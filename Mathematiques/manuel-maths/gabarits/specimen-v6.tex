@@ -94,6 +94,8 @@ remédiation transforment chaque difficulté en piste de travail concrète.
   \parcoursUn~14 h \quad \parcoursDeux~11 h \quad \parcoursTrois~10 h
 }
 
+\nxActiverDecor
+
 % ============================= COURS + FIGURES =============================
 \rubrique{Cours}
 \section{Sens de variation d'une suite}
@@ -138,28 +140,150 @@ point \emph{d'abscisse} $n+1$.}
   \figIntervalle{-4}{5}{-2}{3}{[}{[}{$-2 \leqslant x < 3$}
 \end{nxfigure}
 
-% ============================= EXERCICES (onglet bleu) =====================
-\debutrubrique{Exercices}
+% ============================= ENCADRÉS DU COURS ===========================
+\clearpage
+\section{Le jeu d'encadrés de la collection}
 
-\begin{exercice}{1SPE-SUITES-EX-901}{1}{10}
+\begin{definitionV}
+Une suite $(u_n)$ est \textbf{arithmétique} s'il existe un réel $r$, appelé
+\textbf{raison}, tel que, pour tout entier naturel $n$,
+$u_{n+1} = u_n + r$.
+\end{definitionV}
+
+\begin{theoremeV}
+Si $(u_n)$ est arithmétique de raison $r$, alors pour tout entier naturel
+$n$, \[ u_n = u_0 + n\,r. \]
+\end{theoremeV}
+
+\begin{demonstrationV}[par récurrence]
+L'égalité est vraie au rang $0$ car $u_0 = u_0 + 0 \times r$. Si elle est
+vraie à un rang $n$, alors $u_{n+1} = u_n + r = u_0 + n r + r
+= u_0 + (n+1) r$ : elle est vraie au rang $n+1$. Par récurrence, elle est
+vraie pour tout entier naturel $n$.
+\end{demonstrationV}
+
+\begin{proprieteV}
+La somme des $n$ premiers entiers naturels non nuls vaut
+$1 + 2 + \dots + n = \dfrac{n(n+1)}{2}$.
+\end{proprieteV}
+
+\begin{remarqueV}
+Le sens de variation d'une suite arithmétique est donné par le signe de sa
+raison : croissante si $r > 0$, décroissante si $r < 0$, constante si
+$r = 0$.
+\end{remarqueV}
+
+\begin{exempleresoluV}
+La suite $(u_n)$ est définie par $u_0 = 3$ et $u_{n+1} = u_n + 5$.
+Exprimer $u_n$ en fonction de $n$, puis calculer $u_{20}$.
+\tcblower
+$(u_n)$ est arithmétique de premier terme $u_0 = 3$ et de raison $r = 5$,
+donc pour tout entier naturel $n$, $u_n = 3 + 5n$.
+En particulier $u_{20} = 3 + 5 \times 20 = 103$.
+\end{exempleresoluV}
+
+\begin{aretenirV}
+\begin{itemize}
+  \item Arithmétique : $u_{n+1} = u_n + r$ \quad et \quad $u_n = u_0 + n\,r$.
+  \item Géométrique : $u_{n+1} = q\,u_n$ \quad et \quad $u_n = u_0 \times q^n$.
+  \item Pour identifier la nature : étudier $u_{n+1} - u_n$ (constant ?) ou
+    $\frac{u_{n+1}}{u_n}$ (constant ?).
+\end{itemize}
+\end{aretenirV}
+
+\begin{histoiredessciencesV}[Gauss, 1777--1855]
+Enfant, Carl Friedrich Gauss aurait calculé $1 + 2 + \dots + 100$ en
+quelques secondes, en appariant les termes : $101 \times 50 = 5050$. C'est
+exactement la formule de la somme des termes d'une suite arithmétique.
+\end{histoiredessciencesV}
+
+% ============================= MÉTHODE v6 ==================================
+\nxRubriqueMajeure{Méthodes}
+\bandeauRubrique[rubMethodes]{Méthodes}{Savoir-faire du chapitre}
+
+\begin{methodeV}{Montrer qu'une suite est arithmétique}
+\etape{Calculer $u_{n+1} - u_n$ pour un entier $n$ \emph{quelconque}, en
+  partant de la définition de la suite.}
+\etape{Simplifier l'expression obtenue jusqu'à montrer qu'elle est
+  \emph{constante} (indépendante de $n$).}
+\etape{Conclure : la suite est arithmétique de raison $r$ égale à cette
+  constante, et citer son premier terme.}
+\end{methodeV}
+
+\begin{exerciceResoluSix}{Appliquer la méthode}
+On considère la suite $(u_n)$ définie pour tout entier naturel $n$ par
+$u_n = 4n - 7$. Montrer que $(u_n)$ est arithmétique et préciser sa raison
+et son premier terme.
+\tcblower
+\commentaireResolu{On forme la différence de deux termes consécutifs.}
+Pour tout entier naturel $n$ :
+$u_{n+1} - u_n = \bigl(4(n+1) - 7\bigr) - (4n - 7) = 4$.
+\commentaireResolu{La différence est constante : on peut conclure.}
+La différence $u_{n+1} - u_n = 4$ ne dépend pas de $n$ : la suite $(u_n)$
+est donc arithmétique de raison $r = 4$, de premier terme $u_0 = -7$.
+\end{exerciceResoluSix}
+
+% ============================= EXERCICES v6 ================================
+\nxRubriqueMajeure{Exercices}
+\bandeauRubrique{Exercices}{S'entraîner à son rythme}
+
+\sousBandeau{Application directe}
+
+\begin{exerciceSix}{Premiers termes}{1}{10}{Calculer}
 On considère la suite $(u_n)$ définie par $u_0 = 5$ et, pour tout entier
 naturel $n$, $u_{n+1} = \frac{1}{2}u_n + 3$.
 \begin{enumerate}
   \item Calculer $u_1$, $u_2$ et $u_3$.
-  \item Représenter les quatre premiers termes sur un nuage de points.
   \item Conjecturer le sens de variation de $(u_n)$.
 \end{enumerate}
-\end{exercice}
+\end{exerciceSix}
 
-\begin{exercice}{1SPE-SUITES-EX-902}{2}{15}
+\begin{exerciceSix}{QCM --- nature d'une suite}{1}{5}{Raisonner}
+La suite définie par $u_n = 3 \times 2^n$ est :
+\reponsesligne{arithmétique}{géométrique}{ni l'une ni l'autre}
+\end{exerciceSix}
+
+\begin{exerciceSix}{Vrai ou faux ?}{1}{5}{Raisonner}
+Justifier chaque réponse.
+\vraifaux{Si $(u_n)$ est arithmétique de raison $-2$, alors $(u_n)$ est
+  décroissante.}
+\vraifaux{La suite définie par $u_n = n^2$ est arithmétique.}
+\end{exerciceSix}
+
+\sousBandeau{Entraînement}
+
+\begin{exerciceSix}[\pictoPython]{Production industrielle}{2}{15}{Modéliser}
 Une usine produit $10\,000$ pièces la première année. Chaque année, la
-production diminue de $10\,\%$.
+production diminue de $10\,\%$. On note $u_n$ la production l'année $n$.
 \begin{enumerate}
-  \item Exprimer $u_{n+1}$ en fonction de $u_n$. Quelle est la nature de la
-    suite $(u_n)$ ?
+  \item Exprimer $u_{n+1}$ en fonction de $u_n$. Quelle est la nature de
+    $(u_n)$ ?
   \item Exprimer $u_n$ en fonction de $n$, puis calculer $u_5$ à l'unité.
+  \item Écrire une fonction Python \lstinline|seuil(p)| renvoyant la
+    première année où la production passe sous \lstinline|p| pièces.
 \end{enumerate}
-\end{exercice}
+\end{exerciceSix}
+
+\sousBandeau{Approfondissement}
+
+\begin{exerciceSix}{Suite arithmético-géométrique}{3}{25}{Chercher}
+La suite $(u_n)$ vérifie $u_0 = 1$ et $u_{n+1} = 2u_n - 3$.
+On pose $v_n = u_n - 3$.
+\begin{enumerate}
+  \item Montrer que $(v_n)$ est géométrique.
+  \item En déduire $u_n$ en fonction de $n$, puis le sens de variation
+    de $(u_n)$.
+\end{enumerate}
+\end{exerciceSix}
+
+\begin{cdpSix}
+\cdp{1}{Pour la question 2, calculer $u_1 - u_0$ et $u_2 - u_1$ : que
+  remarque-t-on ?}
+\cdp{4}{Penser à factoriser par $0{,}9$ : chaque année, la production est
+  multipliée par le même coefficient.}
+\cdp{5}{Écrire $v_{n+1} = u_{n+1} - 3$ puis remplacer $u_{n+1}$ par
+  $2u_n - 3$.}
+\end{cdpSix}
 
 % ============================= FIGURES NSI =================================
 \debutrubrique{Méthodes}

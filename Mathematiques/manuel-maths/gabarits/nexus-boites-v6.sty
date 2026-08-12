@@ -1,0 +1,194 @@
+% nexus-boites-v6.sty — Jeu d'encadrés éditorial v6 (Nexus Réussite)
+% Chaque type d'encadré a sa forme ET sa couleur, comme chez les grands
+% éditeurs scolaires : l'élève reconnaît le rôle du bloc avant de le lire.
+%   Définition   — fond teinté discipline, coin plié, onglet titre
+%   Théorème     — cadre blanc double filet, pavé numéroté
+%   Propriété    — filet gauche épais, titre en ligne, fond blanc
+%   Remarque     — filet pointillé, crayon, sans fond
+%   À retenir    — panneau jaune d'or, coins ronds, cible
+%   Exemple      — énoncé sur fond neutre / solution séparée par pointillés
+%   Démonstration— filet fin, tombstone de fin
+%   Histoire     — sépia, médaillon
+%   Méthode v6   — cadre or, étapes numérotées en pastilles
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{gabarits/nexus-boites-v6}[2026/08/12 v1.0 Encadres editoriaux Nexus]
+
+\RequirePackage{tikz}
+\RequirePackage[most,skins]{tcolorbox}
+
+% --- Couleurs propres au jeu d'encadrés -----------------------------------
+\definecolor{jauneRetenir}{HTML}{E9A23B}   % or chaud — synthèse / à retenir
+\definecolor{sepiaHistoire}{HTML}{8A6D3B}  % sépia — histoire des sciences
+\definecolor{violetDemo}{HTML}{7C3AED}     % violet — raisonnement
+
+% --- Compteurs ------------------------------------------------------------
+\newcounter{nxSixDef}[chapter]
+\newcounter{nxSixThm}[chapter]
+\newcounter{nxSixProp}[chapter]
+\newcounter{nxSixMeth}[chapter]
+
+% Petit label capitale espacée (réutilise la logique \nxboxtitle du socle)
+\newcommand{\nxSixLabel}[2]{{\titrefont\fontsize{7.6}{10}\selectfont
+  \addfontfeatures{LetterSpace=10}\textcolor{#1}{\MakeUppercase{#2}}}}
+
+% ===========================================================================
+%  DÉFINITION — fond teinté, coin plié, onglet
+% ===========================================================================
+\newtcolorbox{defV}[1][]{enhanced, breakable,
+  colback=chapcolor!8, boxrule=0pt, frame hidden,
+  sharp corners, arc=0pt,
+  borderline west={2.6pt}{0pt}{chapcolor},
+  top=13pt, bottom=10pt, left=12pt, right=14pt,
+  before skip=15pt, after skip=15pt,
+  attach boxed title to top left={yshift=-2.6mm, xshift=8pt},
+  boxed title style={colback=chapcolor, boxrule=0pt, arc=1.6pt,
+    left=8pt, right=8pt, top=3pt, bottom=3pt},
+  title={\nxSixLabel{white}{Définition~\ifstrempty{#1}{\thenxSixDef}{#1}}},
+  overlay={% coin plié en haut à droite
+    \path[fill=chapcolor!30] ([xshift=-12pt]frame.north east)
+      -- (frame.north east) -- ([yshift=-12pt]frame.north east) -- cycle;
+    \path[fill=chapcolor!62] ([xshift=-12pt]frame.north east)
+      -- ([yshift=-12pt]frame.north east)
+      -- ([xshift=-12pt,yshift=-12pt]frame.north east) -- cycle;}}
+\newenvironment{definitionV}[1][]{%
+  \stepcounter{nxSixDef}\begin{defV}[#1]}{\end{defV}}
+
+% ===========================================================================
+%  THÉORÈME — blanc, double filet, pavé numéroté
+% ===========================================================================
+\newtcolorbox{thmV}[1][]{enhanced, breakable,
+  colback=white, colframe=chapcolor!40, boxrule=0.8pt, arc=0pt,
+  borderline west={3pt}{0pt}{chapcolor},
+  borderline={0.8pt}{2.6pt}{chapcolor!15},
+  top=13pt, bottom=10pt, left=13pt, right=10pt,
+  before skip=15pt, after skip=15pt,
+  attach boxed title to top left={yshift=-2.6mm, xshift=8pt},
+  boxed title style={colback=white, colframe=chapcolor, boxrule=1pt,
+    arc=1.6pt, left=8pt, right=8pt, top=3pt, bottom=3pt},
+  title={\nxSixLabel{chapcolor}{Théorème~\ifstrempty{#1}{\thenxSixThm}{#1}}}}
+\newenvironment{theoremeV}[1][]{%
+  \stepcounter{nxSixThm}\begin{thmV}[#1]}{\end{thmV}}
+
+% ===========================================================================
+%  PROPRIÉTÉ — filet gauche, titre en ligne, losange
+% ===========================================================================
+\newtcolorbox{propV}[1][]{enhanced, breakable,
+  colback=white, boxrule=0pt, frame hidden, arc=0pt,
+  borderline west={2.6pt}{0pt}{chapcolor!70},
+  top=8pt, bottom=8pt, left=13pt, right=8pt,
+  before skip=13pt, after skip=13pt,
+  before upper={\nxLosange[chapcolor!70]\enspace
+    \nxSixLabel{chapcolor!85!black}{Propriété~%
+      \ifstrempty{#1}{\thenxSixProp}{#1}}\quad}}
+\newenvironment{proprieteV}[1][]{%
+  \stepcounter{nxSixProp}\begin{propV}[#1]}{\end{propV}}
+
+% ===========================================================================
+%  REMARQUE — crayon, filet pointillé, sans fond
+% ===========================================================================
+\newcommand{\icnCrayon}[1][coulRetenir]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.8pt,rounded corners=0.2pt]
+      (-0.38em,-0.38em) -- (0.22em,0.22em) -- (0.38em,0.38em)
+      -- (0.3em,0.44em) -- (0.14em,0.3em) -- (-0.46em,-0.3em) -- cycle;
+    \draw[#1,line width=0.6pt] (0.14em,0.3em) -- (0.22em,0.22em);
+  }%
+}
+\newenvironment{remarqueV}{%
+  \par\addvspace{11pt}\noindent
+  \begin{minipage}{\linewidth}
+  \tikz[baseline=0.4em]{\draw[coulRetenir!70, line width=0.9pt, dash pattern=on 0.9pt off 2.2pt, line cap=round]
+    (0,-0.1) -- (0,1.05em);}\hspace{6pt}%
+  \icnCrayon\enspace\nxSixLabel{coulRetenir}{Remarque}\quad
+  \begin{minipage}[t]{\dimexpr\linewidth-6.2em\relax}
+  \small}%
+  {\end{minipage}\end{minipage}\par\addvspace{11pt}}
+
+% ===========================================================================
+%  À RETENIR — panneau or, coins ronds, cible
+% ===========================================================================
+\newtcolorbox{retenirV}{enhanced, breakable,
+  colback=jauneRetenir!14, boxrule=0pt, frame hidden,
+  arc=6pt, rounded corners,
+  borderline north={2.2pt}{0pt}{jauneRetenir},
+  top=13pt, bottom=11pt, left=13pt, right=13pt,
+  before skip=16pt, after skip=16pt,
+  attach boxed title to top left={yshift=-2.6mm, xshift=10pt},
+  boxed title style={colback=jauneRetenir, boxrule=0pt, arc=6pt,
+    left=9pt, right=9pt, top=3pt, bottom=3pt},
+  title={\icnObjectif[white]\enspace\nxSixLabel{white}{À retenir}}}
+\newenvironment{aretenirV}{\begin{retenirV}}{\end{retenirV}}
+
+% ===========================================================================
+%  EXEMPLE — énoncé fond neutre / solution après pointillés
+% ===========================================================================
+\newtcolorbox{exempleV}{enhanced, breakable, bicolor,
+  colback=grisdoux!70, colbacklower=white,
+  colframe=filetgris, boxrule=0.6pt, arc=2pt,
+  top=9pt, bottom=9pt, left=11pt, right=11pt, middle=7pt,
+  before skip=13pt, after skip=13pt,
+  before upper={\nxSixLabel{encre!80}{Exemple}\quad},
+  before lower={\noindent\textcolor{chapcolor!40}{\leaders
+      \hbox{\rule[2.2pt]{2.4pt}{0.55pt}\hskip 2.4pt}\hfill\kern0pt}\par
+    \smallskip\icnCheck[nsiAccent]\enspace
+    \nxSixLabel{nsiAccent!85!black}{Solution}\quad}}
+\newenvironment{exempleresoluV}{\begin{exempleV}}{\end{exempleV}}
+
+% ===========================================================================
+%  DÉMONSTRATION — filet violet, tombstone
+% ===========================================================================
+\newenvironment{demonstrationV}[1][]{%
+  \par\addvspace{12pt}\noindent
+  \begin{minipage}{\linewidth}
+  \nxSixLabel{violetDemo}{Démonstration\ifstrempty{#1}{}{ --- #1}}\par\smallskip
+  \begingroup\small
+  \setlength{\leftskip}{9pt}%
+  \noindent\hspace{-9pt}%
+  \textcolor{violetDemo!55}{\rule[-2pt]{1.1pt}{0.95em}}\hspace{7.9pt}\ignorespaces}%
+  {\nobreak\hfill\textcolor{violetDemo}{$\blacksquare$}\endgroup
+   \end{minipage}\par\addvspace{12pt}}
+
+% ===========================================================================
+%  HISTOIRE DES SCIENCES — sépia, médaillon
+% ===========================================================================
+\newcommand{\icnPlume}[1][sepiaHistoire]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.8pt]
+      (-0.35em,-0.45em) .. controls (-0.1em,0.1em) and (0.2em,0.35em)
+      .. (0.45em,0.45em)
+      .. controls (0.3em,0.15em) and (0.05em,-0.15em) .. (-0.2em,-0.28em);
+    \draw[#1,line width=0.7pt] (-0.35em,-0.45em) -- (-0.15em,-0.18em);
+  }%
+}
+\newtcolorbox{histoireV}[1][]{enhanced, breakable,
+  colback=sepiaHistoire!9, boxrule=0pt, frame hidden, arc=2pt,
+  borderline west={2.2pt}{0pt}{sepiaHistoire!75},
+  top=11pt, bottom=9pt, left=12pt, right=12pt,
+  before skip=14pt, after skip=14pt,
+  before upper={\icnPlume\enspace\nxSixLabel{sepiaHistoire}{Histoire%
+    \ifstrempty{#1}{}{ --- #1}}\par\smallskip\small}}
+\newenvironment{histoiredessciencesV}[1][]{\begin{histoireV}[#1]}{\end{histoireV}}
+
+% ===========================================================================
+%  MÉTHODE v6 — cadre or, pastilles d'étapes
+% ===========================================================================
+\newcounter{nxSixEtape}
+\newcommand{\etape}[1]{%
+  \stepcounter{nxSixEtape}\par\smallskip\noindent
+  \tikz[baseline=(e.base)]\node[circle, fill=rubMethodes, text=white,
+    inner sep=1.6pt, minimum size=1.35em,
+    font=\titrefont\fontsize{8}{8}\selectfont](e){\arabic{nxSixEtape}};%
+  \hspace{6pt}\begin{minipage}[t]{\dimexpr\linewidth-2.3em\relax}#1\end{minipage}\par}
+\newtcolorbox{methV}[2][]{enhanced, breakable,
+  colback=white, colframe=rubMethodes!55, boxrule=0.9pt, arc=2.5pt,
+  top=13pt, bottom=10pt, left=12pt, right=12pt,
+  before skip=16pt, after skip=16pt,
+  attach boxed title to top left={yshift=-2.6mm, xshift=8pt},
+  boxed title style={colback=rubMethodes, boxrule=0pt, arc=2pt,
+    left=8pt, right=8pt, top=3pt, bottom=3pt},
+  title={\icnMethode[white]\enspace\nxSixLabel{white}{Méthode~%
+    \ifstrempty{#1}{\thenxSixMeth}{#1}}\enspace
+    {\titrefont\fontsize{8.5}{10}\selectfont\color{white}#2}}}
+\newenvironment{methodeV}[2][]{%
+  \stepcounter{nxSixMeth}\setcounter{nxSixEtape}{0}%
+  \begin{methV}[#1]{#2}}{\end{methV}}
