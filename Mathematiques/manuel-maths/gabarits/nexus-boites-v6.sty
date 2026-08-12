@@ -120,6 +120,51 @@
 \newenvironment{aretenirV}{\begin{retenirV}}{\end{retenirV}}
 
 % ===========================================================================
+%  ERREUR FRÉQUENTE — corail, panneau d'avertissement, filet plein
+% ===========================================================================
+% Le rôle du bloc doit se lire avant le texte : forme anguleuse et couleur
+% d'alerte, distinctes du « à retenir » (or, coins ronds) auquel elle
+% ressemblait en v4.1.
+\newcommand{\icnAlerte}[1][coulRetenir]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.85pt,line join=round]
+      (0,0.5em) -- (0.5em,-0.4em) -- (-0.5em,-0.4em) -- cycle;
+    \draw[#1,line width=0.8pt,line cap=round] (0,0.24em) -- (0,-0.06em);
+    \fill[#1] (0,-0.22em) circle (0.055em);
+  }%
+}
+\newtcolorbox{erreurV}{enhanced, breakable,
+  colback=coulRetenir!7, boxrule=0pt, frame hidden,
+  sharp corners, arc=0pt,
+  borderline west={2.8pt}{0pt}{coulRetenir},
+  top=13pt, bottom=10pt, left=12pt, right=12pt,
+  before skip=15pt, after skip=15pt,
+  attach boxed title to top left={yshift=-2.6mm, xshift=8pt},
+  boxed title style={colback=coulRetenir, boxrule=0pt, arc=1.6pt,
+    left=8pt, right=8pt, top=3pt, bottom=3pt},
+  title={\icnAlerte[white]\enspace\nxSixLabel{white}{Erreur fréquente}}}
+\newenvironment{erreurfrequenteV}{\begin{erreurV}}{\end{erreurV}}
+
+% ===========================================================================
+%  POUR ALLER PLUS LOIN — hors programme, signalé sans ambiguïté
+% ===========================================================================
+% Le cadrage editorial (conception §7) exige que l'enrichissement ne puisse
+% pas se lire comme exigible : filet pointille, fond absent, etiquette
+% explicite. Le pointille dit « hors du parcours » a lui seul.
+\newtcolorbox{plusloinV}{enhanced, breakable,
+  colback=white, boxrule=0pt, frame hidden, arc=0pt,
+  borderline west={0.9pt}{0pt}{chapcolor!55,
+    dash pattern=on 2.2pt off 2.2pt},
+  top=13pt, bottom=9pt, left=13pt, right=10pt,
+  before skip=15pt, after skip=15pt,
+  attach boxed title to top left={yshift=-2.6mm, xshift=9pt},
+  boxed title style={colback=white, colframe=chapcolor!55, boxrule=0.7pt,
+    arc=1.6pt, left=7pt, right=7pt, top=2.6pt, bottom=2.6pt},
+  title={\icnEtoile[chapcolor]\enspace
+    \nxSixLabel{chapcolor!85!black}{Pour aller plus loin}}}
+\newenvironment{allerplusloinV}{\begin{plusloinV}}{\end{plusloinV}}
+
+% ===========================================================================
 %  EXEMPLE — énoncé fond neutre / solution après pointillés
 % ===========================================================================
 \newtcolorbox{exempleV}{enhanced, breakable, bicolor,

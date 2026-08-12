@@ -1,0 +1,69 @@
+% specimen-pont-v6.tex — Vérifie le pont v4.1 → v6.
+% Compile : cd manuel-maths && TEXINPUTS=gabarits: lualatex gabarits/specimen-pont-v6.tex
+%
+% Ce spécimen n'emploie QUE des macros v4.1, exactement comme les 2 751 objets
+% de la collection. Il doit rendre les formes v6 sans qu'aucune ligne du
+% corpus n'ait changé. Pour obtenir la maquette d'avant, remplacer la ligne
+% \usepackage par :  \usepackage[sanspont]{gabarits/nexus-charte-v6}
+\documentclass{gabarits/nexus-manuel-v5}
+\usepackage{gabarits/nexus-charte-v6}
+\matiere{Mathématiques}\niveau{Première spécialité}
+
+\begin{document}
+\mainmatter
+\chapter{Pont v4.1 vers v6}
+\rubrique{Cours}
+
+\section{Encadrés de cours}
+
+\definition[D1]{Une suite $(u_n)$ est \textbf{géométrique} de raison $q$
+lorsque, pour tout entier naturel $n$, on a $u_{n+1} = q\,u_n$.}
+
+\theoreme[T1]{Pour tout entier naturel $n$ et tout réel $q \neq 1$,
+\[ 1 + q + q^2 + \dots + q^n = \frac{1 - q^{n+1}}{1 - q}. \]}
+
+\propriete[P1]{Si $q > 1$ et $u_0 > 0$, alors la suite $(u_n)$ est
+strictement croissante et diverge vers $+\infty$.}
+
+\exemple{Pour $q = 2$ et $u_0 = 3$, on obtient $u_1 = 6$, puis $u_2 = 12$.}
+
+\contreexemple{La suite définie par $u_n = n^2$ n'est pas géométrique :
+le quotient $u_{n+1}/u_n$ dépend de $n$.}
+
+\demonstration{Notons $S = 1 + q + \dots + q^n$. Alors $qS = q + \dots +
+q^{n+1}$, donc $S - qS = 1 - q^{n+1}$, d'où le résultat puisque $q \neq 1$.}
+
+\erreurFrequente{\textbf{Confondre raison et premier terme.} La raison $q$ est
+le \emph{quotient} de deux termes consécutifs, jamais leur différence.}
+
+\approfondissement{La somme d'une suite géométrique de raison $|q| < 1$
+converge vers $1/(1-q)$ quand $n$ tend vers l'infini. Cette notion relève du
+programme de terminale et n'est pas exigible en première.}
+
+\section{Fiche méthode}
+\rubrique{Méthodes}
+
+\begin{fichemethode}{M1}{Reconnaître une suite géométrique}
+\quandUtiliser{L'énoncé donne une relation de récurrence ou une formule
+explicite, et demande la nature de la suite.}
+\pasApas{Calculer le quotient $u_{n+1}/u_n$. S'il ne dépend pas de $n$, la
+suite est géométrique de raison ce quotient.}
+\exempleRedige{Pour $u_n = 5 \times 3^n$, on a $u_{n+1}/u_n = 3$ pour tout
+$n$ : la suite est géométrique de raison $3$ et de premier terme $5$.}
+\pieges{Ne jamais conclure à partir des deux premiers termes seulement.}
+\verifier{Recalculer $u_2$ par la formule explicite et par la récurrence.}
+\sEntrainer{\refExos{12 à 18}}
+\end{fichemethode}
+
+\section{Écriture par environnement}
+
+\begin{nxdef}[D2]
+Une suite est \textbf{arithmétique} de raison $r$ lorsque la différence de
+deux termes consécutifs est constante et vaut $r$.
+\end{nxdef}
+
+\begin{nxprop}[P2]
+Une suite arithmétique de raison $r > 0$ est strictement croissante.
+\end{nxprop}
+
+\end{document}

@@ -604,6 +604,56 @@ def test_render_master_emits_a_rubric_mark_before_every_object_block() -> None:
     assert len(vues) == len(_professor_paths())
 
 
+# Encadres v4.1 que le corpus emploie et que le pont doit rebrancher sur les
+# formes v6. Les raccourcis \definition, \theoreme, \propriete,
+# \erreurFrequente et \approfondissement ouvrent ces environnements : les
+# rebrancher couvre les deux ecritures.
+PONT_ENVIRONNEMENTS = ("nxdef", "nxthm", "nxprop", "nxcard", "nxerr", "nxstar", "fmbox")
+PONT_COMMANDES = ("exemple", "contreexemple", "demonstration")
+
+
+def test_the_charter_loads_the_v6_bridge_and_can_be_asked_not_to() -> None:
+    charte = (MANUAL_ROOT / "gabarits" / "nexus-charte-v6.sty").read_text(
+        encoding="utf-8"
+    )
+
+    assert "\\RequirePackage{gabarits/nexus-pont-v6}" in charte
+    # Le diff avant/apres exige par AGENTS.md suppose de pouvoir rendre la
+    # maquette v4.1 sans toucher au corpus.
+    assert "\\DeclareOption{sanspont}" in charte
+
+
+@pytest.mark.parametrize("environnement", PONT_ENVIRONNEMENTS)
+def test_the_bridge_rewires_every_v41_box_environment(environnement: str) -> None:
+    pont = (MANUAL_ROOT / "gabarits" / "nexus-pont-v6.sty").read_text(encoding="utf-8")
+
+    assert f"\\renewenvironment{{{environnement}}}" in pont
+
+
+@pytest.mark.parametrize("commande", PONT_COMMANDES)
+def test_the_bridge_rewires_every_v41_paragraph_macro(commande: str) -> None:
+    pont = (MANUAL_ROOT / "gabarits" / "nexus-pont-v6.sty").read_text(encoding="utf-8")
+
+    assert f"\\renewcommand{{\\{commande}}}" in pont
+
+
+def test_the_bridge_covers_every_box_macro_the_corpus_actually_uses() -> None:
+    """No v4.1 box may survive the bridge: the corpus is never rewritten."""
+
+    pont = (MANUAL_ROOT / "gabarits" / "nexus-pont-v6.sty").read_text(encoding="utf-8")
+    corpus = "\n".join(
+        path.read_text(encoding="utf-8", errors="replace")
+        for path in (MANUAL_ROOT / "chapitres").rglob("*.tex")
+    )
+
+    for environnement in PONT_ENVIRONNEMENTS:
+        if f"\\begin{{{environnement}}}" in corpus:
+            assert f"\\renewenvironment{{{environnement}}}" in pont, environnement
+    for commande in PONT_COMMANDES:
+        if re.search(rf"\\{commande}\b", corpus):
+            assert f"\\renewcommand{{\\{commande}}}" in pont, commande
+
+
 def test_render_master_configures_closed_student_redaction() -> None:
     student = assemble_manuel.render_master("eleve", "1" * 32)
     professor = assemble_manuel.render_master("professeur", "2" * 32)

@@ -11,6 +11,14 @@
 \RequirePackage{etoolbox}
 \RequirePackage{tikz}
 
+% Option « sanspont » : charge la charte sans rebrancher les encadres v4.1 du
+% corpus sur les formes v6. Sert a produire le diff avant/apres qu'AGENTS.md
+% exige de toute evolution de baseline visuelle.
+\newif\ifnxSixPont
+\nxSixPonttrue
+\DeclareOption{sanspont}{\nxSixPontfalse}
+\ProcessOptions\relax
+
 % ===========================================================================
 %  1. PALETTE DE RUBRIQUES — stable dans toute la collection
 % ===========================================================================
@@ -249,3 +257,9 @@
 \RequirePackage{gabarits/nexus-boites-v6}
 \RequirePackage{gabarits/nexus-exercices-v6}
 \RequirePackage{gabarits/nexus-decor}
+
+% Le pont vient en dernier : il redefinit des environnements que les modules
+% ci-dessus doivent avoir fini de declarer.
+\ifnxSixPont
+  \RequirePackage{gabarits/nexus-pont-v6}
+\fi

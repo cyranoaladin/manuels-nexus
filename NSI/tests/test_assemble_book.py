@@ -359,6 +359,40 @@ def test_the_v5_class_is_mirrored_beside_the_charter():
     assert (ROOT / "gabarits" / "nexus-manuel-v5.cls").exists()
 
 
+# La charte est synchronisee depuis manuel-maths (docs/06). Une divergence
+# silencieuse ferait diverger la maquette des deux disciplines.
+CHARTE_SYNCHRONISEE = (
+    "nexus-manuel-v5.cls",
+    "nexus-charte-v6.sty",
+    "nexus-boites-v6.sty",
+    "nexus-exercices-v6.sty",
+    "nexus-pont-v6.sty",
+    "nexus-couverture.sty",
+    "nexus-pages-froides.sty",
+    "nexus-figures-bib.sty",
+    "nexus-decor.sty",
+)
+
+
+@pytest.mark.parametrize("gabarit", CHARTE_SYNCHRONISEE)
+def test_charter_modules_match_their_manuel_maths_source(gabarit):
+    amont = (
+        ROOT.parent / "Mathematiques" / "manuel-maths" / "gabarits" / gabarit
+    ).read_text(encoding="utf-8")
+    miroir = (ROOT / "gabarits" / gabarit).read_text(encoding="utf-8")
+
+    assert miroir == amont
+
+
+def test_the_bridge_rewires_the_boxes_the_nsi_corpus_uses():
+    pont = (ROOT / "gabarits" / "nexus-pont-v6.sty").read_text(encoding="utf-8")
+
+    # \definition, \propriete, \erreurFrequente et \approfondissement du
+    # corpus NSI ouvrent ces environnements.
+    for environnement in ("nxdef", "nxthm", "nxprop", "nxerr", "nxstar", "fmbox"):
+        assert f"\\renewenvironment{{{environnement}}}" in pont
+
+
 @pytest.mark.parametrize(
     ("relative_path", "expected"),
     [

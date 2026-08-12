@@ -1,0 +1,74 @@
+% nexus-pont-v6.sty — Pont v4.1/v5 → v6 (Nexus Réussite)
+%
+% Les encadrés v6 (nexus-boites-v6) portent des noms neufs — definitionV,
+% theoremeV, methodeV… — qu'aucun des 2 751 objets de la collection n'emploie :
+% le corpus est écrit avec les macros v4.1, et il n'est pas question de le
+% réécrire. Ce module rebranche donc les environnements v4.1 sur les formes v6.
+%
+% Aucun fichier de contenu n'est touché. Le rebranchement est intégralement
+% réversible : \usepackage[sanspont]{gabarits/nexus-charte-v6} rend la
+% maquette v4.1 et permet le diff avant/après exigé par AGENTS.md.
+%
+% Ce que le corpus emploie réellement, et vers quoi cela est envoyé :
+%
+%   \definition / nxdef        201 emplois → defV      (fond teinté, coin plié)
+%   \theoreme / nxthm           76         → thmV      (double filet, pavé)
+%   \propriete / nxprop        299         → propV     (filet, losange)
+%   \erreurFrequente / nxerr   288         → erreurV   (corail, panneau)
+%   \approfondissement/nxstar   49         → plusloinV (pointillé, hors parcours)
+%   \fichemethode               84         → methV     (or, étapes en pastilles)
+%   \exemple                   331         → label v6
+%   \contreexemple              46         → label v6
+%   \demonstration              60         → demonstrationV (violet, tombstone)
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{gabarits/nexus-pont-v6}[2026/08/12 v1.0 Pont v4.1 vers v6]
+
+\RequirePackage{etoolbox}
+
+% ===========================================================================
+%  1. ENCADRÉS DE COURS
+% ===========================================================================
+% Les raccourcis \definition, \theoreme et \propriete de la v4.1 ouvrent ces
+% environnements : les rebrancher couvre les deux écritures d'un seul geste.
+% Les variantes …V portent le compteur v6 ; l'argument optionnel reste le
+% libellé explicite du corpus (« D4 », « P2 »), qui prime sur le compteur.
+\renewenvironment{nxdef}[1][]{\begin{definitionV}[#1]}{\end{definitionV}}
+\renewenvironment{nxthm}[1][]{\begin{theoremeV}[#1]}{\end{theoremeV}}
+\renewenvironment{nxprop}[1][]{\begin{proprieteV}[#1]}{\end{proprieteV}}
+
+% La carte (objectifs, contrat d'ouverture) garde son titre libre : elle n'a
+% pas d'équivalent numéroté en v6, on lui donne la forme « à retenir ».
+\renewenvironment{nxcard}[1][]{%
+  \begin{retenirV}\ifstrempty{#1}{}{\nxSixLabel{jauneRetenir!75!black}{#1}\quad}%
+}{\end{retenirV}}
+
+\renewenvironment{nxerr}{\begin{erreurfrequenteV}}{\end{erreurfrequenteV}}
+\renewenvironment{nxstar}{\begin{allerplusloinV}}{\end{allerplusloinV}}
+
+% ===========================================================================
+%  2. FICHES MÉTHODES
+% ===========================================================================
+% \fichemethode{numéro}{titre} ouvre fmbox : la v6 compose le même couple en
+% cadre or à pastilles d'étapes. Les six rubriques de la fiche (\quandUtiliser,
+% \pasApas, …) restent des \paragraph et traversent le pont inchangées.
+\renewenvironment{fmbox}[2]{\begin{methodeV}[#1]{#2}}{\end{methodeV}}
+
+% ===========================================================================
+%  3. BLOCS DE PARAGRAPHE
+% ===========================================================================
+% \exemple et \contreexemple sont des macros de paragraphe, pas des boîtes :
+% le corpus ne sépare pas l'énoncé de sa solution, l'encadré bicolore exempleV
+% ne s'y applique donc pas. On leur donne le label v6, qui suffit à les faire
+% reconnaître, sans inventer une segmentation que le contenu ne porte pas.
+\renewcommand{\exemple}[1]{%
+  \par\addvspace{9pt}\noindent
+  {\nxSixLabel{encre!80}{Exemple}}\enspace #1\par\addvspace{9pt}}
+\renewcommand{\contreexemple}[1]{%
+  \par\addvspace{9pt}\noindent
+  {\icnAlerte[coulRetenir]\enspace\nxSixLabel{coulRetenir}{Contre-exemple}}%
+  \enspace #1\par\addvspace{9pt}}
+
+% La démonstration prend le filet violet et le tombstone : c'est le seul bloc
+% du cours dont la fin doit se voir.
+\renewcommand{\demonstration}[1]{%
+  \begin{demonstrationV}#1\end{demonstrationV}}
