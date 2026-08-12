@@ -681,12 +681,14 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             class_bindings.difference_update(deleted_names)
         self.generic_visit(node)
 
-    def visit_Call(self, node: ast.Call) -> None:
+    def visit_Name(self, node: ast.Name) -> None:
         if (
-            isinstance(node.func, ast.Name)
-            and node.func.id in _DYNAMIC_NAMESPACE_BUILTINS
+            isinstance(node.ctx, ast.Load)
+            and node.id in _DYNAMIC_NAMESPACE_BUILTINS
         ):
             self.ambiguous.update(_AUDITED_SELECTION_CONSTANTS)
+
+    def visit_Call(self, node: ast.Call) -> None:
         if isinstance(node.func, ast.Attribute) and node.func.attr in _MUTATING_METHODS:
             self._record_mutation(_target_root_names(node.func.value))
             self._record_module_names(

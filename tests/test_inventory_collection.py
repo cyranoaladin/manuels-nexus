@@ -7461,6 +7461,103 @@ LIVRES_CONNUS = tuple(BOOK_MANIFESTS)
     assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
 
 
+def test_manifest_backed_nsi_assembler_rejects_aliased_dynamic_namespace(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        '''BOOK_MANIFESTS = {"1NSI": "manifests/books/1NSI.json"}
+BOOK_ID = "1NSI"
+CHAPITRES = []
+ORDER = [("cours", "*")]
+VARIANTS = ["eleve"]
+VARIANT_ORDERS = {"eleve": [("cours", "*")]}
+ELEVE_VARIANTS = ["eleve"]
+ELEVE_ALLOWED_TYPES = ["cours"]
+def consume(value):
+    value.clear()
+    return ()
+namespace = globals
+namespace()["tuple"] = consume
+LIVRES_CONNUS = tuple(BOOK_MANIFESTS)
+''',
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
+def test_manifest_backed_nsi_assembler_rejects_transitive_dynamic_namespace_alias(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        '''BOOK_MANIFESTS = {"1NSI": "manifests/books/1NSI.json"}
+BOOK_ID = "1NSI"
+CHAPITRES = []
+ORDER = [("cours", "*")]
+VARIANTS = ["eleve"]
+VARIANT_ORDERS = {"eleve": [("cours", "*")]}
+ELEVE_VARIANTS = ["eleve"]
+ELEVE_ALLOWED_TYPES = ["cours"]
+def consume(value):
+    value.clear()
+    return ()
+first = globals
+second = first
+second()["tuple"] = consume
+LIVRES_CONNUS = tuple(BOOK_MANIFESTS)
+''',
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
+def test_manifest_backed_nsi_assembler_rejects_aliased_vars_namespace(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        '''BOOK_MANIFESTS = {"1NSI": "manifests/books/1NSI.json"}
+BOOK_ID = "1NSI"
+CHAPITRES = []
+ORDER = [("cours", "*")]
+VARIANTS = ["eleve"]
+VARIANT_ORDERS = {"eleve": [("cours", "*")]}
+ELEVE_VARIANTS = ["eleve"]
+ELEVE_ALLOWED_TYPES = ["cours"]
+def consume(value):
+    value.clear()
+    return ()
+namespace = vars
+namespace()["tuple"] = consume
+LIVRES_CONNUS = tuple(BOOK_MANIFESTS)
+''',
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
 def test_closed_contract_rejects_mutation_through_indexed_rules_alias(
     tmp_path: Path, inventory_module
 ) -> None:
