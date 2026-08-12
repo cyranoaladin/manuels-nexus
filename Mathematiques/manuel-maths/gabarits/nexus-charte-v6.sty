@@ -49,12 +49,15 @@
 
 % Résolution tolérante : nom de rubrique tel qu'écrit → clef normalisée.
 % (les rubriques v5 sont posées par \rubrique{Exercices}, \rubrique{Cours}...)
+% Le resultat sert de NOM de couleur dans un \edef : aucune des deux branches
+% ne doit laisser fuir l'espace de fin de ligne, sinon xcolor recoit « encre »
+% avec une espace finale et echoue sur une couleur non definie.
 \newcommand{\nxRubriqueCouleur}[1]{%
-  \ifcsname nxRubCol@nx@norm@#1\endcsname
-    \csname nxRubCol@nx@norm@#1\endcsname
-  \else
-    encre
-  \fi
+  \ifcsname nxRubCol@nx@norm@#1\endcsname%
+    \csname nxRubCol@nx@norm@#1\endcsname%
+  \else%
+    encre%
+  \fi%
 }
 % Normalisation explicite des libellés employés par la collection
 \newcommand{\nxNormRub}[2]{%

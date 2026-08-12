@@ -116,6 +116,26 @@ ORDER = [
     ("corriges", "*"),
 ]
 
+# Rubriques de la charte v6 : chaque sous-repertoire de chapitre porte la
+# rubrique qui colore son onglet lateral et son decor de page. Les libelles
+# sont ceux que normalise nexus-charte-v6.sty (table \nxNormRub) ; en changer
+# un ici sans l'y declarer ferait retomber la rubrique sur la couleur encre.
+RUBRIQUES = {
+    "cours": "Cours",
+    "methodes": "Méthodes",
+    "exercices": "Exercices",
+    "qcm": "Auto-évaluation",
+    "evaluations": "Évaluation",
+    "remediation": "Remédiation",
+    "corriges": "Corrigés",
+}
+# Le repertoire cours porte quatre temps distincts, separes par leur prefixe.
+RUBRIQUES_COURS = {
+    "00_ouverture": "Ouverture",
+    "01_diagnostic": "Diagnostic",
+    "07_td": "TD",
+}
+
 ELEVE_EXCLUDES = {"corriges"}
 ELEVE_ALLOWED_TYPES = {
     "algorithme",
@@ -779,6 +799,21 @@ def object_type(path: Path) -> str:
     return value
 
 
+def rubrique_libelle(path: Path) -> str:
+    """Return the v6 charter rubric label carried by an object's directory."""
+
+    sous_dossier = path.parent.name
+    if sous_dossier == "cours":
+        for prefixe, libelle in RUBRIQUES_COURS.items():
+            if path.name.startswith(prefixe):
+                return libelle
+        return RUBRIQUES["cours"]
+    try:
+        return RUBRIQUES[sous_dossier]
+    except KeyError as error:
+        raise AssemblyError(f"rubrique inconnue: {path}") from error
+
+
 def collect_chapter(chap_dir: Path, variant: str) -> list[Path]:
     if variant not in {"eleve", "professeur"}:
         raise AssemblyError("variante inconnue")
@@ -869,6 +904,10 @@ def render_master(
         parts.append("\\newpage")
     else:
         parts.append("\\sommaireNexus")
+    # Les pages froides precedent toute marque de rubrique : leur onglet
+    # lateral n'aurait ni libelle ni couleur. Il ne s'active qu'avec le decor,
+    # au premier chapitre.
+    parts.append("\\nxVSuppressTabfalse")
     parts.append("\\nxActiverDecor")
 
     # Chapters
@@ -880,20 +919,29 @@ def render_master(
 
         opening = ouverture_depuis_contrat(chap_dir)
         files = collect_chapter(chap_dir, variant)
-        inputs = "\n".join(
-            wrap_object_input(
-                f.relative_to(ROOT).as_posix(),
-                canonical_tracked_path(
-                    f.relative_to(git_root).as_posix(),
-                    git_root,
-                    tracked_paths,
-                ),
+        # La marque de rubrique est posee au premier objet de chaque rubrique
+        # et tient jusqu'au changement suivant : c'est elle que la page relit
+        # au shipout pour colorer son onglet et son decor (charte v6).
+        blocs = []
+        rubrique_courante = None
+        for f in files:
+            rubrique = rubrique_libelle(f)
+            if rubrique != rubrique_courante:
+                blocs.append(f"\\rubrique{{{rubrique}}}")
+                rubrique_courante = rubrique
+            blocs.append(
+                wrap_object_input(
+                    f.relative_to(ROOT).as_posix(),
+                    canonical_tracked_path(
+                        f.relative_to(git_root).as_posix(),
+                        git_root,
+                        tracked_paths,
+                    ),
+                )
             )
-            for f in files
-        )
         parts.append(f"% ===== {chap} =====")
         parts.append(opening)
-        parts.append(inputs)
+        parts.append("\n".join(blocs))
 
     # Back matter (1SPE uniquement : formulaire et memo Python specifiques)
     if manual == "1SPE":
@@ -945,8 +993,9 @@ def render_master(
     )
     master = f"""% {MANUAL_TITLES[manual]} — variante {titre_var}
 % Assemble par scripts/assemble_manuel.py
-\\documentclass{{gabarits/nexus-manuel}}
+\\documentclass{{gabarits/nexus-manuel-v5}}
 \\usepackage{{gabarits/nexus-charte-v6}}
+\\nxVSuppressTabtrue
 {variant_configuration}
 {matiere_niveau}
 \\title{{{MANUAL_TITLES[manual]} — Édition {titre_var}}}

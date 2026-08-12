@@ -524,6 +524,86 @@ def test_render_master_has_one_run_marker_and_no_marked_transversal_input() -> N
         )
 
 
+def test_render_master_loads_the_v5_class_under_the_v6_charter() -> None:
+    master = assemble_manuel.render_master("professeur", "3" * 32)
+
+    assert "\\documentclass{gabarits/nexus-manuel-v5}" in master
+    assert "\\documentclass{gabarits/nexus-manuel}" not in master
+    # La charte v6 se pose PAR-DESSUS la classe v5 : c'est cet ordre qui
+    # substitue le rendu d'onglet colore par rubrique (nexus-charte-v6.sty:128).
+    assert master.index("\\documentclass{gabarits/nexus-manuel-v5}") < master.index(
+        "\\usepackage{gabarits/nexus-charte-v6}"
+    )
+
+
+@pytest.mark.parametrize(
+    ("relative_path", "expected"),
+    [
+        ("cours/00_ouverture.tex", "Ouverture"),
+        ("cours/01_diagnostic.tex", "Diagnostic"),
+        ("cours/02_activites.tex", "Cours"),
+        ("cours/10_definitions.tex", "Cours"),
+        ("cours/07_td_fil_rouge.tex", "TD"),
+        ("methodes/1SPE-SUITES-ME-001.tex", "Méthodes"),
+        ("exercices/1SPE-SUITES-EX-001.tex", "Exercices"),
+        ("qcm/diagnostic.tex", "Auto-évaluation"),
+        ("evaluations/eval_A.tex", "Évaluation"),
+        ("remediation/fiche_01.tex", "Remédiation"),
+        ("corriges/1SPE-SUITES-EX-001.tex", "Corrigés"),
+    ],
+)
+def test_rubrique_libelle_maps_every_collection_directory(
+    relative_path: str, expected: str
+) -> None:
+    path = MANUAL_ROOT / "chapitres" / "1SPE-SUITES" / relative_path
+
+    assert assemble_manuel.rubrique_libelle(path) == expected
+
+
+def test_rubrique_libelle_rejects_an_unmapped_directory() -> None:
+    path = MANUAL_ROOT / "chapitres" / "1SPE-SUITES" / "inconnu" / "objet.tex"
+
+    with pytest.raises(assemble_manuel.AssemblyError):
+        assemble_manuel.rubrique_libelle(path)
+
+
+def test_render_master_marks_each_rubric_change_once() -> None:
+    master = assemble_manuel.render_master("professeur", "4" * 32)
+
+    # Chaque \rubrique precede immediatement le premier objet de sa rubrique
+    # et n'est jamais repetee tant que la rubrique ne change pas.
+    marques = re.findall(r"\\rubrique\{([^}]+)\}", master)
+    assert marques, "aucune marque de rubrique emise"
+    connues = set(assemble_manuel.RUBRIQUES.values()) | set(
+        assemble_manuel.RUBRIQUES_COURS.values()
+    )
+    assert all(libelle in connues for libelle in marques)
+    for previous, current in zip(marques, marques[1:]):
+        assert previous != current
+
+    # La premiere marque du premier chapitre est l'ouverture.
+    assert marques[0] == "Ouverture"
+
+
+def test_render_master_emits_a_rubric_mark_before_every_object_block() -> None:
+    master = assemble_manuel.render_master("professeur", "5" * 32)
+    lines = master.splitlines()
+
+    rubrique_courante: str | None = None
+    vues: list[str] = []
+    for index, line in enumerate(lines):
+        marque = re.fullmatch(r"\\rubrique\{([^}]+)\}", line)
+        if marque is not None:
+            rubrique_courante = marque.group(1)
+        elif line.startswith("\\typeout{NEXUS_OBJECT_BEGIN:"):
+            assert rubrique_courante is not None, (
+                f"objet sans rubrique courante ligne {index}: {lines[index + 1]}"
+            )
+            vues.append(rubrique_courante)
+
+    assert len(vues) == len(_professor_paths())
+
+
 def test_render_master_configures_closed_student_redaction() -> None:
     student = assemble_manuel.render_master("eleve", "1" * 32)
     professor = assemble_manuel.render_master("professeur", "2" * 32)

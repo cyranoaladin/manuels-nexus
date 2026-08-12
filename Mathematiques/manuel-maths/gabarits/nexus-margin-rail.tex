@@ -113,6 +113,12 @@
   \setbox\nxMarginCaptureBox=\vbox{%
     \hsize=\marginparwidth
     \linewidth=\hsize
+    % Le rail est une colonne etroite : la composer au fer a gauche, comme la
+    % classe le declare deja pour les notes de marge exterieure
+    % (\raggedrightmarginnote). Justifiee, la moindre formule en ligne y
+    % produit un debordement horizontal, que le gate anti-collision rejette.
+    \raggedright
+    \emergencystretch=\hsize
     #2}%
   \directlua{nexus_margin.capture_box(
     "\luaescapestring{\nxMarginCurrentId}",
