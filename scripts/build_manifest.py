@@ -99,6 +99,27 @@ _1NSI_STUDENT_VARIANTS = frozenset(
     {"eleve", "methodes", "remediation", "amenagee", "projets"}
 )
 _INVENTORY_ERROR_DIAGNOSTIC_LIMIT = 240
+_INVENTORY_ERROR_DIAGNOSTICS = frozenset(
+    {
+        "branche de provenance du manifeste incohérente",
+        "provenance du manifeste sans ancêtre Git strict",
+        "provenance du manifeste sans ancêtre Git valide",
+        "provenance du manifeste Git invalide",
+        "provenance du manifeste Git invérifiable",
+        "branche Git détachée ou indisponible",
+        "dépôt Git sale pour le manifeste observé",
+        "build_state_digest incohérent",
+        "source_digest du manifeste de build incohérent",
+        "model_digest du manifeste de build incohérent",
+        "état Git modifié pendant la validation du manifeste",
+        "ensemble des sources suivies modifié pendant la validation",
+        "source_digest modifié pendant la validation du manifeste",
+        "manifeste de build modifié pendant la validation",
+    }
+)
+_INVENTORY_ERROR_DIAGNOSTIC_ALIASES = {
+    "git branch unavailable": "branche Git détachée ou indisponible",
+}
 
 
 class BuildManifestError(RuntimeError):
@@ -116,11 +137,16 @@ def _bounded_inventory_error_diagnostic(
         exc, inventory_error
     ):
         return type(exc).__name__
-    message = " ".join(str(exc).split())
-    if not message:
+    message = str(exc)
+    diagnostic = _INVENTORY_ERROR_DIAGNOSTIC_ALIASES.get(message)
+    if diagnostic is None and message in _INVENTORY_ERROR_DIAGNOSTICS:
+        diagnostic = message
+    if (
+        diagnostic is None
+        or len(diagnostic) > _INVENTORY_ERROR_DIAGNOSTIC_LIMIT
+    ):
         return "InventoryError"
-    limit = _INVENTORY_ERROR_DIAGNOSTIC_LIMIT
-    return message if len(message) <= limit else message[: limit - 1] + "…"
+    return diagnostic
 
 
 def _requires_student_separation(manual: object, variant: object) -> bool:
@@ -1585,8 +1611,10 @@ def _derive_receipt_evidence(
     receipt: Mapping[str, Any],
     *,
     inventory: Mapping[str, Any] | None = None,
+    inventory_module: Any | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any], Callable[[dict[str, Any]], None]]:
-    inventory_module = _load_inventory_module()
+    if inventory_module is None:
+        inventory_module = _load_inventory_module()
     initial_git_snapshot = _capture_git_snapshot(root)
     if inventory is None:
         inventory = inventory_module.build_inventory(root)
@@ -1993,8 +2021,11 @@ def _derive_receipt_evidence(
 
 def _read_schema_valid_manifest(
     root: Path,
+    *,
+    inventory_module: Any | None = None,
 ) -> tuple[dict[str, Any], str]:
-    inventory_module = _load_inventory_module()
+    if inventory_module is None:
+        inventory_module = _load_inventory_module()
     try:
         snapshot = inventory_module._ConfinedJsonSnapshot(
             root=root,
@@ -2028,8 +2059,13 @@ def _read_schema_valid_manifest(
 
 def _validate_refresh_source_is_empty(
     root: Path,
+    *,
+    inventory_module: Any | None = None,
 ) -> tuple[dict[str, Any], str]:
-    payload, manifest_digest = _read_schema_valid_manifest(root)
+    payload, manifest_digest = _read_schema_valid_manifest(
+        root,
+        inventory_module=inventory_module,
+    )
     if payload.get("builds") != []:
         raise BuildManifestError(
             "refresh interdit: le manifeste doit être strictement vide"
@@ -2055,14 +2091,19 @@ def record_from_receipt(receipt_path: Path) -> None:
         raise BuildManifestError("receipt sans compilation réussie")
     if not preflight_succeeded:
         raise BuildManifestError("receipt sans préflight réussi")
-    current, _current_manifest_digest = _read_schema_valid_manifest(root)
-    inventory_module: object | None = None
+    inventory_module = _load_inventory_module()
+    current, _current_manifest_digest = _read_schema_valid_manifest(
+        root,
+        inventory_module=inventory_module,
+    )
     try:
         if current["builds"] == []:
             _empty_manifest, empty_manifest_digest = (
-                _validate_refresh_source_is_empty(root)
+                _validate_refresh_source_is_empty(
+                    root,
+                    inventory_module=inventory_module,
+                )
             )
-            inventory_module = _load_inventory_module()
             inventory = (
                 inventory_module._build_inventory_for_empty_manifest_refresh(
                     root
@@ -2077,11 +2118,13 @@ def record_from_receipt(receipt_path: Path) -> None:
                 root,
                 receipt,
                 inventory=inventory,
+                inventory_module=inventory_module,
             )
         else:
             envelope, build, validator = _derive_receipt_evidence(
                 root,
                 receipt,
+                inventory_module=inventory_module,
             )
     except BuildManifestError:
         raise

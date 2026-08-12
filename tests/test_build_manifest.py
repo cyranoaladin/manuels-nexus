@@ -43,27 +43,37 @@ def _load_module(path: Path, name: str):
     return module
 
 
-def test_inventory_error_diagnostic_is_bounded_and_redacts_generic_errors(
+def test_inventory_error_diagnostic_allows_only_canonical_messages(
     inventory_module,
     manifest_module,
 ) -> None:
-    inventory_error = inventory_module.InventoryError(
-        "branche incohérente\n" + "x" * 500
+    allowed = inventory_module.InventoryError(
+        "branche de provenance du manifeste incohérente"
+    )
+    unsafe = inventory_module.InventoryError(
+        "/tmp/private.yaml: api_key=SECRET_MARKER: YAML fragment"
     )
     inventory_api = SimpleNamespace(InventoryError=inventory_module.InventoryError)
 
-    diagnostic = manifest_module._bounded_inventory_error_diagnostic(
+    allowed_diagnostic = manifest_module._bounded_inventory_error_diagnostic(
         inventory_api,
-        inventory_error,
+        allowed,
+    )
+    unsafe_diagnostic = manifest_module._bounded_inventory_error_diagnostic(
+        inventory_api,
+        unsafe,
     )
     generic = manifest_module._bounded_inventory_error_diagnostic(
         inventory_api,
         RuntimeError("api_key=do-not-expose"),
     )
 
-    assert diagnostic.startswith("branche incohérente x")
-    assert len(diagnostic) <= 240
-    assert "\n" not in diagnostic
+    assert allowed_diagnostic == "branche de provenance du manifeste incohérente"
+    assert len(allowed_diagnostic) <= 240
+    assert unsafe_diagnostic == "InventoryError"
+    assert "SECRET_MARKER" not in unsafe_diagnostic
+    assert "/tmp/private.yaml" not in unsafe_diagnostic
+    assert "YAML fragment" not in unsafe_diagnostic
     assert generic == "RuntimeError"
     assert "do-not-expose" not in generic
 
@@ -1286,6 +1296,50 @@ def test_refresh_empty_manifest_cli_reports_inventory_ancestry_diagnostic(
     captured = capsys.readouterr()
     assert "ancêtre" in captured.err
     assert "InventoryError" not in captured.err
+    assert "Traceback" not in captured.err
+
+
+def test_refresh_empty_manifest_cli_redacts_unlisted_inventory_error(
+    tmp_path: Path,
+    inventory_module,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    _payload, _manifest_path = _branch_rebind_manifest_repository(tmp_path)
+    unsafe = (
+        "/tmp/private.yaml: api_key=SECRET_MARKER: "
+        "YAML fragment {raw: value}"
+    )
+
+    def reject_with_unlisted_error(
+        _repository: Path,
+        **_kwargs,
+    ) -> dict[str, object]:
+        raise inventory_module.InventoryError(unsafe)
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_build_inventory",
+        reject_with_unlisted_error,
+    )
+    monkeypatch.setattr(
+        manifest_module,
+        "_load_inventory_module",
+        lambda: inventory_module,
+    )
+    monkeypatch.chdir(tmp_path)
+
+    assert manifest_module._run(["--refresh-empty"]) == 2
+
+    captured = capsys.readouterr()
+    assert captured.err == (
+        "build manifest refusé: calcul borné des digests impossible: "
+        "InventoryError\n"
+    )
+    assert "SECRET_MARKER" not in captured.err
+    assert "/tmp/private.yaml" not in captured.err
+    assert "YAML fragment" not in captured.err
     assert "Traceback" not in captured.err
 
 
@@ -5046,9 +5100,17 @@ def test_receipt_cli_activates_first_build_from_clean_stale_empty_manifest(
     calls: list[str] = []
     real_validate_empty = manifest_module._validate_refresh_source_is_empty
 
-    def validate_empty(root: Path):
+    def validate_empty(
+        root: Path,
+        *,
+        inventory_module=None,
+    ):
         calls.append("validate_empty")
-        return real_validate_empty(root)
+        assert inventory_module is fake_inventory
+        return real_validate_empty(
+            root,
+            inventory_module=inventory_module,
+        )
 
     def bounded_builder(root: Path) -> dict[str, object]:
         assert root == tmp_path
@@ -5079,10 +5141,12 @@ def test_receipt_cli_activates_first_build_from_clean_stale_empty_manifest(
         receipt_payload: dict[str, object],
         *,
         inventory: dict[str, object] | None = None,
+        inventory_module=None,
     ):
         assert root == tmp_path
         assert receipt_payload == _receipt()
         assert inventory is bootstrap_inventory
+        assert inventory_module is fake_inventory
         calls.append("derive")
 
         def validate(payload: dict[str, object]) -> None:
@@ -5238,6 +5302,49 @@ def test_receipt_cli_reports_inventory_branch_diagnostic(
     assert manifest_path.read_bytes() == original
 
 
+def test_nonempty_receipt_cli_reports_inventory_business_diagnostic(
+    tmp_path: Path,
+    inventory_module,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    _head, receipt_path, manifest_path, _tracked_source = (
+        _install_clean_receipt_entrypoint_fixture(tmp_path, nonempty=True)
+    )
+    original = manifest_path.read_bytes()
+    inventory_api = inventory_module
+
+    def reject_nonempty_derivation(
+        *_args,
+        inventory_module=None,
+        **_kwargs,
+    ):
+        assert inventory_module is inventory_api
+        raise inventory_api.InventoryError(
+            "source_digest du manifeste de build incohérent"
+        )
+
+    monkeypatch.setattr(
+        manifest_module,
+        "_derive_receipt_evidence",
+        reject_nonempty_derivation,
+    )
+    monkeypatch.setattr(
+        manifest_module,
+        "_load_inventory_module",
+        lambda: inventory_api,
+    )
+
+    assert manifest_module._run(["--receipt", str(receipt_path)]) == 2
+
+    captured = capsys.readouterr()
+    assert "source_digest du manifeste de build incohérent" in captured.err
+    assert "InventoryError" not in captured.err
+    assert "Traceback" not in captured.err
+    assert manifest_path.read_bytes() == original
+
+
 @pytest.mark.parametrize("replacement", ["empty-reencoded", "nonempty"])
 def test_receipt_bootstrap_binds_exact_empty_manifest_snapshot(
     tmp_path: Path,
@@ -5301,8 +5408,10 @@ def test_receipt_bootstrap_binds_exact_empty_manifest_snapshot(
         _receipt_payload: dict[str, object],
         *,
         inventory: dict[str, object] | None = None,
+        inventory_module=None,
     ):
         assert inventory is bootstrap_inventory
+        assert inventory_module is fake_inventory
         manifest_path.write_bytes(concurrent_bytes)
 
         def validate(payload: dict[str, object]) -> None:
@@ -5486,7 +5595,7 @@ def test_receipt_activation_rolls_back_exactly_on_transaction_failure(
     monkeypatch.setattr(
         manifest_module,
         "_derive_receipt_evidence",
-        lambda _root, _receipt_payload, *, inventory: (
+        lambda _root, _receipt_payload, *, inventory, inventory_module: (
             envelope,
             build,
             validate,
