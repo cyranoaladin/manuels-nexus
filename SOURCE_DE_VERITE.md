@@ -195,3 +195,45 @@ d'exemples SQL (`Eleve JOIN`, `Note WHERE`) et non des données réelles.
 
 Ce contrôle est à refaire avant chaque poussée sensible : recherche de secrets,
 de données personnelles, de CSV et de bases sqlite.
+
+## Audit de recolement — 2026-08-12
+
+Nouvelle passe exhaustive : worktrees, dossiers externes, clones du corpus,
+refs git, depot GitHub.
+
+**Branche porteuse du travail en cours.** La branche
+`integration/1spe-bo2026-traceability` (creee apres la consolidation du 11
+aout) part de `main` et porte la mission « finalisation premium des six
+manuels » : conception approuvee
+(`docs/superpowers/specs/2026-08-12-finalisation-premium-six-manuels-design.md`)
+et plan Wave 0
+(`docs/superpowers/plans/2026-08-12-wave-0-collection-infrastructure.md`).
+`main` reste la source de verite ; cette branche est la seule a contenir du
+travail plus recent que `main`, et doit y etre fusionnee a l'issue des vagues.
+
+**Production retrouvee hors depot — recuperee.** Passe TD-normalisation P00 du
+corpus NSI, non commitee depuis le 2026-07-15 dans le worktree externe
+`~/Documents/NSI-recovery-t10-p08-t17`. Sauvegardee en commit local `cb48096`
+dans ce clone et copiee ici :
+`NSI/sources/recuperation/2026-07-15-p00-td-normalisation.patch` (voir
+`NSI/sources/SOURCES.md`). C'etait la seule production de la collection
+retrouvee hors du depot.
+
+**Clones externes du corpus `cyranoaladin/NSI`** (matiere premiere, pas des
+manuels) :
+
+| Chemin | Etat |
+|---|---|
+| `~/Documents/NSI-recovery-t10-p08-t17` | a jour de l'amont (`52bcfdea`) ; portait la passe P00 recuperee ci-dessus |
+| `~/Documents/00_NSI/NSI` | perime (31 commits de retard) ; son commit local REM6 `36394a5` est deja en amont via la PR #111 — rien a recuperer ; fichier non suivi `reports/forensic_recovery_t10_p08_t17.md` (rapport, sans contenu pedagogique) |
+| `~/Documents/00_NSI/NSI-recovery-t10-p08-t17` | worktree casse (son depot parent `~/Documents/NSI` n'existe plus) — supprimable |
+
+**Nettoyages effectues.** Ref distante fantome
+`baseline-final/finalisation-collection-v1` supprimee (le remote n'existait
+plus). Squelette vide `chapitres/TSPE-SUITES-LIMITES/` a la racine supprime
+(zero fichier, doublon d'arborescence du vrai chapitre sous
+`Mathematiques/manuel-maths/chapitres/`).
+
+**GitHub.** `manuels-nexus` public, 7 branches distantes conformes aux refs
+locales. Amont corpus `cyranoaladin/NSI` : `main` = `52bcfdea` = commit epingle
+du subtree — aucun ecart.

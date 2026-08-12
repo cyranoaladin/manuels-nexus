@@ -64,3 +64,24 @@ sont substantiels et directement exploitables.
 **Point ouvert.** Ce corpus est public alors que `manuels-nexus` est passe en
 prive le 2026-08-11. Si la matiere premiere doit suivre le meme regime que les
 manuels qu'elle alimente, la visibilite du depot `NSI` est a trancher.
+
+## Recuperation — passe TD-normalisation P00 non commitee (2026-08-12)
+
+L'audit du 2026-08-12 a retrouve, dans le worktree externe
+`/home/alaeddine/Documents/NSI-recovery-t10-p08-t17` (clone du depot corpus
+`cyranoaladin/NSI`), une passe de normalisation du TD diagnostic P00 datee du
+2026-07-15, restee **non commitee** sur la branche locale
+`td-normalisation/p00-diagnostic-python`. Les passes equivalentes P08, P12 et
+T13 ont, elles, ete fusionnees en amont via les PR `td-normalisation/*`.
+
+| | |
+|---|---|
+| Perimetre | 8 fichiers, +451/-354 : `P00_contract.yml`, TD et corrige diagnostic Python, manifestes, registre de dette TD, revue de substance P-LANG-01 |
+| Sauvegarde amont locale | commit `cb48096` sur `td-normalisation/p00-diagnostic-python` du clone de recuperation (non pousse) |
+| Copie dans ce depot | `NSI/sources/recuperation/2026-07-15-p00-td-normalisation.patch` |
+| Base d'application | commit corpus `52bcfdea` (le commit epingle du subtree) |
+
+**Statut.** Matiere premiere non revue, au meme regime que le reste du corpus :
+la passe n'est ni appliquee a `NSI/corpus_nsi/` ni poussee en amont. Pour
+l'integrer : la faire aboutir dans le depot `cyranoaladin/NSI` (revue puis PR,
+comme P08/P12/T13), puis `git subtree pull`.

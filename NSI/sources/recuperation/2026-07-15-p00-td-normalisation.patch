@@ -1,0 +1,1001 @@
+diff --git a/03_progressions/supports/contracts/P00_contract.yml b/03_progressions/supports/contracts/P00_contract.yml
+index 421751e..1ebaa8d 100644
+--- a/03_progressions/supports/contracts/P00_contract.yml
++++ b/03_progressions/supports/contracts/P00_contract.yml
+@@ -1,56 +1,61 @@
+ sequence: P00
+ theme: Rentrée et méthode
+ notions_exigibles:
+-- affectation
+-- type
+-- condition
+-- trace d’exécution
++  - variable
++  - valeur
++  - type
++  - affectation
++  - comparaison
++  - condition
++  - boucle
++  - entrée-sortie
+ capacites_officielles:
+-- P-LANG-01
++  - P-LANG-01
++minimum_exercices: 8
+ exemples_obligatoires:
+-- 'trace d’affectation : `x = 4 ; x = x + 3 ; print(x)` -> `7` affiché'
+-- 'concaténation de chaînes : `mot = "NS" ; mot = mot + "I"` -> `"NSI"`'
+-- 'test conditionnel : `n = 6 ; n % 2 == 0` -> `True`'
+-- 'fonction courte : `def f(a): return 2*a + 1` avec `a = 5` -> `11` retourné'
++  - points = points + bonus
++  - prix * quantite - 2
++  - if age == 15
++  - range(1, 4)
+ cas_limites:
+-- variable réaffectée deux fois
+-- addition impossible entre chaîne et entier
+-- reste nul
+-- aucun affichage sans `print`
+-erreurs_frequentes:
+-- EF1 - Lire le signe égal comme une égalité mathématique permanente.
+-- EF2 - Confondre affichage et valeur retournée par une fonction.
+-- EF3 - Oublier de tester la valeur zéro dans une fonction numérique.
+-- EF4 - Donner une sortie sans trace intermédiaire.
++  - quantite = 0
++  - temperature = -2
++  - saisie 4 dans le programme débogué
+ types_exercices_attendus:
+-- trace d’affectation avec `x = 4 ; x = x + 3 ; print(x)`
+-- concaténation de chaînes à partir de `mot = "NS" ; mot = mot + "I"`
+-- test conditionnel avec `n = 6 ; n % 2 == 0`
+-- 'fonction courte pour `def f(a): return 2*a + 1` avec `a = 5`'
+-- un cas limite lié à variable réaffectée deux fois
+-- deux méthodes possibles pour concaténation de chaînes
+-- un transfert qui utilise test conditionnel avec une donnée nouvelle
+-- un énoncé volontairement erroné sur fonction courte
+-tp_attendu: Compléter une fonction qui simule une trace mémoire simple sans exécuter
+-  le code reçu.
++  - lecture d'affectations avec état mémoire
++  - trace d'un calcul numérique et ordre des opérations
++  - distinction entre affectation et comparaison
++  - prédiction d'une branche if/else
++  - tableau de trace d'une boucle for et accumulation
++  - débogage d'un programme avec type, nom et indentation
++  - interprétation de input, int et print
++  - correction de raisonnements faux avec mini-exemples
++erreurs_frequentes:
++  - Lire le signe égal comme une égalité mathématique permanente.
++  - Croire que == modifie une variable.
++  - Croire que input renvoie directement un entier.
++  - Oublier l'indentation d'un bloc Python.
++  - Croire qu'une boucle s'arrête sans borne ou condition.
++tp_attendu: Compléter une fonction qui simule une trace mémoire simple sans exécuter le code reçu.
+ interdits_pedagogiques:
+-- réponse cohérente sans calcul
+-- production vérifiable sans livrable concret
+-- starter qui retourne directement la réponse
+-criteres_validation_humaine:
+-- relecture pédagogique indépendante
+-- vérification scientifique des exemples
+-- exécution du TP corrigé
+-- alignement avec le BO 2019
++  - réponse cohérente sans calcul
++  - production vérifiable sans livrable concret
++  - starter qui retourne directement la réponse
+ must_include:
+-- affectation
+-- x = 4 ; x = x + 3 ; print(x)
+-- mot = "NS" ; mot = mot + "I"
+-- variable réaffectée deux fois
+-- EF1
+-- Compléter une fonction qui simule une trace mémoire simple sans exécuter le code
+-  reçu.
++  - points = points + bonus
++  - prix * quantite - 2
++  - if age == 15
++  - range(1, 4)
++  - int(input
++  - trace d’exécution
++  - Corriger des raisonnements faux
+ must_not:
+-- réponse cohérente sans calcul
+-- production vérifiable sans livrable concret
+-- starter qui retourne directement la réponse
++  - réponse cohérente sans calcul
++  - production vérifiable sans livrable concret
++  - starter qui retourne directement la réponse
++  - pseudo-code décoratif sans lien avec une activité Python
++criteres_validation_humaine:
++  - relecture pédagogique indépendante
++  - vérification scientifique des exemples Python
++  - exécution du TP corrigé
++  - alignement avec le BO 2019
+diff --git a/03_progressions/supports/premiere/P00/P00_corrige_diagnostic_python.md b/03_progressions/supports/premiere/P00/P00_corrige_diagnostic_python.md
+index 14887c6..6ec1daa 100644
+--- a/03_progressions/supports/premiere/P00/P00_corrige_diagnostic_python.md
++++ b/03_progressions/supports/premiere/P00/P00_corrige_diagnostic_python.md
+@@ -1,140 +1,166 @@
+ ---
+-title: "P00 - Corrige - Diagnostic Python"
++title: "P00 - Corrigé - Diagnostic Python"
+ level: "premiere"
+ sequence_id: "P00"
+ document_type: "corrige"
+ status: "needs_review"
+-version: "0.4.1"
++version: "0.5.0"
+ source: "BO 2019"
+ source_creation: "generated_from_program"
+ theme: "Rentrée et méthode"
+-notion: "affectation, type, condition, trace d’exécution"
++notion: "variables, affectation, types, conditions, boucles, entrées-sorties"
+ objectifs:
+-  - "Objectif O1 - Identifier précisément la représentation ou la structure en jeu"
+-  - "Objectif O2 - Appliquer une méthode disciplinaire complète"
+-  - "Objectif O3 - Justifier le résultat sur un cas différent"
+-  - "Objectif O4 - Contrôler un cas limite et corriger une erreur observée"
++  - "Diagnostiquer des acquis de départ en lisant et en corrigeant de courts programmes Python."
++  - "Justifier une prédiction d'exécution par une trace courte et une donnée concrète."
+ private_data: false
+ official_program:
+   capacities:
+     - "P-LANG-01"
+ ---
+ 
+-
+ # P00 - Corrigé professeur - Diagnostic Python
+ 
+-## Objectifs spécifiques
+-- Objectif O1 - Identifier précisément la représentation ou la structure en jeu.
+-- Objectif O2 - Appliquer une méthode disciplinaire complète.
+-- Objectif O3 - Justifier le résultat sur un cas différent.
+-- Objectif O4 - Contrôler un cas limite et corriger une erreur observée.
++Ce corrigé accompagne le TD P00. Il rend visibles les étapes de raisonnement à
++faire verbaliser ; il ne constitue pas un barème automatisé.
++
++## Capacité officielle
++
++- **P-LANG-01 — Mettre en évidence un corpus de constructions élémentaires.**
++
++## Objectifs
++
++- Identifier les constructions Python que l'élève sait déjà lire.
++- Rendre observable le raisonnement attendu dans une trace ou une correction.
+ 
+-## Capacités officielles atomiques
+-- P-LANG-01
++## Capacités officielles
++
++- **P-LANG-01 — Mettre en évidence un corpus de constructions élémentaires.**
+ 
+ ## Prérequis
+-- Reconnaître une consigne liée à affectation.
+-- Distinguer donnée, méthode et conclusion dans le thème Rentrée et méthode.
+-- Rédiger une justification courte en utilisant le vocabulaire du programme.
+-- Contrôler une réponse par un cas limite ou un contre-exemple explicite.
++
++- Lire une affectation, une comparaison et un affichage simples.
++- Accepter de distinguer la valeur saisie de son type Python.
+ 
+ ## Séance(s) correspondante(s)
+-- P00-S1 à P00-S4 : support rattaché aux séances prêtes de la progression.
+ 
+-## Situation-problème concrète
+-Un groupe reçoit quatre fragments Python issus de copies anonymisées et doit prédire les valeurs affichées avant d’exécuter le programme.
++- P00-S1 : correction collective du diagnostic ; les erreurs relevées guident la remédiation courte.
++
++## Situation-problème
++
++Le professeur doit distinguer une erreur de vocabulaire, de trace ou de syntaxe
++afin de proposer une reprise ciblée, sans confondre diagnostic et évaluation notée.
+ 
+ ## Activité d’entrée
+-1. Repérer les variables modifiées dans `x = 4 ; x = x + 3 ; print(x)`.
+-2. Séparer valeur stockée, expression évaluée et affichage produit.
+-3. Comparer une prédiction papier avec une exécution Python.
+-4. Identifier la première instruction qui explique une divergence.
+-
+-## Méthode générale de correction
+-- Point 1 : pour trace d’affectation, exiger la donnée `x = 4 ; x = x + 3 ; print(x)`, la méthode « dresser une table instruction, expression calculée, nouvelle valeur » et le contrôle « variable réaffectée deux fois ».
+-- Point 2 : pour concaténation de chaînes, exiger la donnée `mot = "NS" ; mot = mot + "I"`, la méthode « identifier le type chaîne puis appliquer `+` comme concaténation » et le contrôle « addition impossible entre chaîne et entier ».
+-- Point 3 : pour test conditionnel, exiger la donnée `n = 6 ; n % 2 == 0`, la méthode « calculer le reste puis évaluer le booléen » et le contrôle « reste nul ».
+-- Point 4 : pour fonction courte, exiger la donnée `def f(a): return 2*a + 1` avec `a = 5`, la méthode « substituer l’argument et distinguer retour et affichage » et le contrôle « aucun affichage sans `print` ».
+-## Exercices numérotés
+-- Exercice 1 : résoudre trace d’affectation avec `x = 4 ; x = x + 3 ; print(x)` ; attendu : `7` affiché.
+-- Exercice 2 : expliquer concaténation de chaînes à partir de `mot = "NS" ; mot = mot + "I"` ; attendu : `"NSI"`.
+-- Exercice 3 : comparer test conditionnel avec `n = 6 ; n % 2 == 0` ; attendu : `True`.
+-- Exercice 4 : corriger fonction courte pour `def f(a): return 2*a + 1` avec `a = 5` ; attendu : `11` retourné.
+-- Exercice 5 : tester un cas limite lié à variable réaffectée deux fois ; attendu : le comportement de trace d’affectation est contrôlé.
+-- Exercice 6 : classer deux méthodes possibles pour concaténation de chaînes ; attendu : la méthode robuste est choisie et justifiée.
+-- Exercice 7 : justifier un transfert qui utilise test conditionnel avec une donnée nouvelle ; attendu : la justification reste valable sur le nouveau cas.
+-- Exercice 8 : étendre un énoncé volontairement erroné sur fonction courte ; attendu : l’erreur est localisée puis réparée.
+-
+-## Corrigé
+-### Corrigé exercice 1
+-- Méthode : identifier `x = 4 ; x = x + 3 ; print(x)`, appliquer la méthode « dresser une table instruction, expression calculée, nouvelle valeur », puis écrire `7` affiché.
+-- Résultat : `7` affiché.
+-- Contrôle : faire apparaître le contrôle « variable réaffectée deux fois ».
+-- Erreur traitée : EF1 - Lire le signe égal comme une égalité mathématique permanente.
+-### Corrigé exercice 2
+-- Méthode : expliciter chaque étape de identifier le type chaîne puis appliquer `+` comme concaténation avant de conclure par `"NSI"`.
+-- Résultat : `"NSI"`.
+-- Contrôle : rédiger la méthode avant le résultat.
+-- Erreur traitée : EF2 - Confondre affichage et valeur retournée par une fonction.
+-### Corrigé exercice 3
+-- Méthode : comparer la donnée avec le cas limite « reste nul » et valider `True`.
+-- Résultat : `True`.
+-- Contrôle : comparer avec le cas « reste nul ».
+-- Erreur traitée : EF3 - Oublier de tester la valeur zéro dans une fonction numérique.
+-### Corrigé exercice 4
+-- Méthode : isoler l’erreur fréquente « Donner une sortie sans trace intermédiaire. » puis reprendre la procédure correcte.
+-- Résultat : `11` retourné.
+-- Contrôle : corriger l’erreur « Donner une sortie sans trace intermédiaire. ».
+-- Erreur traitée : EF4 - Donner une sortie sans trace intermédiaire.
+-### Corrigé exercice 5
+-- Méthode : identifier `x = 4 ; x = x + 3 ; print(x)`, appliquer la méthode « dresser une table instruction, expression calculée, nouvelle valeur », puis écrire `7` affiché.
+-- Résultat : le comportement de trace d’affectation est contrôlé.
+-- Contrôle : nommer la donnée minimale et la conclusion.
+-- Erreur traitée : EF1 - Lire le signe égal comme une égalité mathématique permanente.
+-### Corrigé exercice 6
+-- Méthode : expliciter chaque étape de identifier le type chaîne puis appliquer `+` comme concaténation avant de conclure par `"NSI"`.
+-- Résultat : la méthode robuste est choisie et justifiée.
+-- Contrôle : identifier pourquoi « Confondre affichage et valeur retournée par une fonction. » est une erreur.
+-- Erreur traitée : EF2 - Confondre affichage et valeur retournée par une fonction.
+-### Corrigé exercice 7
+-- Méthode : comparer la donnée avec le cas limite « reste nul » et valider `True`.
+-- Résultat : la justification reste valable sur le nouveau cas.
+-- Contrôle : inclure une étape calculable par un pair.
+-- Erreur traitée : EF3 - Oublier de tester la valeur zéro dans une fonction numérique.
+-### Corrigé exercice 8
+-- Méthode : isoler l’erreur fréquente « Donner une sortie sans trace intermédiaire. » puis reprendre la procédure correcte.
+-- Résultat : l’erreur est localisée puis réparée.
+-- Contrôle : proposer une activité corrective inspirée de « Écrire une justification en deux phrases : état avant, état après. ».
+-- Erreur traitée : EF4 - Donner une sortie sans trace intermédiaire.
+-
+-## Barème de correction rapide
+-- Exercice 1 : 1 point méthode, 0,5 point résultat, 0,5 point contrôle sur « faire apparaître le contrôle « variable réaffectée deux fois » ».
+-- Exercice 2 : 1 point méthode, 0,5 point résultat, 0,5 point contrôle sur « rédiger la méthode avant le résultat ».
+-- Exercice 3 : 1 point méthode, 0,5 point résultat, 0,5 point contrôle sur « comparer avec le cas « reste nul » ».
+-- Exercice 4 : 1 point méthode, 0,5 point résultat, 0,5 point contrôle sur « corriger l’erreur « Donner une sortie sans trace intermédiaire. » ».
+-- Exercice 5 : 1 point méthode, 0,5 point résultat, 0,5 point contrôle sur « nommer la donnée minimale et la conclusion ».
+-- Exercice 6 : 1 point méthode, 0,5 point résultat, 0,5 point contrôle sur « identifier pourquoi « Confondre affichage et valeur retournée par une fonction. » est une erreur ».
+-- Exercice 7 : 1 point méthode, 0,5 point résultat, 0,5 point contrôle sur « inclure une étape calculable par un pair ».
+-- Exercice 8 : 1 point méthode, 0,5 point résultat, 0,5 point contrôle sur « proposer une activité corrective inspirée de « Écrire une justification en deux phrases : état avant, état après. » ».
++
++- Faire voter sur la valeur finale de `points` après `points = points + bonus`.
++- Demander ensuite une justification qui cite une instruction et une valeur.
++
++## Exemples de correction
++
++- Exemple : `age == 15` compare une valeur et produit `True` ; il ne modifie pas `age`.
++- Exemple : `int("16")` produit l'entier `16`, alors que `input` fournit une chaîne.
++
++## Exercices
++
++Les huit corrigés ci-dessous correspondent aux huit activités du TD : affectation,
++calcul, comparaison, condition, boucle, débogage, entrée-sortie et raisonnements faux.
++
++### Corrigé exercice 1 — Affectations
++
++- Table attendue : `points` passe de `12` à `15` après `points = points + bonus` ; `bonus` reste `3`.
++- Méthode : calculer `12 + 3`, puis inscrire la nouvelle valeur dans la colonne de `points`.
++- Justification : la partie droite est calculée avec les valeurs actuelles (`12 + 3`), puis la valeur obtenue est affectée à `points`.
++- Résultat : après l'instruction, `points` vaut `15` et `bonus` vaut `3`.
++- Vocabulaire attendu : variable, valeur, entier et affectation.
++- Relance possible : demander si une seconde variable serait nécessaire pour conserver l'ancienne valeur `12`.
++
++### Corrigé exercice 2 — Calcul et affichage
++
++- Calcul : `7 * 3 - 2` donne successivement `21`, puis `19`.
++- Méthode : effectuer la multiplication avant la soustraction, puis affecter le résultat à `total`.
++- État avant l'affichage : `total` contient l'entier `19`.
++- Résultat : `print(total)` affiche `19` ; avec `quantite = 0`, il affiche `-2`.
++- Vigilance : l'élève doit distinguer la valeur stockée dans `total` de son affichage.
++
++### Corrigé exercice 3 — `=` et `==`
++
++- `age = 15` modifie la variable ; `age == 15` évalue une comparaison et renvoie `True`.
++- Méthode : repérer si le signe est employé pour stocker une valeur ou pour produire un booléen.
++- Résultat : dans une condition, seule la forme `if age == 15:` est valide pour tester l'âge.
++- La condition correcte est `if age == 15:` ; `if age = 15:` est une erreur de syntaxe.
++- Une correction recevable réfute explicitement l'idée que `==` modifie `age`.
++
++### Corrigé exercice 4 — Condition
++
++- La comparaison `18 < 0` vaut `False` ; la branche `else` affiche `pas de gel`.
++- Méthode : évaluer d'abord la comparaison, puis suivre la branche associée à `True` ou à `False`.
++- Résultat : avec `temperature = 18`, le message affiché est `pas de gel`.
++- Une valeur comme `-2` rend la condition vraie et fait afficher `gel`.
++- Demander à l'élève de citer la condition avant de nommer la branche : cela évite une prédiction au hasard.
++
++### Corrigé exercice 5 — Boucle et accumulation
++
++| `nombre` | calcul de `somme` | nouvelle valeur |
++|---:|---|---:|
++| 1 | `0 + 1` | 1 |
++| 2 | `1 + 2` | 3 |
++| 3 | `3 + 3` | 6 |
++
++- Résultat : le programme affiche `6`.
++- Méthode : relever chaque valeur fournie par `range(1, 4)` et ajouter cette valeur à la somme précédente.
++- Explication : `range(1, 4)` est borné ; après la valeur `3`, aucune nouvelle valeur n'est fournie et la boucle s'arrête.
++
++### Corrigé exercice 6 — Débogage
++
++- Le résultat de `input` est une chaîne : il faut `int(input("Nombre : "))` avant `nombre > 0`.
++- Méthode : vérifier séparément le type, l'indentation et chaque nom de variable avant d'exécuter le programme.
++- La ligne `print` doit être indentée sous le `if`.
++- `numbre` est un nom inconnu ; la variable définie est `nombre`.
++- Après les trois corrections, la saisie `4` conduit à l'affichage de `8`.
++- Résultat : le programme corrigé affiche `8` pour l'entrée `4`.
++
++### Corrigé exercice 7 — Entrée, conversion, sortie
++
++```python
++age_texte = input("Âge : ")
++age = int(age_texte)
++print(age + 1)
++```
++
++- Avec `16`, la première variable contient `"16"` (`str`) et la seconde `16` (`int`).
++- Résultat : `age` vaut `16` et `print(age + 1)` affiche `17`.
++- Méthode : conserver le texte renvoyé par `input`, le convertir avec `int`, puis seulement effectuer l'addition.
++- Le point essentiel est que `input` livre du texte, même lorsque l'utilisateur a saisi des chiffres.
++
++### Corrigé exercice 8 — Raisonnements faux
++
++- Réaffectation : `x = 2` puis `x = 5` laisse `x` à `5` ; une variable ne contient qu'une valeur courante.
++- Méthode : pour chaque affirmation, exécuter mentalement le contre-exemple et nommer l'effet de l'instruction.
++- Type : `input()` produit une chaîne, alors que `int(...)` produit un entier si le texte représente un entier.
++- Comparaison : `x == 3` ne modifie pas `x`, mais produit un booléen ; `x = 3` est l'affectation.
++- Arrêt d'une boucle : `range(3)` fournit trois valeurs, et une boucle `while` dépend d'une condition devenue fausse.
++- Résultat : dans le premier contre-exemple, `x` vaut `5` ; dans le dernier, les valeurs produites sont `0`, `1` et `2`.
++
+ ## Erreurs fréquentes
+-- Erreur fréquente EF1 - Lire le signe égal comme une égalité mathématique permanente.
+-- Erreur fréquente EF2 - Confondre affichage et valeur retournée par une fonction.
+-- Erreur fréquente EF3 - Oublier de tester la valeur zéro dans une fonction numérique.
+-- Erreur fréquente EF4 - Donner une sortie sans trace intermédiaire.
+ 
+-## Remédiation ciblée
+-- Activité corrective EF1 : Construire un tableau mémoire avec une ligne par instruction.
+-- Activité corrective EF2 : Colorer `print`, `return` et expression évaluée dans trois colonnes.
+-- Activité corrective EF3 : Ajouter les tests `0`, `1` et `-1` avant les cas ordinaires.
+-- Activité corrective EF4 : Écrire une justification en deux phrases : état avant, état après.
++- Confondre `=` et `==`.
++- Utiliser directement le texte renvoyé par `input` dans un calcul numérique.
++- Oublier qu'un bloc Python dépend de son indentation.
++- Prédire une boucle sans donner les valeurs successives de son compteur.
++
++## Remédiation
++
++- Pour une confusion sur l'affectation, faire compléter une trace mémoire ligne par ligne.
++- Pour une confusion sur les types, faire annoter `"16"` et `16` avant d'exécuter une conversion.
++- Pour une condition ou une boucle mal lue, demander d'abord la valeur du test ou les valeurs produites par `range`.
+ 
+ ## Différenciation
+-- Socle : traiter `x = 4 ; x = x + 3 ; print(x)` avec une fiche méthode fournie.
+-- Standard : traiter `mot = "NS" ; mot = mot + "I"` en rédigeant la justification complète.
+-- Expert : inventer un cas limite lié à « reste nul » et expliquer le comportement attendu.
++
++- Socle : fournir la première ligne des tableaux de trace.
++- Standard : demander une justification complète avant l'exécution.
++- Approfondissement : faire modifier une donnée puis prédire la nouvelle sortie.
+ 
+ ## Critères de réussite
+-- La capacité officielle est citée dans la copie.
+-- La méthode contient au moins une étape vérifiable par un pair.
+-- Le cas limite est discuté avec une donnée concrète.
+-- La correction explique quelle erreur fréquente est évitée.
++
++- La réponse cite une ligne Python et une valeur calculée.
++- Une erreur est corrigée de manière minimale et justifiée.
+diff --git a/03_progressions/supports/premiere/P00/P00_td_diagnostic_python.md b/03_progressions/supports/premiere/P00/P00_td_diagnostic_python.md
+index 7916f13..78b2fb0 100644
+--- a/03_progressions/supports/premiere/P00/P00_td_diagnostic_python.md
++++ b/03_progressions/supports/premiere/P00/P00_td_diagnostic_python.md
+@@ -1,19 +1,18 @@
+ ---
+-title: "P00 - Td - Diagnostic Python"
++title: "P00 - TD - Diagnostic Python"
+ level: "premiere"
+ sequence_id: "P00"
+ document_type: "td"
+ status: "needs_review"
+-version: "0.4.1"
++version: "0.5.0"
+ source: "BO 2019"
+ source_creation: "generated_from_program"
+ theme: "Rentrée et méthode"
+-notion: "affectation, type, condition, trace d’exécution"
++notion: "variables, affectation, types, conditions, boucles, entrées-sorties"
+ objectifs:
+-  - "Objectif O1 - Identifier précisément la représentation ou la structure en jeu"
+-  - "Objectif O2 - Appliquer une méthode disciplinaire complète"
+-  - "Objectif O3 - Justifier le résultat sur un cas différent"
+-  - "Objectif O4 - Contrôler un cas limite et corriger une erreur observée"
++  - "Diagnostiquer des acquis de départ en lisant et en corrigeant de courts programmes Python."
++  - "Employer le vocabulaire variable, valeur, type, affectation, condition, boucle et affichage."
++  - "Justifier une prédiction d'exécution par une trace courte et une donnée concrète."
+ private_data: false
+ official_program:
+   capacities:
+@@ -22,196 +21,274 @@ official_program:
+ 
+ # P00 - TD - Diagnostic Python
+ 
+-## Objectifs spécifiques
+-- Objectif O1 - Identifier précisément la représentation ou la structure en jeu.
+-- Objectif O2 - Appliquer une méthode disciplinaire complète.
+-- Objectif O3 - Justifier le résultat sur un cas différent.
+-- Objectif O4 - Contrôler un cas limite et corriger une erreur observée.
++## Objectifs
+ 
+-## Capacités officielles atomiques
+-- P-LANG-01
++- Repérer les constructions élémentaires de Python dans de petits programmes.
++- Expliquer une exécution avec une trace, plutôt qu'en se fiant à une intuition.
++- Identifier une erreur fréquente puis proposer une correction minimale.
+ 
+ ## Prérequis
+-- Reconnaître une consigne liée à affectation.
+-- Distinguer donnée, méthode et conclusion dans le thème Rentrée et méthode.
+-- Rédiger une justification courte en utilisant le vocabulaire du programme.
+-- Contrôler une réponse par un cas limite ou un contre-exemple explicite.
++
++- Savoir lire une instruction Python très courte.
++- Connaître les mots « variable », « valeur » et « affichage » sans devoir les définir formellement.
++
++## Capacités officielles
++
++- **P-LANG-01 — Mettre en évidence un corpus de constructions élémentaires.**
+ 
+ ## Séance(s) correspondante(s)
+-- P00-S1 à P00-S4 : support rattaché aux séances prêtes de la progression.
+ 
+-## Situation-problème concrète
+-Un groupe reçoit quatre fragments Python issus de copies anonymisées et doit prédire les valeurs affichées avant d’exécuter le programme.
++- P00-S1 : diagnostic des constructions Python et constitution des groupes de remédiation.
+ 
+ ## Activité d’entrée
+-1. Repérer les variables modifiées dans `x = 4 ; x = x + 3 ; print(x)`.
+-2. Séparer valeur stockée, expression évaluée et affichage produit.
+-3. Comparer une prédiction papier avec une exécution Python.
+-4. Identifier la première instruction qui explique une divergence.
+-
+-## Exemples corrigés précis
+-### Exemple corrigé 1 - trace d’affectation
+-- Donnée étudiée : `x = 4 ; x = x + 3 ; print(x)`.
+-- Méthode : dresser une table instruction, expression calculée, nouvelle valeur.
+-- Résultat obtenu : `7` affiché.
+-- Contrôle : le cas limite « variable réaffectée deux fois » est vérifié séparément.
+-### Exemple corrigé 2 - concaténation de chaînes
+-- Donnée étudiée : `mot = "NS" ; mot = mot + "I"`.
+-- Méthode : identifier le type chaîne puis appliquer `+` comme concaténation.
+-- Résultat obtenu : `"NSI"`.
+-- Contrôle : le cas limite « addition impossible entre chaîne et entier » est vérifié séparément.
+-### Exemple corrigé 3 - test conditionnel
+-- Donnée étudiée : `n = 6 ; n % 2 == 0`.
+-- Méthode : calculer le reste puis évaluer le booléen.
+-- Résultat obtenu : `True`.
+-- Contrôle : le cas limite « reste nul » est vérifié séparément.
+-### Exemple corrigé 4 - fonction courte
+-- Donnée étudiée : `def f(a): return 2*a + 1` avec `a = 5`.
+-- Méthode : substituer l’argument et distinguer retour et affichage.
+-- Résultat obtenu : `11` retourné.
+-- Contrôle : le cas limite « aucun affichage sans `print` » est vérifié séparément.
++
++- Prédire sans exécuter le résultat de `x = 4`, puis de `x = x + 3`.
++- Mettre en commun les propositions et exiger une trace qui distingue l'ancienne et la nouvelle valeur.
++
++## Exemple de méthode
++
++Pour le fragment `x = 4` puis `x = x + 3`, écrire une ligne par instruction,
++calculer la partie droite, puis noter la nouvelle valeur de `x` : `4`, puis `7`.
++
++## Repères d'objectifs
++
++- O1 : lire l'état d'une variable et son type.
++- O2 : construire une trace de calcul ou de boucle.
++- O3 : interpréter une comparaison ou une condition.
++- O4 : diagnostiquer et corriger une erreur Python.
++
++## Situation-problème
++
++Avant de commencer le chapitre de programmation, une équipe doit relire huit fragments
++issus d'un carnet de tests. Chaque réponse doit indiquer ce que Python fait réellement,
++pas seulement ce que le programmeur voulait faire.
++
++## Consigne commune
++
++Travaillez d'abord sans exécuter les programmes. Pour chaque exercice, écrivez une trace,
++une phrase de justification ou une correction minimale selon la consigne. Vérifiez ensuite
++votre réponse dans l'interpréteur si le professeur vous y autorise.
++
+ ## Exercices numérotés
+-### Exercice 1
++
++### Exercice 1 — Lire des affectations
++
++- Type : lecture/analyse.
+ - Objectif travaillé : O1.
+-- Capacité officielle : P-LANG-01.
+-- Énoncé disciplinaire : résoudre trace d’affectation avec `x = 4 ; x = x + 3 ; print(x)`.
+-- Production attendue : `7` affiché.
+-- Contrainte de contrôle : faire apparaître le contrôle « variable réaffectée deux fois ».
+-- Critère local : la réponse contient une donnée, une méthode, un résultat et une vérification.
+-### Exercice 2
++- Programme :
++
++  ```python
++  points = 12
++  bonus = 3
++  points = points + bonus
++  ```
++
++- Recopiez dans un tableau les valeurs de `points` et de `bonus` après chaque ligne.
++- Indiquez le type de chaque valeur et expliquez pourquoi `points` ne vaut plus `12` à la fin.
++- Piège à discuter : une variable garde-t-elle toutes ses anciennes valeurs ?
++
++### Exercice 2 — Tracer un calcul
++
++- Type : trace/table.
+ - Objectif travaillé : O2.
+-- Capacité officielle : P-LANG-01.
+-- Énoncé disciplinaire : expliquer concaténation de chaînes à partir de `mot = "NS" ; mot = mot + "I"`.
+-- Production attendue : `"NSI"`.
+-- Contrainte de contrôle : rédiger la méthode avant le résultat.
+-- Critère local : la réponse contient une donnée, une méthode, un résultat et une vérification.
+-### Exercice 3
++- Programme :
++
++  ```python
++  prix = 7
++  quantite = 3
++  total = prix * quantite - 2
++  print(total)
++  ```
++
++- Calculez l'expression de droite en respectant l'ordre des opérations, puis donnez ce qui est affiché.
++- Ajoutez une ligne de trace indiquant la valeur de `total` juste avant `print`.
++- Contrôle : que vaudrait `total` si `quantite` était `0` ?
++
++### Exercice 3 — Affectation ou comparaison ?
++
++- Type : justification.
++- Objectif travaillé : O3.
++- Pour chacune des lignes suivantes, dites si elle modifie `age`, teste une égalité ou provoque une erreur de syntaxe dans une condition Python.
++
++  ```python
++  age = 15
++  age == 15
++  if age = 15:
++      print("même âge")
++  ```
++
++- Corrigez seulement la troisième ligne afin que le message s'affiche lorsque `age` vaut `15`.
++- Réfutez la phrase : « `==` donne une nouvelle valeur à la variable. »
++
++### Exercice 4 — Lire une condition
++
++- Type : lecture/analyse.
+ - Objectif travaillé : O3.
+-- Capacité officielle : P-LANG-01.
+-- Énoncé disciplinaire : comparer test conditionnel avec `n = 6 ; n % 2 == 0`.
+-- Production attendue : `True`.
+-- Contrainte de contrôle : comparer avec le cas « reste nul ».
+-- Critère local : la réponse contient une donnée, une méthode, un résultat et une vérification.
+-### Exercice 4
++- Sans exécuter, prévoyez le message affiché par le programme.
++
++  ```python
++  temperature = 18
++  if temperature < 0:
++      print("gel")
++  else:
++      print("pas de gel")
++  ```
++
++- Écrivez la condition évaluée et la branche réellement exécutée.
++- Remplacez `18` par une valeur qui ferait afficher `gel`, puis expliquez votre choix.
++
++### Exercice 5 — Suivre une boucle
++
++- Type : trace/table.
++- Objectif travaillé : O2.
++- Complétez un tableau à trois lignes pour `nombre`, `somme` et le texte affiché.
++
++  ```python
++  somme = 0
++  for nombre in range(1, 4):
++      somme = somme + nombre
++  print(somme)
++  ```
++
++- Indiquez les trois valeurs prises par `nombre` et la valeur finale de `somme`.
++- Piège : la boucle s'arrête-t-elle « quand on le décide », ou parce que `range(1, 4)` ne fournit plus de valeur ?
++
++### Exercice 6 — Déboguer trois erreurs
++
++- Type : débogage.
+ - Objectif travaillé : O4.
+-- Capacité officielle : P-LANG-01.
+-- Énoncé disciplinaire : corriger fonction courte pour `def f(a): return 2*a + 1` avec `a = 5`.
+-- Production attendue : `11` retourné.
+-- Contrainte de contrôle : corriger l’erreur « Donner une sortie sans trace intermédiaire. ».
+-- Critère local : la réponse contient une donnée, une méthode, un résultat et une vérification.
+-### Exercice 5
++- Ce programme doit afficher le double du nombre saisi. Repérez trois erreurs différentes, puis proposez la correction minimale de chaque ligne concernée.
++
++  ```python
++  nombre = input("Nombre : ")
++  if nombre > 0:
++  print(numbre * 2)
++  ```
++
++- Votre réponse doit traiter l'indentation, le nom de variable et le type obtenu par `input`.
++- Test de contrôle : que doit afficher la version corrigée si l'utilisateur saisit `4` ?
++- Cas limite : expliquez pourquoi la version corrigée n'affiche rien si l'utilisateur saisit `0` ; la condition `nombre > 0` est alors fausse.
++
++### Exercice 7 — Interpréter entrée et sortie
++
++- Type : production/écriture.
+ - Objectif travaillé : O1.
+-- Capacité officielle : P-LANG-01.
+-- Énoncé disciplinaire : tester un cas limite lié à variable réaffectée deux fois.
+-- Production attendue : le comportement de trace d’affectation est contrôlé.
+-- Contrainte de contrôle : nommer la donnée minimale et la conclusion.
+-- Critère local : la réponse contient une donnée, une méthode, un résultat et une vérification.
+-### Exercice 6
+-- Objectif travaillé : O2.
+-- Capacité officielle : P-LANG-01.
+-- Énoncé disciplinaire : classer deux méthodes possibles pour concaténation de chaînes.
+-- Production attendue : la méthode robuste est choisie et justifiée.
+-- Contrainte de contrôle : identifier pourquoi « Confondre affichage et valeur retournée par une fonction. » est une erreur.
+-- Critère local : la réponse contient une donnée, une méthode, un résultat et une vérification.
+-### Exercice 7
+-- Objectif travaillé : O3.
+-- Capacité officielle : P-LANG-01.
+-- Énoncé disciplinaire : justifier un transfert qui utilise test conditionnel avec une donnée nouvelle.
+-- Production attendue : la justification reste valable sur le nouveau cas.
+-- Contrainte de contrôle : inclure une étape calculable par un pair.
+-- Critère local : la réponse contient une donnée, une méthode, un résultat et une vérification.
+-### Exercice 8
++- Écrivez trois lignes Python qui demandent un âge, le convertissent en entier puis affichent l'âge l'année prochaine.
++- Pour l'entrée `16`, donnez précisément la valeur stockée juste après `input`, puis juste après la conversion.
++- Expliquez pourquoi `input` ne renvoie pas directement un entier.
++
++### Exercice 8 — Corriger des raisonnements faux
++
++- Type : transfert.
+ - Objectif travaillé : O4.
+-- Capacité officielle : P-LANG-01.
+-- Énoncé disciplinaire : étendre un énoncé volontairement erroné sur fonction courte.
+-- Production attendue : l’erreur est localisée puis réparée.
+-- Contrainte de contrôle : proposer une activité corrective inspirée de « Écrire une justification en deux phrases : état avant, état après. ».
+-- Critère local : la réponse contient une donnée, une méthode, un résultat et une vérification.
+-## Corrigé
++- Pour chacune des affirmations, écrivez « faux », puis une phrase de correction accompagnée d'un mini-exemple Python.
++
++  1. « Une variable garde toutes ses anciennes valeurs. »
++  2. « `input` renvoie directement un entier. »
++  3. « `==` modifie la variable située à gauche. »
++  4. « Une boucle s'arrête quand le programmeur le décide, sans condition. »
++
++- Votre quatrième exemple doit citer une borne de `range` ou une condition de `while`.
++
++## Corrigé indicatif après recherche
++
+ ### Corrigé exercice 1
+-- Résultat : `7` affiché.
+-- Contrôle : faire apparaître le contrôle « variable réaffectée deux fois ».
+-- Erreur traitée : EF1 - Lire le signe égal comme une égalité mathématique permanente.
+-- Donnée utilisée alpha dans P00 td diagnostic python : cas alpha de l exercice 1 avec les valeurs indiquées dans l énoncé.
+-- Méthode alpha dans P00 td diagnostic python : trace courte, pseudo-code local `if cas_alpha: décider else: calculer`, invariant nommé et complexité `O(n)`.
+-- Résultat alpha dans P00 td diagnostic python : sortie vérifiable de l exercice 1, reliée à la capacité officielle du bloc.
+-- Contrôle alpha dans P00 td diagnostic python : le cas limite annoncé est décidé explicitement et une réponse sans trace est refusée.
++
++- Référence : Exercice 1, lire l'état des variables après les affectations.
++- Données : après la première ligne, `points` vaut `12` (`int`) ; `bonus` vaut `3` (`int`).
++- Méthode : l'expression `points + bonus` utilise les valeurs actuelles, soit `12 + 3`, puis l'affectation remplace la valeur de `points`.
++- Résultat : après la troisième ligne, `points` vaut `15` et `bonus` vaut toujours `3`.
++- Erreur traitée : `=` ne signifie pas ici une égalité mathématique durable ; une variable ne mémorise pas automatiquement ses anciennes valeurs.
++
+ ### Corrigé exercice 2
+-- Résultat : `"NSI"`.
+-- Contrôle : rédiger la méthode avant le résultat.
+-- Erreur traitée : EF2 - Confondre affichage et valeur retournée par une fonction.
+-- Donnée utilisée beta dans P00 td diagnostic python : cas beta de l exercice 2 avec les valeurs indiquées dans l énoncé.
+-- Méthode beta dans P00 td diagnostic python : trace courte, pseudo-code local `if cas_beta: décider else: calculer`, invariant nommé et complexité `O(n)`.
+-- Résultat beta dans P00 td diagnostic python : sortie vérifiable de l exercice 2, reliée à la capacité officielle du bloc.
+-- Contrôle beta dans P00 td diagnostic python : le cas limite annoncé est décidé explicitement et une réponse sans trace est refusée.
++
++- Référence : Exercice 2, tracer le calcul du prix total avant l'affichage.
++- Données : `prix * quantite - 2` devient `7 * 3 - 2`.
++- Méthode : Python effectue d'abord la multiplication : `21 - 2`, puis la soustraction.
++- Résultat : `total` vaut `19` juste avant `print`, et le programme affiche `19`.
++- Contrôle : avec `quantite = 0`, le calcul donne `7 * 0 - 2`, donc `-2`.
++
+ ### Corrigé exercice 3
+-- Résultat : `True`.
+-- Contrôle : comparer avec le cas « reste nul ».
+-- Erreur traitée : EF3 - Oublier de tester la valeur zéro dans une fonction numérique.
+-- Donnée utilisée gamma dans P00 td diagnostic python : cas gamma de l exercice 3 avec les valeurs indiquées dans l énoncé.
+-- Méthode gamma dans P00 td diagnostic python : trace courte, pseudo-code local `if cas_gamma: décider else: calculer`, invariant nommé et complexité `O(n)`.
+-- Résultat gamma dans P00 td diagnostic python : sortie vérifiable de l exercice 3, reliée à la capacité officielle du bloc.
+-- Contrôle gamma dans P00 td diagnostic python : le cas limite annoncé est décidé explicitement et une réponse sans trace est refusée.
++
++- Référence : Exercice 3, distinguer le signe d'affectation du test d'égalité.
++- `age = 15` est une affectation : elle stocke `15` dans `age`.
++- `age == 15` est une comparaison : elle produit le booléen `True` sans modifier `age`.
++- Dans une condition, il faut écrire `if age == 15:` ; avec `=` Python signale une erreur de syntaxe.
++- La phrase est fausse : par exemple, après `age == 15`, la variable `age` vaut encore `15` ; seul le résultat de la comparaison est `True`.
++
+ ### Corrigé exercice 4
+-- Résultat : `11` retourné.
+-- Contrôle : corriger l’erreur « Donner une sortie sans trace intermédiaire. ».
+-- Erreur traitée : EF4 - Donner une sortie sans trace intermédiaire.
+-- Donnée utilisée delta dans P00 td diagnostic python : cas delta de l exercice 4 avec les valeurs indiquées dans l énoncé.
+-- Méthode delta dans P00 td diagnostic python : trace courte, pseudo-code local `if cas_delta: décider else: calculer`, invariant nommé et complexité `O(n)`.
+-- Résultat delta dans P00 td diagnostic python : sortie vérifiable de l exercice 4, reliée à la capacité officielle du bloc.
+-- Contrôle delta dans P00 td diagnostic python : le cas limite annoncé est décidé explicitement et une réponse sans trace est refusée.
++
++- Référence : Exercice 4, suivre la branche sélectionnée par la condition.
++- Données : la condition évaluée est `18 < 0`.
++- Méthode : cette comparaison vaut `False`, donc Python n'exécute pas la première branche et passe au `else`.
++- Résultat : le programme affiche `pas de gel`.
++- Variante : avec `temperature = -2`, la condition `-2 < 0` est vraie et le programme affiche `gel`.
++
+ ### Corrigé exercice 5
+-- Résultat : le comportement de trace d’affectation est contrôlé.
+-- Contrôle : nommer la donnée minimale et la conclusion.
+-- Erreur traitée : EF1 - Lire le signe égal comme une égalité mathématique permanente.
+-- Donnée utilisée epsilon dans P00 td diagnostic python : cas epsilon de l exercice 5 avec les valeurs indiquées dans l énoncé.
+-- Méthode epsilon dans P00 td diagnostic python : trace courte, pseudo-code local `if cas_epsilon: décider else: calculer`, invariant nommé et complexité `O(n)`.
+-- Résultat epsilon dans P00 td diagnostic python : sortie vérifiable de l exercice 5, reliée à la capacité officielle du bloc.
+-- Contrôle epsilon dans P00 td diagnostic python : le cas limite annoncé est décidé explicitement et une réponse sans trace est refusée.
++
++- Référence : Exercice 5, relever les valeurs successives de la boucle.
++| passage dans la boucle | `nombre` | `somme` après l'addition |
++|---|---:|---:|
++| 1 | 1 | 1 |
++| 2 | 2 | 3 |
++| 3 | 3 | 6 |
++
++- Résultat : `print(somme)` affiche `6`.
++- Explication : `range(1, 4)` fournit successivement `1`, `2` et `3` ; lorsqu'il n'y a plus de valeur, la boucle se termine.
++
+ ### Corrigé exercice 6
+-- Résultat : la méthode robuste est choisie et justifiée.
+-- Contrôle : identifier pourquoi « Confondre affichage et valeur retournée par une fonction. » est une erreur.
+-- Erreur traitée : EF2 - Confondre affichage et valeur retournée par une fonction.
+-- Donnée utilisée zeta dans P00 td diagnostic python : cas zeta de l exercice 6 avec les valeurs indiquées dans l énoncé.
+-- Méthode zeta dans P00 td diagnostic python : trace courte, pseudo-code local `if cas_zeta: décider else: calculer`, invariant nommé et complexité `O(n)`.
+-- Résultat zeta dans P00 td diagnostic python : sortie vérifiable de l exercice 6, reliée à la capacité officielle du bloc.
+-- Contrôle zeta dans P00 td diagnostic python : le cas limite annoncé est décidé explicitement et une réponse sans trace est refusée.
++
++- Référence : Exercice 6, corriger le type, le nom et l'indentation.
++- Correction de type : `nombre = int(input("Nombre : "))` convertit la chaîne saisie en entier avant la comparaison.
++- Correction d'indentation : `print` doit être décalé sous le `if` pour appartenir à son bloc.
++- Correction de nom : `numbre` doit devenir `nombre`, car c'est la variable définie à la première ligne.
++- Programme corrigé :
++
++  ```python
++  nombre = int(input("Nombre : "))
++  if nombre > 0:
++      print(nombre * 2)
++  ```
++
++  Pour la saisie `4`, il affiche `8`.
++
+ ### Corrigé exercice 7
+-- Résultat : la justification reste valable sur le nouveau cas.
+-- Contrôle : inclure une étape calculable par un pair.
+-- Erreur traitée : EF3 - Oublier de tester la valeur zéro dans une fonction numérique.
+-- Donnée utilisée eta dans P00 td diagnostic python : cas eta de l exercice 7 avec les valeurs indiquées dans l énoncé.
+-- Méthode eta dans P00 td diagnostic python : trace courte, pseudo-code local `if cas_eta: décider else: calculer`, invariant nommé et complexité `O(n)`.
+-- Résultat eta dans P00 td diagnostic python : sortie vérifiable de l exercice 7, reliée à la capacité officielle du bloc.
+-- Contrôle eta dans P00 td diagnostic python : le cas limite annoncé est décidé explicitement et une réponse sans trace est refusée.
++
++- Référence : Exercice 7, suivre le texte saisi, sa conversion et son affichage.
++```python
++age_texte = input("Âge : ")
++age = int(age_texte)
++print(age + 1)
++```
++
++- Pour l'entrée `16`, `age_texte` vaut d'abord la chaîne `"16"`, puis `age` vaut l'entier `16`.
++- Le programme affiche `17`.
++- `input` renvoie toujours du texte : `int(...)` est donc nécessaire avant un calcul numérique.
++
+ ### Corrigé exercice 8
+-- Résultat : l’erreur est localisée puis réparée.
+-- Contrôle : proposer une activité corrective inspirée de « Écrire une justification en deux phrases : état avant, état après. ».
+-- Erreur traitée : EF4 - Donner une sortie sans trace intermédiaire.
+-- Donnée utilisée theta dans P00 td diagnostic python : cas theta de l exercice 8 avec les valeurs indiquées dans l énoncé.
+-- Méthode theta dans P00 td diagnostic python : trace courte, pseudo-code local `if cas_theta: décider else: calculer`, invariant nommé et complexité `O(n)`.
+-- Résultat theta dans P00 td diagnostic python : sortie vérifiable de l exercice 8, reliée à la capacité officielle du bloc.
+-- Contrôle theta dans P00 td diagnostic python : le cas limite annoncé est décidé explicitement et une réponse sans trace est refusée.
++
++- Référence : Exercice 8, réfuter les quatre raisonnements par un contre-exemple.
++
++- Données : les quatre affirmations portent sur `x = 2`, `input("Âge : ")`, `x == 3` et `range(3)`.
++- Méthode : pour chaque phrase, distinguer l'instruction Python de son effet observable, puis écrire un contre-exemple exécutable.
++- Résultat : les quatre affirmations sont fausses : après `x = 2` puis `x = 5`, `x` vaut `5` ; `input` renvoie `"16"` ; `x == 3` produit un booléen ; `range(3)` fournit seulement `0`, `1` et `2`.
++- Vérification : une boucle `while` s'arrête lorsque sa condition devient fausse ; son arrêt ne dépend donc pas d'une décision extérieure au programme.
+ 
+ ## Erreurs fréquentes
+-- Erreur fréquente EF1 - Lire le signe égal comme une égalité mathématique permanente.
+-- Erreur fréquente EF2 - Confondre affichage et valeur retournée par une fonction.
+-- Erreur fréquente EF3 - Oublier de tester la valeur zéro dans une fonction numérique.
+-- Erreur fréquente EF4 - Donner une sortie sans trace intermédiaire.
+-
+-## Remédiation ciblée
+-- Activité corrective EF1 : Construire un tableau mémoire avec une ligne par instruction.
+-- Activité corrective EF2 : Colorer `print`, `return` et expression évaluée dans trois colonnes.
+-- Activité corrective EF3 : Ajouter les tests `0`, `1` et `-1` avant les cas ordinaires.
+-- Activité corrective EF4 : Écrire une justification en deux phrases : état avant, état après.
+-
+-## Différenciation
+-- Socle : traiter `x = 4 ; x = x + 3 ; print(x)` avec une fiche méthode fournie.
+-- Standard : traiter `mot = "NS" ; mot = mot + "I"` en rédigeant la justification complète.
+-- Expert : inventer un cas limite lié à « reste nul » et expliquer le comportement attendu.
++
++- Confondre une affectation (`=`) et une comparaison (`==`).
++- Oublier que `input` renvoie une chaîne de caractères.
++- Lire une boucle sans identifier ses valeurs successives ni sa condition d'arrêt.
++- Répondre par un résultat sans donner la trace ou la ligne Python qui le justifie.
++
++## Remédiation et différenciation
++
++- **Socle** : utiliser les tableaux de trace des exercices 1, 2 et 5, avec les premières valeurs déjà inscrites.
++- **Standard** : réaliser l'ensemble du diagnostic puis comparer une réponse avec un camarade en citant une ligne de programme.
++- **Approfondissement** : modifier l'exercice 6 pour traiter aussi le cas `0`, puis écrire une condition qui affiche un message adapté.
+ 
+ ## Critères de réussite
+-- La capacité officielle est citée dans la copie.
+-- La méthode contient au moins une étape vérifiable par un pair.
+-- Le cas limite est discuté avec une donnée concrète.
+-- La correction explique quelle erreur fréquente est évitée.
++
++- J'emploie correctement `=`, `==`, `int`, `if`, `for` et `print` dans le contexte demandé.
++- Mes traces donnent des valeurs intermédiaires vérifiables.
++- Je corrige une erreur précise sans réécrire inutilement tout le programme.
+diff --git a/manifest.csv b/manifest.csv
+index 69987e5..876cfe7 100644
+--- a/manifest.csv
++++ b/manifest.csv
+@@ -21,7 +21,7 @@ I01-progression-premiere,progression_premiere.md,03_progressions/progression_pre
+ I01-progression-terminale,progression_terminale.md,03_progressions/progression_terminale.md,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,autre,a1d62bb0835e691c3216aba28515f845f50c78dc574e76a5923496b447fdef1f,non
+ I01-seances-premiere,seances_premiere.md,03_progressions/seances_premiere.md,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,autre,882e05b14810d2a8cf03f563d84eccbb0cb85f63277d5a6ad95b81b882133d65,non
+ I01-seances-terminale,seances_terminale.md,03_progressions/seances_terminale.md,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,autre,18c289e1aaf41a673c4f7868f00887fed02d80292f4689d7173a9624561fda69,non
+-I01-P00-contract,P00_contract.yml,03_progressions/supports/contracts/P00_contract.yml,document,interne,,,NA,needs_review,basse,non,oui,,generated,mixte,non,non,autre,af2b71d22f3809f46f9f245552edec3428543d5a7f28be8803ef9caa20856109,non
++I01-P00-contract,P00_contract.yml,03_progressions/supports/contracts/P00_contract.yml,document,interne,,,NA,needs_review,basse,non,oui,,generated,mixte,non,non,autre,d372cdd4453359c8671d691861b50c6f79ccf5b9b43135a923a5aa4fe17cff2b,non
+ I01-P01-contract,P01_contract.yml,03_progressions/supports/contracts/P01_contract.yml,document,interne,,,NA,needs_review,basse,non,oui,,generated,mixte,non,non,autre,01c6f7c82e04215da65a53892b0723f0f5dd20af12c9c43cdf66c3af3dcfcc30,non
+ I01-P02-contract,P02_contract.yml,03_progressions/supports/contracts/P02_contract.yml,document,interne,,,NA,needs_review,basse,non,oui,,generated,mixte,non,non,autre,b6cdd17bd62a279ceaf77afaa5065c74223d25ea7bc892ceb443ef8b149f5dbc,non
+ I01-P03-contract,P03_contract.yml,03_progressions/supports/contracts/P03_contract.yml,document,interne,,,NA,needs_review,basse,non,oui,,generated,mixte,non,non,autre,e00aee55ece63d07e10efa61cdd0d6c8170b9ce739360d601a4a160f334a6b6b,non
+@@ -85,11 +85,11 @@ P01-P12-fiche-cours-tris-invariants-complexite,P12_fiche_cours_tris_invariants_c
+ P01-P13-fiche-cours-dichotomie-glouton-knn,P13_fiche_cours_dichotomie_glouton_knn.md,03_progressions/fiches_cours/premiere/P13/P13_fiche_cours_dichotomie_glouton_knn.md,document,premiere,Algorithmique,dichotomie glouton k-NN,P13,needs_review,basse,oui,oui,BO 2019,generated,mixte,non,non,autre,e7cc86dafbfb5c3076d97e3d9b8ee0f9da6364c580f18189b57984f0bec3f08f,non
+ P01-P14-fiche-cours-synthese-projet-oral,P14_fiche_cours_synthese_projet_oral.md,03_progressions/fiches_cours/premiere/P14/P14_fiche_cours_synthese_projet_oral.md,document,premiere,Projet et synthèse,projet oral,P14,needs_review,basse,oui,oui,BO 2019,generated,mixte,non,non,exercise,3fb35ccb019142f4c11eb94fd08a2f44e329179717c3c780807409dbb3964f45,non
+ P01-P00-bareme-diagnostic-python,P00_bareme_diagnostic_python.md,03_progressions/supports/premiere/P00/P00_bareme_diagnostic_python.md,document,premiere,Rentrée et méthode,"affectation, type, condition, trace d’exécution",P00,needs_review,basse,oui,oui,BO 2019,generated,mixte,non,non,autre,0b1196ca988d0530443222b03f3ccae99d923c56ac6eee572081af5f23eb454d,non
+-P01-P00-corrige-diagnostic-python,P00_corrige_diagnostic_python.md,03_progressions/supports/premiere/P00/P00_corrige_diagnostic_python.md,document,premiere,Rentrée et méthode,"affectation, type, condition, trace d’exécution",P00,needs_review,basse,oui,oui,BO 2019,generated,corrige,non,non,corrige,f2f8aa1e8cfbe59a96410c6147a74ce56dbc0efe3ae6c4d4855a8036655dee68,non
++P01-P00-corrige-diagnostic-python,P00_corrige_diagnostic_python.md,03_progressions/supports/premiere/P00/P00_corrige_diagnostic_python.md,document,premiere,Rentrée et méthode,"variables, affectation, types, conditions, boucles, entrées-sorties",P00,needs_review,basse,oui,oui,BO 2019,generated,corrige,non,non,corrige,2df2705dfa6e2fb530722189373702d03c2277d82a7e73dd3863ec25eece51ec,non
+ P01-P00-cours-diagnostic-python,P00_cours_diagnostic_python.md,03_progressions/supports/premiere/P00/P00_cours_diagnostic_python.md,document,premiere,Rentrée et méthode,"affectation, type, condition, trace d’exécution",P00,needs_review,basse,oui,oui,BO 2019,generated,mixte,non,non,cours,2bbbf04667b9eab5781d24cd13dc1d812f4721a2468a43cfa5aba6b1b9c88ccc,non
+ P01-P00-evaluation-diagnostic-python,P00_evaluation_diagnostic_python.md,03_progressions/supports/premiere/P00/P00_evaluation_diagnostic_python.md,document,premiere,Rentrée et méthode,"affectation, type, condition, trace d’exécution",P00,needs_review,basse,oui,oui,BO 2019,generated,eleve,non,non,evaluation,ab727ffc89b834eda465886d93722907b74dd329ee6ae9332750f54057699855,non
+ P01-P00-remediation-diagnostic-python,P00_remediation_diagnostic_python.md,03_progressions/supports/premiere/P00/P00_remediation_diagnostic_python.md,document,premiere,Rentrée et méthode,"affectation, type, condition, trace d’exécution",P00,needs_review,basse,oui,oui,BO 2019,generated,mixte,non,non,autre,f047a44d23d9e05aefa6e180af4ed5eb6e791395ce472f91533e409d9dc019cc,non
+-P01-P00-td-diagnostic-python,P00_td_diagnostic_python.md,03_progressions/supports/premiere/P00/P00_td_diagnostic_python.md,document,premiere,Rentrée et méthode,"affectation, type, condition, trace d’exécution",P00,needs_review,basse,oui,oui,BO 2019,generated,eleve,non,non,td,6eb5807620e8de418ff59f170aa4a4cf847190be586a67acc03feaa62285d4c8,non
++P01-P00-td-diagnostic-python,P00_td_diagnostic_python.md,03_progressions/supports/premiere/P00/P00_td_diagnostic_python.md,document,premiere,Rentrée et méthode,"variables, affectation, types, conditions, boucles, entrées-sorties",P00,needs_review,basse,oui,oui,BO 2019,generated,eleve,non,non,td,1d47a1e79b8f99a2c392c13ff9418398e2e58284e151181268651a79dae56432,non
+ P01-P00-tp-diagnostic-python,P00_tp_diagnostic_python.md,03_progressions/supports/premiere/P00/P00_tp_diagnostic_python.md,document,premiere,Rentrée et méthode,"affectation, type, condition, trace d’exécution",P00,needs_review,basse,oui,oui,BO 2019,generated,eleve,non,non,tp,bdfce07cfca213ceea801b84e6b79fcd75d2321c37d2ae5e6c10dfe75b7926c8,non
+ P01-P00-trace-diagnostic-python,P00_trace_diagnostic_python.md,03_progressions/supports/premiere/P00/P00_trace_diagnostic_python.md,document,premiere,Rentrée et méthode,"affectation, type, condition, trace d’exécution",P00,needs_review,basse,oui,oui,BO 2019,generated,mixte,non,non,trace,386b37460d1cfac53b52e0541eaa52e9977a9ece057452a513df4593ca0e64e8,non
+ P01-P00-version-amenagee-diagnostic-python,P00_version_amenagee_diagnostic_python.md,03_progressions/supports/premiere/P00/P00_version_amenagee_diagnostic_python.md,document,premiere,Rentrée et méthode,"affectation, type, condition, trace d’exécution",P00,needs_review,basse,oui,oui,BO 2019,generated,mixte,non,non,autre,f3ca19ab0ddf2f5acc87836f0c9b6743a8aed4b14bfaa0865997a5e7db0c674b,non
+diff --git a/manifest_tooling.csv b/manifest_tooling.csv
+index 1f4ec87..4b66fea 100644
+--- a/manifest_tooling.csv
++++ b/manifest_tooling.csv
+@@ -124,8 +124,8 @@ I01-rag-reindex-plan,rag_reindex_plan.md,reports/reconciliation/rag_reindex_plan
+ I01-reconciliation-report,reconciliation_report.md,reports/reconciliation/reconciliation_report.md,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,autre,d733bf2016ff82e2a420bdd22f8d45019d6d97aa9f910d9ee601568e9a1fc14a,non
+ I01-reconciliation-verification-report,reconciliation_verification_report.md,reports/reconciliation/reconciliation_verification_report.md,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,autre,f08797d5c21958d2475a81d6aa7a102be324b9fcdd90cbf5810b8cadf23e1673,non
+ I01-recovery-t10-p08-t17-from-blobs,recovery_t10_p08_t17_from_blobs.md,reports/recovery_t10_p08_t17_from_blobs.md,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,autre,c11eb92f8211d00ddd1561317a063edf498d3c59326fbcd6e1cefc1f919c3d13,non
+-I01-td-quality-debt-register,td_quality_debt_register.yml,reports/td_quality_debt_register.yml,document,interne,,,NA,needs_review,basse,non,oui,,generated,mixte,non,non,td,0899c668a74c24c22d45e62c5a8ca0992c242c2f8d0bccef8659c23587c4f0fc,non
+-I01-td-quality-debt-report,td_quality_debt_report.md,reports/td_quality_debt_report.md,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,td,a8ab5f20c24460e1e2b271a4ce7399086f02d1d2c4a4f05e5064fae55f167311,non
++I01-td-quality-debt-register,td_quality_debt_register.yml,reports/td_quality_debt_register.yml,document,interne,,,NA,needs_review,basse,non,oui,,generated,mixte,non,non,td,13105c78b4f544bf0bd9131fc8f05ab0708422c400c339de2f1c477b237661db,non
++I01-td-quality-debt-report,td_quality_debt_report.md,reports/td_quality_debt_report.md,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,td,c66c93f9136db1119aede592133f27e02032069a7f39003c2d304a04bd8acdfa,non
+ I01-reports-policy,reports_policy.md,reports_policy.md,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,autre,75da1970b7a395fbe205d62fb210e9a488b9155c765256c50b03d63ac2186dd1,non
+ I01-requirements,requirements.txt,requirements.txt,document,interne,,,NA,needs_review,basse,non,oui,,generated,mixte,non,non,autre,0e768805eef29d1e7e1d82e1a4655602b6dd21598ea1acca31e89665fb64b03c,non
+ I01-reviewer-confirmation.schema,reviewer_confirmation.schema.json,reviewer_confirmation.schema.json,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,autre,120b8d7fdc730e3fcaf9c8c43eac703331203672bdbc876aa5ff5b47d4635e97,non
+@@ -181,7 +181,7 @@ I01-P-IHM-03C-substance-review,P-IHM-03C_substance_review.json,substance_reviews
+ I01-P-IHM-04A-substance-review,P-IHM-04A_substance_review.json,substance_reviews/campaign/P-IHM-04A_substance_review.json,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,autre,a68be5897ca492aa64d5f6c14efd3f4bdaae1e35bf4bf1f2d8dd35fd725479a3,non
+ I01-P-IHM-04B-substance-review,P-IHM-04B_substance_review.json,substance_reviews/campaign/P-IHM-04B_substance_review.json,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,autre,059a5f712b12a6ed65ecc2ec633860414789b2fea5a18eb8b03d59852cfd39ac,non
+ I01-P-IHM-04C-substance-review,P-IHM-04C_substance_review.json,substance_reviews/campaign/P-IHM-04C_substance_review.json,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,autre,65dfcf12ce3440f07bc11fdaa746bf6efd9924ea11333c1e67a75966af6edc49,non
+-I01-P-LANG-01-substance-review,P-LANG-01_substance_review.json,substance_reviews/campaign/P-LANG-01_substance_review.json,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,autre,747221277e3d1c12b6d66dda62797581a330bfab2412a323114d61e99cd18ab7,non
++I01-P-LANG-01-substance-review,P-LANG-01_substance_review.json,substance_reviews/campaign/P-LANG-01_substance_review.json,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,autre,cdbd71a1fffa35e7dfef5ad6fa0afbeeb06a7545364432b987ec187ef24251a4,non
+ I01-P-LANG-02-substance-review,P-LANG-02_substance_review.json,substance_reviews/campaign/P-LANG-02_substance_review.json,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,autre,a0b188c377309ee46ebb9ad3fc3b2902df600056541c1aa86abcec6cbd2ddc5c,non
+ I01-P-LANG-03A-substance-review,P-LANG-03A_substance_review.json,substance_reviews/campaign/P-LANG-03A_substance_review.json,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,autre,92488e6322962a2060b741e26ea6c5d24dacf86bdbe7c5b2591bc9797eb941ed,non
+ I01-P-LANG-03B-substance-review,P-LANG-03B_substance_review.json,substance_reviews/campaign/P-LANG-03B_substance_review.json,document,interne,,,NA,needs_review,basse,oui,oui,,generated,mixte,non,non,autre,7452664085a42d71743219ca89c8279a8e1226a9b2ebcacc3e1dc4cecc603a2e,non
+diff --git a/reports/td_quality_debt_register.yml b/reports/td_quality_debt_register.yml
+index e8b556e..537ad2f 100644
+--- a/reports/td_quality_debt_register.yml
++++ b/reports/td_quality_debt_register.yml
+@@ -4,16 +4,6 @@ purpose: >
+   pas la qualité pédagogique des TD listés. Il empêche qu’une dette connue soit
+   modifiée ou reproduite sans normalisation dédiée.
+ entries:
+-  - path: 03_progressions/supports/premiere/P00/P00_td_diagnostic_python.md
+-    level: premiere
+-    sequence: P00
+-    debt_types:
+-      - corrections_quasi_identiques
+-    classification: vraie_dette
+-    sha256: 6eb5807620e8de418ff59f170aa4a4cf847190be586a67acc03feaa62285d4c8
+-    note: >
+-      Dette connue, non certifiante, à normaliser dans un lot dédié. Toute
+-      modification invalide l’empreinte et impose une revue explicite.
+   - path: 03_progressions/supports/premiere/P01/P01_td_conversions_bases.md
+     level: premiere
+     sequence: P01
+diff --git a/reports/td_quality_debt_report.md b/reports/td_quality_debt_report.md
+index 3acc068..435a3a5 100644
+--- a/reports/td_quality_debt_report.md
++++ b/reports/td_quality_debt_report.md
+@@ -2,10 +2,10 @@
+ 
+ ## Synthèse
+ 
+-- 26 TD historiques restent enregistrés.
+-- 12 TD de Première.
++- 25 TD historiques restent enregistrés.
++- 11 TD de Première.
+ - 14 TD de Terminale.
+-- Le diagnostic initial a relevé 42 alertes : 29 sur corrigés quasi identiques et 13 sur exercices quasi identiques.
++- Le diagnostic initial a relevé 41 alertes : 28 sur corrigés quasi identiques et 13 sur exercices quasi identiques.
+ - Conclusion : situation mixte, avec dette réelle et faux positifs.
+ 
+ Ce rapport ne déclare aucun TD conforme.
+@@ -13,13 +13,12 @@ Le registre est non certifiant et non promotionnel.
+ La normalisation doit être traitée dans un lot dédié.
+ Toute modification d’un TD enregistré invalide son empreinte et impose une revue.
+ 
+-P12 est sorti du registre après normalisation dans LOT TD-NORMALISATION-01. T13 est sorti du registre après normalisation dans LOT TD-NORMALISATION-02. P08 HTTP/formulaires est sorti du registre après normalisation dans LOT TD-NORMALISATION-03. P08 HTML/CSS/DOM est sorti du registre après normalisation dans LOT TD-NORMALISATION-04. Ces retraits n’emportent aucune promotion de statut et laissent les 26 autres dettes à traiter dans des lots dédiés.
++P12 est sorti du registre après normalisation dans LOT TD-NORMALISATION-01. T13 est sorti du registre après normalisation dans LOT TD-NORMALISATION-02. P08 HTTP/formulaires est sorti du registre après normalisation dans LOT TD-NORMALISATION-03. P08 HTML/CSS/DOM est sorti du registre après normalisation dans LOT TD-NORMALISATION-04. P00 diagnostic Python est sorti du registre après normalisation dans LOT TD-NORMALISATION-05. Ces retraits n’emportent aucune promotion de statut et laissent les 25 autres dettes à traiter dans des lots dédiés.
+ 
+ ## TD enregistrés
+ 
+ | Niveau | Séquence | TD | Classification | Dette | Priorité |
+ |---|---|---|---|---|---|
+-| premiere | P00 | `03_progressions/supports/premiere/P00/P00_td_diagnostic_python.md` | vraie_dette | corrections_quasi_identiques | haute |
+ | premiere | P01 | `03_progressions/supports/premiere/P01/P01_td_conversions_bases.md` | mixte | corrections_quasi_identiques | revue |
+ | premiere | P02 | `03_progressions/supports/premiere/P02/P02_td_complement_booleens.md` | vraie_dette | corrections_quasi_identiques | haute |
+ | premiere | P03 | `03_progressions/supports/premiere/P03/P03_td_texte_reels.md` | mixte | corrections_quasi_identiques | revue |
+diff --git a/substance_reviews/campaign/P-LANG-01_substance_review.json b/substance_reviews/campaign/P-LANG-01_substance_review.json
+index 2422548..42205cd 100644
+--- a/substance_reviews/campaign/P-LANG-01_substance_review.json
++++ b/substance_reviews/campaign/P-LANG-01_substance_review.json
+@@ -2,7 +2,7 @@
+   "schema_version": "1.0.0",
+   "unit": "campaign",
+   "level": "premiere",
+-  "judged_at": "2026-07-07T08:46:19Z",
++  "judged_at": "2026-07-15T13:58:31Z",
+   "judge_model": "claude-sonnet-4-6",
+   "author_model": "campaign-tooling",
+   "capacities": [
+@@ -19,15 +19,15 @@
+       "proof_practice": {
+         "present": true,
+         "file": "03_progressions/supports/premiere/P00/P00_td_diagnostic_python.md",
+-        "anchor": "#exercice-2",
+-        "quote": "Énoncé disciplinaire : expliquer concaténation de chaînes à partir de `mot = \"NS\" ; mot = mot + \"I\"`.",
++        "anchor": "#exercice-7--interpréter-entrée-et-sortie",
++        "quote": "- Écrivez trois lignes Python qui demandent un âge, le convertissent en entier puis affichent l'âge l'année prochaine.",
+         "teaches": true
+       },
+       "proof_correction": {
+         "present": true,
+         "file": "03_progressions/supports/premiere/P00/P00_corrige_diagnostic_python.md",
+-        "anchor": "#corrigé-exercice-1",
+-        "quote": "Méthode : identifier `x = 4 ; x = x + 3 ; print(x)`, appliquer la méthode « dresser une table instruction, expression calculée, nouvelle valeur », puis écrire `7` affiché.",
++        "anchor": "#corrigé-exercice-6--débogage",
++        "quote": "- Le résultat de `input` est une chaîne : il faut `int(input(\"Nombre : \"))` avant `nombre > 0`.",
+         "teaches": true
+       },
+       "verdict": "needs_review",
