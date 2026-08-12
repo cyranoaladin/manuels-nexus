@@ -739,6 +739,25 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         self.generic_visit(node)
 
     def visit_Call(self, node: ast.Call) -> None:
+        reads_sys_dict = (
+            isinstance(node.func, ast.Attribute)
+            and node.func.attr == "__getattribute__"
+            and isinstance(node.func.value, ast.Name)
+            and node.func.value.id in self._sys_module_aliases
+            and len(node.args) == 1
+            and isinstance(node.args[0], ast.Constant)
+            and node.args[0].value == "__dict__"
+        ) or (
+            isinstance(node.func, ast.Name)
+            and node.func.id == "getattr"
+            and len(node.args) in {2, 3}
+            and isinstance(node.args[0], ast.Name)
+            and node.args[0].id in self._sys_module_aliases
+            and isinstance(node.args[1], ast.Constant)
+            and node.args[1].value == "__dict__"
+        )
+        if reads_sys_dict:
+            self._mark_reflective_namespace()
         if isinstance(node.func, ast.Attribute) and node.func.attr in _MUTATING_METHODS:
             self._record_mutation(_target_root_names(node.func.value))
             self._record_module_names(

@@ -7710,6 +7710,46 @@ def test_manifest_backed_nsi_assembler_rejects_aliased_sys_dict_reflection(
     assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
 
 
+def test_manifest_backed_nsi_assembler_rejects_sys_getattribute_dict_reflection(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        'import sys\nsys.__getattribute__("__dict__")["modules"]'
+        '["builtins"].__dict__["tuple"] = consume',
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
+def test_manifest_backed_nsi_assembler_rejects_aliased_sys_getattribute_dict(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        'from os import sys as s\ns.__getattribute__("__dict__")["modules"]'
+        '["builtins"].__dict__["tuple"] = consume',
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
+def test_manifest_backed_nsi_assembler_rejects_getattr_sys_dict_inside_function(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        'import sys as s\ndef rewrite_builtin():\n'
+        '    getattr(s, "__dict__")["modules"]["builtins"]'
+        '.__dict__["tuple"] = consume',
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
 def test_manifest_backed_nsi_assembler_allows_ordinary_sys_usage(
     tmp_path: Path, inventory_module
 ) -> None:
@@ -7738,6 +7778,44 @@ def test_manifest_backed_nsi_assembler_allows_ordinary_aliased_sys_usage(
         tmp_path,
         inventory_module,
         reflection,
+    )
+
+    assert errors == []
+
+
+def test_manifest_backed_nsi_assembler_allows_ordinary_getattr_sys_usage(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        'import sys\ndef read_arguments():\n'
+        '    return tuple(getattr(sys, "argv"))',
+    )
+
+    assert errors == []
+
+
+def test_manifest_backed_nsi_assembler_allows_unrelated_object_dict(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        "class Holder:\n    pass\nSTATE = Holder().__dict__",
+    )
+
+    assert errors == []
+
+
+def test_manifest_backed_nsi_assembler_allows_unrelated_getattr_dict(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        'class Holder:\n    pass\ndef read_state():\n'
+        '    return getattr(Holder(), "__dict__")',
     )
 
     assert errors == []
