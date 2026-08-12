@@ -726,6 +726,11 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
                 and node.value.id in self._sys_module_aliases
             )
             or (
+                node.attr == "__dict__"
+                and isinstance(node.value, ast.Name)
+                and node.value.id in self._sys_module_aliases
+            )
+            or (
                 len(self._scopes) == 1
                 and node.attr in _MODULE_REFLECTIVE_NAMESPACE_SYMBOLS
             )
@@ -876,6 +881,9 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         self._record_binding(_import_bound_names(node))
 
     def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
+        for alias in node.names:
+            if alias.name == "sys":
+                self._sys_module_aliases.add(alias.asname or "sys")
         imports_reflective_symbol = any(
             alias.name in _MODULE_REFLECTIVE_NAMESPACE_SYMBOLS
             for alias in node.names

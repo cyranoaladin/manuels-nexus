@@ -7664,6 +7664,52 @@ def test_manifest_backed_nsi_assembler_rejects_sys_modules_reflection(
     assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
 
 
+def test_manifest_backed_nsi_assembler_rejects_sys_dict_modules_reflection(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        'import sys\nsys.__dict__["modules"]["builtins"].__dict__["tuple"] = consume',
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
+def test_manifest_backed_nsi_assembler_rejects_aliased_sys_dict_mapping(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        'import sys\nnamespace = sys.__dict__\n'
+        'namespace["modules"]["builtins"].__dict__["tuple"] = consume',
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
+@pytest.mark.parametrize(
+    "reflection",
+    [
+        'import sys as s\ns.__dict__["modules"]["builtins"].__dict__["tuple"] = consume',
+        'from os import sys\nsys.__dict__["modules"]["builtins"].__dict__["tuple"] = consume',
+    ],
+)
+def test_manifest_backed_nsi_assembler_rejects_aliased_sys_dict_reflection(
+    tmp_path: Path,
+    inventory_module,
+    reflection: str,
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        reflection,
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
 def test_manifest_backed_nsi_assembler_allows_ordinary_sys_usage(
     tmp_path: Path, inventory_module
 ) -> None:
@@ -7671,6 +7717,27 @@ def test_manifest_backed_nsi_assembler_allows_ordinary_sys_usage(
         tmp_path,
         inventory_module,
         "import sys\nARGUMENTS = tuple(sys.argv)",
+    )
+
+    assert errors == []
+
+
+@pytest.mark.parametrize(
+    "reflection",
+    [
+        "import sys as s\nARGUMENTS = tuple(s.argv)",
+        "from os import sys\nARGUMENTS = tuple(sys.argv)",
+    ],
+)
+def test_manifest_backed_nsi_assembler_allows_ordinary_aliased_sys_usage(
+    tmp_path: Path,
+    inventory_module,
+    reflection: str,
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        reflection,
     )
 
     assert errors == []
