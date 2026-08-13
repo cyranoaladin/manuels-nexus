@@ -98,8 +98,15 @@ Les fixtures minimales suivantes doivent être reconnues :
 
 Les accents et la casse ne doivent pas permettre de contourner le gate. Le
 test ne doit cependant pas transformer les verbes d'instruction comme
-« Corrige le programme » en faux positif ; les tests verts existants restent
-le contrat de non-régression.
+« Corrige le programme » en faux positif. Les six contre-exemples existants du
+recorder restent verts ; le cas Mathématiques, auparavant moins complet, est
+étendu et devient contractuellement rouge.
+
+L'alignement des contre-exemples a révélé que le filtre Mathématiques courant
+signale à tort `corrigé` pour quatre consignes, tandis que le recorder les
+accepte. Le jalon Red contractualise aussi cette divergence dans un seul cas
+Pytest qui évalue toutes les phrases avant l'assertion. Il est interdit de
+corriger le regex dans cette tranche.
 
 ### Surface réelle
 
@@ -198,6 +205,11 @@ Les nouvelles assertions doivent échouer parce que :
 - le préflight Mathématiques accepte encore les diagnostics `Overfull` ;
 - le log suivi contient encore les débordements ;
 - le registre et `SOURCES.md` portent encore le NOR erroné.
+
+La matrice attendue comprend désormais 20 cas rouges : 15 pour la séparation
+élève, 3 pour les débordements et 2 pour la provenance. Le quinzième cas élève
+est le contrat de non-faux-positif du filtre Mathématiques découvert pendant
+l'implémentation.
 
 Un test qui échoue par import, chemin absent, faute de syntaxe, outil invoqué
 incorrectement ou fixture mal construite n'est pas un Red valide.

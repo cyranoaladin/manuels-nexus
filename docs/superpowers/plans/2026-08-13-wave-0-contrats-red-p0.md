@@ -148,22 +148,34 @@ Ajouter près des tests existants de `student_text_violations` :
 
 ```python
 @pytest.mark.parametrize(
-    ("text", "expected"),
+    ("texts", "expected"),
     [
-        ("Correction et diagnostics", "corrigé"),
-        ("Réponses correctes", "corrigé"),
-        ("Bareme : 6 points", "barème enseignant"),
-        ("clé de correction", "corrigé"),
-        ("TSPE-DERIVATION-CONVEXITE", "identifiant interne"),
-        ("(renvois exercices M1)", "renvoi provisoire"),
+        (("Correction et diagnostics", "CORRECTION ET DIAGNOSTICS"), "corrigé"),
+        (("Réponses correctes", "Reponses correctes"), "corrigé"),
+        (("Bareme : 6 points", "Barème : 6 points"), "barème enseignant"),
+        (("Cle de correction", "clé de correction", "Clé de correction"), "corrigé"),
+        (("TSPE-DERIVATION-CONVEXITE", "tspe-derivation-convexite"), "identifiant interne"),
+        (("(renvois exercices M1)", "(RENVOIS EXERCICES M1)"), "renvoi provisoire"),
     ],
 )
 def test_p0_student_pdf_text_gate_rejects_observed_leaks(
-    text: str,
+    texts: tuple[str, ...],
     expected: str,
 ) -> None:
-    assert expected in assemble_manuel.student_text_violations(text)
+    missing = [
+        text
+        for text in texts
+        if expected not in assemble_manuel.student_text_violations(text)
+    ]
+    assert not missing
 ```
+
+Renforcer aussi le test existant
+`test_student_pdf_text_gate_accepts_student_instructions` sans créer de cas
+Pytest supplémentaire : évaluer les six phrases du recorder plus le texte
+historique `Compléter le programme. Solution : x appartient à [0 ; 1].`,
+collecter tous les faux positifs, puis exiger une collection vide. Ce contrat
+est attendu rouge sur quatre consignes dans cette tranche.
 
 - [ ] **Step 2: Vérifier le Red Mathématiques**
 
@@ -174,7 +186,8 @@ python3 -m pytest -q \
   Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_p0_student_pdf_text_gate_rejects_observed_leaks
 ```
 
-Expected: 6 échecs d'assertion ; chaque liste réelle vaut `[]`.
+Expected: 6 échecs d'assertion ; les listes `missing` exposent toutes les
+graphies non reconnues.
 
 - [ ] **Step 3: Ajouter le même contrat au recorder global**
 
@@ -182,22 +195,27 @@ Ajouter près des tests existants de `_student_text_violations` :
 
 ```python
 @pytest.mark.parametrize(
-    ("text", "expected"),
+    ("texts", "expected"),
     [
-        ("Correction et diagnostics", "corrigé"),
-        ("Réponses correctes", "corrigé"),
-        ("Bareme : 6 points", "barème enseignant"),
-        ("clé de correction", "corrigé"),
-        ("TSPE-DERIVATION-CONVEXITE", "identifiant interne"),
-        ("(renvois exercices M1)", "renvoi provisoire"),
+        (("Correction et diagnostics", "CORRECTION ET DIAGNOSTICS"), "corrigé"),
+        (("Réponses correctes", "Reponses correctes"), "corrigé"),
+        (("Bareme : 6 points", "Barème : 6 points"), "barème enseignant"),
+        (("Cle de correction", "clé de correction", "Clé de correction"), "corrigé"),
+        (("TSPE-DERIVATION-CONVEXITE", "tspe-derivation-convexite"), "identifiant interne"),
+        (("(renvois exercices M1)", "(RENVOIS EXERCICES M1)"), "renvoi provisoire"),
     ],
 )
 def test_p0_recorder_student_gate_rejects_observed_leaks(
     manifest_module,
-    text: str,
+    texts: tuple[str, ...],
     expected: str,
 ) -> None:
-    assert expected in manifest_module._student_text_violations(text)
+    missing = [
+        text
+        for text in texts
+        if expected not in manifest_module._student_text_violations(text)
+    ]
+    assert not missing
 ```
 
 - [ ] **Step 4: Vérifier le Red du recorder**
@@ -209,7 +227,8 @@ python3 -m pytest -q \
   tests/test_build_manifest.py::test_p0_recorder_student_gate_rejects_observed_leaks
 ```
 
-Expected: 6 échecs d'assertion ; chaque liste réelle vaut `[]`.
+Expected: 6 échecs d'assertion ; les listes `missing` exposent toutes les
+graphies non reconnues.
 
 ### Task 3: Contractualiser les PDF élèves suivis
 
@@ -294,7 +313,7 @@ python3 -m pytest -q \
 Expected: 2 échecs ; le premier nomme correction/renvois, le second clé,
 barème et identifiant.
 
-- [ ] **Step 3: Vérifier les contre-exemples historiques verts**
+- [ ] **Step 3: Vérifier la divergence des contre-exemples sans la corriger**
 
 Run:
 
@@ -304,7 +323,8 @@ python3 -m pytest -q \
   tests/test_build_manifest.py::test_recorder_student_text_gate_allows_correction_instructions
 ```
 
-Expected: 7 tests passés ; aucun faux positif sur les verbes de correction.
+Expected: 1 échec Mathématiques listant les quatre faux positifs et 6 tests
+recorder passés. Aucun regex de production n'est corrigé dans ce jalon.
 
 - [ ] **Step 4: Faire les revues conformité puis qualité**
 
@@ -314,7 +334,24 @@ dispatch un autre reviewer de qualité qui contrôle précision des regex,
 messages, déterminisme et absence de faux positifs. Toute correction est faite
 par l'implémenteur puis revue de nouveau avant commit.
 
-- [ ] **Step 5: Contrôler et committer seulement la famille élève**
+- [ ] **Step 5: Versionner le correctif documentaire issu du Red**
+
+Run:
+
+```bash
+set -e
+git add \
+  docs/superpowers/specs/2026-08-13-wave-0-contrats-red-p0-design.md \
+  docs/superpowers/plans/2026-08-13-wave-0-contrats-red-p0.md
+git diff --cached --check
+git diff --cached --stat
+git commit -m "[DOCS] étend le contrat Red aux faux positifs élève"
+```
+
+Expected: seulement la spec et le plan ; le nouveau total de 20 Red et la
+divergence Mathématiques/recorder sont versionnés avant les tests.
+
+- [ ] **Step 6: Contrôler et committer seulement la famille élève**
 
 Run:
 
@@ -619,6 +656,7 @@ Run:
 ```bash
 python3 -m pytest --collect-only -q \
   Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_p0_student_pdf_text_gate_rejects_observed_leaks \
+  Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_student_pdf_text_gate_accepts_student_instructions \
   tests/test_build_manifest.py::test_p0_recorder_student_gate_rejects_observed_leaks \
   Mathematiques/manuel-maths/tests/test_p0_student_artifacts.py \
   Mathematiques/manuel-maths/tests/test_pdf_integrity.py::test_p0_math_pdf_preflight_rejects_overfull_diagnostics \
@@ -626,7 +664,7 @@ python3 -m pytest --collect-only -q \
   tests/test_programme_registry.py
 ```
 
-Expected: exactement 19 tests collectés : 14 séparation, 3 overflow,
+Expected: exactement 20 tests collectés : 15 séparation, 3 overflow,
 2 programme.
 
 - [ ] **Step 2: Exécuter les contrats rapides et relever leur matrice Red**
@@ -637,6 +675,7 @@ Run:
 set +e
 python3 -m pytest -q \
   Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_p0_student_pdf_text_gate_rejects_observed_leaks \
+  Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_student_pdf_text_gate_accepts_student_instructions \
   tests/test_build_manifest.py::test_p0_recorder_student_gate_rejects_observed_leaks \
   Mathematiques/manuel-maths/tests/test_p0_student_artifacts.py \
   Mathematiques/manuel-maths/tests/test_pdf_integrity.py::test_p0_math_pdf_preflight_rejects_overfull_diagnostics \
@@ -646,7 +685,7 @@ set -e
 test "$quick_status" -ne 0
 ```
 
-Expected: 18 échecs contractuels, code Pytest non nul conservé et vérifié.
+Expected: 19 échecs contractuels, code Pytest non nul conservé et vérifié.
 
 - [ ] **Step 3: Exécuter séparément le contrat de compilation**
 
@@ -669,13 +708,14 @@ Run:
 
 ```bash
 python3 -m pytest -q \
-  Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_student_pdf_text_gate_accepts_student_instructions \
   tests/test_build_manifest.py::test_recorder_student_text_gate_allows_correction_instructions \
   Mathematiques/manuel-maths/tests/test_pdf_integrity.py \
   -k 'not test_p0_math_pdf_preflight_rejects_overfull_diagnostics'
 ```
 
-Expected: tous les tests sélectionnés passent.
+Expected: les 6 contre-exemples du recorder et les tests historiques du
+préflight passent. Le contre-exemple Mathématiques est désormais un Red
+contractuel et n'est pas masqué dans cette commande.
 
 - [ ] **Step 5: Reproduire la dette historique séparément**
 
@@ -691,7 +731,7 @@ test "$legacy_status" -ne 0
 ```
 
 Expected: un échec sur 2 producteurs attendus contre 6 réels, sans mélange avec
-les 19 nouveaux contrats.
+les 20 contrats Red.
 
 - [ ] **Step 6: Vérifier qu'aucun test n'est neutralisé**
 
@@ -731,7 +771,7 @@ PY
 Expected: code 0 ; aucune ligne ajoutée dans les six fichiers ne neutralise un
 test. Les marqueurs historiques non ajoutés ne créent pas de faux positif.
 
-- [ ] **Step 7: Vérifier le périmètre des six commits du jalon**
+- [ ] **Step 7: Vérifier le périmètre des sept commits du jalon**
 
 Run:
 
@@ -742,13 +782,13 @@ git diff ff55af2e..HEAD --name-only
 git log --oneline --decorate ff55af2e..HEAD
 ```
 
-Expected: deux documents et six fichiers de tests seulement ; six commits
-atomiques (dont un correctif documentaire de provenance), arbre propre.
+Expected: deux documents et six fichiers de tests seulement ; sept commits
+atomiques (dont deux correctifs documentaires), arbre propre.
 
 - [ ] **Step 8: Faire la revue finale du jalon**
 
-Dispatch un reviewer final en lecture seule avec la spec, le plan, les six
-commits et les sorties Red. Il doit confirmer : 19 tests nouveaux, échecs pour
+Dispatch un reviewer final en lecture seule avec la spec, le plan, les sept
+commits et les sorties Red. Il doit confirmer : 20 tests contractuels, échecs pour
 les bonnes raisons, zéro production modifiée, dette historique séparée et
 aucun gate affaibli.
 
@@ -823,9 +863,10 @@ manifeste pour rendre ce contrôle vert.
 Le jalon est terminé seulement si :
 
 - spécification et plan sont approuvés et versionnés ;
-- exactement 19 nouveaux cas Pytest sont collectés ;
-- 19 cas échouent sur les symptômes P0 attendus ;
-- les contre-exemples historiques ciblés restent verts ;
+- exactement 20 cas Pytest contractuels sont collectés ;
+- 20 cas échouent sur les symptômes P0 attendus ;
+- les six contre-exemples du recorder restent verts et la divergence du filtre
+  Mathématiques reste rouge ;
 - la dette des producteurs est reproduite et rapportée séparément ;
 - aucun test n'est `skip`, `xfail` ou soustrait à la collecte ;
 - aucun fichier de production, contenu, PDF, registre ou baseline n'a changé ;
