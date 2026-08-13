@@ -518,6 +518,8 @@ sur un fichier éventuellement absent.
 - `NSI/corpus_nsi/scripts/substance_judge.py` ;
 - `NSI/corpus_nsi/scripts/run_substance_judge.py` ;
 - `NSI/corpus_nsi/scripts/check_rag_config.py` ;
+- `NSI/corpus_nsi/scripts/rebuild_inventory.py` — reconstruction déterministe
+  des sorties canoniques du corpus, sans transport réseau ;
 - `NSI/corpus_nsi/scripts/check_rag_freshness.py` — réseau RAG seulement ;
 - `NSI/corpus_nsi/scripts/ingest_nsi_corpus.py` — ingestion, embedding et vector
   DB seulement ;
@@ -571,6 +573,7 @@ section LLM dans `rag_config.example.yml`, fait échouer le gate.
 - `Mathematiques/manuel-maths/tests/test_ingest_openrouter.py` ;
 - `NSI/tests/test_ingest_openrouter.py` ;
 - `NSI/corpus_nsi/tests/test_openrouter_judges.py` ;
+- `NSI/corpus_nsi/tests/test_manifest_separation.py` ;
 - `NSI/corpus_nsi/tests/test_rag_governance_and_indexes.py` ;
 - `NSI/corpus_nsi/tests/test_secret_guard.py` ;
 - `NSI/corpus_nsi/tests/test_substance_judge_pipeline.py` ;
@@ -610,6 +613,41 @@ Les surfaces opérationnelles identifiées sont également alignées :
 Les formulations ne promettent ni remise, ni Batch API, ni modèle par défaut,
 ni disponibilité permanente.
 
+### 8.5 Sorties canoniques d'inventaire du corpus
+
+Quatre fichiers générés à la racine du corpus sont des surfaces actives, et non
+des snapshots historiques :
+
+- `NSI/corpus_nsi/manifest.csv` ;
+- `NSI/corpus_nsi/manifest_tooling.csv` ;
+- `NSI/corpus_nsi/inventory_report.md` ;
+- `NSI/corpus_nsi/duplicates_report.md`.
+
+Ils sont reconstruits exclusivement par :
+
+```bash
+cd NSI/corpus_nsi
+python3 -m scripts.rebuild_inventory
+```
+
+`iter_files()` utilise `git ls-files` lorsque Git est disponible. Le rebuild
+OpenRouter est donc exécuté seulement après que tout nouveau fichier du corpus,
+en particulier `tests/test_openrouter_judges.py`, a été ajouté à Git et inclus
+dans un commit antérieur. Un fichier simplement présent dans le worktree mais
+non suivi ne constitue pas une entrée d'inventaire valide. Le gate vérifie
+chaque nouveau chemin attendu avec `git ls-files --error-unmatch` avant de
+lancer le rebuild.
+
+Sur le delta OpenRouter vérifié, le rebuild doit modifier exactement :
+
+- `NSI/corpus_nsi/manifest_tooling.csv` ;
+- `NSI/corpus_nsi/inventory_report.md`.
+
+Cette allowlist est fermée. `manifest.csv` et `duplicates_report.md` doivent
+rester octet-identiques au commit précédant le rebuild. `coverage.md` est hors
+périmètre : il n'est ni recalculé, ni modifié, ni invoqué comme preuve de cette
+migration.
+
 ## 9. Exclusions historiques immuables
 
 Le gate distingue les instructions actives des traces datées. Les chemins ou
@@ -630,7 +668,9 @@ ou par diff d'allowlist :
   une seule exception de conteneur :
   `substance_reviews/campaign/_usage_log.json` peut recevoir des entrées v2,
   tandis que chacun de ses objets v1 reste protégé sans migration ;
-- les manifests et inventaires générés décrivant l'état antérieur ;
+- les copies datées de manifests ou d'inventaires conservées sous un répertoire
+  historique tel que `audit/**`, `reports/**` ou un ancien plan ; les quatre
+  sorties canoniques actives de la section 8.5 ne sont pas des historiques ;
 - les fixtures historiques qui représentent explicitement une ancienne preuve,
   sauf si elles sont l'entrée active d'un test de la nouvelle politique.
 
@@ -640,6 +680,8 @@ pour faire croire que le passé utilisait OpenRouter.
 
 Les nouvelles consultations ou smoke tests sont consignés sous
 `audit/openrouter/`. Aucun nouvel artefact n'est écrit sous `audit/chutes/`.
+Le rebuild d'inventaire ne parcourt ni ne modifie un snapshot historique et ne
+touche jamais `substance_reviews/campaign/_usage_log.json`.
 
 ## 10. Contrat TDD Red
 
@@ -726,7 +768,12 @@ Les tests couvrent :
 7. l'absence de `/api/v1/models` dans les tests, Makefiles et workflows CI ;
 8. l'intégrité des catégories historiques protégées ;
 9. l'absence de nouvelle cible Makefile NSI pour l'ingestion ;
-10. l'absence de réseau réel dans toutes les suites ciblées.
+10. l'absence de réseau réel dans toutes les suites ciblées ;
+11. la présence dans `manifest_tooling.csv` des nouveaux fichiers OpenRouter du
+    corpus une fois ceux-ci suivis, sans fuite vers `manifest.csv` ;
+12. la fermeture du delta de rebuild aux deux sorties autorisées, l'identité
+    octet de `manifest.csv` et `duplicates_report.md`, et l'idempotence des
+    quatre sorties canoniques.
 
 Le corpus NSI n'est pas collecté par la configuration Pytest racine. Son contrat
 est donc exécuté séparément :
@@ -746,6 +793,22 @@ python -m pytest \
 Le plan peut ajouter un fichier de test ciblé à cette commande, sans lancer le
 réseau.
 
+Après les commits qui suivent les nouveaux fichiers du corpus, le gate
+d'inventaire est exécuté séparément, sans clé OpenRouter et sans socket réel :
+
+```bash
+cd NSI/corpus_nsi
+python3 -m scripts.rebuild_inventory
+python3 -m pytest tests/test_manifest_separation.py -q -p no:cacheprovider
+```
+
+Le premier rebuild est suivi d'un snapshot temporaire des hashes des quatre
+sorties, puis d'un second rebuild et d'une comparaison exacte de ces hashes.
+Le répertoire temporaire est extérieur au corpus et n'est jamais inventorié.
+Ces commandes n'importent ni n'appellent le client OpenRouter, n'utilisent
+aucune clé et n'effectuent aucun accès réseau. Toute tentative réseau pendant
+le test fait échouer le gate.
+
 ## 11. Green minimal et Refactor
 
 ### 11.1 Green
@@ -763,6 +826,11 @@ Green ajoute uniquement :
 - le gate de policy allowlist ;
 - l'alignement des autorités et documents actifs ;
 - les tests nécessaires pour rendre Red vert.
+
+Le Green de production n'embarque pas opportunément les sorties générées.
+Après que ses nouveaux fichiers de code, tests, configuration et documentation
+du corpus ont été suivis et committés, une étape d'audit dédiée reconstruit
+l'inventaire et vérifie son delta fermé avant son propre commit atomique.
 
 Il n'ajoute ni SDK LLM, ni nouvelle cible Makefile, ni modèle par défaut, ni
 sélection automatique, ni nouvelle fonction RAG.
@@ -804,6 +872,15 @@ Le lot est acceptable lorsque :
 - le gate échoue lorsqu'un client fournisseur fictif est ajouté hors allowlist ;
 - aucun test, Makefile ou workflow CI n'appelle un service LLM ou
   `/api/v1/models` ;
+- les nouveaux fichiers OpenRouter du corpus sont suivis avant le rebuild et
+  apparaissent dans l'inventaire d'outillage ;
+- `python3 -m scripts.rebuild_inventory` est idempotent sur les quatre sorties
+  canoniques et son delta contient exactement `manifest_tooling.csv` et
+  `inventory_report.md` ;
+- `manifest.csv`, `duplicates_report.md` et `coverage.md` restent
+  octet-identiques au commit précédant le rebuild ;
+- `python3 -m pytest tests/test_manifest_separation.py -q -p no:cacheprovider`
+  rapporte trois tests verts, sans clé ni accès réseau ;
 - les catégories historiques exclues sont octet-identiques à la base ; seule
   l'exception `_usage_log.json` peut changer, et ses objets v1 restent
   profondément identiques et dans le même ordre relatif ;
@@ -823,7 +900,11 @@ L'ordre recommandé pour l'implémentation est :
    quatre appelants, pré-jugement neutre, requirements et configurations ;
 3. `[DOCS] aligne les autorites sur OpenRouter` — autorités et documentation
    opérationnelle actives ;
-4. `[AUDIT] consigne le smoke OpenRouter` — seulement après un smoke humain
+4. `[AUDIT] resynchronise l inventaire outillage OpenRouter` — seulement après
+   que les nouveaux fichiers du corpus sont suivis et committés ; le commit
+   contient exactement `NSI/corpus_nsi/manifest_tooling.csv` et
+   `NSI/corpus_nsi/inventory_report.md` ;
+5. `[AUDIT] consigne le smoke OpenRouter` — seulement après un smoke humain
    réellement exécuté et vérifié.
 
 Une correction issue de revue reçoit un commit ciblé supplémentaire. Aucun
@@ -862,7 +943,10 @@ suivantes sont simultanément prouvées :
 4. **séparation RAG/LLM** — les endpoints RAG restent distincts et ne servent
    jamais de destination LLM ;
 5. **traçabilité honnête** — les autorités actives sont à jour et les preuves,
-   verdicts et rapports historiques restent intacts.
+   verdicts et rapports historiques restent intacts ; les deux sorties
+   canoniques d'outillage sont resynchronisées dans le commit audit dédié,
+   tandis que `manifest.csv`, `duplicates_report.md` et `coverage.md` restent
+   inchangés.
 
 Tant qu'une propriété manque, le dépôt ne déclare pas l'exclusivité OpenRouter
 comme réalisée.
