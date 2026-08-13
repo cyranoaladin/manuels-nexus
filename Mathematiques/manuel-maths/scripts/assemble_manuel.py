@@ -47,7 +47,7 @@ CHAPITRES = [
     "1SPE-PROBA-COND",
     "1SPE-VARIABLES-ALEATOIRES",
     # Ordre officiel du perimetre TSPE corrige le 2026-08-05
-    # (docs/10_perimetre_terminale.md, programme 2019 MENE1921247A).
+    # (docs/10_perimetre_terminale.md, programme 2019 MENE1921246A).
     # Le chapitre 10bis TSPE-CONCENTRATION-LGN reste un point ouvert
     # A_VALIDER_HUMAIN (fusion dans TSPE-PROBABILITES ou chapitre distinct)
     # et n'est pas produit : il n'apparait donc pas ici.

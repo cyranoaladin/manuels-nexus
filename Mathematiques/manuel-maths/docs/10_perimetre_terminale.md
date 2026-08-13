@@ -4,7 +4,7 @@
 
 ### TSPE v1 (rentree 2026-2027)
 Programme de specialite mathematiques, classe terminale generale.
-**BO special n 8 du 25 juillet 2019** (arrete du 19-07-2019, MENE1921247A).
+**BO special n 8 du 25 juillet 2019** (arrete du 19-07-2019, MENE1921246A).
 Texte depose : `sources/BO2019_TSPE_specialite.pdf`.
 
 ### TSPE v2 (rentree 2027-2028 — backlog)
