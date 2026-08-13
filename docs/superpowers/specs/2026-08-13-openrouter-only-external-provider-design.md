@@ -1,7 +1,7 @@
 # Exclusivité OpenRouter pour les appels LLM externes
 
 **Date :** 13 août 2026
-**Statut :** spécification approuvée, non implémentée, corrigée après inventaire
+**Statut :** spécification approuvée, non implémentée, contrat fermé après revue
 **Décision humaine :** approche B — exclusivité réelle
 **Base de conception :** `a21a1787229844c1d9c3616c0c3213c7095fa9dc`
 **Décision de publication inchangée :** **NO-GO**
@@ -35,6 +35,10 @@ L'interface officielle est la
 [création d'une chat completion OpenRouter](https://openrouter.ai/docs/api/api-reference/chat/create-a-chat-completion).
 La gestion des enveloppes d'échec suit la documentation
 [Errors and Debugging](https://openrouter.ai/docs/api/reference/errors-and-debugging).
+La comptabilité suit la documentation officielle
+[Usage Accounting](https://openrouter.ai/docs/cookbook/administration/usage-accounting) :
+les tokens, le coût et les compteurs de cache proviennent de la réponse, jamais
+d'une table tarifaire locale.
 Le catalogue
 [`GET /api/v1/models`](https://openrouter.ai/docs/api/api-reference/models/list-all-models-and-their-properties)
 est réservé à un smoke test humain et n'est jamais appelé en production, dans
@@ -80,6 +84,8 @@ rester déterministe et devenir fournisseur-neutre, sans défaut Claude.
 Les surfaces actives comprennent aussi :
 
 - `.env.rag.example`, qui expose `LOCAL_LLM_*` ;
+- `rag_config.example.yml`, dont la section `llm` fixe actuellement
+  `engine: ollama` et un modèle local ;
 - `scripts/check_rag_config.py`, qui rend ces variables obligatoires ;
 - les tests de gouvernance, de secrets, de juge et de policy ;
 - le `Makefile` et les commandes existantes du corpus ;
@@ -143,8 +149,15 @@ créé.
 
 Les quatre appelants découvrent la racine Git à partir de leur propre
 `Path(__file__).resolve()`, en remontant les parents jusqu'au premier marqueur
-`.git` correspondant au checkout courant. Ils ajoutent cette racine précise au
-chemin d'import avant d'importer `nexus_external`.
+`.git` correspondant au checkout courant. Ils placent cette racine précise en
+tête de `sys.path`, avec `sys.path.insert(0, ...)`, avant d'importer
+`nexus_external`. Un chemin déjà présent plus loin dans `sys.path` est d'abord
+retiré afin que la racine découverte reste prioritaire.
+
+Après import, chaque adaptateur résout `nexus_external.__file__` et vérifie que
+le module chargé se trouve exactement sous
+`<racine découverte>/nexus_external/`. Une installation homonyme globale, un
+autre checkout ou un paquet masqué fait échouer l'appelant avant tout réseau.
 
 Le mécanisme :
 
@@ -169,7 +182,23 @@ violerait YAGNI.
 ### 4.3 `nexus_external/openrouter_client.py`
 
 Le client possède une responsabilité : envoyer une chat completion OpenRouter
-non streamée et retourner le contenu textuel complet de la première choice.
+non streamée et retourner un résultat structuré immuable
+`OpenRouterCompletion`.
+
+`OpenRouterCompletion` contient exactement :
+
+- `content`, contenu textuel complet de la première choice ;
+- `generation_id`, champ racine `id` de la réponse ;
+- `model`, champ racine `model` réellement retourné ;
+- `provider`, chaîne optionnelle lorsque OpenRouter la retourne ;
+- `usage`, valeur immuable structurée contenant exactement
+  `prompt_tokens`, `completion_tokens`, `total_tokens`, `cost`,
+  `cached_tokens` et `cache_write_tokens`.
+
+Les appelants consomment cet objet sans accéder au JSON brut. La classification
+n'utilise que `content` dans sa logique métier ; elle ignore la valeur de
+`usage`, mais pas sa validation par le client. Les deux juges peuvent consigner
+les identifiants et la comptabilité validés.
 
 L'interface publique reçoit explicitement la clé, le modèle, les messages, la
 limite de sortie et un transport `httpx` injectable. Les tests remplacent le
@@ -206,7 +235,25 @@ Le client refuse, même sous HTTP 200 :
 - un contenu vide ;
 - tout `finish_reason` différent de `stop`, notamment `length`,
   `content_filter` ou `error` ;
+- un `id` ou un `model` racine absent, vide ou non textuel ;
+- un `provider` présent mais vide ou non textuel ;
+- un objet `usage` absent ou invalide ;
 - une enveloppe non JSON ou de forme inattendue.
+
+Le contrat de comptabilité est unique pour tous les appelants. Les champs
+`prompt_tokens`, `completion_tokens` et `total_tokens` sont des entiers non
+négatifs, avec refus explicite des booléens, et
+`total_tokens == prompt_tokens + completion_tokens`. `cost` est un nombre fini
+non négatif, booléens refusés. `cached_tokens` et `cache_write_tokens` sont lus
+depuis `usage.prompt_tokens_details` ; lorsqu'un de ces champs optionnels n'est
+pas retourné par OpenRouter, il est normalisé à `0`. S'il est présent, il doit
+être un entier non négatif, booléens refusés, et ne pas dépasser
+`prompt_tokens`. Un objet de détails présent mais mal typé est refusé.
+
+Le client exige donc toujours une comptabilité valide, y compris pour la
+classification. Il ne lance pas de second appel à `/generation` pour réparer
+une réponse. Ce choix donne un seul protocole fail-closed et garantit que le
+juge comptable ne reçoit jamais une complétion dépourvue de preuve d'usage.
 
 Les tests couvrent au minimum 400, 401, 402, 403, 408, 429 et les erreurs 5xx,
 ainsi que les erreurs dans une enveloppe HTTP 200. Les catégories exposées
@@ -307,6 +354,44 @@ Les retries métier déjà explicites dans la campagne peuvent être conservés
 dans l'appelant si leurs tests en bornent le nombre et les délais. Le client
 partagé, lui, reste sans retry et ne sélectionne jamais un modèle de repli.
 
+#### 6.1.1 Journal comptable versionné
+
+`substance_reviews/campaign/_usage_log.json` est un historique actif, mais ses
+entrées existantes constituent le schéma v1 et ne sont pas migrées. La
+fusion-upsert conserve chaque objet v1, ses valeurs et son ordre relatif sans
+ajouter, supprimer ou renommer de champ. En particulier, aucune ancienne ligne
+n'est recalculée avec les données OpenRouter.
+
+Chaque complétion OpenRouter réussie ajoute une entrée de schéma v2 contenant :
+
+- `schema_version: 2` et `provider: openrouter` ;
+- `cap`, `seq`, l'index de tentative et `judged_at` ;
+- `model` et `generation_id` issus de `OpenRouterCompletion` ;
+- `prompt_tokens`, `completion_tokens`, `total_tokens`, `cached_tokens` et
+  `cache_write_tokens` issus de son `usage` validé ;
+- `cost_usd`, copie exacte de `usage.cost`.
+
+Le coût n'est jamais recalculé, arrondi à partir des tokens ou obtenu depuis un
+tarif de modèle. Le code ne contient plus de prix Claude, de coefficient de
+cache Anthropic, de seuil de cache Anthropic ni d'alerte fondée sur un minimum
+de tokens Anthropic.
+
+Une entrée v2 réussie est identifiée de façon stable par son
+`generation_id` ; rejouer l'upsert avec le même identifiant la remplace sans
+duplication. Les entrées v2 d'autres générations et toutes les entrées v1 sont
+préservées, y compris lorsqu'elles portent le même `cap`. Ainsi, une tentative
+supplémentaire facturée garde sa propre génération et son propre coût. Une
+erreur sans réponse exploitable peut être consignée comme entrée v2 d'échec,
+avec `provider`, `model`, `cap`, `seq`, tentative, date et catégorie expurgée,
+mais sans inventer `generation_id`, compteurs ou `cost_usd`.
+
+Les totaux affichés pour le run courant somment seulement les entrées v2
+réussies produites pendant ce run. Ils ne mélangent pas les anciens noms v1
+`read`, `write`, `fresh` et `out`. La compatibilité v1 est prouvée par fixture
+et comparaison profonde avant/après fusion ; la comptabilité v2 est prouvée
+avec des mutations de coût et de compteurs de cache afin qu'aucune formule
+locale ne puisse passer.
+
 ### 6.2 `substance_judge.py`
 
 Seul le transport LLM de `substance_judge.py` migre vers OpenRouter. La recherche
@@ -338,6 +423,7 @@ une consultation distante.
 La migration met à jour ensemble :
 
 - `NSI/corpus_nsi/.env.rag.example` ;
+- `NSI/corpus_nsi/rag_config.example.yml` ;
 - `NSI/corpus_nsi/scripts/check_rag_config.py` ;
 - les tests qui verrouillent cette configuration ;
 - les tests de secrets concernés ;
@@ -354,8 +440,17 @@ OPENROUTER_MODEL=
 
 `check_rag_config.py` exige ces deux clés, exige que la clé d'exemple soit vide,
 refuse les quatre anciennes variables `LOCAL_LLM_*` et continue de contrôler
-les paramètres RAG sans les transformer. Les tests suivent ce contrat
-fail-closed.
+les paramètres RAG sans les transformer.
+
+La section locale `llm` est supprimée de `rag_config.example.yml`. Aucune
+section de remplacement `external_llm` n'y est ajoutée : `.env.rag` porte déjà
+les deux paramètres OpenRouter, et dupliquer modèle ou endpoint créerait une
+seconde autorité. `check_rag_config.py` et
+`tests/test_rag_governance_and_indexes.py` refusent explicitement toute section
+`llm`, notamment `llm.engine: ollama`, toute section `external_llm`, toute clé
+`LOCAL_LLM_*` et tout endpoint de chat arbitraire. Ils acceptent et préservent
+les sections et variables existantes de RAG, embedding et base vectorielle ;
+les URL non-LLM ne sont ni renommées ni assimilées à un endpoint de chat.
 
 `httpx==0.28.1` est ajouté au requirements du corpus afin que ses tests isolés
 puissent importer le client partagé. Cette version est compatible avec le
@@ -445,6 +540,7 @@ pour un appel de chat, de messages ou de completions.
 - `Mathematiques/manuel-maths/.env.example` ;
 - `NSI/.env.example` ;
 - `NSI/corpus_nsi/.env.rag.example` ;
+- `NSI/corpus_nsi/rag_config.example.yml` ;
 - `Mathematiques/manuel-maths/requirements.txt` ;
 - `NSI/requirements.txt` ;
 - `NSI/corpus_nsi/requirements.txt` ;
@@ -462,6 +558,10 @@ pour un appel de chat, de messages ou de completions.
 Les Makefiles et workflows ne reçoivent aucune nouvelle cible réseau. Ils sont
 scannés pour prouver que Pytest/CI n'appelle ni OpenRouter, ni le catalogue des
 modèles, ni un fournisseur direct.
+
+L'allowlist de configuration nomme les deux fichiers RAG. Un nouveau fichier de
+configuration contenant une destination LLM, ou la réintroduction d'une
+section LLM dans `rag_config.example.yml`, fait échouer le gate.
 
 ### 8.3 Tests actifs à créer ou adapter
 
@@ -526,7 +626,10 @@ ou par diff d'allowlist :
   `reports/excellence_remediation_progress.md`, même lorsqu'un rapport conserve
   une ancienne instruction Anthropic ;
 - `NSI/corpus_nsi/docs/judge_campaign_plan.md`, plan daté et en lecture seule ;
-- `NSI/corpus_nsi/substance_reviews/**` et tout verdict JSON déjà produit ;
+- `NSI/corpus_nsi/substance_reviews/**` et tout verdict JSON déjà produit, avec
+  une seule exception de conteneur :
+  `substance_reviews/campaign/_usage_log.json` peut recevoir des entrées v2,
+  tandis que chacun de ses objets v1 reste protégé sans migration ;
 - les manifests et inventaires générés décrivant l'état antérieur ;
 - les fixtures historiques qui représentent explicitement une ancienne preuve,
   sauf si elles sont l'entrée active d'un test de la nouvelle politique.
@@ -551,13 +654,18 @@ Les tests couvrent :
    `max_completion_tokens` ;
 2. injection de `httpx.MockTransport` et zéro socket réel ;
 3. timeout borné et redirections non suivies ;
-4. extraction d'une réponse complète ;
+4. extraction d'un `OpenRouterCompletion` immuable avec identifiant, modèle,
+   provider optionnel et usage structuré ;
 5. refus des erreurs HTTP 400, 401, 402, 403, 408, 429 et 5xx ;
 6. refus d'un objet `error` racine ou dans la choice sous HTTP 200 ;
 7. refus de `finish_reason: error`, `length` ou autre contenu partiel ;
 8. refus d'une enveloppe, choice, message ou content mal typé ;
 9. absence des clés, prompts et corps bruts dans exceptions et logs ;
-10. absence de retry ou de modèle de repli implicite.
+10. absence de retry ou de modèle de repli implicite ;
+11. refus de `usage` absent, de tokens négatifs, booléens ou incohérents, d'un
+    coût négatif/non fini et de détails de cache invalides ;
+12. normalisation à zéro des seuls compteurs de cache optionnels absents et
+    conservation exacte de `usage.cost`.
 
 ### 10.2 Classification
 
@@ -593,7 +701,15 @@ Les tests couvrent :
 7. la non-promotion des verdicts et la conservation des vetos existants ;
 8. la découverte de la racine depuis chacun des quatre `__file__`, avec un
    répertoire courant différent ;
-9. l'absence d'import `anthropic` et de lecture `ANTHROPIC_API_KEY` actifs.
+9. la priorité de cette racine dans `sys.path` et le refus d'un
+   `nexus_external` chargé depuis un autre checkout ou une installation globale ;
+10. l'absence d'import `anthropic` et de lecture `ANTHROPIC_API_KEY` actifs ;
+11. les entrées v2 du journal : identifiants, modèle, tokens, cache et copie
+    exacte du coût OpenRouter ;
+12. la conservation profonde et de l'ordre relatif d'une fixture v1 lors de la
+    fusion-upsert, même à `cap` identique ;
+13. l'absence de tarif local, de calcul de coût Claude et d'alerte/seuil de
+    cache Anthropic, verrouillée par mutations.
 
 ### 10.4 Policy, gouvernance et historique
 
@@ -603,7 +719,9 @@ Les tests couvrent :
 2. l'échec sur tout nouveau client fournisseur hors allowlist ;
 3. la présence des fichiers scannés avant toute assertion négative ;
 4. la conservation des endpoints RAG non-LLM ;
-5. le contrat `.env.rag.example` et `check_rag_config.py` ;
+5. le contrat coordonné `.env.rag.example`, `rag_config.example.yml`,
+   `check_rag_config.py` et `test_rag_governance_and_indexes.py`, incluant le
+   rejet de `llm.engine: ollama`, de `LOCAL_LLM_*` et d'un endpoint arbitraire ;
 6. l'absence de Chutes dans les quatre autorités actives ;
 7. l'absence de `/api/v1/models` dans les tests, Makefiles et workflows CI ;
 8. l'intégrité des catégories historiques protégées ;
@@ -639,7 +757,9 @@ Green ajoute uniquement :
 - les quatre délégations réseau ;
 - la neutralisation documentaire de `run_substance_judge.py` ;
 - les requirements et exemples d'environnement nécessaires ;
-- la mise à jour coordonnée de `check_rag_config.py` et de ses tests ;
+- la suppression de la section LLM locale de `rag_config.example.yml` et la
+  mise à jour coordonnée de `check_rag_config.py` et de ses tests ;
+- le journal comptable v2 OpenRouter avec compatibilité v1 non destructive ;
 - le gate de policy allowlist ;
 - l'alignement des autorités et documents actifs ;
 - les tests nécessaires pour rendre Red vert.
@@ -667,18 +787,26 @@ Le lot est acceptable lorsque :
 - la suite ciblée séparée du corpus NSI est verte ;
 - Ruff et les contrôles Python affectés sont verts ;
 - les commandes des deux ingestions chargent `nexus_external` depuis leur
-  contexte normal ;
+  contexte normal et les quatre appelants prouvent le chemin exact du module
+  chargé ;
 - `anthropic` a disparu des requirements/imports actifs et
   `ANTHROPIC_API_KEY` de la configuration active ;
 - `LOCAL_LLM_*` a disparu de la configuration et du transport LLM actifs ;
+- `rag_config.example.yml` ne contient aucune section LLM et son gate refuse
+  `ollama`, une variable locale ou un endpoint de chat arbitraire sans altérer
+  les endpoints RAG/embedding ;
 - le seul endpoint LLM actif est dans
   `nexus_external/openrouter_client.py` ;
+- les nouvelles lignes `_usage_log.json` sont v2, reprennent exactement le coût
+  et les tokens OpenRouter, et les lignes v1 restent inchangées ;
 - les endpoints RAG existants et leurs barrières restent inchangés ;
 - les quatre autorités prescrivent OpenRouter et n'ordonnent plus Chutes ;
 - le gate échoue lorsqu'un client fournisseur fictif est ajouté hors allowlist ;
 - aucun test, Makefile ou workflow CI n'appelle un service LLM ou
   `/api/v1/models` ;
-- les catégories historiques exclues sont octet-identiques à la base ;
+- les catégories historiques exclues sont octet-identiques à la base ; seule
+  l'exception `_usage_log.json` peut changer, et ses objets v1 restent
+  profondément identiques et dans le même ordre relatif ;
 - `git diff --check` est vert ;
 - `--release-strict` reste rouge pour les dettes éditoriales réelles et n'est
   ni affaibli ni requalifié.
