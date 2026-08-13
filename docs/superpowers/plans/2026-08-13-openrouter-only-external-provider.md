@@ -349,7 +349,8 @@ Expected: 5 032 tests découverts et échec historique de collecte exclusivement
 
 ```bash
 set -euo pipefail
-CORPUS_ROOT=/home/alaeddine/Documents/Manuels_Nexus/.worktrees/green-openrouter-only/NSI/corpus_nsi
+IMPL_ROOT=/home/alaeddine/Documents/Manuels_Nexus/.worktrees/green-openrouter-only
+SOURCE_REPORT=$IMPL_ROOT/NSI/corpus_nsi/01_build_reports/P05_substance_review.json
 mapfile -t POINTERS < <(find /tmp -maxdepth 1 -user "$(id -u)" -type f -name 'nexus-openrouter-baseline-pointer.*' ! -name '*.complete' -print)
 test "${#POINTERS[@]}" -eq 1
 POINTER=${POINTERS[0]}
@@ -357,6 +358,23 @@ test -O "$POINTER"; test ! -L "$POINTER"; test "$(stat -c '%a' "$POINTER")" = 60
 EVIDENCE_ROOT=$(cat "$POINTER")
 case "$EVIDENCE_ROOT" in /tmp/nexus-openrouter-baseline.*) ;; *) exit 1 ;; esac
 test -d "$EVIDENCE_ROOT"
+test -z "$(git -C "$IMPL_ROOT" status --porcelain=v1)"
+SOURCE_SHA=$(git -C "$IMPL_ROOT" rev-parse HEAD)
+if test -e "$SOURCE_REPORT"; then
+  sha256sum "$SOURCE_REPORT" > "$EVIDENCE_ROOT/source-p05-report.before"
+else
+  printf '%s\n' ABSENT > "$EVIDENCE_ROOT/source-p05-report.before"
+fi
+CORPUS_CLONE=$(mktemp -d /tmp/nexus-openrouter-corpus-baseline.XXXXXX)
+git clone --shared --no-checkout "$IMPL_ROOT" "$CORPUS_CLONE/repo"
+test ! -e "$CORPUS_CLONE/repo/NSI/corpus_nsi/01_build_reports/P05_substance_review.json"
+git -C "$CORPUS_CLONE/repo" branch baseline-corpus "$SOURCE_SHA"
+git -C "$CORPUS_CLONE/repo" symbolic-ref HEAD refs/heads/baseline-corpus
+git -C "$CORPUS_CLONE/repo" read-tree -mu HEAD
+test "$(git -C "$CORPUS_CLONE/repo" rev-parse HEAD)" = "$SOURCE_SHA"
+test ! -e "$CORPUS_CLONE/repo/NSI/corpus_nsi/01_build_reports/P05_substance_review.json"
+printf '%s\n' "$CORPUS_CLONE/repo" > "$EVIDENCE_ROOT/corpus-baseline-clone-path"
+CORPUS_ROOT=$CORPUS_CLONE/repo/NSI/corpus_nsi
 cd "$CORPUS_ROOT"
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
   python3 -m pytest --collect-only -q -p no:cacheprovider \
@@ -379,9 +397,17 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
     tests/test_policy_checker_ast.py \
   | tee "$EVIDENCE_ROOT/corpus-baseline.out"
 rg -F '85 passed' "$EVIDENCE_ROOT/corpus-baseline.out"
+if test -e "$SOURCE_REPORT"; then
+  sha256sum "$SOURCE_REPORT" > "$EVIDENCE_ROOT/source-p05-report.after"
+else
+  printf '%s\n' ABSENT > "$EVIDENCE_ROOT/source-p05-report.after"
+fi
+cmp "$EVIDENCE_ROOT/source-p05-report.before" "$EVIDENCE_ROOT/source-p05-report.after"
+test -e "$CORPUS_ROOT/01_build_reports/P05_substance_review.json"
+test -z "$(git -C "$IMPL_ROOT" status --porcelain=v1)"
 ```
 
-Expected: ensemble trié exact de 85 nodeids et `85 passed`, aucun accès réseau. Ce fichier de preuve est la source indépendante comparée littéralement aux 27 nouveaux juges et trois manifest en Tasks 7 et 19. Sinon `HARD STOP` avant Red.
+Expected: ensemble trié exact de 85 nodeids et `85 passed`, aucun accès réseau. Le test historique qui écrit `01_build_reports/P05_substance_review.json` s'exécute uniquement dans le clone temporaire conservé ; le rapport ignoré du worktree source reste absent ou octet-identique. Ce fichier de preuve est la source indépendante comparée littéralement aux 27 nouveaux juges et trois manifest en Tasks 7 et 19. Sinon `HARD STOP` avant Red.
 
 - [ ] **Step 3: Reproduire l’inventaire direct sur la branche dédiée**
 
