@@ -682,10 +682,93 @@ def test_student_pdf_text_gate_rejects_teacher_leaks(
     assert expected in assemble_manuel.student_text_violations(text)
 
 
+@pytest.mark.parametrize(
+    ("texts", "expected"),
+    [
+        (
+            (
+                "Correction et diagnostics",
+                "correction et diagnostics",
+                "CORRECTION ET DIAGNOSTICS",
+            ),
+            "corrigé",
+        ),
+        (
+            (
+                "Réponses correctes",
+                "Reponses correctes",
+                "RÉPONSES CORRECTES",
+                "REPONSES CORRECTES",
+            ),
+            "corrigé",
+        ),
+        (
+            (
+                "Bareme : 6 points",
+                "Barème : 6 points",
+                "BAREME : 6 POINTS",
+                "BARÈME : 6 POINTS",
+            ),
+            "barème enseignant",
+        ),
+        (
+            (
+                "Cle de correction",
+                "clé de correction",
+                "Clé de correction",
+                "CLE DE CORRECTION",
+                "CLÉ DE CORRECTION",
+            ),
+            "corrigé",
+        ),
+        (
+            (
+                "TSPE-DERIVATION-CONVEXITE",
+                "tspe-derivation-convexite",
+            ),
+            "identifiant interne",
+        ),
+        (
+            (
+                "(renvois exercices M1)",
+                "(Renvois exercices M1)",
+                "(RENVOIS EXERCICES M1)",
+            ),
+            "renvoi provisoire",
+        ),
+    ],
+)
+def test_p0_student_pdf_text_gate_rejects_observed_leaks(
+    texts: tuple[str, ...],
+    expected: str,
+) -> None:
+    missing = [
+        text
+        for text in texts
+        if expected not in assemble_manuel.student_text_violations(text)
+    ]
+    assert not missing
+
+
 def test_student_pdf_text_gate_accepts_student_instructions() -> None:
-    assert assemble_manuel.student_text_violations(
-        "Compléter le programme. Solution : x appartient à [0 ; 1]."
-    ) == []
+    texts = (
+        "Corrige le programme.",
+        "Corriger le programme.",
+        "Tu corriges le programme.",
+        "Tu corriges",
+        "Tu corriges.",
+        "Étudier la version corrigée.",
+        "Compléter le programme. Solution : x appartient à [0 ; 1].",
+    )
+    violations_by_text = {
+        text: violations
+        for text in texts
+        if (violations := assemble_manuel.student_text_violations(text))
+    }
+    assert not violations_by_text, (
+        "instructions élève signalées à tort par le filtre : "
+        f"{violations_by_text}"
+    )
 
 
 def test_real_professor_order_matches_declared_inventory() -> None:

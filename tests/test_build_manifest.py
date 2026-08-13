@@ -358,6 +358,75 @@ def test_recorder_student_text_gate_rejects_teacher_leaks(
 
 
 @pytest.mark.parametrize(
+    ("texts", "expected"),
+    [
+        (
+            (
+                "Correction et diagnostics",
+                "correction et diagnostics",
+                "CORRECTION ET DIAGNOSTICS",
+            ),
+            "corrigé",
+        ),
+        (
+            (
+                "Réponses correctes",
+                "Reponses correctes",
+                "RÉPONSES CORRECTES",
+                "REPONSES CORRECTES",
+            ),
+            "corrigé",
+        ),
+        (
+            (
+                "Bareme : 6 points",
+                "Barème : 6 points",
+                "BAREME : 6 POINTS",
+                "BARÈME : 6 POINTS",
+            ),
+            "barème enseignant",
+        ),
+        (
+            (
+                "Cle de correction",
+                "clé de correction",
+                "Clé de correction",
+                "CLE DE CORRECTION",
+                "CLÉ DE CORRECTION",
+            ),
+            "corrigé",
+        ),
+        (
+            (
+                "TSPE-DERIVATION-CONVEXITE",
+                "tspe-derivation-convexite",
+            ),
+            "identifiant interne",
+        ),
+        (
+            (
+                "(renvois exercices M1)",
+                "(Renvois exercices M1)",
+                "(RENVOIS EXERCICES M1)",
+            ),
+            "renvoi provisoire",
+        ),
+    ],
+)
+def test_p0_recorder_student_gate_rejects_observed_leaks(
+    manifest_module,
+    texts: tuple[str, ...],
+    expected: str,
+) -> None:
+    missing = [
+        text
+        for text in texts
+        if expected not in manifest_module._student_text_violations(text)
+    ]
+    assert not missing
+
+
+@pytest.mark.parametrize(
     "text",
     [
         "Corrige le programme.",
