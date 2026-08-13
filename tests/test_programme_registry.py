@@ -109,6 +109,26 @@ def test_p0_tspe_active_documents_use_the_mathematics_nor() -> None:
 def test_p0_tspe_readme_reports_the_current_fixed_provenance() -> None:
     text = README.read_text(encoding="utf-8")
     normalized = " ".join(text.split())
+    audited_begin = "<!-- BEGIN CURRENT AUDITED STATE -->"
+    audited_end = "<!-- END CURRENT AUDITED STATE -->"
+    programmes_begin = "## Programmes officiels 2026-2027"
+    programmes_end = "## Enrichissements hors programme"
+    historic_p0 = (
+        "4. **Provenance TSPE.** Le registre porte `MENE1921262A` (STMG) au lieu de\n"
+        "   `MENE1921246A` (spécialité mathématiques)."
+    )
+    closure = "La provenance TSPE est corrigée et n'est plus un P0 ouvert."
+    post_audit_update = f"**Actualisation post-audit — Wave 0.**\n\n{closure}"
+
+    assert text.count(audited_begin) == 1
+    assert text.count(audited_end) == 1
+    before_audit, remainder = text.split(audited_begin, maxsplit=1)
+    audited_state, after_audit = remainder.split(audited_end, maxsplit=1)
+    outside_audit = before_audit + after_audit
+    programmes = before_audit.split(programmes_begin, maxsplit=1)[1].split(
+        programmes_end, maxsplit=1
+    )[0]
+
     assert CORRECT_TSPE_URL in text
     assert "Registre et table des sources alignés" in text
     assert (
@@ -116,8 +136,10 @@ def test_p0_tspe_readme_reports_the_current_fixed_provenance() -> None:
         "TSPE le NOR `MENE1921246A`" in normalized
     )
     assert "Le registre courant attribue encore à TSPE" not in text
-    assert "**Provenance TSPE.** Le registre porte" not in text
-    assert "La provenance TSPE est corrigée et n'est plus un P0 ouvert." in text
+    assert historic_p0 in audited_state
+    assert closure not in audited_state
+    assert post_audit_update in outside_audit
+    assert post_audit_update in programmes
 
 
 @pytest.mark.parametrize("wrong_nor", [STMG_NOR, TNSI_NOR])
