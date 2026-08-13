@@ -731,7 +731,7 @@ PY
 Expected: code 0 ; aucune ligne ajoutée dans les six fichiers ne neutralise un
 test. Les marqueurs historiques non ajoutés ne créent pas de faux positif.
 
-- [ ] **Step 7: Vérifier le périmètre des cinq commits du jalon**
+- [ ] **Step 7: Vérifier le périmètre des six commits du jalon**
 
 Run:
 
@@ -742,24 +742,49 @@ git diff ff55af2e..HEAD --name-only
 git log --oneline --decorate ff55af2e..HEAD
 ```
 
-Expected: deux documents et six fichiers de tests seulement ; cinq commits
-atomiques, arbre propre.
+Expected: deux documents et six fichiers de tests seulement ; six commits
+atomiques (dont un correctif documentaire de provenance), arbre propre.
 
 - [ ] **Step 8: Faire la revue finale du jalon**
 
-Dispatch un reviewer final en lecture seule avec la spec, le plan, les cinq
+Dispatch un reviewer final en lecture seule avec la spec, le plan, les six
 commits et les sorties Red. Il doit confirmer : 19 tests nouveaux, échecs pour
 les bonnes raisons, zéro production modifiée, dette historique séparée et
 aucun gate affaibli.
 
 - [ ] **Step 9: Relever les gates sans prétendre au vert**
 
-Run:
+Run dans le checkout d'intégration principal, dont la branche correspond à la
+provenance versionnée du manifeste :
 
 ```bash
-python3 scripts/inventory_collection.py --check --require-clean
+integration_checkout=$(
+  python3 - <<'PY'
+import subprocess
+
+lines = subprocess.run(
+    ["git", "worktree", "list", "--porcelain"],
+    check=True,
+    capture_output=True,
+    text=True,
+).stdout.splitlines()
+path = None
+for line in lines:
+    if line.startswith("worktree "):
+        path = line.removeprefix("worktree ")
+    elif line == "branch refs/heads/integration/1spe-bo2026-traceability":
+        assert path is not None
+        print(path)
+        break
+PY
+)
+test -n "$integration_checkout"
+git -C "$integration_checkout" status --short --branch
+(cd "$integration_checkout" && \
+  python3 scripts/inventory_collection.py --check --require-clean)
 set +e
-python3 scripts/inventory_collection.py --check --release-strict --require-clean
+(cd "$integration_checkout" && \
+  python3 scripts/inventory_collection.py --check --release-strict --require-clean)
 release_status=$?
 set -e
 test "$release_status" -eq 7
@@ -767,6 +792,31 @@ test "$release_status" -eq 7
 
 Expected: structure verte, release toujours rouge code 7. Les tests Red ne
 modifient ni inventaire ni baseline.
+
+Puis relever la contrainte de provenance propre au worktree :
+
+```bash
+set +e
+worktree_output=$(python3 scripts/inventory_collection.py --check --require-clean 2>&1)
+worktree_status=$?
+set -e
+test "$worktree_status" -eq 3
+printf '%s\n' "$worktree_output" | python3 -c '
+import json
+import sys
+
+payload = json.loads(sys.stdin.read().splitlines()[-1])
+assert payload["gate"] == "check"
+assert payload["exit_code"] == 3
+assert payload["reasons"] == [
+    "check_error:branche de provenance du manifeste incohérente"
+]
+'
+```
+
+Expected: code 3 avec pour unique cause la branche du worktree différente de
+la branche attestée par `audit/BUILD_MANIFEST.json`. Ne jamais réécrire le
+manifeste pour rendre ce contrôle vert.
 
 ## Définition de terminé
 
@@ -780,5 +830,8 @@ Le jalon est terminé seulement si :
 - aucun test n'est `skip`, `xfail` ou soustrait à la collecte ;
 - aucun fichier de production, contenu, PDF, registre ou baseline n'a changé ;
 - les trois familles de tests ont leurs commits atomiques et leurs deux revues ;
-- l'arbre final est propre et le gate structurel reste vert ;
-- `--release-strict` reste rouge pour les raisons métier existantes.
+- l'arbre final du worktree est propre ;
+- le checkout d'intégration attesté garde le gate structurel vert et
+  `--release-strict` rouge code 7 ;
+- le worktree rapporte séparément le code 3 de provenance de branche, sans
+  modification du manifeste.

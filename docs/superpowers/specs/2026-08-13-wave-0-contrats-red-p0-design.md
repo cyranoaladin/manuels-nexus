@@ -250,12 +250,24 @@ La vérification finale doit produire :
 - les messages montrant les P0 réels ;
 - les tests historiques ciblés verts, hors dette préexistante consignée ;
 - `git diff --check` vert et un arbre propre ;
-- les gates de release toujours rouges, sans changement de baseline.
+- le gate structurel vert dans le checkout d'intégration attesté par le
+  manifeste ;
+- dans le worktree isolé, le code 3 attendu et uniquement la raison
+  `check_error:branche de provenance du manifeste incohérente` ;
+- le gate de release toujours rouge code 7 dans le checkout d'intégration,
+  sans changement de baseline.
+
+Le manifeste versionné atteste la branche
+`integration/1spe-bo2026-traceability`. Il est interdit de le réécrire pour
+faire accepter artificiellement la branche de tests. Les codes du worktree et
+du checkout attesté sont donc relevés séparément.
 
 ## Définition de terminé
 
 Le jalon Red est terminé lorsque les trois familles sont committées, les
 nouveaux tests sont collectés et échouent exclusivement sur les comportements
 P0 décrits, aucune surface de production n'a changé et les dettes historiques
-sont distinguées. Il est volontairement interdit de déclarer la collection ou
-les tests complets « verts » à ce stade.
+sont distinguées. Le worktree reste propre ; sa divergence de branche avec la
+provenance du manifeste est rapportée comme telle, sans mutation du manifeste.
+Il est volontairement interdit de déclarer la collection ou les tests complets
+« verts » à ce stade.
