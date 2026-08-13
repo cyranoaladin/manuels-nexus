@@ -285,6 +285,38 @@ def test_margin_proof_passes_runner_environment_and_twenty_second_timeout(
     ]
 
 
+@pytest.mark.parametrize(
+    "diagnostic",
+    [
+        "Overfull \\hbox (163.04901pt too wide)",
+        "Overfull \\vbox (110.95308pt too high)",
+    ],
+)
+def test_p0_math_pdf_preflight_rejects_overfull_diagnostics(
+    tmp_path,
+    diagnostic: str,
+) -> None:
+    import pdf_integrity
+
+    pdf = tmp_path / "manual.pdf"
+    log = tmp_path / "manual.log"
+    pdf.write_bytes(b"%PDF fixture")
+    log.write_text(diagnostic + "\n", encoding="utf-8")
+
+    def runner(_command, **_kwargs):
+        return SimpleNamespace(
+            returncode=0,
+            stdout=(
+                "name type emb sub uni object ID\n"
+                "--------------------------------\n"
+                "Fixture Type1 yes yes yes 1 0\n"
+            ),
+            stderr="",
+        )
+
+    assert pdf_integrity.verify_pdf(pdf, log, runner=runner) == 1
+
+
 _HAS_LUALATEX = shutil.which("lualatex") is not None
 
 
