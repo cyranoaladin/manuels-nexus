@@ -1,9 +1,13 @@
 # Conception — README racine autosuffisant pour audit
 
-**Date :** 13 août 2026  
-**Statut :** conception approuvée par l'utilisateur  
-**Branche :** `integration/1spe-bo2026-traceability`  
-**Point de départ :** `b5c6f9f113dc7be0b33765bb6229b6d4e6611467`  
+**Date :** 13 août 2026
+
+**Statut :** conception approuvée par l'utilisateur
+
+**Branche :** `integration/1spe-bo2026-traceability`
+
+**Point de départ :** `b5c6f9f113dc7be0b33765bb6229b6d4e6611467`
+
 **Approche retenue :** manuel d'audit en couches
 
 ## 1. Objectif
