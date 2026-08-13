@@ -301,11 +301,12 @@ test -s .github/workflows/ci-audit-collection.yml
 test -s .github/workflows/ci-mathematiques.yml
 test -s .github/workflows/ci-nsi.yml
 test -s NSI/corpus_nsi/.github/workflows/ci.yml
-rg -n 'pytest|requirements-ci-audit|--no-deps' \
+LC_ALL=C rg --no-heading -n 'pytest|requirements-ci-audit|--no-deps' \
   .github/workflows/ci-audit-collection.yml \
   .github/workflows/ci-mathematiques.yml \
   .github/workflows/ci-nsi.yml \
-  NSI/corpus_nsi/.github/workflows/ci.yml
+  NSI/corpus_nsi/.github/workflows/ci.yml \
+| LC_ALL=C sort
 ```
 
 Expected: le corpus possède son workflow interne, mais Pytest racine ne collecte que les trois `testpaths` de `pyproject.toml`. Ne pas prétendre que le nouveau contrat corpus est déjà branché dans la CI racine.
@@ -338,8 +339,8 @@ ROOT_COLLECT_RC=$?
 set -e
 test "$ROOT_COLLECT_RC" -eq 2
 rg -F '5032 tests collected' "$EVIDENCE_ROOT/root-collect.out"
-test "$(grep -c '^ERROR collecting ' "$EVIDENCE_ROOT/root-collect.out")" -eq 1
-rg -F 'assemble.BOOK_VARIANTS' "$EVIDENCE_ROOT/root-collect.out"
+test "$(rg -c '^_+ ERROR collecting ' "$EVIDENCE_ROOT/root-collect.out")" -eq 1
+rg -F "module 'assemble' has no attribute 'BOOK_VARIANTS'" "$EVIDENCE_ROOT/root-collect.out"
 ```
 
 Expected: 5 032 tests découverts et échec historique de collecte exclusivement lié à la collision `assemble.BOOK_VARIANTS`. Tout autre motif est `HARD STOP`. Cette dette n’est ni corrigée ni utilisée pour masquer les quatre processus ciblés.
