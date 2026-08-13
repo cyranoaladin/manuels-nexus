@@ -1,7 +1,7 @@
 # Exclusivité OpenRouter pour les appels LLM externes
 
 **Date :** 13 août 2026
-**Statut :** spécification approuvée, non implémentée
+**Statut :** spécification approuvée, non implémentée, corrigée après inventaire
 **Décision humaine :** approche B — exclusivité réelle
 **Base de conception :** `a21a1787229844c1d9c3616c0c3213c7095fa9dc`
 **Décision de publication inchangée :** **NO-GO**
@@ -11,254 +11,250 @@
 OpenRouter devient l'unique passerelle autorisée pour tout appel LLM externe,
 actif ou nouveau, du dépôt.
 
-Cette décision porte sur le chemin réseau et les clients utilisés, pas sur
+Cette décision porte sur la destination réseau et le client utilisés, pas sur
 l'auteur du modèle choisi dans le catalogue OpenRouter. Un identifiant de
-modèle OpenRouter peut donc contenir un espace de noms d'auteur ; cela ne
-permet jamais d'appeler directement l'API de cet auteur.
+modèle OpenRouter peut contenir un espace de noms d'auteur ; il ne permet jamais
+d'appeler directement l'API de cet auteur.
 
-Le contrat est le suivant :
+Le contrat est fermé :
 
 - un appel LLM externe passe exclusivement par
-  `https://openrouter.ai/api/v1/chat/completions` ;
+  `POST https://openrouter.ai/api/v1/chat/completions` ;
 - l'authentification utilise `Authorization: Bearer <OPENROUTER_API_KEY>` ;
-- chaque requête nomme explicitement un unique modèle configuré par
-  `OPENROUTER_MODEL` ;
-- aucun SDK, endpoint, secret ou mécanisme de repli d'un fournisseur direct
-  n'est admis ;
-- l'absence de clé sélectionne l'heuristique locale et n'ouvre aucune
-  connexion ;
-- la présence d'une clé sans modèle est une erreur de configuration explicite ;
+- chaque requête nomme exactement un modèle fourni par `OPENROUTER_MODEL` ;
+- aucun SDK, endpoint, secret ou repli d'un fournisseur direct n'est admis ;
+- aucun endpoint LLM local ou configurable arbitrairement n'est admis ;
+- l'absence de clé sélectionne le comportement local déterministe lorsqu'un
+  appelant en possède un ; elle n'ouvre aucune connexion ;
+- la présence d'une clé sans modèle est une erreur explicite avant réseau ;
 - les consultations Chutes cessent ;
-- les preuves historiques Chutes et les anciens documents de décision ne sont
-  ni réécrits, ni déplacés, ni renommés.
+- les preuves historiques Chutes, les verdicts déjà produits et les anciens
+  documents de décision ne sont ni réécrits, ni déplacés, ni renommés.
 
-L'API de référence est la
+L'interface officielle est la
 [création d'une chat completion OpenRouter](https://openrouter.ai/docs/api/api-reference/chat/create-a-chat-completion).
+La gestion des enveloppes d'échec suit la documentation
+[Errors and Debugging](https://openrouter.ai/docs/api/reference/errors-and-debugging).
 Le catalogue
 [`GET /api/v1/models`](https://openrouter.ai/docs/api/api-reference/models/list-all-models-and-their-properties)
-est réservé à un smoke test humain. Il ne fait pas partie du chemin de
-production et ne doit jamais être appelé par la CI.
+est réservé à un smoke test humain et n'est jamais appelé en production, dans
+Pytest ou dans la CI.
 
-## 2. Problème constaté
+## 2. État réel inventorié
 
-L'état de départ contient trois incohérences structurelles.
+### 2.1 Instructions applicables
 
-### 2.1 Autorités actives encore orientées vers Chutes
+Les modifications à la racine, en Mathématiques et sous `NSI/` obéissent à
+`AGENTS.md`. Toute modification sous `NSI/corpus_nsi/` obéit en plus au fichier
+plus proche `NSI/corpus_nsi/AGENTS.md`, qui impose notamment :
 
-Quatre autorités ou guides actifs demandent encore de consulter Chutes :
+- des gates de policy fail-closed ;
+- la non-promotion automatique des jugements de substance ;
+- la séparation entre auteur et juge ;
+- l'absence de données personnelles d'élèves ;
+- la distinction entre recherche RAG et validation pédagogique.
 
-1. `AGENTS.md` ;
-2. `.agents/skills/nexus-manual-quality/SKILL.md` ;
-3. `CODEX_CAHIER_DES_CHARGES_MANUEL_1SPE.md` ;
-4. `README.md`.
+Ces deux fichiers sont lus intégralement avant le lot Red et relus si leur
+contenu change avant Green.
 
-Une modification limitée à un script laisserait donc le workflow contractuel
-en contradiction avec la décision humaine.
+### 2.2 Quatre appelants réseau LLM actifs
 
-### 2.2 Deux appels directs Anthropic identiques
+L'inventaire de la base identifie quatre appelants à migrer :
 
-Les fichiers suivants sont identiques à la base de conception :
+1. `Mathematiques/manuel-maths/scripts/ingest.py` appelle directement le SDK
+   Anthropic pour classifier un fragment limité à 3 000 caractères ;
+2. `NSI/scripts/ingest.py`, identique au précédent, fait le même appel ;
+3. `NSI/corpus_nsi/scripts/judge_campaign.py` appelle directement
+   `https://api.anthropic.com/v1/messages`, lit `ANTHROPIC_API_KEY` et fixe un
+   modèle Anthropic ;
+4. `NSI/corpus_nsi/scripts/substance_judge.py` construit son endpoint LLM à
+   partir de `LOCAL_LLM_BASE_URL` et peut donc atteindre une URL arbitraire.
 
-- `Mathematiques/manuel-maths/scripts/ingest.py` ;
-- `NSI/scripts/ingest.py`.
+`NSI/corpus_nsi/scripts/run_substance_judge.py` n'appelle actuellement aucun
+LLM : il produit un pré-jugement déterministe hors réseau. Il mentionne
+néanmoins Anthropic et choisit par défaut un nom de modèle Claude. Il doit
+rester déterministe et devenir fournisseur-neutre, sans défaut Claude.
 
-Leur fonction `classify()` :
+### 2.3 Configuration et gouvernance liées
 
-- lit `ANTHROPIC_API_KEY` ;
-- importe le SDK `anthropic` à la demande ;
-- appelle directement un modèle Anthropic ;
-- limite déjà le fragment transmis à 3 000 caractères ;
-- utilise déjà une heuristique locale lorsque la clé est absente.
+Les surfaces actives comprennent aussi :
 
-Cette duplication est le seul appel LLM direct observé dans le code actif. Il
-n'existe aucun client OpenRouter partagé à la racine.
+- `.env.rag.example`, qui expose `LOCAL_LLM_*` ;
+- `scripts/check_rag_config.py`, qui rend ces variables obligatoires ;
+- les tests de gouvernance, de secrets, de juge et de policy ;
+- le `Makefile` et les commandes existantes du corpus ;
+- les requirements du corpus, qui ne contiennent pas encore `httpx` ;
+- les README et documents actifs qui décrivent le RAG ou les juges.
 
-### 2.3 Configuration et documentation durables divergentes
+Les endpoints RAG, embedding et base vectorielle ne sont pas des endpoints LLM.
+Ils restent hors migration lorsque leur usage est le retrieval existant. En
+particulier, `RAG_API_BASE_URL`, `EMBEDDING_BASE_URL` et `VECTOR_DB_URL` ne sont
+ni supprimés ni redirigés vers OpenRouter.
 
-Les dépendances, exemples d'environnement et documents opérationnels citent
-encore Anthropic, sa clé ou son Batch API. `httpx>=0.27` est toutefois déjà
-présent dans les exigences Mathématiques et NSI et déjà utilisé par les deux
-pipelines de collecte. La migration n'exige donc pas un nouveau SDK LLM.
+### 2.4 Collision de noms Python vérifiée
+
+Un paquet racine nommé `scripts` existe, mais les deux manuels et le corpus NSI
+possèdent aussi leur propre dossier `scripts`. Depuis leurs commandes normales,
+le dossier local peut masquer le paquet racine. L'architecture initialement
+envisagée sous `scripts/openrouter_*` est donc abandonnée.
 
 ## 3. Objectifs
 
 Le lot d'implémentation devra :
 
 1. établir une seule frontière réseau LLM, testable et partagée ;
-2. préserver le mode local sans coût et sans réseau ;
-3. faire déléguer les deux ingestions à la même classification ;
-4. supprimer les dépendances et configurations Anthropic directes actives ;
-5. aligner les quatre autorités actives et les guides opérationnels durables ;
-6. empêcher tout retour silencieux à Chutes ou à un fournisseur direct ;
-7. garantir des tests CI entièrement hors réseau ;
-8. préserver les historiques et la traçabilité existante ;
-9. ne modifier aucun contrat métier, contenu scolaire, PDF ou gate de
-   publication.
+2. préserver les modes déterministes locaux et l'absence de réseau en CI ;
+3. faire déléguer les quatre appelants réseau au même client ;
+4. maintenir `run_substance_judge.py` hors réseau et fournisseur-neutre ;
+5. supprimer les dépendances, clés et endpoints LLM directs actifs ;
+6. aligner les autorités, configurations et guides opérationnels actifs ;
+7. empêcher fail-closed l'ajout d'un nouveau client fournisseur hors allowlist ;
+8. préserver les endpoints RAG non-LLM et leurs barrières de collection ;
+9. préserver les historiques, verdicts et preuves existants ;
+10. ne modifier aucun contrat métier, contenu scolaire, PDF ou gate de
+    publication.
 
-## 4. Périmètre exact
-
-### 4.1 Code partagé à créer
-
-- `scripts/openrouter_client.py` : frontière HTTP OpenRouter, validation du
-  protocole et erreurs expurgées ;
-- `scripts/openrouter_classification.py` : heuristique locale, construction du
-  prompt, interprétation et validation de la classification.
-
-### 4.2 Appelants à migrer
-
-- `Mathematiques/manuel-maths/scripts/ingest.py` ;
-- `NSI/scripts/ingest.py`.
-
-Les deux scripts doivent rester des adaptateurs minces et déléguer toute la
-logique de classification au module racine. Ils ne doivent contenir ni endpoint
-LLM, ni client fournisseur, ni logique de sélection de modèle.
-
-Leurs docstrings et commentaires actifs deviennent eux aussi
-fournisseur-neutres ou OpenRouter-only. Le point d'extension vision encore non
-implémenté reste hors périmètre fonctionnel : il ne doit plus annoncer un futur
-appel direct à Claude et ne reçoit aucune implémentation dans ce lot.
-
-Leur chargement du module partagé doit fonctionner depuis les commandes
-existantes `make ingest`. Une résolution déterministe de la racine du dépôt à
-partir de `__file__` est admise ; elle ne doit dépendre ni du répertoire courant
-ni d'un `PYTHONPATH` fourni manuellement. La même adaptation doit être utilisée
-dans les deux fichiers afin de ne pas recréer deux comportements.
-
-### 4.3 Configuration et dépendances actives à migrer
-
-- `Mathematiques/manuel-maths/.env.example` ;
-- `NSI/.env.example` ;
-- `Mathematiques/manuel-maths/requirements.txt` ;
-- `NSI/requirements.txt`.
-
-Pour leur configuration LLM, les exemples d'environnement remplacent la
-variable Anthropic par les deux variables suivantes :
-
-```dotenv
-OPENROUTER_API_KEY=
-OPENROUTER_MODEL=
-```
-
-Les autres variables non LLM, notamment la connexion à la base de données,
-restent inchangées. Les exemples ne contiennent aucune valeur ressemblant à
-une vraie clé. La dépendance `anthropic` est supprimée ; `httpx` existant est
-conservé.
-
-### 4.4 Autorités et documentation actives à aligner
-
-Les quatre autorités actives sont obligatoirement mises à jour :
-
-- `AGENTS.md` ;
-- `.agents/skills/nexus-manual-quality/SKILL.md` ;
-- `CODEX_CAHIER_DES_CHARGES_MANUEL_1SPE.md` ;
-- `README.md`.
-
-Les occurrences opérationnelles actives identifiées doivent également être
-alignées, sans réécriture éditoriale sans rapport :
-
-- `Mathematiques/PROMPT_MISSION_AUTONOME.md` ;
-- `Mathematiques/workflow_production_manuel.md` ;
-- `Mathematiques/manuel-maths/README.md` ;
-- `Mathematiques/manuel-maths/CAHIER_DES_CHARGES.md` ;
-- `Mathematiques/manuel-maths/docs/02_workflow_production.md` ;
-- `Mathematiques/manuel-maths/docs/03_architecture_technique.md` ;
-- `NSI/CAHIER_DES_CHARGES.md` ;
-- `NSI/docs/02_workflow_production.md` ;
-- `NSI/docs/03_architecture_technique.md`.
-
-La mise à jour décrit OpenRouter comme passerelle et
-`OPENROUTER_MODEL` comme sélection explicite. Elle ne promet ni remise de prix,
-ni Batch API, ni modèle par défaut, ni disponibilité permanente d'un modèle.
-
-### 4.5 Tests à créer ou adapter
-
-Les tests racine couvrent le client et la classification partagés. Les tests
-des deux manuels prouvent la délégation des scripts d'ingestion et leur
-exécution depuis leur contexte habituel.
-
-Le nom exact des fichiers de test sera fixé par le plan d'implémentation, mais
-le contrat Red de la section 11 est obligatoire.
-
-## 5. Hors périmètre
-
-Ce lot ne doit pas :
-
-- choisir ou figer dans le dépôt la valeur de production de
-  `OPENROUTER_MODEL` ;
-- créer un routeur multi-modèles ou une liste de modèles de repli ;
-- intégrer un SDK OpenRouter, OpenAI, Anthropic ou Chutes ;
-- ajouter streaming, outils, embeddings, vision, cache, Batch API ou gestion de
-  coûts ;
-- réaliser automatiquement un `GET /api/v1/models` ;
-- effectuer un appel réseau dans un test ou dans la CI ;
-- modifier la logique d'extraction, de découpage, les schémas de chunks ou le
-  contenu des corpus ;
-- corriger les P0 Wave 0, les quatre dettes historiques de séparation élève ou
-  un autre gate déjà rouge ;
-- produire une expertise disciplinaire, une approbation ou une décision de
-  publication ;
-- déplacer les preuves historiques vers `audit/openrouter/` ;
-- réécrire un ancien audit, plan ou spécification pour lui faire refléter la
-  politique présente.
-
-## 6. Architecture cible
+## 4. Architecture cible
 
 ```text
 ingest Mathématiques ─┐
-                     ├─> scripts/openrouter_classification.py
-ingest NSI ──────────┘       ├─ clé absente ─> heuristique locale
-                             └─ clé + modèle
-                                    │
-                                    v
-                         scripts/openrouter_client.py
-                                    │
-                                    v
-                    POST openrouter.ai/api/v1/chat/completions
+ingest NSI ───────────┼─> nexus_external.openrouter_client
+judge_campaign ───────┤          │
+substance_judge ──────┘          v
+                         POST OpenRouter chat/completions
+
+run_substance_judge ─────> pré-jugement déterministe, zéro réseau
+search_rag ───────────────> endpoint RAG existant, distinct du LLM
 ```
 
-### 6.1 `scripts/openrouter_client.py`
+### 4.1 Paquet racine non ambigu
 
-Le module possède une responsabilité unique : transformer une demande de chat
-en requête HTTP OpenRouter et retourner le contenu textuel de la première
-réponse.
+Le code partagé est créé dans :
 
-Son interface publique doit permettre l'injection d'un transport `httpx`, afin
-que `httpx.MockTransport` remplace intégralement le réseau dans les tests. Les
-paramètres métier restent explicites : clé, modèle, messages et limite de
-sortie.
+- `nexus_external/__init__.py` ;
+- `nexus_external/openrouter_client.py` ;
+- `nexus_external/classification.py`.
+
+`nexus_external` ne collisionne avec aucun dossier local existant et matérialise
+la frontière des services externes. Aucun module `scripts/openrouter_*` n'est
+créé.
+
+### 4.2 Découverte déterministe de la racine Git
+
+Les quatre appelants découvrent la racine Git à partir de leur propre
+`Path(__file__).resolve()`, en remontant les parents jusqu'au premier marqueur
+`.git` correspondant au checkout courant. Ils ajoutent cette racine précise au
+chemin d'import avant d'importer `nexus_external`.
+
+Le mécanisme :
+
+- ne dépend pas du répertoire courant ;
+- ne dépend pas d'un `PYTHONPATH` fourni manuellement ;
+- échoue explicitement si la racine n'est pas trouvée ;
+- n'accepte pas une racine passée par l'environnement ;
+- est identique dans les quatre adaptateurs, ou factorisé seulement si cela ne
+  réintroduit aucune collision.
+
+Les commandes à préserver sont :
+
+- Mathématiques : `make ingest` depuis `Mathematiques/manuel-maths/` ;
+- NSI : `python3 scripts/ingest.py` depuis `NSI/` ;
+- corpus : les commandes Python existantes depuis `NSI/corpus_nsi/`, dont
+  `python -m scripts.judge_campaign` et
+  `python -m scripts.substance_judge`.
+
+Aucune nouvelle cible Makefile NSI n'est ajoutée : elle serait sans appelant et
+violerait YAGNI.
+
+### 4.3 `nexus_external/openrouter_client.py`
+
+Le client possède une responsabilité : envoyer une chat completion OpenRouter
+non streamée et retourner le contenu textuel complet de la première choice.
+
+L'interface publique reçoit explicitement la clé, le modèle, les messages, la
+limite de sortie et un transport `httpx` injectable. Les tests remplacent le
+réseau par `httpx.MockTransport`.
 
 Le client :
 
-- utilise une constante interne pour l'URL HTTPS exacte ;
+- fixe en code l'URL HTTPS exacte ;
 - envoie `Content-Type: application/json` et le Bearer attendu ;
-- inclut toujours le champ JSON `model` ;
-- effectue une requête non streamée ;
-- applique un timeout borné sur toutes les phases HTTP ;
-- refuse un modèle vide avant tout appel ;
-- exige une réponse HTTP réussie ;
-- extrait uniquement `choices[0].message.content` si c'est une chaîne non vide ;
-- lève des erreurs applicatives stables et expurgées pour la configuration, le
-  transport, le statut HTTP et le protocole de réponse ;
-- ne journalise ni en-têtes, ni clé, ni prompt, ni réponse brute ;
-- n'effectue aucun nouvel essai implicite dans ce premier lot.
+- inclut un unique champ `model`, jamais `models` ;
+- utilise `max_completion_tokens`, et non `max_tokens` ;
+- utilise `max_completion_tokens: 200` pour la classification des ingestions ;
+- accepte une autre limite explicite et bornée pour les juges, sans changer le
+  modèle ni l'endpoint ;
+- applique un timeout borné à toutes les phases HTTP, au plus 30 secondes par
+  requête dans le premier lot ;
+- refuse une clé ou un modèle vide avant toute requête ;
+- ne suit pas de redirection vers une autre origine ;
+- ne fait aucun retry implicite dans le client partagé ;
+- ne journalise ni clé, ni header, ni prompt, ni réponse brute.
 
-Le timeout recommandé est de 30 secondes au plus par requête. Sa valeur doit
-être centralisée et injectable en test, jamais désactivée.
+### 4.4 Validation stricte de la réponse OpenRouter
 
-### 6.2 `scripts/openrouter_classification.py`
+Une réponse est utilisable uniquement si elle est HTTP 2xx et possède une
+première choice complète avec un `message.content` textuel non vide.
 
-Le module porte les deux chemins de classification et constitue l'interface
-appelée par les ingestions.
+Le client refuse, même sous HTTP 200 :
 
-Il expose conceptuellement :
+- un objet `error` au niveau racine ;
+- un objet `error` dans la première choice ;
+- `finish_reason == "error"` ;
+- une choice absente ou d'un type invalide ;
+- un message absent ou invalide ;
+- un contenu vide ;
+- tout `finish_reason` différent de `stop`, notamment `length`,
+  `content_filter` ou `error` ;
+- une enveloppe non JSON ou de forme inattendue.
 
-- une fonction pure d'heuristique locale ;
-- une fonction de classification qui interprète l'environnement et choisit le
-  chemin local ou OpenRouter ;
-- une fonction pure de décodage et de validation de la sortie du modèle.
+Les tests couvrent au minimum 400, 401, 402, 403, 408, 429 et les erreurs 5xx,
+ainsi que les erreurs dans une enveloppe HTTP 200. Les catégories exposées
+distinguent configuration, paiement/crédits, authentification/autorisation,
+limitation de débit, timeout/transport, indisponibilité et protocole.
 
-Le dictionnaire retourné conserve le contrat actuel. Par exemple, la valeur
-conservatrice est :
+Les exceptions sont stables et expurgées : elles peuvent contenir la catégorie,
+le statut, l'endpoint constant et le modèle public ; elles ne contiennent jamais
+la clé, le prompt, le fragment, le corps brut ou les headers.
+
+## 5. Classification partagée
+
+### 5.1 Deux chemins explicites
+
+`nexus_external/classification.py` expose :
+
+- une heuristique locale pure ;
+- une fonction de classification qui interprète une vue injectée de
+  l'environnement ;
+- une fonction pure qui parse et valide la sortie distante.
+
+La matrice est :
+
+| `OPENROUTER_API_KEY` | `OPENROUTER_MODEL` | Comportement |
+|---|---|---|
+| absente ou vide | toute valeur | heuristique locale, zéro réseau |
+| présente | absente ou vide | erreur de configuration avant réseau |
+| présente | présente | un POST OpenRouter avec ce modèle exact |
+
+Aucun autre nom de variable de clé ou endpoint LLM n'est interprété.
+
+### 5.2 Objet de classification fermé
+
+Le JSON distant valide est un objet fermé contenant exactement les cinq clés :
+
+- `chunk_type` : l'une de `cours`, `methode`, `exercice`, `corrige`,
+  `activite`, `evaluation`, `erreur_type`, `autre` ;
+- `niveau` : l'une de `2GT`, `1SPE`, `TSPE`, `TEXP`, ou `null` ;
+- `theme` : une chaîne, ou `null` ;
+- `capacites` : une liste de chaînes ;
+- `difficulte` : l'entier 1, 2 ou 3, ou `null`.
+
+En Python, `bool` est explicitement refusé pour `difficulte`, même s'il est un
+sous-type de `int`. Une clé manquante ou supplémentaire, un type invalide, un
+enum inconnu ou un JSON non décodable invalide l'objet entier. Il n'y a pas de
+validation ou de fusion champ par champ.
+
+Toute sortie invalide devient le résultat conservateur global :
 
 ```json
 {
@@ -270,272 +266,475 @@ conservatrice est :
 }
 ```
 
-`chunk_type` accepte les valeurs actuelles `cours`, `methode`, `exercice`,
-`corrige`, `activite`, `evaluation`, `erreur_type` et `autre`. `niveau` accepte
-`2GT`, `1SPE`, `TSPE`, `TEXP` ou `null`. `theme` est une chaîne ou `null`,
-`capacites` une liste et `difficulte` l'entier 1, 2 ou 3, ou `null`. Aucun type
-du schéma de chunk n'est modifié.
+Le prompt de classification conserve sa finalité et transmet au plus les
+3 000 premiers caractères du fragment. La requête utilise
+`max_completion_tokens: 200`.
 
-Le prompt conserve le rôle actuel de classification, la limite de sortie
-actuelle de 200 tokens et la consigne de réponse JSON. Seuls les 3 000 premiers
-caractères du fragment sont transmis. L'heuristique peut examiner localement le
-fragment sans l'envoyer.
+### 5.3 Barrière des métadonnées de confiance
 
-Une réponse textuelle entourée d'une clôture Markdown JSON peut être nettoyée
-comme aujourd'hui. Un JSON de classification non décodable produit le résultat
-conservateur historique `chunk_type: autre` avec les autres valeurs vides ; ce
-repli est local et ne déclenche aucun autre fournisseur. En revanche, une
-réponse API sans contenu conforme au protocole, une erreur réseau ou un statut
-HTTP en échec interrompt l'appel avec une erreur expurgée : le pipeline ne
-doit pas basculer silencieusement d'un mode distant commencé vers un mode local.
+Le dictionnaire distant n'est jamais étalé sur le record complet. Seules les
+cinq clés validées sont retournées par la classification, puis l'ingestion
+construit elle-même les métadonnées de confiance :
 
-### 6.3 Matrice de configuration
+- `source_id` ;
+- `doc_url` ;
+- `doc_hash` ;
+- `content_md` ;
+- `usage_policy` ;
+- `tier`.
 
-| `OPENROUTER_API_KEY` | `OPENROUTER_MODEL` | Comportement |
-|---|---|---|
-| absente ou vide | absente, vide ou renseignée | heuristique locale, zéro réseau |
-| présente | absente ou vide | erreur explicite avant tout réseau |
-| présente | présente | un POST OpenRouter avec ce modèle exact |
+Les tests injectent des sorties hostiles contenant ces noms, ou une deuxième
+valeur destinée à les écraser. L'objet distant est rejeté globalement et aucune
+métadonnée de provenance, de contenu ou de politique ne change.
 
-La présence isolée d'un modèle ne doit jamais provoquer un appel. Aucun autre
-nom de variable de clé LLM n'est interprété.
+## 6. Migration des juges du corpus NSI
 
-## 7. Flux détaillé
+### 6.1 `judge_campaign.py`
 
-Pour chaque chunk :
+`judge_campaign.py` remplace son transport Anthropic direct par le client
+OpenRouter partagé. Il lit uniquement `OPENROUTER_API_KEY` et
+`OPENROUTER_MODEL`, d'abord depuis l'environnement puis, pour les valeurs
+absentes, depuis le `.env.rag` local ignoré résolu par
+`scripts.rag_core.resolve_env_file(ROOT)`. Il ne lit plus le `.env` générique.
 
-1. l'ingestion appelle la fonction partagée avec le texte brut ;
-2. la fonction lit une vue injectée de l'environnement ;
-3. sans clé, elle retourne immédiatement l'heuristique locale ;
-4. avec clé, elle exige un modèle non vide ;
-5. elle construit le prompt avec au plus 3 000 caractères de contenu ;
-6. le client envoie un seul POST avec le modèle exact ;
-7. le client valide l'enveloppe OpenRouter et retourne le texte ;
-8. la couche classification nettoie, parse et normalise le JSON ;
-9. l'ingestion assemble le record existant ;
-10. le schéma de chunk existant valide le record avant écriture.
+Le protocole de verdict, les quatre exemples, la validation avant écriture, la
+non-promotion et la séparation juge/auteur restent inchangés. La migration
+adapte les messages au format Chat Completions sans affaiblir les vérifications.
+Le modèle consigné dans `judge_model` est la valeur explicite
+`OPENROUTER_MODEL` réellement demandée, pas une constante Claude.
 
-Il n'existe aucune branche vers Chutes, Anthropic direct ou une autre API LLM.
+Les retries métier déjà explicites dans la campagne peuvent être conservés
+dans l'appelant si leurs tests en bornent le nombre et les délais. Le client
+partagé, lui, reste sans retry et ne sélectionne jamais un modèle de repli.
 
-## 8. Erreurs et observabilité
+### 6.2 `substance_judge.py`
 
-Les erreurs exposées doivent distinguer au minimum :
+Seul le transport LLM de `substance_judge.py` migre vers OpenRouter. La recherche
+`search_rag()` continue d'utiliser `RAG_API_BASE_URL`, son Bearer RAG et les
+barrières de collection existantes. Le lot interdit de réutiliser le client
+OpenRouter pour le RAG.
 
-- configuration incomplète ;
-- timeout ou transport indisponible ;
-- authentification ou autorisation refusée ;
-- limitation de débit ;
-- autre statut HTTP ;
-- enveloppe de réponse invalide.
+Les variables `LOCAL_LLM_ENGINE`, `LOCAL_LLM_BASE_URL`, `LOCAL_LLM_MODEL` et
+`LOCAL_LLM_API_KEY` disparaissent de la configuration active. Aucun endpoint
+local, URL configurable ou défaut `qwen` ne subsiste pour le juge LLM.
 
-Les messages peuvent contenir le type d'erreur, le statut HTTP, l'endpoint
-constant et le modèle public configuré. Ils ne doivent jamais contenir :
+Sans clé OpenRouter, le juge retourne son résultat conservateur actuel sans
+réseau. Avec une clé sans modèle, il échoue avant réseau. Une erreur distante
+reste une erreur expurgée ou un verdict conservateur explicitement attribué à
+l'indisponibilité, selon le contrat existant testé ; elle ne bascule vers aucun
+autre fournisseur et ne promeut jamais un verdict.
 
-- la clé ou le header `Authorization` ;
-- le fragment source ;
-- le prompt complet ;
-- le corps brut d'une réponse distante ;
-- une donnée personnelle ou un secret présent dans l'environnement.
+### 6.3 `run_substance_judge.py`
 
-Le premier lot n'ajoute pas de télémétrie distante. Une sortie locale concise
-est admise si elle respecte ces règles.
+`run_substance_judge.py` reste intégralement déterministe et hors réseau. Il ne
+doit pas importer le client OpenRouter. Sa docstring, ses usages et son option
+`--model` deviennent fournisseur-neutres ; aucun nom Claude n'est la valeur par
+défaut. Le champ `judge_model` doit décrire honnêtement le pré-jugement
+déterministe, par exemple `deterministic-prejudge`, et ne pas laisser croire à
+une consultation distante.
 
-## 9. Sécurité et protection des données
+### 6.4 Gouvernance RAG et requirements
 
-### 9.1 Frontière réseau fermée
+La migration met à jour ensemble :
 
-L'URL n'est pas configurable par variable d'environnement dans ce lot. Elle est
-fixée en HTTPS sur `openrouter.ai`, ce qui évite d'introduire une destination
-arbitraire. Les redirections automatiques ne sont pas nécessaires.
+- `NSI/corpus_nsi/.env.rag.example` ;
+- `NSI/corpus_nsi/scripts/check_rag_config.py` ;
+- les tests qui verrouillent cette configuration ;
+- les tests de secrets concernés ;
+- les documents RAG actifs ;
+- `NSI/corpus_nsi/requirements.txt`.
 
-### 9.2 Secrets
+L'exemple RAG conserve ses variables RAG, embedding, vector DB et SSH. Pour le
+LLM il expose seulement :
 
-- les clés ne sont présentes que dans l'environnement local ou le coffre CI ;
-- aucune CI de ce lot n'a besoin d'une vraie clé ;
-- `.env.example` contient des valeurs vides ;
-- aucune clé ne figure dans Git, les exceptions, snapshots, fixtures ou preuves ;
-- les tests utilisent une valeur sentinelle et prouvent son absence des erreurs
-  et logs.
+```dotenv
+OPENROUTER_API_KEY=
+OPENROUTER_MODEL=
+```
 
-### 9.3 Données transmises
+`check_rag_config.py` exige ces deux clés, exige que la clé d'exemple soit vide,
+refuse les quatre anciennes variables `LOCAL_LLM_*` et continue de contrôler
+les paramètres RAG sans les transformer. Les tests suivent ce contrat
+fail-closed.
 
-- au plus 3 000 caractères du chunk sont envoyés ;
-- aucun secret, donnée personnelle ou contenu élève non anonymisé n'est envoyé ;
-- le modèle ne reçoit que le strict fragment nécessaire à la classification ;
-- aucun fichier, manifeste complet, variable d'environnement ou métadonnée de
-  machine n'est joint ;
-- la sortie du modèle est une donnée non fiable, bornée, parsée puis validée
-  avant toute écriture.
+`httpx==0.28.1` est ajouté au requirements du corpus afin que ses tests isolés
+puissent importer le client partagé. Cette version est compatible avec le
+contrat `httpx>=0.27` des deux autres projets. Aucun SDK LLM n'est ajouté.
 
-### 9.4 Autorité des résultats
+## 7. Données, secrets et sécurité
+
+### 7.1 Précondition opératoire
+
+Le code ne peut pas prouver qu'un texte libre ne contient aucune donnée
+personnelle ou aucun secret. Avant d'activer OpenRouter, l'opérateur doit donc
+vérifier que le fragment est autorisé, anonymisé si nécessaire, et exempt de
+secret. Un contenu qui ne satisfait pas cette précondition reste en mode local
+ou est rejeté ; il n'est pas transmis.
+
+Cette règle complète, sans la remplacer, l'interdiction du plus proche
+`NSI/corpus_nsi/AGENTS.md` concernant les données d'élèves.
+
+### 7.2 Propriétés prouvables par le code
+
+Pour la classification des ingestions, les tests prouvent que la requête ne
+contient que :
+
+- les instructions statiques de classification ;
+- au plus les 3 000 premiers caractères du fragment fourni ;
+- le modèle explicite et la limite de sortie.
+
+Elle ne contient aucune variable d'environnement supplémentaire, métadonnée de
+source, URL de document, hash, manifeste, chemin de machine ou fichier joint.
+
+Pour les juges de substance, les données nécessaires sont plus larges et déjà
+définies par leurs protocoles. La migration ne les étend pas. Leurs tests
+prouvent que le client reçoit uniquement les messages construits par l'appelant
+et aucune copie implicite de l'environnement.
+
+### 7.3 Secrets et erreurs
+
+- les vraies clés restent dans l'environnement ou un fichier local ignoré ;
+- les exemples committés utilisent une valeur vide ;
+- la CI n'a besoin d'aucune vraie clé ;
+- les tests utilisent des sentinelles et prouvent leur absence des exceptions,
+  logs et artefacts ;
+- la clé n'est jamais écrite dans une preuve, un verdict ou un snapshot ;
+- les réponses distantes restent non fiables et sont validées avant usage.
 
 Une réponse OpenRouter reste consultative. Elle ne vaut ni source officielle,
-ni validation mathématique, ni conformité programme, ni approbation humaine.
-Les sources, tests, builds et validations humaines conservent leur priorité.
+ni validation scientifique, ni validation pédagogique, ni approbation humaine.
 
-## 10. Smoke test et preuves futures
+## 8. Surfaces actives canoniques
 
-Le `GET https://openrouter.ai/api/v1/models` est autorisé uniquement lors d'un
-smoke test humain explicite. Il sert à vérifier qu'une clé locale est valide et
-que la valeur choisie de `OPENROUTER_MODEL` apparaît dans le catalogue courant.
+Le gate de politique utilise l'allowlist versionnée ci-dessous. Une surface
+active ajoutant un transport LLM ou un client fournisseur en dehors de cette
+liste fait échouer le gate ; le scan ne se contente pas d'une recherche négative
+sur un fichier éventuellement absent.
 
-Ce smoke test :
+### 8.1 Code actif autorisé
 
-- n'est jamais exécuté par Pytest ou la CI ;
-- ne choisit pas automatiquement un modèle ;
-- ne modifie pas la configuration ;
-- n'enregistre ni clé ni réponse brute exhaustive ;
-- n'est pas requis lorsque la clé est absente ;
-- ne transforme pas l'indisponibilité distante en échec des gates hors réseau.
+- `nexus_external/__init__.py` ;
+- `nexus_external/openrouter_client.py` — seul fichier autorisé à contenir
+  l'endpoint OpenRouter et à instancier le client HTTP LLM ;
+- `nexus_external/classification.py` ;
+- `Mathematiques/manuel-maths/scripts/ingest.py` ;
+- `NSI/scripts/ingest.py` ;
+- `NSI/corpus_nsi/scripts/judge_campaign.py` ;
+- `NSI/corpus_nsi/scripts/substance_judge.py` ;
+- `NSI/corpus_nsi/scripts/run_substance_judge.py` ;
+- `NSI/corpus_nsi/scripts/check_rag_config.py` ;
+- `NSI/corpus_nsi/scripts/check_rag_freshness.py` — réseau RAG seulement ;
+- `NSI/corpus_nsi/scripts/ingest_nsi_corpus.py` — ingestion, embedding et vector
+  DB seulement ;
+- `NSI/corpus_nsi/scripts/rag_diagnose_search_timeout.py` — diagnostic RAG
+  seulement ;
+- `NSI/corpus_nsi/scripts/rag_ingest_server.py` — embedding et Chroma seulement ;
+- `NSI/corpus_nsi/scripts/rag_query_example.py` — génération d'un exemple de
+  requête RAG, sans client LLM ;
+- `NSI/corpus_nsi/scripts/rag_smoke_test.py` — smoke RAG seulement.
 
-Les nouvelles consultations ou smoke tests utiles seront consignés sous
-`audit/openrouter/` avec, au minimum : date, objectif, modèle explicite, nature
-des données envoyées, résultat synthétique, vérification locale et décision de
-retenir ou rejeter la recommandation. Les secrets et données personnelles sont
-interdits dans ces preuves.
+Les quatre appelants peuvent importer le client, mais ne contiennent aucun
+endpoint LLM, import de SDK fournisseur ou création de client HTTP LLM.
+Les six fichiers RAG nommés peuvent instancier leur transport existant
+uniquement vers les variables et endpoints non-LLM documentés. Le gate inspecte
+leurs sources/destinations et refuse qu'ils deviennent une exemption générique
+pour un appel de chat, de messages ou de completions.
 
-## 11. Contrat TDD
+### 8.2 Configuration, dépendances et workflows actifs
 
-L'implémentation suit strictement Red, Green, puis Refactor.
+- `Mathematiques/manuel-maths/.env.example` ;
+- `NSI/.env.example` ;
+- `NSI/corpus_nsi/.env.rag.example` ;
+- `Mathematiques/manuel-maths/requirements.txt` ;
+- `NSI/requirements.txt` ;
+- `NSI/corpus_nsi/requirements.txt` ;
+- `requirements-ci-audit.txt`, complété par `httpx==0.28.1` et sa fermeture
+  transitive épinglée puisque les workflows racine installent avec `--no-deps` ;
+- `pyproject.toml` ;
+- `Mathematiques/manuel-maths/Makefile` ;
+- `NSI/Makefile` ;
+- `NSI/corpus_nsi/Makefile` ;
+- `.github/workflows/ci-audit-collection.yml` ;
+- `.github/workflows/ci-mathematiques.yml` ;
+- `.github/workflows/ci-nsi.yml` ;
+- `NSI/corpus_nsi/.github/workflows/ci.yml`.
 
-### 11.1 Red — tests écrits avant la production
+Les Makefiles et workflows ne reçoivent aucune nouvelle cible réseau. Ils sont
+scannés pour prouver que Pytest/CI n'appelle ni OpenRouter, ni le catalogue des
+modèles, ni un fournisseur direct.
 
-Le jalon Red doit échouer pour les raisons attendues et couvrir :
+### 8.3 Tests actifs à créer ou adapter
 
-1. l'URL exacte, le POST, le Bearer, le JSON et le modèle explicite ;
-2. l'injection d'un `httpx.MockTransport` sans accès réseau ;
-3. la matrice complète des variables d'environnement ;
-4. l'absence totale de requête lorsque la clé est absente ;
-5. l'erreur avant requête lorsque la clé existe sans modèle ;
-6. le timeout borné ;
-7. l'extraction d'une réponse OpenRouter valide ;
-8. les erreurs expurgées pour timeout, 401/403, 429, 5xx et protocole invalide ;
-9. l'absence de la clé sentinelle dans exceptions et logs ;
-10. la limite de 3 000 caractères transmis ;
-11. la conservation de l'heuristique locale ;
-12. le résultat conservateur sur JSON de classification non décodable ;
-13. la délégation des deux ingestions au module racine ;
-14. l'absence d'import ou dépendance `anthropic` dans le code actif ;
-15. l'absence de `ANTHROPIC_API_KEY` dans la configuration active ;
-16. l'absence d'instruction active appelant Chutes dans les quatre autorités ;
-17. l'absence d'appel à `/api/v1/models` dans les tests et workflows CI ;
-18. l'exécution des deux scripts depuis leurs commandes et répertoires prévus.
+- `tests/test_openrouter_client.py` ;
+- `tests/test_openrouter_classification.py` ;
+- `tests/test_external_provider_policy.py` ;
+- `Mathematiques/manuel-maths/tests/test_ingest_openrouter.py` ;
+- `NSI/tests/test_ingest_openrouter.py` ;
+- `NSI/corpus_nsi/tests/test_openrouter_judges.py` ;
+- `NSI/corpus_nsi/tests/test_rag_governance_and_indexes.py` ;
+- `NSI/corpus_nsi/tests/test_secret_guard.py` ;
+- `NSI/corpus_nsi/tests/test_substance_judge_pipeline.py` ;
+- `NSI/corpus_nsi/tests/test_substance_hardened.py` ;
+- `NSI/corpus_nsi/tests/test_judge_collection_barriers.py` ;
+- `NSI/corpus_nsi/tests/test_policy_checker_ast.py`.
 
-Les scans de politique utilisent une liste explicite de surfaces actives et
-une liste d'exclusions historiques. Ils ne doivent pas échouer sur une preuve
-ancienne qui mentionne fidèlement Chutes ou Anthropic.
+Les mutations du gate ajoutent un faux client `requests`, `urllib`, `httpx` ou
+SDK fournisseur dans un nouveau fichier actif et doivent obtenir un échec.
 
-### 11.2 Green — minimum de production
+### 8.4 Documentation active à aligner
 
-Le jalon Green ajoute uniquement :
+Les quatre autorités ou guides racine sont obligatoires :
 
-- le client HTTP partagé ;
+- `AGENTS.md` ;
+- `.agents/skills/nexus-manual-quality/SKILL.md` ;
+- `CODEX_CAHIER_DES_CHARGES_MANUEL_1SPE.md` ;
+- `README.md`.
+
+Les surfaces opérationnelles identifiées sont également alignées :
+
+- `Mathematiques/PROMPT_MISSION_AUTONOME.md` ;
+- `Mathematiques/workflow_production_manuel.md` ;
+- `Mathematiques/manuel-maths/README.md` ;
+- `Mathematiques/manuel-maths/CAHIER_DES_CHARGES.md` ;
+- `Mathematiques/manuel-maths/docs/02_workflow_production.md` ;
+- `Mathematiques/manuel-maths/docs/03_architecture_technique.md` ;
+- `NSI/CAHIER_DES_CHARGES.md` ;
+- `NSI/docs/02_workflow_production.md` ;
+- `NSI/docs/03_architecture_technique.md` ;
+- `NSI/corpus_nsi/README.md` ;
+- `NSI/corpus_nsi/rag_connection.md` ;
+- `NSI/corpus_nsi/substance_pipeline.md` ;
+- `NSI/corpus_nsi/docs/enrichment_roadmap.md` lorsqu'il prescrit encore une
+  campagne active.
+
+Les formulations ne promettent ni remise, ni Batch API, ni modèle par défaut,
+ni disponibilité permanente.
+
+## 9. Exclusions historiques immuables
+
+Le gate distingue les instructions actives des traces datées. Les chemins ou
+catégories suivants sont exclus des migrations textuelles et protégés par hash
+ou par diff d'allowlist :
+
+- `audit/chutes/**` ;
+- les autres fichiers existants sous `audit/**` qui relatent un état antérieur ;
+- `docs/codex/**` lorsqu'il décrit un contrôle daté ;
+- les anciens fichiers sous `docs/superpowers/plans/**` ;
+- les anciennes spécifications sous `docs/superpowers/specs/**`, à l'exception
+  du présent fichier corrigé ;
+- `NSI/corpus_nsi/reports/**`, y compris explicitement
+  `reports/excellence_remediation_progress.md`, même lorsqu'un rapport conserve
+  une ancienne instruction Anthropic ;
+- `NSI/corpus_nsi/docs/judge_campaign_plan.md`, plan daté et en lecture seule ;
+- `NSI/corpus_nsi/substance_reviews/**` et tout verdict JSON déjà produit ;
+- les manifests et inventaires générés décrivant l'état antérieur ;
+- les fixtures historiques qui représentent explicitement une ancienne preuve,
+  sauf si elles sont l'entrée active d'un test de la nouvelle politique.
+
+Une occurrence historique n'est pas une instruction active. Elle ne doit pas
+faire échouer un scan correctement routé, et elle ne doit jamais être réécrite
+pour faire croire que le passé utilisait OpenRouter.
+
+Les nouvelles consultations ou smoke tests sont consignés sous
+`audit/openrouter/`. Aucun nouvel artefact n'est écrit sous `audit/chutes/`.
+
+## 10. Contrat TDD Red
+
+Le jalon Red est committé avant toute modification de production. Chaque famille
+échoue pour une raison attendue et aucune erreur de collecte ne masque le Red.
+
+### 10.1 Client OpenRouter
+
+Les tests couvrent :
+
+1. URL exacte, POST, Bearer, JSON, `model` unique et
+   `max_completion_tokens` ;
+2. injection de `httpx.MockTransport` et zéro socket réel ;
+3. timeout borné et redirections non suivies ;
+4. extraction d'une réponse complète ;
+5. refus des erreurs HTTP 400, 401, 402, 403, 408, 429 et 5xx ;
+6. refus d'un objet `error` racine ou dans la choice sous HTTP 200 ;
+7. refus de `finish_reason: error`, `length` ou autre contenu partiel ;
+8. refus d'une enveloppe, choice, message ou content mal typé ;
+9. absence des clés, prompts et corps bruts dans exceptions et logs ;
+10. absence de retry ou de modèle de repli implicite.
+
+### 10.2 Classification
+
+Les tests couvrent :
+
+1. la matrice complète clé/modèle ;
+2. zéro requête sans clé ;
+3. erreur avant requête avec clé sans modèle ;
+4. limite exacte de 3 000 caractères du fragment envoyé ;
+5. `max_completion_tokens: 200` ;
+6. conservation de l'heuristique locale ;
+7. objet valide avec exactement cinq clés ;
+8. rejet global des clés manquantes, extras, enums et types invalides ;
+9. rejet explicite de `True` et `False` pour `difficulte` ;
+10. résultat conservateur global sur toute sortie invalide ;
+11. impossibilité d'écraser les six métadonnées de confiance ;
+12. absence d'environnement, chemin, URL, hash ou métadonnée ajoutés au prompt.
+
+### 10.3 Quatre appelants et pré-jugement
+
+Les tests couvrent :
+
+1. la délégation des deux ingestions au paquet racine ;
+2. l'exécution de `make ingest` côté Mathématiques et de
+   `python3 scripts/ingest.py` côté NSI dans un scénario sans source/réseau ;
+3. la délégation de `judge_campaign.py` au client commun, sans endpoint ni clé
+   Anthropic ;
+4. la délégation du seul transport LLM de `substance_judge.py`, sans modifier
+   son transport RAG ;
+5. la disparition de `LOCAL_LLM_*` et de tout endpoint LLM arbitraire ;
+6. le fonctionnement déterministe de `run_substance_judge.py`, sans import
+   réseau ni défaut Claude ;
+7. la non-promotion des verdicts et la conservation des vetos existants ;
+8. la découverte de la racine depuis chacun des quatre `__file__`, avec un
+   répertoire courant différent ;
+9. l'absence d'import `anthropic` et de lecture `ANTHROPIC_API_KEY` actifs.
+
+### 10.4 Policy, gouvernance et historique
+
+Les tests couvrent :
+
+1. l'allowlist canonique des surfaces actives ;
+2. l'échec sur tout nouveau client fournisseur hors allowlist ;
+3. la présence des fichiers scannés avant toute assertion négative ;
+4. la conservation des endpoints RAG non-LLM ;
+5. le contrat `.env.rag.example` et `check_rag_config.py` ;
+6. l'absence de Chutes dans les quatre autorités actives ;
+7. l'absence de `/api/v1/models` dans les tests, Makefiles et workflows CI ;
+8. l'intégrité des catégories historiques protégées ;
+9. l'absence de nouvelle cible Makefile NSI pour l'ingestion ;
+10. l'absence de réseau réel dans toutes les suites ciblées.
+
+Le corpus NSI n'est pas collecté par la configuration Pytest racine. Son contrat
+est donc exécuté séparément :
+
+```bash
+cd NSI/corpus_nsi
+python -m pytest \
+  tests/test_rag_governance_and_indexes.py \
+  tests/test_secret_guard.py \
+  tests/test_openrouter_judges.py \
+  tests/test_substance_judge_pipeline.py \
+  tests/test_substance_hardened.py \
+  tests/test_judge_collection_barriers.py \
+  tests/test_policy_checker_ast.py
+```
+
+Le plan peut ajouter un fichier de test ciblé à cette commande, sans lancer le
+réseau.
+
+## 11. Green minimal et Refactor
+
+### 11.1 Green
+
+Green ajoute uniquement :
+
+- le paquet `nexus_external` ;
 - la classification partagée ;
-- les deux délégations d'ingestion ;
-- la configuration et les dépendances minimales ;
-- l'alignement documentaire actif ;
-- les tests nécessaires pour rendre le contrat Red vert.
+- les quatre délégations réseau ;
+- la neutralisation documentaire de `run_substance_judge.py` ;
+- les requirements et exemples d'environnement nécessaires ;
+- la mise à jour coordonnée de `check_rag_config.py` et de ses tests ;
+- le gate de policy allowlist ;
+- l'alignement des autorités et documents actifs ;
+- les tests nécessaires pour rendre Red vert.
 
-Aucun élargissement fonctionnel n'est admis pour obtenir Green.
+Il n'ajoute ni SDK LLM, ni nouvelle cible Makefile, ni modèle par défaut, ni
+sélection automatique, ni nouvelle fonction RAG.
 
-### 11.3 Refactor
+### 11.2 Refactor
 
-Après Green seulement, les doublons de prompt ou d'heuristique encore présents
-peuvent être retirés. Le refactor doit conserver les mêmes tests, le même schéma
-de chunk et l'absence de réseau en CI.
+Après Green seulement, les doublons de prompt, validation ou découverte de
+racine peuvent être réduits si le refactor conserve :
+
+- les commandes existantes ;
+- les schémas de chunks et verdicts ;
+- les vetos du juge ;
+- les endpoints RAG ;
+- l'absence de réseau en CI ;
+- tous les tests de mutation du gate.
 
 ## 12. Gates d'acceptation
 
-Le lot OpenRouter est acceptable lorsque :
+Le lot est acceptable lorsque :
 
-- tous les tests ciblés sont verts avec `MockTransport` ;
-- les tests prouvent qu'aucune requête réelle n'a lieu ;
+- les tests ciblés racine sont verts avec `MockTransport` ;
+- la suite ciblée séparée du corpus NSI est verte ;
 - Ruff et les contrôles Python affectés sont verts ;
-- les deux commandes d'ingestion chargent le module partagé dans leur contexte
-  normal ;
-- `anthropic` a disparu des requirements actifs et des imports de production ;
-- aucune configuration active ne lit `ANTHROPIC_API_KEY` ;
+- les commandes des deux ingestions chargent `nexus_external` depuis leur
+  contexte normal ;
+- `anthropic` a disparu des requirements/imports actifs et
+  `ANTHROPIC_API_KEY` de la configuration active ;
+- `LOCAL_LLM_*` a disparu de la configuration et du transport LLM actifs ;
+- le seul endpoint LLM actif est dans
+  `nexus_external/openrouter_client.py` ;
+- les endpoints RAG existants et leurs barrières restent inchangés ;
 - les quatre autorités prescrivent OpenRouter et n'ordonnent plus Chutes ;
-- les documents opérationnels actifs ne recommandent plus un appel fournisseur
-  direct ;
-- les fichiers modifiés respectent l'allowlist du lot ;
+- le gate échoue lorsqu'un client fournisseur fictif est ajouté hors allowlist ;
+- aucun test, Makefile ou workflow CI n'appelle un service LLM ou
+  `/api/v1/models` ;
+- les catégories historiques exclues sont octet-identiques à la base ;
 - `git diff --check` est vert ;
-- les répertoires `audit/chutes/**`, les audits existants et les anciens
-  plans/spécifications sont inchangés ;
 - `--release-strict` reste rouge pour les dettes éditoriales réelles et n'est
   ni affaibli ni requalifié.
 
-Le smoke test humain OpenRouter est une preuve externe séparée. Son absence ne
-rend pas rouges les tests hors réseau ; sa réussite ne rend pas le manuel
-publiable.
+Le smoke test humain OpenRouter est séparé. Sa réussite ne vaut ni validation
+disciplinaire, ni correction P0, ni autorisation de publication.
 
-## 13. Commits atomiques attendus pour l'implémentation
+## 13. Commits atomiques attendus
 
-L'ordre recommandé est :
+L'ordre recommandé pour l'implémentation est :
 
 1. `[TESTS] verrouille la passerelle OpenRouter` — contrat Red uniquement ;
-2. `[PYTHON] centralise les appels LLM via OpenRouter` — client,
-   classification, ingestions, dépendances et exemples d'environnement ;
+2. `[PYTHON] centralise les appels LLM via OpenRouter` — paquet partagé,
+   quatre appelants, pré-jugement neutre, requirements et configurations ;
 3. `[DOCS] aligne les autorites sur OpenRouter` — autorités et documentation
    opérationnelle actives ;
-4. `[AUDIT] consigne le smoke OpenRouter` — uniquement si un smoke humain a
-   réellement été exécuté et vérifié.
+4. `[AUDIT] consigne le smoke OpenRouter` — seulement après un smoke humain
+   réellement exécuté et vérifié.
 
-Une correction issue de revue reçoit un commit supplémentaire ciblé. Aucun
-commit ne mélange cette migration avec une correction mathématique, un
-changement de baseline visuelle, une migration de corpus ou un P0 Wave 0.
+Une correction issue de revue reçoit un commit ciblé supplémentaire. Aucun
+commit ne mélange la migration avec une correction mathématique, une baseline
+visuelle, une migration de corpus ou un P0 Wave 0.
 
-## 14. Préservation des historiques
-
-Les chemins suivants sont des preuves ou décisions historiques et restent
-immuables dans ce lot :
-
-- `audit/chutes/**` ;
-- les autres audits existants mentionnant Chutes ou OpenRouter ;
-- les manifests de revues visuelles existants ;
-- `docs/codex/**` lorsqu'il décrit un état contrôlé antérieur ;
-- les anciens fichiers sous `docs/superpowers/plans/` ;
-- les anciennes spécifications sous `docs/superpowers/specs/`.
-
-Leur vocabulaire historique n'est pas une instruction active. Toute preuve
-nouvelle utilise `audit/openrouter/`. Cette séparation empêche de falsifier
-l'état observé à une date antérieure.
-
-## 15. Interaction avec Wave 0
+## 14. Interaction avec Wave 0
 
 Les trois plans Green P0 approuvés — provenance programme TSPE, séparation
-élève/professeur et préflight des débordements — sont indépendants du
-fournisseur externe. Ils continuent à s'exécuter hors réseau et ne doivent pas
-être modifiés par ce lot.
+élève/professeur et préflight des débordements — restent fournisseur-agnostiques
+et hors réseau.
 
-En particulier :
-
-- la correction Programme reste un lot autonome ;
+- la correction Programme reste autonome ;
 - la tâche 2 Séparation reste bloquée séparément sur quatre dettes historiques
-  déjà observées sur sa base propre ;
+  observées sur sa base propre ;
 - le lot Overflow reste empilé selon son plan approuvé ;
 - aucun test Wave 0 n'est supprimé, ignoré, transformé en `skip`/`xfail` ou
-  requalifié pour faciliter OpenRouter ;
+  requalifié ;
 - aucune consultation Chutes n'est effectuée pendant Wave 0 ;
-- OpenRouter n'est pas requis pour poursuivre les travaux déterministes locaux.
+- OpenRouter n'est pas requis pour les travaux déterministes locaux.
 
-La branche d'implémentation OpenRouter doit donc rester distincte des branches
-Green P0 jusqu'à une décision humaine d'intégration. La migration du
-fournisseur ne vaut correction d'aucun P0 et ne change pas le **NO-GO**.
+La branche OpenRouter reste distincte des branches Green P0 jusqu'à une décision
+humaine d'intégration. Cette migration ne corrige aucun P0 et ne change pas le
+**NO-GO**.
 
-## 16. Critères de réussite de la décision
+## 15. Critères de réalisation de la décision
 
-La décision « OpenRouter-only » est effectivement réalisée seulement si les
-quatre propriétés suivantes sont simultanément prouvées :
+La décision « OpenRouter-only » est implémentée seulement si les cinq propriétés
+suivantes sont simultanément prouvées :
 
-1. **unicité réseau** — chaque appel LLM actif atteint uniquement l'endpoint
+1. **unicité réseau LLM** — tout appel LLM actif atteint uniquement l'endpoint
    OpenRouter fixé ;
-2. **unicité logique** — les deux ingestions utilisent la même classification
-   partagée ;
-3. **mode local réel** — sans clé, les mêmes entrées sont classées sans aucun
-   réseau ;
-4. **traçabilité honnête** — les autorités actives sont à jour et les preuves
-   historiques restent intactes.
+2. **unicité du transport** — les quatre appelants utilisent le même client
+   `nexus_external` ;
+3. **mode local réel** — sans clé, les chemins locaux restent sans réseau ;
+4. **séparation RAG/LLM** — les endpoints RAG restent distincts et ne servent
+   jamais de destination LLM ;
+5. **traçabilité honnête** — les autorités actives sont à jour et les preuves,
+   verdicts et rapports historiques restent intacts.
 
-Tant que l'un de ces critères manque, le dépôt ne peut pas déclarer
-l'exclusivité OpenRouter comme implémentée.
+Tant qu'une propriété manque, le dépôt ne déclare pas l'exclusivité OpenRouter
+comme réalisée.
