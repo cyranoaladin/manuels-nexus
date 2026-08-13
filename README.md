@@ -379,6 +379,10 @@ Le registre canonique et la table des sources attribuent désormais à TSPE le
 NOR `MENE1921246A`, en cohérence avec le programme de spécialité mathématiques
 de Terminale. Les rapports datés conservent la trace de l'erreur antérieure.
 
+**Actualisation post-audit — Wave 0.**
+
+La provenance TSPE est corrigée et n'est plus un P0 ouvert.
+
 Pour 1NSI, une preuve officielle archivée sous
 [audit/sources/1nsi](audit/sources/1nsi/) confirme `MENE1901633A`, mais l'entrée
 `SRC-BO2019-NSI-PREMIERE` du registre ne porte encore ni `arrete` ni `url`.
@@ -880,8 +884,8 @@ validation des manuels.
    « Géométrie dans l'espace » dépasse d'environ `127.741 pt`.
 3. **Renvois et identifiants.** Le PDF élève 1SPE contient 50 renvois
    provisoires sur 37 pages ; le PDF TSPE en contient 13 sur neuf pages.
-
-La provenance TSPE est corrigée et n'est plus un P0 ouvert.
+4. **Provenance TSPE.** Le registre porte `MENE1921262A` (STMG) au lieu de
+   `MENE1921246A` (spécialité mathématiques).
 
 Le contrôle courant des fuites élèves ne recherche pas encore toutes les
 formulations observées. Le préflight Mathématiques accepte les grands
