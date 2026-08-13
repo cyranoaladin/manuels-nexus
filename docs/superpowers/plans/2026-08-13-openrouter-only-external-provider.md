@@ -1328,7 +1328,7 @@ NODES=(
   tests/test_ingest_openrouter.py::test_math_network_guard_mutation_is_effective
 )
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
-  python3 -m pytest --collect-only -q -p no:cacheprovider "${NODES[@]}" > "$COLLECT"
+  python3 -m pytest --rootdir=. --collect-only -q -p no:cacheprovider "${NODES[@]}" > "$COLLECT"
 test "$(sed -n '/^tests\//p' "$COLLECT" | wc -l)" -eq 4
 for node in "${NODES[@]}"; do rg -Fx -- "$node" "$COLLECT"; done
 set +e
@@ -1384,7 +1384,7 @@ NODES=(
   tests/test_ingest_openrouter.py::test_math_no_source_command_does_not_import_extraction_backends
 )
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
-  python3 -m pytest --collect-only -q -p no:cacheprovider "${NODES[@]}" > "$COLLECT"
+  python3 -m pytest --rootdir=. --collect-only -q -p no:cacheprovider "${NODES[@]}" > "$COLLECT"
 test "$(sed -n '/^tests\//p' "$COLLECT" | wc -l)" -eq 4
 for node in "${NODES[@]}"; do rg -Fx -- "$node" "$COLLECT"; done
 set +e
@@ -1444,7 +1444,7 @@ NODES=(
   tests/test_ingest_openrouter.py::test_nsi_network_guard_mutation_is_effective
 )
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
-  python3 -m pytest --collect-only -q -p no:cacheprovider "${NODES[@]}" > "$COLLECT"
+  python3 -m pytest --rootdir=. --collect-only -q -p no:cacheprovider "${NODES[@]}" > "$COLLECT"
 test "$(sed -n '/^tests\//p' "$COLLECT" | wc -l)" -eq 4
 for node in "${NODES[@]}"; do rg -Fx -- "$node" "$COLLECT"; done
 set +e
@@ -1500,7 +1500,7 @@ NODES=(
   tests/test_ingest_openrouter.py::test_nsi_no_source_command_does_not_import_extraction_backends
 )
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
-  python3 -m pytest --collect-only -q -p no:cacheprovider "${NODES[@]}" > "$COLLECT"
+  python3 -m pytest --rootdir=. --collect-only -q -p no:cacheprovider "${NODES[@]}" > "$COLLECT"
 test "$(sed -n '/^tests\//p' "$COLLECT" | wc -l)" -eq 4
 for node in "${NODES[@]}"; do rg -Fx -- "$node" "$COLLECT"; done
 set +e
@@ -1532,9 +1532,9 @@ IMPL_ROOT=/home/alaeddine/Documents/Manuels_Nexus/.worktrees/green-openrouter-on
 cd "$IMPL_ROOT"
 python3 -m pytest --collect-only -q -p no:cacheprovider tests/test_external_provider_policy.py
 cd "$IMPL_ROOT/Mathematiques/manuel-maths"
-python3 -m pytest --collect-only -q -p no:cacheprovider tests/test_ingest_openrouter.py
+python3 -m pytest --rootdir=. --collect-only -q -p no:cacheprovider tests/test_ingest_openrouter.py
 cd "$IMPL_ROOT/NSI"
-python3 -m pytest --collect-only -q -p no:cacheprovider tests/test_ingest_openrouter.py
+python3 -m pytest --rootdir=. --collect-only -q -p no:cacheprovider tests/test_ingest_openrouter.py
 ```
 
 Expected: trois processus de collecte verts : exactement 12 policy, 8 Mathématiques et 8 NSI ; aucune paramétrisation, zéro skip et zéro import futur à la collecte.
@@ -1969,7 +1969,7 @@ for prefix, cwd in (("math", root / "Mathematiques/manuel-maths"), ("nsi", root 
         f"test_{prefix}_network_guard_mutation_is_effective",
     )
     expected = {f"tests/test_ingest_openrouter.py::{name}" for name in names}
-    out = subprocess.check_output([sys.executable, "-m", "pytest", "--collect-only", "-q", "-p", "no:cacheprovider", "tests/test_ingest_openrouter.py"], cwd=cwd, text=True, env=clean_env)
+    out = subprocess.check_output([sys.executable, "-m", "pytest", "--rootdir=.", "--collect-only", "-q", "-p", "no:cacheprovider", "tests/test_ingest_openrouter.py"], cwd=cwd, text=True, env=clean_env)
     actual = {line for line in out.splitlines() if line.startswith("tests/")}
     assert actual == expected, (prefix, actual - expected, expected - actual)
     assert len(actual) == 8
@@ -4059,10 +4059,10 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
   tests/test_openrouter_client.py tests/test_openrouter_classification.py \
   tests/test_external_provider_policy.py > "$NODE_TMP/core.nodes"
 cd "$IMPL_ROOT/Mathematiques/manuel-maths"
-env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL PYTHONPATH="$GUARD_ROOT" NEXUS_NETWORK_GUARD_MARKER="$MARKER" python3 -m pytest --collect-only -q -p no:cacheprovider \
+env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL PYTHONPATH="$GUARD_ROOT" NEXUS_NETWORK_GUARD_MARKER="$MARKER" python3 -m pytest --rootdir=. --collect-only -q -p no:cacheprovider \
   tests/test_ingest_openrouter.py > "$NODE_TMP/math.nodes"
 cd "$IMPL_ROOT/NSI"
-env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL PYTHONPATH="$GUARD_ROOT" NEXUS_NETWORK_GUARD_MARKER="$MARKER" python3 -m pytest --collect-only -q -p no:cacheprovider \
+env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL PYTHONPATH="$GUARD_ROOT" NEXUS_NETWORK_GUARD_MARKER="$MARKER" python3 -m pytest --rootdir=. --collect-only -q -p no:cacheprovider \
   tests/test_ingest_openrouter.py > "$NODE_TMP/nsi.nodes"
 cd "$IMPL_ROOT/NSI/corpus_nsi"
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL PYTHONPATH="$GUARD_ROOT" NEXUS_NETWORK_GUARD_MARKER="$MARKER" python3 -m pytest --collect-only -q -p no:cacheprovider \
