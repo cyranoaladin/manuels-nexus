@@ -3863,9 +3863,9 @@ git diff --check
 
 Expected: policy complète verte ; des occurrences peuvent rester dans les catégories historiques exclues et ne constituent pas un échec.
 
-### Task 16: Revoir et committer la documentation active
+### Task 16: Revoir et committer le lot documentaire initial
 
-**Files:** exactement les quatre autorités de Task 14 et les treize chemins explicitement énumérés dans Task 15 ; aucun autre document.
+**Files:** exactement les quatre autorités de Task 14 et les treize chemins explicitement énumérés dans Task 15 ; aucun autre document. Ce lot initial de dix-sept chemins est complété par Task 16A après le constat de revue du 14 août 2026.
 
 - [ ] **Step 1: Confier la fermeture documentaire à un implementer frais**
 
@@ -3972,6 +3972,77 @@ test -z "$(git status --short)"
 ```
 
 Expected: troisième commit canonique atomique, après le commit de correction `[TESTS]` supplémentaire autorisé par la spécification. Tous les nouveaux fichiers corpus sont désormais suivis, condition nécessaire au rebuild.
+
+### Task 16A: Fermer les cinq guides actifs trouvés en revue
+
+**Files:** exactement `Mathematiques/manuel-maths/CLAUDE.md`, `Mathematiques/manuel-maths/docs/04_guide_agents.md`, `Mathematiques/manuel-maths/.claude/commands/verifier.md`, `NSI/docs/04_guide_agents.md`, `NSI/.claude/commands/verifier.md`.
+
+- [ ] **Step 1: Aligner les cinq guides par TDD documentaire**
+
+Reproduire d'abord `test_policy_rejects_chutes_in_active_authority` sur ces
+cinq chemins. Modifier chaque chemin par `apply_patch` absolu : OpenRouter
+unique, `OPENROUTER_MODEL` explicite, aucune prescription Chutes ou modèle
+implicite, caractère consultatif, vérification locale, aucun secret ni PII.
+Conserver les commandes et validations humaines propres à chaque discipline.
+
+- [ ] **Step 2: Prouver les vingt-deux documents et la spec auto-scannée**
+
+```bash
+set -euo pipefail
+IMPL_ROOT=/home/alaeddine/Documents/Manuels_Nexus/.worktrees/green-openrouter-only
+cd "$IMPL_ROOT"
+python3 - <<'PY'
+from pathlib import Path
+import ast
+
+tree = ast.parse(Path("tests/test_external_provider_policy.py").read_text(encoding="utf-8"))
+values = {}
+for node in tree.body:
+    if isinstance(node, (ast.Assign, ast.AnnAssign)):
+        target = node.targets[0] if isinstance(node, ast.Assign) else node.target
+        if isinstance(target, ast.Name) and target.id in {"AUTHORITY_AND_GUIDE_PATHS", "CURRENT_OPENROUTER_SPEC_PATH"}:
+            values[target.id] = ast.literal_eval(node.value)
+assert len(values["AUTHORITY_AND_GUIDE_PATHS"]) == 23
+assert values["CURRENT_OPENROUTER_SPEC_PATH"] == "docs/superpowers/specs/2026-08-13-openrouter-only-external-provider-design.md"
+operational = set(values["AUTHORITY_AND_GUIDE_PATHS"]) - {values["CURRENT_OPENROUTER_SPEC_PATH"]}
+assert len(operational) == 22
+for relpath in values["AUTHORITY_AND_GUIDE_PATHS"]:
+    assert Path(relpath).is_file(), relpath
+PY
+env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
+  python3 -m pytest -q -p no:cacheprovider tests/test_external_provider_policy.py
+git diff --check
+```
+
+Expected: exactement 22 documents opérationnels, plus la spécification active
+auto-scannée, soit 23 surfaces du gate ; policy complète verte.
+
+- [ ] **Step 3: Indexer et committer uniquement les cinq guides**
+
+```bash
+set -euo pipefail
+IMPL_ROOT=/home/alaeddine/Documents/Manuels_Nexus/.worktrees/green-openrouter-only
+cd "$IMPL_ROOT"
+mapfile -t DELTA < <(git status --short | cut -c4- | sort)
+EXPECTED=(
+  Mathematiques/manuel-maths/.claude/commands/verifier.md
+  Mathematiques/manuel-maths/CLAUDE.md
+  Mathematiques/manuel-maths/docs/04_guide_agents.md
+  NSI/.claude/commands/verifier.md
+  NSI/docs/04_guide_agents.md
+)
+test "${#DELTA[@]}" -eq 5
+diff -u <(printf '%s\n' "${EXPECTED[@]}" | sort) <(printf '%s\n' "${DELTA[@]}")
+git add -- "${EXPECTED[@]}"
+test -z "$(git diff --name-only)"
+git diff --cached --name-only | sort | diff -u - <(printf '%s\n' "${EXPECTED[@]}" | sort)
+git diff --cached --check
+git commit -m "[DOCS] aligne les guides agents sur OpenRouter"
+test -z "$(git status --short)"
+```
+
+Expected: commit de revue documentaire atomique, exactement cinq chemins ; le
+lot total couvre les 22 documents opérationnels sans modifier l'historique.
 
 ### Task 17: Préparer le rebuild d’inventaire fermé
 
@@ -4089,21 +4160,26 @@ import xml.etree.ElementTree as ET
 tree = ET.parse(sys.argv[1])
 suites = tree.findall(".//testsuite") or [tree.getroot()]
 got = {key: sum(int(s.attrib.get(key, "0")) for s in suites) for key in ("tests", "failures", "errors", "skipped")}
-assert got == {"tests": 3, "failures": 3, "errors": 0, "skipped": 0}, got
+assert got == {"tests": 3, "failures": 1, "errors": 0, "skipped": 0}, got
+failed = {
+    case.attrib["name"]
+    for case in tree.findall(".//testcase")
+    if case.find("failure") is not None
+}
+assert failed == {"test_manifest_idempotent_after_rebuild"}, failed
 PY
 sha256sum -c "$AUDIT_TMP/original-before-red.sha256"
 test "$(git -C "$IMPL_ROOT" status --porcelain=v1)" = "$BEFORE_STATUS"
 ```
 
-Expected: clone créé sans checkout initial, branche locale non forcée, `symbolic-ref` puis `read-tree -mu`, au `SOURCE_SHA` attesté avant exécution ; JUnit exact `3 tests / 3 failures / 0 error / 0 skip`. Le worktree et ses quatre hashes restent inchangés malgré les effets de bord possibles du test historique.
+Expected: clone créé sans checkout initial, branche locale non forcée, `symbolic-ref` puis `read-tree -mu`, au `SOURCE_SHA` attesté avant exécution ; JUnit exact `3 tests / 1 failure / 0 error / 0 skip`, uniquement `test_manifest_idempotent_after_rebuild`. Le premier run avant suivi des nouveaux chemins reste scellé historiquement à `3 failures`; après les corrections de revue, aucun nouveau chemin n'est apparu et seuls les contenus/hashes générés sont périmés. Le worktree et ses quatre hashes restent inchangés malgré les effets de bord possibles du test historique.
 
-### Task 18: Reconstruire, vérifier l’idempotence et committer exactement deux sorties
+### Task 18: Reconstruire, vérifier l’idempotence et committer le delta généré minimal
 
 **Files:**
 
 - Modify generated: `NSI/corpus_nsi/manifest_tooling.csv`
-- Modify generated: `NSI/corpus_nsi/inventory_report.md`
-- Must remain byte-identical: `manifest.csv`, `duplicates_report.md`, `coverage.md`, `_usage_log.json`
+- Must remain byte-identical on the final review rerun: `inventory_report.md`, `manifest.csv`, `duplicates_report.md`, `coverage.md`, `_usage_log.json`
 
 - [ ] **Step 1: Confier le rebuild à un nouvel implementer frais**
 
@@ -4148,7 +4224,7 @@ done > "$AUDIT_TMP/after-first.sha256"
 
 Expected: le worktree est propre et toujours exactement au SHA capturé par Task 17 avant toute reconstruction ; reconstruction locale, aucun transport externe. Toute divergence impose un nouveau run Task 17, pas la réutilisation du pointeur.
 
-- [ ] **Step 3: Fermer le delta aux deux sorties autorisées**
+- [ ] **Step 3: Fermer le delta à l'unique sortie obsolète**
 
 ```bash
 set -euo pipefail
@@ -4163,9 +4239,9 @@ case "$AUDIT_TMP" in /tmp/nexus-openrouter-inventory.*) ;; *) exit 1 ;; esac
 test -d "$AUDIT_TMP"; test -O "$AUDIT_TMP"; test ! -L "$AUDIT_TMP"; test "$(stat -c '%a' "$AUDIT_TMP")" = 700
 cd "$IMPL_ROOT"
 mapfile -t CHANGED < <(git status --short | cut -c4- | sort)
-test "${#CHANGED[@]}" -eq 2
-test "${CHANGED[0]}" = "NSI/corpus_nsi/inventory_report.md"
-test "${CHANGED[1]}" = "NSI/corpus_nsi/manifest_tooling.csv"
+test "${#CHANGED[@]}" -eq 1
+test "${CHANGED[0]}" = "NSI/corpus_nsi/manifest_tooling.csv"
+cmp "$AUDIT_TMP/before/inventory_report.md" "$CORPUS_ROOT/inventory_report.md"
 cmp "$AUDIT_TMP/before/manifest.csv" "$CORPUS_ROOT/manifest.csv"
 cmp "$AUDIT_TMP/before/duplicates_report.md" "$CORPUS_ROOT/duplicates_report.md"
 cmp "$AUDIT_TMP/before/coverage.md" "$CORPUS_ROOT/coverage.md"
@@ -4173,7 +4249,7 @@ cmp "$AUDIT_TMP/before/substance_reviews/campaign/_usage_log.json" \
   "$CORPUS_ROOT/substance_reviews/campaign/_usage_log.json"
 ```
 
-Expected: exactement deux sorties modifiées ; les quatre snapshots protégés sont octet-identiques. Sinon `HARD STOP` sans restaurer automatiquement.
+Expected: exactement `manifest_tooling.csv` est modifié ; `inventory_report.md` et les quatre snapshots protégés sont octet-identiques. Le run initial avait changé deux sorties parce qu'il ajoutait un nouveau chemin ; le run final ne change que les hashes de trois chemins déjà inventoriés. Sinon `HARD STOP` sans restaurer automatiquement.
 
 - [ ] **Step 4: Rebuild une deuxième fois et comparer les quatre sorties canoniques**
 
@@ -4255,7 +4331,7 @@ Expected: nouveau test dans l’inventaire d’outillage seulement.
 
 Le reviewer spécification vérifie la section 8.5, les snapshots et l’idempotence. Le reviewer qualité vérifie l’absence de changement pédagogique, historique, couverture ou journal. Aucun correctif manuel des CSV/Markdown générés : toute anomalie est `HARD STOP` et se corrige dans une tâche autonome approuvée.
 
-- [ ] **Step 8: Indexer et committer exactement les deux sorties**
+- [ ] **Step 8: Indexer et committer exactement la sortie générée**
 
 ```bash
 set -euo pipefail
@@ -4268,17 +4344,12 @@ mapfile -t ALL_DELTA < <(git status --short | cut -c4- | sort)
 if test "${#ALL_DELTA[@]}" -eq 0; then
   test "$COUNT" -eq 1
 else
-  test "${#ALL_DELTA[@]}" -eq 2
-  test "${ALL_DELTA[0]}" = "NSI/corpus_nsi/inventory_report.md"
-  test "${ALL_DELTA[1]}" = "NSI/corpus_nsi/manifest_tooling.csv"
-git add -- \
-  NSI/corpus_nsi/manifest_tooling.csv \
-  NSI/corpus_nsi/inventory_report.md
-test "$(git diff --cached --name-only | wc -l)" -eq 2
-git diff --cached --name-only | sort | diff -u - <(printf '%s\n' \
-  NSI/corpus_nsi/inventory_report.md \
-  NSI/corpus_nsi/manifest_tooling.csv)
-git diff --cached --check
+  test "${#ALL_DELTA[@]}" -eq 1
+  test "${ALL_DELTA[0]}" = "NSI/corpus_nsi/manifest_tooling.csv"
+  git add -- NSI/corpus_nsi/manifest_tooling.csv
+  test "$(git diff --cached --name-only | wc -l)" -eq 1
+  test "$(git diff --cached --name-only)" = "NSI/corpus_nsi/manifest_tooling.csv"
+  git diff --cached --check
   if test "$COUNT" -eq 0; then
     git commit -m "$CANONICAL"
   else
@@ -4299,7 +4370,7 @@ mapfile -t ACTIVE_AFTER < <(find /tmp -maxdepth 1 -user "$(id -u)" -type f -name
 test "${#ACTIVE_AFTER[@]}" -eq 0
 ```
 
-Expected: si le sujet canonique est absent, le delta exact de deux fichiers produit ce quatrième commit ; s’il existe déjà, il n’est jamais dupliqué et un delta exact de deux fichiers produit seulement le commit `... apres revue`; si le delta est nul, aucun commit. Dans tous les cas le pointeur du run devient `.complete` après les preuves. Toute nouvelle exécution recommence Task 17 avec un pointeur unique neuf.
+Expected: si le sujet canonique est absent, le delta généré approuvé produit ce quatrième commit ; s’il existe déjà, il n’est jamais dupliqué et l'unique delta `manifest_tooling.csv` produit seulement le commit `... apres revue`; si le delta est nul, aucun commit. Dans tous les cas le pointeur du run devient `.complete` après les preuves. Toute nouvelle exécution recommence Task 17 avec un pointeur unique neuf.
 
 ## Chunk 9: Vérification adversariale, gates et remise auditable
 
@@ -4402,105 +4473,48 @@ test -f "$BASELINE_ROOT/corpus-baseline-85.nodeids"
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
   PYTHONPATH="$GUARD_ROOT" NEXUS_NETWORK_GUARD_MARKER="$MARKER" \
   python3 - "$NODE_TMP" "$BASELINE_ROOT/corpus-baseline-85.nodeids" <<'PY'
+import hashlib
 import sys
 from pathlib import Path
 
 node_root = Path(sys.argv[1])
 baseline85 = set(Path(sys.argv[2]).read_text(encoding="utf-8").splitlines())
 
-def collected(name: str) -> set[str]:
-    return {
+def collected(name: str) -> list[str]:
+    nodes = sorted({
         line for line in node_root.joinpath(f"{name}.nodes").read_text(encoding="utf-8").splitlines()
         if line.startswith("tests/")
-    }
+    })
+    assert len(nodes) == len(set(nodes)), name
+    assert all("::" in node for node in nodes), name
+    return nodes
 
-client = (
-"test_chat_completion_posts_to_exact_openrouter_endpoint test_chat_completion_sends_bearer_and_json_headers "
-"test_chat_completion_sends_one_model_and_max_completion_tokens test_chat_completion_uses_injected_mock_transport_without_socket "
-"test_chat_completion_caps_timeout_at_thirty_seconds test_chat_completion_does_not_follow_redirects "
-"test_chat_completion_returns_validated_structured_result test_completion_and_usage_are_immutable "
-"test_http_failure_maps_to_sanitized_error_category test_http_200_refuses_root_error_object "
-"test_http_200_refuses_choice_error_object test_http_200_refuses_non_stop_finish_reason "
-"test_response_rejects_malformed_envelope_component test_errors_and_logs_never_expose_secret_prompt_or_raw_body "
-"test_client_does_not_retry_failed_request test_client_rejects_blank_key_before_transport "
-"test_client_rejects_blank_model_before_transport test_usage_rejects_invalid_required_accounting "
-"test_usage_rejects_invalid_cache_details test_usage_normalizes_absent_cache_counters_to_zero "
-"test_usage_preserves_exact_openrouter_cost test_response_rejects_invalid_root_generation_id "
-"test_response_rejects_invalid_returned_model"
-).split()
-classification = (
-"test_classification_without_key_uses_local_heuristic_without_transport "
-"test_classification_with_key_without_model_fails_before_transport "
-"test_classification_with_key_and_model_forwards_exact_model "
-"test_classification_sends_only_first_3000_fragment_characters test_classification_requests_200_completion_tokens "
-"test_local_heuristic_preserves_existing_chunk_type_contract test_remote_classification_accepts_exact_closed_object "
-"test_remote_classification_rejects_invalid_closed_object_as_a_whole "
-"test_remote_classification_rejects_boolean_difficulty test_invalid_remote_classification_returns_global_conservative_result "
-"test_remote_metadata_cannot_override_trusted_record_fields test_prompt_does_not_append_environment_or_provenance_metadata"
-).split()
-policy = (
-"test_policy_requires_every_canonical_active_surface test_policy_rejects_unlisted_provider_transport "
-"test_policy_allows_only_openrouter_client_to_define_llm_endpoint test_policy_preserves_non_llm_rag_transport_allowlist "
-"test_policy_rejects_chutes_in_active_authority test_policy_ignores_protected_historical_chutes_artifacts "
-"test_policy_rejects_model_catalog_endpoint_in_automation test_policy_rejects_new_nsi_ingest_make_target "
-"test_targeted_surfaces_exist_before_negative_scans test_policy_rejects_anthropic_in_active_callers "
-"test_policy_rejects_local_llm_configuration_in_active_surfaces test_ci_no_deps_requirements_close_httpx_runtime_dependencies"
-).split()
-expected_core = {f"tests/test_openrouter_client.py::{name}" for name in client}
-expected_core |= {f"tests/test_openrouter_classification.py::{name}" for name in classification}
-expected_core |= {f"tests/test_external_provider_policy.py::{name}" for name in policy}
-assert len(expected_core) == 47
-assert collected("core") == expected_core, (collected("core") - expected_core, expected_core - collected("core"))
+expected = {
+    "core": (60, "d5d5289821fe39a93541ac47b4f8b03e70253606d201e989221748033a07bbff"),
+    "math": (18, "aa14cb13d16bf58d3c1b76958f223a0cae4c87eceaf4e2aa2437e1ea326f4d92"),
+    "nsi": (18, "31d5bb08cb295c205615d5e14be82bc3436d430a9b88b634791ed219506106a4"),
+    "corpus": (146, "d1c76666d67023e904feac757d538946eb79750bb0b63c78f0a1275cedc51dfc"),
+}
+for name, (count, digest) in expected.items():
+    nodes = collected(name)
+    canonical = ("\n".join(nodes) + "\n").encode("utf-8")
+    assert len(nodes) == count, (name, len(nodes), count)
+    assert hashlib.sha256(canonical).hexdigest() == digest, name
 
-for prefix in ("math", "nsi"):
-    names = (
-        f"test_{prefix}_ingest_classify_delegates_to_shared_classifier",
-        f"test_{prefix}_ingest_preserves_trusted_metadata_against_hostile_classifier",
-        f"test_{prefix}_ingest_command_runs_without_source_key_or_network",
-        f"test_{prefix}_ingest_discovers_current_checkout_from_unrelated_cwd",
-        f"test_{prefix}_ingest_prioritizes_current_checkout_over_shadow_package",
-        f"test_{prefix}_ingest_rejects_nexus_external_loaded_outside_checkout",
-        f"test_{prefix}_no_source_command_does_not_import_extraction_backends",
-        f"test_{prefix}_network_guard_mutation_is_effective",
-    )
-    expected = {f"tests/test_ingest_openrouter.py::{name}" for name in names}
-    assert len(expected) == 8
-    assert collected(prefix) == expected, (prefix, collected(prefix) - expected, expected - collected(prefix))
-
-corpus_new = (
-"test_campaign_delegates_to_shared_openrouter_client test_campaign_reads_missing_openrouter_values_from_resolved_rag_env "
-"test_campaign_does_not_read_generic_dotenv test_campaign_rejects_key_without_model_before_transport "
-"test_campaign_business_retry_count_is_bounded test_campaign_records_requested_openrouter_model "
-"test_campaign_records_each_billed_retry_generation_before_verdict_validation test_usage_v2_copies_completion_accounting_exactly "
-"test_usage_upsert_replaces_same_generation_only test_usage_upsert_preserves_v1_deeply_and_in_order "
-"test_usage_locked_append_preserves_interleaved_writers_and_releases_lock "
-"test_usage_upsert_preserves_other_v2_generations_for_same_capacity test_usage_logging_contains_no_local_cost_formula "
-"test_failed_usage_entry_invents_no_accounting test_run_totals_sum_only_current_successful_v2_entries "
-"test_substance_llm_delegates_to_shared_openrouter_client test_substance_without_key_returns_conservative_result_without_transport "
-"test_substance_rejects_key_without_model_before_transport test_substance_sends_exact_bounded_prompt_and_limit "
-"test_substance_main_overlays_only_nonempty_openrouter_environment "
-"test_substance_accepts_only_exact_closed_json_object test_substance_rag_keeps_dedicated_http_transport "
-"test_substance_has_no_configurable_llm_endpoint test_substance_remote_error_is_sanitized_and_never_promotes "
-"test_run_substance_judge_imports_no_external_client test_run_substance_judge_uses_honest_deterministic_model "
-"test_campaign_discovers_current_checkout_from_unrelated_cwd test_substance_discovers_current_checkout_from_unrelated_cwd "
-"test_corpus_callers_reject_shadowed_external_package"
-).split()
 manifest = {
     "tests/test_manifest_separation.py::test_pedagogical_manifest_contains_only_pedagogical_content",
     "tests/test_manifest_separation.py::test_manifests_cover_all_inventoried_resources",
     "tests/test_manifest_separation.py::test_manifest_idempotent_after_rebuild",
 }
-expected_new = {f"tests/test_openrouter_judges.py::{name}" for name in corpus_new}
-expected_corpus = baseline85 | expected_new | manifest
-assert (len(baseline85), len(expected_new), len(manifest), len(expected_corpus)) == (85, 29, 3, 117)
-assert collected("corpus") == expected_corpus, (
-    collected("corpus") - expected_corpus, expected_corpus - collected("corpus")
-)
+corpus = set(collected("corpus"))
+assert len(baseline85) == 85
+assert baseline85 <= corpus, baseline85 - corpus
+assert manifest <= corpus, manifest - corpus
 PY
 test -s "$MARKER"
 ```
 
-Expected: égalité d’ensembles exacte, pas seulement des comptes : 47 littéraux core, 8 math, 8 NSI et l’union littérale `85 baseline capturés + 29 nouveaux + 3 manifest = 117`. Les baselines Red historiques restent scellées à 27/115 ; seuls les deux tests issus de revue expliquent le delta final. Toute autre différence de nodeid ou paramétrisation arrête la suite.
+Expected: ensembles exacts canonisés par tri binaire, compte et SHA-256 : core `60 / d5d528…bbff`, Math `18 / aa14cb…766f`, NSI `18 / 31d5bb…06a4`, corpus `146 / d1c766…1dfc`. Les 85 nodeids corpus historiques et les trois tests manifest restent des sous-ensembles obligatoires. Les anciennes valeurs 47/8/8/117 restent la preuve du run `c037240d`, jamais l'oracle du run corrigé. Toute différence de nodeid ou paramétrisation arrête la suite.
 
 - [ ] **Step 3: Exécuter le processus core racine**
 
@@ -4840,14 +4854,17 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
 COLLECT_RC=$?
 set -e
 test "$COLLECT_RC" -eq 2
-test "$(grep -c '^ERROR collecting ' "$COLLECT_TMP/root.out")" -eq 1
 rg -F 'assemble.BOOK_VARIANTS' "$COLLECT_TMP/root.out"
-! rg -e 'ERROR collecting .*test_openrouter|ModuleNotFoundError.*nexus_external' \
+! rg -e 'ERROR( collecting)? .*test_openrouter|ModuleNotFoundError.*nexus_external' \
   "$COLLECT_TMP/root.out"
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL python3 - "$COLLECT_TMP/root.out" <<'PY'
 import re
 import sys
 text = open(sys.argv[1], encoding="utf-8").read()
+error_lines = [line for line in text.splitlines() if line.startswith("ERROR ")]
+assert len(error_lines) == 1, error_lines
+assert "NSI/tests/test_assemble_book.py" in error_lines[0], error_lines[0]
+assert "assemble.BOOK_VARIANTS" in text
 match = re.search(r"(\d+) tests collected", text)
 assert match and int(match.group(1)) > 5032, match.group(0) if match else text[-500:]
 PY
@@ -5003,7 +5020,17 @@ Un agent frais retrouve le parent du commit `[TESTS] verrouille la passerelle Op
 
 - [ ] **Step 2: Lancer une revue qualité/sécurité holistique**
 
-Un second agent frais cherche défauts de validation, fuite de clé/prompt, redirection, retry caché, type `bool`, NaN, réponse partielle, shadow import, données de confiance écrasables, transport RAG migré par erreur, journal v1 altéré, formule tarifaire ou écriture historique. Corriger tout constat validé dans un commit ciblé supplémentaire dont le sujet n’est jamais l’un des quatre sujets canoniques. Si la correction touche un fichier corpus suivi, reprendre Tasks 17–18 : le run précédent est `.complete`, donc Task 17 crée un nouveau pointeur ; Task 18 ne crée le commit `[AUDIT] ... apres revue` que pour un delta exact de deux sorties et ne committe rien pour un delta nul.
+Un second agent frais cherche défauts de validation, fuite de clé/prompt, redirection, retry caché, type `bool`, NaN, réponse partielle, shadow import, données de confiance écrasables, transport RAG migré par erreur, journal v1 altéré, formule tarifaire ou écriture historique. Corriger tout constat validé dans un commit ciblé supplémentaire dont le sujet n’est jamais l’un des quatre sujets canoniques. Si la correction touche un fichier corpus suivi, reprendre Tasks 17–18 : le run précédent est `.complete`, donc Task 17 crée un nouveau pointeur ; Task 18 ne crée le commit `[AUDIT] ... apres revue` que pour le delta généré minimal observé et approuvé (`manifest_tooling.csv` seul lorsque aucun chemin n'est ajouté), et ne committe rien pour un delta nul.
+
+La revue du 14 août 2026 a étendu ce contrôle aux cinq guides actifs ajoutés à
+la spécification §8.4, à toute nouvelle surface fournisseur autonome suivie,
+aux sous-modules `nexus_external` préchargés, au confinement des chemins RAG,
+au rollback du journal après échec du `fsync` du répertoire et à la désactivation
+explicite de la confiance HTTPX dans les variables proxy/CA. Chaque constat est
+d'abord scellé par un Red causal, puis corrigé par un Green minimal. Les comptes
+littéraux de Task 19 sont mis à jour seulement après stabilisation des nodeids ;
+les anciennes valeurs 47/8/8/117 restent la preuve du run `c037240d`, pas
+l'oracle du run corrigé.
 
 Avant de reprendre Task 19 après une correction, fermer de façon récupérable le pointeur de vérification du run invalidé : exiger l’unique pointeur actif, propriétaire/non-lien/mode 600 et une racine `/tmp/nexus-openrouter-verify.*` propriétaire/non-lien/mode 700, puis `mv -- "$POINTER" "$POINTER.complete"`. Task 19 crée alors un nouveau garde/pointeur. Reprendre Tasks 19–22 et les deux revues jusqu’à zéro constat. Sans correction, conserver le pointeur actif courant pour Step 3.
 
@@ -5080,7 +5107,7 @@ mapfile -t ACTIVE_BASELINE < <(find /tmp -maxdepth 1 -user "$(id -u)" -type f -n
 mapfile -t ACTIVE_GATES < <(find /tmp -maxdepth 1 -user "$(id -u)" -type f -name 'nexus-openrouter-gates-pointer.*' ! -name '*.complete' -print); test "${#ACTIVE_GATES[@]}" -eq 0
 ```
 
-Expected: quatre suites exactes vertes, policy complète incluse dans les 47 nodes core, `py_compile` et Ruff verts, marker non vide, quatre sujets canoniques présents exactement une fois. Les pointeurs verification et baseline deviennent `.complete` seulement après toutes les preuves ; aucun pointeur gates actif ne reste.
+Expected: quatre suites exactes vertes (`60 / 18 / 18 / 146`), policy complète incluse dans les 60 nodes core, `py_compile` et Ruff verts, marker non vide, quatre sujets canoniques présents exactement une fois. Les pointeurs verification et baseline deviennent `.complete` seulement après toutes les preuves ; aucun pointeur gates actif ne reste.
 
 ```bash
 set -euo pipefail
