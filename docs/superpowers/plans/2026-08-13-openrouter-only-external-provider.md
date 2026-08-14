@@ -2181,11 +2181,11 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
 set -e
 cd "$IMPL_ROOT/Mathematiques/manuel-maths"
 set +e
-env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL python3 -m pytest -q -p no:cacheprovider tests/test_ingest_openrouter.py --junitxml "$RUN_TMP/math.xml"; RC_MATH=$?
+env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL python3 -m pytest --rootdir=. -q -p no:cacheprovider tests/test_ingest_openrouter.py --junitxml "$RUN_TMP/math.xml"; RC_MATH=$?
 set -e
 cd "$IMPL_ROOT/NSI"
 set +e
-env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL python3 -m pytest -q -p no:cacheprovider tests/test_ingest_openrouter.py --junitxml "$RUN_TMP/nsi.xml"; RC_NSI=$?
+env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL python3 -m pytest --rootdir=. -q -p no:cacheprovider tests/test_ingest_openrouter.py --junitxml "$RUN_TMP/nsi.xml"; RC_NSI=$?
 set -e
 CORPUS_SOURCE_REPORT=$IMPL_ROOT/NSI/corpus_nsi/01_build_reports/P05_substance_review.json
 test ! -e "$CORPUS_SOURCE_REPORT"
