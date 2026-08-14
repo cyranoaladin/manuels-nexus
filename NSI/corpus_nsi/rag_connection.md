@@ -19,6 +19,9 @@ charges :
 - modèle historique du corpus NSI : `nomic-embed-text`, dimension `768`,
   distance `cosine`.
 
+Ces éléments décrivent l'infrastructure observée historiquement. Ils ne
+configurent aucun fournisseur LLM actif du dépôt.
+
 `rag_education` peut servir d'inspiration ou de comparaison externe. Cette
 collection ne prouve jamais la couverture interne du corpus.
 
@@ -35,11 +38,34 @@ RAG_COLLECTION=nsi_corpus
 RAG_DISTANCE=cosine
 RAG_VECTOR_DIM=768
 EMBEDDING_MODEL=nomic-embed-text
-LOCAL_LLM_ENGINE=ollama
-LOCAL_LLM_MODEL=qwen2.5:7b
+EMBEDDING_BASE_URL=
+EMBEDDING_API_KEY=
+VECTOR_DB_URL=
+VECTOR_DB_API_KEY=
+OPENROUTER_API_KEY=
+OPENROUTER_MODEL=
 ```
 
-## Smoke test
+## Séparation RAG / LLM
+
+OpenRouter est l'unique passerelle LLM externe. Les deux valeurs LLM sont lues
+depuis `.env.rag` ; aucun modèle n'est fourni par défaut et aucun endpoint LLM
+n'y est configurable. Le seul client LLM partagé porte l'endpoint fixe
+`https://openrouter.ai/api/v1/chat/completions`.
+
+`RAG_API_BASE_URL` reste exclusivement l'URL de recherche du corpus, avec son
+Bearer RAG. L'extraction, `EMBEDDING_*`, `VECTOR_DB_*` et Chroma constituent des
+traitements distincts et ne passent pas par le client OpenRouter. Sans clé, le
+juge de substance reste conservateur et n'ouvre aucune connexion LLM. Une clé
+présente sans `OPENROUTER_MODEL` est une erreur de configuration avant réseau ;
+aucun autre fournisseur ni modèle de repli n'est utilisé.
+
+Avant toute consultation externe, vérifier que les extraits sont autorisés,
+anonymisés si nécessaire et exempts de secret ou de donnée personnelle. Toute
+réponse distante est consultative et doit être contrôlée localement puis
+humainement.
+
+## Smoke test RAG manuel
 
 Sans `.env.rag`, `scripts/rag_smoke_test.py` n'ouvre pas le réseau et affiche :
 
@@ -51,6 +77,9 @@ Avec `.env.rag`, il appelle `/search` en Bearer sur `nsi_corpus`, vérifie la
 présence de résultats et exige les métadonnées minimales. Les champs canoniques
 des nouveaux chunks sont `section_anchor` et `capacity_ids`. Les anciens champs
 `anchor` et `capacities` ne sont tolérés que comme alias de compatibilité.
+Le smoke RAG configuré est déclenché uniquement par un opérateur et ne consulte
+pas OpenRouter. Pytest et la CI exécutent seulement son chemin de garde avec un
+fichier de configuration volontairement absent, sans appel réseau.
 
 Observation du 2026-06-29 :
 

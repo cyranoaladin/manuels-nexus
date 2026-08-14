@@ -940,24 +940,29 @@ Aucune fusion automatique dans `main`.
 
 ---
 
-# 14. Utilisation de Chutes
+# 14. Passerelle LLM externe — amendement du 13 août 2026
 
-Si le MCP Chutes est disponible :
+Le présent amendement remplace, pour toute opération future, la prescription
+externe de la version 1.0. Les traces datées antérieures restent immuables et
+ne sont pas réécrites pour attribuer au passé un fournisseur différent.
 
-1. effectuer un smoke test ;
-2. utiliser uniquement les modèles réellement listés ;
-3. anonymiser les données ;
-4. consulter des rôles indépendants :
-   - mathématiques ;
-   - programme ;
-   - pédagogie ;
-   - LaTeX/design ;
-   - Python/CI ;
-   - audit adversarial ;
-5. vérifier localement toute recommandation ;
-6. consigner la consultation dans `audit/chutes/`.
+OpenRouter est l'unique destination LLM externe active. Le client partagé fixe
+`https://openrouter.ai/api/v1/chat/completions` et reçoit exclusivement
+`OPENROUTER_API_KEY` et `OPENROUTER_MODEL` pour sa configuration LLM. Aucun
+modèle, endpoint secondaire ou fournisseur de repli n'est implicite.
 
-Chutes est consultatif. Les tests, sources officielles et validations humaines font autorité.
+- Sans clé, le chemin reste local et déterministe lorsqu'il existe, sans
+  réseau.
+- Une clé présente sans modèle est une erreur de configuration avant réseau.
+- Aucun secret ni aucune donnée personnelle ne doit être transmis.
+- Toute sortie externe est consultative et doit être vérifiée localement ; les
+  tests, sources officielles, revues indépendantes et validations humaines
+  restent souverains.
+- Un smoke test OpenRouter est séparé et n'est lancé que sur instruction
+  humaine explicite, jamais automatiquement ni en CI.
+- Une nouvelle preuve optionnelle n'est écrite sous `audit/openrouter/`
+  qu'après une consultation réellement exécutée et vérifiée.
+- Aucun nouvel appel Chutes.
 
 ---
 
@@ -1111,7 +1116,9 @@ Puis :
 2. lire le présent document ;
 3. lire les audits courants ;
 4. vérifier les WIP ;
-5. tester Chutes si disponible ;
+5. ne lancer aucun smoke externe automatiquement ; sur instruction humaine
+   explicite seulement, exécuter un smoke OpenRouter séparé après les contrôles
+   locaux ;
 6. établir un plan atomique ;
 7. exécuter le plus petit correctif à fort effet ;
 8. tester ;

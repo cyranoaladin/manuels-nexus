@@ -141,18 +141,27 @@ Chaque capacité doit comporter, sauf justification approuvée :
 10. réactivation ;
 11. transfert.
 
-## Chutes
+## Passerelle LLM externe
 
-Si le MCP Chutes est disponible :
+OpenRouter est l'unique destination LLM externe active. Le client partagé
+utilise exclusivement :
 
-- effectuer un smoke test ;
-- utiliser seulement les modèles réellement disponibles ;
-- ne transmettre aucun secret ou donnée personnelle ;
-- consulter des expertises indépendantes ;
-- vérifier localement chaque recommandation ;
-- consigner les consultations utiles dans `audit/chutes/`.
+- `https://openrouter.ai/api/v1/chat/completions` ;
+- `OPENROUTER_API_KEY` ;
+- `OPENROUTER_MODEL`.
 
-Chutes est consultatif.
+Sans clé, utiliser le mode local déterministe lorsqu'il existe et ne lancer
+aucun appel réseau. Une clé présente sans modèle est une erreur de
+configuration. Ne transmettre aucun secret ni aucune donnée personnelle.
+
+Toute réponse externe reste consultative : vérifier localement chaque
+recommandation et conserver les validations humaines requises. Un smoke test
+OpenRouter exige une instruction humaine explicite ; il reste séparé, n'est
+jamais automatique et n'est jamais exécuté en CI. Les preuves historiques
+datées restent immuables. Une nouvelle preuve éventuelle est consignée sous
+`audit/openrouter/` seulement après une consultation réellement exécutée.
+
+- Aucun nouvel appel Chutes.
 
 ## Tests et gates
 

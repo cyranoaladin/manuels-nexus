@@ -103,7 +103,7 @@ Sommaire compact :
   [gates](#tests-et-gates) et [CI](#intégration-continue) ;
 - **Gouvernance** — [contribution](#workflow-obligatoire-de-contribution),
   [Git](#git-commits-et-interdictions) et
-  [Chutes](#consultation-externe-chutes) ;
+  [OpenRouter](#passerelle-llm-externe-openrouter) ;
 - **Audit et passation** —
   [état daté](#état-courant-audité--13-août-2026),
   [roadmap](#roadmap-approuvée), [carte documentaire](#carte-documentaire) et
@@ -635,6 +635,19 @@ secret ou une donnée personnelle ne doit jamais être versionné. Les fonctions
 RAG ou base de données ne sont pas une précondition prouvée des builds complets
 documentés ci-dessous.
 
+La configuration LLM externe active emploie uniquement des valeurs explicites
+et non versionnées :
+
+```dotenv
+OPENROUTER_API_KEY=
+OPENROUTER_MODEL=
+```
+
+Sans clé, les chemins qui le permettent restent en mode local déterministe et
+n'effectuent aucun appel réseau. Une clé présente sans modèle provoque une
+erreur de configuration avant réseau. Aucun modèle par défaut ni endpoint LLM
+configurable n'est prévu.
+
 ## Construire un manuel localement
 
 Depuis la racine, exemples de builds locaux sans enregistrement de preuve :
@@ -823,21 +836,38 @@ Sans instruction humaine explicite, sont interdits :
 Avant commit : `git diff --check`, statut, tests ciblés et gates affectés. Avant
 push sensible : examiner secrets, données personnelles, bases et artefacts.
 
-## Consultation externe Chutes
+## Passerelle LLM externe OpenRouter
 
-Lorsque le MCP Chutes est disponible :
+OpenRouter est l’unique passerelle LLM externe active si et seulement si les cinq propriétés OpenRouter passent sur le SHA courant.
 
-1. effectuer un smoke test ;
-2. utiliser seulement les modèles réellement listés ;
-3. ne transmettre ni secret, ni clé, ni donnée personnelle ;
-4. demander des avis indépendants par domaine ;
-5. vérifier localement chaque recommandation ;
-6. consigner les consultations utiles sous [audit/chutes](audit/chutes/).
+Ces cinq propriétés sont :
 
-Chutes n'est ni une source d'autorité ni une approbation. Lors de l'audit du 13
-août, le catalogue de modèles était accessible, puis la consultation a été
-refusée avec HTTP 402 pour quota insuffisant. Aucune expertise externe
-exploitable n'a donc été retenue pour cet audit.
+1. tout appel LLM actif atteint uniquement
+   `https://openrouter.ai/api/v1/chat/completions` ;
+2. les quatre appelants actifs utilisent le même client partagé
+   `nexus_external` ;
+3. l'absence de clé conserve un mode local déterministe sans réseau lorsqu'il
+   existe, tandis qu'une clé sans modèle échoue avant réseau ;
+4. les endpoints RAG restent distincts et ne deviennent jamais une destination
+   LLM ;
+5. les autorités, preuves, verdicts et historiques restent honnêtes et les
+   sorties d'inventaire sont resynchronisées par leur workflow dédié.
+
+Le client reçoit exclusivement `OPENROUTER_API_KEY` et `OPENROUTER_MODEL`, fixe
+l'endpoint ci-dessus et n'interroge ni catalogue de modèles ni fournisseur de
+repli. Une réponse externe reste consultative : elle ne remplace jamais les
+sources officielles, les tests, la vérification locale, les revues
+indépendantes ou l'approbation humaine.
+
+Aucun secret ni aucune donnée personnelle ne doit être transmis. Un smoke test
+OpenRouter est une opération humaine explicite et séparée ; il n'est jamais
+automatique et n'est jamais exécuté en CI. Une nouvelle preuve optionnelle est
+consignée sous `audit/openrouter/` seulement après une consultation réellement
+exécutée et vérifiée. Les preuves historiques datées restent inchangées et ne
+sont pas réécrites pour modifier le fournisseur qu'elles ont réellement
+observé.
+
+- Aucun nouvel appel Chutes.
 
 <!-- BEGIN CURRENT AUDITED STATE -->
 
@@ -1131,8 +1161,8 @@ Ne jamais versionner :
 - contenus externes dont les droits ne sont pas établis.
 
 Avant push, examiner au minimum les nouveaux fichiers, les `.env`, CSV, bases
-SQLite, PDF importés et assets. Chutes ou tout service externe ne reçoit aucune
-donnée personnelle ni aucun secret.
+SQLite, PDF importés et assets. Aucun service externe ne reçoit de donnée
+personnelle ni de secret.
 
 ## Glossaire
 

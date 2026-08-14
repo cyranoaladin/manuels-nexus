@@ -6,7 +6,7 @@ Version 1.0 — Juillet 2026 — Maître d'ouvrage : Nexus Réussite (M&M ACADEM
 
 ## 1. Objet
 
-Concevoir et produire, via un pipeline agentique (Claude Code + MCP + scripts), un manuel de mathématiques par niveau, conforme aux programmes officiels français, structuré pour l'accompagnement personnalisé et la pédagogie différenciée selon le gabarit défini dans `docs/01_conception_manuel.md`.
+Concevoir et produire, via un pipeline agentique local (MCP + scripts), un manuel de mathématiques par niveau, conforme aux programmes officiels français, structuré pour l'accompagnement personnalisé et la pédagogie différenciée selon le gabarit défini dans `docs/01_conception_manuel.md`.
 
 **Périmètre initial (phase pilote)** : Première EDS Mathématiques, chapitre "Suites numériques" (`1SPE-SUITES`), production de bout en bout. **Extension** : chapitres restants de Première, puis Terminale EDS + Maths Expertes, puis autres niveaux.
 
@@ -48,7 +48,7 @@ Concevoir et produire, via un pipeline agentique (Claude Code + MCP + scripts), 
 | N02 | **Propriété intellectuelle** : similarité n-gram (n=8) avec toute source T2/T4 < 0,35 ; attribution obligatoire pour T1/T3-libre adapté |
 | N03 | **Conformité** : traçabilité complète objet ↔ capacité ↔ B.O. (tableau de correspondance généré) |
 | N04 | **Reproductibilité** : `make setup && make chapter CHAP=X` reconstruit le PDF à l'identique sur machine vierge (Ubuntu 24 / Mint 22) |
-| N05 | **Coût** : production LLM ≤ 40 $ par chapitre en régime de croisière (Batch API pour les lots massifs) |
+| N05 | **Coût** : production LLM ≤ 40 $ par chapitre en régime de croisière ; coût OpenRouter mesuré depuis les réponses du service, sans remise présumée |
 | N06 | **Crawling responsable** : robots.txt respecté, throttling ≥ 2 s/req/domaine, User-Agent identifié, uniquement les domaines du registre |
 | N07 | **RGPD** : aucun contenu de copie d'élève réelle non anonymisée dans le corpus |
 
@@ -56,8 +56,9 @@ Concevoir et produire, via un pipeline agentique (Claude Code + MCP + scripts), 
 
 - Python ≥ 3.11, PostgreSQL ≥ 16 + pgvector, texlive-full (pdflatex), FastMCP pour les serveurs, Git/GitHub avec CI Actions.
 - Embeddings 1024d (modèle au choix : voyage-3 / bge-m3 — cohérent avec la stack RAG existante), reranker CrossEncoder MiniLM.
-- Modèles LLM : Anthropic (Sonnet pour la masse, Opus/Fable pour strate ★, ◆◆◆ et revue adversariale), Batch API pour les lots non interactifs.
-- Déploiement cible des services : serveur Hetzner existant (base et MCP), exécution des agents en local via Claude Code.
+- LLM externe : OpenRouter uniquement, via `POST https://openrouter.ai/api/v1/chat/completions`, avec `OPENROUTER_API_KEY` et le modèle exact fourni par `OPENROUTER_MODEL`. Sans clé, la classification reste locale, déterministe et hors réseau ; une clé sans modèle est une erreur avant réseau. Aucun endpoint ni modèle de repli n'est implicite.
+- Les réponses OpenRouter restent consultatives et sont vérifiées localement ; elles ne valent ni source officielle, ni validation mathématique, scientifique, pédagogique ou humaine. Aucun secret ni donnée personnelle n'est transmis. Un éventuel smoke test est déclenché et vérifié par un humain uniquement, jamais par la CI ni automatiquement.
+- Déploiement cible des services : serveur Hetzner existant (base et MCP), exécution des agents en local.
 
 ## 6. Critères d'acceptation de la phase pilote
 
@@ -78,8 +79,8 @@ Concevoir et produire, via un pipeline agentique (Claude Code + MCP + scripts), 
 
 | Risque | Parade |
 |---|---|
-| Extraction LaTeX défaillante sur PDF complexes | Fallback vision LLM par zone ; échantillonnage qualité 5 % en revue humaine |
+| Extraction LaTeX défaillante sur PDF complexes | Signaler les zones en `manual_review` ; échantillonnage qualité 5 % en revue humaine |
 | Hallucination réglementaire (capacité inventée) | Référentiel = seule source de vérité (R7) ; gate conformité |
 | Contamination de licence (CC-BY-SA) | `usage_policy` propagée ; adaptation substantielle par défaut ; revue juridique avant commercialisation |
 | Dérive de qualité entre chapitres | Few-shot issus du pilote certifié ; check-list bloquante identique |
-| Coût API dérivant | Compteur de coût par LOT dans les rapports ; Batch API ; Haiku pour la classification |
+| Coût API dérivant | Compteur de coût par LOT dans les rapports ; modèle OpenRouter explicitement configuré ; classification locale déterministe sans clé |

@@ -1,5 +1,22 @@
 # Programme d'enrichissement — regime de croisiere post-flip
 
+## Statut operationnel
+
+Cette feuille de route décrit un workflow corpus dormant. Elle n'est reliée ni
+à la CI racine ni à un déclenchement réseau automatique. Chaque lot est activé
+par une décision humaine explicite, puis exécuté avec ses gates locaux. Aucun
+smoke LLM ou appel OpenRouter n'est lancé par Pytest ou la CI.
+
+Si un jugement LLM externe est autorisé, OpenRouter est l'unique passerelle et
+les deux valeurs `OPENROUTER_API_KEY` et `OPENROUTER_MODEL` sont fournies dans
+le `.env.rag` local ignoré. Aucun modèle n'est implicite : sans clé, le workflow
+reste déterministe ou conservateur sans appel LLM ; la recherche RAG peut
+toujours utiliser son transport si elle est configurée. Une clé sans modèle
+provoque une erreur avant réseau LLM. `RAG_API_BASE_URL` demeure réservé à la recherche RAG,
+distincte de l'extraction, des embeddings et de la base vectorielle. Aucun
+secret ni donnée personnelle n'est transmis ; toute sortie reste consultative
+et soumise à validation locale et humaine.
+
 ## Standard de reference
 
 Le PANTHEON de la revue (fiches T05 arbres, P11 parcours, T09 bases relationnelles)
@@ -11,7 +28,7 @@ pipeline integral : production -> gates -> juge -> echantillon lead.
 Tout enrichissement suit le cycle :
 1. Production du contenu (cours/TD/TP/eval/corrige/bareme)
 2. Passage des gates automatiques (audit-core + CI)
-3. Jugement de substance (judge_campaign --force)
+3. Si le lot dormant est activé : campagne de substance OpenRouter, déclenchée manuellement avec clé et modèle explicites
 4. Echantillon lead (revue humaine sur les verdicts)
 
 ## Lots d'enrichissement
@@ -44,7 +61,7 @@ Tout enrichissement suit le cycle :
   2. Ajouter les questions d'evaluation pour T-LANG-04B et T-LANG-05 ou reduire les metadonnees (RVW-015)
   3. Produire les preuves de substance alignees pour T-LANG-03C (creation et documentation de module, RVW-024)
   4. Fournir une preuve de cours portant sur les causes typiques de bugs pour T-LANG-05 (RVW-021)
-  5. Rejuger l'ensemble via judge_campaign --force
+  5. Après validation humaine des corrections, demander une activation ponctuelle de la campagne de substance ; sinon conserver les verdicts à revoir
 
 ### E4 — Reconstruction de la chaine T07 graphes
 - **Perimetre** : T07 (cours, TD, evaluation, bareme, corrige)
@@ -114,5 +131,7 @@ Tout enrichissement suit le cycle :
 
 ## Statut
 
-POST-FLIP — regime de croisiere. Le rapport de revue reste dans
+POST-FLIP — feuille de route de croisiere, dont l'exécution reste dormante tant
+qu'un responsable ne l'active pas explicitement. Elle n'est pas branchée sur la
+CI racine. Le rapport de revue reste dans
 `reports/final_recipe_review_nsi.md` comme reference.

@@ -1,7 +1,7 @@
 # Workflow agentique de production du manuel
 ## Sourcing web → base de connaissances → composition assistée → validation → publication
 
-Ce document définit le système complet : cartographie des sources, pipeline de collecte, architecture RAG, agents spécialisés, serveurs MCP, orchestration, contrôle qualité et cadre juridique. Il est conçu pour s'appuyer sur l'infrastructure existante (Claude Code/Cowork, dépôts GitHub, PostgreSQL + pgvector, chaîne LaTeX) et sur une méthode de travail par LOTs.
+Ce document définit le système complet : cartographie des sources, pipeline de collecte, architecture RAG, agents spécialisés, serveurs MCP, orchestration, contrôle qualité et cadre juridique. Il est conçu pour s'appuyer sur l'infrastructure existante (agent de production local, dépôts GitHub, PostgreSQL + pgvector, chaîne LaTeX) et sur une méthode de travail par LOTs.
 
 ---
 
@@ -116,11 +116,11 @@ Principe directeur : **chaque étape produit des artefacts versionnés dans Git*
 Le point dur : **extraire les mathématiques proprement**.
 
 1. **Extraction** :
-   - PDF texte : `pymupdf` ; PDF scanné : OCR (`tesseract` + fallback vision LLM pour les formules).
-   - Formules : conversion vers LaTeX via un modèle vision (Claude sur images de zones détectées comme mathématiques) quand l'extraction texte les casse — c'est le poste où le LLM apporte le plus.
+   - PDF texte : `pymupdf` ; PDF scanné : OCR avec `tesseract`.
+   - Formules : `latex_fallback()` est un point d'extension non implémenté qui laisse actuellement le texte inchangé. Aucune zone suspecte ni aucun statut `manual_review` n'est produit automatiquement ; le contrôle humain doit repérer les formules mal extraites.
    - HTML : `trafilatura` + règles par source (les sites T4 ont des gabarits stables → extracteurs dédiés amortis).
 2. **Normalisation** : tout converge vers Markdown+LaTeX (`$...$`), en-têtes hiérarchiques reconstruits.
-3. **Découpage sémantique** : par unité pédagogique (un exercice = un chunk ; une définition+exemple = un chunk ; une activité = un chunk éventuellement long), jamais par fenêtre fixe de tokens. Un classifieur LLM léger (Haiku) étiquette chaque chunk : `{type: cours|methode|exercice|corrige|activite|evaluation|erreur_type, niveau, theme, capacites_probables[], difficulte_estimee}`.
+3. **Découpage et classification sémantiques** : par unité pédagogique (un exercice = un chunk ; une définition+exemple = un chunk ; une activité = un chunk éventuellement long), jamais par fenêtre fixe de tokens. `make ingest` sépare l'extraction et le stockage de la classification : sans clé OpenRouter, le classifieur local déterministe étiquette chaque chunk ; si OpenRouter est configuré, le modèle explicitement fourni par `OPENROUTER_MODEL` peut proposer les cinq champs canoniques consultatifs : `{chunk_type, niveau, theme, capacites, difficulte}`.
 4. **Sortie** : `corpus/{SRC-id}/{doc-id}/chunk-*.json` avec le texte normalisé + métadonnées + `usage_policy` héritée du registre.
 
 ## 3.4 Indexation (réutilisation directe de l'infra RAG existante)
@@ -145,7 +145,7 @@ Le point dur : **extraire les mathématiques proprement**.
 
 # PARTIE 5 — ÉTAPE E : AGENTS DE COMPOSITION
 
-Chaque agent est un rôle avec un prompt système dédié, le gabarit du manuel (le document de conception) en contexte, et le dossier de curation de la capacité concernée. Modèles : Sonnet pour la production de masse, Opus/Fable pour les objets à forte exigence (démonstrations, sujets d'évaluation, strate ★).
+Chaque agent est un rôle avec un prompt système dédié, le gabarit du manuel (le document de conception) en contexte, et le dossier de curation de la capacité concernée. Toute assistance LLM externe passe par OpenRouter avec le modèle explicitement fixé dans `OPENROUTER_MODEL` ; aucun modèle de repli n'est sélectionné implicitement. Les sorties restent des propositions soumises aux gates et aux revues humaines applicables.
 
 ## 5.1 Rédacteur-Cours
 - **Entrée** : capacités + brief de curation + extraits T1 (formulations officielles).
@@ -197,12 +197,12 @@ Chaque agent est un rôle avec un prompt système dédié, le gabarit du manuel 
 
 ## 6.2 Orchestration
 
-- **Poste de pilotage** : Claude Code (ou Cowork pour les phases de curation/revue) avec les MCP ci-dessus configurés dans le projet. Chaque rôle d'agent = un fichier de commande/skill (`/rediger-methode C3`, `/generer-exercices C3 --parcours 2 --n 6`, `/verifier chap-suites`).
-- **Automatisation lourde** (crawl, ingestion, indexation, batchs de vérification) : scripts Python + cron ou n8n sur le Hetzner ; pas besoin d'agent LLM pour ce qui est déterministe.
+- **Poste de pilotage** : agent de production local avec les MCP ci-dessus configurés dans le projet. Chaque rôle d'agent = un fichier de commande/skill (`/rediger-methode C3`, `/generer-exercices C3 --parcours 2 --n 6`, `/verifier chap-suites`).
+- **Automatisation lourde** (crawl, ingestion, indexation, lots de vérification) : scripts Python + cron ou n8n sur le Hetzner ; pas besoin d'agent LLM pour ce qui est déterministe.
 - **CI GitHub Actions** sur le dépôt du manuel :
   - à chaque PR : compilation LaTeX complète, exécution des scripts SymPy attachés aux objets modifiés, contrôle du schéma des métadonnées, rapport de couverture des capacités ;
   - merge bloqué si un gate échoue.
-- **Batch API Anthropic** pour les productions de masse (génération des coups de pouce, des QCM, des versions B) : −50 % de coût, adapté aux lots non interactifs.
+- **Accès LLM externe** : uniquement `POST https://openrouter.ai/api/v1/chat/completions`, authentifié par `OPENROUTER_API_KEY`, avec le modèle exact de `OPENROUTER_MODEL`. Sans clé, la classification locale déterministe reste hors réseau ; une clé sans modèle est une erreur avant réseau. Aucune sélection implicite de modèle n'est admise. Les réponses sont consultatives, vérifiées localement et ne valent aucune validation disciplinaire ou humaine. Aucun secret ni donnée personnelle n'est transmis. Tout smoke test est lancé et vérifié manuellement par un humain, jamais en CI ni automatiquement.
 
 ## 6.3 Structure du dépôt
 
@@ -237,7 +237,7 @@ Cycle de production d'un chapitre (calibrage : ~2 semaines en travail parallèle
 | **LOT 3** | Cours (strates 1-2-3) + fiches méthodes | Rédacteurs | Conformité B.O. + compilation + revue humaine |
 | **LOT 4** | Exercices 3 parcours + corrigés + coups de pouce | Générateur + Corrigés | 100 % SymPy verified ou revue tracée ; anti-similarité passé ; couverture capacités × parcours complète |
 | **LOT 5** | QCM diagnostic + auto-évaluation + remédiation | Générateur-QCM | Chaque distracteur relié à une erreur documentée |
-| **LOT 6** | Évaluation A + version B (re-paramétrage sympy) + barème compétences | Rédacteur (Opus/Fable) + humain | Barème vérifié, sujet testé en résolution aveugle par un agent |
+| **LOT 6** | Évaluation A + version B (re-paramétrage sympy) + barème compétences | Rédacteur + humain | Barème vérifié, sujet testé en résolution aveugle par un agent |
 | **LOT 7** | Assemblage, relecture finale humaine (3 passes), publication PDF + exports | CI + humain | Check-list qualité (Partie 8 du doc de conception) 100 % |
 
 Chaque LOT laisse un fichier de synthèse (`LOT-n_rapport.md`) dans le dépôt : décisions, verdicts, coûts API, points reportés — traçabilité identique au workflow de certification NSI.
@@ -257,7 +257,7 @@ tentative de ré-attestation.
 ## Estimation de charge (ordre de grandeur, chapitre lycée standard)
 
 - Corpus : 300–800 chunks utiles par thème après curation.
-- Génération : ~120 objets par chapitre (sections de cours, 7 méthodes, ~60 exercices, corrigés, 15 QCM, 2 sujets). En Batch API Sonnet + passes Opus ciblées : quelques dollars à quelques dizaines de dollars par chapitre — le coût dominant reste la revue humaine, que le système réduit à ~4 h/chapitre au lieu de la rédaction intégrale.
+- Génération : ~120 objets par chapitre (sections de cours, 7 méthodes, ~60 exercices, corrigés, 15 QCM, 2 sujets). Le coût OpenRouter est mesuré à partir des réponses du service pour le modèle explicitement configuré ; aucune remise ni disponibilité n'est présumée. Le coût dominant reste la revue humaine.
 
 ---
 

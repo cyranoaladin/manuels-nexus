@@ -1,6 +1,6 @@
 ---
 name: nexus-manual-quality
-description: Use for auditing, correcting, compiling, validating, reviewing, or releasing Nexus Réussite school manuals, especially the Mathématiques Première spécialité 2026-2027 manual. Trigger on manual, LaTeX, curriculum compliance, mathematical review, student/teacher variants, PDF preflight, educational design, Chutes expert review, or release-quality work. Do not use for unrelated software tasks.
+description: Use for auditing, correcting, compiling, validating, reviewing, or releasing Nexus Réussite school manuals, especially the Mathématiques Première spécialité 2026-2027 manual. Trigger on manual, LaTeX, curriculum compliance, mathematical review, student/teacher variants, PDF preflight, educational design, OpenRouter expert review, or release-quality work. Do not use for unrelated software tasks.
 ---
 
 # Nexus Manual Quality
@@ -60,14 +60,21 @@ For curriculum or exam claims:
 - update the programme matrix;
 - distinguish mandatory, optional enrichment and out-of-scope content.
 
-### 4. Use Chutes when available
+### 4. Use OpenRouter only on explicit human instruction
 
-- smoke-test the MCP;
-- use only listed models;
-- consult an independent relevant expert;
+- treat OpenRouter as the sole external LLM destination;
+- use only `https://openrouter.ai/api/v1/chat/completions` with the explicitly
+  configured `OPENROUTER_API_KEY` and `OPENROUTER_MODEL`;
+- without a key, keep deterministic local behavior when available and make no
+  network call; with a key but no model, stop on a configuration error;
+- run any smoke test separately, only after explicit human instruction, never
+  automatically or in CI;
 - do not transmit secrets or personal data;
-- verify recommendations locally;
-- save a compact report in `audit/chutes/`.
+- treat external output as consultative, verify it locally, and preserve the
+  required independent and human reviews;
+- keep dated historical evidence immutable; save a new optional compact report
+  under `audit/openrouter/` only after a consultation actually ran;
+- Aucun nouvel appel Chutes.
 
 ### 5. Reproduce before fixing
 

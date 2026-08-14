@@ -54,7 +54,23 @@ E1–E8 identiques au manuel maths (contrat, diagnostic+fiches R, cours 3 strate
 
 ## 5. Architecture imposée
 
-Python ≥ 3.11, pandoc (filtre Lua), texlive-full, ruff, pytest ; PostgreSQL+pgvector optionnel (MODE FICHIERS supporté nativement, leçon du run maths) ; FastMCP ; charte Nexus synchronisée depuis manuel-maths (tronc commun intouchable, extensions NSI en fichiers séparés) ; modèles Anthropic (Sonnet production, Opus ◆◆◆/ECE/adversarial) quand la clé est disponible, rédaction locale par l'agent sinon (mode nominal, coût 0 $ consigné).
+Python ≥ 3.11, pandoc (filtre Lua), texlive-full, ruff, pytest ; PostgreSQL+pgvector optionnel (MODE FICHIERS supporté nativement, leçon du run maths) ; FastMCP ; charte Nexus synchronisée depuis manuel-maths (tronc commun intouchable, extensions NSI en fichiers séparés).
+
+OpenRouter est l'unique passerelle LLM externe. Le seul client HTTP LLM partagé,
+`nexus_external/openrouter_client.py`, porte l'endpoint fixe
+`https://openrouter.ai/api/v1/chat/completions` ; aucun guide ou fichier de
+configuration ne définit un endpoint LLM alternatif. Les appels configurés
+lisent uniquement `OPENROUTER_API_KEY` et `OPENROUTER_MODEL`. Aucun modèle n'est
+implicite : sans clé, les surfaces qui le permettent restent en mode local ou
+conservateur sans réseau ; une clé présente sans modèle provoque une erreur
+avant réseau, sans repli fournisseur.
+
+L'extraction de documents, les embeddings, la base vectorielle et la recherche
+RAG restent des transports distincts. `RAG_API_BASE_URL` désigne uniquement la
+recherche RAG et n'est jamais utilisé comme endpoint LLM. Avant tout appel
+externe, le contenu doit être autorisé, anonymisé si nécessaire et exempt de
+secret ou de donnée personnelle. Une réponse LLM reste consultative et ne
+remplace ni les gates locaux ni la validation humaine.
 
 ## 6. Check-list NSI ajoutée au LOT 7 (en plus de docs/01 Partie 8)
 

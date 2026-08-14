@@ -115,17 +115,53 @@ pytest
 make audit
 ```
 
-Le dépôt est orienté vers une revue continue : chaque ajout doit être répercuté dans `manifest.csv`, `coverage.md` et `inventory_report.md`.
+Le dépôt est orienté vers une revue continue. Les sorties d'inventaire sont
+reconstruites par `python3 -m scripts.rebuild_inventory`, jamais corrigées à la
+main. Un contenu pédagogique peut affecter `manifest.csv` et la couverture ;
+un ajout d'outillage affecte `manifest_tooling.csv` et
+`inventory_report.md`. Pour le lot OpenRouter, `manifest.csv`, `coverage.md` et
+`duplicates_report.md` doivent rester inchangés.
 
-## 10) Substance et statuts
+## 10) Appels externes, RAG et secrets
+
+Les valeurs locales du corpus sont centralisées dans `.env.rag`, créé depuis
+`.env.rag.example` et toujours ignoré par Git. Les seules variables LLM sont :
+
+```env
+OPENROUTER_API_KEY=
+OPENROUTER_MODEL=
+```
+
+OpenRouter est l'unique passerelle LLM externe. L'endpoint fixe
+`https://openrouter.ai/api/v1/chat/completions` appartient exclusivement au
+client partagé `nexus_external/openrouter_client.py` : il n'existe aucune
+variable d'endpoint LLM dans `.env.rag` ou dans la configuration RAG. Aucun
+modèle n'est implicite. Sans clé, la classification reste locale et le juge de
+substance n'effectue aucun appel LLM ; une clé présente sans
+modèle provoque une erreur avant tout réseau LLM. La recherche RAG peut encore
+être appelée si elle est configurée. La campagne distante exige donc les
+deux valeurs explicites, tandis que `scripts/run_substance_judge.py` reste un
+pré-jugement déterministe hors réseau.
+
+`RAG_API_BASE_URL` et `RAG_API_KEY` servent uniquement à la recherche RAG. Les
+opérations d'extraction, d'embedding et de base vectorielle conservent leurs
+propres outils et paramètres ; aucune ne passe par le client LLM. Avant toute
+consultation externe, le contenu doit être autorisé, anonymisé si nécessaire et
+exempt de secret ou de donnée personnelle. Une réponse distante reste
+consultative et doit être vérifiée localement puis humainement.
+
+## 11) Substance et statuts
 
 Le pipeline de substance est conservateur :
 
 - `scripts/run_substance_judge.py` et `scripts/check_substance_anchors.py` produisent et vérifient les verdicts au format `substance_verdict.schema.json`.
-- `scripts/substance_judge.py` peut proposer des preuves depuis le RAG/LLM, mais ne constitue pas une validation humaine.
+- `scripts/substance_judge.py` peut proposer des preuves depuis le RAG et, si les deux variables OpenRouter sont explicitement configurées, demander un avis LLM ; il ne constitue pas une validation humaine.
 - `covered`, `validated_*` et `published` restent à `0` tant qu’une revue humaine pédagogique et scientifique n’est pas tracée.
 
-Le smoke RAG est optionnel et séparé des tests pytest :
+Le smoke RAG configuré est une opération humaine optionnelle, distincte
+d'OpenRouter. Pytest et la CI exécutent uniquement son chemin de garde avec un
+fichier de configuration volontairement absent ; aucun smoke réseau configuré
+n'est lancé automatiquement :
 
 ```bash
 python -m scripts.rag_smoke_test

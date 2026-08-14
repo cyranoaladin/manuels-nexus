@@ -6,11 +6,25 @@ Dépôt de production agentique d'un manuel de mathématiques conforme aux progr
 
 ```bash
 make setup                      # environnement + base de données
-cp .env.example .env            # renseigner DATABASE_URL et ANTHROPIC_API_KEY
+cp .env.example .env            # renseigner DATABASE_URL ; OpenRouter est optionnel
 make crawl                      # collecte des sources actives du registre
 make ingest && make index       # normalisation + indexation pgvector
-claude                          # lancer Claude Code : lire CLAUDE.md, démarrer LOT 0
 ```
+
+## Accès LLM externe
+
+La classification peut utiliser OpenRouter seulement si `OPENROUTER_API_KEY` et
+`OPENROUTER_MODEL` sont tous deux renseignés. L'unique endpoint LLM autorisé est
+`POST https://openrouter.ai/api/v1/chat/completions` ; aucun endpoint ni modèle
+de repli n'est implicite. Sans clé, `make ingest` conserve la classification
+locale déterministe et n'ouvre aucune connexion. Une clé sans modèle provoque
+une erreur avant réseau.
+
+Toute réponse distante reste consultative et doit être vérifiée localement :
+elle ne vaut ni source officielle, ni validation disciplinaire, pédagogique ou
+humaine. Aucun secret ni donnée personnelle ne doit être envoyé. Un smoke test
+OpenRouter éventuel est lancé et vérifié par un humain uniquement, jamais par
+la CI ni automatiquement.
 
 ## Cartographie du dépôt
 
@@ -28,4 +42,4 @@ claude                          # lancer Claude Code : lire CLAUDE.md, démarrer
 | `prompts/` | Prompts systèmes des agents de composition |
 | `gabarits/` | Classe LaTeX `nexus-manuel.cls` + macros + gabarit chapitre |
 | `chapitres/` | Un dossier par chapitre (objets .tex + validations + rapports LOT) |
-| `.claude/commands/` | Slash commands Claude Code |
+| `.claude/commands/` | Commandes d'agent versionnées du projet |

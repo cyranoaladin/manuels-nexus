@@ -5,13 +5,15 @@
 - **PostgreSQL ≥ 16 + pgvector** : base `corpus_manuel_maths`, schéma `db/schema.sql` (4 tables + 1 vue : capacites, chunks, objets, validations, couverture).
 - **Embeddings** : BGE-M3 1024d (aligné sur la stack RAG existante) ; **reranker** CrossEncoder MiniLM ; recherche hybride vecteur (0.6) + BM25 tsvector français (0.4) puis rerank.
 - **LaTeX** : texlive-full, classe `gabarits/nexus-manuel.cls`, compilation pdflatex ×2.
-- **LLM** : Anthropic — Haiku (classification de chunks), Sonnet (production de masse), Opus/Fable (strate ★, ◆◆◆, adversarial). Batch API pour les lots non interactifs (coûts ÷2).
-- **MCP** : 4 serveurs FastMCP en stdio, déclarés dans `.mcp.json` (chargés automatiquement par Claude Code à l'ouverture du projet).
+- **LLM externe** : OpenRouter uniquement, par `POST https://openrouter.ai/api/v1/chat/completions`, authentifié avec `OPENROUTER_API_KEY` et le modèle exact de `OPENROUTER_MODEL`. Aucun endpoint ou modèle de repli n'est implicite. Sans clé, la classification reste locale, déterministe et hors réseau ; une clé sans modèle échoue avant réseau. Les réponses sont consultatives, vérifiées localement et ne valent aucune validation disciplinaire ou humaine. Aucun secret ni donnée personnelle n'est transmis. Tout smoke test reste humain, jamais CI ou automatique.
+- **MCP** : 4 serveurs FastMCP en stdio, déclarés dans `.mcp.json` et chargés par l'environnement agentique local à l'ouverture du projet.
 
 ## Flux de données
 ```
 registry.yaml -> crawl.py -> raw/{SRC}/{date}/ (+manifest)
-             -> ingest.py -> corpus/**/chunk-*.json   (schéma chunk.schema.json)
+             -> ingest.py -> extraction/normalisation -> classification locale
+                                               ou OpenRouter explicitement configuré
+                        -> corpus/**/chunk-*.json   (schéma chunk.schema.json)
              -> index.py  -> table chunks (embedding + tsv)
 contrat.yaml + search_corpus -> dossier_curation.json
 prompts/* + curation -> chapitres/{CHAP}/{type}/*.tex  (en-tête % META + bloc % VERIFY)
@@ -27,5 +29,5 @@ assemble.py -> build/{CHAP}/{CHAP}_{variant}.pdf
 
 ## Déploiement
 - Base + éventuellement MCP corpus : serveur Hetzner existant (tunnel SSH ou exposition privée).
-- Agents : Claude Code local (`claude` à la racine du dépôt) ; les serveurs MCP démarrent en stdio local.
+- Agents : agent de production local ; les serveurs MCP démarrent en stdio local.
 - CI : GitHub Actions (`.github/workflows/ci.yml`), gates légers uniquement (sans embeddings) ; les gates lourds tournent en local/serveur avant push.

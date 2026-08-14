@@ -1,16 +1,16 @@
 # MISSION AUTONOME — Élaboration complète du manuel de mathématiques Première EDS
 
-Tu es Claude Code, agent de production du manuel. Tu travailles dans un dossier contenant : `manuel-maths/` (le noyau du projet), `manuel_maths_conception.md` et `workflow_production_manuel.md` (copies des documents de conception, également présents dans `manuel-maths/docs/`).
+Tu es l'agent de production du manuel. Tu travailles dans un dossier contenant : `manuel-maths/` (le noyau du projet), `manuel_maths_conception.md` et `workflow_production_manuel.md` (copies des documents de conception, également présents dans `manuel-maths/docs/`).
 
 Ta mission : **produire le manuel complet de Première EDS Mathématiques, de bout en bout, sans interruption**, en suivant le gabarit pédagogique et le pipeline définis dans le dépôt.
 
 ---
 
-## 0. RÉGIME D'AUTONOMIE (modifie le protocole standard)
+## 0. RÉGIME D'AUTONOMIE (préparation continue, approbations préservées)
 
-Le fichier `manuel-maths/CLAUDE.md` prévoit des arrêts pour validation humaine en sortie des LOTs 0, 2, 3 et 7. **Pour cette mission, instruction explicite de chaîner** : tu ne t'arrêtes à aucun LOT. Les validations humaines sont remplacées par le protocole d'auto-validation du §4 ci-dessous. Tout le reste de `CLAUDE.md` reste en vigueur, en particulier les règles absolues R1–R8 : les gates techniques (SymPy, similarité, compilation, couverture, conformité) restent **bloquants** — un gate qui échoue se corrige, il ne se contourne jamais.
+Le fichier `manuel-maths/CLAUDE.md` prévoit des arrêts pour validation humaine en sortie des LOTs 0, 2, 3 et 7. **Pour cette mission, l'agent peut chaîner la préparation technique des LOTs**, mais le protocole du §4 est une pré-revue et ne remplace aucune approbation humaine. Tout artefact en attente conserve un statut `needs_*_review` ; aucun tag, aucune publication et aucune déclaration de LOT approuvé ne sont permis avant la validation humaine tracée. Tout le reste de `CLAUDE.md` reste en vigueur, en particulier les règles absolues R1–R8 : les gates techniques (SymPy, similarité, compilation, couverture, conformité) restent **bloquants** — un gate qui échoue se corrige, il ne se contourne jamais.
 
-Tu ne poses AUCUNE question. Face à un choix, tu appliques dans l'ordre : (1) le cahier des charges, (2) les docs de conception, (3) la solution la plus simple et réversible, documentée dans le rapport de LOT. Les seules conditions d'arrêt total sont listées au §7.
+Hors demande d'une validation humaine explicitement requise, tu ne poses aucune question. Face à un choix, tu appliques dans l'ordre : (1) le cahier des charges, (2) les docs de conception, (3) la solution la plus simple et réversible, documentée dans le rapport de LOT. Les conditions d'arrêt sont listées au §7.
 
 ---
 
@@ -18,7 +18,7 @@ Tu ne poses AUCUNE question. Face à un choix, tu appliques dans l'ordre : (1) l
 
 1. `cd manuel-maths` — tout le travail se fait dans le dépôt. Si ce n'est pas un dépôt git : `git init && git add -A && git commit -m "[INIT] noyau du projet"`.
 2. Lis dans l'ordre : `CLAUDE.md`, `CAHIER_DES_CHARGES.md`, `docs/01` à `docs/05`. Ne recommence pas ce qui existe déjà : inspecte `chapitres/` et les rapports de LOT présents pour reprendre là où le travail s'est arrêté (la mission est **reprenable** : à tout redémarrage, refais cette inspection).
-3. `make setup` puis `cp .env.example .env`. Renseigne `ANTHROPIC_API_KEY` depuis l'environnement si disponible.
+3. `make setup` puis `cp .env.example .env`. Pour activer la classification LLM externe, renseigne conjointement `OPENROUTER_API_KEY` et `OPENROUTER_MODEL` depuis l'environnement. Tout appel LLM externe passe exclusivement par `POST https://openrouter.ai/api/v1/chat/completions`, sans endpoint ni modèle implicite. Sans clé, la classification reste locale, déterministe et sans réseau ; une clé présente sans modèle provoque une erreur de configuration avant réseau. Une réponse OpenRouter reste consultative : elle est vérifiée localement et ne vaut ni source officielle, ni validation mathématique, scientifique ou pédagogique, ni approbation humaine. Aucun secret ni donnée personnelle ne doit être transmis. Un éventuel smoke test OpenRouter est déclenché et vérifié par un humain uniquement, jamais par la CI ni par une automatisation.
 4. **Détection des capacités de l'environnement**, avec modes dégradés :
    - PostgreSQL disponible → `make db`, pipeline complet.
    - PostgreSQL indisponible → tente `docker run -d --name manuel-pg -e POSTGRES_PASSWORD=manuel -p 5432:5432 pgvector/pgvector:pg16` ; si Docker indisponible aussi → **MODE FICHIERS** : le corpus reste en JSON dans `corpus/`, la recherche se fait par lecture directe + filtrage lexical, les fonctions du MCP banque sont remplacées par la lecture des en-têtes `% META:` (le script `coverage_report.py` fonctionne déjà ainsi). Consigne le mode retenu dans `LOT-0_rapport.md`.
@@ -51,15 +51,15 @@ Après les 10 chapitres : **LOT FINAL** (§5) — blocs transversaux et assembla
 
 ---
 
-## 3. BOUCLE DE PRODUCTION PAR CHAPITRE (LOTs 0 → 7, sans pause)
+## 3. BOUCLE DE PRÉPARATION PAR CHAPITRE (LOTs 0 → 7, approbations bloquantes)
 
 Pour CHAQUE chapitre, exécute strictement :
 
-**LOT 0 — Contrat.** Référentiel + contrat.yaml (capacités C1..Cn en langage élève, prérequis R*, situation d'accroche, temps estimés). Auto-validation : schéma `contrat_chapitre.schema.json` + relecture adversariale (§4). Commit `[CHAP][LOT-0]`.
+**LOT 0 — Contrat.** Référentiel + contrat.yaml (capacités C1..Cn en langage élève, prérequis R*, situation d'accroche, temps estimés). Pré-revue automatique : schéma `contrat_chapitre.schema.json` + relecture adversariale (§4), puis validation humaine tracée. Commit `[CHAP][LOT-0]`.
 
 **LOT 1 — Corpus.** Si réseau : `make crawl` ciblé (sources actives pertinentes pour le thème), `make ingest`, `make index` (si base). Sinon : passe en génération ex nihilo. Gate : disponibilité d'au moins un brief exploitable par capacité (sinon documente l'angle mort). Commit.
 
-**LOT 2 — Curation.** Applique `prompts/curateur.md` → `dossier_curation.json`. En mode fichiers/hors-ligne : le "dossier de curation" est constitué de tes propres synthèses par capacité (approches d'introduction, erreurs types connues des rapports de jury, formats d'examen récurrents) — même format JSON. Auto-validation §4. Commit.
+**LOT 2 — Curation.** Applique `prompts/curateur.md` → `dossier_curation.json`. En mode fichiers/hors-ligne : le "dossier de curation" est constitué de tes propres synthèses par capacité (approches d'introduction, erreurs types connues des rapports de jury, formats d'examen récurrents) — même format JSON. Pré-revue §4, puis validation humaine tracée. Commit.
 
 **LOT 3 — Cours + méthodes.** `prompts/redacteur_cours.md` (3 strates ; démonstrations exigibles complètes en ★ ; ≥ 3 `\erreurFrequente` par chapitre ; exemple + contre-exemple après chaque définition) puis `prompts/redacteur_methodes.md` (une fiche M par capacité, exemple entièrement nouveau). Chaque .tex : en-tête META + compilation objet (mcp-latex ou `assemble.py`). Gates : conformité (aucune notion hors référentiel en strates 1–2), compilation, similarité (si corpus). Revue adversariale sur toutes les démonstrations. Commit.
 
@@ -69,18 +69,18 @@ Pour CHAQUE chapitre, exécute strictement :
 
 **LOT 6 — Évaluations.** Sujet A (barème par compétences), version B par re-paramétrage sympy des exercices paramétrés (vérifie la version B par le même bloc VERIFY adapté), les 2 TD (fil rouge résolvant la situation d'accroche + TD contextualisé avec Python et question orale). Gate spécial : **résolution aveugle** — résous le sujet A dans une session de raisonnement séparée, sans consulter le corrigé ; toute divergence entre ta résolution et le corrigé = erreur à instruire avant de continuer. Commit.
 
-**LOT 7 — Assemblage chapitre.** `make chapter CHAP=...` (+ variantes `methodes` et `remediation`), check-list qualité de `docs/01` Partie 8 exécutée point par point et consignée dans `LOT-7_rapport.md` avec ✅/❌ ; tout ❌ se corrige avant de passer au chapitre suivant. Mise à jour de `MISSION_LOG.md`. Commit + tag `git tag chap/{ID}-v1`.
+**LOT 7 — Assemblage chapitre.** `make chapter CHAP=...` (+ variantes `methodes` et `remediation`), check-list qualité de `docs/01` Partie 8 exécutée point par point et consignée dans `LOT-7_rapport.md` avec ✅/❌ ; tout ❌ se corrige avant de passer au chapitre suivant. Mise à jour de `MISSION_LOG.md`. Le commit peut préparer la revue, mais le tag `chap/{ID}-v1` n'est créé qu'après validation humaine tracée.
 
 **Discipline inter-chapitres** : à partir du chapitre 2, injecte 2–3 objets du chapitre 1 (mêmes types) comme few-shot dans chaque prompt de production — c'est le mécanisme de consistance du manuel. Si tu améliores un prompt ou une macro en cours de route, applique l'amélioration aux chapitres SUIVANTS et note-la dans `MISSION_LOG.md` (pas de reprise rétroactive avant le LOT FINAL).
 
 ---
 
-## 4. AUTO-VALIDATION (remplace les validations humaines pour cette mission)
+## 4. PRÉ-REVUE AUTOMATIQUE (ne remplace pas les validations humaines)
 
-Pour chaque point qui exigeait une validation humaine :
+Avant chaque point qui exige une validation humaine :
 1. **Relecture adversariale systématique** : applique `prompts/verificateur_adversarial.md` dans une passe de raisonnement distincte (tu changes de rôle : tu attaques ta propre production sur les 6 angles). Verdict JSON écrit dans `validations/`. Une faille majeure = correction immédiate puis nouvelle passe.
 2. **Périmètre adversarial obligatoire** : 100 % des contrats, démonstrations, fiches méthodes et sujets d'évaluation ; 30 % des exercices ◆◆/◆◆◆ tirés au sort ; 20 % des corrigés.
-3. **Registre des points en attente humaine** : tout ce qu'un humain devra re-vérifier avant commercialisation (libellés B.O. non confirmés en ligne, objets `manual_review`, questions de licence) est centralisé dans `A_VALIDER_HUMAIN.md` à la racine — tu le complètes au fil de l'eau, tu ne bloques jamais dessus.
+3. **Registre des points en attente humaine** : tout ce qu'un humain doit re-vérifier avant approbation ou commercialisation (libellés B.O. non confirmés en ligne, objets `manual_review`, questions de licence) est centralisé dans `A_VALIDER_HUMAIN.md` à la racine. La préparation peut continuer avec un statut `needs_*_review`, mais l'approbation, le tag et la publication restent bloqués.
 
 ---
 
@@ -92,7 +92,7 @@ Après le chapitre 10 :
 3. **Déclinaisons** : `MANUEL_1SPE_methodes.pdf` (toutes les fiches M), `MANUEL_1SPE_remediation.pdf`, export JSON consolidé de tous les QCM (`build/qcm_1SPE.json`).
 4. **Passe de cohérence globale** : renvois inter-chapitres valides (les `\refExos` résolus, les fiches R pointant vers les bons chapitres d'origine), numérotation continue, notations uniformes (script de grep sur les motifs interdits de `docs/05`), aucune capacité du référentiel sans objet (couverture sur les 10 chapitres).
 5. **Rapport final `RAPPORT_FINAL.md`** : statistiques (objets produits par type/statut, matrice de couverture globale, coût API total, temps), synthèse de `A_VALIDER_HUMAIN.md`, et les 10 améliorations prioritaires pour la v2.
-6. Commit final + tag `git tag manuel-1SPE-v1.0`.
+6. Préparer le commit final ; créer le tag `manuel-1SPE-v1.0` uniquement après les validations humaines tracées des jalons bloquants.
 
 ---
 
@@ -103,10 +103,11 @@ Après le chapitre 10 :
 - **Commits** : atomiques, format `[CHAP][LOT-n] description` — c'est ton mécanisme de reprise.
 - **Aucune dégradation silencieuse** : tout mode dégradé, tout gate différé, toute hypothèse est écrit dans le rapport de LOT concerné.
 
-## 7. CONDITIONS D'ARRÊT TOTAL (les seules)
+## 7. CONDITIONS D'ARRÊT OU DE PAUSE
 
 1. Mission accomplie : `MANUEL_1SPE_v1.pdf` compilé + `RAPPORT_FINAL.md` écrit.
 2. Impossibilité matérielle persistante (disque plein, clé API invalide, pdflatex ET production .tex impossibles) après 3 tentatives de contournement documentées → écris `ARRET_MISSION.md` (état exact, cause, procédure de reprise) et arrête-toi proprement.
 3. Détection d'un problème d'intégrité (corruption du dépôt, gates qui passent alors qu'ils devraient échouer) → même procédure : ne jamais continuer à produire sur des fondations douteuses.
+4. Jalon soumis à validation humaine → conserver les artefacts en `needs_*_review`, consigner l'état exact et attendre la décision avant tout tag, publication ou déclaration d'approbation.
 
 Commence maintenant par la PHASE 0, puis le chapitre `1SPE-SUITES`, LOT 0. Bonne production.
