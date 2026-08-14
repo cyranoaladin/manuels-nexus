@@ -1,14 +1,22 @@
 # Guide des agents de composition
 
-| # | Agent | Prompt | Entrées | Sorties | Modèle | Gates aval |
+| # | Agent | Prompt | Entrées | Sorties | Configuration LLM | Gates aval |
 |---|---|---|---|---|---|---|
-| 1 | Curateur | prompts/curateur.md | contrat.yaml + MCP corpus | dossier_curation.json | Sonnet | validation humaine |
-| 2 | Rédacteur-Cours | prompts/redacteur_cours.md | curation + référentiel | cours/*.tex | Opus (strate 1/★), Sonnet (strate 2) | conformité, compilation, similarité, revue humaine |
-| 3 | Rédacteur-Méthodes | prompts/redacteur_methodes.md | curation + cours | methodes/*.tex | Sonnet | compilation, similarité |
-| 4 | Générateur-Exercices | prompts/generateur_exercices.md | curation + méthodes | exercices/*.tex (+ coups de pouce) | Sonnet (◆/◆◆), Opus (◆◆◆) | sympy, similarité, couverture |
-| 5 | Rédacteur-Corrigés | prompts/redacteur_corriges.md | énoncés SEULS | corriges/*.tex | Sonnet | sympy, adversarial (échantillon) |
-| 6 | Générateur-QCM | prompts/generateur_qcm.md | curation (erreurs types) | qcm/*.json + *.tex, remediation/*.tex | Sonnet/Haiku | lien distracteur↔erreur (revue) |
-| 7 | Vérificateur adversarial | prompts/verificateur_adversarial.md | objet + référentiel | verdict JSON dans validations/ | Opus/Fable | — |
+| 1 | Curateur | prompts/curateur.md | contrat.yaml + MCP corpus | dossier_curation.json | `OPENROUTER_MODEL` | validation humaine |
+| 2 | Rédacteur-Cours | prompts/redacteur_cours.md | curation + référentiel | cours/*.tex | `OPENROUTER_MODEL` | conformité, compilation, similarité, revue humaine |
+| 3 | Rédacteur-Méthodes | prompts/redacteur_methodes.md | curation + cours | methodes/*.tex | `OPENROUTER_MODEL` | compilation, similarité |
+| 4 | Générateur-Exercices | prompts/generateur_exercices.md | curation + méthodes | exercices/*.tex (+ coups de pouce) | `OPENROUTER_MODEL` | sympy, similarité, couverture |
+| 5 | Rédacteur-Corrigés | prompts/redacteur_corriges.md | énoncés SEULS | corriges/*.tex | `OPENROUTER_MODEL` | sympy, adversarial (échantillon) |
+| 6 | Générateur-QCM | prompts/generateur_qcm.md | curation (erreurs types) | qcm/*.json + *.tex, remediation/*.tex | `OPENROUTER_MODEL` | lien distracteur↔erreur (revue) |
+| 7 | Vérificateur adversarial | prompts/verificateur_adversarial.md | objet + référentiel | verdict JSON dans validations/ | `OPENROUTER_MODEL` | — |
+
+## Passerelle LLM externe
+
+OpenRouter est l'unique destination LLM externe active. Le modèle est fourni
+explicitement par `OPENROUTER_MODEL` ; aucun modèle n'est sélectionné implicitement.
+Ne transmettre aucun secret ni aucune donnée personnelle. Toute
+réponse externe est consultative : la vérifier localement et conserver les
+revues et validations humaines requises.
 
 ## Règles d'injection de contexte (toutes productions)
 1. Le contrat du chapitre (toujours).

@@ -1,4 +1,4 @@
-# CLAUDE.md — Instructions de l'agent de production du manuel
+# Instructions de l'agent de production du manuel
 
 **À CHAQUE DÉMARRAGE DE SESSION : lire `DIRECTIVES_EN_COURS.md` et reprendre la première tâche non cochée de sa check-list, sans rien redemander.**
 
@@ -49,31 +49,38 @@ Fin de chaque LOT : écrire `chapitres/{CHAP}/LOT-n_rapport.md` (décisions, ver
 - `make similarity CHAP=...` — contrôle anti-similarité.
 - `make coverage CHAP=...` — rapport de couverture capacités × parcours.
 - `make chapter CHAP=...` — assemblage + compilation PDF du chapitre.
-- Slash commands disponibles : voir `.claude/commands/` (`/curation`, `/exercices`, `/verifier`, `/lot-rapport`).
+- Commandes locales disponibles : `/curation`, `/exercices`, `/verifier` et `/lot-rapport`.
 - MCP : si les serveurs `mcp-corpus` / `mcp-banque` / `mcp-sympy` / `mcp-latex` sont configurés, les utiliser en priorité ; sinon fallback sur les scripts équivalents.
 
-## 5. Production de contenu : quel prompt pour quel objet
+## 5. Passerelle LLM externe
 
-| Objet | Prompt système | Modèle recommandé |
+- OpenRouter est l'unique destination LLM externe active.
+- Le modèle est fourni explicitement par `OPENROUTER_MODEL` ; aucun modèle n'est sélectionné implicitement.
+- Ne transmettre aucun secret ni aucune donnée personnelle.
+- Toute réponse externe est consultative : la vérifier localement et conserver les revues et validations humaines requises.
+
+## 6. Production de contenu : quel prompt pour quel objet
+
+| Objet | Prompt système | Configuration LLM |
 |---|---|---|
-| Curation | `prompts/curateur.md` | Sonnet |
-| Cours (strates 1-3) | `prompts/redacteur_cours.md` | Opus/Fable (strate 1 et ★), Sonnet (strate 2) |
-| Fiches méthodes | `prompts/redacteur_methodes.md` | Sonnet |
-| Exercices | `prompts/generateur_exercices.md` | Sonnet (◆/◆◆), Opus (◆◆◆) |
-| Corrigés | `prompts/redacteur_corriges.md` | Sonnet — **sans accès au corrigé source** |
-| QCM/coups de pouce | `prompts/generateur_qcm.md` | Sonnet/Haiku |
-| Revue adversariale | `prompts/verificateur_adversarial.md` | Opus/Fable |
+| Curation | `prompts/curateur.md` | `OPENROUTER_MODEL` |
+| Cours (strates 1-3) | `prompts/redacteur_cours.md` | `OPENROUTER_MODEL` |
+| Fiches méthodes | `prompts/redacteur_methodes.md` | `OPENROUTER_MODEL` |
+| Exercices | `prompts/generateur_exercices.md` | `OPENROUTER_MODEL` |
+| Corrigés | `prompts/redacteur_corriges.md` | `OPENROUTER_MODEL` — **sans accès au corrigé source** |
+| QCM/coups de pouce | `prompts/generateur_qcm.md` | `OPENROUTER_MODEL` |
+| Revue adversariale | `prompts/verificateur_adversarial.md` | `OPENROUTER_MODEL` |
 
 Injecter systématiquement dans le contexte : le contrat du chapitre, le dossier de curation de la capacité, les conventions LaTeX, et (à partir du 2e chapitre) 2–3 objets certifiés du chapitre pilote comme few-shot.
 
-## 6. Style et langue
+## 7. Style et langue
 
 - Tout le contenu élève est en français, style factuel, sans emphase ni lyrisme.
 - Notations conformes au B.O. du niveau (ex. $(u_n)$, pas $\{u_n\}$ ; $u_{n+1}$, pas $u(n+1)$ sauf contexte algorithmique).
 - Corrigés au standard "copie modèle" : rédaction complète attendue d'un élève, théorèmes cités, hypothèses vérifiées.
 - Communications/couvertures Nexus Réussite : jamais de chiffres d'utilisateurs invérifiables.
 
-## 7. Ce que tu ne fais JAMAIS
+## 8. Ce que tu ne fais JAMAIS
 
 - Publier ou marquer `ready` un objet sans gates passés (R2, R3, R6).
 - Modifier `referentiel/*.json` sans instruction explicite (c'est la source de vérité).
