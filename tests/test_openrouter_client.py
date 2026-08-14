@@ -740,13 +740,13 @@ def test_usage_normalizes_absent_cache_counters_to_zero() -> None:
 
 def test_usage_preserves_exact_openrouter_cost() -> None:
     module = _client_module()
-    payload = _success_payload()
-    payload["usage"]["cost"] = 0.0012345
+    for expected_cost in (0.0012345, 10**1000):
+        payload = _success_payload()
+        payload["usage"]["cost"] = expected_cost
 
-    result = _call(module, _transport_for(payload))
+        result = _call(module, _transport_for(payload))
 
-    assert result.usage.cost == 0.0012345
-    assert math.isclose(result.usage.cost, payload["usage"]["cost"], rel_tol=0.0)
+        assert result.usage.cost == expected_cost
 
 
 def test_response_rejects_invalid_root_generation_id() -> None:
