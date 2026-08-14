@@ -1,17 +1,17 @@
 # Inventaire ressources NSI
 
-- Total ressources : 1174
+- Total ressources : 1175
 - Ressources pédagogiques : 53
-- Ressources techniques : 1121
+- Ressources techniques : 1122
 - Ressources copiées dans banques : 0
 
 ## Répartition par source
 - adapted_from_drive: 7
-- generated: 1166
+- generated: 1167
 - import_partiel: 1
 
 ## Répartition par niveau
-- interne: 605
+- interne: 606
 - premiere: 266
 - terminale: 303
 
@@ -21,15 +21,15 @@
 - python: 84
 - script: 210
 - sequence: 45
-- test: 77
+- test: 78
 
 ## Répartition par statut
-- needs_review: 1174
+- needs_review: 1175
 
 ## Répartition audience
 - corrige: 82
 - eleve: 143
-- mixte: 946
+- mixte: 947
 - professeur: 3
 
 ## Catégories (distinguer exigences)
@@ -1172,6 +1172,7 @@
   - tests/test_no_placeholders_code.py
   - tests/test_no_stale_archive_guard.py
   - tests/test_notional_and_disciplinary_controls.py
+  - tests/test_openrouter_judges.py
   - tests/test_operational_substance_controls.py
   - tests/test_organizer_nsi_safety.py
   - tests/test_p05_p04_controls.py
@@ -2348,6 +2349,7 @@
   - tests/test_no_placeholders_code.py
   - tests/test_no_stale_archive_guard.py
   - tests/test_notional_and_disciplinary_controls.py
+  - tests/test_openrouter_judges.py
   - tests/test_operational_substance_controls.py
   - tests/test_organizer_nsi_safety.py
   - tests/test_p05_p04_controls.py
@@ -3489,6 +3491,7 @@
 - tests/test_no_placeholders_code.py
 - tests/test_no_stale_archive_guard.py
 - tests/test_notional_and_disciplinary_controls.py
+- tests/test_openrouter_judges.py
 - tests/test_operational_substance_controls.py
 - tests/test_organizer_nsi_safety.py
 - tests/test_p05_p04_controls.py
@@ -4668,6 +4671,7 @@
 - tests/test_no_placeholders_code.py
 - tests/test_no_stale_archive_guard.py
 - tests/test_notional_and_disciplinary_controls.py
+- tests/test_openrouter_judges.py
 - tests/test_operational_substance_controls.py
 - tests/test_organizer_nsi_safety.py
 - tests/test_p05_p04_controls.py
