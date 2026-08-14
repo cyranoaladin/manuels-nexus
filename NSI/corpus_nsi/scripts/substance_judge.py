@@ -15,7 +15,7 @@ import os
 import re
 import sys
 import urllib.request
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 CORPUS_ROOT = Path(__file__).resolve().parents[1]
@@ -147,6 +147,11 @@ ENV_FILE = resolve_env_file(ROOT)
 # Collections whose hits count as internal substance proof.
 # source_type on each hit must also be "nsi_corpus" (KIND).
 INTERNAL_COVERAGE_COLLECTIONS = {"nsi_corpus", "nsi_corpus_v2"}
+INTERNAL_COVERAGE_SOURCE_ROOTS = (
+    PurePosixPath("03_progressions/supports"),
+    PurePosixPath("03_progressions/fiches_cours"),
+)
+INTERNAL_COVERAGE_STATUSES = {"needs_review", "needs_content", "draft"}
 
 
 def is_internal_collection(name: str) -> bool:
@@ -166,6 +171,52 @@ def is_internal_hit(hit: dict[str, Any]) -> bool:
     if not isinstance(metadata, dict):
         return False
     return str(metadata.get("source_type", "")) == "nsi_corpus"
+
+
+def _canonical_internal_metadata(
+    hit: dict[str, Any],
+    capacity_id: str,
+    role_document_types: list[str],
+) -> dict[str, Any] | None:
+    if not isinstance(hit, dict):
+        return None
+    metadata = hit.get("metadata")
+    if not isinstance(metadata, dict):
+        return None
+    raw_path = metadata.get("path")
+    if not isinstance(raw_path, str) or not raw_path:
+        return None
+    if metadata.get("collection") != "nsi_corpus":
+        return None
+    if metadata.get("source_type") != "nsi_corpus":
+        return None
+    if metadata.get("proof_scope") != "internal_coverage_candidate":
+        return None
+    if metadata.get("usable_for_coverage") is not True:
+        return None
+    if metadata.get("private_data") is not False:
+        return None
+    anchor = metadata.get("section_anchor")
+    if not isinstance(anchor, str) or not anchor.strip():
+        return None
+    capacity_ids = metadata.get("capacity_ids")
+    if (
+        not isinstance(capacity_ids, list)
+        or not all(
+            isinstance(item, str) and bool(item.strip()) for item in capacity_ids
+        )
+        or capacity_id not in capacity_ids
+    ):
+        return None
+    document_type = metadata.get("document_type")
+    if (
+        not isinstance(document_type, str)
+        or document_type not in role_document_types
+    ):
+        return None
+    if metadata.get("status") not in INTERNAL_COVERAGE_STATUSES:
+        return None
+    return metadata
 
 
 PROGRAMME = ROOT / "00_programmes_officiels" / "programme_nsi_2019.yaml"
@@ -414,22 +465,109 @@ def veto_deterministe(verdict: dict[str, Any], intitule: str, used_citations: se
     return verdict
 
 
-def section_body(repo_root: Path, file_rel: str, anchor: str) -> str | None:
-    relative_path = Path(file_rel)
+def _has_symlink_component(repo_root: Path, candidate: Path) -> bool:
+    try:
+        relative_parts = candidate.relative_to(repo_root).parts
+    except ValueError:
+        return True
+    current = repo_root
+    if current.is_symlink():
+        return True
+    for part in relative_parts:
+        current /= part
+        if current.is_symlink():
+            return True
+    return False
+
+
+def _read_confined_section(
+    repo_root: Path,
+    file_rel: str,
+    anchor: str,
+    *,
+    source_roots: tuple[PurePosixPath, ...] | None = None,
+) -> str | None:
+    if "\x00" in file_rel:
+        return None
+    relative_path = PurePosixPath(file_rel)
     if relative_path.is_absolute() or ".." in relative_path.parts:
         return None
-    resolved_root = repo_root.resolve()
     try:
-        source_path = (resolved_root / relative_path).resolve(strict=True)
+        lexical_root = repo_root.absolute()
+        resolved_root = lexical_root.resolve(strict=True)
+        candidate = lexical_root.joinpath(*relative_path.parts)
     except (OSError, RuntimeError, ValueError):
         return None
-    if source_path == resolved_root or not source_path.is_relative_to(resolved_root):
+    if not resolved_root.is_dir() or _has_symlink_component(lexical_root, candidate):
         return None
-    if not source_path.is_file():
+    resolved_source_roots: list[Path] = []
+    if source_roots is not None:
+        if not any(relative_path.is_relative_to(root) for root in source_roots):
+            return None
+        for source_root in source_roots:
+            lexical_source_root = lexical_root.joinpath(*source_root.parts)
+            if _has_symlink_component(lexical_root, lexical_source_root):
+                continue
+            try:
+                resolved_source_root = lexical_source_root.resolve(strict=True)
+            except (OSError, RuntimeError, ValueError):
+                continue
+            if (
+                resolved_source_root.is_dir()
+                and resolved_source_root != resolved_root
+                and resolved_source_root.is_relative_to(resolved_root)
+            ):
+                resolved_source_roots.append(resolved_source_root)
+    try:
+        source_path = candidate.resolve(strict=True)
+    except (OSError, RuntimeError, ValueError):
         return None
-    sections = parse_sections(source_path.read_text(encoding="utf-8", errors="replace"))
+    if source_roots is None:
+        is_confined = source_path != resolved_root and source_path.is_relative_to(
+            resolved_root
+        )
+    else:
+        is_confined = any(
+            source_path != source_root and source_path.is_relative_to(source_root)
+            for source_root in resolved_source_roots
+        )
+    if not is_confined or not source_path.is_file():
+        return None
+    try:
+        document = source_path.read_text(encoding="utf-8", errors="replace")
+    except (OSError, RuntimeError, ValueError):
+        return None
+    sections = parse_sections(document)
     section = sections.get(anchor.lstrip("#"))
     return section.body if section else None
+
+
+def section_body(repo_root: Path, file_rel: str, anchor: str) -> str | None:
+    return _read_confined_section(repo_root, file_rel, anchor)
+
+
+def canonical_internal_section(
+    repo_root: Path,
+    hit: dict[str, Any],
+    capacity_id: str,
+    role_document_types: list[str],
+) -> tuple[str, str] | None:
+    """Validate, resolve and read one governed internal evidence section."""
+    metadata = _canonical_internal_metadata(
+        hit, capacity_id, role_document_types
+    )
+    if metadata is None:
+        return None
+    file_rel = str(metadata["path"])
+    section = _read_confined_section(
+        repo_root,
+        file_rel,
+        str(metadata["section_anchor"]),
+        source_roots=INTERNAL_COVERAGE_SOURCE_ROOTS,
+    )
+    if section is None:
+        return None
+    return file_rel, section
 
 
 def quote_is_verified(repo_root: Path, file_rel: str, anchor: str, quote: str) -> bool:
@@ -444,6 +582,8 @@ def accepted_evidence(
     repo_root: Path,
     hit: dict[str, Any],
     llm_result: dict[str, Any],
+    *,
+    section_text: str | None = None,
 ) -> Evidence | None:
     metadata = hit.get("metadata", {})
     if not isinstance(metadata, dict):
@@ -453,7 +593,12 @@ def accepted_evidence(
     quote = str(llm_result.get("citation", ""))
     if not file_rel or not anchor or not quote:
         return None
-    if not quote_is_verified(repo_root, file_rel, anchor, quote):
+    if section_text is None:
+        quote_verified = quote_is_verified(repo_root, file_rel, anchor, quote)
+    else:
+        status, _ = citation_status(quote, section_text)
+        quote_verified = status in {"exact", "normalized"}
+    if not quote_verified:
         return None
     return {
         "present": True,
@@ -492,14 +637,18 @@ def judge_role(
         hits = search_rag(env, query, k=5)
     seen_files: set[str] = set()
     for hit in hits:
-        metadata = hit.get("metadata", {})
-        if not isinstance(metadata, dict):
+        candidate = canonical_internal_section(
+            repo_root,
+            hit,
+            cap["id"],
+            list(role_spec["doc_types"]),
+        )
+        if candidate is None:
             continue
-        file_rel = str(metadata.get("path", ""))
-        if not file_rel or file_rel in seen_files:
+        file_rel, text = candidate
+        if file_rel in seen_files:
             continue
         seen_files.add(file_rel)
-        text = document_text_for_hit(repo_root, hit)
         if len(text.strip()) < 12:
             continue
         llm_result = call_llm(env, intitule, text, str(role_spec["label"]))
@@ -510,7 +659,9 @@ def judge_role(
         )
         if not checked.get("taught"):
             continue
-        evidence = accepted_evidence(repo_root, hit, checked)
+        evidence = accepted_evidence(
+            repo_root, hit, checked, section_text=text
+        )
         if evidence is not None:
             return evidence
     return empty_evidence()
