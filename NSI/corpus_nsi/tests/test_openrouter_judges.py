@@ -14,6 +14,7 @@ import inspect
 import json
 import socket
 import sys
+import threading
 import urllib.request
 from collections.abc import Callable
 from pathlib import Path
@@ -1678,6 +1679,238 @@ def test_usage_upsert_preserves_v1_deeply_and_in_order(
     assert journal_errors == []
 
 
+def test_usage_locked_append_preserves_interleaved_writers_and_releases_lock(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    campaign = _campaign()
+    append_locked = getattr(campaign, "append_usage_log_locked", None)
+    assert callable(append_locked), "locked usage append helper is missing"
+    main_tree = ast.parse(inspect.getsource(campaign.main))
+    main_calls = {
+        node.func.id
+        for node in ast.walk(main_tree)
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+    }
+    assert "append_usage_log_locked" in main_calls
+    assert "write_usage_log_atomic" not in main_calls
+    assert "merge_usage_log" not in main_calls
+
+    output_dir = tmp_path / "interleaved"
+    output_dir.mkdir()
+    log_path = output_dir / "_usage_log.json"
+    v1 = {
+        "cap": "legacy-v1",
+        "read": 7,
+        "nested": {"preserve": [1, 2, 3]},
+    }
+    generation_a = {
+        "schema_version": 2,
+        "generation_id": "gen-interleaved-a",
+        "cost_usd": 1,
+    }
+    generation_b = {
+        "schema_version": 2,
+        "generation_id": "gen-interleaved-b",
+        "cost_usd": 2,
+    }
+    original_bytes = json.dumps([v1], ensure_ascii=False).encode() + b"\n"
+    log_path.write_bytes(original_bytes)
+
+    error_dir = tmp_path / "writer-error"
+    error_dir.mkdir()
+    error_log = error_dir / "_usage_log.json"
+    error_log.write_bytes(original_bytes)
+
+    real_load = campaign.load_usage_log
+    real_merge = campaign.merge_usage_log
+    real_write = campaign.write_usage_log_atomic
+    real_flock = campaign.fcntl.flock
+    real_close = campaign.os.close
+    events: list[tuple[str, str, int | None, Path | None]] = []
+    event_guard = threading.Lock()
+    lock_fds: dict[int, Path] = {}
+    loaded_snapshots: dict[str, list[dict[str, object]]] = {}
+    thread_errors: list[BaseException] = []
+    results: dict[str, list[dict[str, object]]] = {}
+    writer_a_acquired = threading.Event()
+    writer_b_attempted = threading.Event()
+
+    def record(
+        action: str,
+        *,
+        fd: int | None = None,
+        path: Path | None = None,
+    ) -> None:
+        with event_guard:
+            events.append((threading.current_thread().name, action, fd, path))
+
+    def traced_flock(fd: int, operation: int) -> None:
+        thread_name = threading.current_thread().name
+        if operation & campaign.fcntl.LOCK_EX:
+            target = Path(campaign.os.readlink(f"/proc/self/fd/{fd}"))
+            lock_fds[fd] = target
+            record("lock_attempt", fd=fd, path=target)
+            if thread_name == "writer-b":
+                writer_b_attempted.set()
+            real_flock(fd, operation)
+            record("lock_acquired", fd=fd, path=target)
+            if thread_name == "writer-a":
+                writer_a_acquired.set()
+                if not writer_b_attempted.wait(2):
+                    raise AssertionError("writer B never attempted the shared lock")
+            return
+        if operation & campaign.fcntl.LOCK_UN:
+            target = lock_fds[fd]
+            real_flock(fd, operation)
+            record("lock_released", fd=fd, path=target)
+            return
+        real_flock(fd, operation)
+
+    def traced_close(fd: int) -> None:
+        lock_path = lock_fds.get(fd)
+        real_close(fd)
+        if lock_path is not None:
+            record("lock_closed", fd=fd, path=lock_path)
+            lock_fds.pop(fd)
+
+    def traced_load(path: Path, *, model: str) -> list[dict[str, object]]:
+        loaded = real_load(path, model=model)
+        thread_name = threading.current_thread().name
+        loaded_snapshots[thread_name] = copy.deepcopy(loaded)
+        record("load", path=path)
+        return loaded
+
+    def traced_merge(
+        existing: list[dict[str, object]],
+        incoming: list[dict[str, object]],
+    ) -> list[dict[str, object]]:
+        record("merge")
+        return real_merge(existing, incoming)
+
+    def traced_write(
+        path: Path,
+        entries: list[dict[str, object]],
+    ) -> None:
+        record("write_start", path=path)
+        if path == error_log:
+            raise OSError("simulated append write failure")
+        real_write(path, entries)
+        record("write_done", path=path)
+
+    def writer(name: str, entry: dict[str, object]) -> None:
+        try:
+            results[name] = append_locked(log_path, [entry], model=MODEL)
+        except BaseException as error:
+            thread_errors.append(error)
+
+    with monkeypatch.context() as locked_patch:
+        locked_patch.setattr(campaign.fcntl, "flock", traced_flock)
+        locked_patch.setattr(campaign.os, "close", traced_close)
+        locked_patch.setattr(campaign, "load_usage_log", traced_load)
+        locked_patch.setattr(campaign, "merge_usage_log", traced_merge)
+        locked_patch.setattr(campaign, "write_usage_log_atomic", traced_write)
+
+        writer_a = threading.Thread(
+            target=writer,
+            args=("writer-a", generation_a),
+            name="writer-a",
+        )
+        writer_b = threading.Thread(
+            target=writer,
+            args=("writer-b", generation_b),
+            name="writer-b",
+        )
+        writer_a.start()
+        assert writer_a_acquired.wait(2), "writer A never acquired the lock"
+        writer_b.start()
+        writer_a.join(3)
+        writer_b.join(3)
+        assert not writer_a.is_alive() and not writer_b.is_alive()
+
+        error_event_start = len(events)
+        with pytest.raises(OSError, match="simulated append write failure"):
+            append_locked(error_log, [generation_a], model=MODEL)
+
+    assert thread_errors == []
+    expected_rows = [v1, generation_a, generation_b]
+    assert json.loads(log_path.read_text(encoding="utf-8")) == expected_rows
+    assert results["writer-a"] == [v1, generation_a]
+    assert results["writer-b"] == expected_rows
+    assert loaded_snapshots["writer-b"] == [v1, generation_a]
+
+    success_events = events[:error_event_start]
+    success_lock_paths = {
+        event[3]
+        for event in success_events
+        if event[1] == "lock_attempt"
+    }
+    assert len(success_lock_paths) == 1
+    shared_lock_path = success_lock_paths.pop()
+    assert shared_lock_path is not None
+    assert shared_lock_path.parent == log_path.parent
+    assert shared_lock_path != log_path
+    for thread_name in ("writer-a", "writer-b"):
+        thread_events = [
+            event for event in success_events if event[0] == thread_name
+        ]
+        assert [event[1] for event in thread_events] == [
+            "lock_attempt",
+            "lock_acquired",
+            "load",
+            "merge",
+            "write_start",
+            "write_done",
+            "lock_released",
+            "lock_closed",
+        ]
+        lock_lifecycle_fds = {
+            event[2]
+            for event in thread_events
+            if event[1] in {
+                "lock_attempt",
+                "lock_acquired",
+                "lock_released",
+                "lock_closed",
+            }
+        }
+        assert len(lock_lifecycle_fds) == 1
+        assert None not in lock_lifecycle_fds
+    assert success_events.index(
+        next(
+            event
+            for event in success_events
+            if event[:2] == ("writer-b", "lock_attempt")
+        )
+    ) < success_events.index(
+        next(
+            event
+            for event in success_events
+            if event[:2] == ("writer-a", "load")
+        )
+    )
+
+    error_events = events[error_event_start:]
+    assert [event[1] for event in error_events] == [
+        "lock_attempt",
+        "lock_acquired",
+        "load",
+        "merge",
+        "write_start",
+        "lock_released",
+        "lock_closed",
+    ]
+    error_lock_fds = {
+        event[2]
+        for event in error_events
+        if event[1].startswith("lock_")
+    }
+    assert len(error_lock_fds) == 1
+    assert None not in error_lock_fds
+    assert lock_fds == {}
+    assert error_log.read_bytes() == original_bytes
+
+
 def test_usage_upsert_preserves_other_v2_generations_for_same_capacity() -> None:
     campaign = _campaign()
     first = {"schema_version": 2, "cap": CAPACITY_ID, "generation_id": "gen-a"}
@@ -1901,6 +2134,169 @@ def test_substance_llm_delegates_to_shared_openrouter_client(
     assert seen[0]["api_key"] == API_KEY
     assert seen[0]["model"] == MODEL
     assert seen[0]["transport"] is transport
+
+
+def test_substance_main_overlays_only_nonempty_openrouter_environment(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    substance = _substance()
+    config_dir = tmp_path / "config"
+    config_dir.mkdir()
+    rag_env = config_dir / ".env.rag"
+    rag_env.write_text(
+        "\n".join(
+            (
+                "RAG_COLLECTION=nsi_corpus",
+                "RAG_API_KEY=file-rag-key",
+                "OPENROUTER_API_KEY=file-openrouter-key",
+                "OPENROUTER_MODEL=file/openrouter-model",
+            )
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    generic_env = config_dir / ".env"
+    generic_env.write_text(
+        "OPENROUTER_API_KEY=generic-key-must-never-be-read\n",
+        encoding="utf-8",
+    )
+    capacity = {
+        "id": CAPACITY_ID,
+        "intitule": CAPACITY_TEXT,
+        "rubrique": "Données",
+        "contenu": "Tables",
+        "niveau": "premiere",
+    }
+    cases = (
+        (
+            "missing-environment-falls-back",
+            None,
+            None,
+            "file-openrouter-key",
+            "file/openrouter-model",
+        ),
+        (
+            "environment-wins",
+            "environment-openrouter-key",
+            "environment/openrouter-model",
+            "environment-openrouter-key",
+            "environment/openrouter-model",
+        ),
+        (
+            "empty-environment-falls-back",
+            "   ",
+            "",
+            "file-openrouter-key",
+            "file/openrouter-model",
+        ),
+        (
+            "mixed-key-environment",
+            "environment-openrouter-key",
+            "  ",
+            "environment-openrouter-key",
+            "file/openrouter-model",
+        ),
+        (
+            "mixed-model-environment",
+            "",
+            "environment/openrouter-model",
+            "file-openrouter-key",
+            "environment/openrouter-model",
+        ),
+    )
+    failures: list[str] = []
+    real_read_text = Path.read_text
+
+    for label, env_key, env_model, expected_key, expected_model in cases:
+        output = tmp_path / f"{label}.json"
+        reads: list[Path] = []
+        observed: dict[str, object] = {}
+
+        def guarded_read_text(
+            path: Path,
+            *args: object,
+            **kwargs: object,
+        ) -> str:
+            reads.append(path)
+            if path == generic_env:
+                raise AssertionError("generic .env must never be read")
+            return real_read_text(path, *args, **kwargs)
+
+        def capture_review(
+            env: dict[str, str],
+            capacities: list[dict[str, str]],
+            **kwargs: object,
+        ) -> dict[str, object]:
+            observed["env"] = dict(env)
+            observed["judge_model"] = kwargs["judge_model"]
+            return {
+                "schema_version": "1.0.0",
+                "unit": kwargs["unit"],
+                "level": kwargs["level"],
+                "judged_at": JUDGED_AT,
+                "judge_model": kwargs["judge_model"],
+                "author_model": "test",
+                "capacities": [],
+            }
+
+        with monkeypatch.context() as scenario_patch:
+            scenario_patch.setattr(substance, "ENV_FILE", rag_env)
+            scenario_patch.setattr(substance, "load_programme", lambda: [capacity])
+            scenario_patch.setattr(
+                substance,
+                "load_contract_capacity_ids",
+                lambda root, unit: [],
+            )
+            scenario_patch.setattr(substance, "build_review", capture_review)
+            scenario_patch.setattr(Path, "read_text", guarded_read_text)
+            if env_key is None:
+                scenario_patch.delenv("OPENROUTER_API_KEY", raising=False)
+            else:
+                scenario_patch.setenv("OPENROUTER_API_KEY", env_key)
+            if env_model is None:
+                scenario_patch.delenv("OPENROUTER_MODEL", raising=False)
+            else:
+                scenario_patch.setenv("OPENROUTER_MODEL", env_model)
+            scenario_patch.setenv("RAG_COLLECTION", "external-environment-collection")
+            scenario_patch.setenv("RAG_API_KEY", "environment-rag-key")
+            scenario_patch.setattr(
+                sys,
+                "argv",
+                [
+                    "substance_judge.py",
+                    "--unit",
+                    "P01",
+                    "--output",
+                    str(output),
+                ],
+            )
+            result = substance.main()
+
+        captured_env = observed.get("env", {})
+        if result != 0:
+            failures.append(f"{label}: main returned {result}")
+        if not isinstance(captured_env, dict):
+            failures.append(f"{label}: build_review received no environment")
+            continue
+        if captured_env.get("OPENROUTER_API_KEY") != expected_key:
+            failures.append(
+                f"{label}: key={captured_env.get('OPENROUTER_API_KEY')!r}"
+            )
+        if captured_env.get("OPENROUTER_MODEL") != expected_model:
+            failures.append(
+                f"{label}: model={captured_env.get('OPENROUTER_MODEL')!r}"
+            )
+        if observed.get("judge_model") != expected_model:
+            failures.append(f"{label}: recorded judge model is not effective model")
+        if captured_env.get("RAG_COLLECTION") != "nsi_corpus":
+            failures.append(f"{label}: process environment replaced RAG_COLLECTION")
+        if captured_env.get("RAG_API_KEY") != "file-rag-key":
+            failures.append(f"{label}: process environment replaced RAG_API_KEY")
+        if reads != [rag_env]:
+            failures.append(f"{label}: unexpected env reads {reads!r}")
+
+    assert failures == []
 
 
 def test_substance_without_key_returns_conservative_result_without_transport(

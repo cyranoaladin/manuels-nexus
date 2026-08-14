@@ -14,8 +14,9 @@ def test_detects_public_ip_but_allows_placeholders_and_private_ips(tmp_path: Pat
     public_file = tmp_path / "scripts" / "public.py"
     placeholder_file = tmp_path / "README.md"
     private_file = tmp_path / "scripts" / "private.py"
-    local_env = tmp_path / ".env.rag"
+    local_env = tmp_path / "NSI" / "corpus_nsi" / ".env.rag"
     public_file.parent.mkdir(parents=True)
+    local_env.parent.mkdir(parents=True)
     public_ip = "88.99." + "254.59"
     public_file.write_text(f"ssh root@{public_ip}\n", encoding="utf-8")
     placeholder_file.write_text("ssh <user>@<host>\n", encoding="utf-8")
@@ -139,13 +140,38 @@ def test_detects_token_like_assignments_without_flagging_examples(
         for relative in sorted(example_relpaths)
     ]
 
+    canonical_local_env = tmp_path / "NSI" / "corpus_nsi" / ".env.rag"
+    tracked_noncanonical_env = tmp_path / "operations" / ".env.rag"
+    pedagogical_local_env = pedagogical_env.parent / ".env.rag"
+    tracked_noncanonical_env.parent.mkdir()
+    for path in (canonical_local_env, pedagogical_local_env):
+        path.write_text(
+            f"OPENROUTER_API_KEY={sentinel}\n",
+            encoding="utf-8",
+        )
+    tracked_noncanonical_env.write_text(
+        f"export OPENROUTER_API_KEY={sentinel}\n",
+        encoding="utf-8",
+    )
+
+    local_env_errors = secrets.scan_paths(
+        [canonical_local_env, tracked_noncanonical_env, pedagogical_local_env],
+        tmp_path,
+    )
+
+    assert local_env_errors == [
+        "operations/.env.rag: secret potentiel dans OPENROUTER_API_KEY"
+    ]
+
 
 def test_blank_secret_assignments_do_not_consume_next_line(tmp_path: Path) -> None:
     env_example = tmp_path / ".env.rag.example"
     env_example.write_text(
         "RAG_API_KEY=\n"
         "RAG_COLLECTION=nsi_corpus\n"
-        "LOCAL_LLM_API_KEY=\n",
+        "LOCAL_LLM_API_KEY=\n"
+        "export OPENROUTER_API_KEY=\n"
+        "export VECTOR_DB_API_KEY=<placeholder>\n",
         encoding="utf-8",
     )
 

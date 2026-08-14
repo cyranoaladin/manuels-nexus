@@ -956,6 +956,9 @@ def _test_guard_call_is_allowed(
 ) -> bool:
     if path not in TEST_PATHS or _dotted_name(call.func) != "urllib.request.urlopen":
         return False
+    if function == "test_network_calls_are_blocked_by_test_fixture":
+        if path != "NSI/corpus_nsi/tests/test_substance_judge_pipeline.py":
+            return False
     if function not in {
         "_forbid_network",
         "_forbid_real_network",
@@ -963,6 +966,7 @@ def _test_guard_call_is_allowed(
         "test_math_network_guard_mutation_is_effective",
         "test_nsi_network_guard_mutation_is_effective",
         "test_policy_rejects_unlisted_provider_transport",
+        "test_network_calls_are_blocked_by_test_fixture",
     }:
         return False
     destination = _network_destination(call)
@@ -1127,6 +1131,24 @@ def test_policy_rejects_unlisted_provider_transport(tmp_path: Path) -> None:
         socket.create_connection(("127.0.0.1", 9))
     with pytest.raises(AssertionError):
         urllib.request.urlopen("http://127.0.0.1:9")
+
+    guard_tree = ast.parse(
+        'urllib.request.urlopen("http://127.0.0.1:9")'
+    )
+    guard_call = next(
+        node for node in ast.walk(guard_tree) if isinstance(node, ast.Call)
+    )
+    guard_function = "test_network_calls_are_blocked_by_test_fixture"
+    assert _test_guard_call_is_allowed(
+        "NSI/corpus_nsi/tests/test_substance_judge_pipeline.py",
+        guard_function,
+        guard_call,
+    )
+    assert not _test_guard_call_is_allowed(
+        "tests/test_openrouter_client.py",
+        guard_function,
+        guard_call,
+    )
 
     rejected_mutations = {
         "mutations/requests_client.py": (

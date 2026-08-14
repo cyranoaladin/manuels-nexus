@@ -181,6 +181,74 @@ def test_rag_config_and_smoke_scripts_are_safe_without_local_config(
     for path, expected_keys in expected_mapping_keys.items():
         assert set(mapping_at(base_config, path)) == expected_keys
 
+    expected_canonical_values = {
+        ("backend",): "chroma",
+        ("api", "base_url"): "https://rag-api.nexusreussite.academy/search",
+        ("api", "auth"): "bearer",
+        ("api", "collection"): "nsi_corpus",
+        ("vector", "distance"): "cosine",
+        ("vector", "dimension"): 768,
+        ("embedding", "model"): "nomic-embed-text",
+        ("embedding", "base_url_env"): "EMBEDDING_BASE_URL",
+        ("collections", "nsi_corpus", "role"): "ressources internes produites",
+        ("collections", "nsi_corpus", "proof_scope"): "internal_only",
+        ("collections", "nsi_corpus", "source_roots"): [
+            "03_progressions/supports/",
+            "03_progressions/fiches_cours/",
+        ],
+        (
+            "collections",
+            "nsi_corpus",
+            "canonical_metadata",
+            "section_anchor",
+        ): "required",
+        (
+            "collections",
+            "nsi_corpus",
+            "canonical_metadata",
+            "capacity_ids",
+        ): "required",
+        (
+            "collections",
+            "nsi_corpus",
+            "canonical_metadata",
+            "private_data",
+        ): False,
+        (
+            "collections",
+            "rag_education",
+            "role",
+        ): "sources Drive, ressources externes et inspiration uniquement",
+        ("collections", "rag_education", "proof_scope"): "not_internal_coverage",
+        (
+            "collections",
+            "nsi_golden_examples",
+            "role",
+        ): "pilotes historiques premiere/sequences et terminale/sequences",
+        (
+            "collections",
+            "nsi_golden_examples",
+            "proof_scope",
+        ): "style_reference_only",
+        (
+            "collections",
+            "nsi_golden_examples",
+            "usable_for_coverage",
+        ): False,
+        ("collections", "nsi_official", "role"): "textes officiels",
+        ("collections", "nsi_official", "proof_scope"): "reference_only",
+        (
+            "collections",
+            "nsi_annales",
+            "role",
+        ): "sujets publics et annales si licence compatible",
+        ("collections", "nsi_annales", "proof_scope"): "external_reference",
+    }
+    for path, expected_value in expected_canonical_values.items():
+        actual_value = mapping_at(base_config, path[:-1])[path[-1]]
+        assert type(actual_value) is type(expected_value)
+        assert actual_value == expected_value
+
     def mutate_mapping(
         path: tuple[str, ...],
         key: str,
@@ -191,6 +259,86 @@ def test_rag_config_and_smoke_scripts_are_safe_without_local_config(
         return mutated
 
     yaml_mutations = {
+        "rag_education cannot prove internal coverage": mutate_mapping(
+            ("collections", "rag_education"),
+            "proof_scope",
+            "internal_only",
+        ),
+        "golden examples cannot prove coverage": mutate_mapping(
+            ("collections", "nsi_golden_examples"),
+            "usable_for_coverage",
+            True,
+        ),
+        "nsi_corpus cannot contain private data": mutate_mapping(
+            ("collections", "nsi_corpus", "canonical_metadata"),
+            "private_data",
+            True,
+        ),
+        "nsi_corpus source roots are closed": mutate_mapping(
+            ("collections", "nsi_corpus"),
+            "source_roots",
+            ["Documents_DRIVE/"],
+        ),
+        "section_anchor remains required": mutate_mapping(
+            ("collections", "nsi_corpus", "canonical_metadata"),
+            "section_anchor",
+            False,
+        ),
+        "wrong type rag_education proof_scope": mutate_mapping(
+            ("collections", "rag_education"),
+            "proof_scope",
+            ["not_internal_coverage"],
+        ),
+        "wrong type golden usable_for_coverage": mutate_mapping(
+            ("collections", "nsi_golden_examples"),
+            "usable_for_coverage",
+            "false",
+        ),
+        "wrong type private_data": mutate_mapping(
+            ("collections", "nsi_corpus", "canonical_metadata"),
+            "private_data",
+            0,
+        ),
+        "wrong type source_roots": mutate_mapping(
+            ("collections", "nsi_corpus"),
+            "source_roots",
+            "03_progressions/supports/",
+        ),
+        "wrong type section_anchor": mutate_mapping(
+            ("collections", "nsi_corpus", "canonical_metadata"),
+            "section_anchor",
+            ["required"],
+        ),
+        "provider URL in canonical api.base_url": mutate_mapping(
+            ("api",),
+            "base_url",
+            "https://provider.invalid/v1/generate",
+        ),
+        "provider model in canonical embedding.model": mutate_mapping(
+            ("embedding",),
+            "model",
+            "gpt-4o",
+        ),
+        "provider env in canonical embedding.base_url_env": mutate_mapping(
+            ("embedding",),
+            "base_url_env",
+            "OTHER_PROVIDER_URL",
+        ),
+        "noncanonical api.auth": mutate_mapping(
+            ("api",),
+            "auth",
+            "basic",
+        ),
+        "noncanonical vector.distance": mutate_mapping(
+            ("vector",),
+            "distance",
+            "euclidean",
+        ),
+        "wrong type vector.dimension": mutate_mapping(
+            ("vector",),
+            "dimension",
+            "768",
+        ),
         "plausible services model and baseUrl": mutate_mapping(
             (),
             "services",
