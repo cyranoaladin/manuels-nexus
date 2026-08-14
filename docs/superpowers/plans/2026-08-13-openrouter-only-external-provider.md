@@ -4764,18 +4764,27 @@ prefixes = (
     "NSI/corpus_nsi/reports/", "NSI/corpus_nsi/docs/judge_campaign_plan.md",
     "NSI/corpus_nsi/substance_reviews/",
 )
+active_contracts = {
+    "docs/superpowers/plans/2026-08-13-openrouter-only-external-provider.md",
+    "docs/superpowers/specs/2026-08-13-openrouter-only-external-provider-design.md",
+}
 def selected(path: str) -> bool:
     return any(path == prefix or path.startswith(prefix) for prefix in prefixes)
 base_paths = subprocess.check_output(["git", "ls-tree", "-r", "--name-only", "-z", base]).decode().split("\0")
 current_paths = subprocess.check_output(["git", "ls-files", "-z"]).decode().split("\0")
-before = {
+before_all = {
     path: subprocess.check_output(["git", "rev-parse", f"{base}:{path}"], text=True).strip()
     for path in base_paths if path and selected(path)
 }
-after = {
+after_all = {
     path: subprocess.check_output(["git", "hash-object", "--", path], text=True).strip()
     for path in current_paths if path and selected(path)
 }
+assert before_all.keys() == after_all.keys()
+changed = {path for path in before_all if before_all[path] != after_all[path]}
+assert changed == active_contracts, changed
+before = {path: digest for path, digest in before_all.items() if path not in active_contracts}
+after = {path: digest for path, digest in after_all.items() if path not in active_contracts}
 root = Path(sys.argv[1])
 root.joinpath("protected.before.hashes").write_text(
     "".join(f"{digest}  {path}\n" for path, digest in sorted(before.items())), encoding="utf-8"
@@ -4783,16 +4792,13 @@ root.joinpath("protected.before.hashes").write_text(
 root.joinpath("protected.final.hashes").write_text(
     "".join(f"{digest}  {path}\n" for path, digest in sorted(after.items())), encoding="utf-8"
 )
-assert before == after, {
-    "added": sorted(after.keys() - before.keys()),
-    "deleted": sorted(before.keys() - after.keys()),
-    "changed": sorted(path for path in before.keys() & after.keys() if before[path] != after[path]),
-}
+assert len(before) == 387
+assert before == after
 PY
 cmp "$VERIFY_TMP/protected.before.hashes" "$VERIFY_TMP/protected.final.hashes"
 ```
 
-Expected: comparaison machine exacte de la liste triée chemin/hash entre l’unique parent Red et le SHA final, y compris ajouts et suppressions ; aucun historique protégé ne change.
+Expected: les 389 chemins initiaux existent toujours, sans ajout ni suppression ; seuls le plan courant et sa spécification active changent, et les 387 historiques réels sont octet-identiques entre l’unique parent Red et le SHA final.
 
 - [ ] **Step 4: Comparer profondément les entrées v1 suivies**
 

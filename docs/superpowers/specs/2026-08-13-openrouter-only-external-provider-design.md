@@ -697,6 +697,14 @@ ou par diff d'allowlist :
 - les fixtures historiques qui représentent explicitement une ancienne preuve,
   sauf si elles sont l'entrée active d'un test de la nouvelle politique.
 
+Deux fichiers placés dans ces namespaces restent des contrats actifs pendant
+cette migration et ne sont donc pas des archives immuables : le présent fichier
+et `docs/superpowers/plans/2026-08-13-openrouter-only-external-provider.md`.
+Le gate final exige que ce soient les deux seuls blobs modifiés parmi les 389
+chemins du namespace historique initial ; les 387 autres chemins restent
+octet-identiques au parent du commit Red. Les deltas des deux contrats actifs
+sont revus et committés comme documentation contractuelle.
+
 Une occurrence historique n'est pas une instruction active. Elle ne doit pas
 faire échouer un scan correctement routé, et elle ne doit jamais être réécrite
 pour faire croire que le passé utilisait OpenRouter.
