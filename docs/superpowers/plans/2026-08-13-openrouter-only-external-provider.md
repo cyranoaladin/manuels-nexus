@@ -3331,7 +3331,7 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
   NSI/corpus_nsi/scripts/check_no_committed_secrets.py
 ```
 
-Expected: 18 chemins Green explicitement indexés, puis gates verts. Deux Reds de revue restent isolés hors de ce bloc : la sonde réseau historique du corpus, corrigée par le commit `[TESTS]` dédié après Task 13, et `LOCAL_LLM_*` dans `rag_connection.md`, corrigé en Task 15 sans exemption. Faire relire le staged diff par un reviewer spécification et un reviewer qualité distincts ; toute correction est réindexée sur la même allowlist avant Task 13.
+Expected: 18 chemins Green explicitement indexés, puis gates verts. Trois Reds restent isolés hors de ce bloc : la sonde réseau historique du corpus, corrigée par le commit `[TESTS]` dédié après Task 13 ; les prescriptions Chutes actives, corrigées en Task 14 ; et `LOCAL_LLM_*` dans `rag_connection.md`, corrigé en Task 15. Aucune exemption documentaire n'est ajoutée. Faire relire le staged diff par un reviewer spécification et un reviewer qualité distincts ; toute correction de production est réindexée sur la même allowlist avant Task 13.
 
 ### Task 13: Vérifier et committer tout le Green de production
 
@@ -3346,8 +3346,19 @@ RUN_TMP=$(mktemp -d /tmp/nexus-openrouter-green-final.XXXXXX)
 CORPUS_RUN=$(mktemp -d /tmp/nexus-openrouter-green-final-corpus.XXXXXX)
 SOURCE_REPORT=$IMPL_ROOT/NSI/corpus_nsi/01_build_reports/P05_substance_review.json
 cd "$IMPL_ROOT"
-test -z "$(git diff --name-only)"
 test "$(git diff --cached --name-only | wc -l)" -eq 18
+python3 - <<'PY'
+import subprocess
+expected = {
+    "NSI/corpus_nsi/tests/test_openrouter_judges.py",
+    "NSI/corpus_nsi/tests/test_rag_governance_and_indexes.py",
+    "NSI/corpus_nsi/tests/test_secret_guard.py",
+}
+actual = set(subprocess.check_output(
+    ["git", "diff", "--name-only"], text=True
+).splitlines())
+assert actual == expected, (actual - expected, expected - actual)
+PY
 test ! -e "$SOURCE_REPORT"
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
   python3 -m pytest -q -p no:cacheprovider \
@@ -3368,11 +3379,18 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
   python3 -m pytest -q -p no:cacheprovider tests/test_ingest_openrouter.py
 cd "$IMPL_ROOT"
 git diff --cached --binary > "$RUN_TMP/green.patch"
+git diff --binary -- \
+  NSI/corpus_nsi/tests/test_openrouter_judges.py \
+  NSI/corpus_nsi/tests/test_rag_governance_and_indexes.py \
+  NSI/corpus_nsi/tests/test_secret_guard.py \
+  > "$RUN_TMP/review-tests.patch"
+test -s "$RUN_TMP/review-tests.patch"
 git clone --quiet --no-hardlinks --no-checkout "$IMPL_ROOT" "$CORPUS_RUN/repo"
 git -C "$CORPUS_RUN/repo" checkout --quiet --detach "$(git rev-parse HEAD)"
 git -C "$CORPUS_RUN/repo" apply --index "$RUN_TMP/green.patch"
-test -z "$(git -C "$CORPUS_RUN/repo" diff --name-only)"
+git -C "$CORPUS_RUN/repo" apply "$RUN_TMP/review-tests.patch"
 test "$(git -C "$CORPUS_RUN/repo" diff --cached --name-only | wc -l)" -eq 18
+test "$(git -C "$CORPUS_RUN/repo" diff --name-only | wc -l)" -eq 3
 cd "$CORPUS_RUN/repo/NSI/corpus_nsi"
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
   python3 -m pytest -q -p no:cacheprovider \
@@ -3386,11 +3404,11 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
 test -e "$CORPUS_RUN/repo/NSI/corpus_nsi/01_build_reports/P05_substance_review.json"
 test ! -e "$SOURCE_REPORT"
 cd "$IMPL_ROOT"
-test -z "$(git diff --name-only)"
 test "$(git diff --cached --name-only | wc -l)" -eq 18
+test "$(git diff --name-only | wc -l)" -eq 3
 ```
 
-Expected: quatre processus verts. Le corpus s'exécute uniquement dans le clone local portant le diff staged exact ; P05 existe dans ce clone et reste absent du worktree source. Ne pas agréger le corpus au Pytest racine et ne pas prétendre la collecte globale verte tant que la collision historique `assemble.BOOK_VARIANTS` existe.
+Expected: quatre processus verts. Le corpus s'exécute uniquement dans le clone local portant le diff staged exact et les trois tests de régression de revue non indexés ; P05 existe dans ce clone et reste absent du worktree source. Ne pas agréger le corpus au Pytest racine et ne pas prétendre la collecte globale verte tant que la collision historique `assemble.BOOK_VARIANTS` existe.
 
 - [ ] **Step 2: Compiler et scanner les surfaces actives**
 
@@ -3434,7 +3452,7 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
   python3 - <<'PY'
 import subprocess
 
-allowed = {
+allowed_production = {
     "nexus_external/__init__.py",
     "nexus_external/openrouter_client.py",
     "nexus_external/classification.py",
@@ -3454,16 +3472,32 @@ allowed = {
     "NSI/corpus_nsi/requirements.txt",
     "requirements-ci-audit.txt",
 }
-lines = subprocess.check_output(["git", "status", "--porcelain=v1"], text=True).splitlines()
-paths = {line[3:] for line in lines}
-assert paths == allowed, (paths - allowed, allowed - paths)
+review_tests = {
+    "NSI/corpus_nsi/tests/test_openrouter_judges.py",
+    "NSI/corpus_nsi/tests/test_rag_governance_and_indexes.py",
+    "NSI/corpus_nsi/tests/test_secret_guard.py",
+}
+staged = set(subprocess.check_output(
+    ["git", "diff", "--cached", "--name-only"], text=True
+).splitlines())
+unstaged = set(subprocess.check_output(
+    ["git", "diff", "--name-only"], text=True
+).splitlines())
+assert staged == allowed_production, (
+    staged - allowed_production,
+    allowed_production - staged,
+)
+assert unstaged == review_tests, (
+    unstaged - review_tests,
+    review_tests - unstaged,
+)
 PY
 git diff --check
 git diff --cached --check
 git diff --cached --stat
 ```
 
-Expected: exactement 18 fichiers Green déjà indexés ; aucun changement non indexé, test réécrit après Red, document actif, Makefile, workflow ou inventaire.
+Expected: exactement 18 fichiers Green indexés et exactement trois tests de régression de revue non indexés ; aucun autre test, document actif, Makefile, workflow ou inventaire.
 
 - [ ] **Step 4: Réaffirmer l’allowlist Green et inspecter le staged diff**
 
@@ -3471,7 +3505,7 @@ Expected: exactement 18 fichiers Green déjà indexés ; aucun changement non in
 set -euo pipefail
 IMPL_ROOT=/home/alaeddine/Documents/Manuels_Nexus/.worktrees/green-openrouter-only
 cd "$IMPL_ROOT"
-test -z "$(git diff --name-only)"
+test "$(git diff --name-only | wc -l)" -eq 3
 git add -- \
   nexus_external/__init__.py \
   nexus_external/openrouter_client.py \
@@ -3500,7 +3534,7 @@ Expected: 18 fichiers indexés, aucune vraie clé, endpoint fournisseur direct, 
 
 - [ ] **Step 5: Lancer la revue holistique Green avant commit**
 
-Un reviewer spécification frais vérifie les cinq propriétés de la section 15, puis un reviewer qualité frais cherche fuite de secret, erreur de provenance, transport RAG détourné, coût recalculé, réponse partielle acceptée ou test affaibli. Corriger seulement les constats validés. Réindexer explicitement les 18 chemins Green après correction, exiger `git diff --name-only` vide (zéro changement non indexé), rejouer immédiatement les quatre processus, `py_compile`, Ruff et `git diff --cached --check`. `HARD STOP` si un reviewer a modifié un test Red ou un chemin hors allowlist.
+Un reviewer spécification frais vérifie les cinq propriétés de la section 15, puis un reviewer qualité frais cherche fuite de secret, erreur de provenance, transport RAG détourné, coût recalculé, réponse partielle acceptée ou test affaibli. Corriger seulement les constats validés. Les quatre P1 validés — valeurs RAG sous clés autorisées, priorité environnement de `substance_judge`, journal concurrent et exclusion `.env.rag` trop large — sont d'abord reproduits dans exactement les trois tests corpus de revue, laissés non indexés. Réindexer explicitement seulement les 18 chemins Green après correction, exiger que `git diff --name-only` contienne exactement ces trois tests, puis rejouer immédiatement les quatre processus, `py_compile`, Ruff et `git diff --cached --check`. `HARD STOP` si un reviewer modifie un autre test ou un chemin hors allowlist.
 
 - [ ] **Step 6: Committer le Green minimal**
 
@@ -3508,20 +3542,74 @@ Un reviewer spécification frais vérifie les cinq propriétés de la section 15
 set -euo pipefail
 IMPL_ROOT=/home/alaeddine/Documents/Manuels_Nexus/.worktrees/green-openrouter-only
 cd "$IMPL_ROOT"
-test -z "$(git diff --name-only)"
+python3 - <<'PY'
+import subprocess
+review_tests = {
+    "NSI/corpus_nsi/tests/test_openrouter_judges.py",
+    "NSI/corpus_nsi/tests/test_rag_governance_and_indexes.py",
+    "NSI/corpus_nsi/tests/test_secret_guard.py",
+}
+production = {
+    "nexus_external/__init__.py",
+    "nexus_external/openrouter_client.py",
+    "nexus_external/classification.py",
+    "Mathematiques/manuel-maths/scripts/ingest.py",
+    "NSI/scripts/ingest.py",
+    "NSI/corpus_nsi/scripts/judge_campaign.py",
+    "NSI/corpus_nsi/scripts/substance_judge.py",
+    "NSI/corpus_nsi/scripts/run_substance_judge.py",
+    "NSI/corpus_nsi/scripts/check_rag_config.py",
+    "NSI/corpus_nsi/scripts/check_no_committed_secrets.py",
+    "Mathematiques/manuel-maths/.env.example",
+    "NSI/.env.example",
+    "NSI/corpus_nsi/.env.rag.example",
+    "NSI/corpus_nsi/rag_config.example.yml",
+    "Mathematiques/manuel-maths/requirements.txt",
+    "NSI/requirements.txt",
+    "NSI/corpus_nsi/requirements.txt",
+    "requirements-ci-audit.txt",
+}
+unstaged = set(subprocess.check_output(
+    ["git", "diff", "--name-only"], text=True
+).splitlines())
+staged = set(subprocess.check_output(
+    ["git", "diff", "--cached", "--name-only"], text=True
+).splitlines())
+assert unstaged == review_tests, (
+    unstaged - review_tests,
+    review_tests - unstaged,
+)
+assert staged == production, (staged - production, production - staged)
+PY
 git diff --cached --check
 git commit -m "[PYTHON] centralise les appels LLM via OpenRouter"
-git status --short
-test -z "$(git status --short)"
+python3 - <<'PY'
+import subprocess
+expected = {
+    "NSI/corpus_nsi/tests/test_openrouter_judges.py",
+    "NSI/corpus_nsi/tests/test_rag_governance_and_indexes.py",
+    "NSI/corpus_nsi/tests/test_secret_guard.py",
+}
+assert not subprocess.check_output(
+    ["git", "diff", "--cached", "--name-only"], text=True
+).splitlines()
+actual = set(subprocess.check_output(
+    ["git", "diff", "--name-only"], text=True
+).splitlines())
+assert actual == expected, (actual - expected, expected - actual)
+PY
 ```
 
-Expected: commit Green atomique après le commit Red, worktree propre. Les sorties d’inventaire restent volontairement périmées jusqu’au commit Audit dédié.
+Expected: commit Green atomique après le commit Red ; seuls les trois tests de régression de revue restent modifiés et non indexés. Les sorties d’inventaire restent volontairement périmées jusqu’au commit Audit dédié.
 
 ### Task 13A: Corriger le faux positif de la sonde réseau corpus
 
 **Files:**
 
 - Modify: `tests/test_external_provider_policy.py`
+- Modify: `NSI/corpus_nsi/tests/test_openrouter_judges.py`
+- Modify: `NSI/corpus_nsi/tests/test_rag_governance_and_indexes.py`
+- Modify: `NSI/corpus_nsi/tests/test_secret_guard.py`
 
 - [ ] **Step 1: Reproduire le Red de revue exact**
 
@@ -3529,7 +3617,8 @@ Expected: commit Green atomique après le commit Red, worktree propre. Les sorti
 set -euo pipefail
 IMPL_ROOT=/home/alaeddine/Documents/Manuels_Nexus/.worktrees/green-openrouter-only
 cd "$IMPL_ROOT"
-test -z "$(git status --short)"
+test "$(git diff --name-only | wc -l)" -eq 3
+test -z "$(git diff --cached --name-only)"
 set +e
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
   python3 -m pytest -q -p no:cacheprovider \
@@ -3538,8 +3627,25 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
 rc=$?
 set -e
 test "$rc" -eq 1
-rg -n "test_substance_judge_pipeline.py" /tmp/nexus-openrouter-network-guard-red.xml
-! rg -n "classification.py|judge_campaign.py" /tmp/nexus-openrouter-network-guard-red.xml
+python3 - <<'PY'
+from xml.etree import ElementTree as ET
+
+root = ET.parse("/tmp/nexus-openrouter-network-guard-red.xml").getroot()
+cases = list(root.iter("testcase"))
+assert len(cases) == 1, len(cases)
+case = cases[0]
+assert case.attrib["name"] == "test_policy_rejects_unlisted_provider_transport"
+failure = case.find("failure")
+assert failure is not None
+text = failure.text or ""
+expected = (
+    "violations=['NSI/corpus_nsi/tests/"
+    "test_substance_judge_pipeline.py'], discovery=[]"
+)
+assert expected in text, text
+assert case.find("error") is None
+assert case.find("skipped") is None
+PY
 ```
 
 Expected: un seul faux positif, causé par `test_network_calls_are_blocked_by_test_fixture` qui appelle volontairement `urllib.request.urlopen("http://127.0.0.1:9")` sous le garde autouse ; aucune production n'est signalée.
@@ -3563,23 +3669,60 @@ Expected: gate et mutations adverses verts ; l'exception porte simultanément su
 
 - [ ] **Step 3: Revoir et committer la correction issue de revue**
 
-Un reviewer indépendant vérifie que les mutations URL opaque, SDK tiers, module importé transitivement et transport RAG étranger restent rouges. Puis :
+Un reviewer indépendant vérifie que les mutations URL opaque, SDK tiers, module importé transitivement et transport RAG étranger restent rouges. Il vérifie aussi les quatre régressions de revue : valeurs RAG sous clés autorisées rejetées, priorité environnement du juge, conservation de deux writers du journal et scan de `.env.rag` hors chemin local canonique. Rejouer les tests corpus concernés dans un clone local si la suite déclenche P05. Puis :
 
 ```bash
 set -euo pipefail
 IMPL_ROOT=/home/alaeddine/Documents/Manuels_Nexus/.worktrees/green-openrouter-only
 cd "$IMPL_ROOT"
-test "$(git status --porcelain=v1 | wc -l)" -eq 1
-test "$(git status --porcelain=v1 | sed -n 's/^ M //p')" = "tests/test_external_provider_policy.py"
+python3 - <<'PY'
+import subprocess
+expected = {
+    "tests/test_external_provider_policy.py",
+    "NSI/corpus_nsi/tests/test_openrouter_judges.py",
+    "NSI/corpus_nsi/tests/test_rag_governance_and_indexes.py",
+    "NSI/corpus_nsi/tests/test_secret_guard.py",
+}
+actual = set(subprocess.check_output(
+    ["git", "diff", "--name-only"], text=True
+).splitlines())
+assert actual == expected, (actual - expected, expected - actual)
+PY
+RUN_TMP=$(mktemp -d /tmp/nexus-openrouter-review-tests.XXXXXX)
+CORPUS_RUN=$(mktemp -d /tmp/nexus-openrouter-review-tests-corpus.XXXXXX)
+SOURCE_REPORT=$IMPL_ROOT/NSI/corpus_nsi/01_build_reports/P05_substance_review.json
+test ! -e "$SOURCE_REPORT"
+git diff --binary -- \
+  NSI/corpus_nsi/tests/test_openrouter_judges.py \
+  NSI/corpus_nsi/tests/test_rag_governance_and_indexes.py \
+  NSI/corpus_nsi/tests/test_secret_guard.py \
+  > "$RUN_TMP/review-tests.patch"
+test -s "$RUN_TMP/review-tests.patch"
+git clone --quiet --no-hardlinks --no-checkout "$IMPL_ROOT" "$CORPUS_RUN/repo"
+git -C "$CORPUS_RUN/repo" checkout --quiet --detach "$(git rev-parse HEAD)"
+git -C "$CORPUS_RUN/repo" apply "$RUN_TMP/review-tests.patch"
+test "$(git -C "$CORPUS_RUN/repo" diff --name-only | wc -l)" -eq 3
+cd "$CORPUS_RUN/repo/NSI/corpus_nsi"
+env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
+  python3 -m pytest -q -p no:cacheprovider \
+  tests/test_openrouter_judges.py \
+  tests/test_rag_governance_and_indexes.py \
+  tests/test_secret_guard.py
+test ! -e "$SOURCE_REPORT"
+cd "$IMPL_ROOT"
 git add -- tests/test_external_provider_policy.py
+git add -f -- \
+  NSI/corpus_nsi/tests/test_openrouter_judges.py \
+  NSI/corpus_nsi/tests/test_rag_governance_and_indexes.py \
+  NSI/corpus_nsi/tests/test_secret_guard.py
 test -z "$(git diff --name-only)"
-test "$(git diff --cached --name-only)" = "tests/test_external_provider_policy.py"
+test "$(git diff --cached --name-only | wc -l)" -eq 4
 git diff --cached --check
-git commit -m "[TESTS] autorise la sonde reseau corpus"
+git commit -m "[TESTS] ferme les corrections de revue OpenRouter"
 test -z "$(git status --short)"
 ```
 
-Expected: commit de correction issu de revue, atomique et tests-only. Le Red documentaire `LOCAL_LLM_*` reste inchangé jusqu'à Task 15.
+Expected: commit de correction issu de revue, atomique et tests-only. Les Reds documentaires Chutes et `LOCAL_LLM_*` restent inchangés jusqu'aux Tasks 14–15.
 
 ## Chunk 8: Autorités actives et inventaire canonique du corpus
 
@@ -3828,7 +3971,7 @@ git status --short
 test -z "$(git status --short)"
 ```
 
-Expected: troisième commit atomique. Tous les nouveaux fichiers corpus sont désormais suivis, condition nécessaire au rebuild.
+Expected: troisième commit canonique atomique, après le commit de correction `[TESTS]` supplémentaire autorisé par la spécification. Tous les nouveaux fichiers corpus sont désormais suivis, condition nécessaire au rebuild.
 
 ### Task 17: Préparer le rebuild d’inventaire fermé
 
@@ -4330,10 +4473,12 @@ corpus_new = (
 "test_campaign_business_retry_count_is_bounded test_campaign_records_requested_openrouter_model "
 "test_campaign_records_each_billed_retry_generation_before_verdict_validation test_usage_v2_copies_completion_accounting_exactly "
 "test_usage_upsert_replaces_same_generation_only test_usage_upsert_preserves_v1_deeply_and_in_order "
+"test_usage_locked_append_preserves_interleaved_writers_and_releases_lock "
 "test_usage_upsert_preserves_other_v2_generations_for_same_capacity test_usage_logging_contains_no_local_cost_formula "
 "test_failed_usage_entry_invents_no_accounting test_run_totals_sum_only_current_successful_v2_entries "
 "test_substance_llm_delegates_to_shared_openrouter_client test_substance_without_key_returns_conservative_result_without_transport "
 "test_substance_rejects_key_without_model_before_transport test_substance_sends_exact_bounded_prompt_and_limit "
+"test_substance_main_overlays_only_nonempty_openrouter_environment "
 "test_substance_accepts_only_exact_closed_json_object test_substance_rag_keeps_dedicated_http_transport "
 "test_substance_has_no_configurable_llm_endpoint test_substance_remote_error_is_sanitized_and_never_promotes "
 "test_run_substance_judge_imports_no_external_client test_run_substance_judge_uses_honest_deterministic_model "
@@ -4347,7 +4492,7 @@ manifest = {
 }
 expected_new = {f"tests/test_openrouter_judges.py::{name}" for name in corpus_new}
 expected_corpus = baseline85 | expected_new | manifest
-assert (len(baseline85), len(expected_new), len(manifest), len(expected_corpus)) == (85, 27, 3, 115)
+assert (len(baseline85), len(expected_new), len(manifest), len(expected_corpus)) == (85, 29, 3, 117)
 assert collected("corpus") == expected_corpus, (
     collected("corpus") - expected_corpus, expected_corpus - collected("corpus")
 )
@@ -4355,7 +4500,7 @@ PY
 test -s "$MARKER"
 ```
 
-Expected: égalité d’ensembles exacte, pas seulement des comptes : 47 littéraux core, 8 math, 8 NSI et l’union littérale `85 baseline capturés + 27 nouveaux + 3 manifest = 115`. Toute différence de nodeid ou paramétrisation arrête la suite.
+Expected: égalité d’ensembles exacte, pas seulement des comptes : 47 littéraux core, 8 math, 8 NSI et l’union littérale `85 baseline capturés + 29 nouveaux + 3 manifest = 117`. Les baselines Red historiques restent scellées à 27/115 ; seuls les deux tests issus de revue expliquent le delta final. Toute autre différence de nodeid ou paramétrisation arrête la suite.
 
 - [ ] **Step 3: Exécuter le processus core racine**
 
