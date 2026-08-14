@@ -4249,7 +4249,7 @@ cmp "$AUDIT_TMP/before/substance_reviews/campaign/_usage_log.json" \
   "$CORPUS_ROOT/substance_reviews/campaign/_usage_log.json"
 ```
 
-Expected: exactement `manifest_tooling.csv` est modifié ; `inventory_report.md` et les quatre snapshots protégés sont octet-identiques. Le run initial avait changé deux sorties parce qu'il ajoutait un nouveau chemin ; le run final ne change que les hashes de trois chemins déjà inventoriés. Sinon `HARD STOP` sans restaurer automatiquement.
+Expected: exactement `manifest_tooling.csv` est modifié ; `inventory_report.md` et les quatre snapshots protégés sont octet-identiques. Le run initial avait changé deux sorties parce qu'il ajoutait un nouveau chemin ; le run final ne change que les hashes de cinq chemins déjà inventoriés. Sinon `HARD STOP` sans restaurer automatiquement.
 
 - [ ] **Step 4: Rebuild une deuxième fois et comparer les quatre sorties canoniques**
 
@@ -4491,9 +4491,9 @@ def collected(name: str) -> list[str]:
 
 expected = {
     "core": (60, "d5d5289821fe39a93541ac47b4f8b03e70253606d201e989221748033a07bbff"),
-    "math": (18, "aa14cb13d16bf58d3c1b76958f223a0cae4c87eceaf4e2aa2437e1ea326f4d92"),
-    "nsi": (18, "31d5bb08cb295c205615d5e14be82bc3436d430a9b88b634791ed219506106a4"),
-    "corpus": (146, "d1c76666d67023e904feac757d538946eb79750bb0b63c78f0a1275cedc51dfc"),
+    "math": (20, "844783938aaf83d73af358d30bff2a464badf1a59708d1ad6f72b03939b3c80b"),
+    "nsi": (20, "9e311bc5e420296b6d7005503d50bbed7fd233e63375d8752ad30c431592169f"),
+    "corpus": (151, "83f12817c67a8e63e10c43ea6b10cdd99dbc94971edb5d8246aa3208dc4a9086"),
 }
 for name, (count, digest) in expected.items():
     nodes = collected(name)
@@ -4514,7 +4514,7 @@ PY
 test -s "$MARKER"
 ```
 
-Expected: ensembles exacts canonisés par tri binaire, compte et SHA-256 : core `60 / d5d528…bbff`, Math `18 / aa14cb…766f`, NSI `18 / 31d5bb…06a4`, corpus `146 / d1c766…1dfc`. Les 85 nodeids corpus historiques et les trois tests manifest restent des sous-ensembles obligatoires. Les anciennes valeurs 47/8/8/117 restent la preuve du run `c037240d`, jamais l'oracle du run corrigé. Toute différence de nodeid ou paramétrisation arrête la suite.
+Expected: ensembles exacts canonisés par tri binaire, compte et SHA-256 : core `60 / d5d528…bbff`, Math `20 / 844783…c80b`, NSI `20 / 9e311b…169f`, corpus `151 / 83f128…a9086`. Les 85 nodeids corpus historiques et les trois tests manifest restent des sous-ensembles obligatoires. Les anciennes valeurs 47/8/8/117 puis 60/18/18/146 restent les preuves des runs antérieurs, jamais l'oracle du run corrigé. Toute différence de nodeid ou paramétrisation arrête la suite.
 
 - [ ] **Step 3: Exécuter le processus core racine**
 
@@ -5038,6 +5038,19 @@ littéraux de Task 19 sont mis à jour seulement après stabilisation des nodeid
 les anciennes valeurs 47/8/8/117 restent la preuve du run `c037240d`, pas
 l'oracle du run corrigé.
 
+La seconde passe holistique au SHA `9d2c1467` a ouvert un dernier lot TDD de
+revue, sans P0 : arrêt campagne avant appel lorsqu'un marqueur recovery existe ;
+détection des transports Python via subprocess/shell ; extension fermée du
+secret guard aux appelants ; ancrage des 387 blobs historiques au parent Red ;
+suivi récursif des requirements inclus ; rejet pré-import des symlinks du paquet
+partagé ; purge/recharge des préchargements non attestables et attestation
+stricte des identités canoniques réutilisées. Chaque propriété reçoit un Red
+causal avant le Green minimal, dans
+un commit tests-only puis un commit production/gates ciblés. Toute modification
+corpus impose un nouveau cycle Tasks 17–18 ; tous les nodeids et hashes de Task
+19 sont recalculés après stabilisation, jamais ajustés à la main par simple
+compte.
+
 Avant de reprendre Task 19 après une correction, fermer de façon récupérable le pointeur de vérification du run invalidé : exiger l’unique pointeur actif, propriétaire/non-lien/mode 600 et une racine `/tmp/nexus-openrouter-verify.*` propriétaire/non-lien/mode 700, puis `mv -- "$POINTER" "$POINTER.complete"`. Task 19 crée alors un nouveau garde/pointeur. Reprendre Tasks 19–22 et les deux revues jusqu’à zéro constat. Sans correction, conserver le pointeur actif courant pour Step 3.
 
 - [ ] **Step 3: Vérifier le statut final**
@@ -5113,7 +5126,7 @@ mapfile -t ACTIVE_BASELINE < <(find /tmp -maxdepth 1 -user "$(id -u)" -type f -n
 mapfile -t ACTIVE_GATES < <(find /tmp -maxdepth 1 -user "$(id -u)" -type f -name 'nexus-openrouter-gates-pointer.*' ! -name '*.complete' -print); test "${#ACTIVE_GATES[@]}" -eq 0
 ```
 
-Expected: quatre suites exactes vertes (`60 / 18 / 18 / 146`), policy complète incluse dans les 60 nodes core, `py_compile` et Ruff verts, marker non vide, quatre sujets canoniques présents exactement une fois. Les pointeurs verification et baseline deviennent `.complete` seulement après toutes les preuves ; aucun pointeur gates actif ne reste.
+Expected: quatre suites exactes vertes (`60 / 20 / 20 / 151`), policy complète incluse dans les 60 nodes core, `py_compile` et Ruff verts, marker non vide, quatre sujets canoniques présents exactement une fois. Les pointeurs verification et baseline deviennent `.complete` seulement après toutes les preuves ; aucun pointeur gates actif ne reste.
 
 ```bash
 set -euo pipefail
