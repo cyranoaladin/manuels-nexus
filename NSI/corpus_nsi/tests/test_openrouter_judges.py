@@ -1432,10 +1432,14 @@ def test_usage_upsert_preserves_v1_deeply_and_in_order(
     atomic_original = json.dumps(v1, ensure_ascii=False).encode() + b"\n"
     atomic_log.write_bytes(atomic_original)
     real_fsync = campaign.os.fsync
+    real_open = campaign.os.open
+    real_close = campaign.os.close
     real_replace = campaign.os.replace
-    atomic_events: list[tuple[str, Path]] = []
+    atomic_events: list[tuple[str, Path, int | None]] = []
     flushed_payloads: dict[Path, bytes] = {}
     replaced_payloads: dict[Path, bytes] = {}
+    directory_fds: dict[int, Path] = {}
+    journal_observation_complete = False
 
     def fd_path(fd: int) -> Path | None:
         try:
@@ -1444,6 +1448,10 @@ def test_usage_upsert_preserves_v1_deeply_and_in_order(
             return None
 
     def trace_fsync(fd: int) -> None:
+        if fd in directory_fds:
+            atomic_events.append(("dir_fsync", directory_fds[fd], fd))
+            real_fsync(fd)
+            return
         target = fd_path(fd)
         if target is not None and target.parent == atomic_log.parent:
             payload = target.read_bytes()
@@ -1452,8 +1460,36 @@ def test_usage_upsert_preserves_v1_deeply_and_in_order(
             except (UnicodeDecodeError, json.JSONDecodeError):
                 journal_errors.append("atomic-success: payload was not flushed before fsync")
             flushed_payloads[target] = payload
-            atomic_events.append(("fsync", target))
+            atomic_events.append(("payload_fsync", target, fd))
         real_fsync(fd)
+
+    def trace_open(
+        path: object,
+        flags: int,
+        mode: int = 0o777,
+        *,
+        dir_fd: int | None = None,
+    ) -> int:
+        if dir_fd is None:
+            fd = real_open(path, flags, mode)
+        else:
+            fd = real_open(path, flags, mode, dir_fd=dir_fd)
+        if (
+            not journal_observation_complete
+            and Path(path) == atomic_log.parent
+        ):
+            directory_fds[fd] = atomic_log.parent
+            atomic_events.append(("dir_open", atomic_log.parent, fd))
+        return fd
+
+    def trace_close(fd: int) -> None:
+        nonlocal journal_observation_complete
+        directory = directory_fds.get(fd)
+        real_close(fd)
+        if directory is not None:
+            atomic_events.append(("dir_close", directory, fd))
+            directory_fds.pop(fd)
+            journal_observation_complete = True
 
     def trace_replace(source: object, destination: object) -> None:
         source_path = Path(source)
@@ -1464,11 +1500,13 @@ def test_usage_upsert_preserves_v1_deeply_and_in_order(
             if source_path.parent != atomic_log.parent:
                 journal_errors.append("atomic-success: temp file is not a sibling")
             replaced_payloads[source_path] = source_path.read_bytes()
-            atomic_events.append(("replace", source_path))
+            atomic_events.append(("replace", source_path, None))
         real_replace(source, destination)
 
     with monkeypatch.context() as atomic_patch:
         atomic_patch.setattr(campaign.os, "fsync", trace_fsync)
+        atomic_patch.setattr(campaign.os, "open", trace_open)
+        atomic_patch.setattr(campaign.os, "close", trace_close)
         atomic_patch.setattr(campaign.os, "replace", trace_replace)
         return_code, raised, calls = run_campaign(
             atomic_patch,
@@ -1484,16 +1522,46 @@ def test_usage_upsert_preserves_v1_deeply_and_in_order(
         journal_errors.append("atomic-success: usage journal was not replaced atomically")
     else:
         temp_path = usage_replaces[0][1]
-        replace_position = atomic_events.index(("replace", temp_path))
-        fsync_events = [event for event in atomic_events if event[0] == "fsync"]
-        if len(fsync_events) != 1:
-            journal_errors.append("atomic-success: sibling temp was not fsynced once")
-        if any(event[1] != temp_path for event in fsync_events):
-            journal_errors.append("atomic-success: fsync targeted a different sibling")
-        if any(
-            atomic_events.index(event) > replace_position for event in fsync_events
-        ):
-            journal_errors.append("atomic-success: replace happened before every fsync")
+        lifecycle = {
+            name: [event for event in atomic_events if event[0] == name]
+            for name in ("payload_fsync", "replace", "dir_open", "dir_fsync", "dir_close")
+        }
+        if any(len(events) != 1 for events in lifecycle.values()):
+            journal_errors.append(
+                f"atomic-success: durability lifecycle is not unique: {atomic_events!r}"
+            )
+        else:
+            payload_fsync_event = lifecycle["payload_fsync"][0]
+            replace_event = lifecycle["replace"][0]
+            directory_open_event = lifecycle["dir_open"][0]
+            directory_fsync_event = lifecycle["dir_fsync"][0]
+            directory_close_event = lifecycle["dir_close"][0]
+            if not (
+                atomic_events.index(payload_fsync_event)
+                < atomic_events.index(replace_event)
+                < atomic_events.index(directory_fsync_event)
+                < atomic_events.index(directory_close_event)
+            ):
+                journal_errors.append(
+                    f"atomic-success: durability causal order differs: {atomic_events!r}"
+                )
+            if atomic_events.index(directory_open_event) >= atomic_events.index(
+                directory_fsync_event
+            ):
+                journal_errors.append(
+                    "atomic-success: directory was not opened before its fsync"
+                )
+            directory_lifecycle_fds = {
+                directory_open_event[2],
+                directory_fsync_event[2],
+                directory_close_event[2],
+            }
+            if len(directory_lifecycle_fds) != 1 or None in directory_lifecycle_fds:
+                journal_errors.append(
+                    "atomic-success: open/fsync/close did not use the same directory fd"
+                )
+        if directory_fds:
+            journal_errors.append("atomic-success: directory descriptor leaked")
         if flushed_payloads.get(temp_path) != replaced_payloads.get(temp_path):
             journal_errors.append("atomic-success: bytes changed between fsync and replace")
         if atomic_log.read_bytes() != replaced_payloads.get(temp_path):
@@ -1537,6 +1605,75 @@ def test_usage_upsert_preserves_v1_deeply_and_in_order(
         journal_errors.append(f"atomic-fault: expected one billed call, observed {calls}")
     if fault_log.read_bytes() != fault_original:
         journal_errors.append("atomic-fault: original bytes changed before replace")
+
+    directory_fault_output = tmp_path / "directory-fsync-fault"
+    directory_fault_output.mkdir()
+    directory_fault_log = directory_fault_output / "_usage_log.json"
+    directory_fault_log.write_bytes(atomic_original)
+    directory_fault_fds: set[int] = set()
+    directory_fault_events: list[tuple[str, int]] = []
+
+    def trace_directory_fault_open(
+        path: object,
+        flags: int,
+        mode: int = 0o777,
+        *,
+        dir_fd: int | None = None,
+    ) -> int:
+        if dir_fd is None:
+            fd = real_open(path, flags, mode)
+        else:
+            fd = real_open(path, flags, mode, dir_fd=dir_fd)
+        if (
+            Path(path) == directory_fault_output
+        ):
+            directory_fault_fds.add(fd)
+            directory_fault_events.append(("open", fd))
+        return fd
+
+    def fail_directory_fsync(fd: int) -> None:
+        if fd in directory_fault_fds:
+            directory_fault_events.append(("fsync", fd))
+            raise OSError("simulated directory fsync failure")
+        real_fsync(fd)
+
+    def trace_directory_fault_close(fd: int) -> None:
+        tracked = fd in directory_fault_fds
+        real_close(fd)
+        if tracked:
+            directory_fault_fds.remove(fd)
+            directory_fault_events.append(("close", fd))
+
+    with monkeypatch.context() as directory_fault_patch:
+        directory_fault_patch.setattr(campaign.os, "open", trace_directory_fault_open)
+        directory_fault_patch.setattr(campaign.os, "fsync", fail_directory_fsync)
+        directory_fault_patch.setattr(
+            campaign.os,
+            "close",
+            trace_directory_fault_close,
+        )
+        return_code, raised, calls = run_campaign(
+            directory_fault_patch,
+            directory_fault_output,
+            generation_id="gen-directory-fsync-fault",
+        )
+    if [event[0] for event in directory_fault_events] != ["open", "fsync", "close"]:
+        journal_errors.append(
+            "directory-fsync-fault: descriptor lifecycle differs: "
+            f"{directory_fault_events!r}"
+        )
+    elif len({event[1] for event in directory_fault_events}) != 1:
+        journal_errors.append(
+            "directory-fsync-fault: open/fsync/close used different fds"
+        )
+    if directory_fault_fds:
+        journal_errors.append("directory-fsync-fault: directory descriptor leaked")
+    if raised is None and return_code == 0:
+        journal_errors.append("directory-fsync-fault: failure did not stop campaign")
+    if calls != 1:
+        journal_errors.append(
+            f"directory-fsync-fault: expected one billed call, observed {calls}"
+        )
 
     assert journal_errors == []
 

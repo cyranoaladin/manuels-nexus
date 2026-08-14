@@ -126,37 +126,122 @@ def test_rag_config_and_smoke_scripts_are_safe_without_local_config(
     rag_config_check.validate_yaml(base_errors)
     assert base_errors == []
 
-    def mutate_internal_collection(key: str, value: object) -> dict[str, object]:
+    expected_mapping_keys = {
+        (): {
+            "backend",
+            "api",
+            "vector",
+            "embedding",
+            "collections",
+            "exclusions",
+            "metadata_required",
+        },
+        ("api",): {"base_url", "auth", "collection"},
+        ("vector",): {"distance", "dimension"},
+        ("embedding",): {"model", "base_url_env"},
+        ("collections",): {
+            "nsi_corpus",
+            "rag_education",
+            "nsi_golden_examples",
+            "nsi_official",
+            "nsi_annales",
+        },
+        ("collections", "nsi_corpus"): {
+            "role",
+            "proof_scope",
+            "source_roots",
+            "canonical_metadata",
+        },
+        ("collections", "nsi_corpus", "canonical_metadata"): {
+            "section_anchor",
+            "capacity_ids",
+            "private_data",
+        },
+        ("collections", "rag_education"): {"role", "proof_scope"},
+        ("collections", "nsi_golden_examples"): {
+            "role",
+            "proof_scope",
+            "usable_for_coverage",
+        },
+        ("collections", "nsi_official"): {"role", "proof_scope"},
+        ("collections", "nsi_annales"): {"role", "proof_scope"},
+    }
+
+    def mapping_at(
+        payload: dict[str, object],
+        path: tuple[str, ...],
+    ) -> dict[str, object]:
+        current = payload
+        for part in path:
+            nested = current[part]
+            assert isinstance(nested, dict)
+            current = nested
+        return current
+
+    for path, expected_keys in expected_mapping_keys.items():
+        assert set(mapping_at(base_config, path)) == expected_keys
+
+    def mutate_mapping(
+        path: tuple[str, ...],
+        key: str,
+        value: object,
+    ) -> dict[str, object]:
         mutated = copy.deepcopy(base_config)
-        collections = mutated["collections"]
-        assert isinstance(collections, dict)
-        internal = collections["nsi_corpus"]
-        assert isinstance(internal, dict)
-        internal[key] = value
+        mapping_at(mutated, path)[key] = value
         return mutated
 
     yaml_mutations = {
-        "nested llm key with neutral value": mutate_internal_collection(
+        "plausible services model and baseUrl": mutate_mapping(
+            (),
+            "services",
+            {
+                "model": "vendor/judge",
+                "baseUrl": "https://provider.invalid/v1/generate",
+            },
+        ),
+        "nested llm key with neutral value": mutate_mapping(
+            ("collections", "nsi_corpus"),
             "llm",
             "disabled",
         ),
-        "nested provider key with neutral value": mutate_internal_collection(
+        "nested provider key with neutral value": mutate_mapping(
+            ("collections", "nsi_corpus"),
             "provider",
             "disabled",
         ),
-        "nested endpoint key with neutral value": mutate_internal_collection(
+        "nested endpoint key with neutral value": mutate_mapping(
+            ("collections", "nsi_corpus"),
             "endpoint",
             "disabled",
         ),
-        "deep openai value under neutral keys": mutate_internal_collection(
+        "camel llmEndpoint key with neutral value": mutate_mapping(
+            ("collections", "nsi_corpus"),
+            "llmEndpoint",
+            "disabled",
+        ),
+        "camel externalLlm key with neutral value": mutate_mapping(
+            ("collections", "nsi_corpus"),
+            "externalLlm",
+            "disabled",
+        ),
+        "deep openai value under neutral keys": mutate_mapping(
+            ("collections", "nsi_corpus"),
             "role",
             "openai",
         ),
-        "deep responses URL under neutral keys": mutate_internal_collection(
+        "deep responses URL under neutral keys": mutate_mapping(
+            ("collections", "nsi_corpus"),
             "role",
             "https://example.invalid/v1/responses",
         ),
     }
+    for path in expected_mapping_keys:
+        if path:
+            yaml_mutations[f"closed mapping {'.'.join(path)}"] = mutate_mapping(
+                path,
+                "unexpected",
+                "disabled",
+            )
     for label, mutated in yaml_mutations.items():
         config_example.write_text(
             yaml.safe_dump(mutated, sort_keys=False),
