@@ -25,14 +25,35 @@ CAPACITY = {
 
 
 def write_source(root: Path, body: str) -> Path:
-    path = root / "cours.md"
+    path = (
+        root
+        / "03_progressions"
+        / "supports"
+        / "premiere"
+        / "P01"
+        / "cours.md"
+    )
+    path.parent.mkdir(parents=True)
     path.write_text(f"# Preuve\n\n{body}\n", encoding="utf-8")
     return path
 
 
 def hit_for(path: Path) -> dict[str, object]:
+    source_root_index = path.parts.index("03_progressions")
+    relative_path = Path(*path.parts[source_root_index:]).as_posix()
     return {
-        "metadata": {"path": path.name, "anchor": "#preuve", "document_type": "cours"},
+        "metadata": {
+            "path": relative_path,
+            "collection": "nsi_corpus",
+            "source_type": "nsi_corpus",
+            "proof_scope": "internal_coverage_candidate",
+            "usable_for_coverage": True,
+            "private_data": False,
+            "section_anchor": "#preuve",
+            "capacity_ids": [CAPACITY["id"]],
+            "status": "draft",
+            "document_type": "cours",
+        },
         "score": 0.1,
         "document": path.read_text(encoding="utf-8"),
     }

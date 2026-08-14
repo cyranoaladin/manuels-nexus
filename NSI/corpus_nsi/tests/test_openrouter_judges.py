@@ -2594,26 +2594,42 @@ def _external_path_hit(
     case: str,
 ) -> tuple[Path, dict[str, object], tuple[str, str]]:
     repo_root = tmp_path / "repository"
-    repo_root.mkdir()
+    source_root = repo_root / "03_progressions" / "supports"
+    source_leaf = source_root / "premiere" / "P99"
+    source_leaf.mkdir(parents=True)
     local_secret = "LOCAL_FILE_SECRET_SENTINEL"
     rag_secret = "RAG_DOCUMENT_SECRET_SENTINEL"
-    outside = tmp_path / "secret.md"
-    outside.write_text(f"# Secret\n\n{local_secret}\n", encoding="utf-8")
+    private = repo_root / "private" / "secret.md"
+    private.parent.mkdir()
+    private.write_text(f"# Secret\n\n{local_secret}\n", encoding="utf-8")
     if case == "parent":
-        file_name = "../secret.md"
+        file_name = "03_progressions/supports/../../private/secret.md"
     elif case == "absolute":
-        file_name = str(outside.resolve())
+        file_name = str(private.resolve())
     elif case == "symlink":
-        file_name = "escape.md"
-        (repo_root / file_name).symlink_to(outside)
+        file_name = "03_progressions/supports/premiere/P99/escape.md"
+        (repo_root / file_name).symlink_to(private)
+    elif case == "symlink-parent":
+        file_name = "03_progressions/supports/premiere/P99/private/secret.md"
+        (source_leaf / "private").symlink_to(
+            private.parent, target_is_directory=True
+        )
+    elif case == "root":
+        file_name = "03_progressions/supports"
     else:
-        file_name = "secret\x00.md"
+        file_name = "03_progressions/supports/premiere/P99/secret\x00.md"
     hit: dict[str, object] = {
         "metadata": {
+            "collection": "nsi_corpus",
             "source_type": "nsi_corpus",
+            "proof_scope": "internal_coverage_candidate",
+            "usable_for_coverage": True,
+            "private_data": False,
             "document_type": "cours",
             "path": file_name,
             "section_anchor": "#secret",
+            "capacity_ids": [CAPACITY_ID],
+            "status": "needs_review",
         },
         "document": rag_secret,
     }
@@ -2625,8 +2641,10 @@ def _external_path_hit(
     (
         pytest.param("parent", id="parent-traversal"),
         pytest.param("absolute", id="absolute-path"),
-        pytest.param("symlink", id="symlink-escape"),
+        pytest.param("symlink", id="symlink-to-private-internal-markdown"),
+        pytest.param("symlink-parent", id="symlinked-parent-directory"),
         pytest.param("nul", id="nul-byte"),
+        pytest.param("root", id="source-root-exact"),
     ),
 )
 def test_substance_document_text_rejects_hit_with_unconfined_path(
@@ -2647,8 +2665,10 @@ def test_substance_document_text_rejects_hit_with_unconfined_path(
     (
         pytest.param("parent", id="parent-traversal"),
         pytest.param("absolute", id="absolute-path"),
-        pytest.param("symlink", id="symlink-escape"),
+        pytest.param("symlink", id="symlink-to-private-internal-markdown"),
+        pytest.param("symlink-parent", id="symlinked-parent-directory"),
         pytest.param("nul", id="nul-byte"),
+        pytest.param("root", id="source-root-exact"),
     ),
 )
 def test_substance_judge_role_skips_unconfined_hit_before_llm(
@@ -2660,9 +2680,19 @@ def test_substance_judge_role_skips_unconfined_hit_before_llm(
 ) -> None:
     substance = _substance()
     repo_root, hit, secrets = _external_path_hit(tmp_path, case)
+    original_read_text = Path.read_text
+    read_calls: list[Path] = []
     llm_calls: list[tuple[object, ...]] = []
 
     monkeypatch.setattr(substance, "search_rag", lambda *args, **kwargs: [hit])
+
+    def capture_read_text(
+        path: Path, *args: object, **kwargs: object
+    ) -> str:
+        read_calls.append(path)
+        return original_read_text(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "read_text", capture_read_text)
 
     def capture_llm(*args: object, **kwargs: object) -> dict[str, object]:
         llm_calls.append((*args, kwargs))
@@ -2690,8 +2720,257 @@ def test_substance_judge_role_skips_unconfined_hit_before_llm(
         (json.dumps(llm_calls, default=str), caplog.text, captured.out, captured.err)
     )
     assert evidence["present"] is False
+    assert read_calls == []
     assert llm_calls == []
     assert all(secret not in observable for secret in secrets)
+
+
+def test_substance_judge_role_rejects_noncanonical_internal_hit_before_llm(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    substance = _substance()
+    capacity = {
+        "id": CAPACITY_ID,
+        "intitule": CAPACITY_TEXT,
+        "rubrique": "Données",
+        "contenu": "Tables",
+        "niveau": "premiere",
+    }
+    canonical_metadata: dict[str, object] = {
+        "path": "03_progressions/supports/premiere/P01/P01_cours_tables.md",
+        "collection": "nsi_corpus",
+        "source_type": "nsi_corpus",
+        "proof_scope": "internal_coverage_candidate",
+        "usable_for_coverage": True,
+        "private_data": False,
+        "section_anchor": "#preuve-canonique",
+        "capacity_ids": [CAPACITY_ID],
+        "status": "needs_review",
+        "document_type": "cours",
+    }
+    repo_root = tmp_path / "repository"
+    source = repo_root / str(canonical_metadata["path"])
+    source.parent.mkdir(parents=True)
+    source.write_text(
+        "# Preuve canonique\n\nImporter une table depuis un fichier CSV.\n",
+        encoding="utf-8",
+    )
+    mutations: dict[str, dict[str, object]] = {
+        "path-outside-source-roots": {
+            "path": "03_progressions/supports_shadow/premiere/P01/cours.md"
+        },
+        "wrong-collection": {"collection": "nsi_corpus_v2"},
+        "wrong-source-type": {"source_type": "external_reference"},
+        "wrong-proof-scope": {"proof_scope": "style_reference_only"},
+        "non-boolean-usable": {"usable_for_coverage": 1},
+        "non-boolean-private-data": {"private_data": 0},
+        "empty-anchor": {"section_anchor": ""},
+        "non-list-capacity-ids": {"capacity_ids": CAPACITY_ID},
+        "current-capacity-absent": {"capacity_ids": ["OTHER-CAPACITY"]},
+        "non-string-capacity-id": {"capacity_ids": [CAPACITY_ID, 7]},
+        "blank-capacity-id": {"capacity_ids": [CAPACITY_ID, " "]},
+        "non-string-document-type": {"document_type": 7},
+        "role-incompatible-document-type": {"document_type": "tp"},
+        "non-candidate-status": {"status": "validated_pedagogy"},
+    }
+    original_read_text = Path.read_text
+    read_calls: list[Path] = []
+    llm_calls: list[str] = []
+
+    def capture_read_text(
+        path: Path, *args: object, **kwargs: object
+    ) -> str:
+        read_calls.append(path)
+        return original_read_text(path, *args, **kwargs)
+
+    def capture_llm(*args: object, **kwargs: object) -> dict[str, object]:
+        llm_calls.append(repr((args, kwargs)))
+        return {"taught": False, "citation": "", "justification": "rejet"}
+
+    monkeypatch.setattr(Path, "read_text", capture_read_text)
+    monkeypatch.setattr(substance, "call_llm", capture_llm)
+    violations: list[tuple[str, int, int]] = []
+    for case, mutation in mutations.items():
+        hit = {"metadata": {**canonical_metadata, **mutation}}
+        monkeypatch.setattr(substance, "search_rag", lambda *args, **kwargs: [hit])
+        read_calls.clear()
+        llm_calls.clear()
+
+        evidence = substance.judge_role(
+            {},
+            capacity,
+            substance.ROLE_SPECS["proof_course"],
+            repo_root,
+            set(),
+        )
+
+        assert evidence["present"] is False, case
+        if read_calls or llm_calls:
+            violations.append((case, len(read_calls), len(llm_calls)))
+
+    assert violations == []
+
+
+def test_substance_judge_role_allows_tracked_canonical_p02_hit(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    substance = _substance()
+    relative_path = (
+        "03_progressions/supports/premiere/P02/"
+        "P02_cours_tables_verite_booleennes.md"
+    )
+    citation = (
+        "Une table de vérité est un tableau qui liste toutes les combinaisons "
+        "possibles des valeurs d'entrée d’une expression booléenne et le résultat "
+        "correspondant."
+    )
+    hit = {
+        "metadata": {
+            "path": relative_path,
+            "collection": "nsi_corpus",
+            "source_type": "nsi_corpus",
+            "proof_scope": "internal_coverage_candidate",
+            "usable_for_coverage": True,
+            "private_data": False,
+            "section_anchor": "#définition-d3--table-de-vérité",
+            "capacity_ids": ["P-DATA-BASE-04"],
+            "status": "needs_review",
+            "document_type": "cours",
+        }
+    }
+    capacity = {
+        "id": "P-DATA-BASE-04",
+        "intitule": "Dresser la table d'une expression booléenne.",
+        "rubrique": "Valeurs booléennes et expressions booléennes",
+        "contenu": "Représentation des données",
+        "niveau": "premiere",
+    }
+    llm_sections: list[str] = []
+
+    monkeypatch.setattr(substance, "search_rag", lambda *args, **kwargs: [hit])
+
+    def accept_tracked_source(
+        env: dict[str, str],
+        capacity_text: str,
+        section_text: str,
+        role_label: str,
+    ) -> dict[str, object]:
+        assert env == {}
+        assert capacity_text == capacity["intitule"]
+        assert role_label == "enseigne"
+        assert citation in section_text
+        llm_sections.append(section_text)
+        return {
+            "taught": True,
+            "citation": citation,
+            "justification": "Preuve P02 suivie et vérifiée.",
+        }
+
+    monkeypatch.setattr(substance, "call_llm", accept_tracked_source)
+
+    evidence = substance.judge_role(
+        {},
+        capacity,
+        substance.ROLE_SPECS["proof_course"],
+        substance.ROOT,
+        set(),
+    )
+
+    assert len(llm_sections) == 1
+    assert evidence == {
+        "present": True,
+        "file": relative_path,
+        "anchor": "#définition-d3--table-de-vérité",
+        "quote": citation,
+        "teaches": True,
+        "note": "Preuve P02 suivie et vérifiée.",
+    }
+
+
+def test_substance_judge_role_allows_canonical_hit_only_from_source_roots(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    substance = _substance()
+    repo_root = tmp_path / "repository"
+    allowed_paths = (
+        Path("03_progressions/supports/premiere/P01/P01_cours_tables.md"),
+        Path("03_progressions/fiches_cours/premiere/P01/P01_tables.md"),
+    )
+    citation = "Importer une table depuis un fichier CSV demande un séparateur explicite."
+    capacity = {
+        "id": CAPACITY_ID,
+        "intitule": CAPACITY_TEXT,
+        "rubrique": "Données",
+        "contenu": "Tables",
+        "niveau": "premiere",
+    }
+    llm_sections: list[str] = []
+
+    def accept_canonical(
+        env: dict[str, str],
+        capacity_text: str,
+        section_text: str,
+        role_label: str,
+    ) -> dict[str, object]:
+        assert env == {}
+        assert capacity_text == CAPACITY_TEXT
+        assert role_label == "enseigne"
+        assert citation in section_text
+        assert "CONTENU RAG NON UTILISE" not in section_text
+        llm_sections.append(section_text)
+        return {
+            "taught": True,
+            "citation": citation,
+            "justification": "Preuve canonique vérifiée.",
+        }
+
+    monkeypatch.setattr(substance, "call_llm", accept_canonical)
+
+    for relative_path in allowed_paths:
+        source = repo_root / relative_path
+        source.parent.mkdir(parents=True)
+        source.write_text(
+            f"# Preuve canonique\n\n{citation}\n",
+            encoding="utf-8",
+        )
+        hit = {
+            "metadata": {
+                "path": relative_path.as_posix(),
+                "collection": "nsi_corpus",
+                "source_type": "nsi_corpus",
+                "proof_scope": "internal_coverage_candidate",
+                "usable_for_coverage": True,
+                "private_data": False,
+                "section_anchor": "#preuve-canonique",
+                "capacity_ids": [CAPACITY_ID],
+                "status": "needs_review",
+                "document_type": "cours",
+            },
+            "document": "CONTENU RAG NON UTILISE",
+        }
+        monkeypatch.setattr(
+            substance, "search_rag", lambda *args, **kwargs: [hit]
+        )
+
+        evidence = substance.judge_role(
+            {},
+            capacity,
+            substance.ROLE_SPECS["proof_course"],
+            repo_root,
+            set(),
+        )
+
+        assert evidence == {
+            "present": True,
+            "file": relative_path.as_posix(),
+            "anchor": "#preuve-canonique",
+            "quote": citation,
+            "teaches": True,
+            "note": "Preuve canonique vérifiée.",
+        }
+    assert len(llm_sections) == len(allowed_paths)
 
 
 def test_substance_document_text_preserves_document_only_hit_fallback(
