@@ -1875,6 +1875,48 @@ def test_usage_journal_durably_prepares_recovery_before_primary_replace(
     assert not recovery_path.exists()
 
 
+def test_campaign_main_refuses_existing_usage_recovery_before_provider_call(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    campaign = _campaign()
+    output_dir = tmp_path / "campaign"
+    output_dir.mkdir()
+    log_path = output_dir / "_usage_log.json"
+    recovery_path = output_dir / "._usage_log.json.recovery"
+    log_bytes = b'[{"schema_version":1,"opaque":"visible"}]\n'
+    recovery_bytes = b'[{"schema_version":1,"opaque":"recoverable"}]\n'
+    log_path.write_bytes(log_bytes)
+    recovery_path.write_bytes(recovery_bytes)
+    provider_calls = 0
+
+    def hostile_provider(*args: object, **kwargs: object) -> object:
+        nonlocal provider_calls
+        provider_calls += 1
+        return _completion(content=json.dumps(_campaign_result()))
+
+    monkeypatch.setenv("OPENROUTER_API_KEY", API_KEY)
+    monkeypatch.setenv("OPENROUTER_MODEL", MODEL)
+    _install_campaign_main_doubles(
+        monkeypatch,
+        campaign,
+        output_dir,
+        hostile_provider,
+    )
+
+    result: int | None = None
+    raised: Exception | None = None
+    try:
+        result = campaign.main()
+    except Exception as error:  # recovery refusal may be exceptional before Green
+        raised = error
+    assert provider_calls == 0
+    assert result == 1
+    assert raised is None
+    assert log_path.read_bytes() == log_bytes
+    assert recovery_path.read_bytes() == recovery_bytes
+
+
 @pytest.mark.parametrize(
     "fault",
     (
@@ -3158,6 +3200,111 @@ def test_corpus_callers_reload_canonical_external_package_over_shadow(
             if name == "nexus_external" or name.startswith("nexus_external."):
                 sys.modules.pop(name, None)
         sys.modules.update(saved)
+
+
+@pytest.mark.parametrize(
+    "caller_module",
+    (
+        pytest.param("judge_campaign", id="campaign"),
+        pytest.param("substance_judge", id="substance"),
+    ),
+)
+@pytest.mark.parametrize(
+    "symlink_kind",
+    (
+        pytest.param("package", id="package-symlink"),
+        pytest.param("module", id="module-symlink"),
+    ),
+)
+def test_corpus_callers_reject_checkout_symlinks_before_external_code(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    caller_module: str,
+    symlink_kind: str,
+) -> None:
+    fake_checkout = tmp_path / "checkout"
+    fake_corpus = fake_checkout / "NSI" / "corpus_nsi"
+    fake_scripts = fake_corpus / "scripts"
+    fake_scripts.mkdir(parents=True)
+    (fake_checkout / ".git").mkdir()
+    caller_path = fake_scripts / f"{caller_module}.py"
+    caller_path.write_text(
+        (CORPUS_ROOT / "scripts" / f"{caller_module}.py").read_text(
+            encoding="utf-8"
+        ),
+        encoding="utf-8",
+    )
+
+    hostile_calls: list[str] = []
+    monkeypatch.setattr(
+        builtins,
+        "_nexus_external_hostile_calls",
+        hostile_calls,
+        raising=False,
+    )
+    hostile_prelude = (
+        "import builtins\n"
+        f"builtins._nexus_external_hostile_calls.append({symlink_kind!r})\n"
+    )
+    client_body = (
+        hostile_prelude
+        + "class OpenRouterCompletion:\n    pass\n"
+        + "class OpenRouterError(Exception):\n    pass\n"
+        + "def chat_completion(**kwargs):\n    return None\n"
+    )
+    outside_package = tmp_path / "outside" / "nexus_external"
+    outside_package.mkdir(parents=True)
+    if symlink_kind == "package":
+        (outside_package / "__init__.py").write_text(
+            hostile_prelude,
+            encoding="utf-8",
+        )
+        (outside_package / "openrouter_client.py").write_text(
+            client_body,
+            encoding="utf-8",
+        )
+        (fake_checkout / "nexus_external").symlink_to(
+            outside_package,
+            target_is_directory=True,
+        )
+    else:
+        package_path = fake_checkout / "nexus_external"
+        package_path.mkdir()
+        (package_path / "__init__.py").write_text("", encoding="utf-8")
+        outside_client = tmp_path / "outside" / "openrouter_client.py"
+        outside_client.write_text(client_body, encoding="utf-8")
+        (package_path / "openrouter_client.py").symlink_to(outside_client)
+
+    saved_external = {
+        name: module
+        for name, module in sys.modules.items()
+        if name == "nexus_external" or name.startswith("nexus_external.")
+    }
+    unique_module = f"_nexus_symlink_probe_{caller_module}_{symlink_kind}"
+    for name in tuple(saved_external):
+        sys.modules.pop(name, None)
+    sys.modules.pop(unique_module, None)
+    try:
+        specification = importlib.util.spec_from_file_location(
+            unique_module,
+            caller_path,
+        )
+        assert specification is not None and specification.loader is not None
+        loaded = importlib.util.module_from_spec(specification)
+        sys.modules[unique_module] = loaded
+        rejection: Exception | None = None
+        try:
+            specification.loader.exec_module(loaded)
+        except (ImportError, RuntimeError) as error:
+            rejection = error
+        assert hostile_calls == []
+        assert rejection is not None
+    finally:
+        sys.modules.pop(unique_module, None)
+        for name in tuple(sys.modules):
+            if name == "nexus_external" or name.startswith("nexus_external."):
+                sys.modules.pop(name, None)
+        sys.modules.update(saved_external)
 
 
 @pytest.mark.parametrize(

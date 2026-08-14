@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import ast
 import hashlib
+import posixpath
 import re
 import shlex
 import socket
@@ -9,7 +10,7 @@ import subprocess
 import tomllib
 import urllib.request
 from collections.abc import Iterable, Mapping
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 import pytest
 import yaml
@@ -201,6 +202,13 @@ CURRENT_OPENROUTER_SPEC_PATH = (
     "docs/superpowers/specs/"
     "2026-08-13-openrouter-only-external-provider-design.md"
 )
+CURRENT_OPENROUTER_PLAN_PATH = (
+    "docs/superpowers/plans/"
+    "2026-08-13-openrouter-only-external-provider.md"
+)
+HISTORICAL_ACTIVE_EXCLUSIONS = frozenset(
+    {CURRENT_OPENROUTER_PLAN_PATH, CURRENT_OPENROUTER_SPEC_PATH}
+)
 CURRENT_SPEC_LOCAL_LLM_HISTORICAL_LINES = {
     "partir de `LOCAL_LLM_BASE_URL` et peut donc atteindre une URL arbitraire.",
     (
@@ -217,28 +225,35 @@ HISTORICAL_SNAPSHOT_COUNT = 389
 HISTORICAL_SNAPSHOT_SHA256 = (
     "71358d1f796a8fc83f2e94a681d313ef81d95a0034c17bdc43a97d458ff7f7d5"
 )
+HISTORICAL_BASELINE_COMMIT = "89a87253aef6ddea07d5639e5910330ebbf5c358"
 
 
-def _tracked_historical_snapshot() -> frozenset[str]:
+def _historical_tree_at_commit(revision: str) -> dict[str, str]:
     completed = subprocess.run(
-        ["git", "-C", str(ROOT), "ls-files", "-z"],
+        ["git", "-C", str(ROOT), "ls-tree", "-r", "-z", revision],
         check=True,
         capture_output=True,
     )
-    paths = {
-        raw.decode("utf-8")
-        for raw in completed.stdout.split(b"\0")
-        if raw
-    }
-    return frozenset(
-        path
-        for path in paths
-        if path in HISTORICAL_EXPLICIT_PATHS
-        or path.startswith(HISTORICAL_NAMESPACE_PREFIXES)
-    )
+    tree: dict[str, str] = {}
+    for raw in completed.stdout.split(b"\0"):
+        if not raw:
+            continue
+        metadata, raw_path = raw.split(b"\t", maxsplit=1)
+        _mode, object_type, object_id = metadata.split(b" ", maxsplit=2)
+        path = raw_path.decode("utf-8")
+        if object_type != b"blob":
+            continue
+        if path in HISTORICAL_EXPLICIT_PATHS or path.startswith(
+            HISTORICAL_NAMESPACE_PREFIXES
+        ):
+            tree[path] = object_id.decode("ascii")
+    return tree
 
 
-DISCOVERY_HISTORICAL_PATH_SNAPSHOT = _tracked_historical_snapshot()
+HISTORICAL_BASELINE_BLOBS = _historical_tree_at_commit(
+    HISTORICAL_BASELINE_COMMIT
+)
+DISCOVERY_HISTORICAL_PATH_SNAPSHOT = frozenset(HISTORICAL_BASELINE_BLOBS)
 
 TARGETED_SCAN_PATHS = (
     *CALLER_PATHS,
@@ -323,7 +338,7 @@ NETWORK_SURFACE_REGISTRY = {
     "Mathematiques/manuel-maths/tests/test_ingest_openrouter.py": {
         "reason": "tests hors ligne et garde socket de l'ingestion",
         "endpoints": ("loopback interdit", "mocks OpenRouter"),
-        "ast_sha256": "9db8839138a8173def8ac89d106d9bf55f47d0c940c560d6aad80810d5407766",
+        "ast_sha256": "e18a2eafb60656ce6f1a79dd548e370feb29ec0dee7d272bf91504eb23f2df94",
     },
     "NSI/corpus_nsi/scrapping_NSI/netpolicy.py": {
         "reason": "politique réseau du scraper pédagogique",
@@ -378,7 +393,7 @@ NETWORK_SURFACE_REGISTRY = {
     "NSI/corpus_nsi/scripts/substance_judge.py": {
         "reason": "recherche RAG; LLM délégué au client partagé",
         "endpoints": ("RAG_API_BASE_URL",),
-        "ast_sha256": "5ade4adfc64059948b295b615ca28ed2a8baee7af700d2c8c2f507c4df8c06bd",
+        "ast_sha256": "ccab44f6454a177cf24b17ec04ae70061ea5e05ea048ac5301d51016a1a6e1ff",
     },
     "NSI/corpus_nsi/tests/conftest.py": {
         "reason": "garde réseau globale des tests corpus",
@@ -393,7 +408,7 @@ NETWORK_SURFACE_REGISTRY = {
     "NSI/corpus_nsi/tests/test_openrouter_judges.py": {
         "reason": "tests hors ligne des juges et garde socket",
         "endpoints": ("loopback interdit", "mocks OpenRouter/RAG"),
-        "ast_sha256": "00b4d8e33700afe4e5d0c550ed807ce357efdce3a60ff60e24c8a82581c3f75d",
+        "ast_sha256": "5a1e554312c344bb260e4da13f23ab88f09d219f38121c7a243372971d6e0b99",
     },
     "NSI/corpus_nsi/tests/test_substance_judge_pipeline.py": {
         "reason": "tests hors ligne du pipeline substance",
@@ -408,7 +423,7 @@ NETWORK_SURFACE_REGISTRY = {
     "NSI/tests/test_ingest_openrouter.py": {
         "reason": "tests hors ligne et garde socket de l'ingestion",
         "endpoints": ("loopback interdit", "mocks OpenRouter"),
-        "ast_sha256": "83d821b27c8f6d06690fcc1a869257e4fa4df97e6584e1fc014796c5a18f3b12",
+        "ast_sha256": "5888753f547699ec3afbfb4ea98080946e3851078aa63a8f30176a370b493d5c",
     },
     "nexus_external/openrouter_client.py": {
         "reason": "unique transport LLM externe partagé",
@@ -418,7 +433,7 @@ NETWORK_SURFACE_REGISTRY = {
     "tests/test_external_provider_policy.py": {
         "reason": "garde réseau et mutations hors ligne de la politique",
         "endpoints": ("loopback interdit", "fixtures uniquement"),
-        "ast_sha256": "8c145ec1775f5402a58bf799bd7d6718f238fa22ff948e87fee362eaf91de2b1",
+        "ast_sha256": "df559caae7d5583b6e46cb868aa4b7208c45497929b8b43efeb087118953368f",
     },
     "tests/test_openrouter_classification.py": {
         "reason": "tests hors ligne de classification OpenRouter",
@@ -516,8 +531,13 @@ def _historical_snapshot_digest(paths: Iterable[str]) -> str:
     return hashlib.sha256(payload).hexdigest()
 
 
+def _git_blob_oid(raw: bytes) -> str:
+    header = f"blob {len(raw)}\0".encode("ascii")
+    return hashlib.sha1(header + raw).hexdigest()
+
+
 def _is_protected_historical_path(path: str) -> bool:
-    if path == CURRENT_OPENROUTER_SPEC_PATH:
+    if path in HISTORICAL_ACTIVE_EXCLUSIONS:
         return False
     snapshot_matches = (
         len(DISCOVERY_HISTORICAL_PATH_SNAPSHOT) == HISTORICAL_SNAPSHOT_COUNT
@@ -525,6 +545,12 @@ def _is_protected_historical_path(path: str) -> bool:
         == HISTORICAL_SNAPSHOT_SHA256
     )
     return snapshot_matches and path in DISCOVERY_HISTORICAL_PATH_SNAPSHOT
+
+
+def _historical_blob_drift(path: str, raw: bytes) -> bool:
+    if not _is_protected_historical_path(path):
+        return False
+    return _git_blob_oid(raw) != HISTORICAL_BASELINE_BLOBS[path]
 
 
 def _is_new_historical_executable(path: str) -> bool:
@@ -645,6 +671,46 @@ def _import_edges(
     return edges, issues
 
 
+def _is_requirement_entrypoint(path: str) -> bool:
+    candidate = PurePosixPath(path)
+    return candidate.suffix == ".txt" and candidate.name.startswith(
+        "requirements"
+    )
+
+
+def _requirement_include_reference(line: str) -> tuple[bool, str | None]:
+    try:
+        tokens = shlex.split(line, comments=True, posix=True)
+    except ValueError:
+        stripped = line.lstrip()
+        return stripped.startswith(("-r", "--requirement")), None
+    if not tokens:
+        return False, None
+    option = tokens[0]
+    if option in {"-r", "--requirement"}:
+        return True, tokens[1] if len(tokens) == 2 else None
+    for prefix in ("--requirement=", "-r="):
+        if option.startswith(prefix):
+            return True, option[len(prefix) :] if len(tokens) == 1 else None
+    if option.startswith("-r") and len(option) > 2:
+        return True, option[2:] if len(tokens) == 1 else None
+    return False, None
+
+
+def _resolve_requirement_include(path: str, reference: str) -> str | None:
+    if not reference or "\0" in reference or "\\" in reference:
+        return None
+    included = PurePosixPath(reference)
+    if included.is_absolute():
+        return None
+    normalized = posixpath.normpath(
+        str(PurePosixPath(path).parent / included)
+    )
+    if normalized == ".." or normalized.startswith("../"):
+        return None
+    return normalized
+
+
 def _discover_provider_surfaces(
     *,
     source_overrides: Mapping[str, str] | None = None,
@@ -659,6 +725,9 @@ def _discover_provider_surfaces(
     }
     active_candidates = {
         path for path in tracked | set(overrides) if _is_active_discovery_candidate(path)
+    }
+    requirement_files = {
+        path for path in active_candidates if _is_requirement_entrypoint(path)
     }
     queue = sorted(set(CANONICAL_PROVIDER_SURFACES) | active_candidates)
     discovered: dict[str, str] = {}
@@ -683,6 +752,29 @@ def _discover_provider_surfaces(
             issues.append(f"untracked active surface: {path}")
         if _is_new_historical_executable(path):
             issues.append(f"new executable in historical namespace: {path}")
+        if path in requirement_files:
+            for line_number, line in enumerate(source.splitlines(), start=1):
+                is_include, reference = _requirement_include_reference(line)
+                if not is_include:
+                    continue
+                target = (
+                    _resolve_requirement_include(path, reference)
+                    if reference is not None
+                    else None
+                )
+                if target is None:
+                    issues.append(
+                        f"invalid requirement include {path}:{line_number}"
+                    )
+                    continue
+                if target not in available:
+                    issues.append(
+                        f"missing requirement include {path}:{line_number}:{target}"
+                    )
+                    continue
+                requirement_files.add(target)
+                if target not in discovered and target not in queue:
+                    queue.append(target)
         if not source or not path.endswith(".py"):
             continue
         try:
@@ -767,19 +859,47 @@ def _canonical_network_ast_digest(source: str) -> str:
 
 def _network_surface_signals(tree: ast.AST) -> set[str]:
     signals: set[str] = set()
+    constants = _constant_strings(tree)
     unsafe_methods = {"delete", "patch", "post", "put", "request"}
     network_prefixes = (*NETWORK_IMPORT_PREFIXES, *PROVIDER_SDK_PREFIXES)
     importlib_aliases = {"importlib"}
     import_module_aliases: set[str] = set()
+    subprocess_aliases = {"subprocess"}
+    os_aliases = {"os"}
+    shell_call_aliases: set[str] = set()
+    subprocess_calls = {
+        "call",
+        "check_call",
+        "check_output",
+        "Popen",
+        "run",
+    }
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
             for alias in node.names:
                 if alias.name == "importlib":
                     importlib_aliases.add(alias.asname or alias.name)
-        elif isinstance(node, ast.ImportFrom) and node.module == "importlib":
-            for alias in node.names:
-                if alias.name == "import_module":
-                    import_module_aliases.add(alias.asname or alias.name)
+                elif alias.name == "subprocess":
+                    subprocess_aliases.add(alias.asname or alias.name)
+                elif alias.name == "os":
+                    os_aliases.add(alias.asname or alias.name)
+        elif isinstance(node, ast.ImportFrom):
+            if node.module == "importlib":
+                for alias in node.names:
+                    if alias.name == "import_module":
+                        import_module_aliases.add(alias.asname or alias.name)
+            elif node.module == "subprocess":
+                shell_call_aliases.update(
+                    alias.asname or alias.name
+                    for alias in node.names
+                    if alias.name in subprocess_calls
+                )
+            elif node.module == "os":
+                shell_call_aliases.update(
+                    alias.asname or alias.name
+                    for alias in node.names
+                    if alias.name == "system"
+                )
 
     receiver_markers = {"client", "gateway", "transport"}
     network_receivers: set[str] = set()
@@ -851,6 +971,44 @@ def _network_surface_signals(tree: ast.AST) -> set[str]:
             ):
                 signals.add(f"reference:{dotted}")
         elif isinstance(node, ast.Call):
+            call_name = _dotted_name(node.func)
+            shell_execution = call_name in shell_call_aliases
+            if isinstance(node.func, ast.Attribute):
+                receiver = _dotted_name(node.func.value)
+                shell_execution = shell_execution or (
+                    receiver in subprocess_aliases
+                    and node.func.attr in subprocess_calls
+                ) or (
+                    receiver in os_aliases and node.func.attr == "system"
+                )
+            if shell_execution:
+                fragments = tuple(
+                    fragment
+                    for candidate in (
+                        *node.args,
+                        *(keyword.value for keyword in node.keywords),
+                    )
+                    for fragment in _string_fragments(candidate, constants)
+                )
+                command = " ".join(fragments)
+                has_provider_destination = any(
+                    marker in fragment.casefold()
+                    for fragment in fragments
+                    for marker in (
+                        "api.anthropic.com",
+                        "openrouter",
+                        "other_provider",
+                        "provider.invalid",
+                        "provider_url",
+                        "/chat/completions",
+                        "/v1/messages",
+                    )
+                )
+                if (
+                    _shell_command_has_network_primitive(command)
+                    and has_provider_destination
+                ):
+                    signals.add("shell-provider-transport")
             if isinstance(node.func, ast.Name) and node.func.id == "__import__":
                 if node.args and isinstance(node.args[0], ast.Constant):
                     imported = node.args[0].value
@@ -1066,20 +1224,49 @@ def _configuration_provider_violations(path: str, source: str) -> list[str]:
     return []
 
 
-def _requirements_provider_violations(path: str, source: str) -> list[str]:
-    candidate = Path(path)
-    if not (
-        candidate.suffix == ".txt"
-        and candidate.name.startswith("requirements")
-    ):
-        return []
-    violations = []
-    for line_number, line in enumerate(source.splitlines(), start=1):
-        requirement = line.split("#", maxsplit=1)[0].strip()
-        if not requirement or requirement.startswith(("-r", "--requirement")):
-            continue
-        if _forbidden_provider_requirement(requirement) is not None:
-            violations.append(f"{path}:{line_number}:{requirement}")
+def _requirements_graph_violations(
+    sources: Mapping[str, str],
+) -> dict[str, list[str]]:
+    violations: dict[str, list[str]] = {}
+
+    def visit(root: str, path: str, stack: tuple[str, ...]) -> None:
+        if path in stack:
+            violations.setdefault(root, []).append(
+                f"requirement include cycle: {' -> '.join((*stack, path))}"
+            )
+            return
+        source = sources.get(path)
+        if source is None:
+            violations.setdefault(root, []).append(
+                f"missing requirement include: {path}"
+            )
+            return
+        for line_number, line in enumerate(source.splitlines(), start=1):
+            is_include, reference = _requirement_include_reference(line)
+            if is_include:
+                target = (
+                    _resolve_requirement_include(path, reference)
+                    if reference is not None
+                    else None
+                )
+                if target is None:
+                    violations.setdefault(root, []).append(
+                        f"invalid requirement include: {path}:{line_number}"
+                    )
+                    continue
+                visit(root, target, (*stack, path))
+                continue
+            requirement = line.split("#", maxsplit=1)[0].strip()
+            if (
+                requirement
+                and _forbidden_provider_requirement(requirement) is not None
+            ):
+                violations.setdefault(root, []).append(
+                    f"{path}:{line_number}:{requirement}"
+                )
+
+    for root in sorted(path for path in sources if _is_requirement_entrypoint(path)):
+        visit(root, root, ())
     return violations
 
 
@@ -1098,6 +1285,7 @@ def _shell_network_violations(path: str, source: str) -> list[str]:
 
 def _unlisted_transport_violations(sources: Mapping[str, str]) -> list[str]:
     violations: list[str] = []
+    requirements_graph_violations = _requirements_graph_violations(sources)
     llm_destination_markers = (
         "api.anthropic.com",
         "/chat/completions",
@@ -1113,9 +1301,9 @@ def _unlisted_transport_violations(sources: Mapping[str, str]) -> list[str]:
                 if is_active_candidate
                 else []
             )
-            requirements_violations = _requirements_provider_violations(
+            requirements_violations = requirements_graph_violations.get(
                 logical_path,
-                source,
+                [],
             )
             shell_violations = _shell_network_violations(logical_path, source)
             has_llm_destination = is_active_candidate and any(
@@ -1163,6 +1351,8 @@ def _chutes_violations(sources: Mapping[str, bytes]) -> list[str]:
     violations: list[str] = []
     for logical_path, raw in sources.items():
         if _is_protected_historical_path(logical_path):
+            if _historical_blob_drift(logical_path, raw):
+                violations.append(f"{logical_path}:historical blob drift")
             continue
         in_spec_history = False
         lines = raw.decode("utf-8").splitlines()
@@ -1393,10 +1583,36 @@ def test_policy_rejects_dynamic_network_aliases_without_registry() -> None:
             "    receiver = gateway\n"
             "    return receiver.get(url)\n"
         ),
+        "scripts/subprocess_provider.py": (
+            "import os\nimport subprocess\n"
+            "subprocess.run(['curl', os.environ['OTHER_PROVIDER_URL']], check=True)\n"
+        ),
+        "scripts/os_system_provider.py": (
+            "import os\n"
+            "os.system('wget https://provider.invalid/v1/chat/completions')\n"
+        ),
+        "scripts/subprocess_httpie.py": (
+            "from subprocess import check_call\n"
+            "check_call(['httpie', 'https://api.anthropic.com/v1/messages'])\n"
+        ),
+        "scripts/subprocess_nc.py": (
+            "import subprocess as process\n"
+            "process.Popen(['nc', 'provider.invalid', '443'])\n"
+        ),
     }
     assert set(mutations) <= set(_unlisted_transport_violations(mutations))
     assert _unlisted_transport_violations(
         {"scripts/dict_lookup.py": "mapping = {}\nmapping.get('url')\n"}
+    ) == []
+    assert _unlisted_transport_violations(
+        {
+            "scripts/local_processes.py": (
+                "import os\nimport subprocess\n"
+                "subprocess.run(['python3', '--version'], check=True)\n"
+                "subprocess.run(['curl', 'README.md'], check=True)\n"
+                "os.system('printf local-only')\n"
+            )
+        }
     ) == []
 
 
@@ -1447,6 +1663,41 @@ def test_policy_parses_nested_configs_and_provider_requirements() -> None:
         ),
     }
     assert set(mutations) <= set(_unlisted_transport_violations(mutations))
+
+    recursive_provider_graph = {
+        "requirements-root.txt": "--requirement deps/provider-deps.lock\n",
+        "deps/provider-deps.lock": "anthropic==1.2.3\n",
+    }
+    discovered_requirements, _edges, discovery_issues = (
+        _discover_provider_surfaces(
+            source_overrides=recursive_provider_graph,
+            tracked_paths=_git_tracked_paths() | set(recursive_provider_graph),
+        )
+    )
+    assert set(recursive_provider_graph) <= set(discovered_requirements)
+    assert not discovery_issues, discovery_issues
+    discovered_violations = _unlisted_transport_violations(
+        discovered_requirements
+    )
+    assert "requirements-root.txt" in discovered_violations
+    assert "deps/provider-deps.lock" not in discovered_violations
+    assert _unlisted_transport_violations(
+        {
+            "requirements-root.txt": "-r deps/runtime.lock\n",
+            "deps/runtime.lock": "httpx==0.28.1\n",
+        }
+    ) == []
+
+    invalid_graphs = (
+        {"requirements-root.txt": "-r ../outside.lock\n"},
+        {"requirements-root.txt": "--requirement missing.lock\n"},
+        {
+            "requirements-root.txt": "-r deps/runtime.lock\n",
+            "deps/runtime.lock": "--requirement ../requirements-root.txt\n",
+        },
+    )
+    for graph in invalid_graphs:
+        assert "requirements-root.txt" in _unlisted_transport_violations(graph)
 
 
 def test_new_executables_under_historical_namespaces_are_active() -> None:
@@ -1813,13 +2064,37 @@ def test_policy_rejects_chutes_in_active_authority(tmp_path: Path) -> None:
 
 
 def test_policy_ignores_protected_historical_chutes_artifacts(tmp_path: Path) -> None:
+    assert HISTORICAL_BASELINE_COMMIT == (
+        "89a87253aef6ddea07d5639e5910330ebbf5c358"
+    )
     assert len(DISCOVERY_HISTORICAL_PATH_SNAPSHOT) == HISTORICAL_SNAPSHOT_COUNT
     assert (
         _historical_snapshot_digest(DISCOVERY_HISTORICAL_PATH_SNAPSHOT)
         == HISTORICAL_SNAPSHOT_SHA256
     )
     assert CURRENT_OPENROUTER_SPEC_PATH in DISCOVERY_HISTORICAL_PATH_SNAPSHOT
-    assert not _is_protected_historical_path(CURRENT_OPENROUTER_SPEC_PATH)
+    assert HISTORICAL_ACTIVE_EXCLUSIONS == frozenset(
+        {CURRENT_OPENROUTER_PLAN_PATH, CURRENT_OPENROUTER_SPEC_PATH}
+    )
+    assert all(
+        not _is_protected_historical_path(path)
+        for path in HISTORICAL_ACTIVE_EXCLUSIONS
+    )
+    assert {
+        path
+        for path in DISCOVERY_HISTORICAL_PATH_SNAPSHOT
+        if not _is_protected_historical_path(path)
+    } == set(HISTORICAL_ACTIVE_EXCLUSIONS)
+    protected_paths = DISCOVERY_HISTORICAL_PATH_SNAPSHOT.difference(
+        HISTORICAL_ACTIVE_EXCLUSIONS
+    )
+    assert protected_paths <= _git_tracked_paths()
+    current_blob_drift = {
+        path: _git_blob_oid((ROOT / path).read_bytes())
+        for path in protected_paths
+        if _historical_blob_drift(path, (ROOT / path).read_bytes())
+    }
+    assert not current_blob_drift, current_blob_drift
 
     source_path = ROOT / "audit/chutes/2026-07-21-mcp-smoke-test.md"
     _assert_paths_exist_and_are_tracked((str(source_path.relative_to(ROOT)),))
@@ -1829,6 +2104,10 @@ def test_policy_ignores_protected_historical_chutes_artifacts(tmp_path: Path) ->
 
     logical_path = f"audit/chutes/{copied.name}"
     assert _chutes_violations({logical_path: copied.read_bytes()}) == []
+    mutation = copied.read_bytes() + b"\ntrace historique modifiee\n"
+    assert _chutes_violations({logical_path: mutation}) == [
+        f"{logical_path}:historical blob drift"
+    ]
     assert copied.read_bytes() == before
     assert source_path.read_bytes() == before
 

@@ -5,9 +5,9 @@ from pathlib import Path
 
 import pytest
 
-ROOT = Path(__file__).resolve().parents[1]
-
 import scripts.check_no_committed_secrets as secrets
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_detects_public_ip_but_allows_placeholders_and_private_ips(tmp_path: Path) -> None:
@@ -101,6 +101,43 @@ def test_detects_token_like_assignments_without_flagging_examples(
         assert text.splitlines().count("OPENROUTER_MODEL=") == 1
 
     assert secrets.scan_paths(copied_examples, tmp_path) == []
+
+    active_secret_relpaths = {
+        Path("Mathematiques/manuel-maths/scripts/ingest.py"),
+        Path("NSI/scripts/ingest.py"),
+        Path("nexus_external/__init__.py"),
+        Path("nexus_external/classification.py"),
+        Path("nexus_external/openrouter_client.py"),
+    }
+    assert secrets.ACTIVE_SECRET_SCAN_PATHS == active_secret_relpaths
+    copied_active_callers: list[Path] = []
+    for relative in sorted(active_secret_relpaths):
+        source = checkout_root / relative
+        assert source.is_file()
+        destination = tmp_path / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_text(
+            source.read_text(encoding="utf-8")
+            + "\nOPENROUTER_API_KEY=sk-or-v1-real-sentinel-for-test\n",
+            encoding="utf-8",
+        )
+        copied_active_callers.append(destination)
+
+    assert secrets.scan_paths(copied_active_callers, tmp_path) == [
+        f"{relative.as_posix()}: secret potentiel dans OPENROUTER_API_KEY"
+        for relative in sorted(active_secret_relpaths)
+    ]
+
+    for path in copied_active_callers:
+        path.write_text(
+            path.read_text(encoding="utf-8").replace(
+                "OPENROUTER_API_KEY=sk-or-v1-real-sentinel-for-test",
+                "OPENROUTER_API_KEY=\nOPENROUTER_TEST_TOKEN=<placeholder>",
+            ),
+            encoding="utf-8",
+        )
+    assert secrets.scan_paths(copied_active_callers, tmp_path) == []
+
     sentinel = "sk-or-v1-active-example-sentinel-for-test"
     for example in copied_examples:
         example.write_text(

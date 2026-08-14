@@ -52,6 +52,7 @@ def _forbid_network(monkeypatch: pytest.MonkeyPatch) -> Iterable[None]:
 
 def _load_ingest(
     *,
+    ingest_path: Path = INGEST_PATH,
     extra_import_path: Path | None = None,
     preloaded_external: types.ModuleType | None = None,
     preloaded_classification: types.ModuleType | None = None,
@@ -80,10 +81,10 @@ def _load_ingest(
         sys.modules["trafilatura"] = types.ModuleType("trafilatura")
     if extra_import_path is not None:
         sys.path.insert(0, str(extra_import_path))
-    sys.path.insert(0, str(SCRIPT_ROOT))
+    sys.path.insert(0, str(ingest_path.parent))
 
     try:
-        spec = importlib.util.spec_from_file_location(MODULE_NAME, INGEST_PATH)
+        spec = importlib.util.spec_from_file_location(MODULE_NAME, ingest_path)
         assert spec is not None and spec.loader is not None
         module = importlib.util.module_from_spec(spec)
         sys.modules[MODULE_NAME] = module
@@ -99,6 +100,90 @@ def _load_ingest(
             ):
                 sys.modules.pop(name, None)
         sys.modules.update(saved_modules)
+
+
+def _write_symlink_checkout(
+    tmp_path: Path,
+    *,
+    symlink_kind: str,
+) -> tuple[Path, Path]:
+    checkout_root = tmp_path / "checkout"
+    checkout_root.joinpath(".git").mkdir(parents=True)
+    ingest_path = (
+        checkout_root
+        / "Mathematiques/manuel-maths/scripts/ingest.py"
+    )
+    ingest_path.parent.mkdir(parents=True)
+    ingest_path.write_text(INGEST_PATH.read_text(encoding="utf-8"), encoding="utf-8")
+    ingest_path.parent.joinpath("common.py").write_text(
+        """from pathlib import Path
+
+ROOT = Path(__file__).parent
+RAW_DIR = ROOT / "raw"
+CORPUS_DIR = ROOT / "corpus"
+
+def load_registry():
+    return []
+
+def write_json(path, payload):
+    raise AssertionError("unused by symlink import test")
+""",
+        encoding="utf-8",
+    )
+    schema_path = ingest_path.parent / "schemas/chunk.schema.json"
+    schema_path.parent.mkdir()
+    schema_path.write_text("{}\n", encoding="utf-8")
+
+    hostile_marker = tmp_path / "hostile-calls.txt"
+    package_path = checkout_root / "nexus_external"
+    if symlink_kind == "package":
+        hostile_package = tmp_path / "outside/nexus_external"
+        hostile_package.mkdir(parents=True)
+        hostile_package.joinpath("__init__.py").write_text(
+            "from pathlib import Path\n"
+            f"Path({str(hostile_marker)!r}).write_text('package\\n', encoding='utf-8')\n",
+            encoding="utf-8",
+        )
+        hostile_package.joinpath("classification.py").write_text(
+            "def classify_chunk(*args, **kwargs):\n    return {}\n",
+            encoding="utf-8",
+        )
+        package_path.symlink_to(hostile_package, target_is_directory=True)
+    elif symlink_kind == "module":
+        package_path.mkdir()
+        package_path.joinpath("__init__.py").write_text("", encoding="utf-8")
+        hostile_module = tmp_path / "outside/classification.py"
+        hostile_module.parent.mkdir(parents=True)
+        hostile_module.write_text(
+            "from pathlib import Path\n"
+            f"Path({str(hostile_marker)!r}).write_text('module\\n', encoding='utf-8')\n"
+            "def classify_chunk(*args, **kwargs):\n    return {}\n",
+            encoding="utf-8",
+        )
+        package_path.joinpath("classification.py").symlink_to(hostile_module)
+    else:
+        raise AssertionError(f"unknown symlink kind: {symlink_kind}")
+    return ingest_path, hostile_marker
+
+
+def _assert_symlink_rejected_before_execution(
+    ingest_path: Path,
+    hostile_marker: Path,
+) -> None:
+    failure: RuntimeError | None = None
+    try:
+        _load_ingest(ingest_path=ingest_path)
+    except RuntimeError as exc:
+        failure = exc
+
+    hostile_calls = (
+        hostile_marker.read_text(encoding="utf-8").splitlines()
+        if hostile_marker.exists()
+        else []
+    )
+    assert hostile_calls == []
+    assert failure is not None
+    assert "nexus_external" in str(failure)
 
 
 def _write_subprocess_network_guard(tmp_path: Path) -> tuple[Path, Path, Path]:
@@ -325,6 +410,28 @@ def test_math_ingest_prioritizes_current_checkout_over_shadow_package(
 
     _assert_checkout_package(module)
     assert Path(module.nexus_external.__file__).resolve().parent != shadow_package
+
+
+def test_math_ingest_rejects_checkout_package_symlink_before_execution(
+    tmp_path: Path,
+) -> None:
+    ingest_path, hostile_marker = _write_symlink_checkout(
+        tmp_path,
+        symlink_kind="package",
+    )
+
+    _assert_symlink_rejected_before_execution(ingest_path, hostile_marker)
+
+
+def test_math_ingest_rejects_checkout_classification_symlink_before_execution(
+    tmp_path: Path,
+) -> None:
+    ingest_path, hostile_marker = _write_symlink_checkout(
+        tmp_path,
+        symlink_kind="module",
+    )
+
+    _assert_symlink_rejected_before_execution(ingest_path, hostile_marker)
 
 
 @pytest.mark.parametrize(
