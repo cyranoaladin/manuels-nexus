@@ -18,7 +18,7 @@ import threading
 import urllib.request
 from collections.abc import Callable
 from pathlib import Path
-from types import SimpleNamespace
+from types import ModuleType, SimpleNamespace
 from typing import Any
 
 import pytest
@@ -1527,34 +1527,59 @@ def test_usage_upsert_preserves_v1_deeply_and_in_order(
             name: [event for event in atomic_events if event[0] == name]
             for name in ("payload_fsync", "replace", "dir_open", "dir_fsync", "dir_close")
         }
-        if any(len(events) != 1 for events in lifecycle.values()):
+        primary_payload_fsync = [
+            event for event in lifecycle["payload_fsync"] if event[1] == temp_path
+        ]
+        recovery_payload_fsync = [
+            event
+            for event in lifecycle["payload_fsync"]
+            if event[1].name.endswith(".recovery.tmp")
+        ]
+        if not (
+            len(primary_payload_fsync) == 1
+            and len(recovery_payload_fsync) == 1
+            and len(lifecycle["replace"]) == 1
+            and len(lifecycle["dir_open"]) == 1
+            and len(lifecycle["dir_fsync"]) == 2
+            and len(lifecycle["dir_close"]) == 1
+        ):
             journal_errors.append(
-                f"atomic-success: durability lifecycle is not unique: {atomic_events!r}"
+                f"atomic-success: durability lifecycle differs: {atomic_events!r}"
             )
         else:
-            payload_fsync_event = lifecycle["payload_fsync"][0]
+            payload_fsync_event = primary_payload_fsync[0]
+            recovery_fsync_event = recovery_payload_fsync[0]
             replace_event = lifecycle["replace"][0]
             directory_open_event = lifecycle["dir_open"][0]
-            directory_fsync_event = lifecycle["dir_fsync"][0]
+            backup_directory_fsync_event = lifecycle["dir_fsync"][0]
+            primary_directory_fsync_event = lifecycle["dir_fsync"][1]
             directory_close_event = lifecycle["dir_close"][0]
+            directory_fsync_indices = [
+                index
+                for index, event in enumerate(atomic_events)
+                if event[0] == "dir_fsync"
+            ]
             if not (
-                atomic_events.index(payload_fsync_event)
+                atomic_events.index(recovery_fsync_event)
+                < directory_fsync_indices[0]
+                < atomic_events.index(payload_fsync_event)
                 < atomic_events.index(replace_event)
-                < atomic_events.index(directory_fsync_event)
+                < directory_fsync_indices[1]
                 < atomic_events.index(directory_close_event)
             ):
                 journal_errors.append(
                     f"atomic-success: durability causal order differs: {atomic_events!r}"
                 )
             if atomic_events.index(directory_open_event) >= atomic_events.index(
-                directory_fsync_event
+                backup_directory_fsync_event
             ):
                 journal_errors.append(
                     "atomic-success: directory was not opened before its fsync"
                 )
             directory_lifecycle_fds = {
                 directory_open_event[2],
-                directory_fsync_event[2],
+                backup_directory_fsync_event[2],
+                primary_directory_fsync_event[2],
                 directory_close_event[2],
             }
             if len(directory_lifecycle_fds) != 1 or None in directory_lifecycle_fds:
@@ -1613,6 +1638,7 @@ def test_usage_upsert_preserves_v1_deeply_and_in_order(
     directory_fault_log.write_bytes(atomic_original)
     directory_fault_fds: set[int] = set()
     directory_fault_events: list[tuple[str, int]] = []
+    directory_fault_primary_replaced = False
 
     def trace_directory_fault_open(
         path: object,
@@ -1635,8 +1661,15 @@ def test_usage_upsert_preserves_v1_deeply_and_in_order(
     def fail_directory_fsync(fd: int) -> None:
         if fd in directory_fault_fds:
             directory_fault_events.append(("fsync", fd))
-            raise OSError("simulated directory fsync failure")
+            if directory_fault_primary_replaced:
+                raise OSError("simulated directory fsync failure")
         real_fsync(fd)
+
+    def trace_directory_fault_replace(source: object, destination: object) -> None:
+        nonlocal directory_fault_primary_replaced
+        if Path(destination) == directory_fault_log:
+            directory_fault_primary_replaced = True
+        real_replace(source, destination)
 
     def trace_directory_fault_close(fd: int) -> None:
         tracked = fd in directory_fault_fds
@@ -1650,6 +1683,11 @@ def test_usage_upsert_preserves_v1_deeply_and_in_order(
         directory_fault_patch.setattr(campaign.os, "fsync", fail_directory_fsync)
         directory_fault_patch.setattr(
             campaign.os,
+            "replace",
+            trace_directory_fault_replace,
+        )
+        directory_fault_patch.setattr(
+            campaign.os,
             "close",
             trace_directory_fault_close,
         )
@@ -1658,7 +1696,13 @@ def test_usage_upsert_preserves_v1_deeply_and_in_order(
             directory_fault_output,
             generation_id="gen-directory-fsync-fault",
         )
-    if [event[0] for event in directory_fault_events] != ["open", "fsync", "close"]:
+    if [event[0] for event in directory_fault_events] != [
+        "open",
+        "fsync",
+        "fsync",
+        "fsync",
+        "close",
+    ]:
         journal_errors.append(
             "directory-fsync-fault: descriptor lifecycle differs: "
             f"{directory_fault_events!r}"
@@ -1675,8 +1719,333 @@ def test_usage_upsert_preserves_v1_deeply_and_in_order(
         journal_errors.append(
             f"directory-fsync-fault: expected one billed call, observed {calls}"
         )
+    if directory_fault_log.read_bytes() != atomic_original:
+        journal_errors.append(
+            "directory-fsync-fault: original journal bytes were not restored"
+        )
 
     assert journal_errors == []
+
+
+def test_usage_journal_restores_original_bytes_when_directory_fsync_fails(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    campaign = _campaign()
+    log_path = tmp_path / "_usage_log.json"
+    original_bytes = b'[{"schema_version":1,"opaque":{"ordered":[3,2,1]}}]\n'
+    log_path.write_bytes(original_bytes)
+    real_open = campaign.os.open
+    real_close = campaign.os.close
+    real_fsync = campaign.os.fsync
+    real_replace = campaign.os.replace
+    directory_fds: set[int] = set()
+    directory_fsync_calls = 0
+    primary_replaced = False
+
+    def traced_open(
+        path: object,
+        flags: int,
+        mode: int = 0o777,
+        *,
+        dir_fd: int | None = None,
+    ) -> int:
+        if dir_fd is None:
+            fd = real_open(path, flags, mode)
+        else:
+            fd = real_open(path, flags, mode, dir_fd=dir_fd)
+        if Path(path) == tmp_path:
+            directory_fds.add(fd)
+        return fd
+
+    def fail_first_directory_fsync(fd: int) -> None:
+        nonlocal directory_fsync_calls
+        if fd in directory_fds:
+            directory_fsync_calls += 1
+            if primary_replaced and directory_fsync_calls == 2:
+                raise OSError("simulated directory fsync failure")
+        real_fsync(fd)
+
+    def traced_replace(source: object, destination: object) -> None:
+        nonlocal primary_replaced
+        if Path(destination) == log_path:
+            primary_replaced = True
+        real_replace(source, destination)
+
+    def traced_close(fd: int) -> None:
+        real_close(fd)
+        directory_fds.discard(fd)
+
+    monkeypatch.setattr(campaign.os, "open", traced_open)
+    monkeypatch.setattr(campaign.os, "fsync", fail_first_directory_fsync)
+    monkeypatch.setattr(campaign.os, "replace", traced_replace)
+    monkeypatch.setattr(campaign.os, "close", traced_close)
+
+    with pytest.raises(OSError, match="directory fsync failure"):
+        campaign.write_usage_log_atomic(
+            log_path,
+            [{"schema_version": 2, "generation_id": "gen-new"}],
+        )
+
+    assert directory_fsync_calls == 3
+    assert directory_fds == set()
+    assert log_path.read_bytes() == original_bytes
+
+
+def test_usage_journal_durably_prepares_recovery_before_primary_replace(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    campaign = _campaign()
+    log_path = tmp_path / "_usage_log.json"
+    recovery_path = tmp_path / "._usage_log.json.recovery"
+    original_bytes = b'[{"schema_version":1,"opaque":"recoverable"}]\n'
+    log_path.write_bytes(original_bytes)
+    real_open = campaign.os.open
+    real_close = campaign.os.close
+    real_fsync = campaign.os.fsync
+    real_replace = campaign.os.replace
+    directory_fds: set[int] = set()
+    events: list[tuple[str, Path | None]] = []
+
+    def fd_path(fd: int) -> Path | None:
+        try:
+            return Path(campaign.os.readlink(f"/proc/self/fd/{fd}"))
+        except OSError:
+            return None
+
+    def traced_open(
+        path: object,
+        flags: int,
+        mode: int = 0o777,
+        *,
+        dir_fd: int | None = None,
+    ) -> int:
+        if dir_fd is None:
+            fd = real_open(path, flags, mode)
+        else:
+            fd = real_open(path, flags, mode, dir_fd=dir_fd)
+        if Path(path) == tmp_path:
+            directory_fds.add(fd)
+        return fd
+
+    def traced_fsync(fd: int) -> None:
+        if fd in directory_fds:
+            events.append(("directory_fsync", tmp_path))
+        else:
+            events.append(("file_fsync", fd_path(fd)))
+        real_fsync(fd)
+
+    def traced_replace(source: object, destination: object) -> None:
+        events.append(("replace", Path(destination)))
+        real_replace(source, destination)
+
+    def traced_close(fd: int) -> None:
+        real_close(fd)
+        directory_fds.discard(fd)
+
+    monkeypatch.setattr(campaign.os, "open", traced_open)
+    monkeypatch.setattr(campaign.os, "fsync", traced_fsync)
+    monkeypatch.setattr(campaign.os, "replace", traced_replace)
+    monkeypatch.setattr(campaign.os, "close", traced_close)
+
+    campaign.write_usage_log_atomic(
+        log_path,
+        [{"schema_version": 2, "generation_id": "gen-new"}],
+    )
+
+    recovery_replace = events.index(("replace", recovery_path))
+    primary_replace = events.index(("replace", log_path))
+    directory_syncs = [
+        index
+        for index, event in enumerate(events)
+        if event == ("directory_fsync", tmp_path)
+    ]
+    recovery_fsyncs = [
+        index
+        for index, event in enumerate(events)
+        if event[0] == "file_fsync"
+        and event[1] is not None
+        and event[1].name.endswith(".recovery.tmp")
+    ]
+    assert len(recovery_fsyncs) == 1
+    assert len(directory_syncs) >= 2
+    assert recovery_fsyncs[0] < recovery_replace < directory_syncs[0] < primary_replace
+    assert directory_fds == set()
+    assert not recovery_path.exists()
+
+
+@pytest.mark.parametrize(
+    "fault",
+    (
+        pytest.param("rollback-file-fsync", id="rollback-file-fsync"),
+        pytest.param("rollback-replace", id="rollback-replace"),
+        pytest.param("second-directory-fsync", id="second-directory-fsync"),
+    ),
+)
+def test_usage_journal_keeps_durable_recovery_when_rollback_fails(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    fault: str,
+) -> None:
+    campaign = _campaign()
+    log_path = tmp_path / "_usage_log.json"
+    recovery_path = tmp_path / "._usage_log.json.recovery"
+    original_bytes = b'[{"schema_version":1,"opaque":{"keep":[1,2,3]}}]\n'
+    log_path.write_bytes(original_bytes)
+    real_open = campaign.os.open
+    real_close = campaign.os.close
+    real_fsync = campaign.os.fsync
+    real_replace = campaign.os.replace
+    directory_fds: set[int] = set()
+    primary_replaced = False
+    commit_failure_seen = False
+    rollback_replaced = False
+
+    def fd_path(fd: int) -> Path | None:
+        try:
+            return Path(campaign.os.readlink(f"/proc/self/fd/{fd}"))
+        except OSError:
+            return None
+
+    def traced_open(
+        path: object,
+        flags: int,
+        mode: int = 0o777,
+        *,
+        dir_fd: int | None = None,
+    ) -> int:
+        if dir_fd is None:
+            fd = real_open(path, flags, mode)
+        else:
+            fd = real_open(path, flags, mode, dir_fd=dir_fd)
+        if Path(path) == tmp_path:
+            directory_fds.add(fd)
+        return fd
+
+    def faulted_fsync(fd: int) -> None:
+        nonlocal commit_failure_seen
+        target = fd_path(fd)
+        if (
+            fault == "rollback-file-fsync"
+            and commit_failure_seen
+            and target is not None
+            and target.name.endswith(".rollback")
+        ):
+            raise OSError("simulated rollback file fsync failure")
+        if fd in directory_fds and primary_replaced:
+            if not commit_failure_seen:
+                commit_failure_seen = True
+                raise OSError("simulated primary directory fsync failure")
+            if fault == "second-directory-fsync" and rollback_replaced:
+                raise OSError("simulated second directory fsync failure")
+        real_fsync(fd)
+
+    def faulted_replace(source: object, destination: object) -> None:
+        nonlocal primary_replaced, rollback_replaced
+        source_path = Path(source)
+        destination_path = Path(destination)
+        if destination_path == log_path and source_path.name.endswith(".rollback"):
+            if fault == "rollback-replace":
+                raise OSError("simulated rollback replace failure")
+            rollback_replaced = True
+        elif destination_path == log_path:
+            primary_replaced = True
+        real_replace(source, destination)
+
+    def traced_close(fd: int) -> None:
+        real_close(fd)
+        directory_fds.discard(fd)
+
+    monkeypatch.setattr(campaign.os, "open", traced_open)
+    monkeypatch.setattr(campaign.os, "fsync", faulted_fsync)
+    monkeypatch.setattr(campaign.os, "replace", faulted_replace)
+    monkeypatch.setattr(campaign.os, "close", traced_close)
+
+    with pytest.raises(OSError):
+        campaign.write_usage_log_atomic(
+            log_path,
+            [{"schema_version": 2, "generation_id": "gen-new"}],
+        )
+
+    assert commit_failure_seen is True
+    assert recovery_path.read_bytes() == original_bytes
+    assert directory_fds == set()
+    if fault == "second-directory-fsync":
+        assert log_path.read_bytes() == original_bytes
+
+    visible_log_bytes = log_path.read_bytes()
+    with pytest.raises(OSError, match="usage journal recovery required"):
+        campaign.write_usage_log_atomic(
+            log_path,
+            [{"schema_version": 2, "generation_id": "gen-retry"}],
+        )
+    assert log_path.read_bytes() == visible_log_bytes
+    assert recovery_path.read_bytes() == original_bytes
+
+
+def test_usage_journal_with_no_history_removes_failed_first_write(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    campaign = _campaign()
+    log_path = tmp_path / "_usage_log.json"
+    recovery_path = tmp_path / "._usage_log.json.recovery"
+    real_open = campaign.os.open
+    real_close = campaign.os.close
+    real_fsync = campaign.os.fsync
+    real_replace = campaign.os.replace
+    directory_fds: set[int] = set()
+    primary_replaced = False
+    failure_seen = False
+
+    def traced_open(
+        path: object,
+        flags: int,
+        mode: int = 0o777,
+        *,
+        dir_fd: int | None = None,
+    ) -> int:
+        if dir_fd is None:
+            fd = real_open(path, flags, mode)
+        else:
+            fd = real_open(path, flags, mode, dir_fd=dir_fd)
+        if Path(path) == tmp_path:
+            directory_fds.add(fd)
+        return fd
+
+    def fail_commit_fsync(fd: int) -> None:
+        nonlocal failure_seen
+        if fd in directory_fds and primary_replaced and not failure_seen:
+            failure_seen = True
+            raise OSError("simulated first write directory fsync failure")
+        real_fsync(fd)
+
+    def traced_replace(source: object, destination: object) -> None:
+        nonlocal primary_replaced
+        if Path(destination) == log_path:
+            primary_replaced = True
+        real_replace(source, destination)
+
+    def traced_close(fd: int) -> None:
+        real_close(fd)
+        directory_fds.discard(fd)
+
+    monkeypatch.setattr(campaign.os, "open", traced_open)
+    monkeypatch.setattr(campaign.os, "fsync", fail_commit_fsync)
+    monkeypatch.setattr(campaign.os, "replace", traced_replace)
+    monkeypatch.setattr(campaign.os, "close", traced_close)
+
+    with pytest.raises(OSError, match="first write directory fsync failure"):
+        campaign.write_usage_log_atomic(
+            log_path,
+            [{"schema_version": 2, "generation_id": "gen-first"}],
+        )
+
+    assert failure_seen is True
+    assert not log_path.exists()
+    assert not recovery_path.exists()
+    assert directory_fds == set()
 
 
 def test_usage_locked_append_preserves_interleaved_writers_and_releases_lock(
@@ -2136,6 +2505,167 @@ def test_substance_llm_delegates_to_shared_openrouter_client(
     assert seen[0]["transport"] is transport
 
 
+@pytest.mark.parametrize(
+    ("case", "file_name"),
+    (
+        pytest.param("parent", "../secret.md", id="parent-traversal"),
+        pytest.param("absolute", None, id="absolute-path"),
+        pytest.param("symlink", "escape.md", id="symlink-escape"),
+    ),
+)
+def test_substance_section_body_rejects_paths_outside_repository(
+    tmp_path: Path,
+    case: str,
+    file_name: str | None,
+) -> None:
+    substance = _substance()
+    repo_root = tmp_path / "repository"
+    repo_root.mkdir()
+    outside = tmp_path / "secret.md"
+    outside.write_text("# Secret\n\nNEVER SEND THIS CONTENT\n", encoding="utf-8")
+    if case == "absolute":
+        file_name = str(outside.resolve())
+    elif case == "symlink":
+        (repo_root / "escape.md").symlink_to(outside)
+    assert file_name is not None
+
+    assert substance.section_body(repo_root, file_name, "#secret") is None
+
+
+def test_substance_section_body_reads_valid_internal_relative_path(
+    tmp_path: Path,
+) -> None:
+    substance = _substance()
+    repo_root = tmp_path / "repository"
+    source = repo_root / "cours" / "lesson.md"
+    source.parent.mkdir(parents=True)
+    source.write_text("# Leçon\n\nCONTENU INTERNE VALIDE\n", encoding="utf-8")
+
+    body = substance.section_body(repo_root, "cours/lesson.md", "#leçon")
+
+    assert body is not None
+    assert "CONTENU INTERNE VALIDE" in body
+
+
+def _external_path_hit(
+    tmp_path: Path,
+    case: str,
+) -> tuple[Path, dict[str, object], tuple[str, str]]:
+    repo_root = tmp_path / "repository"
+    repo_root.mkdir()
+    local_secret = "LOCAL_FILE_SECRET_SENTINEL"
+    rag_secret = "RAG_DOCUMENT_SECRET_SENTINEL"
+    outside = tmp_path / "secret.md"
+    outside.write_text(f"# Secret\n\n{local_secret}\n", encoding="utf-8")
+    if case == "parent":
+        file_name = "../secret.md"
+    elif case == "absolute":
+        file_name = str(outside.resolve())
+    elif case == "symlink":
+        file_name = "escape.md"
+        (repo_root / file_name).symlink_to(outside)
+    else:
+        file_name = "secret\x00.md"
+    hit: dict[str, object] = {
+        "metadata": {
+            "source_type": "nsi_corpus",
+            "document_type": "cours",
+            "path": file_name,
+            "section_anchor": "#secret",
+        },
+        "document": rag_secret,
+    }
+    return repo_root, hit, (local_secret, rag_secret)
+
+
+@pytest.mark.parametrize(
+    "case",
+    (
+        pytest.param("parent", id="parent-traversal"),
+        pytest.param("absolute", id="absolute-path"),
+        pytest.param("symlink", id="symlink-escape"),
+        pytest.param("nul", id="nul-byte"),
+    ),
+)
+def test_substance_document_text_rejects_hit_with_unconfined_path(
+    tmp_path: Path,
+    case: str,
+) -> None:
+    substance = _substance()
+    repo_root, hit, secrets = _external_path_hit(tmp_path, case)
+
+    rendered = substance.document_text_for_hit(repo_root, hit)
+
+    assert rendered == ""
+    assert all(secret not in rendered for secret in secrets)
+
+
+@pytest.mark.parametrize(
+    "case",
+    (
+        pytest.param("parent", id="parent-traversal"),
+        pytest.param("absolute", id="absolute-path"),
+        pytest.param("symlink", id="symlink-escape"),
+        pytest.param("nul", id="nul-byte"),
+    ),
+)
+def test_substance_judge_role_skips_unconfined_hit_before_llm(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    caplog: pytest.LogCaptureFixture,
+    capsys: pytest.CaptureFixture[str],
+    case: str,
+) -> None:
+    substance = _substance()
+    repo_root, hit, secrets = _external_path_hit(tmp_path, case)
+    llm_calls: list[tuple[object, ...]] = []
+
+    monkeypatch.setattr(substance, "search_rag", lambda *args, **kwargs: [hit])
+
+    def capture_llm(*args: object, **kwargs: object) -> dict[str, object]:
+        llm_calls.append((*args, kwargs))
+        return {"taught": False, "citation": "", "justification": "rejected"}
+
+    monkeypatch.setattr(substance, "call_llm", capture_llm)
+    capacity = {
+        "id": CAPACITY_ID,
+        "intitule": CAPACITY_TEXT,
+        "rubrique": "Données",
+        "contenu": "Tables",
+        "niveau": "premiere",
+    }
+    with caplog.at_level("DEBUG"):
+        evidence = substance.judge_role(
+            {},
+            capacity,
+            substance.ROLE_SPECS["proof_course"],
+            repo_root,
+            set(),
+        )
+
+    captured = capsys.readouterr()
+    observable = "\n".join(
+        (json.dumps(llm_calls, default=str), caplog.text, captured.out, captured.err)
+    )
+    assert evidence["present"] is False
+    assert llm_calls == []
+    assert all(secret not in observable for secret in secrets)
+
+
+def test_substance_document_text_preserves_document_only_hit_fallback(
+    tmp_path: Path,
+) -> None:
+    substance = _substance()
+    hit = {
+        "metadata": {"source_type": "nsi_corpus", "document_type": "cours"},
+        "document": "DOCUMENT SANS CHEMIN CONSERVE",
+    }
+
+    assert substance.document_text_for_hit(tmp_path, hit) == (
+        "DOCUMENT SANS CHEMIN CONSERVE"
+    )
+
+
 def test_substance_main_overlays_only_nonempty_openrouter_environment(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
@@ -2593,7 +3123,7 @@ def test_substance_discovers_current_checkout_from_unrelated_cwd(
     assert Path(inspect.getfile(substance.call_llm)).resolve().is_relative_to(CORPUS_ROOT)
 
 
-def test_corpus_callers_reject_shadowed_external_package(
+def test_corpus_callers_reload_canonical_external_package_over_shadow(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
 ) -> None:
@@ -2616,10 +3146,137 @@ def test_corpus_callers_reject_shadowed_external_package(
     try:
         for module_name in ("scripts.judge_campaign", "scripts.substance_judge"):
             sys.modules.pop(module_name, None)
-            with pytest.raises((ImportError, RuntimeError), match="nexus_external|checkout|shadow"):
-                importlib.import_module(module_name)
+            loaded = importlib.import_module(module_name)
+            assert Path(loaded.nexus_external.__file__).resolve().parent == (
+                CHECKOUT_ROOT / "nexus_external"
+            ).resolve()
+            assert loaded.chat_completion.__module__ == (
+                "nexus_external.openrouter_client"
+            )
     finally:
         for name in list(sys.modules):
             if name == "nexus_external" or name.startswith("nexus_external."):
                 sys.modules.pop(name, None)
         sys.modules.update(saved)
+
+
+@pytest.mark.parametrize(
+    "caller_module",
+    (
+        pytest.param("scripts.judge_campaign", id="campaign"),
+        pytest.param("scripts.substance_judge", id="substance"),
+    ),
+)
+def test_corpus_callers_reload_canonical_preloaded_openrouter_submodule(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    caller_module: str,
+) -> None:
+    monkeypatch.syspath_prepend(str(CHECKOUT_ROOT))
+    monkeypatch.syspath_prepend(str(CORPUS_ROOT))
+    external_package = importlib.import_module("nexus_external")
+    assert Path(external_package.__file__).resolve().parent == (
+        CHECKOUT_ROOT / "nexus_external"
+    ).resolve()
+    authentic_submodule = importlib.import_module("nexus_external.openrouter_client")
+    assert Path(authentic_submodule.__file__).resolve() == (
+        CHECKOUT_ROOT / "nexus_external" / "openrouter_client.py"
+    ).resolve()
+    foreign_path = tmp_path / "nexus_external" / "openrouter_client.py"
+    foreign_path.parent.mkdir()
+    foreign_path.write_text("# foreign preloaded module\n", encoding="utf-8")
+    foreign = ModuleType("nexus_external.openrouter_client")
+    foreign.__file__ = str(foreign_path)
+    foreign.OpenRouterCompletion = type("OpenRouterCompletion", (), {})
+    foreign.OpenRouterError = type("OpenRouterError", (Exception,), {})
+    foreign.chat_completion = lambda **kwargs: None
+    saved_submodule = authentic_submodule
+    saved_attribute = external_package.openrouter_client
+    saved_caller = sys.modules.pop(caller_module, None)
+    sys.modules["nexus_external.openrouter_client"] = foreign
+    try:
+        loaded = importlib.import_module(caller_module)
+        assert Path(loaded._openrouter_client.__file__).resolve() == (
+            CHECKOUT_ROOT / "nexus_external" / "openrouter_client.py"
+        ).resolve()
+        assert loaded.chat_completion is not foreign.chat_completion
+    finally:
+        sys.modules.pop(caller_module, None)
+        sys.modules.pop("nexus_external.openrouter_client", None)
+        if saved_submodule is not None:
+            sys.modules["nexus_external.openrouter_client"] = saved_submodule
+        if saved_attribute is None:
+            delattr(external_package, "openrouter_client")
+        else:
+            external_package.openrouter_client = saved_attribute
+        if saved_caller is not None:
+            sys.modules[caller_module] = saved_caller
+
+
+@pytest.mark.parametrize(
+    "caller_module",
+    (
+        pytest.param("scripts.judge_campaign", id="campaign"),
+        pytest.param("scripts.substance_judge", id="substance"),
+    ),
+)
+@pytest.mark.parametrize(
+    "provenance",
+    (
+        pytest.param("forged", id="forged-canonical-file"),
+        pytest.param("symlink", id="symlink-to-canonical-file"),
+        pytest.param("missing", id="missing-file"),
+        pytest.param("invalid", id="invalid-file"),
+    ),
+)
+def test_corpus_callers_never_bind_unattestable_preloaded_client(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    caller_module: str,
+    provenance: str,
+) -> None:
+    monkeypatch.syspath_prepend(str(CHECKOUT_ROOT))
+    monkeypatch.syspath_prepend(str(CORPUS_ROOT))
+    external_package = importlib.import_module("nexus_external")
+    authentic_submodule = importlib.import_module("nexus_external.openrouter_client")
+    canonical_file = (
+        CHECKOUT_ROOT / "nexus_external" / "openrouter_client.py"
+    ).resolve()
+    hostile_calls = 0
+
+    def hostile_chat_completion(**kwargs: object) -> None:
+        nonlocal hostile_calls
+        hostile_calls += 1
+        raise AssertionError(f"hostile transport called: {kwargs}")
+
+    hostile = ModuleType("nexus_external.openrouter_client")
+    if provenance == "forged":
+        hostile.__file__ = str(canonical_file)
+    elif provenance == "symlink":
+        linked_file = tmp_path / "openrouter_client.py"
+        linked_file.symlink_to(canonical_file)
+        hostile.__file__ = str(linked_file)
+    elif provenance == "invalid":
+        hostile.__file__ = object()
+    hostile.OpenRouterCompletion = type("OpenRouterCompletion", (), {})
+    hostile.OpenRouterError = type("OpenRouterError", (Exception,), {})
+    hostile.chat_completion = hostile_chat_completion
+    saved_caller = sys.modules.pop(caller_module, None)
+    sys.modules["nexus_external.openrouter_client"] = hostile
+    external_package.openrouter_client = hostile
+    imported: object | None = None
+    try:
+        try:
+            imported = importlib.import_module(caller_module)
+        except (ImportError, RuntimeError):
+            pass
+        if imported is not None:
+            assert getattr(imported, "chat_completion") is not hostile_chat_completion
+            assert getattr(imported, "_openrouter_client") is not hostile
+        assert hostile_calls == 0
+    finally:
+        sys.modules.pop(caller_module, None)
+        sys.modules["nexus_external.openrouter_client"] = authentic_submodule
+        external_package.openrouter_client = authentic_submodule
+        if saved_caller is not None:
+            sys.modules[caller_module] = saved_caller

@@ -302,6 +302,40 @@ def test_chat_completion_caps_timeout_at_thirty_seconds() -> None:
     assert all(value is not None and 0 < value <= 30 for value in timeout.values())
 
 
+def test_chat_completion_ignores_proxy_and_ca_environment(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _client_module()
+    real_client = module.httpx.Client
+    observed: list[dict[str, object]] = []
+
+    monkeypatch.setenv("HTTPS_PROXY", "http://proxy-sentinel.invalid:8443")
+    monkeypatch.setenv("ALL_PROXY", "socks5://all-proxy-sentinel.invalid:1080")
+    monkeypatch.setenv("SSL_CERT_FILE", "/missing/ca-sentinel.pem")
+
+    def recording_client(**kwargs: object) -> httpx.Client:
+        observed.append(dict(kwargs))
+        assert kwargs["transport"] is None
+        assert kwargs["trust_env"] is False
+        controlled_kwargs = dict(kwargs)
+        controlled_kwargs["transport"] = _transport_for()
+        return real_client(**controlled_kwargs)
+
+    monkeypatch.setattr(module.httpx, "Client", recording_client)
+
+    result = module.chat_completion(
+        api_key=API_KEY,
+        model=MODEL,
+        messages=MESSAGES,
+        max_completion_tokens=321,
+    )
+
+    assert result.content == "réponse complète"
+    assert len(observed) == 1
+    assert observed[0]["transport"] is None
+    assert observed[0]["trust_env"] is False
+
+
 def test_chat_completion_does_not_follow_redirects() -> None:
     module = _client_module()
     seen: list[str] = []

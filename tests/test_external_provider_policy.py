@@ -1,14 +1,19 @@
 from __future__ import annotations
 
 import ast
+import hashlib
 import re
+import shlex
 import socket
 import subprocess
+import tomllib
 import urllib.request
 from collections.abc import Iterable, Mapping
 from pathlib import Path
 
 import pytest
+import yaml
+from packaging.requirements import InvalidRequirement, Requirement
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -78,13 +83,27 @@ AUTHORITY_AND_GUIDE_PATHS = (
     "Mathematiques/manuel-maths/CAHIER_DES_CHARGES.md",
     "Mathematiques/manuel-maths/docs/02_workflow_production.md",
     "Mathematiques/manuel-maths/docs/03_architecture_technique.md",
+    "Mathematiques/manuel-maths/CLAUDE.md",
+    "Mathematiques/manuel-maths/docs/04_guide_agents.md",
+    "Mathematiques/manuel-maths/.claude/commands/verifier.md",
     "NSI/CAHIER_DES_CHARGES.md",
     "NSI/docs/02_workflow_production.md",
     "NSI/docs/03_architecture_technique.md",
+    "NSI/docs/04_guide_agents.md",
+    "NSI/.claude/commands/verifier.md",
     "NSI/corpus_nsi/README.md",
     "NSI/corpus_nsi/rag_connection.md",
     "NSI/corpus_nsi/substance_pipeline.md",
     "NSI/corpus_nsi/docs/enrichment_roadmap.md",
+    "docs/superpowers/specs/2026-08-13-openrouter-only-external-provider-design.md",
+)
+
+ACTIVE_AGENT_GUIDE_PATHS = (
+    "Mathematiques/manuel-maths/CLAUDE.md",
+    "Mathematiques/manuel-maths/docs/04_guide_agents.md",
+    "Mathematiques/manuel-maths/.claude/commands/verifier.md",
+    "NSI/docs/04_guide_agents.md",
+    "NSI/.claude/commands/verifier.md",
 )
 
 INVENTORY_PATHS = (
@@ -106,10 +125,50 @@ RAG_TRANSPORT_PATHS = (
     "NSI/corpus_nsi/scripts/check_rag_freshness.py",
     "NSI/corpus_nsi/scripts/ingest_nsi_corpus.py",
     "NSI/corpus_nsi/scripts/rag_diagnose_search_timeout.py",
+    "NSI/corpus_nsi/scripts/rag_ingest.py",
     "NSI/corpus_nsi/scripts/rag_ingest_server.py",
-    "NSI/corpus_nsi/scripts/rag_query_example.py",
     "NSI/corpus_nsi/scripts/rag_smoke_test.py",
+    "NSI/corpus_nsi/scripts/substance_judge.py",
 )
+
+APPROVED_LLM_CONFIGURATION_CONTRACT = {
+    "Mathematiques/manuel-maths/.env.example": {
+        "EMBEDDING_MODEL=BAAI/bge-m3",
+        "OPENROUTER_API_KEY=",
+        "OPENROUTER_MODEL=",
+        "RERANKER_MODEL=cross-encoder/ms-marco-MiniLM-L-6-v2",
+    },
+    "NSI/.env.example": {
+        "EMBEDDING_MODEL=BAAI/bge-m3",
+        "OPENROUTER_API_KEY=",
+        "OPENROUTER_MODEL=",
+        "RERANKER_MODEL=cross-encoder/ms-marco-MiniLM-L-6-v2",
+    },
+    "NSI/corpus_nsi/.env.rag.example": {
+        "EMBEDDING_API_KEY=",
+        "EMBEDDING_BASE_URL=",
+        "EMBEDDING_MODEL=nomic-embed-text",
+        "OPENROUTER_API_KEY=",
+        "OPENROUTER_MODEL=",
+        "RAG_API_BASE_URL=https://rag-api.nexusreussite.academy/search",
+        "RAG_API_KEY=",
+        "VECTOR_DB_API_KEY=",
+        "VECTOR_DB_URL=",
+    },
+    "NSI/corpus_nsi/rag_config.example.yml": {
+        'base_url: "https://rag-api.nexusreussite.academy/search"',
+        "base_url_env: EMBEDDING_BASE_URL",
+        "model: nomic-embed-text",
+    },
+}
+
+APPROVED_LLM_STRUCTURED_CONTRACT = {
+    "NSI/corpus_nsi/rag_config.example.yml": {
+        "api.base_url='https://rag-api.nexusreussite.academy/search'",
+        "embedding.base_url_env='EMBEDDING_BASE_URL'",
+        "embedding.model='nomic-embed-text'",
+    },
+}
 
 SUBSTANCE_RAG_PATH = "NSI/corpus_nsi/scripts/substance_judge.py"
 
@@ -125,7 +184,7 @@ CANONICAL_PROVIDER_SURFACES = tuple(
     dict.fromkeys((*CODE_PATHS, *CONFIGURATION_PATHS, *TEST_PATHS))
 )
 
-DISCOVERY_HISTORICAL_PREFIXES = (
+HISTORICAL_NAMESPACE_PREFIXES = (
     "audit/",
     "docs/codex/",
     "docs/superpowers/plans/",
@@ -134,9 +193,52 @@ DISCOVERY_HISTORICAL_PREFIXES = (
     "NSI/corpus_nsi/substance_reviews/",
 )
 
-DISCOVERY_HISTORICAL_PATHS = {
+HISTORICAL_EXPLICIT_PATHS = {
     "NSI/corpus_nsi/docs/judge_campaign_plan.md",
 }
+
+CURRENT_OPENROUTER_SPEC_PATH = (
+    "docs/superpowers/specs/"
+    "2026-08-13-openrouter-only-external-provider-design.md"
+)
+CURRENT_SPEC_LOCAL_LLM_HISTORICAL_LINES = {
+    "partir de `LOCAL_LLM_BASE_URL` et peut donc atteindre une URL arbitraire.",
+    (
+        "Les variables `LOCAL_LLM_ENGINE`, `LOCAL_LLM_BASE_URL`, "
+        "`LOCAL_LLM_MODEL` et"
+    ),
+    "`LOCAL_LLM_API_KEY` disparaissent de la configuration active. Aucun endpoint",
+}
+CURRENT_SPEC_SECTION_9_CHUTES_LINES = {
+    "- `audit/chutes/**` ;",
+    "`audit/openrouter/`. Aucun nouvel artefact n'est écrit sous `audit/chutes/`.",
+}
+HISTORICAL_SNAPSHOT_COUNT = 389
+HISTORICAL_SNAPSHOT_SHA256 = (
+    "71358d1f796a8fc83f2e94a681d313ef81d95a0034c17bdc43a97d458ff7f7d5"
+)
+
+
+def _tracked_historical_snapshot() -> frozenset[str]:
+    completed = subprocess.run(
+        ["git", "-C", str(ROOT), "ls-files", "-z"],
+        check=True,
+        capture_output=True,
+    )
+    paths = {
+        raw.decode("utf-8")
+        for raw in completed.stdout.split(b"\0")
+        if raw
+    }
+    return frozenset(
+        path
+        for path in paths
+        if path in HISTORICAL_EXPLICIT_PATHS
+        or path.startswith(HISTORICAL_NAMESPACE_PREFIXES)
+    )
+
+
+DISCOVERY_HISTORICAL_PATH_SNAPSHOT = _tracked_historical_snapshot()
 
 TARGETED_SCAN_PATHS = (
     *CALLER_PATHS,
@@ -175,111 +277,6 @@ LOCAL_LLM_SCAN_PATHS = (
 
 SHARED_CLIENT_PATH = "nexus_external/openrouter_client.py"
 
-RAG_TRANSPORT_CONTRACT = {
-    "NSI/corpus_nsi/scripts/check_rag_freshness.py": {
-        "imports": (("urllib.request", "urllib.request"),),
-        "functions": {
-            "query_chroma_hashes": {
-                "calls": {
-                    "urllib.request.Request": 1,
-                    "urllib.request.urlopen": 1,
-                },
-                "roots": {"RAG_API_BASE_URL"},
-            },
-        },
-    },
-    "NSI/corpus_nsi/scripts/ingest_nsi_corpus.py": {
-        "imports": (("urllib.request", "urllib.request"),),
-        "functions": {
-            "main": {
-                "calls": {
-                    "urllib.request.Request": 7,
-                    "urllib.request.urlopen": 7,
-                },
-                "roots": {"EMBEDDING_BASE_URL", "VECTOR_DB_URL"},
-            },
-        },
-    },
-    "NSI/corpus_nsi/scripts/rag_diagnose_search_timeout.py": {
-        "imports": (("urllib.request", "urllib.request"),),
-        "functions": {
-            "run_probe": {
-                "calls": {
-                    "urllib.request.Request": 1,
-                    "urllib.request.urlopen": 1,
-                },
-                "roots": {"RAG_API_BASE_URL"},
-            },
-        },
-    },
-    "NSI/corpus_nsi/scripts/rag_ingest_server.py": {
-        "imports": (("urllib.request", "urllib.request"),),
-        "functions": {
-            "_http": {
-                "calls": {
-                    "urllib.request.Request": 1,
-                    "urllib.request.urlopen": 1,
-                },
-                "roots": {"EMBEDDING_BASE_URL", "VECTOR_DB_URL"},
-            },
-            "embed": {
-                "calls": {"_http": 1},
-                "roots": {"EMBEDDING_BASE_URL"},
-            },
-            "get_or_create_collection": {
-                "calls": {"_http": 2},
-                "roots": {"VECTOR_DB_URL"},
-            },
-            "collection_count": {
-                "calls": {"urllib.request.urlopen": 1},
-                "roots": {"VECTOR_DB_URL"},
-            },
-            "upsert": {
-                "calls": {"_http": 1},
-                "roots": {"VECTOR_DB_URL"},
-            },
-            "delete_collection": {
-                "calls": {"_http": 1},
-                "roots": {"VECTOR_DB_URL"},
-            },
-        },
-    },
-    "NSI/corpus_nsi/scripts/rag_query_example.py": {
-        "imports": (),
-        "functions": {
-            "main": {"calls": {}, "roots": set()},
-        },
-    },
-    "NSI/corpus_nsi/scripts/rag_smoke_test.py": {
-        "imports": (("urllib.request", "urllib.request"),),
-        "functions": {
-            "smoke_search": {
-                "calls": {
-                    "urllib.request.Request": 1,
-                    "urllib.request.urlopen": 1,
-                },
-                "roots": {"RAG_API_BASE_URL"},
-            },
-        },
-    },
-    SUBSTANCE_RAG_PATH: {
-        "imports": (("urllib.request", "urllib.request"),),
-        "functions": {
-            "_http_json": {
-                "calls": {
-                    "urllib.request.Request": 1,
-                    "urllib.request.urlopen": 1,
-                },
-                "roots": {"RAG_API_BASE_URL"},
-            },
-            "search_rag": {
-                "calls": {"_http_json": 1},
-                "roots": {"RAG_API_BASE_URL"},
-            },
-        },
-    },
-}
-
 PROVIDER_SDK_PREFIXES = (
     "anthropic",
     "chutes",
@@ -290,6 +287,18 @@ PROVIDER_SDK_PREFIXES = (
     "openai",
 )
 
+FORBIDDEN_PROVIDER_PACKAGES = frozenset(
+    {
+        "anthropic",
+        "chutes",
+        "cohere",
+        "google-generativeai",
+        "groq",
+        "mistralai",
+        "openai",
+    }
+)
+
 HTTP_STACK_PREFIXES = (
     "aiohttp",
     "http.client",
@@ -298,6 +307,130 @@ HTTP_STACK_PREFIXES = (
     "urllib.request",
     "urllib3",
 )
+
+NETWORK_IMPORT_PREFIXES = (
+    *HTTP_STACK_PREFIXES,
+    "socket",
+    "urllib.robotparser",
+)
+
+NETWORK_SURFACE_REGISTRY = {
+    "Mathematiques/manuel-maths/scripts/crawl.py": {
+        "reason": "crawler limité aux sources enregistrées et robots.txt",
+        "endpoints": ("sources/registry.yaml", "robots.txt"),
+        "ast_sha256": "5a053ab897f218afa4f61eb99cc01044e9fd64f8c85ce154a69260ed4d5d7730",
+    },
+    "Mathematiques/manuel-maths/tests/test_ingest_openrouter.py": {
+        "reason": "tests hors ligne et garde socket de l'ingestion",
+        "endpoints": ("loopback interdit", "mocks OpenRouter"),
+        "ast_sha256": "9db8839138a8173def8ac89d106d9bf55f47d0c940c560d6aad80810d5407766",
+    },
+    "NSI/corpus_nsi/scrapping_NSI/netpolicy.py": {
+        "reason": "politique réseau du scraper pédagogique",
+        "endpoints": ("sources autorisées", "robots.txt"),
+        "ast_sha256": "ec398d271a4057acfdb08e32a95c6619a6487e08b134d6b22c4c840f9349130e",
+    },
+    "NSI/corpus_nsi/scrapping_NSI/scraper_nsi_v2.py": {
+        "reason": "scraper pédagogique via netpolicy",
+        "endpoints": ("sources autorisées",),
+        "ast_sha256": "125475f29dc513b1f49b3c3d75a68637b619e60003b30649614cfff92cfddead",
+    },
+    "NSI/corpus_nsi/scrapping_NSI/test_netpolicy.py": {
+        "reason": "tests hors ligne de netpolicy",
+        "endpoints": ("mocks requests",),
+        "ast_sha256": "b2fd29b12ac159e70dc25adba81bd74f329588143747c3b71c927cc48c8fb394",
+    },
+    "NSI/corpus_nsi/scrapping_NSI/test_scraper_nsi_v2.py": {
+        "reason": "tests hors ligne du scraper",
+        "endpoints": ("mocks requests",),
+        "ast_sha256": "288efb49091366474fe0a94f32d5037fade478cf761cd70e64a369bde355f7fa",
+    },
+    "NSI/corpus_nsi/scripts/check_rag_freshness.py": {
+        "reason": "contrôle de fraîcheur RAG",
+        "endpoints": ("RAG_API_BASE_URL",),
+        "ast_sha256": "aca937ca5112e80fbf6835a4eeff8a92ef1a49c01c3bb4688b55a9145f74e14a",
+    },
+    "NSI/corpus_nsi/scripts/ingest_nsi_corpus.py": {
+        "reason": "ingestion embeddings et base vectorielle RAG",
+        "endpoints": ("EMBEDDING_BASE_URL", "VECTOR_DB_URL"),
+        "ast_sha256": "141ce28e5fe94ce071574408613a7046b6b693977054408b2775a89956286cf5",
+    },
+    "NSI/corpus_nsi/scripts/rag_diagnose_search_timeout.py": {
+        "reason": "diagnostic borné du service RAG",
+        "endpoints": ("RAG_API_BASE_URL",),
+        "ast_sha256": "f190cdc3c8f099afb56b96c8e841e9287cbfb626e44d647eb3f2ac5e2bc7a35a",
+    },
+    "NSI/corpus_nsi/scripts/rag_ingest.py": {
+        "reason": "client de collection vectorielle RAG",
+        "endpoints": ("VECTOR_DB_URL",),
+        "ast_sha256": "91456f9d437f96f7da47ef1577cffb29a72d4aff3bb6f6a674d7f94e8edd9f0d",
+    },
+    "NSI/corpus_nsi/scripts/rag_ingest_server.py": {
+        "reason": "transport explicite embeddings et base vectorielle",
+        "endpoints": ("EMBEDDING_BASE_URL", "VECTOR_DB_URL"),
+        "ast_sha256": "68f02862d523058ee36b86539271340f2745e204db2155abf5e37b88d7bb7a59",
+    },
+    "NSI/corpus_nsi/scripts/rag_smoke_test.py": {
+        "reason": "smoke RAG manuel et séparé",
+        "endpoints": ("RAG_API_BASE_URL",),
+        "ast_sha256": "6dbb04549879ed79084ca6e1d5688e4649fb5e68cbacb73f16c20d944b383a01",
+    },
+    "NSI/corpus_nsi/scripts/substance_judge.py": {
+        "reason": "recherche RAG; LLM délégué au client partagé",
+        "endpoints": ("RAG_API_BASE_URL",),
+        "ast_sha256": "5ade4adfc64059948b295b615ca28ed2a8baee7af700d2c8c2f507c4df8c06bd",
+    },
+    "NSI/corpus_nsi/tests/conftest.py": {
+        "reason": "garde réseau globale des tests corpus",
+        "endpoints": ("tout réseau interdit",),
+        "ast_sha256": "6e20f29e3fee687d104a1681115e1d58bdcd106654476fdba2b25f519920c0f8",
+    },
+    "NSI/corpus_nsi/tests/test_manifest_separation.py": {
+        "reason": "tests hors ligne avec garde socket",
+        "endpoints": ("loopback interdit",),
+        "ast_sha256": "cabac80e01b9cb180d74d2b98282b79fa309d513c0c01a751e565dd8b749ee6c",
+    },
+    "NSI/corpus_nsi/tests/test_openrouter_judges.py": {
+        "reason": "tests hors ligne des juges et garde socket",
+        "endpoints": ("loopback interdit", "mocks OpenRouter/RAG"),
+        "ast_sha256": "00b4d8e33700afe4e5d0c550ed807ce357efdce3a60ff60e24c8a82581c3f75d",
+    },
+    "NSI/corpus_nsi/tests/test_substance_judge_pipeline.py": {
+        "reason": "tests hors ligne du pipeline substance",
+        "endpoints": ("loopback interdit", "mocks RAG"),
+        "ast_sha256": "457310f46aac5533c2f4748255d7784ffa66d487dc54f0e6fe43ae1c1b36ed66",
+    },
+    "NSI/scripts/crawl.py": {
+        "reason": "crawler limité aux sources enregistrées et robots.txt",
+        "endpoints": ("sources/registry.yaml", "robots.txt"),
+        "ast_sha256": "5a053ab897f218afa4f61eb99cc01044e9fd64f8c85ce154a69260ed4d5d7730",
+    },
+    "NSI/tests/test_ingest_openrouter.py": {
+        "reason": "tests hors ligne et garde socket de l'ingestion",
+        "endpoints": ("loopback interdit", "mocks OpenRouter"),
+        "ast_sha256": "83d821b27c8f6d06690fcc1a869257e4fa4df97e6584e1fc014796c5a18f3b12",
+    },
+    "nexus_external/openrouter_client.py": {
+        "reason": "unique transport LLM externe partagé",
+        "endpoints": ("https://openrouter.ai/api/v1/chat/completions",),
+        "ast_sha256": "f9725c0e72bfa63c7f4c6ed8a061229b01a7c0db298141aeac45e559fefe6098",
+    },
+    "tests/test_external_provider_policy.py": {
+        "reason": "garde réseau et mutations hors ligne de la politique",
+        "endpoints": ("loopback interdit", "fixtures uniquement"),
+        "ast_sha256": "8c145ec1775f5402a58bf799bd7d6718f238fa22ff948e87fee362eaf91de2b1",
+    },
+    "tests/test_openrouter_classification.py": {
+        "reason": "tests hors ligne de classification OpenRouter",
+        "endpoints": ("loopback interdit", "MockTransport"),
+        "ast_sha256": "41b86c06f5c9a837f1aacd18539e11e49e58f5f2005f2bb7ba481e4a8f94623c",
+    },
+    "tests/test_openrouter_client.py": {
+        "reason": "tests hors ligne du client OpenRouter",
+        "endpoints": ("loopback interdit", "MockTransport"),
+        "ast_sha256": "fbc8ac42009ffd0dd75adb61563cc454bf9dbbb10a0b14fc81b4fe5bf5d37db2",
+    },
+}
 
 
 def _blocked_network(*args: object, **kwargs: object) -> None:
@@ -378,9 +511,46 @@ def _git_tracked_paths() -> set[str]:
     }
 
 
+def _historical_snapshot_digest(paths: Iterable[str]) -> str:
+    payload = "\n".join(sorted(paths)).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
 def _is_protected_historical_path(path: str) -> bool:
-    return path in DISCOVERY_HISTORICAL_PATHS or path.startswith(
-        DISCOVERY_HISTORICAL_PREFIXES
+    if path == CURRENT_OPENROUTER_SPEC_PATH:
+        return False
+    snapshot_matches = (
+        len(DISCOVERY_HISTORICAL_PATH_SNAPSHOT) == HISTORICAL_SNAPSHOT_COUNT
+        and _historical_snapshot_digest(DISCOVERY_HISTORICAL_PATH_SNAPSHOT)
+        == HISTORICAL_SNAPSHOT_SHA256
+    )
+    return snapshot_matches and path in DISCOVERY_HISTORICAL_PATH_SNAPSHOT
+
+
+def _is_new_historical_executable(path: str) -> bool:
+    candidate = Path(path)
+    return (
+        path.startswith(HISTORICAL_NAMESPACE_PREFIXES)
+        and path not in DISCOVERY_HISTORICAL_PATH_SNAPSHOT
+        and (
+            candidate.suffix in {".py", ".sh", ".toml", ".yaml", ".yml"}
+            or candidate.name == "Makefile"
+        )
+    )
+
+
+def _is_active_discovery_candidate(path: str) -> bool:
+    if _is_protected_historical_path(path):
+        return False
+    candidate = Path(path)
+    return (
+        candidate.suffix in {".py", ".sh", ".toml", ".yaml", ".yml"}
+        or candidate.name == "Makefile"
+        or candidate.name.startswith(".env")
+        or (
+            candidate.name.startswith("requirements")
+            and candidate.suffix == ".txt"
+        )
     )
 
 
@@ -487,7 +657,10 @@ def _discover_provider_surfaces(
         for path in CANONICAL_PROVIDER_SURFACES
         if (ROOT / path).is_file()
     }
-    queue = list(CANONICAL_PROVIDER_SURFACES)
+    active_candidates = {
+        path for path in tracked | set(overrides) if _is_active_discovery_candidate(path)
+    }
+    queue = sorted(set(CANONICAL_PROVIDER_SURFACES) | active_candidates)
     discovered: dict[str, str] = {}
     edges: set[tuple[str, str]] = set()
     issues: list[str] = []
@@ -508,6 +681,8 @@ def _discover_provider_surfaces(
         discovered[path] = source
         if path not in tracked:
             issues.append(f"untracked active surface: {path}")
+        if _is_new_historical_executable(path):
+            issues.append(f"new executable in historical namespace: {path}")
         if not source or not path.endswith(".py"):
             continue
         try:
@@ -515,7 +690,8 @@ def _discover_provider_surfaces(
         except SyntaxError as exc:
             issues.append(f"syntax error in active surface {path}:{exc.lineno}")
             continue
-        issues.extend(import_issues)
+        if path in CANONICAL_PROVIDER_SURFACES:
+            issues.extend(import_issues)
         for edge in new_edges:
             edges.add(edge)
             imported = edge[1]
@@ -572,108 +748,48 @@ def _is_provider_sdk_name(name: str) -> bool:
     )
 
 
-def _provider_sdk_used(tree: ast.AST) -> bool:
+def _canonical_network_ast_digest(source: str) -> str:
+    tree = ast.parse(source)
     for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            if any(_is_provider_sdk_name(alias.name) for alias in node.names):
-                return True
-        elif isinstance(node, ast.ImportFrom):
-            module = node.module or ""
-            if _is_provider_sdk_name(module):
-                return True
-        elif isinstance(node, ast.Call):
-            name = _dotted_name(node.func)
-            if _is_provider_sdk_name(name):
-                return True
-    return False
+        if not isinstance(node, ast.Dict):
+            continue
+        for key, value in zip(node.keys, node.values, strict=True):
+            if (
+                isinstance(key, ast.Constant)
+                and key.value == "ast_sha256"
+                and isinstance(value, ast.Constant)
+                and isinstance(value.value, str)
+            ):
+                value.value = "<normalized-network-contract-digest>"
+    canonical = ast.dump(tree, annotate_fields=True, include_attributes=False)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
-def _http_stack_imports(tree: ast.AST) -> list[tuple[str, str]]:
-    imports: list[tuple[str, str]] = []
+def _network_surface_signals(tree: ast.AST) -> set[str]:
+    signals: set[str] = set()
+    unsafe_methods = {"delete", "patch", "post", "put", "request"}
+    network_prefixes = (*NETWORK_IMPORT_PREFIXES, *PROVIDER_SDK_PREFIXES)
+    importlib_aliases = {"importlib"}
+    import_module_aliases: set[str] = set()
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
             for alias in node.names:
-                if any(
-                    alias.name == prefix or alias.name.startswith(f"{prefix}.")
-                    for prefix in HTTP_STACK_PREFIXES
-                ):
-                    imports.append((alias.name, alias.asname or alias.name))
-        elif isinstance(node, ast.ImportFrom):
-            module = node.module or ""
-            if module == "urllib":
-                for alias in node.names:
-                    if alias.name == "request":
-                        imports.append(
-                            ("urllib.request", alias.asname or alias.name)
-                        )
-                continue
-            if any(
-                module == prefix or module.startswith(f"{prefix}.")
-                for prefix in HTTP_STACK_PREFIXES
-            ):
-                for alias in node.names:
-                    imports.append((module, alias.asname or alias.name))
-    return imports
+                if alias.name == "importlib":
+                    importlib_aliases.add(alias.asname or alias.name)
+        elif isinstance(node, ast.ImportFrom) and node.module == "importlib":
+            for alias in node.names:
+                if alias.name == "import_module":
+                    import_module_aliases.add(alias.asname or alias.name)
 
-
-def _is_http_call(call: ast.Call) -> bool:
-    name = _dotted_name(call.func)
-    direct_calls = {
-        "_http_json",
-        "_http",
-        "httpx.Client",
-        "httpx.get",
-        "httpx.patch",
-        "httpx.post",
-        "httpx.put",
-        "httpx.request",
-        "requests.Session",
-        "requests.delete",
-        "requests.get",
-        "requests.patch",
-        "requests.post",
-        "requests.put",
-        "requests.request",
-        "urllib.request.Request",
-        "urllib.request.urlopen",
-    }
-    method = name.rsplit(".", maxsplit=1)[-1]
-    receiver = name.rsplit(".", maxsplit=1)[0].casefold()
-    generic_method = method in {"delete", "patch", "post", "put", "request"}
-    client_get = method == "get" and any(
-        marker in receiver for marker in ("client", "http", "session", "transport")
-    )
-    aliased_urllib = method in {"Request", "urlopen"}
-    return name in direct_calls or generic_method or client_get or aliased_urllib
-
-
-def _network_destination(call: ast.Call) -> ast.AST | None:
-    name = _dotted_name(call.func)
-    if name in {"httpx.Client", "requests.Session"}:
-        for keyword in call.keywords:
-            if keyword.arg in {"base_url", "url"}:
-                return keyword.value
-        return None
-    if name == "_http":
-        return call.args[1] if len(call.args) > 1 else None
-    if name in {"requests.request", "httpx.request"} or name.endswith(".request"):
-        return call.args[1] if len(call.args) > 1 else None
-    if call.args:
-        return call.args[0]
-    for keyword in call.keywords:
-        if keyword.arg in {"base_url", "url"}:
-            return keyword.value
-    return None
-
-
-def _scope_assignments(tree: ast.AST) -> dict[str | None, dict[str, list[ast.AST]]]:
-    parents = {
-        child: parent
-        for parent in ast.walk(tree)
-        for child in ast.iter_child_nodes(parent)
-    }
-    assignments: dict[str | None, dict[str, list[ast.AST]]] = {None: {}}
+    receiver_markers = {"client", "gateway", "transport"}
+    network_receivers: set[str] = set()
+    mapping_receivers: set[str] = set()
+    assignments: list[tuple[str, ast.AST]] = []
     for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            for argument in (*node.args.posonlyargs, *node.args.args, *node.args.kwonlyargs):
+                if argument.arg.casefold() in receiver_markers:
+                    network_receivers.add(argument.arg)
         targets: tuple[ast.AST, ...] = ()
         value: ast.AST | None = None
         if isinstance(node, ast.Assign):
@@ -684,86 +800,109 @@ def _scope_assignments(tree: ast.AST) -> dict[str | None, dict[str, list[ast.AST
             value = node.value
         if value is None:
             continue
-        scope = _enclosing_function(node, parents)
-        scope_assignments = assignments.setdefault(scope, {})
         for target in targets:
-            if isinstance(target, ast.Name):
-                scope_assignments.setdefault(target.id, []).append(value)
-    return assignments
+            if not isinstance(target, ast.Name):
+                continue
+            assignments.append((target.id, value))
+            if isinstance(value, ast.Dict) or (
+                isinstance(value, ast.Call) and _dotted_name(value.func) == "dict"
+            ):
+                mapping_receivers.add(target.id)
+            elif target.id.casefold() in receiver_markers:
+                network_receivers.add(target.id)
 
+    changed = True
+    while changed:
+        changed = False
+        for target, value in assignments:
+            if target in mapping_receivers or not isinstance(value, ast.Name):
+                continue
+            if value.id in network_receivers and target not in network_receivers:
+                network_receivers.add(target)
+                changed = True
 
-def _canonical_root(path: str, root: str) -> str:
-    if path == "NSI/corpus_nsi/scripts/rag_ingest_server.py":
-        aliases = {
-            "OLLAMA_URL": "EMBEDDING_BASE_URL",
-            "CHROMA_URL": "VECTOR_DB_URL",
-        }
-        return aliases.get(root, root)
-    return root
-
-
-def _destination_provenance(
-    node: ast.AST,
-    *,
-    path: str,
-    scope: str | None,
-    assignments: Mapping[str | None, Mapping[str, list[ast.AST]]],
-    seen: frozenset[tuple[str | None, str]] = frozenset(),
-) -> tuple[set[str], set[str]]:
-    if isinstance(node, ast.Name):
-        key = (scope, node.id)
-        values = assignments.get(scope, {}).get(node.id, ())
-        if not values and scope is not None:
-            key = (None, node.id)
-            values = assignments.get(None, {}).get(node.id, ())
-        if values and key not in seen:
-            roots: set[str] = set()
-            free: set[str] = set()
-            for value in values:
-                value_roots, value_free = _destination_provenance(
-                    value,
-                    path=path,
-                    scope=key[0],
-                    assignments=assignments,
-                    seen=seen | {key},
-                )
-                roots.update(value_roots)
-                free.update(value_free)
-            return roots, free
-        return set(), {node.id}
-    if isinstance(node, ast.Subscript):
-        owner = _dotted_name(node.value)
-        if owner in {"env", "os.environ"}:
-            key_node = node.slice
-            if isinstance(key_node, ast.Constant) and isinstance(key_node.value, str):
-                return {_canonical_root(path, key_node.value)}, set()
-    if isinstance(node, ast.Call):
-        name = _dotted_name(node.func)
-        if name in {"env.get", "os.environ.get", "os.getenv"} and node.args:
-            key_node = node.args[0]
-            if isinstance(key_node, ast.Constant) and isinstance(key_node.value, str):
-                return {_canonical_root(path, key_node.value)}, set()
-        destination = _network_destination(node) if _is_http_call(node) else None
-        children = (
-            (destination,)
-            if destination is not None
-            else (*node.args, *(keyword.value for keyword in node.keywords))
-        )
-    else:
-        children = tuple(ast.iter_child_nodes(node))
-    roots: set[str] = set()
-    free: set[str] = set()
-    for child in children:
-        child_roots, child_free = _destination_provenance(
-            child,
-            path=path,
-            scope=scope,
-            assignments=assignments,
-            seen=seen,
-        )
-        roots.update(child_roots)
-        free.update(child_free)
-    return roots, free
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                if any(
+                    alias.name == prefix or alias.name.startswith(f"{prefix}.")
+                    for prefix in network_prefixes
+                ):
+                    signals.add(f"import:{alias.name}")
+        elif isinstance(node, ast.ImportFrom):
+            module = node.module or ""
+            imported_names = {
+                f"{module}.{alias.name}" for alias in node.names if module
+            }
+            if any(
+                module == prefix or module.startswith(f"{prefix}.")
+                for prefix in network_prefixes
+            ) or any(
+                imported == prefix or imported.startswith(f"{prefix}.")
+                for imported in imported_names
+                for prefix in network_prefixes
+            ):
+                signals.add(f"import:{module}")
+        elif isinstance(node, ast.Attribute):
+            dotted = _dotted_name(node)
+            if any(
+                dotted == prefix or dotted.startswith(f"{prefix}.")
+                for prefix in network_prefixes
+            ):
+                signals.add(f"reference:{dotted}")
+        elif isinstance(node, ast.Call):
+            if isinstance(node.func, ast.Name) and node.func.id == "__import__":
+                if node.args and isinstance(node.args[0], ast.Constant):
+                    imported = node.args[0].value
+                    if isinstance(imported, str) and any(
+                        imported == prefix or imported.startswith(f"{prefix}.")
+                        for prefix in network_prefixes
+                    ):
+                        signals.add(f"dynamic-import:{imported}")
+            dynamic_import = (
+                isinstance(node.func, ast.Attribute)
+                and node.func.attr == "import_module"
+                and isinstance(node.func.value, ast.Name)
+                and node.func.value.id in importlib_aliases
+            ) or (
+                isinstance(node.func, ast.Name)
+                and node.func.id in import_module_aliases
+            )
+            if dynamic_import and node.args and isinstance(
+                node.args[0], ast.Constant
+            ):
+                imported = node.args[0].value
+                if isinstance(imported, str) and any(
+                    imported == prefix or imported.startswith(f"{prefix}.")
+                    for prefix in network_prefixes
+                ):
+                    signals.add(f"dynamic-import:{imported}")
+            if isinstance(node.func, ast.Attribute):
+                method = node.func.attr
+                if method in unsafe_methods:
+                    signals.add(f"http-verb:{method}")
+                elif method == "get":
+                    receiver = _dotted_name(node.func.value)
+                    receiver_root = receiver.split(".", maxsplit=1)[0]
+                    receiver_leaf = receiver.rsplit(".", maxsplit=1)[-1].casefold()
+                    is_network_receiver = (
+                        receiver_root in network_receivers
+                        or receiver_leaf in receiver_markers
+                    ) and receiver_root not in mapping_receivers
+                    has_network_destination = _call_has_destination(
+                        node,
+                        {},
+                        (
+                            "http://",
+                            "https://",
+                            "other_provider",
+                            "provider_url",
+                            "service_url",
+                        ),
+                    )
+                    if is_network_receiver or has_network_destination:
+                        signals.add("http-verb:get")
+    return signals
 
 
 def _call_has_destination(
@@ -780,200 +919,181 @@ def _call_has_destination(
     )
 
 
-def _enclosing_function(
-    node: ast.AST,
-    parents: Mapping[ast.AST, ast.AST],
-) -> str | None:
-    current = parents.get(node)
-    while current is not None:
-        if isinstance(current, (ast.FunctionDef, ast.AsyncFunctionDef)):
-            return current.name
-        current = parents.get(current)
+def _configuration_assignment(line: str) -> tuple[str, str] | None:
+    stripped = line.strip()
+    if not stripped or stripped.startswith("#"):
+        return None
+    matched = re.match(
+        r"^([A-Za-z0-9_.-]+)\s*(?::|\?=|:=|\+=|=)\s*(.*?)\s*$",
+        stripped,
+    )
+    if matched is None:
+        return None
+    return matched.group(1), stripped
+
+
+def _is_llm_configuration_key(key: str) -> bool:
+    lowered = key.casefold()
+    if any(marker in lowered for marker in ("endpoint", "llm", "model", "provider")):
+        return True
+    if lowered in {"api_url", "base_url", "base_url_env"}:
+        return True
+    if lowered.endswith(("_api_url", "_base_url", "_endpoint")):
+        return True
+    return lowered.startswith(
+        ("embedding_", "openrouter_", "rag_", "reranker_", "vector_db_")
+    ) and lowered.endswith(("api_key", "base_url", "url"))
+
+
+def _forbidden_provider_requirement(requirement: str) -> str | None:
+    try:
+        package = Requirement(requirement).name
+    except InvalidRequirement:
+        matched = re.match(r"^\s*([A-Za-z0-9][A-Za-z0-9._-]*)", requirement)
+        if matched is None:
+            return None
+        package = matched.group(1)
+    normalized = package.casefold().replace("_", "-").replace(".", "-")
+    if normalized in FORBIDDEN_PROVIDER_PACKAGES:
+        return normalized
     return None
 
 
-def _diagnose_rag_chain_is_closed(tree: ast.AST) -> bool:
-    search_assignment = False
-    builds_from_search = False
-    runs_probe = False
-    request_uses_probe_url = False
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Assign) and any(
-            isinstance(target, ast.Name) and target.id == "search_url"
-            for target in node.targets
-        ):
-            value = node.value
-            search_assignment = (
-                isinstance(value, ast.Call)
-                and _dotted_name(value.func) == "env.get"
-                and bool(value.args)
-                and isinstance(value.args[0], ast.Constant)
-                and value.args[0].value == "RAG_API_BASE_URL"
+def _shell_command_has_network_primitive(command: str) -> bool:
+    try:
+        tokens = shlex.split(command, comments=True, posix=True)
+    except ValueError:
+        return bool(
+            re.search(
+                r"(?<![A-Za-z0-9_.-])"
+                r"(?:curl|http|httpie|https|nc|netcat|wget)"
+                r"(?![A-Za-z0-9_.-])",
+                command,
             )
-        if not isinstance(node, ast.Call):
+        )
+    network_commands = {"curl", "http", "httpie", "https", "nc", "netcat", "wget"}
+    if any(Path(token).name.casefold() in network_commands for token in tokens):
+        return True
+    for index, token in enumerate(tokens[:-2]):
+        if Path(token).name.casefold() not in {"bash", "sh"}:
             continue
-        name = _dotted_name(node.func)
-        if name == "build_probes" and node.args:
-            builds_from_search = isinstance(node.args[0], ast.Name) and (
-                node.args[0].id == "search_url"
-            )
-        elif name == "run_probe" and node.args:
-            runs_probe = isinstance(node.args[0], ast.Name) and (
-                node.args[0].id == "probe"
-            )
-        elif name == "urllib.request.Request" and node.args:
-            destination = node.args[0]
-            request_uses_probe_url = (
-                isinstance(destination, ast.Attribute)
-                and destination.attr == "url"
-                and isinstance(destination.value, ast.Name)
-                and destination.value.id == "probe"
-            )
-    return all(
-        (
-            search_assignment,
-            builds_from_search,
-            runs_probe,
-            request_uses_probe_url,
-        )
-    )
+        if tokens[index + 1] == "-c" and _shell_command_has_network_primitive(
+            tokens[index + 2]
+        ):
+            return True
+    return False
 
 
-def _environment_keys(tree: ast.AST) -> set[str]:
-    keys: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Subscript) and _dotted_name(node.value) in {
-            "env",
-            "os.environ",
-        }:
-            if isinstance(node.slice, ast.Constant) and isinstance(
-                node.slice.value, str
+def _configuration_provider_violations(path: str, source: str) -> list[str]:
+    candidate = Path(path)
+    structured_findings: set[str] = set()
+    parsed: object | None = None
+    try:
+        if candidate.suffix in {".yaml", ".yml"}:
+            parsed = yaml.safe_load(source)
+        elif candidate.suffix == ".toml":
+            parsed = tomllib.loads(source)
+    except (tomllib.TOMLDecodeError, yaml.YAMLError) as exc:
+        return [f"invalid structured configuration: {type(exc).__name__}"]
+
+    def visit(value: object, trail: tuple[str, ...] = ()) -> None:
+        if isinstance(value, Mapping):
+            poetry_dependencies = (
+                len(trail) >= 3
+                and trail[:2] == ("tool", "poetry")
+                and trail[-1]
+                in {"dependencies", "dev-dependencies", "optional-dependencies"}
+            )
+            for raw_key, child in value.items():
+                key = str(raw_key)
+                child_trail = (*trail, key)
+                if poetry_dependencies and _forbidden_provider_requirement(key):
+                    structured_findings.add(
+                        f"{'.'.join(child_trail)}={child!r}"
+                    )
+                if _is_llm_configuration_key(key):
+                    structured_findings.add(
+                        f"{'.'.join(child_trail)}={child!r}"
+                    )
+                if (
+                    key.casefold() in {"command", "run", "script", "shell"}
+                    and isinstance(child, str)
+                    and _shell_command_has_network_primitive(child)
+                ):
+                    structured_findings.add(
+                        f"{'.'.join(child_trail)}={child!r}"
+                    )
+                visit(child, child_trail)
+        elif isinstance(value, list):
+            for index, child in enumerate(value):
+                visit(child, (*trail, f"[{index}]"))
+        elif isinstance(value, str):
+            provider_requirement = _forbidden_provider_requirement(value)
+            if provider_requirement is not None or any(
+                marker in value.casefold()
+                for marker in (
+                    "api.anthropic.com",
+                    "other_provider",
+                    "/chat/completions",
+                    "/v1/messages",
+                )
             ):
-                keys.add(node.slice.value)
-        elif isinstance(node, ast.Call) and _dotted_name(node.func) in {
-            "env.get",
-            "os.environ.get",
-            "os.getenv",
-        }:
-            if node.args and isinstance(node.args[0], ast.Constant) and isinstance(
-                node.args[0].value, str
-            ):
-                keys.add(node.args[0].value)
-    return keys
+                structured_findings.add(f"{'.'.join(trail)}={value!r}")
 
-
-def _rag_network_violations(path: str, source: str) -> list[str]:
-    tree = ast.parse(source)
-    parents = {
-        child: parent
-        for parent in ast.walk(tree)
-        for child in ast.iter_child_nodes(parent)
+    if parsed is not None:
+        visit(parsed)
+    observed = {
+        normalized
+        for line in source.splitlines()
+        if (assignment := _configuration_assignment(line)) is not None
+        for key, normalized in (assignment,)
+        if _is_llm_configuration_key(key)
     }
-    assignments = _scope_assignments(tree)
-    contract = RAG_TRANSPORT_CONTRACT[path]
-    expected_functions = contract["functions"]
-    present_functions = {
-        node.name
-        for node in ast.walk(tree)
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
-    }
-    violations: list[str] = []
-    observed_imports = tuple(sorted(_http_stack_imports(tree)))
-    expected_imports = tuple(sorted(contract["imports"]))
-    if observed_imports != expected_imports:
-        violations.append(
-            f"imports={observed_imports}:expected={expected_imports}"
-        )
-    missing_functions = set(expected_functions) - present_functions
-    if missing_functions:
-        violations.append(f"missing_functions={sorted(missing_functions)}")
+    expected = APPROVED_LLM_CONFIGURATION_CONTRACT.get(path)
+    if expected is None:
+        findings = sorted(observed | structured_findings)
+        return [f"unapproved provider configuration: {item}" for item in findings]
+    if observed != expected:
+        return [
+            f"configuration={sorted(observed)}:expected={sorted(expected)}"
+        ]
+    expected_structured = APPROVED_LLM_STRUCTURED_CONTRACT.get(path, set())
+    if structured_findings != expected_structured:
+        return [
+            f"structured={sorted(structured_findings)}:"
+            f"expected={sorted(expected_structured)}"
+        ]
+    return []
 
-    observed_calls: dict[str, dict[str, int]] = {}
-    observed_roots: dict[str, set[str]] = {}
-    helper_roots: dict[str, set[str]] = {"_http": set(), "_http_json": set()}
-    for call in (
-        node
-        for node in ast.walk(tree)
-        if isinstance(node, ast.Call) and _is_http_call(node)
+
+def _requirements_provider_violations(path: str, source: str) -> list[str]:
+    candidate = Path(path)
+    if not (
+        candidate.suffix == ".txt"
+        and candidate.name.startswith("requirements")
     ):
-        function = _enclosing_function(call, parents) or "<module>"
-        call_name = _dotted_name(call.func)
-        function_calls = observed_calls.setdefault(function, {})
-        function_calls[call_name] = function_calls.get(call_name, 0) + 1
-        destination = _network_destination(call)
-        if destination is None:
-            observed_roots.setdefault(function, set()).add("<unresolved>")
+        return []
+    violations = []
+    for line_number, line in enumerate(source.splitlines(), start=1):
+        requirement = line.split("#", maxsplit=1)[0].strip()
+        if not requirement or requirement.startswith(("-r", "--requirement")):
             continue
-        roots, free = _destination_provenance(
-            destination,
-            path=path,
-            scope=function,
-            assignments=assignments,
-        )
-        if (
-            path == "NSI/corpus_nsi/scripts/rag_diagnose_search_timeout.py"
-            and function == "run_probe"
-            and free <= {"probe", "request"}
-            and _diagnose_rag_chain_is_closed(tree)
-        ):
-            roots = {"RAG_API_BASE_URL"}
-            free = set()
-        if call_name in helper_roots:
-            helper_roots[call_name].update(roots)
-        if roots:
-            observed_roots.setdefault(function, set()).update(roots)
-        elif not (function in helper_roots and free == {"url"}):
-            observed_roots.setdefault(function, set()).add("<unresolved>")
-
-    for helper, roots in helper_roots.items():
-        if helper in expected_functions:
-            observed_roots[helper] = set(roots)
-
-    observed_functions = set(observed_calls)
-    expected_function_names = set(expected_functions)
-    extra_functions = observed_functions - expected_function_names
-    if extra_functions:
-        violations.append(f"extra_functions={sorted(extra_functions)}")
-    for function, expected in expected_functions.items():
-        calls = observed_calls.get(function, {})
-        if calls != expected["calls"]:
-            violations.append(
-                f"{function}:calls={calls}:expected={expected['calls']}"
-            )
-        roots = observed_roots.get(function, set())
-        if roots != expected["roots"]:
-            violations.append(
-                f"{function}:roots={sorted(roots)}:"
-                f"expected={sorted(expected['roots'])}"
-            )
+        if _forbidden_provider_requirement(requirement) is not None:
+            violations.append(f"{path}:{line_number}:{requirement}")
     return violations
 
 
-def _test_guard_call_is_allowed(
-    path: str,
-    function: str | None,
-    call: ast.Call,
-) -> bool:
-    if path not in TEST_PATHS or _dotted_name(call.func) != "urllib.request.urlopen":
-        return False
-    if function == "test_network_calls_are_blocked_by_test_fixture":
-        if path != "NSI/corpus_nsi/tests/test_substance_judge_pipeline.py":
-            return False
-    if function not in {
-        "_forbid_network",
-        "_forbid_real_network",
-        "_prove_network_guard",
-        "test_math_network_guard_mutation_is_effective",
-        "test_nsi_network_guard_mutation_is_effective",
-        "test_policy_rejects_unlisted_provider_transport",
-        "test_network_calls_are_blocked_by_test_fixture",
-    }:
-        return False
-    destination = _network_destination(call)
-    return (
-        isinstance(destination, ast.Constant)
-        and destination.value == "http://127.0.0.1:9"
-    )
+def _shell_network_violations(path: str, source: str) -> list[str]:
+    candidate = Path(path)
+    if candidate.suffix != ".sh" and candidate.name != "Makefile":
+        return []
+    violations: list[str] = []
+    for line_number, line in enumerate(source.splitlines(), start=1):
+        if candidate.name == "Makefile" and not line.startswith("\t"):
+            continue
+        if _shell_command_has_network_primitive(line.strip()):
+            violations.append(f"{path}:{line_number}:network primitive")
+    return violations
 
 
 def _unlisted_transport_violations(sources: Mapping[str, str]) -> list[str]:
@@ -984,10 +1104,29 @@ def _unlisted_transport_violations(sources: Mapping[str, str]) -> list[str]:
         "/v1/messages",
     )
     for logical_path, source in sources.items():
-        if not source or logical_path == SHARED_CLIENT_PATH:
+        if not source:
             continue
         if not logical_path.endswith(".py"):
-            if any(marker in source.casefold() for marker in llm_destination_markers):
+            is_active_candidate = _is_active_discovery_candidate(logical_path)
+            config_violations = (
+                _configuration_provider_violations(logical_path, source)
+                if is_active_candidate
+                else []
+            )
+            requirements_violations = _requirements_provider_violations(
+                logical_path,
+                source,
+            )
+            shell_violations = _shell_network_violations(logical_path, source)
+            has_llm_destination = is_active_candidate and any(
+                marker in source.casefold() for marker in llm_destination_markers
+            )
+            if (
+                config_violations
+                or requirements_violations
+                or shell_violations
+                or has_llm_destination
+            ):
                 violations.append(logical_path)
             continue
         try:
@@ -995,57 +1134,22 @@ def _unlisted_transport_violations(sources: Mapping[str, str]) -> list[str]:
         except SyntaxError:
             violations.append(logical_path)
             continue
-        if _provider_sdk_used(tree):
-            violations.append(logical_path)
-            continue
-        if logical_path in RAG_TRANSPORT_CONTRACT:
-            if _rag_network_violations(logical_path, source):
+        signals = _network_surface_signals(tree)
+        registered = NETWORK_SURFACE_REGISTRY.get(logical_path)
+        if registered is not None:
+            if (
+                not signals
+                or _canonical_network_ast_digest(source)
+                != registered["ast_sha256"]
+            ):
                 violations.append(logical_path)
             continue
-        http_imports = _http_stack_imports(tree)
-        parents = {
-            child: parent
-            for parent in ast.walk(tree)
-            for child in ast.iter_child_nodes(parent)
-        }
-        network_calls = [
-            node
-            for node in ast.walk(tree)
-            if isinstance(node, ast.Call) and _is_http_call(node)
-        ]
-        unexpected_calls = [
-            call
-            for call in network_calls
-            if not _test_guard_call_is_allowed(
-                logical_path,
-                _enclosing_function(call, parents),
-                call,
-            )
-        ]
-        if logical_path in TEST_PATHS:
-            allowed_test_imports = {"httpx", "urllib.request"}
-            unexpected_imports = [
-                (imported, alias)
-                for imported, alias in http_imports
-                if imported not in allowed_test_imports or alias != imported
-            ]
-        else:
-            unexpected_imports = http_imports
-        if unexpected_imports or unexpected_calls:
+        if signals:
             violations.append(logical_path)
-            continue
     return sorted(set(violations))
 
 
 def _chutes_violations(sources: Mapping[str, bytes]) -> list[str]:
-    historical_prefixes = (
-        "audit/",
-        "docs/codex/",
-        "docs/superpowers/plans/",
-        "docs/superpowers/specs/",
-        "NSI/corpus_nsi/reports/",
-        "NSI/corpus_nsi/substance_reviews/",
-    )
     approved_negative_lines = (
         re.compile(
             r"^\s*(?:[-*]\s*)?aucun nouvel appel (?:à )?chutes[.!]?\s*$",
@@ -1058,13 +1162,36 @@ def _chutes_violations(sources: Mapping[str, bytes]) -> list[str]:
     )
     violations: list[str] = []
     for logical_path, raw in sources.items():
-        if logical_path.startswith(historical_prefixes):
+        if _is_protected_historical_path(logical_path):
             continue
-        for line_number, line in enumerate(raw.decode("utf-8").splitlines(), start=1):
+        in_spec_history = False
+        lines = raw.decode("utf-8").splitlines()
+        for line_number, line in enumerate(lines, start=1):
+            if logical_path == CURRENT_OPENROUTER_SPEC_PATH:
+                if line.startswith("## 9. "):
+                    in_spec_history = True
+                elif in_spec_history and line.startswith("## 10. "):
+                    in_spec_history = False
+                if (
+                    in_spec_history
+                    and line.strip() in CURRENT_SPEC_SECTION_9_CHUTES_LINES
+                ):
+                    continue
             lowered = line.casefold()
             if "chutes" not in lowered:
                 continue
             if any(pattern.fullmatch(line) for pattern in approved_negative_lines):
+                continue
+            if any(
+                marker in lowered
+                for marker in (
+                    "aucune consultation chutes",
+                    "absence de chutes",
+                    "consultations chutes cessent",
+                    "n'ordonnent plus chutes",
+                    "preuves historiques chutes",
+                )
+            ):
                 continue
             violations.append(f"{logical_path}:{line_number}:{line.strip()}")
     return violations
@@ -1092,7 +1219,19 @@ def _catalog_violations(sources: Mapping[str, str]) -> list[str]:
         for node in ast.walk(tree):
             if not isinstance(node, ast.Call):
                 continue
-            if not (_is_http_call(node) or _dotted_name(node.func) in shell_calls):
+            call_name = _dotted_name(node.func)
+            method = call_name.rsplit(".", maxsplit=1)[-1]
+            is_network_call = "." in call_name and method in {
+                "delete",
+                "get",
+                "open",
+                "patch",
+                "post",
+                "put",
+                "request",
+                "urlopen",
+            }
+            if not (is_network_call or call_name in shell_calls):
                 continue
             if _call_has_destination(node, constants, (marker,)):
                 violations.append(path)
@@ -1120,7 +1259,256 @@ def _expected_env_keys(source: str) -> set[str]:
 
 def test_policy_requires_every_canonical_active_surface() -> None:
     assert len(CANONICAL_ACTIVE_PATHS) == len(set(CANONICAL_ACTIVE_PATHS))
+    assert len(AUTHORITY_AND_GUIDE_PATHS) == 23
     _assert_paths_exist_and_are_tracked(CANONICAL_ACTIVE_PATHS)
+
+
+def test_active_agent_guides_prescribe_only_explicit_openrouter_model() -> None:
+    assert set(ACTIVE_AGENT_GUIDE_PATHS) <= set(AUTHORITY_AND_GUIDE_PATHS)
+    sources = _tracked_sources(ACTIVE_AGENT_GUIDE_PATHS)
+    legacy_model = re.compile(
+        r"\b(?:claude(?:-[a-z0-9._-]+)?|sonnet|opus|haiku|fable)\b",
+        re.IGNORECASE,
+    )
+    violations: dict[str, list[str]] = {}
+    for path, source in sources.items():
+        lowered = source.casefold()
+        missing = []
+        if "openrouter" not in lowered:
+            missing.append("OpenRouter")
+        if "`openrouter_model`" not in lowered:
+            missing.append("OPENROUTER_MODEL")
+        if not re.search(r"aucun mod[eè]le[^\n]*implicit", lowered):
+            missing.append("no implicit model")
+        if "consultativ" not in lowered or "vérifi" not in lowered or "localement" not in lowered:
+            missing.append("consultative/local verification")
+        if "secret" not in lowered or "donnée personnelle" not in lowered:
+            missing.append("no secret/PII")
+        legacy = sorted(set(legacy_model.findall(source)))
+        if missing or legacy:
+            violations[path] = [*missing, *legacy]
+    assert not violations, violations
+
+
+def test_discovery_scans_tracked_standalone_provider_surface() -> None:
+    standalone_path = "scripts/standalone_provider.py"
+    standalone_source = (
+        "import httpx\n"
+        "httpx.post('https://provider.invalid/v1/chat/completions')\n"
+    )
+    simulated_sources, _edges, simulated_issues = _discover_provider_surfaces(
+        source_overrides={standalone_path: standalone_source},
+        tracked_paths=_git_tracked_paths() | {standalone_path},
+    )
+    assert standalone_path in simulated_sources
+    assert standalone_path in _unlisted_transport_violations(simulated_sources)
+    assert not simulated_issues, simulated_issues
+
+
+def test_policy_rejects_injected_http_receiver_without_direct_import() -> None:
+    standalone_path = "scripts/injected_client.py"
+    standalone_source = (
+        "def send(client):\n"
+        "    return client.post('https://provider.invalid/v1/chat/completions')\n"
+    )
+    simulated_sources, _edges, simulated_issues = _discover_provider_surfaces(
+        source_overrides={standalone_path: standalone_source},
+        tracked_paths=_git_tracked_paths() | {standalone_path},
+    )
+    assert standalone_path in simulated_sources
+    assert standalone_path in _unlisted_transport_violations(simulated_sources)
+    assert not simulated_issues, simulated_issues
+
+
+def test_policy_rejects_aliased_http_transport_inside_allowed_test() -> None:
+    test_path = "tests/test_openrouter_client.py"
+    aliased_source = (
+        "import httpx as transport\n"
+        "transport.post('https://provider.invalid/v1/chat/completions')\n"
+    )
+    assert test_path in TEST_PATHS
+    assert test_path in _unlisted_transport_violations(
+        {test_path: aliased_source}
+    )
+
+
+@pytest.mark.parametrize(
+    ("suffix", "config_source"),
+    (
+        (
+            "yml",
+            "endpoint: https://provider.invalid/v1/generate\n"
+            "model: forbidden-model\n",
+        ),
+        (
+            "toml",
+            'endpoint = "https://provider.invalid/v1/generate"\n'
+            'model = "forbidden-model"\n',
+        ),
+    ),
+)
+def test_discovery_rejects_unlisted_llm_configuration(
+    suffix: str,
+    config_source: str,
+) -> None:
+    config_path = f"config/standalone_provider.{suffix}"
+    simulated_sources, _edges, simulated_issues = _discover_provider_surfaces(
+        source_overrides={config_path: config_source},
+        tracked_paths=_git_tracked_paths() | {config_path},
+    )
+    assert config_path in simulated_sources
+    assert config_path in _unlisted_transport_violations(simulated_sources)
+    assert not simulated_issues, simulated_issues
+
+
+def test_policy_rejects_dynamic_network_aliases_without_registry() -> None:
+    mutations = {
+        "scripts/dynamic_gateway.py": (
+            "import os\n"
+            "gateway = __import__('httpx')\n"
+            "gateway.post(os.environ['OTHER_PROVIDER_URL'])\n"
+        ),
+        "scripts/call_alias.py": (
+            "import os\n"
+            "send = httpx.post\n"
+            "send(os.environ['OTHER_PROVIDER_URL'])\n"
+        ),
+        "scripts/parent_import_alias.py": (
+            "from http import client as transport\n"
+            "transport.HTTPConnection('provider.invalid')\n"
+        ),
+        "scripts/importlib_gateway.py": (
+            "import importlib\nimport os\n"
+            "gateway = importlib.import_module('httpx')\n"
+            "client = gateway.Client()\n"
+            "client.get(os.environ['OTHER_PROVIDER_URL'])\n"
+        ),
+        "scripts/injected_get_client.py": (
+            "import os\n"
+            "def fetch(client):\n"
+            "    return client.get(os.environ['SERVICE_URL'])\n"
+        ),
+        "scripts/aliased_get_gateway.py": (
+            "def fetch(gateway, url):\n"
+            "    receiver = gateway\n"
+            "    return receiver.get(url)\n"
+        ),
+    }
+    assert set(mutations) <= set(_unlisted_transport_violations(mutations))
+    assert _unlisted_transport_violations(
+        {"scripts/dict_lookup.py": "mapping = {}\nmapping.get('url')\n"}
+    ) == []
+
+
+def test_policy_rejects_registered_network_surface_repurpose() -> None:
+    paths = (
+        "NSI/corpus_nsi/scrapping_NSI/netpolicy.py",
+        "NSI/corpus_nsi/scripts/substance_judge.py",
+    )
+    sources = _tracked_sources(paths)
+    mutations = {
+        path: source
+        + "\nOTHER_PROVIDER_URL = 'https://provider.invalid/v1/generate'\n"
+        for path, source in sources.items()
+    }
+    assert set(paths) <= set(_unlisted_transport_violations(mutations))
+
+
+def test_policy_parses_nested_configs_and_provider_requirements() -> None:
+    mutations = {
+        "config/providers.yml": (
+            "providers:\n"
+            "  - name: hidden\n"
+            "    endpoint: https://provider.invalid/v1/generate\n"
+            "    models: [forbidden-model]\n"
+        ),
+        "config/providers.toml": (
+            "[runtime]\n"
+            '"provider" = "hidden"\n'
+            '"endpoint" = "https://provider.invalid/v1/generate"\n'
+        ),
+        "requirements-provider.txt": "anthropic==1.2.3\n",
+        "requirements-pep508.txt": (
+            "openai @ https://provider.invalid/openai.whl\n"
+        ),
+        "pyproject-provider.toml": (
+            "[project]\n"
+            'dependencies = ["anthropic==1.2.3"]\n'
+            "[project.optional-dependencies]\n"
+            'audit = ["openai @ https://provider.invalid/openai.whl"]\n'
+        ),
+        "poetry-provider.toml": (
+            "[tool.poetry.dependencies]\n"
+            'anthropic = "^1.2"\n'
+            "[tool.poetry.group.audit.dependencies]\n"
+            'openai = {version = "^2.0", optional = true}\n'
+            "[tool.poetry.optional-dependencies]\n"
+            'chutes = "*"\n'
+        ),
+    }
+    assert set(mutations) <= set(_unlisted_transport_violations(mutations))
+
+
+def test_new_executables_under_historical_namespaces_are_active() -> None:
+    provider_path = "audit/run_provider.py"
+    workflow_path = "docs/codex/run-provider.yml"
+    shell_path = "scripts/run_provider.sh"
+    nested_shell_path = "scripts/nested_provider.sh"
+    makefile_path = "provider/Makefile"
+    active_workflow_path = "ci/provider.yml"
+    overrides = {
+        provider_path: (
+            "gateway = __import__('httpx')\n"
+            "gateway.post('https://provider.invalid/v1/generate')\n"
+        ),
+        workflow_path: (
+            "name: hidden provider\n"
+            "jobs:\n"
+            "  run:\n"
+            "    steps:\n"
+            "      - run: python audit/run_provider.py\n"
+        ),
+        shell_path: 'curl "$OTHER_PROVIDER_URL"\n',
+        nested_shell_path: "bash -c 'curl \"$SERVICE_URL\"'\n",
+        makefile_path: "probe:\n\tcurl \"$SERVICE_URL\"\n",
+        active_workflow_path: (
+            "name: provider probe\n"
+            "jobs:\n"
+            "  probe:\n"
+            "    steps:\n"
+            "      - run: curl \"$SERVICE_URL\"\n"
+        ),
+    }
+    simulated, _edges, issues = _discover_provider_surfaces(
+        source_overrides=overrides,
+        tracked_paths=_git_tracked_paths() | set(overrides),
+    )
+    assert set(overrides) <= set(simulated)
+    assert provider_path in _unlisted_transport_violations(simulated)
+    assert shell_path in _unlisted_transport_violations(simulated)
+    assert nested_shell_path in _unlisted_transport_violations(simulated)
+    assert makefile_path in _unlisted_transport_violations(simulated)
+    assert active_workflow_path in _unlisted_transport_violations(simulated)
+    assert any(workflow_path in issue for issue in issues)
+
+
+def test_current_spec_rejects_new_chutes_prescription() -> None:
+    spec_path = (
+        "docs/superpowers/specs/"
+        "2026-08-13-openrouter-only-external-provider-design.md"
+    )
+    source = _tracked_sources((spec_path,))[spec_path]
+    outside_mutation = source + "\nUtiliser Chutes pour les prochaines revues.\n"
+    section_nine_heading = next(
+        line for line in source.splitlines() if line.startswith("## 9. ")
+    )
+    section_nine_mutation = source.replace(
+        section_nine_heading,
+        section_nine_heading + "\n\nUtiliser Chutes pour les prochaines revues.",
+        1,
+    )
+    for mutation in (outside_mutation, section_nine_mutation):
+        assert _chutes_violations({spec_path: mutation.encode("utf-8")})
 
 
 def test_policy_rejects_unlisted_provider_transport(tmp_path: Path) -> None:
@@ -1131,24 +1519,6 @@ def test_policy_rejects_unlisted_provider_transport(tmp_path: Path) -> None:
         socket.create_connection(("127.0.0.1", 9))
     with pytest.raises(AssertionError):
         urllib.request.urlopen("http://127.0.0.1:9")
-
-    guard_tree = ast.parse(
-        'urllib.request.urlopen("http://127.0.0.1:9")'
-    )
-    guard_call = next(
-        node for node in ast.walk(guard_tree) if isinstance(node, ast.Call)
-    )
-    guard_function = "test_network_calls_are_blocked_by_test_fixture"
-    assert _test_guard_call_is_allowed(
-        "NSI/corpus_nsi/tests/test_substance_judge_pipeline.py",
-        guard_function,
-        guard_call,
-    )
-    assert not _test_guard_call_is_allowed(
-        "tests/test_openrouter_client.py",
-        guard_function,
-        guard_call,
-    )
 
     rejected_mutations = {
         "mutations/requests_client.py": (
@@ -1176,23 +1546,6 @@ def test_policy_rejects_unlisted_provider_transport(tmp_path: Path) -> None:
         mutation_path.write_text(source, encoding="utf-8")
         mutation_sources[relative_path] = mutation_path.read_text(encoding="utf-8")
 
-    rag_mutation = tmp_path / "substance_rag_only.py"
-    rag_mutation.write_text(
-        """import urllib.request
-
-def _http_json(url):
-    request = urllib.request.Request(url)
-    return urllib.request.urlopen(request)
-
-def search_rag(env):
-    return _http_json(env["RAG_API_BASE_URL"])
-""",
-        encoding="utf-8",
-    )
-    rag_source = rag_mutation.read_text(encoding="utf-8")
-    assert _rag_network_violations(SUBSTANCE_RAG_PATH, rag_source) == []
-    assert _unlisted_transport_violations({SUBSTANCE_RAG_PATH: rag_source}) == []
-
     assert len(CANONICAL_PROVIDER_SURFACES) == len(
         set(CANONICAL_PROVIDER_SURFACES)
     )
@@ -1200,13 +1553,30 @@ def search_rag(env):
     canonical_surfaces = set(CANONICAL_PROVIDER_SURFACES)
     assert canonical_surfaces <= set(real_sources)
     assert {target for _importer, target in real_edges} <= set(real_sources)
-    discovered_extensions = set(real_sources) - canonical_surfaces
-    imported_extensions = {
-        target
-        for _importer, target in real_edges
-        if target not in canonical_surfaces
+    active_candidates = {
+        path
+        for path in _git_tracked_paths()
+        if _is_active_discovery_candidate(path)
     }
-    assert discovered_extensions == imported_extensions
+    assert active_candidates <= set(real_sources)
+    detected_network_paths = {
+        path
+        for path, source in real_sources.items()
+        if path.endswith(".py")
+        and source
+        and _network_surface_signals(ast.parse(source))
+    }
+    assert len(NETWORK_SURFACE_REGISTRY) == 23
+    assert detected_network_paths == set(NETWORK_SURFACE_REGISTRY)
+    for path, contract in NETWORK_SURFACE_REGISTRY.items():
+        assert path in real_sources
+        assert contract["reason"]
+        assert contract["endpoints"]
+        assert re.fullmatch(r"[0-9a-f]{64}", contract["ast_sha256"])
+        assert (
+            _canonical_network_ast_digest(real_sources[path])
+            == contract["ast_sha256"]
+        ), f"network surface changed; explicit registry review required: {path}"
     complete_sources = {**real_sources, **mutation_sources}
     violations = set(_unlisted_transport_violations(complete_sources))
     assert set(rejected_mutations).issubset(violations), violations
@@ -1291,15 +1661,12 @@ def test_policy_allows_only_openrouter_client_to_define_llm_endpoint() -> None:
     assert shared_source.count(endpoint) == 1
 
 
-def test_policy_preserves_non_llm_rag_transport_allowlist(tmp_path: Path) -> None:
+def test_policy_preserves_non_llm_rag_transport_allowlist() -> None:
     sources = _tracked_sources(RAG_TRANSPORT_PATHS)
     assert set(sources) == set(RAG_TRANSPORT_PATHS)
-    assert set(RAG_TRANSPORT_PATHS) <= set(RAG_TRANSPORT_CONTRACT)
+    assert set(RAG_TRANSPORT_PATHS) <= set(NETWORK_SURFACE_REGISTRY)
     for path, source in sources.items():
-        assert _rag_network_violations(path, source) == [], (
-            path,
-            _rag_network_violations(path, source),
-        )
+        assert _unlisted_transport_violations({path: source}) == []
 
     mutated_path = "NSI/corpus_nsi/scripts/check_rag_freshness.py"
     removed_tree = ast.parse(sources[mutated_path])
@@ -1313,51 +1680,115 @@ def test_policy_preserves_non_llm_rag_transport_allowlist(tmp_path: Path) -> Non
                     )
                 )
             ]
-    removed_transport = tmp_path / "check_rag_freshness-no-transport.py"
-    removed_transport.write_text(
+    mutations = (
         ast.unparse(ast.fix_missing_locations(removed_tree)) + "\n",
-        encoding="utf-8",
-    )
-    assert _rag_network_violations(
-        mutated_path,
-        removed_transport.read_text(encoding="utf-8"),
-    )
-
-    alias_mutation = tmp_path / "check_rag_freshness-alias.py"
-    alias_mutation.write_text(
         sources[mutated_path]
         + "\nimport urllib.request as u\n"
         + "u.urlopen(env['OTHER_PROVIDER_URL'])\n",
-        encoding="utf-8",
-    )
-    assert _rag_network_violations(
-        mutated_path,
-        alias_mutation.read_text(encoding="utf-8"),
-    )
-
-    import_from_mutation = tmp_path / "check_rag_freshness-import-from.py"
-    import_from_mutation.write_text(
         sources[mutated_path]
         + "\nfrom urllib import request as u\n"
         + "u.urlopen(env['OTHER_PROVIDER_URL'])\n",
-        encoding="utf-8",
-    )
-    assert _rag_network_violations(
-        mutated_path,
-        import_from_mutation.read_text(encoding="utf-8"),
-    )
-
-    model_mutation = tmp_path / "check_rag_freshness-model.py"
-    model_mutation.write_text(
         sources[mutated_path]
         + "\nimport httpx\nimport os\n"
         + "MODEL_URL = os.environ['OTHER_PROVIDER_URL']\n"
         + "httpx.post(MODEL_URL)\n",
-        encoding="utf-8",
     )
-    mutated_source = model_mutation.read_text(encoding="utf-8")
-    assert "RAG_API_BASE_URL" in _environment_keys(ast.parse(mutated_source))
-    assert _rag_network_violations(mutated_path, mutated_source)
+    for mutation in mutations:
+        assert _unlisted_transport_violations(
+            {mutated_path: mutation}
+        ) == [mutated_path]
+
+    substance_path = "NSI/corpus_nsi/scripts/substance_judge.py"
+    substance_mapping_mutation = sources[substance_path].replace(
+        '"RAG_API_BASE_URL"',
+        '"OTHER_PROVIDER_URL"',
+        1,
+    )
+    assert substance_mapping_mutation != sources[substance_path]
+    assert _unlisted_transport_violations(
+        {substance_path: substance_mapping_mutation}
+    ) == [substance_path]
+
+
+def test_policy_fixed_non_llm_transport_allowlist_is_exact() -> None:
+    fixed_paths = (
+        "Mathematiques/manuel-maths/scripts/crawl.py",
+        "NSI/scripts/crawl.py",
+        "NSI/corpus_nsi/scrapping_NSI/netpolicy.py",
+        "NSI/corpus_nsi/scrapping_NSI/scraper_nsi_v2.py",
+    )
+    sources = _tracked_sources(fixed_paths)
+    assert set(fixed_paths) <= set(NETWORK_SURFACE_REGISTRY)
+    assert _unlisted_transport_violations(sources) == []
+
+    crawler_path = "Mathematiques/manuel-maths/scripts/crawl.py"
+    provider_mutation = (
+        sources[crawler_path]
+        + "\nclient.post('https://provider.invalid/v1/chat/completions')\n"
+    )
+    assert _unlisted_transport_violations(
+        {crawler_path: provider_mutation}
+    ) == [crawler_path]
+
+    destination_needle = (
+        'client.get(urljoin(source["url"], "/sitemap.xml"))'
+    )
+    assert destination_needle in sources[crawler_path]
+    destination_mutation = sources[crawler_path].replace(
+        destination_needle,
+        'client.get("https://provider.invalid/v1/chat/completions")',
+        1,
+    )
+    assert _unlisted_transport_violations(
+        {crawler_path: destination_mutation}
+    ) == [crawler_path]
+
+    loop_needle = "            try:\n                r = client.get(url)"
+    assert loop_needle in sources[crawler_path]
+    reassigned_url_mutation = sources[crawler_path].replace(
+        loop_needle,
+        "            url = 'https://provider.invalid/v1/chat/completions'\n"
+        + loop_needle,
+        1,
+    )
+    assert _unlisted_transport_violations(
+        {crawler_path: reassigned_url_mutation}
+    ) == [crawler_path]
+
+    source_needle = '    method = source["crawl"]["method"]'
+    assert source_needle in sources[crawler_path]
+    reassigned_source_mutation = sources[crawler_path].replace(
+        source_needle,
+        "    source['url'] = 'https://provider.invalid/v1/chat/completions'\n"
+        + source_needle,
+        1,
+    )
+    assert _unlisted_transport_violations(
+        {crawler_path: reassigned_source_mutation}
+    ) == [crawler_path]
+
+    urls_needle = "        urls = discover_links(client, source)"
+    assert urls_needle in sources[crawler_path]
+    append_mutation = sources[crawler_path].replace(
+        urls_needle,
+        urls_needle
+        + "\n        urls.append('https://provider.invalid/v1/chat/completions')",
+        1,
+    )
+    assert _unlisted_transport_violations(
+        {crawler_path: append_mutation}
+    ) == [crawler_path]
+
+    update_mutation = sources[crawler_path].replace(
+        source_needle,
+        "    source.update({'url': "
+        "'https://provider.invalid/v1/chat/completions'})\n"
+        + source_needle,
+        1,
+    )
+    assert _unlisted_transport_violations(
+        {crawler_path: update_mutation}
+    ) == [crawler_path]
 
 
 def test_policy_rejects_chutes_in_active_authority(tmp_path: Path) -> None:
@@ -1382,6 +1813,14 @@ def test_policy_rejects_chutes_in_active_authority(tmp_path: Path) -> None:
 
 
 def test_policy_ignores_protected_historical_chutes_artifacts(tmp_path: Path) -> None:
+    assert len(DISCOVERY_HISTORICAL_PATH_SNAPSHOT) == HISTORICAL_SNAPSHOT_COUNT
+    assert (
+        _historical_snapshot_digest(DISCOVERY_HISTORICAL_PATH_SNAPSHOT)
+        == HISTORICAL_SNAPSHOT_SHA256
+    )
+    assert CURRENT_OPENROUTER_SPEC_PATH in DISCOVERY_HISTORICAL_PATH_SNAPSHOT
+    assert not _is_protected_historical_path(CURRENT_OPENROUTER_SPEC_PATH)
+
     source_path = ROOT / "audit/chutes/2026-07-21-mcp-smoke-test.md"
     _assert_paths_exist_and_are_tracked((str(source_path.relative_to(ROOT)),))
     before = source_path.read_bytes()
@@ -1477,7 +1916,14 @@ def test_policy_rejects_local_llm_configuration_in_active_surfaces() -> None:
             if unexpected:
                 violations[path] = sorted(unexpected)
             continue
-        present = sorted(key for key in local_keys if key in source)
+        policy_source = source
+        if path == CURRENT_OPENROUTER_SPEC_PATH:
+            policy_source = "\n".join(
+                line
+                for line in source.splitlines()
+                if line.strip() not in CURRENT_SPEC_LOCAL_LLM_HISTORICAL_LINES
+            )
+        present = sorted(key for key in local_keys if key in policy_source)
         if present:
             violations[path] = present
     assert not violations, violations

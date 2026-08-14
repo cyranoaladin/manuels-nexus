@@ -54,6 +54,7 @@ def _load_ingest(
     *,
     extra_import_path: Path | None = None,
     preloaded_external: types.ModuleType | None = None,
+    preloaded_classification: types.ModuleType | None = None,
     stub_extraction_backends: bool = True,
 ) -> types.ModuleType:
     saved_path = list(sys.path)
@@ -72,6 +73,8 @@ def _load_ingest(
         sys.modules.pop(name, None)
     if preloaded_external is not None:
         sys.modules["nexus_external"] = preloaded_external
+    if preloaded_classification is not None:
+        sys.modules["nexus_external.classification"] = preloaded_classification
     if stub_extraction_backends:
         sys.modules["fitz"] = types.ModuleType("fitz")
         sys.modules["trafilatura"] = types.ModuleType("trafilatura")
@@ -162,6 +165,11 @@ def _assert_checkout_package(module: types.ModuleType) -> None:
     assert checkout_root == CHECKOUT_ROOT.resolve()
     package_path = Path(module.nexus_external.__file__).resolve().parent
     assert package_path == (CHECKOUT_ROOT / "nexus_external").resolve()
+    classification_path = Path(module.nexus_classification.__file__).resolve()
+    assert classification_path == (
+        CHECKOUT_ROOT / "nexus_external/classification.py"
+    ).resolve()
+    assert module.classify_chunk is module.nexus_classification.classify_chunk
     assert (checkout_root / ".git").exists()
 
 
@@ -319,18 +327,93 @@ def test_nsi_ingest_prioritizes_current_checkout_over_shadow_package(
     assert Path(module.nexus_external.__file__).resolve().parent != shadow_package
 
 
-def test_nsi_ingest_rejects_nexus_external_loaded_outside_checkout(
+@pytest.mark.parametrize(
+    "origin_kind",
+    ("foreign", "missing", "invalid", "symlink", "forged"),
+)
+def test_nsi_ingest_reloads_preloaded_nexus_external(
     tmp_path: Path,
+    origin_kind: str,
 ) -> None:
     poison_path = tmp_path / "poison/nexus_external/__init__.py"
     poison_path.parent.mkdir(parents=True)
     poison_path.write_text('ORIGIN = "poison"\n', encoding="utf-8")
     poisoned = types.ModuleType("nexus_external")
-    poisoned.__file__ = str(poison_path)
-    poisoned.__path__ = [str(poison_path.parent)]
 
-    with pytest.raises(RuntimeError):
-        _load_ingest(preloaded_external=poisoned)
+    if origin_kind == "foreign":
+        poisoned.__file__ = str(poison_path)
+    elif origin_kind == "invalid":
+        poisoned.__file__ = object()
+    elif origin_kind == "symlink":
+        poison_path.unlink()
+        poison_path.symlink_to(CHECKOUT_ROOT / "nexus_external/__init__.py")
+        poisoned.__file__ = str(poison_path)
+    elif origin_kind == "forged":
+        poisoned.__file__ = str(CHECKOUT_ROOT / "nexus_external/__init__.py")
+    poisoned.__path__ = [str(CHECKOUT_ROOT / "nexus_external")]
+
+    module = _load_ingest(preloaded_external=poisoned)
+
+    _assert_checkout_package(module)
+    assert module.nexus_external is not poisoned
+
+
+@pytest.mark.parametrize(
+    "origin_kind",
+    ("foreign", "missing", "invalid", "symlink", "forged"),
+)
+def test_nsi_ingest_reloads_preloaded_classification(
+    tmp_path: Path,
+    origin_kind: str,
+) -> None:
+    poison_path = tmp_path / "poison/nexus_external/classification.py"
+    poison_path.parent.mkdir(parents=True)
+    poison_path.write_text("# foreign classification sentinel\n", encoding="utf-8")
+    poisoned = types.ModuleType("nexus_external.classification")
+
+    if origin_kind == "foreign":
+        poisoned.__file__ = str(poison_path)
+    elif origin_kind == "invalid":
+        poisoned.__file__ = object()
+    elif origin_kind == "symlink":
+        poison_path.unlink()
+        poison_path.symlink_to(CHECKOUT_ROOT / "nexus_external/classification.py")
+        poisoned.__file__ = str(poison_path)
+    elif origin_kind == "forged":
+        poisoned.__file__ = str(CHECKOUT_ROOT / "nexus_external/classification.py")
+    calls = 0
+
+    def poisoned_classify_chunk(*args: object, **kwargs: object) -> dict:
+        nonlocal calls
+        calls += 1
+        raise AssertionError("foreign classifier called")
+
+    poisoned.classify_chunk = poisoned_classify_chunk
+
+    module = _load_ingest(preloaded_classification=poisoned)
+
+    _assert_checkout_package(module)
+    assert module.nexus_classification is not poisoned
+    assert calls == 0
+
+
+def test_nsi_ingest_reloads_legitimate_preloaded_canonical_namespace(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.syspath_prepend(str(CHECKOUT_ROOT))
+    canonical_external = importlib.import_module("nexus_external")
+    canonical_classification = importlib.import_module(
+        "nexus_external.classification"
+    )
+
+    module = _load_ingest(
+        preloaded_external=canonical_external,
+        preloaded_classification=canonical_classification,
+    )
+
+    _assert_checkout_package(module)
+    assert module.nexus_external is not canonical_external
+    assert module.nexus_classification is not canonical_classification
 
 
 def test_nsi_no_source_command_does_not_import_extraction_backends(
