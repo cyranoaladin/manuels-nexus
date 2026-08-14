@@ -154,10 +154,20 @@ tête de `sys.path`, avec `sys.path.insert(0, ...)`, avant d'importer
 `nexus_external`. Un chemin déjà présent plus loin dans `sys.path` est d'abord
 retiré afin que la racine découverte reste prioritaire.
 
-Après import, chaque adaptateur résout `nexus_external.__file__` et vérifie que
-le module chargé se trouve exactement sous
-`<racine découverte>/nexus_external/`. Une installation homonyme globale, un
-autre checkout ou un paquet masqué fait échouer l'appelant avant tout réseau.
+Avant import, chaque adaptateur prouve lexicalement que le paquet et le
+sous-module attendus sont des fichiers/répertoires réels du checkout, non
+symlinks et confinés sous `<racine découverte>/nexus_external/`. Les deux
+ingestions purgent systématiquement de `sys.modules` le namespace
+`nexus_external` préchargé, puis importent une identité neuve depuis la racine
+prioritaire. Les deux juges corpus peuvent réutiliser une identité préchargée
+seulement après attestation exacte de son `__file__`, de `spec.origin`, du
+loader et du callable client ; si cette attestation échoue, ils purgent tout le
+namespace puis réimportent depuis le checkout. Après import, les quatre
+appelants vérifient que `nexus_external.__file__` et le sous-module chargé
+correspondent exactement aux chemins canoniques prouvés. Une installation
+homonyme globale, un autre checkout ou un paquet masqué n'est jamais lié ni
+appelé ; un symlink, un chemin canonique absent/invalide ou une provenance
+post-import divergente fait échouer l'appelant avant tout réseau.
 
 Le mécanisme :
 
@@ -165,8 +175,9 @@ Le mécanisme :
 - ne dépend pas d'un `PYTHONPATH` fourni manuellement ;
 - échoue explicitement si la racine n'est pas trouvée ;
 - n'accepte pas une racine passée par l'environnement ;
-- est identique dans les quatre adaptateurs, ou factorisé seulement si cela ne
-  réintroduit aucune collision.
+- partage les mêmes preuves pré/post-import dans les quatre adaptateurs ; seules
+  les stratégies de purge explicitement différenciées ci-dessus divergent ;
+- est factorisé seulement si cela ne réintroduit aucune collision.
 
 Les commandes à préserver sont :
 
@@ -391,6 +402,12 @@ réussies produites pendant ce run. Ils ne mélangent pas les anciens noms v1
 et comparaison profonde avant/après fusion ; la comptabilité v2 est prouvée
 avec des mutations de coût et de compteurs de cache afin qu'aucune formule
 locale ne puisse passer.
+
+La présence d'un sibling `._usage_log.json.recovery` signale un journal en
+récupération. Elle est vérifiée avant toute boucle de jugement et avant tout
+appel OpenRouter : le run s'arrête en mode fermé, sans complétion facturable et
+sans modifier le marqueur. Le contrôle répété sous verrou avant chaque append
+reste obligatoire pour fermer les courses concurrentes.
 
 ### 6.2 `substance_judge.py`
 
@@ -666,7 +683,7 @@ migration.
 **Amendement de revue du 14 août 2026.** Le premier rebuild, qui ajoutait un
 nouveau chemin suivi, a bien produit les deux sorties ci-dessus dans le commit
 canonique. Le rerun final après corrections ne comporte aucun nouveau chemin :
-il met à jour uniquement les empreintes de trois fichiers déjà inventoriés.
+il met à jour uniquement les empreintes de cinq fichiers déjà inventoriés.
 Son delta minimal fermé est donc exactement `manifest_tooling.csv` ;
 `inventory_report.md` rejoint les surfaces exigées octet-identiques. Toute
 fabrication d'un delta Markdown sans changement d'inventaire est interdite.
@@ -789,7 +806,9 @@ Les tests couvrent :
 Les tests couvrent :
 
 1. l'allowlist canonique des surfaces actives ;
-2. l'échec sur tout nouveau client fournisseur hors allowlist ;
+2. l'échec sur tout nouveau client fournisseur hors allowlist, y compris un
+   transport lancé depuis Python via `subprocess.*` ou `os.system` et un script
+   shell exécutable ;
 3. la présence des fichiers scannés avant toute assertion négative ;
 4. la conservation des endpoints RAG non-LLM ;
 5. le contrat coordonné `.env.rag.example`, `rag_config.example.yml`,
@@ -797,7 +816,8 @@ Les tests couvrent :
    rejet de `llm.engine: ollama`, de `LOCAL_LLM_*` et d'un endpoint arbitraire ;
 6. l'absence de Chutes dans les quatre autorités actives ;
 7. l'absence de `/api/v1/models` dans les tests, Makefiles et workflows CI ;
-8. l'intégrité des catégories historiques protégées ;
+8. l'intégrité des 387 blobs historiques protégés, ancrée au parent du commit
+   Red et non à une copie des octets courants ;
 9. l'absence de nouvelle cible Makefile NSI pour l'ingestion ;
 10. l'absence de réseau réel dans toutes les suites ciblées ;
 11. la présence dans `manifest_tooling.csv` des nouveaux fichiers OpenRouter du
@@ -805,6 +825,11 @@ Les tests couvrent :
 12. la fermeture du delta du premier rebuild aux deux sorties autorisées, puis
     du rerun final au seul `manifest_tooling.csv`, l'identité octet des autres
     sorties et l'idempotence des quatre sorties canoniques.
+13. le suivi récursif et confiné des inclusions `-r`/`--requirement`, avec
+    refus des fichiers absents, cycles et SDK fournisseur dans un fichier au
+    nom non canonique ;
+14. la garde des secrets sur les configurations et tous les appelants actifs,
+    notamment `nexus_external/*.py` et les deux ingestions disciplinaires.
 
 Le corpus NSI n'est pas collecté par la configuration Pytest racine. Son contrat
 est donc exécuté séparément :
