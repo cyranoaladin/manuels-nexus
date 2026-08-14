@@ -59,7 +59,7 @@
 - `NSI/corpus_nsi/scripts/judge_campaign.py` — Chat Completions, journal v2 et configuration `.env.rag`.
 - `NSI/corpus_nsi/scripts/substance_judge.py` — seul transport LLM migré ; `_http_json()` RAG conservé.
 - `NSI/corpus_nsi/scripts/run_substance_judge.py` — libellé et modèle déterministes honnêtes.
-- `NSI/corpus_nsi/scripts/check_rag_config.py`, `.env.rag.example`, `rag_config.example.yml` — autorité OpenRouter unique, RAG préservé.
+- `NSI/corpus_nsi/scripts/check_rag_config.py`, `NSI/corpus_nsi/scripts/check_no_committed_secrets.py`, `.env.rag.example`, `rag_config.example.yml` — autorité OpenRouter unique, garde des secrets étendue aux fichiers `.env.*`, RAG préservé.
 - `Mathematiques/manuel-maths/.env.example`, `NSI/.env.example` — `OPENROUTER_API_KEY` et `OPENROUTER_MODEL` vides.
 - `Mathematiques/manuel-maths/requirements.txt`, `NSI/requirements.txt` — retrait d’`anthropic`.
 - `NSI/corpus_nsi/requirements.txt` — ajout exact de `httpx==0.28.1`.
@@ -3158,6 +3158,7 @@ Expected: tous les tests verts, fixture autouse bloquant socket/urllib toujours 
 - Modify: `NSI/corpus_nsi/requirements.txt`
 - Modify: `requirements-ci-audit.txt`
 - Modify: `NSI/corpus_nsi/scripts/check_rag_config.py`
+- Modify: `NSI/corpus_nsi/scripts/check_no_committed_secrets.py`
 - Test: `tests/test_external_provider_policy.py`
 - Test: `NSI/corpus_nsi/tests/test_rag_governance_and_indexes.py`
 - Test: `NSI/corpus_nsi/tests/test_secret_guard.py`
@@ -3204,7 +3205,21 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
 
 Expected: `2 passed`. La commande `python3 -m scripts.check_rag_config` est couverte par le second node et sera rejouée au final sous garde réseau.
 
-- [ ] **Step 4: Fermer seulement les pins HTTP statiques**
+- [ ] **Step 4: Étendre seulement la garde de secrets aux fichiers `.env.*`**
+
+Avec `apply_patch` sur le chemin absolu `NSI/corpus_nsi/scripts/check_no_committed_secrets.py`, conserver l'exclusion locale exacte de `.env.rag`, puis faire reconnaître comme candidat texte tout nom racine commençant par `.env`, indépendamment de son suffixe. Ne pas élargir le scope au corpus pédagogique et ne pas affaiblir les placeholders. Le cas `.env.secret` contenant une vraie sentinelle OpenRouter doit être signalé, tandis que les trois exemples suivis aux valeurs vides restent acceptés.
+
+```bash
+set -euo pipefail
+cd /home/alaeddine/Documents/Manuels_Nexus/.worktrees/green-openrouter-only/NSI/corpus_nsi
+env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
+  python3 -m pytest -q -p no:cacheprovider \
+  tests/test_secret_guard.py::test_detects_token_like_assignments_without_flagging_examples
+```
+
+Expected: `1 passed` ; `.env.secret` est scanné et les exemples à clé vide ne produisent aucun faux positif.
+
+- [ ] **Step 5: Fermer seulement les pins HTTP statiques**
 
 Avec `apply_patch` sur les chemins absolus `NSI/corpus_nsi/requirements.txt` et `requirements-ci-audit.txt`, ajouter exactement `httpx==0.28.1` une fois au corpus et les pins racine suivants en conservant `typing_extensions==4.15.0` :
 
@@ -3230,9 +3245,9 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
 
 Expected: `1 passed` par lecture des fichiers suivis seulement.
 
-- [ ] **Step 5: Passer policy, configuration et analyse statique affectée**
+- [ ] **Step 6: Passer policy, configuration et analyse statique affectée**
 
-Sans `apply_patch` supplémentaire, fermer d'abord l'allowlist Green et l'indexer : `test_policy_requires_every_canonical_active_surface` exige à juste titre que les trois nouveaux modules soient visibles par `git ls-files`, ce qui n'est vrai qu'après `git add`. L'index doit être vide avant cette opération et contenir ensuite exactement les 17 chemins Green, sans changement non indexé. Exécuter alors le bloc autonome de preuve des seules productions/configurations. Ne pas exiger les deux nodes d’autorités Chutes avant le commit DOCS du chunk suivant.
+Sans `apply_patch` supplémentaire, fermer d'abord l'allowlist Green et l'indexer : `test_policy_requires_every_canonical_active_surface` exige à juste titre que les trois nouveaux modules soient visibles par `git ls-files`, ce qui n'est vrai qu'après `git add`. L'index doit être vide avant cette opération et contenir ensuite exactement les 18 chemins Green, sans changement non indexé. Exécuter alors le bloc autonome de preuve des seules productions/configurations. Ne pas exiger les deux nodes d'autorités Chutes avant le commit DOCS du chunk suivant.
 
 ```bash
 set -euo pipefail
@@ -3250,6 +3265,7 @@ git add -- \
   NSI/corpus_nsi/scripts/substance_judge.py \
   NSI/corpus_nsi/scripts/run_substance_judge.py \
   NSI/corpus_nsi/scripts/check_rag_config.py \
+  NSI/corpus_nsi/scripts/check_no_committed_secrets.py \
   Mathematiques/manuel-maths/.env.example \
   NSI/.env.example \
   NSI/corpus_nsi/.env.rag.example \
@@ -3271,6 +3287,7 @@ expected = {
     "NSI/corpus_nsi/scripts/substance_judge.py",
     "NSI/corpus_nsi/scripts/run_substance_judge.py",
     "NSI/corpus_nsi/scripts/check_rag_config.py",
+    "NSI/corpus_nsi/scripts/check_no_committed_secrets.py",
     "Mathematiques/manuel-maths/.env.example",
     "NSI/.env.example",
     "NSI/corpus_nsi/.env.rag.example",
@@ -3311,10 +3328,11 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
   NSI/corpus_nsi/scripts/judge_campaign.py \
   NSI/corpus_nsi/scripts/substance_judge.py \
   NSI/corpus_nsi/scripts/run_substance_judge.py \
-  NSI/corpus_nsi/scripts/check_rag_config.py
+  NSI/corpus_nsi/scripts/check_rag_config.py \
+  NSI/corpus_nsi/scripts/check_no_committed_secrets.py
 ```
 
-Expected: 17 chemins Green explicitement indexés, puis gates verts. Faire relire le staged diff par un reviewer spécification et un reviewer qualité distincts ; toute correction est réindexée sur la même allowlist avant Task 13.
+Expected: 18 chemins Green explicitement indexés, puis gates verts. Faire relire le staged diff par un reviewer spécification et un reviewer qualité distincts ; toute correction est réindexée sur la même allowlist avant Task 13.
 
 ### Task 13: Vérifier et committer tout le Green de production
 
@@ -3327,7 +3345,7 @@ set -euo pipefail
 IMPL_ROOT=/home/alaeddine/Documents/Manuels_Nexus/.worktrees/green-openrouter-only
 cd "$IMPL_ROOT"
 test -z "$(git diff --name-only)"
-test "$(git diff --cached --name-only | wc -l)" -eq 17
+test "$(git diff --cached --name-only | wc -l)" -eq 18
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
   python3 -m pytest -q -p no:cacheprovider \
   tests/test_openrouter_client.py \
@@ -3377,7 +3395,8 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
   NSI/corpus_nsi/scripts/judge_campaign.py \
   NSI/corpus_nsi/scripts/substance_judge.py \
   NSI/corpus_nsi/scripts/run_substance_judge.py \
-  NSI/corpus_nsi/scripts/check_rag_config.py
+  NSI/corpus_nsi/scripts/check_rag_config.py \
+  NSI/corpus_nsi/scripts/check_no_committed_secrets.py
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
   python3 -m ruff check \
   nexus_external \
@@ -3386,7 +3405,8 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
   NSI/corpus_nsi/scripts/judge_campaign.py \
   NSI/corpus_nsi/scripts/substance_judge.py \
   NSI/corpus_nsi/scripts/run_substance_judge.py \
-  NSI/corpus_nsi/scripts/check_rag_config.py
+  NSI/corpus_nsi/scripts/check_rag_config.py \
+  NSI/corpus_nsi/scripts/check_no_committed_secrets.py
 ```
 
 Expected: syntaxe et Ruff verts. Les éventuels `__pycache__` sont ignorés et ne sont pas ajoutés.
@@ -3411,6 +3431,7 @@ allowed = {
     "NSI/corpus_nsi/scripts/substance_judge.py",
     "NSI/corpus_nsi/scripts/run_substance_judge.py",
     "NSI/corpus_nsi/scripts/check_rag_config.py",
+    "NSI/corpus_nsi/scripts/check_no_committed_secrets.py",
     "Mathematiques/manuel-maths/.env.example",
     "NSI/.env.example",
     "NSI/corpus_nsi/.env.rag.example",
@@ -3429,7 +3450,7 @@ git diff --cached --check
 git diff --cached --stat
 ```
 
-Expected: exactement 17 fichiers Green déjà indexés ; aucun changement non indexé, test réécrit après Red, document actif, Makefile, workflow ou inventaire.
+Expected: exactement 18 fichiers Green déjà indexés ; aucun changement non indexé, test réécrit après Red, document actif, Makefile, workflow ou inventaire.
 
 - [ ] **Step 4: Réaffirmer l’allowlist Green et inspecter le staged diff**
 
@@ -3448,6 +3469,7 @@ git add -- \
   NSI/corpus_nsi/scripts/substance_judge.py \
   NSI/corpus_nsi/scripts/run_substance_judge.py \
   NSI/corpus_nsi/scripts/check_rag_config.py \
+  NSI/corpus_nsi/scripts/check_no_committed_secrets.py \
   Mathematiques/manuel-maths/.env.example \
   NSI/.env.example \
   NSI/corpus_nsi/.env.rag.example \
@@ -3460,11 +3482,11 @@ git diff --cached --check
 git diff --cached --stat
 ```
 
-Expected: 17 fichiers indexés, aucune vraie clé, endpoint fournisseur direct, `LOCAL_LLM_*` ou prix local.
+Expected: 18 fichiers indexés, aucune vraie clé, endpoint fournisseur direct, `LOCAL_LLM_*` ou prix local.
 
 - [ ] **Step 5: Lancer la revue holistique Green avant commit**
 
-Un reviewer spécification frais vérifie les cinq propriétés de la section 15, puis un reviewer qualité frais cherche fuite de secret, erreur de provenance, transport RAG détourné, coût recalculé, réponse partielle acceptée ou test affaibli. Corriger seulement les constats validés. Réindexer explicitement les 17 chemins Green après correction, exiger `git diff --name-only` vide (zéro changement non indexé), rejouer immédiatement les quatre processus, `py_compile`, Ruff et `git diff --cached --check`. `HARD STOP` si un reviewer a modifié un test Red ou un chemin hors allowlist.
+Un reviewer spécification frais vérifie les cinq propriétés de la section 15, puis un reviewer qualité frais cherche fuite de secret, erreur de provenance, transport RAG détourné, coût recalculé, réponse partielle acceptée ou test affaibli. Corriger seulement les constats validés. Réindexer explicitement les 18 chemins Green après correction, exiger `git diff --name-only` vide (zéro changement non indexé), rejouer immédiatement les quatre processus, `py_compile`, Ruff et `git diff --cached --check`. `HARD STOP` si un reviewer a modifié un test Red ou un chemin hors allowlist.
 
 - [ ] **Step 6: Committer le Green minimal**
 
@@ -3754,7 +3776,8 @@ git ls-files --error-unmatch \
   NSI/corpus_nsi/scripts/judge_campaign.py \
   NSI/corpus_nsi/scripts/substance_judge.py \
   NSI/corpus_nsi/scripts/run_substance_judge.py \
-  NSI/corpus_nsi/scripts/check_rag_config.py
+  NSI/corpus_nsi/scripts/check_rag_config.py \
+  NSI/corpus_nsi/scripts/check_no_committed_secrets.py
 test -e "$IMPL_ROOT/.git"
 test -d "$CORPUS_ROOT"
 ```
@@ -4798,13 +4821,15 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
   nexus_external/__init__.py nexus_external/openrouter_client.py nexus_external/classification.py \
   Mathematiques/manuel-maths/scripts/ingest.py NSI/scripts/ingest.py \
   NSI/corpus_nsi/scripts/judge_campaign.py NSI/corpus_nsi/scripts/substance_judge.py \
-  NSI/corpus_nsi/scripts/run_substance_judge.py NSI/corpus_nsi/scripts/check_rag_config.py
+  NSI/corpus_nsi/scripts/run_substance_judge.py NSI/corpus_nsi/scripts/check_rag_config.py \
+  NSI/corpus_nsi/scripts/check_no_committed_secrets.py
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
   PYTHONPATH="$VR/guard" NEXUS_NETWORK_GUARD_MARKER="$VR/sitecustomize.marker" \
   python3 -m ruff check \
   nexus_external Mathematiques/manuel-maths/scripts/ingest.py NSI/scripts/ingest.py \
   NSI/corpus_nsi/scripts/judge_campaign.py NSI/corpus_nsi/scripts/substance_judge.py \
-  NSI/corpus_nsi/scripts/run_substance_judge.py NSI/corpus_nsi/scripts/check_rag_config.py
+  NSI/corpus_nsi/scripts/run_substance_judge.py NSI/corpus_nsi/scripts/check_rag_config.py \
+  NSI/corpus_nsi/scripts/check_no_committed_secrets.py
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
   PYTHONPATH="$VR/guard" NEXUS_NETWORK_GUARD_MARKER="$VR/sitecustomize.marker" \
   python3 - <<'PY'
