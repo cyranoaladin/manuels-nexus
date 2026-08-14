@@ -3534,7 +3534,7 @@ Expected: 18 fichiers indexés, aucune vraie clé, endpoint fournisseur direct, 
 
 - [ ] **Step 5: Lancer la revue holistique Green avant commit**
 
-Un reviewer spécification frais vérifie les cinq propriétés de la section 15, puis un reviewer qualité frais cherche fuite de secret, erreur de provenance, transport RAG détourné, coût recalculé, réponse partielle acceptée ou test affaibli. Corriger seulement les constats validés. Les quatre P1 validés — valeurs RAG sous clés autorisées, priorité environnement de `substance_judge`, journal concurrent et exclusion `.env.rag` trop large — sont d'abord reproduits dans exactement les trois tests corpus de revue, laissés non indexés. Réindexer explicitement seulement les 18 chemins Green après correction, exiger que `git diff --name-only` contienne exactement ces trois tests, puis rejouer immédiatement les quatre processus, `py_compile`, Ruff et `git diff --cached --check`. `HARD STOP` si un reviewer modifie un autre test ou un chemin hors allowlist.
+Un reviewer spécification frais vérifie les cinq propriétés de la section 15, puis un reviewer qualité frais cherche fuite de secret, erreur de provenance, transport RAG détourné, coût recalculé, réponse partielle acceptée ou test affaibli. Corriger seulement les constats validés. Les six P1 validés — valeurs réseau RAG sous clés autorisées, feuilles de gouvernance des collections, priorité environnement de `substance_judge`, journal concurrent, exclusion `.env.rag` trop large et affectation secrète préfixée par `export` — sont d'abord reproduits dans exactement les trois tests corpus de revue, laissés non indexés. Réindexer explicitement seulement les 18 chemins Green après correction, exiger que `git diff --name-only` contienne exactement ces trois tests, puis rejouer immédiatement les quatre processus, `py_compile`, Ruff et `git diff --cached --check`. `HARD STOP` si un reviewer modifie un autre test ou un chemin hors allowlist.
 
 - [ ] **Step 6: Committer le Green minimal**
 
@@ -3669,7 +3669,7 @@ Expected: gate et mutations adverses verts ; l'exception porte simultanément su
 
 - [ ] **Step 3: Revoir et committer la correction issue de revue**
 
-Un reviewer indépendant vérifie que les mutations URL opaque, SDK tiers, module importé transitivement et transport RAG étranger restent rouges. Il vérifie aussi les quatre régressions de revue : valeurs RAG sous clés autorisées rejetées, priorité environnement du juge, conservation de deux writers du journal et scan de `.env.rag` hors chemin local canonique. Rejouer les tests corpus concernés dans un clone local si la suite déclenche P05. Puis :
+Un reviewer indépendant vérifie que les mutations URL opaque, SDK tiers, module importé transitivement et transport RAG étranger restent rouges. Il vérifie aussi les six régressions de revue : valeurs réseau et gouvernance RAG sous clés autorisées rejetées, priorité environnement du juge, conservation de deux writers du journal, scan de `.env.rag` hors chemin local canonique et détection d'une affectation secrète préfixée par `export`. Rejouer les tests corpus concernés dans le clone local fermé ci-dessous. Puis :
 
 ```bash
 set -euo pipefail
