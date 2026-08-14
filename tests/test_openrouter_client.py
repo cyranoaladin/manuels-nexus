@@ -104,7 +104,19 @@ def _transport_for(
                 content=b"null",
                 headers={"content-type": "application/json"},
             )
-        return httpx.Response(status_code, json=copy.deepcopy(body))
+        copied_body = copy.deepcopy(body)
+        try:
+            return httpx.Response(status_code, json=copied_body)
+        except ValueError:
+            return httpx.Response(
+                status_code,
+                content=json.dumps(
+                    copied_body,
+                    allow_nan=True,
+                    ensure_ascii=False,
+                ).encode("utf-8"),
+                headers={"content-type": "application/json"},
+            )
 
     return httpx.MockTransport(handler)
 
