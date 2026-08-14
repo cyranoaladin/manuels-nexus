@@ -3313,14 +3313,12 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
 cd "$IMPL_ROOT"
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL python3 -m pytest -q -p no:cacheprovider \
   tests/test_external_provider_policy.py::test_policy_requires_every_canonical_active_surface \
-  tests/test_external_provider_policy.py::test_policy_rejects_unlisted_provider_transport \
   tests/test_external_provider_policy.py::test_policy_allows_only_openrouter_client_to_define_llm_endpoint \
   tests/test_external_provider_policy.py::test_policy_preserves_non_llm_rag_transport_allowlist \
   tests/test_external_provider_policy.py::test_policy_rejects_model_catalog_endpoint_in_automation \
   tests/test_external_provider_policy.py::test_policy_rejects_new_nsi_ingest_make_target \
   tests/test_external_provider_policy.py::test_targeted_surfaces_exist_before_negative_scans \
-  tests/test_external_provider_policy.py::test_policy_rejects_anthropic_in_active_callers \
-  tests/test_external_provider_policy.py::test_policy_rejects_local_llm_configuration_in_active_surfaces
+  tests/test_external_provider_policy.py::test_policy_rejects_anthropic_in_active_callers
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
   python3 -m ruff check \
   nexus_external \
@@ -3333,7 +3331,7 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
   NSI/corpus_nsi/scripts/check_no_committed_secrets.py
 ```
 
-Expected: 18 chemins Green explicitement indexés, puis gates verts. Faire relire le staged diff par un reviewer spécification et un reviewer qualité distincts ; toute correction est réindexée sur la même allowlist avant Task 13.
+Expected: 18 chemins Green explicitement indexés, puis gates verts. Deux Reds de revue restent isolés hors de ce bloc : la sonde réseau historique du corpus, corrigée par le commit `[TESTS]` dédié après Task 13, et `LOCAL_LLM_*` dans `rag_connection.md`, corrigé en Task 15 sans exemption. Faire relire le staged diff par un reviewer spécification et un reviewer qualité distincts ; toute correction est réindexée sur la même allowlist avant Task 13.
 
 ### Task 13: Vérifier et committer tout le Green de production
 
@@ -3356,14 +3354,12 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
   tests/test_openrouter_client.py \
   tests/test_openrouter_classification.py \
   tests/test_external_provider_policy.py::test_policy_requires_every_canonical_active_surface \
-  tests/test_external_provider_policy.py::test_policy_rejects_unlisted_provider_transport \
   tests/test_external_provider_policy.py::test_policy_allows_only_openrouter_client_to_define_llm_endpoint \
   tests/test_external_provider_policy.py::test_policy_preserves_non_llm_rag_transport_allowlist \
   tests/test_external_provider_policy.py::test_policy_rejects_model_catalog_endpoint_in_automation \
   tests/test_external_provider_policy.py::test_policy_rejects_new_nsi_ingest_make_target \
   tests/test_external_provider_policy.py::test_targeted_surfaces_exist_before_negative_scans \
-  tests/test_external_provider_policy.py::test_policy_rejects_anthropic_in_active_callers \
-  tests/test_external_provider_policy.py::test_policy_rejects_local_llm_configuration_in_active_surfaces
+  tests/test_external_provider_policy.py::test_policy_rejects_anthropic_in_active_callers
 cd "$IMPL_ROOT/Mathematiques/manuel-maths"
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
   python3 -m pytest -q -p no:cacheprovider tests/test_ingest_openrouter.py
@@ -3520,6 +3516,70 @@ test -z "$(git status --short)"
 ```
 
 Expected: commit Green atomique après le commit Red, worktree propre. Les sorties d’inventaire restent volontairement périmées jusqu’au commit Audit dédié.
+
+### Task 13A: Corriger le faux positif de la sonde réseau corpus
+
+**Files:**
+
+- Modify: `tests/test_external_provider_policy.py`
+
+- [ ] **Step 1: Reproduire le Red de revue exact**
+
+```bash
+set -euo pipefail
+IMPL_ROOT=/home/alaeddine/Documents/Manuels_Nexus/.worktrees/green-openrouter-only
+cd "$IMPL_ROOT"
+test -z "$(git status --short)"
+set +e
+env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
+  python3 -m pytest -q -p no:cacheprovider \
+  tests/test_external_provider_policy.py::test_policy_rejects_unlisted_provider_transport \
+  --junitxml /tmp/nexus-openrouter-network-guard-red.xml
+rc=$?
+set -e
+test "$rc" -eq 1
+rg -n "test_substance_judge_pipeline.py" /tmp/nexus-openrouter-network-guard-red.xml
+! rg -n "classification.py|judge_campaign.py" /tmp/nexus-openrouter-network-guard-red.xml
+```
+
+Expected: un seul faux positif, causé par `test_network_calls_are_blocked_by_test_fixture` qui appelle volontairement `urllib.request.urlopen("http://127.0.0.1:9")` sous le garde autouse ; aucune production n'est signalée.
+
+- [ ] **Step 2: Ajouter l'exception fermée du garde historique**
+
+Avec `apply_patch` sur le seul fichier autorisé, ajouter `test_network_calls_are_blocked_by_test_fixture` à l'ensemble fermé de `_test_guard_call_is_allowed`. Ne modifier ni la condition `path in TEST_PATHS`, ni le nom d'appel exact `urllib.request.urlopen`, ni l'URL constante exacte `http://127.0.0.1:9`. Aucun autre appel ou endpoint n'est autorisé.
+
+```bash
+set -euo pipefail
+IMPL_ROOT=/home/alaeddine/Documents/Manuels_Nexus/.worktrees/green-openrouter-only
+cd "$IMPL_ROOT"
+env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
+  python3 -m pytest -q -p no:cacheprovider \
+  tests/test_external_provider_policy.py::test_policy_rejects_unlisted_provider_transport
+python3 -m ruff check tests/test_external_provider_policy.py
+git diff --check
+```
+
+Expected: gate et mutations adverses verts ; l'exception porte simultanément sur le chemin canonique de test, la fonction exacte, l'appel exact et l'URL loopback exacte.
+
+- [ ] **Step 3: Revoir et committer la correction issue de revue**
+
+Un reviewer indépendant vérifie que les mutations URL opaque, SDK tiers, module importé transitivement et transport RAG étranger restent rouges. Puis :
+
+```bash
+set -euo pipefail
+IMPL_ROOT=/home/alaeddine/Documents/Manuels_Nexus/.worktrees/green-openrouter-only
+cd "$IMPL_ROOT"
+test "$(git status --porcelain=v1 | wc -l)" -eq 1
+test "$(git status --porcelain=v1 | sed -n 's/^ M //p')" = "tests/test_external_provider_policy.py"
+git add -- tests/test_external_provider_policy.py
+test -z "$(git diff --name-only)"
+test "$(git diff --cached --name-only)" = "tests/test_external_provider_policy.py"
+git diff --cached --check
+git commit -m "[TESTS] autorise la sonde reseau corpus"
+test -z "$(git status --short)"
+```
+
+Expected: commit de correction issu de revue, atomique et tests-only. Le Red documentaire `LOCAL_LLM_*` reste inchangé jusqu'à Task 15.
 
 ## Chunk 8: Autorités actives et inventaire canonique du corpus
 
