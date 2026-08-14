@@ -1,19 +1,16 @@
 #!/usr/bin/env python3
-"""Orchestrateur du juge de substance : assemble le message utilisateur à partir
-d'une unité du dépôt, appelle le modèle juge, écrit le verdict JSON, puis laisse
-check_substance_anchors.py faire le veto mécanique.
+"""Pré-jugement local déterministe d'une unité du corpus NSI.
 
-Ce fichier est un squelette opérationnel : la fonction `call_judge` est isolée
-pour brancher l'API Anthropic (ou un autre fournisseur) sans toucher au reste.
-La construction du prompt (table des ancres + texte intégral) est complète et ne
-dépend d'aucune API : elle est testable hors-ligne avec --dry-run.
+Le script assemble les preuves mécaniques, écrit un verdict non promu, puis
+laisse ``check_substance_anchors.py`` appliquer son veto. Il n'appelle aucun
+modèle et n'importe aucun client réseau.
 
 Usage :
     # prépare le prompt seulement (aucun appel modèle) :
     python run_substance_judge.py --unit s01_representation_donnees \
         --level premiere --repo-root /chemin/depot --dry-run
 
-    # boucle complète (nécessite ANTHROPIC_API_KEY) :
+    # pré-jugement déterministe complet :
     python run_substance_judge.py --unit P05 --level premiere \
         --repo-root /chemin/depot --out P05/_substance_review.json
 """
@@ -181,7 +178,7 @@ def main() -> int:
     ap.add_argument("--repo-root", type=Path, default=Path("."))
     ap.add_argument("--capacities", nargs="*", default=None,
                     help="ids de capacités ; par défaut lues dans le contrat")
-    ap.add_argument("--model", default="claude-opus-4-8")
+    ap.add_argument("--model", default="deterministic-prejudge")
     ap.add_argument("--out", type=Path, default=None)
     ap.add_argument("--dry-run", action="store_true",
                     help="écrit le prompt sur stdout sans appeler le modèle")

@@ -9,9 +9,6 @@ vector:
 embedding:
   model: nomic-embed-text
   base_url_env: EMBEDDING_BASE_URL
-llm:
-  engine: ollama
-  model: qwen2.5:7b
 collections:
   nsi_corpus:
     role: "ressources internes produites"

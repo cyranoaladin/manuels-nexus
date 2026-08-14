@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
-"""Judge campaign: evaluate capacity coverage using Anthropic Messages API.
+"""Judge campaign: evaluate capacity coverage through OpenRouter.
 
-Synchronous sequential calls with two-tier prompt caching:
-  - Tier 1 (system): static protocol + schema + 4 gold examples, TTL 1h
-  - Tier 2 (user prefix): sequence context (all evidence files), TTL 5min
-  - Variable: capacity prompt (never cached)
-
-Execution is sorted by sequence to maximize tier-2 cache hits.
+Execution is synchronous and sorted by sequence. Every successful billed
+generation is journalled before its verdict is parsed or validated.
 
 V0d — Coverage derivation (ref: scripts/check_program_coverage.py L40-62):
   The coverage engine does NOT read judge verdicts. covered=0 until the lead
@@ -16,31 +12,60 @@ J2d — Validate-before-save: each verdict passes the hardened checker BEFORE
   writing. If invalid, ONE retry with error feedback. If still invalid, the
   verdict is saved as needs_content with the error noted.
 
-SECRETS: ANTHROPIC_API_KEY read from environment or .env — never committed.
+SECRETS: OpenRouter configuration comes from the environment or ``.env.rag``.
 """
 
 from __future__ import annotations
 
 import argparse
+from collections.abc import Mapping, Sequence
+import fcntl
 import json
 import os
 import re
 import sys
+import tempfile
 import time
-import urllib.error
-import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
-_REPO_ROOT = Path(__file__).resolve().parents[1]
-if str(_REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(_REPO_ROOT))
+CORPUS_ROOT = Path(__file__).resolve().parents[1]
+try:
+    CHECKOUT_ROOT = next(parent for parent in CORPUS_ROOT.parents if (parent / ".git").exists())
+except StopIteration as exc:
+    raise RuntimeError("checkout root not found for nexus_external") from exc
+
+checkout_path = str(CHECKOUT_ROOT)
+while checkout_path in sys.path:
+    sys.path.remove(checkout_path)
+sys.path.insert(0, checkout_path)
+
+import nexus_external  # noqa: E402
+from nexus_external.openrouter_client import (  # noqa: E402
+    OpenRouterCompletion,
+    OpenRouterError,
+    chat_completion,
+)
+
+expected_external = (CHECKOUT_ROOT / "nexus_external").resolve()
+loaded_external = Path(nexus_external.__file__).resolve().parent
+if loaded_external != expected_external:
+    raise ImportError(
+        "nexus_external loaded outside current checkout: "
+        f"expected {expected_external}, got {loaded_external}"
+    )
+
+corpus_path = str(CORPUS_ROOT)
+for managed_path in (corpus_path, checkout_path):
+    while managed_path in sys.path:
+        sys.path.remove(managed_path)
+sys.path.insert(0, corpus_path)
+sys.path.insert(1, checkout_path)
 
 import yaml  # noqa: E402
 
 from scripts._qa_common import (  # noqa: E402
-    ROOT,
     SUPPORTS_DIR,
     read_frontmatter,
 )
@@ -48,10 +73,12 @@ from scripts.check_substance_anchors import (  # noqa: E402
     parse_sections,
     validate_verdict_data,
 )
+from scripts.rag_core import resolve_env_file  # noqa: E402
+
+ROOT = CORPUS_ROOT
 
 PROGRAMME_FILE = ROOT / "00_programmes_officiels" / "programme_nsi_2019.yaml"
 OUTPUT_DIR = ROOT / "substance_reviews" / "campaign"
-MODEL = "claude-sonnet-4-6"
 
 # ── Verdict schema (sorted keys for byte-stability) ──
 VERDICT_SCHEMA = {
@@ -154,15 +181,6 @@ SYSTEM_TEXT = (
     + GOLD_EXAMPLES
 )
 
-SYSTEM_BLOCKS = [
-    {
-        "type": "text",
-        "text": SYSTEM_TEXT,
-        "cache_control": {"type": "ephemeral"},
-    }
-]
-
-
 def load_programme() -> dict[str, dict[str, str]]:
     data = yaml.safe_load(PROGRAMME_FILE.read_text(encoding="utf-8"))
     entries: dict[str, dict[str, str]] = {}
@@ -259,84 +277,298 @@ def build_capacity_prompt(cap_id: str, programme: dict[str, dict[str, str]]) -> 
     )
 
 
-def call_anthropic_cached(
+def load_openrouter_config(
+    environ: Mapping[str, str],
+    env_path: Path,
+) -> tuple[str, str]:
+    """Resolve the two OpenRouter values without consulting generic dotenv."""
+
+    api_key = environ.get("OPENROUTER_API_KEY", "").strip()
+    model = environ.get("OPENROUTER_MODEL", "").strip()
+    file_values: dict[str, str] = {}
+    if env_path.is_file():
+        for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+            line = raw_line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, value = line.partition("=")
+            if key in {"OPENROUTER_API_KEY", "OPENROUTER_MODEL"}:
+                file_values[key] = value.strip()
+    if not api_key:
+        api_key = file_values.get("OPENROUTER_API_KEY", "").strip()
+    if not model:
+        model = file_values.get("OPENROUTER_MODEL", "").strip()
+    if not api_key or not model:
+        raise OpenRouterError("configuration", model=model or "<invalid>")
+    return api_key, model
+
+
+def call_openrouter_judge(
     api_key: str,
+    model: str,
     seq_context: str,
     capacity_prompt: str,
-) -> tuple[dict[str, Any], dict[str, int]]:
-    user_content: list[dict[str, Any]] = []
-    if seq_context:
-        user_content.append({
-            "type": "text",
-            "text": seq_context,
-            "cache_control": {"type": "ephemeral"},
-        })
-    user_content.append({"type": "text", "text": capacity_prompt})
+    *,
+    transport: object | None = None,
+) -> OpenRouterCompletion:
+    user_content = (
+        seq_context + "\n\n" + capacity_prompt
+        if seq_context
+        else capacity_prompt
+    )
+    return chat_completion(
+        api_key=api_key,
+        model=model,
+        messages=[
+            {"role": "system", "content": SYSTEM_TEXT},
+            {"role": "user", "content": user_content},
+        ],
+        max_completion_tokens=2500,
+        transport=transport,
+    )
 
-    body = {
-        "model": MODEL,
-        "max_tokens": 2500,  # J2e: increased from 1500
-        "temperature": 0,
-        "system": SYSTEM_BLOCKS,
-        "messages": [{"role": "user", "content": user_content}],
+
+def build_usage_v2(
+    *,
+    cap: str,
+    seq: str,
+    attempt: int,
+    judged_at: str,
+    completion: OpenRouterCompletion,
+) -> dict[str, object]:
+    usage = completion.usage
+    return {
+        "schema_version": 2,
+        "provider": "openrouter",
+        "cap": cap,
+        "seq": seq,
+        "attempt": attempt,
+        "judged_at": judged_at,
+        "model": completion.model,
+        "generation_id": completion.generation_id,
+        "prompt_tokens": usage.prompt_tokens,
+        "completion_tokens": usage.completion_tokens,
+        "total_tokens": usage.total_tokens,
+        "cached_tokens": usage.cached_tokens,
+        "cache_write_tokens": usage.cache_write_tokens,
+        "cost_usd": usage.cost,
     }
-    data = json.dumps(body).encode("utf-8")
 
-    last_err: Exception | None = None
-    for attempt in range(3):
-        if attempt > 0:
-            delay = 2 ** attempt
-            print(f"  retry {attempt+1}/3 in {delay}s...", end=" ", flush=True)
-            time.sleep(delay)
-        req = urllib.request.Request(
-            "https://api.anthropic.com/v1/messages",
-            data=data,
-            headers={
-                "Content-Type": "application/json",
-                "x-api-key": api_key,
-                "anthropic-version": "2023-06-01",
-            },
+
+def build_failed_usage_v2(
+    *,
+    cap: str,
+    seq: str,
+    attempt: int,
+    judged_at: str,
+    model: str,
+    error_category: str,
+) -> dict[str, object]:
+    return {
+        "schema_version": 2,
+        "provider": "openrouter",
+        "cap": cap,
+        "seq": seq,
+        "attempt": attempt,
+        "judged_at": judged_at,
+        "model": model,
+        "error_category": error_category,
+    }
+
+
+def merge_usage_log(
+    existing: Sequence[Mapping[str, object]],
+    incoming: Sequence[Mapping[str, object]],
+) -> list[dict[str, object]]:
+    """Upsert schema-v2 generations while preserving every v1 row."""
+
+    merged = [dict(entry) for entry in existing]
+    for entry in incoming:
+        replacement = dict(entry)
+        generation_id = replacement.get("generation_id")
+        position = next(
+            (
+                index
+                for index, previous in enumerate(merged)
+                if generation_id is not None
+                and previous.get("schema_version") == 2
+                and previous.get("generation_id") == generation_id
+            ),
+            None,
         )
-        try:
-            resp = urllib.request.urlopen(req, timeout=120)
-            last_err = None
-            break
-        except urllib.error.HTTPError as e:
-            error_body = e.read().decode("utf-8", errors="replace")
-            if e.code in (429, 529) or "overloaded" in error_body.lower():
-                last_err = RuntimeError(f"API {e.code}: {error_body[:200]}")
-                continue
-            raise RuntimeError(f"API {e.code}: {error_body[:300]}") from e
-        except (TimeoutError, OSError) as e:
-            last_err = e
-            continue
-    if last_err is not None:
-        raise last_err
+        if position is None:
+            merged.append(replacement)
+        else:
+            merged[position] = replacement
+    return merged
 
-    result = json.loads(resp.read())
-    usage = result.get("usage", {})
-    usage_dict = {
-        "read": usage.get("cache_read_input_tokens", 0),
-        "write": usage.get("cache_creation_input_tokens", 0),
-        "fresh": usage.get("input_tokens", 0),
-        "out": usage.get("output_tokens", 0),
+
+def load_usage_log(
+    log_path: Path,
+    *,
+    model: str,
+) -> list[dict[str, object]]:
+    """Load an existing journal without treating corruption as empty history."""
+
+    if not log_path.exists():
+        return []
+    try:
+        loaded = json.loads(log_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise OpenRouterError("protocol", model=model) from error
+    if not isinstance(loaded, list) or not all(
+        isinstance(entry, dict) for entry in loaded
+    ):
+        raise OpenRouterError("protocol", model=model)
+    return loaded
+
+
+def directory_open_flags() -> int:
+    return os.O_RDONLY | getattr(os, "O_DIRECTORY", 0)
+
+
+def lock_open_flags() -> int:
+    return os.O_RDWR | os.O_CREAT
+
+
+def write_usage_log_atomic(
+    log_path: Path,
+    entries: Sequence[Mapping[str, object]],
+) -> None:
+    """Durably replace a usage journal from a distinct sibling temporary file."""
+
+    payload = json.dumps(entries, ensure_ascii=False, indent=2)
+    descriptor, temporary_name = tempfile.mkstemp(
+        dir=log_path.parent,
+        prefix=f".{log_path.name}.",
+        suffix=".tmp",
+    )
+    temporary_path = Path(temporary_name)
+    try:
+        with os.fdopen(descriptor, "w", encoding="utf-8", newline="\n") as stream:
+            stream.write(payload)
+            stream.write("\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary_path, log_path)
+        directory_fd = os.open(log_path.parent, directory_open_flags())
+        try:
+            os.fsync(directory_fd)
+        finally:
+            os.close(directory_fd)
+    except Exception:
+        try:
+            temporary_path.unlink(missing_ok=True)
+        except OSError:
+            pass
+        raise
+
+
+def append_usage_log_locked(
+    log_path: Path,
+    incoming: Sequence[Mapping[str, object]],
+    *,
+    model: str,
+) -> list[dict[str, object]]:
+    """Append generations without losing writes from concurrent processes."""
+
+    lock_path = log_path.with_name(f".{log_path.name}.lock")
+    lock_fd = os.open(lock_path, lock_open_flags(), 0o600)
+    try:
+        fcntl.flock(lock_fd, fcntl.LOCK_EX)
+        try:
+            existing = load_usage_log(log_path, model=model)
+            merged = merge_usage_log(existing, incoming)
+            write_usage_log_atomic(log_path, merged)
+            return merged
+        finally:
+            fcntl.flock(lock_fd, fcntl.LOCK_UN)
+    finally:
+        os.close(lock_fd)
+
+
+ROLE_ERROR_PATTERNS = {
+    "proof_course": re.compile(r"(?:\[cours\]|\bproof_course\b)", re.IGNORECASE),
+    "proof_practice": re.compile(
+        r"(?:\[entraînement\]|\bproof_practice\b)",
+        re.IGNORECASE,
+    ),
+    "proof_correction": re.compile(
+        r"(?:\[correction\]|\bproof_correction\b)",
+        re.IGNORECASE,
+    ),
+}
+
+
+def failed_proof_roles(errors: Sequence[str]) -> list[str]:
+    """Attribute gate errors only through the protocol's anchored role markers."""
+
+    error_text = "\n".join(errors)
+    return [
+        role
+        for role, pattern in ROLE_ERROR_PATTERNS.items()
+        if pattern.search(error_text)
+    ]
+
+
+def current_run_totals(
+    current_entries: Sequence[Mapping[str, object]],
+) -> dict[str, int | float]:
+    return {
+        "prompt_tokens": sum(int(entry["prompt_tokens"]) for entry in current_entries),
+        "completion_tokens": sum(
+            int(entry["completion_tokens"]) for entry in current_entries
+        ),
+        "total_tokens": sum(int(entry["total_tokens"]) for entry in current_entries),
+        "cached_tokens": sum(int(entry["cached_tokens"]) for entry in current_entries),
+        "cache_write_tokens": sum(
+            int(entry["cache_write_tokens"]) for entry in current_entries
+        ),
+        "cost_usd": sum(
+            cast(int | float, entry["cost_usd"]) for entry in current_entries
+        ),
     }
 
-    content = ""
-    for block in result.get("content", []):
-        if block.get("type") == "text":
-            content += block.get("text", "")
 
-    content = content.strip()
-    if content.startswith("```"):
-        content = re.sub(r"^```\w*\n?", "", content)
-        content = re.sub(r"\n?```$", "", content)
-    try:
-        parsed = json.loads(content)
-    except json.JSONDecodeError:
-        parsed = {"error": "JSON parse failed", "raw": content[:500]}
+def parse_campaign_verdict(content: str) -> dict[str, object]:
+    payload = content.strip()
+    if payload.startswith("```"):
+        fence_start = "```json\n"
+        fence_end = "\n```"
+        if not payload.startswith(fence_start) or not payload.endswith(fence_end):
+            raise ValueError("campaign verdict fence must be exactly ```json")
+        payload = payload[len(fence_start) : -len(fence_end)]
+    parsed = json.loads(payload)
+    if not isinstance(parsed, dict):
+        raise ValueError("campaign verdict must be a JSON object")
+    return parsed
 
-    return parsed, usage_dict
+
+def _call_with_transport_retries(
+    api_key: str,
+    model: str,
+    seq_context: str,
+    capacity_prompt: str,
+) -> OpenRouterCompletion:
+    retryable = {"rate_limit", "timeout", "transport", "unavailable"}
+    delays = (0, 2, 4)
+    last_error: OpenRouterError | None = None
+    for delay in delays:
+        if delay:
+            time.sleep(delay)
+        try:
+            return call_openrouter_judge(
+                api_key,
+                model,
+                seq_context,
+                capacity_prompt,
+            )
+        except OpenRouterError as error:
+            last_error = error
+            if error.category not in retryable:
+                raise
+    assert last_error is not None
+    raise last_error
 
 
 def format_verdict(cap_id: str, cap_info: dict[str, str], judge_result: dict[str, Any]) -> dict[str, Any]:
@@ -413,15 +645,21 @@ def validate_verdict_file(verdict_path: Path) -> list[str]:
     return validate_verdict_data(verdict, SUBSTANCE_SCHEMA, repo_root=ROOT)
 
 
-def _write_verdict_json(path: Path, cap_id: str, verdict: dict[str, Any],
-                        programme: dict[str, dict[str, str]]) -> None:
+def _write_verdict_json(
+    path: Path,
+    cap_id: str,
+    verdict: dict[str, Any],
+    programme: dict[str, dict[str, str]],
+    *,
+    judge_model: str,
+) -> None:
     """Write a verdict review JSON to the given path (no rename, no validation)."""
     review = {
         "schema_version": "1.0.0",
         "unit": "campaign",
         "level": programme[cap_id]["niveau"],
         "judged_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
-        "judge_model": MODEL,
+        "judge_model": judge_model,
         "author_model": "campaign-tooling",
         "capacities": [verdict],
     }
@@ -430,7 +668,7 @@ def _write_verdict_json(path: Path, cap_id: str, verdict: dict[str, Any],
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Judge campaign via Anthropic API (cached, hardened)")
+    parser = argparse.ArgumentParser(description="Judge campaign via OpenRouter")
     parser.add_argument("--cap-ids", type=str, default="", help="Comma-separated capacity IDs")
     parser.add_argument("--all", action="store_true", help="Judge all capacities")
     parser.add_argument("--dry-run", action="store_true", help="List capacities without calling API")
@@ -438,19 +676,6 @@ def main() -> int:
     parser.add_argument("--force", action="store_true", help="Re-judge even if verdict file exists")
     parser.add_argument("--output-dir", type=Path, default=OUTPUT_DIR)
     args = parser.parse_args()
-
-    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
-    if not api_key:
-        env_path = ROOT / ".env"
-        if env_path.exists():
-            for line in env_path.read_text(encoding="utf-8").splitlines():
-                line = line.strip()
-                if line.startswith("ANTHROPIC_API_KEY="):
-                    api_key = line.split("=", 1)[1].strip()
-                    break
-    if not api_key and not args.dry_run:
-        print("ERROR: ANTHROPIC_API_KEY not set in environment", file=sys.stderr)
-        return 1
 
     programme = load_programme()
 
@@ -468,7 +693,6 @@ def main() -> int:
         if args.count_tokens:
             sys_tokens = len(SYSTEM_TEXT) // 4
             print(f"System block: {len(SYSTEM_TEXT)} chars ~ {sys_tokens} tokens")
-            print(f"  (minimum 1024 for cache: {'OK' if sys_tokens >= 1024 else 'TOO SHORT'})")
         print(f"Would judge {len(selected)} capacities:")
         seq_map: dict[str, list[str]] = {}
         for cap_id in selected:
@@ -478,6 +702,15 @@ def main() -> int:
             print(f"  {seq_id}: {', '.join(seq_map[seq_id])}")
         return 0
 
+    try:
+        api_key, requested_model = load_openrouter_config(
+            os.environ,
+            resolve_env_file(CORPUS_ROOT),
+        )
+    except OpenRouterError as error:
+        print(f"ERROR: OpenRouter {error.category}", file=sys.stderr)
+        return 1
+
     def seq_sort_key(cid: str) -> str:
         seqs = find_sequences_for_capacity(cid)
         return seqs[0] if seqs else "zzz"
@@ -486,9 +719,14 @@ def main() -> int:
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     results: list[dict[str, Any]] = []
-    usage_log: list[dict[str, Any]] = []
+    current_entries: list[dict[str, object]] = []
     seq_context_cache: dict[tuple[str, str], str] = {}  # (seq_id, cap_id) -> context
-    api_calls = 0
+    log_path = args.output_dir / "_usage_log.json"
+    try:
+        load_usage_log(log_path, model=requested_model)
+    except OpenRouterError as error:
+        print(f"ERROR: OpenRouter {error.category}", file=sys.stderr)
+        return 1
 
     for i, cap_id in enumerate(selected):
         seqs = find_sequences_for_capacity(cap_id)
@@ -512,146 +750,173 @@ def main() -> int:
         cap_prompt = build_capacity_prompt(cap_id, programme)
 
         print(f"  [{i+1}/{len(selected)}] {cap_id} ({seq_id})...", end=" ", flush=True)
+        final_path = args.output_dir / f"{cap_id}_substance_review.json"
         try:
-            judge_result, usage = call_anthropic_cached(api_key, seq_context, cap_prompt)
-            api_calls += 1
-            verdict = format_verdict(cap_id, programme[cap_id], judge_result)
-
-            # J6-bis: write candidate to .tmp, validate, promote only on success.
-            # The existing valid verdict (if any) stays intact until replaced.
-            final_path = args.output_dir / f"{cap_id}_substance_review.json"
-            tmp_path = final_path.with_suffix(".json.tmp")
-            _write_verdict_json(tmp_path, cap_id, verdict, programme)
-            errors = validate_verdict_file(tmp_path)
-
-            if not errors:
-                tmp_path.replace(final_path)  # promote (cross-platform, atomic overwrite)
-            else:
-                # ONE retry with error feedback
-                print("INVALID, retrying...", end=" ", flush=True)
-                tmp_path.unlink(missing_ok=True)
-                feedback = (
-                    "Le verdict précédent a échoué la validation mécanique :\n"
-                    + "\n".join(errors[:5])
-                    + "\n\nCorrige les erreurs. Rappel : quote = sous-chaîne VERBATIM, "
-                    "≥25 chars, anchor = slug existant, une citation DISTINCTE par rôle."
+            logical_prompt = cap_prompt
+            verdict: dict[str, Any] | None = None
+            promoted = False
+            for logical_attempt in (1, 2):
+                completion = _call_with_transport_retries(
+                    api_key,
+                    requested_model,
+                    seq_context,
+                    logical_prompt,
                 )
-                retry_prompt = cap_prompt + "\n\nFEEDBACK DU VÉRIFICATEUR :\n" + feedback
-                judge_result2, usage2 = call_anthropic_cached(api_key, seq_context, retry_prompt)
-                api_calls += 1
-                for k in usage:
-                    usage[k] += usage2[k]
-                verdict = format_verdict(cap_id, programme[cap_id], judge_result2)
-                _write_verdict_json(tmp_path, cap_id, verdict, programme)
-                errors2 = validate_verdict_file(tmp_path)
-                if errors2:
-                    # Partial degradation: only zero out failing roles
-                    tmp_path.unlink(missing_ok=True)
-                    error_text = " ".join(errors2)
-                    role_map = {
-                        "proof_course": ["proof_course", "cours"],
-                        "proof_practice": ["proof_practice", "practice", "td", "tp"],
-                        "proof_correction": ["proof_correction", "correction", "corrigé", "corrige"],
+                judged_at = (
+                    datetime.now(timezone.utc)
+                    .replace(microsecond=0)
+                    .isoformat()
+                    .replace("+00:00", "Z")
+                )
+                entry = build_usage_v2(
+                    cap=cap_id,
+                    seq=seq_id,
+                    attempt=logical_attempt,
+                    judged_at=judged_at,
+                    completion=completion,
+                )
+                current_entries.append(entry)
+                append_usage_log_locked(
+                    log_path,
+                    [entry],
+                    model=requested_model,
+                )
+
+                try:
+                    judge_result = parse_campaign_verdict(completion.content)
+                except (json.JSONDecodeError, ValueError):
+                    if logical_attempt == 1:
+                        logical_prompt = cap_prompt + (
+                            "\n\nFEEDBACK DU VÉRIFICATEUR : le verdict précédent "
+                            "n'était pas un objet JSON valide."
+                        )
+                        continue
+                    judge_result = {
+                        "comment": "Verdict distant invalide après nouvelle tentative."
                     }
-                    failed_roles: list[str] = []
-                    for role, keywords in role_map.items():
-                        if any(kw in error_text.lower() for kw in keywords):
-                            failed_roles.append(role)
-                    if not failed_roles:
-                        failed_roles = list(role_map.keys())
-                    for role in failed_roles:
-                        verdict[role] = {"present": False, "file": None, "anchor": None, "quote": None, "teaches": False}
-                    valid_count = sum(
-                        1 for r in ["proof_course", "proof_practice", "proof_correction"]
-                        if verdict[r].get("present")
+
+                verdict = format_verdict(cap_id, programme[cap_id], judge_result)
+                tmp_path = final_path.with_suffix(".json.tmp")
+                _write_verdict_json(
+                    tmp_path,
+                    cap_id,
+                    verdict,
+                    programme,
+                    judge_model=requested_model,
+                )
+                errors = validate_verdict_file(tmp_path)
+                if not errors:
+                    tmp_path.replace(final_path)
+                    promoted = True
+                    break
+                tmp_path.unlink(missing_ok=True)
+                if logical_attempt == 1:
+                    logical_prompt = cap_prompt + (
+                        "\n\nFEEDBACK DU VÉRIFICATEUR :\n"
+                        + "\n".join(errors[:5])
                     )
-                    verdict["verdict"] = "needs_review" if valid_count else "needs_content"
-                    diag_parts = errors2[:3]
-                    if len(errors2) > 3:
-                        diag_parts.append(f"+{len(errors2) - 3} autres")
-                    diag = "; ".join(diag_parts)
-                    prefix = f"Auto-dégradé ({len(failed_roles)} rôle(s) invalide(s)). "
-                    max_diag = 400 - len(prefix)
-                    if len(diag) > max_diag:
-                        diag = diag[:max_diag - 3].rsplit(" ", 1)[0] + "..."
-                    verdict["justification"] = prefix + diag
-                    _write_verdict_json(tmp_path, cap_id, verdict, programme)
+                    continue
+                failed_roles = failed_proof_roles(errors)
+                if not failed_roles:
+                    print("gate error without role marker; not promoted")
+                    break
+                for role in failed_roles:
+                    verdict[role] = {
+                        "present": False,
+                        "file": None,
+                        "anchor": None,
+                        "quote": None,
+                        "teaches": False,
+                    }
+                valid_count = sum(
+                    1
+                    for role in ROLE_ERROR_PATTERNS
+                    if verdict[role].get("present")
+                )
+                verdict["verdict"] = (
+                    "needs_review" if valid_count else "needs_content"
+                )
+                verdict["justification"] = (
+                    f"Auto-dégradé ({len(failed_roles)} rôle(s) invalide(s))."
+                )
+                _write_verdict_json(
+                    tmp_path,
+                    cap_id,
+                    verdict,
+                    programme,
+                    judge_model=requested_model,
+                )
+                degraded_errors = validate_verdict_file(tmp_path)
+                if not degraded_errors:
                     tmp_path.replace(final_path)
-                    print(f"DEGRADED {len(failed_roles)} role(s)")
+                    promoted = True
                 else:
-                    tmp_path.replace(final_path)
-                    print("FIXED", end=" ")
+                    tmp_path.unlink(missing_ok=True)
+                    print("degraded verdict failed validation; not promoted")
+                break
 
-            results.append(verdict)
-            present_count = sum(1 for k in ["proof_course", "proof_practice", "proof_correction"]
-                              if verdict[k].get("present"))
-            cost = (usage["read"] * 0.30 + usage["write"] * 3.75
-                    + usage["fresh"] * 3.0 + usage["out"] * 15.0) / 1_000_000
-            usage_log.append({"cap": cap_id, "seq": seq_id, **usage, "cost_usd": round(cost, 6),
-                              "api_calls": api_calls})
-
-            print(f"{present_count}/3 | r={usage['read']} w={usage['write']} f={usage['fresh']} o={usage['out']} ${cost:.4f}")
-
-            if api_calls >= 2 and usage["read"] < 1024:
-                print(f"  WARNING: CACHE MISS on API call {api_calls}")
-
-            if i < len(selected) - 1:
-                time.sleep(0.5)
-        except Exception as exc:
-            print(f"ERROR: {exc}")
-            final_path = args.output_dir / f"{cap_id}_substance_review.json"
+            assert verdict is not None
+            if promoted:
+                results.append(verdict)
+                present_count = sum(
+                    1
+                    for role in ROLE_ERROR_PATTERNS
+                    if verdict[role].get("present")
+                )
+                print(f"{present_count}/3")
+        except OpenRouterError as error:
+            print(f"ERROR: OpenRouter {error.category}")
+            failed_entry = build_failed_usage_v2(
+                cap=cap_id,
+                seq=seq_id,
+                attempt=3 if error.category in {"rate_limit", "timeout", "transport", "unavailable"} else 1,
+                judged_at=(
+                    datetime.now(timezone.utc)
+                    .replace(microsecond=0)
+                    .isoformat()
+                    .replace("+00:00", "Z")
+                ),
+                model=requested_model,
+                error_category=error.category,
+            )
+            append_usage_log_locked(
+                log_path,
+                [failed_entry],
+                model=requested_model,
+            )
             if should_preserve_existing_verdict(final_path):
                 print(f"  verdict existant préservé : {final_path.name}")
                 existing = json.loads(final_path.read_text(encoding="utf-8"))
                 results.append(existing.get("capacities", [{}])[0] if existing.get("capacities") else {})
             else:
-                err_verdict = format_verdict(cap_id, programme[cap_id], {"comment": f"API error: {exc}"})
+                err_verdict = format_verdict(
+                    cap_id,
+                    programme[cap_id],
+                    {"comment": f"OpenRouter indisponible ({error.category})."},
+                )
                 err_verdict["verdict"] = "needs_content"
                 for role in ["proof_course", "proof_practice", "proof_correction"]:
                     err_verdict[role] = {"present": False, "file": None, "anchor": None, "quote": None, "teaches": False}
                 tmp_path = final_path.with_suffix(".json.tmp")
-                _write_verdict_json(tmp_path, cap_id, err_verdict, programme)
+                _write_verdict_json(
+                    tmp_path,
+                    cap_id,
+                    err_verdict,
+                    programme,
+                    judge_model=requested_model,
+                )
                 tmp_path.replace(final_path)
                 results.append(err_verdict)
-            usage_log.append({"cap": cap_id, "seq": seq_id, "read": 0, "write": 0,
-                              "fresh": 0, "out": 0, "cost_usd": 0, "error": str(exc)[:100]})
 
     # Summary
-    total_cost = sum(u.get("cost_usd", 0) for u in usage_log)
-    total_read = sum(u.get("read", 0) for u in usage_log)
-    total_write = sum(u.get("write", 0) for u in usage_log)
-    total_fresh = sum(u.get("fresh", 0) for u in usage_log)
-    total_out = sum(u.get("out", 0) for u in usage_log)
+    totals = current_run_totals(current_entries)
 
     print(f"\n{'='*60}")
     print(f"{len(results)} verdicts written to {args.output_dir}/")
     with_proofs = sum(1 for v in results if v["verdict"] == "needs_review")
     print(f"  needs_review (with proofs): {with_proofs}")
     print(f"  needs_content (no proofs): {len(results) - with_proofs}")
-    print(f"\nAPI calls: {api_calls}")
-    print("Token usage totals:")
-    print(f"  cache_read: {total_read:,}  cache_write: {total_write:,}")
-    print(f"  fresh_input: {total_fresh:,}  output: {total_out:,}")
-    print(f"  TOTAL COST: ${total_cost:.4f}")
-
-    # K5-BIS-2: fusion-upsert — load existing, replace by cap, keep the rest
-    log_path = args.output_dir / "_usage_log.json"
-    existing_log: list[dict[str, Any]] = []
-    if log_path.exists():
-        try:
-            existing_log = json.loads(log_path.read_text(encoding="utf-8"))
-        except (json.JSONDecodeError, OSError):
-            existing_log = []
-    # Build set of caps judged in this run
-    judged_caps = {entry["cap"] for entry in usage_log if "cap" in entry}
-    # Keep entries from previous runs for caps NOT judged this time
-    merged = [entry for entry in existing_log if entry.get("cap") not in judged_caps]
-    # Add timestamped entries from this run
-    run_ts = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-    for entry in usage_log:
-        entry["judged_at"] = run_ts
-        merged.append(entry)
-    log_path.write_text(json.dumps(merged, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"\nOpenRouter usage for this run: {totals}")
     print(f"\nUsage log: {log_path}")
 
     return 0

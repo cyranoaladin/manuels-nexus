@@ -11,6 +11,12 @@ from typing import Iterable
 
 from scripts._qa_common import ROOT, print_result
 
+CORPUS_ROOT = ROOT.resolve()
+CHECKOUT_ROOT = CORPUS_ROOT.parents[1]
+EXPECTED_CORPUS_ROOT = CHECKOUT_ROOT / "NSI" / "corpus_nsi"
+if EXPECTED_CORPUS_ROOT.resolve() != CORPUS_ROOT or not (CHECKOUT_ROOT / ".git").exists():
+    raise RuntimeError("racine du checkout introuvable depuis le corpus NSI")
+
 TEXT_SUFFIXES = {
     ".cfg",
     ".csv",
@@ -25,26 +31,37 @@ TEXT_SUFFIXES = {
     ".yaml",
     ".yml",
 }
-IGNORED_NAMES = {".env.rag"}
 TOOLING_PARTS = {".github", "scripts"}
 PEDAGOGICAL_PARTS = {"02_modeles_documents", "03_progressions", "premiere", "terminale"}
 ROOT_SCOPED_FILES = {"Makefile", "README.md", "SKILLS.md", ".pre-commit-config.yaml"}
 ROOT_CONFIG_SUFFIXES = {".toml", ".yml", ".yaml"}
+CORPUS_RELATIVE_ROOT = Path("NSI/corpus_nsi")
+CANONICAL_LOCAL_ENV = CORPUS_RELATIVE_ROOT / ".env.rag"
+ACTIVE_ENV_EXAMPLE_PATHS = {
+    Path("Mathematiques/manuel-maths/.env.example"),
+    Path("NSI/.env.example"),
+    Path("NSI/corpus_nsi/.env.rag.example"),
+}
 IPV4_RE = re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b")
 SECRET_ASSIGNMENT_RE = re.compile(
-    r"(?m)^[ \t]*((?:TOKEN|[A-Z0-9_]+_TOKEN|[A-Z0-9_]*(?:API_KEY|SECRET|PASSWORD|PRIVATE_KEY)))[ \t]*=[ \t]*([^\n#]*)"
+    r"(?m)^[ \t]*(?:export[ \t]+)?((?:TOKEN|[A-Z0-9_]+_TOKEN|[A-Z0-9_]*(?:API_KEY|SECRET|PASSWORD|PRIVATE_KEY)))[ \t]*=[ \t]*([^\n#]*)"
 )
 SAFE_VALUES = {"", "changeme", "example", "placeholder"}
 ALLOWED_PUBLIC_IP_LINES = {
     (".env.rag.example", "RAG_SSH_HOST", "88.99." + "254.59"),
+    (
+        "NSI/corpus_nsi/.env.rag.example",
+        "RAG_SSH_HOST",
+        "88.99." + "254.59",
+    ),
 }
 
 
 def is_text_candidate(path: Path) -> bool:
-    if path.name in IGNORED_NAMES:
-        return False
     if any(part in {".git", ".venv", "__pycache__"} for part in path.parts):
         return False
+    if path.name.startswith(".env"):
+        return True
     if path.suffix.lower() in TEXT_SUFFIXES:
         return True
     return path.name in {".pre-commit-config.yaml", "Makefile", "README.md"}
@@ -52,11 +69,21 @@ def is_text_candidate(path: Path) -> bool:
 
 def is_secret_scan_scope(path: Path, root: Path) -> bool:
     rel = path.relative_to(root)
-    if not rel.parts:
+    scope_rel = rel
+    if rel.is_relative_to(CORPUS_RELATIVE_ROOT):
+        scope_rel = rel.relative_to(CORPUS_RELATIVE_ROOT)
+    if not scope_rel.parts:
         return False
-    first = rel.parts[0]
+    first = scope_rel.parts[0]
     if first in PEDAGOGICAL_PARTS:
         return False
+    if rel == CANONICAL_LOCAL_ENV:
+        return False
+    if rel.name == ".env.rag":
+        return True
+    if rel in ACTIVE_ENV_EXAMPLE_PATHS:
+        return True
+    rel = scope_rel
     if first in TOOLING_PARTS:
         return True
     if len(rel.parts) == 1:
@@ -145,7 +172,7 @@ def scan_paths(paths: Iterable[Path], root: Path) -> list[str]:
 
 
 def main() -> None:
-    errors = scan_paths(tracked_files(ROOT), ROOT)
+    errors = scan_paths(tracked_files(CHECKOUT_ROOT), CHECKOUT_ROOT)
     print_result("check_no_committed_secrets", errors)
 
 

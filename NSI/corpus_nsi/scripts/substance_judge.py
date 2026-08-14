@@ -10,21 +10,49 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import json
+import os
 import re
 import sys
-import time
 import urllib.request
 from pathlib import Path
 from typing import Any
 
-_REPO_ROOT = Path(__file__).resolve().parents[1]
-if str(_REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(_REPO_ROOT))
+CORPUS_ROOT = Path(__file__).resolve().parents[1]
+try:
+    CHECKOUT_ROOT = next(parent for parent in CORPUS_ROOT.parents if (parent / ".git").exists())
+except StopIteration as exc:
+    raise RuntimeError("checkout root not found for nexus_external") from exc
+
+checkout_path = str(CHECKOUT_ROOT)
+while checkout_path in sys.path:
+    sys.path.remove(checkout_path)
+sys.path.insert(0, checkout_path)
+
+import nexus_external  # noqa: E402
+from nexus_external.openrouter_client import (  # noqa: E402
+    OpenRouterError,
+    chat_completion,
+)
+
+expected_external = (CHECKOUT_ROOT / "nexus_external").resolve()
+loaded_external = Path(nexus_external.__file__).resolve().parent
+if loaded_external != expected_external:
+    raise ImportError(
+        "nexus_external loaded outside current checkout: "
+        f"expected {expected_external}, got {loaded_external}"
+    )
+
+corpus_path = str(CORPUS_ROOT)
+for managed_path in (corpus_path, checkout_path):
+    while managed_path in sys.path:
+        sys.path.remove(managed_path)
+sys.path.insert(0, corpus_path)
+sys.path.insert(1, checkout_path)
 
 from scripts.check_substance_anchors import citation_status, parse_sections  # noqa: E402
 from scripts.rag_core import resolve_env_file  # noqa: E402
 
-ROOT = _REPO_ROOT
+ROOT = CORPUS_ROOT
 ENV_FILE = resolve_env_file(ROOT)
 
 # Collections whose hits count as internal substance proof.
@@ -179,46 +207,75 @@ def search_rag(
     return hits
 
 
-def call_llm(env: dict[str, str], capacity_text: str, section_text: str, role_label: str) -> dict[str, Any]:
-    llm_url = env.get("LOCAL_LLM_BASE_URL", "")
-    llm_model = env.get("LOCAL_LLM_MODEL", "qwen2.5:7b")
-    if not llm_url:
-        return {"taught": False, "citation": "", "justification": "LLM non configurée"}
+def _conservative_llm_result(justification: str) -> dict[str, Any]:
+    return {"taught": False, "citation": "", "justification": justification}
+
+
+def _parse_llm_result(content: object) -> dict[str, Any]:
+    if not isinstance(content, str):
+        return _conservative_llm_result("JSON invalide")
+    payload = content.strip()
+    if payload.startswith("```"):
+        lines = payload.splitlines()
+        if len(lines) < 3 or lines[0] != "```json" or lines[-1] != "```":
+            return _conservative_llm_result("JSON invalide")
+        payload = "\n".join(lines[1:-1])
+    try:
+        result = json.loads(payload)
+    except json.JSONDecodeError:
+        return _conservative_llm_result("JSON invalide")
+    if not isinstance(result, dict) or set(result) != {
+        "taught",
+        "citation",
+        "justification",
+    }:
+        return _conservative_llm_result("JSON invalide")
+    if type(result["taught"]) is not bool:
+        return _conservative_llm_result("JSON invalide")
+    if not isinstance(result["citation"], str) or not isinstance(
+        result["justification"], str
+    ):
+        return _conservative_llm_result("JSON invalide")
+    return result
+
+
+def call_llm(
+    env: dict[str, str],
+    capacity_text: str,
+    section_text: str,
+    role_label: str,
+    *,
+    transport: object | None = None,
+) -> dict[str, Any]:
+    api_key = env.get("OPENROUTER_API_KEY", "").strip()
+    model = env.get("OPENROUTER_MODEL", "").strip()
+    if not api_key:
+        return _conservative_llm_result("LLM non configuré")
+    if not model:
+        raise OpenRouterError("configuration", model="<invalid>")
 
     user_prompt = (
-        f"Capacité NSI : \"{capacity_text}\"\n"
+        f'Capacité NSI : "{capacity_text}"\n'
         f"Rôle : {role_label}\n\n"
         f"Extrait :\n---\n{section_text[:800]}\n---\n\n"
         f"Cette section {role_label}-t-elle cette capacité ?"
     )
-    for attempt in range(2):
-        try:
-            data = _http_json(
-                f"{llm_url}/chat/completions",
-                body={
-                    "model": llm_model,
-                    "messages": [
-                        {"role": "system", "content": JUDGE_SYSTEM_PROMPT},
-                        {"role": "user", "content": user_prompt},
-                    ],
-                    "temperature": 0,
-                },
-                timeout=90,
-            )
-            content = data["choices"][0]["message"]["content"].strip()
-            if content.startswith("```"):
-                content = re.sub(r"^```\w*\n?", "", content)
-                content = re.sub(r"\n?```$", "", content)
-            result = json.loads(content)
-            if isinstance(result, dict) and "taught" in result:
-                return result
-        except (json.JSONDecodeError, KeyError):
-            if attempt == 0:
-                time.sleep(1)
-                continue
-        except Exception as exc:
-            return {"taught": False, "citation": "", "justification": f"Erreur LLM: {exc}"}
-    return {"taught": False, "citation": "", "justification": "JSON invalide"}
+    try:
+        completion = chat_completion(
+            api_key=api_key,
+            model=model,
+            messages=[
+                {"role": "system", "content": JUDGE_SYSTEM_PROMPT},
+                {"role": "user", "content": user_prompt},
+            ],
+            max_completion_tokens=800,
+            transport=transport,
+        )
+    except OpenRouterError as error:
+        return _conservative_llm_result(
+            f"OpenRouter indisponible ({error.category})"
+        )
+    return _parse_llm_result(completion.content)
 
 
 def empty_evidence(note: str = "Aucune preuve vérifiable retenue.") -> Evidence:
@@ -488,6 +545,10 @@ def main() -> int:
         return 1
 
     env = load_env(ENV_FILE)
+    for key in ("OPENROUTER_API_KEY", "OPENROUTER_MODEL"):
+        value = os.environ.get(key, "").strip()
+        if value:
+            env[key] = value
     # Barrier A: refuse non-internal collections before any query
     rag_col = env.get("RAG_COLLECTION", "nsi_corpus")
     if not is_internal_collection(rag_col):
@@ -504,7 +565,10 @@ def main() -> int:
         unit=args.unit,
         level=args.level,
         repo_root=ROOT,
-        judge_model=env.get("LOCAL_LLM_MODEL", "local-llm"),
+        judge_model=(
+            env.get("OPENROUTER_MODEL", "").strip()
+            or "deterministic-conservative"
+        ),
     )
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(review, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
