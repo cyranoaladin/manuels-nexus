@@ -863,6 +863,23 @@ def test_campaign_records_requested_openrouter_model(
     assert review["judge_model"] != MODEL_RETURNED
     assert review["judge_model"] != getattr(campaign, "MODEL", None)
 
+    valid_result = _campaign_result()
+    serialized = json.dumps(valid_result)
+    for accepted in (
+        serialized,
+        f"```json\n{serialized}\n```",
+    ):
+        assert campaign.parse_campaign_verdict(accepted) == valid_result
+    for rejected in (
+        f"```JSON\n{serialized}\n```",
+        f"```\n{serialized}\n```",
+        f"texte périphérique\n{serialized}",
+        f"```json\n{serialized}\n```\ntexte périphérique",
+        f"```json\n{serialized}\n```\n```json\n{serialized}\n```",
+    ):
+        with pytest.raises((json.JSONDecodeError, ValueError)):
+            campaign.parse_campaign_verdict(rejected)
+
 
 def test_campaign_records_each_billed_retry_generation_before_verdict_validation(
     monkeypatch: pytest.MonkeyPatch,
@@ -914,13 +931,41 @@ def test_campaign_records_each_billed_retry_generation_before_verdict_validation
         if content == "first":
             raise ValueError("invalid first verdict")
         assert content == "second"
-        return _campaign_result()
+        return {
+            "proof_course": {
+                "present": True,
+                "file": "cours.md",
+                "anchor": "#cours",
+                "quote": "Preuve de cours qui sera rejetée par le gate.",
+            },
+            "proof_practice": {
+                "present": True,
+                "file": "td.md",
+                "anchor": "#exercice",
+                "quote": "Preuve de pratique distincte qui doit être conservée.",
+            },
+            "proof_correction": {
+                "present": True,
+                "file": "corrige.md",
+                "anchor": "#correction",
+                "quote": "Preuve de correction distincte qui doit être conservée.",
+            },
+            "comment": "Deux rôles valides doivent survivre à la dégradation ciblée.",
+        }
+
+    def validate_candidate(path: Path) -> list[str]:
+        review = json.loads(path.read_text(encoding="utf-8"))
+        capacity = review["capacities"][0]
+        if capacity["proof_course"]["present"]:
+            return ["proof_course: citation invalide"]
+        return []
 
     monkeypatch.setenv("OPENROUTER_API_KEY", API_KEY)
     monkeypatch.setenv("OPENROUTER_MODEL", MODEL)
     monkeypatch.setattr(campaign, "merge_usage_log", traced_merge)
     monkeypatch.setattr(campaign, "parse_campaign_verdict", traced_parse)
     _install_campaign_main_doubles(monkeypatch, campaign, output_dir, fake_call)
+    monkeypatch.setattr(campaign, "validate_verdict_file", validate_candidate)
 
     assert campaign.main() == 0
     assert events == [
@@ -934,6 +979,34 @@ def test_campaign_records_each_billed_retry_generation_before_verdict_validation
     entries = json.loads((output_dir / "_usage_log.json").read_text(encoding="utf-8"))
     assert [entry["generation_id"] for entry in entries] == ["gen-first", "gen-second"]
     assert [entry["cost_usd"] for entry in entries] == [0.001, 0.009]
+    review = json.loads(
+        (output_dir / f"{CAPACITY_ID}_substance_review.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    capacity = review["capacities"][0]
+    assert capacity["proof_course"] == {
+        "present": False,
+        "file": None,
+        "anchor": None,
+        "quote": None,
+        "teaches": False,
+    }
+    assert capacity["proof_practice"] == {
+        "present": True,
+        "file": "td.md",
+        "anchor": "#exercice",
+        "quote": "Preuve de pratique distincte qui doit être conservée.",
+        "teaches": True,
+    }
+    assert capacity["proof_correction"] == {
+        "present": True,
+        "file": "corrige.md",
+        "anchor": "#correction",
+        "quote": "Preuve de correction distincte qui doit être conservée.",
+        "teaches": True,
+    }
+    assert capacity["verdict"] == "needs_review"
 
 
 def test_usage_v2_copies_completion_accounting_exactly() -> None:
@@ -1228,6 +1301,14 @@ def test_run_totals_sum_only_current_successful_v2_entries() -> None:
     history[0]["cost_usd"] = 123_456.0
     assert campaign.current_run_totals(current_entries) == totals
     assert all("run_id" not in row for row in merged_history)
+
+    huge_cost = 10**1000
+    huge_entries = [
+        {**current_entries[0], "cost_usd": huge_cost},
+        {**current_entries[1], "cost_usd": 17},
+    ]
+    huge_totals = campaign.current_run_totals(huge_entries)
+    assert huge_totals["cost_usd"] == huge_cost + 17
 
 
 def test_substance_llm_delegates_to_shared_openrouter_client(
