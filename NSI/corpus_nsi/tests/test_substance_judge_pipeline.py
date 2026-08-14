@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import socket
 import subprocess
+import urllib.request
 from pathlib import Path
 
 import pytest
@@ -95,19 +96,48 @@ def test_judge_never_promotes_to_validated_pedagogy(
 ) -> None:
     source = write_source(tmp_path, "Importer un CSV demande de choisir un séparateur.")
     monkeypatch.setattr(substance_judge, "search_rag", lambda *args, **kwargs: [hit_for(source)])
-    monkeypatch.setattr(
-        substance_judge,
-        "call_llm",
-        lambda *args, **kwargs: {
-            "taught": True,
-            "citation": "Importer un CSV demande de choisir un séparateur.",
-            "justification": "preuve présente",
+
+    conservative = substance_judge.judge_capacity({}, CAPACITY, repo_root=tmp_path)
+
+    assert conservative["verdict"] == "needs_content"
+    assert conservative["verdict"] != "validated_pedagogy"
+    for role in ("proof_course", "proof_practice", "proof_correction"):
+        assert conservative[role]["present"] is False
+
+    positive = {
+        "taught": True,
+        "citation": "Importer un CSV demande de choisir un séparateur.",
+        "justification": "La citation prouve un enseignement explicite.",
+    }
+    if hasattr(substance_judge, "chat_completion"):
+        from types import SimpleNamespace
+
+        monkeypatch.setattr(
+            substance_judge,
+            "chat_completion",
+            lambda **kwargs: SimpleNamespace(content=json.dumps(positive)),
+        )
+    else:
+        monkeypatch.setattr(
+            substance_judge,
+            "_http_json",
+            lambda *args, **kwargs: {
+                "choices": [{"message": {"content": json.dumps(positive)}}]
+            },
+        )
+    remote = substance_judge.judge_capacity(
+        {
+            "OPENROUTER_API_KEY": "openrouter-test-key",
+            "OPENROUTER_MODEL": "vendor/test-model",
+            "LOCAL_LLM_BASE_URL": "https://legacy.invalid",
+            "LOCAL_LLM_MODEL": "legacy-test-model",
         },
+        CAPACITY,
+        repo_root=tmp_path,
     )
 
-    verdict = substance_judge.judge_capacity({}, CAPACITY, repo_root=tmp_path)
-
-    assert verdict["verdict"] == "needs_review"
+    assert remote["verdict"] == "needs_review"
+    assert remote["verdict"] != "validated_pedagogy"
 
 
 def test_lexical_branch_is_executed() -> None:
@@ -157,12 +187,18 @@ def test_offline_fixture_writes_schema_verdict(tmp_path: Path) -> None:
 
 
 def test_network_calls_are_blocked_by_test_fixture() -> None:
-    with pytest.raises(AssertionError, match="network"):
-        sock = socket.socket()
-        try:
-            sock.connect(("127.0.0.1", 9))
-        finally:
-            sock.close()
+    def socket_connect() -> None:
+        with socket.socket() as candidate:
+            candidate.connect(("127.0.0.1", 9))
+
+    probes = (
+        socket_connect,
+        lambda: socket.create_connection(("127.0.0.1", 9)),
+        lambda: urllib.request.urlopen("http://127.0.0.1:9"),
+    )
+    for probe in probes:
+        with pytest.raises(AssertionError, match="network"):
+            probe()
 
 
 def test_makefile_contains_judge_chain() -> None:

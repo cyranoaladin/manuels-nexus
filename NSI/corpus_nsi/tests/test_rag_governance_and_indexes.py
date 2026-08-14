@@ -49,17 +49,34 @@ def absent_capacity_ids() -> set[str]:
 
 
 def test_rag_env_example_uses_internal_corpus_without_real_secret() -> None:
+    raw = (ROOT / ".env.rag.example").read_text(encoding="utf-8")
     values = env_example_map()
 
-    assert values["RAG_BACKEND"] == "chroma"
-    assert values["RAG_API_BASE_URL"] == "https://rag-api.nexusreussite.academy/search"
-    assert values["RAG_API_KEY"] == ""
-    assert values["RAG_COLLECTION"] == "nsi_corpus"
-    assert values["RAG_DISTANCE"] == "cosine"
-    assert values["RAG_VECTOR_DIM"] == "768"
-    assert values["EMBEDDING_MODEL"] == "nomic-embed-text"
-    assert values["LOCAL_LLM_ENGINE"] == "ollama"
-    assert values["LOCAL_LLM_MODEL"] == "qwen2.5:7b"
+    expected_non_llm = {
+        "RAG_BACKEND": "chroma",
+        "RAG_API_BASE_URL": "https://rag-api.nexusreussite.academy/search",
+        "RAG_API_KEY": "",
+        "RAG_COLLECTION": "nsi_corpus",
+        "RAG_DISTANCE": "cosine",
+        "RAG_VECTOR_DIM": "768",
+        "EMBEDDING_MODEL": "nomic-embed-text",
+        "EMBEDDING_BASE_URL": "",
+        "EMBEDDING_API_KEY": "",
+        "VECTOR_DB_URL": "",
+        "VECTOR_DB_API_KEY": "",
+    }
+    assert {key: values.get(key) for key in expected_non_llm} == expected_non_llm
+    assert raw.splitlines().count("OPENROUTER_API_KEY=") == 1
+    assert raw.splitlines().count("OPENROUTER_MODEL=") == 1
+    assert values["OPENROUTER_API_KEY"] == ""
+    assert values["OPENROUTER_MODEL"] == ""
+    for forbidden in (
+        "LOCAL_LLM_ENGINE",
+        "LOCAL_LLM_BASE_URL",
+        "LOCAL_LLM_MODEL",
+        "LOCAL_LLM_API_KEY",
+    ):
+        assert forbidden not in values
     assert values["RAG_SSH_HOST"] == "88.99.254.59"
     assert values["RAG_SSH_USER"] == "root"
     assert ".env.rag" in (ROOT / ".gitignore").read_text(encoding="utf-8")

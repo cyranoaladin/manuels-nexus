@@ -111,8 +111,25 @@ def test_search_rag_with_doc_type_filter_handles_malformed() -> None:
 
 def test_search_rag_with_doc_type_filter_excludes_non_matching() -> None:
     """doc_type_filter excludes even valid internal hits with wrong document_type."""
-    env = {"RAG_API_BASE_URL": "http://fake", "RAG_API_KEY": "fake", "RAG_COLLECTION": "nsi_corpus_v2"}
-    with patch.object(judge, "_http_json", _fake_http_json_with_malformed):
+    rag_url = "https://rag.example.invalid/search"
+    env = {
+        "RAG_API_BASE_URL": rag_url,
+        "RAG_API_KEY": "rag-token-sentinel",
+        "RAG_COLLECTION": "nsi_corpus_v2",
+    }
+    seen: list[tuple[tuple[Any, ...], dict[str, Any]]] = []
+
+    def capture_rag(*args: Any, **kwargs: Any) -> dict[str, Any]:
+        seen.append((args, kwargs))
+        return _fake_http_json_with_malformed()
+
+    with patch.object(judge, "_http_json", capture_rag):
         # Filter for "evaluation" — no hit has this type
         result = judge.search_rag(env, "test query", doc_type_filter=["evaluation"])
     assert len(result) == 0
+    assert len(seen) == 1
+    args, kwargs = seen[0]
+    assert args == (rag_url,)
+    assert kwargs["headers"] == {"Authorization": "Bearer rag-token-sentinel"}
+    assert kwargs["body"]["collection"] == "nsi_corpus_v2"
+    assert "openrouter.ai" not in str((args, kwargs)).lower()

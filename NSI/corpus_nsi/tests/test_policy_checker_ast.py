@@ -6,6 +6,7 @@ mutations of the real substance_judge.py.
 """
 from __future__ import annotations
 
+import ast
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,6 +16,7 @@ from scripts.check_rag_collection_policy import check_judge_collection_policy
 # A minimal VALID judge source (all rules pass)
 VALID_JUDGE = '''
 from typing import Any
+from nexus_external.openrouter_client import chat_completion
 
 INTERNAL_COVERAGE_COLLECTIONS = {"nsi_corpus", "nsi_corpus_v2"}
 
@@ -37,12 +39,60 @@ def search_rag(env, query, k=5, doc_type_filter=None):
     if doc_type_filter:
         hits = [h for h in hits if h.get("metadata", {}).get("document_type", "") in doc_type_filter]
     return hits
+
+def call_llm(env, capacity_text, section_text, role_label, *, transport=None):
+    api_key = env.get("OPENROUTER_API_KEY", "")
+    model = env.get("OPENROUTER_MODEL", "")
+    return chat_completion(
+        api_key=api_key,
+        model=model,
+        messages=[{"role": "user", "content": section_text}],
+        max_completion_tokens=800,
+        transport=transport,
+    )
 '''
+
+
+def _openrouter_transport_errors(source: str) -> list[str]:
+    tree = ast.parse(source)
+    imported_shared_client = any(
+        isinstance(node, ast.ImportFrom)
+        and node.module == "nexus_external.openrouter_client"
+        and any(alias.name == "chat_completion" for alias in node.names)
+        for node in ast.walk(tree)
+    )
+    called_shared_client = any(
+        isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Name)
+        and node.func.id == "chat_completion"
+        for node in ast.walk(tree)
+    )
+    strings = {
+        node.value
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Constant) and isinstance(node.value, str)
+    }
+    errors: list[str] = []
+    if not imported_shared_client or not called_shared_client:
+        errors.append("transport LLM partagé OpenRouter absent")
+    for required in ("OPENROUTER_API_KEY", "OPENROUTER_MODEL"):
+        if required not in strings:
+            errors.append(f"configuration {required} absente")
+    for forbidden in (
+        "LOCAL_LLM_ENGINE",
+        "LOCAL_LLM_BASE_URL",
+        "LOCAL_LLM_MODEL",
+        "LOCAL_LLM_API_KEY",
+    ):
+        if forbidden in strings:
+            errors.append(f"ancienne configuration active: {forbidden}")
+    return errors
 
 
 def test_valid_judge_passes() -> None:
     """The valid fixture must produce 0 errors."""
     errors = check_judge_collection_policy(VALID_JUDGE)
+    errors.extend(_openrouter_transport_errors(VALID_JUDGE))
     assert not errors, f"Valid judge should pass but got: {errors}"
 
 
@@ -223,4 +273,5 @@ def test_real_judge_passes() -> None:
     """The actual substance_judge.py must pass ALL rules."""
     source = (ROOT / "scripts" / "substance_judge.py").read_text(encoding="utf-8")
     errors = check_judge_collection_policy(source)
+    errors.extend(_openrouter_transport_errors(source))
     assert not errors, f"Real judge should pass but got: {errors}"

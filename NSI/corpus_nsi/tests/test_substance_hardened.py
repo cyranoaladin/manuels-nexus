@@ -6,12 +6,14 @@ correctly rejects (ROUGE) or accepts (VERT) it.
 """
 
 import json
+import os
 import subprocess
 import sys
 import tempfile
 import unittest
 from pathlib import Path
 from typing import Any
+from unittest.mock import patch
 
 from scripts.check_substance_anchors import (
     check_capacity,
@@ -19,7 +21,7 @@ from scripts.check_substance_anchors import (
     citation_status,
     validate_verdict_data,
 )
-from scripts.judge_campaign import validate_verdict_file, should_preserve_existing_verdict
+from scripts.judge_campaign import validate_verdict_file
 
 
 def _make_capacity(cap_id: str = "P-TEST-01",
@@ -482,32 +484,92 @@ class TestSubstanceHardened(unittest.TestCase):
     # ── K1-PREAMBULE: except handler preserves existing valid verdict ──
 
     def test_api_error_preserves_existing_valid_verdict(self):
-        """Exercises should_preserve_existing_verdict — the actual predicate
-        used by the except handler. Non-tautological: a mutation of the
-        predicate condition would fail this test."""
+        """An OpenRouter failure preserves only an existing valid verdict."""
+        import scripts.judge_campaign as campaign
+
+        class SanitizedOpenRouterError(campaign.OpenRouterError):
+            category = "unavailable"
+
+            def __init__(self):
+                Exception.__init__(self, "OpenRouter unavailable")
+
+        programme = {
+            "P-PRESERVE-01": {
+                "id": "P-PRESERVE-01",
+                "intitule": "Préserver un verdict valide.",
+                "contenu": "Conservation",
+                "rubrique": "Qualité",
+                "niveau": "premiere",
+            }
+        }
+        error = SanitizedOpenRouterError()
         valid_verdict = self._make_full_verdict()
-        final_path = Path(self.tmpdir) / "P-PRESERVE-01_substance_review.json"
-        final_path.write_text(json.dumps(valid_verdict), encoding="utf-8")
+        cases = (
+            ("valid", valid_verdict, True),
+            ("invalid", self._DUP_VERDICT, False),
+            ("absent", None, False),
+        )
+        for label, existing, must_preserve in cases:
+            output_dir = Path(self.tmpdir) / label
+            output_dir.mkdir()
+            final_path = output_dir / "P-PRESERVE-01_substance_review.json"
+            before_bytes = None
+            if existing is not None:
+                final_path.write_text(json.dumps(existing), encoding="utf-8")
+                before_bytes = final_path.read_bytes()
+            argv = [
+                "judge_campaign.py",
+                "--cap-ids",
+                "P-PRESERVE-01",
+                "--force",
+                "--output-dir",
+                str(output_dir),
+            ]
+            with (
+                patch.dict(
+                    os.environ,
+                    {
+                        "OPENROUTER_API_KEY": "openrouter-key-sentinel",
+                        "OPENROUTER_MODEL": "vendor/model-explicit",
+                    },
+                    clear=False,
+                ),
+                patch.object(sys, "argv", argv),
+                patch.object(campaign, "load_programme", return_value=programme),
+                patch.object(
+                    campaign,
+                    "find_sequences_for_capacity",
+                    return_value=["P01"],
+                ),
+                patch.object(
+                    campaign,
+                    "build_sequence_context",
+                    return_value="contexte",
+                ),
+                patch.object(
+                    campaign,
+                    "build_capacity_prompt",
+                    return_value="prompt",
+                ),
+                patch.object(
+                    campaign,
+                    "call_openrouter_judge",
+                    side_effect=error,
+                ),
+                patch.object(campaign.time, "sleep", return_value=None),
+            ):
+                self.assertEqual(campaign.main(), 0)
 
-        # VERT: valid verdict on disk → preserve
-        self.assertTrue(should_preserve_existing_verdict(final_path),
-                        "Valid verdict must be preserved on API error")
-
-        # VERT: no file → don't preserve (write error verdict)
-        missing = Path(self.tmpdir) / "MISSING_substance_review.json"
-        self.assertFalse(should_preserve_existing_verdict(missing),
-                         "Missing file must not be 'preserved'")
-
-        # VERT: invalid verdict on disk → don't preserve
-        invalid_path = Path(self.tmpdir) / "INVALID_substance_review.json"
-        invalid_path.write_text(json.dumps(self._DUP_VERDICT), encoding="utf-8")
-        self.assertFalse(should_preserve_existing_verdict(invalid_path),
-                         "Invalid verdict must not be preserved")
-
-        # Verify the valid file is unchanged
-        after = json.loads(final_path.read_text(encoding="utf-8"))
-        self.assertEqual(after, valid_verdict,
-                         "Verdict file must be byte-identical after preservation")
+            self.assertTrue(final_path.is_file())
+            if must_preserve:
+                self.assertEqual(final_path.read_bytes(), before_bytes)
+            else:
+                replacement = json.loads(final_path.read_text(encoding="utf-8"))
+                self.assertNotEqual(replacement, existing)
+                self.assertEqual(
+                    replacement["capacities"][0]["verdict"],
+                    "needs_content",
+                )
 
 
 if __name__ == "__main__":

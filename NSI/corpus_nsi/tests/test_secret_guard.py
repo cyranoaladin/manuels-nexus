@@ -25,17 +25,43 @@ def test_detects_public_ip_but_allows_placeholders_and_private_ips(tmp_path: Pat
 
 
 def test_detects_token_like_assignments_without_flagging_examples(tmp_path: Path) -> None:
-    secret_file = tmp_path / ".env.example"
+    checkout_root = ROOT.parents[1]
+    secret_file = tmp_path / ".env.secret"
     safe_file = tmp_path / ".env.safe"
     constant_file = tmp_path / "scripts" / "constants.py"
     constant_file.parent.mkdir(parents=True)
-    secret_file.write_text("RAG_API_KEY=abc1234567890secret\n", encoding="utf-8")
+    secret_file.write_text(
+        "OPENROUTER_API_KEY=sk-or-v1-real-sentinel-for-test\n",
+        encoding="utf-8",
+    )
     safe_file.write_text("RAG_API_KEY=<token Bearer pour l'API>\n", encoding="utf-8")
     constant_file.write_text('CONCRETE_TOKENS = {"trace", "table"}\n', encoding="utf-8")
+    example_relpaths = (
+        Path("Mathematiques/manuel-maths/.env.example"),
+        Path("NSI/.env.example"),
+        Path("NSI/corpus_nsi/.env.rag.example"),
+    )
+    copied_examples: list[Path] = []
+    for relative in example_relpaths:
+        source = checkout_root / relative
+        assert source.is_file()
+        destination = tmp_path / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(source.read_bytes())
+        copied_examples.append(destination)
 
-    errors = secrets.scan_paths([secret_file, safe_file, constant_file], tmp_path)
+    errors = secrets.scan_paths(
+        [secret_file, safe_file, constant_file, *copied_examples],
+        tmp_path,
+    )
 
-    assert errors == [f"{secret_file.name}: secret potentiel dans RAG_API_KEY"]
+    assert errors == [
+        f"{secret_file.name}: secret potentiel dans OPENROUTER_API_KEY"
+    ]
+    for example in copied_examples:
+        text = example.read_text(encoding="utf-8")
+        assert text.splitlines().count("OPENROUTER_API_KEY=") == 1
+        assert text.splitlines().count("OPENROUTER_MODEL=") == 1
 
 
 def test_blank_secret_assignments_do_not_consume_next_line(tmp_path: Path) -> None:
