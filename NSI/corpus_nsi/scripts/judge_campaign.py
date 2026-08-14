@@ -37,6 +37,23 @@ try:
 except StopIteration as exc:
     raise RuntimeError("checkout root not found for nexus_external") from exc
 
+EXTERNAL_PACKAGE = CHECKOUT_ROOT / "nexus_external"
+EXTERNAL_INIT = EXTERNAL_PACKAGE / "__init__.py"
+EXTERNAL_CLIENT = EXTERNAL_PACKAGE / "openrouter_client.py"
+
+
+def _require_external_checkout_files() -> None:
+    if EXTERNAL_PACKAGE.is_symlink() or not EXTERNAL_PACKAGE.is_dir():
+        raise ImportError("nexus_external package is not a real checkout directory")
+    for expected_file in (EXTERNAL_INIT, EXTERNAL_CLIENT):
+        if expected_file.is_symlink() or not expected_file.is_file():
+            raise ImportError(
+                f"nexus_external checkout module is not a real file: {expected_file}"
+            )
+
+
+_require_external_checkout_files()
+
 
 def _preloaded_external_is_canonical() -> bool:
     names = tuple(
@@ -48,7 +65,7 @@ def _preloaded_external_is_canonical() -> bool:
         return True
     if "nexus_external" not in names:
         return False
-    expected_root = (CHECKOUT_ROOT / "nexus_external").resolve()
+    expected_root = EXTERNAL_PACKAGE
     for name in names:
         module = sys.modules.get(name)
         parts = name.split(".")[1:]
@@ -102,19 +119,20 @@ import nexus_external  # noqa: E402
 _openrouter_client = importlib.import_module(  # noqa: E402
     "nexus_external.openrouter_client"
 )
+if not _preloaded_external_is_canonical():
+    raise ImportError("nexus_external checkout provenance is not exact after import")
 
-expected_external = (CHECKOUT_ROOT / "nexus_external").resolve()
-loaded_external = Path(nexus_external.__file__).resolve().parent
-if loaded_external != expected_external:
+loaded_external_file = Path(nexus_external.__file__).absolute()
+if loaded_external_file != EXTERNAL_INIT:
     raise ImportError(
         "nexus_external loaded outside current checkout: "
-        f"expected {expected_external}, got {loaded_external}"
+        f"expected {EXTERNAL_INIT}, got {loaded_external_file}"
     )
-expected_openrouter_client = (expected_external / "openrouter_client.py").resolve()
+expected_openrouter_client = EXTERNAL_CLIENT
 loaded_openrouter_client_file = getattr(_openrouter_client, "__file__", None)
 if loaded_openrouter_client_file is None:
     raise ImportError("nexus_external.openrouter_client has no checkout provenance")
-loaded_openrouter_client = Path(loaded_openrouter_client_file).resolve()
+loaded_openrouter_client = Path(loaded_openrouter_client_file).absolute()
 if loaded_openrouter_client != expected_openrouter_client:
     raise ImportError(
         "nexus_external.openrouter_client loaded outside current checkout: "
@@ -481,6 +499,9 @@ def load_usage_log(
 ) -> list[dict[str, object]]:
     """Load an existing journal without treating corruption as empty history."""
 
+    recovery_path = log_path.with_name(f".{log_path.name}.recovery")
+    if recovery_path.exists():
+        raise OpenRouterError("protocol", model=model)
     if not log_path.exists():
         return []
     try:

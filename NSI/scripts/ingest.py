@@ -9,6 +9,7 @@ import importlib
 import json
 import os
 import re
+import stat
 import sys
 from pathlib import Path
 
@@ -22,7 +23,36 @@ def _discover_checkout_root() -> Path:
     raise RuntimeError("checkout Git Nexus introuvable depuis __file__")
 
 
+def _validate_checkout_external_sources(checkout_root: Path) -> tuple[Path, Path]:
+    package_path = checkout_root / "nexus_external"
+    init_path = package_path / "__init__.py"
+    classification_path = package_path / "classification.py"
+    expected_entries = (
+        (package_path, stat.S_ISDIR),
+        (init_path, stat.S_ISREG),
+        (classification_path, stat.S_ISREG),
+    )
+
+    for path, expected_kind in expected_entries:
+        try:
+            path.relative_to(checkout_root)
+            mode = path.lstat().st_mode
+        except (OSError, ValueError):
+            raise RuntimeError(
+                f"source nexus_external absente ou hors du checkout: {path}"
+            ) from None
+        if stat.S_ISLNK(mode) or not expected_kind(mode):
+            raise RuntimeError(
+                f"source nexus_external non sûre dans le checkout: {path}"
+            )
+
+    return package_path.resolve(strict=True), classification_path.resolve(strict=True)
+
+
 CHECKOUT_ROOT = _discover_checkout_root()
+expected_package, expected_classification = _validate_checkout_external_sources(
+    CHECKOUT_ROOT
+)
 preloaded_external = tuple(
     name
     for name in sys.modules
@@ -36,14 +66,12 @@ sys.path[:] = [item for item in sys.path if item != root_text]
 sys.path.insert(0, root_text)
 import nexus_external  # noqa: E402
 
-expected_package = (CHECKOUT_ROOT / "nexus_external").resolve()
 loaded_package = Path(nexus_external.__file__).resolve().parent
 if loaded_package != expected_package:
     raise RuntimeError("nexus_external chargé hors du checkout courant")
 
 from nexus_external import classification as nexus_classification  # noqa: E402
 
-expected_classification = (expected_package / "classification.py").resolve()
 try:
     loaded_classification = Path(nexus_classification.__file__).resolve()
 except (AttributeError, TypeError, OSError, RuntimeError):

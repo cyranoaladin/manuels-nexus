@@ -42,6 +42,13 @@ ACTIVE_ENV_EXAMPLE_PATHS = {
     Path("NSI/.env.example"),
     Path("NSI/corpus_nsi/.env.rag.example"),
 }
+ACTIVE_SECRET_SCAN_PATHS = {
+    Path("Mathematiques/manuel-maths/scripts/ingest.py"),
+    Path("NSI/scripts/ingest.py"),
+    Path("nexus_external/__init__.py"),
+    Path("nexus_external/classification.py"),
+    Path("nexus_external/openrouter_client.py"),
+}
 IPV4_RE = re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b")
 SECRET_ASSIGNMENT_RE = re.compile(
     r"(?m)^[ \t]*(?:export[ \t]+)?((?:TOKEN|[A-Z0-9_]+_TOKEN|[A-Z0-9_]*(?:API_KEY|SECRET|PASSWORD|PRIVATE_KEY)))[ \t]*=[ \t]*([^\n#]*)"
@@ -69,6 +76,8 @@ def is_text_candidate(path: Path) -> bool:
 
 def is_secret_scan_scope(path: Path, root: Path) -> bool:
     rel = path.relative_to(root)
+    if rel in ACTIVE_SECRET_SCAN_PATHS:
+        return True
     scope_rel = rel
     if rel.is_relative_to(CORPUS_RELATIVE_ROOT):
         scope_rel = rel.relative_to(CORPUS_RELATIVE_ROOT)
