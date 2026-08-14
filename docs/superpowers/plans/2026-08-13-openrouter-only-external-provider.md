@@ -3261,19 +3261,20 @@ git add -- \
   nexus_external/classification.py \
   Mathematiques/manuel-maths/scripts/ingest.py \
   NSI/scripts/ingest.py \
+  Mathematiques/manuel-maths/.env.example \
+  NSI/.env.example \
+  Mathematiques/manuel-maths/requirements.txt \
+  NSI/requirements.txt \
+  requirements-ci-audit.txt
+git add -f -- \
   NSI/corpus_nsi/scripts/judge_campaign.py \
   NSI/corpus_nsi/scripts/substance_judge.py \
   NSI/corpus_nsi/scripts/run_substance_judge.py \
   NSI/corpus_nsi/scripts/check_rag_config.py \
   NSI/corpus_nsi/scripts/check_no_committed_secrets.py \
-  Mathematiques/manuel-maths/.env.example \
-  NSI/.env.example \
   NSI/corpus_nsi/.env.rag.example \
   NSI/corpus_nsi/rag_config.example.yml \
-  Mathematiques/manuel-maths/requirements.txt \
-  NSI/requirements.txt \
-  NSI/corpus_nsi/requirements.txt \
-  requirements-ci-audit.txt
+  NSI/corpus_nsi/requirements.txt
 test -z "$(git diff --name-only)"
 python3 - <<'PY'
 import subprocess
@@ -3343,9 +3344,13 @@ Expected: 18 chemins Green explicitement indexés, puis gates verts. Faire relir
 ```bash
 set -euo pipefail
 IMPL_ROOT=/home/alaeddine/Documents/Manuels_Nexus/.worktrees/green-openrouter-only
+RUN_TMP=$(mktemp -d /tmp/nexus-openrouter-green-final.XXXXXX)
+CORPUS_RUN=$(mktemp -d /tmp/nexus-openrouter-green-final-corpus.XXXXXX)
+SOURCE_REPORT=$IMPL_ROOT/NSI/corpus_nsi/01_build_reports/P05_substance_review.json
 cd "$IMPL_ROOT"
 test -z "$(git diff --name-only)"
 test "$(git diff --cached --name-only | wc -l)" -eq 18
+test ! -e "$SOURCE_REPORT"
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
   python3 -m pytest -q -p no:cacheprovider \
   tests/test_openrouter_client.py \
@@ -3365,7 +3370,14 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
 cd "$IMPL_ROOT/NSI"
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
   python3 -m pytest -q -p no:cacheprovider tests/test_ingest_openrouter.py
-cd "$IMPL_ROOT/NSI/corpus_nsi"
+cd "$IMPL_ROOT"
+git diff --cached --binary > "$RUN_TMP/green.patch"
+git clone --quiet --no-hardlinks --no-checkout "$IMPL_ROOT" "$CORPUS_RUN/repo"
+git -C "$CORPUS_RUN/repo" checkout --quiet --detach "$(git rev-parse HEAD)"
+git -C "$CORPUS_RUN/repo" apply --index "$RUN_TMP/green.patch"
+test -z "$(git -C "$CORPUS_RUN/repo" diff --name-only)"
+test "$(git -C "$CORPUS_RUN/repo" diff --cached --name-only | wc -l)" -eq 18
+cd "$CORPUS_RUN/repo/NSI/corpus_nsi"
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
   python3 -m pytest -q -p no:cacheprovider \
     tests/test_rag_governance_and_indexes.py \
@@ -3375,9 +3387,14 @@ env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_
     tests/test_substance_hardened.py \
     tests/test_judge_collection_barriers.py \
     tests/test_policy_checker_ast.py
+test -e "$CORPUS_RUN/repo/NSI/corpus_nsi/01_build_reports/P05_substance_review.json"
+test ! -e "$SOURCE_REPORT"
+cd "$IMPL_ROOT"
+test -z "$(git diff --name-only)"
+test "$(git diff --cached --name-only | wc -l)" -eq 18
 ```
 
-Expected: quatre processus verts. Ne pas agréger le corpus au Pytest racine et ne pas prétendre la collecte globale verte tant que la collision historique `assemble.BOOK_VARIANTS` existe.
+Expected: quatre processus verts. Le corpus s'exécute uniquement dans le clone local portant le diff staged exact ; P05 existe dans ce clone et reste absent du worktree source. Ne pas agréger le corpus au Pytest racine et ne pas prétendre la collecte globale verte tant que la collision historique `assemble.BOOK_VARIANTS` existe.
 
 - [ ] **Step 2: Compiler et scanner les surfaces actives**
 
@@ -3465,19 +3482,20 @@ git add -- \
   nexus_external/classification.py \
   Mathematiques/manuel-maths/scripts/ingest.py \
   NSI/scripts/ingest.py \
+  Mathematiques/manuel-maths/.env.example \
+  NSI/.env.example \
+  Mathematiques/manuel-maths/requirements.txt \
+  NSI/requirements.txt \
+  requirements-ci-audit.txt
+git add -f -- \
   NSI/corpus_nsi/scripts/judge_campaign.py \
   NSI/corpus_nsi/scripts/substance_judge.py \
   NSI/corpus_nsi/scripts/run_substance_judge.py \
   NSI/corpus_nsi/scripts/check_rag_config.py \
   NSI/corpus_nsi/scripts/check_no_committed_secrets.py \
-  Mathematiques/manuel-maths/.env.example \
-  NSI/.env.example \
   NSI/corpus_nsi/.env.rag.example \
   NSI/corpus_nsi/rag_config.example.yml \
-  Mathematiques/manuel-maths/requirements.txt \
-  NSI/requirements.txt \
-  NSI/corpus_nsi/requirements.txt \
-  requirements-ci-audit.txt
+  NSI/corpus_nsi/requirements.txt
 git diff --cached --check
 git diff --cached --stat
 ```
