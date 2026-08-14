@@ -601,9 +601,14 @@ Les surfaces opérationnelles identifiées sont également alignées :
 - `Mathematiques/manuel-maths/CAHIER_DES_CHARGES.md` ;
 - `Mathematiques/manuel-maths/docs/02_workflow_production.md` ;
 - `Mathematiques/manuel-maths/docs/03_architecture_technique.md` ;
+- `Mathematiques/manuel-maths/CLAUDE.md` ;
+- `Mathematiques/manuel-maths/docs/04_guide_agents.md` ;
+- `Mathematiques/manuel-maths/.claude/commands/verifier.md` ;
 - `NSI/CAHIER_DES_CHARGES.md` ;
 - `NSI/docs/02_workflow_production.md` ;
 - `NSI/docs/03_architecture_technique.md` ;
+- `NSI/docs/04_guide_agents.md` ;
+- `NSI/.claude/commands/verifier.md` ;
 - `NSI/corpus_nsi/README.md` ;
 - `NSI/corpus_nsi/rag_connection.md` ;
 - `NSI/corpus_nsi/substance_pipeline.md` ;
@@ -612,6 +617,16 @@ Les surfaces opérationnelles identifiées sont également alignées :
 
 Les formulations ne promettent ni remise, ni Batch API, ni modèle par défaut,
 ni disponibilité permanente.
+
+**Amendement de revue du 14 août 2026.** Les cinq guides d'agents ajoutés
+ci-dessus sont des surfaces opérationnelles actives : les missions courantes les
+référencent directement. Ils font donc partie du même périmètre canonique que
+les dix-sept surfaces initialement identifiées. Le gate documentaire couvre
+désormais exactement vingt-deux documents opérationnels et refuse toute
+prescription de modèle implicite dans l'un d'eux. La présente spécification est
+elle-même une autorité active auto-scannée : l'ensemble technique du gate compte
+donc exactement vingt-trois surfaces (`22 + 1 spec`), sans transformer la spec
+en guide opérationnel.
 
 ### 8.5 Sorties canoniques d'inventaire du corpus
 
@@ -647,6 +662,14 @@ Cette allowlist est fermée. `manifest.csv` et `duplicates_report.md` doivent
 rester octet-identiques au commit précédant le rebuild. `coverage.md` est hors
 périmètre : il n'est ni recalculé, ni modifié, ni invoqué comme preuve de cette
 migration.
+
+**Amendement de revue du 14 août 2026.** Le premier rebuild, qui ajoutait un
+nouveau chemin suivi, a bien produit les deux sorties ci-dessus dans le commit
+canonique. Le rerun final après corrections ne comporte aucun nouveau chemin :
+il met à jour uniquement les empreintes de trois fichiers déjà inventoriés.
+Son delta minimal fermé est donc exactement `manifest_tooling.csv` ;
+`inventory_report.md` rejoint les surfaces exigées octet-identiques. Toute
+fabrication d'un delta Markdown sans changement d'inventaire est interdite.
 
 ## 9. Exclusions historiques immuables
 
@@ -771,9 +794,9 @@ Les tests couvrent :
 10. l'absence de réseau réel dans toutes les suites ciblées ;
 11. la présence dans `manifest_tooling.csv` des nouveaux fichiers OpenRouter du
     corpus une fois ceux-ci suivis, sans fuite vers `manifest.csv` ;
-12. la fermeture du delta de rebuild aux deux sorties autorisées, l'identité
-    octet de `manifest.csv` et `duplicates_report.md`, et l'idempotence des
-    quatre sorties canoniques.
+12. la fermeture du delta du premier rebuild aux deux sorties autorisées, puis
+    du rerun final au seul `manifest_tooling.csv`, l'identité octet des autres
+    sorties et l'idempotence des quatre sorties canoniques.
 
 Le corpus NSI n'est pas collecté par la configuration Pytest racine. Son contrat
 est donc exécuté séparément :
@@ -875,8 +898,9 @@ Le lot est acceptable lorsque :
 - les nouveaux fichiers OpenRouter du corpus sont suivis avant le rebuild et
   apparaissent dans l'inventaire d'outillage ;
 - `python3 -m scripts.rebuild_inventory` est idempotent sur les quatre sorties
-  canoniques et son delta contient exactement `manifest_tooling.csv` et
-  `inventory_report.md` ;
+  canoniques ; son premier delta contient exactement `manifest_tooling.csv` et
+  `inventory_report.md`, puis son rerun final sans nouveau chemin contient
+  exactement `manifest_tooling.csv` ;
 - `manifest.csv`, `duplicates_report.md` et `coverage.md` restent
   octet-identiques au commit précédant le rebuild ;
 - `python3 -m pytest tests/test_manifest_separation.py -q -p no:cacheprovider`
@@ -911,6 +935,11 @@ Une correction issue de revue reçoit un commit ciblé supplémentaire. Aucun
 commit ne mélange la migration avec une correction mathématique, une baseline
 visuelle, une migration de corpus ou un P0 Wave 0.
 
+Si une correction de revue modifie seulement le contenu de chemins corpus déjà
+suivis, le commit audit supplémentaire contient uniquement
+`NSI/corpus_nsi/manifest_tooling.csv`; il ne duplique pas le sujet canonique et
+ne fabrique aucune modification de `inventory_report.md`.
+
 ## 14. Interaction avec Wave 0
 
 Les trois plans Green P0 approuvés — provenance programme TSPE, séparation
@@ -943,10 +972,11 @@ suivantes sont simultanément prouvées :
 4. **séparation RAG/LLM** — les endpoints RAG restent distincts et ne servent
    jamais de destination LLM ;
 5. **traçabilité honnête** — les autorités actives sont à jour et les preuves,
-   verdicts et rapports historiques restent intacts ; les deux sorties
-   canoniques d'outillage sont resynchronisées dans le commit audit dédié,
+   verdicts et rapports historiques restent intacts ; les sorties d'outillage
+   réellement périmées sont resynchronisées dans les commits audit dédiés,
    tandis que `manifest.csv`, `duplicates_report.md` et `coverage.md` restent
-   inchangés.
+   inchangés, ainsi que `inventory_report.md` lorsque les chemins inventoriés
+   ne changent pas.
 
 Tant qu'une propriété manque, le dépôt ne déclare pas l'exclusivité OpenRouter
 comme réalisée.
