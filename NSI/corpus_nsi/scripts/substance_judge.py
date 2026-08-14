@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 from datetime import datetime, timezone
+import importlib
 import json
 import os
 import re
@@ -23,15 +24,70 @@ try:
 except StopIteration as exc:
     raise RuntimeError("checkout root not found for nexus_external") from exc
 
+
+def _preloaded_external_is_canonical() -> bool:
+    names = tuple(
+        name
+        for name in sys.modules
+        if name == "nexus_external" or name.startswith("nexus_external.")
+    )
+    if not names:
+        return True
+    if "nexus_external" not in names:
+        return False
+    expected_root = (CHECKOUT_ROOT / "nexus_external").resolve()
+    for name in names:
+        module = sys.modules.get(name)
+        parts = name.split(".")[1:]
+        expected_file = (
+            expected_root / "__init__.py"
+            if not parts
+            else expected_root.joinpath(*parts).with_suffix(".py")
+        )
+        try:
+            module_file = Path(module.__file__).absolute()
+            specification = module.__spec__
+            origin = Path(specification.origin).absolute()
+            loader_file = Path(specification.loader.get_filename(name)).absolute()
+        except (AttributeError, TypeError, OSError, RuntimeError):
+            return False
+        if (
+            module_file != expected_file
+            or origin != expected_file
+            or loader_file != expected_file
+            or module_file.is_symlink()
+        ):
+            return False
+    client = sys.modules.get("nexus_external.openrouter_client")
+    if client is not None:
+        expected_client = expected_root / "openrouter_client.py"
+        try:
+            callable_file = Path(
+                client.chat_completion.__code__.co_filename
+            ).absolute()
+        except (AttributeError, TypeError, OSError, RuntimeError):
+            return False
+        if callable_file != expected_client:
+            return False
+    return True
+
+
+if not _preloaded_external_is_canonical():
+    for preloaded_name in tuple(sys.modules):
+        if preloaded_name == "nexus_external" or preloaded_name.startswith(
+            "nexus_external."
+        ):
+            sys.modules.pop(preloaded_name, None)
+    importlib.invalidate_caches()
 checkout_path = str(CHECKOUT_ROOT)
 while checkout_path in sys.path:
     sys.path.remove(checkout_path)
 sys.path.insert(0, checkout_path)
 
 import nexus_external  # noqa: E402
-from nexus_external.openrouter_client import (  # noqa: E402
-    OpenRouterError,
-    chat_completion,
+
+_openrouter_client = importlib.import_module(  # noqa: E402
+    "nexus_external.openrouter_client"
 )
 
 expected_external = (CHECKOUT_ROOT / "nexus_external").resolve()
@@ -41,6 +97,21 @@ if loaded_external != expected_external:
         "nexus_external loaded outside current checkout: "
         f"expected {expected_external}, got {loaded_external}"
     )
+expected_openrouter_client = (expected_external / "openrouter_client.py").resolve()
+loaded_openrouter_client_file = getattr(_openrouter_client, "__file__", None)
+if loaded_openrouter_client_file is None:
+    raise ImportError("nexus_external.openrouter_client has no checkout provenance")
+loaded_openrouter_client = Path(loaded_openrouter_client_file).resolve()
+if loaded_openrouter_client != expected_openrouter_client:
+    raise ImportError(
+        "nexus_external.openrouter_client loaded outside current checkout: "
+        f"expected {expected_openrouter_client}, got {loaded_openrouter_client}"
+    )
+
+from nexus_external.openrouter_client import (  # noqa: E402
+    OpenRouterError,
+    chat_completion,
+)
 
 corpus_path = str(CORPUS_ROOT)
 for managed_path in (corpus_path, checkout_path):
@@ -326,8 +397,17 @@ def veto_deterministe(verdict: dict[str, Any], intitule: str, used_citations: se
 
 
 def section_body(repo_root: Path, file_rel: str, anchor: str) -> str | None:
-    source_path = repo_root / file_rel
-    if not source_path.exists():
+    relative_path = Path(file_rel)
+    if relative_path.is_absolute() or ".." in relative_path.parts:
+        return None
+    resolved_root = repo_root.resolve()
+    try:
+        source_path = (resolved_root / relative_path).resolve(strict=True)
+    except (OSError, RuntimeError, ValueError):
+        return None
+    if source_path == resolved_root or not source_path.is_relative_to(resolved_root):
+        return None
+    if not source_path.is_file():
         return None
     sections = parse_sections(source_path.read_text(encoding="utf-8", errors="replace"))
     section = sections.get(anchor.lstrip("#"))
@@ -372,10 +452,10 @@ def document_text_for_hit(repo_root: Path, hit: dict[str, Any]) -> str:
     if isinstance(metadata, dict):
         file_rel = str(metadata.get("path", ""))
         anchor = str(metadata.get("section_anchor") or metadata.get("anchor", ""))
-        if file_rel and anchor:
-            body = section_body(repo_root, file_rel, anchor)
-            if body:
-                return body
+        if file_rel:
+            if not anchor:
+                return ""
+            return section_body(repo_root, file_rel, anchor) or ""
     document = hit.get("document", "")
     return str(document)
 

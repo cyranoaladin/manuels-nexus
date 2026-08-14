@@ -5,6 +5,7 @@ pédagogique -> classification partagée -> métadonnées héritées du registre
 Les formules cassées par l'extraction PDF pourront être traitées par
 l'extension locale latex_fallback().
 """
+import importlib
 import json
 import os
 import re
@@ -22,6 +23,14 @@ def _discover_checkout_root() -> Path:
 
 
 CHECKOUT_ROOT = _discover_checkout_root()
+preloaded_external = tuple(
+    name
+    for name in sys.modules
+    if name == "nexus_external" or name.startswith("nexus_external.")
+)
+for module_name in preloaded_external:
+    sys.modules.pop(module_name, None)
+importlib.invalidate_caches()
 root_text = str(CHECKOUT_ROOT)
 sys.path[:] = [item for item in sys.path if item != root_text]
 sys.path.insert(0, root_text)
@@ -32,7 +41,20 @@ loaded_package = Path(nexus_external.__file__).resolve().parent
 if loaded_package != expected_package:
     raise RuntimeError("nexus_external chargé hors du checkout courant")
 
-from nexus_external.classification import classify_chunk  # noqa: E402
+from nexus_external import classification as nexus_classification  # noqa: E402
+
+expected_classification = (expected_package / "classification.py").resolve()
+try:
+    loaded_classification = Path(nexus_classification.__file__).resolve()
+except (AttributeError, TypeError, OSError, RuntimeError):
+    raise RuntimeError(
+        "nexus_external.classification chargé hors du checkout courant"
+    ) from None
+if loaded_classification != expected_classification:
+    raise RuntimeError(
+        "nexus_external.classification chargé hors du checkout courant"
+    )
+classify_chunk = nexus_classification.classify_chunk
 
 from common import CORPUS_DIR, RAW_DIR, ROOT, load_registry, write_json  # noqa: E402
 

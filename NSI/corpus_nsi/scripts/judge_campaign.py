@@ -20,6 +20,7 @@ from __future__ import annotations
 import argparse
 from collections.abc import Mapping, Sequence
 import fcntl
+import importlib
 import json
 import os
 import re
@@ -36,16 +37,70 @@ try:
 except StopIteration as exc:
     raise RuntimeError("checkout root not found for nexus_external") from exc
 
+
+def _preloaded_external_is_canonical() -> bool:
+    names = tuple(
+        name
+        for name in sys.modules
+        if name == "nexus_external" or name.startswith("nexus_external.")
+    )
+    if not names:
+        return True
+    if "nexus_external" not in names:
+        return False
+    expected_root = (CHECKOUT_ROOT / "nexus_external").resolve()
+    for name in names:
+        module = sys.modules.get(name)
+        parts = name.split(".")[1:]
+        expected_file = (
+            expected_root / "__init__.py"
+            if not parts
+            else expected_root.joinpath(*parts).with_suffix(".py")
+        )
+        try:
+            module_file = Path(module.__file__).absolute()
+            specification = module.__spec__
+            origin = Path(specification.origin).absolute()
+            loader_file = Path(specification.loader.get_filename(name)).absolute()
+        except (AttributeError, TypeError, OSError, RuntimeError):
+            return False
+        if (
+            module_file != expected_file
+            or origin != expected_file
+            or loader_file != expected_file
+            or module_file.is_symlink()
+        ):
+            return False
+    client = sys.modules.get("nexus_external.openrouter_client")
+    if client is not None:
+        expected_client = expected_root / "openrouter_client.py"
+        try:
+            callable_file = Path(
+                client.chat_completion.__code__.co_filename
+            ).absolute()
+        except (AttributeError, TypeError, OSError, RuntimeError):
+            return False
+        if callable_file != expected_client:
+            return False
+    return True
+
+
+if not _preloaded_external_is_canonical():
+    for preloaded_name in tuple(sys.modules):
+        if preloaded_name == "nexus_external" or preloaded_name.startswith(
+            "nexus_external."
+        ):
+            sys.modules.pop(preloaded_name, None)
+    importlib.invalidate_caches()
 checkout_path = str(CHECKOUT_ROOT)
 while checkout_path in sys.path:
     sys.path.remove(checkout_path)
 sys.path.insert(0, checkout_path)
 
 import nexus_external  # noqa: E402
-from nexus_external.openrouter_client import (  # noqa: E402
-    OpenRouterCompletion,
-    OpenRouterError,
-    chat_completion,
+
+_openrouter_client = importlib.import_module(  # noqa: E402
+    "nexus_external.openrouter_client"
 )
 
 expected_external = (CHECKOUT_ROOT / "nexus_external").resolve()
@@ -55,6 +110,22 @@ if loaded_external != expected_external:
         "nexus_external loaded outside current checkout: "
         f"expected {expected_external}, got {loaded_external}"
     )
+expected_openrouter_client = (expected_external / "openrouter_client.py").resolve()
+loaded_openrouter_client_file = getattr(_openrouter_client, "__file__", None)
+if loaded_openrouter_client_file is None:
+    raise ImportError("nexus_external.openrouter_client has no checkout provenance")
+loaded_openrouter_client = Path(loaded_openrouter_client_file).resolve()
+if loaded_openrouter_client != expected_openrouter_client:
+    raise ImportError(
+        "nexus_external.openrouter_client loaded outside current checkout: "
+        f"expected {expected_openrouter_client}, got {loaded_openrouter_client}"
+    )
+
+from nexus_external.openrouter_client import (  # noqa: E402
+    OpenRouterCompletion,
+    OpenRouterError,
+    chat_completion,
+)
 
 corpus_path = str(CORPUS_ROOT)
 for managed_path in (corpus_path, checkout_path):
@@ -431,37 +502,93 @@ def lock_open_flags() -> int:
     return os.O_RDWR | os.O_CREAT
 
 
-def write_usage_log_atomic(
-    log_path: Path,
-    entries: Sequence[Mapping[str, object]],
-) -> None:
-    """Durably replace a usage journal from a distinct sibling temporary file."""
-
-    payload = json.dumps(entries, ensure_ascii=False, indent=2)
+def _write_fsynced_sibling(log_path: Path, payload: bytes, suffix: str) -> Path:
     descriptor, temporary_name = tempfile.mkstemp(
         dir=log_path.parent,
         prefix=f".{log_path.name}.",
-        suffix=".tmp",
+        suffix=suffix,
     )
     temporary_path = Path(temporary_name)
     try:
-        with os.fdopen(descriptor, "w", encoding="utf-8", newline="\n") as stream:
+        with os.fdopen(descriptor, "wb") as stream:
             stream.write(payload)
-            stream.write("\n")
             stream.flush()
             os.fsync(stream.fileno())
-        os.replace(temporary_path, log_path)
-        directory_fd = os.open(log_path.parent, directory_open_flags())
-        try:
-            os.fsync(directory_fd)
-        finally:
-            os.close(directory_fd)
     except Exception:
         try:
             temporary_path.unlink(missing_ok=True)
         except OSError:
             pass
         raise
+    return temporary_path
+
+
+def write_usage_log_atomic(
+    log_path: Path,
+    entries: Sequence[Mapping[str, object]],
+) -> None:
+    """Replace a journal only after preserving recoverable original bytes."""
+
+    payload_text = json.dumps(entries, ensure_ascii=False, indent=2)
+    payload = f"{payload_text}\n".encode()
+    original_bytes = log_path.read_bytes() if log_path.exists() else None
+    recovery_path = log_path.with_name(f".{log_path.name}.recovery")
+    recovery_temporary = None
+    payload_temporary = None
+    rollback_temporary = None
+    directory_fd = None
+    try:
+        if recovery_path.exists():
+            raise OSError(f"usage journal recovery required: {recovery_path}")
+        if original_bytes is not None:
+            recovery_temporary = _write_fsynced_sibling(
+                log_path,
+                original_bytes,
+                ".recovery.tmp",
+            )
+        directory_fd = os.open(log_path.parent, directory_open_flags())
+        if recovery_temporary is not None:
+            os.replace(recovery_temporary, recovery_path)
+            recovery_temporary = None
+            os.fsync(directory_fd)
+        payload_temporary = _write_fsynced_sibling(log_path, payload, ".tmp")
+        os.replace(payload_temporary, log_path)
+        payload_temporary = None
+        try:
+            os.fsync(directory_fd)
+        except Exception:
+            if original_bytes is None:
+                log_path.unlink(missing_ok=True)
+                os.fsync(directory_fd)
+            else:
+                rollback_temporary = _write_fsynced_sibling(
+                    log_path,
+                    original_bytes,
+                    ".rollback",
+                )
+                os.replace(rollback_temporary, log_path)
+                rollback_temporary = None
+                os.fsync(directory_fd)
+                recovery_path.unlink(missing_ok=True)
+            raise
+        if original_bytes is not None:
+            recovery_path.unlink(missing_ok=True)
+    except Exception:
+        for transient_path in (
+            recovery_temporary,
+            payload_temporary,
+            rollback_temporary,
+        ):
+            if transient_path is None:
+                continue
+            try:
+                transient_path.unlink(missing_ok=True)
+            except OSError:
+                pass
+        raise
+    finally:
+        if directory_fd is not None:
+            os.close(directory_fd)
 
 
 def append_usage_log_locked(

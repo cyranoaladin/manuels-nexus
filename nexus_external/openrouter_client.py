@@ -278,6 +278,7 @@ def chat_completion(
         with httpx.Client(
             timeout=httpx.Timeout(30.0),
             follow_redirects=False,
+            trust_env=False,
             transport=transport,
         ) as client:
             response = client.post(
