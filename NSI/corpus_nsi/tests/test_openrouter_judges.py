@@ -1008,6 +1008,227 @@ def test_campaign_records_each_billed_retry_generation_before_verdict_validation
     }
     assert capacity["verdict"] == "needs_review"
 
+    absent_proof = {
+        "present": False,
+        "file": None,
+        "anchor": None,
+        "quote": None,
+        "teaches": False,
+    }
+    present_proofs = {
+        "proof_course": {
+            "present": True,
+            "file": "cours.md",
+            "anchor": "#cours",
+            "quote": "Preuve de cours distincte qui doit être conservée.",
+            "teaches": True,
+        },
+        "proof_practice": {
+            "present": True,
+            "file": "entrainement.md",
+            "anchor": "#exercice",
+            "quote": "Preuve d'entraînement distincte qui doit être conservée.",
+            "teaches": True,
+        },
+        "proof_correction": {
+            "present": True,
+            "file": "corrige.md",
+            "anchor": "#correction",
+            "quote": "Preuve de correction distincte qui doit être conservée.",
+            "teaches": True,
+        },
+    }
+
+    def complete_judge_result() -> dict[str, object]:
+        return {
+            role: {
+                key: value
+                for key, value in proof.items()
+                if key != "teaches"
+            }
+            for role, proof in present_proofs.items()
+        } | {
+            "comment": "Chaque rôle fournit une preuve indépendante et vérifiable."
+        }
+
+    quality_errors: list[str] = []
+
+    def run_gate_scenario(
+        label: str,
+        first_gate_error: str,
+        *,
+        expected_failed_role: str | None,
+        second_gate_error: str | None = None,
+    ) -> None:
+        scenario_output = tmp_path / label
+        final_path = scenario_output / f"{CAPACITY_ID}_substance_review.json"
+        sentinel = b'{"existing":"must survive a red gate"}\n'
+        if expected_failed_role is None or second_gate_error is not None:
+            scenario_output.mkdir(parents=True, exist_ok=True)
+            final_path.write_bytes(sentinel)
+
+        scenario_completions = [
+            _completion(
+                content=f"invalid-{label}",
+                generation_id=f"gen-{label}-first",
+            ),
+            _completion(
+                content=f"candidate-{label}",
+                generation_id=f"gen-{label}-second",
+            ),
+        ]
+        validation_snapshots: list[dict[str, object]] = []
+
+        def scenario_call(*args: object, **kwargs: object) -> object:
+            return scenario_completions.pop(0)
+
+        def scenario_parse(content: str) -> dict[str, object]:
+            if content == f"invalid-{label}":
+                raise ValueError("force the billed logical retry")
+            assert content == f"candidate-{label}"
+            return complete_judge_result()
+
+        def scenario_validate(path: Path) -> list[str]:
+            candidate_review = json.loads(path.read_text(encoding="utf-8"))
+            validation_snapshots.append(
+                copy.deepcopy(candidate_review["capacities"][0])
+            )
+            if len(validation_snapshots) == 1:
+                return [first_gate_error]
+            return [second_gate_error] if second_gate_error is not None else []
+
+        result: int | None = None
+        raised: Exception | None = None
+        with monkeypatch.context() as scenario_patch:
+            scenario_patch.setenv("OPENROUTER_API_KEY", API_KEY)
+            scenario_patch.setenv("OPENROUTER_MODEL", MODEL)
+            _install_campaign_main_doubles(
+                scenario_patch,
+                campaign,
+                scenario_output,
+                scenario_call,
+            )
+            scenario_patch.setattr(campaign, "parse_campaign_verdict", scenario_parse)
+            scenario_patch.setattr(campaign, "validate_verdict_file", scenario_validate)
+            try:
+                result = campaign.main()
+            except Exception as error:  # the fail-closed path may be exceptional
+                raised = error
+
+        if not validation_snapshots:
+            quality_errors.append(f"{label}: original candidate was not validated")
+        else:
+            for role, expected in present_proofs.items():
+                if validation_snapshots[0][role] != expected:
+                    quality_errors.append(
+                        f"{label}: original tmp changed {role} to "
+                        f"{validation_snapshots[0][role]!r}, expected {expected!r}"
+                    )
+        if expected_failed_role is not None and len(validation_snapshots) >= 2:
+            for role, expected in present_proofs.items():
+                role_expected = absent_proof if role == expected_failed_role else expected
+                if validation_snapshots[1][role] != role_expected:
+                    quality_errors.append(
+                        f"{label}: degraded tmp changed {role} to "
+                        f"{validation_snapshots[1][role]!r}, "
+                        f"expected {role_expected!r}"
+                    )
+
+        if expected_failed_role is None:
+            if final_path.read_bytes() != sentinel:
+                quality_errors.append(
+                    f"{label}: an unattributable gate error replaced the final verdict"
+                )
+            return
+
+        if second_gate_error is not None:
+            if len(validation_snapshots) != 2:
+                quality_errors.append(
+                    f"{label}: degraded candidate was not validated a second time"
+                )
+            if final_path.read_bytes() != sentinel:
+                quality_errors.append(
+                    f"{label}: a candidate failing its second gate replaced the final verdict"
+                )
+            return
+
+        if raised is not None or result != 0:
+            quality_errors.append(
+                f"{label}: a role-attributable candidate did not complete: {raised!r}"
+            )
+            return
+        if len(validation_snapshots) != 2:
+            quality_errors.append(
+                f"{label}: degraded candidate was not validated a second time"
+            )
+        if not final_path.is_file():
+            quality_errors.append(f"{label}: validated degraded verdict was not promoted")
+            return
+        final_capacity = json.loads(final_path.read_text(encoding="utf-8"))[
+            "capacities"
+        ][0]
+        for role, expected in present_proofs.items():
+            role_expected = absent_proof if role == expected_failed_role else expected
+            if final_capacity[role] != role_expected:
+                quality_errors.append(
+                    f"{label}: {role} changed to {final_capacity[role]!r}, "
+                    f"expected {role_expected!r}"
+                )
+
+    role_scenarios = (
+        ("marker-course", "[cours] citation invalide", "proof_course"),
+        (
+            "marker-practice-duplicate",
+            "[entraînement] citation dupliquée (identique à cours)",
+            "proof_practice",
+        ),
+        (
+            "marker-practice-file",
+            "[entraînement] present=true mais file manquant",
+            "proof_practice",
+        ),
+        (
+            "marker-correction",
+            "[correction] ancre introuvable",
+            "proof_correction",
+        ),
+        (
+            "exact-proof-practice",
+            "proof_practice: citation invalide",
+            "proof_practice",
+        ),
+        (
+            "exact-proof-correction",
+            "proof_correction: citation invalide",
+            "proof_correction",
+        ),
+    )
+    for scenario_label, gate_error, failed_role in role_scenarios:
+        run_gate_scenario(
+            scenario_label,
+            gate_error,
+            expected_failed_role=failed_role,
+        )
+
+    run_gate_scenario(
+        "unattributable-http",
+        "erreur globale du protocole HTTP sans rôle attribuable",
+        expected_failed_role=None,
+    )
+    run_gate_scenario(
+        "unattributable-stdout",
+        "erreur globale stdout illisible sans rôle attribuable",
+        expected_failed_role=None,
+    )
+    run_gate_scenario(
+        "second-gate-red",
+        "[entraînement] citation invalide",
+        expected_failed_role="proof_practice",
+        second_gate_error="erreur globale persistante après dégradation",
+    )
+
+    assert quality_errors == []
+
 
 def test_usage_v2_copies_completion_accounting_exactly() -> None:
     campaign = _campaign()
@@ -1074,7 +1295,10 @@ def test_usage_upsert_replaces_same_generation_only() -> None:
     assert sum(row.get("generation_id") == "gen-same" for row in merged) == 1
 
 
-def test_usage_upsert_preserves_v1_deeply_and_in_order(tmp_path: Path) -> None:
+def test_usage_upsert_preserves_v1_deeply_and_in_order(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
     campaign = _campaign()
     v1 = [
         {
@@ -1112,6 +1336,209 @@ def test_usage_upsert_preserves_v1_deeply_and_in_order(tmp_path: Path) -> None:
         row for row in before if row.get("cap") != new["cap"]
     ] + [new]
     assert replaced_by_capacity != merged
+
+    journal_errors: list[str] = []
+
+    def run_campaign(
+        patch: pytest.MonkeyPatch,
+        output_dir: Path,
+        *,
+        generation_id: str,
+    ) -> tuple[int | None, Exception | None, int]:
+        calls = 0
+
+        def fake_call(*args: object, **kwargs: object) -> object:
+            nonlocal calls
+            calls += 1
+            return _completion(
+                content=json.dumps(_campaign_result()),
+                generation_id=generation_id,
+            )
+
+        patch.setenv("OPENROUTER_API_KEY", API_KEY)
+        patch.setenv("OPENROUTER_MODEL", MODEL)
+        _install_campaign_main_doubles(patch, campaign, output_dir, fake_call)
+        try:
+            return campaign.main(), None, calls
+        except Exception as error:  # a protocol stop may be exceptional
+            return None, error, calls
+
+    malformed_cases = (
+        ("malformed-json", b"{not-json\n"),
+        ("non-list", b'{"schema_version":2}\n'),
+        ("non-dict-entry", b'[1, {"schema_version":1}]\n'),
+    )
+    for label, original_bytes in malformed_cases:
+        malformed_output = tmp_path / label
+        malformed_output.mkdir()
+        malformed_log = malformed_output / "_usage_log.json"
+        malformed_log.write_bytes(original_bytes)
+        with monkeypatch.context() as malformed_patch:
+            return_code, raised, calls = run_campaign(
+                malformed_patch,
+                malformed_output,
+                generation_id=f"gen-{label}",
+            )
+        stopped_as_protocol = (
+            return_code not in (None, 0)
+            or (
+                getattr(raised, "category", None) == "protocol"
+                and raised.__class__.__name__ == "OpenRouterError"
+            )
+        )
+        if not stopped_as_protocol:
+            journal_errors.append(f"{label}: invalid history did not stop as protocol")
+        if calls != 0:
+            journal_errors.append(f"{label}: API called after invalid history")
+        if malformed_log.read_bytes() != original_bytes:
+            journal_errors.append(f"{label}: invalid history was overwritten")
+
+    unreadable_output = tmp_path / "unreadable"
+    unreadable_output.mkdir()
+    unreadable_log = unreadable_output / "_usage_log.json"
+    unreadable_bytes = b'[{"schema_version":1,"opaque":"preserve"}]\n'
+    unreadable_log.write_bytes(unreadable_bytes)
+    real_read_text = Path.read_text
+
+    def fail_usage_read(path: Path, *args: object, **kwargs: object) -> str:
+        if path == unreadable_log:
+            raise OSError("simulated unreadable usage journal")
+        return real_read_text(path, *args, **kwargs)
+
+    with monkeypatch.context() as unreadable_patch:
+        unreadable_patch.setattr(Path, "read_text", fail_usage_read)
+        return_code, raised, calls = run_campaign(
+            unreadable_patch,
+            unreadable_output,
+            generation_id="gen-unreadable",
+        )
+    stopped_as_protocol = (
+        return_code not in (None, 0)
+        or (
+            getattr(raised, "category", None) == "protocol"
+            and raised.__class__.__name__ == "OpenRouterError"
+        )
+    )
+    if not stopped_as_protocol:
+        journal_errors.append("unreadable: OSError did not stop as protocol")
+    if calls != 0:
+        journal_errors.append("unreadable: API called after journal read OSError")
+    if unreadable_log.read_bytes() != unreadable_bytes:
+        journal_errors.append("unreadable: journal was overwritten after read OSError")
+
+    atomic_output = tmp_path / "atomic-success"
+    atomic_output.mkdir()
+    atomic_log = atomic_output / "_usage_log.json"
+    atomic_original = json.dumps(v1, ensure_ascii=False).encode() + b"\n"
+    atomic_log.write_bytes(atomic_original)
+    real_fsync = campaign.os.fsync
+    real_replace = campaign.os.replace
+    atomic_events: list[tuple[str, Path]] = []
+    flushed_payloads: dict[Path, bytes] = {}
+    replaced_payloads: dict[Path, bytes] = {}
+
+    def fd_path(fd: int) -> Path | None:
+        try:
+            return Path(campaign.os.readlink(f"/proc/self/fd/{fd}"))
+        except OSError:
+            return None
+
+    def trace_fsync(fd: int) -> None:
+        target = fd_path(fd)
+        if target is not None and target.parent == atomic_log.parent:
+            payload = target.read_bytes()
+            try:
+                json.loads(payload)
+            except (UnicodeDecodeError, json.JSONDecodeError):
+                journal_errors.append("atomic-success: payload was not flushed before fsync")
+            flushed_payloads[target] = payload
+            atomic_events.append(("fsync", target))
+        real_fsync(fd)
+
+    def trace_replace(source: object, destination: object) -> None:
+        source_path = Path(source)
+        destination_path = Path(destination)
+        if destination_path == atomic_log:
+            if source_path == destination_path:
+                journal_errors.append("atomic-success: in-place replace is forbidden")
+            if source_path.parent != atomic_log.parent:
+                journal_errors.append("atomic-success: temp file is not a sibling")
+            replaced_payloads[source_path] = source_path.read_bytes()
+            atomic_events.append(("replace", source_path))
+        real_replace(source, destination)
+
+    with monkeypatch.context() as atomic_patch:
+        atomic_patch.setattr(campaign.os, "fsync", trace_fsync)
+        atomic_patch.setattr(campaign.os, "replace", trace_replace)
+        return_code, raised, calls = run_campaign(
+            atomic_patch,
+            atomic_output,
+            generation_id="gen-atomic-success",
+        )
+    if raised is not None or return_code != 0 or calls != 1:
+        journal_errors.append(
+            f"atomic-success: campaign did not complete cleanly: {raised!r}"
+        )
+    usage_replaces = [event for event in atomic_events if event[0] == "replace"]
+    if len(usage_replaces) != 1:
+        journal_errors.append("atomic-success: usage journal was not replaced atomically")
+    else:
+        temp_path = usage_replaces[0][1]
+        replace_position = atomic_events.index(("replace", temp_path))
+        fsync_events = [event for event in atomic_events if event[0] == "fsync"]
+        if len(fsync_events) != 1:
+            journal_errors.append("atomic-success: sibling temp was not fsynced once")
+        if any(event[1] != temp_path for event in fsync_events):
+            journal_errors.append("atomic-success: fsync targeted a different sibling")
+        if any(
+            atomic_events.index(event) > replace_position for event in fsync_events
+        ):
+            journal_errors.append("atomic-success: replace happened before every fsync")
+        if flushed_payloads.get(temp_path) != replaced_payloads.get(temp_path):
+            journal_errors.append("atomic-success: bytes changed between fsync and replace")
+        if atomic_log.read_bytes() != replaced_payloads.get(temp_path):
+            journal_errors.append("atomic-success: replace did not install complete bytes")
+    try:
+        atomic_entries = json.loads(atomic_log.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        atomic_entries = []
+    if atomic_entries[: len(v1)] != v1 or [
+        row.get("generation_id") for row in atomic_entries[len(v1) :]
+    ] != ["gen-atomic-success"]:
+        journal_errors.append("atomic-success: ordered v1 history was not preserved")
+
+    fault_output = tmp_path / "atomic-fault"
+    fault_output.mkdir()
+    fault_log = fault_output / "_usage_log.json"
+    fault_original = b'[{"schema_version":1,"opaque":{"nested":[1,2]}}]\n'
+    fault_log.write_bytes(fault_original)
+    fault_triggered = False
+
+    def fail_before_replace(fd: int) -> None:
+        nonlocal fault_triggered
+        target = fd_path(fd)
+        if target is not None and target.parent == fault_log.parent:
+            fault_triggered = True
+            raise OSError("simulated failure after flush and before replace")
+        real_fsync(fd)
+
+    with monkeypatch.context() as fault_patch:
+        fault_patch.setattr(campaign.os, "fsync", fail_before_replace)
+        return_code, raised, calls = run_campaign(
+            fault_patch,
+            fault_output,
+            generation_id="gen-atomic-fault",
+        )
+    if not fault_triggered:
+        journal_errors.append("atomic-fault: no flush/fsync occurred before replace")
+    if raised is None and return_code == 0:
+        journal_errors.append("atomic-fault: pre-replace failure did not stop campaign")
+    if calls != 1:
+        journal_errors.append(f"atomic-fault: expected one billed call, observed {calls}")
+    if fault_log.read_bytes() != fault_original:
+        journal_errors.append("atomic-fault: original bytes changed before replace")
+
+    assert journal_errors == []
 
 
 def test_usage_upsert_preserves_other_v2_generations_for_same_capacity() -> None:

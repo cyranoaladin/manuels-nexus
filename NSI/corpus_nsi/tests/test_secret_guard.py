@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 from pathlib import Path
+
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -24,7 +27,10 @@ def test_detects_public_ip_but_allows_placeholders_and_private_ips(tmp_path: Pat
     assert errors == [f"scripts/{public_file.name}: adresse IP publique en clair -> {public_ip}"]
 
 
-def test_detects_token_like_assignments_without_flagging_examples(tmp_path: Path) -> None:
+def test_detects_token_like_assignments_without_flagging_examples(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     checkout_root = ROOT.parents[1]
     secret_file = tmp_path / ".env.secret"
     safe_file = tmp_path / ".env.safe"
@@ -41,6 +47,36 @@ def test_detects_token_like_assignments_without_flagging_examples(tmp_path: Path
         Path("NSI/.env.example"),
         Path("NSI/corpus_nsi/.env.rag.example"),
     )
+    tracked_roots: list[Path] = []
+    scan_roots: list[Path] = []
+    inventories: list[tuple[Path, ...]] = []
+    printed_results: list[tuple[str, tuple[str, ...]]] = []
+
+    def fake_tracked_files(root: Path) -> list[Path]:
+        tracked_roots.append(root)
+        return [root / relative for relative in example_relpaths]
+
+    def fake_scan_paths(paths: Iterable[Path], root: Path) -> list[str]:
+        scan_roots.append(root)
+        inventories.append(tuple(paths))
+        return []
+
+    def fake_print_result(name: str, errors: list[str]) -> None:
+        printed_results.append((name, tuple(errors)))
+
+    with monkeypatch.context() as main_probe:
+        main_probe.setattr(secrets, "tracked_files", fake_tracked_files)
+        main_probe.setattr(secrets, "scan_paths", fake_scan_paths)
+        main_probe.setattr(secrets, "print_result", fake_print_result)
+        secrets.main()
+
+    assert tracked_roots == [checkout_root]
+    assert scan_roots == [checkout_root]
+    assert inventories == [
+        tuple(checkout_root / relative for relative in example_relpaths)
+    ]
+    assert printed_results == [("check_no_committed_secrets", ())]
+
     copied_examples: list[Path] = []
     for relative in example_relpaths:
         source = checkout_root / relative
@@ -62,6 +98,46 @@ def test_detects_token_like_assignments_without_flagging_examples(tmp_path: Path
         text = example.read_text(encoding="utf-8")
         assert text.splitlines().count("OPENROUTER_API_KEY=") == 1
         assert text.splitlines().count("OPENROUTER_MODEL=") == 1
+
+    assert secrets.scan_paths(copied_examples, tmp_path) == []
+    sentinel = "sk-or-v1-active-example-sentinel-for-test"
+    for example in copied_examples:
+        example.write_text(
+            example.read_text(encoding="utf-8").replace(
+                "OPENROUTER_API_KEY=",
+                f"OPENROUTER_API_KEY={sentinel}",
+            ),
+            encoding="utf-8",
+        )
+    pedagogical_env = (
+        tmp_path
+        / "03_progressions"
+        / "supports"
+        / "terminale"
+        / "T12"
+        / ".env.example"
+    )
+    pedagogical_env.parent.mkdir(parents=True)
+    pedagogical_env.write_text(
+        f"OPENROUTER_API_KEY={sentinel}\n",
+        encoding="utf-8",
+    )
+    unlisted_nested_env = tmp_path / "docs" / ".env.example"
+    unlisted_nested_env.parent.mkdir()
+    unlisted_nested_env.write_text(
+        f"OPENROUTER_API_KEY={sentinel}\n",
+        encoding="utf-8",
+    )
+
+    mutation_errors = secrets.scan_paths(
+        [*copied_examples, pedagogical_env, unlisted_nested_env],
+        tmp_path,
+    )
+
+    assert mutation_errors == [
+        f"{relative.as_posix()}: secret potentiel dans OPENROUTER_API_KEY"
+        for relative in sorted(example_relpaths)
+    ]
 
 
 def test_blank_secret_assignments_do_not_consume_next_line(tmp_path: Path) -> None:

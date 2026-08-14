@@ -1,11 +1,17 @@
 from __future__ import annotations
 
+import copy
 import csv
 import os
 import subprocess
 import sys
 import textwrap
 from pathlib import Path
+
+import pytest
+import yaml
+
+import scripts.check_rag_config as rag_config_check
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -52,7 +58,7 @@ def test_rag_env_example_uses_internal_corpus_without_real_secret() -> None:
     raw = (ROOT / ".env.rag.example").read_text(encoding="utf-8")
     values = env_example_map()
 
-    expected_non_llm = {
+    expected = {
         "RAG_BACKEND": "chroma",
         "RAG_API_BASE_URL": "https://rag-api.nexusreussite.academy/search",
         "RAG_API_KEY": "",
@@ -64,8 +70,12 @@ def test_rag_env_example_uses_internal_corpus_without_real_secret() -> None:
         "EMBEDDING_API_KEY": "",
         "VECTOR_DB_URL": "",
         "VECTOR_DB_API_KEY": "",
+        "OPENROUTER_API_KEY": "",
+        "OPENROUTER_MODEL": "",
+        "RAG_SSH_HOST": "88.99.254.59",
+        "RAG_SSH_USER": "root",
     }
-    assert {key: values.get(key) for key in expected_non_llm} == expected_non_llm
+    assert values == expected
     assert raw.splitlines().count("OPENROUTER_API_KEY=") == 1
     assert raw.splitlines().count("OPENROUTER_MODEL=") == 1
     assert values["OPENROUTER_API_KEY"] == ""
@@ -82,9 +92,79 @@ def test_rag_env_example_uses_internal_corpus_without_real_secret() -> None:
     assert ".env.rag" in (ROOT / ".gitignore").read_text(encoding="utf-8")
 
 
-def test_rag_config_and_smoke_scripts_are_safe_without_local_config() -> None:
+def test_rag_config_and_smoke_scripts_are_safe_without_local_config(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     config_result = run_script("scripts.check_rag_config")
     assert config_result.returncode == 0, config_result.stdout
+
+    env_example = tmp_path / ".env.rag.example"
+    base_env = (ROOT / ".env.rag.example").read_text(encoding="utf-8")
+    monkeypatch.setattr(rag_config_check, "ENV_EXAMPLE", env_example)
+    for mutation in (
+        "ANTHROPIC_API_KEY=sk-ant-forbidden-sentinel",
+        "OPENAI_BASE_URL=https://provider.invalid/v1/responses",
+    ):
+        env_example.write_text(f"{base_env}{mutation}\n", encoding="utf-8")
+        errors: list[str] = []
+        rag_config_check.validate_env_example(errors)
+        assert errors, f"mutation .env non rejetée: {mutation}"
+
+    config_example = tmp_path / "rag_config.example.yml"
+    base_config = yaml.safe_load(
+        (ROOT / "rag_config.example.yml").read_text(encoding="utf-8")
+    )
+    assert isinstance(base_config, dict)
+    monkeypatch.setattr(rag_config_check, "CONFIG_EXAMPLE", config_example)
+
+    config_example.write_text(
+        yaml.safe_dump(base_config, sort_keys=False),
+        encoding="utf-8",
+    )
+    base_errors: list[str] = []
+    rag_config_check.validate_yaml(base_errors)
+    assert base_errors == []
+
+    def mutate_internal_collection(key: str, value: object) -> dict[str, object]:
+        mutated = copy.deepcopy(base_config)
+        collections = mutated["collections"]
+        assert isinstance(collections, dict)
+        internal = collections["nsi_corpus"]
+        assert isinstance(internal, dict)
+        internal[key] = value
+        return mutated
+
+    yaml_mutations = {
+        "nested llm key with neutral value": mutate_internal_collection(
+            "llm",
+            "disabled",
+        ),
+        "nested provider key with neutral value": mutate_internal_collection(
+            "provider",
+            "disabled",
+        ),
+        "nested endpoint key with neutral value": mutate_internal_collection(
+            "endpoint",
+            "disabled",
+        ),
+        "deep openai value under neutral keys": mutate_internal_collection(
+            "role",
+            "openai",
+        ),
+        "deep responses URL under neutral keys": mutate_internal_collection(
+            "role",
+            "https://example.invalid/v1/responses",
+        ),
+    }
+    for label, mutated in yaml_mutations.items():
+        config_example.write_text(
+            yaml.safe_dump(mutated, sort_keys=False),
+            encoding="utf-8",
+        )
+        errors = []
+        rag_config_check.validate_yaml(errors)
+        assert errors, f"mutation YAML non rejetée: {label}"
 
     smoke_result = run_script(
         "scripts.rag_smoke_test",
