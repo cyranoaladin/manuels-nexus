@@ -2012,19 +2012,50 @@ python3 -m pytest -q -p no:cacheprovider \
   --junitxml "$EVIDENCE_ROOT/red-final-core.xml" \
   > "$EVIDENCE_ROOT/red-final-core.out" 2>&1
 RC_CORE=$?
+set -e
 cd "$IMPL_ROOT/Mathematiques/manuel-maths"
+set +e
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
 python3 -m pytest -q -p no:cacheprovider tests/test_ingest_openrouter.py \
   --junitxml "$EVIDENCE_ROOT/red-final-math.xml" \
   > "$EVIDENCE_ROOT/red-final-math.out" 2>&1
 RC_MATH=$?
+set -e
 cd "$IMPL_ROOT/NSI"
+set +e
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
 python3 -m pytest -q -p no:cacheprovider tests/test_ingest_openrouter.py \
   --junitxml "$EVIDENCE_ROOT/red-final-nsi.xml" \
   > "$EVIDENCE_ROOT/red-final-nsi.out" 2>&1
 RC_NSI=$?
-cd "$IMPL_ROOT/NSI/corpus_nsi"
+set -e
+CORPUS_SOURCE_REPORT=$IMPL_ROOT/NSI/corpus_nsi/01_build_reports/P05_substance_review.json
+test ! -e "$CORPUS_SOURCE_REPORT"
+CORPUS_RUN=$(mktemp -d /tmp/nexus-openrouter-red-final-corpus.XXXXXX)
+git clone --shared --no-checkout "$IMPL_ROOT" "$CORPUS_RUN/repo"
+SOURCE_SHA=$(git -C "$IMPL_ROOT" rev-parse HEAD)
+git -C "$CORPUS_RUN/repo" branch red-final-corpus "$SOURCE_SHA"
+git -C "$CORPUS_RUN/repo" symbolic-ref HEAD refs/heads/red-final-corpus
+git -C "$CORPUS_RUN/repo" read-tree -mu HEAD
+git -C "$IMPL_ROOT" diff --binary HEAD -- \
+  NSI/corpus_nsi/tests/test_rag_governance_and_indexes.py \
+  NSI/corpus_nsi/tests/test_secret_guard.py \
+  NSI/corpus_nsi/tests/test_substance_judge_pipeline.py \
+  NSI/corpus_nsi/tests/test_substance_hardened.py \
+  NSI/corpus_nsi/tests/test_judge_collection_barriers.py \
+  NSI/corpus_nsi/tests/test_policy_checker_ast.py \
+  NSI/corpus_nsi/tests/test_manifest_separation.py \
+  | git -C "$CORPUS_RUN/repo" apply
+set +e
+git -C "$IMPL_ROOT" diff --no-index --binary /dev/null \
+  NSI/corpus_nsi/tests/test_openrouter_judges.py \
+  > "$CORPUS_RUN/new-openrouter-judges.patch"
+RC_NEW_PATCH=$?
+set -e
+test "$RC_NEW_PATCH" -eq 1
+git -C "$CORPUS_RUN/repo" apply "$CORPUS_RUN/new-openrouter-judges.patch"
+cd "$CORPUS_RUN/repo/NSI/corpus_nsi"
+set +e
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL \
 python3 -m pytest -q -p no:cacheprovider \
   tests/test_rag_governance_and_indexes.py tests/test_secret_guard.py \
@@ -2035,6 +2066,8 @@ python3 -m pytest -q -p no:cacheprovider \
   > "$EVIDENCE_ROOT/red-final-corpus.out" 2>&1
 RC_CORPUS=$?
 set -e
+test ! -e "$CORPUS_SOURCE_REPORT"
+test -e "$CORPUS_RUN/repo/NSI/corpus_nsi/01_build_reports/P05_substance_review.json"
 test "$RC_CORE" -eq 1
 test "$RC_MATH" -eq 1
 test "$RC_NSI" -eq 1
@@ -2090,11 +2123,17 @@ allowed = {
     "NSI/corpus_nsi/tests/test_judge_collection_barriers.py",
     "NSI/corpus_nsi/tests/test_policy_checker_ast.py",
 }
+ignored = "NSI/corpus_nsi/tests/test_openrouter_judges.py"
 actual = set(subprocess.check_output(
     ["git", "status", "--porcelain=v1"], text=True
 ).splitlines())
 paths = {line[3:] for line in actual}
-assert paths == allowed, (paths - allowed, allowed - paths)
+assert paths == allowed - {ignored}, (paths - allowed, allowed - paths)
+ignored_status = subprocess.check_output(
+    ["git", "status", "--porcelain=v1", "--ignored=matching", "--", ignored],
+    text=True,
+).splitlines()
+assert ignored_status == [f"!! {ignored}"], ignored_status
 PY
 git diff --check
 ```
@@ -2112,7 +2151,8 @@ git add -- \
   tests/test_openrouter_classification.py \
   tests/test_external_provider_policy.py \
   Mathematiques/manuel-maths/tests/test_ingest_openrouter.py \
-  NSI/tests/test_ingest_openrouter.py \
+  NSI/tests/test_ingest_openrouter.py
+git add -f -- \
   NSI/corpus_nsi/tests/test_openrouter_judges.py \
   NSI/corpus_nsi/tests/test_manifest_separation.py \
   NSI/corpus_nsi/tests/test_rag_governance_and_indexes.py \
@@ -2122,6 +2162,8 @@ git add -- \
   NSI/corpus_nsi/tests/test_judge_collection_barriers.py \
   NSI/corpus_nsi/tests/test_policy_checker_ast.py
 git diff --cached --name-only | sort
+test "$(git diff --cached --name-only | wc -l)" -eq 13
+test -z "$(git diff --name-only)"
 git diff --cached --check
 git diff --cached --stat
 ```
@@ -2136,13 +2178,49 @@ IMPL_ROOT=/home/alaeddine/Documents/Manuels_Nexus/.worktrees/green-openrouter-on
 RUN_TMP=$(mktemp -d /tmp/nexus-openrouter-red-staged.XXXXXX)
 cd "$IMPL_ROOT"; set +e
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL python3 -m pytest -q -p no:cacheprovider tests/test_openrouter_client.py tests/test_openrouter_classification.py tests/test_external_provider_policy.py --junitxml "$RUN_TMP/core.xml"; RC_CORE=$?
+set -e
 cd "$IMPL_ROOT/Mathematiques/manuel-maths"
+set +e
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL python3 -m pytest -q -p no:cacheprovider tests/test_ingest_openrouter.py --junitxml "$RUN_TMP/math.xml"; RC_MATH=$?
+set -e
 cd "$IMPL_ROOT/NSI"
+set +e
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL python3 -m pytest -q -p no:cacheprovider tests/test_ingest_openrouter.py --junitxml "$RUN_TMP/nsi.xml"; RC_NSI=$?
-cd "$IMPL_ROOT/NSI/corpus_nsi"
+set -e
+CORPUS_SOURCE_REPORT=$IMPL_ROOT/NSI/corpus_nsi/01_build_reports/P05_substance_review.json
+test ! -e "$CORPUS_SOURCE_REPORT"
+CORPUS_RUN=$(mktemp -d /tmp/nexus-openrouter-red-staged-corpus.XXXXXX)
+git clone --shared --no-checkout "$IMPL_ROOT" "$CORPUS_RUN/repo"
+SOURCE_SHA=$(git -C "$IMPL_ROOT" rev-parse HEAD)
+git -C "$CORPUS_RUN/repo" branch red-staged-corpus "$SOURCE_SHA"
+git -C "$CORPUS_RUN/repo" symbolic-ref HEAD refs/heads/red-staged-corpus
+git -C "$CORPUS_RUN/repo" read-tree -mu HEAD
+git -C "$IMPL_ROOT" diff --cached --binary HEAD -- \
+  NSI/corpus_nsi/tests/test_rag_governance_and_indexes.py \
+  NSI/corpus_nsi/tests/test_secret_guard.py \
+  NSI/corpus_nsi/tests/test_openrouter_judges.py \
+  NSI/corpus_nsi/tests/test_substance_judge_pipeline.py \
+  NSI/corpus_nsi/tests/test_substance_hardened.py \
+  NSI/corpus_nsi/tests/test_judge_collection_barriers.py \
+  NSI/corpus_nsi/tests/test_policy_checker_ast.py \
+  NSI/corpus_nsi/tests/test_manifest_separation.py \
+  | git -C "$CORPUS_RUN/repo" apply
+git -C "$CORPUS_RUN/repo" add -f -- \
+  NSI/corpus_nsi/tests/test_openrouter_judges.py \
+  NSI/corpus_nsi/tests/test_rag_governance_and_indexes.py \
+  NSI/corpus_nsi/tests/test_secret_guard.py \
+  NSI/corpus_nsi/tests/test_substance_judge_pipeline.py \
+  NSI/corpus_nsi/tests/test_substance_hardened.py \
+  NSI/corpus_nsi/tests/test_judge_collection_barriers.py \
+  NSI/corpus_nsi/tests/test_policy_checker_ast.py \
+  NSI/corpus_nsi/tests/test_manifest_separation.py
+test "$(git -C "$CORPUS_RUN/repo" diff --cached --name-only | wc -l)" -eq 8
+cd "$CORPUS_RUN/repo/NSI/corpus_nsi"
+set +e
 env -u OPENROUTER_API_KEY -u OPENROUTER_MODEL -u ANTHROPIC_API_KEY -u LOCAL_LLM_BASE_URL python3 -m pytest -q -p no:cacheprovider tests/test_rag_governance_and_indexes.py tests/test_secret_guard.py tests/test_openrouter_judges.py tests/test_substance_judge_pipeline.py tests/test_substance_hardened.py tests/test_judge_collection_barriers.py tests/test_policy_checker_ast.py tests/test_manifest_separation.py --junitxml "$RUN_TMP/corpus.xml"; RC_CORPUS=$?
 set -e
+test ! -e "$CORPUS_SOURCE_REPORT"
+test -e "$CORPUS_RUN/repo/NSI/corpus_nsi/01_build_reports/P05_substance_review.json"
 test "$RC_CORE" -eq 1; test "$RC_MATH" -eq 1; test "$RC_NSI" -eq 1; test "$RC_CORPUS" -eq 1
 python3 - "$RUN_TMP" <<'PY'
 import sys, xml.etree.ElementTree as ET
