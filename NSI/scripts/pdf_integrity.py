@@ -52,7 +52,10 @@ def log_has_missing_asset_warning(log: str) -> bool:
 
 
 def log_has_missing_character_warning(log: str) -> bool:
-    return MISSING_CHARACTER in log
+    for line in log.splitlines():
+        if MISSING_CHARACTER in line and "in font nullfont!" not in line:
+            return True
+    return False
 
 
 def fonts_are_embedded(output: str) -> bool:
@@ -79,6 +82,9 @@ def verify_pdf(
         print(f"Gabarit Nexus absent : {log}")
         return 1
     if log_has_missing_character_warning(log_text):
+        for line in log_text.splitlines():
+            if MISSING_CHARACTER in line:
+                print(f"Glyphe manquant detail : {line}")
         print(f"Glyphe manquant dans le PDF : {log}")
         return 1
     try:
@@ -151,7 +157,13 @@ def book_preflight_issues(
         issues.append(f"Journal LaTeX introuvable : {log}")
         log_text = ""
     for diagnostic in BOOK_LOG_DIAGNOSTICS:
-        if diagnostic.lower() in log_text.lower():
+        if diagnostic == MISSING_CHARACTER:
+            if log_has_missing_character_warning(log_text):
+                issues.append(f"Diagnostic LaTeX interdit : {diagnostic}")
+        elif diagnostic == MISSING_ASSET:
+            if log_has_missing_asset_warning(log_text):
+                issues.append(f"Diagnostic LaTeX interdit : {diagnostic}")
+        elif diagnostic.lower() in log_text.lower():
             issues.append(f"Diagnostic LaTeX interdit : {diagnostic}")
 
     if fitz is not None:
