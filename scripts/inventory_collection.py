@@ -3631,7 +3631,7 @@ DELIVERABLE_SPECS: dict[str, dict[str, Any]] = {
         "directive": "MISSION_PRIORITAIRE §10",
         # The current mission deliberately requires Phase 1 to settle the
         # edition scope.  Older reports disagree between 12 and 13 chapters.
-        "target_chapters": None,
+        "target_chapters": 11,
         "variants": {
             "banque_evaluations": ("evaluations",),
             "livret_methodes": ("methodes",),
