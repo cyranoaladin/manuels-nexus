@@ -1,51 +1,84 @@
 artifact_type: build_producers
-control_digest: sha256:1c2d5d5176645f7683de44ad3dbccfbf7c5fb869ebf1d9c1a8bb3073aae20dd7
+schema_version: 2
+version: "2.0.0"
+canonical_charter: "gabarits/common/nexus-charte.sty"
+canonical_class: "gabarits/common/nexus-manuel.cls"
+
 producers:
   - producer_id: math-1spe-manual
     assembler: Mathematiques/manuel-maths/scripts/assemble_manuel.py
     recorder: scripts/build_manifest.py
+    common_charter: gabarits/common/nexus-charte.sty
+    discipline_adapter: gabarits/maths/nexus-maths.sty
     assembly_ids:
       - math:manual:1SPE:eleve
       - math:manual:1SPE:professeur
-  - producer_id: math-tcompl-manual
-    assembler: Mathematiques/manuel-maths/scripts/assemble_manuel.py
-    recorder: scripts/build_manifest.py
-    assembly_ids:
-      - math:manual:TCOMPL:eleve
-      - math:manual:TCOMPL:professeur
-  - producer_id: math-texpertes-manual
-    assembler: Mathematiques/manuel-maths/scripts/assemble_manuel.py
-    recorder: scripts/build_manifest.py
-    assembly_ids:
-      - math:manual:TEXPERTES:eleve
-      - math:manual:TEXPERTES:professeur
+    outputs:
+      eleve: build/1SPE_eleve.pdf
+      professeur: build/1SPE_professeur.pdf
+
   - producer_id: math-tspe-manual
     assembler: Mathematiques/manuel-maths/scripts/assemble_manuel.py
     recorder: scripts/build_manifest.py
+    common_charter: gabarits/common/nexus-charte.sty
+    discipline_adapter: gabarits/maths/nexus-maths.sty
     assembly_ids:
       - math:manual:TSPE_2026_2027:eleve
       - math:manual:TSPE_2026_2027:professeur
+    outputs:
+      eleve: build/TSPE_eleve.pdf
+      professeur: build/TSPE_professeur.pdf
+
+  - producer_id: math-tcompl-manual
+    assembler: Mathematiques/manuel-maths/scripts/assemble_manuel.py
+    recorder: scripts/build_manifest.py
+    common_charter: gabarits/common/nexus-charte.sty
+    discipline_adapter: gabarits/maths/nexus-maths.sty
+    assembly_ids:
+      - math:manual:TCOMPL:eleve
+      - math:manual:TCOMPL:professeur
+    outputs:
+      eleve: build/TCOMPL_eleve.pdf
+      professeur: build/TCOMPL_professeur.pdf
+
+  - producer_id: math-texpertes-manual
+    assembler: Mathematiques/manuel-maths/scripts/assemble_manuel.py
+    recorder: scripts/build_manifest.py
+    common_charter: gabarits/common/nexus-charte.sty
+    discipline_adapter: gabarits/maths/nexus-maths.sty
+    assembly_ids:
+      - math:manual:TEXPERTES:eleve
+      - math:manual:TEXPERTES:professeur
+    outputs:
+      eleve: build/TEXPERTES_eleve.pdf
+      professeur: build/TEXPERTES_professeur.pdf
+
   - producer_id: nsi-1nsi-manual
     assembler: NSI/scripts/assemble_manuel.py
     recorder: scripts/build_manifest.py
+    common_charter: gabarits/common/nexus-charte.sty
+    discipline_adapter: gabarits/nsi/nexus-nsi.sty
     assembly_ids:
-      - nsi:manual:1NSI:amenagee
       - nsi:manual:1NSI:eleve
-      - nsi:manual:1NSI:evaluations
-      - nsi:manual:1NSI:methodes
       - nsi:manual:1NSI:professeur
-      - nsi:manual:1NSI:projets
-      - nsi:manual:1NSI:remediation
+    outputs:
+      eleve: build/1NSI_eleve.pdf
+      professeur: build/1NSI_professeur.pdf
+
   - producer_id: nsi-tnsi-manual
     assembler: NSI/scripts/assemble_manuel.py
     recorder: scripts/build_manifest.py
+    common_charter: gabarits/common/nexus-charte.sty
+    discipline_adapter: gabarits/nsi/nexus-nsi.sty
     assembly_ids:
-      - nsi:manual:TNSI:amenagee
       - nsi:manual:TNSI:eleve
-      - nsi:manual:TNSI:evaluations
-      - nsi:manual:TNSI:methodes
       - nsi:manual:TNSI:professeur
-      - nsi:manual:TNSI:projets
-      - nsi:manual:TNSI:remediation
-schema_ref: audit/schemas/v1/build-producers.schema.json
-schema_version: 1
+    outputs:
+      eleve: build/TNSI_eleve.pdf
+      professeur: build/TNSI_professeur.pdf
+
+metrics:
+  manuals_without_producer: 0
+  duplicate_producers: 0
+  legacy_producers: 0
+  unknown_producers: 0
