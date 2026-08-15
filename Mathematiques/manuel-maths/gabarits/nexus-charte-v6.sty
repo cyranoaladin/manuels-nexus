@@ -1,8 +1,12 @@
-% Redirection canonique vers le module unique gabarits/common/nexus-charte.sty
+% Redirection canonique vers gabarits/common/nexus-charte.sty
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{gabarits/nexus-charte-v6}[2026/07/20 v6.0 Wrapper Compatibilite Charte - Canonique]
+\ProvidesPackage{nexus-charte-v6}[2026/07/20 v6.0 Wrapper Compatibilite nexus-charte-v6 - Canonique]
 \IfFileExists{gabarits/common/nexus-charte.sty}{%
   \RequirePackage{gabarits/common/nexus-charte}%
 }{%
-  \RequirePackage{../../gabarits/common/nexus-charte}%
+  \IfFileExists{../../gabarits/common/nexus-charte.sty}{%
+    \RequirePackage{../../gabarits/common/nexus-charte}%
+  }{%
+    \RequirePackage{nexus-charte}%
+  }%
 }

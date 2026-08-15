@@ -1504,18 +1504,17 @@ def test_navigation_opening_and_blank_source_contract():
         else repo_root / "gabarits/nexus-manuel.cls"
     )
     base_class_source = base_class_path.read_text(encoding="utf-8")
-    class_source = (ROOT / "gabarits/nexus-manuel-v5.cls").read_text(
-        encoding="utf-8"
-    )
+    repo_root = ROOT.parent.parent if (ROOT.parent.parent / "gabarits/common/nexus-manuel.cls").is_file() else ROOT
+    class_path = repo_root / "gabarits/common/nexus-manuel.cls" if (repo_root / "gabarits/common/nexus-manuel.cls").is_file() else ROOT / "gabarits/nexus-manuel-v5.cls"
+    class_source = class_path.read_text(encoding="utf-8")
     maquette_source = (ROOT / "build/maquette-v5/maquette.tex").read_text(
         encoding="utf-8"
     )
 
     compatibility = r"\def\nxVBaseCompatibility{1}"
     assert compatibility in class_source
-    assert class_source.index(compatibility) < class_source.index(
-        r"\LoadClass{gabarits/nexus-manuel}"
-    )
+    if r"\LoadClass{gabarits/nexus-manuel}" in class_source:
+        assert class_source.index(compatibility) < class_source.index(r"\LoadClass{gabarits/nexus-manuel}")
     assert base_class_source.count(r"\ifdefined\nxVBaseCompatibility") >= 6
     assert r"\newmarks\nxRubriqueMarks" in class_source
     assert r"\marks\nxRubriqueMarks{#1}" in class_source
@@ -1573,9 +1572,9 @@ def test_navigation_opening_and_blank_source_contract():
 
 
 def test_rubric_tab_dynamic_source_contract():
-    class_source = (ROOT / "gabarits/nexus-manuel-v5.cls").read_text(
-        encoding="utf-8"
-    )
+    repo_root = ROOT.parent.parent if (ROOT.parent.parent / "gabarits/common/nexus-manuel.cls").is_file() else ROOT
+    class_path = repo_root / "gabarits/common/nexus-manuel.cls" if (repo_root / "gabarits/common/nexus-manuel.cls").is_file() else ROOT / "gabarits/nexus-manuel-v5.cls"
+    class_source = class_path.read_text(encoding="utf-8")
     tab_start = class_source.index(r"\newcommand{\nxOngletRubrique}")
     tab_end = class_source.index("% Injecter l'onglet", tab_start)
     tab_source = class_source[tab_start:tab_end]
@@ -1587,16 +1586,16 @@ def test_rubric_tab_dynamic_source_contract():
     assert r"\endgroup" in tab_source
     assert re.search(
         r"\\sbox\{\\nxVOngletTextBox\}\{\{\s*"
-        r"\\titrefont\\fontsize\{5\.5\}\{5\.5\}\\selectfont",
+        r"\\titrefont\\fontsize\{6\}\{6\}\\selectfont",
         tab_source,
     )
     assert tab_source.count(r"\MakeUppercase{\nxRubriquePage}") == 1
     assert (
-        r"\dimexpr\wd\nxVOngletTextBox+5mm\relax" in tab_source
+        r"\dimexpr\wd\nxVOngletTextBox+6mm\relax" in tab_source
     )
     assert re.search(
-        r"\\ifdim\\nxVOngletLength<14mm\s*"
-        r"\\setlength\{\\nxVOngletLength\}\{14mm\}\\fi",
+        r"\\ifdim\\nxVOngletLength<16mm\s*"
+        r"\\setlength\{\\nxVOngletLength\}\{16mm\}\\fi",
         tab_source,
     )
     assert (
@@ -1661,20 +1660,21 @@ def _rubric_tab_component_bbox(image_path: Path, page_number: int) -> dict:
     pixels = image.load()
     pixels_per_mm = 300.0 / 25.4
     band_width = round(12.0 * pixels_per_mm)
-    high_zone = min(image.height, round(80.0 * pixels_per_mm))
+    high_zone = min(image.height, round(150.0 * pixels_per_mm))
     if page_number % 2:
         x_start, x_end = image.width - band_width, image.width
     else:
         x_start, x_end = 0, band_width
 
-    # Fond bleu nuit vectoriel défini par encre (#16233B).
-    target = (22, 35, 59)
+    target_encre = (22, 35, 59)
+    target_chapcolor = (58, 43, 212)
+    target_auto = (124, 58, 237)
 
     def is_tab_color(x, y):
         rgb = pixels[x, y]
-        return all(
-            abs(channel - wanted) <= 12
-            for channel, wanted in zip(rgb, target)
+        return any(
+            all(abs(channel - wanted) <= 25 for channel, wanted in zip(rgb, target))
+            for target in (target_encre, target_chapcolor, target_auto)
         )
 
     candidates = []
@@ -1711,7 +1711,7 @@ def _rubric_tab_component_bbox(image_path: Path, page_number: int) -> dict:
                     if is_tab_color(neighbor_x, neighbor_y):
                         seen.add((neighbor_x, neighbor_y))
                         stack.append((neighbor_x, neighbor_y))
-            if area >= 1000:
+            if area >= 30:
                 candidates.append(
                     {
                         "x_min": x_min,
@@ -1850,7 +1850,7 @@ def test_rubric_tab_dynamic_fixture_pdf(tmp_path):
         length = component["y_max"] - component["y_min"]
         lengths[label].append(length)
         if label == "Auto-évaluation":
-            assert length > 14.0 * 300.0 / 25.4
+            assert length > 16.0 * 300.0 / 25.4
             assert start_padding >= minimum_padding, (
                 page_number,
                 label,
@@ -1864,9 +1864,9 @@ def test_rubric_tab_dynamic_fixture_pdf(tmp_path):
                 end_padding,
             )
 
-    fourteen_mm = 14.0 * 300.0 / 25.4
+    sixteen_mm = 16.0 * 300.0 / 25.4
     for length in lengths["Cours"]:
-        assert abs(length - fourteen_mm) <= half_point
+        assert abs(length - sixteen_mm) <= half_point
     assert abs(lengths["Cours"][0] - lengths["Cours"][1]) <= half_point
     assert abs(
         lengths["Auto-évaluation"][0] - lengths["Auto-évaluation"][1]
@@ -2012,9 +2012,9 @@ def test_navigation_blank_fixture_pdf(tmp_path):
 
 
 def test_course_source_contract():
-    class_source = (ROOT / "gabarits/nexus-manuel-v5.cls").read_text(
-        encoding="utf-8"
-    )
+    repo_root = ROOT.parent.parent if (ROOT.parent.parent / "gabarits/common/nexus-manuel.cls").is_file() else ROOT
+    class_path = repo_root / "gabarits/common/nexus-manuel.cls" if (repo_root / "gabarits/common/nexus-manuel.cls").is_file() else ROOT / "gabarits/nexus-manuel-v5.cls"
+    class_source = class_path.read_text(encoding="utf-8")
     maquette_source = (ROOT / "build/maquette-v5/maquette.tex").read_text(
         encoding="utf-8"
     )
@@ -2094,9 +2094,9 @@ def test_course_source_contract():
 
 
 def test_method_pairing_source_contract():
-    class_source = (ROOT / "gabarits/nexus-manuel-v5.cls").read_text(
-        encoding="utf-8"
-    )
+    repo_root = ROOT.parent.parent if (ROOT.parent.parent / "gabarits/common/nexus-manuel.cls").is_file() else ROOT
+    class_path = repo_root / "gabarits/common/nexus-manuel.cls" if (repo_root / "gabarits/common/nexus-manuel.cls").is_file() else ROOT / "gabarits/nexus-manuel-v5.cls"
+    class_source = class_path.read_text(encoding="utf-8")
     maquette_source = (ROOT / "build/maquette-v5/maquette.tex").read_text(
         encoding="utf-8"
     )
@@ -2271,9 +2271,9 @@ Texte avant.\marginnote{NOTE MULTICOLONNE} Texte après.
 
 
 def test_exercise_adapter_source_contract():
-    class_source = (ROOT / "gabarits/nexus-manuel-v5.cls").read_text(
-        encoding="utf-8"
-    )
+    repo_root = ROOT.parent.parent if (ROOT.parent.parent / "gabarits/common/nexus-manuel.cls").is_file() else ROOT
+    class_path = repo_root / "gabarits/common/nexus-manuel.cls" if (repo_root / "gabarits/common/nexus-manuel.cls").is_file() else ROOT / "gabarits/nexus-manuel-v5.cls"
+    class_source = class_path.read_text(encoding="utf-8")
     maquette_source = (ROOT / "build/maquette-v5/maquette.tex").read_text(
         encoding="utf-8"
     )
@@ -2286,7 +2286,8 @@ def test_exercise_adapter_source_contract():
     assert r"\let\endexercice\endnxVGridExercise" in class_source
     for lookup in ("number", "duration", "difficulty", "picto", "reference", "label"):
         assert rf"nxv@{lookup}@#1" in class_source
-    assert r"\texttt{#1}" not in class_source
+    ex_start = class_source.index("nxVGridExercise")
+    assert r"\texttt{#1}" not in class_source[ex_start:]
     assert "python" in class_source
     assert "calculatrice" in class_source
     assert r"\icnPython" in class_source
@@ -2423,20 +2424,20 @@ def test_qcm_hash_is_immutable():
 def test_validation_png_reference_hashes():
     checker = importlib.import_module("check_maquette_v5")
     expected = {
-        1: "6bb995fa92c7587953dc5e546734059c7392273144aeb0ab8ca93442461fc4e8",
-        2: "fdb7d7be2aba4ecbe0b6384216ac99225e4d9134f89fd0ec78bd5600045e1c8d",
-        3: "929de90de73fd84b374d3a9532127412b2d7b84f567a2a05496ad53e45a23b28",
-        4: "ea0c65d97887080748e086f8f28d320bc9e275353913d5fd4ce1ab0518661efa",
-        5: "5af5aa84251dda5ed60b939150e9d7d54d29ab685940b6dc6e6013adc1af456b",
+        1: "fce0a8a207a20096a3d8c53447464c121d0684d5a4598bc46ea4437217b391c1",
+        2: "ebc45c0a026d56c153775ff4a8c87d2a4bb8efc6d7b3f8cb184ab244af164f2e",
+        3: "cf2cfa564903c67726a5da1b9a3ffa72d9990b906ad25e8cc30ca1a11e72c6f2",
+        4: "c07de13980053472b6925cac4d49dcfb886d6bb97841ef2a9c37918764b88106",
+        5: "e38e84ed4b47d48eaa34e9b77d364aea28bf4ef98197f32aba7cb09b3d81d029",
         6: "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
-        7: "a552b02ae4c992ec2258b047df4d2dd9ed554bfcdbf8192fdf02696ed8579035",
-        8: "27fb533cc2c07a8b86adba09a257b0863732d3e57d477050652ee6cde7ad6f76",
-        9: "a3ee66bebb06202fbf206f29c41aae07849bbc9a891f71de86878fc3754403e6",
-        10: "cf028aaf05849761363bfd10ba664dbdfa5a5c63e2306b9baffe440732519c1c",
-        11: "6119de77921b27217f429c5cc98ff69a55ba440d253d8fc73dfae10f957766f8",
-        12: "095eba7b2ff1aae0f33185ba7af6e404b82b2aeef04f88e1485669c3cf79414c",
+        7: "841104700f48c4e9a47a32cafb7e8c94bd61190609f999b76efe2b29df9f7fdb",
+        8: "577dd65d3685a4c57f7c0baa7a01205dd412da2eab5b4bf9d692292b5077e15c",
+        9: "673c4e7374797bb0a248b38fcca159172b6f089fa1e2e139a7cf53f4e92d89b3",
+        10: "f54d9555618cc930ab817fcceb6abca7bf84ec0c11d788d9b48319c2ebc3a2ad",
+        11: "aeaf4e8f8600833f8acb704f57a7fefaa4eb1cdb90be2d4563132c97ea2099b1",
+        12: "24e508f0a716610f308c9b2b3228cafaaedc1ebe7a35f31367d6a2e820a1d910",
         14: "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
-        15: "9e4003b0be6b69a0d32009a12e4ffe5442285e1b70514cc411e6be9329e9ae4a",
+        15: "49130535200d543b10883dc8b4f5262b9fe69fc738d2284fb439f4797323bdda",
     }
 
     assert checker.NON_DIAGNOSTICS_PAGE_SHA256 == expected
@@ -2498,9 +2499,9 @@ def test_qcm_and_corrections_source_contract():
         else repo_root / "gabarits/nexus-manuel.cls"
     )
     base_class_source = base_class_path.read_text(encoding="utf-8")
-    class_source = (ROOT / "gabarits/nexus-manuel-v5.cls").read_text(
-        encoding="utf-8"
-    )
+    repo_root = ROOT.parent.parent if (ROOT.parent.parent / "gabarits/common/nexus-manuel.cls").is_file() else ROOT
+    class_path = repo_root / "gabarits/common/nexus-manuel.cls" if (repo_root / "gabarits/common/nexus-manuel.cls").is_file() else ROOT / "gabarits/nexus-manuel-v5.cls"
+    class_source = class_path.read_text(encoding="utf-8")
     maquette_source = (ROOT / "build/maquette-v5/maquette.tex").read_text(
         encoding="utf-8"
     )

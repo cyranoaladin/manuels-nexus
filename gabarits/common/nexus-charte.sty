@@ -248,18 +248,27 @@
   }%
 }
 
-% ===========================================================================
-%  4. MODULES DE LA CHARTE
-% ===========================================================================
-\RequirePackage{gabarits/common/nexus-couverture}
-\RequirePackage{gabarits/common/nexus-pages-froides}
-\RequirePackage{gabarits/common/nexus-figures-bib}
-\RequirePackage{gabarits/common/nexus-boites}
-\RequirePackage{gabarits/common/nexus-exercices}
-\RequirePackage{gabarits/common/nexus-decor}
+\newcommand{\nxRequireCommonModule}[1]{%
+  \IfFileExists{gabarits/common/#1.sty}{%
+    \RequirePackage{gabarits/common/#1}%
+  }{%
+    \IfFileExists{../../gabarits/common/#1.sty}{%
+      \RequirePackage{../../gabarits/common/#1}%
+    }{%
+      \RequirePackage{#1}%
+    }%
+  }%
+}
+
+\nxRequireCommonModule{nexus-couverture}
+\nxRequireCommonModule{nexus-pages-froides}
+\nxRequireCommonModule{nexus-figures-bib}
+\nxRequireCommonModule{nexus-boites}
+\nxRequireCommonModule{nexus-exercices}
+\nxRequireCommonModule{nexus-decor}
 
 % Le pont vient en dernier : il redefinit des environnements que les modules
 % ci-dessus doivent avoir fini de declarer.
 \ifnxSixPont
-  \RequirePackage{gabarits/common/nexus-pont}
+  \nxRequireCommonModule{nexus-pont}
 \fi

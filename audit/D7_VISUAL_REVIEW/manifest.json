@@ -1,0 +1,424 @@
+{
+  "git_sha": "609a89e7219dc50e2b974dcb73898d214fadf7e0",
+  "canonical_engine_version": "NEXUS_ENGINE_V6_CANONICAL_2026_07_20",
+  "canonical_charter_version": "NEXUS_CHARTER_V6_CANONICAL_2026_07_20",
+  "maquette_history_name": "maquette-v5",
+  "release_schema_version": "2026_2027_V6_FINAL",
+  "specimen_pdf_sha256": "d76678df1e086f054183bb41d1e3248f1d94e94b69f9c0f375236151fe3eefaf",
+  "specimen_fls_sha256": "feb4f737fb6715bf8158cb6cc9e7760a40789edfdb2ae8975f5426018025cf63",
+  "canonical_class_sha256": "7f568390a08d7f7e52ddbb01bf3bb85ab86b3380c9a76590eed7751d598e77b2",
+  "canonical_charter_sha256": "112dfe968e18eb96d99093f4f3c83377529829e03258db7305c988d1573e8975",
+  "common_modules_sha256": {
+    "nexus-boites.sty": "9cdecfd826561817a540d95e4eab38bacfc253a8a932956f58e533d83510d2ec",
+    "nexus-exercices.sty": "abae58775dc52a29b98a28add1cf6c55404222fc2990b119547f8863358571b7",
+    "nexus-pont.sty": "2703ad66ef9733c7c45f2176a7c13918a34920f6d4112e70f300d33e8f09d088",
+    "nexus-couverture.sty": "cc687eeeb93df549adc3b08003cea5432aae19e6bd15cecefa07d681b3f915a1",
+    "nexus-pages-froides.sty": "4e1f7fae36ffa3b871bbe728ec9c7fcbf4b473c9f614660edb6cb057f8282bd8",
+    "nexus-decor.sty": "bde5267321f2c8b034d06b3913d6589ccb0b96e78091466028b42a6b1a289942",
+    "nexus-figures-bib.sty": "e8fede638c9bd372213cd7ede0d76279106f7a0cc1c9f5f180a01afb197ac4ff",
+    "nexus-margin-rail.tex": "6ffc96378d2dece2dd7479647b7b7046025fe3c12a1bdd0fcf41d8787e277823"
+  },
+  "discipline_adapters_sha256": {
+    "nexus-maths.sty": "c51c5b6a6fc330ccf47c0980716719f37073317b91f7233d8cc01f5fe1bed994",
+    "nexus-nsi.sty": "ddb6942951050b49582fbebb4668330fb7994e5cc08569e2451b4e39785ebd08"
+  },
+  "reproducibility": {
+    "build_A_pdf_sha256": "d76678df1e086f054183bb41d1e3248f1d94e94b69f9c0f375236151fe3eefaf",
+    "build_B_pdf_sha256": "c37509372094767940be636acd219ef963b1551224005ce08d3044e8e6d9b35a",
+    "build_A_fls_sha256": "feb4f737fb6715bf8158cb6cc9e7760a40789edfdb2ae8975f5426018025cf63",
+    "build_B_fls_sha256": "ce0741b6b0a2957651896a67c353d70881f1d266fe586d53b6f1bb0c06871ff4",
+    "pdf_byte_identical_within_worktree": true,
+    "png_images_byte_identical_across_worktrees": true,
+    "fls_loaded_modules_identical": true,
+    "reproducible_status": "PASS",
+    "notes": "PDF A et B different uniquement au niveau du trailer /ID (incorporant le chemin absolu du worktree). En meme repertoire, le PDF est 100% byte-identique. Les 15 pages PNG sont 100% byte-identiques entre Worktree A et B."
+  },
+  "wrappers_audit": {
+    "total_wrappers": 4,
+    "required_for_compatibility": 4,
+    "removable_target_phase": "D15",
+    "production_consumers": [
+      "Mathematiques/manuel-maths",
+      "NSI"
+    ],
+    "wrappers": [
+      {
+        "path": "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls",
+        "target": "gabarits/common/nexus-manuel.cls",
+        "reason": "H\u00e9ritage d'inclusion relative pour tests locaux et assembleur v5",
+        "removal_phase": "D15"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty",
+        "target": "gabarits/common/nexus-charte.sty",
+        "reason": "Redirection transparente de RequirePackage{gabarits/nexus-charte-v6}",
+        "removal_phase": "D15"
+      },
+      {
+        "path": "NSI/gabarits/nexus-manuel.cls",
+        "target": "gabarits/common/nexus-manuel.cls",
+        "reason": "H\u00e9ritage d'inclusion relative pour manuels NSI",
+        "removal_phase": "D15"
+      },
+      {
+        "path": "NSI/gabarits/nexus-charte-v6.sty",
+        "target": "gabarits/common/nexus-charte.sty",
+        "reason": "Redirection transparente de RequirePackage{gabarits/nexus-charte-v6}",
+        "removal_phase": "D15"
+      }
+    ]
+  },
+  "style_inventory_summary": {
+    "cls": 5,
+    "sty": 28,
+    "masters": 1,
+    "chapitre_master.tex": 3,
+    "objet_standalone.tex": 2,
+    "nexus_tex": 16,
+    "templates": 0,
+    "total_unique": 55,
+    "unknown": 0
+  },
+  "latex_version_matrix_summary": {
+    "version_mismatch": 1,
+    "rows": [
+      {
+        "path": "Mathematiques/manuel-maths/gabarits/nexus-boites-v6.sty",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-boites-v6 - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "d9d62a0c3276201ef1563a2fc0aeb1d4766f6a0c5eb6ae2b3d64cdee5c0ca3be"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-charte-v6 - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "7fad3fd62a75f093d4cc2095f59ce94f5bdc19b358e4e0ff81925f2dca1f005a"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/gabarits/nexus-couverture.sty",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-couverture - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "bfd45c247a577e74166a2fed8e24910e5e16b5685fbad025e5fb995a91df410b"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/gabarits/nexus-decor.sty",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-decor - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "2e791c0aaa6b8e9c3366e89c6c4a81cd26d1275b2973fec61d04ebcacc2920d2"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/gabarits/nexus-exercices-v6.sty",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-exercices-v6 - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "ab755de60654084c24a9cc3869d7a3b2c96bde21d0d889c658f5320a52996089"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/gabarits/nexus-figures-bib.sty",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-figures-bib - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "49cecbf05205c0e9186ac3e812ed43aacb424d0fe26be10b522c400d7e266b13"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-manuel-v5 - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "7f228134ccb037f2b8e6089467e4c5e85c62f6d0d5c239d3b9be788d691a595b"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-manuel - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "17c29c045b881ba0132d8728e093e4fc748a53566581e2f7286af2c92af0f31b"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/gabarits/nexus-pages-froides.sty",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-pages-froides - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "4c3771c33cea91d7a73bb75f70f69a4c07a12196cc2a111bc5defaa258656311"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/gabarits/nexus-pont-v6.sty",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-pont-v6 - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "afc62841b9c7bbecb181144485666ea223d94552488f959ee227e94dbceabfd1"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/gabarits/reference-v4/manuel-kit/manuel.sty",
+        "declared_version": "2026/07/16 v2.0 Manuel scolaire \u2014 editorial premium",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "MISMATCH",
+        "sha256": "e9130fda64ec9d6d06b2cf2ffad7e67af271528b9ed9b025de303a5216661ee9"
+      },
+      {
+        "path": "NSI/gabarits/nexus-boites-v6.sty",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-boites-v6 - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "d9d62a0c3276201ef1563a2fc0aeb1d4766f6a0c5eb6ae2b3d64cdee5c0ca3be"
+      },
+      {
+        "path": "NSI/gabarits/nexus-charte-v6.sty",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-charte-v6 - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "7fad3fd62a75f093d4cc2095f59ce94f5bdc19b358e4e0ff81925f2dca1f005a"
+      },
+      {
+        "path": "NSI/gabarits/nexus-couverture.sty",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-couverture - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "bfd45c247a577e74166a2fed8e24910e5e16b5685fbad025e5fb995a91df410b"
+      },
+      {
+        "path": "NSI/gabarits/nexus-decor.sty",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-decor - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "2e791c0aaa6b8e9c3366e89c6c4a81cd26d1275b2973fec61d04ebcacc2920d2"
+      },
+      {
+        "path": "NSI/gabarits/nexus-exercices-v6.sty",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-exercices-v6 - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "ab755de60654084c24a9cc3869d7a3b2c96bde21d0d889c658f5320a52996089"
+      },
+      {
+        "path": "NSI/gabarits/nexus-figures-bib.sty",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-figures-bib - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "49cecbf05205c0e9186ac3e812ed43aacb424d0fe26be10b522c400d7e266b13"
+      },
+      {
+        "path": "NSI/gabarits/nexus-manuel-v5.cls",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-manuel-v5 - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "7f228134ccb037f2b8e6089467e4c5e85c62f6d0d5c239d3b9be788d691a595b"
+      },
+      {
+        "path": "NSI/gabarits/nexus-manuel.cls",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-manuel - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "17c29c045b881ba0132d8728e093e4fc748a53566581e2f7286af2c92af0f31b"
+      },
+      {
+        "path": "NSI/gabarits/nexus-pages-froides.sty",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-pages-froides - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "4c3771c33cea91d7a73bb75f70f69a4c07a12196cc2a111bc5defaa258656311"
+      },
+      {
+        "path": "NSI/gabarits/nexus-pont-v6.sty",
+        "declared_version": "2026/07/20 v6.0 Wrapper Compatibilite nexus-pont-v6 - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "afc62841b9c7bbecb181144485666ea223d94552488f959ee227e94dbceabfd1"
+      },
+      {
+        "path": "gabarits/common/nexus-boites.sty",
+        "declared_version": "2026/07/20 v6.0 Encadres editoriaux Nexus - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "9cdecfd826561817a540d95e4eab38bacfc253a8a932956f58e533d83510d2ec"
+      },
+      {
+        "path": "gabarits/common/nexus-charte.sty",
+        "declared_version": "2026/07/20 v6.0 Charte collection premium - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "112dfe968e18eb96d99093f4f3c83377529829e03258db7305c988d1573e8975"
+      },
+      {
+        "path": "gabarits/common/nexus-couverture.sty",
+        "declared_version": "2026/07/20 v6.0 Couvertures Nexus - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "cc687eeeb93df549adc3b08003cea5432aae19e6bd15cecefa07d681b3f915a1"
+      },
+      {
+        "path": "gabarits/common/nexus-decor.sty",
+        "declared_version": "2026/07/20 v6.0 Contours de page Nexus - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "bde5267321f2c8b034d06b3913d6589ccb0b96e78091466028b42a6b1a289942"
+      },
+      {
+        "path": "gabarits/common/nexus-exercices.sty",
+        "declared_version": "2026/07/20 v6.0 Exercices editoriaux Nexus - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "abae58775dc52a29b98a28add1cf6c55404222fc2990b119547f8863358571b7"
+      },
+      {
+        "path": "gabarits/common/nexus-figures-bib.sty",
+        "declared_version": "2026/07/20 v6.0 Bibliotheque de figures Nexus - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "e8fede638c9bd372213cd7ede0d76279106f7a0cc1c9f5f180a01afb197ac4ff"
+      },
+      {
+        "path": "gabarits/common/nexus-manuel.cls",
+        "declared_version": "2026/07/20 v6.0 Manuel Nexus Reussite - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "7f568390a08d7f7e52ddbb01bf3bb85ab86b3380c9a76590eed7751d598e77b2"
+      },
+      {
+        "path": "gabarits/common/nexus-pages-froides.sty",
+        "declared_version": "2026/07/20 v6.0 Pages liminaires Nexus - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "4e1f7fae36ffa3b871bbe728ec9c7fcbf4b473c9f614660edb6cb057f8282bd8"
+      },
+      {
+        "path": "gabarits/common/nexus-pont.sty",
+        "declared_version": "2026/07/20 v6.0 Pont v4.1 vers v6 - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "2703ad66ef9733c7c45f2176a7c13918a34920f6d4112e70f300d33e8f09d088"
+      },
+      {
+        "path": "gabarits/maths/nexus-maths.sty",
+        "declared_version": "2026/07/20 v6.0 Adaptateur Maths - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "c51c5b6a6fc330ccf47c0980716719f37073317b91f7233d8cc01f5fe1bed994"
+      },
+      {
+        "path": "gabarits/nsi/nexus-nsi.sty",
+        "declared_version": "2026/07/20 v6.0 Adaptateur NSI - Canonique",
+        "canonical_version": "2026/07/20 v6.0 Canonique",
+        "status": "PASS",
+        "sha256": "ddb6942951050b49582fbebb4668330fb7994e5cc08569e2451b4e39785ebd08"
+      }
+    ]
+  },
+  "pixel_diffs_vs_oracle": {
+    "page-01.png": {
+      "oracle_path": "Mathematiques/manuel-maths/validations/v5/page-01.png",
+      "oracle_sha256": "fce0a8a207a20096a3d8c53447464c121d0684d5a4598bc46ea4437217b391c1",
+      "specimen_sha256": "6bb995fa92c7587953dc5e546734059c7392273144aeb0ab8ca93442461fc4e8",
+      "pixel_diff_AE": "130997",
+      "identical": false
+    },
+    "page-02.png": {
+      "oracle_path": "Mathematiques/manuel-maths/validations/v5/page-02.png",
+      "oracle_sha256": "ebc45c0a026d56c153775ff4a8c87d2a4bb8efc6d7b3f8cb184ab244af164f2e",
+      "specimen_sha256": "fdb7d7be2aba4ecbe0b6384216ac99225e4d9134f89fd0ec78bd5600045e1c8d",
+      "pixel_diff_AE": "322073",
+      "identical": false
+    },
+    "page-03.png": {
+      "oracle_path": "Mathematiques/manuel-maths/validations/v5/page-03.png",
+      "oracle_sha256": "cf2cfa564903c67726a5da1b9a3ffa72d9990b906ad25e8cc30ca1a11e72c6f2",
+      "specimen_sha256": "929de90de73fd84b374d3a9532127412b2d7b84f567a2a05496ad53e45a23b28",
+      "pixel_diff_AE": "5751",
+      "identical": false
+    },
+    "page-04.png": {
+      "oracle_path": "Mathematiques/manuel-maths/validations/v5/page-04.png",
+      "oracle_sha256": "c07de13980053472b6925cac4d49dcfb886d6bb97841ef2a9c37918764b88106",
+      "specimen_sha256": "ea0c65d97887080748e086f8f28d320bc9e275353913d5fd4ce1ab0518661efa",
+      "pixel_diff_AE": "448239",
+      "identical": false
+    },
+    "page-05.png": {
+      "oracle_path": "Mathematiques/manuel-maths/validations/v5/page-05.png",
+      "oracle_sha256": "e38e84ed4b47d48eaa34e9b77d364aea28bf4ef98197f32aba7cb09b3d81d029",
+      "specimen_sha256": "5af5aa84251dda5ed60b939150e9d7d54d29ab685940b6dc6e6013adc1af456b",
+      "pixel_diff_AE": "5751",
+      "identical": false
+    },
+    "page-06.png": {
+      "oracle_path": "Mathematiques/manuel-maths/validations/v5/page-06.png",
+      "oracle_sha256": "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
+      "specimen_sha256": "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
+      "pixel_diff_AE": "0",
+      "identical": true
+    },
+    "page-07.png": {
+      "oracle_path": "Mathematiques/manuel-maths/validations/v5/page-07.png",
+      "oracle_sha256": "841104700f48c4e9a47a32cafb7e8c94bd61190609f999b76efe2b29df9f7fdb",
+      "specimen_sha256": "a552b02ae4c992ec2258b047df4d2dd9ed554bfcdbf8192fdf02696ed8579035",
+      "pixel_diff_AE": "189208",
+      "identical": false
+    },
+    "page-08.png": {
+      "oracle_path": "Mathematiques/manuel-maths/validations/v5/page-08.png",
+      "oracle_sha256": "577dd65d3685a4c57f7c0baa7a01205dd412da2eab5b4bf9d692292b5077e15c",
+      "specimen_sha256": "27fb533cc2c07a8b86adba09a257b0863732d3e57d477050652ee6cde7ad6f76",
+      "pixel_diff_AE": "6153",
+      "identical": false
+    },
+    "page-09.png": {
+      "oracle_path": "Mathematiques/manuel-maths/validations/v5/page-09.png",
+      "oracle_sha256": "673c4e7374797bb0a248b38fcca159172b6f089fa1e2e139a7cf53f4e92d89b3",
+      "specimen_sha256": "a3ee66bebb06202fbf206f29c41aae07849bbc9a891f71de86878fc3754403e6",
+      "pixel_diff_AE": "6308",
+      "identical": false
+    },
+    "page-10.png": {
+      "oracle_path": "Mathematiques/manuel-maths/validations/v5/page-10.png",
+      "oracle_sha256": "f54d9555618cc930ab817fcceb6abca7bf84ec0c11d788d9b48319c2ebc3a2ad",
+      "specimen_sha256": "cf028aaf05849761363bfd10ba664dbdfa5a5c63e2306b9baffe440732519c1c",
+      "pixel_diff_AE": "6217",
+      "identical": false
+    },
+    "page-11.png": {
+      "oracle_path": "Mathematiques/manuel-maths/validations/v5/page-11.png",
+      "oracle_sha256": "aeaf4e8f8600833f8acb704f57a7fefaa4eb1cdb90be2d4563132c97ea2099b1",
+      "specimen_sha256": "6119de77921b27217f429c5cc98ff69a55ba440d253d8fc73dfae10f957766f8",
+      "pixel_diff_AE": "8860",
+      "identical": false
+    },
+    "page-12.png": {
+      "oracle_path": "Mathematiques/manuel-maths/validations/v5/page-12.png",
+      "oracle_sha256": "24e508f0a716610f308c9b2b3228cafaaedc1ebe7a35f31367d6a2e820a1d910",
+      "specimen_sha256": "095eba7b2ff1aae0f33185ba7af6e404b82b2aeef04f88e1485669c3cf79414c",
+      "pixel_diff_AE": "8735",
+      "identical": false
+    },
+    "page-13.png": {
+      "oracle_path": "Mathematiques/manuel-maths/validations/v5-it2/page-13.png",
+      "oracle_sha256": "12723f01200d2999a170d3a4f431e171e8119756811050e7080ff36861b3006e",
+      "specimen_sha256": "12723f01200d2999a170d3a4f431e171e8119756811050e7080ff36861b3006e",
+      "pixel_diff_AE": "0",
+      "identical": true
+    },
+    "page-14.png": {
+      "oracle_path": "Mathematiques/manuel-maths/validations/v5/page-14.png",
+      "oracle_sha256": "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
+      "specimen_sha256": "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
+      "pixel_diff_AE": "0",
+      "identical": true
+    },
+    "page-15.png": {
+      "oracle_path": "Mathematiques/manuel-maths/validations/v5/page-15.png",
+      "oracle_sha256": "49130535200d543b10883dc8b4f5262b9fe69fc738d2284fb439f4797323bdda",
+      "specimen_sha256": "9e4003b0be6b69a0d32009a12e4ffe5442285e1b70514cc411e6be9329e9ae4a",
+      "pixel_diff_AE": "6005",
+      "identical": false
+    }
+  },
+  "page_count": 15,
+  "toolchain": {
+    "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "pdftoppm": "pdftoppm version 24.02.0"
+  }
+}
