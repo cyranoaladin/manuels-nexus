@@ -1,6 +1,6 @@
 # ÉTAT DE LA COLLECTION — édition 2026-2027
 
-Généré le 2026-08-11 par `scripts/collection_dashboard.py`.
+Généré le 2026-08-14 par `scripts/collection_dashboard.py`.
 Aucun chiffre de ce document n'est saisi à la main : tout est recalculé
 depuis l'arbre par `scripts/chapter_readiness.py`.
 

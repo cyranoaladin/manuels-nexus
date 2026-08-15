@@ -4,7 +4,7 @@ nihilo. 7/7 capacites conformes (etude de fonction : derivee/limites/
 tableau de variation, exploitation pour resoudre f(x)=k, valeurs
 approchees par dichotomie ; convexite : reconnaissance graphique et
 caracterisation par f'' ; statistique a deux variables : nuage/point
-moyen/droite de regression). Statut : valide.
+moyen/droite de regression). Statut : approuvé.
 
 Ecart assume vs le volume dense des chapitres TSPE specialite (8
 exercices, 2 methodes, 2 remediations) : volume reduit (4 exercices, QCM,

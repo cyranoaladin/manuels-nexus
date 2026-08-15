@@ -1,7 +1,22 @@
-% META: {"id": "TEXP-ARI-CO-004", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-004", "capacites_codes": ["C8"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-ARI-CO-004", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-004", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
-% assert pow(5, 10, 11) == 1
+% from sympy import *
+% x = symbols('x')
+% f = sqrt(x**2 + 4)
+% fp = diff(f, x)
+% assert simplify(fp) == x/sqrt(x**2 + 4)
+% assert fp.subs(x, 0) == 0
+% assert fp.subs(x, 3) == 3*sqrt(13)/13
 % END-VERIFY
 \begin{corrige}{TEXP-ARI-EX-004}
-$11$ est premier et $5$ n'est pas divisible par $11$ : le petit théorème de Fermat donne directement $5^{11-1}=5^{10}\equiv1\ [11]$. Le reste de la division de $5^{10}$ par $11$ est donc $1$.
+
+On pose $u(x) = x^2+4$. Alors $u'(x) = 2x$ et $u(x) > 0$ sur $\mathbb{R}$.
+
+\commentaireMarge{$u(x) = x^2+4 > 0$ partout : la racine est bien definie sur $\mathbb{R}$.}
+
+La formule $(\sqrt{u})' = \dfrac{u'}{2\sqrt{u}}$ donne :
+\[ f'(x) = \frac{2x}{2\sqrt{x^2+4}} = \frac{x}{\sqrt{x^2+4}}. \]
+
+On verifie : $f'(0) = 0$ (la tangente est horizontale en $0$).
+
 \end{corrige}

@@ -14,7 +14,7 @@ branches — non traite ici.
 
 | Manuel | Programme | BO source | Referentiel capacites | Chapitres rediges | Doc de cadrage |
 |---|---|---|---|---|---|
-| Maths specialite Terminale (TSPE) | 2019, arrete MENE1921262A | depose | 12/12 fichiers extraits (dont 2 hors-perimetre a retirer, corrige) | 3 amorces, non assembles | `Mathematiques/manuel-maths/docs/10_perimetre_terminale.md` |
+| Maths specialite Terminale (TSPE) | 2019, arrete MENE1921246A | depose | 12/12 fichiers extraits (dont 2 hors-perimetre a retirer, corrige) | 3 amorces, non assembles | `Mathematiques/manuel-maths/docs/10_perimetre_terminale.md` |
 | Maths complementaires Terminale | 2019, arrete MENE1921265A | depose ce jour | 0/9 — a extraire | 0 | `Mathematiques/manuel-maths/docs/11_perimetre_terminale_complementaires.md` |
 | Maths expertes Terminale | 2019, arrete MENE1921264A | depose ce jour | 0/6 — a extraire | 0 | `Mathematiques/manuel-maths/docs/12_perimetre_terminale_expertes.md` |
 | NSI Terminale (TNSI) | 2019, arrete MENE1921247A | deja depose, verifie ce jour | 6/6 fichiers extraits (metadonnee BO a corriger) | 0 | `NSI/docs/11_perimetre_terminale.md` |

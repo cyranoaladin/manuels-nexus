@@ -1,16 +1,21 @@
-% META: {"id": "TCOMPL-ATT-CO-001", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ATT-EX-001", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TCOMPL-ATT-CO-001", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ATT-EX-001", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
-% from sympy import Rational
-% p = Rational(3, 10)
-% PX4 = (1-p)**3 * p
-% assert PX4 == Rational(1029, 10000)
-% E = 1/p
-% assert E == Rational(10, 3)
+% from sympy import *
+% x = symbols('x')
+% f = exp(3*x**2 + 1)
+% fp = diff(f, x)
+% assert fp == 6*x*exp(3*x**2 + 1)
+% assert fp.subs(x, 0) == 0
 % END-VERIFY
 \begin{corrige}{TCOMPL-ATT-EX-001}
-\textbf{1.} Chaque visiteur s'inscrit indépendamment avec la même probabilité $p=0{,}3$ : $X$ est le rang du premier succès dans un schéma de Bernoulli, donc $X\sim\mathcal{G}(0{,}3)$.
 
-\textbf{2.} $P(X=4) = (1-0{,}3)^3\times0{,}3 = 0{,}7^3\times0{,}3 = 0{,}1029$.
+\commentaireMarge{Poser $u(x) = 3x^2+1$ et $v(t)=\mathrm{e}^t$.}
 
-\textbf{3.} $E(X) = \dfrac{1}{0{,}3} = \dfrac{10}{3} \approx 3{,}33$ : il faut en moyenne observer environ $3{,}33$ visiteurs avant le premier inscrit.
+On pose $u(x) = 3x^2 + 1$ et $v(t) = \mathrm{e}^t$. Alors $u'(x) = 6x$ et $v'(t) = \mathrm{e}^t$.
+
+La formule $(v \circ u)' = u' \times (v' \circ u)$ donne :
+\[ f'(x) = 6x\, \mathrm{e}^{3x^2 + 1}. \]
+
+En particulier $f'(0) = 0$ et $f'(1) = 6\mathrm{e}^4$.
+
 \end{corrige}

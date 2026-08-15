@@ -1,30 +1,16 @@
-% META: {"id": "1NSI-ARCHOS-CO-004", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "corrige", "exercice_ref": "1NSI-ARCHOS-EX-004", "capacites": ["P-ARCH-03B"], "sources_inspiration": [], "status": "verified"}
-% BEGIN-VERIFY
-% import subprocess, tempfile
-% with tempfile.TemporaryDirectory() as tmp:
-%     subprocess.run(["mkdir", "projet"], cwd=tmp, check=True)
-%     subprocess.run(["touch", "projet/main.py"], cwd=tmp, check=True)
-%     subprocess.run(["touch", "projet/readme.md"], cwd=tmp, check=True)
-%     resultat = subprocess.run(["ls", "projet"], cwd=tmp, capture_output=True, text=True, check=True)
-%     assert sorted(resultat.stdout.split()) == ["main.py", "readme.md"]
-%     subprocess.run(["rm", "projet/readme.md"], cwd=tmp, check=True)
-%     resultat2 = subprocess.run(["ls", "projet"], cwd=tmp, capture_output=True, text=True, check=True)
-%     assert resultat2.stdout.split() == ["main.py"]
-% END-VERIFY
-\begin{corrige}{1NSI-ARCHOS-EX-004}
-\begin{python}
-import subprocess
+% META: {"id": "1NSI-ARCHOS-CO-004", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "correction", "exercice_ref": "1NSI-ARCHOS-EX-003", "capacites": ["1NSI-ARCHITECTURE-OS-C1"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C1"], "parcours": 2, "fichier_exercice": "chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-004.tex"}
+\begin{corrige}{1NSI-ARCHOS-EX-003}
+\textbf{1.} Non, un processeur monoprocesseur n'exécute qu'\textbf{une seule} instruction à
+la fois. C'est la \textbf{gestion des processus} du système d'exploitation qui partage très
+rapidement le temps processeur entre les différents programmes (chacun reçoit un court
+intervalle de temps à tour de rôle), donnant l'\textbf{illusion} d'une exécution simultanée.
 
-subprocess.run(["mkdir", "projet"])
-subprocess.run(["touch", "projet/main.py"])
-subprocess.run(["touch", "projet/readme.md"])
+\textbf{2.} C'est la \textbf{gestion des droits} (permissions d'accès aux fichiers) qui est
+concernée : elle permet d'autoriser le lecteur de musique à écrire son propre fichier de log
+tout en lui refusant l'accès aux fichiers personnels d'un autre programme ou utilisateur.
 
-resultat = subprocess.run(["ls", "projet"], capture_output=True, text=True)
-print(resultat.stdout)  # main.py \n readme.md
-
-subprocess.run(["rm", "projet/readme.md"])
-resultat2 = subprocess.run(["ls", "projet"], capture_output=True, text=True)
-print(resultat2.stdout)  # main.py
-\end{python}
-Après suppression, seul \lstinline{main.py} reste dans le dossier \lstinline{projet}.
+\textbf{3.} Système libre signifie que le \textbf{code source} de Linux est mis à
+disposition de tous : n'importe qui peut le consulter, le modifier et le redistribuer
+librement. Un système propriétaire (comme Windows) ne diffuse pas son code source ; seul
+l'éditeur peut le modifier.
 \end{corrige}

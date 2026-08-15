@@ -15,8 +15,9 @@ from pdf_integrity import verify_pdf
 
 ORDER = [  # les 9 temps du gabarit (docs/01 Partie 3)
     ("cours", "00_ouverture"), ("cours", "01_diagnostic"), ("cours", "02_activites"),
+    ("cours", "experimentations/*.tex"),
     ("cours", "1*"), ("methodes", "*"), ("exercices", "*"),
-    ("cours", "07_td*"), ("qcm", "*"), ("evaluations", "*"), ("remediation", "*"),
+    ("cours", "07_td*"), ("qcm", "*.tex"), ("evaluations", "*"), ("remediation", "*"),
 ]
 
 
@@ -27,7 +28,10 @@ def collect(chap_dir: Path, variant: str) -> list[Path]:
         return sorted((chap_dir / "remediation").glob("*.tex"))
     files = []
     for sub, pat in ORDER:
-        candidats = sorted((chap_dir / sub).glob(f"{pat}.tex" if not pat.endswith("*") else pat + ".tex"))
+        pattern = pat
+        if "*" not in pattern:
+            pattern = f"{pattern}.tex"
+        candidats = sorted((chap_dir / sub).glob(pattern))
         if sub == "exercices":
             files += [f for f in candidats if not f.name.endswith("-CDP.tex")]
             files += [f for f in candidats if f.name.endswith("-CDP.tex")]

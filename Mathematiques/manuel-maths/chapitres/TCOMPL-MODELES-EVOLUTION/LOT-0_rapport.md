@@ -4,7 +4,7 @@ Deuxieme chapitre du manuel Maths complementaires (2/9). Cree ex nihilo.
 geometrique et de sa somme [demonstration exigible], representation
 graphique de suite recurrente, suite arithmetico-geometrique
 [demonstration exigible], equation differentielle y'=ay+b
-[demonstration exigible]). Statut : valide.
+[demonstration exigible]). Statut : approuvé.
 
 Ecart assume vs le volume dense TSPE (memes raisons que
 TCOMPL-MODELES-FONCTION LOT-0) : 4 exercices, QCM, 1 remediation, 2

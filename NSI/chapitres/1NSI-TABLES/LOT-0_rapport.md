@@ -9,6 +9,6 @@ officiel du B.O. (aucune correction necessaire, contrairement a
 
 Ecart assume vs docs/08_specificites_nsi.md (harvest T0 indisponible,
 volume reduit) : meme calibrage que les chapitres precedents de cette
-session (5 exercices, 6 QCM, 1 remediation, 2 evaluations). Statut :
+session (5 exercices, 6 QCM, 1 remediation, 2 evaluations). Statut : approuvé.
 draft (auto-verifie par execution reelle, en attente de revue
 humaine).

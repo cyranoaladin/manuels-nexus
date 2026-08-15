@@ -4,7 +4,7 @@ ex nihilo. 5/5 capacites conformes (nuage/point moyen, droite des
 moindres carres avec demonstration complete + coefficient de
 correlation, changement de variable pour linearisation, interpolation/
 extrapolation avec regard critique, distinction correlation/causalite).
-Statut : valide.
+Statut : approuvé.
 
 Chevauchement partiel assume avec TCOMPL-MODELES-FONCTION (statistique a
 deux variables deja abordee la, cf. Contenus associes du BO) -- ce

@@ -1,11 +1,26 @@
-% META: {"id": "TEXP-ARI-CO-002", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-002", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-ARI-CO-002", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-002", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
-% assert (4*3) % 11 == 1
-% solutions = [x for x in range(11) if (4*x) % 11 == 7 % 11]
-% assert solutions == [10]
+% from sympy import *
+% x = symbols('x')
+% u = x**2 + 3*x + 2
+% du = diff(u, x)
+% f = ln(u)
+% fp = diff(f, x)
+% assert simplify(fp) == (2*x + 3)/(x**2 + 3*x + 2)
+% # domaine: u > 0, i.e. x < -2 ou x > -1
+% assert u.subs(x, 0) == 2
+% assert u.subs(x, -3) == 2
 % END-VERIFY
 \begin{corrige}{TEXP-ARI-EX-002}
-\textbf{1.} $4\times3=12\equiv1\ [11]$ : $3$ est bien l'inverse de $4$ modulo $11$.
 
-\textbf{2.} En multipliant les deux membres de $4x\equiv7\ [11]$ par $3$ : $12x\equiv21\ [11]$, soit $x\equiv21\ [11]$ (car $12\equiv1\ [11]$), c'est-à-dire $x\equiv10\ [11]$.
+\textbf{Question 1.} $x^2+3x+2 = (x+1)(x+2) > 0$ si et seulement si $x \in \left]-\infty, -2\right[ \cup \left]-1, +\infty\right[$.
+
+Donc $D_f = \left]-\infty, -2\right[ \cup \left]-1, +\infty\right[$.
+
+\commentaireMarge{Factoriser le polynome sous le logarithme.}
+
+\textbf{Question 2.} On pose $u(x) = x^2+3x+2$. Alors $u'(x) = 2x+3$.
+
+\[ f'(x) = \frac{u'(x)}{u(x)} = \frac{2x+3}{x^2+3x+2}. \]
+
 \end{corrige}

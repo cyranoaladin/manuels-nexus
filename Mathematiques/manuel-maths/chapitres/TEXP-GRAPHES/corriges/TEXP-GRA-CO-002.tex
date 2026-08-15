@@ -1,15 +1,26 @@
-% META: {"id": "TEXP-GRA-CO-002", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige", "exercice_ref": "TEXP-GRA-EX-002", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-GRA-CO-002", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige", "exercice_ref": "TEXP-GRA-EX-002", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
-% n = 6
-% nb_matchs = n * (n - 1) // 2
-% assert nb_matchs == 15
+% from sympy import *
+% x = symbols('x')
+% u = x**2 + 3*x + 2
+% du = diff(u, x)
+% f = ln(u)
+% fp = diff(f, x)
+% assert simplify(fp) == (2*x + 3)/(x**2 + 3*x + 2)
+% # domaine: u > 0, i.e. x < -2 ou x > -1
+% assert u.subs(x, 0) == 2
+% assert u.subs(x, -3) == 2
 % END-VERIFY
 \begin{corrige}{TEXP-GRA-EX-002}
-\textbf{1.} On modélise chaque \textbf{équipe} par un sommet, et chaque \textbf{match} par une arête reliant les deux équipes qui s'affrontent.
 
-\textbf{2.} Il y a $6$ équipes, donc le graphe est d'\textbf{ordre 6}.
+\textbf{Question 1.} $x^2+3x+2 = (x+1)(x+2) > 0$ si et seulement si $x \in \left]-\infty, -2\right[ \cup \left]-1, +\infty\right[$.
 
-\textbf{3.} Comme chaque équipe affronte toutes les autres exactement une fois, tous les sommets sont reliés deux à deux : c'est un \textbf{graphe complet}.
+Donc $D_f = \left]-\infty, -2\right[ \cup \left]-1, +\infty\right[$.
 
-\textbf{4.} Le nombre d'arêtes d'un graphe complet d'ordre $6$ est $\dfrac{6\times5}{2}=15$. Il y a donc \textbf{15 matchs} au total.
+\commentaireMarge{Factoriser le polynome sous le logarithme.}
+
+\textbf{Question 2.} On pose $u(x) = x^2+3x+2$. Alors $u'(x) = 2x+3$.
+
+\[ f'(x) = \frac{u'(x)}{u(x)} = \frac{2x+3}{x^2+3x+2}. \]
+
 \end{corrige}

@@ -1,12 +1,22 @@
-% META: {"id": "TEXP-CAG-CO-003", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "corrige", "exercice_ref": "TEXP-CAG-EX-003", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-CAG-CO-003", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "corrige", "exercice_ref": "TEXP-CAG-EX-003", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
-% from sympy import sqrt, I, Abs, arg, pi, simplify
-% z = -sqrt(2) + I*sqrt(2)
-% assert simplify(Abs(z) - 2) == 0
-% assert simplify(arg(z) - 3*pi/4) == 0
+% from sympy import *
+% x = symbols('x')
+% f = (2*x + 1)**5
+% fp = diff(f, x)
+% assert fp == 10*(2*x+1)**4
+% assert fp.subs(x, 0) == 10
+% assert fp.subs(x, Rational(-1,2)) == 0
 % END-VERIFY
 \begin{corrige}{TEXP-CAG-EX-003}
-$|z| = \sqrt{(-\sqrt2)^2+(\sqrt2)^2} = \sqrt{2+2} = 2$.
 
-$\cos\theta = \dfrac{-\sqrt2}{2} = -\dfrac{\sqrt2}{2}$ et $\sin\theta = \dfrac{\sqrt2}{2}$ : ces valeurs correspondent à $\theta = \dfrac{3\pi}{4}$.
+On pose $u(x) = 2x+1$. Alors $u'(x) = 2$.
+
+\commentaireMarge{Identifier $u(x) = 2x+1$ puis appliquer $(u^n)' = n\,u'\,u^{n-1}$.}
+
+La formule $(u^n)' = n\,u'\,u^{n-1}$ donne :
+\[ f'(x) = 5 \times 2 \times (2x+1)^4 = 10(2x+1)^4. \]
+
+On verifie : $f'(0) = 10$ et $f'\!\left(-\tfrac{1}{2}\right) = 0$.
+
 \end{corrige}

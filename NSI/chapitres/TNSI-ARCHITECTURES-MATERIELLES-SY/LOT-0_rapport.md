@@ -2,7 +2,7 @@
 Cree ex nihilo. 7/7 capacites conformes (systeme sur puce, creation/
 ordonnancement/interblocage de processus, protocoles de routage RIP/OSPF,
 chiffrement symetrique/asymetrique, securisation HTTPS). Aucune
-demonstration exigible. Statut : valide.
+demonstration exigible. Statut : approuvé.
 
 Chapitre plus conceptuel que les precedents (le BO precise explicitement
 que la negociation SSL detaillee n'est pas a aborder) : le code sert a

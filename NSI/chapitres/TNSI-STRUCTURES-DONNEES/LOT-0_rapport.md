@@ -3,7 +3,7 @@ Cree ex nihilo. 14/14 capacites conformes (interface/implementation,
 classes, piles/files LIFO-FIFO, liste vs dictionnaire, arbres binaires,
 graphes et leurs representations). Aucune demonstration formellement
 exigible par le referentiel (contrairement aux maths, R5/R6 exigent
-l'execution du code, pas une preuve mathematique). Statut : valide.
+l'execution du code, pas une preuve mathematique). Statut : approuvé.
 
 Ecart assume vs docs/08_specificites_nsi.md (cahier des charges NSI complet
 qui vise 50+ exercices/chapitre, 15+ QCM, sujets ECE, mini-projet,

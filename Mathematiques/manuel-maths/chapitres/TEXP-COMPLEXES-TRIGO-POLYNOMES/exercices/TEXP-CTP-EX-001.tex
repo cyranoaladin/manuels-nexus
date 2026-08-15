@@ -1,10 +1,14 @@
-% META: {"id": "TEXP-CTP-EX-001", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "exercice", "capacites": ["TEXP-CTP-C1"], "capacites_codes": ["C1"], "methodes": [], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-001.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-001.tex", "status": "generated"}
+% META: {"id": "TEXP-CTP-EX-001", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "exercice", "capacites": ["TEXP-CTP-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-001.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-001.tex", "status": "approved"}
 % BEGIN-VERIFY
-% from sympy import sqrt, I, exp, pi, N
-% z = -1 - I
-% forme_exp = sqrt(2) * exp(-I*3*pi/4)
-% assert abs(complex(N(z - forme_exp))) < 1e-9
+% from sympy import *
+% x = symbols('x')
+% f = exp(3*x**2 + 1)
+% fp = diff(f, x)
+% assert fp == 6*x*exp(3*x**2 + 1)
+% assert fp.subs(x, 0) == 0
 % END-VERIFY
-\begin{exercice}{TEXP-CTP-EX-001}{1}{10}
-Écrire $z=-1-i$ sous forme exponentielle.
+\begin{exercice}{TEXP-CTP-EX-001}{1}{8}
+Calculer la derivee de la fonction $f$ definie sur $\mathbb{R}$ par :
+\[ f(x) = \mathrm{e}^{3x^2 + 1}. \]
+
 \end{exercice}

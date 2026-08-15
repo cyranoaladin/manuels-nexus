@@ -112,7 +112,7 @@ capacite×parcours toujours ≥2/case sur les deux chapitres. Fichiers
 - **Statut** : en production
 - **Referentiel** : BO special n 8 du 25 juillet 2019 (programme 2019)
 - Chapitres clos : TSPE-SUITES-LIMITES, TSPE-LIMITES-FONCTIONS, TSPE-DERIVATION-CONVEXITE
-- Prochaine tache directive : 5a/5b referentiel + perimetre
+- Prochaine tache directive : validation humaine des blocages listés dans `A_VALIDER_HUMAIN.md` (BO/perimetre/TSPE), hors contenu éditorial.
 
 ## Jalon TSPE v2 (rentree 2027-2028)
 

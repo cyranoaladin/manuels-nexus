@@ -39,4 +39,4 @@ QCM 7 sections (C1-C7), 1-2 questions/capacite, 4 distracteurs par question.
 fiche dediee, couvertes par RE-C4/C5 existantes vu la proximite methode).
 5 fiches "FR" (erreurs frequentes ciblees R1-R5). SymPy sur les blocs
 calculables : 0 FAIL. QCM Q4 (C2) : formulation de l'option A un peu proche
-de la conclusion recherchee (ambiguite mineure, non bloquante). Statut : valide.
+de la conclusion recherchee (ambiguite mineure, non bloquante). Statut : approuvé.

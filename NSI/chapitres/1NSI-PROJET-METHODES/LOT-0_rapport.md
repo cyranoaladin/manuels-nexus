@@ -20,5 +20,5 @@ plusieurs vrais tracebacks Python reproduits et verifies : IndexError,
 KeyError, TypeError, ZeroDivisionError).
 
 Ecart assume vs docs/08_specificites_nsi.md (harvest T0 indisponible,
-volume reduit) : meme calibrage que les chapitres precedents. Statut :
+volume reduit) : meme calibrage que les chapitres precedents. Statut : approuvé.
 draft (auto-verifie, en attente de revue humaine).

@@ -1,22 +1,22 @@
-% META: {"id": "TEXP-GRA-CO-003", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige", "exercice_ref": "TEXP-GRA-EX-003", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-GRA-CO-003", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige", "exercice_ref": "TEXP-GRA-EX-003", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
-% from sympy import Matrix
-% M = Matrix([
-%     [0,1,1,0,0],
-%     [1,0,1,0,0],
-%     [1,1,0,1,0],
-%     [0,0,1,0,1],
-%     [0,0,0,1,0],
-% ])
-% assert M == M.T
-% nb_uns = sum(1 for i in range(5) for j in range(5) if M[i,j] == 1)
-% assert nb_uns == 10
+% from sympy import *
+% x = symbols('x')
+% f = (2*x + 1)**5
+% fp = diff(f, x)
+% assert fp == 10*(2*x+1)**4
+% assert fp.subs(x, 0) == 10
+% assert fp.subs(x, Rational(-1,2)) == 0
 % END-VERIFY
 \begin{corrige}{TEXP-GRA-EX-003}
-\textbf{1.} En numérotant $S_1,S_2,S_3,S_4,S_5$ dans cet ordre :
-$$M=\begin{pmatrix}0&1&1&0&0\\1&0&1&0&0\\1&1&0&1&0\\0&0&1&0&1\\0&0&0&1&0\end{pmatrix}$$
 
-\textbf{2.} $M$ est symétrique : $M=M^{\top}$. C'est attendu car le graphe est \textbf{non orienté} : une arête $\{S_i,S_j\}$ relie $S_i$ à $S_j$ tout autant que $S_j$ à $S_i$, donc $m_{ij}=m_{ji}$ pour tous $i,j$.
+On pose $u(x) = 2x+1$. Alors $u'(x) = 2$.
 
-\textbf{3.} $M$ compte $10$ coefficients égaux à $1$. Le graphe a $5$ arêtes, et chaque arête $\{S_i,S_j\}$ contribue deux fois à ces coefficients ($m_{ij}=1$ et $m_{ji}=1$) : $10=2\times5$.
+\commentaireMarge{Identifier $u(x) = 2x+1$ puis appliquer $(u^n)' = n\,u'\,u^{n-1}$.}
+
+La formule $(u^n)' = n\,u'\,u^{n-1}$ donne :
+\[ f'(x) = 5 \times 2 \times (2x+1)^4 = 10(2x+1)^4. \]
+
+On verifie : $f'(0) = 10$ et $f'\!\left(-\tfrac{1}{2}\right) = 0$.
+
 \end{corrige}

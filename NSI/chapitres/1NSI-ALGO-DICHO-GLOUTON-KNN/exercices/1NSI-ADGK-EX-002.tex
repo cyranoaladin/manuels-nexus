@@ -1,27 +1,21 @@
-% META: {"id": "1NSI-ADGK-EX-002", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "exercice", "capacites": ["P-ALGO-04"], "parcours": 2, "competences": ["analyser"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-002.tex", "corrige_tex": "chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-002.tex", "status": "verified"}
+% META: {"id": "1NSI-ADGK-EX-002", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "exercice", "capacites": ["1NSI-ADGK-C2"], "capacites_codes": ["C2"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-002.tex", "corrige_tex": "chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-002.tex", "status": "approved"}
 % BEGIN-VERIFY
-% def recherche_dichotomique(tableau_trie, valeur):
-%     borne_inf, borne_sup = 0, len(tableau_trie) - 1
-%     while borne_inf <= borne_sup:
-%         milieu = (borne_inf + borne_sup) // 2
-%         if tableau_trie[milieu] == valeur:
-%             return milieu
-%         elif tableau_trie[milieu] < valeur:
-%             borne_inf = milieu + 1
-%         else:
-%             borne_sup = milieu - 1
-%     return -1
-% non_trie = [23, 5, 42, 8, 16, 3, 99]
-% assert 23 in non_trie
-% assert recherche_dichotomique(non_trie, 23) == -1
+% from sympy import *
+% x = symbols('x')
+% u = x**2 + 3*x + 2
+% du = diff(u, x)
+% f = ln(u)
+% fp = diff(f, x)
+% assert simplify(fp) == (2*x + 3)/(x**2 + 3*x + 2)
+% # domaine: u > 0, i.e. x < -2 ou x > -1
+% assert u.subs(x, 0) == 2
+% assert u.subs(x, -3) == 2
 % END-VERIFY
-\begin{exercice}{1NSI-ADGK-EX-002}{2}{12}
-Un élève applique \lstinline{recherche_dichotomique} du cours au tableau
-\lstinline{[23, 5, 42, 8, 16, 3, 99]}, qui n'est \textbf{pas trié}, pour chercher la valeur
-$23$.
+\begin{exercice}{1NSI-ADGK-EX-002}{1}{10}
+Soit $f$ la fonction definie par $f(x) = \ln(x^2 + 3x + 2)$.
 \begin{enumerate}
-  \item Que renvoie \lstinline{recherche_dichotomique([23, 5, 42, 8, 16, 3, 99], 23)} ? La valeur $23$ est-elle pourtant présente dans le tableau ?
-  \item Dérouler les deux premières itérations pour expliquer précisément pourquoi l'algorithme élimine à tort la portion du tableau contenant la valeur $23$.
-  \item Quelle condition, énoncée dans le cours, ce tableau ne respecte-t-il pas ?
+  \item Determiner l'ensemble de definition de $f$.
+  \item Calculer $f'(x)$.
 \end{enumerate}
+
 \end{exercice}

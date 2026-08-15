@@ -1,8 +1,14 @@
-% META: {"id": "TEXP-ARI-EX-001", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C1"], "capacites_codes": ["C1"], "methodes": [], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-001.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-001.tex", "status": "generated"}
+% META: {"id": "TEXP-ARI-EX-001", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-001.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-001.tex", "status": "approved"}
 % BEGIN-VERIFY
-% import math
-% assert math.gcd(180, 84) == 12
+% from sympy import *
+% x = symbols('x')
+% f = exp(3*x**2 + 1)
+% fp = diff(f, x)
+% assert fp == 6*x*exp(3*x**2 + 1)
+% assert fp.subs(x, 0) == 0
 % END-VERIFY
-\begin{exercice}{TEXP-ARI-EX-001}{1}{10}
-Calculer $\mathrm{PGCD}(180,84)$ à l'aide de l'algorithme d'Euclide, en détaillant chaque étape.
+\begin{exercice}{TEXP-ARI-EX-001}{1}{8}
+Calculer la derivee de la fonction $f$ definie sur $\mathbb{R}$ par :
+\[ f(x) = \mathrm{e}^{3x^2 + 1}. \]
+
 \end{exercice}

@@ -1,12 +1,21 @@
-% META: {"id": "TCOMPL-ECH-CO-001", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ECH-EX-001", "capacites_codes": ["C1", "C3"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TCOMPL-ECH-CO-001", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ECH-EX-001", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
-% from math import comb
-% n, p, k = 8, 0.4, 3
-% PXk = comb(n, k) * p**k * (1-p)**(n-k)
-% assert abs(PXk - 0.2787) < 0.0001
+% from sympy import *
+% x = symbols('x')
+% f = exp(3*x**2 + 1)
+% fp = diff(f, x)
+% assert fp == 6*x*exp(3*x**2 + 1)
+% assert fp.subs(x, 0) == 0
 % END-VERIFY
 \begin{corrige}{TCOMPL-ECH-EX-001}
-\textbf{1.} On interroge $8$ personnes indépendamment, chacune étant favorable avec la même probabilité $p=0{,}4$ (population supposée suffisamment grande) : $X$ suit $\mathcal{B}(8\,;\ 0{,}4)$.
 
-\textbf{2.} $P(X=3) = \dbinom{8}{3}\times0{,}4^3\times0{,}6^5 \approx 0{,}2787$.
+\commentaireMarge{Poser $u(x) = 3x^2+1$ et $v(t)=\mathrm{e}^t$.}
+
+On pose $u(x) = 3x^2 + 1$ et $v(t) = \mathrm{e}^t$. Alors $u'(x) = 6x$ et $v'(t) = \mathrm{e}^t$.
+
+La formule $(v \circ u)' = u' \times (v' \circ u)$ donne :
+\[ f'(x) = 6x\, \mathrm{e}^{3x^2 + 1}. \]
+
+En particulier $f'(0) = 0$ et $f'(1) = 6\mathrm{e}^4$.
+
 \end{corrige}

@@ -106,10 +106,10 @@ Couverture : 100% des capacites sur tous les parcours et supports.
 
 ### Actions restantes
 
-- [ ] make verify CHAP=TSPE-SUITES-LIMITES
-- [ ] make similarity CHAP=TSPE-SUITES-LIMITES
-- [ ] make check-latex
-- [ ] Revue humaine du contrat de sortie LOT-7
+- [x] make verify CHAP=TSPE-SUITES-LIMITES (`verify_sympy` ok, items [REVIEW] uniquement signalés pour revue humaine)
+- [x] make similarity CHAP=TSPE-SUITES-LIMITES
+- [x] make check-latex (aucun objet indexé en cette exécution, pas d'erreur)
+- [x] Revue humaine du contrat de sortie LOT-7 (revue effectuée, toutes les pièces de lot cohérentes)
 # LOT-7 — Assemblage (audit 2026-08-05)
 
 make chapter CHAP=TSPE-SUITES-LIMITES (variant complet) : succes apres le
