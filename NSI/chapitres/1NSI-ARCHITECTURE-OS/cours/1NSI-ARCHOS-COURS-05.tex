@@ -1,0 +1,97 @@
+% META: {"id": "1NSI-ARCHOS-COURS-05", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "cours", "capacites": ["1NSI-ARCHITECTURE-OS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C5"]}
+\section{Dérouler l'exécution d'instructions machine}
+
+\definition[D3]{
+  Une \textbf{instruction machine} est une opération élémentaire que le processeur sait
+  exécuter directement : charger une valeur depuis la mémoire dans un registre, effectuer un
+  calcul entre registres, écrire un registre en mémoire, etc. Un \textbf{programme machine}
+  est une suite d'instructions, exécutées \textbf{dans l'ordre}, une par une.
+}
+
+\exemple{Un jeu d'instructions minimal, inspiré du langage machine :
+\begin{itemize}
+  \item \lstinline{("LOAD", registre, adresse)} : charge la valeur de la mémoire à \lstinline{adresse} dans \lstinline{registre}.
+  \item \lstinline{("ADD", r1, r2)} : ajoute le contenu de \lstinline{r2} à \lstinline{r1} (résultat dans \lstinline{r1}).
+  \item \lstinline{("STORE", registre, adresse)} : écrit le contenu de \lstinline{registre} en mémoire à \lstinline{adresse}.
+  \item \lstinline{("HALT",)} : arrête l'exécution.
+\end{itemize}}
+
+\begin{codereference}{Simuler l'exécution d'un programme machine}
+\begin{python}
+def executer(programme, memoire):
+    """Execute un programme machine simplifie, instruction par instruction."""
+    registres = {}
+    for instruction in programme:
+        op = instruction[0]
+        if op == "LOAD":
+            _, reg, adresse = instruction
+            registres[reg] = memoire[adresse]
+        elif op == "ADD":
+            _, reg_dest, reg_src = instruction
+            registres[reg_dest] = registres[reg_dest] + registres[reg_src]
+        elif op == "STORE":
+            _, reg, adresse = instruction
+            memoire[adresse] = registres[reg]
+        elif op == "HALT":
+            break
+    return memoire, registres
+
+memoire = [5, 3, 0]  # memoire[0]=5, memoire[1]=3, memoire[2]=0
+programme = [
+    ("LOAD", "R0", 0),   # R0 <- memoire[0] = 5
+    ("LOAD", "R1", 1),   # R1 <- memoire[1] = 3
+    ("ADD", "R0", "R1"), # R0 <- R0 + R1 = 8
+    ("STORE", "R0", 2),  # memoire[2] <- R0 = 8
+    ("HALT",),
+]
+memoire_finale, registres = executer(programme, memoire)
+print(memoire_finale)   # [5, 3, 8]
+print(registres)        # {'R0': 8, 'R1': 3}
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def executer(programme, memoire):
+%     registres = {}
+%     for instruction in programme:
+%         op = instruction[0]
+%         if op == "LOAD":
+%             _, reg, adresse = instruction
+%             registres[reg] = memoire[adresse]
+%         elif op == "ADD":
+%             _, reg_dest, reg_src = instruction
+%             registres[reg_dest] = registres[reg_dest] + registres[reg_src]
+%         elif op == "STORE":
+%             _, reg, adresse = instruction
+%             memoire[adresse] = registres[reg]
+%         elif op == "HALT":
+%             break
+%     return memoire, registres
+% memoire = [5, 3, 0]
+% programme = [
+%     ("LOAD", "R0", 0),
+%     ("LOAD", "R1", 1),
+%     ("ADD", "R0", "R1"),
+%     ("STORE", "R0", 2),
+%     ("HALT",),
+% ]
+% memoire_finale, registres = executer(programme, memoire)
+% assert memoire_finale == [5, 3, 8]
+% assert registres == {"R0": 8, "R1": 3}
+% END-VERIFY
+
+\propriete[Dérouler une exécution]{
+  \textbf{Dérouler} l'exécution d'un programme consiste à indiquer, après \textbf{chaque}
+  instruction, l'état des registres et de la mémoire à cet instant précis — c'est ce qui
+  permet de vérifier ou de prédire le résultat d'un programme sans avoir besoin de
+  l'exécuter sur une vraie machine.
+}
+
+\erreurFrequente{Oublier que les instructions s'exécutent \textbf{dans l'ordre d'écriture}
+du programme, une à la fois. Un déroulé d'exécution qui \og saute \fg{} une instruction ou
+en anticipe une plus loin (sans branchement explicite) est incorrect.}
+
+\alamachine{Ajoute une instruction \lstinline{("SUB", r1, r2)} (soustraction : \lstinline{r1
+<- r1 - r2}) au simulateur \lstinline{executer}. Écris un programme qui calcule
+\lstinline{memoire[0] - memoire[1]} et le stocke dans \lstinline{memoire[2]}, pour
+\lstinline{memoire = [10, 4, 0]}.}

@@ -1,77 +1,110 @@
-% META: {"id": "TCOMPL-MODELES-EVOLUTION-QCM", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4","C5"], "status": "generated"}
+% META: {"id": "TCOMPL-MODELES-EVOLUTION-QCM", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "qcm", "genere_depuis": "chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Modèles d'évolution}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Modeles d'evolution discrète et continue}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1/C2 --- Modélisation, suite géométrique}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Pour une suite géométrique de raison $q$ avec $0<q<1$, la limite de $u_n$ quand $n\to+\infty$ est :
+\item[] \textbf{Capacite C1}
+
+\item \textbf{[Q1]} Une suite arithmetique de raison r et premier terme $u_0$ a pour terme general :
   \begin{enumerate}[label=\Alph*.]
-    \item $+\infty$.
-    \item $0$.
-    \item $u_0$.
-    \item $q$.
+    \item $u_n = u_0 + n r$
+    \item $u_n = u_0 \times r^n$
+    \item $u_n = u_0 + r^n$
+    \item $u_n = u_0 n r$
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q2]} La limite de la somme $S_n$ des termes d'une suite géométrique de premier terme $u_0$ et de raison $q \in\, ]0,1[$ vaut :
+\item \textbf{[Q2]} Une suite geometrique de raison $q > 1$ et $u_0 > 0$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item $u_0(1-q)$.
-    \item $\dfrac{u_0}{1-q}$.
-    \item $\dfrac{u_0}{1+q}$.
-    \item $u_0 \times q$.
+    \item Decroissante et converge vers 0
+    \item Constante
+    \item Strictement croissante et diverge vers $+\infty$
+    \item Alternée
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C2}
 
-\subsection*{C3/C4 --- Suites récurrentes}
-
-\item \textbf{[Q3]} Sur la représentation graphique d'une suite $u_{n+1}=f(u_n)$ (courbe de $f$ et droite $y=x$), un point fixe candidat pour la limite correspond à :
+\item \textbf{[Q3]} L'equation differentielle $y' = a y$ a pour solutions les fonctions :
   \begin{enumerate}[label=\Alph*.]
-    \item l'origine du repère.
-    \item un point d'intersection entre la courbe de $f$ et la droite $y=x$.
-    \item le point $u_0$.
-    \item n'importe quel point de la courbe.
+    \item $f(x) = a x + C$
+    \item $f(x) = C e^{a x}$
+    \item $f(x) = C e^{-a x}$
+    \item $f(x) = C x^a$
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q4]} Pour une suite arithmético-géométrique $u_{n+1}=au_n+b$ (avec $a\neq1$), la suite constante $c$ solution vérifie :
+\item \textbf{[Q4]} Le modele de Malthus suppose un taux de croissance :
   \begin{enumerate}[label=\Alph*.]
-    \item $c = a+b$.
-    \item $c = ac+b$.
-    \item $c = a-b$.
-    \item $c = b/a$.
+    \item Decroissant
+    \item Nul
+    \item Logistique
+    \item Constant et proportionnel a la population
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C3}
 
-\subsection*{C5 --- Équation différentielle}
-
-\item \textbf{[Q5]} La solution générale de $y'=ay$ (avec $a$ réel) est :
+\item \textbf{[Q5]} Le modele logistique de Verhulst comporte une capacite d'accueil K qui est :
   \begin{enumerate}[label=\Alph*.]
-    \item $y(x) = ax + C$.
-    \item $y(x) = C\,\mathrm{e}^{ax}$.
-    \item $y(x) = a\,\mathrm{e}^{x}$.
-    \item $y(x) = C^{ax}$.
-  \end{enumerate}
-
-\bigskip
-
-\item \textbf{[Q6]} Pour résoudre $y'=ay+b$, on cherche d'abord :
-  \begin{enumerate}[label=\Alph*.]
-    \item la limite de $y$ en $+\infty$.
-    \item une solution particulière constante $y_p=-b/a$.
-    \item la dérivée seconde de $y$.
-    \item la valeur de $y$ en $x=1$.
+    \item La limite de la population quand $t \to +\infty$
+    \item La population initiale $u_0$
+    \item Le taux de croissance initial
+    \item Le temps de demi-vie
   \end{enumerate}
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C1 & \textbf{C} \\
+Q3 & C2 & \textbf{B} \\
+Q4 & C2 & \textbf{D} \\
+Q5 & C3 & \textbf{A} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — Formule d'une suite geometrique. \emph{Renvoi : C1.}
+    \item \textbf{C} — Formule incorrecte. \emph{Renvoi : C1.}
+    \item \textbf{D} — Produit au lieu d'addition. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Comportement pour 0 < q < 1. \emph{Renvoi : C1.}
+    \item \textbf{B} — Comportement pour q = 1. \emph{Renvoi : C1.}
+    \item \textbf{D} — Comportement pour q < 0. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — Solution de y' = a. \emph{Renvoi : C2.}
+    \item \textbf{C} — Erreur de signe dans l'exposant. \emph{Renvoi : C2.}
+    \item \textbf{D} — Fonction puissance au lieu d'exponentielle. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — Hypothese du modele de Verhulst. \emph{Renvoi : C2.}
+    \item \textbf{B} — Population constante. \emph{Renvoi : C2.}
+    \item \textbf{C} — Modele avec capacite d'accueil. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{B} — K est l'asymptote horizontale. \emph{Renvoi : C3.}
+    \item \textbf{C} — K n'est pas un taux. \emph{Renvoi : C3.}
+    \item \textbf{D} — K est une taille de population, pas un temps. \emph{Renvoi : C3.}
+  \end{itemize}
+\end{itemize}

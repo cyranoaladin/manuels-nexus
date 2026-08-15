@@ -1,0 +1,19 @@
+% META: {"id": "TNSI-STRUCT-CO-016", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "correction", "exercice_ref": "TNSI-STRUCT-EX-004", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-STRUCTURES-DONNEES-C4"], "parcours": 2, "fichier_exercice": "chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-016.tex"}
+% BEGIN-VERIFY
+% matrice = [[0,1,0,1],[0,0,1,0],[0,0,0,0],[0,0,1,0]]
+% succ = {i: [j for j in range(4) if matrice[i][j]==1] for i in range(4)}
+% assert succ == {0: [1,3], 1: [2], 2: [], 3: [2]}
+% END-VERIFY
+\begin{corrige}{TNSI-STRUCT-EX-004}
+
+\textbf{Q1.} En lisant les $1$ de la matrice : $0\to1$, $0\to3$, $1\to2$, $3\to2$.
+
+\textbf{Q2.} La ligne $2$ de la matrice ne contient que des $0$ : le sommet $2$ n'a \textbf{aucun successeur} (c'est un puits du graphe).
+
+\textbf{Q3.}
+\begin{python}
+successeurs = {0: [1, 3], 1: [2], 2: [], 3: [2]}
+\end{python}
+Le sommet $2$, bien que sans successeur, apparait dans le dictionnaire avec une liste vide (conformement a la remarque du cours).
+
+\end{corrige}

@@ -1,0 +1,29 @@
+% META: {"id": "TNSI-LANG-EX-019", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "exercice", "capacites": ["TNSI-LANGAGES-ET-PROGRAMMATION-C4"], "capacites_codes": ["C4"], "methodes": ["M1"], "parcours": 2, "competences": ["programmer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-019.tex", "corrige_tex": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-019.tex", "status": "approved"}
+% BEGIN-VERIFY
+% def mots_longs_imperatif(mots, longueur_min):
+%     resultat = []
+%     for mot in mots:
+%         if len(mot) >= longueur_min:
+%             resultat.append(mot.upper())
+%     return resultat
+% def mots_longs_fonctionnel(mots, longueur_min):
+%     return [mot.upper() for mot in mots if len(mot) >= longueur_min]
+% mots = ["chat", "ordinateur", "cle", "programmation"]
+% assert mots_longs_imperatif(mots, 6) == mots_longs_fonctionnel(mots, 6)
+% assert mots_longs_fonctionnel(mots, 6) == ["ORDINATEUR", "PROGRAMMATION"]
+% END-VERIFY
+\begin{exercice}{TNSI-LANG-EX-003}{2}{20}
+La fonction suivante, écrite en style \textbf{impératif}, sélectionne et met en majuscules les mots d'une liste dont la longueur atteint un minimum donné :
+\begin{python}
+def mots_longs_imperatif(mots, longueur_min):
+    resultat = []
+    for mot in mots:
+        if len(mot) >= longueur_min:
+            resultat.append(mot.upper())
+    return resultat
+\end{python}
+\begin{enumerate}
+  \item Réécrire cette fonction en style \textbf{fonctionnel}, sous le nom \lstinline{mots_longs_fonctionnel}, en une seule expression (liste en compréhension).
+  \item Vérifier que les deux versions renvoient le même résultat sur \lstinline{["chat", "ordinateur", "cle", "programmation"]} avec \lstinline{longueur_min=6}.
+\end{enumerate}
+\end{exercice}

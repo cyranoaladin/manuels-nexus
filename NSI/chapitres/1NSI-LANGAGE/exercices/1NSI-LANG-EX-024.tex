@@ -1,0 +1,41 @@
+% META: {"id": "1NSI-LANG-EX-024", "chapitre": "1NSI-LANGAGE", "type_objet": "exercice", "capacites": ["1NSI-LANGAGE-C4"], "parcours": 2, "competences": ["analyser", "programmer", "valider"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-024.tex", "corrige_tex": "chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-024.tex", "status": "approved", "capacites_codes": ["C4"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% def est_premier_bugue(n):
+%     for i in range(2, n):
+%         if n % i == 0:
+%             return False
+%     return True
+% assert est_premier_bugue(7) is True
+% assert est_premier_bugue(8) is False
+% assert est_premier_bugue(1) is True  # bug : 1 n'est pas premier
+% def est_premier(n):
+%     if n < 2:
+%         return False
+%     for i in range(2, n):
+%         if n % i == 0:
+%             return False
+%     return True
+% assert est_premier(1) is False
+% assert est_premier(2) is True
+% assert est_premier(7) is True
+% assert est_premier(8) is False
+% END-VERIFY
+\begin{exercice}{1NSI-LANG-EX-004}{2}{12}
+Un élève teste sa fonction \lstinline{est_premier_bugue} uniquement sur $7$ (nombre
+premier) et $8$ (non premier), et conclut qu'elle est correcte :
+\begin{python}
+def est_premier_bugue(n):
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+    return True
+
+print(est_premier_bugue(7))  # True
+print(est_premier_bugue(8))  # False
+\end{python}
+\begin{enumerate}
+  \item Que renvoie \lstinline{est_premier_bugue(1)} ? Est-ce le résultat attendu ($1$ n'est pas un nombre premier) ?
+  \item Pourquoi le jeu de tests de l'élève (seulement $7$ et $8$) n'a-t-il pas permis de détecter ce bug ?
+  \item Corriger la fonction, et proposer un jeu de tests plus complet (au moins $4$ cas, dont un cas limite) qui aurait détecté le bug.
+\end{enumerate}
+\end{exercice}

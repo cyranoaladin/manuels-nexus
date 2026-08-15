@@ -1,0 +1,35 @@
+% META: {"id": "1NSI-TAB-REMED-02", "chapitre": "1NSI-TABLES", "type_objet": "remediation", "capacites": ["1NSI-TABLES-C2"], "status": "approved", "capacites_codes": ["C2"]}
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : doublons sur une colonne, pas sur la ligne entiere
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-TAB-RE-C2-EX1}{1}{10}
+Un élève cherche les élèves inscrits deux fois (même nom) dans la table suivante, mais
+compare des \textbf{lignes entières} au lieu de la seule colonne \lstinline{nom} :
+\begin{python}
+eleves = [
+    {"nom": "Ali", "age": 16, "classe": "1A"},
+    {"nom": "Ali", "age": 17, "classe": "1B"},
+]
+lignes_str = [str(e) for e in eleves]
+doublons_naifs = [chaine for chaine in set(lignes_str) if lignes_str.count(chaine) > 1]
+\end{python}
+\begin{enumerate}
+  \item Que vaut \lstinline{doublons_naifs} ? Le nom \lstinline{"Ali"} est-il pourtant présent deux fois dans la table ?
+  \item Pourquoi la méthode de l'élève échoue-t-elle à détecter ce cas ?
+  \item Réécrire une détection de doublons qui compare uniquement la colonne \lstinline{nom}, et vérifier qu'elle détecte bien \lstinline{"Ali"}.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% eleves = [
+%     {"nom": "Ali", "age": 16, "classe": "1A"},
+%     {"nom": "Ali", "age": 17, "classe": "1B"},
+% ]
+% lignes_str = [str(ligne) for ligne in eleves]
+% doublons_naifs = [chaine for chaine in set(lignes_str) if lignes_str.count(chaine) > 1]
+% assert doublons_naifs == []
+% noms = [ligne["nom"] for ligne in eleves]
+% doublons_colonne = [n for n in set(noms) if noms.count(n) > 1]
+% assert doublons_colonne == ["Ali"]
+% END-VERIFY

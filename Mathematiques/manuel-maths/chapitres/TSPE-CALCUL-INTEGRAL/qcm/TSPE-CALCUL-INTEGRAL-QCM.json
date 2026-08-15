@@ -1,0 +1,136 @@
+{
+  "chapitre": "TSPE-CALCUL-INTEGRAL",
+  "titre": "Calcul d'integrales et primitives",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "Soit $f(x) = x^2$. L'integrale $\\int_{0}^{3} f(x) dx$ vaut :",
+      "correcte": "B",
+      "options": {
+        "A": "3",
+        "B": "9",
+        "C": "27",
+        "D": "18"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Erreur de primitive $x$ au lieu de $x^3/3$.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "Erreur de puissance $3^3$.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Erreur de facteur.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "La valeur moyenne de $f(x) = 2x$ sur $[0, 4]$ est :",
+      "correcte": "C",
+      "options": {
+        "A": "2",
+        "B": "8",
+        "C": "4",
+        "D": "16"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Division incorrecte par 4.",
+          "renvoi": "C1"
+        },
+        "B": {
+          "erreur": "Oubli de la division par (b-a).",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Calcul de $f(4)$ au lieu de l'integrale.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C2",
+      "enonce": "Si $F$ est une primitive de $f$ sur $[a, b]$, alors $\\int_a^b f(x) dx$ est :",
+      "correcte": "A",
+      "options": {
+        "A": "$F(b) - F(a)$",
+        "B": "$F(a) - F(b)$",
+        "C": "$f(b) - f(a)$",
+        "D": "$F(b) + F(a)$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Ordre inverse des bornes.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Utilisation de $f$ au lieu de $F$.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Addition au lieu de soustraction.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "$\\int_0^1 e^{2x} dx$ est egale a :",
+      "correcte": "B",
+      "options": {
+        "A": "$e^2 - 1$",
+        "B": "$\\frac{e^2 - 1}{2}$",
+        "C": "$2(e^2 - 1)$",
+        "D": "$e^2$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Oubli du facteur $1/2$ de la primitive.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Multiplication par 2 au lieu de division par 2.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Oubli de la valeur en 0.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C3",
+      "enonce": "Par integration par parties de $\\int x e^x dx$, la primitive est :",
+      "correcte": "D",
+      "options": {
+        "A": "$x e^x$",
+        "B": "$e^x$",
+        "C": "$(x+1)e^x$",
+        "D": "$(x-1)e^x$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Oubli du terme du a la derivee de $x$.",
+          "renvoi": "C3"
+        },
+        "B": {
+          "erreur": "Primitive incomplete.",
+          "renvoi": "C3"
+        },
+        "C": {
+          "erreur": "Erreur de signe dans le terme $-e^x$.",
+          "renvoi": "C3"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+% META: {"id": "1NSI-TAB-EX-015", "chapitre": "1NSI-TABLES", "type_objet": "exercice", "capacites": ["1NSI-TABLES-C3"], "parcours": 1, "competences": ["analyser", "concevoir"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-015.tex", "corrige_tex": "chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-015.tex", "status": "approved", "capacites_codes": ["C3"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% eleves = [
+%     {"nom": "Amine", "classe": "1A"}, {"nom": "Lina", "classe": "1B"},
+%     {"nom": "Omar", "classe": "1A"}, {"nom": "Sara", "classe": "1B"},
+% ]
+% absences = [
+%     {"nom": "Amine", "nb_absences": 2}, {"nom": "Omar", "nb_absences": 0}, {"nom": "Sara", "nb_absences": 5},
+% ]
+% def fusionner(table1, table2, cle):
+%     index2 = {ligne[cle]: ligne for ligne in table2}
+%     fusion = []
+%     for ligne1 in table1:
+%         if ligne1[cle] in index2:
+%             complement = {k: v for k, v in index2[ligne1[cle]].items() if k != cle}
+%             fusion.append({**ligne1, **complement})
+%     return fusion
+% resultat = fusionner(eleves, absences, "nom")
+% assert len(resultat) == 3
+% assert "Lina" not in [ligne["nom"] for ligne in resultat]
+% END-VERIFY
+\begin{exercice}{1NSI-TAB-EX-005}{3}{15}
+Un lycée dispose de deux tables :
+\begin{python}
+eleves = [
+    {"nom": "Amine", "classe": "1A"},
+    {"nom": "Lina", "classe": "1B"},
+    {"nom": "Omar", "classe": "1A"},
+    {"nom": "Sara", "classe": "1B"},
+]
+absences = [
+    {"nom": "Amine", "nb_absences": 2},
+    {"nom": "Omar", "nb_absences": 0},
+    {"nom": "Sara", "nb_absences": 5},
+]
+\end{python}
+\begin{enumerate}
+  \item En utilisant la fonction \lstinline{fusionner(table1, table2, cle)} du cours, fusionner \lstinline{eleves} et \lstinline{absences} sur la colonne \lstinline{nom}. Combien de lignes contient le résultat ?
+  \item Quel élève de \lstinline{eleves} n'apparaît \textbf{pas} dans la table fusionnée ? Pourquoi ?
+  \item Le CPE souhaite une table listant \textbf{tous} les élèves, y compris ceux sans donnée d'absence (avec \lstinline{nb_absences} à $0$ par défaut dans ce cas). Proposer, en français ou en pseudo-code, une modification de la fonction \lstinline{fusionner} permettant d'obtenir ce résultat.
+\end{enumerate}
+\end{exercice}

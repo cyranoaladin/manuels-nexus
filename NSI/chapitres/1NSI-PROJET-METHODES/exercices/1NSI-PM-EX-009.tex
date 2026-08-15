@@ -1,0 +1,54 @@
+% META: {"id": "1NSI-PM-EX-009", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "exercice", "capacites": ["1NSI-PROJET-METHODES-C2"], "parcours": 1, "competences": ["communiquer", "analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-009.tex", "corrige_tex": "chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-009.tex", "status": "approved", "capacites_codes": ["C2"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% def a_une_docstring(fonction):
+%     return fonction.__doc__ is not None and len(fonction.__doc__.strip()) > 0
+% def tri_insertion(tableau):
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j -= 1
+%         tableau[j + 1] = valeur
+%     return tableau
+% assert a_une_docstring(tri_insertion) is False
+% def tri_insertion_documente(tableau):
+%     """Trie tableau par ordre croissant, par insertion.
+%
+%     Precondition : tableau est une liste d'elements comparables entre eux.
+%     Postcondition : le resultat est une liste triee, de meme longueur.
+%     """
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j -= 1
+%         tableau[j + 1] = valeur
+%     return tableau
+% assert a_une_docstring(tri_insertion_documente) is True
+% assert tri_insertion_documente([3, 1, 2]) == [1, 2, 3]
+% END-VERIFY
+\begin{exercice}{1NSI-PM-EX-004}{2}{10}
+On reprend la fonction \lstinline{tri_insertion} d'un chapitre précédent, sans aucune
+documentation :
+\begin{python}
+def tri_insertion(tableau):
+    tableau = tableau[:]
+    for i in range(1, len(tableau)):
+        valeur = tableau[i]
+        j = i - 1
+        while j >= 0 and tableau[j] > valeur:
+            tableau[j + 1] = tableau[j]
+            j -= 1
+        tableau[j + 1] = valeur
+    return tableau
+\end{python}
+\begin{enumerate}
+  \item Vérifier, avec \lstinline{a_une_docstring} du cours, que cette fonction n'est pas documentée.
+  \item Écrire une docstring complète pour cette fonction (rôle, précondition, postcondition), puis vérifier qu'elle est bien détectée comme documentée.
+  \item Si tu devais présenter cette fonction en $2$ minutes à l'oral, quels seraient les $3$ points les plus importants à expliquer (au-delà d'une lecture ligne par ligne du code) ?
+\end{enumerate}
+\end{exercice}

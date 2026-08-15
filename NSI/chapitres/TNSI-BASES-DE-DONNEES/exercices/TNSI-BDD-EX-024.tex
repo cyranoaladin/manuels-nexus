@@ -1,0 +1,28 @@
+% META: {"id": "TNSI-BDD-EX-024", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "exercice", "capacites": ["TNSI-BASES-DE-DONNEES-C6"], "capacites_codes": ["C6"], "methodes": ["M1"], "parcours": 2, "competences": ["programmer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-BASES-DE-DONNEES/exercices/TNSI-BDD-EX-024.tex", "corrige_tex": "chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-024.tex", "status": "approved"}
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Stock(id INTEGER PRIMARY KEY, produit TEXT, quantite INTEGER)")
+% conn.executemany("INSERT INTO Stock VALUES (?,?,?)", [
+%     (1, "Cahier", 40), (2, "Stylo", 0), (3, "Regle", 12),
+% ])
+% conn.execute("INSERT INTO Stock(produit, quantite) VALUES ('Gomme', 25)")
+% conn.execute("UPDATE Stock SET quantite = quantite - 5 WHERE produit = 'Cahier'")
+% conn.execute("DELETE FROM Stock WHERE quantite = 0")
+% conn.commit()
+% cur = conn.execute("SELECT produit, quantite FROM Stock ORDER BY produit")
+% assert cur.fetchall() == [("Cahier", 35), ("Gomme", 25), ("Regle", 12)]
+% END-VERIFY
+\begin{exercice}{TNSI-BDD-EX-004}{2}{20}
+On dispose de la table :
+\begin{sql}
+CREATE TABLE Stock(id INTEGER PRIMARY KEY, produit TEXT, quantite INTEGER);
+INSERT INTO Stock VALUES (1, 'Cahier', 40), (2, 'Stylo', 0), (3, 'Regle', 12);
+\end{sql}
+Écrire les requêtes SQL permettant, dans l'ordre, de :
+\begin{enumerate}
+  \item ajouter un produit \texttt{'Gomme'} avec une quantité de $25$ ;
+  \item diminuer de $5$ la quantité de \texttt{'Cahier'} (sans réécrire la valeur numérique finale) ;
+  \item supprimer tous les produits dont la quantité en stock est nulle.
+\end{enumerate}
+\end{exercice}

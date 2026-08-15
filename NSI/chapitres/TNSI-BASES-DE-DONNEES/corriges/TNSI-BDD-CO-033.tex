@@ -1,0 +1,25 @@
+% META: {"id": "TNSI-BDD-CO-033", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "correction", "exercice_ref": "TNSI-BDD-EX-001", "capacites_codes": ["C8"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-BASES-DE-DONNEES-C8"], "parcours": 1, "fichier_exercice": "chapitres/TNSI-BASES-DE-DONNEES/exercices/TNSI-BDD-EX-033.tex"}
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Adherent(id INTEGER PRIMARY KEY, nom TEXT, prenom TEXT)")
+% conn.execute("CREATE TABLE Sport(id INTEGER PRIMARY KEY, nom TEXT, coach TEXT)")
+% conn.execute("CREATE TABLE Seance(id INTEGER PRIMARY KEY, id_adherent INTEGER REFERENCES Adherent(id), id_sport INTEGER REFERENCES Sport(id), jour TEXT)")
+% conn.execute("INSERT INTO Adherent VALUES (1, 'Diallo', 'Awa')")
+% conn.execute("INSERT INTO Sport VALUES (1, 'Natation', 'M. Petit'), (2, 'Escalade', 'Mme Roux')")
+% conn.execute("INSERT INTO Seance VALUES (1, 1, 1, 'lundi'), (2, 1, 2, 'mercredi')")
+% conn.commit()
+% cur = conn.execute("SELECT Sport.nom FROM Seance JOIN Sport ON Seance.id_sport = Sport.id WHERE Seance.id_adherent = 1")
+% assert set(r[0] for r in cur.fetchall()) == {"Natation", "Escalade"}
+% END-VERIFY
+\begin{corrige}{TNSI-BDD-EX-001}
+\textbf{Q1.} Un adhérent pratiquant deux sports apparaît \textbf{deux fois} dans la table (une ligne par couple adhérent/sport), avec son nom et son prénom \textbf{dupliqués}. Si l'on corrige une faute dans son nom sur une seule ligne, les deux lignes deviennent incohérentes entre elles : c'est une anomalie de mise à jour.
+
+\textbf{Q2.} On sépare en trois relations :
+\begin{sql}
+Adherent(id, nom, prenom)
+Sport(id, nom, coach)
+Seance(id, id_adherent, id_sport, jour)
+\end{sql}
+\texttt{Seance.id\_adherent} est une clé étrangère vers \texttt{Adherent.id}, et \texttt{Seance.id\_sport} une clé étrangère vers \texttt{Sport.id}. Le nom de l'adhérent n'est désormais stocké qu'une seule fois, quel que soit le nombre de sports pratiqués.
+\end{corrige}

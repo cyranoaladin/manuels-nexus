@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-PROBA-CO-016", "chapitre": "TSPE-PROBABILITES", "type_objet": "correction", "exercice_ref": "TSPE-PROBA-EX-007", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-PROBA-C4"], "parcours": 1, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-016.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% V = Rational(2,10)*Rational(8,10)
+% assert V == Rational(4, 25)
+% END-VERIFY
+\begin{corrige}{TSPE-PROBA-EX-007}
+
+\textbf{Q1.} $V(X_1) = p(1-p) = 0{,}2\times0{,}8 = 0{,}16 = \dfrac{4}{25}$.
+
+\textbf{Q2.} Les composants sont independants (donne dans l'enonce), donc les variables $X_1,X_2,X_3$ sont independantes : l'additivite de la variance s'applique.
+
+\textbf{Q3.} $V(X_1+X_2+X_3) = V(X_1)+V(X_2)+V(X_3) = 3\times\dfrac{4}{25} = \boxed{\dfrac{12}{25}} = 0{,}48$.
+
+\end{corrige}

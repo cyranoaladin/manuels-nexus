@@ -1,67 +1,110 @@
-% META: {"id": "TSPE-CALCUL-INTEGRAL-QCM", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4","C7","C8"], "status": "generated"}
+% META: {"id": "TSPE-CALCUL-INTEGRAL-QCM", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "qcm", "genere_depuis": "chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-evaluation — Calcul intégral}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Calcul d'integrales et primitives}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule reponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C2/C7 — Calcul et théorème fondamental}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Si $F$ est une primitive de $f$ sur $[a,b]$, alors $\displaystyle\int_a^b f(x)\,\mathrm{d}x$ vaut :
+\item[] \textbf{Capacite C1}
+
+\item \textbf{[Q1]} Soit $f(x) = x^2$. L'integrale $\int_{0}^{3} f(x) dx$ vaut :
   \begin{enumerate}[label=\Alph*.]
-    \item $F(a)-F(b)$.
-    \item $F(b)-F(a)$.
-    \item $F(b)+F(a)$.
-    \item $F'(b)-F'(a)$.
+    \item 3
+    \item 9
+    \item 27
+    \item 18
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q2]} Pour une fonction $f$ continue, positive et croissante, la fonction $x \mapsto \int_a^x f(t)\,\mathrm{d}t$ est :
+\item \textbf{[Q2]} La valeur moyenne de $f(x) = 2x$ sur $[0, 4]$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item une primitive de $f$.
-    \item une primitive de $f'$.
-    \item constante.
-    \item toujours nulle.
+    \item 2
+    \item 8
+    \item 4
+    \item 16
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C2}
 
-\subsection*{C8 — Intégration par parties}
-
-\item \textbf{[Q3]} La formule d'integration par parties s'ecrit :
+\item \textbf{[Q3]} Si $F$ est une primitive de $f$ sur $[a, b]$, alors $\int_a^b f(x) dx$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item $\int_a^b uv' = \int_a^b u'v$.
-    \item $\int_a^b uv' = [uv]_a^b + \int_a^b u'v$.
-    \item $\int_a^b uv' = [uv]_a^b - \int_a^b u'v$.
-    \item $\int_a^b uv' = [u'v']_a^b$.
+    \item $F(b) - F(a)$
+    \item $F(a) - F(b)$
+    \item $f(b) - f(a)$
+    \item $F(b) + F(a)$
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C3/C4 — Comparaison et aires}
-
-\item \textbf{[Q4]} Si $f \leq g$ sur $[a,b]$, alors :
+\item \textbf{[Q4]} $\int_0^1 e^{2x} dx$ est egale a :
   \begin{enumerate}[label=\Alph*.]
-    \item $\int_a^b f \geq \int_a^b g$.
-    \item $\int_a^b f \leq \int_a^b g$.
-    \item $\int_a^b f = \int_a^b g$.
-    \item on ne peut rien dire.
+    \item $e^2 - 1$
+    \item $\frac{e^2 - 1}{2}$
+    \item $2(e^2 - 1)$
+    \item $e^2$
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C3}
 
-\item \textbf{[Q5]} L'aire entre les courbes de $f$ et $g$ sur $[a,b]$, avec $g \leq f$, se calcule par :
+\item \textbf{[Q5]} Par integration par parties de $\int x e^x dx$, la primitive est :
   \begin{enumerate}[label=\Alph*.]
-    \item $\int_a^b (f+g)$.
-    \item $\int_a^b (f-g)$.
-    \item $\int_a^b (g-f)$.
-    \item $\int_a^b f \times \int_a^b g$.
+    \item $x e^x$
+    \item $e^x$
+    \item $(x+1)e^x$
+    \item $(x-1)e^x$
   \end{enumerate}
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C1 & \textbf{B} \\
+Q2 & C1 & \textbf{C} \\
+Q3 & C2 & \textbf{A} \\
+Q4 & C2 & \textbf{B} \\
+Q5 & C3 & \textbf{D} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{A} — Erreur de primitive $x$ au lieu de $x^3/3$. \emph{Renvoi : C1.}
+    \item \textbf{C} — Erreur de puissance $3^3$. \emph{Renvoi : C1.}
+    \item \textbf{D} — Erreur de facteur. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Division incorrecte par 4. \emph{Renvoi : C1.}
+    \item \textbf{B} — Oubli de la division par (b-a). \emph{Renvoi : C1.}
+    \item \textbf{D} — Calcul de $f(4)$ au lieu de l'integrale. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{B} — Ordre inverse des bornes. \emph{Renvoi : C2.}
+    \item \textbf{C} — Utilisation de $f$ au lieu de $F$. \emph{Renvoi : C2.}
+    \item \textbf{D} — Addition au lieu de soustraction. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — Oubli du facteur $1/2$ de la primitive. \emph{Renvoi : C2.}
+    \item \textbf{C} — Multiplication par 2 au lieu de division par 2. \emph{Renvoi : C2.}
+    \item \textbf{D} — Oubli de la valeur en 0. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — Oubli du terme du a la derivee de $x$. \emph{Renvoi : C3.}
+    \item \textbf{B} — Primitive incomplete. \emph{Renvoi : C3.}
+    \item \textbf{C} — Erreur de signe dans le terme $-e^x$. \emph{Renvoi : C3.}
+  \end{itemize}
+\end{itemize}

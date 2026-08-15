@@ -1,0 +1,136 @@
+{
+  "chapitre": "TCOMPL-ECHANTILLONNAGE",
+  "titre": "Echantillonnage et estimation",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "L'intervalle de confiance usuel au niveau 95% pour une proportion p avec un echantillon de taille n est :",
+      "correcte": "A",
+      "options": {
+        "A": "$[f - \\frac{1}{\\sqrt{n}} ; f + \\frac{1}{\\sqrt{n}}]$",
+        "B": "$[f - \\frac{1}{n} ; f + \\frac{1}{n}]$",
+        "C": "$[f - 1,96 ; f + 1,96]$",
+        "D": "$[0 ; 1]$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Erreur d'exposant sur n.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "Oubli de diviser par sqrt(n).",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Intervalle trivial non informatif.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "Pour diviser la largeur de l'intervalle de confiance par 2, la taille n de l'echantillon doit etre :",
+      "correcte": "C",
+      "options": {
+        "A": "Doublee",
+        "B": "Triplee",
+        "C": "Multipliee par 4",
+        "D": "Divisee par 2"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Oubli de la racine carree au denominateur.",
+          "renvoi": "C1"
+        },
+        "B": {
+          "erreur": "Facteur 3 incorrect.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Effet inverse.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C2",
+      "enonce": "La frequence observee f sur un echantillon de taille n suit approximativement :",
+      "correcte": "B",
+      "options": {
+        "A": "Une loi uniforme",
+        "B": "Une loi normale sous les conditions d'application",
+        "C": "Une loi de Poisson",
+        "D": "Une loi d'exponentielle"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Theoreme central limite implique la loi normale.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Loi de Poisson pas adaptee aux frequences.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Loi continue non symetrique.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "Un estimateur sans biais du milieu d'un intervalle de confiance est :",
+      "correcte": "D",
+      "options": {
+        "A": "La taille n",
+        "B": "La variance",
+        "C": "L'ecart-type",
+        "D": "La frequence observee f"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "La taille n est un parametre de conception.",
+          "renvoi": "C2"
+        },
+        "B": {
+          "erreur": "La variance mesure la dispersion.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "L'ecart-type mesure la variabilite.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C3",
+      "enonce": "Les conditions standard $n \\ge 30$, $nf \\ge 5$ et $n(1-f) \\ge 5$ permettent d'assurer :",
+      "correcte": "A",
+      "options": {
+        "A": "La validite de l'approximation normale de la frequence",
+        "B": "Que la taille n est infinie",
+        "C": "Que p est exactement egal a f",
+        "D": "Que la variance est nulle"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "n reste fini.",
+          "renvoi": "C3"
+        },
+        "C": {
+          "erreur": "f est une estimation, pas une egalite exacte.",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "La variance d'echantillonnage n'est pas nulle.",
+          "renvoi": "C3"
+        }
+      }
+    }
+  ]
+}

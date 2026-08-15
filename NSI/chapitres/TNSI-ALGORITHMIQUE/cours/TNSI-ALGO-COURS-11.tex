@@ -1,0 +1,107 @@
+% META: {"id": "TNSI-ALGO-COURS-11", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "cours", "capacites_codes": ["C11"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TNSI-ALGORITHMIQUE-C11"]}
+\section{Cycle et chemin dans un graphe}
+
+% ============================================================
+% STRATE 1 — Detection de cycle
+% ============================================================
+
+\definition[1]{
+Un \textbf{cycle} est un chemin qui part d'un sommet et y revient sans repasser deux fois par la même arête. Pour un graphe \textbf{non orienté}, on détecte un cycle lors d'un parcours (BFS ou DFS) si l'on rencontre un sommet déjà visité qui n'est \textbf{pas} le sommet dont on vient directement (son parent dans le parcours).
+}
+
+\margeAppui{
+Il ne faut pas confondre un cycle avec le simple fait de \og revoir \fg{} un sommet : dans un graphe non orienté, chaque arête $(u, v)$ permet de revenir immédiatement de $v$ vers $u$, ce qui n'est pas un cycle. On exclut donc explicitement le parent direct.
+}
+
+\textbf{Exemple.}
+\begin{python}
+def a_un_cycle(graphe, sommet, visites, parent):
+    visites.append(sommet)
+    for voisin in graphe[sommet]:
+        if voisin not in visites:
+            if a_un_cycle(graphe, voisin, visites, sommet):
+                return True
+        elif voisin != parent:
+            return True
+    return False
+\end{python}
+
+% BEGIN-VERIFY
+% def a_un_cycle(graphe, sommet, visites, parent):
+%     visites.append(sommet)
+%     for voisin in graphe[sommet]:
+%         if voisin not in visites:
+%             if a_un_cycle(graphe, voisin, visites, sommet):
+%                 return True
+%         elif voisin != parent:
+%             return True
+%     return False
+%
+% carre = {0: [1, 2], 1: [0, 3], 2: [0, 3], 3: [1, 2]}
+% assert a_un_cycle(carre, 0, [], None) is True
+% arbre_graphe = {0: [1, 2], 1: [0], 2: [0]}
+% assert a_un_cycle(arbre_graphe, 0, [], None) is False
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Recherche de chemin
+% ============================================================
+
+\definition[2]{
+\textbf{Chercher un chemin} entre deux sommets $A$ et $B$ revient à effectuer un parcours (BFS ou DFS) depuis $A$ en mémorisant, pour chaque sommet visité, le sommet depuis lequel il a été atteint ; on remonte ensuite cette chaîne depuis $B$ pour reconstituer le chemin. \textbf{L'absence de chemin} doit être explicitement traitée : si $B$ n'est jamais atteint, aucun chemin n'existe.
+}
+
+\begin{python}
+def chemin(graphe, depart, arrivee):
+    predecesseur = {depart: None}
+    file = [depart]
+    while file:
+        sommet = file.pop(0)
+        if sommet == arrivee:
+            break
+        for voisin in graphe[sommet]:
+            if voisin not in predecesseur:
+                predecesseur[voisin] = sommet
+                file.append(voisin)
+    if arrivee not in predecesseur:
+        return None
+    chemin_trouve = []
+    sommet = arrivee
+    while sommet is not None:
+        chemin_trouve.append(sommet)
+        sommet = predecesseur[sommet]
+    chemin_trouve.reverse()
+    return chemin_trouve
+\end{python}
+
+% BEGIN-VERIFY
+% def chemin(graphe, depart, arrivee):
+%     predecesseur = {depart: None}
+%     file = [depart]
+%     while file:
+%         sommet = file.pop(0)
+%         if sommet == arrivee:
+%             break
+%         for voisin in graphe[sommet]:
+%             if voisin not in predecesseur:
+%                 predecesseur[voisin] = sommet
+%                 file.append(voisin)
+%     if arrivee not in predecesseur:
+%         return None
+%     chemin_trouve = []
+%     sommet = arrivee
+%     while sommet is not None:
+%         chemin_trouve.append(sommet)
+%         sommet = predecesseur[sommet]
+%     chemin_trouve.reverse()
+%     return chemin_trouve
+%
+% graphe = {0: [1, 2], 1: [0, 3], 2: [0], 3: [1]}
+% assert chemin(graphe, 0, 3) == [0, 1, 3]
+% isole = {0: [1], 1: [0], 2: []}
+% assert chemin(isole, 0, 2) is None
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Ne pas traiter le cas où aucun chemin n'existe.} Si l'on oublie de tester \lstinline{if arrivee not in predecesseur:}, la reconstruction du chemin lève une \lstinline{KeyError} lorsque le sommet d'arrivée n'a jamais été atteint (graphe non connexe). Un algorithme de recherche de chemin correct doit toujours prévoir ce cas et renvoyer une valeur explicite (ici \lstinline{None}) plutôt que de planter.
+}

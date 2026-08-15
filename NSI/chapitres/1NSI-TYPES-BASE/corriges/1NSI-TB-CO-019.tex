@@ -1,0 +1,19 @@
+% META: {"id": "1NSI-TB-CO-019", "chapitre": "1NSI-TYPES-BASE", "type_objet": "correction", "exercice_ref": "1NSI-TB-EX-001", "capacites": ["1NSI-TYPES-BASE-C4"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C4"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-019.tex"}
+% BEGIN-VERIFY
+% assert bin(156) == '0b10011100'
+% assert hex(156) == '0x9c'
+% assert int('11001', 2) == 25
+% assert int('3F', 16) == 63
+% END-VERIFY
+\begin{corrige}{1NSI-TB-EX-001}
+\textbf{1.} Divisions par 2 : $156=2\times78+0$, $78=2\times39+0$, $39=2\times19+1$,
+$19=2\times9+1$, $9=2\times4+1$, $4=2\times2+0$, $2=2\times1+0$, $1=2\times0+1$. En lisant
+les restes de bas en haut : $156=10011100_2$.
+
+Divisions par 16 : $156=16\times9+12$ ($12=$C en hexadécimal), $9=16\times0+9$. Donc
+$156=9C_{16}$.
+
+\textbf{2.} $11001_2=1\times16+1\times8+0\times4+0\times2+1\times1=25$.
+
+\textbf{3.} $3F_{16}=3\times16+15=48+15=63$.
+\end{corrige}

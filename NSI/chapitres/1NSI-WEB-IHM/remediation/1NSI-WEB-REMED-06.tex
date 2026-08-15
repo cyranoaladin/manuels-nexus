@@ -1,0 +1,26 @@
+% META: {"id": "1NSI-WEB-REMED-06", "chapitre": "1NSI-WEB-IHM", "type_objet": "remediation", "capacites": ["1NSI-WEB-IHM-C6"], "status": "approved", "capacites_codes": ["C6"]}
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C9 : ne pas utiliser GET pour des donnees confidentielles
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-WEB-RE-C9-EX1}{1}{10}
+Un élève conçoit un formulaire de réinitialisation de mot de passe avec la méthode GET :
+\begin{console}
+<form action="/nouveau_mdp" method="GET">
+    <input type="password" name="nouveau_mdp">
+    <button type="submit">Valider</button>
+</form>
+\end{console}
+\begin{enumerate}
+  \item En utilisant \lstinline{urlencode}, construire l'URL qui serait générée si l'utilisateur saisit \lstinline{"MonSecret2026"} comme nouveau mot de passe.
+  \item Le nouveau mot de passe apparaît-il dans cette URL ? Où cette URL risque-t-elle d'être enregistrée (historique, journaux serveur) ?
+  \item Réécrire l'attribut \lstinline{method} du formulaire pour corriger ce problème.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from urllib.parse import urlencode
+% donnees = {"nouveau_mdp": "MonSecret2026"}
+% url = "https://site.fr/nouveau_mdp?" + urlencode(donnees)
+% assert "MonSecret2026" in url
+% END-VERIFY

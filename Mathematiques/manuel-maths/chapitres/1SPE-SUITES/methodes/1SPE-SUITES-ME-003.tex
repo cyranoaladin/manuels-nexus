@@ -8,7 +8,8 @@
 
 \pasApas{%
   \begin{enumerate}
-    \item Je vérifie que $u_n \neq 0$ pour tout $n \in \mathbb{N}$ (condition indispensable pour former le quotient).
+    \item Je vérifie que $u_n 
+eq 0$ pour tout $n \in \mathbb{N}$ (condition indispensable pour former le quotient).
     \item Je calcule le quotient $\dfrac{u_{n+1}}{u_n}$ en remplaçant $n$ par $n+1$ dans l'expression de $u_n$.
     \item Je simplifie l'expression obtenue.
     \item Je vérifie que le résultat est une constante $q$ (indépendante de $n$).
@@ -21,9 +22,11 @@
   Montrer que $(u_n)$ est une suite géométrique et préciser sa raison et son premier terme.
 
   \medskip
-  \commentaireMarge{Vérifier que $u_n \neq 0$ pour tout $n$.}%
+  \commentaireMarge{Vérifier que $u_n 
+eq 0$ pour tout $n$.}%
   Pour tout $n \in \mathbb{N}$, $3^n > 0$, donc $u_n = 7 \times 3^n > 0$.
-  En particulier, $u_n \neq 0$ pour tout $n \in \mathbb{N}$.
+  En particulier, $u_n 
+eq 0$ pour tout $n \in \mathbb{N}$.
 
   \commentaireMarge{Exprimer $u_{n+1}$ en remplaçant $n$ par $n+1$.}%
   Pour tout $n \in \mathbb{N}$ :
@@ -49,7 +52,8 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Oublier de vérifier que $u_n \neq 0$ avant de former le quotient.
+    \item \textbf{Piège 1.} Oublier de vérifier que $u_n 
+eq 0$ avant de former le quotient.
       Si $u_n = 0$ pour un certain rang, le quotient $u_{n+1}/u_n$ est une division par zéro : la démonstration est invalide.
     \item \textbf{Piège 2.} Conclure à partir d'exemples numériques sans preuve générale.
       Vérifier $u_1/u_0 = u_2/u_1 = 3$ ne suffit pas ; le calcul doit être mené pour tout $n \in \mathbb{N}$.

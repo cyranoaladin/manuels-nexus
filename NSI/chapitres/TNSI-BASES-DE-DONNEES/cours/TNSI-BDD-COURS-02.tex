@@ -1,0 +1,62 @@
+% META: {"id": "TNSI-BDD-COURS-02", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "cours", "capacites_codes": ["C2"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TNSI-BASES-DE-DONNEES-C2"]}
+\section{Le système de gestion de bases de données}
+
+% ============================================================
+% STRATE 1 — Services d'un SGBD
+% ============================================================
+
+\definition[1]{
+Un \textbf{système de gestion de bases de données} (SGBD) est un logiciel qui prend en charge le stockage, l'interrogation et la modification des données d'une base, en offrant quatre services principaux :
+\begin{itemize}
+  \item la \textbf{persistance} : les données restent stockées durablement, indépendamment de l'exécution d'un programme particulier ;
+  \item la \textbf{concurrence} : plusieurs utilisateurs ou programmes peuvent accéder à la base simultanément sans corrompre les données ;
+  \item l'\textbf{efficacité} : les requêtes sur de grands volumes de données restent rapides, notamment grâce à des index ;
+  \item la \textbf{sécurisation} : l'accès aux données est contrôlé (droits d'utilisateurs) et leur intégrité est préservée (contraintes, transactions).
+\end{itemize}
+}
+
+\textbf{Exemple.} La persistance : une base créée dans un fichier reste accessible après la fermeture du programme qui l'a créée.
+\begin{python}
+import sqlite3
+
+conn = sqlite3.connect("bibliotheque.db")
+conn.execute("CREATE TABLE IF NOT EXISTS Livre(id INTEGER PRIMARY KEY, titre TEXT)")
+conn.execute("INSERT INTO Livre(titre) VALUES ('1984')")
+conn.commit()
+conn.close()
+# Le fichier bibliotheque.db contient desormais la table et sa ligne,
+# meme apres la fin du programme.
+\end{python}
+
+% BEGIN-VERIFY
+% import sqlite3, os, tempfile
+% with tempfile.TemporaryDirectory() as tmp:
+%     path = os.path.join(tmp, "bibliotheque.db")
+%     conn = sqlite3.connect(path)
+%     conn.execute("CREATE TABLE IF NOT EXISTS Livre(id INTEGER PRIMARY KEY, titre TEXT)")
+%     conn.execute("INSERT INTO Livre(titre) VALUES ('1984')")
+%     conn.commit()
+%     conn.close()
+%     assert os.path.exists(path)
+%     conn2 = sqlite3.connect(path)
+%     cur = conn2.cursor()
+%     cur.execute("SELECT titre FROM Livre")
+%     assert cur.fetchone() == ("1984",)
+%     conn2.close()
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Concurrence et transactions
+% ============================================================
+
+\margeAppui{
+Sans gestion de la \textbf{concurrence}, deux modifications simultanées de la même donnée (par exemple deux emprunts du même exemplaire unique au même instant) pourraient produire un résultat incohérent. Le SGBD sérialise ou verrouille les accès pour l'éviter.
+}
+
+\propriete[Transaction]{
+Une \textbf{transaction} regroupe plusieurs opérations en un tout indivisible : soit toutes les opérations réussissent et sont \textbf{validées} (\texttt{COMMIT}), soit une échoue et toutes sont \textbf{annulées} (\texttt{ROLLBACK}), pour ne jamais laisser la base dans un état intermédiaire incohérent.
+}
+
+\erreurFrequente{
+\textbf{Confondre un SGBD et un simple fichier.} Un fichier texte ou CSV stocke des données mais n'offre \textbf{aucun} des quatre services ci-dessus : pas de contrôle de concurrence, pas de garantie d'intégrité, pas de langage d'interrogation efficace sur de gros volumes. C'est précisément pour ces raisons qu'on utilise un SGBD dès que les données doivent être partagées, protégées ou interrogées de façon complexe.
+}

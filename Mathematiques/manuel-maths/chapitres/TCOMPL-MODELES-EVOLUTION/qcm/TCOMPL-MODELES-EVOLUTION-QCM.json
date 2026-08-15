@@ -1,0 +1,136 @@
+{
+  "chapitre": "TCOMPL-MODELES-EVOLUTION",
+  "titre": "Modeles d'evolution discrète et continue",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "Une suite arithmetique de raison r et premier terme $u_0$ a pour terme general :",
+      "correcte": "A",
+      "options": {
+        "A": "$u_n = u_0 + n r$",
+        "B": "$u_n = u_0 \\times r^n$",
+        "C": "$u_n = u_0 + r^n$",
+        "D": "$u_n = u_0 n r$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Formule d'une suite geometrique.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "Formule incorrecte.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Produit au lieu d'addition.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "Une suite geometrique de raison $q > 1$ et $u_0 > 0$ est :",
+      "correcte": "C",
+      "options": {
+        "A": "Decroissante et converge vers 0",
+        "B": "Constante",
+        "C": "Strictement croissante et diverge vers $+\\infty$",
+        "D": "Alternée"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Comportement pour 0 < q < 1.",
+          "renvoi": "C1"
+        },
+        "B": {
+          "erreur": "Comportement pour q = 1.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Comportement pour q < 0.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C2",
+      "enonce": "L'equation differentielle $y' = a y$ a pour solutions les fonctions :",
+      "correcte": "B",
+      "options": {
+        "A": "$f(x) = a x + C$",
+        "B": "$f(x) = C e^{a x}$",
+        "C": "$f(x) = C e^{-a x}$",
+        "D": "$f(x) = C x^a$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Solution de y' = a.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Erreur de signe dans l'exposant.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Fonction puissance au lieu d'exponentielle.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "Le modele de Malthus suppose un taux de croissance :",
+      "correcte": "D",
+      "options": {
+        "A": "Decroissant",
+        "B": "Nul",
+        "C": "Logistique",
+        "D": "Constant et proportionnel a la population"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Hypothese du modele de Verhulst.",
+          "renvoi": "C2"
+        },
+        "B": {
+          "erreur": "Population constante.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Modele avec capacite d'accueil.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C3",
+      "enonce": "Le modele logistique de Verhulst comporte une capacite d'accueil K qui est :",
+      "correcte": "A",
+      "options": {
+        "A": "La limite de la population quand $t \\to +\\infty$",
+        "B": "La population initiale $u_0$",
+        "C": "Le taux de croissance initial",
+        "D": "Le temps de demi-vie"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "K est l'asymptote horizontale.",
+          "renvoi": "C3"
+        },
+        "C": {
+          "erreur": "K n'est pas un taux.",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "K est une taille de population, pas un temps.",
+          "renvoi": "C3"
+        }
+      }
+    }
+  ]
+}

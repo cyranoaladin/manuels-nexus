@@ -1,0 +1,22 @@
+% META: {"id": "TEXP-GRA-EX-018", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C3"], "capacites_codes": ["C3"], "methodes": ["M2","M5"], "parcours": 2, "competences": ["modeliser","raisonner"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-018.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-018.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # boite de base carree 20x20, hauteur x, volume V = x(20-2x)^2 sur [0,10]
+% V = x*(20 - 2*x)**2
+% Vp = diff(V, x)
+% crit = solve(Vp, x)
+% assert Rational(10,3) in crit
+% Vmax = V.subs(x, Rational(10,3))
+% assert Vmax == Rational(16000, 27)
+% assert V.subs(x, 0) == 0
+% assert V.subs(x, 10) == 0
+% END-VERIFY
+\begin{exercice}{TEXP-GRA-EX-018}{3}{25}
+On decoupe aux quatre coins d'une plaque carree de cote $20$ cm des carres de cote $x$ cm, puis on replie pour former une boite ouverte.
+\begin{enumerate}
+  \item Exprimer le volume $V(x)$ de la boite en fonction de $x$.
+  \item Pour quelle valeur de $x$ le volume est-il maximal ? Quel est ce volume maximal ?
+\end{enumerate}
+
+\end{exercice}

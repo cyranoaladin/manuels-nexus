@@ -1,0 +1,24 @@
+% META: {"id": "TEXP-MAT-CO-021", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige", "exercice_ref": "TEXP-MAT-EX-021", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', positive=True)
+% g = ln(x) - x + 1
+% g2 = diff(g, x, 2)
+% assert g2 == -1/x**2
+% assert g2 < 0  # concave
+% assert g.subs(x, 1) == 0
+% assert diff(g, x).subs(x, 1) == 0
+% # concave + maximum en 1 => g <= 0
+% assert g.subs(x, 2) == ln(2) - 1
+% END-VERIFY
+\begin{corrige}{TEXP-MAT-EX-021}
+
+Posons $g(x) = \ln x - x + 1$ sur $\left]0, +\infty\right[$.
+
+\commentaireMarge{$g'' < 0$ : $g$ est concave, donc son extremum est un maximum.}
+
+$g'(x) = \dfrac{1}{x} - 1$ et $g''(x) = -\dfrac{1}{x^2} < 0$ : $g$ est concave.
+
+$g'(x) = 0 \iff x = 1$ et $g(1) = 0$. Par concavite, $g(x) \leq g(1) = 0$, soit $\ln x \leq x - 1$.
+
+\end{corrige}

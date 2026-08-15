@@ -1,0 +1,27 @@
+% META: {"id": "1NSI-WEB-CO-029", "chapitre": "1NSI-WEB-IHM", "type_objet": "correction", "exercice_ref": "1NSI-WEB-EX-005", "capacites": ["1NSI-WEB-IHM-C5"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C5"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-029.tex"}
+% BEGIN-VERIFY
+% from urllib.parse import urlencode
+% params = {"destination": "Djerba", "voyageurs": 2, "tri": "prix_croissant"}
+% url = "https://voyages.fr/recherche?" + urlencode(params)
+% assert url == "https://voyages.fr/recherche?destination=Djerba&voyageurs=2&tri=prix_croissant"
+% END-VERIFY
+\begin{corrige}{1NSI-WEB-EX-005}
+\textbf{1.}
+\begin{python}
+from urllib.parse import urlencode
+
+params = {"destination": "Djerba", "voyageurs": 2, "tri": "prix_croissant"}
+url = "https://voyages.fr/recherche?" + urlencode(params)
+print(url)
+# https://voyages.fr/recherche?destination=Djerba&voyageurs=2&tri=prix_croissant
+\end{python}
+
+\textbf{2.} Oui : avec GET, les paramètres de recherche font partie intégrante de l'URL.
+Mettre cette URL en favori (ou la partager) permet de retrouver exactement la même
+recherche plus tard, car tous les critères sont encodés dans l'adresse elle-même.
+
+\textbf{3.} Non, ce n'est pas justifié ici : les données transmises (destination,
+nombre de voyageurs, critère de tri) ne sont \textbf{pas confidentielles} — ce sont des
+critères de recherche publics, pas des mots de passe ni des informations sensibles. GET est
+adapté, et présente même un avantage (URL partageable/favorisable) que POST n'offre pas.
+\end{corrige}

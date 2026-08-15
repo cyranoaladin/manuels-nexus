@@ -1,0 +1,42 @@
+% META: {"id": "1NSI-LANG-CO-040", "chapitre": "1NSI-LANGAGE", "type_objet": "correction", "exercice_ref": "1NSI-LANG-EX-004", "capacites": ["1NSI-LANGAGE-C7"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C7"], "parcours": 2, "fichier_exercice": "chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-040.tex"}
+% BEGIN-VERIFY
+% def est_premier(n):
+%     if n < 2:
+%         return False
+%     for i in range(2, n):
+%         if n % i == 0:
+%             return False
+%     return True
+% assert est_premier(1) is False
+% assert est_premier(2) is True
+% assert est_premier(7) is True
+% assert est_premier(8) is False
+% END-VERIFY
+\begin{corrige}{1NSI-LANG-EX-004}
+\textbf{1.} \lstinline{est_premier_bugue(1)} renvoie \lstinline{True} : la boucle
+\lstinline{for i in range(2, 1):} ne s'exécute jamais (l'intervalle est vide), donc la
+fonction renvoie directement \lstinline{True}. Ce n'est \textbf{pas} le résultat attendu :
+$1$ n'est pas un nombre premier (par définition, un nombre premier a exactement deux
+diviseurs distincts, $1$ et lui-même ; $1$ n'en a qu'un seul).
+
+\textbf{2.} Le jeu de tests ($7$ et $8$) ne teste que des valeurs « normales »
+($\geqslant2$), aucune valeur limite comme $n=1$ ou $n=0$. Le succès du test sur $7$ et $8$
+ne prouve pas que la fonction est correcte pour \textbf{tous} les cas, notamment les cas
+limites non testés.
+
+\textbf{3.}
+\begin{python}
+def est_premier(n):
+    if n < 2:
+        return False
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+    return True
+
+assert est_premier(1) is False   # cas limite qui revele le bug
+assert est_premier(2) is True    # plus petit nombre premier
+assert est_premier(7) is True    # cas "normal", premier
+assert est_premier(8) is False   # cas "normal", non premier
+\end{python}
+\end{corrige}

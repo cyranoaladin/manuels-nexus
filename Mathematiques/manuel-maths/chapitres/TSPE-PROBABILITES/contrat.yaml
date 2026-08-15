@@ -1,30 +1,67 @@
 chapitre: TSPE-PROBABILITES
 niveau: TSPE
 theme: PROBABILITES
-titre: "Probabilités : succession d'épreuves, loi binomiale, concentration"
-statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
-
+titre: 'Probabilités : succession d''épreuves, loi binomiale, concentration'
+statut: approved
 capacites:
-  - { code: C1, ref_capacite: TSPE-PROBA-C1, libelle_eleve: "Je sais modéliser une situation par une succession d'épreuves indépendantes, la représenter par un arbre et calculer des probabilités." }
-  - { code: C2, ref_capacite: TSPE-PROBA-C2, libelle_eleve: "Je sais reconnaître et modéliser une situation par un schéma de Bernoulli et une loi binomiale." }
-  - { code: C3, ref_capacite: TSPE-PROBA-C3, libelle_eleve: "Je sais utiliser la loi binomiale pour résoudre des problèmes de seuil, comparaison ou optimisation." }
-  - { code: C4, ref_capacite: TSPE-PROBA-C4, libelle_eleve: "Je sais calculer numériquement des probabilités binomiales et chercher un intervalle de probabilité donnée." }
-  - { code: C5, ref_capacite: TSPE-PROBA-C5, libelle_eleve: "Je sais démontrer l'expression de la probabilité de k succès dans le schéma de Bernoulli, à l'aide des coefficients binomiaux." }
-  - { code: C6, ref_capacite: TSPE-PROBA-C6, libelle_eleve: "Je sais décomposer une variable aléatoire en somme de variables aléatoires plus simples." }
-  - { code: C7, ref_capacite: TSPE-PROBA-C7, libelle_eleve: "Je sais calculer l'espérance d'une variable aléatoire en utilisant la linéarité de l'espérance." }
-  - { code: C8, ref_capacite: TSPE-PROBA-C8, libelle_eleve: "Je sais calculer la variance d'une variable aléatoire en utilisant l'additivité de la variance pour des variables indépendantes." }
-  - { code: C9, ref_capacite: TSPE-PROBA-C9, libelle_eleve: "Je sais démontrer les formules de l'espérance et de la variance de la loi binomiale." }
-  - { code: C10, ref_capacite: TSPE-CONCLGN-C1, libelle_eleve: "Je sais appliquer l'inégalité de Bienaymé-Tchebychev pour déterminer une taille d'échantillon en fonction de la précision et du risque." }
-
+- code: C1
+  ref_capacite: TSPE-PROBA-C1
+  libelle_eleve: Je sais modéliser une situation par une succession d'épreuves indépendantes,
+    la représenter par un arbre et calculer des probabilités.
+- code: C2
+  ref_capacite: TSPE-PROBA-C2
+  libelle_eleve: Je sais reconnaître et modéliser une situation par un schéma de Bernoulli
+    et une loi binomiale.
+- code: C3
+  ref_capacite: TSPE-PROBA-C3
+  libelle_eleve: Je sais utiliser la loi binomiale pour résoudre des problèmes de
+    seuil, comparaison ou optimisation.
+- code: C4
+  ref_capacite: TSPE-PROBA-C4
+  libelle_eleve: Je sais calculer numériquement des probabilités binomiales et chercher
+    un intervalle de probabilité donnée.
+- code: C5
+  ref_capacite: TSPE-PROBA-C5
+  libelle_eleve: Je sais démontrer l'expression de la probabilité de k succès dans
+    le schéma de Bernoulli, à l'aide des coefficients binomiaux.
+- code: C6
+  ref_capacite: TSPE-PROBA-C6
+  libelle_eleve: Je sais décomposer une variable aléatoire en somme de variables aléatoires
+    plus simples.
+- code: C7
+  ref_capacite: TSPE-PROBA-C7
+  libelle_eleve: Je sais calculer l'espérance d'une variable aléatoire en utilisant
+    la linéarité de l'espérance.
+- code: C8
+  ref_capacite: TSPE-PROBA-C8
+  libelle_eleve: Je sais calculer la variance d'une variable aléatoire en utilisant
+    l'additivité de la variance pour des variables indépendantes.
+- code: C9
+  ref_capacite: TSPE-PROBA-C9
+  libelle_eleve: Je sais démontrer les formules de l'espérance et de la variance de
+    la loi binomiale.
+- code: C10
+  ref_capacite: TSPE-CONCLGN-C1
+  libelle_eleve: Je sais appliquer l'inégalité de Bienaymé-Tchebychev pour déterminer
+    une taille d'échantillon en fonction de la précision et du risque.
 prerequis:
-  - { code: R1, libelle: "Probabilités conditionnelles, indépendance, arbres pondérés", chapitre_origine: "1SPE-PROBA-COND" }
-  - { code: R2, libelle: "Variables aléatoires : loi, espérance, variance", chapitre_origine: "1SPE-VARIABLES-ALEATOIRES" }
-  - { code: R3, libelle: "Combinatoire : coefficients binomiaux", chapitre_origine: "TSPE-COMBINATOIRE" }
+- code: R1
+  libelle: Probabilités conditionnelles, indépendance, arbres pondérés
+  chapitre_origine: 1SPE-PROBA-COND
+- code: R2
+  libelle: 'Variables aléatoires : loi, espérance, variance'
+  chapitre_origine: 1SPE-VARIABLES-ALEATOIRES
+- code: R3
+  libelle: 'Combinatoire : coefficients binomiaux'
+  chapitre_origine: TSPE-COMBINATOIRE
+situation_accroche: 'Un laboratoire teste un vaccin sur un grand echantillon. Comment
+  quantifier la fiabilite d''une estimation faite a partir d''un echantillon, et determiner
+  la taille d''echantillon necessaire pour une precision donnee ? Ce chapitre etablit
+  les outils de la loi binomiale et de la concentration pour repondre rigoureusement
+  a ces questions.
 
-situation_accroche: >
-  Un laboratoire teste un vaccin sur un grand echantillon. Comment quantifier la fiabilite
-  d'une estimation faite a partir d'un echantillon, et determiner la taille d'echantillon
-  necessaire pour une precision donnee ? Ce chapitre etablit les outils de la loi binomiale
-  et de la concentration pour repondre rigoureusement a ces questions.
-
-temps_estime_h: { parcours1: 20, parcours2: 17, parcours3: 14 }
+  '
+temps_estime_h:
+  parcours1: 20
+  parcours2: 17
+  parcours3: 14

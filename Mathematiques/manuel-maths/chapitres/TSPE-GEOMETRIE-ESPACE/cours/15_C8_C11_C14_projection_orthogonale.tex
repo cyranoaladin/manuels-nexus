@@ -1,4 +1,4 @@
-% META: {"id": "TSPE-GEOESPACE-CR-015", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "cours", "capacites_codes": ["C8", "C11", "C14"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+% META: {"id": "TSPE-GEOESPACE-CR-015", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "cours", "capacites_codes": ["C8", "C11", "C14"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved"}
 
 \section{Projection orthogonale et distances}
 
@@ -11,11 +11,13 @@ Le \textbf{projete orthogonal} d'un point $M$ sur un plan $\mathcal{P}$ est le p
 }
 
 \theoreme{
-Le projete orthogonal $H$ de $M$ sur $\mathcal{P}$ est le point de $\mathcal{P}$ le plus proche de $M$ : pour tout point $N \in \mathcal{P}$, $N \neq H$, on a $MH < MN$.
+Le projete orthogonal $H$ de $M$ sur $\mathcal{P}$ est le point de $\mathcal{P}$ le plus proche de $M$ : pour tout point $N \in \mathcal{P}$, $N 
+eq H$, on a $MH < MN$.
 }
 
 \demonstration{
-Soit $N \in \mathcal{P}$, $N \neq H$. Comme $H,N \in \mathcal{P}$, le vecteur $\vec{HN}$ est un vecteur du plan $\mathcal{P}$.
+Soit $N \in \mathcal{P}$, $N 
+eq H$. Comme $H,N \in \mathcal{P}$, le vecteur $\vec{HN}$ est un vecteur du plan $\mathcal{P}$.
 
 Par construction, $(MH)$ est orthogonale a $\mathcal{P}$, donc $\vec{MH}$ est orthogonal a tout vecteur de $\mathcal{P}$, en particulier a $\vec{HN}$ : $\vec{MH}\cdot\vec{HN}=0$.
 
@@ -24,7 +26,8 @@ Par la relation de Chasles, $\vec{MN} = \vec{MH}+\vec{HN}$, donc dans le triangl
   MN^2 = MH^2+HN^2.
 \]
 
-Comme $N \neq H$, $HN>0$, donc $HN^2>0$, d'ou $MN^2 = MH^2+HN^2 > MH^2$, soit $MN>MH$ (les deux membres sont positifs).
+Comme $N 
+eq H$, $HN>0$, donc $HN^2>0$, d'ou $MN^2 = MH^2+HN^2 > MH^2$, soit $MN>MH$ (les deux membres sont positifs).
 
 Ainsi $H$ est strictement plus proche de $M$ que tout autre point de $\mathcal{P}$.
 }

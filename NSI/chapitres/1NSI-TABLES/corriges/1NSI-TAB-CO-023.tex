@@ -1,0 +1,131 @@
+% META: {"id": "1NSI-TAB-CO-023", "chapitre": "1NSI-TABLES", "type_objet": "correction", "exercice_ref": "1NSI-TAB-EX-005", "capacites": ["1NSI-TABLES-C4"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C4"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-023.tex"}
+% BEGIN-VERIFY
+% eleves = [
+%     {"nom": "Amine", "classe": "1A"}, {"nom": "Lina", "classe": "1B"},
+%     {"nom": "Omar", "classe": "1A"}, {"nom": "Sara", "classe": "1B"},
+% ]
+% absences = [
+%     {"nom": "Amine", "nb_absences": 2}, {"nom": "Omar", "nb_absences": 0}, {"nom": "Sara", "nb_absences": 5},
+% ]
+% def fusionner_tout(table1, table2, cle, defauts):
+%     colonnes1 = {
+%         colonne for ligne in table1 for colonne in ligne if colonne != cle
+%     }
+%     colonnes2 = {
+%         colonne for ligne in table2 for colonne in ligne if colonne != cle
+%     }
+%     colonnes2.update(colonne for colonne in defauts if colonne != cle)
+%     if not colonnes1.isdisjoint(colonnes2):
+%         raise ValueError("les colonnes hors cle doivent etre disjointes")
+%
+%     index2 = {}
+%     for ligne2 in table2:
+%         index2.setdefault(ligne2[cle], []).append(ligne2)
+%
+%     fusion = []
+%     for ligne1 in table1:
+%         correspondances = index2.get(ligne1[cle], [defauts])
+%         for ligne2 in correspondances:
+%             complement = {k: v for k, v in ligne2.items() if k != cle}
+%             fusion.append({**ligne1, **complement})
+%     return fusion
+% resultat = fusionner_tout(eleves, absences, "nom", {"nb_absences": 0})
+% assert len(resultat) == 4
+% lina = [ligne for ligne in resultat if ligne["nom"] == "Lina"][0]
+% assert lina["nb_absences"] == 0
+% doublons = fusionner_tout(
+%     [{"nom": "Amine", "classe": "1A"}],
+%     [
+%         {"nom": "Amine", "absence": "lundi"},
+%         {"nom": "Amine", "absence": "mardi"},
+%     ],
+%     "nom",
+%     {"absence": "aucune"},
+% )
+% assert doublons == [
+%     {"nom": "Amine", "classe": "1A", "absence": "lundi"},
+%     {"nom": "Amine", "classe": "1A", "absence": "mardi"},
+% ]
+% produit = fusionner_tout(
+%     [
+%         {"nom": "Amine", "groupe": "A"},
+%         {"nom": "Amine", "groupe": "B"},
+%     ],
+%     [
+%         {"nom": "Amine", "absence": "lundi"},
+%         {"nom": "Amine", "absence": "mardi"},
+%     ],
+%     "nom",
+%     {"absence": "aucune"},
+% )
+% assert produit == [
+%     {"nom": "Amine", "groupe": "A", "absence": "lundi"},
+%     {"nom": "Amine", "groupe": "A", "absence": "mardi"},
+%     {"nom": "Amine", "groupe": "B", "absence": "lundi"},
+%     {"nom": "Amine", "groupe": "B", "absence": "mardi"},
+% ]
+% table_collision = [{"nom": "Amine", "classe": "1B"}]
+% try:
+%     fusionner_tout(eleves[:1], table_collision, "nom", {})
+% except ValueError as erreur:
+%     assert str(erreur) == "les colonnes hors cle doivent etre disjointes"
+% else:
+%     raise AssertionError("une collision doit etre refusee")
+% defauts_collision = {"classe": "inconnue"}
+% try:
+%     fusionner_tout([{"nom": "Lina", "classe": "1B"}], [], "nom", defauts_collision)
+% except ValueError as erreur:
+%     assert str(erreur) == "les colonnes hors cle doivent etre disjointes"
+% else:
+%     raise AssertionError("une collision avec les valeurs par defaut doit etre refusee")
+% collision_sans_correspondance = [{"nom": "Omar", "classe": "1B"}]
+% try:
+%     fusionner_tout(eleves[:1], collision_sans_correspondance, "nom", {})
+% except ValueError as erreur:
+%     assert str(erreur) == "les colonnes hors cle doivent etre disjointes"
+% else:
+%     raise AssertionError("les schemas globaux en collision doivent etre refuses")
+% END-VERIFY
+\begin{corrige}{1NSI-TAB-EX-005}
+\textbf{1.} La table fusionnée contient $3$ lignes (Amine, Omar, Sara).
+
+\textbf{2.} \textbf{Lina} n'apparaît pas dans le résultat : son nom n'est pas présent dans
+la table \lstinline{absences}, donc il est hors du domaine de valeurs \textbf{commun} aux
+deux tables sur la colonne \lstinline{nom}.
+
+\textbf{3.} Il faut modifier la fonction pour que, lorsque le nom d'un élève de
+\lstinline{eleves} n'est pas trouvé dans \lstinline{absences}, on lui attribue des valeurs
+par défaut (\lstinline{nb_absences: 0}) au lieu de l'exclure du résultat :
+% PYTHON-SOURCE: code/fusionner_tout.py
+\begin{python}
+def fusionner_tout(table1, table2, cle, defauts):
+    colonnes1 = {
+        colonne for ligne in table1 for colonne in ligne if colonne != cle
+    }
+    colonnes2 = {
+        colonne for ligne in table2 for colonne in ligne if colonne != cle
+    }
+    colonnes2.update(colonne for colonne in defauts if colonne != cle)
+    if not colonnes1.isdisjoint(colonnes2):
+        raise ValueError("les colonnes hors cle doivent etre disjointes")
+
+    index2 = {}
+    for ligne2 in table2:
+        index2.setdefault(ligne2[cle], []).append(ligne2)
+
+    fusion = []
+    for ligne1 in table1:
+        correspondances = index2.get(ligne1[cle], [defauts])
+        for ligne2 in correspondances:
+            complement = {k: v for k, v in ligne2.items() if k != cle}
+            fusion.append({**ligne1, **complement})
+    return fusion
+\end{python}
+Avec \lstinline|fusionner_tout(eleves, absences, "nom", {"nb_absences": 0})|, on obtient
+bien les $4$ élèves, Lina ayant \lstinline{nb_absences} égal à $0$. Si plusieurs lignes de
+la seconde table portent la même clé, chacune produit une ligne dans le résultat : aucune
+correspondance n'est écrasée dans l'index. Les colonnes hors clé doivent être disjointes :
+la fonction contrôle globalement les schémas et lève une erreur au lieu d'écraser
+silencieusement une valeur de la première table, même si les lignes concernées ne partagent
+pas la même clé ou si une valeur par défaut porte le même nom.
+\end{corrige}

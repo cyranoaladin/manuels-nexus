@@ -1,0 +1,47 @@
+% META: {"id": "TSPE-CALCUL-INTEGRAL-COURS-06", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "cours", "capacites_codes": ["C6"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TSPE-CALCUL-INTEGRAL-C6"], "statut": "structure"}
+
+\section{Suites d'intégrales}
+
+% ============================================================
+% STRATE 1 — Methode et exemple avec relation de recurrence
+% ============================================================
+
+On etudie parfois une suite $\left(I_n\right)$ definie par $I_n = \displaystyle\int_a^b f_n(x)\,\mathrm{d}x$, ou $f_n$ depend d'un entier $n$. On peut etudier son signe, sa monotonie, sa limite, ou etablir une relation de recurrence par integration par parties.
+
+\exemple{
+Pour $n \in \mathbb{N}$, on pose $I_n = \displaystyle\int_0^1 x^n\,\mathrm{e}^x\,\mathrm{d}x$.
+
+\textbf{Signe.} $x^n\mathrm{e}^x \geq 0$ sur $[0,1]$, donc $I_n \geq 0$ pour tout $n$ (integrale d'une fonction positive).
+
+\textbf{Relation de recurrence.} Par integration par parties avec $u(x)=x^n$ ($u'(x)=nx^{n-1}$) et $v'(x)=\mathrm{e}^x$ ($v(x)=\mathrm{e}^x$) :
+\[
+  I_n = \big[x^n\mathrm{e}^x\big]_0^1 - \int_0^1 nx^{n-1}\mathrm{e}^x\,\mathrm{d}x = \mathrm{e} - n I_{n-1} \quad (n \geq 1).
+\]
+
+\textbf{Calcul de $I_0$.} $I_0 = \displaystyle\int_0^1 \mathrm{e}^x\,\mathrm{d}x = \mathrm{e}-1$.
+
+\textbf{Calcul de $I_1$.} $I_1 = \mathrm{e} - 1 \times I_0 = \mathrm{e} - (\mathrm{e}-1) = 1$.
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, integrate, simplify
+% x, n = symbols('x n')
+% I0 = integrate(exp(x), (x, 0, 1))
+% assert simplify(I0 - (exp(1)-1)) == 0
+% I1 = integrate(x*exp(x), (x, 0, 1))
+% assert I1 == 1
+% # verifie la relation I1 = e - 1*I0
+% assert simplify(I1 - (exp(1) - I0)) == 0
+% END-VERIFY
+}
+
+\margeAppui{
+Une suite d'integrales positive et decroissante (ou majoree) converge (theoreme de la limite monotone, chapitre Suites) : on peut alors chercher sa limite, par exemple par encadrement.
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre la relation de recurrence avec une formule close.} $I_n = \mathrm{e} - nI_{n-1}$ exprime $I_n$ en fonction de $I_{n-1}$, pas directement en fonction de $n$ seul : il faut it\'erer la relation ou raisonner par recurrence pour obtenir des informations sur $I_n$ (signe, limite...).
+}

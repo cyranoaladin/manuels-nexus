@@ -1,0 +1,20 @@
+% META: {"id": "TCOMPL-MF-EX-037", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "exercice", "capacites": ["TCOMPL-MF-C2"], "capacites_codes": ["C2"], "methodes": ["M4"], "parcours": 2, "competences": ["communiquer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-037.tex", "corrige_tex": "chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-037.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**3 - 3*x**2 + 2
+% fpp = diff(f, x, 2)
+% assert expand(fpp) == 6*x - 6
+% assert solve(fpp, x) == [1]
+% assert f.subs(x, 1) == 0
+% assert fpp.subs(x, 0) == -6  # concave
+% assert fpp.subs(x, 2) == 6   # convexe
+% END-VERIFY
+\begin{exercice}{TCOMPL-MF-EX-037}{1}{12}
+La courbe de $f(x) = x^3 - 3x^2 + 2$ est tracee.
+\begin{enumerate}
+  \item Ou la courbure change-t-elle ?
+  \item En quel point la courbe traverse-t-elle sa tangente ?
+\end{enumerate}
+
+\end{exercice}

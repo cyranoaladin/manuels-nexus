@@ -1,0 +1,12 @@
+% META: {"id": "TSPE-COMBI-CO-011", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "correction", "exercice_ref": "TSPE-COMBI-EX-004", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-COMBINATOIRE-C2"], "parcours": 1, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-COMBINATOIRE/exercices/TSPE-COMBI-EX-011.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import binomial
+% total = sum(binomial(5, k) for k in range(6))
+% assert total == 32
+% END-VERIFY
+\begin{corrige}{TSPE-COMBI-EX-004}
+\[
+  \binom{5}{0}+\binom{5}{1}+\binom{5}{2}+\binom{5}{3}+\binom{5}{4}+\binom{5}{5} = 1+5+10+10+5+1 = 32 = 2^5.
+\]
+La formule est bien verifiee.
+\end{corrige}

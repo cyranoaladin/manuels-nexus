@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-LOGARITHME-REMED-02", "chapitre": "TSPE-LOGARITHME", "type_objet": "remediation", "capacites_codes": ["C2"], "status": "approved", "capacites": ["TSPE-LOGARITHME-C2"], "statut": "complete"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : derivee de ln
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-LOG-RE-C3-EX1}{1}{8}
+Calculer la derivee de $f(x) = \ln(x) + x^2$ sur $]0,+\infty[$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, ln, diff
+% x = symbols('x')
+% assert diff(ln(x) + x**2, x) == 1/x + 2*x
+% END-VERIFY
+
+\begin{corrige}{TSPE-LOG-RE-C3-EX1}
+$f'(x) = \dfrac{1}{x} + 2x$.
+\end{corrige}

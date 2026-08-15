@@ -1,0 +1,75 @@
+% META: {"id": "1NSI-ADGK-1NSI-ADGK-EV-A", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "evaluation", "capacites": ["P-ALGO-04", "P-ALGO-05", "P-ALGO-03"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
+\section*{Évaluation A --- Dichotomie, gloutons, k-NN} \textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (dichotomie, variant) ; Ex. 2 : 10 pts (glouton, k-NN)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Recherche dichotomique} \hfill (10 points)
+
+On applique \lstinline{recherche_dichotomique} du cours au tableau trié
+\lstinline{[3, 9, 14, 21, 27, 33, 40, 48]} pour chercher la valeur $27$.
+
+\begin{enumerate}
+  \item (5 pts) Dérouler l'algorithme : \lstinline{borne_inf}, \lstinline{borne_sup}, \lstinline{milieu} à chaque itération, jusqu'à trouver la valeur.
+  \item (3 pts) Calculer le variant $V=\text{borne\_sup}-\text{borne\_inf}$ à chaque itération et vérifier qu'il décroît strictement.
+  \item (2 pts) Pourquoi cette preuve de décroissance stricte suffit-elle à garantir la terminaison de l'algorithme ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def recherche_dichotomique(tableau_trie, valeur):
+%     borne_inf, borne_sup = 0, len(tableau_trie) - 1
+%     while borne_inf <= borne_sup:
+%         milieu = (borne_inf + borne_sup) // 2
+%         if tableau_trie[milieu] == valeur:
+%             return milieu
+%         elif tableau_trie[milieu] < valeur:
+%             borne_inf = milieu + 1
+%         else:
+%             borne_sup = milieu - 1
+%     return -1
+% t = [3, 9, 14, 21, 27, 33, 40, 48]
+% assert recherche_dichotomique(t, 27) == 4
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Glouton et k-NN} \hfill (10 points)
+
+\begin{enumerate}
+  \item (4 pts) Utiliser \lstinline{rendu_glouton} du cours pour rendre $47$ euros avec le système $\{20, 10, 5, 2, 1\}$. Détailler le choix de chaque pièce.
+  \item (3 pts) On dispose de la base d'animaux (masse en kg, taille en cm, espèce) :
+\begin{python}
+animaux = [
+    (5, 30, "Chat"), (6, 32, "Chat"), (4, 28, "Chat"),
+    (30, 80, "Chien"), (32, 85, "Chien"), (28, 78, "Chien"),
+]
+\end{python}
+  Prédire l'espèce d'un animal de masse $5{,}5$\,kg et de taille $31$\,cm, avec $k=3$.
+  \item (3 pts) La méthode gloutonne de rendu de monnaie donne-t-elle toujours le nombre minimal de pièces, quel que soit le système de pièces ? Justifier brièvement.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def rendu_glouton(montant, pieces):
+%     pieces_triees = sorted(pieces, reverse=True)
+%     rendu = []
+%     for p in pieces_triees:
+%         while montant >= p:
+%             rendu.append(p)
+%             montant -= p
+%     return rendu
+% assert rendu_glouton(47, [20, 10, 5, 2, 1]) == [20, 20, 5, 2]
+% def distance(p1, p2):
+%     return ((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2) ** 0.5
+% def k_plus_proches_voisins(points_classes, nouveau_point, k):
+%     distances = [(distance((x, y), nouveau_point), classe)
+%                  for (x, y, classe) in points_classes]
+%     distances.sort(key=lambda d: d[0])
+%     classes = [c for (_, c) in distances[:k]]
+%     return max(set(classes), key=classes.count)
+% animaux = [
+%     (5, 30, "Chat"), (6, 32, "Chat"), (4, 28, "Chat"),
+%     (30, 80, "Chien"), (32, 85, "Chien"), (28, 78, "Chien"),
+% ]
+% assert k_plus_proches_voisins(animaux, (5.5, 31), 3) == "Chat"
+% END-VERIFY

@@ -1,23 +1,42 @@
 chapitre: TSPE-LOGARITHME
 niveau: TSPE
 theme: LOGARITHME
-titre: "Fonction logarithme népérien"
-statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
-
+titre: Fonction logarithme népérien
+statut: approved
 capacites:
-  - { code: C1, ref_capacite: TSPE-LOG-C1, libelle_eleve: "Je sais utiliser les propriétés algébriques du logarithme et de l'exponentielle pour transformer des expressions, résoudre des équations et inéquations." }
-  - { code: C2, ref_capacite: TSPE-LOG-C2, libelle_eleve: "Je sais mobiliser les propriétés de l'exponentielle et du logarithme dans le cadre de la résolution de problèmes." }
-  - { code: C3, ref_capacite: TSPE-LOG-C3, libelle_eleve: "Je sais démontrer que la dérivée de ln est x ↦ 1/x, en admettant la dérivabilité." }
-  - { code: C4, ref_capacite: TSPE-LOG-C4, libelle_eleve: "Je sais démontrer que la limite de x ln(x) quand x tend vers 0 est 0." }
-
+- code: C1
+  ref_capacite: TSPE-LOG-C1
+  libelle_eleve: Je sais utiliser les propriétés algébriques du logarithme et de l'exponentielle
+    pour transformer des expressions, résoudre des équations et inéquations.
+- code: C2
+  ref_capacite: TSPE-LOG-C2
+  libelle_eleve: Je sais mobiliser les propriétés de l'exponentielle et du logarithme
+    dans le cadre de la résolution de problèmes.
+- code: C3
+  ref_capacite: TSPE-LOG-C3
+  libelle_eleve: Je sais démontrer que la dérivée de ln est x ↦ 1/x, en admettant
+    la dérivabilité.
+- code: C4
+  ref_capacite: TSPE-LOG-C4
+  libelle_eleve: Je sais démontrer que la limite de x ln(x) quand x tend vers 0 est
+    0.
 prerequis:
-  - { code: R1, libelle: "Fonction exponentielle : définition, propriétés algébriques, dérivée", chapitre_origine: "1SPE-EXPONENTIELLE" }
-  - { code: R2, libelle: "Limites de fonctions, croissances comparées de x^n et exp", chapitre_origine: "TSPE-LIMITES-FONCTIONS" }
-  - { code: R3, libelle: "Dérivée d'une fonction composée", chapitre_origine: "1SPE-DERIVATION-GLOBAL" }
+- code: R1
+  libelle: 'Fonction exponentielle : définition, propriétés algébriques, dérivée'
+  chapitre_origine: 1SPE-EXPONENTIELLE
+- code: R2
+  libelle: Limites de fonctions, croissances comparées de x^n et exp
+  chapitre_origine: TSPE-LIMITES-FONCTIONS
+- code: R3
+  libelle: Dérivée d'une fonction composée
+  chapitre_origine: 1SPE-DERIVATION-GLOBAL
+situation_accroche: 'Un echantillon radioactif perd la moitie de sa masse tous les
+  23 ans environ. Au bout de combien de temps n''en reste-t-il plus que 10% ? Pour
+  repondre, il faut "inverser" l''exponentielle : c''est le role du logarithme neperien,
+  outil central de ce chapitre.
 
-situation_accroche: >
-  Un echantillon radioactif perd la moitie de sa masse tous les 23 ans environ. Au bout
-  de combien de temps n'en reste-t-il plus que 10% ? Pour repondre, il faut "inverser"
-  l'exponentielle : c'est le role du logarithme neperien, outil central de ce chapitre.
-
-temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }
+  '
+temps_estime_h:
+  parcours1: 12
+  parcours2: 10
+  parcours3: 8

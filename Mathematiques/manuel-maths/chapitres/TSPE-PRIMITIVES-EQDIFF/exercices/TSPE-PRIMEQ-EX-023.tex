@@ -1,0 +1,11 @@
+% META: {"id": "TSPE-PRIMEQ-EX-023", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "exercice", "capacites": ["TSPE-PRIMITIVES-EQDIFF-C4"], "capacites_codes": ["C4"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-PRIMITIVES-EQDIFF/exercices/TSPE-PRIMEQ-EX-023.tex", "corrige_tex": "chapitres/TSPE-PRIMITIVES-EQDIFF/corriges/TSPE-PRIMEQ-CO-023.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, Rational
+% x = symbols('x')
+% y = 2*exp(-Rational(1, 2)*x)
+% assert diff(y, x) == -Rational(1, 2)*y
+% assert y.subs(x, 0) == 2
+% END-VERIFY
+\begin{exercice}{TSPE-PRIMEQ-EX-007}{1}{10}
+Resoudre l'equation differentielle $y' = -\dfrac{1}{2}y$, puis determiner la solution telle que $y(0)=2$.
+\end{exercice}

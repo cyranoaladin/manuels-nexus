@@ -25,6 +25,6 @@
     "coups_de_pouce": { "type": "array", "maxItems": 3, "items": { "type": "string" } },
     "fichier_tex": { "type": "string" },
     "corrige_tex": { "type": "string" },
-    "status": { "enum": ["draft", "generated", "verified", "manual_review", "ready", "rejected"] }
+    "status": { "enum": ["draft", "generated", "verified", "manual_review", "needs_review", "ready", "approved", "rejected"] }
   }
 }

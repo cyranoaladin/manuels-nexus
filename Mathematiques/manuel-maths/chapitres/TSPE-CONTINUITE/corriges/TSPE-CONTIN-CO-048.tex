@@ -1,4 +1,4 @@
-% META: {"id": "TSPE-CONTIN-CO-048", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-048", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TSPE-CONTIN-CO-048", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-048", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
 % from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, fibonacci
 % x = symbols('x')
@@ -33,7 +33,8 @@ Numerateurs et denominateurs sont des termes consecutifs de la suite de Fibonacc
 
 \textbf{Q2.} Montrons par recurrence que $u_n \in \left[\dfrac12\,;1\right]$. C'est vrai pour $u_0 = 1$. Si $\dfrac12 \leq u_n \leq 1$, alors $\dfrac32 \leq 1 + u_n \leq 2$, donc par decroissance de l'inverse sur les reels strictement positifs, $\dfrac12 \leq \dfrac{1}{1+u_n} \leq \dfrac23$, et en particulier $u_{n+1} \in \left[\dfrac12\,;1\right]$.
 
-\textbf{Q3.} $\dfrac{1}{1+x} = x$ equivaut, pour $x \neq -1$, a $1 = x(1+x)$, soit $x^2 + x - 1 = 0$. Le discriminant vaut $5$, d'ou les racines $\dfrac{-1 \pm \sqrt5}{2}$. Sur $\left]0\,;+\infty\right[$, seule $\varphi = \dfrac{\sqrt5 - 1}{2} \approx 0{,}618$ convient. C'est l'inverse du nombre d'or.
+\textbf{Q3.} $\dfrac{1}{1+x} = x$ equivaut, pour $x 
+eq -1$, a $1 = x(1+x)$, soit $x^2 + x - 1 = 0$. Le discriminant vaut $5$, d'ou les racines $\dfrac{-1 \pm \sqrt5}{2}$. Sur $\left]0\,;+\infty\right[$, seule $\varphi = \dfrac{\sqrt5 - 1}{2} \approx 0{,}618$ convient. C'est l'inverse du nombre d'or.
 
 \textbf{Q4.} La fonction $f$ est strictement decroissante sur $\left]0\,;+\infty\right[$, car $f'(x) = -\dfrac{1}{(1+x)^2} < 0$. Donc si $u_n < \varphi$, alors $f(u_n) > f(\varphi) = \varphi$, c'est-a-dire $u_{n+1} > \varphi$, et reciproquement : les termes alternent autour de $\varphi$, ce qui interdit toute monotonie.
 

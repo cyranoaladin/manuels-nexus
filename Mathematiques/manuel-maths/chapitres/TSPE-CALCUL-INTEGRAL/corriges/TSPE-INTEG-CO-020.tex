@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-INTEG-CO-020", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "correction", "exercice_ref": "TSPE-INTEG-EX-004", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-CALCUL-INTEGRAL-C4"], "parcours": 2, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-020.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational
+% x = symbols('x')
+% assert integrate(x - x**2, (x, 0, 1)) == Rational(1, 6)
+% END-VERIFY
+\begin{corrige}{TSPE-INTEG-EX-004}
+
+\textbf{Q1.} $f(x)=g(x) \iff x=x^2 \iff x(1-x)=0 \iff x=0$ ou $x=1$. Points d'intersection : $(0,0)$ et $(1,1)$.
+
+\textbf{Q2.} Pour $x \in [0,1]$, $f(x)-g(x) = x-x^2 = x(1-x)$. Comme $x \geq 0$ et $1-x \geq 0$ sur $[0,1]$, on a $f(x)-g(x) \geq 0$, soit $f \geq g$.
+
+\textbf{Q3.} $\mathcal{A} = \displaystyle\int_0^1 (x-x^2)\,\mathrm{d}x = \left[\dfrac{x^2}{2}-\dfrac{x^3}{3}\right]_0^1 = \dfrac{1}{2}-\dfrac{1}{3} = \boxed{\dfrac{1}{6}}$ unite d'aire.
+
+\end{corrige}

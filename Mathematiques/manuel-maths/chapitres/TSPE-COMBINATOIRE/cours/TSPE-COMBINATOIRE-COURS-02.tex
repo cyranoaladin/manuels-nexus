@@ -1,0 +1,56 @@
+% META: {"id": "TSPE-COMBINATOIRE-COURS-02", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "cours", "capacites_codes": ["C2"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TSPE-COMBINATOIRE-C2"], "statut": "structure"}
+
+\section{Principes de dénombrement, permutations, combinaisons}
+
+% ============================================================
+% STRATE 1 — Principes et formules
+% ============================================================
+
+\propriete[Principe additif]{
+Si $A$ et $B$ sont deux ensembles finis disjoints ($A \cap B = \emptyset$), alors $\mathrm{Card}(A \cup B) = \mathrm{Card}(A) + \mathrm{Card}(B)$.
+}
+
+\propriete[Principe multiplicatif]{
+Si une situation resulte d'une succession de $p$ choix independants, comportant respectivement $n_1, n_2, \ldots, n_p$ possibilites, alors le nombre total de resultats possibles est $n_1 \times n_2 \times \cdots \times n_p$.
+}
+
+\definition[1]{
+Soit $E$ un ensemble a $n$ elements ($n \geq 1$). Une \textbf{permutation} de $E$ est un rangement ordonne de tous les elements de $E$. Le nombre de permutations de $E$ est :
+\[
+  n! = n \times (n-1) \times \cdots \times 2 \times 1 \qquad (\text{avec } 0! = 1).
+\]
+}
+
+\margeAppui{
+$n!$ se lit "factorielle $n$". C'est une consequence directe du principe multiplicatif : $n$ choix pour la 1re place, $n-1$ pour la 2e, etc.
+}
+
+\definition[2]{
+Soit $E$ un ensemble a $n$ elements et $k \in \{0,1,\ldots,n\}$. Une \textbf{combinaison} de $k$ elements de $E$ est un sous-ensemble de $E$ a $k$ elements (l'ordre ne compte pas). Le nombre de combinaisons de $k$ elements parmi $n$ est note $\dbinom{n}{k}$ (« $n$ choisir $k$ »), et vaut :
+\[
+  \binom{n}{k} = \frac{n!}{k!\,(n-k)!}.
+\]
+}
+
+\exemple{
+Un club de $10$ personnes doit elire un bureau de $3$ membres avec des roles distincts (president, secretaire, tresorier), puis (independamment) choisir $3$ delegues sans role distinct.
+
+\textbf{Bureau (ordre compte).} $10 \times 9 \times 8 = 720$ facons.
+
+\textbf{Delegues (ordre ne compte pas).} $\dbinom{10}{3} = \dfrac{10!}{3!\,7!} = \dfrac{10\times9\times8}{3\times2\times1} = 120$ facons.
+
+% BEGIN-VERIFY
+% from sympy import binomial, factorial
+% assert 10*9*8 == 720
+% assert binomial(10, 3) == 120
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Utiliser une combinaison quand l'ordre compte (ou l'inverse).} Pour un bureau avec roles distincts (president $
+eq$ secretaire), l'ordre compte : il ne faut pas utiliser $\dbinom{n}{k}$ mais un produit direct ($n \times (n-1) \times \cdots$). Les combinaisons ne s'appliquent que lorsque l'ordre est indifferent.
+}

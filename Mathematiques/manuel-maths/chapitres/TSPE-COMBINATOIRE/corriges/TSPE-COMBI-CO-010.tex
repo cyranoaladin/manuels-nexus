@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-COMBI-CO-010", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "correction", "exercice_ref": "TSPE-COMBI-EX-003", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-COMBINATOIRE-C2"], "parcours": 2, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-COMBINATOIRE/exercices/TSPE-COMBI-EX-010.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import binomial, factorial
+% assert binomial(32, 5) == 201376
+% assert binomial(32,5) == factorial(32)/(factorial(5)*factorial(27))
+% END-VERIFY
+\begin{corrige}{TSPE-COMBI-EX-003}
+
+\textbf{Q1.} Non : une main de cartes est un ensemble de $5$ cartes, sans ordre (recevoir les cartes dans un ordre ou un autre donne la meme main).
+
+\textbf{Q2.} Il s'agit d'un choix de $5$ elements parmi $32$, sans ordre, sans repetition : c'est une combinaison.
+\[
+  \binom{32}{5} = \frac{32!}{5!\,27!} = \boxed{201\,376}.
+\]
+
+\end{corrige}

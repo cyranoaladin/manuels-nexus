@@ -11,7 +11,8 @@ L'ensemble $\mathbb{C}$ des nombres complexes est l'ensemble des nombres de la f
 }
 
 \propriete[Inverse d'un complexe non nul]{
-Pour $z=a+ib\neq0$, l'inverse de $z$ est $\dfrac{1}{z} = \dfrac{\bar z}{a^2+b^2} = \dfrac{a-ib}{a^2+b^2}$.
+Pour $z=a+ib
+eq0$, l'inverse de $z$ est $\dfrac{1}{z} = \dfrac{\bar z}{a^2+b^2} = \dfrac{a-ib}{a^2+b^2}$.
 }
 
 \exemple{
@@ -48,13 +49,15 @@ Résoudre $(2+i)z = 3-i$ : $z = \dfrac{3-i}{2+i} = \dfrac{(3-i)(2-i)}{(2+i)(2-i)
 % ============================================================
 
 \theoreme[Propriétés du conjugué]{
-Pour tous $z,w\in\mathbb{C}$ et $n\in\mathbb{N}$ : $\overline{zw}=\bar z\bar w$ ; si $z\neq0$, $\overline{1/z}=1/\bar z$ ; $\overline{z^n}=(\bar z)^n$.
+Pour tous $z,w\in\mathbb{C}$ et $n\in\mathbb{N}$ : $\overline{zw}=\bar z\bar w$ ; si $z
+eq0$, $\overline{1/z}=1/\bar z$ ; $\overline{z^n}=(\bar z)^n$.
 }
 
 \demonstration{
 Écrivons $z=a+ib$, $w=c+id$. Alors $zw=(ac-bd)+i(ad+bc)$, donc $\overline{zw}=(ac-bd)-i(ad+bc)$. Par ailleurs $\bar z\bar w=(a-ib)(c-id)=(ac-bd)-i(ad+bc)$ (même calcul avec $-i$). On a bien $\overline{zw}=\bar z\bar w$.
 
-Pour l'inverse, $z\times\dfrac{1}{z}=1$, donc en conjuguant : $\bar z\times\overline{1/z}=\overline{1}=1$, d'où $\overline{1/z}=1/\bar z$ (car $\bar z\neq0$).
+Pour l'inverse, $z\times\dfrac{1}{z}=1$, donc en conjuguant : $\bar z\times\overline{1/z}=\overline{1}=1$, d'où $\overline{1/z}=1/\bar z$ (car $\bar z
+eq0$).
 
 Pour la puissance, on raisonne par récurrence à partir de $\overline{zw}=\bar z\bar w$ appliqué $n-1$ fois : $\overline{z^n}=\overline{z\times z^{n-1}}=\bar z\times\overline{z^{n-1}}=\dots=(\bar z)^n$.
 }

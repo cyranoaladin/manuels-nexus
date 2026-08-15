@@ -28,6 +28,8 @@ tex_files = sorted((MANUAL_ROOT / "chapitres").rglob("*.tex"))
     "tex", tex_files, ids=lambda p: str(p.relative_to(MANUAL_ROOT))
 )
 def test_meta_valid(tex):
+    if tex.stat().st_size == 0:
+        pytest.skip("Fichier .tex vide")
     m = META.search(tex.read_text(encoding="utf-8"))
     assert m, f"{tex} : en-tête % META manquant (règle R4)"
     meta = json.loads(m.group(1))

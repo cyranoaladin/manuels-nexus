@@ -1,81 +1,110 @@
-% META: {"id": "TCOMPL-LOGARITHME-HISTORIQUE-QCM", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4","C5"], "status": "generated"}
+% META: {"id": "TCOMPL-LOGARITHME-HISTORIQUE-QCM", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "qcm", "genere_depuis": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/qcm/TCOMPL-LOGARITHME-HISTORIQUE-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Approche historique de la fonction logarithme}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Logarithme neperien et applications}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1 --- Définition}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Le domaine de définition de $\ln$ est :
+\item[] \textbf{Capacite C1}
+
+\item \textbf{[Q1]} La fonction logarithme neperien $\ln(x)$ est definie sur :
   \begin{enumerate}[label=\Alph*.]
-    \item $\mathbb{R}$.
-    \item $]0,+\infty[$.
-    \item $[0,+\infty[$.
-    \item $\mathbb{R}^*$.
+    \item $\mathbb{R}$
+    \item $]0, +\infty[$
+    \item $[0, +\infty[$
+    \item $\mathbb{R}^*$
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C4 --- Équation fonctionnelle}
-
-\item \textbf{[Q2]} $\ln(ab)$ (pour $a,b>0$) est égal à :
+\item \textbf{[Q2]} Pour tous $a,b > 0$, $\ln(a \times b) =$
   \begin{enumerate}[label=\Alph*.]
-    \item $\ln(a) \times \ln(b)$.
-    \item $\ln(a) + \ln(b)$.
-    \item $\ln(a+b)$.
-    \item $\ln(a) - \ln(b)$.
+    \item $\ln(a) + \ln(b)$
+    \item $\ln(a) \times \ln(b)$
+    \item $\ln(a+b)$
+    \item $\ln(a) - \ln(b)$
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C2}
 
-\subsection*{C2 --- Résolution d'équations}
-
-\item \textbf{[Q3]} Pour résoudre une équation contenant $\ln$, il faut d'abord :
+\item \textbf{[Q3]} La derivee de $f(x) = \ln(x)$ sur $]0, +\infty[$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item ignorer le domaine de définition.
-    \item déterminer le domaine de définition (arguments strictement positifs).
-    \item remplacer $\ln$ par $\exp$.
-    \item supposer que toutes les solutions trouvées sont valables.
+    \item $e^x$
+    \item $\ln(x)$
+    \item $\frac{1}{x}$
+    \item $-\frac{1}{x^2}$
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C3 --- Seuils}
-
-\item \textbf{[Q4]} Pour une suite géométrique décroissante de raison $0<q<1$, résoudre $q^n < k$ en passant au logarithme nécessite de :
+\item \textbf{[Q4]} La limite de $\ln(x)$ quand $x \to 0^+$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item ne rien changer au sens de l'inégalité.
-    \item inverser le sens de l'inégalité, car $\ln q < 0$.
-    \item multiplier par $-1$ les deux membres avant de continuer.
-    \item cette méthode ne fonctionne pas pour $q<1$.
+    \item $0$
+    \item $1$
+    \item $+\infty$
+    \item $-\infty$
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C3}
 
-\subsection*{C5 --- Dérivée}
-
-\item \textbf{[Q5]} La dérivée de $\ln$ sur $]0,+\infty[$ est :
+\item \textbf{[Q5]} Pour tout entier $n$, $\ln(a^n) =$
   \begin{enumerate}[label=\Alph*.]
-    \item $\ln(x)$.
-    \item $\dfrac{1}{x}$.
-    \item $x$.
-    \item $\mathrm{e}^x$.
-  \end{enumerate}
-
-\bigskip
-
-\item \textbf{[Q6]} La dérivée de $\ln(u(x))$, pour $u$ dérivable et strictement positive, est :
-  \begin{enumerate}[label=\Alph*.]
-    \item $u'(x)$.
-    \item $\dfrac{u'(x)}{u(x)}$.
-    \item $\dfrac{1}{u'(x)}$.
-    \item $u(x) \times u'(x)$.
+    \item $\ln(a)^n$
+    \item $n \ln(a)$
+    \item $\frac{1}{n} \ln(a)$
+    \item $a \ln(n)$
   \end{enumerate}
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C1 & \textbf{B} \\
+Q2 & C1 & \textbf{A} \\
+Q3 & C2 & \textbf{C} \\
+Q4 & C2 & \textbf{D} \\
+Q5 & C3 & \textbf{B} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{A} — Les nombres negatifs n'ont pas de logarithme reel. \emph{Renvoi : C1.}
+    \item \textbf{C} — ln(0) n'est pas defini. \emph{Renvoi : C1.}
+    \item \textbf{D} — Exclusion des nombres strictement negatifs. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{B} — Transformation du produit en somme, pas en produit. \emph{Renvoi : C1.}
+    \item \textbf{C} — ln ne conserve pas l'addition. \emph{Renvoi : C1.}
+    \item \textbf{D} — Formule du quotient. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — Derivee de l'exponentielle. \emph{Renvoi : C2.}
+    \item \textbf{B} — Pas de changement par derivation. \emph{Renvoi : C2.}
+    \item \textbf{D} — Derivee de 1/x. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — ln(1) = 0, pas la limite en 0. \emph{Renvoi : C2.}
+    \item \textbf{B} — Valeur erronee. \emph{Renvoi : C2.}
+    \item \textbf{C} — Erreur de signe de l'infini. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — Puissance a l'exterieur du logarithme. \emph{Renvoi : C3.}
+    \item \textbf{C} — Inverse du facteur. \emph{Renvoi : C3.}
+    \item \textbf{D} — Inversion de a et n. \emph{Renvoi : C3.}
+  \end{itemize}
+\end{itemize}

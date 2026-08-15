@@ -1,0 +1,37 @@
+% META: {"id": "TNSI-STRUCT-EVAL-A-corrige", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "correction", "evaluation_ref": "TNSI-STRUCT-EVAL-A", "capacites": ["T-STRUCT-02A", "T-STRUCT-02B", "T-STRUCT-03A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% class Rectangle:
+%     def __init__(self, largeur, hauteur):
+%         self.largeur = largeur
+%         self.hauteur = hauteur
+%     def aire(self):
+%         return self.largeur * self.hauteur
+%     def perimetre(self):
+%         return 2 * (self.largeur + self.hauteur)
+% r = Rectangle(4, 3)
+% assert r.aire() == 12
+% assert r.perimetre() == 14
+% pile = [5, 3, 8, 1]
+% pile.pop(); pile.pop(); pile.pop()
+% assert pile == [5]
+% END-VERIFY
+\begin{corrige}{TNSI-STRUCT-EVAL-A-EX1}
+\begin{python}
+class Rectangle:
+    def __init__(self, largeur, hauteur):
+        self.largeur = largeur
+        self.hauteur = hauteur
+
+    def aire(self):
+        return self.largeur * self.hauteur
+
+    def perimetre(self):
+        return 2 * (self.largeur + self.hauteur)
+\end{python}
+\end{corrige}
+
+\begin{corrige}{TNSI-STRUCT-EVAL-A-EX2}
+\textbf{Q1.} Interface : \lstinline{empiler(v)}, \lstinline{depiler()}, \lstinline{est_vide()}. Principe LIFO : le dernier element empile est le premier depile.
+
+\textbf{Q2.} Apres avoir empile $5,3,8,1$, la pile est $[5,3,8,1]$ (du bas vers le sommet). Depiler trois fois retire $1$, puis $8$, puis $3$ (LIFO) : il reste $[5]$.
+\end{corrige}

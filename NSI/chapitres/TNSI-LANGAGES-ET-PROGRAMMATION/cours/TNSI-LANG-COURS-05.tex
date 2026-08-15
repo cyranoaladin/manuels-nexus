@@ -1,0 +1,99 @@
+% META: {"id": "TNSI-LANG-COURS-05", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "cours", "capacites_codes": ["C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TNSI-LANGAGES-ET-PROGRAMMATION-C5"]}
+\section{Mise au point : causes typiques de bugs}
+
+% ============================================================
+% STRATE 1 — Flottants et effets de bord
+% ============================================================
+
+\definition[1]{
+La \textbf{mise au point} (\textit{débogage}) consiste à localiser et corriger les causes d'un comportement incorrect d'un programme. Certaines causes de bugs reviennent très fréquemment : erreurs liées aux \textbf{nombres flottants}, aux \textbf{effets de bord}, aux \textbf{inégalités}, et au \textbf{nommage}.
+}
+
+\textbf{Exemple.} Les nombres flottants ne représentent pas exactement toutes les valeurs décimales :
+\begin{python}
+resultat = 0.1 + 0.2
+print(resultat == 0.3)       # False, a priori surprenant
+print(abs(resultat - 0.3) < 1e-9)  # True : comparaison a une tolerance pres
+\end{python}
+
+% BEGIN-VERIFY
+% resultat = 0.1 + 0.2
+% assert resultat != 0.3
+% assert abs(resultat - 0.3) < 1e-9
+% END-VERIFY
+
+\margeAppui{
+Ne \textbf{jamais} comparer deux flottants avec \lstinline{==} : toujours comparer leur écart à une petite tolérance près (\lstinline{abs(a - b) < epsilon}).
+}
+
+\textbf{Exemple.} Un \textbf{effet de bord} inattendu par aliasing : deux noms qui désignent le même objet mutable.
+\begin{python}
+def vider(liste):
+    liste.clear()
+
+a = [1, 2, 3]
+b = a          # b designe le MEME objet liste que a, pas une copie
+vider(b)
+\end{python}
+
+% BEGIN-VERIFY
+% def vider(liste):
+%     liste.clear()
+% a = [1, 2, 3]
+% b = a
+% vider(b)
+% assert a == []
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Croire que \lstinline{b = a} crée une copie de la liste \lstinline{a}.} En Python, cette instruction fait seulement pointer \lstinline{b} vers le \textbf{même objet} que \lstinline{a} : modifier \lstinline{b} (par une méthode qui modifie en place, comme \lstinline{clear}, \lstinline{append}, \lstinline{sort}) modifie donc aussi \lstinline{a}. Pour obtenir une copie indépendante, il faut écrire explicitement \lstinline{b = a.copy()} ou \lstinline{b = list(a)}.
+}
+
+% ============================================================
+% STRATE 2 — Inegalites, nommage
+% ============================================================
+
+\textbf{Exemple.} Une erreur \textbf{d'inégalité stricte/large} (\textit{off-by-one}) très fréquente dans une boucle :
+\begin{python}
+def indices_valides(liste, indice):
+    # Version correcte : indice doit verifier 0 <= indice < len(liste)
+    return 0 <= indice < len(liste)
+\end{python}
+
+% BEGIN-VERIFY
+% def indices_valides(liste, indice):
+%     return 0 <= indice < len(liste)
+% liste = [10, 20, 30]
+% assert indices_valides(liste, 0) is True
+% assert indices_valides(liste, 2) is True
+% assert indices_valides(liste, 3) is False
+% assert indices_valides(liste, -1) is False
+% END-VERIFY
+
+\margeAppui{
+L'erreur classique consiste à écrire \lstinline{indice <= len(liste)} au lieu de \lstinline{indice < len(liste)} : pour une liste de longueur $3$ (indices valides $0, 1, 2$), l'indice $3$ serait alors accepté à tort, provoquant un \lstinline{IndexError} au moment de l'accès réel à \lstinline{liste[indice]}.
+}
+
+\textbf{Exemple.} Une erreur de \textbf{nommage} : masquer (\textit{shadow}) une fonction native de Python.
+\begin{python}
+def somme_avec_bug(valeurs):
+    sum = 0          # masque la fonction native sum() !
+    for v in valeurs:
+        sum += v
+    return sum       # fonctionne ici, mais sum() natif est devenu inaccessible
+\end{python}
+
+% BEGIN-VERIFY
+% def somme_avec_bug(valeurs):
+%     sum = 0
+%     for v in valeurs:
+%         sum += v
+%     return sum
+% assert somme_avec_bug([1, 2, 3]) == 6
+% import builtins
+% assert callable(builtins.sum)
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Nommer une variable comme une fonction native (\lstinline{sum}, \lstinline{list}, \lstinline{type}, \lstinline{id}...).} Python l'autorise sans erreur, mais la fonction native devient \textbf{inaccessible sous ce nom} dans le reste du bloc de code : si l'on a besoin d'appeler \lstinline{sum(...)} plus loin dans la même fonction, l'appel échouera avec une erreur de type \og int object is not callable \fg{} puisque \lstinline{sum} désigne maintenant un entier.
+}

@@ -1,0 +1,30 @@
+% META: {"id": "1NSI-TB-CO-015", "chapitre": "1NSI-TYPES-BASE", "type_objet": "correction", "exercice_ref": "1NSI-TB-EX-003", "capacites": ["1NSI-TYPES-BASE-C3"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C3"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-015.tex"}
+% BEGIN-VERIFY
+% assert sum([0.10] * 3) != 0.3
+% def presque_egaux(a, b, tolerance=1e-9):
+%     return abs(a - b) < tolerance
+% assert presque_egaux(sum([0.10] * 3), 0.3) is True
+% END-VERIFY
+\begin{corrige}{1NSI-TB-EX-003}
+\textbf{1.} Le programme affiche \lstinline{"Erreur de calcul !"}. En effet,
+\lstinline{0.10} n'a pas d'écriture binaire finie : \lstinline{sum([0.10, 0.10, 0.10])}
+vaut en réalité \lstinline{0.30000000000000004}, une valeur très proche de mais
+\textbf{différente} de \lstinline{0.30} (qui, lui aussi, est stocké de façon approchée). Le
+test \lstinline{==} compare des valeurs qui ne sont pas bit à bit identiques.
+
+\textbf{2.}
+\begin{python}
+def presque_egaux(a, b, tolerance=1e-9):
+    return abs(a - b) < tolerance
+\end{python}
+
+\textbf{3.}
+\begin{python}
+prix = [0.10] * 3
+if presque_egaux(sum(prix), 0.30):
+    print("Ca fait bien 0,30 euro")
+else:
+    print("Erreur de calcul !")
+\end{python}
+Avec ce test tolérant, le programme affiche bien \lstinline{"Ca fait bien 0,30 euro"}.
+\end{corrige}

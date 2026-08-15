@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-LOG-CO-024", "chapitre": "TSPE-LOGARITHME", "type_objet": "correction", "exercice_ref": "TSPE-LOG-EX-008", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-LOGARITHME-C4"], "parcours": 2, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-LOGARITHME/exercices/TSPE-LOG-EX-024.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, exp, simplify
+% x = symbols('x', positive=True)
+% f = x*ln(x)
+% assert simplify(f.subs(x, exp(-1)) + exp(-1)) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-LOG-EX-008}
+
+\textbf{Q1.} C'est le resultat du cours (demonstration par changement de variable $X=-\ln x$) : $\displaystyle\lim_{x \to 0^+} x\ln x = 0$.
+
+\textbf{Q2.} Quand $x \to +\infty$, $\ln x \to +\infty$ et $x \to +\infty$ : par produit de deux limites $+\infty$, $f(x) = x\ln x \to +\infty$.
+
+\textbf{Q3.} $f$ est un produit de $x$ (derivee $1$) et $\ln x$ (derivee $1/x$) : $f'(x) = 1 \times \ln x + x \times \dfrac{1}{x} = \ln x + 1$.
+
+$f'(x) = 0 \iff \ln x = -1 \iff x = \mathrm{e}^{-1} = \dfrac{1}{\mathrm{e}}$.
+
+\textbf{Q4.} Pour $x < \dfrac{1}{\mathrm{e}}$, $\ln x < -1$ (par croissance de $\ln$), donc $f'(x) < 0$. Pour $x > \dfrac{1}{\mathrm{e}}$, $f'(x) > 0$. $f$ est donc decroissante sur $\left]0, \dfrac{1}{\mathrm{e}}\right]$ et croissante sur $\left[\dfrac{1}{\mathrm{e}}, +\infty\right[$.
+
+\textbf{Q5.} Le minimum de $f$ est atteint en $x=\dfrac{1}{\mathrm{e}}$ et vaut $f\!\left(\dfrac{1}{\mathrm{e}}\right) = \dfrac{1}{\mathrm{e}} \times \ln\!\left(\dfrac{1}{\mathrm{e}}\right) = \dfrac{1}{\mathrm{e}} \times (-1) = -\dfrac{1}{\mathrm{e}}$.
+
+\end{corrige}

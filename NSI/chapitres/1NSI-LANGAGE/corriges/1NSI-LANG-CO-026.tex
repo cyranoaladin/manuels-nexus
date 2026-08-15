@@ -1,0 +1,31 @@
+% META: {"id": "1NSI-LANG-CO-026", "chapitre": "1NSI-LANGAGE", "type_objet": "correction", "exercice_ref": "1NSI-LANG-EX-002", "capacites": ["1NSI-LANGAGE-C5"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C5"], "parcours": 2, "fichier_exercice": "chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-026.tex"}
+% BEGIN-VERIFY
+% def factorielle(n):
+%     resultat = 1
+%     for i in range(1, n + 1):
+%         resultat = resultat * i
+%     return resultat
+% assert factorielle(5) == 120
+% assert factorielle(0) == 1
+% END-VERIFY
+\begin{corrige}{1NSI-LANG-EX-002}
+\textbf{1.}
+\begin{python}
+def factorielle(n):
+    resultat = 1
+    for i in range(1, n + 1):
+        resultat = resultat * i
+    return resultat
+\end{python}
+
+\textbf{2.} \textbf{Traits communs} : une fonction nommée \lstinline{factorielle} prenant
+un paramètre \lstinline{n} et renvoyant un résultat ; une boucle bornée qui parcourt les
+entiers de $1$ à $n$ en accumulant un produit. \textbf{Traits particuliers} au langage de
+style C : le type de chaque variable est déclaré explicitement (\lstinline{int}) ; les
+blocs d'instructions sont délimités par des accolades \lstinline|{}| (et non par
+l'indentation comme en Python) ; chaque instruction se termine par un point-virgule.
+
+\textbf{3.} $5!=1\times2\times3\times4\times5=120$. Par convention, $0!=1$ (produit vide,
+la boucle \lstinline{for i in range(1, 1)} ne s'exécute jamais et \lstinline{resultat}
+reste égal à $1$).
+\end{corrige}

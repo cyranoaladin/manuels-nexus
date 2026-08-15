@@ -1,150 +1,115 @@
-% META: {"id": "TSPE-SUITES-LIMITES-QCM", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4","C5","C6","C7"], "status": "generated"}
+% META: {"id": "TSPE-SUITES-LIMITES-QCM", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "qcm", "genere_depuis": "chapitres/TSPE-SUITES-LIMITES/qcm/TSPE-SUITES-LIMITES-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-evaluation — Suites : limites et convergence}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Suites : limites et convergence — QCM d'auto-evaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule reponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C1 — Convergence et divergence}
-% ------------------------------------------------------------
 
 \begin{enumerate}
 
+\item[] \textbf{Capacite C1}
+
 \item \textbf{[Q1]} Soit $(u_n)$ definie par $u_n = \dfrac{5n - 1}{2n + 3}$. Quelle est $\lim_{n \to +\infty} u_n$ ?
   \begin{enumerate}[label=\Alph*.]
-    \item $\dfrac{5}{3}$
-    \item $\dfrac{5}{2}$
+    \item $5/3$
+    \item $5/2$
     \item $+\infty$
     \item $0$
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q2]} La suite $u_n = (-1)^n + \dfrac{1}{n}$ est :
+\item \textbf{[Q2]} La suite $u_n = (-1)^n + 1/n$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item convergente vers $0$
-    \item convergente vers $1$
+    \item convergente vers 0
+    \item convergente vers 1
     \item divergente vers $+\infty$
     \item divergente sans limite
   \end{enumerate}
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C2 — Raisonnement par recurrence}
-% ------------------------------------------------------------
+\item[] \textbf{Capacite C2}
 
 \item \textbf{[Q3]} Dans une preuve par recurrence, l'etape d'heredite consiste a :
   \begin{enumerate}[label=\Alph*.]
-    \item Verifier que la propriete est vraie pour $n = 0$.
-    \item Supposer $\mathcal{P}(n)$ vraie et montrer $\mathcal{P}(n+1)$.
-    \item Montrer que $\mathcal{P}(n)$ est vraie pour tout $n$.
-    \item Remplacer $n$ par $n+1$ dans la formule.
+    \item Verifier P(0)
+    \item Supposer P(n) et montrer P(n+1)
+    \item Montrer P(n) pour tout n
+    \item Remplacer n par n+1
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q4]} Pour demontrer par recurrence que $2^n > n$ pour tout $n \geq 1$, quelle inegalite faut-il verifier dans l'heredite ?
+\item \textbf{[Q4]} Heredite pour $2^n > n$, $n \geq 1$ :
   \begin{enumerate}[label=\Alph*.]
-    \item $2^{n+1} > n + 1$ en partant de $2^n > n$.
-    \item $2^n > n$ directement.
-    \item $2^{n+1} = 2^n + 2^n > n + n = 2n$.
-    \item A et C sont correctes.
+    \item $2^{n+1} > n+1$ via $2^n > n$
+    \item Montrer $2^n > n$ directement
+    \item $2^{n+1} = 2 \times 2^n > 2n \geq n+1$
+    \item A et C correctes
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C3}
 
-% ------------------------------------------------------------
-\subsection*{C3 — Modelisation}
-% ------------------------------------------------------------
-
-\item \textbf{[Q5]} La suite definie par $u_0 = 100$ et $u_{n+1} = 0{,}9\,u_n + 20$ converge vers :
+\item \textbf{[Q5]} $u_0=100$, $u_{n+1}=0{,}9u_n+20$. Limite ?
   \begin{enumerate}[label=\Alph*.]
-    \item $180$
-    \item $200$
-    \item $220$
-    \item $0$
+    \item 180
+    \item 200
+    \item 220
+    \item 0
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q6]} Pour etudier $u_{n+1} = 0{,}7\,u_n + 9$, on pose $v_n = u_n - \ell$. La raison de la suite geometrique $(v_n)$ est :
+\item \textbf{[Q6]} $u_{n+1}=0{,}7u_n+9$. Raison de $(v_n)$ ?
   \begin{enumerate}[label=\Alph*.]
-    \item $9$
-    \item $0{,}7$
-    \item $30$
-    \item $0{,}3$
+    \item 9
+    \item 0,7
+    \item 30
+    \item 0,3
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C4}
 
-% ------------------------------------------------------------
-\subsection*{C4 — Suite croissante non majoree}
-% ------------------------------------------------------------
-
-\item \textbf{[Q7]} Parmi les assertions suivantes, laquelle est vraie ?
+\item \textbf{[Q7]} Laquelle est vraie ?
   \begin{enumerate}[label=\Alph*.]
-    \item Toute suite croissante diverge vers $+\infty$.
-    \item Toute suite croissante et majoree converge.
-    \item Toute suite majoree converge.
-    \item Toute suite convergente est croissante.
+    \item Toute suite croissante diverge
+    \item Croissante majoree => converge
+    \item Majoree => converge
+    \item Convergente => croissante
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q8]} Soit $(u_n)$ croissante. Si on montre que $u_n \geq n$ pour tout $n$, on peut conclure que :
+\item \textbf{[Q8]} $(u_n)$ croissante, $u_n \geq n$. Conclusion ?
   \begin{enumerate}[label=\Alph*.]
-    \item $(u_n)$ converge vers $1$.
-    \item $(u_n)$ est bornee.
-    \item $(u_n)$ diverge vers $+\infty$.
-    \item $(u_n)$ est decroissante.
+    \item converge vers 1
+    \item bornee
+    \item diverge vers $+\infty$
+    \item decroissante
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C5}
 
-% ------------------------------------------------------------
-\subsection*{C5 — Bernoulli et $q^n$}
-% ------------------------------------------------------------
-
-\item \textbf{[Q9]} L'inegalite de Bernoulli affirme que pour $a \geq -1$ et $n \in \mathbb{N}$ :
+\item \textbf{[Q9]} Inegalite de Bernoulli :
   \begin{enumerate}[label=\Alph*.]
-    \item $(1+a)^n \leq 1 + na$
-    \item $(1+a)^n \geq 1 + na$
-    \item $(1+a)^n = 1 + na$
+    \item $(1+a)^n \leq 1+na$
+    \item $(1+a)^n \geq 1+na$
+    \item $(1+a)^n = 1+na$
     \item $(1+a)^n \geq na$
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q10]} $\lim_{n \to +\infty} 0{,}95^n = $
+\item \textbf{[Q10]} $\lim 0{,}95^n$ ?
   \begin{enumerate}[label=\Alph*.]
     \item $+\infty$
-    \item $0{,}95$
-    \item $0$
+    \item 0,95
+    \item 0
     \item pas de limite
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q11]} $\lim_{n \to +\infty} 1{,}02^n = $
+\item \textbf{[Q11]} $\lim 1{,}02^n$ ?
   \begin{enumerate}[label=\Alph*.]
-    \item $0$
-    \item $1$
-    \item $1{,}02$
+    \item 0
+    \item 1
+    \item 1,02
     \item $+\infty$
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C6}
 
-% ------------------------------------------------------------
-\subsection*{C6 — Comparaison}
-% ------------------------------------------------------------
-
-\item \textbf{[Q12]} Si $u_n \leq v_n$ pour tout $n$ et $\lim u_n = +\infty$, alors :
+\item \textbf{[Q12]} $u_n \leq v_n$ et $\lim u_n = +\infty$. Conclusion sur $v_n$ ?
   \begin{enumerate}[label=\Alph*.]
     \item $\lim v_n = +\infty$
     \item $\lim v_n = 0$
@@ -152,38 +117,153 @@
     \item On ne peut rien conclure
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q13]} Le theoreme des gendarmes s'applique lorsque :
+\item \textbf{[Q13]} Le theoreme des gendarmes s'applique quand :
   \begin{enumerate}[label=\Alph*.]
-    \item Les deux suites encadrantes tendent vers la meme limite.
-    \item Les deux suites encadrantes tendent vers des limites differentes.
-    \item Une seule des suites encadrantes tend vers $\ell$.
-    \item Les suites encadrantes divergent.
+    \item meme limite
+    \item limites differentes
+    \item une seule limite
+    \item divergence
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C7}
 
-% ------------------------------------------------------------
-\subsection*{C7 — Limites de l'exponentielle}
-% ------------------------------------------------------------
-
-\item \textbf{[Q14]} $\lim_{x \to -\infty} \mathrm{e}^x = $
+\item \textbf{[Q14]} $\lim_{x \to -\infty} e^x$ ?
   \begin{enumerate}[label=\Alph*.]
     \item $-\infty$
-    \item $0$
-    \item $1$
+    \item 0
+    \item 1
     \item $+\infty$
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q15]} $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x^2} = $
+\item \textbf{[Q15]} $\lim_{x \to +\infty} e^x / x^2$ ?
   \begin{enumerate}[label=\Alph*.]
-    \item $0$
-    \item $1$
+    \item 0
+    \item 1
     \item $+\infty$
-    \item forme indeterminee sans conclusion
+    \item indeterminee
   \end{enumerate}
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C1 & \textbf{B} \\
+Q2 & C1 & \textbf{D} \\
+Q3 & C2 & \textbf{B} \\
+Q4 & C2 & \textbf{D} \\
+Q5 & C3 & \textbf{B} \\
+Q6 & C3 & \textbf{B} \\
+Q7 & C4 & \textbf{B} \\
+Q8 & C4 & \textbf{C} \\
+Q9 & C5 & \textbf{B} \\
+Q10 & C5 & \textbf{C} \\
+Q11 & C5 & \textbf{D} \\
+Q12 & C6 & \textbf{A} \\
+Q13 & C6 & \textbf{A} \\
+Q14 & C7 & \textbf{B} \\
+Q15 & C7 & \textbf{C} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{A} — L'eleve a divise les termes constants (-1 et 3) au lieu des coefficients dominants. \emph{Renvoi : M1, etape 3.}
+    \item \textbf{C} — L'eleve pense que tout quotient de polynomes diverge. \emph{Renvoi : M1, etape 2.}
+    \item \textbf{D} — L'eleve confond avec une suite du type 1/n. \emph{Renvoi : M1, etape 1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — L'eleve ne considere que le terme 1/n. \emph{Renvoi : C1, definition divergence.}
+    \item \textbf{B} — L'eleve ne considere que les termes pairs. \emph{Renvoi : C1, unicite limite.}
+    \item \textbf{C} — L'eleve confond avec n+1/n. \emph{Renvoi : C1, exemples.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — C'est l'initialisation, pas l'heredite. \emph{Renvoi : M2, etape 1.}
+    \item \textbf{C} — C'est la conclusion, pas l'heredite. \emph{Renvoi : M2, etape 4.}
+    \item \textbf{D} — On ne remplace pas mecaniquement; on doit utiliser l'hypothese. \emph{Renvoi : M2, piege 3.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — L'implication est annoncee sans etre justifiee : passer de 2\textasciicircum{}n > n a 2\textasciicircum{}(n+1) > n+1 demande le calcul intermediaire, pas seulement l'hypothese de recurrence. \emph{Renvoi : M2, redaction de l'heredite.}
+    \item \textbf{B} — L'heredite suppose P(n), elle ne le demontre pas. \emph{Renvoi : M2, piege 2.}
+    \item \textbf{C} — La chaine est juste mais incomplete : elle etablit 2\textasciicircum{}(n+1) > 2n, puis affirme 2n >= n+1 sans preciser que cela suppose n >= 1, hypothese pourtant disponible. \emph{Renvoi : M2, redaction de l'heredite.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — Erreur de calcul dans $20/(1-0{,}9)$. \emph{Renvoi : M3, etape 1.}
+    \item \textbf{C} — L'eleve a resolu $\ell = 0{,}9\ell + 20$ incorrectement. \emph{Renvoi : M3, etape 1.}
+    \item \textbf{D} — L'eleve confond avec $0{,}9^n \to 0$. \emph{Renvoi : M3, etape 6.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — Confusion entre la constante additive et la raison. \emph{Renvoi : M3, etape 3.}
+    \item \textbf{C} — C'est le point fixe $\ell = 9/0{,}3 = 30$. \emph{Renvoi : M3, etape 1.}
+    \item \textbf{D} — C'est $1-a$, pas $a$. \emph{Renvoi : M3, etape 3.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — Contre-exemple : $u_n = 1-1/n$ croissante, converge vers 1. \emph{Renvoi : C4, theoreme.}
+    \item \textbf{C} — Il faut aussi la monotonie. \emph{Renvoi : C4, theoreme.}
+    \item \textbf{D} — Contre-exemple : $u_n = (-1)^n/n$ converge vers 0 sans etre croissante. \emph{Renvoi : C1, definition.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{A} — Si $u_n \geq n$, la suite ne peut converger vers un reel fini. \emph{Renvoi : C4, theoreme.}
+    \item \textbf{B} — $u_n \geq n$ implique que $(u_n)$ n'est pas majoree. \emph{Renvoi : C4, theoreme.}
+    \item \textbf{D} — Contradictoire avec l'hypothese : une suite croissante ne peut pas etre decroissante. \emph{Renvoi : RE-C4.}
+  \end{itemize}
+  \item \textbf{Q9}
+  \begin{itemize}
+    \item \textbf{A} — Inversion du sens de l'inegalite. \emph{Renvoi : C5, theoreme.}
+    \item \textbf{C} — C'est une inegalite, pas une egalite (sauf si $a=0$ ou $n \leq 1$). \emph{Renvoi : C5, theoreme.}
+    \item \textbf{D} — Membre de droite errone : l'inegalite de Bernoulli majore par 1 + na, et non par na, ce qui la rendrait fausse pour n = 0. \emph{Renvoi : cours C5.}
+  \end{itemize}
+  \item \textbf{Q10}
+  \begin{itemize}
+    \item \textbf{A} — C'est pour $q > 1$. \emph{Renvoi : C5, tableau.}
+    \item \textbf{B} — Confusion entre $q$ et $\lim q^n$. \emph{Renvoi : C5, tableau.}
+    \item \textbf{D} — Une suite geometrique de raison strictement comprise entre 0 et 1 converge vers 0 ; l'absence de limite concerne les raisons inferieures ou egales a -1. \emph{Renvoi : M4, suites geometriques.}
+  \end{itemize}
+  \item \textbf{Q11}
+  \begin{itemize}
+    \item \textbf{A} — C'est pour $|q|<1$. \emph{Renvoi : C5, tableau.}
+    \item \textbf{B} — C'est pour $q=1$. \emph{Renvoi : C5, tableau.}
+    \item \textbf{C} — Confusion entre la raison de la suite et sa limite : la raison 1,02 est superieure a 1, donc la suite diverge vers plus l'infini. \emph{Renvoi : M4, suites geometriques.}
+  \end{itemize}
+  \item \textbf{Q12}
+  \begin{itemize}
+    \item \textbf{B} — Contradiction : $v_n \geq u_n \to +\infty$. \emph{Renvoi : C6, theoreme comparaison.}
+    \item \textbf{C} — La minoration par une suite tendant vers plus l'infini interdit la convergence : v\_n est repousse vers plus l'infini. \emph{Renvoi : M5, theoreme de comparaison.}
+    \item \textbf{D} — Le theoreme de comparaison donne une conclusion precise. \emph{Renvoi : C6, theoreme comparaison.}
+  \end{itemize}
+  \item \textbf{Q13}
+  \begin{itemize}
+    \item \textbf{B} — Si les limites sont differentes, on ne peut pas conclure. \emph{Renvoi : C6, theoreme gendarmes.}
+    \item \textbf{C} — Les DEUX bornes doivent tendre vers $\ell$. \emph{Renvoi : C6, theoreme gendarmes.}
+    \item \textbf{D} — Le theoreme des gendarmes conclut a une convergence : il encadre par deux suites de meme limite finie, il ne s'applique pas a une divergence. \emph{Renvoi : M5, theoreme des gendarmes.}
+  \end{itemize}
+  \item \textbf{Q14}
+  \begin{itemize}
+    \item \textbf{A} — $e^x > 0$ pour tout $x$, donc la limite ne peut etre $-\infty$. \emph{Renvoi : C7, demonstration.}
+    \item \textbf{C} — $e^0 = 1$ mais $\lim_{-\infty} e^x 
+eq 1$. \emph{Renvoi : C7, demonstration.}
+    \item \textbf{D} — Sens de variation inverse : l'exponentielle tend vers 0 en moins l'infini et vers plus l'infini en plus l'infini. \emph{Renvoi : cours C7.}
+  \end{itemize}
+  \item \textbf{Q15}
+  \begin{itemize}
+    \item \textbf{A} — L'exponentielle croit plus vite que tout polynome. \emph{Renvoi : C7, croissance comparee.}
+    \item \textbf{B} — L'eleve simplifie comme s'il s'agissait d'un quotient de termes de meme nature ; la croissance comparee donne plus l'infini. \emph{Renvoi : M3, croissances comparees.}
+    \item \textbf{D} — C'est une forme indeterminee qui se resout par les croissances comparees. \emph{Renvoi : C7, croissance comparee.}
+  \end{itemize}
+\end{itemize}

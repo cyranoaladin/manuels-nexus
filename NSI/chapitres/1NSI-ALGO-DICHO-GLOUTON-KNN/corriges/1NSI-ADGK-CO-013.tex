@@ -1,0 +1,24 @@
+% META: {"id": "1NSI-ADGK-CO-013", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "corrige", "exercice_ref": "1NSI-ADGK-EX-013", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (x**2 + 1)/x
+% fp = diff(f, x)
+% assert simplify(fp) == 1 - 1/x**2
+% assert solve(fp, x) == [-1, 1]
+% assert f.subs(x, 1) == 2
+% assert f.subs(x, -1) == -2
+% END-VERIFY
+\begin{corrige}{1NSI-ADGK-EX-013}
+
+$f(x) = x + \dfrac{1}{x}$, donc $f'(x) = 1 - \dfrac{1}{x^2} = \dfrac{x^2-1}{x^2}$.
+
+\commentaireMarge{Simplifier en $x + 1/x$ facilite la derivation.}
+
+$f'(x) = 0 \iff x^2 = 1 \iff x = \pm 1$.
+
+$f' > 0$ sur $\left]-\infty, -1\right[ \cup \left]1, +\infty\right[$ et $f' < 0$ sur $\left]-1, 0\right[ \cup \left]0, 1\right[$.
+
+$f$ admet un minimum local $f(1) = 2$ et un maximum local $f(-1) = -2$.
+
+\end{corrige}

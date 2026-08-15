@@ -1,79 +1,110 @@
-% META: {"id": "TCOMPL-INFERENCE-BAYESIENNE-QCM", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4","C5"], "status": "generated"}
+% META: {"id": "TCOMPL-INFERENCE-BAYESIENNE-QCM", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "qcm", "genere_depuis": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/qcm/TCOMPL-INFERENCE-BAYESIENNE-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Inférence bayésienne}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Inference bayesienne et conditionnement}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C2/C3 --- Formule de Bayes}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} La formule de Bayes s'écrit :
-  \begin{enumerate}[label=\Alph*.]
-    \item $P_B(A) = P_A(B)$.
-    \item $P_B(A) = \dfrac{P_A(B)\times P(A)}{P(B)}$.
-    \item $P_B(A) = P(A)+P(B)$.
-    \item $P_B(A) = P(A)\times P(B)$.
-    \end{enumerate}
+\item[] \textbf{Capacite C1}
 
-\bigskip
-
-\item \textbf{[Q2]} $P_B(A)$ et $P_A(B)$ sont :
+\item \textbf{[Q1]} La formule de Bayes s'ecrit $P(A|B) =$
   \begin{enumerate}[label=\Alph*.]
-    \item toujours égales.
-    \item en général différentes.
-    \item toujours de somme $1$.
-    \item toujours de produit $1$.
+    \item $\frac{P(B|A)P(A)}{P(B)}$
+    \item $\frac{P(A|B)P(B)}{P(A)}$
+    \item $P(A) P(B)$
+    \item $P(A \cap B)$
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C1 --- Probabilités conditionnelles}
-
-\item \textbf{[Q3]} La probabilité a priori d'un événement $A$ est :
+\item \textbf{[Q2]} Si A et B sont independants, alors $P(A \cap B) =$
   \begin{enumerate}[label=\Alph*.]
-    \item $P(A)$, avant toute observation.
-    \item $P_B(A)$, après observation de $B$.
-    \item toujours égale à $0{,}5$.
-    \item impossible à définir.
+    \item $P(A) + P(B)$
+    \item $P(A|B)$
+    \item $P(A) \times P(B)$
+    \item $P(A)/P(B)$
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C2}
 
-\subsection*{C4 --- Tests de dépistage}
-
-\item \textbf{[Q4]} La sensibilité d'un test mesure :
+\item \textbf{[Q3]} La formule des probabilites totales pour une partition $(A_k)$ s'ecrit $P(B) =$
   \begin{enumerate}[label=\Alph*.]
-    \item la probabilité d'être malade sachant le test positif.
-    \item la probabilité que le test soit positif sachant que le patient est malade.
-    \item la proportion de malades dans la population.
-    \item la probabilité que le test soit négatif sachant le patient sain.
+    \item $\sum P(A_k)$
+    \item $\sum P(B|A_k) P(A_k)$
+    \item $\prod P(B|A_k)$
+    \item $P(B|A_1)$
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C5 --- VPP et prévalence}
-
-\item \textbf{[Q5]} Pour un test de sensibilité et spécificité fixées, la valeur prédictive positive :
+\item \textbf{[Q4]} En inference bayesienne, la probabilite $P(A)$ avant de connaitre B s'appelle :
   \begin{enumerate}[label=\Alph*.]
-    \item ne dépend pas de la prévalence.
-    \item est une fonction croissante de la prévalence.
-    \item est une fonction décroissante de la prévalence.
-    \item vaut toujours $1$.
+    \item La probabilite a posteriori
+    \item La vraisemblance
+    \item La valeur p
+    \item La probabilite a priori
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C3}
 
-\item \textbf{[Q6]} Un test très sensible et spécifique appliqué à une maladie très rare donne typiquement :
+\item \textbf{[Q5]} Un test de sensibilite 95% et specificite 90% sur une maladie rare (1%) donne une VPP :
   \begin{enumerate}[label=\Alph*.]
-    \item une VPP très élevée, proche de $1$.
-    \item une VPP potentiellement faible, à cause du grand nombre de faux positifs en valeur absolue.
-    \item une VPP toujours égale à la sensibilité.
-    \item aucun faux positif possible.
+    \item Faible (inférieure à 10%) car la maladie est rare
+    \item Tres forte (95%)
+    \item Egale a 50%
+    \item Exactement 90%
   \end{enumerate}
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C1 & \textbf{C} \\
+Q3 & C2 & \textbf{B} \\
+Q4 & C2 & \textbf{D} \\
+Q5 & C3 & \textbf{A} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — Tautologie sans inversion. \emph{Renvoi : C1.}
+    \item \textbf{C} — Independance non supposee. \emph{Renvoi : C1.}
+    \item \textbf{D} — Oubli de la division par P(B). \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Formule d'evenements disjoints. \emph{Renvoi : C1.}
+    \item \textbf{B} — Probabilite conditionnelle. \emph{Renvoi : C1.}
+    \item \textbf{D} — Rapport incorrect. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — La somme des P(A\_k) vaut 1. \emph{Renvoi : C2.}
+    \item \textbf{C} — Produit au lieu d'une somme. \emph{Renvoi : C2.}
+    \item \textbf{D} — Seul le premier terme considere. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — P(A|B) est la probabilite a posteriori. \emph{Renvoi : C2.}
+    \item \textbf{B} — P(B|A) est la vraisemblance. \emph{Renvoi : C2.}
+    \item \textbf{C} — Terme de test d'hypothese. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{B} — Oubli de l'effet du biais de rarete (paradoxe du faux positif). \emph{Renvoi : C3.}
+    \item \textbf{C} — Valeur arbitraire. \emph{Renvoi : C3.}
+    \item \textbf{D} — Confusion avec la specificite. \emph{Renvoi : C3.}
+  \end{itemize}
+\end{itemize}

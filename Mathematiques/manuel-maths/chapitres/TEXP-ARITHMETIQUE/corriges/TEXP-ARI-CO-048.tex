@@ -1,0 +1,30 @@
+% META: {"id": "TEXP-ARI-CO-048", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-048", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f(x) = 1/(1+x), convexe sur ]-1,+inf[
+% f = 1/(1+x)
+% fpp = diff(f, x, 2)
+% assert fpp == 2/(1+x)**3
+% assert fpp.subs(x, 0) == 2  # > 0, convexe
+% # tangente en 0: f(0)=1, f'(0)=-1, y=1-x
+% # convexe => f >= tangente => 1/(1+x) >= 1-x pour x > -1
+% g = f - (1 - x)
+% assert simplify(g) == x**2/(1+x)
+% assert g.subs(x, 0) == 0
+% assert g.subs(x, Rational(1,2)) == Rational(1,6) > 0
+% assert g.subs(x, Rational(-1,2)) == Rational(1,2) > 0
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-048}
+
+\textbf{Question 1.} $f''(x) = \dfrac{2}{(1+x)^3} > 0$ sur $\left]-1, +\infty\right[$ : $f$ est convexe.
+
+\commentaireMarge{$f''=2/(1+x)^3 > 0$ sur $]-1,+\infty[$ : convexe, courbe au-dessus des tangentes.}
+
+\textbf{Question 2.} La tangente en $0$ est $y = 1 - x$ (car $f(0)=1$, $f'(0)=-1$).
+
+Par convexite, $f(x) \geq 1 - x$, soit $\dfrac{1}{1+x} \geq 1 - x$ pour tout $x > -1$.
+
+\textbf{Question 3.} $\dfrac{1}{1{,}05} \geq 1 - 0{,}05 = 0{,}95$. La vraie valeur est $\approx 0{,}952$, donc l'approximation est par defaut (comme attendu par convexite).
+
+\end{corrige}

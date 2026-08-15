@@ -1,0 +1,13 @@
+% META: {"id": "TNSI-LANG-EX-013", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "exercice", "capacites": ["TNSI-LANGAGES-ET-PROGRAMMATION-C3"], "capacites_codes": ["C3"], "methodes": ["M1"], "parcours": 1, "competences": ["programmer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-013.tex", "corrige_tex": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-013.tex", "status": "approved"}
+% BEGIN-VERIFY
+% def somme_chiffres(n):
+%     if n < 10:
+%         return n
+%     return n % 10 + somme_chiffres(n // 10)
+% assert somme_chiffres(1234) == 10
+% assert somme_chiffres(7) == 7
+% assert somme_chiffres(100) == 1
+% END-VERIFY
+\begin{exercice}{TNSI-LANG-EX-001}{1}{15}
+Écrire une fonction récursive \lstinline{somme_chiffres(n)} qui renvoie la somme des chiffres d'un entier positif \lstinline{n} (par exemple, $1234 \to 1+2+3+4 = 10$). Quel est le cas de base ? Combien d'appels récursifs sont nécessaires pour \lstinline{somme_chiffres(1234)} ?
+\end{exercice}

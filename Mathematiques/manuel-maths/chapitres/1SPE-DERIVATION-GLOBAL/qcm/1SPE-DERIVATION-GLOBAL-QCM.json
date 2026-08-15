@@ -1,17 +1,396 @@
-{"chapitre":"1SPE-DERIVATION-GLOBAL","questions":[
-  {"id":"Q1","capacite":"C1","correcte":"B","diagnostics":{"A":{"erreur":"Oubli du coefficient n dans nx^{n-1}.","renvoi":"M1"},"C":{"erreur":"Exposant non décrémenté : 4x^4 au lieu de 4x^3.","renvoi":"M1"},"D":{"erreur":"Coefficient n remplacé par n-1 = 3.","renvoi":"M1"}}},
-  {"id":"Q2","capacite":"C1","correcte":"C","diagnostics":{"A":{"erreur":"Facteur 2 au numérateur au lieu du dénominateur.","renvoi":"M1"},"B":{"erreur":"Dénominateur 2 omis dans la formule de dérivée de sqrt.","renvoi":"M1"},"D":{"erreur":"sqrt(x) divisé par 2 sans dérivation.","renvoi":"M1"}}},
-  {"id":"Q3","capacite":"C1","correcte":"C","diagnostics":{"A":{"erreur":"Signe moins oublié dans la dérivée de 1/x.","renvoi":"M1"},"B":{"erreur":"Forme -x^2 au lieu de -1/x^2.","renvoi":"M1"},"D":{"erreur":"Confusion avec la dérivée de ln(x).","renvoi":"M1"}}},
-  {"id":"Q4","capacite":"C2","correcte":"A","diagnostics":{"B":{"erreur":"Coefficient 3 non dérivé, terme 3x au lieu de 6x.","renvoi":"M2"},"C":{"erreur":"Exposant non décrémenté.","renvoi":"M2"},"D":{"erreur":"Terme constant +2 conservé dans la dérivée.","renvoi":"M2"}}},
-  {"id":"Q5","capacite":"C2","correcte":"C","diagnostics":{"A":{"erreur":"Pas de quotient ici, c'est un produit.","renvoi":"M2"},"B":{"erreur":"Pas une somme mais un produit.","renvoi":"M2"},"D":{"erreur":"f est bien dérivable sur ]0;+inf[.","renvoi":"M2"}}},
-  {"id":"Q6","capacite":"C2","correcte":"B","diagnostics":{"A":{"erreur":"u'=0 au lieu de 1, erreur de dérivation du numérateur.","renvoi":"M2"},"C":{"erreur":"Signe + au numérateur : u'v+uv' au lieu de u'v-uv'.","renvoi":"M2"},"D":{"erreur":"Numérateur 1 issu d'un calcul erroné.","renvoi":"M2"}}},
-  {"id":"Q7","capacite":"C3","correcte":"C","diagnostics":{"A":{"erreur":"Signe + de f' confondu avec décroissance.","renvoi":"M3"},"B":{"erreur":"Signe + de f' confondu avec f' nulle.","renvoi":"M3"},"D":{"erreur":"Signe de f' confondu avec annulation de f.","renvoi":"M3"}}},
-  {"id":"Q8","capacite":"C3","correcte":"C","diagnostics":{"A":{"erreur":"Intervalle de croissance pris au lieu de décroissance.","renvoi":"M3"},"B":{"erreur":"Racine de f au lieu de f'.","renvoi":"M3"},"D":{"erreur":"f'(4)=4 ≠ 0, pas la racine de f'.","renvoi":"M3"}}},
-  {"id":"Q9","capacite":"C3","correcte":"C","diagnostics":{"A":{"erreur":"Changement +→- correspond à un maximum, pas un minimum.","renvoi":"M3, M4"},"B":{"erreur":"Annulation de f' avec changement de signe donne un extremum.","renvoi":"M4"},"D":{"erreur":"f'(3)=0 ne signifie pas f(3)=0.","renvoi":"M3"}}},
-  {"id":"Q10","capacite":"C4","correcte":"B","diagnostics":{"A":{"erreur":"Signe de -2x oublié : -2x+6=0 donne x=3, pas -3.","renvoi":"M4"},"C":{"erreur":"x=6 correspond à -4(6)+80=56≠0.","renvoi":"M4"},"D":{"erreur":"x=0 correspond à B'(0)=80≠0.","renvoi":"M4"}}},
-  {"id":"Q11","capacite":"C4","correcte":"B","diagnostics":{"A":{"erreur":"Coefficient dominant négatif implique maximum global, pas minimum.","renvoi":"M4"},"C":{"erreur":"Point d'inflexion si f' ne change pas de signe en ce point.","renvoi":"M4"},"D":{"erreur":"f' change de signe donc c'est bien un extremum.","renvoi":"M4"}}},
-  {"id":"Q12","capacite":"C4","correcte":"B","diagnostics":{"A":{"erreur":"f(x)=0 donne les racines de f, pas ses extremums.","renvoi":"M4"},"C":{"erreur":"f(0) est une image, pas nécessairement un extremum.","renvoi":"M4"},"D":{"erreur":"Croissance seule ne localise pas les extremums.","renvoi":"M3"}}},
-  {"id":"Q13","capacite":"C5","correcte":"B","diagnostics":{"A":{"erreur":"Dériver avant d'avoir défini la quantité à optimiser.","renvoi":"M5"},"C":{"erreur":"Pas nécessairement un problème de second degré.","renvoi":"M5"},"D":{"erreur":"Tracer la courbe n'est pas la première étape.","renvoi":"M5"}}},
-  {"id":"Q14","capacite":"C5","correcte":"C","diagnostics":{"A":{"erreur":"x=80 donne B'(80)=-240≠0.","renvoi":"M5"},"B":{"erreur":"x=4 donne B'(4)=64≠0.","renvoi":"M5"},"D":{"erreur":"x=40 donne B'(40)=-80≠0.","renvoi":"M5"}}},
-  {"id":"Q15","capacite":"C5","correcte":"C","diagnostics":{"A":{"erreur":"Les extremums aux bornes du segment sont aussi candidats.","renvoi":"M5"},"B":{"erreur":"Sur un segment fermé, les bornes sont toujours à tester.","renvoi":"M5"},"D":{"erreur":"Le point critique intérieur x=5 doit aussi être vérifié.","renvoi":"M5"}}}
-]}
+{
+  "chapitre": "1SPE-DERIVATION-GLOBAL",
+  "titre": "Fonction dérivée et applications — QCM d'auto-évaluation",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "La dérivée de la fonction $f(x) = x^4$ sur $\\mathbb{R}$ est :",
+      "options": {
+        "A": "$x^3$",
+        "B": "$4x^3$",
+        "C": "$4x^4$",
+        "D": "$3x^3$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Oubli du coefficient $n$ dans la formule $(x^n)' = n x^{n-1}$.",
+          "renvoi": "M1"
+        },
+        "C": {
+          "erreur": "Exposant non décrémenté ($4x^4$ au lieu de $4x^3$).",
+          "renvoi": "M1"
+        },
+        "D": {
+          "erreur": "Coefficient $n$ remplacé par $n-1 = 3$.",
+          "renvoi": "M1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "La fonction $f(x) = \\sqrt{x}$ est dérivable sur $]0 ; +\\infty[$ et sa dérivée est :",
+      "options": {
+        "A": "$\\dfrac{2}{\\sqrt{x}}$",
+        "B": "$\\dfrac{1}{\\sqrt{x}}$",
+        "C": "$\\dfrac{1}{2\\sqrt{x}}$",
+        "D": "$\\dfrac{\\sqrt{x}}{2}$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Facteur 2 au numérateur au lieu du dénominateur.",
+          "renvoi": "M1"
+        },
+        "B": {
+          "erreur": "Dénominateur 2 omis dans la formule de dérivation de $\\sqrt{x}$.",
+          "renvoi": "M1"
+        },
+        "D": {
+          "erreur": "$\\sqrt{x}$ divisé par 2 sans dérivation.",
+          "renvoi": "M1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C1",
+      "enonce": "Pour $x \\neq 0$, la dérivée de $f(x) = \\dfrac{1}{x}$ est :",
+      "options": {
+        "A": "$\\dfrac{1}{x^2}$",
+        "B": "$-x^2$",
+        "C": "$-\\dfrac{1}{x^2}$",
+        "D": "$\\ln(x)$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Signe moins oublié dans la dérivée de $1/x$.",
+          "renvoi": "M1"
+        },
+        "B": {
+          "erreur": "Forme $-x^2$ au lieu de $-1/x^2$.",
+          "renvoi": "M1"
+        },
+        "D": {
+          "erreur": "Confusion avec la dérivée de $\\ln(x)$.",
+          "renvoi": "M1"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "La dérivée de la fonction $f(x) = 3x^2 - 5x + 2$ sur $\\mathbb{R}$ est :",
+      "options": {
+        "A": "$6x - 5$",
+        "B": "$3x - 5$",
+        "C": "$6x^2 - 5$",
+        "D": "$6x - 3$"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Coefficient 3 non dérivé, terme $3x$ au lieu de $6x$.",
+          "renvoi": "M2"
+        },
+        "C": {
+          "erreur": "Exposant non décrémenté.",
+          "renvoi": "M2"
+        },
+        "D": {
+          "erreur": "Terme constant $+2$ conservé dans la dérivée.",
+          "renvoi": "M2"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C2",
+      "enonce": "La formule de dérivation d'un produit $(uv)'$ est :",
+      "options": {
+        "A": "$u'v'$",
+        "B": "$u' + v'$",
+        "C": "$u'v + uv'$",
+        "D": "$u'v - uv'$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Produit des dérivées au lieu de la formule Leibniz.",
+          "renvoi": "M2"
+        },
+        "B": {
+          "erreur": "Somme des dérivées.",
+          "renvoi": "M2"
+        },
+        "D": {
+          "erreur": "Signe moins (c'est le numérateur du quotient).",
+          "renvoi": "M2"
+        }
+      }
+    },
+    {
+      "id": "Q6",
+      "capacite": "C2",
+      "enonce": "La dérivée du quotient $\\left(\\dfrac{u}{v}\\right)'$ est égale à :",
+      "options": {
+        "A": "$\\dfrac{u'v + uv'}{v^2}$",
+        "B": "$\\dfrac{u'v - uv'}{v^2}$",
+        "C": "$\\dfrac{u'}{v'}$",
+        "D": "$\\dfrac{u'v - uv'}{v}$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Signe $+$ au numérateur au lieu de $-$.",
+          "renvoi": "M2"
+        },
+        "C": {
+          "erreur": "Quotient des dérivées.",
+          "renvoi": "M2"
+        },
+        "D": {
+          "erreur": "Carré au dénominateur oublié.",
+          "renvoi": "M2"
+        }
+      }
+    },
+    {
+      "id": "Q7",
+      "capacite": "C3",
+      "enonce": "Si $f'(x) > 0$ sur un intervalle $I$, alors la fonction $f$ est :",
+      "options": {
+        "A": "strictement décroissante sur $I$",
+        "B": "constante sur $I$",
+        "C": "strictement croissante sur $I$",
+        "D": "nulle sur $I$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Signe $+$ de $f'$ confondu avec décroissance.",
+          "renvoi": "M3"
+        },
+        "B": {
+          "erreur": "Signe $+$ de $f'$ confondu avec $f'$ nulle.",
+          "renvoi": "M3"
+        },
+        "D": {
+          "erreur": "Signe de $f'$ confondu avec annulation de $f$.",
+          "renvoi": "M3"
+        }
+      }
+    },
+    {
+      "id": "Q8",
+      "capacite": "C3",
+      "enonce": "Si le tableau de signe de $f'(x)$ indique $f'(x) < 0$ sur $]1 ; 4[$, alors $f$ est :",
+      "options": {
+        "A": "croissante sur $]1 ; 4[$",
+        "B": "nulle en $x=2{,}5$",
+        "C": "strictement décroissante sur $]1 ; 4[$",
+        "D": "convexe sur $]1 ; 4[$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Intervalle de croissance pris au lieu de décroissance.",
+          "renvoi": "M3"
+        },
+        "B": {
+          "erreur": "Racine de $f$ au lieu du signe de $f'$.",
+          "renvoi": "M3"
+        },
+        "D": {
+          "erreur": "$f'(4)=4 \\neq 0$, pas la racine de $f'$.",
+          "renvoi": "M3"
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "capacite": "C3",
+      "enonce": "Si $f'(x)$ s'annule en $x=a$ en passant du signe $+$ au signe $-$, la fonction $f$ admet en $a$ :",
+      "options": {
+        "A": "un minimum local",
+        "B": "un point d'inflexion",
+        "C": "un maximum local",
+        "D": "une asymptote verticale"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Changement $+ \\to -$ correspond à un maximum, pas un minimum.",
+          "renvoi": "M3, M4"
+        },
+        "B": {
+          "erreur": "Annulation de $f'$ avec changement de signe donne un extremum.",
+          "renvoi": "M4"
+        },
+        "D": {
+          "erreur": "$f'(3)=0$ ne signifie pas asymptote.",
+          "renvoi": "M3"
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "capacite": "C4",
+      "enonce": "Soit $B(x) = -x^2 + 6x - 5$ la fonction bénéfice. Le bénéfice maximal est atteint pour $x$ égal à :",
+      "options": {
+        "A": "$-3$",
+        "B": "$3$",
+        "C": "$6$",
+        "D": "$0$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Signe de $-2x$ oublié : $-2x+6=0$ donne $x=3$, pas $-3$.",
+          "renvoi": "M4"
+        },
+        "C": {
+          "erreur": "$x=6$ correspond à $B'(6) = -6 \\neq 0$.",
+          "renvoi": "M4"
+        },
+        "D": {
+          "erreur": "$x=0$ correspond à $B'(0) = 6 \\neq 0$.",
+          "renvoi": "M4"
+        }
+      }
+    },
+    {
+      "id": "Q11",
+      "capacite": "C4",
+      "enonce": "Pour une fonction polynôme du second degré $f(x) = ax^2 + bx + c$ avec $a < 0$, l'extremum est :",
+      "options": {
+        "A": "un minimum global",
+        "B": "un maximum global",
+        "C": "un point d'inflexion",
+        "D": "inexistant"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Coefficient dominant négatif implique un maximum global, pas un minimum.",
+          "renvoi": "M4"
+        },
+        "C": {
+          "erreur": "Pas de point d'inflexion pour une parabole.",
+          "renvoi": "M4"
+        },
+        "D": {
+          "erreur": "$f'$ change de signe donc c'est bien un extremum.",
+          "renvoi": "M4"
+        }
+      }
+    },
+    {
+      "id": "Q12",
+      "capacite": "C4",
+      "enonce": "Pour déterminer les extremums locaux d'une fonction dérivable $f$ sur un intervalle ouvert, on cherche :",
+      "options": {
+        "A": "les valeurs où $f(x) = 0$",
+        "B": "les valeurs où $f'(x) = 0$ avec changement de signe",
+        "C": "les valeurs où $f''(x) > 0$",
+        "D": "les bornes de l'intervalle"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "$f(x)=0$ donne les racines de $f$, pas ses extremums.",
+          "renvoi": "M4"
+        },
+        "C": {
+          "erreur": "Condition de convexité, pas seule d'extremum.",
+          "renvoi": "M4"
+        },
+        "D": {
+          "erreur": "Sur un intervalle ouvert, les bornes ne sont pas atteintes.",
+          "renvoi": "M3"
+        }
+      }
+    },
+    {
+      "id": "Q13",
+      "capacite": "C5",
+      "enonce": "Dans un problème d'optimisation, la première étape consiste à :",
+      "options": {
+        "A": "dériver immédiatement",
+        "B": "exprimer la quantité à optimiser sous la forme d'une fonction $f(x)$ d'une seule variable",
+        "C": "résoudre l'équation $f(x) = 0$",
+        "D": "tracer la courbe sur la calculatrice"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Dériver avant d'avoir défini la fonction à optimiser.",
+          "renvoi": "M5"
+        },
+        "C": {
+          "erreur": "Résoudre $f(x)=0$ cherche les racines, pas l'optimum.",
+          "renvoi": "M5"
+        },
+        "D": {
+          "erreur": "Tracer la courbe n'est pas une preuve algébrique.",
+          "renvoi": "M5"
+        }
+      }
+    },
+    {
+      "id": "Q14",
+      "capacite": "C5",
+      "enonce": "Un fabricant veut maximiser le volume $V(x) = x(120 - 2x)^2$ pour $x \\in ]0 ; 60[$. $V'(x) = 0$ donne $x$ égal à :",
+      "options": {
+        "A": "$60$",
+        "B": "$40$",
+        "C": "$20$",
+        "D": "$10$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "$x=60$ donne un volume nul $V(60)=0$.",
+          "renvoi": "M5"
+        },
+        "B": {
+          "erreur": "$x=40$ ne donne pas la racine de $V'(x)$.",
+          "renvoi": "M5"
+        },
+        "D": {
+          "erreur": "$x=10$ donne $V'(10) \\neq 0$.",
+          "renvoi": "M5"
+        }
+      }
+    },
+    {
+      "id": "Q15",
+      "capacite": "C5",
+      "enonce": "Pour trouver le maximum d'une fonction continue $f$ sur un segment fermé $[a, b]$, il faut comparer :",
+      "options": {
+        "A": "les valeurs de $f'$ aux bornes",
+        "B": "les valeurs de $f$ aux points critiques intérieurs où $f'(x)=0$ et aux bornes $f(a), f(b)$",
+        "C": "uniquement les points où $f'(x)=0$",
+        "D": "uniquement les bornes $f(a)$ et $f(b)$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Les valeurs de $f'$ ne sont pas les valeurs de la fonction $f$.",
+          "renvoi": "M5"
+        },
+        "C": {
+          "erreur": "Sur un segment fermé, le maximum peut être atteint sur une borne sans annulation de $f'$.",
+          "renvoi": "M5"
+        },
+        "D": {
+          "erreur": "Le point critique intérieur doit aussi être vérifié.",
+          "renvoi": "M5"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+% META: {"id": "1NSI-TB-EX-008", "chapitre": "1NSI-TYPES-BASE", "type_objet": "exercice", "capacites": ["1NSI-TYPES-BASE-C2"], "parcours": 2, "competences": ["analyser", "programmer", "valider"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-008.tex", "corrige_tex": "chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-008.tex", "status": "approved", "capacites_codes": ["C2"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% assert sum([0.10] * 3) != 0.3
+% def presque_egaux(a, b, tolerance=1e-9):
+%     return abs(a - b) < tolerance
+% assert presque_egaux(sum([0.10] * 3), 0.3) is True
+% END-VERIFY
+\begin{exercice}{1NSI-TB-EX-003}{2}{12}
+Un élève écrit le programme suivant pour vérifier que trois pièces de $0{,}10$\,€ font bien
+$0{,}30$\,€ :
+\begin{python}
+prix = [0.10] * 3
+if sum(prix) == 0.30:
+    print("Ca fait bien 0,30 euro")
+else:
+    print("Erreur de calcul !")
+\end{python}
+\begin{enumerate}
+  \item Que va afficher ce programme ? Pourquoi (relier à la représentation des flottants) ?
+  \item Écrire une fonction \lstinline{presque_egaux(a, b, tolerance=1e-9)} qui teste si deux
+  flottants sont égaux à une tolérance près.
+  \item Réécrire le test \lstinline{if sum(prix) == 0.30:} en utilisant cette fonction, pour
+  que le programme affiche \lstinline{"Ca fait bien 0,30 euro"}.
+\end{enumerate}
+\end{exercice}

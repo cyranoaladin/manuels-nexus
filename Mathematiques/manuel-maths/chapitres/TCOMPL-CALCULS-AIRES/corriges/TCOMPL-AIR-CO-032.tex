@@ -1,0 +1,31 @@
+% META: {"id": "TCOMPL-AIR-CO-032", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "corrige", "exercice_ref": "TCOMPL-AIR-EX-032", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x*exp(-x)
+% fp = diff(f, x)
+% fpp = diff(f, x, 2)
+% assert simplify(fp) == (1-x)*exp(-x)
+% assert simplify(fpp) == (x-2)*exp(-x)
+% assert solve(fp, x) == [1]
+% assert solve(fpp, x) == [2]
+% assert f.subs(x, 0) == 0
+% assert f.subs(x, 1) == exp(-1)
+% assert f.subs(x, 2) == 2*exp(-2)
+% assert limit(f, x, oo) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-AIR-EX-032}
+
+\textbf{Question 1.} $f'(x) = (1-x)\,\mathrm{e}^{-x}$ et $f''(x) = (x-2)\,\mathrm{e}^{-x}$.
+
+\commentaireMarge{$f''=(x-2)\mathrm{e}^{-x}$ change de signe en $x=2$ : inflexion.}
+
+$f'$ s'annule en $x=1$ (max local $f(1)=\mathrm{e}^{-1}$). $\lim_{x\to+\infty} f = 0$ (asymptote horizontale $y=0$).
+
+\textbf{Question 2.} $f''(x) = 0 \iff x = 2$. Point d'inflexion en $(2,\, 2\mathrm{e}^{-2})$.
+
+Convexe sur $\left]-\infty, 2\right]$, concave sur $\left[2, +\infty\right[$.
+
+\textbf{Question 3.} La courbe part de $0$, monte jusqu'a $\mathrm{e}^{-1}$, descend en s'incurvant vers l'asymptote $y=0$.
+
+\end{corrige}

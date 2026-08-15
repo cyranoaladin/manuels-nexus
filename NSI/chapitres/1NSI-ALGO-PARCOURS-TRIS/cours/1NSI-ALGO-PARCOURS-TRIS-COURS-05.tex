@@ -1,0 +1,120 @@
+% META: {"id": "1NSI-ALGO-PARCOURS-TRIS-COURS-05", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "cours", "capacites": ["1NSI-ALGO-PARCOURS-TRIS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C5"], "statut": "structure"}
+\section{Algorithmes gloutons}
+
+\definition[D2]{
+  Un \textbf{algorithme glouton} construit une solution étape par étape, en faisant à
+  chaque étape le choix qui semble \textbf{le meilleur sur le moment} (le choix
+  \og localement optimal \fg{}), sans jamais revenir en arrière.
+}
+
+\exemple{Le \textbf{rendu de monnaie} : pour tenter d'obtenir un rendu avec peu de
+pièces, on choisit à chaque étape la plus grande pièce (ou billet) ne dépassant
+pas le montant restant. Les valeurs des pièces doivent être strictement positives. Si la
+stratégie gloutonne ne trouve pas de rendu exact, la fonction le signale au lieu de
+renvoyer un rendu partiel ; cela ne prouve pas qu'aucun autre rendu exact n'existe.}
+
+\begin{codereference}{Rendu de monnaie glouton}
+% PYTHON-SOURCE: code/rendu_glouton.py
+\begin{python}
+def rendu_glouton(montant, pieces):
+    """Construit un rendu en choisissant d'abord les plus grandes pieces disponibles.
+
+    Precondition : les valeurs des pieces sont strictement positives.
+    """
+    if not all(p > 0 for p in pieces):
+        raise ValueError("les pieces doivent etre strictement positives")
+    pieces_triees = sorted(pieces, reverse=True)
+    rendu = []
+    for p in pieces_triees:
+        while montant >= p:
+            rendu.append(p)
+            montant -= p
+    if montant != 0:
+        raise ValueError("l'algorithme glouton n'a pas trouve de rendu exact")
+    return rendu
+
+
+print(rendu_glouton(78, [50, 20, 10, 5, 2, 1]))
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def rendu_glouton(montant, pieces):
+%     if not all(p > 0 for p in pieces):
+%         raise ValueError("les pieces doivent etre strictement positives")
+%     pieces_triees = sorted(pieces, reverse=True)
+%     rendu = []
+%     for p in pieces_triees:
+%         while montant >= p:
+%             rendu.append(p)
+%             montant -= p
+%     if montant != 0:
+%         raise ValueError("l'algorithme glouton n'a pas trouve de rendu exact")
+%     return rendu
+% resultat = rendu_glouton(78, [50, 20, 10, 5, 2, 1])
+% assert resultat == [50, 20, 5, 2, 1]
+% assert sum(resultat) == 78
+% try:
+%     rendu_glouton(3, [2, 0, 1])
+% except ValueError as erreur:
+%     assert str(erreur) == "les pieces doivent etre strictement positives"
+% else:
+%     raise AssertionError("une piece nulle doit etre refusee")
+% try:
+%     rendu_glouton(3, [2])
+% except ValueError as erreur:
+%     assert str(erreur) == "l'algorithme glouton n'a pas trouve de rendu exact"
+% else:
+%     raise AssertionError("un rendu partiel doit etre refuse")
+% END-VERIFY
+
+\propriete[Un algorithme glouton n'est pas toujours optimal]{
+  Un algorithme glouton donne une solution \textbf{rapide à calculer}, mais qui n'est
+  \textbf{pas garantie optimale} en général : le choix localement optimal à chaque étape
+  peut conduire à une solution globalement moins bonne qu'une autre approche.
+}
+
+\contreexemple{Avec le système de pièces $\{4, 3, 1\}$ (non standard), pour rendre $6$ :
+la méthode gloutonne choisit d'abord $4$ (la plus grande pièce $\leqslant6$), puis doit
+compléter les $2$ restants avec deux pièces de $1$ : elle utilise $3$ pièces ($4+1+1$).
+Or une solution avec $2$ pièces existe : $3+3=6$. L'algorithme glouton n'est donc, dans ce
+cas, \textbf{pas optimal}.}
+
+% BEGIN-VERIFY
+% def rendu_glouton(montant, pieces):
+%     if not all(p > 0 for p in pieces):
+%         raise ValueError("les pieces doivent etre strictement positives")
+%     pieces_triees = sorted(pieces, reverse=True)
+%     rendu = []
+%     for p in pieces_triees:
+%         while montant >= p:
+%             rendu.append(p)
+%             montant -= p
+%     if montant != 0:
+%         raise ValueError("l'algorithme glouton n'a pas trouve de rendu exact")
+%     return rendu
+% rendu = rendu_glouton(6, [4, 3, 1])
+% assert rendu == [4, 1, 1]
+% assert len(rendu) == 3
+% assert sum(rendu) == 6
+% solution_optimale = [3, 3]
+% assert len(solution_optimale) < len(rendu)
+% assert sum(solution_optimale) == 6
+% END-VERIFY
+
+\propriete[Quand l'approche gloutonne fonctionne-t-elle ?]{
+  Pour le système de pièces \textbf{en euros} $\{1, 2, 5, 10, 20, 50, 100, 200\}$
+  (centimes ou euros), la méthode gloutonne donne \textbf{toujours} le nombre minimal de
+  pièces : ce système a une propriété mathématique particulière (chaque pièce est
+  \og assez grande \fg{} par rapport aux suivantes) qui garantit l'optimalité du choix
+  glouton. Ce n'est pas le cas pour un système de pièces quelconque.
+}
+
+\erreurFrequente{Croire qu'un algorithme glouton donne toujours la meilleure solution
+possible. Un algorithme glouton est une \textbf{heuristique} (une méthode rapide et
+souvent efficace en pratique), pas une garantie d'optimalité : il faut vérifier, au cas par
+cas, si les propriétés du problème garantissent l'optimalité de l'approche gloutonne.}
+
+\alamachine{Teste \lstinline{rendu_glouton} avec le système de pièces $\{1, 5, 6, 9\}$
+pour rendre $11$. Combien de pièces la méthode gloutonne utilise-t-elle ? Trouve, en
+cherchant à la main, une solution utilisant moins de pièces.}

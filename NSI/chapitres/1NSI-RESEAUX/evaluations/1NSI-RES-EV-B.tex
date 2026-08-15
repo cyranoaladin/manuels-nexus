@@ -1,0 +1,81 @@
+% META: {"id": "1NSI-RES-EVAL-B", "chapitre": "1NSI-RESEAUX", "type_objet": "evaluation", "capacites": ["P-ARCH-02A", "P-ARCH-02B", "P-ARCH-02C", "P-ARCH-04A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "approved"}
+\section*{Évaluation B --- Réseaux}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (paquets, bit alterné) ; Ex. 2 : 10 pts (réseau, capteurs)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Paquets et bit alterné} \hfill (10 points)
+
+\begin{enumerate}
+  \item (4 pts) Découper le message suivant en paquets de taille maximale $5$ avec
+  \lstinline{decouper_en_paquets} du cours :
+  \begin{center}\lstinline{"PAQUETSRESEAU"}\end{center}
+  Combien de paquets sont créés, et que contiennent-ils ?
+  \item (3 pts) On envoie les messages \lstinline{["M", "N", "O"]} avec le protocole du bit alterné ; la deuxième tentative globale échoue. Dérouler l'envoi et donner la liste finale des messages reçus, avec leur bit.
+  \item (3 pts) Pourquoi un seul bit (0 ou 1) suffit-il à distinguer un nouveau paquet d'une retransmission, dans ce protocole ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def decouper_en_paquets(message, taille_max):
+%     nb_paquets = (len(message) + taille_max - 1) // taille_max
+%     paquets = []
+%     for i in range(nb_paquets):
+%         donnees = message[i * taille_max:(i + 1) * taille_max]
+%         paquets.append({"numero": i, "total": nb_paquets, "donnees": donnees})
+%     return paquets
+% paquets = decouper_en_paquets("PAQUETSRESEAU", 5)
+% assert paquets == [
+%     {"numero": 0, "total": 3, "donnees": "PAQUE"},
+%     {"numero": 1, "total": 3, "donnees": "TSRES"},
+%     {"numero": 2, "total": 3, "donnees": "EAU"},
+% ]
+% def protocole_bit_alterne(messages, tentatives_perdues):
+%     resultat = []
+%     bit = 0
+%     compteur = 0
+%     for m in messages:
+%         recu = False
+%         while not recu:
+%             compteur += 1
+%             if compteur in tentatives_perdues:
+%                 continue
+%             resultat.append((bit, m))
+%             recu = True
+%         bit = 1 - bit
+%     return resultat
+% assert protocole_bit_alterne(["M", "N", "O"], {2}) == [(0, "M"), (1, "N"), (0, "O")]
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Réseau et capteurs} \hfill (10 points)
+
+\begin{enumerate}
+  \item (4 pts) On donne le réseau suivant :
+  \begin{center}\lstinline|{"X": ["Y"], "Y": ["X", "Z"], "Z": ["Y"]}|\end{center}
+  En utilisant \lstinline{peuvent_communiquer} du cours, vérifier que \lstinline{"X"}
+  et \lstinline{"Z"} peuvent communiquer.
+  \item (3 pts) Écrire une fonction \lstinline{decider_ventilation(co2, seuil=800)} qui renvoie \lstinline{True} si le taux de CO2 (en ppm) dépasse le seuil (la ventilation doit s'activer).
+  \item (3 pts) Tester cette fonction pour un taux de $1000$ ppm et de $500$ ppm. Identifier, dans ce système, le capteur et l'actionneur.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% reseau = {"X": ["Y"], "Y": ["X", "Z"], "Z": ["Y"]}
+% def peuvent_communiquer(reseau, depart, arrivee, visites=None):
+%     if visites is None:
+%         visites = set()
+%     if depart == arrivee:
+%         return True
+%     visites.add(depart)
+%     for v in reseau.get(depart, []):
+%         if v not in visites and peuvent_communiquer(reseau, v, arrivee, visites):
+%             return True
+%     return False
+% assert peuvent_communiquer(reseau, "X", "Z") is True
+% def decider_ventilation(co2, seuil=800):
+%     return co2 > seuil
+% assert decider_ventilation(1000) is True
+% assert decider_ventilation(500) is False
+% END-VERIFY

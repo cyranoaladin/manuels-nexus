@@ -1,4 +1,4 @@
-% META: {"id": "TSPE-CONTIN-EX-050", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C2"], "capacites_codes": ["C2"], "methodes": ["M2", "M5"], "parcours": 3, "competences": ["chercher", "raisonner", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-050.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-050.tex", "status": "generated"}
+% META: {"id": "TSPE-CONTIN-EX-050", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C2"], "capacites_codes": ["C2"], "methodes": ["M2", "M5"], "parcours": 3, "competences": ["chercher", "raisonner", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-050.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-050.tex", "status": "approved"}
 % BEGIN-VERIFY
 % from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, fibonacci
 % x = symbols('x')
@@ -23,7 +23,8 @@ On demontre ici un theoreme general qui englobe la plupart des exercices du chap
 
 \begin{enumerate}
   \item Demontrer l'\emph{existence} d'un point fixe. On pourra utiliser la fonction $g(x) = f(x) - x$ et le theoreme des valeurs intermediaires sur $I = [\alpha\,;\beta]$.
-  \item Demontrer l'\emph{unicite} : supposer deux points fixes $\ell_1 \neq \ell_2$ et utiliser l'inegalite des accroissements finis pour aboutir a une contradiction.
+  \item Demontrer l'\emph{unicite} : supposer deux points fixes $\ell_1 
+eq \ell_2$ et utiliser l'inegalite des accroissements finis pour aboutir a une contradiction.
   \item Demontrer la \emph{convergence} : etablir $\left|u_n - \ell\right| \leq k^{\,n}\left|u_0 - \ell\right|$ puis conclure.
   \item Verifier que les hypotheses sont satisfaites pour $f(x) = \sqrt{x+2}$ sur $[0\,;3]$, pour $f(x) = \dfrac{x+3}{2}$ sur $[1\,;3]$ et pour $f(x) = \dfrac{1}{1+x}$ sur $\left[\dfrac12\,;1\right]$. Preciser un $k$ dans chaque cas.
   \item L'hypothese $k < 1$ est-elle indispensable ? Etudier le cas $f(x) = \dfrac{x^2}{4} + 1$ sur $[0\,;2]$ de l'exercice \textsc{ex-044} : que vaut $f'(2)$, et le theoreme s'applique-t-il ?

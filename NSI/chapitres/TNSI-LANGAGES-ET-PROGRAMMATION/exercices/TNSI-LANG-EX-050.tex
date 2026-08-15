@@ -1,0 +1,20 @@
+% META: {"id": "TNSI-LANG-EX-050", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "exercice", "capacites": ["TNSI-LANGAGES-ET-PROGRAMMATION-C11"], "capacites_codes": ["C11"], "methodes": ["M1"], "parcours": 2, "competences": ["analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-050.tex", "corrige_tex": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-050.tex", "status": "approved"}
+% BEGIN-VERIFY
+% import math
+% assert round(math.hypot(3, 4), 4) == 5.0
+% assert math.gcd(48, 18) == 6
+% try:
+%     math.sqrt("4")
+%     leve_erreur = False
+% except TypeError:
+%     leve_erreur = True
+% assert leve_erreur is True
+% END-VERIFY
+\begin{exercice}{TNSI-LANG-EX-002}{1}{15}
+En consultant la documentation du module standard \lstinline{math} (par exemple avec \lstinline{help(math.hypot)} et \lstinline{help(math.gcd)}) :
+\begin{enumerate}
+  \item Utiliser \lstinline{math.hypot(x, y)} pour calculer l'hypoténuse d'un triangle rectangle de côtés $3$ et $4$.
+  \item Utiliser \lstinline{math.gcd(a, b)} pour calculer le plus grand diviseur commun de $48$ et $18$.
+  \item La documentation précise que \lstinline{math.sqrt(x)} attend un nombre. Que se passe-t-il si l'on appelle \lstinline{math.sqrt("4")} (une chaîne de caractères) au lieu de \lstinline{math.sqrt(4)} ? Vérifier en lisant le message d'erreur obtenu.
+\end{enumerate}
+\end{exercice}

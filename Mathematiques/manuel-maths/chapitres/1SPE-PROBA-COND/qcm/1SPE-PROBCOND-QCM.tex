@@ -1,273 +1,309 @@
-% META: {"id": "1SPE-PROBCOND-QCM", "chapitre": "1SPE-PROBA-COND", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4","C5"], "status": "generated"}
+% META: {"id": "1SPE-PROBA-COND-QCM", "chapitre": "1SPE-PROBA-COND", "type_objet": "qcm", "genere_depuis": "chapitres/1SPE-PROBA-COND/qcm/1SPE-PROBCOND-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-% ============================================================
-% QCM D'AUTO-EVALUATION --- Probabilites conditionnelles et independance
-% Nexus Reussite
-% 18 questions --- 3 ou 4 par capacite C1 a C5
-% ============================================================
-
-\section*{QCM d'auto-evaluation --- Probabilites conditionnelles}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Probabilites conditionnelles et independance --- QCM d'auto-evaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule reponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C1 --- Probabilite conditionnelle}
-% ------------------------------------------------------------
-
 \begin{enumerate}
 
-% ---- Q1 ----
-\item \textbf{[Q1]} On donne $P(A) = \dfrac{1}{2}$ et $P(A \cap B) = \dfrac{1}{6}$. Que vaut $P_A(B)$ ?
+\item[] \textbf{Capacite C1}
 
+\item \textbf{[Q1]} On donne P(A) = 1/2 et P(A inter B) = 1/6. Que vaut P\_A(B) ?
   \begin{enumerate}[label=\Alph*.]
-    \item $\dfrac{1}{3}$
-    \item $\dfrac{1}{2}$
-    \item $\dfrac{1}{6}$
-    \item $\dfrac{2}{3}$
+    \item 1/3
+    \item 1/2
+    \item 1/6
+    \item 2/3
   \end{enumerate}
 
-\bigskip
-
-% ---- Q2 ----
-\item \textbf{[Q2]} $P_A(B) = \dfrac{3}{5}$ signifie :
-
+\item \textbf{[Q2]} P\_A(B) = 3/5 signifie :
   \begin{enumerate}[label=\Alph*.]
-    \item La probabilite de $A$ sachant $B$ est $\dfrac{3}{5}$.
-    \item La probabilite de $A \cap B$ est $\dfrac{3}{5}$.
-    \item La probabilite de $B$ sachant que $A$ est realise est $\dfrac{3}{5}$.
-    \item La probabilite de $A \cup B$ est $\dfrac{3}{5}$.
+    \item P(A sachant B) = 3/5
+    \item P(A inter B) = 3/5
+    \item P(B sachant A) = 3/5
+    \item P(A union B) = 3/5
   \end{enumerate}
 
-\bigskip
-
-% ---- Q3 ----
-\item \textbf{[Q3]} Si $P(A) = \dfrac{2}{5}$ et $P_A(B) = \dfrac{3}{4}$, que vaut $P(A \cap B)$ ?
-
+\item \textbf{[Q3]} Si P(A) = 2/5 et P\_A(B) = 3/4, que vaut P(A inter B) ?
   \begin{enumerate}[label=\Alph*.]
-    \item $\dfrac{3}{20}$
-    \item $\dfrac{3}{10}$
-    \item $\dfrac{23}{20}$
-    \item $\dfrac{6}{5}$
+    \item 3/20
+    \item 3/10
+    \item 23/20
+    \item 6/5
   \end{enumerate}
 
-\bigskip
-
-% ---- Q4 ----
-\item \textbf{[Q4]} On donne $P_A(B) = \dfrac{2}{3}$. Que vaut $P_A(\overline{B})$ ?
-
+\item \textbf{[Q4]} On donne P\_A(B) = 2/3. Que vaut P\_A(Bbar) ?
   \begin{enumerate}[label=\Alph*.]
-    \item $\dfrac{2}{3}$
-    \item $\dfrac{1}{3}$
+    \item 2/3
+    \item 1/3
     \item On ne peut pas savoir.
-    \item $0$
+    \item 0
   \end{enumerate}
 
-\end{enumerate}
+\item[] \textbf{Capacite C2}
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C2 --- Arbre pondere}
-% ------------------------------------------------------------
-
-\begin{enumerate}
-\setcounter{enumi}{4}
-
-% ---- Q5 ----
 \item \textbf{[Q5]} Dans un arbre pondere, la probabilite d'un chemin s'obtient en :
-
   \begin{enumerate}[label=\Alph*.]
-    \item additionnant les probabilites des branches du chemin.
-    \item multipliant les probabilites des branches du chemin.
-    \item prenant la plus grande probabilite du chemin.
-    \item divisant les probabilites des branches du chemin.
+    \item additionnant
+    \item multipliant
+    \item prenant le max
+    \item divisant
   \end{enumerate}
 
-\bigskip
-
-% ---- Q6 ----
 \item \textbf{[Q6]} A chaque noeud d'un arbre pondere, la somme des probabilites des branches vaut :
-
   \begin{enumerate}[label=\Alph*.]
-    \item $0$
-    \item la probabilite du noeud parent.
-    \item $1$
-    \item le nombre de branches.
+    \item 0
+    \item la probabilite du noeud parent
+    \item 1
+    \item le nombre de branches
   \end{enumerate}
 
-\bigskip
-
-% ---- Q7 ----
-\item \textbf{[Q7]} Sur un arbre, les probabilites inscrites sur les branches issues d'un noeud $A$ sont :
-
+\item \textbf{[Q7]} Les probabilites inscrites sur les branches issues d'un noeud A sont :
   \begin{enumerate}[label=\Alph*.]
-    \item Des probabilites $P(B)$, $P(\overline{B})$.
-    \item Des probabilites conditionnelles $P_A(B)$, $P_A(\overline{B})$.
-    \item Des probabilites d'intersection $P(A \cap B)$, $P(A \cap \overline{B})$.
-    \item Des frequences observees.
+    \item P(B), P(Bbar)
+    \item P\_A(B), P\_A(Bbar)
+    \item P(A inter B), P(A inter Bbar)
+    \item des frequences
   \end{enumerate}
 
-\end{enumerate}
+\item[] \textbf{Capacite C3}
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C3 --- Formule des probabilites totales}
-% ------------------------------------------------------------
-
-\begin{enumerate}
-\setcounter{enumi}{7}
-
-% ---- Q8 ----
-\item \textbf{[Q8]} Si $P(B) = \dfrac{1}{3}$, $P_B(A) = \dfrac{1}{2}$ et $P_{\overline{B}}(A) = \dfrac{1}{4}$, alors $P(A)$ vaut :
-
+\item \textbf{[Q8]} Si P(B) = 1/3, P\_B(A) = 1/2 et P\_Bbar(A) = 1/4, alors P(A) vaut :
   \begin{enumerate}[label=\Alph*.]
-    \item $\dfrac{1}{3}$
-    \item $\dfrac{1}{6} + \dfrac{1}{6} = \dfrac{1}{3}$
-    \item $\dfrac{1}{6} + \dfrac{1}{4} = \dfrac{5}{12}$
-    \item $\dfrac{1}{6} + \dfrac{2}{12} = \dfrac{1}{3}$
+    \item 1/3
+    \item 1/6 + 1/6 = 1/3
+    \item 1/6 + 1/4 = 5/12
+    \item 1/6 + 2/12 = 1/3
   \end{enumerate}
 
-\bigskip
-
-% ---- Q9 ----
-\item \textbf{[Q9]} Pour appliquer la formule des probabilites totales avec $\{B_1, B_2, B_3\}$, il faut que :
-
+\item \textbf{[Q9]} Pour appliquer la formule des probabilites totales avec {B1, B2, B3}, il faut que :
   \begin{enumerate}[label=\Alph*.]
-    \item Les $B_i$ soient independants.
-    \item Les $B_i$ forment une partition de $\Omega$.
-    \item Les $B_i$ soient equiprobables.
-    \item $P(B_i) > \dfrac{1}{2}$ pour tout $i$.
+    \item Les Bi soient independants
+    \item Les Bi forment une partition
+    \item Les Bi soient equiprobables
+    \item P(Bi) > 1/2
   \end{enumerate}
 
-\bigskip
-
-% ---- Q10 ----
-\item \textbf{[Q10]} La formule des probabilites totales pour la partition $\{B, \overline{B}\}$ s'ecrit :
-
+\item \textbf{[Q10]} La formule des probabilites totales pour {B, Bbar} s'ecrit :
   \begin{enumerate}[label=\Alph*.]
-    \item $P(A) = P(B) + P(\overline{B})$
-    \item $P(A) = P(A \cap B) \times P(A \cap \overline{B})$
-    \item $P(A) = P(B)\,P_B(A) + P(\overline{B})\,P_{\overline{B}}(A)$
-    \item $P(A) = P(B)\,P(A) + P(\overline{B})\,P(A)$
+    \item P(A) = P(B) + P(Bbar)
+    \item P(A) = P(A inter B) x P(A inter Bbar)
+    \item P(A) = P(B)*P\_B(A) + P(Bbar)*P\_Bbar(A)
+    \item P(A) = P(B)*P(A) + P(Bbar)*P(A)
   \end{enumerate}
 
-\bigskip
-
-% ---- Q11 ----
-\item \textbf{[Q11]} Laquelle de ces etapes fait partie de la demonstration de la formule des probabilites totales ?
-
+\item \textbf{[Q11]} Quelle etape fait partie de la demonstration de la formule des probabilites totales ?
   \begin{enumerate}[label=\Alph*.]
-    \item $A = A \cup B$
-    \item $A = (A \cap B) \cup (A \cap \overline{B})$ avec evenements incompatibles
-    \item $P(A) = P(B) \times P(A)$
-    \item $A$ et $B$ sont independants
+    \item A = A union B
+    \item A = (A inter B) union (A inter Bbar) incompatibles
+    \item P(A) = P(B) x P(A)
+    \item A et B sont independants
   \end{enumerate}
 
-\end{enumerate}
+\item[] \textbf{Capacite C4}
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C4 --- Independance}
-% ------------------------------------------------------------
-
-\begin{enumerate}
-\setcounter{enumi}{11}
-
-% ---- Q12 ----
-\item \textbf{[Q12]} $A$ et $B$ sont independants si et seulement si :
-
+\item \textbf{[Q12]} A et B sont independants ssi :
   \begin{enumerate}[label=\Alph*.]
-    \item $P(A \cap B) = 0$
-    \item $P(A \cap B) = P(A) + P(B)$
-    \item $P(A \cap B) = P(A) \times P(B)$
-    \item $P(A \cup B) = P(A) \times P(B)$
+    \item P(A inter B) = 0
+    \item P(A inter B) = P(A) + P(B)
+    \item P(A inter B) = P(A) x P(B)
+    \item P(A union B) = P(A) x P(B)
   \end{enumerate}
 
-\bigskip
-
-% ---- Q13 ----
-\item \textbf{[Q13]} Si $A$ et $B$ sont incompatibles avec $P(A) > 0$ et $P(B) > 0$, alors :
-
+\item \textbf{[Q13]} Si A et B sont incompatibles avec P(A) > 0 et P(B) > 0, alors :
   \begin{enumerate}[label=\Alph*.]
-    \item $A$ et $B$ sont independants.
-    \item $A$ et $B$ ne sont pas independants.
-    \item On ne peut pas conclure.
-    \item $P_A(B) = 1$.
+    \item ils sont independants
+    \item ils ne sont pas independants
+    \item on ne peut pas conclure
+    \item P\_A(B) = 1
   \end{enumerate}
 
-\bigskip
-
-% ---- Q14 ----
-\item \textbf{[Q14]} Si $A$ et $B$ sont independants, alors $\overline{A}$ et $B$ sont :
-
+\item \textbf{[Q14]} Si A et B sont independants, alors Abar et B sont :
   \begin{enumerate}[label=\Alph*.]
-    \item incompatibles.
-    \item independants.
-    \item de meme probabilite.
-    \item sans lien.
+    \item incompatibles
+    \item independants
+    \item de meme probabilite
+    \item sans lien
   \end{enumerate}
 
-\end{enumerate}
+\item[] \textbf{Capacite C5}
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C5 --- Problemes contextualises}
-% ------------------------------------------------------------
-
-\begin{enumerate}
-\setcounter{enumi}{14}
-
-% ---- Q15 ----
 \item \textbf{[Q15]} La sensibilite d'un test est :
-
   \begin{enumerate}[label=\Alph*.]
-    \item $P(M | T^+)$ (probabilite d'etre malade sachant test positif).
-    \item $P(T^+ | M)$ (probabilite d'un test positif sachant qu'on est malade).
-    \item $P(T^- | \overline{M})$ (probabilite d'un test negatif sachant qu'on est sain).
-    \item $P(M)$ (prevalence de la maladie).
+    \item P(M | T+)
+    \item P(T+ | M)
+    \item P(T- | Mbar)
+    \item P(M)
   \end{enumerate}
 
-\bigskip
-
-% ---- Q16 ----
 \item \textbf{[Q16]} La valeur predictive positive (VPP) est :
-
   \begin{enumerate}[label=\Alph*.]
-    \item $P(T^+ | M)$
-    \item $P(M | T^+)$
-    \item $P(T^+)$
-    \item $P(\overline{M} | T^-)$
+    \item P(T+ | M)
+    \item P(M | T+)
+    \item P(T+)
+    \item P(Mbar | T-)
   \end{enumerate}
 
-\bigskip
-
-% ---- Q17 ----
-\item \textbf{[Q17]} Un test a une sensibilite de $99\,\%$ et la prevalence est de $0{,}1\,\%$. La VPP sera :
-
+\item \textbf{[Q17]} Sensibilite 99%, prevalence 0,1%. La VPP sera :
   \begin{enumerate}[label=\Alph*.]
-    \item Proche de $99\,\%$.
-    \item Proche de $50\,\%$.
-    \item Probablement faible (bien inferieure a $50\,\%$).
-    \item Exactement $0{,}1\,\%$.
+    \item proche de 99%
+    \item proche de 50%
+    \item probablement faible
+    \item exactement 0,1%
   \end{enumerate}
 
-\bigskip
-
-% ---- Q18 ----
-\item \textbf{[Q18]} Dans un probleme de controle qualite avec 3 machines, on utilise :
-
+\item \textbf{[Q18]} Controle qualite avec 3 machines, on utilise :
   \begin{enumerate}[label=\Alph*.]
-    \item L'independance.
-    \item La formule de Bayes (probabilites totales + conditionnelle inversee).
-    \item Uniquement des probabilites simples.
-    \item Le theoreme des valeurs intermediaires.
+    \item l'independance
+    \item formule de Bayes (prob totales + cond inversee)
+    \item uniquement des prob simples
+    \item theoreme des valeurs intermediaires
   \end{enumerate}
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C1 & \textbf{C} \\
+Q3 & C1 & \textbf{B} \\
+Q4 & C1 & \textbf{B} \\
+Q5 & C2 & \textbf{B} \\
+Q6 & C2 & \textbf{C} \\
+Q7 & C2 & \textbf{B} \\
+Q8 & C3 & \textbf{D} \\
+Q9 & C3 & \textbf{B} \\
+Q10 & C3 & \textbf{C} \\
+Q11 & C3 & \textbf{B} \\
+Q12 & C4 & \textbf{C} \\
+Q13 & C4 & \textbf{B} \\
+Q14 & C4 & \textbf{B} \\
+Q15 & C5 & \textbf{B} \\
+Q16 & C5 & \textbf{B} \\
+Q17 & C5 & \textbf{C} \\
+Q18 & C5 & \textbf{B} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — L'eleve a confondu P\_A(B) avec P(A). P\_A(B) = P(A inter B)/P(A) = (1/6)/(1/2) = 1/3. \emph{Renvoi : C1, definition.}
+    \item \textbf{C} — L'eleve a donne P(A inter B) au lieu de calculer le quotient. \emph{Renvoi : C1, formule.}
+    \item \textbf{D} — L'eleve a inverse la fraction : P(A)/P(A inter B) = 3 au lieu de P(A inter B)/P(A) = 1/3. \emph{Renvoi : C1, formule.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — L'eleve a inverse l'ordre de conditionnement : P\_A(B) est la probabilite de B sachant A, pas de A sachant B. \emph{Renvoi : C1, notation.}
+    \item \textbf{B} — P\_A(B) n'est pas P(A inter B), c'est le quotient P(A inter B)/P(A). \emph{Renvoi : C1, definition.}
+    \item \textbf{D} — Confusion entre probabilite conditionnelle et probabilite de l'union. \emph{Renvoi : C1, definition.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — L'eleve a divise au lieu de multiplier : P(A inter B) = P(A) x P\_A(B), pas P(A) / P\_A(B). \emph{Renvoi : C1, formule de multiplication.}
+    \item \textbf{C} — L'eleve a additionne P(A) + P\_A(B) au lieu de les multiplier. \emph{Renvoi : C1, formule de multiplication.}
+    \item \textbf{D} — L'eleve a calcule P\_A(B)/P(A) = (3/4)/(2/5) = 15/8 ou une autre erreur de calcul. \emph{Renvoi : C1, formule de multiplication.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — L'eleve a recopie P\_A(B) au lieu de calculer le complementaire. \emph{Renvoi : C1, complementaire conditionnel.}
+    \item \textbf{C} — La relation P\_A(B) + P\_A(Bbar) = 1 est toujours vraie, donc on peut conclure. \emph{Renvoi : C1, propriete.}
+    \item \textbf{D} — Confusion avec l'incompatibilite. \emph{Renvoi : C1, complementaire.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — On additionne les probabilites des chemins pour obtenir la probabilite d'un evenement, mais le long d'un chemin on multiplie. \emph{Renvoi : C2, regle du produit.}
+    \item \textbf{C} — Erreur de methode : on multiplie les probabilites le long d'un chemin. \emph{Renvoi : C2, regle du produit.}
+    \item \textbf{D} — La division intervient dans le calcul de P\_A(B), pas dans le produit le long d'un chemin. \emph{Renvoi : C2, regle du produit.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — Les probabilites sont positives, leur somme ne peut pas etre nulle. \emph{Renvoi : C2, regle de construction.}
+    \item \textbf{B} — La somme des probabilites conditionnelles issues d'un noeud vaut 1, pas la probabilite du noeud. \emph{Renvoi : C2, regle de construction.}
+    \item \textbf{D} — Confusion entre le nombre de branches et la somme des probabilites. \emph{Renvoi : C2, regle de construction.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — Ce sont des probabilites conditionnelles, pas des probabilites marginales. \emph{Renvoi : C2, construction.}
+    \item \textbf{C} — Les probabilites d'intersection sont celles des feuilles (chemins complets), pas des branches. \emph{Renvoi : C2, construction.}
+    \item \textbf{D} — Un arbre pondere utilise des probabilites, pas des frequences observees. \emph{Renvoi : C2, definition.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{A} — L'eleve a repondu P(B) au lieu de calculer P(A) par les probabilites totales. \emph{Renvoi : C3, formule.}
+    \item \textbf{B} — L'eleve a calcule P(B)*P\_B(A) = 1/6 correctement mais a oublie d'utiliser P(Bbar) = 2/3 pour le second terme. \emph{Renvoi : C3, formule.}
+    \item \textbf{C} — Le second terme doit etre P(Bbar)*P\_Bbar(A) = 2/3 * 1/4 = 1/6, pas 1/4. \emph{Renvoi : C3, formule.}
+  \end{itemize}
+  \item \textbf{Q9}
+  \begin{itemize}
+    \item \textbf{A} — L'independance n'est pas requise ; c'est la structure de partition qui est necessaire. \emph{Renvoi : C3, hypothese.}
+    \item \textbf{C} — L'equiprobabilite n'est pas necessaire. \emph{Renvoi : C3, hypothese.}
+    \item \textbf{D} — Il suffit que P(Bi) > 0. \emph{Renvoi : C3, hypothese.}
+  \end{itemize}
+  \item \textbf{Q10}
+  \begin{itemize}
+    \item \textbf{A} — P(B) + P(Bbar) = 1, pas P(A). Il manque les probabilites conditionnelles. \emph{Renvoi : C3, formule.}
+    \item \textbf{B} — On additionne les termes, on ne les multiplie pas. \emph{Renvoi : C3, formule.}
+    \item \textbf{D} — La formule D se simplifie en P(A) = P(A), ce qui est trivial et inutile. \emph{Renvoi : C3, formule.}
+  \end{itemize}
+  \item \textbf{Q11}
+  \begin{itemize}
+    \item \textbf{A} — A = A union B est faux en general (sauf si A inclus dans B). \emph{Renvoi : C3, demonstration.}
+    \item \textbf{C} — Cela donnerait P(B) = 1, ce qui est faux en general. \emph{Renvoi : C3, demonstration.}
+    \item \textbf{D} — L'independance n'est pas une hypothese de la demonstration. \emph{Renvoi : C3, demonstration.}
+  \end{itemize}
+  \item \textbf{Q12}
+  \begin{itemize}
+    \item \textbf{A} — P(A inter B) = 0 signifie incompatibilite, pas independance. \emph{Renvoi : C4, definition.}
+    \item \textbf{B} — P(A inter B) = P(A) + P(B) est impossible (depasse 1 en general). \emph{Renvoi : C4, definition.}
+    \item \textbf{D} — La formule de l'union est P(A union B) = P(A) + P(B) - P(A inter B), pas un produit. \emph{Renvoi : C4, definition.}
+  \end{itemize}
+  \item \textbf{Q13}
+  \begin{itemize}
+    \item \textbf{A} — Incompatibles => P(A inter B) = 0, mais P(A)*P(B) > 0, donc pas independants. \emph{Renvoi : C4, contre-exemple.}
+    \item \textbf{C} — On peut conclure : P(A inter B) = 0 != P(A)*P(B) > 0. \emph{Renvoi : C4, contre-exemple.}
+    \item \textbf{D} — P\_A(B) = P(A inter B)/P(A) = 0/P(A) = 0, pas 1. \emph{Renvoi : C4, incompatibilite.}
+  \end{itemize}
+  \item \textbf{Q14}
+  \begin{itemize}
+    \item \textbf{A} — L'independance de A et B n'implique pas l'incompatibilite de Abar et B. \emph{Renvoi : C4, propriete.}
+    \item \textbf{C} — Rien ne dit que P(Abar) = P(B). \emph{Renvoi : C4, propriete.}
+    \item \textbf{D} — Il y a un lien precis : ils sont independants (propriete demontrable). \emph{Renvoi : C4, propriete.}
+  \end{itemize}
+  \item \textbf{Q15}
+  \begin{itemize}
+    \item \textbf{A} — P(M | T+) est la valeur predictive positive, pas la sensibilite. \emph{Renvoi : C5, definitions.}
+    \item \textbf{C} — P(T- | Mbar) est la specificite, pas la sensibilite. \emph{Renvoi : C5, definitions.}
+    \item \textbf{D} — P(M) est la prevalence, pas la sensibilite. \emph{Renvoi : C5, definitions.}
+  \end{itemize}
+  \item \textbf{Q16}
+  \begin{itemize}
+    \item \textbf{A} — P(T+ | M) est la sensibilite, pas la VPP. \emph{Renvoi : C5, definitions.}
+    \item \textbf{C} — P(T+) est la probabilite globale d'un test positif. \emph{Renvoi : C5, definitions.}
+    \item \textbf{D} — P(Mbar | T-) est la valeur predictive negative. \emph{Renvoi : C5, definitions.}
+  \end{itemize}
+  \item \textbf{Q17}
+  \begin{itemize}
+    \item \textbf{A} — Meme avec une tres bonne sensibilite, la VPP est faible si la prevalence est tres basse (beaucoup de faux positifs). \emph{Renvoi : C5, VPP et prevalence.}
+    \item \textbf{B} — Avec 0,1% de prevalence, la VPP sera bien en dessous de 50%. \emph{Renvoi : C5, VPP et prevalence.}
+    \item \textbf{D} — La VPP n'est pas egale a la prevalence. \emph{Renvoi : C5, formule de Bayes.}
+  \end{itemize}
+  \item \textbf{Q18}
+  \begin{itemize}
+    \item \textbf{A} — L'independance peut intervenir mais l'outil central est la formule des probabilites totales. \emph{Renvoi : C5, methode.}
+    \item \textbf{C} — Le probleme necessite des probabilites conditionnelles. \emph{Renvoi : C5, methode.}
+    \item \textbf{D} — Le TVI est un theoreme d'analyse, sans rapport avec les probabilites. \emph{Renvoi : C5, hors sujet.}
+  \end{itemize}
+\end{itemize}

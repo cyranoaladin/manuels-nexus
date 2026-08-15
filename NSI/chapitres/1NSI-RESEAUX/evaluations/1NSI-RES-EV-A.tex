@@ -1,0 +1,81 @@
+% META: {"id": "1NSI-RES-EVAL-A", "chapitre": "1NSI-RESEAUX", "type_objet": "evaluation", "capacites": ["P-ARCH-02A", "P-ARCH-02B", "P-ARCH-02C", "P-ARCH-04A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "approved"}
+\section*{Évaluation A --- Réseaux}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (paquets, bit alterné) ; Ex. 2 : 10 pts (réseau, capteurs)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Paquets et bit alterné} \hfill (10 points)
+
+\begin{enumerate}
+  \item (4 pts) Découper le message suivant en paquets de taille maximale $4$ avec
+  \lstinline{decouper_en_paquets} du cours :
+  \begin{center}\lstinline{"DONNEESNSI"}\end{center}
+  Combien de paquets sont créés, et que contiennent-ils ?
+  \item (3 pts) On envoie les messages \lstinline{["P", "Q"]} avec le protocole du bit alterné ; la première tentative globale échoue. Dérouler l'envoi et donner la liste finale des messages reçus, avec leur bit.
+  \item (3 pts) Pourquoi le protocole du bit alterné garantit-il que tous les messages finissent par arriver, même en cas de pertes ponctuelles ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def decouper_en_paquets(message, taille_max):
+%     nb_paquets = (len(message) + taille_max - 1) // taille_max
+%     paquets = []
+%     for i in range(nb_paquets):
+%         donnees = message[i * taille_max:(i + 1) * taille_max]
+%         paquets.append({"numero": i, "total": nb_paquets, "donnees": donnees})
+%     return paquets
+% paquets = decouper_en_paquets("DONNEESNSI", 4)
+% assert paquets == [
+%     {"numero": 0, "total": 3, "donnees": "DONN"},
+%     {"numero": 1, "total": 3, "donnees": "EESN"},
+%     {"numero": 2, "total": 3, "donnees": "SI"},
+% ]
+% def protocole_bit_alterne(messages, tentatives_perdues):
+%     resultat = []
+%     bit = 0
+%     compteur = 0
+%     for m in messages:
+%         recu = False
+%         while not recu:
+%             compteur += 1
+%             if compteur in tentatives_perdues:
+%                 continue
+%             resultat.append((bit, m))
+%             recu = True
+%         bit = 1 - bit
+%     return resultat
+% assert protocole_bit_alterne(["P", "Q"], {1}) == [(0, "P"), (1, "Q")]
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Réseau et capteurs} \hfill (10 points)
+
+\begin{enumerate}
+  \item (4 pts) On donne le réseau suivant :
+  \begin{center}\lstinline|{"A": ["B"], "B": ["A", "C"], "C": ["B"]}|\end{center}
+  En utilisant \lstinline{peuvent_communiquer} du cours, vérifier que \lstinline{"A"}
+  et \lstinline{"C"} peuvent communiquer.
+  \item (3 pts) Écrire une fonction \lstinline{decider_arrosage(humidite, seuil=25)} qui renvoie \lstinline{True} si l'humidité est inférieure au seuil (la pompe doit s'activer).
+  \item (3 pts) Tester cette fonction pour une humidité de $20\,\%$ et de $30\,\%$. Identifier, dans ce système, le capteur et l'actionneur.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% reseau = {"A": ["B"], "B": ["A", "C"], "C": ["B"]}
+% def peuvent_communiquer(reseau, depart, arrivee, visites=None):
+%     if visites is None:
+%         visites = set()
+%     if depart == arrivee:
+%         return True
+%     visites.add(depart)
+%     for v in reseau.get(depart, []):
+%         if v not in visites and peuvent_communiquer(reseau, v, arrivee, visites):
+%             return True
+%     return False
+% assert peuvent_communiquer(reseau, "A", "C") is True
+% def decider_arrosage(humidite, seuil=25):
+%     return humidite < seuil
+% assert decider_arrosage(20) is True
+% assert decider_arrosage(30) is False
+% END-VERIFY

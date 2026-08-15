@@ -1,21 +1,396 @@
 {
   "chapitre": "1SPE-PRODUIT-SCALAIRE",
-  "titre": "Produit scalaire — QCM d'auto-evaluation",
+  "titre": "Produit scalaire — QCM d'auto-évaluation",
   "questions": [
-    {"id":"Q1","capacite":"C1","enonce":"Soient u(3,-2) et v(1,4). Que vaut u.v ?","options":{"A":"-5","B":"5","C":"-11","D":"11"},"correcte":"A","diagnostics":{"B":{"erreur":"Oubli du signe dans (-2)*4","renvoi":"M1"},"C":{"erreur":"Erreur de calcul","renvoi":"M1"},"D":{"erreur":"Addition des composantes au lieu du produit scalaire","renvoi":"M1"}}},
-    {"id":"Q2","capacite":"C1","enonce":"||u||=5, ||v||=4, angle=pi/3. u.v = ?","options":{"A":"20","B":"10","C":"10*sqrt(3)","D":"10*sqrt(2)"},"correcte":"B","diagnostics":{"A":{"erreur":"Oubli du cos(pi/3)=1/2","renvoi":"M1"},"C":{"erreur":"Confusion cos/sin","renvoi":"M1; R3"},"D":{"erreur":"Mauvaise valeur du cosinus","renvoi":"M1; R3"}}},
-    {"id":"Q3","capacite":"C1","enonce":"Le produit scalaire u.v est :","options":{"A":"un vecteur","B":"un nombre reel","C":"toujours positif","D":"defini uniquement si u et v sont non nuls"},"correcte":"B","diagnostics":{"A":{"erreur":"Confusion avec le produit vectoriel","renvoi":"M1"},"C":{"erreur":"Le PS peut etre negatif (angle obtus)","renvoi":"M1"},"D":{"erreur":"On pose u.v=0 si l'un est nul","renvoi":"M1"}}},
-    {"id":"Q4","capacite":"C2","enonce":"||u+v||^2 = ?","options":{"A":"||u||^2+||v||^2","B":"||u||^2+2u.v+||v||^2","C":"||u||^2-2u.v+||v||^2","D":"(u.v)^2"},"correcte":"B","diagnostics":{"A":{"erreur":"Oubli du terme 2u.v","renvoi":"M2"},"C":{"erreur":"Signe du double produit (c'est ||u-v||^2)","renvoi":"M2"},"D":{"erreur":"Confusion totale","renvoi":"M2"}}},
-    {"id":"Q5","capacite":"C2","enonce":"u.u = ?","options":{"A":"||u||","B":"||u||^2","C":"2||u||","D":"0"},"correcte":"B","diagnostics":{"A":{"erreur":"Oubli du carre","renvoi":"M2"},"C":{"erreur":"Confusion","renvoi":"M2"},"D":{"erreur":"u.u=0 ssi u=0","renvoi":"M2"}}},
-    {"id":"Q6","capacite":"C2","enonce":"||u||=3, ||v||=4, u.v=5. ||u+v|| = ?","options":{"A":"5","B":"sqrt(35)","C":"7","D":"sqrt(25)"},"correcte":"B","diagnostics":{"A":{"erreur":"sqrt(25)=5 mais ||u+v||^2=9+10+16=35","renvoi":"M2"},"C":{"erreur":"Erreur de calcul","renvoi":"M2"},"D":{"erreur":"||u+v||^2=35, pas 25","renvoi":"M2"}}},
-    {"id":"Q7","capacite":"C3","enonce":"u perp v ssi :","options":{"A":"u.v>0","B":"u.v<0","C":"u.v=0","D":"||u||=||v||"},"correcte":"C","diagnostics":{"A":{"erreur":"Le signe ne determine pas l'orthogonalite","renvoi":"M3"},"B":{"erreur":"Idem","renvoi":"M3"},"D":{"erreur":"Meme norme != orthogonalite","renvoi":"M3"}}},
-    {"id":"Q8","capacite":"C3","enonce":"u(2,3) et v(3,-2) sont :","options":{"A":"colineaires","B":"orthogonaux","C":"de meme norme","D":"de sens contraire"},"correcte":"B","diagnostics":{"A":{"erreur":"det=2*(-2)-3*3=-13 != 0","renvoi":"M3"},"C":{"erreur":"||u||=||v||=sqrt(13) est vrai mais c'est l'orthogonalite qui est demandee","renvoi":"M3"},"D":{"erreur":"Non pertinent","renvoi":"M3"}}},
-    {"id":"Q9","capacite":"C3","enonce":"Angle entre (1,0) et (1,1) :","options":{"A":"pi/6","B":"pi/4","C":"pi/3","D":"pi/2"},"correcte":"B","diagnostics":{"A":{"erreur":"Confusion valeurs remarquables","renvoi":"M3; R3"},"C":{"erreur":"Idem","renvoi":"M3; R3"},"D":{"erreur":"u.v=1 != 0","renvoi":"M3"}}},
-    {"id":"Q10","capacite":"C4","enonce":"M sur mediatrice de [AB] ssi :","options":{"A":"MA.MB=0","B":"MA=MB","C":"MA+MB=0","D":"MA+MB=AB"},"correcte":"B","diagnostics":{"A":{"erreur":"Ce serait le cercle de diametre [AB]","renvoi":"M4"},"C":{"erreur":"M serait milieu de [AB]","renvoi":"M4"},"D":{"erreur":"Ce serait le segment [AB]","renvoi":"M4"}}},
-    {"id":"Q11","capacite":"C4","enonce":"Aire triangle cotes a,b angle theta :","options":{"A":"ab*cos(theta)","B":"(1/2)ab*cos(theta)","C":"(1/2)ab*sin(theta)","D":"ab*sin(theta)"},"correcte":"C","diagnostics":{"A":{"erreur":"cos au lieu de sin, et oubli du 1/2","renvoi":"M4"},"B":{"erreur":"cos au lieu de sin","renvoi":"M4"},"D":{"erreur":"Oubli du facteur 1/2","renvoi":"M4"}}},
-    {"id":"Q12","capacite":"C4","enonce":"Pied H de la hauteur issue de A : AH.? = 0","options":{"A":"AH.AB=0","B":"AH.BC=0","C":"AH.AC=0","D":"AH=BH"},"correcte":"B","diagnostics":{"A":{"erreur":"La hauteur est perp a BC, pas a AB","renvoi":"M4"},"C":{"erreur":"Perp a BC, pas a AC","renvoi":"M4"},"D":{"erreur":"Non pertinent","renvoi":"M4"}}},
-    {"id":"Q13","capacite":"C5","enonce":"Formule d'Al-Kashi :","options":{"A":"a^2=b^2+c^2+2bc*cos(A)","B":"a^2=b^2+c^2-2bc*cos(A)","C":"a^2=b^2-c^2-2bc*cos(A)","D":"a=b+c-2bc*cos(A)"},"correcte":"B","diagnostics":{"A":{"erreur":"Signe + au lieu de -","renvoi":"M5"},"C":{"erreur":"b^2-c^2 au lieu de b^2+c^2","renvoi":"M5"},"D":{"erreur":"Pas de carre sur a","renvoi":"M5"}}},
-    {"id":"Q14","capacite":"C5","enonce":"b=5, c=8, A=pi/3. a^2 = ?","options":{"A":"49","B":"89","C":"129","D":"9"},"correcte":"A","diagnostics":{"B":{"erreur":"Oubli du terme -2bc*cos","renvoi":"M5"},"C":{"erreur":"Signe + au lieu de -","renvoi":"M5"},"D":{"erreur":"Erreur grossiere","renvoi":"M5"}}},
-    {"id":"Q15","capacite":"C5","enonce":"Si A=pi/2, Al-Kashi donne :","options":{"A":"a^2=b^2-c^2","B":"a^2=b^2+c^2","C":"a^2=2bc","D":"a=b+c"},"correcte":"B","diagnostics":{"A":{"erreur":"Signe - au lieu de +","renvoi":"M5; R5"},"C":{"erreur":"Formule incorrecte","renvoi":"M5; R5"},"D":{"erreur":"Pas le theoreme de Pythagore","renvoi":"M5; R5"}}}
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "Soient $\\vec{u}(3,-2)$ et $\\vec{v}(1,4)$. Que vaut $\\vec{u} \\cdot \\vec{v}$ ?",
+      "options": {
+        "A": "$-5$",
+        "B": "$5$",
+        "C": "$-11$",
+        "D": "$11$"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Oubli du signe dans $(-2) \\times 4$.",
+          "renvoi": "M1"
+        },
+        "C": {
+          "erreur": "Erreur de calcul dans le produit des composantes.",
+          "renvoi": "M1"
+        },
+        "D": {
+          "erreur": "Addition des composantes au lieu du produit scalaire.",
+          "renvoi": "M1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "Si $\\|\\vec{u}\\|=5$, $\\|\\vec{v}\\|=4$ et $(\\vec{u},\\vec{v}) = \\dfrac{\\pi}{3}$, quelle est la valeur de $\\vec{u} \\cdot \\vec{v}$ ?",
+      "options": {
+        "A": "$20$",
+        "B": "$10$",
+        "C": "$10\\sqrt{3}$",
+        "D": "$10\\sqrt{2}$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Oubli du facteur $\\cos\\!\\left(\\dfrac{\\pi}{3}\\right) = \\dfrac{1}{2}$.",
+          "renvoi": "M1"
+        },
+        "C": {
+          "erreur": "Confusion entre le cosinus et le sinus.",
+          "renvoi": "M1; R3"
+        },
+        "D": {
+          "erreur": "Mauvaise valeur du cosinus de l'angle.",
+          "renvoi": "M1; R3"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C1",
+      "enonce": "Le produit scalaire $\\vec{u} \\cdot \\vec{v}$ est :",
+      "options": {
+        "A": "un vecteur",
+        "B": "un nombre réel",
+        "C": "toujours positif",
+        "D": "défini uniquement si $\\vec{u}$ et $\\vec{v}$ sont non nuls"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Confusion avec le produit vectoriel.",
+          "renvoi": "M1"
+        },
+        "C": {
+          "erreur": "Le produit scalaire peut être négatif si l'angle est obtus.",
+          "renvoi": "M1"
+        },
+        "D": {
+          "erreur": "On pose $\\vec{u} \\cdot \\vec{v} = 0$ si l'un des vecteurs est nul.",
+          "renvoi": "M1"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "$\\Vert\\vec{u}+\\vec{v}\\Vert^2 = ?$",
+      "options": {
+        "A": "$\\Vert\\vec{u}\\Vert^2 + \\Vert\\vec{v}\\Vert^2$",
+        "B": "$\\Vert\\vec{u}\\Vert^2 + 2\\vec{u}\\cdot\\vec{v} + \\Vert\\vec{v}\\Vert^2$",
+        "C": "$\\Vert\\vec{u}\\Vert^2 - 2\\vec{u}\\cdot\\vec{v} + \\Vert\\vec{v}\\Vert^2$",
+        "D": "$(\\vec{u}\\cdot\\vec{v})^2$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Oubli du double produit $2\\vec{u}\\cdot\\vec{v}$.",
+          "renvoi": "M2"
+        },
+        "C": {
+          "erreur": "Signe du double produit (c'est la formule pour $\\Vert\\vec{u}-\\vec{v}\\Vert^2$).",
+          "renvoi": "M2"
+        },
+        "D": {
+          "erreur": "Confusion entre norme du carré de la somme et carré du produit scalaire.",
+          "renvoi": "M2"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C2",
+      "enonce": "$\\vec{u} \\cdot \\vec{u} = ?$",
+      "options": {
+        "A": "$\\Vert\\vec{u}\\Vert$",
+        "B": "$\\Vert\\vec{u}\\Vert^2$",
+        "C": "$2\\Vert\\vec{u}\\Vert$",
+        "D": "$0$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Oubli du carré dans la définition du carré scalaire.",
+          "renvoi": "M2"
+        },
+        "C": {
+          "erreur": "Confusion de coefficient.",
+          "renvoi": "M2"
+        },
+        "D": {
+          "erreur": "$\\vec{u}\\cdot\\vec{u}=0$ si et seulement si $\\vec{u}=\\vec{0}$.",
+          "renvoi": "M2"
+        }
+      }
+    },
+    {
+      "id": "Q6",
+      "capacite": "C2",
+      "enonce": "Sachant que $\\|\\vec{u}\\|=3$, $\\|\\vec{v}\\|=4$ et $\\vec{u}\\cdot\\vec{v}=5$, quelle est la valeur de $\\|\\vec{u}+\\vec{v}\\|$ ?",
+      "options": {
+        "A": "$5$",
+        "B": "$\\sqrt{35}$",
+        "C": "$7$",
+        "D": "$\\sqrt{25}$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "$\\sqrt{25}=5$ mais $\\|\\vec{u}+\\vec{v}\\|^2 = 9 + 10 + 16 = 35$.",
+          "renvoi": "M2"
+        },
+        "C": {
+          "erreur": "Erreur d'application de la formule.",
+          "renvoi": "M2"
+        },
+        "D": {
+          "erreur": "$\\|\\vec{u}+\\vec{v}\\|^2 = 35$, et non $25$.",
+          "renvoi": "M2"
+        }
+      }
+    },
+    {
+      "id": "Q7",
+      "capacite": "C3",
+      "enonce": "Deux vecteurs non nuls $\\vec{u}$ et $\\vec{v}$ sont orthogonaux si et seulement si :",
+      "options": {
+        "A": "$\\vec{u}\\cdot\\vec{v} > 0$",
+        "B": "$\\vec{u}\\cdot\\vec{v} < 0$",
+        "C": "$\\vec{u}\\cdot\\vec{v} = 0$",
+        "D": "$\\Vert\\vec{u}\\Vert = \\Vert\\vec{v}\\Vert$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Le signe strict ne caractérise pas l'orthogonalité.",
+          "renvoi": "M3"
+        },
+        "B": {
+          "erreur": "Idem.",
+          "renvoi": "M3"
+        },
+        "D": {
+          "erreur": "Avoir la même norme ne garantit pas l'orthogonalité.",
+          "renvoi": "M3"
+        }
+      }
+    },
+    {
+      "id": "Q8",
+      "capacite": "C3",
+      "enonce": "Les vecteurs $\\vec{u}(2,3)$ et $\\vec{v}(3,-2)$ sont :",
+      "options": {
+        "A": "colinéaires",
+        "B": "orthogonaux",
+        "C": "de même norme",
+        "D": "de sens contraire"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Le déterminant vaut $2 \\times (-2) - 3 \\times 3 = -13 \\neq 0$.",
+          "renvoi": "M3"
+        },
+        "C": {
+          "erreur": "$\\Vert\\vec{u}\\Vert = \\Vert\\vec{v}\\Vert = \\sqrt{13}$ est vrai mais l'orthogonalité est la propriété caractérisée.",
+          "renvoi": "M3"
+        },
+        "D": {
+          "erreur": "Option incorrecte.",
+          "renvoi": "M3"
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "capacite": "C3",
+      "enonce": "Quel est l'angle orienté entre les vecteurs $(1,0)$ et $(1,1)$ ?",
+      "options": {
+        "A": "$\\dfrac{\\pi}{6}$",
+        "B": "$\\dfrac{\\pi}{4}$",
+        "C": "$\\dfrac{\\pi}{3}$",
+        "D": "$\\dfrac{\\pi}{2}$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Confusion dans les valeurs remarquables de l'angle.",
+          "renvoi": "M3; R3"
+        },
+        "C": {
+          "erreur": "Confusion de valeur remarquable.",
+          "renvoi": "M3; R3"
+        },
+        "D": {
+          "erreur": "Le produit scalaire est non nul ($1 \\neq 0$).",
+          "renvoi": "M3"
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "capacite": "C4",
+      "enonce": "Un point $M$ appartient à la médiatrice du segment $[AB]$ si et seulement si :",
+      "options": {
+        "A": "$\\vec{MA} \\cdot \\vec{MB} = 0$",
+        "B": "$MA = MB$",
+        "C": "$\\vec{MA} + \\vec{MB} = \\vec{0}$",
+        "D": "$MA + MB = AB$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Ce serait l'équation du cercle de diamètre $[AB]$.",
+          "renvoi": "M4"
+        },
+        "C": {
+          "erreur": "Ceci caractérise le milieu de $[AB]$.",
+          "renvoi": "M4"
+        },
+        "D": {
+          "erreur": "Ceci caractérise l'appartenance au segment $[AB]$.",
+          "renvoi": "M4"
+        }
+      }
+    },
+    {
+      "id": "Q11",
+      "capacite": "C4",
+      "enonce": "Dans un triangle de côtés $a, b$ formant un angle $\\theta$, l'aire est donnée par :",
+      "options": {
+        "A": "$ab \\cos(\\theta)$",
+        "B": "$\\dfrac{1}{2} ab \\cos(\\theta)$",
+        "C": "$\\dfrac{1}{2} ab \\sin(\\theta)$",
+        "D": "$ab \\sin(\\theta)$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Cosinus au lieu de sinus et oubli du facteur $1/2$.",
+          "renvoi": "M4"
+        },
+        "B": {
+          "erreur": "Cosinus au lieu de sinus.",
+          "renvoi": "M4"
+        },
+        "D": {
+          "erreur": "Oubli du facteur $1/2$.",
+          "renvoi": "M4"
+        }
+      }
+    },
+    {
+      "id": "Q12",
+      "capacite": "C4",
+      "enonce": "Soit $H$ le pied de la hauteur issue de $A$ dans le triangle $ABC$. Quelle relation est exacte ?",
+      "options": {
+        "A": "$\\vec{AH} \\cdot \\vec{AB} = 0$",
+        "B": "$\\vec{AH} \\cdot \\vec{BC} = 0$",
+        "C": "$\\vec{AH} \\cdot \\vec{AC} = 0$",
+        "D": "$AH = BH$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "La hauteur est perpendiculaire au côté opposé $(BC)$, pas à $(AB)$.",
+          "renvoi": "M4"
+        },
+        "C": {
+          "erreur": "La hauteur est perpendiculaire à $(BC)$, pas à $(AC)$.",
+          "renvoi": "M4"
+        },
+        "D": {
+          "erreur": "Relation de longueurs non justifiée.",
+          "renvoi": "M4"
+        }
+      }
+    },
+    {
+      "id": "Q13",
+      "capacite": "C5",
+      "enonce": "Quelle est l'expression exacte de la formule d'Al-Kashi ?",
+      "options": {
+        "A": "$a^2 = b^2 + c^2 + 2bc \\cos(A)$",
+        "B": "$a^2 = b^2 + c^2 - 2bc \\cos(A)$",
+        "C": "$a^2 = b^2 - c^2 - 2bc \\cos(A)$",
+        "D": "$a = b + c - 2bc \\cos(A)$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Signe $+$ au lieu de $-$ devant le terme en cosinus.",
+          "renvoi": "M5"
+        },
+        "C": {
+          "erreur": "Signe $-$ devant $c^2$ au lieu de $+$.",
+          "renvoi": "M5"
+        },
+        "D": {
+          "erreur": "Oubli des carrés sur les longueurs des côtés.",
+          "renvoi": "M5"
+        }
+      }
+    },
+    {
+      "id": "Q14",
+      "capacite": "C5",
+      "enonce": "Dans un triangle avec $b=5$, $c=8$ et $\\widehat{A} = \\dfrac{\\pi}{3}$, que vaut $a^2$ ?",
+      "options": {
+        "A": "$49$",
+        "B": "$89$",
+        "C": "$129$",
+        "D": "$9$"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Oubli du terme $-2bc \\cos(A)$.",
+          "renvoi": "M5"
+        },
+        "C": {
+          "erreur": "Erreur de signe $+2bc \\cos(A)$ au lieu de $-$.",
+          "renvoi": "M5"
+        },
+        "D": {
+          "erreur": "Erreur de calcul.",
+          "renvoi": "M5"
+        }
+      }
+    },
+    {
+      "id": "Q15",
+      "capacite": "C5",
+      "enonce": "Si $\\widehat{A} = \\dfrac{\\pi}{2}$, la formule d'Al-Kashi redonne :",
+      "options": {
+        "A": "$a^2 = b^2 - c^2$",
+        "B": "$a^2 = b^2 + c^2$",
+        "C": "$a^2 = 2bc$",
+        "D": "$a = b + c$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Signe $-$ au lieu de $+$.",
+          "renvoi": "M5; R5"
+        },
+        "C": {
+          "erreur": "Formule incorrecte.",
+          "renvoi": "M5; R5"
+        },
+        "D": {
+          "erreur": "Ce n'est pas l'égalité du théorème de Pythagore.",
+          "renvoi": "M5; R5"
+        }
+      }
+    }
   ]
 }

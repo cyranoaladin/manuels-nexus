@@ -1,0 +1,23 @@
+% META: {"id": "TSPE-PRIMITIVES-EQDIFF-REMED-04", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "remediation", "capacites_codes": ["C4"], "status": "approved", "capacites": ["TSPE-PRIMITIVES-EQDIFF-C4"], "statut": "complete"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : equation y'=ay+b
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-PRIMEQ-RE-C2-EX1}{1}{10}
+Resoudre $y' = 4y + 8$, puis determiner la solution telle que $y(0)=-1$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff
+% x = symbols('x')
+% y = exp(4*x) - 2
+% assert diff(y, x) == 4*y + 8
+% assert y.subs(x, 0) == -1
+% END-VERIFY
+
+\begin{corrige}{TSPE-PRIMEQ-RE-C2-EX1}
+Solution particuliere : $y_0 = -\dfrac{8}{4} = -2$. Solutions generales : $y(x) = C\mathrm{e}^{4x} - 2$.
+
+$y(0) = C-2 = -1$, donc $C=1$ : $y(x) = \mathrm{e}^{4x} - 2$.
+\end{corrige}

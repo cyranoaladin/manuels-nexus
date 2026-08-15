@@ -1,0 +1,136 @@
+{
+  "chapitre": "TEXP-ARITHMETIQUE",
+  "titre": "Arithmetique",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "Soient a et b entiers. Si a divise b et b divise c alors :",
+      "correcte": "B",
+      "options": {
+        "A": "a divise b+c uniquement",
+        "B": "a divise c",
+        "C": "c divise a",
+        "D": "a = c"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Propriete trop restreinte.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "Sens de divisibilite inverse.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Egalite non necessaire.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "La division euclidienne de 25 par 7 donne pour reste :",
+      "correcte": "C",
+      "options": {
+        "A": "1",
+        "B": "2",
+        "C": "4",
+        "D": "3"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Quotient faux.",
+          "renvoi": "C1"
+        },
+        "B": {
+          "erreur": "Erreur de calcul.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Reste incorrect.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C2",
+      "enonce": "Le PGCD de 48 et 18 est :",
+      "correcte": "A",
+      "options": {
+        "A": "6",
+        "B": "12",
+        "C": "3",
+        "D": "2"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "12 ne divise pas 18.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "3 n'est pas le PLUS GRAND diviseur.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "2 n'est pas le plus grand diviseur.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "Le theoreme de Bezout affirme que PGCD(a,b)=1 si et seulement si :",
+      "correcte": "D",
+      "options": {
+        "A": "$a+b=1$",
+        "B": "$a b = 1$",
+        "C": "$\\exists u,v \\in \\mathbb{Z}, au-bv=0$",
+        "D": "$\\exists u,v \\in \\mathbb{Z}, au+bv=1$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Equation trop simple.",
+          "renvoi": "C2"
+        },
+        "B": {
+          "erreur": "Produit egal a 1.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Equation homogene.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C3",
+      "enonce": "Si $a \\equiv b \\pmod{n}$, alors :",
+      "correcte": "A",
+      "options": {
+        "A": "$n$ divise $a-b$",
+        "B": "$a$ divise $b-n$",
+        "C": "$a-b = n$",
+        "D": "$a+b$ est multiple de $n$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Sens du diviseur inverse.",
+          "renvoi": "C3"
+        },
+        "C": {
+          "erreur": "Egalite non necessaire.",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "Somme au lieu de difference.",
+          "renvoi": "C3"
+        }
+      }
+    }
+  ]
+}

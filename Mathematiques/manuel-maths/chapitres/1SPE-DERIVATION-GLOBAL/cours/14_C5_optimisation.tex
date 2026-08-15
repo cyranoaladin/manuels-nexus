@@ -65,7 +65,8 @@ x    & 0 & & 5 & & 10 \\
 \hline
 A'(x) &   & + & 0 & - & \\
 \hline
-A(x)  & 0 & \nearrow & 25 & \searrow & 0 \\
+A(x)  & 0 & 
+earrow & 25 & \searrow & 0 \\
 \hline
 \end{array}
 \]
@@ -91,12 +92,15 @@ maximale est le carré de côté $5$ cm, d'aire $25$ cm².}
   \addplot[point] coordinates {(5,25)};
   \draw[dashed,nxGris] (axis cs:5,0) -- (axis cs:5,25)
                         (axis cs:0,25) -- (axis cs:5,25);
-  \node[anchor=south west,font=\footnotesize,nxBleu] at (axis cs:5,25)
+  
+ode[anchor=south west,font=\footnotesize,nxBleu] at (axis cs:5,25)
         {$(5\,;\,25)$};
-  \node[anchor=north,font=\footnotesize,nxGris] at (axis cs:5,0) {$5$};
+  
+ode[anchor=north,font=\footnotesize,nxGris] at (axis cs:5,0) {$5$};
 \end{axis}
 \end{tikzpicture}
-\nxcaption{La parabole atteint son sommet en $x=5$ : l'aire maximale est $25$ cm².}
+
+xcaption{La parabole atteint son sommet en $x=5$ : l'aire maximale est $25$ cm².}
 \end{nxfigure}
 
 % ── Exemple 2 : boîte de conserve cylindrique ────────────────────────────────
@@ -150,7 +154,8 @@ r      & 0 & & r_0 \approx 4{,}30 & & +\infty \\
 \hline
 S'(r)  &   & - & 0 & + & \\
 \hline
-S(r)   & +\infty & \searrow & S_{\min} & \nearrow & +\infty \\
+S(r)   & +\infty & \searrow & S_{\min} & 
+earrow & +\infty \\
 \hline
 \end{array}
 \]

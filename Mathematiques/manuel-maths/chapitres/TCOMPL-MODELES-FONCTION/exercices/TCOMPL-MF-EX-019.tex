@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-MF-EX-019", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "exercice", "capacites": ["TCOMPL-MF-C5"], "capacites_codes": ["C5"], "methodes": ["M2","M5"], "parcours": 1, "competences": ["modeliser","raisonner"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-019.tex", "corrige_tex": "chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-019.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% C = x**3/3 - 5*x**2 + 30*x
+% Cp = diff(C, x)
+% assert expand(Cp) == x**2 - 10*x + 30
+% # discriminant: 100 - 120 = -20 < 0, pas de racine reelle
+% disc = 100 - 120
+% assert disc < 0
+% assert Cp.subs(x, 0) == 30
+% assert Cp.subs(x, 5) == 5
+% assert C.subs(x, 0) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-MF-EX-019}{3}{25}
+Le cout de production de $x$ unites est modelise par $C(x) = \dfrac{x^3}{3} - 5x^2 + 30x$.
+\begin{enumerate}
+  \item Calculer le cout marginal $C'(x)$. Son signe permet-il d'identifier un cout minimum ?
+  \item Calculer le cout moyen $\dfrac{C(x)}{x}$ et determiner s'il admet un minimum.
+  \item Comparer les deux resultats.
+\end{enumerate}
+
+\end{exercice}

@@ -1,0 +1,32 @@
+% META: {"id": "TCOMPL-ECH-CO-009", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ECH-EX-009", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x*sqrt(4 - x**2)
+% fp = diff(f, x)
+% crit = solve(fp, x)
+% assert sqrt(2) in crit
+% fmax = f.subs(x, sqrt(2))
+% assert simplify(fmax) == 2
+% assert f.subs(x, 0) == 0
+% assert f.subs(x, 2) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-ECH-EX-009}
+
+\textbf{Question 1.} Sur $[0,2]$, on a $0 \leq x^2 \leq 4$, donc $4 - x^2 \geq 0$ et $f$ est bien definie.
+
+\commentaireMarge{Produit $x \times \sqrt{4-x^2}$ : deriver avec la regle du produit.}
+
+\textbf{Question 2.} $f = u \times v$ avec $u=x$ et $v=\sqrt{4-x^2}$.
+$u'=1$ et $v' = \dfrac{-2x}{2\sqrt{4-x^2}} = \dfrac{-x}{\sqrt{4-x^2}}$.
+
+\[ f'(x) = \sqrt{4-x^2} + x \times \frac{-x}{\sqrt{4-x^2}} = \frac{4-x^2-x^2}{\sqrt{4-x^2}} = \frac{4-2x^2}{\sqrt{4-x^2}}. \]
+
+$f'(x) = 0 \iff 4-2x^2 = 0 \iff x = \sqrt{2}$ (sur $[0,2]$).
+
+$f'$ est positive sur $[0,\sqrt{2}]$ et negative sur $[\sqrt{2}, 2]$ : $f$ est croissante puis decroissante.
+
+\textbf{Question 3.} Le maximum est atteint en $x = \sqrt{2}$ et vaut :
+\[ f(\sqrt{2}) = \sqrt{2}\,\sqrt{4-2} = \sqrt{2} \times \sqrt{2} = \boxed{2}. \]
+
+\end{corrige}

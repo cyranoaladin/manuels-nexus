@@ -1,0 +1,31 @@
+% META: {"id": "TNSI-LANG-REMED-06", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "remediation", "capacites_codes": ["C6"], "status": "approved", "capacites": ["TNSI-LANGAGES-ET-PROGRAMMATION-C6"]}
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C05 : inegalite stricte/large (off-by-one)
+%---------------------------------------------------------------
+
+\begin{exercice}{TNSI-LANG-RE-C05-EX1}{1}{10}
+Une fonction censée vérifier qu'un indice est valide pour une liste de longueur \lstinline{n} est écrite ainsi :
+\begin{python}
+def indice_valide_bug(indice, n):
+    return 0 <= indice <= n
+\end{python}
+Pour une liste de longueur $n = 5$ (indices valides : $0$ à $4$), que renvoie \lstinline{indice_valide_bug(5, 5)} ? Est-ce correct ? Corriger la fonction.
+\end{exercice}
+
+% BEGIN-VERIFY
+% def indice_valide_bug(indice, n):
+%     return 0 <= indice <= n
+% assert indice_valide_bug(5, 5) is True
+% def indice_valide_corrige(indice, n):
+%     return 0 <= indice < n
+% assert indice_valide_corrige(5, 5) is False
+% assert indice_valide_corrige(4, 5) is True
+% END-VERIFY
+
+\begin{corrige}{TNSI-LANG-RE-C05-EX1}
+\lstinline{indice_valide_bug(5, 5)} renvoie \lstinline{True}, ce qui est \textbf{incorrect} : pour une liste de longueur $5$, les indices valides sont $0, 1, 2, 3, 4$ (indice $5$ est hors limites, il provoquerait un \lstinline{IndexError}). L'erreur vient de l'inégalité \textbf{large} \lstinline{<= n} au lieu de \textbf{stricte} \lstinline{< n} :
+\begin{python}
+def indice_valide_corrige(indice, n):
+    return 0 <= indice < n
+\end{python}
+\end{corrige}

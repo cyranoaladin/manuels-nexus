@@ -1,0 +1,25 @@
+% META: {"id": "TCOMPL-ME-CO-012", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-ME-EX-012", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', positive=True)
+% f = x*ln(x)
+% fp = diff(f, x)
+% assert simplify(fp) == ln(x) + 1
+% assert solve(fp, x) == [exp(-1)]
+% assert f.subs(x, exp(-1)) == -exp(-1)
+% assert limit(f, x, oo) == oo
+% assert limit(f, x, 0, '+') == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-ME-EX-012}
+
+$f'(x) = \ln x + x \times \dfrac{1}{x} = \ln x + 1$.
+
+\commentaireMarge{$\ln x + 1 = 0 \iff x = \mathrm{e}^{-1}$. Le signe suit celui de $\ln x + 1$.}
+
+$f'(x) = 0 \iff x = \mathrm{e}^{-1}$. $f'$ est negative sur $\left]0, \mathrm{e}^{-1}\right]$ et positive sur $\left[\mathrm{e}^{-1}, +\infty\right[$.
+
+Le minimum est $f(\mathrm{e}^{-1}) = \mathrm{e}^{-1} \times (-1) = -\mathrm{e}^{-1}$.
+
+$\lim_{x \to 0^+} x\ln x = 0$ (croissances compareees) et $\lim_{x \to +\infty} x\ln x = +\infty$.
+
+\end{corrige}

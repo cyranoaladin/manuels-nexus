@@ -1,0 +1,24 @@
+% META: {"id": "TCOMPL-LOG-CO-029", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "corrige", "exercice_ref": "TCOMPL-LOG-EX-029", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**4 - 4*x**3 + 6*x**2
+% fpp = diff(f, x, 2)
+% assert expand(fpp) == 12*x**2 - 24*x + 12
+% assert factor(fpp) == 12*(x-1)**2
+% # f'' >= 0 partout, pas de changement de signe => pas d'inflexion
+% assert fpp.subs(x, 1) == 0
+% assert fpp.subs(x, 0) == 12
+% assert fpp.subs(x, 2) == 12
+% END-VERIFY
+\begin{corrige}{TCOMPL-LOG-EX-029}
+
+$f''(x) = 12x^2 - 24x + 12 = 12(x-1)^2 \geq 0$ pour tout $x$.
+
+\commentaireMarge{$f''=12(x-1)^2 \geq 0$ : pas de changement de signe, donc pas d'inflexion.}
+
+Bien que $f''(1) = 0$, la derivee seconde \textbf{ne change pas de signe} en $x=1$.
+
+La courbe n'admet donc \textbf{aucun point d'inflexion} : elle est convexe partout.
+
+\end{corrige}

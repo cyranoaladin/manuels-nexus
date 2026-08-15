@@ -1,0 +1,21 @@
+% META: {"id": "TEXP-GRA-EX-015", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C5"], "capacites_codes": ["C5"], "methodes": ["M2","M5"], "parcours": 1, "competences": ["raisonner","calculer"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-015.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-015.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', positive=True)
+% f = ln(x)/x
+% fp = diff(f, x)
+% assert simplify(fp) == (1 - ln(x))/x**2
+% assert solve(fp, x) == [exp(1)]
+% assert f.subs(x, exp(1)) == exp(-1)
+% assert limit(f, x, oo) == 0
+% assert limit(f, x, 0, '+') == -oo
+% END-VERIFY
+\begin{exercice}{TEXP-GRA-EX-015}{2}{18}
+Soit $f(x) = \dfrac{\ln x}{x}$ sur $\left]0, +\infty\right[$.
+\begin{enumerate}
+  \item Calculer $f'(x)$ et etudier son signe.
+  \item Determiner les limites de $f$ en $0^+$ et en $+\infty$.
+  \item Dresser le tableau de variations.
+\end{enumerate}
+
+\end{exercice}

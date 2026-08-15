@@ -1,0 +1,53 @@
+% META: {"id": "TSPE-PROBABILITES-COURS-05", "chapitre": "TSPE-PROBABILITES", "type_objet": "cours", "capacites_codes": ["C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TSPE-PROBA-C5"], "statut": "structure"}
+
+\section{Variance d'une somme de variables indépendantes}
+
+% ============================================================
+% STRATE 1 — Additivite de la variance
+% ============================================================
+
+\propriete[Additivité de la variance, admise]{
+Si $X_1, \ldots, X_n$ sont des variables aleatoires \textbf{deux a deux independantes}, alors :
+\[
+  V(X_1+\cdots+X_n) = V(X_1)+\cdots+V(X_n).
+\]
+}
+
+\margeAppui{
+Contrairement a l'esperance, cette formule \textbf{necessite} l'independance des variables. Sans cette hypothese, $V(X+Y)$ peut differer de $V(X)+V(Y)$.
+}
+
+\propriete[Variance d'une variable de Bernoulli]{
+Si $X_i$ suit une loi de Bernoulli de parametre $p$ (c'est-a-dire $P(X_i=1)=p$, $P(X_i=0)=1-p$), alors $V(X_i) = p(1-p)$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, simplify
+% p = symbols('p')
+% Ei = p  # E(Xi) = 0*(1-p)+1*p = p
+% EiSq = p  # E(Xi^2) = 0^2*(1-p)+1^2*p = p
+% Vi = EiSq - Ei**2
+% assert simplify(Vi - p*(1-p)) == 0
+% END-VERIFY
+
+\exemple{
+Deux capteurs independants ont chacun une probabilite $0{,}1$ de tomber en panne dans l'annee. Soit $X_1,X_2$ les variables de Bernoulli associees (1 si panne). Calculer $V(X_1+X_2)$.
+
+$V(X_1)=V(X_2) = 0{,}1\times0{,}9 = 0{,}09$. Par independance, $V(X_1+X_2) = 0{,}09+0{,}09 = 0{,}18$.
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% V = Rational(1,10)*Rational(9,10)
+% assert V == Rational(9, 100)
+% assert 2*V == Rational(18, 100)
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Appliquer l'additivite de la variance sans verifier l'independance.} Si les variables sont dependantes (par exemple $X$ et $-X$), $V(X+(-X))=V(0)=0 
+eq V(X)+V(-X)=2V(X)$ en general : l'additivite est fausse sans l'hypothese d'independance.
+}

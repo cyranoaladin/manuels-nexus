@@ -1,128 +1,80 @@
-% META: {"id":"1SPE-DERIVATION-LOCAL-QCM","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"qcm","capacites_codes":["C1","C2","C3","C4","C5"],"status":"generated"}
+% META: {"id": "1SPE-DERIVATION-LOCAL-QCM", "chapitre": "1SPE-DERIVATION-LOCAL", "type_objet": "qcm", "genere_depuis": "chapitres/1SPE-DERIVATION-LOCAL/qcm/1SPE-DERIVATION-LOCAL-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-% ============================================================
-% QCM D'AUTO-EVALUATION — Derivation locale (1SPE-DERIVATION-LOCAL)
-% Nexus Reussite
-% 15 questions — 3 par capacite C1 a C5
-% ============================================================
-
-\section*{QCM d'auto-évaluation — Dérivation : point de vue local}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Dérivation locale — QCM d'auto-évaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C1 — Taux de variation et pente de sécante}
-% ------------------------------------------------------------
 
 \begin{enumerate}
 
-% ---- Q1 ----
-\item \textbf{[Q1]} Soit $f$ la fonction définie par $f(x)=x^2$. Quel est le taux de variation de $f$ entre $1$ et $3$ ?
+\item[] \textbf{Capacite C1}
 
+\item \textbf{[Q1]} Le taux d'variation de la fonction $f$ entre $a$ et $b$ ($a 
+eq b$) est égal à :
   \begin{enumerate}[label=\Alph*.]
-    \item $\dfrac{f(3)}{3} = 3$
-    \item $\dfrac{f(3)-f(1)}{3-1} = 4$
-    \item $f(3)-f(1) = 8$
-    \item $\dfrac{3-1}{f(3)-f(1)} = \dfrac{1}{4}$
+    \item $\dfrac{f(b)}{b}$
+    \item $\dfrac{f(b) - f(a)}{b - a}$
+    \item $f(b) - f(a)$
+    \item $\dfrac{b - a}{f(b) - f(a)}$
   \end{enumerate}
 
-\bigskip
-
-% ---- Q2 ----
-\item \textbf{[Q2]} Le taux de variation de $f$ entre $a$ et $a+h$ ($h\neq 0$) est :
-
+\item \textbf{[Q2]} Pour $h 
+eq 0$, le taux d'accroissement de $f$ en $a$ s'écrit :
   \begin{enumerate}[label=\Alph*.]
     \item $f(a+h) - f(a)$
-    \item $\dfrac{f(a+h)-f(a)}{h}$
-    \item $\dfrac{h}{f(a+h)-f(a)}$
-    \item $f(a+h) \times h$
+    \item $\dfrac{f(a+h) - f(a)}{h}$
+    \item $\dfrac{h}{f(a+h) - f(a)}$
+    \item $h \times [f(a+h) - f(a)]$
   \end{enumerate}
 
-\bigskip
-
-% ---- Q3 ----
-\item \textbf{[Q3]} Un cycliste parcourt $f(t)$ mètres en $t$ secondes. Le taux de variation de $f$ entre $t=10$ et $t=20$ représente :
-
+\item \textbf{[Q3]} Si $d(t)$ désigne la position d'un mobile à l'instant $t$, la vitesse moyenne entre $t_1$ et $t_2$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item La distance parcourue entre $t=10$ et $t=20$.
-    \item La vitesse à l'instant $t=15$.
-    \item La vitesse moyenne entre $t=10$ et $t=20$.
-    \item L'accélération entre $t=10$ et $t=20$.
+    \item $d(t_2) - d(t_1)$
+    \item $d'(t_1)$
+    \item $\dfrac{d(t_2) - d(t_1)}{t_2 - t_1}$
+    \item $d''(t_1)$
   \end{enumerate}
 
-\end{enumerate}
+\item[] \textbf{Capacite C2}
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C2 — Nombre dérivé, pente et vitesse instantanée}
-% ------------------------------------------------------------
-
-\begin{enumerate}[resume]
-
-% ---- Q4 ----
-\item \textbf{[Q4]} Le nombre dérivé $f'(a)$ est :
-
+\item \textbf{[Q4]} Par définition, le nombre dérivé $f'(a)$ est la limite quand $h \to 0$ de :
   \begin{enumerate}[label=\Alph*.]
-    \item La pente de la tangente à la courbe au point d'abscisse $a$.
-    \item La pente de la sécante entre $a$ et $b$.
-    \item L'ordonnée du point d'abscisse $a$ sur la courbe.
-    \item La valeur de $f$ au point le plus proche de $a$.
+    \item $\dfrac{f(a+h) - f(a)}{h}$
+    \item $\dfrac{f(x) - f(a)}{x}$
+    \item $f(a)$
+    \item $f(a+h)$
   \end{enumerate}
 
-\bigskip
-
-% ---- Q5 ----
-\item \textbf{[Q5]} Soit $f(x) = x^2$. On pose $t(h) = \dfrac{f(2+h)-f(2)}{h}$. Quelle est la forme simplifiée de $t(h)$ pour $h \neq 0$ ?
-
+\item \textbf{[Q5]} Pour $f(x) = x^2$, le taux d'accroissement en $a=2$ vaut :
   \begin{enumerate}[label=\Alph*.]
-    \item $4+h$
-    \item $2h$
-    \item $h+2$
+    \item $4 + h$
+    \item $4 + h^2$
+    \item $4$
     \item $4h$
   \end{enumerate}
 
-\bigskip
-
-% ---- Q6 ----
-\item \textbf{[Q6]} Un mobile a pour position $d(t) = 3t^2 + t$ (en mètres, $t$ en secondes). Le nombre $d'(2)$ représente :
-
+\item \textbf{[Q6]} La vitesse instantanée à l'instant $t=2$ correspond à :
   \begin{enumerate}[label=\Alph*.]
-    \item La distance parcourue à $t=2$.
-    \item La vitesse instantanée à $t=2$.
-    \item La vitesse moyenne entre $t=0$ et $t=2$.
-    \item L'accélération à $t=2$.
+    \item $d(2)$
+    \item $d'(2)$
+    \item $\dfrac{d(2)}{2}$
+    \item $d''(2)$
   \end{enumerate}
 
-\end{enumerate}
+\item[] \textbf{Capacite C3}
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C3 — Lecture graphique et construction de la tangente}
-% ------------------------------------------------------------
-
-\begin{enumerate}[resume]
-
-% ---- Q7 ----
-\item \textbf{[Q7]} Sur un graphique, la tangente à la courbe de $f$ au point $A(2;5)$ passe aussi par le point $B(4;9)$. Alors $f'(2)$ vaut :
-
+\item \textbf{[Q7]} La pente de la droite passant par $A(x_A, y_A)$ et $B(x_B, y_B)$ ($x_A 
+eq x_B$) vaut :
   \begin{enumerate}[label=\Alph*.]
-    \item $\dfrac{9}{4} = 2{,}25$
-    \item $\dfrac{9-5}{4-2} = 2$
-    \item $9-5 = 4$
-    \item $\dfrac{4-2}{9-5} = 0{,}5$
+    \item $\dfrac{y_B}{x_B}$
+    \item $\dfrac{y_B - y_A}{x_B - x_A}$
+    \item $y_B - y_A$
+    \item $\dfrac{x_B - x_A}{y_B - y_A}$
   \end{enumerate}
 
-\bigskip
-
-% ---- Q8 ----
-\item \textbf{[Q8]} La tangente en un point de la courbe est horizontale. Cela signifie que :
-
+\item \textbf{[Q8]} La courbe représentative de $f$ admet une tangente horizontale au point d'abscisse $a$ si :
   \begin{enumerate}[label=\Alph*.]
     \item $f(a) = 0$
     \item $f'(a) = 0$
@@ -130,255 +82,186 @@
     \item $f(a) = f'(a)$
   \end{enumerate}
 
-\bigskip
-
-% ---- Q9 ----
-\item \textbf{[Q9]} Pour construire la tangente en $A(a;f(a))$, il faut connaître :
-
+\item \textbf{[Q9]} Géométriquement, le nombre dérivé $f'(a)$ représente :
   \begin{enumerate}[label=\Alph*.]
-    \item Uniquement $f(a)$.
-    \item Uniquement $f'(a)$.
-    \item Le point $A$ et la pente $f'(a)$.
-    \item Deux points quelconques de la courbe.
+    \item l'ordonnée à l'origine de la tangente
+    \item l'abscisse du point de contact
+    \item le coefficient directeur de la tangente en $a$
+    \item la longueur du segment sécant
   \end{enumerate}
 
-\end{enumerate}
+\item[] \textbf{Capacite C4}
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C4 — Équation de la tangente}
-% ------------------------------------------------------------
-
-\begin{enumerate}[resume]
-
-% ---- Q10 ----
-\item \textbf{[Q10]} L'équation de la tangente à la courbe de $f$ au point d'abscisse $a$ est :
-
+\item \textbf{[Q10]} L'équation réduite de la tangente à la courbe de $f$ au point d'abscisse $a$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item $y = f'(a) \cdot x + f(a)$
+    \item $y = f'(a)x + f(a)$
     \item $y = f'(a)(x - a) + f(a)$
     \item $y = f(a)(x - a) + f'(a)$
     \item $y = f'(x)(x - a) + f(a)$
   \end{enumerate}
 
-\bigskip
-
-% ---- Q11 ----
-\item \textbf{[Q11]} Soit $f(3) = 7$ et $f'(3) = -2$. L'équation de la tangente en $x=3$ est :
-
+\item \textbf{[Q11]} Si $f(1)=3$ et $f'(1)=-2$, l'équation de la tangente en $a=1$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item $y = -2x + 7$
-    \item $y = -2(x-3) + 7$
-    \item $y = 7(x-3) - 2$
     \item $y = -2x + 3$
+    \item $y = -2x + 5$
+    \item $y = 3x - 2$
+    \item $y = -2x - 1$
   \end{enumerate}
 
-\bigskip
-
-% ---- Q12 ----
-\item \textbf{[Q12]} Pour vérifier que la tangente en $a$ est correcte, on peut notamment :
-
+\item \textbf{[Q12]} Une droite d'équation $y = mx + p$ passe par $(a, f(a))$ avec pour pente $f'(a)$. Son ordonnée à l'origine $p$ vaut :
   \begin{enumerate}[label=\Alph*.]
-    \item Vérifier que $y(0)=f(0)$.
-    \item Vérifier que $y(a) = f(a)$ et que le coefficient directeur est $f'(a)$.
-    \item Vérifier que $y(a) = 0$.
-    \item Vérifier que $y(a) = f'(a)$.
+    \item $f(0)$
+    \item $f(a) - a f'(a)$
+    \item $0$
+    \item $f'(a)$
   \end{enumerate}
 
-\end{enumerate}
+\item[] \textbf{Capacite C5}
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C5 — Approximation linéaire}
-% ------------------------------------------------------------
-
-\begin{enumerate}[resume]
-
-% ---- Q13 ----
-\item \textbf{[Q13]} Si $f(a) = 4$ et $f'(a) = 3$, alors $f(a + h) \approx$ :
-
+\item \textbf{[Q13]} L'approximation affine de $f(a+h)$ pour $h$ voisin de 0 est donnée par :
   \begin{enumerate}[label=\Alph*.]
-    \item $3h$
-    \item $4 + 3h$
-    \item $3 + 4h$
-    \item $7h$
+    \item $f(a+h) \approx f'(a) h$
+    \item $f(a+h) \approx f(a) + f'(a) h$
+    \item $f(a+h) \approx f'(a) + f(a) h$
+    \item $f(a+h) \approx (f(a) + f'(a)) h$
   \end{enumerate}
 
-\bigskip
-
-% ---- Q14 ----
-\item \textbf{[Q14]} L'approximation $f(a+h) \approx f(a) + f'(a) \cdot h$ est d'autant plus fiable que :
-
+\item \textbf{[Q14]} L'approximation affine locale est d'autant plus précise que :
   \begin{enumerate}[label=\Alph*.]
-    \item $h$ est grand.
-    \item $h$ est proche de $0$.
-    \item $f'(a)$ est nul.
-    \item $a = 0$.
+    \item $|h|$ est grand
+    \item $|h|$ est très proche de 0
+    \item $f'(a) = 0$
+    \item $a = 0$
   \end{enumerate}
 
-\bigskip
-
-% ---- Q15 ----
-\item \textbf{[Q15]} On sait que $\sqrt{4} = 2$ et que la dérivée de $\sqrt{x}$ en $x=4$ vaut $\dfrac{1}{4}$. Alors $\sqrt{4{,}06} \approx$ :
-
+\item \textbf{[Q15]} Pour $f(x)=\sqrt{x}$, comme $f(4)=2$ et $f'(4)=\dfrac{1}{4}$, une valeur approchée de $\sqrt{4{,}06}$ est :
   \begin{enumerate}[label=\Alph*.]
     \item $2{,}06$
     \item $2{,}015$
-    \item $2{,}06 \times \dfrac{1}{4}$
-    \item $2{,}6$
+    \item $0{,}015$
+    \item $2{,}15$
   \end{enumerate}
 
 \end{enumerate}
 
-% ============================================================
-%  GRILLE DE CORRECTION ET DIAGNOSTICS
-% ============================================================
-
-\newpage
-
-\section*{Correction et diagnostics}
+\clearpage
+\section*{Cle de correction — reservee au professeur}
 
 \begin{center}
-\begin{tabular}{|c|c|c|l|}
+\begin{tabular}{lll}
 \hline
-\textbf{Question} & \textbf{Capacité} & \textbf{Réponse} & \textbf{Distracteurs — erreur type et renvoi} \\
+Question & Capacite & Reponse exacte \\
 \hline
-Q1 & C1 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : quotient $f(b)/b$ au lieu de $(f(b)-f(a))/(b-a)$ — \textit{renvoi M1} \\
-    C : numérateur seul, dénominateur oublié — \textit{renvoi M1} \\
-    D : quotient inversé — \textit{renvoi M1}
-  \end{tabular} \\
-\hline
-Q2 & C1 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : accroissement de $f$ seul, sans diviser par $h$ — \textit{renvoi M1} \\
-    C : quotient inversé — \textit{renvoi M1} \\
-    D : produit au lieu d'un quotient — \textit{renvoi M1}
-  \end{tabular} \\
-\hline
-Q3 & C1 & C &
-  \begin{tabular}[t]{@{}l@{}}
-    A : distance $\neq$ vitesse moyenne (pas de division) — \textit{renvoi M1 ; R5} \\
-    B : vitesse en un instant $\neq$ vitesse moyenne — \textit{renvoi M1 ; M2} \\
-    D : accélération = dérivée de la vitesse, pas de la position — \textit{renvoi M2}
-  \end{tabular} \\
-\hline
-Q4 & C2 & A &
-  \begin{tabular}[t]{@{}l@{}}
-    B : pente de sécante $\neq$ pente de tangente — \textit{renvoi M2, passage à la limite} \\
-    C : $f(a)$ est l'ordonnée, pas la pente — \textit{renvoi M2} \\
-    D : le nombre dérivé n'est pas une valeur de $f$ — \textit{renvoi M2}
-  \end{tabular} \\
-\hline
-Q5 & C2 & A &
-  \begin{tabular}[t]{@{}l@{}}
-    B : développement incorrect de $(2+h)^2$ — \textit{renvoi R2} \\
-    C : erreur d'identification du terme $4$ — \textit{renvoi R2} \\
-    D : produit $4h$ au lieu de somme $4+h$ — \textit{renvoi R2}
-  \end{tabular} \\
-\hline
-Q6 & C2 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : $d(2)$ est la position, pas la vitesse — \textit{renvoi M2} \\
-    C : vitesse moyenne $\neq$ vitesse instantanée — \textit{renvoi M1 ; M2} \\
-    D : accélération = dérivée de la vitesse — \textit{renvoi M2}
-  \end{tabular} \\
-\hline
-Q7 & C3 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : quotient $y_B/x_B$ au lieu de pente — \textit{renvoi R3} \\
-    C : différence d'ordonnées sans diviser par $\Delta x$ — \textit{renvoi R3} \\
-    D : quotient inversé — \textit{renvoi R3}
-  \end{tabular} \\
-\hline
-Q8 & C3 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : $f(a)=0$ signifie que le point est sur l'axe, pas tangente horizontale — \textit{renvoi M3} \\
-    C : pente $1$ = droite à $45°$, pas horizontale — \textit{renvoi R3} \\
-    D : aucune raison d'égalité $f(a) = f'(a)$ — \textit{renvoi M3}
-  \end{tabular} \\
-\hline
-Q9 & C3 & C &
-  \begin{tabular}[t]{@{}l@{}}
-    A : sans la pente, la tangente n'est pas déterminée — \textit{renvoi M3} \\
-    B : sans le point de contact, la tangente n'est pas positionnée — \textit{renvoi M3 ; M4} \\
-    D : la tangente n'est pas une sécante — \textit{renvoi M3}
-  \end{tabular} \\
-\hline
-Q10 & C4 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : ordonnée à l'origine $\neq$ $f(a)$ sauf si $a=0$ — \textit{renvoi M4} \\
-    C : rôles de $f(a)$ et $f'(a)$ inversés — \textit{renvoi M4} \\
-    D : $f'(x)$ varie avec $x$, la pente est $f'(a)$ — \textit{renvoi M4}
-  \end{tabular} \\
-\hline
-Q11 & C4 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : $f'(a)x + f(a)$ au lieu de $f'(a)(x-a)+f(a)$ — \textit{renvoi M4} \\
-    C : rôles de $f(a)$ et $f'(a)$ inversés — \textit{renvoi M4} \\
-    D : ordonnée à l'origine mal calculée — \textit{renvoi M4}
-  \end{tabular} \\
-\hline
-Q12 & C4 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : $y(0)=f(0)$ n'est vrai que si $a=0$ — \textit{renvoi M4} \\
-    C : la tangente passe par $(a;f(a))$, pas par $(a;0)$ — \textit{renvoi M4} \\
-    D : $y(a)$ doit valoir $f(a)$, pas $f'(a)$ — \textit{renvoi M4}
-  \end{tabular} \\
-\hline
-Q13 & C5 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : terme $f(a)$ oublié — \textit{renvoi M5} \\
-    C : rôles de $f(a)$ et $f'(a)$ inversés — \textit{renvoi M5} \\
-    D : somme $f(a)+f'(a)$ multipliée par $h$ — \textit{renvoi M5}
-  \end{tabular} \\
-\hline
-Q14 & C5 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : plus $h$ est grand, plus l'approximation est mauvaise — \textit{renvoi M5} \\
-    C : $f'(a)=0$ donne $f(a+h)\approx f(a)$, pas « meilleur » — \textit{renvoi M5} \\
-    D : la qualité ne dépend pas de $a=0$ mais de $|h|$ — \textit{renvoi M5}
-  \end{tabular} \\
-\hline
-Q15 & C5 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : $h=0{,}06$ ajouté à $\sqrt{4}$ sans multiplier par $f'(4)$ — \textit{renvoi M5} \\
-    C : produit $h \times f'(a)$ sans ajouter $f(a)$ — \textit{renvoi M5} \\
-    D : erreur de placement de la virgule — \textit{renvoi M5}
-  \end{tabular} \\
+Q1 & C1 & \textbf{B} \\
+Q2 & C1 & \textbf{B} \\
+Q3 & C1 & \textbf{C} \\
+Q4 & C2 & \textbf{A} \\
+Q5 & C2 & \textbf{A} \\
+Q6 & C2 & \textbf{B} \\
+Q7 & C3 & \textbf{B} \\
+Q8 & C3 & \textbf{B} \\
+Q9 & C3 & \textbf{C} \\
+Q10 & C4 & \textbf{B} \\
+Q11 & C4 & \textbf{B} \\
+Q12 & C4 & \textbf{B} \\
+Q13 & C5 & \textbf{B} \\
+Q14 & C5 & \textbf{B} \\
+Q15 & C5 & \textbf{B} \\
 \hline
 \end{tabular}
 \end{center}
 
-\bigskip
+\subsection*{Diagnostic des reponses erronees}
 
-\begin{center}
-\textbf{Réponses correctes}
-
-\medskip
-\begin{tabular}{|c|c||c|c||c|c||c|c||c|c|}
-\hline
-Q1 & B & Q2 & B & Q3 & C & Q4 & A & Q5 & A \\
-\hline
-Q6 & B & Q7 & B & Q8 & B & Q9 & C & Q10 & B \\
-\hline
-Q11 & B & Q12 & B & Q13 & B & Q14 & B & Q15 & B \\
-\hline
-\end{tabular}
-\end{center}
-
-\bigskip
-
-\begin{center}
-\textit{%
-  Score : $\ldots\ldots / 15$ \quad
-  Capacités à retravailler : C1~\textbf{[$\square$Q1 $\square$Q2 $\square$Q3]}
-  C2~\textbf{[$\square$Q4 $\square$Q5 $\square$Q6]}
-  C3~\textbf{[$\square$Q7 $\square$Q8 $\square$Q9]}
-  C4~\textbf{[$\square$Q10 $\square$Q11 $\square$Q12]}
-  C5~\textbf{[$\square$Q13 $\square$Q14 $\square$Q15]}
-}
-\end{center}
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{A} — Quotient $f(b)/b$ au lieu de $(f(b)-f(a))/(b-a)$. \emph{Renvoi : M1.}
+    \item \textbf{C} — Numérateur seul, dénominateur oublié. \emph{Renvoi : M1.}
+    \item \textbf{D} — Quotient inversé. \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Accroissement de $f$ seul, sans diviser par $h$. \emph{Renvoi : M1.}
+    \item \textbf{C} — Quotient inversé. \emph{Renvoi : M1.}
+    \item \textbf{D} — Produit au lieu d'un quotient. \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — Distance parcourue confondue avec vitesse moyenne. \emph{Renvoi : M1, R5.}
+    \item \textbf{B} — Vitesse en un instant confondue avec vitesse moyenne. \emph{Renvoi : M1, M2.}
+    \item \textbf{D} — Accélération confondue avec vitesse. \emph{Renvoi : M2.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{B} — Pente de sécante confondue avec pente de tangente. \emph{Renvoi : M2.}
+    \item \textbf{C} — $f(a)$ est l'ordonnée, pas la pente. \emph{Renvoi : M2.}
+    \item \textbf{D} — Le nombre dérivé n'est pas une valeur de $f$. \emph{Renvoi : M2.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{B} — Développement incorrect de $(2+h)^2$. \emph{Renvoi : R2.}
+    \item \textbf{C} — Erreur d'identification du terme 4. \emph{Renvoi : R2.}
+    \item \textbf{D} — Produit $4h$ au lieu de somme $4+h$. \emph{Renvoi : R2.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — $d(2)$ est la position, pas la vitesse. \emph{Renvoi : M2.}
+    \item \textbf{C} — Vitesse moyenne confondue avec vitesse instantanée. \emph{Renvoi : M1, M2.}
+    \item \textbf{D} — Accélération = dérivée de la vitesse. \emph{Renvoi : M2.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — Quotient $y_B/x_B$ au lieu de pente. \emph{Renvoi : R3.}
+    \item \textbf{C} — Différence d'ordonnées sans diviser par $\Delta x$. \emph{Renvoi : R3.}
+    \item \textbf{D} — Quotient inversé. \emph{Renvoi : R3.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{A} — $f(a)=0$ signifie point sur l'axe, pas tangente horizontale. \emph{Renvoi : M3.}
+    \item \textbf{C} — Pente 1 = droite à 45°, pas horizontale. \emph{Renvoi : R3.}
+    \item \textbf{D} — Aucune raison d'égalité $f(a) = f'(a)$. \emph{Renvoi : M3.}
+  \end{itemize}
+  \item \textbf{Q9}
+  \begin{itemize}
+    \item \textbf{A} — Sans la pente, la tangente n'est pas déterminée. \emph{Renvoi : M3.}
+    \item \textbf{B} — Sans le point de contact, la tangente n'est pas positionnée. \emph{Renvoi : M3, M4.}
+    \item \textbf{D} — La tangente n'est pas une sécante. \emph{Renvoi : M3.}
+  \end{itemize}
+  \item \textbf{Q10}
+  \begin{itemize}
+    \item \textbf{A} — Ordonnée à l'origine confondue avec $f(a)$ sauf si $a=0$. \emph{Renvoi : M4.}
+    \item \textbf{C} — Rôles de $f(a)$ et $f'(a)$ inversés. \emph{Renvoi : M4.}
+    \item \textbf{D} — $f'(x)$ varie avec $x$, la pente est $f'(a)$. \emph{Renvoi : M4.}
+  \end{itemize}
+  \item \textbf{Q11}
+  \begin{itemize}
+    \item \textbf{A} — $f'(a)x + f(a)$ au lieu de $f'(a)(x-a)+f(a)$. \emph{Renvoi : M4.}
+    \item \textbf{C} — Rôles de $f(a)$ et $f'(a)$ inversés. \emph{Renvoi : M4.}
+    \item \textbf{D} — Ordonnée à l'origine mal calculée. \emph{Renvoi : M4.}
+  \end{itemize}
+  \item \textbf{Q12}
+  \begin{itemize}
+    \item \textbf{A} — $y(0)=f(0)$ n'est vrai que si $a=0$. \emph{Renvoi : M4.}
+    \item \textbf{C} — La tangente passe par $(a, f(a))$, pas par $(a, 0)$. \emph{Renvoi : M4.}
+    \item \textbf{D} — $y(a)$ doit valoir $f(a)$, pas $f'(a)$. \emph{Renvoi : M4.}
+  \end{itemize}
+  \item \textbf{Q13}
+  \begin{itemize}
+    \item \textbf{A} — Terme $f(a)$ oublié. \emph{Renvoi : M5.}
+    \item \textbf{C} — Rôles de $f(a)$ et $f'(a)$ inversés. \emph{Renvoi : M5.}
+    \item \textbf{D} — Somme $f(a)+f'(a)$ multipliée par $h$. \emph{Renvoi : M5.}
+  \end{itemize}
+  \item \textbf{Q14}
+  \begin{itemize}
+    \item \textbf{A} — Plus $h$ est grand, plus l'approximation est mauvaise. \emph{Renvoi : M5.}
+    \item \textbf{C} — $f'(a)=0$ donne $f(a+h) \approx f(a)$, pas meilleur. \emph{Renvoi : M5.}
+    \item \textbf{D} — La qualité ne dépend pas de $a=0$ mais de $|h|$. \emph{Renvoi : M5.}
+  \end{itemize}
+  \item \textbf{Q15}
+  \begin{itemize}
+    \item \textbf{A} — $h=0{,}06$ ajouté à $\sqrt{4}$ sans multiplier par $f'(4)$. \emph{Renvoi : M5.}
+    \item \textbf{C} — Produit $h \times f'(a)$ sans ajouter $f(a)$. \emph{Renvoi : M5.}
+    \item \textbf{D} — Erreur de placement de la virgule. \emph{Renvoi : M5.}
+  \end{itemize}
+\end{itemize}

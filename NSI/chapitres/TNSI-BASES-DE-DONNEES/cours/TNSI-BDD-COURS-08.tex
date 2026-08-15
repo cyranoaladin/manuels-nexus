@@ -1,0 +1,82 @@
+% META: {"id": "TNSI-BDD-COURS-08", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "cours", "capacites_codes": ["C8"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TNSI-BASES-DE-DONNEES-C8"]}
+\section{Interroger une base : SELECT, FROM, WHERE}
+
+% ============================================================
+% STRATE 1 — Composants d'une requete, SELECT / FROM
+% ============================================================
+
+\definition[1]{
+Le langage \textbf{SQL} (\textit{Structured Query Language}) permet d'interroger et de manipuler une base relationnelle. Une requête d'interrogation combine des \textbf{clauses}, chacune introduite par un \textbf{mot clé} : \texttt{SELECT} (quels attributs afficher), \texttt{FROM} (dans quelle relation), et optionnellement \texttt{WHERE} (quelle condition sur les tuples).
+}
+
+\margeAppui{
+\texttt{SELECT} correspond à une \textbf{projection} (choisir des colonnes) ; \texttt{WHERE} correspond à une \textbf{sélection} (choisir des lignes selon une condition). Ce sont deux opérations indépendantes : on peut projeter sans sélectionner, ou sélectionner sans projeter (avec \texttt{SELECT~*}).
+}
+
+\textbf{Exemple.} Base d'exemple filée sur tout le chapitre (bibliothèque) :
+\begin{sql}
+CREATE TABLE Livre(id INTEGER PRIMARY KEY, titre TEXT, auteur TEXT, annee INTEGER);
+INSERT INTO Livre VALUES
+  (1, 'Le Petit Prince', 'Saint-Exupery', 1943),
+  (2, '1984', 'Orwell', 1949),
+  (3, 'La Peste', 'Camus', 1947);
+\end{sql}
+Afficher uniquement les titres et auteurs de tous les livres :
+\begin{sql}
+SELECT titre, auteur FROM Livre;
+\end{sql}
+
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Livre(id INTEGER PRIMARY KEY, titre TEXT, auteur TEXT, annee INTEGER)")
+% conn.executemany("INSERT INTO Livre VALUES (?,?,?,?)", [
+%     (1, "Le Petit Prince", "Saint-Exupery", 1943),
+%     (2, "1984", "Orwell", 1949),
+%     (3, "La Peste", "Camus", 1947),
+% ])
+% conn.commit()
+% cur = conn.execute("SELECT titre, auteur FROM Livre")
+% assert cur.fetchall() == [
+%     ("Le Petit Prince", "Saint-Exupery"),
+%     ("1984", "Orwell"),
+%     ("La Peste", "Camus"),
+% ]
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — WHERE, operateurs et conditions composees
+% ============================================================
+
+\propriete[Filtrer avec WHERE]{
+La clause \texttt{WHERE} ne conserve que les tuples vérifiant une \textbf{condition}. Les opérateurs de comparaison usuels (\texttt{=}, \texttt{<}, \texttt{>}, \texttt{<=}, \texttt{>=}, \texttt{<>} pour différent) se combinent avec \texttt{AND}, \texttt{OR}, \texttt{NOT} pour des conditions composées ; \texttt{LIKE} permet une recherche approchée sur du texte (motif avec le joker \texttt{\%}).
+}
+
+\textbf{Exemple.} Livres parus après 1945 :
+\begin{sql}
+SELECT titre FROM Livre WHERE annee > 1945;
+\end{sql}
+Livres d'Orwell ou de Camus :
+\begin{sql}
+SELECT titre FROM Livre WHERE auteur = 'Orwell' OR auteur = 'Camus';
+\end{sql}
+
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Livre(id INTEGER PRIMARY KEY, titre TEXT, auteur TEXT, annee INTEGER)")
+% conn.executemany("INSERT INTO Livre VALUES (?,?,?,?)", [
+%     (1, "Le Petit Prince", "Saint-Exupery", 1943),
+%     (2, "1984", "Orwell", 1949),
+%     (3, "La Peste", "Camus", 1947),
+% ])
+% conn.commit()
+% cur = conn.execute("SELECT titre FROM Livre WHERE annee > 1945")
+% assert set(r[0] for r in cur.fetchall()) == {"1984", "La Peste"}
+% cur = conn.execute("SELECT titre FROM Livre WHERE auteur = 'Orwell' OR auteur = 'Camus'")
+% assert set(r[0] for r in cur.fetchall()) == {"1984", "La Peste"}
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Oublier les guillemets autour d'une chaîne de caractères.} \texttt{WHERE auteur = Orwell} est une erreur : SQL interprète \texttt{Orwell} sans guillemets comme un nom de colonne inexistant. Il faut écrire \texttt{WHERE auteur = 'Orwell'}, avec des apostrophes simples autour du texte.
+}

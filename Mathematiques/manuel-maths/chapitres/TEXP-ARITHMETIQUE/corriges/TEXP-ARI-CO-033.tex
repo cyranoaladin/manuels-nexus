@@ -1,0 +1,30 @@
+% META: {"id": "TEXP-ARI-CO-033", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-033", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f''(x) = 12x^2 - 24, f'(0)=4, f(0)=1
+% fpp = 12*x**2 - 24
+% fp = integrate(fpp, x) + 4  # f'(0)=4
+% assert expand(fp) == 4*x**3 - 24*x + 4
+% f = integrate(fp, x) + 1  # f(0)=1
+% assert f == x**4 - 12*x**2 + 4*x + 1
+% assert solve(fpp, x) == [-sqrt(2), sqrt(2)]
+% assert solve(fp, x)  # 3 racines reelles
+% crit = solve(fp, x)
+% assert len(crit) == 3
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-033}
+
+\textbf{Question 1.} $f'(x) = \int (12x^2 - 24)\,dx + C_1 = 4x^3 - 24x + C_1$.
+
+Avec $f'(0) = 4$ : $C_1 = 4$, donc $f'(x) = 4x^3 - 24x + 4$.
+
+\commentaireMarge{Integrer $f''$ avec $f'(0)=4$ puis $f(0)=1$.}
+
+$f(x) = \int (4t^3 - 24t + 4)\,dt + C_2 = x^4 - 12x^2 + 4x + 1$ (car $f(0) = 1$).
+
+\textbf{Question 2.} $f'' = 0 \iff x = \pm\sqrt{2}$. Convexe sur $\left]-\infty,-\sqrt2\right] \cup \left[\sqrt2,+\infty\right[$, concave entre.
+
+Points d'inflexion en $x = \pm\sqrt{2}$.
+
+\end{corrige}

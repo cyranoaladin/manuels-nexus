@@ -1,0 +1,57 @@
+% META: {"id": "TNSI-ALGO-EVAL-A-corrige", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "correction", "evaluation_ref": "TNSI-ALGO-EVAL-A", "capacites": ["T-ALGO-01A", "T-ALGO-01B", "T-ALGO-01E", "T-ALGO-01F"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+% def taille(arbre):
+%     if arbre is None:
+%         return 0
+%     return 1 + taille(arbre.gauche) + taille(arbre.droite)
+% def hauteur(arbre):
+%     if arbre is None:
+%         return -1
+%     return 1 + max(hauteur(arbre.gauche), hauteur(arbre.droite))
+% arbre = Noeud(10, Noeud(5, Noeud(2), Noeud(7)), Noeud(15))
+% assert taille(arbre) == 5
+% assert hauteur(arbre) == 2
+% def inserer(arbre, cle):
+%     if arbre is None:
+%         return Noeud(cle)
+%     if cle < arbre.valeur:
+%         arbre.gauche = inserer(arbre.gauche, cle)
+%     elif cle > arbre.valeur:
+%         arbre.droite = inserer(arbre.droite, cle)
+%     return arbre
+% abr = None
+% for v in (10, 5, 15, 3, 7, 12):
+%     abr = inserer(abr, v)
+% def minimum(arbre):
+%     while arbre.gauche is not None:
+%         arbre = arbre.gauche
+%     return arbre.valeur
+% assert minimum(abr) == 3
+% END-VERIFY
+\begin{corrige}{TNSI-ALGO-EVAL-A-EX1}
+\textbf{Q1.} L'arbre a $5$ nœuds ($10, 5, 15, 2, 7$) : taille $= 5$. Le plus long chemin racine-feuille est $10 \to 5 \to 2$ (ou $10 \to 5 \to 7$), soit $2$ arêtes : hauteur $= 2$.
+
+\textbf{Q2.}
+\begin{python}
+def est_feuille(arbre):
+    return arbre is not None and arbre.gauche is None and arbre.droite is None
+\end{python}
+\end{corrige}
+
+\begin{corrige}{TNSI-ALGO-EVAL-A-EX2}
+\textbf{Q1.} L'ABR obtenu a pour racine $10$, sous-arbre gauche enraciné en $5$ (avec $3$ à gauche et $7$ à droite), et sous-arbre droit enraciné en $15$ (avec $12$ à gauche).
+
+\textbf{Q2.}
+\begin{python}
+def minimum(arbre):
+    while arbre.gauche is not None:
+        arbre = arbre.gauche
+    return arbre.valeur
+\end{python}
+Dans un ABR, chaque descente à gauche mène vers des valeurs plus petites ; la plus petite valeur est donc atteinte lorsqu'il n'y a plus de sous-arbre gauche.
+\end{corrige}

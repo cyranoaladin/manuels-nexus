@@ -20,7 +20,8 @@ subprocess.run(["touch", "projet/main.py"])
 subprocess.run(["touch", "projet/readme.md"])
 
 resultat = subprocess.run(["ls", "projet"], capture_output=True, text=True)
-print(resultat.stdout)  # main.py \n readme.md
+print(resultat.stdout)  # main.py 
+ readme.md
 
 subprocess.run(["rm", "projet/readme.md"])
 resultat2 = subprocess.run(["ls", "projet"], capture_output=True, text=True)

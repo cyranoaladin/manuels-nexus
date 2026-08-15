@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-REMED-15", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "remediation", "capacites_codes": ["C15"], "status": "approved", "capacites": ["TSPE-GEOMETRIE-ESPACE-C15"], "statut": "complete"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C7 : produit scalaire dans l'espace
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-GEOESPACE-RE-C7-EX1}{1}{8}
+Soit $\vec{u}\begin{pmatrix}2\\-1\\3\end{pmatrix}$ et $\vec{v}\begin{pmatrix}1\\4\\2\end{pmatrix}$. Calculer $\vec{u}\cdot\vec{v}$. Les vecteurs sont-ils orthogonaux ?
+\end{exercice}
+
+% BEGIN-VERIFY
+% u = (2,-1,3); v = (1,4,2)
+% dot = sum(a*b for a,b in zip(u,v))
+% assert dot == 4
+% END-VERIFY
+
+\begin{corrige}{TSPE-GEOESPACE-RE-C7-EX1}
+$\vec{u}\cdot\vec{v} = 2\times1+(-1)\times4+3\times2 = 2-4+6 = 4 
+eq 0$ : les vecteurs ne sont pas orthogonaux.
+\end{corrige}

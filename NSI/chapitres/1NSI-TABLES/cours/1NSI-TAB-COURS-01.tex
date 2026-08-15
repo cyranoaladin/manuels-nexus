@@ -1,0 +1,115 @@
+% META: {"id": "1NSI-TAB-COURS-01", "chapitre": "1NSI-TABLES", "type_objet": "cours", "capacites": ["1NSI-TABLES-C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C1"]}
+\section{Importer une table}
+
+\margeAppui{Une \emph{table} est une liste de p-uplets nommés (dictionnaires) qui
+partagent les mêmes descripteurs (les mêmes clés) : chaque ligne représente un
+enregistrement, chaque colonne un descripteur commun à toutes les lignes.}
+
+\definition[D1]{
+  Une \textbf{table} est une liste de dictionnaires ayant tous les mêmes clés. Chaque
+  dictionnaire de la liste représente une \textbf{ligne} de la table ; chaque clé
+  représente une \textbf{colonne}.
+}
+
+\exemple{Les adhérents d'un club sportif, sous forme de table :}
+
+\begin{python}
+adherents = [
+    {"nom": "Ali", "age": 16, "categorie": "junior", "cotisation": 80},
+    {"nom": "Sami", "age": 15, "categorie": "junior", "cotisation": 80},
+    {"nom": "Nour", "age": 17, "categorie": "junior", "cotisation": 80},
+    {"nom": "Yasmine", "age": 22, "categorie": "senior", "cotisation": 120},
+    {"nom": "Karim", "age": 19, "categorie": "senior", "cotisation": 120},
+]
+\end{python}
+
+% BEGIN-VERIFY
+% adherents = [
+%     {"nom": "Ali", "age": 16, "categorie": "junior", "cotisation": 80},
+%     {"nom": "Sami", "age": 15, "categorie": "junior", "cotisation": 80},
+% ]
+% assert adherents[0]["nom"] == "Ali"
+% assert set(adherents[0].keys()) == set(adherents[1].keys())
+% END-VERIFY
+
+\definition[D2]{
+  Le format \textbf{CSV} (\emph{comma-separated values}) représente une table dans un
+  fichier texte : la première ligne contient les noms des colonnes (l'en-tête), chaque
+  ligne suivante contient les valeurs séparées par une virgule (ou un autre séparateur, par
+  exemple une tabulation pour un fichier « texte tabulé »).
+}
+
+\exemple{Le fichier \lstinline{adherents.csv} correspondant à la table ci-dessus :}
+
+\begin{console}
+nom,age,categorie,cotisation
+Ali,16,junior,80
+Sami,15,junior,80
+Nour,17,junior,80
+Yasmine,22,senior,120
+Karim,19,senior,120
+\end{console}
+
+\begin{codereference}{Importer un fichier CSV en table}
+\begin{python}
+import csv
+
+def importer_csv(nom_fichier):
+    """Importe un fichier CSV et renvoie une table (liste de dictionnaires).
+
+    Precondition : le fichier existe, la premiere ligne contient l'en-tete.
+    """
+    with open(nom_fichier, encoding="utf-8") as f:
+        lecteur = csv.DictReader(f)
+        return list(lecteur)
+
+table = importer_csv("adherents.csv")
+print(table[0])  # {'nom': 'Ali', 'age': '16', 'categorie': 'junior', 'cotisation': '80'}
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% import csv
+% import io
+% texte_csv = "nom,age,categorie,cotisation
+Ali,16,junior,80
+Sami,15,junior,80"
+% lecteur = csv.DictReader(io.StringIO(texte_csv))
+% table = list(lecteur)
+% assert table[0] == {"nom": "Ali", "age": "16", "categorie": "junior", "cotisation": "80"}
+% assert len(table) == 2
+% END-VERIFY
+
+\erreurFrequente{Oublier que les valeurs importées d'un CSV sont \textbf{toujours des
+chaînes de caractères} (\lstinline{str}), même si elles « ressemblent » à des nombres.
+\lstinline{table[0]["age"]} vaut la chaîne \lstinline{"16"}, pas l'entier \lstinline{16} :
+il faut convertir explicitement avec \lstinline{int(...)} ou \lstinline{float(...)} avant
+de faire des calculs ou des comparaisons numériques.}
+
+\begin{codereference}{Convertir les types après import}
+\begin{python}
+def convertir_types(table):
+    """Convertit les colonnes numeriques age et cotisation en entiers."""
+    for ligne in table:
+        ligne["age"] = int(ligne["age"])
+        ligne["cotisation"] = int(ligne["cotisation"])
+    return table
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def convertir_types(table):
+%     for ligne in table:
+%         ligne["age"] = int(ligne["age"])
+%         ligne["cotisation"] = int(ligne["cotisation"])
+%     return table
+% table = [{"nom": "Ali", "age": "16", "categorie": "junior", "cotisation": "80"}]
+% table = convertir_types(table)
+% assert table[0]["age"] == 16
+% assert isinstance(table[0]["age"], int)
+% END-VERIFY
+
+\alamachine{Crée un fichier \lstinline{adherents.csv} avec le contenu de l'exemple
+ci-dessus, importe-le avec \lstinline{importer_csv}, puis convertis les colonnes
+\lstinline{age} et \lstinline{cotisation} en entiers avec \lstinline{convertir_types}.
+Vérifie avec \lstinline{type(table[0]["age"])} que la conversion a bien eu lieu.}

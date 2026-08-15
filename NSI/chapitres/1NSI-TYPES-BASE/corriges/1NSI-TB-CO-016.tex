@@ -1,0 +1,31 @@
+% META: {"id": "1NSI-TB-CO-016", "chapitre": "1NSI-TYPES-BASE", "type_objet": "correction", "exercice_ref": "1NSI-TB-EX-004", "capacites": ["1NSI-TYPES-BASE-C3"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C3"], "parcours": 2, "fichier_exercice": "chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-016.tex"}
+% BEGIN-VERIFY
+% def expr(a, b, c):
+%     return (a or b) and (not c)
+% resultats = {(a, b, c): expr(a, b, c)
+%              for a in (True, False) for b in (True, False) for c in (True, False)}
+% assert sum(1 for v in resultats.values() if v) == 3
+% END-VERIFY
+\begin{corrige}{1NSI-TB-EX-004}
+\textbf{1.}
+\begin{center}
+\begin{tabular}{ccc|c}
+  $a$ & $b$ & $c$ & $(a\ \text{or}\ b)\ \text{and}\ (\text{not}\ c)$ \\\hline
+  V & V & V & F \\
+  V & V & F & V \\
+  V & F & V & F \\
+  V & F & F & V \\
+  F & V & V & F \\
+  F & V & F & V \\
+  F & F & V & F \\
+  F & F & F & F \\
+\end{tabular}
+\end{center}
+
+\textbf{2.} L'alarme se déclenche pour $3$ combinaisons sur $8$ (celles où $c=\text{Faux}$
+et $(a\ \text{or}\ b)=\text{Vrai}$).
+
+\textbf{3.} Non : dès que $c=\text{Vrai}$ (mode maintenance), $\text{not}\ c=\text{Faux}$,
+donc $(a\ \text{or}\ b)\ \text{and}\ \text{Faux}=\text{Faux}$ quelles que soient les valeurs
+de $a$ et $b$ : l'alarme ne peut jamais se déclencher en mode maintenance.
+\end{corrige}

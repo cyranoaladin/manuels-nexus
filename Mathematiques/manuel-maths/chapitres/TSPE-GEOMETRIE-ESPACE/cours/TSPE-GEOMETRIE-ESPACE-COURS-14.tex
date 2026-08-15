@@ -1,0 +1,69 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-COURS-14", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "cours", "capacites_codes": ["C14"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TSPE-GEOMETRIE-ESPACE-C14"], "statut": "structure"}
+
+\section{Projection orthogonale et distances}
+
+% ============================================================
+% STRATE 1 — Demonstration exigible et methode de calcul
+% ============================================================
+
+\definition[1]{
+Le \textbf{projete orthogonal} d'un point $M$ sur un plan $\mathcal{P}$ est le point $H$, intersection de $\mathcal{P}$ avec la droite passant par $M$ et de vecteur directeur un vecteur normal a $\mathcal{P}$.
+}
+
+\theoreme{
+Le projete orthogonal $H$ de $M$ sur $\mathcal{P}$ est le point de $\mathcal{P}$ le plus proche de $M$ : pour tout point $N \in \mathcal{P}$, $N 
+eq H$, on a $MH < MN$.
+}
+
+\demonstration{
+Soit $N \in \mathcal{P}$, $N 
+eq H$. Comme $H,N \in \mathcal{P}$, le vecteur $\vec{HN}$ est un vecteur du plan $\mathcal{P}$.
+
+Par construction, $(MH)$ est orthogonale a $\mathcal{P}$, donc $\vec{MH}$ est orthogonal a tout vecteur de $\mathcal{P}$, en particulier a $\vec{HN}$ : $\vec{MH}\cdot\vec{HN}=0$.
+
+Par la relation de Chasles, $\vec{MN} = \vec{MH}+\vec{HN}$, donc dans le triangle $MHN$ (rectangle en $H$ d'apres ce qui precede), le theoreme de Pythagore donne :
+\[
+  MN^2 = MH^2+HN^2.
+\]
+
+Comme $N 
+eq H$, $HN>0$, donc $HN^2>0$, d'ou $MN^2 = MH^2+HN^2 > MH^2$, soit $MN>MH$ (les deux membres sont positifs).
+
+Ainsi $H$ est strictement plus proche de $M$ que tout autre point de $\mathcal{P}$.
+}
+
+\margeAppui{
+Cette demonstration repose sur le theoreme de Pythagore applique au triangle rectangle $MHN$, consequence directe de l'orthogonalite de $(MH)$ et de $\mathcal{P}$.
+}
+
+\propriete[Distance d'un point à un plan]{
+$d(M,\mathcal{P}) = MH$, ou $H$ est le projete orthogonal de $M$ sur $\mathcal{P}$. Si $\mathcal{P}$ a pour equation $ax+by+cz+d=0$ (repere orthonorme) et $M(x_0,y_0,z_0)$ :
+\[
+  d(M,\mathcal{P}) = \frac{|ax_0+by_0+cz_0+d|}{\sqrt{a^2+b^2+c^2}}.
+\]
+}
+
+\exemple{
+Calculer les coordonnees du projete orthogonal de $M(1,2,3)$ sur le plan $\mathcal{P}: x+y+z-3=0$.
+
+Vecteur normal $\vec{n}\begin{pmatrix}1\\1\\1\end{pmatrix}$. La droite $(MH)$ a pour representation parametrique $\begin{cases}x=1+t\\y=2+t\\z=3+t\end{cases}$.
+
+$H \in \mathcal{P}$ : $(1+t)+(2+t)+(3+t)-3=0 \iff 3t+3=0 \iff t=-1$.
+
+Donc $H(1-1,\,2-1,\,3-1) = H(0,1,2)$.
+
+% BEGIN-VERIFY
+% t = -1
+% H = (1+t, 2+t, 3+t)
+% assert H == (0, 1, 2)
+% assert H[0]+H[1]+H[2]-3 == 0
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier de verifier que $H$ appartient bien au plan.} Apres avoir determine $t$ et calcule les coordonnees de $H$, il est recommande de verifier que $H$ verifie l'equation du plan (controle de coherence).
+}

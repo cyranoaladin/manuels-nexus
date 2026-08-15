@@ -11,7 +11,8 @@ Dans le plan muni d'un repère $(O ; \vec{i}, \vec{j})$, une \textbf{équation c
 \[
   ax + by + c = 0
 \]
-où $a$, $b$, $c$ sont des réels avec $(a, b) \neq (0, 0)$.
+où $a$, $b$, $c$ sont des réels avec $(a, b) 
+eq (0, 0)$.
 
 Un point $M(x ; y)$ appartient à $\mathcal{D}$ si et seulement si ses coordonnées vérifient cette équation.
 }
@@ -20,7 +21,9 @@ Un point $M(x ; y)$ appartient à $\mathcal{D}$ si et seulement si ses coordonn�
 La droite $\mathcal{D}$ d'équation $2x - 3y + 6 = 0$.
 \begin{itemize}
   \item Le point $A(0 ; 2)$ : $2 \times 0 - 3 \times 2 + 6 = 0$. Donc $A \in \mathcal{D}$.
-  \item Le point $B(3 ; 0)$ : $2 \times 3 - 3 \times 0 + 6 = 12 \neq 0$. Donc $B \notin \mathcal{D}$.
+  \item Le point $B(3 ; 0)$ : $2 \times 3 - 3 \times 0 + 6 = 12 
+eq 0$. Donc $B 
+otin \mathcal{D}$.
   \item Le point $C(3 ; 4)$ : $2 \times 3 - 3 \times 4 + 6 = -6 + 6 = 0 $. Donc $C \in \mathcal{D}$.
 \end{itemize}
 }
@@ -28,7 +31,8 @@ La droite $\mathcal{D}$ d'équation $2x - 3y + 6 = 0$.
 \propriete[1]{
 Toute droite du plan admet une équation cartésienne $ax + by + c = 0$.
 \begin{itemize}
-  \item Si $b \neq 0$, on peut écrire $y = -\dfrac{a}{b}x - \dfrac{c}{b}$, soit $y = mx + p$ (équation réduite). La droite n'est pas verticale, de coefficient directeur $m = -\dfrac{a}{b}$ et d'ordonnée à l'origine $p = -\dfrac{c}{b}$.
+  \item Si $b 
+eq 0$, on peut écrire $y = -\dfrac{a}{b}x - \dfrac{c}{b}$, soit $y = mx + p$ (équation réduite). La droite n'est pas verticale, de coefficient directeur $m = -\dfrac{a}{b}$ et d'ordonnée à l'origine $p = -\dfrac{c}{b}$.
   \item Si $b = 0$, l'équation devient $ax + c = 0$, soit $x = -\dfrac{c}{a}$ : la droite est verticale.
 \end{itemize}
 }
@@ -44,7 +48,8 @@ L'équation $0x + 0y + 3 = 0$ (soit $3 = 0$) ne définit aucune droite : $(a, b)
 }
 
 \propriete[2]{
-Pour déterminer une équation cartésienne de la droite passant par $A(x_A ; y_A)$ et $B(x_B ; y_B)$ avec $A \neq B$ :
+Pour déterminer une équation cartésienne de la droite passant par $A(x_A ; y_A)$ et $B(x_B ; y_B)$ avec $A 
+eq B$ :
 \begin{enumerate}
   \item Si $x_A = x_B$, la droite est verticale : $x = x_A$.
   \item Sinon, calculer le coefficient directeur $m = \dfrac{y_B - y_A}{x_B - x_A}$, puis $p = y_A - m x_A$. L'équation cartésienne est $mx - y + p = 0$.
@@ -85,5 +90,6 @@ La droite passant par $A(3 ; 1)$ et $B(3 ; 7)$ a pour équation $x = 3$ (et non 
 % ============================================================
 
 \approfondissement{
-L'équation cartésienne $ax + by + c = 0$ n'est pas unique : toute équation $\lambda a x + \lambda b y + \lambda c = 0$ avec $\lambda \neq 0$ définit la même droite. On peut toujours normaliser en imposant par exemple $a^2 + b^2 = 1$ (vecteur normal unitaire).
+L'équation cartésienne $ax + by + c = 0$ n'est pas unique : toute équation $\lambda a x + \lambda b y + \lambda c = 0$ avec $\lambda 
+eq 0$ définit la même droite. On peut toujours normaliser en imposant par exemple $a^2 + b^2 = 1$ (vecteur normal unitaire).
 }

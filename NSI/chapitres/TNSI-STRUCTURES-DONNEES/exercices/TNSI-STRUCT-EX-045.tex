@@ -1,0 +1,33 @@
+% META: {"id": "TNSI-STRUCT-EX-045", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "exercice", "capacites": ["TNSI-STRUCTURES-DONNEES-C13"], "capacites_codes": ["C13"], "methodes": ["M1"], "parcours": 1, "competences": ["programmer", "analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-045.tex", "corrige_tex": "chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-045.tex", "status": "approved"}
+% BEGIN-VERIFY
+% class Pile:
+%     def __init__(self):
+%         self._d = []
+%     def empiler(self, v):
+%         self._d.append(v)
+%     def depiler(self):
+%         return self._d.pop()
+%     def est_vide(self):
+%         return len(self._d) == 0
+% def est_equilibre(expr):
+%     p = Pile()
+%     paires = {')': '(', ']': '[', '}': '{'}
+%     for c in expr:
+%         if c in '([{':
+%             p.empiler(c)
+%         elif c in ')]}':
+%             if p.est_vide() or p.depiler() != paires[c]:
+%                 return False
+%     return p.est_vide()
+% assert est_equilibre('([{}])') == True
+% assert est_equilibre('([)]') == False
+% assert est_equilibre('((') == False
+% END-VERIFY
+\begin{exercice}{TNSI-STRUCT-EX-001}{2}{20}
+On veut verifier si une expression comportant des parentheses \lstinline{()}, crochets \lstinline{[]} et accolades \lstinline|{}| est \textbf{bien parenthesee} (chaque symbole ouvrant a un symbole fermant correspondant, dans le bon ordre).
+\begin{enumerate}
+  \item Expliquer pourquoi une \textbf{pile} est une structure adaptee a ce probleme (justifier par les operations dominantes).
+  \item Ecrire une fonction \lstinline{est_equilibre(expr)} qui utilise une pile (interface \lstinline{empiler}, \lstinline{depiler}, \lstinline{est_vide}) pour resoudre ce probleme.
+  \item Tester votre fonction sur \lstinline|"([{}])"| (bien parenthesee) et \lstinline{"([)]"} (mal parenthesee).
+\end{enumerate}
+\end{exercice}

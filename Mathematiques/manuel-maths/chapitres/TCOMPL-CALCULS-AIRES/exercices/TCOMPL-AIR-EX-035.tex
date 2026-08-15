@@ -1,0 +1,20 @@
+% META: {"id": "TCOMPL-AIR-EX-035", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "exercice", "capacites": ["TCOMPL-AIR-C5"], "capacites_codes": ["C5"], "methodes": ["M4"], "parcours": 2, "competences": ["communiquer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-035.tex", "corrige_tex": "chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-035.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**4 - 2*x**2
+% fpp = diff(f, x, 2)
+% assert expand(fpp) == 12*x**2 - 4
+% # convexe ou f''>0: |x| > sqrt(3)/3, concave sinon
+% assert fpp.subs(x, 1) == 8  # convexe
+% assert fpp.subs(x, 0) == -4  # concave
+% assert solve(fpp, x) == [-sqrt(3)/3, sqrt(3)/3]
+% END-VERIFY
+\begin{exercice}{TCOMPL-AIR-EX-035}{1}{10}
+La courbe representative de $f(x) = x^4 - 2x^2$ est donnee ci-dessous.
+\begin{enumerate}
+  \item Sur quels intervalles la courbe est-elle convexe ? concave ?
+  \item Identifier les points d'inflexion.
+\end{enumerate}
+
+\end{exercice}

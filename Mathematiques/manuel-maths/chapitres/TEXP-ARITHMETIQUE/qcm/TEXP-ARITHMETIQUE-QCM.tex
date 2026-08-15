@@ -1,81 +1,110 @@
-% META: {"id": "TEXP-ARITHMETIQUE-QCM", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "qcm", "capacites_codes": ["C1","C2","C4","C5","C6","C7","C8"], "status": "generated"}
+% META: {"id": "TEXP-ARITHMETIQUE-QCM", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "qcm", "genere_depuis": "chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Arithmétique}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Arithmetique}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1 --- PGCD}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} L'algorithme d'Euclide calcule le PGCD de $a$ et $b$ en utilisant :
+\item[] \textbf{Capacite C1}
+
+\item \textbf{[Q1]} Soient a et b entiers. Si a divise b et b divise c alors :
   \begin{enumerate}[label=\Alph*.]
-    \item des divisions euclidiennes successives.
-    \item la décomposition en facteurs premiers uniquement.
-    \item une recherche exhaustive de tous les diviseurs.
-    \item aucune opération arithmétique.
+    \item a divise b+c uniquement
+    \item a divise c
+    \item c divise a
+    \item a = c
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C5/C6 --- Bézout, Gauss}
-
-\item \textbf{[Q2]} Le théorème de Bézout affirme que le PGCD de $a$ et $b$ s'écrit :
+\item \textbf{[Q2]} La division euclidienne de 25 par 7 donne pour reste :
   \begin{enumerate}[label=\Alph*.]
-    \item $a+b$.
-    \item $ax+by$ pour des entiers $x,y$.
-    \item $a\times b$.
-    \item toujours $1$.
+    \item 1
+    \item 2
+    \item 4
+    \item 3
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C2}
 
-\item \textbf{[Q3]} Le théorème de Gauss dit que si $a$ divise $bc$ et $a$ est premier avec $b$, alors :
+\item \textbf{[Q3]} Le PGCD de 48 et 18 est :
   \begin{enumerate}[label=\Alph*.]
-    \item $a$ divise $b$.
-    \item $a$ divise $c$.
-    \item $a$ est premier avec $c$.
-    \item $a=1$.
+    \item 6
+    \item 12
+    \item 3
+    \item 2
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C4 --- Équations diophantiennes}
-
-\item \textbf{[Q4]} L'équation $ax+by=c$ admet des solutions entières si et seulement si :
+\item \textbf{[Q4]} Le theoreme de Bezout affirme que PGCD(a,b)=1 si et seulement si :
   \begin{enumerate}[label=\Alph*.]
-    \item $c=0$.
-    \item $\mathrm{PGCD}(a,b)$ divise $c$.
-    \item $a$ et $b$ sont premiers.
-    \item $c$ divise $a$ et $b$.
+    \item $a+b=1$
+    \item $a b = 1$
+    \item $\exists u,v \in \mathbb{Z}, au-bv=0$
+    \item $\exists u,v \in \mathbb{Z}, au+bv=1$
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C3}
 
-\subsection*{C7 --- Nombres premiers}
-
-\item \textbf{[Q5]} L'ensemble des nombres premiers est :
+\item \textbf{[Q5]} Si $a \equiv b \pmod{n}$, alors :
   \begin{enumerate}[label=\Alph*.]
-    \item fini.
-    \item infini.
-    \item réduit à un seul élément.
-    \item vide.
-  \end{enumerate}
-
-\bigskip
-
-\subsection*{C8 --- Petit théorème de Fermat}
-
-\item \textbf{[Q6]} Le petit théorème de Fermat s'applique :
-  \begin{enumerate}[label=\Alph*.]
-    \item à tout entier $p$.
-    \item uniquement si $p$ est premier.
-    \item uniquement si $p$ est pair.
-    \item uniquement si $a=1$.
+    \item $n$ divise $a-b$
+    \item $a$ divise $b-n$
+    \item $a-b = n$
+    \item $a+b$ est multiple de $n$
   \end{enumerate}
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C1 & \textbf{B} \\
+Q2 & C1 & \textbf{C} \\
+Q3 & C2 & \textbf{A} \\
+Q4 & C2 & \textbf{D} \\
+Q5 & C3 & \textbf{A} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{A} — Propriete trop restreinte. \emph{Renvoi : C1.}
+    \item \textbf{C} — Sens de divisibilite inverse. \emph{Renvoi : C1.}
+    \item \textbf{D} — Egalite non necessaire. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Quotient faux. \emph{Renvoi : C1.}
+    \item \textbf{B} — Erreur de calcul. \emph{Renvoi : C1.}
+    \item \textbf{D} — Reste incorrect. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{B} — 12 ne divise pas 18. \emph{Renvoi : C2.}
+    \item \textbf{C} — 3 n'est pas le PLUS GRAND diviseur. \emph{Renvoi : C2.}
+    \item \textbf{D} — 2 n'est pas le plus grand diviseur. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — Equation trop simple. \emph{Renvoi : C2.}
+    \item \textbf{B} — Produit egal a 1. \emph{Renvoi : C2.}
+    \item \textbf{C} — Equation homogene. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{B} — Sens du diviseur inverse. \emph{Renvoi : C3.}
+    \item \textbf{C} — Egalite non necessaire. \emph{Renvoi : C3.}
+    \item \textbf{D} — Somme au lieu de difference. \emph{Renvoi : C3.}
+  \end{itemize}
+\end{itemize}

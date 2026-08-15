@@ -1,22 +1,34 @@
 chapitre: TSPE-TRIGONOMETRIE
 niveau: TSPE
 theme: TRIGONOMETRIE
-titre: "Fonctions sinus et cosinus"
-statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
-
+titre: Fonctions sinus et cosinus
+statut: approved
 capacites:
-  - { code: C1, ref_capacite: TSPE-TRIGO-C1, libelle_eleve: "Je sais résoudre des équations et inéquations trigonométriques du type cos(x) = a ou cos(x) ≤ a sur [-π,π]." }
-  - { code: C2, ref_capacite: TSPE-TRIGO-C2, libelle_eleve: "Je sais étudier une fonction construite à partir de fonctions trigonométriques (variations, optimum) dans un contexte de résolution de problème." }
-
+- code: C1
+  ref_capacite: TSPE-TRIGO-C1
+  libelle_eleve: Je sais résoudre des équations et inéquations trigonométriques du
+    type cos(x) = a ou cos(x) ≤ a sur [-π,π].
+- code: C2
+  ref_capacite: TSPE-TRIGO-C2
+  libelle_eleve: Je sais étudier une fonction construite à partir de fonctions trigonométriques
+    (variations, optimum) dans un contexte de résolution de problème.
 prerequis:
-  - { code: R1, libelle: "Cercle trigonométrique, cosinus et sinus d'un réel", chapitre_origine: "1SPE-TRIGONOMETRIE" }
-  - { code: R2, libelle: "Dérivation : dérivées de fonctions composées, tableaux de variations", chapitre_origine: "1SPE-DERIVATION-GLOBAL" }
-  - { code: R3, libelle: "Compléments sur la dérivation, convexité", chapitre_origine: "TSPE-DERIVATION-CONVEXITE" }
+- code: R1
+  libelle: Cercle trigonométrique, cosinus et sinus d'un réel
+  chapitre_origine: 1SPE-TRIGONOMETRIE
+- code: R2
+  libelle: 'Dérivation : dérivées de fonctions composées, tableaux de variations'
+  chapitre_origine: 1SPE-DERIVATION-GLOBAL
+- code: R3
+  libelle: Compléments sur la dérivation, convexité
+  chapitre_origine: TSPE-DERIVATION-CONVEXITE
+situation_accroche: 'Un architecte concoit une verriere en forme de triangle isocele
+  inscrit dans un arc de cercle. Quel angle au sommet donne l''aire maximale de vitrage
+  pour un rayon donne ? L''etude des fonctions trigonometriques permet de resoudre
+  ce type de probleme d''optimisation geometrique.
 
-situation_accroche: >
-  Un architecte concoit une verriere en forme de triangle isocele inscrit dans un arc de
-  cercle. Quel angle au sommet donne l'aire maximale de vitrage pour un rayon donne ?
-  L'etude des fonctions trigonometriques permet de resoudre ce type de probleme
-  d'optimisation geometrique.
-
-temps_estime_h: { parcours1: 8, parcours2: 7, parcours3: 6 }
+  '
+temps_estime_h:
+  parcours1: 8
+  parcours2: 7
+  parcours3: 6

@@ -1,0 +1,158 @@
+% META: {"id": "1NSI-TAB-COURS-04", "chapitre": "1NSI-TABLES", "type_objet": "cours", "capacites": ["1NSI-TABLES-C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C4"]}
+\section{Fusionner deux tables}
+
+\definition[D4]{
+  Le \textbf{domaine de valeurs} d'une colonne est l'ensemble des valeurs qu'elle peut
+  prendre. Pour \textbf{fusionner} deux tables, on les combine en s'appuyant sur une
+  colonne commune (une \textbf{clé}) dont le domaine de valeurs permet de faire
+  correspondre les lignes de l'une avec celles de l'autre.
+}
+
+\exemple{On dispose d'une seconde table, les présences aux entraînements, partageant la
+colonne \lstinline{nom} avec la table \lstinline{adherents}. Les deux tables sont
+présentées dans le programme ci-dessous.}
+
+\propriete[Fusion par clé commune]{
+  Fusionner deux tables \lstinline{table1} et \lstinline{table2} suivant une colonne
+  \lstinline{cle} consiste à construire une nouvelle table où chaque ligne combine les
+  colonnes des deux tables, pour les valeurs de \lstinline{cle} présentes \textbf{dans les
+  deux}. Une valeur de \lstinline{cle} présente dans une seule des deux tables n'apparaît
+  pas dans le résultat (elle est hors du domaine de valeurs commun).
+
+  \textbf{Précondition : les colonnes hors clé des deux tables doivent être disjointes.}
+  Sinon, une colonne de la seconde table écraserait silencieusement la colonne de même nom
+  dans la première table.
+}
+
+\begin{codereference}{Fusionner deux tables par une colonne commune}
+% PYTHON-SOURCE: code/fusionner.py
+\begin{python}
+def fusionner(table1, table2, cle):
+    """Fusionne table1 et table2 sur les valeurs communes de `cle`.
+
+    Preconditions : `cle` est presente dans les deux tables et les autres
+    colonnes sont disjointes.
+    """
+    colonnes1 = {nom for ligne in table1 for nom in ligne if nom != cle}
+    colonnes2 = {nom for ligne in table2 for nom in ligne if nom != cle}
+    if not colonnes1.isdisjoint(colonnes2):
+        raise ValueError("les colonnes hors cle doivent etre disjointes")
+    index2 = {ligne[cle]: ligne for ligne in table2}
+    fusion = []
+    for ligne1 in table1:
+        if ligne1[cle] in index2:
+            complement = {
+                k: v for k, v in index2[ligne1[cle]].items() if k != cle
+            }
+            fusion.append({**ligne1, **complement})
+    return fusion
+
+
+adherents = [
+    {"nom": "Ali", "age": 16},
+    {"nom": "Sami", "age": 15},
+    {"nom": "Yasmine", "age": 22},
+]
+presences = [
+    {"nom": "Ali", "seances": 12},
+    {"nom": "Sami", "seances": 9},
+    {"nom": "Yasmine", "seances": 15},
+]
+resultat = fusionner(adherents, presences, "nom")
+print(resultat)
+\end{python}
+
+\begin{console}
+[{'nom': 'Ali', 'age': 16, 'seances': 12}, {'nom': 'Sami', 'age': 15, 'seances': 9}, {'nom': 'Yasmine', 'age': 22, 'seances': 15}]
+\end{console}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def fusionner(table1, table2, cle):
+%     """Fusionne table1 et table2 sur les valeurs communes de `cle`.
+%
+%     Preconditions : `cle` est presente dans les deux tables et les autres
+%     colonnes sont disjointes.
+%     """
+%     colonnes1 = {nom for ligne in table1 for nom in ligne if nom != cle}
+%     colonnes2 = {nom for ligne in table2 for nom in ligne if nom != cle}
+%     if not colonnes1.isdisjoint(colonnes2):
+%         raise ValueError("les colonnes hors cle doivent etre disjointes")
+%     index2 = {ligne[cle]: ligne for ligne in table2}
+%     fusion = []
+%     for ligne1 in table1:
+%         if ligne1[cle] in index2:
+%             complement = {
+%                 k: v for k, v in index2[ligne1[cle]].items() if k != cle
+%             }
+%             fusion.append({**ligne1, **complement})
+%     return fusion
+%
+%
+% adherents = [
+%     {"nom": "Ali", "age": 16},
+%     {"nom": "Sami", "age": 15},
+%     {"nom": "Yasmine", "age": 22},
+% ]
+% presences = [
+%     {"nom": "Ali", "seances": 12},
+%     {"nom": "Sami", "seances": 9},
+%     {"nom": "Yasmine", "seances": 15},
+% ]
+% resultat = fusionner(adherents, presences, "nom")
+% print(resultat)
+% assert resultat == [
+%     {"nom": "Ali", "age": 16, "seances": 12},
+%     {"nom": "Sami", "age": 15, "seances": 9},
+%     {"nom": "Yasmine", "age": 22, "seances": 15},
+% ]
+% table_collision1 = [{"nom": "Ali"}, {"nom": "Sami", "age": 15}]
+% table_collision2 = [
+%     {"nom": "Ali", "seances": 12},
+%     {"nom": "Sami", "age": 16},
+% ]
+% try:
+%     fusionner(table_collision1, table_collision2, "nom")
+% except ValueError as erreur:
+%     assert str(erreur) == "les colonnes hors cle doivent etre disjointes"
+% else:
+%     raise AssertionError
+% END-VERIFY
+
+\exemple{Si \lstinline{presences} ne contient pas d'entrée pour \lstinline{"Karim"} et
+\lstinline{"Nour"} (absents du domaine de valeurs commun), ces adhérents
+\textbf{n'apparaissent pas} dans la table fusionnée, même s'ils sont présents dans
+\lstinline{adherents} :}
+
+% BEGIN-VERIFY
+% def fusionner(table1, table2, cle):
+%     colonnes1 = {nom for ligne in table1 for nom in ligne if nom != cle}
+%     colonnes2 = {nom for ligne in table2 for nom in ligne if nom != cle}
+%     if not colonnes1.isdisjoint(colonnes2):
+%         raise ValueError("les colonnes hors cle doivent etre disjointes")
+%     index2 = {ligne[cle]: ligne for ligne in table2}
+%     fusion = []
+%     for ligne1 in table1:
+%         if ligne1[cle] in index2:
+%             complement = {
+%                 k: v for k, v in index2[ligne1[cle]].items() if k != cle
+%             }
+%             fusion.append({**ligne1, **complement})
+%     return fusion
+% adherents = [{"nom": "Ali", "age": 16}, {"nom": "Karim", "age": 19}]
+% presences = [{"nom": "Ali", "seances": 12}]
+% resultat = fusionner(adherents, presences, "nom")
+% assert len(resultat) == 1
+% assert resultat[0]["nom"] == "Ali"
+% assert "Karim" not in [l["nom"] for l in resultat]
+% END-VERIFY
+
+\erreurFrequente{Croire que la fusion garde \textbf{toutes} les lignes des deux tables. Par
+défaut, seules les lignes dont la clé est présente \textbf{dans les deux} tables sont
+conservées (fusion sur le domaine de valeurs \textbf{commun}) : c'est le comportement
+attendu par le programme officiel, qui met l'accent sur cette notion de domaine de valeurs.}
+
+\alamachine{Ajoute une troisième table \lstinline{cotisations_payees} (colonnes
+\lstinline{nom} et \lstinline{montant_paye}) avec seulement 3 des 5 adhérents. Fusionne-la
+avec \lstinline{adherents} via \lstinline{fusionner}, et vérifie que la table résultante ne
+contient que les adhérents présents dans les deux tables.}

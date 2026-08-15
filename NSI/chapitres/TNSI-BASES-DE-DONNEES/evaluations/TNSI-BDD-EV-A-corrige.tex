@@ -1,0 +1,39 @@
+% META: {"id": "TNSI-BDD-EVAL-A-corrige", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "correction", "evaluation_ref": "TNSI-BDD-EVAL-A", "capacites": ["T-BDD-01A", "T-BDD-03B", "T-BDD-03C", "T-BDD-03F"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Produit(id INTEGER PRIMARY KEY, nom TEXT, prix REAL, categorie TEXT)")
+% conn.executemany("INSERT INTO Produit VALUES (?,?,?,?)", [
+%     (1, "Cahier", 1.50, "Papeterie"), (2, "Stylo", 0.80, "Papeterie"), (3, "Casque audio", 25.00, "Electronique"),
+% ])
+% conn.commit()
+% cur = conn.execute("SELECT nom FROM Produit WHERE categorie = 'Papeterie'")
+% assert set(r[0] for r in cur.fetchall()) == {"Cahier", "Stylo"}
+% cur = conn.execute("SELECT nom FROM Produit WHERE prix < 2.00")
+% assert set(r[0] for r in cur.fetchall()) == {"Cahier", "Stylo"}
+% conn.execute("INSERT INTO Produit(nom, categorie, prix) VALUES ('Gomme', 'Papeterie', 0.60)")
+% conn.commit()
+% assert conn.execute("SELECT COUNT(*) FROM Produit").fetchone()[0] == 4
+% END-VERIFY
+\begin{corrige}{TNSI-BDD-EVAL-A-EX1}
+\textbf{Q1.} Une \textbf{relation} est une table regroupant des tuples décrits par les mêmes attributs. Un \textbf{attribut} est une colonne de la relation, définie sur un domaine. Une \textbf{clé primaire} est un attribut (ou groupe d'attributs) dont la valeur identifie de façon unique chaque tuple.
+
+\textbf{Q2.} \texttt{Commande.id\_client} est une clé étrangère vers \texttt{Client.id} : elle permet de savoir quel client a passé chaque commande, sans dupliquer les informations du client dans la table \texttt{Commande}.
+\end{corrige}
+
+\begin{corrige}{TNSI-BDD-EVAL-A-EX2}
+\textbf{Q1.}
+\begin{sql}
+SELECT nom FROM Produit WHERE categorie = 'Papeterie';
+\end{sql}
+
+\textbf{Q2.}
+\begin{sql}
+SELECT nom FROM Produit WHERE prix < 2.00;
+\end{sql}
+
+\textbf{Q3.}
+\begin{sql}
+INSERT INTO Produit(nom, categorie, prix) VALUES ('Gomme', 'Papeterie', 0.60);
+\end{sql}
+\end{corrige}

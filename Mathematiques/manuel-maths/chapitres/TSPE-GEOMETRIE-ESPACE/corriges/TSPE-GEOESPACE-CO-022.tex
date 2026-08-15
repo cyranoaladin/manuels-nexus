@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-GEOESPACE-CO-022", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "correction", "exercice_ref": "TSPE-GEOESPACE-EX-001", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-GEOMETRIE-ESPACE-C7"], "parcours": 2, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-022.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% A=(0,0,0); B=(1,2,2); C=(2,-2,1)
+% AB=tuple(B[i]-A[i] for i in range(3))
+% AC=tuple(C[i]-A[i] for i in range(3))
+% dot = sum(a*b for a,b in zip(AB,AC))
+% assert dot == 0
+% END-VERIFY
+\begin{corrige}{TSPE-GEOESPACE-EX-001}
+
+\textbf{Q1.} $\vec{AB}\begin{pmatrix}1\\2\\2\end{pmatrix}$, $\vec{AC}\begin{pmatrix}2\\-2\\1\end{pmatrix}$.
+
+\textbf{Q2.} $\vec{AB}\cdot\vec{AC} = 1\times2+2\times(-2)+2\times1 = 2-4+2 = 0$.
+
+\textbf{Q3.} Comme $\vec{AB}\cdot\vec{AC}=0$, les vecteurs $\vec{AB}$ et $\vec{AC}$ sont orthogonaux : le triangle $ABC$ est rectangle en $A$.
+
+\end{corrige}

@@ -1,8 +1,10 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage{nsi-preamble}
-\newcommand{\cor}[4]{\subsection*{Exercice #1 (#2)}\begin{itemize}[nosep]\item \textbf{Réponse} : #3\item \textbf{Cas limite} : #4\end{itemize}}
+
+ewcommand{\cor}[4]{\subsection*{Exercice #1 (#2)}\begin{itemize}[nosep]\item \textbf{Réponse} : #3\item \textbf{Cas limite} : #4\end{itemize}}
 \begin{document}
-\nsiheader{Corrigé — Dichotomie, glouton et k-NN}{Première}{P13}{1}{P-ALGO-03, P-ALGO-04, P-ALGO-05}{BO 2019}{needs\_review}
+
+siheader{Corrigé — Dichotomie, glouton et k-NN}{Première}{P13}{1}{P-ALGO-03, P-ALGO-04, P-ALGO-05}{BO 2019}{needs\_review}
 
 \section*{Corrigé du TD}
 \cor{1}{P-ALGO-04}{milieux $18$ puis $37$ $\rightarrow$ indice $4$.}{cible absente.}
@@ -15,7 +17,8 @@
 \cor{8}{P-ALGO-04}{sur \texttt{cible=38} (absente), $V$ décroît $6\rightarrow 3\rightarrow 1\rightarrow 0$ $\rightarrow$ arrêt sans trouver.}{$V$ atteint~$0$, gauche $>$ droite.}
 \cor{9}{P-ALGO-03}{3 plus proches $= A(3,2), B(5,4), A(2,3)$ ; vote $A=2, B=1$ $\rightarrow$ classe $A$.}{$k=2$ avec égalité $\rightarrow$ résultat indéterminé.}
 
-\noindent Détail des distances au nouveau point $(4,3)$ :
+
+oindent Détail des distances au nouveau point $(4,3)$ :
 \begin{center}
 \begin{tabular}{cccc}
 \toprule

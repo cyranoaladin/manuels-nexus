@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-PROBA-CO-029", "chapitre": "TSPE-PROBABILITES", "type_objet": "correction", "exercice_ref": "TSPE-PROBA-EX-002", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-PROBA-C6"], "parcours": 2, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-029.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial
+% expr = binomial(8,3) * Rational(1,2)**3 * Rational(1,2)**5
+% assert expr == binomial(8,3) * Rational(1,2)**8
+% END-VERIFY
+\begin{corrige}{TSPE-PROBA-EX-002}
+
+\textbf{Q1.} Les $8$ lancers sont des repetitions independantes d'une meme epreuve a deux issues (Face/Pile) : c'est un schema de Bernoulli. $X$ suit donc la loi binomiale $\mathcal{B}(8,\,0{,}5)$ (avec $p=0{,}5$ la probabilite d'obtenir Face a un lancer).
+
+\textbf{Q2.} $P(X=3) = \dbinom{8}{3}\times(0{,}5)^3\times(0{,}5)^5$.
+
+\end{corrige}

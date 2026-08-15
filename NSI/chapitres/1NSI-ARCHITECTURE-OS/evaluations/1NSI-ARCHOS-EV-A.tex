@@ -1,0 +1,84 @@
+% META: {"id": "1NSI-ARCHOS-EVAL-A", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "evaluation", "capacites": ["P-ARCH-01A", "P-ARCH-01B", "P-ARCH-03A", "P-ARCH-03C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "approved"}
+\section*{Évaluation A --- Architecture et systèmes d'exploitation}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (von Neumann, instructions) ; Ex. 2 : 10 pts (OS, permissions)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Von Neumann et instructions machine} \hfill (10 points)
+
+\begin{enumerate}
+  \item (3 pts) Nommer les quatre constituants principaux de l'architecture de von Neumann, et préciser lequel stocke à la fois instructions et données.
+  \item (4 pts) On ajoute au simulateur \lstinline{executer} du cours l'instruction \lstinline{("MUL", reg_dest, reg_src)} (multiplication : \lstinline{reg_dest <- reg_dest * reg_src}). Écrire le code de cette instruction.
+  \item (3 pts) Dérouler l'exécution de ce programme et donner l'état final de \lstinline{memoire} :
+\begin{python}
+memoire = [6, 7, 0]
+programme = [
+    ("LOAD", "R0", 0),
+    ("LOAD", "R1", 1),
+    ("MUL", "R0", "R1"),
+    ("STORE", "R0", 2),
+    ("HALT",),
+]
+\end{python}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def executer(programme, memoire):
+%     registres = {}
+%     for instruction in programme:
+%         op = instruction[0]
+%         if op == "LOAD":
+%             _, reg, adresse = instruction
+%             registres[reg] = memoire[adresse]
+%         elif op == "MUL":
+%             _, reg_dest, reg_src = instruction
+%             registres[reg_dest] = registres[reg_dest] * registres[reg_src]
+%         elif op == "STORE":
+%             _, reg, adresse = instruction
+%             memoire[adresse] = registres[reg]
+%         elif op == "HALT":
+%             break
+%     return memoire, registres
+% memoire = [6, 7, 0]
+% programme = [
+%     ("LOAD", "R0", 0),
+%     ("LOAD", "R1", 1),
+%     ("MUL", "R0", "R1"),
+%     ("STORE", "R0", 2),
+%     ("HALT",),
+% ]
+% memoire_finale, registres = executer(programme, memoire)
+% assert memoire_finale == [6, 7, 42]
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Système d'exploitation et permissions} \hfill (10 points)
+
+\begin{enumerate}
+  \item (3 pts) Citer deux fonctions assurées par un système d'exploitation.
+  \item (4 pts) Un fichier a les permissions \lstinline{"rwxr-x---"}. En utilisant \lstinline{droit_accorde} du cours, déterminer si le propriétaire peut l'exécuter, si le groupe peut l'exécuter, et si les autres peuvent le lire.
+  \item (3 pts) Convertir ces permissions en notation octale avec \lstinline{permissions_vers_octal}.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def droit_accorde(permissions, categorie, action):
+%     index = {"proprietaire": 0, "groupe": 3, "autres": 6}
+%     decalage = {"lecture": 0, "ecriture": 1, "execution": 2}
+%     position = index[categorie] + decalage[action]
+%     return permissions[position] != "-"
+% def permissions_vers_octal(permissions):
+%     groupes = [permissions[0:3], permissions[3:6], permissions[6:9]]
+%     valeurs = []
+%     for g in groupes:
+%         v = (4 if g[0] == "r" else 0) + (2 if g[1] == "w" else 0) + (1 if g[2] == "x" else 0)
+%         valeurs.append(v)
+%     return "".join(str(v) for v in valeurs)
+% perm = "rwxr-x---"
+% assert droit_accorde(perm, "proprietaire", "execution") is True
+% assert droit_accorde(perm, "groupe", "execution") is True
+% assert droit_accorde(perm, "autres", "lecture") is False
+% assert permissions_vers_octal(perm) == "750"
+% END-VERIFY

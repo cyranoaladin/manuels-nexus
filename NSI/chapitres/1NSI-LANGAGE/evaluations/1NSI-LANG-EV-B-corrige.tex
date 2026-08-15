@@ -1,0 +1,57 @@
+% META: {"id": "1NSI-LANG-EVAL-B-corrige", "chapitre": "1NSI-LANGAGE", "type_objet": "correction", "evaluation_ref": "1NSI-LANG-EVAL-B", "capacites": ["P-LANG-01", "P-LANG-03B", "P-LANG-04", "P-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% def moyenne_ponderee(valeurs, poids):
+%     assert len(valeurs) == len(poids)
+%     assert sum(poids) > 0
+%     total = 0
+%     for i in range(len(valeurs)):
+%         total = total + valeurs[i] * poids[i]
+%     return total / sum(poids)
+% assert moyenne_ponderee([8, 12, 16], [1, 1, 2]) == 13.0
+% def produit_negatifs_bugue(liste):
+%     prod = 0
+%     for x in liste:
+%         if x < 0:
+%             prod *= x
+%     return prod
+% assert produit_negatifs_bugue([-2, -3, -4]) == 0
+% import math
+% assert math.gcd(60, 48) == 12
+% END-VERIFY
+\begin{corrige}{1NSI-LANG-EVAL-B-EX1}
+\textbf{1.} Précondition : \lstinline{valeurs} et \lstinline{poids} ont la même longueur,
+et la somme des poids est strictement positive.
+
+\textbf{2.}
+\begin{python}
+def moyenne_ponderee(valeurs, poids):
+    assert len(valeurs) == len(poids)
+    assert sum(poids) > 0
+    total = 0
+    for i in range(len(valeurs)):
+        total = total + valeurs[i] * poids[i]
+    return total / sum(poids)
+\end{python}
+
+\textbf{3.} $\dfrac{8\times1+12\times1+16\times2}{1+1+2}=\dfrac{8+12+32}{4}=\dfrac{52}{4}=13$.
+\end{corrige}
+
+\begin{corrige}{1NSI-LANG-EVAL-B-EX2}
+\textbf{1.} \lstinline{produit_negatifs_bugue([-2, -3, -4])} renvoie $0$. Le résultat
+attendu est $-24$ ($(-2)\times(-3)\times(-4)$).
+
+\textbf{2.} L'accumulateur \lstinline{prod} est initialisé à $0$ : dès la première
+multiplication (\lstinline{prod *= x}), $0\times x=0$ quel que soit $x$, donc
+\lstinline{prod} reste $0$ pour toujours. Il faut initialiser un accumulateur de
+\textbf{produit} à $1$ (l'élément neutre de la multiplication), pas à $0$ :
+\begin{python}
+def produit_negatifs(liste):
+    prod = 1
+    for x in liste:
+        if x < 0:
+            prod *= x
+    return prod
+\end{python}
+
+\textbf{3.} \lstinline{import math} puis \lstinline{math.gcd(60, 48)}, qui renvoie $12$.
+\end{corrige}

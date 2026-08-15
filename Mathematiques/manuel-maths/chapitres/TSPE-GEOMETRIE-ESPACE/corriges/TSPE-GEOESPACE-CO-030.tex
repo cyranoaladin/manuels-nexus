@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-GEOESPACE-CO-030", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "correction", "exercice_ref": "TSPE-GEOESPACE-EX-002", "capacites_codes": ["C10"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-GEOMETRIE-ESPACE-C10"], "parcours": 1, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-030.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% A=(2,-1,0); u=(1,2,-1)
+% t=2
+% pt = tuple(A[i]+t*u[i] for i in range(3))
+% assert pt == (4,3,-2)
+% END-VERIFY
+\begin{corrige}{TSPE-GEOESPACE-EX-002}
+
+\textbf{Q1.} $\begin{cases}x=2+t\\y=-1+2t\\z=-t\end{cases} \quad (t\in\mathbb{R})$.
+
+\textbf{Q2.} On cherche $t$ tel que $2+t=4$, soit $t=2$. On verifie sur les autres coordonnees : $-1+2\times2=3$ \checkmark, $-2=-2$ \checkmark. Les trois equations sont verifiees par la meme valeur $t=2$ : $B \in \mathcal{D}$.
+
+\end{corrige}

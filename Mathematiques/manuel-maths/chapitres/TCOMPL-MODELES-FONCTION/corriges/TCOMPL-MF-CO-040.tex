@@ -1,0 +1,33 @@
+% META: {"id": "TCOMPL-MF-CO-040", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-MF-EX-040", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f(x) = sqrt(1+x), tangente en 0: f(0)=1, f'(0)=1/2, y=1+x/2
+% f = sqrt(1 + x)
+% fp = diff(f, x)
+% assert fp.subs(x, 0) == Rational(1, 2)
+% # f concave: f'' < 0
+% fpp = diff(f, x, 2)
+% assert fpp == -1/(4*(1+x)**Rational(3,2))
+% assert fpp.subs(x, 0) == -Rational(1,4)  # concave
+% # approximation: sqrt(1.1) ~ 1.05
+% approx = 1 + Rational(1,20)  # 1 + 0.1/2
+% assert approx == Rational(21, 20)
+% exact = f.subs(x, Rational(1,10))
+% assert exact == sqrt(Rational(11,10))
+% # concave => courbe sous la tangente => approx >= exact
+% assert approx > float(exact)
+% END-VERIFY
+\begin{corrige}{TCOMPL-MF-EX-040}
+
+\textbf{Question 1.} $f(0)=1$, $f'(x) = \dfrac{1}{2\sqrt{1+x}}$, $f'(0) = \dfrac{1}{2}$.
+
+\commentaireMarge{$\sqrt{1+x}$ concave ($f''<0$) : la tangente majore la courbe.}
+
+Tangente : $y = 1 + \dfrac{x}{2}$. Pour $x = 0{,}1$ : $\sqrt{1{,}1} \approx 1 + \dfrac{0{,}1}{2} = 1{,}05$.
+
+\textbf{Question 2.} $f''(x) = -\dfrac{1}{4(1+x)^{3/2}} < 0$ : $f$ est concave, donc la courbe est \textbf{au-dessous} de la tangente.
+
+L'approximation $1{,}05$ est donc \textbf{par exces}.
+
+\end{corrige}

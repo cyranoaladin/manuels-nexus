@@ -1,77 +1,110 @@
-% META: {"id": "TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "qcm", "capacites_codes": ["C1","C2","C4","C5","C6","C7"], "status": "generated"}
+% META: {"id": "TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "qcm", "genere_depuis": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Trigonométrie et équations polynomiales}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Complexes : trigonometrie et polynomes}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1/C2 --- Forme exponentielle, Euler, Moivre}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} La forme exponentielle de $z=r(\cos\theta+i\sin\theta)$ s'écrit :
+\item[] \textbf{Capacite C1}
+
+\item \textbf{[Q1]} La forme exponentielle de $z = 1 + i\sqrt{3}$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item $z=r\theta$.
-    \item $z=r\,\mathrm{e}^{i\theta}$.
-    \item $z=r+\mathrm{e}^{i\theta}$.
-    \item $z=\theta\,\mathrm{e}^{ir}$.
+    \item $2e^{i\pi/3}$
+    \item $2e^{i\pi/6}$
+    \item $e^{i\pi/3}$
+    \item $2e^{-i\pi/3}$
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q2]} La formule d'Euler pour $\cos\theta$ est :
+\item \textbf{[Q2]} D'apres la formule de Euler, $\cos(\theta) =$
   \begin{enumerate}[label=\Alph*.]
-    \item $\cos\theta = \mathrm{e}^{i\theta}+\mathrm{e}^{-i\theta}$.
-    \item $\cos\theta = \dfrac{\mathrm{e}^{i\theta}+\mathrm{e}^{-i\theta}}{2}$.
-    \item $\cos\theta = \dfrac{\mathrm{e}^{i\theta}-\mathrm{e}^{-i\theta}}{2i}$.
-    \item $\cos\theta = \mathrm{e}^{i\theta}\times\mathrm{e}^{-i\theta}$.
+    \item $\frac{e^{i\theta} - e^{-i\theta}}{2}$
+    \item $\frac{e^{i\theta} + e^{-i\theta}}{2i}$
+    \item $\frac{e^{i\theta} + e^{-i\theta}}{2}$
+    \item $e^{i\theta} + e^{-i\theta}$
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C2}
 
-\subsection*{C4/C5 --- Équations polynomiales}
-
-\item \textbf{[Q3]} Si $P(a)=0$ pour un polynôme $P$, alors $P(z)$ se factorise par :
+\item \textbf{[Q3]} La formule de Moivre donne $(\cos\theta + i\sin\theta)^n =$
   \begin{enumerate}[label=\Alph*.]
-    \item $z+a$.
-    \item $z-a$.
-    \item $az$.
-    \item $z/a$.
+    \item $\cos^n\theta + i\sin^n\theta$
+    \item $\cos(n\theta) + i\sin(n\theta)$
+    \item $n\cos\theta + in\sin\theta$
+    \item $\cos(n\theta) - i\sin(n\theta)$
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q4]} Un polynôme de degré $n$ admet :
+\item \textbf{[Q4]} Les racines n-iemes de l'unite sont au nombre de :
   \begin{enumerate}[label=\Alph*.]
-    \item exactement $n$ racines réelles.
-    \item au plus $n$ racines.
-    \item toujours $n+1$ racines.
-    \item une seule racine.
+    \item 1
+    \item 2
+    \item n-1
+    \item n
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C3}
 
-\subsection*{C6/C7 --- Géométrie, racines de l'unité}
-
-\item \textbf{[Q5]} Trois points $A,B,C$ d'affixes $a,b,c$ sont alignés si et seulement si $\dfrac{c-a}{b-a}$ est :
+\item \textbf{[Q5]} Un polynome de degre n a coefficients complexes admet dans $\mathbb{C}$ :
   \begin{enumerate}[label=\Alph*.]
-    \item un imaginaire pur.
-    \item un réel.
-    \item de module $1$.
-    \item nul.
-  \end{enumerate}
-
-\bigskip
-
-\item \textbf{[Q6]} L'ensemble $\mathbb{U}_n$ des racines $n$-ièmes de l'unité contient :
-  \begin{enumerate}[label=\Alph*.]
-    \item une infinité d'éléments.
-    \item exactement $n$ éléments.
-    \item exactement $1$ élément.
-    \item $n-1$ éléments.
+    \item Exactement n racines comptees avec multiplicite
+    \item Au plus n-1 racines
+    \item Toujours 0 racine
+    \item Infini de racines
   \end{enumerate}
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C1 & \textbf{C} \\
+Q3 & C2 & \textbf{B} \\
+Q4 & C2 & \textbf{D} \\
+Q5 & C3 & \textbf{A} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — Erreur d'angle pi/6 au lieu de pi/3. \emph{Renvoi : C1.}
+    \item \textbf{C} — Module faux (1 au lieu de 2). \emph{Renvoi : C1.}
+    \item \textbf{D} — Erreur de signe d'argument. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Formule de sin(theta) sans le i. \emph{Renvoi : C1.}
+    \item \textbf{B} — Facteur 2i au lieu de 2. \emph{Renvoi : C1.}
+    \item \textbf{D} — Oubli de diviser par 2. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — Puissance appliquee aux fonctions. \emph{Renvoi : C2.}
+    \item \textbf{C} — Facteur n devant cos et sin. \emph{Renvoi : C2.}
+    \item \textbf{D} — Erreur de signe. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — Seule la racine 1 comptee dans R. \emph{Renvoi : C2.}
+    \item \textbf{B} — Racines reelles uniquement. \emph{Renvoi : C2.}
+    \item \textbf{C} — Compte incorrect. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{B} — Nombre insuffisant de racines. \emph{Renvoi : C3.}
+    \item \textbf{C} — Contradiction du theoreme d'Alembert-Gauss. \emph{Renvoi : C3.}
+    \item \textbf{D} — Nombre infini impossible. \emph{Renvoi : C3.}
+  \end{itemize}
+\end{itemize}

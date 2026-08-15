@@ -1,0 +1,35 @@
+% META: {"id": "TNSI-ARCH-COURS-05", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "cours", "capacites_codes": ["C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TNSI-ARCHITECTURES-MATERIELLES-SY-C5"]}
+\section{Le système sur puce}
+
+% ============================================================
+% STRATE 1 — Definition et composants
+% ============================================================
+
+\definition[1]{
+Un \textbf{système sur puce} (\textit{System on Chip}, SoC) intègre sur un unique circuit intégré plusieurs composants qui, historiquement, occupaient des circuits séparés : un ou plusieurs \textbf{processeurs}, de la \textbf{mémoire}, des \textbf{interfaces} de communication (Wi-Fi, Bluetooth, USB...), et parfois des \textbf{accélérateurs} spécialisés (traitement graphique, calcul pour l'intelligence artificielle, traitement du signal audio).
+}
+
+\margeAppui{
+Le smartphone est l'exemple le plus répandu de système sur puce : processeur, mémoire vive, modem radio (4G/5G/Wi-Fi) et accélérateur graphique tiennent sur une puce de quelques millimètres carrés.
+}
+
+\propriete[Avantages de l'intégration]{
+Intégrer plusieurs composants sur une même puce présente trois avantages principaux :
+\begin{itemize}
+  \item \textbf{compacité} : un seul circuit remplace plusieurs cartes séparées, ce qui réduit la taille du produit final ;
+  \item \textbf{consommation énergétique réduite} : les distances entre composants, très courtes sur une même puce, réduisent les pertes électriques liées à la communication entre eux ;
+  \item \textbf{coût de fabrication} : produire une seule puce en grande série revient souvent moins cher qu'assembler plusieurs composants distincts.
+\end{itemize}
+}
+
+% ============================================================
+% STRATE 2 — Contrepartie
+% ============================================================
+
+\erreurFrequente{
+\textbf{Croire que l'intégration n'a que des avantages.} L'inconvénient principal d'un système sur puce est la perte de \textbf{modularité} : si un seul composant est défaillant ou devient obsolète (par exemple la mémoire), c'est toute la puce qu'il faut remplacer, alors que des composants séparés auraient pu être changés individuellement.
+}
+
+\approfondissement{
+Certains systèmes sur puce embarquent également des \textbf{FPGA} (circuits reconfigurables) pour adapter certains traitements sans changer de puce physique, ou des zones mémoire dédiées à la sécurité (\textit{secure enclave}) isolées du reste du système.
+}

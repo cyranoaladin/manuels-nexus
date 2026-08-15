@@ -1,0 +1,136 @@
+{
+  "chapitre": "TCOMPL-INFERENCE-BAYESIENNE",
+  "titre": "Inference bayesienne et conditionnement",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "La formule de Bayes s'ecrit $P(A|B) =$",
+      "correcte": "A",
+      "options": {
+        "A": "$\\frac{P(B|A)P(A)}{P(B)}$",
+        "B": "$\\frac{P(A|B)P(B)}{P(A)}$",
+        "C": "$P(A) P(B)$",
+        "D": "$P(A \\cap B)$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Tautologie sans inversion.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "Independance non supposee.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Oubli de la division par P(B).",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "Si A et B sont independants, alors $P(A \\cap B) =$",
+      "correcte": "C",
+      "options": {
+        "A": "$P(A) + P(B)$",
+        "B": "$P(A|B)$",
+        "C": "$P(A) \\times P(B)$",
+        "D": "$P(A)/P(B)$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Formule d'evenements disjoints.",
+          "renvoi": "C1"
+        },
+        "B": {
+          "erreur": "Probabilite conditionnelle.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Rapport incorrect.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C2",
+      "enonce": "La formule des probabilites totales pour une partition $(A_k)$ s'ecrit $P(B) =$",
+      "correcte": "B",
+      "options": {
+        "A": "$\\sum P(A_k)$",
+        "B": "$\\sum P(B|A_k) P(A_k)$",
+        "C": "$\\prod P(B|A_k)$",
+        "D": "$P(B|A_1)$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "La somme des P(A_k) vaut 1.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Produit au lieu d'une somme.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Seul le premier terme considere.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "En inference bayesienne, la probabilite $P(A)$ avant de connaitre B s'appelle :",
+      "correcte": "D",
+      "options": {
+        "A": "La probabilite a posteriori",
+        "B": "La vraisemblance",
+        "C": "La valeur p",
+        "D": "La probabilite a priori"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "P(A|B) est la probabilite a posteriori.",
+          "renvoi": "C2"
+        },
+        "B": {
+          "erreur": "P(B|A) est la vraisemblance.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Terme de test d'hypothese.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C3",
+      "enonce": "Un test de sensibilite 95% et specificite 90% sur une maladie rare (1%) donne une VPP :",
+      "correcte": "A",
+      "options": {
+        "A": "Faible (inférieure à 10%) car la maladie est rare",
+        "B": "Tres forte (95%)",
+        "C": "Egale a 50%",
+        "D": "Exactement 90%"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Oubli de l'effet du biais de rarete (paradoxe du faux positif).",
+          "renvoi": "C3"
+        },
+        "C": {
+          "erreur": "Valeur arbitraire.",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "Confusion avec la specificite.",
+          "renvoi": "C3"
+        }
+      }
+    }
+  ]
+}

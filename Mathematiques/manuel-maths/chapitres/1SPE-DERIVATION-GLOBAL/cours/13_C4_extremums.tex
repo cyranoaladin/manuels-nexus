@@ -81,7 +81,9 @@ x      & -\infty & & 1 & & 2 & & +\infty \\
 \hline
 f'(x)  &  & + & 0 & - & 0 & + & \\
 \hline
-f      & \nearrow & & 3 & & 2 & & \nearrow \\
+f      & 
+earrow & & 3 & & 2 & & 
+earrow \\
        &          &\searrow& &\searrow& & & \\
 \hline
 \end{array}
@@ -110,13 +112,16 @@ il n'y a donc pas d'extremum global sur $\mathbb{R}$.
   \addplot[courbe,domain=-0.1:3.7,samples=80] {2*x^3 - 9*x^2 + 12*x - 2};
   \addplot[point] coordinates {(1,3)};
   \addplot[point] coordinates {(2,2)};
-  \node[anchor=south west,font=\footnotesize,nxBleu] at (axis cs:1,3)
+  
+ode[anchor=south west,font=\footnotesize,nxBleu] at (axis cs:1,3)
         {max local $f(1)=3$};
-  \node[anchor=north west,font=\footnotesize,nxOr] at (axis cs:2,2)
+  
+ode[anchor=north west,font=\footnotesize,nxOr] at (axis cs:2,2)
         {min local $f(2)=2$};
 \end{axis}
 \end{tikzpicture}
-\nxcaption{La dérivée s'annule en $x=1$ et $x=2$ avec changements de signe.}
+
+xcaption{La dérivée s'annule en $x=1$ et $x=2$ avec changements de signe.}
 \end{nxfigure}
 
 % ── Contre-exemple : annulation sans extremum ─────────────────────────────────

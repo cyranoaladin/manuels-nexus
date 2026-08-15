@@ -1,0 +1,38 @@
+% META: {"id": "1NSI-PM-CO-023", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "correction", "exercice_ref": "1NSI-PM-EX-005", "capacites": ["1NSI-PROJET-METHODES-C4"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C4"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-023.tex"}
+% BEGIN-VERIFY
+% def rechercher_participant_bugue(participants, pseudo):
+%     for i in range(len(participants) - 1):
+%         if participants[i] == pseudo:
+%             return i
+%     return -1
+% participants = ["Ali", "Sara", "Nora", "Yanis"]
+% assert rechercher_participant_bugue(participants, "Yanis") == -1
+% def rechercher_participant(participants, pseudo):
+%     for i in range(len(participants)):
+%         if participants[i] == pseudo:
+%             return i
+%     return -1
+% assert rechercher_participant(participants, "Yanis") == 3
+% END-VERIFY
+\begin{corrige}{1NSI-PM-EX-005}
+\textbf{1.} L'appel renvoie $-1$ (« non trouvé »), alors que \lstinline{"Yanis"} est bien
+présent. La boucle \lstinline{range(len(participants) - 1)} parcourt les indices $0$ à
+\lstinline{len(participants) - 2} : avec $4$ participants, cela correspond aux indices $0$,
+$1$, $2$ — l'indice $3$ (le dernier, \lstinline{"Yanis"}) n'est jamais testé.
+
+\textbf{2.}
+\begin{python}
+def rechercher_participant(participants, pseudo):
+    for i in range(len(participants)):
+        if participants[i] == pseudo:
+            return i
+    return -1
+\end{python}
+
+\textbf{3.} La démarche de projet du cours invite à rester « d'une ambition raisonnable » :
+corriger un bug clairement identifié et localisé (une seule ligne à changer) juste avant la
+présentation reste raisonnable, puisque le correctif est simple et déjà compris. En
+revanche, si la correction avait impliqué une refonte plus large, mieux aurait valu la
+documenter comme limite connue plutôt que de risquer d'introduire un nouveau bug dans la
+précipitation, juste avant de présenter le projet.
+\end{corrige}

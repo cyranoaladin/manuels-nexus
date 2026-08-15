@@ -1,0 +1,136 @@
+{
+  "chapitre": "TCOMPL-INEGALITES",
+  "titre": "Inegalites et approximations",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "L'inegalite de Bienayme-Tchebycheff s'ecrit $P(|X - \\mu| \\ge a) \\le$",
+      "correcte": "B",
+      "options": {
+        "A": "$\\frac{V(X)}{a}$",
+        "B": "$\\frac{V(X)}{a^2}$",
+        "C": "$a^2 V(X)$",
+        "D": "$\\frac{\\sigma}{a}$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Oubli du carre sur a.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "Facteur multiplicatif au lieu d'une division.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Utilisation de l'ecart-type sans carre.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "L'inegalite de Markov s'applique a une variable aleatoire X a valeurs :",
+      "correcte": "C",
+      "options": {
+        "A": "Quelconques",
+        "B": "Strictement negatives",
+        "C": "Positives ou nulles",
+        "D": "Entieres relatives"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Condition de positivite indispensable.",
+          "renvoi": "C1"
+        },
+        "B": {
+          "erreur": "La variable doit etre positive.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Valable aussi pour les variables continues positives.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C2",
+      "enonce": "L'inegalite de Markov affirme pour $X \\ge 0$ et $a > 0$ que $P(X \\ge a) \\le$",
+      "correcte": "A",
+      "options": {
+        "A": "$\\frac{E(X)}{a}$",
+        "B": "$\\frac{E(X)}{a^2}$",
+        "C": "$\\frac{V(X)}{a}$",
+        "D": "$a E(X)$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Carre inutile pour Markov.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Utilisation de la variance au lieu de l'esperance.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Multiplication au lieu de division.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "La loi forte des grands nombres stipule que la moyenne d'un echantillon converge vers :",
+      "correcte": "D",
+      "options": {
+        "A": "L'ecart-type",
+        "B": "La variance",
+        "C": "0",
+        "D": "L'esperance mathématique"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "L'ecart-type est la dispersion.",
+          "renvoi": "C2"
+        },
+        "B": {
+          "erreur": "La variance est la moyenne des carres des ecarts.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "La limite est l'esperance mu, pas necessairement 0.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C3",
+      "enonce": "Si $V(X) = 4$, la probabilite $P(|X - E(X)| \\ge 4)$ est majoree par :",
+      "correcte": "B",
+      "options": {
+        "A": "1",
+        "B": "1/4",
+        "C": "1/2",
+        "D": "1/16"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Majoration triviale par 1 non optimale.",
+          "renvoi": "C3"
+        },
+        "C": {
+          "erreur": "Erreur de calcul 4/16 = 1/4.",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "Division par 4^3.",
+          "renvoi": "C3"
+        }
+      }
+    }
+  ]
+}

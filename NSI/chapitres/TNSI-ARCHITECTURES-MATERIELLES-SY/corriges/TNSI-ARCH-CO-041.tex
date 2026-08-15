@@ -1,0 +1,24 @@
+% META: {"id": "TNSI-ARCH-CO-041", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "correction", "exercice_ref": "TNSI-ARCH-EX-001", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-ARCHITECTURES-MATERIELLES-SY-C7"], "parcours": 1, "fichier_exercice": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-041.tex"}
+% BEGIN-VERIFY
+% def tourniquet(processus, tranche, duree_totale):
+%     ordre_execution = []
+%     file = list(processus)
+%     temps_restant = dict(duree_totale)
+%     while file:
+%         p = file.pop(0)
+%         execute = min(tranche, temps_restant[p])
+%         ordre_execution.append((p, execute))
+%         temps_restant[p] -= execute
+%         if temps_restant[p] > 0:
+%             file.append(p)
+%     return ordre_execution
+% resultat = tourniquet(["X", "Y"], 3, {"X": 4, "Y": 6})
+% assert resultat == [("X", 3), ("Y", 3), ("X", 1), ("Y", 3)]
+% END-VERIFY
+\begin{corrige}{TNSI-ARCH-EX-001}
+\begin{python}
+resultat = tourniquet(["X", "Y"], 3, {"X": 4, "Y": 6})
+print(resultat)  # [('X', 3), ('Y', 3), ('X', 1), ('Y', 3)]
+\end{python}
+\texttt{X} s'exécute $3$ puis $1$ unité de temps (total $4$), \texttt{Y} s'exécute $3$ puis $3$ unités de temps (total $6$). Il faut $4$ tranches de temps au total pour que les deux processus se terminent.
+\end{corrige}

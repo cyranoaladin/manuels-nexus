@@ -1,0 +1,97 @@
+% META: {"id": "1NSI-TB-COURS-02", "chapitre": "1NSI-TYPES-BASE", "type_objet": "cours", "capacites": ["1NSI-TYPES-BASE-C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C2"]}
+\section{Représentation binaire des entiers relatifs}
+
+\definition[D2]{
+  Un entier écrit sur $n$ \textbf{bits} peut représenter $2^n$ valeurs distinctes. Pour un
+  entier \textbf{positif}, ces valeurs vont de $0$ à $2^n-1$ : sur $8$ bits, de $0$ à $255$.
+}
+
+\propriete[Nombre de bits nécessaires]{
+  Le nombre de bits nécessaires pour écrire un entier positif $n$ (avec $n\geqslant1$) est
+  $\lfloor \log_2(n)\rfloor + 1$. En pratique, on utilise des tailles standard : $8$, $16$,
+  $32$ ou $64$ bits (Python, lui, ajuste automatiquement la taille de ses entiers, sans
+  limite fixe).
+}
+
+\exemple{$200$ s'écrit sur $8$ bits ($200 < 256=2^8$), mais $200+150=350$ nécessite $9$
+bits ($350 \geqslant 256$ mais $350 < 512=2^9$) : une addition peut faire « déborder » le
+nombre de bits disponibles.}
+
+% BEGIN-VERIFY
+% assert (200).bit_length() == 8
+% assert (200 + 150).bit_length() == 9
+% assert 2**7 <= 200 < 2**8
+% assert 2**8 <= 350 < 2**9
+% END-VERIFY
+
+\definition[D3]{
+  Le \textbf{complément à 2} est la méthode standard pour représenter les entiers
+  \textbf{relatifs} (positifs et négatifs) en binaire, sur un nombre fixe $n$ de bits. Pour
+  représenter $-x$ (avec $x>0$) : on écrit $x$ en binaire sur $n$ bits, on inverse chaque
+  bit (0 devient 1, 1 devient 0), puis on ajoute 1 au résultat.
+}
+
+\exemple{Sur $8$ bits, pour représenter $-5$ : $5$ s'écrit \lstinline{00000101} ; en
+inversant chaque bit on obtient \lstinline{11111010} ; en ajoutant 1 on obtient
+\lstinline{11111011}, qui est la représentation de $-5$ en complément à 2 sur 8 bits.}
+
+\begin{codereference}{Complément à 2 sur $n$ bits}
+\begin{python}
+def complement_a_2(x, n):
+    """Renvoie l'ecriture sur n bits de l'entier relatif x (complement a 2).
+
+    Preconditions : -2**(n-1) <= x < 2**(n-1).
+    """
+    if x < 0:
+        x = (1 << n) + x  # equivaut a l'inversion des bits puis +1
+    return format(x, f'0{n}b')
+
+print(complement_a_2(5, 8))    # 00000101
+print(complement_a_2(-5, 8))   # 11111011
+print(complement_a_2(-1, 8))   # 11111111
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def complement_a_2(x, n):
+%     if x < 0:
+%         x = (1 << n) + x
+%     return format(x, f'0{n}b')
+% assert complement_a_2(5, 8) == '00000101'
+% assert complement_a_2(-5, 8) == '11111011'
+% assert complement_a_2(-1, 8) == '11111111'
+% # verification par la methode "inversion des bits + 1"
+% bits_5 = format(5, '08b')
+% inverse = ''.join('1' if b == '0' else '0' for b in bits_5)
+% plus_un = format(int(inverse, 2) + 1, '08b')
+% assert plus_un == complement_a_2(-5, 8)
+% END-VERIFY
+
+\propriete[Intérêt du complément à 2]{
+  Le complément à 2 permet d'additionner deux entiers relatifs \textbf{avec le même circuit
+  binaire} que pour des entiers positifs, sans traitement particulier du signe : le bit de
+  poids fort indique le signe (0 = positif, 1 = négatif), et l'addition « déborde »
+  naturellement de façon cohérente.
+}
+
+% BEGIN-VERIFY
+% def complement_a_2(x, n):
+%     if x < 0:
+%         x = (1 << n) + x
+%     return format(x, f'0{n}b')
+% # addition binaire brute de 5 et -3 sur 8 bits doit redonner 2 (modulo 2**8)
+% a = int(complement_a_2(5, 8), 2)
+% b = int(complement_a_2(-3, 8), 2)
+% somme_brute = (a + b) % (1 << 8)
+% assert somme_brute == int(complement_a_2(2, 8), 2)
+% END-VERIFY
+
+\erreurFrequente{Croire qu'un nombre négatif se code en changeant simplement le bit de
+poids fort (« signe + valeur absolue »). Ce n'est \textbf{pas} le complément à 2 : cette
+méthode naïve poserait des problèmes pour l'addition (deux écritures de 0) et n'est pas
+celle utilisée par les machines réelles.}
+
+\alamachine{Vérifie avec la fonction \lstinline{complement_a_2(x, 8)} ci-dessus l'écriture de
+$-1$, $-128$ et $127$ sur 8 bits. Que se passe-t-il si tu essaies d'appeler la fonction avec
+$x=-129$ ou $x=128$ ? Pourquoi (relie ta réponse à la précondition indiquée dans la
+docstring) ?}

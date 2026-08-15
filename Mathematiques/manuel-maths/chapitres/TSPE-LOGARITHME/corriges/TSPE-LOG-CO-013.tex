@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-LOG-CO-013", "chapitre": "TSPE-LOGARITHME", "type_objet": "correction", "exercice_ref": "TSPE-LOG-EX-005", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-LOGARITHME-C3"], "parcours": 1, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-LOGARITHME/exercices/TSPE-LOG-EX-013.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, diff
+% x = symbols('x')
+% assert diff(ln(x**2+1), x) == 2*x/(x**2+1)
+% assert diff(3*ln(x) - x, x) == 3/x - 1
+% END-VERIFY
+\begin{corrige}{TSPE-LOG-EX-005}
+
+\textbf{a.} $f = \ln(u)$ avec $u(x)=x^2+1$, toujours strictement positif : $D_f = \mathbb{R}$. $u'(x)=2x$, donc $f'(x) = \dfrac{u'(x)}{u(x)} = \dfrac{2x}{x^2+1}$.
+
+\textbf{b.} $g$ definie pour $x>0$ : $D_g = ]0,+\infty[$. $g'(x) = 3 \times \dfrac{1}{x} - 1 = \dfrac{3}{x} - 1$.
+
+\end{corrige}

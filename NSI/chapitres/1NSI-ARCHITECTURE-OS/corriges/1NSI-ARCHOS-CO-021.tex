@@ -1,0 +1,60 @@
+% META: {"id": "1NSI-ARCHOS-CO-021", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "correction", "exercice_ref": "1NSI-ARCHOS-EX-002", "capacites": ["1NSI-ARCHITECTURE-OS-C4"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C4"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-021.tex"}
+% BEGIN-VERIFY
+% def executer(programme, memoire):
+%     registres = {}
+%     for instruction in programme:
+%         op = instruction[0]
+%         if op == "LOAD":
+%             _, reg, adresse = instruction
+%             registres[reg] = memoire[adresse]
+%         elif op == "SUB":
+%             _, reg_dest, reg_src = instruction
+%             registres[reg_dest] = registres[reg_dest] - registres[reg_src]
+%         elif op == "STORE":
+%             _, reg, adresse = instruction
+%             memoire[adresse] = registres[reg]
+%         elif op == "HALT":
+%             break
+%     return memoire, registres
+% memoire = [10, 4, 0]
+% programme = [
+%     ("LOAD", "R0", 0),
+%     ("LOAD", "R1", 1),
+%     ("SUB", "R0", "R1"),
+%     ("STORE", "R0", 2),
+%     ("HALT",),
+% ]
+% memoire_finale, registres = executer(programme, memoire)
+% assert memoire_finale == [10, 4, 6]
+% END-VERIFY
+\begin{corrige}{1NSI-ARCHOS-EX-002}
+\textbf{1.}
+\begin{python}
+def executer(programme, memoire):
+    registres = {}
+    for instruction in programme:
+        op = instruction[0]
+        if op == "LOAD":
+            _, reg, adresse = instruction
+            registres[reg] = memoire[adresse]
+        elif op == "SUB":
+            _, reg_dest, reg_src = instruction
+            registres[reg_dest] = registres[reg_dest] - registres[reg_src]
+        elif op == "STORE":
+            _, reg, adresse = instruction
+            memoire[adresse] = registres[reg]
+        elif op == "HALT":
+            break
+    return memoire, registres
+\end{python}
+
+\textbf{2.} Déroulé :
+\begin{itemize}
+  \item Après \lstinline{("LOAD", "R0", 0)} : \lstinline|registres = {"R0": 10}|
+  \item Après \lstinline{("LOAD", "R1", 1)} : \lstinline|registres = {"R0": 10, "R1": 4}|
+  \item Après \lstinline{("SUB", "R0", "R1")} : \lstinline|registres = {"R0": 6, "R1": 4}|
+  \item Après \lstinline{("STORE", "R0", 2)} : \lstinline{memoire = [10, 4, 6]}
+\end{itemize}
+
+\textbf{3.} L'exécution confirme : \lstinline{memoire_finale = [10, 4, 6]}.
+\end{corrige}

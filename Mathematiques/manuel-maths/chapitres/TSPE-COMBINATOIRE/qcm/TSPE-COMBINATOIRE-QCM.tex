@@ -1,67 +1,110 @@
-% META: {"id": "TSPE-COMBINATOIRE-QCM", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4"], "status": "generated"}
+% META: {"id": "TSPE-COMBINATOIRE-QCM", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "qcm", "genere_depuis": "chapitres/TSPE-COMBINATOIRE/qcm/TSPE-COMBINATOIRE-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-evaluation — Combinatoire et dénombrement}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Combinatoire et denombrement}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule reponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C2 — Principes et formules}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Le nombre de facons de ranger $5$ livres distincts sur une etagere est :
+\item[] \textbf{Capacite C1}
+
+\item \textbf{[Q1]} Le nombre de k-listes d'un ensemble a n elements est :
   \begin{enumerate}[label=\Alph*.]
-    \item $5$.
-    \item $5^5$.
-    \item $5! = 120$.
-    \item $\dbinom{5}{1}$.
+    \item $n^k$
+    \item $k^n$
+    \item $n!$
+    \item $\binom{n}{k}$
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q2]} Pour choisir $3$ personnes parmi $10$ sans distinguer de role, on calcule :
+\item \textbf{[Q2]} Le nombre d'arrangements sans repetition $A_n^k$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item $10 \times 9 \times 8$.
-    \item $\dbinom{10}{3}$.
-    \item $10^3$.
-    \item $3!$.
+    \item $n^k$
+    \item $\frac{n!}{k!}$
+    \item $\frac{n!}{(n-k)!}$
+    \item $\binom{n}{k}$
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C2}
 
-\subsection*{C3 — Somme des coefficients binomiaux}
-
-\item \textbf{[Q3]} $\displaystyle\sum_{k=0}^{n}\dbinom{n}{k}$ vaut :
+\item \textbf{[Q3]} Le nombre de combinaisons $\binom{5}{2}$ vaut :
   \begin{enumerate}[label=\Alph*.]
-    \item $n^2$.
-    \item $2n$.
-    \item $2^n$.
-    \item $n!$.
+    \item 20
+    \item 10
+    \item 5
+    \item 25
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C4 — Relation de Pascal}
-
-\item \textbf{[Q4]} La relation de Pascal s'ecrit :
+\item \textbf{[Q4]} Propriete de symetrie des coefficients binomiaux :
   \begin{enumerate}[label=\Alph*.]
-    \item $\dbinom{n}{k} = \dbinom{n-1}{k-1} + \dbinom{n-1}{k}$.
-    \item $\dbinom{n}{k} = \dbinom{n-1}{k} \times \dbinom{n-1}{k-1}$.
-    \item $\dbinom{n}{k} = \dbinom{n}{k-1} + \dbinom{n}{k+1}$.
-    \item $\dbinom{n}{k} = \dbinom{n-1}{k}$.
+    \item $\binom{n}{k} = \binom{n}{n-k}$
+    \item $\binom{n}{k} = \binom{n-1}{k}$
+    \item $\binom{n}{k} = \binom{k}{n}$
+    \item $\binom{n}{k} = \binom{n}{k+1}$
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C3}
 
-\item \textbf{[Q5]} Dans la preuve combinatoire de la relation de Pascal, on partitionne les parties a $k$ elements selon :
+\item \textbf{[Q5]} Le triangle de Pascal donne $\binom{n}{k} + \binom{n}{k+1} =$
   \begin{enumerate}[label=\Alph*.]
-    \item leur taille.
-    \item si elles contiennent un element fixe ou non.
-    \item leur ordre.
-    \item leur complementaire.
+    \item $\binom{n}{k+2}$
+    \item $\binom{n+2}{k}$
+    \item $\binom{n+1}{k}$
+    \item $\binom{n+1}{k+1}$
   \end{enumerate}
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C1 & \textbf{C} \\
+Q3 & C2 & \textbf{B} \\
+Q4 & C2 & \textbf{A} \\
+Q5 & C3 & \textbf{D} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — Inversion de la base et de l'exposant. \emph{Renvoi : C1.}
+    \item \textbf{C} — Formule des permutations. \emph{Renvoi : C1.}
+    \item \textbf{D} — Formule des combinaisons. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Formule avec remise. \emph{Renvoi : C1.}
+    \item \textbf{B} — Erreur de denominateur. \emph{Renvoi : C1.}
+    \item \textbf{D} — Formule sans ordre. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — Oubli de diviser par $2!$. \emph{Renvoi : C2.}
+    \item \textbf{C} — Confusions avec $n$. \emph{Renvoi : C2.}
+    \item \textbf{D} — Calcul de $5^2$. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{B} — Formule incomplete de Pascal. \emph{Renvoi : C2.}
+    \item \textbf{C} — Inversion de n et k. \emph{Renvoi : C2.}
+    \item \textbf{D} — Relation de recurrence fausse. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — Erreur sur l'indice k. \emph{Renvoi : C3.}
+    \item \textbf{B} — Erreur sur l'indice n. \emph{Renvoi : C3.}
+    \item \textbf{C} — Choix de l'indice k incorrect. \emph{Renvoi : C3.}
+  \end{itemize}
+\end{itemize}

@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-LOG-CO-011", "chapitre": "TSPE-LOGARITHME", "type_objet": "correction", "exercice_ref": "TSPE-LOG-EX-003", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-LOGARITHME-C2"], "parcours": 1, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-LOGARITHME/exercices/TSPE-LOG-EX-011.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import ln, Rational, simplify
+% sol = 20*ln(Rational(5,2))
+% assert round(float(sol), 2) == 18.33
+% END-VERIFY
+\begin{corrige}{TSPE-LOG-EX-003}
+
+\textbf{Q1.} $P(0) = 200\,\mathrm{e}^0 = 200$. Il y a initialement $200$ milliers de bacteries.
+
+\textbf{Q2.} On resout $200\,\mathrm{e}^{0{,}05t} = 500$, soit $\mathrm{e}^{0{,}05t} = 2{,}5$.
+
+En appliquant $\ln$ (les deux membres sont strictement positifs) :
+\[
+  0{,}05t = \ln(2{,}5), \qquad \text{donc} \qquad t = \frac{\ln(2{,}5)}{0{,}05} = 20\ln(2{,}5).
+\]
+
+Numeriquement, $t \approx 18{,}33$ heures.
+
+\end{corrige}

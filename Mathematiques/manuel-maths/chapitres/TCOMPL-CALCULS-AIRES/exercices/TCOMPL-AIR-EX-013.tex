@@ -1,0 +1,15 @@
+% META: {"id": "TCOMPL-AIR-EX-013", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "exercice", "capacites": ["TCOMPL-AIR-C1"], "capacites_codes": ["C1"], "methodes": ["M2"], "parcours": 1, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-013.tex", "corrige_tex": "chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-013.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (x**2 + 1)/x
+% fp = diff(f, x)
+% assert simplify(fp) == 1 - 1/x**2
+% assert solve(fp, x) == [-1, 1]
+% assert f.subs(x, 1) == 2
+% assert f.subs(x, -1) == -2
+% END-VERIFY
+\begin{exercice}{TCOMPL-AIR-EX-013}{1}{15}
+Etudier les variations de $f(x) = \dfrac{x^2+1}{x}$ sur $\mathbb{R}^*$.
+
+\end{exercice}

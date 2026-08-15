@@ -1,0 +1,54 @@
+% META: {"id": "1NSI-AGT-EVAL-B-corrige", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "correction", "evaluation_ref": "1NSI-AGT-EVAL-B", "capacites": ["P-ALGO-01A", "P-ALGO-01B", "P-ALGO-02B", "P-ALGO-02D"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% def recherche_occurrence(tableau, valeur):
+%     for i in range(len(tableau)):
+%         if tableau[i] == valeur:
+%             return i
+%     return -1
+% def maximum(tableau):
+%     maxi = tableau[0]
+%     for x in tableau[1:]:
+%         if x > maxi:
+%             maxi = x
+%     return maxi
+% def moyenne(tableau):
+%     return sum(tableau) / len(tableau)
+% t = [17, 40, 6, 25, 12]
+% assert recherche_occurrence(t, 6) == 2
+% assert maximum(t) == 40
+% assert moyenne(t) == 20.0
+% def tri_selection(tableau):
+%     tableau = tableau[:]
+%     n = len(tableau)
+%     for i in range(n - 1):
+%         indice_min = i
+%         for j in range(i + 1, n):
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%     return tableau
+% assert tri_selection([7, 1, 4, 9]) == [1, 4, 7, 9]
+% END-VERIFY
+\begin{corrige}{1NSI-AGT-EVAL-B-EX1}
+\textbf{1.} La valeur $6$ se trouve à l'indice $2$.
+
+\textbf{2.} Le maximum est $40$.
+
+\textbf{3.} $\dfrac{17+40+6+25+12}{5}=\dfrac{100}{5}=20$.
+\end{corrige}
+
+\begin{corrige}{1NSI-AGT-EVAL-B-EX2}
+\textbf{1.} Tableau initial : \lstinline{[7, 1, 4, 9]}.
+\begin{itemize}
+  \item $i=0$ : minimum de \lstinline{[7,1,4,9]} à l'indice $1$ (valeur $1$). Après échange : \lstinline{[1, 7, 4, 9]}.
+  \item $i=1$ : minimum de \lstinline{[7,4,9]} à l'indice $2$ (valeur $4$). Après échange : \lstinline{[1, 4, 7, 9]}.
+  \item $i=2$ : minimum de \lstinline{[7,9]} à l'indice $2$ (valeur $7$, déjà en place). Après échange (avec elle-même) : \lstinline{[1, 4, 7, 9]}.
+\end{itemize}
+
+\textbf{2.} Après $i=0$ : \lstinline{[1]} trié, $1\leqslant4$ (min du reste). Après $i=1$ :
+\lstinline{[1,4]} trié, $4\leqslant7$. Après $i=2$ : \lstinline{[1,4,7]} trié,
+$7\leqslant9$. L'invariant est vérifié à chaque étape.
+
+\textbf{3.} Le coût dans le pire cas est \textbf{quadratique}, $O(n^2)$ (et c'est aussi
+le cas dans le \textbf{meilleur} cas pour ce tri, contrairement au tri par insertion).
+\end{corrige}

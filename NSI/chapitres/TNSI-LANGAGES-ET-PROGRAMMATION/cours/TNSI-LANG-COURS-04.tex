@@ -1,0 +1,83 @@
+% META: {"id": "TNSI-LANG-COURS-04", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "cours", "capacites_codes": ["C4"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TNSI-LANGAGES-ET-PROGRAMMATION-C4"]}
+\section{Paradigmes de programmation}
+
+% ============================================================
+% STRATE 1 — Les trois paradigmes sur un meme exemple
+% ============================================================
+
+\definition[1]{
+Un \textbf{paradigme de programmation} est une façon générale de structurer un programme et de raisonner sur son fonctionnement. Un même langage, et même un même programme, peut mobiliser \textbf{plusieurs paradigmes}.
+}
+
+\textbf{Exemple.} Calculer la somme des carrés des nombres pairs d'une liste, dans trois styles différents.
+
+\textbf{Style impératif} (une suite d'instructions qui modifient un état) :
+\begin{python}
+def somme_carres_pairs_imperatif(liste):
+    total = 0
+    for x in liste:
+        if x % 2 == 0:
+            total += x ** 2
+    return total
+\end{python}
+
+\textbf{Style fonctionnel} (composition de fonctions, sans modifier d'état) :
+\begin{python}
+def somme_carres_pairs_fonctionnel(liste):
+    return sum(x ** 2 for x in liste if x % 2 == 0)
+\end{python}
+
+\textbf{Style objet} (les données et les traitements sont regroupés dans une classe) :
+\begin{python}
+class ListeNombres:
+    def __init__(self, valeurs):
+        self.valeurs = valeurs
+
+    def somme_carres_pairs(self):
+        return sum(x ** 2 for x in self.valeurs if x % 2 == 0)
+\end{python}
+
+% BEGIN-VERIFY
+% def somme_carres_pairs_imperatif(liste):
+%     total = 0
+%     for x in liste:
+%         if x % 2 == 0:
+%             total += x ** 2
+%     return total
+%
+% def somme_carres_pairs_fonctionnel(liste):
+%     return sum(x ** 2 for x in liste if x % 2 == 0)
+%
+% class ListeNombres:
+%     def __init__(self, valeurs):
+%         self.valeurs = valeurs
+%     def somme_carres_pairs(self):
+%         return sum(x ** 2 for x in self.valeurs if x % 2 == 0)
+%
+% donnees = [1, 2, 3, 4, 5, 6]
+% resultat_attendu = 2**2 + 4**2 + 6**2
+% assert somme_carres_pairs_imperatif(donnees) == resultat_attendu
+% assert somme_carres_pairs_fonctionnel(donnees) == resultat_attendu
+% assert ListeNombres(donnees).somme_carres_pairs() == resultat_attendu
+% END-VERIFY
+
+\margeAppui{
+Les trois versions calculent exactement le même résultat : le paradigme change la \textbf{façon d'écrire} le programme, pas ce qu'il calcule (cohérent avec l'idée que la calculabilité ne dépend pas d'un style d'écriture particulier).
+}
+
+% ============================================================
+% STRATE 2 — Choisir un paradigme
+% ============================================================
+
+\propriete[Choisir un paradigme selon le contexte]{
+\begin{itemize}
+  \item Le style \textbf{impératif} est naturel pour décrire une suite d'étapes avec un état qui évolue (simulation, algorithme pas à pas).
+  \item Le style \textbf{fonctionnel} favorise la lisibilité et limite les effets de bord pour des transformations de données (filtrer, transformer, agréger).
+  \item Le style \textbf{objet} est adapté quand on manipule des \textbf{entités} avec un état propre et des comportements associés (une classe \lstinline{Compte}, \lstinline{Pile}, \lstinline{Noeud}...).
+\end{itemize}
+Ce choix n'est presque jamais exclusif : un même projet combine typiquement les trois styles selon les besoins de chaque partie.
+}
+
+\erreurFrequente{
+\textbf{Croire qu'un langage \og impose \fg{} un seul paradigme.} Python permet d'écrire du code impératif, fonctionnel (fonctions \lstinline{map}, \lstinline{filter}, expressions génératrices) et objet (classes) au sein d'un \textbf{même} programme, voire d'une même fonction. Le paradigme est un choix de conception, pas une contrainte du langage.
+}

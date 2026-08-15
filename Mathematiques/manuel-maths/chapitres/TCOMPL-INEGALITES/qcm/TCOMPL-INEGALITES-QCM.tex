@@ -1,77 +1,110 @@
-% META: {"id": "TCOMPL-INEGALITES-QCM", "chapitre": "TCOMPL-INEGALITES", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4","C5"], "status": "generated"}
+% META: {"id": "TCOMPL-INEGALITES-QCM", "chapitre": "TCOMPL-INEGALITES", "type_objet": "qcm", "genere_depuis": "chapitres/TCOMPL-INEGALITES/qcm/TCOMPL-INEGALITES-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Répartition des richesses, inégalités}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Inegalites et approximations}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1/C2 --- Courbe de Lorenz}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Une courbe de Lorenz $L$ vérifie toujours :
+\item[] \textbf{Capacite C1}
+
+\item \textbf{[Q1]} L'inegalite de Bienayme-Tchebycheff s'ecrit $P(|X - \mu| \ge a) \le$
   \begin{enumerate}[label=\Alph*.]
-    \item $L(0)=1$ et $L(1)=0$.
-    \item $L(0)=0$ et $L(1)=1$.
-    \item $L(0)=L(1)$.
-    \item $L(x)>x$ pour tout $x$.
+    \item $\frac{V(X)}{a}$
+    \item $\frac{V(X)}{a^2}$
+    \item $a^2 V(X)$
+    \item $\frac{\sigma}{a}$
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q2]} La fonction modélisant une courbe de Lorenz doit être :
+\item \textbf{[Q2]} L'inegalite de Markov s'applique a une variable aleatoire X a valeurs :
   \begin{enumerate}[label=\Alph*.]
-    \item décroissante et concave.
-    \item croissante et convexe.
-    \item constante.
-    \item croissante et concave.
+    \item Quelconques
+    \item Strictement negatives
+    \item Positives ou nulles
+    \item Entieres relatives
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C2}
 
-\subsection*{C3 --- Indice de Gini}
-
-\item \textbf{[Q3]} Un indice de Gini égal à $0$ correspond à :
+\item \textbf{[Q3]} L'inegalite de Markov affirme pour $X \ge 0$ et $a > 0$ que $P(X \ge a) \le$
   \begin{enumerate}[label=\Alph*.]
-    \item une inégalité maximale.
-    \item une égalité parfaite.
-    \item une erreur de calcul.
-    \item une répartition impossible.
+    \item $\frac{E(X)}{a}$
+    \item $\frac{E(X)}{a^2}$
+    \item $\frac{V(X)}{a}$
+    \item $a E(X)$
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q4]} Entre deux répartitions dont les courbes de Lorenz sont $L_1$ et $L_2$ avec $L_1(x) > L_2(x)$ pour tout $x\in\,]0,1[$, la répartition la plus inégalitaire est celle de :
+\item \textbf{[Q4]} La loi forte des grands nombres stipule que la moyenne d'un echantillon converge vers :
   \begin{enumerate}[label=\Alph*.]
-    \item indice $G_1$ (associé à $L_1$).
-    \item indice $G_2$ (associé à $L_2$).
-    \item elles sont forcément égales.
-    \item impossible à dire sans calcul.
+    \item L'ecart-type
+    \item La variance
+    \item 0
+    \item L'esperance mathématique
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C3}
 
-\subsection*{C5 --- Calcul par intégrale}
-
-\item \textbf{[Q5]} La formule $G = 1 - 2\displaystyle\int_0^1 L(x)\,\mathrm{d}x$ découle du fait que :
+\item \textbf{[Q5]} Si $V(X) = 4$, la probabilite $P(|X - E(X)| \ge 4)$ est majoree par :
   \begin{enumerate}[label=\Alph*.]
-    \item l'aire sous la bissectrice sur $[0,1]$ vaut $1$.
-    \item l'aire sous la bissectrice sur $[0,1]$ vaut $\dfrac{1}{2}$.
-    \item $L$ est toujours égale à $x$.
-    \item l'intégrale de $L$ vaut toujours $1$.
-  \end{enumerate}
-
-\bigskip
-
-\item \textbf{[Q6]} Pour $L(x)=x$ (égalité parfaite), $\displaystyle\int_0^1 L(x)\,\mathrm{d}x$ vaut :
-  \begin{enumerate}[label=\Alph*.]
-    \item $1$.
-    \item $\dfrac{1}{2}$.
-    \item $0$.
-    \item $2$.
+    \item 1
+    \item 1/4
+    \item 1/2
+    \item 1/16
   \end{enumerate}
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C1 & \textbf{B} \\
+Q2 & C1 & \textbf{C} \\
+Q3 & C2 & \textbf{A} \\
+Q4 & C2 & \textbf{D} \\
+Q5 & C3 & \textbf{B} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{A} — Oubli du carre sur a. \emph{Renvoi : C1.}
+    \item \textbf{C} — Facteur multiplicatif au lieu d'une division. \emph{Renvoi : C1.}
+    \item \textbf{D} — Utilisation de l'ecart-type sans carre. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Condition de positivite indispensable. \emph{Renvoi : C1.}
+    \item \textbf{B} — La variable doit etre positive. \emph{Renvoi : C1.}
+    \item \textbf{D} — Valable aussi pour les variables continues positives. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{B} — Carre inutile pour Markov. \emph{Renvoi : C2.}
+    \item \textbf{C} — Utilisation de la variance au lieu de l'esperance. \emph{Renvoi : C2.}
+    \item \textbf{D} — Multiplication au lieu de division. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — L'ecart-type est la dispersion. \emph{Renvoi : C2.}
+    \item \textbf{B} — La variance est la moyenne des carres des ecarts. \emph{Renvoi : C2.}
+    \item \textbf{C} — La limite est l'esperance mu, pas necessairement 0. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — Majoration triviale par 1 non optimale. \emph{Renvoi : C3.}
+    \item \textbf{C} — Erreur de calcul 4/16 = 1/4. \emph{Renvoi : C3.}
+    \item \textbf{D} — Division par 4\textasciicircum{}3. \emph{Renvoi : C3.}
+  \end{itemize}
+\end{itemize}

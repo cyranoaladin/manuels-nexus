@@ -1,0 +1,111 @@
+% META: {"id": "TNSI-ARCH-COURS-02", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "cours", "capacites_codes": ["C2"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TNSI-ARCHITECTURES-MATERIELLES-SY-C2"]}
+\section{Processus : création, ordonnancement, interblocage}
+
+% ============================================================
+% STRATE 1 — Creation de processus
+% ============================================================
+
+\definition[1]{
+Un \textbf{processus} est un programme en cours d'exécution, avec son propre espace mémoire et son propre état (registres, pile d'appels). La \textbf{création} d'un processus consiste, pour le système d'exploitation, à lui allouer de la mémoire, à charger le code du programme, et à l'inscrire dans la liste des processus à exécuter.
+}
+
+\margeAppui{
+Sous les systèmes de type Unix/Linux, un nouveau processus est le plus souvent créé par \textbf{duplication} d'un processus existant (appel système \texttt{fork}), qui est ensuite remplacé par le nouveau programme (appel système \texttt{exec}).
+}
+
+% ============================================================
+% STRATE 2 — Ordonnancement
+% ============================================================
+
+\definition[2]{
+Un seul processeur ne peut exécuter qu'une instruction à la fois : quand plusieurs processus doivent s'exécuter \og en même temps \fg{}, l'\textbf{ordonnanceur} du système d'exploitation leur alloue le processeur à tour de rôle, pendant de courtes tranches de temps, donnant l'illusion d'une exécution simultanée.
+}
+
+\textbf{Exemple.} La politique \textbf{tourniquet} (\textit{round-robin}) alloue à chaque processus une tranche de temps fixe, dans l'ordre, en boucle :
+\begin{python}
+def tourniquet(processus, tranche, duree_totale):
+    ordre_execution = []
+    file = list(processus)
+    temps_restant = dict(duree_totale)
+    while file:
+        p = file.pop(0)
+        execute = min(tranche, temps_restant[p])
+        ordre_execution.append((p, execute))
+        temps_restant[p] -= execute
+        if temps_restant[p] > 0:
+            file.append(p)
+    return ordre_execution
+\end{python}
+
+% BEGIN-VERIFY
+% def tourniquet(processus, tranche, duree_totale):
+%     ordre_execution = []
+%     file = list(processus)
+%     temps_restant = dict(duree_totale)
+%     while file:
+%         p = file.pop(0)
+%         execute = min(tranche, temps_restant[p])
+%         ordre_execution.append((p, execute))
+%         temps_restant[p] -= execute
+%         if temps_restant[p] > 0:
+%             file.append(p)
+%     return ordre_execution
+%
+% resultat = tourniquet(["A", "B", "C"], 2, {"A": 3, "B": 5, "C": 2})
+% assert resultat == [("A", 2), ("B", 2), ("C", 2), ("A", 1), ("B", 2), ("B", 1)]
+% total_par_processus = {}
+% for p, t in resultat:
+%     total_par_processus[p] = total_par_processus.get(p, 0) + t
+% assert total_par_processus == {"A": 3, "B": 5, "C": 2}
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Confondre concurrence et parallélisme.} Sur un processeur à un seul cœur, plusieurs processus s'exécutent en \textbf{concurrence} (à tour de rôle, jamais réellement simultanément) : c'est l'ordonnancement rapide qui donne l'illusion du parallélisme. Sur un processeur multi-cœurs, plusieurs processus peuvent en revanche s'exécuter en \textbf{parallélisme} réel, un par cœur.
+}
+
+% ============================================================
+% STRATE 2 — Interblocage
+% ============================================================
+
+\definition[3]{
+Un \textbf{interblocage} (\textit{deadlock}) survient lorsque plusieurs processus attendent chacun une ressource retenue par un autre processus du même groupe, formant un cycle d'attente dont aucun ne peut sortir seul.
+}
+
+\textbf{Exemple.} Deux processus, chacun retenant une ressource et attendant celle de l'autre :
+\begin{python}
+# Processus P1 : retient R1, attend R2
+# Processus P2 : retient R2, attend R1
+attente = {"P1": "R2", "P2": "R1"}
+retenue_par = {"R1": "P1", "R2": "P2"}
+\end{python}
+
+% BEGIN-VERIFY
+% def a_un_interblocage(attente, retenue_par):
+%     for depart in attente:
+%         visites = [depart]
+%         courant = depart
+%         while True:
+%             ressource_attendue = attente.get(courant)
+%             if ressource_attendue is None:
+%                 break
+%             detenteur = retenue_par.get(ressource_attendue)
+%             if detenteur is None:
+%                 break
+%             if detenteur in visites:
+%                 return True
+%             visites.append(detenteur)
+%             courant = detenteur
+%     return False
+%
+% attente = {"P1": "R2", "P2": "R1"}
+% retenue_par = {"R1": "P1", "R2": "P2"}
+% assert a_un_interblocage(attente, retenue_par) is True
+%
+% attente_ok = {"P1": "R2"}
+% retenue_par_ok = {"R1": "P1", "R2": "P3"}
+% assert a_un_interblocage(attente_ok, retenue_par_ok) is False
+% END-VERIFY
+
+\propriete[Mise en évidence par un graphe d'attente]{
+Un interblocage se traduit par un \textbf{cycle} dans le graphe orienté où chaque processus pointe vers la ressource qu'il attend, et chaque ressource pointe vers le processus qui la retient. On retrouve ainsi la détection de cycle vue dans le chapitre \textit{Algorithmique}, appliquée cette fois à un graphe de dépendances entre processus et ressources.
+}

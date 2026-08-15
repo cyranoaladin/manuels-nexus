@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-METH-01", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C13", "C16"], "methodes": ["M1"], "sources_inspiration": [], "status": "approved"}
+\begin{fichemethode}{M1}{Déterminer l'équation cartésienne d'un plan}
+
+\quandUtiliser{%
+  Utiliser cette methode pour trouver l'equation cartesienne d'un plan connaissant un point et un vecteur normal (ou pour en deduire un vecteur normal a partir d'une equation donnee).
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Identifier} un point $A(x_A,y_A,z_A)$ du plan et un vecteur normal $\vec{n}(a,b,c)$ (si non donne, le trouver via un produit vectoriel implicite ou par orthogonalite a deux vecteurs du plan, en resolvant un systeme).
+    \item \textbf{Ecrire} $a(x-x_A)+b(y-y_A)+c(z-z_A)=0$.
+    \item \textbf{Developper} pour obtenir la forme reduite $ax+by+cz+d=0$.
+    \item \textbf{Verifier} en substituant les coordonnees de $A$ (et d'un autre point connu du plan si possible).
+    \item \textbf{Pour lire un vecteur normal a partir d'une equation} $ax+by+cz+d=0$ donnee : le vecteur normal est directement $(a,b,c)$.
+  \end{enumerate}
+}
+
+\end{fichemethode}

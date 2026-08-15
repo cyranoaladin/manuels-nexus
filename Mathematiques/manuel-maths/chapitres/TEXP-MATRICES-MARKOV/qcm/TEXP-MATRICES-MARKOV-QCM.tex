@@ -1,81 +1,110 @@
-% META: {"id": "TEXP-MATRICES-MARKOV-QCM", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4","C5","C6","C7"], "status": "generated"}
+% META: {"id": "TEXP-MATRICES-MARKOV-QCM", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "qcm", "genere_depuis": "chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Matrices et chaînes de Markov}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Matrices et chaines de Markov}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1 --- Opérations sur les matrices}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Une matrice carrée $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ est inversible si et seulement si :
+\item[] \textbf{Capacite C1}
+
+\item \textbf{[Q1]} Une matrice de transition d'une chaine de Markov a pour propriete :
   \begin{enumerate}[label=\Alph*.]
-    \item $a=d$ et $b=c$.
-    \item $ad-bc\neq0$.
-    \item $a+b+c+d\neq0$.
-    \item elle est toujours inversible.
+    \item La somme des colonnes vaut 1
+    \item La somme de chaque ligne vaut 1
+    \item Tous ses coefficients sont negatifs
+    \item Elle est toujours symetrique
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C2/C3 --- Modélisation et suites de matrices}
-
-\item \textbf{[Q2]} Pour une suite $(U_n)$ vérifiant $U_{n+1}=AU_n+C$ avec $I-A$ inversible, le point fixe $X$ vérifie :
+\item \textbf{[Q2]} Si $P$ est la matrice de transition et $P_0$ l'etat initial (vecteur ligne), alors $P_n =$
   \begin{enumerate}[label=\Alph*.]
-    \item $X=A+C$.
-    \item $X=AX+C$.
-    \item $X=A^{-1}C$.
-    \item $X=0$.
+    \item $P_0 P^n$
+    \item $P^n P_0$
+    \item $P_0 + n P$
+    \item $P_0 P n$
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C2}
 
-\item \textbf{[Q3]} Dans la formule $U_n=A^n(U_0-X)+X$, la matrice $X$ représente :
+\item \textbf{[Q3]} Un etat stable $X$ d'une chaine de Markov verifie :
   \begin{enumerate}[label=\Alph*.]
-    \item la valeur de $U_n$ quand $n=0$.
-    \item le point fixe de la relation de récurrence.
-    \item l'inverse de $A$.
-    \item une matrice toujours nulle.
+    \item $P X = X$
+    \item $X P = 0$
+    \item $X P = X$ et la somme des composantes vaut 1
+    \item $X^2 = P$
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C4 --- Chaînes de Markov}
-
-\item \textbf{[Q4]} Dans la matrice de transition $P$ d'une chaîne de Markov, chaque \textbf{ligne} :
+\item \textbf{[Q4]} Si une matrice de transition $P$ n'a aucun coefficient nul, la chaine de Markov est :
   \begin{enumerate}[label=\Alph*.]
-    \item somme à $0$.
-    \item somme à $1$.
-    \item contient uniquement des $1$.
-    \item est symétrique.
+    \item Instable
+    \item Periodique
+    \item Divergente
+    \item Ergodique et admet un unique etat stable
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C3}
 
-\subsection*{C5 --- Distribution après $n$ transitions}
-
-\item \textbf{[Q5]} La distribution après $n$ transitions $\pi_n$ se calcule par :
+\item \textbf{[Q5]} Pour inverser une matrice 2x2 $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$, le determinant est :
   \begin{enumerate}[label=\Alph*.]
-    \item $\pi_n=P^n\pi_0$.
-    \item $\pi_n=\pi_0P^n$.
-    \item $\pi_n=P^n+\pi_0$.
-    \item $\pi_n=\pi_0+n P$.
-  \end{enumerate}
-
-\bigskip
-
-\subsection*{C6/C7 --- Démonstration et distribution invariante}
-
-\item \textbf{[Q6]} Une distribution $\pi$ est dite \textbf{invariante} pour une chaîne de Markov de matrice $P$ si :
-  \begin{enumerate}[label=\Alph*.]
-    \item $\pi P=\pi$.
-    \item $\pi+P=0$.
-    \item $P$ est inversible.
-    \item $\pi$ contient uniquement des zéros.
+    \item $ad - bc$
+    \item $ac - bd$
+    \item $ad + bc$
+    \item $a+b+c+d$
   \end{enumerate}
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C1 & \textbf{B} \\
+Q2 & C1 & \textbf{A} \\
+Q3 & C2 & \textbf{C} \\
+Q4 & C2 & \textbf{D} \\
+Q5 & C3 & \textbf{A} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{A} — Confusions entre lignes et colonnes. \emph{Renvoi : C1.}
+    \item \textbf{C} — Les probabilites sont positives. \emph{Renvoi : C1.}
+    \item \textbf{D} — Symetrie non requise. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{B} — Ordre des facteurs incorrect avec vecteur ligne. \emph{Renvoi : C1.}
+    \item \textbf{C} — Addition au lieu de produit matriciel. \emph{Renvoi : C1.}
+    \item \textbf{D} — Multiplication par n au lieu de la puissance n. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — Vecteur colonne au lieu de vecteur ligne. \emph{Renvoi : C2.}
+    \item \textbf{B} — Produit nul incorrect. \emph{Renvoi : C2.}
+    \item \textbf{D} — Carre matriciel incorrect. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — Propriete d'ergodicite implique la stabilite. \emph{Renvoi : C2.}
+    \item \textbf{B} — Pas de periodicite avec coefficients strictement positifs. \emph{Renvoi : C2.}
+    \item \textbf{C} — La suite des etats converge. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{B} — Erreur de formule du determinant. \emph{Renvoi : C3.}
+    \item \textbf{C} — Signe + au lieu de -. \emph{Renvoi : C3.}
+    \item \textbf{D} — Somme des termes. \emph{Renvoi : C3.}
+  \end{itemize}
+\end{itemize}

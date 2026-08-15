@@ -1,0 +1,21 @@
+% META: {"id": "1NSI-TB-EX-009", "chapitre": "1NSI-TYPES-BASE", "type_objet": "exercice", "capacites": ["1NSI-TYPES-BASE-C2"], "parcours": 1, "competences": ["analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-009.tex", "corrige_tex": "chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-009.tex", "status": "approved", "capacites_codes": ["C2"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% def expr(a, b, c):
+%     return (a or b) and (not c)
+% resultats = {(a, b, c): expr(a, b, c)
+%              for a in (True, False) for b in (True, False) for c in (True, False)}
+% assert resultats[(True, True, True)] is False
+% assert resultats[(True, False, False)] is True
+% assert resultats[(False, False, False)] is False
+% assert sum(1 for v in resultats.values() if v) == 3
+% END-VERIFY
+\begin{exercice}{1NSI-TB-EX-004}{2}{12}
+Un système d'alarme se déclenche selon l'expression booléenne
+$(a\ \text{or}\ b)\ \text{and}\ (\text{not}\ c)$, où $a$ = « capteur porte activé »,
+$b$ = « capteur fenêtre activé », $c$ = « mode maintenance activé ».
+\begin{enumerate}
+  \item Dresser la table de vérité complète de cette expression ($2^3=8$ lignes).
+  \item Pour combien de combinaisons de $(a,b,c)$ l'alarme se déclenche-t-elle ?
+  \item En mode maintenance ($c=\text{Vrai}$), l'alarme peut-elle se déclencher, quels que soient $a$ et $b$ ? Justifier.
+\end{enumerate}
+\end{exercice}

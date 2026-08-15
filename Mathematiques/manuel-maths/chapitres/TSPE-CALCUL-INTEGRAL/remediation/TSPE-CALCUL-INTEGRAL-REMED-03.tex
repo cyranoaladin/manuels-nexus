@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-CALCUL-INTEGRAL-REMED-03", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "remediation", "capacites_codes": ["C3"], "status": "approved", "capacites": ["TSPE-CALCUL-INTEGRAL-C3"], "statut": "complete"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : calcul d'integrale par primitive
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-INTEG-RE-C2-EX1}{1}{8}
+Calculer $\displaystyle\int_0^1 (2x+3)\,\mathrm{d}x$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, integrate
+% x = symbols('x')
+% assert integrate(2*x+3, (x, 0, 1)) == 4
+% END-VERIFY
+
+\begin{corrige}{TSPE-INTEG-RE-C2-EX1}
+Une primitive de $2x+3$ est $x^2+3x$.
+\[
+  \int_0^1 (2x+3)\,\mathrm{d}x = [x^2+3x]_0^1 = (1+3)-0 = 4.
+\]
+\end{corrige}

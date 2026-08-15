@@ -1,0 +1,38 @@
+% META: {"id": "1NSI-PM-REMED-04", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "remediation", "capacites": ["1NSI-PROJET-METHODES-C4"], "status": "approved", "capacites_codes": ["C4"]}
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : TypeError par melange str/int
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-PM-RE-C3-EX1}{1}{10}
+Le programme suivant plante à l'exécution :
+\begin{python}
+def message_bienvenue_bugue(nom, age):
+    return "Bonjour " + nom + ", tu as " + age + " ans."
+
+message_bienvenue_bugue("Lina", 16)
+\end{python}
+\begin{enumerate}
+  \item Quel type d'erreur ce programme provoque-t-il ? Quel est le message exact ?
+  \item En appliquant la démarche méthodique du cours, identifier précisément quelle sous-expression du \lstinline{return} pose problème, et pourquoi.
+  \item Corriger la fonction (au moins deux méthodes sont possibles : conversion explicite, ou f-string).
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def message_bienvenue_bugue(nom, age):
+%     return "Bonjour " + nom + ", tu as " + age + " ans."
+% erreur_levee = False
+% try:
+%     message_bienvenue_bugue("Lina", 16)
+% except TypeError as e:
+%     erreur_levee = True
+%     message = str(e)
+% assert erreur_levee is True
+% assert message == 'can only concatenate str (not "int") to str'
+% def message_bienvenue(nom, age):
+%     return "Bonjour " + nom + ", tu as " + str(age) + " ans."
+% assert message_bienvenue("Lina", 16) == "Bonjour Lina, tu as 16 ans."
+% def message_bienvenue_fstring(nom, age):
+%     return f"Bonjour {nom}, tu as {age} ans."
+% assert message_bienvenue_fstring("Lina", 16) == "Bonjour Lina, tu as 16 ans."
+% END-VERIFY

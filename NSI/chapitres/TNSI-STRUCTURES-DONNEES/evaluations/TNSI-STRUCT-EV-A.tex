@@ -1,0 +1,38 @@
+% META: {"id": "TNSI-STRUCT-EVAL-A", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "evaluation", "capacites": ["T-STRUCT-02A", "T-STRUCT-02B", "T-STRUCT-03A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "approved"}
+\section*{Évaluation A --- Structures de données}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (programmer une classe) ; Ex. 2 : 10 pts (pile, LIFO)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Classe Rectangle} \hfill (10 points)
+
+\begin{enumerate}
+  \item (4 pts) Ecrire une classe \lstinline{Rectangle} avec un constructeur prenant \lstinline{largeur} et \lstinline{hauteur}.
+  \item (3 pts) Ajouter une methode \lstinline{aire()} qui renvoie l'aire du rectangle.
+  \item (3 pts) Ajouter une methode \lstinline{perimetre()} qui renvoie le perimetre du rectangle.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% class Rectangle:
+%     def __init__(self, largeur, hauteur):
+%         self.largeur = largeur
+%         self.hauteur = hauteur
+%     def aire(self):
+%         return self.largeur * self.hauteur
+%     def perimetre(self):
+%         return 2 * (self.largeur + self.hauteur)
+% r = Rectangle(4, 3)
+% assert r.aire() == 12
+% assert r.perimetre() == 14
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Pile} \hfill (10 points)
+
+\begin{enumerate}
+  \item (4 pts) Rappeler l'interface d'une pile (trois methodes) et le principe LIFO.
+  \item (6 pts) On empile successivement $5, 3, 8, 1$, puis on depile trois fois. Donner, en le justifiant, le contenu final de la pile.
+\end{enumerate}

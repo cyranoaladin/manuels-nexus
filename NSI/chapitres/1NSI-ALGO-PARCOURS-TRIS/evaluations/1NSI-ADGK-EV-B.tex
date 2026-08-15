@@ -1,0 +1,63 @@
+% META: {"id": "1NSI-AGT-EVAL-B", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "evaluation", "capacites": ["P-ALGO-01A", "P-ALGO-01B", "P-ALGO-02B", "P-ALGO-02D"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "approved"}
+\section*{Évaluation B --- Parcours et tris}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (recherche, extremum, moyenne) ; Ex. 2 : 10 pts (tri par sélection, invariant)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Parcours séquentiel} \hfill (10 points)
+
+On donne le tableau \lstinline{[17, 40, 6, 25, 12]}.
+
+\begin{enumerate}
+  \item (3 pts) À quel indice se trouve la valeur $6$ ? Utiliser \lstinline{recherche_occurrence} du cours.
+  \item (3 pts) Calculer le maximum de ce tableau avec \lstinline{maximum}.
+  \item (4 pts) Calculer la moyenne de ce tableau avec \lstinline{moyenne}. Détailler le calcul à la main.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def recherche_occurrence(tableau, valeur):
+%     for i in range(len(tableau)):
+%         if tableau[i] == valeur:
+%             return i
+%     return -1
+% def maximum(tableau):
+%     maxi = tableau[0]
+%     for x in tableau[1:]:
+%         if x > maxi:
+%             maxi = x
+%     return maxi
+% def moyenne(tableau):
+%     return sum(tableau) / len(tableau)
+% t = [17, 40, 6, 25, 12]
+% assert recherche_occurrence(t, 6) == 2
+% assert maximum(t) == 40
+% assert moyenne(t) == 20.0
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Tri par sélection} \hfill (10 points)
+
+On applique le tri par sélection au tableau \lstinline{[7, 1, 4, 9]}.
+
+\begin{enumerate}
+  \item (5 pts) Dérouler l'algorithme : pour chaque itération de la boucle externe, donner l'indice du minimum trouvé et le contenu du tableau après l'échange.
+  \item (3 pts) Vérifier, à chaque étape, l'invariant de boucle du cours (préfixe trié et inférieur ou égal au reste).
+  \item (2 pts) Quel est le coût de cet algorithme dans le pire cas, en fonction de la taille $n$ du tableau ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def tri_selection(tableau):
+%     tableau = tableau[:]
+%     n = len(tableau)
+%     for i in range(n - 1):
+%         indice_min = i
+%         for j in range(i + 1, n):
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%     return tableau
+% assert tri_selection([7, 1, 4, 9]) == [1, 4, 7, 9]
+% END-VERIFY

@@ -1,0 +1,28 @@
+% META: {"id": "TEXP-MATRICES-MARKOV-FR-R1", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "remediation", "capacites_codes": ["R1"], "status": "approved"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU -- R1 : Derivation : derivees de reference et regles
+%---------------------------------------------------------------
+
+\subsection*{Rappel -- Derivation : derivees de reference et regles}
+
+\textbf{Derivees usuelles :} $(x^n)' = n x^{n-1}$, $(\mathrm{e}^x)' = \mathrm{e}^x$, $(\ln x)' = \dfrac{1}{x}$, $(\sqrt{x})' = \dfrac{1}{2\sqrt{x}}$.
+
+\textbf{Regles :} $(u+v)' = u' + v'$, $(uv)' = u'v + uv'$, $\left(\dfrac{u}{v}\right)' = \dfrac{u'v - uv'}{v^2}$.
+
+\begin{exercice}{TEXP-MAT-FR-R1-EX1}{1}{8}
+Calculer les derivees des fonctions suivantes :
+\begin{enumerate}
+  \item $f(x) = x^4 - 3x^2 + 5$
+  \item $g(x) = \dfrac{\mathrm{e}^x}{x}$ sur $\mathbb{R}^*$
+  \item $h(x) = x \ln x$ sur $]0, +\infty[$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert diff(x**4 - 3*x**2 + 5, x) == 4*x**3 - 6*x
+% assert simplify(diff(exp(x)/x, x) - (exp(x)*x - exp(x))/x**2) == 0
+% assert simplify(diff(x*ln(x), x) - (ln(x) + 1)) == 0
+% END-VERIFY

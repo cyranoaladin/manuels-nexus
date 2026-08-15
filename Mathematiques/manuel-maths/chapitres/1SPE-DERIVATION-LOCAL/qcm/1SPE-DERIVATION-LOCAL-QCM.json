@@ -1,17 +1,396 @@
-{"chapitre":"1SPE-DERIVATION-LOCAL","questions":[
-  {"id":"Q1","capacite":"C1","correcte":"B","diagnostics":{"A":{"erreur":"Quotient f(b)/b au lieu de (f(b)-f(a))/(b-a).","renvoi":"M1"},"C":{"erreur":"Numérateur seul, dénominateur oublié.","renvoi":"M1"},"D":{"erreur":"Quotient inversé.","renvoi":"M1"}}},
-  {"id":"Q2","capacite":"C1","correcte":"B","diagnostics":{"A":{"erreur":"Accroissement de f seul, sans diviser par h.","renvoi":"M1"},"C":{"erreur":"Quotient inversé.","renvoi":"M1"},"D":{"erreur":"Produit au lieu d'un quotient.","renvoi":"M1"}}},
-  {"id":"Q3","capacite":"C1","correcte":"C","diagnostics":{"A":{"erreur":"Distance parcourue confondue avec vitesse moyenne.","renvoi":"M1, R5"},"B":{"erreur":"Vitesse en un instant confondue avec vitesse moyenne.","renvoi":"M1, M2"},"D":{"erreur":"Accélération confondue avec vitesse.","renvoi":"M2"}}},
-  {"id":"Q4","capacite":"C2","correcte":"A","diagnostics":{"B":{"erreur":"Pente de sécante confondue avec pente de tangente.","renvoi":"M2"},"C":{"erreur":"f(a) est l'ordonnée, pas la pente.","renvoi":"M2"},"D":{"erreur":"Le nombre dérivé n'est pas une valeur de f.","renvoi":"M2"}}},
-  {"id":"Q5","capacite":"C2","correcte":"A","diagnostics":{"B":{"erreur":"Développement incorrect de (2+h)^2.","renvoi":"R2"},"C":{"erreur":"Erreur d'identification du terme 4.","renvoi":"R2"},"D":{"erreur":"Produit 4h au lieu de somme 4+h.","renvoi":"R2"}}},
-  {"id":"Q6","capacite":"C2","correcte":"B","diagnostics":{"A":{"erreur":"d(2) est la position, pas la vitesse.","renvoi":"M2"},"C":{"erreur":"Vitesse moyenne confondue avec vitesse instantanée.","renvoi":"M1, M2"},"D":{"erreur":"Accélération = dérivée de la vitesse.","renvoi":"M2"}}},
-  {"id":"Q7","capacite":"C3","correcte":"B","diagnostics":{"A":{"erreur":"Quotient y_B/x_B au lieu de pente.","renvoi":"R3"},"C":{"erreur":"Différence d'ordonnées sans diviser par delta x.","renvoi":"R3"},"D":{"erreur":"Quotient inversé.","renvoi":"R3"}}},
-  {"id":"Q8","capacite":"C3","correcte":"B","diagnostics":{"A":{"erreur":"f(a)=0 signifie point sur l'axe, pas tangente horizontale.","renvoi":"M3"},"C":{"erreur":"Pente 1 = droite à 45°, pas horizontale.","renvoi":"R3"},"D":{"erreur":"Aucune raison d'égalité f(a) = f'(a).","renvoi":"M3"}}},
-  {"id":"Q9","capacite":"C3","correcte":"C","diagnostics":{"A":{"erreur":"Sans la pente, la tangente n'est pas déterminée.","renvoi":"M3"},"B":{"erreur":"Sans le point de contact, la tangente n'est pas positionnée.","renvoi":"M3, M4"},"D":{"erreur":"La tangente n'est pas une sécante.","renvoi":"M3"}}},
-  {"id":"Q10","capacite":"C4","correcte":"B","diagnostics":{"A":{"erreur":"Ordonnée à l'origine confondue avec f(a) sauf si a=0.","renvoi":"M4"},"C":{"erreur":"Rôles de f(a) et f'(a) inversés.","renvoi":"M4"},"D":{"erreur":"f'(x) varie avec x, la pente est f'(a).","renvoi":"M4"}}},
-  {"id":"Q11","capacite":"C4","correcte":"B","diagnostics":{"A":{"erreur":"f'(a)x + f(a) au lieu de f'(a)(x-a)+f(a).","renvoi":"M4"},"C":{"erreur":"Rôles de f(a) et f'(a) inversés.","renvoi":"M4"},"D":{"erreur":"Ordonnée à l'origine mal calculée.","renvoi":"M4"}}},
-  {"id":"Q12","capacite":"C4","correcte":"B","diagnostics":{"A":{"erreur":"y(0)=f(0) n'est vrai que si a=0.","renvoi":"M4"},"C":{"erreur":"La tangente passe par (a;f(a)), pas par (a;0).","renvoi":"M4"},"D":{"erreur":"y(a) doit valoir f(a), pas f'(a).","renvoi":"M4"}}},
-  {"id":"Q13","capacite":"C5","correcte":"B","diagnostics":{"A":{"erreur":"Terme f(a) oublié.","renvoi":"M5"},"C":{"erreur":"Rôles de f(a) et f'(a) inversés.","renvoi":"M5"},"D":{"erreur":"Somme f(a)+f'(a) multipliée par h.","renvoi":"M5"}}},
-  {"id":"Q14","capacite":"C5","correcte":"B","diagnostics":{"A":{"erreur":"Plus h est grand, plus l'approximation est mauvaise.","renvoi":"M5"},"C":{"erreur":"f'(a)=0 donne f(a+h)≈f(a), pas meilleur.","renvoi":"M5"},"D":{"erreur":"La qualité ne dépend pas de a=0 mais de |h|.","renvoi":"M5"}}},
-  {"id":"Q15","capacite":"C5","correcte":"B","diagnostics":{"A":{"erreur":"h=0,06 ajouté à sqrt(4) sans multiplier par f'(4).","renvoi":"M5"},"C":{"erreur":"Produit h*f'(a) sans ajouter f(a).","renvoi":"M5"},"D":{"erreur":"Erreur de placement de la virgule.","renvoi":"M5"}}}
-]}
+{
+  "chapitre": "1SPE-DERIVATION-LOCAL",
+  "titre": "Dérivation locale — QCM d'auto-évaluation",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "Le taux d'variation de la fonction $f$ entre $a$ et $b$ ($a \\neq b$) est égal à :",
+      "options": {
+        "A": "$\\dfrac{f(b)}{b}$",
+        "B": "$\\dfrac{f(b) - f(a)}{b - a}$",
+        "C": "$f(b) - f(a)$",
+        "D": "$\\dfrac{b - a}{f(b) - f(a)}$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Quotient $f(b)/b$ au lieu de $(f(b)-f(a))/(b-a)$.",
+          "renvoi": "M1"
+        },
+        "C": {
+          "erreur": "Numérateur seul, dénominateur oublié.",
+          "renvoi": "M1"
+        },
+        "D": {
+          "erreur": "Quotient inversé.",
+          "renvoi": "M1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "Pour $h \\neq 0$, le taux d'accroissement de $f$ en $a$ s'écrit :",
+      "options": {
+        "A": "$f(a+h) - f(a)$",
+        "B": "$\\dfrac{f(a+h) - f(a)}{h}$",
+        "C": "$\\dfrac{h}{f(a+h) - f(a)}$",
+        "D": "$h \\times [f(a+h) - f(a)]$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Accroissement de $f$ seul, sans diviser par $h$.",
+          "renvoi": "M1"
+        },
+        "C": {
+          "erreur": "Quotient inversé.",
+          "renvoi": "M1"
+        },
+        "D": {
+          "erreur": "Produit au lieu d'un quotient.",
+          "renvoi": "M1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C1",
+      "enonce": "Si $d(t)$ désigne la position d'un mobile à l'instant $t$, la vitesse moyenne entre $t_1$ et $t_2$ est :",
+      "options": {
+        "A": "$d(t_2) - d(t_1)$",
+        "B": "$d'(t_1)$",
+        "C": "$\\dfrac{d(t_2) - d(t_1)}{t_2 - t_1}$",
+        "D": "$d''(t_1)$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Distance parcourue confondue avec vitesse moyenne.",
+          "renvoi": "M1, R5"
+        },
+        "B": {
+          "erreur": "Vitesse en un instant confondue avec vitesse moyenne.",
+          "renvoi": "M1, M2"
+        },
+        "D": {
+          "erreur": "Accélération confondue avec vitesse.",
+          "renvoi": "M2"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "Par définition, le nombre dérivé $f'(a)$ est la limite quand $h \\to 0$ de :",
+      "options": {
+        "A": "$\\dfrac{f(a+h) - f(a)}{h}$",
+        "B": "$\\dfrac{f(x) - f(a)}{x}$",
+        "C": "$f(a)$",
+        "D": "$f(a+h)$"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Pente de sécante confondue avec pente de tangente.",
+          "renvoi": "M2"
+        },
+        "C": {
+          "erreur": "$f(a)$ est l'ordonnée, pas la pente.",
+          "renvoi": "M2"
+        },
+        "D": {
+          "erreur": "Le nombre dérivé n'est pas une valeur de $f$.",
+          "renvoi": "M2"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C2",
+      "enonce": "Pour $f(x) = x^2$, le taux d'accroissement en $a=2$ vaut :",
+      "options": {
+        "A": "$4 + h$",
+        "B": "$4 + h^2$",
+        "C": "$4$",
+        "D": "$4h$"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Développement incorrect de $(2+h)^2$.",
+          "renvoi": "R2"
+        },
+        "C": {
+          "erreur": "Erreur d'identification du terme 4.",
+          "renvoi": "R2"
+        },
+        "D": {
+          "erreur": "Produit $4h$ au lieu de somme $4+h$.",
+          "renvoi": "R2"
+        }
+      }
+    },
+    {
+      "id": "Q6",
+      "capacite": "C2",
+      "enonce": "La vitesse instantanée à l'instant $t=2$ correspond à :",
+      "options": {
+        "A": "$d(2)$",
+        "B": "$d'(2)$",
+        "C": "$\\dfrac{d(2)}{2}$",
+        "D": "$d''(2)$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "$d(2)$ est la position, pas la vitesse.",
+          "renvoi": "M2"
+        },
+        "C": {
+          "erreur": "Vitesse moyenne confondue avec vitesse instantanée.",
+          "renvoi": "M1, M2"
+        },
+        "D": {
+          "erreur": "Accélération = dérivée de la vitesse.",
+          "renvoi": "M2"
+        }
+      }
+    },
+    {
+      "id": "Q7",
+      "capacite": "C3",
+      "enonce": "La pente de la droite passant par $A(x_A, y_A)$ et $B(x_B, y_B)$ ($x_A \\neq x_B$) vaut :",
+      "options": {
+        "A": "$\\dfrac{y_B}{x_B}$",
+        "B": "$\\dfrac{y_B - y_A}{x_B - x_A}$",
+        "C": "$y_B - y_A$",
+        "D": "$\\dfrac{x_B - x_A}{y_B - y_A}$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Quotient $y_B/x_B$ au lieu de pente.",
+          "renvoi": "R3"
+        },
+        "C": {
+          "erreur": "Différence d'ordonnées sans diviser par $\\Delta x$.",
+          "renvoi": "R3"
+        },
+        "D": {
+          "erreur": "Quotient inversé.",
+          "renvoi": "R3"
+        }
+      }
+    },
+    {
+      "id": "Q8",
+      "capacite": "C3",
+      "enonce": "La courbe représentative de $f$ admet une tangente horizontale au point d'abscisse $a$ si :",
+      "options": {
+        "A": "$f(a) = 0$",
+        "B": "$f'(a) = 0$",
+        "C": "$f'(a) = 1$",
+        "D": "$f(a) = f'(a)$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "$f(a)=0$ signifie point sur l'axe, pas tangente horizontale.",
+          "renvoi": "M3"
+        },
+        "C": {
+          "erreur": "Pente 1 = droite à 45°, pas horizontale.",
+          "renvoi": "R3"
+        },
+        "D": {
+          "erreur": "Aucune raison d'égalité $f(a) = f'(a)$.",
+          "renvoi": "M3"
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "capacite": "C3",
+      "enonce": "Géométriquement, le nombre dérivé $f'(a)$ représente :",
+      "options": {
+        "A": "l'ordonnée à l'origine de la tangente",
+        "B": "l'abscisse du point de contact",
+        "C": "le coefficient directeur de la tangente en $a$",
+        "D": "la longueur du segment sécant"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Sans la pente, la tangente n'est pas déterminée.",
+          "renvoi": "M3"
+        },
+        "B": {
+          "erreur": "Sans le point de contact, la tangente n'est pas positionnée.",
+          "renvoi": "M3, M4"
+        },
+        "D": {
+          "erreur": "La tangente n'est pas une sécante.",
+          "renvoi": "M3"
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "capacite": "C4",
+      "enonce": "L'équation réduite de la tangente à la courbe de $f$ au point d'abscisse $a$ est :",
+      "options": {
+        "A": "$y = f'(a)x + f(a)$",
+        "B": "$y = f'(a)(x - a) + f(a)$",
+        "C": "$y = f(a)(x - a) + f'(a)$",
+        "D": "$y = f'(x)(x - a) + f(a)$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Ordonnée à l'origine confondue avec $f(a)$ sauf si $a=0$.",
+          "renvoi": "M4"
+        },
+        "C": {
+          "erreur": "Rôles de $f(a)$ et $f'(a)$ inversés.",
+          "renvoi": "M4"
+        },
+        "D": {
+          "erreur": "$f'(x)$ varie avec $x$, la pente est $f'(a)$.",
+          "renvoi": "M4"
+        }
+      }
+    },
+    {
+      "id": "Q11",
+      "capacite": "C4",
+      "enonce": "Si $f(1)=3$ et $f'(1)=-2$, l'équation de la tangente en $a=1$ est :",
+      "options": {
+        "A": "$y = -2x + 3$",
+        "B": "$y = -2x + 5$",
+        "C": "$y = 3x - 2$",
+        "D": "$y = -2x - 1$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "$f'(a)x + f(a)$ au lieu de $f'(a)(x-a)+f(a)$.",
+          "renvoi": "M4"
+        },
+        "C": {
+          "erreur": "Rôles de $f(a)$ et $f'(a)$ inversés.",
+          "renvoi": "M4"
+        },
+        "D": {
+          "erreur": "Ordonnée à l'origine mal calculée.",
+          "renvoi": "M4"
+        }
+      }
+    },
+    {
+      "id": "Q12",
+      "capacite": "C4",
+      "enonce": "Une droite d'équation $y = mx + p$ passe par $(a, f(a))$ avec pour pente $f'(a)$. Son ordonnée à l'origine $p$ vaut :",
+      "options": {
+        "A": "$f(0)$",
+        "B": "$f(a) - a f'(a)$",
+        "C": "$0$",
+        "D": "$f'(a)$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "$y(0)=f(0)$ n'est vrai que si $a=0$.",
+          "renvoi": "M4"
+        },
+        "C": {
+          "erreur": "La tangente passe par $(a, f(a))$, pas par $(a, 0)$.",
+          "renvoi": "M4"
+        },
+        "D": {
+          "erreur": "$y(a)$ doit valoir $f(a)$, pas $f'(a)$.",
+          "renvoi": "M4"
+        }
+      }
+    },
+    {
+      "id": "Q13",
+      "capacite": "C5",
+      "enonce": "L'approximation affine de $f(a+h)$ pour $h$ voisin de 0 est donnée par :",
+      "options": {
+        "A": "$f(a+h) \\approx f'(a) h$",
+        "B": "$f(a+h) \\approx f(a) + f'(a) h$",
+        "C": "$f(a+h) \\approx f'(a) + f(a) h$",
+        "D": "$f(a+h) \\approx (f(a) + f'(a)) h$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Terme $f(a)$ oublié.",
+          "renvoi": "M5"
+        },
+        "C": {
+          "erreur": "Rôles de $f(a)$ et $f'(a)$ inversés.",
+          "renvoi": "M5"
+        },
+        "D": {
+          "erreur": "Somme $f(a)+f'(a)$ multipliée par $h$.",
+          "renvoi": "M5"
+        }
+      }
+    },
+    {
+      "id": "Q14",
+      "capacite": "C5",
+      "enonce": "L'approximation affine locale est d'autant plus précise que :",
+      "options": {
+        "A": "$|h|$ est grand",
+        "B": "$|h|$ est très proche de 0",
+        "C": "$f'(a) = 0$",
+        "D": "$a = 0$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Plus $h$ est grand, plus l'approximation est mauvaise.",
+          "renvoi": "M5"
+        },
+        "C": {
+          "erreur": "$f'(a)=0$ donne $f(a+h) \\approx f(a)$, pas meilleur.",
+          "renvoi": "M5"
+        },
+        "D": {
+          "erreur": "La qualité ne dépend pas de $a=0$ mais de $|h|$.",
+          "renvoi": "M5"
+        }
+      }
+    },
+    {
+      "id": "Q15",
+      "capacite": "C5",
+      "enonce": "Pour $f(x)=\\sqrt{x}$, comme $f(4)=2$ et $f'(4)=\\dfrac{1}{4}$, une valeur approchée de $\\sqrt{4{,}06}$ est :",
+      "options": {
+        "A": "$2{,}06$",
+        "B": "$2{,}015$",
+        "C": "$0{,}015$",
+        "D": "$2{,}15$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "$h=0{,}06$ ajouté à $\\sqrt{4}$ sans multiplier par $f'(4)$.",
+          "renvoi": "M5"
+        },
+        "C": {
+          "erreur": "Produit $h \\times f'(a)$ sans ajouter $f(a)$.",
+          "renvoi": "M5"
+        },
+        "D": {
+          "erreur": "Erreur de placement de la virgule.",
+          "renvoi": "M5"
+        }
+      }
+    }
+  ]
+}

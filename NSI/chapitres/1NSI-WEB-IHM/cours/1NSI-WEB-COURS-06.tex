@@ -1,0 +1,88 @@
+% META: {"id": "1NSI-WEB-COURS-06", "chapitre": "1NSI-WEB-IHM", "type_objet": "cours", "capacites": ["1NSI-WEB-IHM-C6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C6"]}
+\section{Formulaires, requêtes GET et POST}
+
+\definition[D5]{
+  Un \textbf{formulaire} Web (balise \lstinline{<form>}) regroupe des composants de saisie
+  (champs de texte, cases à cocher...) et un bouton d'envoi. Lorsque l'utilisateur
+  \textbf{soumet} le formulaire, le navigateur envoie une requête au serveur, contenant les
+  valeurs saisies sous forme de \textbf{paramètres}.
+}
+
+\exemple{Un formulaire de recherche simple :}
+
+\begin{console}
+<form action="/recherche" method="GET">
+    <input type="text" name="q">
+    <button type="submit">Rechercher</button>
+</form>
+\end{console}
+
+\propriete[Requête GET]{
+  Avec la méthode \lstinline{GET}, les paramètres du formulaire sont ajoutés
+  \textbf{directement dans l'URL}, après un point d'interrogation, sous la forme
+  \lstinline{cle1=valeur1&cle2=valeur2}. Ils sont donc \textbf{visibles} (dans la barre
+  d'adresse, dans l'historique du navigateur) et de \textbf{taille limitée}.
+}
+
+\begin{codereference}{Construire une requête GET (module \lstinline{urllib.parse})}
+\begin{python}
+from urllib.parse import urlencode
+
+parametres = {"q": "chaton", "page": 2}
+url_get = "https://exemple.fr/recherche?" + urlencode(parametres)
+print(url_get)
+# https://exemple.fr/recherche?q=chaton&page=2
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% from urllib.parse import urlencode
+% parametres = {"q": "chaton", "page": 2}
+% url_get = "https://exemple.fr/recherche?" + urlencode(parametres)
+% assert url_get == "https://exemple.fr/recherche?q=chaton&page=2"
+% END-VERIFY
+
+\propriete[Requête POST]{
+  Avec la méthode \lstinline{POST}, les paramètres sont placés dans le \textbf{corps} de la
+  requête, pas dans l'URL : ils ne sont \textbf{pas visibles} dans la barre d'adresse et ne
+  sont pas limités en taille de la même façon.
+}
+
+\exemple{Le formulaire de connexion suivant utilise \lstinline{POST}, pour ne pas exposer le
+mot de passe dans l'URL :}
+
+\begin{console}
+<form action="/connexion" method="POST">
+    <input type="text" name="identifiant">
+    <input type="password" name="mdp">
+    <button type="submit">Se connecter</button>
+</form>
+\end{console}
+
+% BEGIN-VERIFY
+% from urllib.parse import urlencode
+% donnees_post = {"identifiant": "alice", "mdp": "secret123"}
+% corps_requete = urlencode(donnees_post)
+% # avec POST, ces donnees vont dans le corps de la requete, pas dans l'URL affichee
+% url_avec_get = "https://exemple.fr/connexion?" + corps_requete
+% assert "secret123" in url_avec_get  # demonstration : si on utilisait GET, le mdp apparaitrait dans l'URL
+% assert "secret123" not in "https://exemple.fr/connexion"  # avec POST, l'URL ne contient pas le mdp
+% END-VERIFY
+
+\propriete[Choisir entre GET et POST]{
+  On choisit \lstinline{GET} pour des paramètres \textbf{non sensibles} et courts
+  (recherche, filtres, pagination), en profitant du fait qu'une URL GET peut être
+  partagée, mise en favori ou revisitée facilement. On choisit \lstinline{POST} pour des
+  données \textbf{confidentielles} (mots de passe) ou \textbf{volumineuses} (envoi d'un
+  fichier), qui ne doivent pas apparaître dans l'URL ni dans l'historique du navigateur.
+}
+
+\erreurFrequente{Utiliser \lstinline{GET} pour transmettre un mot de passe ou toute donnée
+confidentielle. Même sur une connexion chiffrée (HTTPS), l'URL complète (avec les
+paramètres GET) reste visible dans l'\textbf{historique du navigateur} et peut être
+enregistrée dans les journaux (\emph{logs}) du serveur : ce n'est pas un canal adapté à des
+données sensibles.}
+
+\alamachine{Écris une fonction \lstinline{construire_url(base, parametres)} qui utilise
+\lstinline{urlencode} pour construire une URL de requête GET à partir d'un dictionnaire de
+paramètres quelconque. Teste-la avec \lstinline|{"ville": "Tunis", "tri": "prix"}|.}

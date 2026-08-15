@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-CORR-EX-017", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "exercice", "capacites": ["TCOMPL-CORR-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["communiquer","raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-017.tex", "corrige_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-017.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**3 - 6*x**2 + 9*x + 1
+% fp = diff(f, x)
+% assert expand(fp) == 3*x**2 - 12*x + 9
+% assert solve(fp, x) == [1, 3]
+% assert f.subs(x, 1) == 5
+% assert f.subs(x, 3) == 1
+% # tangente en x=2: f(2)=3, f'(2)=-3, y=-3(x-2)+3=-3x+9
+% assert f.subs(x, 2) == 3
+% assert fp.subs(x, 2) == -3
+% END-VERIFY
+\begin{exercice}{TCOMPL-CORR-EX-017}{2}{20}
+Soit $f(x) = x^3 - 6x^2 + 9x + 1$.
+\begin{enumerate}
+  \item Dresser le tableau de variations de $f$.
+  \item Determiner l'equation de la tangente a la courbe au point d'abscisse $2$.
+  \item La courbe traverse-t-elle cette tangente en $x = 2$ ?
+\end{enumerate}
+
+\end{exercice}

@@ -1,0 +1,58 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-COURS-13", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "cours", "capacites_codes": ["C13"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TSPE-GEOMETRIE-ESPACE-C13"], "statut": "structure"}
+
+\section{Équation cartésienne d'un plan}
+
+% ============================================================
+% STRATE 1 — Vecteur normal et demonstration exigible
+% ============================================================
+
+\definition[1]{
+Un vecteur $\vec{n}$ non nul est \textbf{normal} a un plan $\mathcal{P}$ s'il est orthogonal a tout vecteur du plan $\mathcal{P}$ (ou, de maniere equivalente, orthogonal a deux vecteurs non colineaires de $\mathcal{P}$).
+}
+
+\theoreme{
+Soit $\mathcal{P}$ le plan passant par $A(x_A,y_A,z_A)$ et de vecteur normal $\vec{n}\begin{pmatrix}a\\b\\c\end{pmatrix}$ (non nul). Un point $M(x,y,z)$ appartient a $\mathcal{P}$ si et seulement si :
+\[
+  a(x-x_A)+b(y-y_A)+c(z-z_A) = 0.
+\]
+En posant $d=-(ax_A+by_A+cz_A)$, cette equation s'ecrit $ax+by+cz+d=0$ : c'est une \textbf{equation cartesienne} de $\mathcal{P}$.
+}
+
+\demonstration{
+$M \in \mathcal{P} \iff \vec{AM}$ est un vecteur du plan $\mathcal{P}$ (ou $M=A$) $\iff \vec{AM}$ est orthogonal a $\vec{n}$ (par definition du vecteur normal, sachant que $\vec{n}$ est orthogonal a tout vecteur de $\mathcal{P}$, et reciproquement tout vecteur orthogonal a $\vec{n}$ et base en un point de $\mathcal{P}$ reste dans $\mathcal{P}$) $\iff \vec{n}\cdot\vec{AM}=0$.
+
+Or $\vec{AM}\begin{pmatrix}x-x_A\\y-y_A\\z-z_A\end{pmatrix}$, donc en repere orthonorme :
+\[
+  \vec{n}\cdot\vec{AM} = a(x-x_A)+b(y-y_A)+c(z-z_A).
+\]
+
+Ainsi $M \in \mathcal{P} \iff a(x-x_A)+b(y-y_A)+c(z-z_A)=0$.
+}
+
+\propriete[Réciproque]{
+Reciproquement, toute equation de la forme $ax+by+cz+d=0$ (avec $(a,b,c)
+eq(0,0,0)$) est l'equation cartesienne d'un plan de vecteur normal $\vec{n}\begin{pmatrix}a\\b\\c\end{pmatrix}$.
+}
+
+\exemple{
+Determiner une equation cartesienne du plan $\mathcal{P}$ passant par $A(1,-2,3)$ de vecteur normal $\vec{n}\begin{pmatrix}2\\1\\-1\end{pmatrix}$.
+\[
+  2(x-1)+1(y+2)-1(z-3) = 0 \iff 2x+y-z+3 = 0.
+\]
+
+% BEGIN-VERIFY
+% # verification : A(1,-2,3) doit verifier l'equation
+% x,y,z = 1,-2,3
+% assert 2*x + y - z + 3 == 0
+% END-VERIFY
+
+Le plan $\mathcal{Q}$ d'equation $x-3y+2z-5=0$ a pour vecteur normal $\vec{n'}\begin{pmatrix}1\\-3\\2\end{pmatrix}$ (coefficients de $x,y,z$).
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Se tromper de signe en lisant le vecteur normal.} Pour $ax+by+cz+d=0$, le vecteur normal est $(a,b,c)$ — les coefficients de $x,y,z$, pas ceux de l'equation developpee sous une autre forme. Toujours ecrire l'equation sous forme reduite avant de lire le vecteur normal.
+}

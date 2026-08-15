@@ -1,0 +1,27 @@
+% META: {"id": "TCOMPL-AIR-CO-011", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "corrige", "exercice_ref": "TCOMPL-AIR-EX-011", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x) - x
+% fp = diff(f, x)
+% assert fp == exp(x) - 1
+% assert solve(fp, x) == [0]
+% assert f.subs(x, 0) == 1
+% assert limit(f, x, oo) == oo
+% assert limit(f, x, -oo) == oo
+% END-VERIFY
+\begin{corrige}{TCOMPL-AIR-EX-011}
+
+$f'(x) = \mathrm{e}^x - 1$.
+
+\commentaireMarge{$\mathrm{e}^x - 1 \geq 0 \iff x \geq 0$ car $\mathrm{e}^x \geq 1$ ssi $x \geq 0$.}
+
+$f'(x) = 0 \iff x = 0$ et $f'(x) > 0$ pour $x > 0$, $f'(x) < 0$ pour $x < 0$.
+
+$f$ est decroissante sur $\left]-\infty, 0\right]$ puis croissante sur $\left[0, +\infty\right[$.
+
+Le minimum est $f(0) = 1$.
+
+Limites : $\lim_{x \to +\infty} f(x) = +\infty$ (croissance comparee) et $\lim_{x \to -\infty} f(x) = +\infty$ ($-x$ domine).
+
+\end{corrige}

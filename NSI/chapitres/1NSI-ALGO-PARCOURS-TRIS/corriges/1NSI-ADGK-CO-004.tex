@@ -1,0 +1,22 @@
+% META: {"id": "1NSI-ADGK-CO-004", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "correction", "exercice_ref": "1NSI-ADGK-EX-004", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "approved", "capacites": ["1NSI-ALGO-PARCOURS-TRIS-C1"], "parcours": 2, "duree_min": 2, "fichier_exercice": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-004.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = sqrt(x**2 + 4)
+% fp = diff(f, x)
+% assert simplify(fp) == x/sqrt(x**2 + 4)
+% assert fp.subs(x, 0) == 0
+% assert fp.subs(x, 3) == 3*sqrt(13)/13
+% END-VERIFY
+\begin{corrige}{1NSI-ADGK-EX-004}
+
+On pose $u(x) = x^2+4$. Alors $u'(x) = 2x$ et $u(x) > 0$ sur $\mathbb{R}$.
+
+\commentaireMarge{$u(x) = x^2+4 > 0$ partout : la racine est bien definie sur $\mathbb{R}$.}
+
+La formule $(\sqrt{u})' = \dfrac{u'}{2\sqrt{u}}$ donne :
+\[ f'(x) = \frac{2x}{2\sqrt{x^2+4}} = \frac{x}{\sqrt{x^2+4}}. \]
+
+On verifie : $f'(0) = 0$ (la tangente est horizontale en $0$).
+
+\end{corrige}

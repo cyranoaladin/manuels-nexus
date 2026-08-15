@@ -1,0 +1,55 @@
+% META: {"id": "1NSI-LANG-REMED-01", "chapitre": "1NSI-LANGAGE", "type_objet": "remediation", "capacites": ["1NSI-LANGAGE-C1"], "status": "approved", "capacites_codes": ["C1"]}
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C4 : accumulateur initialise a une constante arbitraire
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-LANG-RE-C4-EX1}{1}{10}
+\textbf{Précondition :} dans toute cette fiche, l'argument est une
+\textbf{liste non vide}. Le cas \lstinline{[]} est hors précondition.
+
+Un élève écrit une fonction censée renvoyer le \textbf{minimum} d'une liste de nombres :
+\begin{python}
+def minimum_bugue(liste):
+    mini = 0
+    for x in liste:
+        if x < mini:
+            mini = x
+    return mini
+\end{python}
+\begin{enumerate}
+  \item Que renvoie \lstinline{minimum_bugue([5, 3, 8])} ? Est-ce le résultat attendu ?
+  \item Pourquoi cette fonction se trompe-t-elle sur cet exemple, alors que tous les éléments de la liste sont positifs ?
+  \item Corriger la fonction en initialisant l'accumulateur correctement, puis
+  justifier le choix de la valeur initiale à partir de la précondition.
+\end{enumerate}
+\end{exercice}
+
+% PYTHON-SOURCE: code/minimum.py
+% BEGIN-VERIFY
+% def minimum_bugue(liste):
+%     mini = 0
+%     for x in liste:
+%         if x < mini:
+%             mini = x
+%     return mini
+% assert minimum_bugue([5, 3, 8]) == 0
+% def minimum(liste):
+%     """Renvoie le plus petit element.
+%
+%     Precondition : liste est non vide.
+%     """
+%     if len(liste) == 0:
+%         raise ValueError("liste doit etre non vide")
+%     mini = liste[0]
+%     for x in liste[1:]:
+%         if x < mini:
+%             mini = x
+%     return mini
+% assert minimum([5, 3, 8]) == 3
+% try:
+%     minimum([])
+% except ValueError as erreur:
+%     assert str(erreur) == "liste doit etre non vide"
+% else:
+%     raise AssertionError("minimum([]) doit echouer")
+% END-VERIFY

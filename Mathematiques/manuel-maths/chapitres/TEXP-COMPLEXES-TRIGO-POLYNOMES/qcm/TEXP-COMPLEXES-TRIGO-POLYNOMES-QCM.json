@@ -1,0 +1,136 @@
+{
+  "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+  "titre": "Complexes : trigonometrie et polynomes",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "La forme exponentielle de $z = 1 + i\\sqrt{3}$ est :",
+      "correcte": "A",
+      "options": {
+        "A": "$2e^{i\\pi/3}$",
+        "B": "$2e^{i\\pi/6}$",
+        "C": "$e^{i\\pi/3}$",
+        "D": "$2e^{-i\\pi/3}$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Erreur d'angle pi/6 au lieu de pi/3.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "Module faux (1 au lieu de 2).",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Erreur de signe d'argument.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "D'apres la formule de Euler, $\\cos(\\theta) =$",
+      "correcte": "C",
+      "options": {
+        "A": "$\\frac{e^{i\\theta} - e^{-i\\theta}}{2}$",
+        "B": "$\\frac{e^{i\\theta} + e^{-i\\theta}}{2i}$",
+        "C": "$\\frac{e^{i\\theta} + e^{-i\\theta}}{2}$",
+        "D": "$e^{i\\theta} + e^{-i\\theta}$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Formule de sin(theta) sans le i.",
+          "renvoi": "C1"
+        },
+        "B": {
+          "erreur": "Facteur 2i au lieu de 2.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Oubli de diviser par 2.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C2",
+      "enonce": "La formule de Moivre donne $(\\cos\\theta + i\\sin\\theta)^n =$",
+      "correcte": "B",
+      "options": {
+        "A": "$\\cos^n\\theta + i\\sin^n\\theta$",
+        "B": "$\\cos(n\\theta) + i\\sin(n\\theta)$",
+        "C": "$n\\cos\\theta + in\\sin\\theta$",
+        "D": "$\\cos(n\\theta) - i\\sin(n\\theta)$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Puissance appliquee aux fonctions.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Facteur n devant cos et sin.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Erreur de signe.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "Les racines n-iemes de l'unite sont au nombre de :",
+      "correcte": "D",
+      "options": {
+        "A": "1",
+        "B": "2",
+        "C": "n-1",
+        "D": "n"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Seule la racine 1 comptee dans R.",
+          "renvoi": "C2"
+        },
+        "B": {
+          "erreur": "Racines reelles uniquement.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Compte incorrect.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C3",
+      "enonce": "Un polynome de degre n a coefficients complexes admet dans $\\mathbb{C}$ :",
+      "correcte": "A",
+      "options": {
+        "A": "Exactement n racines comptees avec multiplicite",
+        "B": "Au plus n-1 racines",
+        "C": "Toujours 0 racine",
+        "D": "Infini de racines"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Nombre insuffisant de racines.",
+          "renvoi": "C3"
+        },
+        "C": {
+          "erreur": "Contradiction du theoreme d'Alembert-Gauss.",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "Nombre infini impossible.",
+          "renvoi": "C3"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+% META: {"id": "TCOMPL-BAYES-CO-030", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "corrige", "exercice_ref": "TCOMPL-BAYES-EX-030", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f' donnee par son tableau: croissante sur R-, decroissante sur R+, f'(0)=2
+% # cela suggere f'(x) = 2 - x^2, donc f(x) = 2x - x^3/3
+% fp = 2 - x**2
+% f = integrate(fp, x)
+% assert f == 2*x - x**3/3
+% fpp = diff(f, x, 2)
+% assert fpp == -2*x
+% assert solve(fp, x) == [-sqrt(2), sqrt(2)]
+% assert solve(fpp, x) == [0]
+% END-VERIFY
+\begin{corrige}{TCOMPL-BAYES-EX-030}
+
+\textbf{Question 1.} $f(x) = \int (2 - x^2)\,dx = 2x - \dfrac{x^3}{3} + C$. On prend $C = 0$.
+
+\commentaireMarge{Integrer $f'$ pour obtenir $f$ ; le signe de $f''=\mathrm{sgn}(f'')$ donne la convexite.}
+
+\textbf{Question 2.} $f''(x) = -2x$. $f'' > 0$ sur $\left]-\infty, 0\right[$ (convexe) et $f'' < 0$ sur $\left]0, +\infty\right[$ (concave). Point d'inflexion en $0$.
+
+\textbf{Question 3.} $f$ admet un maximum local en $x = \sqrt{2}$ ($f(\sqrt{2}) = \dfrac{4\sqrt{2}}{3}$) et un minimum local en $x = -\sqrt{2}$.
+
+\end{corrige}

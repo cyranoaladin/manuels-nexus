@@ -1,0 +1,136 @@
+{
+  "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+  "titre": "Nombres complexes : algebre et geometrie",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "La forme algebrique de $(1+i)^2$ est :",
+      "correcte": "C",
+      "options": {
+        "A": "2",
+        "B": "-2",
+        "C": "2i",
+        "D": "-2i"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Oubli de i^2 = -1.",
+          "renvoi": "C1"
+        },
+        "B": {
+          "erreur": "Erreur de signe.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Erreur de signe du produit.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "Le conjugue de $z = 3 - 4i$ est :",
+      "correcte": "A",
+      "options": {
+        "A": "3 + 4i",
+        "B": "-3 + 4i",
+        "C": "-3 - 4i",
+        "D": "4 - 3i"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Changement de signe de la partie reelle.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "Changement des deux signes.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Inversion des parties reelle et imaginaire.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C2",
+      "enonce": "Le module de $z = 3 + 4i$ vaut :",
+      "correcte": "B",
+      "options": {
+        "A": "7",
+        "B": "5",
+        "C": "25",
+        "D": "1"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Addition des parties au lieu des carres.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Oubli de la racine carree.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Soustraction des carres.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "Un argument de $z = -1 + i$ est :",
+      "correcte": "D",
+      "options": {
+        "A": "$\\pi/4$",
+        "B": "$-\\pi/4$",
+        "C": "$-3\\pi/4$",
+        "D": "$3\\pi/4$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Premier quadrant au lieu du second.",
+          "renvoi": "C2"
+        },
+        "B": {
+          "erreur": "Quatrieme quadrant.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Troisieme quadrant.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C3",
+      "enonce": "L'equation $z^2 + 1 = 0$ a pour solutions dans $\\mathbb{C}$ :",
+      "correcte": "B",
+      "options": {
+        "A": "1 et -1",
+        "B": "i et -i",
+        "C": "1+i et 1-i",
+        "D": "Pas de solution"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Solutions dans R pour z^2 - 1 = 0.",
+          "renvoi": "C3"
+        },
+        "C": {
+          "erreur": "Solutions incorrectes.",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "Vrai dans R mais faux dans C.",
+          "renvoi": "C3"
+        }
+      }
+    }
+  ]
+}

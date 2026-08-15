@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 import subprocess
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
@@ -9,10 +10,32 @@ from importlib import import_module
 from pathlib import Path
 from typing import Any
 
+try:
+    import fitz
+except ImportError:
+    fitz = None
+
 
 MISSING_ASSET = "Nexus asset missing:"
 MISSING_CHARACTER = "Missing character:"
 COMMAND_TIMEOUT_SECONDS = 20
+BOOK_LOG_DIAGNOSTICS = (
+    "! LaTeX Error",
+    "Fatal error",
+    "Emergency stop",
+    "Overfull \\hbox",
+    "Overfull \\vbox",
+    "Underfull \\hbox",
+    "Underfull \\vbox",
+    "Undefined control sequence",
+    MISSING_ASSET,
+    MISSING_CHARACTER,
+)
+BOOK_METADATA_FIELDS = ("title", "author", "subject", "keywords")
+BOOK_STUDENT_LEAK = re.compile(
+    r"\bcorrigés?\b|^[ \t]*corriges\b|barème indicatif|réponse attendue|1NSI-",
+    re.IGNORECASE | re.MULTILINE,
+)
 
 
 @dataclass(frozen=True)
@@ -113,3 +136,60 @@ def verify_pdf(
         print("Gate marges : résultat structuré non passant")
         return 1
     return 0
+
+
+def book_preflight_issues(
+    pdf: Path,
+    log: Path,
+    *,
+    check_student_leaks: bool = True,
+) -> list[str]:
+    issues = []
+    try:
+        log_text = log.read_text(encoding="utf-8", errors="replace")
+    except FileNotFoundError:
+        issues.append(f"Journal LaTeX introuvable : {log}")
+        log_text = ""
+    for diagnostic in BOOK_LOG_DIAGNOSTICS:
+        if diagnostic.lower() in log_text.lower():
+            issues.append(f"Diagnostic LaTeX interdit : {diagnostic}")
+
+    if fitz is not None:
+        try:
+            with fitz.open(pdf) as document:
+                metadata = document.metadata or {}
+                for field in BOOK_METADATA_FIELDS:
+                    if not str(metadata.get(field, "")).strip():
+                        issues.append(f"Métadonnée PDF vide : {field}")
+                if not document.get_toc(simple=True):
+                    issues.append("Outline PDF vide.")
+                if not any(page.get_links() for page in document):
+                    issues.append("Aucun lien PDF.")
+                try:
+                    text = "\n".join(page.get_text() for page in document)
+                except (RuntimeError, ValueError) as error:
+                    issues.append(f"Extraction texte PDF impossible : {error}")
+                else:
+                    if check_student_leaks:
+                        leak = BOOK_STUDENT_LEAK.search(text)
+                        if leak:
+                            issues.append(f"Fuite version élève : {leak.group(0)}")
+        except (FileNotFoundError, fitz.FileDataError) as error:
+            issues.append(f"PDF illisible : {error}")
+    return issues
+
+
+def preflight_book_pdf(
+    pdf: Path,
+    log: Path,
+    *,
+    check_student_leaks: bool = True,
+) -> int:
+    issues = book_preflight_issues(
+        pdf,
+        log,
+        check_student_leaks=check_student_leaks,
+    )
+    for issue in issues:
+        print(issue)
+    return int(bool(issues))

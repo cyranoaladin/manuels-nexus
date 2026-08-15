@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-PRIMEQ-CO-024", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "correction", "exercice_ref": "TSPE-PRIMEQ-EX-008", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-PRIMITIVES-EQDIFF-C4"], "parcours": 2, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-PRIMITIVES-EQDIFF/exercices/TSPE-PRIMEQ-EX-024.tex", "mode_creation": "ex_nihilo"}
+\begin{corrige}{TSPE-PRIMEQ-EX-008}
+
+\textbf{Q1.} $z$ est un produit de $y$ (derivee $y'$) et $x \mapsto \mathrm{e}^{-4x}$ (derivee $-4\mathrm{e}^{-4x}$) :
+\[
+  z'(x) = y'(x)\,\mathrm{e}^{-4x} + y(x)\times(-4)\,\mathrm{e}^{-4x} = \left(y'(x) - 4y(x)\right)\mathrm{e}^{-4x}.
+\]
+
+\textbf{Q2.} Comme $y$ verifie $(E)$, $y'(x) = 4y(x)$ pour tout $x$, donc $y'(x)-4y(x)=0$. Ainsi $z'(x) = 0 \times \mathrm{e}^{-4x} = 0$.
+
+\textbf{Q3.} $z' = 0$ sur $\mathbb{R}$ : d'apres la propriete admise, $z$ est constante. Il existe donc $C \in \mathbb{R}$ tel que $z(x)=C$ pour tout $x$, c'est-a-dire $y(x)\mathrm{e}^{-4x}=C$, soit $y(x) = C\mathrm{e}^{4x}$.
+
+\textbf{Q4.} Ce raisonnement part d'une solution \emph{quelconque} $y$ de $(E)$ (on n'a fait aucune hypothese particuliere sur $y$, seulement qu'elle verifie $y'=4y$), et aboutit a $y(x)=C\mathrm{e}^{4x}$ pour un certain $C$. Cela prouve donc que \emph{toute} solution de $(E)$ est necessairement de cette forme : il n'y a pas d'autre solution possible.
+
+\end{corrige}

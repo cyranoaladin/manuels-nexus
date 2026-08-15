@@ -1,0 +1,136 @@
+{
+  "chapitre": "TEXP-GRAPHES",
+  "titre": "Graphes et matrices d'adjacence",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "Dans un graphe simple non oriente d'ordre n, le degre maximal d'un sommet est :",
+      "correcte": "B",
+      "options": {
+        "A": "n",
+        "B": "n-1",
+        "C": "2n",
+        "D": "n^2"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Compte incluant le sommet lui-meme sans boucle.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "Valeur trop grande.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Valeur quadratique fausse.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "La somme des degres de tous les sommets d'un graphe est egale a :",
+      "correcte": "C",
+      "options": {
+        "A": "Le nombre d'aretes",
+        "B": "Le double du nombre de sommets",
+        "C": "Le double du nombre d'aretes",
+        "D": "Le carre du nombre de sommets"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Chaque arete contribue pour 2 degres.",
+          "renvoi": "C1"
+        },
+        "B": {
+          "erreur": "Confusions entre sommets et aretes.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Formule quadratique incorrecte.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C2",
+      "enonce": "Un graphe admet une chaine eulerienne si et seulement si le nombre de sommets de degre impair est :",
+      "correcte": "A",
+      "options": {
+        "A": "0 ou 2",
+        "B": "Exactement 1",
+        "C": "Un nombre pair quelconque",
+        "D": "Toujours 0"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Impossible d'avoir un seul sommet de degre impair.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Seuls 0 et 2 sont autorises.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Cas du cycle eulerien uniquement.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "Si M est la matrice d'adjacence, le nombre de chemins de longueur k de i a j est donne par le coefficient $(i,j)$ de :",
+      "correcte": "D",
+      "options": {
+        "A": "$M + k$",
+        "B": "$k M$",
+        "C": "$M^{k-1}$",
+        "D": "$M^k$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Addition incorrecte.",
+          "renvoi": "C2"
+        },
+        "B": {
+          "erreur": "Multiplication par un scalaire.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Puissance decalee de 1.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C3",
+      "enonce": "L'algorithme de Dijkstra permet de trouver :",
+      "correcte": "C",
+      "options": {
+        "A": "Un cycle eulerien",
+        "B": "La matrice d'adjacence",
+        "C": "Le plus court chemin dans un graphe a poids positifs",
+        "D": "La coloration minimale"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Probleme d'Euler, pas de chemin le plus court.",
+          "renvoi": "C3"
+        },
+        "B": {
+          "erreur": "Donnee d'entree, pas le resultat.",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "Probleme de coloration.",
+          "renvoi": "C3"
+        }
+      }
+    }
+  ]
+}

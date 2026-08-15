@@ -1,79 +1,110 @@
-% META: {"id": "TCOMPL-MODELES-FONCTION-QCM", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "qcm", "capacites_codes": ["C1","C2","C4","C5","C6","C7"], "status": "generated"}
+% META: {"id": "TCOMPL-MODELES-FONCTION-QCM", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "qcm", "genere_depuis": "chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Modèles définis par une fonction d'une variable}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Fonctions et modélisation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1 --- Dérivée et tableau de variation}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Si $f'(x) < 0$ sur un intervalle $I$, alors sur $I$, $f$ est :
+\item[] \textbf{Capacite C1}
+
+\item \textbf{[Q1]} La derivee de $f(x) = e^{-x^2}$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item croissante.
-    \item décroissante.
-    \item constante.
-    \item convexe.
+    \item $e^{-x^2}$
+    \item $-2x e^{-x^2}$
+    \item $2x e^{-x^2}$
+    \item $-x e^{-x^2}$
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C2 --- Nombre de solutions}
-
-\item \textbf{[Q2]} Une fonction $f$ décroît de $+\infty$ à $5$ sur $]0,a]$ puis croît de $5$ à $+\infty$ sur $[a,+\infty[$. L'équation $f(x) = 3$ admet :
+\item \textbf{[Q2]} Une fonction f est convexe sur un intervalle I si et seulement si sa derivee seconde $f''$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item aucune solution.
-    \item une solution.
-    \item deux solutions.
-    \item une infinité de solutions.
+    \item Négative
+    \item Nulle
+    \item Positive ou nulle
+    \item Strictement decroissante
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C2}
 
-\subsection*{C4/C5 --- Convexité}
-
-\item \textbf{[Q3]} Une fonction dont la courbe est toujours au-dessus de ses tangentes est dite :
+\item \textbf{[Q3]} Un point d'inflexion de la courbe de f est un point ou :
   \begin{enumerate}[label=\Alph*.]
-    \item concave.
-    \item convexe.
-    \item croissante.
-    \item impaire.
+    \item $f''$ s'annule en changeant de signe
+    \item $f'$ s'annule
+    \item $f$ s'annule
+    \item $f''$ est maximale
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q4]} Une fonction deux fois dérivable est convexe sur un intervalle $I$ si et seulement si :
+\item \textbf{[Q4]} La limite de $\frac{e^x}{x}$ quand $x \to +\infty$ est par croissance comparee :
   \begin{enumerate}[label=\Alph*.]
-    \item $f'(x) \geq 0$ sur $I$.
-    \item $f''(x) \geq 0$ sur $I$.
-    \item $f(x) \geq 0$ sur $I$.
-    \item $f''(x) \leq 0$ sur $I$.
+    \item 0
+    \item 1
+    \item e
+    \item $+\infty$
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C3}
 
-\subsection*{C6/C7 --- Statistique à deux variables}
-
-\item \textbf{[Q5]} Le point moyen $G(\bar{x}, \bar{y})$ d'un nuage de points :
+\item \textbf{[Q5]} Si $f(x) = \ln(2x+1)$, la derivee $f'(x)$ vaut :
   \begin{enumerate}[label=\Alph*.]
-    \item n'a aucun lien avec la droite de régression.
-    \item appartient toujours à la droite de régression (moindres carrés).
-    \item est toujours à l'origine du repère.
-    \item n'existe que si le nuage est aligné.
-  \end{enumerate}
-
-\bigskip
-
-\item \textbf{[Q6]} Utiliser une droite de régression pour estimer une valeur très en dehors de la plage des données observées, c'est :
-  \begin{enumerate}[label=\Alph*.]
-    \item interpoler, toujours fiable.
-    \item extrapoler, ce qui demande un regard critique.
-    \item impossible mathématiquement.
-    \item équivalent à calculer le point moyen.
+    \item $\frac{1}{2x+1}$
+    \item $\frac{2}{2x+1}$
+    \item $\frac{1}{x}$
+    \item $2 \ln(2x+1)$
   \end{enumerate}
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C1 & \textbf{B} \\
+Q2 & C1 & \textbf{C} \\
+Q3 & C2 & \textbf{A} \\
+Q4 & C2 & \textbf{D} \\
+Q5 & C3 & \textbf{B} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{A} — Oubli de dériver l'interieur. \emph{Renvoi : C1.}
+    \item \textbf{C} — Erreur de signe de la derivee de -x\textasciicircum{}2. \emph{Renvoi : C1.}
+    \item \textbf{D} — Oubli du facteur 2. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Condition de concavite. \emph{Renvoi : C1.}
+    \item \textbf{B} — Fonction affine. \emph{Renvoi : C1.}
+    \item \textbf{D} — Condition incorrecte. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{B} — Extremum local de f, pas inflexion. \emph{Renvoi : C2.}
+    \item \textbf{C} — Racine de f. \emph{Renvoi : C2.}
+    \item \textbf{D} — Pas de changement de concavite requis par le max de f''. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — Inverse x/e\textasciicircum{}x tend vers 0. \emph{Renvoi : C2.}
+    \item \textbf{B} — Forme indeterminee non levee. \emph{Renvoi : C2.}
+    \item \textbf{C} — Valeur en x=1. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — Oubli de la derivee de u(x) = 2x+1. \emph{Renvoi : C3.}
+    \item \textbf{C} — Simplification abusive. \emph{Renvoi : C3.}
+    \item \textbf{D} — Multiplication au lieu de derivation. \emph{Renvoi : C3.}
+  \end{itemize}
+\end{itemize}

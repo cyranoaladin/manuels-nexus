@@ -5,8 +5,9 @@ from __future__ import annotations
 from pathlib import Path
 import sys
 
-import fitz
 import pytest
+
+fitz = pytest.importorskip("fitz")
 
 
 ROOT = Path(__file__).resolve().parents[1]

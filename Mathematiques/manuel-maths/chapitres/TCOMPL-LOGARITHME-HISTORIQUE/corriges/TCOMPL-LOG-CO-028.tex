@@ -1,0 +1,28 @@
+% META: {"id": "TCOMPL-LOG-CO-028", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "corrige", "exercice_ref": "TCOMPL-LOG-EX-028", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**3 - 3*x
+% fp = diff(f, x)
+% fpp = diff(f, x, 2)
+% assert expand(fp) == 3*x**2 - 3
+% assert expand(fpp) == 6*x
+% assert solve(fp, x) == [-1, 1]
+% assert solve(fpp, x) == [0]
+% assert f.subs(x, 0) == 0
+% assert f.subs(x, -1) == 2
+% assert f.subs(x, 1) == -2
+% END-VERIFY
+\begin{corrige}{TCOMPL-LOG-EX-028}
+
+\textbf{Question 1.} $f'(x) = 3x^2 - 3 = 3(x-1)(x+1)$ et $f''(x) = 6x$.
+
+\commentaireMarge{$f''$ change de signe en $0$ : inflexion.}
+
+\textbf{Question 2.} $f''(x) > 0$ sur $]0,+\infty[$ (convexe) et $f''(x) < 0$ sur $]-\infty,0[$ (concave).
+
+Le point $x=0$ est un point d'inflexion ($f(0) = 0$).
+
+\textbf{Question 3.} $f$ croit sur $[-1,1]$ (max local $f(1)=-2$ \ldots) — la courbe est concave puis convexe avec un point d'inflexion en $(0,0)$.
+
+\end{corrige}

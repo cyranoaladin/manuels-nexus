@@ -1,0 +1,24 @@
+% META: {"id": "TEXP-MAT-EX-028", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "exercice", "capacites": ["TEXP-MAT-C7"], "capacites_codes": ["C7"], "methodes": ["M4"], "parcours": 2, "competences": ["communiquer","calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-028.tex", "corrige_tex": "chapitres/TEXP-MATRICES-MARKOV/corriges/TEXP-MAT-CO-028.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**3 - 3*x
+% fp = diff(f, x)
+% fpp = diff(f, x, 2)
+% assert expand(fp) == 3*x**2 - 3
+% assert expand(fpp) == 6*x
+% assert solve(fp, x) == [-1, 1]
+% assert solve(fpp, x) == [0]
+% assert f.subs(x, 0) == 0
+% assert f.subs(x, -1) == 2
+% assert f.subs(x, 1) == -2
+% END-VERIFY
+\begin{exercice}{TEXP-MAT-EX-028}{1}{12}
+Soit $f(x) = x^3 - 3x$.
+\begin{enumerate}
+  \item Dresser les tableaux de signes de $f'$ et $f''$.
+  \item En deduire les intervalles de convexite et les points d'inflexion.
+  \item Esquisser la courbe en placant les points remarquables.
+\end{enumerate}
+
+\end{exercice}

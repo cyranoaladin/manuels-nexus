@@ -1,0 +1,29 @@
+% META: {"id": "TNSI-ALGO-CO-011", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "correction", "exercice_ref": "TNSI-ALGO-EX-001", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-ALGORITHMIQUE-C3"], "parcours": 1, "fichier_exercice": "chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-011.tex"}
+% BEGIN-VERIFY
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+% def compter_feuilles(arbre):
+%     if arbre is None:
+%         return 0
+%     if arbre.gauche is None and arbre.droite is None:
+%         return 1
+%     return compter_feuilles(arbre.gauche) + compter_feuilles(arbre.droite)
+% arbre = Noeud(1, Noeud(2, Noeud(4), Noeud(5)), Noeud(3))
+% assert compter_feuilles(arbre) == 3
+% assert compter_feuilles(Noeud(1)) == 1
+% assert compter_feuilles(None) == 0
+% END-VERIFY
+\begin{corrige}{TNSI-ALGO-EX-001}
+\begin{python}
+def compter_feuilles(arbre):
+    if arbre is None:
+        return 0
+    if arbre.gauche is None and arbre.droite is None:
+        return 1
+    return compter_feuilles(arbre.gauche) + compter_feuilles(arbre.droite)
+\end{python}
+Cas de base : l'arbre vide n'a aucune feuille. Un nœud sans aucun enfant est lui-même une feuille (on renvoie $1$, sans appel récursif supplémentaire). Sinon, on additionne le nombre de feuilles des deux sous-arbres.
+\end{corrige}

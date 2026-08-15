@@ -1,0 +1,17 @@
+% META: {"id": "1NSI-ADGK-CO-025", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "correction", "exercice_ref": "1NSI-ADGK-RE-C1", "capacites": ["1NSI-ALGO-PARCOURS-TRIS-C5"], "status": "approved", "capacites_codes": ["C5"], "parcours": 1, "duree_min": 2, "fichier_exercice": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-025.tex", "sources_inspiration": [], "mode_creation": "ex_nihilo"}
+
+\begin{corrige}{1NSI-ADGK-RE-C1-EX1}
+\textbf{1.} La fonction ne termine \textbf{jamais} : elle entre dans une boucle infinie
+(après $20$ itérations, aucune réponse n'est obtenue).
+
+\textbf{2.} Dès que \lstinline{tableau_trie[milieu] < valeur} et que la zone de recherche
+se réduit à deux éléments consécutifs (\lstinline{borne_sup = borne_inf + 1}), on a
+\lstinline{milieu = borne_inf} : l'instruction \lstinline{borne_inf = milieu} laisse alors
+\lstinline{borne_inf} \textbf{inchangé}. Le variant $V=\text{borne\_sup}-\text{borne\_inf}$
+cesse de décroître (il stagne à la même valeur indéfiniment) : la preuve de terminaison du
+cours ne s'applique plus, et effectivement, l'algorithme ne termine pas.
+
+\textbf{3.} Il faut remettre \lstinline{borne_inf = milieu + 1} (comme dans le cours), pour
+garantir que \lstinline{borne_inf} augmente strictement à chaque fois que cette branche est
+empruntée, ce qui restaure la décroissance stricte du variant $V$.
+\end{corrige}

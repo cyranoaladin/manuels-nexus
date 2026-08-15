@@ -1,0 +1,53 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-COURS-07", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "cours", "capacites_codes": ["C7"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TSPE-GEOMETRIE-ESPACE-C7"], "statut": "structure"}
+
+\section{Systèmes d'équations, orthogonalité, lieux géométriques}
+
+% ============================================================
+% STRATE 1 — Methode et exemples
+% ============================================================
+
+De nombreux problemes de configuration dans l'espace (alignement, coplanarite, intersection, orthogonalite) se traduisent par un \textbf{systeme d'equations lineaires} qu'il faut resoudre et interpreter geometriquement.
+
+\exemple{
+Determiner l'intersection de la droite $\mathcal{D}: \begin{cases}x=1+t\\y=2-t\\z=t\end{cases}$ et du plan $\mathcal{P}: 2x-y+z-1=0$.
+
+On substitue les expressions de $x,y,z$ dans l'equation de $\mathcal{P}$ :
+\[
+  2(1+t)-(2-t)+t-1=0 \iff 2+2t-2+t+t-1=0 \iff 4t-1=0 \iff t=\frac{1}{4}.
+\]
+
+Le point d'intersection est $\left(1+\dfrac{1}{4},\,2-\dfrac{1}{4},\,\dfrac{1}{4}\right) = \left(\dfrac{5}{4},\,\dfrac{7}{4},\,\dfrac{1}{4}\right)$.
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% t = Rational(1,4)
+% x, y, z = 1+t, 2-t, t
+% assert (x, y, z) == (Rational(5,4), Rational(7,4), Rational(1,4))
+% assert 2*x - y + z - 1 == 0
+% END-VERIFY
+}
+
+\propriete[Orthogonalité droite–plan]{
+Une droite $\mathcal{D}$ de vecteur directeur $\vec{u}$ est orthogonale a un plan $\mathcal{P}$ de vecteur normal $\vec{n}$ si et seulement si $\vec{u}$ et $\vec{n}$ sont colineaires.
+}
+
+\exemple{
+\textbf{Lieu geometrique : plan mediateur.} Determiner l'ensemble des points $M(x,y,z)$ equidistants de $A(0,0,0)$ et $B(2,0,0)$.
+
+$MA=MB \iff MA^2=MB^2 \iff x^2+y^2+z^2 = (x-2)^2+y^2+z^2 \iff x^2 = x^2-4x+4 \iff 4x=4 \iff x=1$.
+
+L'ensemble cherche est le plan d'equation $x=1$ : c'est le \textbf{plan mediateur} du segment $[AB]$ (plan perpendiculaire a $(AB)$ passant par son milieu).
+
+% BEGIN-VERIFY
+% # milieu de AB = (1,0,0), verifie x=1
+% assert (0+2)/2 == 1
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre vecteur directeur de droite et vecteur normal de plan dans les conditions d'orthogonalite.} Droite orthogonale a un plan $\iff$ vecteur directeur colineaire au vecteur normal. Droite parallele a un plan $\iff$ vecteur directeur orthogonal au vecteur normal. Ne pas inverser ces deux conditions.
+}

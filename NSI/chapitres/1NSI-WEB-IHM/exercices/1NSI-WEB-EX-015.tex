@@ -1,0 +1,27 @@
+% META: {"id": "1NSI-WEB-EX-015", "chapitre": "1NSI-WEB-IHM", "type_objet": "exercice", "capacites": ["1NSI-WEB-IHM-C3"], "parcours": 1, "competences": ["programmer", "analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-015.tex", "corrige_tex": "chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-015.tex", "status": "approved", "capacites_codes": ["C3"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% from urllib.parse import urlencode
+% params = {"destination": "Djerba", "voyageurs": 2, "tri": "prix_croissant"}
+% url = "https://voyages.fr/recherche?" + urlencode(params)
+% assert url == "https://voyages.fr/recherche?destination=Djerba&voyageurs=2&tri=prix_croissant"
+% END-VERIFY
+\begin{exercice}{1NSI-WEB-EX-005}{3}{15}
+Un site de voyage propose ce formulaire de recherche :
+\begin{console}
+<form action="/recherche" method="GET">
+    <input type="text" name="destination">
+    <input type="number" name="voyageurs">
+    <select name="tri">
+        <option value="prix_croissant">Prix croissant</option>
+    </select>
+    <button type="submit">Rechercher</button>
+</form>
+\end{console}
+Un visiteur saisit \lstinline{"Djerba"} comme destination, \lstinline{2} voyageurs, et
+laisse le tri sur \lstinline{"prix_croissant"}.
+\begin{enumerate}
+  \item En utilisant \lstinline{urlencode}, construire l'URL complète de la requête GET qui serait envoyée (l'action est \lstinline{"https://voyages.fr/recherche"}).
+  \item Ce visiteur peut-il mettre cette page de résultats en favori et la retrouver plus tard avec les mêmes critères de recherche ? Pourquoi cela fonctionne-t-il grâce à la méthode GET ?
+  \item Le concepteur du site hésite à passer ce formulaire en méthode POST, pour des raisons de sécurité. Est-ce justifié ici ? Argumenter en citant la nature des données transmises.
+\end{enumerate}
+\end{exercice}

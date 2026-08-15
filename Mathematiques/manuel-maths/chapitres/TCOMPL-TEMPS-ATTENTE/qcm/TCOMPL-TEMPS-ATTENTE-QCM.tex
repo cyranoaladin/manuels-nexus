@@ -1,79 +1,110 @@
-% META: {"id": "TCOMPL-TEMPS-ATTENTE-QCM", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4","C5","C6"], "status": "generated"}
+% META: {"id": "TCOMPL-TEMPS-ATTENTE-QCM", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "qcm", "genere_depuis": "chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Temps d'attente}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Loi géométrique et temps d'attente}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1/C2 --- Loi géométrique}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Pour $X\sim\mathcal{G}(p)$, $P(X=k)$ (pour $k\geq1$) vaut :
+\item[] \textbf{Capacite C1}
+
+\item \textbf{[Q1]} Une variable aleatoire X suivant une loi geometrique de parametre p a pour esperance :
   \begin{enumerate}[label=\Alph*.]
-    \item $(1-p)^{k}p$.
-    \item $(1-p)^{k-1}p$.
-    \item $p^k(1-p)$.
-    \item $kp$.
+    \item $\frac{1}{p}$
+    \item $\frac{1-p}{p^2}$
+    \item $p$
+    \item $1-p$
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q2]} L'espérance d'une loi géométrique de paramètre $p$ est :
+\item \textbf{[Q2]} Pour $k \ge 1$, la probabilite $P(X = k)$ d'une loi geometrique $G(p)$ vaut :
   \begin{enumerate}[label=\Alph*.]
-    \item $p$.
-    \item $1-p$.
-    \item $\dfrac{1}{p}$.
-    \item $np$.
+    \item $p^k (1-p)$
+    \item $p (1-p)^k$
+    \item $(1-p)^{k-1} p$
+    \item $\binom{n}{k} p^k (1-p)^{n-k}$
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C2}
 
-\subsection*{C3 --- Absence de mémoire}
-
-\item \textbf{[Q3]} L'absence de mémoire signifie que :
+\item \textbf{[Q3]} La propriete de perte de memoire de la loi geometrique s'ecrit $P_{X > n}(X > n+k) =$
   \begin{enumerate}[label=\Alph*.]
-    \item le passé influence toujours l'avenir.
-    \item la probabilité conditionnelle du temps d'attente restant ne dépend pas du temps déjà écoulé.
-    \item la loi géométrique n'a pas d'espérance.
-    \item le succès devient certain après plusieurs échecs.
+    \item $P(X > n)$
+    \item $P(X > k)$
+    \item $P(X = k)$
+    \item $1 - P(X > k)$
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C4/C5 --- Loi exponentielle, densité}
-
-\item \textbf{[Q4]} Une fonction $f$ est une densité de probabilité sur $[0,+\infty[$ si :
+\item \textbf{[Q4]} Pour une loi geometrique $G(p)$, $P(X > k) =$
   \begin{enumerate}[label=\Alph*.]
-    \item $f$ est positive et son intégrale sur $[0,+\infty[$ vaut $1$.
-    \item $f$ est négative.
-    \item $f(0)=1$.
-    \item $f$ est croissante.
+    \item $p^k$
+    \item $1 - p^k$
+    \item 1 - (1-p)\textasciicircum{}k
+    \item $(1-p)^k$
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C3}
 
-\item \textbf{[Q5]} Pour une loi à densité, $P(X=x_0)$ pour une valeur précise $x_0$ vaut :
+\item \textbf{[Q5]} Si $p = 0{,}2$, le temps d'attente moyen du premier succes est :
   \begin{enumerate}[label=\Alph*.]
-    \item $1$.
-    \item $f(x_0)$.
-    \item $0$.
-    \item impossible à déterminer.
-  \end{enumerate}
-
-\bigskip
-
-\subsection*{C6 --- Espérance}
-
-\item \textbf{[Q6]} L'espérance d'une loi exponentielle de paramètre $\lambda$ est :
-  \begin{enumerate}[label=\Alph*.]
-    \item $\lambda$.
-    \item $\dfrac{1}{\lambda}$.
-    \item $\lambda^2$.
-    \item $1-\lambda$.
+    \item 2 d'essais
+    \item 4 d'essais
+    \item 5 d'essais
+    \item 10 d'essais
   \end{enumerate}
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C1 & \textbf{C} \\
+Q3 & C2 & \textbf{B} \\
+Q4 & C2 & \textbf{D} \\
+Q5 & C3 & \textbf{C} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — Formule de la variance. \emph{Renvoi : C1.}
+    \item \textbf{C} — Parametre p. \emph{Renvoi : C1.}
+    \item \textbf{D} — Probabilite d'echec. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Inversion des roles de succes et echec. \emph{Renvoi : C1.}
+    \item \textbf{B} — Erreur d'exposant k au lieu de k-1. \emph{Renvoi : C1.}
+    \item \textbf{D} — Formule de la loi binomiale. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — Temps n au lieu de k. \emph{Renvoi : C2.}
+    \item \textbf{C} — Egalite au lieu d'une superiocrite stricte. \emph{Renvoi : C2.}
+    \item \textbf{D} — Evenement contraire. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — Utilisation de p au lieu de (1-p). \emph{Renvoi : C2.}
+    \item \textbf{B} — Formule fausse. \emph{Renvoi : C2.}
+    \item \textbf{C} — Probabilite P(X <= k). \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — Calcul 1/0.5. \emph{Renvoi : C3.}
+    \item \textbf{B} — Calcul (1-p)/p = 0.8/0.2 = 4. \emph{Renvoi : C3.}
+    \item \textbf{D} — Calcul 1/(0.2\textasciicircum{}2). \emph{Renvoi : C3.}
+  \end{itemize}
+\end{itemize}

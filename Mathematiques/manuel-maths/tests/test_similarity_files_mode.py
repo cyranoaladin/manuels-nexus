@@ -5,7 +5,12 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts"))
+SCRIPTS = str(ROOT / "scripts")
+if SCRIPTS in sys.path:
+    sys.path.remove(SCRIPTS)
+sys.path.insert(0, SCRIPTS)
+for mod in ("common", "similarity_check"):
+    sys.modules.pop(mod, None)
 
 import similarity_check  # noqa: E402
 

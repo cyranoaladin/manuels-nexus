@@ -1,0 +1,136 @@
+{
+  "chapitre": "TEXP-MATRICES-MARKOV",
+  "titre": "Matrices et chaines de Markov",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "Une matrice de transition d'une chaine de Markov a pour propriete :",
+      "correcte": "B",
+      "options": {
+        "A": "La somme des colonnes vaut 1",
+        "B": "La somme de chaque ligne vaut 1",
+        "C": "Tous ses coefficients sont negatifs",
+        "D": "Elle est toujours symetrique"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Confusions entre lignes et colonnes.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "Les probabilites sont positives.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Symetrie non requise.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "Si $P$ est la matrice de transition et $P_0$ l'etat initial (vecteur ligne), alors $P_n =$",
+      "correcte": "A",
+      "options": {
+        "A": "$P_0 P^n$",
+        "B": "$P^n P_0$",
+        "C": "$P_0 + n P$",
+        "D": "$P_0 P n$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Ordre des facteurs incorrect avec vecteur ligne.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "Addition au lieu de produit matriciel.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Multiplication par n au lieu de la puissance n.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C2",
+      "enonce": "Un etat stable $X$ d'une chaine de Markov verifie :",
+      "correcte": "C",
+      "options": {
+        "A": "$P X = X$",
+        "B": "$X P = 0$",
+        "C": "$X P = X$ et la somme des composantes vaut 1",
+        "D": "$X^2 = P$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Vecteur colonne au lieu de vecteur ligne.",
+          "renvoi": "C2"
+        },
+        "B": {
+          "erreur": "Produit nul incorrect.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Carre matriciel incorrect.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "Si une matrice de transition $P$ n'a aucun coefficient nul, la chaine de Markov est :",
+      "correcte": "D",
+      "options": {
+        "A": "Instable",
+        "B": "Periodique",
+        "C": "Divergente",
+        "D": "Ergodique et admet un unique etat stable"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Propriete d'ergodicite implique la stabilite.",
+          "renvoi": "C2"
+        },
+        "B": {
+          "erreur": "Pas de periodicite avec coefficients strictement positifs.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "La suite des etats converge.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C3",
+      "enonce": "Pour inverser une matrice 2x2 $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$, le determinant est :",
+      "correcte": "A",
+      "options": {
+        "A": "$ad - bc$",
+        "B": "$ac - bd$",
+        "C": "$ad + bc$",
+        "D": "$a+b+c+d$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Erreur de formule du determinant.",
+          "renvoi": "C3"
+        },
+        "C": {
+          "erreur": "Signe + au lieu de -.",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "Somme des termes.",
+          "renvoi": "C3"
+        }
+      }
+    }
+  ]
+}

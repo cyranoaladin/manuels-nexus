@@ -1,0 +1,28 @@
+% META: {"id": "1NSI-RES-EX-016", "chapitre": "1NSI-RESEAUX", "type_objet": "exercice", "capacites": ["1NSI-RESEAUX-C3"], "parcours": 2, "competences": ["analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-016.tex", "corrige_tex": "chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-016.tex", "status": "approved", "capacites_codes": ["C3"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% def decouper_en_paquets(message, taille_max):
+%     nb_paquets = (len(message) + taille_max - 1) // taille_max
+%     paquets = []
+%     for i in range(nb_paquets):
+%         donnees = message[i * taille_max:(i + 1) * taille_max]
+%         paquets.append({"numero": i, "total": nb_paquets, "donnees": donnees})
+%     return paquets
+% def reassembler(paquets):
+%     paquets_tries = sorted(paquets, key=lambda p: p["numero"])
+%     return "".join(p["donnees"] for p in paquets_tries)
+% message = "PROTOCOLERESEAU"
+% paquets = decouper_en_paquets(message, 5)
+% assert len(paquets) == 3
+% assert paquets[0]["donnees"] == "PROTO"
+% ordre_arrivee = [paquets[2], paquets[0], paquets[1]]
+% assert reassembler(ordre_arrivee) == message
+% END-VERIFY
+\begin{exercice}{1NSI-RES-EX-001}{1}{12}
+On utilise la fonction de découpage du cours. Le message \lstinline{"PROTOCOLERESEAU"} est
+découpé en paquets de taille maximale $5$.
+\begin{enumerate}
+  \item Combien de paquets sont créés ? Donner le contenu (\lstinline{donnees}) de chacun.
+  \item On suppose que les paquets arrivent au destinataire dans l'ordre suivant : paquet $2$, puis paquet $0$, puis paquet $1$. Le message est-il correctement reconstitué par \lstinline{reassembler} malgré cet ordre d'arrivée ? Pourquoi ?
+  \item Que se passerait-il si l'on reconstituait le message en concaténant simplement les paquets \textbf{dans leur ordre d'arrivée}, sans utiliser leur numéro ?
+\end{enumerate}
+\end{exercice}

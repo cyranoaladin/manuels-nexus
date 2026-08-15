@@ -1,28 +1,56 @@
 chapitre: TSPE-CALCUL-INTEGRAL
 niveau: TSPE
 theme: CALCUL-INTEGRAL
-titre: "Calcul intégral"
-statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
-
+titre: Calcul intégral
+statut: approved
 capacites:
-  - { code: C1, ref_capacite: TSPE-INTEG-C1, libelle_eleve: "Je sais estimer graphiquement ou encadrer une intégrale et une valeur moyenne." }
-  - { code: C2, ref_capacite: TSPE-INTEG-C2, libelle_eleve: "Je sais calculer une intégrale en utilisant une primitive ou une intégration par parties." }
-  - { code: C3, ref_capacite: TSPE-INTEG-C3, libelle_eleve: "Je sais majorer ou minorer une intégrale en comparant les fonctions intégrées." }
-  - { code: C4, ref_capacite: TSPE-INTEG-C4, libelle_eleve: "Je sais calculer l'aire comprise entre deux courbes à l'aide d'intégrales." }
-  - { code: C5, ref_capacite: TSPE-INTEG-C5, libelle_eleve: "Je sais étudier une suite d'intégrales, notamment en établissant une relation de récurrence." }
-  - { code: C6, ref_capacite: TSPE-INTEG-C6, libelle_eleve: "Je sais interpréter une intégrale ou une valeur moyenne dans un contexte concret." }
-  - { code: C7, ref_capacite: TSPE-INTEG-C7, libelle_eleve: "Je sais démontrer que la fonction intégrale d'une fonction positive croissante est une primitive, et en déduire $\\int_a^b f = F(b) - F(a)$." }
-  - { code: C8, ref_capacite: TSPE-INTEG-C8, libelle_eleve: "Je sais démontrer la formule d'intégration par parties." }
-
+- code: C1
+  ref_capacite: TSPE-INTEG-C1
+  libelle_eleve: Je sais estimer graphiquement ou encadrer une intégrale et une valeur
+    moyenne.
+- code: C2
+  ref_capacite: TSPE-INTEG-C2
+  libelle_eleve: Je sais calculer une intégrale en utilisant une primitive ou une
+    intégration par parties.
+- code: C3
+  ref_capacite: TSPE-INTEG-C3
+  libelle_eleve: Je sais majorer ou minorer une intégrale en comparant les fonctions
+    intégrées.
+- code: C4
+  ref_capacite: TSPE-INTEG-C4
+  libelle_eleve: Je sais calculer l'aire comprise entre deux courbes à l'aide d'intégrales.
+- code: C5
+  ref_capacite: TSPE-INTEG-C5
+  libelle_eleve: Je sais étudier une suite d'intégrales, notamment en établissant
+    une relation de récurrence.
+- code: C6
+  ref_capacite: TSPE-INTEG-C6
+  libelle_eleve: Je sais interpréter une intégrale ou une valeur moyenne dans un contexte
+    concret.
+- code: C7
+  ref_capacite: TSPE-INTEG-C7
+  libelle_eleve: Je sais démontrer que la fonction intégrale d'une fonction positive
+    croissante est une primitive, et en déduire $\int_a^b f = F(b) - F(a)$.
+- code: C8
+  ref_capacite: TSPE-INTEG-C8
+  libelle_eleve: Je sais démontrer la formule d'intégration par parties.
 prerequis:
-  - { code: R1, libelle: "Primitives : calcul, propriétés", chapitre_origine: "TSPE-PRIMITIVES-EQDIFF" }
-  - { code: R2, libelle: "Dérivation d'un produit de fonctions", chapitre_origine: "1SPE-DERIVATION-GLOBAL" }
-  - { code: R3, libelle: "Théorème des gendarmes", chapitre_origine: "TSPE-SUITES-LIMITES" }
+- code: R1
+  libelle: 'Primitives : calcul, propriétés'
+  chapitre_origine: TSPE-PRIMITIVES-EQDIFF
+- code: R2
+  libelle: Dérivation d'un produit de fonctions
+  chapitre_origine: 1SPE-DERIVATION-GLOBAL
+- code: R3
+  libelle: Théorème des gendarmes
+  chapitre_origine: TSPE-SUITES-LIMITES
+situation_accroche: 'La distance parcourue par un mobile s''obtient en integrant sa
+  vitesse au cours du temps. Comment justifier rigoureusement ce lien entre aire sous
+  une courbe et primitive ? Ce chapitre etablit le theoreme fondamental du calcul
+  integral et les outils de calcul associes.
 
-situation_accroche: >
-  La distance parcourue par un mobile s'obtient en integrant sa vitesse au cours du
-  temps. Comment justifier rigoureusement ce lien entre aire sous une courbe et
-  primitive ? Ce chapitre etablit le theoreme fondamental du calcul integral et les
-  outils de calcul associes.
-
-temps_estime_h: { parcours1: 16, parcours2: 14, parcours3: 11 }
+  '
+temps_estime_h:
+  parcours1: 16
+  parcours2: 14
+  parcours3: 11

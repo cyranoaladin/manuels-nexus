@@ -1,0 +1,51 @@
+% META: {"id": "TSPE-LOGARITHME-COURS-04", "chapitre": "TSPE-LOGARITHME", "type_objet": "cours", "capacites_codes": ["C4"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TSPE-LOGARITHME-C4"], "statut": "structure"}
+
+\section{Limite de $x \ln x$ en $0$}
+
+% ============================================================
+% STRATE 1 — Demonstration exigible
+% ============================================================
+
+\theoreme{
+\[
+  \lim_{x \to 0^+} x \ln x = 0.
+\]
+}
+
+\demonstration{
+Posons $X = -\ln x$. Quand $x \to 0^+$, $\ln x \to -\infty$, donc $X = -\ln x \to +\infty$.
+
+De $X = -\ln x$, on tire $\ln x = -X$, soit $x = \mathrm{e}^{-X}$.
+
+Alors :
+\[
+  x \ln x = \mathrm{e}^{-X} \times (-X) = -\frac{X}{\mathrm{e}^{X}}.
+\]
+
+D'apres la croissance comparee $\dfrac{\mathrm{e}^X}{X} \to +\infty$ quand $X \to +\infty$ (chapitre limites de fonctions), on a $\dfrac{X}{\mathrm{e}^X} \to 0$, donc $x \ln x = -\dfrac{X}{\mathrm{e}^X} \to 0$.
+}
+
+\margeAppui{
+Ce resultat prolonge par continuite : on pose par convention $0 \ln 0 = 0$, ce qui permet de definir $x \mapsto x\ln x$ en $0$ (utile par exemple en theorie de l'information, entropie).
+}
+
+\exemple{
+Calculer $\displaystyle\lim_{x \to 0^+} x^2 \ln x$.
+
+On ecrit $x^2 \ln x = x \times (x \ln x)$. Or $x \to 0$ et $x \ln x \to 0$, donc par produit des limites, $x^2 \ln x \to 0$.
+
+% BEGIN-VERIFY
+% from sympy import symbols, ln, limit
+% x = symbols('x', positive=True)
+% assert limit(x*ln(x), x, 0, '+') == 0
+% assert limit(x**2*ln(x), x, 0, '+') == 0
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Conclure trop vite sur une forme « $0 \times (-\infty)$ ».} $x \ln x$ en $0^+$ est une forme indeterminee (produit d'un terme qui tend vers $0$ et d'un terme qui tend vers $-\infty$) : il faut un changement de variable et la croissance comparee pour conclure, on ne peut pas se contenter d'un raisonnement intuitif.
+}

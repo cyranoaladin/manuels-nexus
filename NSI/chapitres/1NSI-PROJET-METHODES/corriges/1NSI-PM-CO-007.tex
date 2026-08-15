@@ -1,0 +1,28 @@
+% META: {"id": "1NSI-PM-CO-007", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "correction", "exercice_ref": "1NSI-PM-EX-001", "capacites": ["1NSI-PROJET-METHODES-C2"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C2"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-007.tex"}
+% BEGIN-VERIFY
+% evenements = [
+%     (1642, "Pascaline, machine a calculer mecanique", "Blaise Pascal"),
+%     (1936, "Concept de machine universelle", "Alan Turing"),
+%     (1971, "Premier microprocesseur commercial", "Intel"),
+%     (1991, "Premiere version publique de Python", "Guido van Rossum"),
+% ]
+% assert evenements == sorted(evenements, key=lambda e: e[0])
+% def evenements_entre(evenements, debut, fin):
+%     return [e for e in evenements if debut <= e[0] <= fin]
+% resultat = evenements_entre(evenements, 1900, 1980)
+% assert [e[0] for e in resultat] == [1936, 1971]
+% END-VERIFY
+\begin{corrige}{1NSI-PM-EX-001}
+\textbf{1.} \lstinline{evenements == sorted(evenements, key=lambda e: e[0])} vaut
+\lstinline{True} : la liste est bien triée par année croissante.
+
+\textbf{2.} Entre 1900 et 1980 : le concept de machine universelle de Turing (1936) et le
+premier microprocesseur commercial (1971).
+
+\textbf{3.} La Pascaline (1642) est une machine \textbf{mécanique} conçue pour une tâche
+unique (l'addition) : elle ne peut exécuter qu'un seul type de calcul, câblé dans sa
+mécanique. Le concept de machine universelle de Turing (1936) est une avancée
+\textbf{théorique} majeure : il montre qu'une seule machine peut, en principe, exécuter
+\textbf{n'importe quel} algorithme, à condition de lui fournir le bon programme — c'est le
+principe fondateur de l'ordinateur moderne, programmable.
+\end{corrige}

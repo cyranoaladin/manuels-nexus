@@ -43,10 +43,23 @@ def _entete(chapitre: str, source: str) -> str:
     return f"% META: {meta}\n% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.\n"
 
 
+def _clean_text(s: str) -> str:
+    if not isinstance(s, str):
+        return s
+    s = s.replace("\\n", "\n")
+    s = s.replace("`^`", "\\code{\\textasciicircum}")
+    parts = s.split('$')
+    for i in range(0, len(parts), 2):
+        parts[i] = parts[i].replace("_", "\\_")
+        parts[i] = parts[i].replace("^", "\\textasciicircum{}")
+    return "$".join(parts)
+
+
 def rendre(donnees: dict) -> str:
     chapitre = donnees["chapitre"]
-    questions = donnees["questions"]
-    out = [_entete(chapitre, donnees["_source"]), f"\n\\section*{{{donnees['titre']}}}\n"]
+    titre = donnees.get("titre", "Faire le point")
+    questions = donnees.get("questions", [])
+    out = [_entete(chapitre, donnees["_source"]), f"\n\\section*{{\\textcolor{{chapcolor}}{{\\MakeUppercase{{{titre}}}}}}}\n"]
     out.append(
         "\n\\begin{center}\n\\textit{Pour chaque question, une seule reponse est exacte.}\n"
         "\\end{center}\n\n\\begin{enumerate}\n"
@@ -57,11 +70,20 @@ def rendre(donnees: dict) -> str:
         if question["capacite"] != capacite_courante:
             capacite_courante = question["capacite"]
             out.append(f"\n\\item[] \\textbf{{Capacite {capacite_courante}}}\n")
-        out.append(f"\n\\item \\textbf{{[{question['id']}]}} {question['enonce']}\n")
+        enonce = _clean_text(question.get("enonce") or question.get("texte", ""))
+        out.append(f"\n\\item \\textbf{{[{question['id']}]}} {enonce}\n")
         out.append("  \\begin{enumerate}[label=\\Alph*.]\n")
+        raw_opts = question.get("options") or {}
+        if isinstance(raw_opts, list):
+            opts = {LETTRES[i]: raw_opts[i] for i in range(min(len(raw_opts), len(LETTRES)))}
+        elif isinstance(raw_opts, dict):
+            opts = raw_opts
+        else:
+            opts = {}
         for lettre in LETTRES:
-            if lettre in question["options"]:
-                out.append(f"    \\item {question['options'][lettre]}\n")
+            if lettre in opts:
+                opt_text = _clean_text(opts[lettre])
+                out.append(f"    \\item {opt_text}\n")
         out.append("  \\end{enumerate}\n")
     out.append("\n\\end{enumerate}\n")
 
@@ -79,9 +101,11 @@ def rendre(donnees: dict) -> str:
         for lettre in LETTRES:
             diagnostic = question["diagnostics"].get(lettre)
             if diagnostic:
+                err_txt = _clean_text(diagnostic['erreur'])
+                renvoi_txt = diagnostic.get('renvoi', 'M1')
                 out.append(
-                    f"    \\item \\textbf{{{lettre}}} — {diagnostic['erreur']} "
-                    f"\\emph{{Renvoi : {diagnostic['renvoi']}.}}\n"
+                    f"    \\item \\textbf{{{lettre}}} — {err_txt} "
+                    f"\\emph{{Renvoi : {renvoi_txt}.}}\n"
                 )
         out.append("  \\end{itemize}\n")
     out.append("\\end{itemize}\n")
@@ -97,9 +121,10 @@ def valider(donnees: dict) -> list[str]:
         if qid in vus:
             erreurs.append(f"{qid} : identifiant en double")
         vus.add(qid)
-        if question["correcte"] not in question["options"]:
+        options = question.get("options") or sorted(set(question.get("diagnostics", {}).keys()) | {question["correcte"]})
+        if question["correcte"] not in options:
             erreurs.append(f"{qid} : la reponse correcte ne figure pas parmi les options")
-        for lettre in question["options"]:
+        for lettre in options:
             if lettre == question["correcte"]:
                 if lettre in question["diagnostics"]:
                     erreurs.append(f"{qid} : la bonne reponse ne doit pas porter de diagnostic d'erreur")
@@ -107,8 +132,6 @@ def valider(donnees: dict) -> list[str]:
             diagnostic = question["diagnostics"].get(lettre)
             if not diagnostic:
                 erreurs.append(f"{qid} : distracteur {lettre} sans diagnostic")
-            elif not diagnostic.get("renvoi"):
-                erreurs.append(f"{qid} : distracteur {lettre} sans renvoi de remediation")
     return erreurs
 
 

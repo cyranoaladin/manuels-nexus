@@ -1,0 +1,27 @@
+% META: {"id": "TSPE-INTEG-CO-032", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "correction", "exercice_ref": "TSPE-INTEG-EX-008", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-CALCUL-INTEGRAL-C6"], "parcours": 2, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-032.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, integrate, simplify, log
+% x = symbols('x')
+% I = integrate(ln(x+1), (x, 0, 1))
+% assert simplify(I - (2*log(2) - 1)) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-INTEG-EX-008}
+On pose $u(x)=\ln(x+1)$, donc $u'(x)=\dfrac{1}{x+1}$, et $v'(x)=1$, donc $v(x)=x$.
+
+Par integration par parties :
+\[
+  \int_0^1 \ln(x+1)\,\mathrm{d}x = \big[x\ln(x+1)\big]_0^1 - \int_0^1 \frac{x}{x+1}\,\mathrm{d}x.
+\]
+
+$\big[x\ln(x+1)\big]_0^1 = 1\times\ln 2 - 0 = \ln 2$.
+
+Pour la seconde integrale, on ecrit $\dfrac{x}{x+1} = \dfrac{(x+1)-1}{x+1} = 1 - \dfrac{1}{x+1}$ :
+\[
+  \int_0^1 \frac{x}{x+1}\,\mathrm{d}x = \big[x - \ln(x+1)\big]_0^1 = (1-\ln 2) - 0 = 1-\ln 2.
+\]
+
+Finalement :
+\[
+  \int_0^1 \ln(x+1)\,\mathrm{d}x = \ln 2 - (1-\ln 2) = \boxed{2\ln 2 - 1}.
+\]
+\end{corrige}

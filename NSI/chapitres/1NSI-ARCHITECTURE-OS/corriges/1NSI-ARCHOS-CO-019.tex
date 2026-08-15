@@ -1,0 +1,17 @@
+% META: {"id": "1NSI-ARCHOS-CO-019", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "correction", "exercice_ref": "1NSI-ARCHITECTURE-OS-RE-C5", "capacites": ["1NSI-ARCHITECTURE-OS-C4"], "status": "approved", "capacites_codes": ["C4"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-019.tex"}
+\begin{corrige}{1NSI-ARCHOS-RE-C5-EX1}
+\textbf{1.} L'ordre est toujours : \textbf{propriétaire} (caractères 1 à 3),
+\textbf{groupe} (caractères 4 à 6), \textbf{autres} (caractères 7 à 9).
+
+\textbf{2.} Pour \lstinline{"rwxrwxr--"} : le bloc \textbf{groupe} est
+\lstinline{rwx} (caractères 4-6), donc le groupe \textbf{peut} écrire
+(\lstinline{droit_accorde(perm, "groupe", "ecriture")} vaut \lstinline{True}). Le bloc
+\textbf{autres} est \lstinline{r--} (caractères 7-9), donc les autres \textbf{ne peuvent
+pas} écrire (\lstinline{False}).
+
+\textbf{3.} Non, ces deux réponses sont \textbf{différentes} (\lstinline{True} contre
+\lstinline{False}) : cela confirme que le bloc du milieu et le dernier bloc concernent des
+catégories distinctes, avec des droits potentiellement différents. L'élève avait tort de
+considérer le bloc du milieu comme celui des \og autres \fg{} : c'est celui du
+\textbf{groupe}.
+\end{corrige}

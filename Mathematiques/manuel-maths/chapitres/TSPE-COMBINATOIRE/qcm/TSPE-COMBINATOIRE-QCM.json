@@ -1,0 +1,136 @@
+{
+  "chapitre": "TSPE-COMBINATOIRE",
+  "titre": "Combinatoire et denombrement",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "Le nombre de k-listes d'un ensemble a n elements est :",
+      "correcte": "A",
+      "options": {
+        "A": "$n^k$",
+        "B": "$k^n$",
+        "C": "$n!$",
+        "D": "$\\binom{n}{k}$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Inversion de la base et de l'exposant.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "Formule des permutations.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Formule des combinaisons.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "Le nombre d'arrangements sans repetition $A_n^k$ est :",
+      "correcte": "C",
+      "options": {
+        "A": "$n^k$",
+        "B": "$\\frac{n!}{k!}$",
+        "C": "$\\frac{n!}{(n-k)!}$",
+        "D": "$\\binom{n}{k}$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Formule avec remise.",
+          "renvoi": "C1"
+        },
+        "B": {
+          "erreur": "Erreur de denominateur.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Formule sans ordre.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C2",
+      "enonce": "Le nombre de combinaisons $\\binom{5}{2}$ vaut :",
+      "correcte": "B",
+      "options": {
+        "A": "20",
+        "B": "10",
+        "C": "5",
+        "D": "25"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Oubli de diviser par $2!$.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Confusions avec $n$.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Calcul de $5^2$.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "Propriete de symetrie des coefficients binomiaux :",
+      "correcte": "A",
+      "options": {
+        "A": "$\\binom{n}{k} = \\binom{n}{n-k}$",
+        "B": "$\\binom{n}{k} = \\binom{n-1}{k}$",
+        "C": "$\\binom{n}{k} = \\binom{k}{n}$",
+        "D": "$\\binom{n}{k} = \\binom{n}{k+1}$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Formule incomplete de Pascal.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Inversion de n et k.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Relation de recurrence fausse.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C3",
+      "enonce": "Le triangle de Pascal donne $\\binom{n}{k} + \\binom{n}{k+1} =$",
+      "correcte": "D",
+      "options": {
+        "A": "$\\binom{n}{k+2}$",
+        "B": "$\\binom{n+2}{k}$",
+        "C": "$\\binom{n+1}{k}$",
+        "D": "$\\binom{n+1}{k+1}$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Erreur sur l'indice k.",
+          "renvoi": "C3"
+        },
+        "B": {
+          "erreur": "Erreur sur l'indice n.",
+          "renvoi": "C3"
+        },
+        "C": {
+          "erreur": "Choix de l'indice k incorrect.",
+          "renvoi": "C3"
+        }
+      }
+    }
+  ]
+}

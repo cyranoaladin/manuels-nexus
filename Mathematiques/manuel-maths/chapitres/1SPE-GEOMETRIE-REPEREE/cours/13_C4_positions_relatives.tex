@@ -12,9 +12,11 @@
 Soient $\mathcal{D}_1 : a_1 x + b_1 y + c_1 = 0$ et $\mathcal{D}_2 : a_2 x + b_2 y + c_2 = 0$ deux droites.
 \begin{itemize}
   \item $\mathcal{D}_1$ et $\mathcal{D}_2$ sont \textbf{parallèles} $\iff$ $a_1 b_2 - a_2 b_1 = 0$ (vecteurs directeurs colinéaires).
-  \item $\mathcal{D}_1$ et $\mathcal{D}_2$ sont \textbf{sécantes} $\iff$ $a_1 b_2 - a_2 b_1 \neq 0$.
+  \item $\mathcal{D}_1$ et $\mathcal{D}_2$ sont \textbf{sécantes} $\iff$ $a_1 b_2 - a_2 b_1 
+eq 0$.
   \item Si elles sont sécantes, le point d'intersection s'obtient en résolvant le système $\begin{cases} a_1 x + b_1 y + c_1 = 0 \\ a_2 x + b_2 y + c_2 = 0 \end{cases}$.
-  \item $\mathcal{D}_1$ et $\mathcal{D}_2$ sont \textbf{confondues} $\iff$ il existe $\lambda \neq 0$ tel que $a_2 = \lambda a_1$, $b_2 = \lambda b_1$ et $c_2 = \lambda c_1$.
+  \item $\mathcal{D}_1$ et $\mathcal{D}_2$ sont \textbf{confondues} $\iff$ il existe $\lambda 
+eq 0$ tel que $a_2 = \lambda a_1$, $b_2 = \lambda b_1$ et $c_2 = \lambda c_1$.
 \end{itemize}
 }
 
@@ -23,13 +25,15 @@ $\mathcal{D}_1 : 2x + 3y - 1 = 0$ et $\mathcal{D}_2 : 4x + 6y + 5 = 0$.
 
 $a_1 b_2 - a_2 b_1 = 2 \times 6 - 4 \times 3 = 12 - 12 = 0$ : droites parallèles.
 
-$\mathcal{D}_2$ s'écrit aussi $2(2x + 3y) + 5 = 0$. Si elles étaient confondues, on aurait $c_2 = 2 c_1 = -2$, or $c_2 = 5 \neq -2$. Elles sont donc strictement parallèles (non confondues).
+$\mathcal{D}_2$ s'écrit aussi $2(2x + 3y) + 5 = 0$. Si elles étaient confondues, on aurait $c_2 = 2 c_1 = -2$, or $c_2 = 5 
+eq -2$. Elles sont donc strictement parallèles (non confondues).
 }
 
 \exemple{
 $\mathcal{D}_1 : x - 2y + 3 = 0$ et $\mathcal{D}_2 : 3x + y - 5 = 0$.
 
-$a_1 b_2 - a_2 b_1 = 1 \times 1 - 3 \times (-2) = 1 + 6 = 7 \neq 0$ : droites sécantes.
+$a_1 b_2 - a_2 b_1 = 1 \times 1 - 3 \times (-2) = 1 + 6 = 7 
+eq 0$ : droites sécantes.
 
 Système : $\begin{cases} x - 2y = -3 \\ 3x + y = 5 \end{cases}$. De la première : $x = 2y - 3$. En substituant : $3(2y - 3) + y = 5$, soit $7y = 14$, $y = 2$, $x = 1$.
 

@@ -1,7 +1,10 @@
 % META: {"id": "1NSI-TAB-CO-001", "chapitre": "1NSI-TABLES", "type_objet": "corrige", "exercice_ref": "1NSI-TAB-EX-001", "capacites": ["P-TABLE-01"], "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % import csv, io
-% texte = "titre,auteur,prix,stock\nLe Petit Prince,Saint-Exupery,7.5,12\n1984,Orwell,9.9,5\nLe Comte de Monte-Cristo,Dumas,12.0,3"
+% texte = "titre,auteur,prix,stock
+Le Petit Prince,Saint-Exupery,7.5,12
+1984,Orwell,9.9,5
+Le Comte de Monte-Cristo,Dumas,12.0,3"
 % livres = list(csv.DictReader(io.StringIO(texte)))
 % for ligne in livres:
 %     ligne["prix"] = float(ligne["prix"])

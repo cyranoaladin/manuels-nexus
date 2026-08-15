@@ -1,0 +1,136 @@
+{
+  "chapitre": "TCOMPL-TEMPS-ATTENTE",
+  "titre": "Loi géométrique et temps d'attente",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "Une variable aleatoire X suivant une loi geometrique de parametre p a pour esperance :",
+      "correcte": "A",
+      "options": {
+        "A": "$\\frac{1}{p}$",
+        "B": "$\\frac{1-p}{p^2}$",
+        "C": "$p$",
+        "D": "$1-p$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Formule de la variance.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "Parametre p.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Probabilite d'echec.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "Pour $k \\ge 1$, la probabilite $P(X = k)$ d'une loi geometrique $G(p)$ vaut :",
+      "correcte": "C",
+      "options": {
+        "A": "$p^k (1-p)$",
+        "B": "$p (1-p)^k$",
+        "C": "$(1-p)^{k-1} p$",
+        "D": "$\\binom{n}{k} p^k (1-p)^{n-k}$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Inversion des roles de succes et echec.",
+          "renvoi": "C1"
+        },
+        "B": {
+          "erreur": "Erreur d'exposant k au lieu de k-1.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Formule de la loi binomiale.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C2",
+      "enonce": "La propriete de perte de memoire de la loi geometrique s'ecrit $P_{X > n}(X > n+k) =$",
+      "correcte": "B",
+      "options": {
+        "A": "$P(X > n)$",
+        "B": "$P(X > k)$",
+        "C": "$P(X = k)$",
+        "D": "$1 - P(X > k)$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Temps n au lieu de k.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Egalite au lieu d'une superiocrite stricte.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Evenement contraire.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "Pour une loi geometrique $G(p)$, $P(X > k) =$",
+      "correcte": "D",
+      "options": {
+        "A": "$p^k$",
+        "B": "$1 - p^k$",
+        "C": "1 - (1-p)^k",
+        "D": "$(1-p)^k$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Utilisation de p au lieu de (1-p).",
+          "renvoi": "C2"
+        },
+        "B": {
+          "erreur": "Formule fausse.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Probabilite P(X <= k).",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C3",
+      "enonce": "Si $p = 0{,}2$, le temps d'attente moyen du premier succes est :",
+      "correcte": "C",
+      "options": {
+        "A": "2 d'essais",
+        "B": "4 d'essais",
+        "C": "5 d'essais",
+        "D": "10 d'essais"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Calcul 1/0.5.",
+          "renvoi": "C3"
+        },
+        "B": {
+          "erreur": "Calcul (1-p)/p = 0.8/0.2 = 4.",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "Calcul 1/(0.2^2).",
+          "renvoi": "C3"
+        }
+      }
+    }
+  ]
+}

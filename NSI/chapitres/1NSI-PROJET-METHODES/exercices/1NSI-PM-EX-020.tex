@@ -1,0 +1,38 @@
+% META: {"id": "1NSI-PM-EX-020", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "exercice", "capacites": ["1NSI-PROJET-METHODES-C4"], "parcours": 2, "competences": ["analyser", "programmer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-020.tex", "corrige_tex": "chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-020.tex", "status": "approved", "capacites_codes": ["C4"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% def rechercher_participant_bugue(participants, pseudo):
+%     for i in range(len(participants) - 1):
+%         if participants[i] == pseudo:
+%             return i
+%     return -1
+% participants = ["Ali", "Sara", "Nora", "Yanis"]
+% assert rechercher_participant_bugue(participants, "Yanis") == -1
+% assert "Yanis" in participants
+% def rechercher_participant(participants, pseudo):
+%     for i in range(len(participants)):
+%         if participants[i] == pseudo:
+%             return i
+%     return -1
+% assert rechercher_participant(participants, "Yanis") == 3
+% END-VERIFY
+\begin{exercice}{1NSI-PM-EX-005}{3}{15}
+Une équipe développe un gestionnaire de tournoi. La veille de la présentation finale
+(dernier jalon du projet), un testeur signale que la fonction
+\lstinline{rechercher_participant} ne trouve jamais le \textbf{dernier} inscrit de la
+liste :
+\begin{python}
+def rechercher_participant_bugue(participants, pseudo):
+    for i in range(len(participants) - 1):
+        if participants[i] == pseudo:
+            return i
+    return -1
+
+participants = ["Ali", "Sara", "Nora", "Yanis"]
+print(rechercher_participant_bugue(participants, "Yanis"))
+\end{python}
+\begin{enumerate}
+  \item Que renvoie cet appel ? Explique précisément, en examinant la boucle \lstinline{for}, pourquoi le dernier élément de \lstinline{participants} n'est jamais examiné.
+  \item Corriger la fonction.
+  \item L'équipe est à la veille de la présentation, avec ce bug encore présent dans une fonctionnalité secondaire. En te référant à la démarche de projet du cours (jalons, ambition raisonnable), quelle serait une décision d'équipe raisonnable : corriger dans l'urgence juste avant de présenter, ou documenter le bug comme limite connue et le corriger après la présentation ? Justifie ta réponse en une ou deux phrases.
+\end{enumerate}
+\end{exercice}

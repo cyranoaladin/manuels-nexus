@@ -1,0 +1,31 @@
+% META: {"id": "TEXP-ARI-CO-050", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-050", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f(x) = (x-1)^4, strictement convexe, minimum en x=1
+% # mais f'(1) = 0, donc la tangente en 1 est y=0, et f >= 0 partout
+% f = (x-1)**4
+% fpp = diff(f, x, 2)
+% assert expand(fpp - 12*(x-1)**2) == 0
+% # fpp = 12*(x-1)**2 >= 0 (convexe)
+% assert f.subs(x, 1) == 0
+% assert diff(f, x).subs(x, 1) == 0
+% # tangente en 1: y=0, f >= 0
+% # mais f''(1) = 0 aussi: pas un point d'inflexion (f'' ne change pas de signe)
+% assert fpp.subs(x, 0) == 12
+% assert fpp.subs(x, 2) == 12
+% # ni tangente traversante, ni inflexion, mais minimum global
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-050}
+
+\textbf{Question 1.} $f''(x) = 12(x-1)^2 \geq 0$ : $f$ est convexe (non strictement).
+
+\commentaireMarge{$f''=12(x-1)^2 \geq 0$ s'annule en $1$ sans changer de signe : pas d'inflexion.}
+
+$f''(1) = 0$ mais $f''$ \textbf{ne change pas de signe} : il n'y a \textbf{pas} de point d'inflexion.
+
+\textbf{Question 2.} $f(1) = 0$ et $f'(1) = 0$ : la tangente est $y = 0$. Comme $f$ est convexe, $f(x) \geq 0$ : la courbe est au-dessus de la tangente.
+
+\textbf{Question 3.} L'annulation de $f''$ sans changement de signe n'indique pas une inflexion mais un << aplatissement >> de la convexite. La courbe reste convexe et reste au-dessus de sa tangente, avec un contact d'ordre superieur (ici d'ordre 4).
+
+\end{corrige}

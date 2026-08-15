@@ -1,0 +1,23 @@
+% META: {"id": "TEXP-MAT-EX-027", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "exercice", "capacites": ["TEXP-MAT-C6"], "capacites_codes": ["C6"], "methodes": ["M4"], "parcours": 2, "competences": ["communiquer","calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-027.tex", "corrige_tex": "chapitres/TEXP-MATRICES-MARKOV/corriges/TEXP-MAT-CO-027.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f(x)=x^4-2x^2, f'=4x^3-4x, f''=12x^2-4
+% f = x**4 - 2*x**2
+% fp = diff(f, x)
+% fpp = diff(f, x, 2)
+% assert expand(fp) == 4*x**3 - 4*x
+% assert expand(fpp) == 12*x**2 - 4
+% assert solve(fpp, x) == [-sqrt(3)/3, sqrt(3)/3]
+% assert f.subs(x, 0) == 0
+% assert f.subs(x, sqrt(3)/3) == Rational(-5, 9)
+% END-VERIFY
+\begin{exercice}{TEXP-MAT-EX-027}{1}{10}
+Soit $f(x) = x^4 - 2x^2$.
+\begin{enumerate}
+  \item Calculer $f'(x)$ et $f''(x)$.
+  \item Determiner les points d'inflexion de la courbe.
+  \item Esquisser l'allure de la courbe.
+\end{enumerate}
+
+\end{exercice}

@@ -1,0 +1,69 @@
+% META: {"id": "1NSI-PM-COURS-01", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "cours", "capacites": ["1NSI-PROJET-METHODES-C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C1"]}
+\section{Repères d'histoire de l'informatique}
+
+\margeAppui{Le programme officiel présente l'histoire de l'informatique comme une rubrique
+\textbf{transversale} : elle se construit progressivement, au fil des concepts rencontrés
+dans chaque chapitre, plutôt que comme un cours isolé.}
+
+\definition[D1]{
+  L'histoire de l'informatique retrace comment les concepts d'\textbf{algorithme}, de
+  \textbf{machine}, de \textbf{langage} et de \textbf{données} — les quatre notions
+  fondamentales du programme — ont émergé et se sont articulés au fil du temps, à travers
+  des personnes précises.
+}
+
+\propriete[Quelques repères clés]{
+  \begin{itemize}
+    \item Les \textbf{algorithmes} sont présents dès l'Antiquité (par exemple l'algorithme d'Euclide).
+    \item Les premières \textbf{machines à calculer} apparaissent progressivement au XVII\textsuperscript{e} siècle.
+    \item En \textbf{1936}, Alan Turing introduit le concept de \textbf{machine universelle} : une machine capable, en principe, d'exécuter n'importe quel algorithme — c'est la naissance de l'idée moderne d'ordinateur.
+    \item Les \textbf{premiers ordinateurs} sont construits en \textbf{1948}.
+    \item Le réseau \textbf{Internet} se développe depuis \textbf{1969}.
+  \end{itemize}
+}
+
+\begin{codereference}{Manipuler une chronologie avec des tableaux de p-uplets}
+\begin{python}
+evenements = [
+    (1936, "Concept de machine universelle", "Alan Turing"),
+    (1948, "Premier ordinateur a programme enregistre", "Equipe de Manchester"),
+    (1969, "Debuts du reseau Internet (ARPANET)", "DARPA"),
+    (1971, "Premier microprocesseur commercial", "Intel"),
+    (1989, "Invention du World Wide Web", "Tim Berners-Lee"),
+    (1991, "Premiere version publique de Python", "Guido van Rossum"),
+]
+
+def evenements_entre(evenements, debut, fin):
+    """Renvoie les evenements dont l'annee est comprise entre debut et fin (inclus)."""
+    return [e for e in evenements if debut <= e[0] <= fin]
+
+for annee, fait, personne in evenements_entre(evenements, 1940, 1970):
+    print(annee, "-", fait, "(" + personne + ")")
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% evenements = [
+%     (1936, "Concept de machine universelle", "Alan Turing"),
+%     (1948, "Premier ordinateur a programme enregistre", "Equipe de Manchester"),
+%     (1969, "Debuts du reseau Internet (ARPANET)", "DARPA"),
+%     (1971, "Premier microprocesseur commercial", "Intel"),
+%     (1989, "Invention du World Wide Web", "Tim Berners-Lee"),
+%     (1991, "Premiere version publique de Python", "Guido van Rossum"),
+% ]
+% assert evenements == sorted(evenements, key=lambda e: e[0])  # deja chronologique
+% def evenements_entre(evenements, debut, fin):
+%     return [e for e in evenements if debut <= e[0] <= fin]
+% resultat = evenements_entre(evenements, 1940, 1970)
+% assert [e[0] for e in resultat] == [1948, 1969]
+% END-VERIFY
+
+\erreurFrequente{Réduire l'histoire de l'informatique à une suite de \og dates à
+retenir \fg{}, sans les relier aux concepts. Le programme précise que ces repères doivent
+être \textbf{construits progressivement}, en lien avec les notions techniques déjà
+étudiées : par exemple, 1936 (Turing) prend tout son sens une fois qu'on a compris la
+notion d'algorithme et de machine universelle du chapitre sur l'architecture.}
+
+\alamachine{Ajoute à la liste \lstinline{evenements} deux événements de ton choix
+(recherchés dans une source fiable), avec leur année et leur protagoniste. Vérifie que la
+liste reste triée chronologiquement avec \lstinline{sorted}.}

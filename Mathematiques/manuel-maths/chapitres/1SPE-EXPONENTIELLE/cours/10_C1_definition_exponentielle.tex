@@ -32,7 +32,8 @@ La \textbf{fonction exponentielle}, notée $\exp$, est l'unique fonction défini
   \item $\exp(0) = 1$.
   \item $\exp(1) = \mathrm{e} \approx 2{,}718$.
   \item Pour tout $x \in \mathbb{R}$, $\exp(x) > 0$.
-  \item Pour tout $x \in \mathbb{R}$, $\exp(x) \neq 0$.
+  \item Pour tout $x \in \mathbb{R}$, $\exp(x) 
+eq 0$.
 \end{itemize}
 }
 
@@ -45,7 +46,8 @@ La \textbf{fonction exponentielle}, notée $\exp$, est l'unique fonction défini
 % END-VERIFY
 
 \demonstration{
-\textbf{Preuve que $\exp(x) \neq 0$ pour tout $x \in \mathbb{R}$.}
+\textbf{Preuve que $\exp(x) 
+eq 0$ pour tout $x \in \mathbb{R}$.}
 
 Posons $g(x) = \exp(x) \times \exp(-x)$. Calculons la dérivée de $g$ à l'aide de la règle du produit :
 \[
@@ -54,7 +56,8 @@ g'(x) = \exp'(x) \cdot \exp(-x) + \exp(x) \cdot (\exp(-x))'
 \]
 Donc $g$ est constante sur $\mathbb{R}$. Or $g(0) = \exp(0) \times \exp(0) = 1 \times 1 = 1$.
 Ainsi, pour tout $x \in \mathbb{R}$, $\exp(x) \times \exp(-x) = 1$.
-En particulier, $\exp(x) \neq 0$ pour tout $x$.
+En particulier, $\exp(x) 
+eq 0$ pour tout $x$.
 }
 
 % BEGIN-VERIFY
@@ -113,7 +116,8 @@ Croire que $\mathrm{e} = 2{,}718$ exactement. Le nombre $\mathrm{e}$ est irratio
 }
 
 \contreexemple{
-La fonction $f(x) = 2\mathrm{e}^x$ vérifie $f' = f$ mais $f(0) = 2 \neq 1$. Elle n'est donc pas la fonction exponentielle. La condition $f(0) = 1$ est indispensable pour l'unicité.
+La fonction $f(x) = 2\mathrm{e}^x$ vérifie $f' = f$ mais $f(0) = 2 
+eq 1$. Elle n'est donc pas la fonction exponentielle. La condition $f(0) = 1$ est indispensable pour l'unicité.
 }
 
 \approfondissement{

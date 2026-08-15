@@ -1,0 +1,23 @@
+% META: {"id": "TEXP-CTP-EX-042", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "exercice", "capacites": ["TEXP-CTP-C7"], "capacites_codes": ["C7"], "methodes": ["M4"], "parcours": 2, "competences": ["modeliser","raisonner"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-042.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-042.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f(x) = x^4 - 4x^2 + 1, trouver nb de points d'inflexion et leur nature
+% f = x**4 - 4*x**2 + 1
+% fpp = diff(f, x, 2)
+% assert expand(fpp) == 12*x**2 - 8
+% assert solve(fpp, x) == [-sqrt(6)/3, sqrt(6)/3]
+% assert fpp.subs(x, 0) == -8  # concave
+% assert fpp.subs(x, 2) == 40  # convexe
+% f.subs(x, sqrt(6)/3)
+% assert simplify(f.subs(x, sqrt(6)/3) - Rational(-11, 9)) == 0
+% END-VERIFY
+\begin{exercice}{TEXP-CTP-EX-042}{3}{25}
+On considere $f(x) = x^4 - 4x^2 + 1$ sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Combien de points d'inflexion la courbe possede-t-elle ? Les determiner.
+  \item Esquisser la courbe en indiquant les variations et la convexite.
+  \item La courbe coupe-t-elle l'axe des abscisses ? Combien de fois ?
+\end{enumerate}
+
+\end{exercice}

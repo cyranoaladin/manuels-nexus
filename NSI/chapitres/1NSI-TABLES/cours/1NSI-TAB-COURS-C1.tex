@@ -71,7 +71,9 @@ print(table[0])  # {'nom': 'Ali', 'age': '16', 'categorie': 'junior', 'cotisatio
 % BEGIN-VERIFY
 % import csv
 % import io
-% texte_csv = "nom,age,categorie,cotisation\nAli,16,junior,80\nSami,15,junior,80"
+% texte_csv = "nom,age,categorie,cotisation
+Ali,16,junior,80
+Sami,15,junior,80"
 % lecteur = csv.DictReader(io.StringIO(texte_csv))
 % table = list(lecteur)
 % assert table[0] == {"nom": "Ali", "age": "16", "categorie": "junior", "cotisation": "80"}

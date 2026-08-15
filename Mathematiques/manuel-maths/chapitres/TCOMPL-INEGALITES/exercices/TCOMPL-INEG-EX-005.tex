@@ -1,0 +1,19 @@
+% META: {"id": "TCOMPL-INEG-EX-005", "chapitre": "TCOMPL-INEGALITES", "type_objet": "exercice", "capacites": ["TCOMPL-INEG-C5"], "capacites_codes": ["C5"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer","raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INEGALITES/exercices/TCOMPL-INEG-EX-005.tex", "corrige_tex": "chapitres/TCOMPL-INEGALITES/corriges/TCOMPL-INEG-CO-005.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(1/x)
+% fp = diff(f, x)
+% assert simplify(fp) == -exp(1/x)/x**2
+% # fp < 0 sur R* : f decroissante
+% assert fp.subs(x, 1) == -exp(1)
+% assert fp.subs(x, -1) == -exp(-1)
+% END-VERIFY
+\begin{exercice}{TCOMPL-INEG-EX-005}{2}{12}
+Soit $f$ definie sur $\mathbb{R}^*$ par $f(x) = \mathrm{e}^{1/x}$.
+\begin{enumerate}
+  \item Calculer $f'(x)$.
+  \item Etudier le signe de $f'(x)$ sur $\mathbb{R}^*$ et en deduire les variations de $f$.
+\end{enumerate}
+
+\end{exercice}

@@ -1,0 +1,49 @@
+% META: {"id": "TSPE-PRIMITIVES-EQDIFF-COURS-05", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "cours", "capacites_codes": ["C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TSPE-PRIMITIVES-EQDIFF-C5"], "statut": "structure"}
+
+\section{Équation différentielle $y' = ay + f$}
+
+% ============================================================
+% STRATE 1 — Methode a partir d'une solution particuliere donnee
+% ============================================================
+
+\theoreme{
+Soit $a \in \mathbb{R}^*$ et $f$ une fonction. Si $y_p$ est une solution particuliere (donnee) de $y'=ay+f$ sur $\mathbb{R}$, alors les solutions de cette equation sont exactement les fonctions :
+\[
+  x \mapsto C\,\mathrm{e}^{ax} + y_p(x), \qquad C \in \mathbb{R}.
+\]
+}
+
+\margeAppui{
+Meme methode que pour $y'=ay+b$ : on pose $z = y - y_p$, et $z' = y'-y_p' = (ay+f)-(ay_p+f) = a(y-y_p) = az$. Donc $z(x) = C\mathrm{e}^{ax}$, d'ou $y = C\mathrm{e}^{ax}+y_p$.
+}
+
+\exemple{
+On donne que $y_p(x) = x$ est une solution particuliere de $y' = -y + x + 1$. Determiner toutes les solutions, puis celle telle que $y(0)=4$.
+
+\textbf{Verification de $y_p$.} $y_p'(x) = 1$ et $-y_p(x)+x+1 = -x+x+1=1$. On a bien $y_p'=1= -y_p+x+1$. \checkmark
+
+\textbf{Solutions generales.} $y(x) = C\mathrm{e}^{-x} + x$.
+
+\textbf{Condition $y(0)=4$.} $C\mathrm{e}^0+0 = C = 4$.
+
+La solution cherchee est $y(x) = 4\mathrm{e}^{-x}+x$.
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff
+% x = symbols('x')
+% yp = x
+% assert diff(yp, x) == 1
+% assert diff(yp, x) - (-yp + x + 1) == 0
+% y = 4*exp(-x) + x
+% assert diff(y, x) == -y + x + 1
+% assert y.subs(x, 0) == 4
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier de verifier la solution particuliere donnee.} Avant d'utiliser $y_p$, il est indispensable de verifier qu'elle satisfait bien l'equation (en calculant $y_p'$ et en la comparant a $ay_p+f$), sous peine de propager une erreur dans toute la resolution.
+}

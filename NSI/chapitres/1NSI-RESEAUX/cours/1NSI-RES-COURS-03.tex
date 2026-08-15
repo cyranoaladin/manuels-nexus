@@ -1,0 +1,146 @@
+% META: {"id": "1NSI-RES-COURS-03", "chapitre": "1NSI-RESEAUX", "type_objet": "cours", "capacites": ["1NSI-RESEAUX-C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C3"]}
+\section{Capteurs, actionneurs et IHM programmée}
+
+\definition[D4]{
+  Un \textbf{capteur} mesure une grandeur physique (température, luminosité, présence...)
+  et la convertit en une donnée numérique exploitable par un programme. Un
+  \textbf{actionneur} reçoit une commande d'un programme et agit sur le monde physique
+  (allumer une lampe, ouvrir un volet, déclencher un moteur...).
+}
+
+\exemple{Un thermostat connecté : le \textbf{capteur} de température mesure la
+température ambiante ; le programme décide, selon cette mesure, d'activer ou non le
+chauffage ; l'\textbf{actionneur} (relais électrique) coupe ou active effectivement le
+chauffage.}
+
+\propriete[Cahier des charges d'une IHM]{
+  Réaliser une IHM (interface homme-machine) répondant à un \textbf{cahier des charges}
+  consiste à traduire des règles énoncées en langage courant (« si la température descend
+  sous $18\,^\circ\text{C}$, le chauffage s'active ») en un programme précis, testé sur des
+  cas concrets.
+}
+
+\begin{codereference}{Thermostat programmé : capteur, décision, actionneur et IHM}
+% PYTHON-SOURCE: code/thermostat_ihm.py
+\begin{python}
+COMMANDES = {"AUTO": None, "ON": True, "OFF": False}
+etat = {"chauffage": False, "override_manuel": None}
+
+
+def traiter_evenement(commande):
+    commande = commande.strip().upper()
+    if commande not in COMMANDES:
+        raise ValueError("commande attendue : AUTO, ON ou OFF")
+    etat["override_manuel"] = COMMANDES[commande]
+
+
+def decider_chauffage(temperature, seuil=18):
+    if etat["override_manuel"] is not None:
+        return etat["override_manuel"]
+    return temperature < seuil
+
+
+def actionner_chauffage(temperature, seuil=18):
+    etat["chauffage"] = decider_chauffage(temperature, seuil)
+    return etat["chauffage"]
+
+
+def afficher_etat(temperature):
+    override = etat["override_manuel"]
+    if override is None:
+        mode = "AUTO"
+    elif override:
+        mode = "ON manuel"
+    else:
+        mode = "OFF manuel"
+    chauffage = "ON" if etat["chauffage"] else "OFF"
+    return f"temperature={temperature} C | mode={mode} | chauffage={chauffage}"
+
+
+def interface_thermostat(commande, temperature, seuil=18):
+    traiter_evenement(commande)
+    actionner_chauffage(temperature, seuil)
+    return afficher_etat(temperature)
+
+
+def lancer_ihm(temperature, seuil=18, lire=input, ecrire=print):
+    ecrire("Commandes : AUTO | ON | OFF")
+    commande = lire("Commande : ")
+    ecrire(interface_thermostat(commande, temperature, seuil))
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% COMMANDES = {"AUTO": None, "ON": True, "OFF": False}
+% etat = {"chauffage": False, "override_manuel": None}
+%
+%
+% def traiter_evenement(commande):
+%     commande = commande.strip().upper()
+%     if commande not in COMMANDES:
+%         raise ValueError("commande attendue : AUTO, ON ou OFF")
+%     etat["override_manuel"] = COMMANDES[commande]
+%
+%
+% def decider_chauffage(temperature, seuil=18):
+%     if etat["override_manuel"] is not None:
+%         return etat["override_manuel"]
+%     return temperature < seuil
+%
+%
+% def actionner_chauffage(temperature, seuil=18):
+%     etat["chauffage"] = decider_chauffage(temperature, seuil)
+%     return etat["chauffage"]
+%
+%
+% def afficher_etat(temperature):
+%     override = etat["override_manuel"]
+%     if override is None:
+%         mode = "AUTO"
+%     elif override:
+%         mode = "ON manuel"
+%     else:
+%         mode = "OFF manuel"
+%     chauffage = "ON" if etat["chauffage"] else "OFF"
+%     return f"temperature={temperature} C | mode={mode} | chauffage={chauffage}"
+%
+%
+% def interface_thermostat(commande, temperature, seuil=18):
+%     traiter_evenement(commande)
+%     actionner_chauffage(temperature, seuil)
+%     return afficher_etat(temperature)
+%
+%
+% def lancer_ihm(temperature, seuil=18, lire=input, ecrire=print):
+%     ecrire("Commandes : AUTO | ON | OFF")
+%     commande = lire("Commande : ")
+%     ecrire(interface_thermostat(commande, temperature, seuil))
+% assert interface_thermostat("ON", 25) == "temperature=25 C | mode=ON manuel | chauffage=ON"
+% assert interface_thermostat("OFF", 15) == "temperature=15 C | mode=OFF manuel | chauffage=OFF"
+% assert interface_thermostat("AUTO", 15) == "temperature=15 C | mode=AUTO | chauffage=ON"
+% assert interface_thermostat("AUTO", 22) == "temperature=22 C | mode=AUTO | chauffage=OFF"
+% assert interface_thermostat("AUTO", 18) == "temperature=18 C | mode=AUTO | chauffage=OFF"
+% assert interface_thermostat("ON", 25) == "temperature=25 C | mode=ON manuel | chauffage=ON"
+% assert interface_thermostat("AUTO", 25) == "temperature=25 C | mode=AUTO | chauffage=OFF"
+% try:
+%     interface_thermostat("CHAUD", 20)
+% except ValueError as erreur:
+%     assert str(erreur) == "commande attendue : AUTO, ON ou OFF"
+% else:
+%     raise AssertionError("une commande invalide doit etre refusee")
+% END-VERIFY
+
+\exemple{L'utilisateur lance \lstinline{lancer_ihm(25)}, saisit une commande
+\lstinline{AUTO}, \lstinline{ON} ou \lstinline{OFF}, puis lit dans l'affichage le mode et
+l'état effectif du chauffage. La commande saisie constitue l'événement traité par l'IHM.}
+
+\erreurFrequente{Programmer une IHM en oubliant de tester les \textbf{cas limites} du
+cahier des charges (température exactement égale au seuil, override activé puis désactivé).
+Un cahier des charges mal testé peut sembler fonctionner sur l'exemple de démonstration tout
+en étant incorrect dans des situations réelles fréquentes.}
+
+\alamachine{Modifie le thermostat pour ajouter une \textbf{hystérésis} : le chauffage
+s'active si la température descend sous $18\,^\circ\text{C}$, mais ne se désactive que
+lorsqu'elle dépasse $20\,^\circ\text{C}$ (pour éviter des allumages/extinctions trop
+fréquents). Teste ta fonction sur une séquence de températures
+\lstinline{[15, 17, 19, 21, 19]}.}

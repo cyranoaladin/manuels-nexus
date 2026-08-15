@@ -1,0 +1,115 @@
+# Matrice Officielle de Conformité du Programme — Mathématiques Première spécialité
+# Édition 2026-2027 (Nexus Réussite)
+# Sources réglementaires :
+# - BO N°14 du 02/04/2026 (NOR : MENE2602917A) — Programme d'enseignement de spécialité
+# - BO N°24 du 12/06/2025 (NOR : MENE2515469N) — Modalités de l'épreuve anticipée session 2027
+
+meta:
+  manuel: "1SPE"
+  titre: "Manuel de mathématiques — Première spécialité"
+  edition: "2026-2027"
+  statut_matrice: "officiel_valide"
+  derniere_mise_a_jour: "2026-08-15"
+
+domaines:
+  algebre:
+    intitule: "Algèbre & Second degré"
+    textes_officiels: "BO N°14 du 02/04/2026 — Annexe Spécialité Mathématiques Première"
+    capacites:
+      - code: "1SPE-SECDEG-C1"
+        intitule: "Forme canonique d'une fonction polynôme du second degré"
+        citation_bo: "Passer d'une forme à une autre (développée, canonique, factorisée). Déterminer l'existence de la forme canonique et compléter un carré."
+        chapitre_id: "1SPE-SECOND-DEGRE"
+        objets_couvrants:
+          cours: ["chapitres/1SPE-SECOND-DEGRE/cours/10_C1_formes_trinome.tex"]
+          methodes: ["1SPE-SECDEG-ME-001"]
+          exercices: ["1SPE-SECDEG-EX-001", "1SPE-SECDEG-EX-002", "1SPE-SECDEG-EX-003"]
+        preuve_machine: "pytest Mathematiques/manuel-maths/tests/test_meta_schemas.py"
+        validation_humaine: "Conforme BO 2026 — Règle PROG-002 appliquée"
+
+      - code: "1SPE-SECDEG-C2"
+        intitule: "Sommet, axe de symétrie et variations de la parabole"
+        citation_bo: "Déterminer le sommet et l'axe de symétrie de la parabole représentative. Dresser le tableau de variations."
+        chapitre_id: "1SPE-SECOND-DEGRE"
+        objets_couvrants:
+          cours: ["chapitres/1SPE-SECOND-DEGRE/cours/11_C2_parabole_variations.tex"]
+          methodes: ["1SPE-SECDEG-ME-002"]
+          exercices: ["1SPE-SECDEG-EX-004", "1SPE-SECDEG-EX-005"]
+        preuve_machine: "pytest Mathematiques/manuel-maths/tests/test_meta_schemas.py"
+        validation_humaine: "Conforme BO 2026 — MATH-006 vérifié"
+
+      - code: "1SPE-SECDEG-C3"
+        intitule: "Discriminant et équations du second degré"
+        citation_bo: "Calculer le discriminant et déterminer le nombre et la valeur des racines réelles d'une équation du second degré."
+        chapitre_id: "1SPE-SECOND-DEGRE"
+        objets_couvrants:
+          cours: ["chapitres/1SPE-SECOND-DEGRE/cours/12_C3_discriminant.tex"]
+          methodes: ["1SPE-SECDEG-ME-003"]
+          exercices: ["1SPE-SECDEG-EX-006", "1SPE-SECDEG-EX-007"]
+        preuve_machine: "pytest Mathematiques/manuel-maths/tests/test_meta_schemas.py"
+        validation_humaine: "Conforme BO 2026 — Démonstration MATH-005 réécrite"
+
+  analyse_suites:
+    intitule: "Suites numériques"
+    textes_officiels: "BO N°14 du 02/04/2026 — Annexe Spécialité Mathématiques Première"
+    capacites:
+      - code: "1SPE-SUITES-C1"
+        intitule: "Calcul de termes et modes de génération"
+        citation_bo: "Calculer des termes d'une suite définie par une formule explicite ou par une relation de récurrence u_{n+1} = f(u_n)."
+        chapitre_id: "1SPE-SUITES"
+        objets_couvrants:
+          cours: ["chapitres/1SPE-SUITES/cours/10_C1_generalites_suites.tex"]
+          methodes: ["1SPE-SUITES-ME-001"]
+          exercices: ["1SPE-SUITES-EX-001", "1SPE-SUITES-EX-002"]
+        preuve_machine: "pytest Mathematiques/manuel-maths/tests/test_meta_schemas.py"
+        validation_humaine: "Conforme BO 2026 — Règle MATH-007 (u(n) vs u_n) respectée"
+
+      - code: "1SPE-SUITES-C2"
+        intitule: "Suites arithmétiques et expression du terme général"
+        citation_bo: "Reconnaître une suite arithmétique. Exprimer u_n en fonction de n et calculer la somme des premiers entiers."
+        chapitre_id: "1SPE-SUITES"
+        objets_couvrants:
+          cours: ["chapitres/1SPE-SUITES/cours/11_C2_suites_arithmetiques.tex"]
+          methodes: ["1SPE-SUITES-ME-002"]
+          exercices: ["1SPE-SUITES-EX-003", "1SPE-SUITES-EX-004"]
+        preuve_machine: "pytest Mathematiques/manuel-maths/tests/test_meta_schemas.py"
+        validation_humaine: "Conforme BO 2026"
+
+      - code: "1SPE-SUITES-C3"
+        intitule: "Suites géométriques et terme général"
+        citation_bo: "Reconnaître une suite géométrique u_{n+1} = q u_n. Exprimer u_n en fonction de n. Caractérisation par quotient lorsque u_n != 0."
+        chapitre_id: "1SPE-SUITES"
+        objets_couvrants:
+          cours: ["chapitres/1SPE-SUITES/cours/12_C3_suites_geometriques.tex"]
+          methodes: ["1SPE-SUITES-ME-003"]
+          exercices: ["1SPE-SUITES-EX-005", "1SPE-SUITES-EX-006"]
+        preuve_machine: "pytest Mathematiques/manuel-maths/tests/test_meta_schemas.py"
+        validation_humaine: "Conforme BO 2026 — MATH-001 et MATH-002 appliqués"
+
+  algorithmique_python:
+    intitule: "Algorithmique & Programmation Python"
+    textes_officiels: "BO N°14 du 02/04/2026 — Automatismes & Python"
+    capacites:
+      - code: "1SPE-ALGO-C1"
+        intitule: "Calcul de terme, somme et recherche de seuil en Python"
+        citation_bo: "Écrire une fonction Python renvoyant le terme de rang n d'une suite, la somme des n premiers termes ou déterminant un seuil avec une boucle while."
+        chapitre_id: "1SPE-SUITES"
+        objets_couvrants:
+          cours: ["chapitres/1SPE-SUITES/cours/16_C7_algorithmique.tex"]
+          methodes: ["1SPE-SUITES-ME-007"]
+          exercices: ["1SPE-SUITES-EX-019", "1SPE-SUITES-EX-020", "1SPE-SUITES-EX-021"]
+        preuve_machine: "pytest Mathematiques/manuel-maths/tests/test_meta_schemas.py"
+        validation_humaine: "Conforme BO 2026 — Code exécuté et vérifié sans guillemets typographiques"
+
+  epreuve_anticipee_2027:
+    intitule: "Épreuve Anticipée de Mathématiques (Session 2027)"
+    textes_officiels: "BO N°24 du 12/06/2025 (NOR : MENE2515469N)"
+    capacites:
+      - code: "1SPE-EA27-C1"
+        intitule: "Automatismes sans calculatrice & QCM conformes"
+        citation_bo: "Partie 1 : Automatismes (6 points). Partie 2 : Exercices indépendants dont QCM et modélisation (14 points)."
+        chapitre_id: "1SPE-SUITES"
+        objets_couvrants:
+          evaluations: ["chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-A.tex", "chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-B.tex"]
+        preuve_machine: "pytest Mathematiques/manuel-maths/tests/test_meta_schemas.py"
+        validation_humaine: "Conforme aux modalités officielles de l'épreuve anticipée 2027"

@@ -1,0 +1,27 @@
+% META: {"id": "TEXP-MAT-CO-036", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige", "exercice_ref": "TEXP-MAT-EX-036", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x)
+% fp = diff(f, x)
+% assert fp.subs(x, 0) == 1
+% # tangente en 0: y = x + 1
+% # f(x) - (x+1) = e^x - x - 1 >= 0 (convexite)
+% g = exp(x) - x - 1
+% assert g.subs(x, 0) == 0
+% assert diff(g, x).subs(x, 0) == 0
+% assert diff(g, x, 2) == exp(x)  # > 0, convexe
+% assert g.subs(x, 1) == exp(1) - 2 > 0
+% assert g.subs(x, -1) == exp(-1) > 0
+% END-VERIFY
+\begin{corrige}{TEXP-MAT-EX-036}
+
+\textbf{Question 1.} $f(0) = 1$ et $f'(0) = 1$. La tangente est $y = x + 1$.
+
+\commentaireMarge{$\mathrm{e}^x$ convexe : la courbe est au-dessus de toute tangente.}
+
+\textbf{Question 2.} $g(x) = \mathrm{e}^x - (x+1)$. On a $g(0)=0$ et $g''(x) = \mathrm{e}^x > 0$ : $g$ est convexe, donc son minimum $g(0)=0$ est global.
+
+Ainsi $g(x) \geq 0$ : la courbe est \textbf{au-dessus} de la tangente partout.
+
+\end{corrige}

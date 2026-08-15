@@ -1,4 +1,4 @@
-% META: {"id": "TSPE-CONTIN-CO-050", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-050", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TSPE-CONTIN-CO-050", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-050", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
 % from sympy import symbols, diff, sqrt, simplify, Rational, solveset, S as SS, Eq
 % x = symbols('x')
@@ -30,7 +30,8 @@ Comme $f(I) \subset I$, on a $f(\alpha) \geq \alpha$, donc $g(\alpha) \geq 0$ ; 
 
 \textbf{Q2. Unicite.} Supposons $\ell_1$ et $\ell_2$ deux points fixes distincts de $I$. L'inegalite des accroissements finis, applicable puisque $\left|f'\right| \leq k$ sur $I$, donne
 \[ \left|\ell_1 - \ell_2\right| = \left|f(\ell_1) - f(\ell_2)\right| \leq k\left|\ell_1 - \ell_2\right|. \]
-Comme $\ell_1 \neq \ell_2$, on peut diviser par $\left|\ell_1 - \ell_2\right| > 0$ : il vient $1 \leq k$, ce qui contredit $k < 1$. Les deux points fixes sont donc confondus.
+Comme $\ell_1 
+eq \ell_2$, on peut diviser par $\left|\ell_1 - \ell_2\right| > 0$ : il vient $1 \leq k$, ce qui contredit $k < 1$. Les deux points fixes sont donc confondus.
 
 \textbf{Q3. Convergence.} La stabilite de $I$ assure par recurrence que tous les $u_n$ restent dans $I$. En appliquant l'inegalite des accroissements finis entre $u_n$ et $\ell$ :
 \[ \left|u_{n+1} - \ell\right| = \left|f(u_n) - f(\ell)\right| \leq k\left|u_n - \ell\right|. \]

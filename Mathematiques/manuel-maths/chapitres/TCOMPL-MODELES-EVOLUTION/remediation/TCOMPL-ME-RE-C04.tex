@@ -1,0 +1,26 @@
+% META: {"id": "TCOMPL-MODELES-EVOLUTION-FR-R4", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "remediation", "capacites_codes": ["R4"], "status": "approved"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU -- R4 : Limites de fonctions et croissances comparees
+%---------------------------------------------------------------
+
+\subsection*{Rappel -- Limites de fonctions et croissances comparees}
+
+\textbf{Croissances compareees :} $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x^n} = +\infty$, $\lim_{x \to +\infty} \dfrac{\ln x}{x} = 0$, $\lim_{x \to +\infty} x\,\mathrm{e}^{-x} = 0$.
+
+\begin{exercice}{TCOMPL-ME-FR-R4-EX1}{1}{10}
+Determiner les limites suivantes :
+\begin{enumerate}
+  \item $\lim_{x \to +\infty} \dfrac{x^3}{\mathrm{e}^x}$
+  \item $\lim_{x \to 0^+} x \ln x$
+  \item $\lim_{x \to +\infty} \left(x - \ln x\right)$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(x**3/exp(x), x, oo) == 0
+% assert limit(x*ln(x), x, 0, '+') == 0
+% assert limit(x - ln(x), x, oo) == oo
+% END-VERIFY

@@ -1,77 +1,127 @@
-% META: {"id": "TSPE-PROBABILITES-QCM", "chapitre": "TSPE-PROBABILITES", "type_objet": "qcm", "capacites_codes": ["C1","C2","C5","C7","C8","C9","C10"], "status": "generated"}
+% META: {"id": "TSPE-PROBABILITES-QCM", "chapitre": "TSPE-PROBABILITES", "type_objet": "qcm", "genere_depuis": "chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-evaluation — Probabilités}
+\section*{\textcolor{chapcolor}{\MakeUppercase{QCM d'auto-evaluation -- Probabilites}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule reponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C2/C5 — Schéma de Bernoulli, loi binomiale}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Si $X \sim \mathcal{B}(n,p)$, alors $P(X=k)$ vaut :
-  \begin{enumerate}[label=\Alph*.]
-    \item $p^k(1-p)^{n-k}$.
-    \item $\dbinom{n}{k}p^k(1-p)^{n-k}$.
-    \item $\dbinom{n}{k}p^k$.
-    \item $np^k$.
-  \end{enumerate}
+\item[] \textbf{Capacite C2}
 
-\bigskip
+\item \textbf{[Q1]} Si X suit B(n,p), alors P(X=k) vaut :
+  \begin{enumerate}[label=\Alph*.]
+    \item p\textasciicircum{}k (1-p)\textasciicircum{}(n-k)
+    \item C(n,k) p\textasciicircum{}k (1-p)\textasciicircum{}(n-k)
+    \item C(n,k) p\textasciicircum{}k
+    \item np\textasciicircum{}k
+  \end{enumerate}
 
 \item \textbf{[Q2]} Un schema de Bernoulli suppose que les epreuves sont :
   \begin{enumerate}[label=\Alph*.]
-    \item dependantes et identiques.
-    \item independantes et identiques.
-    \item independantes et differentes.
-    \item toutes de probabilite $1/2$.
+    \item dependantes et identiques
+    \item independantes et identiques
+    \item independantes et differentes
+    \item toutes de probabilite 1/2
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C7}
 
-\subsection*{C7/C8/C9 — Espérance, variance}
-
-\item \textbf{[Q3]} La linearite de l'esperance $E(X+Y)=E(X)+E(Y)$ est valable :
+\item \textbf{[Q3]} La linearite de l'esperance E(X+Y)=E(X)+E(Y) est valable :
   \begin{enumerate}[label=\Alph*.]
-    \item uniquement si $X,Y$ sont independantes.
-    \item toujours, sans condition d'independance.
-    \item uniquement si $X=Y$.
-    \item jamais.
+    \item uniquement si X et Y sont independantes
+    \item toujours, sans condition d'independence
+    \item uniquement si X=Y
+    \item jamais
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q4]} L'additivite de la variance $V(X+Y)=V(X)+V(Y)$ necessite :
+\item \textbf{[Q4]} L'additivite de la variance V(X+Y)=V(X)+V(Y) necessite :
   \begin{enumerate}[label=\Alph*.]
-    \item que $X$ et $Y$ soient independantes.
-    \item que $X=Y$.
-    \item rien de particulier.
-    \item que $E(X)=E(Y)$.
+    \item que X et Y soient independantes
+    \item que X=Y
+    \item rien de particulier
+    \item que E(X)=E(Y)
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C8}
 
-\item \textbf{[Q5]} Pour $X \sim \mathcal{B}(n,p)$, $V(X)$ vaut :
+\item \textbf{[Q5]} Pour X ~ B(n,p), V(X) vaut :
   \begin{enumerate}[label=\Alph*.]
-    \item $np$.
-    \item $np(1-p)$.
-    \item $n(1-p)$.
-    \item $p(1-p)$.
+    \item np
+    \item np(1-p)
+    \item n(1-p)
+    \item p(1-p)
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C10}
 
-\subsection*{C10 — Concentration}
-
-\item \textbf{[Q6]} L'inegalite de Bienayme-Tchebychev majore :
+\item \textbf{[Q6]} L'inégalité de Bienayme-Tchebychev majore :
   \begin{enumerate}[label=\Alph*.]
-    \item $P(|Y-\mu|\geq\delta)$.
-    \item $E(Y)$.
-    \item $V(Y)$.
-    \item $P(Y=\mu)$.
+    \item P(|Y-mu|>=delta)
+    \item E(Y)
+    \item V(Y)
+    \item P(Y=mu)
   \end{enumerate}
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C2 & \textbf{B} \\
+Q2 & C2 & \textbf{B} \\
+Q3 & C7 & \textbf{B} \\
+Q4 & C7 & \textbf{A} \\
+Q5 & C8 & \textbf{B} \\
+Q6 & C10 & \textbf{A} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours applicable \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+\end{itemize}

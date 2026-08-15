@@ -1,0 +1,58 @@
+% META: {"id": "1NSI-WEB-EVAL-A-corrige", "chapitre": "1NSI-WEB-IHM", "type_objet": "correction", "evaluation_ref": "1NSI-WEB-EVAL-A", "capacites": ["P-IHM-01A", "P-IHM-02", "P-IHM-04B", "P-IHM-04C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% gestionnaires = {}
+% def ajouter_gestionnaire(id_composant, fonction):
+%     gestionnaires[id_composant] = fonction
+% def declencher_clic(id_composant):
+%     if id_composant in gestionnaires:
+%         return gestionnaires[id_composant]()
+%     return None
+% panier = {"articles": 0}
+% def ajouter_article():
+%     panier["articles"] += 1
+%     return panier["articles"]
+% ajouter_gestionnaire("bouton_ajouter", ajouter_article)
+% resultats = [declencher_clic("bouton_ajouter") for _ in range(3)]
+% assert resultats == [1, 2, 3]
+% from urllib.parse import urlencode
+% params = {"q": "ordinateur", "trie": "popularite"}
+% url = "https://boutique.fr/recherche?" + urlencode(params)
+% assert url == "https://boutique.fr/recherche?q=ordinateur&trie=popularite"
+% END-VERIFY
+\begin{corrige}{1NSI-WEB-EVAL-A-EX1}
+\textbf{1.} Non. Le HTML décrit uniquement l'apparence des composants ; sans code
+JavaScript associant une fonction à l'événement clic du bouton, rien ne se produit
+automatiquement.
+
+\textbf{2.}
+\begin{python}
+panier = {"articles": 0}
+
+def ajouter_article():
+    panier["articles"] += 1
+    return panier["articles"]
+
+ajouter_gestionnaire("bouton_ajouter", ajouter_article)
+\end{python}
+
+\textbf{3.} La séquence est \lstinline{[1, 2, 3]}.
+\end{corrige}
+
+\begin{corrige}{1NSI-WEB-EVAL-A-EX2}
+\textbf{1.}
+\begin{python}
+from urllib.parse import urlencode
+
+params = {"q": "ordinateur", "trie": "popularite"}
+url = "https://boutique.fr/recherche?" + urlencode(params)
+print(url)
+# https://boutique.fr/recherche?q=ordinateur&trie=popularite
+\end{python}
+
+\textbf{2.} Oui, GET est adapté : les critères de recherche ne sont pas confidentiels, et
+l'URL résultante peut être partagée ou mise en favori pour retrouver la même recherche.
+
+\textbf{3.} Il faut privilégier \textbf{POST} : un numéro de téléphone et une adresse
+postale sont des données à caractère personnel, qui ne doivent pas apparaître dans l'URL
+(historique du navigateur, journaux du serveur).
+\end{corrige}

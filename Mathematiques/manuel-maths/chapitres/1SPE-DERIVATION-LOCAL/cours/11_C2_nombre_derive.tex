@@ -21,15 +21,19 @@
   \addplot[tangente,domain=0.5:4] {2*(x-2) + 2};
   % Point de contact
   \addplot[point] coordinates {(2,2)};
-  \node[anchor=north west,font=\footnotesize,nxBleu] at (axis cs:2,2) {$A(a;f(a))$};
-  \node[anchor=south,font=\footnotesize,nxOr] at (axis cs:3.8,5.6) {\small tangente};
+  
+ode[anchor=north west,font=\footnotesize,nxBleu] at (axis cs:2,2) {$A(a;f(a))$};
+  
+ode[anchor=south,font=\footnotesize,nxOr] at (axis cs:3.8,5.6) {\small tangente};
 \end{axis}
 \end{tikzpicture}
-\nxcaption{Les sécantes (pointillés) convergent vers la tangente (trait plein or) lorsque $h\to 0$.}
+
+xcaption{Les sécantes (pointillés) convergent vers la tangente (trait plein or) lorsque $h\to 0$.}
 \end{nxfigure}
 
 \margeAppui{On passe des sécantes à la tangente : les sécantes utilisent deux points, la tangente décrit la direction de la courbe en un seul point.}
 \margeAppui{En cinématique, une vitesse moyenne se calcule sur un intervalle ; une vitesse instantanée est interprétée à un instant précis.}
 \erreurFrequente{\textbf{Copie fautive :} « $f'(a)=f(a)$. » \textbf{Correction :} $f(a)$ est l'ordonnée du point de la courbe ; $f'(a)$ est la pente de la tangente en ce point.}
 \erreurFrequente{\textbf{Copie fautive :} « La vitesse instantanée est la distance parcourue. » \textbf{Correction :} si $d$ est une distance, $d'(t)$ est une vitesse ; l'unité est par exemple m/s.}
-\approfondissement{Pour $f(x)=x^2$, $\frac{f(a+h)-f(a)}h=\frac{(a+h)^2-a^2}h=2a+h$ pour $h\ne0$. Ces nombres sont aussi proches que l'on veut de $2a$ lorsque $h$ se rapproche de $0$. Ainsi $f'(a)=2a$ ; ce calcul éclaire l'intuition sans imposer une définition formelle de limite.}
+\approfondissement{Pour $f(x)=x^2$, $\frac{f(a+h)-f(a)}h=\frac{(a+h)^2-a^2}h=2a+h$ pour $h
+e0$. Ces nombres sont aussi proches que l'on veut de $2a$ lorsque $h$ se rapproche de $0$. Ainsi $f'(a)=2a$ ; ce calcul éclaire l'intuition sans imposer une définition formelle de limite.}

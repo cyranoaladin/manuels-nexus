@@ -1,18 +1,15 @@
-% META: {"id": "TSPE-DERIVATION-CONVEXITE-QCM", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4","C5","C6"], "status": "generated"}
+% META: {"id": "TSPE-DERIVATION-CONVEXITE-QCM", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "qcm", "genere_depuis": "chapitres/TSPE-DERIVATION-CONVEXITE/qcm/TSPE-DERIVATION-CONVEXITE-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-evaluation -- Complements sur la derivation, convexite}
+\section*{\textcolor{chapcolor}{\MakeUppercase{QCM d'auto-evaluation -- Complements sur la derivation, convexite}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule reponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C1 -- Derivee d'une fonction composee}
-% ------------------------------------------------------------
-
 \begin{enumerate}
+
+\item[] \textbf{Capacite C1}
 
 \item \textbf{[Q1]} La derivee de $f(x) = \mathrm{e}^{x^2}$ est :
   \begin{enumerate}[label=\Alph*.]
@@ -21,9 +18,6 @@
     \item $x\,\mathrm{e}^{x^2}$
     \item $2\,\mathrm{e}^{x^2}$
   \end{enumerate}
-  % Reponse correcte : B. Piege A (oubli de $u'$), C (facteur $x$ au lieu de $2x$), D (facteur $2$ sans $x$).
-
-\bigskip
 
 \item \textbf{[Q2]} La derivee de $f(x) = \ln(x^2 + 1)$ sur $\mathbb{R}$ est :
   \begin{enumerate}[label=\Alph*.]
@@ -32,9 +26,6 @@
     \item $\dfrac{2}{x^2 + 1}$
     \item $\dfrac{x}{x^2 + 1}$
   \end{enumerate}
-  % Reponse correcte : B. Piege A (oubli de $u'$), C ($2$ sans $x$), D ($x$ sans $2$).
-
-\bigskip
 
 \item \textbf{[Q3]} La derivee de $f(x) = (3x - 2)^4$ est :
   \begin{enumerate}[label=\Alph*.]
@@ -43,13 +34,8 @@
     \item $3(3x-2)^4$
     \item $4 \cdot 3 \cdot (3x-2)^3$
   \end{enumerate}
-  % Reponse correcte : B. Piege A (oubli du $3$ de $u'$), C (puissance non diminuee), D (doublement du facteur $3$).
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C2 -- Etude complete de fonction}
-% ------------------------------------------------------------
+\item[] \textbf{Capacite C2}
 
 \item \textbf{[Q4]} Soit $f(x) = x\,\mathrm{e}^{-x}$. La derivee $f'(x)$ est :
   \begin{enumerate}[label=\Alph*.]
@@ -58,9 +44,6 @@
     \item $-\mathrm{e}^{-x}$
     \item $x\,\mathrm{e}^{-x}$
   \end{enumerate}
-  % Reponse correcte : A (= $(1-x)\mathrm{e}^{-x}$). Piege B (signe $+$ au lieu de $-$), C (oubli du produit), D (oubli de la derivee de $\mathrm{e}^{-x}$).
-
-\bigskip
 
 \item \textbf{[Q5]} La limite de $f(x) = \dfrac{\ln x}{x}$ en $+\infty$ est :
   \begin{enumerate}[label=\Alph*.]
@@ -69,9 +52,6 @@
     \item $0$
     \item $-\infty$
   \end{enumerate}
-  % Reponse correcte : C (croissances comparees). Piege A (croissance de $\ln$ domine), B (quotient de termes croissants), D (signe erronee).
-
-\bigskip
 
 \item \textbf{[Q6]} La fonction $f(x) = x^3 - 3x$ admet :
   \begin{enumerate}[label=\Alph*.]
@@ -80,13 +60,8 @@
     \item un maximum en $x = 0$
     \item aucun extremum
   \end{enumerate}
-  % Reponse correcte : B ($f' = 3(x^2-1)$, $f' = 0$ en $\pm 1$). Piege A (inversion), C ($f'(0) \neq 0$), D.
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C3 -- Inegalites par convexite}
-% ------------------------------------------------------------
+\item[] \textbf{Capacite C3}
 
 \item \textbf{[Q7]} La fonction $f(x) = \mathrm{e}^x$ est :
   \begin{enumerate}[label=\Alph*.]
@@ -95,9 +70,6 @@
     \item convexe sur $\mathbb{R}^+$ et concave sur $\mathbb{R}^-$
     \item ni convexe ni concave
   \end{enumerate}
-  % Reponse correcte : A ($f'' = \mathrm{e}^x > 0$). Piege B, C, D.
-
-\bigskip
 
 \item \textbf{[Q8]} L'inegalite $\mathrm{e}^x \geq 1 + x$ est valable :
   \begin{enumerate}[label=\Alph*.]
@@ -106,9 +78,6 @@
     \item pour tout $x \in \mathbb{R}$
     \item seulement en $x = 0$
   \end{enumerate}
-  % Reponse correcte : C (convexite globale de $\mathrm{e}^x$). Piege A, B (restriction erronee), D.
-
-\bigskip
 
 \item \textbf{[Q9]} La fonction $f(x) = \ln x$ est :
   \begin{enumerate}[label=\Alph*.]
@@ -117,13 +86,8 @@
     \item convexe puis concave
     \item ni convexe ni concave
   \end{enumerate}
-  % Reponse correcte : B ($f'' = -1/x^2 < 0$). Piege A (confusion convexite/concavite), C, D.
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C4 -- Esquisse de courbe}
-% ------------------------------------------------------------
+\item[] \textbf{Capacite C4}
 
 \item \textbf{[Q10]} Si $f''(x) > 0$ sur un intervalle $I$, alors la courbe de $f$ est :
   \begin{enumerate}[label=\Alph*.]
@@ -132,9 +96,6 @@
     \item croissante
     \item decroissante
   \end{enumerate}
-  % Reponse correcte : A. Piege B (inversion), C/D (confusion $f''$ et $f'$).
-
-\bigskip
 
 \item \textbf{[Q11]} Un point d'inflexion est un point ou :
   \begin{enumerate}[label=\Alph*.]
@@ -143,13 +104,8 @@
     \item $f''(x) = 0$ seulement
     \item $f(x) = 0$
   \end{enumerate}
-  % Reponse correcte : B. Piege A (confusion avec extremum), C (oubli du changement de signe), D.
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C5 -- Lecture graphique et convexite}
-% ------------------------------------------------------------
+\item[] \textbf{Capacite C5}
 
 \item \textbf{[Q12]} Si $f$ est convexe, alors la courbe est :
   \begin{enumerate}[label=\Alph*.]
@@ -158,9 +114,6 @@
     \item au-dessus de ses cordes
     \item au-dessous de ses cordes
   \end{enumerate}
-  % Reponse correcte : A. Piege B (inversion), C/D (confusion tangente/corde).
-
-\bigskip
 
 \item \textbf{[Q13]} La courbe de $f(x) = x^3$ traverse sa tangente en $x = 0$ car :
   \begin{enumerate}[label=\Alph*.]
@@ -169,13 +122,8 @@
     \item $f(0) = 0$
     \item $f$ est decroissante
   \end{enumerate}
-  % Reponse correcte : B. Piege A, C (conditions necessaires mais non suffisantes), D.
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C6 -- Courbe au-dessus des tangentes}
-% ------------------------------------------------------------
+\item[] \textbf{Capacite C6}
 
 \item \textbf{[Q14]} Si $f''(x) \geq 0$ sur $I$, alors pour tout $a, x \in I$ :
   \begin{enumerate}[label=\Alph*.]
@@ -184,9 +132,6 @@
     \item $f(x) = f(a) + f'(a)(x - a)$
     \item $f(x) \geq f(a)$
   \end{enumerate}
-  % Reponse correcte : A (theoreme du cours). Piege B (inversion), C (egalite = tangente), D (inegalite trop faible).
-
-\bigskip
 
 \item \textbf{[Q15]} L'approximation $\mathrm{e}^{0{,}1} \approx 1{,}1$ obtenue par tangente en $0$ est :
   \begin{enumerate}[label=\Alph*.]
@@ -195,8 +140,127 @@
     \item exacte
     \item impossible a determiner
   \end{enumerate}
-  % Reponse correcte : B (convexite de $\mathrm{e}^x$ : tangente en dessous). Piege A (inversion), C, D.
-
-\bigskip
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C1 & \textbf{B} \\
+Q2 & C1 & \textbf{B} \\
+Q3 & C1 & \textbf{B} \\
+Q4 & C2 & \textbf{A} \\
+Q5 & C2 & \textbf{C} \\
+Q6 & C2 & \textbf{B} \\
+Q7 & C3 & \textbf{A} \\
+Q8 & C3 & \textbf{C} \\
+Q9 & C3 & \textbf{B} \\
+Q10 & C4 & \textbf{A} \\
+Q11 & C4 & \textbf{B} \\
+Q12 & C5 & \textbf{A} \\
+Q13 & C5 & \textbf{B} \\
+Q14 & C6 & \textbf{A} \\
+Q15 & C6 & \textbf{B} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q9}
+  \begin{itemize}
+    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q10}
+  \begin{itemize}
+    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q11}
+  \begin{itemize}
+    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q12}
+  \begin{itemize}
+    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q13}
+  \begin{itemize}
+    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q14}
+  \begin{itemize}
+    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q15}
+  \begin{itemize}
+    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+  \end{itemize}
+\end{itemize}

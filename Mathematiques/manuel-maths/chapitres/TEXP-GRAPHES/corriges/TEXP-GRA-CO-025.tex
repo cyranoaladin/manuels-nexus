@@ -1,0 +1,26 @@
+% META: {"id": "TEXP-GRA-CO-025", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige", "exercice_ref": "TEXP-GRA-EX-025", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% a, b = symbols('a b', positive=True)
+% # ln concave => ln((a+b)/2) >= (ln a + ln b)/2 = ln(sqrt(ab))
+% lhs = ln((a+b)/2)
+% rhs = (ln(a) + ln(b))/2
+% assert simplify(rhs - ln(sqrt(a*b))) == 0
+% # numerique
+% assert simplify((lhs - rhs).subs({a: 1, b: 4}) - (ln(Rational(5,2)) - ln(2))) == 0
+% assert lhs.subs({a: 1, b: 4}) == ln(Rational(5,2))
+% assert simplify(rhs.subs({a: 1, b: 4}) - ln(2)) == 0
+% assert ln(Rational(5,2)) > ln(2)
+% END-VERIFY
+\begin{corrige}{TEXP-GRA-EX-025}
+
+La fonction $\ln$ est concave sur $\left]0, +\infty\right[$ (car $\ln'' = -1/t^2 < 0$).
+
+\commentaireMarge{Concavite de $\ln$ : $\ln\!\left(\frac{a+b}{2}\right) \geq \frac{\ln a + \ln b}{2}$.}
+
+Par l'inegalite de Jensen (sens concave) :
+\[ \ln\!\left(\frac{a+b}{2}\right) \geq \frac{\ln a + \ln b}{2} = \ln\sqrt{ab}. \]
+
+Comme $\ln$ est croissante : $\dfrac{a+b}{2} \geq \sqrt{ab}$.
+
+\end{corrige}

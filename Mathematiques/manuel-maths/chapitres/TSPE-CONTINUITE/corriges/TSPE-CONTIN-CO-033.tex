@@ -1,4 +1,4 @@
-% META: {"id": "TSPE-CONTIN-CO-033", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-033", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TSPE-CONTIN-CO-033", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-033", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
 % from sympy import symbols, nsolve, Rational, sqrt, solveset, S as SS, Eq
 % x = symbols('x')
@@ -18,7 +18,9 @@
 % END-VERIFY
 \begin{corrige}{TSPE-CONTIN-EX-033}
 
-\textbf{Q1.} $f_n$ est une fonction polynome, donc continue sur $[0\,;1]$. Sa derivee vaut $f_n'(x) = n x^{n-1} + 1 \geq 1 > 0$, donc $f_n$ est strictement croissante. Enfin $f_n(0) = -1 < 0$ et $f_n(1) = 1 + 1 - 1 = 1 > 0$. D'apres le theoreme des valeurs intermediaires applique a une fonction strictement monotone, l'equation $f_n(x) = 0$ admet une unique solution $\alpha_n$ dans $[0\,;1]$. Comme $f_n(0) \neq 0$ et $f_n(1) \neq 0$, cette solution n'est pas une borne : $0 < \alpha_n < 1$.
+\textbf{Q1.} $f_n$ est une fonction polynome, donc continue sur $[0\,;1]$. Sa derivee vaut $f_n'(x) = n x^{n-1} + 1 \geq 1 > 0$, donc $f_n$ est strictement croissante. Enfin $f_n(0) = -1 < 0$ et $f_n(1) = 1 + 1 - 1 = 1 > 0$. D'apres le theoreme des valeurs intermediaires applique a une fonction strictement monotone, l'equation $f_n(x) = 0$ admet une unique solution $\alpha_n$ dans $[0\,;1]$. Comme $f_n(0) 
+eq 0$ et $f_n(1) 
+eq 0$, cette solution n'est pas une borne : $0 < \alpha_n < 1$.
 
 \textbf{Q2.} Pour $n = 1$ : $x + x - 1 = 0$ donne $2x = 1$, soit $\alpha_1 = \dfrac{1}{2}$.
 

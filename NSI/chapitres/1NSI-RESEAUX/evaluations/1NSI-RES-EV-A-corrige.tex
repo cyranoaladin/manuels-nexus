@@ -1,0 +1,53 @@
+% META: {"id": "1NSI-RES-EVAL-A-corrige", "chapitre": "1NSI-RESEAUX", "type_objet": "correction", "evaluation_ref": "1NSI-RES-EVAL-A", "capacites": ["P-ARCH-02A", "P-ARCH-02B", "P-ARCH-02C", "P-ARCH-04A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% def decouper_en_paquets(message, taille_max):
+%     nb_paquets = (len(message) + taille_max - 1) // taille_max
+%     paquets = []
+%     for i in range(nb_paquets):
+%         donnees = message[i * taille_max:(i + 1) * taille_max]
+%         paquets.append({"numero": i, "total": nb_paquets, "donnees": donnees})
+%     return paquets
+% paquets = decouper_en_paquets("DONNEESNSI", 4)
+% assert len(paquets) == 3
+% reseau = {"A": ["B"], "B": ["A", "C"], "C": ["B"]}
+% def peuvent_communiquer(reseau, depart, arrivee, visites=None):
+%     if visites is None:
+%         visites = set()
+%     if depart == arrivee:
+%         return True
+%     visites.add(depart)
+%     for v in reseau.get(depart, []):
+%         if v not in visites and peuvent_communiquer(reseau, v, arrivee, visites):
+%             return True
+%     return False
+% assert peuvent_communiquer(reseau, "A", "C") is True
+% END-VERIFY
+\begin{corrige}{1NSI-RES-EVAL-A-EX1}
+\textbf{1.} $3$ paquets sont créés : \lstinline{"DONN"} (numéro 0), \lstinline{"EESN"}
+(numéro 1), \lstinline{"SI"} (numéro 2).
+
+\textbf{2.} Tentative $1$ : envoi de \lstinline{"P"} avec bit $0$ — échoue. Tentative $2$ :
+retransmission de \lstinline{"P"} avec bit $0$ — réussit. Tentative $3$ : envoi de
+\lstinline{"Q"} avec bit $1$ — réussit. Messages reçus : \lstinline{[(0, "P"), (1, "Q")]}.
+
+\textbf{3.} L'émetteur \textbf{retransmet} systématiquement tant qu'il ne reçoit pas
+l'accusé de réception attendu : un message n'est jamais considéré comme envoyé tant que sa
+réception n'a pas été confirmée, ce qui garantit qu'il finit par arriver (en l'absence de
+perte permanente).
+\end{corrige}
+
+\begin{corrige}{1NSI-RES-EVAL-A-EX2}
+\textbf{1.} \lstinline{peuvent_communiquer(reseau, "A", "C")} renvoie \lstinline{True} :
+il existe un chemin \lstinline{A -> B -> C}.
+
+\textbf{2.}
+\begin{python}
+def decider_arrosage(humidite, seuil=25):
+    return humidite < seuil
+\end{python}
+
+\textbf{3.} \lstinline{decider_arrosage(20)} vaut \lstinline{True} (sol sec, il faut
+arroser) ; \lstinline{decider_arrosage(30)} vaut \lstinline{False} (sol suffisamment
+humide). Le \textbf{capteur} est le capteur d'humidité du sol ; l'\textbf{actionneur} est
+la pompe d'arrosage.
+\end{corrige}

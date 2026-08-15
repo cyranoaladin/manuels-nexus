@@ -1,0 +1,27 @@
+% META: {"id": "TNSI-BDD-CO-010", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "correction", "exercice_ref": "TNSI-BDD-EX-002", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-BASES-DE-DONNEES-C2"], "parcours": 1, "fichier_exercice": "chapitres/TNSI-BASES-DE-DONNEES/exercices/TNSI-BDD-EX-010.tex"}
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Film(id INTEGER PRIMARY KEY, titre TEXT, realisateur TEXT, duree INTEGER)")
+% conn.executemany("INSERT INTO Film VALUES (?,?,?,?)", [
+%     (1, "Le Voyage de Chihiro", "Miyazaki", 125),
+%     (2, "Princesse Mononoke", "Miyazaki", 134),
+%     (3, "Vice-versa", "Docter", 95),
+% ])
+% conn.commit()
+% cur = conn.execute("SELECT titre FROM Film WHERE realisateur = 'Miyazaki'")
+% assert set(r[0] for r in cur.fetchall()) == {"Le Voyage de Chihiro", "Princesse Mononoke"}
+% cur = conn.execute("SELECT titre FROM Film WHERE duree > 100")
+% assert set(r[0] for r in cur.fetchall()) == {"Le Voyage de Chihiro", "Princesse Mononoke"}
+% END-VERIFY
+\begin{corrige}{TNSI-BDD-EX-002}
+\textbf{Q1.}
+\begin{sql}
+SELECT titre FROM Film WHERE realisateur = 'Miyazaki';
+\end{sql}
+
+\textbf{Q2.}
+\begin{sql}
+SELECT titre FROM Film WHERE duree > 100;
+\end{sql}
+\end{corrige}

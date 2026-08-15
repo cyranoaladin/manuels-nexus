@@ -1,0 +1,49 @@
+% META: {"id": "TSPE-PROBABILITES-COURS-08", "chapitre": "TSPE-PROBABILITES", "type_objet": "cours", "capacites_codes": ["C8"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TSPE-PROBA-C8"], "statut": "structure"}
+
+\section{Succession d'épreuves, arbres pondérés}
+
+% ============================================================
+% STRATE 1 — Rappels et methode
+% ============================================================
+
+\propriete[Règles de l'arbre pondéré]{
+\begin{itemize}
+  \item Sur chaque branche issue d'un meme noeud, la somme des probabilites vaut $1$.
+  \item La probabilite d'un chemin est le \textbf{produit} des probabilites des branches qui le composent.
+  \item La probabilite d'un evenement est la \textbf{somme} des probabilites des chemins qui le realisent.
+\end{itemize}
+}
+
+\definition[1]{
+Deux epreuves sont \textbf{independantes} si le resultat de l'une n'influence pas les probabilites de l'autre. Deux evenements $A$ et $B$ sont independants si $P(A \cap B) = P(A) \times P(B)$.
+}
+
+\propriete[Formule des probabilités totales]{
+Si $A_1, \ldots, A_n$ forment une partition de l'univers (evenements disjoints dont l'union est l'univers, tous de probabilite non nulle), alors pour tout evenement $B$ :
+\[
+  P(B) = \sum_{i=1}^n P(A_i) \times P_{A_i}(B).
+\]
+}
+
+\exemple{
+Une urne contient $3$ boules rouges et $2$ boules vertes. On tire deux boules successivement, sans remise. Quelle est la probabilite de tirer deux boules de couleurs differentes ?
+
+Arbre : $P(R_1) = \dfrac{3}{5}$, puis $P_{R_1}(V_2) = \dfrac{2}{4}$ ; $P(V_1)=\dfrac{2}{5}$, puis $P_{V_1}(R_2)=\dfrac{3}{4}$.
+\[
+  P(\text{couleurs differentes}) = \frac{3}{5}\times\frac{2}{4} + \frac{2}{5}\times\frac{3}{4} = \frac{6}{20}+\frac{6}{20} = \frac{12}{20} = \frac{3}{5}.
+\]
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% p = Rational(3,5)*Rational(2,4) + Rational(2,5)*Rational(3,4)
+% assert p == Rational(3,5)
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre tirage avec remise et sans remise.} Sans remise, les probabilites conditionnelles changent a chaque etape (le denominateur diminue). Avec remise, les probabilites restent identiques a chaque etape (epreuves independantes et identiques).
+}

@@ -1,0 +1,48 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-COURS-11", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "cours", "capacites_codes": ["C11"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TSPE-GEOMETRIE-ESPACE-C11"], "statut": "structure"}
+
+\section{Produit scalaire dans l'espace}
+
+% ============================================================
+% STRATE 1 — Definition, formule analytique, applications
+% ============================================================
+
+\definition[1]{
+Dans un repere orthonorme $(O;\vec{i},\vec{j},\vec{k})$, si $\vec{u}\begin{pmatrix}x\\y\\z\end{pmatrix}$ et $\vec{v}\begin{pmatrix}x'\\y'\\z'\end{pmatrix}$, le \textbf{produit scalaire} de $\vec{u}$ et $\vec{v}$ est :
+\[
+  \vec{u}\cdot\vec{v} = xx'+yy'+zz'.
+\]
+}
+
+\propriete{
+$\vec{u}\cdot\vec{v} = \|\vec{u}\|\times\|\vec{v}\|\times\cos(\widehat{\vec{u},\vec{v}})$. En particulier, $\vec{u}$ et $\vec{v}$ sont orthogonaux si et seulement si $\vec{u}\cdot\vec{v}=0$.
+}
+
+\exemple{
+Soit $A(1,0,2)$, $B(3,1,1)$, $C(2,-1,4)$. Montrer que le triangle $ABC$ est rectangle en $A$.
+
+$\vec{AB}\begin{pmatrix}2\\1\\-1\end{pmatrix}$, $\vec{AC}\begin{pmatrix}1\\-1\\2\end{pmatrix}$.
+
+$\vec{AB}\cdot\vec{AC} = 2\times1+1\times(-1)+(-1)\times2 = 2-1-2 = -1 
+eq 0$.
+
+Le triangle n'est donc \textbf{pas} rectangle en $A$.
+
+% BEGIN-VERIFY
+% AB = (2, 1, -1)
+% AC = (1, -1, 2)
+% dot = sum(a*b for a, b in zip(AB, AC))
+% assert dot == -1
+% END-VERIFY
+}
+
+\propriete[Longueur d'un vecteur]{
+$\|\vec{u}\| = \sqrt{\vec{u}\cdot\vec{u}} = \sqrt{x^2+y^2+z^2}$.
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Utiliser la formule analytique dans un repere non orthonorme.} La formule $\vec{u}\cdot\vec{v}=xx'+yy'+zz'$ n'est valable que dans un repere \textbf{orthonorme}. Toujours verifier cette hypothese avant de l'appliquer.
+}

@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-GEOESPACE-EX-042", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "exercice", "capacites": ["TSPE-GEOMETRIE-ESPACE-C14"], "capacites_codes": ["C14"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer", "modeliser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-042.tex", "corrige_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-042.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% A=(0,0,1); u=(1,2,-1)
+% a,b,c,d=2,-1,1,-4
+% coeff_t = a*u[0]+b*u[1]+c*u[2]
+% const = a*A[0]+b*A[1]+c*A[2]+d
+% t = Rational(-const, coeff_t)
+% pt = tuple(A[i]+t*u[i] for i in range(3))
+% assert pt == (-3,-6,4)
+% assert 2*pt[0]-pt[1]+pt[2]-4 == 0
+% END-VERIFY
+\begin{exercice}{TSPE-GEOESPACE-EX-007}{2}{14}
+Soit $\mathcal{D}$ la droite passant par $A(0,0,1)$ de vecteur directeur $\vec{u}\begin{pmatrix}1\\2\\-1\end{pmatrix}$, et $\mathcal{P}$ le plan d'equation $2x-y+z-4=0$.
+\begin{enumerate}
+  \item Ecrire une representation parametrique de $\mathcal{D}$.
+  \item En substituant dans l'equation de $\mathcal{P}$, determiner la valeur du parametre $t$ correspondant au point d'intersection.
+  \item En deduire les coordonnees du point d'intersection de $\mathcal{D}$ et $\mathcal{P}$.
+\end{enumerate}
+\end{exercice}

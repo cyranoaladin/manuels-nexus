@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-PROBA-CO-015", "chapitre": "TSPE-PROBABILITES", "type_objet": "correction", "exercice_ref": "TSPE-PROBA-EX-006", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-PROBA-C3"], "parcours": 1, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-015.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% Ei = Rational(1+2+3+4+5+6, 6)
+% assert 2*Ei == 7
+% END-VERIFY
+\begin{corrige}{TSPE-PROBA-EX-006}
+
+\textbf{Q1.} $X = X_1+X_2$, ou $X_1$ (resp. $X_2$) est le resultat du premier (resp. second) de, chacun suivant la loi uniforme sur $\{1,2,3,4,5,6\}$.
+
+\textbf{Q2.} $E(X_1) = \dfrac{1+2+3+4+5+6}{6} = \dfrac{21}{6} = \dfrac{7}{2}$.
+
+\textbf{Q3.} Par linearite de l'esperance : $E(X) = E(X_1)+E(X_2) = \dfrac{7}{2}+\dfrac{7}{2} = \boxed{7}$.
+
+\end{corrige}

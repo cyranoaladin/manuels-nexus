@@ -1,0 +1,31 @@
+% META: {"id": "TNSI-ALGO-REMED-10", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "remediation", "capacites_codes": ["C10"], "status": "approved", "capacites": ["TNSI-ALGORITHMIQUE-C10"]}
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C04 : argument par defaut mutable
+%---------------------------------------------------------------
+
+\begin{exercice}{TNSI-ALGO-RE-C04-EX1}{1}{10}
+Une fonction de mémoïsation est écrite ainsi :
+\begin{python}
+def f(n, memo={}):
+    if n in memo:
+        return memo[n]
+    memo[n] = n * n
+    return memo[n]
+\end{python}
+On appelle \lstinline{f(3)}, puis \lstinline|f(2, {})| (avec un dictionnaire frais), puis \lstinline{f(3)} à nouveau. Le deuxième appel à \lstinline{f(3)} recalcule-t-il $3 \times 3$, ou retrouve-t-il directement le résultat mémorisé du tout premier appel ? Pourquoi ce comportement peut-il surprendre ?
+\end{exercice}
+
+% BEGIN-VERIFY
+% def f(n, memo={}):
+%     if n in memo:
+%         return memo[n]
+%     memo[n] = n * n
+%     return memo[n]
+% f(3)
+% f(2, {})
+% assert 3 in f.__defaults__[0]
+% END-VERIFY
+
+\begin{corrige}{TNSI-ALGO-RE-C04-EX1}
+Le deuxième appel à \lstinline{f(3)} retrouve directement $9$ dans \lstinline{memo}, sans recalcul : le dictionnaire par défaut \lstinline|memo={}| est créé \textbf{une seule fois}, à la définition de la fonction, et \textbf{partagé} par tous les appels qui ne fournissent pas explicitement leur propre dictionnaire. C'est surprenant car on pourrait croire, par analogie avec d'autres langages, que \lstinline|memo={}| recrée un dictionnaire vide à \textbf{chaque} appel -- ce n'est pas le cas en Python. C'est pourquoi le cours utilise systématiquement \lstinline{memo=None} suivi d'une initialisation à l'intérieur de la fonction.
+\end{corrige}

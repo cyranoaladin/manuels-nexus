@@ -1,0 +1,136 @@
+{
+  "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE",
+  "titre": "Logarithme neperien et applications",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "La fonction logarithme neperien $\\ln(x)$ est definie sur :",
+      "correcte": "B",
+      "options": {
+        "A": "$\\mathbb{R}$",
+        "B": "$]0, +\\infty[$",
+        "C": "$[0, +\\infty[$",
+        "D": "$\\mathbb{R}^*$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Les nombres negatifs n'ont pas de logarithme reel.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "ln(0) n'est pas defini.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Exclusion des nombres strictement negatifs.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "Pour tous $a,b > 0$, $\\ln(a \\times b) =$",
+      "correcte": "A",
+      "options": {
+        "A": "$\\ln(a) + \\ln(b)$",
+        "B": "$\\ln(a) \\times \\ln(b)$",
+        "C": "$\\ln(a+b)$",
+        "D": "$\\ln(a) - \\ln(b)$"
+      },
+      "diagnostics": {
+        "B": {
+          "erreur": "Transformation du produit en somme, pas en produit.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "ln ne conserve pas l'addition.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "Formule du quotient.",
+          "renvoi": "C1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C2",
+      "enonce": "La derivee de $f(x) = \\ln(x)$ sur $]0, +\\infty[$ est :",
+      "correcte": "C",
+      "options": {
+        "A": "$e^x$",
+        "B": "$\\ln(x)$",
+        "C": "$\\frac{1}{x}$",
+        "D": "$-\\frac{1}{x^2}$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Derivee de l'exponentielle.",
+          "renvoi": "C2"
+        },
+        "B": {
+          "erreur": "Pas de changement par derivation.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Derivee de 1/x.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "La limite de $\\ln(x)$ quand $x \\to 0^+$ est :",
+      "correcte": "D",
+      "options": {
+        "A": "$0$",
+        "B": "$1$",
+        "C": "$+\\infty$",
+        "D": "$-\\infty$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "ln(1) = 0, pas la limite en 0.",
+          "renvoi": "C2"
+        },
+        "B": {
+          "erreur": "Valeur erronee.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Erreur de signe de l'infini.",
+          "renvoi": "C2"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C3",
+      "enonce": "Pour tout entier $n$, $\\ln(a^n) =$",
+      "correcte": "B",
+      "options": {
+        "A": "$\\ln(a)^n$",
+        "B": "$n \\ln(a)$",
+        "C": "$\\frac{1}{n} \\ln(a)$",
+        "D": "$a \\ln(n)$"
+      },
+      "diagnostics": {
+        "A": {
+          "erreur": "Puissance a l'exterieur du logarithme.",
+          "renvoi": "C3"
+        },
+        "C": {
+          "erreur": "Inverse du facteur.",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "Inversion de a et n.",
+          "renvoi": "C3"
+        }
+      }
+    }
+  ]
+}

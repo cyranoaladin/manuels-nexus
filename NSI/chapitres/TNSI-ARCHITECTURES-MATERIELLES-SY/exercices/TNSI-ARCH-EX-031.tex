@@ -1,0 +1,51 @@
+% META: {"id": "TNSI-ARCH-EX-031", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "exercice", "capacites": ["TNSI-ARCHITECTURES-MATERIELLES-SY-C6"], "capacites_codes": ["C6"], "methodes": ["M1"], "parcours": 1, "competences": ["programmer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-031.tex", "corrige_tex": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-031.tex", "status": "approved"}
+% BEGIN-VERIFY
+% def bfs_sauts(graphe_couts, depart, arrivee):
+%     visites = {depart: 0}
+%     file = [depart]
+%     while file:
+%         courant = file.pop(0)
+%         if courant == arrivee:
+%             return visites[courant]
+%         for voisin in graphe_couts[courant]:
+%             if voisin not in visites:
+%                 visites[voisin] = visites[courant] + 1
+%                 file.append(voisin)
+%     return None
+% def plus_court_cout(graphe_couts, depart, arrivee):
+%     couts = {depart: 0}
+%     a_traiter = [depart]
+%     while a_traiter:
+%         courant = min(a_traiter, key=lambda s: couts[s])
+%         a_traiter.remove(courant)
+%         if courant == arrivee:
+%             break
+%         for voisin, poids in graphe_couts[courant].items():
+%             nouveau_cout = couts[courant] + poids
+%             if voisin not in couts or nouveau_cout < couts[voisin]:
+%                 couts[voisin] = nouveau_cout
+%                 if voisin not in a_traiter:
+%                     a_traiter.append(voisin)
+%     return couts[arrivee]
+% reseau = {
+%     "A": {"B": 2, "C": 10},
+%     "B": {"A": 2, "C": 2},
+%     "C": {"A": 10, "B": 2},
+% }
+% assert bfs_sauts(reseau, "A", "C") == 1
+% assert plus_court_cout(reseau, "A", "C") == 4
+% END-VERIFY
+\begin{exercice}{TNSI-ARCH-EX-003}{2}{20}
+On donne le réseau de coûts suivant :
+\begin{python}
+reseau = {
+    "A": {"B": 2, "C": 10},
+    "B": {"A": 2, "C": 2},
+    "C": {"A": 10, "B": 2},
+}
+\end{python}
+\begin{enumerate}
+  \item Quelle route \texttt{RIP} (minimisant le nombre de sauts) choisirait-il de \texttt{A} vers \texttt{C} ? En utilisant \lstinline{bfs_sauts} du cours, combien de sauts compte-t-elle ?
+  \item En utilisant \lstinline{plus_court_cout} du cours, quel est le coût de la route effectivement la moins coûteuse de \texttt{A} vers \texttt{C} ? Ce n'est pas la route directe : pourquoi ?
+\end{enumerate}
+\end{exercice}

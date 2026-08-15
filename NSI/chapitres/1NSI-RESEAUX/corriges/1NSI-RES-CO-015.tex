@@ -1,0 +1,38 @@
+% META: {"id": "1NSI-RES-CO-015", "chapitre": "1NSI-RESEAUX", "type_objet": "correction", "exercice_ref": "1NSI-RES-EX-003", "capacites": ["1NSI-RESEAUX-C3"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C3"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-015.tex"}
+% BEGIN-VERIFY
+% reseau = {
+%     "Salle1": ["Switch1"],
+%     "Salle2": ["Switch1"],
+%     "Switch1": ["Salle1", "Salle2", "Switch2"],
+%     "Switch2": ["Switch1", "Salle3"],
+%     "Salle3": ["Switch2"],
+% }
+% def peuvent_communiquer(reseau, depart, arrivee, visites=None):
+%     if visites is None:
+%         visites = set()
+%     if depart == arrivee:
+%         return True
+%     visites.add(depart)
+%     for voisin in reseau.get(depart, []):
+%         if voisin not in visites:
+%             if peuvent_communiquer(reseau, voisin, arrivee, visites):
+%                 return True
+%     return False
+% assert peuvent_communiquer(reseau, "Salle1", "Salle3") is True
+% reseau2 = dict(reseau)
+% reseau2["SalleIsolee"] = []
+% assert peuvent_communiquer(reseau2, "Salle1", "SalleIsolee") is False
+% END-VERIFY
+\begin{corrige}{1NSI-RES-EX-003}
+\textbf{1.} \lstinline{peuvent_communiquer(reseau, "Salle1", "Salle3")} renvoie
+\lstinline{True} : il existe un chemin \lstinline{Salle1 -> Switch1 -> Switch2 -> Salle3}.
+
+\textbf{2.} Avec \lstinline{reseau["SalleIsolee"] = []}, la fonction renvoie
+\lstinline{False} : aucun chemin n'existe vers une machine qui n'a aucune connexion.
+
+\textbf{3.} Le marquage des sommets visités évite de \textbf{reparcourir indéfiniment} un
+même sommet. Sans cette précaution, un cycle (comme deux câbles entre \lstinline{Switch1}
+et \lstinline{Switch2}) provoquerait des appels récursifs sans fin : la fonction
+repasserait continuellement entre les deux commutateurs, sans jamais terminer
+(\textbf{boucle infinie} / dépassement de la profondeur de récursion).
+\end{corrige}

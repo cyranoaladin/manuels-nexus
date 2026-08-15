@@ -1,0 +1,16 @@
+% META: {"id": "1NSI-LANG-EX-020", "chapitre": "1NSI-LANGAGE", "type_objet": "exercice", "capacites": ["1NSI-LANGAGE-C4"], "parcours": 2, "competences": ["programmer", "valider"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-020.tex", "corrige_tex": "chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-020.tex", "status": "approved", "capacites_codes": ["C4"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% import statistics
+% notes = [10, 12, 14, 20]
+% assert statistics.mean(notes) == 14
+% assert statistics.median(notes) == 13.0
+% END-VERIFY
+\begin{exercice}{1NSI-LANG-EX-005}{3}{12}
+On souhaite calculer la moyenne et la médiane de la liste de notes \lstinline{[10, 12, 14, 20]},
+sans les recalculer « à la main ».
+\begin{enumerate}
+  \item À l'aide de \lstinline{help(...)} ou d'une recherche dans la documentation, trouver le nom du module de la bibliothèque standard Python qui contient des fonctions statistiques de base, et le nom de la fonction qui calcule une moyenne.
+  \item Écrire le code qui importe ce module et calcule la moyenne, puis la médiane, de la liste de notes.
+  \item Une postcondition raisonnable pour une fonction de moyenne de notes sur 20 serait « le résultat est compris entre 0 et 20 ». Vérifier que le résultat obtenu respecte cette postcondition.
+\end{enumerate}
+\end{exercice}

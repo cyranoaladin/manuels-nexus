@@ -1,0 +1,104 @@
+% META: {"id": "1NSI-ALGO-PARCOURS-TRIS-COURS-03", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "cours", "capacites": ["1NSI-ALGO-PARCOURS-TRIS-C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C3"], "statut": "structure"}
+\section{L'algorithme des k plus proches voisins}
+
+\margeAppui{Les k plus proches voisins (k-NN, \emph{k-nearest neighbors}) sont un exemple
+simple d'\textbf{algorithme d'apprentissage} : la machine \og apprend \fg{} à classer de
+nouveaux éléments à partir d'exemples déjà classés.}
+
+\definition[D3]{
+  L'algorithme des \textbf{k plus proches voisins} prédit la classe d'un nouvel élément en
+  examinant les $k$ éléments \textbf{déjà classés} les plus proches de lui (au sens d'une
+  distance, par exemple la distance euclidienne), et en lui attribuant la classe
+  \textbf{majoritaire} parmi ces $k$ voisins. Le paramètre $k$ doit être entier et vérifier
+  $1\leqslant k\leqslant n$, où $n$ est le nombre d'éléments déjà classés.
+}
+
+\propriete[Distance euclidienne entre deux points]{
+  Pour deux points $(x_1,y_1)$ et $(x_2,y_2)$ du plan, la distance euclidienne est
+  $d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$.
+}
+
+\begin{codereference}{Algorithme des k plus proches voisins}
+% PYTHON-SOURCE: code/k_plus_proches_voisins.py
+\begin{python}
+def distance(p1, p2):
+    """Distance euclidienne entre deux points (x, y)."""
+    return ((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2) ** 0.5
+
+
+def k_plus_proches_voisins(points_classes, nouveau_point, k):
+    """Predit la classe de `nouveau_point` a partir de ses k plus proches voisins.
+
+    `points_classes` : liste de triplets (x, y, classe) deja etiquetes.
+    Precondition : k est un entier et 1 <= k <= len(points_classes).
+    """
+    if type(k) is not int or not 1 <= k <= len(points_classes):
+        raise ValueError(
+            "k doit etre un entier compris entre 1 et le nombre de points"
+        )
+    distances = [
+        (distance((x, y), nouveau_point), classe)
+        for (x, y, classe) in points_classes
+    ]
+    distances.sort(key=lambda d: d[0])
+    k_plus_proches = distances[:k]
+    classes = [c for (_, c) in k_plus_proches]
+    return max(set(classes), key=classes.count)
+
+
+points = [
+    (1, 1, "A"), (2, 1, "A"), (1, 2, "A"),
+    (8, 8, "B"), (9, 8, "B"), (8, 9, "B"),
+]
+print(k_plus_proches_voisins(points, (1.5, 1.5), 3))
+print(k_plus_proches_voisins(points, (8.5, 8.5), 3))
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def distance(p1, p2):
+%     return ((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2) ** 0.5
+% def k_plus_proches_voisins(points_classes, nouveau_point, k):
+%     if type(k) is not int or not 1 <= k <= len(points_classes):
+%         raise ValueError(
+%             "k doit etre un entier compris entre 1 et le nombre de points"
+%         )
+%     distances = [(distance((x, y), nouveau_point), classe)
+%                  for (x, y, classe) in points_classes]
+%     distances.sort(key=lambda d: d[0])
+%     k_plus_proches = distances[:k]
+%     classes = [c for (_, c) in k_plus_proches]
+%     return max(set(classes), key=classes.count)
+% points = [
+%     (1, 1, "A"), (2, 1, "A"), (1, 2, "A"),
+%     (8, 8, "B"), (9, 8, "B"), (8, 9, "B"),
+% ]
+% assert k_plus_proches_voisins(points, (1.5, 1.5), 3) == "A"
+% assert k_plus_proches_voisins(points, (8.5, 8.5), 3) == "B"
+% assert abs(distance((1,1),(4,5)) - 5.0) < 1e-9
+% for k_invalide in (0, -1, len(points) + 1, 1.0, True):
+%     try:
+%         k_plus_proches_voisins(points, (1.5, 1.5), k_invalide)
+%     except ValueError as erreur:
+%         assert str(erreur) == "k doit etre un entier compris entre 1 et le nombre de points"
+%     else:
+%         raise AssertionError("k hors domaine doit etre refuse")
+% END-VERIFY
+
+\propriete[Choix de $k$]{
+  Le choix du nombre $k$ de voisins influence le résultat : un $k$ \textbf{trop petit}
+  rend la prédiction sensible au bruit (un seul voisin atypique peut fausser le résultat)
+  ; un $k$ \textbf{trop grand} risque d'inclure des voisins trop éloignés, peu pertinents
+  pour la classification. On choisit souvent $k$ impair (pour éviter les égalités entre
+  deux classes) et adapté à la taille du jeu de données.
+}
+
+\erreurFrequente{Oublier de \textbf{trier} les distances avant de sélectionner les $k$
+plus proches voisins. Sans tri (par exemple en prenant les $k$ \textbf{premiers} points de
+la liste \lstinline{points_classes}, dans l'ordre où ils sont donnés), on ne sélectionne pas
+du tout les voisins les plus proches, mais des points arbitraires.}
+
+\alamachine{Ajoute un point mal classé aux données de l'exemple, par exemple
+\lstinline{(1, 1, "B")} au milieu du groupe \lstinline{"A"}, puis reclasse le point
+\lstinline{(1.5, 1.5)} avec $k=3$ puis $k=5$. Le résultat change-t-il ? Explique en quoi
+cela illustre l'intérêt d'un $k$ pas trop petit face au bruit dans les données.}

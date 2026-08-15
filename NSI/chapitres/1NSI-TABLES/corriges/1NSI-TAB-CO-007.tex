@@ -1,0 +1,33 @@
+% META: {"id": "1NSI-TAB-CO-007", "chapitre": "1NSI-TABLES", "type_objet": "correction", "exercice_ref": "1NSI-TAB-EX-001", "capacites": ["1NSI-TABLES-C2"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C2"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-007.tex"}
+% BEGIN-VERIFY
+% import csv, io
+% texte = "titre,auteur,prix,stock
+Le Petit Prince,Saint-Exupery,7.5,12
+1984,Orwell,9.9,5
+Le Comte de Monte-Cristo,Dumas,12.0,3"
+% livres = list(csv.DictReader(io.StringIO(texte)))
+% for ligne in livres:
+%     ligne["prix"] = float(ligne["prix"])
+%     ligne["stock"] = int(ligne["stock"])
+% valeur_stock = sum(ligne["prix"] * ligne["stock"] for ligne in livres)
+% assert abs(valeur_stock - 175.5) < 1e-9
+% END-VERIFY
+\begin{corrige}{1NSI-TAB-EX-001}
+\textbf{1.}
+\begin{python}
+import csv
+
+with open("livres.csv", encoding="utf-8") as f:
+    livres = list(csv.DictReader(f))
+\end{python}
+
+\textbf{2.} \lstinline{livres[0]["prix"]} est une chaîne de caractères
+(\lstinline{str}), pas un flottant : \lstinline{"7.5"}, pas \lstinline{7.5}.
+\begin{python}
+for ligne in livres:
+    ligne["prix"] = float(ligne["prix"])
+    ligne["stock"] = int(ligne["stock"])
+\end{python}
+
+\textbf{3.} $7{,}5\times12+9{,}9\times5+12{,}0\times3=90+49{,}5+36=175{,}5$ euros.
+\end{corrige}

@@ -1,0 +1,16 @@
+% META: {"id": "1NSI-WEB-EX-044", "chapitre": "1NSI-WEB-IHM", "type_objet": "exercice", "capacites": ["1NSI-WEB-IHM-C8"], "parcours": 2, "competences": ["analyser", "programmer", "valider"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-044.tex", "corrige_tex": "chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-044.tex", "status": "approved", "capacites_codes": ["C8"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% from urllib.parse import urlencode
+% donnees = {"carte": "1234567812345678", "code": "123"}
+% url_si_get = "https://banque.fr/paiement?" + urlencode(donnees)
+% assert "1234567812345678" in url_si_get
+% END-VERIFY
+\begin{exercice}{1NSI-WEB-EX-004}{2}{12}
+Un site de paiement en ligne doit transmettre un numéro de carte bancaire et un code de
+sécurité au serveur.
+\begin{enumerate}
+  \item Le site utilise HTTPS. Cela suffit-il à garantir que le numéro de carte ne sera visible par personne d'autre que le serveur destinataire ? Justifier en une phrase (on distinguera la protection pendant la \textbf{transmission} de ce qui se passe \textbf{avant} ou \textbf{après}).
+  \item Écrire le code qui construit l'URL qu'obtiendrait un attaquant regardant l'historique du navigateur, \textbf{si} (par erreur de conception) ce formulaire utilisait la méthode GET avec les paramètres \lstinline|{"carte": "1234567812345678", "code": "123"}|. Le numéro de carte apparaît-il dans cette URL ?
+  \item Quelle méthode (GET ou POST) faut-il utiliser pour ce formulaire ? Justifier.
+\end{enumerate}
+\end{exercice}

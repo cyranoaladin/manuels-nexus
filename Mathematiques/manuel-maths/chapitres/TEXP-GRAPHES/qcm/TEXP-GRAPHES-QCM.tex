@@ -1,81 +1,110 @@
-% META: {"id": "TEXP-GRAPHES-QCM", "chapitre": "TEXP-GRAPHES", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4","C5"], "status": "generated"}
+% META: {"id": "TEXP-GRAPHES-QCM", "chapitre": "TEXP-GRAPHES", "type_objet": "qcm", "genere_depuis": "chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Graphes}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Graphes et matrices d'adjacence}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1 --- Vocabulaire des graphes}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Le degré d'un sommet est :
+\item[] \textbf{Capacite C1}
+
+\item \textbf{[Q1]} Dans un graphe simple non oriente d'ordre n, le degre maximal d'un sommet est :
   \begin{enumerate}[label=\Alph*.]
-    \item le nombre de sommets du graphe.
-    \item le nombre d'arêtes incidentes à ce sommet.
-    \item la distance à un autre sommet.
-    \item toujours égal à l'ordre du graphe.
+    \item n
+    \item n-1
+    \item 2n
+    \item n\textasciicircum{}2
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q2]} Un graphe complet d'ordre $n$ possède :
+\item \textbf{[Q2]} La somme des degres de tous les sommets d'un graphe est egale a :
   \begin{enumerate}[label=\Alph*.]
-    \item $n$ arêtes.
-    \item $n-1$ arêtes.
-    \item $\dfrac{n(n-1)}{2}$ arêtes.
-    \item $n^2$ arêtes.
+    \item Le nombre d'aretes
+    \item Le double du nombre de sommets
+    \item Le double du nombre d'aretes
+    \item Le carre du nombre de sommets
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C2}
 
-\subsection*{C2 --- Modélisation}
-
-\item \textbf{[Q3]} Pour modéliser un réseau de villes reliées par des routes, on choisit naturellement :
+\item \textbf{[Q3]} Un graphe admet une chaine eulerienne si et seulement si le nombre de sommets de degre impair est :
   \begin{enumerate}[label=\Alph*.]
-    \item les villes comme arêtes et les routes comme sommets.
-    \item les villes comme sommets et les routes comme arêtes.
-    \item uniquement des sommets, sans arêtes.
-    \item une matrice sans lien avec un graphe.
+    \item 0 ou 2
+    \item Exactement 1
+    \item Un nombre pair quelconque
+    \item Toujours 0
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C3 --- Matrice d'adjacence}
-
-\item \textbf{[Q4]} La matrice d'adjacence d'un graphe non orienté est toujours :
+\item \textbf{[Q4]} Si M est la matrice d'adjacence, le nombre de chemins de longueur k de i a j est donne par le coefficient $(i,j)$ de :
   \begin{enumerate}[label=\Alph*.]
-    \item diagonale.
-    \item symétrique.
-    \item inversible.
-    \item composée uniquement de $1$.
+    \item $M + k$
+    \item $k M$
+    \item $M^{k-1}$
+    \item $M^k$
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacite C3}
 
-\subsection*{C4 --- Puissances de la matrice d'adjacence}
-
-\item \textbf{[Q5]} Si $M$ est la matrice d'adjacence d'un graphe $G$, le coefficient $(M^3)_{ij}$ donne :
+\item \textbf{[Q5]} L'algorithme de Dijkstra permet de trouver :
   \begin{enumerate}[label=\Alph*.]
-    \item le nombre de sommets adjacents à $i$.
-    \item le nombre de chaînes de longueur $3$ entre $i$ et $j$.
-    \item la distance la plus courte entre $i$ et $j$.
-    \item toujours $0$ si $i\neq j$.
-  \end{enumerate}
-
-\bigskip
-
-\subsection*{C5 --- Démonstration}
-
-\item \textbf{[Q6]} Dans la démonstration par récurrence de la propriété sur $(M^n)_{ij}$, l'étape d'hérédité repose sur :
-  \begin{enumerate}[label=\Alph*.]
-    \item le calcul direct de $M^n$ pour un très grand $n$.
-    \item la décomposition d'une chaîne de longueur $n+1$ en une chaîne de longueur $n$ suivie d'une arête.
-    \item le fait que $M$ soit toujours inversible.
-    \item une vérification numérique sur quelques exemples.
+    \item Un cycle eulerien
+    \item La matrice d'adjacence
+    \item Le plus court chemin dans un graphe a poids positifs
+    \item La coloration minimale
   \end{enumerate}
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C1 & \textbf{B} \\
+Q2 & C1 & \textbf{C} \\
+Q3 & C2 & \textbf{A} \\
+Q4 & C2 & \textbf{D} \\
+Q5 & C3 & \textbf{C} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{A} — Compte incluant le sommet lui-meme sans boucle. \emph{Renvoi : C1.}
+    \item \textbf{C} — Valeur trop grande. \emph{Renvoi : C1.}
+    \item \textbf{D} — Valeur quadratique fausse. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Chaque arete contribue pour 2 degres. \emph{Renvoi : C1.}
+    \item \textbf{B} — Confusions entre sommets et aretes. \emph{Renvoi : C1.}
+    \item \textbf{D} — Formule quadratique incorrecte. \emph{Renvoi : C1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{B} — Impossible d'avoir un seul sommet de degre impair. \emph{Renvoi : C2.}
+    \item \textbf{C} — Seuls 0 et 2 sont autorises. \emph{Renvoi : C2.}
+    \item \textbf{D} — Cas du cycle eulerien uniquement. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — Addition incorrecte. \emph{Renvoi : C2.}
+    \item \textbf{B} — Multiplication par un scalaire. \emph{Renvoi : C2.}
+    \item \textbf{C} — Puissance decalee de 1. \emph{Renvoi : C2.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — Probleme d'Euler, pas de chemin le plus court. \emph{Renvoi : C3.}
+    \item \textbf{B} — Donnee d'entree, pas le resultat. \emph{Renvoi : C3.}
+    \item \textbf{D} — Probleme de coloration. \emph{Renvoi : C3.}
+  \end{itemize}
+\end{itemize}

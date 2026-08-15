@@ -2,8 +2,9 @@
 from pathlib import Path
 import sys
 
-import fitz
 import pytest
+
+fitz = pytest.importorskip("fitz")
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))

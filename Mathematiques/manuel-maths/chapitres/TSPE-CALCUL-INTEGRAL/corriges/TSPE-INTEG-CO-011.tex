@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-INTEG-CO-011", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "correction", "exercice_ref": "TSPE-INTEG-EX-003", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-CALCUL-INTEGRAL-C2"], "parcours": 1, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-011.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational
+% x = symbols('x')
+% assert integrate(x**2, (x, 0, 1)) == Rational(1, 3)
+% assert integrate(x**3, (x, 0, 1)) == Rational(1, 4)
+% END-VERIFY
+\begin{corrige}{TSPE-INTEG-EX-003}
+
+\textbf{Q1.} Pour $x \in [0,1]$, $0 \leq x \leq 1$, donc en multipliant par $x^2 \geq 0$ : $x^3 = x \times x^2 \leq 1 \times x^2 = x^2$.
+
+\textbf{Q2.} D'apres la propriete de comparaison des integrales (fonctions continues, $x^3 \leq x^2$ sur $[0,1]$) : $\displaystyle\int_0^1 x^3\,\mathrm{d}x \leq \int_0^1 x^2\,\mathrm{d}x$.
+
+\textbf{Q3.} $\displaystyle\int_0^1 x^2\,\mathrm{d}x = \left[\dfrac{x^3}{3}\right]_0^1 = \dfrac{1}{3}$. $\displaystyle\int_0^1 x^3\,\mathrm{d}x = \left[\dfrac{x^4}{4}\right]_0^1 = \dfrac{1}{4}$.
+
+On verifie bien $\dfrac{1}{4} \leq \dfrac{1}{3}$.
+
+\end{corrige}

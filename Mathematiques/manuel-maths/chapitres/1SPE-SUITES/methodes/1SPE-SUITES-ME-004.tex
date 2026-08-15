@@ -22,7 +22,8 @@
   \begin{enumerate}
     \item J'identifie le premier terme $u_0$, la raison $q$ et le nombre de termes
       (de $u_0$ à $u_n$, il y a $n+1$ termes).
-    \item Je vérifie que $q \neq 1$.
+    \item Je vérifie que $q 
+eq 1$.
     \item J'applique la formule :
       \[
         S = u_0 \times \frac{1 - q^{n+1}}{1 - q}.
@@ -58,8 +59,11 @@
   de raison $q = 2$ et de premier terme $u_0 = 1$.
   On somme de $k = 0$ à $k = 9$ : il y a $10$ termes.
 
-  \commentaireMarge{Vérifier $q \neq 1$ : ici $q = 2 \neq 1$.}%
-  Comme $q = 2 \neq 1$, on peut appliquer la formule.
+  \commentaireMarge{Vérifier $q 
+eq 1$ : ici $q = 2 
+eq 1$.}%
+  Comme $q = 2 
+eq 1$, on peut appliquer la formule.
 
   \commentaireMarge{Appliquer la formule de la somme géométrique avec $n+1 = 10$.}%
   \[
@@ -71,7 +75,8 @@
   \begin{itemize}
     \item \textbf{Piège 1.} Erreur sur le nombre de termes : de $u_0$ à $u_n$, il y a $n+1$ termes
       (et non $n$). Par exemple, de $u_0$ à $u_9$ il y a $10$ termes. Compter soigneusement.
-    \item \textbf{Piège 2.} Oublier de vérifier $q \neq 1$ avant d'appliquer la formule géométrique.
+    \item \textbf{Piège 2.} Oublier de vérifier $q 
+eq 1$ avant d'appliquer la formule géométrique.
       Si $q = 1$, la suite est constante et la somme vaut simplement $(n+1) \times u_0$.
     \item \textbf{Piège 3.} Confondre $1 - q^n$ et $1 - q^{n+1}$ dans la formule géométrique.
       Lorsqu'on somme $n+1$ termes (de $u_0$ à $u_n$), l'exposant est $n+1$, pas $n$.

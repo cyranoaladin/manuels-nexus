@@ -1,25 +1,48 @@
 chapitre: TSPE-PRIMITIVES-EQDIFF
 niveau: TSPE
 theme: PRIMITIVES-EQDIFF
-titre: "Primitives et équations différentielles"
-statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
-
+titre: Primitives et équations différentielles
+statut: approved
 capacites:
-  - { code: C1, ref_capacite: TSPE-PRIMEQ-C1, libelle_eleve: "Je sais calculer une primitive en utilisant les primitives de référence et la forme (v' ∘ u) × u'." }
-  - { code: C2, ref_capacite: TSPE-PRIMEQ-C2, libelle_eleve: "Je sais résoudre une équation différentielle y' = ay + b en trouvant la solution particulière constante puis toutes les solutions." }
-  - { code: C3, ref_capacite: TSPE-PRIMEQ-C3, libelle_eleve: "Je sais, à partir d'une solution particulière donnée de y' = ay + f, déterminer toutes les solutions." }
-  - { code: C4, ref_capacite: TSPE-PRIMEQ-C4, libelle_eleve: "Je sais démontrer que deux primitives d'une même fonction continue diffèrent d'une constante." }
-  - { code: C5, ref_capacite: TSPE-PRIMEQ-C5, libelle_eleve: "Je sais démontrer la résolution complète de l'équation différentielle y' = ay." }
-
+- code: C1
+  ref_capacite: TSPE-PRIMEQ-C1
+  libelle_eleve: Je sais calculer une primitive en utilisant les primitives de référence
+    et la forme (v' ∘ u) × u'.
+- code: C2
+  ref_capacite: TSPE-PRIMEQ-C2
+  libelle_eleve: Je sais résoudre une équation différentielle y' = ay + b en trouvant
+    la solution particulière constante puis toutes les solutions.
+- code: C3
+  ref_capacite: TSPE-PRIMEQ-C3
+  libelle_eleve: Je sais, à partir d'une solution particulière donnée de y' = ay +
+    f, déterminer toutes les solutions.
+- code: C4
+  ref_capacite: TSPE-PRIMEQ-C4
+  libelle_eleve: Je sais démontrer que deux primitives d'une même fonction continue
+    diffèrent d'une constante.
+- code: C5
+  ref_capacite: TSPE-PRIMEQ-C5
+  libelle_eleve: Je sais démontrer la résolution complète de l'équation différentielle
+    y' = ay.
 prerequis:
-  - { code: R1, libelle: "Dérivation : dérivées de référence, dérivée d'une composée", chapitre_origine: "1SPE-DERIVATION-GLOBAL" }
-  - { code: R2, libelle: "Fonction exponentielle et fonction logarithme", chapitre_origine: "TSPE-LOGARITHME" }
-  - { code: R3, libelle: "Une fonction dont la dérivée est nulle sur un intervalle est constante (admis)", chapitre_origine: "1SPE-DERIVATION-GLOBAL" }
+- code: R1
+  libelle: 'Dérivation : dérivées de référence, dérivée d''une composée'
+  chapitre_origine: 1SPE-DERIVATION-GLOBAL
+- code: R2
+  libelle: Fonction exponentielle et fonction logarithme
+  chapitre_origine: TSPE-LOGARITHME
+- code: R3
+  libelle: Une fonction dont la dérivée est nulle sur un intervalle est constante
+    (admis)
+  chapitre_origine: 1SPE-DERIVATION-GLOBAL
+situation_accroche: 'La vitesse de refroidissement d''un objet est proportionnelle
+  a l''ecart de temperature avec le milieu ambiant : c''est une equation differentielle.
+  Savoir la resoudre permet de predire la temperature de l''objet a tout instant.
+  Ce chapitre etablit les outils necessaires : primitives, puis equations differentielles
+  lineaires du premier ordre.
 
-situation_accroche: >
-  La vitesse de refroidissement d'un objet est proportionnelle a l'ecart de temperature
-  avec le milieu ambiant : c'est une equation differentielle. Savoir la resoudre permet
-  de predire la temperature de l'objet a tout instant. Ce chapitre etablit les outils
-  necessaires : primitives, puis equations differentielles lineaires du premier ordre.
-
-temps_estime_h: { parcours1: 14, parcours2: 12, parcours3: 10 }
+  '
+temps_estime_h:
+  parcours1: 14
+  parcours2: 12
+  parcours3: 10

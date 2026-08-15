@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-COMBI-EX-014", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "exercice", "capacites": ["TSPE-COMBINATOIRE-C3"], "capacites_codes": ["C3"], "methodes": ["M1"], "parcours": 2, "competences": ["raisonner", "communiquer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-COMBINATOIRE/exercices/TSPE-COMBI-EX-014.tex", "corrige_tex": "chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-014.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import binomial, Rational
+% n, k = 8, 3
+% lhs = binomial(n-1, k-1) + binomial(n-1, k)
+% rhs = binomial(n, k)
+% assert lhs == rhs
+% END-VERIFY
+\begin{exercice}{TSPE-COMBI-EX-007}{3}{18}
+On considere un groupe $G$ de $8$ personnes, dont une personne particuliere nommee Alice. On souhaite denombrer les comites de $3$ personnes que l'on peut former a partir de $G$.
+\begin{enumerate}
+  \item Combien y a-t-il de comites de $3$ personnes contenant Alice ? (Justifier par un denombrement, sans formule factorielle.)
+  \item Combien y a-t-il de comites de $3$ personnes ne contenant pas Alice ?
+  \item En deduire, par le principe additif, le nombre total de comites de $3$ personnes parmi les $8$.
+  \item Retrouver ce resultat directement, et verifier la coherence avec la relation de Pascal appliquee a $n=8$, $k=3$.
+\end{enumerate}
+\end{exercice}

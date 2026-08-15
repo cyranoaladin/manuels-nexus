@@ -1,0 +1,19 @@
+% META: {"id": "TCOMPL-CORR-EX-026", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "exercice", "capacites": ["TCOMPL-CORR-C1"], "capacites_codes": ["C1"], "methodes": ["M3"], "parcours": 2, "competences": ["modeliser","raisonner"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-026.tex", "corrige_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-026.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% a, b, c = symbols('a b c', positive=True)
+% # AM-GM pour 3 variables: (a+b+c)/3 >= (abc)^(1/3)
+% # par concavite de ln
+% lhs = ln((a+b+c)/3)
+% rhs = (ln(a) + ln(b) + ln(c))/3
+% # numerique
+% assert lhs.subs({a:1, b:2, c:4}) == ln(Rational(7,3))
+% assert simplify(rhs.subs({a:1, b:2, c:4}) - ln(2)) == 0
+% assert ln(Rational(7,3)) > ln(2)
+% END-VERIFY
+\begin{exercice}{TCOMPL-CORR-EX-026}{3}{25}
+Generaliser l'inegalite arithmetico-geometrique a trois variables positives :
+\[ \frac{a+b+c}{3} \geq \sqrt[3]{abc}. \]
+On demontrera le resultat en utilisant la concavite de $\ln$.
+
+\end{exercice}

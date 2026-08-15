@@ -1,0 +1,26 @@
+% META: {"id": "1NSI-TB-REMED-04", "chapitre": "1NSI-TYPES-BASE", "type_objet": "remediation", "capacites": ["1NSI-TYPES-BASE-C4"], "status": "approved", "capacites_codes": ["C4"]}
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : comparaison de flottants avec ==
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-TB-RE-C3-EX1}{1}{10}
+Un élève écrit une boucle qui ajoute $0{,}1$ trois fois de suite à une variable
+\lstinline{x} initialisée à $0{,}0$, puis teste \lstinline{if x == 0.3:}. Il s'attend à ce
+que ce test soit vérifié, mais ce n'est pas le cas.
+\begin{enumerate}
+  \item Quelle est la valeur exacte affichée par \lstinline{print(x)} après la boucle ?
+  \item Pourquoi le test \lstinline{x == 0.3} échoue-t-il malgré tout ?
+  \item Proposer une correction du test qui fonctionne.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% x = 0.0
+% for _ in range(3):
+%     x += 0.1
+% assert repr(x) == '0.30000000000000004'
+% assert (x == 0.3) is False
+% def presque_egaux(a, b, tolerance=1e-9):
+%     return abs(a - b) < tolerance
+% assert presque_egaux(x, 0.3) is True
+% END-VERIFY

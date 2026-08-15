@@ -1,0 +1,16 @@
+% META: {"id": "TEXP-ARI-EX-024", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C6"], "capacites_codes": ["C6"], "methodes": ["M3"], "parcours": 1, "competences": ["raisonner"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-024.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-024.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # x^2+y^2 >= (x+y)^2/2 par convexite de t^2
+% lhs = x**2 + y**2
+% rhs = (x+y)**2/2
+% assert expand(2*(lhs - rhs) - (x-y)**2) == 0
+% assert simplify(lhs - rhs - (x-y)**2/2) == 0
+% assert (lhs - rhs).subs({x: 1, y: 3}) == 2
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-024}{2}{18}
+Demontrer que pour tous reels $x$ et $y$ :
+\[ x^2 + y^2 \geq \frac{(x+y)^2}{2}. \]
+
+\end{exercice}

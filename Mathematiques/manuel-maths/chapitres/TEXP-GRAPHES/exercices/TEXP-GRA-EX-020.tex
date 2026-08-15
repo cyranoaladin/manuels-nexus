@@ -1,0 +1,18 @@
+% META: {"id": "TEXP-GRA-EX-020", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C5"], "capacites_codes": ["C5"], "methodes": ["M3"], "parcours": 2, "competences": ["raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-020.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-020.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% g = exp(x) - 1 - x
+% g2 = diff(g, x, 2)
+% assert g2 == exp(x)
+% # g2 = exp(x) > 0 pour tout x (convexe)
+% assert g.subs(x, 0) == 0
+% assert diff(g, x).subs(x, 0) == 0
+% # donc g >= 0 car convexe et minimum en 0
+% assert g.subs(x, 1) == exp(1) - 2
+% assert g.subs(x, -1) == exp(-1)
+% END-VERIFY
+\begin{exercice}{TEXP-GRA-EX-020}{1}{12}
+Demontrer que pour tout $x \in \mathbb{R}$, $\mathrm{e}^x \geq 1 + x$.
+
+\end{exercice}

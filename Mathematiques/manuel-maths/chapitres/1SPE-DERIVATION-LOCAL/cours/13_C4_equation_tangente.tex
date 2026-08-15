@@ -22,12 +22,15 @@ L'hypothèse de dérivabilité en $a$ est nécessaire : elle garantit que la pen
   \addplot[tangente,domain=-0.5:3.5] {0.2*(x-1) + 1.9};
   % Point de contact
   \addplot[point] coordinates {(1,1.9)};
-  \node[anchor=south west,font=\footnotesize,nxBleu] at (axis cs:1,1.9) {$A(a;f(a))$};
+  
+ode[anchor=south west,font=\footnotesize,nxBleu] at (axis cs:1,1.9) {$A(a;f(a))$};
   % Annotation tangente
-  \node[anchor=south,font=\footnotesize,nxOr] at (axis cs:3,2.3) {$y=f(a)+f'(a)(x-a)$};
+  
+ode[anchor=south,font=\footnotesize,nxOr] at (axis cs:3,2.3) {$y=f(a)+f'(a)(x-a)$};
 \end{axis}
 \end{tikzpicture}
-\nxcaption{La tangente passe par $A$ avec la pente $f'(a)$.}
+
+xcaption{La tangente passe par $A$ avec la pente $f'(a)$.}
 \end{nxfigure}
 
 \margeAppui{Retenir les trois informations séparées : l'abscisse $a$, l'ordonnée $f(a)$ et la pente $f'(a)$.}

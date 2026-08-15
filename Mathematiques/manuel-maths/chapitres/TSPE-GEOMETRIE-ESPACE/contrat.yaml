@@ -1,36 +1,90 @@
 chapitre: TSPE-GEOMETRIE-ESPACE
 niveau: TSPE
 theme: GEOMETRIE-ESPACE
-titre: "Géométrie dans l'espace"
-statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
-
+titre: Géométrie dans l'espace
+statut: approved
 capacites:
-  - { code: C1, ref_capacite: TSPE-GEOESPACE-C1, libelle_eleve: "Je sais représenter graphiquement des combinaisons linéaires de vecteurs de l'espace." }
-  - { code: C2, ref_capacite: TSPE-GEOESPACE-C2, libelle_eleve: "Je sais décomposer un vecteur comme combinaison linéaire de vecteurs à partir d'une figure." }
-  - { code: C3, ref_capacite: TSPE-GEOESPACE-C3, libelle_eleve: "Je sais décrire la position relative de droites et de plans dans l'espace." }
-  - { code: C4, ref_capacite: TSPE-GEOESPACE-C4, libelle_eleve: "Je sais déterminer sur une figure si des vecteurs forment une base d'un plan ou de l'espace." }
-  - { code: C5, ref_capacite: TSPE-GEOESPACE-C5, libelle_eleve: "Je sais lire sur une figure les coordonnées d'un vecteur dans une base donnée." }
-  - { code: C6, ref_capacite: TSPE-GEOESPACE-C6, libelle_eleve: "Je sais résoudre des problèmes de configuration dans l'espace (alignement, colinéarité, parallélisme, coplanarité)." }
-  - { code: C7, ref_capacite: TSPE-GEOESPACE-C7, libelle_eleve: "Je sais utiliser le produit scalaire dans l'espace pour démontrer une orthogonalité ou calculer un angle ou une longueur." }
-  - { code: C8, ref_capacite: TSPE-GEOESPACE-C8, libelle_eleve: "Je sais calculer la distance d'un point à une droite ou à un plan en utilisant la projection orthogonale." }
-  - { code: C9, ref_capacite: TSPE-GEOESPACE-C9, libelle_eleve: "Je sais résoudre des problèmes de longueur, angle, aire et volume dans l'espace." }
-  - { code: C10, ref_capacite: TSPE-GEOESPACE-C10, libelle_eleve: "Je sais étudier des problèmes d'orthogonalité et de lieux géométriques dans l'espace." }
-  - { code: C11, ref_capacite: TSPE-GEOESPACE-C11, libelle_eleve: "Je sais démontrer que le projeté orthogonal d'un point sur un plan est le point du plan le plus proche." }
-  - { code: C12, ref_capacite: TSPE-GEOESPACE-C12, libelle_eleve: "Je sais déterminer et exploiter une représentation paramétrique d'une droite de l'espace." }
-  - { code: C13, ref_capacite: TSPE-GEOESPACE-C13, libelle_eleve: "Je sais déterminer l'équation cartésienne d'un plan et identifier un vecteur normal à partir de cette équation." }
-  - { code: C14, ref_capacite: TSPE-GEOESPACE-C14, libelle_eleve: "Je sais calculer les coordonnées du projeté orthogonal d'un point sur un plan ou sur une droite." }
-  - { code: C15, ref_capacite: TSPE-GEOESPACE-C15, libelle_eleve: "Je sais traduire un problème géométrique en système d'équations linéaires, le résoudre et interpréter les solutions." }
-  - { code: C16, ref_capacite: TSPE-GEOESPACE-C16, libelle_eleve: "Je sais démontrer l'équation cartésienne d'un plan connaissant un vecteur normal et un point." }
-
+- code: C1
+  ref_capacite: TSPE-GEOESPACE-C1
+  libelle_eleve: Je sais représenter graphiquement des combinaisons linéaires de vecteurs
+    de l'espace.
+- code: C2
+  ref_capacite: TSPE-GEOESPACE-C2
+  libelle_eleve: Je sais décomposer un vecteur comme combinaison linéaire de vecteurs
+    à partir d'une figure.
+- code: C3
+  ref_capacite: TSPE-GEOESPACE-C3
+  libelle_eleve: Je sais décrire la position relative de droites et de plans dans
+    l'espace.
+- code: C4
+  ref_capacite: TSPE-GEOESPACE-C4
+  libelle_eleve: Je sais déterminer sur une figure si des vecteurs forment une base
+    d'un plan ou de l'espace.
+- code: C5
+  ref_capacite: TSPE-GEOESPACE-C5
+  libelle_eleve: Je sais lire sur une figure les coordonnées d'un vecteur dans une
+    base donnée.
+- code: C6
+  ref_capacite: TSPE-GEOESPACE-C6
+  libelle_eleve: Je sais résoudre des problèmes de configuration dans l'espace (alignement,
+    colinéarité, parallélisme, coplanarité).
+- code: C7
+  ref_capacite: TSPE-GEOESPACE-C7
+  libelle_eleve: Je sais utiliser le produit scalaire dans l'espace pour démontrer
+    une orthogonalité ou calculer un angle ou une longueur.
+- code: C8
+  ref_capacite: TSPE-GEOESPACE-C8
+  libelle_eleve: Je sais calculer la distance d'un point à une droite ou à un plan
+    en utilisant la projection orthogonale.
+- code: C9
+  ref_capacite: TSPE-GEOESPACE-C9
+  libelle_eleve: Je sais résoudre des problèmes de longueur, angle, aire et volume
+    dans l'espace.
+- code: C10
+  ref_capacite: TSPE-GEOESPACE-C10
+  libelle_eleve: Je sais étudier des problèmes d'orthogonalité et de lieux géométriques
+    dans l'espace.
+- code: C11
+  ref_capacite: TSPE-GEOESPACE-C11
+  libelle_eleve: Je sais démontrer que le projeté orthogonal d'un point sur un plan
+    est le point du plan le plus proche.
+- code: C12
+  ref_capacite: TSPE-GEOESPACE-C12
+  libelle_eleve: Je sais déterminer et exploiter une représentation paramétrique d'une
+    droite de l'espace.
+- code: C13
+  ref_capacite: TSPE-GEOESPACE-C13
+  libelle_eleve: Je sais déterminer l'équation cartésienne d'un plan et identifier
+    un vecteur normal à partir de cette équation.
+- code: C14
+  ref_capacite: TSPE-GEOESPACE-C14
+  libelle_eleve: Je sais calculer les coordonnées du projeté orthogonal d'un point
+    sur un plan ou sur une droite.
+- code: C15
+  ref_capacite: TSPE-GEOESPACE-C15
+  libelle_eleve: Je sais traduire un problème géométrique en système d'équations linéaires,
+    le résoudre et interpréter les solutions.
+- code: C16
+  ref_capacite: TSPE-GEOESPACE-C16
+  libelle_eleve: Je sais démontrer l'équation cartésienne d'un plan connaissant un
+    vecteur normal et un point.
 prerequis:
-  - { code: R1, libelle: "Produit scalaire dans le plan, vecteur normal, équation de droite", chapitre_origine: "1SPE-PRODUIT-SCALAIRE" }
-  - { code: R2, libelle: "Géométrie repérée dans le plan (équations, systèmes)", chapitre_origine: "1SPE-GEOMETRIE-REPEREE" }
-  - { code: R3, libelle: "Vecteurs du plan : combinaisons linéaires, colinéarité", chapitre_origine: "1SPE-PRODUIT-SCALAIRE" }
+- code: R1
+  libelle: Produit scalaire dans le plan, vecteur normal, équation de droite
+  chapitre_origine: 1SPE-PRODUIT-SCALAIRE
+- code: R2
+  libelle: Géométrie repérée dans le plan (équations, systèmes)
+  chapitre_origine: 1SPE-GEOMETRIE-REPEREE
+- code: R3
+  libelle: 'Vecteurs du plan : combinaisons linéaires, colinéarité'
+  chapitre_origine: 1SPE-PRODUIT-SCALAIRE
+situation_accroche: 'Un architecte concoit un toit dont un pan doit etre incline selon
+  un angle precis par rapport au sol. Comment modeliser rigoureusement des plans,
+  des droites et des angles dans l''espace a trois dimensions ? Ce chapitre etend
+  au volume les outils vectoriels et analytiques deja maitrises dans le plan.
 
-situation_accroche: >
-  Un architecte concoit un toit dont un pan doit etre incline selon un angle precis par
-  rapport au sol. Comment modeliser rigoureusement des plans, des droites et des angles
-  dans l'espace a trois dimensions ? Ce chapitre etend au volume les outils vectoriels
-  et analytiques deja maitrises dans le plan.
-
-temps_estime_h: { parcours1: 22, parcours2: 19, parcours3: 15 }
+  '
+temps_estime_h:
+  parcours1: 22
+  parcours2: 19
+  parcours3: 15

@@ -1,0 +1,47 @@
+% META: {"id": "1NSI-TB-EVAL-A-corrige", "chapitre": "1NSI-TYPES-BASE", "type_objet": "correction", "evaluation_ref": "1NSI-TB-EVAL-A", "capacites": ["P-BASE-01", "P-BASE-02", "P-BASE-03", "P-BASE-04", "P-BASE-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% assert bin(90) == '0b1011010'
+% assert hex(90) == '0x5a'
+% assert (90).bit_length() == 7
+% def complement_a_2(x, n):
+%     if x < 0:
+%         x = (1 << n) + x
+%     return format(x, f'0{n}b')
+% assert complement_a_2(-7, 8) == '11111001'
+% assert (0.1 + 0.1 + 0.1 == 0.3) is False
+% END-VERIFY
+\begin{corrige}{1NSI-TB-EVAL-A-EX1}
+\textbf{1.} Divisions par 2 : $90=2\times45+0$, $45=2\times22+1$, $22=2\times11+0$,
+$11=2\times5+1$, $5=2\times2+1$, $2=2\times1+0$, $1=2\times0+1$. Restes de bas en haut :
+$90=1011010_2$. En base 16 : $90=16\times5+10$ (10 = A), soit $90=5A_{16}$.
+
+\textbf{2.} $2^6=64\leqslant90<128=2^7$, donc $90$ nécessite $7$ bits.
+
+\textbf{3.} $7=0000111_2$, soit sur 8 bits : $00000111$. Inversion des bits :
+$11111000$. Ajout de $1$ : $11111001$. Donc $-7$ s'écrit $11111001$.
+\end{corrige}
+
+\begin{corrige}{1NSI-TB-EVAL-A-EX2}
+\textbf{1.} Le test renvoie \lstinline{False}. Chaque \lstinline{0.1} est stocké de façon
+approchée en mémoire ; après trois additions, la valeur accumulée
+(\lstinline{0.30000000000000004}) n'est pas identique bit à bit à la représentation
+flottante de \lstinline{0.3}.
+
+\textbf{2.}
+\begin{center}
+\begin{tabular}{cc|c}
+  $a$ & $b$ & résultat \\\hline
+  V & V & F \\
+  V & F & V \\
+  F & V & V \\
+  F & F & F \\
+\end{tabular}
+\end{center}
+Cette expression reproduit le \textbf{ou exclusif} (\lstinline{xor}) : elle est vraie
+lorsque $a$ et $b$ ont des valeurs différentes.
+
+\textbf{3.} Oui, les trois encodages donnent $4$ octets. Le mot \lstinline{"info"} ne
+contient que des lettres non accentuées, présentes à l'identique dans ASCII (7 bits),
+ISO-8859-1 (8 bits, compatible ASCII sur ses 128 premiers caractères) et UTF-8 (qui code les
+128 premiers caractères Unicode sur un seul octet, identique à ASCII).
+\end{corrige}

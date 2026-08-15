@@ -1,0 +1,25 @@
+% META: {"id": "TNSI-BDD-CO-040", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "correction", "exercice_ref": "TNSI-BDD-EX-004", "capacites_codes": ["C10"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-BASES-DE-DONNEES-C10"], "parcours": 2, "fichier_exercice": "chapitres/TNSI-BASES-DE-DONNEES/exercices/TNSI-BDD-EX-040.tex"}
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Stock(id INTEGER PRIMARY KEY, produit TEXT, quantite INTEGER)")
+% conn.executemany("INSERT INTO Stock VALUES (?,?,?)", [
+%     (1, "Cahier", 40), (2, "Stylo", 0), (3, "Regle", 12),
+% ])
+% conn.execute("INSERT INTO Stock(produit, quantite) VALUES ('Gomme', 25)")
+% conn.execute("UPDATE Stock SET quantite = quantite - 5 WHERE produit = 'Cahier'")
+% conn.execute("DELETE FROM Stock WHERE quantite = 0")
+% conn.commit()
+% cur = conn.execute("SELECT produit, quantite FROM Stock ORDER BY produit")
+% assert cur.fetchall() == [("Cahier", 35), ("Gomme", 25), ("Regle", 12)]
+% END-VERIFY
+\begin{corrige}{TNSI-BDD-EX-004}
+\begin{sql}
+INSERT INTO Stock(produit, quantite) VALUES ('Gomme', 25);
+
+UPDATE Stock SET quantite = quantite - 5 WHERE produit = 'Cahier';
+
+DELETE FROM Stock WHERE quantite = 0;
+\end{sql}
+Le \texttt{UPDATE} utilise \texttt{quantite - 5} pour exprimer la nouvelle valeur \textbf{relativement} à l'ancienne, sans avoir besoin de connaître ni réécrire la valeur numérique finale ($35$). Le \texttt{DELETE} cible précisément \texttt{quantite = 0} : seul \texttt{'Stylo'} est supprimé.
+\end{corrige}

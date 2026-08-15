@@ -1,0 +1,156 @@
+% META: {"id": "1NSI-PM-COURS-03", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "cours", "capacites": ["1NSI-PROJET-METHODES-C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C3"]}
+\section{Déboguer méthodiquement}
+
+\definition[D3]{
+  \textbf{Déboguer} un programme, c'est identifier puis corriger la cause d'un
+  comportement incorrect (plantage, résultat faux). Une démarche \textbf{méthodique} vaut
+  mieux qu'une correction \og au hasard \fg{}.
+}
+
+\exemple{Le programme suivant plante lorsqu'on l'exécute :}
+
+\begin{python}
+def moyenne_ponderee_bugue(valeurs, poids):
+    total = 0
+    for i in range(len(valeurs)):
+        total += valeurs[i] * poids[i]
+    return total / sum(poids)
+
+moyenne_ponderee_bugue([12, 15, 18], [1, 2])
+\end{python}
+
+\begin{console}
+Traceback (most recent call last):
+  File "programme.py", line 7, in <module>
+    moyenne_ponderee_bugue([12, 15, 18], [1, 2])
+  File "programme.py", line 4, in moyenne_ponderee_bugue
+    total += valeurs[i] * poids[i]
+             ~~~~~~~~~~^^^
+IndexError: list index out of range
+\end{console}
+
+% BEGIN-VERIFY
+% def moyenne_ponderee_bugue(valeurs, poids):
+%     total = 0
+%     for i in range(len(valeurs)):
+%         total += valeurs[i] * poids[i]
+%     return total / sum(poids)
+% erreur_levee = False
+% try:
+%     moyenne_ponderee_bugue([12, 15, 18], [1, 2])
+% except IndexError as e:
+%     erreur_levee = True
+%     message = str(e)
+% assert erreur_levee is True
+% assert message == "list index out of range"
+% END-VERIFY
+
+\propriete[Lire un message d'erreur (traceback)]{
+  Un \textbf{traceback} Python indique, de haut en bas, la \textbf{pile des appels} qui a
+  mené à l'erreur, et se termine par le \textbf{type} de l'erreur
+  (\lstinline{IndexError}) et un \textbf{message} explicatif. La \textbf{dernière ligne de
+  code} indiquée (ici, \lstinline{total += valeurs[i] * poids[i]}) est l'endroit précis où
+  l'erreur s'est produite — c'est le premier endroit à examiner.
+}
+
+\propriete[Démarche méthodique de débogage]{
+  \begin{enumerate}
+    \item Lire \textbf{entièrement} le message d'erreur : type d'erreur, ligne concernée.
+    \item Identifier la \textbf{cause} : ici, \lstinline{poids} a seulement $2$ éléments, mais la boucle tente d'accéder à \lstinline{poids[2]} (car \lstinline{valeurs} en a $3$).
+    \item Formuler une \textbf{hypothèse} : les deux listes doivent avoir la même longueur.
+    \item \textbf{Vérifier} l'hypothèse, par exemple avec un \lstinline{print(len(valeurs), len(poids))} ou un contrôle explicite de la précondition.
+    \item \textbf{Corriger} : ajouter une précondition, ou corriger l'appel fautif.
+  \end{enumerate}
+}
+
+\begin{codereference}{Corriger avec une précondition explicite}
+% PYTHON-SOURCE: code/moyenne_ponderee.py
+\begin{python}
+def moyenne_ponderee(valeurs, poids):
+    """Renvoie la moyenne ponderee pour des poids valides."""
+    if len(valeurs) != len(poids):
+        raise ValueError("valeurs et poids doivent avoir la meme longueur")
+    if not all(poids_i >= 0 for poids_i in poids):
+        raise ValueError("les poids doivent etre non negatifs")
+    somme_poids = sum(poids)
+    if somme_poids <= 0:
+        raise ValueError("la somme des poids doit etre strictement positive")
+    total = 0
+    for i in range(len(valeurs)):
+        total += valeurs[i] * poids[i]
+    return total / somme_poids
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def moyenne_ponderee(valeurs, poids):
+%     """Renvoie la moyenne ponderee pour des poids valides."""
+%     if len(valeurs) != len(poids):
+%         raise ValueError("valeurs et poids doivent avoir la meme longueur")
+%     if not all(poids_i >= 0 for poids_i in poids):
+%         raise ValueError("les poids doivent etre non negatifs")
+%     somme_poids = sum(poids)
+%     if somme_poids <= 0:
+%         raise ValueError("la somme des poids doit etre strictement positive")
+%     total = 0
+%     for i in range(len(valeurs)):
+%         total += valeurs[i] * poids[i]
+%     return total / somme_poids
+% assert moyenne_ponderee([12, 15], [1, 3]) == 14.25
+% try:
+%     moyenne_ponderee([12, 15, 18], [1, 2])
+% except ValueError as erreur:
+%     assert str(erreur) == "valeurs et poids doivent avoir la meme longueur"
+% else:
+%     raise AssertionError
+% try:
+%     moyenne_ponderee([12, 15], [1, -0.5])
+% except ValueError as erreur:
+%     assert str(erreur) == "les poids doivent etre non negatifs"
+% else:
+%     raise AssertionError
+% try:
+%     moyenne_ponderee([12, 15], [1, float("nan")])
+% except ValueError as erreur:
+%     assert str(erreur) == "les poids doivent etre non negatifs"
+% else:
+%     raise AssertionError
+% try:
+%     moyenne_ponderee([12, 15], [0, 0])
+% except ValueError as erreur:
+%     assert str(erreur) == "la somme des poids doit etre strictement positive"
+% else:
+%     raise AssertionError
+% try:
+%     moyenne_ponderee([], [])
+% except ValueError as erreur:
+%     assert str(erreur) == "la somme des poids doit etre strictement positive"
+% else:
+%     raise AssertionError
+% END-VERIFY
+
+\propriete[Interpréter les préconditions de la moyenne pondérée]{
+  Lorsque les listes ont la même longueur, que tous les poids sont positifs ou
+  nuls et que leur somme est strictement positive, les poids normalisés forment
+  une \textbf{combinaison convexe} des valeurs. La liste \texttt{valeurs} est alors
+  nécessairement non vide et le résultat appartient à l'intervalle
+  $[\min(\texttt{valeurs})\,;\,\max(\texttt{valeurs})]$.
+}
+
+\propriete[Rôle du \lstinline{print}, de \lstinline{assert} et des exceptions en débogage]{
+  Insérer temporairement des \lstinline{print(...)} pour afficher l'état de variables clés
+  à des points précis du programme est une technique simple et efficace pour localiser un
+  bug. Les \lstinline{assert} documentent des hypothèses de développement, mais Python peut
+  les supprimer en mode optimisé. Une précondition qui doit rester vérifiée à chaque
+  exécution utilise donc un test explicite et lève ici une \lstinline{ValueError}.
+}
+
+\erreurFrequente{Corriger un bug en modifiant du code \textbf{au hasard}, sans avoir
+d'abord compris sa cause exacte. Cette approche peut sembler « résoudre » le problème par
+chance sur un cas, tout en laissant le bug intact (ou en en créant un nouveau) dans
+d'autres cas.}
+
+\alamachine{Provoque volontairement une \lstinline{TypeError} en appelant
+\lstinline{moyenne_ponderee(["a", "b"], [1, 2])} (des chaînes au lieu de nombres). Lis le
+traceback obtenu, identifie la ligne et le type d'erreur, puis explique en une phrase la
+cause du problème.}

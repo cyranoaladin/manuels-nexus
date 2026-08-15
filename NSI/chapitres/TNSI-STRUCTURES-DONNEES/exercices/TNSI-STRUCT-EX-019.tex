@@ -1,0 +1,23 @@
+% META: {"id": "TNSI-STRUCT-EX-019", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "exercice", "capacites": ["TNSI-STRUCTURES-DONNEES-C5"], "capacites_codes": ["C5"], "methodes": ["M1"], "parcours": 1, "competences": ["programmer", "analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-019.tex", "corrige_tex": "chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-019.tex", "status": "approved"}
+% BEGIN-VERIFY
+% class Arbre:
+%     def __init__(self, v, g=None, d=None):
+%         self.valeur=v; self.gauche=g; self.droit=d
+% def taille(a):
+%     if a is None: return 0
+%     return 1+taille(a.gauche)+taille(a.droit)
+% def hauteur(a):
+%     if a is None: return -1
+%     return 1+max(hauteur(a.gauche), hauteur(a.droit))
+% a = Arbre(1, Arbre(2, Arbre(3, Arbre(4, Arbre(5)))))
+% assert taille(a) == 5
+% assert hauteur(a) == 4
+% END-VERIFY
+\begin{exercice}{TNSI-STRUCT-EX-003}{2}{15}
+On construit un arbre binaire "en peigne" : la racine vaut $1$, son fils gauche vaut $2$ et a lui-meme un fils gauche $3$, qui a un fils gauche $4$, qui a un fils gauche $5$ (aucun fils droit nulle part).
+\begin{enumerate}
+  \item En utilisant la classe \lstinline{Arbre} du cours et les fonctions \lstinline{taille} et \lstinline{hauteur}, construire cet arbre en Python.
+  \item Sans executer de code, predire la taille et la hauteur de cet arbre. Justifier.
+  \item Verifier votre prediction en appelant \lstinline{taille} et \lstinline{hauteur} sur l'arbre construit.
+\end{enumerate}
+\end{exercice}

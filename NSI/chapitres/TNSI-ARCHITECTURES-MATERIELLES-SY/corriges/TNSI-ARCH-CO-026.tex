@@ -1,0 +1,31 @@
+% META: {"id": "TNSI-ARCH-CO-026", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "correction", "exercice_ref": "TNSI-ARCH-EX-002", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-ARCHITECTURES-MATERIELLES-SY-C5"], "parcours": 2, "fichier_exercice": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-026.tex"}
+% BEGIN-VERIFY
+% def a_un_interblocage(attente, retenue_par):
+%     for depart in attente:
+%         visites = [depart]
+%         courant = depart
+%         while True:
+%             ressource_attendue = attente.get(courant)
+%             if ressource_attendue is None:
+%                 break
+%             detenteur = retenue_par.get(ressource_attendue)
+%             if detenteur is None:
+%                 break
+%             if detenteur in visites:
+%                 return True
+%             visites.append(detenteur)
+%             courant = detenteur
+%     return False
+% attente = {"P1": "R2", "P2": "R3", "P3": "R1"}
+% retenue_par = {"R1": "P1", "R2": "P2", "R3": "P3"}
+% assert a_un_interblocage(attente, retenue_par) is True
+% END-VERIFY
+\begin{corrige}{TNSI-ARCH-EX-002}
+\textbf{Q1.}
+\begin{python}
+attente = {"P1": "R2", "P2": "R3", "P3": "R1"}
+retenue_par = {"R1": "P1", "R2": "P2", "R3": "P3"}
+\end{python}
+
+\textbf{Q2.} Oui, il y a interblocage : \texttt{P1} attend \texttt{R2} retenue par \texttt{P2}, qui attend \texttt{R3} retenue par \texttt{P3}, qui attend \texttt{R1} retenue par \texttt{P1} -- on revient au point de départ. Le cycle d'attente \texttt{P1} $\to$ \texttt{P2} $\to$ \texttt{P3} $\to$ \texttt{P1} signifie qu'aucun des trois processus ne peut jamais obtenir la ressource qu'il attend.
+\end{corrige}

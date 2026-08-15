@@ -1,384 +1,269 @@
-% META: {"id":"1SPE-DERIVATION-GLOBAL-QCM","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"qcm","capacites_codes":["C1","C2","C3","C4","C5"],"status":"generated"}
+% META: {"id": "1SPE-DERIVATION-GLOBAL-QCM", "chapitre": "1SPE-DERIVATION-GLOBAL", "type_objet": "qcm", "genere_depuis": "chapitres/1SPE-DERIVATION-GLOBAL/qcm/1SPE-DERIVATION-GLOBAL-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-% ============================================================
-% QCM D'AUTO-EVALUATION — Dérivation : applications aux variations (1SPE-DERIVATION-GLOBAL)
-% Nexus Réussite
-% 15 questions — 3 par capacité C1 à C5
-% ============================================================
-
-\section*{QCM d'auto-évaluation — Dérivation : applications aux variations}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Fonction dérivée et applications — QCM d'auto-évaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C1 — Dérivées des fonctions de référence}
-% ------------------------------------------------------------
 
 \begin{enumerate}
 
-% ---- Q1 ----
-\item \textbf{[Q1]} La dérivée de $f(x) = x^4$ est :
+\item[] \textbf{Capacite C1}
 
+\item \textbf{[Q1]} La dérivée de la fonction $f(x) = x^4$ sur $\mathbb{R}$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item $f'(x) = x^3$
-    \item $f'(x) = 4x^3$
-    \item $f'(x) = 4x^4$
-    \item $f'(x) = 3x^3$
+    \item $x^3$
+    \item $4x^3$
+    \item $4x^4$
+    \item $3x^3$
   \end{enumerate}
 
-\bigskip
-
-% ---- Q2 ----
-\item \textbf{[Q2]} La dérivée de $f(x) = \sqrt{x}$ pour $x > 0$ est :
-
+\item \textbf{[Q2]} La fonction $f(x) = \sqrt{x}$ est dérivable sur $]0 ; +\infty[$ et sa dérivée est :
   \begin{enumerate}[label=\Alph*.]
-    \item $f'(x) = 2\sqrt{x}$
-    \item $f'(x) = \dfrac{1}{\sqrt{x}}$
-    \item $f'(x) = \dfrac{1}{2\sqrt{x}}$
-    \item $f'(x) = \dfrac{\sqrt{x}}{2}$
+    \item $\dfrac{2}{\sqrt{x}}$
+    \item $\dfrac{1}{\sqrt{x}}$
+    \item $\dfrac{1}{2\sqrt{x}}$
+    \item $\dfrac{\sqrt{x}}{2}$
   \end{enumerate}
 
-\bigskip
-
-% ---- Q3 ----
-\item \textbf{[Q3]} La dérivée de $f(x) = \dfrac{1}{x}$ pour $x \neq 0$ est :
-
+\item \textbf{[Q3]} Pour $x 
+eq 0$, la dérivée de $f(x) = \dfrac{1}{x}$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item $f'(x) = \dfrac{1}{x^2}$
-    \item $f'(x) = -x^2$
-    \item $f'(x) = -\dfrac{1}{x^2}$
-    \item $f'(x) = \ln x$
+    \item $\dfrac{1}{x^2}$
+    \item $-x^2$
+    \item $-\dfrac{1}{x^2}$
+    \item $\ln(x)$
   \end{enumerate}
 
-\end{enumerate}
+\item[] \textbf{Capacite C2}
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C2 — Règles de dérivation (somme, produit, quotient)}
-% ------------------------------------------------------------
-
-\begin{enumerate}[resume]
-
-% ---- Q4 ----
-\item \textbf{[Q4]} Soit $f(x) = 3x^2 - 5x + 2$. Alors $f'(x)$ vaut :
-
+\item \textbf{[Q4]} La dérivée de la fonction $f(x) = 3x^2 - 5x + 2$ sur $\mathbb{R}$ est :
   \begin{enumerate}[label=\Alph*.]
     \item $6x - 5$
     \item $3x - 5$
     \item $6x^2 - 5$
-    \item $6x + 2$
+    \item $6x - 3$
   \end{enumerate}
 
-\bigskip
-
-% ---- Q5 ----
-\item \textbf{[Q5]} Soit $f(x) = x^2 \cdot \sqrt{x}$ pour $x > 0$. La règle à utiliser pour calculer $f'$ est :
-
+\item \textbf{[Q5]} La formule de dérivation d'un produit $(uv)'$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item La règle du quotient.
-    \item La règle de la somme.
-    \item La règle du produit : $(uv)' = u'v + uv'$.
-    \item Aucune règle : $f$ n'est pas dérivable.
+    \item $u'v'$
+    \item $u' + v'$
+    \item $u'v + uv'$
+    \item $u'v - uv'$
   \end{enumerate}
 
-\bigskip
-
-% ---- Q6 ----
-\item \textbf{[Q6]} Soit $f(x) = \dfrac{x+1}{x-1}$ pour $x \neq 1$. La règle du quotient donne $f'(x) = \dfrac{u'v - uv'}{v^2}$ avec $u = x+1$ et $v = x-1$. Alors $f'(x)$ vaut :
-
+\item \textbf{[Q6]} La dérivée du quotient $\left(\dfrac{u}{v}\right)'$ est égale à :
   \begin{enumerate}[label=\Alph*.]
-    \item $\dfrac{0}{(x-1)^2} = 0$
-    \item $\dfrac{(x-1)-(x+1)}{(x-1)^2} = \dfrac{-2}{(x-1)^2}$
-    \item $\dfrac{(x+1)+(x-1)}{(x-1)^2} = \dfrac{2x}{(x-1)^2}$
-    \item $\dfrac{1}{(x-1)^2}$
+    \item $\dfrac{u'v + uv'}{v^2}$
+    \item $\dfrac{u'v - uv'}{v^2}$
+    \item $\dfrac{u'}{v'}$
+    \item $\dfrac{u'v - uv'}{v}$
+  \end{enumerate}
+
+\item[] \textbf{Capacite C3}
+
+\item \textbf{[Q7]} Si $f'(x) > 0$ sur un intervalle $I$, alors la fonction $f$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item strictement décroissante sur $I$
+    \item constante sur $I$
+    \item strictement croissante sur $I$
+    \item nulle sur $I$
+  \end{enumerate}
+
+\item \textbf{[Q8]} Si le tableau de signe de $f'(x)$ indique $f'(x) < 0$ sur $]1 ; 4[$, alors $f$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item croissante sur $]1 ; 4[$
+    \item nulle en $x=2{,}5$
+    \item strictement décroissante sur $]1 ; 4[$
+    \item convexe sur $]1 ; 4[$
+  \end{enumerate}
+
+\item \textbf{[Q9]} Si $f'(x)$ s'annule en $x=a$ en passant du signe $+$ au signe $-$, la fonction $f$ admet en $a$ :
+  \begin{enumerate}[label=\Alph*.]
+    \item un minimum local
+    \item un point d'inflexion
+    \item un maximum local
+    \item une asymptote verticale
+  \end{enumerate}
+
+\item[] \textbf{Capacite C4}
+
+\item \textbf{[Q10]} Soit $B(x) = -x^2 + 6x - 5$ la fonction bénéfice. Le bénéfice maximal est atteint pour $x$ égal à :
+  \begin{enumerate}[label=\Alph*.]
+    \item $-3$
+    \item $3$
+    \item $6$
+    \item $0$
+  \end{enumerate}
+
+\item \textbf{[Q11]} Pour une fonction polynôme du second degré $f(x) = ax^2 + bx + c$ avec $a < 0$, l'extremum est :
+  \begin{enumerate}[label=\Alph*.]
+    \item un minimum global
+    \item un maximum global
+    \item un point d'inflexion
+    \item inexistant
+  \end{enumerate}
+
+\item \textbf{[Q12]} Pour déterminer les extremums locaux d'une fonction dérivable $f$ sur un intervalle ouvert, on cherche :
+  \begin{enumerate}[label=\Alph*.]
+    \item les valeurs où $f(x) = 0$
+    \item les valeurs où $f'(x) = 0$ avec changement de signe
+    \item les valeurs où $f''(x) > 0$
+    \item les bornes de l'intervalle
+  \end{enumerate}
+
+\item[] \textbf{Capacite C5}
+
+\item \textbf{[Q13]} Dans un problème d'optimisation, la première étape consiste à :
+  \begin{enumerate}[label=\Alph*.]
+    \item dériver immédiatement
+    \item exprimer la quantité à optimiser sous la forme d'une fonction $f(x)$ d'une seule variable
+    \item résoudre l'équation $f(x) = 0$
+    \item tracer la courbe sur la calculatrice
+  \end{enumerate}
+
+\item \textbf{[Q14]} Un fabricant veut maximiser le volume $V(x) = x(120 - 2x)^2$ pour $x \in ]0 ; 60[$. $V'(x) = 0$ donne $x$ égal à :
+  \begin{enumerate}[label=\Alph*.]
+    \item $60$
+    \item $40$
+    \item $20$
+    \item $10$
+  \end{enumerate}
+
+\item \textbf{[Q15]} Pour trouver le maximum d'une fonction continue $f$ sur un segment fermé $[a, b]$, il faut comparer :
+  \begin{enumerate}[label=\Alph*.]
+    \item les valeurs de $f'$ aux bornes
+    \item les valeurs de $f$ aux points critiques intérieurs où $f'(x)=0$ et aux bornes $f(a), f(b)$
+    \item uniquement les points où $f'(x)=0$
+    \item uniquement les bornes $f(a)$ et $f(b)$
   \end{enumerate}
 
 \end{enumerate}
 
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C3 — Signe de la dérivée et tableau de variations}
-% ------------------------------------------------------------
-
-\begin{enumerate}[resume]
-
-% ---- Q7 ----
-\item \textbf{[Q7]} Si $f'(x) > 0$ sur un intervalle $I$, alors $f$ est :
-
-  \begin{enumerate}[label=\Alph*.]
-    \item Décroissante sur $I$.
-    \item Constante sur $I$.
-    \item Croissante sur $I$.
-    \item Nulle sur $I$.
-  \end{enumerate}
-
-\bigskip
-
-% ---- Q8 ----
-\item \textbf{[Q8]} Soit $f(x) = x^2 - 4x + 1$. On a $f'(x) = 2x - 4$. Sur quel intervalle $f$ est-elle décroissante ?
-
-  \begin{enumerate}[label=\Alph*.]
-    \item $[2\,;\,+\infty[$
-    \item $]-\infty\,;\,4]$
-    \item $]-\infty\,;\,2]$
-    \item $[4\,;\,+\infty[$
-  \end{enumerate}
-
-\bigskip
-
-% ---- Q9 ----
-\item \textbf{[Q9]} La dérivée $f'$ s'annule en $x = 3$ et change de signe de $+$ à $-$ en ce point. Cela signifie que $f$ :
-
-  \begin{enumerate}[label=\Alph*.]
-    \item Admet un minimum en $x = 3$.
-    \item Est constante au voisinage de $x = 3$.
-    \item Admet un maximum en $x = 3$.
-    \item Est nulle en $x = 3$.
-  \end{enumerate}
-
-\end{enumerate}
-
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C4 — Extremums d'une fonction}
-% ------------------------------------------------------------
-
-\begin{enumerate}[resume]
-
-% ---- Q10 ----
-\item \textbf{[Q10]} Soit $f(x) = -x^2 + 6x - 5$. On a $f'(x) = -2x + 6$. La valeur $f'(x) = 0$ donne $x = $ :
-
-  \begin{enumerate}[label=\Alph*.]
-    \item $x = -3$
-    \item $x = 3$
-    \item $x = 6$
-    \item $x = 0$
-  \end{enumerate}
-
-\bigskip
-
-% ---- Q11 ----
-\item \textbf{[Q11]} Dans la situation de la question précédente, $f$ admet en $x = 3$ :
-
-  \begin{enumerate}[label=\Alph*.]
-    \item Un minimum global, car $f''(3) > 0$.
-    \item Un maximum global, car le coefficient dominant de $f$ est négatif et $f'(3) = 0$.
-    \item Un point d'inflexion.
-    \item Aucun extremum.
-  \end{enumerate}
-
-\bigskip
-
-% ---- Q12 ----
-\item \textbf{[Q12]} Pour trouver les extremums d'une fonction dérivable sur $\mathbb{R}$, on doit :
-
-  \begin{enumerate}[label=\Alph*.]
-    \item Résoudre $f(x) = 0$.
-    \item Résoudre $f'(x) = 0$ puis étudier le signe de $f'$ autour des solutions.
-    \item Calculer $f(0)$.
-    \item Vérifier que $f$ est croissante.
-  \end{enumerate}
-
-\end{enumerate}
-
-\bigskip
-
-% ------------------------------------------------------------
-\subsection*{C5 — Problèmes d'optimisation}
-% ------------------------------------------------------------
-
-\begin{enumerate}[resume]
-
-% ---- Q13 ----
-\item \textbf{[Q13]} Pour résoudre un problème d'optimisation, la première étape est de :
-
-  \begin{enumerate}[label=\Alph*.]
-    \item Calculer $f'(x)$ directement.
-    \item Définir la quantité à optimiser et l'exprimer en fonction d'une seule variable.
-    \item Résoudre une équation du second degré.
-    \item Tracer la courbe de $f$.
-  \end{enumerate}
-
-\bigskip
-
-% ---- Q14 ----
-\item \textbf{[Q14]} Une entreprise fabrique $x$ articles. Son bénéfice est $B(x) = -2x^2 + 80x - 300$ (en euros). La valeur de $x$ qui maximise le bénéfice vérifie $B'(x) = 0$, soit $-4x + 80 = 0$. On trouve $x = $ :
-
-  \begin{enumerate}[label=\Alph*.]
-    \item $x = 80$
-    \item $x = 4$
-    \item $x = 20$
-    \item $x = 40$
-  \end{enumerate}
-
-\bigskip
-
-% ---- Q15 ----
-\item \textbf{[Q15]} Dans un problème où $x$ doit vérifier $0 \leqslant x \leqslant 10$, on trouve que $f'(x) = 0$ pour $x = 5$. Parmi les valeurs à tester pour chercher le maximum de $f$, lesquelles doit-on obligatoirement inclure ?
-
-  \begin{enumerate}[label=\Alph*.]
-    \item Uniquement $x = 5$.
-    \item $x = 5$ uniquement si $f'$ change de signe.
-    \item $x = 0$, $x = 5$ et $x = 10$.
-    \item $x = 0$ et $x = 10$ uniquement.
-  \end{enumerate}
-
-\end{enumerate}
-
-% ============================================================
-%  GRILLE DE CORRECTION ET DIAGNOSTICS
-% ============================================================
-
-\newpage
-
-\section*{Correction et diagnostics}
+\clearpage
+\section*{Cle de correction — reservee au professeur}
 
 \begin{center}
-\begin{tabular}{|c|c|c|l|}
+\begin{tabular}{lll}
 \hline
-\textbf{Question} & \textbf{Capacité} & \textbf{Réponse} & \textbf{Distracteurs — erreur type et renvoi} \\
+Question & Capacite & Reponse exacte \\
 \hline
-Q1 & C1 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : oubli du coefficient $n$ dans $nx^{n-1}$ — \textit{renvoi M1} \\
-    C : exposant non décrémenté — \textit{renvoi M1} \\
-    D : coefficient $n$ remplacé par $n-1$ — \textit{renvoi M1}
-  \end{tabular} \\
-\hline
-Q2 & C1 & C &
-  \begin{tabular}[t]{@{}l@{}}
-    A : facteur $2$ au numérateur au lieu du dénominateur — \textit{renvoi M1} \\
-    B : dénominateur $2$ omis — \textit{renvoi M1} \\
-    D : $\sqrt{x}$ non dérivé, juste divisé par $2$ — \textit{renvoi M1}
-  \end{tabular} \\
-\hline
-Q3 & C1 & C &
-  \begin{tabular}[t]{@{}l@{}}
-    A : signe $-$ oublié — \textit{renvoi M1} \\
-    B : inverse au lieu de $-1/x^2$ — \textit{renvoi M1} \\
-    D : confusion avec dérivée de $\ln$ — \textit{renvoi M1}
-  \end{tabular} \\
-\hline
-Q4 & C2 & A &
-  \begin{tabular}[t]{@{}l@{}}
-    B : coefficient $3$ non dérivé — \textit{renvoi M2} \\
-    C : exposant non décrémenté — \textit{renvoi M2} \\
-    D : terme constant $+2$ conservé — \textit{renvoi M2}
-  \end{tabular} \\
-\hline
-Q5 & C2 & C &
-  \begin{tabular}[t]{@{}l@{}}
-    A : pas de quotient, c'est un produit — \textit{renvoi M2} \\
-    B : pas une somme mais un produit — \textit{renvoi M2} \\
-    D : $f$ est bien dérivable sur $]0;+\infty[$ — \textit{renvoi M2}
-  \end{tabular} \\
-\hline
-Q6 & C2 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : $u'=0$ au lieu de $1$, erreur de dérivation — \textit{renvoi M2} \\
-    C : signe $+$ au numérateur au lieu de $-$ — \textit{renvoi M2} \\
-    D : numérateur $1$ issu d'un calcul erroné — \textit{renvoi M2}
-  \end{tabular} \\
-\hline
-Q7 & C3 & C &
-  \begin{tabular}[t]{@{}l@{}}
-    A : signe $+$ confondu avec décroissance — \textit{renvoi M3} \\
-    B : signe $+$ confondu avec dérivée nulle — \textit{renvoi M3} \\
-    D : signe de $f'$ confondu avec annulation de $f$ — \textit{renvoi M3}
-  \end{tabular} \\
-\hline
-Q8 & C3 & C &
-  \begin{tabular}[t]{@{}l@{}}
-    A : intervalle de croissance au lieu de décroissance — \textit{renvoi M3} \\
-    B : racine de $f$ au lieu de $f'$ — \textit{renvoi M3} \\
-    D : $f'(4)=4\neq 0$, pas la racine de $f'$ — \textit{renvoi M3}
-  \end{tabular} \\
-\hline
-Q9 & C3 & C &
-  \begin{tabular}[t]{@{}l@{}}
-    A : changement $+\to-$ correspond à un maximum, pas un minimum — \textit{renvoi M3 ; M4} \\
-    B : le point peut être un extremum — \textit{renvoi M4} \\
-    D : $f'(3)=0$ ne signifie pas $f(3)=0$ — \textit{renvoi M3}
-  \end{tabular} \\
-\hline
-Q10 & C4 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : signe de $-2x$ oublié lors de la résolution — \textit{renvoi M4} \\
-    C : $f'(x)=0$ n'implique pas $x=6$ — \textit{renvoi M4} \\
-    D : $x=0$ correspond à $f'(0)=6\neq 0$ — \textit{renvoi M4}
-  \end{tabular} \\
-\hline
-Q11 & C4 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : coefficient dominant négatif implique maximum, pas minimum — \textit{renvoi M4} \\
-    C : point d'inflexion si $f'$ ne change pas de signe — \textit{renvoi M4} \\
-    D : $f'$ change bien de signe donc c'est un extremum — \textit{renvoi M4}
-  \end{tabular} \\
-\hline
-Q12 & C4 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : $f(x)=0$ donne les racines de $f$, pas ses extremums — \textit{renvoi M4} \\
-    C : $f(0)$ est une simple image, pas un extremum — \textit{renvoi M4} \\
-    D : croissance de $f$ ne suffit pas pour localiser les extremums — \textit{renvoi M3}
-  \end{tabular} \\
-\hline
-Q13 & C5 & B &
-  \begin{tabular}[t]{@{}l@{}}
-    A : dériver avant de définir la quantité à optimiser — \textit{renvoi M5} \\
-    C : pas nécessairement un second degré — \textit{renvoi M5} \\
-    D : tracer n'est pas la première étape — \textit{renvoi M5}
-  \end{tabular} \\
-\hline
-Q14 & C5 & C &
-  \begin{tabular}[t]{@{}l@{}}
-    A : $x=80$ correspond à $B'(80) \neq 0$ — \textit{renvoi M5} \\
-    B : $x=4$ correspond à $B'(4)=64\neq 0$ — \textit{renvoi M5} \\
-    D : $x=40$ correspond à $B'(40)=-80\neq 0$ — \textit{renvoi M5}
-  \end{tabular} \\
-\hline
-Q15 & C5 & C &
-  \begin{tabular}[t]{@{}l@{}}
-    A : les extremums aux bornes sont aussi candidats — \textit{renvoi M5} \\
-    B : sur un segment fermé, les bornes sont toujours à tester — \textit{renvoi M5} \\
-    D : le point critique intérieur $x=5$ doit aussi être vérifié — \textit{renvoi M5}
-  \end{tabular} \\
+Q1 & C1 & \textbf{B} \\
+Q2 & C1 & \textbf{C} \\
+Q3 & C1 & \textbf{C} \\
+Q4 & C2 & \textbf{A} \\
+Q5 & C2 & \textbf{C} \\
+Q6 & C2 & \textbf{B} \\
+Q7 & C3 & \textbf{C} \\
+Q8 & C3 & \textbf{C} \\
+Q9 & C3 & \textbf{C} \\
+Q10 & C4 & \textbf{B} \\
+Q11 & C4 & \textbf{B} \\
+Q12 & C4 & \textbf{B} \\
+Q13 & C5 & \textbf{B} \\
+Q14 & C5 & \textbf{C} \\
+Q15 & C5 & \textbf{B} \\
 \hline
 \end{tabular}
 \end{center}
 
-\bigskip
+\subsection*{Diagnostic des reponses erronees}
 
-\begin{center}
-\textbf{Réponses correctes}
-
-\medskip
-\begin{tabular}{|c|c||c|c||c|c||c|c||c|c|}
-\hline
-Q1 & B & Q2 & C & Q3 & C & Q4 & A & Q5 & C \\
-\hline
-Q6 & B & Q7 & C & Q8 & C & Q9 & C & Q10 & B \\
-\hline
-Q11 & B & Q12 & B & Q13 & B & Q14 & C & Q15 & C \\
-\hline
-\end{tabular}
-\end{center}
-
-\bigskip
-
-\begin{center}
-\textit{%
-  Score : $\ldots\ldots / 15$ \quad
-  Capacités à retravailler : C1~\textbf{[$\square$Q1 $\square$Q2 $\square$Q3]}
-  C2~\textbf{[$\square$Q4 $\square$Q5 $\square$Q6]}
-  C3~\textbf{[$\square$Q7 $\square$Q8 $\square$Q9]}
-  C4~\textbf{[$\square$Q10 $\square$Q11 $\square$Q12]}
-  C5~\textbf{[$\square$Q13 $\square$Q14 $\square$Q15]}
-}
-\end{center}
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{A} — Oubli du coefficient $n$ dans la formule $(x^n)' = n x^{n-1}$. \emph{Renvoi : M1.}
+    \item \textbf{C} — Exposant non décrémenté ($4x^4$ au lieu de $4x^3$). \emph{Renvoi : M1.}
+    \item \textbf{D} — Coefficient $n$ remplacé par $n-1 = 3$. \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Facteur 2 au numérateur au lieu du dénominateur. \emph{Renvoi : M1.}
+    \item \textbf{B} — Dénominateur 2 omis dans la formule de dérivation de $\sqrt{x}$. \emph{Renvoi : M1.}
+    \item \textbf{D} — $\sqrt{x}$ divisé par 2 sans dérivation. \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — Signe moins oublié dans la dérivée de $1/x$. \emph{Renvoi : M1.}
+    \item \textbf{B} — Forme $-x^2$ au lieu de $-1/x^2$. \emph{Renvoi : M1.}
+    \item \textbf{D} — Confusion avec la dérivée de $\ln(x)$. \emph{Renvoi : M1.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{B} — Coefficient 3 non dérivé, terme $3x$ au lieu de $6x$. \emph{Renvoi : M2.}
+    \item \textbf{C} — Exposant non décrémenté. \emph{Renvoi : M2.}
+    \item \textbf{D} — Terme constant $+2$ conservé dans la dérivée. \emph{Renvoi : M2.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — Produit des dérivées au lieu de la formule Leibniz. \emph{Renvoi : M2.}
+    \item \textbf{B} — Somme des dérivées. \emph{Renvoi : M2.}
+    \item \textbf{D} — Signe moins (c'est le numérateur du quotient). \emph{Renvoi : M2.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — Signe $+$ au numérateur au lieu de $-$. \emph{Renvoi : M2.}
+    \item \textbf{C} — Quotient des dérivées. \emph{Renvoi : M2.}
+    \item \textbf{D} — Carré au dénominateur oublié. \emph{Renvoi : M2.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — Signe $+$ de $f'$ confondu avec décroissance. \emph{Renvoi : M3.}
+    \item \textbf{B} — Signe $+$ de $f'$ confondu avec $f'$ nulle. \emph{Renvoi : M3.}
+    \item \textbf{D} — Signe de $f'$ confondu avec annulation de $f$. \emph{Renvoi : M3.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{A} — Intervalle de croissance pris au lieu de décroissance. \emph{Renvoi : M3.}
+    \item \textbf{B} — Racine de $f$ au lieu du signe de $f'$. \emph{Renvoi : M3.}
+    \item \textbf{D} — $f'(4)=4 
+eq 0$, pas la racine de $f'$. \emph{Renvoi : M3.}
+  \end{itemize}
+  \item \textbf{Q9}
+  \begin{itemize}
+    \item \textbf{A} — Changement $+ \to -$ correspond à un maximum, pas un minimum. \emph{Renvoi : M3, M4.}
+    \item \textbf{B} — Annulation de $f'$ avec changement de signe donne un extremum. \emph{Renvoi : M4.}
+    \item \textbf{D} — $f'(3)=0$ ne signifie pas asymptote. \emph{Renvoi : M3.}
+  \end{itemize}
+  \item \textbf{Q10}
+  \begin{itemize}
+    \item \textbf{A} — Signe de $-2x$ oublié : $-2x+6=0$ donne $x=3$, pas $-3$. \emph{Renvoi : M4.}
+    \item \textbf{C} — $x=6$ correspond à $B'(6) = -6 
+eq 0$. \emph{Renvoi : M4.}
+    \item \textbf{D} — $x=0$ correspond à $B'(0) = 6 
+eq 0$. \emph{Renvoi : M4.}
+  \end{itemize}
+  \item \textbf{Q11}
+  \begin{itemize}
+    \item \textbf{A} — Coefficient dominant négatif implique un maximum global, pas un minimum. \emph{Renvoi : M4.}
+    \item \textbf{C} — Pas de point d'inflexion pour une parabole. \emph{Renvoi : M4.}
+    \item \textbf{D} — $f'$ change de signe donc c'est bien un extremum. \emph{Renvoi : M4.}
+  \end{itemize}
+  \item \textbf{Q12}
+  \begin{itemize}
+    \item \textbf{A} — $f(x)=0$ donne les racines de $f$, pas ses extremums. \emph{Renvoi : M4.}
+    \item \textbf{C} — Condition de convexité, pas seule d'extremum. \emph{Renvoi : M4.}
+    \item \textbf{D} — Sur un intervalle ouvert, les bornes ne sont pas atteintes. \emph{Renvoi : M3.}
+  \end{itemize}
+  \item \textbf{Q13}
+  \begin{itemize}
+    \item \textbf{A} — Dériver avant d'avoir défini la fonction à optimiser. \emph{Renvoi : M5.}
+    \item \textbf{C} — Résoudre $f(x)=0$ cherche les racines, pas l'optimum. \emph{Renvoi : M5.}
+    \item \textbf{D} — Tracer la courbe n'est pas une preuve algébrique. \emph{Renvoi : M5.}
+  \end{itemize}
+  \item \textbf{Q14}
+  \begin{itemize}
+    \item \textbf{A} — $x=60$ donne un volume nul $V(60)=0$. \emph{Renvoi : M5.}
+    \item \textbf{B} — $x=40$ ne donne pas la racine de $V'(x)$. \emph{Renvoi : M5.}
+    \item \textbf{D} — $x=10$ donne $V'(10) 
+eq 0$. \emph{Renvoi : M5.}
+  \end{itemize}
+  \item \textbf{Q15}
+  \begin{itemize}
+    \item \textbf{A} — Les valeurs de $f'$ ne sont pas les valeurs de la fonction $f$. \emph{Renvoi : M5.}
+    \item \textbf{C} — Sur un segment fermé, le maximum peut être atteint sur une borne sans annulation de $f'$. \emph{Renvoi : M5.}
+    \item \textbf{D} — Le point critique intérieur doit aussi être vérifié. \emph{Renvoi : M5.}
+  \end{itemize}
+\end{itemize}
