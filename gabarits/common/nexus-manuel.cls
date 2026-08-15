@@ -3,7 +3,12 @@
 % Polices : TeX Gyre Pagella (corps + maths) + TeX Gyre Heros (titres) + JetBrains Mono (code).
 % Charte graphique : kit v2 « Éditorial premium » transposé.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nexus-manuel}[2026/07/16 v4.1 Manuel Nexus Reussite - editorial premium]
+\ProvidesClass{nexus-manuel}[2026/07/20 v6.0 Manuel Nexus Reussite - Canonique]
+
+\ifdefined\pdfvariable
+  \pdfvariable suppressoptionalinfo 511
+  \pdfvariable id {}
+\fi
 
 % ===========================================================================
 %  BASE KOMA-SCRIPT
