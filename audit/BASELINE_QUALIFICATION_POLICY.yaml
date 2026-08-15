@@ -7,6 +7,7 @@ allowed_dispositions:
 - accepted_exception
 - fixed
 approved_set:
+  baseline_sha: 27082043c45fc405299e335f6eb7475f01288e27
   category_counts:
     assembler_invalid: 1
     blocking_statuses: 2147
@@ -28,7 +29,9 @@ approved_set:
   observed_model_digest_before_materialization: sha256:5f745be61f8584ff0d038e0799dbda26712730e4834deb869330c609a74ef02f
   observed_source_digest_before_materialization: sha256:0a3f8493ee2dd56a44401e75ba55d3e76b43497507ce0c9d8db5a9e49251c003
   owner_counts:
-    unknown: 7244
+    direction_editoriale_pedagogique: 351
+    direction_scientifique_programme: 2407
+    ingenierie_build_qualite: 4486
 approved_transition:
   final_active_fingerprint_count: 2866
   initial_active_fingerprint_count: 2986
@@ -423,7 +426,7 @@ approved_transition:
   resolved_fingerprint_digest: sha256:b652287acfa1d91c62446b1dc3f251b46980ca6363968a14733b3e2e91bf3631
   retained_fingerprint_count: 2677
 artifact_type: baseline_qualification_policy
-control_digest: sha256:6441432023fbd381d2004df8fb54ebcf7bd8c2aef72241d55d40b8e6b6df195d
+control_digest: sha256:593d1e0018d863883df04b5de9f4e0c3b15fd5eedb97db7cf8a863e4651b543d
 decision:
   approved_by: Alaeddine Ben Rhouma
   approver_role: Direction scientifique et éditoriale Nexus Réussite
@@ -441,53 +444,280 @@ initial_policy:
   - decision:
       disposition: open_debt
       owner: ingenierie_build_qualite
-      reason: Assembleur invalide ou non conforme.
+      reason: Contrat de chapitre non approuvé, y compris le statut complete.
+      release_blocking: true
+    id: blocking-contract-not-approved
+    match:
+      categories:
+      - blocking_statuses
+      field_equals:
+        scope: contract
+    order: 1
+  - decision:
+      disposition: open_debt
+      owner: direction_scientifique_programme
+      reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
+      release_blocking: true
+    id: blocking-scientific-object
+    match:
+      categories:
+      - blocking_statuses
+      field_equals:
+        scope: object
+      field_in:
+        object_type:
+        - cours
+        - methode
+        - exercice
+        - evaluation
+        - qcm
+        - corrige
+        - corrige_evaluation
+        - evaluation_corrige
+        - td
+    order: 2
+  - decision:
+      disposition: open_debt
+      owner: direction_editoriale_pedagogique
+      reason: Objet pédagogique, de remédiation ou de variante non approuvé.
+      release_blocking: true
+    id: blocking-pedagogical-object
+    match:
+      categories:
+      - blocking_statuses
+      field_equals:
+        scope: object
+      field_in:
+        object_type:
+        - amenagee
+        - coup_de_pouce
+        - projet
+        - qcm_diagnostics
+        - remediation
+    order: 3
+  - decision:
+      disposition: open_debt
+      owner: ingenierie_build_qualite
+      reason: Le contenu existe mais aucun assemblage déclaré ne l'inclut.
+      release_blocking: true
+    id: unassembled-object
+    match:
+      categories:
+      - unassembled_objects
+    order: 4
+  - decision:
+      disposition: open_debt
+      owner: ingenierie_build_qualite
+      reason: Référence META cassée dans une source de production.
+      release_blocking: true
+    id: broken-meta-reference
+    match:
+      categories:
+      - broken_meta_references
+    order: 5
+  - decision:
+      disposition: open_debt
+      owner: direction_editoriale_pedagogique
+      reason: Source éditoriale d'inspiration déclarée mais indisponible.
+      release_blocking: true
+    id: unavailable-inspiration-source
+    match:
+      categories:
+      - unavailable_inspiration_sources
+    order: 6
+  - decision:
+      disposition: open_debt
+      owner: direction_editoriale_pedagogique
+      reason: Chapitre ou livrable absent de l'assemblage du manuel.
+      release_blocking: true
+    id: missing-chapter-deliverable
+    match:
+      categories:
+      - chapters_not_in_manual
+    order: 7
+  - decision:
+      disposition: open_debt
+      owner: ingenierie_build_qualite
+      reason: Contenu présent mais assembleur de manuel manquant.
+      release_blocking: true
+    id: missing-assembler
+    match:
+      categories:
+      - missing_assemblers
+    order: 8
+  - decision:
+      disposition: open_debt
+      owner: ingenierie_build_qualite
+      reason: PDF suivi sans attribution fiable à un livrable.
+      release_blocking: true
+    id: unattributed-pdf
+    match:
+      categories:
+      - unattributed_pdfs
+    order: 9
+  - decision:
+      disposition: open_debt
+      owner: direction_scientifique_programme
+      reason: Correction disciplinaire absente.
+      release_blocking: true
+    id: missing-correction
+    match:
+      categories:
+      - missing_corrections
+    order: 10
+  - decision:
+      disposition: open_debt
+      owner: ingenierie_build_qualite
+      reason: Référence LaTeX cassée dans une source de production.
+      release_blocking: true
+    id: broken-latex-reference
+    match:
+      categories:
+      - broken_latex_references
+    order: 11
+  - decision:
+      disposition: harvest_candidate
+      owner: direction_editoriale_pedagogique
+      reason: Candidat de récolte contrôlé séparément et non publiable.
+      release_blocking: false
+    id: harvest-candidate
+    match:
+      categories:
+      - harvest_candidate
+      source_glob: '**/_harvest/**/*.candidate.tex'
+    order: 12
+  - decision:
+      disposition: generated_dependency
+      owner: ingenierie_build_qualite
+      reason: Dépendance générée dont le producteur est identifié et testé.
+      release_blocking: false
+    id: generated-dependency-proved
+    match:
+      all_true:
+      - producer_identified
+      - producer_tested
+      categories:
+      - generated_dependency
+    order: 13
+  - decision:
+      disposition: open_debt
+      owner: ingenierie_build_qualite
+      reason: Dépendance générée sans producteur observé et testé.
+      release_blocking: true
+    id: generated-dependency-unproved
+    match:
+      categories:
+      - generated_dependency
+      not_all_true:
+      - producer_identified
+      - producer_tested
+    order: 14
+  - decision:
+      disposition: intentional_reuse
+      owner: direction_editoriale_pedagogique
+      reason: Réutilisation voulue, variante identifiée et absence de doublon PDF
+        prouvée.
+      release_blocking: false
+    id: intentional-reuse-proved
+    match:
+      all_true:
+      - editorial_decision
+      - no_pdf_duplicate
+      - variant_identified
+      categories:
+      - duplicate_assembly_objects
+    order: 15
+  - decision:
+      disposition: open_debt
+      owner: direction_editoriale_pedagogique
+      reason: Réutilisation sans preuve éditoriale complète.
+      release_blocking: true
+    id: intentional-reuse-unproved
+    match:
+      categories:
+      - duplicate_assembly_objects
+      not_all_true:
+      - editorial_decision
+      - no_pdf_duplicate
+      - variant_identified
+    order: 16
+  - decision:
+      disposition: open_debt
+      owner: direction_scientifique_programme
+      reason: Algorithme ou expérimentation scientifique sans statut de publication
+        approuvé.
+      release_blocking: true
+    id: blocking-scientific-algorithm-experiment
+    match:
+      categories:
+      - blocking_statuses
+      field_equals:
+        scope: object
+      field_in:
+        object_type:
+        - algorithme
+        - experimentation
+    order: 17
+  - decision:
+      disposition: open_debt
+      owner: ingenierie_build_qualite
+      reason: Type d'objet non classé dans la taxonomie canonique.
+      release_blocking: true
+    id: unclassified-source-type
+    match:
+      categories:
+      - unclassified_types
+    order: 18
+  - decision:
+      disposition: open_debt
+      owner: ingenierie_build_qualite
+      reason: Assembleur invalide.
       release_blocking: true
     id: assembler-invalid
     match:
       categories:
       - assembler_invalid
-    order: 50
+    order: 19
   - decision:
       disposition: open_debt
       owner: direction_editoriale_pedagogique
-      reason: Incohérence de contexte disciplinaire ou pédagogique.
+      reason: Incohérence contexte.
       release_blocking: true
     id: context-mismatches
     match:
       categories:
       - context_mismatches
-    order: 51
+    order: 20
   - decision:
       disposition: open_debt
       owner: ingenierie_build_qualite
-      reason: Identifiant d'objet dupliqué.
+      reason: ID dupliqué.
       release_blocking: true
     id: duplicate-ids
     match:
       categories:
       - duplicate_ids
-    order: 52
+    order: 21
   - decision:
       disposition: open_debt
       owner: ingenierie_build_qualite
-      reason: Cycle de dépendances LaTeX détecté.
+      reason: Cycle LaTeX.
       release_blocking: true
     id: latex-cycles
     match:
       categories:
       - latex_cycles
-    order: 53
+    order: 22
   - decision:
       disposition: open_debt
       owner: ingenierie_build_qualite
-      reason: Fichier orphelin non rattaché.
+      reason: Fichier orphelin.
       release_blocking: true
     id: orphan-files
     match:
       categories:
       - orphan_files
-    order: 54
+    order: 23
 owners:
   direction_editoriale_pedagogique:
     scope:
@@ -742,5 +972,55 @@ rules:
     categories:
     - unclassified_types
   order: 18
+- decision:
+    disposition: open_debt
+    owner: ingenierie_build_qualite
+    reason: Assembleur invalide.
+    release_blocking: true
+  id: assembler-invalid
+  match:
+    categories:
+    - assembler_invalid
+  order: 19
+- decision:
+    disposition: open_debt
+    owner: direction_editoriale_pedagogique
+    reason: Incohérence contexte.
+    release_blocking: true
+  id: context-mismatches
+  match:
+    categories:
+    - context_mismatches
+  order: 20
+- decision:
+    disposition: open_debt
+    owner: ingenierie_build_qualite
+    reason: ID dupliqué.
+    release_blocking: true
+  id: duplicate-ids
+  match:
+    categories:
+    - duplicate_ids
+  order: 21
+- decision:
+    disposition: open_debt
+    owner: ingenierie_build_qualite
+    reason: Cycle LaTeX.
+    release_blocking: true
+  id: latex-cycles
+  match:
+    categories:
+    - latex_cycles
+  order: 22
+- decision:
+    disposition: open_debt
+    owner: ingenierie_build_qualite
+    reason: Fichier orphelin.
+    release_blocking: true
+  id: orphan-files
+  match:
+    categories:
+    - orphan_files
+  order: 23
 schema_ref: audit/schemas/v1/baseline-qualification-policy.schema.json
 schema_version: 1
