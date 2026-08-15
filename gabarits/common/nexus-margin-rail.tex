@@ -1,0 +1,135 @@
+% NEXUS-MARGIN-COMPOSITOR-SCHEMA:1
+% Unique TeX adapter for managed marginal annotations.
+\RequirePackage{luatexbase}
+\newcounter{nxMarginGlobalOrder}
+\newbox\nxMarginCaptureBox
+\newbox\nxMarginReportDecorationBox
+
+\newcommand{\nxMarginEightDigits}[1]{%
+  \ifnum#1<10000000 0\fi
+  \ifnum#1<1000000 0\fi
+  \ifnum#1<100000 0\fi
+  \ifnum#1<10000 0\fi
+  \ifnum#1<1000 0\fi
+  \ifnum#1<100 0\fi
+  \ifnum#1<10 0\fi
+  \number#1}
+\newcommand{\nxMarginVariant}{professeur}
+\newcommand{\nxMarginStableId}[2]{%
+  nxm:\nxMarginVariant:#1:\nxMarginEightDigits{#2}}
+
+\directlua{%
+  local path = kpse.find_file("nexus-margin-shipout.lua", "lua")
+    or "gabarits/nexus-margin-shipout.lua"
+  local chunk, load_error = loadfile(path)
+  if not chunk then
+    error("cannot load nexus-margin-shipout.lua: " .. tostring(load_error))
+  end
+  nexus_margin = chunk()
+}
+
+\AtBeginDocument{%
+  \ifnxVersionProfesseur
+    \gdef\nxMarginVariant{professeur}%
+  \else
+    \gdef\nxMarginVariant{eleve}%
+  \fi
+  \setbox\nxMarginReportDecorationBox=\vbox{%
+    \hsize=\marginparwidth
+    \parindent=0pt
+    \sffamily\fontsize{6.5}{8}\selectfont
+    \color{encre!65}%
+    \noindent\fboxsep=2pt\fboxrule=.4pt
+    \fcolorbox{encre!25}{white}{suite de la page 0000}%
+    \par\vskip3pt}%
+  \typeout{NEXUS-MARGIN-REPORT-DECORATION-SP:%
+    \number\dimexpr\ht\nxMarginReportDecorationBox+\dp\nxMarginReportDecorationBox\relax}%
+  \directlua{nexus_margin.configure({
+    variant = "\luaescapestring{\nxMarginVariant}",
+    page_width_sp = \number\paperwidth,
+    page_height_sp = \number\paperheight,
+    rail_width_sp = \number\marginparwidth,
+    odd_rail_left_sp = \number\dimexpr
+      1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep\relax,
+    even_rail_left_sp = \number\dimexpr
+      1in+\hoffset+\evensidemargin-\marginparsep-\marginparwidth\relax,
+    rail_top_sp = \number\dimexpr
+      1in+\voffset+\topmargin+\headheight+\headsep\relax,
+    rail_bottom_sp = \number\dimexpr
+      1in+\voffset+\topmargin+\headheight+\headsep+\textheight\relax,
+    report_box_number = \number\nxMarginReportDecorationBox,
+    report_decoration_height_sp = \number\dimexpr
+      \ht\nxMarginReportDecorationBox+\dp\nxMarginReportDecorationBox\relax
+  })}%
+}
+
+\newcommand{\nxMarginAnchorMaterial}[1]{%
+  \savepos
+  \directlua{nexus_margin.write_anchor_whatsit(
+    "\luaescapestring{#1}")}%
+  \directlua{nexus_margin.write_anchor_marked_content(
+    "\luaescapestring{#1}")}%
+  \edef\nxMarginAnchorLua{%
+    nexus_margin.resolve_anchor("\luaescapestring{#1}")}%
+  \expandafter\latelua\expandafter{\nxMarginAnchorLua}%
+}
+
+\AddToHook{shipout/foreground}{%
+  \directlua{nexus_margin.render_foreground()}%
+}
+
+\newcommand{\nxMarginDeferredAnchor}[1]{%
+  \ifhmode
+    \vadjust{\hbox to 0pt{\nxMarginAnchorMaterial{#1}\hss}}%
+  \else
+    \nxMarginAnchorMaterial{#1}%
+  \fi
+}
+
+\newcommand{\nxMarginReserveMaterial}[5]{%
+  \directlua{nexus_margin.write_obstacle_whatsit(
+    "\luaescapestring{#1}", #2, #3, #4, #5)}%
+}
+
+\NewDocumentCommand\nxMarginReserveRect{m m m m m}{%
+  \edef\nxMarginReserveCall{%
+    \noexpand\nxMarginReserveMaterial
+      {#1}%
+      {\number\dimexpr#2\relax}%
+      {\number\dimexpr#3\relax}%
+      {\number\dimexpr#4\relax}%
+      {\number\dimexpr#5\relax}}%
+  \ifhmode
+    \vadjust{\nxMarginReserveCall}%
+  \else
+    \nxMarginReserveCall
+  \fi
+}
+
+\NewDocumentCommand\nxMarginRailNote{m +m}{%
+  \stepcounter{nxMarginGlobalOrder}%
+  \edef\nxMarginCurrentId{%
+    \nxMarginStableId{#1}{\arabic{nxMarginGlobalOrder}}}%
+  \setbox\nxMarginCaptureBox=\vbox{%
+    \hsize=\marginparwidth
+    \linewidth=\hsize
+    % Le rail est une colonne etroite : la composer au fer a gauche, comme la
+    % classe le declare deja pour les notes de marge exterieure
+    % (\raggedrightmarginnote). Justifiee, la moindre formule en ligne y
+    % produit un debordement horizontal, que le gate anti-collision rejette.
+    \raggedright
+    \emergencystretch=\hsize
+    #2}%
+  \directlua{nexus_margin.capture_box(
+    "\luaescapestring{\nxMarginCurrentId}",
+    "\luaescapestring{#1}",
+    \number\value{nxMarginGlobalOrder},
+    \number\nxMarginCaptureBox)}%
+  \edef\nxMarginDeferredCall{%
+    \noexpand\nxMarginDeferredAnchor{\nxMarginCurrentId}}%
+  \nxMarginDeferredCall
+}
+
+\AddToHook{enddocument/afterlastpage}{%
+  \directlua{nexus_margin.finalize()}%
+}

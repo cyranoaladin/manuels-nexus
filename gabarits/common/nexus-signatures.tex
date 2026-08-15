@@ -1,0 +1,163 @@
+% nexus-signatures.tex — Décors d'ouverture et onglets de chapitre Nexus Réussite
+% Chaque chapitre a un décor TikZ géométrique dans la moitié droite du bandeau.
+% Kit v4.1 : décors 100% géométriques, dessinés dans le repère `current page`.
+
+\RequirePackage{tikz}
+\usetikzlibrary{calc,decorations.markings}
+
+% ============================================================
+%  ONGLET DE TRANCHE
+% ============================================================
+\newcounter{nxChapNum}
+\setcounter{nxChapNum}{0}
+
+\newlength{\nxOngletHauteur}
+\newlength{\nxOngletLargeur}
+\setlength{\nxOngletHauteur}{1.5cm}
+\setlength{\nxOngletLargeur}{0.6cm}
+\newsavebox{\nxOngletTextBox}
+\newlength{\nxOngletTextHeight}% étendue le long de la tranche (= largeur du texte avant rotation)
+\newlength{\nxOngletHalfTextHeight}
+\newlength{\nxOngletVerticalShift}
+\newlength{\nxOngletHalfLargeur}
+
+% L'onglet affiche « CHAPITRE N » sur UNE SEULE ligne (pas de retour à la
+% ligne). C'est un choix délibéré, pas une limite de mise en page : un texte
+% multi-lignes composé dans une colonne étroite puis pivoté à 90° dans l'en-
+% tête de page ne s'affiche pas correctement avec ce moteur (LuaTeX/pgf) —
+% la boîte est correctement composée (vérifié via \showbox) mais le rendu
+% final n'affiche qu'une fraction des lignes, de façon non déterministe.
+% Le titre complet du chapitre reste consultable dans le fil d'Ariane
+% horizontal (\headmark) juste à côté.
+\newcommand{\nxOnglet}{%
+  \begingroup
+  \sbox{\nxOngletTextBox}{\titrefont\fontsize{7}{8}\selectfont\color{white}\MakeUppercase{Chapitre~\thechapter}}%
+  \setlength{\nxOngletTextHeight}{\wd\nxOngletTextBox}%
+  \addtolength{\nxOngletTextHeight}{4mm}% padding gauche/droite (le long de la tranche)
+  \ifdim\nxOngletTextHeight<\nxOngletHauteur
+    \setlength{\nxOngletTextHeight}{\nxOngletHauteur}% minimum
+  \fi
+  \setlength{\nxOngletHalfTextHeight}{0.5\nxOngletTextHeight}%
+  \setlength{\nxOngletHalfLargeur}{0.5\nxOngletLargeur}%
+  \setlength{\nxOngletVerticalShift}{%
+    \dimexpr 2cm + \nxOngletHauteur*\value{nxChapNum} + 0.3cm*\value{nxChapNum}\relax
+  }%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[chapcolor]
+      (current page.north east)
+      ++(-\nxOngletLargeur, -\nxOngletVerticalShift)
+      rectangle
+      +(\nxOngletLargeur, -\nxOngletTextHeight);
+    \node[rotate=90, anchor=center, inner sep=0pt]
+      at ([yshift=-\nxOngletVerticalShift-\nxOngletHalfTextHeight,
+           xshift=-\nxOngletHalfLargeur]current page.north east)
+      {\usebox{\nxOngletTextBox}};
+  \end{tikzpicture}%
+  \endgroup
+}
+
+% ============================================================
+%  DÉCORS PAR CHAPITRE (dans le bandeau d'ouverture)
+% ============================================================
+% Convention : chaque décor est dessiné dans la moitié droite du bandeau
+% en utilisant le repère `current page` (remember picture, overlay).
+% Les couleurs utilisent chapcolor et white.
+
+% --- Suites : spirale d'or (rectangles d'or + spirale logarithmique) ---
+\newcommand{\motifSuites}{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \coordinate (Spi) at ([xshift=-55mm,yshift=-90mm]current page.north east);
+    % Rectangles d'or concentriques
+    \foreach \s/\o in {55/0.12, 34/0.15, 21/0.18, 13/0.22, 8/0.28} {
+      \draw[white,line width=0.6pt,opacity=\o]
+        ($(Spi)+(-\s mm,-\s*0.618 mm)$) rectangle ($(Spi)+(\s mm,\s*0.618 mm)$);
+    }
+    % Spirale approchée par arcs
+    \draw[white,line width=1.2pt,opacity=0.25]
+      ($(Spi)+(0,0)$)
+      arc[start angle=0,end angle=90,radius=5mm]
+      arc[start angle=90,end angle=180,radius=8mm]
+      arc[start angle=180,end angle=270,radius=13mm]
+      arc[start angle=270,end angle=360,radius=21mm];
+  \end{tikzpicture}%
+}
+
+% --- Second degré : famille de paraboles ouvertes ---
+\newcommand{\motifSecondDegre}{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \coordinate (Par) at ([xshift=-50mm,yshift=-80mm]current page.north east);
+    \foreach \a/\op in {0.008/0.12, 0.012/0.16, 0.018/0.20, 0.028/0.25} {
+      \draw[white,line width=0.8pt,opacity=\op,domain=-60:60,samples=50]
+        plot ({\x+\pgfplotmarksize},{\a*\x*\x});
+    }
+    % Axe de symétrie
+    \draw[white,line width=0.5pt,opacity=0.15,dashed] ($(Par)+(0,-30mm)$) -- ($(Par)+(0,50mm)$);
+    % Sommet
+    \fill[white,opacity=0.3] (Par) circle (2pt);
+  \end{tikzpicture}%
+}
+
+% --- Dérivation locale : faisceau de sécantes convergeant vers la tangente ---
+\newcommand{\motifDerivation}{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \coordinate (Tan) at ([xshift=-55mm,yshift=-85mm]current page.north east);
+    % Courbe
+    \draw[white,line width=1.2pt,opacity=0.25,domain=-40:40,samples=50]
+      plot ({\x},{\x*\x/500});
+    % Sécantes (de plus en plus proches)
+    \foreach \d/\op in {35/0.10, 25/0.14, 15/0.18, 8/0.22} {
+      \draw[white,line width=0.6pt,opacity=\op]
+        ($(Tan)+(-\d mm,-\d*\d/500 mm)$) -- ($(Tan)+(\d mm,\d*\d/500 mm)$);
+    }
+    % Tangente (horizontale au sommet)
+    \draw[white,line width=1.4pt,opacity=0.35]
+      ($(Tan)+(-40mm,0)$) -- ($(Tan)+(40mm,0)$);
+    % Point de contact
+    \fill[white,opacity=0.5] (Tan) circle (2.5pt);
+  \end{tikzpicture}%
+}
+
+% --- Types construits (NSI) : grille binaire avec flèches de référence ---
+\newcommand{\motifTypesConstruits}{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \coordinate (Grid) at ([xshift=-50mm,yshift=-80mm]current page.north east);
+    % Grille 6×4
+    \foreach \r in {0,...,3}{%
+      \foreach \c in {0,...,5}{%
+        \node[draw=white,line width=0.4pt,opacity=0.15,rounded corners=1.4pt,
+          minimum width=11mm,minimum height=9mm,inner sep=0pt]
+          (cell-\r-\c) at ($(Grid)+(\c*14mm-35mm,\r*13mm-20mm)$) {};%
+      }%
+    }%
+    % Cellules mises en valeur
+    \foreach \r/\c in {0/0,0/3,1/2,2/4,3/1}{%
+      \fill[white,opacity=0.12,rounded corners=1.1pt]
+        ($(cell-\r-\c.center)+(-4.5mm,-3.5mm)$) rectangle ++(9mm,7mm);%
+    }%
+    % Flèches de référence
+    \foreach \r/\a/\b in {0/0/1,0/2/3,1/1/2,2/3/4,3/0/1}{%
+      \draw[white,line width=0.4pt,opacity=0.2,-{Stealth[length=2.5pt]}]
+        (cell-\r-\a.east) -- (cell-\r-\b.west);%
+    }%
+  \end{tikzpicture}%
+}
+
+% --- Générique (fallback) ---
+\newcommand{\motifGenerique}{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \foreach \i in {0,...,7} {
+      \draw[white,line width=0.6pt,opacity=0.08]
+        ([xshift={-20mm-\i*8mm},yshift=-30mm]current page.north east)
+        -- ++(0,-120mm);
+    }
+  \end{tikzpicture}%
+}
+
+% ============================================================
+%  MINIATURE EN-TÊTE (petit motif dans le header)
+% ============================================================
+\newcommand{\nxMiniMotif}{%
+  \tikz[baseline=-0.1em]{%
+    \fill[chapcolor!30] (0,0) -- (0.15em,0.25em) -- (0.3em,0) -- (0.15em,-0.25em) -- cycle;
+  }%
+}

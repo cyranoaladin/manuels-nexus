@@ -1,0 +1,31 @@
+% nexus-figures-nsi.tex — Bibliothèque TikZ NSI, style aligné sur la charte Nexus :
+% traits 0.8pt, nxBleu structures, nxOr mises en évidence, nxGris repères.
+\RequirePackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,matrix,shapes.multipart,calc,trees}
+
+\tikzset{
+  nxnode/.style={circle,draw=nxBleu,line width=0.8pt,minimum size=1.9em,font=\sffamily\small,inner sep=1pt},
+  nxnodehl/.style={nxnode,fill=nxOr!25},
+  nxedge/.style={draw=nxBleu,line width=0.8pt},
+  nxarrow/.style={nxedge,-{Stealth[length=5pt]}},
+  nxcell/.style={draw=nxGris,line width=0.6pt,minimum width=2.2em,minimum height=1.7em,font=\ttfamily\small},
+  nxcellhl/.style={nxcell,fill=nxOr!20},
+  nxref/.style={draw=nxRouge,line width=0.8pt,-{Stealth[length=5pt]},dashed},
+}
+
+% nxfigure et nxfig sont definis dans nexus-figures.tex (tronc commun)
+
+% Tableau mémoire : \memtable{v1,v2,v3,...}{indice de départ}
+\newcommand{\memtable}[2]{%
+  \begin{tikzpicture}[node distance=0pt]
+    \foreach [count=\i from #2] \v in {#1}{%
+      \node[nxcell] (c\i) at ({(\i-#2)*2.2em},0) {\v};
+      \node[font=\tiny\sffamily,color=nxGris,above=1pt of c\i] {\i};}
+  \end{tikzpicture}}
+
+% Arbre binaire compact : \nxbintree{racine}{sous-arbre gauche}{sous-arbre droit} en syntaxe child
+% (utiliser directement tikz \node[nxnode] {r} child {...} pour les cas complexes)
+
+% Table SQL : en-tête nxBleu!10
+\newenvironment{sqltable}{\begin{center}\sffamily\small
+  \rowcolors{2}{white}{nxGris!6}}{\end{center}}

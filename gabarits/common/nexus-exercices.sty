@@ -1,0 +1,175 @@
+% nexus-exercices-v6.sty — Pages d'exercices éditoriales v6 (Nexus Réussite)
+% Système inspiré des standards des grands éditeurs scolaires :
+%   bandeau de rubrique pleine largeur, sous-bandeaux de progression
+%   (Application / Entraînement / Approfondissement / Prendre des initiatives),
+%   numéro d'exercice en pavé couleur, chips de compétence officielles,
+%   difficulté, durée, pictos, QCM à lettres cerclées, vrai-faux,
+%   exercice résolu commenté, coups de pouce.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{gabarits/nexus-exercices-v6}[2026/08/12 v1.0 Exercices editoriaux Nexus]
+
+\RequirePackage{tikz}
+\RequirePackage[most,skins]{tcolorbox}
+
+% ===========================================================================
+%  BANDEAU DE RUBRIQUE — pleine largeur, numéro de chapitre en pavé
+% ===========================================================================
+% \bandeauRubrique{EXERCICES}{S'entraîner}   (couleur = rubrique courante)
+\newcommand{\bandeauRubrique}[3][rubExercices]{%
+  \par\noindent
+  \begin{tikzpicture}
+    \node[fill=#1, text=white, anchor=west, inner xsep=0pt, inner ysep=0pt,
+      minimum height=13mm, minimum width=\linewidth] (b) at (0,0) {};
+    \node[fill=#1!60!black, text=white, anchor=west, minimum size=13mm,
+      inner sep=0pt, font=\titrefont\fontsize{17}{17}\selectfont]
+      at (b.west) {\thechapter};
+    \node[anchor=west, text=white, inner sep=0pt,
+      font=\titrefont\fontsize{15}{17}\selectfont]
+      at ([xshift=17mm]b.west)
+      {\addfontfeatures{LetterSpace=12}\MakeUppercase{#2}};
+    \node[anchor=east, text=white, inner sep=0pt,
+      font=\titrefont\fontsize{8.5}{10}\selectfont, opacity=0.92]
+      at ([xshift=-4mm]b.east) {\MakeUppercase{#3}};
+    \draw[white, opacity=0.35, line width=0.7pt]
+      ([xshift=13.6mm]b.north west) -- ([xshift=13.6mm]b.south west);
+  \end{tikzpicture}\par\nopagebreak\vspace{4pt}
+}
+% Sous-bandeau de progression : \sousBandeau{Application}
+\newcommand{\sousBandeau}[2][rubExercices]{%
+  \par\vspace{9pt}\noindent
+  \begin{tikzpicture}
+    \node[fill=#1!12, anchor=west, inner xsep=8pt, inner ysep=0pt,
+      minimum height=6.6mm, minimum width=\linewidth] (s) at (0,0) {};
+    \node[anchor=west, text=#1!75!black, inner sep=0pt,
+      font=\titrefont\fontsize{9.5}{11}\selectfont]
+      at ([xshift=8pt]s.west)
+      {\addfontfeatures{LetterSpace=8}\MakeUppercase{#2}};
+    \path[fill=#1] (s.west) -- ++(2.2mm,0) -- ++(0,6.6mm) -- ++(-2.2mm,0)
+      -- cycle;
+  \end{tikzpicture}\par\nopagebreak\vspace{3pt}
+}
+
+% ===========================================================================
+%  CHIPS — compétence officielle, durée, pictos
+% ===========================================================================
+% Compétences du programme : Chercher, Modéliser, Représenter, Raisonner,
+% Calculer, Communiquer (et « Programmer » côté NSI).
+\newcommand{\comp}[1]{%
+  \tikz[baseline=(c.base)]\node[draw=encre!35, text=encre!70, line width=0.5pt,
+    rounded corners=4.2pt, inner xsep=5.4pt, inner ysep=2.2pt,
+    font=\sffamily\fontsize{6.6}{7.5}\selectfont](c)
+    {\MakeUppercase{#1}};%
+}
+\newcommand{\chipDuree}[1]{%
+  {\sffamily\fontsize{6.8}{8}\selectfont\color{encre!55}%
+    \icnChrono[encre!55]\,#1\,min}%
+}
+
+% ===========================================================================
+%  EXERCICE v6 — pavé numéroté, titre, difficulté, durée, compétence
+% ===========================================================================
+% \begin{exerciceSix}[picto]{titre}{difficulté 1-3}{durée}{Compétence}
+\newcounter{nxSixExo}[chapter]
+\newenvironment{exerciceSix}[5][]{%
+  \refstepcounter{nxSixExo}\par\vspace{9pt}\noindent
+  \begin{minipage}{\linewidth}
+  \tikz[baseline=(n.base)]\node[fill=rubExercices, text=white,
+    inner xsep=0pt, inner ysep=0pt, minimum size=5.6mm,
+    font=\titrefont\fontsize{9.5}{9.5}\selectfont](n)
+    {\thenxSixExo};%
+  \hspace{6pt}{\titrefont\fontsize{9.5}{11.5}\selectfont\color{encre}#2}%
+  \enspace
+  \ifnum#3=1\relax\parcoursUn\fi
+  \ifnum#3=2\relax\parcoursDeux\fi
+  \ifnum#3=3\relax\parcoursTrois\fi
+  \enspace\chipDuree{#4}%
+  \enspace\comp{#5}%
+  \ifstrempty{#1}{}{\hfill #1}%
+  \par\nopagebreak\vspace{2.5pt}\noindent\ignorespaces}%
+  {\end{minipage}\par\vspace{4pt}}
+
+% ===========================================================================
+%  QCM — lettres cerclées
+% ===========================================================================
+% \begin{qcmSix} … \reponses{...}{...}{...} … \end{qcmSix}
+\newcommand{\nxSixLettre}[1]{%
+  \tikz[baseline=(l.base)]\node[draw=rubExercices, text=rubExercices!80!black,
+    circle, line width=0.7pt, inner sep=1.3pt,
+    font=\sffamily\bfseries\fontsize{7}{7}\selectfont](l){#1};%
+}
+\newcommand{\reponses}[3]{%
+  \par\nopagebreak\smallskip\noindent
+  \begin{minipage}{\linewidth}\small
+  \nxSixLettre{a}\enspace #1\par\smallskip
+  \nxSixLettre{b}\enspace #2\par\smallskip
+  \nxSixLettre{c}\enspace #3\par
+  \end{minipage}\par}
+\newcommand{\reponsesligne}[3]{%
+  \par\nopagebreak\smallskip\noindent{\small
+  \nxSixLettre{a}\enspace #1\hfill
+  \nxSixLettre{b}\enspace #2\hfill
+  \nxSixLettre{c}\enspace #3}\par}
+
+% ===========================================================================
+%  VRAI / FAUX — pastilles à cocher
+% ===========================================================================
+\newcommand{\nxSixVF}{%
+  {\sffamily\fontsize{7}{8}\selectfont
+   \tikz[baseline=-0.5ex]\draw[nsiAccent!80, line width=0.7pt] (0,0) circle (0.85ex)
+     node[text=nsiAccent!80]{\fontsize{6}{6}\selectfont V};%
+   \hspace{2.5pt}%
+   \tikz[baseline=-0.5ex]\draw[coulRetenir!80, line width=0.7pt] (0,0) circle (0.85ex)
+     node[text=coulRetenir!80]{\fontsize{6}{6}\selectfont F};}%
+}
+% \vraifaux{affirmation}
+\newcommand{\vraifaux}[1]{%
+  \par\smallskip\noindent
+  \begin{minipage}{\linewidth}\small
+  \begin{minipage}[t]{\dimexpr\linewidth-3.2em\relax}#1\end{minipage}\hfill
+  \begin{minipage}[t]{2.8em}\raggedleft\nxSixVF\end{minipage}
+  \end{minipage}\par}
+
+% ===========================================================================
+%  EXERCICE RÉSOLU — énoncé + résolution commentée côte à côte
+% ===========================================================================
+% \begin{exerciceResoluSix}{titre}
+%   énoncé \tcblower résolution (utiliser \commentaireResolu{...})
+% \end{exerciceResoluSix}
+\newcommand{\commentaireResolu}[1]{%
+  \par\nopagebreak\noindent
+  {\sffamily\fontsize{7.4}{9.5}\selectfont\color{rubMethodes!80!black}%
+    \tikz[baseline=0.1em]\draw[rubMethodes, line width=0.8pt, line cap=round]
+      (0,0) -- (0.5em,0) -- (0.5em,0.62em);\hspace{3.5pt}#1}\par\smallskip}
+\newtcolorbox{exresSix}[1]{enhanced, breakable, sidebyside,
+  sidebyside align=top, righthand ratio=0.52,
+  colback=grisdoux!55, colbacklower=white,
+  colframe=rubMethodes!50, boxrule=0.9pt, arc=2.5pt,
+  segmentation style={color=rubMethodes!45, line width=0.7pt,
+    dash pattern=on 1.6pt off 2.4pt},
+  top=11pt, bottom=9pt, left=11pt, right=11pt,
+  before skip=16pt, after skip=16pt,
+  attach boxed title to top left={yshift=-2.6mm, xshift=8pt},
+  boxed title style={colback=rubMethodes, boxrule=0pt, arc=2pt,
+    left=8pt, right=8pt, top=3pt, bottom=3pt},
+  title={\nxSixLabel{white}{Exercice résolu}\enspace
+    {\titrefont\fontsize{8.5}{10}\selectfont\color{white}#1}}}
+\newenvironment{exerciceResoluSix}[1]{\begin{exresSix}{#1}}{\end{exresSix}}
+
+% ===========================================================================
+%  COUP DE POUCE — bandeau clef en pied de série
+% ===========================================================================
+\newtcolorbox{cdpSix}{enhanced, breakable,
+  colback=rubTD!9, boxrule=0pt, frame hidden, arc=2.5pt,
+  borderline west={2.4pt}{0pt}{rubTD},
+  top=8pt, bottom=8pt, left=11pt, right=11pt,
+  before skip=13pt, after skip=13pt,
+  before upper={\icnCle[rubTD!80!black]\enspace
+    \nxSixLabel{rubTD!75!black}{Coups de pouce}\par\smallskip\small}}
+% \cdp{numéro}{indice}
+\newcommand{\cdp}[2]{%
+  \par\noindent
+  \tikz[baseline=(c.base)]\node[fill=rubTD!85, text=white, inner xsep=4pt,
+    inner ysep=1.6pt, rounded corners=1.4pt,
+    font=\titrefont\fontsize{7}{7}\selectfont](c){#1};%
+  \hspace{5pt}\begin{minipage}[t]{\dimexpr\linewidth-2.6em\relax}
+    \small #2\end{minipage}\par\smallskip}

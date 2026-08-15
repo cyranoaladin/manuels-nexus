@@ -1,0 +1,57 @@
+% nexus-figures.tex — Style pgfplots normalisé et environnement pour figures Nexus Réussite
+% Règle : capacité graphique ⇒ ≥2 figures cours, ≥1 exercices ;
+%         chapitre analyse ≥6 figures, géométrie ≥10.
+% Étiquettes : courbe en fin, à droite ; tangente sous la droite ; point de
+% contact seul (disque bleu 1.6 pt) ; grille nxGris!15 ; graduations utiles.
+
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{intersections,arrows.meta}
+
+% ============================================================
+%  STYLE NEXUS NORMALISÉ
+% ============================================================
+\pgfplotsset{
+  nexus/.style={
+    axis lines=middle,
+    axis line style={nxGris,line width=0.5pt,-{Stealth[length=4pt]}},
+    grid=major,
+    grid style={nxGris!15,line width=0.3pt},
+    tick style={nxGris,line width=0.4pt},
+    tick label style={font=\footnotesize,color=nxGris},
+    label style={font=\small},
+    every axis plot/.append style={line width=1.1pt},
+    % Styles nommés pour les objets courants
+    courbe/.style={nxBleu,line width=1.1pt},
+    tangente/.style={nxOr!75!black,line width=1.1pt},
+    secante/.style={nxOr!60,line width=0.8pt,dashed},
+    point/.style={only marks,mark=*,mark size=1.6pt,nxBleu},
+    aire/.style={fill=nxVert!15,draw=none},
+    asymptote/.style={nxRouge!60,line width=0.6pt,dashed},
+    width=0.85\linewidth,
+    height=0.5\linewidth,
+  }
+}
+
+% À employer avec \node[right,nxBleu] en fin de courbe et
+% \node[below,nxOr!75!black] sous une tangente : aucun label sur le tracé.
+
+% ============================================================
+%  ENVIRONNEMENT NUMÉROTÉ
+% ============================================================
+\newcounter{nxfig}
+\newenvironment{nxfigure}[2][0.9\linewidth]{%
+  \refstepcounter{nxfig}%
+  \begin{center}%
+  \begin{minipage}{#1}%
+  \centering%
+}{%
+  \par\smallskip
+  \end{minipage}%
+  \end{center}%
+}
+
+% Légende sous la figure
+\newcommand{\nxcaption}[1]{%
+  {\small\textcolor{nxGris}{\textit{Figure \thenxfig\ --- #1}}}%
+}

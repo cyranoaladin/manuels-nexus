@@ -1,0 +1,76 @@
+% nexus-decor.sty — Motifs de contour de page (Nexus Réussite, charte v6)
+% Habillage discret des pages intérieures, dans la couleur de la rubrique
+% active : repères d'angle façon hirondelles d'imprimeur, rangée de losanges
+% en tête extérieure, filet de pied. Les pages « pleines » (couverture,
+% ouverture de chapitre, pages liminaires) restent vierges.
+%
+% Usage :  \nxActiverDecor   (dans le document, après les pages liminaires)
+%          \nxSuspendreDecor / \nxReprendreDecor  autour d'une page pleine
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{gabarits/nexus-decor}[2026/08/12 v1.0 Contours de page Nexus]
+
+\RequirePackage{tikz}
+
+\newif\ifnxDecor
+\nxDecorfalse
+\newcommand{\nxActiverDecor}{\global\nxDecortrue}
+\newcommand{\nxSuspendreDecor}{\global\nxDecorfalse}
+\newcommand{\nxReprendreDecor}{\global\nxDecortrue}
+
+% Couleur du décor = couleur de la rubrique de la page quand la classe v5
+% fournit le mark de rubrique (\nxRubriquePage), sinon couleur de chapitre
+% (classe v4 des volumes assemblés).
+\newcommand{\nxDecorCouleur}{%
+  \ifcsname nxRubriquePage\endcsname
+    \ifcsname nxRubriqueCouleur\endcsname
+      \nxRubriqueCouleur{\nxRubriquePage}%
+    \else
+      chapcolor%
+    \fi
+  \else
+    chapcolor%
+  \fi}
+
+\newcommand{\nxDecorDessin}{%
+  \ifnxDecor
+  \begingroup
+  \edef\nxDecorFill{\nxDecorCouleur}%
+  \begin{tikzpicture}[remember picture, overlay]
+    \begin{scope}[color=\nxDecorFill]
+      % repères d'angle (à 7 mm des bords)
+      \draw[line width=1pt, line cap=round]
+        ([shift={(7mm,-7mm)}]current page.north west) -- ++(4.2mm,0)
+        ([shift={(7mm,-7mm)}]current page.north west) -- ++(0,-4.2mm);
+      \draw[line width=1pt, line cap=round]
+        ([shift={(-7mm,-7mm)}]current page.north east) -- ++(-4.2mm,0)
+        ([shift={(-7mm,-7mm)}]current page.north east) -- ++(0,-4.2mm);
+      \draw[line width=1pt, line cap=round]
+        ([shift={(7mm,7mm)}]current page.south west) -- ++(4.2mm,0)
+        ([shift={(7mm,7mm)}]current page.south west) -- ++(0,4.2mm);
+      \draw[line width=1pt, line cap=round]
+        ([shift={(-7mm,7mm)}]current page.south east) -- ++(-4.2mm,0)
+        ([shift={(-7mm,7mm)}]current page.south east) -- ++(0,4.2mm);
+      % rangée de losanges en tête, côté extérieur
+      \ifodd\value{page}%
+        \foreach \i in {0,1,2}{%
+          \path[fill=\nxDecorFill, fill opacity={0.9-\i*0.3}]
+            ([xshift=-14mm-\i*4.4mm, yshift=-8.6mm]current page.north east)
+            -- ++(1.4mm,1.05mm) -- ++(1.4mm,-1.05mm) -- ++(-1.4mm,-1.05mm)
+            -- cycle;}%
+      \else
+        \foreach \i in {0,1,2}{%
+          \path[fill=\nxDecorFill, fill opacity={0.9-\i*0.3}]
+            ([xshift=14mm+\i*4.4mm, yshift=-8.6mm]current page.north west)
+            -- ++(-1.4mm,1.05mm) -- ++(-1.4mm,-1.05mm) -- ++(1.4mm,-1.05mm)
+            -- cycle;}%
+      \fi
+      % filet de pied
+      \draw[line width=0.5pt, opacity=0.45]
+        ([xshift=20mm, yshift=16mm]current page.south west)
+        -- ([xshift=-20mm, yshift=16mm]current page.south east);
+    \end{scope}
+  \end{tikzpicture}%
+  \endgroup
+  \fi}
+
+\AddToHook{shipout/background}{\nxDecorDessin}
