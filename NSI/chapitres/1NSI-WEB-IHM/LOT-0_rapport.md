@@ -17,5 +17,5 @@ exercice (EX-001/CO-001) est purement conceptuel et reste a bon droit
 en statut manual_review (aucun code a executer).
 
 Ecart assume vs docs/08_specificites_nsi.md (harvest T0 indisponible,
-volume reduit) : meme calibrage que les chapitres precedents. Statut :
+volume reduit) : meme calibrage que les chapitres precedents. Statut : approuvé.
 draft (auto-verifie, en attente de revue humaine).

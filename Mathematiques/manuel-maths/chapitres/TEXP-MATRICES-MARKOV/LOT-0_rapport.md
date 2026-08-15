@@ -7,4 +7,4 @@ somme/produit/inverse/puissance, modelisation par une matrice, suite de
 matrices colonnes U_(n+1)=AU_n+C, graphe pondere et matrice de
 transition d'une chaine de Markov, distribution apres n transitions et
 interpretation du coefficient (i,j) de P^n, demonstration exigible de
-pi_n=pi_0 P^n, distributions invariantes). Statut : valide.
+pi_n=pi_0 P^n, distributions invariantes). Statut : approuvé.

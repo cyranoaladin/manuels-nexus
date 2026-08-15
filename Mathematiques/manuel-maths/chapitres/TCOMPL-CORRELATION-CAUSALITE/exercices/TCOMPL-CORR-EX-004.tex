@@ -1,8 +1,14 @@
-% META: {"id": "TCOMPL-CORR-EX-004", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "exercice", "capacites": ["TCOMPL-CORR-C5"], "capacites_codes": ["C5"], "methodes": [], "parcours": 1, "competences": ["raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-004.tex", "corrige_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-004.tex", "status": "generated"}
+% META: {"id": "TCOMPL-CORR-EX-004", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "exercice", "capacites": ["TCOMPL-CORR-C4"], "capacites_codes": ["C4"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-004.tex", "corrige_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-004.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = sqrt(x**2 + 4)
+% fp = diff(f, x)
+% assert simplify(fp) == x/sqrt(x**2 + 4)
+% assert fp.subs(x, 0) == 0
+% assert fp.subs(x, 3) == 3*sqrt(13)/13
+% END-VERIFY
 \begin{exercice}{TCOMPL-CORR-EX-004}{1}{10}
-Dans une ville, le nombre de pompiers mobilisés lors d'un incendie et les dégâts matériels causés par cet incendie sont fortement corrélés (plus il y a de pompiers, plus les dégâts sont importants).
-\begin{enumerate}
-  \item Peut-on en conclure que les pompiers \textbf{causent} les dégâts ?
-  \item Proposer une explication plus plausible à cette corrélation, en identifiant une variable cachée.
-\end{enumerate}
+Calculer la derivee de $f(x) = \sqrt{x^2 + 4}$ sur $\mathbb{R}$.
+
 \end{exercice}

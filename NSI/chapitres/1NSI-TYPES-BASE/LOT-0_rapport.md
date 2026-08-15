@@ -19,5 +19,5 @@ version amenagee) : corpus_nsi indisponible dans ce worktree (submodule
 non initialise), mode ex nihilo. Volume reduit (5 exercices, 6 QCM, 1
 remediation, 2 evaluations), meme calibrage que les chapitres TNSI
 produits precedemment dans cette session (cf. LOT-0 de
-TNSI-STRUCTURES-DONNEES). Statut : draft (auto-verifie par execution
+TNSI-STRUCTURES-DONNEES). Statut : approuvé.
 reelle, en attente de revue humaine comme le reste du projet).

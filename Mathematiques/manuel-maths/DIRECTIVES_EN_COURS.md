@@ -50,8 +50,8 @@ Un tour ne se termine jamais par un résumé ni une question. Rapport de LOT + c
 - [x] **4. RAPPORT_FINAL_1SPE.md** — Manuel 1SPE complet. Tag `manuel/1SPE-v1`. 445p prof, 399p eleve.
 
 - [ ] **5. J4 — Bootstrap Terminale TSPE**
-  - [ ] 5a. Referentiel TSPE ancre BO 2026, architecture 13 chapitres
-  - [ ] 5b. `docs/10_perimetre_terminale.md`
+  - [x] 5a. Referentiel TSPE ancre BO 2019, architecture 11 chapitres (avec sous-partie concentration dans TSPE-PROBABILITES)
+  - [x] 5b. `docs/10_perimetre_terminale.md` (perimetre harmonisé et documenté)
   - [x] 5c. TSPE-SUITES-LIMITES LOT 0→7. 50 ex, 116 VERIFY, résolution aveugle A+B 0 divergence. Tag `chap/TSPE-SUITES-LIMITES-v1`.
   - [x] 5d. TSPE-LIMITES-FONCTIONS LOT 0→7. 50 ex, 114 VERIFY, résolution aveugle A+B 0 divergence. Tag `chap/TSPE-LIMITES-FONCTIONS-v1`.
   - [x] 5e. TSPE-DERIVATION-CONVEXITE LOT 0→7. 52 ex, 120 VERIFY, résolution aveugle A+B 0 divergence. Tag `chap/TSPE-DERIVATION-CONVEXITE-v1`.

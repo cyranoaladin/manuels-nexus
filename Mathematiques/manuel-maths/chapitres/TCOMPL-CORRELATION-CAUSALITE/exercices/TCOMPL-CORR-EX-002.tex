@@ -1,16 +1,21 @@
-% META: {"id": "TCOMPL-CORR-EX-002", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "exercice", "capacites": ["TCOMPL-CORR-C4"], "capacites_codes": ["C4"], "methodes": [], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-002.tex", "corrige_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-002.tex", "status": "generated"}
+% META: {"id": "TCOMPL-CORR-EX-002", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "exercice", "capacites": ["TCOMPL-CORR-C2"], "capacites_codes": ["C2"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-002.tex", "corrige_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-002.tex", "status": "approved"}
 % BEGIN-VERIFY
-% a, b = 3.2, 4.7
-% assert abs((a*1.5 + b) - 9.5) < 1e-9
-% valeur_interp = a*2.5 + b
-% assert abs(valeur_interp - 12.7) < 1e-9
-% valeur_extrap = a*50 + b
-% assert abs(valeur_extrap - 164.7) < 1e-9
+% from sympy import *
+% x = symbols('x')
+% u = x**2 + 3*x + 2
+% du = diff(u, x)
+% f = ln(u)
+% fp = diff(f, x)
+% assert simplify(fp) == (2*x + 3)/(x**2 + 3*x + 2)
+% # domaine: u > 0, i.e. x < -2 ou x > -1
+% assert u.subs(x, 0) == 2
+% assert u.subs(x, -3) == 2
 % END-VERIFY
-\begin{exercice}{TCOMPL-CORR-EX-002}{2}{15}
-On reprend l'ajustement $y=3{,}2x+4{,}7$ de l'exercice précédent, valable pour un budget publicitaire $x\in[0,3]$ (en milliers d'euros).
+\begin{exercice}{TCOMPL-CORR-EX-002}{1}{10}
+Soit $f$ la fonction definie par $f(x) = \ln(x^2 + 3x + 2)$.
 \begin{enumerate}
-  \item Estimer le nombre de nouveaux clients pour un budget de $2{,}5$ milliers d'euros. S'agit-il d'une interpolation ou d'une extrapolation ?
-  \item Estimer le nombre de nouveaux clients pour un budget de $50$ milliers d'euros. S'agit-il d'une interpolation ou d'une extrapolation ? Cette estimation est-elle fiable ? Justifier.
+  \item Determiner l'ensemble de definition de $f$.
+  \item Calculer $f'(x)$.
 \end{enumerate}
+
 \end{exercice}

@@ -1,20 +1,21 @@
-% META: {"id": "TEXP-MAT-CO-001", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige", "exercice_ref": "TEXP-MAT-EX-001", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-MAT-CO-001", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige", "exercice_ref": "TEXP-MAT-EX-001", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
-% from sympy import Matrix, eye
-% A = Matrix([[3,2],[1,1]])
-% B = Matrix([[0,1],[2,1]])
-% assert A+B == Matrix([[3,3],[3,2]])
-% assert A*B == Matrix([[4,5],[2,2]])
-% assert A.det() == 1
-% assert A.inv() == Matrix([[1,-2],[-1,3]])
-% assert A**2 == Matrix([[11,8],[4,3]])
+% from sympy import *
+% x = symbols('x')
+% f = exp(3*x**2 + 1)
+% fp = diff(f, x)
+% assert fp == 6*x*exp(3*x**2 + 1)
+% assert fp.subs(x, 0) == 0
 % END-VERIFY
 \begin{corrige}{TEXP-MAT-EX-001}
-\textbf{1.} $A+B=\begin{pmatrix}3&3\\3&2\end{pmatrix}$ et $AB=\begin{pmatrix}4&5\\2&2\end{pmatrix}$.
 
-\textbf{2.} $\det(A)=3\times1-2\times1=1\neq0$ : $A$ est inversible.
+\commentaireMarge{Poser $u(x) = 3x^2+1$ et $v(t)=\mathrm{e}^t$.}
 
-\textbf{3.} $A^{-1}=\dfrac{1}{1}\begin{pmatrix}1&-2\\-1&3\end{pmatrix}=\begin{pmatrix}1&-2\\-1&3\end{pmatrix}$. On vérifie $AA^{-1}=\begin{pmatrix}3\times1+2\times(-1)&3\times(-2)+2\times3\\1\times1+1\times(-1)&1\times(-2)+1\times3\end{pmatrix}=\begin{pmatrix}1&0\\0&1\end{pmatrix}=I$.
+On pose $u(x) = 3x^2 + 1$ et $v(t) = \mathrm{e}^t$. Alors $u'(x) = 6x$ et $v'(t) = \mathrm{e}^t$.
 
-\textbf{4.} $A^2=\begin{pmatrix}11&8\\4&3\end{pmatrix}$.
+La formule $(v \circ u)' = u' \times (v' \circ u)$ donne :
+\[ f'(x) = 6x\, \mathrm{e}^{3x^2 + 1}. \]
+
+En particulier $f'(0) = 0$ et $f'(1) = 6\mathrm{e}^4$.
+
 \end{corrige}

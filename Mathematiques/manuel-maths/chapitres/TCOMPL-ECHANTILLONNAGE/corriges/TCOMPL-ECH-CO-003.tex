@@ -1,25 +1,22 @@
-% META: {"id": "TCOMPL-ECH-CO-003", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ECH-EX-003", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TCOMPL-ECH-CO-003", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ECH-EX-003", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
-% from math import comb
-% def P_egal(n, p, k):
-%     return comb(n, k) * p**k * (1 - p)**(n - k)
-% n, p = 100, 0.5
-% a, cumul = 0, 0
-% while cumul < 0.025:
-%     cumul += P_egal(n, p, a)
-%     a += 1
-% a -= 1
-% b, cumul2 = 0, 0
-% while cumul2 < 0.975:
-%     cumul2 += P_egal(n, p, b)
-%     b += 1
-% b -= 1
-% assert a == 40
-% assert b == 60
-% assert not (40 <= 65 <= 60)
+% from sympy import *
+% x = symbols('x')
+% f = (2*x + 1)**5
+% fp = diff(f, x)
+% assert fp == 10*(2*x+1)**4
+% assert fp.subs(x, 0) == 10
+% assert fp.subs(x, Rational(-1,2)) == 0
 % END-VERIFY
 \begin{corrige}{TCOMPL-ECH-EX-003}
-\textbf{1.} On trouve $I=[40,60]$ : $P(X\in[40,60]) \geq 0{,}95$.
 
-\textbf{2.} La valeur observée $65$ n'appartient \textbf{pas} à l'intervalle de fluctuation $[40,60]$ : ce résultat est très peu probable si la pièce était équilibrée (probabilité inférieure à $2{,}5\%$ d'obtenir une valeur aussi extrême dans ce sens). On \textbf{rejette} donc l'hypothèse d'équilibre de la pièce, au risque de $5\%$ de se tromper.
+On pose $u(x) = 2x+1$. Alors $u'(x) = 2$.
+
+\commentaireMarge{Identifier $u(x) = 2x+1$ puis appliquer $(u^n)' = n\,u'\,u^{n-1}$.}
+
+La formule $(u^n)' = n\,u'\,u^{n-1}$ donne :
+\[ f'(x) = 5 \times 2 \times (2x+1)^4 = 10(2x+1)^4. \]
+
+On verifie : $f'(0) = 10$ et $f'\!\left(-\tfrac{1}{2}\right) = 0$.
+
 \end{corrige}

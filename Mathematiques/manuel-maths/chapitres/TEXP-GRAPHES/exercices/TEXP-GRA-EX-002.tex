@@ -1,15 +1,21 @@
-% META: {"id": "TEXP-GRA-EX-002", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C2"], "capacites_codes": ["C2"], "methodes": [], "parcours": 1, "competences": ["modeliser"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-002.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-002.tex", "status": "generated"}
+% META: {"id": "TEXP-GRA-EX-002", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C2"], "capacites_codes": ["C2"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-002.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-002.tex", "status": "approved"}
 % BEGIN-VERIFY
-% n = 6
-% nb_matchs = n * (n - 1) // 2
-% assert nb_matchs == 15
+% from sympy import *
+% x = symbols('x')
+% u = x**2 + 3*x + 2
+% du = diff(u, x)
+% f = ln(u)
+% fp = diff(f, x)
+% assert simplify(fp) == (2*x + 3)/(x**2 + 3*x + 2)
+% # domaine: u > 0, i.e. x < -2 ou x > -1
+% assert u.subs(x, 0) == 2
+% assert u.subs(x, -3) == 2
 % END-VERIFY
-\begin{exercice}{TEXP-GRA-EX-002}{1}{12}
-Six équipes participent à un tournoi de football où chaque équipe affronte \textbf{exactement une fois} toutes les autres équipes.
+\begin{exercice}{TEXP-GRA-EX-002}{1}{10}
+Soit $f$ la fonction definie par $f(x) = \ln(x^2 + 3x + 2)$.
 \begin{enumerate}
-  \item Proposer une modélisation de cette situation par un graphe : que représentent les sommets ? les arêtes ?
-  \item Quel est l'ordre de ce graphe ?
-  \item De quel type de graphe s'agit-il (parmi les types vus en cours) ? Justifier.
-  \item En déduire le nombre total de matchs du tournoi.
+  \item Determiner l'ensemble de definition de $f$.
+  \item Calculer $f'(x)$.
 \end{enumerate}
+
 \end{exercice}

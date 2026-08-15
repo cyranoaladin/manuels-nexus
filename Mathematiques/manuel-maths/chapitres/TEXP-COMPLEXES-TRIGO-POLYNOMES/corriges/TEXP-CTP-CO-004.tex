@@ -1,14 +1,22 @@
-% META: {"id": "TEXP-CTP-CO-004", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige", "exercice_ref": "TEXP-CTP-EX-004", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-CTP-CO-004", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige", "exercice_ref": "TEXP-CTP-EX-004", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
-% from sympy import I, simplify, im
-% a, b, c = 1+I, 3+3*I, 5+5*I
-% rapport = simplify((c-a)/(b-a))
-% assert im(rapport) == 0
-% assert rapport == 2
+% from sympy import *
+% x = symbols('x')
+% f = sqrt(x**2 + 4)
+% fp = diff(f, x)
+% assert simplify(fp) == x/sqrt(x**2 + 4)
+% assert fp.subs(x, 0) == 0
+% assert fp.subs(x, 3) == 3*sqrt(13)/13
 % END-VERIFY
 \begin{corrige}{TEXP-CTP-EX-004}
-\[
-  \frac{c-a}{b-a} = \frac{(5+5i)-(1+i)}{(3+3i)-(1+i)} = \frac{4+4i}{2+2i} = \frac{4(1+i)}{2(1+i)} = 2.
-\]
-Ce rapport est un \textbf{réel} (égal à $2$) : $A$, $B$, $C$ sont donc \textbf{alignés}.
+
+On pose $u(x) = x^2+4$. Alors $u'(x) = 2x$ et $u(x) > 0$ sur $\mathbb{R}$.
+
+\commentaireMarge{$u(x) = x^2+4 > 0$ partout : la racine est bien definie sur $\mathbb{R}$.}
+
+La formule $(\sqrt{u})' = \dfrac{u'}{2\sqrt{u}}$ donne :
+\[ f'(x) = \frac{2x}{2\sqrt{x^2+4}} = \frac{x}{\sqrt{x^2+4}}. \]
+
+On verifie : $f'(0) = 0$ (la tangente est horizontale en $0$).
+
 \end{corrige}

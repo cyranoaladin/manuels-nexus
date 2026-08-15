@@ -1,16 +1,22 @@
-% META: {"id": "TEXP-CTP-CO-003", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige", "exercice_ref": "TEXP-CTP-EX-003", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TEXP-CTP-CO-003", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige", "exercice_ref": "TEXP-CTP-EX-003", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
-% from sympy import symbols, solve, factor, I
-% z = symbols('z')
-% P = z**3 - z**2 + z - 1
-% assert P.subs(z, 1) == 0
-% assert factor(P) == (z-1)*(z**2+1)
-% assert set(solve(P, z)) == {1, I, -I}
+% from sympy import *
+% x = symbols('x')
+% f = (2*x + 1)**5
+% fp = diff(f, x)
+% assert fp == 10*(2*x+1)**4
+% assert fp.subs(x, 0) == 10
+% assert fp.subs(x, Rational(-1,2)) == 0
 % END-VERIFY
 \begin{corrige}{TEXP-CTP-EX-003}
-\textbf{1.} $P(1) = 1-1+1-1=0$ : $1$ est bien racine de $P$.
 
-\textbf{2.} Par identification (ou division euclidienne) : $Q(z)=z^2+1$, et on vérifie $(z-1)(z^2+1) = z^3+z-z^2-1 = z^3-z^2+z-1 = P(z)$.
+On pose $u(x) = 2x+1$. Alors $u'(x) = 2$.
 
-\textbf{3.} $P(z)=0 \iff z=1$ ou $Q(z)=0$. L'équation $z^2+1=0$ donne $z^2=-1$, soit $z=i$ ou $z=-i$. L'ensemble des solutions est $\{1,i,-i\}$.
+\commentaireMarge{Identifier $u(x) = 2x+1$ puis appliquer $(u^n)' = n\,u'\,u^{n-1}$.}
+
+La formule $(u^n)' = n\,u'\,u^{n-1}$ donne :
+\[ f'(x) = 5 \times 2 \times (2x+1)^4 = 10(2x+1)^4. \]
+
+On verifie : $f'(0) = 10$ et $f'\!\left(-\tfrac{1}{2}\right) = 0$.
+
 \end{corrige}

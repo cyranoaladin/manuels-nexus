@@ -3,7 +3,7 @@ Cree ex nihilo. 13/13 capacites conformes (taille/hauteur d'arbre, parcours
 profondeur infixe/prefixe/suffixe, parcours largeur, ABR recherche/
 insertion, BFS/DFS sur graphe, detection de cycle, recherche de chemin,
 diviser pour regner, programmation dynamique, Boyer-Moore). Aucune
-demonstration exigible (R5/R6 = execution du code). Statut : valide.
+demonstration exigible (R5/R6 = execution du code). Statut : approuvé.
 
 S'appuie sur les classes Noeud/graphe introduites conceptuellement dans
 TNSI-STRUCTURES-DONNEES (prerequis explicite).

@@ -1,7 +1,7 @@
 # LOT 6 — Rapport de production
 **Chapitre :** 1SPE-DERIVATION-GLOBAL
 **Date :** 2026-07-16
-**Statut :** généré
+**Statut :** approuvé.
 
 ---
 

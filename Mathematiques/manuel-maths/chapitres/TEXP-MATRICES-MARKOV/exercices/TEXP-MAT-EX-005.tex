@@ -1,20 +1,19 @@
-% META: {"id": "TEXP-MAT-EX-005", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "exercice", "capacites": ["TEXP-MAT-C5"], "capacites_codes": ["C5"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-005.tex", "corrige_tex": "chapitres/TEXP-MATRICES-MARKOV/corriges/TEXP-MAT-CO-005.tex", "status": "generated"}
+% META: {"id": "TEXP-MAT-EX-005", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "exercice", "capacites": ["TEXP-MAT-C5"], "capacites_codes": ["C5"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer","raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-005.tex", "corrige_tex": "chapitres/TEXP-MATRICES-MARKOV/corriges/TEXP-MAT-CO-005.tex", "status": "approved"}
 % BEGIN-VERIFY
-% from sympy import Matrix, Rational
-% P = Matrix([[Rational(9,10), Rational(1,10)], [Rational(3,10), Rational(7,10)]])
-% pi0 = Matrix([[1,0]])
-% pi1 = pi0*P
-% pi2 = pi0*P**2
-% assert pi1 == Matrix([[Rational(9,10), Rational(1,10)]])
-% assert pi2 == Matrix([[Rational(21,25), Rational(4,25)]])
-% P2 = P**2
-% assert P2 == Matrix([[Rational(21,25), Rational(4,25)], [Rational(12,25), Rational(13,25)]])
+% from sympy import *
+% x = symbols('x')
+% f = exp(1/x)
+% fp = diff(f, x)
+% assert simplify(fp) == -exp(1/x)/x**2
+% # fp < 0 sur R* : f decroissante
+% assert fp.subs(x, 1) == -exp(1)
+% assert fp.subs(x, -1) == -exp(-1)
 % END-VERIFY
-\begin{exercice}{TEXP-MAT-EX-005}{2}{15}
-On reprend la chaîne de Markov du service de streaming (exercice précédent), de matrice de transition $P=\begin{pmatrix}0{,}9&0{,}1\\0{,}3&0{,}7\end{pmatrix}$ et de distribution initiale $\pi_0=\begin{pmatrix}1&0\end{pmatrix}$.
+\begin{exercice}{TEXP-MAT-EX-005}{2}{12}
+Soit $f$ definie sur $\mathbb{R}^*$ par $f(x) = \mathrm{e}^{1/x}$.
 \begin{enumerate}
-  \item Calculer $\pi_1=\pi_0P$. Interpréter le résultat.
-  \item Calculer $P^2$, puis $\pi_2=\pi_0P^2$.
-  \item Quelle est la probabilité que ce client soit encore abonné dans deux mois ? Quel coefficient de $P^2$ donne directement cette information ?
+  \item Calculer $f'(x)$.
+  \item Etudier le signe de $f'(x)$ sur $\mathbb{R}^*$ et en deduire les variations de $f$.
 \end{enumerate}
+
 \end{exercice}

@@ -1,21 +1,22 @@
-% META: {"id": "TCOMPL-ME-CO-003", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-ME-EX-003", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TCOMPL-ME-CO-003", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-ME-EX-003", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
-% from sympy import symbols, exp, diff, Rational, limit, oo
-% t = symbols('t')
-% C = -60
-% y = C*exp(-Rational(1,4)*t) + 240
-% yp = diff(y, t)
-% assert (yp - (-Rational(1,4)*y + 60)).simplify() == 0
-% assert y.subs(t, 0) == 180
-% assert limit(y, t, oo) == 240
+% from sympy import *
+% x = symbols('x')
+% f = (2*x + 1)**5
+% fp = diff(f, x)
+% assert fp == 10*(2*x+1)**4
+% assert fp.subs(x, 0) == 10
+% assert fp.subs(x, Rational(-1,2)) == 0
 % END-VERIFY
 \begin{corrige}{TCOMPL-ME-EX-003}
-\textbf{1.} $y_p$ vérifie $-0{,}25\,y_p+60=0$, soit $y_p = \dfrac{60}{0{,}25} = 240$.
 
-\textbf{2.} La solution générale est $y(t) = C\,\mathrm{e}^{-0{,}25t} + 240$. La condition $y(0)=180$ donne $C+240=180$, soit $C=-60$ :
-\[
-  y(t) = -60\,\mathrm{e}^{-0{,}25t} + 240.
-\]
+On pose $u(x) = 2x+1$. Alors $u'(x) = 2$.
 
-\textbf{3.} Quand $t\to+\infty$, $\mathrm{e}^{-0{,}25t}\to0$, donc $y(t) \to 240$ : la température de l'objet se stabilise à $240$ degrés (température du four).
+\commentaireMarge{Identifier $u(x) = 2x+1$ puis appliquer $(u^n)' = n\,u'\,u^{n-1}$.}
+
+La formule $(u^n)' = n\,u'\,u^{n-1}$ donne :
+\[ f'(x) = 5 \times 2 \times (2x+1)^4 = 10(2x+1)^4. \]
+
+On verifie : $f'(0) = 10$ et $f'\!\left(-\tfrac{1}{2}\right) = 0$.
+
 \end{corrige}

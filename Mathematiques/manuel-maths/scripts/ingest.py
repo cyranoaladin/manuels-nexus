@@ -11,11 +11,13 @@ from pathlib import Path
 
 import fitz  # pymupdf
 import trafilatura
+from dotenv import load_dotenv
 from jsonschema import validate
 
 from common import CORPUS_DIR, RAW_DIR, ROOT, load_registry, write_json
 
 CHUNK_SCHEMA = json.loads((ROOT / "schemas" / "chunk.schema.json").read_text(encoding="utf-8"))
+load_dotenv(ROOT / ".env")
 
 # Découpage par unité pédagogique : en-têtes d'exercices/parties, jamais par fenêtre fixe.
 SPLIT_PATTERN = re.compile(
@@ -52,7 +54,49 @@ def classify(chunk: str) -> dict:
     """Classification LLM (Haiku) : type, niveau, thème, capacités probables, difficulté.
     Sans clé API, heuristique lexicale de repli."""
     import os
-    if not os.getenv("ANTHROPIC_API_KEY"):
+    openrouter_key = os.getenv("OPENROUTER_API_KEY", "").strip()
+    anthropic_key = os.getenv("ANTHROPIC_API_KEY", "").strip()
+
+    if openrouter_key:
+        import httpx
+
+        model = os.getenv("OPENROUTER_CLASSIFIER_MODEL", "anthropic/claude-3.5-haiku")
+        prompt = (
+            "Classe ce fragment de ressource de mathématiques (lycée français). "
+            "Réponds UNIQUEMENT en JSON: {\"chunk_type\": cours|methode|exercice|corrige|activite|"
+            "evaluation|erreur_type|autre, \"niveau\": 2GT|1SPE|TSPE|TEXP|null, "
+            "\"theme\": mot-clé majuscule ou null, \"capacites\": [], \"difficulte\": 1|2|3|null}\n\n"
+            f"FRAGMENT:\n{chunk[:3000]}"
+        )
+        try:
+            resp = httpx.post(
+                os.getenv("OPENROUTER_URL", "https://openrouter.ai/api/v1/chat/completions"),
+                headers={
+                    "Authorization": f"Bearer {openrouter_key}",
+                    "Content-Type": "application/json",
+                    "HTTP-Referer": "https://cyranoaladin.local",
+                    "X-Title": "manuels-rag-ingest",
+                },
+                json={
+                    "model": model,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "max_tokens": 200,
+                    "temperature": 0.2,
+                },
+                timeout=30.0,
+            )
+            resp.raise_for_status()
+            raw = (resp.json()["choices"][0]["message"]["content"] or "").strip()
+        except Exception:
+            raw = ""
+        if raw:
+            raw = raw.removeprefix("```json").removesuffix("```").strip()
+            try:
+                return json.loads(raw)
+            except json.JSONDecodeError:
+                pass
+
+    if not anthropic_key:
         low = chunk.lower()
         ctype = ("exercice" if low.startswith(("exercice", "probl")) else
                  "corrige" if low.startswith(("correction", "corrig")) else
@@ -62,7 +106,7 @@ def classify(chunk: str) -> dict:
         return {"chunk_type": ctype, "niveau": None, "theme": None,
                 "capacites": [], "difficulte": None}
     from anthropic import Anthropic
-    client = Anthropic()
+    client = Anthropic(api_key=anthropic_key)
     prompt = (
         "Classe ce fragment de ressource de mathématiques (lycée français). "
         "Réponds UNIQUEMENT en JSON: {\"chunk_type\": cours|methode|exercice|corrige|activite|"
@@ -70,7 +114,9 @@ def classify(chunk: str) -> dict:
         "\"theme\": mot-clé majuscule ou null, \"capacites\": [], \"difficulte\": 1|2|3|null}\n\n"
         f"FRAGMENT:\n{chunk[:3000]}"
     )
-    msg = client.messages.create(model="claude-haiku-4-5-20251001", max_tokens=200,
+    msg = client.messages.create(
+        model=os.getenv("ANTHROPIC_CLASSIFIER_MODEL", "claude-haiku-4-5-20251001"),
+        max_tokens=200,
                                  messages=[{"role": "user", "content": prompt}])
     raw = msg.content[0].text.strip().removeprefix("```json").removesuffix("```").strip()
     try:

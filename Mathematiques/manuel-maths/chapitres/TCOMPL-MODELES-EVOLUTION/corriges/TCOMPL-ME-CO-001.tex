@@ -1,13 +1,21 @@
-% META: {"id": "TCOMPL-ME-CO-001", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-ME-EX-001", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TCOMPL-ME-CO-001", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-ME-EX-001", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
-% from sympy import Rational
-% u0, q = 200, Rational(1, 4)
-% limite = u0 / (1 - q)
-% assert limite == Rational(800, 3)
+% from sympy import *
+% x = symbols('x')
+% f = exp(3*x**2 + 1)
+% fp = diff(f, x)
+% assert fp == 6*x*exp(3*x**2 + 1)
+% assert fp.subs(x, 0) == 0
 % END-VERIFY
 \begin{corrige}{TCOMPL-ME-EX-001}
-Chaque jour, $25\%$ du polluant présent subsiste : c'est une suite géométrique de raison $q=0{,}25$. La quantité totale accumulée après $n$ jours est la somme des apports successifs, chacun dégradé au fil du temps, qui tend vers :
-\[
-  \frac{200}{1-0{,}25} = \frac{200}{0{,}75} = \frac{800}{3} \approx 266{,}7 \text{ kg}.
-\]
+
+\commentaireMarge{Poser $u(x) = 3x^2+1$ et $v(t)=\mathrm{e}^t$.}
+
+On pose $u(x) = 3x^2 + 1$ et $v(t) = \mathrm{e}^t$. Alors $u'(x) = 6x$ et $v'(t) = \mathrm{e}^t$.
+
+La formule $(v \circ u)' = u' \times (v' \circ u)$ donne :
+\[ f'(x) = 6x\, \mathrm{e}^{3x^2 + 1}. \]
+
+En particulier $f'(0) = 0$ et $f'(1) = 6\mathrm{e}^4$.
+
 \end{corrige}

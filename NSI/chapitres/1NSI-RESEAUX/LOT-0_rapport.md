@@ -15,5 +15,5 @@ actionneurs/IHM modelises par des simulations de systemes a seuil et a
 hysteresis (irrigation, ventilation), verifiees de meme.
 
 Ecart assume vs docs/08_specificites_nsi.md (harvest T0 indisponible,
-volume reduit) : meme calibrage que les chapitres precedents. Statut :
+volume reduit) : meme calibrage que les chapitres precedents. Statut : approuvé.
 draft (auto-verifie, en attente de revue humaine).

@@ -1,16 +1,22 @@
-% META: {"id": "TCOMPL-MF-CO-003", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-MF-EX-003", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TCOMPL-MF-CO-003", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-MF-EX-003", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
-% from sympy import symbols, diff, solve, Eq, simplify
+% from sympy import *
 % x = symbols('x')
-% h = x**3 - 6*x**2 + 9*x
-% hpp = diff(h, x, 2)
-% assert simplify(hpp - (6*x - 12)) == 0
-% assert solve(Eq(hpp, 0), x) == [2]
+% f = (2*x + 1)**5
+% fp = diff(f, x)
+% assert fp == 10*(2*x+1)**4
+% assert fp.subs(x, 0) == 10
+% assert fp.subs(x, Rational(-1,2)) == 0
 % END-VERIFY
 \begin{corrige}{TCOMPL-MF-EX-003}
-\textbf{1.} $h'(x) = 3x^2 - 12x + 9$, donc $h''(x) = 6x - 12$.
 
-\textbf{2.} $h''(x) = 6x-12 = 6(x-2)$. Pour $x<2$, $h''(x)<0$ : $h$ est \textbf{concave} sur $]-\infty,2]$. Pour $x>2$, $h''(x)>0$ : $h$ est \textbf{convexe} sur $[2,+\infty[$.
+On pose $u(x) = 2x+1$. Alors $u'(x) = 2$.
 
-\textbf{3.} $h''$ s'annule en $x=2$ en changeant de signe (négatif avant, positif après) : $h$ admet un \textbf{point d'inflexion} d'abscisse $x=2$.
+\commentaireMarge{Identifier $u(x) = 2x+1$ puis appliquer $(u^n)' = n\,u'\,u^{n-1}$.}
+
+La formule $(u^n)' = n\,u'\,u^{n-1}$ donne :
+\[ f'(x) = 5 \times 2 \times (2x+1)^4 = 10(2x+1)^4. \]
+
+On verifie : $f'(0) = 10$ et $f'\!\left(-\tfrac{1}{2}\right) = 0$.
+
 \end{corrige}

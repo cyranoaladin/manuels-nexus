@@ -1,10 +1,14 @@
-% META: {"id": "TEXP-CAG-EX-001", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "exercice", "capacites": ["TEXP-CAG-C2"], "capacites_codes": ["C2"], "methodes": [], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/exercices/TEXP-CAG-EX-001.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/corriges/TEXP-CAG-CO-001.tex", "status": "generated"}
+% META: {"id": "TEXP-CAG-EX-001", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "exercice", "capacites": ["TEXP-CAG-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/exercices/TEXP-CAG-EX-001.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/corriges/TEXP-CAG-CO-001.tex", "status": "approved"}
 % BEGIN-VERIFY
-% from sympy import I, symbols, Eq, solve
-% z = symbols('z')
-% sol = solve(Eq((1-I)*z, 4+2*I), z)
-% assert sol == [1 + 3*I]
+% from sympy import *
+% x = symbols('x')
+% f = exp(3*x**2 + 1)
+% fp = diff(f, x)
+% assert fp == 6*x*exp(3*x**2 + 1)
+% assert fp.subs(x, 0) == 0
 % END-VERIFY
-\begin{exercice}{TEXP-CAG-EX-001}{1}{10}
-Résoudre l'équation $(1-i)z = 4+2i$, en donnant le résultat sous forme algébrique.
+\begin{exercice}{TEXP-CAG-EX-001}{1}{8}
+Calculer la derivee de la fonction $f$ definie sur $\mathbb{R}$ par :
+\[ f(x) = \mathrm{e}^{3x^2 + 1}. \]
+
 \end{exercice}

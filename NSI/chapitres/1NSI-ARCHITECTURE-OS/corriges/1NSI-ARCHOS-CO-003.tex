@@ -1,16 +1,60 @@
-% META: {"id": "1NSI-ARCHOS-CO-003", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "corrige", "exercice_ref": "1NSI-ARCHOS-EX-003", "capacites": ["P-ARCH-03A"], "sources_inspiration": [], "status": "manual_review"}
-\begin{corrige}{1NSI-ARCHOS-EX-003}
-\textbf{1.} Non, un processeur monoprocesseur n'exécute qu'\textbf{une seule} instruction à
-la fois. C'est la \textbf{gestion des processus} du système d'exploitation qui partage très
-rapidement le temps processeur entre les différents programmes (chacun reçoit un court
-intervalle de temps à tour de rôle), donnant l'\textbf{illusion} d'une exécution simultanée.
+% META: {"id": "1NSI-ARCHOS-CO-003", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "correction", "exercice_ref": "1NSI-ARCHOS-EX-002", "capacites": ["1NSI-ARCHITECTURE-OS-C1"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C1"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-003.tex"}
+% BEGIN-VERIFY
+% def executer(programme, memoire):
+%     registres = {}
+%     for instruction in programme:
+%         op = instruction[0]
+%         if op == "LOAD":
+%             _, reg, adresse = instruction
+%             registres[reg] = memoire[adresse]
+%         elif op == "SUB":
+%             _, reg_dest, reg_src = instruction
+%             registres[reg_dest] = registres[reg_dest] - registres[reg_src]
+%         elif op == "STORE":
+%             _, reg, adresse = instruction
+%             memoire[adresse] = registres[reg]
+%         elif op == "HALT":
+%             break
+%     return memoire, registres
+% memoire = [10, 4, 0]
+% programme = [
+%     ("LOAD", "R0", 0),
+%     ("LOAD", "R1", 1),
+%     ("SUB", "R0", "R1"),
+%     ("STORE", "R0", 2),
+%     ("HALT",),
+% ]
+% memoire_finale, registres = executer(programme, memoire)
+% assert memoire_finale == [10, 4, 6]
+% END-VERIFY
+\begin{corrige}{1NSI-ARCHOS-EX-002}
+\textbf{1.}
+\begin{python}
+def executer(programme, memoire):
+    registres = {}
+    for instruction in programme:
+        op = instruction[0]
+        if op == "LOAD":
+            _, reg, adresse = instruction
+            registres[reg] = memoire[adresse]
+        elif op == "SUB":
+            _, reg_dest, reg_src = instruction
+            registres[reg_dest] = registres[reg_dest] - registres[reg_src]
+        elif op == "STORE":
+            _, reg, adresse = instruction
+            memoire[adresse] = registres[reg]
+        elif op == "HALT":
+            break
+    return memoire, registres
+\end{python}
 
-\textbf{2.} C'est la \textbf{gestion des droits} (permissions d'accès aux fichiers) qui est
-concernée : elle permet d'autoriser le lecteur de musique à écrire son propre fichier de log
-tout en lui refusant l'accès aux fichiers personnels d'un autre programme ou utilisateur.
+\textbf{2.} Déroulé :
+\begin{itemize}
+  \item Après \lstinline{("LOAD", "R0", 0)} : \lstinline|registres = {"R0": 10}|
+  \item Après \lstinline{("LOAD", "R1", 1)} : \lstinline|registres = {"R0": 10, "R1": 4}|
+  \item Après \lstinline{("SUB", "R0", "R1")} : \lstinline|registres = {"R0": 6, "R1": 4}|
+  \item Après \lstinline{("STORE", "R0", 2)} : \lstinline{memoire = [10, 4, 6]}
+\end{itemize}
 
-\textbf{3.} Système libre signifie que le \textbf{code source} de Linux est mis à
-disposition de tous : n'importe qui peut le consulter, le modifier et le redistribuer
-librement. Un système propriétaire (comme Windows) ne diffuse pas son code source ; seul
-l'éditeur peut le modifier.
+\textbf{3.} L'exécution confirme : \lstinline{memoire_finale = [10, 4, 6]}.
 \end{corrige}

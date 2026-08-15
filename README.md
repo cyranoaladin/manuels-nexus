@@ -369,17 +369,16 @@ colonne « réserve locale » rend visibles les lacunes du registre actuel.
 |---|---|---|---|---|
 | `1SPE` | Programme de spécialité mathématiques de Première | [`MENE2602917A`](https://www.education.gouv.fr/bo/2026/Hebdo14/MENE2602917A) | Rentrée 2026 | Source texte déposée et empreintée |
 | Épreuve anticipée 1SPE | Modalités à compter de la session 2027 | [`MENE2515469N`](https://www.education.gouv.fr/bo/2025/Hebdo24/MENE2515469N) | Session 2027 | `source_deposee: false` dans le registre |
-| `TSPE_2026_2027` | Programme de spécialité mathématiques de Terminale | [`MENE1921246A`](https://www.education.gouv.fr/bo/19/Special8/MENE1921246A.htm) | Rentrée 2020, encore applicable | Registre local erroné, voir ci-dessous |
+| `TSPE_2026_2027` | Programme de spécialité mathématiques de Terminale | [`MENE1921246A`](https://www.education.gouv.fr/bo/19/Special8/MENE1921246A.htm) | Rentrée 2020, encore applicable | Registre local corrigé |
 | `TCOMPL` | Mathématiques complémentaires | [`MENE1921265A`](https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm) | Rentrée 2020 | Source texte déposée et empreintée |
 | `TEXPERTES` | Mathématiques expertes | [`MENE1921264A`](https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm) | Rentrée 2020 | Source texte déposée et empreintée |
 | `1NSI` | Spécialité NSI de Première | [`MENE1901633A`](https://www.education.gouv.fr/bo/19/Special1/MENE1901633A.htm) | Rentrée 2019 | PDF local présent, mais NOR et URL absents du registre |
 | `TNSI` | Spécialité NSI de Terminale | [`MENE1921247A`](https://www.education.gouv.fr/bo/19/Special8/MENE1921247A.htm) | Rentrée 2020 | Programme déposé ; modalités 2026 non déposées |
 
-Le registre courant attribue encore à TSPE le NOR `MENE1921262A`. Ce NOR
-correspond aux enseignements de spécialité de Terminale **STMG**, pas au
-programme de spécialité mathématiques. C'est un P0 de provenance à corriger
-dans un lot réglementaire séparé ; le présent README ne le masque ni ne modifie
-le registre.
+Le registre courant a été corrigé pour TSPE : la référence officielle est bien
+`MENE1921246A` (programme de spécialité mathématiques). La référence
+`MENE1921262A` ne concerne que la STMG et n'apparaît plus comme source de
+vérité pour le parcours 2026-2027 en mathématiques.
 
 Pour 1NSI, une preuve officielle archivée sous
 [audit/sources/1nsi](audit/sources/1nsi/) confirme `MENE1901633A`, mais l'entrée
@@ -882,8 +881,8 @@ validation des manuels.
    « Géométrie dans l'espace » dépasse d'environ `127.741 pt`.
 3. **Renvois et identifiants.** Le PDF élève 1SPE contient 50 renvois
    provisoires sur 37 pages ; le PDF TSPE en contient 13 sur neuf pages.
-4. **Provenance TSPE.** Le registre porte `MENE1921262A` (STMG) au lieu de
-   `MENE1921246A` (spécialité mathématiques).
+4. **Provenance TSPE.** Corrigé : le registre TSPE référence désormais
+   `MENE1921246A` (spécialité mathématiques) au lieu de `MENE1921262A`.
 
 Le contrôle courant des fuites élèves ne recherche pas encore toutes les
 formulations observées. Le préflight Mathématiques accepte les grands

@@ -1,7 +1,7 @@
 # LOT 6 --- Rapport de production
 **Chapitre :** 1SPE-PROBA-COND
 **Date :** 2026-07-17
-**Statut :** genere
+**Statut :** approuvé
 
 ---
 

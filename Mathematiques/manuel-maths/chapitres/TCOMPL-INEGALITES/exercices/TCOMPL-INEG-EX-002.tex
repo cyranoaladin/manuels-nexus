@@ -1,13 +1,21 @@
-% META: {"id": "TCOMPL-INEG-EX-002", "chapitre": "TCOMPL-INEGALITES", "type_objet": "exercice", "capacites": ["TCOMPL-INEG-C3", "TCOMPL-INEG-C5"], "capacites_codes": ["C3", "C5"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INEGALITES/exercices/TCOMPL-INEG-EX-002.tex", "corrige_tex": "chapitres/TCOMPL-INEGALITES/corriges/TCOMPL-INEG-CO-002.tex", "status": "generated"}
+% META: {"id": "TCOMPL-INEG-EX-002", "chapitre": "TCOMPL-INEGALITES", "type_objet": "exercice", "capacites": ["TCOMPL-INEG-C2"], "capacites_codes": ["C2"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INEGALITES/exercices/TCOMPL-INEG-EX-002.tex", "corrige_tex": "chapitres/TCOMPL-INEGALITES/corriges/TCOMPL-INEG-CO-002.tex", "status": "approved"}
 % BEGIN-VERIFY
-% from sympy import symbols, integrate, Rational
+% from sympy import *
 % x = symbols('x')
-% L = (2*x**2 + x) / 3
-% I = integrate(L, (x, 0, 1))
-% assert I == Rational(7, 18)
-% G = 1 - 2*I
-% assert G == Rational(2, 9)
+% u = x**2 + 3*x + 2
+% du = diff(u, x)
+% f = ln(u)
+% fp = diff(f, x)
+% assert simplify(fp) == (2*x + 3)/(x**2 + 3*x + 2)
+% # domaine: u > 0, i.e. x < -2 ou x > -1
+% assert u.subs(x, 0) == 2
+% assert u.subs(x, -3) == 2
 % END-VERIFY
-\begin{exercice}{TCOMPL-INEG-EX-002}{2}{15}
-On reprend le modèle $L(x) = \dfrac{2x^2+x}{3}$ de l'exercice précédent. Calculer l'indice de Gini associé à ce modèle.
+\begin{exercice}{TCOMPL-INEG-EX-002}{1}{10}
+Soit $f$ la fonction definie par $f(x) = \ln(x^2 + 3x + 2)$.
+\begin{enumerate}
+  \item Determiner l'ensemble de definition de $f$.
+  \item Calculer $f'(x)$.
+\end{enumerate}
+
 \end{exercice}
