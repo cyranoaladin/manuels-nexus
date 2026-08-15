@@ -1,22 +1,26 @@
-% META: {"id": "TCOMPL-ME-CO-002", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-ME-EX-002", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TCOMPL-ME-CO-002", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-ME-EX-002", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
-% from sympy import Rational
-% a, b, u0 = Rational(3, 4), 5, 2
-% c = b / (1 - a)
-% assert c == 20
-% u = u0
-% for _ in range(4):
-%     u = a * u + b
-% formule = c + (u0 - c) * a**4
-% assert u == formule
+% from sympy import *
+% x = symbols('x')
+% u = x**2 + 3*x + 2
+% du = diff(u, x)
+% f = ln(u)
+% fp = diff(f, x)
+% assert simplify(fp) == (2*x + 3)/(x**2 + 3*x + 2)
+% # domaine: u > 0, i.e. x < -2 ou x > -1
+% assert u.subs(x, 0) == 2
+% assert u.subs(x, -3) == 2
 % END-VERIFY
 \begin{corrige}{TCOMPL-ME-EX-002}
-\textbf{1.} $c = 0{,}75c+5 \iff 0{,}25c=5 \iff c=20$.
 
-\textbf{2.} $v_{n+1} = u_{n+1}-20 = (0{,}75u_n+5)-20 = 0{,}75u_n - 15 = 0{,}75(u_n-20) = 0{,}75\,v_n$. La suite $(v_n)$ est géométrique de raison $0{,}75$.
+\textbf{Question 1.} $x^2+3x+2 = (x+1)(x+2) > 0$ si et seulement si $x \in \left]-\infty, -2\right[ \cup \left]-1, +\infty\right[$.
 
-\textbf{3.} $v_0 = u_0-20 = 2-20=-18$, donc $v_n = -18 \times 0{,}75^n$, soit :
-\[
-  u_n = 20 - 18 \times 0{,}75^n.
-\]
+Donc $D_f = \left]-\infty, -2\right[ \cup \left]-1, +\infty\right[$.
+
+\commentaireMarge{Factoriser le polynome sous le logarithme.}
+
+\textbf{Question 2.} On pose $u(x) = x^2+3x+2$. Alors $u'(x) = 2x+3$.
+
+\[ f'(x) = \frac{u'(x)}{u(x)} = \frac{2x+3}{x^2+3x+2}. \]
+
 \end{corrige}

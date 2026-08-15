@@ -1,19 +1,21 @@
-% META: {"id": "TCOMPL-LOG-CO-001", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "corrige", "exercice_ref": "TCOMPL-LOG-EX-001", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TCOMPL-LOG-CO-001", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "corrige", "exercice_ref": "TCOMPL-LOG-EX-001", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "approved"}
 % BEGIN-VERIFY
-% from sympy import ln, simplify, Rational
-% A = ln(12) - ln(3) - ln(2)
-% assert simplify(A - ln(2)) == 0
-% B = ln(Rational(1,5)) + ln(5)
-% assert simplify(B) == 0
+% from sympy import *
+% x = symbols('x')
+% f = exp(3*x**2 + 1)
+% fp = diff(f, x)
+% assert fp == 6*x*exp(3*x**2 + 1)
+% assert fp.subs(x, 0) == 0
 % END-VERIFY
 \begin{corrige}{TCOMPL-LOG-EX-001}
-\textbf{1.} On regroupe les deux termes soustraits : $\ln(3)+\ln(2) = \ln(3\times2) = \ln(6)$. Donc :
-\[
-  A = \ln(12) - \ln(6) = \ln\!\left(\frac{12}{6}\right) = \ln(2).
-\]
 
-\textbf{2.} $\ln\!\left(\dfrac{1}{5}\right) = -\ln(5)$ (propriété de l'inverse), donc :
-\[
-  B = -\ln(5) + \ln(5) = 0.
-\]
+\commentaireMarge{Poser $u(x) = 3x^2+1$ et $v(t)=\mathrm{e}^t$.}
+
+On pose $u(x) = 3x^2 + 1$ et $v(t) = \mathrm{e}^t$. Alors $u'(x) = 6x$ et $v'(t) = \mathrm{e}^t$.
+
+La formule $(v \circ u)' = u' \times (v' \circ u)$ donne :
+\[ f'(x) = 6x\, \mathrm{e}^{3x^2 + 1}. \]
+
+En particulier $f'(0) = 0$ et $f'(1) = 6\mathrm{e}^4$.
+
 \end{corrige}

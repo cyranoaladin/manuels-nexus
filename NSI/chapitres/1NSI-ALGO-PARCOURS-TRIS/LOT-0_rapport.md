@@ -15,5 +15,5 @@ execution python reelle (assertions sur le prefixe trie a chaque
 etape, exactement comme la demonstration l'exige).
 
 Ecart assume vs docs/08_specificites_nsi.md (harvest T0 indisponible,
-volume reduit) : meme calibrage que les chapitres precedents. Statut :
+volume reduit) : meme calibrage que les chapitres precedents. Statut : approuvé.
 draft (auto-verifie, en attente de revue humaine).

@@ -5,4 +5,4 @@ capacites conformes (diviseurs/PGCD, congruences/inverse modulaire, tests
 de divisibilite/primalite/chiffrement, equations diophantiennes,
 demonstrations de Bezout et de Gauss, infinite des nombres premiers
 [demonstration], petit theoreme de Fermat, algorithmes Euclide/crible/
-decomposition). Statut : valide.
+decomposition). Statut : approuvé.

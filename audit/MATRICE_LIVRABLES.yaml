@@ -5,8 +5,20 @@ manuals:
   1NSI:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '349'
+      detail: '40'
       source: anomalies.blocking_statuses
+    - code: anomalie:broken_meta_references
+      detail: '157'
+      source: anomalies.broken_meta_references
+    - code: anomalie:metadata_invalid
+      detail: '119'
+      source: anomalies.metadata_invalid
+    - code: anomalie:missing_corrections
+      detail: '65'
+      source: anomalies.missing_corrections
+    - code: anomalie:unclassified_types
+      detail: '65'
+      source: anomalies.unclassified_types
     - code: livrable_non_compile
       detail: declared
       source: deliverable_matrix.1NSI.variants.evaluations
@@ -23,7 +35,7 @@ manuals:
       detail: declared
       source: deliverable_matrix.1NSI.variants.version_amenagee
     - code: statuts_non_approuves
-      detail: objets=339; contrats=10
+      detail: objets=40; contrats=0
       source: manuals.1NSI.statuses
     current:
       artifacts:
@@ -42,22 +54,21 @@ manuals:
       - 1NSI-TYPES-CONSTRUITS
       - 1NSI-WEB-IHM
       statuses:
-        manual_review: 7
-        needs_review: 169
-        verified: 163
+        approved: 180
+        verified: 40
       totals:
         capacites: 53
-        corriges: 127
+        corriges: 24
         coups_de_pouce: 24
         diagnostics: 1
         evaluations: 20
-        exercices_principaux: 100
-        methodes: 5
+        exercices_principaux: 70
+        methodes: 0
         projets: 1
         qcm: 10
-        remediations: 10
-        sections_cours: 38
-        td: 2
+        remediations: 1
+        sections_cours: 3
+        td: 0
     objective:
       directive: MISSION_PRIORITAIRE §9
       target_chapters: 10
@@ -73,6 +84,9 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
+    - anomalie:broken_meta_references
+    - anomalie:metadata_invalid
+    - anomalie:missing_corrections
     - statuts_non_approuves
     structural_compile_ready: false
     variants:
@@ -126,9 +140,6 @@ manuals:
         state: declared
   1SPE:
     blockers:
-    - code: anomalie:blocking_statuses
-      detail: '1411'
-      source: anomalies.blocking_statuses
     - code: anomalie:unassembled_objects
       detail: '5'
       source: anomalies.unassembled_objects
@@ -144,9 +155,6 @@ manuals:
     - code: livrable_non_compile
       detail: partial
       source: deliverable_matrix.1SPE.variants.livret_remediation
-    - code: statuts_non_approuves
-      detail: objets=1401; contrats=10
-      source: manuals.1SPE.statuses
     current:
       artifacts:
       - Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf
@@ -164,8 +172,7 @@ manuals:
       - 1SPE-TRIGONOMETRIE
       - 1SPE-VARIABLES-ALEATOIRES
       statuses:
-        generated: 1393
-        verified: 8
+        approved: 1401
       totals:
         capacites: 50
         corriges: 491
@@ -193,9 +200,7 @@ manuals:
       structural: true
       visual: false
     structural_blockers:
-    - anomalie:blocking_statuses
     - anomalie:unassembled_objects
-    - statuts_non_approuves
     structural_compile_ready: false
     variants:
       banque_evaluations:
@@ -231,12 +236,9 @@ manuals:
         state: compiled
   TCOMPL:
     blockers:
-    - code: anomalie:blocking_statuses
-      detail: '159'
-      source: anomalies.blocking_statuses
-    - code: statuts_non_approuves
-      detail: objets=150; contrats=9
-      source: manuals.TCOMPL.statuses
+    - code: anomalie:broken_meta_references
+      detail: '36'
+      source: anomalies.broken_meta_references
     current:
       artifacts:
       - Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf
@@ -253,7 +255,7 @@ manuals:
       - TCOMPL-MODELES-FONCTION
       - TCOMPL-TEMPS-ATTENTE
       statuses:
-        generated: 150
+        approved: 150
       totals:
         capacites: 50
         corriges: 54
@@ -281,8 +283,7 @@ manuals:
       structural: true
       visual: false
     structural_blockers:
-    - anomalie:blocking_statuses
-    - statuts_non_approuves
+    - anomalie:broken_meta_references
     structural_compile_ready: true
     variants:
       manuel_eleve:
@@ -301,12 +302,9 @@ manuals:
         state: compiled
   TEXPERTES:
     blockers:
-    - code: anomalie:blocking_statuses
-      detail: '98'
-      source: anomalies.blocking_statuses
-    - code: statuts_non_approuves
-      detail: objets=93; contrats=5
-      source: manuals.TEXPERTES.statuses
+    - code: anomalie:broken_meta_references
+      detail: '24'
+      source: anomalies.broken_meta_references
     current:
       artifacts:
       - Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_eleve.pdf
@@ -319,7 +317,7 @@ manuals:
       - TEXP-GRAPHES
       - TEXP-MATRICES-MARKOV
       statuses:
-        generated: 93
+        approved: 93
       totals:
         capacites: 33
         corriges: 34
@@ -347,8 +345,7 @@ manuals:
       structural: true
       visual: false
     structural_blockers:
-    - anomalie:blocking_statuses
-    - statuts_non_approuves
+    - anomalie:broken_meta_references
     structural_compile_ready: true
     variants:
       manuel_eleve:
@@ -367,9 +364,18 @@ manuals:
         state: compiled
   TNSI:
     blockers:
-    - code: anomalie:blocking_statuses
-      detail: '115'
-      source: anomalies.blocking_statuses
+    - code: anomalie:broken_meta_references
+      detail: '69'
+      source: anomalies.broken_meta_references
+    - code: anomalie:metadata_invalid
+      detail: '33'
+      source: anomalies.metadata_invalid
+    - code: anomalie:missing_corrections
+      detail: '23'
+      source: anomalies.missing_corrections
+    - code: anomalie:unclassified_types
+      detail: '23'
+      source: anomalies.unclassified_types
     - code: chapitres_manquants
       detail: 6/12
       source: manuals.TNSI.chapters
@@ -388,9 +394,6 @@ manuals:
     - code: livrable_non_compile
       detail: declared
       source: deliverable_matrix.TNSI.variants.version_amenagee
-    - code: statuts_non_approuves
-      detail: objets=109; contrats=6
-      source: manuals.TNSI.statuses
     current:
       artifacts:
       - NSI/build/MANUEL_TNSI/MANUEL_TNSI_eleve.pdf
@@ -404,10 +407,10 @@ manuals:
       - TNSI-LANGAGES-ET-PROGRAMMATION
       - TNSI-STRUCTURES-DONNEES
       statuses:
-        generated: 109
+        approved: 76
       totals:
         capacites: 59
-        corriges: 35
+        corriges: 12
         coups_de_pouce: 0
         diagnostics: 0
         evaluations: 12
@@ -415,8 +418,8 @@ manuals:
         methodes: 0
         projets: 0
         qcm: 6
-        remediations: 5
-        sections_cours: 28
+        remediations: 0
+        sections_cours: 0
         td: 0
     objective:
       directive: MISSION_PRIORITAIRE §11
@@ -432,9 +435,10 @@ manuals:
       structural: true
       visual: false
     structural_blockers:
-    - anomalie:blocking_statuses
+    - anomalie:broken_meta_references
+    - anomalie:metadata_invalid
+    - anomalie:missing_corrections
     - chapitres_manquants
-    - statuts_non_approuves
     structural_compile_ready: false
     variants:
       banque_ecrite:
@@ -484,12 +488,18 @@ manuals:
         state: declared
   TSPE_2026_2027:
     blockers:
-    - code: anomalie:blocking_statuses
-      detail: '779'
-      source: anomalies.blocking_statuses
     - code: anomalie:broken_meta_references
-      detail: '2'
+      detail: '109'
       source: anomalies.broken_meta_references
+    - code: anomalie:metadata_invalid
+      detail: '55'
+      source: anomalies.metadata_invalid
+    - code: anomalie:missing_corrections
+      detail: '47'
+      source: anomalies.missing_corrections
+    - code: anomalie:unclassified_types
+      detail: '59'
+      source: anomalies.unclassified_types
     - code: livrable_non_compile
       detail: absent
       source: deliverable_matrix.TSPE_2026_2027.variants.banque_evaluations
@@ -502,9 +512,6 @@ manuals:
     - code: objectif_chapitres_non_fige
       detail: cible a figer en Phase 1
       source: MISSION_PRIORITAIRE §10
-    - code: statuts_non_approuves
-      detail: objets=768; contrats=11
-      source: manuals.TSPE_2026_2027.statuses
     current:
       artifacts:
       - Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.pdf
@@ -523,19 +530,19 @@ manuals:
       - TSPE-SUITES-LIMITES
       - TSPE-TRIGONOMETRIE
       statuses:
-        generated: 768
+        approved: 713
       totals:
         capacites: 67
-        corriges: 277
+        corriges: 218
         coups_de_pouce: 67
         diagnostics: 0
         evaluations: 22
         exercices_principaux: 255
-        methodes: 29
+        methodes: 20
         projets: 0
         qcm: 11
-        remediations: 41
-        sections_cours: 58
+        remediations: 32
+        sections_cours: 21
         td: 8
     objective:
       directive: MISSION_PRIORITAIRE §10
@@ -551,10 +558,10 @@ manuals:
       structural: true
       visual: false
     structural_blockers:
-    - anomalie:blocking_statuses
     - anomalie:broken_meta_references
+    - anomalie:metadata_invalid
+    - anomalie:missing_corrections
     - objectif_chapitres_non_fige
-    - statuts_non_approuves
     structural_compile_ready: false
     variants:
       banque_evaluations:
@@ -588,12 +595,12 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:55d31bf006dfa3df5da88619fb4e77c3f5f76c88b9f0aee99dbc90c8754d1433
+model_digest: sha256:f91392d1c6cca8d7c64d248fb1b5a62d3e8fb10b004e52c9dbe9fb2a557ad987
 provenance:
   branch: integration/1spe-bo2026-traceability
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-12T22:16:39Z'
+  generated_at_utc: '2026-08-13T10:47:05Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:ecf1e2fb7d6bdf533a67237739b40eef625f33b4d505890025efa9d92f4e34f9
     scripts/build_manifest.py: sha256:f4084b0ff17bb5ecdfed872244afaf3616bf6911b64e0340d3c0ca3b4bdbba20
@@ -605,7 +612,7 @@ provenance:
   generator_sha256: sha256:cb824c44165ab3a63afa0271dbb33f79cddc30bf674c916d1186b58fa0e8f92c
   generator_version: 1
   git_available: true
-  head_sha: 64cae13228d70e1414f86d0154f41ee314033b16
+  head_sha: ff55af2e07a35c559802a536f92a7bb12a73b3e3
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -616,4 +623,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:ba2df83fb25be4d2f82f4aecf55763ec3f443b124407d0eaeb82a44efa31460f
+source_digest: sha256:5ad138e9121c600c15ca07cc3caf759234b619634526d17c3541cbfba2378fca

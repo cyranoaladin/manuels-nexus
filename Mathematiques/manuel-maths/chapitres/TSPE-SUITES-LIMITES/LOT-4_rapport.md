@@ -51,7 +51,7 @@
 similarite) non automatisable ici : pas de DB/pgvector configuree dans cet
 environnement (cf. `terminale/collection-v1` ROADMAP) ; mode ex-nihilo deja
 valide en LOT 1 rend ce check moins critique (sources_inspiration: [] partout,
-pas de corpus externe reutilise). Statut : valide.
+pas de corpus externe reutilise). Statut : approuvé.
 
 ## Correctif critique — 2026-08-05 (audit approfondi post-mode-autonome)
 

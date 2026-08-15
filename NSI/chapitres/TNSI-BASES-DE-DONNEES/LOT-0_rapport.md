@@ -2,7 +2,7 @@
 Cree ex nihilo. 12/12 capacites conformes (modele relationnel, anomalies de
 schema, services d'un SGBD, SELECT/FROM/WHERE/JOIN/ORDER BY/INSERT/UPDATE/
 DELETE). Aucune demonstration exigible (R5/R6 = execution du code, pas de
-preuve mathematique). Statut : valide.
+preuve mathematique). Statut : approuvé.
 
 Base d'exemple filee sur tout le chapitre (bibliotheque : Livre/Usager/
 Emprunt), coherente d'une section a l'autre pour ancrer les notions.

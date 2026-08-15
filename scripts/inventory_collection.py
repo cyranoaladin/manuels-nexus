@@ -3529,10 +3529,13 @@ COUNT_KEYS: tuple[str, ...] = (
 )
 
 TYPE_CATEGORIES: dict[str, str] = {
+    "algorithme": "sections_cours",
     "cours": "sections_cours",
+    "correction": "corriges",
     "methode": "methodes",
     "exercice": "exercices_principaux",
     "corrige": "corriges",
+    "experimentation": "sections_cours",
     "corrige_evaluation": "corriges",
     "evaluation_corrige": "corriges",
     "coup_de_pouce": "coups_de_pouce",

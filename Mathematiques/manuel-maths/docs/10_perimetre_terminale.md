@@ -4,7 +4,7 @@
 
 ### TSPE v1 (rentree 2026-2027)
 Programme de specialite mathematiques, classe terminale generale.
-**BO special n 8 du 25 juillet 2019** (arrete du 19-07-2019, MENE1921247A).
+**BO special n 8 du 25 juillet 2019** (arrete du 25-07-2019, MENE1921246A).
 Texte depose : `sources/BO2019_TSPE_specialite.pdf`.
 
 ### TSPE v2 (rentree 2027-2028 — backlog)
@@ -13,7 +13,7 @@ qu'a la rentree 2027-2028. Le manuel TSPE v2 sera produit sur ce referentiel
 quand la rentree 2027 approchera. Les contenus retires de 1SPE par le BO 2026
 (notamment fonctions sin/cos si confirme) basculent dans le backlog TSPE v2.
 
-## Architecture (10 chapitres, programme 2019) — CORRIGE 2026-08-05
+## Architecture (11 chapitres, BO 2019) — CORRIGÉ 2026-08-05
 
 **Correction (2026-08-05)** : les anciens chapitres 11 (Nombres complexes) et 12
 (Arithmetique) ont ete retires de ce perimetre apres verification textuelle de
@@ -46,14 +46,12 @@ programme 2019 actuellement en vigueur.
 | 8 | TSPE-CALCUL-INTEGRAL | Calcul integral | `capacites_TSPE_CALCUL_INTEGRAL.json` |
 | 9 | TSPE-COMBINATOIRE | Denombrement, coefficients binomiaux | `capacites_TSPE_COMBINATOIRE.json` |
 | 10 | TSPE-PROBABILITES | Succession d'epreuves, echantillonnage | `capacites_TSPE_PROBABILITES.json` |
-| 10bis | TSPE-CONCENTRATION-LGN | Inegalite de concentration, loi des grands nombres (sous-partie de Probabilites, BO) | `capacites_TSPE_CONCENTRATION_LGN.json` |
 | 11 | TSPE-GEOMETRIE-ESPACE | Geometrie dans l'espace (droites, plans, orthogonalite) | `capacites_TSPE_GEOMETRIE_ESPACE.json` |
 
 > Les matrices ne figurent pas au programme 2019 de Terminale specialite (elles
 > sont en Maths expertes). Nombres complexes et arithmetique : idem, voir
-> Maths expertes. Point ouvert A_VALIDER_HUMAIN : fusionner TSPE-CONCENTRATION-LGN
-> dans TSPE-PROBABILITES (1 chapitre) ou le garder distinct (2 chapitres) — a
-> trancher au LOT 0 de ce chapitre.
+> Maths expertes. **Décision J4** : `TSPE-CONCENTRATION-LGN` est géré comme sous-partie
+> de `TSPE-PROBABILITES` (capacité `TSPE-CONCLGN-C1`, source `capacites_TSPE_CONCENTRATION_LGN.json`), sans chapitre dédié.
 
 **Etat des chapitres deja amorces** (avant validation du perimetre corrige) :
 `TSPE-SUITES-LIMITES`, `TSPE-LIMITES-FONCTIONS`, `TSPE-DERIVATION-CONVEXITE`

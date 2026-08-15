@@ -1,15 +1,14 @@
-% META: {"id": "TCOMPL-LOG-EX-003", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "exercice", "capacites": ["TCOMPL-LOG-C3"], "capacites_codes": ["C3"], "methodes": [], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/exercices/TCOMPL-LOG-EX-003.tex", "corrige_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/corriges/TCOMPL-LOG-CO-003.tex", "status": "generated"}
+% META: {"id": "TCOMPL-LOG-EX-003", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "exercice", "capacites": ["TCOMPL-LOG-C3"], "capacites_codes": ["C3"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/exercices/TCOMPL-LOG-EX-003.tex", "corrige_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/corriges/TCOMPL-LOG-CO-003.tex", "status": "approved"}
 % BEGIN-VERIFY
-% import math
-% n_reel = math.log(50/500) / math.log(0.9)
-% assert 21 < n_reel < 22
-% assert 500 * 0.9**21 > 50
-% assert 500 * 0.9**22 < 50
+% from sympy import *
+% x = symbols('x')
+% f = (2*x + 1)**5
+% fp = diff(f, x)
+% assert fp == 10*(2*x+1)**4
+% assert fp.subs(x, 0) == 10
+% assert fp.subs(x, Rational(-1,2)) == 0
 % END-VERIFY
-\begin{exercice}{TCOMPL-LOG-EX-003}{2}{15}
-Un médicament est éliminé de l'organisme à raison de $10\%$ par heure : la quantité restante après $n$ heures est $u_n = 500 \times 0{,}9^n$ (en mg). À partir de quel rang $n$ la quantité restante devient-elle inférieure à $50$ mg ?
-\begin{enumerate}
-  \item Poser l'inéquation $u_n < 50$ et la transformer à l'aide du logarithme (attention au sens de l'inégalité).
-  \item Résoudre et conclure.
-\end{enumerate}
+\begin{exercice}{TCOMPL-LOG-EX-003}{1}{8}
+Calculer la derivee de $f(x) = (2x + 1)^5$ sur $\mathbb{R}$.
+
 \end{exercice}

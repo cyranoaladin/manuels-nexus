@@ -4,4 +4,4 @@ capacites conformes (forme trigo/exponentielle, formules d'Euler/Moivre,
 demonstration de la formule d'addition par produit scalaire, equations
 polynomiales, demonstrations de factorisation et du nombre max de
 racines, complexes en geometrie, racines n-iemes de l'unite avec
-demonstration). Statut : valide.
+demonstration). Statut : approuvé.

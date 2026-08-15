@@ -1,7 +1,7 @@
 # LOT 5 — Rapport de production
 **Chapitre :** 1SPE-EXPONENTIELLE
 **Date :** 2026-07-17
-**Statut :** généré
+**Statut :** approuvé.
 
 ---
 

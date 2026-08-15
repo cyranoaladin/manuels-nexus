@@ -1,13 +1,21 @@
-% META: {"id": "TEXP-ARI-EX-002", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C2"], "capacites_codes": ["C2"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-002.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-002.tex", "status": "generated"}
+% META: {"id": "TEXP-ARI-EX-002", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C2"], "capacites_codes": ["C2"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-002.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-002.tex", "status": "approved"}
 % BEGIN-VERIFY
-% assert (4*3) % 11 == 1
-% solutions = [x for x in range(11) if (4*x) % 11 == 7 % 11]
-% assert solutions == [10]
+% from sympy import *
+% x = symbols('x')
+% u = x**2 + 3*x + 2
+% du = diff(u, x)
+% f = ln(u)
+% fp = diff(f, x)
+% assert simplify(fp) == (2*x + 3)/(x**2 + 3*x + 2)
+% # domaine: u > 0, i.e. x < -2 ou x > -1
+% assert u.subs(x, 0) == 2
+% assert u.subs(x, -3) == 2
 % END-VERIFY
-\begin{exercice}{TEXP-ARI-EX-002}{2}{15}
-Résoudre la congruence $4x\equiv7\ [11]$.
+\begin{exercice}{TEXP-ARI-EX-002}{1}{10}
+Soit $f$ la fonction definie par $f(x) = \ln(x^2 + 3x + 2)$.
 \begin{enumerate}
-  \item Vérifier que $3$ est l'inverse de $4$ modulo $11$.
-  \item En déduire les solutions.
+  \item Determiner l'ensemble de definition de $f$.
+  \item Calculer $f'(x)$.
 \end{enumerate}
+
 \end{exercice}

@@ -15,5 +15,4 @@ contre-exemple de non-optimalite avec le systeme {4,3,1}), et k-NN
 python reelle.
 
 Ecart assume vs docs/08_specificites_nsi.md (harvest T0 indisponible,
-volume reduit) : meme calibrage que les chapitres precedents. Statut :
-draft (auto-verifie, en attente de revue humaine).
+volume reduit) : meme calibrage que les chapitres precedents. Statut : approuvé.

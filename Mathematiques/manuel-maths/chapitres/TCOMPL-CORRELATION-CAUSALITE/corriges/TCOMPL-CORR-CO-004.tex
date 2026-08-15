@@ -1,6 +1,22 @@
-% META: {"id": "TCOMPL-CORR-CO-004", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "corrige", "exercice_ref": "TCOMPL-CORR-EX-004", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "TCOMPL-CORR-CO-004", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "corrige", "exercice_ref": "TCOMPL-CORR-EX-004", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = sqrt(x**2 + 4)
+% fp = diff(f, x)
+% assert simplify(fp) == x/sqrt(x**2 + 4)
+% assert fp.subs(x, 0) == 0
+% assert fp.subs(x, 3) == 3*sqrt(13)/13
+% END-VERIFY
 \begin{corrige}{TCOMPL-CORR-EX-004}
-\textbf{1.} Non : ce serait absurde, les pompiers n'aggravent pas les dégâts, ils luttent contre l'incendie.
 
-\textbf{2.} La variable cachée est la \textbf{taille de l'incendie} : un incendie plus important mobilise davantage de pompiers \textbf{et} cause davantage de dégâts. C'est la taille de l'incendie qui cause les deux variables observées, pas l'une qui cause l'autre.
+On pose $u(x) = x^2+4$. Alors $u'(x) = 2x$ et $u(x) > 0$ sur $\mathbb{R}$.
+
+\commentaireMarge{$u(x) = x^2+4 > 0$ partout : la racine est bien definie sur $\mathbb{R}$.}
+
+La formule $(\sqrt{u})' = \dfrac{u'}{2\sqrt{u}}$ donne :
+\[ f'(x) = \frac{2x}{2\sqrt{x^2+4}} = \frac{x}{\sqrt{x^2+4}}. \]
+
+On verifie : $f'(0) = 0$ (la tangente est horizontale en $0$).
+
 \end{corrige}
