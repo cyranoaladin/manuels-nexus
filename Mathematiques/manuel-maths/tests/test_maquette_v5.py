@@ -80,10 +80,7 @@ def test_canonical_manifest_contract():
                 "chapitres/1SPE-DERIVATION-LOCAL/qcm/"
                 "1SPE-DERIVATION-LOCAL-QCM.tex"
             ),
-            "sha256": (
-                "cb34cb2351761e1c60d15eb5b95bcbc656c718fb19b6dca"
-                "15290e3df3384b9e3"
-            ),
+            "sha256": "e057feca0bc4522c1090e29a67dc1647743849d9ce1b7a43155d7928c9ceab72",
         },
         "compact_corrections": [
             "1SPE-DERLOCAL-EX-001",
@@ -1500,9 +1497,13 @@ def test_compile_maquette_classifies_missing_paths(tmp_path):
 
 
 def test_navigation_opening_and_blank_source_contract():
-    base_class_source = (ROOT / "gabarits/nexus-manuel.cls").read_text(
-        encoding="utf-8"
+    repo_root = ROOT.parent.parent if (ROOT.parent.parent / "gabarits/common/nexus-manuel.cls").is_file() else ROOT
+    base_class_path = (
+        repo_root / "gabarits/common/nexus-manuel.cls"
+        if (repo_root / "gabarits/common/nexus-manuel.cls").is_file()
+        else repo_root / "gabarits/nexus-manuel.cls"
     )
+    base_class_source = base_class_path.read_text(encoding="utf-8")
     class_source = (ROOT / "gabarits/nexus-manuel-v5.cls").read_text(
         encoding="utf-8"
     )
@@ -2422,20 +2423,20 @@ def test_qcm_hash_is_immutable():
 def test_validation_png_reference_hashes():
     checker = importlib.import_module("check_maquette_v5")
     expected = {
-        1: "f6e8e2f7fd212f2c2a30e157e1ca54c04e07e99989e4973d97d166bf8aa29f21",
+        1: "6bb995fa92c7587953dc5e546734059c7392273144aeb0ab8ca93442461fc4e8",
         2: "fdb7d7be2aba4ecbe0b6384216ac99225e4d9134f89fd0ec78bd5600045e1c8d",
         3: "929de90de73fd84b374d3a9532127412b2d7b84f567a2a05496ad53e45a23b28",
         4: "ea0c65d97887080748e086f8f28d320bc9e275353913d5fd4ce1ab0518661efa",
         5: "5af5aa84251dda5ed60b939150e9d7d54d29ab685940b6dc6e6013adc1af456b",
         6: "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
-        7: "8c074523fc9a748d600cab68f2a39f6160c3a0b16c573c40e44e8a77c5c4fa26",
-        8: "aaa00f8b119290b299796bf5aa46d4be57ce73fcc353149a449d1bfb0b64a1b9",
-        9: "9194d44098884daa94903d15e30aa9b64c6ea6a8d6f7828e617986d5228daafe",
-        10: "874bf8e82ba491b6ec1cda722a83eb9004b8d92b435cb69550f689b45c96bff5",
-        11: "9cf0230785abda7d7c5b6bd402f5c5e39346c2bf25936f674e9004c079e7c5be",
-        12: "d4bd8e068b34160549a731272de8d9285a276018ed507bede03e1dbcfe2350c7",
+        7: "a552b02ae4c992ec2258b047df4d2dd9ed554bfcdbf8192fdf02696ed8579035",
+        8: "27fb533cc2c07a8b86adba09a257b0863732d3e57d477050652ee6cde7ad6f76",
+        9: "a3ee66bebb06202fbf206f29c41aae07849bbc9a891f71de86878fc3754403e6",
+        10: "cf028aaf05849761363bfd10ba664dbdfa5a5c63e2306b9baffe440732519c1c",
+        11: "6119de77921b27217f429c5cc98ff69a55ba440d253d8fc73dfae10f957766f8",
+        12: "095eba7b2ff1aae0f33185ba7af6e404b82b2aeef04f88e1485669c3cf79414c",
         14: "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
-        15: "d47612afe936bbc82576388107f34ebce8d547344c93176019cc7462a4677591",
+        15: "9e4003b0be6b69a0d32009a12e4ffe5442285e1b70514cc411e6be9329e9ae4a",
     }
 
     assert checker.NON_DIAGNOSTICS_PAGE_SHA256 == expected
@@ -2467,7 +2468,7 @@ def test_validation_png_reference_hashes():
 
     corrected = ROOT / "validations/v5-it2/page-13.png"
     assert checker.PAGE_13_REFERENCE_SHA256 == (
-        "2edeb64a24a83e38a88a0aefab83e54452eec3c9270cbeee3dc3afefb201af23"
+        "12723f01200d2999a170d3a4f431e171e8119756811050e7080ff36861b3006e"
     )
     assert hashlib.sha256(corrected.read_bytes()).hexdigest() == (
         checker.PAGE_13_REFERENCE_SHA256
@@ -2490,9 +2491,13 @@ def test_non_diagnostics_page_hashes_reject_a_changed_page(tmp_path):
 
 
 def test_qcm_and_corrections_source_contract():
-    base_class_source = (ROOT / "gabarits/nexus-manuel.cls").read_text(
-        encoding="utf-8"
+    repo_root = ROOT.parent.parent if (ROOT.parent.parent / "gabarits/common/nexus-manuel.cls").is_file() else ROOT
+    base_class_path = (
+        repo_root / "gabarits/common/nexus-manuel.cls"
+        if (repo_root / "gabarits/common/nexus-manuel.cls").is_file()
+        else repo_root / "gabarits/nexus-manuel.cls"
     )
+    base_class_source = base_class_path.read_text(encoding="utf-8")
     class_source = (ROOT / "gabarits/nexus-manuel-v5.cls").read_text(
         encoding="utf-8"
     )

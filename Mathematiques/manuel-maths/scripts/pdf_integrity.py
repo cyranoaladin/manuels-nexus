@@ -82,6 +82,9 @@ def verify_pdf(
         print(f"Gabarit Nexus absent : {log}")
         return 1
     if log_has_missing_character_warning(log_text):
+        for line in log_text.splitlines():
+            if MISSING_CHARACTER in line:
+                print(f"Glyphe manquant detail : {line}")
         print(f"Glyphe manquant dans le PDF : {log}")
         return 1
     try:
