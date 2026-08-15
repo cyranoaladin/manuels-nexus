@@ -1,0 +1,40 @@
+% META: {"id": "TNSI-ALGO-CO-027", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "correction", "exercice_ref": "TNSI-ALGO-EX-002", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-ALGORITHMIQUE-C7"], "parcours": 1, "fichier_exercice": "chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-027.tex"}
+% BEGIN-VERIFY
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+% def inserer(arbre, cle):
+%     if arbre is None:
+%         return Noeud(cle)
+%     if cle < arbre.valeur:
+%         arbre.gauche = inserer(arbre.gauche, cle)
+%     elif cle > arbre.valeur:
+%         arbre.droite = inserer(arbre.droite, cle)
+%     return arbre
+% def rechercher(arbre, cle):
+%     if arbre is None:
+%         return False
+%     if cle == arbre.valeur:
+%         return True
+%     if cle < arbre.valeur:
+%         return rechercher(arbre.gauche, cle)
+%     return rechercher(arbre.droite, cle)
+% abr = None
+% for v in (7, 3, 9, 1, 5):
+%     abr = inserer(abr, v)
+% assert rechercher(abr, 5) is True
+% assert rechercher(abr, 4) is False
+% END-VERIFY
+\begin{corrige}{TNSI-ALGO-EX-002}
+\begin{python}
+abr = None
+for v in (7, 3, 9, 1, 5):
+    abr = inserer(abr, v)
+
+print(rechercher(abr, 5))  # True
+print(rechercher(abr, 4))  # False
+\end{python}
+L'arbre construit a pour racine $7$, sous-arbre gauche enraciné en $3$ (lui-même avec $1$ à gauche et $5$ à droite), et sous-arbre droit réduit à $9$. La recherche de $5$ descend $7 \to 3 \to 5$ (trouvé) ; celle de $4$ descend $7 \to 3 \to 5 \to$ sous-arbre gauche vide (non trouvé).
+\end{corrige}

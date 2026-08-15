@@ -1,0 +1,38 @@
+% META: {"id": "1NSI-PM-EX-012", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "exercice", "capacites": ["1NSI-PROJET-METHODES-C2"], "parcours": 2, "competences": ["analyser", "modeliser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-012.tex", "corrige_tex": "chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-012.tex", "status": "approved", "capacites_codes": ["C2"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% jalons = [
+%     {"nom": "Specification du jeu", "termine": True},
+%     {"nom": "Deplacement du personnage", "termine": True},
+%     {"nom": "Gestion des collisions", "termine": True},
+%     {"nom": "Score et niveaux", "termine": False},
+%     {"nom": "Tests et equilibrage", "termine": False},
+%     {"nom": "Presentation finale", "termine": False},
+% ]
+% def avancement(jalons):
+%     return sum(1 for j in jalons if j["termine"]) / len(jalons) * 100
+% def prochain_jalon(jalons):
+%     for j in jalons:
+%         if not j["termine"]:
+%             return j["nom"]
+%     return None
+% assert avancement(jalons) == 50.0
+% assert prochain_jalon(jalons) == "Score et niveaux"
+% END-VERIFY
+\begin{exercice}{1NSI-PM-EX-002}{1}{10}
+Une équipe de $3$ élèves développe un petit jeu vidéo, découpé en $6$ jalons :
+\begin{python}
+jalons = [
+    {"nom": "Specification du jeu", "termine": True},
+    {"nom": "Deplacement du personnage", "termine": True},
+    {"nom": "Gestion des collisions", "termine": True},
+    {"nom": "Score et niveaux", "termine": False},
+    {"nom": "Tests et equilibrage", "termine": False},
+    {"nom": "Presentation finale", "termine": False},
+]
+\end{python}
+\begin{enumerate}
+  \item En utilisant \lstinline{avancement} du cours, calculer le pourcentage d'avancement du projet.
+  \item En utilisant \lstinline{prochain_jalon} du cours, déterminer sur quel jalon l'équipe doit désormais se concentrer.
+  \item L'équipe est à mi-parcours de l'horaire prévu pour ce projet, et son avancement est justement de $50\,\%$. Les $3$ jalons restants (score/niveaux, tests, présentation) te semblent-ils du même volume de travail que les $3$ jalons déjà réalisés ? Pourquoi ce simple pourcentage peut-il être trompeur ?
+\end{enumerate}
+\end{exercice}

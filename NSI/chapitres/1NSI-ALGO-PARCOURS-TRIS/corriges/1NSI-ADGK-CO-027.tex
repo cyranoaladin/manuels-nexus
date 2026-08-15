@@ -1,0 +1,26 @@
+% META: {"id": "1NSI-ADGK-CO-027", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "correction", "exercice_ref": "1NSI-ADGK-EX-002", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "approved", "capacites": ["1NSI-ALGO-PARCOURS-TRIS-C5"], "parcours": 1, "duree_min": 2, "fichier_exercice": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-027.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% u = x**2 + 3*x + 2
+% du = diff(u, x)
+% f = ln(u)
+% fp = diff(f, x)
+% assert simplify(fp) == (2*x + 3)/(x**2 + 3*x + 2)
+% # domaine: u > 0, i.e. x < -2 ou x > -1
+% assert u.subs(x, 0) == 2
+% assert u.subs(x, -3) == 2
+% END-VERIFY
+\begin{corrige}{1NSI-ADGK-EX-002}
+
+\textbf{Question 1.} $x^2+3x+2 = (x+1)(x+2) > 0$ si et seulement si $x \in \left]-\infty, -2\right[ \cup \left]-1, +\infty\right[$.
+
+Donc $D_f = \left]-\infty, -2\right[ \cup \left]-1, +\infty\right[$.
+
+\commentaireMarge{Factoriser le polynome sous le logarithme.}
+
+\textbf{Question 2.} On pose $u(x) = x^2+3x+2$. Alors $u'(x) = 2x+3$.
+
+\[ f'(x) = \frac{u'(x)}{u(x)} = \frac{2x+3}{x^2+3x+2}. \]
+
+\end{corrige}

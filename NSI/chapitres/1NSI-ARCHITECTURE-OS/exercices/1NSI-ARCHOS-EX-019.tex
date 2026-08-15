@@ -1,0 +1,24 @@
+% META: {"id": "1NSI-ARCHOS-EX-019", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "exercice", "capacites": ["1NSI-ARCHITECTURE-OS-C4"], "parcours": 1, "competences": ["programmer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-019.tex", "corrige_tex": "chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-019.tex", "status": "approved", "capacites_codes": ["C4"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% import subprocess, tempfile
+% with tempfile.TemporaryDirectory() as tmp:
+%     subprocess.run(["mkdir", "projet"], cwd=tmp, check=True)
+%     subprocess.run(["touch", "projet/main.py"], cwd=tmp, check=True)
+%     subprocess.run(["touch", "projet/readme.md"], cwd=tmp, check=True)
+%     resultat = subprocess.run(["ls", "projet"], cwd=tmp, capture_output=True, text=True, check=True)
+%     assert sorted(resultat.stdout.split()) == ["main.py", "readme.md"]
+%     subprocess.run(["rm", "projet/readme.md"], cwd=tmp, check=True)
+%     resultat2 = subprocess.run(["ls", "projet"], cwd=tmp, capture_output=True, text=True, check=True)
+%     assert resultat2.stdout.split() == ["main.py"]
+% END-VERIFY
+\begin{exercice}{1NSI-ARCHOS-EX-004}{2}{10}
+En t'aidant du tableau des commandes de base du cours (\lstinline{mkdir}, \lstinline{touch},
+\lstinline{ls}, \lstinline{rm}), écrire (en Python, via \lstinline{subprocess.run}, comme
+dans le cours) la séquence de commandes qui :
+\begin{enumerate}
+  \item crée un dossier \lstinline{projet} ;
+  \item crée dans ce dossier deux fichiers vides, \lstinline{main.py} et \lstinline{readme.md} ;
+  \item liste le contenu du dossier \lstinline{projet} (vérifier que les deux fichiers y apparaissent) ;
+  \item supprime le fichier \lstinline{readme.md}, puis liste à nouveau le contenu du dossier pour vérifier qu'il ne reste que \lstinline{main.py}.
+\end{enumerate}
+\end{exercice}

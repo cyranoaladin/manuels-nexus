@@ -1,0 +1,51 @@
+% META: {"id": "1NSI-PM-CO-022", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "correction", "exercice_ref": "1NSI-PM-EX-004", "capacites": ["1NSI-PROJET-METHODES-C4"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C4"], "parcours": 2, "fichier_exercice": "chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-022.tex"}
+% BEGIN-VERIFY
+% def a_une_docstring(fonction):
+%     return fonction.__doc__ is not None and len(fonction.__doc__.strip()) > 0
+% def tri_insertion_documente(tableau):
+%     """Trie tableau par ordre croissant, par insertion.
+%
+%     Precondition : tableau est une liste d'elements comparables entre eux.
+%     Postcondition : le resultat est une liste triee, de meme longueur.
+%     """
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j -= 1
+%         tableau[j + 1] = valeur
+%     return tableau
+% assert a_une_docstring(tri_insertion_documente) is True
+% END-VERIFY
+\begin{corrige}{1NSI-PM-EX-004}
+\textbf{1.} \lstinline{a_une_docstring(tri_insertion)} vaut \lstinline{False} : aucune
+docstring n'est présente.
+
+\textbf{2.}
+\begin{python}
+def tri_insertion_documente(tableau):
+    """Trie tableau par ordre croissant, par insertion.
+
+    Precondition : tableau est une liste d'elements comparables entre eux.
+    Postcondition : le resultat est une liste triee, de meme longueur.
+    """
+    tableau = tableau[:]
+    for i in range(1, len(tableau)):
+        valeur = tableau[i]
+        j = i - 1
+        while j >= 0 and tableau[j] > valeur:
+            tableau[j + 1] = tableau[j]
+            j -= 1
+        tableau[j + 1] = valeur
+    return tableau
+\end{python}
+\lstinline{a_une_docstring(tri_insertion_documente)} vaut désormais \lstinline{True}.
+
+\textbf{3.} Trois points pertinents : (1) le \textbf{principe} de l'algorithme (construire
+une partie triée en insérant chaque élément à sa bonne place, comme trier des cartes en
+main) ; (2) sa \textbf{complexité} ($O(n^2)$ dans le pire cas, mais rapide sur un tableau
+presque trié) ; (3) l'\textbf{invariant de boucle} qui prouve sa correction (le préfixe
+traité reste toujours trié).
+\end{corrige}

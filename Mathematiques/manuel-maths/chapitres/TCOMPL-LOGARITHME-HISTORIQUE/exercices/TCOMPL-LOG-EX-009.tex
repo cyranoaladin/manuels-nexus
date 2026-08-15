@@ -1,0 +1,22 @@
+% META: {"id": "TCOMPL-LOG-EX-009", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "exercice", "capacites": ["TCOMPL-LOG-C4"], "capacites_codes": ["C4"], "methodes": ["M1","M5"], "parcours": 2, "competences": ["modeliser","raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/exercices/TCOMPL-LOG-EX-009.tex", "corrige_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/corriges/TCOMPL-LOG-CO-009.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x*sqrt(4 - x**2)
+% fp = diff(f, x)
+% crit = solve(fp, x)
+% assert sqrt(2) in crit
+% fmax = f.subs(x, sqrt(2))
+% assert simplify(fmax) == 2
+% assert f.subs(x, 0) == 0
+% assert f.subs(x, 2) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-LOG-EX-009}{3}{20}
+On considere la fonction $f$ definie sur $[0,\, 2]$ par $f(x) = x\sqrt{4 - x^2}$.
+\begin{enumerate}
+  \item Justifier que $f$ est bien definie sur $[0,\, 2]$.
+  \item Calculer $f'(x)$ et determiner les variations de $f$.
+  \item En deduire le maximum de $f$ sur $[0,\, 2]$ et la valeur de $x$ pour laquelle il est atteint.
+\end{enumerate}
+
+\end{exercice}

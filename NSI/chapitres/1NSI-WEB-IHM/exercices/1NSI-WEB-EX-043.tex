@@ -1,0 +1,24 @@
+% META: {"id": "1NSI-WEB-EX-043", "chapitre": "1NSI-WEB-IHM", "type_objet": "exercice", "capacites": ["1NSI-WEB-IHM-C8"], "parcours": 1, "competences": ["analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-043.tex", "corrige_tex": "chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-043.tex", "status": "approved", "capacites_codes": ["C8"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% cookies_client = {}
+% def serveur_definit_cookie(nom, valeur):
+%     cookies_client[nom] = valeur
+% def client_envoie_requete_avec_cookies(url):
+%     return {"url": url, "cookies": dict(cookies_client)}
+% r1 = client_envoie_requete_avec_cookies("/accueil")
+% assert r1 == {"url": "/accueil", "cookies": {}}
+% serveur_definit_cookie("panier", "2 articles")
+% r2 = client_envoie_requete_avec_cookies("/paiement")
+% assert r2 == {"url": "/paiement", "cookies": {"panier": "2 articles"}}
+% END-VERIFY
+\begin{exercice}{1NSI-WEB-EX-003}{2}{12}
+On reprend le modèle de cookies du cours. Un site de e-commerce fonctionne ainsi : un
+visiteur charge la page \lstinline{/accueil} (aucun cookie n'existe encore), puis ajoute un
+article à son panier. Le serveur définit alors un cookie \lstinline{"panier"} avec la valeur
+\lstinline{"2 articles"}, puis le visiteur charge la page \lstinline{/paiement}.
+\begin{enumerate}
+  \item Que contient la requête envoyée pour \lstinline{/accueil}, avant tout ajout au panier ?
+  \item Après l'ajout au panier, que contient la requête envoyée pour \lstinline{/paiement} ?
+  \item Le serveur qui traite \lstinline{/paiement} a-t-il besoin de « se souvenir » lui-même du panier du visiteur ? Expliquer, en une phrase, comment le cookie résout ce problème.
+\end{enumerate}
+\end{exercice}

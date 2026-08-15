@@ -1,0 +1,22 @@
+% META: {"id": "1NSI-ADGK-EX-016", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "exercice", "capacites": ["1NSI-ALGO-PARCOURS-TRIS-C3"], "capacites_codes": ["C3"], "methodes": ["M1"], "parcours": 2, "competences": ["raisonner", "calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-016.tex", "corrige_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-016.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x)/(x + 1)
+% fp = diff(f, x)
+% assert simplify(fp - x*exp(x)/(x+1)**2) == 0
+% assert solve(fp, x) == [0]
+% assert f.subs(x, 0) == 1
+% assert limit(f, x, oo) == oo
+% assert limit(f, x, -1, '+') == oo
+% assert limit(f, x, -oo) == 0
+% END-VERIFY
+\begin{exercice}{1NSI-ADGK-EX-016}{2}{20}
+Soit $f(x) = \dfrac{\mathrm{e}^x}{x+1}$ definie sur $\mathbb{R} \setminus \{-1\}$.
+\begin{enumerate}
+  \item Calculer $f'(x)$ et etudier son signe.
+  \item Determiner les limites aux bornes du domaine de definition.
+  \item Dresser le tableau de variations complet.
+\end{enumerate}
+
+\end{exercice}

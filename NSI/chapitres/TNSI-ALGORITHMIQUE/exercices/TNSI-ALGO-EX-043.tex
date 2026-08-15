@@ -1,0 +1,42 @@
+% META: {"id": "TNSI-ALGO-EX-043", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "exercice", "capacites": ["TNSI-ALGORITHMIQUE-C11"], "capacites_codes": ["C11"], "methodes": ["M1"], "parcours": 1, "competences": ["programmer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-043.tex", "corrige_tex": "chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-043.tex", "status": "approved"}
+% BEGIN-VERIFY
+% def chemin(graphe, depart, arrivee):
+%     predecesseur = {depart: None}
+%     file = [depart]
+%     while file:
+%         sommet = file.pop(0)
+%         if sommet == arrivee:
+%             break
+%         for voisin in graphe[sommet]:
+%             if voisin not in predecesseur:
+%                 predecesseur[voisin] = sommet
+%                 file.append(voisin)
+%     if arrivee not in predecesseur:
+%         return None
+%     c = []
+%     s = arrivee
+%     while s is not None:
+%         c.append(s)
+%         s = predecesseur[s]
+%     c.reverse()
+%     return c
+% metro = {
+%     "A": ["B"], "B": ["A", "C", "D"], "C": ["B", "E"],
+%     "D": ["B", "E"], "E": ["C", "D"],
+% }
+% trajet = chemin(metro, "A", "E")
+% assert trajet == ["A", "B", "C", "E"]
+% END-VERIFY
+\begin{exercice}{TNSI-ALGO-EX-003}{2}{20}
+On modélise un petit réseau de métro par le graphe (non orienté) suivant, où chaque station est reliée à ses stations directement accessibles :
+\begin{python}
+metro = {
+    "A": ["B"],
+    "B": ["A", "C", "D"],
+    "C": ["B", "E"],
+    "D": ["B", "E"],
+    "E": ["C", "D"],
+}
+\end{python}
+En utilisant la fonction \lstinline{chemin} du cours (recherche de chemin par BFS), déterminer le trajet trouvé de \texttt{"A"} à \texttt{"E"}. Combien de stations ce trajet compte-t-il (départ et arrivée compris) ?
+\end{exercice}

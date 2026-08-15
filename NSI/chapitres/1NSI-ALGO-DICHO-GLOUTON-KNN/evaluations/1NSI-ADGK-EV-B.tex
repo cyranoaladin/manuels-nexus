@@ -1,0 +1,76 @@
+% META: {"id": "1NSI-ADGK-1NSI-ADGK-EV-B", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "evaluation", "capacites": ["P-ALGO-04", "P-ALGO-05", "P-ALGO-03"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
+\section*{Évaluation B --- Dichotomie, gloutons, k-NN}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (dichotomie, variant) ; Ex. 2 : 10 pts (glouton, k-NN)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Recherche dichotomique} \hfill (10 points)
+
+On applique \lstinline{recherche_dichotomique} du cours au tableau trié
+\lstinline{[2, 6, 11, 17, 24, 31, 39, 50]} pour chercher la valeur $24$.
+
+\begin{enumerate}
+  \item (5 pts) Dérouler l'algorithme : \lstinline{borne_inf}, \lstinline{borne_sup}, \lstinline{milieu} à chaque itération, jusqu'à trouver la valeur.
+  \item (3 pts) Calculer le variant $V=\text{borne\_sup}-\text{borne\_inf}$ à chaque itération et vérifier qu'il décroît strictement.
+  \item (2 pts) Pourquoi cette preuve de décroissance stricte suffit-elle à garantir la terminaison de l'algorithme ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def recherche_dichotomique(tableau_trie, valeur):
+%     borne_inf, borne_sup = 0, len(tableau_trie) - 1
+%     while borne_inf <= borne_sup:
+%         milieu = (borne_inf + borne_sup) // 2
+%         if tableau_trie[milieu] == valeur:
+%             return milieu
+%         elif tableau_trie[milieu] < valeur:
+%             borne_inf = milieu + 1
+%         else:
+%             borne_sup = milieu - 1
+%     return -1
+% t = [2, 6, 11, 17, 24, 31, 39, 50]
+% assert recherche_dichotomique(t, 24) == 4
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Glouton et k-NN} \hfill (10 points)
+
+\begin{enumerate}
+  \item (4 pts) Utiliser \lstinline{rendu_glouton} du cours pour rendre $38$ euros avec le système $\{20, 10, 5, 2, 1\}$. Détailler le choix de chaque pièce.
+  \item (3 pts) On dispose de la base de fleurs (longueur de pétale en cm, largeur de pétale en cm, espèce) :
+\begin{python}
+fleurs = [
+    (5, 1.5, "Iris"), (5.2, 1.6, "Iris"), (4.8, 1.4, "Iris"),
+    (6.5, 2.2, "Rose"), (6.8, 2.3, "Rose"), (6.3, 2.1, "Rose"),
+]
+\end{python}
+  Prédire l'espèce d'une fleur de longueur $5{,}1$\,cm et de largeur $1{,}5$\,cm, avec $k=3$.
+  \item (3 pts) Un $k$ trop petit (par exemple $k=1$) présente quel risque, en présence de données bruitées (un point mal classé dans la base) ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def rendu_glouton(montant, pieces):
+%     pieces_triees = sorted(pieces, reverse=True)
+%     rendu = []
+%     for p in pieces_triees:
+%         while montant >= p:
+%             rendu.append(p)
+%             montant -= p
+%     return rendu
+% assert rendu_glouton(38, [20, 10, 5, 2, 1]) == [20, 10, 5, 2, 1]
+% def distance(p1, p2):
+%     return ((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2) ** 0.5
+% def k_plus_proches_voisins(points_classes, nouveau_point, k):
+%     distances = [(distance((x, y), nouveau_point), classe)
+%                  for (x, y, classe) in points_classes]
+%     distances.sort(key=lambda d: d[0])
+%     classes = [c for (_, c) in distances[:k]]
+%     return max(set(classes), key=classes.count)
+% fleurs = [
+%     (5, 1.5, "Iris"), (5.2, 1.6, "Iris"), (4.8, 1.4, "Iris"),
+%     (6.5, 2.2, "Rose"), (6.8, 2.3, "Rose"), (6.3, 2.1, "Rose"),
+% ]
+% assert k_plus_proches_voisins(fleurs, (5.1, 1.5), 3) == "Iris"
+% END-VERIFY

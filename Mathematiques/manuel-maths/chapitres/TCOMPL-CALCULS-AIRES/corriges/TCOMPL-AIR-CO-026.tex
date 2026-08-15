@@ -1,0 +1,25 @@
+% META: {"id": "TCOMPL-AIR-CO-026", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "corrige", "exercice_ref": "TCOMPL-AIR-EX-026", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% a, b, c = symbols('a b c', positive=True)
+% # AM-GM pour 3 variables: (a+b+c)/3 >= (abc)^(1/3)
+% # par concavite de ln
+% lhs = ln((a+b+c)/3)
+% rhs = (ln(a) + ln(b) + ln(c))/3
+% # numerique
+% assert lhs.subs({a:1, b:2, c:4}) == ln(Rational(7,3))
+% assert simplify(rhs.subs({a:1, b:2, c:4}) - ln(2)) == 0
+% assert ln(Rational(7,3)) > ln(2)
+% END-VERIFY
+\begin{corrige}{TCOMPL-AIR-EX-026}
+
+La fonction $\ln$ est concave. Par Jensen avec $t_1=t_2=t_3=\dfrac{1}{3}$ :
+\[ \ln\!\left(\frac{a+b+c}{3}\right) \geq \frac{\ln a + \ln b + \ln c}{3} = \ln\sqrt[3]{abc}. \]
+
+\commentaireMarge{Jensen avec 3 points et poids $1/3$ chacun.}
+
+Comme $\ln$ est croissante : $\dfrac{a+b+c}{3} \geq \sqrt[3]{abc}$.
+
+L'egalite a lieu si et seulement si $a = b = c$.
+
+\end{corrige}

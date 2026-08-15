@@ -1,0 +1,63 @@
+% META: {"id": "TNSI-LANG-COURS-06", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "cours", "capacites_codes": ["C6"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TNSI-LANGAGES-ET-PROGRAMMATION-C6"]}
+\section{Programme, donnée et calculabilité}
+
+% ============================================================
+% STRATE 1 — Le programme comme donnee
+% ============================================================
+
+\definition[1]{
+Un programme est lui-même une suite de caractères (son code source) ou d'octets (son code compilé) : c'est donc une \textbf{donnée} comme une autre, qui peut être stockée, copiée, transmise sur un réseau, ou même \textbf{lue et exécutée par un autre programme} (un interpréteur ou un compilateur).
+}
+
+\textbf{Exemple.} Un programme peut être représenté comme une simple liste d'instructions (une donnée), puis exécuté par un \textbf{interpréteur} qui la parcourt :
+\begin{python}
+def interpreter(programme, accumulateur=0):
+    for instruction, valeur in programme:
+        if instruction == "ADD":
+            accumulateur += valeur
+        elif instruction == "MUL":
+            accumulateur *= valeur
+    return accumulateur
+\end{python}
+
+% BEGIN-VERIFY
+% def interpreter(programme, accumulateur=0):
+%     for instruction, valeur in programme:
+%         if instruction == "ADD":
+%             accumulateur += valeur
+%         elif instruction == "MUL":
+%             accumulateur *= valeur
+%     return accumulateur
+%
+% programme = [("ADD", 5), ("MUL", 3), ("ADD", 1)]
+% assert interpreter(programme) == 16
+% END-VERIFY
+
+\margeAppui{
+Ici, \lstinline{programme} est une simple liste Python (une donnée), et \lstinline{interpreter} est un autre programme qui la lit et l'exécute instruction par instruction. C'est exactement ce principe, généralisé, qui permet à un interpréteur Python d'exécuter du code Python : le code source est une donnée que l'interpréteur lit et interprète.
+}
+
+% ============================================================
+% STRATE 2 — Calculabilite et probleme de l'arret
+% ============================================================
+
+\propriete[Calculabilité indépendante du langage]{
+Ce qu'un programme peut calculer ne dépend pas du \textbf{langage} dans lequel il est écrit : un algorithme calculable en Python l'est tout autant en C, en OCaml ou dans n'importe quel autre langage de programmation à usage général. Un langage peut rendre un calcul plus simple ou plus rapide à écrire, mais il ne rend jamais calculable ce qui ne l'était pas dans un autre langage.
+}
+
+\definition[2]{
+Le \textbf{problème de l'arrêt} consiste à se demander s'il existe un programme capable de décider, pour \textbf{n'importe quel} programme $P$ et \textbf{n'importe quelle} entrée $e$, si l'exécution de $P$ sur $e$ s'arrête ou boucle indéfiniment. Ce problème est \textbf{indécidable} : aucun programme ne peut le résoudre dans tous les cas.
+}
+
+\propriete[Argument intuitif d'indécidabilité]{
+Supposons qu'existe une fonction \lstinline{s_arrete(P, e)} qui renvoie toujours correctement \lstinline{True} si le programme \lstinline{P} s'arrête sur l'entrée \lstinline{e}, et \lstinline{False} sinon. Construisons alors un programme \lstinline{paradoxe} qui, exécuté sur lui-même comme entrée, fait \textbf{le contraire} de ce que prédit \lstinline{s_arrete} :
+\begin{itemize}
+  \item si \lstinline{s_arrete(paradoxe, paradoxe)} vaut \lstinline{True} (prédit que \lstinline{paradoxe} s'arrête), alors \lstinline{paradoxe} boucle volontairement à l'infini ;
+  \item si \lstinline{s_arrete(paradoxe, paradoxe)} vaut \lstinline{False} (prédit que \lstinline{paradoxe} boucle), alors \lstinline{paradoxe} s'arrête immédiatement.
+\end{itemize}
+Dans les deux cas, \lstinline{s_arrete} se trompe sur \lstinline{paradoxe} appliqué à lui-même : une telle fonction \lstinline{s_arrete} ne peut donc pas exister pour \textbf{tous} les cas.
+}
+
+\erreurFrequente{
+\textbf{Croire que l'indécidabilité du problème de l'arrêt signifie qu'on ne peut jamais savoir si un programme donné s'arrête.} Ce n'est pas ce que dit le résultat : on peut très bien prouver, au cas par cas, que tel ou tel programme particulier s'arrête (ou boucle). Ce qui est impossible, c'est d'écrire un \textbf{unique} programme qui répondrait correctement pour \textbf{tous} les programmes et toutes les entrées possibles, sans exception.
+}

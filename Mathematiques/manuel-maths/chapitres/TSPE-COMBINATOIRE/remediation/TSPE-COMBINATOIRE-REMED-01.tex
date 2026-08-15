@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-COMBINATOIRE-REMED-01", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "approved", "capacites": ["TSPE-COMBINATOIRE-C1"], "statut": "complete"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : permutations et combinaisons
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-COMBI-RE-C2-EX1}{1}{8}
+Combien y a-t-il de facons de choisir $2$ delegues (sans role distinct) dans une classe de $28$ eleves ?
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import binomial
+% assert binomial(28, 2) == 378
+% END-VERIFY
+
+\begin{corrige}{TSPE-COMBI-RE-C2-EX1}
+Choix sans ordre de $2$ elements parmi $28$ : $\dbinom{28}{2} = \dfrac{28\times27}{2} = 378$.
+\end{corrige}

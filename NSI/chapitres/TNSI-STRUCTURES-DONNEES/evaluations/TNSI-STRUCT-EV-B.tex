@@ -1,0 +1,36 @@
+% META: {"id": "TNSI-STRUCT-EVAL-B", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "evaluation", "capacites": ["T-STRUCT-05A", "T-STRUCT-05B", "T-STRUCT-05D"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "approved"}
+\section*{Évaluation B --- Structures de données}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 8 pts (modélisation) ; Ex. 2 : 12 pts (graphes, conversion)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Modélisation} \hfill (8 points)
+
+Un reseau de transport relie des stations par des lignes directes.
+\begin{enumerate}
+  \item (4 pts) Justifier qu'un graphe est une structure adaptee pour modeliser ce reseau.
+  \item (4 pts) Ce graphe doit-il etre oriente ou non oriente si les lignes fonctionnent dans les deux sens ? Justifier.
+\end{enumerate}
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Graphes, conversion} \hfill (12 points)
+
+On donne un graphe oriente a $3$ sommets ($0,1,2$) par ses listes de successeurs :
+\begin{python}
+successeurs = {0: [1, 2], 1: [], 2: [0]}
+\end{python}
+\begin{enumerate}
+  \item (4 pts) Lister toutes les aretes de ce graphe.
+  \item (4 pts) Le sommet $1$ a-t-il des successeurs ? Qu'est-ce que cela signifie ?
+  \item (4 pts) Donner la matrice d'adjacence correspondant a ce graphe.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% successeurs = {0: [1, 2], 1: [], 2: [0]}
+% n = 3
+% matrice = [[1 if j in successeurs[i] else 0 for j in range(n)] for i in range(n)]
+% assert matrice == [[0,1,1],[0,0,0],[1,0,0]]
+% END-VERIFY

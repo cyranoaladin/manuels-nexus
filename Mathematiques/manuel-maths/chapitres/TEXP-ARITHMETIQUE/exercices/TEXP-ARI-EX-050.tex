@@ -1,0 +1,27 @@
+% META: {"id": "TEXP-ARI-EX-050", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C5"], "capacites_codes": ["C5"], "methodes": ["M3"], "parcours": 2, "competences": ["raisonner","raisonner"], "duree_min": 30, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-050.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-050.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f(x) = (x-1)^4, strictement convexe, minimum en x=1
+% # mais f'(1) = 0, donc la tangente en 1 est y=0, et f >= 0 partout
+% f = (x-1)**4
+% fpp = diff(f, x, 2)
+% assert expand(fpp - 12*(x-1)**2) == 0
+% # fpp = 12*(x-1)**2 >= 0 (convexe)
+% assert f.subs(x, 1) == 0
+% assert diff(f, x).subs(x, 1) == 0
+% # tangente en 1: y=0, f >= 0
+% # mais f''(1) = 0 aussi: pas un point d'inflexion (f'' ne change pas de signe)
+% assert fpp.subs(x, 0) == 12
+% assert fpp.subs(x, 2) == 12
+% # ni tangente traversante, ni inflexion, mais minimum global
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-050}{3}{30}
+Soit $f(x) = (x-1)^4$.
+\begin{enumerate}
+  \item Etudier la convexite de $f$. $f''$ s'annule-t-elle ? La courbe admet-elle un point d'inflexion ?
+  \item Determiner la tangente en $x = 1$ et la position de la courbe par rapport a elle.
+  \item Que se passe-t-il quand $f''$ s'annule sans changer de signe ? Discuter.
+\end{enumerate}
+
+\end{exercice}

@@ -1,0 +1,79 @@
+% META: {"id": "TNSI-ALGO-COURS-05", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "cours", "capacites_codes": ["C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TNSI-ALGORITHMIQUE-C5"]}
+\section{Diviser pour régner}
+
+% ============================================================
+% STRATE 1 — Principe et tri fusion
+% ============================================================
+
+\definition[1]{
+La méthode \textbf{diviser pour régner} résout un problème en trois étapes : \textbf{diviser} l'instance en sous-instances plus petites de même nature, \textbf{régner} en résolvant récursivement chaque sous-instance, puis \textbf{combiner} les solutions partielles pour obtenir la solution du problème initial.
+}
+
+\margeAppui{
+Le \textbf{tri fusion} (\textit{merge sort}) est l'exemple emblématique : diviser la liste en deux moitiés, trier récursivement chaque moitié, puis fusionner les deux listes triées en une seule.
+}
+
+\textbf{Exemple.}
+\begin{python}
+def fusionner(gauche, droite):
+    resultat = []
+    i, j = 0, 0
+    while i < len(gauche) and j < len(droite):
+        if gauche[i] <= droite[j]:
+            resultat.append(gauche[i])
+            i += 1
+        else:
+            resultat.append(droite[j])
+            j += 1
+    return resultat + gauche[i:] + droite[j:]
+
+def tri_fusion(liste):
+    if len(liste) <= 1:
+        return liste
+    milieu = len(liste) // 2
+    gauche = tri_fusion(liste[:milieu])
+    droite = tri_fusion(liste[milieu:])
+    return fusionner(gauche, droite)
+\end{python}
+
+% BEGIN-VERIFY
+% def fusionner(gauche, droite):
+%     resultat = []
+%     i, j = 0, 0
+%     while i < len(gauche) and j < len(droite):
+%         if gauche[i] <= droite[j]:
+%             resultat.append(gauche[i])
+%             i += 1
+%         else:
+%             resultat.append(droite[j])
+%             j += 1
+%     return resultat + gauche[i:] + droite[j:]
+%
+% def tri_fusion(liste):
+%     if len(liste) <= 1:
+%         return liste
+%     milieu = len(liste) // 2
+%     gauche = tri_fusion(liste[:milieu])
+%     droite = tri_fusion(liste[milieu:])
+%     return fusionner(gauche, droite)
+%
+% assert tri_fusion([5, 3, 8, 1, 9, 2]) == [1, 2, 3, 5, 8, 9]
+% assert tri_fusion([]) == []
+% assert tri_fusion([1]) == [1]
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Cout
+% ============================================================
+
+\propriete[Coût du tri fusion]{
+À chaque niveau de récursion, la liste est divisée en deux, ce qui donne $\log_2 n$ niveaux ; à chaque niveau, la fusion de toutes les sous-listes coûte $n$ comparaisons au total. Le coût total du tri fusion est donc de l'ordre de $n \log_2 n$, bien meilleur que les $n^2$ comparaisons d'un tri par sélection ou par insertion sur de grandes listes.
+}
+
+\erreurFrequente{
+\textbf{Oublier le cas de base.} Sans le test \lstinline{if len(liste) <= 1: return liste}, la récursion ne s'arrête jamais : diviser une liste vide donnerait deux listes vides, et l'appel récursif se répéterait indéfiniment (ou lèverait une erreur de profondeur de récursion maximale atteinte).
+}
+
+\approfondissement{
+La \textbf{rotation d'image} est un autre exemple classique de diviser pour régner : on découpe l'image en quadrants, on fait pivoter chaque quadrant récursivement, puis on réassemble le résultat en permutant les quadrants entre eux.
+}

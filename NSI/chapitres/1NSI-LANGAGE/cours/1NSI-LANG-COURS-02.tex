@@ -1,0 +1,71 @@
+% META: {"id": "1NSI-LANG-COURS-02", "chapitre": "1NSI-LANGAGE", "type_objet": "cours", "capacites": ["1NSI-LANGAGE-C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C2"]}
+\section{Diversité et unité des langages de programmation}
+
+\propriete[Unité]{
+  Tous les langages de programmation impératifs partagent le même noyau de
+  \textbf{constructions élémentaires} (§0.1) : c'est ce qui permet de reconnaître un
+  algorithme même écrit dans un langage inconnu. Ce qui varie, ce sont les
+  \textbf{traits particuliers} : syntaxe, typage, gestion des blocs d'instructions.
+}
+
+\exemple{La même fonction, « renvoyer le plus grand de deux nombres », écrite en Python
+puis dans un langage de style C :}
+
+\begin{python}
+def maximum(a, b):
+    if a > b:
+        return a
+    else:
+        return b
+\end{python}
+
+\begin{console}
+int maximum(int a, int b) {
+    if (a > b) {
+        return a;
+    } else {
+        return b;
+    }
+}
+\end{console}
+
+% BEGIN-VERIFY
+% def maximum(a, b):
+%     if a > b:
+%         return a
+%     else:
+%         return b
+% assert maximum(3, 7) == 7
+% assert maximum(7, 3) == 7
+% assert maximum(-2, -5) == -2
+% END-VERIFY
+
+\propriete[Traits communs et traits particuliers]{
+  \textbf{Traits communs} aux deux écritures ci-dessus : une fonction nommée
+  \lstinline{maximum} prenant deux paramètres, une conditionnelle \lstinline{if}/\lstinline{else},
+  un \lstinline{return} dans chaque branche. \textbf{Traits particuliers} au langage de
+  style C : les types sont déclarés explicitement (\lstinline{int}), les blocs
+  d'instructions sont délimités par des accolades \texttt{\{\}} et non par
+  l'indentation, chaque instruction se termine par un point-virgule.
+}
+
+\definition[D2]{
+  Un langage est dit à \textbf{typage explicite} si le programmeur doit indiquer le type de
+  chaque variable (comme en C ou en Java) ; il est à \textbf{typage implicite} (ou
+  dynamique) si l'interpréteur déduit le type automatiquement (comme en Python).
+}
+
+\exemple{En Python, l'indentation \textbf{délimite} les blocs (elle fait partie de la
+syntaxe) ; dans un langage de style C, ce sont les accolades qui délimitent les blocs, et
+l'indentation n'est qu'une convention de lisibilité (le programme fonctionnerait même mal
+indenté).}
+
+\erreurFrequente{Croire qu'un algorithme « appartient » à un langage précis. Un même
+algorithme (par exemple « chercher le maximum d'une liste ») peut s'écrire dans n'importe
+quel langage Turing-complet : c'est la \textbf{traduction} qui change, pas l'algorithme
+lui-même.}
+
+\alamachine{Recherche (dans la documentation d'un langage que tu ne connais pas, comme
+JavaScript ou Scratch) comment s'écrit une boucle \lstinline{for} et une conditionnelle
+\lstinline{if}. Identifie les traits communs avec Python et les traits particuliers à ce
+langage.}

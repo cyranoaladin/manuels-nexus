@@ -1,0 +1,83 @@
+% META: {"id": "TNSI-ARCH-COURS-07", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "cours", "capacites_codes": ["C7"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TNSI-ARCHITECTURES-MATERIELLES-SY-C7"]}
+\section{Protocoles de routage}
+
+% ============================================================
+% STRATE 1 — Le routage comme un chemin dans un graphe
+% ============================================================
+
+\definition[1]{
+Un réseau se modélise par un \textbf{graphe} dont les sommets sont des routeurs et les arêtes des liaisons directes. \textbf{Router} un paquet consiste à choisir, à chaque routeur, la liaison à emprunter pour progresser vers la destination. Le \textbf{protocole de routage} détermine comment cette route est calculée.
+}
+
+\margeAppui{
+On retrouve ici la recherche de chemin dans un graphe, vue dans le chapitre \textit{Algorithmique} : c'est la \textbf{métrique} utilisée (ce que le protocole cherche à minimiser) qui distingue les protocoles entre eux.
+}
+
+\propriete[RIP : minimiser le nombre de sauts]{
+Le protocole \textbf{RIP} (\textit{Routing Information Protocol}) choisit la route qui minimise le \textbf{nombre de sauts} (de routeurs traversés), sans tenir compte de la capacité ou de la congestion des liaisons. C'est exactement ce que calcule un parcours en largeur (BFS) sur le graphe du réseau.
+}
+
+% ============================================================
+% STRATE 2 — OSPF : minimiser un cout
+% ============================================================
+
+\propriete[OSPF : minimiser un coût]{
+Le protocole \textbf{OSPF} (\textit{Open Shortest Path First}) associe un \textbf{coût} à chaque liaison (reflétant par exemple sa bande passante) et choisit la route qui minimise la somme des coûts, pas le nombre de sauts. Une route avec plus de sauts mais de meilleure capacité peut ainsi être préférée à une route plus courte mais plus lente.
+}
+
+\textbf{Exemple.} Sur ce réseau, la route au moins de sauts (RIP) et la route au moindre coût (OSPF) diffèrent :
+\begin{python}
+reseau_couts = {
+    "A": {"B": 1, "C": 5},
+    "B": {"A": 1, "D": 1},
+    "C": {"A": 5, "D": 1},
+    "D": {"B": 1, "C": 1},
+}
+\end{python}
+De \texttt{A} vers \texttt{D} : la route \texttt{A-C-D} compte $2$ sauts (comme \texttt{A-B-D}), mais coûte $5+1=6$, alors que \texttt{A-B-D} compte aussi $2$ sauts pour un coût de $1+1=2$ : ici les deux critères coïncident. En revanche, si l'on ajoute une liaison directe coûteuse \texttt{A-D} de coût $3$, RIP choisirait ce trajet à \textbf{un seul saut}, alors qu'OSPF préférerait toujours \texttt{A-B-D} (coût $2 < 3$).
+
+% BEGIN-VERIFY
+% def plus_court_cout(graphe_couts, depart, arrivee):
+%     couts = {depart: 0}
+%     a_traiter = [depart]
+%     predecesseur = {depart: None}
+%     while a_traiter:
+%         courant = min(a_traiter, key=lambda s: couts[s])
+%         a_traiter.remove(courant)
+%         if courant == arrivee:
+%             break
+%         for voisin, poids in graphe_couts[courant].items():
+%             nouveau_cout = couts[courant] + poids
+%             if voisin not in couts or nouveau_cout < couts[voisin]:
+%                 couts[voisin] = nouveau_cout
+%                 predecesseur[voisin] = courant
+%                 if voisin not in a_traiter:
+%                     a_traiter.append(voisin)
+%     return couts[arrivee]
+%
+% reseau_couts = {
+%     "A": {"B": 1, "D": 3, "C": 5},
+%     "B": {"A": 1, "D": 1},
+%     "C": {"A": 5, "D": 1},
+%     "D": {"B": 1, "C": 1, "A": 3},
+% }
+% assert plus_court_cout(reseau_couts, "A", "D") == 2
+%
+% def bfs_sauts(graphe_couts, depart, arrivee):
+%     visites = {depart: 0}
+%     file = [depart]
+%     while file:
+%         courant = file.pop(0)
+%         if courant == arrivee:
+%             return visites[courant]
+%         for voisin in graphe_couts[courant]:
+%             if voisin not in visites:
+%                 visites[voisin] = visites[courant] + 1
+%                 file.append(voisin)
+%     return None
+% assert bfs_sauts(reseau_couts, "A", "D") == 1
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Croire qu'un protocole de routage choisit toujours le chemin \og le plus court \fg{} au sens intuitif.} Ce que minimise le protocole dépend entièrement de sa \textbf{métrique} : RIP minimise le nombre de sauts (route \texttt{A-D} directe préférée dans l'exemple), OSPF minimise un coût cumulé (route \texttt{A-B-D} préférée si son coût total est plus faible), même si cette dernière traverse davantage de routeurs.
+}

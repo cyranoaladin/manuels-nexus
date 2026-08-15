@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-PROBA-EX-023", "chapitre": "TSPE-PROBABILITES", "type_objet": "exercice", "capacites": ["TSPE-PROBA-C5"], "capacites_codes": ["C5"], "methodes": ["M1"], "parcours": 1, "competences": ["raisonner", "communiquer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-023.tex", "corrige_tex": "chapitres/TSPE-PROBABILITES/corriges/TSPE-PROBA-CO-023.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial
+% p = Rational(1,3)
+% assert binomial(3,2)*p**2*(1-p)**1 == Rational(2,9)
+% END-VERIFY
+\begin{exercice}{TSPE-PROBA-EX-005}{3}{15}
+On repete $3$ fois une epreuve de Bernoulli de parametre $p=\dfrac{1}{3}$ (succes S, echec E). Soit $X$ le nombre de succes.
+\begin{enumerate}
+  \item Lister tous les chemins de l'arbre comportant exactement $2$ succes.
+  \item Calculer la probabilite d'un seul de ces chemins (par exemple SSE).
+  \item Justifier que tous les chemins listes en Q1 ont la meme probabilite.
+  \item En deduire $P(X=2)$, et verifier que ce resultat coincide avec la formule $\dbinom{3}{2}p^2(1-p)^1$.
+\end{enumerate}
+\end{exercice}

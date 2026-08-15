@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-PRIMEQ-CO-018", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "correction", "exercice_ref": "TSPE-PRIMEQ-EX-002", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-PRIMITIVES-EQDIFF-C3"], "parcours": 2, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-PRIMITIVES-EQDIFF/exercices/TSPE-PRIMEQ-EX-018.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, ln, simplify, Rational
+% x = symbols('x')
+% F = Rational(1,2)*ln(x**2+4)
+% assert simplify(diff(F, x) - x/(x**2+4)) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-PRIMEQ-EX-002}
+On reconnait la forme $\dfrac{u'}{u}$ avec $u(x)=x^2+4$ (toujours $>0$), $u'(x)=2x$. On a $f(x) = \dfrac{1}{2} \times \dfrac{2x}{x^2+4} = \dfrac{1}{2} \times \dfrac{u'(x)}{u(x)}$.
+
+Une primitive de $\dfrac{u'}{u}$ est $\ln(u)$, donc une primitive de $f$ est :
+\[
+  \boxed{F(x) = \frac{1}{2}\ln(x^2+4)}.
+\]
+\end{corrige}

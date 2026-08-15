@@ -1,0 +1,16 @@
+% META: {"id": "TEXP-ARI-EX-012", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C3"], "capacites_codes": ["C3"], "methodes": ["M2"], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-012.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-012.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', positive=True)
+% f = x*ln(x)
+% fp = diff(f, x)
+% assert simplify(fp) == ln(x) + 1
+% assert solve(fp, x) == [exp(-1)]
+% assert f.subs(x, exp(-1)) == -exp(-1)
+% assert limit(f, x, oo) == oo
+% assert limit(f, x, 0, '+') == 0
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-012}{1}{15}
+Etudier les variations de $f(x) = x\ln x$ sur $\left]0, +\infty\right[$, limites comprises.
+
+\end{exercice}

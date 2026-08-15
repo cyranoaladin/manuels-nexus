@@ -1,0 +1,25 @@
+% META: {"id": "TNSI-ALGO-CO-040", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "correction", "exercice_ref": "TNSI-ALGO-EX-005", "capacites_codes": ["C10"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-ALGORITHMIQUE-C10"], "parcours": 2, "fichier_exercice": "chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-040.tex"}
+% BEGIN-VERIFY
+% def maximum_dpr(liste):
+%     if len(liste) == 1:
+%         return liste[0]
+%     milieu = len(liste) // 2
+%     max_gauche = maximum_dpr(liste[:milieu])
+%     max_droite = maximum_dpr(liste[milieu:])
+%     return max(max_gauche, max_droite)
+% assert maximum_dpr([3, 7, 1, 9, 4, 2]) == 9
+% assert maximum_dpr([5]) == 5
+% assert maximum_dpr([-1, -5, -2]) == -1
+% END-VERIFY
+\begin{corrige}{TNSI-ALGO-EX-005}
+\begin{python}
+def maximum_dpr(liste):
+    if len(liste) == 1:
+        return liste[0]
+    milieu = len(liste) // 2
+    max_gauche = maximum_dpr(liste[:milieu])
+    max_droite = maximum_dpr(liste[milieu:])
+    return max(max_gauche, max_droite)
+\end{python}
+Le cas de base est une liste réduite à un seul élément : son maximum est cet élément lui-même, sans appel récursif. On suppose la liste non vide en entrée (une liste vide n'a pas de maximum).
+\end{corrige}

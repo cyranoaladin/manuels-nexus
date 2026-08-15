@@ -1,0 +1,24 @@
+% META: {"id": "TCOMPL-AIR-CO-005", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "corrige", "exercice_ref": "TCOMPL-AIR-EX-005", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(1/x)
+% fp = diff(f, x)
+% assert simplify(fp) == -exp(1/x)/x**2
+% # fp < 0 sur R* : f decroissante
+% assert fp.subs(x, 1) == -exp(1)
+% assert fp.subs(x, -1) == -exp(-1)
+% END-VERIFY
+\begin{corrige}{TCOMPL-AIR-EX-005}
+
+\textbf{Question 1.} On pose $u(x) = \dfrac{1}{x}$. Alors $u'(x) = -\dfrac{1}{x^2}$.
+
+\[ f'(x) = u'(x)\,\mathrm{e}^{u(x)} = -\frac{1}{x^2}\,\mathrm{e}^{1/x}. \]
+
+\commentaireMarge{Sur $\mathbb{R}^*$, $x^2 > 0$ et $\mathrm{e}^{1/x} > 0$, donc $f' < 0$.}
+
+\textbf{Question 2.} Pour tout $x \in \mathbb{R}^*$, on a $x^2 > 0$ et $\mathrm{e}^{1/x} > 0$, donc $f'(x) < 0$.
+
+La fonction $f$ est \textbf{strictement decroissante} sur $\left]-\infty, 0\right[$ et sur $\left]0, +\infty\right[$.
+
+\end{corrige}

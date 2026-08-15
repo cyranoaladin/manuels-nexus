@@ -1,0 +1,10 @@
+% META: {"id": "TSPE-PRIMEQ-EX-010", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "exercice", "capacites": ["TSPE-PRIMITIVES-EQDIFF-C2"], "capacites_codes": ["C2"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-PRIMITIVES-EQDIFF/exercices/TSPE-PRIMEQ-EX-010.tex", "corrige_tex": "chapitres/TSPE-PRIMITIVES-EQDIFF/corriges/TSPE-PRIMEQ-CO-010.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, ln, simplify, Rational
+% x = symbols('x')
+% F = Rational(1,2)*ln(x**2+4)
+% assert simplify(diff(F, x) - x/(x**2+4)) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-PRIMEQ-EX-002}{2}{12}
+Determiner une primitive sur $\mathbb{R}$ de $f(x) = \dfrac{x}{x^2+4}$.
+\end{exercice}

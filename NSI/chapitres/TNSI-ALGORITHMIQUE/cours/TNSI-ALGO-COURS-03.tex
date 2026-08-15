@@ -1,0 +1,88 @@
+% META: {"id": "TNSI-ALGO-COURS-03", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "cours", "capacites_codes": ["C3"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TNSI-ALGORITHMIQUE-C3"]}
+\section{Parcours d'un graphe}
+
+% ============================================================
+% STRATE 1 — BFS
+% ============================================================
+
+On représente un graphe par un dictionnaire associant à chaque sommet la liste de ses successeurs (voir le chapitre \textit{Structures de données}).
+
+\definition[1]{
+Le parcours en \textbf{largeur d'abord} (\textit{Breadth-First Search}, BFS) d'un graphe visite les sommets par distance croissante au sommet de départ, en utilisant une \textbf{file}. Contrairement à un arbre, un graphe peut contenir des \textbf{cycles} : il faut donc mémoriser les sommets déjà visités pour ne pas boucler indéfiniment.
+}
+
+\textbf{Exemple.}
+\begin{python}
+def bfs(graphe, depart):
+    visites = [depart]
+    file = [depart]
+    while file:
+        sommet = file.pop(0)
+        for voisin in graphe[sommet]:
+            if voisin not in visites:
+                visites.append(voisin)
+                file.append(voisin)
+    return visites
+\end{python}
+
+% BEGIN-VERIFY
+% def bfs(graphe, depart):
+%     visites = [depart]
+%     file = [depart]
+%     while file:
+%         sommet = file.pop(0)
+%         for voisin in graphe[sommet]:
+%             if voisin not in visites:
+%                 visites.append(voisin)
+%                 file.append(voisin)
+%     return visites
+%
+% graphe = {0: [1, 2], 1: [0, 3], 2: [0, 3], 3: [1, 2]}
+% assert bfs(graphe, 0) == [0, 1, 2, 3]
+% END-VERIFY
+
+\margeAppui{
+Sans la liste \lstinline{visites}, un graphe contenant un cycle (comme le carré $0-1-3-2-0$ de l'exemple) ferait boucler l'algorithme indéfiniment : le sommet $0$ serait redécouvert depuis $1$ ou $2$, encore et encore.
+}
+
+% ============================================================
+% STRATE 2 — DFS
+% ============================================================
+
+\definition[2]{
+Le parcours en \textbf{profondeur d'abord} (\textit{Depth-First Search}, DFS) explore chaque branche aussi loin que possible avant de revenir en arrière (\textit{backtrack}). Il s'implémente naturellement par \textbf{récursion} (la pile d'appels joue le rôle de la pile), ou explicitement avec une \textbf{pile}.
+}
+
+\textbf{Exemple.} Version récursive :
+\begin{python}
+def dfs(graphe, sommet, visites=None):
+    if visites is None:
+        visites = []
+    visites.append(sommet)
+    for voisin in graphe[sommet]:
+        if voisin not in visites:
+            dfs(graphe, voisin, visites)
+    return visites
+\end{python}
+
+% BEGIN-VERIFY
+% def dfs(graphe, sommet, visites=None):
+%     if visites is None:
+%         visites = []
+%     visites.append(sommet)
+%     for voisin in graphe[sommet]:
+%         if voisin not in visites:
+%             dfs(graphe, voisin, visites)
+%     return visites
+%
+% graphe = {0: [1, 2], 1: [0, 3], 2: [0, 3], 3: [1, 2]}
+% assert dfs(graphe, 0) == [0, 1, 3, 2]
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Argument par défaut mutable.} Écrire \lstinline{def dfs(graphe, sommet, visites=[]):} au lieu de \lstinline{visites=None} est un piège classique en Python : la liste par défaut est créée \textbf{une seule fois}, à la définition de la fonction, et \textbf{partagée} entre tous les appels qui ne fournissent pas explicitement \lstinline{visites}. Un deuxième appel \lstinline{dfs(graphe, 0)} repartirait alors avec les sommets déjà visités lors du premier appel.
+}
+
+\propriete[BFS et DFS : deux usages différents]{
+Le BFS trouve le \textbf{plus court chemin} en nombre d'arêtes dans un graphe non pondéré (il visite par distance croissante). Le DFS est souvent plus simple à écrire et suffit pour explorer entièrement un graphe ou détecter sa connexité, mais ne garantit pas de trouver le chemin le plus court.
+}

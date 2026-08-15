@@ -1,0 +1,24 @@
+% META: {"id": "TEXP-ARI-EX-039", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C3"], "capacites_codes": ["C3"], "methodes": ["M4"], "parcours": 1, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-039.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-039.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = ln(x)
+% fp = diff(f, x)
+% # tangente en x=1: f(1)=0, f'(1)=1, y=x-1
+% # ln(x) - (x-1) = ln(x) - x + 1 <= 0 (concavite)
+% g = ln(x) - x + 1
+% g2 = diff(g, x, 2)
+% assert g2 == -1/x**2  # < 0, concave
+% assert g.subs(x, 1) == 0
+% assert g.subs(x, 2) == ln(2) - 1 < 0
+% assert simplify(g.subs(x, Rational(1,2)) - (-ln(2) + Rational(1,2))) == 0
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-039}{2}{15}
+Soit $f(x) = \ln x$ sur $\left]0, +\infty\right[$.
+\begin{enumerate}
+  \item Determiner la tangente a la courbe au point d'abscisse $1$.
+  \item Montrer que la courbe est au-dessous de cette tangente.
+  \item En deduire une inegalite connue.
+\end{enumerate}
+
+\end{exercice}

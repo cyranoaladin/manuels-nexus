@@ -1,0 +1,27 @@
+% META: {"id": "TNSI-STRUCT-EX-026", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "exercice", "capacites": ["TNSI-STRUCTURES-DONNEES-C7"], "capacites_codes": ["C7"], "methodes": ["M1"], "parcours": 2, "competences": ["programmer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-026.tex", "corrige_tex": "chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-026.tex", "status": "approved"}
+% BEGIN-VERIFY
+% class Compte:
+%     def __init__(self, titulaire, solde=0):
+%         self.titulaire = titulaire
+%         self.solde = solde
+%     def deposer(self, montant):
+%         self.solde = self.solde + montant
+%     def retirer(self, montant):
+%         if montant > self.solde:
+%             raise ValueError('solde insuffisant')
+%         self.solde = self.solde - montant
+% c = Compte('Alice', 100)
+% c.deposer(50)
+% assert c.solde == 150
+% c.retirer(30)
+% assert c.solde == 120
+% END-VERIFY
+\begin{exercice}{TNSI-STRUCT-EX-002}{1}{15}
+Ecrire une classe \lstinline{Compte} representant un compte bancaire simplifie, avec :
+\begin{itemize}
+  \item un constructeur prenant un \lstinline{titulaire} et un \lstinline{solde} initial (par defaut $0$) ;
+  \item une methode \lstinline{deposer(montant)} qui augmente le solde ;
+  \item une methode \lstinline{retirer(montant)} qui diminue le solde, et leve une erreur (\lstinline{ValueError}) si le montant demande depasse le solde disponible.
+\end{itemize}
+Tester votre classe avec un compte initial de $100$, un depot de $50$, puis un retrait de $30$.
+\end{exercice}

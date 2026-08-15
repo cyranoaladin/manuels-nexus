@@ -1,0 +1,32 @@
+% META: {"id": "TNSI-LANG-CO-020", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "correction", "exercice_ref": "TNSI-LANG-EX-004", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-LANGAGES-ET-PROGRAMMATION-C4"], "parcours": 1, "fichier_exercice": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-020.tex"}
+% BEGIN-VERIFY
+% def ajouter_note(bulletin, note):
+%     bulletin.append(note)
+%     return bulletin
+% bulletin_A = []
+% bulletin_B = ajouter_note(bulletin_A, 15)
+% bulletin_C = ajouter_note(bulletin_A, 12)
+% assert bulletin_A == [15, 12]
+% assert bulletin_B == [15, 12]
+% assert bulletin_C == [15, 12]
+% assert bulletin_A is bulletin_B is bulletin_C
+%
+% def ajouter_note_corrige(bulletin, note):
+%     return bulletin + [note]
+% bulletin_A2 = []
+% bulletin_B2 = ajouter_note_corrige(bulletin_A2, 15)
+% bulletin_C2 = ajouter_note_corrige(bulletin_A2, 12)
+% assert bulletin_A2 == []
+% assert bulletin_B2 == [15]
+% assert bulletin_C2 == [12]
+% END-VERIFY
+\begin{corrige}{TNSI-LANG-EX-004}
+\textbf{Q1.} \lstinline{bulletin_A}, \lstinline{bulletin_B} et \lstinline{bulletin_C} désignent tous les \textbf{trois le même objet liste}, qui contient finalement \lstinline{[15, 12]}. Ce n'est \textbf{pas} le résultat attendu : \lstinline{append} modifie la liste \textbf{en place} (effet de bord), donc chaque appel modifie le même \lstinline{bulletin_A} au lieu de créer un bulletin séparé pour chaque élève.
+
+\textbf{Q2.}
+\begin{python}
+def ajouter_note_corrige(bulletin, note):
+    return bulletin + [note]
+\end{python}
+L'opérateur \lstinline{+} sur des listes crée une \textbf{nouvelle} liste (concaténation), sans modifier \lstinline{bulletin} : \lstinline{bulletin_A2} reste \lstinline{[]}, \lstinline{bulletin_B2} vaut \lstinline{[15]} et \lstinline{bulletin_C2} vaut \lstinline{[12]}, chacun indépendant des autres.
+\end{corrige}

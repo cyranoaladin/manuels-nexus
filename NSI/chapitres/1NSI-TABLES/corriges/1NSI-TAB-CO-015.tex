@@ -1,0 +1,37 @@
+% META: {"id": "1NSI-TAB-CO-015", "chapitre": "1NSI-TABLES", "type_objet": "correction", "exercice_ref": "1NSI-TAB-EX-003", "capacites": ["1NSI-TABLES-C3"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C3"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-015.tex"}
+% BEGIN-VERIFY
+% commandes = [
+%     {"id": "C001", "client": "Ali", "quantite": 3},
+%     {"id": "C002", "client": "Sara", "quantite": 1},
+%     {"id": "C001", "client": "Ali", "quantite": 3},
+%     {"id": "C003", "client": "Nadia", "quantite": -2},
+% ]
+% def doublons(table, colonne):
+%     valeurs = [ligne[colonne] for ligne in table]
+%     return [v for v in set(valeurs) if valeurs.count(v) > 1]
+% assert doublons(commandes, "id") == ["C001"]
+% END-VERIFY
+\begin{corrige}{1NSI-TAB-EX-003}
+\textbf{1.}
+\begin{python}
+def doublons(table, colonne):
+    valeurs = [ligne[colonne] for ligne in table]
+    return [v for v in set(valeurs) if valeurs.count(v) > 1]
+\end{python}
+\lstinline{doublons(commandes, "id")} renvoie \lstinline{["C001"]} : l'identifiant
+\lstinline{"C001"} apparaît deux fois. C'est anormal car un identifiant de commande est
+censé être \textbf{unique} : cela peut signaler une commande enregistrée deux fois par
+erreur.
+
+\textbf{2.}
+\begin{python}
+def coherente(table):
+    for ligne in table:
+        if not isinstance(ligne["quantite"], int) or ligne["quantite"] <= 0:
+            return False
+    return True
+\end{python}
+\lstinline{coherente(commandes)} renvoie \lstinline{False}.
+
+\textbf{3.} La ligne responsable est \lstinline|{"id": "C003", "client": "Nadia", "quantite": -2}| : sa quantité est négative, ce qui n'a pas de sens pour une commande.
+\end{corrige}

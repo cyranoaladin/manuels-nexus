@@ -1,0 +1,88 @@
+% META: {"id": "1NSI-TB-COURS-01", "chapitre": "1NSI-TYPES-BASE", "type_objet": "cours", "capacites": ["1NSI-TYPES-BASE-C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C1"]}
+\section{Écriture d'un entier dans une base}
+\label{sec:bases}
+
+\margeAppui{Une machine ne manipule que des 0 et des 1 : le \emph{bit}. Toute donnée
+est finalement une suite de bits, dont le sens dépend du codage choisi.}
+
+\definition[D1]{
+  La \textbf{base} $b$ (avec $b\geqslant2$) d'un système de numération est le nombre de
+  chiffres distincts utilisés pour écrire un nombre. En base $b$, un nombre s'écrit
+  $\overline{d_{k}d_{k-1}\ldots d_1d_0}_b$ et sa valeur en base 10 est
+  $\displaystyle\sum_{i=0}^{k} d_i \times b^i$.
+}
+
+\exemple{En base 2 (\emph{binaire}, chiffres 0 et 1), $101101_2 = 1\times32+0\times16+1\times8+1\times4+0\times2+1\times1 = 45$. En base 16 (\emph{hexadécimal}, chiffres 0-9 puis A-F), $2D_{16} = 2\times16+13 = 45$.}
+
+% BEGIN-VERIFY
+% assert int('101101', 2) == 45
+% assert int('2D', 16) == 45
+% assert bin(45) == '0b101101'
+% assert hex(45) == '0x2d'
+% END-VERIFY
+
+\propriete[Conversion base $b$ vers base 10]{
+  Pour convertir un nombre écrit en base $b$ vers la base 10, on calcule la somme des
+  chiffres multipliés par les puissances de $b$ correspondantes (méthode dite « d'Horner »
+  pour un calcul efficace : on part du chiffre de poids fort et on accumule
+  $r \leftarrow r\times b + d_i$).
+}
+
+\begin{codereference}{Conversion base $b$ vers décimal}
+\begin{python}
+def vers_decimal(chiffres, base):
+    """Convertit une liste de chiffres (poids fort en premier) en un entier decimal.
+
+    Preconditions : base >= 2, chaque chiffre de `chiffres` est dans [0, base[.
+    """
+    valeur = 0
+    for d in chiffres:
+        valeur = valeur * base + d
+    return valeur
+
+print(vers_decimal([1, 0, 1, 1, 0, 1], 2))   # 45
+print(vers_decimal([2, 13], 16))             # 45
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def vers_decimal(chiffres, base):
+%     valeur = 0
+%     for d in chiffres:
+%         valeur = valeur * base + d
+%     return valeur
+% assert vers_decimal([1, 0, 1, 1, 0, 1], 2) == 45
+% assert vers_decimal([2, 13], 16) == 45
+% assert vers_decimal([1, 1, 1, 1, 1, 1, 1, 1], 2) == 255
+% END-VERIFY
+
+\propriete[Conversion base 10 vers base $b$]{
+  Pour convertir un entier positif de la base 10 vers la base $b$, on effectue des
+  divisions euclidiennes successives par $b$ : les restes obtenus, lus de bas en haut
+  (dernier reste calculé en premier), forment l'écriture en base $b$.
+}
+
+\exemple{Pour convertir $45$ en base $2$ : $45=2\times22+1$, $22=2\times11+0$, $11=2\times5+1$, $5=2\times2+1$, $2=2\times1+0$, $1=2\times0+1$. En lisant les restes de bas en haut : $101101_2$.}
+
+% BEGIN-VERIFY
+% def vers_base(n, base):
+%     if n == 0:
+%         return [0]
+%     chiffres = []
+%     while n > 0:
+%         chiffres.append(n % base)
+%         n //= base
+%     return chiffres[::-1]
+% assert vers_base(45, 2) == [1, 0, 1, 1, 0, 1]
+% assert vers_base(45, 16) == [2, 13]
+% assert vers_base(0, 2) == [0]
+% END-VERIFY
+
+\erreurFrequente{Confondre la \textbf{valeur} d'un nombre et son \textbf{écriture}. Le nombre
+quarante-cinq est le même objet mathématique, qu'on l'écrive \lstinline{101101} en base 2,
+\lstinline{2D} en base 16 ou \lstinline{45} en base 10 : seule son écriture change selon la base.}
+
+\alamachine{Écris une fonction \lstinline{vers_base(n, base)} qui renvoie la liste des
+chiffres de l'entier positif \lstinline{n} écrit en base \lstinline{base} (poids fort en
+premier), puis vérifie que \lstinline{vers_base(255, 16)} donne \lstinline{[15, 15]}. Compare
+avec les fonctions natives \lstinline{bin}, \lstinline{oct} et \lstinline{hex} de Python.}

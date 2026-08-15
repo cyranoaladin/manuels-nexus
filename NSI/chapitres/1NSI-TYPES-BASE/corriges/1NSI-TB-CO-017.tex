@@ -1,0 +1,28 @@
+% META: {"id": "1NSI-TB-CO-017", "chapitre": "1NSI-TYPES-BASE", "type_objet": "correction", "exercice_ref": "1NSI-TB-EX-005", "capacites": ["1NSI-TYPES-BASE-C3"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C3"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-017.tex"}
+% BEGIN-VERIFY
+% s = 'Bonjour à tous !'
+% assert len(s) == 16
+% assert len(s.encode('utf-8')) == 17
+% assert len(s.encode('iso-8859-1')) == 16
+% END-VERIFY
+\begin{corrige}{1NSI-TB-EX-005}
+\textbf{1.} La chaîne compte $16$ caractères.
+
+\textbf{2.} En UTF-8 : $17$ octets. En ISO-8859-1 : $16$ octets. Le « à » occupe $2$ octets
+en UTF-8 (car son code Unicode dépasse la plage codée sur un seul octet) mais $1$ seul octet
+en ISO-8859-1 (qui code directement les caractères accentués usuels d'Europe de l'Ouest sur
+un octet) : d'où l'écart d'un octet entre les deux encodages. En ISO-8859-1, tous les
+caractères de cette chaîne tiennent sur un octet, donc le nombre d'octets égale le nombre de
+caractères ; ce n'est pas le cas en UTF-8 à cause du « à ».
+
+\textbf{3.} L'encodage échoue avec une \lstinline{UnicodeEncodeError} : le caractère
+\lstinline{'à'} n'existe pas dans le jeu de caractères ASCII (qui ne code que les $128$
+premiers caractères Unicode, c'est-à-dire les lettres non accentuées, chiffres et
+ponctuation de base).
+
+\textbf{4.} ISO-8859-1 ne code que les caractères d'Europe de l'Ouest (256 caractères au
+total) : il ne peut pas représenter les caractères arabes, chinois ou cyrilliques. UTF-8, en
+revanche, peut coder \textbf{tous} les caractères de toutes les langues du monde (table
+Unicode), ce qui en fait le choix adapté pour un serveur recevant des messages
+internationaux.
+\end{corrige}

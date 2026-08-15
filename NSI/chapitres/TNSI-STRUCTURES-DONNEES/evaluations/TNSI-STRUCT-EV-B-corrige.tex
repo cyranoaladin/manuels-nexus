@@ -1,0 +1,27 @@
+% META: {"id": "TNSI-STRUCT-EVAL-B-corrige", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "correction", "evaluation_ref": "TNSI-STRUCT-EVAL-B", "capacites": ["T-STRUCT-05A", "T-STRUCT-05B", "T-STRUCT-05D"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% successeurs = {0: [1, 2], 1: [], 2: [0]}
+% n = 3
+% matrice = [[1 if j in successeurs[i] else 0 for j in range(n)] for i in range(n)]
+% assert matrice == [[0,1,1],[0,0,0],[1,0,0]]
+% END-VERIFY
+\begin{corrige}{TNSI-STRUCT-EVAL-B-EX1}
+\textbf{Q1.} Un graphe modelise naturellement des elements (stations) en relation (lignes directes) : les stations sont les sommets, les lignes directes les aretes.
+
+\textbf{Q2.} Si les lignes fonctionnent dans les deux sens, le graphe doit etre \textbf{non oriente} (une arete entre deux stations represente une liaison utilisable dans les deux sens, sans distinction de direction).
+\end{corrige}
+
+\begin{corrige}{TNSI-STRUCT-EVAL-B-EX2}
+\textbf{Q1.} $0\to1$, $0\to2$, $2\to0$.
+
+\textbf{Q2.} La liste associee au sommet $1$ est vide : $1$ n'a aucun successeur, c'est un puits du graphe (aucune arete sortante).
+
+\textbf{Q3.}
+\begin{python}
+matrice = [
+    [0, 1, 1],
+    [0, 0, 0],
+    [1, 0, 0],
+]
+\end{python}
+\end{corrige}

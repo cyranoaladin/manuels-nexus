@@ -1,0 +1,29 @@
+% META: {"id": "TCOMPL-INEG-CO-027", "chapitre": "TCOMPL-INEGALITES", "type_objet": "corrige", "exercice_ref": "TCOMPL-INEG-EX-027", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f(x)=x^4-2x^2, f'=4x^3-4x, f''=12x^2-4
+% f = x**4 - 2*x**2
+% fp = diff(f, x)
+% fpp = diff(f, x, 2)
+% assert expand(fp) == 4*x**3 - 4*x
+% assert expand(fpp) == 12*x**2 - 4
+% assert solve(fpp, x) == [-sqrt(3)/3, sqrt(3)/3]
+% assert f.subs(x, 0) == 0
+% assert f.subs(x, sqrt(3)/3) == Rational(-5, 9)
+% END-VERIFY
+\begin{corrige}{TCOMPL-INEG-EX-027}
+
+\textbf{Question 1.} $f'(x) = 4x^3 - 4x = 4x(x^2-1)$ et $f''(x) = 12x^2 - 4$.
+
+\commentaireMarge{$f''=0$ en $\pm\frac{\sqrt{3}}{3}$ : points d'inflexion.}
+
+\textbf{Question 2.} $f''(x) = 0 \iff x = \pm\dfrac{\sqrt{3}}{3}$.
+
+En ces points, $f''$ change de signe : ce sont des points d'inflexion.
+
+$\displaystyle f\!\left(\frac{\sqrt{3}}{3}\right) = \frac{1}{9} - \frac{2}{3} = -\frac{5}{9}$.
+
+\textbf{Question 3.} La courbe est convexe sur $\left]-\infty, -\frac{\sqrt3}{3}\right] \cup \left[\frac{\sqrt3}{3}, +\infty\right[$ et concave entre ces valeurs. Elle presente deux << bosses >> avec une inflexion au passage.
+
+\end{corrige}

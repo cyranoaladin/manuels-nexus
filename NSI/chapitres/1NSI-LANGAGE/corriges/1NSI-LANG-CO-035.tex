@@ -1,0 +1,26 @@
+% META: {"id": "1NSI-LANG-CO-035", "chapitre": "1NSI-LANGAGE", "type_objet": "correction", "exercice_ref": "1NSI-LANG-EX-005", "capacites": ["1NSI-LANGAGE-C6"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C6"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-035.tex"}
+% BEGIN-VERIFY
+% import statistics
+% notes = [10, 12, 14, 20]
+% moyenne = statistics.mean(notes)
+% mediane = statistics.median(notes)
+% assert moyenne == 14
+% assert mediane == 13.0
+% assert 0 <= moyenne <= 20
+% END-VERIFY
+\begin{corrige}{1NSI-LANG-EX-005}
+\textbf{1.} Le module de la bibliothèque standard est \lstinline{statistics}. La fonction
+qui calcule une moyenne est \lstinline{statistics.mean}.
+
+\textbf{2.}
+\begin{python}
+import statistics
+
+notes = [10, 12, 14, 20]
+moyenne = statistics.mean(notes)     # 14
+mediane = statistics.median(notes)   # 13.0
+\end{python}
+
+\textbf{3.} La moyenne obtenue est $14$, qui est bien comprise entre $0$ et $20$ : la
+postcondition est respectée.
+\end{corrige}

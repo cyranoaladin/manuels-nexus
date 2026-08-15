@@ -1,0 +1,19 @@
+% META: {"id": "TNSI-ALGO-EX-024", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "exercice", "capacites": ["TNSI-ALGORITHMIQUE-C6"], "capacites_codes": ["C6"], "methodes": ["M1"], "parcours": 2, "competences": ["programmer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-024.tex", "corrige_tex": "chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-024.tex", "status": "approved"}
+% BEGIN-VERIFY
+% def fib_memo(n, memo=None):
+%     if memo is None:
+%         memo = {0: 0, 1: 1}
+%     if n in memo:
+%         return memo[n]
+%     memo[n] = fib_memo(n - 1, memo) + fib_memo(n - 2, memo)
+%     return memo[n]
+% assert [fib_memo(n) for n in range(10)] == [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+% assert fib_memo(30) == 832040
+% END-VERIFY
+\begin{exercice}{TNSI-ALGO-EX-004}{2}{20}
+La suite de Fibonacci est définie par $F_0 = 0$, $F_1 = 1$, et $F_n = F_{n-1} + F_{n-2}$ pour $n \geq 2$. Une version récursive naïve de son calcul recalcule un très grand nombre de fois les mêmes valeurs.
+\begin{enumerate}
+  \item Écrire une fonction \lstinline{fib_memo(n, memo=None)} qui calcule $F_n$ par \textbf{programmation dynamique} (mémoïsation), en s'inspirant de \lstinline{rendu_memo} du cours.
+  \item Vérifier que $F_0, F_1, \dots, F_9$ vaut $0, 1, 1, 2, 3, 5, 8, 13, 21, 34$, et que $F_{30} = 832\,040$.
+\end{enumerate}
+\end{exercice}

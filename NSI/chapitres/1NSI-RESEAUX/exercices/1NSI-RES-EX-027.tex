@@ -1,0 +1,30 @@
+% META: {"id": "1NSI-RES-EX-027", "chapitre": "1NSI-RESEAUX", "type_objet": "exercice", "capacites": ["1NSI-RESEAUX-C5"], "parcours": 1, "competences": ["analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-027.tex", "corrige_tex": "chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-027.tex", "status": "approved", "capacites_codes": ["C5"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% def protocole_bit_alterne(messages, tentatives_perdues):
+%     resultat = []
+%     bit = 0
+%     compteur_tentative = 0
+%     for message in messages:
+%         recu = False
+%         while not recu:
+%             compteur_tentative += 1
+%             if compteur_tentative in tentatives_perdues:
+%                 continue
+%             resultat.append((bit, message))
+%             recu = True
+%         bit = 1 - bit
+%     return resultat
+% envois = protocole_bit_alterne(["X", "Y", "Z"], tentatives_perdues={1, 4})
+% assert envois == [(0, "X"), (1, "Y"), (0, "Z")]
+% assert len(envois) == 3
+% END-VERIFY
+\begin{exercice}{1NSI-RES-EX-002}{1}{12}
+On envoie les messages \lstinline{["X", "Y", "Z"]} avec le protocole du bit alterné du
+cours. La première tentative globale (numéro $1$) et la quatrième tentative globale
+(numéro $4$) échouent (paquet ou ACK perdu) ; toutes les autres réussissent.
+\begin{enumerate}
+  \item Dérouler, tentative par tentative, ce qui se passe : quel message est concerné par chaque tentative, réussit-elle, et quel est le bit utilisé ?
+  \item Donner la liste finale des messages effectivement reçus par le destinataire, avec leur bit.
+  \item Combien de tentatives ont été nécessaires au total pour transmettre les $3$ messages ? Ce nombre est-il égal au nombre de messages ? Pourquoi ?
+\end{enumerate}
+\end{exercice}

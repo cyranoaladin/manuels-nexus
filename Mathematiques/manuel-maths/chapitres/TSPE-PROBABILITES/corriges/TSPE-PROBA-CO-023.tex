@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-PROBA-CO-023", "chapitre": "TSPE-PROBABILITES", "type_objet": "correction", "exercice_ref": "TSPE-PROBA-EX-005", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-PROBA-C5"], "parcours": 1, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-023.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial
+% p = Rational(1,3)
+% assert binomial(3,2)*p**2*(1-p)**1 == Rational(2,9)
+% END-VERIFY
+\begin{corrige}{TSPE-PROBA-EX-005}
+
+\textbf{Q1.} Les chemins avec exactement $2$ succes parmi $3$ epreuves : SSE, SES, ESS.
+
+\textbf{Q2.} $P(\text{SSE}) = p\times p\times(1-p) = \dfrac{1}{3}\times\dfrac{1}{3}\times\dfrac{2}{3} = \dfrac{2}{27}$.
+
+\textbf{Q3.} Chaque chemin comporte $2$ facteurs $p$ et $1$ facteur $(1-p)$ (dans un ordre different, mais la multiplication est commutative) : le produit vaut toujours $p^2(1-p) = \dfrac{2}{27}$, quel que soit l'ordre.
+
+\textbf{Q4.} $P(X=2) = P(\text{SSE})+P(\text{SES})+P(\text{ESS}) = 3\times\dfrac{2}{27} = \dfrac{6}{27} = \dfrac{2}{9}$.
+
+Avec la formule : $\dbinom{3}{2}p^2(1-p)^1 = 3\times\dfrac{2}{27} = \dfrac{2}{9}$. Les deux resultats coincident.
+
+\end{corrige}

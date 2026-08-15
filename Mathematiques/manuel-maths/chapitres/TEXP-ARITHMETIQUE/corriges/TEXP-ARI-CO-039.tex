@@ -1,0 +1,28 @@
+% META: {"id": "TEXP-ARI-CO-039", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-039", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = ln(x)
+% fp = diff(f, x)
+% # tangente en x=1: f(1)=0, f'(1)=1, y=x-1
+% # ln(x) - (x-1) = ln(x) - x + 1 <= 0 (concavite)
+% g = ln(x) - x + 1
+% g2 = diff(g, x, 2)
+% assert g2 == -1/x**2  # < 0, concave
+% assert g.subs(x, 1) == 0
+% assert g.subs(x, 2) == ln(2) - 1 < 0
+% assert simplify(g.subs(x, Rational(1,2)) - (-ln(2) + Rational(1,2))) == 0
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-039}
+
+\textbf{Question 1.} $f(1)=0$ et $f'(1)=1$. La tangente est $y = x - 1$.
+
+\commentaireMarge{$\ln$ est concave : la courbe est en dessous de ses tangentes.}
+
+\textbf{Question 2.} $g(x) = \ln x - (x-1)$. $g''(x) = -\dfrac{1}{x^2} < 0$ : $g$ est concave.
+
+$g(1) = 0$ est le maximum de $g$ (car $g'(1) = 0$ et $g$ concave), donc $g(x) \leq 0$ : la courbe est \textbf{au-dessous} de la tangente.
+
+\textbf{Question 3.} On retrouve $\ln x \leq x - 1$ pour tout $x > 0$.
+
+\end{corrige}

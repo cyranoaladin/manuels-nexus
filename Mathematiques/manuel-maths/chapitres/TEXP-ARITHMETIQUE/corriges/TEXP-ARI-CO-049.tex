@@ -1,0 +1,35 @@
+% META: {"id": "TEXP-ARI-CO-049", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-049", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, a, h = symbols('x a h')
+% # Theoreme C6: si f'' >= 0, alors f(x) >= f(a) + f'(a)(x-a)
+% # Demo via g(x) = f(x) - f(a) - f'(a)(x-a)
+% # g(a) = 0, g'(x) = f'(x) - f'(a), g'(a) = 0
+% # g''(x) = f''(x) >= 0 => g' croissante
+% # Sur [a, x] (x > a): g' >= g'(a) = 0 => g croissante => g(x) >= g(a) = 0
+% # Sur [x, a] (x < a): g' <= g'(a) = 0 => g decroissante => g(x) >= g(a) = 0
+% # Verification numerique sur f(x) = x^4, a = 1
+% fx = x**4
+% fa = 1
+% fpa = 4
+% g = fx - fa - fpa*(x - 1)
+% assert g.subs(x, 1) == 0
+% assert g.subs(x, 0) == 3
+% assert g.subs(x, 2) == 11
+% assert g.subs(x, Rational(1,2)) == Rational(17,16)
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-049}
+
+Posons $g(x) = f(x) - f(a) - f'(a)(x - a)$.
+
+\commentaireMarge{Poser $g$, étudier $g'$ et $g''$.}
+
+\textbf{Initialisation.} $g(a) = 0$ et $g'(x) = f'(x) - f'(a)$, donc $g'(a) = 0$. De plus $g''(x) = f''(x) \geq 0$.
+
+\textbf{Cas $x \geq a$.} Comme $g'' \geq 0$, $g'$ est croissante. Pour $x \geq a$, $g'(x) \geq g'(a) = 0$, donc $g$ est croissante sur $[a, x]$, et $g(x) \geq g(a) = 0$.
+
+\textbf{Cas $x \leq a$.} Pour $x \leq a$, $g'(x) \leq g'(a) = 0$, donc $g$ est decroissante sur $[x, a]$. Ainsi $g(x) \geq g(a) = 0$.
+
+\textbf{Conclusion.} Dans les deux cas, $g(x) \geq 0$, soit $f(x) \geq f(a) + f'(a)(x - a)$. $\blacksquare$
+
+\end{corrige}

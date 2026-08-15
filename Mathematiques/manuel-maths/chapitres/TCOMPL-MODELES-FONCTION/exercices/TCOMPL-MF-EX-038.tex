@@ -1,0 +1,21 @@
+% META: {"id": "TCOMPL-MF-EX-038", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "exercice", "capacites": ["TCOMPL-MF-C3"], "capacites_codes": ["C3"], "methodes": ["M4"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-038.tex", "corrige_tex": "chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-038.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f(x) = x^4 + x^2 >= 0 par convexite (somme de convexe)
+% f = x**4 + x**2
+% fpp = diff(f, x, 2)
+% assert expand(fpp) == 12*x**2 + 2
+% # fpp = 12*x**2 + 2 > 0 (strictement convexe)
+% assert f.subs(x, 0) == 0
+% assert f.subs(x, 1) == 2
+% END-VERIFY
+\begin{exercice}{TCOMPL-MF-EX-038}{2}{15}
+Soit $f(x) = x^4 + x^2$.
+\begin{enumerate}
+  \item Montrer que $f$ est strictement convexe sur $\mathbb{R}$.
+  \item En deduire que $f$ admet un unique minimum et le determiner.
+  \item Resoudre $f(x) \geq 2$.
+\end{enumerate}
+
+\end{exercice}

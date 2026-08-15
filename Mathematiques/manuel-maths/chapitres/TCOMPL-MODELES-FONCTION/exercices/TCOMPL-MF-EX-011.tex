@@ -1,0 +1,16 @@
+% META: {"id": "TCOMPL-MF-EX-011", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "exercice", "capacites": ["TCOMPL-MF-C4"], "capacites_codes": ["C4"], "methodes": ["M2"], "parcours": 2, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-011.tex", "corrige_tex": "chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-011.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x) - x
+% fp = diff(f, x)
+% assert fp == exp(x) - 1
+% assert solve(fp, x) == [0]
+% assert f.subs(x, 0) == 1
+% assert limit(f, x, oo) == oo
+% assert limit(f, x, -oo) == oo
+% END-VERIFY
+\begin{exercice}{TCOMPL-MF-EX-011}{1}{12}
+Etudier les variations de $f(x) = \mathrm{e}^x - x$ sur $\mathbb{R}$ et determiner ses limites en $\pm\infty$.
+
+\end{exercice}

@@ -1,0 +1,25 @@
+% META: {"id": "TCOMPL-INEG-CO-015", "chapitre": "TCOMPL-INEGALITES", "type_objet": "corrige", "exercice_ref": "TCOMPL-INEG-EX-015", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', positive=True)
+% f = ln(x)/x
+% fp = diff(f, x)
+% assert simplify(fp) == (1 - ln(x))/x**2
+% assert solve(fp, x) == [exp(1)]
+% assert f.subs(x, exp(1)) == exp(-1)
+% assert limit(f, x, oo) == 0
+% assert limit(f, x, 0, '+') == -oo
+% END-VERIFY
+\begin{corrige}{TCOMPL-INEG-EX-015}
+
+\textbf{Question 1.} $f'(x) = \dfrac{\dfrac{1}{x} \cdot x - \ln x \cdot 1}{x^2} = \dfrac{1 - \ln x}{x^2}$.
+
+\commentaireMarge{Quotient : $(u/v)' = (u'v - uv')/v^2$.}
+
+$f'(x) = 0 \iff \ln x = 1 \iff x = \mathrm{e}$. $f' > 0$ sur $\left]0, \mathrm{e}\right]$ et $f' < 0$ sur $\left[\mathrm{e}, +\infty\right[$.
+
+\textbf{Question 2.} $\lim_{x \to 0^+} \dfrac{\ln x}{x} = -\infty$ et $\lim_{x \to +\infty} \dfrac{\ln x}{x} = 0$ (croissances compareees).
+
+\textbf{Question 3.} $f$ admet un maximum $f(\mathrm{e}) = \dfrac{1}{\mathrm{e}}$.
+
+\end{corrige}

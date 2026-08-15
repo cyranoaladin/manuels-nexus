@@ -1,0 +1,90 @@
+% META: {"id": "TNSI-STRUCT-COURS-14", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "cours", "capacites_codes": ["C14"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TNSI-STRUCTURES-DONNEES-C14"]}
+\section{Arbres binaires}
+
+% ============================================================
+% STRATE 1 — Structure et mesures
+% ============================================================
+
+\definition[1]{
+Un \textbf{arbre binaire} est soit \textbf{vide}, soit constitue d'une \textbf{racine} (une valeur) et de deux \textbf{sous-arbres} (gauche et droit), eux-memes des arbres binaires. Une \textbf{feuille} est un noeud sans sous-arbre (les deux sous-arbres sont vides).
+}
+
+\margeAppui{
+Les structures arborescentes sont adaptees a la modelisation de \textbf{hierarchies} (systeme de fichiers, arbre genealogique) ou de processus \textbf{recursifs} par nature (expressions arithmetiques, algorithmes de tri comme le tri fusion).
+}
+
+\propriete[Mesures usuelles]{
+$\bullet$ La \textbf{taille} d'un arbre est son nombre total de noeuds.
+
+$\bullet$ La \textbf{hauteur} d'un arbre est la longueur du plus long chemin de la racine a une feuille (hauteur $0$ pour un arbre reduit a une seule feuille, hauteur $-1$ ou non definie pour un arbre vide selon la convention retenue).
+
+$\bullet$ Le nombre de \textbf{feuilles} est le nombre de noeuds sans sous-arbre.
+}
+
+\textbf{Exemple.} Implementation d'un arbre binaire et calcul de ses mesures :
+\begin{python}
+class Arbre:
+    def __init__(self, valeur, gauche=None, droit=None):
+        self.valeur = valeur
+        self.gauche = gauche
+        self.droit = droit
+
+def taille(a):
+    if a is None:
+        return 0
+    return 1 + taille(a.gauche) + taille(a.droit)
+
+def hauteur(a):
+    if a is None:
+        return -1
+    return 1 + max(hauteur(a.gauche), hauteur(a.droit))
+
+def nb_feuilles(a):
+    if a is None:
+        return 0
+    if a.gauche is None and a.droit is None:
+        return 1
+    return nb_feuilles(a.gauche) + nb_feuilles(a.droit)
+\end{python}
+
+Pour l'arbre $\left(1, \left(2,(4,\emptyset,\emptyset),\emptyset\right), (3,\emptyset,\emptyset)\right)$ (racine 1, fils gauche 2 ayant lui-meme un fils gauche 4, fils droit 3) :
+
+% BEGIN-VERIFY
+% class Arbre:
+%     def __init__(self, valeur, gauche=None, droit=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droit = droit
+%
+% def taille(a):
+%     if a is None:
+%         return 0
+%     return 1 + taille(a.gauche) + taille(a.droit)
+%
+% def hauteur(a):
+%     if a is None:
+%         return -1
+%     return 1 + max(hauteur(a.gauche), hauteur(a.droit))
+%
+% def nb_feuilles(a):
+%     if a is None:
+%         return 0
+%     if a.gauche is None and a.droit is None:
+%         return 1
+%     return nb_feuilles(a.gauche) + nb_feuilles(a.droit)
+%
+% arbre = Arbre(1, Arbre(2, Arbre(4)), Arbre(3))
+% assert taille(arbre) == 4
+% assert hauteur(arbre) == 2
+% assert nb_feuilles(arbre) == 2
+% END-VERIFY
+
+taille $=4$, hauteur $=2$ (chemin $1\to2\to4$), nombre de feuilles $=2$ (les noeuds $4$ et $3$).
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier le cas de base dans une fonction recursive sur un arbre.} Toute fonction recursive sur un arbre binaire doit traiter explicitement le cas \lstinline{a is None} (arbre vide) en premier, sous peine d'erreur (\lstinline{AttributeError}) lorsque la recursion atteint un sous-arbre vide.
+}

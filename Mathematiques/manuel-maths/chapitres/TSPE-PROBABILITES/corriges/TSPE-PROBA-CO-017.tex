@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-PROBA-CO-017", "chapitre": "TSPE-PROBABILITES", "type_objet": "correction", "exercice_ref": "TSPE-PROBA-EX-008", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-PROBA-C4"], "parcours": 2, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-017.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% n, p = 40, Rational(1,4)
+% assert n*p == 10
+% assert n*p*(1-p) == Rational(15,2)
+% END-VERIFY
+\begin{corrige}{TSPE-PROBA-EX-008}
+
+\textbf{Q1.} On ecrit $X=X_1+\cdots+X_{40}$, ou $X_i$ vaut $1$ si la $i$-eme epreuve est un succes (probabilite $0{,}25$), $0$ sinon. Chaque $X_i$ suit une loi de Bernoulli, $E(X_i)=p=0{,}25$. Par linearite de l'esperance :
+\[
+  E(X) = \sum_{i=1}^{40} E(X_i) = 40\times0{,}25 = 10.
+\]
+
+\textbf{Q2.} Les $40$ epreuves sont independantes (schema de Bernoulli), donc les $X_i$ sont independantes : l'additivite de la variance s'applique. $V(X_i)=p(1-p)=0{,}25\times0{,}75=0{,}1875$.
+\[
+  V(X) = \sum_{i=1}^{40} V(X_i) = 40\times0{,}1875 = 7{,}5.
+\]
+
+\textbf{Q3.} $E(X) = 40\times0{,}25 = \boxed{10}$. $V(X) = 40\times0{,}25\times0{,}75 = \boxed{7{,}5}$.
+
+\end{corrige}

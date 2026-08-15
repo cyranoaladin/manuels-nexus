@@ -1,0 +1,74 @@
+% META: {"id": "TNSI-ALGO-EVAL-A", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "evaluation", "capacites": ["T-ALGO-01A", "T-ALGO-01B", "T-ALGO-01E", "T-ALGO-01F"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "approved"}
+\section*{Évaluation A --- Arbres binaires}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 8 pts (taille, hauteur) ; Ex. 2 : 12 pts (arbre de recherche)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Taille et hauteur} \hfill (8 points)
+
+On donne la classe \lstinline{Noeud} du cours (attributs \lstinline{valeur}, \lstinline{gauche}, \lstinline{droite}) et l'arbre :
+\begin{python}
+arbre = Noeud(10, Noeud(5, Noeud(2), Noeud(7)), Noeud(15))
+\end{python}
+\begin{enumerate}
+  \item (4 pts) Sans exécuter de code, donner la taille et la hauteur de cet arbre en justifiant (convention : hauteur d'une feuille = $0$).
+  \item (4 pts) Écrire une fonction \lstinline{est_feuille(arbre)} qui renvoie \lstinline{True} si et seulement si \lstinline{arbre} est un nœud sans aucun enfant.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+% def taille(arbre):
+%     if arbre is None:
+%         return 0
+%     return 1 + taille(arbre.gauche) + taille(arbre.droite)
+% def hauteur(arbre):
+%     if arbre is None:
+%         return -1
+%     return 1 + max(hauteur(arbre.gauche), hauteur(arbre.droite))
+% arbre = Noeud(10, Noeud(5, Noeud(2), Noeud(7)), Noeud(15))
+% assert taille(arbre) == 5
+% assert hauteur(arbre) == 2
+% def est_feuille(arbre):
+%     return arbre is not None and arbre.gauche is None and arbre.droite is None
+% assert est_feuille(Noeud(2)) is True
+% assert est_feuille(arbre) is False
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Arbre binaire de recherche} \hfill (12 points)
+
+\begin{enumerate}
+  \item (6 pts) En utilisant \lstinline{inserer} du cours, construire un ABR à partir des valeurs $10, 5, 15, 3, 7, 12$ insérées dans cet ordre.
+  \item (6 pts) Écrire une fonction \lstinline{minimum(arbre)} qui renvoie la plus petite valeur d'un ABR non vide (indication : la plus petite valeur d'un ABR se trouve toujours tout en bas à gauche).
+\end{enumerate}
+
+% BEGIN-VERIFY
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+% def inserer(arbre, cle):
+%     if arbre is None:
+%         return Noeud(cle)
+%     if cle < arbre.valeur:
+%         arbre.gauche = inserer(arbre.gauche, cle)
+%     elif cle > arbre.valeur:
+%         arbre.droite = inserer(arbre.droite, cle)
+%     return arbre
+% abr = None
+% for v in (10, 5, 15, 3, 7, 12):
+%     abr = inserer(abr, v)
+% def minimum(arbre):
+%     while arbre.gauche is not None:
+%         arbre = arbre.gauche
+%     return arbre.valeur
+% assert minimum(abr) == 3
+% END-VERIFY

@@ -1,0 +1,146 @@
+% META: {"id": "1NSI-RES-COURS-02", "chapitre": "1NSI-RESEAUX", "type_objet": "cours", "capacites": ["1NSI-RESEAUX-C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C2"]}
+\section{Le protocole du bit alterné}
+
+\definition[D2]{
+  Le protocole du \textbf{bit alterné} est un mécanisme simple de récupération de perte de
+  paquets. L'émetteur associe à chaque paquet un \textbf{bit} (0 ou 1) qui \textbf{alterne}
+  à chaque nouveau paquet. Le récepteur renvoie un \textbf{accusé de réception} (ACK)
+  contenant ce même bit. Si l'émetteur ne reçoit \textbf{pas} l'ACK attendu (paquet ou ACK
+  perdu), il \textbf{retransmet} le paquet avec le même bit, jusqu'à recevoir l'ACK correct.
+}
+
+\propriete[Pourquoi un simple bit suffit]{
+  Comme les paquets sont envoyés \textbf{un par un} (l'émetteur attend l'ACK avant d'envoyer
+  le suivant), un seul bit alterné suffit à distinguer \og un nouveau paquet \fg{} d'
+  \og une retransmission de l'ancien \fg{} : le récepteur sait qu'il a déjà reçu un paquet
+  avec un bit donné, et ignore les doublons.
+}
+
+\begin{codereference}{Simulation du protocole du bit alterné}
+\begin{python}
+def protocole_bit_alterne(messages, tentatives_perdues):
+    """Simule l'envoi de `messages` avec le protocole du bit alterne.
+
+    `tentatives_perdues` : ensemble des numeros de tentatives (globales, a partir de 1)
+    qui echouent (paquet ou ACK perdu), pour simuler des pertes reseau.
+    Renvoie la liste des (bit, message) effectivement recus par le destinataire.
+    """
+    resultat = []
+    bit = 0
+    compteur_tentative = 0
+    for message in messages:
+        recu = False
+        while not recu:
+            compteur_tentative += 1
+            if compteur_tentative in tentatives_perdues:
+                continue  # echec : on retransmet le meme message avec le meme bit
+            resultat.append((bit, message))
+            recu = True
+        bit = 1 - bit  # on alterne le bit pour le message suivant
+    return resultat
+
+# La 2e tentative globale echoue : le premier envoi de "B" est perdu, il est retransmis
+envois = protocole_bit_alterne(["A", "B", "C"], tentatives_perdues={2})
+print(envois)  # [(0, 'A'), (1, 'B'), (0, 'C')]
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def protocole_bit_alterne(messages, tentatives_perdues):
+%     resultat = []
+%     bit = 0
+%     compteur_tentative = 0
+%     for message in messages:
+%         recu = False
+%         while not recu:
+%             compteur_tentative += 1
+%             if compteur_tentative in tentatives_perdues:
+%                 continue
+%             resultat.append((bit, message))
+%             recu = True
+%         bit = 1 - bit
+%     return resultat
+% envois = protocole_bit_alterne(["A", "B", "C"], tentatives_perdues={2})
+% assert envois == [(0, "A"), (1, "B"), (0, "C")]
+% assert len(envois) == 3
+% sans_perte = protocole_bit_alterne(["A", "B", "C"], tentatives_perdues=set())
+% assert sans_perte == [(0, "A"), (1, "B"), (0, "C")]
+% END-VERIFY
+
+\propriete[Robustesse du protocole]{
+  Quel que soit le nombre de pertes simulées, tant que le réseau finit par transmettre
+  correctement (pas de perte \textbf{permanente}), tous les messages finissent par arriver :
+  le protocole du bit alterné garantit la \textbf{livraison}, au prix éventuel de
+  retransmissions et donc d'un délai supplémentaire.
+}
+
+\section{Simuler un réseau}
+
+\definition[D3]{
+  On peut modéliser un \textbf{réseau} local par un \textbf{graphe} : chaque machine est un
+  sommet, chaque connexion directe (câble, Wi-Fi) est une arête. Deux machines peuvent
+  communiquer si et seulement s'il existe un \textbf{chemin} entre elles dans ce graphe
+  (éventuellement via des intermédiaires comme un commutateur ou un routeur).
+}
+
+\begin{codereference}{Simuler un réseau et tester la communication entre deux machines}
+\begin{python}
+reseau = {
+    "PC1": ["Switch"],
+    "PC2": ["Switch"],
+    "Switch": ["PC1", "PC2", "Routeur"],
+    "Routeur": ["Switch", "Internet"],
+    "Internet": ["Routeur"],
+}
+
+def peuvent_communiquer(reseau, depart, arrivee, visites=None):
+    """Teste s'il existe un chemin entre `depart` et `arrivee` dans le reseau."""
+    if visites is None:
+        visites = set()
+    if depart == arrivee:
+        return True
+    visites.add(depart)
+    for voisin in reseau.get(depart, []):
+        if voisin not in visites:
+            if peuvent_communiquer(reseau, voisin, arrivee, visites):
+                return True
+    return False
+
+print(peuvent_communiquer(reseau, "PC1", "Internet"))  # True
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% reseau = {
+%     "PC1": ["Switch"],
+%     "PC2": ["Switch"],
+%     "Switch": ["PC1", "PC2", "Routeur"],
+%     "Routeur": ["Switch", "Internet"],
+%     "Internet": ["Routeur"],
+% }
+% def peuvent_communiquer(reseau, depart, arrivee, visites=None):
+%     if visites is None:
+%         visites = set()
+%     if depart == arrivee:
+%         return True
+%     visites.add(depart)
+%     for voisin in reseau.get(depart, []):
+%         if voisin not in visites:
+%             if peuvent_communiquer(reseau, voisin, arrivee, visites):
+%                 return True
+%     return False
+% assert peuvent_communiquer(reseau, "PC1", "Internet") is True
+% assert peuvent_communiquer(reseau, "PC1", "PC2") is True
+% reseau_isole = dict(reseau)
+% reseau_isole["PC3"] = []
+% assert peuvent_communiquer(reseau_isole, "PC1", "PC3") is False
+% END-VERIFY
+
+\erreurFrequente{Oublier de marquer les sommets \textbf{déjà visités} lors du parcours d'un
+réseau. Sans cette précaution, un réseau contenant un cycle (par exemple deux commutateurs
+reliés entre eux et à d'autres machines) provoquerait une \textbf{boucle infinie} lors de la
+recherche de chemin.}
+
+\alamachine{Ajoute au réseau simulé une machine \lstinline{"PC3"} reliée uniquement à
+\lstinline{"PC1"} (et non au \lstinline{Switch}). Vérifie que \lstinline{PC3} peut
+communiquer avec \lstinline{PC1} mais pas directement avec \lstinline{Internet}.}

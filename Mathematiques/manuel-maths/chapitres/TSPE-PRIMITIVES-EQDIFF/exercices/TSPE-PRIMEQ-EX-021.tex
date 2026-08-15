@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-PRIMEQ-EX-021", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "exercice", "capacites": ["TSPE-PRIMITIVES-EQDIFF-C4"], "capacites_codes": ["C4"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-PRIMITIVES-EQDIFF/exercices/TSPE-PRIMEQ-EX-021.tex", "corrige_tex": "chapitres/TSPE-PRIMITIVES-EQDIFF/corriges/TSPE-PRIMEQ-CO-021.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, exp, simplify
+% x = symbols('x')
+% yp = 2*x - 1
+% f = 5 - 6*x
+% assert simplify(diff(yp, x) - (3*yp + f)) == 0
+% y = 6*exp(3*x) + yp
+% assert simplify(diff(y, x) - (3*y + f)) == 0
+% assert y.subs(x, 0) == 5
+% END-VERIFY
+\begin{exercice}{TSPE-PRIMEQ-EX-005}{2}{15}
+On considere l'equation differentielle $y' = 3y + 5 - 6x$. On donne que $y_p(x) = 2x-1$ est une solution particuliere.
+\begin{enumerate}
+  \item Verifier que $y_p$ est bien solution de l'equation.
+  \item Donner la forme generale des solutions.
+  \item Determiner la solution $y$ telle que $y(0) = 5$.
+\end{enumerate}
+\end{exercice}

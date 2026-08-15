@@ -1,0 +1,55 @@
+% META: {"id": "1NSI-ADGK-1NSI-ADGK-EV-A-corrige", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-ADGK-1NSI-ADGK-EV-A", "capacites": ["P-ALGO-04", "P-ALGO-05", "P-ALGO-03"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% BEGIN-VERIFY
+% def recherche_dichotomique_trace(tableau_trie, valeur):
+%     borne_inf, borne_sup = 0, len(tableau_trie) - 1
+%     etapes = []
+%     while borne_inf <= borne_sup:
+%         milieu = (borne_inf + borne_sup) // 2
+%         etapes.append((borne_inf, borne_sup, milieu))
+%         if tableau_trie[milieu] == valeur:
+%             return milieu, etapes
+%         elif tableau_trie[milieu] < valeur:
+%             borne_inf = milieu + 1
+%         else:
+%             borne_sup = milieu - 1
+%     return -1, etapes
+% t = [3, 9, 14, 21, 27, 33, 40, 48]
+% idx, etapes = recherche_dichotomique_trace(t, 27)
+% assert idx == 4
+% assert etapes == [(0, 7, 3), (4, 7, 5), (4, 4, 4)]
+% def rendu_glouton(montant, pieces):
+%     pieces_triees = sorted(pieces, reverse=True)
+%     rendu = []
+%     for p in pieces_triees:
+%         while montant >= p:
+%             rendu.append(p)
+%             montant -= p
+%     return rendu
+% assert rendu_glouton(47, [20, 10, 5, 2, 1]) == [20, 20, 5, 2]
+% END-VERIFY
+\begin{corrige}{1NSI-ADGK-1NSI-ADGK-EV-A-EX1}
+\textbf{1.} Itération 1 : \lstinline{inf=0}, \lstinline{sup=7}, \lstinline{milieu=3}
+(\lstinline{t[3]=21<27}). Itération 2 : \lstinline{inf=4}, \lstinline{sup=7},
+\lstinline{milieu=5} (\lstinline{t[5]=33>27}). Itération 3 : \lstinline{inf=4},
+\lstinline{sup=4}, \lstinline{milieu=4} (\lstinline{t[4]=27}, trouvé, indice $4$).
+
+\textbf{2.} $V$ vaut successivement $7-0=7$, $7-4=3$, $4-4=0$ : la suite $7,3,0$ est
+strictement décroissante.
+
+\textbf{3.} $V$ est un entier positif ou nul qui décroît strictement : une telle suite est
+nécessairement finie (elle ne peut pas décroître indéfiniment en restant positive), donc
+la boucle termine forcément après un nombre fini d'itérations.
+\end{corrige}
+
+\begin{corrige}{1NSI-ADGK-1NSI-ADGK-EV-A-EX2}
+\textbf{1.} Pour $47$ : $20$ (reste $27$), $20$ (reste $7$), $5$ (reste $2$), $2$ (reste
+$0$). Rendu : \lstinline{[20, 20, 5, 2]}.
+
+\textbf{2.} \lstinline{k_plus_proches_voisins(animaux, (5.5, 31), 3)} renvoie
+\lstinline{"Chat"} : cet animal est proche en masse et en taille du groupe des chats.
+
+\textbf{3.} Non, la méthode gloutonne n'est pas optimale pour \textbf{tout} système de
+pièces (seulement pour des systèmes ayant certaines propriétés, comme le système en euros) :
+avec $\{4,3,1\}$ par exemple, rendre $6$ de façon gloutonne utilise $3$ pièces
+($4+1+1$) alors que $3+3$ n'en utilise que $2$.
+\end{corrige}

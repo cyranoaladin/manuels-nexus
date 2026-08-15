@@ -1,0 +1,166 @@
+% META: {"id": "TNSI-ALGO-COURS-01", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TNSI-ALGORITHMIQUE-C1"]}
+\section{Taille, hauteur et parcours d'un arbre binaire}
+
+% ============================================================
+% STRATE 1 — Taille et hauteur
+% ============================================================
+
+On représente un arbre binaire par des nœuds chaînés :
+\begin{python}
+class Noeud:
+    def __init__(self, valeur, gauche=None, droite=None):
+        self.valeur = valeur
+        self.gauche = gauche
+        self.droite = droite
+\end{python}
+Un arbre vide est représenté par \lstinline{None}.
+
+\definition[1]{
+La \textbf{taille} d'un arbre est son nombre de nœuds. La \textbf{hauteur} d'un arbre est la longueur du plus long chemin de la racine à une feuille : par convention, la hauteur de l'arbre vide est $-1$, et la hauteur d'une feuille (nœud sans enfant) est $0$.
+}
+
+\margeAppui{
+Ces deux mesures se calculent par des fonctions \textbf{récursives} : le cas de base est l'arbre vide (\lstinline{None}), et le cas général combine les résultats obtenus sur les sous-arbres gauche et droit.
+}
+
+\textbf{Exemple.}
+\begin{python}
+def taille(arbre):
+    if arbre is None:
+        return 0
+    return 1 + taille(arbre.gauche) + taille(arbre.droite)
+
+def hauteur(arbre):
+    if arbre is None:
+        return -1
+    return 1 + max(hauteur(arbre.gauche), hauteur(arbre.droite))
+\end{python}
+
+% BEGIN-VERIFY
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+%
+% def taille(arbre):
+%     if arbre is None:
+%         return 0
+%     return 1 + taille(arbre.gauche) + taille(arbre.droite)
+%
+% def hauteur(arbre):
+%     if arbre is None:
+%         return -1
+%     return 1 + max(hauteur(arbre.gauche), hauteur(arbre.droite))
+%
+% feuille = Noeud(5)
+% assert taille(feuille) == 1
+% assert hauteur(feuille) == 0
+% arbre = Noeud(1, Noeud(2, Noeud(4)), Noeud(3))
+% assert taille(arbre) == 4
+% assert hauteur(arbre) == 2
+% assert taille(None) == 0
+% assert hauteur(None) == -1
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Parcours en profondeur et en largeur
+% ============================================================
+
+\propriete[Parcours en profondeur]{
+Un parcours \textbf{en profondeur} visite récursivement les sous-arbres avant de \og remonter \fg{}. Trois ordres sont usuels selon la position de la racine :
+\begin{itemize}
+  \item \textbf{préfixe} : racine, puis sous-arbre gauche, puis sous-arbre droit ;
+  \item \textbf{infixe} : sous-arbre gauche, puis racine, puis sous-arbre droit ;
+  \item \textbf{suffixe} : sous-arbre gauche, puis sous-arbre droit, puis racine.
+\end{itemize}
+}
+
+\textbf{Exemple.}
+\begin{python}
+def infixe(arbre):
+    if arbre is None:
+        return []
+    return infixe(arbre.gauche) + [arbre.valeur] + infixe(arbre.droite)
+\end{python}
+
+% BEGIN-VERIFY
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+%
+% def infixe(arbre):
+%     if arbre is None:
+%         return []
+%     return infixe(arbre.gauche) + [arbre.valeur] + infixe(arbre.droite)
+%
+% def prefixe(arbre):
+%     if arbre is None:
+%         return []
+%     return [arbre.valeur] + prefixe(arbre.gauche) + prefixe(arbre.droite)
+%
+% def suffixe(arbre):
+%     if arbre is None:
+%         return []
+%     return suffixe(arbre.gauche) + suffixe(arbre.droite) + [arbre.valeur]
+%
+% arbre = Noeud(1, Noeud(2, Noeud(4), Noeud(5)), Noeud(3))
+% assert infixe(arbre) == [4, 2, 5, 1, 3]
+% assert prefixe(arbre) == [1, 2, 4, 5, 3]
+% assert suffixe(arbre) == [4, 5, 2, 3, 1]
+% END-VERIFY
+
+\margeAppui{
+Un parcours \textbf{infixe} d'un arbre binaire de recherche (voir section suivante) affiche toujours les valeurs dans l'\textbf{ordre croissant} : c'est une propriété très utile pour vérifier qu'un arbre est bien un ABR.
+}
+
+\definition[2]{
+Un parcours \textbf{en largeur} (\textit{Breadth-First Search}, BFS) visite les nœuds \textbf{niveau par niveau}, de la racine vers les feuilles. Il s'implémente avec une \textbf{file} : on enfile la racine, puis, tant que la file n'est pas vide, on défile un nœud, on le traite, et on enfile ses enfants non vides.
+}
+
+\begin{python}
+def largeur(arbre):
+    if arbre is None:
+        return []
+    resultat = []
+    file = [arbre]
+    while file:
+        noeud = file.pop(0)
+        resultat.append(noeud.valeur)
+        if noeud.gauche is not None:
+            file.append(noeud.gauche)
+        if noeud.droite is not None:
+            file.append(noeud.droite)
+    return resultat
+\end{python}
+
+% BEGIN-VERIFY
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+%
+% def largeur(arbre):
+%     if arbre is None:
+%         return []
+%     resultat = []
+%     file = [arbre]
+%     while file:
+%         noeud = file.pop(0)
+%         resultat.append(noeud.valeur)
+%         if noeud.gauche is not None:
+%             file.append(noeud.gauche)
+%         if noeud.droite is not None:
+%             file.append(noeud.droite)
+%     return resultat
+%
+% arbre = Noeud(1, Noeud(2, Noeud(4), Noeud(5)), Noeud(3))
+% assert largeur(arbre) == [1, 2, 3, 4, 5]
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Confondre parcours en profondeur et en largeur.} Un parcours en profondeur (préfixe/infixe/suffixe) descend au maximum dans un sous-arbre avant de passer au suivant ; un parcours en largeur traite \textbf{tous} les nœuds d'un niveau avant de passer au niveau suivant. Sur l'arbre \lstinline{Noeud(1, Noeud(2, Noeud(4), Noeud(5)), Noeud(3))}, le parcours préfixe donne \lstinline{[1, 2, 4, 5, 3]} alors que le parcours en largeur donne \lstinline{[1, 2, 3, 4, 5]}.
+}

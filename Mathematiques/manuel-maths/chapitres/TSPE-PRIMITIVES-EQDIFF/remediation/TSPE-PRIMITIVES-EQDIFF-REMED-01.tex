@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-PRIMITIVES-EQDIFF-REMED-01", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "approved", "capacites": ["TSPE-PRIMITIVES-EQDIFF-C1"], "statut": "complete"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : calcul de primitives
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-PRIMEQ-RE-C1-EX1}{1}{8}
+Determiner une primitive sur $\mathbb{R}$ de $f(x) = 4x^3(x^4+1)^5$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, expand
+% x = symbols('x')
+% F = (x**4+1)**6/6
+% assert expand(diff(F, x) - 4*x**3*(x**4+1)**5) == 0
+% END-VERIFY
+
+\begin{corrige}{TSPE-PRIMEQ-RE-C1-EX1}
+Forme $u'u^n$ avec $u(x)=x^4+1$, $u'(x)=4x^3$, $n=5$ : une primitive est $F(x) = \dfrac{(x^4+1)^6}{6}$.
+\end{corrige}

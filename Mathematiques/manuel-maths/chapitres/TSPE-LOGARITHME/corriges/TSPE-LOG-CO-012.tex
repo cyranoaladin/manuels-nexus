@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-LOG-CO-012", "chapitre": "TSPE-LOGARITHME", "type_objet": "correction", "exercice_ref": "TSPE-LOG-EX-004", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-LOGARITHME-C2"], "parcours": 2, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-LOGARITHME/exercices/TSPE-LOG-EX-012.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import Rational, ln
+% n_exact = ln(2) / ln(Rational(103, 100))
+% assert round(float(n_exact), 2) == 23.45
+% END-VERIFY
+\begin{corrige}{TSPE-LOG-EX-004}
+
+\textbf{Q1.} $1000 \times 1{,}03^n = 2000 \iff 1{,}03^n = 2$.
+
+En appliquant $\ln$ (croissant, les deux membres sont strictement positifs) :
+\[
+  n \ln(1{,}03) = \ln 2, \qquad \text{donc} \qquad n = \frac{\ln 2}{\ln(1{,}03)}.
+\]
+
+Numeriquement, $n \approx 23{,}45$.
+
+\textbf{Q2.} La suite $(C(n))$ est croissante (raison $1{,}03>1$). Comme $n = \dfrac{\ln 2}{\ln(1{,}03)} \approx 23{,}45$ n'est pas entier, $C(23) < 2000 < C(24)$ : le capital a double a partir du rang $n=24$.
+
+\end{corrige}

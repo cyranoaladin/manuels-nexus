@@ -1,0 +1,22 @@
+% META: {"id": "1NSI-TB-EX-020", "chapitre": "1NSI-TYPES-BASE", "type_objet": "exercice", "capacites": ["1NSI-TYPES-BASE-C4"], "parcours": 2, "competences": ["analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-020.tex", "corrige_tex": "chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-020.tex", "status": "approved", "capacites_codes": ["C4"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% s = 'Bonjour à tous !'
+% assert len(s) == 16
+% assert len(s.encode('utf-8')) == 17
+% assert len(s.encode('iso-8859-1')) == 16
+% erreur = False
+% try:
+%     s.encode('ascii')
+% except UnicodeEncodeError:
+%     erreur = True
+% assert erreur is True
+% END-VERIFY
+\begin{exercice}{1NSI-TB-EX-005}{3}{12}
+On considère la chaîne \lstinline{"Bonjour à tous !"}.
+\begin{enumerate}
+  \item Combien cette chaîne compte-t-elle de \textbf{caractères} ?
+  \item Combien d'\textbf{octets} occupe-t-elle une fois encodée en UTF-8 ? En ISO-8859-1 ? Pourquoi ces deux nombres diffèrent-ils entre eux, et diffèrent-ils du nombre de caractères ?
+  \item Que se passe-t-il si on tente de l'encoder en ASCII ? Justifier précisément (quel caractère pose problème et pourquoi).
+  \item Un serveur web français reçoit des messages d'utilisateurs du monde entier (arabe, chinois, russe...). Pourquoi ISO-8859-1 serait-il un mauvais choix d'encodage pour stocker ces messages, contrairement à UTF-8 ?
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-GEOESPACE-EX-010", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "exercice", "capacites": ["TSPE-GEOMETRIE-ESPACE-C3"], "capacites_codes": ["C3"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-010.tex", "corrige_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-010.tex", "status": "approved"}
+% BEGIN-VERIFY
+% A=(0,1,2); n=(1,-1,2)
+% d = -(n[0]*A[0]+n[1]*A[1]+n[2]*A[2])
+% assert d == -3
+% # verifier A satisfait l'equation
+% assert n[0]*A[0]+n[1]*A[1]+n[2]*A[2]+d == 0
+% END-VERIFY
+\begin{exercice}{TSPE-GEOESPACE-EX-003}{2}{14}
+Soit $\mathcal{P}$ le plan passant par $A(0,1,2)$ de vecteur normal $\vec{n}\begin{pmatrix}1\\-1\\2\end{pmatrix}$.
+\begin{enumerate}
+  \item En reprenant la methode du cours (calcul de $\vec{n}\cdot\vec{AM}$ pour $M(x,y,z)$), etablir une equation cartesienne de $\mathcal{P}$.
+  \item Le point $C(3,2,1)$ appartient-il a $\mathcal{P}$ ?
+  \item Donner un vecteur normal au plan $\mathcal{Q}: 3x+y-4z+2=0$.
+\end{enumerate}
+\end{exercice}

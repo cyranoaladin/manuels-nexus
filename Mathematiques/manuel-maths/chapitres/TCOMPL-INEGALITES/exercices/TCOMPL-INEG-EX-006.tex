@@ -1,0 +1,18 @@
+% META: {"id": "TCOMPL-INEG-EX-006", "chapitre": "TCOMPL-INEGALITES", "type_objet": "exercice", "capacites": ["TCOMPL-INEG-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer","raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INEGALITES/exercices/TCOMPL-INEG-EX-006.tex", "corrige_tex": "chapitres/TCOMPL-INEGALITES/corriges/TCOMPL-INEG-CO-006.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', positive=True)
+% f = ln(1/x)
+% fp = diff(f, x)
+% assert simplify(fp) == -1/x
+% assert fp.subs(x, 1) == -1
+% assert fp.subs(x, 2) == Rational(-1,2)
+% END-VERIFY
+\begin{exercice}{TCOMPL-INEG-EX-006}{2}{12}
+Soit $f$ definie sur $\left]0, +\infty\right[$ par $f(x) = \ln\!\left(\dfrac{1}{x}\right)$.
+\begin{enumerate}
+  \item Simplifier l'expression de $f$.
+  \item Calculer $f'(x)$ de deux manieres differentes.
+\end{enumerate}
+
+\end{exercice}

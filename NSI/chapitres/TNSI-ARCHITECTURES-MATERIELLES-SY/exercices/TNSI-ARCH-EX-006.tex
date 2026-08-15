@@ -1,0 +1,29 @@
+% META: {"id": "TNSI-ARCH-EX-006", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "exercice", "capacites": ["TNSI-ARCHITECTURES-MATERIELLES-SY-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-006.tex", "corrige_tex": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-006.tex", "status": "approved"}
+% BEGIN-VERIFY
+% def a_un_interblocage(attente, retenue_par):
+%     for depart in attente:
+%         visites = [depart]
+%         courant = depart
+%         while True:
+%             ressource_attendue = attente.get(courant)
+%             if ressource_attendue is None:
+%                 break
+%             detenteur = retenue_par.get(ressource_attendue)
+%             if detenteur is None:
+%                 break
+%             if detenteur in visites:
+%                 return True
+%             visites.append(detenteur)
+%             courant = detenteur
+%     return False
+% attente = {"P1": "R2", "P2": "R3", "P3": "R1"}
+% retenue_par = {"R1": "P1", "R2": "P2", "R3": "P3"}
+% assert a_un_interblocage(attente, retenue_par) is True
+% END-VERIFY
+\begin{exercice}{TNSI-ARCH-EX-002}{2}{15}
+Trois processus se partagent trois ressources : \texttt{P1} retient \texttt{R1} et attend \texttt{R2} ; \texttt{P2} retient \texttt{R2} et attend \texttt{R3} ; \texttt{P3} retient \texttt{R3} et attend \texttt{R1}.
+\begin{enumerate}
+  \item Représenter cette situation par les deux dictionnaires \lstinline{attente} et \lstinline{retenue_par} du cours.
+  \item Y a-t-il un interblocage ? Justifier en décrivant le cycle d'attente.
+\end{enumerate}
+\end{exercice}

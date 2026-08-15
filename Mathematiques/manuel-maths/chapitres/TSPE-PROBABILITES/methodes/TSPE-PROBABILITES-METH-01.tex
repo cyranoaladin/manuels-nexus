@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-PROBABILITES-METH-01", "chapitre": "TSPE-PROBABILITES", "type_objet": "methode", "capacites_codes": ["C2", "C3", "C4"], "methodes": ["M1"], "sources_inspiration": [], "status": "approved"}
+\begin{fichemethode}{M1}{Reconnaître et utiliser une loi binomiale}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsqu'une situation repete une meme epreuve a deux issues, de facon independante.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Verifier les conditions du schema de Bernoulli} : $n$ repetitions independantes d'une meme epreuve a deux issues (succes/echec).
+    \item \textbf{Identifier les parametres} $n$ (nombre de repetitions) et $p$ (probabilite de succes a chaque epreuve).
+    \item \textbf{Ecrire} $X \sim \mathcal{B}(n,p)$, ou $X$ compte le nombre de succes.
+    \item \textbf{Calculer} $P(X=k) = \dbinom{n}{k}p^k(1-p)^{n-k}$, ou une probabilite cumulee, a l'aide de la calculatrice/d'un algorithme si necessaire.
+    \item \textbf{Pour un seuil} : chercher $k$ par balayage (calculatrice/algorithme) jusqu'a atteindre la condition demandee.
+  \end{enumerate}
+}
+
+\end{fichemethode}

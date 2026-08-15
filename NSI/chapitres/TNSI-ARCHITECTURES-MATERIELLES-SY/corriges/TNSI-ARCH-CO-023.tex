@@ -1,0 +1,42 @@
+% META: {"id": "TNSI-ARCH-CO-023", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "correction", "exercice_ref": "TNSI-ARCH-EX-003", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-ARCHITECTURES-MATERIELLES-SY-C4"], "parcours": 1, "fichier_exercice": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-023.tex"}
+% BEGIN-VERIFY
+% def bfs_sauts(graphe_couts, depart, arrivee):
+%     visites = {depart: 0}
+%     file = [depart]
+%     while file:
+%         courant = file.pop(0)
+%         if courant == arrivee:
+%             return visites[courant]
+%         for voisin in graphe_couts[courant]:
+%             if voisin not in visites:
+%                 visites[voisin] = visites[courant] + 1
+%                 file.append(voisin)
+%     return None
+% def plus_court_cout(graphe_couts, depart, arrivee):
+%     couts = {depart: 0}
+%     a_traiter = [depart]
+%     while a_traiter:
+%         courant = min(a_traiter, key=lambda s: couts[s])
+%         a_traiter.remove(courant)
+%         if courant == arrivee:
+%             break
+%         for voisin, poids in graphe_couts[courant].items():
+%             nouveau_cout = couts[courant] + poids
+%             if voisin not in couts or nouveau_cout < couts[voisin]:
+%                 couts[voisin] = nouveau_cout
+%                 if voisin not in a_traiter:
+%                     a_traiter.append(voisin)
+%     return couts[arrivee]
+% reseau = {
+%     "A": {"B": 2, "C": 10},
+%     "B": {"A": 2, "C": 2},
+%     "C": {"A": 10, "B": 2},
+% }
+% assert bfs_sauts(reseau, "A", "C") == 1
+% assert plus_court_cout(reseau, "A", "C") == 4
+% END-VERIFY
+\begin{corrige}{TNSI-ARCH-EX-003}
+\textbf{Q1.} RIP choisirait la route directe \texttt{A-C} : elle ne compte qu'un seul saut, quel que soit son coût. \lstinline{bfs_sauts(reseau, "A", "C")} renvoie $1$.
+
+\textbf{Q2.} \lstinline{plus_court_cout(reseau, "A", "C")} renvoie $4$ : la route la moins coûteuse est \texttt{A-B-C} (coût $2+2=4$), moins chère que la route directe \texttt{A-C} (coût $10$), bien qu'elle traverse un routeur de plus. OSPF choisirait donc \texttt{A-B-C}, RIP choisirait \texttt{A-C} : les deux protocoles divergent car ils n'optimisent pas le même critère.
+\end{corrige}

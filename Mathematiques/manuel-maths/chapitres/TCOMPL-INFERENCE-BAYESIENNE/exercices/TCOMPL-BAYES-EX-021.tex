@@ -1,0 +1,17 @@
+% META: {"id": "TCOMPL-BAYES-EX-021", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "exercice", "capacites": ["TCOMPL-BAYES-C1"], "capacites_codes": ["C1"], "methodes": ["M3"], "parcours": 1, "competences": ["raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/exercices/TCOMPL-BAYES-EX-021.tex", "corrige_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/corriges/TCOMPL-BAYES-CO-021.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', positive=True)
+% g = ln(x) - x + 1
+% g2 = diff(g, x, 2)
+% assert g2 == -1/x**2
+% assert g2 < 0  # concave
+% assert g.subs(x, 1) == 0
+% assert diff(g, x).subs(x, 1) == 0
+% # concave + maximum en 1 => g <= 0
+% assert g.subs(x, 2) == ln(2) - 1
+% END-VERIFY
+\begin{exercice}{TCOMPL-BAYES-EX-021}{1}{12}
+Demontrer que pour tout $x > 0$, $\ln x \leq x - 1$.
+
+\end{exercice}

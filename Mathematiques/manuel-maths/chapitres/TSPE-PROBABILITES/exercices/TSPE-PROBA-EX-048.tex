@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-PROBA-EX-048", "chapitre": "TSPE-PROBABILITES", "type_objet": "exercice", "capacites": ["TSPE-CONCLGN-C1"], "capacites_codes": ["C10"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-048.tex", "corrige_tex": "chapitres/TSPE-PROBABILITES/corriges/TSPE-PROBA-CO-048.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% p = Rational(3,10)
+% n = 10
+% P0 = (1-p)**n
+% assert round(float(1-P0), 4) == 0.9718
+% END-VERIFY
+\begin{exercice}{TSPE-PROBA-EX-003}{2}{14}
+Un tireur a une probabilite $0{,}3$ de toucher sa cible a chaque tir. Il tire $10$ fois, de facon independante. Soit $X$ le nombre de tirs reussis.
+\begin{enumerate}
+  \item Justifier que $X \sim \mathcal{B}(10,\,0{,}3)$.
+  \item Calculer $P(X=0)$ (arrondir a $10^{-4}$).
+  \item En deduire $P(X\geq 1)$ (probabilite de toucher la cible au moins une fois).
+\end{enumerate}
+\end{exercice}

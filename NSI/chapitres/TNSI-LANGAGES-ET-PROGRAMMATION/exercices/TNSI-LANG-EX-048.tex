@@ -1,0 +1,35 @@
+% META: {"id": "TNSI-LANG-EX-048", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "exercice", "capacites": ["TNSI-LANGAGES-ET-PROGRAMMATION-C11"], "capacites_codes": ["C11"], "methodes": ["M1"], "parcours": 2, "competences": ["analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-048.tex", "corrige_tex": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-048.tex", "status": "approved"}
+% BEGIN-VERIFY
+% def ajouter_note(bulletin, note):
+%     bulletin.append(note)
+%     return bulletin
+% bulletin_zero = []
+% b1 = ajouter_note(bulletin_zero, 15)
+% b2 = ajouter_note(bulletin_zero, 12)
+% assert b1 is b2
+% assert b1 == [15, 12]
+% def ajouter_note_corrige(bulletin, note):
+%     return bulletin + [note]
+% bulletin_zero2 = []
+% b1c = ajouter_note_corrige(bulletin_zero2, 15)
+% b2c = ajouter_note_corrige(bulletin_zero2, 12)
+% assert b1c == [15]
+% assert b2c == [12]
+% assert bulletin_zero2 == []
+% END-VERIFY
+\begin{exercice}{TNSI-LANG-EX-004}{1}{15}
+Le code suivant contient un bug lié à un \textbf{effet de bord} inattendu :
+\begin{python}
+def ajouter_note(bulletin, note):
+    bulletin.append(note)
+    return bulletin
+
+bulletin_A = []
+bulletin_B = ajouter_note(bulletin_A, 15)
+bulletin_C = ajouter_note(bulletin_A, 12)
+\end{python}
+\begin{enumerate}
+  \item Que contiennent \lstinline{bulletin_A}, \lstinline{bulletin_B} et \lstinline{bulletin_C} après ces trois lignes ? Le résultat est-il celui attendu si l'on voulait deux bulletins \textbf{indépendants} (un avec la note $15$, un autre avec la note $12$) ?
+  \item Corriger \lstinline{ajouter_note} pour qu'elle renvoie un \textbf{nouveau} bulletin sans modifier celui passé en argument.
+\end{enumerate}
+\end{exercice}

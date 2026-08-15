@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-LOG-EX-014", "chapitre": "TSPE-LOGARITHME", "type_objet": "exercice", "capacites": ["TSPE-LOGARITHME-C3"], "capacites_codes": ["C3"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LOGARITHME/exercices/TSPE-LOG-EX-014.tex", "corrige_tex": "chapitres/TSPE-LOGARITHME/corriges/TSPE-LOG-CO-014.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, diff, solve, Eq
+% x = symbols('x', positive=True)
+% f = x - ln(x)
+% fp = diff(f, x)
+% assert fp == 1 - 1/x
+% crit = solve(Eq(fp, 0), x)
+% assert crit == [1]
+% assert f.subs(x, 1) == 1
+% END-VERIFY
+\begin{exercice}{TSPE-LOG-EX-006}{2}{14}
+Soit $f(x) = x - \ln x$ sur $]0, +\infty[$.
+\begin{enumerate}
+  \item Calculer $f'(x)$.
+  \item Resoudre $f'(x)=0$, puis etudier le signe de $f'(x)$ sur $]0,+\infty[$.
+  \item En deduire le tableau de variations de $f$, et donner le minimum de $f$ sur $]0,+\infty[$.
+\end{enumerate}
+\end{exercice}

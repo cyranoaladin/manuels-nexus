@@ -1,0 +1,30 @@
+% META: {"id": "1NSI-TAB-CO-020", "chapitre": "1NSI-TABLES", "type_objet": "correction", "exercice_ref": "1NSI-TAB-EX-002", "capacites": ["1NSI-TABLES-C4"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C4"], "parcours": 2, "fichier_exercice": "chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-020.tex"}
+% BEGIN-VERIFY
+% notes = [
+%     {"nom": "Amine", "matiere": "Maths", "note": 14},
+%     {"nom": "Amine", "matiere": "NSI", "note": 16},
+%     {"nom": "Lina", "matiere": "Maths", "note": 12},
+%     {"nom": "Lina", "matiere": "NSI", "note": 18},
+%     {"nom": "Omar", "matiere": "Maths", "note": 9},
+%     {"nom": "Omar", "matiere": "NSI", "note": 11},
+% ]
+% resultat = [ligne for ligne in notes if ligne["matiere"] == "NSI" and ligne["note"] >= 15]
+% assert [ligne["nom"] for ligne in resultat] == ["Amine", "Lina"]
+% sous_10 = [ligne["nom"] for ligne in notes if ligne["note"] < 10]
+% assert sous_10 == ["Omar"]
+% END-VERIFY
+\begin{corrige}{1NSI-TAB-EX-002}
+\textbf{1.}
+\begin{python}
+resultat = [ligne for ligne in notes if ligne["matiere"] == "NSI" and ligne["note"] >= 15]
+\end{python}
+
+\textbf{2.} On obtient $2$ lignes : celles d'\textbf{Amine} (NSI, 16) et de \textbf{Lina}
+(NSI, 18).
+
+\textbf{3.}
+\begin{python}
+sous_10 = [ligne["nom"] for ligne in notes if ligne["note"] < 10]
+\end{python}
+Résultat : \lstinline{["Omar"]} (seule sa note de Maths, $9$, est inférieure à $10$).
+\end{corrige}

@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-LOG-CO-010", "chapitre": "TSPE-LOGARITHME", "type_objet": "correction", "exercice_ref": "TSPE-LOG-EX-002", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-LOGARITHME-C2"], "parcours": 2, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-LOGARITHME/exercices/TSPE-LOG-EX-010.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import ln, exp, simplify
+% borne = (2 + ln(4)) / 3
+% assert simplify(exp(3*borne - 2) - 4) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-LOG-EX-002}
+
+$\mathrm{e}^{3x-2}$ et $4$ sont strictement positifs : on peut appliquer $\ln$ (croissant) aux deux membres, ce qui conserve le sens de l'inegalite.
+\[
+  \mathrm{e}^{3x-2} \leq 4 \iff \ln\!\left(\mathrm{e}^{3x-2}\right) \leq \ln 4 \iff 3x - 2 \leq \ln 4 \iff x \leq \frac{2+\ln 4}{3}.
+\]
+
+\[
+  \boxed{S = \left]-\infty, \dfrac{2+\ln 4}{3}\right]}.
+\]
+
+\end{corrige}

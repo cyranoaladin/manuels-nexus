@@ -1,0 +1,21 @@
+% META: {"id": "1NSI-ADGK-EX-014", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "exercice", "capacites": ["1NSI-ALGO-PARCOURS-TRIS-C3"], "capacites_codes": ["C3"], "methodes": ["M1"], "parcours": 2, "competences": ["raisonner", "calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-014.tex", "corrige_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-014.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**2 * exp(-x)
+% fp = diff(f, x)
+% assert simplify(fp) == (2 - x)*x*exp(-x)
+% assert solve(fp, x) == [0, 2]
+% assert f.subs(x, 2) == 4*exp(-2)
+% assert limit(f, x, oo) == 0
+% assert limit(f, x, -oo) == oo
+% END-VERIFY
+\begin{exercice}{1NSI-ADGK-EX-014}{2}{18}
+Soit $f(x) = x^2\,\mathrm{e}^{-x}$ definie sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Calculer $f'(x)$ et etudier son signe.
+  \item Determiner les limites de $f$ en $\pm\infty$.
+  \item Dresser le tableau de variations de $f$.
+\end{enumerate}
+
+\end{exercice}

@@ -1,0 +1,31 @@
+% META: {"id": "1NSI-TAB-EX-012", "chapitre": "1NSI-TABLES", "type_objet": "exercice", "capacites": ["1NSI-TABLES-C2"], "parcours": 2, "competences": ["programmer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-012.tex", "corrige_tex": "chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-012.tex", "status": "approved", "capacites_codes": ["C2"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% notes = [
+%     {"nom": "Amine", "matiere": "Maths", "note": 14},
+%     {"nom": "Amine", "matiere": "NSI", "note": 16},
+%     {"nom": "Lina", "matiere": "Maths", "note": 12},
+%     {"nom": "Lina", "matiere": "NSI", "note": 18},
+%     {"nom": "Omar", "matiere": "Maths", "note": 9},
+%     {"nom": "Omar", "matiere": "NSI", "note": 11},
+% ]
+% resultat = [ligne for ligne in notes if ligne["matiere"] == "NSI" and ligne["note"] >= 15]
+% assert [ligne["nom"] for ligne in resultat] == ["Amine", "Lina"]
+% END-VERIFY
+\begin{exercice}{1NSI-TAB-EX-002}{1}{12}
+On dispose de la table \lstinline{notes} d'un contrôle continu :
+\begin{python}
+notes = [
+    {"nom": "Amine", "matiere": "Maths", "note": 14},
+    {"nom": "Amine", "matiere": "NSI", "note": 16},
+    {"nom": "Lina", "matiere": "Maths", "note": 12},
+    {"nom": "Lina", "matiere": "NSI", "note": 18},
+    {"nom": "Omar", "matiere": "Maths", "note": 9},
+    {"nom": "Omar", "matiere": "NSI", "note": 11},
+]
+\end{python}
+\begin{enumerate}
+  \item Écrire une compréhension de liste renvoyant les lignes où la matière est \lstinline{"NSI"} et la note est supérieure ou égale à $15$.
+  \item Combien de lignes obtient-on ? Donner les noms correspondants.
+  \item Écrire une compréhension de liste renvoyant les noms des élèves ayant une note strictement inférieure à $10$ (peu importe la matière).
+\end{enumerate}
+\end{exercice}

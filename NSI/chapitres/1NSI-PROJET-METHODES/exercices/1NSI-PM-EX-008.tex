@@ -1,0 +1,30 @@
+% META: {"id": "1NSI-PM-EX-008", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "exercice", "capacites": ["1NSI-PROJET-METHODES-C2"], "parcours": 2, "competences": ["analyser", "programmer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-008.tex", "corrige_tex": "chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-008.tex", "status": "approved", "capacites_codes": ["C2"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% notes = {"Alice": 15, "Bob": 12, "Chloe": 18}
+% def afficher_note(notes, nom):
+%     return notes[nom]
+% erreur_levee = False
+% try:
+%     afficher_note(notes, "David")
+% except KeyError as e:
+%     erreur_levee = True
+%     message = str(e)
+% assert erreur_levee is True
+% assert message == "'David'"
+% END-VERIFY
+\begin{exercice}{1NSI-PM-EX-003}{2}{12}
+Le programme suivant plante à l'exécution :
+\begin{python}
+notes = {"Alice": 15, "Bob": 12, "Chloe": 18}
+
+def afficher_note(notes, nom):
+    print(nom, ":", notes[nom])
+
+afficher_note(notes, "David")
+\end{python}
+\begin{enumerate}
+  \item Quel type d'erreur ce programme provoque-t-il ? Quel est le message exact ?
+  \item En suivant la démarche méthodique du cours, identifier précisément la cause du problème (sans se contenter de « il y a une erreur »).
+  \item Proposer une correction de \lstinline{afficher_note} qui affiche un message clair (par exemple \lstinline{"Nom inconnu"}) au lieu de planter, lorsque le nom n'existe pas dans \lstinline{notes}.
+\end{enumerate}
+\end{exercice}

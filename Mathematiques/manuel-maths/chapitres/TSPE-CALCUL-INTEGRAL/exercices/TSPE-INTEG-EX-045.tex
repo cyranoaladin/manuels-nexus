@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-INTEG-EX-045", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "exercice", "capacites": ["TSPE-CALCUL-INTEGRAL-C8"], "capacites_codes": ["C8"], "methodes": ["M1"], "parcours": 1, "competences": ["raisonner", "chercher"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-045.tex", "corrige_tex": "chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-045.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational
+% x, n = symbols('x n')
+% for k in range(0, 6):
+%     assert integrate(x**k, (x, 0, 1)) == Rational(1, k+1)
+% END-VERIFY
+\begin{exercice}{TSPE-INTEG-EX-005}{3}{16}
+Pour $n \in \mathbb{N}$, on pose $J_n = \displaystyle\int_0^1 x^n\,\mathrm{d}x$.
+\begin{enumerate}
+  \item Calculer $J_n$ en fonction de $n$ (formule directe).
+  \item Justifier que pour tout $n$, $J_n \geq 0$.
+  \item Montrer que $(J_n)$ est decroissante (on pourra comparer $x^{n+1}$ et $x^n$ sur $[0,1]$).
+  \item En deduire que $(J_n)$ converge, et determiner sa limite.
+\end{enumerate}
+\end{exercice}

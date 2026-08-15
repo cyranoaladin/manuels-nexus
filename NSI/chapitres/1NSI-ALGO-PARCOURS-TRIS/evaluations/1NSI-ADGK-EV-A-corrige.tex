@@ -1,0 +1,52 @@
+% META: {"id": "1NSI-AGT-EVAL-A-corrige", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "correction", "evaluation_ref": "1NSI-AGT-EVAL-A", "capacites": ["P-ALGO-01A", "P-ALGO-01B", "P-ALGO-02A", "P-ALGO-02C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% def recherche_occurrence(tableau, valeur):
+%     for i in range(len(tableau)):
+%         if tableau[i] == valeur:
+%             return i
+%     return -1
+% def maximum(tableau):
+%     maxi = tableau[0]
+%     for x in tableau[1:]:
+%         if x > maxi:
+%             maxi = x
+%     return maxi
+% def moyenne(tableau):
+%     return sum(tableau) / len(tableau)
+% t = [22, 15, 8, 30, 11]
+% assert recherche_occurrence(t, 30) == 3
+% assert maximum(t) == 30
+% assert moyenne(t) == 17.2
+% def tri_insertion(tableau):
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j -= 1
+%         tableau[j + 1] = valeur
+%     return tableau
+% assert tri_insertion([9, 2, 6, 4]) == [2, 4, 6, 9]
+% END-VERIFY
+\begin{corrige}{1NSI-AGT-EVAL-A-EX1}
+\textbf{1.} La valeur $30$ se trouve à l'indice $3$.
+
+\textbf{2.} Le maximum est $30$.
+
+\textbf{3.} $\dfrac{22+15+8+30+11}{5}=\dfrac{86}{5}=17{,}2$.
+\end{corrige}
+
+\begin{corrige}{1NSI-AGT-EVAL-A-EX2}
+\textbf{1.} Tableau initial : \lstinline{[9, 2, 6, 4]}.
+\begin{itemize}
+  \item Après $i=1$ (insertion de $2$) : \lstinline{[2, 9, 6, 4]}
+  \item Après $i=2$ (insertion de $6$) : \lstinline{[2, 6, 9, 4]}
+  \item Après $i=3$ (insertion de $4$) : \lstinline{[2, 4, 6, 9]}
+\end{itemize}
+
+\textbf{2.} Après $i=1$ : \lstinline{[2, 9]} trié. Après $i=2$ : \lstinline{[2, 6, 9]}
+trié. Après $i=3$ : \lstinline{[2, 4, 6, 9]} trié. L'invariant est vérifié à chaque étape.
+
+\textbf{3.} Le coût dans le pire cas est \textbf{quadratique}, $O(n^2)$.
+\end{corrige}

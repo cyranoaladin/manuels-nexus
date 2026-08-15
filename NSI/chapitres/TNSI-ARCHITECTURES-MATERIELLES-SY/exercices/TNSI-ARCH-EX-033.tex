@@ -1,0 +1,20 @@
+% META: {"id": "TNSI-ARCH-EX-033", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "exercice", "capacites": ["TNSI-ARCHITECTURES-MATERIELLES-SY-C6"], "capacites_codes": ["C6"], "methodes": ["M1"], "parcours": 1, "competences": ["programmer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-033.tex", "corrige_tex": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-033.tex", "status": "approved"}
+% BEGIN-VERIFY
+% def tourniquet(processus, tranche, duree_totale):
+%     ordre_execution = []
+%     file = list(processus)
+%     temps_restant = dict(duree_totale)
+%     while file:
+%         p = file.pop(0)
+%         execute = min(tranche, temps_restant[p])
+%         ordre_execution.append((p, execute))
+%         temps_restant[p] -= execute
+%         if temps_restant[p] > 0:
+%             file.append(p)
+%     return ordre_execution
+% resultat = tourniquet(["X", "Y"], 3, {"X": 4, "Y": 6})
+% assert resultat == [("X", 3), ("Y", 3), ("X", 1), ("Y", 3)]
+% END-VERIFY
+\begin{exercice}{TNSI-ARCH-EX-001}{1}{15}
+En utilisant la fonction \lstinline{tourniquet} du cours, déterminer l'ordre d'exécution pour deux processus \texttt{X} (durée totale $4$) et \texttt{Y} (durée totale $6$), avec une tranche de temps de $3$. Combien de tranches de temps sont-elles nécessaires au total pour que les deux processus se terminent ?
+\end{exercice}

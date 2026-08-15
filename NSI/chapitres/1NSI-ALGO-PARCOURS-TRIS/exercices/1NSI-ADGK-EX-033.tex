@@ -1,0 +1,22 @@
+% META: {"id": "1NSI-ADGK-EX-033", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "exercice", "capacites": ["1NSI-ALGO-PARCOURS-TRIS-C6"], "capacites_codes": ["C6"], "methodes": ["M1"], "parcours": 1, "competences": ["modeliser", "raisonner"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-033.tex", "corrige_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-033.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x*sqrt(4 - x**2)
+% fp = diff(f, x)
+% crit = solve(fp, x)
+% assert sqrt(2) in crit
+% fmax = f.subs(x, sqrt(2))
+% assert simplify(fmax) == 2
+% assert f.subs(x, 0) == 0
+% assert f.subs(x, 2) == 0
+% END-VERIFY
+\begin{exercice}{1NSI-ADGK-EX-009}{3}{20}
+On considere la fonction $f$ definie sur $[0,\, 2]$ par $f(x) = x\sqrt{4 - x^2}$.
+\begin{enumerate}
+  \item Justifier que $f$ est bien definie sur $[0,\, 2]$.
+  \item Calculer $f'(x)$ et determiner les variations de $f$.
+  \item En deduire le maximum de $f$ sur $[0,\, 2]$ et la valeur de $x$ pour laquelle il est atteint.
+\end{enumerate}
+
+\end{exercice}

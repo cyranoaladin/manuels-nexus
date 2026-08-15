@@ -1,0 +1,41 @@
+% META: {"id": "TNSI-BDD-EVAL-B-corrige", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "correction", "evaluation_ref": "TNSI-BDD-EVAL-B", "capacites": ["T-BDD-02", "T-BDD-03D", "T-BDD-03E", "T-BDD-03G", "T-BDD-03H"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Employe(id INTEGER PRIMARY KEY, nom TEXT, id_service INTEGER)")
+% conn.execute("CREATE TABLE Service(id INTEGER PRIMARY KEY, nom TEXT)")
+% conn.executemany("INSERT INTO Service VALUES (?,?)", [(1, "Comptabilite"), (2, "Informatique")])
+% conn.executemany("INSERT INTO Employe VALUES (?,?,?)", [(1, "Ben Ali", 2), (2, "Chraibi", 1), (3, "Haddad", 2)])
+% conn.commit()
+% conn.execute("UPDATE Employe SET id_service = 1 WHERE nom = 'Ben Ali'")
+% conn.execute("DELETE FROM Employe WHERE id_service = 1")
+% conn.commit()
+% cur = conn.execute("SELECT nom FROM Employe")
+% assert cur.fetchall() == [("Haddad",)]
+% END-VERIFY
+\begin{corrige}{TNSI-BDD-EVAL-B-EX1}
+\textbf{Q1.} Persistance, concurrence, efficacité, sécurisation.
+
+\textbf{Q2.} Un fichier CSV n'offre aucune gestion de la \textbf{concurrence} : si deux guichets modifient le fichier en même temps, l'une des deux réservations peut être écrasée ou perdue. Un SGBD sérialise les accès concurrents pour garantir qu'aucune réservation n'est perdue.
+\end{corrige}
+
+\begin{corrige}{TNSI-BDD-EVAL-B-EX2}
+\textbf{Q1.}
+\begin{sql}
+SELECT Employe.nom, Service.nom
+FROM Employe
+JOIN Service ON Employe.id_service = Service.id
+ORDER BY Employe.nom ASC;
+\end{sql}
+
+\textbf{Q2.}
+\begin{sql}
+UPDATE Employe SET id_service = 1 WHERE nom = 'Ben Ali';
+\end{sql}
+
+\textbf{Q3.}
+\begin{sql}
+DELETE FROM Employe WHERE id_service = 1;
+\end{sql}
+Après la question précédente, \texttt{'Ben Ali'} et \texttt{'Chraibi'} sont tous deux dans le service $1$ : il ne reste que \texttt{'Haddad'}. Sans clause \texttt{WHERE}, \texttt{DELETE FROM Employe;} supprimerait \textbf{tous} les employés, quel que soit leur service.
+\end{corrige}

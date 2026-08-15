@@ -1,0 +1,83 @@
+% META: {"id": "1NSI-TB-COURS-03", "chapitre": "1NSI-TYPES-BASE", "type_objet": "cours", "capacites": ["1NSI-TYPES-BASE-C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C3"]}
+\section{Représentation approximative des nombres flottants}
+
+\margeAppui{Un \emph{nombre flottant} (\lstinline{float}) représente un nombre réel avec
+une précision \textbf{limitée} : la plupart des nombres réels n'ont pas d'écriture binaire
+finie, tout comme $1/3$ n'a pas d'écriture décimale finie.}
+
+\definition[D4]{
+  Un \textbf{nombre flottant} est une valeur numérique approchée d'un nombre réel, stockée
+  sur un nombre fixe de bits. Beaucoup de nombres qui s'écrivent simplement en base 10 (comme
+  $0{,}1$) n'ont \textbf{pas} d'écriture binaire finie, exactement comme $1/3=0{,}333\ldots$
+  n'a pas d'écriture décimale finie.
+}
+
+\exemple{En Python, \lstinline{0.1} n'est pas stocké exactement : c'est une valeur très
+proche mais légèrement différente. La conséquence la plus visible :}
+
+\begin{console}
+>>> 0.1 + 0.2
+0.30000000000000004
+>>> 0.1 + 0.2 == 0.3
+False
+\end{console}
+
+% BEGIN-VERIFY
+% assert 0.1 + 0.2 != 0.3
+% valeur_affichee = repr(0.1 + 0.2)
+% assert valeur_affichee == '0.30000000000000004'
+% END-VERIFY
+
+\propriete[Ne jamais tester l'égalité de deux flottants]{
+  Comparer deux flottants avec \lstinline{==} est une erreur classique : à cause des erreurs
+  d'arrondi, deux calculs mathématiquement égaux peuvent donner des valeurs flottantes
+  légèrement différentes. Il faut comparer leur \textbf{écart} à une petite tolérance près.
+}
+
+\begin{codereference}{Comparaison de flottants avec tolérance}
+\begin{python}
+def presque_egaux(a, b, tolerance=1e-9):
+    """Teste si deux flottants sont egaux a une tolerance pres."""
+    return abs(a - b) < tolerance
+
+print(0.1 + 0.2 == 0.3)              # False (piege classique)
+print(presque_egaux(0.1 + 0.2, 0.3)) # True
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def presque_egaux(a, b, tolerance=1e-9):
+%     return abs(a - b) < tolerance
+% assert (0.1 + 0.2 == 0.3) is False
+% assert presque_egaux(0.1 + 0.2, 0.3) is True
+% assert presque_egaux(1/3, 0.3333333333) is True
+% assert presque_egaux(1.0, 1.001) is False
+% END-VERIFY
+
+\erreurFrequente{Écrire \lstinline{if resultat == valeur_attendue:} pour tester un calcul
+flottant (EF). Cette comparaison peut échouer même quand le calcul est correct, à cause des
+erreurs d'arrondi : il faut toujours comparer avec une tolérance, via une fonction comme
+\lstinline{presque_egaux} ci-dessus.}
+
+\approfondissement{La norme utilisée par la quasi-totalité des langages (dont Python) est
+IEEE-754, qui code un flottant en trois parties : un bit de signe, un exposant, et une
+mantisse (partie fractionnaire). Aucune connaissance précise de cette norme n'est exigible
+au programme, mais elle explique pourquoi $1/3$, $0{,}1$ ou $0{,}2$ ne sont pas
+représentables exactement en base 2 (seules les fractions dont le dénominateur est une
+puissance de 2, comme $0{,}25=1/4$, le sont).}
+
+\exemple{$0{,}25=1/4=2^{-2}$ est représentable \textbf{exactement} en binaire, contrairement
+à $0{,}1$ :}
+
+% BEGIN-VERIFY
+% assert 0.25 * 4 == 1.0
+% assert (0.25).hex() == '0x1.0000000000000p-2'  # mantisse toute a zero : ecriture binaire finie
+% assert (0.1).hex() == '0x1.999999999999ap-4'    # mantisse periodique : ecriture binaire arrondie
+% assert f'{0.25:.20f}' == '0.25000000000000000000'
+% assert f'{0.1:.20f}' != '0.10000000000000000000'
+% END-VERIFY
+
+\alamachine{Dans un éditeur Python, calcule \lstinline{0.1 + 0.1 + 0.1} et compare-le à
+\lstinline{0.3} avec \lstinline{==}, puis avec la fonction \lstinline{presque_egaux}
+ci-dessus. Cherche un autre triplet de flottants dont la somme affiche un résultat
+« bizarre » comme \lstinline{0.30000000000000004}.}

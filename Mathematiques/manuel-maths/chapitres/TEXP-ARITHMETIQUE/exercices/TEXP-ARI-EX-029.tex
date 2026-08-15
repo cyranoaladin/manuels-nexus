@@ -1,0 +1,17 @@
+% META: {"id": "TEXP-ARI-EX-029", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C2"], "capacites_codes": ["C2"], "methodes": ["M4"], "parcours": 2, "competences": ["communiquer","raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-029.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-029.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**4 - 4*x**3 + 6*x**2
+% fpp = diff(f, x, 2)
+% assert expand(fpp) == 12*x**2 - 24*x + 12
+% assert factor(fpp) == 12*(x-1)**2
+% # f'' >= 0 partout, pas de changement de signe => pas d'inflexion
+% assert fpp.subs(x, 1) == 0
+% assert fpp.subs(x, 0) == 12
+% assert fpp.subs(x, 2) == 12
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-029}{1}{12}
+Soit $f(x) = x^4 - 4x^3 + 6x^2$. La courbe admet-elle des points d'inflexion ?
+
+\end{exercice}

@@ -1,0 +1,48 @@
+% META: {"id": "TNSI-LANG-EVAL-B-corrige", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "correction", "evaluation_ref": "TNSI-LANG-EVAL-B", "capacites": ["T-LANG-03C", "T-LANG-04A", "T-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% def est_premier(n):
+%     """Indique si l'entier n (n > 1) est premier."""
+%     for d in range(2, n):
+%         if n % d == 0:
+%             return False
+%     return True
+% assert est_premier(7) is True
+% assert est_premier(8) is False
+%
+% def carres_positifs_fonctionnel(valeurs):
+%     return [v ** 2 for v in valeurs if v > 0]
+% donnees = [-2, 3, -1, 4]
+% assert carres_positifs_fonctionnel(donnees) == [9, 16]
+%
+% resultat = 0.3 - 0.2
+% assert resultat != 0.1
+% END-VERIFY
+\begin{corrige}{TNSI-LANG-EVAL-B-EX1}
+\begin{python}
+def est_premier(n):
+    """Indique si l'entier n (n > 1) est premier.
+
+    Parametre : n, entier strictement superieur a 1.
+    Renvoie : True si n est premier, False sinon.
+    """
+    for d in range(2, n):
+        if n % d == 0:
+            return False
+    return True
+
+print(est_premier(7))  # True
+print(est_premier(8))  # False
+\end{python}
+\end{corrige}
+
+\begin{corrige}{TNSI-LANG-EVAL-B-EX2}
+\textbf{Q1.}
+\begin{python}
+def carres_positifs_fonctionnel(valeurs):
+    return [v ** 2 for v in valeurs if v > 0]
+\end{python}
+
+\textbf{Q2.} La fonction native masquée est \lstinline{sum}. Le code fonctionne malgré tout \textbf{ici} car la variable locale \lstinline{sum} n'est utilisée que comme accumulateur, sans jamais appeler la fonction native \lstinline{sum(...)} dans le reste de la fonction. Le risque apparaîtrait si l'on avait besoin d'appeler \lstinline{sum(...)} plus loin dans le même bloc : l'appel échouerait car \lstinline{sum} désignerait alors un entier, plus une fonction.
+
+\textbf{Q3.} \lstinline{resultat == 0.1} renvoie \lstinline{False} : à cause des arrondis internes de la représentation binaire des flottants, \lstinline{0.3 - 0.2} ne vaut pas exactement \lstinline{0.1} (l'écart est de l'ordre de $10^{-17}$). Comparer deux flottants avec \lstinline{==} est risqué pour cette raison ; il faut comparer leur écart à une tolérance près : \lstinline{abs(resultat - 0.1) < 1e-9}.
+\end{corrige}

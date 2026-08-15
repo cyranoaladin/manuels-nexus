@@ -1,0 +1,351 @@
+{
+  "chapitre": "TSPE-DERIVATION-CONVEXITE",
+  "titre": "QCM d'auto-evaluation -- Complements sur la derivation, convexite",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "La derivee de $f(x) = \\mathrm{e}^{x^2}$ est :",
+      "options": {
+        "A": "$\\mathrm{e}^{x^2}$",
+        "B": "$2x\\,\\mathrm{e}^{x^2}$",
+        "C": "$x\\,\\mathrm{e}^{x^2}$",
+        "D": "$2\\,\\mathrm{e}^{x^2}$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "C": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "D": {
+          "erreur": "Consulter le cours correspondant"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "La derivee de $f(x) = \\ln(x^2 + 1)$ sur $\\mathbb{R}$ est :",
+      "options": {
+        "A": "$\\dfrac{1}{x^2 + 1}$",
+        "B": "$\\dfrac{2x}{x^2 + 1}$",
+        "C": "$\\dfrac{2}{x^2 + 1}$",
+        "D": "$\\dfrac{x}{x^2 + 1}$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "C": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "D": {
+          "erreur": "Consulter le cours correspondant"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C1",
+      "enonce": "La derivee de $f(x) = (3x - 2)^4$ est :",
+      "options": {
+        "A": "$4(3x-2)^3$",
+        "B": "$12(3x-2)^3$",
+        "C": "$3(3x-2)^4$",
+        "D": "$4 \\cdot 3 \\cdot (3x-2)^3$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "C": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "D": {
+          "erreur": "Consulter le cours correspondant"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "Soit $f(x) = x\\,\\mathrm{e}^{-x}$. La derivee $f'(x)$ est :",
+      "options": {
+        "A": "$\\mathrm{e}^{-x} - x\\,\\mathrm{e}^{-x}$",
+        "B": "$\\mathrm{e}^{-x} + x\\,\\mathrm{e}^{-x}$",
+        "C": "$-\\mathrm{e}^{-x}$",
+        "D": "$x\\,\\mathrm{e}^{-x}$"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "C": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "D": {
+          "erreur": "Consulter le cours correspondant"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C2",
+      "enonce": "La limite de $f(x) = \\dfrac{\\ln x}{x}$ en $+\\infty$ est :",
+      "options": {
+        "A": "$+\\infty$",
+        "B": "$1$",
+        "C": "$0$",
+        "D": "$-\\infty$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "B": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "D": {
+          "erreur": "Consulter le cours correspondant"
+        }
+      }
+    },
+    {
+      "id": "Q6",
+      "capacite": "C2",
+      "enonce": "La fonction $f(x) = x^3 - 3x$ admet :",
+      "options": {
+        "A": "un maximum en $x = 1$ et un minimum en $x = -1$",
+        "B": "un maximum en $x = -1$ et un minimum en $x = 1$",
+        "C": "un maximum en $x = 0$",
+        "D": "aucun extremum"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "C": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "D": {
+          "erreur": "Consulter le cours correspondant"
+        }
+      }
+    },
+    {
+      "id": "Q7",
+      "capacite": "C3",
+      "enonce": "La fonction $f(x) = \\mathrm{e}^x$ est :",
+      "options": {
+        "A": "convexe sur $\\mathbb{R}$",
+        "B": "concave sur $\\mathbb{R}$",
+        "C": "convexe sur $\\mathbb{R}^+$ et concave sur $\\mathbb{R}^-$",
+        "D": "ni convexe ni concave"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "C": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "D": {
+          "erreur": "Consulter le cours correspondant"
+        }
+      }
+    },
+    {
+      "id": "Q8",
+      "capacite": "C3",
+      "enonce": "L'inegalite $\\mathrm{e}^x \\geq 1 + x$ est valable :",
+      "options": {
+        "A": "pour tout $x \\geq 0$",
+        "B": "pour tout $x \\leq 0$",
+        "C": "pour tout $x \\in \\mathbb{R}$",
+        "D": "seulement en $x = 0$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "B": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "D": {
+          "erreur": "Consulter le cours correspondant"
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "capacite": "C3",
+      "enonce": "La fonction $f(x) = \\ln x$ est :",
+      "options": {
+        "A": "convexe sur $]0, +\\infty[$",
+        "B": "concave sur $]0, +\\infty[$",
+        "C": "convexe puis concave",
+        "D": "ni convexe ni concave"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "C": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "D": {
+          "erreur": "Consulter le cours correspondant"
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "capacite": "C4",
+      "enonce": "Si $f''(x) > 0$ sur un intervalle $I$, alors la courbe de $f$ est :",
+      "options": {
+        "A": "convexe (en forme de $\\cup$)",
+        "B": "concave (en forme de $\\cap$)",
+        "C": "croissante",
+        "D": "decroissante"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "C": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "D": {
+          "erreur": "Consulter le cours correspondant"
+        }
+      }
+    },
+    {
+      "id": "Q11",
+      "capacite": "C4",
+      "enonce": "Un point d'inflexion est un point ou :",
+      "options": {
+        "A": "$f'(x) = 0$",
+        "B": "$f''(x) = 0$ et $f''$ change de signe",
+        "C": "$f''(x) = 0$ seulement",
+        "D": "$f(x) = 0$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "C": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "D": {
+          "erreur": "Consulter le cours correspondant"
+        }
+      }
+    },
+    {
+      "id": "Q12",
+      "capacite": "C5",
+      "enonce": "Si $f$ est convexe, alors la courbe est :",
+      "options": {
+        "A": "au-dessus de ses tangentes",
+        "B": "au-dessous de ses tangentes",
+        "C": "au-dessus de ses cordes",
+        "D": "au-dessous de ses cordes"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "C": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "D": {
+          "erreur": "Consulter le cours correspondant"
+        }
+      }
+    },
+    {
+      "id": "Q13",
+      "capacite": "C5",
+      "enonce": "La courbe de $f(x) = x^3$ traverse sa tangente en $x = 0$ car :",
+      "options": {
+        "A": "$f'(0) = 0$",
+        "B": "$f''(0) = 0$ et $f''$ change de signe",
+        "C": "$f(0) = 0$",
+        "D": "$f$ est decroissante"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "C": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "D": {
+          "erreur": "Consulter le cours correspondant"
+        }
+      }
+    },
+    {
+      "id": "Q14",
+      "capacite": "C6",
+      "enonce": "Si $f''(x) \\geq 0$ sur $I$, alors pour tout $a, x \\in I$ :",
+      "options": {
+        "A": "$f(x) \\geq f(a) + f'(a)(x - a)$",
+        "B": "$f(x) \\leq f(a) + f'(a)(x - a)$",
+        "C": "$f(x) = f(a) + f'(a)(x - a)$",
+        "D": "$f(x) \\geq f(a)$"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "C": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "D": {
+          "erreur": "Consulter le cours correspondant"
+        }
+      }
+    },
+    {
+      "id": "Q15",
+      "capacite": "C6",
+      "enonce": "L'approximation $\\mathrm{e}^{0{,}1} \\approx 1{,}1$ obtenue par tangente en $0$ est :",
+      "options": {
+        "A": "par defaut (la vraie valeur est plus grande)",
+        "B": "par exces (la vraie valeur est plus petite)",
+        "C": "exacte",
+        "D": "impossible a determiner"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "C": {
+          "erreur": "Consulter le cours correspondant"
+        },
+        "D": {
+          "erreur": "Consulter le cours correspondant"
+        }
+      }
+    }
+  ]
+}

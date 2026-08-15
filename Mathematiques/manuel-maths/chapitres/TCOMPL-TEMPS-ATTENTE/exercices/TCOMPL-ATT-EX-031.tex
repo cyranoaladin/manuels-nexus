@@ -1,0 +1,22 @@
+% META: {"id": "TCOMPL-ATT-EX-031", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "exercice", "capacites": ["TCOMPL-ATT-C1"], "capacites_codes": ["C1"], "methodes": ["M4"], "parcours": 2, "competences": ["raisonner","calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-031.tex", "corrige_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-031.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f''(x) = 6(x-1)(x-3)
+% fpp = 6*(x-1)*(x-3)
+% # f' = x^3 - 6x^2 + 9x + C, f = x^4/4 - 2x^3 + 9x^2/2 + Cx + D
+% fp = integrate(fpp, x)
+% assert simplify(fp - (2*x**3 - 12*x**2 + 18*x)) == 0
+% f = integrate(fp, x)
+% assert simplify(f - (x**4/2 - 4*x**3 + 9*x**2)) == 0
+% assert solve(fpp, x) == [1, 3]
+% END-VERIFY
+\begin{exercice}{TCOMPL-ATT-EX-031}{2}{15}
+On sait que $f''(x) = 6(x-1)(x-3)$ et que $f(0) = 0$, $f'(0) = 0$.
+\begin{enumerate}
+  \item Determiner une expression de $f$.
+  \item Identifier les intervalles de convexite et les points d'inflexion.
+  \item Esquisser la courbe de $f$.
+\end{enumerate}
+
+\end{exercice}

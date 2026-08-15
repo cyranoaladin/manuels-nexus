@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-PRIMEQ-EX-024", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "exercice", "capacites": ["TSPE-PRIMITIVES-EQDIFF-C4"], "capacites_codes": ["C4"], "methodes": ["M1"], "parcours": 2, "competences": ["raisonner", "communiquer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-PRIMITIVES-EQDIFF/exercices/TSPE-PRIMEQ-EX-024.tex", "corrige_tex": "chapitres/TSPE-PRIMITIVES-EQDIFF/corriges/TSPE-PRIMEQ-CO-024.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, Function
+% x = symbols('x')
+% a = 4
+% y = symbols('y', cls=Function)
+% z = y(x)*exp(-a*x)
+% zp = diff(z, x)
+% # zp = (y'(x) - a*y(x)) * exp(-a*x) ; substituer y'(x)=a*y(x) donne zp=0
+% expr = zp.subs(diff(y(x), x), a*y(x))
+% from sympy import simplify
+% assert simplify(expr) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-PRIMEQ-EX-008}{3}{18}
+On considere l'equation differentielle $(E) : y' = 4y$, et $y$ une solution de $(E)$ sur $\mathbb{R}$. On pose $z(x) = y(x)\,\mathrm{e}^{-4x}$.
+\begin{enumerate}
+  \item Calculer $z'(x)$ en fonction de $y(x)$, $y'(x)$ et $x$ (on derivera un produit).
+  \item En utilisant le fait que $y$ verifie $(E)$, montrer que $z'(x) = 0$ pour tout $x$.
+  \item En deduire que $z$ est constante, puis exprimer $y(x)$ en fonction de cette constante.
+  \item Redigez une phrase de conclusion expliquant pourquoi ce raisonnement prouve que \emph{toutes} les solutions de $(E)$ sont de cette forme.
+\end{enumerate}
+\end{exercice}

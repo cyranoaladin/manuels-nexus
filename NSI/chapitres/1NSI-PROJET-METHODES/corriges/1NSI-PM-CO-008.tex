@@ -1,0 +1,32 @@
+% META: {"id": "1NSI-PM-CO-008", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "correction", "exercice_ref": "1NSI-PM-EX-002", "capacites": ["1NSI-PROJET-METHODES-C2"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C2"], "parcours": 2, "fichier_exercice": "chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-008.tex"}
+% BEGIN-VERIFY
+% jalons = [
+%     {"nom": "Specification du jeu", "termine": True},
+%     {"nom": "Deplacement du personnage", "termine": True},
+%     {"nom": "Gestion des collisions", "termine": True},
+%     {"nom": "Score et niveaux", "termine": False},
+%     {"nom": "Tests et equilibrage", "termine": False},
+%     {"nom": "Presentation finale", "termine": False},
+% ]
+% def avancement(jalons):
+%     return sum(1 for j in jalons if j["termine"]) / len(jalons) * 100
+% def prochain_jalon(jalons):
+%     for j in jalons:
+%         if not j["termine"]:
+%             return j["nom"]
+%     return None
+% assert avancement(jalons) == 50.0
+% assert prochain_jalon(jalons) == "Score et niveaux"
+% END-VERIFY
+\begin{corrige}{1NSI-PM-EX-002}
+\textbf{1.} L'avancement est de $50{,}0\,\%$ ($3$ jalons terminés sur $6$).
+
+\textbf{2.} Le prochain jalon à traiter est \lstinline{"Score et niveaux"}.
+
+\textbf{3.} Pas nécessairement : le \textbf{nombre} de jalons terminés ne dit rien sur leur
+\textbf{charge de travail respective}. « Tests et équilibrage » ou « Score et niveaux »
+peuvent s'avérer bien plus longs que « Spécification du jeu ». Un pourcentage calculé
+uniquement sur le \textbf{nombre} de jalons peut donc être trompeur : il vaudrait mieux
+pondérer chaque jalon par une estimation de sa durée, plutôt que de tous les compter à
+parts égales.
+\end{corrige}

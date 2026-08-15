@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-LOG-CO-015", "chapitre": "TSPE-LOGARITHME", "type_objet": "correction", "exercice_ref": "TSPE-LOG-EX-007", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-LOGARITHME-C3"], "parcours": 1, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-LOGARITHME/exercices/TSPE-LOG-EX-015.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, limit
+% x = symbols('x', positive=True)
+% assert limit(3*x*ln(x), x, 0, '+') == 0
+% assert limit(x*ln(x) + 2*x, x, 0, '+') == 0
+% END-VERIFY
+\begin{corrige}{TSPE-LOG-EX-007}
+
+\textbf{Q1.} $3x\ln x = 3 \times (x\ln x)$. Comme $x\ln x \to 0$, par produit par une constante, $3x\ln x \to 3 \times 0 = 0$.
+
+\textbf{Q2.} $x\ln x \to 0$ et $2x \to 0$ (limite usuelle) : par somme des limites, $x\ln x + 2x \to 0 + 0 = 0$.
+
+\end{corrige}

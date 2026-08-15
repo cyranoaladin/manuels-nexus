@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-INTEG-EX-015", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "exercice", "capacites": ["TSPE-CALCUL-INTEGRAL-C3"], "capacites_codes": ["C3"], "methodes": ["M1"], "parcours": 1, "competences": ["raisonner", "communiquer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-015.tex", "corrige_tex": "chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-015.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, diff, simplify
+% x, t = symbols('x t')
+% A = integrate(2*t + 1, (t, 0, x))
+% assert simplify(diff(A, x) - (2*x+1)) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-INTEG-EX-007}{3}{18}
+On considere $f(t) = 2t+1$ sur $[0,5]$, une fonction continue, positive et croissante. On pose $A(x) = \displaystyle\int_0^x f(t)\,\mathrm{d}t$ pour $x \in [0,5]$.
+\begin{enumerate}
+  \item En reprenant la demonstration du cours, justifier que pour $h>0$ et $x_0 \in [0,5[$ :
+  \[
+    h\,f(x_0) \leq A(x_0+h) - A(x_0) \leq h\,f(x_0+h).
+  \]
+  \item En deduire (sans calculer $A(x)$ explicitement) que $A'(x_0) = f(x_0)$.
+  \item Verifier ce resultat en calculant explicitement $A(x)$ (aire d'un trapeze), puis $A'(x)$.
+\end{enumerate}
+\end{exercice}

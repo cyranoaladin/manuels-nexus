@@ -1,0 +1,25 @@
+% META: {"id": "1NSI-TAB-EX-024", "chapitre": "1NSI-TABLES", "type_objet": "exercice", "capacites": ["1NSI-TABLES-C4"], "parcours": 2, "competences": ["programmer", "analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-024.tex", "corrige_tex": "chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-024.tex", "status": "approved", "capacites_codes": ["C4"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% notes = [
+%     {"nom": "Amine", "matiere": "Maths", "note": 14},
+%     {"nom": "Amine", "matiere": "NSI", "note": 16},
+%     {"nom": "Lina", "matiere": "Maths", "note": 12},
+%     {"nom": "Lina", "matiere": "NSI", "note": 18},
+%     {"nom": "Omar", "matiere": "Maths", "note": 9},
+%     {"nom": "Omar", "matiere": "NSI", "note": 11},
+% ]
+% tri = sorted(notes, key=lambda ligne: ligne["note"], reverse=True)
+% premiere = (tri[0]["nom"], tri[0]["matiere"], tri[0]["note"])
+% derniere = (tri[-1]["nom"], tri[-1]["matiere"], tri[-1]["note"])
+% assert premiere == ("Lina", "NSI", 18)
+% assert derniere == ("Omar", "Maths", 9)
+% assert notes[0]["note"] == 14  # table originale non modifiee par sorted
+% END-VERIFY
+\begin{exercice}{1NSI-TAB-EX-004}{2}{10}
+On reprend la table \lstinline{notes} de l'exercice précédent.
+\begin{enumerate}
+  \item Écrire l'instruction qui trie cette table par note \textbf{décroissante}.
+  \item Quelle est la première ligne de la table triée ? La dernière ?
+  \item La table \lstinline{notes} d'origine est-elle modifiée par cette instruction ? Justifier en une phrase.
+\end{enumerate}
+\end{exercice}

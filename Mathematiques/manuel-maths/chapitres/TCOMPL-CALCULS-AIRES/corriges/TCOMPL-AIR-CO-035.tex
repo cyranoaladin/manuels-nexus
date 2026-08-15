@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-AIR-CO-035", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "corrige", "exercice_ref": "TCOMPL-AIR-EX-035", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**4 - 2*x**2
+% fpp = diff(f, x, 2)
+% assert expand(fpp) == 12*x**2 - 4
+% # convexe ou f''>0: |x| > sqrt(3)/3, concave sinon
+% assert fpp.subs(x, 1) == 8  # convexe
+% assert fpp.subs(x, 0) == -4  # concave
+% assert solve(fpp, x) == [-sqrt(3)/3, sqrt(3)/3]
+% END-VERIFY
+\begin{corrige}{TCOMPL-AIR-EX-035}
+
+$f''(x) = 12x^2 - 4$. Cette expression est positive si $|x| > \dfrac{\sqrt{3}}{3}$ et negative sinon.
+
+\commentaireMarge{Convexe ou $f''>0$, concave ou $f''<0$.}
+
+\textbf{Question 1.} Convexe sur $\left]-\infty, -\frac{\sqrt3}{3}\right] \cup \left[\frac{\sqrt3}{3}, +\infty\right[$, concave sur $\left[-\frac{\sqrt3}{3}, \frac{\sqrt3}{3}\right]$.
+
+\textbf{Question 2.} Deux points d'inflexion en $x = \pm\dfrac{\sqrt{3}}{3}$, ou $f$ change de courbure.
+
+\end{corrige}

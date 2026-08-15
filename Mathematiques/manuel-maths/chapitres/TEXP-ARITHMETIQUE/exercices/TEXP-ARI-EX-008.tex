@@ -1,0 +1,18 @@
+% META: {"id": "TEXP-ARI-EX-008", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C8"], "capacites_codes": ["C8"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-008.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-008.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (x**3 - 1)**4 * exp(2*x)
+% fp = diff(f, x)
+% # produit: (uv)' = u'v + uv'
+% u = (x**3-1)**4
+% v = exp(2*x)
+% up = 12*x**2*(x**3-1)**3
+% vp = 2*exp(2*x)
+% assert simplify(fp - (up*v + u*vp)) == 0
+% assert fp.subs(x, 1) == 0
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-008}{2}{15}
+Calculer la derivee de $f(x) = (x^3 - 1)^4 \, \mathrm{e}^{2x}$ sur $\mathbb{R}$.
+
+\end{exercice}

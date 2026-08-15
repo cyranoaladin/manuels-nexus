@@ -1,0 +1,16 @@
+% META: {"id": "TEXP-GRA-EX-023", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-023.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-023.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # e^x + e^y >= 2*e^((x+y)/2) par Jensen
+% lhs = exp(x) + exp(y)
+% rhs = 2*exp((x+y)/2)
+% # verifier numeriquement
+% assert (lhs - rhs).subs({x: 0, y: 2}) == 1 + exp(2) - 2*exp(1)
+% assert (lhs - rhs).subs({x: 1, y: 3}) > 0
+% END-VERIFY
+\begin{exercice}{TEXP-GRA-EX-023}{2}{15}
+Demontrer que pour tous reels $x$ et $y$ :
+\[ \mathrm{e}^x + \mathrm{e}^y \geq 2\,\mathrm{e}^{\frac{x+y}{2}}. \]
+
+\end{exercice}

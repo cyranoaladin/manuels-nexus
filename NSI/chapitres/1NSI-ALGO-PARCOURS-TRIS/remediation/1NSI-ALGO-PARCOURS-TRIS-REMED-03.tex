@@ -1,0 +1,64 @@
+% META: {"id": "1NSI-ALGO-PARCOURS-TRIS-REMED-03", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "remediation", "capacites": ["1NSI-ALGO-PARCOURS-TRIS-C3"], "status": "approved", "capacites_codes": ["C3"], "statut": "complete"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : oubli du +1 dans la mise a jour de borne_inf
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-ADGK-RE-C1-EX1}{1}{10}
+Un élève écrit la recherche dichotomique suivante, avec une erreur dans la mise à jour de
+\lstinline{borne_inf} :
+\begin{python}
+def recherche_dichotomique_bugue(tableau_trie, valeur):
+    borne_inf, borne_sup = 0, len(tableau_trie) - 1
+    while borne_inf <= borne_sup:
+        milieu = (borne_inf + borne_sup) // 2
+        if tableau_trie[milieu] == valeur:
+            return milieu
+        elif tableau_trie[milieu] < valeur:
+            borne_inf = milieu  # au lieu de milieu + 1
+        else:
+            borne_sup = milieu - 1
+    return -1
+\end{python}
+\begin{enumerate}
+  \item Sur le tableau \lstinline{[1, 3, 5, 7, 9, 11, 13]}, que se passe-t-il si on cherche la valeur $4$ (absente) avec cette fonction bugée ? (on pourra limiter le nombre d'itérations testées à $20$ pour éviter une exécution trop longue)
+  \item Calculer le variant $V=\text{borne\_sup}-\text{borne\_inf}$ à chaque itération. Décroît-il toujours strictement avec cette version bugée ?
+  \item Corriger le code pour que la terminaison soit à nouveau garantie.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def recherche_dichotomique_bugue_limitee(tableau_trie, valeur, max_iter=20):
+%     borne_inf, borne_sup = 0, len(tableau_trie) - 1
+%     variants = []
+%     compteur = 0
+%     while borne_inf <= borne_sup:
+%         compteur += 1
+%         if compteur > max_iter:
+%             return "boucle_infinie", variants
+%         variants.append(borne_sup - borne_inf)
+%         milieu = (borne_inf + borne_sup) // 2
+%         if tableau_trie[milieu] == valeur:
+%             return milieu, variants
+%         elif tableau_trie[milieu] < valeur:
+%             borne_inf = milieu
+%         else:
+%             borne_sup = milieu - 1
+%     return -1, variants
+% t = [1, 3, 5, 7, 9, 11, 13]
+% resultat, variants = recherche_dichotomique_bugue_limitee(t, 4)
+% assert resultat == "boucle_infinie"
+% assert variants[-1] == variants[-2] == variants[-3]  # le variant ne decroit plus (stagne)
+% def recherche_dichotomique(tableau_trie, valeur):
+%     borne_inf, borne_sup = 0, len(tableau_trie) - 1
+%     while borne_inf <= borne_sup:
+%         milieu = (borne_inf + borne_sup) // 2
+%         if tableau_trie[milieu] == valeur:
+%             return milieu
+%         elif tableau_trie[milieu] < valeur:
+%             borne_inf = milieu + 1
+%         else:
+%             borne_sup = milieu - 1
+%     return -1
+% assert recherche_dichotomique(t, 4) == -1
+% END-VERIFY

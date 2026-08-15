@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-PROBA-CO-012", "chapitre": "TSPE-PROBABILITES", "type_objet": "correction", "exercice_ref": "TSPE-PROBA-EX-003", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-PROBA-C3"], "parcours": 2, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-012.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% p = Rational(3,10)
+% P0 = (1-p)**10
+% assert round(float(P0), 4) == 0.0282
+% assert round(float(1-P0), 4) == 0.9718
+% END-VERIFY
+\begin{corrige}{TSPE-PROBA-EX-003}
+
+\textbf{Q1.} Les $10$ tirs sont des repetitions independantes d'une meme epreuve a deux issues (touche/rate), de probabilite de succes constante $0{,}3$ : c'est un schema de Bernoulli, donc $X \sim \mathcal{B}(10,\,0{,}3)$.
+
+\textbf{Q2.} $P(X=0) = \dbinom{10}{0}(0{,}3)^0(0{,}7)^{10} = (0{,}7)^{10} \approx 0{,}0282$.
+
+\textbf{Q3.} $P(X\geq 1) = 1-P(X=0) \approx 1-0{,}0282 = \boxed{0{,}9718}$.
+
+\end{corrige}

@@ -1,0 +1,66 @@
+% META: {"id": "1NSI-LANG-EVAL-B", "chapitre": "1NSI-LANGAGE", "type_objet": "evaluation", "capacites": ["P-LANG-01", "P-LANG-03B", "P-LANG-04", "P-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "approved"}
+\section*{Évaluation B --- Langages et programmation}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (constructions, spécification) ; Ex. 2 : 10 pts (mise au point, bibliothèque)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Moyenne pondérée} \hfill (10 points)
+
+\begin{enumerate}
+  \item (2 pts) Proposer une précondition pour une fonction \lstinline{moyenne_ponderee(valeurs, poids)} calculant une moyenne pondérée.
+  \item (5 pts) Écrire cette fonction, avec les \lstinline{assert} correspondants, en utilisant une boucle \lstinline{for} bornée.
+  \item (3 pts) Calculer \lstinline{moyenne_ponderee([8, 12, 16], [1, 1, 2])} à la main, puis vérifier avec le code.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def moyenne_ponderee(valeurs, poids):
+%     assert len(valeurs) == len(poids)
+%     assert sum(poids) > 0
+%     total = 0
+%     for i in range(len(valeurs)):
+%         total = total + valeurs[i] * poids[i]
+%     return total / sum(poids)
+% assert moyenne_ponderee([8, 12, 16], [1, 1, 2]) == 13.0
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Mise au point et bibliothèque} \hfill (10 points)
+
+Un élève écrit la fonction suivante, censée renvoyer le produit des éléments strictement
+négatifs d'une liste :
+\begin{python}
+def produit_negatifs_bugue(liste):
+    prod = 0
+    for x in liste:
+        if x < 0:
+            prod *= x
+    return prod
+\end{python}
+
+\begin{enumerate}
+  \item (3 pts) Que renvoie \lstinline{produit_negatifs_bugue([-2, -3, -4])} ? Quel est le résultat attendu ?
+  \item (4 pts) Identifier précisément l'erreur dans le code, et proposer une version corrigée.
+  \item (3 pts) En utilisant le module \lstinline{math}, calculer le PGCD de $60$ et $48$ (indiquer le nom de la fonction utilisée).
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def produit_negatifs_bugue(liste):
+%     prod = 0
+%     for x in liste:
+%         if x < 0:
+%             prod *= x
+%     return prod
+% assert produit_negatifs_bugue([-2, -3, -4]) == 0
+% def produit_negatifs(liste):
+%     prod = 1
+%     for x in liste:
+%         if x < 0:
+%             prod *= x
+%     return prod
+% assert produit_negatifs([-2, -3, -4]) == -24
+% import math
+% assert math.gcd(60, 48) == 12
+% END-VERIFY

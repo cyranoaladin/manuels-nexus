@@ -1,0 +1,27 @@
+% META: {"id": "1NSI-RES-EX-010", "chapitre": "1NSI-RESEAUX", "type_objet": "exercice", "capacites": ["1NSI-RESEAUX-C2"], "parcours": 2, "competences": ["concevoir", "programmer", "valider"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-010.tex", "corrige_tex": "chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-010.tex", "status": "approved", "capacites_codes": ["C2"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% etat = {"pompe": False}
+% def irrigation_hysteresis(humidite, seuil_bas=30, seuil_haut=60):
+%     if etat["pompe"]:
+%         if humidite > seuil_haut:
+%             etat["pompe"] = False
+%     else:
+%         if humidite < seuil_bas:
+%             etat["pompe"] = True
+%     return etat["pompe"]
+% sequence = [20, 35, 50, 65, 40]
+% resultats = [irrigation_hysteresis(h) for h in sequence]
+% assert resultats == [True, True, True, False, False]
+% END-VERIFY
+\begin{exercice}{1NSI-RES-EX-005}{3}{15}
+Cahier des charges d'un système d'arrosage automatique : un capteur mesure l'humidité du
+sol (en \%) ; la pompe se \textbf{déclenche} quand l'humidité descend sous $30\,\%$, et ne
+s'\textbf{arrête} que lorsque l'humidité dépasse $60\,\%$ (pour éviter des démarrages/arrêts
+trop fréquents de la pompe — c'est le principe d'\textbf{hystérésis} déjà rencontré pour le
+thermostat du cours).
+\begin{enumerate}
+  \item Écrire une fonction \lstinline{irrigation_hysteresis(humidite, seuil_bas=30, seuil_haut=60)} qui met à jour et renvoie l'état \lstinline{etat["pompe"]} (initialement \lstinline{False}), en respectant ce cahier des charges.
+  \item Tester ta fonction sur la séquence de mesures \lstinline{[20, 35, 50, 65, 40]} (une mesure par heure). Donner la séquence des états de la pompe.
+  \item À la mesure \lstinline{35} (deuxième heure), la pompe est-elle active ? Pourquoi, alors que $35\,\%$ est supérieur au seuil bas de $30\,\%$ ?
+\end{enumerate}
+\end{exercice}

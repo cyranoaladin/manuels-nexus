@@ -1,0 +1,139 @@
+% META: {"id": "1NSI-ARCHOS-COURS-03", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "cours", "capacites": ["1NSI-ARCHITECTURE-OS-C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C3"]}
+\section{Systèmes d'exploitation}
+
+\definition[D4]{
+  Un \textbf{système d'exploitation} (OS, \emph{operating system}) est le logiciel qui gère
+  les ressources matérielles d'une machine (processeur, mémoire, disque, périphériques) et
+  fournit une interface pour exécuter d'autres programmes.
+}
+
+\propriete[Fonctions d'un système d'exploitation]{
+  Un système d'exploitation assure notamment : la \textbf{gestion des processus}
+  (démarrer, arrêter, partager le temps processeur entre plusieurs programmes), la
+  \textbf{gestion de la mémoire} (allouer de l'espace à chaque programme), la
+  \textbf{gestion des fichiers} (organiser le stockage sur disque), et la \textbf{gestion des
+  droits} (contrôler qui a le droit de faire quoi).
+}
+
+\erreurFrequente{Confondre un système d'exploitation avec une simple \og interface
+graphique \fg{}. L'interface graphique (bureau, fenêtres, icônes) n'est qu'une des façons de
+présenter le système d'exploitation à l'utilisateur : le système d'exploitation lui-même
+fonctionne indépendamment de la présence ou non d'une interface graphique (un serveur peut
+tourner sans aucun affichage graphique).}
+
+\propriete[Systèmes libres et propriétaires]{
+  Un système d'exploitation \textbf{libre} (comme Linux) met à disposition son code source,
+  modifiable et redistribuable librement. Un système \textbf{propriétaire} (comme Windows ou
+  macOS) ne diffuse pas son code source. Les élèves de NSI utilisent généralement un système
+  libre en travaux pratiques.
+}
+
+\section{La ligne de commande}
+
+\definition[D5]{
+  La \textbf{ligne de commande} (ou \emph{terminal}, ou \emph{shell}) permet de piloter le
+  système d'exploitation en tapant des commandes textuelles, plutôt qu'en cliquant sur des
+  icônes.
+}
+
+\propriete[Commandes de base sur fichiers et dossiers]{
+  \begin{center}
+  \begin{tabular}{ll}
+    \lstinline{ls} & lister le contenu d'un dossier \\
+    \lstinline{cd chemin} & se déplacer dans un dossier \\
+    \lstinline{mkdir nom} & créer un dossier \\
+    \lstinline{touch fichier} & créer un fichier vide \\
+    \lstinline{rm fichier} & supprimer un fichier \\
+    \lstinline{cat fichier} & afficher le contenu d'un fichier \\
+  \end{tabular}
+  \end{center}
+}
+
+\begin{codereference}{Exécuter de vraies commandes shell depuis Python}
+\begin{python}
+import subprocess
+
+subprocess.run(["mkdir", "dossier_test"])
+subprocess.run(["touch", "dossier_test/notes.txt"])
+resultat = subprocess.run(["ls", "dossier_test"], capture_output=True, text=True)
+print(resultat.stdout)  # notes.txt
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% import subprocess, tempfile
+% with tempfile.TemporaryDirectory() as tmp:
+%     subprocess.run(["mkdir", "dossier_test"], cwd=tmp, check=True)
+%     subprocess.run(["touch", "dossier_test/notes.txt"], cwd=tmp, check=True)
+%     resultat = subprocess.run(["ls", "dossier_test"], cwd=tmp, capture_output=True, text=True, check=True)
+%     assert resultat.stdout.strip() == "notes.txt"
+% END-VERIFY
+
+\section{Droits et permissions d'accès}
+
+\definition[D6]{
+  Sous un système de type Unix (Linux, macOS), chaque fichier a trois catégories
+  d'utilisateurs associées à des droits : le \textbf{propriétaire}, le \textbf{groupe}, et
+  \textbf{les autres}. Pour chaque catégorie, trois droits peuvent être accordés ou refusés :
+  \textbf{lecture} (r), \textbf{écriture} (w), \textbf{exécution} (x).
+}
+
+\exemple{La chaîne \lstinline{"rwxr-xr--"} se lit par blocs de $3$ caractères :
+\lstinline{rwx} (propriétaire : lecture, écriture, exécution), \lstinline{r-x} (groupe :
+lecture, exécution, pas d'écriture), \lstinline{r--} (autres : lecture seule).}
+
+\begin{codereference}{Vérifier un droit d'accès à partir de sa représentation}
+\begin{python}
+def droit_accorde(permissions, categorie, action):
+    """Teste si `action` est autorisee pour `categorie` selon `permissions`.
+
+    permissions : chaine de 9 caracteres, ex "rwxr-xr--".
+    categorie : "proprietaire", "groupe" ou "autres".
+    action : "lecture", "ecriture" ou "execution".
+    """
+    index = {"proprietaire": 0, "groupe": 3, "autres": 6}
+    decalage = {"lecture": 0, "ecriture": 1, "execution": 2}
+    position = index[categorie] + decalage[action]
+    return permissions[position] != "-"
+
+perm = "rwxr-xr--"
+print(droit_accorde(perm, "proprietaire", "ecriture"))  # True
+print(droit_accorde(perm, "autres", "ecriture"))         # False
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def droit_accorde(permissions, categorie, action):
+%     index = {"proprietaire": 0, "groupe": 3, "autres": 6}
+%     decalage = {"lecture": 0, "ecriture": 1, "execution": 2}
+%     position = index[categorie] + decalage[action]
+%     return permissions[position] != "-"
+% perm = "rwxr-xr--"
+% assert droit_accorde(perm, "proprietaire", "ecriture") is True
+% assert droit_accorde(perm, "groupe", "ecriture") is False
+% assert droit_accorde(perm, "autres", "lecture") is True
+% assert droit_accorde(perm, "autres", "ecriture") is False
+% END-VERIFY
+
+\propriete[Notation octale]{
+  Chaque bloc de $3$ droits (lecture=4, écriture=2, exécution=1) se résume en un
+  \textbf{chiffre octal} égal à la somme des droits accordés. \lstinline{rwx} vaut
+  $4+2+1=7$, \lstinline{r-x} vaut $4+0+1=5$, \lstinline{r--} vaut $4$ : on retrouve la
+  notation \lstinline{chmod 754} bien connue des utilisateurs de Linux.
+}
+
+% BEGIN-VERIFY
+% def permissions_vers_octal(permissions):
+%     groupes = [permissions[0:3], permissions[3:6], permissions[6:9]]
+%     valeurs = []
+%     for g in groupes:
+%         v = (4 if g[0] == "r" else 0) + (2 if g[1] == "w" else 0) + (1 if g[2] == "x" else 0)
+%         valeurs.append(v)
+%     return "".join(str(v) for v in valeurs)
+% assert permissions_vers_octal("rwxr-xr--") == "754"
+% END-VERIFY
+
+\alamachine{Dans un terminal Linux, exécute la commande \lstinline{ls -l} dans un dossier
+de ton choix : observe la colonne de permissions (par exemple \lstinline{-rw-r--r--}).
+Identifie le propriétaire, le groupe, et les droits accordés aux autres utilisateurs pour un
+des fichiers listés.}

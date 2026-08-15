@@ -1,0 +1,34 @@
+% META: {"id": "1NSI-ARCHOS-CO-030", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "correction", "exercice_ref": "1NSI-ARCHOS-EX-005", "capacites": ["1NSI-ARCHITECTURE-OS-C5"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C5"], "parcours": 2, "fichier_exercice": "chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-030.tex"}
+% BEGIN-VERIFY
+% def droit_accorde(permissions, categorie, action):
+%     index = {"proprietaire": 0, "groupe": 3, "autres": 6}
+%     decalage = {"lecture": 0, "ecriture": 1, "execution": 2}
+%     position = index[categorie] + decalage[action]
+%     return permissions[position] != "-"
+% def permissions_vers_octal(permissions):
+%     groupes = [permissions[0:3], permissions[3:6], permissions[6:9]]
+%     valeurs = []
+%     for g in groupes:
+%         v = (4 if g[0] == "r" else 0) + (2 if g[1] == "w" else 0) + (1 if g[2] == "x" else 0)
+%         valeurs.append(v)
+%     return "".join(str(v) for v in valeurs)
+% perm = "rw-r-----"
+% assert droit_accorde(perm, "proprietaire", "execution") is False
+% assert permissions_vers_octal(perm) == "640"
+% END-VERIFY
+\begin{corrige}{1NSI-ARCHOS-EX-005}
+\textbf{1.} Le propriétaire \textbf{ne peut pas} exécuter ce fichier (troisième caractère
+du premier bloc : \lstinline{-}). Le groupe \textbf{peut} le lire (\lstinline{r-----} $\to$
+bloc groupe \lstinline{r--}). Les autres utilisateurs \textbf{ne peuvent pas} le lire
+(dernier bloc : \lstinline{---}).
+
+\textbf{2.} \lstinline{rw-r-----} se décompose en \lstinline{rw-} (proprietaire :
+$4+2=6$), \lstinline{r--} (groupe : $4$), \lstinline{---} (autres : $0$) : notation
+octale \lstinline{640}.
+
+\textbf{3.} Non, ce fichier n'est \textbf{pas} accessible en lecture par n'importe quel
+utilisateur : seuls le propriétaire et les membres du groupe peuvent le lire, les
+\og autres \fg{} n'ont aucun droit. Un scénario approprié : un fichier de données
+personnelles partagé au sein d'une équipe (le groupe) mais qui ne doit pas être visible par
+les autres utilisateurs du système.
+\end{corrige}

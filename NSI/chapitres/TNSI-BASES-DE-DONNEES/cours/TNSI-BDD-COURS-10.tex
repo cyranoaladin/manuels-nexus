@@ -1,0 +1,81 @@
+% META: {"id": "TNSI-BDD-COURS-10", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "cours", "capacites_codes": ["C10"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TNSI-BASES-DE-DONNEES-C10"]}
+\section{Modifier une base : INSERT, UPDATE, DELETE}
+
+% ============================================================
+% STRATE 1 — INSERT
+% ============================================================
+
+\definition[1]{
+La clause \textbf{INSERT INTO} ajoute un ou plusieurs tuples à une relation. On précise la relation, éventuellement la liste des attributs renseignés, puis les valeurs avec \texttt{VALUES}.
+}
+
+\textbf{Exemple.}
+\begin{sql}
+INSERT INTO Livre(titre, auteur, annee)
+VALUES ('Fahrenheit 451', 'Bradbury', 1953);
+\end{sql}
+
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Livre(id INTEGER PRIMARY KEY, titre TEXT, auteur TEXT, annee INTEGER)")
+% conn.execute("INSERT INTO Livre(titre, auteur, annee) VALUES ('Fahrenheit 451', 'Bradbury', 1953)")
+% conn.commit()
+% cur = conn.execute("SELECT titre, auteur, annee FROM Livre")
+% assert cur.fetchone() == ("Fahrenheit 451", "Bradbury", 1953)
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — UPDATE et DELETE
+% ============================================================
+
+\propriete[Mettre à jour avec UPDATE]{
+La clause \textbf{UPDATE ... SET ... WHERE ...} modifie la valeur d'un ou plusieurs attributs pour les tuples vérifiant une condition. \textbf{Sans clause \texttt{WHERE}, tous les tuples de la relation sont modifiés.}
+}
+
+\textbf{Exemple.} Corriger l'année de parution d'un livre :
+\begin{sql}
+UPDATE Livre SET annee = 1954 WHERE titre = 'Fahrenheit 451';
+\end{sql}
+
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Livre(id INTEGER PRIMARY KEY, titre TEXT, auteur TEXT, annee INTEGER)")
+% conn.execute("INSERT INTO Livre(titre, auteur, annee) VALUES ('Fahrenheit 451', 'Bradbury', 1953)")
+% conn.execute("UPDATE Livre SET annee = 1954 WHERE titre = 'Fahrenheit 451'")
+% conn.commit()
+% cur = conn.execute("SELECT annee FROM Livre WHERE titre = 'Fahrenheit 451'")
+% assert cur.fetchone() == (1954,)
+% END-VERIFY
+
+\definition[2]{
+La clause \textbf{DELETE FROM ... WHERE ...} supprime les tuples vérifiant une condition. \textbf{Sans clause \texttt{WHERE}, tous les tuples de la relation sont supprimés} (la table reste, mais devient vide).
+}
+
+\textbf{Exemple.} Supprimer les livres parus avant 1950 :
+\begin{sql}
+DELETE FROM Livre WHERE annee < 1950;
+\end{sql}
+
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Livre(id INTEGER PRIMARY KEY, titre TEXT, auteur TEXT, annee INTEGER)")
+% conn.executemany("INSERT INTO Livre VALUES (?,?,?,?)", [
+%     (1, "Le Petit Prince", "Saint-Exupery", 1943),
+%     (2, "1984", "Orwell", 1949),
+%     (3, "La Peste", "Camus", 1947),
+%     (4, "Fahrenheit 451", "Bradbury", 1954),
+% ])
+% conn.execute("DELETE FROM Livre WHERE annee < 1950")
+% conn.commit()
+% cur = conn.execute("SELECT titre FROM Livre")
+% assert set(r[0] for r in cur.fetchall()) == {"Fahrenheit 451"}
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Exécuter un \texttt{UPDATE} ou un \texttt{DELETE} sans \texttt{WHERE}.} C'est l'erreur la plus dangereuse en SQL : \texttt{DELETE FROM Livre;} (sans condition) supprime \textbf{tous} les livres, et \texttt{UPDATE Livre SET annee = 2000;} écrase l'année de \textbf{tous} les livres. Il faut toujours vérifier, avant d'exécuter une modification, quels tuples seraient concernés en testant d'abord la condition avec un \texttt{SELECT}.
+}
+
+\alamachine{Avant tout \texttt{UPDATE} ou \texttt{DELETE}, exécute d'abord le \texttt{SELECT} correspondant avec la même clause \texttt{WHERE} pour vérifier quels tuples seront affectés.}

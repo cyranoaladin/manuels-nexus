@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-PROBABILITES-REMED-05", "chapitre": "TSPE-PROBABILITES", "type_objet": "remediation", "capacites_codes": ["C5"], "status": "approved", "capacites": ["TSPE-PROBA-C5"], "statut": "complete"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2/C4 : loi binomiale
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-PROBA-RE-C2-EX1}{1}{8}
+$X \sim \mathcal{B}(5,\,0{,}4)$. Calculer $P(X=2)$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational, binomial
+% assert binomial(5,2)*Rational(4,10)**2*Rational(6,10)**3 == Rational(1728, 5000)
+% END-VERIFY
+
+\begin{corrige}{TSPE-PROBA-RE-C2-EX1}
+\[
+  P(X=2) = \binom{5}{2}(0{,}4)^2(0{,}6)^3 = 10\times0{,}16\times0{,}216 = 0{,}3456.
+\]
+\end{corrige}

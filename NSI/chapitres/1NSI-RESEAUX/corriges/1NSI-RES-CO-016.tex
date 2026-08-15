@@ -1,0 +1,23 @@
+% META: {"id": "1NSI-RES-CO-016", "chapitre": "1NSI-RESEAUX", "type_objet": "correction", "exercice_ref": "1NSI-RES-EX-004", "capacites": ["1NSI-RESEAUX-C3"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C3"], "parcours": 2, "fichier_exercice": "chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-016.tex"}
+% BEGIN-VERIFY
+% def decider_eclairage(luminosite, seuil=300):
+%     return luminosite < seuil
+% assert decider_eclairage(150) is True
+% assert decider_eclairage(500) is False
+% assert decider_eclairage(300) is False
+% END-VERIFY
+\begin{corrige}{1NSI-RES-EX-004}
+\textbf{1.} Le \textbf{capteur} est le capteur de luminosité (photorésistance ou capteur
+optique). L'\textbf{actionneur} est l'ampoule du lampadaire (via son relais électrique).
+
+\textbf{2.}
+\begin{python}
+def decider_eclairage(luminosite, seuil=300):
+    return luminosite < seuil
+\end{python}
+
+\textbf{3.} À $150$ lux : \lstinline{True} (le lampadaire s'allume, il fait sombre). À
+$500$ lux : \lstinline{False} (il fait jour). À exactement $300$ lux : \lstinline{False}
+(le test est \lstinline{<}, strictement inférieur), ce qui est cohérent avec l'énoncé
+« sous $300$ lux » : à $300$ lux pile, on n'est pas encore \textit{sous} le seuil.
+\end{corrige}

@@ -1,0 +1,25 @@
+% META: {"id": "TEXP-ARI-CO-037", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-037", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**3 - 3*x**2 + 2
+% fpp = diff(f, x, 2)
+% assert expand(fpp) == 6*x - 6
+% assert solve(fpp, x) == [1]
+% assert f.subs(x, 1) == 0
+% assert fpp.subs(x, 0) == -6  # concave
+% assert fpp.subs(x, 2) == 6   # convexe
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-037}
+
+$f''(x) = 6x - 6 = 6(x-1)$.
+
+\commentaireMarge{$f''=0$ en $x=1$ avec changement de signe : inflexion.}
+
+\textbf{Question 1.} $f''$ change de signe en $x = 1$ : c'est un point d'inflexion.
+
+Concave sur $\left]-\infty, 1\right]$, convexe sur $\left[1, +\infty\right[$.
+
+\textbf{Question 2.} En $x = 1$ ($f(1) = 0$), la courbe traverse sa tangente car la convexite change.
+
+\end{corrige}

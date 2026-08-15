@@ -1,0 +1,32 @@
+% META: {"id": "1NSI-WEB-CO-028", "chapitre": "1NSI-WEB-IHM", "type_objet": "correction", "exercice_ref": "1NSI-WEB-EX-004", "capacites": ["1NSI-WEB-IHM-C5"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C5"], "parcours": 2, "fichier_exercice": "chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-028.tex"}
+% BEGIN-VERIFY
+% from urllib.parse import urlencode
+% donnees = {"carte": "1234567812345678", "code": "123"}
+% url_si_get = "https://banque.fr/paiement?" + urlencode(donnees)
+% assert "1234567812345678" in url_si_get
+% END-VERIFY
+\begin{corrige}{1NSI-WEB-EX-004}
+\textbf{1.} Non, cela ne suffit pas. HTTPS protège uniquement les données \textbf{pendant
+leur transmission} sur le réseau (personne ne peut les intercepter en chemin). Cela ne dit
+rien sur la façon dont l'URL est enregistrée dans l'\textbf{historique du navigateur}, dans
+les \textbf{journaux du serveur}, ou sur la sécurité du \textbf{stockage} des données une
+fois reçues par le serveur.
+
+\textbf{2.}
+\begin{python}
+from urllib.parse import urlencode
+
+donnees = {"carte": "1234567812345678", "code": "123"}
+url_si_get = "https://banque.fr/paiement?" + urlencode(donnees)
+print(url_si_get)
+\end{python}
+Oui, le numéro de carte complet apparaîtrait en clair dans l'URL, visible dans
+l'historique du navigateur et potentiellement dans les journaux du serveur.
+
+\textbf{3.} Il faut utiliser \textbf{POST} : les données (numéro de carte, code de
+sécurité) sont confidentielles, et POST les place dans le corps de la requête plutôt que
+dans l'URL. Elles n'apparaissent donc pas dans l'historique des URL du navigateur. En
+revanche, un serveur web, un proxy ou l'application peuvent néanmoins journaliser le corps
+de la requête. Il faut aussi utiliser HTTPS, minimiser les données collectées et appliquer
+une politique de journalisation qui protège et limite ces enregistrements.
+\end{corrige}
