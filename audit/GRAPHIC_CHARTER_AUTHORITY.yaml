@@ -1,0 +1,59 @@
+version: 1.0.0
+canonical_charter: "NEXUS_CHARTER_V6_CANONICAL_2026_07_20"
+authoritative_spec:
+  tab_min_length: "16mm"
+  tab_padding: "3mm+3mm (+6mm total)"
+  tab_font: "6/6 pt uppercase"
+  tab_thickness: "12mm"
+  maquette_pages_invariant: 15
+  cover_design: "nexus-couverture-collection-2026"
+  cold_pages_design: "nexus-pages-froides-11-step-loop"
+
+decisions:
+  - id: "DEC-2026-01-V4-LEGACY"
+    date: "2026-01-15"
+    source: "v4/v4.1 charter specification"
+    commit: "historical"
+    status: "superseded"
+    supersedes: null
+    scope: "Global collection"
+    requirements: "Encadrés simples, onglets fixes 14mm, police 5.5pt."
+    human_approval_evidence: "Initial collection baseline 2026."
+
+  - id: "DEC-2026-05-V5-MAQUETTE"
+    date: "2026-05-10"
+    source: "v5 editorial mockup spec"
+    commit: "ff55af2e"
+    status: "superseded"
+    supersedes: "DEC-2026-01-V4-LEGACY"
+    scope: "1SPE 15-page editorial mockup"
+    requirements: "Grille d'exercices 2 colonnes 68mm, notes marginales, onglets de rubriques par chapitre, 15 pages strictes."
+    human_approval_evidence: "Validé par approbation éditoriale v5."
+
+  - id: "DEC-2026-07-20-TAB-SPEC"
+    date: "2026-07-20"
+    source: "docs/superpowers/specs/2026-07-20-dynamic-rubric-tab-length-design.md"
+    commit: "charte/v5-b-it2"
+    status: "approved"
+    supersedes: "DEC-2026-05-V5-MAQUETTE"
+    scope: "Global collection rubric tabs"
+    requirements:
+      min_length: "16mm"
+      dynamic_length: "max(16mm, text_width + 6mm)"
+      padding: "3mm + 3mm"
+      font_size: "6/6 pt"
+      page_invariant: 15
+    human_approval_evidence: "Décision humaine explicite du 20 juillet 2026 reconfirmée le 15 août 2026."
+
+  - id: "DEC-2026-07-31-V6-PREMIUM"
+    date: "2026-07-31"
+    source: "Charte V6 Premium"
+    commit: "533d1919"
+    status: "approved"
+    supersedes: "DEC-2026-05-V5-MAQUETTE"
+    scope: "Global collection visual charter"
+    requirements:
+      boxes: "tcolorbox coins arrondis 4pt, ombre portée HSL chapcolor"
+      loop: "Boucle pédagogique Nexus à 11 temps"
+      layout: "Structure unifiée 6 manuels"
+    human_approval_evidence: "Mise à jour Charte v6 et mode d'emploi 11 temps."
