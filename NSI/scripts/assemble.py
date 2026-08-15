@@ -18,6 +18,16 @@ from pathlib import Path
 from common import ROOT
 from pdf_integrity import preflight_book_pdf, verify_pdf
 
+VARIANTS = [
+    "eleve",
+    "professeur",
+    "methodes",
+    "remediation",
+    "amenagee",
+    "evaluations",
+    "projets",
+]
+BOOK_VARIANTS = VARIANTS
 BOOK_VARIANT_SUFFIX = {
     "complet": "",
     "methodes": "_methodes",

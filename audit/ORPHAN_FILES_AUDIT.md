@@ -1,0 +1,110 @@
+# AUDIT DES FICHIERS ET DÉPENDANCES DU DÉPÔT
+
+- **Total fichiers suivis** : `12463`
+- **Fichiers autonomes / Scripts / Entrées** : `5247`
+- **Fichiers sans référence entrante directe** : `7178` (inclus fragments de chapitres, gabarits autonomes et ressources)
+
+## Fichiers sans Référence Entrante Directe
+
+| Chemin Fichier | Type | Références Sortantes | Analyse et Rôle |
+| :--- | :---: | :---: | :--- |
+| `.agents/skills/nexus-manual-quality/SKILL.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `.codex/rules/manuals.rules` | `.rules` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `.github/workflows/ci-audit-collection.yml` | `.yml` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `.github/workflows/ci-mathematiques.yml` | `.yml` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `.github/workflows/ci-nsi.yml` | `.yml` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `.gitignore` | `no_ext` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `DIRECTIVES_COLLECTION.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `ETAT_COLLECTION.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `ETAT_COLLECTION_2026_2027.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `MANUELS_PDF_PUBLICATION/01_Maths_1re_Spe_Eleve.pdf` | `.pdf` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `MANUELS_PDF_PUBLICATION/02_Maths_1re_Spe_Professeur.pdf` | `.pdf` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `MANUELS_PDF_PUBLICATION/03_Maths_Tle_Spe_Eleve.pdf` | `.pdf` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `MANUELS_PDF_PUBLICATION/04_Maths_Tle_Spe_Professeur.pdf` | `.pdf` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `MANUELS_PDF_PUBLICATION/05_Maths_Tle_Expertes_Eleve.pdf` | `.pdf` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `MANUELS_PDF_PUBLICATION/06_Maths_Tle_Expertes_Professeur.pdf` | `.pdf` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `MANUELS_PDF_PUBLICATION/07_Maths_Tle_Complementaires_Eleve.pdf` | `.pdf` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `MANUELS_PDF_PUBLICATION/08_Maths_Tle_Complementaires_Professeur.pdf` | `.pdf` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `MANUELS_PDF_PUBLICATION/09_NSI_1re_Eleve.pdf` | `.pdf` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `MANUELS_PDF_PUBLICATION/10_NSI_1re_Professeur.pdf` | `.pdf` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `MANUELS_PDF_PUBLICATION/11_NSI_Tle_Eleve.pdf` | `.pdf` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `MANUELS_PDF_PUBLICATION/12_NSI_Tle_Professeur.pdf` | `.pdf` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/PROMPT_MISSION_AUTONOME.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/.claude/commands/curation.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/.claude/commands/exercices.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/.claude/commands/lot-rapport.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/.claude/commands/verifier.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/.env.example` | `.example` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/.github/workflows/ci.yml` | `.yml` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/.gitignore` | `no_ext` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/A_VALIDER_HUMAIN.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/CAHIER_DES_CHARGES.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/CLAUDE.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/ETAT_COLLECTION.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/LF-0_rapport.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/LF-2_rapport.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/LF-3_rapport.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/LF-4_rapport.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/LOT-3bis_rapport.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/MAQUETTE_V5_A_VALIDER.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/MISSION_LOG.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/Makefile` | `no_ext` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/RAPPORT_FINAL_1SPE.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/README.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/SPECIMEN_A_VALIDER.md` | `.md` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/12_C3_formules_addition.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/13_C4_equations_trigonometriques.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/14_C5_fonctions_cos_sin.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-021.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-022.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-023.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-024.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-025.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-026.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-027.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-028.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-029.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-030.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-031.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-032.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-033.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-034.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-035.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-036.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-037.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-038.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-039.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-040.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-041.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-042.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-043.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-044.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-045.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-046.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-047.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-048.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-049.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-CO-050.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EV-A-corrige.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EV-A.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EV-B-corrige.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EV-B.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-021-CDP.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-021.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-022-CDP.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-022.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-023-CDP.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-023.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-024-CDP.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-024.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-025.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-026.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-027.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-028.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-029.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-030.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-031-CDP.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-031.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-032-CDP.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |
+| `Mathematiques/manuel-maths/backlog_tspe_v2/1SPE-TRIGONOMETRIE/1SPE-TRIGO-EX-032.tex` | `.tex` | 0 | Aucune référence entrante directe (peut être un fragment ou fixture) |

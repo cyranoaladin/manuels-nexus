@@ -18,6 +18,7 @@ ORDER = [  # les 9 temps du gabarit (docs/01 Partie 3)
     ("cours", "1*"), ("methodes", "*"), ("exercices", "*"),
     ("cours", "07_td*"), ("qcm", "*"), ("evaluations", "*"), ("remediation", "*"),
 ]
+BOOK_VARIANTS = ("eleve", "professeur", "methodes", "remediation", "amenagee", "evaluations", "projets", "complet")
 
 
 def collect(chap_dir: Path, variant: str) -> list[Path]:
