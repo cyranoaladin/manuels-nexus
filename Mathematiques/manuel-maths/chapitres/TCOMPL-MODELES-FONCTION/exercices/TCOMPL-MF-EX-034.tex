@@ -1,0 +1,20 @@
+% META: {"id": "TCOMPL-MF-EX-034", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "exercice", "capacites": ["TCOMPL-MF-C6"], "capacites_codes": ["C6"], "methodes": ["M4"], "parcours": 1, "competences": ["modeliser","raisonner"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-034.tex", "corrige_tex": "chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-034.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f convexe sur ]-inf,1], concave sur [1,+inf[, f(0)=0, f(1)=1, f(2)=1, f'(1)=0
+% # f(x) = -x^3/6 + x^2/2, f''=1-x, f'(0)=0... testons
+% f = x**2/2 - x**3/6 - x/2
+% fpp = diff(f, x, 2)
+% assert fpp == 1 - x
+% assert f.subs(x, 0) == 0
+% assert simplify(f.subs(x, 1) - Rational(-1,6)) == 0
+% assert simplify(diff(f, x).subs(x, 1)) == 0
+% assert fpp.subs(x, 0) == 1  # convexe en 0
+% assert fpp.subs(x, 2) == -1  # concave en 2
+% assert solve(fpp, x) == [1]
+% END-VERIFY
+\begin{exercice}{TCOMPL-MF-EX-034}{3}{25}
+Trouver une fonction $f$ verifiant : $f(0)=0$, convexe sur $\left]-\infty, 1\right]$ et concave sur $\left[1, +\infty\right[$, avec un point d'inflexion en $x=1$ et $f'(1)=0$. Esquisser sa courbe.
+
+\end{exercice}

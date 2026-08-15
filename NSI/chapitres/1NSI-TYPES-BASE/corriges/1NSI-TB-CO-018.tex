@@ -1,0 +1,22 @@
+% META: {"id": "1NSI-TB-CO-018", "chapitre": "1NSI-TYPES-BASE", "type_objet": "correction", "exercice_ref": "1NSI-TYPES-BASE-RE-C3", "capacites": ["1NSI-TYPES-BASE-C3"], "status": "approved", "capacites_codes": ["C3"], "parcours": 2, "fichier_exercice": "chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-018.tex"}
+\begin{corrige}{1NSI-TB-RE-C3-EX1}
+\textbf{1.} \lstinline{print(x)} affiche \lstinline{0.30000000000000004}.
+
+\textbf{2.} Le littéral \lstinline{0.1} est déjà stocké sous une valeur approchée. Dans cette
+boucle, les deux premières additions sont exactes relativement à leurs opérandes flottants,
+mais la troisième doit être arrondie. Après trois additions, la valeur accumulée n'est donc
+plus exactement égale à la représentation flottante de $0{,}3$ : les deux calculs produisent
+deux nombres flottants représentables distincts. Le test \lstinline{==} compare les valeurs
+selon les règles d'égalité de Python, pas leurs représentations binaires bit à bit. Par
+exemple, \lstinline{-0.0 == 0.0} vaut \lstinline{True}, tandis que
+\lstinline{float("nan") == float("nan")} vaut \lstinline{False}.
+
+\textbf{3.} Il faut remplacer le test par une comparaison à tolérance près :
+\begin{python}
+def presque_egaux(a, b, tolerance=1e-9):
+    return abs(a - b) < tolerance
+
+if presque_egaux(x, 0.3):
+    ...
+\end{python}
+\end{corrige}

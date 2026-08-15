@@ -1,0 +1,21 @@
+% META: {"id": "TSPE-INTEG-CO-031", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "correction", "exercice_ref": "TSPE-INTEG-EX-007", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-CALCUL-INTEGRAL-C6"], "parcours": 1, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-031.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, diff, simplify
+% x, t = symbols('x t')
+% A = integrate(2*t + 1, (t, 0, x))
+% assert A == x**2 + x
+% assert simplify(diff(A, x) - (2*x+1)) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-INTEG-EX-007}
+
+\textbf{Q1.} $f$ est croissante sur $[0,5]$, donc sur $[x_0,x_0+h]$, $f(x_0) \leq f(t) \leq f(x_0+h)$ pour tout $t$ dans cet intervalle. $A(x_0+h)-A(x_0)$ est l'aire sous $f$ entre $x_0$ et $x_0+h$, encadree par les aires des rectangles de largeur $h$ et de hauteurs $f(x_0)$, $f(x_0+h)$ : d'ou l'encadrement.
+
+\textbf{Q2.} En divisant par $h>0$ : $f(x_0) \leq \dfrac{A(x_0+h)-A(x_0)}{h} \leq f(x_0+h)$. Comme $f$ est continue, $f(x_0+h) \to f(x_0)$ quand $h \to 0^+$ ; par le theoreme des gendarmes, le taux d'accroissement tend vers $f(x_0)$, donc $A'(x_0)=f(x_0)$.
+
+\textbf{Q3.} Le domaine sous la courbe de $f(t)=2t+1$ entre $0$ et $x$ est un trapeze de bases $f(0)=1$ et $f(x)=2x+1$, de hauteur $x$ :
+\[
+  A(x) = \frac{(1)+(2x+1)}{2} \times x = \frac{2x+2}{2}\times x = (x+1)x = x^2+x.
+\]
+$A'(x) = 2x+1 = f(x)$. On retrouve bien le resultat de la Q2.
+
+\end{corrige}

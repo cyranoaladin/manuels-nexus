@@ -1,0 +1,27 @@
+% META: {"id": "1NSI-TAB-CO-022", "chapitre": "1NSI-TABLES", "type_objet": "correction", "exercice_ref": "1NSI-TAB-EX-004", "capacites": ["1NSI-TABLES-C4"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C4"], "parcours": 2, "fichier_exercice": "chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-022.tex"}
+% BEGIN-VERIFY
+% notes = [
+%     {"nom": "Amine", "matiere": "Maths", "note": 14},
+%     {"nom": "Amine", "matiere": "NSI", "note": 16},
+%     {"nom": "Lina", "matiere": "Maths", "note": 12},
+%     {"nom": "Lina", "matiere": "NSI", "note": 18},
+%     {"nom": "Omar", "matiere": "Maths", "note": 9},
+%     {"nom": "Omar", "matiere": "NSI", "note": 11},
+% ]
+% tri = sorted(notes, key=lambda ligne: ligne["note"], reverse=True)
+% assert (tri[0]["nom"], tri[0]["note"]) == ("Lina", 18)
+% assert (tri[-1]["nom"], tri[-1]["note"]) == ("Omar", 9)
+% END-VERIFY
+\begin{corrige}{1NSI-TAB-EX-004}
+\textbf{1.}
+\begin{python}
+tri = sorted(notes, key=lambda ligne: ligne["note"], reverse=True)
+\end{python}
+
+\textbf{2.} La première ligne est celle de \textbf{Lina} en NSI (note $18$) ; la dernière
+est celle d'\textbf{Omar} en Maths (note $9$).
+
+\textbf{3.} Non, \lstinline{notes} n'est \textbf{pas} modifiée : \lstinline{sorted} renvoie
+toujours une \textbf{nouvelle} liste triée, sans modifier la liste passée en argument
+(contrairement à la méthode \lstinline{.sort()}).
+\end{corrige}

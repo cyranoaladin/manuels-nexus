@@ -1,0 +1,29 @@
+% META: {"id": "TCOMPL-BAYES-CO-019", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "corrige", "exercice_ref": "TCOMPL-BAYES-EX-019", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% C = x**3/3 - 5*x**2 + 30*x
+% Cp = diff(C, x)
+% assert expand(Cp) == x**2 - 10*x + 30
+% # discriminant: 100 - 120 = -20 < 0, pas de racine reelle
+% disc = 100 - 120
+% assert disc < 0
+% assert Cp.subs(x, 0) == 30
+% assert Cp.subs(x, 5) == 5
+% assert C.subs(x, 0) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-BAYES-EX-019}
+
+\textbf{Question 1.} $C'(x) = x^2 - 10x + 30$. Le discriminant vaut $100 - 120 = -20 < 0$.
+
+\commentaireMarge{$\Delta < 0$ : le cout marginal est strictement positif.}
+
+Le cout marginal est strictement positif pour tout $x$ : il n'y a pas de cout minimum (le cout augmente toujours).
+
+\textbf{Question 2.} $\dfrac{C(x)}{x} = \dfrac{x^2}{3} - 5x + 30$. Sa derivee est $\dfrac{2x}{3} - 5$, nulle en $x = \dfrac{15}{2}$.
+
+Le cout moyen admet un minimum en $x = 7{,}5$ : $\dfrac{C(7{,}5)}{7{,}5} = \dfrac{56{,}25}{3} - 37{,}5 + 30 = -25{,}625$.
+
+\textbf{Question 3.} Le cout marginal croit tandis que le cout moyen decroit puis croit : l'optimum economique correspond au minimum du cout moyen.
+
+\end{corrige}

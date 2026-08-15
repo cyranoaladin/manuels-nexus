@@ -1,0 +1,30 @@
+% META: {"id": "TCOMPL-MODELES-EVOLUTION-FR-R2", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "remediation", "capacites_codes": ["R2"], "status": "approved"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU -- R2 : Derivation locale : nombre derive et tangente
+%---------------------------------------------------------------
+
+\subsection*{Rappel -- Derivation locale : nombre derive et tangente}
+
+\textbf{Nombre derive :} $f'(a) = \lim_{h \to 0} \dfrac{f(a+h) - f(a)}{h}$.
+
+\textbf{Tangente :} equation $y = f(a) + f'(a)(x - a)$.
+
+\begin{exercice}{TCOMPL-ME-FR-R2-EX1}{1}{8}
+Soit $f(x) = x^2 + 3x - 1$.
+\begin{enumerate}
+  \item Calculer $f'(1)$ par la formule du nombre derive.
+  \item Donner l'equation de la tangente a la courbe en $x = 1$.
+  \item En quel point la tangente est-elle horizontale ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**2 + 3*x - 1
+% assert diff(f, x).subs(x, 1) == 5
+% assert f.subs(x, 1) == 3
+% # tangente: y = 3 + 5(x-1) = 5x - 2
+% assert solve(diff(f, x), x) == [Rational(-3,2)]
+% END-VERIFY

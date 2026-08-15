@@ -1,0 +1,26 @@
+% META: {"id": "TEXP-MAT-CO-016", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige", "exercice_ref": "TEXP-MAT-EX-016", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x)/(x + 1)
+% fp = diff(f, x)
+% assert simplify(fp - x*exp(x)/(x+1)**2) == 0
+% assert solve(fp, x) == [0]
+% assert f.subs(x, 0) == 1
+% assert limit(f, x, oo) == oo
+% assert limit(f, x, -1, '+') == oo
+% assert limit(f, x, -oo) == 0
+% END-VERIFY
+\begin{corrige}{TEXP-MAT-EX-016}
+
+\textbf{Question 1.} $f'(x) = \dfrac{\mathrm{e}^x(x+1) - \mathrm{e}^x}{(x+1)^2} = \dfrac{x\,\mathrm{e}^x}{(x+1)^2}$.
+
+\commentaireMarge{Le signe de $f'$ est celui de $x$ car $\mathrm{e}^x > 0$ et $(x+1)^2 > 0$.}
+
+$f'(x) = 0 \iff x = 0$. $f' < 0$ sur $\left]-\infty, -1\right[ \cup \left]-1, 0\right[$ et $f' > 0$ sur $\left]0, +\infty\right[$.
+
+\textbf{Question 2.} $\lim_{x \to +\infty} f = +\infty$, $\lim_{x \to -\infty} f = 0$ (croissances compareees), $\lim_{x \to -1^+} f = +\infty$.
+
+\textbf{Question 3.} Minimum local $f(0) = 1$. La droite $x = -1$ est asymptote verticale.
+
+\end{corrige}

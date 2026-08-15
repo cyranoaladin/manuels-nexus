@@ -1,0 +1,59 @@
+% META: {"id": "TSPE-PRIMITIVES-EQDIFF-COURS-03", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "cours", "capacites_codes": ["C3"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TSPE-PRIMITIVES-EQDIFF-C3"], "statut": "structure"}
+
+\section{Équation différentielle $y' = ay$}
+
+% ============================================================
+% STRATE 1 — Demonstration exigible
+% ============================================================
+
+\definition[1]{
+Une \textbf{equation differentielle} est une equation dont l'inconnue est une fonction $y$, reliant $y$ a sa (ou ses) derivee(s). Une \textbf{solution} sur un intervalle $I$ est une fonction derivable sur $I$ qui verifie l'equation pour tout $x \in I$.
+}
+
+\theoreme{
+Soit $a \in \mathbb{R}$. Les solutions sur $\mathbb{R}$ de l'equation differentielle $y' = ay$ sont exactement les fonctions
+\[
+  x \mapsto C\,\mathrm{e}^{ax}, \qquad C \in \mathbb{R}.
+\]
+}
+
+\demonstration{
+\textbf{Les fonctions $C\mathrm{e}^{ax}$ sont solutions.} Pour $y(x) = C\mathrm{e}^{ax}$, on a $y'(x) = C \times a\,\mathrm{e}^{ax} = a \times \left(C\mathrm{e}^{ax}\right) = a\,y(x)$ : l'equation est bien verifiee.
+
+\textbf{Il n'y a pas d'autre solution.} Soit $y$ une solution de $y'=ay$ sur $\mathbb{R}$. Considerons la fonction $z(x) = y(x)\,\mathrm{e}^{-ax}$.
+
+$z$ est derivable (produit de fonctions derivables) et :
+\[
+  z'(x) = y'(x)\,\mathrm{e}^{-ax} + y(x) \times (-a)\,\mathrm{e}^{-ax} = \left(y'(x) - a\,y(x)\right) \mathrm{e}^{-ax}.
+\]
+
+Comme $y'=ay$, on a $y'(x) - a y(x) = 0$ pour tout $x$, donc $z'(x) = 0$ sur $\mathbb{R}$.
+
+D'apres la propriete admise (une fonction de derivee nulle sur un intervalle est constante), $z$ est constante : il existe $C \in \mathbb{R}$ tel que $z(x) = C$ pour tout $x$, c'est-a-dire $y(x)\,\mathrm{e}^{-ax} = C$, soit $y(x) = C\,\mathrm{e}^{ax}$.
+}
+
+\margeAppui{
+La technique de la demonstration (multiplier par $\mathrm{e}^{-ax}$ pour faire apparaitre une derivee nulle) est caracteristique de ce type d'equation differentielle : elle se generalise a $y'=ay+b$ et $y'=ay+f$.
+}
+
+\exemple{
+Determiner la solution de $y' = 3y$ telle que $y(0) = 5$.
+
+Les solutions sont $y(x) = C\mathrm{e}^{3x}$. La condition $y(0)=5$ donne $C\mathrm{e}^0 = C = 5$. La solution cherchee est $y(x) = 5\mathrm{e}^{3x}$.
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, Function
+% x = symbols('x')
+% y = 5*exp(3*x)
+% assert diff(y, x) == 3*y
+% assert y.subs(x, 0) == 5
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier une famille de solutions (la constante $C$).} L'equation $y'=ay$ a une infinite de solutions (une pour chaque $C \in \mathbb{R}$), pas une seule. Une condition supplementaire (comme $y(0)=\ldots$) est necessaire pour determiner $C$ de maniere unique.
+}

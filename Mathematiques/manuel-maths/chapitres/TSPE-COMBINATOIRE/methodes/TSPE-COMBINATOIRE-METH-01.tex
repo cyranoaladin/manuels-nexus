@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-COMBINATOIRE-METH-01", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "methode", "capacites_codes": ["C1", "C2"], "methodes": ["M1"], "sources_inspiration": [], "status": "approved"}
+\begin{fichemethode}{M1}{Résoudre un problème de dénombrement}
+
+\quandUtiliser{%
+  Utiliser cette methode face a un probleme demandant de compter le nombre de possibilites.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Identifier} precisement les objets a denombrer.
+    \item \textbf{L'ordre compte-t-il ?} Si oui, penser produit direct ou permutation ; si non, penser combinaison.
+    \item \textbf{Les repetitions sont-elles autorisees ?} Adapter le nombre de choix a chaque etape en consequence.
+    \item \textbf{Choisir une representation} (arbre pour des etapes successives, tableau pour deux criteres, diagramme pour des categories).
+    \item \textbf{Appliquer} le principe additif (cas disjoints) ou multiplicatif (etapes independantes successives), ou la formule de combinaison $\dbinom{n}{k}$.
+    \item \textbf{Verifier} l'ordre de grandeur du resultat (coherence avec un cas simplifie ou un denombrement partiel).
+  \end{enumerate}
+}
+
+\end{fichemethode}

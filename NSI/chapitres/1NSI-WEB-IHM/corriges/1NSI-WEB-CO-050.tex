@@ -1,0 +1,36 @@
+% META: {"id": "1NSI-WEB-CO-050", "chapitre": "1NSI-WEB-IHM", "type_objet": "correction", "exercice_ref": "1NSI-WEB-EX-002", "capacites": ["1NSI-WEB-IHM-C9"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C9"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-050.tex"}
+% BEGIN-VERIFY
+% gestionnaires = {}
+% def ajouter_gestionnaire(id_composant, fonction):
+%     gestionnaires[id_composant] = fonction
+% def declencher_clic(id_composant):
+%     if id_composant in gestionnaires:
+%         return gestionnaires[id_composant]()
+%     return None
+% etat = {"visible": False}
+% def basculer_affichage():
+%     etat["visible"] = not etat["visible"]
+%     return etat["visible"]
+% ajouter_gestionnaire("bouton_menu", basculer_affichage)
+% resultats = [declencher_clic("bouton_menu") for _ in range(3)]
+% assert resultats == [True, False, True]
+% END-VERIFY
+\begin{corrige}{1NSI-WEB-EX-002}
+\textbf{1.}
+\begin{python}
+etat = {"visible": False}
+
+def basculer_affichage():
+    etat["visible"] = not etat["visible"]
+    return etat["visible"]
+\end{python}
+
+\textbf{2.}
+\begin{python}
+ajouter_gestionnaire("bouton_menu", basculer_affichage)
+\end{python}
+
+\textbf{3.} La séquence est \lstinline{[True, False, True]} : le premier clic affiche le
+menu (\lstinline{True}), le deuxième le masque (\lstinline{False}), le troisième le
+réaffiche (\lstinline{True}).
+\end{corrige}

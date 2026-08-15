@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-PRIMEQ-CO-028", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "correction", "exercice_ref": "TSPE-PRIMEQ-EX-004", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-PRIMITIVES-EQDIFF-C5"], "parcours": 2, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-PRIMITIVES-EQDIFF/exercices/TSPE-PRIMEQ-EX-028.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import exp
+% T10 = 20 + 70*exp(-1)
+% assert round(float(T10), 2) == 45.75
+% END-VERIFY
+\begin{corrige}{TSPE-PRIMEQ-EX-004}
+
+\textbf{Q1.} $T' = -0{,}1(T-20) = -0{,}1T + 2$ : on a $a=-0{,}1$ et $b=2$.
+
+\textbf{Q2.} Solution particuliere : $T_0 = -\dfrac{b}{a} = -\dfrac{2}{-0{,}1} = 20$ (coherent avec la temperature ambiante). Solutions generales : $T(t) = C\mathrm{e}^{-0{,}1t}+20$.
+
+\textbf{Q3.} $T(0) = C+20 = 90$, donc $C=70$. Ainsi $T(t) = 70\,\mathrm{e}^{-0{,}1t}+20$.
+
+\textbf{Q4.} $T(10) = 70\,\mathrm{e}^{-1}+20 \approx 25{,}75+20 = 45{,}75\degres$C.
+
+\end{corrige}

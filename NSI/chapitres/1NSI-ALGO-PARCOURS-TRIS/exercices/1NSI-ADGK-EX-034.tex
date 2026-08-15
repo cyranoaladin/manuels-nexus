@@ -1,0 +1,17 @@
+% META: {"id": "1NSI-ADGK-EX-034", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "exercice", "capacites": ["1NSI-ALGO-PARCOURS-TRIS-C6"], "capacites_codes": ["C6"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-034.tex", "corrige_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-034.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**3 - 3*x**2 + 2
+% fp = diff(f, x)
+% assert expand(fp) == 3*x**2 - 6*x
+% assert solve(fp, x) == [0, 2]
+% assert f.subs(x, 0) == 2
+% assert f.subs(x, 2) == -2
+% assert limit(f, x, -oo) == -oo
+% assert limit(f, x, oo) == oo
+% END-VERIFY
+\begin{exercice}{1NSI-ADGK-EX-010}{1}{12}
+Etudier les variations de $f(x) = x^3 - 3x^2 + 2$ sur $\mathbb{R}$.
+
+\end{exercice}

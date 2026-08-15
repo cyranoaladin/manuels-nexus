@@ -1,0 +1,36 @@
+% META: {"id": "1NSI-TAB-EX-008", "chapitre": "1NSI-TABLES", "type_objet": "exercice", "capacites": ["1NSI-TABLES-C2"], "parcours": 2, "competences": ["programmer", "valider"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-008.tex", "corrige_tex": "chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-008.tex", "status": "approved", "capacites_codes": ["C2"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% commandes = [
+%     {"id": "C001", "client": "Ali", "quantite": 3},
+%     {"id": "C002", "client": "Sara", "quantite": 1},
+%     {"id": "C001", "client": "Ali", "quantite": 3},
+%     {"id": "C003", "client": "Nadia", "quantite": -2},
+% ]
+% ids = [c["id"] for c in commandes]
+% doublons = [i for i in set(ids) if ids.count(i) > 1]
+% assert doublons == ["C001"]
+% def coherente(table):
+%     for c in table:
+%         if not isinstance(c["quantite"], int) or c["quantite"] <= 0:
+%             return False
+%     return True
+% assert coherente(commandes) is False
+% incoherentes = [c for c in commandes if not (isinstance(c["quantite"], int) and c["quantite"] > 0)]
+% assert incoherentes == [{"id": "C003", "client": "Nadia", "quantite": -2}]
+% END-VERIFY
+\begin{exercice}{1NSI-TAB-EX-003}{2}{12}
+On dispose de la table \lstinline{commandes} suivante :
+\begin{python}
+commandes = [
+    {"id": "C001", "client": "Ali", "quantite": 3},
+    {"id": "C002", "client": "Sara", "quantite": 1},
+    {"id": "C001", "client": "Ali", "quantite": 3},
+    {"id": "C003", "client": "Nadia", "quantite": -2},
+]
+\end{python}
+\begin{enumerate}
+  \item Écrire une fonction \lstinline{doublons(table, colonne)} qui renvoie les valeurs de \lstinline{colonne} apparaissant plus d'une fois. L'appliquer à la colonne \lstinline{id} : que trouve-t-on, et pourquoi est-ce a priori anormal pour un identifiant de commande ?
+  \item Écrire une fonction \lstinline{coherente(table)} qui renvoie \lstinline{False} si au moins une \lstinline{quantite} n'est pas un entier strictement positif.
+  \item Identifier la ou les ligne(s) responsable(s) de l'incohérence détectée à la question 2.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,16 @@
+% META: {"id": "TEXP-CTP-EX-024", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "exercice", "capacites": ["TEXP-CTP-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["raisonner"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-024.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-024.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # x^2+y^2 >= (x+y)^2/2 par convexite de t^2
+% lhs = x**2 + y**2
+% rhs = (x+y)**2/2
+% assert expand(2*(lhs - rhs) - (x-y)**2) == 0
+% assert simplify(lhs - rhs - (x-y)**2/2) == 0
+% assert (lhs - rhs).subs({x: 1, y: 3}) == 2
+% END-VERIFY
+\begin{exercice}{TEXP-CTP-EX-024}{2}{18}
+Demontrer que pour tous reels $x$ et $y$ :
+\[ x^2 + y^2 \geq \frac{(x+y)^2}{2}. \]
+
+\end{exercice}

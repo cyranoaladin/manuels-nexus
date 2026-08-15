@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-GEOESPACE-CO-046", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "correction", "exercice_ref": "TSPE-GEOESPACE-EX-004", "capacites_codes": ["C15"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-GEOMETRIE-ESPACE-C15"], "parcours": 2, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-046.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import sqrt, Rational
+% M = (4,2,1)
+% H = (Rational(8,3), Rational(2,3), Rational(-1,3))
+% assert 1*H[0]+1*H[1]+1*H[2]-3 == 0
+% MH = sqrt(sum((M[i]-H[i])**2 for i in range(3)))
+% assert MH == 4*sqrt(3)/3
+% END-VERIFY
+\begin{corrige}{TSPE-GEOESPACE-EX-004}
+
+\textbf{Q1.} $\vec{n}\begin{pmatrix}1\\1\\1\end{pmatrix}$ (coefficients de $x,y,z$ dans l'equation de $\mathcal{P}$).
+
+\textbf{Q2.} $\begin{cases}x=4+t\\y=2+t\\z=1+t\end{cases}\quad(t\in\mathbb{R})$.
+
+\textbf{Q3.} $H \in \mathcal{P}$ : $(4+t)+(2+t)+(1+t)-3=0 \iff 3t+4=0 \iff t=-\dfrac{4}{3}$.
+
+$H\left(4-\dfrac{4}{3},\,2-\dfrac{4}{3},\,1-\dfrac{4}{3}\right) = H\left(\dfrac{8}{3},\,\dfrac{2}{3},\,-\dfrac{1}{3}\right)$.
+
+\textbf{Q4.} $MH = \sqrt{\left(4-\frac{8}{3}\right)^2+\left(2-\frac{2}{3}\right)^2+\left(1+\frac{1}{3}\right)^2} = \sqrt{3\times\left(\frac{4}{3}\right)^2} = \dfrac{4}{\sqrt{3}} = \dfrac{4\sqrt{3}}{3}$.
+
+\end{corrige}

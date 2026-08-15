@@ -1,0 +1,29 @@
+% META: {"id": "1NSI-LANG-CO-039", "chapitre": "1NSI-LANGAGE", "type_objet": "correction", "exercice_ref": "1NSI-LANG-EX-003", "capacites": ["1NSI-LANGAGE-C7"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C7"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-039.tex"}
+% BEGIN-VERIFY
+% def perimetre_rectangle(largeur, longueur):
+%     assert largeur > 0
+%     assert longueur > 0
+%     p = 2 * (largeur + longueur)
+%     assert p > 0
+%     return p
+% assert perimetre_rectangle(3, 5) == 16
+% END-VERIFY
+\begin{corrige}{1NSI-LANG-EX-003}
+\textbf{1.} Précondition : \lstinline{largeur > 0} et \lstinline{longueur > 0} (un
+rectangle ne peut pas avoir de côté négatif ou nul). Postcondition : le résultat renvoyé est
+strictement positif.
+
+\textbf{2.}
+\begin{python}
+def perimetre_rectangle(largeur, longueur):
+    assert largeur > 0
+    assert longueur > 0
+    p = 2 * (largeur + longueur)
+    assert p > 0
+    return p
+\end{python}
+
+\textbf{3.} $\text{perimetre\_rectangle}(3,5)=2\times(3+5)=16$. L'appel avec
+\lstinline{largeur=-1} viole la précondition \lstinline{largeur > 0} : l'instruction
+\lstinline{assert} déclenche une \lstinline{AssertionError}.
+\end{corrige}

@@ -1,0 +1,33 @@
+% META: {"id": "TNSI-LANG-EVAL-A", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "evaluation", "capacites": ["T-LANG-01A", "T-LANG-01C", "T-LANG-02A", "T-LANG-02B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "approved"}
+\section*{Évaluation A --- Calculabilité et récursivité}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 8 pts (programme comme donnée, problème de l'arrêt) ; Ex. 2 : 12 pts (récursivité)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Programme comme donnée et calculabilité} \hfill (8 points)
+
+\begin{enumerate}
+  \item (4 pts) Expliquer, avec un exemple, en quoi un programme est aussi une donnée.
+  \item (4 pts) Résumer en quelques phrases l'argument montrant que le problème de l'arrêt est indécidable (sans formalisme, l'idée du raisonnement par l'absurde suffit).
+\end{enumerate}
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Récursivité} \hfill (12 points)
+
+\begin{enumerate}
+  \item (6 pts) Écrire une fonction récursive \lstinline{puissance(base, exposant)} qui calcule $\text{base}^{\text{exposant}}$ pour un exposant entier positif ou nul (sans utiliser l'opérateur \lstinline{**}).
+  \item (6 pts) Décrire l'arbre d'appels de \lstinline{puissance(2, 4)} : quels appels successifs sont déclenchés, et quel est le cas de base atteint ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def puissance(base, exposant):
+%     if exposant == 0:
+%         return 1
+%     return base * puissance(base, exposant - 1)
+% assert puissance(2, 4) == 16
+% assert puissance(5, 0) == 1
+% assert puissance(3, 3) == 27
+% END-VERIFY

@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-GEOESPACE-CO-048", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "correction", "exercice_ref": "TSPE-GEOESPACE-EX-006", "capacites_codes": ["C16"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-GEOMETRIE-ESPACE-C16"], "parcours": 1, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-048.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% A=(1,0,0);B=(0,1,0);C=(0,0,1);D=(0,-1,2)
+% AB=tuple(B[i]-A[i] for i in range(3))
+% AC=tuple(C[i]-A[i] for i in range(3))
+% AD=tuple(D[i]-A[i] for i in range(3))
+% a, b = -1, 2
+% assert tuple(a*AB[i]+b*AC[i] for i in range(3)) == AD
+% END-VERIFY
+\begin{corrige}{TSPE-GEOESPACE-EX-006}
+
+\textbf{Q1.} $\vec{AB}\begin{pmatrix}-1\\1\\0\end{pmatrix}$, $\vec{AC}\begin{pmatrix}-1\\0\\1\end{pmatrix}$, $\vec{AD}\begin{pmatrix}-1\\-1\\2\end{pmatrix}$.
+
+\textbf{Q2.} Le systeme $a\vec{AB}+b\vec{AC}=\vec{AD}$ s'ecrit :
+\[
+  \begin{cases} -a-b = -1 \\ a = -1 \\ b = 2 \end{cases}
+\]
+Les deux dernieres equations donnent $a=-1$, $b=2$. On verifie la premiere : $-(-1)-2 = 1-2=-1$ \checkmark. Le systeme est coherent : $a=-1$, $b=2$.
+
+\textbf{Q3.} $\vec{AD} = -\vec{AB}+2\vec{AC}$ : $\vec{AD}$ est combinaison lineaire de $\vec{AB}$ et $\vec{AC}$, donc $A,B,C,D$ sont coplanaires.
+
+\end{corrige}

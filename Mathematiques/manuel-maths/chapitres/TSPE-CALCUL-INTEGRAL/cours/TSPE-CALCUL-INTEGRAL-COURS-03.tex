@@ -1,0 +1,50 @@
+% META: {"id": "TSPE-CALCUL-INTEGRAL-COURS-03", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "cours", "capacites_codes": ["C3"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TSPE-CALCUL-INTEGRAL-C3"], "statut": "structure"}
+
+\section{Propriétés de l'intégrale et calculs}
+
+% ============================================================
+% STRATE 1 — Linearite, relation de Chasles, calcul via primitive
+% ============================================================
+
+\propriete[Linéarité]{
+Pour $f,g$ continues sur $[a,b]$ et $\lambda \in \mathbb{R}$ :
+\[
+  \int_a^b (f+g)(x)\,\mathrm{d}x = \int_a^b f(x)\,\mathrm{d}x + \int_a^b g(x)\,\mathrm{d}x, \qquad \int_a^b \lambda f(x)\,\mathrm{d}x = \lambda \int_a^b f(x)\,\mathrm{d}x.
+\]
+}
+
+\propriete[Relation de Chasles]{
+Pour $f$ continue sur un intervalle contenant $a,b,c$ :
+\[
+  \int_a^b f(x)\,\mathrm{d}x + \int_b^c f(x)\,\mathrm{d}x = \int_a^c f(x)\,\mathrm{d}x.
+\]
+On convient aussi que $\displaystyle\int_a^a f(x)\,\mathrm{d}x = 0$ et $\displaystyle\int_b^a f(x)\,\mathrm{d}x = -\int_a^b f(x)\,\mathrm{d}x$.
+}
+
+\exemple{
+Calculer $\displaystyle\int_0^{\ln 2} (3\mathrm{e}^x - 1)\,\mathrm{d}x$.
+
+Une primitive de $3\mathrm{e}^x-1$ est $F(x) = 3\mathrm{e}^x - x$.
+\[
+  \int_0^{\ln 2} (3\mathrm{e}^x-1)\,\mathrm{d}x = F(\ln 2) - F(0) = (3 \times 2 - \ln 2) - (3 - 0) = 6 - \ln 2 - 3 = 3 - \ln 2.
+\]
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, ln, integrate, simplify
+% x = symbols('x')
+% I = integrate(3*exp(x) - 1, (x, 0, ln(2)))
+% assert simplify(I - (3 - ln(2))) == 0
+% END-VERIFY
+}
+
+\margeAppui{
+Methode de calcul : trouver une primitive $F$ de $f$ (chapitre precedent), puis calculer $F(b)-F(a)$.
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier le signe lorsque $a>b$.} $\displaystyle\int_b^a f = -\int_a^b f$. Une inversion des bornes change le signe du resultat.
+}

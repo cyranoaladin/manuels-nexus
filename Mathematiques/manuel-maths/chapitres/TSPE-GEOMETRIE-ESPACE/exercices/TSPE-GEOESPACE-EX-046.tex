@@ -1,0 +1,23 @@
+% META: {"id": "TSPE-GEOESPACE-EX-046", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "exercice", "capacites": ["TSPE-GEOMETRIE-ESPACE-C15"], "capacites_codes": ["C15"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-046.tex", "corrige_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-046.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import sqrt, Rational
+% M = (4,2,1)
+% a,b,c,d = 1,1,1,-3
+% num = abs(a*M[0]+b*M[1]+c*M[2]+d)
+% den = sqrt(a**2+b**2+c**2)
+% assert num == 4
+% assert den == sqrt(3)
+% t = Rational(4,3)
+% H = tuple(M[i] - t*[a,b,c][i] for i in range(3))
+% assert H == (Rational(8,3), Rational(2,3), Rational(-1,3))
+% assert a*H[0]+b*H[1]+c*H[2]+d == 0
+% END-VERIFY
+\begin{exercice}{TSPE-GEOESPACE-EX-004}{2}{15}
+Soit $\mathcal{P}$ le plan d'equation $x+y+z-3=0$ et $M(4,2,1)$.
+\begin{enumerate}
+  \item Donner un vecteur normal $\vec{n}$ a $\mathcal{P}$.
+  \item Ecrire une representation parametrique de la droite $(MH)$ orthogonale a $\mathcal{P}$ passant par $M$.
+  \item Determiner les coordonnees du projete orthogonal $H$ de $M$ sur $\mathcal{P}$.
+  \item Calculer la distance $MH$, c'est-a-dire $d(M,\mathcal{P})$.
+\end{enumerate}
+\end{exercice}

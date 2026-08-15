@@ -1,0 +1,24 @@
+% META: {"id": "TCOMPL-ATT-EX-033", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "exercice", "capacites": ["TCOMPL-ATT-C3"], "capacites_codes": ["C3"], "methodes": ["M4"], "parcours": 2, "competences": ["modeliser","raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-033.tex", "corrige_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-033.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f''(x) = 12x^2 - 24, f'(0)=4, f(0)=1
+% fpp = 12*x**2 - 24
+% fp = integrate(fpp, x) + 4  # f'(0)=4
+% assert expand(fp) == 4*x**3 - 24*x + 4
+% f = integrate(fp, x) + 1  # f(0)=1
+% assert f == x**4 - 12*x**2 + 4*x + 1
+% assert solve(fpp, x) == [-sqrt(2), sqrt(2)]
+% assert solve(fp, x)  # 3 racines reelles
+% crit = solve(fp, x)
+% assert len(crit) == 3
+% END-VERIFY
+\begin{exercice}{TCOMPL-ATT-EX-033}{3}{20}
+On donne $f''(x) = 12x^2 - 24$, $f'(0) = 4$ et $f(0) = 1$.
+\begin{enumerate}
+  \item Determiner l'expression de $f$.
+  \item Etudier la convexite et identifier les points d'inflexion.
+  \item Esquisser la courbe en determinant les extremums.
+\end{enumerate}
+
+\end{exercice}

@@ -1,0 +1,77 @@
+% META: {"id": "1NSI-PM-EVAL-B", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "evaluation", "capacites": ["P-HIST-01", "BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "approved"}
+\section*{Évaluation B --- Projet et méthodes}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (histoire, démarche de projet) ; Ex. 2 : 10 pts (débogage)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Histoire et gestion de projet} \hfill (10 points)
+
+\begin{enumerate}
+  \item (4 pts) En utilisant \lstinline{evenements_entre} du cours sur la chronologie \lstinline{[(1936, ...), (1969, ...), (1991, ...)]}, lister les événements situés entre 1960 et 1991.
+  \item (3 pts) Un projet est découpé en $5$ jalons, dont $3$ sont terminés. Calculer son avancement avec \lstinline{avancement} du cours.
+  \item (3 pts) Le programme officiel précise que les professeurs veillent à ce que les projets restent « d'une ambition raisonnable ». Pourquoi cette recommandation est-elle importante pour une équipe de $2$ à $4$ élèves ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% evenements = [
+%     (1936, "Concept de machine universelle", "Alan Turing"),
+%     (1969, "Debuts du reseau Internet", "DARPA"),
+%     (1991, "Premiere version publique de Python", "Guido van Rossum"),
+% ]
+% def evenements_entre(evenements, debut, fin):
+%     return [e for e in evenements if debut <= e[0] <= fin]
+% resultat = evenements_entre(evenements, 1960, 1991)
+% assert [e[0] for e in resultat] == [1969, 1991]
+% jalons = [
+%     {"nom": "Maquette", "termine": True},
+%     {"nom": "Backend", "termine": True},
+%     {"nom": "Frontend", "termine": True},
+%     {"nom": "Documentation", "termine": False},
+%     {"nom": "Presentation", "termine": False},
+% ]
+% def avancement(jalons):
+%     return sum(1 for j in jalons if j["termine"]) / len(jalons) * 100
+% assert avancement(jalons) == 60.0
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Débogage} \hfill (10 points)
+
+\begin{python}
+def acceder_element_bugue(liste, indice):
+    return liste[indice]
+
+acceder_element_bugue([1, 2, 3], 5)
+\end{python}
+
+\begin{enumerate}
+  \item (3 pts) Quel type d'erreur ce programme provoque-t-il ? Quel est le message exact ?
+  \item (4 pts) Écrire une version corrigée \lstinline{acceder_element(liste, indice)} qui utilise une précondition (\lstinline{assert}) pour vérifier que l'indice est valide, avec un message clair.
+  \item (3 pts) Pourquoi une précondition explicite est-elle préférable à laisser l'erreur native (\lstinline{IndexError}) se produire sans explication ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def acceder_element_bugue(liste, indice):
+%     return liste[indice]
+% erreur_native = False
+% try:
+%     acceder_element_bugue([1, 2, 3], 5)
+% except IndexError as e:
+%     erreur_native = True
+%     message = str(e)
+% assert erreur_native is True
+% assert message == "list index out of range"
+% def acceder_element(liste, indice):
+%     assert 0 <= indice < len(liste), "indice hors des bornes de la liste"
+%     return liste[indice]
+% assert acceder_element([1, 2, 3], 1) == 2
+% erreur_precondition = False
+% try:
+%     acceder_element([1, 2, 3], 5)
+% except AssertionError:
+%     erreur_precondition = True
+% assert erreur_precondition is True
+% END-VERIFY

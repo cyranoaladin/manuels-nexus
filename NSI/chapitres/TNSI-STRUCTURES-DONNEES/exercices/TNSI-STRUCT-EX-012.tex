@@ -1,0 +1,22 @@
+% META: {"id": "TNSI-STRUCT-EX-012", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "exercice", "capacites": ["TNSI-STRUCTURES-DONNEES-C3"], "capacites_codes": ["C3"], "methodes": ["M1"], "parcours": 2, "competences": ["programmer", "analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-012.tex", "corrige_tex": "chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-012.tex", "status": "approved"}
+% BEGIN-VERIFY
+% matrice = [[0,1,0,1],[0,0,1,0],[0,0,0,0],[0,0,1,0]]
+% succ = {i: [j for j in range(4) if matrice[i][j]==1] for i in range(4)}
+% assert succ == {0: [1,3], 1: [2], 2: [], 3: [2]}
+% END-VERIFY
+\begin{exercice}{TNSI-STRUCT-EX-004}{2}{18}
+On donne le graphe oriente a $4$ sommets ($0,1,2,3$) represente par la matrice d'adjacence :
+\begin{python}
+matrice = [
+    [0, 1, 0, 1],
+    [0, 0, 1, 0],
+    [0, 0, 0, 0],
+    [0, 0, 1, 0],
+]
+\end{python}
+\begin{enumerate}
+  \item Lister toutes les aretes de ce graphe (sous la forme $i \to j$).
+  \item Le sommet $2$ a-t-il des successeurs ? Interpreter.
+  \item En utilisant la fonction \lstinline{matrice_vers_listes} du cours, donner la representation par listes de successeurs de ce graphe.
+\end{enumerate}
+\end{exercice}

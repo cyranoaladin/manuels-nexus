@@ -1,0 +1,36 @@
+% META: {"id": "TNSI-STRUCT-CO-026", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "correction", "exercice_ref": "TNSI-STRUCT-EX-002", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-STRUCTURES-DONNEES-C7"], "parcours": 2, "fichier_exercice": "chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-026.tex"}
+% BEGIN-VERIFY
+% class Compte:
+%     def __init__(self, titulaire, solde=0):
+%         self.titulaire = titulaire
+%         self.solde = solde
+%     def deposer(self, montant):
+%         self.solde = self.solde + montant
+%     def retirer(self, montant):
+%         if montant > self.solde:
+%             raise ValueError('solde insuffisant')
+%         self.solde = self.solde - montant
+% c = Compte('Alice', 100)
+% c.deposer(50)
+% assert c.solde == 150
+% c.retirer(30)
+% assert c.solde == 120
+% END-VERIFY
+\begin{corrige}{TNSI-STRUCT-EX-002}
+\begin{python}
+class Compte:
+    def __init__(self, titulaire, solde=0):
+        self.titulaire = titulaire
+        self.solde = solde
+
+    def deposer(self, montant):
+        self.solde = self.solde + montant
+
+    def retirer(self, montant):
+        if montant > self.solde:
+            raise ValueError("solde insuffisant")
+        self.solde = self.solde - montant
+\end{python}
+
+Test : \lstinline{c = Compte("Alice", 100)} ; apres \lstinline{c.deposer(50)}, \lstinline{c.solde} vaut $150$ ; apres \lstinline{c.retirer(30)}, \lstinline{c.solde} vaut $120$.
+\end{corrige}

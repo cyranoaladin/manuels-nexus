@@ -1,0 +1,23 @@
+% META: {"id": "TSPE-LOG-EX-024", "chapitre": "TSPE-LOGARITHME", "type_objet": "exercice", "capacites": ["TSPE-LOGARITHME-C4"], "capacites_codes": ["C4"], "methodes": ["M1"], "parcours": 2, "competences": ["raisonner", "calculer", "chercher"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LOGARITHME/exercices/TSPE-LOG-EX-024.tex", "corrige_tex": "chapitres/TSPE-LOGARITHME/corriges/TSPE-LOG-CO-024.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, diff, exp, solve, Eq, simplify, limit, oo
+% x = symbols('x', positive=True)
+% f = x*ln(x)
+% fp = diff(f, x)
+% assert fp == ln(x) + 1
+% crit = solve(Eq(fp, 0), x)
+% assert crit == [exp(-1)]
+% assert simplify(f.subs(x, exp(-1)) + exp(-1)) == 0
+% assert limit(f, x, 0, '+') == 0
+% assert limit(f, x, oo) == oo
+% END-VERIFY
+\begin{exercice}{TSPE-LOG-EX-008}{3}{20}
+On considere la fonction $f(x) = x\ln x$ sur $]0, +\infty[$, prolongee par $f(0)=0$.
+\begin{enumerate}
+  \item Justifier que $\displaystyle\lim_{x \to 0^+} f(x) = 0$ (le prolongement en $0$ est donc continu).
+  \item Determiner $\displaystyle\lim_{x \to +\infty} f(x)$.
+  \item Calculer $f'(x)$ pour $x>0$, et resoudre $f'(x)=0$.
+  \item Etudier le signe de $f'(x)$ et dresser le tableau de variations de $f$ sur $]0,+\infty[$.
+  \item En deduire la valeur minimale de $f$ sur $]0,+\infty[$ (valeur exacte).
+\end{enumerate}
+\end{exercice}

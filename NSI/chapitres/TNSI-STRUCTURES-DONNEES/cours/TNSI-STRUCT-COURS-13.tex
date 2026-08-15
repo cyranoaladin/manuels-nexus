@@ -1,0 +1,73 @@
+% META: {"id": "TNSI-STRUCT-COURS-13", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "cours", "capacites_codes": ["C13"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TNSI-STRUCTURES-DONNEES-C13"]}
+\section{Piles, files, et choix de structure adaptée}
+
+% ============================================================
+% STRATE 1 — LIFO/FIFO et comparaison liste/dictionnaire
+% ============================================================
+
+\definition[1]{
+Une \textbf{pile} (Stack) fonctionne selon le principe \textbf{LIFO} (\textit{Last In, First Out}) : le dernier element ajoute est le premier retire. Interface : \lstinline{empiler}, \lstinline{depiler}, \lstinline{est_vide}.
+
+Une \textbf{file} (Queue) fonctionne selon le principe \textbf{FIFO} (\textit{First In, First Out}) : le premier element ajoute est le premier retire. Interface : \lstinline{enfiler}, \lstinline{defiler}, \lstinline{est_vide}.
+}
+
+\textbf{Exemple.} Implementation d'une file avec une liste Python (\lstinline{collections.deque} est preferable en pratique pour l'efficacite, mais une liste suffit pour illustrer le principe) :
+\begin{python}
+class File:
+    def __init__(self):
+        self._donnees = []
+
+    def enfiler(self, valeur):
+        self._donnees.append(valeur)
+
+    def defiler(self):
+        return self._donnees.pop(0)
+
+    def est_vide(self):
+        return len(self._donnees) == 0
+\end{python}
+
+% BEGIN-VERIFY
+% class File:
+%     def __init__(self):
+%         self._donnees = []
+%     def enfiler(self, valeur):
+%         self._donnees.append(valeur)
+%     def defiler(self):
+%         return self._donnees.pop(0)
+%     def est_vide(self):
+%         return len(self._donnees) == 0
+%
+% f = File()
+% f.enfiler("A")
+% f.enfiler("B")
+% f.enfiler("C")
+% assert f.defiler() == "A"
+% assert f.defiler() == "B"
+% assert f.defiler() == "C"
+% assert f.est_vide()
+% END-VERIFY
+
+Ici, "A" est le premier entre et le premier sorti : comportement FIFO, a l'oppose du comportement LIFO d'une pile.
+
+\propriete[Choisir une structure adaptée]{
+Le choix depend des \textbf{operations dominantes} de la situation a modeliser :
+\begin{itemize}
+  \item \textbf{Pile} : annulation d'actions (undo), evaluation d'expressions, parcours en profondeur.
+  \item \textbf{File} : gestion de taches dans l'ordre d'arrivee, parcours en largeur, files d'attente.
+  \item \textbf{Liste} : acces par position (indice), parcours sequentiel.
+  \item \textbf{Dictionnaire} : acces direct par cle (recherche rapide en moyenne, independante de la taille), sans notion d'ordre de position.
+\end{itemize}
+}
+
+\margeAppui{
+Rechercher une valeur dans une \textbf{liste} de $n$ elements necessite, dans le pire cas, de parcourir les $n$ elements un par un. Rechercher une valeur associee a une \textbf{cle} dans un dictionnaire est en moyenne bien plus rapide (acces direct via une table de hachage), independamment du nombre d'elements stockes.
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre \lstinline{.pop()} et \lstinline{.pop(0)}.} Pour une liste Python, \lstinline{.pop()} retire et renvoie le \textbf{dernier} element (comportement LIFO, utile pour une pile), tandis que \lstinline{.pop(0)} retire et renvoie le \textbf{premier} element (comportement FIFO, utile pour une file, mais couteux car il faut decaler tous les elements restants).
+}

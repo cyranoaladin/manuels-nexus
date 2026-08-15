@@ -1,0 +1,17 @@
+% META: {"id": "TCOMPL-CORR-EX-010", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "exercice", "capacites": ["TCOMPL-CORR-C5"], "capacites_codes": ["C5"], "methodes": ["M2"], "parcours": 2, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-010.tex", "corrige_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-010.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**3 - 3*x**2 + 2
+% fp = diff(f, x)
+% assert expand(fp) == 3*x**2 - 6*x
+% assert solve(fp, x) == [0, 2]
+% assert f.subs(x, 0) == 2
+% assert f.subs(x, 2) == -2
+% assert limit(f, x, -oo) == -oo
+% assert limit(f, x, oo) == oo
+% END-VERIFY
+\begin{exercice}{TCOMPL-CORR-EX-010}{1}{12}
+Etudier les variations de $f(x) = x^3 - 3x^2 + 2$ sur $\mathbb{R}$.
+
+\end{exercice}

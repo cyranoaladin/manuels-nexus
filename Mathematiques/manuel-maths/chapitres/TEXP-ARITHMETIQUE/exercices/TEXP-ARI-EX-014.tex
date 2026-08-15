@@ -1,0 +1,21 @@
+% META: {"id": "TEXP-ARI-EX-014", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C5"], "capacites_codes": ["C5"], "methodes": ["M2","M5"], "parcours": 2, "competences": ["raisonner","calculer"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-014.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-014.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**2 * exp(-x)
+% fp = diff(f, x)
+% assert simplify(fp) == (2 - x)*x*exp(-x)
+% assert solve(fp, x) == [0, 2]
+% assert f.subs(x, 2) == 4*exp(-2)
+% assert limit(f, x, oo) == 0
+% assert limit(f, x, -oo) == oo
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-014}{2}{18}
+Soit $f(x) = x^2\,\mathrm{e}^{-x}$ definie sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Calculer $f'(x)$ et etudier son signe.
+  \item Determiner les limites de $f$ en $\pm\infty$.
+  \item Dresser le tableau de variations de $f$.
+\end{enumerate}
+
+\end{exercice}

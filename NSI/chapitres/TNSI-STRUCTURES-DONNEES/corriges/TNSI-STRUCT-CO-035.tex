@@ -1,0 +1,27 @@
+% META: {"id": "TNSI-STRUCT-CO-035", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "correction", "exercice_ref": "TNSI-STRUCT-EX-003", "capacites_codes": ["C9"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-STRUCTURES-DONNEES-C9"], "parcours": 1, "fichier_exercice": "chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-035.tex"}
+% BEGIN-VERIFY
+% class Arbre:
+%     def __init__(self, v, g=None, d=None):
+%         self.valeur=v; self.gauche=g; self.droit=d
+% def taille(a):
+%     if a is None: return 0
+%     return 1+taille(a.gauche)+taille(a.droit)
+% def hauteur(a):
+%     if a is None: return -1
+%     return 1+max(hauteur(a.gauche), hauteur(a.droit))
+% a = Arbre(1, Arbre(2, Arbre(3, Arbre(4, Arbre(5)))))
+% assert taille(a) == 5
+% assert hauteur(a) == 4
+% END-VERIFY
+\begin{corrige}{TNSI-STRUCT-EX-003}
+
+\textbf{Q1.}
+\begin{python}
+arbre = Arbre(1, Arbre(2, Arbre(3, Arbre(4, Arbre(5)))))
+\end{python}
+
+\textbf{Q2.} L'arbre a $5$ noeuds (1,2,3,4,5), donc \textbf{taille} $=5$. Le plus long chemin racine-feuille passe par tous les noeuds (chaine de fils gauches), soit $4$ aretes parcourues : \textbf{hauteur} $=4$.
+
+\textbf{Q3.} \lstinline{taille(arbre)} renvoie $5$, \lstinline{hauteur(arbre)} renvoie $4$ : la prediction est confirmee.
+
+\end{corrige}

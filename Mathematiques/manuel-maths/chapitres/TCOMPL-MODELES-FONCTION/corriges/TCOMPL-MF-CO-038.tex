@@ -1,0 +1,27 @@
+% META: {"id": "TCOMPL-MF-CO-038", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-MF-EX-038", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f(x) = x^4 + x^2 >= 0 par convexite (somme de convexe)
+% f = x**4 + x**2
+% fpp = diff(f, x, 2)
+% assert expand(fpp) == 12*x**2 + 2
+% # fpp = 12*x**2 + 2 > 0 (strictement convexe)
+% assert f.subs(x, 0) == 0
+% assert f.subs(x, 1) == 2
+% END-VERIFY
+\begin{corrige}{TCOMPL-MF-EX-038}
+
+\textbf{Question 1.} $f''(x) = 12x^2 + 2 > 0$ : $f$ est strictement convexe sur $\mathbb{R}$.
+
+\commentaireMarge{$f'' > 0$ partout : strictement convexe, un seul minimum.}
+
+\textbf{Question 2.} $f'(x) = 4x^3 + 2x = 2x(2x^2+1) = 0 \iff x = 0$.
+
+Le minimum unique est $f(0) = 0$ (par convexite stricte, c'est le seul extremum).
+
+\textbf{Question 3.} $f(x) \geq 2 \iff x^4 + x^2 - 2 \geq 0$. Posons $u = x^2 \geq 0$ : $u^2 + u - 2 = (u+2)(u-1)$.
+
+Comme $u \geq 0$, on a $u \geq 1$, soit $x^2 \geq 1 \iff x \in \left]-\infty, -1\right] \cup \left[1, +\infty\right[$.
+
+\end{corrige}

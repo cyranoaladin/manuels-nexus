@@ -1,0 +1,114 @@
+% META: {"id": "TNSI-ALGO-COURS-06", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "cours", "capacites_codes": ["C6"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TNSI-ALGORITHMIQUE-C6"]}
+\section{Programmation dynamique}
+
+% ============================================================
+% STRATE 1 — Principe : eviter de refaire les memes calculs
+% ============================================================
+
+\definition[1]{
+La \textbf{programmation dynamique} résout un problème en le décomposant en sous-problèmes, comme diviser pour régner, mais s'applique lorsque ces sous-problèmes se \textbf{recoupent} (les mêmes sous-problèmes réapparaissent plusieurs fois). On \textbf{mémorise} (\textit{mémoïsation}) le résultat de chaque sous-problème déjà résolu pour ne jamais le recalculer.
+}
+
+\margeAppui{
+Le \textbf{rendu de monnaie} : trouver le nombre minimal de pièces pour rendre une somme $n$, à partir d'un système de pièces donné, est un problème classique de programmation dynamique.
+}
+
+\textbf{Exemple.} Version naïve, sans mémoïsation : recalcule plusieurs fois les mêmes sous-sommes.
+\begin{python}
+def rendu_naif(pieces, somme):
+    if somme == 0:
+        return 0
+    meilleur = None
+    for p in pieces:
+        if p <= somme:
+            candidat = 1 + rendu_naif(pieces, somme - p)
+            if meilleur is None or candidat < meilleur:
+                meilleur = candidat
+    return meilleur
+\end{python}
+
+% BEGIN-VERIFY
+% def rendu_naif(pieces, somme):
+%     if somme == 0:
+%         return 0
+%     meilleur = None
+%     for p in pieces:
+%         if p <= somme:
+%             candidat = 1 + rendu_naif(pieces, somme - p)
+%             if meilleur is None or candidat < meilleur:
+%                 meilleur = candidat
+%     return meilleur
+%
+% assert rendu_naif([1, 2, 5], 11) == 3
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Memoisation
+% ============================================================
+
+\propriete[Mémoïsation]{
+On stocke chaque résultat déjà calculé dans un \textbf{dictionnaire} (somme $\to$ nombre minimal de pièces) : avant de calculer, on vérifie si le résultat est déjà connu ; sinon, on le calcule puis on l'enregistre avant de le renvoyer.
+}
+
+\begin{python}
+def rendu_memo(pieces, somme, memo=None):
+    if memo is None:
+        memo = {0: 0}
+    if somme in memo:
+        return memo[somme]
+    meilleur = None
+    for p in pieces:
+        if p <= somme:
+            candidat = 1 + rendu_memo(pieces, somme - p, memo)
+            if meilleur is None or candidat < meilleur:
+                meilleur = candidat
+    memo[somme] = meilleur
+    return meilleur
+\end{python}
+
+% BEGIN-VERIFY
+% def rendu_memo(pieces, somme, memo=None):
+%     if memo is None:
+%         memo = {0: 0}
+%     if somme in memo:
+%         return memo[somme]
+%     meilleur = None
+%     for p in pieces:
+%         if p <= somme:
+%             candidat = 1 + rendu_memo(pieces, somme - p, memo)
+%             if meilleur is None or candidat < meilleur:
+%                 meilleur = candidat
+%     memo[somme] = meilleur
+%     return meilleur
+%
+% assert rendu_memo([1, 2, 5], 11) == 3
+% assert rendu_memo([1, 2, 5], 0) == 0
+%
+% import time
+% def rendu_naif(pieces, somme):
+%     if somme == 0:
+%         return 0
+%     meilleur = None
+%     for p in pieces:
+%         if p <= somme:
+%             candidat = 1 + rendu_naif(pieces, somme - p)
+%             if meilleur is None or candidat < meilleur:
+%                 meilleur = candidat
+%     return meilleur
+%
+% t0 = time.perf_counter()
+% rendu_naif([1, 2, 5], 24)
+% duree_naive = time.perf_counter() - t0
+% t0 = time.perf_counter()
+% rendu_memo([1, 2, 5], 24)
+% duree_memo = time.perf_counter() - t0
+% assert duree_memo < duree_naive
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Argument \texttt{memo} par défaut mutable partagé entre appels.} Comme pour un graphe, écrire \texttt{memo=\{0: 0\}} directement dans la signature créerait un dictionnaire partagé et corrompu entre appels indépendants ; on utilise \lstinline{memo=None} puis on l'initialise à l'intérieur de la fonction.
+}
+
+\propriete[Gain apporté par la mémoïsation]{
+Sans mémoïsation, le nombre d'appels récursifs croît de façon \textbf{exponentielle} avec la somme à rendre (les mêmes sous-sommes sont recalculées un grand nombre de fois). Avec mémoïsation, chaque sous-somme n'est calculée \textbf{qu'une seule fois} : le coût devient proportionnel au nombre de sous-problèmes distincts (ici, la valeur de la somme), au prix d'un espace mémoire supplémentaire pour stocker le dictionnaire.
+}

@@ -1,0 +1,19 @@
+% META: {"id": "TCOMPL-ME-EX-025", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "exercice", "capacites": ["TCOMPL-ME-C5"], "capacites_codes": ["C5"], "methodes": ["M3"], "parcours": 1, "competences": ["raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-MODELES-EVOLUTION/exercices/TCOMPL-ME-EX-025.tex", "corrige_tex": "chapitres/TCOMPL-MODELES-EVOLUTION/corriges/TCOMPL-ME-CO-025.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% a, b = symbols('a b', positive=True)
+% # ln concave => ln((a+b)/2) >= (ln a + ln b)/2 = ln(sqrt(ab))
+% lhs = ln((a+b)/2)
+% rhs = (ln(a) + ln(b))/2
+% assert simplify(rhs - ln(sqrt(a*b))) == 0
+% # numerique
+% assert simplify((lhs - rhs).subs({a: 1, b: 4}) - (ln(Rational(5,2)) - ln(2))) == 0
+% assert lhs.subs({a: 1, b: 4}) == ln(Rational(5,2))
+% assert simplify(rhs.subs({a: 1, b: 4}) - ln(2)) == 0
+% assert ln(Rational(5,2)) > ln(2)
+% END-VERIFY
+\begin{exercice}{TCOMPL-ME-EX-025}{2}{20}
+En utilisant la concavite de la fonction $\ln$, demontrer l'inegalite arithmetico-geometrique :
+\[ \frac{a+b}{2} \geq \sqrt{ab} \quad (a > 0,\; b > 0). \]
+
+\end{exercice}

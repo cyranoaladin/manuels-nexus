@@ -1,0 +1,80 @@
+% META: {"id": "1NSI-TAB-EVAL-A", "chapitre": "1NSI-TABLES", "type_objet": "evaluation", "capacites": ["P-TABLE-01", "P-TABLE-02", "P-TABLE-03", "P-TABLE-04"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "approved"}
+\section*{Évaluation A --- Traitement de données en tables}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (import, recherche) ; Ex. 2 : 10 pts (tri, fusion)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Une table de films} \hfill (10 points)
+
+\begin{python}
+films = [
+    {"titre": "Interstellar", "annee": 2014, "genre": "SF", "note": 8.6},
+    {"titre": "Inception", "annee": 2010, "genre": "SF", "note": 8.8},
+    {"titre": "Amelie", "annee": 2001, "genre": "Comedie", "note": 8.3},
+    {"titre": "Dune", "annee": 2021, "genre": "SF", "note": 8.0},
+]
+\end{python}
+
+\begin{enumerate}
+  \item (3 pts) Si cette table provenait d'un fichier CSV importé avec \lstinline{csv.DictReader}, quel serait le type de \lstinline{films[0]["annee"]} avant conversion ? Écrire le code de conversion nécessaire pour les colonnes \lstinline{annee} (en \lstinline{int}) et \lstinline{note} (en \lstinline{float}).
+  \item (4 pts) Écrire une compréhension de liste renvoyant les films de genre \lstinline{"SF"} ayant une note supérieure ou égale à $8{,}5$.
+  \item (3 pts) Combien de films remplissent ce critère ? Les nommer.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% films = [
+%     {"titre": "Interstellar", "annee": 2014, "genre": "SF", "note": 8.6},
+%     {"titre": "Inception", "annee": 2010, "genre": "SF", "note": 8.8},
+%     {"titre": "Amelie", "annee": 2001, "genre": "Comedie", "note": 8.3},
+%     {"titre": "Dune", "annee": 2021, "genre": "SF", "note": 8.0},
+% ]
+% resultat = [f for f in films if f["genre"] == "SF" and f["note"] >= 8.5]
+% assert [f["titre"] for f in resultat] == ["Interstellar", "Inception"]
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Tri et fusion} \hfill (10 points)
+
+\begin{enumerate}
+  \item (3 pts) Écrire l'instruction qui trie la table \lstinline{films} par année croissante. Donner le titre du premier film après ce tri.
+  \item (4 pts) On dispose de la table \lstinline{realisateurs} :
+\begin{python}
+realisateurs = [
+    {"titre": "Interstellar", "realisateur": "Nolan"},
+    {"titre": "Inception", "realisateur": "Nolan"},
+    {"titre": "Amelie", "realisateur": "Jeunet"},
+]
+\end{python}
+  En utilisant la fonction \lstinline{fusionner(table1, table2, cle)} du cours, fusionner \lstinline{films} et \lstinline{realisateurs} sur \lstinline{titre}. Combien de lignes obtient-on ?
+  \item (3 pts) Quel film de la table \lstinline{films} n'apparaît pas dans le résultat de la fusion ? Pourquoi ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% films = [
+%     {"titre": "Interstellar", "annee": 2014, "genre": "SF", "note": 8.6},
+%     {"titre": "Inception", "annee": 2010, "genre": "SF", "note": 8.8},
+%     {"titre": "Amelie", "annee": 2001, "genre": "Comedie", "note": 8.3},
+%     {"titre": "Dune", "annee": 2021, "genre": "SF", "note": 8.0},
+% ]
+% tri = sorted(films, key=lambda ligne: ligne["annee"])
+% assert tri[0]["titre"] == "Amelie"
+% realisateurs = [
+%     {"titre": "Interstellar", "realisateur": "Nolan"},
+%     {"titre": "Inception", "realisateur": "Nolan"},
+%     {"titre": "Amelie", "realisateur": "Jeunet"},
+% ]
+% def fusionner(table1, table2, cle):
+%     index2 = {ligne[cle]: ligne for ligne in table2}
+%     fusion = []
+%     for ligne1 in table1:
+%         if ligne1[cle] in index2:
+%             complement = {k: v for k, v in index2[ligne1[cle]].items() if k != cle}
+%             fusion.append({**ligne1, **complement})
+%     return fusion
+% resultat = fusionner(films, realisateurs, "titre")
+% assert len(resultat) == 3
+% assert "Dune" not in [ligne["titre"] for ligne in resultat]
+% END-VERIFY

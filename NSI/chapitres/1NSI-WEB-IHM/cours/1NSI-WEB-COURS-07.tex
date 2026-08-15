@@ -1,0 +1,101 @@
+% META: {"id": "1NSI-WEB-COURS-07", "chapitre": "1NSI-WEB-IHM", "type_objet": "cours", "capacites": ["1NSI-WEB-IHM-C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C7"]}
+\section{Composants graphiques et événements}
+
+\margeAppui{Une page Web ne se limite pas à du texte statique : des \textbf{composants
+graphiques} permettent à l'utilisateur d'interagir avec elle (cliquer, saisir du texte,
+choisir une option).}
+
+\definition[D1]{
+  Un \textbf{composant graphique} d'une page Web est un élément avec lequel l'utilisateur
+  peut interagir : bouton (\lstinline{<button>}), champ de texte
+  (\lstinline{<input type="text">}), case à cocher (\lstinline{<input type="checkbox">}),
+  liste déroulante (\lstinline{<select>}), lien (\lstinline{<a>})...
+}
+
+\exemple{Extrait de code HTML décrivant un bouton :}
+
+\begin{console}
+<button id="bouton_valider">Valider</button>
+\end{console}
+
+\propriete[Description vs comportement]{
+  Le code \textbf{HTML} décrit uniquement l'\textbf{apparence} et la \textbf{structure} d'un
+  composant graphique (« il y a un bouton, avec ce texte »). Le \textbf{comportement} du
+  composant (que se passe-t-il quand on clique dessus ?) est programmé séparément, en
+  général en \textbf{JavaScript}.
+}
+
+\definition[D2]{
+  Un \textbf{événement} est une action détectée par le navigateur (clic de souris, appui sur
+  une touche, chargement de la page, soumission d'un formulaire...). Une \textbf{fonction
+  associée à un événement} (un \emph{gestionnaire d'événement}, ou \emph{event handler}) est
+  exécutée automatiquement lorsque cet événement se produit sur un composant donné.
+}
+
+\exemple{En JavaScript, on associe une fonction à l'événement « clic » d'un bouton :}
+
+\begin{console}
+document.getElementById("bouton_valider").addEventListener("click", function() {
+    alert("Formulaire valide !");
+});
+\end{console}
+
+\propriete[Simuler un gestionnaire d'événements]{
+  Le principe d'un gestionnaire d'événements peut se modéliser simplement : un
+  \textbf{dictionnaire} associe à chaque identifiant de composant la fonction à exécuter
+  lors du clic. « Déclencher un clic » revient alors à rechercher puis appeler la fonction
+  associée.
+}
+
+\begin{codereference}{Modélisation Python d'un gestionnaire d'événements}
+\begin{python}
+gestionnaires = {}
+
+def ajouter_gestionnaire(id_composant, fonction):
+    """Associe `fonction` a l'evenement clic du composant `id_composant`."""
+    gestionnaires[id_composant] = fonction
+
+def declencher_clic(id_composant):
+    """Simule un clic : execute la fonction associee, si elle existe."""
+    if id_composant in gestionnaires:
+        return gestionnaires[id_composant]()
+    return None
+
+compteur = {"valeur": 0}
+def incrementer():
+    compteur["valeur"] += 1
+    return compteur["valeur"]
+
+ajouter_gestionnaire("bouton_plus", incrementer)
+print(declencher_clic("bouton_plus"))  # 1
+print(declencher_clic("bouton_plus"))  # 2
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% gestionnaires = {}
+% def ajouter_gestionnaire(id_composant, fonction):
+%     gestionnaires[id_composant] = fonction
+% def declencher_clic(id_composant):
+%     if id_composant in gestionnaires:
+%         return gestionnaires[id_composant]()
+%     return None
+% compteur = {"valeur": 0}
+% def incrementer():
+%     compteur["valeur"] += 1
+%     return compteur["valeur"]
+% ajouter_gestionnaire("bouton_plus", incrementer)
+% assert declencher_clic("bouton_plus") == 1
+% assert declencher_clic("bouton_plus") == 2
+% assert declencher_clic("bouton_inexistant") is None
+% END-VERIFY
+
+\erreurFrequente{Confondre la \textbf{description} HTML d'un composant (son apparence, son
+identifiant) avec son \textbf{comportement} programmé (ce qui se passe lors d'un événement).
+Le code HTML \lstinline{<button id="bouton_plus">+</button>} ne fait \textbf{rien} par
+lui-même tant qu'aucune fonction n'est associée à l'un de ses événements.}
+
+\alamachine{Modifie le code Python ci-dessus pour ajouter un second gestionnaire,
+associé à \lstinline{"bouton_moins"}, qui décrémente \lstinline{compteur["valeur"]}.
+Déclenche successivement \lstinline{"bouton_plus"}, \lstinline{"bouton_plus"},
+\lstinline{"bouton_moins"}, et vérifie que \lstinline{compteur["valeur"]} vaut $1$.}

@@ -1,0 +1,36 @@
+% META: {"id": "TNSI-ALGO-CO-023", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "correction", "exercice_ref": "TNSI-ALGO-EX-003", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-ALGORITHMIQUE-C6"], "parcours": 1, "fichier_exercice": "chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-023.tex"}
+% BEGIN-VERIFY
+% def chemin(graphe, depart, arrivee):
+%     predecesseur = {depart: None}
+%     file = [depart]
+%     while file:
+%         sommet = file.pop(0)
+%         if sommet == arrivee:
+%             break
+%         for voisin in graphe[sommet]:
+%             if voisin not in predecesseur:
+%                 predecesseur[voisin] = sommet
+%                 file.append(voisin)
+%     if arrivee not in predecesseur:
+%         return None
+%     c = []
+%     s = arrivee
+%     while s is not None:
+%         c.append(s)
+%         s = predecesseur[s]
+%     c.reverse()
+%     return c
+% metro = {
+%     "A": ["B"], "B": ["A", "C", "D"], "C": ["B", "E"],
+%     "D": ["B", "E"], "E": ["C", "D"],
+% }
+% trajet = chemin(metro, "A", "E")
+% assert trajet == ["A", "B", "C", "E"]
+% END-VERIFY
+\begin{corrige}{TNSI-ALGO-EX-003}
+\begin{python}
+trajet = chemin(metro, "A", "E")
+print(trajet)  # ['A', 'B', 'C', 'E']
+\end{python}
+Le BFS depuis \texttt{"A"} atteint \texttt{"B"} en premier (distance $1$), puis \texttt{"C"} et \texttt{"D"} (distance $2$, \texttt{"C"} découvert avant \texttt{"D"} car il apparaît en premier dans la liste des voisins de \texttt{"B"}), puis \texttt{"E"} (distance $3$, découvert depuis \texttt{"C"}). Le trajet reconstruit est \texttt{A} $\to$ \texttt{B} $\to$ \texttt{C} $\to$ \texttt{E} : il compte $4$ stations (départ et arrivée compris).
+\end{corrige}

@@ -1,0 +1,25 @@
+% META: {"id": "1NSI-LANG-EX-018", "chapitre": "1NSI-LANGAGE", "type_objet": "exercice", "capacites": ["1NSI-LANGAGE-C3"], "parcours": 2, "competences": ["concevoir", "programmer", "valider"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-018.tex", "corrige_tex": "chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-018.tex", "status": "approved", "capacites_codes": ["C3"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% def perimetre_rectangle(largeur, longueur):
+%     assert largeur > 0
+%     assert longueur > 0
+%     p = 2 * (largeur + longueur)
+%     assert p > 0
+%     return p
+% assert perimetre_rectangle(3, 5) == 16
+% erreur = False
+% try:
+%     perimetre_rectangle(-1, 5)
+% except AssertionError:
+%     erreur = True
+% assert erreur is True
+% END-VERIFY
+\begin{exercice}{1NSI-LANG-EX-003}{2}{12}
+On veut écrire une fonction \lstinline{perimetre_rectangle(largeur, longueur)} qui calcule
+le périmètre d'un rectangle.
+\begin{enumerate}
+  \item Proposer une précondition sur \lstinline{largeur} et \lstinline{longueur}, et une postcondition sur le résultat.
+  \item Écrire la fonction, avec des \lstinline{assert} correspondant à ces conditions.
+  \item Vérifier que \lstinline{perimetre_rectangle(3, 5)} vaut $16$, et que \lstinline{perimetre_rectangle(-1, 5)} déclenche bien une erreur.
+\end{enumerate}
+\end{exercice}

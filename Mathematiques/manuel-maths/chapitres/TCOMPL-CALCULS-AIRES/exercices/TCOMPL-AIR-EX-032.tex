@@ -1,0 +1,25 @@
+% META: {"id": "TCOMPL-AIR-EX-032", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "exercice", "capacites": ["TCOMPL-AIR-C2"], "capacites_codes": ["C2"], "methodes": ["M4"], "parcours": 2, "competences": ["communiquer","raisonner"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-032.tex", "corrige_tex": "chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-032.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x*exp(-x)
+% fp = diff(f, x)
+% fpp = diff(f, x, 2)
+% assert simplify(fp) == (1-x)*exp(-x)
+% assert simplify(fpp) == (x-2)*exp(-x)
+% assert solve(fp, x) == [1]
+% assert solve(fpp, x) == [2]
+% assert f.subs(x, 0) == 0
+% assert f.subs(x, 1) == exp(-1)
+% assert f.subs(x, 2) == 2*exp(-2)
+% assert limit(f, x, oo) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-AIR-EX-032}{2}{18}
+Soit $f(x) = x\,\mathrm{e}^{-x}$ sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Dresser le tableau de variations complet (limites, $f'$, $f''$).
+  \item Identifier les points d'inflexion.
+  \item Esquisser la courbe en placant l'asymptote et les points remarquables.
+\end{enumerate}
+
+\end{exercice}

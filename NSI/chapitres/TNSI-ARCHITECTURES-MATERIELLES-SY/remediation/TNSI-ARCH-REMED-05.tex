@@ -1,0 +1,29 @@
+% META: {"id": "TNSI-ARCH-REMED-05", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "remediation", "capacites_codes": ["C5"], "status": "approved", "capacites": ["TNSI-ARCHITECTURES-MATERIELLES-SY-C5"]}
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C02B : concurrence vs parallelisme
+%---------------------------------------------------------------
+
+\begin{exercice}{TNSI-ARCH-RE-C02B-EX1}{1}{10}
+Un ordinateur possède un processeur à un seul cœur, et pourtant l'utilisateur peut écouter de la musique tout en tapant du texte dans un traitement de texte, sans interruption perceptible. Ces deux tâches s'exécutent-elles en parallélisme réel ou en concurrence ? Expliquer.
+\end{exercice}
+
+% BEGIN-VERIFY
+% def tourniquet(processus, tranche, duree_totale):
+%     ordre_execution = []
+%     file = list(processus)
+%     temps_restant = dict(duree_totale)
+%     while file:
+%         p = file.pop(0)
+%         execute = min(tranche, temps_restant[p])
+%         ordre_execution.append((p, execute))
+%         temps_restant[p] -= execute
+%         if temps_restant[p] > 0:
+%             file.append(p)
+%     return ordre_execution
+% resultat = tourniquet(["musique", "texte"], 1, {"musique": 2, "texte": 2})
+% assert resultat == [("musique", 1), ("texte", 1), ("musique", 1), ("texte", 1)]
+% END-VERIFY
+
+\begin{corrige}{TNSI-ARCH-RE-C02B-EX1}
+Ces deux tâches s'exécutent en \textbf{concurrence}, pas en parallélisme réel : un seul cœur ne peut exécuter qu'une instruction à la fois. L'ordonnanceur alterne très rapidement entre les deux processus (tranches de temps de quelques millisecondes), ce qui donne à l'utilisateur l'\textbf{illusion} d'une exécution simultanée, alors qu'en réalité chaque processus n'avance que pendant sa tranche de temps.
+\end{corrige}

@@ -1,0 +1,29 @@
+% META: {"id": "TCOMPL-MODELES-FONCTION-FR-R5", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "remediation", "capacites_codes": ["R5"], "status": "approved"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU -- R5 : Fonction logarithme neperien : proprietes et derivee
+%---------------------------------------------------------------
+
+\subsection*{Rappel -- Fonction logarithme neperien : proprietes et derivee}
+
+\textbf{Proprietes :} $\ln(ab) = \ln a + \ln b$, $\ln\left(\dfrac{a}{b}\right) = \ln a - \ln b$, $\ln(\mathrm{e}^x) = x$.
+
+\textbf{Derivee :} $(\ln x)' = \dfrac{1}{x}$ sur $]0, +\infty[$.
+
+\begin{exercice}{TCOMPL-MF-FR-R5-EX1}{1}{8}
+\begin{enumerate}
+  \item Resoudre $\ln(x + 1) = 0$.
+  \item Etudier les variations de $g(x) = \ln x - x$ sur $]0, +\infty[$.
+  \item Determiner $\lim_{x \to +\infty} \dfrac{\ln x}{x^2}$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', positive=True)
+% assert ln(1) == 0  # ln(x+1)=0 <=> x=0
+% gp = diff(ln(x) - x, x)
+% assert gp == 1/x - 1
+% assert solve(gp, x) == [1]
+% assert limit(ln(x)/x**2, x, oo) == 0
+% END-VERIFY

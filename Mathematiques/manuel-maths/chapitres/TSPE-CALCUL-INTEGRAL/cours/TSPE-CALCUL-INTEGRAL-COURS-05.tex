@@ -1,0 +1,46 @@
+% META: {"id": "TSPE-CALCUL-INTEGRAL-COURS-05", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "cours", "capacites_codes": ["C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TSPE-CALCUL-INTEGRAL-C5"], "statut": "structure"}
+
+\section{Aire entre deux courbes}
+
+% ============================================================
+% STRATE 1 — Methode et exemple
+% ============================================================
+
+\propriete{
+Si $f$ et $g$ sont continues sur $[a,b]$ et $g \leq f$ sur $[a,b]$, l'aire du domaine compris entre les courbes de $f$ et $g$ (et les droites $x=a$, $x=b$) est :
+\[
+  \mathcal{A} = \int_a^b \big(f(x)-g(x)\big)\,\mathrm{d}x \quad \text{(en unites d'aire)}.
+\]
+}
+
+\margeAppui{
+On se ramene ainsi a l'integrale d'une fonction positive ($f-g \geq 0$), meme si $f$ et $g$ ne sont pas positives elles-memes.
+}
+
+\exemple{
+Calculer l'aire entre les courbes de $f(x)=-x^2+4$ et $g(x)=x^2-2$ sur l'intervalle ou $g \leq f$.
+
+\textbf{Intersection.} $f(x)=g(x) \iff -x^2+4=x^2-2 \iff 2x^2=6 \iff x^2=3 \iff x=\pm\sqrt{3}$.
+
+Sur $[-\sqrt{3},\sqrt{3}]$, $f(x)-g(x) = -2x^2+6 \geq 0$ (verifie en $x=0$ : $6>0$), donc $g \leq f$ sur cet intervalle.
+\[
+  \mathcal{A} = \int_{-\sqrt{3}}^{\sqrt{3}} (-2x^2+6)\,\mathrm{d}x = \Big[-\frac{2x^3}{3}+6x\Big]_{-\sqrt{3}}^{\sqrt{3}} = 8\sqrt{3} \text{ unites d'aire}.
+\]
+
+% BEGIN-VERIFY
+% from sympy import symbols, sqrt, integrate, simplify
+% x = symbols('x')
+% f = -x**2 + 4
+% g = x**2 - 2
+% I = integrate(f - g, (x, -sqrt(3), sqrt(3)))
+% assert simplify(I - 8*sqrt(3)) == 0
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier de determiner quelle courbe est au-dessus.} Sans verifier le signe de $f-g$ sur l'intervalle, on risque de calculer $\int (f-g)$ avec un resultat negatif (aire algebrique), qui ne represente pas une aire geometrique. Toujours integrer la fonction la plus grande moins la plus petite.
+}

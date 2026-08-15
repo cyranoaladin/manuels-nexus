@@ -1,0 +1,24 @@
+% META: {"id": "TEXP-ARI-EX-049", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C4"], "capacites_codes": ["C4"], "methodes": ["M3"], "parcours": 2, "competences": ["raisonner"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-049.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-049.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, a, h = symbols('x a h')
+% # Theoreme C6: si f'' >= 0, alors f(x) >= f(a) + f'(a)(x-a)
+% # Demo via g(x) = f(x) - f(a) - f'(a)(x-a)
+% # g(a) = 0, g'(x) = f'(x) - f'(a), g'(a) = 0
+% # g''(x) = f''(x) >= 0 => g' croissante
+% # Sur [a, x] (x > a): g' >= g'(a) = 0 => g croissante => g(x) >= g(a) = 0
+% # Sur [x, a] (x < a): g' <= g'(a) = 0 => g decroissante => g(x) >= g(a) = 0
+% # Verification numerique sur f(x) = x^4, a = 1
+% fx = x**4
+% fa = 1
+% fpa = 4
+% g = fx - fa - fpa*(x - 1)
+% assert g.subs(x, 1) == 0
+% assert g.subs(x, 0) == 3
+% assert g.subs(x, 2) == 11
+% assert g.subs(x, Rational(1,2)) == Rational(17,16)
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-049}{3}{25}
+Demontrer integralement le theoreme : \emph{si $f$ est deux fois derivable sur un intervalle $I$ avec $f'' \geq 0$ sur $I$, alors pour tous $a, x \in I$ : $f(x) \geq f(a) + f'(a)(x - a)$.}
+
+\end{exercice}

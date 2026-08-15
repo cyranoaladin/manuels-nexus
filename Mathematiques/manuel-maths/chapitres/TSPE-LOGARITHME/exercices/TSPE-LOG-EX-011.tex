@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-LOG-EX-011", "chapitre": "TSPE-LOGARITHME", "type_objet": "exercice", "capacites": ["TSPE-LOGARITHME-C2"], "capacites_codes": ["C2"], "methodes": ["M1"], "parcours": 1, "competences": ["modeliser", "calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LOGARITHME/exercices/TSPE-LOG-EX-011.tex", "corrige_tex": "chapitres/TSPE-LOGARITHME/corriges/TSPE-LOG-CO-011.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, ln, Rational, solve, Eq, simplify
+% t = symbols('t', positive=True)
+% P = 200*exp(Rational(5,100)*t)
+% sol = solve(Eq(P, 500), t)
+% assert simplify(sol[0] - 20*ln(Rational(5,2))) == 0
+% assert round(float(sol[0]), 2) == 18.33
+% END-VERIFY
+\begin{exercice}{TSPE-LOG-EX-003}{2}{15}
+Une population de bacteries est modelisee par $P(t) = 200\,\mathrm{e}^{0{,}05t}$, ou $t$ est le temps en heures et $P(t)$ le nombre de bacteries (en milliers).
+\begin{enumerate}
+  \item Calculer $P(0)$. Interpreter.
+  \item Determiner, en resolvant une equation, au bout de combien de temps la population atteint $500$ (milliers). Donner la valeur exacte puis une valeur approchee a $0{,}01$ heure pres.
+\end{enumerate}
+\end{exercice}

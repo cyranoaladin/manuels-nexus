@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-GEOESPACE-CO-038", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "correction", "exercice_ref": "TSPE-GEOESPACE-EX-003", "capacites_codes": ["C12"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-GEOMETRIE-ESPACE-C12"], "parcours": 1, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-038.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% C = (3,2,1)
+% assert 1*C[0] - 1*C[1] + 2*C[2] - 3 == 0
+% END-VERIFY
+\begin{corrige}{TSPE-GEOESPACE-EX-003}
+
+\textbf{Q1.} $M(x,y,z) \in \mathcal{P} \iff \vec{n}\cdot\vec{AM}=0$, avec $\vec{AM}\begin{pmatrix}x-0\\y-1\\z-2\end{pmatrix}$ :
+\[
+  1(x-0)-1(y-1)+2(z-2)=0 \iff x-y+2z-3=0.
+\]
+
+\textbf{Q2.} $3-2+2\times1-3 = 3-2+2-3 = 0$. L'equation est verifiee : $C \in \mathcal{P}$.
+
+\textbf{Q3.} Pour $\mathcal{Q}: 3x+y-4z+2=0$, le vecteur normal est $\vec{n'}\begin{pmatrix}3\\1\\-4\end{pmatrix}$ (coefficients de $x,y,z$).
+
+\end{corrige}

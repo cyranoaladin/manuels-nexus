@@ -1,0 +1,30 @@
+% META: {"id": "TCOMPL-LOG-CO-007", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "corrige", "exercice_ref": "TCOMPL-LOG-EX-007", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x**2 - 2)
+% fp = diff(f, x)
+% assert fp == 2*x*exp(x**2 - 2)
+% f0 = f.subs(x, 0)
+% fp0 = fp.subs(x, 0)
+% assert f0 == exp(-2)
+% assert fp0 == 0
+% # tangente: y = f(0) + f'(0)*(x-0) = e^(-2)
+% assert f0 + fp0*0 == exp(-2)
+% END-VERIFY
+\begin{corrige}{TCOMPL-LOG-EX-007}
+
+\textbf{Question 1.} $u(x) = x^2-2$, $u'(x) = 2x$. Donc $f'(x) = 2x\,\mathrm{e}^{x^2-2}$.
+
+\commentaireMarge{$f'(0)=0$ : la tangente est horizontale.}
+
+\textbf{Question 2.} $f(0) = \mathrm{e}^{-2}$ et $f'(0) = 0$. La tangente en $0$ est :
+\[ y = \mathrm{e}^{-2}. \]
+
+\textbf{Question 3.} Etudions $g(x) = f(x) - \mathrm{e}^{-2} = \mathrm{e}^{x^2-2} - \mathrm{e}^{-2}$.
+
+Au voisinage de $0$, $x^2-2 \geq -2$ donc $\mathrm{e}^{x^2-2} \geq \mathrm{e}^{-2}$, soit $g(x) \geq 0$.
+
+La courbe est \textbf{au-dessus} de la tangente au voisinage de $0$ (et en fait partout).
+
+\end{corrige}

@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-COMBI-EX-012", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "exercice", "capacites": ["TSPE-COMBINATOIRE-C2"], "capacites_codes": ["C2"], "methodes": ["M1"], "parcours": 2, "competences": ["raisonner", "modeliser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-COMBINATOIRE/exercices/TSPE-COMBI-EX-012.tex", "corrige_tex": "chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-012.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import binomial
+% assert 2**6 == 64
+% total = sum(binomial(6, k) for k in range(7))
+% assert total == 64
+% END-VERIFY
+\begin{exercice}{TSPE-COMBI-EX-005}{3}{15}
+Une pizzeria propose $6$ garnitures. Un client compose sa pizza en choisissant librement un sous-ensemble de ces $6$ garnitures (eventuellement aucune, eventuellement toutes).
+\begin{enumerate}
+  \item En utilisant le principe multiplicatif (chaque garniture est prise ou non), calculer le nombre total de pizzas differentes possibles.
+  \item Retrouver ce resultat en sommant, pour $k$ allant de $0$ a $6$, le nombre de pizzas ayant exactement $k$ garnitures.
+  \item Expliquer en une phrase pourquoi les deux methodes donnent necessairement le meme resultat.
+\end{enumerate}
+\end{exercice}

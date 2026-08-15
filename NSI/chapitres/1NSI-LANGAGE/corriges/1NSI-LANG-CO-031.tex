@@ -1,0 +1,29 @@
+% META: {"id": "1NSI-LANG-CO-031", "chapitre": "1NSI-LANGAGE", "type_objet": "correction", "exercice_ref": "1NSI-LANG-EX-001", "capacites": ["1NSI-LANGAGE-C6"], "sources_inspiration": [], "status": "approved", "capacites_codes": ["C6"], "parcours": 1, "fichier_exercice": "chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-031.tex"}
+% BEGIN-VERIFY
+% def somme_pairs(liste):
+%     total = 0
+%     for x in liste:
+%         if x % 2 == 0:
+%             total = total + x
+%     return total
+% assert somme_pairs([1, 2, 3, 4, 5, 6]) == 12
+% assert somme_pairs([1, 3, 5]) == 0
+% END-VERIFY
+\begin{corrige}{1NSI-LANG-EX-001}
+\textbf{1.}
+\begin{python}
+def somme_pairs(liste):
+    total = 0
+    for x in liste:
+        if x % 2 == 0:
+            total = total + x
+    return total
+\end{python}
+
+\textbf{2.} \textbf{Affectation} : \lstinline{total = 0}. \textbf{Boucle bornée} :
+\lstinline{for x in liste:} (le nombre d'itérations est connu, c'est la longueur de la
+liste). \textbf{Conditionnelle} : \lstinline{if x % 2 == 0:}.
+
+\textbf{3.} \lstinline{somme_pairs([1, 2, 3, 4, 5, 6])} vaut $2+4+6=12$.
+\lstinline{somme_pairs([1, 3, 5])} vaut $0$ (aucun élément pair).
+\end{corrige}

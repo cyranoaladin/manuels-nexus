@@ -1,0 +1,17 @@
+% META: {"id": "TNSI-LANG-CO-033", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "correction", "exercice_ref": "TNSI-LANG-EX-001", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-LANGAGES-ET-PROGRAMMATION-C7"], "parcours": 1, "fichier_exercice": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-033.tex"}
+% BEGIN-VERIFY
+% def somme_chiffres(n):
+%     if n < 10:
+%         return n
+%     return n % 10 + somme_chiffres(n // 10)
+% assert somme_chiffres(1234) == 10
+% END-VERIFY
+\begin{corrige}{TNSI-LANG-EX-001}
+\begin{python}
+def somme_chiffres(n):
+    if n < 10:
+        return n
+    return n % 10 + somme_chiffres(n // 10)
+\end{python}
+Le cas de base est \lstinline{n < 10} (un seul chiffre) : la fonction renvoie \lstinline{n} directement. Le cas général sépare le dernier chiffre (\lstinline{n % 10}) du reste du nombre (\lstinline{n // 10}), et additionne récursivement. Pour \lstinline{somme_chiffres(1234)}, l'arbre d'appels est \lstinline{somme_chiffres(1234)} $\to$ \lstinline{somme_chiffres(123)} $\to$ \lstinline{somme_chiffres(12)} $\to$ \lstinline{somme_chiffres(1)} : $4$ appels au total (le dernier atteint le cas de base).
+\end{corrige}

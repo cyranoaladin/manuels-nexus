@@ -1,0 +1,17 @@
+% META: {"id": "1NSI-TB-EX-012", "chapitre": "1NSI-TYPES-BASE", "type_objet": "exercice", "capacites": ["1NSI-TYPES-BASE-C2"], "parcours": 2, "competences": ["analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-012.tex", "corrige_tex": "chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-012.tex", "status": "approved", "capacites_codes": ["C2"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% assert (300).bit_length() == 9
+% def complement_a_2(x, n):
+%     if x < 0:
+%         x = (1 << n) + x
+%     return format(x, f'0{n}b')
+% assert complement_a_2(-12, 8) == '11110100'
+% assert complement_a_2(20, 8) == '00010100'
+% END-VERIFY
+\begin{exercice}{1NSI-TB-EX-002}{1}{12}
+\begin{enumerate}
+  \item Combien de bits sont nécessaires pour écrire $300$ en binaire ?
+  \item Écrire $20$ en complément à 2 sur $8$ bits.
+  \item Écrire $-12$ en complément à 2 sur $8$ bits (détailler : écriture de $12$, inversion des bits, ajout de $1$).
+\end{enumerate}
+\end{exercice}

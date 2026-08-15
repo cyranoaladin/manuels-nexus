@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-PROBA-EX-018", "chapitre": "TSPE-PROBABILITES", "type_objet": "exercice", "capacites": ["TSPE-PROBA-C4"], "capacites_codes": ["C4"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer", "modeliser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-018.tex", "corrige_tex": "chapitres/TSPE-PROBABILITES/corriges/TSPE-PROBA-CO-018.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% n_min = 1 / (4 * Rational(5,100)**2 * Rational(1,10))
+% assert n_min == 1000
+% END-VERIFY
+\begin{exercice}{TSPE-PROBA-EX-009}{2}{12}
+On souhaite estimer une proportion $p$ inconnue dans une population, avec une precision $\delta=0{,}05$ et un risque $\alpha=0{,}1$ (c'est-a-dire $P(|M_n-p|\geq\delta)\leq\alpha$).
+\begin{enumerate}
+  \item Rappeler la majoration de $V(M_n)$ valable pour tout $p \in [0,1]$.
+  \item En deduire une condition suffisante sur $n$ pour garantir $P(|M_n-p|\geq0{,}05)\leq0{,}1$.
+  \item Calculer la plus petite valeur de $n$ verifiant cette condition.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,22 @@
+% META: {"id": "1NSI-ADGK-CO-028", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "correction", "exercice_ref": "1NSI-ADGK-EX-003", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "approved", "capacites": ["1NSI-ALGO-PARCOURS-TRIS-C5"], "parcours": 2, "duree_min": 2, "fichier_exercice": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-028.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (2*x + 1)**5
+% fp = diff(f, x)
+% assert fp == 10*(2*x+1)**4
+% assert fp.subs(x, 0) == 10
+% assert fp.subs(x, Rational(-1,2)) == 0
+% END-VERIFY
+\begin{corrige}{1NSI-ADGK-EX-003}
+
+On pose $u(x) = 2x+1$. Alors $u'(x) = 2$.
+
+\commentaireMarge{Identifier $u(x) = 2x+1$ puis appliquer $(u^n)' = n\,u'\,u^{n-1}$.}
+
+La formule $(u^n)' = n\,u'\,u^{n-1}$ donne :
+\[ f'(x) = 5 \times 2 \times (2x+1)^4 = 10(2x+1)^4. \]
+
+On verifie : $f'(0) = 10$ et $f'\!\left(-\tfrac{1}{2}\right) = 0$.
+
+\end{corrige}

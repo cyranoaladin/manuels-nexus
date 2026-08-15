@@ -1,0 +1,21 @@
+% META: {"id": "TNSI-ARCH-CO-028", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "correction", "exercice_ref": "TNSI-ARCH-EX-004", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-ARCHITECTURES-MATERIELLES-SY-C5"], "parcours": 2, "fichier_exercice": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-028.tex"}
+% BEGIN-VERIFY
+% def chiffrer_xor(message, cle):
+%     return bytes(o ^ cle[i % len(cle)] for i, o in enumerate(message))
+% message = b"BAC2027"
+% cle = b"NSI"
+% chiffre = chiffrer_xor(message, cle)
+% dechiffre = chiffrer_xor(chiffre, cle)
+% assert dechiffre == message
+% assert chiffre != message
+% END-VERIFY
+\begin{corrige}{TNSI-ARCH-EX-004}
+\begin{python}
+message = b"BAC2027"
+cle = b"NSI"
+chiffre = chiffrer_xor(message, cle)
+dechiffre = chiffrer_xor(chiffre, cle)
+print(dechiffre == message)  # True
+\end{python}
+Ce chiffrement est dit \textbf{symétrique} car la \textbf{même clé} \texttt{cle} sert à la fois à chiffrer et à déchiffrer : il n'y a qu'un seul secret partagé, contrairement au chiffrement asymétrique qui utilise deux clés différentes (publique et privée).
+\end{corrige}

@@ -1,0 +1,31 @@
+% META: {"id": "TEXP-ARI-CO-045", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-045", "capacites_codes": ["C9"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # tangente a e^x en 0: y=1+x (deja vu)
+% # mais aussi: e^x >= 1 + x + x^2/2 (meilleure approx car convexe)
+% # en fait e^x - 1 - x - x^2/2: etudier
+% g = exp(x) - 1 - x - x**2/2
+% gp = diff(g, x)
+% gpp = diff(g, x, 2)
+% assert gpp == exp(x) - 1
+% assert gpp.subs(x, 0) == 0
+% assert g.subs(x, 0) == 0
+% assert gp.subs(x, 0) == 0
+% # g'' = e^x - 1 >= 0, donc g' croissante, g'(0)=0 => g'>=0 pour x>=0
+% assert gpp.subs(x, 1) == exp(1) - 1 > 0
+% assert g.subs(x, 1) == exp(1) - Rational(5,2)
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-045}
+
+Posons $g(x) = \mathrm{e}^x - 1 - x - \dfrac{x^2}{2}$.
+
+\commentaireMarge{Etudier $g'' = \mathrm{e}^x - 1 \geq 0$ sur $[0,+\infty[$ pour remonter au signe de $g$.}
+
+$g'(x) = \mathrm{e}^x - 1 - x$ et $g''(x) = \mathrm{e}^x - 1 \geq 0$ pour $x \geq 0$.
+
+Donc $g'$ est croissante sur $[0, +\infty[$, et comme $g'(0) = 0$, on a $g'(x) \geq 0$ sur $[0, +\infty[$.
+
+Ainsi $g$ est croissante sur $[0, +\infty[$ et $g(0) = 0$, d'ou $g(x) \geq 0$ : $\mathrm{e}^x \geq 1 + x + \dfrac{x^2}{2}$.
+
+\end{corrige}

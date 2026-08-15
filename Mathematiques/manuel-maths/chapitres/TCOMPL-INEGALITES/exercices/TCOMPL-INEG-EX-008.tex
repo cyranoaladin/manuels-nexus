@@ -1,0 +1,18 @@
+% META: {"id": "TCOMPL-INEG-EX-008", "chapitre": "TCOMPL-INEGALITES", "type_objet": "exercice", "capacites": ["TCOMPL-INEG-C3"], "capacites_codes": ["C3"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INEGALITES/exercices/TCOMPL-INEG-EX-008.tex", "corrige_tex": "chapitres/TCOMPL-INEGALITES/corriges/TCOMPL-INEG-CO-008.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (x**3 - 1)**4 * exp(2*x)
+% fp = diff(f, x)
+% # produit: (uv)' = u'v + uv'
+% u = (x**3-1)**4
+% v = exp(2*x)
+% up = 12*x**2*(x**3-1)**3
+% vp = 2*exp(2*x)
+% assert simplify(fp - (up*v + u*vp)) == 0
+% assert fp.subs(x, 1) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-INEG-EX-008}{2}{15}
+Calculer la derivee de $f(x) = (x^3 - 1)^4 \, \mathrm{e}^{2x}$ sur $\mathbb{R}$.
+
+\end{exercice}

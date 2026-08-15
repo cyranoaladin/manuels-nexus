@@ -1,0 +1,29 @@
+% META: {"id": "TEXP-ARI-EX-046", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C1"], "capacites_codes": ["C1"], "methodes": ["M3"], "parcours": 2, "competences": ["raisonner","raisonner"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-046.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-046.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% a = symbols('a')
+% f = symbols('f', cls=Function)
+% # Theoreme: si f'' >= 0 sur I, alors f(x) >= f(a) + f'(a)(x-a)
+% # Demonstration: g(x) = f(x) - f(a) - f'(a)(x-a)
+% # g(a) = 0, g'(a) = 0, g''(x) = f''(x) >= 0 => g convexe => g >= 0
+% # Verification sur f(x) = x^2, a = 2
+% fx = x**2
+% fa = 4
+% fpa = 4
+% tangente = fa + fpa*(x - 2)
+% g = fx - tangente
+% assert expand(g - (x - 2)**2) == 0
+% assert g.subs(x, 2) == 0
+% assert g.subs(x, 0) == 4
+% assert g.subs(x, 5) == 9
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-046}{2}{18}
+On veut demontrer le theoreme : \emph{Si $f'' \geq 0$ sur un intervalle $I$, alors pour tout $a \in I$ et tout $x \in I$ : $f(x) \geq f(a) + f'(a)(x - a)$.}
+\begin{enumerate}
+  \item Poser $g(x) = f(x) - f(a) - f'(a)(x-a)$. Que vaut $g(a)$ ? $g'(a)$ ?
+  \item Exprimer $g''(x)$ et en deduire le signe de $g$.
+  \item Conclure.
+\end{enumerate}
+
+\end{exercice}

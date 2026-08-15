@@ -1,0 +1,26 @@
+% META: {"id": "1NSI-ARCHOS-REMED-02", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "remediation", "capacites": ["1NSI-ARCHITECTURE-OS-C2"], "status": "approved", "capacites_codes": ["C2"]}
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C5 : confondre les 3 blocs de permissions (proprietaire/groupe/autres)
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-ARCHOS-RE-C5-EX1}{1}{10}
+Un élève lit la permission \lstinline{"rwxrwxr--"} et affirme que « le bloc du milieu
+(\lstinline{rwx}) concerne les \emph{autres} utilisateurs », alors qu'il concerne en
+réalité le \emph{groupe}.
+\begin{enumerate}
+  \item Rappeler l'ordre des trois catégories dans une chaîne de permissions.
+  \item En utilisant \lstinline{droit_accorde} du cours, déterminer si le \textbf{groupe} peut écrire dans ce fichier, puis si les \textbf{autres} utilisateurs peuvent y écrire.
+  \item Ces deux réponses sont-elles identiques ? Qu'est-ce que cela montre sur l'erreur de l'élève ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def droit_accorde(permissions, categorie, action):
+%     index = {"proprietaire": 0, "groupe": 3, "autres": 6}
+%     decalage = {"lecture": 0, "ecriture": 1, "execution": 2}
+%     position = index[categorie] + decalage[action]
+%     return permissions[position] != "-"
+% perm = "rwxrwxr--"
+% assert droit_accorde(perm, "groupe", "ecriture") is True
+% assert droit_accorde(perm, "autres", "ecriture") is False
+% END-VERIFY

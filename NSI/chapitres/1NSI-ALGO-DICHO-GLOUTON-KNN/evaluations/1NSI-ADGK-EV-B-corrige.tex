@@ -1,0 +1,55 @@
+% META: {"id": "1NSI-ADGK-1NSI-ADGK-EV-B-corrige", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-ADGK-1NSI-ADGK-EV-B", "capacites": ["P-ALGO-04", "P-ALGO-05", "P-ALGO-03"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% BEGIN-VERIFY
+% def recherche_dichotomique_trace(tableau_trie, valeur):
+%     borne_inf, borne_sup = 0, len(tableau_trie) - 1
+%     etapes = []
+%     while borne_inf <= borne_sup:
+%         milieu = (borne_inf + borne_sup) // 2
+%         etapes.append((borne_inf, borne_sup, milieu))
+%         if tableau_trie[milieu] == valeur:
+%             return milieu, etapes
+%         elif tableau_trie[milieu] < valeur:
+%             borne_inf = milieu + 1
+%         else:
+%             borne_sup = milieu - 1
+%     return -1, etapes
+% t = [2, 6, 11, 17, 24, 31, 39, 50]
+% idx, etapes = recherche_dichotomique_trace(t, 24)
+% assert idx == 4
+% assert etapes == [(0, 7, 3), (4, 7, 5), (4, 4, 4)]
+% def rendu_glouton(montant, pieces):
+%     pieces_triees = sorted(pieces, reverse=True)
+%     rendu = []
+%     for p in pieces_triees:
+%         while montant >= p:
+%             rendu.append(p)
+%             montant -= p
+%     return rendu
+% assert rendu_glouton(38, [20, 10, 5, 2, 1]) == [20, 10, 5, 2, 1]
+% END-VERIFY
+\begin{corrige}{1NSI-ADGK-1NSI-ADGK-EV-B-EX1}
+\textbf{1.} Itération 1 : \lstinline{inf=0}, \lstinline{sup=7}, \lstinline{milieu=3}
+(\lstinline{t[3]=17<24}). Itération 2 : \lstinline{inf=4}, \lstinline{sup=7},
+\lstinline{milieu=5} (\lstinline{t[5]=31>24}). Itération 3 : \lstinline{inf=4},
+\lstinline{sup=4}, \lstinline{milieu=4} (\lstinline{t[4]=24}, trouvé, indice $4$).
+
+\textbf{2.} $V$ vaut successivement $7-0=7$, $7-4=3$, $4-4=0$ : la suite $7,3,0$ est
+strictement décroissante.
+
+\textbf{3.} $V$ est un entier positif ou nul qui décroît strictement à chaque itération :
+une telle suite ne peut être infinie, donc la boucle se termine forcément.
+\end{corrige}
+
+\begin{corrige}{1NSI-ADGK-1NSI-ADGK-EV-B-EX2}
+\textbf{1.} Pour $38$ : $20$ (reste $18$), $10$ (reste $8$), $5$ (reste $3$), $2$ (reste
+$1$), $1$ (reste $0$). Rendu : \lstinline{[20, 10, 5, 2, 1]}.
+
+\textbf{2.} \lstinline{k_plus_proches_voisins(fleurs, (5.1, 1.5), 3)} renvoie
+\lstinline{"Iris"} : cette fleur est proche en longueur et largeur de pétale du groupe des
+iris.
+
+\textbf{3.} Avec $k=1$, la prédiction ne repose que sur le \textbf{seul} voisin le plus
+proche : si ce point unique est mal classé dans la base (une erreur de saisie, un cas
+atypique), la prédiction sera directement faussée, sans qu'aucun autre voisin ne vienne
+« corriger » cette erreur par un vote majoritaire.
+\end{corrige}

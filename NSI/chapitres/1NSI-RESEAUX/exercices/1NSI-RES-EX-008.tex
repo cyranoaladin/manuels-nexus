@@ -1,0 +1,42 @@
+% META: {"id": "1NSI-RES-EX-008", "chapitre": "1NSI-RESEAUX", "type_objet": "exercice", "capacites": ["1NSI-RESEAUX-C2"], "parcours": 2, "competences": ["analyser", "modeliser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-008.tex", "corrige_tex": "chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-008.tex", "status": "approved", "capacites_codes": ["C2"], "methodes": ["M1"]}
+% BEGIN-VERIFY
+% reseau = {
+%     "Salle1": ["Switch1"],
+%     "Salle2": ["Switch1"],
+%     "Switch1": ["Salle1", "Salle2", "Switch2"],
+%     "Switch2": ["Switch1", "Salle3"],
+%     "Salle3": ["Switch2"],
+% }
+% def peuvent_communiquer(reseau, depart, arrivee, visites=None):
+%     if visites is None:
+%         visites = set()
+%     if depart == arrivee:
+%         return True
+%     visites.add(depart)
+%     for voisin in reseau.get(depart, []):
+%         if voisin not in visites:
+%             if peuvent_communiquer(reseau, voisin, arrivee, visites):
+%                 return True
+%     return False
+% assert peuvent_communiquer(reseau, "Salle1", "Salle3") is True
+% reseau2 = dict(reseau)
+% reseau2["SalleIsolee"] = []
+% assert peuvent_communiquer(reseau2, "Salle1", "SalleIsolee") is False
+% END-VERIFY
+\begin{exercice}{1NSI-RES-EX-003}{2}{12}
+Le réseau d'un établissement scolaire relie trois salles à deux commutateurs :
+\begin{python}
+reseau = {
+    "Salle1": ["Switch1"],
+    "Salle2": ["Switch1"],
+    "Switch1": ["Salle1", "Salle2", "Switch2"],
+    "Switch2": ["Switch1", "Salle3"],
+    "Salle3": ["Switch2"],
+}
+\end{python}
+\begin{enumerate}
+  \item En utilisant \lstinline{peuvent_communiquer} du cours, vérifier que \lstinline{"Salle1"} et \lstinline{"Salle3"} peuvent communiquer, bien qu'elles ne soient reliées à aucun commutateur commun directement.
+  \item Ajouter une machine \lstinline{"SalleIsolee"} qui n'est reliée à \textbf{aucune} autre machine du réseau (dictionnaire avec une liste vide). Vérifie qu'elle ne peut communiquer avec aucune autre salle.
+  \item Pourquoi la fonction marque-t-elle les sommets \og visités \fg{} pendant sa recherche ? Que risquerait-il de se passer si ce réseau contenait un cycle (par exemple si \lstinline{Switch1} et \lstinline{Switch2} étaient reliés par \textbf{deux} câbles distincts, modélisés comme une arête supplémentaire) et que cette précaution était absente ?
+\end{enumerate}
+\end{exercice}

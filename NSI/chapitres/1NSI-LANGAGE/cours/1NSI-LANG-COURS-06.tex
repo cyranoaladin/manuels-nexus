@@ -1,0 +1,80 @@
+% META: {"id": "1NSI-LANG-COURS-06", "chapitre": "1NSI-LANGAGE", "type_objet": "cours", "capacites": ["1NSI-LANGAGE-C6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved", "capacites_codes": ["C6"]}
+\section{Constructions élémentaires}
+
+\margeAppui{Malgré leur grande diversité, presque tous les langages de programmation
+partagent le même petit noyau de constructions de base.}
+
+\definition[D1]{
+  Les \textbf{constructions élémentaires} d'un langage de programmation impératif sont :
+  la \textbf{séquence} (exécuter des instructions les unes après les autres), l'\textbf{affectation}
+  (donner une valeur à une variable), la \textbf{conditionnelle} (\lstinline{if}/\lstinline{else}),
+  les \textbf{boucles} (\textbf{bornées}, \lstinline{for}, dont le nombre de répétitions est
+  connu à l'avance ; \textbf{non bornées}, \lstinline{while}, qui se répètent tant qu'une
+  condition est vraie), et l'\textbf{appel de fonction}.
+}
+
+\exemple{La fonction \lstinline{somme_chiffres} illustre ces cinq constructions :}
+
+\begin{codereference}{Somme des chiffres d'un entier (toutes les constructions de base)}
+\begin{python}
+def somme_chiffres(n):
+    """Renvoie la somme des chiffres de l'entier positif n."""
+    total = 0                  # affectation
+    while n > 0:                # boucle NON bornee (while)
+        chiffre = n % 10
+        total = total + chiffre # sequence d'instructions
+        n = n // 10
+    return total
+
+for valeur in range(3):         # boucle bornee (for)
+    print(valeur, somme_chiffres(valeur * 100 + 34))  # appel de fonction
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def somme_chiffres(n):
+%     total = 0
+%     while n > 0:
+%         chiffre = n % 10
+%         total = total + chiffre
+%         n = n // 10
+%     return total
+% assert somme_chiffres(1234) == 10
+% assert somme_chiffres(0) == 0
+% assert somme_chiffres(9) == 9
+% END-VERIFY
+
+\propriete[Conditionnelle]{
+  L'instruction \lstinline{if ... elif ... else ...} exécute un bloc d'instructions
+  différent selon qu'une (ou plusieurs) condition(s) booléenne(s) est/sont vraie(s).
+}
+
+\begin{python}
+def est_pair(n):
+    if n % 2 == 0:
+        return True
+    else:
+        return False
+\end{python}
+
+% BEGIN-VERIFY
+% def est_pair(n):
+%     if n % 2 == 0:
+%         return True
+%     else:
+%         return False
+% assert est_pair(4) is True
+% assert est_pair(7) is False
+% END-VERIFY
+
+\erreurFrequente{Confondre boucle \textbf{bornée} (\lstinline{for}, nombre d'itérations
+connu à l'avance, par exemple \lstinline{for i in range(10)}) et boucle \textbf{non bornée}
+(\lstinline{while}, le nombre d'itérations dépend de l'évolution d'une condition et n'est
+pas toujours connu à l'avance). Utiliser une boucle \lstinline{while} sans faire évoluer la
+condition qu'elle teste crée une \textbf{boucle infinie}.}
+
+\alamachine{Écris une fonction \lstinline{compte_a_rebours(n)} qui affiche les entiers de
+\lstinline{n} à \lstinline{0} en utilisant une boucle \lstinline{while} (boucle non bornée),
+puis une version \lstinline{compte_a_rebours_for(n)} utilisant \lstinline{for} (boucle
+bornée, avec \lstinline{range} et un pas négatif). Compare les deux versions : laquelle
+te semble la plus naturelle ici ?}

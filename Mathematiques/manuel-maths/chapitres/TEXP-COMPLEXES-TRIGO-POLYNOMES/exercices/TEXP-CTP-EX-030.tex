@@ -1,0 +1,23 @@
+% META: {"id": "TEXP-CTP-EX-030", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "exercice", "capacites": ["TEXP-CTP-C2"], "capacites_codes": ["C2"], "methodes": ["M4"], "parcours": 1, "competences": ["raisonner","calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-030.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-030.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f' donnee par son tableau: croissante sur R-, decroissante sur R+, f'(0)=2
+% # cela suggere f'(x) = 2 - x^2, donc f(x) = 2x - x^3/3
+% fp = 2 - x**2
+% f = integrate(fp, x)
+% assert f == 2*x - x**3/3
+% fpp = diff(f, x, 2)
+% assert fpp == -2*x
+% assert solve(fp, x) == [-sqrt(2), sqrt(2)]
+% assert solve(fpp, x) == [0]
+% END-VERIFY
+\begin{exercice}{TEXP-CTP-EX-030}{2}{15}
+On donne le tableau de variations de $f'$ : $f'$ est croissante sur $\left]-\infty, 0\right]$, decroissante sur $\left[0, +\infty\right[$, avec $f'(0) = 2$ et $f'(\pm\sqrt{2}) = 0$. On suppose $f'(x) = 2 - x^2$.
+\begin{enumerate}
+  \item En deduire une expression possible de $f$.
+  \item Determiner les intervalles de convexite de $f$.
+  \item Esquisser la courbe de $f$.
+\end{enumerate}
+
+\end{exercice}

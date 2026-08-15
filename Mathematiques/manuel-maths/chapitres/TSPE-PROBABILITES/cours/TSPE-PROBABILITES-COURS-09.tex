@@ -1,0 +1,67 @@
+% META: {"id": "TSPE-PROBABILITES-COURS-09", "chapitre": "TSPE-PROBABILITES", "type_objet": "cours", "capacites_codes": ["C9"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TSPE-PROBA-C9"], "statut": "structure"}
+
+\section{Schéma de Bernoulli et loi binomiale}
+
+% ============================================================
+% STRATE 1 — Definitions et demonstration exigible
+% ============================================================
+
+\definition[1]{
+Une \textbf{epreuve de Bernoulli} est une experience aleatoire a deux issues : \textbf{succes} (probabilite $p$) et \textbf{echec} (probabilite $1-p$).
+
+Un \textbf{schema de Bernoulli} est la repetition de $n$ epreuves de Bernoulli identiques et independantes.
+}
+
+\definition[2]{
+Si $X$ compte le nombre de succes dans un schema de Bernoulli de parametres $n$ et $p$, on dit que $X$ suit la \textbf{loi binomiale} de parametres $n$ et $p$, notee $X \sim \mathcal{B}(n,p)$.
+}
+
+\theoreme{
+Si $X \sim \mathcal{B}(n,p)$, alors pour tout entier $k \in \{0,1,\ldots,n\}$ :
+\[
+  P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}.
+\]
+}
+
+\demonstration{
+On considere un chemin de l'arbre associe au schema de Bernoulli comportant exactement $k$ succes (S) et $n-k$ echecs (E), dans un ordre donne.
+
+Par independance des epreuves, la probabilite de ce chemin particulier est le produit des probabilites des branches :
+\[
+  \underbrace{p \times p \times \cdots \times p}_{k \text{ fois}} \times \underbrace{(1-p)\times\cdots\times(1-p)}_{n-k \text{ fois}} = p^k(1-p)^{n-k}.
+\]
+
+Cette probabilite est la \textbf{meme} pour tout chemin comportant exactement $k$ succes (l'ordre des succes/echecs ne change pas la valeur du produit, seulement le nombre de facteurs $p$ et $1-p$).
+
+Or le nombre de chemins de l'arbre comportant exactement $k$ succes parmi $n$ epreuves est le nombre de facons de choisir les $k$ positions des succes parmi les $n$ positions disponibles, soit $\dbinom{n}{k}$ (chapitre Combinatoire).
+
+L'evenement $(X=k)$ est realise par l'union de tous ces chemins (disjoints). Par le principe additif :
+\[
+  P(X=k) = \binom{n}{k} \times p^k(1-p)^{n-k}.
+\]
+}
+
+\margeAppui{
+Cette formule combine deux ingredients : le denombrement du nombre de chemins favorables ($\dbinom{n}{k}$, chapitre precedent) et le calcul de la probabilite d'un chemin particulier ($p^k(1-p)^{n-k}$, par independance).
+}
+
+\exemple{
+On lance un de equilibre $4$ fois. $X$ = nombre de fois ou l'on obtient un $6$. $X \sim \mathcal{B}\!\left(4,\dfrac{1}{6}\right)$.
+\[
+  P(X=2) = \binom{4}{2}\left(\frac{1}{6}\right)^2\left(\frac{5}{6}\right)^2 = 6 \times \frac{1}{36}\times\frac{25}{36} = \frac{150}{1296} = \frac{25}{216}.
+\]
+
+% BEGIN-VERIFY
+% from sympy import Rational, binomial
+% p = binomial(4,2) * Rational(1,6)**2 * Rational(5,6)**2
+% assert p == Rational(25, 216)
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier le coefficient binomial.} $P(X=k)$ n'est pas $p^k(1-p)^{n-k}$ seul (probabilite d'\emph{un} chemin), mais bien $\dbinom{n}{k}p^k(1-p)^{n-k}$ (somme sur tous les chemins favorables).
+}

@@ -1,0 +1,26 @@
+% META: {"id": "TNSI-LANG-CO-039", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "correction", "exercice_ref": "TNSI-LANG-EX-003", "capacites_codes": ["C9"], "sources_inspiration": [], "status": "approved", "capacites": ["TNSI-LANGAGES-ET-PROGRAMMATION-C9"], "parcours": 1, "fichier_exercice": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/exercices/TNSI-LANG-EX-039.tex"}
+% BEGIN-VERIFY
+% def mots_longs_imperatif(mots, longueur_min):
+%     resultat = []
+%     for mot in mots:
+%         if len(mot) >= longueur_min:
+%             resultat.append(mot.upper())
+%     return resultat
+% def mots_longs_fonctionnel(mots, longueur_min):
+%     return [mot.upper() for mot in mots if len(mot) >= longueur_min]
+% mots = ["chat", "ordinateur", "cle", "programmation"]
+% assert mots_longs_imperatif(mots, 6) == mots_longs_fonctionnel(mots, 6)
+% assert mots_longs_fonctionnel(mots, 6) == ["ORDINATEUR", "PROGRAMMATION"]
+% END-VERIFY
+\begin{corrige}{TNSI-LANG-EX-003}
+\begin{python}
+def mots_longs_fonctionnel(mots, longueur_min):
+    return [mot.upper() for mot in mots if len(mot) >= longueur_min]
+\end{python}
+\begin{python}
+mots = ["chat", "ordinateur", "cle", "programmation"]
+print(mots_longs_imperatif(mots, 6) == mots_longs_fonctionnel(mots, 6))  # True
+print(mots_longs_fonctionnel(mots, 6))  # ['ORDINATEUR', 'PROGRAMMATION']
+\end{python}
+Les deux versions produisent le même résultat : la version fonctionnelle exprime en une seule expression ce que la version impérative construit pas à pas avec une variable d'accumulation (\lstinline{resultat}) modifiée par des instructions successives.
+\end{corrige}

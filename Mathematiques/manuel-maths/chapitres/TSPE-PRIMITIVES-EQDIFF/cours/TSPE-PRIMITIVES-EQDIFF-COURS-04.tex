@@ -1,0 +1,48 @@
+% META: {"id": "TSPE-PRIMITIVES-EQDIFF-COURS-04", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "cours", "capacites_codes": ["C4"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TSPE-PRIMITIVES-EQDIFF-C4"], "statut": "structure"}
+
+\section{Équation différentielle $y' = ay + b$}
+
+% ============================================================
+% STRATE 1 — Methode et theoreme
+% ============================================================
+
+\theoreme{
+Soit $a \in \mathbb{R}^*$ et $b \in \mathbb{R}$. L'equation $y' = ay+b$ admet une unique solution constante $y_0 = -\dfrac{b}{a}$ (solution particuliere).
+
+Les solutions de $y'=ay+b$ sur $\mathbb{R}$ sont exactement les fonctions :
+\[
+  x \mapsto C\,\mathrm{e}^{ax} - \frac{b}{a}, \qquad C \in \mathbb{R}.
+\]
+}
+
+\margeAppui{
+\textbf{Methode.} On cherche d'abord la solution particuliere constante $y_0$ (verifiant $y_0'=0=ay_0+b$, d'ou $y_0=-b/a$). Puis on pose $z = y-y_0$ : $z' = y' = ay+b = a(z+y_0)+b = az + (ay_0+b) = az$ (car $ay_0+b=0$). Donc $z$ verifie $z'=az$, et $z(x)=C\mathrm{e}^{ax}$ ; d'ou $y = z+y_0 = C\mathrm{e}^{ax} - b/a$.
+}
+
+\exemple{
+Resoudre $y' = 2y - 6$, puis determiner la solution telle que $y(0)=1$.
+
+Solution particuliere constante : $y_0 = -\dfrac{-6}{2} = 3$ (on verifie : $y_0'=0$ et $2y_0-6=6-6=0$. \checkmark)
+
+Solutions generales : $y(x) = C\mathrm{e}^{2x} + 3$.
+
+Condition $y(0)=1$ : $C\mathrm{e}^0+3 = C+3 = 1$, donc $C=-2$.
+
+La solution cherchee est $y(x) = -2\mathrm{e}^{2x}+3$.
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff
+% x = symbols('x')
+% y = -2*exp(2*x) + 3
+% assert diff(y, x) == 2*y - 6
+% assert y.subs(x, 0) == 1
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Se tromper de signe pour la solution particuliere.} Pour $y'=ay+b$, la solution constante est $y_0 = -\dfrac{b}{a}$ (avec un signe moins), obtenue en resolvant $0 = ay_0+b$. Une erreur frequente est d'ecrire $y_0 = \dfrac{b}{a}$.
+}

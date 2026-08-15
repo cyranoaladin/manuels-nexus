@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-INTEG-CO-017", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "correction", "exercice_ref": "TSPE-INTEG-EX-001", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-CALCUL-INTEGRAL-C3"], "parcours": 1, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-017.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate
+% x = symbols('x')
+% I = integrate(x**2+1, (x, 0, 2))
+% assert 2*1 <= I <= 2*5
+% END-VERIFY
+\begin{corrige}{TSPE-INTEG-EX-001}
+
+\textbf{Q1.} $f$ est strictement croissante sur $[0,2]$ (somme de $x^2$ croissante sur $[0,+\infty[$ et d'une constante). Minimum : $f(0)=1$. Maximum : $f(2)=5$.
+
+\textbf{Q2.} Par la propriete d'encadrement, avec $m=1$, $M=5$, $b-a=2$ :
+\[
+  2 \leq \int_0^2 f(x)\,\mathrm{d}x \leq 10.
+\]
+
+\end{corrige}

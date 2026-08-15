@@ -1,0 +1,25 @@
+% META: {"id": "TEXP-GRA-CO-006", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige", "exercice_ref": "TEXP-GRA-EX-006", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', positive=True)
+% f = ln(1/x)
+% fp = diff(f, x)
+% assert simplify(fp) == -1/x
+% assert fp.subs(x, 1) == -1
+% assert fp.subs(x, 2) == Rational(-1,2)
+% END-VERIFY
+\begin{corrige}{TEXP-GRA-EX-006}
+
+\textbf{Question 1.} $f(x) = \ln\!\left(\dfrac{1}{x}\right) = -\ln(x)$ sur $\left]0,+\infty\right[$.
+
+\commentaireMarge{Utiliser $\ln(1/x) = -\ln(x)$ puis deriver.}
+
+\textbf{Question 2.}
+\begin{itemize}
+  \item \textbf{Methode 1} (simplification) : $f(x) = -\ln(x)$, donc $f'(x) = -\dfrac{1}{x}$.
+  \item \textbf{Methode 2} (composition) : on pose $u(x) = \dfrac{1}{x}$, $u'(x) = -\dfrac{1}{x^2}$.
+  \[ f'(x) = \frac{u'(x)}{u(x)} = \frac{-1/x^2}{1/x} = -\frac{1}{x}. \]
+\end{itemize}
+Les deux methodes donnent bien $f'(x) = -\dfrac{1}{x}$.
+
+\end{corrige}

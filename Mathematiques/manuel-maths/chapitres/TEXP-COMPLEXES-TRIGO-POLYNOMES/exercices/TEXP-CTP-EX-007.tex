@@ -1,0 +1,23 @@
+% META: {"id": "TEXP-CTP-EX-007", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "exercice", "capacites": ["TEXP-CTP-C7"], "capacites_codes": ["C7"], "methodes": ["M1"], "parcours": 1, "competences": ["raisonner","calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-007.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-007.tex", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x**2 - 2)
+% fp = diff(f, x)
+% assert fp == 2*x*exp(x**2 - 2)
+% f0 = f.subs(x, 0)
+% fp0 = fp.subs(x, 0)
+% assert f0 == exp(-2)
+% assert fp0 == 0
+% # tangente: y = f(0) + f'(0)*(x-0) = e^(-2)
+% assert f0 + fp0*0 == exp(-2)
+% END-VERIFY
+\begin{exercice}{TEXP-CTP-EX-007}{2}{15}
+Soit $f$ definie sur $\mathbb{R}$ par $f(x) = \mathrm{e}^{x^2 - 2}$.
+\begin{enumerate}
+  \item Calculer $f'(x)$.
+  \item Determiner l'equation de la tangente a la courbe de $f$ au point d'abscisse $0$.
+  \item La courbe est-elle au-dessus ou au-dessous de cette tangente au voisinage de $0$ ?
+\end{enumerate}
+
+\end{exercice}

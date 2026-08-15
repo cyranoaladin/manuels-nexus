@@ -1,0 +1,47 @@
+% META: {"id": "TSPE-PROBABILITES-COURS-10", "chapitre": "TSPE-PROBABILITES", "type_objet": "cours", "capacites_codes": ["C10"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved", "capacites": ["TSPE-CONCLGN-C1"], "statut": "structure"}
+
+\section{Utiliser la loi binomiale : seuils et calculs numériques}
+
+% ============================================================
+% STRATE 1 — Methode et exemple
+% ============================================================
+
+Pour $X \sim \mathcal{B}(n,p)$, on calcule frequemment :
+\begin{itemize}
+  \item $P(X=k)$ (probabilite ponctuelle) ;
+  \item $P(X \leq k) = \displaystyle\sum_{i=0}^{k} P(X=i)$ (probabilite cumulee) ;
+  \item $P(k \leq X \leq k') = P(X\leq k') - P(X \leq k-1)$.
+\end{itemize}
+
+\exemple{
+Une usine produit des pieces avec un taux de defaut de $p=0{,}05$. On preleve $n=20$ pieces au hasard (production supposee suffisamment grande pour assimiler ce prelevement a un schema de Bernoulli). $X$ = nombre de pieces defectueuses, $X \sim \mathcal{B}(20,\,0{,}05)$.
+
+\textbf{Probabilite d'avoir au plus $1$ piece defectueuse.}
+\[
+  P(X\leq 1) = P(X=0)+P(X=1) = (0{,}95)^{20} + 20\times0{,}05\times(0{,}95)^{19} \approx 0{,}3585+0{,}3774 = 0{,}7358.
+\]
+
+% BEGIN-VERIFY
+% from sympy import Rational, binomial
+% p = Rational(5, 100)
+% n = 20
+% P0 = (1-p)**n
+% P1 = binomial(n,1)*p*(1-p)**(n-1)
+% total = P0 + P1
+% assert round(float(total), 4) == 0.7358
+% END-VERIFY
+
+\textbf{Recherche d'un seuil.} On peut chercher le plus petit entier $k$ tel que $P(X \leq k) \geq 0{,}95$ (par exemple pour garantir un controle qualite avec un risque de $5\%$) : on calcule $P(X\leq k)$ pour $k=0,1,2,\ldots$ jusqu'a depasser $0{,}95$ (a l'aide d'un tableur ou d'un algorithme).
+}
+
+\margeAppui{
+En pratique, ces calculs se font a l'aide de la calculatrice (fonctions binomFdp/binomFRep) ou d'un algorithme Python (fonction \texttt{binom} du module \texttt{scipy.stats}, ou calcul direct par boucle).
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre $P(X\leq k)$ et $P(X<k)$.} $P(X<k) = P(X\leq k-1)$ pour une variable a valeurs entieres : la difference d'une unite sur la borne change le resultat. Toujours preciser si l'inegalite est stricte ou large.
+}

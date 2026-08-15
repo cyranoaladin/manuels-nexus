@@ -1,0 +1,31 @@
+% META: {"id": "TCOMPL-BAYES-CO-017", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "corrige", "exercice_ref": "TCOMPL-BAYES-EX-017", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**3 - 6*x**2 + 9*x + 1
+% fp = diff(f, x)
+% assert expand(fp) == 3*x**2 - 12*x + 9
+% assert solve(fp, x) == [1, 3]
+% assert f.subs(x, 1) == 5
+% assert f.subs(x, 3) == 1
+% # tangente en x=2: f(2)=3, f'(2)=-3, y=-3(x-2)+3=-3x+9
+% assert f.subs(x, 2) == 3
+% assert fp.subs(x, 2) == -3
+% END-VERIFY
+\begin{corrige}{TCOMPL-BAYES-EX-017}
+
+\textbf{Question 1.} $f'(x) = 3x^2 - 12x + 9 = 3(x-1)(x-3)$.
+
+\commentaireMarge{Factoriser $f'(x) = 3(x-1)(x-3)$.}
+
+$f' > 0$ sur $\left]-\infty,1\right[ \cup \left]3,+\infty\right[$, $f' < 0$ sur $[1,3]$.
+
+Maximum local $f(1) = 5$, minimum local $f(3) = 1$.
+
+\textbf{Question 2.} $f(2) = 3$ et $f'(2) = 3(1)(-1) = -3$. La tangente est $y = -3(x-2)+3 = -3x+9$.
+
+\textbf{Question 3.} $f''(x) = 6x - 12$, donc $f''(2) = 0$ : le point $x=2$ est un \textbf{point d'inflexion}.
+
+La courbe traverse sa tangente en $x = 2$ (changement de convexite).
+
+\end{corrige}

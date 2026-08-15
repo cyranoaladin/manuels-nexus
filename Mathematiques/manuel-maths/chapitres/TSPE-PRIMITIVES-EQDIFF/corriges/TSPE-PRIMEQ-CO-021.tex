@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-PRIMEQ-CO-021", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "correction", "exercice_ref": "TSPE-PRIMEQ-EX-005", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "approved", "capacites": ["TSPE-PRIMITIVES-EQDIFF-C4"], "parcours": 1, "duree_min": 2, "fichier_exercice": "chapitres/TSPE-PRIMITIVES-EQDIFF/exercices/TSPE-PRIMEQ-EX-021.tex", "mode_creation": "ex_nihilo"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, exp, simplify
+% x = symbols('x')
+% yp = 2*x - 1
+% assert simplify(diff(yp, x) - (3*yp + 5 - 6*x)) == 0
+% y = 6*exp(3*x) + yp
+% assert y.subs(x, 0) == 5
+% END-VERIFY
+\begin{corrige}{TSPE-PRIMEQ-EX-005}
+
+\textbf{Q1.} $y_p'(x) = 2$. Et $3y_p(x) + 5 - 6x = 3(2x-1)+5-6x = 6x-3+5-6x = 2$. On a bien $y_p' = 3y_p+5-6x$. \checkmark
+
+\textbf{Q2.} Solutions generales : $y(x) = C\mathrm{e}^{3x} + (2x-1)$, $C \in \mathbb{R}$.
+
+\textbf{Q3.} $y(0) = C - 1 = 5$, donc $C=6$. La solution cherchee est $y(x) = 6\mathrm{e}^{3x}+2x-1$.
+
+\end{corrige}

@@ -1,0 +1,21 @@
+% META: {"id": "TNSI-STRUCT-REMED-01", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "approved", "capacites": ["TNSI-STRUCTURES-DONNEES-C1"]}
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C03A : LIFO/FIFO
+%---------------------------------------------------------------
+
+\begin{exercice}{TNSI-STRUCT-RE-C03-EX1}{1}{10}
+On empile successivement les valeurs $10$, $20$, $30$ dans une pile, puis on depile deux fois. Quelle est la valeur au sommet de la pile apres ces operations ?
+\end{exercice}
+
+% BEGIN-VERIFY
+% pile = []
+% for v in (10, 20, 30):
+%     pile.append(v)
+% pile.pop()
+% pile.pop()
+% assert pile[-1] == 10
+% END-VERIFY
+
+\begin{corrige}{TNSI-STRUCT-RE-C03-EX1}
+Apres avoir empile $10, 20, 30$, la pile est (du bas vers le sommet) $[10, 20, 30]$. Depiler une fois retire $30$ (LIFO), depiler une deuxieme fois retire $20$. Il reste $10$ au sommet.
+\end{corrige}
