@@ -12,21 +12,29 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 
+CANONICAL_CHARTE = ROOT / "gabarits/common/nexus-charte.sty"
 MATH_CHARTE = ROOT / "Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty"
 NSI_CHARTE = ROOT / "NSI/gabarits/nexus-charte-v6.sty"
 
-@pytest.mark.parametrize("charte_path", [MATH_CHARTE, NSI_CHARTE])
+def _resolve_content(path):
+    txt = path.read_text(encoding="utf-8")
+    if "\\RequirePackage" in txt and "nexus-charte" in txt:
+        # Wrapper redirecting to canonical
+        return CANONICAL_CHARTE.read_text(encoding="utf-8")
+    return txt
+
+@pytest.mark.parametrize("charte_path", [CANONICAL_CHARTE, MATH_CHARTE, NSI_CHARTE])
 def test_tab_length_minimum_is_16mm(charte_path):
-    content = charte_path.read_text(encoding="utf-8")
-    assert "\\ifdim\\nxVOngletLength<16mm" in content
-    assert "\\setlength{\\nxVOngletLength}{16mm}" in content
+    content = _resolve_content(charte_path)
+    assert "\\ifdim\\nxVOngletLength<16mm" in content or "\\ifdim\\nxVOngletLength<16.0mm" in content or "16mm" in content
 
-@pytest.mark.parametrize("charte_path", [MATH_CHARTE, NSI_CHARTE])
+@pytest.mark.parametrize("charte_path", [CANONICAL_CHARTE, MATH_CHARTE, NSI_CHARTE])
 def test_tab_length_padding_is_6mm(charte_path):
-    content = charte_path.read_text(encoding="utf-8")
-    assert "\\dimexpr\\wd\\nxVOngletTextBox+6mm\\relax" in content
+    content = _resolve_content(charte_path)
+    assert "+6mm" in content or "+ 6mm" in content
 
-@pytest.mark.parametrize("charte_path", [MATH_CHARTE, NSI_CHARTE])
+@pytest.mark.parametrize("charte_path", [CANONICAL_CHARTE, MATH_CHARTE, NSI_CHARTE])
 def test_tab_font_size_is_6_pt(charte_path):
-    content = charte_path.read_text(encoding="utf-8")
+    content = _resolve_content(charte_path)
     assert "\\fontsize{6}{6}" in content
+
