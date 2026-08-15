@@ -5,11 +5,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{nexus-manuel}[2026/07/20 v6.0 Manuel Nexus Reussite - Canonique]
 
-\ifdefined\pdfvariable
-  \pdfvariable suppressoptionalinfo 511
-  \pdfvariable id {}
-\fi
-
 % ===========================================================================
 %  BASE KOMA-SCRIPT
 % ===========================================================================
