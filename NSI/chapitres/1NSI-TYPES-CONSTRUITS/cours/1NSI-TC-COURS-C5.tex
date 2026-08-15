@@ -37,17 +37,17 @@ print(len(copie))      # 4
 \begin{nxfigure}{Alias : deux noms pour le même objet}
 \begin{tikzpicture}
   
-ode[font=\sffamily\small,anchor=east] (vn) at (0, 0) {\lstinline{notes}};
+\node[font=\sffamily\small,anchor=east] (vn) at (0, 0) {\lstinline{notes}};
   
-ode[font=\sffamily\small,anchor=east] (vc) at (0, -1.2em) {\lstinline{copie}};
+\node[font=\sffamily\small,anchor=east] (vc) at (0, -1.2em) {\lstinline{copie}};
   
-ode[nxcell] (c0) at (4em, -0.6em) {12};
+\node[nxcell] (c0) at (4em, -0.6em) {12};
   
-ode[nxcell] (c1) at (6.2em, -0.6em) {15};
+\node[nxcell] (c1) at (6.2em, -0.6em) {15};
   
-ode[nxcell] (c2) at (8.4em, -0.6em) {9};
+\node[nxcell] (c2) at (8.4em, -0.6em) {9};
   
-ode[nxcell,fill=nxOr!20] (c3) at (10.6em, -0.6em) {18};
+\node[nxcell,fill=nxOr!20] (c3) at (10.6em, -0.6em) {18};
   \draw[nxref] (vn.east) -- (c0.west);
   \draw[nxref] (vc.east) -- (c0.west);
 \end{tikzpicture}
@@ -90,23 +90,23 @@ print(copie)           # [12, 15, 9, 18]
 \begin{nxfigure}{Copie indépendante : deux objets distincts}
 \begin{tikzpicture}
   
-ode[font=\sffamily\small,anchor=east] (vn) at (0, 0) {\lstinline{notes}};
+\node[font=\sffamily\small,anchor=east] (vn) at (0, 0) {\lstinline{notes}};
   
-ode[font=\sffamily\small,anchor=east] (vc) at (0, -2.4em) {\lstinline{copie}};
+\node[font=\sffamily\small,anchor=east] (vc) at (0, -2.4em) {\lstinline{copie}};
   
-ode[nxcell] (a0) at (4em, 0) {12};
+\node[nxcell] (a0) at (4em, 0) {12};
   
-ode[nxcell] (a1) at (6.2em, 0) {15};
+\node[nxcell] (a1) at (6.2em, 0) {15};
   
-ode[nxcell] (a2) at (8.4em, 0) {9};
+\node[nxcell] (a2) at (8.4em, 0) {9};
   
-ode[nxcell] (b0) at (4em, -2.4em) {12};
+\node[nxcell] (b0) at (4em, -2.4em) {12};
   
-ode[nxcell] (b1) at (6.2em, -2.4em) {15};
+\node[nxcell] (b1) at (6.2em, -2.4em) {15};
   
-ode[nxcell] (b2) at (8.4em, -2.4em) {9};
+\node[nxcell] (b2) at (8.4em, -2.4em) {9};
   
-ode[nxcell,fill=nxOr!20] (b3) at (10.6em, -2.4em) {18};
+\node[nxcell,fill=nxOr!20] (b3) at (10.6em, -2.4em) {18};
   \draw[nxarrow] (vn.east) -- (a0.west);
   \draw[nxarrow] (vc.east) -- (b0.west);
 \end{tikzpicture}

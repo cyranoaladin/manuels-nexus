@@ -20,9 +20,9 @@ On étudie la météo d'une ville : chaque jour est soit \og Ensoleillé \fg{} (
 \begin{center}
 \begin{tikzpicture}[node distance=3.2cm, >=Latex, thick]
   
-ode[circle, draw, minimum size=1.4cm] (E) {E};
+\node[circle, draw, minimum size=1.4cm] (E) {E};
   
-ode[circle, draw, minimum size=1.4cm, right of=E] (P) {P};
+\node[circle, draw, minimum size=1.4cm, right of=E] (P) {P};
   \draw[->] (E) to[loop above] node{$0{,}8$} (E);
   \draw[->] (P) to[loop above] node{$0{,}6$} (P);
   \draw[->] (E) to[bend left=15] node[above]{$0{,}2$} (P);

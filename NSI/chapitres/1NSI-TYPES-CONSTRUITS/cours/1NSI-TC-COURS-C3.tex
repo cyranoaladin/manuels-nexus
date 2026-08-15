@@ -33,23 +33,23 @@ print(image[1][1])  # 255 (pixel central)
 \begin{tikzpicture}
   \foreach \i/\v in {0/0, 1/0, 2/0}{
     
-ode[nxcell] at ({\i*2.2em}, 0) {\v};
+\node[nxcell] at ({\i*2.2em}, 0) {\v};
     
-ode[font=\tiny\sffamily,color=nxGris] at ({\i*2.2em}, 0.9em) {\i};}
+\node[font=\tiny\sffamily,color=nxGris] at ({\i*2.2em}, 0.9em) {\i};}
   \foreach \i/\v in {0/0, 1/255, 2/0}{
     
-ode[nxcell,fill=nxOr!20] at ({\i*2.2em}, -1.8em) {\v};
+\node[nxcell,fill=nxOr!20] at ({\i*2.2em}, -1.8em) {\v};
     
-ode[font=\tiny\sffamily,color=nxGris] at ({\i*2.2em}, -0.9em) {\i};}
+\node[font=\tiny\sffamily,color=nxGris] at ({\i*2.2em}, -0.9em) {\i};}
   \foreach \i/\v in {0/0, 1/0, 2/0}{
     
-ode[nxcell] at ({\i*2.2em}, -3.6em) {\v};}
+\node[nxcell] at ({\i*2.2em}, -3.6em) {\v};}
   
-ode[font=\tiny\sffamily,color=nxGris,anchor=east] at (-1em, 0) {ligne 0};
+\node[font=\tiny\sffamily,color=nxGris,anchor=east] at (-1em, 0) {ligne 0};
   
-ode[font=\tiny\sffamily,color=nxGris,anchor=east] at (-1em, -1.8em) {ligne 1};
+\node[font=\tiny\sffamily,color=nxGris,anchor=east] at (-1em, -1.8em) {ligne 1};
   
-ode[font=\tiny\sffamily,color=nxGris,anchor=east] at (-1em, -3.6em) {ligne 2};
+\node[font=\tiny\sffamily,color=nxGris,anchor=east] at (-1em, -3.6em) {ligne 2};
   \draw[nxarrow,nxOr] (3.5em, -3em) -- (2.2em, -1.8em)
     node[midway,right,font=\footnotesize\sffamily] {\lstinline{image[1][1]}};
 \end{tikzpicture}

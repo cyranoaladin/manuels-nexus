@@ -27,11 +27,11 @@ Cette approximation utilise l'ordonnée de la tangente au voisinage de $a$.}
   \addplot[point,nxOr] coordinates {(2.3, {2*(2.3-2)+2.5})};
   \draw[nxRouge,line width=0.5pt,<->] (axis cs:2.35,{0.5*2.3^2+0.5}) -- node[right,font=\scriptsize] {écart} (axis cs:2.35,{2*(2.3-2)+2.5});
   
-ode[anchor=north east,font=\scriptsize,nxBleu] at (axis cs:2,2.5) {$a$};
+\node[anchor=north east,font=\scriptsize,nxBleu] at (axis cs:2,2.5) {$a$};
   
-ode[anchor=south west,font=\scriptsize,nxGris] at (axis cs:2.3,{2*(2.3-2)+2.5}) {$f(a)+f'(a)h$};
+\node[anchor=south west,font=\scriptsize,nxGris] at (axis cs:2.3,{2*(2.3-2)+2.5}) {$f(a)+f'(a)h$};
   
-ode[anchor=north west,font=\scriptsize,nxVert] at (axis cs:2.3,{0.5*2.3^2+0.5}) {$f(a+h)$};
+\node[anchor=north west,font=\scriptsize,nxVert] at (axis cs:2.3,{0.5*2.3^2+0.5}) {$f(a+h)$};
 \end{axis}
 \end{tikzpicture}
 

@@ -17,13 +17,13 @@ d'organisation : l'architecture de von Neumann.}
   liaison/.style={draw=nxBleu, line width=0.8pt, <->, >=Stealth}
 ]
   
-ode[boite] (uc) at (-2.2,2) {Processeur (UC)\\[2pt]\footnotesize registres, UAL, séquenceur};
+\node[boite] (uc) at (-2.2,2) {Processeur (UC)\\[2pt]\footnotesize registres, UAL, séquenceur};
   
-ode[boite] (mem) at (2.2,2) {Mémoire\\[2pt]\footnotesize instructions et données};
+\node[boite] (mem) at (2.2,2) {Mémoire\\[2pt]\footnotesize instructions et données};
   
-ode[boite, minimum width=1.5cm] (entree) at (-2.2,-2) {Entrées};
+\node[boite, minimum width=1.5cm] (entree) at (-2.2,-2) {Entrées};
   
-ode[boite, minimum width=1.5cm] (sortie) at (2.2,-2) {Sorties};
+\node[boite, minimum width=1.5cm] (sortie) at (2.2,-2) {Sorties};
 
   \draw[bus] (-4,0) -- (4,0) node[midway, above, font=\tiny\sffamily] {bus};
   \draw[liaison] (uc.south) -- (-2.2,0);

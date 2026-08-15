@@ -21,12 +21,12 @@
   % Points de lecture sur la tangente
   \addplot[point,nxOr] coordinates {(1,{1.2*(1-3)+2.2}) (5,{1.2*(5-3)+2.2})};
   
-ode[anchor=south east,font=\footnotesize,nxBleu] at (axis cs:3,2.2) {point de contact};
+\node[anchor=south east,font=\footnotesize,nxBleu] at (axis cs:3,2.2) {point de contact};
   % Flèches de lecture
   \draw[-{Stealth},nxOr,line width=0.6pt] (axis cs:1,-0.2) -- node[right,font=\footnotesize] {$+4.8$} (axis cs:1,4.6);
   \draw[-{Stealth},nxOr,line width=0.6pt] (axis cs:1,-0.2) -- node[below,font=\footnotesize] {$+4$} (axis cs:5,-0.2);
   
-ode[anchor=north,font=\footnotesize,nxOr] at (axis cs:3,-0.3) {pente $=\frac{4{,}8}{4}=1{,}2$};
+\node[anchor=north,font=\footnotesize,nxOr] at (axis cs:3,-0.3) {pente $=\frac{4{,}8}{4}=1{,}2$};
 \end{axis}
 \end{tikzpicture}
 
