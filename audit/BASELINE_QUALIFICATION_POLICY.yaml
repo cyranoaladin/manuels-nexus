@@ -423,7 +423,7 @@ approved_transition:
   resolved_fingerprint_digest: sha256:b652287acfa1d91c62446b1dc3f251b46980ca6363968a14733b3e2e91bf3631
   retained_fingerprint_count: 2677
 artifact_type: baseline_qualification_policy
-control_digest: sha256:de4c533db0a12d62520e8db02b4a1c80b01a0bdc45c791c1082a8ff2d8c91be9
+control_digest: sha256:6441432023fbd381d2004df8fb54ebcf7bd8c2aef72241d55d40b8e6b6df195d
 decision:
   approved_by: Alaeddine Ben Rhouma
   approver_role: Direction scientifique et éditoriale Nexus Réussite
@@ -437,6 +437,57 @@ initial_policy:
   - accepted_exception
   - false_positive
   - fixed
+  rules:
+  - decision:
+      disposition: open_debt
+      owner: ingenierie_build_qualite
+      reason: Assembleur invalide ou non conforme.
+      release_blocking: true
+    id: assembler-invalid
+    match:
+      categories:
+      - assembler_invalid
+    order: 50
+  - decision:
+      disposition: open_debt
+      owner: direction_editoriale_pedagogique
+      reason: Incohérence de contexte disciplinaire ou pédagogique.
+      release_blocking: true
+    id: context-mismatches
+    match:
+      categories:
+      - context_mismatches
+    order: 51
+  - decision:
+      disposition: open_debt
+      owner: ingenierie_build_qualite
+      reason: Identifiant d'objet dupliqué.
+      release_blocking: true
+    id: duplicate-ids
+    match:
+      categories:
+      - duplicate_ids
+    order: 52
+  - decision:
+      disposition: open_debt
+      owner: ingenierie_build_qualite
+      reason: Cycle de dépendances LaTeX détecté.
+      release_blocking: true
+    id: latex-cycles
+    match:
+      categories:
+      - latex_cycles
+    order: 53
+  - decision:
+      disposition: open_debt
+      owner: ingenierie_build_qualite
+      reason: Fichier orphelin non rattaché.
+      release_blocking: true
+    id: orphan-files
+    match:
+      categories:
+      - orphan_files
+    order: 54
 owners:
   direction_editoriale_pedagogique:
     scope:
