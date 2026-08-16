@@ -2049,7 +2049,7 @@ def _compare_anomaly_debt(
             for field in ("owner", "justification", "qualification_digest", "disposition", "policy_rule"):
                 if prev.get(field) is not None and entry.get(field) is None:
                     entry[field] = prev[field]
-            if entry.get("qualified") is not True and prev.get("qualified") is True and entry.get("qualification_digest") == prev.get("qualification_digest"):
+            if prev.get("qualified") is True and entry.get("qualified") is not False:
                 entry["qualified"] = True
     history = [
         _canonicalize(dict(entry))
@@ -2161,7 +2161,7 @@ def _compare_anomaly_debt(
             for field in ("owner", "justification", "qualification_digest", "disposition", "policy_rule"):
                 if old_entry.get(field) is not None and new_entry.get(field) is None:
                     new_entry[field] = old_entry[field]
-            if new_entry.get("qualified") is not True and old_entry.get("qualified") is True and new_entry.get("qualification_digest") == old_entry.get("qualification_digest"):
+            if old_entry.get("qualified") is True and new_entry.get("qualified") is not False:
                 new_entry["qualified"] = True
             modified.append(
                 {
