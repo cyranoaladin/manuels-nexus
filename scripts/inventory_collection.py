@@ -2070,7 +2070,7 @@ def _compare_anomaly_debt(
         if entry.get("fingerprint")
     }
 
-    failures = _active_debt_qualification_failures(current)
+    failures: list[str] = []
     improvements: list[str] = []
     unchanged: list[str] = []
     new: list[str] = []
@@ -2227,6 +2227,8 @@ def _compare_anomaly_debt(
         else:
             new.append(fingerprint)
             failures.append(f"anomalie nouvelle fp={fingerprint}")
+
+    failures.extend(_active_debt_qualification_failures(current))
 
     return {
         "failures": sorted(set(failures)),
