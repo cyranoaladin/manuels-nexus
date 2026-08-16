@@ -66,10 +66,11 @@ def build_dir_name() -> str:
 def output_stem(variant: str) -> str:
     return f"MANUEL_{BOOK_ID}_{variant}"
 ORDER = [
-    ("cours", "00_ouverture"),
-    ("cours", "01_diagnostic"),
-    ("cours", "02_activites"),
+    ("cours", "00_ouverture*"),
+    ("cours", "01_diagnostic*"),
+    ("cours", "02_activites*"),
         ("cours", "1*"),
+        ("cours", "T*"),
     ("methodes", "*"),
     ("exercices", "*"),
     ("coups_de_pouce", "*"),
@@ -94,10 +95,11 @@ VARIANTS = [
 ]
 VARIANT_ORDERS = {
     "eleve": [
-        ("cours", "00_ouverture"),
-        ("cours", "01_diagnostic"),
-        ("cours", "02_activites"),
+        ("cours", "00_ouverture*"),
+        ("cours", "01_diagnostic*"),
+        ("cours", "02_activites*"),
             ("cours", "1*"),
+        ("cours", "T*"),
         ("methodes", "*"),
         ("exercices", "*"),
         ("coups_de_pouce", "*"),
@@ -107,10 +109,11 @@ VARIANT_ORDERS = {
         ("ece", "*"),
     ],
     "professeur": [
-        ("cours", "00_ouverture"),
-        ("cours", "01_diagnostic"),
-        ("cours", "02_activites"),
+        ("cours", "00_ouverture*"),
+        ("cours", "01_diagnostic*"),
+        ("cours", "02_activites*"),
             ("cours", "1*"),
+        ("cours", "T*"),
         ("methodes", "*"),
         ("exercices", "*"),
         ("coups_de_pouce", "*"),
@@ -327,8 +330,6 @@ def collect_variant_objects(variant: str) -> list[Path]:
                 patterns = ("1*", "T*", "*_cours*", "*invalid*", "*indented*")
                 for pat in patterns:
                     for path in sorted((chapter_dir / directory).glob(f"{pat}.tex")):
-                        if path.name.startswith(("00_ouverture", "01_diagnostic", "02_activites", "07_td")):
-                            continue
                         if path not in tracked_objects:
                             continue
                         path = _confined_object(chapter_dir, path)

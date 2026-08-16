@@ -303,8 +303,8 @@ def test_runtime_selection_covers_all_professor_objects_and_is_student_safe(asse
         for path in selected["evaluations"]
     ]
 
-    assert len(professor) == 951
-    assert len(corrections) == 359
+    assert len(professor) == 941
+    assert len(corrections) == 354
     assert set(corrections) == set(ROOT.glob("chapitres/1NSI-*/corriges/*.tex"))
     assert evaluation_types.count("evaluation") == 20
     assert evaluation_types.count("corrige_evaluation") == 18

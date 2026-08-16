@@ -4816,6 +4816,7 @@ def _add_reference_graph(
     reverse_corrections: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for correction in objects:
         if correction["source_type"] not in {
+            "correction",
             "corrige",
             "corrige_evaluation",
             "evaluation_corrige",
@@ -4837,6 +4838,7 @@ def _add_reference_graph(
             )
             candidate = objects_by_path.get(explicit_target)
             if candidate is not None and candidate["source_type"] in {
+                "correction",
                 "corrige",
                 "corrige_evaluation",
                 "evaluation_corrige",
@@ -4851,7 +4853,7 @@ def _add_reference_graph(
         if correction is None and "-EX-" in exercise["id"]:
             conventional_id = exercise["id"].replace("-EX-", "-CO-", 1)
             candidates = objects_by_id.get(conventional_id, [])
-            if len(candidates) == 1 and candidates[0]["source_type"] == "corrige":
+            if len(candidates) == 1 and candidates[0]["source_type"] in {"corrige", "correction"}:
                 correction = candidates[0]
                 mode = "id_convention"
         if correction is None:

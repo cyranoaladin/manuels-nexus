@@ -1,0 +1,104 @@
+{
+  "failure_count": 9,
+  "failures": [
+    {
+      "nodeid": "tests/test_inventory_collection.py::test_repository_baseline_is_frozen_schema_valid_and_gate_green",
+      "suite": "inventory_collection",
+      "failure_type": "QualificationError",
+      "message_normalized": "jeu approuvé: count, fingerprint digest or category counts drift",
+      "related_anomaly_category": "baseline_count_drift",
+      "expected_to_be_fixed_by": "A0-G221 remediation campaign",
+      "baseline_governance_only": true,
+      "actual_product_defect": false,
+      "unexpected_regression": false
+    },
+    {
+      "nodeid": "tests/test_inventory_collection.py::test_materialize_baseline_qualifications_check_is_read_only",
+      "suite": "inventory_collection",
+      "failure_type": "QualificationError",
+      "message_normalized": "jeu approuvé: count, fingerprint digest or category counts drift",
+      "related_anomaly_category": "baseline_count_drift",
+      "expected_to_be_fixed_by": "A0-G221 remediation campaign",
+      "baseline_governance_only": true,
+      "actual_product_defect": false,
+      "unexpected_regression": false
+    },
+    {
+      "nodeid": "tests/test_inventory_collection.py::test_materialization_revalidations_use_only_the_owned_lock_identity",
+      "suite": "inventory_collection",
+      "failure_type": "QualificationError",
+      "message_normalized": "jeu approuvé: count, fingerprint digest or category counts drift",
+      "related_anomaly_category": "baseline_count_drift",
+      "expected_to_be_fixed_by": "A0-G221 remediation campaign",
+      "baseline_governance_only": true,
+      "actual_product_defect": false,
+      "unexpected_regression": false
+    },
+    {
+      "nodeid": "tests/test_inventory_collection.py::test_live_nsi_manual_declaration_covers_1nsi_and_tnsi",
+      "suite": "inventory_collection",
+      "failure_type": "QualificationError",
+      "message_normalized": "jeu approuvé: count, fingerprint digest or category counts drift",
+      "related_anomaly_category": "baseline_count_drift",
+      "expected_to_be_fixed_by": "A0-G221 remediation campaign",
+      "baseline_governance_only": true,
+      "actual_product_defect": false,
+      "unexpected_regression": false
+    },
+    {
+      "nodeid": "tests/test_baseline_qualification.py::test_repository_approved_set_has_exact_category_and_owner_counts",
+      "suite": "baseline_qualification",
+      "failure_type": "QualificationError",
+      "message_normalized": "jeu approuvé: count, fingerprint digest or category counts drift",
+      "related_anomaly_category": "baseline_count_drift",
+      "expected_to_be_fixed_by": "A0-G221 remediation campaign",
+      "baseline_governance_only": true,
+      "actual_product_defect": false,
+      "unexpected_regression": false
+    },
+    {
+      "nodeid": "tests/test_baseline_qualification.py::test_materialization_plan_preserves_history_and_emits_all_required_fields",
+      "suite": "baseline_qualification",
+      "failure_type": "QualificationError",
+      "message_normalized": "jeu approuvé: count, fingerprint digest or category counts drift",
+      "related_anomaly_category": "baseline_count_drift",
+      "expected_to_be_fixed_by": "A0-G221 remediation campaign",
+      "baseline_governance_only": true,
+      "actual_product_defect": false,
+      "unexpected_regression": false
+    },
+    {
+      "nodeid": "tests/test_baseline_qualification.py::test_repository_registry_excludes_prior_policy_from_current_policy",
+      "suite": "baseline_qualification",
+      "failure_type": "QualificationError",
+      "message_normalized": "jeu approuvé: count, fingerprint digest or category counts drift",
+      "related_anomaly_category": "baseline_count_drift",
+      "expected_to_be_fixed_by": "A0-G221 remediation campaign",
+      "baseline_governance_only": true,
+      "actual_product_defect": false,
+      "unexpected_regression": false
+    },
+    {
+      "nodeid": "tests/test_baseline_qualification.py::test_materialization_plan_corrects_policy_entry_drift_after_materialization",
+      "suite": "baseline_qualification",
+      "failure_type": "QualificationError",
+      "message_normalized": "jeu approuvé: count, fingerprint digest or category counts drift",
+      "related_anomaly_category": "baseline_count_drift",
+      "expected_to_be_fixed_by": "A0-G221 remediation campaign",
+      "baseline_governance_only": true,
+      "actual_product_defect": false,
+      "unexpected_regression": false
+    },
+    {
+      "nodeid": "tests/test_baseline_qualification.py::test_materialization_refuses_approved_set_drift_without_partial_payload",
+      "suite": "baseline_qualification",
+      "failure_type": "QualificationError",
+      "message_normalized": "jeu approuvé pré-matérialisation: source/model digest drift",
+      "related_anomaly_category": "baseline_count_drift",
+      "expected_to_be_fixed_by": "A0-G221 remediation campaign",
+      "baseline_governance_only": true,
+      "actual_product_defect": false,
+      "unexpected_regression": false
+    }
+  ]
+}
