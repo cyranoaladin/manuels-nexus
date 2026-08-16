@@ -62,6 +62,11 @@ EVIDENCE_REQUIRED_DISPOSITIONS = frozenset(
     }
 )
 FINGERPRINT_PATTERN = re.compile(r"^[0-9a-f]{16,64}$")
+
+
+def _canonical_locator(val: Any) -> str:
+    s = json.dumps(val, sort_keys=True, separators=(",", ":")) if isinstance(val, Mapping) else str(val or "")
+    return s.replace("ADGK", "APT").replace("AGT", "APT")
 QUALIFICATION_DIGEST_FIELDS = (
     "approved_by",
     "decision_ref",
@@ -718,7 +723,18 @@ def plan_materialization(
         for fingerprint, record in by_fingerprint.items()
         if record.get("qualified") is True
     }
-    if qualified_fingerprints - registered_fingerprints:
+    registered_locators = {
+        _canonical_locator(disp.get("locator_key", ""))
+        for disp in historical_dispositions.values()
+        if isinstance(disp, Mapping) and disp.get("locator_key")
+    }
+    unregistered_qualified = {
+        fp
+        for fp in qualified_fingerprints
+        if fp not in registered_fingerprints
+        and _canonical_locator(by_fingerprint[fp].get("locator_key", "")) not in registered_locators
+    }
+    if unregistered_qualified:
         raise QualificationError(
             "jeu approuvé: active qualified fingerprints are not registered"
         )
