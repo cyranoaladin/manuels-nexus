@@ -718,19 +718,15 @@ def plan_materialization(
         raise QualificationError(
             "jeu approuvé pré-matérialisation: source/model digest drift"
         )
-    registered_locators = {
-        _canonical_locator(disp.get("locator_key", ""))
-        for disp in historical_dispositions.values()
-        if isinstance(disp, Mapping) and disp.get("locator_key")
-    }
     qualified_fingerprints = {
         fingerprint
         for fingerprint, record in by_fingerprint.items()
         if record.get("qualified") is True
-        and (
-            fingerprint in registered_fingerprints
-            or _canonical_locator(record.get("locator_key", "")) in registered_locators
-        )
+    }
+    registered_locators = {
+        _canonical_locator(disp.get("locator_key", ""))
+        for disp in historical_dispositions.values()
+        if isinstance(disp, Mapping) and disp.get("locator_key")
     }
     unregistered_qualified = {
         fp
