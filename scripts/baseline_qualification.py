@@ -503,6 +503,15 @@ def classify_anomaly(
     }
 
 
+def _is_qualifiable_by_policy(
+    policy: Mapping[str, Any],
+    category: str,
+    anomaly: Mapping[str, Any],
+) -> bool:
+    decision = classify_anomaly(policy, category, anomaly)
+    return decision is not None and decision.get("disposition") != "open_debt"
+
+
 def _unqualified_entry(
     record: Mapping[str, Any],
     reason: str,
@@ -732,17 +741,15 @@ def plan_materialization(
         fingerprint
         for fingerprint, record in by_fingerprint.items()
         if record.get("qualified") is True
-    }
-    unregistered_qualified = {
-        fp
-        for fp in qualified_fingerprints
-        if fp not in registered_or_locators
-        and (
-            not registered_fingerprints
-            or fp in policy_generated_fingerprints
-            or _canonical_locator(by_fingerprint[fp].get("locator_key", "")) in registered_locators
+        and _is_qualifiable_by_policy(
+            policy,
+            str(record.get("category", "")),
+            record.get("anomaly", {})
+            if isinstance(record.get("anomaly"), Mapping)
+            else {},
         )
     }
+    unregistered_qualified = qualified_fingerprints - registered_or_locators
     if unregistered_qualified:
         raise QualificationError(
             "jeu approuvé: active qualified fingerprints are not registered"
