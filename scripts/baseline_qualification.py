@@ -732,9 +732,20 @@ def plan_materialization(
         fingerprint
         for fingerprint, record in by_fingerprint.items()
         if record.get("qualified") is True
-        and bool(_matching_rules(policy, str(record.get("category", "")), record.get("anomaly", {})))
     }
-    if qualified_fingerprints - registered_or_locators:
+    unregistered_qualified = {
+        fp
+        for fp in qualified_fingerprints
+        if fp not in registered_or_locators
+        and (
+            by_fingerprint[fp].get("qualification_policy_digest") == policy_digest
+            or (
+                by_fingerprint[fp].get("policy_rule")
+                and by_fingerprint[fp].get("policy_rule") != "open-debt"
+            )
+        )
+    }
+    if unregistered_qualified:
         raise QualificationError(
             "jeu approuvé: active qualified fingerprints are not registered"
         )
