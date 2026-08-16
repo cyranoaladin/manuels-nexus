@@ -1,0 +1,47 @@
+{
+  "total_broken_meta": 2803,
+  "clusters": [
+    {
+      "cluster_id": "CLUSTER-META-01",
+      "name": "Missing Course/Exercise Target META ID",
+      "count": 2150,
+      "manuals": [
+        "1NSI",
+        "1SPE",
+        "TNSI",
+        "TSPE_2026_2027"
+      ],
+      "root_cause": "Référence META explicite dans un exercice/méthode vers un ID non déclaré",
+      "analyzer_bug": false,
+      "source_bug": true,
+      "fix_strategy": "Déclaration ou correction de l ID cible dans la source TeX"
+    },
+    {
+      "cluster_id": "CLUSTER-META-02",
+      "name": "Legacy NSI ID Pattern (ADGK)",
+      "count": 450,
+      "manuals": [
+        "1NSI"
+      ],
+      "root_cause": "Ancien préfixe ADGK dans les fichiers de cours ou méthodes",
+      "analyzer_bug": false,
+      "source_bug": true,
+      "fix_strategy": "Alignement sur le préfixe d identifiant APT"
+    },
+    {
+      "cluster_id": "CLUSTER-META-03",
+      "name": "Capacity Naming Variation",
+      "count": 203,
+      "manuals": [
+        "1SPE",
+        "TSPE_2026_2027",
+        "TCOMPL",
+        "TEXPERTES"
+      ],
+      "root_cause": "Variante de majuscule/underscore dans le code de capacité officielle",
+      "analyzer_bug": true,
+      "source_bug": false,
+      "fix_strategy": "Normalisation de la table d alias dans l analyseur d inventaire"
+    }
+  ]
+}
