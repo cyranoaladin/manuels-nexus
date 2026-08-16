@@ -325,8 +325,19 @@ def validate_materialized_registry(
     )
     for active in active_records:
         fingerprint = str(active.get("fingerprint", ""))
+        category = str(active.get("category", ""))
+        anomaly = active.get("anomaly")
+        if not isinstance(anomaly, Mapping) or not _is_qualifiable_by_policy(policy, category, anomaly):
+            continue
         actual = dispositions.get(fingerprint)
         if not isinstance(actual, Mapping):
+            loc = _canonical_locator(active.get("locator_key", ""))
+            if loc and any(
+                _canonical_locator(d.get("locator_key", "")) == loc
+                for d in dispositions.values()
+                if isinstance(d, Mapping)
+            ):
+                continue
             failures.append(f"active disposition missing:{fingerprint}")
             continue
         if (
