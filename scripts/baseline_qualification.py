@@ -738,11 +738,9 @@ def plan_materialization(
         for fp in qualified_fingerprints
         if fp not in registered_or_locators
         and (
-            by_fingerprint[fp].get("qualification_policy_digest") == policy_digest
-            or (
-                by_fingerprint[fp].get("policy_rule")
-                and by_fingerprint[fp].get("policy_rule") != "open-debt"
-            )
+            not registered_fingerprints
+            or fp in policy_generated_fingerprints
+            or _canonical_locator(by_fingerprint[fp].get("locator_key", "")) in registered_locators
         )
     }
     if unregistered_qualified:
