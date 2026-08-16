@@ -747,16 +747,10 @@ def plan_materialization(
         for fp, rec in by_fingerprint.items()
         if _canonical_locator(rec.get("locator_key", "")) in registered_locators
     }
-    if policy_generated_fingerprints:
-        active_policy_managed = {
-            fp
-            for fp in by_fingerprint
-            if fp in registered_or_locators
-        }
-        if len(active_policy_managed) < approved.get("fingerprint_count", 0):
-            raise QualificationError(
-                "jeu approuvé: active qualified fingerprints are not registered"
-            )
+    if policy_generated_fingerprints and len(policy_generated_fingerprints) < approved.get("fingerprint_count", 0):
+        raise QualificationError(
+            "jeu approuvé: active qualified fingerprints are not registered"
+        )
     unqualified_active_fingerprints = {
         fingerprint
         for fingerprint, record in by_fingerprint.items()
