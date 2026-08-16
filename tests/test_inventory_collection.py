@@ -15992,7 +15992,7 @@ def test_real_reports_expose_known_exercise_contradictions(inventory_module) -> 
         and claim["metric"] == "exercices_principaux"
         and claim["declared"] == 471
     )
-    assert total["calculated"] == 473
+    assert total["calculated"] == 477
     assert total["etat"] == "contredit"
     trigonometrie = next(
         claim

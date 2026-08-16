@@ -92,13 +92,12 @@ VARIANTS = [
     "evaluations",
     "projets",
 ]
-BOOK_VARIANTS = VARIANTS
 VARIANT_ORDERS = {
     "eleve": [
         ("cours", "00_ouverture"),
         ("cours", "01_diagnostic"),
         ("cours", "02_activites"),
-        ("cours", "1*"),
+        ("cours", "*COURS*"),
         ("methodes", "*"),
         ("exercices", "*"),
         ("coups_de_pouce", "*"),
@@ -111,7 +110,7 @@ VARIANT_ORDERS = {
         ("cours", "00_ouverture"),
         ("cours", "01_diagnostic"),
         ("cours", "02_activites"),
-        ("cours", "1*"),
+        ("cours", "*COURS*"),
         ("methodes", "*"),
         ("exercices", "*"),
         ("coups_de_pouce", "*"),
