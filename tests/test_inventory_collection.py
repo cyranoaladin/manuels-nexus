@@ -12142,6 +12142,27 @@ def test_correction_source_type_support_and_gate_validation(inventory_module):
     assert ex_obj["metadata"]["corrige_tex"] != "valid.tex"
 
 
+def test_a1_broken_latex_references_resolved(inventory_module):
+    """Verify that all 5 A1 broken LaTeX references resolve to existing tracked sources."""
+    from pathlib import Path
+    root = Path(__file__).resolve().parent.parent
+    
+    # 1. renvois.tex is tracked and exists
+    assert (root / "Mathematiques/manuel-maths/build/maquette-v5/renvois.tex").exists()
+    
+    # 2. Canonical class wrappers reference existing common class
+    assert (root / "gabarits/common/nexus-manuel.cls").exists()
+    for wrapper in [
+        "Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls",
+        "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls",
+        "NSI/gabarits/nexus-manuel-v5.cls",
+        "NSI/gabarits/nexus-manuel.cls",
+    ]:
+        content = (root / wrapper).read_text(encoding="utf-8")
+        assert "../../gabarits/common/nexus-manuel.cls" in content
+
+
+
 
 def test_gate_result_contract_exposes_exact_dimensions_and_sorted_reasons(
     inventory_module,
