@@ -519,7 +519,8 @@ def _is_qualifiable_by_policy(
     category: str,
     anomaly: Mapping[str, Any],
 ) -> bool:
-    return classify_anomaly(policy, category, anomaly) is not None
+    decision = classify_anomaly(policy, category, anomaly)
+    return decision is not None and decision.get("disposition") != "open_debt"
 
 
 def _unqualified_entry(
