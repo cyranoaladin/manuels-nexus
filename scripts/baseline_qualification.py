@@ -718,24 +718,23 @@ def plan_materialization(
         raise QualificationError(
             "jeu approuvé pré-matérialisation: source/model digest drift"
         )
-    qualified_fingerprints = {
-        fingerprint
-        for fingerprint, record in by_fingerprint.items()
-        if record.get("qualified") is True
-    }
     registered_locators = {
         _canonical_locator(disp.get("locator_key", ""))
         for disp in historical_dispositions.values()
         if isinstance(disp, Mapping) and disp.get("locator_key")
     }
-    unregistered_qualified = {
+    registered_or_locators = registered_fingerprints | {
         fp
-        for fp in qualified_fingerprints
-        if fp not in registered_fingerprints
-        and _canonical_locator(by_fingerprint[fp].get("locator_key", "")) not in registered_locators
-        and by_fingerprint[fp].get("policy_rule") not in (None, "", "open-debt")
+        for fp, rec in by_fingerprint.items()
+        if _canonical_locator(rec.get("locator_key", "")) in registered_locators
     }
-    if unregistered_qualified:
+    qualified_fingerprints = {
+        fingerprint
+        for fingerprint, record in by_fingerprint.items()
+        if record.get("qualified") is True
+        and bool(_matching_rules(policy, str(record.get("category", "")), record.get("anomaly", {})))
+    }
+    if qualified_fingerprints - registered_or_locators:
         raise QualificationError(
             "jeu approuvé: active qualified fingerprints are not registered"
         )
