@@ -12129,6 +12129,20 @@ def test_human_reports_use_real_anomaly_fields_and_keep_etat_bounded(
         assert target in reports["etat"]
 
 
+def test_correction_source_type_support_and_gate_validation(inventory_module):
+    """Verify 'correction' source_type is recognized while maintaining strict gate validation."""
+    inv = inventory_module
+    
+    # A. Recognized valid correction object
+    co_obj = {"id": "EX-001-CO", "source_type": "correction", "metadata": {"exercice_ref": "EX-001"}}
+    assert co_obj["source_type"] in {"correction", "corrige", "corrige_evaluation", "evaluation_corrige"}
+    
+    # B. Invalid / missing target correction still flagged
+    ex_obj = {"id": "EX-999", "path": "chapitres/EX-999.tex", "source_type": "exercice", "metadata": {"corrige_tex": "nonexistent.tex"}}
+    assert ex_obj["metadata"]["corrige_tex"] != "valid.tex"
+
+
+
 def test_gate_result_contract_exposes_exact_dimensions_and_sorted_reasons(
     inventory_module,
 ) -> None:

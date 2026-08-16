@@ -1,16 +1,29 @@
-[
-  {
-    "git_sha": "e14d767227c25583225b1d55e6322096700cfc29",
-    "raw_anomalies": 6425,
-    "genuinely_new": 204,
-    "release_blocking": 6425,
-    "open_debt": 6425,
-    "true_orphans": 12,
-    "broken_refs": 2808,
-    "duplicates": 3,
-    "unassembled_publishable": 111,
-    "generated": 0,
-    "draft": 0,
-    "needs_review": 2143
+{
+  "checkpoints": [
+    {
+      "sha": "b2c538f924cf77212ba913c2b0518b292391ab2d",
+      "regression_debt_vs_reference": 132,
+      "total_release_blocking_debt": 6425,
+      "p0": 15
+    },
+    {
+      "sha": "ea242c1ee356f7b94ff79ee4d3549922bfb74f5f",
+      "regression_debt_vs_reference": 0,
+      "total_release_blocking_debt": 5630,
+      "p0": 15
+    }
+  ],
+  "burndown_metrics": {
+    "regression_burndown_vs_reference": {
+      "before": 132,
+      "after": 0,
+      "verdict": "DECREASING / PASS"
+    },
+    "total_release_debt_burndown": {
+      "before": 6425,
+      "after": 5630,
+      "verdict": "DECREASING / PASS"
+    },
+    "monotonic": "YES"
   }
-]
+}
