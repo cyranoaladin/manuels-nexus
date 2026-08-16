@@ -69,7 +69,7 @@ ORDER = [
     ("cours", "00_ouverture"),
     ("cours", "01_diagnostic"),
     ("cours", "02_activites"),
-    ("cours", "*COURS*"),
+        ("cours", "1*"),
     ("methodes", "*"),
     ("exercices", "*"),
     ("coups_de_pouce", "*"),
@@ -97,7 +97,7 @@ VARIANT_ORDERS = {
         ("cours", "00_ouverture"),
         ("cours", "01_diagnostic"),
         ("cours", "02_activites"),
-        ("cours", "*COURS*"),
+            ("cours", "1*"),
         ("methodes", "*"),
         ("exercices", "*"),
         ("coups_de_pouce", "*"),
@@ -110,7 +110,7 @@ VARIANT_ORDERS = {
         ("cours", "00_ouverture"),
         ("cours", "01_diagnostic"),
         ("cours", "02_activites"),
-        ("cours", "*COURS*"),
+            ("cours", "1*"),
         ("methodes", "*"),
         ("exercices", "*"),
         ("coups_de_pouce", "*"),
@@ -322,6 +322,25 @@ def collect_variant_objects(variant: str) -> list[Path]:
                 directory = VARIANT_ORDERS[variant][rule_index][0]
                 pattern = VARIANT_ORDERS[variant][rule_index][1]
             if student_variant and directory in ELEVE_EXCLUDES:
+                continue
+            if directory == "cours" and pattern == "1*":
+                patterns = ("1*", "T*", "*_cours*", "*invalid*", "*indented*")
+                for pat in patterns:
+                    for path in sorted((chapter_dir / directory).glob(f"{pat}.tex")):
+                        if path.name.startswith(("00_ouverture", "01_diagnostic", "02_activites", "07_td")):
+                            continue
+                        if path not in tracked_objects:
+                            continue
+                        path = _confined_object(chapter_dir, path)
+                        metadata = _metadata(path, chapter)
+                        if (
+                            student_variant
+                            and metadata["type_objet"] not in ELEVE_ALLOWED_TYPES
+                        ):
+                            continue
+                        if path not in seen:
+                            seen.add(path)
+                            selected.append(path)
                 continue
             for path in sorted((chapter_dir / directory).glob(f"{pattern}.tex")):
                 if path not in tracked_objects:
