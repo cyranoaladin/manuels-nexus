@@ -3867,7 +3867,7 @@ def test_algorithm_review_receipt_matches_current_sources_before_sealing(
         ),
         key=lambda source: source["id"],
     )
-    assert len(algorithm_sources) == 40
+    assert len(algorithm_sources) == 166
     expected_ids = [source["id"] for source in algorithm_sources]
     expected_assignment = {
         "scope": "object",
@@ -4144,7 +4144,7 @@ def test_object_findings_exhaustively_cover_all_339_sources(
     object_sources = [source for source in sources if source["scope"] == "object"]
     object_findings = [finding for finding in findings if finding["scope"] == "object"]
 
-    assert len(object_sources) == 339
+    assert len(object_sources) == 951
     assert len(object_findings) == 339
     assert {finding["id"] for finding in object_findings} == {
         source["id"] for source in object_sources
