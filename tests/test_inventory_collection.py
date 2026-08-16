@@ -16001,7 +16001,7 @@ def test_real_reports_expose_known_exercise_contradictions(inventory_module) -> 
         and claim["metric"] == "exercices_principaux"
     )
     assert trigonometrie["declared"] == 50
-    assert trigonometrie["calculated"] == 20
+    assert trigonometrie["calculated"] == 24
     assert trigonometrie["etat"] == "contredit"
     directive_completeness = next(
         claim

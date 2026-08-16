@@ -69,7 +69,7 @@ ORDER = [
     ("cours", "00_ouverture"),
     ("cours", "01_diagnostic"),
     ("cours", "02_activites"),
-    ("cours", "1*"),
+    ("cours", "*COURS*"),
     ("methodes", "*"),
     ("exercices", "*"),
     ("coups_de_pouce", "*"),
