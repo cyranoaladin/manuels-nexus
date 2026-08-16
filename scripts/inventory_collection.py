@@ -2139,11 +2139,11 @@ def _compare_anomaly_debt(
     previous_by_locator: dict[str, list[str]] = defaultdict(list)
     current_by_locator: dict[str, list[str]] = defaultdict(list)
     for fingerprint in unmatched_previous:
-        locator = str(previous[fingerprint].get("locator_key", ""))
+        locator = str(previous[fingerprint].get("locator_key", "")).replace("ADGK", "APT").replace("AGT", "APT")
         if locator:
             previous_by_locator[locator].append(fingerprint)
     for fingerprint in unmatched_current:
-        locator = str(current[fingerprint].get("locator_key", ""))
+        locator = str(current[fingerprint].get("locator_key", "")).replace("ADGK", "APT").replace("AGT", "APT")
         if locator:
             current_by_locator[locator].append(fingerprint)
     for locator in sorted(set(previous_by_locator) & set(current_by_locator)):
