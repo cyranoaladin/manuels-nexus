@@ -734,9 +734,10 @@ def plan_materialization(
         raise QualificationError(
             "jeu approuvé: active unqualified fingerprints belong to prior policy"
         )
-    approved_fingerprints = (
-        policy_generated_fingerprints | unqualified_active_fingerprints
-    )
+    if policy_generated_fingerprints:
+        approved_fingerprints = set(policy_generated_fingerprints)
+    else:
+        approved_fingerprints = set(unqualified_active_fingerprints)
     fingerprints = sorted(approved_fingerprints)
     approved_count = len(fingerprints)
     approved_digest = fingerprint_set_digest(fingerprints)
