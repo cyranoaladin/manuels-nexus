@@ -5,8 +5,17 @@ manuals:
   1NSI:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '349'
+      detail: '353'
       source: anomalies.blocking_statuses
+    - code: anomalie:broken_meta_references
+      detail: '887'
+      source: anomalies.broken_meta_references
+    - code: anomalie:missing_corrections
+      detail: '207'
+      source: anomalies.missing_corrections
+    - code: anomalie:unclassified_types
+      detail: '247'
+      source: anomalies.unclassified_types
     - code: livrable_non_compile
       detail: declared
       source: deliverable_matrix.1NSI.variants.evaluations
@@ -23,7 +32,7 @@ manuals:
       detail: declared
       source: deliverable_matrix.1NSI.variants.version_amenagee
     - code: statuts_non_approuves
-      detail: objets=339; contrats=10
+      detail: objets=343; contrats=10
       source: manuals.1NSI.statuses
     current:
       artifacts:
@@ -42,21 +51,22 @@ manuals:
       - 1NSI-TYPES-CONSTRUITS
       - 1NSI-WEB-IHM
       statuses:
+        approved: 647
         manual_review: 7
         needs_review: 169
-        verified: 163
+        verified: 167
       totals:
         capacites: 53
-        corriges: 127
+        corriges: 148
         coups_de_pouce: 24
         diagnostics: 1
-        evaluations: 20
-        exercices_principaux: 100
-        methodes: 5
+        evaluations: 40
+        exercices_principaux: 350
+        methodes: 15
         projets: 1
-        qcm: 10
-        remediations: 10
-        sections_cours: 38
+        qcm: 11
+        remediations: 62
+        sections_cours: 88
         td: 2
     objective:
       directive: MISSION_PRIORITAIRE §9
@@ -73,12 +83,15 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
+    - anomalie:broken_meta_references
+    - anomalie:missing_corrections
     - statuts_non_approuves
     structural_compile_ready: false
     variants:
       evaluations:
         artifacts: []
-        declared_chapter_variants: []
+        declared_chapter_variants:
+        - evaluations
         declared_manual_variants:
         - evaluations
         state: declared
@@ -92,7 +105,8 @@ manuals:
       manuel_eleve:
         artifacts:
         - NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf
-        declared_chapter_variants: []
+        declared_chapter_variants:
+        - eleve
         declared_manual_variants:
         - eleve
         state: compiled
@@ -106,7 +120,8 @@ manuals:
         state: compiled
       projets:
         artifacts: []
-        declared_chapter_variants: []
+        declared_chapter_variants:
+        - projets
         declared_manual_variants:
         - projets
         state: declared
@@ -129,6 +144,9 @@ manuals:
     - code: anomalie:blocking_statuses
       detail: '1411'
       source: anomalies.blocking_statuses
+    - code: anomalie:broken_meta_references
+      detail: '21'
+      source: anomalies.broken_meta_references
     - code: anomalie:unassembled_objects
       detail: '5'
       source: anomalies.unassembled_objects
@@ -164,15 +182,16 @@ manuals:
       - 1SPE-TRIGONOMETRIE
       - 1SPE-VARIABLES-ALEATOIRES
       statuses:
+        approved: 16
         generated: 1393
         verified: 8
       totals:
         capacites: 50
-        corriges: 491
-        coups_de_pouce: 176
+        corriges: 497
+        coups_de_pouce: 180
         diagnostics: 5
-        evaluations: 18
-        exercices_principaux: 473
+        evaluations: 20
+        exercices_principaux: 477
         methodes: 50
         projets: 0
         qcm: 10
@@ -194,6 +213,7 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
+    - anomalie:broken_meta_references
     - anomalie:unassembled_objects
     - statuts_non_approuves
     structural_compile_ready: false
@@ -234,6 +254,12 @@ manuals:
     - code: anomalie:blocking_statuses
       detail: '159'
       source: anomalies.blocking_statuses
+    - code: anomalie:broken_meta_references
+      detail: '305'
+      source: anomalies.broken_meta_references
+    - code: anomalie:context_mismatches
+      detail: '3'
+      source: anomalies.context_mismatches
     - code: statuts_non_approuves
       detail: objets=150; contrats=9
       source: manuals.TCOMPL.statuses
@@ -253,20 +279,21 @@ manuals:
       - TCOMPL-MODELES-FONCTION
       - TCOMPL-TEMPS-ATTENTE
       statuses:
+        approved: 604
         generated: 150
       totals:
         capacites: 50
-        corriges: 54
+        corriges: 318
         coups_de_pouce: 0
         diagnostics: 0
         evaluations: 18
-        exercices_principaux: 36
-        methodes: 0
+        exercices_principaux: 300
+        methodes: 9
         projets: 0
         qcm: 9
-        remediations: 9
-        sections_cours: 24
-        td: 0
+        remediations: 50
+        sections_cours: 32
+        td: 18
     objective:
       directive: docs/11_perimetre_terminale_complementaires.md
       target_chapters: 9
@@ -282,6 +309,7 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
+    - anomalie:broken_meta_references
     - statuts_non_approuves
     structural_compile_ready: true
     variants:
@@ -304,6 +332,9 @@ manuals:
     - code: anomalie:blocking_statuses
       detail: '98'
       source: anomalies.blocking_statuses
+    - code: anomalie:broken_meta_references
+      detail: '193'
+      source: anomalies.broken_meta_references
     - code: statuts_non_approuves
       detail: objets=93; contrats=5
       source: manuals.TEXPERTES.statuses
@@ -319,20 +350,21 @@ manuals:
       - TEXP-GRAPHES
       - TEXP-MATRICES-MARKOV
       statuses:
+        approved: 391
         generated: 93
       totals:
         capacites: 33
-        corriges: 34
+        corriges: 204
         coups_de_pouce: 0
         diagnostics: 0
         evaluations: 10
-        exercices_principaux: 24
-        methodes: 0
+        exercices_principaux: 194
+        methodes: 5
         projets: 0
         qcm: 5
-        remediations: 5
-        sections_cours: 15
-        td: 0
+        remediations: 33
+        sections_cours: 23
+        td: 10
     objective:
       directive: docs/12_perimetre_terminale_expertes.md
       target_chapters: 5
@@ -348,6 +380,7 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
+    - anomalie:broken_meta_references
     - statuts_non_approuves
     structural_compile_ready: true
     variants:
@@ -370,6 +403,15 @@ manuals:
     - code: anomalie:blocking_statuses
       detail: '115'
       source: anomalies.blocking_statuses
+    - code: anomalie:broken_meta_references
+      detail: '877'
+      source: anomalies.broken_meta_references
+    - code: anomalie:missing_corrections
+      detail: '243'
+      source: anomalies.missing_corrections
+    - code: anomalie:unclassified_types
+      detail: '255'
+      source: anomalies.unclassified_types
     - code: chapitres_manquants
       detail: 6/12
       source: manuals.TNSI.chapters
@@ -404,19 +446,20 @@ manuals:
       - TNSI-LANGAGES-ET-PROGRAMMATION
       - TNSI-STRUCTURES-DONNEES
       statuses:
+        approved: 634
         generated: 109
       totals:
         capacites: 59
         corriges: 35
         coups_de_pouce: 0
         diagnostics: 0
-        evaluations: 12
-        exercices_principaux: 23
-        methodes: 0
+        evaluations: 24
+        exercices_principaux: 266
+        methodes: 6
         projets: 0
         qcm: 6
-        remediations: 5
-        sections_cours: 28
+        remediations: 64
+        sections_cours: 87
         td: 0
     objective:
       directive: MISSION_PRIORITAIRE §11
@@ -433,6 +476,8 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
+    - anomalie:broken_meta_references
+    - anomalie:missing_corrections
     - chapitres_manquants
     - statuts_non_approuves
     structural_compile_ready: false
@@ -450,7 +495,8 @@ manuals:
       manuel_eleve:
         artifacts:
         - NSI/build/MANUEL_TNSI/MANUEL_TNSI_eleve.pdf
-        declared_chapter_variants: []
+        declared_chapter_variants:
+        - eleve
         declared_manual_variants:
         - eleve
         state: compiled
@@ -464,7 +510,8 @@ manuals:
         state: compiled
       projets:
         artifacts: []
-        declared_chapter_variants: []
+        declared_chapter_variants:
+        - projets
         declared_manual_variants:
         - projets
         state: declared
@@ -485,11 +532,20 @@ manuals:
   TSPE_2026_2027:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '779'
+      detail: '11'
       source: anomalies.blocking_statuses
     - code: anomalie:broken_meta_references
-      detail: '2'
+      detail: '562'
       source: anomalies.broken_meta_references
+    - code: anomalie:missing_corrections
+      detail: '179'
+      source: anomalies.missing_corrections
+    - code: anomalie:unassembled_objects
+      detail: '47'
+      source: anomalies.unassembled_objects
+    - code: anomalie:unclassified_types
+      detail: '179'
+      source: anomalies.unclassified_types
     - code: livrable_non_compile
       detail: absent
       source: deliverable_matrix.TSPE_2026_2027.variants.banque_evaluations
@@ -499,11 +555,8 @@ manuals:
     - code: livrable_non_compile
       detail: partial
       source: deliverable_matrix.TSPE_2026_2027.variants.livret_remediation
-    - code: objectif_chapitres_non_fige
-      detail: cible a figer en Phase 1
-      source: MISSION_PRIORITAIRE §10
     - code: statuts_non_approuves
-      detail: objets=768; contrats=11
+      detail: objets=11; contrats=0
       source: manuals.TSPE_2026_2027.statuses
     current:
       artifacts:
@@ -523,23 +576,24 @@ manuals:
       - TSPE-SUITES-LIMITES
       - TSPE-TRIGONOMETRIE
       statuses:
-        generated: 768
+        approved: 1243
+        generated: 11
       totals:
         capacites: 67
-        corriges: 277
+        corriges: 291
         coups_de_pouce: 67
         diagnostics: 0
         evaluations: 22
-        exercices_principaux: 255
-        methodes: 29
+        exercices_principaux: 448
+        methodes: 35
         projets: 0
         qcm: 11
-        remediations: 41
-        sections_cours: 58
+        remediations: 88
+        sections_cours: 105
         td: 8
     objective:
       directive: MISSION_PRIORITAIRE §10
-      target_chapters: null
+      target_chapters: 11
     phase0_structural_eligible: false
     publication_eligible: false
     publication_gate_coverage:
@@ -553,7 +607,8 @@ manuals:
     structural_blockers:
     - anomalie:blocking_statuses
     - anomalie:broken_meta_references
-    - objectif_chapitres_non_fige
+    - anomalie:missing_corrections
+    - anomalie:unassembled_objects
     - statuts_non_approuves
     structural_compile_ready: false
     variants:
@@ -588,24 +643,24 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:55d31bf006dfa3df5da88619fb4e77c3f5f76c88b9f0aee99dbc90c8754d1433
+model_digest: sha256:43119741f6d50ffc74fb9432a7ce88095402c580442392e208315a540d4505c0
 provenance:
-  branch: integration/1spe-bo2026-traceability
+  branch: audit/adversarial-reconciliation-2026
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-12T22:16:39Z'
+  generated_at_utc: '2026-08-16T07:53:29Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:ecf1e2fb7d6bdf533a67237739b40eef625f33b4d505890025efa9d92f4e34f9
     scripts/build_manifest.py: sha256:f4084b0ff17bb5ecdfed872244afaf3616bf6911b64e0340d3c0ca3b4bdbba20
     scripts/inventory_assembly.py: sha256:1759502372fc12faafb27b40d959979c9b63a439cef08ca56246d2d992c26047
-    scripts/inventory_collection.py: sha256:5205a49f432b86c97f72f0b0532371b90a6bad7a8bbee41e9b39f941c93e735c
+    scripts/inventory_collection.py: sha256:2e6d6196233e505b904c4bd440bfc47238a2bbd6515a806371de5675b15c4fcb
     scripts/inventory_graph.py: sha256:3d7e846c534a490280e2a190ce5cf16d539ec87205259a9060c0abbb6c11bdcb
     scripts/inventory_pdf.py: sha256:0931c5864414ab0248cb14b9d0ca583de190f3e6633e9c6862908eb344a2892b
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:cb824c44165ab3a63afa0271dbb33f79cddc30bf674c916d1186b58fa0e8f92c
+  generator_sha256: sha256:68b7917dbec3d190e17889d531ac18d617c7990dceaca15c58fcc0d7367f2ef6
   generator_version: 1
   git_available: true
-  head_sha: 64cae13228d70e1414f86d0154f41ee314033b16
+  head_sha: e701b30adb96f988ce1c3c5ffda0e66930ea508e
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -616,4 +671,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:ba2df83fb25be4d2f82f4aecf55763ec3f443b124407d0eaeb82a44efa31460f
+source_digest: sha256:c059e1e9d88ac249db9381c41d249237ffc323b173067a08da25a1b3f93811cc

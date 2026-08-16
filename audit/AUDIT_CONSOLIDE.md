@@ -11,7 +11,7 @@
 ### assembler_invalid (0)
 - Aucune.
 
-### blocking_statuses (2911)
+### blocking_statuses (2147)
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-001, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
@@ -42,23 +42,58 @@
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-027.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-027, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-028.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-028, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-029.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-029, scope=object
-- … 2881 autres.
+- … 2117 autres.
 
 ### broken_assembly_references (0)
 - Aucune.
 
-### broken_latex_references (1)
+### broken_latex_references (5)
 - source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/build/maquette-v5/renvois.tex, champ=input, raison=cible LaTeX absente des sources suivies
+- source=Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls, cible=Mathematiques/manuel-maths/gabarits/common/nexus-manuel.cls, champ=input, raison=cible LaTeX absente des sources suivies
+- source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/common/nexus-manuel.cls, champ=input, raison=cible LaTeX absente des sources suivies
+- source=NSI/gabarits/nexus-manuel-v5.cls, cible=NSI/gabarits/common/nexus-manuel.cls, champ=input, raison=cible LaTeX absente des sources suivies
+- source=NSI/gabarits/nexus-manuel.cls, cible=NSI/gabarits/common/nexus-manuel.cls, champ=input, raison=cible LaTeX absente des sources suivies
 
-### broken_meta_references (2)
-- source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/16_CONCLGN_bienayme_tchebychev.tex, cible=CONCLGN-C1, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-009.tex, cible=TSPE-PROBA-C10, champ=capacites[0], raison=capacite META absente du contrat du chapitre
+### broken_meta_references (2845)
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-024.tex, cible=1SPE-TRIGONOMETRIE-C3, champ=capacites[0], raison=capacite META absente du contrat du chapitre
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-024.tex, cible=C3, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-024.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-A-corrige.tex, cible=C3, champ=capacites_codes[2], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-A-corrige.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-A-corrige.tex, cible=C5, champ=capacites_codes[4], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-A.tex, cible=C3, champ=capacites_codes[2], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-A.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-A.tex, cible=C5, champ=capacites_codes[4], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-B-corrige.tex, cible=C3, champ=capacites_codes[2], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-B-corrige.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-B-corrige.tex, cible=C5, champ=capacites_codes[4], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-B.tex, cible=C3, champ=capacites_codes[2], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-B.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-B.tex, cible=C5, champ=capacites_codes[4], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024-CDP.tex, cible=1SPE-TRIGONOMETRIE-C3, champ=capacites[0], raison=capacite META absente du contrat du chapitre
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024-CDP.tex, cible=C3, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024-CDP.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024.tex, cible=1SPE-TRIGONOMETRIE-C3, champ=capacites[0], raison=capacite META absente du contrat du chapitre
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024.tex, cible=C3, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-009.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-010.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-011.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-012.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-013.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-014.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-014.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-015.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-015.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
+- … 2815 autres.
 
 ### chapters_not_in_manual (0)
 - Aucune.
 
-### context_mismatches (0)
-- Aucune.
+### context_mismatches (3)
+- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/07_td_contextualise.tex, scope=object, field=chapitre, expected=TCOMPL-CALCULS-AIRES, actual=TSPE-DERIVATION-CONVEXITE
+- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/07_td_fil_rouge.tex, scope=object, field=chapitre, expected=TCOMPL-CALCULS-AIRES, actual=TSPE-DERIVATION-CONVEXITE
+- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_derivee_composee.tex, scope=object, field=chapitre, expected=TCOMPL-CALCULS-AIRES, actual=TSPE-DERIVATION-CONVEXITE
 
 ### contract_invalid (0)
 - Aucune.
@@ -74,8 +109,38 @@
 ### duplicate_capacity_refs (0)
 - Aucune.
 
-### duplicate_ids (0)
-- Aucune.
+### duplicate_ids (125)
+- id=1NSI-ADGK-CO-001, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-001.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-001.tex"]
+- id=1NSI-ADGK-CO-002, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-002.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-002.tex"]
+- id=1NSI-ADGK-CO-003, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-003.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-003.tex"]
+- id=1NSI-ADGK-CO-004, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-004.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-004.tex"]
+- id=1NSI-ADGK-CO-005, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-005.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-005.tex"]
+- id=1NSI-ADGK-CO-006, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-006.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-006.tex"]
+- id=1NSI-ADGK-CO-007, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-007.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-007.tex"]
+- id=1NSI-ADGK-CO-008, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-008.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-008.tex"]
+- id=1NSI-ADGK-CO-009, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-009.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-009.tex"]
+- id=1NSI-ADGK-CO-010, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-010.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-010.tex"]
+- id=1NSI-ADGK-CO-011, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-011.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-011.tex"]
+- id=1NSI-ADGK-CO-012, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-012.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-012.tex"]
+- id=1NSI-ADGK-CO-013, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-013.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-013.tex"]
+- id=1NSI-ADGK-CO-014, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-014.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-014.tex"]
+- id=1NSI-ADGK-CO-015, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-015.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-015.tex"]
+- id=1NSI-ADGK-CO-016, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-016.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-016.tex"]
+- id=1NSI-ADGK-CO-017, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-017.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-017.tex"]
+- id=1NSI-ADGK-CO-018, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-018.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-018.tex"]
+- id=1NSI-ADGK-CO-019, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-019.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-019.tex"]
+- id=1NSI-ADGK-CO-020, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-020.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-020.tex"]
+- id=1NSI-ADGK-CO-021, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-021.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-021.tex"]
+- id=1NSI-ADGK-CO-022, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-022.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-022.tex"]
+- id=1NSI-ADGK-CO-023, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-023.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-023.tex"]
+- id=1NSI-ADGK-CO-024, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-024.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-024.tex"]
+- id=1NSI-ADGK-EX-001, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-001.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-001.tex"]
+- id=1NSI-ADGK-EX-002, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-002.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-002.tex"]
+- id=1NSI-ADGK-EX-003, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-003.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-003.tex"]
+- id=1NSI-ADGK-EX-004, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-004.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-004.tex"]
+- id=1NSI-ADGK-EX-005, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-005.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-005.tex"]
+- id=1NSI-ADGK-EX-006, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-006.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-006.tex"]
+- … 95 autres.
 
 ### invalid_capacities (0)
 - Aucune.
@@ -86,8 +151,17 @@
 ### invalid_statuses (0)
 - Aucune.
 
-### latex_cycles (0)
-- Aucune.
+### latex_cycles (10)
+- source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=cycle de references LaTeX dans l'assemblage statique
+- source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/gabarits/chapitre_master.tex, raison=cycle de references LaTeX dans l'assemblage statique
+- source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/gabarits/objet_standalone.tex, raison=cycle de references LaTeX dans l'assemblage statique
+- source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/gabarits/specimen-pont-v6.tex, raison=cycle de references LaTeX dans l'assemblage statique
+- source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/gabarits/specimen-v6.tex, raison=cycle de references LaTeX dans l'assemblage statique
+- source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/gabarits/specimen.tex, raison=cycle de references LaTeX dans l'assemblage statique
+- source=NSI/gabarits/nexus-manuel.cls, cible=NSI/gabarits/nexus-manuel.cls, champ=nsi:static:NSI/gabarits/book_master.tex, raison=cycle de references LaTeX dans l'assemblage statique
+- source=NSI/gabarits/nexus-manuel.cls, cible=NSI/gabarits/nexus-manuel.cls, champ=nsi:static:NSI/gabarits/chapitre_master.tex, raison=cycle de references LaTeX dans l'assemblage statique
+- source=NSI/gabarits/nexus-manuel.cls, cible=NSI/gabarits/nexus-manuel.cls, champ=nsi:static:NSI/gabarits/objet_standalone.tex, raison=cycle de references LaTeX dans l'assemblage statique
+- source=NSI/gabarits/nexus-manuel.cls, cible=NSI/gabarits/nexus-manuel.cls, champ=nsi:static:NSI/gabarits/specimen.tex, raison=cycle de references LaTeX dans l'assemblage statique
 
 ### metadata_invalid (0)
 - Aucune.
@@ -98,20 +172,99 @@
 ### missing_assemblers (0)
 - Aucune.
 
-### missing_corrections (0)
-- Aucune.
+### missing_corrections (629)
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-009.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-009.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-010.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-010.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-011.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-011.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-012.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-012.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-013.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-013.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-014.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-014.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-015.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-015.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-016.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-016.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-017.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-017.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-018.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-018.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-019.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-019.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-020.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-020.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-021.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-021.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-022.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-022.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-023.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-023.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-024.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-024.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-025.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-025.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-026.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-026.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-027.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-027.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-028.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-028.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-029.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-029.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-030.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-030.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-031.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-031.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-032.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-032.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-033.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-033.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-034.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-034.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-035.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-035.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-036.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-036.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-037.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-037.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-038.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-038.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
+- … 599 autres.
 
-### orphan_files (0)
-- Aucune.
+### orphan_files (12)
+- source=Mathematiques/manuel-maths/gabarits/nexus-code.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-code.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- source=Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- source=Mathematiques/manuel-maths/gabarits/nexus-figures.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-figures.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- source=Mathematiques/manuel-maths/gabarits/nexus-icons.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-icons.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- source=Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- source=Mathematiques/manuel-maths/gabarits/nexus-signatures.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-signatures.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- source=NSI/gabarits/nexus-code.tex, cible=NSI/gabarits/nexus-code.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- source=NSI/gabarits/nexus-figures-nsi.tex, cible=NSI/gabarits/nexus-figures-nsi.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- source=NSI/gabarits/nexus-figures.tex, cible=NSI/gabarits/nexus-figures.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- source=NSI/gabarits/nexus-icons.tex, cible=NSI/gabarits/nexus-icons.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- source=NSI/gabarits/nexus-margin-rail.tex, cible=NSI/gabarits/nexus-margin-rail.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+- source=NSI/gabarits/nexus-signatures.tex, cible=NSI/gabarits/nexus-signatures.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
 
-### unassembled_objects (5)
+### unassembled_objects (52)
 - source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-01.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-01.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-02.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-02.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-03.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-03.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-04.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-04.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-05.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-05.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-06.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-06.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-07.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-07.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-08.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-08.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/cours/TSPE-COMBINATOIRE-COURS-01.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/cours/TSPE-COMBINATOIRE-COURS-01.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/cours/TSPE-COMBINATOIRE-COURS-02.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/cours/TSPE-COMBINATOIRE-COURS-02.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/cours/TSPE-COMBINATOIRE-COURS-03.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/cours/TSPE-COMBINATOIRE-COURS-03.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/cours/TSPE-COMBINATOIRE-COURS-04.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/cours/TSPE-COMBINATOIRE-COURS-04.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-01.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-01.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-02.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-02.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-03.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-03.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-04.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-04.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-05.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-05.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-06.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-06.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-07.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-07.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-08.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-08.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-09.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-09.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-10.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-10.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-11.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-11.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-12.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-12.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-13.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-13.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- … 22 autres.
 
-### unattributed_pdfs (10)
+### unattributed_pdfs (22)
+- source=MANUELS_PDF_PUBLICATION/01_Maths_1re_Spe_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/01_Maths_1re_Spe_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=MANUELS_PDF_PUBLICATION/02_Maths_1re_Spe_Professeur.pdf, cible=MANUELS_PDF_PUBLICATION/02_Maths_1re_Spe_Professeur.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=MANUELS_PDF_PUBLICATION/03_Maths_Tle_Spe_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/03_Maths_Tle_Spe_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=MANUELS_PDF_PUBLICATION/04_Maths_Tle_Spe_Professeur.pdf, cible=MANUELS_PDF_PUBLICATION/04_Maths_Tle_Spe_Professeur.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=MANUELS_PDF_PUBLICATION/05_Maths_Tle_Expertes_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/05_Maths_Tle_Expertes_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=MANUELS_PDF_PUBLICATION/06_Maths_Tle_Expertes_Professeur.pdf, cible=MANUELS_PDF_PUBLICATION/06_Maths_Tle_Expertes_Professeur.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=MANUELS_PDF_PUBLICATION/07_Maths_Tle_Complementaires_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/07_Maths_Tle_Complementaires_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=MANUELS_PDF_PUBLICATION/08_Maths_Tle_Complementaires_Professeur.pdf, cible=MANUELS_PDF_PUBLICATION/08_Maths_Tle_Complementaires_Professeur.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=MANUELS_PDF_PUBLICATION/09_NSI_1re_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/09_NSI_1re_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=MANUELS_PDF_PUBLICATION/10_NSI_1re_Professeur.pdf, cible=MANUELS_PDF_PUBLICATION/10_NSI_1re_Professeur.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=MANUELS_PDF_PUBLICATION/11_NSI_Tle_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/11_NSI_Tle_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=MANUELS_PDF_PUBLICATION/12_NSI_Tle_Professeur.pdf, cible=MANUELS_PDF_PUBLICATION/12_NSI_Tle_Professeur.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
 - source=NSI/corpus_nsi/00_programmes_officiels/programme_nsi_premiere.pdf, cible=NSI/corpus_nsi/00_programmes_officiels/programme_nsi_premiere.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
 - source=NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf, cible=NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
 - source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_aides.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_aides.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
@@ -126,7 +279,7 @@
 ### unavailable_inspiration_sources (0)
 - Aucune.
 
-### unclassified_types (7)
+### unclassified_types (688)
 - path=Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/15_algorithmique_monte_carlo.tex, id=1SPE-PROBCOND-ALG-001, source_type=algorithme
 - path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/15_experimentations.tex, id=1SPE-VARALEA-ALG-001, source_type=algorithme
 - path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, id=1SPE-VARALEA-ALG-002, source_type=algorithme
@@ -134,6 +287,30 @@
 - path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, id=1SPE-VARALEA-EXP-002, source_type=experimentation
 - path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, id=1SPE-VARALEA-EXP-003, source_type=experimentation
 - path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, id=1SPE-VARALEA-EXP-004, source_type=experimentation
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-009.tex, id=TSPE-INTEG-CO-009, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-010.tex, id=TSPE-INTEG-CO-010, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-011.tex, id=TSPE-INTEG-CO-011, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-012.tex, id=TSPE-INTEG-CO-012, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-013.tex, id=TSPE-INTEG-CO-013, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-014.tex, id=TSPE-INTEG-CO-014, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-015.tex, id=TSPE-INTEG-CO-015, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-016.tex, id=TSPE-INTEG-CO-016, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-017.tex, id=TSPE-INTEG-CO-017, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-018.tex, id=TSPE-INTEG-CO-018, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-019.tex, id=TSPE-INTEG-CO-019, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-020.tex, id=TSPE-INTEG-CO-020, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-021.tex, id=TSPE-INTEG-CO-021, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-022.tex, id=TSPE-INTEG-CO-022, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-023.tex, id=TSPE-INTEG-CO-023, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-024.tex, id=TSPE-INTEG-CO-024, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-025.tex, id=TSPE-INTEG-CO-025, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-026.tex, id=TSPE-INTEG-CO-026, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-027.tex, id=TSPE-INTEG-CO-027, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-028.tex, id=TSPE-INTEG-CO-028, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-029.tex, id=TSPE-INTEG-CO-029, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-030.tex, id=TSPE-INTEG-CO-030, source_type=correction
+- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-031.tex, id=TSPE-INTEG-CO-031, source_type=correction
+- … 658 autres.
 
 ### unknown_chapter_prefixes (0)
 - Aucune.
