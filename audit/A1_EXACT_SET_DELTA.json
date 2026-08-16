@@ -1,0 +1,52 @@
+{
+  "phase": "A1",
+  "s1_raw_count": 5630,
+  "s2_raw_count": 5615,
+  "removals_count": 15,
+  "additions_count": 0,
+  "removals_breakdown": [
+    {
+      "fingerprint": "broken_latex_1",
+      "category": "broken_latex_references",
+      "path": "Mathematiques/manuel-maths/build/maquette-v5/renvois.tex",
+      "cause": "Tracked generated dependency resolution in maquette v5",
+      "real_defect": true
+    },
+    {
+      "fingerprint": "broken_latex_2",
+      "category": "broken_latex_references",
+      "path": "Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls",
+      "cause": "Canonical class redirection to root common class",
+      "real_defect": true
+    },
+    {
+      "fingerprint": "broken_latex_3",
+      "category": "broken_latex_references",
+      "path": "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls",
+      "cause": "Canonical class redirection to root common class",
+      "real_defect": true
+    },
+    {
+      "fingerprint": "broken_latex_4",
+      "category": "broken_latex_references",
+      "path": "NSI/gabarits/nexus-manuel-v5.cls",
+      "cause": "Canonical class redirection to root common class",
+      "real_defect": true
+    },
+    {
+      "fingerprint": "broken_latex_5",
+      "category": "broken_latex_references",
+      "path": "NSI/gabarits/nexus-manuel.cls",
+      "cause": "Canonical class redirection to root common class",
+      "real_defect": true
+    },
+    {
+      "fingerprint": "broken_meta_secondary_1..10",
+      "category": "broken_meta_references",
+      "path": "Mathematiques/manuel-maths/gabarits/*.cls",
+      "cause": "Secondary metadata alignment resulting from wrapper class simplification",
+      "real_defect": false
+    }
+  ],
+  "sum_classes": 15
+}
