@@ -162,7 +162,13 @@ def add_latex_graph(
             continue
         for command, raw_target in latex_inputs(tex):
             target = resolve_latex_target(source, raw_target, tracked)
-            resolved = target in tracked
+            resolved = (
+                target in tracked
+                or (
+                    (source_roles.get(target) == "generated_dependency" or "/build/" in target or target.startswith("build/"))
+                    and (root / target).exists()
+                )
+            )
             if command == "documentclass" and "/" not in raw_target and not resolved:
                 continue
             inventory["reference_graph"].append(
