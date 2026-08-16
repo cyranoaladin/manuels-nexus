@@ -164,8 +164,9 @@ def add_latex_graph(
             target = resolve_latex_target(source, raw_target, tracked)
             resolved = (
                 target in tracked
+                or source_roles.get(target) == "generated_dependency"
                 or (
-                    (source_roles.get(target) == "generated_dependency" or "/build/" in target or target.startswith("build/"))
+                    ("/build/" in target or target.startswith("build/"))
                     and (root / target).exists()
                 )
             )
