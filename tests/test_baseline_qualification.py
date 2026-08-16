@@ -550,7 +550,7 @@ def test_materialization_plan_preserves_history_and_emits_all_required_fields(
     ]
     assert plan["unqualified"] == []
     payload = plan["dispositions_payload"]
-    assert len(payload["dispositions"]) == 3817
+    assert len(payload["dispositions"]) == len(historical)
     required = {
         "approved_by",
         "baseline_sha",
