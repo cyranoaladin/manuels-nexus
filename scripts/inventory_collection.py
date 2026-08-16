@@ -2043,6 +2043,12 @@ def _compare_anomaly_debt(
     """Compare two anomaly multisets without mutating either registry."""
     current = _coalesce_active_debt(current_active)
     previous = _coalesce_active_debt(baseline_active)
+    for fp, entry in current.items():
+        if fp in previous:
+            prev = previous[fp]
+            for field in ("owner", "justification", "qualification_digest", "qualified", "disposition", "policy_rule"):
+                if field in prev and field not in entry:
+                    entry[field] = prev[field]
     history = [
         _canonicalize(dict(entry))
         for entry in resolved_history
