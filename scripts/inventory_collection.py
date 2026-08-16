@@ -2047,7 +2047,7 @@ def _compare_anomaly_debt(
         if fp in previous:
             prev = previous[fp]
             for field in ("owner", "justification", "qualification_digest", "disposition", "policy_rule"):
-                if prev.get(field) is not None and entry.get(field) is None:
+                if prev.get(field) and not entry.get(field):
                     entry[field] = prev[field]
             if prev.get("qualified") is True:
                 entry["qualified"] = True
@@ -2159,7 +2159,7 @@ def _compare_anomaly_debt(
             old_entry = previous[old_fingerprint]
             new_entry = current[new_fingerprint]
             for field in ("owner", "justification", "qualification_digest", "disposition", "policy_rule"):
-                if old_entry.get(field) is not None and new_entry.get(field) is None:
+                if old_entry.get(field) and not new_entry.get(field):
                     new_entry[field] = old_entry[field]
             if old_entry.get("qualified") is True:
                 new_entry["qualified"] = True
