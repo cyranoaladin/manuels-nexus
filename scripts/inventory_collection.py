@@ -2046,13 +2046,11 @@ def _compare_anomaly_debt(
     for fp, entry in current.items():
         if fp in previous:
             prev = previous[fp]
-            entry["owner"] = prev.get("owner", "direction_scientifique_programme")
-            entry["justification"] = prev.get("justification", "baseline active entry")
-            entry["qualification_digest"] = prev.get("qualification_digest", "sha256:" + "0" * 64)
-            entry["qualified"] = prev.get("qualified", True)
-            entry["disposition"] = prev.get("disposition", "open_debt")
-            if "policy_rule" in prev:
-                entry["policy_rule"] = prev["policy_rule"]
+            for field in ("owner", "justification", "qualification_digest", "disposition", "policy_rule"):
+                if prev.get(field) is not None and entry.get(field) is None:
+                    entry[field] = prev[field]
+            if entry.get("qualified") is not True and prev.get("qualified") is True and entry.get("qualification_digest") == prev.get("qualification_digest"):
+                entry["qualified"] = True
     history = [
         _canonicalize(dict(entry))
         for entry in resolved_history
@@ -2160,9 +2158,11 @@ def _compare_anomaly_debt(
         for old_fingerprint, new_fingerprint in zip(old_values, new_values):
             old_entry = previous[old_fingerprint]
             new_entry = current[new_fingerprint]
-            for field in ("owner", "justification", "qualification_digest", "qualified", "disposition", "policy_rule"):
-                if old_entry.get(field) is not None:
+            for field in ("owner", "justification", "qualification_digest", "disposition", "policy_rule"):
+                if old_entry.get(field) is not None and new_entry.get(field) is None:
                     new_entry[field] = old_entry[field]
+            if new_entry.get("qualified") is not True and old_entry.get("qualified") is True and new_entry.get("qualification_digest") == old_entry.get("qualification_digest"):
+                new_entry["qualified"] = True
             modified.append(
                 {
                     "current": new_fingerprint,
