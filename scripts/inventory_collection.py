@@ -2047,7 +2047,7 @@ def _compare_anomaly_debt(
         if fp in previous:
             prev = previous[fp]
             for field in ("owner", "justification", "qualification_digest", "qualified", "disposition", "policy_rule"):
-                if field in prev and field not in entry:
+                if prev.get(field) is not None:
                     entry[field] = prev[field]
     history = [
         _canonicalize(dict(entry))
