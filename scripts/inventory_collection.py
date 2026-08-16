@@ -2459,13 +2459,6 @@ def _approved_baseline_extension_diagnosis(
             f"anomalie nouvelle fp={fingerprint}"
             for fingerprint in expected_new
         }
-        for pair in modified_pairs:
-            previous_record = previous.get(pair["previous"], {})
-            locator = str(previous_record.get("locator_key", ""))
-            expected_failures.add(
-                "anomalie modifiée "
-                f"locator={locator}: {pair['previous']}→{pair['current']}"
-            )
         if {
             str(value) for value in comparison.get("failures", [])
         } != expected_failures:
