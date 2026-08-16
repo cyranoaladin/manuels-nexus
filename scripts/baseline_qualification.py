@@ -733,6 +733,7 @@ def plan_materialization(
         for fp in qualified_fingerprints
         if fp not in registered_fingerprints
         and _canonical_locator(by_fingerprint[fp].get("locator_key", "")) not in registered_locators
+        and by_fingerprint[fp].get("policy_rule") not in (None, "", "open-debt")
     }
     if unregistered_qualified:
         raise QualificationError(
