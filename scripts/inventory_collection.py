@@ -2142,12 +2142,16 @@ def _compare_anomaly_debt(
     unmatched_previous = set(previous) - set(exact)
     previous_by_locator: dict[str, list[str]] = defaultdict(list)
     current_by_locator: dict[str, list[str]] = defaultdict(list)
+    def _loc_str(val: Any) -> str:
+        s = json.dumps(val, sort_keys=True, separators=(",", ":")) if isinstance(val, Mapping) else str(val or "")
+        return s.replace("ADGK", "APT").replace("AGT", "APT")
+
     for fingerprint in unmatched_previous:
-        locator = str(previous[fingerprint].get("locator_key", "")).replace("ADGK", "APT").replace("AGT", "APT")
+        locator = _loc_str(previous[fingerprint].get("locator_key", ""))
         if locator:
             previous_by_locator[locator].append(fingerprint)
     for fingerprint in unmatched_current:
-        locator = str(current[fingerprint].get("locator_key", "")).replace("ADGK", "APT").replace("AGT", "APT")
+        locator = _loc_str(current[fingerprint].get("locator_key", ""))
         if locator:
             current_by_locator[locator].append(fingerprint)
     for locator in sorted(set(previous_by_locator) & set(current_by_locator)):
