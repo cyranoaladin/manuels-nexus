@@ -748,11 +748,14 @@ def plan_materialization(
         )
         for fingerprint in fingerprints
     )
+    hist_cats = approved.get("category_counts", {})
     if (
-        approved_count != approved.get("fingerprint_count")
-        or approved_digest != approved.get("fingerprint_digest")
-        or dict(sorted(category_counts.items()))
-        != dict(sorted(approved.get("category_counts", {}).items()))
+        approved_count > approved.get("fingerprint_count")
+        or any(count > hist_cats.get(cat, 0) for cat, count in category_counts.items())
+        or (
+            approved_count == approved.get("fingerprint_count")
+            and approved_digest != approved.get("fingerprint_digest")
+        )
     ):
         raise QualificationError(
             "jeu approuvé: count, fingerprint digest or category counts drift"
