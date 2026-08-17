@@ -1,0 +1,97 @@
+{
+  "analysis_name": "A2_LATEX_SCC_ANALYSIS",
+  "total_cycles_before": 10,
+  "total_cycles_after": 0,
+  "graph_topology": "DAG (Directed Acyclic Graph)",
+  "max_scc_size": 1,
+  "scc_components_count": 10,
+  "classification_breakdown": {
+    "PRODUCTION_REACHABLE": 2,
+    "FIXTURE_ONLY": 4,
+    "PROTOTYPE_ONLY": 2,
+    "ARCHIVE_ONLY": 2,
+    "ANALYZER_FALSE_POSITIVE": 0
+  },
+  "scc_nodes": [
+    {
+      "id": "scc_01",
+      "field": "nsi:static:NSI/gabarits/chapitre_master.tex",
+      "source": "NSI/gabarits/nexus-manuel.cls",
+      "class": "FIXTURE_ONLY",
+      "status": "RESOLVED_DAG",
+      "proof": "TeX graph resolved to DAG via canonical class redirection"
+    },
+    {
+      "id": "scc_02",
+      "field": "math:static:Mathematiques/manuel-maths/gabarits/objet_standalone.tex",
+      "source": "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls",
+      "class": "PROTOTYPE_ONLY",
+      "status": "RESOLVED_DAG",
+      "proof": "TeX graph resolved to DAG via canonical class redirection"
+    },
+    {
+      "id": "scc_03",
+      "field": "nsi:static:NSI/gabarits/book_master.tex",
+      "source": "NSI/gabarits/nexus-manuel.cls",
+      "class": "FIXTURE_ONLY",
+      "status": "RESOLVED_DAG",
+      "proof": "TeX graph resolved to DAG via canonical class redirection"
+    },
+    {
+      "id": "scc_04",
+      "field": "math:static:Mathematiques/manuel-maths/gabarits/chapitre_master.tex",
+      "source": "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls",
+      "class": "PRODUCTION_REACHABLE",
+      "status": "RESOLVED_DAG",
+      "proof": "TeX graph resolved to DAG via canonical class redirection"
+    },
+    {
+      "id": "scc_05",
+      "field": "nsi:static:NSI/gabarits/specimen.tex",
+      "source": "NSI/gabarits/nexus-manuel.cls",
+      "class": "ARCHIVE_ONLY",
+      "status": "RESOLVED_DAG",
+      "proof": "TeX graph resolved to DAG via canonical class redirection"
+    },
+    {
+      "id": "scc_06",
+      "field": "nsi:static:NSI/gabarits/objet_standalone.tex",
+      "source": "NSI/gabarits/nexus-manuel.cls",
+      "class": "PROTOTYPE_ONLY",
+      "status": "RESOLVED_DAG",
+      "proof": "TeX graph resolved to DAG via canonical class redirection"
+    },
+    {
+      "id": "scc_07",
+      "field": "math:static:Mathematiques/manuel-maths/gabarits/specimen.tex",
+      "source": "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls",
+      "class": "ARCHIVE_ONLY",
+      "status": "RESOLVED_DAG",
+      "proof": "TeX graph resolved to DAG via canonical class redirection"
+    },
+    {
+      "id": "scc_08",
+      "field": "math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex",
+      "source": "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls",
+      "class": "PRODUCTION_REACHABLE",
+      "status": "RESOLVED_DAG",
+      "proof": "TeX graph resolved to DAG via canonical class redirection"
+    },
+    {
+      "id": "scc_09",
+      "field": "math:static:Mathematiques/manuel-maths/gabarits/specimen-pont-v6.tex",
+      "source": "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls",
+      "class": "FIXTURE_ONLY",
+      "status": "RESOLVED_DAG",
+      "proof": "TeX graph resolved to DAG via canonical class redirection"
+    },
+    {
+      "id": "scc_10",
+      "field": "math:static:Mathematiques/manuel-maths/gabarits/specimen-v6.tex",
+      "source": "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls",
+      "class": "FIXTURE_ONLY",
+      "status": "RESOLVED_DAG",
+      "proof": "TeX graph resolved to DAG via canonical class redirection"
+    }
+  ]
+}
