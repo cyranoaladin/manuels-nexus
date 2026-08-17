@@ -11650,6 +11650,42 @@ def test_static_latex_cycle_is_reported_and_deep_chain_is_iterative(
     )
 
 
+def test_latex_cycle_detection_mutation_2_and_3_nodes(
+    tmp_path: Path, inventory_module
+) -> None:
+    # 2-node cycle mutation: A -> B -> A
+    repo_2 = tmp_path / "repo_2"
+    _init_repository(repo_2)
+    sources_2 = {
+        "NSI/build/root.tex": "\\documentclass{article}\n\\input{a.tex}\n",
+        "NSI/build/a.tex": "\\input{b.tex}\n",
+        "NSI/build/b.tex": "\\input{a.tex}\n",
+    }
+    for path, content in sources_2.items():
+        _write(repo_2 / path, content)
+    _track(repo_2, *sources_2)
+
+    inv_2 = inventory_module.build_inventory(repo_2)
+    assert len(inv_2["anomalies"]["latex_cycles"]) > 0
+
+    # 3-node cycle mutation: A -> B -> C -> A
+    repo_3 = tmp_path / "repo_3"
+    _init_repository(repo_3)
+    sources_3 = {
+        "NSI/build/root.tex": "\\documentclass{article}\n\\input{a.tex}\n",
+        "NSI/build/a.tex": "\\input{b.tex}\n",
+        "NSI/build/b.tex": "\\input{c.tex}\n",
+        "NSI/build/c.tex": "\\input{a.tex}\n",
+    }
+    for path, content in sources_3.items():
+        _write(repo_3 / path, content)
+    _track(repo_3, *sources_3)
+
+    inv_3 = inventory_module.build_inventory(repo_3)
+    assert len(inv_3["anomalies"]["latex_cycles"]) > 0
+
+
+
 def test_source_digest_distinguishes_empty_from_missing_tracked_file(
     tmp_path: Path, inventory_module
 ) -> None:

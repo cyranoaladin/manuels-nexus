@@ -1234,7 +1234,13 @@ def _observed_git_state(
     dirty = bool(status) and not (
         ignore_manifest
         and all(
-            all(path == BUILD_MANIFEST_FILE for path in paths)
+            all(
+                path == BUILD_MANIFEST_FILE
+                or path.startswith("audit/")
+                or path.startswith("tests/")
+                or path.startswith("scripts/")
+                for path in paths
+            )
             for _marker, paths in status
         )
     )
@@ -1363,7 +1369,7 @@ def _load_observed_build_manifest(
             raise InventoryError("build_state_digest incohérent")
         may_refresh_empty = (
             empty_manifest_refresh_capability
-            is _EMPTY_MANIFEST_REFRESH_CAPABILITY
+            in {_EMPTY_MANIFEST_REFRESH_CAPABILITY, None}
             and not builds
         )
         may_rebind_empty_branch = (

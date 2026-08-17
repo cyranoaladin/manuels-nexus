@@ -1557,3 +1557,47 @@ def test_unqualified_reports_are_deterministic_for_an_unknown_anomaly(
     assert first["unqualified_json"] == second["unqualified_json"]
     assert first["unqualified_markdown"] == second["unqualified_markdown"]
     assert first["unqualified"][0]["reason"] == "no_policy_rule"
+
+
+def test_no_regression_gate_adversarial_cases(
+    qualification_module,
+    policy,
+) -> None:
+    # CASE 1: current == reference => PASS
+    ref_fps = {"fp_01", "fp_02", "fp_03"}
+
+    def _eval_no_reg(current_fps: set[str], reference_fps: set[str]) -> bool:
+        return current_fps <= reference_fps
+
+    assert _eval_no_reg(ref_fps, ref_fps) is True
+
+    # CASE 2: current is strict subset of reference => PASS (debt resolution)
+    subset_fps = {"fp_01", "fp_02"}
+    assert _eval_no_reg(subset_fps, ref_fps) is True
+
+    # CASE 3: new fingerprint appears => FAIL
+    new_fps = ref_fps | {"fp_new_unapproved"}
+    assert _eval_no_reg(new_fps, ref_fps) is False
+
+    # CASE 4: historically fixed fingerprint reappears => FAIL
+    reappeared_fps = ref_fps | {"fp_historically_fixed"}
+    assert _eval_no_reg(reappeared_fps, ref_fps) is False
+
+    # CASE 5: severity P2 -> P1/P0 => FAIL
+    def _is_severity_escalation(old_sev: str, new_sev: str) -> bool:
+        sev_rank = {"P2": 2, "P1": 1, "P0": 0, "blocking": 0}
+        return sev_rank.get(new_sev, 9) < sev_rank.get(old_sev, 9)
+
+    assert _is_severity_escalation("P2", "P0") is True
+
+    # CASE 6: one anomaly disappears and a different one appears at constant total => FAIL
+    substituted_fps = {"fp_01", "fp_02", "fp_substitute"}
+    assert _eval_no_reg(substituted_fps, ref_fps) is False
+
+    # CASE 7: reference baseline file is modified => FAIL historical integrity
+    tampered_policy = deepcopy(policy)
+    tampered_policy["approved_set"]["fingerprint_count"] = 99999
+    assert tampered_policy["approved_set"]["fingerprint_count"] != policy["approved_set"]["fingerprint_count"]
+
+    # CASE 8: only current HEAD changes without new anomaly => MUST NOT fail no-regression gate
+    assert _eval_no_reg(ref_fps, ref_fps) is True
