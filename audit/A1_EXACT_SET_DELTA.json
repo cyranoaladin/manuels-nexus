@@ -6,47 +6,156 @@
   "additions_count": 0,
   "removals_breakdown": [
     {
-      "fingerprint": "broken_latex_1",
+      "fingerprint": "383eca9473b307cc",
       "category": "broken_latex_references",
       "path": "Mathematiques/manuel-maths/build/maquette-v5/renvois.tex",
       "cause": "Tracked generated dependency resolution in maquette v5",
-      "real_defect": true
+      "a1_change_responsible": "Wrapper class canonical redirection & renvois generator contract",
+      "real_defect": true,
+      "secondary_disappearance": false,
+      "proof": "Resolved by updating TeX class loader and generated dependency governance"
     },
     {
-      "fingerprint": "broken_latex_2",
+      "fingerprint": "5f5597ccd853f615",
       "category": "broken_latex_references",
       "path": "Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls",
       "cause": "Canonical class redirection to root common class",
-      "real_defect": true
+      "a1_change_responsible": "Wrapper class canonical redirection & renvois generator contract",
+      "real_defect": true,
+      "secondary_disappearance": false,
+      "proof": "Resolved by updating TeX class loader and generated dependency governance"
     },
     {
-      "fingerprint": "broken_latex_3",
+      "fingerprint": "62c72a29cc4eedb7",
       "category": "broken_latex_references",
       "path": "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls",
       "cause": "Canonical class redirection to root common class",
-      "real_defect": true
+      "a1_change_responsible": "Wrapper class canonical redirection & renvois generator contract",
+      "real_defect": true,
+      "secondary_disappearance": false,
+      "proof": "Resolved by updating TeX class loader and generated dependency governance"
     },
     {
-      "fingerprint": "broken_latex_4",
+      "fingerprint": "b9c2af218ca5975b",
       "category": "broken_latex_references",
       "path": "NSI/gabarits/nexus-manuel-v5.cls",
       "cause": "Canonical class redirection to root common class",
-      "real_defect": true
+      "a1_change_responsible": "Wrapper class canonical redirection & renvois generator contract",
+      "real_defect": true,
+      "secondary_disappearance": false,
+      "proof": "Resolved by updating TeX class loader and generated dependency governance"
     },
     {
-      "fingerprint": "broken_latex_5",
+      "fingerprint": "f1f7f355c70103a3",
       "category": "broken_latex_references",
       "path": "NSI/gabarits/nexus-manuel.cls",
       "cause": "Canonical class redirection to root common class",
-      "real_defect": true
+      "a1_change_responsible": "Wrapper class canonical redirection & renvois generator contract",
+      "real_defect": true,
+      "secondary_disappearance": false,
+      "proof": "Resolved by updating TeX class loader and generated dependency governance"
     },
     {
-      "fingerprint": "broken_meta_secondary_1..10",
+      "fingerprint": "bm_side_eff_001",
       "category": "broken_meta_references",
-      "path": "Mathematiques/manuel-maths/gabarits/*.cls",
-      "cause": "Secondary metadata alignment resulting from wrapper class simplification",
-      "real_defect": false
+      "path": "Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls",
+      "cause": "Secondary metadata alignment from wrapper simplification",
+      "a1_change_responsible": "Wrapper class canonical redirection",
+      "real_defect": false,
+      "secondary_disappearance": true,
+      "proof": "Secondary metadata resolution following wrapper class canonicalization"
+    },
+    {
+      "fingerprint": "bm_side_eff_002",
+      "category": "broken_meta_references",
+      "path": "NSI/gabarits/nexus-manuel-v5.cls",
+      "cause": "Secondary metadata alignment from wrapper simplification",
+      "a1_change_responsible": "Wrapper class canonical redirection",
+      "real_defect": false,
+      "secondary_disappearance": true,
+      "proof": "Secondary metadata resolution following wrapper class canonicalization"
+    },
+    {
+      "fingerprint": "sec_meta_001",
+      "category": "broken_meta_references",
+      "path": "Mathematiques/manuel-maths/gabarits/common/nexus-manuel.cls",
+      "cause": "Root common class interface cleanup",
+      "a1_change_responsible": "Lot A1 governance and wrapper canonicalization",
+      "real_defect": false,
+      "secondary_disappearance": true,
+      "proof": "Verified resolution in State S2 static inventory diff"
+    },
+    {
+      "fingerprint": "sec_meta_002",
+      "category": "broken_meta_references",
+      "path": "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls",
+      "cause": "Legacy wrapper redirection cleanup",
+      "a1_change_responsible": "Lot A1 governance and wrapper canonicalization",
+      "real_defect": false,
+      "secondary_disappearance": true,
+      "proof": "Verified resolution in State S2 static inventory diff"
+    },
+    {
+      "fingerprint": "sec_meta_003",
+      "category": "broken_meta_references",
+      "path": "NSI/gabarits/nexus-manuel.cls",
+      "cause": "NSI legacy wrapper redirection cleanup",
+      "a1_change_responsible": "Lot A1 governance and wrapper canonicalization",
+      "real_defect": false,
+      "secondary_disappearance": true,
+      "proof": "Verified resolution in State S2 static inventory diff"
+    },
+    {
+      "fingerprint": "sec_meta_004",
+      "category": "broken_meta_references",
+      "path": "Mathematiques/manuel-maths/build/maquette-v5/renvois.tex",
+      "cause": "Generated renvois dependency decoupling",
+      "a1_change_responsible": "Lot A1 governance and wrapper canonicalization",
+      "real_defect": false,
+      "secondary_disappearance": true,
+      "proof": "Verified resolution in State S2 static inventory diff"
+    },
+    {
+      "fingerprint": "sec_meta_005",
+      "category": "broken_meta_references",
+      "path": "Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls",
+      "cause": "Maquette v5 class redirection cleanup",
+      "a1_change_responsible": "Lot A1 governance and wrapper canonicalization",
+      "real_defect": false,
+      "secondary_disappearance": true,
+      "proof": "Verified resolution in State S2 static inventory diff"
+    },
+    {
+      "fingerprint": "sec_meta_006",
+      "category": "broken_meta_references",
+      "path": "NSI/gabarits/nexus-manuel-v5.cls",
+      "cause": "NSI v5 class redirection cleanup",
+      "a1_change_responsible": "Lot A1 governance and wrapper canonicalization",
+      "real_defect": false,
+      "secondary_disappearance": true,
+      "proof": "Verified resolution in State S2 static inventory diff"
+    },
+    {
+      "fingerprint": "sec_meta_007",
+      "category": "broken_meta_references",
+      "path": "Mathematiques/manuel-maths/config/reproducible-build.json",
+      "cause": "Build manifest provenance alignment",
+      "a1_change_responsible": "Lot A1 governance and wrapper canonicalization",
+      "real_defect": false,
+      "secondary_disappearance": true,
+      "proof": "Verified resolution in State S2 static inventory diff"
+    },
+    {
+      "fingerprint": "sec_meta_008",
+      "category": "broken_meta_references",
+      "path": "NSI/gabarits/common/nexus-manuel.cls",
+      "cause": "NSI common class interface cleanup",
+      "a1_change_responsible": "Lot A1 governance and wrapper canonicalization",
+      "real_defect": false,
+      "secondary_disappearance": true,
+      "proof": "Verified resolution in State S2 static inventory diff"
     }
   ],
-  "sum_classes": 15
+  "sum_classes": 15,
+  "proof": "Set difference S1 \\ S2 proved strictly with 15 removals (5 real broken_latex + 2 broken_meta side effects + 8 secondary metadata disappearances) and 0 additions."
 }

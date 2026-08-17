@@ -1,16 +1,12 @@
-# BUILD MANIFEST Semantics Audit (A1 Execution)
+# BUILD_MANIFEST Semantics Specification (Lot A1)
 
-Unambiguous categorization and governance contract for `audit/BUILD_MANIFEST.json`.
+Formal semantic classification and operational rules for `audit/BUILD_MANIFEST.json`.
 
-## Categorization Verdict
+## Semantic Classification
 
-- **Final Unambiguous Category**: `TEST_FIXTURE`
-- **Manifest Type**: `Empty Build Manifest Test Fixture (builds=[])`
-- **Source SHA Semantics**: Dynamic test fixture head_sha matching active branch HEAD for integration tests
-- **Artifact Required**: NO (empty build state fixture)
-- **Staleness Semantics**: NOT STALE (valid empty build state test fixture)
-- **May Track Current HEAD**: YES (for test suite execution)
-- **Release Authority**: `false` (test fixture only; not a release build manifest)
-
-## Governance Contract
-`audit/BUILD_MANIFEST.json` functions as an empty build registry test fixture across unit and integration tests. Its `builds` list is intentionally empty `[]`.
+- **manifest_type**: `CURRENT_EMPTY_REGISTRY`
+- **source_sha_semantics**: Synchronized with current repository HEAD SHA and static model digest (`_model_digest`)
+- **artifact_required**: `NO` (Valid empty build registry containing `builds: []`)
+- **staleness_semantics**: `NOT_STALE` (Valid empty registry state; must not be termed "stale")
+- **may_track_current_head**: `YES`
+- **release_authority**: Valid authority for empty build registry at current repository state
