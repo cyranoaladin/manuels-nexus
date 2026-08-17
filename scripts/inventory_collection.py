@@ -1250,7 +1250,11 @@ def _observed_git_state(
             ("rev-parse", "HEAD"),
             description="git HEAD",
         ),
-        _git_value(root, ("branch", "--show-current")) or "detached",
+        _git_required_value(
+            root,
+            ("branch", "--show-current"),
+            description="git branch",
+        ),
         dirty,
     )
 
