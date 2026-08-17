@@ -1415,7 +1415,7 @@ def _load_observed_build_manifest(
         branch_differs = recorded_branch != branch
         if may_rebind_empty_branch and not branch:
             raise InventoryError("branche Git détachée ou indisponible")
-        if branch_differs and not may_rebind_empty_branch and branch != "detached":
+        if branch_differs and not may_rebind_empty_branch:
             raise InventoryError("branche de provenance du manifeste incohérente")
         if (
             branch_differs
