@@ -1368,8 +1368,7 @@ def _load_observed_build_manifest(
         if payload.get("build_state_digest") != _build_state_digest(builds):
             raise InventoryError("build_state_digest incohérent")
         may_refresh_empty = (
-            empty_manifest_refresh_capability
-            in {_EMPTY_MANIFEST_REFRESH_CAPABILITY, None}
+            empty_manifest_refresh_capability == _EMPTY_MANIFEST_REFRESH_CAPABILITY
             and not builds
         )
         may_rebind_empty_branch = (
