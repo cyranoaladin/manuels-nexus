@@ -1,36 +1,41 @@
 {
-  "phase_states": {
-    "S0_baseline": {
-      "total_raw_anomalies": 6425,
-      "release_blocking": 6425,
-      "total_p0": 15,
-      "broken_latex": 5,
-      "latex_cycles": 10,
-      "a1_scoped_real_defects": 5
+    "phase_states": {
+        "S0_baseline": {
+            "total_raw_anomalies": 6425,
+            "release_blocking": 6425,
+            "total_p0": 15,
+            "broken_latex": 5,
+            "latex_cycles": 10,
+            "a1_scoped_real_defects": 5
+        },
+        "S1_post_A0": {
+            "total_raw_anomalies": 5630,
+            "release_blocking": 5630,
+            "total_p0": 15,
+            "broken_latex": 5,
+            "latex_cycles": 10,
+            "a1_scoped_real_defects": 5
+        },
+        "S2_post_A1": {
+            "total_raw_anomalies": 5615,
+            "release_blocking": 5615,
+            "total_p0": 0,
+            "broken_latex": 0,
+            "latex_cycles": 0,
+            "a1_scoped_real_defects": 0
+        },
+        "S3_post_A2": {
+            "total_raw_anomalies": 5615,
+            "release_blocking": 5615,
+            "total_p0": 0,
+            "broken_latex": 0,
+            "latex_cycles": 0,
+            "a1_scoped_real_defects": 0
+        }
     },
-    "S1_post_A0": {
-      "total_raw_anomalies": 5630,
-      "release_blocking": 5630,
-      "total_p0": 15,
-      "broken_latex": 5,
-      "latex_cycles": 10,
-      "a1_scoped_real_defects": 5
-    },
-    "S2_post_A1": {
-      "total_raw_anomalies": 5615,
-      "release_blocking": 5615,
-      "total_p0": 10,
-      "broken_latex": 0,
-      "latex_cycles": 10,
-      "a1_scoped_real_defects": 0
-    },
-    "S3_post_A2": {
-      "total_raw_anomalies": 5605,
-      "release_blocking": 5605,
-      "total_p0": 0,
-      "broken_latex": 0,
-      "latex_cycles": 0,
-      "a1_scoped_real_defects": 0
+    "provenance_correction": {
+        "reference": "audit/PROVENANCE_CORRECTION_1361cf37.md",
+        "note": "S3 corrigé de 5605 à 5615 (valeur reproduite hermétiquement à 9ddcffee, worktrees frais A==B); 5605 provenait d'une double soustraction des 10 latex_cycles déjà résolus dans S2. S2 corrigé également : les 10 latex_cycles étaient déjà résolus par fed6d28a (A1) ; l'ancienne valeur '10' provenait de l'inventaire committé stale.",
+        "reproduced_at_sha": "9ddcffee6a341981feed95e54bc641e17cdc0732"
     }
-  }
 }

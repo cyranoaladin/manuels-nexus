@@ -1,27 +1,87 @@
 # A2 LaTeX Strongly Connected Components (SCC) Analysis
 
-Analysis of the 10 LaTeX graph cycles and their resolution into a strict Directed Acyclic Graph (DAG).
+Analyse des 10 anomalies `latex_cycles` historiques et de leur résolution.
 
-## Overview Metrics
+> Corrigé le 2026-08-18 suite au diagnostic de provenance
+> (`audit/PROVENANCE_CORRECTION_1361cf37.md`). La version précédente de ce
+> rapport attribuait la résolution au lot A2 et parlait de « canonical class
+> redirection » sans identifier de commit. Les faits ci-dessous sont établis
+> par reproduction hermétique.
 
-- **Total Cycles Before**: `10`
-- **Total Cycles After**: `0`
-- **Graph Topology**: `DAG (Directed Acyclic Graph)`
-- **Max SCC Size**: `1` (Trivial singletons)
-- **Strongly Connected Components**: `10`
+## Résultat reproduit (SHA 9ddcffee, deux worktrees frais, A == B)
 
-## Graph Classification Breakdown
+- **FULL_REPOSITORY_LATEX_GRAPH — SCC cycliques** : `0`
+- **PRODUCTION_REACHABLE_LATEX_GRAPH — SCC cycliques** : `0`
+- **Topologie** : DAG strict sur l'ensemble du graphe analysé.
 
-| Classification | Count | Description |
-| --- | --- | --- |
-| **PRODUCTION_REACHABLE** | `2` | Active production gabarits used in manual compilation (`maquette.tex`, `chapitre_master.tex`) |
-| **FIXTURE_ONLY** | `4` | Test fixtures and specimen templates (`specimen-v6.tex`, `specimen-pont-v6.tex`, `chapitre_master.tex` NSI, `book_master.tex`) |
-| **PROTOTYPE_ONLY** | `2` | Prototype standalone object TeX files |
-| **ARCHIVE_ONLY** | `2` | Legacy specimen documents |
-| **ANALYZER_FALSE_POSITIVE** | `0` | N/A |
-| **TOTAL** | **`10`** | **100% Accounted For** |
+L'objectif release (`PRODUCTION_GRAPH cyclic SCC = 0`) est atteint, et le
+graphe complet (fixtures, prototypes, archives inclus) est également acyclique.
 
-## Invariant Verification
+## Nature réelle du défaut
 
-The graphic charter architecture invariant: `common -> discipline -> manual` is preserved without back-references.
-All 10 SCCs are verified as resolved and free of cyclic dependencies.
+Les 10 anomalies partageaient **un unique motif de défaut**, dupliqué dans
+2 fichiers sources :
+
+- `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls`
+- `NSI/gabarits/nexus-manuel.cls`
+
+Ces wrappers contenaient un fallback littéral auto-référentiel :
+
+```tex
+\IfFileExists{...}{...}{\input{nexus-manuel.cls}}  % auto-référence
+```
+
+L'analyseur résolvait `nexus-manuel.cls` vers le wrapper lui-même → self-loop
+SCC. Le défaut était réel dans le graphe source (auto-inclusion littérale),
+mais latent à l'exécution LaTeX (branche uniquement atteinte si la classe
+canonique `gabarits/common/nexus-manuel.cls` est absente).
+
+- **Commit de correction** : `fed6d28a` (2026-08-16, lot A1,
+  « resolve all 5 A1 broken_latex_references ») — suppression du fallback
+  auto-référentiel dans les 2 wrappers.
+- **Changement de source dans le lot A2** : AUCUN (aucun `.tex/.sty/.cls`
+  modifié entre `1361cf37` et `9ddcffee`). A2 est un lot de vérification et
+  de documentation.
+- **Faux positifs d'analyseur** : 0 (l'auto-inclusion existait littéralement).
+
+## Décomposition des 10 surfaces d'anomalie
+
+Un défaut par fichier wrapper (2 défauts sources) apparaissait sur 10 champs
+d'assemblage statique (un par point d'entrée `.tex` dont le graphe atteint le
+wrapper) :
+
+| # | Champ | Portée | Défaut source | Corrigé par |
+| --- | --- | --- | --- | --- |
+| 1 | `math:static:.../build/maquette-v5/maquette.tex` | PRODUCTION_REACHABLE | wrapper maths | `fed6d28a` |
+| 2 | `math:static:.../gabarits/chapitre_master.tex` | PRODUCTION_REACHABLE | wrapper maths | `fed6d28a` |
+| 3 | `math:static:.../gabarits/objet_standalone.tex` | PROTOTYPE_ONLY | wrapper maths | `fed6d28a` |
+| 4 | `math:static:.../gabarits/specimen-pont-v6.tex` | FIXTURE_ONLY | wrapper maths | `fed6d28a` |
+| 5 | `math:static:.../gabarits/specimen-v6.tex` | FIXTURE_ONLY | wrapper maths | `fed6d28a` |
+| 6 | `math:static:.../gabarits/specimen.tex` | ARCHIVE_ONLY | wrapper maths | `fed6d28a` |
+| 7 | `nsi:static:NSI/gabarits/book_master.tex` | FIXTURE_ONLY | wrapper NSI | `fed6d28a` |
+| 8 | `nsi:static:NSI/gabarits/chapitre_master.tex` | FIXTURE_ONLY | wrapper NSI | `fed6d28a` |
+| 9 | `nsi:static:NSI/gabarits/objet_standalone.tex` | PROTOTYPE_ONLY | wrapper NSI | `fed6d28a` |
+| 10 | `nsi:static:NSI/gabarits/specimen.tex` | ARCHIVE_ONLY | wrapper NSI | `fed6d28a` |
+
+Bilan honnête :
+
+- **Vrais défauts source corrigés** : 2 (un motif, 2 fichiers wrappers) —
+  corrigés en A1, pas en A2.
+- **Surfaces production-reachable assainies** : 2 (champs 1-2).
+- **Surfaces non-production (fixtures/prototypes/archives)** : 8 — mêmes
+  défauts sources, désormais résolues ; elles n'ont jamais été chargées en
+  runtime production.
+- Les 10 ne doivent PAS être présentés comme dix défauts release distincts.
+
+## Pourquoi l'ancien rapport annonçait encore « 10 cycles »
+
+L'ancien décompte provenait de `audit/INVENTAIRE_COLLECTION.json` committé,
+généré AVANT `fed6d28a` et jamais régénéré/committé depuis. Toute analyse
+fraîche postérieure à `fed6d28a` donne 0 cycle. Voir
+`audit/PROVENANCE_CORRECTION_1361cf37.md`.
+
+## Invariant d'architecture
+
+L'invariant `common -> discipline -> manual` est préservé sans référence
+arrière : vérifié sur le graphe frais reproduit (SCC max = 1, aucune arête de
+retour vers `gabarits/common`).
