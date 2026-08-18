@@ -10705,6 +10705,220 @@ def test_recursive_static_latex_assembly_counts_duplicates_and_assembles_correct
     assert inventory_module.build_inventory(tmp_path)["source_digest"] != first_digest
 
 
+_REUSE_STATIC_ROOT = "Mathematiques/manuel-maths/build/maquette-v5/maquette.tex"
+_REUSE_STATIC_ID = f"math:static:{_REUSE_STATIC_ROOT}"
+
+
+def _write_reuse_fixture(
+    tmp_path: Path,
+    *,
+    exercise_inclusions: int,
+    registry_entries: list[dict] | None,
+) -> str:
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    exercise = f"{base}/exercices/1SPE-TEST-EX-001.tex"
+    inputs = "\n".join(
+        ["\\input{chapitres/1SPE-TEST/exercices/1SPE-TEST-EX-001}"]
+        * exercise_inclusions
+    )
+    sources = {
+        f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
+        exercise: _meta(
+            id="1SPE-TEST-EX-001", type_objet="exercice", status="approved"
+        ),
+        _REUSE_STATIC_ROOT: (
+            "\\documentclass{article}\n\\begin{document}\n"
+            f"{inputs}\n\\end{{document}}\n"
+        ),
+    }
+    if registry_entries is not None:
+        sources["audit/ASSEMBLY_REUSE_CONTRACTS.yaml"] = yaml.safe_dump(
+            {
+                "artifact_type": "assembly_reuse_contracts",
+                "schema_version": 1,
+                "contracts": registry_entries,
+            },
+            allow_unicode=True,
+            sort_keys=True,
+        )
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+    return exercise
+
+
+def _reuse_entry(exercise: str, expected: int) -> dict:
+    return {
+        "assembly_id": _REUSE_STATIC_ID,
+        "object_path": exercise,
+        "expected_occurrences": expected,
+        "authority": "manifest canonique de test",
+        "reason": "réutilisation éditoriale déclarée (fixture)",
+    }
+
+
+def test_declared_assembly_reuse_is_not_flagged_as_duplicate(
+    tmp_path: Path, inventory_module
+) -> None:
+    """Un objet inclus 2 fois AVEC contrat déclaré expected=2 n'est pas une anomalie."""
+    _init_repository(tmp_path)
+    exercise = _write_reuse_fixture(
+        tmp_path,
+        exercise_inclusions=2,
+        registry_entries=[_reuse_entry("chapitres-placeholder", 2)],
+    )
+    # corrige l'entrée avec le vrai chemin de l'objet
+    payload = yaml.safe_load(
+        (tmp_path / "audit/ASSEMBLY_REUSE_CONTRACTS.yaml").read_text(
+            encoding="utf-8"
+        )
+    )
+    payload["contracts"] = [_reuse_entry(exercise, 2)]
+    _write(
+        tmp_path / "audit/ASSEMBLY_REUSE_CONTRACTS.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+    _track(tmp_path, "audit/ASSEMBLY_REUSE_CONTRACTS.yaml")
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert inventory["anomalies"]["duplicate_assembly_objects"] == []
+
+
+def test_undeclared_double_inclusion_is_still_flagged(
+    tmp_path: Path, inventory_module
+) -> None:
+    """Mutation: sans contrat déclaré, la double inclusion reste une anomalie."""
+    _init_repository(tmp_path)
+    exercise = _write_reuse_fixture(
+        tmp_path, exercise_inclusions=2, registry_entries=None
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert [
+        (item["champ"], item["cible"], item["raison"])
+        for item in inventory["anomalies"]["duplicate_assembly_objects"]
+    ] == [
+        (
+            _REUSE_STATIC_ID,
+            exercise,
+            "objet inclus 2 fois dans le meme assemblage LaTeX",
+        )
+    ]
+
+
+def test_declared_reuse_occurrence_mismatch_is_flagged(
+    tmp_path: Path, inventory_module
+) -> None:
+    """Invariant bidirectionnel: observé != contrat => anomalie (3, 1 ou 0 vs 2)."""
+    for inclusions in (3, 1):
+        repo = tmp_path / f"repo-{inclusions}"
+        _init_repository(repo)
+        exercise = _write_reuse_fixture(
+            repo, exercise_inclusions=inclusions, registry_entries=None
+        )
+        _write(
+            repo / "audit/ASSEMBLY_REUSE_CONTRACTS.yaml",
+            yaml.safe_dump(
+                {
+                    "artifact_type": "assembly_reuse_contracts",
+                    "schema_version": 1,
+                    "contracts": [_reuse_entry(exercise, 2)],
+                },
+                allow_unicode=True,
+                sort_keys=True,
+            ),
+        )
+        _track(repo, "audit/ASSEMBLY_REUSE_CONTRACTS.yaml")
+
+        inventory = inventory_module.build_inventory(repo)
+        flagged = inventory["anomalies"]["duplicate_assembly_objects"]
+        assert len(flagged) == 1, (inclusions, flagged)
+        assert flagged[0]["cible"] == exercise
+        assert "au lieu de 2" in flagged[0]["raison"], (inclusions, flagged)
+
+
+def test_reuse_registry_rejects_invalid_entries(
+    tmp_path: Path, inventory_module
+) -> None:
+    """expected < 2, doublon de clé ou structure invalide => InventoryError."""
+    _init_repository(tmp_path)
+    exercise = _write_reuse_fixture(
+        tmp_path, exercise_inclusions=2, registry_entries=None
+    )
+    for contracts in (
+        [_reuse_entry(exercise, 1)],
+        [_reuse_entry(exercise, 2), _reuse_entry(exercise, 2)],
+        [{"assembly_id": _REUSE_STATIC_ID}],
+    ):
+        _write(
+            tmp_path / "audit/ASSEMBLY_REUSE_CONTRACTS.yaml",
+            yaml.safe_dump(
+                {
+                    "artifact_type": "assembly_reuse_contracts",
+                    "schema_version": 1,
+                    "contracts": contracts,
+                },
+                allow_unicode=True,
+                sort_keys=True,
+            ),
+        )
+        _track(tmp_path, "audit/ASSEMBLY_REUSE_CONTRACTS.yaml")
+        with pytest.raises(inventory_module.InventoryError):
+            inventory_module.build_inventory(tmp_path)
+
+
+def test_repository_duplicate_assembly_objects_is_zero(
+    inventory_module,
+) -> None:
+    """A3: plus aucun doublon d'assemblage non contractualisé dans le dépôt réel."""
+    inventory = inventory_module.build_inventory(ROOT)
+
+    assert inventory["anomalies"]["duplicate_assembly_objects"] == []
+
+
+def test_maquette_reuse_contracts_match_manifest_authority(
+    inventory_module,
+) -> None:
+    """Le registre déclaré reflète exactement l'autorité du manifest canonique.
+
+    Source d'autorité indépendante (§5): rendered_method.applications du
+    manifest maquette-v5, chacun devant aussi figurer dans exercise_order.
+    Le registre ne doit ni inventer ni omettre une réutilisation.
+    """
+    manifest = json.loads(
+        (
+            ROOT / "Mathematiques/manuel-maths/build/maquette-v5/manifest.json"
+        ).read_text(encoding="utf-8")
+    )
+    applications = manifest["rendered_method"]["applications"]
+    assert applications, "l'autorité doit déclarer au moins une application"
+    for object_id in applications:
+        assert object_id in manifest["exercise_order"]
+
+    registry = yaml.safe_load(
+        (ROOT / "audit/ASSEMBLY_REUSE_CONTRACTS.yaml").read_text(
+            encoding="utf-8"
+        )
+    )
+    maquette_entries = {
+        entry["object_path"]: entry
+        for entry in registry["contracts"]
+        if entry["assembly_id"]
+        == "math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex"
+    }
+    expected_paths = {
+        "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/"
+        f"exercices/{object_id}.tex"
+        for object_id in applications
+    }
+    assert set(maquette_entries) == expected_paths
+    for entry in maquette_entries.values():
+        assert entry["expected_occurrences"] == 2
+        assert "manifest.json" in entry["authority"]
+
+
 def test_graph_source_role_policies_are_explicit(
     inventory_module,
 ) -> None:

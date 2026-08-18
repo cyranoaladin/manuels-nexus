@@ -203,6 +203,7 @@ def add_static_latex_assemblies(
     is_relevant_tex: Any,
     chapter_id_from_source: Any,
     manual_for_chapter: Any,
+    declared_reuse: Mapping[tuple[str, str], int] | None = None,
 ) -> None:
     """Build static assemblies only from explicitly eligible source roles."""
 
@@ -302,14 +303,36 @@ def add_static_latex_assemblies(
                 "variant": variant,
             }
         )
-        for path, count in sorted(Counter(object_occurrences).items()):
-            if count > 1:
+        # Invariant permanent: occurrence_count == expected_occurrence_count
+        # pour chaque (assemblage, objet). expected vaut 1 sauf réutilisation
+        # éditoriale déclarée (registre contractuel, autorité indépendante).
+        reuse = declared_reuse or {}
+        occurrences = Counter(object_occurrences)
+        for path, count in sorted(occurrences.items()):
+            expected = reuse.get((assembly_id, path), 1)
+            if count == expected:
+                continue
+            if expected == 1:
+                reason = (
+                    f"objet inclus {count} fois dans le meme assemblage LaTeX"
+                )
+            else:
+                reason = (
+                    f"objet inclus {count} fois au lieu de {expected} "
+                    "(contrat de réutilisation déclaré)"
+                )
+            inventory["anomalies"]["duplicate_assembly_objects"].append(
+                _anomaly(static_root, path, assembly_id, reason)
+            )
+        for (declared_assembly, path), expected in sorted(reuse.items()):
+            if declared_assembly == assembly_id and path not in occurrences:
                 inventory["anomalies"]["duplicate_assembly_objects"].append(
                     _anomaly(
                         static_root,
                         path,
                         assembly_id,
-                        f"objet inclus {count} fois dans le meme assemblage LaTeX",
+                        f"objet inclus 0 fois au lieu de {expected} "
+                        "(contrat de réutilisation déclaré)",
                     )
                 )
 

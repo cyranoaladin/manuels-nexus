@@ -4908,6 +4908,69 @@ def _add_latex_graph(
     )
 
 
+ASSEMBLY_REUSE_CONTRACTS_FILE = "audit/ASSEMBLY_REUSE_CONTRACTS.yaml"
+
+
+def _load_assembly_reuse_contracts(
+    root: Path,
+) -> dict[tuple[str, str], int]:
+    """Registre des réutilisations éditoriales déclarées par assemblage.
+
+    Contrat: pour (assembly_id, object_path), l'occurrence attendue (>= 2)
+    provient d'une autorité indépendante de l'assembleur (manifest canonique,
+    contrat de chapitre...). Le défaut implicite reste 1 pour tout objet non
+    déclaré: une duplication non contractualisée demeure une anomalie.
+    """
+    path = root / ASSEMBLY_REUSE_CONTRACTS_FILE
+    if not path.exists() and not path.is_symlink():
+        return {}
+    try:
+        payload = yaml.safe_load(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, yaml.YAMLError) as exc:
+        raise InventoryError(
+            f"registre de réutilisation illisible: {type(exc).__name__}"
+        ) from exc
+    if (
+        not isinstance(payload, Mapping)
+        or payload.get("artifact_type") != "assembly_reuse_contracts"
+        or payload.get("schema_version") != 1
+        or not isinstance(payload.get("contracts"), list)
+    ):
+        raise InventoryError("registre de réutilisation invalide")
+    declared: dict[tuple[str, str], int] = {}
+    for entry in payload["contracts"]:
+        if not isinstance(entry, Mapping):
+            raise InventoryError("entrée de réutilisation invalide")
+        assembly_id = entry.get("assembly_id")
+        object_path = entry.get("object_path")
+        expected = entry.get("expected_occurrences")
+        authority = entry.get("authority")
+        reason = entry.get("reason")
+        if (
+            not isinstance(assembly_id, str)
+            or not assembly_id
+            or not isinstance(object_path, str)
+            or not object_path
+            or type(expected) is not int
+            or expected < 2
+            or not isinstance(authority, str)
+            or not authority
+            or not isinstance(reason, str)
+            or not reason
+        ):
+            raise InventoryError(
+                "entrée de réutilisation invalide: assembly_id/object_path/"
+                "authority/reason non vides et expected_occurrences >= 2 requis"
+            )
+        key = (assembly_id, object_path)
+        if key in declared:
+            raise InventoryError(
+                f"réutilisation déclarée en double: {assembly_id} -> {object_path}"
+            )
+        declared[key] = expected
+    return declared
+
+
 def _add_static_latex_assemblies(
     inventory: dict[str, Any],
     root: Path,
@@ -4925,6 +4988,7 @@ def _add_static_latex_assemblies(
         is_relevant_tex=_is_relevant_tex,
         chapter_id_from_source=_chapter_id_from_source,
         manual_for_chapter=_manual_for_chapter,
+        declared_reuse=_load_assembly_reuse_contracts(root),
     )
 
 
