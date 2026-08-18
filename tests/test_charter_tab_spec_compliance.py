@@ -2,7 +2,9 @@
 
 Vérifie que les modules de charte respectent scrupuleusement la spécification validée :
 docs/superpowers/specs/2026-07-20-dynamic-rubric-tab-length-design.md
-- Épaisseur extérieure de l'onglet : 12 mm
+- TAB_VISIBLE_THICKNESS (« épaisseur extérieure ») : 12 mm SUR la page ;
+  s'y ajoute un BLEED de 1 mm hors page (arête de coupe), soit un
+  TOTAL_DRAWN_RECTANGLE de 13 mm — voir audit/CHARTER_TAB_GEOMETRY_PROOF.md
 - Longueur minimale de l'onglet : 16 mm
 - Longueur auto : max(16 mm, largeur typographique du libellé + 6 mm)
 - Padding longitudinal : 3 mm à chaque extrémité (6 mm TOTAL)
@@ -46,12 +48,13 @@ CANONICAL_CLASS = ROOT / "gabarits/common/nexus-manuel.cls"
 
 @pytest.mark.parametrize("source_path", [CANONICAL_CHARTE, CANONICAL_CLASS])
 def test_tab_outer_thickness_is_12mm(source_path):
-    """Épaisseur extérieure contractuelle : 12 mm visibles sur la page.
+    """TAB_VISIBLE_THICKNESS contractuelle : 12 mm visibles sur la page.
 
-    Page impaire : rectangle de xshift=-12mm au bord (le +1mm hors page est
-    l'arête de coupe). Page paire : miroir jusqu'à xshift=12mm. L'ancienne
-    géométrie -10mm/+10mm (11 mm dont 10 visibles) violait la spec du
-    2026-07-20 et est interdite.
+    Page impaire : rectangle de xshift=-12mm au bord, +1mm de BLEED hors page
+    (TOTAL_DRAWN_RECTANGLE = 13 mm) ; texte centré à ±6 mm = centre de la
+    bande visible. Page paire : miroir jusqu'à xshift=12mm. Géométries
+    interdites : -10/+1 (bug 11 mm corrigé par be5f37a1) et -11/+1
+    (lecture « total = 12 mm » rejetée par l'arbitrage du 2026-08-18).
     """
     content = source_path.read_text(encoding="utf-8")
     assert "xshift=-12mm" in content

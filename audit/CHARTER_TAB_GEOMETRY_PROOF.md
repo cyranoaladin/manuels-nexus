@@ -5,6 +5,26 @@ correction d'épaisseur. Snapshot historique attaché au commit de correction ;
 ne se régénère pas. Autorité contractuelle :
 `Mathematiques/manuel-maths/docs/superpowers/specs/2026-07-20-dynamic-rubric-tab-length-design.md`.
 
+## Terminologie normative (arbitrage humain du 2026-08-18 — définitif)
+
+Trois grandeurs distinctes, à ne plus jamais confondre :
+
+| terme | définition | valeur contractuelle |
+| --- | --- | --- |
+| **TAB_VISIBLE_THICKNESS** | épaisseur de l'onglet mesurable SUR la page (du bord de page vers l'intérieur) ; c'est elle que désigne « épaisseur extérieure » dans la spec du 2026-07-20 | **12 mm** |
+| **BLEED** | débord de coupe dessiné HORS page (au-delà du bord), introduit après le 20/07 pour garder une arête de coupe nette ; jamais visible, jamais décompté de l'épaisseur | 1 mm |
+| **TOTAL_DRAWN_RECTANGLE** | étendue totale du rectangle TikZ = VISIBLE + BLEED | 13 mm |
+
+Le code validé du 20/07 traçait `bord de page → -12 mm` avec texte centré à
+±6 mm : TAB_VISIBLE_THICKNESS = 12 mm, sans bleed. Le bleed de +1 mm ajouté
+ensuite ne doit PAS réduire les 12 mm visibles. La géométrie actuelle
+(impaire `-12 mm → +1 mm`, paire `-1 mm → +12 mm`, texte à ±6 mm = centre de
+la bande visible) est donc **contractuellement validée** ; elle restaure
+l'intention validée du 20/07 sans créer de nouvelle décision graphique.
+Géométries interdites : `-10/+1` (11 mm, le bug corrigé) et `-11/+1`
+(interprétation « total = 12 mm » explicitement rejetée par l'arbitrage,
+avec le recentrage ±5,5 mm qui l'accompagnerait).
+
 ## Méthode
 
 - Maquette V5 réelle (15 pages), producteur `build_maquette_v5.py` puis
