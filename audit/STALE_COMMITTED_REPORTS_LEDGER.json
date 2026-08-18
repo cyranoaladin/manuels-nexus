@@ -1,0 +1,93 @@
+{
+  "artifact_name": "STALE_COMMITTED_REPORTS_LEDGER",
+  "created": "2026-08-18",
+  "reference": "audit/STALE_COMMITTED_REPORTS_LEDGER.md",
+  "principle": {
+    "current_report": "vérité régénérée depuis le HEAD courant; recommitté à chaque scellement",
+    "historical_snapshot": "preuve immuable attachée à un SHA explicite; jamais rafraîchie",
+    "separation": "aucun test n'épingle un rapport CURRENT comme snapshot historique"
+  },
+  "refresh_head_sha": "3018b3097f82dfe4aa59b47e276b9a2320a7f3ab",
+  "reports": [
+    {
+      "path": "audit/INVENTAIRE_COLLECTION.json",
+      "producer": "scripts/inventory_collection.py",
+      "current_or_historical": "CURRENT",
+      "source_sha_recorded_stale": "e701b30adb96f988ce1c3c5ffda0e66930ea508e",
+      "stale_since_commit": "premier commit source postérieur à 7297c4cd (2026-08-16)",
+      "actual_head_at_refresh": "3018b3097f82dfe4aa59b47e276b9a2320a7f3ab",
+      "tests_pinning_old_content": [],
+      "why_pinned": "aucun épinglage réel: les 3 échecs observés étaient un artefact d'arbre sale pendant la mesure",
+      "target_architecture": "CURRENT régénéré+committé à chaque scellement; provenance.head_sha = SHA observé à la génération"
+    },
+    {
+      "path": "audit/INVENTAIRE_COLLECTION.md",
+      "producer": "scripts/inventory_collection.py",
+      "current_or_historical": "CURRENT",
+      "source_sha_recorded_stale": "e701b30adb96f988ce1c3c5ffda0e66930ea508e",
+      "stale_since_commit": "premier commit source postérieur à 7297c4cd (2026-08-16)",
+      "actual_head_at_refresh": "3018b3097f82dfe4aa59b47e276b9a2320a7f3ab",
+      "tests_pinning_old_content": [],
+      "why_pinned": "aucun épinglage réel: les 3 échecs observés étaient un artefact d'arbre sale pendant la mesure",
+      "target_architecture": "CURRENT régénéré+committé à chaque scellement; provenance.head_sha = SHA observé à la génération"
+    },
+    {
+      "path": "audit/AUDIT_CONSOLIDE.md",
+      "producer": "scripts/inventory_collection.py",
+      "current_or_historical": "CURRENT",
+      "source_sha_recorded_stale": "e701b30adb96f988ce1c3c5ffda0e66930ea508e",
+      "stale_since_commit": "premier commit source postérieur à 7297c4cd (2026-08-16)",
+      "actual_head_at_refresh": "3018b3097f82dfe4aa59b47e276b9a2320a7f3ab",
+      "tests_pinning_old_content": [],
+      "why_pinned": "aucun épinglage réel: les 3 échecs observés étaient un artefact d'arbre sale pendant la mesure",
+      "target_architecture": "CURRENT régénéré+committé à chaque scellement; provenance.head_sha = SHA observé à la génération"
+    },
+    {
+      "path": "audit/ECARTS_ET_CONTRADICTIONS.yaml",
+      "producer": "scripts/inventory_collection.py",
+      "current_or_historical": "CURRENT",
+      "source_sha_recorded_stale": "e701b30adb96f988ce1c3c5ffda0e66930ea508e",
+      "stale_since_commit": "premier commit source postérieur à 7297c4cd (2026-08-16)",
+      "actual_head_at_refresh": "3018b3097f82dfe4aa59b47e276b9a2320a7f3ab",
+      "tests_pinning_old_content": [],
+      "why_pinned": "aucun épinglage réel: les 3 échecs observés étaient un artefact d'arbre sale pendant la mesure",
+      "target_architecture": "CURRENT régénéré+committé à chaque scellement; provenance.head_sha = SHA observé à la génération"
+    },
+    {
+      "path": "audit/MATRICE_LIVRABLES.yaml",
+      "producer": "scripts/inventory_collection.py",
+      "current_or_historical": "CURRENT",
+      "source_sha_recorded_stale": "e701b30adb96f988ce1c3c5ffda0e66930ea508e",
+      "stale_since_commit": "premier commit source postérieur à 7297c4cd (2026-08-16)",
+      "actual_head_at_refresh": "3018b3097f82dfe4aa59b47e276b9a2320a7f3ab",
+      "tests_pinning_old_content": [],
+      "why_pinned": "aucun épinglage réel: les 3 échecs observés étaient un artefact d'arbre sale pendant la mesure",
+      "target_architecture": "CURRENT régénéré+committé à chaque scellement; provenance.head_sha = SHA observé à la génération"
+    },
+    {
+      "path": "ETAT_COLLECTION.md",
+      "producer": "scripts/inventory_collection.py",
+      "current_or_historical": "CURRENT",
+      "source_sha_recorded_stale": "1d0c3fda (dernier refresh committé)",
+      "stale_since_commit": "premier commit source postérieur à 7297c4cd (2026-08-16)",
+      "actual_head_at_refresh": "3018b3097f82dfe4aa59b47e276b9a2320a7f3ab",
+      "tests_pinning_old_content": [],
+      "why_pinned": "aucun épinglage réel: les 3 échecs observés étaient un artefact d'arbre sale pendant la mesure",
+      "target_architecture": "CURRENT régénéré+committé à chaque scellement; provenance.head_sha = SHA observé à la génération"
+    }
+  ],
+  "restructured_tests": [
+    {
+      "test": "test_real_reports_expose_known_exercise_contradictions",
+      "why_pinned": "oracle éternel sur des défauts réels vivants (471/477, 50/24, DIRECTIVES l.50)",
+      "target_architecture": "invariant de cohérence interne + fixture synthétique historique gelée"
+    },
+    {
+      "test": "test_repository_baseline_is_frozen_schema_valid_and_gate_green",
+      "why_pinned": "mélange intégrité historique / gate courant",
+      "target_architecture": "HISTORICAL_BASELINE_INTEGRITY et CURRENT_NO_REGRESSION séparés"
+    }
+  ],
+  "stale_reports_before": 6,
+  "stale_reports_after": 0
+}

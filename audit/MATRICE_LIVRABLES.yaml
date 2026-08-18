@@ -5,16 +5,13 @@ manuals:
   1NSI:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '353'
+      detail: '339'
       source: anomalies.blocking_statuses
     - code: anomalie:broken_meta_references
-      detail: '887'
+      detail: '796'
       source: anomalies.broken_meta_references
-    - code: anomalie:missing_corrections
-      detail: '207'
-      source: anomalies.missing_corrections
     - code: anomalie:unclassified_types
-      detail: '247'
+      detail: '231'
       source: anomalies.unclassified_types
     - code: livrable_non_compile
       detail: declared
@@ -32,7 +29,7 @@ manuals:
       detail: declared
       source: deliverable_matrix.1NSI.variants.version_amenagee
     - code: statuts_non_approuves
-      detail: objets=343; contrats=10
+      detail: objets=329; contrats=10
       source: manuals.1NSI.statuses
     current:
       artifacts:
@@ -51,20 +48,20 @@ manuals:
       - 1NSI-TYPES-CONSTRUITS
       - 1NSI-WEB-IHM
       statuses:
-        approved: 647
+        approved: 612
         manual_review: 7
         needs_review: 169
-        verified: 167
+        verified: 153
       totals:
         capacites: 53
-        corriges: 148
+        corriges: 141
         coups_de_pouce: 24
         diagnostics: 1
-        evaluations: 40
-        exercices_principaux: 350
+        evaluations: 20
+        exercices_principaux: 345
         methodes: 15
         projets: 1
-        qcm: 11
+        qcm: 10
         remediations: 62
         sections_cours: 88
         td: 2
@@ -84,7 +81,6 @@ manuals:
     structural_blockers:
     - anomalie:blocking_statuses
     - anomalie:broken_meta_references
-    - anomalie:missing_corrections
     - statuts_non_approuves
     structural_compile_ready: false
     variants:
@@ -404,13 +400,10 @@ manuals:
       detail: '115'
       source: anomalies.blocking_statuses
     - code: anomalie:broken_meta_references
-      detail: '877'
+      detail: '853'
       source: anomalies.broken_meta_references
-    - code: anomalie:missing_corrections
-      detail: '243'
-      source: anomalies.missing_corrections
     - code: anomalie:unclassified_types
-      detail: '255'
+      detail: '243'
       source: anomalies.unclassified_types
     - code: chapitres_manquants
       detail: 6/12
@@ -446,14 +439,14 @@ manuals:
       - TNSI-LANGAGES-ET-PROGRAMMATION
       - TNSI-STRUCTURES-DONNEES
       statuses:
-        approved: 634
+        approved: 610
         generated: 109
       totals:
         capacites: 59
         corriges: 35
         coups_de_pouce: 0
         diagnostics: 0
-        evaluations: 24
+        evaluations: 12
         exercices_principaux: 266
         methodes: 6
         projets: 0
@@ -477,7 +470,6 @@ manuals:
     structural_blockers:
     - anomalie:blocking_statuses
     - anomalie:broken_meta_references
-    - anomalie:missing_corrections
     - chapitres_manquants
     - statuts_non_approuves
     structural_compile_ready: false
@@ -537,9 +529,6 @@ manuals:
     - code: anomalie:broken_meta_references
       detail: '562'
       source: anomalies.broken_meta_references
-    - code: anomalie:missing_corrections
-      detail: '179'
-      source: anomalies.missing_corrections
     - code: anomalie:unassembled_objects
       detail: '47'
       source: anomalies.unassembled_objects
@@ -607,7 +596,6 @@ manuals:
     structural_blockers:
     - anomalie:blocking_statuses
     - anomalie:broken_meta_references
-    - anomalie:missing_corrections
     - anomalie:unassembled_objects
     - statuts_non_approuves
     structural_compile_ready: false
@@ -643,24 +631,24 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:43119741f6d50ffc74fb9432a7ce88095402c580442392e208315a540d4505c0
+model_digest: sha256:dccdc793e296b3bf715a7e355b507c2316aad298ed62b27ef16a14cef55205b8
 provenance:
   branch: audit/adversarial-reconciliation-2026
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-16T07:53:29Z'
+  generated_at_utc: '2026-08-18T12:32:02Z'
   generator_files:
-    scripts/baseline_qualification.py: sha256:ecf1e2fb7d6bdf533a67237739b40eef625f33b4d505890025efa9d92f4e34f9
+    scripts/baseline_qualification.py: sha256:51eed728c11d516d5bf5b5804d52583321260d02d2bebd748dca07eb3cfba908
     scripts/build_manifest.py: sha256:f4084b0ff17bb5ecdfed872244afaf3616bf6911b64e0340d3c0ca3b4bdbba20
     scripts/inventory_assembly.py: sha256:1759502372fc12faafb27b40d959979c9b63a439cef08ca56246d2d992c26047
-    scripts/inventory_collection.py: sha256:2e6d6196233e505b904c4bd440bfc47238a2bbd6515a806371de5675b15c4fcb
-    scripts/inventory_graph.py: sha256:3d7e846c534a490280e2a190ce5cf16d539ec87205259a9060c0abbb6c11bdcb
+    scripts/inventory_collection.py: sha256:fce3a2702791859d8a5426601899a617422d817e7d2d0c77d4d23b794eb4505e
+    scripts/inventory_graph.py: sha256:f6ec98b634b2f441115f5bdcc06d6ef2efa198dd8d125ef55c5236ef9f1f19b7
     scripts/inventory_pdf.py: sha256:0931c5864414ab0248cb14b9d0ca583de190f3e6633e9c6862908eb344a2892b
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:68b7917dbec3d190e17889d531ac18d617c7990dceaca15c58fcc0d7367f2ef6
+  generator_sha256: sha256:3648d620333c14a357ed7fff6c936ef51bc38f0b420fa179ebbcb264288b578e
   generator_version: 1
   git_available: true
-  head_sha: e701b30adb96f988ce1c3c5ffda0e66930ea508e
+  head_sha: 3018b3097f82dfe4aa59b47e276b9a2320a7f3ab
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -671,4 +659,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:c059e1e9d88ac249db9381c41d249237ffc323b173067a08da25a1b3f93811cc
+source_digest: sha256:461c704da39de6c2099a716d727609c0d141ceaa4a6d690f2fa8c0482c9476a1

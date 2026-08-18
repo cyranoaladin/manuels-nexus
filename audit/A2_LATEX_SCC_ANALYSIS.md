@@ -63,15 +63,18 @@ wrapper) :
 | 9 | `nsi:static:NSI/gabarits/objet_standalone.tex` | PROTOTYPE_ONLY | wrapper NSI | `fed6d28a` |
 | 10 | `nsi:static:NSI/gabarits/specimen.tex` | ARCHIVE_ONLY | wrapper NSI | `fed6d28a` |
 
-Bilan honnête :
+Nomenclature officielle (arbitrage 2026-08-18) :
 
-- **Vrais défauts source corrigés** : 2 (un motif, 2 fichiers wrappers) —
-  corrigés en A1, pas en A2.
-- **Surfaces production-reachable assainies** : 2 (champs 1-2).
-- **Surfaces non-production (fixtures/prototypes/archives)** : 8 — mêmes
-  défauts sources, désormais résolues ; elles n'ont jamais été chargées en
-  runtime production.
-- Les 10 ne doivent PAS être présentés comme dix défauts release distincts.
+- **A1 : wrapper self-reference defect = FIXED** (commit `fed6d28a`).
+- **A2 : stale cycle-report reconciliation = COMPLETED** (aucun changement
+  de source ; réconciliation du rapport stale et vérification hermétique).
+- **real production root causes = 1** (motif fallback auto-référentiel).
+- **affected production wrapper files = 2**.
+- **inventory surfaces/fingerprints = 10** (dont 2 production-reachable,
+  4 fixture, 2 prototype, 2 archive).
+- **current cycles = 0** (graphe complet ET graphe production).
+- Les 10 surfaces ne doivent PAS être présentées comme dix défauts release
+  distincts, et A2 ne doit pas être présenté comme ayant corrigé dix défauts.
 
 ## Pourquoi l'ancien rapport annonçait encore « 10 cycles »
 

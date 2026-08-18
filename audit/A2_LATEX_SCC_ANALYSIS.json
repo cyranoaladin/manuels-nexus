@@ -117,7 +117,7 @@
   "provenance_correction": {
     "reference": "audit/PROVENANCE_CORRECTION_1361cf37.md",
     "corrected_on": "2026-08-18",
-    "real_source_defects_fixed": 2,
+    "real_source_defects_fixed": "1 motif dans 2 fichiers wrappers",
     "defect_pattern": "fallback auto-référentiel \\input{nexus-manuel.cls} dans les 2 wrappers",
     "fixed_by_commit": "fed6d28a723dba1f80ae2ea70e609d9b150a8090",
     "fixed_in_lot": "A1",
@@ -125,6 +125,14 @@
     "analyzer_false_positives": 0,
     "full_graph_cyclic_scc": 0,
     "production_graph_cyclic_scc": 0,
-    "reproduced_at_sha": "9ddcffee6a341981feed95e54bc641e17cdc0732"
+    "reproduced_at_sha": "9ddcffee6a341981feed95e54bc641e17cdc0732",
+    "nomenclature": {
+      "A1": "wrapper self-reference defect = FIXED",
+      "A2": "stale cycle-report reconciliation = COMPLETED",
+      "real_production_root_causes": 1,
+      "affected_production_wrapper_files": 2,
+      "inventory_surfaces_fingerprints": 10,
+      "current_cycles": 0
+    }
   }
 }

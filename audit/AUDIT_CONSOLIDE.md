@@ -11,7 +11,7 @@
 ### assembler_invalid (0)
 - Aucune.
 
-### blocking_statuses (2147)
+### blocking_statuses (2133)
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-001, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
@@ -42,19 +42,15 @@
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-027.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-027, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-028.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-028, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-029.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-029, scope=object
-- … 2117 autres.
+- … 2103 autres.
 
 ### broken_assembly_references (0)
 - Aucune.
 
-### broken_latex_references (5)
-- source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/build/maquette-v5/renvois.tex, champ=input, raison=cible LaTeX absente des sources suivies
-- source=Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls, cible=Mathematiques/manuel-maths/gabarits/common/nexus-manuel.cls, champ=input, raison=cible LaTeX absente des sources suivies
-- source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/common/nexus-manuel.cls, champ=input, raison=cible LaTeX absente des sources suivies
-- source=NSI/gabarits/nexus-manuel-v5.cls, cible=NSI/gabarits/common/nexus-manuel.cls, champ=input, raison=cible LaTeX absente des sources suivies
-- source=NSI/gabarits/nexus-manuel.cls, cible=NSI/gabarits/common/nexus-manuel.cls, champ=input, raison=cible LaTeX absente des sources suivies
+### broken_latex_references (0)
+- Aucune.
 
-### broken_meta_references (2845)
+### broken_meta_references (2730)
 - source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-024.tex, cible=1SPE-TRIGONOMETRIE-C3, champ=capacites[0], raison=capacite META absente du contrat du chapitre
 - source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-024.tex, cible=C3, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
 - source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-024.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
@@ -85,7 +81,7 @@
 - source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-014.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
 - source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-015.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
 - source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-015.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
-- … 2815 autres.
+- … 2700 autres.
 
 ### chapters_not_in_manual (0)
 - Aucune.
@@ -109,38 +105,8 @@
 ### duplicate_capacity_refs (0)
 - Aucune.
 
-### duplicate_ids (125)
-- id=1NSI-ADGK-CO-001, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-001.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-001.tex"]
-- id=1NSI-ADGK-CO-002, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-002.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-002.tex"]
-- id=1NSI-ADGK-CO-003, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-003.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-003.tex"]
-- id=1NSI-ADGK-CO-004, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-004.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-004.tex"]
-- id=1NSI-ADGK-CO-005, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-005.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-005.tex"]
-- id=1NSI-ADGK-CO-006, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-006.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-006.tex"]
-- id=1NSI-ADGK-CO-007, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-007.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-007.tex"]
-- id=1NSI-ADGK-CO-008, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-008.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-008.tex"]
-- id=1NSI-ADGK-CO-009, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-009.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-009.tex"]
-- id=1NSI-ADGK-CO-010, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-010.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-010.tex"]
-- id=1NSI-ADGK-CO-011, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-011.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-011.tex"]
-- id=1NSI-ADGK-CO-012, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-012.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-012.tex"]
-- id=1NSI-ADGK-CO-013, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-013.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-013.tex"]
-- id=1NSI-ADGK-CO-014, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-014.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-014.tex"]
-- id=1NSI-ADGK-CO-015, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-015.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-015.tex"]
-- id=1NSI-ADGK-CO-016, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-016.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-016.tex"]
-- id=1NSI-ADGK-CO-017, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-017.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-017.tex"]
-- id=1NSI-ADGK-CO-018, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-018.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-018.tex"]
-- id=1NSI-ADGK-CO-019, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-019.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-019.tex"]
-- id=1NSI-ADGK-CO-020, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-020.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-020.tex"]
-- id=1NSI-ADGK-CO-021, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-021.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-021.tex"]
-- id=1NSI-ADGK-CO-022, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-022.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-022.tex"]
-- id=1NSI-ADGK-CO-023, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-023.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-023.tex"]
-- id=1NSI-ADGK-CO-024, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-024.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-024.tex"]
-- id=1NSI-ADGK-EX-001, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-001.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-001.tex"]
-- id=1NSI-ADGK-EX-002, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-002.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-002.tex"]
-- id=1NSI-ADGK-EX-003, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-003.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-003.tex"]
-- id=1NSI-ADGK-EX-004, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-004.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-004.tex"]
-- id=1NSI-ADGK-EX-005, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-005.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-005.tex"]
-- id=1NSI-ADGK-EX-006, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-006.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-ADGK-EX-006.tex"]
-- … 95 autres.
+### duplicate_ids (0)
+- Aucune.
 
 ### invalid_capacities (0)
 - Aucune.
@@ -151,17 +117,8 @@
 ### invalid_statuses (0)
 - Aucune.
 
-### latex_cycles (10)
-- source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=cycle de references LaTeX dans l'assemblage statique
-- source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/gabarits/chapitre_master.tex, raison=cycle de references LaTeX dans l'assemblage statique
-- source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/gabarits/objet_standalone.tex, raison=cycle de references LaTeX dans l'assemblage statique
-- source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/gabarits/specimen-pont-v6.tex, raison=cycle de references LaTeX dans l'assemblage statique
-- source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/gabarits/specimen-v6.tex, raison=cycle de references LaTeX dans l'assemblage statique
-- source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/gabarits/specimen.tex, raison=cycle de references LaTeX dans l'assemblage statique
-- source=NSI/gabarits/nexus-manuel.cls, cible=NSI/gabarits/nexus-manuel.cls, champ=nsi:static:NSI/gabarits/book_master.tex, raison=cycle de references LaTeX dans l'assemblage statique
-- source=NSI/gabarits/nexus-manuel.cls, cible=NSI/gabarits/nexus-manuel.cls, champ=nsi:static:NSI/gabarits/chapitre_master.tex, raison=cycle de references LaTeX dans l'assemblage statique
-- source=NSI/gabarits/nexus-manuel.cls, cible=NSI/gabarits/nexus-manuel.cls, champ=nsi:static:NSI/gabarits/objet_standalone.tex, raison=cycle de references LaTeX dans l'assemblage statique
-- source=NSI/gabarits/nexus-manuel.cls, cible=NSI/gabarits/nexus-manuel.cls, champ=nsi:static:NSI/gabarits/specimen.tex, raison=cycle de references LaTeX dans l'assemblage statique
+### latex_cycles (0)
+- Aucune.
 
 ### metadata_invalid (0)
 - Aucune.
@@ -172,38 +129,8 @@
 ### missing_assemblers (0)
 - Aucune.
 
-### missing_corrections (629)
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-009.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-009.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-010.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-010.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-011.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-011.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-012.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-012.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-013.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-013.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-014.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-014.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-015.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-015.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-016.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-016.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-017.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-017.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-018.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-018.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-019.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-019.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-020.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-020.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-021.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-021.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-022.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-022.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-023.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-023.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-024.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-024.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-025.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-025.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-026.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-026.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-027.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-027.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-028.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-028.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-029.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-029.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-030.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-030.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-031.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-031.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-032.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-032.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-033.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-033.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-034.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-034.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-035.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-035.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-036.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-036.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-037.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-037.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-038.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-038.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- … 599 autres.
+### missing_corrections (0)
+- Aucune.
 
 ### orphan_files (12)
 - source=Mathematiques/manuel-maths/gabarits/nexus-code.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-code.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
@@ -279,7 +206,7 @@
 ### unavailable_inspiration_sources (0)
 - Aucune.
 
-### unclassified_types (688)
+### unclassified_types (660)
 - path=Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/15_algorithmique_monte_carlo.tex, id=1SPE-PROBCOND-ALG-001, source_type=algorithme
 - path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/15_experimentations.tex, id=1SPE-VARALEA-ALG-001, source_type=algorithme
 - path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, id=1SPE-VARALEA-ALG-002, source_type=algorithme
@@ -310,7 +237,7 @@
 - path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-029.tex, id=TSPE-INTEG-CO-029, source_type=correction
 - path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-030.tex, id=TSPE-INTEG-CO-030, source_type=correction
 - path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-031.tex, id=TSPE-INTEG-CO-031, source_type=correction
-- … 658 autres.
+- … 630 autres.
 
 ### unknown_chapter_prefixes (0)
 - Aucune.

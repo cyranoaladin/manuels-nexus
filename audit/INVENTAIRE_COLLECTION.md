@@ -6,27 +6,23 @@
 
 | ID | Manuel | Matière | Niveau | Édition | Chapitres | Capacités | Exercices | Fichiers contenu | Objets | Variantes compilées |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 350 | 990 | 990 | manual |
+| 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 345 | 941 | 941 | manual |
 | 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 50 | 477 | 1417 | 1417 | manual |
 | TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 50 | 300 | 754 | 754 | manual |
 | TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 194 | 484 | 484 | manual |
-| TNSI | NSI Terminale | NSI | Terminale | courante | 6 | 59 | 266 | 743 | 743 | manual |
+| TNSI | NSI Terminale | NSI | Terminale | courante | 6 | 59 | 266 | 719 | 719 | manual |
 | TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 11 | 67 | 448 | 1254 | 1254 | manual |
 
 ## Anomalies détectées
 
 | Catégorie | Nombre |
 |---|---|
-| broken_meta_references | 2845 |
-| blocking_statuses | 2147 |
-| unclassified_types | 688 |
-| missing_corrections | 629 |
-| duplicate_ids | 125 |
+| broken_meta_references | 2730 |
+| blocking_statuses | 2133 |
+| unclassified_types | 660 |
 | unassembled_objects | 52 |
 | unattributed_pdfs | 22 |
 | orphan_files | 12 |
-| latex_cycles | 10 |
-| broken_latex_references | 5 |
 | context_mismatches | 3 |
 | duplicate_assembly_objects | 3 |
 
@@ -36,11 +32,6 @@
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-003, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-004, scope=object
-- broken_latex_references: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/build/maquette-v5/renvois.tex, champ=input, raison=cible LaTeX absente des sources suivies
-- broken_latex_references: source=Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls, cible=Mathematiques/manuel-maths/gabarits/common/nexus-manuel.cls, champ=input, raison=cible LaTeX absente des sources suivies
-- broken_latex_references: source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/common/nexus-manuel.cls, champ=input, raison=cible LaTeX absente des sources suivies
-- broken_latex_references: source=NSI/gabarits/nexus-manuel-v5.cls, cible=NSI/gabarits/common/nexus-manuel.cls, champ=input, raison=cible LaTeX absente des sources suivies
-- broken_latex_references: source=NSI/gabarits/nexus-manuel.cls, cible=NSI/gabarits/common/nexus-manuel.cls, champ=input, raison=cible LaTeX absente des sources suivies
 - broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-024.tex, cible=1SPE-TRIGONOMETRIE-C3, champ=capacites[0], raison=capacite META absente du contrat du chapitre
 - broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-024.tex, cible=C3, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
 - broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-024.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
@@ -52,21 +43,6 @@
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-001.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-002.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-005.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
-- duplicate_ids: id=1NSI-ADGK-CO-001, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-001.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-001.tex"]
-- duplicate_ids: id=1NSI-ADGK-CO-002, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-002.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-002.tex"]
-- duplicate_ids: id=1NSI-ADGK-CO-003, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-003.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-003.tex"]
-- duplicate_ids: id=1NSI-ADGK-CO-004, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-004.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-004.tex"]
-- duplicate_ids: id=1NSI-ADGK-CO-005, paths=["NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-005.tex", "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-005.tex"]
-- latex_cycles: source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=cycle de references LaTeX dans l'assemblage statique
-- latex_cycles: source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/gabarits/chapitre_master.tex, raison=cycle de references LaTeX dans l'assemblage statique
-- latex_cycles: source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/gabarits/objet_standalone.tex, raison=cycle de references LaTeX dans l'assemblage statique
-- latex_cycles: source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/gabarits/specimen-pont-v6.tex, raison=cycle de references LaTeX dans l'assemblage statique
-- latex_cycles: source=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, cible=Mathematiques/manuel-maths/gabarits/nexus-manuel.cls, champ=math:static:Mathematiques/manuel-maths/gabarits/specimen-v6.tex, raison=cycle de references LaTeX dans l'assemblage statique
-- missing_corrections: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-009.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-009.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- missing_corrections: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-010.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-010.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- missing_corrections: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-011.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-011.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- missing_corrections: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-012.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-012.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
-- missing_corrections: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-013.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-013.tex, champ=corrige_tex, raison=aucun corrige suivi ne resout cet exercice
 - orphan_files: source=Mathematiques/manuel-maths/gabarits/nexus-code.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-code.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
 - orphan_files: source=Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
 - orphan_files: source=Mathematiques/manuel-maths/gabarits/nexus-figures.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-figures.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
@@ -92,7 +68,7 @@
 
 - Assertions lues: 122
 - Ouvertes: 53
-- Contradictoires: 29
+- Contradictoires: 28
 
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 16 | report:Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | chapitres | 3 | None | ouvert
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 36 | report:Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | exercices_principaux | 30 | None | ouvert
