@@ -6680,11 +6680,33 @@ def _read_confined_json_mapping(
         os.close(root_fd)
 
 
+def _file_entry_fingerprint(
+    value: os.stat_result,
+) -> tuple[int, int, int, int, int, int]:
+    # (dev, ino) seul est contournable par réutilisation d'inode après
+    # unlink+create ; un fichier recréé porte toujours un st_ctime_ns
+    # différent, donc l'empreinte étendue rend la substitution détectable.
+    return (
+        value.st_dev,
+        value.st_ino,
+        stat.S_IFMT(value.st_mode),
+        value.st_size,
+        value.st_mtime_ns,
+        value.st_ctime_ns,
+    )
+
+
 def _revalidate_destination_entry(
     parent_fd: int,
     basename: str,
     expected: os.stat_result | None,
+    *,
+    strict_fingerprint: bool = False,
 ) -> None:
+    # strict_fingerprint=True n'est valable que pour une fenêtre où AUCUNE
+    # mutation légitime (rename/replace de la machinerie) ne peut toucher
+    # l'entrée entre le snapshot et cette revalidation : les renames légitimes
+    # changent st_ctime_ns et déclencheraient un faux positif ailleurs.
     try:
         current = os.stat(
             basename,
@@ -6701,9 +6723,12 @@ def _revalidate_destination_entry(
         raise InventoryError(
             f"destination target appeared during transaction: {basename}"
         )
+    identity = (
+        _file_entry_fingerprint if strict_fingerprint else _stat_identity
+    )
     if (
         not stat.S_ISREG(current.st_mode)
-        or _stat_identity(current) != _stat_identity(expected)
+        or identity(current) != identity(expected)
     ):
         raise InventoryError(
             f"destination target identity changed: {basename}"
@@ -7747,6 +7772,7 @@ def _apply_atomic_payloads(
                 parent_fd,
                 relative.name,
                 destination_snapshots[relative],
+                strict_fingerprint=True,
             )
             os.replace(
                 stage_name,
