@@ -1,0 +1,75 @@
+{
+  "artifact_name": "A3_DUPLICATE_ASSEMBLY_FORENSICS",
+  "created": "2026-08-18",
+  "reference": "audit/A3_DUPLICATE_ASSEMBLY_FORENSICS.md",
+  "shared_context": {
+    "start_sha": "018a0adbba10fc4e18a74a23f671b25c1b3241e3",
+    "assembly_id": "math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex",
+    "assembler": "Mathematiques/manuel-maths/build/maquette-v5/maquette.tex",
+    "generated_master": null,
+    "producer": "Mathematiques/manuel-maths/scripts/build_maquette_v5.py (renvois)",
+    "manual": null,
+    "chapter": "1SPE-DERIVATION-LOCAL",
+    "variant": "maquette-v5",
+    "object_type": "exercice",
+    "authority": "build/maquette-v5/manifest.json#rendered_method.applications + exercise_order + required_strings \"S'entraîner : ex. 1, 2, 7 p. 9\"",
+    "root_cause": "détecteur: expected=1 codé en dur, aucune notion de réutilisation contractuelle déclarée",
+    "classification": "INTENTIONAL_REUSE",
+    "real_product_defect": false,
+    "analyzer_false_positive": "verdict faux (observation exacte, contrat non modélisé)",
+    "intentional_reuse_candidate": true,
+    "occurrence_count_expected": 2,
+    "occurrence_count_observed": 2,
+    "pdf_occurrence_if_build_exists": 2
+  },
+  "cases": [
+    {
+      "fingerprint": "19669084dffa5d5b",
+      "object_id": "1SPE-DERLOCAL-EX-001",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-001.tex",
+      "sha256_prefix": "42007b26399a82a5",
+      "all_inclusion_paths": [
+        "maquette.tex:41 (methodePairee ME-001)",
+        "maquette.tex:50 (grilleExercices, n°1)"
+      ],
+      "manifest_entries": [
+        "rendered_method.applications[0]",
+        "exercise_order[0]"
+      ]
+    },
+    {
+      "fingerprint": "b912c1041392a181",
+      "object_id": "1SPE-DERLOCAL-EX-002",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-002.tex",
+      "sha256_prefix": "e896c34ea006a77c",
+      "all_inclusion_paths": [
+        "maquette.tex:42 (methodePairee ME-001)",
+        "maquette.tex:51 (grilleExercices, n°2)"
+      ],
+      "manifest_entries": [
+        "rendered_method.applications[1]",
+        "exercise_order[1]"
+      ]
+    },
+    {
+      "fingerprint": "2695d63b022fe9f0",
+      "object_id": "1SPE-DERLOCAL-EX-005",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-005.tex",
+      "sha256_prefix": "824f39b800e1bb39",
+      "all_inclusion_paths": [
+        "maquette.tex:43 (methodePairee ME-001)",
+        "maquette.tex:56 (grilleExercices, n°7)"
+      ],
+      "manifest_entries": [
+        "rendered_method.applications[2]",
+        "exercise_order[6]"
+      ]
+    }
+  ],
+  "root_causes": {
+    "count": 1,
+    "classes": [
+      "INTENTIONAL_REUSE"
+    ]
+  }
+}
