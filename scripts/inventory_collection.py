@@ -760,12 +760,7 @@ def _load_source_roles(
     role_patterns, default_role, ordered_roles = _collect_role_patterns(root)
     assignments: dict[str, str] = {}
     tracked = git_tracked_files(root) if tracked_files is None else tracked_files
-    extra_declared = [
-        pattern for candidate in ordered_roles
-        for pattern in role_patterns.get(candidate, ())  # type: ignore[arg-type]
-        if "*" not in pattern and "?" not in pattern and "[" not in pattern
-    ]
-    raw_paths = sorted(set(tracked) | set(extra_declared))
+    raw_paths = sorted(set(tracked))
     normalized_paths: dict[str, list[str]] = defaultdict(list)
     for rel in raw_paths:
         normalized_paths[_normalize_path_for_match(rel)].append(rel)

@@ -795,6 +795,114 @@ def test_require_clean_uses_canonical_union_for_untracked_source_roles(
     assert gate["reasons"] == [f"untracked_relevant:{hidden}"]
 
 
+def test_require_clean_ignores_untracked_irrelevant_file(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    """Untracked files outside the relevant canonical union are not blocking."""
+    _init_repository(tmp_path)
+    _write(tmp_path / "README.md", "# fixture\n")
+    _track(tmp_path, "README.md")
+    _commit_repository(tmp_path, "état initial")
+    _write(tmp_path / "notes/scratch.txt", "brouillon local\n")
+
+    gate = inventory_module._require_clean_gate(tmp_path)
+
+    assert gate["success"] is True
+    assert gate["reasons"] == []
+
+
+def test_require_clean_reports_untracked_relevant_canonical_path(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    """An untracked canonical production path yields untracked_relevant."""
+    _init_repository(tmp_path)
+    _write(tmp_path / "README.md", "# fixture\n")
+    _track(tmp_path, "README.md")
+    _commit_repository(tmp_path, "état initial")
+    hidden = (
+        "Mathematiques/manuel-maths/chapitres/"
+        "1SPE-TEST/cours/untracked.tex"
+    )
+    _write(tmp_path / hidden, _meta(status="approved"))
+
+    gate = inventory_module._require_clean_gate(tmp_path)
+
+    assert gate["exit_code"] == 4
+    assert gate["reasons"] == [f"untracked_relevant:{hidden}"]
+
+
+def test_require_clean_reports_modified_tracked_relevant_file(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    """A dirty tracked relevant file yields modified_tracked, never git_status_error."""
+    _init_repository(tmp_path)
+    course = (
+        "Mathematiques/manuel-maths/chapitres/"
+        "1SPE-TEST/cours/c1.tex"
+    )
+    _write(tmp_path / course, _meta(status="approved"))
+    _track(tmp_path, course)
+    _commit_repository(tmp_path, "état initial")
+    _write(tmp_path / course, _meta(status="approved") + "% modification locale\n")
+
+    gate = inventory_module._require_clean_gate(tmp_path)
+
+    assert gate["exit_code"] == 4
+    assert gate["reasons"] == [f"modified_tracked:{course}"]
+
+
+def test_require_clean_reserves_git_status_error_for_git_failures(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    """git_status_error only fires when Git itself cannot be interrogated."""
+    broken_root = tmp_path / "not-a-repository"
+    broken_root.mkdir()
+
+    gate = inventory_module._require_clean_gate(broken_root)
+
+    assert gate["success"] is False
+    assert gate["reasons"]
+    assert all(
+        reason.startswith("git_status_error:") for reason in gate["reasons"]
+    )
+
+
+def test_source_roles_literal_git_paths_are_bijective(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    """Git path -> SOURCE_ROLES -> inventory mapping preserves literal names.
+
+    POSIX allows backslashes, spaces and non-ASCII in file names; the loader
+    must never rewrite them (no \\ -> /, no escape interpretation, no
+    Windows-style normalization of a POSIX repository).
+    """
+    _init_repository(tmp_path)
+    literals = [
+        "ordinary/path.tex",
+        r"path\with\backslash.tex",
+        "path with spaces.tex",
+        "path-with-unicode-é.tex",
+    ]
+    for literal in literals:
+        _write(tmp_path / literal, "% fixture\n")
+    _track(tmp_path, *literals)
+
+    tracked = inventory_module.git_tracked_files(tmp_path)
+    assert sorted(tracked) == sorted(literals)
+
+    assignments = inventory_module._load_source_roles(tmp_path, tracked)
+    assert sorted(assignments) == sorted(literals)
+    for literal in literals:
+        assert assignments[literal] == "transversal"
+    # Bijectivity: distinct Git paths map to distinct assignment keys.
+    assert len(set(assignments)) == len(literals)
+
+
 def test_source_roles_control_cannot_downgrade_to_legacy_when_schema_is_installed(
     tmp_path: Path,
     inventory_module,
@@ -3088,6 +3196,13 @@ def test_anomalies_baseline_schema_requires_active_qualification_identity(
 def test_repository_baseline_is_frozen_schema_valid_and_gate_green(
     inventory_module,
 ) -> None:
+    """HISTORICAL_BASELINE_INTEGRITY only: the frozen reference baseline.
+
+    The immutable REFERENCE_BASELINE snapshot must stay schema-valid and keep
+    its frozen governance flags. Current-state concerns (no-regression gate,
+    current report reproducibility) are covered by their own tests and must
+    never be folded back into this historical check.
+    """
     path = ROOT / "audit/ANOMALIES_BASELINE.json"
     payload = json.loads(path.read_text(encoding="utf-8"))
 
@@ -3096,15 +3211,71 @@ def test_repository_baseline_is_frozen_schema_valid_and_gate_green(
         root=ROOT,
         path=Path("audit/ANOMALIES_BASELINE.json"),
     )
-    gate = inventory_module._fail_on_new_gate(ROOT)
 
     assert payload["provisional"] is False
     assert payload["baseline_purpose"] == "debt_regression_control"
     assert payload["release_acceptance"] is False
     assert payload["fingerprint_schema_version"] == 1
+
+
+def test_repository_fail_on_new_gate_is_green(
+    inventory_module,
+) -> None:
+    """CURRENT_NO_REGRESSION only: live debt versus the frozen baseline."""
+    gate = inventory_module._fail_on_new_gate(ROOT)
+
     assert gate["success"] is True
     assert gate["exit_code"] == 0
     assert gate["reasons"] == []
+
+
+def test_build_manifest_provenance_is_not_self_attesting(
+    inventory_module,
+) -> None:
+    """Anti-loop guard (contract OBSERVED_BUILD_SOURCE_SHA).
+
+    The tracked manifest must never attest the commit that contains itself:
+    provenance.head_sha is the source commit observed at attestation time, a
+    strict ancestor of HEAD. A manifest recording the current HEAD on a clean
+    tree is the signature of the forbidden manual "head_sha alignment" loop.
+    The recorded commit must not be a self-attesting fixed point either.
+    """
+    payload = json.loads(
+        (ROOT / "audit/BUILD_MANIFEST.json").read_text(encoding="utf-8")
+    )
+    recorded = payload["provenance"]["head_sha"]
+    head = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=ROOT,
+        stdout=subprocess.PIPE,
+        text=True,
+        check=True,
+    ).stdout.strip()
+
+    assert re.fullmatch(r"[0-9a-f]{40}", recorded)
+    assert recorded != head, (
+        "provenance.head_sha ne doit jamais être aligné sur le HEAD courant"
+    )
+    ancestry = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", recorded, head],
+        cwd=ROOT,
+    )
+    assert ancestry.returncode == 0, (
+        "provenance.head_sha doit être un ancêtre strict de HEAD"
+    )
+
+    at_recorded = subprocess.run(
+        ["git", "show", f"{recorded}:audit/BUILD_MANIFEST.json"],
+        cwd=ROOT,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        text=True,
+    )
+    if at_recorded.returncode == 0:
+        recorded_payload = json.loads(at_recorded.stdout)
+        assert (
+            recorded_payload["provenance"]["head_sha"] != recorded
+        ), "le commit attesté ne doit pas être un point fixe auto-attestant"
 
 
 def _fingerprint_case(**overrides: object) -> dict[str, object]:
@@ -12178,43 +12349,166 @@ def test_correction_source_type_support_and_gate_validation(inventory_module):
     assert ex_obj["metadata"]["corrige_tex"] != "valid.tex"
 
 
-def test_a1_broken_latex_references_resolved(inventory_module):
-    """Verify that all 5 A1 broken LaTeX references resolve to existing tracked sources."""
-    from pathlib import Path
-    root = Path(__file__).resolve().parent.parent
-    
-    # 1. renvois.tex exists on disk as generated dependency
-    assert (root / "Mathematiques/manuel-maths/build/maquette-v5/renvois.tex").exists()
-    
-    # 2. Canonical class wrappers reference existing common class
-    assert (root / "gabarits/common/nexus-manuel.cls").exists()
+_RENVOIS_REL = "Mathematiques/manuel-maths/build/maquette-v5/renvois.tex"
+_MAQUETTE_PROJECT = ROOT / "Mathematiques/manuel-maths"
+_RENVOIS_PRODUCER = _MAQUETTE_PROJECT / "scripts/build_maquette_v5.py"
+_RENVOIS_MANIFEST = _MAQUETTE_PROJECT / "build/maquette-v5/manifest.json"
+
+
+def _run_renvois_producer(manifest: Path, output: Path) -> subprocess.CompletedProcess:
+    return subprocess.run(
+        [
+            sys.executable,
+            "scripts/build_maquette_v5.py",
+            "--manifest",
+            str(manifest),
+            "--output",
+            str(output),
+        ],
+        cwd=_MAQUETTE_PROJECT,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+
+
+def test_a1_broken_latex_references_resolved(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    """A1 broken refs stay resolved from tracked sources alone.
+
+    renvois.tex is a generated_dependency: a fresh checkout does not contain
+    it, and the reference graph must model it as resolved without requiring
+    the physical file (CASE R1 for the graph model).
+    """
+    # 1. Canonical class + wrappers reference the tracked common class.
+    assert (ROOT / "gabarits/common/nexus-manuel.cls").exists()
     for wrapper in [
         "Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls",
         "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls",
         "NSI/gabarits/nexus-manuel-v5.cls",
         "NSI/gabarits/nexus-manuel.cls",
     ]:
-        content = (root / wrapper).read_text(encoding="utf-8")
+        content = (ROOT / wrapper).read_text(encoding="utf-8")
         assert "../../gabarits/common/nexus-manuel.cls" in content
 
+    # 2. The graph models the generated dependency without the file on disk.
+    source = "Mathematiques/manuel-maths/build/maquette-v5/maquette.tex"
+    _write(
+        tmp_path / source,
+        "\\documentclass{article}\n"
+        "\\input{build/maquette-v5/renvois.tex}\n",
+    )
+    assert not (tmp_path / _RENVOIS_REL).exists()
+    inventory = {
+        "reference_graph": [],
+        "anomalies": {"broken_latex_references": []},
+    }
+    inventory_module._graph_core.add_latex_graph(
+        inventory,
+        tmp_path,
+        frozenset({source}),
+        source_roles={source: "production_object"},
+        blocking_source_roles=frozenset({"production_object"}),
+        is_relevant_tex=lambda path: path.endswith((".tex", ".cls", ".sty")),
+        resolve_latex_target=inventory_module._resolve_latex_target,
+    )
+    renvois_edges = [
+        edge
+        for edge in inventory["reference_graph"]
+        if edge["cible"].endswith("renvois.tex")
+    ]
+    assert renvois_edges, "l'arête vers renvois.tex doit être modélisée"
+    assert all(edge["resolved"] for edge in renvois_edges)
+    assert inventory["anomalies"]["broken_latex_references"] == []
 
-def test_renvois_generated_dependency_architecture(inventory_module):
-    """Test A-E architecture contract for renvois.tex generated dependency."""
-    from pathlib import Path
-    root = Path(__file__).resolve().parent.parent
-    renvois_path = root / "Mathematiques/manuel-maths/build/maquette-v5/renvois.tex"
-    
-    # A. renvois.tex is a generated dependency under build/
-    assert "build/" in str(renvois_path)
-    
-    # B. Producer script exists
-    producer = root / "Mathematiques/manuel-maths/scripts/build_maquette_v5.py"
-    assert producer.exists()
-    
-    # C. renvois.tex is generated deterministically
-    assert renvois_path.exists()
-    content = renvois_path.read_text(encoding="utf-8")
-    assert "Generated by build_maquette_v5.py" in content
+
+def test_renvois_generated_dependency_architecture(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    """Contract for the renvois.tex GENERATED_DEPENDENCY (cases R1-R8).
+
+    META/manifest canonique -> build_maquette_v5.py -> renvois.tex -> build.
+    A fresh checkout does not contain the output; only the producer creates
+    it, deterministically, from tracked canonical inputs.
+    """
+    # R1 — fresh-checkout state: producer + canonical input are tracked;
+    # the output itself must not be required to exist.
+    assert _RENVOIS_PRODUCER.exists()
+    assert _RENVOIS_MANIFEST.exists()
+    maquette_master = _MAQUETTE_PROJECT / "build/maquette-v5/maquette.tex"
+    assert "\\input{build/maquette-v5/renvois.tex}" in maquette_master.read_text(
+        encoding="utf-8"
+    )
+
+    # R7 — the generated output must never be tracked in Git.
+    tracked_probe = subprocess.run(
+        ["git", "ls-files", "--", _RENVOIS_REL],
+        cwd=ROOT,
+        stdout=subprocess.PIPE,
+        text=True,
+        check=True,
+    )
+    assert tracked_probe.stdout.strip() == "", (
+        "renvois.tex est un generated_dependency: il ne doit pas être suivi"
+    )
+
+    # R2 — the producer generates the output from the canonical manifest.
+    out_a = tmp_path / "renvois_a.tex"
+    run_a = _run_renvois_producer(_RENVOIS_MANIFEST, out_a)
+    assert run_a.returncode == 0, run_a.stderr
+    assert out_a.exists()
+    content_a = out_a.read_text(encoding="utf-8")
+    assert content_a.startswith("% Generated by build_maquette_v5.py")
+
+    # R3 — producer output integrates with the build entry point.
+    assert "\\nxvCorrectionStartLabel" in content_a
+    assert "\\newif\\ifnxvPairingFallback" in content_a
+
+    # R8 — two runs from the same inputs are byte-identical.
+    out_b = tmp_path / "renvois_b.tex"
+    run_b = _run_renvois_producer(_RENVOIS_MANIFEST, out_b)
+    assert run_b.returncode == 0, run_b.stderr
+    digest_a = hashlib.sha256(out_a.read_bytes()).hexdigest()
+    digest_b = hashlib.sha256(out_b.read_bytes()).hexdigest()
+    assert digest_a == digest_b
+
+    # R4 — broken canonical input: the producer fails and writes no output.
+    broken_manifest = json.loads(_RENVOIS_MANIFEST.read_text(encoding="utf-8"))
+    broken_manifest["expected_pages"] = 14
+    broken_path = tmp_path / "manifest_broken.json"
+    broken_path.write_text(json.dumps(broken_manifest), encoding="utf-8")
+    out_broken = tmp_path / "renvois_broken.tex"
+    run_broken = _run_renvois_producer(broken_path, out_broken)
+    assert run_broken.returncode != 0
+    assert not out_broken.exists()
+
+    # R5 — modified canonical input: deterministically different output.
+    swapped_manifest = json.loads(_RENVOIS_MANIFEST.read_text(encoding="utf-8"))
+    order = swapped_manifest["exercise_order"]
+    swapped_manifest["exercise_order"] = [order[1], order[0], *order[2:]]
+    swapped_path = tmp_path / "manifest_swapped.json"
+    swapped_path.write_text(json.dumps(swapped_manifest), encoding="utf-8")
+    out_swapped_1 = tmp_path / "renvois_swapped_1.tex"
+    out_swapped_2 = tmp_path / "renvois_swapped_2.tex"
+    for out_swapped in (out_swapped_1, out_swapped_2):
+        run_swapped = _run_renvois_producer(swapped_path, out_swapped)
+        assert run_swapped.returncode == 0, run_swapped.stderr
+    swapped_digest_1 = hashlib.sha256(out_swapped_1.read_bytes()).hexdigest()
+    swapped_digest_2 = hashlib.sha256(out_swapped_2.read_bytes()).hexdigest()
+    assert swapped_digest_1 == swapped_digest_2
+    assert swapped_digest_1 != digest_a
+
+    # R6 — a stale preexisting output is regenerated, never accepted as-is.
+    out_stale = tmp_path / "renvois_stale.tex"
+    out_stale.write_text("% STALE HANDCRAFTED CONTENT\n", encoding="utf-8")
+    run_stale = _run_renvois_producer(_RENVOIS_MANIFEST, out_stale)
+    assert run_stale.returncode == 0, run_stale.stderr
+    stale_content = out_stale.read_text(encoding="utf-8")
+    assert "STALE HANDCRAFTED CONTENT" not in stale_content
+    assert hashlib.sha256(out_stale.read_bytes()).hexdigest() == digest_a
 
 
 import pytest
@@ -16093,36 +16387,91 @@ Suite enveloppee : 1 exercice.
     assert remediation["etat"] == "ouvert"
 
 
-def test_real_reports_expose_known_exercise_contradictions(inventory_module) -> None:
-    inventory = inventory_module.build_inventory(ROOT)
-    claims = inventory["report_reconciliation"]["claims"]
+def test_real_report_reconciliation_is_internally_consistent(
+    inventory_module,
+) -> None:
+    """Live-repo invariant: reconciliation states match the claim contents.
 
-    total = next(
+    A detector test must not depend forever on a real production defect
+    (historical cases live in the synthetic fixture below): fixing a real
+    contradiction in the repository must never break this test. Here we only
+    require that every claim state is coherent with its declared/calculated
+    values and that the summary counts the claims exactly.
+    """
+    inventory = inventory_module.build_inventory(ROOT)
+    reconciliation = inventory["report_reconciliation"]
+    claims = reconciliation["claims"]
+    by_state = {"confirme": 0, "contredit": 0, "ouvert": 0}
+    for claim in claims:
+        assert claim["etat"] in by_state, claim
+        by_state[claim["etat"]] += 1
+        if claim["etat"] == "confirme":
+            assert claim["calculated"] == claim["declared"], claim
+        elif claim["etat"] == "contredit":
+            assert claim["calculated"] is not None, claim
+            assert claim["calculated"] != claim["declared"], claim
+        else:
+            assert claim["calculated"] is None, claim
+    assert reconciliation["summary"] == by_state
+
+
+def test_fixture_exposes_historical_1spe_exercise_contradictions(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    """Frozen historical detection case (snapshot 2026-08).
+
+    The production repository once declared 471 exercises in
+    RAPPORT_FINAL_1SPE.md while the inventory calculated 477, and declared 50
+    for 1SPE-TRIGONOMETRIE against 24 calculated. Those real defects are debt,
+    not test oracles: this synthetic fixture freezes the detection pattern so
+    the detector keeps being proven even after the real defects are fixed.
+    """
+    _init_repository(tmp_path)
+    chapter = "1SPE-TEST"
+    base = _chapter_path("1SPE", chapter)
+    report = "Mathematiques/manuel-maths/RAPPORT_FINAL_1SPE.md"
+    sources = {
+        f"{base}/contrat.yaml": _contract(chapter, "1SPE", capacities=1),
+        f"{base}/exercices/ex-1.tex": _meta(
+            id="1SPE-TEST-EX-001", type_objet="exercice", status="approved"
+        ),
+        f"{base}/exercices/ex-2.tex": _meta(
+            id="1SPE-TEST-EX-002", type_objet="exercice", status="approved"
+        ),
+        report: """# RAPPORT FINAL — Manuel de Mathematiques Premiere Specialite
+
+### Chapitres (1)
+
+| # | Chapitre | Exercices | Pages (chap) |
+|---|---|---:|---:|
+| 1 | Chapitre de test | 50 | 12 |
+| | **Total** | **471** | **12** |
+""",
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    claims = inventory_module.build_inventory(tmp_path)["report_reconciliation"][
+        "claims"
+    ]
+
+    chapter_claim = next(
         claim
         for claim in claims
-        if claim["path"] == "Mathematiques/manuel-maths/RAPPORT_FINAL_1SPE.md"
-        and claim["scope"] == "manual:1SPE"
+        if claim["scope"] == f"chapter:{chapter}"
+        and claim["metric"] == "exercices_principaux"
+    )
+    assert chapter_claim["declared"] == 50
+    assert chapter_claim["calculated"] == 2
+    assert chapter_claim["etat"] == "contredit"
+    total_claim = next(
+        claim
+        for claim in claims
+        if claim["scope"] == "manual:1SPE"
         and claim["metric"] == "exercices_principaux"
         and claim["declared"] == 471
     )
-    assert total["calculated"] == 477
-    assert total["etat"] == "contredit"
-    trigonometrie = next(
-        claim
-        for claim in claims
-        if claim["scope"] == "chapter:1SPE-TRIGONOMETRIE"
-        and claim["metric"] == "exercices_principaux"
-    )
-    assert trigonometrie["declared"] == 50
-    assert trigonometrie["calculated"] == 24
-    assert trigonometrie["etat"] == "contredit"
-    directive_completeness = next(
-        claim
-        for claim in claims
-        if claim["path"] == "Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md"
-        and claim["line"] == 50
-        and claim["metric"] == "completude"
-    )
-    assert directive_completeness["declared"] is True
-    assert directive_completeness["calculated"] is False
-    assert directive_completeness["etat"] == "contredit"
+    assert total_claim["calculated"] == 2
+    assert total_claim["etat"] == "contredit"
