@@ -7426,6 +7426,7 @@ def _recover_interrupted_transactions(
                         parent_fd,
                         relative.name,
                         current[1] if current is not None else None,
+                        strict_fingerprint=True,
                     )
                     expected_digest: str | None
                     if committed:
@@ -7482,6 +7483,7 @@ def _recover_interrupted_transactions(
                         parent_fd,
                         relative.name,
                         recovered[1] if recovered is not None else None,
+                        strict_fingerprint=True,
                     )
                     _require_repository_root_identity(root, root_stat)
                     _revalidate_destination_parent(
