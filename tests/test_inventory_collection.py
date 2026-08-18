@@ -2400,26 +2400,26 @@ def test_dispositions_control_file_is_schema_valid_and_digest_verified(
 def test_repository_build_applies_qualification_view_without_mutating_raw_anomalies(
     inventory_module,
 ) -> None:
-    inventory = inventory_module.build_inventory(ROOT)
-    raw_duplicates = inventory["anomalies"]["duplicate_assembly_objects"]
-    qualifications = inventory["anomaly_qualifications"]
-    intentional_fingerprints = {
-        "19669084dffa5d5b",
-        "2695d63b022fe9f0",
-        "b912c1041392a181",
-    }
+    """La vue de qualification ne mute JAMAIS les anomalies brutes.
 
-    assert len(raw_duplicates) == 3
-    assert all(
-        {"fingerprint", "disposition", "blocking"}.isdisjoint(anomaly)
-        for anomaly in raw_duplicates
-    )
-    assert {
-        fingerprint
-        for fingerprint in intentional_fingerprints
-        if qualifications[fingerprint]["disposition"] == "intentional_reuse"
-        and qualifications[fingerprint]["blocking"] is False
-    } == intentional_fingerprints
+    Version non épinglée (doctrine: la résolution d'une dette ne doit pas
+    casser son détecteur). L'ancien oracle exigeait la présence des 3
+    duplicate_assembly_objects historiques, qualifiés intentional_reuse;
+    depuis A3 cette réutilisation est contractualisée dans
+    audit/ASSEMBLY_REUSE_CONTRACTS.yaml et la liste brute est vide.
+    L'invariant est désormais vérifié sur TOUTES les catégories brutes,
+    quel que soit l'état de la dette.
+    """
+    inventory = inventory_module.build_inventory(ROOT)
+
+    for category, items in inventory["anomalies"].items():
+        assert isinstance(items, list), category
+        assert all(
+            {"fingerprint", "disposition", "blocking"}.isdisjoint(anomaly)
+            for anomaly in items
+            if isinstance(anomaly, Mapping)
+        ), category
+    assert inventory["anomalies"]["duplicate_assembly_objects"] == []
     blockers = inventory["deliverable_matrix"]["manuals"]["1SPE"]["blockers"]
     assert not any(
         blocker["code"] == "anomalie:duplicate_assembly_objects"

@@ -7654,6 +7654,7 @@ def _apply_atomic_payloads(
     applied_snapshots: dict[PurePosixPath, os.stat_result] = {}
     staged: dict[PurePosixPath, str] = {}
     stage_digests: dict[PurePosixPath, str] = {}
+    stage_sizes: dict[PurePosixPath, int] = {}
     backups: dict[PurePosixPath, str] = {}
     backup_payloads: dict[PurePosixPath, bytes] = {}
     backup_digests: dict[PurePosixPath, str] = {}
@@ -7745,6 +7746,7 @@ def _apply_atomic_payloads(
             stage_digests[relative] = _transaction_payload_digest(
                 stage_payload
             )
+            stage_sizes[relative] = len(stage_payload)
             transaction_entries.add(stage_name)
             backup = _read_destination_backup(
                 parent_fd,
@@ -7856,8 +7858,16 @@ def _apply_atomic_payloads(
                 raise InventoryError(
                     f"applied destination is not regular: {relative}"
                 )
-            if _stat_identity(applied_stat) != _stat_identity(
-                stage_snapshots[relative]
+            # stage_snapshots est un fstat pris À LA CRÉATION (taille 0,
+            # avant écriture): seuls dev/ino/format sont comparables. La
+            # taille du payload stagé ancre la détection d'une substitution
+            # unlink+create qui réutiliserait l'inode libéré.
+            if (
+                _stat_identity(applied_stat)
+                != _stat_identity(stage_snapshots[relative])
+                or stat.S_IFMT(applied_stat.st_mode)
+                != stat.S_IFMT(stage_snapshots[relative].st_mode)
+                or applied_stat.st_size != stage_sizes[relative]
             ):
                 raise InventoryError(
                     f"applied destination identity changed: {relative}"
@@ -7877,6 +7887,7 @@ def _apply_atomic_payloads(
                 parent_fd,
                 relative.name,
                 applied_snapshots[relative],
+                strict_fingerprint=True,
             )
         if validate_state is not None:
             validate_state()
@@ -7905,6 +7916,7 @@ def _apply_atomic_payloads(
                     parent_fd,
                     relative.name,
                     applied_stat,
+                    strict_fingerprint=True,
                 )
                 backup_payload = backup_payloads.get(relative)
                 if backup_payload is not None:
