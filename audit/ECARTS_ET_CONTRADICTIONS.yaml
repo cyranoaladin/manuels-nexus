@@ -23742,19 +23742,7 @@ anomalies:
     scope: object
   contract_invalid: []
   contract_missing: []
-  duplicate_assembly_objects:
-  - champ: math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex
-    cible: Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-001.tex
-    raison: objet inclus 2 fois dans le meme assemblage LaTeX
-    source: Mathematiques/manuel-maths/build/maquette-v5/maquette.tex
-  - champ: math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex
-    cible: Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-002.tex
-    raison: objet inclus 2 fois dans le meme assemblage LaTeX
-    source: Mathematiques/manuel-maths/build/maquette-v5/maquette.tex
-  - champ: math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex
-    cible: Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-005.tex
-    raison: objet inclus 2 fois dans le meme assemblage LaTeX
-    source: Mathematiques/manuel-maths/build/maquette-v5/maquette.tex
+  duplicate_assembly_objects: []
   duplicate_capacity_refs: []
   duplicate_ids: []
   invalid_capacities: []
@@ -28016,24 +28004,24 @@ counts:
   claims_contredits: 28
   claims_ouverts: 53
 generated_by: inventory_collection.py
-model_digest: sha256:c13dd6a9901a2dab446ca2d50132ebc253cf7ad41b66be9b0e2adfc8267ba2b8
+model_digest: sha256:3cdd1fd542e751a5f8623a9bf5f18026cb648150f81e688f5c585172da2da5a7
 provenance:
   branch: audit/adversarial-reconciliation-2026
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-18T18:23:40Z'
+  generated_at_utc: '2026-08-18T20:57:36Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:51eed728c11d516d5bf5b5804d52583321260d02d2bebd748dca07eb3cfba908
     scripts/build_manifest.py: sha256:f4084b0ff17bb5ecdfed872244afaf3616bf6911b64e0340d3c0ca3b4bdbba20
     scripts/inventory_assembly.py: sha256:1759502372fc12faafb27b40d959979c9b63a439cef08ca56246d2d992c26047
-    scripts/inventory_collection.py: sha256:9ca6a8cd830af000a0c4469746ccd4b9dd5f66be5649c4fddec57274530ba9dc
-    scripts/inventory_graph.py: sha256:f6ec98b634b2f441115f5bdcc06d6ef2efa198dd8d125ef55c5236ef9f1f19b7
+    scripts/inventory_collection.py: sha256:8ad323eb6ea47c5ef5dfb1538630025ee5e763c2a90ac228ac6449600cae88a8
+    scripts/inventory_graph.py: sha256:b1a198b0cb79511a8e0a38ee020ea314c22a66f05ddd8ad709c3d9dc8781209a
     scripts/inventory_pdf.py: sha256:0931c5864414ab0248cb14b9d0ca583de190f3e6633e9c6862908eb344a2892b
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:4f4d2b9d8f75fe8ac9639e69b346e6605ad3fa656cca54ac0652d43c74ec1c03
+  generator_sha256: sha256:167aa5d4a78b6b8d1e3544e79079bde8c6a66c2af5f5f2e5d91e2e1672cdf020
   generator_version: 1
   git_available: true
-  head_sha: 25f38afc4d69703841963d802af54b7ebd9e9fba
+  head_sha: 6078ec44edd294fed9a4d238edfe0694864b1be2
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
