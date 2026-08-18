@@ -2417,7 +2417,7 @@ def test_repository_build_applies_qualification_view_without_mutating_raw_anomal
         assert all(
             {"fingerprint", "disposition", "blocking"}.isdisjoint(anomaly)
             for anomaly in items
-            if isinstance(anomaly, Mapping)
+            if isinstance(anomaly, dict)
         ), category
     assert inventory["anomalies"]["duplicate_assembly_objects"] == []
     blockers = inventory["deliverable_matrix"]["manuals"]["1SPE"]["blockers"]
