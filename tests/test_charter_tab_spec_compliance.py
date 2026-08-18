@@ -41,3 +41,26 @@ def test_tab_font_size_is_6_6_pt(charte_path):
     assert "\\fontsize{6}{6}" in content
 
 
+CANONICAL_CLASS = ROOT / "gabarits/common/nexus-manuel.cls"
+
+
+@pytest.mark.parametrize("source_path", [CANONICAL_CHARTE, CANONICAL_CLASS])
+def test_tab_outer_thickness_is_12mm(source_path):
+    """Épaisseur extérieure contractuelle : 12 mm visibles sur la page.
+
+    Page impaire : rectangle de xshift=-12mm au bord (le +1mm hors page est
+    l'arête de coupe). Page paire : miroir jusqu'à xshift=12mm. L'ancienne
+    géométrie -10mm/+10mm (11 mm dont 10 visibles) violait la spec du
+    2026-07-20 et est interdite.
+    """
+    content = source_path.read_text(encoding="utf-8")
+    assert "xshift=-12mm" in content
+    assert "xshift=12mm" in content
+    assert "xshift=-10mm" not in content
+    assert (
+        "[xshift=10mm,yshift=\\ongletY" not in content
+    ), "géométrie 10mm interdite pour l'onglet"
+    assert "xshift=-6mm]current page.north east" in content
+    assert "xshift=6mm]current page.north west" in content
+
+

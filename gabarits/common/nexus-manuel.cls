@@ -711,34 +711,36 @@
   \begin{tikzpicture}[remember picture, overlay]
     \pgfmathsetmacro{\ongletY}{-25 - (\value{chapter}-1)*18}
     \ifodd\value{page}%
+      % Épaisseur extérieure contractuelle : 12 mm visibles sur la page
+      % (spec 2026-07-20) ; le +1 mm hors page garde l'arête de coupe nette.
       \path[fill=encre,rounded corners=1.1mm]
-        ([xshift=-10mm,yshift=\ongletY mm]current page.north east)
+        ([xshift=-12mm,yshift=\ongletY mm]current page.north east)
         rectangle
         ([xshift=1mm,yshift=\ongletY mm-\nxVOngletLength]
           current page.north east);
       \draw[chapcolor,line width=0.7pt]
-        ([xshift=-10mm,yshift=\ongletY mm]current page.north east)
+        ([xshift=-12mm,yshift=\ongletY mm]current page.north east)
         --
-        ([xshift=-10mm,yshift=\ongletY mm-\nxVOngletLength]
+        ([xshift=-12mm,yshift=\ongletY mm-\nxVOngletLength]
           current page.north east);
       \node[rotate=90,anchor=center,inner sep=0pt]
         at ([yshift=\ongletY mm-\nxVOngletHalfLength,
-             xshift=-5mm]current page.north east)
+             xshift=-6mm]current page.north east)
         {\usebox{\nxVOngletTextBox}};
     \else
       \path[fill=encre,rounded corners=1.1mm]
         ([xshift=-1mm,yshift=\ongletY mm]current page.north west)
         rectangle
-        ([xshift=10mm,yshift=\ongletY mm-\nxVOngletLength]
+        ([xshift=12mm,yshift=\ongletY mm-\nxVOngletLength]
           current page.north west);
       \draw[chapcolor,line width=0.7pt]
-        ([xshift=10mm,yshift=\ongletY mm]current page.north west)
+        ([xshift=12mm,yshift=\ongletY mm]current page.north west)
         --
-        ([xshift=10mm,yshift=\ongletY mm-\nxVOngletLength]
+        ([xshift=12mm,yshift=\ongletY mm-\nxVOngletLength]
           current page.north west);
       \node[rotate=-90,anchor=center,inner sep=0pt]
         at ([yshift=\ongletY mm-\nxVOngletHalfLength,
-             xshift=5mm]current page.north west)
+             xshift=6mm]current page.north west)
         {\usebox{\nxVOngletTextBox}};
     \fi
   \end{tikzpicture}%
