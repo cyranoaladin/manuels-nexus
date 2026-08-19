@@ -1,0 +1,74 @@
+% META: {"id": "TCOMPL-ME-ME-005", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "methode", "capacites_codes": ["C5"], "methodes": ["M5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, Function, Eq, dsolve, exp, simplify
+% t = symbols('t')
+% y = Function('y')
+% sol = dsolve(Eq(y(t).diff(t), 2*y(t) + 6), y(t), ics={y(0): 1})
+% assert simplify(sol.rhs - (4*exp(2*t) - 3)) == 0
+% g = 4*exp(2*t) - 3
+% assert simplify(g.diff(t) - (2*g + 6)) == 0
+% END-VERIFY
+\begin{fichemethode}{M5}{Resoudre y' = ay puis y' = ay + b avec une solution particuliere constante}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande de resoudre une equation
+  differentielle du type $y' = ay$ ou $y' = ay + b$ ($a \neq 0$), avec
+  eventuellement une condition initiale.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Cas $y' = ay$ : les solutions sont exactement les fonctions
+      $y(t) = C\,e^{at}$, $C \in \mathbb{R}$ (resultat de cours).
+    \item Cas $y' = ay + b$ : chercher une solution particuliere CONSTANTE
+      $y_p = c$ ; alors $y_p' = 0$ donne $0 = ac + b$, soit
+      $c = -\dfrac{b}{a}$.
+    \item Ecrire la solution generale : somme de la solution generale de
+      $y' = ay$ et de la solution particuliere,
+      $y(t) = C\,e^{at} - \dfrac{b}{a}$.
+    \item Determiner $C$ avec la condition initiale : substituer $t = 0$ et
+      resoudre en $C$.
+    \item Controler en derivant la solution obtenue et en verifiant l'equation
+      ET la condition initiale.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Resoudre $y' = 2y + 6$ avec $y(0) = 1$.
+
+  \medskip
+  \commentaireMarge{Solution constante : $0 = 2c + 6$.}%
+  Solution particuliere constante : $c = -\dfrac{6}{2} = -3$.
+  Solutions generales : $y(t) = C\,e^{2t} - 3$, $C \in \mathbb{R}$.
+
+  \medskip
+  \commentaireMarge{La condition initiale fixe $C$.}%
+  $y(0) = 1$ donne $C - 3 = 1$, donc $C = 4$ :
+  $y(t) = 4\,e^{2t} - 3$.
+
+  \medskip
+  Controle : $y'(t) = 8\,e^{2t}$ et
+  $2y(t) + 6 = 8\,e^{2t} - 6 + 6 = 8\,e^{2t}$ ; de plus $y(0) = 4 - 3 = 1$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Erreur de signe dans la solution particuliere :
+      $c = -\frac{b}{a}$, pas $\frac{b}{a}$.
+    \item \textbf{Piege 2.} Appliquer la condition initiale AVANT d'avoir ecrit
+      la solution generale complete (le $-\frac{b}{a}$ doit y figurer).
+    \item \textbf{Piege 3.} Confondre le cadre discret (suites
+      arithmetico-geometriques, fiche M4) et le cadre continu : la structure
+      est analogue mais $e^{at}$ remplace $a^n$.
+  \end{itemize}
+}
+
+\verifier{%
+  Deriver la solution finale et substituer dans l'equation (egalite pour tout
+  $t$), verifier la condition initiale, et controler le comportement en
+  $+\infty$ selon le signe de $a$.
+}
+
+\sEntrainer{\refExos{M5}}
+
+\end{fichemethode}

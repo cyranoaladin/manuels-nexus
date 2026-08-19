@@ -1,0 +1,72 @@
+% META: {"id": "TCOMPL-ME-ME-003", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% f = lambda x: x/2 + 2
+% u = Rational(1); seq = [u]
+% for _ in range(5):
+%     u = f(u); seq.append(u)
+% assert seq[:4] == [1, Rational(5,2), Rational(13,4), Rational(29,8)]
+% assert all(seq[i] < seq[i+1] for i in range(5))
+% assert all(s < 4 for s in seq)
+% assert f(4) == 4
+% END-VERIFY
+\begin{fichemethode}{M3}{Representer graphiquement une suite recurrente et conjecturer son comportement}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque la suite est definie par $u_{n+1} = f(u_n)$ et
+  que l'enonce demande une construction graphique « en escalier » (ou « en
+  colimacon ») et une conjecture sur les variations et la limite.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Tracer la courbe $\mathcal{C}_f$ de $f$ ET la droite $d : y = x$ dans
+      le meme repere.
+    \item Placer $u_0$ sur l'axe des abscisses ; monter verticalement jusqu'a
+      $\mathcal{C}_f$ : l'ordonnee atteinte est $u_1 = f(u_0)$.
+    \item Ramener $u_1$ sur l'axe des abscisses en passant HORIZONTALEMENT par
+      la droite $y = x$.
+    \item Repeter le procede pour construire $u_2$, $u_3$... et observer la
+      dynamique (escalier monotone ou colimacon alterne).
+    \item Conjecturer : sens de variation, majorant/minorant, et limite
+      apparente — candidate naturelle : l'abscisse du point d'intersection de
+      $\mathcal{C}_f$ et de $d$ (solution de $f(x) = x$).
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Soit $u_0 = 1$ et $u_{n+1} = \dfrac{u_n}{2} + 2$. Construire les premiers
+  termes et conjecturer.
+
+  \medskip
+  \commentaireMarge{La droite $y = x$ sert de « miroir » pour rabattre chaque
+  terme sur l'axe des abscisses.}%
+  On trace $\mathcal{C}_f$ ($f(x) = \frac{x}{2} + 2$) et $y = x$, qui se coupent
+  au point d'abscisse 4 (car $f(4) = 4$). Depuis $u_0 = 1$, la construction en
+  escalier donne $u_1 = 2{,}5$ ; $u_2 = 3{,}25$ ; $u_3 = 3{,}625$...
+
+  \medskip
+  Conjecture : $(u_n)$ est croissante, majoree par 4, et converge vers 4.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Oublier de tracer la droite $y = x$ : sans elle, on
+      ne peut pas rabattre $u_{n+1}$ sur l'axe des abscisses.
+    \item \textbf{Piege 2.} Lire les termes sur l'axe des ORDONNEES : les
+      termes successifs se lisent sur l'axe des ABSCISSES.
+    \item \textbf{Piege 3.} Confondre conjecture et preuve : la construction
+      graphique suggere le comportement, elle ne le demontre pas (fiche M4 pour
+      la preuve).
+  \end{itemize}
+}
+
+\verifier{%
+  Recalculer numeriquement $u_1$, $u_2$, $u_3$ et comparer avec la lecture
+  graphique ; controler que la limite conjecturee est bien solution de
+  $f(x) = x$.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

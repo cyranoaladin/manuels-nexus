@@ -1,0 +1,42 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-MODELES-EVOLUTION",
+ "method_id": "TCOMPL-ME-ME-005",
+ "alias": "M5",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "2e99c75cc9cd03a5c9ee6279a3584fe36014f16417effaae6d33462fe25812f3",
+ "capacity_authority": {
+  "code": "C5",
+  "ref": "TCOMPL-ME-C5",
+  "libelle": "Je sais résoudre une équation différentielle y'=ay, et y'=ay+b en cherchant une solution particulière constante.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert simplify(sol.rhs - (4*exp(2*t) - 3)) == 0",
+   "assert simplify(g.diff(t) - (2*g + 6)) == 0"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M5}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}
