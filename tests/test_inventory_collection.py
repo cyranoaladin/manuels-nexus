@@ -11168,6 +11168,35 @@ def test_repository_method_aliases_are_unambiguous(
     assert ambiguous == []
 
 
+def test_trigonometrie_contract_covers_bo_referentiel(
+    inventory_module,
+) -> None:
+    """A4.7a: le contrat 1SPE-TRIGONOMETRIE couvre le référentiel BO.
+
+    Autorité: referentiel/capacites_1SPE_TRIGONOMETRIE.json (C1..C5). Les
+    évaluations et EX-024 référencent C3-C5 conformément au référentiel; le
+    contrat ne doit pas rester sous-déclaré.
+    """
+    referentiel = json.loads(
+        (
+            ROOT
+            / "Mathematiques/manuel-maths/referentiel/capacites_1SPE_TRIGONOMETRIE.json"
+        ).read_text(encoding="utf-8")
+    )
+    contract = yaml.safe_load(
+        (
+            ROOT
+            / "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/contrat.yaml"
+        ).read_text(encoding="utf-8")
+    )
+    contract_refs = {cap["ref_capacite"] for cap in contract["capacites"]}
+    referentiel_ids = {cap["id"] for cap in referentiel["capacites"]}
+
+    assert contract_refs == referentiel_ids
+    codes = [cap["code"] for cap in contract["capacites"]]
+    assert codes == [f"C{index}" for index in range(1, len(codes) + 1)]
+
+
 def test_graph_source_role_policies_are_explicit(
     inventory_module,
 ) -> None:
