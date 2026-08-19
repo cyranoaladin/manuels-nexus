@@ -3,25 +3,26 @@
  "schema_version": 1,
  "manual": "1SPE",
  "chapter": "1SPE-TRIGONOMETRIE",
- "method_id": "1SPE-TRIGO-ME-004",
- "alias": "M4",
+ "method_id": "1SPE-TRIGO-ME-003",
+ "alias": "M3",
  "created": "2026-08-19",
  "status": "needs_review",
- "source_sha256": "e39611c6b2de2bee0dc0c03e7668473455b930af338f953d6e64813c53dc4709",
+ "source_sha256": "14c464b5306333ac1e6b4e63a064b566cd7ae1717dc52a8547f83a7b73ef5d90",
  "capacity_authority": {
-  "code": "C4",
-  "ref": "1SPE-TRIGONOMETRIE-C4",
-  "libelle": "Je sais résoudre cos(x)=a, sin(x)=a et les inéquations associées.",
+  "code": "C3",
+  "ref": "1SPE-TRIGONOMETRIE-C3",
+  "libelle": "Je sais utiliser cos(a+b), sin(a+b), cos(2a), sin(2a).",
   "programme": "voir PROGRAM_AUTHORITY_2026_2027"
  },
  "scientific_checks": {
   "tool": "SymPy (bloc VERIFY exécuté réellement)",
   "executed": true,
   "results": [
-   "assert sols == FiniteSet(-pi/4, pi/4)",
-   "assert simplify(cos(pi/4) - sqrt(2)/2) == 0",
-   "assert simplify(cos(-pi/4) - sqrt(2)/2) == 0",
-   "assert sols2 == FiniteSet(pi/6, 5*pi/6)"
+   "assert simplify(expand_trig(cos(a+b)) - (cos(a)*cos(b) - sin(a)*sin(b))) == 0",
+   "assert simplify(expand_trig(sin(2*a)) - 2*sin(a)*cos(a)) == 0",
+   "assert simplify(cos(pi/12) - (sqrt(6) + sqrt(2))/4) == 0",
+   "assert sa**2 + ca**2 == 1",
+   "assert 2*sa*ca == Rational(24,25) and 2*ca**2 - 1 == Rational(-7,25)"
   ]
  },
  "pedagogical_checks": {
@@ -38,7 +39,7 @@
  },
  "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
  "cross_reference_check": {
-  "sEntrainer": "\\refExos{M4}"
+  "sEntrainer": "\\refExos{M3}"
  },
  "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
 }

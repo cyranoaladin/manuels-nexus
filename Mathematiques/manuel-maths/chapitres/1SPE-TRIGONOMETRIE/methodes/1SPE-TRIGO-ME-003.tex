@@ -1,0 +1,75 @@
+% META: {"id": "1SPE-TRIGO-ME-003", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, cos, sin, sqrt, pi, simplify, expand_trig, Rational
+% a, b = symbols('a b', real=True)
+% assert simplify(expand_trig(cos(a+b)) - (cos(a)*cos(b) - sin(a)*sin(b))) == 0
+% assert simplify(expand_trig(sin(2*a)) - 2*sin(a)*cos(a)) == 0
+% assert simplify(cos(pi/12) - (sqrt(6) + sqrt(2))/4) == 0
+% ca = Rational(3,5); sa = Rational(4,5)
+% assert sa**2 + ca**2 == 1
+% assert 2*sa*ca == Rational(24,25) and 2*ca**2 - 1 == Rational(-7,25)
+% END-VERIFY
+\begin{fichemethode}{M3}{Utiliser les formules d'addition et de duplication}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande une valeur exacte de
+  $\cos$ ou $\sin$ d'un angle qui se decompose en somme ou difference d'angles
+  remarquables, ou fait intervenir $\cos(2a)$, $\sin(2a)$.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Ecrire la formule adaptee : $\cos(a+b) = \cos a\cos b - \sin a\sin b$,
+      $\sin(a+b) = \sin a\cos b + \cos a\sin b$ (et leurs variantes en $a-b$).
+    \item Duplication : $\sin(2a) = 2\sin a\cos a$ et
+      $\cos(2a) = \cos^2 a - \sin^2 a = 2\cos^2 a - 1 = 1 - 2\sin^2 a$.
+    \item Decomposer l'angle cible en angles remarquables (ex. :
+      $\frac{\pi}{12} = \frac{\pi}{3} - \frac{\pi}{4}$).
+    \item Substituer les valeurs exactes connues et simplifier (radicaux).
+    \item Si une seule ligne trigonometrique est connue, retrouver l'autre par
+      $\cos^2 a + \sin^2 a = 1$ en fixant le SIGNE grace a l'intervalle de $a$.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  1) Calculer $\cos\dfrac{\pi}{12}$. \quad 2) Sachant que
+  $\cos a = \dfrac{3}{5}$ avec $a \in \left[0\,;\,\dfrac{\pi}{2}\right]$,
+  calculer $\sin(2a)$ et $\cos(2a)$.
+
+  \medskip
+  \commentaireMarge{$\frac{\pi}{12} = \frac{\pi}{3} - \frac{\pi}{4}$.}%
+  1) $\cos\dfrac{\pi}{12} = \cos\dfrac{\pi}{3}\cos\dfrac{\pi}{4}
+  + \sin\dfrac{\pi}{3}\sin\dfrac{\pi}{4}
+  = \dfrac{1}{2}\cdot\dfrac{\sqrt{2}}{2} + \dfrac{\sqrt{3}}{2}\cdot
+  \dfrac{\sqrt{2}}{2} = \dfrac{\sqrt{2} + \sqrt{6}}{4}$.
+
+  \medskip
+  \commentaireMarge{Signe de $\sin a$ fixe par l'intervalle.}%
+  2) $\sin^2 a = 1 - \dfrac{9}{25} = \dfrac{16}{25}$ et $a \in
+  \left[0\,;\,\frac{\pi}{2}\right]$ donc $\sin a = \dfrac{4}{5}$.
+  Alors $\sin(2a) = 2 \times \dfrac{4}{5} \times \dfrac{3}{5} =
+  \dfrac{24}{25}$ et $\cos(2a) = 2\left(\dfrac{3}{5}\right)^2 - 1
+  = -\dfrac{7}{25}$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Ecrire $\cos(a+b) = \cos a + \cos b$ : les lignes
+      trigonometriques ne sont PAS lineaires.
+    \item \textbf{Piege 2.} Erreur de signe dans $\cos(a+b)$ (c'est un MOINS)
+      ou dans $\cos(a-b)$ (c'est un PLUS).
+    \item \textbf{Piege 3.} Oublier de determiner le signe de la ligne
+      manquante avec l'intervalle avant d'appliquer une formule de
+      duplication.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler le resultat a la calculatrice en valeur approchee
+  ($\cos\frac{\pi}{12} \approx 0{,}966$), verifier que les valeurs restent
+  dans $[-1\,;\,1]$, et tester $\sin^2(2a) + \cos^2(2a) = 1$.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

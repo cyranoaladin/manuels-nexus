@@ -3,25 +3,26 @@
  "schema_version": 1,
  "manual": "1SPE",
  "chapter": "1SPE-TRIGONOMETRIE",
- "method_id": "1SPE-TRIGO-ME-004",
- "alias": "M4",
+ "method_id": "1SPE-TRIGO-ME-005",
+ "alias": "M5",
  "created": "2026-08-19",
  "status": "needs_review",
- "source_sha256": "e39611c6b2de2bee0dc0c03e7668473455b930af338f953d6e64813c53dc4709",
+ "source_sha256": "1b44bcc7a8f49e0c27a3fbc596360929db51412862efea1c9206cf6038515c95",
  "capacity_authority": {
-  "code": "C4",
-  "ref": "1SPE-TRIGONOMETRIE-C4",
-  "libelle": "Je sais résoudre cos(x)=a, sin(x)=a et les inéquations associées.",
+  "code": "C5",
+  "ref": "1SPE-TRIGONOMETRIE-C5",
+  "libelle": "Je connais les variations de cos et sin sur [0;2π] et leur périodicité.",
   "programme": "voir PROGRAM_AUTHORITY_2026_2027"
  },
  "scientific_checks": {
   "tool": "SymPy (bloc VERIFY exécuté réellement)",
   "executed": true,
   "results": [
-   "assert sols == FiniteSet(-pi/4, pi/4)",
-   "assert simplify(cos(pi/4) - sqrt(2)/2) == 0",
-   "assert simplify(cos(-pi/4) - sqrt(2)/2) == 0",
-   "assert sols2 == FiniteSet(pi/6, 5*pi/6)"
+   "assert diff(sin(x), x) == cos(x) and diff(cos(x), x) == -sin(x)",
+   "assert simplify(cos(x + 2*pi) - cos(x)) == 0",
+   "assert simplify(sin(x + 2*pi) - sin(x)) == 0",
+   "assert -sin(pi/3) < 0 and -sin(Rational(1,10)) < 0",
+   "assert cos(Rational(1,10)) > 0 and cos(pi/3) > 0"
   ]
  },
  "pedagogical_checks": {
@@ -38,7 +39,7 @@
  },
  "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
  "cross_reference_check": {
-  "sEntrainer": "\\refExos{M4}"
+  "sEntrainer": "\\refExos{M5}"
  },
  "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
 }
