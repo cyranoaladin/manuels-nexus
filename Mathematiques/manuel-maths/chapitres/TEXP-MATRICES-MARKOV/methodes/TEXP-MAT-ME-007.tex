@@ -1,0 +1,74 @@
+% META: {"id": "TEXP-MAT-ME-007", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "methode", "capacites_codes": ["C7"], "methodes": ["M7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, symbols, Eq, solve
+% P = Matrix([[Rational(9,10), Rational(1,10)], [Rational(3,10), Rational(7,10)]])
+% a = symbols('a')
+% sol = solve(Eq(a, Rational(9,10)*a + Rational(3,10)*(1 - a)), a)
+% assert sol == [Rational(3,4)]
+% pi = Matrix([[Rational(3,4), Rational(1,4)]])
+% assert pi*P == pi
+% assert sum(pi) == 1
+% END-VERIFY
+\begin{fichemethode}{M7}{Determiner une distribution invariante}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande la distribution invariante
+  (etat stable) d'une chaine de Markov a 2 ou 3 etats : une distribution
+  $\pi$ verifiant $\pi P = \pi$.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Poser l'inconnue : $\pi = (a\ \ 1-a)$ pour deux etats (la contrainte
+      de somme 1 est integree d'emblee) ; $(a\ \ b\ \ 1-a-b)$ pour trois.
+    \item Ecrire l'equation $\pi P = \pi$ et developper coordonnee par
+      coordonnee.
+    \item Constater qu'une equation est redondante (les colonnes de
+      l'equation se compensent) : il reste un systeme reduit a resoudre avec
+      la contrainte de somme.
+    \item Resoudre et donner $\pi$ ; verifier $0 \leq$ chaque coefficient
+      $\leq 1$.
+    \item Interpreter : repartition qui se REPRODUIT d'etape en etape (et,
+      dans les situations du programme, limite des $\pi_n$).
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Determiner la distribution invariante de
+  $P = \begin{pmatrix} 0{,}9 & 0{,}1\\ 0{,}3 & 0{,}7 \end{pmatrix}$.
+
+  \medskip
+  \commentaireMarge{Une seule inconnue grace a la somme 1.}%
+  Posons $\pi = (a\ \ 1-a)$. La premiere coordonnee de $\pi P = \pi$ s'ecrit :
+  $0{,}9\,a + 0{,}3\,(1 - a) = a$, soit $0{,}3 = 0{,}4\,a$, donc
+  $a = \dfrac{3}{4}$.
+
+  \medskip
+  \commentaireMarge{La seconde equation est automatiquement verifiee.}%
+  Ainsi $\pi = \left(\dfrac{3}{4}\ \ \dfrac{1}{4}\right)$. Controle :
+  $\pi P = (0{,}675 + 0{,}075\ \ ;\ \ 0{,}075 + 0{,}175)
+  = (0{,}75\ \ 0{,}25) = \pi$.
+
+  \medskip
+  A l'equilibre, l'operateur $A$ detient 75\,\% du marche.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Resoudre $P\pi = \pi$ avec $\pi$ en ligne (mauvais
+      sens du produit) : l'invariance s'ecrit $\pi P = \pi$.
+    \item \textbf{Piege 2.} Oublier la contrainte de somme 1 : sans elle, le
+      systeme $\pi P = \pi$ a une infinite de solutions proportionnelles.
+    \item \textbf{Piege 3.} Confondre distribution invariante et distribution
+      initiale : $\pi$ ne depend pas de $\pi_0$.
+  \end{itemize}
+}
+
+\verifier{%
+  Calculer effectivement $\pi P$ et retrouver $\pi$, controler la somme 1 et la
+  positivite, et comparer avec $\pi_n$ pour $n$ grand a la calculatrice.
+}
+
+\sEntrainer{\refExos{M7}}
+
+\end{fichemethode}

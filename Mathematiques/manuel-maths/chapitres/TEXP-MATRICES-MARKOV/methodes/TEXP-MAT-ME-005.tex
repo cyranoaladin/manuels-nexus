@@ -1,0 +1,74 @@
+% META: {"id": "TEXP-MAT-ME-005", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "methode", "capacites_codes": ["C5"], "methodes": ["M5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational
+% P = Matrix([[Rational(9,10), Rational(1,10)], [Rational(3,10), Rational(7,10)]])
+% pi0 = Matrix([[Rational(1,2), Rational(1,2)]])
+% pi1 = pi0*P; pi2 = pi1*P
+% assert pi1 == Matrix([[Rational(3,5), Rational(2,5)]])
+% assert pi2 == Matrix([[Rational(33,50), Rational(17,50)]])
+% assert pi0*P**2 == pi2
+% assert sum(pi2) == 1
+% END-VERIFY
+\begin{fichemethode}{M5}{Calculer la distribution apres n transitions et lire P puissance n}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande la repartition entre les
+  etats apres $n$ etapes d'une chaine de Markov, ou l'interpretation d'un
+  coefficient de $P^n$.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Ecrire $P$ et $\pi_0$ (fiche M4), en ligne pour la distribution.
+    \item Une etape : $\pi_1 = \pi_0 P$ (produit ligne par matrice).
+    \item $n$ etapes : $\pi_n = \pi_0 P^n$ (demonstration : fiche M6) ;
+      calculer $P^n$ par produits successifs ou a la calculatrice.
+    \item Interpreter le coefficient $(i\,;\,j)$ de $P^n$ : c'est la
+      probabilite d'etre a l'etat $j$ au bout de $n$ etapes EN PARTANT de
+      l'etat $i$.
+    \item Controler que $\pi_n$ somme a 1 et interpreter les proportions dans
+      le contexte.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Avec $P = \begin{pmatrix} 0{,}9 & 0{,}1\\ 0{,}3 & 0{,}7 \end{pmatrix}$ et
+  $\pi_0 = (0{,}5\ \ 0{,}5)$, calculer $\pi_1$ et $\pi_2$.
+
+  \medskip
+  \commentaireMarge{Produit ligne $\times$ matrice.}%
+  $\pi_1 = \pi_0 P = (0{,}5 \times 0{,}9 + 0{,}5 \times 0{,}3\ \ ;\ \
+  0{,}5 \times 0{,}1 + 0{,}5 \times 0{,}7) = (0{,}6\ \ 0{,}4)$.
+
+  \medskip
+  $\pi_2 = \pi_1 P = (0{,}6 \times 0{,}9 + 0{,}4 \times 0{,}3\ \ ;\ \
+  0{,}6 \times 0{,}1 + 0{,}4 \times 0{,}7) = (0{,}66\ \ 0{,}34)$ — identique a
+  $\pi_0 P^2$.
+
+  \medskip
+  \commentaireMarge{Lecture de $P^2$.}%
+  Le coefficient $(1\,;\,2)$ de $P^2$ vaut $0{,}16$ : partant de $A$, la
+  probabilite d'etre chez $B$ apres 2 ans est $0{,}16$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Multiplier dans le mauvais sens ($P\,\pi_0$ avec
+      $\pi_0$ en ligne) : avec la convention en ligne, la distribution
+      multiplie $P$ A GAUCHE.
+    \item \textbf{Piege 2.} Confondre $\pi_n$ (distribution, depend de
+      $\pi_0$) et $P^n$ (transitions en $n$ etapes, independant de $\pi_0$).
+    \item \textbf{Piege 3.} Calculer $P^n$ en elevant chaque coefficient a la
+      puissance $n$.
+  \end{itemize}
+}
+
+\verifier{%
+  Verifier que chaque $\pi_k$ somme a 1, recouper $\pi_2$ par les deux chemins
+  ($\pi_1 P$ et $\pi_0 P^2$), et controler que les lignes de $P^n$ somment
+  a 1.
+}
+
+\sEntrainer{\refExos{M5}}
+
+\end{fichemethode}

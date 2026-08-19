@@ -1,0 +1,41 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-MATRICES-MARKOV",
+ "method_id": "TEXP-MAT-ME-006",
+ "alias": "M6",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "d373db265870be31a60a72345c17513fd6bca46b9b2a007e1fa5e308c815cf9e",
+ "capacity_authority": {
+  "code": "C6",
+  "ref": "TEXP-MAT-C6",
+  "libelle": "Je sais démontrer l'expression de la distribution après n transitions pour une chaîne de Markov.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert pi == pi0*P**n"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M6}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

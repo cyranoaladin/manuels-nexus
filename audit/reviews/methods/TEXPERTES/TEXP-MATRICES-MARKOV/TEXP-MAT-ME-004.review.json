@@ -1,0 +1,43 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-MATRICES-MARKOV",
+ "method_id": "TEXP-MAT-ME-004",
+ "alias": "M4",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "6b218474c394ba3ed64c0ccbebe94c2394168fb88e8fdf284c65fc0843fccd89",
+ "capacity_authority": {
+  "code": "C4",
+  "ref": "TEXP-MAT-C4",
+  "libelle": "Je sais associer un graphe orienté pondéré à une chaîne de Markov à deux ou trois états, et représenter distribution initiale et matrice de transition.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert sum(P.row(0)) == 1 and sum(P.row(1)) == 1",
+   "assert all(0 <= P[i, j] <= 1 for i in range(2) for j in range(2))",
+   "assert sum(pi0) == 1"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M4}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

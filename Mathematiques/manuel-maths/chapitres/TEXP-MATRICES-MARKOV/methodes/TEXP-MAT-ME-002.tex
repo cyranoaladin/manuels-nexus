@@ -1,0 +1,72 @@
+% META: {"id": "TEXP-MAT-ME-002", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "methode", "capacites_codes": ["C2"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% # 2 usines x 3 produits ; production journaliere
+% P = Matrix([[10, 5, 8], [4, 12, 6]])
+% # totaux sur 5 jours
+% assert 5*P == Matrix([[50, 25, 40], [20, 60, 30]])
+% # couts unitaires des 3 produits -> cout par usine = P * couts
+% couts = Matrix([2, 3, 1])
+% assert P*couts == Matrix([43, 50])
+% END-VERIFY
+\begin{fichemethode}{M2}{Modeliser une situation par une matrice}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsqu'une situation a DEUX entrees (usines/produits,
+  liaisons d'un reseau, systeme lineaire...) doit etre codee par une matrice
+  avant tout calcul.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Choisir la signification des LIGNES et celle des COLONNES, et
+      l'annoncer explicitement (ex. : lignes = usines, colonnes = produits).
+    \item Remplir la matrice : le coefficient $(i\,;\,j)$ est la donnee croisee
+      de la ligne $i$ et de la colonne $j$ (production, cout, effectif...).
+    \item Traduire les operations de l'enonce : cumul dans le temps $\to$
+      multiplication par un scalaire ou somme ; bilan croise (couts,
+      totaux) $\to$ produit par un vecteur colonne ou une autre matrice.
+    \item Controler la COHERENCE des dimensions avant chaque produit : c'est
+      le meilleur detecteur d'erreur de modelisation.
+    \item Interpreter chaque coefficient du resultat dans le contexte (unites
+      comprises).
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Deux usines fabriquent trois produits ; les productions journalieres sont :
+  usine 1 : 10, 5, 8 ; usine 2 : 4, 12, 6. Les couts unitaires des produits
+  sont 2, 3, 1 (en euros). Modeliser et calculer le cout journalier par usine.
+
+  \medskip
+  \commentaireMarge{Lignes $=$ usines, colonnes $=$ produits.}%
+  $P = \begin{pmatrix} 10 & 5 & 8\\ 4 & 12 & 6 \end{pmatrix}$ et le vecteur
+  des couts $C = \begin{pmatrix} 2\\ 3\\ 1 \end{pmatrix}$.
+
+  \medskip
+  \commentaireMarge{Dimensions : $(2\times 3)(3 \times 1) = 2 \times 1$.}%
+  $PC = \begin{pmatrix} 10 \times 2 + 5 \times 3 + 8 \times 1\\
+  4 \times 2 + 12 \times 3 + 6 \times 1 \end{pmatrix}
+  = \begin{pmatrix} 43\\ 50 \end{pmatrix}$ : 43 euros par jour pour l'usine 1,
+  50 pour l'usine 2.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Ne pas annoncer la convention lignes/colonnes : la
+      matrice transposee code une autre lecture et fausse les produits.
+    \item \textbf{Piege 2.} Multiplier dans le mauvais sens ($CP$ au lieu de
+      $PC$) : les dimensions ne s'enchainent plus.
+    \item \textbf{Piege 3.} Additionner des matrices codant des grandeurs
+      d'unites differentes.
+  \end{itemize}
+}
+
+\verifier{%
+  Recalculer un coefficient du resultat directement depuis l'enonce (43 euros
+  pour l'usine 1), et verifier que dimensions et unites sont coherentes.
+}
+
+\sEntrainer{\refExos{M2}}
+
+\end{fichemethode}

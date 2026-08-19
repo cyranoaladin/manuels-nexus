@@ -1,0 +1,46 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-MATRICES-MARKOV",
+ "method_id": "TEXP-MAT-ME-001",
+ "alias": "M1",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "eee5e50d0d97bb056c30b2a9a1c30d62deff3c57e118eb7a988f241150e34538",
+ "capacity_authority": {
+  "code": "C1",
+  "ref": "TEXP-MAT-C1",
+  "libelle": "Je sais effectuer les opérations sur les matrices (somme, produit, inverse, puissance).",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert A + B == Matrix([[1,3],[4,4]])",
+   "assert A*B == Matrix([[2,1],[4,3]]) and B*A == Matrix([[3,4],[1,2]])",
+   "assert A*B != B*A",
+   "assert A.det() == -2",
+   "assert A.inv() == Matrix([[-2,1],[Rational(3,2),Rational(-1,2)]])",
+   "assert A*A.inv() == eye(2)"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M1}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

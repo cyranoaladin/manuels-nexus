@@ -1,0 +1,78 @@
+% META: {"id": "TEXP-MAT-ME-003", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, eye
+% A = Matrix([[Rational(1,2), 0], [0, Rational(1,3)]])
+% C = Matrix([1, 2])
+% L = (eye(2) - A).inv()*C
+% assert L == Matrix([2, 3])
+% U0 = Matrix([4, 6])
+% U1 = A*U0 + C; U2 = A*U1 + C
+% assert U1 == Matrix([3, 4]) and U2 == Matrix([Rational(5,2), Rational(10,3)])
+% assert A**2*(U0 - L) + L == U2
+% END-VERIFY
+\begin{fichemethode}{M3}{Etudier une suite U(n+1) = A U(n) + C}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsqu'une suite de matrices colonnes verifie
+  $U_{n+1} = A\,U_n + C$ et que l'enonce demande une expression de $U_n$, son
+  comportement, ou un etat stable.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Chercher l'etat stable $L$ : resoudre $L = A\,L + C$, c'est-a-dire
+      le systeme lineaire $(I - A)L = C$ (inverse de $I - A$ ou resolution
+      directe).
+    \item Poser la suite auxiliaire $V_n = U_n - L$.
+    \item Montrer que $V_{n+1} = A\,V_n$ :
+      $V_{n+1} = A U_n + C - (AL + C) = A(U_n - L)$.
+    \item En deduire $V_n = A^n V_0$, puis
+      $U_n = A^n\left(U_0 - L\right) + L$.
+    \item Etudier le comportement : si $A^n \to 0$ (coefficients), alors
+      $U_n \to L$ — interpreter l'etat stable dans le contexte.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  $U_{n+1} = A\,U_n + C$ avec
+  $A = \begin{pmatrix} 1/2 & 0\\ 0 & 1/3 \end{pmatrix}$,
+  $C = \begin{pmatrix} 1\\ 2 \end{pmatrix}$,
+  $U_0 = \begin{pmatrix} 4\\ 6 \end{pmatrix}$. Exprimer $U_n$.
+
+  \medskip
+  \commentaireMarge{Etat stable : $(I - A)L = C$.}%
+  $L = A L + C$ donne $\ell_1 = \frac{\ell_1}{2} + 1$ et
+  $\ell_2 = \frac{\ell_2}{3} + 2$, soit $L = \begin{pmatrix} 2\\ 3
+  \end{pmatrix}$.
+
+  \medskip
+  \commentaireMarge{Suite auxiliaire geometrique matricielle.}%
+  $V_n = U_n - L$ verifie $V_{n+1} = A V_n$, donc $V_n = A^n V_0$ avec
+  $V_0 = \begin{pmatrix} 2\\ 3 \end{pmatrix}$ :
+  $U_n = A^n \begin{pmatrix} 2\\ 3 \end{pmatrix} + \begin{pmatrix} 2\\ 3
+  \end{pmatrix} = \begin{pmatrix} 2 + 2/2^n\\ 3 + 3/3^n \end{pmatrix}$.
+
+  \medskip
+  Les puissances $\frac{1}{2^n}$ et $\frac{1}{3^n}$ tendent vers 0 :
+  $U_n \to L$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Ecrire $U_n = A^n U_0 + C$ : la constante ne se
+      propage pas ainsi — passer par l'etat stable.
+    \item \textbf{Piege 2.} Inverser $I - A$ sans verifier qu'il est
+      inversible ($\det(I - A) \neq 0$).
+    \item \textbf{Piege 3.} Multiplier par $A$ du mauvais cote dans la suite
+      auxiliaire ($V_{n+1} = A V_n$, l'ordre compte).
+  \end{itemize}
+}
+
+\verifier{%
+  Controler la formule sur $U_1$ et $U_2$ par la recurrence directe, verifier
+  $L = AL + C$, et confronter la limite au sens concret de l'etat stable.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}
