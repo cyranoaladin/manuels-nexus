@@ -1,0 +1,43 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+ "method_id": "TCOMPL-LOG-ME-004",
+ "alias": "M4",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "a1962b56d4b02b02b417f4403bf80abbe846f0d86cb41407c2e366ef08d7f140",
+ "capacity_authority": {
+  "code": "C4",
+  "ref": "TCOMPL-LOG-C4",
+  "libelle": "Je sais démontrer les relations ln(ab) = ln(a) + ln(b) et ln(1/a) = -ln(a) à partir de l'équation fonctionnelle.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert simplify(expand_log(log(a*b)) - (log(a) + log(b))) == 0",
+   "assert simplify(expand_log(log(1/a), force=True) + log(a)) == 0",
+   "assert simplify(exp(log(a) + log(b)) - a*b) == 0"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M4}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

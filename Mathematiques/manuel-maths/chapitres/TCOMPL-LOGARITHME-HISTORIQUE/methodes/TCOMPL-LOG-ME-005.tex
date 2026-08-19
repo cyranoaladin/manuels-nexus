@@ -1,0 +1,68 @@
+% META: {"id": "TCOMPL-LOG-ME-005", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "methode", "capacites_codes": ["C5"], "methodes": ["M5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, log, exp, diff, simplify
+% x = symbols('x', positive=True)
+% assert simplify(diff(exp(log(x)), x) - 1) == 0
+% assert simplify(1/exp(log(x)) - 1/x) == 0
+% assert diff(log(x), x) == 1/x
+% END-VERIFY
+\begin{fichemethode}{M5}{Demontrer que la derivee de ln est x -> 1/x}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande de DEMONTRER que
+  $\ln'(x) = \dfrac{1}{x}$ sur $]0\,;\,+\infty[$, en ADMETTANT que $\ln$ est
+  derivable.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Enoncer le point de depart : pour tout $x > 0$, $e^{\ln x} = x$, et
+      $\ln$ est derivable sur $]0\,;\,+\infty[$ (admis).
+    \item Deriver les deux membres de l'egalite $e^{\ln x} = x$ : a droite, la
+      derivee de $x \mapsto x$ vaut 1.
+    \item A gauche, appliquer la derivation d'une composee
+      $(e^{u})' = u'\,e^{u}$ avec $u = \ln$ :
+      $\bigl(e^{\ln x}\bigr)' = \ln'(x)\,e^{\ln x}$.
+    \item Egaler : $\ln'(x)\,e^{\ln x} = 1$, et remplacer $e^{\ln x}$ par $x$ :
+      $\ln'(x) \times x = 1$.
+    \item Conclure en divisant par $x \neq 0$ : $\ln'(x) = \dfrac{1}{x}$ pour
+      tout $x > 0$.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Demontrer que pour tout $x > 0$, $\ln'(x) = \dfrac{1}{x}$ (derivabilite de
+  $\ln$ admise).
+
+  \medskip
+  \commentaireMarge{Deriver l'identite $e^{\ln x} = x$.}%
+  Pour tout $x > 0$, $e^{\ln x} = x$. Les deux membres sont derivables sur
+  $]0\,;\,+\infty[$ ; en derivant, avec $(e^u)' = u'e^u$ :
+  $\ln'(x)\,e^{\ln x} = 1$.
+
+  \medskip
+  \commentaireMarge{Remplacer $e^{\ln x}$ par $x$.}%
+  Or $e^{\ln x} = x$, donc $x\,\ln'(x) = 1$. Comme $x > 0$, on peut diviser :
+  $\ln'(x) = \dfrac{1}{x}$. \hfill$\square$
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Oublier de mentionner l'hypothese ADMISE (la
+      derivabilite de $\ln$) : sans elle, on ne peut pas deriver la composee.
+    \item \textbf{Piege 2.} Deriver $e^{\ln x}$ en $e^{\ln x}$ tout court, en
+      oubliant le facteur $\ln'(x)$ de la composee.
+    \item \textbf{Piege 3.} Diviser par $x$ sans signaler $x \neq 0$ (garanti
+      ici par $x > 0$).
+  \end{itemize}
+}
+
+\verifier{%
+  Controler la coherence du resultat : $\dfrac{1}{x} > 0$ sur
+  $]0\,;\,+\infty[$, ce qui confirme la stricte croissance de $\ln$ ; et la
+  tangente en 1 a pour pente $\ln'(1) = 1$ (fiche M1).
+}
+
+\sEntrainer{\refExos{M5}}
+
+\end{fichemethode}

@@ -1,42 +1,67 @@
-% META: {"id": "TCOMPL-LOG-ME-001", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "sources_inspiration": [], "status": "approved"}
-\begin{fichemethode}{M1}{Deriver une fonction composee}
+% META: {"id": "TCOMPL-LOG-ME-001", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, log, exp, limit, diff, oo, simplify, E
+% x = symbols('x', positive=True)
+% assert limit(log(x), x, 0, '+') == -oo
+% assert limit(log(x), x, oo) == oo
+% assert diff(log(x), x) == 1/x
+% assert simplify(exp(log(x)) - x) == 0 and log(1) == 0 and log(E) == 1
+% END-VERIFY
+\begin{fichemethode}{M1}{Mobiliser le logarithme comme reciproque de l'exponentielle}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque la fonction a deriver fait intervenir une composition : $\mathrm{e}^{u(x)}$, $\ln(u(x))$, $(u(x))^n$, $\sqrt{u(x)}$, ou plus generalement $v(u(x))$.
+  Utiliser cette methode lorsque l'enonce demande de justifier une propriete de
+  $\ln$ (valeurs remarquables, limites, allure de la courbe, derivee) a partir
+  de sa DEFINITION : $\ln$ est la fonction reciproque de $\exp$.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item \textbf{Identifier la fonction exterieure $v$ et la fonction interieure $u$.}
-    \item \textbf{Calculer $u'(x)$.}
-    \item \textbf{Calculer $v'(t)$.}
-    \item \textbf{Appliquer la formule :} $(v \circ u)'(x) = u'(x) \times v'(u(x))$.
-    \item \textbf{Simplifier} l'expression obtenue.
+    \item Poser la definition : pour $x > 0$, $y = \ln(x) \iff x = e^y$ ;
+      autrement dit $e^{\ln x} = x$ (pour $x > 0$) et $\ln(e^y) = y$ (pour tout
+      $y$).
+    \item En deduire les valeurs remarquables : $\ln(1) = 0$ (car $e^0 = 1$) et
+      $\ln(e) = 1$ (car $e^1 = e$).
+    \item Transferer les proprietes de $\exp$ : $\ln$ est definie sur
+      $]0\,;\,+\infty[$, strictement croissante, et
+      $\lim_{x \to 0^+} \ln x = -\infty$, $\lim_{x \to +\infty} \ln x = +\infty$.
+    \item Pour la courbe : celle de $\ln$ est la symetrique de celle de $\exp$
+      par rapport a la droite $y = x$.
+    \item Utiliser la derivee $\ln'(x) = \dfrac{1}{x}$ (demonstration : fiche
+      M5) pour les tangentes et variations.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  \textbf{Exemple.} Deriver $f(x) = \mathrm{e}^{x^2 - 3x}$.
+  Justifier que $\ln(e^2) = 2$ et determiner la tangente a la courbe de $\ln$
+  au point d'abscisse 1.
 
   \medskip
-  \commentaireMarge{Identifier : $v(t) = \mathrm{e}^t$, $u(x) = x^2 - 3x$.}%
-  Fonction interieure : $u(x) = x^2 - 3x$, donc $u'(x) = 2x - 3$.
+  \commentaireMarge{Appliquer $\ln(e^y) = y$.}%
+  Par definition de la reciproque, $\ln(e^2) = 2$.
 
-  \commentaireMarge{Appliquer $(e^u)' = u' \cdot e^u$.}%
-  Fonction exterieure : $v(t) = \mathrm{e}^t$, donc $v'(t) = \mathrm{e}^t$.
-
-  $f'(x) = u'(x) \times \mathrm{e}^{u(x)} = (2x-3)\,\mathrm{e}^{x^2 - 3x}$.
+  \medskip
+  \commentaireMarge{$T : y = f'(a)(x-a) + f(a)$.}%
+  On a $\ln(1) = 0$ et $\ln'(1) = \dfrac{1}{1} = 1$, donc la tangente en 1 est
+  $y = 1 \times (x - 1) + 0 = x - 1$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier $u'(x)$ : ecrire $(\mathrm{e}^{u})' = \mathrm{e}^u$ au lieu de $u'\,\mathrm{e}^u$.
-    \item \textbf{Piege 2.} Pour $(\ln u)'$, oublier le signe de $u$ : verifier que $u > 0$ sur l'intervalle d'etude.
+    \item \textbf{Piege 1.} Ecrire $\ln(x)$ pour $x \leq 0$ : le logarithme
+      n'est defini que sur $]0\,;\,+\infty[$.
+    \item \textbf{Piege 2.} Utiliser $e^{\ln x} = x$ sans la condition $x > 0$
+      (alors que $\ln(e^y) = y$ vaut pour tout reel $y$).
+    \item \textbf{Piege 3.} Confondre les courbes : celle de $\ln$ est SOUS la
+      droite $y = x - 1$ partout sauf au point de tangence, et la symetrie avec
+      $\exp$ se fait par rapport a $y = x$, pas par rapport a un axe.
   \end{itemize}
 }
 
 \verifier{%
-  Verifier sur un cas simple : si $u(x) = 2x$, alors $(\mathrm{e}^{2x})' = 2\mathrm{e}^{2x}$ (et non $\mathrm{e}^{2x}$).
+  Controler chaque propriete en revenant a $\exp$ (une egalite sur $\ln$ doit se
+  traduire en egalite vraie sur $\exp$), et verifier les limites par lecture de
+  la courbe symetrique.
 }
 
 \sEntrainer{\refExos{M1}}

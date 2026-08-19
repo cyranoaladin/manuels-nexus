@@ -1,0 +1,42 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+ "method_id": "TCOMPL-LOG-ME-002",
+ "alias": "M2",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "a9fa49fba3cddb9b9f52730908e79e8e359d086001f77859bf37c2b95ec8150d",
+ "capacity_authority": {
+  "code": "C2",
+  "ref": "TCOMPL-LOG-C2",
+  "libelle": "Je sais utiliser l'équation fonctionnelle du logarithme pour transformer une écriture ou résoudre une équation/inéquation.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert solve(Eq(log(x) + log(2*x), log(8)), x) == [2]",
+   "assert solve(Eq(3*x - 1, x + 5), x) == [3]"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M2}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

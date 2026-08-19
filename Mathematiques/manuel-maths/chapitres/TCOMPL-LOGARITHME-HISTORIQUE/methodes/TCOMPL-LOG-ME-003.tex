@@ -1,0 +1,68 @@
+% META: {"id": "TCOMPL-LOG-ME-003", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Rational, log, floor
+% from math import log as mlog
+% q, seuil = Rational(8,10), Rational(1,100)
+% n0 = mlog(float(seuil))/mlog(float(q))
+% assert 20 < n0 < 21
+% assert q**20 > seuil and q**21 < seuil
+% END-VERIFY
+\begin{fichemethode}{M3}{Determiner un seuil avec ln(q^n) = n ln(q)}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande le plus petit entier $n$ tel
+  qu'une suite geometrique franchisse un seuil : resoudre $q^n < s$ (ou
+  $q^n > s$) a l'aide de $\ln(q^n) = n\ln(q)$.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Ecrire l'inequation a resoudre (ex. $u_0\,q^n < s$) et l'isoler sous
+      la forme $q^n < s'$ avec $q > 0$ et $s' > 0$.
+    \item Appliquer $\ln$ aux deux membres (fonction strictement croissante,
+      le sens est conserve) : $\ln(q^n) < \ln(s')$.
+    \item Utiliser $\ln(q^n) = n\ln(q)$ pour obtenir $n\ln(q) < \ln(s')$.
+    \item Diviser par $\ln(q)$ en surveillant son SIGNE : si $0 < q < 1$,
+      $\ln(q) < 0$ et l'inegalite CHANGE de sens :
+      $n > \dfrac{\ln(s')}{\ln(q)}$.
+    \item Conclure par le plus petit entier qui convient, et le verifier par un
+      calcul direct de $q^n$ de part et d'autre.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Determiner le plus petit entier $n$ tel que $0{,}8^n < 0{,}01$.
+
+  \medskip
+  \commentaireMarge{$\ln$ conserve le sens de l'inegalite.}%
+  $0{,}8^n < 0{,}01 \iff n\ln(0{,}8) < \ln(0{,}01)$.
+
+  \medskip
+  \commentaireMarge{$\ln(0{,}8) < 0$ : division qui RENVERSE l'inegalite.}%
+  Comme $\ln(0{,}8) < 0$ :
+  $n > \dfrac{\ln(0{,}01)}{\ln(0{,}8)} \approx 20{,}64$.
+
+  \medskip
+  Le plus petit entier qui convient est $n = 21$. Controle :
+  $0{,}8^{20} \approx 0{,}0115 > 0{,}01$ et $0{,}8^{21} \approx 0{,}0092 < 0{,}01$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Diviser par $\ln(q)$ sans regarder son signe : pour
+      $0 < q < 1$, $\ln(q) < 0$ et le sens de l'inegalite se renverse.
+    \item \textbf{Piege 2.} Arrondir vers le bas : si $n > 20{,}64$, le premier
+      entier est 21, pas 20.
+    \item \textbf{Piege 3.} Ecrire $\ln(q^n) = \ln(q)^n$ : la propriete est
+      $n\ln(q)$.
+  \end{itemize}
+}
+
+\verifier{%
+  Toujours tester l'entier trouve ET le precedent par calcul direct : $q^{n}$
+  doit franchir le seuil, $q^{n-1}$ non.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}
