@@ -7,6 +7,10 @@
   \IfFileExists{../../gabarits/common/nexus-charte.sty}{%
     \RequirePackage{../../gabarits/common/nexus-charte}%
   }{%
-    \RequirePackage{nexus-charte}%
+    \IfFileExists{../gabarits/common/nexus-charte.sty}{%
+      \RequirePackage{../gabarits/common/nexus-charte}%
+    }{%
+      \RequirePackage{nexus-charte}%
+    }%
   }%
 }

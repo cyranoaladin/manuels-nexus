@@ -7,6 +7,10 @@
   \IfFileExists{../../gabarits/common/nexus-decor.sty}{%
     \RequirePackage{../../gabarits/common/nexus-decor}%
   }{%
-    \RequirePackage{nexus-decor}%
+    \IfFileExists{../gabarits/common/nexus-decor.sty}{%
+      \RequirePackage{../gabarits/common/nexus-decor}%
+    }{%
+      \RequirePackage{nexus-decor}%
+    }%
   }%
 }

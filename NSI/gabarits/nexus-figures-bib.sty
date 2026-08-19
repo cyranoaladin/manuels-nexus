@@ -7,6 +7,10 @@
   \IfFileExists{../../gabarits/common/nexus-figures-bib.sty}{%
     \RequirePackage{../../gabarits/common/nexus-figures-bib}%
   }{%
-    \RequirePackage{nexus-figures-bib}%
+    \IfFileExists{../gabarits/common/nexus-figures-bib.sty}{%
+      \RequirePackage{../gabarits/common/nexus-figures-bib}%
+    }{%
+      \RequirePackage{nexus-figures-bib}%
+    }%
   }%
 }

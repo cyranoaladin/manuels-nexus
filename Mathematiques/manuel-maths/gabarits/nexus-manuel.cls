@@ -4,4 +4,8 @@
 \IfFileExists{../../gabarits/common/nexus-manuel.cls}{%
   \input{../../gabarits/common/nexus-manuel.cls}%
 }{%
+  \IfFileExists{../gabarits/common/nexus-manuel.cls}{%
+    \input{../gabarits/common/nexus-manuel.cls}%
+  }{%
+  }%
 }

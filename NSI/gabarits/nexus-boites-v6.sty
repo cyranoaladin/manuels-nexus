@@ -7,6 +7,10 @@
   \IfFileExists{../../gabarits/common/nexus-boites.sty}{%
     \RequirePackage{../../gabarits/common/nexus-boites}%
   }{%
-    \RequirePackage{nexus-boites}%
+    \IfFileExists{../gabarits/common/nexus-boites.sty}{%
+      \RequirePackage{../gabarits/common/nexus-boites}%
+    }{%
+      \RequirePackage{nexus-boites}%
+    }%
   }%
 }

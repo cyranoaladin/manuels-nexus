@@ -7,6 +7,10 @@
   \IfFileExists{../../gabarits/common/nexus-couverture.sty}{%
     \RequirePackage{../../gabarits/common/nexus-couverture}%
   }{%
-    \RequirePackage{nexus-couverture}%
+    \IfFileExists{../gabarits/common/nexus-couverture.sty}{%
+      \RequirePackage{../gabarits/common/nexus-couverture}%
+    }{%
+      \RequirePackage{nexus-couverture}%
+    }%
   }%
 }

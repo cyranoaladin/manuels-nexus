@@ -7,6 +7,10 @@
   \IfFileExists{../../gabarits/common/nexus-exercices.sty}{%
     \RequirePackage{../../gabarits/common/nexus-exercices}%
   }{%
-    \RequirePackage{nexus-exercices}%
+    \IfFileExists{../gabarits/common/nexus-exercices.sty}{%
+      \RequirePackage{../gabarits/common/nexus-exercices}%
+    }{%
+      \RequirePackage{nexus-exercices}%
+    }%
   }%
 }

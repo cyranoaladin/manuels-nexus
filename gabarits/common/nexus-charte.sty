@@ -257,7 +257,13 @@
     \IfFileExists{../../gabarits/common/#1.sty}{%
       \RequirePackage{../../gabarits/common/#1}%
     }{%
-      \RequirePackage{#1}%
+      % Résolution explicite depuis un projet de profondeur 1 (ex. NSI/) :
+      % la source canonique reste unique sous gabarits/common.
+      \IfFileExists{../gabarits/common/#1.sty}{%
+        \RequirePackage{../gabarits/common/#1}%
+      }{%
+        \RequirePackage{#1}%
+      }%
     }%
   }%
 }

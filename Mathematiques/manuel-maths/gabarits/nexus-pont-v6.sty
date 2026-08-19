@@ -7,6 +7,10 @@
   \IfFileExists{../../gabarits/common/nexus-pont.sty}{%
     \RequirePackage{../../gabarits/common/nexus-pont}%
   }{%
-    \RequirePackage{nexus-pont}%
+    \IfFileExists{../gabarits/common/nexus-pont.sty}{%
+      \RequirePackage{../gabarits/common/nexus-pont}%
+    }{%
+      \RequirePackage{nexus-pont}%
+    }%
   }%
 }

@@ -6,5 +6,10 @@
   \input{../../gabarits/common/nexus-manuel.cls}
   \RequirePackage{../../gabarits/common/nexus-charte}%
 }{%
-  \RequirePackage{nexus-charte}%
+  \IfFileExists{../gabarits/common/nexus-manuel.cls}{%
+    \input{../gabarits/common/nexus-manuel.cls}
+    \RequirePackage{../gabarits/common/nexus-charte}%
+  }{%
+    \RequirePackage{nexus-charte}%
+  }%
 }
