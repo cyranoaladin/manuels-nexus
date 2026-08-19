@@ -4709,6 +4709,17 @@ def _add_reference_graph(
                     continue
                 field = f"capacites[{index}]"
                 target = capacity_codes[chapter_id].get(value, value)
+                if target not in capacity_refs[chapter_id] and value.startswith(
+                    f"{chapter_id}-"
+                ):
+                    # Namespace CAPACITY_ID scopé chapitre: {CHAPTER_ID}-C{n}.
+                    # Uniquement le préfixe EXACT du chapitre courant, puis le
+                    # code doit exister au contrat — aucune normalisation
+                    # floue, aucune résolution inter-chapitres.
+                    scoped_code = value[len(chapter_id) + 1 :]
+                    scoped_target = capacity_codes[chapter_id].get(scoped_code)
+                    if scoped_target is not None:
+                        target = scoped_target
                 resolved = target in capacity_refs[chapter_id]
                 _append_reference(
                     inventory,

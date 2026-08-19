@@ -10965,6 +10965,112 @@ def test_maquette_reuse_contracts_match_manifest_authority(
         assert derived == 2
 
 
+def _capacity_resolver_fixture(
+    tmp_path: Path,
+    declared_capacities: list[str],
+) -> str:
+    """Chapitre au contrat NSI-style: codes C1/C2 -> refs programme P-REF-0n
+    (différentes de la forme scopée {CHAPTER}-C{n})."""
+    chapter = "1NSI-TEST"
+    base = _chapter_path("1NSI", chapter)
+    exercise = f"{base}/exercices/1NSI-TEST-EX-001.tex"
+    contract = (
+        f"chapitre: {chapter}\n"
+        "niveau: 1NSI\n"
+        "titre: Chapitre de test\n"
+        "statut: approved\n"
+        "capacites:\n"
+        '  - { code: C1, ref_capacite: P-REF-01, libelle_eleve: "Capacite 1" }\n'
+        '  - { code: C2, ref_capacite: P-REF-02, libelle_eleve: "Capacite 2" }\n'
+    )
+    sources = {
+        f"{base}/contrat.yaml": contract,
+        exercise: _meta(
+            id="1NSI-TEST-EX-001",
+            chapitre=chapter,
+            type_objet="exercice",
+            status="approved",
+            capacites=declared_capacities,
+        ),
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+    return exercise
+
+
+def _broken_capacity_targets(inventory: dict) -> list[str]:
+    return [
+        item["cible"]
+        for item in inventory["anomalies"]["broken_meta_references"]
+        if item["champ"].startswith("capacites[")
+    ]
+
+
+def test_capacity_resolver_accepts_chapter_scoped_ids(
+    tmp_path: Path, inventory_module
+) -> None:
+    """Namespace CAPACITY_ID: {CHAPTER_ID}-C{n} valide au contrat => résolu.
+
+    Le contrat déclare C1/C2 -> P-REF-01/02 ; l'objet référence
+    1NSI-TEST-C1 (ID scopé chapitre) et C2 (code nu): zéro anomalie.
+    """
+    _init_repository(tmp_path)
+    _capacity_resolver_fixture(tmp_path, ["1NSI-TEST-C1", "C2"])
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert _broken_capacity_targets(inventory) == []
+
+
+def test_capacity_resolver_rejects_foreign_and_absent_references(
+    tmp_path: Path, inventory_module
+) -> None:
+    """Adversarial: mauvais namespace/chapitre/code => toujours cassé.
+
+    - code scopé absent du contrat (1NSI-TEST-C9) ;
+    - préfixe d'un AUTRE chapitre (1NSI-AUTRE-C1) — pas de résolution
+      inter-chapitres, pas de normalisation floue ;
+    - code nu absent (C9) ;
+    - ref programme d'un autre namespace non déclarée au contrat (P-REF-99).
+    """
+    _init_repository(tmp_path)
+    _capacity_resolver_fixture(
+        tmp_path,
+        ["1NSI-TEST-C9", "1NSI-AUTRE-C1", "C9", "P-REF-99"],
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert sorted(_broken_capacity_targets(inventory)) == [
+        "1NSI-AUTRE-C1",
+        "1NSI-TEST-C9",
+        "C9",
+        "P-REF-99",
+    ]
+
+
+def test_capacity_resolver_normalization_is_injective(
+    tmp_path: Path, inventory_module
+) -> None:
+    """Aucune collision: la forme scopée et le code nu du MÊME contrat
+    désignent la même ref (pas deux cibles distinctes), et un préfixe
+    partiel (1NSI-TES-C1) n'est jamais normalisé."""
+    _init_repository(tmp_path)
+    _capacity_resolver_fixture(tmp_path, ["1NSI-TEST-C1", "C1", "1NSI-TES-C1"])
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert _broken_capacity_targets(inventory) == ["1NSI-TES-C1"]
+    resolved = [
+        ref["cible"]
+        for ref in inventory["reference_graph"]
+        if ref["kind"] == "capacity" and ref["resolved"]
+        and ref["champ"].startswith("capacites[")
+    ]
+    assert resolved == ["P-REF-01", "P-REF-01"]
+
+
 def test_graph_source_role_policies_are_explicit(
     inventory_module,
 ) -> None:
