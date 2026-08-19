@@ -1,0 +1,74 @@
+% META: {"id": "TCOMPL-BAYES-ME-003", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% p, Se, Sp = Rational(1,100), Rational(9,10), Rational(19,20)
+% PT = p*Se + (1-p)*(1-Sp)
+% assert PT == Rational(117, 2000)
+% assert p*Se/PT == Rational(2, 13)
+% # P_M(T) = 9/10 alors que P_T(M) = 2/13 : les deux conditionnements different
+% assert Rational(9,10) != Rational(2,13)
+% END-VERIFY
+\begin{fichemethode}{M3}{Distinguer $P_B(A)$ de $P_A(B)$ dans un probleme concret}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsqu'un enonce en langage courant (« proportion de
+  malades parmi les tests positifs », « taux de positifs parmi les malades »)
+  risque de faire confondre les deux conditionnements $P_A(B)$ et $P_B(A)$.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Traduire chaque phrase en identifiant l'evenement CONDITIONNANT :
+      « parmi les $X$ » ou « sachant $X$ » $\Rightarrow$ le conditionnement est
+      $P_X(\cdot)$.
+    \item Ecrire les deux quantites en jeu ($P_A(B)$ et $P_B(A)$) et reperer
+      laquelle est DONNEE, laquelle est DEMANDEE.
+    \item Se rappeler qu'elles n'ont aucune raison d'etre egales : elles ne
+      partagent que le numerateur $P(A \cap B)$, mais se rapportent a des
+      populations de reference differentes.
+    \item Si la quantite demandee est « dans l'autre sens », appliquer la
+      formule de Bayes (fiche M2).
+    \item Reformuler la conclusion en langage courant en nommant explicitement
+      la population de reference.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Un test detecte une maladie touchant 1\,\% de la population : il est positif
+  pour 90\,\% des malades. Pourtant, seuls $\dfrac{2}{13} \approx 15\,\%$ des
+  tests positifs concernent de vrais malades. Y a-t-il contradiction ?
+
+  \medskip
+  \commentaireMarge{Deux populations de reference differentes.}%
+  Non. « Positif pour 90\,\% des malades » est $P_M(T) = 0{,}9$ : la reference
+  est la population des MALADES. « 15\,\% des positifs sont malades » est
+  $P_T(M) = \dfrac{2}{13}$ : la reference est la population des TESTS POSITIFS.
+
+  \medskip
+  Comme la maladie est rare, les faux positifs issus des 99\,\% de non-malades
+  submergent les vrais positifs : $P_M(T)$ et $P_T(M)$ different fortement sans
+  aucune contradiction.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Croire que $P_A(B) = P_B(A)$ : c'est l'« erreur du
+      conditionnement inverse », source classique de contresens (tests medicaux,
+      justice).
+    \item \textbf{Piege 2.} Mal identifier la population de reference dans une
+      phrase en pourcentage (« 90\,\% des malades » $\neq$ « 90\,\% des
+      positifs »).
+    \item \textbf{Piege 3.} Oublier la prevalence : quand $A$ est rare, $P_B(A)$
+      peut etre faible meme si $P_A(B)$ est proche de 1.
+  \end{itemize}
+}
+
+\verifier{%
+  Reecrire chaque probabilite sous la forme $P_{\text{reference}}(\text{cible})$
+  et controler avec un tableau d'effectifs fictif (ex. 10\,000 individus) : les
+  deux quotients n'ont pas le meme denominateur.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

@@ -1,0 +1,41 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+ "method_id": "TCOMPL-BAYES-ME-002",
+ "alias": "M2",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "21a5a73a6fb9b9c1ee8f2e65698f94e66e152fd45451ceed193938c92d4cacab",
+ "capacity_authority": {
+  "code": "C2",
+  "ref": "TCOMPL-BAYES-C2",
+  "libelle": "Je sais utiliser la formule de Bayes pour calculer une probabilité a posteriori $P_B(A)$ à partir de $P_A(B)$, $P(A)$ et $P(B)$.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert PBA == Rational(9,16)"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M2}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

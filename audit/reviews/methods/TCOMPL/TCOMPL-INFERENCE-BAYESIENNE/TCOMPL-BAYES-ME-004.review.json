@@ -1,0 +1,43 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+ "method_id": "TCOMPL-BAYES-ME-004",
+ "alias": "M4",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "91490fc2c379f19e1d5e2921656980cca720bfbadeeebe050889cb35cc80b374",
+ "capacity_authority": {
+  "code": "C4",
+  "ref": "TCOMPL-BAYES-C4",
+  "libelle": "Je sais définir sensibilité, spécificité, valeur prédictive positive et négative d'un test, et les relier aux probabilités conditionnelles.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert PT == Rational(117,2000)",
+   "assert VPP == Rational(2,13)",
+   "assert VPN == Rational(1881,1883)"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M4}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

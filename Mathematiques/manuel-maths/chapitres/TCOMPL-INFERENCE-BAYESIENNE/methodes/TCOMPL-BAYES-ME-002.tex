@@ -1,0 +1,65 @@
+% META: {"id": "TCOMPL-BAYES-ME-002", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "methode", "capacites_codes": ["C2"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% PA, PAB = Rational(3,10), Rational(6,10)
+% PB = Rational(8,25)
+% PBA = PAB*PA/PB
+% assert PBA == Rational(9,16)
+% END-VERIFY
+\begin{fichemethode}{M2}{Utiliser la formule de Bayes pour renverser un conditionnement}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce donne $P_A(B)$ (et les probabilites
+  de $A$ et de $B$) mais demande la probabilite « dans l'autre sens » :
+  $P_B(A)$, la probabilite a posteriori de $A$ sachant $B$.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Identifier ce qui est CONNU : $P(A)$, $P_A(B)$, et $P(B)$ (ou de quoi
+      le calculer par probabilites totales, fiche M1).
+    \item Ecrire la formule de Bayes :
+      $P_B(A) = \dfrac{P_A(B) \times P(A)}{P(B)}$.
+    \item Si $P(B)$ n'est pas donne, le calculer :
+      $P(B) = P(A)\,P_A(B) + P(\overline{A})\,P_{\overline{A}}(B)$.
+    \item Substituer les valeurs et simplifier (fraction exacte, puis arrondi).
+    \item Interpreter : $P_B(A)$ actualise la probabilite de $A$ APRES
+      l'observation de $B$.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Avec $P(A) = 0{,}3$, $P_A(B) = 0{,}6$ et $P(B) = 0{,}32$, calculer $P_B(A)$.
+
+  \medskip
+  \commentaireMarge{Numerateur : le chemin $A$ puis $B$ ; denominateur : tous les
+  chemins vers $B$.}%
+  $P_B(A) = \dfrac{P_A(B)\,P(A)}{P(B)} = \dfrac{0{,}6 \times 0{,}3}{0{,}32}
+  = \dfrac{0{,}18}{0{,}32} = \dfrac{9}{16} = 0{,}5625$.
+
+  \medskip
+  Avant l'observation, $P(A) = 0{,}3$ ; apres avoir observe $B$, la probabilite
+  de $A$ est reevaluee a $\dfrac{9}{16} \approx 0{,}56$ : l'observation de $B$
+  rend $A$ nettement plus plausible.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Confondre $P_B(A)$ et $P_A(B)$ : la formule de Bayes
+      sert precisement a passer de l'un a l'autre (voir fiche M3).
+    \item \textbf{Piege 2.} Utiliser un $P(B)$ incomplet (oublier le chemin par
+      $\overline{A}$ dans les probabilites totales).
+    \item \textbf{Piege 3.} Obtenir un resultat hors de $[0\,;\,1]$ et ne pas
+      s'en alarmer : c'est le signe d'une erreur de substitution.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler que $P_B(A) \in [0\,;\,1]$, retrouver le meme resultat par
+  $P_B(A) = \dfrac{P(A \cap B)}{P(B)}$, et verifier la coherence du sens de
+  variation : si $B$ est plus frequent chez $A$, alors $P_B(A) > P(A)$.
+}
+
+\sEntrainer{\refExos{M2}}
+
+\end{fichemethode}

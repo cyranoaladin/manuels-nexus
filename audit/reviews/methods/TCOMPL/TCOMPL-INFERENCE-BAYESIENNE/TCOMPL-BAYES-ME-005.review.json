@@ -1,0 +1,44 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+ "method_id": "TCOMPL-BAYES-ME-005",
+ "alias": "M5",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "cfad357358ad69a8957d5964aa5700c3f3ef0a0bb1b19110886371101a85ee35",
+ "capacity_authority": {
+  "code": "C5",
+  "ref": "TCOMPL-BAYES-C5",
+  "libelle": "Je sais étudier, en fonction de la prévalence, la valeur prédictive positive d'un test, et interpréter le résultat.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert simplify(V - f) == 0",
+   "assert f.subs(x, Rational(1,100)) == Rational(2,13)",
+   "assert f.subs(x, Rational(1,2)) == Rational(18,19)",
+   "assert simplify(diff(f, x) - 18/(17*x+1)**2) == 0"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M5}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

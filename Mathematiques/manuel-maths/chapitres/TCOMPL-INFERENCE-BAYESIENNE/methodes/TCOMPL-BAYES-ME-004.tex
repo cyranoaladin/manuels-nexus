@@ -1,0 +1,79 @@
+% META: {"id": "TCOMPL-BAYES-ME-004", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "methode", "capacites_codes": ["C4"], "methodes": ["M4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% p, Se, Sp = Rational(1,100), Rational(9,10), Rational(19,20)
+% PT = p*Se + (1-p)*(1-Sp)
+% VPP = p*Se/PT
+% VPN = (1-p)*Sp/(1-PT)
+% assert PT == Rational(117,2000)
+% assert VPP == Rational(2,13)
+% assert VPN == Rational(1881,1883)
+% END-VERIFY
+\begin{fichemethode}{M4}{Definir et calculer sensibilite, specificite, VPP et VPN d'un test}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce porte sur un test de depistage et
+  demande de definir ou de calculer sensibilite, specificite, valeur predictive
+  positive (VPP) ou negative (VPN).
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Noter $M$ « etre malade » et $T$ « test positif », et traduire :
+      sensibilite $= P_M(T)$ ; specificite $= P_{\overline{M}}(\overline{T})$ ;
+      VPP $= P_T(M)$ ; VPN $= P_{\overline{T}}(\overline{M})$.
+    \item Reperer que sensibilite/specificite conditionnent par l'ETAT DE SANTE,
+      tandis que VPP/VPN conditionnent par le RESULTAT DU TEST.
+    \item Construire l'arbre pondere avec la prevalence $p = P(M)$, la
+      sensibilite et la specificite (fiche M1).
+    \item Calculer $P(T) = p \cdot \text{Se} + (1-p)(1-\text{Sp})$, puis
+      renverser par Bayes (fiche M2) :
+      $\text{VPP} = \dfrac{p \cdot \text{Se}}{P(T)}$,
+      $\text{VPN} = \dfrac{(1-p)\,\text{Sp}}{1 - P(T)}$.
+    \item Donner les valeurs exactes puis arrondies, et interpreter chacune dans
+      le contexte.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Une maladie a une prevalence de 1\,\%. Un test a une sensibilite de $0{,}9$ et
+  une specificite de $0{,}95$. Calculer VPP et VPN.
+
+  \medskip
+  \commentaireMarge{$P(T)$ par probabilites totales.}%
+  $P(T) = 0{,}01 \times 0{,}9 + 0{,}99 \times 0{,}05 = 0{,}0585$.
+
+  \medskip
+  \commentaireMarge{Bayes dans les deux sens.}%
+  $\text{VPP} = P_T(M) = \dfrac{0{,}01 \times 0{,}9}{0{,}0585} = \dfrac{2}{13}
+  \approx 0{,}154$ ;\quad
+  $\text{VPN} = P_{\overline{T}}(\overline{M})
+  = \dfrac{0{,}99 \times 0{,}95}{1 - 0{,}0585} = \dfrac{1881}{1883}
+  \approx 0{,}999$.
+
+  \medskip
+  Un resultat negatif est tres fiable (VPN $\approx 99{,}9\,\%$), mais un
+  resultat positif ne signifie une maladie que dans environ 15\,\% des cas.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Confondre sensibilite ($P_M(T)$) et VPP ($P_T(M)$) :
+      le conditionnement est inverse (fiche M3).
+    \item \textbf{Piege 2.} Ecrire la specificite comme $P_{\overline{M}}(T)$ :
+      c'est la probabilite du test NEGATIF chez les non-malades,
+      $P_{\overline{M}}(\overline{T})$.
+    \item \textbf{Piege 3.} Calculer la VPN avec $P(T)$ au denominateur au lieu
+      de $1 - P(T) = P(\overline{T})$.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler les quatre valeurs sur un tableau d'effectifs (10\,000 personnes :
+  100 malades dont 90 positifs ; 9\,900 saines dont 495 positives), et verifier
+  que chaque valeur est dans $[0\,;\,1]$.
+}
+
+\sEntrainer{\refExos{M4}}
+
+\end{fichemethode}
