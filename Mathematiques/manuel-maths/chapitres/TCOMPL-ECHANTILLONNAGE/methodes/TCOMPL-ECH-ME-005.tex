@@ -16,8 +16,8 @@
 
 \pasApas{%
   \begin{enumerate}
-    \item Simuler UNE observation : \verb|random.random() < p| renvoie
-      \verb|True| (succes) avec probabilite $p$.
+    \item Simuler UNE observation : \texttt{random.random() < p} renvoie
+      \texttt{True} (succes) avec probabilite $p$.
     \item Simuler UN echantillon de taille $n$ : compter les succes sur $n$ tirages
       dans une boucle ou une comprehension.
     \item Repeter $N$ fois pour obtenir $N$ echantillons, et stocker chaque
@@ -34,16 +34,16 @@
   $p = 0{,}3$ et calculer la moyenne des frequences observees.
 
   \medskip
-\begin{verbatim}
-import random
-random.seed(42)                 # simulation reproductible
-frequences = []
-for _ in range(200):            # N echantillons
-    succes = sum(1 for _ in range(100)
-                 if random.random() < 0.3)
-    frequences.append(succes / 100)
-moyenne = sum(frequences) / len(frequences)
-\end{verbatim}
+\begin{flushleft}\ttfamily\small
+  import random\\
+  random.seed(42)\quad\# simulation reproductible\\
+  frequences = []\\
+  for \_ in range(200):\quad\# N echantillons\\
+  \hspace*{1.2em}succes = sum(1 for \_ in range(100)\\
+  \hspace*{3.4em}if random.random() < 0.3)\\
+  \hspace*{1.2em}frequences.append(succes / 100)\\
+  moyenne = sum(frequences) / len(frequences)
+  \end{flushleft}
 
   \commentaireMarge{La moyenne des frequences est proche de $p = 0{,}3$.}%
   On obtient une moyenne d'environ $0{,}30$ : la serie des moyennes fluctue
@@ -52,7 +52,7 @@ moyenne = sum(frequences) / len(frequences)
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Ecrire \verb|random.random() < p| avec $p$ en
+    \item \textbf{Piege 1.} Ecrire \texttt{random.random() < p} avec $p$ en
       pourcentage (30 au lieu de 0,3).
     \item \textbf{Piege 2.} Confondre $n$ (taille d'un echantillon) et $N$
       (nombre d'echantillons).

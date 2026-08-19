@@ -26,8 +26,8 @@
     \item Transformer les autres formes : $P(X \geq k) = 1 - P(X \leq k-1)$ ;
       $P(a \leq X \leq b) = P(X \leq b) - P(X \leq a-1)$.
     \item En Python :
-      \verb|from math import comb| puis
-      \verb|sum(comb(n,i)*p**i*(1-p)**(n-i) for i in range(k+1))|.
+      \texttt{from math import comb} puis
+      \texttt{sum(comb(n,i)*p**i*(1-p)**(n-i) for i in range(k+1))}.
   \end{enumerate}
 }
 

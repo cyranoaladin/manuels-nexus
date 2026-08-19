@@ -62,12 +62,12 @@
 
   \medskip
   \commentaireMarge{L'invariant de boucle : le PGCD du couple est conserve.}%
-\begin{verbatim}
-def euclide(a, b):
-    while b != 0:
-        a, b = b, a % b
-    return a
-\end{verbatim}
+\begin{flushleft}\ttfamily\small
+  def euclide(a, b):\\
+  \hspace*{1.2em}while b != 0:\\
+  \hspace*{2.4em}a, b = b, a \% b\\
+  \hspace*{1.2em}return a
+  \end{flushleft}
 
   \medskip
   \texttt{euclide(252, 198)} renvoie 18, conforme au calcul manuel
