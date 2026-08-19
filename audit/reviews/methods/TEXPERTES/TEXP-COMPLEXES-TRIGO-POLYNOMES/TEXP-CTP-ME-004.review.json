@@ -1,0 +1,43 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+ "method_id": "TEXP-CTP-ME-004",
+ "alias": "M4",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "4be50bbf3480c2f4f9617579416fee0a6eecb406e50e75cbeb9f505730f23775",
+ "capacity_authority": {
+  "code": "C4",
+  "ref": "TEXP-CTP-C4",
+  "libelle": "Je sais résoudre une équation polynomiale de degré 2, ou de degré 3 quand une racine est connue, et factoriser un polynôme dont une racine est connue.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert set(solve(z**2 - 2*z + 5, z)) == {1 - 2*I, 1 + 2*I}",
+   "assert P.subs(z, 1) == 0",
+   "assert expand((z - 1)*(z**2 - 2*z + 5) - P) == 0"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M4}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

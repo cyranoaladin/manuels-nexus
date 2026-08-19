@@ -1,0 +1,73 @@
+% META: {"id": "TEXP-CTP-ME-005", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "methode", "capacites_codes": ["C5"], "methodes": ["M5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand
+% z, a = symbols('z a')
+% assert expand((z - a)*(z**2 + a*z + a**2) - (z**3 - a**3)) == 0
+% assert expand((z - a)*sum(z**k * a**(3-1-k) for k in range(3)) - (z**3 - a**3)) == 0
+% # P(1)=0 => P se factorise par (z-1)
+% P = z**3 - 3*z**2 + 7*z - 5
+% assert P.subs(z, 1) == 0
+% assert expand((z - 1)*(z**2 - 2*z + 5) - P) == 0
+% END-VERIFY
+\begin{fichemethode}{M5}{Demontrer les factorisations par z - a et la majoration du nombre de racines}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande de DEMONTRER que $z - a$
+  divise $z^n - a^n$, que $P(a) = 0$ entraine la factorisation de $P$ par
+  $z - a$, ou qu'un polynome de degre $n$ a au plus $n$ racines.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Identite cle : verifier en developpant (somme telescopique) que
+      $z^n - a^n = (z - a)\left(z^{n-1} + a\,z^{n-2} + \dots + a^{n-1}\right)$.
+    \item Factorisation de $P$ avec $P(a) = 0$ : ecrire
+      $P(z) = P(z) - P(a) = \sum_k c_k (z^k - a^k)$, et factoriser CHAQUE
+      $z^k - a^k$ par $z - a$ (etape 1) ; en factorisant globalement,
+      $P(z) = (z - a)\,Q(z)$ avec $\deg Q = \deg P - 1$.
+    \item Majoration des racines : raisonner par recurrence sur le degre $n$.
+      Un polynome de degre 0 non nul n'a pas de racine.
+    \item Heredite : si $P$ de degre $n$ a une racine $a$, alors
+      $P = (z - a)Q$ avec $\deg Q = n - 1$ ; toute autre racine de $P$ annule
+      $Q$ (produit nul), donc $P$ a au plus $1 + (n-1) = n$ racines.
+    \item Conclure et signaler la consequence : deux polynomes de degre
+      $\leq n$ egaux en $n + 1$ points sont egaux.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Demontrer que $z - a$ divise $z^3 - a^3$, puis factoriser
+  $P(z) = z^3 - 3z^2 + 7z - 5$ (qui verifie $P(1) = 0$).
+
+  \medskip
+  \commentaireMarge{Developpement telescopique.}%
+  $(z - a)(z^2 + az + a^2) = z^3 + az^2 + a^2z - az^2 - a^2z - a^3
+  = z^3 - a^3$. \hfill$\square$
+
+  \medskip
+  \commentaireMarge{$P(z) = P(z) - P(1)$ : chaque bloc se factorise.}%
+  $P(z) = P(z) - P(1) = (z^3 - 1) - 3(z^2 - 1) + 7(z - 1)$. Chaque terme est
+  divisible par $z - 1$ :
+  $P(z) = (z-1)\left[(z^2 + z + 1) - 3(z + 1) + 7\right]
+  = (z - 1)(z^2 - 2z + 5)$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Se tromper dans la somme telescopique : les termes
+      intermediaires doivent s'annuler DEUX a DEUX — developper soigneusement.
+    \item \textbf{Piege 2.} Dans la recurrence, oublier l'argument « produit
+      nul dans $\mathbb{C}$ » qui reporte les autres racines sur $Q$.
+    \item \textbf{Piege 3.} Enoncer « exactement $n$ racines » : le theoreme
+      demontre ici est une MAJORATION (au plus $n$).
+  \end{itemize}
+}
+
+\verifier{%
+  Redevelopper chaque factorisation obtenue, tester l'identite $z^n - a^n$ sur
+  des valeurs numeriques, et controler le degre du quotient.
+}
+
+\sEntrainer{\refExos{M5}}
+
+\end{fichemethode}

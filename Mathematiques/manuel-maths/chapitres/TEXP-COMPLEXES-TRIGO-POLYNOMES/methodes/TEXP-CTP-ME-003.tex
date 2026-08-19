@@ -1,0 +1,73 @@
+% META: {"id": "TEXP-CTP-ME-003", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, cos, sin, simplify, expand_trig
+% a, b = symbols('a b', real=True)
+% assert simplify(expand_trig(cos(a - b)) - (cos(a)*cos(b) + sin(a)*sin(b))) == 0
+% assert simplify(expand_trig(cos(a + b)) - (cos(a)*cos(b) - sin(a)*sin(b))) == 0
+% # produit scalaire de u(cos a, sin a) et v(cos b, sin b)
+% ps = cos(a)*cos(b) + sin(a)*sin(b)
+% assert simplify(ps - cos(a - b)) == 0
+% END-VERIFY
+\begin{fichemethode}{M3}{Demontrer une formule d'addition par le produit scalaire}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande de DEMONTRER une formule
+  d'addition (typiquement $\cos(a - b) = \cos a\cos b + \sin a \sin b$) a
+  partir du produit scalaire de deux vecteurs unitaires.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Introduire les vecteurs unitaires
+      $\vec{u}(\cos a\,;\,\sin a)$ et $\vec{v}(\cos b\,;\,\sin b)$ portes par
+      les angles $a$ et $b$ sur le cercle trigonometrique.
+    \item Calculer le produit scalaire en COORDONNEES :
+      $\vec{u}\cdot\vec{v} = \cos a\cos b + \sin a\sin b$.
+    \item Calculer le meme produit scalaire avec la formule GEOMETRIQUE :
+      $\vec{u}\cdot\vec{v} = \|\vec{u}\|\,\|\vec{v}\|
+      \cos(\vec{u}\,;\,\vec{v}) = 1 \times 1 \times \cos(a - b)$.
+    \item Egaler les deux expressions :
+      $\cos(a - b) = \cos a\cos b + \sin a\sin b$.
+    \item En deduire les autres formules : $b \to -b$ donne $\cos(a+b)$ ;
+      $a \to \frac{\pi}{2} - a$ donne les formules en sinus.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Demontrer $\cos(a - b) = \cos a\cos b + \sin a\sin b$, puis en deduire
+  $\cos(a + b)$.
+
+  \medskip
+  \commentaireMarge{Deux calculs du MEME produit scalaire.}%
+  Avec $\vec{u}(\cos a\,;\,\sin a)$ et $\vec{v}(\cos b\,;\,\sin b)$, unitaires :
+  en coordonnees, $\vec{u}\cdot\vec{v} = \cos a\cos b + \sin a\sin b$ ;
+  geometriquement, $\vec{u}\cdot\vec{v} = \cos(a - b)$ (angle entre les deux
+  vecteurs). D'ou l'egalite. \hfill$\square$
+
+  \medskip
+  \commentaireMarge{Substitution $b \to -b$ et parite.}%
+  En remplacant $b$ par $-b$ : $\cos(a + b) = \cos a\cos(-b) + \sin a\sin(-b)
+  = \cos a\cos b - \sin a\sin b$ ($\cos$ paire, $\sin$ impaire).
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Oublier de preciser que les vecteurs sont
+      UNITAIRES : sans cela, la forme geometrique contient les normes.
+    \item \textbf{Piege 2.} Erreur de signe en passant a $\cos(a+b)$ : c'est la
+      parite de $\cos$ et l'imparite de $\sin$ qui donnent le $-$.
+    \item \textbf{Piege 3.} Utiliser la formule a demontrer (via une identite
+      derivee d'elle) dans la preuve : seul le double calcul du produit
+      scalaire est permis.
+  \end{itemize}
+}
+
+\verifier{%
+  Tester la formule sur des angles connus ($a = b$ : $\cos 0 = 1 =
+  \cos^2 a + \sin^2 a$ ; $a = \frac{\pi}{2}$, $b = 0$...), et controler les
+  signes des variantes.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

@@ -1,0 +1,44 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+ "method_id": "TEXP-CTP-ME-007",
+ "alias": "M7",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "97479f766d80de60f77daa5866d55d5b2559726bec653d82fd592cdf4045de28",
+ "capacity_authority": {
+  "code": "C7",
+  "ref": "TEXP-CTP-C7",
+  "libelle": "Je sais déterminer l'ensemble des racines n-ièmes de l'unité et les utiliser pour étudier des polygones réguliers.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert all(simplify(r**5 - 1) == 0 for r in roots5)",
+   "assert simplify(expand_complex(sum(roots5))) == 0",
+   "assert simplify(expand_complex(1 + j + j**2)) == 0",
+   "assert all(Abs(r) == 1 for r in roots5)"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M7}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

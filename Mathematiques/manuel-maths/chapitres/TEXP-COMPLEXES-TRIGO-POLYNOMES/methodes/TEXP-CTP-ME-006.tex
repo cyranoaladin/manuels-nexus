@@ -1,0 +1,73 @@
+% META: {"id": "TEXP-CTP-ME-006", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "methode", "capacites_codes": ["C6"], "methodes": ["M6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import I, simplify, im, re, Abs
+% A = 1 + 2*I; B = 3 + 3*I; C = 7 + 5*I
+% r = simplify((C - A)/(B - A))
+% assert im(r) == 0 and r == 3
+% A2 = 0; B2 = 2 + 2*I; C2 = -1 + I
+% r2 = simplify((C2 - A2)/(B2 - A2))
+% assert re(r2) == 0 and r2 == I/2
+% assert Abs(B - A) == Abs(3 + 3*I - 1 - 2*I)
+% END-VERIFY
+\begin{fichemethode}{M6}{Etudier des configurations du plan avec les nombres complexes}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande d'etudier alignement,
+  orthogonalite, longueurs, angles ou un ensemble de points, a l'aide des
+  affixes.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Traduire les objets : longueur $AB = |z_B - z_A|$ ; angle
+      $(\vec{AB}\,;\,\vec{AC}) = \arg\dfrac{z_C - z_A}{z_B - z_A}\ [2\pi]$.
+    \item Former le quotient cle $Z = \dfrac{z_C - z_A}{z_B - z_A}$ et le
+      mettre sous forme algebrique.
+    \item Interpreter : $Z$ REEL $\iff$ $A$, $B$, $C$ alignes ;
+      $Z$ IMAGINAIRE PUR $\iff$ $(AB) \perp (AC)$ ; $|Z| = \frac{AC}{AB}$
+      compare les longueurs.
+    \item Ensembles de points : traduire la condition en egalite de modules
+      ($|z - z_A| = |z - z_B|$ : mediatrice ; $|z - z_A| = r$ : cercle) ou
+      d'arguments (demi-droites), puis identifier l'ensemble.
+    \item Conclure GEOMETRIQUEMENT en citant la caracterisation utilisee.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  1) $A$, $B$, $C$ d'affixes $1 + 2i$, $3 + 3i$, $7 + 5i$ sont-ils alignes ?
+  2) $A'$, $B'$, $C'$ d'affixes $0$, $2 + 2i$, $-1 + i$ : montrer
+  $(A'B') \perp (A'C')$.
+
+  \medskip
+  \commentaireMarge{Quotient reel $=$ alignement.}%
+  1) $\dfrac{z_C - z_A}{z_B - z_A} = \dfrac{6 + 3i}{2 + i}
+  = \dfrac{3(2 + i)}{2 + i} = 3 \in \mathbb{R}$ : les points sont alignes
+  (et $\vec{AC} = 3\,\vec{AB}$).
+
+  \medskip
+  \commentaireMarge{Quotient imaginaire pur $=$ angle droit.}%
+  2) $\dfrac{z_{C'} - z_{A'}}{z_{B'} - z_{A'}} = \dfrac{-1 + i}{2 + 2i}
+  = \dfrac{(-1 + i)(2 - 2i)}{8} = \dfrac{4i}{8} = \dfrac{i}{2}$,
+  imaginaire pur non nul : $(A'B') \perp (A'C')$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Confondre les criteres : reel $=$ alignement,
+      imaginaire pur $=$ orthogonalite — ne pas les intervertir.
+    \item \textbf{Piege 2.} Former le quotient avec des differences
+      incoherentes : les trois affixes doivent partir du MEME point $A$.
+    \item \textbf{Piege 3.} Oublier le cas $Z = 0$ ou un denominateur nul
+      (points confondus) avant de diviser.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler le resultat sur une figure (placer les points), et recouper par une
+  autre voie : vecteurs colineaires pour l'alignement, produit scalaire nul
+  pour l'orthogonalite.
+}
+
+\sEntrainer{\refExos{M6}}
+
+\end{fichemethode}

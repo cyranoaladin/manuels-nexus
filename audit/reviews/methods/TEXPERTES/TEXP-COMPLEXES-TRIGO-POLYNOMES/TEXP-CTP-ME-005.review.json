@@ -1,0 +1,44 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+ "method_id": "TEXP-CTP-ME-005",
+ "alias": "M5",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "a6c46a2b1b651675123134154c9c8db4ba8279a72778054013dee5fcd8d28036",
+ "capacity_authority": {
+  "code": "C5",
+  "ref": "TEXP-CTP-C5",
+  "libelle": "Je sais démontrer la factorisation de $z^n-a^n$ par $z-a$, celle de $P(z)$ par $z-a$ si $P(a)=0$, et que le nombre de racines d'un polynôme est majoré par son degré.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert expand((z - a)*(z**2 + a*z + a**2) - (z**3 - a**3)) == 0",
+   "assert expand((z - a)*sum(z**k * a**(3-1-k) for k in range(3)) - (z**3 - a**3)) == 0",
+   "assert P.subs(z, 1) == 0",
+   "assert expand((z - 1)*(z**2 - 2*z + 5) - P) == 0"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M5}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}
