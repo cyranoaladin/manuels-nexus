@@ -1,5 +1,5 @@
 artifact_type: anomaly_dispositions
-control_digest: sha256:522168fd1c82c645b7b84b6f0d6b48b6dda7b11de01e2eb3313d665f9c2fcc6b
+control_digest: sha256:6576b2ee06ce54bcc42e91f4b247968ce0f8fefdddec69abe5a2e0a9454388cc
 dispositions:
   0030282f546d3d82:
     approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
@@ -47878,6 +47878,33 @@ dispositions:
     release_blocking: true
     severity: blocking
     source: NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/corriges/TNSI-HIST-CO-023.tex
+  4ad3e114730f28ec:
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
+    baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
+    blocking: true
+    capacity_id: TCOMPL-CALCULS-AIRES-C6
+    capacity_ref: TCOMPL-AIR-C6
+    category: blocking_statuses
+    chapter: TCOMPL-CALCULS-AIRES
+    decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
+    disposition: open_debt
+    fingerprint: 4ad3e114730f28ec
+    fingerprint_schema_version: 1
+    justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
+    manual: TCOMPL
+    method_source_sha: 737554747e0470379042a1fe0644ca5a8dc69d86fc687221dc1d1c29db918249
+    owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
+    policy_rule: blocking-scientific-object
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
+    qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
+    reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
+    release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-CALCULS-AIRES/TCOMPL-AIR-ME-006.review.json
+    review_packet_sha: ae5f4cb2033dff114d55088f772c99e4cff86ca9f18340c3488601bc4086f633
+    severity: blocking
+    source: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-AIR-ME-006.tex
   4ad41b808ae3dda4:
     approved_by: Alaeddine Ben Rhouma
     baseline_sha: a48e8e41fc3f6ef9274e564722d5155c8df401b7
@@ -71821,6 +71848,33 @@ dispositions:
     release_blocking: true
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-046.tex
+  70dfcb9ea3d7e1ec:
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
+    baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
+    blocking: true
+    capacity_id: 1SPE-TRIGONOMETRIE-C5
+    capacity_ref: 1SPE-TRIGONOMETRIE-C5
+    category: blocking_statuses
+    chapter: 1SPE-TRIGONOMETRIE
+    decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
+    disposition: open_debt
+    fingerprint: 70dfcb9ea3d7e1ec
+    fingerprint_schema_version: 1
+    justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
+    manual: 1SPE
+    method_source_sha: 1b44bcc7a8f49e0c27a3fbc596360929db51412862efea1c9206cf6038515c95
+    owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
+    policy_rule: blocking-scientific-object
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
+    qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
+    reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
+    release_blocking: true
+    review_packet: audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/1SPE-TRIGO-ME-005.review.json
+    review_packet_sha: 833e82ebd340f4b7a1f0a28d3bc90d7979c7bb2ecca43c5a44764151d7fabf1a
+    severity: blocking
+    source: Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/methodes/1SPE-TRIGO-ME-005.tex
   70e74035a135f3bc:
     approved_by: Alaeddine Ben Rhouma
     baseline_sha: a48e8e41fc3f6ef9274e564722d5155c8df401b7
@@ -80603,6 +80657,33 @@ dispositions:
     release_blocking: true
     severity: blocking
     source: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B-corrige.tex
+  7eb525dfe531febe:
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
+    baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
+    blocking: true
+    capacity_id: TCOMPL-ECHANTILLONNAGE-C6
+    capacity_ref: TCOMPL-ECH-C6
+    category: blocking_statuses
+    chapter: TCOMPL-ECHANTILLONNAGE
+    decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
+    disposition: open_debt
+    fingerprint: 7eb525dfe531febe
+    fingerprint_schema_version: 1
+    justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
+    manual: TCOMPL
+    method_source_sha: 840d7f71f3288a5121594f11d747049fa15a6e637ac131beab3d9effceb2c979
+    owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
+    policy_rule: blocking-scientific-object
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
+    qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
+    reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
+    release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-ECHANTILLONNAGE/TCOMPL-ECH-ME-006.review.json
+    review_packet_sha: 762cdaefacbc58237bec90460da7d919dde4ab18122daf1c34b70d31a18615cb
+    severity: blocking
+    source: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-006.tex
   7eb64014ab15d06c:
     approved_by: Alaeddine Ben Rhouma
     baseline_sha: afae475ee06e8510804c0065ccfd35dfa0199875
@@ -118797,6 +118878,33 @@ dispositions:
     release_blocking: true
     severity: blocking
     source: NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-014.tex
+  baf25a2d0a53d6dc:
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
+    baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
+    blocking: true
+    capacity_id: 1SPE-TRIGONOMETRIE-C3
+    capacity_ref: 1SPE-TRIGONOMETRIE-C3
+    category: blocking_statuses
+    chapter: 1SPE-TRIGONOMETRIE
+    decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
+    disposition: open_debt
+    fingerprint: baf25a2d0a53d6dc
+    fingerprint_schema_version: 1
+    justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
+    manual: 1SPE
+    method_source_sha: 14c464b5306333ac1e6b4e63a064b566cd7ae1717dc52a8547f83a7b73ef5d90
+    owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
+    policy_rule: blocking-scientific-object
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
+    qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
+    reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
+    release_blocking: true
+    review_packet: audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/1SPE-TRIGO-ME-003.review.json
+    review_packet_sha: 214679c5dae5afff77ae40dd4377c63f906f92a8d1c14ad0107cd8c8b15f9ee6
+    severity: blocking
+    source: Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/methodes/1SPE-TRIGO-ME-003.tex
   baf8ecdaa180ce84:
     approved_by: Alaeddine Ben Rhouma
     baseline_sha: 27082043c45fc405299e335f6eb7475f01288e27
