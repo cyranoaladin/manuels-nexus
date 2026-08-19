@@ -1,0 +1,41 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-GRAPHES",
+ "method_id": "TEXP-GRA-ME-005",
+ "alias": "M5",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "5414b39ee5888fff39c1adbe78c3f0e20aef4198eede1abda936066dede81c67",
+ "capacity_authority": {
+  "code": "C5",
+  "ref": "TEXP-GRA-C5",
+  "libelle": "Je sais démontrer que le coefficient (i,j) de la puissance n-ième de la matrice d'adjacence donne le nombre de chemins de longueur n entre les sommets i et j.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert Mn[i, j] == chemins(i, j, n)"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M5}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

@@ -1,0 +1,73 @@
+% META: {"id": "TEXP-GRA-ME-002", "chapitre": "TEXP-GRAPHES", "type_objet": "methode", "capacites_codes": ["C2"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% # modelisation : 4 villes, liaisons AB, AC, BC, CD -> graphe precedent
+% aretes = {frozenset(p) for p in (("A","B"), ("A","C"), ("B","C"), ("C","D"))}
+% sommets = {s for a in aretes for s in a}
+% assert sommets == {"A", "B", "C", "D"} and len(aretes) == 4
+% # une liaison declaree deux fois ne cree qu'une arete
+% aretes2 = aretes | {frozenset(("B","A"))}
+% assert len(aretes2) == 4
+% END-VERIFY
+\begin{fichemethode}{M2}{Modeliser une situation concrete par un graphe}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsqu'une situation (reseau de transport, tournoi,
+  relations d'incompatibilite, plan de taches...) doit etre traduite en graphe
+  avant tout raisonnement.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Choisir les SOMMETS : les objets de la situation (villes, personnes,
+      taches...) — un sommet par objet, sans doublon.
+    \item Choisir les ARETES : la relation binaire pertinente (liaison
+      directe, rencontre, incompatibilite...) ; se demander si elle est
+      symetrique (graphe non oriente) ou non (graphe oriente).
+    \item Dessiner le graphe ou dresser la liste sommets/aretes ; une relation
+      mentionnee deux fois ne cree qu'UNE arete.
+    \item Verifier la fidelite du modele : chaque contrainte de l'enonce doit
+      correspondre a une arete (ou une absence d'arete), rien de plus.
+    \item Reformuler la QUESTION de l'enonce en termes de graphe (existence
+      d'une chaine, degre maximal, nombre de chemins... — fiches M1 et M4).
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Quatre villes $A$, $B$, $C$, $D$ sont reliees par des routes directes :
+  $A\!-\!B$, $A\!-\!C$, $B\!-\!C$, $C\!-\!D$. Modeliser, puis traduire la
+  question « peut-on aller de $A$ a $D$ ? ».
+
+  \medskip
+  \commentaireMarge{Sommets $=$ villes, aretes $=$ routes directes.}%
+  On prend pour sommets les quatre villes et pour aretes les quatre liaisons
+  routieres — la relation « etre relie par une route » est symetrique : graphe
+  NON oriente d'ordre 4 (celui de la fiche M1).
+
+  \medskip
+  \commentaireMarge{Traduction : existence d'une chaine.}%
+  « Aller de $A$ a $D$ » se traduit par « existe-t-il une chaine de $A$ a
+  $D$ ? » — oui : $A - C - D$, de longueur 2. Le graphe etant connexe, tout
+  trajet entre deux villes est possible.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Prendre pour sommets les relations (routes) au lieu
+      des objets (villes) : inverser sommets et aretes ruine le modele.
+    \item \textbf{Piege 2.} Ignorer l'orientation quand la relation n'est pas
+      symetrique (sens uniques, « $x$ bat $y$ ») : il faut alors un graphe
+      oriente.
+    \item \textbf{Piege 3.} Ajouter des aretes que l'enonce ne donne pas
+      (liaisons « evidentes » mais non declarees).
+  \end{itemize}
+}
+
+\verifier{%
+  Relire chaque phrase de l'enonce et pointer l'element du graphe qui la
+  traduit ; controler ordre et nombre d'aretes ; verifier que la reponse
+  « graphe » se retraduit bien en reponse concrete.
+}
+
+\sEntrainer{\refExos{M2}}
+
+\end{fichemethode}

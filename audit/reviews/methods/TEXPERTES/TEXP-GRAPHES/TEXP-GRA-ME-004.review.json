@@ -1,0 +1,44 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-GRAPHES",
+ "method_id": "TEXP-GRA-ME-004",
+ "alias": "M4",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "41c4cfa5a2ffe58ff5a6ee2c5cffb9adac9cd10034369d47cf01a54a5adb842c",
+ "capacity_authority": {
+  "code": "C4",
+  "ref": "TEXP-GRA-C4",
+  "libelle": "Je sais calculer le nombre de chemins de longueur donnée entre deux sommets d'un graphe à l'aide des puissances de la matrice d'adjacence.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert M2[0, 3] == 1   # A-C-D unique chemin de longueur 2",
+   "assert M2[0, 0] == 2   # A-B-A et A-C-A",
+   "assert M3[0, 1] == 3",
+   "assert M3 == M2*M"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M4}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

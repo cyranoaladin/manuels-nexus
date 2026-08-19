@@ -1,0 +1,43 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-GRAPHES",
+ "method_id": "TEXP-GRA-ME-003",
+ "alias": "M3",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "af4d3eaca465a774a8292075a7eb8b1640f37f39da684482f1de74e8965ffb1e",
+ "capacity_authority": {
+  "code": "C3",
+  "ref": "TEXP-GRA-C3",
+  "libelle": "Je sais construire la matrice d'adjacence d'un graphe.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert M == M.T",
+   "assert all(M[i, i] == 0 for i in range(4))",
+   "assert [sum(M.row(i)) for i in range(4)] == [2, 2, 3, 1]"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M3}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

@@ -1,0 +1,84 @@
+% META: {"id": "TEXP-GRA-ME-005", "chapitre": "TEXP-GRAPHES", "type_objet": "methode", "capacites_codes": ["C5"], "methodes": ["M5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% M = Matrix([[0,1,1,0],[1,0,1,0],[1,1,0,1],[0,0,1,0]])
+% # verification exhaustive du theoreme pour n = 2 et n = 3 par enumeration
+% import itertools
+% V = range(4)
+% def chemins(i, j, n):
+%     return sum(1 for mid in itertools.product(V, repeat=n-1)
+%                if all(M[a, b] == 1 for a, b in zip((i,)+mid, mid+(j,))))
+% for n, Mn in ((2, M**2), (3, M**3)):
+%     for i in V:
+%         for j in V:
+%             assert Mn[i, j] == chemins(i, j, n)
+% END-VERIFY
+\begin{fichemethode}{M5}{Demontrer le theoreme de comptage des chemins par recurrence}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande de DEMONTRER que le
+  coefficient $(i\,;\,j)$ de $M^n$ (matrice d'adjacence $M$) est le nombre de
+  chemins de longueur $n$ de $i$ a $j$.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Poser la propriete $\mathcal{P}(n)$ : « pour tous sommets $i, j$, le
+      coefficient $\left(M^n\right)_{ij}$ est le nombre de chemins de longueur
+      $n$ de $i$ a $j$ ».
+    \item Initialisation ($n = 1$) : $M^1 = M$ et $m_{ij} = 1$ exactement
+      quand $i$ et $j$ sont adjacents — un chemin de longueur 1 est une arete.
+    \item Heredite : supposer $\mathcal{P}(n)$ et ecrire le produit
+      $\left(M^{n+1}\right)_{ij} = \sum_{k} \left(M^{n}\right)_{ik}\,m_{kj}$.
+    \item Interpreter la somme : tout chemin de longueur $n+1$ de $i$ a $j$
+      se decompose de maniere UNIQUE en un chemin de longueur $n$ de $i$ vers
+      un sommet $k$, suivi d'une arete $k\,j$ ; le terme
+      $\left(M^{n}\right)_{ik} m_{kj}$ compte exactement ces chemins pour
+      chaque $k$ intermediaire.
+    \item Conclure : la somme sur $k$ compte tous les chemins de longueur
+      $n+1$ sans double compte, donc $\mathcal{P}(n+1)$ est vraie ; par
+      recurrence, $\mathcal{P}(n)$ vaut pour tout $n \geq 1$.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Rediger l'heredite de la demonstration.
+
+  \medskip
+  \commentaireMarge{La formule du produit matriciel EST l'argument de
+  denombrement.}%
+  Supposons que $\left(M^{n}\right)_{ik}$ compte les chemins de longueur $n$ de
+  $i$ a $k$, pour tous $i, k$. Par definition du produit :
+  $\left(M^{n+1}\right)_{ij} = \displaystyle\sum_{k=1}^{p}
+  \left(M^{n}\right)_{ik}\,m_{kj}$.
+
+  \medskip
+  Pour chaque sommet $k$ : si $m_{kj} = 1$, le produit
+  $\left(M^{n}\right)_{ik} \times 1$ compte les chemins de longueur $n+1$ de
+  $i$ a $j$ dont l'AVANT-DERNIER sommet est $k$ ; si $m_{kj} = 0$, aucun
+  chemin ne finit par l'arete $k\,j$ et le terme est nul. Tout chemin de
+  longueur $n+1$ ayant un unique avant-dernier sommet, la somme sur $k$ les
+  compte tous une et une seule fois. \hfill$\square$
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Decomposer le chemin sans dire que l'avant-dernier
+      sommet est UNIQUE : c'est ce qui exclut les doubles comptes.
+    \item \textbf{Piege 2.} Ecrire le produit dans le mauvais sens
+      ($M\,M^n$ avec decomposition par le DEUXIEME sommet est correct aussi,
+      mais il faut etre coherent avec sa decomposition).
+    \item \textbf{Piege 3.} Oublier l'initialisation $n = 1$ (ou la faire avec
+      $M^0 = I$ sans justifier la convention).
+  \end{itemize}
+}
+
+\verifier{%
+  Confronter le theoreme a une verification exhaustive sur un petit graphe
+  (enumeration des chemins de longueur 2 et 3, fiche M4) : chaque coefficient
+  doit coincider avec le compte manuel.
+}
+
+\sEntrainer{\refExos{M5}}
+
+\end{fichemethode}

@@ -1,0 +1,42 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-GRAPHES",
+ "method_id": "TEXP-GRA-ME-001",
+ "alias": "M1",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "8de0f1afba5788a951e4efc099924c1ee659bf67c149bcc6f9f3681f0a83b58a",
+ "capacity_authority": {
+  "code": "C1",
+  "ref": "TEXP-GRA-C1",
+  "libelle": "Je sais utiliser le vocabulaire des graphes : sommets, arêtes, adjacence, degré, ordre, chaîne, connexité, graphe complet.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert degres == [2, 2, 3, 1]",
+   "assert sum(M) == 2*4  # somme des degres = 2 x nombre d'aretes"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M1}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

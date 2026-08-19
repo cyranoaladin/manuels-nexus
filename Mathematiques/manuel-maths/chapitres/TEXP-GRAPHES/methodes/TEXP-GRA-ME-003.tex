@@ -1,0 +1,70 @@
+% META: {"id": "TEXP-GRA-ME-003", "chapitre": "TEXP-GRAPHES", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% M = Matrix([[0,1,1,0],[1,0,1,0],[1,1,0,1],[0,0,1,0]])
+% assert M == M.T
+% assert all(M[i, i] == 0 for i in range(4))
+% assert [sum(M.row(i)) for i in range(4)] == [2, 2, 3, 1]
+% END-VERIFY
+\begin{fichemethode}{M3}{Construire la matrice d'adjacence d'un graphe}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande la matrice d'adjacence d'un
+  graphe donne (par dessin ou liste d'aretes), ou de reconstruire le graphe
+  depuis sa matrice.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Numeroter les sommets et FIXER cet ordre : la matrice en depend
+      (ligne $i$ et colonne $i$ pour le sommet numero $i$).
+    \item Remplir : $m_{ij} = 1$ si les sommets $i$ et $j$ sont adjacents,
+      $m_{ij} = 0$ sinon.
+    \item Diagonale : $m_{ii} = 0$ en l'absence de boucle.
+    \item Controles pour un graphe non oriente : matrice SYMETRIQUE
+      ($m_{ij} = m_{ji}$), et la somme de la ligne $i$ vaut le degre du sommet
+      $i$.
+    \item Lecture inverse : chaque 1 au-dessus de la diagonale correspond a
+      une arete — les compter pour retrouver la taille du graphe.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Ecrire la matrice d'adjacence du graphe d'aretes $AB$, $AC$, $BC$, $CD$
+  (sommets ranges dans l'ordre $A, B, C, D$).
+
+  \medskip
+  \commentaireMarge{Un 1 par adjacence, symetriquement.}%
+  $M = \begin{pmatrix}
+  0 & 1 & 1 & 0\\
+  1 & 0 & 1 & 0\\
+  1 & 1 & 0 & 1\\
+  0 & 0 & 1 & 0
+  \end{pmatrix}$
+
+  \medskip
+  \commentaireMarge{Sommes des lignes $=$ degres.}%
+  $M$ est symetrique, de diagonale nulle, et les sommes des lignes donnent
+  $2, 2, 3, 1$ : ce sont bien les degres de $A$, $B$, $C$, $D$ (fiche M1).
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Oublier la symetrie : chaque arete remplit DEUX
+      coefficients ($m_{ij}$ ET $m_{ji}$).
+    \item \textbf{Piege 2.} Changer l'ordre des sommets en cours de route : la
+      matrice n'a de sens que pour un ordre fixe et annonce.
+    \item \textbf{Piege 3.} Mettre des 1 sur la diagonale sans boucle dans le
+      graphe.
+  \end{itemize}
+}
+
+\verifier{%
+  Verifier la symetrie, la diagonale nulle, et que la somme de tous les
+  coefficients vaut $2 \times$ le nombre d'aretes ; reconstruire deux ou trois
+  aretes depuis la matrice pour recouper.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}
