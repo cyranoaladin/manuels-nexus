@@ -8,7 +8,7 @@ manuals:
       detail: '339'
       source: anomalies.blocking_statuses
     - code: anomalie:broken_meta_references
-      detail: '796'
+      detail: '41'
       source: anomalies.broken_meta_references
     - code: anomalie:unclassified_types
       detail: '231'
@@ -48,7 +48,7 @@ manuals:
       - 1NSI-TYPES-CONSTRUITS
       - 1NSI-WEB-IHM
       statuses:
-        approved: 612
+        approved: 611
         manual_review: 7
         needs_review: 169
         verified: 153
@@ -59,7 +59,7 @@ manuals:
         diagnostics: 1
         evaluations: 20
         exercices_principaux: 345
-        methodes: 15
+        methodes: 14
         projets: 1
         qcm: 10
         remediations: 62
@@ -141,7 +141,7 @@ manuals:
       detail: '1411'
       source: anomalies.blocking_statuses
     - code: anomalie:broken_meta_references
-      detail: '21'
+      detail: '3'
       source: anomalies.broken_meta_references
     - code: anomalie:unassembled_objects
       detail: '5'
@@ -182,7 +182,7 @@ manuals:
         generated: 1393
         verified: 8
       totals:
-        capacites: 50
+        capacites: 53
         corriges: 497
         coups_de_pouce: 180
         diagnostics: 5
@@ -399,9 +399,6 @@ manuals:
     - code: anomalie:blocking_statuses
       detail: '115'
       source: anomalies.blocking_statuses
-    - code: anomalie:broken_meta_references
-      detail: '853'
-      source: anomalies.broken_meta_references
     - code: anomalie:unclassified_types
       detail: '243'
       source: anomalies.unclassified_types
@@ -469,7 +466,6 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
-    - anomalie:broken_meta_references
     - chapitres_manquants
     - statuts_non_approuves
     structural_compile_ready: false
@@ -526,9 +522,6 @@ manuals:
     - code: anomalie:blocking_statuses
       detail: '11'
       source: anomalies.blocking_statuses
-    - code: anomalie:broken_meta_references
-      detail: '562'
-      source: anomalies.broken_meta_references
     - code: anomalie:unassembled_objects
       detail: '47'
       source: anomalies.unassembled_objects
@@ -565,7 +558,7 @@ manuals:
       - TSPE-SUITES-LIMITES
       - TSPE-TRIGONOMETRIE
       statuses:
-        approved: 1243
+        approved: 1237
         generated: 11
       totals:
         capacites: 67
@@ -574,7 +567,7 @@ manuals:
         diagnostics: 0
         evaluations: 22
         exercices_principaux: 448
-        methodes: 35
+        methodes: 29
         projets: 0
         qcm: 11
         remediations: 88
@@ -595,7 +588,6 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
-    - anomalie:broken_meta_references
     - anomalie:unassembled_objects
     - statuts_non_approuves
     structural_compile_ready: false
@@ -631,24 +623,24 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:3cdd1fd542e751a5f8623a9bf5f18026cb648150f81e688f5c585172da2da5a7
+model_digest: sha256:b3309082abfd19031b1cf771be9901d404d162ee50106df1f85a6c20fc0cc4f6
 provenance:
   branch: audit/adversarial-reconciliation-2026
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-19T02:11:26Z'
+  generated_at_utc: '2026-08-19T02:54:39Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:51eed728c11d516d5bf5b5804d52583321260d02d2bebd748dca07eb3cfba908
     scripts/build_manifest.py: sha256:f4084b0ff17bb5ecdfed872244afaf3616bf6911b64e0340d3c0ca3b4bdbba20
     scripts/inventory_assembly.py: sha256:1759502372fc12faafb27b40d959979c9b63a439cef08ca56246d2d992c26047
-    scripts/inventory_collection.py: sha256:a65b17709d1c98aa314c3b48aed22f0a08a62846aba15cf40193032121f697f3
-    scripts/inventory_graph.py: sha256:b1a198b0cb79511a8e0a38ee020ea314c22a66f05ddd8ad709c3d9dc8781209a
+    scripts/inventory_collection.py: sha256:2d51704fc61fa67017fc021a50f93f2afbeb57dcdad7ac4ff04528c760cc38c2
+    scripts/inventory_graph.py: sha256:820389c13acddd37e24813c45237e9333ef419803651c46c362b74c18b6f9531
     scripts/inventory_pdf.py: sha256:0931c5864414ab0248cb14b9d0ca583de190f3e6633e9c6862908eb344a2892b
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:4817e93c14f5fa1c945a9a727d02f0edfd45a752c330ea1c6c3e91369a6cbcad
+  generator_sha256: sha256:4f495c862dd106fa2d21256398f09493ecba37c49e5987d1d1351bc89d83bcac
   generator_version: 1
   git_available: true
-  head_sha: cc965c2d025cc6a8549a32e9562300f4a9142791
+  head_sha: 5db1752018333f67b5ff5a123ff5e783a4ec1f18
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -659,4 +651,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:f71a6d03e66d1e56666a7822a610be4684a21bdf3bb65449c7ea3f06d62cecf4
+source_digest: sha256:a28634f750bf85b487be5522ec94437c22bfbb7e7ce5ba5433068d7e536e2538

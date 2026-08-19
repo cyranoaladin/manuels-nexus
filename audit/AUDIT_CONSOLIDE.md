@@ -50,27 +50,9 @@
 ### broken_latex_references (0)
 - Aucune.
 
-### broken_meta_references (2730)
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-024.tex, cible=1SPE-TRIGONOMETRIE-C3, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-024.tex, cible=C3, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
+### broken_meta_references (542)
 - source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-024.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-A-corrige.tex, cible=C3, champ=capacites_codes[2], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-A-corrige.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-A-corrige.tex, cible=C5, champ=capacites_codes[4], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-A.tex, cible=C3, champ=capacites_codes[2], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-A.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-A.tex, cible=C5, champ=capacites_codes[4], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-B-corrige.tex, cible=C3, champ=capacites_codes[2], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-B-corrige.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-B-corrige.tex, cible=C5, champ=capacites_codes[4], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-B.tex, cible=C3, champ=capacites_codes[2], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-B.tex, cible=C4, champ=capacites_codes[3], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-B.tex, cible=C5, champ=capacites_codes[4], raison=reference capacites_codes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024-CDP.tex, cible=1SPE-TRIGONOMETRIE-C3, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024-CDP.tex, cible=C3, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
 - source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024-CDP.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024.tex, cible=1SPE-TRIGONOMETRIE-C3, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024.tex, cible=C3, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
 - source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
 - source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-009.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
 - source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-010.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
@@ -81,7 +63,25 @@
 - source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-014.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
 - source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-015.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
 - source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-015.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
-- … 2700 autres.
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-016.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-016.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-017.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-018.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-018.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-019.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-019.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-020.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-021.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-022.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-023.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-024.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-025.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-026.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-027.tex, cible=M4, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-028.tex, cible=M4, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-029.tex, cible=M4, champ=methodes[0], raison=reference methodes absente ou ambigue
+- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-030.tex, cible=M4, champ=methodes[0], raison=reference methodes absente ou ambigue
+- … 512 autres.
 
 ### chapters_not_in_manual (0)
 - Aucune.
