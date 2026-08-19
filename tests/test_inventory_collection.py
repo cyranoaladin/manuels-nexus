@@ -11149,6 +11149,25 @@ def test_legacy_meth_alias_stays_strict(
     ), entries
 
 
+def test_repository_method_aliases_are_unambiguous(
+    inventory_module,
+) -> None:
+    """A4.3: plus aucun alias de méthode ambigu/dupliqué dans le dépôt réel.
+
+    Invariant permanent (la détection reste garantie par la fixture
+    test_legacy_meth_alias_stays_strict): aucun chapitre ne doit porter deux
+    objets méthode partageant le même alias M{n}.
+    """
+    inventory = inventory_module.build_inventory(ROOT)
+
+    ambiguous = [
+        (item["source"], item["cible"])
+        for item in inventory["anomalies"]["broken_meta_references"]
+        if item["raison"] == "alias de methode ambigu ou duplique"
+    ]
+    assert ambiguous == []
+
+
 def test_graph_source_role_policies_are_explicit(
     inventory_module,
 ) -> None:
