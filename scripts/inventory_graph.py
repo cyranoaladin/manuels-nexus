@@ -10,7 +10,10 @@ from typing import Any, Mapping
 
 
 METHOD_ALIAS_RE = re.compile(r"M[1-9]\d*")
-METHOD_ID_SUFFIX_RE = re.compile(r"(?:^|-)(?:ME-0*|M0*)([1-9]\d*)$")
+# Schémas d'ID de méthode reconnus pour dériver l'alias M{n} :
+# -ME-0n (canonique), -METH-0n (legacy), -M0n. Dérivation stricte par
+# suffixe exact — aucune normalisation floue.
+METHOD_ID_SUFFIX_RE = re.compile(r"(?:^|-)(?:ME-0*|METH-0*|M0*)([1-9]\d*)$")
 
 
 def method_aliases(item: Mapping[str, Any]) -> list[str]:

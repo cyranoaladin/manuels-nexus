@@ -11071,6 +11071,84 @@ def test_capacity_resolver_normalization_is_injective(
     assert resolved == ["P-REF-01", "P-REF-01"]
 
 
+def _method_alias_fixture(
+    tmp_path: Path,
+    method_ids: list[str],
+    exercise_methods: list[str],
+) -> None:
+    chapter = "1NSI-TEST"
+    base = _chapter_path("1NSI", chapter)
+    sources = {
+        f"{base}/contrat.yaml": _contract(chapter, "1NSI", capacities=1),
+        f"{base}/exercices/1NSI-TEST-EX-001.tex": _meta(
+            id="1NSI-TEST-EX-001",
+            chapitre=chapter,
+            type_objet="exercice",
+            status="approved",
+            methodes=exercise_methods,
+        ),
+    }
+    for method_id in method_ids:
+        sources[f"{base}/methodes/{method_id}.tex"] = _meta(
+            id=method_id,
+            chapitre=chapter,
+            type_objet="methode",
+            status="approved",
+        )
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+
+def _broken_method_entries(inventory: dict) -> list[tuple[str, str]]:
+    return sorted(
+        (item["cible"], item["raison"])
+        for item in inventory["anomalies"]["broken_meta_references"]
+        if item["champ"].startswith("methodes")
+    )
+
+
+def test_legacy_meth_suffix_derives_method_alias(
+    tmp_path: Path, inventory_module
+) -> None:
+    """Schéma legacy {CHAPTER}-METH-0n: l'alias M{n} doit se dériver.
+
+    La méthode unique METH-01 fournit M1; la référence M1 de l'exercice se
+    résout; aucune anomalie 'alias inexploitable' ni 'reference absente'.
+    """
+    _init_repository(tmp_path)
+    _method_alias_fixture(
+        tmp_path,
+        method_ids=["1NSI-TEST-METH-01"],
+        exercise_methods=["M1"],
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert _broken_method_entries(inventory) == []
+
+
+def test_legacy_meth_alias_stays_strict(
+    tmp_path: Path, inventory_module
+) -> None:
+    """Adversarial: M2 sans METH-02 reste cassé; un doublon d'alias entre
+    legacy METH-01 et ME-001 reste ambigu (mutation)."""
+    _init_repository(tmp_path)
+    _method_alias_fixture(
+        tmp_path,
+        method_ids=["1NSI-TEST-METH-01", "1NSI-TEST-ME-001"],
+        exercise_methods=["M1", "M2"],
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    entries = _broken_method_entries(inventory)
+    assert ("M2", "reference methodes absente ou ambigue") in entries
+    assert (
+        entries.count(("M1", "alias de methode ambigu ou duplique")) >= 2
+    ), entries
+
+
 def test_graph_source_role_policies_are_explicit(
     inventory_module,
 ) -> None:
