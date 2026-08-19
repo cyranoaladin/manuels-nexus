@@ -11184,6 +11184,68 @@ def test_canonical_common_targets_resolve_from_any_depth(
     assert any("nexus-absent" in target for target in broken), broken
 
 
+def test_prerequisite_codes_resolve_without_origin(
+    tmp_path: Path, inventory_module
+) -> None:
+    """§3: un prérequis {code, libelle} SANS chapitre_origine est VALIDE
+    (le schéma le déclare facultatif) ; un code R absent du contrat reste
+    une référence cassée (mutation)."""
+    _init_repository(tmp_path)
+    chapter = "1SPE-TEST"
+    base = _chapter_path("1SPE", chapter)
+    contract = _contract(chapter, "1SPE", capacities=1) + (
+        "prerequis:\n"
+        '  - { code: R1, libelle: "Rappel sans origine declaree" }\n'
+    )
+    sources = {
+        f"{base}/contrat.yaml": contract,
+        f"{base}/remediation/{chapter}-RE-C01.tex": _meta(
+            id=f"{chapter}-FR-R1",
+            chapitre=chapter,
+            type_objet="remediation",
+            status="approved",
+            capacites_codes=["R1"],
+        ),
+        f"{base}/remediation/{chapter}-RE-C02.tex": _meta(
+            id=f"{chapter}-FR-R9",
+            chapitre=chapter,
+            type_objet="remediation",
+            status="approved",
+            capacites_codes=["R9"],
+        ),
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    broken = [
+        (item["cible"], item["raison"])
+        for item in inventory["anomalies"]["broken_meta_references"]
+        if item["champ"].startswith("capacites_codes")
+    ]
+    assert ("R1", "reference capacites_codes absente ou ambigue") not in broken
+    assert any(t == "R9" for t, _ in broken), broken
+
+
+def test_repository_prerequisite_references_are_declared(
+    inventory_module,
+) -> None:
+    """§3: plus aucune référence R{n} cassée dans le dépôt réel — chaque
+    fiche de remise à niveau a son prérequis déclaré au contrat consommateur
+    (libellé verbatim de la fiche, origine jamais inventée)."""
+    inventory = inventory_module.build_inventory(ROOT)
+
+    broken_r = [
+        (item["source"], item["cible"])
+        for item in inventory["anomalies"]["broken_meta_references"]
+        if item["champ"].startswith("capacites_codes")
+        and re.fullmatch(r"R[0-9]+", item["cible"])
+    ]
+    assert broken_r == []
+
+
 def test_repository_method_aliases_are_unambiguous(
     inventory_module,
 ) -> None:
