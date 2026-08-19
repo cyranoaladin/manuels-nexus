@@ -4694,6 +4694,10 @@ def test_fixed_disposition_reappearance_flows_to_active_regression_and_gate(
             ),
                 "occurrence_count": 1,
                 "owner": fixed["owner"],
+                # decision_ref est propagé dans l'entrée active depuis
+                # l'implémentation scellée de la décision humaine A4
+                # EXPECTED_REVIEW_DEBT (signature stricte du gate).
+                "decision_ref": fixed["decision_ref"],
                 "qualification_digest": (
                     inventory_module._baseline_qualification
                     .qualification_digest(fixed)
