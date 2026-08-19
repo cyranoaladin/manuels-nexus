@@ -1,0 +1,52 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "1SPE",
+ "chapter": "1SPE-TRIGONOMETRIE",
+ "method_id": "1SPE-TRIGO-ME-004",
+ "alias": "M4",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "e39611c6b2de2bee0dc0c03e7668473455b930af338f953d6e64813c53dc4709",
+ "capacity_authority": {
+  "code": "C4",
+  "ref": "1SPE-TRIGONOMETRIE-C4",
+  "libelle": "Je sais résoudre cos(x)=a, sin(x)=a et les inéquations associées.",
+  "programme": "1re spécialité mathématiques 2026 (BO n°14 du 2/4/2026)",
+  "source": "referentiel/capacites_1SPE_TRIGONOMETRIE.json"
+ },
+ "scientific_checks": {
+  "tool": "SymPy",
+  "executed": true,
+  "results": [
+   "solveset(cos x = sqrt2/2, ]-pi;pi]) == {-pi/4, pi/4}",
+   "solveset(sin x = 1/2, ]-pi;pi]) == {pi/6, 5pi/6} (piège 2)",
+   "cos(7pi/4) == sqrt2/2 (piège 3, translation +2pi)"
+  ],
+  "verify_block_in_source": true
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true,
+  "wording_level": "élève (je sais faire)"
+ },
+ "programme_check": "contenu limité à cos/sin, valeurs remarquables, familles de solutions — conforme C4 du programme 2026, rien hors programme",
+ "cross_reference_check": {
+  "inbound_objects": [
+   "1SPE-TRIGO-EX-024",
+   "1SPE-TRIGO-CO-024",
+   "1SPE-TRIGO-EX-024-CDP"
+  ],
+  "retag_note": "les 3 objets étaient étiquetés C3/M3 alors que leur contenu (résoudre cos x = sqrt2/2) est mot pour mot la capacité C4 du référentiel 2026: WRONG_TAG_UNAMBIGUOUS corrigé C4/M4; leurs receipts/validations deviennent légitimement stale",
+  "sEntrainer": "\\refExos{M4} — renvoi automatique par alias"
+ },
+ "promotion_rule": "toute promotion ultérieure exige une preuve versionnée (review humaine)"
+}
