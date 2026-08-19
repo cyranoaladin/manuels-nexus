@@ -303,7 +303,10 @@ def test_runtime_selection_covers_all_professor_objects_and_is_student_safe(asse
         for path in selected["evaluations"]
     ]
 
-    assert len(professor) == 941
+    # Re-atteste a la cloture A4 (2026-08-19) : 940 objets pre-campagne
+    # + les 2 fiches methodes ADGK produites par la campagne (ME-002,
+    # ME-003 ; ME-001 preexistait) = 942.
+    assert len(professor) == 942
     assert len(corrections) == 354
     assert set(corrections) == set(ROOT.glob("chapitres/1NSI-*/corriges/*.tex"))
     assert evaluation_types.count("evaluation") == 20

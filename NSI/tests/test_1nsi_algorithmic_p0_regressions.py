@@ -15,13 +15,13 @@ INSERTION_COURSE = (
     CHAPTERS
     / "1NSI-ALGO-PARCOURS-TRIS"
     / "cours"
-    / "1NSI-AGT-COURS-C2.tex"
+    / "1NSI-APT-COURS-C2.tex"
 )
 SELECTION_COURSE = (
     CHAPTERS
     / "1NSI-ALGO-PARCOURS-TRIS"
     / "cours"
-    / "1NSI-AGT-COURS-C3.tex"
+    / "1NSI-APT-COURS-C3.tex"
 )
 ALGORITHMS_QCM = (
     CHAPTERS

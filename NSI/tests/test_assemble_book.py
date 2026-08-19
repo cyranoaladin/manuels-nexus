@@ -248,7 +248,21 @@ def test_collect_book_files_ignores_markers_in_repository_parent(monkeypatch, tm
 def test_collect_book_chapters_methodes_1nsi():
     chapters = assemble.collect_book_chapters("1NSI", "methodes")
 
-    assert [path.name for path in chapters] == ["1NSI-TYPES-CONSTRUITS"]
+    # Etat pilote historique : seul TYPES-CONSTRUITS portait des fiches.
+    # Depuis les lots scelles (fiches METH heritees + campagne A4 ADGK),
+    # les 10 chapitres 1NSI ont un contenu methodes assemblable.
+    assert [path.name for path in chapters] == [
+        "1NSI-TYPES-BASE",
+        "1NSI-TYPES-CONSTRUITS",
+        "1NSI-TABLES",
+        "1NSI-LANGAGE",
+        "1NSI-ALGO-PARCOURS-TRIS",
+        "1NSI-ALGO-DICHO-GLOUTON-KNN",
+        "1NSI-WEB-IHM",
+        "1NSI-ARCHITECTURE-OS",
+        "1NSI-RESEAUX",
+        "1NSI-PROJET-METHODES",
+    ]
 
 
 def test_collect_book_chapters_amenagee_1nsi():
@@ -385,7 +399,9 @@ def test_charter_modules_match_their_manuel_maths_source(gabarit):
 
 
 def test_the_bridge_rewires_the_boxes_the_nsi_corpus_uses():
-    pont = (ROOT / "gabarits" / "nexus-pont-v6.sty").read_text(encoding="utf-8")
+    # Redirection canonique depuis la canonicalisation INFRA : le pont
+    # contractuel vit dans gabarits/common/.
+    pont = (ROOT.parent / "gabarits" / "common" / "nexus-pont.sty").read_text(encoding="utf-8")
 
     # \definition, \propriete, \erreurFrequente et \approfondissement du
     # corpus NSI ouvrent ces environnements.
@@ -453,11 +469,13 @@ def test_render_book_master_uses_ragged_alignment_for_left_margin_notes():
     assert r"\renewcommand*{\raggedleftmarginnote}{\raggedleft}" in tex
 
 
-def test_render_book_master_methodes_contains_one_chapter():
+def test_render_book_master_methodes_covers_all_chapters():
     tex = assemble.render_book_master("1NSI", "methodes")
 
     assert "1NSI-TYPES-CONSTRUITS" in tex
-    assert tex.count("\\chapter{") == 1
+    # 10 chapitres a contenu methodes depuis les lots scelles (cf.
+    # test_collect_book_chapters_methodes_1nsi).
+    assert tex.count("\\chapter{") == 10
 
 
 def test_compile_tex_rejects_lualatex_failure_even_with_stale_pdf(

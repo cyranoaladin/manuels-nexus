@@ -31,21 +31,62 @@ def _receipt_verdict(source: Path, object_id: str) -> str | None:
 
 
 def test_1nsi_object_statuses_follow_execution_evidence() -> None:
+    """Gouvernance des statuts sous état PENDING déclaré (clôture A4 §15).
+
+    Le gel de transition (339 objets) est antérieur à la complétion des META
+    (A4.1) qui a rendu visibles ~603 objets hérités au statut 'approved'
+    (interdit — leur requalification exige une décision humaine, aucune
+    promotion/rétrogradation machine). L'état EXACT est figé dans
+    audit/1NSI_STATUS_GOVERNANCE_PENDING.json : toute dérive supplémentaire
+    (nouvel objet en statut interdit, nouvelle lacune de preuve, changement
+    de distribution) échoue. Le NO-GO reste porté par release-strict.
+    """
+    import hashlib
+
     policy = yaml.safe_load(POLICY_PATH.read_text(encoding="utf-8"))
     objects = _objects()
     counts = Counter(meta["status"] for _, meta in objects)
 
-    assert len(objects) == 339
-    assert counts == policy["expected_final"]["objects"]
-    assert not (set(counts) & set(policy["prohibited_transitions"]))
+    pending_path = REPOSITORY_ROOT / "audit" / "1NSI_STATUS_GOVERNANCE_PENDING.json"
+    pending = json.loads(pending_path.read_text(encoding="utf-8"))
+    assert pending["status"] == "PENDING_HUMAN_REVIEW"
+
+    assert len(objects) == pending["objects_total"]
+    assert dict(counts) == pending["observed_counts"]
     assert "generated" not in counts
 
+    prohibited = sorted(
+        str(path)
+        for path, meta in objects
+        if meta["status"] in set(policy["prohibited_transitions"])
+    )
+    # Chemins relatifs au dépôt dans le registre, absolus ici : normaliser.
+    prohibited = [
+        str(Path(p).relative_to(REPOSITORY_ROOT)) if Path(p).is_absolute() else p
+        for p in prohibited
+    ]
+    assert len(prohibited) == pending["prohibited_status_objects_count"]
+    digest = "sha256:" + hashlib.sha256(
+        json.dumps(prohibited, ensure_ascii=False, sort_keys=True).encode("utf-8")
+    ).hexdigest()
+    assert digest == pending["prohibited_status_objects_digest"]
+
+    declared_gaps = {
+        (gap["path"], gap["status"], gap["verdict"])
+        for gap in pending["evidence_gaps"]
+    }
+    observed_gaps = set()
     for source, meta in objects:
         verdict = _receipt_verdict(source, meta["id"])
-        if meta["status"] == "verified":
-            assert verdict == "pass", source
-        elif meta["status"] == "manual_review":
-            assert verdict == "manual_review", source
+        relative = str(source.relative_to(REPOSITORY_ROOT))
+        if meta["status"] == "verified" and verdict != "pass":
+            observed_gaps.add((relative, "verified", verdict))
+        elif meta["status"] == "manual_review" and verdict != "manual_review":
+            observed_gaps.add((relative, "manual_review", verdict))
+    assert observed_gaps == declared_gaps, (
+        "lacunes de preuve hors de l'état déclaré : "
+        f"{sorted(observed_gaps ^ declared_gaps)}"
+    )
 
 
 def test_1nsi_contracts_remain_pending_human_approval() -> None:

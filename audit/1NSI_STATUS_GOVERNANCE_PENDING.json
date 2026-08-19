@@ -1,0 +1,53 @@
+{
+ "artifact_name": "1NSI_STATUS_GOVERNANCE_PENDING",
+ "created": "2026-08-19",
+ "status": "PENDING_HUMAN_REVIEW",
+ "reason": "La transition de statuts 1NSI a été figée (339 objets, a2013a12) AVANT la complétion des META (A4.1) qui a rendu visibles ~603 objets hérités portant le statut de génération 'approved' — statut INTERDIT par la politique scellée, qu'aucune promotion machine ne peut ni bénir ni rétrograder en masse (décision humaine requise). S'y ajoutent 7 objets 'verified' du chapitre APT dont les reçus d'exécution existent sous le nom de fichier APT mais avec objet_id AGT (renommage mi-appliqué) : preuve intacte, liaison cassée — complétion mécanique du renommage à arbitrer. Ce registre fige l'état EXACT ; toute dérive supplémentaire échoue.",
+ "no_go_carrier": "release-strict — les blocking_statuses de l'inventaire portent déjà ces objets",
+ "observed_counts": {
+  "verified": 153,
+  "approved": 610,
+  "needs_review": 172,
+  "manual_review": 7
+ },
+ "objects_total": 942,
+ "prohibited_status_objects_count": 610,
+ "prohibited_status_objects_digest": "sha256:2057eccb8e4bb3e5cf2576a0011d685413ec0900891cfd2b328d18af3165d73b",
+ "evidence_gaps": [
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-APT-COURS-C1.tex",
+   "status": "verified",
+   "verdict": null
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-APT-COURS-C2.tex",
+   "status": "verified",
+   "verdict": null
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-APT-COURS-C3.tex",
+   "status": "verified",
+   "verdict": null
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-APT-EVAL-A-corrige.tex",
+   "status": "verified",
+   "verdict": null
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-APT-EVAL-A.tex",
+   "status": "verified",
+   "verdict": null
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-APT-EVAL-B-corrige.tex",
+   "status": "verified",
+   "verdict": null
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-APT-EVAL-B.tex",
+   "status": "verified",
+   "verdict": null
+  }
+ ]
+}

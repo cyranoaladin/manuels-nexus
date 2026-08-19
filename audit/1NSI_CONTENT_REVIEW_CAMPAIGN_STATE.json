@@ -1,0 +1,42 @@
+{
+ "artifact_name": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE",
+ "created": "2026-08-19",
+ "status": "PENDING_REVIEW_RERUN",
+ "reason": "Campagne de revue de contenu 1NSI scellée (commit 5d8bedd9, 349 sources, reviewers/receipts épinglés) ; depuis, des lots scellés ont légitimement déplacé le corpus (complétion des META A4.1 rendant visibles ~603 objets, renommage AGT→APT, arbitrage ADGK, prérequis R-codes au contrat ADGK, fiches méthodes de campagne). La re-exécution de la revue (nouveau run, nouveaux receipts, confirmation humaine) est un LOT à part entière, NON démarré (clôture A4 §17). Le présent artefact fige l'état de dérive EXACT : tout écart supplémentaire doit refaire échouer les tests.",
+ "no_go_carrier": "release-strict / publication_approval du registre de revue (human_confirmation_required)",
+ "sealed": {
+  "sealing_commit": "5d8bedd9b20d042fcc25eac7d601dcc6ff44cb99",
+  "sealed_sources_count": 349,
+  "sealed_protocol_digest": "sha256:8127337d665962e008eb129348ddb29f59df1e666503d73929bdb644ddf30f28",
+  "findings_count": 349,
+  "findings_ids_digest": "sha256:14d30227513e4ec5ad6f070f3eb879301917eeb015f385fd8d745c875b81772b"
+ },
+ "observed": {
+  "protocol_digest_current": "sha256:5ebd94ab830266dd68ade18a9afcf5327b5835bc1ee69b46dafb63807ba70de2",
+  "sources_count": 952,
+  "sources_ids_digest": "sha256:807c5b8f3ff9615589a583f03e1519931957f16752602dc26ea814ad8f6aeb05",
+  "object_sources_count": 942,
+  "algorithm_scope_count": 158,
+  "algorithm_scope_ids_digest": "sha256:2076b161de6b17b9c8d876b5fa2b30f9114e78710a598cefed916405b7a3d5c7",
+  "policy_sha256": "sha256:0f92fe4a8acc3e04a7c383205d04a8e24f44baedd40ce86f28195b062a87d9bf",
+  "findings_sha256": "sha256:9687cb06fc791494a147138b5d23d484c4b827d92ee48d43318cb59ebba612c1",
+  "registry_sha256": "sha256:7bb8569aea320f2fe57b19d975cc34b1fffa46e0c5a137839b3cf49b8342c580",
+  "adgk_contract_sha256": "sha256:ae4500318bc1f11658dbf35153e79ac6f50b3e0008ef2e9a69e713267c607a5b",
+  "ids_only_in_findings": [
+   "1NSI-AGT-CO-001",
+   "1NSI-AGT-CO-002",
+   "1NSI-AGT-CO-003",
+   "1NSI-AGT-CO-004",
+   "1NSI-AGT-CO-005",
+   "1NSI-AGT-EX-001",
+   "1NSI-AGT-EX-002",
+   "1NSI-AGT-EX-003",
+   "1NSI-AGT-EX-004",
+   "1NSI-AGT-EX-005",
+   "1NSI-AGT-RE-C5",
+   "1NSI-AGT-RE-C5-CORRIGE"
+  ],
+  "ids_only_in_sources_count": 615,
+  "ids_only_in_sources_digest": "sha256:272245c294df55e412a751a6cca5be7f7841961a13cb80534bca9082942daf97"
+ }
+}

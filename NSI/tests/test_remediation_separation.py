@@ -23,10 +23,12 @@ EXPECTED = {
         "1NSI-ADGK-RE-C1-EX1",
         "38bf1cadf40b1e6d4edf301aeff79f28c12ccf8e423c434c4c948940fdf8510c",
     ),
-    "1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-AGT-RE-C5.tex": (
-        "1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-RE-C5-CORRIGE.tex",
-        "1NSI-AGT-RE-C5-EX1",
-        "1b940570a28f3516b319ad22928181987eaa5ff6a80c3acee6f34afca0aa0bfe",
+    # Renommage de slug scelle AGT -> APT (fichiers et ids internes APT) :
+    # bloc de correction inchange, re-epingle sous son chemin canonique.
+    "1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C5.tex": (
+        "1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-RE-C5-CORRIGE.tex",
+        "1NSI-APT-RE-C5-EX1",
+        "d82b309a406a7ecab5f005ce7a199efc34af179e1637c0b1ff1b9f082446664a",
     ),
     "1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHITECTURE-OS-RE-C5.tex": (
         "1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE.tex",
