@@ -1,0 +1,68 @@
+% META: {"id": "TCOMPL-AIR-ME-005", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "methode", "capacites_codes": ["C5"], "methodes": ["M5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% F1 = x**2/2 + 3
+% F2 = x**2/2 - 5
+% assert diff(F1 - F2, x) == 0
+% assert F1 - F2 == 8
+% END-VERIFY
+\begin{fichemethode}{M5}{Demontrer que deux primitives different d'une constante}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande de \textbf{demontrer} que deux
+  primitives d'une meme fonction continue sur un \textbf{intervalle} different
+  d'une constante, ou de determiner LA primitive verifiant une condition initiale.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Poser le cadre : $F$ et $G$ sont deux primitives de $f$ sur un
+      \textbf{intervalle} $I$, donc $F' = f$ et $G' = f$ sur $I$.
+    \item Introduire la fonction auxiliaire $H = F - G$.
+    \item Deriver : $H' = F' - G' = f - f = 0$ sur $I$.
+    \item Invoquer le theoreme : une fonction de derivee nulle sur un
+      \textbf{intervalle} y est constante. Donc il existe $C \in \mathbb{R}$
+      tel que $F(x) = G(x) + C$ pour tout $x \in I$.
+    \item Pour une condition initiale $F(x_0) = y_0$ : calculer
+      $C = y_0 - G(x_0)$, ce qui determine $F$ de maniere unique.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  $F_1(x) = \dfrac{x^2}{2} + 3$ et $F_2(x) = \dfrac{x^2}{2} - 5$ sont deux
+  primitives de $f(x) = x$ sur $\mathbb{R}$. Verifier la propriete, puis
+  determiner la primitive $F$ de $f$ telle que $F(2) = 0$.
+
+  \medskip
+  \commentaireMarge{$H' = 0$ sur un intervalle $\Rightarrow$ $H$ constante.}%
+  Posons $H = F_1 - F_2$ : $H'(x) = x - x = 0$ sur l'intervalle $\mathbb{R}$,
+  donc $H$ est constante ; ici $H(x) = 3 - (-5) = 8$ pour tout $x$.
+
+  \medskip
+  Les primitives de $f$ sont les $F(x) = \dfrac{x^2}{2} + C$. La condition
+  $F(2) = 0$ donne $2 + C = 0$, soit $C = -2$ :
+  $F(x) = \dfrac{x^2}{2} - 2$ est l'unique primitive qui convient.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Oublier l'hypothese d'\textbf{intervalle} : sur une
+      reunion d'intervalles disjoints (ex. $\mathbb{R}^*$), une fonction de
+      derivee nulle peut prendre une constante differente sur chaque morceau.
+    \item \textbf{Piege 2.} Affirmer « $H' = 0$ donc $H = 0$ » : la conclusion
+      correcte est « $H$ constante », pas « $H$ nulle ».
+    \item \textbf{Piege 3.} Croire qu'une condition initiale change $f$ : elle ne
+      fait que selectionner UNE primitive parmi les $F + C$.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler que $H = F - G$ a bien une derivee nulle (calcul explicite), que la
+  constante trouvee est coherente en evaluant $F - G$ en un point, et que la
+  primitive selectionnee satisfait exactement la condition initiale.
+}
+
+\sEntrainer{\refExos{M5}}
+
+\end{fichemethode}

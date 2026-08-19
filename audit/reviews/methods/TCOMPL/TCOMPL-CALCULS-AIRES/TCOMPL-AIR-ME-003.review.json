@@ -1,0 +1,42 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-CALCULS-AIRES",
+ "method_id": "TCOMPL-AIR-ME-003",
+ "alias": "M3",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "5e289b92ccc9ec4adab30b692f3e95baf7d19870237b73b7924be0479ea52794",
+ "capacity_authority": {
+  "code": "C3",
+  "ref": "TCOMPL-AIR-C3",
+  "libelle": "Je sais calculer une intégrale, une valeur moyenne, une aire sous une courbe ou entre deux courbes.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert integrate(exp(x), (x, 0, 1)) == E - 1",
+   "assert integrate(x - x**2, (x, 0, 1)) == Rational(1, 6)"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M3}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

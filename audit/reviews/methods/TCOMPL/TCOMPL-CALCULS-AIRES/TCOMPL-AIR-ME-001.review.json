@@ -1,0 +1,42 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-CALCULS-AIRES",
+ "method_id": "TCOMPL-AIR-ME-001",
+ "alias": "M1",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "f0454bb4b0bb52ac344ccb859dd16c34415431abf716191c8b27fef49195cd52",
+ "capacity_authority": {
+  "code": "C1",
+  "ref": "TCOMPL-AIR-C1",
+  "libelle": "Je sais définir l'intégrale d'une fonction continue positive comme aire sous la courbe, et utiliser la relation de Chasles.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert integrate(x, (x, 0, 3)) == Rational(9,2)",
+   "assert integrate(x, (x, 0, 1)) + integrate(x, (x, 1, 3)) == Rational(9,2)"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M1}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

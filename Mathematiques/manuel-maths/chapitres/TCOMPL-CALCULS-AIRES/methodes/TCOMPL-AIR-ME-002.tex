@@ -1,0 +1,70 @@
+% META: {"id": "TCOMPL-AIR-ME-002", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "methode", "capacites_codes": ["C2"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% n = 4
+% lo = Rational(sum(i**2 for i in range(n)), n**3)
+% hi = Rational(sum(i**2 for i in range(1, n+1)), n**3)
+% assert lo == Rational(7, 32) and hi == Rational(15, 32)
+% I = integrate(x**2, (x, 0, 1))
+% assert I == Rational(1, 3) and lo < I < hi
+% END-VERIFY
+\begin{fichemethode}{M2}{Encadrer une integrale ou une valeur moyenne par des rectangles}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande d'\textbf{estimer} ou
+  d'\textbf{encadrer} $\int_a^b f(x)\,dx$ (ou la valeur moyenne de $f$) sans
+  calculer de primitive : lecture graphique, methode des rectangles.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Decouper $[a\,;\,b]$ en $n$ intervalles de meme largeur $h = \dfrac{b-a}{n}$.
+    \item Si $f$ est \textbf{croissante} sur $[a\,;\,b]$ : sur chaque morceau, le
+      rectangle bati sur la valeur a gauche est SOUS la courbe, celui bati sur la
+      valeur a droite est AU-DESSUS.
+    \item Sommer : $\displaystyle h\sum_{i=0}^{n-1} f(a+ih) \;\leq\; \int_a^b f(x)\,dx
+      \;\leq\; h\sum_{i=1}^{n} f(a+ih)$ (inegalites inversees si $f$ est decroissante).
+    \item Pour la valeur moyenne $\mu = \dfrac{1}{b-a}\displaystyle\int_a^b f(x)\,dx$ :
+      diviser l'encadrement obtenu par $b-a$.
+    \item Resserrer l'encadrement en augmentant $n$ si la precision demandee l'exige.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Encadrer $I = \displaystyle\int_0^1 x^2\,dx$ avec $n = 4$ rectangles.
+
+  \medskip
+  \commentaireMarge{$x \mapsto x^2$ est croissante sur $[0;1]$, $h = \frac{1}{4}$.}%
+  Somme inferieure :
+  $\dfrac{1}{4}\left(0^2 + \left(\tfrac{1}{4}\right)^2 + \left(\tfrac{2}{4}\right)^2
+  + \left(\tfrac{3}{4}\right)^2\right) = \dfrac{0+1+4+9}{64} = \dfrac{7}{32}$.
+
+  Somme superieure :
+  $\dfrac{1}{4}\left(\left(\tfrac{1}{4}\right)^2 + \left(\tfrac{2}{4}\right)^2
+  + \left(\tfrac{3}{4}\right)^2 + 1^2\right) = \dfrac{1+4+9+16}{64} = \dfrac{15}{32}$.
+
+  \medskip
+  Donc $\dfrac{7}{32} \leq I \leq \dfrac{15}{32}$ — coherent avec la valeur exacte
+  $I = \dfrac{1}{3} \approx 0{,}333$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Oublier d'etudier le sens de variation : les roles des
+      rectangles gauche/droite s'echangent si $f$ est decroissante.
+    \item \textbf{Piege 2.} Se tromper dans les bornes des sommes ($i$ de $0$ a $n-1$
+      pour la gauche, de $1$ a $n$ pour la droite).
+    \item \textbf{Piege 3.} Pour la valeur moyenne, oublier de diviser par $b-a$.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler que la somme inferieure est bien $\leq$ la somme superieure, que leur
+  ecart vaut $h\,|f(b)-f(a)|$ (fonction monotone), et que toute valeur exacte connue
+  tombe dans l'encadrement.
+}
+
+\sEntrainer{\refExos{M2}}
+
+\end{fichemethode}
