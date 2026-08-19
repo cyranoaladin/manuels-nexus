@@ -1,0 +1,44 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+ "method_id": "TEXP-CAG-ME-003",
+ "alias": "M3",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "d9ccb0e945ff594ed159d53a0a467b8b81c9f54f2b77841e7584f16aafe32a0c",
+ "capacity_authority": {
+  "code": "C3",
+  "ref": "TEXP-CAG-C3",
+  "libelle": "Je sais démontrer les propriétés du conjugué d'un produit, d'un inverse, d'une puissance, et la formule du binôme dans $\\mathbb{C}$.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert simplify(expand(conjugate(z1*z2)) - expand(conjugate(z1)*conjugate(z2))) == 0",
+   "assert simplify(conjugate(z1**3) - conjugate(z1)**3) == 0",
+   "assert expand((1 + I)**4) == -4",
+   "assert sum(binomial(4, k)*I**k for k in range(5)) == -4"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M3}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

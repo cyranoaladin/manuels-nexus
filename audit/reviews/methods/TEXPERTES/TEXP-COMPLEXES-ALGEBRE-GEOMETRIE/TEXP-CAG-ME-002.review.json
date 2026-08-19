@@ -1,0 +1,43 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+ "method_id": "TEXP-CAG-ME-002",
+ "alias": "M2",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "21c9dfe21f0d92e0c4ecae9e30207fb5560b76624dc4925e03a95e662aeaa39c",
+ "capacity_authority": {
+  "code": "C2",
+  "ref": "TEXP-CAG-C2",
+  "libelle": "Je sais résoudre une équation linéaire az=b ou une équation simple faisant intervenir z et son conjugué.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert simplify((3 - I)/(2 + I) - (1 - I)) == 0",
+   "assert sol == {x: 2, y: 1}",
+   "assert simplify(z + 2*conjugate(z) - (6 - I)) == 0"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M2}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

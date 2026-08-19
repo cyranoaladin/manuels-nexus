@@ -1,0 +1,43 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+ "method_id": "TEXP-CAG-ME-004",
+ "alias": "M4",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "7d03868903773f47b5c09b537bcaa0a4edc53c1c5a194dd478cfe02cfc72fbca",
+ "capacity_authority": {
+  "code": "C4",
+  "ref": "TEXP-CAG-C4",
+  "libelle": "Je sais déterminer le module et un argument d'un nombre complexe, et représenter/déterminer une affixe.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert Abs(z) == 2",
+   "assert arg(z) == pi/3",
+   "assert simplify(2*(cos(pi/3) + I*sin(pi/3)) - z) == 0"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M4}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

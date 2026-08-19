@@ -1,0 +1,43 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+ "method_id": "TEXP-CAG-ME-001",
+ "alias": "M1",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "3841c305f761472839d53883f3d06a09db5dfdc37ee845c87ba9955097b4777d",
+ "capacity_authority": {
+  "code": "C1",
+  "ref": "TEXP-CAG-C1",
+  "libelle": "Je sais effectuer des calculs algébriques avec des nombres complexes (somme, produit, conjugué, inverse).",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert expand(z1*z2) == 11 - 10*I",
+   "assert conjugate(z1) == 3 - 2*I",
+   "assert simplify(1/z1 - (Rational(3,13) - Rational(2,13)*I)) == 0"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M1}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

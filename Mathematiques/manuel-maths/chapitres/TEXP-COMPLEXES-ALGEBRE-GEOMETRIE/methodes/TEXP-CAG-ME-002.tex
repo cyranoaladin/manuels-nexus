@@ -1,0 +1,71 @@
+% META: {"id": "TEXP-CAG-ME-002", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "methode", "capacites_codes": ["C2"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import I, simplify, symbols, Eq, solve, conjugate
+% assert simplify((3 - I)/(2 + I) - (1 - I)) == 0
+% x, y = symbols('x y', real=True)
+% # z + 2 conj(z) = 6 - i  <=>  3x - iy = 6 - i
+% sol = solve([Eq(3*x, 6), Eq(-y, -1)], [x, y])
+% assert sol == {x: 2, y: 1}
+% z = 2 + I
+% assert simplify(z + 2*conjugate(z) - (6 - I)) == 0
+% END-VERIFY
+\begin{fichemethode}{M2}{Resoudre az = b et les equations melant z et son conjugue}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande de resoudre dans $\mathbb{C}$
+  une equation lineaire $az = b$, ou une equation contenant a la fois $z$ et
+  $\bar{z}$ (qu'on traite en posant $z = x + iy$).
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Equation $az = b$ ($a \neq 0$) : diviser, $z = \dfrac{b}{a}$, puis
+      mettre le quotient sous forme algebrique (conjugue du denominateur,
+      fiche M1).
+    \item Equation avec $\bar{z}$ : poser $z = x + iy$ ($x, y$ reels), donc
+      $\bar{z} = x - iy$.
+    \item Substituer et developper pour obtenir une egalite de la forme
+      $A + iB = A' + iB'$ avec $A, B, A', B'$ reels.
+    \item Identifier parties reelles et imaginaires : deux equations REELLES
+      en $x$ et $y$.
+    \item Resoudre le systeme et conclure sous la forme $z = x + iy$, puis
+      verifier dans l'equation initiale.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  1) Resoudre $(2 + i)z = 3 - i$. \quad 2) Resoudre
+  $z + 2\bar{z} = 6 - i$.
+
+  \medskip
+  \commentaireMarge{Quotient mis sous forme algebrique.}%
+  1) $z = \dfrac{3 - i}{2 + i} = \dfrac{(3 - i)(2 - i)}{5}
+  = \dfrac{6 - 3i - 2i - 1}{5} = \dfrac{5 - 5i}{5} = 1 - i$.
+
+  \medskip
+  \commentaireMarge{Identification des parties reelle et imaginaire.}%
+  2) Posons $z = x + iy$ : $z + 2\bar{z} = 3x - iy$. L'equation devient
+  $3x - iy = 6 - i$, d'ou $3x = 6$ et $-y = -1$ : $x = 2$, $y = 1$.
+  Donc $z = 2 + i$. Controle : $2 + i + 2(2 - i) = 6 - i$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Identifier les parties reelle et imaginaire sans
+      avoir verifie que $x$ et $y$ sont REELS (l'identification n'est valable
+      que sous cette hypothese).
+    \item \textbf{Piege 2.} Ecrire $\overline{z} = -z$ : le conjugue ne change
+      que le signe de la partie IMAGINAIRE.
+    \item \textbf{Piege 3.} Diviser par $a$ sans le mettre ensuite sous forme
+      algebrique : le resultat doit etre au format $a + ib$.
+  \end{itemize}
+}
+
+\verifier{%
+  Substituer la solution dans l'equation initiale (calcul complet avec le
+  conjugue), et controler la forme algebrique du resultat.
+}
+
+\sEntrainer{\refExos{M2}}
+
+\end{fichemethode}
