@@ -1,0 +1,68 @@
+% META: {"id": "TCOMPL-ATT-ME-003", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% q = Rational(5,6)
+% assert (q**10)/(q**4) == q**6
+% assert q**6 == Rational(15625,46656)
+% END-VERIFY
+\begin{fichemethode}{M3}{Exploiter l'absence de memoire de la loi geometrique}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsqu'un enonce conditionne par le passe (« sachant
+  qu'il y a deja eu $m$ echecs... ») et demande une probabilite sur la suite de
+  l'attente : l'absence de memoire permet de « remettre le compteur a zero ».
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Reperer la structure : une probabilite CONDITIONNELLE de la forme
+      $P_{(X > m)}(X > m + n)$.
+    \item Citer la propriete d'absence de memoire :
+      $P_{(X > m)}(X > m + n) = P(X > n)$.
+    \item (Justification si demandee :
+      $P_{(X>m)}(X > m+n) = \dfrac{P(X > m+n)}{P(X > m)}
+      = \dfrac{(1-p)^{m+n}}{(1-p)^m} = (1-p)^n$.)
+    \item Calculer $P(X > n) = (1-p)^n$ avec le $n$ RESTANT (pas $m+n$).
+    \item Interpreter : les echecs passes ne changent rien aux chances futures
+      — et denoncer l'intuition contraire (« le 6 est du »).
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  On lance un de jusqu'au premier 6. Sachant que les 4 premiers lancers n'ont
+  pas donne de 6, quelle est la probabilite qu'il n'y ait toujours pas de 6
+  apres 10 lancers ?
+
+  \medskip
+  \commentaireMarge{Conditionnement du type $X > m$ : absence de memoire.}%
+  On cherche $P_{(X > 4)}(X > 10)$. Par absence de memoire de la loi
+  geometrique, $P_{(X > 4)}(X > 10) = P(X > 6)$.
+
+  \medskip
+  $P(X > 6) = \left(\dfrac{5}{6}\right)^{6} = \dfrac{15625}{46656}
+  \approx 0{,}335$ : tout se passe comme si l'attente REPARTAIT de zero pour
+  les 6 lancers restants.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Croire qu'apres beaucoup d'echecs le succes devient
+      plus probable (« sophisme du joueur ») : la propriete dit exactement le
+      contraire.
+    \item \textbf{Piege 2.} Utiliser $m + n$ au lieu du $n$ restant dans
+      $P(X > n)$ apres la remise a zero.
+    \item \textbf{Piege 3.} Appliquer l'absence de memoire a un conditionnement
+      qui n'est pas du type $X > m$ (par exemple $X = m$) : la propriete ne s'y
+      applique pas.
+  \end{itemize}
+}
+
+\verifier{%
+  Retrouver le resultat par le calcul direct du quotient
+  $\frac{P(X > m+n)}{P(X > m)}$, et controler que la reponse ne depend que de la
+  duree restante $n$.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

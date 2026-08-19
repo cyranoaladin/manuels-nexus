@@ -1,0 +1,43 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-TEMPS-ATTENTE",
+ "method_id": "TCOMPL-ATT-ME-006",
+ "alias": "M6",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "1515907d7004e372e22fa4dc9c10cbc08b73ce895ac47d9f33edb94cdb8f7a90",
+ "capacity_authority": {
+  "code": "C6",
+  "ref": "TCOMPL-ATT-C6",
+  "libelle": "Je sais calculer l'espérance d'une variable aléatoire suivant une loi exponentielle, sous forme d'intégrale.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert simplify(diff(G, t) - t*lam*exp(-lam*t)) == 0",
+   "assert limit(IA, A, oo) == 2",
+   "assert integrate(t*lam*exp(-lam*t), (t, 0, oo)) == 2"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M6}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

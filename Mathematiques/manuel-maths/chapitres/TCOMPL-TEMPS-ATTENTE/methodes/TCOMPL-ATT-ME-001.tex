@@ -1,42 +1,69 @@
-% META: {"id": "TCOMPL-ATT-ME-001", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "sources_inspiration": [], "status": "approved"}
-\begin{fichemethode}{M1}{Deriver une fonction composee}
+% META: {"id": "TCOMPL-ATT-ME-001", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, summation, oo
+% k = symbols('k', integer=True, positive=True)
+% p = Rational(1,6); q = 1 - p
+% assert summation(q**(k-1)*p, (k, 1, oo)) == 1
+% assert summation(k*q**(k-1)*p, (k, 1, oo)) == 6
+% END-VERIFY
+\begin{fichemethode}{M1}{Reconnaitre et definir une loi geometrique}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque la fonction a deriver fait intervenir une composition : $\mathrm{e}^{u(x)}$, $\ln(u(x))$, $(u(x))^n$, $\sqrt{u(x)}$, ou plus generalement $v(u(x))$.
+  Utiliser cette methode lorsqu'une experience de Bernoulli (succes de
+  probabilite $p$) est REPETEE de facon independante et que la variable
+  etudiee est le RANG du premier succes : il s'agit de justifier que $X$ suit
+  la loi geometrique de parametre $p$ et d'en donner les proprietes.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item \textbf{Identifier la fonction exterieure $v$ et la fonction interieure $u$.}
-    \item \textbf{Calculer $u'(x)$.}
-    \item \textbf{Calculer $v'(t)$.}
-    \item \textbf{Appliquer la formule :} $(v \circ u)'(x) = u'(x) \times v'(u(x))$.
-    \item \textbf{Simplifier} l'expression obtenue.
+    \item Verifier les trois conditions du modele : epreuves de Bernoulli
+      identiques, independantes, et $X$ = rang du premier succes.
+    \item Enoncer la loi : pour tout entier $k \geq 1$,
+      $P(X = k) = (1-p)^{k-1}\,p$ ($k-1$ echecs puis un succes).
+    \item Retenir la queue de distribution : $P(X > n) = (1-p)^n$ (les $n$
+      premieres epreuves sont toutes des echecs).
+    \item Donner l'esperance : $E(X) = \dfrac{1}{p}$ — le rang moyen du premier
+      succes.
+    \item Enoncer l'absence de memoire : pour tous entiers $m, n \geq 0$,
+      $P_{(X > m)}(X > m+n) = P(X > n)$ — le passe ne change pas l'attente
+      restante (exploitation : fiche M3).
   \end{enumerate}
 }
 
 \exempleRedige{%
-  \textbf{Exemple.} Deriver $f(x) = \mathrm{e}^{x^2 - 3x}$.
+  On lance un de equilibre jusqu'a obtenir un 6 ; $X$ est le rang du premier 6.
+  Justifier la loi de $X$ et donner $E(X)$.
 
   \medskip
-  \commentaireMarge{Identifier : $v(t) = \mathrm{e}^t$, $u(x) = x^2 - 3x$.}%
-  Fonction interieure : $u(x) = x^2 - 3x$, donc $u'(x) = 2x - 3$.
+  \commentaireMarge{Trois conditions a citer explicitement.}%
+  Chaque lancer est une epreuve de Bernoulli de parametre $p = \dfrac{1}{6}$
+  (succes : « obtenir 6 »), les lancers sont independants et identiques, et $X$
+  est le rang du premier succes : $X$ suit la loi geometrique de parametre
+  $\dfrac{1}{6}$.
 
-  \commentaireMarge{Appliquer $(e^u)' = u' \cdot e^u$.}%
-  Fonction exterieure : $v(t) = \mathrm{e}^t$, donc $v'(t) = \mathrm{e}^t$.
-
-  $f'(x) = u'(x) \times \mathrm{e}^{u(x)} = (2x-3)\,\mathrm{e}^{x^2 - 3x}$.
+  \medskip
+  Donc $P(X = k) = \left(\dfrac{5}{6}\right)^{k-1}\dfrac{1}{6}$ pour $k \geq 1$,
+  et $E(X) = \dfrac{1}{p} = 6$ : en moyenne, le premier 6 arrive au sixieme
+  lancer.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier $u'(x)$ : ecrire $(\mathrm{e}^{u})' = \mathrm{e}^u$ au lieu de $u'\,\mathrm{e}^u$.
-    \item \textbf{Piege 2.} Pour $(\ln u)'$, oublier le signe de $u$ : verifier que $u > 0$ sur l'intervalle d'etude.
+    \item \textbf{Piege 1.} Confondre avec la loi binomiale : la binomiale
+      compte les succes en $n$ epreuves FIXEES, la geometrique attend le
+      PREMIER succes (nombre d'epreuves non borne).
+    \item \textbf{Piege 2.} Ecrire $P(X = k) = p^{k-1}(1-p)$ : l'exposant
+      $k-1$ porte sur l'ECHEC $(1-p)$.
+    \item \textbf{Piege 3.} Oublier de justifier l'independance des epreuves
+      avant de conclure sur la loi.
   \end{itemize}
 }
 
 \verifier{%
-  Verifier sur un cas simple : si $u(x) = 2x$, alors $(\mathrm{e}^{2x})' = 2\mathrm{e}^{2x}$ (et non $\mathrm{e}^{2x}$).
+  Controler que les $P(X = k)$ somment a 1 (serie geometrique), que
+  $E(X) = \frac{1}{p}$ est coherent (plus $p$ est petit, plus l'attente est
+  longue), et tester $P(X > 0) = 1$.
 }
 
 \sEntrainer{\refExos{M1}}

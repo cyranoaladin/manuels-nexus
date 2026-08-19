@@ -1,0 +1,72 @@
+% META: {"id": "TCOMPL-ATT-ME-004", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "methode", "capacites_codes": ["C4"], "methodes": ["M4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, exp, integrate, oo, simplify
+% t, a = symbols('t a', positive=True)
+% lam = Rational(1,2)
+% f = lam*exp(-lam*t)
+% assert integrate(f, (t, 0, oo)) == 1
+% assert simplify(integrate(f, (t, 0, a)) - (1 - exp(-lam*a))) == 0
+% assert integrate(t*f, (t, 0, oo)) == 2
+% END-VERIFY
+\begin{fichemethode}{M4}{Definir la loi exponentielle : densite, repartition, esperance, absence de memoire}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsqu'un temps d'attente CONTINU sans usure
+  (desintegration, panne electronique, arrivee d'un client...) est modelise et
+  que l'enonce demande de definir la loi exponentielle de parametre
+  $\lambda > 0$ et ses proprietes.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Donner la densite : $f(t) = \lambda\,e^{-\lambda t}$ pour $t \geq 0$
+      (et $f(t) = 0$ pour $t < 0$).
+    \item En deduire la fonction de repartition : pour $t \geq 0$,
+      $F(t) = P(T \leq t) = \displaystyle\int_0^t \lambda e^{-\lambda x}\,dx
+      = 1 - e^{-\lambda t}$, d'ou $P(T > t) = e^{-\lambda t}$.
+    \item Donner l'esperance : $E(T) = \dfrac{1}{\lambda}$ (duree moyenne
+      d'attente ; calcul integral : fiche M6).
+    \item Enoncer l'absence de memoire : pour tous $s, t \geq 0$,
+      $P_{(T > s)}(T > s + t) = P(T > t)$ — analogue continu de la loi
+      geometrique.
+    \item Identifier $\lambda$ depuis l'enonce : souvent via l'esperance
+      ($\lambda = \frac{1}{E(T)}$) ou une probabilite donnee.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  La duree de vie $T$ (en annees) d'un composant suit la loi exponentielle
+  d'esperance 2 ans. Determiner $\lambda$, la densite et $P(T > t)$.
+
+  \medskip
+  \commentaireMarge{$E(T) = \frac{1}{\lambda}$ donne $\lambda$.}%
+  $E(T) = \dfrac{1}{\lambda} = 2$, donc $\lambda = \dfrac{1}{2}$.
+
+  \medskip
+  La densite est $f(t) = \dfrac{1}{2}\,e^{-t/2}$ pour $t \geq 0$, la fonction de
+  repartition $F(t) = 1 - e^{-t/2}$, et $P(T > t) = e^{-t/2}$ : la
+  probabilite de survie decroit exponentiellement, sans effet d'usure (absence
+  de memoire).
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Confondre $\lambda$ et $E(T)$ : c'est
+      $E(T) = \frac{1}{\lambda}$ — un grand $\lambda$ signifie une attente
+      COURTE.
+    \item \textbf{Piege 2.} Oublier que la densite est nulle pour $t < 0$ :
+      toutes les integrales partent de 0.
+    \item \textbf{Piege 3.} Ecrire $P(T > t) = e^{\lambda t}$ (signe) : une
+      probabilite ne depasse jamais 1.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler que $\int_0^{+\infty} f = 1$, que $F(0) = 0$ et
+  $F(t) \to 1$ en $+\infty$, et que $P(T > E(T)) = e^{-1} \approx 0{,}37$
+  (repere utile).
+}
+
+\sEntrainer{\refExos{M4}}
+
+\end{fichemethode}

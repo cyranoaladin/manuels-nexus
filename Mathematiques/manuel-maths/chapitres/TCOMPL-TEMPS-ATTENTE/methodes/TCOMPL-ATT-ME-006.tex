@@ -1,0 +1,77 @@
+% META: {"id": "TCOMPL-ATT-ME-006", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "methode", "capacites_codes": ["C6"], "methodes": ["M6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, exp, integrate, limit, oo, diff, simplify
+% t, A = symbols('t A', positive=True)
+% lam = Rational(1,2)
+% G = -(t + 2)*exp(-lam*t)
+% assert simplify(diff(G, t) - t*lam*exp(-lam*t)) == 0
+% IA = G.subs(t, A) - G.subs(t, 0)
+% assert limit(IA, A, oo) == 2
+% assert integrate(t*lam*exp(-lam*t), (t, 0, oo)) == 2
+% END-VERIFY
+\begin{fichemethode}{M6}{Calculer l'esperance d'une loi exponentielle par une integrale}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande de CALCULER
+  $E(T) = \displaystyle\lim_{A \to +\infty}\int_0^A t\,\lambda e^{-\lambda t}\,dt$
+  pour une loi exponentielle, ou de verifier la formule $E(T) = \frac{1}{\lambda}$.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Ecrire l'esperance comme integrale impropre :
+      $E(T) = \displaystyle\lim_{A \to +\infty} \int_0^A t\,\lambda
+      e^{-\lambda t}\,dt$.
+    \item Chercher une primitive de $t \mapsto t\,\lambda e^{-\lambda t}$ :
+      poser $G(t) = -\left(t + \dfrac{1}{\lambda}\right) e^{-\lambda t}$ et
+      VERIFIER en derivant que $G'(t) = t\,\lambda e^{-\lambda t}$.
+    \item Calculer $\displaystyle\int_0^A = G(A) - G(0)
+      = \dfrac{1}{\lambda} - \left(A + \dfrac{1}{\lambda}\right)e^{-\lambda A}$.
+    \item Passer a la limite : $\left(A + \frac{1}{\lambda}\right)
+      e^{-\lambda A} \to 0$ quand $A \to +\infty$ (croissance comparee), donc
+      $E(T) = \dfrac{1}{\lambda}$.
+    \item Interpreter : duree moyenne d'attente, coherente avec le parametre.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Calculer l'esperance de $T$ de loi exponentielle de parametre
+  $\lambda = \dfrac{1}{2}$.
+
+  \medskip
+  \commentaireMarge{Primitive proposee, controlee par derivation.}%
+  Posons $G(t) = -(t + 2)\,e^{-t/2}$. Alors
+  $G'(t) = -e^{-t/2} + \dfrac{1}{2}(t+2)e^{-t/2} = \dfrac{t}{2}\,e^{-t/2}$,
+  qui est bien la fonction a integrer.
+
+  \medskip
+  \commentaireMarge{Croissance comparee : $A e^{-A/2} \to 0$.}%
+  $\displaystyle\int_0^A \dfrac{t}{2}e^{-t/2}\,dt = G(A) - G(0)
+  = 2 - (A+2)e^{-A/2} \xrightarrow[A \to +\infty]{} 2$.
+
+  \medskip
+  Donc $E(T) = 2 = \dfrac{1}{\lambda}$ : l'attente moyenne est de 2 unites de
+  temps.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Integrer $\lambda e^{-\lambda t}$ (la densite) au
+      lieu de $t\,\lambda e^{-\lambda t}$ : l'esperance porte sur $t\,f(t)$.
+    \item \textbf{Piege 2.} Oublier le terme $\frac{1}{\lambda}$ dans la
+      primitive $G$ : controler SYSTEMATIQUEMENT en derivant.
+    \item \textbf{Piege 3.} Affirmer $(A + \frac{1}{\lambda})e^{-\lambda A} \to 0$
+      sans invoquer la croissance comparee (l'exponentielle l'emporte sur le
+      polynome).
+  \end{itemize}
+}
+
+\verifier{%
+  Deriver la primitive $G$ pour retrouver exactement $t\,\lambda e^{-\lambda t}$,
+  controler $E(T) = \frac{1}{\lambda} > 0$, et confronter a une simulation ou a
+  l'ordre de grandeur du contexte.
+}
+
+\sEntrainer{\refExos{M6}}
+
+\end{fichemethode}
