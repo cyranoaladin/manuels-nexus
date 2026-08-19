@@ -65,8 +65,15 @@ FINGERPRINT_PATTERN = re.compile(r"^[0-9a-f]{16,64}$")
 
 
 def _canonical_locator(val: Any) -> str:
-    s = json.dumps(val, sort_keys=True, separators=(",", ":")) if isinstance(val, Mapping) else str(val or "")
-    return s.replace("ADGK", "APT").replace("AGT", "APT")
+    # Pas de repli d'alias de chapitre : l'arbitrage A4 du 2026-08-19
+    # (audit/A4_ADGK_CANONICAL_STATUS.md) établit ADGK et APT comme chapitres
+    # canoniques DISTINCTS — un rapprochement de locators entre eux serait une
+    # confusion inter-chapitres.
+    return (
+        json.dumps(val, sort_keys=True, separators=(",", ":"))
+        if isinstance(val, Mapping)
+        else str(val or "")
+    )
 QUALIFICATION_DIGEST_FIELDS = (
     "approved_by",
     "decision_ref",

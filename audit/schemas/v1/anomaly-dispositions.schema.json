@@ -83,6 +83,19 @@
           "type": "string",
           "pattern": "^sha256:[0-9a-f]{64}$"
         },
+        "policy_id": { "$ref": "#/$defs/non_empty_string" },
+        "method_source_sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "capacity_id": { "$ref": "#/$defs/non_empty_string" },
+        "capacity_ref": { "type": ["string", "null"] },
+        "review_packet": { "$ref": "#/$defs/non_empty_string" },
+        "review_packet_sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "qualification_reason": { "$ref": "#/$defs/non_empty_string" },
         "reason": { "$ref": "#/$defs/non_empty_string" },
         "release_blocking": { "type": "boolean" },
         "review_condition": { "$ref": "#/$defs/non_empty_string" },
@@ -93,6 +106,27 @@
         "scope": { "$ref": "#/$defs/scope" }
       },
       "allOf": [
+        {
+          "if": {
+            "properties": {
+              "decision_ref": {
+                "const": "audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19"
+              }
+            },
+            "required": ["decision_ref"]
+          },
+          "then": {
+            "required": [
+              "policy_id",
+              "qualification_policy_digest",
+              "method_source_sha",
+              "capacity_id",
+              "review_packet",
+              "review_packet_sha",
+              "qualification_reason"
+            ]
+          }
+        },
         {
           "if": {
             "anyOf": [

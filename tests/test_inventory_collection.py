@@ -11296,6 +11296,177 @@ def test_expected_review_debt_policy_gates_exactly(
         assert inventory_module._is_expected_review_debt(mutated) is False, field
 
 
+def _a4_debt_fixture(tmp_path):
+    """Arbre minimal portant une qualification A4 dérivée valide."""
+    import hashlib as _hashlib
+
+    root = tmp_path
+    policy = root / "audit/A4_METHOD_REVIEW_DEBT_POLICY.md"
+    policy.parent.mkdir(parents=True, exist_ok=True)
+    policy.write_text("# décision humaine de classe\n", encoding="utf-8")
+    source_rel = "NSI/chapitres/X/methodes/X-ME-002.tex"
+    source = root / source_rel
+    source.parent.mkdir(parents=True, exist_ok=True)
+    meta = (
+        '% META: {"id": "X-ME-002", "chapitre": "X", "type_objet": "methode",'
+        ' "capacites_codes": ["C2"], "methodes": ["M2"],'
+        ' "status": "needs_review"}\n'
+    )
+    source.write_text(meta + "corps\n", encoding="utf-8")
+    packet_rel = "audit/reviews/methods/1NSI/X/X-ME-002.review.json"
+    packet = root / packet_rel
+    packet.parent.mkdir(parents=True, exist_ok=True)
+    packet.write_text(
+        json.dumps(
+            {
+                "source_sha256": _hashlib.sha256(
+                    source.read_bytes()
+                ).hexdigest(),
+                "status": "needs_review",
+            }
+        ),
+        encoding="utf-8",
+    )
+    record = {
+        "fingerprint": "feedfacefeedface",
+        "decision_ref": (
+            "audit/A4_METHOD_REVIEW_DEBT_POLICY.md"
+            "#decision-a4-method-review-debt-2026-08-19"
+        ),
+        "qualification_policy_digest": (
+            "sha256:" + _hashlib.sha256(policy.read_bytes()).hexdigest()
+        ),
+        "source": source_rel,
+        "method_source_sha": _hashlib.sha256(
+            source.read_bytes()
+        ).hexdigest(),
+        "review_packet": packet_rel,
+        "review_packet_sha": _hashlib.sha256(
+            packet.read_bytes()
+        ).hexdigest(),
+    }
+    return root, policy, source, packet, record
+
+
+def test_a4_review_debt_valid_record_has_no_violation(
+    inventory_module, tmp_path
+) -> None:
+    root, _, _, _, record = _a4_debt_fixture(tmp_path)
+    assert (
+        inventory_module._a4_method_review_debt_violations(root, record) == []
+    )
+
+
+def test_a4_review_debt_policy_edit_invalidates_derived_qualifications(
+    inventory_module, tmp_path
+) -> None:
+    """Politique humaine modifiée => toute qualification dérivée est invalide
+    tant qu'une nouvelle décision humaine explicite n'est pas scellée."""
+    root, policy, _, _, record = _a4_debt_fixture(tmp_path)
+    policy.write_text("# politique altérée\n", encoding="utf-8")
+    violations = inventory_module._a4_method_review_debt_violations(
+        root, record
+    )
+    assert any("politique A4 modifiée" in v for v in violations)
+
+
+def test_a4_review_debt_method_edit_makes_qualification_stale(
+    inventory_module, tmp_path
+) -> None:
+    """Source de la fiche modifiée => qualification STALE."""
+    root, _, source, _, record = _a4_debt_fixture(tmp_path)
+    source.write_text(
+        source.read_text(encoding="utf-8") + "% edit\n", encoding="utf-8"
+    )
+    violations = inventory_module._a4_method_review_debt_violations(
+        root, record
+    )
+    assert any("STALE" in v for v in violations)
+
+
+def test_a4_review_debt_missing_packet_invalidates_qualification(
+    inventory_module, tmp_path
+) -> None:
+    """Packet de revue manquant => qualification invalide."""
+    root, _, _, packet, record = _a4_debt_fixture(tmp_path)
+    packet.unlink()
+    violations = inventory_module._a4_method_review_debt_violations(
+        root, record
+    )
+    assert any("packet de revue manquant" in v for v in violations)
+
+
+def test_a4_review_debt_status_promotion_without_review_fails(
+    inventory_module, tmp_path
+) -> None:
+    """Statut promu approved sans revue humaine (dette A4 encore ouverte)
+    => FAIL."""
+    import hashlib as _hashlib
+
+    root, _, source, packet, record = _a4_debt_fixture(tmp_path)
+    promoted = source.read_text(encoding="utf-8").replace(
+        '"status": "needs_review"', '"status": "approved"'
+    )
+    source.write_text(promoted, encoding="utf-8")
+    record["method_source_sha"] = _hashlib.sha256(
+        source.read_bytes()
+    ).hexdigest()
+    packet.write_text(
+        json.dumps(
+            {
+                "source_sha256": record["method_source_sha"],
+                "status": "needs_review",
+            }
+        ),
+        encoding="utf-8",
+    )
+    record["review_packet_sha"] = _hashlib.sha256(
+        packet.read_bytes()
+    ).hexdigest()
+    violations = inventory_module._a4_method_review_debt_violations(
+        root, record
+    )
+    assert any("statut promu sans revue humaine" in v for v in violations)
+
+
+def test_repository_a4_derived_qualifications_reference_class_policy(
+    inventory_module,
+) -> None:
+    """§5 clôture A4 : aucune qualification dérivée ne fabrique une
+    approbation humaine individuelle — approved_by référence la décision de
+    classe, et chaque enregistrement porte le quintuplé exigé."""
+    doc = yaml.safe_load(
+        (ROOT / "audit/ANOMALY_DISPOSITIONS.yaml").read_text(
+            encoding="utf-8"
+        )
+    )
+    anchor = inventory_module.A4_METHOD_REVIEW_DEBT_DECISION_REF
+    derived = [
+        record
+        for record in doc["dispositions"].values()
+        if record.get("decision_ref") == anchor
+    ]
+    assert derived, "les qualifications A4 dérivées doivent exister"
+    for record in derived:
+        assert str(record.get("approved_by", "")).startswith("policy:"), (
+            record["fingerprint"]
+        )
+        for field in (
+            "policy_id",
+            "qualification_policy_digest",
+            "method_source_sha",
+            "capacity_id",
+            "review_packet",
+            "review_packet_sha",
+            "qualification_reason",
+        ):
+            assert record.get(field), (record["fingerprint"], field)
+        assert (
+            inventory_module._a4_method_review_debt_violations(ROOT, record)
+            == []
+        ), record["fingerprint"]
+
+
 def test_repository_fail_on_new_accepts_only_declared_review_debt(
     inventory_module,
 ) -> None:

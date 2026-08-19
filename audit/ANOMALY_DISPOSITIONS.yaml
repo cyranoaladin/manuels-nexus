@@ -1,10 +1,12 @@
 artifact_type: anomaly_dispositions
-control_digest: sha256:8fe6f39b26a0b19aaa4d6e08a3474d42c16c96035acac786745c8ea849f3c171
+control_digest: sha256:bf62c4f449ecea845639f1762a12f2b42812f3edafea92bbf424329e5741ae9a
 dispositions:
   0030282f546d3d82:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-LOGARITHME-HISTORIQUE-C5
+    capacity_ref: TCOMPL-LOG-C5
     category: blocking_statuses
     chapter: TCOMPL-LOGARITHME-HISTORIQUE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -13,12 +15,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 3f9e5b55872372de73e6f246d37bf79680e60952dd0542d95f06a8fff3bdb2ca
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-LOGARITHME-HISTORIQUE/TCOMPL-LOG-ME-005.review.json
+    review_packet_sha: 5f7a98b5d70264e3024358a28cc0b513708d7f182db64e4d13126013efcd0dea
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-005.tex
   0039a2dd21589133:
@@ -663,9 +670,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C3.tex
   01533128b52c0fa0:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-INEGALITES-C1
+    capacity_ref: TCOMPL-INEG-C1
     category: blocking_statuses
     chapter: TCOMPL-INEGALITES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -674,12 +683,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 48e828dc30d70528b0cceae234cb00b70e87a12c6bdf29e86bda9a9a62198ba5
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-INEGALITES/TCOMPL-INEG-ME-001.review.json
+    review_packet_sha: 5e23c8740c79454976665cfb335a4525235067ab3c807585c611b76ee7067567
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/methodes/TCOMPL-INEG-ME-001.tex
   0153bd900d01ef91:
@@ -1053,9 +1067,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/corriges/TSPE-SUITLIM-CO-019.tex
   021c56e25a132dd7:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-LOGARITHME-HISTORIQUE-C3
+    capacity_ref: TCOMPL-LOG-C3
     category: blocking_statuses
     chapter: TCOMPL-LOGARITHME-HISTORIQUE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -1064,12 +1080,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 0299b501994ede3542b4b0f53cffff77998562cb7364409f6c4a30969ab0621c
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-LOGARITHME-HISTORIQUE/TCOMPL-LOG-ME-003.review.json
+    review_packet_sha: a240bd19d6a8a64d216c875e9082f8f1a273fa94d33c802084adab0f0f40f51e
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-003.tex
   022362435848775b:
@@ -4026,9 +4047,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/exercices/TSPE-PRIMEQ-EX-014.tex
   06710621e974eafb:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-INFERENCE-BAYESIENNE-C2
+    capacity_ref: TCOMPL-BAYES-C2
     category: blocking_statuses
     chapter: TCOMPL-INFERENCE-BAYESIENNE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -4037,12 +4060,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 21a5a73a6fb9b9c1ee8f2e65698f94e66e152fd45451ceed193938c92d4cacab
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-INFERENCE-BAYESIENNE/TCOMPL-BAYES-ME-002.review.json
+    review_packet_sha: 29f74d335c1df3a867750223554d08d635f583b7d8a202af19ccd5eb3ec60cb4
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/methodes/TCOMPL-BAYES-ME-002.tex
   0674b7807f46b5d4:
@@ -4319,9 +4347,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/corriges/TSPE-SUITLIM-CO-029.tex
   06c9d10c3a3f09ef:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-LOGARITHME-HISTORIQUE-C2
+    capacity_ref: TCOMPL-LOG-C2
     category: blocking_statuses
     chapter: TCOMPL-LOGARITHME-HISTORIQUE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -4330,12 +4360,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: a9fa49fba3cddb9b9f52730908e79e8e359d086001f77859bf37c2b95ec8150d
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-LOGARITHME-HISTORIQUE/TCOMPL-LOG-ME-002.review.json
+    review_packet_sha: 8af1f53ac2ee47314d74542753e87b88058ec48a8ad4ae69c6f79ad614918bbf
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-002.tex
   06d4a9804ac2f95d:
@@ -6930,9 +6965,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-051.tex
   0ae21dd0da220747:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-C5
+    capacity_ref: TEXP-CAG-C5
     category: blocking_statuses
     chapter: TEXP-COMPLEXES-ALGEBRE-GEOMETRIE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -6941,12 +6978,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 7fc4b0b43afccbf96acaf293dcd724539b57d6b29c8df93dc62ed3b00e94a57c
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/TEXP-CAG-ME-005.review.json
+    review_packet_sha: 58ec7c6f5d92b7183f97c0754efce82ce9076a0dce7eda4683ccc34664cdfbc4
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/methodes/TEXP-CAG-ME-005.tex
   0af012e67a27663a:
@@ -7829,9 +7871,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-022.tex
   0c52237e59af9cc2:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-GRAPHES-C4
+    capacity_ref: TEXP-GRA-C4
     category: blocking_statuses
     chapter: TEXP-GRAPHES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -7840,12 +7884,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 41c4cfa5a2ffe58ff5a6ee2c5cffb9adac9cd10034369d47cf01a54a5adb842c
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-GRAPHES/TEXP-GRA-ME-004.review.json
+    review_packet_sha: 165bc682e17a81b11a21b96805dfc4f7efde6501d6388d875809585d10ca49e1
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/methodes/TEXP-GRA-ME-004.tex
   0c543e1506ec65ed:
@@ -7929,9 +7978,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/remediation/TSPE-LIMITES-FONCTIONS-RE-C3.tex
   0c7cf3afe9c32860:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-COMPLEXES-TRIGO-POLYNOMES-C3
+    capacity_ref: TEXP-CTP-C3
     category: blocking_statuses
     chapter: TEXP-COMPLEXES-TRIGO-POLYNOMES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -7940,12 +7991,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: df7ed074330eaad5584145ac759fd3893c465fb0b38681bb65192f45bc7305e7
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-COMPLEXES-TRIGO-POLYNOMES/TEXP-CTP-ME-003.review.json
+    review_packet_sha: 7ed89ee1938537ced4ed2bd19dc34eb58ef2cf1ac931d7d9046f76202eb0be6b
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-003.tex
   0c7edb701346b2de:
@@ -9589,9 +9645,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-001.tex
   0f1068a9fbddd4f5:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-ARITHMETIQUE-C8
+    capacity_ref: TEXP-ARI-C8
     category: blocking_statuses
     chapter: TEXP-ARITHMETIQUE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -9600,12 +9658,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 834baf209b49fd3c1f7323f97c75452e9bf0a632709c5cf9b7c13f4d5da36ff0
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-ARITHMETIQUE/TEXP-ARI-ME-008.review.json
+    review_packet_sha: 80613ad0c91fad4aaa7a37e7496d8a8609ac6546e115cf077d31c2ec20579097
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-008.tex
   0f2b05cec891ac5e:
@@ -10249,9 +10312,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-009.tex
   0fe136e4e18e572d:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-COMPLEXES-TRIGO-POLYNOMES-C4
+    capacity_ref: TEXP-CTP-C4
     category: blocking_statuses
     chapter: TEXP-COMPLEXES-TRIGO-POLYNOMES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -10260,12 +10325,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 4be50bbf3480c2f4f9617579416fee0a6eecb406e50e75cbeb9f505730f23775
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-COMPLEXES-TRIGO-POLYNOMES/TEXP-CTP-ME-004.review.json
+    review_packet_sha: a8c6c3290e6dc556c9304bc8f7d09339163821b070b3b90f9dfabf7936d1dc78
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-004.tex
   0fe2e81739503b33:
@@ -11418,9 +11488,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-001.tex
   11abb6d5bc294fdc:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-MODELES-FONCTION-C7
+    capacity_ref: TCOMPL-MF-C7
     category: blocking_statuses
     chapter: TCOMPL-MODELES-FONCTION
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -11429,12 +11501,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: fac9f39fdb7fa1fd92acacb8a44cf74cc2f5e857c56e4269eff9944e10b30c3e
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-MODELES-FONCTION/TCOMPL-MF-ME-007.review.json
+    review_packet_sha: 3417670630c569679f6c420866f09d3e75e8972542026bead866411e945edbae
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-007.tex
   11ae381f7b000064:
@@ -19401,9 +19478,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-021.tex
   1e07caec5dab3c17:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-MODELES-EVOLUTION-C1
+    capacity_ref: TCOMPL-ME-C1
     category: blocking_statuses
     chapter: TCOMPL-MODELES-EVOLUTION
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -19412,12 +19491,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 29220dad1f3f34611ad57fa7c7b647f48bf6ca7224a63a8120db1cb997c36c9a
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-MODELES-EVOLUTION/TCOMPL-ME-ME-001.review.json
+    review_packet_sha: ea7cb942ed8b381abdbca05ae605d1e6f96ab5663512f80b04abd4d5279eeeab
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-001.tex
   1e0997aece6ed98c:
@@ -20453,9 +20537,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/TNSI-STRUCTURES-DONNEES/remediation/TNSI-STRUCT-REMED-14.tex
   1fc241703550a485:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-ARITHMETIQUE-C7
+    capacity_ref: TEXP-ARI-C7
     category: blocking_statuses
     chapter: TEXP-ARITHMETIQUE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -20464,12 +20550,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: d74354099858215efbbcdfb3592a94fd639dd9134fe48a761600c18efd893faf
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-ARITHMETIQUE/TEXP-ARI-ME-007.review.json
+    review_packet_sha: f0cb863e22168cd9e98ab3535122134407b3a4687a5e3622b147e71eec680356
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-007.tex
   1fdd39fc459a2744:
@@ -20961,9 +21052,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-019.tex
   209f03089e4e176e:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-LOGARITHME-HISTORIQUE-C4
+    capacity_ref: TCOMPL-LOG-C4
     category: blocking_statuses
     chapter: TCOMPL-LOGARITHME-HISTORIQUE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -20972,12 +21065,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: a1962b56d4b02b02b417f4403bf80abbe846f0d86cb41407c2e366ef08d7f140
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-LOGARITHME-HISTORIQUE/TCOMPL-LOG-ME-004.review.json
+    review_packet_sha: 3c015976fdf93a053d42fdb0d7a2087a6e2d10023871a0e87ba9252dd0c831ba
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-004.tex
   20b9125c6e39d54c:
@@ -24036,9 +24134,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-011.tex
   2650980f52446a6b:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-INEGALITES-C5
+    capacity_ref: TCOMPL-INEG-C5
     category: blocking_statuses
     chapter: TCOMPL-INEGALITES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -24047,12 +24147,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 0618e34323765ce0c6fdba5e2e0e9bab1dc333f2d695c81169eb2759204890d3
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-INEGALITES/TCOMPL-INEG-ME-005.review.json
+    review_packet_sha: 1cbb0c5f83149a436426999a04a80578cd1198309ae908f75730e7c95d7247ad
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/methodes/TCOMPL-INEG-ME-005.tex
   265336d7ecd3f060:
@@ -24075,9 +24180,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-028.tex
   265da5778de5d423:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-ECHANTILLONNAGE-C3
+    capacity_ref: TCOMPL-ECH-C3
     category: blocking_statuses
     chapter: TCOMPL-ECHANTILLONNAGE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -24086,12 +24193,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: e4f5c566e49c66129444ef05eef36174041970d8fec7dfe143d5f10ccb17576b
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-ECHANTILLONNAGE/TCOMPL-ECH-ME-003.review.json
+    review_packet_sha: 928ef95695b4796aaf242fa0111b454a8de5b0723756fd781e372297a5ad1774
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-003.tex
   266edc165703660f:
@@ -29450,9 +29562,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-022-CDP.tex
   2ee632b82aa10c4a:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-TEMPS-ATTENTE-C6
+    capacity_ref: TCOMPL-ATT-C6
     category: blocking_statuses
     chapter: TCOMPL-TEMPS-ATTENTE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -29461,12 +29575,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 1515907d7004e372e22fa4dc9c10cbc08b73ce895ac47d9f33edb94cdb8f7a90
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-TEMPS-ATTENTE/TCOMPL-ATT-ME-006.review.json
+    review_packet_sha: 1940b9bedac2ebc44d4aa5ded3f45d584917d6623062dee184586c8b20a9a6d7
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-006.tex
   2ef60b88eafbe1ab:
@@ -29628,9 +29747,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-040.tex
   2f15b92d6ec50f69:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-INEGALITES-C4
+    capacity_ref: TCOMPL-INEG-C4
     category: blocking_statuses
     chapter: TCOMPL-INEGALITES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -29639,12 +29760,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 065469b6c1451bd961af76146a8cf09b9f9f63139d366d78ef909c6c9c7bd4d1
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-INEGALITES/TCOMPL-INEG-ME-004.review.json
+    review_packet_sha: 905f16cf5856458a133a27fa348d43e3b332fa5d33ed43791e519f13c17e9442
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/methodes/TCOMPL-INEG-ME-004.tex
   2f17d20dda3ce4ac:
@@ -39049,9 +39175,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-017.tex
   3d2d2b1c09cee1c4:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-MODELES-FONCTION-C2
+    capacity_ref: TCOMPL-MF-C2
     category: blocking_statuses
     chapter: TCOMPL-MODELES-FONCTION
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -39060,12 +39188,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: faec06b951731deafa34551fe6a0981bbf491450c47b4fd89acea89698fc7caa
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-MODELES-FONCTION/TCOMPL-MF-ME-002.review.json
+    review_packet_sha: a26eb3e3f8cb43711cd367c1af9559fff26453aed971ffc632c607a458f3a571
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-002.tex
   3d2ff2c0334b0e58:
@@ -39745,9 +39878,11 @@ dispositions:
     severity: blocking
     source: NSI/gabarits/nexus-figures.tex
   3e69771df38d383f:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-MODELES-FONCTION-C4
+    capacity_ref: TCOMPL-MF-C4
     category: blocking_statuses
     chapter: TCOMPL-MODELES-FONCTION
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -39756,12 +39891,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 50d48442b5bb6a8551382aff07163cc8ba2e8fa0f5bc0df8d80615f51310bbae
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-MODELES-FONCTION/TCOMPL-MF-ME-004.review.json
+    review_packet_sha: ffe5f4a818e94a4d8d5997a9d6e8617136dfd7ae941b9619542ca5de453adbcf
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-004.tex
   3e73d436ceb5cc89:
@@ -40527,9 +40667,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-039.tex
   3fb4aac030caa40c:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-MODELES-EVOLUTION-C2
+    capacity_ref: TCOMPL-ME-C2
     category: blocking_statuses
     chapter: TCOMPL-MODELES-EVOLUTION
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -40538,12 +40680,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 93bbde33f4db023c3b1ca0ee9c8e6419c5962112f9548eaf1e49b5acce37dcea
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-MODELES-EVOLUTION/TCOMPL-ME-ME-002.review.json
+    review_packet_sha: 17ebc2c7a770a7e14c228abb433237d7d8f03e24a0613a3f091a9dccf2ac42ce
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-002.tex
   3fb4d641912e0a0e:
@@ -45397,9 +45544,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-012.tex
   470fcd9c3b14067f:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-C4
+    capacity_ref: TEXP-CAG-C4
     category: blocking_statuses
     chapter: TEXP-COMPLEXES-ALGEBRE-GEOMETRIE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -45408,12 +45557,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 7d03868903773f47b5c09b537bcaa0a4edc53c1c5a194dd478cfe02cfc72fbca
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/TEXP-CAG-ME-004.review.json
+    review_packet_sha: 4819d044c735690b5bd582e0b4e2fabba14cf76cfca21bc0f7bed82a62186852
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/methodes/TEXP-CAG-ME-004.tex
   471451408041f5d0:
@@ -47286,9 +47440,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-009.tex
   4a32199d0e3b5481:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-ARITHMETIQUE-C9
+    capacity_ref: TEXP-ARI-C9
     category: blocking_statuses
     chapter: TEXP-ARITHMETIQUE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -47297,12 +47453,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 46ef1fca23025c465dc8829489fe5cc869d5cbb6e7e918331ca95390dcfb145b
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-ARITHMETIQUE/TEXP-ARI-ME-009.review.json
+    review_packet_sha: 00a3d35bb87cbd71b3dcb6ffb45c2c427368fabce5cacfc49501d211b630abf2
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-009.tex
   4a39d4f7fef41eb8:
@@ -48378,9 +48539,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-034.tex
   4bc68f1fa2bedcd3:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-CALCULS-AIRES-C3
+    capacity_ref: TCOMPL-AIR-C3
     category: blocking_statuses
     chapter: TCOMPL-CALCULS-AIRES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -48389,12 +48552,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 5e289b92ccc9ec4adab30b692f3e95baf7d19870237b73b7924be0479ea52794
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-CALCULS-AIRES/TCOMPL-AIR-ME-003.review.json
+    review_packet_sha: 00c9796c3fe0b447a6f86c9d74d5c66638dd1d7217442554c920d09dc9df746f
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-AIR-ME-003.tex
   4be39094fd065673:
@@ -49998,9 +50166,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-011.tex
   4e2d09feb48084a6:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-MATRICES-MARKOV-C1
+    capacity_ref: TEXP-MAT-C1
     category: blocking_statuses
     chapter: TEXP-MATRICES-MARKOV
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -50009,12 +50179,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: eee5e50d0d97bb056c30b2a9a1c30d62deff3c57e118eb7a988f241150e34538
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-MATRICES-MARKOV/TEXP-MAT-ME-001.review.json
+    review_packet_sha: a2b4912b3639c469cda723897bfd1ede4169bfc687a97e27b24c8789ad26532e
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-001.tex
   4e3e65f88d234c69:
@@ -51186,9 +51361,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-023.tex
   4fe9c142ba3cc784:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-TEMPS-ATTENTE-C2
+    capacity_ref: TCOMPL-ATT-C2
     category: blocking_statuses
     chapter: TCOMPL-TEMPS-ATTENTE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -51197,12 +51374,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 22a5811866b4d113e811947dd23a3274f558aad464c5c1c5aaf833a0ec39948a
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-TEMPS-ATTENTE/TCOMPL-ATT-ME-002.review.json
+    review_packet_sha: d3c6545e4a69e9a3f3e9b924f09d589b393544fe827d7c4be1a2601786e8a526
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-002.tex
   4ff56351d4a8d640:
@@ -54218,9 +54400,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-027.tex
   55146f6814087378:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-TEMPS-ATTENTE-C4
+    capacity_ref: TCOMPL-ATT-C4
     category: blocking_statuses
     chapter: TCOMPL-TEMPS-ATTENTE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -54229,12 +54413,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 910f4749c6dd2f04f57a17ab325a174f162d53ec766f54ad3de8c4faad69d6c2
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-TEMPS-ATTENTE/TCOMPL-ATT-ME-004.review.json
+    review_packet_sha: 3da79a0e8a0e8bbf468c4f8306b98c4d3cf5f0d19e340bb8b7bfba87b7dfa91a
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-004.tex
   55310004ca22f5bf:
@@ -56168,9 +56357,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/10_C1_loi_probabilite.tex
   581904a3ac5370d2:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-ECHANTILLONNAGE-C5
+    capacity_ref: TCOMPL-ECH-C5
     category: blocking_statuses
     chapter: TCOMPL-ECHANTILLONNAGE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -56179,12 +56370,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: e24cf90cf7fb84e5ddde3986f8b17ef2be9b291e399e4d0679fc7001648b3eca
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-ECHANTILLONNAGE/TCOMPL-ECH-ME-005.review.json
+    review_packet_sha: 2b8d5a2db43014b76f982c83d0bd61fea9514dddbbcfbed6832100cb2036b539
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-005.tex
   5819b998988c472c:
@@ -56616,9 +56812,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/exercices/TNSI-HIST-EX-005.tex
   590b0a7934abae80:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-CORRELATION-CAUSALITE-C3
+    capacity_ref: TCOMPL-CORR-C3
     category: blocking_statuses
     chapter: TCOMPL-CORRELATION-CAUSALITE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -56627,12 +56825,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: c378b9ba77ccc34ce341d92a4d6edee47ede16ac59ede71e01e0b02a979aaa8c
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-CORRELATION-CAUSALITE/TCOMPL-CORR-ME-003.review.json
+    review_packet_sha: 638a0db5dfedbef11e41dc3134f5393ca5b81b03f269d59370d1e016737a0436
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/methodes/TCOMPL-CORR-ME-003.tex
   590bc29fe101f02d:
@@ -58658,9 +58861,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/exercices/TCOMPL-LOG-EX-018.tex
   5bec67f6f3b4f43d:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-TEMPS-ATTENTE-C3
+    capacity_ref: TCOMPL-ATT-C3
     category: blocking_statuses
     chapter: TCOMPL-TEMPS-ATTENTE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -58669,12 +58874,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 4234259a1318cb402a7b674f30bfeac2b20ef94970de1176a70e517133148add
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-TEMPS-ATTENTE/TCOMPL-ATT-ME-003.review.json
+    review_packet_sha: 2a2167c9bfcf657441aea3d56b2581f8a3e18637025351eda2d85249aab3c28b
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-003.tex
   5bfaf91fcad66142:
@@ -59440,9 +59650,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-004.tex
   5d2c024d6ba0e509:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-INFERENCE-BAYESIENNE-C1
+    capacity_ref: TCOMPL-BAYES-C1
     category: blocking_statuses
     chapter: TCOMPL-INFERENCE-BAYESIENNE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -59451,12 +59663,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 8829d2ded23a553f607d8cfcad537f5ca7f7b747241021cd38528ac592a9d4dd
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-INFERENCE-BAYESIENNE/TCOMPL-BAYES-ME-001.review.json
+    review_packet_sha: 0baa2b6e0c7934c25c7bbbf898b411d120f33912073b9c553ce6f1bdb3267474
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/methodes/TCOMPL-BAYES-ME-001.tex
   5d325fff554916df:
@@ -63927,9 +64144,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-034-CDP.tex
   6457bb738aa0a816:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-CALCULS-AIRES-C1
+    capacity_ref: TCOMPL-AIR-C1
     category: blocking_statuses
     chapter: TCOMPL-CALCULS-AIRES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -63938,12 +64157,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: f0454bb4b0bb52ac344ccb859dd16c34415431abf716191c8b27fef49195cd52
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-CALCULS-AIRES/TCOMPL-AIR-ME-001.review.json
+    review_packet_sha: 6f1af46a38f4df8dc3222093e3df3f04ff333d377e182cb8555e5ef4b21b942d
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-CALCULS-AIRES-ME-001.tex
   6462f4fe56163284:
@@ -64351,9 +64575,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-048.tex
   651dd33093c8cd7e:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-COMPLEXES-TRIGO-POLYNOMES-C5
+    capacity_ref: TEXP-CTP-C5
     category: blocking_statuses
     chapter: TEXP-COMPLEXES-TRIGO-POLYNOMES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -64362,12 +64588,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: a6c46a2b1b651675123134154c9c8db4ba8279a72778054013dee5fcd8d28036
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-COMPLEXES-TRIGO-POLYNOMES/TEXP-CTP-ME-005.review.json
+    review_packet_sha: 6b99baee7991e0b8bf96216158f3c3cfb923e33ace6dede6121234ad75da65d9
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-005.tex
   6534eedeb4c258b0:
@@ -64994,9 +65225,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-ADGK-CO-010.tex
   663df7bbf976dcf1:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-MODELES-FONCTION-C6
+    capacity_ref: TCOMPL-MF-C6
     category: blocking_statuses
     chapter: TCOMPL-MODELES-FONCTION
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -65005,12 +65238,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 82b41a59267b4e6eda2adcd447f514516c9a8a492bc09c73a0ad4a2df077705f
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-MODELES-FONCTION/TCOMPL-MF-ME-006.review.json
+    review_packet_sha: 33d641fb9ece30e4d5615b8d9057882ec93680d60e31e862ae52ea92f1ea7342
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-006.tex
   664242b7fc4b7ac7:
@@ -66481,9 +66719,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/exercices/TSPE-LOG-EX-009.tex
   6877641e8fa2f62e:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-COMPLEXES-TRIGO-POLYNOMES-C6
+    capacity_ref: TEXP-CTP-C6
     category: blocking_statuses
     chapter: TEXP-COMPLEXES-TRIGO-POLYNOMES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -66492,12 +66732,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 73e2872bc5b96415e05399431809ec9c36f1f2b20a6861baa37b5f5f661d7832
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-COMPLEXES-TRIGO-POLYNOMES/TEXP-CTP-ME-006.review.json
+    review_packet_sha: 17f11f981bba84f9fffa2bd25fcb4abc2131accf87630fa220deeb783495f05f
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-006.tex
   687c24169fb95dcf:
@@ -66989,9 +67234,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-024.tex
   69653e1c3bea2b5e:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-MATRICES-MARKOV-C6
+    capacity_ref: TEXP-MAT-C6
     category: blocking_statuses
     chapter: TEXP-MATRICES-MARKOV
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -67000,12 +67247,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: d373db265870be31a60a72345c17513fd6bca46b9b2a007e1fa5e308c815cf9e
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-MATRICES-MARKOV/TEXP-MAT-ME-006.review.json
+    review_packet_sha: 61fa7248a09871076b3952f398eb389abf13359c81421639d4dbabd465857867
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-006.tex
   697123c2a315a095:
@@ -67982,9 +68234,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/corriges/TSPE-SUITLIM-CO-027.tex
   6ae81a03b6cc436b:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-GRAPHES-C3
+    capacity_ref: TEXP-GRA-C3
     category: blocking_statuses
     chapter: TEXP-GRAPHES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -67993,12 +68247,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: af4d3eaca465a774a8292075a7eb8b1640f37f39da684482f1de74e8965ffb1e
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-GRAPHES/TEXP-GRA-ME-003.review.json
+    review_packet_sha: 8a3fcafa80840ebf44a43c49bc4afc3d83838cee2d727ce9fbdddefdb83d5153
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/methodes/TEXP-GRA-ME-003.tex
   6af124b87aacea17:
@@ -72500,9 +72759,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM-DIAG.tex
   72442cf47779336b:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-GRAPHES-C2
+    capacity_ref: TEXP-GRA-C2
     category: blocking_statuses
     chapter: TEXP-GRAPHES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -72511,12 +72772,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 57516a44d68bfaf3fb9ac9e61430210f6197c0cb05bd01f61074b9522057e736
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-GRAPHES/TEXP-GRA-ME-002.review.json
+    review_packet_sha: 618cdcd4b88b50b27809d7f586b030a5bc57acc2b91411a6aa9efa062a20bfc3
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/methodes/TEXP-GRA-ME-002.tex
   72458bd11bb5d468:
@@ -72677,9 +72943,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-018.tex
   7268e1fc1b1346b3:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-C2
+    capacity_ref: TEXP-CAG-C2
     category: blocking_statuses
     chapter: TEXP-COMPLEXES-ALGEBRE-GEOMETRIE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -72688,12 +72956,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 21c9dfe21f0d92e0c4ecae9e30207fb5560b76624dc4925e03a95e662aeaa39c
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/TEXP-CAG-ME-002.review.json
+    review_packet_sha: a53a7f9fddc65fd3795a0ac9b4fb22a9b019eace4fa5189d0ab4eaa47cd57c2c
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/methodes/TEXP-CAG-ME-002.tex
   7270a12e04b47b75:
@@ -74005,9 +74278,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-035.tex
   74aacd756bac15f4:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: 1NSI-ALGO-DICHO-GLOUTON-KNN-C2
+    capacity_ref: P-ALGO-05
     category: blocking_statuses
     chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -74016,12 +74291,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: 1NSI
+    method_source_sha: 0bee3bc3e58acd659d21134642e388fc44f5a9069b6ea6592804df09e8d3902a
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/1NSI/1NSI-ALGO-DICHO-GLOUTON-KNN/1NSI-ADGK-ME-002.review.json
+    review_packet_sha: 3058e52187cc072b8e0f180f4c791eb6264c7f6d8fc90538e06bd75ecc44e7ed
     severity: blocking
     source: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-002.tex
   74bf57bc1ae81703:
@@ -78326,9 +78606,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/TNSI-ALGORITHMIQUE/cours/TNSI-ALGO-COURS-03.tex
   7b40f5ed539c5a26:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-GRAPHES-C1
+    capacity_ref: TEXP-GRA-C1
     category: blocking_statuses
     chapter: TEXP-GRAPHES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -78337,12 +78619,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 8de0f1afba5788a951e4efc099924c1ee659bf67c149bcc6f9f3681f0a83b58a
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-GRAPHES/TEXP-GRA-ME-001.review.json
+    review_packet_sha: 2203f64a83fb6dc29d0bdf59c3ee020bf5efa43a51d4763f350d965dd0e1e64d
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/methodes/TEXP-GRA-ME-001.tex
   7b46263e7b30f5e3:
@@ -81639,9 +81926,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/exercices/TNSI-HIST-EX-002.tex
   80d853f9d234f4a5:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-INFERENCE-BAYESIENNE-C4
+    capacity_ref: TCOMPL-BAYES-C4
     category: blocking_statuses
     chapter: TCOMPL-INFERENCE-BAYESIENNE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -81650,12 +81939,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 91490fc2c379f19e1d5e2921656980cca720bfbadeeebe050889cb35cc80b374
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-INFERENCE-BAYESIENNE/TCOMPL-BAYES-ME-004.review.json
+    review_packet_sha: ab053e66278da074e90b88c25c55c8a498c84f8cd87c4c36e8ff2fd9721eeab7
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/methodes/TCOMPL-BAYES-ME-004.tex
   80da45f727fb5817:
@@ -81795,9 +82089,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-050.tex
   8108bdb51a042101:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-MODELES-EVOLUTION-C5
+    capacity_ref: TCOMPL-ME-C5
     category: blocking_statuses
     chapter: TCOMPL-MODELES-EVOLUTION
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -81806,12 +82102,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 2e99c75cc9cd03a5c9ee6279a3584fe36014f16417effaae6d33462fe25812f3
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-MODELES-EVOLUTION/TCOMPL-ME-ME-005.review.json
+    review_packet_sha: b83f5929f175c4270169de7da92feaf42d828309e9948ae0773ddfb50a0b438f
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-005.tex
   811507f995674b58:
@@ -83647,9 +83948,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-002.tex
   83989c3720c75dfe:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-ECHANTILLONNAGE-C2
+    capacity_ref: TCOMPL-ECH-C2
     category: blocking_statuses
     chapter: TCOMPL-ECHANTILLONNAGE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -83658,12 +83961,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 83acd0348257616c87faf90a5c9c915602dc500eeb435a1ebace1584d3b5ef85
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-ECHANTILLONNAGE/TCOMPL-ECH-ME-002.review.json
+    review_packet_sha: ed1062a3f458027428d862b7fdf38fe4479cd85e9eac3d9589e421f302ff3adc
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-002.tex
   8399554c3b2e38a9:
@@ -83883,9 +84191,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/corriges/TSPE-SUITLIM-CO-010.tex
   83dae4249056ea23:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-CORRELATION-CAUSALITE-C2
+    capacity_ref: TCOMPL-CORR-C2
     category: blocking_statuses
     chapter: TCOMPL-CORRELATION-CAUSALITE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -83894,12 +84204,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 5eeac903d0b17af3040542f484aa65d31f0c5fa9263bd44e219c5fb5f259440b
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-CORRELATION-CAUSALITE/TCOMPL-CORR-ME-002.review.json
+    review_packet_sha: c3198bb09412f64853a12b25bb9332a5fea72cf8bf4c678120103942b5187210
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/methodes/TCOMPL-CORR-ME-002.tex
   83e107214e511917:
@@ -84587,9 +84902,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-023.tex
   84c9ef77925f37c7:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-CALCULS-AIRES-C2
+    capacity_ref: TCOMPL-AIR-C2
     category: blocking_statuses
     chapter: TCOMPL-CALCULS-AIRES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -84598,12 +84915,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 4285a372171f0cefed3dabb3df4f75ad4194efdf1c1bdd8bb095de5649dd140d
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-CALCULS-AIRES/TCOMPL-AIR-ME-002.review.json
+    review_packet_sha: 9c670f3f2b2cfd9e22cbe9c6953114b1403fdb8c68783b782438cd2e98057722
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-AIR-ME-002.tex
   84d4b036901701e5:
@@ -84646,9 +84968,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-040.tex
   84db8170cb56eee0:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-TEMPS-ATTENTE-C1
+    capacity_ref: TCOMPL-ATT-C1
     category: blocking_statuses
     chapter: TCOMPL-TEMPS-ATTENTE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -84657,12 +84981,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 592dd3b05f46f1cf67c1e85753858e0863ea634305557a92419d231156ad73f1
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-TEMPS-ATTENTE/TCOMPL-ATT-ME-001.review.json
+    review_packet_sha: 04ab912e12e9f572e16f580b309c113e28d7ce701b8efc5e3307980b22849118
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-001.tex
   84dbe8c8e5b04133:
@@ -87067,9 +87396,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/exercices/TCOMPL-ME-EX-003.tex
   88b5b9d05ca06bcb:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-INFERENCE-BAYESIENNE-C5
+    capacity_ref: TCOMPL-BAYES-C5
     category: blocking_statuses
     chapter: TCOMPL-INFERENCE-BAYESIENNE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -87078,12 +87409,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: cfad357358ad69a8957d5964aa5700c3f3ef0a0bb1b19110886371101a85ee35
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-INFERENCE-BAYESIENNE/TCOMPL-BAYES-ME-005.review.json
+    review_packet_sha: ee28b61d76bbeba8ad546ff4b7239b3d0c969b4d50d3e83f322b4b6894f21521
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/methodes/TCOMPL-BAYES-ME-005.tex
   88ba7d8e7050a336:
@@ -90713,9 +91049,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B-corrige.tex
   8eb2eaac657922e4:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-ARITHMETIQUE-C1
+    capacity_ref: TEXP-ARI-C1
     category: blocking_statuses
     chapter: TEXP-ARITHMETIQUE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -90724,12 +91062,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 7d9f2fd64edc6bb396d2a59894e3dc9d6f67ff7f18a391b9352243c3d131ed00
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-ARITHMETIQUE/TEXP-ARI-ME-001.review.json
+    review_packet_sha: 53c132a64dc55b8aee5b81ac4aa881c4b8a1deff979a39ea1bfb084fa41bd616
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-001.tex
   8ec02a14bd0b6ad8:
@@ -93847,9 +94190,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/corriges/TSPE-SUITLIM-CO-005.tex
   931d7cde398a47b3:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-ECHANTILLONNAGE-C1
+    capacity_ref: TCOMPL-ECH-C1
     category: blocking_statuses
     chapter: TCOMPL-ECHANTILLONNAGE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -93858,12 +94203,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: fd44dd434086469aac03a4902a47f41783d4b415c9dbb566991baae666f85aba
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-ECHANTILLONNAGE/TCOMPL-ECH-ME-001.review.json
+    review_packet_sha: 1a2f2edc58896996ba05984c3ad579269ba4f21bd5216faa4592f91334d158a7
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-001.tex
   931ddb44e2637b0d:
@@ -94701,9 +95051,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-039.tex
   9454cca9ee56bf2a:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-MODELES-EVOLUTION-C4
+    capacity_ref: TCOMPL-ME-C4
     category: blocking_statuses
     chapter: TCOMPL-MODELES-EVOLUTION
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -94712,12 +95064,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: e4f2f9219e42e4ff772c30d9ce2ea2cc0127656fbd7a6f02d9549cb5e9126b39
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-MODELES-EVOLUTION/TCOMPL-ME-ME-004.review.json
+    review_packet_sha: b3c9ab446da16fd97db394e157c7c152187ce795128d50c4235deb6e674db6e8
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-004.tex
   9457ea0974d6c813:
@@ -100384,9 +100741,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-028.tex
   9ce6275a9fbf8c6f:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-INFERENCE-BAYESIENNE-C3
+    capacity_ref: TCOMPL-BAYES-C3
     category: blocking_statuses
     chapter: TCOMPL-INFERENCE-BAYESIENNE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -100395,12 +100754,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 05faf251d10cb3d1ea0e7745a5e55bdb0732379a9b2f1c8959650cd2279b7f91
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-INFERENCE-BAYESIENNE/TCOMPL-BAYES-ME-003.review.json
+    review_packet_sha: b2f595be670c612b90ebac40ae42a5b4c8d6e2e3dc8309b5b94f24439097a8d7
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/methodes/TCOMPL-BAYES-ME-003.tex
   9cec24d36e1228ae:
@@ -101744,9 +102108,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-018.tex
   9f4c22f13c2d24c2:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-CALCULS-AIRES-C5
+    capacity_ref: TCOMPL-AIR-C5
     category: blocking_statuses
     chapter: TCOMPL-CALCULS-AIRES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -101755,12 +102121,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 65ed7cf698e4387ab3a810cdc646d6d890235b5126927aa6d2776df200b05a87
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-CALCULS-AIRES/TCOMPL-AIR-ME-005.review.json
+    review_packet_sha: fd92b253d2c7996c920182cf04963ab3e51f54c9b22c9b62f50c1bec63b2c79b
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-AIR-ME-005.tex
   9f51bda5ca7c1f5d:
@@ -101920,9 +102291,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-005.tex
   9f9231b9f41e4b8b:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-MODELES-EVOLUTION-C3
+    capacity_ref: TCOMPL-ME-C3
     category: blocking_statuses
     chapter: TCOMPL-MODELES-EVOLUTION
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -101931,12 +102304,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 1d9a76291ca3c9eff307b32805f16e284d738f8ae3148082262f4dcba79b4fa2
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-MODELES-EVOLUTION/TCOMPL-ME-ME-003.review.json
+    review_packet_sha: 664eea1a433583cc9d236b0ac0cf08f218e01f802553cdc59cb2a349f2d5c90a
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/methodes/TCOMPL-ME-ME-003.tex
   9f962d8305bcbc85:
@@ -102538,9 +102916,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-049.tex
   a0753d0aba4d02a8:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-ARITHMETIQUE-C3
+    capacity_ref: TEXP-ARI-C3
     category: blocking_statuses
     chapter: TEXP-ARITHMETIQUE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -102549,12 +102929,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 376ff79f6de60e4266f802eee0aa03887acdae751f897f857f138921c95fc5cb
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-ARITHMETIQUE/TEXP-ARI-ME-003.review.json
+    review_packet_sha: a770228113b94fd59e77b1053e831994a7eacdb27e24f7c99afc5673b8ed1a14
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-003.tex
   a07c00feb0af2ce7:
@@ -104518,9 +104903,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/corriges/TSPE-LOG-CO-016.tex
   a3d1aec470dce9e8:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-MODELES-FONCTION-C5
+    capacity_ref: TCOMPL-MF-C5
     category: blocking_statuses
     chapter: TCOMPL-MODELES-FONCTION
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -104529,12 +104916,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 4a65f9d140f1c3a212c2e66142c81292dd6d55168da4dc041ba417a7ab2cce5b
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-MODELES-FONCTION/TCOMPL-MF-ME-005.review.json
+    review_packet_sha: 8c0bc0db0a38e67b9d506e437cd73c861ed48e9d2e9c387b32a4c067b29d952b
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-005.tex
   a3d8028f3f119334:
@@ -105702,9 +106094,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-040.tex
   a54fcaaa934aa84d:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-INEGALITES-C2
+    capacity_ref: TCOMPL-INEG-C2
     category: blocking_statuses
     chapter: TCOMPL-INEGALITES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -105713,12 +106107,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: b1df251ca8944acb573ecdea5b57a5399ff92104f1a361e9a6c8d243f492fc8b
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-INEGALITES/TCOMPL-INEG-ME-002.review.json
+    review_packet_sha: 91102e1ae56faae87de1fa59a28a65c28b867eed898e494c05d3529fc81083b1
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/methodes/TCOMPL-INEG-ME-002.tex
   a5639e5b0c97caf0:
@@ -106228,9 +106627,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-019.tex
   a6270d4ed2dba761:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-CALCULS-AIRES-C4
+    capacity_ref: TCOMPL-AIR-C4
     category: blocking_statuses
     chapter: TCOMPL-CALCULS-AIRES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -106239,12 +106640,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 0d77556b1c64e1bc71f9d511e059cd25418e3f8b40d7ffa12619b349f4f43739
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-CALCULS-AIRES/TCOMPL-AIR-ME-004.review.json
+    review_packet_sha: a462f6040d73229538a3c01d8225d15bfd2b1344299ad43e15fdee385a817da2
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/methodes/TCOMPL-AIR-ME-004.tex
   a629ba04f6f3fa52:
@@ -110655,9 +111061,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/cours/07_td_contextualise.tex
   ae6389117fc89d5f:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-MATRICES-MARKOV-C7
+    capacity_ref: TEXP-MAT-C7
     category: blocking_statuses
     chapter: TEXP-MATRICES-MARKOV
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -110666,12 +111074,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: b8b28e2f52d3578a17524d957eb3046b6eab60ad2221300935ef138a5c18b680
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-MATRICES-MARKOV/TEXP-MAT-ME-007.review.json
+    review_packet_sha: 036e91c0ad0372b8401b31c6290a3a2d088859bfb41864fa59202f9932ab2d69
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-007.tex
   ae645642e0bd417f:
@@ -111643,9 +112056,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-035.tex
   afcba49c06c9409b:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-INEGALITES-C3
+    capacity_ref: TCOMPL-INEG-C3
     category: blocking_statuses
     chapter: TCOMPL-INEGALITES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -111654,12 +112069,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 3fb2e9b85fe6be78304cf8a36e4555caf9b775a0720c51e85e1e0efe7c6450a2
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-INEGALITES/TCOMPL-INEG-ME-003.review.json
+    review_packet_sha: 364911c7820658ce125795d02d98e7efd272780e02785cfbad702f8b78814fd5
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/methodes/TCOMPL-INEG-ME-003.tex
   afcd82716247677b:
@@ -111938,9 +112358,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/exercices/TCOMPL-BAYES-EX-022.tex
   b0b81c9742c416e1:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: 1NSI-ALGO-DICHO-GLOUTON-KNN-C3
+    capacity_ref: P-ALGO-03
     category: blocking_statuses
     chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -111949,12 +112371,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: 1NSI
+    method_source_sha: 6db1bec7ba0de560cb2c8867882c49ee5bce30f0f9fca577acfefa051f6005cd
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/1NSI/1NSI-ALGO-DICHO-GLOUTON-KNN/1NSI-ADGK-ME-003.review.json
+    review_packet_sha: 5a6a006f36108bc97ad880bf478378025f2dc3972bece90e645d20f4336f1db4
     severity: blocking
     source: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-003.tex
   b0c5469f6166f019:
@@ -113050,9 +113477,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-041.tex
   b2abd47781d37139:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-MATRICES-MARKOV-C4
+    capacity_ref: TEXP-MAT-C4
     category: blocking_statuses
     chapter: TEXP-MATRICES-MARKOV
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -113061,12 +113490,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 6b218474c394ba3ed64c0ccbebe94c2394168fb88e8fdf284c65fc0843fccd89
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-MATRICES-MARKOV/TEXP-MAT-ME-004.review.json
+    review_packet_sha: 23301e31cb596a7c28e3e03eae72fb83f1a6c6372e6eb6adef98fdf701d14007
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-004.tex
   b2ac11e5b79becc9:
@@ -114282,9 +114716,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-039.tex
   b488ade29a5828f1:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-TEMPS-ATTENTE-C5
+    capacity_ref: TCOMPL-ATT-C5
     category: blocking_statuses
     chapter: TCOMPL-TEMPS-ATTENTE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -114293,12 +114729,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 69d72b979e4d60b43dfc518cb6da1ff9368ea56e54ec0868285512f07343622d
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-TEMPS-ATTENTE/TCOMPL-ATT-ME-005.review.json
+    review_packet_sha: d47fb375e9f93ffd768434c82164385ed3259f62de55244cda107eae838445c1
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/methodes/TCOMPL-ATT-ME-005.tex
   b49e84bed68d81a7:
@@ -116283,9 +116724,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-001.tex
   b82fe87c65ab5b4b:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-C3
+    capacity_ref: TEXP-CAG-C3
     category: blocking_statuses
     chapter: TEXP-COMPLEXES-ALGEBRE-GEOMETRIE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -116294,12 +116737,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: d9ccb0e945ff594ed159d53a0a467b8b81c9f54f2b77841e7584f16aafe32a0c
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/TEXP-CAG-ME-003.review.json
+    review_packet_sha: 8bba33d920b42482851645910a59816ddd79a9a35199519e0f282445e2926b59
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/methodes/TEXP-CAG-ME-003.tex
   b8519684f7bbc16b:
@@ -118508,9 +118956,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-RE-C3-CORRIGE.tex
   bb2cf6d945cb6cd5:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-CORRELATION-CAUSALITE-C5
+    capacity_ref: TCOMPL-CORR-C5
     category: blocking_statuses
     chapter: TCOMPL-CORRELATION-CAUSALITE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -118519,12 +118969,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 73f7c9480df19dacb25d8ab41ca70517923de4c0276fb4b6a9c9ea8b0062cce4
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-CORRELATION-CAUSALITE/TCOMPL-CORR-ME-005.review.json
+    review_packet_sha: c53ae8160b55cf9c22c32b752140762e207098d3cad3654f656ee5608ad63af6
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/methodes/TCOMPL-CORR-ME-005.tex
   bb2e391bb374959d:
@@ -120723,9 +121178,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-043.tex
   bf30ca02ed1a0de7:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-MATRICES-MARKOV-C3
+    capacity_ref: TEXP-MAT-C3
     category: blocking_statuses
     chapter: TEXP-MATRICES-MARKOV
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -120734,12 +121191,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: da569370e6c2089cb72aa34bb53b84f5fc5c122dbfacf4680ed62c1df1e35a4f
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-MATRICES-MARKOV/TEXP-MAT-ME-003.review.json
+    review_packet_sha: 07f75431dd6edd8be61487e32d17d5116c8ab269cf51e48dbf9d5387b74524ec
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-003.tex
   bf3fda63b5edafa4:
@@ -121051,9 +121513,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/remediation/TNSI-HIST-REMED-01.tex
   bf8b8407281f12c7:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-COMPLEXES-TRIGO-POLYNOMES-C2
+    capacity_ref: TEXP-CTP-C2
     category: blocking_statuses
     chapter: TEXP-COMPLEXES-TRIGO-POLYNOMES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -121062,12 +121526,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 3cafcef30eaf1725a6b1523fb21b473ea2184bc5c2dfd74a17352e0bc2e81442
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-COMPLEXES-TRIGO-POLYNOMES/TEXP-CTP-ME-002.review.json
+    review_packet_sha: 4799c8837ad18917d7bcb63ebc6b5d56e8bb8d685e20afbf47d6b2a5cbd6b723
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-002.tex
   bf8fdb2da116358e:
@@ -122031,9 +122500,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/evaluations/TSPE-LIMFCT-EV-A-corrige.tex
   c0db390090910a45:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-COMPLEXES-TRIGO-POLYNOMES-C1
+    capacity_ref: TEXP-CTP-C1
     category: blocking_statuses
     chapter: TEXP-COMPLEXES-TRIGO-POLYNOMES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -122042,12 +122513,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 95a6176fc083a0cf5180ddb91b19b84ca254abb489a564a70a634cb3bd58b68b
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-COMPLEXES-TRIGO-POLYNOMES/TEXP-CTP-ME-001.review.json
+    review_packet_sha: f7527cde95fd2e59e2fdbb9b4f0296ebe5911558bdfcf5ffab952e03b27c047b
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-001.tex
   c0e0f3e17e0e2de0:
@@ -123103,9 +123579,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/corriges/TSPE-PROBA-CO-018.tex
   c298d72b87aa5543:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-ARITHMETIQUE-C2
+    capacity_ref: TEXP-ARI-C2
     category: blocking_statuses
     chapter: TEXP-ARITHMETIQUE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -123114,12 +123592,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 10cdb84851ac6661775836bd3c50dac4e59349bc11787785a294d99369fb3bf2
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-ARITHMETIQUE/TEXP-ARI-ME-002.review.json
+    review_packet_sha: 2c42bbd4e68adb06c44f0bfa52c2d144b827a01de8372a292b0a633fcaa591ea
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-002.tex
   c29919cd56483c7a:
@@ -125611,9 +126094,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-007.tex
   c728b984c4f7958b:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-ARITHMETIQUE-C4
+    capacity_ref: TEXP-ARI-C4
     category: blocking_statuses
     chapter: TEXP-ARITHMETIQUE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -125622,12 +126107,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 4f64dc80d6fe0c06450d2dcb5281917a0fb721f7317d07d8203bf02d8840df0d
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-ARITHMETIQUE/TEXP-ARI-ME-004.review.json
+    review_packet_sha: 98b3e39cba62d4dd2f44ca310b39a3e9ea64ead4e3d9d78f0c57ecdfb9015dc5
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-004.tex
   c729b4a76f27c6dc:
@@ -126354,9 +126844,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-013.tex
   c858f076fae10c27:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-GRAPHES-C5
+    capacity_ref: TEXP-GRA-C5
     category: blocking_statuses
     chapter: TEXP-GRAPHES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -126365,12 +126857,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 5414b39ee5888fff39c1adbe78c3f0e20aef4198eede1abda936066dede81c67
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-GRAPHES/TEXP-GRA-ME-005.review.json
+    review_packet_sha: a49eadf5ad878e2655e5087b1be34eacce14fa236e2efae0626ec808903e2211
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/methodes/TEXP-GRA-ME-005.tex
   c85c5f4f0d30b2bc:
@@ -127951,9 +128448,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/cours/07_td_contextualise.tex
   caad266bff908115:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-ECHANTILLONNAGE-C4
+    capacity_ref: TCOMPL-ECH-C4
     category: blocking_statuses
     chapter: TCOMPL-ECHANTILLONNAGE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -127962,12 +128461,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: ddc7bd245ee77fd686248c4e4b612d5f898988c506a0f20e06d276c6e18582c4
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-ECHANTILLONNAGE/TCOMPL-ECH-ME-004.review.json
+    review_packet_sha: e2042ab024c7564fabab0fdb9fa84e64784cb766be533e20482a482586a9b380
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/methodes/TCOMPL-ECH-ME-004.tex
   cabbfaa3d780ae38:
@@ -130577,9 +131081,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-021.tex
   cedc0c971f03a4de:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-MATRICES-MARKOV-C5
+    capacity_ref: TEXP-MAT-C5
     category: blocking_statuses
     chapter: TEXP-MATRICES-MARKOV
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -130588,12 +131094,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 19bb4d52bd847bdf2abecab848369fb62514c69ebe54e88117aa863f13f369d6
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-MATRICES-MARKOV/TEXP-MAT-ME-005.review.json
+    review_packet_sha: 2d0870aa1e8a07822308c356cf0922680a2a47b69f4cbfc0e0f25004b2730ab0
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-005.tex
   cee6ba7384e4df1d:
@@ -136175,9 +136686,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-016.tex
   d6db49d30489ae12:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-ARITHMETIQUE-C6
+    capacity_ref: TEXP-ARI-C6
     category: blocking_statuses
     chapter: TEXP-ARITHMETIQUE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -136186,12 +136699,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 9d8e8eb0745c7ce68c589f02fa2ff80930a292bde793d1f8c6adc8fd76d799e3
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-ARITHMETIQUE/TEXP-ARI-ME-006.review.json
+    review_packet_sha: c99424cc6146b9fe46495ad5aad79b7acb527989aec2da0947811e6519429684
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-006.tex
   d6de56fe4290521b:
@@ -138252,9 +138770,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-020.tex
   d960733fa0bd1035:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-CORRELATION-CAUSALITE-C4
+    capacity_ref: TCOMPL-CORR-C4
     category: blocking_statuses
     chapter: TCOMPL-CORRELATION-CAUSALITE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -138263,12 +138783,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 364cc1f3f22b035b04dbf49f92bc98efff22ed1cd9554792ddab972123e152e6
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-CORRELATION-CAUSALITE/TCOMPL-CORR-ME-004.review.json
+    review_packet_sha: 0d2d7e930f6bcd2e049d7f13c0b0807fb2866e5ced6c3184ef6257208bc307c2
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/methodes/TCOMPL-CORR-ME-004.tex
   d96828f3be259afc:
@@ -139230,9 +139755,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-045.tex
   db10ea45bab2b3a2:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-ARITHMETIQUE-C5
+    capacity_ref: TEXP-ARI-C5
     category: blocking_statuses
     chapter: TEXP-ARITHMETIQUE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -139241,12 +139768,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 9c1d49c24943725e3d52d9ca8c27f73b234aba398bea8bc3d147f29b128c7b33
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-ARITHMETIQUE/TEXP-ARI-ME-005.review.json
+    review_packet_sha: 3b97d979c8aa32c71d1a53c07cad522d26cd7d5865e83319ab763cec7e0e21f4
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/methodes/TEXP-ARI-ME-005.tex
   db17560414b446fa:
@@ -139501,9 +140033,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-002.tex
   db730bde1c3ed617:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-LOGARITHME-HISTORIQUE-C1
+    capacity_ref: TCOMPL-LOG-C1
     category: blocking_statuses
     chapter: TCOMPL-LOGARITHME-HISTORIQUE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -139512,12 +140046,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 0921e4d0c09e9d3d3f035eeb1ec33aced595383cae923c46c3195b4febe2469f
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-LOGARITHME-HISTORIQUE/TCOMPL-LOG-ME-001.review.json
+    review_packet_sha: 7fd519d2f81bcd91d253092fe90280cb18b5c12e9f0705431d9588d5b7b3e76b
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/methodes/TCOMPL-LOG-ME-001.tex
   db7624a07bd5db40:
@@ -139815,9 +140354,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EV-B-corrige.tex
   dc0025fc58dc2e34:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: 1SPE-TRIGONOMETRIE-C4
+    capacity_ref: 1SPE-TRIGONOMETRIE-C4
     category: blocking_statuses
     chapter: 1SPE-TRIGONOMETRIE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -139826,12 +140367,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: 1SPE
+    method_source_sha: e39611c6b2de2bee0dc0c03e7668473455b930af338f953d6e64813c53dc4709
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/1SPE-TRIGO-ME-004.review.json
+    review_packet_sha: afa008f8457675d97e9d71f080755a848c432aa2610b69a21b85ad6a0acacab9
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/methodes/1SPE-TRIGO-ME-004.tex
   dc0af25ba94e247a:
@@ -147526,9 +148072,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-014.tex
   e9cb7ad0c70884b7:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-COMPLEXES-TRIGO-POLYNOMES-C7
+    capacity_ref: TEXP-CTP-C7
     category: blocking_statuses
     chapter: TEXP-COMPLEXES-TRIGO-POLYNOMES
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -147537,12 +148085,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 97479f766d80de60f77daa5866d55d5b2559726bec653d82fd592cdf4045de28
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-COMPLEXES-TRIGO-POLYNOMES/TEXP-CTP-ME-007.review.json
+    review_packet_sha: 4de35d16e14c770f102bd225ab97a6f2b1f684c78db3dddb824444d2e1e6b2de
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-007.tex
   e9daa9488fb9fa71:
@@ -147763,9 +148316,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/evaluations/TEXP-GRA-EV-A-corrige.tex
   ea40b78c1f105bcf:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-MODELES-FONCTION-C3
+    capacity_ref: TCOMPL-MF-C3
     category: blocking_statuses
     chapter: TCOMPL-MODELES-FONCTION
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -147774,12 +148329,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 4e8536737b3b9b131189b508518da82989a066209c4a977981a5fe3b317f7572
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-MODELES-FONCTION/TCOMPL-MF-ME-003.review.json
+    review_packet_sha: 6ad28068053fdfead597c2dd23a779754a7736c44d50511df0e4c4726405716c
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-003.tex
   ea45e670226b4d6b:
@@ -149829,9 +150389,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-036.tex
   ed9e59a472a9e4a5:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: 1NSI-ALGO-DICHO-GLOUTON-KNN-C1
+    capacity_ref: P-ALGO-04
     category: blocking_statuses
     chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -149840,12 +150402,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: 1NSI
+    method_source_sha: a1d9f7f86aa92ebe761c930ebfb54164ec5f868505e6460e5cbdc3ec3f0918ac
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/1NSI/1NSI-ALGO-DICHO-GLOUTON-KNN/1NSI-ADGK-ME-001.review.json
+    review_packet_sha: 0382d5acf876d65aa440561fa1426218db95063de9f367932fa851609a4ba258
     severity: blocking
     source: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-001.tex
   edad81f890374a70:
@@ -153747,9 +154314,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-031.tex
   f473b8a850a04afc:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-MODELES-FONCTION-C1
+    capacity_ref: TCOMPL-MF-C1
     category: blocking_statuses
     chapter: TCOMPL-MODELES-FONCTION
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -153758,12 +154327,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: a5ca7032a265f6c09a576174b94969700248ab5d5526b965fa959a0c1d1b031b
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-MODELES-FONCTION/TCOMPL-MF-ME-001.review.json
+    review_packet_sha: f99c6a2d27e062e976538cd1109bb9f44126400b49ad5c7a399e31034501515e
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/methodes/TCOMPL-MF-ME-001.tex
   f48bbd7642b47fc6:
@@ -153825,9 +154399,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/exercices/TSPE-LOG-EX-017.tex
   f49896a42f0000d4:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-MATRICES-MARKOV-C2
+    capacity_ref: TEXP-MAT-C2
     category: blocking_statuses
     chapter: TEXP-MATRICES-MARKOV
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -153836,12 +154412,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 8f8fae552b144feda5ee3a795dcfc9a13652510fef245a8bc64e86164955e422
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-MATRICES-MARKOV/TEXP-MAT-ME-002.review.json
+    review_packet_sha: a12c370c247508106cff12751261da97ae247a334995b311c3f37bd73d3605cf
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/methodes/TEXP-MAT-ME-002.tex
   f4995694ce0acad8:
@@ -154390,9 +154971,11 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-PROJET-METHODES/qcm/1NSI-PROJET-METHODES-QCM.tex
   f55beaf4faa24cc5:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TCOMPL-CORRELATION-CAUSALITE-C1
+    capacity_ref: TCOMPL-CORR-C1
     category: blocking_statuses
     chapter: TCOMPL-CORRELATION-CAUSALITE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -154401,12 +154984,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TCOMPL
+    method_source_sha: 053a0e2defc72dd6b1865c06cfc7b0a89b7b3dd6d45d9e26c1ae23afb04a01bc
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TCOMPL/TCOMPL-CORRELATION-CAUSALITE/TCOMPL-CORR-ME-001.review.json
+    review_packet_sha: 70949f6e70f9e1981ca5c4fef82fcc1f73200d8ccb5df79b9c13c3586c1c60d5
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/methodes/TCOMPL-CORR-ME-001.tex
   f56f559b2807e989:
@@ -155756,9 +156344,11 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-034.tex
   f7bcb21fb088ddda:
-    approved_by: Alaeddine Ben Rhouma
+    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode n'est revendiquée)
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
+    capacity_id: TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-C1
+    capacity_ref: TEXP-CAG-C1
     category: blocking_statuses
     chapter: TEXP-COMPLEXES-ALGEBRE-GEOMETRIE
     decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
@@ -155767,12 +156357,17 @@ dispositions:
     fingerprint_schema_version: 1
     justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i), statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
     manual: TEXPERTES
+    method_source_sha: 3841c305f761472839d53883f3d06a09db5dfdc37ee845c87ba9955097b4777d
     owner: direction_scientifique_programme
+    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:b5285bdb6364b836d064bdf763cf3305574ccaa505fa19e194992c146b18396c
+    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
     qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
+    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
     release_blocking: true
+    review_packet: audit/reviews/methods/TEXPERTES/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/TEXP-CAG-ME-001.review.json
+    review_packet_sha: 5d72e96471ebe0d0a6321ae9d92a877e33b75a0950268776593ac75218a4bb36
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/methodes/TEXP-CAG-ME-001.tex
   f7bcf791a008379f:

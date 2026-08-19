@@ -863,6 +863,96 @@ def _classify_is_production(
     ) == "production_object"
 
 
+def _a4_method_review_debt_violations(
+    root: Path, record: Mapping[str, Any]
+) -> list[str]:
+    """Live re-verification of an EXPECTED_REVIEW_DEBT qualification derived
+    from the class-level human decision A4_METHOD_REVIEW_DEBT_POLICY.md.
+
+    The human decision authorised ONE class of transitions; every derived
+    record must therefore stay bound to the exact policy text, the exact
+    method source and the exact review packet it was derived from. Any drift
+    (policy edited, method edited, packet missing or stale, status promoted
+    without review) invalidates the derived qualification until a new
+    explicit human decision.
+    """
+    fingerprint = str(record.get("fingerprint", ""))
+    violations: list[str] = []
+    policy_path = root / "audit/A4_METHOD_REVIEW_DEBT_POLICY.md"
+    if not policy_path.is_file():
+        return [
+            "politique A4 EXPECTED_REVIEW_DEBT introuvable: "
+            f"qualification dérivée invalide fp={fingerprint}"
+        ]
+    policy_digest = (
+        "sha256:" + hashlib.sha256(policy_path.read_bytes()).hexdigest()
+    )
+    if record.get("qualification_policy_digest") != policy_digest:
+        violations.append(
+            "politique A4 modifiée sans nouvelle décision humaine: "
+            f"qualification dérivée invalide fp={fingerprint}"
+        )
+    source = str(record.get("source", ""))
+    source_path = root / source
+    method_source_sha = record.get("method_source_sha")
+    if not isinstance(method_source_sha, str) or not method_source_sha:
+        violations.append(
+            f"method_source_sha absent de la qualification fp={fingerprint}"
+        )
+    elif not source_path.is_file():
+        violations.append(
+            f"source de la fiche méthode introuvable fp={fingerprint}: {source}"
+        )
+    elif (
+        hashlib.sha256(source_path.read_bytes()).hexdigest()
+        != method_source_sha
+    ):
+        violations.append(
+            "fiche méthode modifiée après qualification (STALE) "
+            f"fp={fingerprint}: {source}"
+        )
+    packet_rel = record.get("review_packet")
+    packet_sha = record.get("review_packet_sha")
+    if not isinstance(packet_rel, str) or not packet_rel:
+        violations.append(
+            f"review_packet absent de la qualification fp={fingerprint}"
+        )
+    elif not isinstance(packet_sha, str) or not packet_sha:
+        violations.append(
+            f"review_packet_sha absent de la qualification fp={fingerprint}"
+        )
+    else:
+        packet_path = root / packet_rel
+        if not packet_path.is_file():
+            violations.append(
+                "packet de revue manquant: qualification invalide "
+                f"fp={fingerprint}: {packet_rel}"
+            )
+        elif (
+            hashlib.sha256(packet_path.read_bytes()).hexdigest() != packet_sha
+        ):
+            violations.append(
+                "packet de revue modifié après qualification (STALE) "
+                f"fp={fingerprint}: {packet_rel}"
+            )
+    if source_path.is_file():
+        try:
+            first_line = source_path.read_text(encoding="utf-8").split("\n")[0]
+            meta = json.loads(first_line.split("% META:", 1)[1])
+        except (IndexError, ValueError, UnicodeDecodeError):
+            violations.append(
+                f"META de la fiche méthode illisible fp={fingerprint}: {source}"
+            )
+        else:
+            if meta.get("status") != "needs_review":
+                violations.append(
+                    "statut promu sans revue humaine "
+                    f"({meta.get('status')}) alors que la dette A4 est "
+                    f"ouverte fp={fingerprint}: {source}"
+                )
+    return violations
+
+
 def _load_dispositions(root: Path) -> dict[str, dict[str, Any]]:
     payload = _load_control_yaml_payload(
         root / ANOMALY_DISPOSITIONS_FILE,
@@ -960,6 +1050,10 @@ def _load_dispositions(root: Path) -> dict[str, dict[str, Any]]:
         for expiry_field in ("expires_at", "expiry"):
             if expiry_field in value:
                 _parse_disposition_expiry(value[expiry_field])
+        if value.get("decision_ref") == A4_METHOD_REVIEW_DEBT_DECISION_REF:
+            violations = _a4_method_review_debt_violations(root, value)
+            if violations:
+                raise InventoryError("; ".join(violations))
         raw_dispositions[fingerprint] = _canonicalize(dict(value))
     return raw_dispositions
 
