@@ -1,0 +1,64 @@
+% META: {"id": "TCOMPL-INEG-ME-005", "chapitre": "TCOMPL-INEGALITES", "type_objet": "methode", "capacites_codes": ["C5"], "methodes": ["M5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational, exp, E, simplify
+% x = symbols('x')
+% A2 = integrate(x - (exp(x)-1)/(E-1), (x, 0, 1))
+% G2 = simplify(2*A2)
+% # G = 2*(1/2 - (E-2)/(E-1)) = (3-E)/(E-1)
+% assert simplify(G2 - (3-E)/(E-1)) == 0
+% assert 0 < float(G2) < 1
+% END-VERIFY
+\begin{fichemethode}{M5}{Calculer l'indice de Gini par une integrale}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque la courbe de Lorenz est modelisee par une
+  fonction $L$ et que l'enonce demande le calcul EXACT de l'indice de Gini par
+  une integrale.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Ecrire l'aire entre la bissectrice et la courbe :
+      $\mathcal{A} = \displaystyle\int_0^1 \bigl(x - L(x)\bigr)\,dx$
+      (la bissectrice est au-dessus car $L$ est convexe avec $L(0)=0$, $L(1)=1$).
+    \item Determiner une primitive de $x - L(x)$ (fiches primitives usuelles).
+    \item Calculer l'integrale avec $\bigl[F(x)\bigr]_0^1 = F(1) - F(0)$.
+    \item Conclure $G = 2\mathcal{A}$ et donner la valeur exacte puis un arrondi.
+    \item Interpreter la valeur obtenue (proche de 0 : egalitaire ; proche de
+      1 : tres inegalitaire) et comparer si l'enonce fournit un autre modele.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Calculer l'indice de Gini du modele $L(x) = \dfrac{e^x - 1}{e - 1}$.
+
+  \medskip
+  \commentaireMarge{Primitive de $x$ : $\frac{x^2}{2}$ ; de $e^x$ : $e^x$.}%
+  $\mathcal{A} = \displaystyle\int_0^1 \left(x - \dfrac{e^x - 1}{e-1}\right) dx
+  = \left[\dfrac{x^2}{2} - \dfrac{e^x - x}{e-1}\right]_0^1
+  = \dfrac{1}{2} - \dfrac{e-2}{e-1}$.
+
+  \medskip
+  D'ou $G = 2\mathcal{A} = 1 - \dfrac{2(e-2)}{e-1} = \dfrac{3-e}{e-1}
+  \approx 0{,}16$ : repartition assez proche de l'egalite.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Inverser l'ordre : integrer $L(x) - x$ donne une aire
+      negative.
+    \item \textbf{Piege 2.} Oublier le facteur 2 dans $G = 2\mathcal{A}$.
+    \item \textbf{Piege 3.} Faute de primitive sur le terme constant
+      ($\frac{1}{e-1}$ se primitive en $\frac{x}{e-1}$, a ne pas oublier).
+  \end{itemize}
+}
+
+\verifier{%
+  Controler $0 \leq G \leq 1$, retrouver l'ordre de grandeur par lecture
+  graphique de l'aire, et tester le cas limite $L(x) = x$ (qui doit donner
+  $G = 0$).
+}
+
+\sEntrainer{\refExos{M5}}
+
+\end{fichemethode}

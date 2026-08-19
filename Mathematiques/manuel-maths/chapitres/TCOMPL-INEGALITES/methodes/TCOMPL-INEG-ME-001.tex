@@ -1,42 +1,57 @@
-% META: {"id": "TCOMPL-INEG-ME-001", "chapitre": "TCOMPL-INEGALITES", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "sources_inspiration": [], "status": "approved"}
-\begin{fichemethode}{M1}{Deriver une fonction composee}
+% META: {"id": "TCOMPL-INEG-ME-001", "chapitre": "TCOMPL-INEGALITES", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M1}{Construire et interpreter une courbe de Lorenz}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque la fonction a deriver fait intervenir une composition : $\mathrm{e}^{u(x)}$, $\ln(u(x))$, $(u(x))^n$, $\sqrt{u(x)}$, ou plus generalement $v(u(x))$.
+  Utiliser cette methode lorsque l'enonce fournit une repartition (revenus,
+  patrimoines, ventes...) par quantiles et demande de construire ou de lire la
+  courbe de Lorenz.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item \textbf{Identifier la fonction exterieure $v$ et la fonction interieure $u$.}
-    \item \textbf{Calculer $u'(x)$.}
-    \item \textbf{Calculer $v'(t)$.}
-    \item \textbf{Appliquer la formule :} $(v \circ u)'(x) = u'(x) \times v'(u(x))$.
-    \item \textbf{Simplifier} l'expression obtenue.
+    \item Classer les parts par ordre CROISSANT (des plus modestes aux plus
+      eleves).
+    \item Calculer les frequences cumulees croissantes de la population ($x$) et
+      de la grandeur repartie ($y$) — les deux entre 0 et 1 (ou en \%).
+    \item Placer les points $(x_i\,;\,y_i)$, en ajoutant toujours $(0\,;\,0)$
+      et $(1\,;\,1)$, et les relier.
+    \item Tracer la premiere bissectrice $y = x$ (droite d'egalite parfaite).
+    \item Interpreter un point : « les $100x\,\%$ les plus modestes detiennent
+      $100y\,\%$ du total » ; plus la courbe s'ecarte de la bissectrice, plus la
+      repartition est inegalitaire.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  \textbf{Exemple.} Deriver $f(x) = \mathrm{e}^{x^2 - 3x}$.
+  Dans un pays, les 50\,\% les plus modestes detiennent 25\,\% du revenu total,
+  et les 80\,\% les plus modestes en detiennent 60\,\%. Placer les points cles
+  et interpreter.
 
   \medskip
-  \commentaireMarge{Identifier : $v(t) = \mathrm{e}^t$, $u(x) = x^2 - 3x$.}%
-  Fonction interieure : $u(x) = x^2 - 3x$, donc $u'(x) = 2x - 3$.
+  \commentaireMarge{Chaque point se lit « cumule contre cumule ».}%
+  La courbe de Lorenz passe par $(0\,;\,0)$, $(0{,}5\,;\,0{,}25)$,
+  $(0{,}8\,;\,0{,}6)$ et $(1\,;\,1)$.
 
-  \commentaireMarge{Appliquer $(e^u)' = u' \cdot e^u$.}%
-  Fonction exterieure : $v(t) = \mathrm{e}^t$, donc $v'(t) = \mathrm{e}^t$.
-
-  $f'(x) = u'(x) \times \mathrm{e}^{u(x)} = (2x-3)\,\mathrm{e}^{x^2 - 3x}$.
+  \medskip
+  Lecture : le point $(0{,}5\,;\,0{,}25)$ signifie que la moitie la plus modeste
+  de la population ne detient que le quart du revenu total — la courbe est
+  nettement sous la bissectrice, la repartition est inegalitaire.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier $u'(x)$ : ecrire $(\mathrm{e}^{u})' = \mathrm{e}^u$ au lieu de $u'\,\mathrm{e}^u$.
-    \item \textbf{Piege 2.} Pour $(\ln u)'$, oublier le signe de $u$ : verifier que $u > 0$ sur l'intervalle d'etude.
+    \item \textbf{Piege 1.} Oublier de trier par ordre croissant avant de
+      cumuler : la courbe de Lorenz serait fausse (elle doit rester sous la
+      bissectrice).
+    \item \textbf{Piege 2.} Cumuler la population mais pas la grandeur (ou
+      l'inverse) : les DEUX axes portent des cumuls.
+    \item \textbf{Piege 3.} Omettre les points $(0\,;\,0)$ et $(1\,;\,1)$.
   \end{itemize}
 }
 
 \verifier{%
-  Verifier sur un cas simple : si $u(x) = 2x$, alors $(\mathrm{e}^{2x})' = 2\mathrm{e}^{2x}$ (et non $\mathrm{e}^{2x}$).
+  Controler que la ligne brisee est croissante, sous la bissectrice, et qu'elle
+  relie bien $(0\,;\,0)$ a $(1\,;\,1)$.
 }
 
 \sEntrainer{\refExos{M1}}

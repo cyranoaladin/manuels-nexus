@@ -1,0 +1,42 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-INEGALITES",
+ "method_id": "TCOMPL-INEG-ME-004",
+ "alias": "M4",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "065469b6c1451bd961af76146a8cf09b9f9f63139d366d78ef909c6c9c7bd4d1",
+ "capacity_authority": {
+  "code": "C4",
+  "ref": "TCOMPL-INEG-C4",
+  "libelle": "Je sais étudier la convexité d'une fonction modélisant une courbe de Lorenz à l'aide de sa dérivée seconde.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert simplify(L.subs(x, 0)) == 0 and simplify(L.subs(x, 1)) == 1",
+   "assert simplify(diff(L, x, 2) - exp(x)/(E - 1)) == 0"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M4}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

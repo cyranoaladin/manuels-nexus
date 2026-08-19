@@ -1,0 +1,66 @@
+% META: {"id": "TCOMPL-INEG-ME-003", "chapitre": "TCOMPL-INEGALITES", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational
+% x = symbols('x')
+% A = integrate(x - x**2, (x, 0, 1))
+% assert A == Rational(1, 6)
+% assert 2*A == Rational(1, 3)
+% END-VERIFY
+\begin{fichemethode}{M3}{Calculer et interpreter un indice de Gini}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande l'indice de Gini d'une
+  repartition, a partir de l'aire entre la courbe de Lorenz et la bissectrice.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Noter $\mathcal{A}$ l'aire du domaine compris entre la bissectrice
+      $y = x$ et la courbe de Lorenz sur $[0\,;\,1]$.
+    \item Definir l'indice de Gini : $G = 2\mathcal{A}$ (l'aire sous la
+      bissectrice valant $\frac{1}{2}$, on normalise pour que $G \in [0\,;\,1]$).
+    \item Calculer $\mathcal{A}$ : par integrale si $L$ est modelisee
+      (fiche M5), ou par decoupage en trapezes si la courbe est donnee par
+      points.
+    \item Conclure $G = 2\mathcal{A}$.
+    \item Interpreter : $G = 0$ egalite parfaite ($L$ = bissectrice) ;
+      $G$ proche de 1 = repartition tres inegalitaire ; comparer deux
+      repartitions par leurs indices.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  La courbe de Lorenz d'une repartition est modelisee par $L(x) = x^2$.
+  Calculer l'indice de Gini et interpreter.
+
+  \medskip
+  \commentaireMarge{$G = 2\mathcal{A}$, aire entre $y=x$ et $L$.}%
+  $\mathcal{A} = \displaystyle\int_0^1 \bigl(x - x^2\bigr)\,dx
+  = \left[\dfrac{x^2}{2} - \dfrac{x^3}{3}\right]_0^1 = \dfrac{1}{6}$,
+  donc $G = 2 \times \dfrac{1}{6} = \dfrac{1}{3} \approx 0{,}33$.
+
+  \medskip
+  Interpretation : $G = 0{,}33$ traduit une inegalite moderee — plus proche de
+  l'egalite parfaite ($0$) que d'une concentration extreme ($1$).
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Oublier le facteur 2 : $G = 2\mathcal{A}$, pas
+      $\mathcal{A}$.
+    \item \textbf{Piege 2.} Integrer $L(x) - x$ (negatif) : l'aire est
+      $\int_0^1 (x - L(x))\,dx$ car la bissectrice est AU-DESSUS.
+    \item \textbf{Piege 3.} Comparer des indices de Gini calcules sur des
+      grandeurs differentes sans le signaler (revenus vs patrimoines).
+  \end{itemize}
+}
+
+\verifier{%
+  Controler $0 \leq G \leq 1$, tester les cas limites ($L(x) = x$ donne $G=0$),
+  et verifier la coherence avec l'allure de la courbe (plus creusee = $G$ plus
+  grand).
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}
