@@ -1,0 +1,43 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-MODELES-FONCTION",
+ "method_id": "TCOMPL-MF-ME-003",
+ "alias": "M3",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "4e8536737b3b9b131189b508518da82989a066209c4a977981a5fe3b317f7572",
+ "capacity_authority": {
+  "code": "C3",
+  "ref": "TCOMPL-MF-C3",
+  "libelle": "Je sais déterminer une valeur approchée ou un encadrement d'une solution d'une équation f(x) = k, par balayage ou dichotomie.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert f.subs(x, 0) == 1 and f.subs(x, Rational(1,2)) == Rational(-3,8)",
+   "assert f.subs(x, Rational(1,4)) == Rational(17,64) and f.subs(x, Rational(3,8)) == Rational(-37,512)",
+   "assert Rational(1,4) < r < Rational(3,8)"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M3}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

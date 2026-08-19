@@ -1,42 +1,67 @@
-% META: {"id": "TCOMPL-MF-ME-001", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "sources_inspiration": [], "status": "approved"}
-\begin{fichemethode}{M1}{Deriver une fonction composee}
+% META: {"id": "TCOMPL-MF-ME-001", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, limit, oo, expand
+% x = symbols('x', real=True)
+% f = x**3 - 3*x + 1
+% assert expand(diff(f, x) - 3*(x-1)*(x+1)) == 0
+% assert f.subs(x, -1) == 3 and f.subs(x, 1) == -1
+% assert limit(f, x, -oo) == -oo and limit(f, x, oo) == oo
+% END-VERIFY
+\begin{fichemethode}{M1}{Etudier une fonction : derivee, limites, tableau de variation}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque la fonction a deriver fait intervenir une composition : $\mathrm{e}^{u(x)}$, $\ln(u(x))$, $(u(x))^n$, $\sqrt{u(x)}$, ou plus generalement $v(u(x))$.
+  Utiliser cette methode lorsque l'enonce demande l'etude complete d'une
+  fonction : calcul de la derivee, signe de la derivee, limites aux bornes et
+  tableau de variation.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item \textbf{Identifier la fonction exterieure $v$ et la fonction interieure $u$.}
-    \item \textbf{Calculer $u'(x)$.}
-    \item \textbf{Calculer $v'(t)$.}
-    \item \textbf{Appliquer la formule :} $(v \circ u)'(x) = u'(x) \times v'(u(x))$.
-    \item \textbf{Simplifier} l'expression obtenue.
+    \item Preciser l'ensemble de definition et les bornes de l'etude.
+    \item Calculer $f'(x)$ avec les formules de derivation (somme, produit,
+      quotient, composee) et FACTORISER $f'$ autant que possible.
+    \item Etudier le signe de $f'(x)$ (tableau de signes des facteurs).
+    \item Calculer les limites de $f$ aux bornes de l'ensemble d'etude et les
+      valeurs de $f$ aux points ou $f'$ s'annule (extremums locaux).
+    \item Dresser le tableau de variation complet : signe de $f'$, fleches de
+      variation, limites et extremums.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  \textbf{Exemple.} Deriver $f(x) = \mathrm{e}^{x^2 - 3x}$.
+  Etudier $f(x) = x^3 - 3x + 1$ sur $\mathbb{R}$.
 
   \medskip
-  \commentaireMarge{Identifier : $v(t) = \mathrm{e}^t$, $u(x) = x^2 - 3x$.}%
-  Fonction interieure : $u(x) = x^2 - 3x$, donc $u'(x) = 2x - 3$.
+  \commentaireMarge{Factoriser $f'$ pour lire son signe.}%
+  $f'(x) = 3x^2 - 3 = 3(x-1)(x+1)$ : $f'(x) > 0$ pour $x < -1$ ou $x > 1$,
+  $f'(x) < 0$ pour $-1 < x < 1$.
 
-  \commentaireMarge{Appliquer $(e^u)' = u' \cdot e^u$.}%
-  Fonction exterieure : $v(t) = \mathrm{e}^t$, donc $v'(t) = \mathrm{e}^t$.
+  \medskip
+  \commentaireMarge{Extremums locaux aux annulations de $f'$.}%
+  $f(-1) = 3$ (maximum local) et $f(1) = -1$ (minimum local) ;
+  $\lim\limits_{x \to -\infty} f(x) = -\infty$ et
+  $\lim\limits_{x \to +\infty} f(x) = +\infty$.
 
-  $f'(x) = u'(x) \times \mathrm{e}^{u(x)} = (2x-3)\,\mathrm{e}^{x^2 - 3x}$.
+  \medskip
+  Tableau : $f$ croit de $-\infty$ a 3 sur $]-\infty\,;\,-1]$, decroit de 3 a
+  $-1$ sur $[-1\,;\,1]$, puis croit de $-1$ a $+\infty$ sur $[1\,;\,+\infty[$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier $u'(x)$ : ecrire $(\mathrm{e}^{u})' = \mathrm{e}^u$ au lieu de $u'\,\mathrm{e}^u$.
-    \item \textbf{Piege 2.} Pour $(\ln u)'$, oublier le signe de $u$ : verifier que $u > 0$ sur l'intervalle d'etude.
+    \item \textbf{Piege 1.} Conclure sur les variations a partir du signe de $f$
+      au lieu du signe de $f'$.
+    \item \textbf{Piege 2.} Ne pas factoriser $f'$ et se tromper dans le tableau
+      de signes d'un trinome.
+    \item \textbf{Piege 3.} Oublier les limites ou les valeurs des extremums
+      dans le tableau : il doit etre complet pour etre exploitable (fiche M2).
   \end{itemize}
 }
 
 \verifier{%
-  Verifier sur un cas simple : si $u(x) = 2x$, alors $(\mathrm{e}^{2x})' = 2\mathrm{e}^{2x}$ (et non $\mathrm{e}^{2x}$).
+  Controler le signe de $f'$ par une valeur test dans chaque intervalle,
+  verifier les extremums en les recalculant, et confronter le tableau a
+  l'allure de la courbe a la calculatrice.
 }
 
 \sEntrainer{\refExos{M1}}

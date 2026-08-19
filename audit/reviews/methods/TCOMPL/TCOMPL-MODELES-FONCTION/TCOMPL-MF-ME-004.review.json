@@ -1,0 +1,42 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-MODELES-FONCTION",
+ "method_id": "TCOMPL-MF-ME-004",
+ "alias": "M4",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "50d48442b5bb6a8551382aff07163cc8ba2e8fa0f5bc0df8d80615f51310bbae",
+ "capacity_authority": {
+  "code": "C4",
+  "ref": "TCOMPL-MF-C4",
+  "libelle": "Je sais reconnaître graphiquement une fonction convexe, concave, ou un point d'inflexion.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert fpp == 6*x",
+   "assert fpp.subs(x, -1) < 0 and fpp.subs(x, 1) > 0 and fpp.subs(x, 0) == 0"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M4}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

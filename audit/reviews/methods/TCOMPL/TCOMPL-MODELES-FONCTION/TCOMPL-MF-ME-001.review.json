@@ -1,0 +1,43 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-MODELES-FONCTION",
+ "method_id": "TCOMPL-MF-ME-001",
+ "alias": "M1",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "a5ca7032a265f6c09a576174b94969700248ab5d5526b965fa959a0c1d1b031b",
+ "capacity_authority": {
+  "code": "C1",
+  "ref": "TCOMPL-MF-C1",
+  "libelle": "Je sais calculer la dérivée d'une fonction, calculer des limites, et dresser un tableau de variation.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert expand(diff(f, x) - 3*(x-1)*(x+1)) == 0",
+   "assert f.subs(x, -1) == 3 and f.subs(x, 1) == -1",
+   "assert limit(f, x, -oo) == -oo and limit(f, x, oo) == oo"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M1}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

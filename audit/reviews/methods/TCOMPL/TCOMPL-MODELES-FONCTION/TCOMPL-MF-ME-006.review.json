@@ -1,0 +1,41 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-MODELES-FONCTION",
+ "method_id": "TCOMPL-MF-ME-006",
+ "alias": "M6",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "82b41a59267b4e6eda2adcd447f514516c9a8a492bc09c73a0ad4a2df077705f",
+ "capacity_authority": {
+  "code": "C6",
+  "ref": "TCOMPL-MF-C6",
+  "libelle": "Je sais représenter un nuage de points et calculer les coordonnées de son point moyen.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert mx == 2 and my == 3"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M6}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

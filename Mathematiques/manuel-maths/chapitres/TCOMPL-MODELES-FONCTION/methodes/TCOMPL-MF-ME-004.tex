@@ -1,0 +1,69 @@
+% META: {"id": "TCOMPL-MF-ME-004", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "methode", "capacites_codes": ["C4"], "methodes": ["M4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff
+% x = symbols('x', real=True)
+% f = x**3 - 3*x + 1
+% fpp = diff(f, x, 2)
+% assert fpp == 6*x
+% assert fpp.subs(x, -1) < 0 and fpp.subs(x, 1) > 0 and fpp.subs(x, 0) == 0
+% END-VERIFY
+\begin{fichemethode}{M4}{Reconnaitre graphiquement convexite, concavite et point d'inflexion}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce fournit une COURBE (ou un trace de
+  tangentes) et demande de reperer les zones de convexite, de concavite, et les
+  eventuels points d'inflexion.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Position par rapport aux tangentes : la courbe est AU-DESSUS de
+      chacune de ses tangentes $\to$ $f$ convexe ; AU-DESSOUS $\to$ $f$
+      concave.
+    \item Position par rapport aux cordes (secantes) : sous ses cordes $\to$
+      convexe ; au-dessus $\to$ concave.
+    \item Reperer visuellement l'orientation : « creux vers le haut » (cuvette)
+      $\to$ convexe ; « creux vers le bas » (dome) $\to$ concave.
+    \item Point d'inflexion : point ou la courbe TRAVERSE sa tangente — la
+      convexite y change de nature.
+    \item Conclure en donnant les intervalles (abscisses) de convexite, de
+      concavite, et les coordonnees des points d'inflexion.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  La courbe de $f(x) = x^3 - 3x + 1$ est donnee. Decrire sa convexite.
+
+  \medskip
+  \commentaireMarge{Un dome a gauche, une cuvette a droite.}%
+  Pour $x < 0$, la courbe est au-dessous de ses tangentes (allure en dome) :
+  $f$ est concave sur $]-\infty\,;\,0]$. Pour $x > 0$, elle est au-dessus de ses
+  tangentes (allure en cuvette) : $f$ est convexe sur $[0\,;\,+\infty[$.
+
+  \medskip
+  \commentaireMarge{La courbe traverse sa tangente au point d'inflexion.}%
+  Au point d'abscisse 0 (de coordonnees $(0\,;\,1)$), la courbe traverse sa
+  tangente : c'est un point d'inflexion.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Confondre variations et convexite : une fonction
+      peut etre decroissante ET convexe — les deux notions sont independantes.
+    \item \textbf{Piege 2.} Prendre un extremum local pour un point
+      d'inflexion : a l'inflexion, c'est la COURBURE qui change, pas
+      necessairement le sens de variation.
+    \item \textbf{Piege 3.} Conclure d'une seule tangente : la position doit
+      etre verifiee pour TOUTES les tangentes de la zone consideree.
+  \end{itemize}
+}
+
+\verifier{%
+  Tracer deux ou trois tangentes (ou cordes) dans chaque zone pour confirmer la
+  position de la courbe, et controler la coherence avec le signe de $f''$
+  lorsqu'il est calculable (fiche M5).
+}
+
+\sEntrainer{\refExos{M4}}
+
+\end{fichemethode}

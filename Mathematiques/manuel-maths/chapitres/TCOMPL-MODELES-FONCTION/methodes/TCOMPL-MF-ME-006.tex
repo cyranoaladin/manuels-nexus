@@ -1,0 +1,64 @@
+% META: {"id": "TCOMPL-MF-ME-006", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "methode", "capacites_codes": ["C6"], "methodes": ["M6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% xs = [0, 1, 2, 3, 4]; ys = [1, 2, 2, 5, 5]
+% mx = Rational(sum(xs), len(xs)); my = Rational(sum(ys), len(ys))
+% assert mx == 2 and my == 3
+% END-VERIFY
+\begin{fichemethode}{M6}{Representer un nuage de points et calculer son point moyen}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsqu'une serie statistique a deux variables
+  $(x_i\,;\,y_i)$ est donnee et que l'enonce demande le nuage de points et les
+  coordonnees du point moyen $G$.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Choisir un repere adapte : unites et graduations couvrant toutes les
+      valeurs de la serie (axes eventuellement coupes par un « zigzag »).
+    \item Placer chaque point $M_i(x_i\,;\,y_i)$ SANS les relier : un nuage
+      n'est pas une courbe.
+    \item Calculer les moyennes
+      $\bar{x} = \dfrac{x_1 + \dots + x_n}{n}$ et
+      $\bar{y} = \dfrac{y_1 + \dots + y_n}{n}$.
+    \item Placer le point moyen $G(\bar{x}\,;\,\bar{y})$ sur le graphique (il
+      n'est generalement PAS un point du nuage).
+    \item Decrire l'allure du nuage : forme allongee ou non, tendance
+      croissante ou decroissante — en vue d'un ajustement (fiche M7).
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Serie : $(0\,;\,1)$, $(1\,;\,2)$, $(2\,;\,2)$, $(3\,;\,5)$, $(4\,;\,5)$.
+  Representer le nuage et determiner le point moyen.
+
+  \medskip
+  \commentaireMarge{Moyenne de chaque coordonnee separement.}%
+  $\bar{x} = \dfrac{0+1+2+3+4}{5} = 2$ et
+  $\bar{y} = \dfrac{1+2+2+5+5}{5} = 3$ : $G(2\,;\,3)$.
+
+  \medskip
+  Le nuage, allonge le long d'une direction croissante, suggere un ajustement
+  affine ; $G$ se place au « centre de gravite » du nuage sans en etre un point.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Relier les points du nuage entre eux : un nuage
+      statistique se represente par des points isoles (croix).
+    \item \textbf{Piege 2.} Croire que $G$ appartient au nuage : c'est faux en
+      general (ici $(2\,;\,3)$ n'est pas dans la serie).
+    \item \textbf{Piege 3.} Melanger les series dans les moyennes : $\bar{x}$
+      se calcule avec les $x_i$ seulement, $\bar{y}$ avec les $y_i$ seulement.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler que $\bar{x}$ et $\bar{y}$ sont compris entre le minimum et le
+  maximum de leur serie, et que $G$ tombe visuellement au centre du nuage.
+}
+
+\sEntrainer{\refExos{M6}}
+
+\end{fichemethode}

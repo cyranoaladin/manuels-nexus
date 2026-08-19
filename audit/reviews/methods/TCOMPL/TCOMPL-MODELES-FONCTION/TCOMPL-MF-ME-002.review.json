@@ -1,0 +1,42 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-MODELES-FONCTION",
+ "method_id": "TCOMPL-MF-ME-002",
+ "alias": "M2",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "faec06b951731deafa34551fe6a0981bbf491450c47b4fd89acea89698fc7caa",
+ "capacity_authority": {
+  "code": "C2",
+  "ref": "TCOMPL-MF-C2",
+  "libelle": "Je sais exploiter un tableau de variation pour déterminer le nombre de solutions d'une équation f(x) = k ou résoudre une inéquation f(x) ≤ k.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert len(real_roots(f)) == 3",
+   "assert len(real_roots(f - 4)) == 1"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M2}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

@@ -1,0 +1,74 @@
+% META: {"id": "TCOMPL-MF-ME-003", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, nsolve
+% x = symbols('x', real=True)
+% f = x**3 - 3*x + 1
+% assert f.subs(x, 0) == 1 and f.subs(x, Rational(1,2)) == Rational(-3,8)
+% assert f.subs(x, Rational(1,4)) == Rational(17,64) and f.subs(x, Rational(3,8)) == Rational(-37,512)
+% r = nsolve(f, 0.35)
+% assert Rational(1,4) < r < Rational(3,8)
+% END-VERIFY
+\begin{fichemethode}{M3}{Encadrer une solution de f(x) = k par balayage ou dichotomie}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'existence d'une solution de $f(x) = k$ est
+  acquise (fiche M2) mais qu'on ne sait pas la calculer exactement : l'enonce
+  demande un encadrement ou une valeur approchee a une precision donnee.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Partir d'un encadrement initial $[a\,;\,b]$ ou $f(a) - k$ et
+      $f(b) - k$ sont de signes contraires.
+    \item Balayage : calculer $f$ sur une subdivision reguliere (pas 0{,}1 puis
+      0{,}01...) et reperer le changement de signe.
+    \item Dichotomie : calculer $f$ au MILIEU $m = \frac{a+b}{2}$ ; garder la
+      moitie ou le changement de signe subsiste, et recommencer.
+    \item Arreter quand la largeur de l'encadrement est inferieure a la
+      precision demandee ($10^{-1}$, $10^{-2}$...).
+    \item Rediger la conclusion : « $\alpha \in [a'\,;\,b']$, donc
+      $\alpha \approx \dots$ a la precision demandee ».
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  $f(x) = x^3 - 3x + 1$ admet une unique solution $\alpha$ de $f(x) = 0$ dans
+  $[0\,;\,0{,}5]$. L'encadrer par dichotomie a $0{,}125$ pres.
+
+  \medskip
+  \commentaireMarge{Signes opposes aux bornes : la racine est a l'interieur.}%
+  $f(0) = 1 > 0$ et $f(0{,}5) = -0{,}375 < 0$.
+
+  \medskip
+  \commentaireMarge{A chaque etape, la largeur est divisee par 2.}%
+  Milieu $0{,}25$ : $f(0{,}25) = \dfrac{17}{64} > 0$, donc
+  $\alpha \in [0{,}25\,;\,0{,}5]$.
+  Milieu $0{,}375$ : $f(0{,}375) = -\dfrac{37}{512} < 0$, donc
+  $\alpha \in [0{,}25\,;\,0{,}375]$.
+
+  \medskip
+  La largeur vaut $0{,}125$ : $\alpha \approx 0{,}3$ a $0{,}125$ pres
+  (valeur de reference : $\alpha \approx 0{,}347$).
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Garder la mauvaise moitie apres le calcul au
+      milieu : on conserve celle ou les signes aux bornes RESTENT opposes.
+    \item \textbf{Piege 2.} Confondre precision et nombre d'etapes : la
+      dichotomie divise la largeur par 2 a chaque etape, il faut la comparer a
+      la precision demandee.
+    \item \textbf{Piege 3.} Appliquer la methode sans avoir justifie
+      l'existence et l'unicite de la solution sur l'intervalle (fiche M2).
+  \end{itemize}
+}
+
+\verifier{%
+  Controler que $f$ change bien de signe sur l'encadrement final, que sa largeur
+  est conforme a la precision demandee, et comparer avec la valeur donnee par la
+  calculatrice.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

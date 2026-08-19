@@ -1,0 +1,42 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-MODELES-FONCTION",
+ "method_id": "TCOMPL-MF-ME-005",
+ "alias": "M5",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "4a65f9d140f1c3a212c2e66142c81292dd6d55168da4dc041ba417a7ab2cce5b",
+ "capacity_authority": {
+  "code": "C5",
+  "ref": "TCOMPL-MF-C5",
+  "libelle": "Je sais étudier la convexité ou la concavité d'une fonction deux fois dérivable.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert diff(f, x, 2) == 6*x",
+   "assert simplify(diff(g, x, 2) - (exp(x) + 2)) == 0"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M5}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

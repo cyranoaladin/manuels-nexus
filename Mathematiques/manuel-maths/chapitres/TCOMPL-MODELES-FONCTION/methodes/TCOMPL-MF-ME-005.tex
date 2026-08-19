@@ -1,0 +1,68 @@
+% META: {"id": "TCOMPL-MF-ME-005", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "methode", "capacites_codes": ["C5"], "methodes": ["M5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, exp, simplify
+% x = symbols('x', real=True)
+% f = x**3 - 3*x + 1
+% assert diff(f, x, 2) == 6*x
+% g = exp(x) + x**2
+% assert simplify(diff(g, x, 2) - (exp(x) + 2)) == 0
+% END-VERIFY
+\begin{fichemethode}{M5}{Etudier la convexite d'une fonction deux fois derivable}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque $f$ est deux fois derivable et que l'enonce
+  demande de DETERMINER par le calcul les intervalles de convexite/concavite et
+  les points d'inflexion.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Calculer $f'(x)$, puis $f''(x)$, en simplifiant/factorisant $f''$.
+    \item Etudier le signe de $f''$ sur l'ensemble d'etude (tableau de signes).
+    \item Conclure : $f'' \geq 0$ sur un intervalle $\to$ $f$ convexe ;
+      $f'' \leq 0$ $\to$ $f$ concave.
+    \item Point d'inflexion : abscisse ou $f''$ s'annule EN CHANGEANT de
+      signe ; calculer son ordonnee $f(x_0)$.
+    \item Presenter le resultat dans un tableau (signe de $f''$, convexite,
+      inflexions) coherent avec l'allure de la courbe.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Etudier la convexite de $f(x) = x^3 - 3x + 1$ sur $\mathbb{R}$.
+
+  \medskip
+  \commentaireMarge{Deux derivations successives.}%
+  $f'(x) = 3x^2 - 3$, puis $f''(x) = 6x$.
+
+  \medskip
+  \commentaireMarge{Le signe de $f''$ pilote la convexite.}%
+  $f''(x) < 0$ pour $x < 0$ : $f$ est concave sur $]-\infty\,;\,0]$.
+  $f''(x) > 0$ pour $x > 0$ : $f$ est convexe sur $[0\,;\,+\infty[$.
+
+  \medskip
+  $f''$ s'annule en 0 EN CHANGEANT de signe : le point $(0\,;\,f(0)) = (0\,;\,1)$
+  est un point d'inflexion — conforme a la lecture graphique (fiche M4).
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Conclure a une inflexion des que $f''(x_0) = 0$ :
+      il faut aussi le CHANGEMENT de signe (contre-exemple : $x^4$ en 0).
+    \item \textbf{Piege 2.} Confondre le role des derivees : $f'$ donne les
+      variations, $f''$ la convexite.
+    \item \textbf{Piege 3.} Erreur de calcul dans la seconde derivation
+      (surtout avec produits et composees) : simplifier $f'$ avant de deriver a
+      nouveau.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler le signe de $f''$ par une valeur test dans chaque intervalle, et
+  confronter les zones obtenues a la position de la courbe par rapport a ses
+  tangentes.
+}
+
+\sEntrainer{\refExos{M5}}
+
+\end{fichemethode}

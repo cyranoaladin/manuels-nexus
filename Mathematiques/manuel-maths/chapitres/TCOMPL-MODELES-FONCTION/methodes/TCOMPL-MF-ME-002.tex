@@ -1,0 +1,68 @@
+% META: {"id": "TCOMPL-MF-ME-002", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "methode", "capacites_codes": ["C2"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, real_roots
+% x = symbols('x', real=True)
+% f = x**3 - 3*x + 1
+% assert len(real_roots(f)) == 3
+% # k=4 : au-dessus du maximum local 3 sur la branche centrale -> 1 seule solution
+% assert len(real_roots(f - 4)) == 1
+% END-VERIFY
+\begin{fichemethode}{M2}{Compter les solutions de f(x) = k avec un tableau de variation}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque le tableau de variation de $f$ est connu et que
+  l'enonce demande le NOMBRE de solutions de $f(x) = k$ (ou l'ensemble des
+  solutions de $f(x) \leq k$), sans resolution algebrique.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Decouper l'ensemble d'etude selon les intervalles de monotonie du
+      tableau de variation.
+    \item Sur chaque intervalle, appliquer le corollaire du theoreme des
+      valeurs intermediaires : $f$ continue et STRICTEMENT monotone atteint
+      exactement une fois chaque valeur comprise entre ses bornes.
+    \item Pour chaque intervalle, tester si $k$ est dans l'intervalle image
+      (lu dans le tableau) : oui $\to$ 1 solution, non $\to$ 0 solution.
+    \item Additionner les solutions de chaque intervalle et conclure.
+    \item Pour $f(x) \leq k$ : localiser les solutions de $f(x) = k$ puis lire
+      dans le tableau les intervalles ou la courbe est sous le niveau $k$.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  $f(x) = x^3 - 3x + 1$ (tableau : fiche M1). Determiner le nombre de solutions
+  de $f(x) = 0$ puis de $f(x) = 4$.
+
+  \medskip
+  \commentaireMarge{Comparer $k$ aux images extremes de chaque branche.}%
+  Pour $k = 0$ : sur $]-\infty\,;\,-1]$, $f$ croit de $-\infty$ a 3 et
+  $0 \in\ ]-\infty\,;\,3]$ : 1 solution. Sur $[-1\,;\,1]$, $f$ decroit de 3 a
+  $-1$ et $0 \in [-1\,;\,3]$ : 1 solution. Sur $[1\,;\,+\infty[$, $f$ croit de
+  $-1$ a $+\infty$ : 1 solution. Total : 3 solutions.
+
+  \medskip
+  Pour $k = 4$ : $4 > 3$ (maximum local), donc aucune solution sur les deux
+  premieres branches ($f \leq 3$ y est verifie) ; sur $[1\,;\,+\infty[$,
+  $4 \in [-1\,;\,+\infty[$ : exactement 1 solution.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Oublier l'hypothese de STRICTE monotonie ou de
+      continuite en citant le corollaire du TVI.
+    \item \textbf{Piege 2.} Comparer $k$ aux bornes de l'intervalle de depart au
+      lieu des IMAGES lues dans le tableau.
+    \item \textbf{Piege 3.} Pour $f(x) \leq k$, donner les solutions de
+      l'equation au lieu des INTERVALLES ou l'inegalite est verifiee.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler le compte avec la courbe a la calculatrice (intersections avec la
+  droite $y = k$), et verifier chaque branche par un calcul d'image test.
+}
+
+\sEntrainer{\refExos{M2}}
+
+\end{fichemethode}
