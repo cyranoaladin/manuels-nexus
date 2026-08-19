@@ -1,0 +1,65 @@
+% META: {"id": "TCOMPL-ECH-ME-003", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial
+% p = Rational(3, 10)
+% P3 = binomial(10, 3) * p**3 * (1-p)**7
+% assert abs(float(P3) - 0.2668) < 0.0005
+% Ple2 = sum(binomial(10, k) * p**k * (1-p)**(10-k) for k in range(3))
+% assert abs(float(Ple2) - 0.3828) < 0.0005
+% END-VERIFY
+\begin{fichemethode}{M3}{Calculer P(X=k) et P(X<=k) pour une loi binomiale}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque $X$ suit une loi binomiale $\mathcal{B}(n\,;\,p)$
+  et que l'enonce demande $P(X = k)$, $P(X \leq k)$, ou une probabilite du type
+  $P(X \geq k)$, a la calculatrice ou en Python.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Justifier d'abord que $X \sim \mathcal{B}(n\,;\,p)$ (fiche M1) et
+      identifier $n$, $p$ et $k$.
+    \item Pour une valeur exacte :
+      $P(X = k) = \dbinom{n}{k} p^k (1-p)^{n-k}$.
+    \item Pour une probabilite cumulee : $P(X \leq k) = \sum_{i=0}^{k} P(X = i)$
+      — a la calculatrice (binomFRep/binomcdf) ou en Python.
+    \item Transformer les autres formes : $P(X \geq k) = 1 - P(X \leq k-1)$ ;
+      $P(a \leq X \leq b) = P(X \leq b) - P(X \leq a-1)$.
+    \item En Python :
+      \verb|from math import comb| puis
+      \verb|sum(comb(n,i)*p**i*(1-p)**(n-i) for i in range(k+1))|.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  $X \sim \mathcal{B}(10\,;\,0{,}3)$. Calculer $P(X = 3)$ puis $P(X \leq 2)$.
+
+  \medskip
+  \commentaireMarge{$\binom{10}{3} = 120$.}%
+  $P(X = 3) = \dbinom{10}{3} \times 0{,}3^3 \times 0{,}7^{7}
+  = 120 \times 0{,}027 \times 0{,}7^7 \approx 0{,}267$.
+
+  \medskip
+  $P(X \leq 2) = P(X=0) + P(X=1) + P(X=2)
+  = 0{,}7^{10} + 10 \times 0{,}3 \times 0{,}7^9 + 45 \times 0{,}09 \times 0{,}7^8
+  \approx 0{,}383$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Ecrire $P(X \geq k) = 1 - P(X \leq k)$ : il faut
+      $1 - P(X \leq k-1)$ (la valeur $k$ doit rester comptee).
+    \item \textbf{Piege 2.} Echanger $p$ et $1-p$, ou $k$ et $n-k$, dans la formule.
+    \item \textbf{Piege 3.} Arrondir trop tot : garder les valeurs exactes jusqu'au
+      resultat final, puis arrondir a $10^{-3}$ pres.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler que le resultat est dans $[0\,;\,1]$, que
+  $\sum_{k=0}^{n} P(X=k) = 1$, et croiser calculatrice et Python sur une valeur.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

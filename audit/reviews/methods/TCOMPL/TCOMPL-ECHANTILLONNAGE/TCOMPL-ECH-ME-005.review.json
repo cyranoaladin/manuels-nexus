@@ -1,0 +1,41 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-ECHANTILLONNAGE",
+ "method_id": "TCOMPL-ECH-ME-005",
+ "alias": "M5",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "e24cf90cf7fb84e5ddde3986f8b17ef2be9b291e399e4d0679fc7001648b3eca",
+ "capacity_authority": {
+  "code": "C5",
+  "ref": "TCOMPL-ECH-C5",
+  "libelle": "Je sais simuler en Python un échantillon de taille n d'une variable aléatoire, et calculer la série des moyennes de N échantillons.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert abs(moyenne_des_frequences - 0.3) < 0.02"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M5}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

@@ -1,0 +1,70 @@
+% META: {"id": "TCOMPL-ECH-ME-004", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "methode", "capacites_codes": ["C4"], "methodes": ["M4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from math import comb
+% def cdf(n, p, k):
+%     return sum(comb(n, i) * p**i * (1-p)**(n-i) for i in range(k+1))
+% a = 0
+% while cdf(50, 0.5, a) <= 0.025:
+%     a += 1
+% b = 0
+% while cdf(50, 0.5, b) < 0.975:
+%     b += 1
+% assert (a, b) == (18, 32)
+% assert cdf(50, 0.5, b) - cdf(50, 0.5, a-1) >= 0.95
+% END-VERIFY
+\begin{fichemethode}{M4}{Determiner un intervalle de fluctuation au seuil 1-alpha}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque $X \sim \mathcal{B}(n\,;\,p)$ et que l'enonce
+  demande un intervalle $I = [a\,;\,b]$ tel que $P(X \in I) \geq 1 - \alpha$
+  (souvent $\alpha = 0{,}05$), par exemple pour une prise de decision.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Identifier $n$, $p$ et le seuil $1-\alpha$.
+    \item Chercher $a$ = le plus petit entier tel que $P(X \leq a) > \dfrac{\alpha}{2}$
+      (a la calculatrice ou en Python, en parcourant la table des $P(X \leq k)$).
+    \item Chercher $b$ = le plus petit entier tel que $P(X \leq b) \geq 1 - \dfrac{\alpha}{2}$.
+    \item Poser $I = [a\,;\,b]$ et verifier
+      $P(a \leq X \leq b) = P(X \leq b) - P(X \leq a-1) \geq 1-\alpha$.
+    \item Pour une frequence observee : diviser les bornes par $n$
+      ($I_f = \left[\frac{a}{n}\,;\,\frac{b}{n}\right]$) et conclure (rejet ou non
+      de l'hypothese sur $p$ au seuil $\alpha$).
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  $X \sim \mathcal{B}(50\,;\,0{,}5)$, seuil $95\,\%$ ($\alpha = 0{,}05$).
+
+  \medskip
+  \commentaireMarge{Table des $P(X \leq k)$ a la calculatrice.}%
+  La table cumulative donne $P(X \leq 17) \approx 0{,}016 \leq 0{,}025$ et
+  $P(X \leq 18) \approx 0{,}032 > 0{,}025$ : donc $a = 18$.
+  De meme $P(X \leq 31) \approx 0{,}968 < 0{,}975$ et
+  $P(X \leq 32) \approx 0{,}984 \geq 0{,}975$ : donc $b = 32$.
+
+  \medskip
+  $I = [18\,;\,32]$ et
+  $P(18 \leq X \leq 32) = P(X \leq 32) - P(X \leq 17) \approx 0{,}968 \geq 0{,}95$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Utiliser $\alpha$ au lieu de $\dfrac{\alpha}{2}$ pour
+      chaque queue de la distribution.
+    \item \textbf{Piege 2.} Verifier avec $P(X \leq a)$ au lieu de $P(X \leq a-1)$
+      dans $P(a \leq X \leq b)$.
+    \item \textbf{Piege 3.} Oublier de diviser par $n$ quand la question porte sur
+      la FREQUENCE observee et non sur le nombre de succes.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler numeriquement $P(X \leq b) - P(X \leq a-1) \geq 1-\alpha$ et que
+  retrecir l'intervalle d'un entier fait tomber sous le seuil (bornes minimales).
+}
+
+\sEntrainer{\refExos{M4}}
+
+\end{fichemethode}

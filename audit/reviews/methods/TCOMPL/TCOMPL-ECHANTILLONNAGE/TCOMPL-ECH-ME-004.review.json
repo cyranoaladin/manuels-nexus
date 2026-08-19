@@ -1,0 +1,42 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-ECHANTILLONNAGE",
+ "method_id": "TCOMPL-ECH-ME-004",
+ "alias": "M4",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "ddc7bd245ee77fd686248c4e4b612d5f898988c506a0f20e06d276c6e18582c4",
+ "capacity_authority": {
+  "code": "C4",
+  "ref": "TCOMPL-ECH-C4",
+  "libelle": "Je sais déterminer un intervalle de fluctuation I tel que P(X∈I) ≥ 1-α pour X suivant une loi binomiale.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert (a, b) == (18, 32)",
+   "assert cdf(50, 0.5, b) - cdf(50, 0.5, a-1) >= 0.95"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M4}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}
