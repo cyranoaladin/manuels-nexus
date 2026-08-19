@@ -16,7 +16,7 @@
 
 \pasApas{%
   \begin{enumerate}
-    \item Calculer $d = \pgcd(a\,;\,b)$ : l'equation a des solutions entieres
+    \item Calculer $d = \mathrm{PGCD}(a\,;\,b)$ : l'equation a des solutions entieres
       si et seulement si $d$ divise $c$ (sinon, aucune solution).
     \item Trouver une solution particuliere $(x_0\,;\,y_0)$ : remonter
       l'algorithme d'Euclide (ou essais) pour $ax + by = d$, puis multiplier
@@ -35,13 +35,13 @@
   Resoudre dans $\mathbb{Z}^2$ : $5x + 7y = 3$.
 
   \medskip
-  \commentaireMarge{$\pgcd(5;7)=1$ divise 3 : solutions garanties.}%
+  \commentaireMarge{$\mathrm{PGCD}(5;7)=1$ divise 3 : solutions garanties.}%
   $5$ et $7$ sont premiers entre eux. Comme $5 \times 3 + 7 \times (-2) = 1$,
   en multipliant par 3 : $5 \times 9 + 7 \times (-6) = 3$ : le couple
   $(9\,;\,-6)$ est une solution particuliere.
 
   \medskip
-  \commentaireMarge{Gauss : $7 \mid 5(x-9)$ et $\pgcd(7;5)=1$ donc
+  \commentaireMarge{Gauss : $7 \mid 5(x-9)$ et $\mathrm{PGCD}(7;5)=1$ donc
   $7 \mid x-9$.}%
   Si $(x\,;\,y)$ est solution, $5(x - 9) = -7(y + 6)$. Ainsi 7 divise
   $5(x-9)$ ; etant premier avec 5, il divise $x - 9$ : $x = 9 + 7k$, puis

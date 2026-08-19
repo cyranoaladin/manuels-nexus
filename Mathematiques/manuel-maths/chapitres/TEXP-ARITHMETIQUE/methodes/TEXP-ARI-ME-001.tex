@@ -21,7 +21,7 @@
     \item PGCD de $a$ et $b$ ($a > b$) : effectuer la division euclidienne
       $a = bq + r$ avec $0 \leq r < b$.
     \item Iterer sur le couple $(b\,;\,r)$ : le PGCD est inchange car
-      $\pgcd(a\,;\,b) = \pgcd(b\,;\,r)$.
+      $\mathrm{PGCD}(a\,;\,b) = \mathrm{PGCD}(b\,;\,r)$.
     \item S'arreter quand le reste est NUL : le PGCD est le DERNIER RESTE NON
       NUL.
     \item Controler que le resultat divise bien $a$ et $b$.
@@ -29,7 +29,7 @@
 }
 
 \exempleRedige{%
-  Calculer $\pgcd(252\,;\,198)$ par l'algorithme d'Euclide.
+  Calculer $\mathrm{PGCD}(252\,;\,198)$ par l'algorithme d'Euclide.
 
   \medskip
   \commentaireMarge{Chaque ligne : dividende $=$ quotient $\times$ diviseur $+$
@@ -40,7 +40,7 @@
   $36 = 2 \times 18 + 0$.
 
   \medskip
-  Le dernier reste non nul est 18 : $\pgcd(252\,;\,198) = 18$.
+  Le dernier reste non nul est 18 : $\mathrm{PGCD}(252\,;\,198) = 18$.
   Controle : $252 = 18 \times 14$ et $198 = 18 \times 11$.
 }
 

@@ -10,7 +10,7 @@
 
 \quandUtiliser{%
   Utiliser cette methode lorsque l'enonce demande de DEMONTRER que
-  $\pgcd(a\,;\,b)$ s'ecrit $ax + by$ avec $x, y$ entiers, ou de CONSTRUIRE
+  $\mathrm{PGCD}(a\,;\,b)$ s'ecrit $ax + by$ avec $x, y$ entiers, ou de CONSTRUIRE
   explicitement un tel couple en remontant l'algorithme d'Euclide.
 }
 
@@ -31,7 +31,7 @@
 }
 
 \exempleRedige{%
-  Trouver $(x\,;\,y)$ tel que $252x + 198y = \pgcd(252\,;\,198) = 18$.
+  Trouver $(x\,;\,y)$ tel que $252x + 198y = \mathrm{PGCD}(252\,;\,198) = 18$.
 
   \medskip
   \commentaireMarge{Euclide descend, Bezout remonte.}%
@@ -54,7 +54,7 @@
     \item \textbf{Piege 2.} Erreur de substitution dans la remontee : traiter
       les lignes UNE par UNE en gardant les restes comme inconnues.
     \item \textbf{Piege 3.} Utiliser la reciproque fausse : $ax + by = c$
-      possible n'implique pas $c = \pgcd(a\,;\,b)$ — c'est vrai seulement pour
+      possible n'implique pas $c = \mathrm{PGCD}(a\,;\,b)$ — c'est vrai seulement pour
       $c$ multiple du PGCD, et l'egalite Bezout $= 1$ caracterise les nombres
       premiers entre eux.
   \end{itemize}

@@ -17,7 +17,7 @@
 
 \pasApas{%
   \begin{enumerate}
-    \item Verifier $\pgcd(a\,;\,n) = 1$ : c'est la condition d'existence d'un
+    \item Verifier $\mathrm{PGCD}(a\,;\,n) = 1$ : c'est la condition d'existence d'un
       inverse de $a$ modulo $n$.
     \item Chercher l'inverse $u$ de $a$ : un entier tel que
       $au \equiv 1\ [n]$ (essais sur les restes $1, 2, \dots, n-1$, ou
@@ -36,7 +36,7 @@
 
   \medskip
   \commentaireMarge{$5$ et $7$ premiers entre eux : inverse garanti.}%
-  $\pgcd(5\,;\,7) = 1$. On cherche $u$ tel que $5u \equiv 1\ [7]$ :
+  $\mathrm{PGCD}(5\,;\,7) = 1$. On cherche $u$ tel que $5u \equiv 1\ [7]$ :
   $5 \times 3 = 15 = 2 \times 7 + 1$, donc $u = 3$ convient.
 
   \medskip
@@ -51,7 +51,7 @@
 \pieges{%
   \begin{itemize}
     \item \textbf{Piege 1.} « Diviser » une congruence : on ne divise jamais,
-      on MULTIPLIE par un inverse (qui n'existe que si $\pgcd(a\,;\,n)=1$).
+      on MULTIPLIE par un inverse (qui n'existe que si $\mathrm{PGCD}(a\,;\,n)=1$).
     \item \textbf{Piege 2.} Oublier de reduire le resultat modulo $n$ (donner 9
       au lieu de 2 modulo 7).
     \item \textbf{Piege 3.} Conclure a une solution UNIQUE : l'ensemble des

@@ -13,13 +13,13 @@
 
 \quandUtiliser{%
   Utiliser cette methode lorsque l'enonce demande de DEMONTRER le theoreme de
-  Gauss (si $a \mid bc$ et $\pgcd(a\,;\,b) = 1$, alors $a \mid c$) ou de
+  Gauss (si $a \mid bc$ et $\mathrm{PGCD}(a\,;\,b) = 1$, alors $a \mid c$) ou de
   l'APPLIQUER pour simplifier une relation de divisibilite.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Poser les hypotheses : $a \mid bc$ et $\pgcd(a\,;\,b) = 1$.
+    \item Poser les hypotheses : $a \mid bc$ et $\mathrm{PGCD}(a\,;\,b) = 1$.
     \item Traduire la primalite relative par Bezout (fiche M5) : il existe
       $u, v \in \mathbb{Z}$ tels que $au + bv = 1$.
     \item Multiplier cette egalite par $c$ : $auc + bvc = c$.
@@ -37,20 +37,20 @@
 
   \medskip
   \commentaireMarge{Bezout multiplie par $c$.}%
-  Supposons $a \mid bc$ et $\pgcd(a\,;\,b) = 1$. Par Bezout, il existe $u, v$
+  Supposons $a \mid bc$ et $\mathrm{PGCD}(a\,;\,b) = 1$. Par Bezout, il existe $u, v$
   entiers avec $au + bv = 1$ ; en multipliant par $c$ : $auc + bvc = c$. Or
   $a \mid auc$, et $a \mid bc$ donne $a \mid bvc$ : donc $a$ divise la somme,
   c'est-a-dire $a \mid c$. \hfill$\square$
 
   \medskip
-  \commentaireMarge{Application directe avec $\pgcd(7;5)=1$.}%
-  Ici $7 \mid 5c$ et $\pgcd(7\,;\,5) = 1$ (7 premier ne divisant pas 5), donc
+  \commentaireMarge{Application directe avec $\mathrm{PGCD}(7;5)=1$.}%
+  Ici $7 \mid 5c$ et $\mathrm{PGCD}(7\,;\,5) = 1$ (7 premier ne divisant pas 5), donc
   $7 \mid c$ — par exemple $5c = 105$ force $c = 21$, bien multiple de 7.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier l'hypothese $\pgcd(a\,;\,b) = 1$ :
+    \item \textbf{Piege 1.} Oublier l'hypothese $\mathrm{PGCD}(a\,;\,b) = 1$ :
       $6 \mid 4 \times 3$ mais $6 \nmid 4$ et $6 \nmid 3$.
     \item \textbf{Piege 2.} Confondre avec le lemme d'Euclide ($p$ premier
       divise $bc$ $\Rightarrow$ $p \mid b$ ou $p \mid c$) : Gauss ne suppose
@@ -62,7 +62,7 @@
 
 \verifier{%
   Tester l'enonce sur des valeurs concretes (y compris un contre-exemple quand
-  $\pgcd(a\,;\,b) \neq 1$), et relire la preuve en verifiant que chaque
+  $\mathrm{PGCD}(a\,;\,b) \neq 1$), et relire la preuve en verifiant que chaque
   divisibilite invoquee est justifiee.
 }
 
