@@ -1,0 +1,444 @@
+{
+ "artifact_name": "GLOBAL_SUITE_CHECKPOINT_TRIAGE",
+ "created": "2026-08-19",
+ "checkpoint_sha_head": "2d04a3c199e1f75bb5230000ad8a57d4a14eb42d",
+ "attribution_sha": "ab54ccc624e31ff7f175ebf806851441dba5d6c9",
+ "root_suite": {
+  "passed": 1121,
+  "failed_after_isolation_fixes": 0,
+  "note": "7 échecs initiaux: 6 = arbre sali par la suite Math (le checker maquette régénère les PNG d'oracles suivis, connus divergents depuis la correction 12mm en attente D7) ; 1 = deux broken_latex nouveaux dus à la vision file-relative de l'échelle multi-profondeur, corrigés par canonicalisation gabarits/common (70c01a4f). Re-run série: 7/7 PASS."
+ },
+ "inherited_failures": [
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_real_professor_order_matches_declared_inventory",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_real_student_order_keeps_evaluations_and_excludes_teacher_objects",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_the_bridge_covers_every_box_macro_the_corpus_actually_uses",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_the_bridge_rewires_every_v41_box_environment[fmbox]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_the_bridge_rewires_every_v41_box_environment[nxcard]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_the_bridge_rewires_every_v41_box_environment[nxdef]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_the_bridge_rewires_every_v41_box_environment[nxerr]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_the_bridge_rewires_every_v41_box_environment[nxprop]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_the_bridge_rewires_every_v41_box_environment[nxstar]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_the_bridge_rewires_every_v41_box_environment[nxthm]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_the_bridge_rewires_every_v41_paragraph_macro[contreexemple]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_the_bridge_rewires_every_v41_paragraph_macro[demonstration]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_the_bridge_rewires_every_v41_paragraph_macro[exemple]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py::test_the_charter_loads_the_v6_bridge_and_can_be_asked_not_to",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_legacy_latex_symbols.py::test_nexus_class_loads_amssymb_for_square_symbol",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_legacy_latex_symbols.py::test_nexus_class_loads_amsthm_after_amsmath_for_qed",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_legacy_latex_symbols.py::test_nexus_class_loads_common_assets_from_the_gabarits_directory",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_maquette_v5_acceptance",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_rubric_tab_dynamic_source_contract",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_margin_compositor_pdf.py::test_public_margin_components_use_only_the_shared_rail_adapter",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_margin_ledger.py::test_xobject_links_remap_uri_lines_and_internal_goto_without_duplicates",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_pdf_integrity.py::test_missing_asset_produces_warning_in_real_compilation",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi[TCOMPL-CALCULS-AIRES]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi[TCOMPL-CORRELATION-CAUSALITE]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi[TSPE-DERIVATION-CONVEXITE]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi[TSPE-GEOMETRIE-ESPACE]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi[TSPE-LOGARITHME]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi[TSPE-PRIMITIVES-EQDIFF]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi[TSPE-PROBABILITES]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi[TSPE-TRIGONOMETRIE]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TCOMPL-ECHANTILLONNAGE]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TCOMPL-INEGALITES]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TCOMPL-INFERENCE-BAYESIENNE]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TCOMPL-LOGARITHME-HISTORIQUE]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TCOMPL-MODELES-EVOLUTION]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TCOMPL-MODELES-FONCTION]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TCOMPL-TEMPS-ATTENTE]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TEXP-ARITHMETIQUE]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TEXP-COMPLEXES-ALGEBRE-GEOMETRIE]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TEXP-COMPLEXES-TRIGO-POLYNOMES]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TEXP-GRAPHES]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TEXP-MATRICES-MARKOV]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TSPE-CALCUL-INTEGRAL]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TSPE-COMBINATOIRE]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TSPE-GEOMETRIE-ESPACE]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TSPE-LOGARITHME]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TSPE-PRIMITIVES-EQDIFF]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_toutes_les_capacites_du_contrat_sont_interrogees[TSPE-PROBABILITES]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_1nsi_algorithmic_p0_regressions.py::test_insertion_sort_termination_covers_all_array_sizes",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_1nsi_algorithmic_p0_regressions.py::test_selection_sort_termination_covers_empty_and_singleton_arrays",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_1nsi_content_reviews.py::test_algorithm_review_receipt_matches_current_sources_before_sealing",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_1nsi_content_reviews.py::test_all_review_receipts_match_current_governance_before_sealing",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_1nsi_content_reviews.py::test_build_manifest_governance_uses_current_clean_base",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "FAILED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_1nsi_content_reviews.py::test_cli_exposes_required_modes",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "FAILED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_1nsi_content_reviews.py::test_counter_review_policy_migration_invalidates_exactly_six_receipts",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_1nsi_content_reviews.py::test_discover_sources_is_exact_and_1nsi_only",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_1nsi_content_reviews.py::test_findings_only_differ_on_reattested_payload_or_provenance",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_1nsi_content_reviews.py::test_object_findings_exhaustively_cover_all_339_sources",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_1nsi_content_reviews.py::test_policy_migration_invalidates_only_review_envelopes",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_1nsi_content_reviews.py::test_policy_pins_official_and_contractual_sources",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_1nsi_content_reviews.py::test_protocol_mutation_invalidates_all_dependency_digests",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_1nsi_content_reviews.py::test_scope_guard_pins_exact_sources_and_immutable_surfaces",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "FAILED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_1nsi_content_reviews.py::test_verify_scope_rejects_changed_path_outside_allowlist",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_1nsi_status_governance.py::test_1nsi_object_statuses_follow_execution_evidence",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_assemble_book.py::test_collect_book_chapters_methodes_1nsi",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_assemble_book.py::test_render_book_master_methodes_contains_one_chapter",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_assemble_book.py::test_the_bridge_rewires_the_boxes_the_nsi_corpus_uses",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "ABSENT",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_assemble_manuel.py::test_runtime_selection_covers_all_professor_objects_and_is_student_safe",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_remediation_separation.py::test_companion_metadata_and_environment_match_source[1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-AGT-RE-C5.tex]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_remediation_separation.py::test_companion_preserves_exact_correction_block[1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-AGT-RE-C5.tex]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  },
+  {
+   "nodeid": "NSI/tests/test_remediation_separation.py::test_remediation_source_contains_only_one_exercise[1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-AGT-RE-C5.tex]",
+   "fails_at_pre_directive_ab54ccc6": true,
+   "baseline_2026_08_15": "PASSED",
+   "caused_by_2026_08_19_infra_fix": false
+  }
+ ],
+ "summary": {
+  "total_math_nsi_failures": 71,
+  "caused_today": 0,
+  "inherited": 71
+ }
+}
