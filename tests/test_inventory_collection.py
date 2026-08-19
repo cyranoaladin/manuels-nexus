@@ -11149,6 +11149,41 @@ def test_legacy_meth_alias_stays_strict(
     ), entries
 
 
+def test_canonical_common_targets_resolve_from_any_depth(
+    tmp_path: Path, inventory_module
+) -> None:
+    """Les échelles IfFileExists multi-profondeur pointant dans
+    gabarits/common/ se résolvent vers LA source canonique unique, quel que
+    soit le préfixe relatif (./, ../, ../../) — et une cible canonique
+    inexistante reste une référence cassée (mutation)."""
+    _init_repository(tmp_path)
+    common = "gabarits/common/nexus-demo.sty"
+    wrapper = "Mathematiques/manuel-maths/gabarits/nexus-demo.cls"
+    sources = {
+        common: "% canonique\n",
+        wrapper: (
+            "\\IfFileExists{../gabarits/common/nexus-demo.sty}{%\n"
+            "  \\input{../gabarits/common/nexus-demo.sty}%\n"
+            "}{%\n"
+            "  \\input{../../gabarits/common/nexus-demo.sty}%\n"
+            "}\n"
+            "\\input{../gabarits/common/nexus-absent.sty}\n"
+        ),
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    broken = [
+        item["cible"]
+        for item in inventory["anomalies"]["broken_latex_references"]
+    ]
+    assert all("nexus-demo.sty" not in target for target in broken), broken
+    assert any("nexus-absent" in target for target in broken), broken
+
+
 def test_repository_method_aliases_are_unambiguous(
     inventory_module,
 ) -> None:

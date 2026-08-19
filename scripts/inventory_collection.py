@@ -5280,7 +5280,18 @@ def _resolve_latex_target(
     if PurePosixPath(normalized).suffix == "":
         normalized += ".tex"
     local_target = posixpath.normpath(str(PurePosixPath(source).parent / normalized))
-    return local_target if local_target in tracked else project_target
+    if local_target in tracked:
+        return local_target
+    # Échelles de résolution multi-profondeur (IfFileExists ./, ../, ../../):
+    # toute référence pointant dans gabarits/common/ désigne LA source
+    # canonique unique — canonicalisation injective, indépendante du cwd de
+    # compilation ; une cible canonique inexistante reste non résolue.
+    marker = "gabarits/common/"
+    if marker in normalized:
+        canonical = marker + normalized.split(marker, 1)[1]
+        if canonical in tracked:
+            return canonical
+    return project_target
 
 
 def _looks_like_local_path(value: Any) -> bool:
