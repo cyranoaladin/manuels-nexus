@@ -1977,6 +1977,36 @@ _ANOMALY_SEVERITY_RANK = MappingProxyType(
 )
 
 
+A4_METHOD_REVIEW_DEBT_DECISION_REF = (
+    "audit/A4_METHOD_REVIEW_DEBT_POLICY.md"
+    "#decision-a4-method-review-debt-2026-08-19"
+)
+
+
+def _is_expected_review_debt(entry: Mapping[str, Any]) -> bool:
+    """Signature stricte de la décision humaine A4 EXPECTED_REVIEW_DEBT.
+
+    Vraie UNIQUEMENT pour un fingerprint `blocking_statuses` d'une fiche
+    méthode (source .../methodes/*.tex), qualifié `open_debt` bloquant avec
+    le decision_ref exact de la décision. Toute variation échoue le gate
+    comme avant — la dette reste un blocker de release jusqu'à revue.
+    """
+    if (
+        entry.get("category") != "blocking_statuses"
+        or entry.get("disposition") != "open_debt"
+        or entry.get("blocking") is not True
+        or entry.get("qualified") is not True
+        or entry.get("decision_ref") != A4_METHOD_REVIEW_DEBT_DECISION_REF
+    ):
+        return False
+    try:
+        locator = json.loads(str(entry.get("locator_key", "")))
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return False
+    source = str(locator.get("source", "")) if isinstance(locator, dict) else ""
+    return "/methodes/" in source and source.endswith(".tex")
+
+
 def _coalesce_active_debt(
     entries: Iterable[Mapping[str, Any]],
 ) -> dict[str, dict[str, Any]]:
@@ -2222,6 +2252,7 @@ def _compare_anomaly_debt(
         resolved.append(fingerprint)
         improvements.append(f"disparition fp={fingerprint}")
 
+    expected_review_debt: list[str] = []
     for fingerprint in sorted(unmatched_current):
         if fingerprint in resolved_fingerprints:
             if fingerprint not in regressions:
@@ -2229,6 +2260,12 @@ def _compare_anomaly_debt(
                 failures.append(
                     f"réapparition d'une anomalie résolue fp={fingerprint}"
                 )
+        elif _is_expected_review_debt(current[fingerprint]):
+            # Décision humaine A4 (A4_METHOD_REVIEW_DEBT_POLICY.md) : la
+            # dette de review des nouvelles fiches méthodes qualifiées reste
+            # VISIBLE et bloquante pour la release, mais ne fait pas échouer
+            # le gate no-new. Toute autre nouveauté échoue comme avant.
+            expected_review_debt.append(fingerprint)
         else:
             new.append(fingerprint)
             failures.append(f"anomalie nouvelle fp={fingerprint}")
@@ -2236,6 +2273,7 @@ def _compare_anomaly_debt(
     failures.extend(_active_debt_qualification_failures(current))
 
     return {
+        "expected_review_debt": sorted(expected_review_debt),
         "failures": sorted(set(failures)),
         "improvements": sorted(set(improvements)),
         "modified": modified,
@@ -6180,6 +6218,7 @@ def _current_active_debt(
                 qualification.get("occurrence_count", 1)
             ),
             "owner": str(qualification.get("owner", "")),
+            "decision_ref": str(qualification.get("decision_ref", "")),
             "qualification_digest": str(
                 qualification.get("qualification_digest", "")
             ),

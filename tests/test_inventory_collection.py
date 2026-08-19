@@ -11246,6 +11246,70 @@ def test_repository_prerequisite_references_are_declared(
     assert broken_r == []
 
 
+def test_expected_review_debt_policy_gates_exactly(
+    inventory_module,
+) -> None:
+    """Décision humaine A4 (A4_METHOD_REVIEW_DEBT_POLICY.md) : une nouvelle
+    anomalie n'échappe au verdict « anomalie nouvelle » QUE si elle porte la
+    signature complète EXPECTED_REVIEW_DEBT ; toute variation échoue."""
+    anchor = inventory_module.A4_METHOD_REVIEW_DEBT_DECISION_REF
+    conforming = {
+        "fingerprint": "feedfacefeedface",
+        "category": "blocking_statuses",
+        "disposition": "open_debt",
+        "blocking": True,
+        "qualified": True,
+        "decision_ref": anchor,
+        "owner": "direction_scientifique_programme",
+        "justification": "EXPECTED_REVIEW_DEBT A4",
+        "qualification_digest": "sha256:" + "0" * 64,
+        "severity": "blocking",
+        "locator_key": json.dumps(
+            {
+                "category": "blocking_statuses",
+                "source": "NSI/chapitres/X/methodes/X-ME-009.tex",
+            },
+            sort_keys=True,
+        ),
+        "occurrence_count": 1,
+    }
+    assert inventory_module._is_expected_review_debt(conforming) is True
+    for field, bad in (
+        ("decision_ref", "audit/AUTRE.md#x"),
+        ("category", "broken_meta_references"),
+        ("disposition", "false_positive"),
+        ("qualified", False),
+        ("blocking", False),
+        (
+            "locator_key",
+            json.dumps(
+                {
+                    "category": "blocking_statuses",
+                    "source": "NSI/chapitres/X/exercices/X-EX-001.tex",
+                },
+                sort_keys=True,
+            ),
+        ),
+    ):
+        mutated = dict(conforming)
+        mutated[field] = bad
+        assert inventory_module._is_expected_review_debt(mutated) is False, field
+
+
+def test_repository_fail_on_new_accepts_only_declared_review_debt(
+    inventory_module,
+) -> None:
+    """Le gate passe, et ses nouveautés acceptées sont EXACTEMENT la dette
+    de review déclarée (fiches méthodes qualifiées A4) — rien d'autre."""
+    gate = inventory_module._fail_on_new_gate(ROOT)
+
+    assert gate["success"] is True, gate["reasons"][:4]
+    declared = gate.get("comparison", {}).get("expected_review_debt", [])
+    assert declared, "la dette déclarée doit rester visible dans le gate"
+    for fingerprint in declared:
+        assert re.fullmatch(r"[0-9a-f]{16}", fingerprint)
+
+
 def test_repository_method_aliases_are_unambiguous(
     inventory_module,
 ) -> None:
