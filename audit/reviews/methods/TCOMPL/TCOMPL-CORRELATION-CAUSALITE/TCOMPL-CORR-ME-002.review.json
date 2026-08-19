@@ -1,0 +1,43 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-CORRELATION-CAUSALITE",
+ "method_id": "TCOMPL-CORR-ME-002",
+ "alias": "M2",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "5eeac903d0b17af3040542f484aa65d31f0c5fa9263bd44e219c5fb5f259440b",
+ "capacity_authority": {
+  "code": "C2",
+  "ref": "TCOMPL-CORR-C2",
+  "libelle": "Je sais déterminer la droite des moindres carrés d'un ajustement affine et calculer un coefficient de corrélation.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert a == Rational(7, 5) and b == Rational(1, 2)",
+   "assert a * Rational(5, 2) + b == 4",
+   "assert nsimplify(r) == 7*sqrt(2)/10"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M2}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

@@ -1,0 +1,65 @@
+% META: {"id": "TCOMPL-CORR-ME-003", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, log, simplify
+% x = symbols('x', real=True)
+% y = 2 * exp(x/2)
+% assert simplify(log(y) - (log(2) + x/2)) == 0
+% END-VERIFY
+\begin{fichemethode}{M3}{Se ramener a un ajustement affine par changement de variable}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque le nuage $(x_i\,;\,y_i)$ n'est PAS allonge le
+  long d'une droite (croissance exponentielle, forme en racine...), mais qu'un
+  changement de variable comme $z = \ln(y)$, $z = y^2$ ou $t = \ln(x)$ rend le
+  nouveau nuage presque aligne.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Observer la forme du nuage et conjecturer un modele : croissance de
+      type exponentiel $\to$ poser $z = \ln(y)$ ; modele en racine
+      ($y = \sqrt{\dots}$) $\to$ poser $z = y^2$.
+    \item Calculer la nouvelle serie $(x_i\,;\,z_i)$ et verifier que son nuage
+      est sensiblement aligne.
+    \item Determiner la droite des moindres carres $z = ax + b$ (fiche M2).
+    \item Revenir a la variable d'origine en inversant le changement :
+      si $z = \ln(y)$, alors $y = e^{z} = e^{b}\,e^{ax}$.
+    \item Controler le modele final sur une ou deux valeurs observees.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Un phenomene suit le modele $y = 2\,e^{x/2}$. Montrer qu'un changement de
+  variable le ramene a un ajustement affine.
+
+  \medskip
+  \commentaireMarge{$\ln$ transforme produit en somme.}%
+  Posons $z = \ln(y)$. Alors
+  $z = \ln\!\left(2\,e^{x/2}\right) = \ln 2 + \dfrac{x}{2}$ :
+  $z$ est une fonction AFFINE de $x$, de pente $a = \dfrac{1}{2}$ et d'ordonnee
+  a l'origine $b = \ln 2$.
+
+  \medskip
+  Reciproquement, a partir d'un ajustement $z = 0{,}5x + b$ obtenu sur les
+  donnees, on retrouve $y = e^{b}\,e^{0{,}5x}$ : un modele exponentiel.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Appliquer $\ln$ a des valeurs negatives ou nulles :
+      le changement $z = \ln(y)$ exige $y > 0$.
+    \item \textbf{Piege 2.} Oublier de REVENIR a la variable d'origine : la
+      reponse finale doit exprimer $y$ en fonction de $x$.
+    \item \textbf{Piege 3.} Ecrire $e^{ax+b} = e^{ax} + e^{b}$ : c'est un
+      produit, $e^{ax+b} = e^{b}\,e^{ax}$.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler l'alignement du nuage transforme (ou un $r$ proche de $\pm 1$), puis
+  substituer une valeur observee dans le modele final pour verifier la coherence.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

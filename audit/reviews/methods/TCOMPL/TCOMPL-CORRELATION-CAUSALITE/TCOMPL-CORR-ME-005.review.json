@@ -1,0 +1,39 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TCOMPL",
+ "chapter": "TCOMPL-CORRELATION-CAUSALITE",
+ "method_id": "TCOMPL-CORR-ME-005",
+ "alias": "M5",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "73f7c9480df19dacb25d8ab41ca70517923de4c0276fb4b6a9c9ea8b0062cce4",
+ "capacity_authority": {
+  "code": "C5",
+  "ref": "TCOMPL-CORR-C5",
+  "libelle": "Je sais expliquer pourquoi une forte corrélation entre deux variables ne prouve pas une relation de cause à effet.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": []
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M5}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

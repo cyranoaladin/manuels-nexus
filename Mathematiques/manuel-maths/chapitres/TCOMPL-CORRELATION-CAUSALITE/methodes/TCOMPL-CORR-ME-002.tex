@@ -1,0 +1,67 @@
+% META: {"id": "TCOMPL-CORR-ME-002", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "methode", "capacites_codes": ["C2"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt, nsimplify
+% xs = [1, 2, 3, 4]; ys = [2, 3, 5, 6]; n = 4
+% sxy = sum(x*y for x, y in zip(xs, ys)); sx2 = sum(x*x for x in xs)
+% a = Rational(n*sxy - sum(xs)*sum(ys), n*sx2 - sum(xs)**2)
+% b = Rational(sum(ys), n) - a * Rational(sum(xs), n)
+% assert a == Rational(7, 5) and b == Rational(1, 2)
+% assert a * Rational(5, 2) + b == 4
+% r = (n*sxy - sum(xs)*sum(ys)) / sqrt((n*sx2 - sum(xs)**2) * (n*sum(y*y for y in ys) - sum(ys)**2))
+% assert nsimplify(r) == 7*sqrt(2)/10
+% END-VERIFY
+\begin{fichemethode}{M2}{Determiner la droite des moindres carres et le coefficient de correlation}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande l'equation $y = ax + b$ de la
+  droite d'ajustement par la methode des moindres carres, ou le coefficient de
+  correlation $r$, generalement a la calculatrice.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Entrer les listes $x_i$ et $y_i$ dans la calculatrice (mode statistique
+      a deux variables) et lancer la regression lineaire.
+    \item Lire la pente $a$ et l'ordonnee a l'origine $b$ ; ecrire $y = ax + b$
+      en arrondissant comme demande.
+    \item Lire le coefficient de correlation $r$ (ou $r^2$ selon le modele).
+    \item Controle cle : la droite des moindres carres passe TOUJOURS par le
+      point moyen $G(\bar{x}\,;\,\bar{y})$ — verifier $a\bar{x} + b = \bar{y}$.
+    \item Interpreter $r$ : proche de $\pm 1$, l'ajustement affine est pertinent ;
+      proche de 0, il ne l'est pas. Le signe de $r$ est celui de la pente.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Serie : $(1\,;\,2)$, $(2\,;\,3)$, $(3\,;\,5)$, $(4\,;\,6)$.
+
+  \medskip
+  \commentaireMarge{Regression lineaire a la calculatrice.}%
+  La calculatrice donne $a = 1{,}4$ et $b = 0{,}5$ : la droite des moindres
+  carres a pour equation $y = 1{,}4x + 0{,}5$.
+
+  \medskip
+  \commentaireMarge{Controle : la droite passe par $G$.}%
+  Avec $G(2{,}5\,;\,4)$ : $1{,}4 \times 2{,}5 + 0{,}5 = 3{,}5 + 0{,}5 = 4 = \bar{y}$.
+  Le coefficient de correlation vaut $r \approx 0{,}99$ : tres proche de 1,
+  l'ajustement affine est excellent.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Echanger les listes $x$ et $y$ : la regression de $y$
+      en $x$ n'est pas celle de $x$ en $y$.
+    \item \textbf{Piege 2.} Confondre $r$ et $r^2$ affiches par la calculatrice.
+    \item \textbf{Piege 3.} Conclure d'un $r$ proche de 1 a une CAUSALITE :
+      $r$ mesure seulement la qualite de l'ajustement affine (voir fiche M5).
+  \end{itemize}
+}
+
+\verifier{%
+  Verifier que $a\bar{x} + b = \bar{y}$ (passage par $G$), que le signe de $a$
+  correspond a la tendance visible du nuage, et que $-1 \leq r \leq 1$.
+}
+
+\sEntrainer{\refExos{M2}}
+
+\end{fichemethode}
