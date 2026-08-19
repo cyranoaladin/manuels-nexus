@@ -1,0 +1,554 @@
+{
+ "artifact_name": "PROGRAM_AUTHORITY_2026_2027",
+ "created": "2026-08-19",
+ "edition": "2026-2027",
+ "global_rules": {
+  "1SPE": {
+   "programme_authority": "Programme de spécialité mathématiques de Première (voie générale) 2026",
+   "bo": "BO n°14 du 2 avril 2026 — application rentrée 2026-2027",
+   "note": "nouveau programme applicable à l'édition 2026-2027 ; référentiel local: referentiel/capacites_1SPE_*.json"
+  },
+  "TSPE/TCOMPL": {
+   "programme_authority": "Programme de l'enseignement optionnel de mathématiques complémentaires (Terminale) 2019 — ACTUELLEMENT APPLICABLE",
+   "bo": "BO spécial n°8 du 25 juillet 2019",
+   "note": "NE PAS utiliser les nouveaux programmes Terminale 2026 (application 2027-2028) pour l'édition 2026-2027"
+  },
+  "TEXPERTES": {
+   "programme_authority": "Programme de l'enseignement optionnel de mathématiques expertes (Terminale) 2019",
+   "bo": "BO spécial n°8 du 25 juillet 2019",
+   "note": "applicable à l'édition 2026-2027 sauf texte officiel ultérieur explicitement applicable"
+  },
+  "1NSI/TNSI": {
+   "programme_authority": "Programme NSI de Première 2019 — actuellement en vigueur",
+   "bo": "BO spécial n°1 du 22 janvier 2019",
+   "note": "programmes NSI 2019 en vigueur pour l'édition 2026-2027"
+  },
+  "TSPE_note": "idem TCOMPL: programmes Terminale actuellement applicables (2019) pour 2026-2027; les programmes 2026 n'entrent en application qu'à la rentrée 2027-2028"
+ },
+ "chapters": [
+  {
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "programme_authority": "Programme NSI de Première 2019 — actuellement en vigueur",
+   "bo_date": "BO spécial n°1 du 22 janvier 2019",
+   "application_note": "programmes NSI 2019 en vigueur pour l'édition 2026-2027",
+   "capacity_reference_set": [
+    {
+     "code": "C1",
+     "ref": "P-ALGO-04"
+    },
+    {
+     "code": "C2",
+     "ref": "P-ALGO-05"
+    },
+    {
+     "code": "C3",
+     "ref": "P-ALGO-03"
+    }
+   ],
+   "contract_alignment": "contrat validé (statut: draft) sous le programme applicable ; pas de référentiel machine local — le contrat est l'autorité de capacités"
+  },
+  {
+   "manual": "1SPE",
+   "chapter": "1SPE-TRIGONOMETRIE",
+   "programme_authority": "Programme de spécialité mathématiques de Première (voie générale) 2026",
+   "bo_date": "BO n°14 du 2 avril 2026 — application rentrée 2026-2027",
+   "application_note": "nouveau programme applicable à l'édition 2026-2027 ; référentiel local: referentiel/capacites_1SPE_*.json",
+   "capacity_reference_set": [
+    {
+     "code": "C1",
+     "ref": "1SPE-TRIGONOMETRIE-C1"
+    },
+    {
+     "code": "C2",
+     "ref": "1SPE-TRIGONOMETRIE-C2"
+    },
+    {
+     "code": "C3",
+     "ref": "1SPE-TRIGONOMETRIE-C3"
+    },
+    {
+     "code": "C4",
+     "ref": "1SPE-TRIGONOMETRIE-C4"
+    },
+    {
+     "code": "C5",
+     "ref": "1SPE-TRIGONOMETRIE-C5"
+    }
+   ],
+   "contract_alignment": "contrat = référentiel BO 2026 (vérifié par test)"
+  },
+  {
+   "manual": "TCOMPL",
+   "chapter": "TCOMPL-CALCULS-AIRES",
+   "programme_authority": "Programme de l'enseignement optionnel de mathématiques complémentaires (Terminale) 2019 — ACTUELLEMENT APPLICABLE",
+   "bo_date": "BO spécial n°8 du 25 juillet 2019",
+   "application_note": "NE PAS utiliser les nouveaux programmes Terminale 2026 (application 2027-2028) pour l'édition 2026-2027",
+   "capacity_reference_set": [
+    {
+     "code": "C1",
+     "ref": "TCOMPL-AIR-C1"
+    },
+    {
+     "code": "C2",
+     "ref": "TCOMPL-AIR-C2"
+    },
+    {
+     "code": "C3",
+     "ref": "TCOMPL-AIR-C3"
+    },
+    {
+     "code": "C4",
+     "ref": "TCOMPL-AIR-C4"
+    },
+    {
+     "code": "C5",
+     "ref": "TCOMPL-AIR-C5"
+    },
+    {
+     "code": "C6",
+     "ref": "TCOMPL-AIR-C6"
+    }
+   ],
+   "contract_alignment": "contrat validé (statut: valide) sous le programme applicable ; pas de référentiel machine local — le contrat est l'autorité de capacités"
+  },
+  {
+   "manual": "TCOMPL",
+   "chapter": "TCOMPL-CORRELATION-CAUSALITE",
+   "programme_authority": "Programme de l'enseignement optionnel de mathématiques complémentaires (Terminale) 2019 — ACTUELLEMENT APPLICABLE",
+   "bo_date": "BO spécial n°8 du 25 juillet 2019",
+   "application_note": "NE PAS utiliser les nouveaux programmes Terminale 2026 (application 2027-2028) pour l'édition 2026-2027",
+   "capacity_reference_set": [
+    {
+     "code": "C1",
+     "ref": "TCOMPL-CORR-C1"
+    },
+    {
+     "code": "C2",
+     "ref": "TCOMPL-CORR-C2"
+    },
+    {
+     "code": "C3",
+     "ref": "TCOMPL-CORR-C3"
+    },
+    {
+     "code": "C4",
+     "ref": "TCOMPL-CORR-C4"
+    },
+    {
+     "code": "C5",
+     "ref": "TCOMPL-CORR-C5"
+    }
+   ],
+   "contract_alignment": "contrat validé (statut: valide) sous le programme applicable ; pas de référentiel machine local — le contrat est l'autorité de capacités"
+  },
+  {
+   "manual": "TCOMPL",
+   "chapter": "TCOMPL-ECHANTILLONNAGE",
+   "programme_authority": "Programme de l'enseignement optionnel de mathématiques complémentaires (Terminale) 2019 — ACTUELLEMENT APPLICABLE",
+   "bo_date": "BO spécial n°8 du 25 juillet 2019",
+   "application_note": "NE PAS utiliser les nouveaux programmes Terminale 2026 (application 2027-2028) pour l'édition 2026-2027",
+   "capacity_reference_set": [
+    {
+     "code": "C1",
+     "ref": "TCOMPL-ECH-C1"
+    },
+    {
+     "code": "C2",
+     "ref": "TCOMPL-ECH-C2"
+    },
+    {
+     "code": "C3",
+     "ref": "TCOMPL-ECH-C3"
+    },
+    {
+     "code": "C4",
+     "ref": "TCOMPL-ECH-C4"
+    },
+    {
+     "code": "C5",
+     "ref": "TCOMPL-ECH-C5"
+    },
+    {
+     "code": "C6",
+     "ref": "TCOMPL-ECH-C6"
+    }
+   ],
+   "contract_alignment": "contrat validé (statut: valide) sous le programme applicable ; pas de référentiel machine local — le contrat est l'autorité de capacités"
+  },
+  {
+   "manual": "TCOMPL",
+   "chapter": "TCOMPL-INEGALITES",
+   "programme_authority": "Programme de l'enseignement optionnel de mathématiques complémentaires (Terminale) 2019 — ACTUELLEMENT APPLICABLE",
+   "bo_date": "BO spécial n°8 du 25 juillet 2019",
+   "application_note": "NE PAS utiliser les nouveaux programmes Terminale 2026 (application 2027-2028) pour l'édition 2026-2027",
+   "capacity_reference_set": [
+    {
+     "code": "C1",
+     "ref": "TCOMPL-INEG-C1"
+    },
+    {
+     "code": "C2",
+     "ref": "TCOMPL-INEG-C2"
+    },
+    {
+     "code": "C3",
+     "ref": "TCOMPL-INEG-C3"
+    },
+    {
+     "code": "C4",
+     "ref": "TCOMPL-INEG-C4"
+    },
+    {
+     "code": "C5",
+     "ref": "TCOMPL-INEG-C5"
+    }
+   ],
+   "contract_alignment": "contrat validé (statut: valide) sous le programme applicable ; pas de référentiel machine local — le contrat est l'autorité de capacités"
+  },
+  {
+   "manual": "TCOMPL",
+   "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+   "programme_authority": "Programme de l'enseignement optionnel de mathématiques complémentaires (Terminale) 2019 — ACTUELLEMENT APPLICABLE",
+   "bo_date": "BO spécial n°8 du 25 juillet 2019",
+   "application_note": "NE PAS utiliser les nouveaux programmes Terminale 2026 (application 2027-2028) pour l'édition 2026-2027",
+   "capacity_reference_set": [
+    {
+     "code": "C1",
+     "ref": "TCOMPL-BAYES-C1"
+    },
+    {
+     "code": "C2",
+     "ref": "TCOMPL-BAYES-C2"
+    },
+    {
+     "code": "C3",
+     "ref": "TCOMPL-BAYES-C3"
+    },
+    {
+     "code": "C4",
+     "ref": "TCOMPL-BAYES-C4"
+    },
+    {
+     "code": "C5",
+     "ref": "TCOMPL-BAYES-C5"
+    }
+   ],
+   "contract_alignment": "contrat validé (statut: valide) sous le programme applicable ; pas de référentiel machine local — le contrat est l'autorité de capacités"
+  },
+  {
+   "manual": "TCOMPL",
+   "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+   "programme_authority": "Programme de l'enseignement optionnel de mathématiques complémentaires (Terminale) 2019 — ACTUELLEMENT APPLICABLE",
+   "bo_date": "BO spécial n°8 du 25 juillet 2019",
+   "application_note": "NE PAS utiliser les nouveaux programmes Terminale 2026 (application 2027-2028) pour l'édition 2026-2027",
+   "capacity_reference_set": [
+    {
+     "code": "C1",
+     "ref": "TCOMPL-LOG-C1"
+    },
+    {
+     "code": "C2",
+     "ref": "TCOMPL-LOG-C2"
+    },
+    {
+     "code": "C3",
+     "ref": "TCOMPL-LOG-C3"
+    },
+    {
+     "code": "C4",
+     "ref": "TCOMPL-LOG-C4"
+    },
+    {
+     "code": "C5",
+     "ref": "TCOMPL-LOG-C5"
+    }
+   ],
+   "contract_alignment": "contrat validé (statut: valide) sous le programme applicable ; pas de référentiel machine local — le contrat est l'autorité de capacités"
+  },
+  {
+   "manual": "TCOMPL",
+   "chapter": "TCOMPL-MODELES-EVOLUTION",
+   "programme_authority": "Programme de l'enseignement optionnel de mathématiques complémentaires (Terminale) 2019 — ACTUELLEMENT APPLICABLE",
+   "bo_date": "BO spécial n°8 du 25 juillet 2019",
+   "application_note": "NE PAS utiliser les nouveaux programmes Terminale 2026 (application 2027-2028) pour l'édition 2026-2027",
+   "capacity_reference_set": [
+    {
+     "code": "C1",
+     "ref": "TCOMPL-ME-C1"
+    },
+    {
+     "code": "C2",
+     "ref": "TCOMPL-ME-C2"
+    },
+    {
+     "code": "C3",
+     "ref": "TCOMPL-ME-C3"
+    },
+    {
+     "code": "C4",
+     "ref": "TCOMPL-ME-C4"
+    },
+    {
+     "code": "C5",
+     "ref": "TCOMPL-ME-C5"
+    }
+   ],
+   "contract_alignment": "contrat validé (statut: valide) sous le programme applicable ; pas de référentiel machine local — le contrat est l'autorité de capacités"
+  },
+  {
+   "manual": "TCOMPL",
+   "chapter": "TCOMPL-MODELES-FONCTION",
+   "programme_authority": "Programme de l'enseignement optionnel de mathématiques complémentaires (Terminale) 2019 — ACTUELLEMENT APPLICABLE",
+   "bo_date": "BO spécial n°8 du 25 juillet 2019",
+   "application_note": "NE PAS utiliser les nouveaux programmes Terminale 2026 (application 2027-2028) pour l'édition 2026-2027",
+   "capacity_reference_set": [
+    {
+     "code": "C1",
+     "ref": "TCOMPL-MF-C1"
+    },
+    {
+     "code": "C2",
+     "ref": "TCOMPL-MF-C2"
+    },
+    {
+     "code": "C3",
+     "ref": "TCOMPL-MF-C3"
+    },
+    {
+     "code": "C4",
+     "ref": "TCOMPL-MF-C4"
+    },
+    {
+     "code": "C5",
+     "ref": "TCOMPL-MF-C5"
+    },
+    {
+     "code": "C6",
+     "ref": "TCOMPL-MF-C6"
+    },
+    {
+     "code": "C7",
+     "ref": "TCOMPL-MF-C7"
+    }
+   ],
+   "contract_alignment": "contrat validé (statut: valide) sous le programme applicable ; pas de référentiel machine local — le contrat est l'autorité de capacités"
+  },
+  {
+   "manual": "TCOMPL",
+   "chapter": "TCOMPL-TEMPS-ATTENTE",
+   "programme_authority": "Programme de l'enseignement optionnel de mathématiques complémentaires (Terminale) 2019 — ACTUELLEMENT APPLICABLE",
+   "bo_date": "BO spécial n°8 du 25 juillet 2019",
+   "application_note": "NE PAS utiliser les nouveaux programmes Terminale 2026 (application 2027-2028) pour l'édition 2026-2027",
+   "capacity_reference_set": [
+    {
+     "code": "C1",
+     "ref": "TCOMPL-ATT-C1"
+    },
+    {
+     "code": "C2",
+     "ref": "TCOMPL-ATT-C2"
+    },
+    {
+     "code": "C3",
+     "ref": "TCOMPL-ATT-C3"
+    },
+    {
+     "code": "C4",
+     "ref": "TCOMPL-ATT-C4"
+    },
+    {
+     "code": "C5",
+     "ref": "TCOMPL-ATT-C5"
+    },
+    {
+     "code": "C6",
+     "ref": "TCOMPL-ATT-C6"
+    }
+   ],
+   "contract_alignment": "contrat validé (statut: valide) sous le programme applicable ; pas de référentiel machine local — le contrat est l'autorité de capacités"
+  },
+  {
+   "manual": "TEXPERTES",
+   "chapter": "TEXP-ARITHMETIQUE",
+   "programme_authority": "Programme de l'enseignement optionnel de mathématiques expertes (Terminale) 2019",
+   "bo_date": "BO spécial n°8 du 25 juillet 2019",
+   "application_note": "applicable à l'édition 2026-2027 sauf texte officiel ultérieur explicitement applicable",
+   "capacity_reference_set": [
+    {
+     "code": "C1",
+     "ref": "TEXP-ARI-C1"
+    },
+    {
+     "code": "C2",
+     "ref": "TEXP-ARI-C2"
+    },
+    {
+     "code": "C3",
+     "ref": "TEXP-ARI-C3"
+    },
+    {
+     "code": "C4",
+     "ref": "TEXP-ARI-C4"
+    },
+    {
+     "code": "C5",
+     "ref": "TEXP-ARI-C5"
+    },
+    {
+     "code": "C6",
+     "ref": "TEXP-ARI-C6"
+    },
+    {
+     "code": "C7",
+     "ref": "TEXP-ARI-C7"
+    },
+    {
+     "code": "C8",
+     "ref": "TEXP-ARI-C8"
+    },
+    {
+     "code": "C9",
+     "ref": "TEXP-ARI-C9"
+    }
+   ],
+   "contract_alignment": "contrat validé (statut: valide) sous le programme applicable ; pas de référentiel machine local — le contrat est l'autorité de capacités"
+  },
+  {
+   "manual": "TEXPERTES",
+   "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+   "programme_authority": "Programme de l'enseignement optionnel de mathématiques expertes (Terminale) 2019",
+   "bo_date": "BO spécial n°8 du 25 juillet 2019",
+   "application_note": "applicable à l'édition 2026-2027 sauf texte officiel ultérieur explicitement applicable",
+   "capacity_reference_set": [
+    {
+     "code": "C1",
+     "ref": "TEXP-CAG-C1"
+    },
+    {
+     "code": "C2",
+     "ref": "TEXP-CAG-C2"
+    },
+    {
+     "code": "C3",
+     "ref": "TEXP-CAG-C3"
+    },
+    {
+     "code": "C4",
+     "ref": "TEXP-CAG-C4"
+    },
+    {
+     "code": "C5",
+     "ref": "TEXP-CAG-C5"
+    }
+   ],
+   "contract_alignment": "contrat validé (statut: valide) sous le programme applicable ; pas de référentiel machine local — le contrat est l'autorité de capacités"
+  },
+  {
+   "manual": "TEXPERTES",
+   "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+   "programme_authority": "Programme de l'enseignement optionnel de mathématiques expertes (Terminale) 2019",
+   "bo_date": "BO spécial n°8 du 25 juillet 2019",
+   "application_note": "applicable à l'édition 2026-2027 sauf texte officiel ultérieur explicitement applicable",
+   "capacity_reference_set": [
+    {
+     "code": "C1",
+     "ref": "TEXP-CTP-C1"
+    },
+    {
+     "code": "C2",
+     "ref": "TEXP-CTP-C2"
+    },
+    {
+     "code": "C3",
+     "ref": "TEXP-CTP-C3"
+    },
+    {
+     "code": "C4",
+     "ref": "TEXP-CTP-C4"
+    },
+    {
+     "code": "C5",
+     "ref": "TEXP-CTP-C5"
+    },
+    {
+     "code": "C6",
+     "ref": "TEXP-CTP-C6"
+    },
+    {
+     "code": "C7",
+     "ref": "TEXP-CTP-C7"
+    }
+   ],
+   "contract_alignment": "contrat validé (statut: valide) sous le programme applicable ; pas de référentiel machine local — le contrat est l'autorité de capacités"
+  },
+  {
+   "manual": "TEXPERTES",
+   "chapter": "TEXP-GRAPHES",
+   "programme_authority": "Programme de l'enseignement optionnel de mathématiques expertes (Terminale) 2019",
+   "bo_date": "BO spécial n°8 du 25 juillet 2019",
+   "application_note": "applicable à l'édition 2026-2027 sauf texte officiel ultérieur explicitement applicable",
+   "capacity_reference_set": [
+    {
+     "code": "C1",
+     "ref": "TEXP-GRA-C1"
+    },
+    {
+     "code": "C2",
+     "ref": "TEXP-GRA-C2"
+    },
+    {
+     "code": "C3",
+     "ref": "TEXP-GRA-C3"
+    },
+    {
+     "code": "C4",
+     "ref": "TEXP-GRA-C4"
+    },
+    {
+     "code": "C5",
+     "ref": "TEXP-GRA-C5"
+    }
+   ],
+   "contract_alignment": "contrat validé (statut: valide) sous le programme applicable ; pas de référentiel machine local — le contrat est l'autorité de capacités"
+  },
+  {
+   "manual": "TEXPERTES",
+   "chapter": "TEXP-MATRICES-MARKOV",
+   "programme_authority": "Programme de l'enseignement optionnel de mathématiques expertes (Terminale) 2019",
+   "bo_date": "BO spécial n°8 du 25 juillet 2019",
+   "application_note": "applicable à l'édition 2026-2027 sauf texte officiel ultérieur explicitement applicable",
+   "capacity_reference_set": [
+    {
+     "code": "C1",
+     "ref": "TEXP-MAT-C1"
+    },
+    {
+     "code": "C2",
+     "ref": "TEXP-MAT-C2"
+    },
+    {
+     "code": "C3",
+     "ref": "TEXP-MAT-C3"
+    },
+    {
+     "code": "C4",
+     "ref": "TEXP-MAT-C4"
+    },
+    {
+     "code": "C5",
+     "ref": "TEXP-MAT-C5"
+    },
+    {
+     "code": "C6",
+     "ref": "TEXP-MAT-C6"
+    },
+    {
+     "code": "C7",
+     "ref": "TEXP-MAT-C7"
+    }
+   ],
+   "contract_alignment": "contrat validé (statut: valide) sous le programme applicable ; pas de référentiel machine local — le contrat est l'autorité de capacités"
+  }
+ ]
+}
