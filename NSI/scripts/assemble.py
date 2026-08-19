@@ -7,6 +7,7 @@ Déclinaisons livre : complet|methodes|remediation|amenagee.
 import argparse
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
+import hashlib
 import json
 import os
 import re
@@ -369,6 +370,75 @@ def _validate_book_variant(variant: str) -> None:
         )
 
 
+PDF_TRAILER_ID_SCHEME = "nexus-pdf-trailer-id/v1"
+
+
+def pdf_trailer_identity(
+    *,
+    book: str,
+    variant: str,
+    body: str,
+    sources: Mapping[str, str],
+) -> str:
+    """Identite de trailer PDF DETERMINISTE et SENSIBLE AUX SOURCES.
+
+    Voir Mathematiques/manuel-maths/scripts/assemble_manuel.py : sans cette
+    identite, LuaTeX tire les deux elements de /ID au hasard a chaque
+    execution (meme sous SOURCE_DATE_EPOCH) et le PDF n'est jamais
+    byte-reproductible. Memes entrees => meme identite ; source pertinente
+    modifiee => identite deterministement differente ; livres et variantes
+    distincts => identites distinctes. Aucun alea, aucune horloge.
+    """
+    payload = [
+        PDF_TRAILER_ID_SCHEME,
+        f"book={book}",
+        f"variant={variant}",
+        "body=" + hashlib.sha256(body.encode("utf-8")).hexdigest(),
+    ]
+    for relative_path in sorted(sources):
+        payload.append(f"{relative_path}\t{sources[relative_path]}")
+    digest = hashlib.sha256("\n".join(payload).encode("utf-8")).hexdigest()
+    return digest[:32].upper()
+
+
+def _book_source_digests(
+    files_by_chapter: Mapping[str, Sequence[Path]],
+) -> dict[str, str]:
+    """Condense chaque source assemblee, plus la classe et la charte."""
+    digests: dict[str, str] = {}
+
+    def record(path: Path) -> None:
+        try:
+            resolved = Path(path).resolve()
+        except OSError:
+            return
+        if not resolved.is_file():
+            return
+        try:
+            relative = resolved.relative_to(ROOT.parent).as_posix()
+        except ValueError:
+            relative = resolved.name
+        digest = hashlib.sha256()
+        with resolved.open("rb") as handle:
+            for chunk in iter(lambda: handle.read(65536), b""):
+                digest.update(chunk)
+        digests[relative] = digest.hexdigest()
+
+    for selected in files_by_chapter.values():
+        for path in selected:
+            record(path)
+    for support in (
+        ROOT.parent / "gabarits" / "common" / "nexus-manuel.cls",
+        ROOT.parent / "gabarits" / "common" / "nexus-charte.sty",
+        ROOT.parent / "gabarits" / "common" / "nexus-pont.sty",
+        ROOT / "gabarits" / "book_master.tex",
+        ROOT / "gabarits" / "nexus-manuel-v5.cls",
+        ROOT / "gabarits" / "nexus-charte-v6.sty",
+    ):
+        record(support)
+    return digests
+
+
 def render_book_master_from_files(
     manifest: Mapping[str, object],
     files_by_chapter: Mapping[str, Sequence[Path]],
@@ -407,8 +477,16 @@ def render_book_master_from_files(
             )
         )
     master = (ROOT / "gabarits" / "book_master.tex").read_text(encoding="utf-8")
+    content_body = "\n\n".join(parts)
+    trailer_identity = pdf_trailer_identity(
+        book=str(manifest.get("book_id") or manifest.get("niveau") or "NSI"),
+        variant=variant_setup,
+        body="\n".join((content_body, variant_setup, str(title))),
+        sources=_book_source_digests(files_by_chapter),
+    )
     return (
-        master.replace("%%VARIANT_SETUP%%", variant_setup)
+        master.replace("%%PDF_TRAILER_ID%%", trailer_identity)
+        .replace("%%VARIANT_SETUP%%", variant_setup)
         .replace("%%MATIERE%%", latex_escape(manifest["matiere"]))
         .replace("%%NIVEAU%%", latex_escape(manifest["niveau"]))
         .replace("%%TITLE%%", latex_escape(title))
@@ -416,7 +494,7 @@ def render_book_master_from_files(
         .replace("%%PDF_AUTHOR%%", latex_escape(manifest["author"]))
         .replace("%%PDF_SUBJECT%%", latex_escape(manifest["subject"]))
         .replace("%%PDF_KEYWORDS%%", latex_escape(manifest["keywords"]))
-        .replace("%%CONTENT%%", "\n\n".join(parts))
+        .replace("%%CONTENT%%", content_body)
     )
 
 

@@ -1,6 +1,10 @@
 % Gabarit maître de manuel — assemblé par les scripts NSI
 \documentclass{gabarits/nexus-manuel-v5}
 \usepackage{gabarits/nexus-charte-v6}
+% Identite de trailer PDF deterministe et derivee des sources (sans
+% elle, LuaTeX tire /ID au hasard a chaque execution et le PDF n'est
+% jamais byte-reproductible). Valeur injectee par l'assembleur.
+\pdfvariable trailerid{[<%%PDF_TRAILER_ID%%> <%%PDF_TRAILER_ID%%>]}
 % Les pages froides precedent toute marque de rubrique : leur onglet lateral
 % n'aurait ni libelle ni couleur. Il s'active avec le decor, au premier
 % chapitre.

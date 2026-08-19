@@ -16,7 +16,7 @@ import stat
 import subprocess
 import sys
 import tempfile
-from collections.abc import Callable, Mapping
+from collections.abc import Callable, Iterable, Mapping
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
@@ -764,6 +764,85 @@ def object_trace_token(canonical_path: str) -> str:
     return hashlib.sha256(canonical_path.encode("utf-8")).hexdigest()[:40]
 
 
+PDF_TRAILER_ID_SCHEME = "nexus-pdf-trailer-id/v1"
+
+
+def pdf_trailer_identity(
+    *,
+    manual: str,
+    variant: str,
+    body: str,
+    sources: Mapping[str, str],
+) -> str:
+    """Identité de trailer PDF DÉTERMINISTE et SENSIBLE AUX SOURCES.
+
+    LuaTeX tire sinon les deux éléments de ``/ID`` au hasard à chaque
+    exécution (même sous ``SOURCE_DATE_EPOCH``), ce qui suffit à casser la
+    reproductibilité binaire du PDF alors que tout le reste est identique.
+
+    L'identité est le condensé du couple (manuel, variante), du corps du
+    master assemblé et du condensé de CHAQUE source que ce master nomme.
+    Conséquences voulues :
+
+    * mêmes entrées ⇒ même identité, donc PDF byte-identique ;
+    * toute source pertinente modifiée ⇒ identité déterministement
+      différente ;
+    * deux manuels/variantes ⇒ identités distinctes (jamais une constante
+      globale partagée).
+
+    Aucun aléa, aucune horloge : le résultat ne dépend que des sources.
+    """
+    payload = [
+        PDF_TRAILER_ID_SCHEME,
+        f"manual={manual}",
+        f"variant={variant}",
+        "body=" + hashlib.sha256(body.encode("utf-8")).hexdigest(),
+    ]
+    for relative_path in sorted(sources):
+        payload.append(f"{relative_path}\t{sources[relative_path]}")
+    digest = hashlib.sha256("\n".join(payload).encode("utf-8")).hexdigest()
+    return digest[:32].upper()
+
+
+def _master_source_digests(
+    body: str,
+    *,
+    objects: Iterable[Path],
+    git_root: Path,
+) -> dict[str, str]:
+    """Condense toute source nommée par le master, plus la charte canonique."""
+    digests: dict[str, str] = {}
+
+    def record(path: Path) -> None:
+        try:
+            resolved = path.resolve()
+            relative = resolved.relative_to(git_root).as_posix()
+        except (OSError, ValueError):
+            return
+        if resolved.is_file():
+            digests[relative] = _sha256_path(resolved)
+
+    for path in objects:
+        record(path)
+    # Les \input transversaux (avant-propos, formulaire, memo...) ne sont pas
+    # des objets de chapitre : les relire depuis le corps du master garantit
+    # qu'aucune source nommée n'échappe à l'identité.
+    for target in re.findall(r"\\input\{([^}]+)\}", body):
+        candidate = ROOT / target
+        record(candidate if candidate.suffix else candidate.with_suffix(".tex"))
+    # Classe et charte canoniques : elles changent le rendu sans apparaître
+    # comme \input.
+    for support in (
+        git_root / "gabarits" / "common" / "nexus-manuel.cls",
+        git_root / "gabarits" / "common" / "nexus-charte.sty",
+        git_root / "gabarits" / "common" / "nexus-pont.sty",
+        ROOT / "gabarits" / "nexus-manuel-v5.cls",
+        ROOT / "gabarits" / "nexus-charte-v6.sty",
+    ):
+        record(support)
+    return digests
+
+
 def wrap_object_input(input_path: str, canonical_path: str) -> str:
     token = object_trace_token(canonical_path)
     return "\n".join(
@@ -881,6 +960,7 @@ def render_master(
     if tracked_paths is None:
         tracked_paths = load_tracked_paths(git_root)
     parts = []
+    assembled_objects: list[Path] = []
 
     # Transversal front matter. Couverture de collection (charte v6) pour
     # tous les manuels ; le texte 1SPE (avant-propos, mode d'emploi,
@@ -919,6 +999,7 @@ def render_master(
 
         opening = ouverture_depuis_contrat(chap_dir)
         files = collect_chapter(chap_dir, variant)
+        assembled_objects.extend(files)
         # La marque de rubrique est posee au premier objet de chaque rubrique
         # et tient jusqu'au changement suivant : c'est elle que la page relit
         # au shipout pour colorer son onglet et son decor (charte v6).
@@ -991,10 +1072,23 @@ def render_master(
         "\\matiere{Mathématiques}"
         f"\\niveau{{{MANUAL_LEVEL_LABELS[manual]}}}"
     )
+    # Identité de trailer PDF déterministe : sans elle, LuaTeX tire /ID au
+    # hasard à chaque exécution et le PDF n'est jamais byte-reproductible.
+    trailer_identity = pdf_trailer_identity(
+        manual=manual,
+        variant=variant,
+        body="\n".join((content, variant_configuration, matiere_niveau)),
+        sources=_master_source_digests(
+            content,
+            objects=assembled_objects,
+            git_root=git_root,
+        ),
+    )
     master = f"""% {MANUAL_TITLES[manual]} — variante {titre_var}
 % Assemble par scripts/assemble_manuel.py
 \\documentclass{{gabarits/nexus-manuel-v5}}
 \\usepackage{{gabarits/nexus-charte-v6}}
+\\pdfvariable trailerid{{[<{trailer_identity}> <{trailer_identity}>]}}
 \\nxVSuppressTabtrue
 {variant_configuration}
 {matiere_niveau}
