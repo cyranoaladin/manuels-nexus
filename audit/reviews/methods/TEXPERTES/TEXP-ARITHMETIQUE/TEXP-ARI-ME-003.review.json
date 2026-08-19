@@ -1,0 +1,46 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-ARITHMETIQUE",
+ "method_id": "TEXP-ARI-ME-003",
+ "alias": "M3",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "376ff79f6de60e4266f802eee0aa03887acdae751f897f857f138921c95fc5cb",
+ "capacity_authority": {
+  "code": "C3",
+  "ref": "TEXP-ARI-C3",
+  "libelle": "Je sais établir et utiliser des tests de divisibilité, étudier la primalité d'un nombre, et étudier des problèmes de chiffrement simples.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert all(pow(10, k, 9) == 1 for k in range(6))",
+   "assert (4+7+3+2) % 9 == 7 and 4732 % 9 == 7",
+   "assert isprime(97) and 9**2 < 97 < 10**2",
+   "assert all(97 % d != 0 for d in (2, 3, 5, 7))",
+   "assert (5*21) % 26 == 1",
+   "assert all((21*((5*x+3) - 3)) % 26 == x for x in range(26))"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M3}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

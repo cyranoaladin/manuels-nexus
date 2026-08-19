@@ -1,0 +1,73 @@
+% META: {"id": "TEXP-ARI-ME-003", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import isprime
+% # test de divisibilite par 9 : 10 = 9+1 donc 10^k = 1 [9]
+% assert all(pow(10, k, 9) == 1 for k in range(6))
+% assert (4+7+3+2) % 9 == 7 and 4732 % 9 == 7
+% assert isprime(97) and 9**2 < 97 < 10**2
+% assert all(97 % d != 0 for d in (2, 3, 5, 7))
+% # chiffrement affine x -> 5x+3 mod 26 : dechiffrement via inverse de 5
+% assert (5*21) % 26 == 1
+% assert all((21*((5*x+3) - 3)) % 26 == x for x in range(26))
+% END-VERIFY
+\begin{fichemethode}{M3}{Tests de divisibilite, primalite et chiffrements simples}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande d'etablir un test de
+  divisibilite avec les congruences, de decider si un entier est premier, ou
+  d'etudier un chiffrement simple (Cesar, affine).
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Test de divisibilite : ecrire $n$ en base 10
+      ($n = \sum c_k 10^k$), reduire $10^k$ modulo $d$ (ex. $10 \equiv 1\ [9]$
+      donc $10^k \equiv 1\ [9]$), et en deduire un critere sur les chiffres.
+    \item Primalite de $n$ : tester la divisibilite par tous les PREMIERS
+      $p \leq \sqrt{n}$ ; si aucun ne divise $n$, alors $n$ est premier.
+    \item Justifier la borne : si $n = ab$ avec $1 < a \leq b$, alors
+      $a \leq \sqrt{n}$.
+    \item Chiffrement : coder les lettres par $0, \dots, 25$ et appliquer la
+      fonction de chiffrement modulo 26 (Cesar : $x \mapsto x + k$ ; affine :
+      $x \mapsto ax + b$ avec $\pgcd(a\,;\,26) = 1$).
+    \item Dechiffrement : inverser la fonction modulo 26 (soustraction pour
+      Cesar, inverse modulaire de $a$ pour l'affine, fiche M2).
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  1) Montrer que 4732 n'est pas divisible par 9. \quad 2) 97 est-il premier ?
+
+  \medskip
+  \commentaireMarge{$10 \equiv 1\ [9]$ : chaque puissance vaut 1.}%
+  1) Comme $10 \equiv 1\ [9]$, $4732 \equiv 4 + 7 + 3 + 2 = 16 \equiv 7\ [9]$ :
+  4732 n'est pas divisible par 9.
+
+  \medskip
+  \commentaireMarge{Tester les premiers jusqu'a $\sqrt{97} < 10$.}%
+  2) $\sqrt{97} < 10$ : il suffit de tester 2, 3, 5, 7. Aucun ne divise 97
+  (97 impair ; $9 + 7 = 16$ non multiple de 3 ; ne finit ni par 0 ni par 5 ;
+  $97 = 13 \times 7 + 6$). Donc 97 est premier.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Tester la primalite avec TOUS les entiers jusqu'a
+      $n$ : la borne $\sqrt{n}$ (et les premiers seulement) suffit.
+    \item \textbf{Piege 2.} Pour un chiffrement affine, choisir $a$ non premier
+      avec 26 : la fonction n'est alors pas bijective, dechiffrement
+      impossible.
+    \item \textbf{Piege 3.} Enoncer un test de divisibilite sans le demontrer
+      par congruences quand l'enonce demande de l'ETABLIR.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler un test de divisibilite sur un exemple dont on connait le reste,
+  verifier une primalite avec la decomposition (fiche M7), et dechiffrer le
+  message code pour retrouver l'original.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

@@ -1,0 +1,43 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-ARITHMETIQUE",
+ "method_id": "TEXP-ARI-ME-006",
+ "alias": "M6",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "9d8e8eb0745c7ce68c589f02fa2ff80930a292bde793d1f8c6adc8fd76d799e3",
+ "capacity_authority": {
+  "code": "C6",
+  "ref": "TEXP-ARI-C6",
+  "libelle": "Je sais démontrer le théorème de Gauss (si a divise bc et a est premier avec b, alors a divise c).",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert (b*c) % 7 == 0 and gcd(7, b) == 1 and c % 7 == 0",
+   "assert 7*u + b*v == 1",
+   "assert c == 7*u*c + v*(b*c)"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M6}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

@@ -1,0 +1,71 @@
+% META: {"id": "TEXP-ARI-ME-006", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "methode", "capacites_codes": ["C6"], "methodes": ["M6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import gcd
+% # schema de la preuve sur un exemple : 7 | 5c et pgcd(7,5)=1 => 7 | c
+% b, c = 5, 21
+% assert (b*c) % 7 == 0 and gcd(7, b) == 1 and c % 7 == 0
+% # Bezout 7u + 5v = 1 puis c = 7uc + 5vc
+% u, v = 3, -4
+% assert 7*u + b*v == 1
+% assert c == 7*u*c + v*(b*c)
+% END-VERIFY
+\begin{fichemethode}{M6}{Demontrer et appliquer le theoreme de Gauss}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande de DEMONTRER le theoreme de
+  Gauss (si $a \mid bc$ et $\pgcd(a\,;\,b) = 1$, alors $a \mid c$) ou de
+  l'APPLIQUER pour simplifier une relation de divisibilite.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Poser les hypotheses : $a \mid bc$ et $\pgcd(a\,;\,b) = 1$.
+    \item Traduire la primalite relative par Bezout (fiche M5) : il existe
+      $u, v \in \mathbb{Z}$ tels que $au + bv = 1$.
+    \item Multiplier cette egalite par $c$ : $auc + bvc = c$.
+    \item Constater que $a$ divise chaque terme du membre de gauche : $a \mid
+      auc$ (evident) et $a \mid bvc$ (car $a \mid bc$).
+    \item Conclure : $a$ divise la somme, donc $a \mid c$. \quad En
+      application : dans $a \mid bc$, on peut « supprimer » le facteur $b$
+      premier avec $a$.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Demontrer le theoreme de Gauss, puis l'appliquer : montrer que si
+  $7 \mid 5c$, alors $7 \mid c$.
+
+  \medskip
+  \commentaireMarge{Bezout multiplie par $c$.}%
+  Supposons $a \mid bc$ et $\pgcd(a\,;\,b) = 1$. Par Bezout, il existe $u, v$
+  entiers avec $au + bv = 1$ ; en multipliant par $c$ : $auc + bvc = c$. Or
+  $a \mid auc$, et $a \mid bc$ donne $a \mid bvc$ : donc $a$ divise la somme,
+  c'est-a-dire $a \mid c$. \hfill$\square$
+
+  \medskip
+  \commentaireMarge{Application directe avec $\pgcd(7;5)=1$.}%
+  Ici $7 \mid 5c$ et $\pgcd(7\,;\,5) = 1$ (7 premier ne divisant pas 5), donc
+  $7 \mid c$ — par exemple $5c = 105$ force $c = 21$, bien multiple de 7.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Oublier l'hypothese $\pgcd(a\,;\,b) = 1$ :
+      $6 \mid 4 \times 3$ mais $6 \nmid 4$ et $6 \nmid 3$.
+    \item \textbf{Piege 2.} Confondre avec le lemme d'Euclide ($p$ premier
+      divise $bc$ $\Rightarrow$ $p \mid b$ ou $p \mid c$) : Gauss ne suppose
+      pas $a$ premier.
+    \item \textbf{Piege 3.} Utiliser Gauss dans une demonstration... de Gauss
+      (circularite) : la preuve repose sur Bezout uniquement.
+  \end{itemize}
+}
+
+\verifier{%
+  Tester l'enonce sur des valeurs concretes (y compris un contre-exemple quand
+  $\pgcd(a\,;\,b) \neq 1$), et relire la preuve en verifiant que chaque
+  divisibilite invoquee est justifiee.
+}
+
+\sEntrainer{\refExos{M6}}
+
+\end{fichemethode}

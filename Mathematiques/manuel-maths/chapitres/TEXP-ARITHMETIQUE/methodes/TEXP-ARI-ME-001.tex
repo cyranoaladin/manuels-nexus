@@ -1,42 +1,63 @@
-% META: {"id": "TEXP-ARI-ME-001", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "sources_inspiration": [], "status": "approved"}
-\begin{fichemethode}{M1}{Deriver une fonction composee}
+% META: {"id": "TEXP-ARI-ME-001", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import gcd
+% assert 252 == 1*198 + 54 and 198 == 3*54 + 36 and 54 == 1*36 + 18 and 36 == 2*18
+% assert gcd(252, 198) == 18
+% divs60 = [d for d in range(1, 61) if 60 % d == 0]
+% assert len(divs60) == 12 and divs60[:4] == [1, 2, 3, 4]
+% END-VERIFY
+\begin{fichemethode}{M1}{Determiner les diviseurs d'un entier et le PGCD par l'algorithme d'Euclide}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque la fonction a deriver fait intervenir une composition : $\mathrm{e}^{u(x)}$, $\ln(u(x))$, $(u(x))^n$, $\sqrt{u(x)}$, ou plus generalement $v(u(x))$.
+  Utiliser cette methode lorsque l'enonce demande la liste des diviseurs d'un
+  entier, ou le PGCD de deux entiers par divisions euclidiennes successives.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item \textbf{Identifier la fonction exterieure $v$ et la fonction interieure $u$.}
-    \item \textbf{Calculer $u'(x)$.}
-    \item \textbf{Calculer $v'(t)$.}
-    \item \textbf{Appliquer la formule :} $(v \circ u)'(x) = u'(x) \times v'(u(x))$.
-    \item \textbf{Simplifier} l'expression obtenue.
+    \item Diviseurs de $n$ : tester les entiers $d$ de 1 a $\sqrt{n}$ ; chaque
+      diviseur $d$ trouve donne le diviseur associe $\dfrac{n}{d}$ (les
+      diviseurs vont par paires).
+    \item PGCD de $a$ et $b$ ($a > b$) : effectuer la division euclidienne
+      $a = bq + r$ avec $0 \leq r < b$.
+    \item Iterer sur le couple $(b\,;\,r)$ : le PGCD est inchange car
+      $\pgcd(a\,;\,b) = \pgcd(b\,;\,r)$.
+    \item S'arreter quand le reste est NUL : le PGCD est le DERNIER RESTE NON
+      NUL.
+    \item Controler que le resultat divise bien $a$ et $b$.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  \textbf{Exemple.} Deriver $f(x) = \mathrm{e}^{x^2 - 3x}$.
+  Calculer $\pgcd(252\,;\,198)$ par l'algorithme d'Euclide.
 
   \medskip
-  \commentaireMarge{Identifier : $v(t) = \mathrm{e}^t$, $u(x) = x^2 - 3x$.}%
-  Fonction interieure : $u(x) = x^2 - 3x$, donc $u'(x) = 2x - 3$.
+  \commentaireMarge{Chaque ligne : dividende $=$ quotient $\times$ diviseur $+$
+  reste.}%
+  $252 = 1 \times 198 + 54$ ;\quad
+  $198 = 3 \times 54 + 36$ ;\quad
+  $54 = 1 \times 36 + 18$ ;\quad
+  $36 = 2 \times 18 + 0$.
 
-  \commentaireMarge{Appliquer $(e^u)' = u' \cdot e^u$.}%
-  Fonction exterieure : $v(t) = \mathrm{e}^t$, donc $v'(t) = \mathrm{e}^t$.
-
-  $f'(x) = u'(x) \times \mathrm{e}^{u(x)} = (2x-3)\,\mathrm{e}^{x^2 - 3x}$.
+  \medskip
+  Le dernier reste non nul est 18 : $\pgcd(252\,;\,198) = 18$.
+  Controle : $252 = 18 \times 14$ et $198 = 18 \times 11$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier $u'(x)$ : ecrire $(\mathrm{e}^{u})' = \mathrm{e}^u$ au lieu de $u'\,\mathrm{e}^u$.
-    \item \textbf{Piege 2.} Pour $(\ln u)'$, oublier le signe de $u$ : verifier que $u > 0$ sur l'intervalle d'etude.
+    \item \textbf{Piege 1.} Prendre le dernier QUOTIENT ou le dernier reste
+      (nul) au lieu du dernier reste NON NUL.
+    \item \textbf{Piege 2.} Pour les diviseurs, s'arreter avant $\sqrt{n}$ ou
+      oublier les diviseurs associes $\frac{n}{d}$.
+    \item \textbf{Piege 3.} Poursuivre l'algorithme avec le couple (quotient,
+      reste) au lieu de (diviseur, reste).
   \end{itemize}
 }
 
 \verifier{%
-  Verifier sur un cas simple : si $u(x) = 2x$, alors $(\mathrm{e}^{2x})' = 2\mathrm{e}^{2x}$ (et non $\mathrm{e}^{2x}$).
+  Verifier que le PGCD trouve divise les deux entiers de depart, et que les
+  quotients $\frac{a}{d}$ et $\frac{b}{d}$ obtenus sont premiers entre eux.
 }
 
 \sEntrainer{\refExos{M1}}

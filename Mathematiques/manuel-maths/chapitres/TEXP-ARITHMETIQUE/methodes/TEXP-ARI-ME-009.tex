@@ -1,0 +1,98 @@
+% META: {"id": "TEXP-ARI-ME-009", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "methode", "capacites_codes": ["C9"], "methodes": ["M9"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def euclide(a, b):
+%     while b:
+%         a, b = b, a % b
+%     return a
+% def bezout(a, b):
+%     if b == 0:
+%         return a, 1, 0
+%     d, u, v = bezout(b, a % b)
+%     return d, v, u - (a // b) * v
+% def crible(n):
+%     prem = [True] * (n + 1); prem[0] = prem[1] = False
+%     for p in range(2, int(n**0.5) + 1):
+%         if prem[p]:
+%             for m in range(p*p, n + 1, p):
+%                 prem[m] = False
+%     return [p for p in range(n + 1) if prem[p]]
+% def decomposition(n):
+%     f, p = {}, 2
+%     while p * p <= n:
+%         while n % p == 0:
+%             f[p] = f.get(p, 0) + 1; n //= p
+%         p += 1
+%     if n > 1:
+%         f[n] = f.get(n, 0) + 1
+%     return f
+% assert euclide(252, 198) == 18
+% d, u, v = bezout(252, 198)
+% assert d == 18 and 252*u + 198*v == 18
+% assert crible(30) == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+% assert decomposition(360) == {2: 3, 3: 2, 5: 1}
+% END-VERIFY
+\begin{fichemethode}{M9}{Programmer Euclide, Bezout, le crible d'Eratosthene et la decomposition}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande d'ecrire (ou de completer) en
+  Python l'algorithme d'Euclide, le calcul d'un couple de Bezout, le crible
+  d'Eratosthene ou la decomposition en facteurs premiers.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Euclide : boucle \texttt{while b != 0} qui remplace
+      \texttt{(a, b)} par \texttt{(b, a \% b)} ; le PGCD est le dernier
+      \texttt{a}.
+    \item Bezout : version recursive — si $b = 0$, renvoyer $(a, 1, 0)$ ;
+      sinon, obtenir $(d, u, v)$ pour $(b, a \bmod b)$ et renvoyer
+      $(d, v, u - \lfloor a/b \rfloor v)$.
+    \item Crible : tableau de booleens initialise a Vrai (sauf 0 et 1) ; pour
+      chaque premier $p \leq \sqrt{n}$, barrer les multiples de $p$ a partir
+      de $p^2$.
+    \item Decomposition : diviser par les candidats croissants tant que
+      $p^2 \leq n$ ; a la fin, si $n > 1$, c'est un dernier facteur premier.
+    \item Tester chaque fonction sur un cas dont le resultat est connu a la
+      main (fiches M1, M5, M7).
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Ecrire l'algorithme d'Euclide et l'appliquer a $(252\,;\,198)$.
+
+  \medskip
+  \commentaireMarge{L'invariant de boucle : le PGCD du couple est conserve.}%
+\begin{verbatim}
+def euclide(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+\end{verbatim}
+
+  \medskip
+  \texttt{euclide(252, 198)} renvoie 18, conforme au calcul manuel
+  (fiche M1). Le couple \texttt{(a, b)} devient successivement
+  $(198\,;\,54)$, $(54\,;\,36)$, $(36\,;\,18)$, $(18\,;\,0)$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Confondre \texttt{a \% b} (reste) et
+      \texttt{a // b} (quotient) — les deux interviennent dans Bezout.
+    \item \textbf{Piege 2.} Dans le crible, barrer a partir de $2p$ au lieu de
+      $p^2$ (correct mais inutilement couteux) ou oublier la borne
+      $\sqrt{n}$.
+    \item \textbf{Piege 3.} Dans la decomposition, oublier le facteur final
+      $n > 1$ apres la boucle (ex. le 5 de 360, ou un grand premier).
+  \end{itemize}
+}
+
+\verifier{%
+  Confronter chaque sortie a un calcul manuel : PGCD par divisions posees,
+  egalite $au + bv = d$ effectivement verifiee, liste des premiers jusqu'a 30,
+  produit de la decomposition egal a l'entier initial.
+}
+
+\sEntrainer{\refExos{M9}}
+
+\end{fichemethode}

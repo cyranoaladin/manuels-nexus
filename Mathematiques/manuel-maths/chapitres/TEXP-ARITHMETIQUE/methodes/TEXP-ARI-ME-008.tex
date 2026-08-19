@@ -1,0 +1,69 @@
+% META: {"id": "TEXP-ARI-ME-008", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "methode", "capacites_codes": ["C8"], "methodes": ["M8"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import isprime
+% assert isprime(11)
+% assert pow(2, 10, 11) == 1
+% assert pow(7, 10, 11) == 1
+% assert 222 == 22*10 + 2
+% assert pow(7, 222, 11) == pow(7, 2, 11) == 5
+% END-VERIFY
+\begin{fichemethode}{M8}{Utiliser le petit theoreme de Fermat pour reduire de grandes puissances}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande le reste d'une GRANDE
+  puissance $a^n$ modulo un nombre PREMIER $p$ : le petit theoreme de Fermat
+  reduit l'exposant modulo $p - 1$.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Enoncer le theoreme : si $p$ est premier et $p$ ne divise pas $a$,
+      alors $a^{p-1} \equiv 1\ [p]$. (Variante : $a^p \equiv a\ [p]$ pour tout
+      entier $a$.)
+    \item Verifier les hypotheses : $p$ premier, et $a$ non multiple de $p$.
+    \item Ecrire la division euclidienne de l'exposant par $p - 1$ :
+      $n = (p-1)q + r$ avec $0 \leq r < p-1$.
+    \item Reduire : $a^n = \left(a^{p-1}\right)^q \times a^r
+      \equiv 1^q \times a^r \equiv a^r\ [p]$.
+    \item Calculer $a^r$ modulo $p$ (petit exposant restant) et conclure par le
+      reste dans $\{0, \dots, p-1\}$.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Determiner le reste de $7^{222}$ dans la division par 11.
+
+  \medskip
+  \commentaireMarge{Hypotheses : 11 premier, $11 \nmid 7$.}%
+  11 est premier et ne divise pas 7, donc par le petit theoreme de Fermat,
+  $7^{10} \equiv 1\ [11]$.
+
+  \medskip
+  \commentaireMarge{Reduire l'exposant modulo $p-1 = 10$.}%
+  $222 = 22 \times 10 + 2$, donc
+  $7^{222} = \left(7^{10}\right)^{22} \times 7^{2} \equiv 1^{22} \times 49
+  \equiv 49 \equiv 5\ [11]$.
+
+  \medskip
+  Le reste de $7^{222}$ par 11 est 5.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Reduire l'exposant modulo $p$ au lieu de $p - 1$.
+    \item \textbf{Piege 2.} Appliquer $a^{p-1} \equiv 1\ [p]$ quand $p \mid a$
+      (faux : utiliser alors $a^n \equiv 0\ [p]$) ou quand $p$ n'est pas
+      premier.
+    \item \textbf{Piege 3.} Oublier le facteur residuel $a^r$ apres la
+      reduction, ou rendre un « reste » superieur a $p - 1$.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler sur un petit cas calculable directement (ex. $7^2 = 49 \equiv 5\
+  [11]$), et verifier que le reste annonce est dans $\{0, \dots, p-1\}$.
+}
+
+\sEntrainer{\refExos{M8}}
+
+\end{fichemethode}

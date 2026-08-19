@@ -1,0 +1,44 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-ARITHMETIQUE",
+ "method_id": "TEXP-ARI-ME-004",
+ "alias": "M4",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "4f64dc80d6fe0c06450d2dcb5281917a0fb721f7317d07d8203bf02d8840df0d",
+ "capacity_authority": {
+  "code": "C4",
+  "ref": "TEXP-ARI-C4",
+  "libelle": "Je sais résoudre une équation diophantienne simple ax+by=c à l'aide du théorème de Bézout.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert gcd(5, 7) == 1",
+   "assert 5*3 + 7*(-2) == 1",
+   "assert 5*9 + 7*(-6) == 3",
+   "assert all(5*(9 + 7*k) + 7*(-6 - 5*k) == 3 for k in range(-4, 5))"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M4}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

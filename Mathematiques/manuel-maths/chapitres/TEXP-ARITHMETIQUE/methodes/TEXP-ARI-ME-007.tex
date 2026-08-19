@@ -1,0 +1,71 @@
+% META: {"id": "TEXP-ARI-ME-007", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "methode", "capacites_codes": ["C7"], "methodes": ["M7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from sympy import factorint, isprime
+% N = 2*3*5*7*11*13 + 1
+% assert N == 30031 and not isprime(N)
+% assert factorint(N) == {59: 1, 509: 1}
+% assert all(N % p == 1 for p in (2, 3, 5, 7, 11, 13))
+% assert factorint(360) == {2: 3, 3: 2, 5: 1}
+% END-VERIFY
+\begin{fichemethode}{M7}{Demontrer l'infinitude des nombres premiers et decomposer en facteurs premiers}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande la demonstration d'Euclide
+  (il existe une infinite de nombres premiers) ou l'utilisation de la
+  decomposition en facteurs premiers (diviseurs, PGCD, simplifications).
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Raisonner par l'absurde : supposer qu'il n'existe qu'un nombre FINI
+      de premiers $p_1, p_2, \dots, p_r$.
+    \item Construire $N = p_1 p_2 \cdots p_r + 1$.
+    \item Observer que $N \geq 2$ admet un diviseur premier $p$ (tout entier
+      $\geq 2$ en a un : c'est son plus petit diviseur $> 1$).
+    \item Aboutir a la contradiction : $p$ serait l'un des $p_i$, mais alors
+      $p$ diviserait $N$ et $p_1 \cdots p_r$, donc leur difference 1 —
+      impossible. L'ensemble des premiers est donc infini.
+    \item Decomposition : diviser successivement par les premiers croissants
+      (2, 3, 5...) jusqu'a atteindre 1, et ecrire
+      $n = p_1^{\alpha_1} \cdots p_k^{\alpha_k}$ (existence et unicite admises
+      ou demontrees selon l'enonce).
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  1) Demontrer qu'il existe une infinite de nombres premiers.
+  2) Decomposer 360.
+
+  \medskip
+  \commentaireMarge{$N$ n'est divisible par aucun $p_i$ : reste 1.}%
+  1) Supposons les premiers en nombre fini : $p_1, \dots, p_r$. Posons
+  $N = p_1 \cdots p_r + 1 \geq 2$ : il admet un diviseur premier $p$, qui est
+  l'un des $p_i$. Alors $p$ divise $N - p_1 \cdots p_r = 1$ : contradiction.
+  \hfill$\square$
+
+  \medskip
+  \commentaireMarge{Attention : $N$ n'est pas forcement premier lui-meme
+  ($2 \cdot 3 \cdot 5 \cdot 7 \cdot 11 \cdot 13 + 1 = 30031 = 59 \times 509$).}%
+  2) $360 = 2 \times 180 = 2^2 \times 90 = 2^3 \times 45 = 2^3 \times 3^2
+  \times 5$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Affirmer que $N = p_1 \cdots p_r + 1$ est premier :
+      la preuve dit seulement qu'il a un diviseur premier HORS de la liste.
+    \item \textbf{Piege 2.} Oublier de justifier que tout entier $\geq 2$ a un
+      diviseur premier.
+    \item \textbf{Piege 3.} Dans la decomposition, s'arreter avant 1 ou sauter
+      un facteur repete ($2^3$ et non $2^2$ pour 360).
+  \end{itemize}
+}
+
+\verifier{%
+  Recomposer le produit de la decomposition pour retrouver l'entier initial, et
+  controler que chaque facteur ecrit est bien premier.
+}
+
+\sEntrainer{\refExos{M7}}
+
+\end{fichemethode}

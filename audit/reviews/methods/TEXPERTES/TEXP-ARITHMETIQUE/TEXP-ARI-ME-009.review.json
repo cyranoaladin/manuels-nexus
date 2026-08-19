@@ -1,0 +1,44 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-ARITHMETIQUE",
+ "method_id": "TEXP-ARI-ME-009",
+ "alias": "M9",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "46ef1fca23025c465dc8829489fe5cc869d5cbb6e7e918331ca95390dcfb145b",
+ "capacity_authority": {
+  "code": "C9",
+  "ref": "TEXP-ARI-C9",
+  "libelle": "Je sais programmer l'algorithme d'Euclide (PGCD et couple de Bézout), le crible d'Ératosthène, et la décomposition en facteurs premiers.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert euclide(252, 198) == 18",
+   "assert d == 18 and 252*u + 198*v == 18",
+   "assert crible(30) == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]",
+   "assert decomposition(360) == {2: 3, 3: 2, 5: 1}"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M9}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

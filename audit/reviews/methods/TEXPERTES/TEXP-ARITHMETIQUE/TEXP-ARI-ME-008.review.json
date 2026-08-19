@@ -1,0 +1,45 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-ARITHMETIQUE",
+ "method_id": "TEXP-ARI-ME-008",
+ "alias": "M8",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "834baf209b49fd3c1f7323f97c75452e9bf0a632709c5cf9b7c13f4d5da36ff0",
+ "capacity_authority": {
+  "code": "C8",
+  "ref": "TEXP-ARI-C8",
+  "libelle": "Je sais énoncer et utiliser le petit théorème de Fermat.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert isprime(11)",
+   "assert pow(2, 10, 11) == 1",
+   "assert pow(7, 10, 11) == 1",
+   "assert 222 == 22*10 + 2",
+   "assert pow(7, 222, 11) == pow(7, 2, 11) == 5"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M8}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

@@ -1,0 +1,44 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-ARITHMETIQUE",
+ "method_id": "TEXP-ARI-ME-007",
+ "alias": "M7",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "d74354099858215efbbcdfb3592a94fd639dd9134fe48a761600c18efd893faf",
+ "capacity_authority": {
+  "code": "C7",
+  "ref": "TEXP-ARI-C7",
+  "libelle": "Je sais démontrer que l'ensemble des nombres premiers est infini, et utiliser la décomposition en facteurs premiers.",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert N == 30031 and not isprime(N)",
+   "assert factorint(N) == {59: 1, 509: 1}",
+   "assert all(N % p == 1 for p in (2, 3, 5, 7, 11, 13))",
+   "assert factorint(360) == {2: 3, 3: 2, 5: 1}"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M7}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

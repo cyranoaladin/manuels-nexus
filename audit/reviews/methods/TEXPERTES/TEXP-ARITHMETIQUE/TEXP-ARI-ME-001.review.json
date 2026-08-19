@@ -1,0 +1,43 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "TEXPERTES",
+ "chapter": "TEXP-ARITHMETIQUE",
+ "method_id": "TEXP-ARI-ME-001",
+ "alias": "M1",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "7d9f2fd64edc6bb396d2a59894e3dc9d6f67ff7f18a391b9352243c3d131ed00",
+ "capacity_authority": {
+  "code": "C1",
+  "ref": "TEXP-ARI-C1",
+  "libelle": "Je sais déterminer les diviseurs d'un entier et le PGCD de deux entiers (algorithme d'Euclide).",
+  "programme": "Maths complémentaires/expertes 2019 (BO spécial n°8 du 25/7/2019)"
+ },
+ "scientific_checks": {
+  "tool": "SymPy (bloc VERIFY exécuté réellement)",
+  "executed": true,
+  "results": [
+   "assert 252 == 1*198 + 54 and 198 == 3*54 + 36 and 54 == 1*36 + 18 and 36 == 2*18",
+   "assert gcd(252, 198) == 18",
+   "assert len(divs60) == 12 and divs60[:4] == [1, 2, 3, 4]"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "quandUtiliser",
+   "pasApas",
+   "exempleRedige",
+   "pieges",
+   "verifier",
+   "sEntrainer"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme d'autorité de l'édition 2026-2027 (PROGRAM_AUTHORITY_2026_2027.md)",
+ "cross_reference_check": {
+  "sEntrainer": "\\refExos{M1}"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}
