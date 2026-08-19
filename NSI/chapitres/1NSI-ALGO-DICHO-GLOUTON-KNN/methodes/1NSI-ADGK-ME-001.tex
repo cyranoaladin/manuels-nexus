@@ -1,44 +1,52 @@
-% META: {"id": "1NSI-ADGK-ME-001", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "sources_inspiration": [], "status": "approved"}
-\begin{fichemethode}{M1}{Deriver une fonction composee}
+% META: {"id": "1NSI-ADGK-ME-001", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "methode", "capacites": ["1NSI-ALGO-DICHO-GLOUTON-KNN-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M1}{Écrire une recherche dichotomique et prouver sa terminaison}
+\textbf{Quand l'utiliser ?} Quand tu cherches une valeur dans un \textbf{tableau trié} et que tu veux un algorithme bien plus rapide que le parcours séquentiel — ou quand l'énoncé demande de \textbf{prouver la terminaison} avec un variant de boucle.
 
-\quandUtiliser{%
-  Utiliser cette methode lorsque la fonction a deriver fait intervenir une composition : $\mathrm{e}^{u(x)}$, $\ln(u(x))$, $(u(x))^n$, $\sqrt{u(x)}$, ou plus generalement $v(u(x))$.
-}
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item Vérifie que le tableau est \textbf{trié} : la dichotomie ne fonctionne que sur un tableau trié.
+  \item Encadre la zone de recherche par deux indices : \lstinline{g = 0} (gauche) et \lstinline{d = len(t) - 1} (droite).
+  \item Tant que \lstinline{g <= d} : calcule le milieu \lstinline{m = (g + d) // 2}.
+  \item Compare \lstinline{t[m]} à la valeur cherchée \lstinline{v} :
+    si \lstinline{t[m] == v}, c'est trouvé ; si \lstinline{t[m] < v}, la valeur est à droite : \lstinline{g = m + 1} ;
+    sinon elle est à gauche : \lstinline{d = m - 1}.
+  \item Si la boucle se termine sans trouver, renvoie \lstinline{None}.
+  \item \textbf{Terminaison} : pose le variant $V = d - g$. C'est un entier, il est
+    positif ou nul tant que la boucle tourne, et chaque tour le fait
+    \textbf{strictement décroître} (le milieu est exclu de la nouvelle zone).
+    Une suite d'entiers positifs strictement décroissante est finie : la boucle s'arrête.
+\end{enumerate}
 
-\pasApas{%
-  \begin{enumerate}
-    \item \textbf{Identifier la fonction exterieure $v$ et la fonction interieure $u$.}
-    \item \textbf{Calculer $u'(x)$.}
-    \item \textbf{Calculer $v'(t)$.}
-    \item \textbf{Appliquer la formule :} $(v \circ u)'(x) = u'(x) \times v'(u(x))$.
-    \item \textbf{Simplifier} l'expression obtenue.
-  \end{enumerate}
-}
+\textbf{Exemple :}
+\begin{python}
+def recherche_dichotomique(t, v):
+    g, d = 0, len(t) - 1
+    while g <= d:            # variant : d - g
+        m = (g + d) // 2
+        if t[m] == v:
+            return m
+        if t[m] < v:
+            g = m + 1        # le milieu m est exclu
+        else:
+            d = m - 1        # le milieu m est exclu
+    return None
 
-\exempleRedige{%
-  \textbf{Exemple.} Deriver $f(x) = \mathrm{e}^{x^2 - 3x}$.
+t = [2, 5, 7, 11, 13, 17, 19, 23]
+recherche_dichotomique(t, 13)   # renvoie 4
+recherche_dichotomique(t, 4)    # renvoie None
+\end{python}
+Sur \lstinline{t} (8 valeurs), chercher 13 fait décroître le variant $d-g$ :
+$7 \to 3 \to 1$ — trois tours suffisent, contre jusqu'à 8 pour un parcours séquentiel.
 
-  \medskip
-  \commentaireMarge{Identifier : $v(t) = \mathrm{e}^t$, $u(x) = x^2 - 3x$.}%
-  Fonction interieure : $u(x) = x^2 - 3x$, donc $u'(x) = 2x - 3$.
+\textbf{Pièges :}
+\begin{itemize}
+  \item Appliquer la dichotomie à un tableau \textbf{non trié} : le résultat est faux sans message d'erreur.
+  \item Écrire \lstinline{g = m} ou \lstinline{d = m} au lieu de \lstinline{m + 1} / \lstinline{m - 1} : le variant ne décroît plus toujours et la boucle peut devenir infinie.
+  \item Confondre \textbf{variant} (entier qui décroît, prouve la terminaison) et \textbf{invariant} (propriété qui reste vraie, prouve la correction).
+  \item Oublier le cas du tableau vide : avec \lstinline{g = 0} et \lstinline{d = -1}, la boucle ne s'exécute pas et on renvoie bien \lstinline{None}.
+\end{itemize}
 
-  \commentaireMarge{Appliquer $(e^u)' = u' \cdot e^u$.}%
-  Fonction exterieure : $v(t) = \mathrm{e}^t$, donc $v'(t) = \mathrm{e}^t$.
+\textbf{Vérifier :} teste sur un tableau vide, un singleton, la première et la dernière case, et une valeur absente ; affiche $d-g$ à chaque tour et contrôle qu'il décroît strictement en restant $\geq 0$.
 
-  $f'(x) = u'(x) \times \mathrm{e}^{u(x)} = (2x-3)\,\mathrm{e}^{x^2 - 3x}$.
-}
-
-\pieges{%
-  \begin{itemize}
-    \item \textbf{Piege 1.} Oublier $u'(x)$ : ecrire $(\mathrm{e}^{u})' = \mathrm{e}^u$ au lieu de $u'\,\mathrm{e}^u$.
-    \item \textbf{Piege 2.} Pour $(\ln u)'$, oublier le signe de $u$ : verifier que $u > 0$ sur l'intervalle d'etude.
-  \end{itemize}
-}
-
-\verifier{%
-  Verifier sur un cas simple : si $u(x) = 2x$, alors $(\mathrm{e}^{2x})' = 2\mathrm{e}^{2x}$ (et non $\mathrm{e}^{2x}$).
-}
-
-\sEntrainer{\refExos{M1}}
-
+\textbf{S'entraîner :} exercices C1 du chapitre (dichotomie).
 \end{fichemethode}

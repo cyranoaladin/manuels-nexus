@@ -1,0 +1,44 @@
+% META: {"id": "1NSI-ADGK-ME-002", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "methode", "capacites": ["1NSI-ALGO-DICHO-GLOUTON-KNN-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M2}{Résoudre un problème avec un algorithme glouton}
+\textbf{Quand l'utiliser ?} Quand un problème d'optimisation (rendre la monnaie, remplir un sac, planifier des tâches) peut s'attaquer par une suite de \textbf{choix locaux} : à chaque étape, on prend « le meilleur choix immédiat » sans jamais revenir en arrière.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item Identifie la quantité à optimiser (minimiser le nombre de pièces, maximiser un gain\ldots).
+  \item Définis le \textbf{critère glouton} : quel est le « meilleur choix immédiat » ? (ex. : la plus grande pièce qui ne dépasse pas le montant restant).
+  \item Trie les candidats selon ce critère (souvent par ordre décroissant).
+  \item Boucle : tant que le problème n'est pas résolu, applique le meilleur choix possible puis mets à jour l'état (montant restant, capacité restante\ldots).
+  \item Ne reviens \textbf{jamais} sur un choix déjà fait : c'est ce qui rend l'algorithme simple et rapide.
+  \item \textbf{Recul critique} : demande-toi si la solution gloutonne est optimale.
+    C'est vrai pour certains systèmes (monnaie en euros), faux en général — cherche un contre-exemple.
+\end{enumerate}
+
+\textbf{Exemple :}
+\begin{python}
+def rendu_monnaie(montant, pieces=(200, 100, 50, 20, 10, 5, 2, 1)):
+    rendu = []
+    for p in pieces:            # pieces triees par valeur decroissante
+        while montant >= p:     # meilleur choix immediat : la plus grande piece
+            montant -= p
+            rendu.append(p)
+    return rendu
+
+rendu_monnaie(263)   # [200, 50, 10, 2, 1] : 5 pieces, total 263
+\end{python}
+Pour 263~centimes, le glouton rend $200 + 50 + 10 + 2 + 1$ : cinq pièces, et
+c'est ici optimal car le système de pièces en euros est \emph{canonique}.
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item Croire que le glouton est toujours optimal. Contre-exemple : avec les
+    pièces $\{1, 3, 4\}$ et un montant de 6, le glouton rend $4 + 1 + 1$
+    (3 pièces) alors que $3 + 3$ (2 pièces) est meilleur.
+  \item Oublier de trier les candidats selon le critère glouton avant la boucle.
+  \item Oublier de mettre à jour l'état (montant restant) : boucle infinie.
+  \item Ne pas traiter le cas limite montant $= 0$ (la fonction doit renvoyer une liste vide).
+\end{itemize}
+
+\textbf{Vérifier :} contrôle que la somme des pièces rendues vaut exactement le montant de départ, teste montant $= 0$ et un montant qui n'est pas atteignable avec le système donné (que se passe-t-il ?), et cherche systématiquement un contre-exemple d'optimalité.
+
+\textbf{S'entraîner :} exercices C2 du chapitre (algorithmes gloutons).
+\end{fichemethode}

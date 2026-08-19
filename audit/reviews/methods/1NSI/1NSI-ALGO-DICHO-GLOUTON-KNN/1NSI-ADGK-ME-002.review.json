@@ -1,0 +1,45 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "1NSI",
+ "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+ "method_id": "1NSI-ADGK-ME-002",
+ "alias": "M2",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "0bee3bc3e58acd659d21134642e388fc44f5a9069b6ea6592804df09e8d3902a",
+ "capacity_authority": {
+  "code": "C2",
+  "ref": "P-ALGO-05",
+  "desc": "résoudre un problème par un algorithme glouton",
+  "programme": "NSI Première 2019 (BO spécial n°1 du 22/1/2019)",
+  "source": "NSI/referentiel/capacites_1NSI_ALGORITHMIQUE.json"
+ },
+ "scientific_checks": {
+  "tool": "exécution Python réelle",
+  "executed": true,
+  "results": [
+   "rendu 263 = [200,50,10,2,1], somme exacte",
+   "montant 0 -> []",
+   "contre-exemple {1,3,4}/6: glouton 3 pièces vs optimal 2 — non-optimalité confirmée"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "Quand l'utiliser",
+   "Pas à pas",
+   "Exemple (code exécuté)",
+   "Pièges",
+   "Vérifier",
+   "S'entraîner"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme NSI 2019 (dichotomie/variant, gloutons, k-NN), zéro hors-programme",
+ "cross_reference_check": {
+  "inbound_aliases": "M2",
+  "note_m1": null
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

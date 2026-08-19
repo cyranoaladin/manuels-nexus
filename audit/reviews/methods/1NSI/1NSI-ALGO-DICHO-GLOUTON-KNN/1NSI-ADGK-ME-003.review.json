@@ -1,0 +1,45 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "1NSI",
+ "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+ "method_id": "1NSI-ADGK-ME-003",
+ "alias": "M3",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "6db1bec7ba0de560cb2c8867882c49ee5bce30f0f9fca577acfefa051f6005cd",
+ "capacity_authority": {
+  "code": "C3",
+  "ref": "P-ALGO-03",
+  "desc": "prédire la classe par les k plus proches voisins",
+  "programme": "NSI Première 2019 (BO spécial n°1 du 22/1/2019)",
+  "source": "NSI/referentiel/capacites_1NSI_ALGORITHMIQUE.json"
+ },
+ "scientific_checks": {
+  "tool": "exécution Python réelle",
+  "executed": true,
+  "results": [
+   "cibles au cœur des classes A et B correctement prédites",
+   "k=1 et tri par distance carrée validés",
+   "conseil k impair documenté (égalités)"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "Quand l'utiliser",
+   "Pas à pas",
+   "Exemple (code exécuté)",
+   "Pièges",
+   "Vérifier",
+   "S'entraîner"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme NSI 2019 (dichotomie/variant, gloutons, k-NN), zéro hors-programme",
+ "cross_reference_check": {
+  "inbound_aliases": "M3",
+  "note_m1": null
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

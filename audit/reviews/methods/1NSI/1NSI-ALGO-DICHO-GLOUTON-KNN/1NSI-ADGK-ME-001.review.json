@@ -1,0 +1,44 @@
+{
+ "artifact_type": "method_review_packet",
+ "schema_version": 1,
+ "manual": "1NSI",
+ "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+ "method_id": "1NSI-ADGK-ME-001",
+ "alias": "M1",
+ "created": "2026-08-19",
+ "status": "needs_review",
+ "source_sha256": "a1d9f7f86aa92ebe761c930ebfb54164ec5f868505e6460e5cbdc3ec3f0918ac",
+ "capacity_authority": {
+  "code": "C1",
+  "ref": "P-ALGO-04",
+  "desc": "recherche dichotomique + terminaison par variant de boucle",
+  "programme": "NSI Première 2019 (BO spécial n°1 du 22/1/2019)",
+  "source": "NSI/referentiel/capacites_1NSI_ALGORITHMIQUE.json"
+ },
+ "scientific_checks": {
+  "tool": "exécution Python réelle",
+  "executed": true,
+  "results": [
+   "dichotomie: nominal/absent/vide/singleton OK",
+   "variant d-g strictement décroissant et >=0 sur 4 cibles"
+  ]
+ },
+ "pedagogical_checks": {
+  "format_nexus": [
+   "Quand l'utiliser",
+   "Pas à pas",
+   "Exemple (code exécuté)",
+   "Pièges",
+   "Vérifier",
+   "S'entraîner"
+  ],
+  "capacity_specific": true,
+  "no_placeholder": true
+ },
+ "programme_check": "contenu limité au programme NSI 2019 (dichotomie/variant, gloutons, k-NN), zéro hors-programme",
+ "cross_reference_check": {
+  "inbound_aliases": "M1",
+  "note_m1": "ME-001: contenu contaminé antérieur (fiche maths « Dériver une fonction composée », statut approved) REMPLACÉ — ancien contenu préservé dans l'historique Git; statut redescendu à needs_review (aucune conservation d'une validation devenue sans objet)"
+ },
+ "promotion_rule": "promotion ultérieure sur preuve versionnée uniquement"
+}

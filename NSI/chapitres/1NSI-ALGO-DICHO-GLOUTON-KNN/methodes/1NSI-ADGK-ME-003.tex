@@ -1,0 +1,45 @@
+% META: {"id": "1NSI-ADGK-ME-003", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "methode", "capacites": ["1NSI-ALGO-DICHO-GLOUTON-KNN-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M3}{Prédire une classe avec les k plus proches voisins}
+\textbf{Quand l'utiliser ?} Quand tu dois prédire la \textbf{classe} d'un nouvel élément (malade/sain, spam/normal\ldots) à partir d'un jeu de données déjà classées : on regarde les $k$ voisins les plus proches et on prend la \textbf{classe majoritaire}.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item Représente chaque donnée par ses attributs numériques et sa classe, par exemple un triplet \lstinline{(x, y, classe)}.
+  \item Choisis une \textbf{distance} : pour comparer des distances, le carré
+    $d^2 = (x_1-x_2)^2 + (y_1-y_2)^2$ suffit (inutile de calculer la racine carrée).
+  \item Calcule la distance de la cible à \textbf{chaque} donnée du jeu.
+  \item Trie les données par distance croissante et garde les $k$ premières : ce sont les $k$ plus proches voisins.
+  \item Compte les classes parmi ces $k$ voisins et renvoie la \textbf{classe majoritaire}.
+  \item Choisis $k$ \textbf{impair} (pour deux classes) afin d'éviter les égalités, et teste plusieurs valeurs de $k$.
+\end{enumerate}
+
+\textbf{Exemple :}
+\begin{python}
+def knn_classe(donnees, cible, k):
+    # donnees : liste de (x, y, classe)
+    tri = sorted(donnees,
+                 key=lambda p: (p[0]-cible[0])**2 + (p[1]-cible[1])**2)
+    voisins = tri[:k]
+    classes = [c for _, _, c in voisins]
+    return max(set(classes), key=classes.count)
+
+pts = [(1, 1, 'A'), (2, 1, 'A'), (1, 2, 'A'),
+       (6, 6, 'B'), (7, 6, 'B'), (6, 7, 'B')]
+knn_classe(pts, (2, 2), 3)   # 'A' : les 3 voisins proches sont de classe A
+knn_classe(pts, (6, 5), 3)   # 'B'
+\end{python}
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item Prendre $k$ pair avec deux classes : une égalité $k/2$--$k/2$ rend la prédiction arbitraire.
+  \item Prendre $k = 1$ : très sensible au bruit (un seul point aberrant décide) ;
+    prendre $k = n$ : on renvoie toujours la classe majoritaire globale, sans tenir compte de la cible.
+  \item Comparer des attributs d'échelles très différentes (ex. des mètres et des
+    kilogrammes) sans les normaliser : l'attribut de grande amplitude écrase l'autre.
+  \item Recalculer \lstinline{sqrt} pour chaque distance : inutile pour un tri, le carré préserve l'ordre.
+\end{itemize}
+
+\textbf{Vérifier :} teste une cible clairement au cœur de chaque classe (la prédiction doit être cette classe), fais varier $k$ ($1$, $3$, $n$) et observe la stabilité, et contrôle que ta fonction traite bien le cas $k$ supérieur au nombre de données.
+
+\textbf{S'entraîner :} exercices C3 du chapitre (k plus proches voisins).
+\end{fichemethode}
