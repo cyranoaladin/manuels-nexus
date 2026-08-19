@@ -1,24 +1,27 @@
 artifact_type: assembly_reuse_contracts
-schema_version: 1
-# Registre des réutilisations éditoriales déclarées par assemblage.
-# expected_occurrences provient d'une autorité INDÉPENDANTE de l'assembleur
-# (manifest canonique) — jamais de l'observation. Tout objet non déclaré a un
-# attendu implicite de 1 : une duplication non contractualisée reste une
-# anomalie duplicate_assembly_objects. Voir
-# audit/A3_DUPLICATE_ASSEMBLY_FORENSICS.md.
+schema_version: 2
+# Annotations de réutilisation éditoriale — SANS valeur métier indépendante.
+# L'occurrence attendue est DÉRIVÉE du manifeste d'autorité
+# (_derive_expected_occurrence_count : 1 rôle = 1 occurrence ;
+# exercise_order + rendered_method.applications). Si le manifeste retire un
+# rôle, l'attendu redescend automatiquement ; si l'object_id est absent des
+# rôles du manifeste, l'annotation est pendante et l'inventaire échoue.
+# Tout objet non annoté a un attendu implicite de 1 : l'annotation est
+# l'acte éditorial obligatoire qui reconnaît la réutilisation.
+# Voir audit/A3_DUPLICATE_ASSEMBLY_FORENSICS.md.
 contracts:
 - assembly_id: "math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex"
   object_path: "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-001.tex"
-  expected_occurrences: 2
-  authority: "Mathematiques/manuel-maths/build/maquette-v5/manifest.json#rendered_method.applications[0] + exercise_order[0]"
-  reason: "application de la méthode ME-001 (pages 6-8) puis grille d'exercices (page 9, n°1) ; chaîne de renvois contractuelle « S'entraîner : ex. 1, 2, 7 p. 9 »"
+  object_id: "1SPE-DERLOCAL-EX-001"
+  authority_manifest: "Mathematiques/manuel-maths/build/maquette-v5/manifest.json"
+  editorial_reason: "application de la méthode ME-001 (pages 6-8) puis grille d'exercices (page 9, n°1) ; chaîne de renvois contractuelle « S'entraîner : ex. 1, 2, 7 p. 9 »"
 - assembly_id: "math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex"
   object_path: "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-002.tex"
-  expected_occurrences: 2
-  authority: "Mathematiques/manuel-maths/build/maquette-v5/manifest.json#rendered_method.applications[1] + exercise_order[1]"
-  reason: "application de la méthode ME-001 (pages 6-8) puis grille d'exercices (page 9, n°2) ; chaîne de renvois contractuelle « S'entraîner : ex. 1, 2, 7 p. 9 »"
+  object_id: "1SPE-DERLOCAL-EX-002"
+  authority_manifest: "Mathematiques/manuel-maths/build/maquette-v5/manifest.json"
+  editorial_reason: "application de la méthode ME-001 (pages 6-8) puis grille d'exercices (page 9, n°2) ; chaîne de renvois contractuelle « S'entraîner : ex. 1, 2, 7 p. 9 »"
 - assembly_id: "math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex"
   object_path: "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-005.tex"
-  expected_occurrences: 2
-  authority: "Mathematiques/manuel-maths/build/maquette-v5/manifest.json#rendered_method.applications[2] + exercise_order[6]"
-  reason: "application de la méthode ME-001 (pages 6-8) puis grille d'exercices (page 9, n°7) ; chaîne de renvois contractuelle « S'entraîner : ex. 1, 2, 7 p. 9 »"
+  object_id: "1SPE-DERLOCAL-EX-005"
+  authority_manifest: "Mathematiques/manuel-maths/build/maquette-v5/manifest.json"
+  editorial_reason: "application de la méthode ME-001 (pages 6-8) puis grille d'exercices (page 9, n°7) ; chaîne de renvois contractuelle « S'entraîner : ex. 1, 2, 7 p. 9 »"

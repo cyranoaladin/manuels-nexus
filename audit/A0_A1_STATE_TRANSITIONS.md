@@ -7,7 +7,7 @@ Detailed state transition metrics across Phase A0 (Model Completeness), Phase A1
 | Metric | S0 Baseline | S1 Post-A0 | S2 Post-A1 | S3 Post-A2 |
 | --- | --- | --- | --- | --- |
 | **TOTAL_RAW_ANOMALIES** | `6425` | `5630` | `5615` | `5615` |
-| **TOTAL_RELEASE_BLOCKING** | `6425` | `5630` | `5615` | `5615` |
+| **TOTAL_RELEASE_BLOCKING** † | `6425` | `5630` | `5615` | `5615` |
 | **TOTAL_P0** | `15` | `15` | `0` | **`0`** |
 | **broken_latex** | `5` | `5` | `0` | **`0`** |
 | **latex_cycles** | `10` | `10` | `0` | **`0`** |
@@ -23,3 +23,9 @@ Detailed state transition metrics across Phase A0 (Model Completeness), Phase A1
 > soustraction arithmétique des 10 cycles. Valeur reproduite hermétiquement à
 > `9ddcffee` (deux worktrees frais, artefacts byte-identiques) : **5615**.
 > Voir `audit/PROVENANCE_CORRECTION_1361cf37.md`.
+>
+> † Note sémantique (2026-08-19) : dans ce snapshot historique,
+> `TOTAL_RELEASE_BLOCKING` égalait RAW par construction. Taxonomie corrigée :
+> voir `audit/ANOMALY_METRIC_SEMANTICS.md` (à cette époque,
+> NONBLOCKING = 3 anomalies `intentional_reuse`, donc BLOCKING réel = RAW − 3
+> pour S2/S3). Valeurs historiques non réécrites.

@@ -4911,15 +4911,61 @@ def _add_latex_graph(
 ASSEMBLY_REUSE_CONTRACTS_FILE = "audit/ASSEMBLY_REUSE_CONTRACTS.yaml"
 
 
+def _derive_expected_occurrence_count(
+    root: Path,
+    authority_manifest: str,
+    object_id: str,
+) -> int:
+    """Dérive l'occurrence attendue depuis le manifeste canonique.
+
+    Unique source de vérité (arbitrage PRE-A4): le manifeste. Un objet compte
+    une occurrence par rôle déclaré — présence dans ``exercise_order`` et
+    présence dans ``rendered_method.applications``. Si le manifeste retire un
+    rôle, l'attendu redescend automatiquement; si l'objet est absent des deux
+    rôles, l'annotation est pendante et le chargement échoue.
+    """
+    manifest_path = root / authority_manifest
+    try:
+        payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise InventoryError(
+            "manifeste d'autorité de réutilisation illisible: "
+            f"{authority_manifest} ({type(exc).__name__})"
+        ) from exc
+    if not isinstance(payload, Mapping):
+        raise InventoryError(
+            f"manifeste d'autorité de réutilisation invalide: {authority_manifest}"
+        )
+    order = payload.get("exercise_order")
+    rendered = payload.get("rendered_method")
+    applications = (
+        rendered.get("applications") if isinstance(rendered, Mapping) else None
+    )
+    roles = 0
+    if isinstance(order, list) and object_id in order:
+        roles += 1
+    if isinstance(applications, list) and object_id in applications:
+        roles += 1
+    if roles == 0:
+        raise InventoryError(
+            "annotation de réutilisation pendante: "
+            f"{object_id} absent des rôles du manifeste {authority_manifest}"
+        )
+    return roles
+
+
 def _load_assembly_reuse_contracts(
     root: Path,
 ) -> dict[tuple[str, str], int]:
-    """Registre des réutilisations éditoriales déclarées par assemblage.
+    """Annotations de réutilisation éditoriale, attendu DÉRIVÉ du manifeste.
 
-    Contrat: pour (assembly_id, object_path), l'occurrence attendue (>= 2)
-    provient d'une autorité indépendante de l'assembleur (manifest canonique,
-    contrat de chapitre...). Le défaut implicite reste 1 pour tout objet non
-    déclaré: une duplication non contractualisée demeure une anomalie.
+    Le registre ne porte AUCUNE valeur métier indépendante: pour chaque
+    (assembly_id, object_path), il ne déclare que l'identité de l'objet, le
+    manifeste d'autorité et la justification éditoriale. L'occurrence
+    attendue est calculée par ``_derive_expected_occurrence_count``. Défaut
+    implicite 1 pour tout objet non annoté: une duplication non annotée
+    reste une anomalie (l'annotation est l'acte éditorial obligatoire), et
+    une réutilisation retirée du manifeste redescend automatiquement à 1.
     """
     path = root / ASSEMBLY_REUSE_CONTRACTS_FILE
     if not path.exists() and not path.is_symlink():
@@ -4933,7 +4979,7 @@ def _load_assembly_reuse_contracts(
     if (
         not isinstance(payload, Mapping)
         or payload.get("artifact_type") != "assembly_reuse_contracts"
-        or payload.get("schema_version") != 1
+        or payload.get("schema_version") != 2
         or not isinstance(payload.get("contracts"), list)
     ):
         raise InventoryError("registre de réutilisation invalide")
@@ -4943,31 +4989,40 @@ def _load_assembly_reuse_contracts(
             raise InventoryError("entrée de réutilisation invalide")
         assembly_id = entry.get("assembly_id")
         object_path = entry.get("object_path")
-        expected = entry.get("expected_occurrences")
-        authority = entry.get("authority")
-        reason = entry.get("reason")
+        object_id = entry.get("object_id")
+        authority_manifest = entry.get("authority_manifest")
+        reason = entry.get("editorial_reason")
         if (
             not isinstance(assembly_id, str)
             or not assembly_id
             or not isinstance(object_path, str)
             or not object_path
-            or type(expected) is not int
-            or expected < 2
-            or not isinstance(authority, str)
-            or not authority
+            or not isinstance(object_id, str)
+            or not object_id
+            or not isinstance(authority_manifest, str)
+            or not authority_manifest
             or not isinstance(reason, str)
             or not reason
         ):
             raise InventoryError(
                 "entrée de réutilisation invalide: assembly_id/object_path/"
-                "authority/reason non vides et expected_occurrences >= 2 requis"
+                "object_id/authority_manifest/editorial_reason non vides requis"
+            )
+        if PurePosixPath(object_path).name != f"{object_id}.tex":
+            raise InventoryError(
+                "annotation de réutilisation incohérente: "
+                f"{object_path} ne porte pas l'objet {object_id}"
             )
         key = (assembly_id, object_path)
         if key in declared:
             raise InventoryError(
                 f"réutilisation déclarée en double: {assembly_id} -> {object_path}"
             )
-        declared[key] = expected
+        declared[key] = _derive_expected_occurrence_count(
+            root,
+            authority_manifest,
+            object_id,
+        )
     return declared
 
 
