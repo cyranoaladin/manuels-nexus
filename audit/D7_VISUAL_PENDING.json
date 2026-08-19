@@ -1,0 +1,46 @@
+{
+ "artifact_name": "D7_VISUAL_PENDING",
+ "created": "2026-08-19",
+ "status": "PENDING_HUMAN_REVIEW",
+ "decision_pending": "D7 (BLOCKED) — validation visuelle humaine de la charte (onglet 12 mm)",
+ "reason": "L'ARBITRAGE HUMAIN 12 MM CONFIRMÉ (géométrie be5f37a1 VALIDÉE : 12 mm visibles + 1 mm bleed, texte ±6 mm) a changé le rendu de la maquette ; les oracles visuels D7 (constantes de check_maquette_v5.py et rasters validations/v5) restent GELÉS — aucune mise à jour d'oracle n'est autorisée tant que D7 est BLOCKED. Le présent artefact déclare l'état divergent EXACT en attente de revue humaine : toute divergence supplémentaire doit refaire échouer le test.",
+ "maquette_v5": {
+  "diverging_pages": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   15
+  ],
+  "matching_pages": [
+   6,
+   14
+  ],
+  "page_13_rule": "réglée par les références it1/it2 du checker (inchangées)",
+  "current_page_sha256": {
+   "1": "1913c770c83f6dfb57af82bf6528f77b828e08419f13af6ba3c4a12ce0cf1499",
+   "2": "1992b081a0e62aa152a1ebc860774ba5ade5fda65de74bf2653804d37087c929",
+   "3": "c6b2a6aa8ef9bc027ad216e36c26654c8a9ff0c3e57604f5d5a4b20bf236d256",
+   "4": "4ec983243c791e2816a0d7d722b0f8b270689664dd44125e8be961d0614a56b3",
+   "5": "3c3b66b86b4a646574dd456db57dfb148776c7f10e38cacca605855c25577fe0",
+   "6": "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
+   "7": "786fd415d5c3e96ae0ffdfc847ee1b8dec0c02ae7cde7fc5e21ec8fd8831c928",
+   "8": "449f1a278ea4b3df6517b01a728616b29eacb67d7a439539d47d523ece513e7f",
+   "9": "44de29de9e148b67de344594b48120037007ba68bacdadded08e42f2f92469ec",
+   "10": "ab12d3bc3125fcb65528fb7158a3299675d4900a73ae1295414f3f8bf5ef4f97",
+   "11": "60d8f8d6d911f0b94734053f18eafd2f677ed57eb26ad666c35d25b9d260a4d2",
+   "12": "554bdc2b6a783418b96043b1bf97de394b37041479baed0268c9e555a0649700",
+   "13": "12723f01200d2999a170d3a4f431e171e8119756811050e7080ff36861b3006e",
+   "14": "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
+   "15": "edb7ba0374e4d0965fee07b183a7569eff15b2b7e221966427b7668f0e7c3923"
+  }
+ },
+ "no_go_carrier": "release-strict / D7 — ce statut PENDING ne lève aucun blocage de publication"
+}

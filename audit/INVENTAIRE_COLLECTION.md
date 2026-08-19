@@ -6,10 +6,10 @@
 
 | ID | Manuel | Matière | Niveau | Édition | Chapitres | Capacités | Exercices | Fichiers contenu | Objets | Variantes compilées |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 345 | 940 | 940 | manual |
-| 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 53 | 477 | 1417 | 1417 | manual |
-| TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 50 | 300 | 754 | 754 | manual |
-| TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 194 | 484 | 484 | manual |
+| 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 345 | 942 | 942 | manual |
+| 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 53 | 477 | 1420 | 1420 | manual |
+| TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 50 | 300 | 785 | 785 | manual |
+| TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 194 | 508 | 508 | manual |
 | TNSI | NSI Terminale | NSI | Terminale | courante | 6 | 59 | 266 | 719 | 719 | manual |
 | TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 11 | 67 | 448 | 1248 | 1248 | manual |
 
@@ -17,9 +17,8 @@
 
 | Catégorie | Nombre |
 |---|---|
-| blocking_statuses | 2133 |
+| blocking_statuses | 2222 |
 | unclassified_types | 660 |
-| broken_meta_references | 542 |
 | unassembled_objects | 52 |
 | unattributed_pdfs | 22 |
 | orphan_files | 12 |
@@ -31,11 +30,6 @@
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-003, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-004, scope=object
-- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-024.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
-- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024-CDP.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
-- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
-- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-009.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
-- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-010.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
 - context_mismatches: path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/07_td_contextualise.tex, scope=object, field=chapitre, expected=TCOMPL-CALCULS-AIRES, actual=TSPE-DERIVATION-CONVEXITE
 - context_mismatches: path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/07_td_fil_rouge.tex, scope=object, field=chapitre, expected=TCOMPL-CALCULS-AIRES, actual=TSPE-DERIVATION-CONVEXITE
 - context_mismatches: path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_derivee_composee.tex, scope=object, field=chapitre, expected=TCOMPL-CALCULS-AIRES, actual=TSPE-DERIVATION-CONVEXITE

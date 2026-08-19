@@ -15,7 +15,9 @@ import pytest
 
 
 MANUAL_ROOT = Path(__file__).resolve().parents[1]
-CLASS_PATH = MANUAL_ROOT / "gabarits" / "nexus-manuel.cls"
+# Redirection canonique depuis la canonicalisation INFRA : la classe
+# contractuelle vit dans gabarits/common/.
+CLASS_PATH = MANUAL_ROOT.parents[1] / "gabarits" / "common" / "nexus-manuel.cls"
 MAX_PASSES = 6
 RUN_NONCE = "0123456789abcdef0123456789abcdef"
 CAPTURE_RECORD = re.compile(r"NEXUS-MARGIN-CAPTURE:(nxm:[^:\s]+:[^:\s]+:\d{8})")

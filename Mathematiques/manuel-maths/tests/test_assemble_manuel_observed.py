@@ -613,11 +613,19 @@ PONT_COMMANDES = ("exemple", "contreexemple", "demonstration")
 
 
 def test_the_charter_loads_the_v6_bridge_and_can_be_asked_not_to() -> None:
-    charte = (MANUAL_ROOT / "gabarits" / "nexus-charte-v6.sty").read_text(
+    # Depuis la canonicalisation INFRA (source unique gabarits/common), les
+    # fichiers locaux gabarits/nexus-*-v6.sty sont des redirections ; le
+    # contenu contractuel vit dans gabarits/common/. Le test suit la
+    # redirection au lieu de figer l'ancienne copie locale.
+    wrapper = (MANUAL_ROOT / "gabarits" / "nexus-charte-v6.sty").read_text(
+        encoding="utf-8"
+    )
+    assert "gabarits/common/nexus-charte" in wrapper
+    charte = (GIT_ROOT / "gabarits" / "common" / "nexus-charte.sty").read_text(
         encoding="utf-8"
     )
 
-    assert "\\RequirePackage{gabarits/nexus-pont-v6}" in charte
+    assert "\\nxRequireCommonModule{nexus-pont}" in charte
     # Le diff avant/apres exige par AGENTS.md suppose de pouvoir rendre la
     # maquette v4.1 sans toucher au corpus.
     assert "\\DeclareOption{sanspont}" in charte
@@ -625,14 +633,14 @@ def test_the_charter_loads_the_v6_bridge_and_can_be_asked_not_to() -> None:
 
 @pytest.mark.parametrize("environnement", PONT_ENVIRONNEMENTS)
 def test_the_bridge_rewires_every_v41_box_environment(environnement: str) -> None:
-    pont = (MANUAL_ROOT / "gabarits" / "nexus-pont-v6.sty").read_text(encoding="utf-8")
+    pont = (GIT_ROOT / "gabarits" / "common" / "nexus-pont.sty").read_text(encoding="utf-8")
 
     assert f"\\renewenvironment{{{environnement}}}" in pont
 
 
 @pytest.mark.parametrize("commande", PONT_COMMANDES)
 def test_the_bridge_rewires_every_v41_paragraph_macro(commande: str) -> None:
-    pont = (MANUAL_ROOT / "gabarits" / "nexus-pont-v6.sty").read_text(encoding="utf-8")
+    pont = (GIT_ROOT / "gabarits" / "common" / "nexus-pont.sty").read_text(encoding="utf-8")
 
     assert f"\\renewcommand{{\\{commande}}}" in pont
 
@@ -640,7 +648,7 @@ def test_the_bridge_rewires_every_v41_paragraph_macro(commande: str) -> None:
 def test_the_bridge_covers_every_box_macro_the_corpus_actually_uses() -> None:
     """No v4.1 box may survive the bridge: the corpus is never rewritten."""
 
-    pont = (MANUAL_ROOT / "gabarits" / "nexus-pont-v6.sty").read_text(encoding="utf-8")
+    pont = (GIT_ROOT / "gabarits" / "common" / "nexus-pont.sty").read_text(encoding="utf-8")
     corpus = "\n".join(
         path.read_text(encoding="utf-8", errors="replace")
         for path in (MANUAL_ROOT / "chapitres").rglob("*.tex")
@@ -699,14 +707,13 @@ def test_real_professor_order_matches_declared_inventory() -> None:
     )
     professor_paths = _professor_paths()
 
-    # Effectif atteste le 2026-08-11 : l'arbre vivant et
-    # audit/INVENTAIRE_COLLECTION.json donnent tous deux 1396 objets, dans le
-    # meme ordre. La constante valait encore 1334, effectif anterieur a la
-    # derniere regeneration de l'inventaire : elle avait decroche des deux
-    # sources qu'elle est censee garder solidaires. Ce garde-fou reste en dur
-    # pour detecter une derive simultanee du vivant et du declare, cas que
-    # l'egalite ligne suivante ne verrait pas.
-    assert len(professor_paths) == 1396
+    # Effectif re-atteste le 2026-08-19 (cloture A4) : l'arbre vivant et
+    # audit/INVENTAIRE_COLLECTION.json regenere donnent tous deux 1415
+    # objets, dans le meme ordre (1396 attestes le 2026-08-11 + 16 objets des
+    # lots scelles depuis + 3 fiches methodes TRIGO de la campagne A4).
+    # Ce garde-fou reste en dur pour detecter une derive simultanee du vivant
+    # et du declare, cas que l'egalite ligne suivante ne verrait pas.
+    assert len(professor_paths) == 1415
     assert all(
         path.startswith("Mathematiques/manuel-maths/") for path in professor_paths
     )
@@ -724,11 +731,14 @@ def test_real_student_order_keeps_evaluations_and_excludes_teacher_objects() -> 
     )
     student_paths = _student_paths()
 
-    # Meme constat que pour la variante professeur : effectif atteste a 905,
-    # identique dans l'arbre vivant et dans l'inventaire (2026-08-11).
-    assert len(student_paths) == 905
+    # Meme constat que pour la variante professeur : effectif re-atteste a
+    # 918 (cloture A4 2026-08-19), identique dans l'arbre vivant et dans
+    # l'inventaire regenere.
+    assert len(student_paths) == 918
     assert student_paths == assembly["included_objects"]
-    assert sum("/evaluations/" in path for path in student_paths) == 18
+    # 20 = 10 chapitres x (EV-A + EV-B) — les evaluations TRIGO (lot BO 2026
+    # scelle) ont rejoint l'assemblage depuis l'attestation du 2026-08-11.
+    assert sum("/evaluations/" in path for path in student_paths) == 20
     assert all("/corriges/" not in path for path in student_paths)
     assert all(not path.endswith("-corrige.tex") for path in student_paths)
     assert all(

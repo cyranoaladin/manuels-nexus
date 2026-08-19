@@ -295,14 +295,26 @@ def test_missing_asset_produces_warning_in_real_compilation(tmp_path):
     import subprocess
     import pdf_integrity
 
-    # Copier gabarits/ en retirant nexus-icons.tex
+    # Depuis la canonicalisation INFRA, gabarits/nexus-manuel.cls est un
+    # wrapper qui sonde ../../gabarits/common/ puis ../gabarits/common/
+    # (chemins concus pour le cwd de l'assembleur). Le bac a sable reproduit
+    # cette topologie : compilation depuis tmp/work, arbre canonique en
+    # tmp/gabarits/common (= ../gabarits/common vu du cwd), et
+    # nexus-icons.tex retire des DEUX emplacements sondes par la classe.
     gabarits_src = ROOT / "gabarits"
-    gabarits_dst = tmp_path / "gabarits"
+    work = tmp_path / "work"
+    work.mkdir()
+    gabarits_dst = work / "gabarits"
     shutil.copytree(gabarits_src, gabarits_dst)
+    common_src = ROOT.parents[1] / "gabarits" / "common"
+    shutil.copytree(common_src, tmp_path / "gabarits" / "common")
     (gabarits_dst / "nexus-icons.tex").unlink()
+    common_icons = tmp_path / "gabarits" / "common" / "nexus-icons.tex"
+    if common_icons.exists():
+        common_icons.unlink()
 
     # Document minimal
-    doc = tmp_path / "minimal.tex"
+    doc = work / "minimal.tex"
     doc.write_text(
         "\\documentclass{nexus-manuel}\n"
         "\\begin{document}\n"
@@ -317,12 +329,12 @@ def test_missing_asset_produces_warning_in_real_compilation(tmp_path):
     env["TEXINPUTS"] = f"{gabarits_dst}:{env.get('TEXINPUTS', '')}"
     subprocess.run(
         ["lualatex", "-interaction=nonstopmode",
-         f"-output-directory={tmp_path}", str(doc)],
-        capture_output=True, cwd=tmp_path, env=env,
+         f"-output-directory={work}", str(doc)],
+        capture_output=True, cwd=work, env=env,
     )
 
-    log_path = tmp_path / "minimal.log"
-    pdf_path = tmp_path / "minimal.pdf"
+    log_path = work / "minimal.log"
+    pdf_path = work / "minimal.pdf"
     assert log_path.exists(), "le log de compilation n'a pas ete produit"
 
     log_text = log_path.read_text(encoding="utf-8", errors="replace")

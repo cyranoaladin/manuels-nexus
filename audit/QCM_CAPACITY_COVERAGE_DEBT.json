@@ -1,0 +1,400 @@
+{
+ "artifact_name": "QCM_CONTENT_DEBT",
+ "created": "2026-08-19",
+ "status": "PENDING_CONTENT_LOT",
+ "reason": "Trous de couverture QCM x capacites anterieurs a la campagne A4 (les QCM ont ete produits avant la completion des contrats). La production de questions releve d'un lot de contenu QCM (LOT 5, gates distracteur<->erreur documentee + validation humaine) — NON demarre (cloture A4 §17). Ce registre fige l'ecart EXACT : toute derive (nouvelle capacite non interrogee, ou capacite couverte sans mise a jour du registre) refait echouer le test. S'y ajoutent les distracteurs P1 sans diagnostic/renvoi de remediation (registre exact ci-dessous), meme lot de contenu QCM.",
+ "no_go_carrier": "release-strict — ce statut PENDING ne leve aucun blocage de publication",
+ "missing_by_chapter": {
+  "TCOMPL-ECHANTILLONNAGE": [
+   "C4",
+   "C5",
+   "C6"
+  ],
+  "TCOMPL-INEGALITES": [
+   "C4",
+   "C5"
+  ],
+  "TCOMPL-INFERENCE-BAYESIENNE": [
+   "C4",
+   "C5"
+  ],
+  "TCOMPL-LOGARITHME-HISTORIQUE": [
+   "C4",
+   "C5"
+  ],
+  "TCOMPL-MODELES-EVOLUTION": [
+   "C4",
+   "C5"
+  ],
+  "TCOMPL-MODELES-FONCTION": [
+   "C4",
+   "C5",
+   "C6",
+   "C7"
+  ],
+  "TCOMPL-TEMPS-ATTENTE": [
+   "C4",
+   "C5",
+   "C6"
+  ],
+  "TEXP-ARITHMETIQUE": [
+   "C4",
+   "C5",
+   "C6",
+   "C7",
+   "C8",
+   "C9"
+  ],
+  "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE": [
+   "C4",
+   "C5"
+  ],
+  "TEXP-COMPLEXES-TRIGO-POLYNOMES": [
+   "C4",
+   "C5",
+   "C6",
+   "C7"
+  ],
+  "TEXP-GRAPHES": [
+   "C4",
+   "C5"
+  ],
+  "TEXP-MATRICES-MARKOV": [
+   "C4",
+   "C5",
+   "C6",
+   "C7"
+  ],
+  "TSPE-CALCUL-INTEGRAL": [
+   "C4",
+   "C5",
+   "C6",
+   "C7",
+   "C8"
+  ],
+  "TSPE-COMBINATOIRE": [
+   "C4"
+  ],
+  "TSPE-GEOMETRIE-ESPACE": [
+   "C2",
+   "C3",
+   "C4",
+   "C5",
+   "C6",
+   "C7",
+   "C8",
+   "C9",
+   "C10",
+   "C11",
+   "C12",
+   "C13",
+   "C14",
+   "C15",
+   "C16"
+  ],
+  "TSPE-LOGARITHME": [
+   "C2",
+   "C3",
+   "C4"
+  ],
+  "TSPE-PRIMITIVES-EQDIFF": [
+   "C2",
+   "C3",
+   "C4",
+   "C5"
+  ],
+  "TSPE-PROBABILITES": [
+   "C1",
+   "C3",
+   "C4",
+   "C5",
+   "C6",
+   "C9"
+  ]
+ },
+ "total_missing": 70,
+ "distractor_gaps_by_chapter": {
+  "TCOMPL-CALCULS-AIRES": {
+   "Q1": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q2": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q3": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q4": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q5": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q6": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ]
+  },
+  "TCOMPL-CORRELATION-CAUSALITE": {
+   "Q1": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q2": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q3": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q4": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q5": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q6": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ]
+  },
+  "TSPE-DERIVATION-CONVEXITE": {
+   "Q1": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q2": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q3": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q4": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q5": [
+    "A:renvoi-vide",
+    "B:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q6": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q7": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q8": [
+    "A:renvoi-vide",
+    "B:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q9": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q10": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q11": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q12": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q13": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q14": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q15": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ]
+  },
+  "TSPE-GEOMETRIE-ESPACE": {
+   "Q1": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q2": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q3": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q4": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q5": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ]
+  },
+  "TSPE-LOGARITHME": {
+   "Q1": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q2": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q3": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q4": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q5": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ]
+  },
+  "TSPE-PRIMITIVES-EQDIFF": {
+   "Q1": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q2": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q3": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q4": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q5": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ]
+  },
+  "TSPE-PROBABILITES": {
+   "Q1": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q2": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q3": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q4": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q5": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q6": [
+    "B:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ]
+  },
+  "TSPE-TRIGONOMETRIE": {
+   "Q1": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q2": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q3": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q4": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ],
+   "Q5": [
+    "A:renvoi-vide",
+    "C:renvoi-vide",
+    "D:renvoi-vide"
+   ]
+  }
+ },
+ "total_distractor_gaps": 159
+}

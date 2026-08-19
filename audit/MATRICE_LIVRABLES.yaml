@@ -5,11 +5,8 @@ manuals:
   1NSI:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '339'
+      detail: '342'
       source: anomalies.blocking_statuses
-    - code: anomalie:broken_meta_references
-      detail: '41'
-      source: anomalies.broken_meta_references
     - code: anomalie:unclassified_types
       detail: '231'
       source: anomalies.unclassified_types
@@ -29,7 +26,7 @@ manuals:
       detail: declared
       source: deliverable_matrix.1NSI.variants.version_amenagee
     - code: statuts_non_approuves
-      detail: objets=329; contrats=10
+      detail: objets=332; contrats=10
       source: manuals.1NSI.statuses
     current:
       artifacts:
@@ -48,9 +45,9 @@ manuals:
       - 1NSI-TYPES-CONSTRUITS
       - 1NSI-WEB-IHM
       statuses:
-        approved: 611
+        approved: 610
         manual_review: 7
-        needs_review: 169
+        needs_review: 172
         verified: 153
       totals:
         capacites: 53
@@ -59,7 +56,7 @@ manuals:
         diagnostics: 1
         evaluations: 20
         exercices_principaux: 345
-        methodes: 14
+        methodes: 16
         projets: 1
         qcm: 10
         remediations: 62
@@ -80,7 +77,6 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
-    - anomalie:broken_meta_references
     - statuts_non_approuves
     structural_compile_ready: false
     variants:
@@ -138,11 +134,8 @@ manuals:
   1SPE:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '1411'
+      detail: '1414'
       source: anomalies.blocking_statuses
-    - code: anomalie:broken_meta_references
-      detail: '3'
-      source: anomalies.broken_meta_references
     - code: anomalie:unassembled_objects
       detail: '5'
       source: anomalies.unassembled_objects
@@ -159,7 +152,7 @@ manuals:
       detail: partial
       source: deliverable_matrix.1SPE.variants.livret_remediation
     - code: statuts_non_approuves
-      detail: objets=1401; contrats=10
+      detail: objets=1404; contrats=10
       source: manuals.1SPE.statuses
     current:
       artifacts:
@@ -180,6 +173,7 @@ manuals:
       statuses:
         approved: 16
         generated: 1393
+        needs_review: 3
         verified: 8
       totals:
         capacites: 53
@@ -188,7 +182,7 @@ manuals:
         diagnostics: 5
         evaluations: 20
         exercices_principaux: 477
-        methodes: 50
+        methodes: 53
         projets: 0
         qcm: 10
         remediations: 97
@@ -209,7 +203,6 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
-    - anomalie:broken_meta_references
     - anomalie:unassembled_objects
     - statuts_non_approuves
     structural_compile_ready: false
@@ -248,16 +241,13 @@ manuals:
   TCOMPL:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '159'
+      detail: '209'
       source: anomalies.blocking_statuses
-    - code: anomalie:broken_meta_references
-      detail: '305'
-      source: anomalies.broken_meta_references
     - code: anomalie:context_mismatches
       detail: '3'
       source: anomalies.context_mismatches
     - code: statuts_non_approuves
-      detail: objets=150; contrats=9
+      detail: objets=200; contrats=9
       source: manuals.TCOMPL.statuses
     current:
       artifacts:
@@ -275,8 +265,9 @@ manuals:
       - TCOMPL-MODELES-FONCTION
       - TCOMPL-TEMPS-ATTENTE
       statuses:
-        approved: 604
+        approved: 585
         generated: 150
+        needs_review: 50
       totals:
         capacites: 50
         corriges: 318
@@ -284,12 +275,12 @@ manuals:
         diagnostics: 0
         evaluations: 18
         exercices_principaux: 300
-        methodes: 9
+        methodes: 50
         projets: 0
         qcm: 9
         remediations: 50
         sections_cours: 32
-        td: 18
+        td: 8
     objective:
       directive: docs/11_perimetre_terminale_complementaires.md
       target_chapters: 9
@@ -305,7 +296,6 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
-    - anomalie:broken_meta_references
     - statuts_non_approuves
     structural_compile_ready: true
     variants:
@@ -326,13 +316,10 @@ manuals:
   TEXPERTES:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '98'
+      detail: '131'
       source: anomalies.blocking_statuses
-    - code: anomalie:broken_meta_references
-      detail: '193'
-      source: anomalies.broken_meta_references
     - code: statuts_non_approuves
-      detail: objets=93; contrats=5
+      detail: objets=126; contrats=5
       source: manuals.TEXPERTES.statuses
     current:
       artifacts:
@@ -346,8 +333,9 @@ manuals:
       - TEXP-GRAPHES
       - TEXP-MATRICES-MARKOV
       statuses:
-        approved: 391
+        approved: 382
         generated: 93
+        needs_review: 33
       totals:
         capacites: 33
         corriges: 204
@@ -355,12 +343,12 @@ manuals:
         diagnostics: 0
         evaluations: 10
         exercices_principaux: 194
-        methodes: 5
+        methodes: 33
         projets: 0
         qcm: 5
         remediations: 33
         sections_cours: 23
-        td: 10
+        td: 6
     objective:
       directive: docs/12_perimetre_terminale_expertes.md
       target_chapters: 5
@@ -376,7 +364,6 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
-    - anomalie:broken_meta_references
     - statuts_non_approuves
     structural_compile_ready: true
     variants:
@@ -623,24 +610,24 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:b3309082abfd19031b1cf771be9901d404d162ee50106df1f85a6c20fc0cc4f6
+model_digest: sha256:19910837ecc2dc560e985c447d90ec57d20a07c630068e9f6229bff7d91ac755
 provenance:
   branch: audit/adversarial-reconciliation-2026
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-19T02:54:39Z'
+  generated_at_utc: '2026-08-19T14:07:53Z'
   generator_files:
-    scripts/baseline_qualification.py: sha256:51eed728c11d516d5bf5b5804d52583321260d02d2bebd748dca07eb3cfba908
+    scripts/baseline_qualification.py: sha256:9067ac4158409689e1374f51fb99cc6b59e66395989b328dfc06cbcf9d2e7841
     scripts/build_manifest.py: sha256:f4084b0ff17bb5ecdfed872244afaf3616bf6911b64e0340d3c0ca3b4bdbba20
     scripts/inventory_assembly.py: sha256:1759502372fc12faafb27b40d959979c9b63a439cef08ca56246d2d992c26047
-    scripts/inventory_collection.py: sha256:2d51704fc61fa67017fc021a50f93f2afbeb57dcdad7ac4ff04528c760cc38c2
+    scripts/inventory_collection.py: sha256:a1ae9774e8ca19cd166a8b60eb1977551d012a80ca15142a1b18683bab1210eb
     scripts/inventory_graph.py: sha256:820389c13acddd37e24813c45237e9333ef419803651c46c362b74c18b6f9531
     scripts/inventory_pdf.py: sha256:0931c5864414ab0248cb14b9d0ca583de190f3e6633e9c6862908eb344a2892b
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:4f495c862dd106fa2d21256398f09493ecba37c49e5987d1d1351bc89d83bcac
+  generator_sha256: sha256:14e369b0969a7442184c0b8aa3bca9aeb5555e75349c2b5088e31f4bfcf073d7
   generator_version: 1
   git_available: true
-  head_sha: 5db1752018333f67b5ff5a123ff5e783a4ec1f18
+  head_sha: 10cbc760547f1188c4f0faee975806d5523e3fa4
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -651,4 +638,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:a28634f750bf85b487be5522ec94437c22bfbb7e7ce5ba5433068d7e536e2538
+source_digest: sha256:1141d155f6fbbcc132c5d0ebbbce02c5b09259d205d0115dfcda46bf33636d9c

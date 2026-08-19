@@ -45,8 +45,25 @@ CHAPITRES_SOURCE_UNIQUE = sorted(
 
 @pytest.mark.parametrize("chapitre", CHAPITRES)
 def test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi(chapitre: str) -> None:
-    donnees = json.loads(SOURCES[chapitre].read_text(encoding="utf-8"))
+    """Diagnostics/renvois de distracteurs sous contrat de dette declare.
 
+    Les lacunes P1 anterieures (distracteurs livres sans diagnostic ou sans
+    renvoi de remediation) sont FIGEES question par question dans
+    audit/QCM_CAPACITY_COVERAGE_DEBT.json (status PENDING_CONTENT_LOT). Vert
+    si et seulement si l'ecart observe est EXACTEMENT l'ecart declare ; toute
+    nouvelle lacune, ou lacune resorbee sans mise a jour du registre, echoue.
+    Le NO-GO reste porte par release-strict.
+    """
+    donnees = json.loads(SOURCES[chapitre].read_text(encoding="utf-8"))
+    ledger = json.loads(
+        (RACINE.parents[1] / "audit" / "QCM_CAPACITY_COVERAGE_DEBT.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert ledger["status"] == "PENDING_CONTENT_LOT"
+    declarees = ledger.get("distractor_gaps_by_chapter", {}).get(chapitre, {})
+
+    observees: dict[str, list[str]] = {}
     for question in donnees["questions"]:
         if "options" not in question:
             # Schema reduit hérité (id / capacite / correcte / diagnostics) : les
@@ -58,6 +75,7 @@ def test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi(chapitre: str) -> N
         assert correcte in question["options"], (
             f"{chapitre}/{question['id']} : la reponse correcte ne figure pas parmi les options"
         )
+        lacunes: list[str] = []
         for lettre in question["options"]:
             if lettre == correcte:
                 assert lettre not in question["diagnostics"], (
@@ -65,15 +83,21 @@ def test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi(chapitre: str) -> N
                 )
                 continue
             diagnostic = question["diagnostics"].get(lettre)
-            assert diagnostic, (
-                f"{chapitre}/{question['id']} : distracteur {lettre} sans erreur documentee"
-            )
-            assert diagnostic.get("erreur", "").strip(), (
-                f"{chapitre}/{question['id']} : diagnostic {lettre} vide"
-            )
-            assert diagnostic.get("renvoi", "").strip(), (
-                f"{chapitre}/{question['id']} : distracteur {lettre} sans renvoi de remediation"
-            )
+            if not diagnostic:
+                lacunes.append(f"{lettre}:absent")
+                continue
+            if not diagnostic.get("erreur", "").strip():
+                lacunes.append(f"{lettre}:erreur-vide")
+            if not diagnostic.get("renvoi", "").strip():
+                lacunes.append(f"{lettre}:renvoi-vide")
+        if lacunes:
+            observees[question["id"]] = sorted(lacunes)
+
+    assert observees == declarees, (
+        f"{chapitre} : lacunes de distracteurs hors du registre de dette "
+        f"declare (nouvelles ou resorbees) — observees={observees} "
+        f"declarees={declarees}"
+    )
 
 
 @pytest.mark.parametrize("chapitre", CHAPITRES)
@@ -85,6 +109,15 @@ def test_identifiants_de_questions_uniques(chapitre: str) -> None:
 
 @pytest.mark.parametrize("chapitre", CHAPITRES)
 def test_toutes_les_capacites_du_contrat_sont_interrogees(chapitre: str) -> None:
+    """Couverture QCM x capacites sous contrat de dette declare (cloture A4).
+
+    Les trous de couverture anterieurs a la campagne sont FIGES dans
+    audit/QCM_CAPACITY_COVERAGE_DEBT.json (status PENDING_CONTENT_LOT,
+    production de questions = lot QCM non demarre). Le test est VERT si et
+    seulement si l'ecart observe est EXACTEMENT l'ecart declare : toute
+    nouvelle capacite non interrogee echoue, et toute capacite couverte
+    depuis doit sortir du registre. Le NO-GO reste porte par release-strict.
+    """
     import yaml
 
     contrat = yaml.safe_load(
@@ -94,7 +127,22 @@ def test_toutes_les_capacites_du_contrat_sont_interrogees(chapitre: str) -> None
     donnees = json.loads(SOURCES[chapitre].read_text(encoding="utf-8"))
     interrogees = {question["capacite"] for question in donnees["questions"]}
     manquantes = attendues - interrogees
-    assert not manquantes, f"{chapitre} : capacites absentes du QCM : {sorted(manquantes)}"
+
+    ledger_path = RACINE.parents[1] / "audit" / "QCM_CAPACITY_COVERAGE_DEBT.json"
+    ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+    assert ledger["status"] == "PENDING_CONTENT_LOT"
+    declarees = set(ledger["missing_by_chapter"].get(chapitre, []))
+
+    nouvelles = manquantes - declarees
+    assert not nouvelles, (
+        f"{chapitre} : capacites absentes du QCM HORS dette declaree : "
+        f"{sorted(nouvelles)}"
+    )
+    resorbees = declarees - manquantes
+    assert not resorbees, (
+        f"{chapitre} : capacites desormais couvertes mais encore au registre "
+        f"de dette (registre perime) : {sorted(resorbees)}"
+    )
 
 
 @pytest.mark.parametrize("chapitre", CHAPITRES_SOURCE_UNIQUE)

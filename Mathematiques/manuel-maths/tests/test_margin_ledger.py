@@ -936,7 +936,15 @@ Page témoin.
     ]
     assert len(uri_links) >= 2, "un rectangle URI est requis par ligne couverte"
     assert len({link["rect"] for link in uri_links}) == len(uri_links)
-    assert len(goto_links) == 1
+    # Comme pour les liens URI, le lien interne recoit UN rectangle par ligne
+    # de marge couverte (la marge charte v6, plus etroite, fait desormais
+    # replier « lien interne » sur deux lignes) ; l'absence de doublon est
+    # garantie par l'unicite des signatures ci-dessous.
+    assert len(goto_links) >= 1
+    assert len({link["rect"] for link in goto_links}) == len(goto_links)
+    assert all(
+        link["destination"] == "nx-ledger-target" for link in goto_links
+    )
     signatures = {
         (link["page"], link["rect"], link["action"], link["uri"], link["destination"])
         for link in links

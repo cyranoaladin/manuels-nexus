@@ -11,7 +11,7 @@
 ### assembler_invalid (0)
 - Aucune.
 
-### blocking_statuses (2133)
+### blocking_statuses (2222)
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-001, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
@@ -42,7 +42,7 @@
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-027.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-027, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-028.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-028, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-029.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-029, scope=object
-- … 2103 autres.
+- … 2192 autres.
 
 ### broken_assembly_references (0)
 - Aucune.
@@ -50,38 +50,8 @@
 ### broken_latex_references (0)
 - Aucune.
 
-### broken_meta_references (542)
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-024.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024-CDP.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-009.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-010.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-011.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-012.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-013.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-014.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-014.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-015.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-015.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-016.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-016.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-017.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-018.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-018.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-019.tex, cible=M2, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-019.tex, cible=M5, champ=methodes[1], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-020.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-021.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-022.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-023.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-024.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-025.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-026.tex, cible=M3, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-027.tex, cible=M4, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-028.tex, cible=M4, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-029.tex, cible=M4, champ=methodes[0], raison=reference methodes absente ou ambigue
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-030.tex, cible=M4, champ=methodes[0], raison=reference methodes absente ou ambigue
-- … 512 autres.
+### broken_meta_references (0)
+- Aucune.
 
 ### chapters_not_in_manual (0)
 - Aucune.

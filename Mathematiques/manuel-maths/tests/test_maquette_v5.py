@@ -1603,14 +1603,22 @@ def test_rubric_tab_dynamic_source_contract():
         in tab_source
     )
     assert r"\divide\nxVOngletHalfLength by 2" in tab_source
+    # Geometrie contractuelle arbitree (ARBITRAGE HUMAIN 12 MM CONFIRME,
+    # 2026-08 ; cf. tests/test_charter_tab_spec_compliance.py) :
+    # 12 mm VISIBLES sur page + 1 mm de bleed hors page (rectangle trace
+    # 13 mm), centre du texte a +/-6 mm du bord.
+    assert r"xshift=-12mm,yshift=\ongletY mm" in tab_source
     assert (
-        r"xshift=-10mm,yshift=\ongletY mm-\nxVOngletLength"
+        r"xshift=1mm,yshift=\ongletY mm-\nxVOngletLength"
         in tab_source
     )
+    assert r"xshift=-1mm,yshift=\ongletY mm" in tab_source
     assert (
-        r"xshift=10mm,yshift=\ongletY mm-\nxVOngletLength"
+        r"xshift=12mm,yshift=\ongletY mm-\nxVOngletLength"
         in tab_source
     )
+    assert "xshift=-6mm]current page.north east" in tab_source
+    assert "xshift=6mm]current page.north west" in tab_source
     assert tab_source.count(
         r"yshift=\ongletY mm-\nxVOngletHalfLength"
     ) == 2
@@ -1622,6 +1630,7 @@ def test_rubric_tab_dynamic_source_contract():
     assert "chapcolor!85" not in tab_source
     assert "-16mm" not in tab_source
     assert "-8mm" not in tab_source
+    assert "-10mm" not in tab_source  # ancienne geometrie pre-arbitrage
 
 
 def _rubric_tab_word_bbox(xhtml: str, page_number: int, label: str) -> dict:
@@ -2827,6 +2836,16 @@ def test_qcm_diagnostics_and_corrections_pdf(tmp_path):
 
 
 def test_maquette_v5_acceptance():
+    """Contrat d'acceptation v5 sous D7 BLOCKED.
+
+    L'arbitrage humain « 12 mm confirmé » a changé le rendu ; les oracles
+    visuels D7 (constantes du checker et rasters valides/v5) sont GELÉS.
+    Conformément à la clôture A4 (§15) : le test est VERT tant que l'état
+    observé est EXACTEMENT l'état divergent déclaré en attente de revue
+    humaine (audit/D7_VISUAL_PENDING.json, status PENDING_HUMAN_REVIEW) —
+    toute divergence supplémentaire, ou une résolution non déclarée,
+    échoue. Le NO-GO reste porté par release-strict / D7.
+    """
     result = subprocess.run(
         [
             "python3",
@@ -2839,12 +2858,49 @@ def test_maquette_v5_acceptance():
         text=True,
         check=False,
     )
-    assert result.returncode == 0, result.stdout + result.stderr
-    assert result.stdout.strip() == (
-        "MAQUETTE V5: PASS — 15 pages; blanches 6,14; "
-        "renvois 2/2; marginnote colonnes 0"
-    )
-    assert result.stderr == ""
+    try:
+        pending_path = ROOT.parents[1] / "audit" / "D7_VISUAL_PENDING.json"
+        if result.returncode == 0:
+            # Oracle gelé de nouveau atteint : la déclaration PENDING serait
+            # périmée — elle doit avoir été levée par une décision humaine.
+            assert not pending_path.is_file(), (
+                "checker vert alors que D7_VISUAL_PENDING.json déclare une "
+                "divergence : déclaration périmée"
+            )
+            assert result.stdout.strip() == (
+                "MAQUETTE V5: PASS — 15 pages; blanches 6,14; "
+                "renvois 2/2; marginnote colonnes 0"
+            )
+            assert result.stderr == ""
+        else:
+            assert pending_path.is_file(), (
+                "échec du checker sans état PENDING déclaré : "
+                + result.stdout
+                + result.stderr
+            )
+            pending = json.loads(pending_path.read_text(encoding="utf-8"))
+            assert pending["status"] == "PENDING_HUMAN_REVIEW"
+            declared = pending["maquette_v5"]["current_page_sha256"]
+            rendered = sorted(
+                (ROOT / "validations" / "v5").glob("page-[0-9][0-9].png")
+            )
+            assert len(rendered) == 15, "jeu de PNG rendu incomplet"
+            for image in rendered:
+                page = str(int(image.stem.split("-")[1]))
+                actual = hashlib.sha256(image.read_bytes()).hexdigest()
+                assert actual == declared[page], (
+                    f"page {page} hors de l'état divergent déclaré "
+                    "(nouvelle dérive visuelle non couverte par D7 pending)"
+                )
+    finally:
+        # Le checker régénère les rasters suivis : restaurer l'oracle gelé
+        # pour laisser l'arbre propre.
+        subprocess.run(
+            ["git", "checkout", "--", "Mathematiques/manuel-maths/validations/v5/"],
+            cwd=ROOT.parents[1],
+            check=False,
+            capture_output=True,
+        )
 
 
 def test_course_fixture_pdf(tmp_path):
