@@ -84,3 +84,35 @@ exactement, locators `(source, champ, cible)` conservés dans le JSON.
 Contrôle croisé : le rendu d'inventaire au HEAD courant donne
 `broken_meta_references = 0` ; aucun des 470 locators pré-campagne ne figure
 dans le rendu courant.
+
+## Addendum — lot de clôture (§8)
+
+La réconciliation de clôture a mesuré l'invariant bidirectionnel C_i↔M_i sur
+les 51 chapitres à contrat et révélé **4 capacités du périmètre campagne sans
+fiche** : `1SPE-TRIGONOMETRIE` C3 et C5 (capacités canoniques du référentiel
+BO, restaurées au contrat par A4.7a `d9cbe5f7`), `TCOMPL-CALCULS-AIRES` C6 et
+`TCOMPL-ECHANTILLONNAGE` C6 (capacités de démonstration sans référence
+entrante au snapshot — invisibles du jeu dérivé des références cassées).
+
+Ces 4 fiches ont été produites APRÈS réconciliation et inventaire (le STOP de
+production était borné « avant réconciliation et inventaire ») par le pipeline
+standard : pré-vérification SymPy, blocs VERIFY exécutés réellement, packets,
+`needs_review`, qualification EXPECTED_REVIEW_DEBT par la politique de classe.
+Totaux finaux : **89 fiches** (59 cibles originales − 1 supersédée + 15
+réécritures + 11 complétions de règle + 4 complétions de clôture + 1
+remplacement du mis-tag).
+
+Cas TRIGO M3 : la CIBLE M3 du jeu initial (issue de refs mal étiquetées) a été
+supersédée par M4 ; la FICHE M3 existe désormais au titre de la capacité
+canonique C3 elle-même (deux faits distincts, tous deux tracés).
+
+Invariant final périmètre campagne (16 chapitres) : **1:1 PASS** — chaque
+capacité du contrat a exactement une fiche, chaque fiche exactement une
+capacité, 0 alias dupliqué, 0 référence méthode non résolue (repo entier).
+
+## Dette résiduelle HORS périmètre (mesurée, non touchée — §17 prochain lot)
+
+22 chapitres / 131 fiches méthodes manquantes (TSPE 8 chapitres/41, 1NSI 8/38,
+TNSI 6/52) + 1 anomalie inverse (`TSPE-CONTINUITE` : M3-M5 sans capacité au
+contrat). Détail dans le JSON (`bidir_invariant`). Le prochain lot de dette
+n'est PAS démarré.
