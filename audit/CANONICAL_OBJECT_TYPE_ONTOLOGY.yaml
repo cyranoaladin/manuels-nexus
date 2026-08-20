@@ -2,7 +2,7 @@ schema_version: 1
 artifact_type: canonical_object_type_ontology
 schema_ref: audit/schemas/v1/canonical-object-type-ontology.schema.json
 generated_by: A5 ontology registry
-control_digest: sha256:a0b2cc1ed1ded2c9bbf5455d7d428de1a57aed2af55d07498a058fdb4c747fcf
+control_digest: sha256:6c7eea0b415da224315ff15d847d883a053308713f8caa342827cbfd03abc6c2
 authority_order:
   - approved specifications and conception
   - canonical contracts and schemas
@@ -32,6 +32,20 @@ canonical_types:
     review_behavior: Source status remains governed by existing publication gates.
     allowed_aliases: []
     authority: [coherent corpus usage, declared assemblers]
+  algorithme:
+    canonical_name: algorithme
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: Algorithmic investigation or implementation carrying an explicit programme objective.
+    inventory_category: sections_cours
+    allowed_source_roles: [production_object]
+    allowed_sections: [cours]
+    allowed_variants: [complet, eleve, parcours1, professeur]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=algorithme
+    assembler_behavior: Explicitly accepted by the Math student and teacher assembler policies.
+    review_behavior: Source status remains governed by existing publication gates.
+    allowed_aliases: []
+    authority: [approved specifications and conception, declared assemblers, coherent corpus usage]
   cours:
     canonical_name: cours
     semantic_dimension: PEDAGOGICAL_OBJECT_TYPE

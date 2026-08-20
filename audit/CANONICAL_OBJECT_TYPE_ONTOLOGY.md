@@ -16,6 +16,7 @@ historiques.
 | Type | Définition courte | Section(s) | Compteur | Variantes | Assemblage/revue | Alias autorisés | Autorité |
 |---|---|---|---|---|---|---|---|
 | `amenagee` | version adaptée explicite | `amenagee` | aucun | `amenagee`, professeur | chemin adapté ; statuts inchangés | aucun | corpus, assembleurs |
+| `algorithme` | investigation ou implémentation algorithmique exigible | `cours` | `sections_cours` | complet, élève, parcours 1, professeur | explicitement accepté par l’assembleur Math ; statuts inchangés | aucun | conception, assembleur, corpus |
 | `cours` | exposition d’un concept | `cours` | `sections_cours` | cours déclarés | politique cours ; statuts inchangés | aucun | structure, assembleurs |
 | `methode` | procédure réutilisable | `methodes` | `methodes` | méthodes déclarées | dette A4 inchangée | aucun | conception, structure |
 | `exercice` | entraînement élève | `exercices` | `exercices_principaux` | exercices déclarés | sélection élève/prof ; statuts inchangés | aucun | structure, assembleurs |
