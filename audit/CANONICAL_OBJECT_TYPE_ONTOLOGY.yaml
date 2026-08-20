@@ -1,0 +1,280 @@
+schema_version: 1
+artifact_type: canonical_object_type_ontology
+schema_ref: audit/schemas/v1/canonical-object-type-ontology.schema.json
+generated_by: A5 ontology registry
+control_digest: sha256:a0b2cc1ed1ded2c9bbf5455d7d428de1a57aed2af55d07498a058fdb4c747fcf
+authority_order:
+  - approved specifications and conception
+  - canonical contracts and schemas
+  - official chapter editorial structure
+  - assemblers and producers
+  - coherent corpus usage
+  - historical reports and audits
+dimensions:
+  pedagogical_object_type: Canonical pedagogical meaning carried by META.type_objet.
+  source_role: Repository trust role assigned independently by SOURCE_ROLES.yaml.
+  assembly_role: Inclusion or exclusion behavior chosen by a declared assembler variant.
+  document_section: First editorial directory below the canonical chapter root.
+  subtype: Orthogonal specialization carried by META.sous_type.
+  legacy_alias: Exact deprecated spelling with one non-ambiguous canonical target.
+canonical_types:
+  amenagee:
+    canonical_name: amenagee
+    semantic_dimension: OTHER_EXPLICIT
+    semantic_definition: Explicit adapted-version source handled outside pedagogical inventory counters.
+    inventory_category: null
+    allowed_source_roles: [production_object]
+    allowed_sections: [amenagee]
+    allowed_variants: [amenagee, professeur]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=amenagee
+    assembler_behavior: Counted only through the dedicated adapted assembly path.
+    review_behavior: Source status remains governed by existing publication gates.
+    allowed_aliases: []
+    authority: [coherent corpus usage, declared assemblers]
+  cours:
+    canonical_name: cours
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: Expository course object carrying an essential concept or worked development.
+    inventory_category: sections_cours
+    allowed_source_roles: [production_object]
+    allowed_sections: [cours]
+    allowed_variants: [complet, eleve, evaluations, maquette-v5, parcours1, professeur, projets]
+    allowed_subtypes: [null, diagnostic, ouverture, td_contextualise, td_fil_rouge]
+    schema_representation: META.type_objet=cours
+    assembler_behavior: Included according to the course policy of each declared variant.
+    review_behavior: Source status remains governed by existing publication gates.
+    allowed_aliases: []
+    authority: [official chapter editorial structure, declared assemblers]
+  methode:
+    canonical_name: methode
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: Method sheet that teaches a reusable problem-solving procedure.
+    inventory_category: methodes
+    allowed_source_roles: [production_object]
+    allowed_sections: [methodes]
+    allowed_variants: [complet, eleve, evaluations, maquette-v5, methodes, parcours1, professeur, projets]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=methode
+    assembler_behavior: Included by method-capable chapter and manual variants.
+    review_behavior: Method review debt remains governed by the sealed A4 policy.
+    allowed_aliases: []
+    authority: [approved specifications and conception, official chapter editorial structure]
+  exercice:
+    canonical_name: exercice
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: Student practice object with a distinct correction relationship when applicable.
+    inventory_category: exercices_principaux
+    allowed_source_roles: [production_object]
+    allowed_sections: [exercices]
+    allowed_variants: [complet, eleve, evaluations, maquette-v5, parcours1, professeur, projets]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=exercice
+    assembler_behavior: Included in student and teacher practice variants subject to selection rules.
+    review_behavior: Source status remains governed by existing publication gates.
+    allowed_aliases: []
+    authority: [official chapter editorial structure, declared assemblers]
+  corrige:
+    canonical_name: corrige
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: Teacher-facing correction paired with an exercise or learning object.
+    inventory_category: corriges
+    allowed_source_roles: [production_object]
+    allowed_sections: [corriges]
+    allowed_variants: [maquette-v5, professeur]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=corrige
+    assembler_behavior: Excluded from student variants and included in teacher variants.
+    review_behavior: Source status remains governed by existing publication gates.
+    allowed_aliases: [correction]
+    authority: [live META.type_objet=corrige peers, official chapter editorial structure]
+  corrige_evaluation:
+    canonical_name: corrige_evaluation
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: Correction specifically paired with an evaluation object.
+    inventory_category: corriges
+    allowed_source_roles: [production_object]
+    allowed_sections: [evaluations]
+    allowed_variants: [complet, professeur]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=corrige_evaluation
+    assembler_behavior: Included according to existing evaluation variant rules.
+    review_behavior: Source status remains governed by existing publication gates.
+    allowed_aliases: []
+    authority: [coherent corpus usage, declared assemblers]
+  evaluation_corrige:
+    canonical_name: evaluation_corrige
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: Legacy-order canonical source type for a corrected evaluation.
+    inventory_category: corriges
+    allowed_source_roles: [production_object]
+    allowed_sections: [evaluations]
+    allowed_variants: [complet, professeur]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=evaluation_corrige
+    assembler_behavior: Included according to existing evaluation variant rules.
+    review_behavior: Source status remains governed by existing publication gates.
+    allowed_aliases: []
+    authority: [coherent corpus usage, declared assemblers]
+  coup_de_pouce:
+    canonical_name: coup_de_pouce
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: Graduated hint associated with an exercise.
+    inventory_category: coups_de_pouce
+    allowed_source_roles: [production_object]
+    allowed_sections: [coups_de_pouce, exercices]
+    allowed_variants: [complet, eleve, evaluations, parcours1, professeur, projets]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=coup_de_pouce
+    assembler_behavior: Included only where the selected learning path exposes hints.
+    review_behavior: Source status remains governed by existing publication gates.
+    allowed_aliases: []
+    authority: [approved specifications and conception, coherent corpus usage]
+  qcm:
+    canonical_name: qcm
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: Multiple-choice assessment or self-positioning object.
+    inventory_category: qcm
+    allowed_source_roles: [production_object]
+    allowed_sections: [qcm]
+    allowed_variants: [complet, eleve, evaluations, maquette-v5, parcours1, professeur, projets]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=qcm
+    assembler_behavior: Included according to QCM policy for the selected variant.
+    review_behavior: Answers and distractors remain governed by existing review gates.
+    allowed_aliases: []
+    authority: [approved specifications and conception, official chapter editorial structure]
+  diagnostic:
+    canonical_name: diagnostic
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: Diagnostic object used before instruction or remediation routing.
+    inventory_category: diagnostics
+    allowed_source_roles: [production_object]
+    allowed_sections: [cours, diagnostics, qcm]
+    allowed_variants: [complet, eleve, professeur]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=diagnostic
+    assembler_behavior: Included where the selected path exposes diagnostic entry points.
+    review_behavior: Source status remains governed by existing publication gates.
+    allowed_aliases: []
+    authority: [approved specifications and conception, existing inventory contract]
+  diagnostics:
+    canonical_name: diagnostics
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: Plural historical source type for a diagnostic object.
+    inventory_category: diagnostics
+    allowed_source_roles: [production_object]
+    allowed_sections: [cours, diagnostics, qcm]
+    allowed_variants: [complet, eleve, professeur]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=diagnostics
+    assembler_behavior: Included where the selected path exposes diagnostic entry points.
+    review_behavior: Source status remains governed by existing publication gates.
+    allowed_aliases: []
+    authority: [existing inventory contract, historical corpus support]
+  qcm_diagnostics:
+    canonical_name: qcm_diagnostics
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: QCM-shaped diagnostic object without conflating all QCM with diagnostics.
+    inventory_category: diagnostics
+    allowed_source_roles: [production_object]
+    allowed_sections: [qcm]
+    allowed_variants: [complet, eleve, evaluations, parcours1, professeur, projets]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=qcm_diagnostics
+    assembler_behavior: Included as a diagnostic QCM by existing variant policies.
+    review_behavior: Answers and distractors remain governed by existing review gates.
+    allowed_aliases: []
+    authority: [coherent corpus usage, existing inventory contract]
+  remediation:
+    canonical_name: remediation
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: Remediation object selected after an identified learning difficulty.
+    inventory_category: remediations
+    allowed_source_roles: [production_object]
+    allowed_sections: [remediation]
+    allowed_variants: [complet, eleve, evaluations, parcours1, professeur, projets, remediation]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=remediation
+    assembler_behavior: Included according to remediation and pathway selection rules.
+    review_behavior: Source status remains governed by existing publication gates.
+    allowed_aliases: []
+    authority: [approved specifications and conception, official chapter editorial structure]
+  td:
+    canonical_name: td
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: Guided tutorial or extended classroom activity object.
+    inventory_category: td
+    allowed_source_roles: [production_object]
+    allowed_sections: [cours]
+    allowed_variants: [complet, eleve, evaluations, parcours1, professeur, projets]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=td
+    assembler_behavior: Included as course material under existing chapter ordering.
+    review_behavior: Source status remains governed by existing publication gates.
+    allowed_aliases: []
+    authority: [official chapter editorial structure, coherent corpus usage]
+  evaluation:
+    canonical_name: evaluation
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: Formal evaluation object distinct from its correction.
+    inventory_category: evaluations
+    allowed_source_roles: [production_object]
+    allowed_sections: [evaluations]
+    allowed_variants: [complet, eleve, evaluations, parcours1, professeur, projets]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=evaluation
+    assembler_behavior: Included according to evaluation selection and variant policy.
+    review_behavior: Source status remains governed by existing publication gates.
+    allowed_aliases: []
+    authority: [approved specifications and conception, official chapter editorial structure]
+  projet:
+    canonical_name: projet
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: Project-based learning object spanning a structured production task.
+    inventory_category: projets
+    allowed_source_roles: [production_object]
+    allowed_sections: [projet]
+    allowed_variants: [complet, eleve, evaluations, parcours1, professeur, projets]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=projet
+    assembler_behavior: Included by project-capable variants.
+    review_behavior: Source status remains governed by existing publication gates.
+    allowed_aliases: []
+    authority: [approved specifications and conception, coherent corpus usage]
+aliases:
+  correction:
+    canonical_target: corrige
+    deprecation_status: deprecated_accepted
+    allowed_source_roles: [production_object]
+    allowed_sections: [corriges]
+    allowed_subtypes: [null]
+    authority:
+      - live META.type_objet=corrige peers
+      - correction reference graph
+      - teacher assembler behavior
+subtypes:
+  diagnostic:
+    semantic_dimension: SUBTYPE
+    semantic_definition: Diagnostic specialization of a course object.
+    inventory_category: diagnostics
+    allowed_source_types: [cours]
+    uncounted: false
+  ouverture:
+    semantic_dimension: SUBTYPE
+    semantic_definition: Chapter opening object intentionally outside inventory counters.
+    inventory_category: null
+    allowed_source_types: [cours]
+    uncounted: true
+  td_contextualise:
+    semantic_dimension: SUBTYPE
+    semantic_definition: Contextualized tutorial specialization of a course object.
+    inventory_category: td
+    allowed_source_types: [cours]
+    uncounted: false
+  td_fil_rouge:
+    semantic_dimension: SUBTYPE
+    semantic_definition: Recurring-thread tutorial specialization of a course object.
+    inventory_category: td
+    allowed_source_types: [cours]
+    uncounted: false

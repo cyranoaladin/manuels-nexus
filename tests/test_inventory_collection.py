@@ -57,6 +57,18 @@ def _write(path: Path, content: str) -> None:
 
 def _init_repository(root: Path) -> None:
     subprocess.run(["git", "init", "-q", str(root)], check=True)
+    controls = (
+        "audit/CANONICAL_OBJECT_TYPE_ONTOLOGY.yaml",
+        "audit/schemas/v1/canonical-object-type-ontology.schema.json",
+    )
+    for relative in controls:
+        target = root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / relative, target)
+    subprocess.run(
+        ["git", "-C", str(root), "add", "--", *controls],
+        check=True,
+    )
 
 
 def _track(root: Path, *relative_paths: str) -> None:
@@ -1020,6 +1032,183 @@ def test_canonical_category_preserves_required_taxonomy(
     inventory_module,
 ) -> None:
     assert inventory_module.canonical_category(source_type, source_subtype) == expected
+
+
+def test_a5_object_type_correction_ontology_is_versioned_and_unambiguous(
+    inventory_module,
+) -> None:
+    ontology_path = ROOT / "audit/CANONICAL_OBJECT_TYPE_ONTOLOGY.yaml"
+    schema_path = (
+        ROOT
+        / "audit/schemas/v1/canonical-object-type-ontology.schema.json"
+    )
+
+    payload = yaml.safe_load(ontology_path.read_text(encoding="utf-8"))
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    jsonschema.validate(payload, schema)
+
+    assert payload["artifact_type"] == "canonical_object_type_ontology"
+    assert payload["control_digest"] == inventory_module._control_digest(payload)
+    assert payload["aliases"]["correction"] == {
+        "allowed_sections": ["corriges"],
+        "allowed_source_roles": ["production_object"],
+        "allowed_subtypes": [None],
+        "authority": [
+            "live META.type_objet=corrige peers",
+            "correction reference graph",
+            "teacher assembler behavior",
+        ],
+        "canonical_target": "corrige",
+        "deprecation_status": "deprecated_accepted",
+    }
+    assert not {
+        "activite",
+        "methode_guidee",
+        "auto_evaluation",
+    } & (set(payload["canonical_types"]) | set(payload["aliases"]))
+
+
+def test_a5_object_type_correction_alias_is_contextual_and_fail_closed(
+    inventory_module,
+) -> None:
+    accepted = inventory_module.canonical_category(
+        "correction",
+        source_section="corriges",
+        source_role="production_object",
+    )
+    assert accepted == "corriges"
+
+    for kwargs in (
+        {"source_section": "cours", "source_role": "production_object"},
+        {"source_section": "corriges", "source_role": "validation_reference"},
+        {
+            "source_subtype": "guidee",
+            "source_section": "corriges",
+            "source_role": "production_object",
+        },
+    ):
+        assert inventory_module.canonical_category("correction", **kwargs) is None
+
+    for rejected in (
+        "Correction",
+        "corrections",
+        "correcton",
+        "corrige_custom",
+        "unknown",
+        "generic",
+        "activite",
+        "methode_guidee",
+        "auto_evaluation",
+    ):
+        assert (
+            inventory_module.canonical_category(
+                rejected,
+                source_section="corriges",
+                source_role="production_object",
+            )
+            is None
+        )
+    assert not inventory_module._is_known_uncounted(
+        "amenagee",
+        None,
+        source_section="cours",
+        source_role="production_object",
+    )
+
+
+def test_a5_object_type_correction_alias_builder_rejects_ambiguity(
+    inventory_module,
+) -> None:
+    aliases = inventory_module._build_object_type_aliases(
+        [
+            ("legacy_a", "corrige"),
+            ("legacy_b", "corrige"),
+        ],
+        canonical_names={"corrige"},
+    )
+    assert aliases == {"legacy_a": "corrige", "legacy_b": "corrige"}
+
+    with pytest.raises(inventory_module.InventoryError, match="ambigu"):
+        inventory_module._build_object_type_aliases(
+            [
+                ("legacy", "corrige"),
+                ("legacy", "cours"),
+            ],
+            canonical_names={"corrige", "cours"},
+        )
+    with pytest.raises(inventory_module.InventoryError, match="cible canonique"):
+        inventory_module._build_object_type_aliases(
+            [("legacy", "absent")],
+            canonical_names={"corrige"},
+        )
+
+
+def test_a5_object_type_correction_alias_counts_as_corrige_in_inventory(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    contract = f"{base}/contrat.yaml"
+    correction = f"{base}/corriges/1SPE-TEST-CO-001.tex"
+    _write(tmp_path / contract, _contract("1SPE-TEST", "1SPE", capacities=1))
+    _write(
+        tmp_path / correction,
+        _meta(
+            id="1SPE-TEST-CO-001",
+            chapitre="1SPE-TEST",
+            type_objet="correction",
+            status="approved",
+        ),
+    )
+    _track(tmp_path, contract, correction)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    chapter = inventory["manuals"]["1SPE"]["chapters"]["1SPE-TEST"]
+
+    assert chapter["counts"]["corriges"] == 1
+    assert inventory["anomalies"]["unclassified_types"] == []
+
+
+def test_a5_object_type_correction_uses_target_repository_ontology(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    ontology_path = tmp_path / "audit/CANONICAL_OBJECT_TYPE_ONTOLOGY.yaml"
+    ontology = yaml.safe_load(ontology_path.read_text(encoding="utf-8"))
+    del ontology["aliases"]["correction"]
+    ontology["canonical_types"]["corrige"]["allowed_aliases"] = []
+    ontology["control_digest"] = inventory_module._control_digest(ontology)
+    ontology_path.write_text(
+        yaml.safe_dump(ontology, allow_unicode=True, sort_keys=False),
+        encoding="utf-8",
+    )
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    contract = f"{base}/contrat.yaml"
+    correction = f"{base}/corriges/1SPE-TEST-CO-001.tex"
+    _write(tmp_path / contract, _contract("1SPE-TEST", "1SPE", capacities=1))
+    _write(
+        tmp_path / correction,
+        _meta(
+            id="1SPE-TEST-CO-001",
+            chapitre="1SPE-TEST",
+            type_objet="correction",
+            status="approved",
+        ),
+    )
+    _track(tmp_path, contract, correction)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert inventory["anomalies"]["unclassified_types"] == [
+        {
+            "id": "1SPE-TEST-CO-001",
+            "path": correction,
+            "source_subtype": None,
+            "source_type": "correction",
+        }
+    ]
 
 
 def test_subtype_priority_changes_counts_but_preserves_source_taxonomy(

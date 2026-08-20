@@ -94,6 +94,9 @@ BASELINE_UPDATE_REPORT_FILE = "audit/BASELINE_UPDATE_REPORT.md"
 BASELINE_FREEZE_REPORT_FILE = "audit/BASELINE_FREEZE_REPORT.md"
 BUILD_MANIFEST_FILE = "audit/BUILD_MANIFEST.json"
 BUILD_PRODUCERS_FILE = "audit/BUILD_PRODUCERS.yaml"
+CANONICAL_OBJECT_TYPE_ONTOLOGY_FILE = (
+    "audit/CANONICAL_OBJECT_TYPE_ONTOLOGY.yaml"
+)
 CANONICAL_BUILD_RECORDER = "scripts/build_manifest.py"
 _EMPTY_MANIFEST_REFRESH_CAPABILITY = object()
 _EMPTY_MANIFEST_BRANCH_REBIND_CAPABILITY = object()
@@ -130,6 +133,14 @@ SCHEMA_REGISTRY: Mapping[str, Mapping[int, str]] = MappingProxyType(
         ),
         "build_producers": MappingProxyType(
             {1: "audit/schemas/v1/build-producers.schema.json"}
+        ),
+        "canonical_object_type_ontology": MappingProxyType(
+            {
+                1: (
+                    "audit/schemas/v1/"
+                    "canonical-object-type-ontology.schema.json"
+                )
+            }
         ),
         "1nsi_content_reviews": MappingProxyType(
             {1: "audit/schemas/v1/1nsi-content-review.schema.json"}
@@ -3673,34 +3684,6 @@ COUNT_KEYS: tuple[str, ...] = (
     "projets",
 )
 
-TYPE_CATEGORIES: dict[str, str] = {
-    "cours": "sections_cours",
-    "methode": "methodes",
-    "exercice": "exercices_principaux",
-    "corrige": "corriges",
-    "corrige_evaluation": "corriges",
-    "evaluation_corrige": "corriges",
-    "coup_de_pouce": "coups_de_pouce",
-    "qcm": "qcm",
-    "diagnostic": "diagnostics",
-    "diagnostics": "diagnostics",
-    "qcm_diagnostics": "diagnostics",
-    "remediation": "remediations",
-    "td": "td",
-    "evaluation": "evaluations",
-    "projet": "projets",
-}
-
-SUBTYPE_CATEGORIES: dict[str, str | None] = {
-    "diagnostic": "diagnostics",
-    "ouverture": None,
-    "td_contextualise": "td",
-    "td_fil_rouge": "td",
-}
-
-KNOWN_UNCOUNTED_TYPES = frozenset({"amenagee"})
-KNOWN_UNCOUNTED_SUBTYPES = frozenset({"ouverture"})
-
 REQUIRED_META_FIELDS: tuple[str, ...] = (
     "id",
     "chapitre",
@@ -3866,6 +3849,136 @@ class MetadataMissingError(MetadataError):
     """Raised when a TeX content source has no ``% META`` header."""
 
 
+def _build_object_type_aliases(
+    pairs: Iterable[tuple[str, str]],
+    *,
+    canonical_names: set[str],
+) -> dict[str, str]:
+    """Build an exact alias map and reject collisions or missing targets."""
+
+    aliases: dict[str, str] = {}
+    for alias, target in pairs:
+        if target not in canonical_names:
+            raise InventoryError(
+                f"cible canonique absente pour alias {alias}: {target}"
+            )
+        if alias in canonical_names:
+            raise InventoryError(
+                f"alias en collision avec un type canonique: {alias}"
+            )
+        previous = aliases.get(alias)
+        if previous is not None and previous != target:
+            raise InventoryError(
+                f"alias ambigu {alias}: {previous} ou {target}"
+            )
+        aliases[alias] = target
+    return aliases
+
+
+def _load_object_type_ontology(root: Path) -> dict[str, Any]:
+    """Load the single versioned authority for ``META.type_objet``."""
+
+    payload = _load_control_yaml_payload(
+        root / CANONICAL_OBJECT_TYPE_ONTOLOGY_FILE,
+        default=None,
+    )
+    if not isinstance(payload, Mapping) or not payload:
+        raise InventoryError(
+            "contrôle versionné absent ou invalide: "
+            f"{CANONICAL_OBJECT_TYPE_ONTOLOGY_FILE}"
+        )
+    validated = _validate_control_payload(
+        root,
+        CANONICAL_OBJECT_TYPE_ONTOLOGY_FILE,
+        payload,
+        artifact_type="canonical_object_type_ontology",
+    )
+    raw_types = validated.get("canonical_types")
+    raw_aliases = validated.get("aliases")
+    raw_subtypes = validated.get("subtypes")
+    if not isinstance(raw_types, Mapping) or not isinstance(
+        raw_aliases, Mapping
+    ) or not isinstance(raw_subtypes, Mapping):
+        raise InventoryError("ontologie type_objet incomplète")
+
+    canonical_names = {str(name) for name in raw_types}
+    for name, definition in raw_types.items():
+        if not isinstance(definition, Mapping):
+            raise InventoryError(f"type canonique invalide: {name}")
+        if definition.get("canonical_name") != name:
+            raise InventoryError(
+                f"canonical_name incohérent pour type_objet={name}"
+            )
+        category = definition.get("inventory_category")
+        if category is not None and category not in COUNT_KEYS:
+            raise InventoryError(
+                f"compteur inventaire inconnu pour type_objet={name}: {category}"
+            )
+
+    alias_map = _build_object_type_aliases(
+        [
+            (str(alias), str(definition.get("canonical_target", "")))
+            for alias, definition in raw_aliases.items()
+            if isinstance(definition, Mapping)
+        ],
+        canonical_names=canonical_names,
+    )
+    if len(alias_map) != len(raw_aliases):
+        raise InventoryError("définition d'alias type_objet invalide")
+    for canonical_name, definition in raw_types.items():
+        declared = definition.get("allowed_aliases")
+        expected = sorted(
+            alias
+            for alias, target in alias_map.items()
+            if target == canonical_name
+        )
+        if declared != expected:
+            raise InventoryError(
+                "aliases autorisés incohérents pour "
+                f"type_objet={canonical_name}: attendu {expected}"
+            )
+    for subtype, definition in raw_subtypes.items():
+        if not isinstance(definition, Mapping):
+            raise InventoryError(f"sous-type invalide: {subtype}")
+        allowed_types = definition.get("allowed_source_types")
+        if not isinstance(allowed_types, list) or any(
+            source_type not in canonical_names
+            for source_type in allowed_types
+        ):
+            raise InventoryError(
+                f"types sources invalides pour sous-type={subtype}"
+            )
+        category = definition.get("inventory_category")
+        if category is not None and category not in COUNT_KEYS:
+            raise InventoryError(
+                f"compteur inventaire inconnu pour sous-type={subtype}: {category}"
+            )
+    return dict(validated)
+
+
+OBJECT_TYPE_ONTOLOGY = _load_object_type_ontology(_REPO_ROOT)
+
+
+def _resolved_object_type(
+    source_type: str,
+    ontology: Mapping[str, Any],
+) -> tuple[str, Mapping[str, Any], Mapping[str, Any]] | None:
+    canonical_types = ontology["canonical_types"]
+    aliases = ontology["aliases"]
+    alias_definition = aliases.get(source_type)
+    if isinstance(alias_definition, Mapping):
+        canonical_name = str(alias_definition["canonical_target"])
+        return (
+            canonical_name,
+            canonical_types[canonical_name],
+            alias_definition,
+        )
+    definition = canonical_types.get(source_type)
+    if not isinstance(definition, Mapping):
+        return None
+    return source_type, definition, definition
+
+
 def git_tracked_files(repository: Path | str) -> tuple[str, ...]:
     """Return repository-relative, sorted paths known to Git.
 
@@ -3934,13 +4047,51 @@ def read_meta(path: Path | str) -> dict[str, Any]:
 
 
 def canonical_category(
-    source_type: str, source_subtype: str | None = None
+    source_type: str,
+    source_subtype: str | None = None,
+    *,
+    source_section: str | None = None,
+    source_role: str | None = None,
+    ontology: Mapping[str, Any] | None = None,
 ) -> str | None:
-    """Map a source taxonomy value to a required inventory counter."""
+    """Map an exact source type to a counter under ontology constraints."""
 
-    if isinstance(source_subtype, str) and source_subtype in SUBTYPE_CATEGORIES:
-        return SUBTYPE_CATEGORIES[source_subtype]
-    return TYPE_CATEGORIES.get(source_type)
+    authority = OBJECT_TYPE_ONTOLOGY if ontology is None else ontology
+    resolved = _resolved_object_type(source_type, authority)
+    if resolved is None:
+        return None
+    canonical_name, definition, contextual_rules = resolved
+    if (
+        source_role is not None
+        and source_role not in contextual_rules["allowed_source_roles"]
+    ):
+        return None
+    if (
+        source_section is not None
+        and source_section not in contextual_rules["allowed_sections"]
+    ):
+        return None
+    if source_subtype not in contextual_rules["allowed_subtypes"]:
+        return None
+    if isinstance(source_subtype, str):
+        subtype_definition = authority["subtypes"].get(source_subtype)
+        if not isinstance(subtype_definition, Mapping) or (
+            canonical_name
+            not in subtype_definition["allowed_source_types"]
+        ):
+            return None
+        return subtype_definition["inventory_category"]
+    return definition["inventory_category"]
+
+
+def _object_source_section(path: str, chapter_id: str) -> str | None:
+    parts = PurePosixPath(path).parts
+    try:
+        chapter_index = parts.index(chapter_id)
+    except ValueError:
+        return None
+    section_index = chapter_index + 1
+    return parts[section_index] if section_index < len(parts) else None
 
 
 def report_source_paths(
@@ -4145,6 +4296,7 @@ def _build_inventory(
     """Build a deterministic canonical model from tracked chapter sources."""
 
     root = Path(repository).resolve()
+    object_type_ontology = _load_object_type_ontology(root)
     if require_git_provenance:
         try:
             _repo_head_sha(root, required=True)
@@ -4388,7 +4540,14 @@ def _build_inventory(
                 scope="object",
             )
             source_subtype = metadata.get("sous_type")
-            category = canonical_category(source_type, source_subtype)
+            source_section = _object_source_section(path, chapter_id)
+            category = canonical_category(
+                source_type,
+                source_subtype,
+                source_section=source_section,
+                source_role=source_roles[path],
+                ontology=object_type_ontology,
+            )
             source_status = metadata["status"]
             status, status_valid, status_reason = _normalize_status(
                 source_status, KNOWN_OBJECT_STATUSES
@@ -4415,7 +4574,13 @@ def _build_inventory(
             chapter["statuses"][status] += 1
             if category is not None:
                 chapter["counts"][category] += 1
-            elif not _is_known_uncounted(source_type, source_subtype):
+            elif not _is_known_uncounted(
+                source_type,
+                source_subtype,
+                source_section=source_section,
+                source_role=source_roles[path],
+                ontology=object_type_ontology,
+            ):
                 anomalies["unclassified_types"].append(
                     {
                         "id": object_id,
@@ -5775,6 +5940,7 @@ def _is_model_source(path: str) -> bool:
             SOURCE_ROLES_FILE,
             ANOMALY_DISPOSITIONS_FILE,
             BUILD_PRODUCERS_FILE,
+            CANONICAL_OBJECT_TYPE_ONTOLOGY_FILE,
         }
         or
         _is_relevant_source(path)
@@ -5908,9 +6074,34 @@ def _normalize_status(
     return normalized, True, None
 
 
-def _is_known_uncounted(source_type: str, source_subtype: Any) -> bool:
-    return source_type in KNOWN_UNCOUNTED_TYPES or (
-        isinstance(source_subtype, str) and source_subtype in KNOWN_UNCOUNTED_SUBTYPES
+def _is_known_uncounted(
+    source_type: str,
+    source_subtype: Any,
+    *,
+    source_section: str | None = None,
+    source_role: str | None = None,
+    ontology: Mapping[str, Any] | None = None,
+) -> bool:
+    authority = OBJECT_TYPE_ONTOLOGY if ontology is None else ontology
+    resolved = _resolved_object_type(source_type, authority)
+    if resolved is None:
+        return False
+    canonical_name, definition, contextual_rules = resolved
+    if (
+        source_role is not None
+        and source_role not in contextual_rules["allowed_source_roles"]
+    ) or (
+        source_section is not None
+        and source_section not in contextual_rules["allowed_sections"]
+    ) or source_subtype not in contextual_rules["allowed_subtypes"]:
+        return False
+    if not isinstance(source_subtype, str):
+        return definition.get("inventory_category") is None
+    subtype_definition = authority["subtypes"].get(source_subtype)
+    return bool(
+        isinstance(subtype_definition, Mapping)
+        and canonical_name in subtype_definition["allowed_source_types"]
+        and subtype_definition.get("uncounted") is True
     )
 
 

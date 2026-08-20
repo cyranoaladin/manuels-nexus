@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nexus-reussite.local/schemas/v1/canonical-object-type-ontology.schema.json",
+  "title": "Canonical Nexus source object type ontology",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_type",
+    "schema_ref",
+    "generated_by",
+    "control_digest",
+    "authority_order",
+    "dimensions",
+    "canonical_types",
+    "aliases",
+    "subtypes"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "artifact_type": {"const": "canonical_object_type_ontology"},
+    "schema_ref": {
+      "const": "audit/schemas/v1/canonical-object-type-ontology.schema.json"
+    },
+    "generated_by": {"const": "A5 ontology registry"},
+    "control_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "authority_order": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "minLength": 1},
+      "required": [
+        "pedagogical_object_type",
+        "source_role",
+        "assembly_role",
+        "document_section",
+        "subtype",
+        "legacy_alias"
+      ]
+    },
+    "canonical_types": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"$ref": "#/$defs/canonicalType"}
+    },
+    "aliases": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/alias"}
+    },
+    "subtypes": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/subtype"}
+    }
+  },
+  "$defs": {
+    "nullableString": {"type": ["string", "null"]},
+    "canonicalType": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_name",
+        "semantic_dimension",
+        "semantic_definition",
+        "inventory_category",
+        "allowed_source_roles",
+        "allowed_sections",
+        "allowed_variants",
+        "allowed_subtypes",
+        "schema_representation",
+        "assembler_behavior",
+        "review_behavior",
+        "allowed_aliases",
+        "authority"
+      ],
+      "properties": {
+        "canonical_name": {"type": "string", "minLength": 1},
+        "semantic_dimension": {
+          "enum": ["PEDAGOGICAL_OBJECT_TYPE", "OTHER_EXPLICIT"]
+        },
+        "semantic_definition": {"type": "string", "minLength": 1},
+        "inventory_category": {"$ref": "#/$defs/nullableString"},
+        "allowed_source_roles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "allowed_sections": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "allowed_variants": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "allowed_subtypes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/nullableString"}
+        },
+        "schema_representation": {"type": "string", "minLength": 1},
+        "assembler_behavior": {"type": "string", "minLength": 1},
+        "review_behavior": {"type": "string", "minLength": 1},
+        "allowed_aliases": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "authority": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "alias": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_target",
+        "deprecation_status",
+        "allowed_source_roles",
+        "allowed_sections",
+        "allowed_subtypes",
+        "authority"
+      ],
+      "properties": {
+        "canonical_target": {"type": "string", "minLength": 1},
+        "deprecation_status": {"const": "deprecated_accepted"},
+        "allowed_source_roles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "allowed_sections": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "allowed_subtypes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/nullableString"}
+        },
+        "authority": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "subtype": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "semantic_dimension",
+        "semantic_definition",
+        "inventory_category",
+        "allowed_source_types",
+        "uncounted"
+      ],
+      "properties": {
+        "semantic_dimension": {"const": "SUBTYPE"},
+        "semantic_definition": {"type": "string", "minLength": 1},
+        "inventory_category": {"$ref": "#/$defs/nullableString"},
+        "allowed_source_types": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "uncounted": {"type": "boolean"}
+      }
+    }
+  }
+}
