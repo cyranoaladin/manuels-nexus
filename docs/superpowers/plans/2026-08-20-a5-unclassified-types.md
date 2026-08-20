@@ -126,7 +126,8 @@ Fichiers :
 
 1. Exécuter `python -m pytest -q tests/`.
 2. Exécuter `python -m pytest -q Mathematiques/manuel-maths/tests/`.
-3. Exécuter `python -m pytest -q NSI/tests/`.
+3. Exécuter `(cd NSI && python -m pytest -q tests/)`, conformément au
+   `working-directory: NSI` des workflows et au point d’entrée du Makefile.
 4. Exiger zéro échec et aucun skip/xfail ajouté.
 5. Vérifier les 12 PDF suivis contre `A4_BUILD_MATRIX_EVIDENCE.json`.
 6. Construire 1SPE élève/professeur et 1NSI élève/professeur sans enregistrement
