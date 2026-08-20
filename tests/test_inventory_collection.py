@@ -1185,6 +1185,138 @@ def test_a5_object_type_correction_alias_counts_as_corrige_in_inventory(
     assert inventory["anomalies"]["unclassified_types"] == []
 
 
+def test_correction_raw_type_alias_and_source_role_remain_orthogonal(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    contract = f"{base}/contrat.yaml"
+    exercise_alias = f"{base}/exercices/1SPE-TEST-EX-001.tex"
+    correction_alias = f"{base}/corriges/correction-alias.tex"
+    exercise_canonical = f"{base}/exercices/1SPE-TEST-EX-002.tex"
+    correction_canonical = f"{base}/corriges/corrige-canonique.tex"
+    sources = {
+        contract: _contract("1SPE-TEST", "1SPE", capacities=1),
+        exercise_alias: _meta(
+            id="1SPE-TEST-EX-001",
+            chapitre="1SPE-TEST",
+            type_objet="exercice",
+            status="approved",
+        ),
+        correction_alias: _meta(
+            id="1SPE-TEST-CO-ALIAS",
+            chapitre="1SPE-TEST",
+            type_objet="correction",
+            exercice_ref="1SPE-TEST-EX-001",
+            status="approved",
+        ),
+        exercise_canonical: _meta(
+            id="1SPE-TEST-EX-002",
+            chapitre="1SPE-TEST",
+            type_objet="exercice",
+            status="approved",
+        ),
+        correction_canonical: _meta(
+            id="1SPE-TEST-CO-CANON",
+            chapitre="1SPE-TEST",
+            type_objet="corrige",
+            exercice_ref="1SPE-TEST-EX-002",
+            status="approved",
+        ),
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    chapter = inventory["manuals"]["1SPE"]["chapters"]["1SPE-TEST"]
+    objects = {item["id"]: item for item in chapter["objects"]}
+    ontology = inventory_module._load_object_type_ontology(tmp_path)
+    source_roles = inventory_module._load_source_roles(
+        tmp_path,
+        inventory_module.git_tracked_files(tmp_path),
+    )
+
+    assert objects["1SPE-TEST-CO-ALIAS"]["source_type"] == "correction"
+    assert objects["1SPE-TEST-CO-ALIAS"]["metadata"]["type_objet"] == "correction"
+    assert objects["1SPE-TEST-CO-CANON"]["source_type"] == "corrige"
+    assert objects["1SPE-TEST-CO-CANON"]["metadata"]["type_objet"] == "corrige"
+    assert {
+        source_type: inventory_module._resolved_object_type(source_type, ontology)[0]
+        for source_type in ("correction", "corrige")
+    } == {"correction": "corrige", "corrige": "corrige"}
+    assert objects["1SPE-TEST-CO-ALIAS"]["canonical_category"] == "corriges"
+    assert objects["1SPE-TEST-CO-CANON"]["canonical_category"] == "corriges"
+    assert chapter["counts"]["corriges"] == 2
+    assert {
+        source_roles[correction_alias],
+        source_roles[correction_canonical],
+    } == {"production_object"}
+    assert {
+        (link["exercise_id"], link["correction_id"], link["mode"])
+        for link in inventory["correction_links"]
+    } == {
+        ("1SPE-TEST-EX-001", "1SPE-TEST-CO-ALIAS", "reverse_meta"),
+        ("1SPE-TEST-EX-002", "1SPE-TEST-CO-CANON", "reverse_meta"),
+    }
+    assert inventory["anomalies"]["missing_corrections"] == []
+    assert inventory["anomalies"]["unclassified_types"] == []
+
+    # ``source_role`` and ``META.type_objet`` are distinct dimensions. A value
+    # from either dimension cannot be substituted into the other.
+    assert (
+        inventory_module.canonical_category(
+            "correction",
+            source_section="corriges",
+            source_role="correction",
+            ontology=ontology,
+        )
+        is None
+    )
+    assert inventory_module._resolved_object_type("production_object", ontology) is None
+
+    # Mutation proof: remove only A5's contextual alias in the target
+    # repository. A0's raw correction-link consumer still resolves the link,
+    # but the alias object must become unclassified. This would turn the green
+    # assertions above red if production lost the canonical alias.
+    ontology_path = tmp_path / "audit/CANONICAL_OBJECT_TYPE_ONTOLOGY.yaml"
+    mutated_ontology = yaml.safe_load(ontology_path.read_text(encoding="utf-8"))
+    del mutated_ontology["aliases"]["correction"]
+    mutated_ontology["canonical_types"]["corrige"]["allowed_aliases"] = []
+    mutated_ontology["control_digest"] = inventory_module._control_digest(
+        mutated_ontology
+    )
+    ontology_path.write_text(
+        yaml.safe_dump(mutated_ontology, allow_unicode=True, sort_keys=False),
+        encoding="utf-8",
+    )
+
+    mutated = inventory_module.build_inventory(tmp_path)
+
+    assert mutated["anomalies"]["unclassified_types"] == [
+        {
+            "id": "1SPE-TEST-CO-ALIAS",
+            "path": correction_alias,
+            "source_subtype": None,
+            "source_type": "correction",
+        }
+    ]
+    assert {
+        (link["exercise_id"], link["correction_id"])
+        for link in mutated["correction_links"]
+    } == {
+        ("1SPE-TEST-EX-001", "1SPE-TEST-CO-ALIAS"),
+        ("1SPE-TEST-EX-002", "1SPE-TEST-CO-CANON"),
+    }
+    mutated_objects = {
+        item["id"]: item
+        for item in mutated["manuals"]["1SPE"]["chapters"]["1SPE-TEST"]["objects"]
+    }
+    assert mutated_objects["1SPE-TEST-CO-ALIAS"]["canonical_category"] is None
+    assert mutated_objects["1SPE-TEST-CO-CANON"]["canonical_category"] == "corriges"
+
+
 def test_a5_object_type_correction_uses_target_repository_ontology(
     tmp_path: Path,
     inventory_module,
