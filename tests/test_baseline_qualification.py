@@ -183,12 +183,34 @@ def test_qualification_policy_schema_and_approved_contract(
             text=True,
         ).stdout
     )
+    current_active = inventory_module._current_active_debt(observed_inventory)
+    identity_migrations = {
+        pair["current"]: {
+            "previous_fingerprint": pair["previous"],
+        }
+        for pair in modified_pairs
+    }
+    current_by_fingerprint = inventory_module._coalesce_active_debt(
+        current_active
+    )
+    baseline_by_fingerprint = inventory_module._coalesce_active_debt(
+        initial_baseline["active"]
+    )
+    for pair in modified_pairs:
+        assert (
+            current_by_fingerprint[pair["current"]]["locator_key"]
+            == baseline_by_fingerprint[pair["previous"]]["locator_key"]
+        )
     comparison = inventory_module._compare_anomaly_debt(
-        inventory_module._current_active_debt(observed_inventory),
+        current_active,
         initial_baseline["active"],
         initial_baseline["resolved"],
+        identity_migrations=identity_migrations,
     )
-    assert modified_pairs == comparison["modified"]
+    assert sorted(
+        modified_pairs,
+        key=lambda pair: pair["current"],
+    ) == comparison["modified"]
     assert set(payload["owners"]) == {
         "direction_scientifique_programme",
         "direction_editoriale_pedagogique",
