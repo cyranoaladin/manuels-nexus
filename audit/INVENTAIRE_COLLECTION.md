@@ -8,7 +8,7 @@
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 345 | 942 | 942 | manual |
 | 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 53 | 477 | 1420 | 1420 | manual |
-| TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 50 | 300 | 785 | 785 | manual |
+| TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 50 | 300 | 782 | 782 | manual |
 | TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 194 | 508 | 508 | manual |
 | TNSI | NSI Terminale | NSI | Terminale | courante | 6 | 59 | 266 | 719 | 719 | manual |
 | TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 11 | 67 | 448 | 1248 | 1248 | manual |
@@ -21,7 +21,6 @@
 | unassembled_objects | 52 |
 | unattributed_pdfs | 22 |
 | orphan_files | 12 |
-| context_mismatches | 3 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
@@ -29,9 +28,6 @@
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-003, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-004, scope=object
-- context_mismatches: path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/07_td_contextualise.tex, scope=object, field=chapitre, expected=TCOMPL-CALCULS-AIRES, actual=TSPE-DERIVATION-CONVEXITE
-- context_mismatches: path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/07_td_fil_rouge.tex, scope=object, field=chapitre, expected=TCOMPL-CALCULS-AIRES, actual=TSPE-DERIVATION-CONVEXITE
-- context_mismatches: path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_derivee_composee.tex, scope=object, field=chapitre, expected=TCOMPL-CALCULS-AIRES, actual=TSPE-DERIVATION-CONVEXITE
 - orphan_files: source=Mathematiques/manuel-maths/gabarits/nexus-code.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-code.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
 - orphan_files: source=Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
 - orphan_files: source=Mathematiques/manuel-maths/gabarits/nexus-figures.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-figures.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source

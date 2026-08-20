@@ -237,9 +237,6 @@ manuals:
     - code: anomalie:blocking_statuses
       detail: '209'
       source: anomalies.blocking_statuses
-    - code: anomalie:context_mismatches
-      detail: '3'
-      source: anomalies.context_mismatches
     - code: statuts_non_approuves
       detail: objets=200; contrats=9
       source: manuals.TCOMPL.statuses
@@ -259,7 +256,7 @@ manuals:
       - TCOMPL-MODELES-FONCTION
       - TCOMPL-TEMPS-ATTENTE
       statuses:
-        approved: 585
+        approved: 582
         generated: 150
         needs_review: 50
       totals:
@@ -273,8 +270,8 @@ manuals:
         projets: 0
         qcm: 9
         remediations: 50
-        sections_cours: 32
-        td: 8
+        sections_cours: 31
+        td: 6
     objective:
       directive: docs/11_perimetre_terminale_complementaires.md
       target_chapters: 9
@@ -598,12 +595,12 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:0df20abed55ca437ee831e85293b84c7e82d0351832dd8389bab630e06fcb39f
+model_digest: sha256:b772a328e6b220394e5f7a99e8a98acb17548fabfe40b6ca6f458c9aa8b41393
 provenance:
   branch: audit/adversarial-reconciliation-2026
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-20T22:02:07Z'
+  generated_at_utc: '2026-08-20T22:57:05Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:9067ac4158409689e1374f51fb99cc6b59e66395989b328dfc06cbcf9d2e7841
     scripts/build_manifest.py: sha256:f4084b0ff17bb5ecdfed872244afaf3616bf6911b64e0340d3c0ca3b4bdbba20
@@ -615,7 +612,7 @@ provenance:
   generator_sha256: sha256:0144c2b3bd358b4e973aaace99a439cde216efc2bc61f83132a8084343c3ca62
   generator_version: 1
   git_available: true
-  head_sha: 9b27b3d29237300597ca0b6a1d27c6373d180610
+  head_sha: 80120762b8d325c5069f5b63b68c827d6ea3db54
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -626,4 +623,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:ce301bec73ae5c6eca9c393e6acc8791cd7ab6e92024eb83c6f7706c4b3052bc
+source_digest: sha256:60c7728c5aa89d809d08ab26ce171e23c60845dcfd31f5d569614052b47ba6e3

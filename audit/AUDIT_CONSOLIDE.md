@@ -56,10 +56,8 @@
 ### chapters_not_in_manual (0)
 - Aucune.
 
-### context_mismatches (3)
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/07_td_contextualise.tex, scope=object, field=chapitre, expected=TCOMPL-CALCULS-AIRES, actual=TSPE-DERIVATION-CONVEXITE
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/07_td_fil_rouge.tex, scope=object, field=chapitre, expected=TCOMPL-CALCULS-AIRES, actual=TSPE-DERIVATION-CONVEXITE
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_derivee_composee.tex, scope=object, field=chapitre, expected=TCOMPL-CALCULS-AIRES, actual=TSPE-DERIVATION-CONVEXITE
+### context_mismatches (0)
+- Aucune.
 
 ### contract_invalid (0)
 - Aucune.
