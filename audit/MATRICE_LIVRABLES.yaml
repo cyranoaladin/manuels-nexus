@@ -7,9 +7,6 @@ manuals:
     - code: anomalie:blocking_statuses
       detail: '342'
       source: anomalies.blocking_statuses
-    - code: anomalie:unclassified_types
-      detail: '231'
-      source: anomalies.unclassified_types
     - code: livrable_non_compile
       detail: declared
       source: deliverable_matrix.1NSI.variants.evaluations
@@ -51,7 +48,7 @@ manuals:
         verified: 153
       totals:
         capacites: 53
-        corriges: 141
+        corriges: 372
         coups_de_pouce: 24
         diagnostics: 1
         evaluations: 20
@@ -139,9 +136,6 @@ manuals:
     - code: anomalie:unassembled_objects
       detail: '5'
       source: anomalies.unassembled_objects
-    - code: anomalie:unclassified_types
-      detail: '7'
-      source: anomalies.unclassified_types
     - code: livrable_non_compile
       detail: absent
       source: deliverable_matrix.1SPE.variants.banque_evaluations
@@ -186,7 +180,7 @@ manuals:
         projets: 0
         qcm: 10
         remediations: 97
-        sections_cours: 50
+        sections_cours: 57
         td: 20
     objective:
       directive: MISSION_PRIORITAIRE §8
@@ -386,9 +380,6 @@ manuals:
     - code: anomalie:blocking_statuses
       detail: '115'
       source: anomalies.blocking_statuses
-    - code: anomalie:unclassified_types
-      detail: '243'
-      source: anomalies.unclassified_types
     - code: chapitres_manquants
       detail: 6/12
       source: manuals.TNSI.chapters
@@ -427,7 +418,7 @@ manuals:
         generated: 109
       totals:
         capacites: 59
-        corriges: 35
+        corriges: 278
         coups_de_pouce: 0
         diagnostics: 0
         evaluations: 12
@@ -512,9 +503,6 @@ manuals:
     - code: anomalie:unassembled_objects
       detail: '47'
       source: anomalies.unassembled_objects
-    - code: anomalie:unclassified_types
-      detail: '179'
-      source: anomalies.unclassified_types
     - code: livrable_non_compile
       detail: absent
       source: deliverable_matrix.TSPE_2026_2027.variants.banque_evaluations
@@ -549,7 +537,7 @@ manuals:
         generated: 11
       totals:
         capacites: 67
-        corriges: 291
+        corriges: 470
         coups_de_pouce: 67
         diagnostics: 0
         evaluations: 22
@@ -610,24 +598,24 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:19910837ecc2dc560e985c447d90ec57d20a07c630068e9f6229bff7d91ac755
+model_digest: sha256:1327cc1951d71e5af6786f4554e2630c699ef4f14bce3d0406c32ab82d5ad470
 provenance:
   branch: audit/adversarial-reconciliation-2026
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-19T14:07:53Z'
+  generated_at_utc: '2026-08-20T12:57:00Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:9067ac4158409689e1374f51fb99cc6b59e66395989b328dfc06cbcf9d2e7841
     scripts/build_manifest.py: sha256:f4084b0ff17bb5ecdfed872244afaf3616bf6911b64e0340d3c0ca3b4bdbba20
     scripts/inventory_assembly.py: sha256:1759502372fc12faafb27b40d959979c9b63a439cef08ca56246d2d992c26047
-    scripts/inventory_collection.py: sha256:a1ae9774e8ca19cd166a8b60eb1977551d012a80ca15142a1b18683bab1210eb
+    scripts/inventory_collection.py: sha256:05312c6698ad61a8dea1b8efc6b35735d8e6c2bcf6fced9fac0fc2dbde9177b1
     scripts/inventory_graph.py: sha256:820389c13acddd37e24813c45237e9333ef419803651c46c362b74c18b6f9531
     scripts/inventory_pdf.py: sha256:0931c5864414ab0248cb14b9d0ca583de190f3e6633e9c6862908eb344a2892b
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:14e369b0969a7442184c0b8aa3bca9aeb5555e75349c2b5088e31f4bfcf073d7
+  generator_sha256: sha256:5f4a33815fa67a4d3d76462a74468d4951cd8ae5f185230cd7460f2309bf2fac
   generator_version: 1
   git_available: true
-  head_sha: 10cbc760547f1188c4f0faee975806d5523e3fa4
+  head_sha: 4643afe13c9e7e47bf51c702b5e51762238171fc
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -638,4 +626,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:1141d155f6fbbcc132c5d0ebbbce02c5b09259d205d0115dfcda46bf33636d9c
+source_digest: sha256:cc3a0610bb937a59f856094399208064b97ab9775d7688c205bddc765a14a6b1

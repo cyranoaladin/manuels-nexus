@@ -18,7 +18,6 @@
 | Catégorie | Nombre |
 |---|---|
 | blocking_statuses | 2222 |
-| unclassified_types | 660 |
 | unassembled_objects | 52 |
 | unattributed_pdfs | 22 |
 | orphan_files | 12 |
@@ -48,11 +47,6 @@
 - unattributed_pdfs: source=MANUELS_PDF_PUBLICATION/03_Maths_Tle_Spe_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/03_Maths_Tle_Spe_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
 - unattributed_pdfs: source=MANUELS_PDF_PUBLICATION/04_Maths_Tle_Spe_Professeur.pdf, cible=MANUELS_PDF_PUBLICATION/04_Maths_Tle_Spe_Professeur.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
 - unattributed_pdfs: source=MANUELS_PDF_PUBLICATION/05_Maths_Tle_Expertes_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/05_Maths_Tle_Expertes_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- unclassified_types: path=Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/15_algorithmique_monte_carlo.tex, id=1SPE-PROBCOND-ALG-001, source_type=algorithme
-- unclassified_types: path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/15_experimentations.tex, id=1SPE-VARALEA-ALG-001, source_type=algorithme
-- unclassified_types: path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, id=1SPE-VARALEA-ALG-002, source_type=algorithme
-- unclassified_types: path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, id=1SPE-VARALEA-EXP-001, source_type=experimentation
-- unclassified_types: path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, id=1SPE-VARALEA-EXP-002, source_type=experimentation
 
 ## Réconciliation des rapports
 

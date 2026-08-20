@@ -174,38 +174,8 @@
 ### unavailable_inspiration_sources (0)
 - Aucune.
 
-### unclassified_types (660)
-- path=Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/15_algorithmique_monte_carlo.tex, id=1SPE-PROBCOND-ALG-001, source_type=algorithme
-- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/15_experimentations.tex, id=1SPE-VARALEA-ALG-001, source_type=algorithme
-- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, id=1SPE-VARALEA-ALG-002, source_type=algorithme
-- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, id=1SPE-VARALEA-EXP-001, source_type=experimentation
-- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, id=1SPE-VARALEA-EXP-002, source_type=experimentation
-- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, id=1SPE-VARALEA-EXP-003, source_type=experimentation
-- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, id=1SPE-VARALEA-EXP-004, source_type=experimentation
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-009.tex, id=TSPE-INTEG-CO-009, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-010.tex, id=TSPE-INTEG-CO-010, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-011.tex, id=TSPE-INTEG-CO-011, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-012.tex, id=TSPE-INTEG-CO-012, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-013.tex, id=TSPE-INTEG-CO-013, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-014.tex, id=TSPE-INTEG-CO-014, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-015.tex, id=TSPE-INTEG-CO-015, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-016.tex, id=TSPE-INTEG-CO-016, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-017.tex, id=TSPE-INTEG-CO-017, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-018.tex, id=TSPE-INTEG-CO-018, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-019.tex, id=TSPE-INTEG-CO-019, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-020.tex, id=TSPE-INTEG-CO-020, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-021.tex, id=TSPE-INTEG-CO-021, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-022.tex, id=TSPE-INTEG-CO-022, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-023.tex, id=TSPE-INTEG-CO-023, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-024.tex, id=TSPE-INTEG-CO-024, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-025.tex, id=TSPE-INTEG-CO-025, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-026.tex, id=TSPE-INTEG-CO-026, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-027.tex, id=TSPE-INTEG-CO-027, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-028.tex, id=TSPE-INTEG-CO-028, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-029.tex, id=TSPE-INTEG-CO-029, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-030.tex, id=TSPE-INTEG-CO-030, source_type=correction
-- path=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-031.tex, id=TSPE-INTEG-CO-031, source_type=correction
-- … 630 autres.
+### unclassified_types (0)
+- Aucune.
 
 ### unknown_chapter_prefixes (0)
 - Aucune.
