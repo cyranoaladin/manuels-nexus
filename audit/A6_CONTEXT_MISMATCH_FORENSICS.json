@@ -1,0 +1,380 @@
+{
+  "artifact_type": "a6_context_mismatch_forensics",
+  "schema_version": 1,
+  "measured_at_source_sha": "ca5c907d42bd2782596a2c715759f8d0bee9b9fa",
+  "measurement": {
+    "command": "python scripts/inventory_collection.py --check --require-clean",
+    "exit_code": 0,
+    "source_artifact": "audit/CURRENT_ANOMALIES_RAW.json",
+    "source_artifact_sha256": "43354229fce31ebd628cabf536c65795bf8c2064b9fb28ed30d07966f3a516d2",
+    "a6_start_context_mismatches": 3,
+    "fingerprints": [
+      "412440a833f2a67e",
+      "d4d96a91fdd7f2ca",
+      "dc3c58388e2cfe7c"
+    ]
+  },
+  "context_dimension_semantics": {
+    "manual": "Le manuel détecté est dérivé du préfixe du chapitre physique et de son contrat; le manuel attendu est celui du chapitre META, confirmé par le contrat, le programme et le jumeau canonique.",
+    "variant": "Les sources ne déclarent pas de champ META variant. Les variantes détectées et attendues sont les assemblages exacts dans lesquels la copie et son jumeau canonique sont atteignables.",
+    "chapter": "Le chapitre détecté est le répertoire canonique contenant la source; le chapitre attendu est le chapitre déclaré par META, confirmé indépendamment par le corps, le contrat, le programme et un jumeau canonique exact."
+  },
+  "authority_hashes": {
+    "build_manifest": "sha256:99ef68c0097a30818e115c3ec0fb1009b4e28588bc27d73c47f9b6bee64e224f",
+    "inventory": "sha256:546de5ff62d5678ba3752db894e2be30efddbb73000b6be7f4e3458e54c9cd0a",
+    "tcompl_contract": "sha256:4ee9d7ffc8516bee9d8b9362888dfc1301f2cd5e11c5bcc4f2cb52b9aa51f08a",
+    "tspe_contract": "sha256:eaa2d3d6ba8f54072be3a8c71f787c5236eff9c448cf6e4586052202e147fa12",
+    "tcompl_programme_capacities": "sha256:886b58aaebd81a721a5f3a0af660f42a0ba97abc9be075645400d77b07f909a9",
+    "tspe_programme_capacities": "sha256:b635344f95297dd5a70b5506fde685a193777696ca678bf530a26a358080600d",
+    "chapter_assembler": "sha256:623471e4c75995c57ac64239d6202ad08d0612aebf4f022db05a3c32e9eccb7f",
+    "manual_assembler": "sha256:b31bfa645702a2012b7da4f790f1c37889bdd9f98786cf5461504819dea32dd8"
+  },
+  "shared_proofs": {
+    "build_manifest": {
+      "path": "audit/BUILD_MANIFEST.json",
+      "builds": [],
+      "per_object_receipt_binding": "NOT_APPLICABLE_EMPTY_BUILD_MANIFEST"
+    },
+    "contracts": {
+      "filesystem_contract": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/contrat.yaml",
+      "filesystem_contract_identity": {
+        "chapitre": "TCOMPL-CALCULS-AIRES",
+        "niveau": "TCOMPL",
+        "theme": "CALCULS-AIRES"
+      },
+      "semantic_contract": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/contrat.yaml",
+      "semantic_contract_identity": {
+        "chapitre": "TSPE-DERIVATION-CONVEXITE",
+        "niveau": "TSPE",
+        "theme": "DERIVATION-CONVEXITE"
+      }
+    },
+    "programme": {
+      "tcompl_authority": "Mathematiques/manuel-maths/referentiel/capacites_TCOMPL_CALCULS-AIRES.json",
+      "tcompl_scope": "intégrale, aires et primitives",
+      "tspe_authority": "Mathematiques/manuel-maths/referentiel/capacites_TSPE_DERIVATION_CONVEXITE.json",
+      "tspe_scope": "dérivation composée, étude de fonctions et convexité"
+    },
+    "remaining_tcompl_capacity_links_after_exact_copy_removal": {
+      "TCOMPL-AIR-C1": 17,
+      "TCOMPL-AIR-C2": 22,
+      "TCOMPL-AIR-C3": 27,
+      "TCOMPL-AIR-C4": 23,
+      "TCOMPL-AIR-C5": 22,
+      "TCOMPL-AIR-C6": 22
+    },
+    "review_and_sha_binding_scan": {
+      "review_scope": "audit/reviews/**/*.review.json",
+      "copy_path_matches": 0,
+      "copy_object_id_matches": 0,
+      "copy_source_sha256_matches": 0,
+      "stale_packets_created_by_proposed_action": 0
+    },
+    "reference_scan": {
+      "inventory_reference_graph": "audit/INVENTAIRE_COLLECTION.json#/reference_graph",
+      "incoming_object_or_path_references": 0,
+      "outgoing_non_capacity_references": 0,
+      "latex_input_or_cross_reference_edges": 0
+    }
+  },
+  "cause_classification_counts": {
+    "WRONG_MANUAL_METADATA": 0,
+    "WRONG_CHAPTER_METADATA": 0,
+    "WRONG_VARIANT_METADATA": 0,
+    "PATH_CONTEXT_DRIFT": 3,
+    "MANIFEST_CONTEXT_DRIFT": 0,
+    "ASSEMBLER_CONTEXT_DRIFT": 0,
+    "GENERATED_FIXTURE_CONTEXT": 0,
+    "ARCHIVE_OR_PROTOTYPE_SCOPE": 0,
+    "ANALYZER_FALSE_POSITIVE": 0,
+    "STALE_REPORT": 0,
+    "OTHER_EXPLICIT": 0
+  },
+  "cases": [
+    {
+      "fingerprint": "412440a833f2a67e",
+      "manual_detected": "TCOMPL",
+      "manual_expected": "TSPE_2026_2027",
+      "variant_detected": [
+        "math:chapter:TCOMPL-CALCULS-AIRES:complet",
+        "math:chapter:TCOMPL-CALCULS-AIRES:parcours1",
+        "math:manual:TCOMPL:eleve",
+        "math:manual:TCOMPL:professeur"
+      ],
+      "variant_expected": [
+        "math:chapter:TSPE-DERIVATION-CONVEXITE:complet",
+        "math:chapter:TSPE-DERIVATION-CONVEXITE:parcours1",
+        "math:manual:TSPE_2026_2027:eleve",
+        "math:manual:TSPE_2026_2027:professeur"
+      ],
+      "chapter_detected": "TCOMPL-CALCULS-AIRES",
+      "chapter_expected": "TSPE-DERIVATION-CONVEXITE",
+      "object_id": "TCOMPL-AIRES-CR-010-DERIVEE",
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_derivee_composee.tex",
+      "meta_context": {
+        "id": "TCOMPL-AIRES-CR-010-DERIVEE",
+        "chapitre": "TSPE-DERIVATION-CONVEXITE",
+        "type_objet": "cours",
+        "capacites_codes": ["C1"],
+        "status": "approved"
+      },
+      "filesystem_context": {
+        "manual": "TCOMPL",
+        "chapter": "TCOMPL-CALCULS-AIRES",
+        "section": "cours",
+        "canonical_category": "sections_cours",
+        "source_sha256": "fee6cebba0c56f889da23eb8615e98dcf3dda527fccaaa9c1a96e46b4239fa16"
+      },
+      "manifest_context": {
+        "manifest": "audit/BUILD_MANIFEST.json",
+        "builds": [],
+        "object_binding": "NOT_APPLICABLE_EMPTY_BUILD_MANIFEST"
+      },
+      "assembler_context": {
+        "runtime_assemblies": [
+          "math:chapter:TCOMPL-CALCULS-AIRES:complet",
+          "math:chapter:TCOMPL-CALCULS-AIRES:parcours1",
+          "math:manual:TCOMPL:eleve",
+          "math:manual:TCOMPL:professeur"
+        ],
+        "canonical_twin_assemblies": [
+          "math:chapter:TSPE-DERIVATION-CONVEXITE:complet",
+          "math:chapter:TSPE-DERIVATION-CONVEXITE:parcours1",
+          "math:manual:TSPE_2026_2027:eleve",
+          "math:manual:TSPE_2026_2027:professeur"
+        ]
+      },
+      "programme_context": {
+        "body_semantics": "dérivée d'une fonction composée et formules (v o u)'",
+        "matches": "TSPE-DERCONV-C1",
+        "does_not_match": "TCOMPL-AIR-C1, qui définit l'intégrale comme aire sous une courbe",
+        "outgoing_capacity_link_under_current_path": ["TCOMPL-AIR-C1"],
+        "canonical_twin_capacity_link": ["TSPE-DERCONV-C1"]
+      },
+      "runtime_reachable": true,
+      "canonical_twin": {
+        "object_id": "TSPE-DERCONV-CR-010",
+        "path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/cours/10_C1_derivee_composee.tex",
+        "source_sha256": "bd0315825c9e99a30a8d29097762934e18d334638ca3b0a5955d42d27a6af51e",
+        "body_sha256_copy": "8a9f30b5dd098d225ca0bd8d5273cc6ddb995d00aec4fff51db1317959a275a1",
+        "body_sha256_twin": "8a9f30b5dd098d225ca0bd8d5273cc6ddb995d00aec4fff51db1317959a275a1",
+        "body_byte_identical": true,
+        "metadata_difference_fields": ["id"]
+      },
+      "references": {
+        "incoming": [],
+        "outgoing_capacity": ["TCOMPL-AIR-C1"],
+        "outgoing_other": []
+      },
+      "review_binding": {
+        "review_records": [],
+        "source_sha_bindings": [],
+        "packet_invalidation_required": false
+      },
+      "root_cause": "PATH_CONTEXT_DRIFT",
+      "proposed_action": "Après tests rouges et dernière vérification des hashes, supprimer uniquement cette copie TCOMPL redondante; conserver le jumeau canonique TSPE inchangé."
+    },
+    {
+      "fingerprint": "d4d96a91fdd7f2ca",
+      "manual_detected": "TCOMPL",
+      "manual_expected": "TSPE_2026_2027",
+      "variant_detected": [
+        "math:chapter:TCOMPL-CALCULS-AIRES:complet",
+        "math:chapter:TCOMPL-CALCULS-AIRES:parcours1",
+        "math:manual:TCOMPL:eleve",
+        "math:manual:TCOMPL:professeur"
+      ],
+      "variant_expected": [
+        "math:chapter:TSPE-DERIVATION-CONVEXITE:complet",
+        "math:chapter:TSPE-DERIVATION-CONVEXITE:parcours1",
+        "math:manual:TSPE_2026_2027:eleve",
+        "math:manual:TSPE_2026_2027:professeur"
+      ],
+      "chapter_detected": "TCOMPL-CALCULS-AIRES",
+      "chapter_expected": "TSPE-DERIVATION-CONVEXITE",
+      "object_id": "TCOMPL-AIRES-COURS-07-FR",
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/07_td_fil_rouge.tex",
+      "meta_context": {
+        "id": "TCOMPL-AIRES-COURS-07-FR",
+        "chapitre": "TSPE-DERIVATION-CONVEXITE",
+        "type_objet": "cours",
+        "sous_type": "td_fil_rouge",
+        "capacites": ["C1", "C2", "C3", "C4", "C5", "C6"],
+        "status": "approved"
+      },
+      "filesystem_context": {
+        "manual": "TCOMPL",
+        "chapter": "TCOMPL-CALCULS-AIRES",
+        "section": "cours",
+        "canonical_category": "td",
+        "source_sha256": "f2286b1bf0bed87192824ce9a2487e6c6ad2db215255b6f51101b613eb0fd836"
+      },
+      "manifest_context": {
+        "manifest": "audit/BUILD_MANIFEST.json",
+        "builds": [],
+        "object_binding": "NOT_APPLICABLE_EMPTY_BUILD_MANIFEST"
+      },
+      "assembler_context": {
+        "runtime_assemblies": [
+          "math:chapter:TCOMPL-CALCULS-AIRES:complet",
+          "math:chapter:TCOMPL-CALCULS-AIRES:parcours1",
+          "math:manual:TCOMPL:eleve",
+          "math:manual:TCOMPL:professeur"
+        ],
+        "canonical_twin_assemblies": [
+          "math:chapter:TSPE-DERIVATION-CONVEXITE:complet",
+          "math:chapter:TSPE-DERIVATION-CONVEXITE:parcours1",
+          "math:manual:TSPE_2026_2027:eleve",
+          "math:manual:TSPE_2026_2027:professeur"
+        ]
+      },
+      "programme_context": {
+        "body_semantics": "étude complète de x^2 exp(-x): dérivée, limites, variations, dérivée seconde, convexité et tangentes",
+        "matches": "TSPE-DERCONV-C1 à TSPE-DERCONV-C6",
+        "does_not_match": "TCOMPL-AIR-C1 à TCOMPL-AIR-C6, centrées sur intégrales, aires et primitives",
+        "outgoing_capacity_link_under_current_path": [
+          "TCOMPL-AIR-C1", "TCOMPL-AIR-C2", "TCOMPL-AIR-C3",
+          "TCOMPL-AIR-C4", "TCOMPL-AIR-C5", "TCOMPL-AIR-C6"
+        ],
+        "canonical_twin_capacity_link": [
+          "TSPE-DERCONV-C1", "TSPE-DERCONV-C2", "TSPE-DERCONV-C3",
+          "TSPE-DERCONV-C4", "TSPE-DERCONV-C5", "TSPE-DERCONV-C6"
+        ],
+        "internal_tspe_identifiers": [
+          "TSPE-DERCONV-COURS-07-FR-EX1",
+          "TSPE-DERCONV-COURS-07-FR-EX2",
+          "TSPE-DERCONV-COURS-07-FR-EX3"
+        ]
+      },
+      "runtime_reachable": true,
+      "canonical_twin": {
+        "object_id": "TSPE-DERCONV-COURS-07-FR",
+        "path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/cours/07_td_fil_rouge.tex",
+        "source_sha256": "186c26bd6e49ad103b6689a7e186670651110d429f4cd7ba6d91dcacdc1fa5ea",
+        "body_sha256_copy": "342abf3729794d7ef832138ea88ec38ae1d9838d7a4fafacb8e2b14d8ac00a5a",
+        "body_sha256_twin": "342abf3729794d7ef832138ea88ec38ae1d9838d7a4fafacb8e2b14d8ac00a5a",
+        "body_byte_identical": true,
+        "metadata_difference_fields": ["id"]
+      },
+      "references": {
+        "incoming": [],
+        "outgoing_capacity": [
+          "TCOMPL-AIR-C1", "TCOMPL-AIR-C2", "TCOMPL-AIR-C3",
+          "TCOMPL-AIR-C4", "TCOMPL-AIR-C5", "TCOMPL-AIR-C6"
+        ],
+        "outgoing_other": []
+      },
+      "review_binding": {
+        "review_records": [],
+        "source_sha_bindings": [],
+        "packet_invalidation_required": false
+      },
+      "root_cause": "PATH_CONTEXT_DRIFT",
+      "proposed_action": "Après tests rouges et dernière vérification des hashes, supprimer uniquement cette copie TCOMPL redondante; conserver le jumeau canonique TSPE inchangé."
+    },
+    {
+      "fingerprint": "dc3c58388e2cfe7c",
+      "manual_detected": "TCOMPL",
+      "manual_expected": "TSPE_2026_2027",
+      "variant_detected": [
+        "math:chapter:TCOMPL-CALCULS-AIRES:complet",
+        "math:chapter:TCOMPL-CALCULS-AIRES:parcours1",
+        "math:manual:TCOMPL:eleve",
+        "math:manual:TCOMPL:professeur"
+      ],
+      "variant_expected": [
+        "math:chapter:TSPE-DERIVATION-CONVEXITE:complet",
+        "math:chapter:TSPE-DERIVATION-CONVEXITE:parcours1",
+        "math:manual:TSPE_2026_2027:eleve",
+        "math:manual:TSPE_2026_2027:professeur"
+      ],
+      "chapter_detected": "TCOMPL-CALCULS-AIRES",
+      "chapter_expected": "TSPE-DERIVATION-CONVEXITE",
+      "object_id": "TCOMPL-AIRES-COURS-07-TC",
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/07_td_contextualise.tex",
+      "meta_context": {
+        "id": "TCOMPL-AIRES-COURS-07-TC",
+        "chapitre": "TSPE-DERIVATION-CONVEXITE",
+        "type_objet": "cours",
+        "sous_type": "td_contextualise",
+        "capacites": ["C1", "C2", "C3", "C6"],
+        "status": "approved"
+      },
+      "filesystem_context": {
+        "manual": "TCOMPL",
+        "chapter": "TCOMPL-CALCULS-AIRES",
+        "section": "cours",
+        "canonical_category": "td",
+        "source_sha256": "2a5e383fc6feedee0bd3018b6194bb1620b357c94ab349af449d98e0035637c0"
+      },
+      "manifest_context": {
+        "manifest": "audit/BUILD_MANIFEST.json",
+        "builds": [],
+        "object_binding": "NOT_APPLICABLE_EMPTY_BUILD_MANIFEST"
+      },
+      "assembler_context": {
+        "runtime_assemblies": [
+          "math:chapter:TCOMPL-CALCULS-AIRES:complet",
+          "math:chapter:TCOMPL-CALCULS-AIRES:parcours1",
+          "math:manual:TCOMPL:eleve",
+          "math:manual:TCOMPL:professeur"
+        ],
+        "canonical_twin_assemblies": [
+          "math:chapter:TSPE-DERIVATION-CONVEXITE:complet",
+          "math:chapter:TSPE-DERIVATION-CONVEXITE:parcours1",
+          "math:manual:TSPE_2026_2027:eleve",
+          "math:manual:TSPE_2026_2027:professeur"
+        ]
+      },
+      "programme_context": {
+        "body_semantics": "optimisation d'un cylindre par dérivation et convexité, sans calcul intégral ni aire sous une courbe",
+        "matches": "TSPE-DERCONV-C1, TSPE-DERCONV-C2, TSPE-DERCONV-C3 et TSPE-DERCONV-C6",
+        "does_not_match": "TCOMPL-AIR-C1, TCOMPL-AIR-C2, TCOMPL-AIR-C3 et TCOMPL-AIR-C6, centrées sur intégrales et aires",
+        "outgoing_capacity_link_under_current_path": [
+          "TCOMPL-AIR-C1", "TCOMPL-AIR-C2", "TCOMPL-AIR-C3", "TCOMPL-AIR-C6"
+        ],
+        "canonical_twin_capacity_link": [
+          "TSPE-DERCONV-C1", "TSPE-DERCONV-C2", "TSPE-DERCONV-C3", "TSPE-DERCONV-C6"
+        ],
+        "internal_tspe_identifiers": [
+          "TSPE-DERCONV-COURS-07-TC-EX1",
+          "TSPE-DERCONV-COURS-07-TC-EX2"
+        ]
+      },
+      "runtime_reachable": true,
+      "canonical_twin": {
+        "object_id": "TSPE-DERCONV-COURS-07-TC",
+        "path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/cours/07_td_contextualise.tex",
+        "source_sha256": "c2a90a9ba7cb804821aa019bf2a686f044c5be2988ac8f0147b2157eb818f2c1",
+        "body_sha256_copy": "a0a7e3ba484cbe69c8da103e23b010bf0b2f7cbc725f803ce82e496df8d8dfb4",
+        "body_sha256_twin": "a0a7e3ba484cbe69c8da103e23b010bf0b2f7cbc725f803ce82e496df8d8dfb4",
+        "body_byte_identical": true,
+        "metadata_difference_fields": ["id"]
+      },
+      "references": {
+        "incoming": [],
+        "outgoing_capacity": [
+          "TCOMPL-AIR-C1", "TCOMPL-AIR-C2", "TCOMPL-AIR-C3", "TCOMPL-AIR-C6"
+        ],
+        "outgoing_other": []
+      },
+      "review_binding": {
+        "review_records": [],
+        "source_sha_bindings": [],
+        "packet_invalidation_required": false
+      },
+      "root_cause": "PATH_CONTEXT_DRIFT",
+      "proposed_action": "Après tests rouges et dernière vérification des hashes, supprimer uniquement cette copie TCOMPL redondante; conserver le jumeau canonique TSPE inchangé."
+    }
+  ],
+  "invariants": {
+    "case_count": 3,
+    "fingerprints_unique": true,
+    "each_case_has_exactly_one_root_cause": true,
+    "all_root_causes_allowed": true,
+    "unknown_count": 0,
+    "source_files_modified_by_this_forensic": 0,
+    "source_files_deleted_by_this_forensic": 0
+  },
+  "conclusion": "Les trois anomalies sont des copies TSPE exactes, physiquement atteignables dans TCOMPL. La cause est PATH_CONTEXT_DRIFT dans les trois cas; A6 doit supprimer uniquement les trois copies après les tests rouges, sans déplacer ni modifier les jumeaux canoniques."
+}
