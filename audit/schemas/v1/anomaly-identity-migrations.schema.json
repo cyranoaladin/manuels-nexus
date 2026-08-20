@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nexus-reussite.invalid/schemas/v1/anomaly-identity-migrations.schema.json",
+  "title": "Nexus exact anomaly identity migrations",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_type",
+    "control_digest",
+    "fingerprint_schema_version",
+    "migrations",
+    "schema_ref",
+    "schema_version"
+  ],
+  "properties": {
+    "artifact_type": {
+      "const": "anomaly_identity_migrations"
+    },
+    "control_digest": {
+      "$ref": "#/$defs/sha256"
+    },
+    "fingerprint_schema_version": {
+      "const": 1
+    },
+    "migrations": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "#/$defs/fingerprint"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/migration"
+      }
+    },
+    "schema_ref": {
+      "const": "audit/schemas/v1/anomaly-identity-migrations.schema.json"
+    },
+    "schema_version": {
+      "const": 1
+    }
+  },
+  "$defs": {
+    "fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "repositoryPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+\\.tex$"
+    },
+    "migration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "category",
+        "chapter",
+        "current_fingerprint",
+        "current_object_id",
+        "current_source",
+        "current_source_sha256",
+        "manual",
+        "object_type",
+        "previous_fingerprint",
+        "previous_object_id",
+        "previous_source",
+        "previous_source_sha256",
+        "status",
+        "transform"
+      ],
+      "properties": {
+        "category": {
+          "const": "blocking_statuses"
+        },
+        "chapter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "current_fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        },
+        "current_object_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "current_source": {
+          "$ref": "#/$defs/repositoryPath"
+        },
+        "current_source_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "manual": {
+          "type": "string",
+          "minLength": 1
+        },
+        "object_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "previous_fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        },
+        "previous_object_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "previous_source": {
+          "$ref": "#/$defs/repositoryPath"
+        },
+        "previous_source_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "transform": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind"],
+              "properties": {
+                "kind": {
+                  "const": "BYTE_IDENTICAL_AFTER_PATH_RENAME"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "new_token",
+                "old_token",
+                "replacement_count"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "EXACT_IDENTIFIER_TOKEN_SUBSTITUTION"
+                },
+                "new_token": {
+                  "const": "1NSI-APT-"
+                },
+                "old_token": {
+                  "const": "1NSI-AGT-"
+                },
+                "replacement_count": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -86,6 +86,15 @@ GENERIC_LOCK_FILE = ".inventory_collection.lock"
 
 SOURCE_ROLES_FILE = "audit/SOURCE_ROLES.yaml"
 ANOMALY_DISPOSITIONS_FILE = "audit/ANOMALY_DISPOSITIONS.yaml"
+ANOMALY_IDENTITY_MIGRATIONS_FILE = (
+    "audit/ANOMALY_IDENTITY_MIGRATIONS.yaml"
+)
+ANOMALY_IDENTITY_MIGRATIONS_SCHEMA_FILE = (
+    "audit/schemas/v1/anomaly-identity-migrations.schema.json"
+)
+PRE_A6_VALIDATE_MODEL_FORENSICS_FILE = (
+    "audit/PRE_A6_VALIDATE_MODEL_FORENSICS.json"
+)
 ANOMALIES_BASELINE_FILE = "audit/ANOMALIES_BASELINE.json"
 BASELINE_QUALIFICATION_POLICY_FILE = "audit/BASELINE_QUALIFICATION_POLICY.yaml"
 UNQUALIFIED_ANOMALIES_JSON_FILE = "audit/UNQUALIFIED_ANOMALIES.json"
@@ -118,6 +127,9 @@ SCHEMA_REGISTRY: Mapping[str, Mapping[int, str]] = MappingProxyType(
         ),
         "anomaly_dispositions": MappingProxyType(
             {1: "audit/schemas/v1/anomaly-dispositions.schema.json"}
+        ),
+        "anomaly_identity_migrations": MappingProxyType(
+            {1: ANOMALY_IDENTITY_MIGRATIONS_SCHEMA_FILE}
         ),
         "baseline_qualification_policy": MappingProxyType(
             {1: "audit/schemas/v1/baseline-qualification-policy.schema.json"}
@@ -1067,6 +1079,493 @@ def _load_dispositions(root: Path) -> dict[str, dict[str, Any]]:
                 raise InventoryError("; ".join(violations))
         raw_dispositions[fingerprint] = _canonicalize(dict(value))
     return raw_dispositions
+
+
+def _load_anomaly_identity_migrations(
+    root: Path,
+) -> dict[str, dict[str, Any]]:
+    """Load exact, mechanical fingerprint migrations from ``root``.
+
+    The control contains no decision fields.  Its only purpose is to prove a
+    bijection between two anomaly identities; qualification semantics remain
+    solely in the historical disposition record.
+    """
+
+    payload = _load_control_yaml_payload(
+        root / ANOMALY_IDENTITY_MIGRATIONS_FILE,
+        default=None,
+    )
+    schema_ref = SCHEMA_REGISTRY["anomaly_identity_migrations"][
+        SCHEMA_VERSION
+    ]
+    versioned_control_required = _versioned_control_required(
+        root,
+        ANOMALY_IDENTITY_MIGRATIONS_FILE,
+        artifact_type="anomaly_identity_migrations",
+    ) or (
+        (root / PRE_A6_VALIDATE_MODEL_FORENSICS_FILE).is_file()
+        and (root / schema_ref).is_file()
+    )
+    if payload is None:
+        if versioned_control_required:
+            raise InventoryError(
+                "contrôle versionné absent: "
+                f"{ANOMALY_IDENTITY_MIGRATIONS_FILE}"
+            )
+        return {}
+    if not isinstance(payload, Mapping) or not payload:
+        raise InventoryError(
+            "contrôle versionné invalide: "
+            f"{ANOMALY_IDENTITY_MIGRATIONS_FILE}"
+        )
+    validated = _validate_control_payload(
+        root,
+        ANOMALY_IDENTITY_MIGRATIONS_FILE,
+        payload,
+        artifact_type="anomaly_identity_migrations",
+    )
+    if validated.get("fingerprint_schema_version") != (
+        FINGERPRINT_SCHEMA_VERSION
+    ):
+        raise InventoryError(
+            "fingerprint_schema_version non supportée dans "
+            f"{ANOMALY_IDENTITY_MIGRATIONS_FILE}"
+        )
+    migrations = validated.get("migrations")
+    if not isinstance(migrations, Mapping) or not migrations:
+        raise InventoryError(
+            f"migrations invalides dans {ANOMALY_IDENTITY_MIGRATIONS_FILE}"
+        )
+
+    current_fingerprints = [str(value) for value in migrations]
+    if current_fingerprints != sorted(current_fingerprints):
+        raise InventoryError(
+            "ordre des migrations non canonique dans "
+            f"{ANOMALY_IDENTITY_MIGRATIONS_FILE}"
+        )
+    normalized: dict[str, dict[str, Any]] = {}
+    previous_fingerprints: set[str] = set()
+    for current_fingerprint, raw_migration in migrations.items():
+        if not isinstance(raw_migration, Mapping):
+            raise InventoryError(
+                "migration non objet pour fingerprint="
+                f"{current_fingerprint}"
+            )
+        migration = _canonicalize(dict(raw_migration))
+        if migration.get("current_fingerprint") != current_fingerprint:
+            raise InventoryError(
+                "fingerprint courant de clé incohérent dans "
+                f"{ANOMALY_IDENTITY_MIGRATIONS_FILE}: "
+                f"{current_fingerprint}"
+            )
+        previous_fingerprint = str(
+            migration.get("previous_fingerprint", "")
+        )
+        if previous_fingerprint in previous_fingerprints:
+            raise InventoryError(
+                "migration non bijective: fingerprint historique dupliqué "
+                f"{previous_fingerprint}"
+            )
+        if previous_fingerprint == current_fingerprint:
+            raise InventoryError(
+                "migration réflexive interdite: "
+                f"{current_fingerprint}"
+            )
+        serialized = json.dumps(
+            migration,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+        if "ADGK" in serialized:
+            raise InventoryError(
+                "migration ADGK/APT interdite par l'arbitrage A4: "
+                f"{current_fingerprint}"
+            )
+        previous_fingerprints.add(previous_fingerprint)
+        normalized[str(current_fingerprint)] = migration
+
+    overlap = set(normalized) & previous_fingerprints
+    if overlap:
+        raise InventoryError(
+            "chaîne ou cycle de migrations interdit: "
+            + ", ".join(sorted(overlap))
+        )
+    return normalized
+
+
+def _meta_from_source_bytes(source: bytes, *, role: str) -> dict[str, Any]:
+    try:
+        first_line = source.decode("utf-8").splitlines()[0]
+        payload = first_line.split("% META:", 1)[1].strip()
+        meta = json.loads(payload)
+    except (
+        IndexError,
+        UnicodeDecodeError,
+        json.JSONDecodeError,
+    ) as exc:
+        raise InventoryError(f"META illisible pour {role}") from exc
+    if not isinstance(meta, Mapping):
+        raise InventoryError(f"META invalide pour {role}")
+    return _canonicalize(dict(meta))
+
+
+def _project_identity_migration_qualifications(
+    root: Path,
+    anomalies: Mapping[str, list[dict[str, Any]]],
+    dispositions: Mapping[str, dict[str, Any]],
+    migrations: Mapping[str, Mapping[str, Any]],
+    baseline: Mapping[str, Any],
+    policy: Mapping[str, Any],
+) -> dict[str, dict[str, Any]]:
+    """Project proven historical dispositions onto current identities.
+
+    Projection is in memory only and fail-closed.  The persisted disposition
+    registry remains the unique human-decision authority.
+    """
+
+    if not migrations:
+        return {str(key): dict(value) for key, value in dispositions.items()}
+    baseline_active = baseline.get("active")
+    if not isinstance(baseline_active, list):
+        raise InventoryError("baseline active invalide pour migration d'identité")
+    baseline_by_fingerprint = {
+        str(entry.get("fingerprint", "")): entry
+        for entry in baseline_active
+        if isinstance(entry, Mapping) and entry.get("fingerprint")
+    }
+    for current_fingerprint, migration in sorted(migrations.items()):
+        previous_fingerprint = str(migration.get("previous_fingerprint", ""))
+        if current_fingerprint in dispositions:
+            raise InventoryError(
+                "migration d'identité interdite: la cible possède déjà une "
+                f"disposition fp={current_fingerprint}"
+            )
+        if not isinstance(dispositions.get(previous_fingerprint), Mapping):
+            raise InventoryError(
+                "disposition historique absente pour migration "
+                f"fp={previous_fingerprint}"
+            )
+        if not isinstance(
+            baseline_by_fingerprint.get(previous_fingerprint), Mapping
+        ):
+            raise InventoryError(
+                "fingerprint historique absent de la baseline active: "
+                f"{previous_fingerprint}"
+            )
+    policy_failures = _baseline_qualification.validate_materialized_registry(
+        policy,
+        dispositions,
+    )
+    if policy_failures:
+        raise InventoryError(
+            "politique historique invalide avant migration d'identité: "
+            + "; ".join(policy_failures[:5])
+        )
+    current_anomalies: dict[
+        str, list[tuple[str, Mapping[str, Any]]]
+    ] = defaultdict(list)
+    for category, values in sorted(anomalies.items()):
+        for anomaly in values:
+            if not isinstance(anomaly, Mapping):
+                continue
+            current_anomalies[
+                _anomaly_fingerprint(anomaly, category=str(category))
+            ].append((str(category), anomaly))
+
+    projected = {
+        str(key): _canonicalize(dict(value))
+        for key, value in dispositions.items()
+    }
+    policy_digest = str(policy.get("control_digest", ""))
+    policy_rules = {
+        str(rule.get("id", "")): rule
+        for rule in policy.get("rules", [])
+        if isinstance(rule, Mapping)
+    }
+    for current_fingerprint, raw_migration in sorted(migrations.items()):
+        migration = dict(raw_migration)
+        previous_fingerprint = str(migration["previous_fingerprint"])
+        previous_disposition = dispositions.get(previous_fingerprint)
+        if not isinstance(previous_disposition, Mapping):
+            raise InventoryError(
+                "disposition historique absente pour migration "
+                f"fp={previous_fingerprint}"
+            )
+        previous_baseline = baseline_by_fingerprint.get(previous_fingerprint)
+        if not isinstance(previous_baseline, Mapping):
+            raise InventoryError(
+                "fingerprint historique absent de la baseline active: "
+                f"{previous_fingerprint}"
+            )
+        if previous_baseline.get("qualified") is not True:
+            raise InventoryError(
+                "fingerprint historique non qualifié dans la baseline: "
+                f"{previous_fingerprint}"
+            )
+        historical_disposition_identity = {
+            "category": migration["category"],
+            "chapter": migration["chapter"],
+            "manual": migration["manual"],
+            "source": migration["previous_source"],
+        }
+        for field, expected in historical_disposition_identity.items():
+            if previous_disposition.get(field) != expected:
+                raise InventoryError(
+                    "disposition historique divergente pour migration "
+                    f"fp={previous_fingerprint}:{field}"
+                )
+        occurrences = current_anomalies.get(current_fingerprint, [])
+        if len(occurrences) != 1:
+            raise InventoryError(
+                "cible de migration absente ou ambiguë fp="
+                f"{current_fingerprint}: occurrences={len(occurrences)}"
+            )
+        category, current_anomaly = occurrences[0]
+        mechanical_fields = {
+            "category": category,
+            "chapter": current_anomaly.get("chapter"),
+            "current_object_id": current_anomaly.get("id"),
+            "current_source": current_anomaly.get(
+                "source", current_anomaly.get("path")
+            ),
+            "manual": current_anomaly.get("manual"),
+            "status": current_anomaly.get("status"),
+        }
+        for field, actual in mechanical_fields.items():
+            if migration.get(field) != actual:
+                raise InventoryError(
+                    "invariant mécanique divergent pour migration "
+                    f"fp={current_fingerprint}:{field}"
+                )
+        if current_anomaly.get("scope") != "object":
+            raise InventoryError(
+                "migration limitée aux anomalies objet fp="
+                f"{current_fingerprint}"
+            )
+
+        current_source = root / str(migration["current_source"])
+        try:
+            current_bytes = current_source.read_bytes()
+        except OSError as exc:
+            raise InventoryError(
+                "source courante absente pour migration fp="
+                f"{current_fingerprint}"
+            ) from exc
+        current_sha = "sha256:" + hashlib.sha256(current_bytes).hexdigest()
+        if current_sha != migration.get("current_source_sha256"):
+            raise InventoryError(
+                "hash source courant divergent pour migration fp="
+                f"{current_fingerprint}"
+            )
+        transform = migration.get("transform")
+        if not isinstance(transform, Mapping):
+            raise InventoryError(
+                f"transformation absente fp={current_fingerprint}"
+            )
+        kind = transform.get("kind")
+        if kind == "BYTE_IDENTICAL_AFTER_PATH_RENAME":
+            previous_bytes = current_bytes
+        elif kind == "EXACT_IDENTIFIER_TOKEN_SUBSTITUTION":
+            old_token = str(transform.get("old_token", ""))
+            new_token = str(transform.get("new_token", ""))
+            replacement_count = transform.get("replacement_count")
+            if (
+                old_token != "1NSI-AGT-"
+                or new_token != "1NSI-APT-"
+                or not isinstance(replacement_count, int)
+                or isinstance(replacement_count, bool)
+            ):
+                raise InventoryError(
+                    "substitution non exacte ou globale interdite fp="
+                    f"{current_fingerprint}"
+                )
+            try:
+                current_text = current_bytes.decode("utf-8")
+            except UnicodeDecodeError as exc:
+                raise InventoryError(
+                    f"source non UTF-8 fp={current_fingerprint}"
+                ) from exc
+            if (
+                old_token in current_text
+                or current_text.count(new_token) != replacement_count
+            ):
+                raise InventoryError(
+                    "nombre de substitutions exactes divergent fp="
+                    f"{current_fingerprint}"
+                )
+            previous_bytes = current_text.replace(
+                new_token,
+                old_token,
+            ).encode("utf-8")
+        else:
+            raise InventoryError(
+                "transformation fuzzy ou inconnue interdite fp="
+                f"{current_fingerprint}"
+            )
+        previous_sha = (
+            "sha256:" + hashlib.sha256(previous_bytes).hexdigest()
+        )
+        if previous_sha != migration.get("previous_source_sha256"):
+            raise InventoryError(
+                "hash source historique divergent pour migration fp="
+                f"{current_fingerprint}"
+            )
+
+        current_meta = _meta_from_source_bytes(
+            current_bytes,
+            role=f"source courante fp={current_fingerprint}",
+        )
+        previous_meta = _meta_from_source_bytes(
+            previous_bytes,
+            role=f"source historique fp={previous_fingerprint}",
+        )
+        for field, expected in {
+            "chapitre": migration["chapter"],
+            "id": migration["current_object_id"],
+            "status": migration["status"],
+            "type_objet": migration["object_type"],
+        }.items():
+            if current_meta.get(field) != expected:
+                raise InventoryError(
+                    "META courant divergent pour migration "
+                    f"fp={current_fingerprint}:{field}"
+                )
+        for field, expected in {
+            "chapitre": migration["chapter"],
+            "id": migration["previous_object_id"],
+            "status": migration["status"],
+            "type_objet": migration["object_type"],
+        }.items():
+            if previous_meta.get(field) != expected:
+                raise InventoryError(
+                    "META historique divergent pour migration "
+                    f"fp={previous_fingerprint}:{field}"
+                )
+
+        previous_anomaly = dict(current_anomaly)
+        previous_anomaly["id"] = migration["previous_object_id"]
+        source_field = (
+            "source" if "source" in previous_anomaly else "path"
+        )
+        previous_anomaly[source_field] = migration["previous_source"]
+        if _anomaly_fingerprint(
+            previous_anomaly,
+            category=category,
+        ) != previous_fingerprint:
+            raise InventoryError(
+                "fingerprint historique non reproductible pour migration "
+                f"fp={previous_fingerprint}"
+            )
+        if previous_baseline.get("locator_key") != _anomaly_locator_key(
+            previous_anomaly,
+            category=category,
+        ):
+            raise InventoryError(
+                "identité baseline divergente pour migration fp="
+                f"{previous_fingerprint}"
+            )
+
+        baseline_expected = {
+            "blocking": previous_disposition.get("blocking"),
+            "category": previous_disposition.get("category"),
+            "disposition": previous_disposition.get("disposition"),
+            "fingerprint": previous_fingerprint,
+            "justification": previous_disposition.get("justification"),
+            "owner": previous_disposition.get("owner"),
+            "qualification_digest": previous_disposition.get(
+                "qualification_digest"
+            ),
+            "qualified": True,
+            "severity": previous_disposition.get("severity"),
+        }
+        for field, expected in baseline_expected.items():
+            if previous_baseline.get(field) != expected:
+                raise InventoryError(
+                    "qualification baseline divergente pour migration "
+                    f"fp={previous_fingerprint}:{field}"
+                )
+        if (
+            previous_disposition.get("qualification_policy_digest")
+            != policy_digest
+        ):
+            raise InventoryError(
+                "policy digest divergent pour migration fp="
+                f"{previous_fingerprint}"
+            )
+        policy_rule = str(previous_disposition.get("policy_rule", ""))
+        rule = policy_rules.get(policy_rule)
+        decision = rule.get("decision") if isinstance(rule, Mapping) else None
+        if not isinstance(decision, Mapping):
+            raise InventoryError(
+                "policy rule historique introuvable pour migration fp="
+                f"{previous_fingerprint}"
+            )
+        expected_decision = {
+            "approved_by": policy.get("decision", {}).get("approved_by"),
+            "baseline_sha": policy.get("approved_set", {}).get(
+                "baseline_sha"
+            ),
+            "blocking": decision.get("release_blocking"),
+            "decision_ref": policy.get("decision", {}).get("ref"),
+            "disposition": decision.get("disposition"),
+            "justification": decision.get("reason"),
+            "owner": decision.get("owner"),
+            "reason": decision.get("reason"),
+            "release_blocking": decision.get("release_blocking"),
+        }
+        for field, expected in expected_decision.items():
+            if previous_disposition.get(field) != expected:
+                raise InventoryError(
+                    "décision historique divergente pour migration "
+                    f"fp={previous_fingerprint}:{field}"
+                )
+        if previous_disposition.get("qualification_digest") != (
+            _baseline_qualification.qualification_digest(
+                previous_disposition
+            )
+        ):
+            raise InventoryError(
+                "qualification digest historique divergent fp="
+                f"{previous_fingerprint}"
+            )
+
+        projected_record = _canonicalize(dict(previous_disposition))
+        projected_record["fingerprint"] = current_fingerprint
+        projected_record["source"] = migration["current_source"]
+        projected[current_fingerprint] = projected_record
+    return dict(sorted(projected.items()))
+
+
+def _effective_dispositions_for_anomalies(
+    root: Path,
+    anomalies: Mapping[str, list[dict[str, Any]]],
+    dispositions: Mapping[str, dict[str, Any]],
+) -> dict[str, dict[str, Any]]:
+    migrations = _load_anomaly_identity_migrations(root)
+    if not migrations:
+        return {str(key): dict(value) for key, value in dispositions.items()}
+    try:
+        baseline = _load_validated_baseline(root)
+        policy = _baseline_qualification.load_policy(
+            root / BASELINE_QUALIFICATION_POLICY_FILE
+        )
+    except (
+        InventoryError,
+        OSError,
+        _baseline_qualification.QualificationError,
+    ) as exc:
+        raise InventoryError(
+            "autorité indisponible pour migration d'identité: "
+            f"{exc}"
+        ) from exc
+    return _project_identity_migration_qualifications(
+        root,
+        anomalies,
+        dispositions,
+        migrations,
+        baseline,
+        policy,
+    )
 
 
 def _schema_ref_for(artifact_type: str, schema_version: int) -> str:
@@ -2179,6 +2678,8 @@ def _compare_anomaly_debt(
     current_active: Iterable[Mapping[str, Any]],
     baseline_active: Iterable[Mapping[str, Any]],
     resolved_history: Iterable[Mapping[str, Any]],
+    *,
+    identity_migrations: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Compare two anomaly multisets without mutating either registry."""
     current = _coalesce_active_debt(current_active)
@@ -2278,24 +2779,33 @@ def _compare_anomaly_debt(
 
     unmatched_current = set(current) - set(exact)
     unmatched_previous = set(previous) - set(exact)
-    previous_by_locator: dict[str, list[str]] = defaultdict(list)
-    current_by_locator: dict[str, list[str]] = defaultdict(list)
-    def _loc_str(val: Any) -> str:
-        s = json.dumps(val, sort_keys=True, separators=(",", ":")) if isinstance(val, Mapping) else str(val or "")
-        return s.replace("ADGK", "APT").replace("AGT", "APT")
+    migrations = identity_migrations or {}
+    seen_previous: set[str] = set()
+    exact_pairs: list[tuple[str, str]] = []
+    for new_fingerprint, migration in sorted(migrations.items()):
+        if not isinstance(migration, Mapping):
+            raise InventoryError(
+                f"migration d'identité invalide fp={new_fingerprint}"
+            )
+        old_fingerprint = str(migration.get("previous_fingerprint", ""))
+        if not old_fingerprint:
+            raise InventoryError(
+                "fingerprint historique absent pour migration fp="
+                f"{new_fingerprint}"
+            )
+        if old_fingerprint in seen_previous:
+            raise InventoryError(
+                "migration non bijective pendant la comparaison fp="
+                f"{old_fingerprint}"
+            )
+        seen_previous.add(old_fingerprint)
+        if (
+            new_fingerprint in unmatched_current
+            and old_fingerprint in unmatched_previous
+        ):
+            exact_pairs.append((old_fingerprint, new_fingerprint))
 
-    for fingerprint in unmatched_previous:
-        locator = _loc_str(previous[fingerprint].get("locator_key", ""))
-        if locator:
-            previous_by_locator[locator].append(fingerprint)
-    for fingerprint in unmatched_current:
-        locator = _loc_str(current[fingerprint].get("locator_key", ""))
-        if locator:
-            current_by_locator[locator].append(fingerprint)
-    for locator in sorted(set(previous_by_locator) & set(current_by_locator)):
-        old_values = sorted(previous_by_locator[locator])
-        new_values = sorted(current_by_locator[locator])
-        for old_fingerprint, new_fingerprint in zip(old_values, new_values):
+    for old_fingerprint, new_fingerprint in exact_pairs:
             old_entry = previous[old_fingerprint]
             new_entry = current[new_fingerprint]
             for field in ("owner", "justification", "qualification_digest", "disposition", "policy_rule"):
@@ -2309,6 +2819,7 @@ def _compare_anomaly_debt(
                     "previous": old_fingerprint,
                 }
             )
+            locator = str(new_entry.get("locator_key", ""))
             old_count = int(old_entry.get("occurrence_count", 0))
             new_count = int(new_entry.get("occurrence_count", 0))
             if new_count > old_count:
@@ -2473,6 +2984,7 @@ def _approved_baseline_extension_diagnosis(
             root / BASELINE_QUALIFICATION_POLICY_FILE
         )
         dispositions = _load_dispositions(root)
+        identity_migrations = _load_anomaly_identity_migrations(root)
     except (
         InventoryError,
         OSError,
@@ -2507,6 +3019,7 @@ def _approved_baseline_extension_diagnosis(
         current_active,
         baseline_active,
         baseline_resolved,
+        identity_migrations=identity_migrations,
     )
     if _canonicalize(comparison) != _canonicalize(recomputed_comparison):
         offending.append("comparaison de baseline fournie incohérente")
@@ -2716,11 +3229,15 @@ def _evaluate_baseline(
         payload.get("resolved"), list
     ):
         return ["champs active/resolved baseline invalides"]
+    identity_migrations = _load_anomaly_identity_migrations(
+        baseline_path.resolve().parent.parent
+    )
     return list(
         _compare_anomaly_debt(
             _current_active_debt(inventory),
             payload["active"],
             payload["resolved"],
+            identity_migrations=identity_migrations,
         )["failures"]
     )
 
@@ -4703,9 +5220,14 @@ def _build_inventory(
         key: sorted(values, key=_anomaly_sort_key)
         for key, values in anomalies.items()
     }
-    inventory["anomaly_qualifications"] = _build_anomaly_qualification_view(
+    effective_dispositions = _effective_dispositions_for_anomalies(
+        root,
         inventory["anomalies"],
         dispositions,
+    )
+    inventory["anomaly_qualifications"] = _build_anomaly_qualification_view(
+        inventory["anomalies"],
+        effective_dispositions,
         today=(
             qualification_today
             if qualification_today is not None
@@ -5939,6 +6461,8 @@ def _is_model_source(path: str) -> bool:
         in {
             SOURCE_ROLES_FILE,
             ANOMALY_DISPOSITIONS_FILE,
+            ANOMALY_IDENTITY_MIGRATIONS_FILE,
+            ANOMALY_IDENTITY_MIGRATIONS_SCHEMA_FILE,
             BUILD_PRODUCERS_FILE,
             CANONICAL_OBJECT_TYPE_ONTOLOGY_FILE,
         }
@@ -9247,6 +9771,7 @@ def _validate_model_gate(
     try:
         _load_source_roles(root, git_tracked_files(root))
         _load_dispositions(root)
+        _load_anomaly_identity_migrations(root)
     except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
         reasons.append(f"contrôles_versionnés:{_stable_gate_reason(exc, root)}")
     if (root / ANOMALIES_BASELINE_FILE).is_file():
@@ -9691,10 +10216,12 @@ def _fail_on_new_gate(root: Path) -> dict[str, Any]:
             ]
         else:
             inventory = build_inventory(root)
+            identity_migrations = _load_anomaly_identity_migrations(root)
             comparison = _compare_anomaly_debt(
                 _current_active_debt(inventory),
                 baseline.get("active", []),
                 baseline.get("resolved", []),
+                identity_migrations=identity_migrations,
             )
             reasons = list(comparison["failures"])
     except (InventoryError, OSError, subprocess.CalledProcessError) as exc:

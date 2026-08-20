@@ -3969,6 +3969,9 @@ def test_debt_comparison_detects_modified_severity_and_lost_disposition(
         [new_modified, severity_new, disposition_new],
         [old_modified, severity_old, disposition_old],
         [],
+        identity_migrations={
+            "b" * 16: {"previous_fingerprint": "a" * 16}
+        },
     )
 
     assert comparison["success"] is False
@@ -4170,10 +4173,14 @@ def _approved_transition_case(inventory_module) -> dict[str, object]:
         "schema_version": 1,
     }
     current_active = [deepcopy(retained), added, current_modified]
+    identity_migrations = {
+        "e" * 16: {"previous_fingerprint": "c" * 16}
+    }
     comparison = inventory_module._compare_anomaly_debt(
         current_active,
         baseline_payload["active"],
         baseline_payload["resolved"],
+        identity_migrations=identity_migrations,
     )
     modified_pairs = [
         {"current": "e" * 16, "previous": "c" * 16},
@@ -4230,6 +4237,7 @@ def _approved_transition_case(inventory_module) -> dict[str, object]:
         "comparison": comparison,
         "current_active": current_active,
         "dispositions": dispositions,
+        "identity_migrations": identity_migrations,
         "policy": policy,
     }
 
@@ -4250,6 +4258,11 @@ def _diagnose_approved_transition(
         "_load_dispositions",
         lambda _root: case["dispositions"],
     )
+    monkeypatch.setattr(
+        inventory_module,
+        "_load_anomaly_identity_migrations",
+        lambda _root: case["identity_migrations"],
+    )
     return inventory_module._approved_baseline_extension_diagnosis(
         tmp_path,
         case["current_active"],
@@ -4265,6 +4278,7 @@ def _refresh_transition_comparison(case: dict[str, object], inventory_module) ->
         case["current_active"],
         baseline_payload["active"],
         baseline_payload["resolved"],
+        identity_migrations=case["identity_migrations"],
     )
 
 
@@ -4562,6 +4576,7 @@ def test_approved_baseline_extension_diagnosis_rejects_different_pair(
     replacement["locator_key"] = (
         "missing_corrections|1SPE|C1|other.tex|corrige_tex|OTHER-1"
     )
+    case["identity_migrations"].pop("e" * 16)
     _refresh_transition_comparison(case, inventory_module)
 
     approved, offending = _diagnose_approved_transition(
@@ -17328,6 +17343,611 @@ def test_release_and_debt_gates_have_independent_documented_failures(
     assert provisional.returncode == 5
     assert provisional_payload["gate"] == "fail-on-new"
     assert any("provisoire" in reason for reason in provisional_payload["reasons"])
+
+
+PRE_A6_IDENTITY_MIGRATIONS = {
+    "3352c285c8971a9a": "4686bd1f406b8183",
+    "3a8ff3c7649eebf4": "a4d85ea8ddf56111",
+    "4efbac4c9cd5b38e": "b1b11f28b3c73674",
+    "5dd488a33d09ff85": "e3f94eee205675b2",
+    "64d302027bb8d49d": "760dd470d22f772c",
+    "685b5345a7a14d3a": "0af04017fed4737f",
+    "6dbdcc7ea0c5b104": "2e10a1fa5e61ca58",
+    "8c73d69a6c3f46c4": "e0ba62172b638934",
+    "9bc05524d4ef9a01": "ac9ea077ad841eeb",
+}
+
+
+def test_pre_a6_identity_migration_registry_is_exact_schema_control(
+    inventory_module,
+) -> None:
+    path = ROOT / "audit/ANOMALY_IDENTITY_MIGRATIONS.yaml"
+    schema_path = (
+        ROOT
+        / "audit/schemas/v1/anomaly-identity-migrations.schema.json"
+    )
+
+    payload = inventory_module._load_control_yaml_payload(path)
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    jsonschema.Draft202012Validator.check_schema(schema)
+    jsonschema.Draft202012Validator(schema).validate(payload)
+
+    assert inventory_module._schema_ref_for(
+        "anomaly_identity_migrations", 1
+    ) == schema_path.relative_to(ROOT).as_posix()
+    assert payload["control_digest"] == inventory_module._control_digest(
+        payload
+    )
+    assert {
+        current: migration["previous_fingerprint"]
+        for current, migration in payload["migrations"].items()
+    } == PRE_A6_IDENTITY_MIGRATIONS
+    forbidden = {
+        "approved_by",
+        "baseline_sha",
+        "blocking",
+        "decision_ref",
+        "disposition",
+        "justification",
+        "owner",
+        "policy_rule",
+        "qualified",
+        "qualification_digest",
+        "qualification_policy_digest",
+        "reason",
+        "release_blocking",
+    }
+
+    def all_keys(value: object) -> set[str]:
+        if isinstance(value, dict):
+            return set(value) | {
+                key
+                for child in value.values()
+                for key in all_keys(child)
+            }
+        if isinstance(value, list):
+            return {
+                key for child in value for key in all_keys(child)
+            }
+        return set()
+
+    assert forbidden.isdisjoint(all_keys(payload))
+
+
+def test_pre_a6_repository_projects_only_the_exact_nine_qualifications(
+    inventory_module,
+) -> None:
+    inventory = inventory_module._build_inventory(
+        ROOT,
+        empty_manifest_refresh_capability=(
+            inventory_module._EMPTY_MANIFEST_REFRESH_CAPABILITY
+        ),
+    )
+    qualifications = inventory["anomaly_qualifications"]
+    dispositions = inventory_module._load_dispositions(ROOT)
+
+    assert set(PRE_A6_IDENTITY_MIGRATIONS) <= set(qualifications)
+    assert all(
+        qualifications[fingerprint]["qualified"] is True
+        for fingerprint in PRE_A6_IDENTITY_MIGRATIONS
+    )
+    assert all(
+        qualifications[current]["qualification_digest"]
+        == dispositions[previous]["qualification_digest"]
+        for current, previous in PRE_A6_IDENTITY_MIGRATIONS.items()
+    )
+    assert (
+        hashlib.sha256(
+            (ROOT / "audit/ANOMALIES_BASELINE.json").read_bytes()
+        ).hexdigest()
+        == "3e9225668121a67c2fdea1248ec420ff16bd3910c8557e3a98df8bb7997250e1"
+    )
+    assert (
+        hashlib.sha256(
+            (ROOT / "audit/ANOMALY_DISPOSITIONS.yaml").read_bytes()
+        ).hexdigest()
+        == "49595a0f28745eee0b8f080a4cbeb2fa7265a798455f2747a93d9d532635cda6"
+    )
+    assert (
+        hashlib.sha256(
+            (ROOT / "audit/BASELINE_QUALIFICATION_POLICY.yaml").read_bytes()
+        ).hexdigest()
+        == "07d95c5073da77944ab07a3312483fdfda0f43d6f412ee023f3269c770b282d2"
+    )
+
+
+def test_pre_a6_debt_comparison_rejects_unmapped_and_accepts_exact_mapping(
+    inventory_module,
+) -> None:
+    previous = _active_debt(
+        "a" * 16,
+        locator_key='{"source":"old/1NSI-AGT-C1.tex"}',
+    )
+    current = _active_debt(
+        "b" * 16,
+        locator_key='{"source":"new/1NSI-APT-C1.tex"}',
+    )
+
+    unmapped = inventory_module._compare_anomaly_debt(
+        [current], [previous], []
+    )
+    mapped = inventory_module._compare_anomaly_debt(
+        [current],
+        [previous],
+        [],
+        identity_migrations={
+            "b" * 16: {"previous_fingerprint": "a" * 16}
+        },
+    )
+
+    assert unmapped["modified"] == []
+    assert unmapped["new"] == ["b" * 16]
+    assert unmapped["resolved"] == ["a" * 16]
+    assert mapped["modified"] == [
+        {"current": "b" * 16, "previous": "a" * 16}
+    ]
+    assert mapped["new"] == []
+    assert mapped["resolved"] == []
+
+
+def _pre_a6_projection_case(inventory_module):
+    stored = json.loads(
+        (ROOT / "audit/INVENTAIRE_COLLECTION.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    anomalies: dict[str, list[dict[str, object]]] = {}
+    for category, values in stored["anomalies"].items():
+        selected = [
+            dict(anomaly)
+            for anomaly in values
+            if inventory_module._anomaly_fingerprint(
+                anomaly,
+                category=category,
+            )
+            in PRE_A6_IDENTITY_MIGRATIONS
+        ]
+        if selected:
+            anomalies[category] = selected
+    return {
+        "anomalies": anomalies,
+        "baseline": inventory_module._load_validated_baseline(ROOT),
+        "dispositions": inventory_module._load_dispositions(ROOT),
+        "migrations": inventory_module._load_anomaly_identity_migrations(
+            ROOT
+        ),
+        "policy": inventory_module._baseline_qualification.load_policy(
+            ROOT / "audit/BASELINE_QUALIFICATION_POLICY.yaml"
+        ),
+    }
+
+
+@pytest.fixture(scope="module")
+def pre_a6_projection_case():
+    return _pre_a6_projection_case(_load_inventory_module())
+
+
+@pytest.mark.parametrize(
+    ("mutation", "error"),
+    [
+        pytest.param(
+            "missing-old-disposition",
+            "disposition historique absente",
+            id="missing-historical-disposition",
+        ),
+        pytest.param(
+            "target-has-disposition",
+            "cible possède déjà",
+            id="target-disposition-forbidden",
+        ),
+        pytest.param(
+            "baseline-unqualified",
+            "non qualifié",
+            id="historical-baseline-unqualified",
+        ),
+        pytest.param(
+            "baseline-identity",
+            "identité baseline divergente",
+            id="baseline-identity-drift",
+        ),
+        pytest.param(
+            "current-source-hash",
+            "hash source courant divergent",
+            id="current-source-hash-drift",
+        ),
+        pytest.param(
+            "previous-source-hash",
+            "hash source historique divergent",
+            id="previous-source-hash-drift",
+        ),
+        pytest.param(
+            "replacement-count",
+            "nombre de substitutions exactes divergent",
+            id="exact-transform-drift",
+        ),
+        pytest.param(
+            "status",
+            "status",
+            id="status-drift",
+        ),
+        pytest.param(
+            "object-type",
+            "type_objet",
+            id="object-type-drift",
+        ),
+        pytest.param(
+            "category",
+            "category",
+            id="category-drift",
+        ),
+        pytest.param(
+            "policy-digest",
+            "politique historique invalide",
+            id="policy-digest-drift",
+        ),
+        pytest.param(
+            "decision-ref",
+            "politique historique invalide",
+            id="decision-ref-drift",
+        ),
+        pytest.param(
+            "qualification-digest",
+            "politique historique invalide",
+            id="qualification-digest-drift",
+        ),
+        pytest.param(
+            "historical-source",
+            "source",
+            id="historical-disposition-source-drift",
+        ),
+        pytest.param(
+            "historical-manual",
+            "manual",
+            id="historical-disposition-manual-drift",
+        ),
+        pytest.param(
+            "historical-chapter",
+            "chapter",
+            id="historical-disposition-chapter-drift",
+        ),
+    ],
+)
+def test_pre_a6_projection_rejects_every_mechanical_or_human_drift(
+    inventory_module,
+    pre_a6_projection_case,
+    mutation: str,
+    error: str,
+) -> None:
+    case = deepcopy(pre_a6_projection_case)
+    current = "6dbdcc7ea0c5b104"
+    previous = PRE_A6_IDENTITY_MIGRATIONS[current]
+    if mutation == "missing-old-disposition":
+        case["dispositions"].pop(previous)
+    elif mutation == "target-has-disposition":
+        case["dispositions"][current] = deepcopy(
+            case["dispositions"][previous]
+        )
+    elif mutation == "baseline-unqualified":
+        entry = next(
+            entry
+            for entry in case["baseline"]["active"]
+            if entry["fingerprint"] == previous
+        )
+        entry["qualified"] = False
+    elif mutation == "baseline-identity":
+        entry = next(
+            entry
+            for entry in case["baseline"]["active"]
+            if entry["fingerprint"] == previous
+        )
+        entry["locator_key"] = '{"source":"falsified.tex"}'
+    elif mutation == "current-source-hash":
+        case["migrations"][current]["current_source_sha256"] = (
+            "sha256:" + "0" * 64
+        )
+    elif mutation == "previous-source-hash":
+        case["migrations"][current]["previous_source_sha256"] = (
+            "sha256:" + "0" * 64
+        )
+    elif mutation == "replacement-count":
+        case["migrations"][current]["transform"]["replacement_count"] += 1
+    elif mutation == "status":
+        case["migrations"][current]["status"] = "approved"
+    elif mutation == "object-type":
+        case["migrations"][current]["object_type"] = "cours"
+    elif mutation == "category":
+        case["migrations"][current]["category"] = "missing_corrections"
+    elif mutation == "policy-digest":
+        case["dispositions"][previous]["qualification_policy_digest"] = (
+            "sha256:" + "0" * 64
+        )
+    elif mutation == "decision-ref":
+        case["dispositions"][previous]["decision_ref"] = (
+            "audit/forged.md#decision"
+        )
+    elif mutation == "qualification-digest":
+        case["dispositions"][previous]["qualification_digest"] = (
+            "sha256:" + "0" * 64
+        )
+    elif mutation == "historical-source":
+        case["dispositions"][previous]["source"] = "forged/source.tex"
+    elif mutation == "historical-manual":
+        case["dispositions"][previous]["manual"] = "TNSI"
+    else:
+        case["dispositions"][previous]["chapter"] = "1NSI-FORGED"
+
+    with pytest.raises(inventory_module.InventoryError, match=error):
+        inventory_module._project_identity_migration_qualifications(
+            ROOT,
+            case["anomalies"],
+            case["dispositions"],
+            case["migrations"],
+            case["baseline"],
+            case["policy"],
+        )
+
+
+@pytest.mark.parametrize(
+    ("mutation", "error"),
+    [
+        pytest.param(
+            "duplicate-previous",
+            "non bijective",
+            id="duplicate-previous-fingerprint",
+        ),
+        pytest.param(
+            "key-mismatch",
+            "clé incohérent",
+            id="key-current-fingerprint-mismatch",
+        ),
+        pytest.param(
+            "adgk",
+            "ADGK/APT interdite",
+            id="adgk-apt-is-never-an-alias",
+        ),
+        pytest.param(
+            "global-token",
+            "non conforme au schéma",
+            id="global-string-replacement-forbidden",
+        ),
+        pytest.param(
+            "fuzzy-kind",
+            "non conforme au schéma",
+            id="fuzzy-matching-forbidden",
+        ),
+        pytest.param(
+            "decision-field",
+            "non conforme au schéma",
+            id="decision-field-forbidden",
+        ),
+        pytest.param(
+            "missing-old",
+            "non conforme au schéma",
+            id="previous-fingerprint-required",
+        ),
+        pytest.param(
+            "missing-source",
+            "non conforme au schéma",
+            id="current-source-required",
+        ),
+        pytest.param(
+            "missing-status",
+            "non conforme au schéma",
+            id="status-required",
+        ),
+        pytest.param(
+            "missing-type",
+            "non conforme au schéma",
+            id="object-type-required",
+        ),
+        pytest.param(
+            "missing-category",
+            "non conforme au schéma",
+            id="category-required",
+        ),
+    ],
+)
+def test_pre_a6_registry_rejects_non_exact_or_decision_bearing_records(
+    tmp_path: Path,
+    inventory_module,
+    mutation: str,
+    error: str,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    payload = yaml.safe_load(
+        (ROOT / "audit/ANOMALY_IDENTITY_MIGRATIONS.yaml").read_text(
+            encoding="utf-8"
+        )
+    )
+    keys = list(payload["migrations"])
+    first = payload["migrations"][keys[0]]
+    second = payload["migrations"][keys[1]]
+    if mutation == "duplicate-previous":
+        second["previous_fingerprint"] = first["previous_fingerprint"]
+    elif mutation == "key-mismatch":
+        first["current_fingerprint"] = "f" * 16
+    elif mutation == "adgk":
+        first["current_object_id"] = "1NSI-ADGK-EVAL-B"
+    elif mutation == "global-token":
+        migrated = payload["migrations"]["6dbdcc7ea0c5b104"]
+        migrated["transform"]["old_token"] = "AGT"
+    elif mutation == "fuzzy-kind":
+        first["transform"] = {"kind": "FUZZY_BASENAME"}
+    elif mutation == "decision-field":
+        first["approved_by"] = "Fabricated"
+    elif mutation == "missing-old":
+        first.pop("previous_fingerprint")
+    elif mutation == "missing-source":
+        first.pop("current_source")
+    elif mutation == "missing-status":
+        first.pop("status")
+    elif mutation == "missing-type":
+        first.pop("object_type")
+    else:
+        first.pop("category")
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    _write(
+        tmp_path / "audit/ANOMALY_IDENTITY_MIGRATIONS.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match=error):
+        inventory_module._load_anomaly_identity_migrations(tmp_path)
+
+
+def test_pre_a6_registry_rejects_duplicate_yaml_keys(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    source = (
+        ROOT / "audit/ANOMALY_IDENTITY_MIGRATIONS.yaml"
+    ).read_text(encoding="utf-8")
+    duplicate = source.replace(
+        "artifact_type: anomaly_identity_migrations\n",
+        "artifact_type: anomaly_identity_migrations\n"
+        "artifact_type: anomaly_identity_migrations\n",
+        1,
+    )
+    _write(
+        tmp_path / "audit/ANOMALY_IDENTITY_MIGRATIONS.yaml",
+        duplicate,
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="dupliquée"):
+        inventory_module._load_anomaly_identity_migrations(tmp_path)
+
+
+def test_pre_a6_registry_is_mandatory_after_forensics_activation(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    _write(
+        tmp_path / "audit/PRE_A6_VALIDATE_MODEL_FORENSICS.json",
+        "{}\n",
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="contrôle versionné absent",
+    ):
+        inventory_module._load_anomaly_identity_migrations(tmp_path)
+
+
+def test_pre_a6_registry_is_loaded_from_each_target_repository(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    first_root = tmp_path / "first"
+    second_root = tmp_path / "second"
+    for repository in (first_root, second_root):
+        _init_repository(repository)
+        _install_audit_schemas(repository)
+        shutil.copyfile(
+            ROOT / "audit/ANOMALY_IDENTITY_MIGRATIONS.yaml",
+            repository / "audit/ANOMALY_IDENTITY_MIGRATIONS.yaml",
+        )
+    second_payload = yaml.safe_load(
+        (
+            second_root / "audit/ANOMALY_IDENTITY_MIGRATIONS.yaml"
+        ).read_text(encoding="utf-8")
+    )
+    retained = next(iter(second_payload["migrations"].items()))
+    second_payload["migrations"] = {retained[0]: retained[1]}
+    second_payload["control_digest"] = inventory_module._control_digest(
+        second_payload
+    )
+    _write(
+        second_root / "audit/ANOMALY_IDENTITY_MIGRATIONS.yaml",
+        yaml.safe_dump(second_payload, allow_unicode=True, sort_keys=True),
+    )
+
+    assert len(
+        inventory_module._load_anomaly_identity_migrations(first_root)
+    ) == 9
+    assert len(
+        inventory_module._load_anomaly_identity_migrations(second_root)
+    ) == 1
+
+
+@pytest.mark.parametrize("mutation_target", ["registry", "schema"])
+def test_pre_a6_registry_mutation_stales_coherent_model_artifacts_and_gates(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    mutation_target: str,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    registry = "audit/ANOMALY_IDENTITY_MIGRATIONS.yaml"
+    schema = "audit/schemas/v1/anomaly-identity-migrations.schema.json"
+    payload = yaml.safe_load((ROOT / registry).read_text(encoding="utf-8"))
+    retained = next(iter(payload["migrations"].items()))
+    payload["migrations"] = {retained[0]: retained[1]}
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    _write(
+        tmp_path / registry,
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+    _track(tmp_path, registry, schema)
+    _commit_repository(tmp_path, "coherent registry fixture")
+    monkeypatch.setattr(
+        inventory_module,
+        "_effective_dispositions_for_anomalies",
+        lambda _root, _anomalies, dispositions: dict(dispositions),
+    )
+    inventory_module.build_inventory_artifacts(tmp_path)
+
+    before = json.loads(
+        (tmp_path / "audit/INVENTAIRE_COLLECTION.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert registry in before["source_files"]
+    assert schema in before["source_files"]
+    if mutation_target == "registry":
+        payload = yaml.safe_load(
+            (tmp_path / registry).read_text(encoding="utf-8")
+        )
+        payload["migrations"][retained[0]]["status"] = "approved"
+        payload["control_digest"] = inventory_module._control_digest(payload)
+        _write(
+            tmp_path / registry,
+            yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+        )
+    else:
+        schema_payload = json.loads(
+            (tmp_path / schema).read_text(encoding="utf-8")
+        )
+        schema_payload["$comment"] = "schema drift under test"
+        _write(
+            tmp_path / schema,
+            json.dumps(schema_payload, ensure_ascii=False, sort_keys=True),
+        )
+
+    current = inventory_module.build_inventory(tmp_path)
+    validate = inventory_module._validate_model_gate(tmp_path)
+    check = inventory_module._check_gate(
+        tmp_path,
+        audit_directory="audit",
+        etat_path="ETAT_COLLECTION.md",
+    )
+
+    assert current["source_digest"] != before["source_digest"]
+    assert inventory_module._model_digest(current) != before["model_digest"]
+    assert validate["success"] is False
+    assert any(
+        "source_digest" in reason or "model_digest" in reason
+        for reason in validate["reasons"]
+    )
+    assert check["success"] is False
+    assert any(
+        "INVENTAIRE_COLLECTION.json" in reason
+        for reason in check["reasons"]
+    )
 
 
 def test_fail_on_new_uses_fingerprint_v1_and_accepts_disappearance(
