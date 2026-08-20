@@ -1279,6 +1279,74 @@ def test_a5_object_type_algorithme_counts_as_course_section(
     assert inventory["anomalies"]["unclassified_types"] == []
 
 
+def test_a5_object_type_experimentation_is_canonical_and_contextual(
+    inventory_module,
+) -> None:
+    definition = inventory_module.OBJECT_TYPE_ONTOLOGY["canonical_types"][
+        "experimentation"
+    ]
+    assert definition["semantic_dimension"] == "PEDAGOGICAL_OBJECT_TYPE"
+    assert definition["inventory_category"] == "sections_cours"
+    assert definition["allowed_sections"] == ["cours"]
+    assert definition["allowed_source_roles"] == ["production_object"]
+    assert definition["allowed_aliases"] == []
+    assert (
+        inventory_module.canonical_category(
+            "experimentation",
+            source_section="cours",
+            source_role="production_object",
+        )
+        == "sections_cours"
+    )
+
+    for kwargs in (
+        {"source_section": "exercices", "source_role": "production_object"},
+        {"source_section": "cours", "source_role": "validation_reference"},
+        {
+            "source_subtype": "simulation",
+            "source_section": "cours",
+            "source_role": "production_object",
+        },
+    ):
+        assert inventory_module.canonical_category("experimentation", **kwargs) is None
+    for rejected in ("Expérimentation", "experiment", "experimentations"):
+        assert (
+            inventory_module.canonical_category(
+                rejected,
+                source_section="cours",
+                source_role="production_object",
+            )
+            is None
+        )
+
+
+def test_a5_object_type_experimentation_counts_as_course_section(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    contract = f"{base}/contrat.yaml"
+    experimentation = f"{base}/cours/experimentations/01_simulation.tex"
+    _write(tmp_path / contract, _contract("1SPE-TEST", "1SPE", capacities=1))
+    _write(
+        tmp_path / experimentation,
+        _meta(
+            id="1SPE-TEST-EXP-001",
+            chapitre="1SPE-TEST",
+            type_objet="experimentation",
+            status="verified",
+        ),
+    )
+    _track(tmp_path, contract, experimentation)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    chapter = inventory["manuals"]["1SPE"]["chapters"]["1SPE-TEST"]
+
+    assert chapter["counts"]["sections_cours"] == 1
+    assert inventory["anomalies"]["unclassified_types"] == []
+
+
 def test_subtype_priority_changes_counts_but_preserves_source_taxonomy(
     tmp_path: Path, inventory_module
 ) -> None:

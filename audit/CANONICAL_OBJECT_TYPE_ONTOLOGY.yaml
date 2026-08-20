@@ -2,7 +2,7 @@ schema_version: 1
 artifact_type: canonical_object_type_ontology
 schema_ref: audit/schemas/v1/canonical-object-type-ontology.schema.json
 generated_by: A5 ontology registry
-control_digest: sha256:6c7eea0b415da224315ff15d847d883a053308713f8caa342827cbfd03abc6c2
+control_digest: sha256:5f42ffafe026f81b3e0f9c7b64c84b38c14212e54587e55735b54c7b79a44100
 authority_order:
   - approved specifications and conception
   - canonical contracts and schemas
@@ -43,6 +43,20 @@ canonical_types:
     allowed_subtypes: [null]
     schema_representation: META.type_objet=algorithme
     assembler_behavior: Explicitly accepted by the Math student and teacher assembler policies.
+    review_behavior: Source status remains governed by existing publication gates.
+    allowed_aliases: []
+    authority: [approved specifications and conception, declared assemblers, coherent corpus usage]
+  experimentation:
+    canonical_name: experimentation
+    semantic_dimension: PEDAGOGICAL_OBJECT_TYPE
+    semantic_definition: Empirical or simulated investigation used to observe and interpret a mathematical phenomenon.
+    inventory_category: sections_cours
+    allowed_source_roles: [production_object]
+    allowed_sections: [cours]
+    allowed_variants: [complet, eleve, parcours1, professeur]
+    allowed_subtypes: [null]
+    schema_representation: META.type_objet=experimentation
+    assembler_behavior: Included transitively by the canonical course source and accepted by the Math student and teacher assembler policies.
     review_behavior: Source status remains governed by existing publication gates.
     allowed_aliases: []
     authority: [approved specifications and conception, declared assemblers, coherent corpus usage]
