@@ -43,3 +43,28 @@ replay était donc incohérent avec lui-même, ce que cette matrice corrige.
 `MANUELS_PDF_PUBLICATION/` contient 12 PDF de publication distincts des
 artefacts de build. Ils ne sont pas régénérés par les assembleurs de la
 matrice ci-dessus et ne relèvent pas de la clôture A4 ; ils restent inchangés.
+
+## Reconstruction de clôture (12/12)
+
+Reconstruction complète depuis un arbre propre après la correction du
+producteur. Preuves par cible dans `A4_BUILD_MATRIX_EVIDENCE.json`
+(identité de trailer, SHA du PDF, pagination, SHA du master et du `.fls`).
+
+| Métrique | Valeur |
+|---|---|
+| Builds attendus | 12 |
+| Builds réussis | **12** |
+| Builds échoués | **0** |
+| Fichiers PDF modifiés | **12** |
+| Fichiers non-PDF modifiés | **0** |
+| Paginations changées | **0** |
+| Textes extraits changés | **0** |
+| Divergences structurelles autres que `/ID` | **0** |
+
+`VISUAL_CHANGE = 0` : pour chacune des 12 cibles, la comparaison du PDF
+d'avant et d'après donne exactement deux lignes divergentes en représentation
+QDF — le seul champ `/ID`, désormais canonique au lieu d'aléatoire.
+
+`SELF_REFERENCE = NO`, revérifié **après** remplacement des PDF suivis : les
+12 identités recalculées sont rigoureusement identiques à celles de la matrice
+établie avant reconstruction.
