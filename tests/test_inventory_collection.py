@@ -6899,6 +6899,238 @@ def test_path_meta_and_contract_context_mismatches_are_explicit(
     ]
 
 
+def test_a6_context_repository_has_no_context_mismatches(
+    tmp_path: Path, inventory_module,
+) -> None:
+    expected_start_fingerprints = frozenset(
+        {
+            "412440a833f2a67e",
+            "d4d96a91fdd7f2ca",
+            "dc3c58388e2cfe7c",
+        }
+    )
+    _init_repository(tmp_path)
+    required_authorities = (
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/contrat.yaml",
+        "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/contrat.yaml",
+        "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/cours/07_td_contextualise.tex",
+        "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/cours/07_td_fil_rouge.tex",
+        "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/cours/10_C1_derivee_composee.tex",
+    )
+    optional_misplaced_copies = (
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/07_td_contextualise.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/07_td_fil_rouge.tex",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_derivee_composee.tex",
+    )
+    copied: list[str] = []
+    for relative in required_authorities:
+        source = ROOT / relative
+        assert source.is_file(), f"autorite A6 requise absente: {relative}"
+        destination = tmp_path / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, destination)
+        copied.append(relative)
+    for relative in optional_misplaced_copies:
+        source = ROOT / relative
+        if source.is_file():
+            destination = tmp_path / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, destination)
+            copied.append(relative)
+    _track(tmp_path, *copied)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    observed_fingerprints = frozenset(
+        inventory_module._anomaly_fingerprint(
+            anomaly,
+            category="context_mismatches",
+        )
+        for anomaly in inventory["anomalies"]["context_mismatches"]
+    )
+
+    # Le test accepte uniquement le snapshot A6 rouge exact ou l'etat vert.
+    # Toute anomalie inattendue fait donc echouer le test avant l'assertion finale.
+    assert observed_fingerprints in {
+        frozenset(),
+        expected_start_fingerprints,
+    }
+    assert observed_fingerprints == frozenset()
+
+
+def test_a6_context_exact_twin_does_not_hide_path_context_drift(
+    tmp_path: Path, inventory_module
+) -> None:
+    _init_repository(tmp_path)
+    physical_chapter = "TCOMPL-CALCULS-AIRES"
+    semantic_chapter = "TSPE-DERIVATION-CONVEXITE"
+    physical_base = _chapter_path("TCOMPL", physical_chapter)
+    semantic_base = _chapter_path("TSPE", semantic_chapter)
+    physical_contract = f"{physical_base}/contrat.yaml"
+    semantic_contract = f"{semantic_base}/contrat.yaml"
+    misplaced = f"{physical_base}/cours/07_td_contextualise.tex"
+    canonical = f"{semantic_base}/cours/07_td_contextualise.tex"
+    sources = {
+        physical_contract: _contract(physical_chapter, "TCOMPL", capacities=1),
+        semantic_contract: _contract(semantic_chapter, "TSPE", capacities=1),
+        misplaced: _meta(
+            id="TCOMPL-AIRES-COURS-07-TC",
+            chapitre=semantic_chapter,
+            status="approved",
+        ),
+        canonical: _meta(
+            id="TSPE-DERCONV-COURS-07-TC",
+            chapitre=semantic_chapter,
+            status="approved",
+        ),
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert (tmp_path / misplaced).read_text(encoding="utf-8").splitlines()[1:] == (
+        tmp_path / canonical
+    ).read_text(encoding="utf-8").splitlines()[1:]
+    assert inventory["anomalies"]["context_mismatches"] == [
+        {
+            "actual": semantic_chapter,
+            "expected": physical_chapter,
+            "field": "chapitre",
+            "path": misplaced,
+            "scope": "object",
+        }
+    ]
+
+
+def test_a6_context_wrong_chapter_meta_is_blocking(
+    tmp_path: Path, inventory_module
+) -> None:
+    _init_repository(tmp_path)
+    chapter = "1SPE-CONTEXTE"
+    base = _chapter_path("1SPE", chapter)
+    contract = f"{base}/contrat.yaml"
+    source = f"{base}/cours/c1.tex"
+    _write(tmp_path / contract, _contract(chapter, "1SPE", capacities=1))
+    _write(
+        tmp_path / source,
+        _meta(
+            id="1SPE-CONTEXTE-COURS-C1",
+            chapitre="1SPE-AUTRE",
+            status="approved",
+        ),
+    )
+    _track(tmp_path, contract, source)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert inventory["anomalies"]["context_mismatches"] == [
+        {
+            "actual": "1SPE-AUTRE",
+            "expected": chapter,
+            "field": "chapitre",
+            "path": source,
+            "scope": "object",
+        }
+    ]
+    assert inventory_module._chapter_publication_eligible(
+        inventory,
+        "1SPE",
+        chapter,
+    ) is False
+
+
+def test_a6_context_wrong_manual_uses_contract_niveau_authority(
+    tmp_path: Path, inventory_module
+) -> None:
+    _init_repository(tmp_path)
+    chapter = "1SPE-CONTEXTE"
+    base = _chapter_path("1SPE", chapter)
+    contract = f"{base}/contrat.yaml"
+    source = f"{base}/cours/c1.tex"
+    _write(tmp_path / contract, _contract(chapter, "TSPE", capacities=1))
+    _write(
+        tmp_path / source,
+        _meta(id="1SPE-CONTEXTE-COURS-C1", chapitre=chapter, status="approved"),
+    )
+    _track(tmp_path, contract, source)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert inventory["anomalies"]["context_mismatches"] == [
+        {
+            "actual": "TSPE",
+            "expected": "1SPE",
+            "field": "niveau",
+            "path": contract,
+            "scope": "contract",
+        }
+    ]
+    assert inventory_module._chapter_publication_eligible(
+        inventory,
+        "1SPE",
+        chapter,
+    ) is False
+
+
+def test_a6_context_wrong_student_variant_contract_is_rejected(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source(
+            'VARIANT_ORDERS["eleve"] = [("corriges", "*")]\n'
+            'ELEVE_ALLOWED_TYPES.append("corrige")\n'
+        ),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert {field for field, _reason in errors} >= {
+        "ELEVE_ALLOWED_TYPES",
+        "VARIANT_ORDERS",
+    }
+
+
+def test_a6_context_archive_cannot_be_reclassified_as_production(
+    inventory_module,
+) -> None:
+    archived_source = "audit/historique/chapitre_archive.tex"
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="classification canonique.*archive",
+    ):
+        inventory_module._validate_tracked_source_role_assignments(
+            {archived_source: "production_object"}
+        )
+
+
+def test_a6_context_chapter_detection_never_uses_fuzzy_basename(
+    inventory_module,
+) -> None:
+    near_chapter = "TCOMPL-CALCULS-AIRE"
+    near_path = (
+        "Mathematiques/manuel-maths/chapitres/"
+        f"{near_chapter}/cours/07_td_contextualise.tex"
+    )
+    missing_prefix = (
+        "Mathematiques/manuel-maths/chapitres/"
+        "TCOMPLCALCULS-AIRES/cours/07_td_contextualise.tex"
+    )
+
+    assert inventory_module._chapter_context(near_path) == (
+        "TCOMPL",
+        near_chapter,
+    )
+    assert inventory_module._chapter_context(missing_prefix) is None
+
+
 def test_duplicate_capacity_references_are_detected_across_chapters(
     tmp_path: Path, inventory_module
 ) -> None:
