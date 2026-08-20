@@ -17397,7 +17397,7 @@ def test_require_clean_handles_dirty_unborn_and_detached_repositories(
     tmp_path: Path
 ) -> None:
     unborn = tmp_path / "unborn"
-    _init_repository(unborn)
+    _init_repository(unborn, with_object_type_ontology=False)
     unborn_result = _run_inventory_cli(unborn, "--require-clean")
 
     detached = tmp_path / "detached"
