@@ -371,6 +371,11 @@ def _validate_book_variant(variant: str) -> None:
 
 
 PDF_TRAILER_ID_SCHEME = "nexus-pdf-trailer-id/v1"
+# Version de generation du PRODUCTEUR : voir la note du meme nom dans
+# Mathematiques/manuel-maths/scripts/assemble_manuel.py. A incrementer
+# uniquement si le producteur change le PDF sans toucher au master ni
+# aux gabarits canoniques.
+PDF_TRAILER_PRODUCER_SCHEMA_VERSION = 1
 
 
 def pdf_trailer_identity(
@@ -391,6 +396,7 @@ def pdf_trailer_identity(
     """
     payload = [
         PDF_TRAILER_ID_SCHEME,
+        f"producer_schema_version={PDF_TRAILER_PRODUCER_SCHEMA_VERSION}",
         f"book={book}",
         f"variant={variant}",
         "body=" + hashlib.sha256(body.encode("utf-8")).hexdigest(),

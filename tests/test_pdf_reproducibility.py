@@ -172,3 +172,136 @@ def test_pdf6_tracked_pdfs_are_byte_reproducible_evidence() -> None:
     }
     for relative in sorted(expected):
         assert (ROOT / relative).is_file(), relative
+
+
+def test_pdf7_preimage_excludes_every_produced_output(math_assembler) -> None:
+    """§2/§7 — SELF_REFERENCE = NO.
+
+    Le préimage ne doit contenir AUCUN artefact produit : ni le PDF, ni son
+    SHA, ni un master compilé, ni un manifeste dérivé. Il ne contient que des
+    sources versionnées (objets assemblés, transversaux, classe et charte
+    canoniques).
+    """
+    objects = []
+    for chapter in math_assembler.MANUAL_CHAPTERS["TEXPERTES"]:
+        objects.extend(
+            math_assembler.collect_chapter(
+                math_assembler.ROOT / "chapitres" / chapter, "eleve"
+            )
+        )
+    master = math_assembler.render_master("eleve", "0" * 32, manual="TEXPERTES")
+    body = master.split("\\begin{document}", 1)[1]
+    sources = math_assembler._master_source_digests(
+        body, objects=objects, git_root=ROOT
+    )
+
+    assert sources, "le préimage doit référencer des sources"
+    for relative in sources:
+        assert "/build/" not in relative, relative
+        assert not relative.endswith(".pdf"), relative
+        assert not relative.endswith(".fls"), relative
+        assert not relative.startswith("audit/"), relative
+        assert "MANUELS_PDF_PUBLICATION" not in relative, relative
+        # Chemins repo-relatifs uniquement : aucun chemin absolu ne doit
+        # entrer dans le digest (sinon deux worktrees divergeraient).
+        assert not relative.startswith("/"), relative
+
+
+def test_pdf8_identity_survives_replacing_the_tracked_output(
+    math_assembler, tmp_path
+) -> None:
+    """§7 — remplacer le PDF suivi ne doit RIEN changer à l'identité.
+
+    Les PDF de build sont versionnés : si leur contenu entrait dans le
+    préimage, reconstruire puis committer changerait l'identité au coup
+    suivant et la reproductibilité serait circulaire.
+    """
+    tracked_pdf = (
+        ROOT
+        / "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES"
+        / "MANUEL_TEXPERTES_eleve.pdf"
+    )
+    if not tracked_pdf.is_file():  # pragma: no cover - dépôt sans artefact
+        pytest.skip("PDF suivi absent")
+    original = tracked_pdf.read_bytes()
+    before = _math_identity(math_assembler, "TEXPERTES", "eleve", "0" * 32)
+    try:
+        tracked_pdf.write_bytes(original + b"%% octets de perturbation\n")
+        during = _math_identity(math_assembler, "TEXPERTES", "eleve", "0" * 32)
+    finally:
+        tracked_pdf.write_bytes(original)
+
+    assert during == before, (
+        "l'identité dépend du PDF produit : auto-référence (SELF_REFERENCE BUG)"
+    )
+
+
+def test_pdf9_identity_is_independent_of_the_absolute_worktree_path(
+    math_assembler, tmp_path
+) -> None:
+    """§3 — même arbre logique, chemin absolu différent ⇒ même identité."""
+    import shutil
+
+    reference = _math_identity(math_assembler, "TEXPERTES", "eleve", "0" * 32)
+
+    mirror_root = tmp_path / "mirror"
+    manual_source = ROOT / "Mathematiques" / "manuel-maths"
+    manual_mirror = mirror_root / "Mathematiques" / "manuel-maths"
+    manual_mirror.parent.mkdir(parents=True)
+    shutil.copytree(
+        manual_source,
+        manual_mirror,
+        ignore=shutil.ignore_patterns("build", "__pycache__", ".git"),
+    )
+    shutil.copytree(ROOT / "gabarits", mirror_root / "gabarits")
+
+    # `common` (qui porte ROOT) est mis en cache par le premier chargement :
+    # le purger force le miroir à résoudre SON propre ROOT.
+    cached_common = sys.modules.pop("common", None)
+    cached_pdf_integrity = sys.modules.pop("pdf_integrity", None)
+    sys.path.insert(0, str(manual_mirror / "scripts"))
+    try:
+        mirrored = _load(
+            "assemble_manuel_math_mirror",
+            manual_mirror / "scripts" / "assemble_manuel.py",
+            manual_mirror / "scripts",
+        )
+        assert mirrored.ROOT == manual_mirror, mirrored.ROOT
+    finally:
+        sys.modules.pop("common", None)
+        sys.modules.pop("pdf_integrity", None)
+        if cached_common is not None:
+            sys.modules["common"] = cached_common
+        if cached_pdf_integrity is not None:
+            sys.modules["pdf_integrity"] = cached_pdf_integrity
+    # Le miroir n'est pas un dépôt Git : on lui fournit la même vue de
+    # fichiers suivis (l'arbre logique est identique, seul le chemin absolu
+    # change — c'est précisément la variable testée).
+    tracked = math_assembler.load_tracked_paths(ROOT)
+    try:
+        master = mirrored.render_master(
+            "eleve",
+            "0" * 32,
+            manual="TEXPERTES",
+            git_root=mirror_root,
+            tracked_paths=tracked,
+        )
+    finally:
+        sys.modules.pop("assemble_manuel_math_mirror", None)
+        sys.path[:] = [p for p in sys.path if str(manual_mirror) not in p]
+    match = TRAILER_ID_RE.search(master)
+    assert match is not None
+    assert match.group(1) == reference, (
+        "l'identité dépend du chemin absolu du worktree"
+    )
+
+
+def test_pdf10_producer_schema_version_is_part_of_the_preimage() -> None:
+    """§4 — le contrat couvre une évolution du producteur hors master/gabarits."""
+    for script in (
+        MATH_SCRIPTS / "assemble_manuel.py",
+        NSI_SCRIPTS / "assemble.py",
+    ):
+        source = script.read_text(encoding="utf-8")
+        assert "PDF_TRAILER_PRODUCER_SCHEMA_VERSION" in source, script.name
+        assert 'f"producer_schema_version=' in source, script.name

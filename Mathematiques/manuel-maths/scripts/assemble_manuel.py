@@ -765,6 +765,14 @@ def object_trace_token(canonical_path: str) -> str:
 
 
 PDF_TRAILER_ID_SCHEME = "nexus-pdf-trailer-id/v1"
+# Version de génération du PRODUCTEUR. Le préimage capture déjà le corps du
+# master et les digests de la classe/charte canoniques : toute évolution du
+# rendu passant par l'un des deux change donc l'identité. Cette constante
+# couvre le cas résiduel — une évolution du producteur qui changerait le PDF
+# SANS toucher au master ni aux gabarits (options de compilation, séquence de
+# passes, post-traitement canonique). Elle DOIT être incrémentée dans ce cas,
+# et seulement dans ce cas.
+PDF_TRAILER_PRODUCER_SCHEMA_VERSION = 1
 
 
 def pdf_trailer_identity(
@@ -794,6 +802,7 @@ def pdf_trailer_identity(
     """
     payload = [
         PDF_TRAILER_ID_SCHEME,
+        f"producer_schema_version={PDF_TRAILER_PRODUCER_SCHEMA_VERSION}",
         f"manual={manual}",
         f"variant={variant}",
         "body=" + hashlib.sha256(body.encode("utf-8")).hexdigest(),
