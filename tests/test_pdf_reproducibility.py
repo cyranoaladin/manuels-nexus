@@ -39,13 +39,36 @@ def _load(name: str, path: Path, extra_sys_path: Path):
     return module
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture()
 def math_assembler():
-    return _load(
-        "assemble_manuel_math_repro",
-        MATH_SCRIPTS / "assemble_manuel.py",
-        MATH_SCRIPTS,
-    )
+    """Charge l'assembleur Mathématiques avec un ``ROOT`` garanti.
+
+    ``assemble_manuel`` fait ``from common import ROOT`` : si un autre module
+    de test a déjà mis en cache un ``common`` issu d'une copie temporaire du
+    dépôt, l'assembleur hériterait de ce ROOT et raisonnerait sur un arbre
+    incomplet. La fixture recharge donc ``common`` depuis le dépôt réel et
+    vérifie le ROOT obtenu, ce qui rend ces tests indépendants de l'ordre
+    d'exécution de la suite.
+    """
+    saved = {
+        name: sys.modules.pop(name, None)
+        for name in ("common", "pdf_integrity", "assemble_manuel")
+    }
+    try:
+        _load("common", MATH_SCRIPTS / "common.py", MATH_SCRIPTS)
+        module = _load(
+            "assemble_manuel_math_repro",
+            MATH_SCRIPTS / "assemble_manuel.py",
+            MATH_SCRIPTS,
+        )
+        assert module.ROOT == MATH_SCRIPTS.parent, module.ROOT
+        yield module
+    finally:
+        sys.modules.pop("assemble_manuel_math_repro", None)
+        for name, value in saved.items():
+            sys.modules.pop(name, None)
+            if value is not None:
+                sys.modules[name] = value
 
 
 def _math_identity(assembler, manual: str, variant: str, run_id: str) -> str:
