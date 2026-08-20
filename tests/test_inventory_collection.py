@@ -55,20 +55,30 @@ def _write(path: Path, content: str) -> None:
     path.write_text(content, encoding="utf-8")
 
 
-def _init_repository(root: Path) -> None:
+def _init_repository(
+    root: Path,
+    *,
+    with_object_type_ontology: bool = True,
+) -> None:
     subprocess.run(["git", "init", "-q", str(root)], check=True)
+    if with_object_type_ontology:
+        _install_object_type_ontology(root)
+
+
+def _install_object_type_ontology(repository: Path) -> tuple[str, str]:
     controls = (
         "audit/CANONICAL_OBJECT_TYPE_ONTOLOGY.yaml",
         "audit/schemas/v1/canonical-object-type-ontology.schema.json",
     )
     for relative in controls:
-        target = root / relative
+        target = repository / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / relative, target)
     subprocess.run(
-        ["git", "-C", str(root), "add", "--", *controls],
+        ["git", "-C", str(repository), "add", "--", *controls],
         check=True,
     )
+    return controls
 
 
 def _track(root: Path, *relative_paths: str) -> None:
@@ -115,7 +125,11 @@ def _chapter_path(manual: str, chapter: str) -> str:
 
 
 def _install_audit_schemas(repository: Path) -> None:
-    shutil.copytree(ROOT / "audit/schemas", repository / "audit/schemas")
+    shutil.copytree(
+        ROOT / "audit/schemas",
+        repository / "audit/schemas",
+        dirs_exist_ok=True,
+    )
 
 
 def _commit_repository(repository: Path, message: str = "fixture") -> str:
@@ -251,7 +265,7 @@ def _minimal_inventory(repository: Path, inventory_module):
 def test_git_tracked_files_excludes_untracked_sources(
     tmp_path: Path, inventory_module
 ) -> None:
-    _init_repository(tmp_path)
+    _init_repository(tmp_path, with_object_type_ontology=False)
     base = _chapter_path("1SPE", "1SPE-TEST")
     tracked = f"{base}/cours/section.tex"
     untracked = f"{base}/cours/brouillon.tex"
@@ -684,7 +698,7 @@ def test_source_roles_preserve_literal_backslash_git_path(
     tmp_path: Path,
     inventory_module,
 ) -> None:
-    _init_repository(tmp_path)
+    _init_repository(tmp_path, with_object_type_ontology=False)
     literal = r"NSI\scripts\assemble.py"
     _write(
         tmp_path / literal,
@@ -705,6 +719,7 @@ def test_source_roles_preserve_literal_backslash_git_path(
         )
         == "fixture"
     )
+    _install_object_type_ontology(tmp_path)
     inventory = inventory_module.build_inventory(tmp_path)
     assert not any(
         assembly["assembler"] == literal for assembly in inventory["assemblies"]
@@ -893,7 +908,7 @@ def test_source_roles_literal_git_paths_are_bijective(
     must never rewrite them (no \\ -> /, no escape interpretation, no
     Windows-style normalization of a POSIX repository).
     """
-    _init_repository(tmp_path)
+    _init_repository(tmp_path, with_object_type_ontology=False)
     literals = [
         "ordinary/path.tex",
         r"path\with\backslash.tex",
@@ -1413,11 +1428,11 @@ def test_build_inventory_aggregates_objects_and_keeps_six_manuals(
         f"{math_base}/remediation/r1.tex": _meta(
             id="1SPE-TEST-REM-001", type_objet="remediation"
         ),
-        f"{math_base}/td/td.tex": _meta(id="1SPE-TEST-TD", type_objet="td"),
+        f"{math_base}/cours/td.tex": _meta(id="1SPE-TEST-TD", type_objet="td"),
         f"{math_base}/evaluations/eval.tex": _meta(
             id="1SPE-TEST-EVAL", type_objet="evaluation"
         ),
-        f"{math_base}/projets/projet.tex": _meta(
+        f"{math_base}/projet/projet.tex": _meta(
             id="1SPE-TEST-PROJET", type_objet="projet"
         ),
         f"{math_base}/evaluations/corrige.tex": _meta(

@@ -4296,7 +4296,6 @@ def _build_inventory(
     """Build a deterministic canonical model from tracked chapter sources."""
 
     root = Path(repository).resolve()
-    object_type_ontology = _load_object_type_ontology(root)
     if require_git_provenance:
         try:
             _repo_head_sha(root, required=True)
@@ -4307,6 +4306,7 @@ def _build_inventory(
             raise InventoryError(
                 f"Git provenance unavailable: {exc}"
             ) from exc
+    object_type_ontology = _load_object_type_ontology(root)
     try:
         tracked = git_tracked_files(root)
     except (OSError, subprocess.CalledProcessError) as exc:
