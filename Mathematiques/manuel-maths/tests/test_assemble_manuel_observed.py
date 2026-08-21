@@ -480,7 +480,7 @@ def test_render_master_loads_tracked_inventory_once(
 def test_run_independent_master_is_pure_for_all_math_targets() -> None:
     expected_hook = (
         '\\directlua{local r=os.getenv("NEXUS_BUILD_RUN"); '
-        'if type(r) ~= "string" or string.len(r) ~= 32 or not '
+        'if not (type(r) == "string") or not (string.len(r) == 32) or not '
         'r:match("^[0-9a-f]+$") then tex.error("NEXUS_BUILD_RUN invalide") '
         'else texio.write_nl("log", "NEXUS_BUILD_" .. "RUN:" .. r); '
         'texio.write_nl("log", "") end}'
@@ -1460,6 +1460,54 @@ def test_real_lualatex_distinct_runs_keep_master_and_pdf_identical(
     assert variable_pdf_metadata.findall(pdf_bytes[0]) == (
         variable_pdf_metadata.findall(pdf_bytes[1])
     )
+
+
+def test_real_tcompl_production_master_compiles_constant_run_hook(
+    tmp_path: Path,
+) -> None:
+    run_id = "a" * 32
+    document = tmp_path / "MANUEL_TCOMPL_eleve.tex"
+    document.write_text(
+        assemble_manuel.render_master(
+            "eleve",
+            manual="TCOMPL",
+            git_root=GIT_ROOT,
+        ),
+        encoding="utf-8",
+    )
+    environment = assemble_manuel._allowlisted_environment()
+    environment.update(assemble_manuel.CONTROLLED_ENVIRONMENT)
+    environment["SOURCE_DATE_EPOCH"] = str(SOURCE_DATE_EPOCH)
+    environment["NEXUS_BUILD_RUN"] = run_id
+
+    completed = assemble_manuel._run_with_environment(
+        subprocess.run,
+        environment,
+        [
+            "lualatex",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "-recorder",
+            f"-output-directory={tmp_path}",
+            str(document),
+        ],
+        capture_output=True,
+        text=True,
+        cwd=MANUAL_ROOT,
+        errors="replace",
+        check=False,
+    )
+
+    log_path = tmp_path / "MANUEL_TCOMPL_eleve.log"
+    evidence = completed.stdout + completed.stderr
+    if log_path.exists():
+        evidence += log_path.read_text(encoding="utf-8", errors="replace")
+    assert completed.returncode == 0, evidence
+    assert [
+        line.strip()
+        for line in log_path.read_text(encoding="utf-8").splitlines()
+        if "NEXUS_BUILD_RUN:" in line
+    ] == [f"NEXUS_BUILD_RUN:{run_id}"]
 
 
 @pytest.mark.parametrize(

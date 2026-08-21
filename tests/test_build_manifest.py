@@ -27,7 +27,7 @@ SHA256_B = "sha256:" + "b" * 64
 RUN_ID = "0123456789abcdef0123456789abcdef"
 MASTER_RUN_HOOK = (
     '\\directlua{local r=os.getenv("NEXUS_BUILD_RUN"); '
-    'if type(r) ~= "string" or string.len(r) ~= 32 or not '
+    'if not (type(r) == "string") or not (string.len(r) == 32) or not '
     'r:match("^[0-9a-f]+$") then tex.error("NEXUS_BUILD_RUN invalide") '
     'else texio.write_nl("log", "NEXUS_BUILD_" .. "RUN:" .. r); '
     'texio.write_nl("log", "") end}'
