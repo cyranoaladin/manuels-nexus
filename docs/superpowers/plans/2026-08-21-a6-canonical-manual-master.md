@@ -353,7 +353,7 @@ exacts et les warnings de dépendances sans les masquer.
 ```bash
 python -m pytest -q tests/test_inventory_collection.py -k 'a6_context'
 python -m pytest -q tests/test_inventory_collection.py -k 'pre_a6 or validate_model'
-python -m pytest -q tests/test_inventory_collection.py -k 'canonical_object_type_ontology'
+python -m pytest -q tests/test_inventory_collection.py -k 'a5_object_type'
 ```
 
 - [ ] **Step 3: Régressions A1–A4 : exactement 28 nœuds**
