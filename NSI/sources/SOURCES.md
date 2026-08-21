@@ -2,20 +2,23 @@
 
 ## Fichiers
 
-| Fichier | Reference BO | Application | SHA-256 |
-|---|---|---|---|
-| `BO2019_NSI_premiere.pdf` | BO special n 1 du 22-01-2019 | Rentree 2019 | `7ca9a32e1823be6c1120cb0417324c3cb01688d1d194c7614a88ea851ccc60b0` |
-| `BO2019_NSI_terminale.pdf` | BO special n 8 du 25-07-2019 | Rentree 2020 | `10ce34666edd722a3d8d86642a9f1ac205c7a9d128d6142a17effcba2fb85e69` |
+| Fichier suivi | Arrete | Page BO | Annexe officielle | SHA-256 |
+|---|---|---|---|---|
+| `NSI/corpus_nsi/00_programmes_officiels/programme_nsi_premiere.pdf` | `MENE1901633A` | `https://www.education.gouv.fr/bo/19/Special1/MENE1901633A.htm` | `https://cache.media.education.gouv.fr/file/SP1-MEN-22-1-2019/26/8/spe633_annexe_1063268.pdf` | `7ca9a32e1823be6c1120cb0417324c3cb01688d1d194c7614a88ea851ccc60b0` |
+| `NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf` | `MENE1921247A` | `https://www.education.gouv.fr/bo/19/Special8/MENE1921247A.htm` | `https://cache.media.education.gouv.fr/file/SPE8_MENJ_25_7_2019/93/3/spe247_annexe_1158933.pdf` | `10ce34666edd722a3d8d86642a9f1ac205c7a9d128d6142a17effcba2fb85e69` |
 
 ## Note
 
-Les programmes NSI ne sont pas modifies par la reforme 2026.
+Ces lignes attestent uniquement l'identite et l'authenticite des deux copies
+locales. Elles ne concluent ni leur applicabilite a l'edition 2026-2027, ni la
+couverture des manuels ; ces decisions relevent de l'audit de programme T2.
 
 ## Extraits texte
 
 `sources/txt/BO2019_NSI_terminale.txt` — extrait `pdftotext -layout` depose le 5 aout 2026,
 recupere depuis `https://eduscol.education.gouv.fr/sites/default/files/document/spe247annexe1158933pdf-89502.pdf`
-(arrete MENE1921247A). SHA-256 verifie identique a `BO2019_NSI_terminale.pdf` deja
+(arrete MENE1921247A). SHA-256 verifie identique a
+`NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf` deja
 enregistre ci-dessus (`10ce34666edd722a3d8d86642a9f1ac205c7a9d128d6142a17effcba2fb85e69`).
 Confirme les 6 themes deja extraits dans `referentiel/capacites_TNSI_*.json` (Histoire de
 l'informatique, Structures de donnees, Bases de donnees, Architectures materielles/OS/reseaux,
