@@ -103,8 +103,8 @@ identifiant changeant coïncident donc légitimement.
 Les sources sont identifiées par leur chemin **repo-relatif POSIX**
 (`resolved.relative_to(git_root)`). Aucun chemin absolu n'entre dans le
 digest : deux worktrees différents portant le même arbre logique produisent
-la même identité (`test_pdf9`, qui recopie l'arbre dans un répertoire
-temporaire et compare).
+la même identité (`test_pdf2_identity_is_independent_of_path`, qui recopie
+l'arbre dans un répertoire temporaire et compare).
 
 Le producteur chapitre classe cependant chaque chemin absolu observé avant de
 l'exclure du digest. Un chemin interne au dépôt doit être régulier, lisible,
@@ -125,6 +125,34 @@ changer la vue des fichiers suivis par Git, ni redéfinir une racine dite
 sont conservés pour la toolchain et son cache, tandis que `SOURCE_DATE_EPOCH`,
 `FORCE_SOURCE_DATE`, `TZ`, `LC_ALL`, `LANG` et `PYTHONHASHSEED` sont fixés aux
 valeurs A4 ci-dessous.
+
+### Exception fermée : identité d'exécution des manuels observés
+
+Les producteurs de manuels Math et NSI conservent un `run_id` aléatoire de
+32 hexadécimaux minuscules pour lier le journal, le préflight et le receipt.
+Cette identité d'**exécution** n'entre ni dans la préimage du trailer ni dans
+le master canonique. Les masters observés contiennent à la place une unique
+ligne LuaTeX constante qui :
+
+1. lit `NEXUS_BUILD_RUN` ;
+2. refuse toute valeur absente ou différente de `[0-9a-f]{32}` ;
+3. écrit exactement `NEXUS_BUILD_RUN:<id>` dans le journal ;
+4. n'écrit aucun contenu dans le document.
+
+L'environnement de base reste l'allowlist A4 ci-dessus. Le producteur en
+copie la map, y ajoute `NEXUS_BUILD_RUN`, puis transmet cette copie aux trois
+seuls appels LuaLaTeX. Git, `pdfinfo`, `pdffonts`, Python, le préflight et le
+recorder de manifeste reçoivent l'environnement de base sans cette variable.
+Une valeur hôte homonyme est donc ignorée et écrasée pour la compilation.
+
+La chaîne de preuve observée est fermée ainsi : le receipt hash le master
+canonique ; le `.fls` doit prouver que ce master exact a été ouvert ; le
+validator exige le hook constant unique et interdit tout token concret dans
+le master ; le journal doit contenir exactement le token du receipt ; le
+préflight doit porter le même token. Un ancien master qui sérialise
+`\typeout{NEXUS_BUILD_RUN:<id>}` est rejeté même si tous ses digests ont été
+recalculés. Les shapes du receipt, du préflight et du manifeste ne changent
+pas.
 
 Les seules variantes du CLI chapitre restent `complet`, `methodes`,
 `parcours1` et `remediation`. La distinction élève/professeur appartient au

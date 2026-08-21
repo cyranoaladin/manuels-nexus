@@ -212,6 +212,13 @@ PREFLIGHT_FIELDS = frozenset(
         "reproducibility",
     }
 )
+MASTER_RUN_HOOK = (
+    '\\directlua{local r=os.getenv("NEXUS_BUILD_RUN"); '
+    'if type(r) ~= "string" or string.len(r) ~= 32 or not '
+    'r:match("^[0-9a-f]+$") then tex.error("NEXUS_BUILD_RUN invalide") '
+    'else texio.write_nl("log", "NEXUS_BUILD_" .. "RUN:" .. r); '
+    'texio.write_nl("log", "") end}'
+)
 
 
 @dataclass(frozen=True)
@@ -430,22 +437,18 @@ def _trace_master(
     master: str,
     context: ManualContext,
     *,
-    run_id: str,
     repository_root: Path,
 ) -> str:
-    if re.fullmatch(r"[0-9a-f]{32}", run_id) is None:
-        raise ValueError("run_id invalide")
-    marker = f"\\typeout{{NEXUS_BUILD_RUN:{run_id}}}"
     if "\\begin{document}" in master:
         if master.count("\\begin{document}") != 1:
             raise ValueError("Debut de document LaTeX ambigu.")
         master = master.replace(
             "\\begin{document}",
-            f"\\begin{{document}}\n{marker}",
+            f"\\begin{{document}}\n{MASTER_RUN_HOOK}",
             1,
         )
     else:
-        master = f"{marker}\n{master}"
+        master = f"{MASTER_RUN_HOOK}\n{master}"
 
     repository = repository_root.resolve(strict=True)
     for chapter in CHAPITRES:
@@ -469,9 +472,6 @@ def _trace_master(
 
 def _render_context(
     context: ManualContext,
-    *,
-    run_id: str | None = None,
-    repository_root: Path | None = None,
 ) -> str:
     master = legacy.render_book_master_from_files(
         context.manifest,
@@ -479,16 +479,7 @@ def _render_context(
         title=_title(context.manifest, context.variant),
         variant_setup=_variant_setup(context.variant),
     )
-    if run_id is None:
-        return master
-    return _trace_master(
-        master,
-        context,
-        run_id=run_id,
-        repository_root=(
-            REPOSITORY_ROOT if repository_root is None else repository_root
-        ),
-    )
+    return master
 
 
 def render_manual_master(variant: str) -> str:
@@ -634,20 +625,46 @@ def _observed_environment(
     return environment
 
 
+def _observed_compile_environment(
+    environment: Mapping[str, str],
+    run_id: str,
+) -> dict[str, str]:
+    if re.fullmatch(r"[0-9a-f]{32}", run_id) is None:
+        raise ValueError("run_id de compilation invalide")
+    compile_environment = dict(environment)
+    compile_environment["NEXUS_BUILD_RUN"] = run_id
+    return compile_environment
+
+
 def _compile_observed(
     tex_path: Path,
     staging: Path,
     *,
     environment: Mapping[str, str],
+    run_id: str,
     runner: Callable[..., Any] | None = None,
 ) -> int:
+    active_runner = subprocess.run if runner is None else runner
+
+    def run_scoped(command: list[str], **kwargs: Any) -> Any:
+        subprocess_environment = dict(kwargs.get("env", {}))
+        if command and command[0] == "lualatex" and "--version" not in command:
+            subprocess_environment = _observed_compile_environment(
+                subprocess_environment,
+                run_id,
+            )
+        else:
+            subprocess_environment.pop("NEXUS_BUILD_RUN", None)
+        kwargs["env"] = subprocess_environment
+        return active_runner(command, **kwargs)
+
     result = legacy.compile_tex(
         tex_path,
         staging,
         source_date_epoch=int(environment["SOURCE_DATE_EPOCH"]),
         recorder=True,
         environment=environment,
-        runner=runner,
+        runner=run_scoped,
     )
     if result:
         return result
@@ -729,11 +746,7 @@ def _collect_tool_versions(
 
 
 def _validate_run_evidence(master_path: Path, log_path: Path, run_id: str) -> None:
-    master_lines = [
-        line
-        for line in master_path.read_text(encoding="utf-8").splitlines()
-        if "NEXUS_BUILD_RUN:" in line
-    ]
+    master = master_path.read_text(encoding="utf-8")
     log_lines = [
         line.strip()
         for line in log_path.read_text(
@@ -741,7 +754,11 @@ def _validate_run_evidence(master_path: Path, log_path: Path, run_id: str) -> No
         ).splitlines()
         if "NEXUS_BUILD_RUN:" in line
     ]
-    if master_lines != [f"\\typeout{{NEXUS_BUILD_RUN:{run_id}}}"]:
+    if (
+        master.count(MASTER_RUN_HOOK) != 1
+        or master.splitlines().count(MASTER_RUN_HOOK) != 1
+        or "NEXUS_BUILD_RUN:" in master
+    ):
         raise ValueError("Marqueur run_id du master invalide.")
     if log_lines != [f"NEXUS_BUILD_RUN:{run_id}"]:
         raise ValueError("Marqueur run_id du journal invalide.")
@@ -971,13 +988,18 @@ def _build_observed(
                 raise ValueError("Le staging resout hors du repertoire de sortie.")
             _atomic_write_text(
                 master_path,
-                _render_context(
+                _trace_master(
+                    _render_context(context),
                     context,
-                    run_id=run_id,
                     repository_root=REPOSITORY_ROOT,
                 ),
             )
-            if _compile_observed(master_path, staging, environment=environment):
+            if _compile_observed(
+                master_path,
+                staging,
+                environment=environment,
+                run_id=run_id,
+            ):
                 return 1
             staged_pdf = staging / f"{context.output_stem}.pdf"
             staged_log = staging / f"{context.output_stem}.log"

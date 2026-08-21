@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import fcntl
 import hashlib
+import inspect
 import json
 import os
 import re
@@ -96,7 +97,7 @@ class FakeProductionRunner:
             if pass_number == self.failing_lualatex_pass:
                 return self._completed(returncode=3, stdout="compile failed")
             if self.publish_outputs:
-                self._publish_lualatex_fixture(command)
+                self._publish_lualatex_fixture(command, kwargs)
             return self._completed(stdout="compiled")
 
         if command == ["lualatex", "--version"]:
@@ -154,22 +155,24 @@ class FakeProductionRunner:
             return self._completed(returncode=5, stderr="version failed")
         return self._completed(stdout=stdout, stderr=stderr)
 
-    def _publish_lualatex_fixture(self, command: list[str]) -> None:
+    def _publish_lualatex_fixture(
+        self,
+        command: list[str],
+        kwargs: dict[str, Any],
+    ) -> None:
         output_argument = next(
             part for part in command if part.startswith("-output-directory=")
         )
         build = Path(output_argument.partition("=")[2])
         master_path = Path(command[-1])
-        run_match = re.search(
-            r"NEXUS_BUILD_RUN:([0-9a-f]{32})",
-            master_path.read_text(encoding="utf-8"),
-        )
-        assert run_match is not None
+        run_id = kwargs.get("env", {}).get("NEXUS_BUILD_RUN")
+        assert isinstance(run_id, str)
+        assert re.fullmatch(r"[0-9a-f]{32}", run_id)
         stem = master_path.stem
         pdf_path = build / f"{stem}.pdf"
         pdf_path.write_bytes(b"%PDF-1.7\nfixture\n")
         run_marker = (
-            f"NEXUS_BUILD_RUN:{run_match.group(1)}\n"
+            f"NEXUS_BUILD_RUN:{run_id}\n"
             if self.log_has_run_id
             else ""
         )
@@ -279,10 +282,10 @@ def _install_orchestration_fixture(
     monkeypatch.setattr(
         assemble_manuel,
         "render_master",
-        lambda _variant, run_id, **_kwargs: (
+        lambda _variant, **_kwargs: (
             "\\documentclass{article}\n"
             "\\begin{document}\n"
-            f"\\typeout{{NEXUS_BUILD_RUN:{run_id}}}\n"
+            f"{assemble_manuel.MASTER_RUN_HOOK}\n"
             "fixture\n"
             "\\end{document}\n"
         ),
@@ -468,14 +471,92 @@ def test_render_master_loads_tracked_inventory_once(
 
     monkeypatch.setattr(assemble_manuel, "load_tracked_paths", recording_loader)
 
-    master = assemble_manuel.render_master("professeur", "b" * 32)
+    master = assemble_manuel.render_master("professeur")
 
     assert master.count("NEXUS_OBJECT_BEGIN:") > 1
     assert calls == [GIT_ROOT]
 
 
+def test_run_independent_master_is_pure_for_all_math_targets() -> None:
+    expected_hook = (
+        '\\directlua{local r=os.getenv("NEXUS_BUILD_RUN"); '
+        'if type(r) ~= "string" or string.len(r) ~= 32 or not '
+        'r:match("^[0-9a-f]+$") then tex.error("NEXUS_BUILD_RUN invalide") '
+        'else texio.write_nl("log", "NEXUS_BUILD_" .. "RUN:" .. r); '
+        'texio.write_nl("log", "") end}'
+    )
+
+    assert "run_id" not in inspect.signature(assemble_manuel.render_master).parameters
+    for manual in assemble_manuel.MANUAL_CHAPTERS:
+        for variant in ("eleve", "professeur"):
+            master = assemble_manuel.render_master(variant, manual=manual)
+            assert master.count(expected_hook) == 1
+            assert re.findall(r"NEXUS_BUILD_RUN:[0-9a-f]{32}", master) == []
+
+
+def test_observed_build_keeps_master_identical_for_distinct_run_ids(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    run_ids = iter(("a" * 32, "b" * 32))
+    monkeypatch.setattr(
+        assemble_manuel.secrets,
+        "token_hex",
+        lambda _size: next(run_ids),
+    )
+    masters: list[bytes] = []
+
+    for label in ("a", "b"):
+        _manual_root, runner, _verify_calls, paths = _install_orchestration_fixture(
+            tmp_path / label,
+            monkeypatch,
+        )
+        assert assemble_manuel.main("professeur", runner=runner) == 0
+        masters.append(paths["master"].read_bytes())
+
+    assert masters[0] == masters[1]
+    assert masters[0].decode("utf-8").count(assemble_manuel.MASTER_RUN_HOOK) == 1
+    assert re.findall(rb"NEXUS_BUILD_RUN:[0-9a-f]{32}", masters[0]) == []
+
+
+def test_run_environment_is_compile_only_and_overwrites_hostile_host_value(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    generated_run_id = "a" * 32
+    monkeypatch.setenv("NEXUS_BUILD_RUN", "hostile-host-value")
+    monkeypatch.setattr(
+        assemble_manuel.secrets,
+        "token_hex",
+        lambda _size: generated_run_id,
+    )
+    _manual_root, runner, _verify_calls, _paths = _install_orchestration_fixture(
+        tmp_path,
+        monkeypatch,
+    )
+
+    assert assemble_manuel.main("professeur", runner=runner) == 0
+
+    compile_calls = [
+        kwargs
+        for command, kwargs in runner.calls
+        if command[0] == "lualatex" and "--version" not in command
+    ]
+    non_compile_calls = [
+        kwargs
+        for command, kwargs in runner.calls
+        if not (command[0] == "lualatex" and "--version" not in command)
+    ]
+    assert len(compile_calls) == 3
+    assert all(
+        kwargs["env"].get("NEXUS_BUILD_RUN") == generated_run_id
+        for kwargs in compile_calls
+    )
+    assert all("NEXUS_BUILD_RUN" not in kwargs["env"] for kwargs in non_compile_calls)
+
+
 def test_render_master_marks_every_object_once_in_collection_order() -> None:
-    master = assemble_manuel.render_master("professeur", "a" * 32)
+    master = assemble_manuel.render_master("professeur")
     expected_paths = _professor_paths()
     blocks = _marked_blocks(master)
 
@@ -496,12 +577,11 @@ def test_render_master_marks_every_object_once_in_collection_order() -> None:
     )
 
 
-def test_render_master_has_one_run_marker_and_no_marked_transversal_input() -> None:
-    run_id = "0123456789abcdef" * 2
-    master = assemble_manuel.render_master("professeur", run_id)
+def test_render_master_has_one_run_hook_and_no_marked_transversal_input() -> None:
+    master = assemble_manuel.render_master("professeur")
 
-    assert re.findall(r"NEXUS_BUILD_RUN:([0-9a-f]{32})", master) == [run_id]
-    assert master.count("NEXUS_BUILD_RUN:") == 1
+    assert master.count(assemble_manuel.MASTER_RUN_HOOK) == 1
+    assert re.findall(r"NEXUS_BUILD_RUN:[0-9a-f]{32}", master) == []
     # Charte v6 : la page de garde transversale est remplacee par la
     # couverture de collection, le sommaire par sa version stylee.
     assert master.count("\\couvertureManuel") == 1
@@ -525,7 +605,7 @@ def test_render_master_has_one_run_marker_and_no_marked_transversal_input() -> N
 
 
 def test_render_master_loads_the_v5_class_under_the_v6_charter() -> None:
-    master = assemble_manuel.render_master("professeur", "3" * 32)
+    master = assemble_manuel.render_master("professeur")
 
     assert "\\documentclass{gabarits/nexus-manuel-v5}" in master
     assert "\\documentclass{gabarits/nexus-manuel}" not in master
@@ -568,7 +648,7 @@ def test_rubrique_libelle_rejects_an_unmapped_directory() -> None:
 
 
 def test_render_master_marks_each_rubric_change_once() -> None:
-    master = assemble_manuel.render_master("professeur", "4" * 32)
+    master = assemble_manuel.render_master("professeur")
 
     # Chaque \rubrique precede immediatement le premier objet de sa rubrique
     # et n'est jamais repetee tant que la rubrique ne change pas.
@@ -586,7 +666,7 @@ def test_render_master_marks_each_rubric_change_once() -> None:
 
 
 def test_render_master_emits_a_rubric_mark_before_every_object_block() -> None:
-    master = assemble_manuel.render_master("professeur", "5" * 32)
+    master = assemble_manuel.render_master("professeur")
     lines = master.splitlines()
 
     rubrique_courante: str | None = None
@@ -663,8 +743,8 @@ def test_the_bridge_covers_every_box_macro_the_corpus_actually_uses() -> None:
 
 
 def test_render_master_configures_closed_student_redaction() -> None:
-    student = assemble_manuel.render_master("eleve", "1" * 32)
-    professor = assemble_manuel.render_master("professeur", "2" * 32)
+    student = assemble_manuel.render_master("eleve")
+    professor = assemble_manuel.render_master("professeur")
 
     assert "\\nxVersionProfesseurfalse" in student
     assert "\\RenewDocumentEnvironment{corrige}{m +b}{}{}" in student
@@ -843,9 +923,22 @@ def test_observed_build_runs_three_strict_passes_then_publishes_closed_proofs(
         subprocess_environments
     )
     allowed_environment = {"PATH", "HOME", *controlled}
+    compile_environments = [kwargs["env"] for _command, kwargs in lualatex_calls]
     assert all(
-        set(environment) <= allowed_environment
-        for environment in subprocess_environments
+        set(environment) <= allowed_environment | {"NEXUS_BUILD_RUN"}
+        for environment in compile_environments
+    )
+    assert len(
+        {environment["NEXUS_BUILD_RUN"] for environment in compile_environments}
+    ) == 1
+    assert re.fullmatch(
+        r"[0-9a-f]{32}",
+        compile_environments[0]["NEXUS_BUILD_RUN"],
+    )
+    assert all(
+        set(kwargs["env"]) <= allowed_environment
+        for command, kwargs in runner.calls
+        if not (command[0] == "lualatex" and "--version" not in command)
     )
     assert all(
         "OPENROUTER_API_KEY" not in environment
@@ -932,7 +1025,12 @@ def test_observed_build_runs_three_strict_passes_then_publishes_closed_proofs(
     assert receipt["reproducibility"] == reproducibility
     assert receipt["run_id"] == report["run_id"]
     assert re.fullmatch(r"[0-9a-f]{32}", receipt["run_id"])
-    assert receipt["run_id"] in paths["master"].read_text(encoding="utf-8")
+    master_text = paths["master"].read_text(encoding="utf-8")
+    assert master_text.count(assemble_manuel.MASTER_RUN_HOOK) == 1
+    assert receipt["run_id"] not in master_text
+    assert f"NEXUS_BUILD_RUN:{receipt['run_id']}" in paths["log"].read_text(
+        encoding="utf-8"
+    )
     assert set(receipt["evidence_sha256"]) == {
         "master",
         "log",
@@ -1261,71 +1359,27 @@ def test_unproved_reproducibility_commit_is_rejected_before_lualatex(
     assert not any(command[0] == "lualatex" for command, _kwargs in runner.calls)
 
 
-def test_real_lualatex_reproducible_run_id(tmp_path: Path) -> None:
-    repository = tmp_path / "repository"
-    repository.mkdir()
-
-    def git(*arguments: str, timestamp: int | None = None) -> str:
-        environment = assemble_manuel._allowlisted_environment()
-        if timestamp is not None:
-            git_date = f"{timestamp} +0000"
-            environment["GIT_AUTHOR_DATE"] = git_date
-            environment["GIT_COMMITTER_DATE"] = git_date
-        completed = subprocess.run(
-            ["git", "-C", str(repository), *arguments],
-            check=True,
-            capture_output=True,
-            text=True,
-            env=environment,
-        )
-        return completed.stdout.strip()
-
-    git("init", "-q")
-    git("config", "user.name", "Observed Assembler Tests")
-    git("config", "user.email", "observed@example.invalid")
-    source = repository / "source.txt"
-    source.write_text("source A\n", encoding="utf-8")
-    git("add", "--", source.name)
-    source_timestamp = 1_700_000_000
-    git("commit", "-qm", "source A", timestamp=source_timestamp)
-    source_commit = git("rev-parse", "HEAD")
-    assert int(git("show", "-s", "--format=%ct", source_commit)) == source_timestamp
-
-    control = repository / CONTROL_RELATIVE
-    control.parent.mkdir(parents=True)
-    control.write_text(
-        json.dumps(
-            {
-                "schema_version": 1,
-                "source_commit": source_commit,
-                "source_date_epoch": source_timestamp,
-            }
-        ),
-        encoding="utf-8",
-    )
-    git("add", "--", CONTROL_RELATIVE.as_posix())
-    git("commit", "-qm", "reproducibility control", timestamp=source_timestamp + 60)
-
+def test_real_lualatex_distinct_runs_keep_master_and_pdf_identical(
+    tmp_path: Path,
+) -> None:
     run_ids = ("a" * 32, "b" * 32)
-    build_directories = (repository / "build-a", repository / "build-b")
+    build_directories = (tmp_path / "build-a", tmp_path / "build-b")
     documents: list[Path] = []
-    for build_directory, run_id in zip(build_directories, run_ids, strict=True):
+    master = (
+        "\\documentclass{article}\n"
+        "\\pdfvariable trailerid{[<0123456789abcdef0123456789abcdef> "
+        "<0123456789abcdef0123456789abcdef>]}\n"
+        "\\begin{document}\n"
+        f"{assemble_manuel.MASTER_RUN_HOOK}\n"
+        "Deterministic fixture.\n"
+        "\\end{document}\n"
+    )
+    for build_directory in build_directories:
         build_directory.mkdir()
         document = build_directory / "document.tex"
-        document.write_text(
-            "\\documentclass{article}\n"
-            "\\begin{document}\n"
-            f"\\typeout{{NEXUS_BUILD_RUN:{run_id}}}\n"
-            "Deterministic fixture.\n"
-            "\\end{document}\n",
-            encoding="utf-8",
-        )
+        document.write_text(master, encoding="utf-8")
         documents.append(document)
-    normalized_documents = [
-        document.read_text(encoding="utf-8").replace(run_id, "<run_id>")
-        for document, run_id in zip(documents, run_ids, strict=True)
-    ]
-    assert normalized_documents[0] == normalized_documents[1]
+    assert documents[0].read_bytes() == documents[1].read_bytes()
 
     def compile_document(
         document: Path,
@@ -1346,46 +1400,23 @@ def test_real_lualatex_reproducible_run_id(tmp_path: Path) -> None:
             command,
             capture_output=True,
             text=True,
-            cwd=repository,
+            cwd=tmp_path,
             errors="replace",
             check=False,
         )
 
-    payload_a, _reproducibility_a, environment_a = (
-        assemble_manuel._load_reproducibility_control(
-            repository,
-            runner=subprocess.run,
-        )
+    base_environment = assemble_manuel._allowlisted_environment()
+    base_environment.update(assemble_manuel.CONTROLLED_ENVIRONMENT)
+    base_environment["SOURCE_DATE_EPOCH"] = "1700000000"
+    environments = tuple(
+        assemble_manuel._compile_environment(base_environment, run_id)
+        for run_id in run_ids
     )
-    head_a = git("rev-parse", "HEAD")
-    head_timestamp_a = int(git("show", "-s", "--format=%ct", head_a))
-    result_a = compile_document(documents[0], build_directories[0], environment_a)
-
-    artifact = repository / "artifact.txt"
-    artifact.write_text("changes HEAD only\n", encoding="utf-8")
-    git("add", "--", artifact.name)
-    git("commit", "-qm", "dummy artifact", timestamp=source_timestamp + 120)
-
-    payload_b, _reproducibility_b, environment_b = (
-        assemble_manuel._load_reproducibility_control(
-            repository,
-            runner=subprocess.run,
-        )
-    )
-    head_b = git("rev-parse", "HEAD")
-    head_timestamp_b = int(git("show", "-s", "--format=%ct", head_b))
-    result_b = compile_document(documents[1], build_directories[1], environment_b)
+    result_a = compile_document(documents[0], build_directories[0], environments[0])
+    result_b = compile_document(documents[1], build_directories[1], environments[1])
 
     assert result_a.returncode == 0, result_a.stdout + result_a.stderr
     assert result_b.returncode == 0, result_b.stdout + result_b.stderr
-    assert head_a != head_b
-    assert head_timestamp_a != head_timestamp_b
-    assert payload_a == payload_b
-    assert payload_a["source_commit"] == source_commit
-    assert payload_a["source_date_epoch"] == source_timestamp
-    assert environment_a["SOURCE_DATE_EPOCH"] == str(source_timestamp)
-    assert environment_b["SOURCE_DATE_EPOCH"] == str(source_timestamp)
-
     logs = [
         build_directory.joinpath("document.log").read_text(
             encoding="utf-8",
@@ -1417,7 +1448,7 @@ def test_real_lualatex_reproducible_run_id(tmp_path: Path) -> None:
             errors="replace",
             check=False,
         )
-        for pdf, environment in zip(pdfs, (environment_a, environment_b), strict=True)
+        for pdf, environment in zip(pdfs, environments, strict=True)
     ]
     assert all(result.returncode == 0 for result in pdfinfo_results)
     assert pdfinfo_results[0].stdout == pdfinfo_results[1].stdout
@@ -1429,6 +1460,112 @@ def test_real_lualatex_reproducible_run_id(tmp_path: Path) -> None:
     assert variable_pdf_metadata.findall(pdf_bytes[0]) == (
         variable_pdf_metadata.findall(pdf_bytes[1])
     )
+
+
+@pytest.mark.parametrize(
+    ("case", "run_value"),
+    [
+        ("absent", None),
+        ("uppercase", "A" * 32),
+        ("short", "a" * 31),
+        ("long", "a" * 33),
+    ],
+    ids=["absent", "uppercase", "short", "long"],
+)
+def test_real_lualatex_rejects_invalid_final_run_environment(
+    tmp_path: Path,
+    case: str,
+    run_value: str | None,
+) -> None:
+    build = tmp_path / case
+    build.mkdir()
+    document = build / "invalid-run.tex"
+    document.write_text(
+        "\\documentclass{article}\n"
+        "\\begin{document}\n"
+        f"{assemble_manuel.MASTER_RUN_HOOK}\n"
+        "Fixture.\n"
+        "\\end{document}\n",
+        encoding="utf-8",
+    )
+    environment = assemble_manuel._allowlisted_environment()
+    environment.update(assemble_manuel.CONTROLLED_ENVIRONMENT)
+    environment["SOURCE_DATE_EPOCH"] = "1700000000"
+    if run_value is not None:
+        environment["NEXUS_BUILD_RUN"] = run_value
+
+    completed = assemble_manuel._run_with_environment(
+        subprocess.run,
+        environment,
+        [
+            "lualatex",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            f"-output-directory={build}",
+            str(document),
+        ],
+        capture_output=True,
+        text=True,
+        cwd=tmp_path,
+        errors="replace",
+        check=False,
+    )
+
+    log_path = build / "invalid-run.log"
+    evidence = completed.stdout + completed.stderr
+    if log_path.exists():
+        evidence += log_path.read_text(encoding="utf-8", errors="replace")
+    assert completed.returncode != 0
+    assert "NEXUS_BUILD_RUN invalide" in evidence
+
+
+def test_constant_run_hook_preserves_legacy_typeout_pdf_bytes(tmp_path: Path) -> None:
+    run_id = "a" * 32
+    trailer = (
+        "\\pdfvariable trailerid{[<0123456789abcdef0123456789abcdef> "
+        "<0123456789abcdef0123456789abcdef>]}\n"
+    )
+    bodies = (
+        f"\\typeout{{NEXUS_BUILD_RUN:{run_id}}}",
+        assemble_manuel.MASTER_RUN_HOOK,
+    )
+    pdfs: list[bytes] = []
+    environment = assemble_manuel._allowlisted_environment()
+    environment.update(assemble_manuel.CONTROLLED_ENVIRONMENT)
+    environment["SOURCE_DATE_EPOCH"] = "1700000000"
+    environment["NEXUS_BUILD_RUN"] = run_id
+    for label, body in zip(("legacy", "hook"), bodies, strict=True):
+        build = tmp_path / label
+        build.mkdir()
+        document = build / "document.tex"
+        document.write_text(
+            "\\documentclass{article}\n"
+            + trailer
+            + "\\begin{document}\n"
+            + body
+            + "\nDeterministic fixture.\n\\end{document}\n",
+            encoding="utf-8",
+        )
+        completed = assemble_manuel._run_with_environment(
+            subprocess.run,
+            environment,
+            [
+                "lualatex",
+                "-interaction=nonstopmode",
+                "-halt-on-error",
+                f"-output-directory={build}",
+                str(document),
+            ],
+            capture_output=True,
+            text=True,
+            cwd=tmp_path,
+            errors="replace",
+            check=False,
+        )
+        assert completed.returncode == 0, completed.stdout + completed.stderr
+        pdfs.append((build / "document.pdf").read_bytes())
+
+    assert pdfs[0] == pdfs[1]
 
 
 def test_git_root_resolution_strips_hostile_git_environment(

@@ -170,6 +170,13 @@ CONTROLLED_ENVIRONMENT = {
     "PYTHONHASHSEED": "0",
 }
 PASSTHROUGH_ENVIRONMENT = ("PATH", "HOME")
+MASTER_RUN_HOOK = (
+    '\\directlua{local r=os.getenv("NEXUS_BUILD_RUN"); '
+    'if type(r) ~= "string" or string.len(r) ~= 32 or not '
+    'r:match("^[0-9a-f]+$") then tex.error("NEXUS_BUILD_RUN invalide") '
+    'else texio.write_nl("log", "NEXUS_BUILD_" .. "RUN:" .. r); '
+    'texio.write_nl("log", "") end}'
+)
 
 
 class AssemblyError(RuntimeError):
@@ -217,6 +224,17 @@ def _git_environment(
         for name, value in environment.items()
         if name in allowed and not name.startswith("GIT_")
     }
+
+
+def _compile_environment(
+    environment: Mapping[str, str],
+    run_id: str,
+) -> dict[str, str]:
+    if re.fullmatch(r"[0-9a-f]{32}", run_id) is None:
+        raise AssemblyError("run_id de compilation invalide")
+    compile_environment = dict(environment)
+    compile_environment["NEXUS_BUILD_RUN"] = run_id
+    return compile_environment
 
 
 def _load_reproducibility_control(
@@ -908,7 +926,6 @@ def ouverture_depuis_contrat(chap_dir: Path) -> str:
 
 def render_master(
     variant: str,
-    run_id: str,
     *,
     manual: str = "1SPE",
     git_root: Path | None = None,
@@ -918,8 +935,6 @@ def render_master(
         raise ValueError("variante inconnue")
     if manual not in MANUAL_CHAPTERS:
         raise ValueError("manuel inconnu")
-    if re.fullmatch(r"[0-9a-f]{32}", run_id) is None:
-        raise ValueError("identifiant de build invalide")
     if git_root is None:
         git_root = resolve_git_root(ROOT)
     if tracked_paths is None:
@@ -1059,7 +1074,7 @@ def render_master(
 {matiere_niveau}
 \\title{{{MANUAL_TITLES[manual]} — Édition {titre_var}}}
 \\begin{{document}}
-\\typeout{{NEXUS_BUILD_RUN:{run_id}}}
+{MASTER_RUN_HOOK}
 {content}
 \\end{{document}}
 """
@@ -1294,11 +1309,11 @@ def _main_locked(
         run_id = secrets.token_hex(16)
         master = render_master(
             variant,
-            run_id,
             manual=manual,
             git_root=git_root,
             tracked_paths=tracked_paths,
         )
+        compile_environment = _compile_environment(environment, run_id)
     except (AssemblyError, OSError, subprocess.SubprocessError, ValueError) as error:
         print(f"Assemblage refusé : {error}")
         return 1
@@ -1321,7 +1336,7 @@ def _main_locked(
                 try:
                     proc = _run_with_environment(
                         active_runner,
-                        environment,
+                        compile_environment,
                         command,
                         capture_output=True,
                         text=True,

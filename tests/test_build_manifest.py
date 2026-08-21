@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import hashlib
 import importlib.util
 import inspect
@@ -24,6 +25,13 @@ MANIFEST_SCRIPT = ROOT / "scripts" / "build_manifest.py"
 SHA256_A = "sha256:" + "a" * 64
 SHA256_B = "sha256:" + "b" * 64
 RUN_ID = "0123456789abcdef0123456789abcdef"
+MASTER_RUN_HOOK = (
+    '\\directlua{local r=os.getenv("NEXUS_BUILD_RUN"); '
+    'if type(r) ~= "string" or string.len(r) ~= 32 or not '
+    'r:match("^[0-9a-f]+$") then tex.error("NEXUS_BUILD_RUN invalide") '
+    'else texio.write_nl("log", "NEXUS_BUILD_" .. "RUN:" .. r); '
+    'texio.write_nl("log", "") end}'
+)
 REPRO_CONFIG_PATH = (
     "Mathematiques/manuel-maths/config/reproducible-build.json"
 )
@@ -523,7 +531,7 @@ def _install_receipt_evidence(
     ):
         path.parent.mkdir(parents=True, exist_ok=True)
     master.write_text(
-        f"\\typeout{{NEXUS_BUILD_RUN:{RUN_ID}}}\n",
+        MASTER_RUN_HOOK + "\n",
         encoding="utf-8",
     )
     pdf_bytes = b"%PDF closed receipt evidence"
@@ -4082,12 +4090,109 @@ def test_receipt_rejects_malformed_run_id(
         manifest_module._derive_receipt_evidence(tmp_path, receipt)
 
 
+def test_receipt_accepts_constant_master_run_hook_and_concrete_log_token(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    receipt, paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+
+    _envelope, build, _validator = manifest_module._derive_receipt_evidence(
+        tmp_path,
+        receipt,
+    )
+
+    assert paths["master"].read_text(encoding="utf-8").count(MASTER_RUN_HOOK) == 1
+    assert f"NEXUS_BUILD_RUN:{RUN_ID}" in paths["log"].read_text(encoding="utf-8")
+    assert receipt["run_id"] == RUN_ID
+    assert build["manual"] == "1SPE"
+
+
+def test_run_hook_protocol_is_identical_across_active_producers(
+    manifest_module,
+) -> None:
+    hooks = []
+    for relative in (
+        "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        "NSI/scripts/assemble_manuel.py",
+    ):
+        tree = ast.parse((ROOT / relative).read_text(encoding="utf-8"))
+        assignment = next(
+            node
+            for node in tree.body
+            if isinstance(node, ast.Assign)
+            and any(
+                isinstance(target, ast.Name) and target.id == "MASTER_RUN_HOOK"
+                for target in node.targets
+            )
+        )
+        hooks.append(ast.literal_eval(assignment.value))
+
+    assert hooks == [MASTER_RUN_HOOK, MASTER_RUN_HOOK]
+    assert manifest_module._MASTER_RUN_HOOK == MASTER_RUN_HOOK
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    ["missing", "duplicate", "altered", "foreign-concrete"],
+)
+def test_receipt_rejects_master_run_hook_protocol_mutations(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    mutation: str,
+) -> None:
+    receipt, paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    master = paths["master"].read_text(encoding="utf-8")
+    if mutation == "missing":
+        master = master.replace(MASTER_RUN_HOOK, "")
+    elif mutation == "duplicate":
+        master += MASTER_RUN_HOOK + "\n"
+    elif mutation == "altered":
+        master = master.replace(
+            'texio.write_nl("log", "")',
+            'texio.write_nl("term", "")',
+        )
+    else:
+        master += f"\\typeout{{NEXUS_BUILD_RUN:{'f' * 32}}}\n"
+    paths["master"].write_text(master, encoding="utf-8")
+    _refresh_receipt_digest(receipt, paths, "master")
+
+    with pytest.raises(manifest_module.BuildManifestError, match="hook|run_id"):
+        manifest_module._derive_receipt_evidence(tmp_path, receipt)
+
+
+def test_receipt_rejects_legacy_concrete_master_marker_with_recomputed_digests(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    receipt, paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    paths["master"].write_text(
+        f"\\typeout{{NEXUS_BUILD_RUN:{RUN_ID}}}\n",
+        encoding="utf-8",
+    )
+    _refresh_receipt_digest(receipt, paths, "master")
+
+    with pytest.raises(manifest_module.BuildManifestError, match="hook|run_id"):
+        manifest_module._derive_receipt_evidence(tmp_path, receipt)
+
+
 @pytest.mark.parametrize(
     ("surface", "mutation"),
     [
-        ("master", "missing"),
-        ("master", "duplicate"),
-        ("master", "foreign"),
         ("log", "missing"),
         ("log", "duplicate"),
         ("log", "foreign"),
@@ -4133,7 +4238,7 @@ def test_receipt_rejects_run_marker_mismatch_or_duplication(
         manifest_module._derive_receipt_evidence(tmp_path, receipt)
 
 
-@pytest.mark.parametrize("surface", ["master", "log"])
+@pytest.mark.parametrize("surface", ["log"])
 @pytest.mark.parametrize(
     "mutation",
     ["underscore_suffix", "hyphen_suffix", "line_prefix", "line_suffix"],

@@ -15,6 +15,7 @@ absence de tout aléa ou horodatage, et absence de constante globale.
 from __future__ import annotations
 
 import importlib.util
+import inspect
 import re
 import sys
 from pathlib import Path
@@ -71,8 +72,8 @@ def math_assembler():
                 sys.modules[name] = value
 
 
-def _math_identity(assembler, manual: str, variant: str, run_id: str) -> str:
-    master = assembler.render_master(variant, run_id, manual=manual)
+def _math_identity(assembler, manual: str, variant: str) -> str:
+    master = assembler.render_master(variant, manual=manual)
     match = TRAILER_ID_RE.search(master)
     assert match is not None, f"identité de trailer absente: {manual}/{variant}"
     assert match.group(1) == match.group(2)
@@ -81,23 +82,14 @@ def _math_identity(assembler, manual: str, variant: str, run_id: str) -> str:
 
 def test_pdf1_same_sources_same_identity(math_assembler) -> None:
     """CASE PDF1 — mêmes sources ⇒ identité (donc PDF) identique."""
-    first = _math_identity(math_assembler, "TEXPERTES", "eleve", "0" * 32)
-    second = _math_identity(math_assembler, "TEXPERTES", "eleve", "0" * 32)
+    first = _math_identity(math_assembler, "TEXPERTES", "eleve")
+    second = _math_identity(math_assembler, "TEXPERTES", "eleve")
     assert first == second
 
 
-def test_pdf2_identity_is_independent_of_run_and_path(math_assembler) -> None:
-    """CASE PDF2 — l'identité ne dépend ni du run_id ni du répertoire.
-
-    Deux worktrees différents compilant les mêmes sources doivent produire le
-    même PDF : l'identité ne doit donc capturer aucun chemin absolu ni aucun
-    identifiant de run (qui est, lui, aléatoire par construction).
-    """
-    reference = _math_identity(math_assembler, "TEXPERTES", "eleve", "0" * 32)
-    for run_id in ("a" * 32, "1234567890abcdef" * 2, "f" * 32):
-        assert _math_identity(math_assembler, "TEXPERTES", "eleve", run_id) == (
-            reference
-        )
+def test_master_renderer_exposes_no_run_identity(math_assembler) -> None:
+    """L'identité d'exécution n'est pas une entrée du renderer canonique."""
+    assert "run_id" not in inspect.signature(math_assembler.render_master).parameters
 
 
 def test_pdf3_relevant_source_change_changes_identity(
@@ -110,13 +102,13 @@ def test_pdf3_relevant_source_change_changes_identity(
         / "TEXP-GRA-ME-002.tex"
     )
     original = fiche.read_bytes()
-    before = _math_identity(math_assembler, "TEXPERTES", "eleve", "0" * 32)
+    before = _math_identity(math_assembler, "TEXPERTES", "eleve")
     try:
         fiche.write_bytes(original + b"% perturbation de test\n")
-        during = _math_identity(math_assembler, "TEXPERTES", "eleve", "0" * 32)
+        during = _math_identity(math_assembler, "TEXPERTES", "eleve")
     finally:
         fiche.write_bytes(original)
-    after = _math_identity(math_assembler, "TEXPERTES", "eleve", "0" * 32)
+    after = _math_identity(math_assembler, "TEXPERTES", "eleve")
 
     assert during != before, "une source modifiée doit changer l'identité"
     assert after == before, "la restauration doit rendre l'identité initiale"
@@ -125,9 +117,7 @@ def test_pdf3_relevant_source_change_changes_identity(
 def test_pdf4_each_manual_and_variant_has_its_own_identity(math_assembler) -> None:
     """CASE PDF4 — jamais de constante globale : une identité par cible."""
     identities = {
-        (manual, variant): _math_identity(
-            math_assembler, manual, variant, "0" * 32
-        )
+        (manual, variant): _math_identity(math_assembler, manual, variant)
         for manual in ("1SPE", "TSPE_2026_2027", "TCOMPL", "TEXPERTES")
         for variant in ("eleve", "professeur")
     }
@@ -218,7 +208,7 @@ def test_pdf7_preimage_excludes_every_produced_output(math_assembler) -> None:
                 math_assembler.ROOT / "chapitres" / chapter, "eleve"
             )
         )
-    master = math_assembler.render_master("eleve", "0" * 32, manual="TEXPERTES")
+    master = math_assembler.render_master("eleve", manual="TEXPERTES")
     body = master.split("\\begin{document}", 1)[1]
     sources = math_assembler._master_source_digests(
         body, objects=objects, git_root=ROOT
@@ -253,10 +243,10 @@ def test_pdf8_identity_survives_replacing_the_tracked_output(
     if not tracked_pdf.is_file():  # pragma: no cover - dépôt sans artefact
         pytest.skip("PDF suivi absent")
     original = tracked_pdf.read_bytes()
-    before = _math_identity(math_assembler, "TEXPERTES", "eleve", "0" * 32)
+    before = _math_identity(math_assembler, "TEXPERTES", "eleve")
     try:
         tracked_pdf.write_bytes(original + b"%% octets de perturbation\n")
-        during = _math_identity(math_assembler, "TEXPERTES", "eleve", "0" * 32)
+        during = _math_identity(math_assembler, "TEXPERTES", "eleve")
     finally:
         tracked_pdf.write_bytes(original)
 
@@ -265,13 +255,13 @@ def test_pdf8_identity_survives_replacing_the_tracked_output(
     )
 
 
-def test_pdf9_identity_is_independent_of_the_absolute_worktree_path(
+def test_pdf2_identity_is_independent_of_path(
     math_assembler, tmp_path
 ) -> None:
     """§3 — même arbre logique, chemin absolu différent ⇒ même identité."""
     import shutil
 
-    reference = _math_identity(math_assembler, "TEXPERTES", "eleve", "0" * 32)
+    reference = _math_identity(math_assembler, "TEXPERTES", "eleve")
 
     mirror_root = tmp_path / "mirror"
     manual_source = ROOT / "Mathematiques" / "manuel-maths"
@@ -310,7 +300,6 @@ def test_pdf9_identity_is_independent_of_the_absolute_worktree_path(
     try:
         master = mirrored.render_master(
             "eleve",
-            "0" * 32,
             manual="TEXPERTES",
             git_root=mirror_root,
             tracked_paths=tracked,

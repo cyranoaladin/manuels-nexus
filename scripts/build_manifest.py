@@ -95,6 +95,13 @@ _RECEIPT_FIELDS = {
     "tool_versions",
     "variant",
 }
+_MASTER_RUN_HOOK = (
+    '\\directlua{local r=os.getenv("NEXUS_BUILD_RUN"); '
+    'if type(r) ~= "string" or string.len(r) ~= 32 or not '
+    'r:match("^[0-9a-f]+$") then tex.error("NEXUS_BUILD_RUN invalide") '
+    'else texio.write_nl("log", "NEXUS_BUILD_" .. "RUN:" .. r); '
+    'texio.write_nl("log", "") end}'
+)
 _1NSI_STUDENT_VARIANTS = frozenset(
     {"eleve", "methodes", "remediation", "amenagee", "projets"}
 )
@@ -1230,21 +1237,26 @@ def _validate_preflight_report(
     return dict(value)
 
 
+def _validate_master_run_hook(payload: bytes) -> None:
+    text = payload.decode("utf-8", errors="replace")
+    if (
+        text.count(_MASTER_RUN_HOOK) != 1
+        or text.splitlines().count(_MASTER_RUN_HOOK) != 1
+        or "NEXUS_BUILD_RUN:" in text
+    ):
+        raise BuildManifestError("hook run_id du master invalide")
+
+
 def _validate_run_marker(
     payload: bytes,
     *,
     run_id: str,
     role: str,
-    tex_line: bool,
 ) -> None:
     text = payload.decode("utf-8", errors="replace")
-    expected = (
-        f"\\typeout{{NEXUS_BUILD_RUN:{run_id}}}"
-        if tex_line
-        else f"NEXUS_BUILD_RUN:{run_id}"
-    )
+    expected = f"NEXUS_BUILD_RUN:{run_id}"
     marker_lines = [
-        line if tex_line else line.strip()
+        line.strip()
         for line in text.splitlines()
         if "NEXUS_BUILD_RUN:" in line
     ]
@@ -1718,17 +1730,11 @@ def _derive_receipt_evidence(
             raise BuildManifestError(f"digest de preuve {name} incohérent")
     proof_hashes["config"] = _sha256_payload(config_payload)
 
-    _validate_run_marker(
-        proof_payloads["master"],
-        run_id=run_id,
-        role="du master",
-        tex_line=True,
-    )
+    _validate_master_run_hook(proof_payloads["master"])
     _validate_run_marker(
         proof_payloads["log"],
         run_id=run_id,
         role="du journal",
-        tex_line=False,
     )
     log_payload = proof_payloads["log"]
     log_text = log_payload.decode("utf-8", errors="replace")

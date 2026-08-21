@@ -4,12 +4,14 @@ from __future__ import annotations
 
 import importlib.util
 import hashlib
+import inspect
 import json
 import os
 from pathlib import Path
 import re
 import subprocess
 import sys
+from types import SimpleNamespace
 
 import pytest
 
@@ -58,6 +60,17 @@ def _load_assembler():
     scripts = str(ROOT / "scripts")
     if scripts not in sys.path:
         sys.path.insert(0, scripts)
+    for module_name in ("common", "pdf_integrity", "assemble", "assemble_manuel"):
+        sys.modules.pop(module_name, None)
+    for module_name in ("common", "pdf_integrity", "assemble"):
+        dependency_spec = importlib.util.spec_from_file_location(
+            module_name,
+            ROOT / "scripts" / f"{module_name}.py",
+        )
+        assert dependency_spec is not None and dependency_spec.loader is not None
+        dependency = importlib.util.module_from_spec(dependency_spec)
+        sys.modules[module_name] = dependency
+        dependency_spec.loader.exec_module(dependency)
     spec = importlib.util.spec_from_file_location("assemble_manuel", ASSEMBLER_PATH)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
@@ -753,35 +766,62 @@ def _write_reproducibility_control(repository: Path) -> int:
 def _observed_build_fakes(monkeypatch, assembler, root: Path):
     observed: dict[str, object] = {"recorder_calls": []}
 
-    def fake_compile(tex_path, staging, *, environment):
+    def fake_compile(tex_path, staging, *, environment, run_id):
         observed["source_date_epoch"] = environment["SOURCE_DATE_EPOCH"]
-        master = tex_path.read_text(encoding="utf-8")
-        run_marker = next(
-            line for line in master.splitlines() if "NEXUS_BUILD_RUN:" in line
+        observed["compile_environment"] = assembler._observed_compile_environment(
+            environment,
+            run_id,
         )
-        run_id = run_marker.partition("NEXUS_BUILD_RUN:")[2].partition("}")[0]
+        assert re.fullmatch(r"[0-9a-f]{32}", run_id)
+        master = tex_path.read_text(encoding="utf-8")
+        trace_lines = [
+            line
+            for line in master.splitlines()
+            if line.startswith("\\typeout{NEXUS_OBJECT_")
+        ]
+        input_paths = re.findall(r"\\input\{([^}]+)\}", master)
         (staging / f"{tex_path.stem}.pdf").write_bytes(b"%PDF observed")
         (staging / f"{tex_path.stem}.log").write_text(
-            f"NEXUS_BUILD_RUN:{run_id}\nOutput written on observed.pdf (3 pages).\n",
+            "\n".join(
+                [
+                    f"NEXUS_BUILD_RUN:{run_id}",
+                    *(
+                        line.removeprefix("\\typeout{").removesuffix("}")
+                        for line in trace_lines
+                    ),
+                    "Output written on observed.pdf (3 pages).",
+                    "",
+                ]
+            ),
             encoding="utf-8",
         )
         (staging / f"{tex_path.stem}.fls").write_text(
-            f"INPUT {tex_path}\n",
+            "\n".join(
+                [
+                    f"INPUT {tex_path}",
+                    *(f"INPUT {root / path}" for path in input_paths),
+                    "",
+                ]
+            ),
             encoding="utf-8",
         )
         return 0
 
     def fake_recorder(receipt_path, *, environment):
-        build_dir = root / "build" / "MANUEL_1NSI"
-        variant = receipt_path.name.removeprefix("MANUEL_1NSI_").removesuffix(
+        build_dir = root / "build" / f"MANUEL_{assembler.BOOK_ID}"
+        variant = receipt_path.name.removeprefix(
+            f"MANUEL_{assembler.BOOK_ID}_"
+        ).removesuffix(
             ".receipt.json"
         )
         receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
         master_path = root.parent / receipt["master_path"]
         fls_path = root.parent / receipt["fls_path"]
-        assert (build_dir / f"MANUEL_1NSI_{variant}.pdf").is_file()
+        assert (build_dir / f"MANUEL_{assembler.BOOK_ID}_{variant}.pdf").is_file()
         assert receipt_path.is_file()
-        assert (build_dir / f"MANUEL_1NSI_{variant}.preflight.json").is_file()
+        assert (
+            build_dir / f"MANUEL_{assembler.BOOK_ID}_{variant}.preflight.json"
+        ).is_file()
         assert f"INPUT {master_path}\n" in fls_path.read_text(encoding="utf-8")
         observed["recorder_calls"].append(receipt_path)
         observed["recorder_environment"] = dict(environment)
@@ -817,18 +857,219 @@ def test_observed_master_wraps_every_object_with_canonical_trace_markers(
     _patch_root(monkeypatch, assembler, root)
     context = assembler._manual_context("eleve")
 
-    master = assembler._render_context(
+    master = assembler._trace_master(
+        assembler._render_context(context),
         context,
-        run_id=RUN_ID,
         repository_root=root.parent,
     )
 
-    assert master.count(f"NEXUS_BUILD_RUN:{RUN_ID}") == 1
+    assert master.count(assembler.MASTER_RUN_HOOK) == 1
+    assert re.findall(r"NEXUS_BUILD_RUN:[0-9a-f]{32}", master) == []
     for path in assembler.collect_variant_objects("eleve"):
         canonical = path.relative_to(root.parent).as_posix()
         token = hashlib.sha256(canonical.encode("utf-8")).hexdigest()[:40]
         assert master.count(f"NEXUS_OBJECT_BEGIN:{token}") == 1
         assert master.count(f"NEXUS_OBJECT_END:{token}") == 1
+
+
+def test_run_independent_master_is_pure_for_all_nsi_targets(assembler):
+    assert "run_id" not in inspect.signature(assembler._trace_master).parameters
+    for book_id in ("1NSI", "TNSI"):
+        assembler.select_book(book_id)
+        for variant in ("eleve", "professeur"):
+            context = assembler._manual_context(variant)
+            master = assembler._trace_master(
+                assembler._render_context(context),
+                context,
+                repository_root=assembler.REPOSITORY_ROOT,
+            )
+            assert master.count(assembler.MASTER_RUN_HOOK) == 1
+            assert re.findall(r"NEXUS_BUILD_RUN:[0-9a-f]{32}", master) == []
+
+
+def test_observed_build_keeps_nsi_master_identical_for_distinct_run_ids(
+    monkeypatch, tmp_path, assembler
+):
+    root = tmp_path / "repository" / "NSI"
+    _prepare_root(root)
+    _patch_root(monkeypatch, assembler, root)
+    _write_reproducibility_control(root.parent)
+    _observed_build_fakes(monkeypatch, assembler, root)
+    run_ids = iter(("a" * 32, "b" * 32))
+    monkeypatch.setattr(assembler.secrets, "token_hex", lambda _size: next(run_ids))
+    masters: list[bytes] = []
+
+    for _run in range(2):
+        assert assembler.build_manual("eleve", record_observed=True) == 0
+        master_path = root / "build/MANUEL_1NSI/MANUEL_1NSI_eleve.tex"
+        masters.append(master_path.read_bytes())
+
+    assert masters[0] == masters[1]
+    assert masters[0].decode("utf-8").count(assembler.MASTER_RUN_HOOK) == 1
+    assert re.findall(rb"NEXUS_BUILD_RUN:[0-9a-f]{32}", masters[0]) == []
+
+
+def test_observed_run_environment_is_compile_only(monkeypatch, tmp_path, assembler):
+    root = tmp_path / "repository" / "NSI"
+    _prepare_root(root)
+    _patch_root(monkeypatch, assembler, root)
+    _write_reproducibility_control(root.parent)
+    monkeypatch.setenv("NEXUS_BUILD_RUN", "hostile-host-value")
+    observed = _observed_build_fakes(monkeypatch, assembler, root)
+
+    assert assembler.build_manual("eleve", record_observed=True) == 0
+
+    assert observed["compile_environment"]["NEXUS_BUILD_RUN"] == RUN_ID
+    assert "NEXUS_BUILD_RUN" not in observed["recorder_environment"]
+
+
+@pytest.mark.parametrize(
+    ("book_id", "variant"),
+    [
+        ("1NSI", "eleve"),
+        ("1NSI", "professeur"),
+        ("TNSI", "eleve"),
+        ("TNSI", "professeur"),
+    ],
+    ids=["1NSI-eleve", "1NSI-professeur", "TNSI-eleve", "TNSI-professeur"],
+)
+def test_record_observed_real_run_protocol(
+    monkeypatch,
+    tmp_path,
+    assembler,
+    book_id,
+    variant,
+):
+    source_manifest = json.loads(
+        (ROOT / f"manifests/books/{book_id}.json").read_text(encoding="utf-8")
+    )
+    root = tmp_path / "repository" / "NSI"
+    manifest = root / f"manifests/books/{book_id}.json"
+    manifest.parent.mkdir(parents=True)
+    manifest.write_text(json.dumps(source_manifest), encoding="utf-8")
+    master_template = root / "gabarits/book_master.tex"
+    master_template.parent.mkdir(parents=True)
+    master_template.write_bytes((ROOT / "gabarits/book_master.tex").read_bytes())
+    chapter_ids = [chapter["id"] for chapter in source_manifest["chapters"]]
+    for index, chapter in enumerate(chapter_ids, start=1):
+        _write_meta(
+            root / "chapitres" / chapter / "cours" / f"{index:02d}_cours.tex",
+            chapter,
+            "cours",
+            f"COURS-{index}",
+        )
+    _patch_root(monkeypatch, assembler, root)
+    assembler.select_book(book_id)
+    _write_reproducibility_control(root.parent)
+    observed = _observed_build_fakes(monkeypatch, assembler, root)
+
+    assert assembler.build_manual(variant, record_observed=True) == 0
+
+    build_dir = root / "build" / f"MANUEL_{book_id}"
+    stem = f"MANUEL_{book_id}_{variant}"
+    master_path = build_dir / f"{stem}.tex"
+    log_path = build_dir / f"{stem}.log"
+    receipt = json.loads(
+        (build_dir / f"{stem}.receipt.json").read_text(encoding="utf-8")
+    )
+    assert receipt["run_id"] == RUN_ID
+    assert receipt["manual"] == book_id
+    assert receipt["variant"] == variant
+    assert master_path.read_text(encoding="utf-8").count(
+        assembler.MASTER_RUN_HOOK
+    ) == 1
+    assert RUN_ID not in master_path.read_text(encoding="utf-8")
+    assert [
+        line.strip()
+        for line in log_path.read_text(encoding="utf-8").splitlines()
+        if "NEXUS_BUILD_RUN:" in line
+    ] == [f"NEXUS_BUILD_RUN:{RUN_ID}"]
+    assert observed["compile_environment"]["NEXUS_BUILD_RUN"] == RUN_ID
+    assert "NEXUS_BUILD_RUN" not in observed["recorder_environment"]
+
+    spec = importlib.util.spec_from_file_location(
+        "build_manifest_nsi_protocol",
+        ROOT.parent / "scripts/build_manifest.py",
+    )
+    assert spec is not None and spec.loader is not None
+    validator = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(validator)
+    canonical_objects = [
+        path.relative_to(root.parent).as_posix()
+        for path in assembler.collect_variant_objects(variant)
+    ]
+    source_digest = "sha256:" + "a" * 64
+    model_digest = "sha256:" + "b" * 64
+    pdf_digest = receipt["evidence_sha256"]["pdf"]
+    inventory = {
+        "declared_assemblies": [
+            {
+                "included_objects": canonical_objects,
+                "manual": book_id,
+                "scope": "manual",
+                "variant": variant,
+            }
+        ],
+        "source_digest": source_digest,
+    }
+    pdf_core = SimpleNamespace(
+        _is_canonical_manual_pdf_path=lambda *_args, **_kwargs: True,
+        inspect_stable_pdf=lambda *_args, **_kwargs: (
+            pdf_digest,
+            3,
+            "pdfinfo",
+            None,
+        ),
+    )
+    inventory_api = SimpleNamespace(
+        COMPILED_PDF_BUILD_ROOTS={book_id: f"NSI/build/MANUEL_{book_id}"},
+        _model_digest=lambda _inventory: model_digest,
+        _observed_deliverable_variant=lambda _manual, _variant: "manual",
+        _page_count_with_pdfinfo=lambda _path: (3, None),
+        _page_count_with_python=lambda _path: (None, "unused"),
+        _pdf_core=pdf_core,
+        _pdf_matches_observed_identity=lambda *_args: True,
+        _validate_artifact_schema=lambda *_args, **_kwargs: None,
+    )
+    reproducibility = receipt["reproducibility"]
+    config_path = root.parent / reproducibility["config_path"]
+    git_snapshot = (("c" * 40, "test", False), "fixture-snapshot")
+    monkeypatch.setattr(validator, "_capture_git_snapshot", lambda _root: git_snapshot)
+    monkeypatch.setattr(
+        validator,
+        "_load_reproducibility_control",
+        lambda _root: (dict(reproducibility), config_path.read_bytes()),
+    )
+    monkeypatch.setattr(
+        validator,
+        "_collect_local_tool_versions",
+        lambda _reproducibility: dict(TOOL_VERSIONS),
+    )
+    monkeypatch.setattr(
+        validator,
+        "_run_local_pdf_preflight",
+        lambda *_args, **_kwargs: {"pdfinfo": "passed", "pdffonts": "passed"},
+    )
+    monkeypatch.setattr(
+        validator,
+        "_run_local_student_separation",
+        lambda *_args, **_kwargs: None,
+    )
+
+    envelope, build, final_validator = validator._derive_receipt_evidence(
+        root.parent,
+        receipt,
+        inventory=inventory,
+        inventory_module=inventory_api,
+    )
+    assert build["included_objects"] == canonical_objects
+    assert build["manual"] == book_id
+    proposed = {
+        **envelope,
+        "builds": [build],
+        "build_state_digest": validator.build_state_digest([build]),
+    }
+    final_validator(proposed)
 
 
 def test_observed_compiler_uses_shared_lualatex_recorder_primitive(
@@ -856,22 +1097,76 @@ def test_observed_compiler_uses_shared_lualatex_recorder_primitive(
             tex_path,
             staging,
             environment=environment,
+            run_id=RUN_ID,
             runner=runner,
         )
         == 0
     )
-    assert calls == [
-        (
+    assert len(calls) == 1
+    path, build_dir, kwargs = calls[0]
+    assert (path, build_dir) == (tex_path, staging)
+    assert kwargs["environment"] == environment
+    assert kwargs["recorder"] is True
+    assert callable(kwargs["runner"])
+    assert kwargs["source_date_epoch"] == 1770000000
+
+
+def test_observed_compiler_exposes_run_only_to_lualatex_subprocesses(
+    monkeypatch, tmp_path, assembler
+):
+    staging = tmp_path / "staging"
+    staging.mkdir()
+    tex_path = staging / "MANUEL_1NSI_eleve.tex"
+    tex_path.write_text("master", encoding="utf-8")
+    calls = []
+
+    def runner(command, **kwargs):
+        calls.append((list(command), dict(kwargs["env"])))
+        if command[0] == "lualatex":
+            (staging / "MANUEL_1NSI_eleve.pdf").write_bytes(b"%PDF")
+            (staging / "MANUEL_1NSI_eleve.log").write_text(
+                f"NEXUS_BUILD_RUN:{RUN_ID}\n",
+                encoding="utf-8",
+            )
+            (staging / "MANUEL_1NSI_eleve.fls").write_text(
+                f"INPUT {tex_path}\n",
+                encoding="utf-8",
+            )
+        return type("Completed", (), {"returncode": 0, "stdout": b"ok"})()
+
+    def verify_pdf(_pdf, _log, *, runner, environment):
+        runner(["pdfinfo", "fixture.pdf"], env=dict(environment))
+        return 0
+
+    monkeypatch.setattr(assembler.legacy, "verify_pdf", verify_pdf)
+    base_environment = {
+        "PATH": os.environ.get("PATH", ""),
+        "SOURCE_DATE_EPOCH": "1770000000",
+    }
+
+    assert (
+        assembler._compile_observed(
             tex_path,
             staging,
-            {
-                "environment": environment,
-                "recorder": True,
-                "runner": runner,
-                "source_date_epoch": 1770000000,
-            },
+            environment=base_environment,
+            run_id=RUN_ID,
+            runner=runner,
         )
+        == 0
+    )
+
+    lualatex_environments = [
+        environment for command, environment in calls if command[0] == "lualatex"
     ]
+    other_environments = [
+        environment for command, environment in calls if command[0] != "lualatex"
+    ]
+    assert len(lualatex_environments) == 3
+    assert all(
+        environment["NEXUS_BUILD_RUN"] == RUN_ID
+        for environment in lualatex_environments
+    )
+    assert all("NEXUS_BUILD_RUN" not in environment for environment in other_environments)
 
 
 @pytest.mark.parametrize("variant", VARIANTS)
