@@ -1,0 +1,1565 @@
+{
+  "artifact_type": "a6_final_evidence_bundle",
+  "boundary": {
+    "evidence_kind": "normalized durable evidence plus verbatim receipt/preflight JSON payloads and raw file hashes",
+    "human_approval": false,
+    "human_validation": false,
+    "inventory_model_input": false,
+    "normalized_transcripts_are_not_raw_stdout": true,
+    "pdf_identity_input": false,
+    "raw_test_or_gate_stdout_archived": false,
+    "raw_test_or_gate_stdout_claimed": false,
+    "release_authorization": false,
+    "self_hash_embedded": false,
+    "source_digest_input": false
+  },
+  "bundle_schema": "nexus-a6-final-evidence-bundle/v1",
+  "canonical_source_graphs": {
+    "fresh_a_and_b_equal": true,
+    "raw_fls_equality_asserted": false,
+    "raw_fls_note": "raw FLS contains absolute paths and is not compared bytewise",
+    "scheme": "parse FLS INPUT relative to its PWD; keep only regular repo-internal Git-tracked files; union declared producer authorities; serialize the mapping repo-relative POSIX path -> sha256:<hex> with json.dumps(ensure_ascii=False, sort_keys=True, separators=(',', ':')); SHA-256 the UTF-8 bytes",
+    "targets": {
+      "1NSI_eleve": {
+        "declared_authority_added_to_runtime_fls": "NSI/gabarits/book_master.tex",
+        "digest": "sha256:50507b859308785502de8f6d31301d2e768072d94cc101db2d3ee79183d7beee",
+        "entries": 509
+      },
+      "1NSI_professeur": {
+        "declared_authority_added_to_runtime_fls": "NSI/gabarits/book_master.tex",
+        "digest": "sha256:e1ade64b313025a7a0cbf85270f5d6257f5fcc9f95e5c7d0923c6681d5a1108d",
+        "entries": 964
+      },
+      "TCOMPL_eleve": {
+        "digest": "sha256:4517f081b7c6ab89e42c8c41e7ef3c0c4ca4eef37b121b9135d49aea1b50c119",
+        "entries": 485
+      },
+      "TCOMPL_professeur": {
+        "digest": "sha256:fcef192324e7121675c2a2ccc25e06c796f5d75c38afbbeb20fc915deafe5181",
+        "entries": 803
+      }
+    }
+  },
+  "command_records": {
+    "final_chapter_builds": [
+      {
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo/Mathematiques/manuel-maths",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo/Mathematiques/manuel-maths"
+        },
+        "cwd_role": "mathematics_manual_root",
+        "environment": {
+          "FORCE_SOURCE_DATE": "1",
+          "LANG": "C.UTF-8",
+          "LC_ALL": "C.UTF-8",
+          "PYTHONHASHSEED": "0",
+          "SOURCE_DATE_EPOCH": "1785962466",
+          "TZ": "UTC"
+        },
+        "exit_code_by_side": {
+          "Fresh A": 0,
+          "Fresh B": 0
+        },
+        "literal_command": "python scripts/assemble.py --chap TCOMPL-CALCULS-AIRES --variant complet",
+        "normalized_summary": {
+          "master_sha256": "88a700757a6604bb2046d53aa477a1ff5f388343b302d133694e7bdad9688a81",
+          "pages": 18,
+          "pdf_sha256": "55efb058b67cd3a2c13dfd90df6333acadf2d78caeb2155a8bbb124f7ef2367b",
+          "text_sha256": "413bc17e0fb76d144fa5266eb81d1ce47960146176d273b33df6416b76bdfc3c",
+          "trailer_id": "ECB619DF9F61EDA9493EF4428CD8EC8F"
+        },
+        "raw_stdout_archived": false,
+        "record_id": "final_chapter_complet"
+      },
+      {
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo/Mathematiques/manuel-maths",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo/Mathematiques/manuel-maths"
+        },
+        "cwd_role": "mathematics_manual_root",
+        "environment": {
+          "FORCE_SOURCE_DATE": "1",
+          "LANG": "C.UTF-8",
+          "LC_ALL": "C.UTF-8",
+          "PYTHONHASHSEED": "0",
+          "SOURCE_DATE_EPOCH": "1785962466",
+          "TZ": "UTC"
+        },
+        "exit_code_by_side": {
+          "Fresh A": 0,
+          "Fresh B": 0
+        },
+        "literal_command": "python scripts/assemble.py --chap TCOMPL-CALCULS-AIRES --variant parcours1",
+        "normalized_summary": {
+          "master_sha256": "7b347427aa0b3646b15680bf3e4bd0c03b12a8c3fd80860f041d2b9a5e4f82e3",
+          "pages": 17,
+          "pdf_sha256": "d6b967bd4af211a3bdd6b0c25638f342f52e64f1bb6939b94ec3f7a093345d4f",
+          "text_sha256": "6c7b6660dbf72192054501e949284173caf7f79533a834a2491cd3116a664e8b",
+          "trailer_id": "7B9618C13706473D3A7015D1E3CC0D91"
+        },
+        "raw_stdout_archived": false,
+        "record_id": "final_chapter_parcours1"
+      }
+    ],
+    "full_suites": [
+      {
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo"
+        },
+        "cwd_role": "repository_root",
+        "environment": "inherited test environment",
+        "exit_code_by_side": {
+          "Fresh A": 0,
+          "Fresh B": 0
+        },
+        "literal_command": "python -m pytest -q tests/",
+        "normalized_summary_by_side": {
+          "Fresh A": {
+            "duration_seconds": 1062.53,
+            "failed": 0,
+            "passed": 1200,
+            "skipped": 0,
+            "warnings": 0,
+            "xfailed": 0,
+            "xpassed": 0
+          },
+          "Fresh B": {
+            "duration_seconds": 1066.38,
+            "failed": 0,
+            "passed": 1200,
+            "skipped": 0,
+            "warnings": 0,
+            "xfailed": 0,
+            "xpassed": 0
+          }
+        },
+        "raw_stdout_archived": false,
+        "record_id": "fresh_full_root"
+      },
+      {
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo"
+        },
+        "cwd_role": "repository_root",
+        "environment": "inherited test environment",
+        "exit_code_by_side": {
+          "Fresh A": 0,
+          "Fresh B": 0
+        },
+        "known_warning_normalization": {
+          "post_summary_interpreter_warning": "sys:1 swigvarlink DeprecationWarning",
+          "pytest_summary_count": 4,
+          "warnings": [
+            "pandas requires numexpr >= 2.8.4; installed dependency version is older",
+            "pandas requires bottleneck >= 1.3.6; installed dependency version is older",
+            "SwigPyPacked DeprecationWarning",
+            "SwigPyObject DeprecationWarning"
+          ]
+        },
+        "literal_command": "python -m pytest -q Mathematiques/manuel-maths/tests/",
+        "normalized_summary_by_side": {
+          "Fresh A": {
+            "duration_seconds": 574.82,
+            "failed": 0,
+            "passed": 4745,
+            "pytest_summary_warnings": 4,
+            "skipped": 0,
+            "xfailed": 0,
+            "xpassed": 0
+          },
+          "Fresh B": {
+            "duration_seconds": 577.7,
+            "failed": 0,
+            "passed": 4745,
+            "pytest_summary_warnings": 4,
+            "skipped": 0,
+            "xfailed": 0,
+            "xpassed": 0
+          }
+        },
+        "raw_stdout_archived": false,
+        "record_id": "fresh_full_math"
+      },
+      {
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo/NSI",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo/NSI"
+        },
+        "cwd_role": "NSI_subdirectory",
+        "environment": "inherited test environment",
+        "exit_code_by_side": {
+          "Fresh A": 0,
+          "Fresh B": 0
+        },
+        "literal_command": "python -m pytest -q tests/",
+        "normalized_summary_by_side": {
+          "Fresh A": {
+            "duration_seconds": 59.37,
+            "failed": 0,
+            "passed": 2199,
+            "skipped": 0,
+            "warnings": 0,
+            "xfailed": 0,
+            "xpassed": 0
+          },
+          "Fresh B": {
+            "duration_seconds": 60.75,
+            "failed": 0,
+            "passed": 2199,
+            "skipped": 0,
+            "warnings": 0,
+            "xfailed": 0,
+            "xpassed": 0
+          }
+        },
+        "raw_stdout_archived": false,
+        "record_id": "fresh_full_nsi"
+      }
+    ],
+    "inventory_gates": [
+      {
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo"
+        },
+        "cwd_role": "repository_root",
+        "environment": "inherited gate environment",
+        "exit_code_by_side": {
+          "Fresh A": 0,
+          "Fresh B": 0
+        },
+        "literal_command": "python scripts/inventory_collection.py --check --require-clean",
+        "normalized_summary": {
+          "gate": "check",
+          "inventory": {
+            "blocking": 2308,
+            "categories": {
+              "assembler_invalid": 0,
+              "blocking_statuses": 2222,
+              "broken_assembly_references": 0,
+              "broken_latex_references": 0,
+              "broken_meta_references": 0,
+              "chapters_not_in_manual": 0,
+              "context_mismatches": 0,
+              "contract_invalid": 0,
+              "contract_missing": 0,
+              "duplicate_assembly_objects": 0,
+              "duplicate_capacity_refs": 0,
+              "duplicate_ids": 0,
+              "invalid_capacities": 0,
+              "invalid_meta_references": 0,
+              "invalid_statuses": 0,
+              "latex_cycles": 0,
+              "metadata_invalid": 0,
+              "metadata_missing": 0,
+              "missing_assemblers": 0,
+              "missing_corrections": 0,
+              "orphan_files": 12,
+              "unassembled_objects": 52,
+              "unattributed_pdfs": 22,
+              "unavailable_inspiration_sources": 0,
+              "unclassified_types": 0,
+              "unknown_chapter_prefixes": 0
+            },
+            "expected_review_debt": 89,
+            "fingerprint_digest": "sha256:fb0a1c4571e71b0c87aeae59394d0c0103b2ef946feab15fd0c291821c4444a8",
+            "inventory_model_p0": 0,
+            "model_digest": "sha256:5d0ace406cc08ff570d38538e0936fae7a482cac8cc2ace4712c5b265d55b90d",
+            "new_unqualified": 0,
+            "nonblocking": 0,
+            "object_count": 5619,
+            "raw": 2308,
+            "source_digest": "sha256:1b387135b51d85a8237269b1e087abd73a277874d072ff5b181cd6067d53ce43",
+            "source_file_count": 6282
+          },
+          "reasons": [],
+          "success": true
+        },
+        "raw_stdout_archived": false,
+        "record_id": "inventory_check_require_clean"
+      },
+      {
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo"
+        },
+        "cwd_role": "repository_root",
+        "environment": "inherited gate environment",
+        "exit_code_by_side": {
+          "Fresh A": 0,
+          "Fresh B": 0
+        },
+        "literal_command": "python scripts/inventory_collection.py --validate-model",
+        "normalized_summary": {
+          "gate": "validate-model",
+          "reasons": [],
+          "success": true
+        },
+        "raw_stdout_archived": false,
+        "record_id": "inventory_validate_model"
+      },
+      {
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo"
+        },
+        "cwd_role": "repository_root",
+        "environment": "inherited gate environment",
+        "exit_code_by_side": {
+          "Fresh A": 0,
+          "Fresh B": 0
+        },
+        "literal_command": "python scripts/inventory_collection.py --fail-on-new",
+        "normalized_summary": {
+          "expected_review_debt_count": 89,
+          "failures": [],
+          "gate": "fail-on-new",
+          "success": true
+        },
+        "raw_stdout_archived": false,
+        "record_id": "inventory_fail_on_new"
+      },
+      {
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo"
+        },
+        "cwd_role": "repository_root",
+        "environment": "inherited gate environment",
+        "exit_code_by_side": {
+          "Fresh A": 7,
+          "Fresh B": 7
+        },
+        "literal_command": "python scripts/inventory_collection.py --release-strict",
+        "normalized_summary": {
+          "gate": "release-strict",
+          "reason_count": 65,
+          "reason_digest": "sha256:3a7f4a78458be6f57b92581e6ca742a208b64867131aba60dae34b927cedb2ba",
+          "reason_digest_scheme": "sha256(json.dumps(reasons, ensure_ascii=False, separators=(',', ':')).encode('utf-8'))",
+          "reasons": [
+            "1NSI:anomalie:blocking_statuses:anomalies.blocking_statuses:342",
+            "1NSI:build_observé_absent:evaluations",
+            "1NSI:build_observé_absent:livret_methodes",
+            "1NSI:build_observé_absent:manuel_eleve",
+            "1NSI:build_observé_absent:manuel_professeur",
+            "1NSI:build_observé_absent:projets",
+            "1NSI:build_observé_absent:remediations",
+            "1NSI:build_observé_absent:version_amenagee",
+            "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.evaluations:declared",
+            "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.livret_methodes:declared",
+            "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.projets:declared",
+            "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.remediations:declared",
+            "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.version_amenagee:declared",
+            "1NSI:statuts_non_approuves:manuals.1NSI.statuses:objets=332; contrats=10",
+            "1SPE:anomalie:blocking_statuses:anomalies.blocking_statuses:1414",
+            "1SPE:anomalie:unassembled_objects:anomalies.unassembled_objects:5",
+            "1SPE:assemblage_déclaré_absent:banque_evaluations",
+            "1SPE:assemblage_déclaré_absent:livret_methodes",
+            "1SPE:assemblage_déclaré_absent:livret_remediation",
+            "1SPE:build_observé_absent:manuel_eleve",
+            "1SPE:build_observé_absent:manuel_professeur",
+            "1SPE:livrable_non_compile:deliverable_matrix.1SPE.variants.banque_evaluations:absent",
+            "1SPE:livrable_non_compile:deliverable_matrix.1SPE.variants.livret_methodes:partial",
+            "1SPE:livrable_non_compile:deliverable_matrix.1SPE.variants.livret_remediation:partial",
+            "1SPE:statuts_non_approuves:manuals.1SPE.statuses:objets=1404; contrats=10",
+            "TCOMPL:anomalie:blocking_statuses:anomalies.blocking_statuses:209",
+            "TCOMPL:build_observé_absent:manuel_eleve",
+            "TCOMPL:build_observé_absent:manuel_professeur",
+            "TCOMPL:statuts_non_approuves:manuals.TCOMPL.statuses:objets=200; contrats=9",
+            "TEXPERTES:anomalie:blocking_statuses:anomalies.blocking_statuses:131",
+            "TEXPERTES:build_observé_absent:manuel_eleve",
+            "TEXPERTES:build_observé_absent:manuel_professeur",
+            "TEXPERTES:statuts_non_approuves:manuals.TEXPERTES.statuses:objets=126; contrats=5",
+            "TNSI:anomalie:blocking_statuses:anomalies.blocking_statuses:115",
+            "TNSI:assemblage_déclaré_absent:banque_ecrite",
+            "TNSI:assemblage_déclaré_absent:banque_pratique",
+            "TNSI:build_observé_absent:manuel_eleve",
+            "TNSI:build_observé_absent:manuel_professeur",
+            "TNSI:build_observé_absent:projets",
+            "TNSI:build_observé_absent:remediations",
+            "TNSI:build_observé_absent:version_amenagee",
+            "TNSI:chapitres_manquants:manuals.TNSI.chapters:6/12",
+            "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.banque_ecrite:absent",
+            "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.banque_pratique:absent",
+            "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.projets:declared",
+            "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.remediations:declared",
+            "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.version_amenagee:declared",
+            "TNSI:statuts_non_approuves:manuals.TNSI.statuses:objets=109; contrats=6",
+            "TSPE_2026_2027:anomalie:blocking_statuses:anomalies.blocking_statuses:11",
+            "TSPE_2026_2027:anomalie:unassembled_objects:anomalies.unassembled_objects:47",
+            "TSPE_2026_2027:assemblage_déclaré_absent:banque_evaluations",
+            "TSPE_2026_2027:assemblage_déclaré_absent:livret_methodes",
+            "TSPE_2026_2027:assemblage_déclaré_absent:livret_remediation",
+            "TSPE_2026_2027:build_observé_absent:manuel_eleve",
+            "TSPE_2026_2027:build_observé_absent:manuel_professeur",
+            "TSPE_2026_2027:livrable_non_compile:deliverable_matrix.TSPE_2026_2027.variants.banque_evaluations:absent",
+            "TSPE_2026_2027:livrable_non_compile:deliverable_matrix.TSPE_2026_2027.variants.livret_methodes:partial",
+            "TSPE_2026_2027:livrable_non_compile:deliverable_matrix.TSPE_2026_2027.variants.livret_remediation:partial",
+            "TSPE_2026_2027:statuts_non_approuves:manuals.TSPE_2026_2027.statuses:objets=11; contrats=0",
+            "build_receipt_producteurs_non_intégrés",
+            "dimension_non_couverte:mathematics",
+            "dimension_non_couverte:pedagogy",
+            "dimension_non_couverte:print",
+            "dimension_non_couverte:regulation",
+            "dimension_non_couverte:visual"
+          ],
+          "success": false
+        },
+        "raw_stdout_archived": false,
+        "record_id": "inventory_release_strict"
+      }
+    ],
+    "no_record_builds": [
+      {
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo"
+        },
+        "cwd_role": "repository_root",
+        "environment": {
+          "FORCE_SOURCE_DATE": "1",
+          "LANG": "C.UTF-8",
+          "LC_ALL": "C.UTF-8",
+          "PYTHONHASHSEED": "0",
+          "SOURCE_DATE_EPOCH": "1785962466",
+          "TZ": "UTC"
+        },
+        "exit_code_by_side": {
+          "Fresh A": 0,
+          "Fresh B": 0
+        },
+        "literal_command": "python Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual TCOMPL --variant eleve",
+        "normalized_summary": {
+          "master_sha256": "667ff1dc87980b02dfd7754f126626878427b3d12fa62edbbb7c0f3c0b35e31d",
+          "pages": 162,
+          "pdf_sha256": "6212a21b273605d416a35337b7f26c10ca78289c02b465d7b13924e32f9abd0f",
+          "runs_per_fresh_root": 2,
+          "text_sha256": "58f2f61a6da11cf575b4cfec81aaf2155703032cc853245f845a331414c23ced",
+          "trailer_id": "0249C7CF59CA498830C7871B589F7F54"
+        },
+        "raw_stdout_archived": false,
+        "record_id": "no_record_TCOMPL_eleve",
+        "runs_by_side": {
+          "Fresh A": 2,
+          "Fresh B": 2
+        }
+      },
+      {
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo"
+        },
+        "cwd_role": "repository_root",
+        "environment": {
+          "FORCE_SOURCE_DATE": "1",
+          "LANG": "C.UTF-8",
+          "LC_ALL": "C.UTF-8",
+          "PYTHONHASHSEED": "0",
+          "SOURCE_DATE_EPOCH": "1785962466",
+          "TZ": "UTC"
+        },
+        "exit_code_by_side": {
+          "Fresh A": 0,
+          "Fresh B": 0
+        },
+        "literal_command": "python Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual TCOMPL --variant professeur",
+        "normalized_summary": {
+          "master_sha256": "13d78c6a6eb8be46ea614721f8000ab1a28a7a8680d5b5e9caa7190b75b673bd",
+          "pages": 226,
+          "pdf_sha256": "d14ec54cdd5641ce13739316f2ec5b3e92d11039aa1b43bab9b2a3b822bb4a3b",
+          "runs_per_fresh_root": 2,
+          "text_sha256": "97334889a2e1282a8934e33de196acc5144045eda084805fa1a5bfc51de7492e",
+          "trailer_id": "E9D13F3293CD20F6A23A80B6A8C13242"
+        },
+        "raw_stdout_archived": false,
+        "record_id": "no_record_TCOMPL_professeur",
+        "runs_by_side": {
+          "Fresh A": 2,
+          "Fresh B": 2
+        }
+      },
+      {
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo"
+        },
+        "cwd_role": "repository_root",
+        "environment": {
+          "FORCE_SOURCE_DATE": "1",
+          "LANG": "C.UTF-8",
+          "LC_ALL": "C.UTF-8",
+          "PYTHONHASHSEED": "0",
+          "SOURCE_DATE_EPOCH": "1785962466",
+          "TZ": "UTC"
+        },
+        "exit_code_by_side": {
+          "Fresh A": 0,
+          "Fresh B": 0
+        },
+        "literal_command": "python NSI/scripts/assemble_manuel.py --book 1NSI --variant eleve",
+        "normalized_summary": {
+          "local_no_record_master_sha256": "1352f2558b08d25e3ea32d63f0443d772457d9ad8391785872847bd4ed35574f",
+          "pages": 235,
+          "pdf_sha256": "7396cc0051fe488d3dad1f00537d919bbdac13eb839770784acace3edea24d39",
+          "runs_per_fresh_root": 1,
+          "text_sha256": "f6e656f2e5839b53d9a2fe4c7cd2452a0bff926e8de0f3ce133302a53b0467fd",
+          "trailer_id": "5280F069D2BC34CDDC3E17795762613E"
+        },
+        "raw_stdout_archived": false,
+        "record_id": "no_record_1NSI_eleve",
+        "runs_by_side": {
+          "Fresh A": 1,
+          "Fresh B": 1
+        }
+      },
+      {
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo"
+        },
+        "cwd_role": "repository_root",
+        "environment": {
+          "FORCE_SOURCE_DATE": "1",
+          "LANG": "C.UTF-8",
+          "LC_ALL": "C.UTF-8",
+          "PYTHONHASHSEED": "0",
+          "SOURCE_DATE_EPOCH": "1785962466",
+          "TZ": "UTC"
+        },
+        "exit_code_by_side": {
+          "Fresh A": 0,
+          "Fresh B": 0
+        },
+        "literal_command": "python NSI/scripts/assemble_manuel.py --book 1NSI --variant professeur",
+        "normalized_summary": {
+          "local_no_record_master_sha256": "1ef4c1264a782ae49138fe660d0aaf59fa0ed6d3f714b7621402e31698d9dc44",
+          "pages": 378,
+          "pdf_sha256": "d91512273ee8753e3590bc236267ddc12e4b1310610f4f5bdb8ffacc9ac9bc31",
+          "runs_per_fresh_root": 1,
+          "text_sha256": "8df655280e1928037a5ef3da1d18b0a36c69f05a1874d21c34397b12ef570ff7",
+          "trailer_id": "9F5B1E31E3F5A55E9922669A83975561"
+        },
+        "raw_stdout_archived": false,
+        "record_id": "no_record_1NSI_professeur",
+        "runs_by_side": {
+          "Fresh A": 1,
+          "Fresh B": 1
+        }
+      }
+    ],
+    "review_binding_scan": {
+      "cwd_by_side": {
+        "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo",
+        "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo"
+      },
+      "cwd_role": "repository_root",
+      "environment": "inherited read-only environment",
+      "exit_code_by_side": {
+        "Fresh A": 0,
+        "Fresh B": 0
+      },
+      "literal_command": "python -B - <<'PY'\nfrom pathlib import Path\nimport hashlib, json\nroot = Path(\".\")\ninv = json.loads((root / \"audit/INVENTAIRE_COLLECTION.json\").read_text())\nref = \"audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19\"\nrows = []\nfor fingerprint, record in sorted(inv[\"anomaly_qualifications\"].items()):\n    if record.get(\"decision_ref\") != ref:\n        continue\n    source = record[\"source\"]\n    packet = record[\"review_packet\"]\n    meta = json.loads(next(line.removeprefix(\"% META:\").strip() for line in (root / source).read_text().splitlines()[:10] if line.startswith(\"% META:\")))\n    packet_payload = json.loads((root / packet).read_text())\n    rows.append({\n        \"fingerprint\": fingerprint,\n        \"source\": source,\n        \"source_sha\": hashlib.sha256((root / source).read_bytes()).hexdigest(),\n        \"record_method_source_sha\": record[\"method_source_sha\"],\n        \"packet\": packet,\n        \"packet_sha\": hashlib.sha256((root / packet).read_bytes()).hexdigest(),\n        \"record_packet_sha\": record[\"review_packet_sha\"],\n        \"packet_source_sha256\": packet_payload[\"source_sha256\"],\n        \"method_status\": meta[\"status\"],\n        \"packet_status\": packet_payload[\"status\"],\n    })\ndigest = hashlib.sha256(json.dumps(rows, ensure_ascii=False, separators=(\",\", \":\"), sort_keys=True).encode()).hexdigest()\nprint(json.dumps({\"records\": len(rows), \"digest\": \"sha256:\" + digest}, sort_keys=True))\nPY",
+      "normalized_summary": {
+        "digest": "sha256:6c41df0deb2007518810bd030df552a4fe38a1265028f099e852cd75cfd7483a",
+        "digest_scheme": "sha256(json.dumps(rows, ensure_ascii=False, separators=(',', ':'), sort_keys=True).encode('utf-8'))",
+        "method_status": "needs_review",
+        "packet_status": "needs_review",
+        "records": 89,
+        "stale_missing_or_mismatched": 0,
+        "unique_packets": 89,
+        "unique_sources": 89
+      },
+      "raw_stdout_archived": false,
+      "record_id": "review_binding_scan"
+    },
+    "targeted_inventory_tests": [
+      {
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo"
+        },
+        "cwd_role": "repository_root",
+        "environment": "inherited test environment",
+        "exit_code_by_side": {
+          "Fresh A": 0,
+          "Fresh B": 0
+        },
+        "literal_command": "python -m pytest -q tests/test_inventory_collection.py -k 'a6_context'",
+        "normalized_summary_by_side": {
+          "Fresh A": {
+            "failed": 0,
+            "passed": 7,
+            "skipped": 0,
+            "xfailed": 0
+          },
+          "Fresh B": {
+            "failed": 0,
+            "passed": 7,
+            "skipped": 0,
+            "xfailed": 0
+          }
+        },
+        "raw_stdout_archived": false,
+        "record_id": "context_mismatch_targeted"
+      },
+      {
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo"
+        },
+        "cwd_role": "repository_root",
+        "environment": "inherited test environment",
+        "exit_code_by_side": {
+          "Fresh A": 0,
+          "Fresh B": 0
+        },
+        "literal_command": "python -m pytest -q tests/test_inventory_collection.py -k 'pre_a6 or validate_model'",
+        "normalized_summary_by_side": {
+          "Fresh A": {
+            "failed": 0,
+            "passed": 43,
+            "skipped": 0,
+            "xfailed": 0
+          },
+          "Fresh B": {
+            "failed": 0,
+            "passed": 43,
+            "skipped": 0,
+            "xfailed": 0
+          }
+        },
+        "raw_stdout_archived": false,
+        "record_id": "pre_a6_validate_model_targeted"
+      },
+      {
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo"
+        },
+        "cwd_role": "repository_root",
+        "environment": "inherited test environment",
+        "exit_code_by_side": {
+          "Fresh A": 0,
+          "Fresh B": 0
+        },
+        "literal_command": "python -m pytest -q tests/test_inventory_collection.py -k 'a5_object_type'",
+        "normalized_summary_by_side": {
+          "Fresh A": {
+            "failed": 0,
+            "passed": 9,
+            "skipped": 0,
+            "xfailed": 0
+          },
+          "Fresh B": {
+            "failed": 0,
+            "passed": 9,
+            "skipped": 0,
+            "xfailed": 0
+          }
+        },
+        "raw_stdout_archived": false,
+        "record_id": "a5_object_type_targeted"
+      },
+      {
+        "collect_literal_command": "python -m pytest -q --collect-only \\\n  tests/test_inventory_collection.py::test_a1_broken_latex_references_resolved \\\n  tests/test_inventory_collection.py::test_static_latex_cycle_is_reported_and_deep_chain_is_iterative \\\n  tests/test_inventory_collection.py::test_latex_cycle_detection_mutation_2_and_3_nodes \\\n  tests/test_inventory_collection.py::test_recursive_static_latex_assembly_counts_duplicates_and_assembles_correction \\\n  tests/test_inventory_collection.py::test_declared_assembly_reuse_is_not_flagged_as_duplicate \\\n  tests/test_inventory_collection.py::test_declared_reuse_occurrence_mismatch_is_flagged \\\n  tests/test_inventory_collection.py::test_reuse_expected_count_follows_manifest_changes \\\n  tests/test_inventory_collection.py::test_reuse_annotation_for_absent_manifest_id_fails \\\n  tests/test_inventory_collection.py::test_reuse_registry_rejects_invalid_entries \\\n  tests/test_inventory_collection.py::test_repository_duplicate_assembly_objects_is_zero \\\n  tests/test_inventory_collection.py::test_maquette_reuse_contracts_match_manifest_authority \\\n  tests/test_inventory_collection.py::test_capacity_resolver_accepts_chapter_scoped_ids \\\n  tests/test_inventory_collection.py::test_capacity_resolver_rejects_foreign_and_absent_references \\\n  tests/test_inventory_collection.py::test_capacity_resolver_normalization_is_injective \\\n  tests/test_inventory_collection.py::test_legacy_meth_suffix_derives_method_alias \\\n  tests/test_inventory_collection.py::test_legacy_meth_alias_stays_strict \\\n  tests/test_inventory_collection.py::test_prerequisite_codes_resolve_without_origin \\\n  tests/test_inventory_collection.py::test_repository_prerequisite_references_are_declared \\\n  tests/test_inventory_collection.py::test_expected_review_debt_policy_gates_exactly \\\n  tests/test_inventory_collection.py::test_a4_review_debt_valid_record_has_no_violation \\\n  tests/test_inventory_collection.py::test_a4_review_debt_policy_edit_invalidates_derived_qualifications \\\n  tests/test_inventory_collection.py::test_a4_review_debt_method_edit_makes_qualification_stale \\\n  tests/test_inventory_collection.py::test_a4_review_debt_missing_packet_invalidates_qualification \\\n  tests/test_inventory_collection.py::test_a4_review_debt_status_promotion_without_review_fails \\\n  tests/test_inventory_collection.py::test_repository_a4_derived_qualifications_reference_class_policy \\\n  tests/test_inventory_collection.py::test_repository_fail_on_new_accepts_only_declared_review_debt \\\n  tests/test_inventory_collection.py::test_repository_method_aliases_are_unambiguous \\\n  tests/test_inventory_collection.py::test_trigonometrie_contract_covers_bo_referentiel",
+        "collect_result_by_side": {
+          "Fresh A": {
+            "collected": 28,
+            "exit_code": 0
+          },
+          "Fresh B": {
+            "collected": 28,
+            "exit_code": 0
+          }
+        },
+        "cwd_by_side": {
+          "Fresh A": "/tmp/nexus-a6-fresh-a.gGBrnV/repo",
+          "Fresh B": "/tmp/nexus-a6-final-b.xhnieA/repo"
+        },
+        "cwd_role": "repository_root",
+        "environment": "inherited test environment",
+        "nodeids": [
+          "tests/test_inventory_collection.py::test_a1_broken_latex_references_resolved",
+          "tests/test_inventory_collection.py::test_static_latex_cycle_is_reported_and_deep_chain_is_iterative",
+          "tests/test_inventory_collection.py::test_latex_cycle_detection_mutation_2_and_3_nodes",
+          "tests/test_inventory_collection.py::test_recursive_static_latex_assembly_counts_duplicates_and_assembles_correction",
+          "tests/test_inventory_collection.py::test_declared_assembly_reuse_is_not_flagged_as_duplicate",
+          "tests/test_inventory_collection.py::test_declared_reuse_occurrence_mismatch_is_flagged",
+          "tests/test_inventory_collection.py::test_reuse_expected_count_follows_manifest_changes",
+          "tests/test_inventory_collection.py::test_reuse_annotation_for_absent_manifest_id_fails",
+          "tests/test_inventory_collection.py::test_reuse_registry_rejects_invalid_entries",
+          "tests/test_inventory_collection.py::test_repository_duplicate_assembly_objects_is_zero",
+          "tests/test_inventory_collection.py::test_maquette_reuse_contracts_match_manifest_authority",
+          "tests/test_inventory_collection.py::test_capacity_resolver_accepts_chapter_scoped_ids",
+          "tests/test_inventory_collection.py::test_capacity_resolver_rejects_foreign_and_absent_references",
+          "tests/test_inventory_collection.py::test_capacity_resolver_normalization_is_injective",
+          "tests/test_inventory_collection.py::test_legacy_meth_suffix_derives_method_alias",
+          "tests/test_inventory_collection.py::test_legacy_meth_alias_stays_strict",
+          "tests/test_inventory_collection.py::test_prerequisite_codes_resolve_without_origin",
+          "tests/test_inventory_collection.py::test_repository_prerequisite_references_are_declared",
+          "tests/test_inventory_collection.py::test_expected_review_debt_policy_gates_exactly",
+          "tests/test_inventory_collection.py::test_a4_review_debt_valid_record_has_no_violation",
+          "tests/test_inventory_collection.py::test_a4_review_debt_policy_edit_invalidates_derived_qualifications",
+          "tests/test_inventory_collection.py::test_a4_review_debt_method_edit_makes_qualification_stale",
+          "tests/test_inventory_collection.py::test_a4_review_debt_missing_packet_invalidates_qualification",
+          "tests/test_inventory_collection.py::test_a4_review_debt_status_promotion_without_review_fails",
+          "tests/test_inventory_collection.py::test_repository_a4_derived_qualifications_reference_class_policy",
+          "tests/test_inventory_collection.py::test_repository_fail_on_new_accepts_only_declared_review_debt",
+          "tests/test_inventory_collection.py::test_repository_method_aliases_are_unambiguous",
+          "tests/test_inventory_collection.py::test_trigonometrie_contract_covers_bo_referentiel"
+        ],
+        "raw_stdout_archived": false,
+        "record_id": "a1_a4_exact_nodes",
+        "run_literal_command": "python -m pytest -q \\\n  tests/test_inventory_collection.py::test_a1_broken_latex_references_resolved \\\n  tests/test_inventory_collection.py::test_static_latex_cycle_is_reported_and_deep_chain_is_iterative \\\n  tests/test_inventory_collection.py::test_latex_cycle_detection_mutation_2_and_3_nodes \\\n  tests/test_inventory_collection.py::test_recursive_static_latex_assembly_counts_duplicates_and_assembles_correction \\\n  tests/test_inventory_collection.py::test_declared_assembly_reuse_is_not_flagged_as_duplicate \\\n  tests/test_inventory_collection.py::test_declared_reuse_occurrence_mismatch_is_flagged \\\n  tests/test_inventory_collection.py::test_reuse_expected_count_follows_manifest_changes \\\n  tests/test_inventory_collection.py::test_reuse_annotation_for_absent_manifest_id_fails \\\n  tests/test_inventory_collection.py::test_reuse_registry_rejects_invalid_entries \\\n  tests/test_inventory_collection.py::test_repository_duplicate_assembly_objects_is_zero \\\n  tests/test_inventory_collection.py::test_maquette_reuse_contracts_match_manifest_authority \\\n  tests/test_inventory_collection.py::test_capacity_resolver_accepts_chapter_scoped_ids \\\n  tests/test_inventory_collection.py::test_capacity_resolver_rejects_foreign_and_absent_references \\\n  tests/test_inventory_collection.py::test_capacity_resolver_normalization_is_injective \\\n  tests/test_inventory_collection.py::test_legacy_meth_suffix_derives_method_alias \\\n  tests/test_inventory_collection.py::test_legacy_meth_alias_stays_strict \\\n  tests/test_inventory_collection.py::test_prerequisite_codes_resolve_without_origin \\\n  tests/test_inventory_collection.py::test_repository_prerequisite_references_are_declared \\\n  tests/test_inventory_collection.py::test_expected_review_debt_policy_gates_exactly \\\n  tests/test_inventory_collection.py::test_a4_review_debt_valid_record_has_no_violation \\\n  tests/test_inventory_collection.py::test_a4_review_debt_policy_edit_invalidates_derived_qualifications \\\n  tests/test_inventory_collection.py::test_a4_review_debt_method_edit_makes_qualification_stale \\\n  tests/test_inventory_collection.py::test_a4_review_debt_missing_packet_invalidates_qualification \\\n  tests/test_inventory_collection.py::test_a4_review_debt_status_promotion_without_review_fails \\\n  tests/test_inventory_collection.py::test_repository_a4_derived_qualifications_reference_class_policy \\\n  tests/test_inventory_collection.py::test_repository_fail_on_new_accepts_only_declared_review_debt \\\n  tests/test_inventory_collection.py::test_repository_method_aliases_are_unambiguous \\\n  tests/test_inventory_collection.py::test_trigonometrie_contract_covers_bo_referentiel",
+        "run_result_by_side": {
+          "Fresh A": {
+            "exit_code": 0,
+            "failed": 0,
+            "passed": 28,
+            "skipped": 0,
+            "xfailed": 0
+          },
+          "Fresh B": {
+            "exit_code": 0,
+            "failed": 0,
+            "passed": 28,
+            "skipped": 0,
+            "xfailed": 0
+          }
+        }
+      }
+    ],
+    "transcript_boundary": "literal commands and normalized summaries are archived; raw pytest/gate stdout is not archived or claimed"
+  },
+  "consistency_assertions": {
+    "all_observed_recorder_rc_zero": true,
+    "all_observed_validator_rc_zero": true,
+    "fresh_a_equals_fresh_b_gates": true,
+    "fresh_a_equals_fresh_b_inventory": true,
+    "fresh_a_equals_fresh_b_release_reasons": true,
+    "fresh_a_equals_fresh_b_tests": true,
+    "observed_run_count": 8,
+    "observed_run_ids_unique": true
+  },
+  "created": "2026-08-21",
+  "fresh_clones": {
+    "Fresh A": {
+      "branch": "audit/adversarial-reconciliation-2026",
+      "clone_mode": "git clone --no-hardlinks",
+      "final": {
+        "active_locks": 0,
+        "clean": true,
+        "git_diff_check_rc": 0,
+        "persistent_lock_files": 2,
+        "persistent_lock_files_acquirable": 2,
+        "staging_or_backups": 0,
+        "writers": 0
+      },
+      "head": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+      "initial": {
+        "alternates": false,
+        "attached": true,
+        "clean": true,
+        "shared_git_object_inodes": 0,
+        "shared_worktree_inodes": 0
+      },
+      "root": "/tmp/nexus-a6-fresh-a.gGBrnV/repo"
+    },
+    "Fresh B": {
+      "branch": "audit/adversarial-reconciliation-2026",
+      "clone_mode": "git clone --no-hardlinks",
+      "final": {
+        "active_locks": 0,
+        "clean": true,
+        "git_diff_check_rc": 0,
+        "staging_or_backups": 0,
+        "writers": 0
+      },
+      "head": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+      "initial": {
+        "alternates": false,
+        "attached": true,
+        "clean": true,
+        "shared_git_object_inodes": 0,
+        "shared_worktree_inodes": 0
+      },
+      "root": "/tmp/nexus-a6-final-b.xhnieA/repo"
+    }
+  },
+  "inventory_exclusion": {
+    "canonical_source_role": "validation_reference",
+    "canonical_source_role_pattern": "audit/**",
+    "current_inventory_source_files_contains_path": false,
+    "is_digest_model_source": false,
+    "is_model_source": false,
+    "path": "audit/A6_FINAL_EVIDENCE_BUNDLE.json",
+    "verification_note": "inventory source_files are selected from Git-tracked model sources; audit JSON evidence is classified validation_reference and this path is not a model-source type"
+  },
+  "inventory_summary": {
+    "blocking": 2308,
+    "categories": {
+      "assembler_invalid": 0,
+      "blocking_statuses": 2222,
+      "broken_assembly_references": 0,
+      "broken_latex_references": 0,
+      "broken_meta_references": 0,
+      "chapters_not_in_manual": 0,
+      "context_mismatches": 0,
+      "contract_invalid": 0,
+      "contract_missing": 0,
+      "duplicate_assembly_objects": 0,
+      "duplicate_capacity_refs": 0,
+      "duplicate_ids": 0,
+      "invalid_capacities": 0,
+      "invalid_meta_references": 0,
+      "invalid_statuses": 0,
+      "latex_cycles": 0,
+      "metadata_invalid": 0,
+      "metadata_missing": 0,
+      "missing_assemblers": 0,
+      "missing_corrections": 0,
+      "orphan_files": 12,
+      "unassembled_objects": 52,
+      "unattributed_pdfs": 22,
+      "unavailable_inspiration_sources": 0,
+      "unclassified_types": 0,
+      "unknown_chapter_prefixes": 0
+    },
+    "expected_review_debt": 89,
+    "fingerprint_digest": "sha256:fb0a1c4571e71b0c87aeae59394d0c0103b2ef946feab15fd0c291821c4444a8",
+    "inventory_model_p0": 0,
+    "model_digest": "sha256:5d0ace406cc08ff570d38538e0936fae7a482cac8cc2ace4712c5b265d55b90d",
+    "new_unqualified": 0,
+    "nonblocking": 0,
+    "object_count": 5619,
+    "raw": 2308,
+    "source_digest": "sha256:1b387135b51d85a8237269b1e087abd73a277874d072ff5b181cd6067d53ce43",
+    "source_file_count": 6282
+  },
+  "observed_runs": [
+    {
+      "clone_after_single_run_observation": {
+        "clone_reused": false,
+        "git_status": [
+          " M audit/BUILD_MANIFEST.json"
+        ],
+        "other_dirty_paths": []
+      },
+      "clone_initial_observation": {
+        "alternates": false,
+        "branch_attached": true,
+        "clean": true,
+        "shared_git_object_inodes": 0,
+        "shared_worktree_inodes": 0
+      },
+      "clone_root": "/tmp/nexus-a6-fresh-a-observed-tcompl-eleve.2cpeOr/repo",
+      "cwd": "/tmp/nexus-a6-fresh-a-observed-tcompl-eleve.2cpeOr/repo",
+      "cwd_role": "repository_root",
+      "environment": {
+        "FORCE_SOURCE_DATE": "1",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "PYTHONHASHSEED": "0",
+        "SOURCE_DATE_EPOCH": "1785962466",
+        "TZ": "UTC"
+      },
+      "exit_code": 0,
+      "extracted_fls_master_input_lines": [
+        "INPUT /tmp/nexus-a6-fresh-a-observed-tcompl-eleve.2cpeOr/repo/Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.tex"
+      ],
+      "extracted_log_marker_lines": [
+        "NEXUS_BUILD_RUN:33820612f92748acc72d321cfbe3962b"
+      ],
+      "literal_command": "python Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual TCOMPL --variant eleve --record-observed",
+      "manifest_summary": {
+        "build_state_digest": "sha256:3646388d70e7193d20c8de4fa80295ae9036507e5dfd3e8d3a84b3cce0def15e",
+        "git_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+        "included_object_count": 464,
+        "included_objects_canonical_digest": "sha256:82d3800cfeea621cabf7d522e768cbffd953bb5a978dcd8ba1ab5b49cf9ebb28",
+        "included_objects_digest_scheme": "sha256(json.dumps(included_objects, ensure_ascii=False, separators=(',', ':')).encode('utf-8')); list order preserved",
+        "manual": "TCOMPL",
+        "variant": "eleve"
+      },
+      "paths": {
+        "fls": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.fls",
+        "log": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.log",
+        "manifest": "audit/BUILD_MANIFEST.json",
+        "master": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.tex",
+        "pdf": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf",
+        "preflight": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.preflight.json",
+        "receipt": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.receipt.json"
+      },
+      "preflight_payload_verbatim": "{\n  \"checks\": {\n    \"pdffonts\": {\n      \"passed\": true\n    },\n    \"pdfinfo\": {\n      \"passed\": true\n    },\n    \"verify_pdf\": {\n      \"passed\": true\n    }\n  },\n  \"page_count\": 162,\n  \"passed\": true,\n  \"pdf_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf\",\n  \"pdf_sha256\": \"sha256:6212a21b273605d416a35337b7f26c10ca78289c02b465d7b13924e32f9abd0f\",\n  \"reproducibility\": {\n    \"config_path\": \"Mathematiques/manuel-maths/config/reproducible-build.json\",\n    \"force_source_date\": \"1\",\n    \"locale\": \"C.UTF-8\",\n    \"pythonhashseed\": \"0\",\n    \"source_commit\": \"f9ad08b1f91395f7631400475f90f1119269c630\",\n    \"source_date_epoch\": 1785962466,\n    \"timezone\": \"UTC\"\n  },\n  \"run_id\": \"33820612f92748acc72d321cfbe3962b\",\n  \"tool_versions\": {\n    \"lualatex\": \"This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\",\n    \"pdffonts\": \"pdffonts version 24.02.0\",\n    \"pdfinfo\": \"pdfinfo version 24.02.0\",\n    \"python\": \"Python 3.12.3\"\n  }\n}\n",
+      "raw_sha256": {
+        "fls": "sha256:baacb0cc682817cbd3f5e62eaeb6e536af8c1e089e97399f0e97e4470424d587",
+        "log": "sha256:ff2f1cc40758b2591c8b08cafdb87f64a510ba9297c32ab8b60d1b5d6d7c39de",
+        "manifest": "sha256:2e56a3d8511e05eac6116b3b2c53a78bdab293d3959b40e0f4aa0a3a4f3f03ac",
+        "master": "sha256:667ff1dc87980b02dfd7754f126626878427b3d12fa62edbbb7c0f3c0b35e31d",
+        "pdf": "sha256:6212a21b273605d416a35337b7f26c10ca78289c02b465d7b13924e32f9abd0f",
+        "preflight": "sha256:181fb66f0fde40711148f6eae7b69e5e33ab3349f4037d7fb2511a653189c2a7",
+        "receipt": "sha256:2b2bd8ceaeb1e4c0051552b23833e200454d515eedbf9434151ce8e50aed3a47"
+      },
+      "raw_stdout_archived": false,
+      "receipt_payload_verbatim": "{\n  \"compile_succeeded\": true,\n  \"evidence_sha256\": {\n    \"fls\": \"sha256:baacb0cc682817cbd3f5e62eaeb6e536af8c1e089e97399f0e97e4470424d587\",\n    \"log\": \"sha256:ff2f1cc40758b2591c8b08cafdb87f64a510ba9297c32ab8b60d1b5d6d7c39de\",\n    \"master\": \"sha256:667ff1dc87980b02dfd7754f126626878427b3d12fa62edbbb7c0f3c0b35e31d\",\n    \"pdf\": \"sha256:6212a21b273605d416a35337b7f26c10ca78289c02b465d7b13924e32f9abd0f\",\n    \"preflight\": \"sha256:181fb66f0fde40711148f6eae7b69e5e33ab3349f4037d7fb2511a653189c2a7\"\n  },\n  \"fls_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.fls\",\n  \"gates\": {\n    \"compile\": {\n      \"passed\": true\n    },\n    \"preflight\": {\n      \"passed\": true\n    },\n    \"student_separation\": {\n      \"passed\": true\n    }\n  },\n  \"generated_dependencies\": [],\n  \"log_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.log\",\n  \"manual\": \"TCOMPL\",\n  \"master_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.tex\",\n  \"pdf_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf\",\n  \"preflight_report\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.preflight.json\",\n  \"preflight_succeeded\": true,\n  \"reproducibility\": {\n    \"config_path\": \"Mathematiques/manuel-maths/config/reproducible-build.json\",\n    \"force_source_date\": \"1\",\n    \"locale\": \"C.UTF-8\",\n    \"pythonhashseed\": \"0\",\n    \"source_commit\": \"f9ad08b1f91395f7631400475f90f1119269c630\",\n    \"source_date_epoch\": 1785962466,\n    \"timezone\": \"UTC\"\n  },\n  \"run_id\": \"33820612f92748acc72d321cfbe3962b\",\n  \"tool_versions\": {\n    \"lualatex\": \"This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\",\n    \"pdffonts\": \"pdffonts version 24.02.0\",\n    \"pdfinfo\": \"pdfinfo version 24.02.0\",\n    \"python\": \"Python 3.12.3\"\n  },\n  \"variant\": \"eleve\"\n}\n",
+      "record_id": "fresh_a_TCOMPL_eleve",
+      "recorder_rc": 0,
+      "run_id": "33820612f92748acc72d321cfbe3962b",
+      "side": "Fresh A",
+      "source_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+      "target": "TCOMPL_eleve",
+      "validator_note": "the common build_manifest recorder validates the receipt before atomically writing the manifest",
+      "validator_rc": 0
+    },
+    {
+      "clone_after_single_run_observation": {
+        "clone_reused": false,
+        "git_status": [
+          " M audit/BUILD_MANIFEST.json"
+        ],
+        "other_dirty_paths": []
+      },
+      "clone_initial_observation": {
+        "alternates": false,
+        "branch_attached": true,
+        "clean": true,
+        "shared_git_object_inodes": 0,
+        "shared_worktree_inodes": 0
+      },
+      "clone_root": "/tmp/nexus-a6-fresh-a-observed-tcompl-prof.hkRyDN/repo",
+      "cwd": "/tmp/nexus-a6-fresh-a-observed-tcompl-prof.hkRyDN/repo",
+      "cwd_role": "repository_root",
+      "environment": {
+        "FORCE_SOURCE_DATE": "1",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "PYTHONHASHSEED": "0",
+        "SOURCE_DATE_EPOCH": "1785962466",
+        "TZ": "UTC"
+      },
+      "exit_code": 0,
+      "extracted_fls_master_input_lines": [
+        "INPUT /tmp/nexus-a6-fresh-a-observed-tcompl-prof.hkRyDN/repo/Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.tex"
+      ],
+      "extracted_log_marker_lines": [
+        "NEXUS_BUILD_RUN:7ac5409eb1331fe0041a887676e1a8f9"
+      ],
+      "literal_command": "python Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual TCOMPL --variant professeur --record-observed",
+      "manifest_summary": {
+        "build_state_digest": "sha256:8581def226ca8d35d266032800861485e97409f7c691d8953bb3c54f85461426",
+        "git_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+        "included_object_count": 782,
+        "included_objects_canonical_digest": "sha256:e06bb07770928d3e5e588097b744c5e17363264a4f44550a4c793232dcce79af",
+        "included_objects_digest_scheme": "sha256(json.dumps(included_objects, ensure_ascii=False, separators=(',', ':')).encode('utf-8')); list order preserved",
+        "manual": "TCOMPL",
+        "variant": "professeur"
+      },
+      "paths": {
+        "fls": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.fls",
+        "log": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.log",
+        "manifest": "audit/BUILD_MANIFEST.json",
+        "master": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.tex",
+        "pdf": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.pdf",
+        "preflight": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.preflight.json",
+        "receipt": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.receipt.json"
+      },
+      "preflight_payload_verbatim": "{\n  \"checks\": {\n    \"pdffonts\": {\n      \"passed\": true\n    },\n    \"pdfinfo\": {\n      \"passed\": true\n    },\n    \"verify_pdf\": {\n      \"passed\": true\n    }\n  },\n  \"page_count\": 226,\n  \"passed\": true,\n  \"pdf_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.pdf\",\n  \"pdf_sha256\": \"sha256:d14ec54cdd5641ce13739316f2ec5b3e92d11039aa1b43bab9b2a3b822bb4a3b\",\n  \"reproducibility\": {\n    \"config_path\": \"Mathematiques/manuel-maths/config/reproducible-build.json\",\n    \"force_source_date\": \"1\",\n    \"locale\": \"C.UTF-8\",\n    \"pythonhashseed\": \"0\",\n    \"source_commit\": \"f9ad08b1f91395f7631400475f90f1119269c630\",\n    \"source_date_epoch\": 1785962466,\n    \"timezone\": \"UTC\"\n  },\n  \"run_id\": \"7ac5409eb1331fe0041a887676e1a8f9\",\n  \"tool_versions\": {\n    \"lualatex\": \"This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\",\n    \"pdffonts\": \"pdffonts version 24.02.0\",\n    \"pdfinfo\": \"pdfinfo version 24.02.0\",\n    \"python\": \"Python 3.12.3\"\n  }\n}\n",
+      "raw_sha256": {
+        "fls": "sha256:910235fff443edd6ee0598b8cad7d9c621bd5b0b0009818153d5daf7658f0964",
+        "log": "sha256:f6f984f67f53b762d29d6034edf6c648c76b74d89c54fbbce86d62baba2aefcd",
+        "manifest": "sha256:276c24392216a5bfefa5478527968b0d2c3dd33ac4b4f7238a6cf7777231a367",
+        "master": "sha256:13d78c6a6eb8be46ea614721f8000ab1a28a7a8680d5b5e9caa7190b75b673bd",
+        "pdf": "sha256:d14ec54cdd5641ce13739316f2ec5b3e92d11039aa1b43bab9b2a3b822bb4a3b",
+        "preflight": "sha256:5cd65c7eeab5be23214aa81c9d0e99b4dcf92946da10892a87f97c08ca4f37bf",
+        "receipt": "sha256:617a490b2b54573309d94bc72ed7e71a0b2cd2cc78a2fad71621be0e7f5c5ae7"
+      },
+      "raw_stdout_archived": false,
+      "receipt_payload_verbatim": "{\n  \"compile_succeeded\": true,\n  \"evidence_sha256\": {\n    \"fls\": \"sha256:910235fff443edd6ee0598b8cad7d9c621bd5b0b0009818153d5daf7658f0964\",\n    \"log\": \"sha256:f6f984f67f53b762d29d6034edf6c648c76b74d89c54fbbce86d62baba2aefcd\",\n    \"master\": \"sha256:13d78c6a6eb8be46ea614721f8000ab1a28a7a8680d5b5e9caa7190b75b673bd\",\n    \"pdf\": \"sha256:d14ec54cdd5641ce13739316f2ec5b3e92d11039aa1b43bab9b2a3b822bb4a3b\",\n    \"preflight\": \"sha256:5cd65c7eeab5be23214aa81c9d0e99b4dcf92946da10892a87f97c08ca4f37bf\"\n  },\n  \"fls_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.fls\",\n  \"gates\": {\n    \"compile\": {\n      \"passed\": true\n    },\n    \"preflight\": {\n      \"passed\": true\n    }\n  },\n  \"generated_dependencies\": [],\n  \"log_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.log\",\n  \"manual\": \"TCOMPL\",\n  \"master_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.tex\",\n  \"pdf_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.pdf\",\n  \"preflight_report\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.preflight.json\",\n  \"preflight_succeeded\": true,\n  \"reproducibility\": {\n    \"config_path\": \"Mathematiques/manuel-maths/config/reproducible-build.json\",\n    \"force_source_date\": \"1\",\n    \"locale\": \"C.UTF-8\",\n    \"pythonhashseed\": \"0\",\n    \"source_commit\": \"f9ad08b1f91395f7631400475f90f1119269c630\",\n    \"source_date_epoch\": 1785962466,\n    \"timezone\": \"UTC\"\n  },\n  \"run_id\": \"7ac5409eb1331fe0041a887676e1a8f9\",\n  \"tool_versions\": {\n    \"lualatex\": \"This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\",\n    \"pdffonts\": \"pdffonts version 24.02.0\",\n    \"pdfinfo\": \"pdfinfo version 24.02.0\",\n    \"python\": \"Python 3.12.3\"\n  },\n  \"variant\": \"professeur\"\n}\n",
+      "record_id": "fresh_a_TCOMPL_professeur",
+      "recorder_rc": 0,
+      "run_id": "7ac5409eb1331fe0041a887676e1a8f9",
+      "side": "Fresh A",
+      "source_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+      "target": "TCOMPL_professeur",
+      "validator_note": "the common build_manifest recorder validates the receipt before atomically writing the manifest",
+      "validator_rc": 0
+    },
+    {
+      "clone_after_single_run_observation": {
+        "clone_reused": false,
+        "git_status": [
+          " M audit/BUILD_MANIFEST.json"
+        ],
+        "other_dirty_paths": []
+      },
+      "clone_initial_observation": {
+        "alternates": false,
+        "branch_attached": true,
+        "clean": true,
+        "shared_git_object_inodes": 0,
+        "shared_worktree_inodes": 0
+      },
+      "clone_root": "/tmp/nexus-a6-fresh-a-observed-1nsi-eleve.L5J7XH/repo",
+      "cwd": "/tmp/nexus-a6-fresh-a-observed-1nsi-eleve.L5J7XH/repo",
+      "cwd_role": "repository_root",
+      "environment": {
+        "FORCE_SOURCE_DATE": "1",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "PYTHONHASHSEED": "0",
+        "SOURCE_DATE_EPOCH": "1785962466",
+        "TZ": "UTC"
+      },
+      "exit_code": 0,
+      "extracted_fls_master_input_lines": [
+        "INPUT /tmp/nexus-a6-fresh-a-observed-1nsi-eleve.L5J7XH/repo/NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.tex"
+      ],
+      "extracted_log_marker_lines": [
+        "NEXUS_BUILD_RUN:23ceb83dd9269a7581113c1476f9dce2"
+      ],
+      "literal_command": "python NSI/scripts/assemble_manuel.py --book 1NSI --variant eleve --record-observed",
+      "manifest_summary": {
+        "build_state_digest": "sha256:129ba4b817264a83e213da9d6661ea2ca3c19e85d26f22a45b9aea0414820d06",
+        "git_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+        "included_object_count": 487,
+        "included_objects_canonical_digest": "sha256:fcbb17852a633efd34282dfc62d1cf1ae3dd0c8359912ba96d54b44e78cee956",
+        "included_objects_digest_scheme": "sha256(json.dumps(included_objects, ensure_ascii=False, separators=(',', ':')).encode('utf-8')); list order preserved",
+        "manual": "1NSI",
+        "variant": "eleve"
+      },
+      "paths": {
+        "fls": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.fls",
+        "log": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.log",
+        "manifest": "audit/BUILD_MANIFEST.json",
+        "master": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.tex",
+        "pdf": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf",
+        "preflight": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.preflight.json",
+        "receipt": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.receipt.json"
+      },
+      "preflight_payload_verbatim": "{\n  \"checks\": {\n    \"pdffonts\": {\n      \"passed\": true\n    },\n    \"pdfinfo\": {\n      \"passed\": true\n    },\n    \"verify_pdf\": {\n      \"passed\": true\n    }\n  },\n  \"page_count\": 235,\n  \"passed\": true,\n  \"pdf_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf\",\n  \"pdf_sha256\": \"sha256:7396cc0051fe488d3dad1f00537d919bbdac13eb839770784acace3edea24d39\",\n  \"reproducibility\": {\n    \"config_path\": \"Mathematiques/manuel-maths/config/reproducible-build.json\",\n    \"force_source_date\": \"1\",\n    \"locale\": \"C.UTF-8\",\n    \"pythonhashseed\": \"0\",\n    \"source_commit\": \"f9ad08b1f91395f7631400475f90f1119269c630\",\n    \"source_date_epoch\": 1785962466,\n    \"timezone\": \"UTC\"\n  },\n  \"run_id\": \"23ceb83dd9269a7581113c1476f9dce2\",\n  \"tool_versions\": {\n    \"lualatex\": \"This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\",\n    \"pdffonts\": \"pdffonts version 24.02.0\",\n    \"pdfinfo\": \"pdfinfo version 24.02.0\",\n    \"python\": \"Python 3.12.3\"\n  }\n}\n",
+      "raw_sha256": {
+        "fls": "sha256:a0b442e5794eafac27a071d7c23d953ca58e17b1e5674aaa9959ac382de05883",
+        "log": "sha256:f3ef1794f41c1e46346f0d6e302f5dfc2a221addcc41924246dd5049f3b0fc82",
+        "manifest": "sha256:80f819692285b04a3af9e52f8f07bcca70e91f7d1cf09000fa29c99cb2d7cac9",
+        "master": "sha256:06bb02bab9799b14c09264e68f895a931ed0c0c088349fb73453ef5eaa395e9a",
+        "pdf": "sha256:7396cc0051fe488d3dad1f00537d919bbdac13eb839770784acace3edea24d39",
+        "preflight": "sha256:5192ac1d73fe7d82beb360e2fa094c936d1b1e653cff93785bd87d9b03584afa",
+        "receipt": "sha256:d4236b6eba8f89521bfaedd7c323e2a742577dfb7544bb45da8de44266ba4fd9"
+      },
+      "raw_stdout_archived": false,
+      "receipt_payload_verbatim": "{\n  \"compile_succeeded\": true,\n  \"evidence_sha256\": {\n    \"fls\": \"sha256:a0b442e5794eafac27a071d7c23d953ca58e17b1e5674aaa9959ac382de05883\",\n    \"log\": \"sha256:f3ef1794f41c1e46346f0d6e302f5dfc2a221addcc41924246dd5049f3b0fc82\",\n    \"master\": \"sha256:06bb02bab9799b14c09264e68f895a931ed0c0c088349fb73453ef5eaa395e9a\",\n    \"pdf\": \"sha256:7396cc0051fe488d3dad1f00537d919bbdac13eb839770784acace3edea24d39\",\n    \"preflight\": \"sha256:5192ac1d73fe7d82beb360e2fa094c936d1b1e653cff93785bd87d9b03584afa\"\n  },\n  \"fls_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.fls\",\n  \"gates\": {\n    \"compile\": {\n      \"passed\": true\n    },\n    \"preflight\": {\n      \"passed\": true\n    },\n    \"student_separation\": {\n      \"passed\": true\n    }\n  },\n  \"generated_dependencies\": [],\n  \"log_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.log\",\n  \"manual\": \"1NSI\",\n  \"master_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.tex\",\n  \"pdf_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf\",\n  \"preflight_report\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.preflight.json\",\n  \"preflight_succeeded\": true,\n  \"reproducibility\": {\n    \"config_path\": \"Mathematiques/manuel-maths/config/reproducible-build.json\",\n    \"force_source_date\": \"1\",\n    \"locale\": \"C.UTF-8\",\n    \"pythonhashseed\": \"0\",\n    \"source_commit\": \"f9ad08b1f91395f7631400475f90f1119269c630\",\n    \"source_date_epoch\": 1785962466,\n    \"timezone\": \"UTC\"\n  },\n  \"run_id\": \"23ceb83dd9269a7581113c1476f9dce2\",\n  \"tool_versions\": {\n    \"lualatex\": \"This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\",\n    \"pdffonts\": \"pdffonts version 24.02.0\",\n    \"pdfinfo\": \"pdfinfo version 24.02.0\",\n    \"python\": \"Python 3.12.3\"\n  },\n  \"variant\": \"eleve\"\n}\n",
+      "record_id": "fresh_a_1NSI_eleve",
+      "recorder_rc": 0,
+      "run_id": "23ceb83dd9269a7581113c1476f9dce2",
+      "side": "Fresh A",
+      "source_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+      "target": "1NSI_eleve",
+      "validator_note": "the common build_manifest recorder validates the receipt before atomically writing the manifest",
+      "validator_rc": 0
+    },
+    {
+      "clone_after_single_run_observation": {
+        "clone_reused": false,
+        "git_status": [
+          " M audit/BUILD_MANIFEST.json"
+        ],
+        "other_dirty_paths": []
+      },
+      "clone_initial_observation": {
+        "alternates": false,
+        "branch_attached": true,
+        "clean": true,
+        "shared_git_object_inodes": 0,
+        "shared_worktree_inodes": 0
+      },
+      "clone_root": "/tmp/nexus-a6-fresh-a-observed-1nsi-prof.Lg45Pb/repo",
+      "cwd": "/tmp/nexus-a6-fresh-a-observed-1nsi-prof.Lg45Pb/repo",
+      "cwd_role": "repository_root",
+      "environment": {
+        "FORCE_SOURCE_DATE": "1",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "PYTHONHASHSEED": "0",
+        "SOURCE_DATE_EPOCH": "1785962466",
+        "TZ": "UTC"
+      },
+      "exit_code": 0,
+      "extracted_fls_master_input_lines": [
+        "INPUT /tmp/nexus-a6-fresh-a-observed-1nsi-prof.Lg45Pb/repo/NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.tex"
+      ],
+      "extracted_log_marker_lines": [
+        "NEXUS_BUILD_RUN:853c1d35069106254ce016f6e229007f"
+      ],
+      "literal_command": "python NSI/scripts/assemble_manuel.py --book 1NSI --variant professeur --record-observed",
+      "manifest_summary": {
+        "build_state_digest": "sha256:7a8800c6e06dd4f6fdfd2479239b6fb28c38c4e104138d385b42b25fa2eda475",
+        "git_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+        "included_object_count": 942,
+        "included_objects_canonical_digest": "sha256:fbb073883ed5c438c5c32b30d2f2760a254010076f6296a2a44fd99247da1ac5",
+        "included_objects_digest_scheme": "sha256(json.dumps(included_objects, ensure_ascii=False, separators=(',', ':')).encode('utf-8')); list order preserved",
+        "manual": "1NSI",
+        "variant": "professeur"
+      },
+      "paths": {
+        "fls": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.fls",
+        "log": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.log",
+        "manifest": "audit/BUILD_MANIFEST.json",
+        "master": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.tex",
+        "pdf": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.pdf",
+        "preflight": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.preflight.json",
+        "receipt": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.receipt.json"
+      },
+      "preflight_payload_verbatim": "{\n  \"checks\": {\n    \"pdffonts\": {\n      \"passed\": true\n    },\n    \"pdfinfo\": {\n      \"passed\": true\n    },\n    \"verify_pdf\": {\n      \"passed\": true\n    }\n  },\n  \"page_count\": 378,\n  \"passed\": true,\n  \"pdf_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.pdf\",\n  \"pdf_sha256\": \"sha256:d91512273ee8753e3590bc236267ddc12e4b1310610f4f5bdb8ffacc9ac9bc31\",\n  \"reproducibility\": {\n    \"config_path\": \"Mathematiques/manuel-maths/config/reproducible-build.json\",\n    \"force_source_date\": \"1\",\n    \"locale\": \"C.UTF-8\",\n    \"pythonhashseed\": \"0\",\n    \"source_commit\": \"f9ad08b1f91395f7631400475f90f1119269c630\",\n    \"source_date_epoch\": 1785962466,\n    \"timezone\": \"UTC\"\n  },\n  \"run_id\": \"853c1d35069106254ce016f6e229007f\",\n  \"tool_versions\": {\n    \"lualatex\": \"This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\",\n    \"pdffonts\": \"pdffonts version 24.02.0\",\n    \"pdfinfo\": \"pdfinfo version 24.02.0\",\n    \"python\": \"Python 3.12.3\"\n  }\n}\n",
+      "raw_sha256": {
+        "fls": "sha256:c834d8340175e74fb6e002d95986d4feb720ff11db77c928a76749eabd28fbf4",
+        "log": "sha256:a5350871096ef313ea5b5a4f31f329ec197bd2f904fde10c62fb1674653a073c",
+        "manifest": "sha256:dc69895866c5df5b97b0aea48000bd988f910b726505dc59054b8be680efb386",
+        "master": "sha256:153c42f0690768aaf2e2f73317666b061bc7f795ac68a7ed651a6eaa53b2de4d",
+        "pdf": "sha256:d91512273ee8753e3590bc236267ddc12e4b1310610f4f5bdb8ffacc9ac9bc31",
+        "preflight": "sha256:bc783435b1d9167e5ffc5ee00ea1953070b8687f2d57cb0bf1b0cd19ab667c46",
+        "receipt": "sha256:f8971a1b97f82778472afc19ae14713fe0071f8d3d3f4208bd073ad33d183056"
+      },
+      "raw_stdout_archived": false,
+      "receipt_payload_verbatim": "{\n  \"compile_succeeded\": true,\n  \"evidence_sha256\": {\n    \"fls\": \"sha256:c834d8340175e74fb6e002d95986d4feb720ff11db77c928a76749eabd28fbf4\",\n    \"log\": \"sha256:a5350871096ef313ea5b5a4f31f329ec197bd2f904fde10c62fb1674653a073c\",\n    \"master\": \"sha256:153c42f0690768aaf2e2f73317666b061bc7f795ac68a7ed651a6eaa53b2de4d\",\n    \"pdf\": \"sha256:d91512273ee8753e3590bc236267ddc12e4b1310610f4f5bdb8ffacc9ac9bc31\",\n    \"preflight\": \"sha256:bc783435b1d9167e5ffc5ee00ea1953070b8687f2d57cb0bf1b0cd19ab667c46\"\n  },\n  \"fls_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.fls\",\n  \"gates\": {\n    \"compile\": {\n      \"passed\": true\n    },\n    \"preflight\": {\n      \"passed\": true\n    }\n  },\n  \"generated_dependencies\": [],\n  \"log_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.log\",\n  \"manual\": \"1NSI\",\n  \"master_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.tex\",\n  \"pdf_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.pdf\",\n  \"preflight_report\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.preflight.json\",\n  \"preflight_succeeded\": true,\n  \"reproducibility\": {\n    \"config_path\": \"Mathematiques/manuel-maths/config/reproducible-build.json\",\n    \"force_source_date\": \"1\",\n    \"locale\": \"C.UTF-8\",\n    \"pythonhashseed\": \"0\",\n    \"source_commit\": \"f9ad08b1f91395f7631400475f90f1119269c630\",\n    \"source_date_epoch\": 1785962466,\n    \"timezone\": \"UTC\"\n  },\n  \"run_id\": \"853c1d35069106254ce016f6e229007f\",\n  \"tool_versions\": {\n    \"lualatex\": \"This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\",\n    \"pdffonts\": \"pdffonts version 24.02.0\",\n    \"pdfinfo\": \"pdfinfo version 24.02.0\",\n    \"python\": \"Python 3.12.3\"\n  },\n  \"variant\": \"professeur\"\n}\n",
+      "record_id": "fresh_a_1NSI_professeur",
+      "recorder_rc": 0,
+      "run_id": "853c1d35069106254ce016f6e229007f",
+      "side": "Fresh A",
+      "source_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+      "target": "1NSI_professeur",
+      "validator_note": "the common build_manifest recorder validates the receipt before atomically writing the manifest",
+      "validator_rc": 0
+    },
+    {
+      "clone_after_single_run_observation": {
+        "clone_reused": false,
+        "git_status": [
+          " M audit/BUILD_MANIFEST.json"
+        ],
+        "other_dirty_paths": []
+      },
+      "clone_initial_observation": {
+        "alternates": false,
+        "branch_attached": true,
+        "clean": true,
+        "shared_git_object_inodes": 0,
+        "shared_worktree_inodes": 0
+      },
+      "clone_root": "/tmp/nexus-a6-final-b-obs-tcompl-eleve.HriwFp/repo",
+      "cwd": "/tmp/nexus-a6-final-b-obs-tcompl-eleve.HriwFp/repo",
+      "cwd_role": "repository_root",
+      "environment": {
+        "FORCE_SOURCE_DATE": "1",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "PYTHONHASHSEED": "0",
+        "SOURCE_DATE_EPOCH": "1785962466",
+        "TZ": "UTC"
+      },
+      "exit_code": 0,
+      "extracted_fls_master_input_lines": [
+        "INPUT /tmp/nexus-a6-final-b-obs-tcompl-eleve.HriwFp/repo/Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.tex"
+      ],
+      "extracted_log_marker_lines": [
+        "NEXUS_BUILD_RUN:70f006537d61f375b00bb25e5d1f74dd"
+      ],
+      "literal_command": "python Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual TCOMPL --variant eleve --record-observed",
+      "manifest_summary": {
+        "build_state_digest": "sha256:3646388d70e7193d20c8de4fa80295ae9036507e5dfd3e8d3a84b3cce0def15e",
+        "git_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+        "included_object_count": 464,
+        "included_objects_canonical_digest": "sha256:82d3800cfeea621cabf7d522e768cbffd953bb5a978dcd8ba1ab5b49cf9ebb28",
+        "included_objects_digest_scheme": "sha256(json.dumps(included_objects, ensure_ascii=False, separators=(',', ':')).encode('utf-8')); list order preserved",
+        "manual": "TCOMPL",
+        "variant": "eleve"
+      },
+      "paths": {
+        "fls": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.fls",
+        "log": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.log",
+        "manifest": "audit/BUILD_MANIFEST.json",
+        "master": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.tex",
+        "pdf": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf",
+        "preflight": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.preflight.json",
+        "receipt": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.receipt.json"
+      },
+      "preflight_payload_verbatim": "{\n  \"checks\": {\n    \"pdffonts\": {\n      \"passed\": true\n    },\n    \"pdfinfo\": {\n      \"passed\": true\n    },\n    \"verify_pdf\": {\n      \"passed\": true\n    }\n  },\n  \"page_count\": 162,\n  \"passed\": true,\n  \"pdf_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf\",\n  \"pdf_sha256\": \"sha256:6212a21b273605d416a35337b7f26c10ca78289c02b465d7b13924e32f9abd0f\",\n  \"reproducibility\": {\n    \"config_path\": \"Mathematiques/manuel-maths/config/reproducible-build.json\",\n    \"force_source_date\": \"1\",\n    \"locale\": \"C.UTF-8\",\n    \"pythonhashseed\": \"0\",\n    \"source_commit\": \"f9ad08b1f91395f7631400475f90f1119269c630\",\n    \"source_date_epoch\": 1785962466,\n    \"timezone\": \"UTC\"\n  },\n  \"run_id\": \"70f006537d61f375b00bb25e5d1f74dd\",\n  \"tool_versions\": {\n    \"lualatex\": \"This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\",\n    \"pdffonts\": \"pdffonts version 24.02.0\",\n    \"pdfinfo\": \"pdfinfo version 24.02.0\",\n    \"python\": \"Python 3.12.3\"\n  }\n}\n",
+      "raw_sha256": {
+        "fls": "sha256:ca13974c002d58f862f7f73dc1980551ff5ea48eddf807b49e3a17677f487239",
+        "log": "sha256:74106df26d71955e237f7bddcc097ef025c3cb0e1cceb0ad75abb25a5909b43e",
+        "manifest": "sha256:2e56a3d8511e05eac6116b3b2c53a78bdab293d3959b40e0f4aa0a3a4f3f03ac",
+        "master": "sha256:667ff1dc87980b02dfd7754f126626878427b3d12fa62edbbb7c0f3c0b35e31d",
+        "pdf": "sha256:6212a21b273605d416a35337b7f26c10ca78289c02b465d7b13924e32f9abd0f",
+        "preflight": "sha256:7aedfe8f1d9cee9409b5fa3ac00842b701e5224c3c468a67bd29a47ae91bf856",
+        "receipt": "sha256:f94aa62373866b714266e2b5dc473e2c3376c658fefbe54e0eaac8877fd6c80d"
+      },
+      "raw_stdout_archived": false,
+      "receipt_payload_verbatim": "{\n  \"compile_succeeded\": true,\n  \"evidence_sha256\": {\n    \"fls\": \"sha256:ca13974c002d58f862f7f73dc1980551ff5ea48eddf807b49e3a17677f487239\",\n    \"log\": \"sha256:74106df26d71955e237f7bddcc097ef025c3cb0e1cceb0ad75abb25a5909b43e\",\n    \"master\": \"sha256:667ff1dc87980b02dfd7754f126626878427b3d12fa62edbbb7c0f3c0b35e31d\",\n    \"pdf\": \"sha256:6212a21b273605d416a35337b7f26c10ca78289c02b465d7b13924e32f9abd0f\",\n    \"preflight\": \"sha256:7aedfe8f1d9cee9409b5fa3ac00842b701e5224c3c468a67bd29a47ae91bf856\"\n  },\n  \"fls_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.fls\",\n  \"gates\": {\n    \"compile\": {\n      \"passed\": true\n    },\n    \"preflight\": {\n      \"passed\": true\n    },\n    \"student_separation\": {\n      \"passed\": true\n    }\n  },\n  \"generated_dependencies\": [],\n  \"log_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.log\",\n  \"manual\": \"TCOMPL\",\n  \"master_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.tex\",\n  \"pdf_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf\",\n  \"preflight_report\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.preflight.json\",\n  \"preflight_succeeded\": true,\n  \"reproducibility\": {\n    \"config_path\": \"Mathematiques/manuel-maths/config/reproducible-build.json\",\n    \"force_source_date\": \"1\",\n    \"locale\": \"C.UTF-8\",\n    \"pythonhashseed\": \"0\",\n    \"source_commit\": \"f9ad08b1f91395f7631400475f90f1119269c630\",\n    \"source_date_epoch\": 1785962466,\n    \"timezone\": \"UTC\"\n  },\n  \"run_id\": \"70f006537d61f375b00bb25e5d1f74dd\",\n  \"tool_versions\": {\n    \"lualatex\": \"This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\",\n    \"pdffonts\": \"pdffonts version 24.02.0\",\n    \"pdfinfo\": \"pdfinfo version 24.02.0\",\n    \"python\": \"Python 3.12.3\"\n  },\n  \"variant\": \"eleve\"\n}\n",
+      "record_id": "fresh_b_TCOMPL_eleve",
+      "recorder_rc": 0,
+      "run_id": "70f006537d61f375b00bb25e5d1f74dd",
+      "side": "Fresh B",
+      "source_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+      "target": "TCOMPL_eleve",
+      "validator_note": "the common build_manifest recorder validates the receipt before atomically writing the manifest",
+      "validator_rc": 0
+    },
+    {
+      "clone_after_single_run_observation": {
+        "clone_reused": false,
+        "git_status": [
+          " M audit/BUILD_MANIFEST.json"
+        ],
+        "other_dirty_paths": []
+      },
+      "clone_initial_observation": {
+        "alternates": false,
+        "branch_attached": true,
+        "clean": true,
+        "shared_git_object_inodes": 0,
+        "shared_worktree_inodes": 0
+      },
+      "clone_root": "/tmp/nexus-a6-final-b-obs-tcompl-prof.1v31p5/repo",
+      "cwd": "/tmp/nexus-a6-final-b-obs-tcompl-prof.1v31p5/repo",
+      "cwd_role": "repository_root",
+      "environment": {
+        "FORCE_SOURCE_DATE": "1",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "PYTHONHASHSEED": "0",
+        "SOURCE_DATE_EPOCH": "1785962466",
+        "TZ": "UTC"
+      },
+      "exit_code": 0,
+      "extracted_fls_master_input_lines": [
+        "INPUT /tmp/nexus-a6-final-b-obs-tcompl-prof.1v31p5/repo/Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.tex"
+      ],
+      "extracted_log_marker_lines": [
+        "NEXUS_BUILD_RUN:3dfd78ae0f87ed3e4dc5764211744972"
+      ],
+      "literal_command": "python Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual TCOMPL --variant professeur --record-observed",
+      "manifest_summary": {
+        "build_state_digest": "sha256:8581def226ca8d35d266032800861485e97409f7c691d8953bb3c54f85461426",
+        "git_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+        "included_object_count": 782,
+        "included_objects_canonical_digest": "sha256:e06bb07770928d3e5e588097b744c5e17363264a4f44550a4c793232dcce79af",
+        "included_objects_digest_scheme": "sha256(json.dumps(included_objects, ensure_ascii=False, separators=(',', ':')).encode('utf-8')); list order preserved",
+        "manual": "TCOMPL",
+        "variant": "professeur"
+      },
+      "paths": {
+        "fls": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.fls",
+        "log": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.log",
+        "manifest": "audit/BUILD_MANIFEST.json",
+        "master": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.tex",
+        "pdf": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.pdf",
+        "preflight": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.preflight.json",
+        "receipt": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.receipt.json"
+      },
+      "preflight_payload_verbatim": "{\n  \"checks\": {\n    \"pdffonts\": {\n      \"passed\": true\n    },\n    \"pdfinfo\": {\n      \"passed\": true\n    },\n    \"verify_pdf\": {\n      \"passed\": true\n    }\n  },\n  \"page_count\": 226,\n  \"passed\": true,\n  \"pdf_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.pdf\",\n  \"pdf_sha256\": \"sha256:d14ec54cdd5641ce13739316f2ec5b3e92d11039aa1b43bab9b2a3b822bb4a3b\",\n  \"reproducibility\": {\n    \"config_path\": \"Mathematiques/manuel-maths/config/reproducible-build.json\",\n    \"force_source_date\": \"1\",\n    \"locale\": \"C.UTF-8\",\n    \"pythonhashseed\": \"0\",\n    \"source_commit\": \"f9ad08b1f91395f7631400475f90f1119269c630\",\n    \"source_date_epoch\": 1785962466,\n    \"timezone\": \"UTC\"\n  },\n  \"run_id\": \"3dfd78ae0f87ed3e4dc5764211744972\",\n  \"tool_versions\": {\n    \"lualatex\": \"This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\",\n    \"pdffonts\": \"pdffonts version 24.02.0\",\n    \"pdfinfo\": \"pdfinfo version 24.02.0\",\n    \"python\": \"Python 3.12.3\"\n  }\n}\n",
+      "raw_sha256": {
+        "fls": "sha256:cb1269f9cb66aa9c70d98456cc67bd15fc025ac514440e6bc8b3537039e62475",
+        "log": "sha256:9ff95d419d39ca70639e1b1d886ecbdfa5ff3395667ce6f7c9e609889a6fc850",
+        "manifest": "sha256:276c24392216a5bfefa5478527968b0d2c3dd33ac4b4f7238a6cf7777231a367",
+        "master": "sha256:13d78c6a6eb8be46ea614721f8000ab1a28a7a8680d5b5e9caa7190b75b673bd",
+        "pdf": "sha256:d14ec54cdd5641ce13739316f2ec5b3e92d11039aa1b43bab9b2a3b822bb4a3b",
+        "preflight": "sha256:cae3fa7f003f823bf01076adb02ec63d068ab054e2913ad89a345dff32c9434b",
+        "receipt": "sha256:4953e4b278863cf7504ede460708f7722e9dc171b2c9945d0fa4a4f5eda05d6b"
+      },
+      "raw_stdout_archived": false,
+      "receipt_payload_verbatim": "{\n  \"compile_succeeded\": true,\n  \"evidence_sha256\": {\n    \"fls\": \"sha256:cb1269f9cb66aa9c70d98456cc67bd15fc025ac514440e6bc8b3537039e62475\",\n    \"log\": \"sha256:9ff95d419d39ca70639e1b1d886ecbdfa5ff3395667ce6f7c9e609889a6fc850\",\n    \"master\": \"sha256:13d78c6a6eb8be46ea614721f8000ab1a28a7a8680d5b5e9caa7190b75b673bd\",\n    \"pdf\": \"sha256:d14ec54cdd5641ce13739316f2ec5b3e92d11039aa1b43bab9b2a3b822bb4a3b\",\n    \"preflight\": \"sha256:cae3fa7f003f823bf01076adb02ec63d068ab054e2913ad89a345dff32c9434b\"\n  },\n  \"fls_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.fls\",\n  \"gates\": {\n    \"compile\": {\n      \"passed\": true\n    },\n    \"preflight\": {\n      \"passed\": true\n    }\n  },\n  \"generated_dependencies\": [],\n  \"log_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.log\",\n  \"manual\": \"TCOMPL\",\n  \"master_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.tex\",\n  \"pdf_path\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.pdf\",\n  \"preflight_report\": \"Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.preflight.json\",\n  \"preflight_succeeded\": true,\n  \"reproducibility\": {\n    \"config_path\": \"Mathematiques/manuel-maths/config/reproducible-build.json\",\n    \"force_source_date\": \"1\",\n    \"locale\": \"C.UTF-8\",\n    \"pythonhashseed\": \"0\",\n    \"source_commit\": \"f9ad08b1f91395f7631400475f90f1119269c630\",\n    \"source_date_epoch\": 1785962466,\n    \"timezone\": \"UTC\"\n  },\n  \"run_id\": \"3dfd78ae0f87ed3e4dc5764211744972\",\n  \"tool_versions\": {\n    \"lualatex\": \"This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\",\n    \"pdffonts\": \"pdffonts version 24.02.0\",\n    \"pdfinfo\": \"pdfinfo version 24.02.0\",\n    \"python\": \"Python 3.12.3\"\n  },\n  \"variant\": \"professeur\"\n}\n",
+      "record_id": "fresh_b_TCOMPL_professeur",
+      "recorder_rc": 0,
+      "run_id": "3dfd78ae0f87ed3e4dc5764211744972",
+      "side": "Fresh B",
+      "source_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+      "target": "TCOMPL_professeur",
+      "validator_note": "the common build_manifest recorder validates the receipt before atomically writing the manifest",
+      "validator_rc": 0
+    },
+    {
+      "clone_after_single_run_observation": {
+        "clone_reused": false,
+        "git_status": [
+          " M audit/BUILD_MANIFEST.json"
+        ],
+        "other_dirty_paths": []
+      },
+      "clone_initial_observation": {
+        "alternates": false,
+        "branch_attached": true,
+        "clean": true,
+        "shared_git_object_inodes": 0,
+        "shared_worktree_inodes": 0
+      },
+      "clone_root": "/tmp/nexus-a6-final-b-obs-1nsi-eleve.2f08RJ/repo",
+      "cwd": "/tmp/nexus-a6-final-b-obs-1nsi-eleve.2f08RJ/repo",
+      "cwd_role": "repository_root",
+      "environment": {
+        "FORCE_SOURCE_DATE": "1",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "PYTHONHASHSEED": "0",
+        "SOURCE_DATE_EPOCH": "1785962466",
+        "TZ": "UTC"
+      },
+      "exit_code": 0,
+      "extracted_fls_master_input_lines": [
+        "INPUT /tmp/nexus-a6-final-b-obs-1nsi-eleve.2f08RJ/repo/NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.tex"
+      ],
+      "extracted_log_marker_lines": [
+        "NEXUS_BUILD_RUN:7ce247935638ed13e0a427893a2eeaa3"
+      ],
+      "literal_command": "python NSI/scripts/assemble_manuel.py --book 1NSI --variant eleve --record-observed",
+      "manifest_summary": {
+        "build_state_digest": "sha256:129ba4b817264a83e213da9d6661ea2ca3c19e85d26f22a45b9aea0414820d06",
+        "git_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+        "included_object_count": 487,
+        "included_objects_canonical_digest": "sha256:fcbb17852a633efd34282dfc62d1cf1ae3dd0c8359912ba96d54b44e78cee956",
+        "included_objects_digest_scheme": "sha256(json.dumps(included_objects, ensure_ascii=False, separators=(',', ':')).encode('utf-8')); list order preserved",
+        "manual": "1NSI",
+        "variant": "eleve"
+      },
+      "paths": {
+        "fls": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.fls",
+        "log": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.log",
+        "manifest": "audit/BUILD_MANIFEST.json",
+        "master": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.tex",
+        "pdf": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf",
+        "preflight": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.preflight.json",
+        "receipt": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.receipt.json"
+      },
+      "preflight_payload_verbatim": "{\n  \"checks\": {\n    \"pdffonts\": {\n      \"passed\": true\n    },\n    \"pdfinfo\": {\n      \"passed\": true\n    },\n    \"verify_pdf\": {\n      \"passed\": true\n    }\n  },\n  \"page_count\": 235,\n  \"passed\": true,\n  \"pdf_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf\",\n  \"pdf_sha256\": \"sha256:7396cc0051fe488d3dad1f00537d919bbdac13eb839770784acace3edea24d39\",\n  \"reproducibility\": {\n    \"config_path\": \"Mathematiques/manuel-maths/config/reproducible-build.json\",\n    \"force_source_date\": \"1\",\n    \"locale\": \"C.UTF-8\",\n    \"pythonhashseed\": \"0\",\n    \"source_commit\": \"f9ad08b1f91395f7631400475f90f1119269c630\",\n    \"source_date_epoch\": 1785962466,\n    \"timezone\": \"UTC\"\n  },\n  \"run_id\": \"7ce247935638ed13e0a427893a2eeaa3\",\n  \"tool_versions\": {\n    \"lualatex\": \"This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\",\n    \"pdffonts\": \"pdffonts version 24.02.0\",\n    \"pdfinfo\": \"pdfinfo version 24.02.0\",\n    \"python\": \"Python 3.12.3\"\n  }\n}\n",
+      "raw_sha256": {
+        "fls": "sha256:67785bef64e3690a688149f9895b39b03dcd81a0a59f8907b0fd7f32c1a03f06",
+        "log": "sha256:c48785e17f3851c8b4d0a71ed748b1324e5173ddcdcc70c8a2b9ff2d640428c2",
+        "manifest": "sha256:80f819692285b04a3af9e52f8f07bcca70e91f7d1cf09000fa29c99cb2d7cac9",
+        "master": "sha256:06bb02bab9799b14c09264e68f895a931ed0c0c088349fb73453ef5eaa395e9a",
+        "pdf": "sha256:7396cc0051fe488d3dad1f00537d919bbdac13eb839770784acace3edea24d39",
+        "preflight": "sha256:5ffee1e0a5da9334d31a82ec200edf2543d43a6fcb21242862f1d12d8bf57ae4",
+        "receipt": "sha256:8a25f694e564125f99922aaafc786c46675a267e658fe688ff5c6f60b9d3b44e"
+      },
+      "raw_stdout_archived": false,
+      "receipt_payload_verbatim": "{\n  \"compile_succeeded\": true,\n  \"evidence_sha256\": {\n    \"fls\": \"sha256:67785bef64e3690a688149f9895b39b03dcd81a0a59f8907b0fd7f32c1a03f06\",\n    \"log\": \"sha256:c48785e17f3851c8b4d0a71ed748b1324e5173ddcdcc70c8a2b9ff2d640428c2\",\n    \"master\": \"sha256:06bb02bab9799b14c09264e68f895a931ed0c0c088349fb73453ef5eaa395e9a\",\n    \"pdf\": \"sha256:7396cc0051fe488d3dad1f00537d919bbdac13eb839770784acace3edea24d39\",\n    \"preflight\": \"sha256:5ffee1e0a5da9334d31a82ec200edf2543d43a6fcb21242862f1d12d8bf57ae4\"\n  },\n  \"fls_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.fls\",\n  \"gates\": {\n    \"compile\": {\n      \"passed\": true\n    },\n    \"preflight\": {\n      \"passed\": true\n    },\n    \"student_separation\": {\n      \"passed\": true\n    }\n  },\n  \"generated_dependencies\": [],\n  \"log_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.log\",\n  \"manual\": \"1NSI\",\n  \"master_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.tex\",\n  \"pdf_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf\",\n  \"preflight_report\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.preflight.json\",\n  \"preflight_succeeded\": true,\n  \"reproducibility\": {\n    \"config_path\": \"Mathematiques/manuel-maths/config/reproducible-build.json\",\n    \"force_source_date\": \"1\",\n    \"locale\": \"C.UTF-8\",\n    \"pythonhashseed\": \"0\",\n    \"source_commit\": \"f9ad08b1f91395f7631400475f90f1119269c630\",\n    \"source_date_epoch\": 1785962466,\n    \"timezone\": \"UTC\"\n  },\n  \"run_id\": \"7ce247935638ed13e0a427893a2eeaa3\",\n  \"tool_versions\": {\n    \"lualatex\": \"This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\",\n    \"pdffonts\": \"pdffonts version 24.02.0\",\n    \"pdfinfo\": \"pdfinfo version 24.02.0\",\n    \"python\": \"Python 3.12.3\"\n  },\n  \"variant\": \"eleve\"\n}\n",
+      "record_id": "fresh_b_1NSI_eleve",
+      "recorder_rc": 0,
+      "run_id": "7ce247935638ed13e0a427893a2eeaa3",
+      "side": "Fresh B",
+      "source_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+      "target": "1NSI_eleve",
+      "validator_note": "the common build_manifest recorder validates the receipt before atomically writing the manifest",
+      "validator_rc": 0
+    },
+    {
+      "clone_after_single_run_observation": {
+        "clone_reused": false,
+        "git_status": [
+          " M audit/BUILD_MANIFEST.json"
+        ],
+        "other_dirty_paths": []
+      },
+      "clone_initial_observation": {
+        "alternates": false,
+        "branch_attached": true,
+        "clean": true,
+        "shared_git_object_inodes": 0,
+        "shared_worktree_inodes": 0
+      },
+      "clone_root": "/tmp/nexus-a6-final-b-obs-1nsi-prof.GvwzOt/repo",
+      "cwd": "/tmp/nexus-a6-final-b-obs-1nsi-prof.GvwzOt/repo",
+      "cwd_role": "repository_root",
+      "environment": {
+        "FORCE_SOURCE_DATE": "1",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "PYTHONHASHSEED": "0",
+        "SOURCE_DATE_EPOCH": "1785962466",
+        "TZ": "UTC"
+      },
+      "exit_code": 0,
+      "extracted_fls_master_input_lines": [
+        "INPUT /tmp/nexus-a6-final-b-obs-1nsi-prof.GvwzOt/repo/NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.tex"
+      ],
+      "extracted_log_marker_lines": [
+        "NEXUS_BUILD_RUN:a867bd04b8b927c69601d985bf7fbe30"
+      ],
+      "literal_command": "python NSI/scripts/assemble_manuel.py --book 1NSI --variant professeur --record-observed",
+      "manifest_summary": {
+        "build_state_digest": "sha256:7a8800c6e06dd4f6fdfd2479239b6fb28c38c4e104138d385b42b25fa2eda475",
+        "git_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+        "included_object_count": 942,
+        "included_objects_canonical_digest": "sha256:fbb073883ed5c438c5c32b30d2f2760a254010076f6296a2a44fd99247da1ac5",
+        "included_objects_digest_scheme": "sha256(json.dumps(included_objects, ensure_ascii=False, separators=(',', ':')).encode('utf-8')); list order preserved",
+        "manual": "1NSI",
+        "variant": "professeur"
+      },
+      "paths": {
+        "fls": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.fls",
+        "log": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.log",
+        "manifest": "audit/BUILD_MANIFEST.json",
+        "master": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.tex",
+        "pdf": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.pdf",
+        "preflight": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.preflight.json",
+        "receipt": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.receipt.json"
+      },
+      "preflight_payload_verbatim": "{\n  \"checks\": {\n    \"pdffonts\": {\n      \"passed\": true\n    },\n    \"pdfinfo\": {\n      \"passed\": true\n    },\n    \"verify_pdf\": {\n      \"passed\": true\n    }\n  },\n  \"page_count\": 378,\n  \"passed\": true,\n  \"pdf_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.pdf\",\n  \"pdf_sha256\": \"sha256:d91512273ee8753e3590bc236267ddc12e4b1310610f4f5bdb8ffacc9ac9bc31\",\n  \"reproducibility\": {\n    \"config_path\": \"Mathematiques/manuel-maths/config/reproducible-build.json\",\n    \"force_source_date\": \"1\",\n    \"locale\": \"C.UTF-8\",\n    \"pythonhashseed\": \"0\",\n    \"source_commit\": \"f9ad08b1f91395f7631400475f90f1119269c630\",\n    \"source_date_epoch\": 1785962466,\n    \"timezone\": \"UTC\"\n  },\n  \"run_id\": \"a867bd04b8b927c69601d985bf7fbe30\",\n  \"tool_versions\": {\n    \"lualatex\": \"This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\",\n    \"pdffonts\": \"pdffonts version 24.02.0\",\n    \"pdfinfo\": \"pdfinfo version 24.02.0\",\n    \"python\": \"Python 3.12.3\"\n  }\n}\n",
+      "raw_sha256": {
+        "fls": "sha256:eb9cda47b715f1299c20c80be851f549111841e231db33151347da0e458dade2",
+        "log": "sha256:4c19890863786b8aa13e51291b2256ead2cd0cdc8312516b9fb1184f49c25672",
+        "manifest": "sha256:dc69895866c5df5b97b0aea48000bd988f910b726505dc59054b8be680efb386",
+        "master": "sha256:153c42f0690768aaf2e2f73317666b061bc7f795ac68a7ed651a6eaa53b2de4d",
+        "pdf": "sha256:d91512273ee8753e3590bc236267ddc12e4b1310610f4f5bdb8ffacc9ac9bc31",
+        "preflight": "sha256:93b20d91fb964fe935ecb266ff9204600fef836b1535e7efa568af1213a46db3",
+        "receipt": "sha256:fe33c2ee24045ca7fe2554a2d87a3e3723cff0dccb70ced3d8e805de879c9f0d"
+      },
+      "raw_stdout_archived": false,
+      "receipt_payload_verbatim": "{\n  \"compile_succeeded\": true,\n  \"evidence_sha256\": {\n    \"fls\": \"sha256:eb9cda47b715f1299c20c80be851f549111841e231db33151347da0e458dade2\",\n    \"log\": \"sha256:4c19890863786b8aa13e51291b2256ead2cd0cdc8312516b9fb1184f49c25672\",\n    \"master\": \"sha256:153c42f0690768aaf2e2f73317666b061bc7f795ac68a7ed651a6eaa53b2de4d\",\n    \"pdf\": \"sha256:d91512273ee8753e3590bc236267ddc12e4b1310610f4f5bdb8ffacc9ac9bc31\",\n    \"preflight\": \"sha256:93b20d91fb964fe935ecb266ff9204600fef836b1535e7efa568af1213a46db3\"\n  },\n  \"fls_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.fls\",\n  \"gates\": {\n    \"compile\": {\n      \"passed\": true\n    },\n    \"preflight\": {\n      \"passed\": true\n    }\n  },\n  \"generated_dependencies\": [],\n  \"log_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.log\",\n  \"manual\": \"1NSI\",\n  \"master_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.tex\",\n  \"pdf_path\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.pdf\",\n  \"preflight_report\": \"NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.preflight.json\",\n  \"preflight_succeeded\": true,\n  \"reproducibility\": {\n    \"config_path\": \"Mathematiques/manuel-maths/config/reproducible-build.json\",\n    \"force_source_date\": \"1\",\n    \"locale\": \"C.UTF-8\",\n    \"pythonhashseed\": \"0\",\n    \"source_commit\": \"f9ad08b1f91395f7631400475f90f1119269c630\",\n    \"source_date_epoch\": 1785962466,\n    \"timezone\": \"UTC\"\n  },\n  \"run_id\": \"a867bd04b8b927c69601d985bf7fbe30\",\n  \"tool_versions\": {\n    \"lualatex\": \"This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\",\n    \"pdffonts\": \"pdffonts version 24.02.0\",\n    \"pdfinfo\": \"pdfinfo version 24.02.0\",\n    \"python\": \"Python 3.12.3\"\n  },\n  \"variant\": \"professeur\"\n}\n",
+      "record_id": "fresh_b_1NSI_professeur",
+      "recorder_rc": 0,
+      "run_id": "a867bd04b8b927c69601d985bf7fbe30",
+      "side": "Fresh B",
+      "source_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+      "target": "1NSI_professeur",
+      "validator_note": "the common build_manifest recorder validates the receipt before atomically writing the manifest",
+      "validator_rc": 0
+    }
+  ],
+  "release_strict": {
+    "exit_code": 7,
+    "reason_count": 65,
+    "reason_digest": "sha256:3a7f4a78458be6f57b92581e6ca742a208b64867131aba60dae34b927cedb2ba",
+    "reason_digest_scheme": "sha256(json.dumps(reasons, ensure_ascii=False, separators=(',', ':')).encode('utf-8'))",
+    "reasons": [
+      "1NSI:anomalie:blocking_statuses:anomalies.blocking_statuses:342",
+      "1NSI:build_observé_absent:evaluations",
+      "1NSI:build_observé_absent:livret_methodes",
+      "1NSI:build_observé_absent:manuel_eleve",
+      "1NSI:build_observé_absent:manuel_professeur",
+      "1NSI:build_observé_absent:projets",
+      "1NSI:build_observé_absent:remediations",
+      "1NSI:build_observé_absent:version_amenagee",
+      "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.evaluations:declared",
+      "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.livret_methodes:declared",
+      "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.projets:declared",
+      "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.remediations:declared",
+      "1NSI:livrable_non_compile:deliverable_matrix.1NSI.variants.version_amenagee:declared",
+      "1NSI:statuts_non_approuves:manuals.1NSI.statuses:objets=332; contrats=10",
+      "1SPE:anomalie:blocking_statuses:anomalies.blocking_statuses:1414",
+      "1SPE:anomalie:unassembled_objects:anomalies.unassembled_objects:5",
+      "1SPE:assemblage_déclaré_absent:banque_evaluations",
+      "1SPE:assemblage_déclaré_absent:livret_methodes",
+      "1SPE:assemblage_déclaré_absent:livret_remediation",
+      "1SPE:build_observé_absent:manuel_eleve",
+      "1SPE:build_observé_absent:manuel_professeur",
+      "1SPE:livrable_non_compile:deliverable_matrix.1SPE.variants.banque_evaluations:absent",
+      "1SPE:livrable_non_compile:deliverable_matrix.1SPE.variants.livret_methodes:partial",
+      "1SPE:livrable_non_compile:deliverable_matrix.1SPE.variants.livret_remediation:partial",
+      "1SPE:statuts_non_approuves:manuals.1SPE.statuses:objets=1404; contrats=10",
+      "TCOMPL:anomalie:blocking_statuses:anomalies.blocking_statuses:209",
+      "TCOMPL:build_observé_absent:manuel_eleve",
+      "TCOMPL:build_observé_absent:manuel_professeur",
+      "TCOMPL:statuts_non_approuves:manuals.TCOMPL.statuses:objets=200; contrats=9",
+      "TEXPERTES:anomalie:blocking_statuses:anomalies.blocking_statuses:131",
+      "TEXPERTES:build_observé_absent:manuel_eleve",
+      "TEXPERTES:build_observé_absent:manuel_professeur",
+      "TEXPERTES:statuts_non_approuves:manuals.TEXPERTES.statuses:objets=126; contrats=5",
+      "TNSI:anomalie:blocking_statuses:anomalies.blocking_statuses:115",
+      "TNSI:assemblage_déclaré_absent:banque_ecrite",
+      "TNSI:assemblage_déclaré_absent:banque_pratique",
+      "TNSI:build_observé_absent:manuel_eleve",
+      "TNSI:build_observé_absent:manuel_professeur",
+      "TNSI:build_observé_absent:projets",
+      "TNSI:build_observé_absent:remediations",
+      "TNSI:build_observé_absent:version_amenagee",
+      "TNSI:chapitres_manquants:manuals.TNSI.chapters:6/12",
+      "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.banque_ecrite:absent",
+      "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.banque_pratique:absent",
+      "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.projets:declared",
+      "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.remediations:declared",
+      "TNSI:livrable_non_compile:deliverable_matrix.TNSI.variants.version_amenagee:declared",
+      "TNSI:statuts_non_approuves:manuals.TNSI.statuses:objets=109; contrats=6",
+      "TSPE_2026_2027:anomalie:blocking_statuses:anomalies.blocking_statuses:11",
+      "TSPE_2026_2027:anomalie:unassembled_objects:anomalies.unassembled_objects:47",
+      "TSPE_2026_2027:assemblage_déclaré_absent:banque_evaluations",
+      "TSPE_2026_2027:assemblage_déclaré_absent:livret_methodes",
+      "TSPE_2026_2027:assemblage_déclaré_absent:livret_remediation",
+      "TSPE_2026_2027:build_observé_absent:manuel_eleve",
+      "TSPE_2026_2027:build_observé_absent:manuel_professeur",
+      "TSPE_2026_2027:livrable_non_compile:deliverable_matrix.TSPE_2026_2027.variants.banque_evaluations:absent",
+      "TSPE_2026_2027:livrable_non_compile:deliverable_matrix.TSPE_2026_2027.variants.livret_methodes:partial",
+      "TSPE_2026_2027:livrable_non_compile:deliverable_matrix.TSPE_2026_2027.variants.livret_remediation:partial",
+      "TSPE_2026_2027:statuts_non_approuves:manuals.TSPE_2026_2027.statuses:objets=11; contrats=0",
+      "build_receipt_producteurs_non_intégrés",
+      "dimension_non_couverte:mathematics",
+      "dimension_non_couverte:pedagogy",
+      "dimension_non_couverte:print",
+      "dimension_non_couverte:regulation",
+      "dimension_non_couverte:visual"
+    ]
+  },
+  "render_authority_hashes": {
+    "chapter_local_class_wrapper": {
+      "math_nsi_equal": true,
+      "paths": [
+        "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls",
+        "NSI/gabarits/nexus-manuel.cls"
+      ],
+      "sha256": "90ea5ae521bcf028fbc5fc240639636c24eb2e1cfc934e0af9a2c94ae7269e07"
+    },
+    "common_physical_bridge": {
+      "path": "gabarits/common/nexus-pont.sty",
+      "sha256": "2703ad66ef9733c7c45f2176a7c13918a34920f6d4112e70f300d33e8f09d088"
+    },
+    "common_physical_charter": {
+      "path": "gabarits/common/nexus-charte.sty",
+      "sha256": "75132957ede070ffa00839547d12bc4289b4aca5888dfd7e98d78c356e4b9b9a"
+    },
+    "common_physical_class": {
+      "path": "gabarits/common/nexus-manuel.cls",
+      "sha256": "9a85c337ec1723bb33e90f71eb5b7c35c0954c63cc69b8fbdce77ac2bcea8c56"
+    },
+    "manual_local_charter": {
+      "math_nsi_equal": true,
+      "paths": [
+        "Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty",
+        "NSI/gabarits/nexus-charte-v6.sty"
+      ],
+      "sha256": "90391485645cb6fa03ae6ffc3b315d612e714b69dcc3c0efd547a7d8fca38137"
+    },
+    "manual_local_class": {
+      "math_nsi_equal": true,
+      "paths": [
+        "Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls",
+        "NSI/gabarits/nexus-manuel-v5.cls"
+      ],
+      "sha256": "5e1d7fdb258865321ee93a34a41a2de806edd93ad36b256829ed1bce4043a7dc"
+    },
+    "note": "these hashes record A6 render inputs only; they do not claim that the later compatibility-wrapper migration is complete"
+  },
+  "review_binding_summary": {
+    "digest": "sha256:6c41df0deb2007518810bd030df552a4fe38a1265028f099e852cd75cfd7483a",
+    "digest_scheme": "sha256(json.dumps(rows, ensure_ascii=False, separators=(',', ':'), sort_keys=True).encode('utf-8'))",
+    "method_status": "needs_review",
+    "packet_status": "needs_review",
+    "records": 89,
+    "stale_missing_or_mismatched": 0,
+    "unique_packets": 89,
+    "unique_sources": 89
+  },
+  "schema_version": 1,
+  "source_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+  "toolchain": {
+    "fresh_a_and_b_equal": true,
+    "lualatex": "LuaHBTeX 1.17.0 (TeX Live 2023/Debian), development id 7581",
+    "pdffonts": "24.02.0",
+    "pdfinfo": "24.02.0",
+    "python": "3.12.3"
+  },
+  "tracked_pdfs": {
+    "count": 36,
+    "digest": "sha256:bf5dff700b331432d5e82322f1aefe6bf33ac87ea06fd3332247d83ec7a35be1",
+    "fresh_a_pathwise_equal": 36,
+    "fresh_b_pathwise_equal": 36,
+    "scheme": "SHA-256 of UTF-8 concatenation '<pdf_sha256>  <repo-relative-path>\\n' for all tracked PDFs sorted by path"
+  }
+}

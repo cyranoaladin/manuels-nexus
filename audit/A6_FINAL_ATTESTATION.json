@@ -3,8 +3,29 @@
   "schema_version": 1,
   "created": "2026-08-21",
   "start_sha": "761508d923d74fd3d93fc055b3f3b1857fb251e1",
-  "observed_candidate_sha": "3de5e5cff314050ed372e5ace6772dcf31383917",
-  "scope": "PRE-A6 validate-model puis A6 context_mismatches uniquement",
+  "a6_source_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+  "scope": "PRE-A6 validate-model puis lot technique A6 context_mismatches et reproductibilite des producteurs affectes",
+  "attestation_boundary": {
+    "source_sha_is_exact": true,
+    "attestation_files_are_evidence_about_source_sha": true,
+    "attestation_files_are_not_inputs_to_pdf_identity": true,
+    "future_lots_are_not_attested": true
+  },
+  "evidence_bundle": {
+    "path": "audit/A6_FINAL_EVIDENCE_BUNDLE.json",
+    "bundle_schema": "nexus-a6-final-evidence-bundle/v1",
+    "source_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+    "evidence_bundle_sha256": "sha256:601deda6e5ef95d8903bc57c86e1dcc439beb6823496a358db3cc6721311e9d6"
+  },
+  "verdicts": {
+    "a6_scoped_technical_lot": "PASS",
+    "machine_publish_ready": "NO",
+    "human_accepted": "NO",
+    "human_validated": "NO",
+    "final_release_authorized": "NO",
+    "publication": "NO-GO",
+    "d7": "BLOCKED"
+  },
   "pre_a6_validate_model": {
     "before_rc": 6,
     "failure_count": 9,
@@ -21,8 +42,8 @@
     ]
   },
   "correction_semantics": {
-    "a0_field": "% META.type_objet, projeté historiquement comme source_type par le consommateur de liens",
-    "a5_field": "% META.type_objet, classé par l'ontologie canonique",
+    "a0_field": "% META.type_objet, projete historiquement comme source_type par le consommateur de liens",
+    "a5_field": "% META.type_objet, classe par l'ontologie canonique",
     "same_semantic_dimension": true,
     "conflict": false,
     "source_role_is_orthogonal": true,
@@ -43,11 +64,67 @@
     "added_fingerprints": [],
     "reclassified_fingerprints": [],
     "common_fingerprints_changed": 0,
-    "fix": "suppression exacte des trois copies TCOMPL redondantes; jumeaux TSPE inchangés",
+    "fix": "suppression exacte des trois copies TCOMPL redondantes; jumeaux TSPE inchanges",
+    "change_kind": "source removal, not status mutation",
+    "status_values_modified": 0,
+    "status_promotions": 0,
     "forensics": [
       "audit/A6_CONTEXT_MISMATCH_FORENSICS.json",
       "audit/A6_CONTEXT_MISMATCH_FORENSICS.md"
     ]
+  },
+  "resolved_p0_history": [
+    {
+      "id": "A6_CHAPTER_PATH_DEPENDENT_TRAILER_ID",
+      "status": "RESOLVED",
+      "disqualified_candidate_sha": "bcac52aa9d0f5385b470410320b082ae6f3bd321",
+      "symptom": "same chapter and sources under different absolute roots produced different PDF bytes and trailer IDs while page count, extracted text and QDF neutralized for /ID were identical",
+      "root_cause": "the chapter producer did not inject the shared deterministic trailer identity",
+      "fix_commit": "feab46bc3a92989ab4d205075fb02dccdbfa26c6",
+      "regression_evidence": "audit/A6_CHAPTER_PDF_PATH_REPRODUCIBILITY.md"
+    },
+    {
+      "id": "A6_MANUAL_MASTER_SERIALIZED_RUN_ID",
+      "status": "RESOLVED",
+      "symptom": "the per-execution run_id was serialized into canonical manual masters, so equal source trees had different master bytes",
+      "root_cause": "execution identity and canonical source identity were mixed",
+      "initial_fix_commit": "f95631ddd317ee283d1449f0076cc386ffeee02d",
+      "final_validated_commit": "7622a2e0c19055fd3665c474a81cebe107d36b1c",
+      "fix": "canonical masters now contain one constant LuaTeX environment hook; the random run_id is supplied only to the three compile calls"
+    },
+    {
+      "id": "A6_TEX_ACTIVE_NOT_EQUAL_IN_LUA_HOOK",
+      "status": "RESOLVED",
+      "disqualified_candidate_sha": "f95631ddd317ee283d1449f0076cc386ffeee02d",
+      "symptom": "the retained first real cross-clone TCOMPL build failed in LuaTeX with 'then expected' near a TeX-expanded token",
+      "root_cause": "Lua operator ~= was embedded in directlua even though ~ is active in TeX",
+      "affected_source_scope": "the identical TeX-unsafe hook defect was present in both Math and NSI producer sources",
+      "retained_runtime_failure_scope": "TCOMPL",
+      "retained_1nsi_observed_failure_claimed": false,
+      "fix_commit": "7622a2e0c19055fd3665c474a81cebe107d36b1c",
+      "fix": "the hook uses TeX-safe equality predicates without ~=",
+      "first_real_cross_clone_replayed_after_fix": true
+    }
+  ],
+  "deterministic_identity_contract": {
+    "authority": "audit/PDF_TRAILER_ID_PREIMAGE_CONTRACT.md",
+    "schema_version": "nexus-pdf-trailer-id/v1",
+    "producer_schema_version": 1,
+    "run_id_in_trailer_preimage": false,
+    "run_id_in_canonical_master": false,
+    "absolute_path_in_preimage": false,
+    "cwd_in_preimage": false,
+    "wall_clock_in_preimage": false,
+    "git_head_added_to_align_identity": false,
+    "generated_outputs_in_preimage": false,
+    "previous_pdf_or_trailer_in_preimage": false,
+    "attestation_in_preimage": false,
+    "master_run_hook": {
+      "constant_occurrences_required": 1,
+      "concrete_run_token_occurrences_required": 0,
+      "log_marker_occurrences_required": 1,
+      "master_must_be_present_in_fls": true
+    }
   },
   "inventory": {
     "raw_before": 2311,
@@ -59,8 +136,8 @@
     "nonblocking_after": 0,
     "unique_fingerprints_after": 2308,
     "fingerprint_digest_after": "sha256:fb0a1c4571e71b0c87aeae59394d0c0103b2ef946feab15fd0c291821c4444a8",
-    "source_digest_after": "sha256:d86c7bffad3a4db13ca5ad99264253d96af92385a3904c3a35e0dfcedbd85e4a",
-    "model_digest_after": "sha256:095f1843a1ea6804ccc13983cf5a2402d8f87cefdddb6fea437363f56191f270",
+    "source_digest_after": "sha256:1b387135b51d85a8237269b1e087abd73a277874d072ff5b181cd6067d53ce43",
+    "model_digest_after": "sha256:5d0ace406cc08ff570d38538e0936fae7a482cac8cc2ace4712c5b265d55b90d",
     "source_file_count_after": 6282,
     "object_count_before": 5622,
     "object_count_after": 5619,
@@ -76,7 +153,33 @@
       "unattributed_pdfs": 22,
       "unclassified_types": 0
     },
-    "p0": 0,
+    "zero_categories_after": [
+      "assembler_invalid",
+      "broken_assembly_references",
+      "broken_latex_references",
+      "broken_meta_references",
+      "chapters_not_in_manual",
+      "context_mismatches",
+      "contract_invalid",
+      "contract_missing",
+      "duplicate_assembly_objects",
+      "duplicate_capacity_refs",
+      "duplicate_ids",
+      "invalid_capacities",
+      "invalid_meta_references",
+      "invalid_statuses",
+      "latex_cycles",
+      "metadata_invalid",
+      "metadata_missing",
+      "missing_assemblers",
+      "missing_corrections",
+      "unavailable_inspiration_sources",
+      "unclassified_types",
+      "unknown_chapter_prefixes"
+    ],
+    "all_other_structural_categories_zero": true,
+    "inventory_model_p0": 0,
+    "project_wide_scientific_or_editorial_p0_claimed": false,
     "new_unqualified": 0,
     "expected_review_debt": 89
   },
@@ -108,40 +211,164 @@
     "human_policy_sha256": "07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7"
   },
   "tests": {
+    "fresh_a_and_b_equal": true,
     "root": {
-      "passed": 1199,
+      "passed": 1200,
       "failed": 0,
       "skipped": 0,
-      "xfailed": 0
+      "xfailed": 0,
+      "unexpected_xpassed": 0,
+      "warnings": 0
     },
     "math": {
-      "passed": 4695,
+      "passed": 4745,
       "failed": 0,
       "skipped": 0,
-      "xfailed": 0
+      "xfailed": 0,
+      "unexpected_xpassed": 0,
+      "known_dependency_warnings": 4,
+      "warning_classes": [
+        "pandas numexpr version",
+        "pandas bottleneck version",
+        "SwigPyPacked DeprecationWarning",
+        "SwigPyObject DeprecationWarning"
+      ]
     },
     "nsi": {
-      "passed": 2191,
+      "passed": 2199,
       "failed": 0,
       "skipped": 0,
-      "xfailed": 0
+      "xfailed": 0,
+      "unexpected_xpassed": 0,
+      "warnings": 0
     },
-    "a6_targeted": 7,
+    "context_mismatch_targeted": 7,
     "pre_a6_validate_model_targeted": 43,
     "a5_ontology": 9,
-    "a1_a4_regression_nodes": 28
+    "a1_a4_regression_nodes": 28,
+    "protocol_tdd_evidence_during_fix": {
+      "combined_manual_protocol_after_hotfix": {
+        "passed": 483,
+        "failed": 0,
+        "component_counts": {
+          "pdf_identity_authority": 11,
+          "build_manifest": 299,
+          "math_observed": 99,
+          "nsi_observed": 74
+        },
+        "component_relation": "11 + 299 + 99 + 74 = 483; these components decompose the combined run and are not added to the final full-suite totals",
+        "math_observed_detail": "98 prior observed tests plus 1 real-production regression"
+      },
+      "chapter_producer_targeted": {
+        "engine_and_security_passed": 42,
+        "real_observed_production_passed": 1,
+        "pdf_identity_authority_passed": 11,
+        "count_relation": "non-additive evidence sets; PDF authority overlaps the authority component of the 483-test manual protocol run"
+      },
+      "relationship_to_fresh_full_suites": "the final Fresh A/B full suites contain these regression tests; the targeted counts record the red-green work performed during the fix and are not extra tests to add to 1200/4745/2199"
+    },
+    "user_required_reproducibility_cases": {
+      "CASE_1": {
+        "status": "PASS",
+        "expectation": "same chapter and sources under different absolute roots produce byte-identical PDFs"
+      },
+      "CASE_2": {
+        "status": "PASS",
+        "expectation": "same inputs with different run_id values produce identical output"
+      },
+      "CASE_3": {
+        "status": "PASS",
+        "expectation": "same inputs built at different wall-clock times produce identical output"
+      },
+      "CASE_4": {
+        "status": "PASS",
+        "expectation": "changing one relevant source byte changes both trailer identity and PDF SHA-256"
+      },
+      "CASE_5": {
+        "status": "PASS",
+        "expectation": "restoring that source restores the original trailer identity and PDF SHA-256"
+      },
+      "CASE_6": {
+        "status": "PASS",
+        "expectation": "student and teacher variants are each deterministic and have distinct identities when variant or content differs"
+      },
+      "CASE_7": {
+        "status": "PASS",
+        "expectation": "different chapters have different deterministic identities"
+      },
+      "CASE_8": {
+        "status": "PASS",
+        "expectation": "changing producer schema version changes identity"
+      },
+      "CASE_9": {
+        "status": "PASS",
+        "expectation": "replacing a tracked old PDF does not change the source preimage"
+      },
+      "CASE_10": {
+        "status": "PASS",
+        "expectation": "the same source graph in two Git worktrees produces byte-identical output"
+      }
+    }
   },
   "gates": {
-    "check_rc": 0,
+    "fresh_a_and_b_equal": true,
+    "check_require_clean_rc": 0,
     "validate_model_rc": 0,
     "fail_on_new_rc": 0,
     "release_strict_rc": 7,
     "release_reason_count": 65,
     "release_reason_digest": "sha256:3a7f4a78458be6f57b92581e6ca742a208b64867131aba60dae34b927cedb2ba",
-    "new_release_reasons": [],
-    "removed_release_reasons": [
+    "release_reason_digest_scheme": "sha256(json.dumps(reasons, ensure_ascii=False, separators=(',', ':')).encode('utf-8')); reasons are already in canonical sorted order",
+    "new_release_reasons_in_a6": [],
+    "removed_release_reasons_in_a6": [
       "TCOMPL:anomalie:context_mismatches:anomalies.context_mismatches:3"
     ]
+  },
+  "fresh_clone_replay": {
+    "clone_command_contract": "git clone --no-hardlinks",
+    "fresh_a": {
+      "root": "/tmp/nexus-a6-fresh-a.gGBrnV/repo",
+      "head": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+      "branch": "audit/adversarial-reconciliation-2026",
+      "attached": true,
+      "initially_clean": true,
+      "finally_clean": true,
+      "alternates": false,
+      "shared_git_object_inodes": 0,
+      "shared_worktree_inodes": 0,
+      "active_writers": 0,
+      "active_staging_or_backups": 0,
+      "active_locks": 0
+    },
+    "fresh_b": {
+      "root": "/tmp/nexus-a6-final-b.xhnieA/repo",
+      "head": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+      "branch": "audit/adversarial-reconciliation-2026",
+      "attached": true,
+      "initially_clean": true,
+      "finally_clean": true,
+      "alternates": false,
+      "shared_git_object_inodes": 0,
+      "shared_worktree_inodes": 0,
+      "active_writers": 0,
+      "active_staging_or_backups": 0,
+      "active_locks": 0
+    },
+    "a_equals_b": {
+      "tests": true,
+      "inventory_counts": true,
+      "inventory_digests": true,
+      "gates": true,
+      "release_reasons": true,
+      "toolchain": true,
+      "manual_masters": true,
+      "pdf_sha256": true,
+      "page_counts": true,
+      "text_sha256": true,
+      "trailer_ids": true,
+      "canonical_source_graphs": true,
+      "tracked_pdf_paths": true
+    }
   },
   "builds": {
     "environment": {
@@ -152,54 +379,211 @@
       "LANG": "C.UTF-8",
       "PYTHONHASHSEED": "0"
     },
-    "tcompl_chapter_complet": {
-      "runs": 2,
-      "identical": true,
-      "sha256": "a40e6eecbb7fd16698d9fceb8a5a1ce6d146323c08d34833d80fada933106655",
-      "pages": 18,
-      "text_sha256": "413bc17e0fb76d144fa5266eb81d1ce47960146176d273b33df6416b76bdfc3c"
+    "observed_toolchain": {
+      "lualatex": "LuaHBTeX 1.17.0 (TeX Live 2023/Debian), development id 7581",
+      "pdfinfo": "24.02.0",
+      "pdffonts": "24.02.0",
+      "python": "3.12.3",
+      "fresh_a_and_b_equal": true
     },
-    "tcompl_chapter_parcours1": {
-      "runs": 2,
-      "identical": true,
-      "sha256": "97f61cdaea06a1a8cc43885912d1de2014993929fab7b7cd8b8eb73a27812903",
-      "pages": 17,
-      "text_sha256": "6c7b6660dbf72192054501e949284173caf7f79533a834a2491cd3116a664e8b"
+    "final_sha_chapter_replay": {
+      "source_sha": "4693849a0df31aaeb9da168c4f874cb2ba7c6774",
+      "chapter": "TCOMPL-CALCULS-AIRES",
+      "fresh_a_rc": 0,
+      "fresh_b_rc": 0,
+      "fresh_a_and_b_equal": true,
+      "complet": {
+        "master_sha256": "88a700757a6604bb2046d53aa477a1ff5f388343b302d133694e7bdad9688a81",
+        "pdf_sha256": "55efb058b67cd3a2c13dfd90df6333acadf2d78caeb2155a8bbb124f7ef2367b",
+        "pages": 18,
+        "text_sha256": "413bc17e0fb76d144fa5266eb81d1ce47960146176d273b33df6416b76bdfc3c",
+        "trailer_id": "ECB619DF9F61EDA9493EF4428CD8EC8F"
+      },
+      "parcours1": {
+        "master_sha256": "7b347427aa0b3646b15680bf3e4bd0c03b12a8c3fd80860f041d2b9a5e4f82e3",
+        "pdf_sha256": "d6b967bd4af211a3bdd6b0c25638f342f52e64f1bb6939b94ec3f7a093345d4f",
+        "pages": 17,
+        "text_sha256": "6c7b6660dbf72192054501e949284173caf7f79533a834a2491cd3116a664e8b",
+        "trailer_id": "7B9618C13706473D3A7015D1E3CC0D91"
+      },
+      "green_evidence": "Fresh A/B final-SHA replay recorded by this attestation",
+      "red_root_cause_evidence_only": "audit/A6_CHAPTER_PDF_PATH_REPRODUCIBILITY.md"
     },
-    "tcompl_manual_eleve": {
-      "runs": 2,
-      "identical": true,
-      "sha256": "6212a21b273605d416a35337b7f26c10ca78289c02b465d7b13924e32f9abd0f",
-      "pages": 162,
-      "text_sha256": "58f2f61a6da11cf575b4cfec81aaf2155703032cc853245f845a331414c23ced",
-      "trailer_id": "0249C7CF59CA498830C7871B589F7F54"
+    "no_record_fresh_a_and_b": {
+      "TCOMPL_eleve": {
+        "runs_per_fresh_root": 2,
+        "master_sha256": "667ff1dc87980b02dfd7754f126626878427b3d12fa62edbbb7c0f3c0b35e31d",
+        "pdf_sha256": "6212a21b273605d416a35337b7f26c10ca78289c02b465d7b13924e32f9abd0f",
+        "pages": 162,
+        "text_sha256": "58f2f61a6da11cf575b4cfec81aaf2155703032cc853245f845a331414c23ced",
+        "trailer_id": "0249C7CF59CA498830C7871B589F7F54"
+      },
+      "TCOMPL_professeur": {
+        "runs_per_fresh_root": 2,
+        "master_sha256": "13d78c6a6eb8be46ea614721f8000ab1a28a7a8680d5b5e9caa7190b75b673bd",
+        "pdf_sha256": "d14ec54cdd5641ce13739316f2ec5b3e92d11039aa1b43bab9b2a3b822bb4a3b",
+        "pages": 226,
+        "text_sha256": "97334889a2e1282a8934e33de196acc5144045eda084805fa1a5bfc51de7492e",
+        "trailer_id": "E9D13F3293CD20F6A23A80B6A8C13242"
+      },
+      "1NSI_eleve": {
+        "runs_per_fresh_root": 1,
+        "local_no_record_master_sha256": "1352f2558b08d25e3ea32d63f0443d772457d9ad8391785872847bd4ed35574f",
+        "pdf_sha256": "7396cc0051fe488d3dad1f00537d919bbdac13eb839770784acace3edea24d39",
+        "pages": 235,
+        "text_sha256": "f6e656f2e5839b53d9a2fe4c7cd2452a0bff926e8de0f3ce133302a53b0467fd",
+        "trailer_id": "5280F069D2BC34CDDC3E17795762613E"
+      },
+      "1NSI_professeur": {
+        "runs_per_fresh_root": 1,
+        "local_no_record_master_sha256": "1ef4c1264a782ae49138fe660d0aaf59fa0ed6d3f714b7621402e31698d9dc44",
+        "pdf_sha256": "d91512273ee8753e3590bc236267ddc12e4b1310610f4f5bdb8ffacc9ac9bc31",
+        "pages": 378,
+        "text_sha256": "8df655280e1928037a5ef3da1d18b0a36c69f05a1874d21c34397b12ef570ff7",
+        "trailer_id": "9F5B1E31E3F5A55E9922669A83975561"
+      },
+      "a_equals_b": true
     },
-    "tcompl_manual_professeur": {
-      "runs": 2,
-      "identical": true,
-      "sha256": "d14ec54cdd5641ce13739316f2ec5b3e92d11039aa1b43bab9b2a3b822bb4a3b",
-      "pages": 226,
-      "text_sha256": "97334889a2e1282a8934e33de196acc5144045eda084805fa1a5bfc51de7492e",
-      "trailer_id": "E9D13F3293CD20F6A23A80B6A8C13242"
+    "observed_mono_run_clones": {
+      "clone_isolation": "one new --no-hardlinks clone per target and per Fresh side; no clone reused after BUILD_MANIFEST.json became dirty",
+      "common_assertions": {
+        "recorder_rc": 0,
+        "manifest_validator_rc": 0,
+        "receipt_pass": true,
+        "preflight_pass": true,
+        "constant_master_hook_occurrences": 1,
+        "concrete_run_id_occurrences_in_master": 0,
+        "exact_log_marker_occurrences": 1,
+        "master_present_in_fls": true
+      },
+      "all_eight_run_ids_distinct": true,
+      "targets": {
+        "TCOMPL_eleve": {
+          "fresh_a_run_id": "33820612f92748acc72d321cfbe3962b",
+          "fresh_b_run_id": "70f006537d61f375b00bb25e5d1f74dd",
+          "master_sha256": "667ff1dc87980b02dfd7754f126626878427b3d12fa62edbbb7c0f3c0b35e31d",
+          "pdf_sha256": "6212a21b273605d416a35337b7f26c10ca78289c02b465d7b13924e32f9abd0f",
+          "pages": 162
+        },
+        "TCOMPL_professeur": {
+          "fresh_a_run_id": "7ac5409eb1331fe0041a887676e1a8f9",
+          "fresh_b_run_id": "3dfd78ae0f87ed3e4dc5764211744972",
+          "master_sha256": "13d78c6a6eb8be46ea614721f8000ab1a28a7a8680d5b5e9caa7190b75b673bd",
+          "pdf_sha256": "d14ec54cdd5641ce13739316f2ec5b3e92d11039aa1b43bab9b2a3b822bb4a3b",
+          "pages": 226
+        },
+        "1NSI_eleve": {
+          "fresh_a_run_id": "23ceb83dd9269a7581113c1476f9dce2",
+          "fresh_b_run_id": "7ce247935638ed13e0a427893a2eeaa3",
+          "observed_master_sha256": "06bb02bab9799b14c09264e68f895a931ed0c0c088349fb73453ef5eaa395e9a",
+          "pdf_sha256": "7396cc0051fe488d3dad1f00537d919bbdac13eb839770784acace3edea24d39",
+          "pages": 235
+        },
+        "1NSI_professeur": {
+          "fresh_a_run_id": "853c1d35069106254ce016f6e229007f",
+          "fresh_b_run_id": "a867bd04b8b927c69601d985bf7fbe30",
+          "observed_master_sha256": "153c42f0690768aaf2e2f73317666b061bc7f795ac68a7ed651a6eaa53b2de4d",
+          "pdf_sha256": "d91512273ee8753e3590bc236267ddc12e4b1310610f4f5bdb8ffacc9ac9bc31",
+          "pages": 378
+        }
+      }
     },
-    "nsi_smoke_eleve_sha256": "7396cc0051fe488d3dad1f00537d919bbdac13eb839770784acace3edea24d39",
-    "nsi_smoke_professeur_sha256": "d91512273ee8753e3590bc236267ddc12e4b1310610f4f5bdb8ffacc9ac9bc31",
-    "tracked_pdf_count": 36,
-    "tracked_pdf_unchanged": 34,
-    "tracked_pdf_expected_changes": 2,
-    "tracked_pdf_set_digest_before": "6534d82f7f91aaee2b61c86452ca80a5dab03b35d2cd78fc85f679929d61a944",
-    "tracked_pdf_set_digest_after": "bf5dff700b331432d5e82322f1aefe6bf33ac87ea06fd3332247d83ec7a35be1",
-    "visual_oracle_used": false
+    "canonical_source_graphs": {
+      "scheme": "parse FLS INPUT relative to its PWD; keep only regular repo-internal Git-tracked files; union declared producer authorities; serialize the mapping repo-relative POSIX path -> sha256:<hex> with json.dumps(ensure_ascii=False, sort_keys=True, separators=(',', ':')); SHA-256 the UTF-8 bytes",
+      "raw_fls_equality_asserted": false,
+      "raw_fls_note": "raw FLS contains absolute paths and is not compared bytewise",
+      "fresh_a_and_b_equal": true,
+      "targets": {
+        "TCOMPL_eleve": {
+          "entries": 485,
+          "digest": "sha256:4517f081b7c6ab89e42c8c41e7ef3c0c4ca4eef37b121b9135d49aea1b50c119"
+        },
+        "TCOMPL_professeur": {
+          "entries": 803,
+          "digest": "sha256:fcef192324e7121675c2a2ccc25e06c796f5d75c38afbbeb20fc915deafe5181"
+        },
+        "1NSI_eleve": {
+          "entries": 509,
+          "digest": "sha256:50507b859308785502de8f6d31301d2e768072d94cc101db2d3ee79183d7beee",
+          "declared_authority_added_to_runtime_fls": "NSI/gabarits/book_master.tex"
+        },
+        "1NSI_professeur": {
+          "entries": 964,
+          "digest": "sha256:e1ade64b313025a7a0cbf85270f5d6257f5fcc9f95e5c7d0923c6681d5a1108d",
+          "declared_authority_added_to_runtime_fls": "NSI/gabarits/book_master.tex"
+        }
+      }
+    },
+    "render_authority_hashes": {
+      "manual_local_class": {
+        "paths": [
+          "Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls",
+          "NSI/gabarits/nexus-manuel-v5.cls"
+        ],
+        "sha256": "5e1d7fdb258865321ee93a34a41a2de806edd93ad36b256829ed1bce4043a7dc",
+        "math_nsi_equal": true
+      },
+      "chapter_local_class_wrapper": {
+        "paths": [
+          "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls",
+          "NSI/gabarits/nexus-manuel.cls"
+        ],
+        "sha256": "90ea5ae521bcf028fbc5fc240639636c24eb2e1cfc934e0af9a2c94ae7269e07",
+        "math_nsi_equal": true
+      },
+      "manual_local_charter": {
+        "paths": [
+          "Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty",
+          "NSI/gabarits/nexus-charte-v6.sty"
+        ],
+        "sha256": "90391485645cb6fa03ae6ffc3b315d612e714b69dcc3c0efd547a7d8fca38137",
+        "math_nsi_equal": true
+      },
+      "common_physical_class": {
+        "path": "gabarits/common/nexus-manuel.cls",
+        "sha256": "9a85c337ec1723bb33e90f71eb5b7c35c0954c63cc69b8fbdce77ac2bcea8c56"
+      },
+      "common_physical_charter": {
+        "path": "gabarits/common/nexus-charte.sty",
+        "sha256": "75132957ede070ffa00839547d12bc4289b4aca5888dfd7e98d78c356e4b9b9a"
+      },
+      "common_physical_bridge": {
+        "path": "gabarits/common/nexus-pont.sty",
+        "sha256": "2703ad66ef9733c7c45f2176a7c13918a34920f6d4112e70f300d33e8f09d088"
+      },
+      "note": "these hashes record A6 render inputs only; they do not claim that the later compatibility-wrapper migration is complete"
+    },
+    "tracked_pdfs": {
+      "count": 36,
+      "fresh_a_pathwise_unchanged_from_source_sha": 36,
+      "fresh_b_pathwise_unchanged_from_source_sha": 36,
+      "fresh_a_equals_fresh_b": true,
+      "canonical_set_digest": "sha256:bf5dff700b331432d5e82322f1aefe6bf33ac87ea06fd3332247d83ec7a35be1",
+      "canonical_set_digest_scheme": "SHA-256 of UTF-8 concatenation '<pdf_sha256>  <repo-relative-path>\\n' for all tracked PDFs sorted by path",
+      "start_sha_to_final_candidate": {
+        "unchanged": 34,
+        "expected_changes": 2,
+        "start_set_digest": "sha256:6534d82f7f91aaee2b61c86452ca80a5dab03b35d2cd78fc85f679929d61a944",
+        "final_set_digest": "sha256:bf5dff700b331432d5e82322f1aefe6bf33ac87ea06fd3332247d83ec7a35be1",
+        "reason": "the two TCOMPL manuals reflect removal of the three redundant context-mismatch sources"
+      },
+      "fresh_a_ad_hoc_row_digest_used": false,
+      "fresh_a_ad_hoc_row_digest_exclusion_reason": "bf5a8741... used a different JSON-row report preimage and is not the canonical tracked-PDF set digest"
+    },
+    "visual_oracle_used": false,
+    "visual_baseline_updated": false
   },
   "governance": {
     "publication": "NO-GO",
     "d7": "BLOCKED",
     "baseline_update": false,
+    "status_values_modified": 0,
     "status_promotions": 0,
     "new_human_qualifications": 0,
+    "forged_approvals": 0,
     "push": false,
     "merge": false,
-    "next_lot_started": false
-  },
-  "fresh_clone_evidence": "À exécuter après le commit de cette attestation au A6_SOURCE_SHA; aucune preuve future n'est préinscrite."
+    "next_lot": "T1 structural debt",
+    "next_lot_evidenced_in_this_attestation": false
+  }
 }
