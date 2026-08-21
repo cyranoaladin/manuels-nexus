@@ -4330,26 +4330,6 @@ BLOCKING_ANOMALY_CATEGORIES = frozenset(
     }
 )
 
-STRUCTURAL_ANOMALY_CATEGORIES = frozenset(
-    {
-        "blocking_statuses",
-        "missing_corrections",
-        "broken_assembly_references",
-        "chapters_not_in_manual",
-        "missing_assemblers",
-        "unassembled_objects",
-        "broken_latex_references",
-        "broken_meta_references",
-        "orphan_files",
-        "metadata_missing",
-        "metadata_invalid",
-        "invalid_statuses",
-        "contract_invalid",
-        "contract_missing",
-    }
-)
-
-
 class InventoryError(ValueError):
     """Base error for an invalid collection source."""
 
@@ -4744,8 +4724,6 @@ def build_deliverable_matrix(inventory: Mapping[str, Any]) -> dict[str, Any]:
             blocker["code"]
             for blocker in blockers
             if blocker["code"].startswith("anomalie:")
-            and blocker["code"].removeprefix("anomalie:")
-            in STRUCTURAL_ANOMALY_CATEGORIES
             or blocker["code"] == "statuts_non_approuves"
             or blocker["code"] == "chapitres_manquants"
             or blocker["code"] == "objectif_chapitres_non_fige"
@@ -4775,6 +4753,7 @@ def build_deliverable_matrix(inventory: Mapping[str, Any]) -> dict[str, Any]:
             "phase0_structural_eligible": phase0_structural_eligible,
             "publication_eligible": bool(
                 phase0_structural_eligible
+                and not blockers
                 and all(
                     publication_coverage[dimension]
                     for dimension in publication_coverage
@@ -6166,16 +6145,29 @@ def _anomaly_is_blocking(
     *,
     category: str,
     manual_id: str,
-    qualifications: Mapping[str, Mapping[str, Any]],
+    qualifications: Mapping[str, Any],
 ) -> bool:
     if _anomaly_manual(anomaly) != manual_id:
         return False
+    return _qualification_blocks_release(
+        anomaly,
+        category=category,
+        qualifications=qualifications,
+    )
+
+
+def _qualification_blocks_release(
+    anomaly: Mapping[str, Any],
+    *,
+    category: str,
+    qualifications: Mapping[str, Any],
+) -> bool:
     qualification = qualifications.get(
         _anomaly_fingerprint(anomaly, category=category)
     )
-    if qualification is None:
+    if not isinstance(qualification, Mapping):
         return True
-    return bool(qualification.get("blocking", True))
+    return qualification.get("blocking") is not False
 
 
 def _manual_blockers(
@@ -6222,7 +6214,7 @@ def _manual_blockers(
                 "source": f"manuals.{manual_id}.statuses",
             }
         )
-    for category in sorted(BLOCKING_ANOMALY_CATEGORIES):
+    for category in sorted(inventory["anomalies"]):
         affected = [
             anomaly
             for anomaly in inventory["anomalies"].get(category, [])
@@ -6230,6 +6222,35 @@ def _manual_blockers(
                 anomaly,
                 category=category,
                 manual_id=manual_id,
+                qualifications=qualifications,
+            )
+        ]
+        if affected:
+            blockers.append(
+                {
+                    "code": f"anomalie:{category}",
+                    "detail": str(len(affected)),
+                    "source": f"anomalies.{category}",
+                }
+            )
+    return blockers
+
+
+def _collection_blockers(
+    inventory: Mapping[str, Any],
+) -> list[dict[str, str]]:
+    qualifications = inventory.get("anomaly_qualifications", {})
+    if not isinstance(qualifications, Mapping):
+        raise InventoryError("vue de qualification absente ou invalide")
+    blockers: list[dict[str, str]] = []
+    for category in sorted(inventory["anomalies"]):
+        affected = [
+            anomaly
+            for anomaly in inventory["anomalies"].get(category, [])
+            if _anomaly_manual(anomaly) is None
+            and _qualification_blocks_release(
+                anomaly,
+                category=category,
                 qualifications=qualifications,
             )
         ]
@@ -6418,7 +6439,7 @@ def _chapter_publication_eligible(
             or _chapter_context(str(anomaly.get("source", "")))
             == (manual_id, chapter_id)
         )
-        for category in BLOCKING_ANOMALY_CATEGORIES
+        for category in sorted(inventory["anomalies"])
         for anomaly in inventory["anomalies"].get(category, [])
     )
 
@@ -11182,6 +11203,7 @@ def _safe_materialize_baseline_qualifications(
 def _release_strict_gate(inventory: Mapping[str, Any]) -> dict[str, Any]:
     reasons: list[str] = []
     matrix = inventory["deliverable_matrix"]["manuals"]
+    collection_blockers = _collection_blockers(inventory)
     observed_coverage = inventory.get("observed_build_coverage", {})
     observed_integration = inventory.get("observed_build_integration")
     integration_ready = (
@@ -11190,6 +11212,11 @@ def _release_strict_gate(inventory: Mapping[str, Any]) -> dict[str, Any]:
     )
     if not integration_ready:
         reasons.append("build_receipt_producteurs_non_intégrés")
+    for blocker in collection_blockers:
+        reasons.append(
+            f"COLLECTION:{blocker['code']}:"
+            f"{blocker['source']}:{blocker['detail']}"
+        )
     for manual_id, manual in sorted(matrix.items()):
         for blocker in manual["blockers"]:
             reasons.append(
@@ -11222,7 +11249,10 @@ def _release_strict_gate(inventory: Mapping[str, Any]) -> dict[str, Any]:
     dimensions = dict(GATE_DIMENSION_TEMPLATE)
     dimensions["structure"] = (
         "passed"
-        if all(manual["phase0_structural_eligible"] for manual in matrix.values())
+        if not collection_blockers
+        and all(
+            manual["phase0_structural_eligible"] for manual in matrix.values()
+        )
         else "failed"
     )
     dimensions["execution"] = (

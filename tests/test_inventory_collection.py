@@ -13795,6 +13795,499 @@ def test_deliverable_matrix_blocks_needs_review_and_checks_model_coherence(
     ]
 
 
+def _release_strict_collection_contract_inventory():
+    variants = {
+        "manuel_eleve": {},
+        "manuel_professeur": {},
+    }
+    chapter = {
+        "compiled_artifacts": [],
+        "contract_status": "approved",
+        "contract_status_valid": True,
+        "counts": {},
+        "objects": [{"publishable": True}],
+    }
+    manual = {
+        "chapters": {"1SPE-TEST": chapter},
+        "compiled_artifacts": [
+            {
+                "path": "build/1spe-eleve.pdf",
+                "scope": "manual",
+                "variant": "eleve",
+            },
+            {
+                "path": "build/1spe-professeur.pdf",
+                "scope": "manual",
+                "variant": "professeur",
+            },
+        ],
+        "declared_variants": {"chapter": [], "manual": []},
+        "statuses": {"approved": 1},
+        "totals": {},
+    }
+    return {
+        "anomalies": {},
+        "anomaly_qualifications": {},
+        "deliverable_matrix": {
+            "manuals": {
+                "1SPE": {
+                    "blockers": [],
+                    "phase0_structural_eligible": True,
+                    "publication_eligible": True,
+                    "variants": variants,
+                }
+            }
+        },
+        "manuals": {"1SPE": manual},
+        "observed_build_coverage": {
+            "1SPE": {
+                "observed_build_ready": True,
+                "variants": {
+                    variant: {
+                        "declared_variants": [variant],
+                        "observed_variants": [variant],
+                    }
+                    for variant in variants
+                },
+            }
+        },
+        "observed_build_integration": {"status": "integrated"},
+    }
+
+
+def _release_strict_collection_contract_add_anomaly(
+    inventory_module,
+    inventory,
+    *,
+    category,
+    anomaly,
+    blocking=True,
+):
+    inventory["anomalies"].setdefault(category, []).append(anomaly)
+    fingerprint = inventory_module._anomaly_fingerprint(
+        anomaly,
+        category=category,
+    )
+    inventory["anomaly_qualifications"][fingerprint] = {
+        "blocking": blocking,
+        "fingerprint": fingerprint,
+    }
+    return fingerprint
+
+
+def _release_strict_collection_contract_reason(category, count):
+    return f"COLLECTION:anomalie:{category}:anomalies.{category}:{count}"
+
+
+def _release_strict_collection_contract_manual_blockers(
+    inventory_module,
+    inventory,
+):
+    specification = {
+        "directive": "fixture",
+        "target_chapters": 1,
+    }
+    blockers = inventory_module._manual_blockers(
+        inventory,
+        "1SPE",
+        specification,
+    )
+    inventory["deliverable_matrix"]["manuals"]["1SPE"]["blockers"] = blockers
+    return blockers
+
+
+def test_release_strict_collection_contract_projects_global_orphan(
+    inventory_module,
+) -> None:
+    inventory = _release_strict_collection_contract_inventory()
+    _release_strict_collection_contract_add_anomaly(
+        inventory_module,
+        inventory,
+        category="orphan_files",
+        anomaly={"path": "archives/orphelin.tex"},
+    )
+
+    gate = inventory_module._release_strict_gate(inventory)
+
+    assert _release_strict_collection_contract_reason("orphan_files", 1) in gate[
+        "reasons"
+    ]
+    assert gate["dimensions"]["structure"] == "failed"
+
+
+def test_release_strict_collection_contract_does_not_infer_manual_from_basename(
+    inventory_module,
+) -> None:
+    inventory = _release_strict_collection_contract_inventory()
+    anomaly = {
+        "path": "MANUELS_PDF_PUBLICATION/MANUEL_1SPE_ELEVE.pdf",
+    }
+    _release_strict_collection_contract_add_anomaly(
+        inventory_module,
+        inventory,
+        category="unattributed_pdfs",
+        anomaly=anomaly,
+    )
+
+    gate = inventory_module._release_strict_gate(inventory)
+    collection_reason = _release_strict_collection_contract_reason(
+        "unattributed_pdfs",
+        1,
+    )
+
+    assert (
+        inventory_module._anomaly_manual(anomaly),
+        collection_reason in gate["reasons"],
+        any(
+            reason.startswith("1SPE:anomalie:unattributed_pdfs:")
+            for reason in gate["reasons"]
+        ),
+    ) == (None, True, False)
+
+
+@pytest.mark.parametrize(
+    "category",
+    [
+        pytest.param("unattributed_pdfs", id="outside-old-allowlist"),
+        pytest.param("future_release_debt", id="future-category"),
+    ],
+)
+def test_release_strict_collection_contract_uses_qualifications_not_old_allowlist(
+    inventory_module,
+    category: str,
+) -> None:
+    inventory = _release_strict_collection_contract_inventory()
+    _release_strict_collection_contract_add_anomaly(
+        inventory_module,
+        inventory,
+        category=category,
+        anomaly={"path": f"collection/{category}.dat"},
+    )
+
+    gate = inventory_module._release_strict_gate(inventory)
+
+    assert _release_strict_collection_contract_reason(category, 1) in gate["reasons"]
+
+
+@pytest.mark.parametrize(
+    "qualification_case",
+    [
+        pytest.param("missing", id="missing"),
+        pytest.param("non_mapping", id="non-mapping"),
+        pytest.param("none_record", id="none-record"),
+        pytest.param("empty_record", id="empty-record"),
+    ],
+)
+def test_release_strict_collection_contract_qualification_record_fails_closed(
+    inventory_module,
+    qualification_case: str,
+) -> None:
+    category = "duplicate_ids"
+    anomaly = {"id": "1SPE-DUPLICATE", "manual": "1SPE"}
+    fingerprint = inventory_module._anomaly_fingerprint(anomaly, category=category)
+    if qualification_case == "missing":
+        qualifications = {}
+    elif qualification_case == "non_mapping":
+        qualifications = {fingerprint: []}
+    elif qualification_case == "none_record":
+        qualifications = {fingerprint: None}
+    else:
+        qualifications = {fingerprint: {}}
+
+    try:
+        observed = inventory_module._anomaly_is_blocking(
+            anomaly,
+            category=category,
+            manual_id="1SPE",
+            qualifications=qualifications,
+        )
+    except (AttributeError, TypeError) as exc:
+        pytest.fail(f"une qualification {qualification_case} doit bloquer: {exc}")
+
+    assert observed is True
+
+
+@pytest.mark.parametrize(
+    "blocking_value",
+    [
+        pytest.param(0, id="integer-zero"),
+        pytest.param("", id="empty-string"),
+        pytest.param("false", id="false-string"),
+        pytest.param([], id="empty-list"),
+        pytest.param({}, id="empty-mapping"),
+        pytest.param(None, id="null"),
+    ],
+)
+def test_release_strict_collection_contract_deceptive_blocking_value_fails_closed(
+    inventory_module,
+    blocking_value,
+) -> None:
+    category = "duplicate_ids"
+    anomaly = {"id": "1SPE-DUPLICATE", "manual": "1SPE"}
+    fingerprint = inventory_module._anomaly_fingerprint(anomaly, category=category)
+
+    assert inventory_module._anomaly_is_blocking(
+        anomaly,
+        category=category,
+        manual_id="1SPE",
+        qualifications={fingerprint: {"blocking": blocking_value}},
+    ) is True
+
+
+def test_release_strict_collection_contract_exact_false_is_the_only_exemption(
+    inventory_module,
+) -> None:
+    category = "duplicate_ids"
+    anomaly = {"id": "1SPE-DUPLICATE", "manual": "1SPE"}
+    fingerprint = inventory_module._anomaly_fingerprint(anomaly, category=category)
+
+    assert inventory_module._anomaly_is_blocking(
+        anomaly,
+        category=category,
+        manual_id="1SPE",
+        qualifications={fingerprint: {"blocking": False}},
+    ) is False
+
+
+def test_release_strict_collection_contract_partitions_manual_and_global_once(
+    inventory_module,
+) -> None:
+    inventory = _release_strict_collection_contract_inventory()
+    for anomaly in (
+        {"manual": "1SPE", "path": "source/manuelle.tex"},
+        {"path": "source/globale.tex"},
+    ):
+        _release_strict_collection_contract_add_anomaly(
+            inventory_module,
+            inventory,
+            category="orphan_files",
+            anomaly=anomaly,
+        )
+    blockers = _release_strict_collection_contract_manual_blockers(
+        inventory_module,
+        inventory,
+    )
+
+    gate = inventory_module._release_strict_gate(inventory)
+    manual_reason = "1SPE:anomalie:orphan_files:anomalies.orphan_files:1"
+    collection_reason = _release_strict_collection_contract_reason(
+        "orphan_files",
+        1,
+    )
+
+    assert [
+        blocker for blocker in blockers if blocker["code"] == "anomalie:orphan_files"
+    ] == [
+        {
+            "code": "anomalie:orphan_files",
+            "detail": "1",
+            "source": "anomalies.orphan_files",
+        }
+    ]
+    assert gate["reasons"].count(manual_reason) == 1
+    assert gate["reasons"].count(collection_reason) == 1
+
+
+def test_release_strict_collection_contract_scope_move_preserves_one_occurrence(
+    inventory_module,
+) -> None:
+    global_inventory = _release_strict_collection_contract_inventory()
+    _release_strict_collection_contract_add_anomaly(
+        inventory_module,
+        global_inventory,
+        category="orphan_files",
+        anomaly={"path": "source/deplacee.tex"},
+    )
+    global_reasons = inventory_module._release_strict_gate(global_inventory)["reasons"]
+
+    manual_inventory = _release_strict_collection_contract_inventory()
+    _release_strict_collection_contract_add_anomaly(
+        inventory_module,
+        manual_inventory,
+        category="orphan_files",
+        anomaly={"manual": "1SPE", "path": "source/deplacee.tex"},
+    )
+    _release_strict_collection_contract_manual_blockers(
+        inventory_module,
+        manual_inventory,
+    )
+    manual_reasons = inventory_module._release_strict_gate(manual_inventory)["reasons"]
+
+    collection_reason = _release_strict_collection_contract_reason(
+        "orphan_files",
+        1,
+    )
+    manual_reason = "1SPE:anomalie:orphan_files:anomalies.orphan_files:1"
+    assert global_reasons.count(collection_reason) == 1
+    assert global_reasons.count(manual_reason) == 0
+    assert manual_reasons.count(collection_reason) == 0
+    assert manual_reasons.count(manual_reason) == 1
+
+
+def test_release_strict_collection_contract_order_is_stable_and_aggregated(
+    inventory_module,
+) -> None:
+    anomalies = [
+        {"path": "source/zeta.tex"},
+        {"path": "source/alpha.tex"},
+    ]
+    rendered = []
+    gates = []
+    for ordered in (anomalies, list(reversed(anomalies))):
+        inventory = _release_strict_collection_contract_inventory()
+        for anomaly in ordered:
+            _release_strict_collection_contract_add_anomaly(
+                inventory_module,
+                inventory,
+                category="orphan_files",
+                anomaly=anomaly,
+            )
+        gate = inventory_module._release_strict_gate(inventory)
+        gates.append(gate)
+        rendered.append(
+            json.dumps(gate, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        )
+
+    reason = _release_strict_collection_contract_reason("orphan_files", 2)
+    assert rendered[0] == rendered[1]
+    assert gates[0]["reasons"].count(reason) == 1
+    assert not any(
+        candidate.endswith(":1") and "anomalie:orphan_files:" in candidate
+        for candidate in gates[0]["reasons"]
+    )
+
+
+def test_release_strict_collection_contract_manual_eligibility_changes_only_for_blocker(
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    inventory = _release_strict_collection_contract_inventory()
+    monkeypatch.setattr(
+        inventory_module,
+        "DELIVERABLE_SPECS",
+        {
+            "1SPE": {
+                "directive": "fixture",
+                "target_chapters": 1,
+                "variants": {
+                    "manuel_eleve": ("eleve",),
+                    "manuel_professeur": ("professeur",),
+                },
+            }
+        },
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "PUBLICATION_GATE_TEMPLATE",
+        {
+            dimension: True
+            for dimension in inventory_module.PUBLICATION_GATE_TEMPLATE
+        },
+    )
+    synthetic_blockers = []
+    monkeypatch.setattr(
+        inventory_module,
+        "_manual_blockers",
+        lambda inventory, manual_id, specification: list(synthetic_blockers),
+    )
+
+    before = inventory_module.build_deliverable_matrix(inventory)["manuals"]["1SPE"]
+    assert before["blockers"] == []
+    assert before["structural_compile_ready"] is True
+    assert all(before["publication_gate_coverage"].values())
+    assert before["publication_eligible"] is True
+
+    synthetic_blockers.append(
+        {
+            "code": "politique_release_synthetique",
+            "detail": "1",
+            "source": "fixture.release_policy",
+        }
+    )
+    after = inventory_module.build_deliverable_matrix(inventory)["manuals"]["1SPE"]
+
+    assert after["blockers"] == [
+        {
+            "code": "politique_release_synthetique",
+            "detail": "1",
+            "source": "fixture.release_policy",
+        }
+    ]
+    assert after["structural_compile_ready"] is True
+    assert after["phase0_structural_eligible"] is True
+    assert all(after["publication_gate_coverage"].values())
+    assert after["publication_eligible"] is False
+
+
+def test_release_strict_collection_contract_future_manual_anomaly_is_structural(
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    inventory = _release_strict_collection_contract_inventory()
+    monkeypatch.setattr(
+        inventory_module,
+        "DELIVERABLE_SPECS",
+        {
+            "1SPE": {
+                "directive": "fixture",
+                "target_chapters": 1,
+                "variants": {
+                    "manuel_eleve": ("eleve",),
+                    "manuel_professeur": ("professeur",),
+                },
+            }
+        },
+    )
+    _release_strict_collection_contract_add_anomaly(
+        inventory_module,
+        inventory,
+        category="future_manual_release_debt",
+        anomaly={"id": "1SPE-FUTURE", "manual": "1SPE"},
+    )
+
+    manual = inventory_module.build_deliverable_matrix(inventory)["manuals"]["1SPE"]
+
+    assert manual["structural_blockers"] == [
+        "anomalie:future_manual_release_debt"
+    ]
+    assert manual["phase0_structural_eligible"] is False
+    assert manual["publication_eligible"] is False
+
+
+def test_release_strict_collection_contract_future_chapter_category_blocks_claim(
+    inventory_module,
+) -> None:
+    inventory = _release_strict_collection_contract_inventory()
+    _release_strict_collection_contract_add_anomaly(
+        inventory_module,
+        inventory,
+        category="future_chapter_release_debt",
+        anomaly={
+            "chapter": "1SPE-TEST",
+            "manual": "1SPE",
+            "path": "Mathematiques/manuel-maths/chapitres/1SPE-TEST/cours/c1.tex",
+        },
+    )
+
+    chapter_eligible = inventory_module._chapter_publication_eligible(
+        inventory,
+        "1SPE",
+        "1SPE-TEST",
+    )
+    claim, evidence, error = inventory_module._calculate_claim(
+        inventory,
+        "chapter:1SPE-TEST",
+        "completude",
+    )
+
+    assert (chapter_eligible, claim, evidence, error) == (
+        False,
+        False,
+        "manuals.1SPE.chapters.1SPE-TEST.publication_eligible",
+        None,
+    )
+
+
 def test_chapter_and_manual_blockers_use_the_same_qualification_view(
     tmp_path: Path,
     inventory_module,

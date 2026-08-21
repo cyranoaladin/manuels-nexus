@@ -2335,6 +2335,8 @@ def test_release_gate_uses_declared_variant_mapping_without_false_pdf_evidence(
         [professor],
     )
     inventory = {
+        "anomalies": {},
+        "anomaly_qualifications": {},
         "deliverable_matrix": {
             "manuals": {
                 "1SPE": {
@@ -2368,6 +2370,8 @@ def test_release_execution_dimension_passes_when_static_and_observed_are_ready(
     inventory_module,
 ) -> None:
     inventory = {
+        "anomalies": {},
+        "anomaly_qualifications": {},
         "deliverable_matrix": {
             "manuals": {
                 "1SPE": {
@@ -2416,6 +2420,8 @@ def test_release_missing_build_integration_proof_fails_closed(
     inventory_module,
 ) -> None:
     inventory = {
+        "anomalies": {},
+        "anomaly_qualifications": {},
         "deliverable_matrix": {"manuals": {}},
         "observed_build_coverage": {},
     }
@@ -2430,6 +2436,8 @@ def test_release_keeps_unintegrated_build_receipt_as_explicit_debt(
     inventory_module,
 ) -> None:
     inventory = {
+        "anomalies": {},
+        "anomaly_qualifications": {},
         "deliverable_matrix": {
             "manuals": {
                 "1SPE": {
