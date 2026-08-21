@@ -1,0 +1,205 @@
+{
+  "artifact_name": "A6_FINAL_ATTESTATION",
+  "schema_version": 1,
+  "created": "2026-08-21",
+  "start_sha": "761508d923d74fd3d93fc055b3f3b1857fb251e1",
+  "observed_candidate_sha": "3de5e5cff314050ed372e5ace6772dcf31383917",
+  "scope": "PRE-A6 validate-model puis A6 context_mismatches uniquement",
+  "pre_a6_validate_model": {
+    "before_rc": 6,
+    "failure_count": 9,
+    "root_cause_counts": {
+      "ID_MIGRATION_FINGERPRINT_DRIFT": 9
+    },
+    "human_decisions_required": 0,
+    "baseline_changed": false,
+    "status_promotions": 0,
+    "after_rc": 0,
+    "forensics": [
+      "audit/PRE_A6_VALIDATE_MODEL_FORENSICS.json",
+      "audit/PRE_A6_VALIDATE_MODEL_FORENSICS.md"
+    ]
+  },
+  "correction_semantics": {
+    "a0_field": "% META.type_objet, projeté historiquement comme source_type par le consommateur de liens",
+    "a5_field": "% META.type_objet, classé par l'ontologie canonique",
+    "same_semantic_dimension": true,
+    "conflict": false,
+    "source_role_is_orthogonal": true,
+    "note": "audit/A5_CORRECTION_TYPE_SEMANTICS.md"
+  },
+  "a6_context": {
+    "before": 3,
+    "after": 0,
+    "classification": {
+      "PATH_CONTEXT_DRIFT": 3
+    },
+    "unknown": 0,
+    "removed_fingerprints": [
+      "412440a833f2a67e",
+      "d4d96a91fdd7f2ca",
+      "dc3c58388e2cfe7c"
+    ],
+    "added_fingerprints": [],
+    "reclassified_fingerprints": [],
+    "common_fingerprints_changed": 0,
+    "fix": "suppression exacte des trois copies TCOMPL redondantes; jumeaux TSPE inchangés",
+    "forensics": [
+      "audit/A6_CONTEXT_MISMATCH_FORENSICS.json",
+      "audit/A6_CONTEXT_MISMATCH_FORENSICS.md"
+    ]
+  },
+  "inventory": {
+    "raw_before": 2311,
+    "raw_after": 2308,
+    "blocking_fingerprints_before": 2311,
+    "blocking_fingerprints_after": 2308,
+    "blocking_statuses_before": 2222,
+    "blocking_statuses_after": 2222,
+    "nonblocking_after": 0,
+    "unique_fingerprints_after": 2308,
+    "fingerprint_digest_after": "sha256:fb0a1c4571e71b0c87aeae59394d0c0103b2ef946feab15fd0c291821c4444a8",
+    "source_digest_after": "sha256:d86c7bffad3a4db13ca5ad99264253d96af92385a3904c3a35e0dfcedbd85e4a",
+    "model_digest_after": "sha256:095f1843a1ea6804ccc13983cf5a2402d8f87cefdddb6fea437363f56191f270",
+    "source_file_count_after": 6282,
+    "object_count_before": 5622,
+    "object_count_after": 5619,
+    "categories_after": {
+      "blocking_statuses": 2222,
+      "broken_latex_references": 0,
+      "broken_meta_references": 0,
+      "context_mismatches": 0,
+      "duplicate_assembly_objects": 0,
+      "latex_cycles": 0,
+      "orphan_files": 12,
+      "unassembled_objects": 52,
+      "unattributed_pdfs": 22,
+      "unclassified_types": 0
+    },
+    "p0": 0,
+    "new_unqualified": 0,
+    "expected_review_debt": 89
+  },
+  "review_debt": {
+    "records": 89,
+    "unique_sources": 89,
+    "unique_packets": 89,
+    "stale_or_mismatched": 0,
+    "binding_digest": "sha256:6c41df0deb2007518810bd030df552a4fe38a1265028f099e852cd75cfd7483a",
+    "binding_digest_scheme": "sha256(json.dumps(rows, ensure_ascii=False, separators=(',', ':'), sort_keys=True).encode('utf-8'))",
+    "binding_rows_order": "fingerprint ascending over dispositions whose decision_ref is A4_METHOD_REVIEW_DEBT_DECISION_REF",
+    "binding_row_fields": [
+      "fingerprint",
+      "source",
+      "source_sha",
+      "record_method_source_sha",
+      "packet",
+      "packet_sha",
+      "record_packet_sha",
+      "packet_source_sha256",
+      "method_status",
+      "packet_status"
+    ]
+  },
+  "authority_hashes": {
+    "reference_baseline_sha256": "3e9225668121a67c2fdea1248ec420ff16bd3910c8557e3a98df8bb7997250e1",
+    "anomaly_dispositions_sha256": "49595a0f28745eee0b8f080a4cbeb2fa7265a798455f2747a93d9d532635cda6",
+    "baseline_policy_sha256": "07d95c5073da77944ab07a3312483fdfda0f43d6f412ee023f3269c770b282d2",
+    "human_policy_sha256": "07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7"
+  },
+  "tests": {
+    "root": {
+      "passed": 1199,
+      "failed": 0,
+      "skipped": 0,
+      "xfailed": 0
+    },
+    "math": {
+      "passed": 4695,
+      "failed": 0,
+      "skipped": 0,
+      "xfailed": 0
+    },
+    "nsi": {
+      "passed": 2191,
+      "failed": 0,
+      "skipped": 0,
+      "xfailed": 0
+    },
+    "a6_targeted": 7,
+    "pre_a6_validate_model_targeted": 43,
+    "a5_ontology": 9,
+    "a1_a4_regression_nodes": 28
+  },
+  "gates": {
+    "check_rc": 0,
+    "validate_model_rc": 0,
+    "fail_on_new_rc": 0,
+    "release_strict_rc": 7,
+    "release_reason_count": 65,
+    "release_reason_digest": "sha256:3a7f4a78458be6f57b92581e6ca742a208b64867131aba60dae34b927cedb2ba",
+    "new_release_reasons": [],
+    "removed_release_reasons": [
+      "TCOMPL:anomalie:context_mismatches:anomalies.context_mismatches:3"
+    ]
+  },
+  "builds": {
+    "environment": {
+      "SOURCE_DATE_EPOCH": "1785962466",
+      "FORCE_SOURCE_DATE": "1",
+      "TZ": "UTC",
+      "LC_ALL": "C.UTF-8",
+      "LANG": "C.UTF-8",
+      "PYTHONHASHSEED": "0"
+    },
+    "tcompl_chapter_complet": {
+      "runs": 2,
+      "identical": true,
+      "sha256": "a40e6eecbb7fd16698d9fceb8a5a1ce6d146323c08d34833d80fada933106655",
+      "pages": 18,
+      "text_sha256": "413bc17e0fb76d144fa5266eb81d1ce47960146176d273b33df6416b76bdfc3c"
+    },
+    "tcompl_chapter_parcours1": {
+      "runs": 2,
+      "identical": true,
+      "sha256": "97f61cdaea06a1a8cc43885912d1de2014993929fab7b7cd8b8eb73a27812903",
+      "pages": 17,
+      "text_sha256": "6c7b6660dbf72192054501e949284173caf7f79533a834a2491cd3116a664e8b"
+    },
+    "tcompl_manual_eleve": {
+      "runs": 2,
+      "identical": true,
+      "sha256": "6212a21b273605d416a35337b7f26c10ca78289c02b465d7b13924e32f9abd0f",
+      "pages": 162,
+      "text_sha256": "58f2f61a6da11cf575b4cfec81aaf2155703032cc853245f845a331414c23ced",
+      "trailer_id": "0249C7CF59CA498830C7871B589F7F54"
+    },
+    "tcompl_manual_professeur": {
+      "runs": 2,
+      "identical": true,
+      "sha256": "d14ec54cdd5641ce13739316f2ec5b3e92d11039aa1b43bab9b2a3b822bb4a3b",
+      "pages": 226,
+      "text_sha256": "97334889a2e1282a8934e33de196acc5144045eda084805fa1a5bfc51de7492e",
+      "trailer_id": "E9D13F3293CD20F6A23A80B6A8C13242"
+    },
+    "nsi_smoke_eleve_sha256": "7396cc0051fe488d3dad1f00537d919bbdac13eb839770784acace3edea24d39",
+    "nsi_smoke_professeur_sha256": "d91512273ee8753e3590bc236267ddc12e4b1310610f4f5bdb8ffacc9ac9bc31",
+    "tracked_pdf_count": 36,
+    "tracked_pdf_unchanged": 34,
+    "tracked_pdf_expected_changes": 2,
+    "tracked_pdf_set_digest_before": "6534d82f7f91aaee2b61c86452ca80a5dab03b35d2cd78fc85f679929d61a944",
+    "tracked_pdf_set_digest_after": "bf5dff700b331432d5e82322f1aefe6bf33ac87ea06fd3332247d83ec7a35be1",
+    "visual_oracle_used": false
+  },
+  "governance": {
+    "publication": "NO-GO",
+    "d7": "BLOCKED",
+    "baseline_update": false,
+    "status_promotions": 0,
+    "new_human_qualifications": 0,
+    "push": false,
+    "merge": false,
+    "next_lot_started": false
+  },
+  "fresh_clone_evidence": "À exécuter après le commit de cette attestation au A6_SOURCE_SHA; aucune preuve future n'est préinscrite."
+}
