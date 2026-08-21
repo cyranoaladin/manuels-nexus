@@ -100,8 +100,9 @@ chemins ni des identités manuels observées.
 
 Compiler avec `-recorder`, jeter le PDF provisoire et parser le `.fls`. Inclure
 toute entrée Git suivie réellement lue dans le dépôt, y compris les dépendances
-transitives de classe/charte/pont. Exclure seulement la toolchain externe et
-les sorties générées confinées au build.
+transitives runtime de la classe. Ajouter séparément au préimage les autorités
+conservatrices charte/pont, sans les charger dans LuaTeX. Exclure seulement la
+toolchain externe prouvée et les sorties exactes du staging courant.
 
 - [ ] **Step 2: Valider et canoniser fail-closed**
 
@@ -118,8 +119,9 @@ graphe, puis injecter une seule ligne après `\documentclass`.
 
 - [ ] **Step 4: Vérifier le graphe final puis GREEN et mutations**
 
-Recompiler avec `-recorder`, reconstruire le graphe et exiger égalité exacte
-des clés et hashes avec la découverte avant d'accepter le PDF.
+Recompiler avec `-recorder`, reconstruire le graphe runtime brut et exiger
+égalité exacte des clés et hashes avec la découverte avant toute union des
+autorités déclarées et avant d'accepter le PDF.
 
 Run:
 

@@ -13,7 +13,8 @@ Dans cet ordre, une entrée par ligne, jointes par `\n` :
 
 1. `nexus-pdf-trailer-id/v1` — schéma de la recette.
 2. `producer_schema_version=<n>` — version de génération du producteur.
-3. `manual=<id>` (Mathématiques) ou `book=<id>` (NSI) — identité de l'ouvrage.
+3. `manual=<id>` (Mathématiques), `manual=chapter:<chapter-id>` (producteur
+   chapitre) ou `book=<id>` (NSI) — identité de la cible.
 4. `variant=<id>` — variante (élève / professeur).
 5. `body=<sha256 du corps du master>` — capture l'**ordre d'assemblage**
    canonique, les titres, la configuration de variante et le niveau.
@@ -28,6 +29,19 @@ Dans cet ordre, une entrée par ligne, jointes par `\n` :
      `gabarits/common/nexus-pont.sty`, ainsi que les wrappers locaux et,
      côté NSI, `gabarits/book_master.tex`.
 
+Pour le producteur chapitre, le graphe n'est pas déduit par motif de nom. Une
+passe LuaLaTeX jetable avec `-recorder` fournit tous les `INPUT` réellement
+lus. Le contrat, le gabarit et les objets collectés sont ajoutés comme entrées
+déclarées du producteur Python. Les quatre autorités de rendu sont exigées par
+leur chemin exact : le wrapper nommé par `\documentclass`, puis
+`gabarits/common/nexus-manuel.cls`, `gabarits/common/nexus-charte.sty` et
+`gabarits/common/nexus-pont.sty`. Le graphe runtime brut exige le wrapper et la
+classe commune réellement lus. La charte et le pont restent des autorités
+conservatrices ajoutées à l'union de préimage ; le producteur chapitre ne les
+charge pas dans LuaTeX, car ce serait une modification visuelle hors du lot.
+Une seconde passe `-recorder` après injection doit retrouver exactement les
+mêmes chemins et SHA-256 **avant** toute union avec ces entrées déclarées.
+
 Mesure de contrôle : TEXPERTES/élève compte **309 entrées de sources**.
 
 ## excluded_outputs
@@ -36,7 +50,12 @@ Aucun artefact produit n'entre dans le préimage. Sont explicitement exclus :
 
 - le PDF que le build va produire, et son SHA256 ;
 - l'ancien `/ID` du PDF suivi ;
-- tout contenu de `build/` et de `MANUELS_PDF_PUBLICATION/` ;
+- les seuls fichiers intermédiaires que le `.fls` déclare dans ses lignes
+  `OUTPUT` sous le staging privé du build courant, ainsi que le master `.tex`
+  exact écrit par le producteur ; un autre fichier lu sous `build/` reste une
+  dépendance interne et doit être suivi par Git, sans exception par suffixe ;
+- les sorties de publication déjà produites et jamais lues par le graphe
+source (`MANUELS_PDF_PUBLICATION/`) ;
 - tout manifeste ou attestation dérivés du PDF (`audit/…`) ;
 - `REPORT_COMMIT_SHA`, `A4_SOURCE_SHA`, `HEAD` courant ;
 - le `run_id` (aléatoire par construction) ;
@@ -46,6 +65,24 @@ Aucun artefact produit n'entre dans le préimage. Sont explicitement exclus :
 `SELF_REFERENCE = NO`, vérifié deux fois : par filtrage du préimage
 (`test_pdf7`) et par l'expérience directe — perturber le PDF suivi puis
 recalculer l'identité donne la **même** valeur (`test_pdf8`).
+
+Chaque build chapitre compile et vérifie exclusivement dans un staging privé
+non symbolique sous `build/<chapter>/`. Le PDF, le master, le log et le `.fls`
+final canoniques, ainsi que les éventuels `.aux`, `.toc` et `.out`, ne sont
+remplacés qu'après préflight réussi, sous verrou. Un optionnel absent du run
+courant est supprimé sous ce même verrou afin qu'aucun stale ne survive. La
+publication utilise `os.replace`, publie le `.fls` avant le PDF et le PDF en
+dernier. Toutes les destinations participent au backup/rollback, y compris
+les suppressions optionnelles. Les backups vivent hors staging et sont tous
+créés puis vérifiés avant la première mutation canonique ; un échec partiel de
+cette phase ne touche aucune destination. Le cleanup du staging fait partie de
+la transaction et son échec restaure l'état canonique précédent. Une fois la
+publication complète et le staging supprimé, le nouvel état est canonique : un
+échec de cleanup du backup conserve cet état, retourne le succès et émet sur
+stderr un avertissement portant le chemin résiduel à traiter. Toute ligne
+`OUTPUT` hors staging est rejetée, sauf les
+transients de toolchain sous les racines prouvées `TEXMFVAR` et
+`TEXMFSYSVAR`.
 
 ## canonical_serialization
 
@@ -68,6 +105,31 @@ Les sources sont identifiées par leur chemin **repo-relatif POSIX**
 digest : deux worktrees différents portant le même arbre logique produisent
 la même identité (`test_pdf9`, qui recopie l'arbre dans un répertoire
 temporaire et compare).
+
+Le producteur chapitre classe cependant chaque chemin absolu observé avant de
+l'exclure du digest. Un chemin interne au dépôt doit être régulier, lisible,
+sans lien symbolique et suivi par Git. Un chemin externe n'est accepté comme
+toolchain que s'il se résout sous une racine obtenue directement par
+`kpsewhich -var-value=` pour `TEXMFDIST`, `TEXMFVAR`, `TEXMFSYSVAR` ou
+`TEXMFSYSCONFIG`. `TEXMFHOME`, `TEXMFLOCAL`, `/tmp` et toute autre racine
+locale cachée sont refusés. Ainsi, un `\input{/tmp/...}` ne peut pas modifier
+le PDF sans modifier l'identité.
+
+Git, `kpsewhich` et LuaLaTeX reçoivent le même environnement scellé par
+allowlist. Il contient exclusivement `PATH` et `HOME`, lus depuis
+l'environnement appelant, puis les six constantes A4. Aucun `GIT_*`, `TEX*`,
+`LUA*`, `*FONTS`, `FONTCONFIG_*`, `LD_PRELOAD` ni autre variable héritée ne
+traverse cette frontière. Un override pointant vers `/tmp` ne peut donc ni
+changer la vue des fichiers suivis par Git, ni redéfinir une racine dite
+« prouvée », ni modifier la résolution effective de LuaTeX. `PATH` et `HOME`
+sont conservés pour la toolchain et son cache, tandis que `SOURCE_DATE_EPOCH`,
+`FORCE_SOURCE_DATE`, `TZ`, `LC_ALL`, `LANG` et `PYTHONHASHSEED` sont fixés aux
+valeurs A4 ci-dessous.
+
+Les seules variantes du CLI chapitre restent `complet`, `methodes`,
+`parcours1` et `remediation`. La distinction élève/professeur appartient au
+producteur de manuel ; le correctif de reproductibilité ne crée aucune fausse
+variante chapitre susceptible de laisser passer des corrigés.
 
 ## Toolchain supportée
 

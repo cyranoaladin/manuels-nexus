@@ -28,10 +28,12 @@ Pour un chapitre, la préimage contient :
 - identité `chapter:<chapter-id>` ;
 - variante ;
 - master final avant injection du trailer ;
-- graphe ordonné exhaustif des sources du dépôt effectivement lues par LuaTeX,
-  notamment objets, contrat, gabarit, wrapper, classe, charte, pont et leurs
-  dépendances transitives (`nexus-margin-rail`, icônes, maths, signatures,
-  code et autres supports suivis réellement consommés).
+- union ordonnée du graphe runtime exhaustif effectivement lu par LuaTeX et
+  des autorités lues par le producteur Python (objets, contrat et gabarit).
+  Le wrapper et la classe commune appartiennent au recorder runtime ; la
+  charte et le pont canoniques sont ajoutés conservativement au préimage sans
+  être chargés par le producteur chapitre, afin de ne provoquer aucun
+  changement visuel hors autorisation.
 
 Le graphe n'est pas une liste maintenue à la main. Le producteur effectue une
 passe de découverte `-recorder`, dont le PDF provisoire est jeté, puis parse
@@ -42,12 +44,24 @@ racine d'autorité, une collision de clé ou une dépendance interne non classé
 fait échouer le build. Les dépendances externes TeX appartiennent à la
 toolchain scellée ; les sorties générées sont confinées au répertoire de build
 et exclues explicitement. La passe finale `-recorder` doit retrouver exactement
-le même graphe et les mêmes hashes, sinon le build échoue.
+le même graphe runtime brut et les mêmes hashes, avant l'union des autorités
+déclarées, sinon le build échoue.
 
-Le producteur exige en outre la présence dans ce graphe des autorités
-canoniques qu'il déclare (classe, charte, pont, wrapper, gabarit et contrat).
-Cette union obligatoire empêche une passe LuaTeX accidentellement tronquée de
-devenir une nouvelle autorité.
+Le producteur exige en outre les chemins exacts des autorités canoniques qu'il
+déclare. L'union de préimage ne peut pas masquer une disparition dans le
+recorder runtime, car l'égalité brute est vérifiée en premier.
+
+Toutes les passes s'exécutent dans un staging privé sous la cible canonique.
+Les sorties `.fls` sont fermées : staging courant, ou transients sous
+`TEXMFVAR`/`TEXMFSYSVAR`, uniquement. Après préflight staged, master, log,
+recorder final et optionnels présents sont publiés transactionnellement ; les
+optionnels absents sont supprimés, puis le PDF est publié en dernier. Le
+cleanup staging appartient à la transaction et toute erreur restaure toutes
+les destinations depuis un backup sécurisé extérieur au staging. Tous les
+backups sont créés et validés avant la première mutation. Après publication
+complète et cleanup staging réussi, l'état canonique est engagé : un échec de
+cleanup du backup ne déclenche plus de rollback, mais laisse une quarantaine
+explicitement signalée avec son chemin sur stderr.
 
 Les chemins absolus, cwd, racine temporaire, horloge, run ID, HEAD, PDF
 antérieur, build outputs et attestations sont exclus. Remplacer un ancien PDF

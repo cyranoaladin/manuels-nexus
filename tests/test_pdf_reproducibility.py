@@ -137,12 +137,14 @@ def test_pdf4_each_manual_and_variant_has_its_own_identity(math_assembler) -> No
 def test_pdf5_identity_carries_no_clock_or_randomness() -> None:
     """CASE PDF5 — aucune horloge, aucun aléa dans le calcul de l'identité."""
     for script in (
-        MATH_SCRIPTS / "assemble_manuel.py",
+        MATH_SCRIPTS / "pdf_reproducibility.py",
         NSI_SCRIPTS / "assemble.py",
     ):
         source = script.read_text(encoding="utf-8")
         start = source.index("def pdf_trailer_identity(")
-        end = source.index("def ", source.index('"""', source.index('"""', start) + 3))
+        doc_end = source.index('"""', source.index('"""', start) + 3) + 3
+        next_definition = source.find("\ndef ", doc_end)
+        end = len(source) if next_definition == -1 else next_definition
         body = source[start:end]
         for forbidden in (
             "time.",
@@ -160,7 +162,11 @@ def test_pdf5b_producers_pin_the_trailer_identity() -> None:
     math_source = (MATH_SCRIPTS / "assemble_manuel.py").read_text(
         encoding="utf-8"
     )
+    chapter_source = (MATH_SCRIPTS / "assemble.py").read_text(encoding="utf-8")
+    assert "from pdf_reproducibility import" in math_source
+    assert "from pdf_reproducibility import" in chapter_source
     assert "\\\\pdfvariable trailerid" in math_source
+    assert "\\\\pdfvariable trailerid" in chapter_source
 
     template = (ROOT / "NSI" / "gabarits" / "book_master.tex").read_text(
         encoding="utf-8"
@@ -322,7 +328,7 @@ def test_pdf9_identity_is_independent_of_the_absolute_worktree_path(
 def test_pdf10_producer_schema_version_is_part_of_the_preimage() -> None:
     """§4 — le contrat couvre une évolution du producteur hors master/gabarits."""
     for script in (
-        MATH_SCRIPTS / "assemble_manuel.py",
+        MATH_SCRIPTS / "pdf_reproducibility.py",
         NSI_SCRIPTS / "assemble.py",
     ):
         source = script.read_text(encoding="utf-8")
