@@ -775,6 +775,6 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--chap", required=True)
     ap.add_argument("--variant", default="complet",
-                    choices=CLI_VARIANTS)
+                    choices=["complet", "methodes", "parcours1", "remediation"])
     args = ap.parse_args()
     sys.exit(main(args.chap, args.variant))

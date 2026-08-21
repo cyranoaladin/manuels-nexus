@@ -12700,6 +12700,44 @@ def test_declared_assembler_allowlist_preserves_real_and_planned_engines(
     assert observed == existing
 
 
+def test_real_math_chapter_assembler_declares_inventory_capabilities_without_expanding_cli(
+    inventory_module,
+) -> None:
+    assembler = ROOT / "Mathematiques/manuel-maths/scripts/assemble.py"
+    analysis = inventory_module.analyze_assembler(assembler)
+    source_tree = ast.parse(assembler.read_text(encoding="utf-8"))
+    cli_variants = next(
+        ast.literal_eval(node.value)
+        for node in source_tree.body
+        if isinstance(node, ast.Assign)
+        and len(node.targets) == 1
+        and isinstance(node.targets[0], ast.Name)
+        and node.targets[0].id == "CLI_VARIANTS"
+    )
+
+    assert inventory_module._supported_manuals_for_assembler(
+        assembler.relative_to(ROOT).as_posix()
+    ) == ("1SPE", "TSPE_2026_2027", "TCOMPL", "TEXPERTES")
+    assert inventory_module._assembly_core.validate_analysis(
+        assembler.relative_to(ROOT).as_posix(),
+        analysis,
+    ) == []
+    assert analysis["variants"] == [
+        "complet",
+        "methodes",
+        "parcours1",
+        "remediation",
+    ]
+    assert cli_variants == (
+        "complet",
+        "methodes",
+        "parcours1",
+        "remediation",
+    )
+    assert "eleve" not in cli_variants
+    assert "professeur" not in cli_variants
+
+
 @pytest.mark.parametrize(
     "orphan",
     [
