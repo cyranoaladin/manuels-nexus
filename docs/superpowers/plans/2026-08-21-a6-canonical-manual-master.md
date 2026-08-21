@@ -257,39 +257,44 @@ donc pas faire partie de ce commit source.
 
 **Files:** aucun edit source.
 
-- [ ] **Step 1: Créer deux vrais clones sans hardlinks au commit source**
+- [ ] **Step 1: Créer un vrai clone sans hardlinks par run observé**
 
 Utiliser exactement :
 
 ```bash
 SOURCE_REPO="$(git rev-parse --show-toplevel)"
-A_PARENT="$(mktemp -d /tmp/nexus-a6-master-proof-a.XXXXXX)"
-B_PARENT="$(mktemp -d /tmp/nexus-a6-master-proof-b.XXXXXX)"
-git clone --no-hardlinks --branch audit/adversarial-reconciliation-2026 "$SOURCE_REPO" "$A_PARENT/repo"
-git clone --no-hardlinks --branch audit/adversarial-reconciliation-2026 "$SOURCE_REPO" "$B_PARENT/repo"
+RUN_PARENT="$(mktemp -d /tmp/nexus-a6-master-proof.XXXXXX)"
+git clone --no-hardlinks --branch audit/adversarial-reconciliation-2026 "$SOURCE_REPO" "$RUN_PARENT/repo"
 ```
 
-Exiger dans chaque clone le SHA candidat exact,
+Créer ainsi un clone distinct pour chaque tuple
+`(root A|B, target, observed-run-index)`. Un run observé modifie
+volontairement `audit/BUILD_MANIFEST.json` ; réutiliser son clone ferait donc
+échouer correctement le run suivant sur le gate Git clean. Ne jamais restaurer
+ou committer ce manifeste pour recycler un clone. Exiger dans chaque clone le
+SHA candidat exact,
 branche attachée, absence d'alternate, zéro inode Git partagé avec la source,
 porcelain vide et `git diff --check` rc0.
 
 - [ ] **Step 2: Compiler et enregistrer TCOMPL élève/professeur**
 
-Dans chaque clone, sous l'environnement A4 exact, exécuter deux fois :
+Sous l'environnement A4 exact, exécuter une seule commande observed par clone.
+Créer deux clones/run IDs pour A et deux pour B pour chaque variante :
 
 ```bash
 python Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual TCOMPL --variant eleve --record-observed
 python Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual TCOMPL --variant professeur --record-observed
 ```
 
-Copier les preuves de chaque run avant le suivant. Exiger deux IDs distincts,
+Conserver les preuves de chaque clone. Exiger deux IDs distincts par racine,
 chacun exactement une fois dans log/préflight/receipt, absent du master ;
 exiger le master dans les `INPUT` FLS et faire accepter chaque receipt par le
-validator commun. Le deuxième run ne doit pas réutiliser le premier ID.
+validator commun. Aucun clone n'exécute un deuxième run observé.
 
 - [ ] **Step 3: Compiler et enregistrer les smokes 1NSI élève/professeur**
 
-Depuis le CWD du clone :
+Utiliser également un clone neuf distinct pour chaque commande et chaque
+racine A/B :
 
 ```bash
 python NSI/scripts/assemble_manuel.py --book 1NSI --variant eleve --record-observed
@@ -422,9 +427,9 @@ et unstaged vides, writers=0, staging/backup=0, locks actifs=0.
 - Modify: `audit/A6_FINAL_ATTESTATION.json`
 - Modify: `audit/A6_FINAL_ATTESTATION.md`
 
-- [ ] **Step 1: Créer deux nouveaux clones de zéro depuis `SOURCE_REPO="$(git rev-parse --show-toplevel)"` vers deux destinations `mktemp`, avec exactement les commandes de Task 6 ; vérifier SHA exact, absence d'alternate/hardlink, branche attachée et clean**
+- [ ] **Step 1: Créer les clones propres de gates A/B puis, séparément, un clone neuf par run observé selon Task 6 depuis `SOURCE_REPO="$(git rev-parse --show-toplevel)"` ; vérifier partout SHA exact, absence d'alternate/hardlink, branche attachée et clean initial**
 - [ ] **Step 2: Rejouer Task 8 puis les mêmes builds de Task 6 sans `--record-observed` dans A puis B, sans réutiliser aucun ancien clone/cache de build**
-- [ ] **Step 3: Après tous les gates propres et builds locaux, exécuter aussi les quatre builds observés TCOMPL/1NSI de Task 6 dans A et B ; ces dernières commandes peuvent salir seulement les sorties observées, mais doivent exercer hook, environnement compile-only et validator commun au SHA final**
+- [ ] **Step 3: Après tous les gates propres et builds locaux, exécuter les builds observés TCOMPL/1NSI dans les clones mono-run distincts de Task 6 ; chaque commande peut salir seulement ses sorties observées, mais doit exercer hook, environnement compile-only et validator commun au SHA final**
 - [ ] **Step 4: Exiger A == B pour les résumés et rc de chaque suite/gate, la liste/digest release, les 89 bindings, tous les compteurs d'inventaire, les digests source/model/fingerprints, masters/PDF/pages/texte/trailers/graphes/classes/chartes ; pour les builds observés, exiger des run IDs distincts mais des liens log/préflight/receipt valides dans les deux clones**
 - [ ] **Step 5: Mettre à jour l'attestation avec les preuves observées seulement**
 - [ ] **Step 6: Revue indépendante de l'attestation et commit**
