@@ -101,12 +101,7 @@
 ### orphan_files (0)
 - Aucune.
 
-### unassembled_objects (52)
-- source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+### unassembled_objects (47)
 - source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-01.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-01.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-02.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-02.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-03.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-03.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
@@ -132,7 +127,12 @@
 - source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-11.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-11.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-12.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-12.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-13.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-13.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- … 22 autres.
+- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-14.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-14.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-15.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-15.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-16.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-16.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/cours/TSPE-LOGARITHME-COURS-01.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/cours/TSPE-LOGARITHME-COURS-01.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/cours/TSPE-LOGARITHME-COURS-02.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/cours/TSPE-LOGARITHME-COURS-02.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- … 17 autres.
 
 ### unattributed_pdfs (0)
 - Aucune.

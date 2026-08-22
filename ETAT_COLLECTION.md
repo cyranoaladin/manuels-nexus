@@ -4,19 +4,19 @@
 
 ## État global
 - Digest source: `sha256:d1decc461ef38373295440156f8ff0e4530f0a15ca193fb6bd738b258cb8c012`
-- Digest modèle: `sha256:8e186b289961cd1fb2cf544e9034dbf04428df919eb5cdcbd07af8e404d67f21`
+- Digest modèle: `sha256:9bbb23928bca1305c1ca5c93d2446b9860f5fc1da109619f40bf94f30aa6f659`
 - Fichiers scannés: 6285
-- Gate `release-strict`: ROUGE (66 bloqueurs)
+- Gate `release-strict`: ROUGE (65 bloqueurs)
 
 ## Provenance synthétique
-- SHA Git: `5f36bfba062e5c1ce098da562946124e54d62e7d`
+- SHA Git: `da445177d2b95711bf827e4f8ead2807384dc41c`
 - Branche: `audit/adversarial-reconciliation-2026`
 - Dépôt sale: non
 
 | Manuel | Identifiant | Chapitres | Fichiers contenu | Objets réels | Bloqueurs | Structure Phase 0 | Publication |
 |---|---|---|---|---|---|---|---|
 | NSI Première | 1NSI | 10 | 942 | 942 | 7 | NON | NON |
-| Mathématiques Première | 1SPE | 10 | 1420 | 1420 | 6 | NON | NON |
+| Mathématiques Première | 1SPE | 10 | 1420 | 1420 | 5 | NON | NON |
 | Mathématiques Terminale complémentaires | TCOMPL | 9 | 782 | 782 | 2 | NON | NON |
 | Mathématiques Terminale expertes | TEXPERTES | 5 | 508 | 508 | 2 | NON | NON |
 | NSI Terminale | TNSI | 6 | 719 | 719 | 8 | NON | NON |

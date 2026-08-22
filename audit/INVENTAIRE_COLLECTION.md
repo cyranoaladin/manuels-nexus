@@ -18,7 +18,7 @@
 | Catégorie | Nombre |
 |---|---|
 | blocking_statuses | 2222 |
-| unassembled_objects | 52 |
+| unassembled_objects | 47 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
@@ -26,11 +26,11 @@
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-003, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-004, scope=object
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-01.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-01.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-02.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-02.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-03.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-03.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-04.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-04.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-05.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-05.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 
 ## Réconciliation des rapports
 

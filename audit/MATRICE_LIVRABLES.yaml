@@ -133,9 +133,6 @@ manuals:
     - code: anomalie:blocking_statuses
       detail: '1414'
       source: anomalies.blocking_statuses
-    - code: anomalie:unassembled_objects
-      detail: '5'
-      source: anomalies.unassembled_objects
     - code: livrable_non_compile
       detail: absent
       source: deliverable_matrix.1SPE.variants.banque_evaluations
@@ -197,7 +194,6 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
-    - anomalie:unassembled_objects
     - statuts_non_approuves
     structural_compile_ready: false
     variants:
@@ -595,24 +591,24 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:8e186b289961cd1fb2cf544e9034dbf04428df919eb5cdcbd07af8e404d67f21
+model_digest: sha256:9bbb23928bca1305c1ca5c93d2446b9860f5fc1da109619f40bf94f30aa6f659
 provenance:
   branch: audit/adversarial-reconciliation-2026
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-22T10:44:53Z'
+  generated_at_utc: '2026-08-22T11:29:51Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:9067ac4158409689e1374f51fb99cc6b59e66395989b328dfc06cbcf9d2e7841
     scripts/build_manifest.py: sha256:08fe2fdb7003a611e807fbb8dac8835c2745758ea2dd6c0a70270a1fa597e084
-    scripts/inventory_assembly.py: sha256:1759502372fc12faafb27b40d959979c9b63a439cef08ca56246d2d992c26047
+    scripts/inventory_assembly.py: sha256:8a2eeaaa869413ae29c761b1972787f77bc2d0f4baf49aa653b70af98092dd0e
     scripts/inventory_collection.py: sha256:28f7d82a2590f075452410fe1c0357b5a3dd2c07203fa9eadfbbb681fcb255ca
     scripts/inventory_graph.py: sha256:dcffb860b1fb2ba214ad254586506b58f762f3fca62b82ab3dffb07cd76633d8
     scripts/inventory_pdf.py: sha256:4d87858492b6f00a9eaf48a717a9c2ddfc423cbe533278747cb199ae885d90b8
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:3f7733f16eee28b886fe04b86975c78a1ec4f5756e8ffa6d2f0d2fa130b94738
+  generator_sha256: sha256:801279e0a90555878d5fe1cebdd76f53b2dd34898141d28524c5b3a48eced205
   generator_version: 1
   git_available: true
-  head_sha: 5f36bfba062e5c1ce098da562946124e54d62e7d
+  head_sha: da445177d2b95711bf827e4f8ead2807384dc41c
   modified_tracked: []
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
