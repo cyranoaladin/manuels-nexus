@@ -12856,6 +12856,93 @@ def test_latex_reference_uses_source_relative_target_when_it_is_tracked(
     )
 
 
+def test_shared_gabarits_common_class_reaches_both_manual_local_overrides(
+    tmp_path: Path, inventory_module
+) -> None:
+    """A class under gabarits/common/ is loaded by each manual's own build
+    with TEXINPUTS=./gabarits/: and cwd at the manual's own root (see
+    NSI/scripts/assemble.py, Mathematiques/manuel-maths/scripts/assemble.py).
+    Its `\\IfFileExists{gabarits/common/X}{...}{\\IfFileExists{gabarits/X}
+    {\\input{gabarits/X}}{}}` fallback therefore resolves, at real compile
+    time, to *each manual's own* gabarits/X — never to gabarits/common/X
+    itself, since that first branch is checked relative to the compiling
+    manual's cwd, not the class file's own directory. Both manual-local
+    copies are genuine compile-time targets of the same shared class, not
+    just one — this was undercounted as two independent `orphan_files`
+    false positives before the fix."""
+    _init_repository(tmp_path)
+    shared_class = "gabarits/common/shared.cls"
+    math_override = "Mathematiques/manuel-maths/gabarits/shared_asset.tex"
+    nsi_override = "NSI/gabarits/shared_asset.tex"
+    _write(
+        tmp_path / shared_class,
+        "\\ProvidesClass{shared}\n"
+        "\\IfFileExists{gabarits/common/shared_asset.tex}"
+        "{\\input{gabarits/common/shared_asset.tex}}"
+        "{\\IfFileExists{gabarits/shared_asset.tex}"
+        "{\\input{gabarits/shared_asset.tex}}{}}\n",
+    )
+    _write(tmp_path / math_override, "Asset local Math\n")
+    _write(tmp_path / nsi_override, "Asset local NSI\n")
+    _track(tmp_path, shared_class, math_override, nsi_override)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    orphans = {item["cible"] for item in inventory["anomalies"]["orphan_files"]}
+    assert math_override not in orphans
+    assert nsi_override not in orphans
+
+
+def test_gabarits_common_override_fallback_ignores_targets_with_no_local_copy(
+    tmp_path: Path, inventory_module
+) -> None:
+    """A gabarits/common/ source's bare `gabarits/X` reference must not
+    manufacture a phantom reachable entry when neither manual actually has
+    a local gabarits/X override — the fallback only recognizes files that
+    genuinely exist and are tracked in one of the two manual projects."""
+    _init_repository(tmp_path)
+    shared_class = "gabarits/common/shared.cls"
+    _write(
+        tmp_path / shared_class,
+        "\\ProvidesClass{shared}\n"
+        "\\IfFileExists{gabarits/common/nothing_here.tex}"
+        "{\\input{gabarits/common/nothing_here.tex}}"
+        "{\\IfFileExists{gabarits/nothing_here.tex}"
+        "{\\input{gabarits/nothing_here.tex}}{}}\n",
+    )
+    _track(tmp_path, shared_class)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert not any(
+        item["cible"]
+        in {
+            "Mathematiques/manuel-maths/gabarits/nothing_here.tex",
+            "NSI/gabarits/nothing_here.tex",
+        }
+        for item in inventory["anomalies"]["orphan_files"]
+    )
+
+
+def test_unrelated_local_gabarit_without_shared_class_reference_stays_orphan(
+    tmp_path: Path, inventory_module
+) -> None:
+    """The fallback is scoped to files actually named by a gabarits/common/
+    source — a manual-local gabarits/ file that no shared class references
+    at all must still be correctly flagged as a real orphan."""
+    _init_repository(tmp_path)
+    shared_class = "gabarits/common/shared.cls"
+    truly_orphaned = "NSI/gabarits/never_referenced.tex"
+    _write(tmp_path / shared_class, "\\ProvidesClass{shared}\n")
+    _write(tmp_path / truly_orphaned, "Jamais reference\n")
+    _track(tmp_path, shared_class, truly_orphaned)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    orphans = {item["cible"] for item in inventory["anomalies"]["orphan_files"]}
+    assert truly_orphaned in orphans
+
+
 def test_missing_declared_manual_chapter_is_broken_and_never_covered(
     tmp_path: Path, inventory_module
 ) -> None:

@@ -356,6 +356,56 @@ def add_static_latex_assemblies(
                 )
 
 
+_GABARITS_COMMON_PREFIX = "gabarits/common/"
+_GABARITS_COMMON_LOCAL_PROJECTS = ("Mathematiques/manuel-maths", "NSI")
+
+
+def _shared_gabarits_common_local_overrides(
+    root: Path,
+    tracked: frozenset[str],
+) -> set[str]:
+    """Files a shared gabarits/common/ class or style reaches through each
+    manual's own gabarits/ override, invisible to the ordinary LaTeX
+    reference graph because gabarits/common/ sits outside every manual's own
+    project root.
+
+    Both Mathematiques/manuel-maths/scripts/assemble.py and
+    NSI/scripts/assemble.py compile with cwd at the manual's own root and
+    TEXINPUTS=./gabarits/:<default>. A gabarits/common/ source's own
+    \\IfFileExists{gabarits/common/X}{...}{\\IfFileExists{gabarits/X}
+    {\\input{gabarits/X}}{}} fallback is therefore evaluated relative to
+    the *compiling manual's* cwd, never to gabarits/common/ itself (that
+    first branch only matches when cwd is the repository root) — so the
+    real, load-bearing target is each manual's own gabarits/X, and both are
+    genuine compile-time targets of the very same shared source, not just
+    whichever project the generic path resolver happens to default to.
+    """
+
+    overrides: set[str] = set()
+    for source in sorted(
+        path for path in tracked if path.startswith(_GABARITS_COMMON_PREFIX)
+    ):
+        if PurePosixPath(source).suffix.lower() not in {".cls", ".sty", ".tex"}:
+            continue
+        try:
+            tex = (root / source).read_text(encoding="utf-8")
+        except (OSError, UnicodeError):
+            continue
+        for _command, raw_target in latex_inputs(tex):
+            normalized = raw_target.strip().replace("\\", "/")
+            if PurePosixPath(normalized).suffix == "":
+                normalized += ".tex"
+            if not normalized.startswith("gabarits/") or normalized.startswith(
+                _GABARITS_COMMON_PREFIX
+            ):
+                continue
+            for project in _GABARITS_COMMON_LOCAL_PROJECTS:
+                candidate = f"{project}/{normalized}"
+                if candidate in tracked:
+                    overrides.add(candidate)
+    return overrides
+
+
 def add_orphan_files(
     inventory: dict[str, Any],
     root: Path,
@@ -396,6 +446,7 @@ def add_orphan_files(
         source_roles=source_roles,
         traversal_source_roles=traversal_source_roles,
     )
+    reachable |= _shared_gabarits_common_local_overrides(root, tracked)
     ignore = skipped_paths or set()
     for path in sorted(
         item
