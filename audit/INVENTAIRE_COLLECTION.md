@@ -11,14 +11,13 @@
 | TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 50 | 300 | 782 | 782 | manual |
 | TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 194 | 508 | 508 | manual |
 | TNSI | NSI Terminale | NSI | Terminale | courante | 6 | 59 | 266 | 719 | 719 | manual |
-| TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 11 | 67 | 448 | 1248 | 1248 | manual |
+| TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 11 | 67 | 448 | 1201 | 1201 | manual |
 
 ## Anomalies détectées
 
 | Catégorie | Nombre |
 |---|---|
 | blocking_statuses | 2222 |
-| unassembled_objects | 47 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
@@ -26,11 +25,6 @@
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-003, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-004, scope=object
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-01.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-01.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-02.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-02.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-03.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-03.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-04.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-04.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-05.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/cours/TSPE-CALCUL-INTEGRAL-COURS-05.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 
 ## Réconciliation des rapports
 
