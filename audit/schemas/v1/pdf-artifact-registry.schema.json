@@ -1,0 +1,304 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nexus:audit:schema:v1:pdf-artifact-registry",
+  "title": "Nexus tracked PDF artifact registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_type",
+    "schema_version",
+    "schema_ref",
+    "control_digest",
+    "records"
+  ],
+  "properties": {
+    "artifact_type": { "const": "pdf_artifact_registry" },
+    "schema_version": { "const": 1 },
+    "schema_ref": { "const": "audit/schemas/v1/pdf-artifact-registry.schema.json" },
+    "control_digest": { "$ref": "#/$defs/sha256" },
+    "records": {
+      "type": "array",
+      "minItems": 22,
+      "maxItems": 22,
+      "prefixItems": [
+        { "properties": { "path": { "const": "MANUELS_PDF_PUBLICATION/01_Maths_1re_Spe_Eleve.pdf" } } },
+        { "properties": { "path": { "const": "MANUELS_PDF_PUBLICATION/02_Maths_1re_Spe_Professeur.pdf" } } },
+        { "properties": { "path": { "const": "MANUELS_PDF_PUBLICATION/03_Maths_Tle_Spe_Eleve.pdf" } } },
+        { "properties": { "path": { "const": "MANUELS_PDF_PUBLICATION/04_Maths_Tle_Spe_Professeur.pdf" } } },
+        { "properties": { "path": { "const": "MANUELS_PDF_PUBLICATION/05_Maths_Tle_Expertes_Eleve.pdf" } } },
+        { "properties": { "path": { "const": "MANUELS_PDF_PUBLICATION/06_Maths_Tle_Expertes_Professeur.pdf" } } },
+        { "properties": { "path": { "const": "MANUELS_PDF_PUBLICATION/07_Maths_Tle_Complementaires_Eleve.pdf" } } },
+        { "properties": { "path": { "const": "MANUELS_PDF_PUBLICATION/08_Maths_Tle_Complementaires_Professeur.pdf" } } },
+        { "properties": { "path": { "const": "MANUELS_PDF_PUBLICATION/09_NSI_1re_Eleve.pdf" } } },
+        { "properties": { "path": { "const": "MANUELS_PDF_PUBLICATION/10_NSI_1re_Professeur.pdf" } } },
+        { "properties": { "path": { "const": "MANUELS_PDF_PUBLICATION/11_NSI_Tle_Eleve.pdf" } } },
+        { "properties": { "path": { "const": "MANUELS_PDF_PUBLICATION/12_NSI_Tle_Professeur.pdf" } } },
+        { "properties": { "path": { "const": "NSI/corpus_nsi/00_programmes_officiels/programme_nsi_premiere.pdf" } } },
+        { "properties": { "path": { "const": "NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf" } } },
+        { "properties": { "path": { "const": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_aides.pdf" } } },
+        { "properties": { "path": { "const": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_corrige.pdf" } } },
+        { "properties": { "path": { "const": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_cours.pdf" } } },
+        { "properties": { "path": { "const": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_evaluation.pdf" } } },
+        { "properties": { "path": { "const": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_fiche_methode.pdf" } } },
+        { "properties": { "path": { "const": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_td.pdf" } } },
+        { "properties": { "path": { "const": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_tp.pdf" } } },
+        { "properties": { "path": { "const": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_trace.pdf" } } }
+      ],
+      "items": { "$ref": "#/$defs/record" },
+      "uniqueItems": true,
+      "allOf": [
+        {
+          "items": { "$ref": "#/$defs/record" }
+        },
+        {
+          "contains": {
+            "required": ["role"],
+            "properties": { "role": { "const": "HISTORICAL_PUBLICATION_SNAPSHOT" } }
+          },
+          "minContains": 12,
+          "maxContains": 12
+        },
+        {
+          "contains": {
+            "required": ["role"],
+            "properties": { "role": { "const": "OFFICIAL_PROGRAM_AUTHORITY" } }
+          },
+          "minContains": 2,
+          "maxContains": 2
+        },
+        {
+          "contains": {
+            "required": ["role"],
+            "properties": { "role": { "const": "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER" } }
+          },
+          "minContains": 8,
+          "maxContains": 8
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "oid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "path": {
+      "type": "string",
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)[^/]+(?:/[^/]+)*\\.pdf$"
+    },
+    "snapshotProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "commit",
+        "blob_oid",
+        "canonical_origin_path",
+        "canonical_origin_blob_oid"
+      ],
+      "properties": {
+        "kind": { "const": "GIT_PUBLICATION_SNAPSHOT" },
+        "commit": { "$ref": "#/$defs/commit" },
+        "blob_oid": { "$ref": "#/$defs/oid" },
+        "canonical_origin_path": { "$ref": "#/$defs/path" },
+        "canonical_origin_blob_oid": { "$ref": "#/$defs/oid" }
+      }
+    },
+    "officialProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "authority_path",
+        "authority_key",
+        "authority_code",
+        "landing_url",
+        "pdf_url"
+      ],
+      "properties": {
+        "kind": { "const": "OFFICIAL_PROGRAM_RECORD" },
+        "authority_path": { "const": "docs/programmes/PROGRAMMES_2026_2027.yaml" },
+        "authority_key": {
+          "enum": [
+            "sources.SRC-BO2019-NSI-PREMIERE",
+            "sources.SRC-BO2019-NSI-TERMINALE"
+          ]
+        },
+        "authority_code": {
+          "enum": ["MENE1901633A", "MENE1921247A"]
+        },
+        "landing_url": {
+          "type": "string",
+          "pattern": "^https://www\\.education\\.gouv\\.fr/"
+        },
+        "pdf_url": {
+          "type": "string",
+          "pattern": "^https://cache\\.media\\.education\\.gouv\\.fr/"
+        }
+      }
+    },
+    "historicalRenderProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "import_commit",
+        "pdf_blob_oid",
+        "declared_recipe_path",
+        "declared_recipe_blob_oid",
+        "build_observed"
+      ],
+      "properties": {
+        "kind": { "const": "REPOSITORY_HISTORY_WITHOUT_BUILD_RECEIPT" },
+        "import_commit": { "$ref": "#/$defs/commit" },
+        "pdf_blob_oid": { "$ref": "#/$defs/oid" },
+        "declared_recipe_path": {
+          "const": "NSI/corpus_nsi/latex/packs/premiere/P13/build.sh"
+        },
+        "declared_recipe_blob_oid": { "$ref": "#/$defs/oid" },
+        "build_observed": { "const": false }
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "role",
+        "manual",
+        "chapter",
+        "variant",
+        "scope",
+        "tracking",
+        "source_role",
+        "pdf_sha256",
+        "page_count",
+        "compilation_evidence",
+        "release_state",
+        "provenance"
+      ],
+      "properties": {
+        "path": { "$ref": "#/$defs/path" },
+        "role": {
+          "enum": [
+            "HISTORICAL_PUBLICATION_SNAPSHOT",
+            "OFFICIAL_PROGRAM_AUTHORITY",
+            "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER"
+          ]
+        },
+        "manual": {
+          "enum": ["1SPE", "TSPE_2026_2027", "TCOMPL", "TEXPERTES", "1NSI", "TNSI"]
+        },
+        "chapter": {
+          "oneOf": [
+            { "type": "null" },
+            { "const": "1NSI-ALGO-DICHO-GLOUTON-KNN" }
+          ]
+        },
+        "variant": {
+          "oneOf": [
+            { "type": "null" },
+            { "enum": ["eleve", "professeur"] }
+          ]
+        },
+        "scope": {
+          "enum": [
+            "publication_snapshot",
+            "official_program_authority",
+            "harvest_historical_render"
+          ]
+        },
+        "tracking": { "const": "TRACKED" },
+        "source_role": { "const": "transversal" },
+        "pdf_sha256": { "$ref": "#/$defs/sha256" },
+        "page_count": { "type": "integer", "minimum": 1 },
+        "compilation_evidence": { "const": false },
+        "release_state": {
+          "enum": ["STALE_UNDECIDED", "REFERENCE_ONLY", "NON_PUBLISHABLE"]
+        },
+        "audience": { "enum": ["PROFESSOR_ONLY", "STUDENT_FACING"] },
+        "provenance": {
+          "oneOf": [
+            { "$ref": "#/$defs/snapshotProvenance" },
+            { "$ref": "#/$defs/officialProvenance" },
+            { "$ref": "#/$defs/historicalRenderProvenance" }
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "role": { "const": "HISTORICAL_PUBLICATION_SNAPSHOT" },
+            "chapter": { "type": "null" },
+            "variant": { "enum": ["eleve", "professeur"] },
+            "scope": { "const": "publication_snapshot" },
+            "release_state": { "const": "STALE_UNDECIDED" },
+            "provenance": { "$ref": "#/$defs/snapshotProvenance" }
+          },
+          "not": { "required": ["audience"] }
+        },
+        {
+          "properties": {
+            "role": { "const": "OFFICIAL_PROGRAM_AUTHORITY" },
+            "chapter": { "type": "null" },
+            "variant": { "type": "null" },
+            "scope": { "const": "official_program_authority" },
+            "release_state": { "const": "REFERENCE_ONLY" },
+            "provenance": { "$ref": "#/$defs/officialProvenance" }
+          },
+          "not": { "required": ["audience"] },
+          "oneOf": [
+            {
+              "properties": {
+                "path": { "const": "NSI/corpus_nsi/00_programmes_officiels/programme_nsi_premiere.pdf" },
+                "manual": { "const": "1NSI" },
+                "provenance": {
+                  "properties": {
+                    "authority_key": { "const": "sources.SRC-BO2019-NSI-PREMIERE" },
+                    "authority_code": { "const": "MENE1901633A" },
+                    "landing_url": { "const": "https://www.education.gouv.fr/bo/19/Special1/MENE1901633A.htm" },
+                    "pdf_url": { "const": "https://cache.media.education.gouv.fr/file/SP1-MEN-22-1-2019/26/8/spe633_annexe_1063268.pdf" }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "path": { "const": "NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf" },
+                "manual": { "const": "TNSI" },
+                "provenance": {
+                  "properties": {
+                    "authority_key": { "const": "sources.SRC-BO2019-NSI-TERMINALE" },
+                    "authority_code": { "const": "MENE1921247A" },
+                    "landing_url": { "const": "https://www.education.gouv.fr/bo/19/Special8/MENE1921247A.htm" },
+                    "pdf_url": { "const": "https://cache.media.education.gouv.fr/file/SPE8_MENJ_25_7_2019/93/3/spe247_annexe_1158933.pdf" }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "required": ["audience"],
+          "properties": {
+            "role": { "const": "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER" },
+            "manual": { "const": "1NSI" },
+            "chapter": { "const": "1NSI-ALGO-DICHO-GLOUTON-KNN" },
+            "variant": { "type": "null" },
+            "scope": { "const": "harvest_historical_render" },
+            "release_state": { "const": "NON_PUBLISHABLE" },
+            "provenance": { "$ref": "#/$defs/historicalRenderProvenance" }
+          }
+        }
+      ]
+    }
+  }
+}

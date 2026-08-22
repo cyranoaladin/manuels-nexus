@@ -59,10 +59,13 @@ def _init_repository(
     root: Path,
     *,
     with_object_type_ontology: bool = True,
+    with_pdf_artifact_controls: bool = True,
 ) -> None:
     subprocess.run(["git", "init", "-q", str(root)], check=True)
     if with_object_type_ontology:
         _install_object_type_ontology(root)
+    if with_pdf_artifact_controls:
+        _write_pdf_artifact_control_fixture(root)
 
 
 def _install_object_type_ontology(repository: Path) -> tuple[str, str]:
@@ -124,12 +127,43 @@ def _chapter_path(manual: str, chapter: str) -> str:
     return f"NSI/chapitres/{chapter}"
 
 
+_PDF_ARTIFACT_REGISTRY_SCHEMA_RELATIVE = (
+    "audit/schemas/v1/pdf-artifact-registry.schema.json"
+)
+
+
+def _relax_pdf_artifact_registry_schema(repository: Path) -> None:
+    """Strip the real registry's exact-22-path/role-count pinning.
+
+    The production schema at ``_PDF_ARTIFACT_REGISTRY_SCHEMA_RELATIVE``
+    intentionally pins ``records`` to the 22 real repository paths via
+    ``minItems``/``maxItems``/``prefixItems``/``allOf`` contains rules. Test
+    fixtures are unrelated synthetic repositories with no such PDFs, so their
+    local copy of this one schema must validate record *shape* only, not the
+    real repository's exact content.
+    """
+
+    schema_path = repository / _PDF_ARTIFACT_REGISTRY_SCHEMA_RELATIVE
+    if not schema_path.is_file():
+        return
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    records_schema = schema.get("properties", {}).get("records")
+    if not isinstance(records_schema, dict):
+        return
+    for cardinality_key in ("minItems", "maxItems", "prefixItems", "allOf"):
+        records_schema.pop(cardinality_key, None)
+    schema_path.write_text(
+        json.dumps(schema, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+
+
 def _install_audit_schemas(repository: Path) -> None:
     shutil.copytree(
         ROOT / "audit/schemas",
         repository / "audit/schemas",
         dirs_exist_ok=True,
     )
+    _relax_pdf_artifact_registry_schema(repository)
 
 
 def _commit_repository(repository: Path, message: str = "fixture") -> str:
@@ -265,7 +299,11 @@ def _minimal_inventory(repository: Path, inventory_module):
 def test_git_tracked_files_excludes_untracked_sources(
     tmp_path: Path, inventory_module
 ) -> None:
-    _init_repository(tmp_path, with_object_type_ontology=False)
+    _init_repository(
+        tmp_path,
+        with_object_type_ontology=False,
+        with_pdf_artifact_controls=False,
+    )
     base = _chapter_path("1SPE", "1SPE-TEST")
     tracked = f"{base}/cours/section.tex"
     untracked = f"{base}/cours/brouillon.tex"
@@ -698,7 +736,11 @@ def test_source_roles_preserve_literal_backslash_git_path(
     tmp_path: Path,
     inventory_module,
 ) -> None:
-    _init_repository(tmp_path, with_object_type_ontology=False)
+    _init_repository(
+        tmp_path,
+        with_object_type_ontology=False,
+        with_pdf_artifact_controls=False,
+    )
     literal = r"NSI\scripts\assemble.py"
     _write(
         tmp_path / literal,
@@ -719,6 +761,7 @@ def test_source_roles_preserve_literal_backslash_git_path(
         )
         == "fixture"
     )
+    _write_pdf_artifact_control_fixture(tmp_path)
     _install_object_type_ontology(tmp_path)
     inventory = inventory_module.build_inventory(tmp_path)
     assert not any(
@@ -908,7 +951,11 @@ def test_source_roles_literal_git_paths_are_bijective(
     must never rewrite them (no \\ -> /, no escape interpretation, no
     Windows-style normalization of a POSIX repository).
     """
-    _init_repository(tmp_path, with_object_type_ontology=False)
+    _init_repository(
+        tmp_path,
+        with_object_type_ontology=False,
+        with_pdf_artifact_controls=False,
+    )
     literals = [
         "ordinary/path.tex",
         r"path\with\backslash.tex",
@@ -10739,8 +10786,10 @@ def test_pdf_inventory_uses_only_tracked_files_and_reports_unavailable_page_coun
             "page_count_method": None,
             "path": tracked_pdf,
             "reason": ("pdfinfo indisponible; lecteur PDF Python indisponible"),
-            "scope": None,
-            "source_role": "generated_dependency",
+                "scope": None,
+                "sha256": "sha256:"
+                + hashlib.sha256("pas un vrai pdf".encode("utf-8")).hexdigest(),
+                "source_role": "generated_dependency",
             "status": "page_count_unavailable",
             "variant": None,
         }
@@ -10778,8 +10827,10 @@ def test_pdf_inventory_prefers_pdfinfo_page_count(
             "page_count_method": "pdfinfo",
             "path": tracked_pdf,
             "reason": None,
-            "scope": "manual",
-            "source_role": "generated_dependency",
+                "scope": "manual",
+                "sha256": "sha256:"
+                + hashlib.sha256("contenu simule".encode("utf-8")).hexdigest(),
+                "source_role": "generated_dependency",
             "status": "counted",
             "variant": "eleve",
         }
@@ -10906,8 +10957,9 @@ def test_missing_tracked_pdf_has_deterministic_checkout_status(
             "page_count_method": None,
             "path": tracked_pdf,
             "reason": "fichier PDF suivi absent du checkout",
-            "scope": None,
-            "source_role": "generated_dependency",
+                "scope": None,
+                "sha256": None,
+                "source_role": "generated_dependency",
             "status": "page_count_unavailable",
             "variant": None,
         }
@@ -10980,6 +11032,7 @@ def test_tracked_pdf_symlink_is_not_read_or_counted(
         "path": pdf,
         "reason": "fichier PDF suivi non régulier: lien symbolique interdit",
         "scope": "manual",
+        "sha256": None,
         "source_role": "generated_dependency",
         "status": "page_count_unavailable",
         "variant": "eleve",
@@ -11031,6 +11084,7 @@ def test_nonregular_tracked_pdf_is_not_read_or_counted(
             "path": pdf,
             "reason": "fichier PDF suivi non régulier: type de fichier interdit",
             "scope": "manual",
+            "sha256": None,
             "source_role": "generated_dependency",
             "status": "page_count_unavailable",
             "variant": "eleve",
@@ -13777,8 +13831,9 @@ def test_deliverable_matrix_blocks_needs_review_and_checks_model_coherence(
             "page_count_method": "pdfinfo",
             "path": "NSI/build/MANUEL_1NSI_v1.pdf",
             "reason": None,
-            "scope": "manual",
-            "source_role": "generated_dependency",
+                "scope": "manual",
+                "sha256": None,
+                "source_role": "generated_dependency",
             "status": "counted",
             "variant": "eleve",
         }
@@ -18912,7 +18967,11 @@ def test_require_clean_handles_dirty_unborn_and_detached_repositories(
     tmp_path: Path
 ) -> None:
     unborn = tmp_path / "unborn"
-    _init_repository(unborn, with_object_type_ontology=False)
+    _init_repository(
+        unborn,
+        with_object_type_ontology=False,
+        with_pdf_artifact_controls=False,
+    )
     unborn_result = _run_inventory_cli(unborn, "--require-clean")
 
     detached = tmp_path / "detached"
@@ -19158,3 +19217,1182 @@ def test_fixture_exposes_historical_1spe_exercise_contradictions(
     )
     assert total_claim["calculated"] == 2
     assert total_claim["etat"] == "contredit"
+
+
+def _write_pdf_artifact_control_fixture(repository: Path) -> tuple[str, ...]:
+    controls = (
+        "audit/PDF_ARTIFACT_REGISTRY.yaml",
+        "audit/schemas/v1/pdf-artifact-registry.schema.json",
+        "docs/programmes/PROGRAMMES_2026_2027.yaml",
+    )
+    _write(
+        repository / controls[0],
+        """artifact_type: pdf_artifact_registry
+schema_version: 1
+schema_ref: audit/schemas/v1/pdf-artifact-registry.schema.json
+control_digest: sha256:placeholder
+records: []
+""",
+    )
+    (repository / controls[1]).parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(ROOT / controls[1], repository / controls[1])
+    _relax_pdf_artifact_registry_schema(repository)
+    _write(repository / controls[2], "sources: {}\n")
+    payload = yaml.safe_load((repository / controls[0]).read_text(encoding="utf-8"))
+    module = _load_inventory_module()
+    payload["control_digest"] = module._control_digest(payload)
+    _write(
+        repository / controls[0],
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=False),
+    )
+    _track(repository, *controls)
+    return controls
+
+
+def test_pdf_artifact_registry_schema_is_closed_and_registered(
+    inventory_module,
+) -> None:
+    schema_path = ROOT / "audit/schemas/v1/pdf-artifact-registry.schema.json"
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+
+    jsonschema.Draft202012Validator.check_schema(schema)
+    assert schema["additionalProperties"] is False
+    assert schema["$defs"]["record"]["additionalProperties"] is False
+    assert inventory_module.SCHEMA_REGISTRY["pdf_artifact_registry"] == {
+        1: "audit/schemas/v1/pdf-artifact-registry.schema.json"
+    }
+
+
+def test_pdf_artifact_registry_schema_locks_v1_paths_and_role_counts() -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/pdf-artifact-registry.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    payload = json.loads(
+        (ROOT / "audit/PDF_ARTIFACT_REGISTRY.yaml").read_text(encoding="utf-8")
+    )
+    validator = jsonschema.Draft202012Validator(schema)
+    validator.validate(payload)
+
+    missing = deepcopy(payload)
+    missing["records"].pop()
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(missing)
+
+    unknown_path = deepcopy(payload)
+    unknown_path["records"][0]["path"] = "archive/unexpected.pdf"
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(unknown_path)
+
+    wrong_roles = deepcopy(payload)
+    snapshot = wrong_roles["records"][0]
+    p13 = next(
+        item
+        for item in wrong_roles["records"]
+        if item["role"] == "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER"
+    )
+    replacement = deepcopy(p13)
+    replacement["path"] = snapshot["path"]
+    replacement["pdf_sha256"] = snapshot["pdf_sha256"]
+    replacement["page_count"] = snapshot["page_count"]
+    wrong_roles["records"][0] = replacement
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(wrong_roles)
+
+
+@pytest.mark.parametrize("record_index", [0, -1])
+@pytest.mark.parametrize(
+    "mutation",
+    ["missing_manual", "forged_approval", "invalid_source_role"],
+)
+def test_pdf_artifact_registry_schema_applies_record_contract_to_prefix_items(
+    record_index: int,
+    mutation: str,
+) -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/pdf-artifact-registry.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    payload = json.loads(
+        (ROOT / "audit/PDF_ARTIFACT_REGISTRY.yaml").read_text(encoding="utf-8")
+    )
+    validator = jsonschema.Draft202012Validator(schema)
+    validator.validate(payload)
+    record = payload["records"][record_index]
+    if mutation == "missing_manual":
+        record.pop("manual")
+    elif mutation == "forged_approval":
+        record["forged_approval"] = True
+    elif mutation == "invalid_source_role":
+        record["source_role"] = "generated_dependency"
+    else:  # pragma: no cover - parametrization is closed above.
+        raise AssertionError(mutation)
+
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(payload)
+
+
+def test_pdf_artifact_registry_loader_activation_is_unconditional(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path, with_pdf_artifact_controls=False)
+    tracked = inventory_module.git_tracked_files(tmp_path)
+
+    with pytest.raises(inventory_module.InventoryError, match="PDF_ARTIFACT_REGISTRY"):
+        with inventory_module._read_stable_tracked_controls(tmp_path, tracked):
+            pass
+
+
+@pytest.mark.parametrize("control_index", [0, 1, 2])
+def test_stable_tracked_control_rejects_leaf_symlink(
+    tmp_path: Path,
+    inventory_module,
+    control_index: int,
+) -> None:
+    _init_repository(tmp_path)
+    controls = _write_pdf_artifact_control_fixture(tmp_path)
+    target = tmp_path / controls[control_index]
+    replacement = target.with_name(target.name + ".real")
+    target.rename(replacement)
+    target.symlink_to(replacement.name)
+    tracked = inventory_module.git_tracked_files(tmp_path)
+
+    with pytest.raises(inventory_module.InventoryError, match="symbolique|sans suivi"):
+        with inventory_module._read_stable_tracked_controls(tmp_path, tracked):
+            pass
+
+
+@pytest.mark.parametrize("control_index", [0, 1, 2])
+def test_stable_tracked_control_rejects_leaf_hardlink(
+    tmp_path: Path,
+    inventory_module,
+    control_index: int,
+) -> None:
+    _init_repository(tmp_path)
+    controls = _write_pdf_artifact_control_fixture(tmp_path)
+    target = tmp_path / controls[control_index]
+    os.link(target, target.with_name(target.name + ".hardlink"))
+    tracked = inventory_module.git_tracked_files(tmp_path)
+
+    with pytest.raises(inventory_module.InventoryError, match="hardlink"):
+        with inventory_module._read_stable_tracked_controls(tmp_path, tracked):
+            pass
+
+
+def test_stable_tracked_control_overrides_preserve_source_digest_preimage(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    controls = _write_pdf_artifact_control_fixture(tmp_path)
+    tracked = inventory_module.git_tracked_files(tmp_path)
+    paths = tuple(sorted(controls))
+    historical = inventory_module._graph_core.source_digest(tmp_path, paths)
+
+    with inventory_module._read_stable_tracked_controls(tmp_path, tracked) as session:
+        overridden = inventory_module._graph_core.source_digest(
+            tmp_path,
+            paths,
+            overrides=session.overrides,
+        )
+
+    assert overridden == historical
+
+
+@pytest.mark.parametrize("control_index", [0, 1, 2])
+def test_stable_tracked_control_rejects_replacement_before_source_digest(
+    tmp_path: Path,
+    inventory_module,
+    control_index: int,
+) -> None:
+    _init_repository(tmp_path)
+    controls = _write_pdf_artifact_control_fixture(tmp_path)
+    tracked = inventory_module.git_tracked_files(tmp_path)
+
+    with pytest.raises(inventory_module.InventoryError, match="modifi"):
+        with inventory_module._read_stable_tracked_controls(tmp_path, tracked) as session:
+            target = tmp_path / controls[control_index]
+            replacement = target.with_suffix(".replacement")
+            replacement.write_bytes(target.read_bytes())
+            replacement.replace(target)
+            inventory_module._source_digest(
+                tmp_path,
+                tuple(sorted(controls)),
+                overrides=session.overrides,
+            )
+            session.validate()
+
+
+def _stable_control_parent(repository: Path, control: str) -> Path:
+    return (repository / control).parent
+
+
+@pytest.mark.parametrize("control_index", [0, 1, 2])
+def test_stable_tracked_control_rejects_parent_symlink(
+    tmp_path: Path,
+    inventory_module,
+    control_index: int,
+) -> None:
+    _init_repository(tmp_path)
+    controls = _write_pdf_artifact_control_fixture(tmp_path)
+    parent = _stable_control_parent(tmp_path, controls[control_index])
+    real_parent = parent.with_name(parent.name + ".real")
+    parent.rename(real_parent)
+    parent.symlink_to(real_parent.name, target_is_directory=True)
+    tracked = inventory_module.git_tracked_files(tmp_path)
+
+    with pytest.raises(inventory_module.InventoryError, match="sans suivi|parent"):
+        with inventory_module._read_stable_tracked_controls(tmp_path, tracked):
+            pass
+
+
+@pytest.mark.parametrize("control_index", [0, 1, 2])
+def test_stable_tracked_control_rejects_parent_substitution(
+    tmp_path: Path,
+    inventory_module,
+    control_index: int,
+) -> None:
+    _init_repository(tmp_path)
+    controls = _write_pdf_artifact_control_fixture(tmp_path)
+    tracked = inventory_module.git_tracked_files(tmp_path)
+
+    with pytest.raises(inventory_module.InventoryError, match="parent.*modifi"):
+        with inventory_module._read_stable_tracked_controls(tmp_path, tracked):
+            parent = _stable_control_parent(tmp_path, controls[control_index])
+            old_parent = parent.with_name(parent.name + ".old")
+            parent.rename(old_parent)
+            parent.mkdir(parents=True)
+            leaf = PurePosixPath(controls[control_index]).name
+            shutil.copyfile(old_parent / leaf, parent / leaf)
+
+
+@pytest.mark.parametrize("control_index", [0, 1, 2])
+def test_stable_tracked_control_rejects_mutation_during_read(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    control_index: int,
+) -> None:
+    _init_repository(tmp_path)
+    controls = _write_pdf_artifact_control_fixture(tmp_path)
+    target = (tmp_path / controls[control_index]).resolve()
+    tracked = inventory_module.git_tracked_files(tmp_path)
+    original_read = inventory_module.os.read
+    mutated = False
+
+    def mutating_read(fd: int, size: int) -> bytes:
+        nonlocal mutated
+        chunk = original_read(fd, size)
+        try:
+            opened = Path(f"/proc/self/fd/{fd}").resolve()
+        except OSError:
+            opened = Path("/")
+        if not mutated and opened == target:
+            with target.open("ab") as stream:
+                stream.write(b"\n# concurrent mutation\n")
+            mutated = True
+        return chunk
+
+    monkeypatch.setattr(inventory_module.os, "read", mutating_read)
+
+    with pytest.raises(inventory_module.InventoryError, match="modifi"):
+        with inventory_module._read_stable_tracked_controls(tmp_path, tracked):
+            pass
+    assert mutated is True
+
+
+def test_pdf_artifact_registry_loader_rejects_invalid_pinned_schema(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    schema = tmp_path / "audit/schemas/v1/pdf-artifact-registry.schema.json"
+    schema.write_text('{"type":"definitely-not-a-json-schema-type"}\n', encoding="utf-8")
+    tracked = inventory_module.git_tracked_files(tmp_path)
+    source_roles = inventory_module._load_source_roles(tmp_path, tracked)
+
+    with pytest.raises(inventory_module.InventoryError, match="schéma Draft 2020-12"):
+        with inventory_module._read_stable_tracked_controls(tmp_path, tracked) as controls:
+            inventory_module._load_pdf_artifact_registry(
+                tmp_path,
+                tracked,
+                source_roles,
+                controls=controls,
+                attribution_model=inventory_module._registry_attribution_model(),
+            )
+
+
+def test_pdf_artifact_registry_pinned_json_rejects_duplicate_keys(
+    inventory_module,
+) -> None:
+    duplicate = b'{"type":"object","type":"array"}'
+
+    with pytest.raises(inventory_module.InventoryError, match="dupliqu"):
+        inventory_module._parse_pinned_json(
+            duplicate,
+            path="audit/schemas/v1/pdf-artifact-registry.schema.json",
+        )
+
+
+def _load_repository_pdf_artifact_registry(inventory_module):
+    tracked = tuple(
+        sorted(
+            set(inventory_module.git_tracked_files(ROOT))
+            | {
+                "audit/PDF_ARTIFACT_REGISTRY.yaml",
+                "audit/schemas/v1/pdf-artifact-registry.schema.json",
+            }
+        )
+    )
+    source_roles = inventory_module._load_source_roles(ROOT, tracked)
+    with inventory_module._read_stable_tracked_controls(ROOT, tracked) as controls:
+        return inventory_module._load_pdf_artifact_registry(
+            ROOT,
+            tracked,
+            source_roles,
+            controls=controls,
+            attribution_model=inventory_module._registry_attribution_model(),
+        )
+
+
+def _clone_with_staged_pdf_registry(tmp_path: Path) -> Path:
+    repository = tmp_path / "repository"
+    subprocess.run(
+        ["git", "clone", "-q", "--no-hardlinks", str(ROOT), str(repository)],
+        check=True,
+    )
+    controls = (
+        "audit/PDF_ARTIFACT_REGISTRY.yaml",
+        "audit/schemas/v1/pdf-artifact-registry.schema.json",
+    )
+    for control in controls:
+        target = repository / control
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / control, target)
+    subprocess.run(
+        ["git", "-C", str(repository), "add", *controls],
+        check=True,
+    )
+    return repository
+
+
+class _RegistryControlOverride:
+    def __init__(self, pinned, payload: dict[str, object]) -> None:
+        self._pinned = pinned
+        self._registry = json.dumps(
+            payload,
+            ensure_ascii=False,
+            sort_keys=False,
+        ).encode("utf-8")
+
+    def bytes(self, path: str) -> bytes:
+        if path == "audit/PDF_ARTIFACT_REGISTRY.yaml":
+            return self._registry
+        return self._pinned.bytes(path)
+
+
+def _mutated_repository_pdf_artifact_registry(inventory_module, mutation: str):
+    payload = json.loads(
+        (ROOT / "audit/PDF_ARTIFACT_REGISTRY.yaml").read_text(encoding="utf-8")
+    )
+    records = payload["records"]
+    snapshot = next(
+        record
+        for record in records
+        if record["role"] == "HISTORICAL_PUBLICATION_SNAPSHOT"
+    )
+    official = next(
+        record for record in records if record["role"] == "OFFICIAL_PROGRAM_AUTHORITY"
+    )
+    p13 = next(
+        record
+        for record in records
+        if record["role"] == "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER"
+        and record["path"].endswith("P13_cours.pdf")
+    )
+    if mutation == "control_digest":
+        payload["control_digest"] = "sha256:" + "0" * 64
+    elif mutation == "order":
+        records[0], records[1] = records[1], records[0]
+    elif mutation == "duplicate":
+        records[1] = deepcopy(records[0])
+    elif mutation == "pdf_sha":
+        p13["pdf_sha256"] = "sha256:" + "0" * 64
+    elif mutation == "page_count":
+        p13["page_count"] += 1
+    elif mutation == "snapshot_blob":
+        snapshot["provenance"]["blob_oid"] = "0" * 40
+    elif mutation == "snapshot_origin":
+        snapshot["provenance"]["canonical_origin_path"] = (
+            "Mathematiques/manuel-maths/build/MANUEL_1SPE/"
+            "MANUEL_1SPE_professeur.pdf"
+        )
+    elif mutation == "official_code":
+        official["provenance"]["authority_code"] = "MENE1921247A"
+    elif mutation == "official_key":
+        official["provenance"]["authority_key"] = (
+            "sources.SRC-BO2019-NSI-TERMINALE"
+        )
+    elif mutation == "official_landing_url":
+        official["provenance"]["landing_url"] = (
+            "https://www.education.gouv.fr/bo/19/Special8/MENE1921247A.htm"
+        )
+    elif mutation == "official_pdf_url":
+        official["provenance"]["pdf_url"] = (
+            "https://cache.media.education.gouv.fr/file/SPE8_MENJ_25_7_2019/"
+            "93/3/spe247_annexe_1158933.pdf"
+        )
+    elif mutation == "p13_audience":
+        p13["audience"] = "PROFESSOR_ONLY"
+    elif mutation == "p13_pdf_blob":
+        p13["provenance"]["pdf_blob_oid"] = "0" * 40
+    elif mutation == "p13_recipe_path":
+        p13["provenance"]["declared_recipe_path"] = (
+            "NSI/corpus_nsi/latex/packs/premiere/P13/other.sh"
+        )
+    elif mutation == "p13_recipe_blob":
+        p13["provenance"]["declared_recipe_blob_oid"] = "0" * 40
+    elif mutation == "p13_build_observed":
+        p13["provenance"]["build_observed"] = True
+    else:  # pragma: no cover - test table is closed below.
+        raise AssertionError(mutation)
+    if mutation != "control_digest":
+        payload["control_digest"] = inventory_module._control_digest(payload)
+    return payload, p13["path"]
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "control_digest",
+        "order",
+        "duplicate",
+        "pdf_sha",
+        "page_count",
+        "snapshot_blob",
+        "snapshot_origin",
+        "official_code",
+        "official_key",
+        "official_landing_url",
+        "official_pdf_url",
+        "p13_audience",
+        "p13_pdf_blob",
+        "p13_recipe_path",
+        "p13_recipe_blob",
+        "p13_build_observed",
+    ],
+)
+def test_pdf_artifact_registry_mutations_fail_closed(
+    inventory_module,
+    mutation: str,
+) -> None:
+    tracked = tuple(
+        sorted(
+            set(inventory_module.git_tracked_files(ROOT))
+            | {
+                "audit/PDF_ARTIFACT_REGISTRY.yaml",
+                "audit/schemas/v1/pdf-artifact-registry.schema.json",
+            }
+        )
+    )
+    source_roles = inventory_module._load_source_roles(ROOT, tracked)
+    payload, p13_path = _mutated_repository_pdf_artifact_registry(
+        inventory_module,
+        mutation,
+    )
+
+    with pytest.raises(
+        (
+            inventory_module.InventoryError,
+            inventory_module._pdf_core.PdfArtifactRegistryError,
+        )
+    ):
+        with inventory_module._read_stable_tracked_controls(ROOT, tracked) as pinned:
+            records, registry_digest = inventory_module._load_pdf_artifact_registry(
+                ROOT,
+                tracked,
+                source_roles,
+                controls=_RegistryControlOverride(pinned, payload),
+                attribution_model=inventory_module._registry_attribution_model(),
+            )
+            if mutation in {"pdf_sha", "page_count"}:
+                inventory_module._pdf_core.inventory_pdfs(
+                    ROOT,
+                    (p13_path,),
+                    _pdf_dispatch_inventory(),
+                    source_roles={p13_path: source_roles[p13_path]},
+                    pdfinfo_counter=inventory_module._page_count_with_pdfinfo,
+                    python_counter=inventory_module._page_count_with_python,
+                    artifact_registry=records,
+                    registry_digest=registry_digest,
+                )
+
+
+@pytest.mark.parametrize(
+    "role",
+    [
+        "HISTORICAL_PUBLICATION_SNAPSHOT",
+        "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER",
+    ],
+)
+def test_pdf_artifact_registry_rejects_current_pdf_and_digest_mutated_together(
+    tmp_path: Path,
+    inventory_module,
+    role: str,
+) -> None:
+    repository = _clone_with_staged_pdf_registry(tmp_path)
+    registry_path = repository / "audit/PDF_ARTIFACT_REGISTRY.yaml"
+    payload = json.loads(registry_path.read_text(encoding="utf-8"))
+    record = next(item for item in payload["records"] if item["role"] == role)
+    pdf_path = repository / record["path"]
+    pdf_path.write_bytes(pdf_path.read_bytes() + b"\n% bilateral mutation\n")
+    record["pdf_sha256"] = "sha256:" + hashlib.sha256(
+        pdf_path.read_bytes()
+    ).hexdigest()
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    registry_path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    tracked = inventory_module.git_tracked_files(repository)
+    source_roles = inventory_module._load_source_roles(repository, tracked)
+
+    with pytest.raises(inventory_module.InventoryError, match="blob.*SHA|SHA.*blob"):
+        with inventory_module._read_stable_tracked_controls(
+            repository,
+            tracked,
+        ) as controls:
+            records, registry_digest = inventory_module._load_pdf_artifact_registry(
+                repository,
+                tracked,
+                source_roles,
+                controls=controls,
+                attribution_model=inventory_module._registry_attribution_model(),
+            )
+            inventory_module._pdf_core.inventory_pdfs(
+                repository,
+                (record["path"],),
+                _pdf_dispatch_inventory(),
+                source_roles={record["path"]: source_roles[record["path"]]},
+                pdfinfo_counter=lambda _path: (record["page_count"], None),
+                python_counter=lambda _path: (None, "unused"),
+                artifact_registry=records,
+                registry_digest=registry_digest,
+            )
+
+
+def test_pdf_artifact_registry_rejects_joint_pdf_and_record_deletion(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    repository = _clone_with_staged_pdf_registry(tmp_path)
+    registry_path = repository / "audit/PDF_ARTIFACT_REGISTRY.yaml"
+    payload = json.loads(registry_path.read_text(encoding="utf-8"))
+    removed = payload["records"].pop(0)
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    registry_path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    subprocess.run(
+        ["git", "-C", str(repository), "rm", "-q", removed["path"]],
+        check=True,
+    )
+    tracked = inventory_module.git_tracked_files(repository)
+    source_roles = inventory_module._load_source_roles(repository, tracked)
+
+    with pytest.raises(inventory_module.InventoryError, match="V1|22|registre PDF"):
+        with inventory_module._read_stable_tracked_controls(
+            repository,
+            tracked,
+        ) as controls:
+            inventory_module._load_pdf_artifact_registry(
+                repository,
+                tracked,
+                source_roles,
+                controls=controls,
+                attribution_model=inventory_module._registry_attribution_model(),
+            )
+
+
+def test_pdf_artifact_registry_rejects_canonical_chapter_shadow(
+    inventory_module,
+) -> None:
+    path = "archive/1SPE-FONCTIONS-SECOND-DEGRE_eleve.pdf"
+    record = {"path": path}
+    model = {
+        "manuals": {
+            "1SPE": {
+                "chapters": {
+                    "1SPE-FONCTIONS-SECOND-DEGRE": {},
+                }
+            }
+        }
+    }
+    rejector = getattr(
+        inventory_module,
+        "_reject_pdf_registry_canonical_shadows",
+        None,
+    )
+
+    assert callable(rejector)
+    with pytest.raises(inventory_module.InventoryError, match="canonique"):
+        rejector((record,), model)
+
+
+def test_pdf_artifact_registry_provenance_is_exact(inventory_module) -> None:
+    records, control_digest = _load_repository_pdf_artifact_registry(
+        inventory_module
+    )
+
+    assert len(records) == 22
+    assert control_digest.startswith("sha256:")
+    assert {
+        role: sum(record["role"] == role for record in records.values())
+        for role in {
+            "HISTORICAL_PUBLICATION_SNAPSHOT",
+            "OFFICIAL_PROGRAM_AUTHORITY",
+            "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER",
+        }
+    } == {
+        "HISTORICAL_PUBLICATION_SNAPSHOT": 12,
+        "OFFICIAL_PROGRAM_AUTHORITY": 2,
+        "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER": 8,
+    }
+    assert all(record["compilation_evidence"] is False for record in records.values())
+    assert all(record["source_role"] == "transversal" for record in records.values())
+    snapshots = [
+        record
+        for record in records.values()
+        if record["role"] == "HISTORICAL_PUBLICATION_SNAPSHOT"
+    ]
+    assert all(
+        record["provenance"]["blob_oid"]
+        == record["provenance"]["canonical_origin_blob_oid"]
+        for record in snapshots
+    )
+    assert {
+        record["provenance"]["authority_code"]
+        for record in records.values()
+        if record["role"] == "OFFICIAL_PROGRAM_AUTHORITY"
+    } == {"MENE1901633A", "MENE1921247A"}
+    assert all(
+        record["provenance"]["build_observed"] is False
+        for record in records.values()
+        if record["role"] == "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER"
+    )
+
+
+def test_pdf_artifact_registry_records_are_deeply_immutable(
+    inventory_module,
+) -> None:
+    records, _control_digest = _load_repository_pdf_artifact_registry(
+        inventory_module
+    )
+    record = records[
+        "NSI/corpus_nsi/latex/packs/premiere/P13/P13_cours.pdf"
+    ]
+
+    with pytest.raises(TypeError):
+        record["release_state"] = "RELEASE_CANDIDATE"
+    with pytest.raises(TypeError):
+        record["provenance"]["build_observed"] = True
+
+
+def test_pdf_artifact_registry_audience_is_exact(inventory_module) -> None:
+    records, _control_digest = _load_repository_pdf_artifact_registry(
+        inventory_module
+    )
+    audiences = {
+        PurePosixPath(path).name: record["audience"]
+        for path, record in records.items()
+        if record["role"] == "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER"
+    }
+
+    assert audiences == {
+        "P13_aides.pdf": "STUDENT_FACING",
+        "P13_corrige.pdf": "PROFESSOR_ONLY",
+        "P13_cours.pdf": "STUDENT_FACING",
+        "P13_evaluation.pdf": "STUDENT_FACING",
+        "P13_fiche_methode.pdf": "STUDENT_FACING",
+        "P13_td.pdf": "PROFESSOR_ONLY",
+        "P13_tp.pdf": "PROFESSOR_ONLY",
+        "P13_trace.pdf": "STUDENT_FACING",
+    }
+    assert all(
+        "audience" not in record
+        for record in records.values()
+        if record["role"] != "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER"
+    )
+
+
+def test_pdf_artifact_registry_schema_binds_official_path_manual_and_authority() -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/pdf-artifact-registry.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    payload = yaml.safe_load(
+        (ROOT / "audit/PDF_ARTIFACT_REGISTRY.yaml").read_text(encoding="utf-8")
+    )
+    record = next(
+        item
+        for item in payload["records"]
+        if item["path"].endswith("programme_nsi_premiere.pdf")
+    )
+    validator = jsonschema.Draft202012Validator(
+        {"$defs": schema["$defs"], **schema["$defs"]["record"]}
+    )
+
+    validator.validate(record)
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(record | {"manual": "TNSI"})
+    wrong_authority = deepcopy(record)
+    wrong_authority["provenance"]["authority_key"] = (
+        "sources.SRC-BO2019-NSI-TERMINALE"
+    )
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(wrong_authority)
+
+
+def _pdf_dispatch_inventory() -> dict[str, object]:
+    return {
+        "manuals": {},
+        "anomalies": {"unattributed_pdfs": []},
+    }
+
+
+def _pdf_dispatch_record(path: str, *, audience: str | None = None) -> dict[str, object]:
+    record: dict[str, object] = {
+        "path": path,
+        "role": "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER",
+        "manual": "1NSI",
+        "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+        "variant": None,
+        "scope": "harvest_historical_render",
+        "tracking": "TRACKED",
+        "source_role": "transversal",
+        "pdf_sha256": "sha256:" + "a" * 64,
+        "page_count": 3,
+        "compilation_evidence": False,
+        "release_state": "NON_PUBLISHABLE",
+    }
+    if audience is not None:
+        record["audience"] = audience
+    return record
+
+
+def test_pdf_artifact_dispatch_uses_exact_registry_path_after_canonical_failure(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    path = "archive/P13_cours.pdf"
+    record = _pdf_dispatch_record(path, audience="STUDENT_FACING")
+    monkeypatch.setattr(
+        inventory_module._pdf_core,
+        "inspect_stable_pdf",
+        lambda *_args, **_kwargs: ("sha256:" + "a" * 64, 3, "pdfinfo", None),
+    )
+    inventory = _pdf_dispatch_inventory()
+
+    artifacts = inventory_module._pdf_core.inventory_pdfs(
+        tmp_path,
+        (path,),
+        inventory,
+        source_roles={path: "transversal"},
+        pdfinfo_counter=lambda _path: (3, None),
+        python_counter=lambda _path: (None, "unused"),
+        artifact_registry={path: record},
+        registry_digest="sha256:" + "b" * 64,
+    )
+
+    assert inventory["anomalies"]["unattributed_pdfs"] == []
+    assert artifacts == [
+        {
+            "artifact_role": "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER",
+            "audience": "STUDENT_FACING",
+            "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+            "compilation_evidence": False,
+            "manual": "1NSI",
+            "page_count": 3,
+            "page_count_method": "pdfinfo",
+            "path": path,
+            "reason": None,
+            "registry_digest": "sha256:" + "b" * 64,
+            "registry_source": "audit/PDF_ARTIFACT_REGISTRY.yaml",
+            "release_state": "NON_PUBLISHABLE",
+            "scope": "harvest_historical_render",
+            "sha256": "sha256:" + "a" * 64,
+            "source_role": "transversal",
+            "status": "counted",
+            "variant": None,
+        }
+    ]
+
+
+def test_pdf_artifact_dispatch_does_not_match_basename(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    path = "other/P13_cours.pdf"
+    registered = "archive/P13_cours.pdf"
+    monkeypatch.setattr(
+        inventory_module._pdf_core,
+        "inspect_stable_pdf",
+        lambda *_args, **_kwargs: ("sha256:" + "c" * 64, 1, "pdfinfo", None),
+    )
+    inventory = _pdf_dispatch_inventory()
+
+    artifacts = inventory_module._pdf_core.inventory_pdfs(
+        tmp_path,
+        (path,),
+        inventory,
+        source_roles={path: "transversal"},
+        pdfinfo_counter=lambda _path: (1, None),
+        python_counter=lambda _path: (None, "unused"),
+        artifact_registry={registered: _pdf_dispatch_record(registered)},
+        registry_digest="sha256:" + "b" * 64,
+    )
+
+    assert len(inventory["anomalies"]["unattributed_pdfs"]) == 1
+    assert artifacts[0]["manual"] is None
+    assert "artifact_role" not in artifacts[0]
+
+
+def test_pdf_artifact_toctou_reuses_single_inspection_digest_and_pages(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    path = "archive/P13_cours.pdf"
+    calls: list[str] = []
+
+    def inspect(_root: Path, inspected: str, **_kwargs):
+        calls.append(inspected)
+        return "sha256:" + "a" * 64, 3, "python", None
+
+    monkeypatch.setattr(inventory_module._pdf_core, "inspect_stable_pdf", inspect)
+    inventory = _pdf_dispatch_inventory()
+
+    artifact = inventory_module._pdf_core.inventory_pdfs(
+        tmp_path,
+        (path,),
+        inventory,
+        source_roles={path: "transversal"},
+        pdfinfo_counter=lambda _path: (None, "unused"),
+        python_counter=lambda _path: (3, None),
+        artifact_registry={
+            path: _pdf_dispatch_record(path, audience="STUDENT_FACING")
+        },
+        registry_digest="sha256:" + "b" * 64,
+    )[0]
+
+    assert calls == [path]
+    assert artifact["sha256"] == "sha256:" + "a" * 64
+    assert artifact["page_count"] == 3
+
+
+def _canonical_pdf_inventory_row() -> dict[str, object]:
+    return {
+        "chapter": None,
+        "manual": "1SPE",
+        "page_count": 12,
+        "page_count_method": "pdfinfo",
+        "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE.pdf",
+        "reason": None,
+        "scope": "manual",
+        "sha256": "sha256:" + "a" * 64,
+        "source_role": "generated_dependency",
+        "status": "counted",
+        "variant": None,
+    }
+
+
+def _registered_pdf_inventory_row(role: str) -> dict[str, object]:
+    common = _canonical_pdf_inventory_row() | {
+        "artifact_role": role,
+        "compilation_evidence": False,
+        "registry_digest": "sha256:" + "b" * 64,
+        "registry_source": "audit/PDF_ARTIFACT_REGISTRY.yaml",
+        "source_role": "transversal",
+    }
+    if role == "HISTORICAL_PUBLICATION_SNAPSHOT":
+        return common | {
+            "manual": "1SPE",
+            "path": "MANUELS_PDF_PUBLICATION/01_Maths_1re_Spe_Eleve.pdf",
+            "release_state": "STALE_UNDECIDED",
+            "scope": "publication_snapshot",
+            "variant": "eleve",
+        }
+    if role == "OFFICIAL_PROGRAM_AUTHORITY":
+        return common | {
+            "manual": "1NSI",
+            "path": (
+                "NSI/corpus_nsi/00_programmes_officiels/"
+                "programme_nsi_premiere.pdf"
+            ),
+            "release_state": "REFERENCE_ONLY",
+            "scope": "official_program_authority",
+            "variant": None,
+        }
+    if role == "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER":
+        return common | {
+            "audience": "STUDENT_FACING",
+            "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+            "manual": "1NSI",
+            "path": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_cours.pdf",
+            "release_state": "NON_PUBLISHABLE",
+            "scope": "harvest_historical_render",
+            "variant": None,
+        }
+    raise AssertionError(role)
+
+
+def test_pdf_artifact_inventory_schema_closes_pdf_rows_and_requires_sha256() -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/inventory-collection.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    row_schema = {
+        "$defs": schema["$defs"],
+        **schema["$defs"]["pdfArtifact"],
+    }
+    validator = jsonschema.Draft202012Validator(row_schema)
+    canonical = _canonical_pdf_inventory_row()
+
+    validator.validate(canonical)
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate({key: value for key, value in canonical.items() if key != "sha256"})
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(canonical | {"unexpected": True})
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(canonical | {"audience": "STUDENT_FACING"})
+
+
+def test_pdf_artifact_inventory_schema_requires_registered_fields_and_p13_audience() -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/inventory-collection.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    validator = jsonschema.Draft202012Validator(
+        {"$defs": schema["$defs"], **schema["$defs"]["pdfArtifact"]}
+    )
+    registered = _canonical_pdf_inventory_row() | {
+        "artifact_role": "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER",
+        "audience": "STUDENT_FACING",
+        "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+        "compilation_evidence": False,
+        "manual": "1NSI",
+        "path": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_cours.pdf",
+        "registry_digest": "sha256:" + "b" * 64,
+        "registry_source": "audit/PDF_ARTIFACT_REGISTRY.yaml",
+        "release_state": "NON_PUBLISHABLE",
+        "scope": "harvest_historical_render",
+        "source_role": "transversal",
+        "variant": None,
+    }
+
+    validator.validate(registered)
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate({key: value for key, value in registered.items() if key != "audience"})
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(registered | {"audience": "PROFESSOR_ONLY"})
+
+
+@pytest.mark.parametrize(
+    "role",
+    [
+        "HISTORICAL_PUBLICATION_SNAPSHOT",
+        "OFFICIAL_PROGRAM_AUTHORITY",
+        "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER",
+    ],
+)
+@pytest.mark.parametrize(
+    ("field", "invalid"),
+    [
+        ("sha256", None),
+        ("page_count", None),
+        ("page_count_method", None),
+        ("status", "page_count_unavailable"),
+        ("reason", "reader failure"),
+    ],
+)
+def test_pdf_artifact_inventory_schema_requires_counted_registered_state(
+    role: str,
+    field: str,
+    invalid: object,
+) -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/inventory-collection.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    validator = jsonschema.Draft202012Validator(
+        {"$defs": schema["$defs"], **schema["$defs"]["pdfArtifact"]}
+    )
+    registered = _registered_pdf_inventory_row(role)
+    validator.validate(registered)
+
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(registered | {field: invalid})
+
+
+def test_publication_snapshots_blocker_is_one_collection_projection(
+    inventory_module,
+) -> None:
+    registry_digest = "sha256:" + "b" * 64
+    inventory = {
+        "anomalies": {},
+        "anomaly_qualifications": {},
+        "provenance": {
+            "pdf_artifact_registry_digest": registry_digest,
+        },
+        "pdfs": [
+            {
+                "artifact_role": "HISTORICAL_PUBLICATION_SNAPSHOT",
+                "path": f"MANUELS_PDF_PUBLICATION/{index:02d}.pdf",
+                "registry_digest": registry_digest,
+                "release_state": "STALE_UNDECIDED",
+            }
+            for index in range(1, 13)
+        ],
+    }
+
+    assert inventory_module._collection_blockers(inventory) == [
+        {
+            "code": "publication_snapshots",
+            "detail": "12",
+            "source": "stale_undecided",
+        }
+    ]
+
+
+def _publication_snapshot_inventory(
+    projection_digest: str,
+    row_digests: tuple[str, ...],
+) -> dict[str, object]:
+    return {
+        "anomalies": {},
+        "anomaly_qualifications": {},
+        "provenance": {
+            "pdf_artifact_registry_digest": projection_digest,
+        },
+        "pdfs": [
+            {
+                "artifact_role": "HISTORICAL_PUBLICATION_SNAPSHOT",
+                "path": f"MANUELS_PDF_PUBLICATION/{index:02d}.pdf",
+                "registry_digest": digest,
+                "release_state": "STALE_UNDECIDED",
+            }
+            for index, digest in enumerate(row_digests, start=1)
+        ],
+    }
+
+
+def test_publication_snapshots_blocker_rejects_divergent_registry_digest(
+    inventory_module,
+) -> None:
+    projection_digest = "sha256:" + "b" * 64
+    inventory = _publication_snapshot_inventory(
+        projection_digest,
+        ("sha256:" + "c" * 64,) * 12,
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="registry_digest"):
+        inventory_module._collection_blockers(inventory)
+
+
+def test_publication_snapshots_blocker_rejects_mixed_registry_digests(
+    inventory_module,
+) -> None:
+    projection_digest = "sha256:" + "b" * 64
+    inventory = _publication_snapshot_inventory(
+        projection_digest,
+        tuple(
+            projection_digest if index % 2 else "sha256:" + "c" * 64
+            for index in range(12)
+        ),
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="registry_digest"):
+        inventory_module._collection_blockers(inventory)
+
+
+def test_publication_snapshots_blocker_rejects_invalid_projection_digest(
+    inventory_module,
+) -> None:
+    inventory = _publication_snapshot_inventory(
+        "sha256:not-a-digest",
+        ("sha256:" + "b" * 64,) * 12,
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="registry_digest"):
+        inventory_module._collection_blockers(inventory)
+
+
+@pytest.mark.parametrize("snapshot_count", [11, 13])
+def test_publication_snapshots_blocker_requires_exactly_twelve_stale_snapshots(
+    inventory_module,
+    snapshot_count: int,
+) -> None:
+    registry_digest = "sha256:" + "b" * 64
+    inventory = _publication_snapshot_inventory(
+        registry_digest,
+        (registry_digest,) * snapshot_count,
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="12"):
+        inventory_module._collection_blockers(inventory)
+
+
+def test_repository_pdf_artifact_registry_attribution(inventory_module) -> None:
+    before = {
+        path.relative_to(ROOT).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+        for path in ROOT.rglob("*.pdf")
+        if ".git" not in path.parts
+    }
+    inventory = inventory_module.build_inventory(ROOT)
+    registered = [row for row in inventory["pdfs"] if "artifact_role" in row]
+
+    assert len(before) == 36
+    assert len(inventory["pdfs"]) == 34
+    assert len(registered) == 22
+    assert inventory["anomalies"]["unattributed_pdfs"] == []
+    assert sum(
+        row["artifact_role"] == "HISTORICAL_PUBLICATION_SNAPSHOT"
+        for row in registered
+    ) == 12
+    assert {
+        PurePosixPath(row["path"]).name: row["audience"]
+        for row in registered
+        if row["artifact_role"]
+        == "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER"
+    } == {
+        "P13_aides.pdf": "STUDENT_FACING",
+        "P13_corrige.pdf": "PROFESSOR_ONLY",
+        "P13_cours.pdf": "STUDENT_FACING",
+        "P13_evaluation.pdf": "STUDENT_FACING",
+        "P13_fiche_methode.pdf": "STUDENT_FACING",
+        "P13_td.pdf": "PROFESSOR_ONLY",
+        "P13_tp.pdf": "PROFESSOR_ONLY",
+        "P13_trace.pdf": "STUDENT_FACING",
+    }
+    assert all(row["compilation_evidence"] is False for row in registered)
+    assert inventory_module._collection_blockers(inventory)[-1] == {
+        "code": "publication_snapshots",
+        "detail": "12",
+        "source": "stale_undecided",
+    }
+    after = {
+        path.relative_to(ROOT).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+        for path in ROOT.rglob("*.pdf")
+        if ".git" not in path.parts
+    }
+    assert after == before

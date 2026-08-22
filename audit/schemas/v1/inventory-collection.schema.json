@@ -76,7 +76,10 @@
       }
     },
     "observed_builds": { "type": "array" },
-    "pdfs": { "type": "array" },
+    "pdfs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/pdfArtifact" }
+    },
     "provenance": { "type": "object" },
     "reference_graph": { "type": "array" },
     "report_reconciliation": { "type": "object" },
@@ -87,6 +90,170 @@
     "source_files": { "type": "array", "items": { "type": "string" } }
   },
   "$defs": {
+    "pdfArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "chapter",
+        "manual",
+        "page_count",
+        "page_count_method",
+        "path",
+        "reason",
+        "scope",
+        "sha256",
+        "source_role",
+        "status",
+        "variant"
+      ],
+      "properties": {
+        "artifact_role": {
+          "enum": [
+            "HISTORICAL_PUBLICATION_SNAPSHOT",
+            "OFFICIAL_PROGRAM_AUTHORITY",
+            "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER"
+          ]
+        },
+        "audience": { "enum": ["PROFESSOR_ONLY", "STUDENT_FACING"] },
+        "chapter": { "type": ["string", "null"] },
+        "compilation_evidence": { "const": false },
+        "manual": {
+          "type": ["string", "null"],
+          "enum": [null, "1SPE", "TSPE_2026_2027", "TCOMPL", "TEXPERTES", "1NSI", "TNSI"]
+        },
+        "page_count": { "type": ["integer", "null"], "minimum": 1 },
+        "page_count_method": {
+          "type": ["string", "null"],
+          "enum": [null, "pdfinfo", "python"]
+        },
+        "path": { "type": "string", "minLength": 1 },
+        "reason": { "type": ["string", "null"] },
+        "registry_digest": { "$ref": "#/$defs/sha256" },
+        "registry_source": { "const": "audit/PDF_ARTIFACT_REGISTRY.yaml" },
+        "release_state": {
+          "enum": ["STALE_UNDECIDED", "REFERENCE_ONLY", "NON_PUBLISHABLE"]
+        },
+        "scope": { "type": ["string", "null"] },
+        "sha256": {
+          "oneOf": [
+            { "$ref": "#/$defs/sha256" },
+            { "type": "null" }
+          ]
+        },
+        "source_role": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["counted", "page_count_unavailable"] },
+        "variant": { "type": ["string", "null"] }
+      },
+      "oneOf": [
+        {
+          "not": {
+            "anyOf": [
+              { "required": ["artifact_role"] },
+              { "required": ["audience"] },
+              { "required": ["compilation_evidence"] },
+              { "required": ["registry_digest"] },
+              { "required": ["registry_source"] },
+              { "required": ["release_state"] }
+            ]
+          }
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/registeredCountedPdfState" }
+          ],
+          "required": [
+            "artifact_role",
+            "compilation_evidence",
+            "registry_digest",
+            "registry_source",
+            "release_state"
+          ],
+          "properties": {
+            "artifact_role": { "const": "HISTORICAL_PUBLICATION_SNAPSHOT" },
+            "chapter": { "type": "null" },
+            "release_state": { "const": "STALE_UNDECIDED" },
+            "scope": { "const": "publication_snapshot" },
+            "source_role": { "const": "transversal" },
+            "variant": { "enum": ["eleve", "professeur"] }
+          },
+          "not": { "required": ["audience"] }
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/registeredCountedPdfState" }
+          ],
+          "required": [
+            "artifact_role",
+            "compilation_evidence",
+            "registry_digest",
+            "registry_source",
+            "release_state"
+          ],
+          "properties": {
+            "artifact_role": { "const": "OFFICIAL_PROGRAM_AUTHORITY" },
+            "chapter": { "type": "null" },
+            "release_state": { "const": "REFERENCE_ONLY" },
+            "scope": { "const": "official_program_authority" },
+            "source_role": { "const": "transversal" },
+            "variant": { "type": "null" }
+          },
+          "not": { "required": ["audience"] }
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/registeredCountedPdfState" }
+          ],
+          "required": [
+            "artifact_role",
+            "audience",
+            "compilation_evidence",
+            "registry_digest",
+            "registry_source",
+            "release_state"
+          ],
+          "properties": {
+            "artifact_role": { "const": "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER" },
+            "chapter": { "const": "1NSI-ALGO-DICHO-GLOUTON-KNN" },
+            "manual": { "const": "1NSI" },
+            "release_state": { "const": "NON_PUBLISHABLE" },
+            "scope": { "const": "harvest_historical_render" },
+            "source_role": { "const": "transversal" },
+            "variant": { "type": "null" }
+          },
+          "oneOf": [
+            {
+              "properties": {
+                "audience": { "const": "PROFESSOR_ONLY" },
+                "path": { "pattern": "/P13_(?:corrige|td|tp)\\.pdf$" }
+              }
+            },
+            {
+              "properties": {
+                "audience": { "const": "STUDENT_FACING" },
+                "path": { "pattern": "/P13_(?:aides|cours|evaluation|fiche_methode|trace)\\.pdf$" }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "registeredCountedPdfState": {
+      "type": "object",
+      "required": [
+        "sha256",
+        "page_count",
+        "page_count_method",
+        "status",
+        "reason"
+      ],
+      "properties": {
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "page_count": { "type": "integer", "minimum": 1 },
+        "page_count_method": { "enum": ["pdfinfo", "python"] },
+        "status": { "const": "counted" },
+        "reason": { "type": "null" }
+      }
+    },
     "stringList": {
       "type": "array",
       "items": { "type": "string", "minLength": 1 },

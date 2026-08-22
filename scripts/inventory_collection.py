@@ -103,6 +103,16 @@ BASELINE_UPDATE_REPORT_FILE = "audit/BASELINE_UPDATE_REPORT.md"
 BASELINE_FREEZE_REPORT_FILE = "audit/BASELINE_FREEZE_REPORT.md"
 BUILD_MANIFEST_FILE = "audit/BUILD_MANIFEST.json"
 BUILD_PRODUCERS_FILE = "audit/BUILD_PRODUCERS.yaml"
+PDF_ARTIFACT_REGISTRY_FILE = "audit/PDF_ARTIFACT_REGISTRY.yaml"
+PDF_ARTIFACT_REGISTRY_SCHEMA_FILE = (
+    "audit/schemas/v1/pdf-artifact-registry.schema.json"
+)
+OFFICIAL_PROGRAM_AUTHORITY_FILE = "docs/programmes/PROGRAMMES_2026_2027.yaml"
+STABLE_TRACKED_CONTROL_FILES = (
+    PDF_ARTIFACT_REGISTRY_FILE,
+    PDF_ARTIFACT_REGISTRY_SCHEMA_FILE,
+    OFFICIAL_PROGRAM_AUTHORITY_FILE,
+)
 CANONICAL_OBJECT_TYPE_ONTOLOGY_FILE = (
     "audit/CANONICAL_OBJECT_TYPE_ONTOLOGY.yaml"
 )
@@ -145,6 +155,9 @@ SCHEMA_REGISTRY: Mapping[str, Mapping[int, str]] = MappingProxyType(
         ),
         "build_producers": MappingProxyType(
             {1: "audit/schemas/v1/build-producers.schema.json"}
+        ),
+        "pdf_artifact_registry": MappingProxyType(
+            {1: PDF_ARTIFACT_REGISTRY_SCHEMA_FILE}
         ),
         "canonical_object_type_ontology": MappingProxyType(
             {
@@ -475,6 +488,463 @@ def _load_control_yaml_payload(path: Path, *, default: Any = None) -> Any:
         raise InventoryError(f"contrôle YAML invalide {path}: {exc}") from exc
 
 
+def _control_stat_fingerprint(
+    value: os.stat_result,
+) -> tuple[int, int, int, int, int, int, int]:
+    return (
+        value.st_dev,
+        value.st_ino,
+        value.st_mode,
+        value.st_size,
+        value.st_mtime_ns,
+        value.st_ctime_ns,
+        value.st_nlink,
+    )
+
+
+class _StableTrackedControlSession:
+    """Pin versioned control bytes and their complete repository path."""
+
+    _directory_flags = (
+        os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC
+    )
+    _leaf_flags = os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC | os.O_NONBLOCK
+
+    def __init__(
+        self,
+        root: Path,
+        tracked: Iterable[str],
+        paths: tuple[str, ...],
+    ) -> None:
+        self.root = Path(root).resolve()
+        self.paths = paths
+        self._records: dict[str, dict[str, Any]] = {}
+        tracked_set = frozenset(tracked)
+        missing = [path for path in paths if path not in tracked_set]
+        if missing:
+            raise InventoryError(
+                "contrôle suivi obligatoire absent: " + ", ".join(missing)
+            )
+        try:
+            for path in paths:
+                self._records[path] = self._pin(path)
+        except BaseException:
+            self.close()
+            raise
+        self.overrides: Mapping[str, tuple[bytes, str]] = MappingProxyType(
+            {
+                path: (record["content"], record["digest"])
+                for path, record in self._records.items()
+            }
+        )
+
+    def _pin(self, path: str) -> dict[str, Any]:
+        components = tuple(path.split("/"))
+        if (
+            path.startswith("/")
+            or "\\" in path
+            or any(component in {"", ".", ".."} for component in components)
+        ):
+            raise InventoryError(f"chemin de contrôle non canonique: {path}")
+        descriptors: list[int] = []
+        parent_fingerprints: list[tuple[int, int, int, int, int, int, int]] = []
+        try:
+            current = os.open(self.root, self._directory_flags)
+            descriptors.append(current)
+            parent_fingerprints.append(
+                _control_stat_fingerprint(os.fstat(current))
+            )
+            for component in components[:-1]:
+                current = os.open(
+                    component,
+                    self._directory_flags,
+                    dir_fd=current,
+                )
+                descriptors.append(current)
+                parent_fingerprints.append(
+                    _control_stat_fingerprint(os.fstat(current))
+                )
+            leaf_name = components[-1]
+            before = os.stat(leaf_name, dir_fd=current, follow_symlinks=False)
+            if stat.S_ISLNK(before.st_mode):
+                raise InventoryError(
+                    f"contrôle suivi lien symbolique interdit: {path}"
+                )
+            if not stat.S_ISREG(before.st_mode):
+                raise InventoryError(f"contrôle suivi non régulier: {path}")
+            if before.st_nlink != 1:
+                raise InventoryError(f"contrôle suivi hardlink interdit: {path}")
+            leaf_fd = os.open(leaf_name, self._leaf_flags, dir_fd=current)
+            descriptors.append(leaf_fd)
+            leaf_fingerprint = _control_stat_fingerprint(os.fstat(leaf_fd))
+            if leaf_fingerprint != _control_stat_fingerprint(before):
+                raise InventoryError(f"contrôle suivi modifié pendant lecture: {path}")
+            chunks: list[bytes] = []
+            while True:
+                chunk = os.read(leaf_fd, 1024 * 1024)
+                if not chunk:
+                    break
+                chunks.append(chunk)
+            content = b"".join(chunks)
+            if len(content) != leaf_fingerprint[3]:
+                raise InventoryError(f"contrôle suivi modifié pendant lecture: {path}")
+            return {
+                "components": components,
+                "descriptors": descriptors,
+                "parent_fingerprints": parent_fingerprints,
+                "leaf_fd": leaf_fd,
+                "leaf_fingerprint": leaf_fingerprint,
+                "content": content,
+                "digest": "sha256:" + hashlib.sha256(content).hexdigest(),
+            }
+        except OSError as exc:
+            for descriptor in reversed(descriptors):
+                try:
+                    os.close(descriptor)
+                except OSError:
+                    pass
+            raise InventoryError(
+                f"contrôle suivi inaccessible sans suivi de lien {path}: "
+                f"{type(exc).__name__}"
+            ) from exc
+        except BaseException:
+            for descriptor in reversed(descriptors):
+                try:
+                    os.close(descriptor)
+                except OSError:
+                    pass
+            raise
+
+    def bytes(self, path: str) -> bytes:
+        return self._records[path]["content"]
+
+    def digest(self, path: str) -> str:
+        return self._records[path]["digest"]
+
+    def validate(self) -> None:
+        for path, record in self._records.items():
+            reopened: list[int] = []
+            try:
+                if _control_stat_fingerprint(os.fstat(record["leaf_fd"])) != record[
+                    "leaf_fingerprint"
+                ]:
+                    raise InventoryError(f"contrôle suivi modifié: {path}")
+                for descriptor, expected in zip(
+                    record["descriptors"][:-1],
+                    record["parent_fingerprints"],
+                    strict=True,
+                ):
+                    if _control_stat_fingerprint(os.fstat(descriptor)) != expected:
+                        raise InventoryError(f"parent du contrôle modifié: {path}")
+                current = record["descriptors"][0]
+                for index, component in enumerate(
+                    record["components"][:-1], start=1
+                ):
+                    current = os.open(
+                        component,
+                        self._directory_flags,
+                        dir_fd=current,
+                    )
+                    reopened.append(current)
+                    if _control_stat_fingerprint(os.fstat(current)) != record[
+                        "parent_fingerprints"
+                    ][index]:
+                        raise InventoryError(f"parent du contrôle modifié: {path}")
+                leaf_name = record["components"][-1]
+                leaf_lstat = os.stat(
+                    leaf_name,
+                    dir_fd=current,
+                    follow_symlinks=False,
+                )
+                if _control_stat_fingerprint(leaf_lstat) != record[
+                    "leaf_fingerprint"
+                ]:
+                    raise InventoryError(f"contrôle suivi modifié: {path}")
+                leaf_fd = os.open(leaf_name, self._leaf_flags, dir_fd=current)
+                reopened.append(leaf_fd)
+                if _control_stat_fingerprint(os.fstat(leaf_fd)) != record[
+                    "leaf_fingerprint"
+                ]:
+                    raise InventoryError(f"contrôle suivi modifié: {path}")
+            except OSError as exc:
+                raise InventoryError(f"contrôle suivi modifié: {path}") from exc
+            finally:
+                for descriptor in reversed(reopened):
+                    try:
+                        os.close(descriptor)
+                    except OSError:
+                        pass
+
+    def close(self) -> None:
+        for record in self._records.values():
+            for descriptor in reversed(record["descriptors"]):
+                try:
+                    os.close(descriptor)
+                except OSError:
+                    pass
+        self._records.clear()
+
+
+@contextmanager
+def _read_stable_tracked_controls(
+    root: Path,
+    tracked: Iterable[str],
+    paths: tuple[str, ...] = STABLE_TRACKED_CONTROL_FILES,
+):
+    session = _StableTrackedControlSession(root, tracked, paths)
+    try:
+        yield session
+        session.validate()
+    finally:
+        session.close()
+
+
+def _parse_pinned_yaml(content: bytes, *, path: str) -> Mapping[str, Any]:
+    try:
+        payload = yaml.load(content.decode("utf-8"), Loader=_UniqueKeySafeLoader)
+    except (UnicodeError, yaml.YAMLError) as exc:
+        raise InventoryError(f"contrôle YAML invalide {path}: {exc}") from exc
+    if not isinstance(payload, Mapping):
+        raise InventoryError(f"contrôle YAML invalide {path}: racine non objet")
+    return payload
+
+
+def _parse_pinned_json(content: bytes, *, path: str) -> Mapping[str, Any]:
+    def reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        payload: dict[str, Any] = {}
+        for key, value in pairs:
+            if key in payload:
+                raise InventoryError(
+                    f"contrôle JSON invalide {path}: clé dupliquée {key}"
+                )
+            payload[key] = value
+        return payload
+
+    try:
+        payload = json.loads(
+            content.decode("utf-8"),
+            object_pairs_hook=reject_duplicate_keys,
+        )
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise InventoryError(f"contrôle JSON invalide {path}: {exc}") from exc
+    if not isinstance(payload, Mapping):
+        raise InventoryError(f"contrôle JSON invalide {path}: racine non objet")
+    return payload
+
+
+def _git_blob_oid(root: Path, commit: str, path: str) -> str:
+    oid = _git_value(root, ("rev-parse", f"{commit}:{path}"), "")
+    if not re.fullmatch(r"[0-9a-f]{40}", oid):
+        raise InventoryError(f"objet Git absent: {commit}:{path}")
+    object_type = _git_value(root, ("cat-file", "-t", oid), "")
+    if object_type != "blob":
+        raise InventoryError(f"objet Git non blob: {commit}:{path}")
+    return oid
+
+
+def _git_blob_sha256(root: Path, oid: str) -> str:
+    try:
+        completed = subprocess.run(
+            ["git", "-C", str(root), "cat-file", "blob", oid],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+    except (subprocess.CalledProcessError, OSError) as exc:
+        raise InventoryError(f"octets du blob Git indisponibles: {oid}") from exc
+    return "sha256:" + hashlib.sha256(completed.stdout).hexdigest()
+
+
+def _registry_attribution_model() -> dict[str, Any]:
+    return {
+        "manuals": {
+            manual_id: {"chapters": {}}
+            for manual_id in MANUALS
+        }
+    }
+
+
+def _reject_pdf_registry_canonical_shadows(
+    records: Iterable[Mapping[str, Any]],
+    attribution_model: Mapping[str, Any],
+) -> None:
+    for record in records:
+        path = str(record["path"])
+        if _pdf_core.attribute_pdf(path, attribution_model)["manual"] is not None:
+            raise InventoryError(f"PDF déjà attribué canoniquement: {path}")
+
+
+def _authority_record(
+    authority: Mapping[str, Any],
+    dotted_key: str,
+) -> Mapping[str, Any]:
+    current: Any = authority
+    for component in dotted_key.split("."):
+        if not isinstance(current, Mapping) or component not in current:
+            raise InventoryError(f"autorité programme absente: {dotted_key}")
+        current = current[component]
+    if not isinstance(current, Mapping):
+        raise InventoryError(f"autorité programme invalide: {dotted_key}")
+    return current
+
+
+def _deep_freeze(value: Any) -> Any:
+    if isinstance(value, Mapping):
+        return MappingProxyType(
+            {key: _deep_freeze(item) for key, item in value.items()}
+        )
+    if isinstance(value, (list, tuple)):
+        return tuple(_deep_freeze(item) for item in value)
+    if isinstance(value, (set, frozenset)):
+        return frozenset(_deep_freeze(item) for item in value)
+    return value
+
+
+def _load_pdf_artifact_registry(
+    root: Path,
+    tracked: Iterable[str],
+    source_roles: Mapping[str, str],
+    *,
+    controls: _StableTrackedControlSession,
+    attribution_model: Mapping[str, Any],
+) -> tuple[Mapping[str, Mapping[str, Any]], str]:
+    tracked_set = frozenset(tracked)
+    registry_payload = _parse_pinned_yaml(
+        controls.bytes(PDF_ARTIFACT_REGISTRY_FILE),
+        path=PDF_ARTIFACT_REGISTRY_FILE,
+    )
+    schema_payload = _parse_pinned_json(
+        controls.bytes(PDF_ARTIFACT_REGISTRY_SCHEMA_FILE),
+        path=PDF_ARTIFACT_REGISTRY_SCHEMA_FILE,
+    )
+    authority_payload = _parse_pinned_yaml(
+        controls.bytes(OFFICIAL_PROGRAM_AUTHORITY_FILE),
+        path=OFFICIAL_PROGRAM_AUTHORITY_FILE,
+    )
+    validated = _validate_control_payload(
+        root,
+        PDF_ARTIFACT_REGISTRY_FILE,
+        registry_payload,
+        artifact_type="pdf_artifact_registry",
+        schema_payload=schema_payload,
+    )
+    records = validated.get("records")
+    if not isinstance(records, list):
+        raise InventoryError("records invalides dans le registre PDF")
+    paths = [record.get("path") for record in records if isinstance(record, Mapping)]
+    if len(paths) != len(records) or paths != sorted(paths):
+        raise InventoryError("ordre non canonique dans le registre PDF")
+    if len(set(paths)) != len(paths):
+        raise InventoryError("chemin dupliqué dans le registre PDF")
+    _reject_pdf_registry_canonical_shadows(records, attribution_model)
+
+    prefixes = (
+        "MANUELS_PDF_PUBLICATION/",
+        "NSI/corpus_nsi/00_programmes_officiels/",
+        "NSI/corpus_nsi/latex/packs/premiere/P13/",
+    )
+    controlled_pdfs = {
+        path
+        for path in tracked_set
+        if path.lower().endswith(".pdf") and path.startswith(prefixes)
+    }
+    if set(paths) != controlled_pdfs:
+        missing = sorted(controlled_pdfs - set(paths))
+        unexpected = sorted(set(paths) - controlled_pdfs)
+        raise InventoryError(
+            "couverture du registre PDF incohérente: "
+            f"manquants={missing}; inattendus={unexpected}"
+        )
+
+    expected_p13_audiences = {
+        "P13_aides.pdf": "STUDENT_FACING",
+        "P13_corrige.pdf": "PROFESSOR_ONLY",
+        "P13_cours.pdf": "STUDENT_FACING",
+        "P13_evaluation.pdf": "STUDENT_FACING",
+        "P13_fiche_methode.pdf": "STUDENT_FACING",
+        "P13_td.pdf": "PROFESSOR_ONLY",
+        "P13_tp.pdf": "PROFESSOR_ONLY",
+        "P13_trace.pdf": "STUDENT_FACING",
+    }
+    immutable: dict[str, Mapping[str, Any]] = {}
+    for raw_record in records:
+        assert isinstance(raw_record, Mapping)
+        record = dict(raw_record)
+        path = str(record["path"])
+        _clean_path(path, role="registre PDF", repository=root)
+        if path not in tracked_set:
+            raise InventoryError(f"PDF du registre non suivi: {path}")
+        if source_roles.get(path) != record["source_role"]:
+            raise InventoryError(f"source_role incohérent pour {path}")
+        if record.get("compilation_evidence") is not False:
+            raise InventoryError(f"fausse preuve de compilation pour {path}")
+        provenance = record["provenance"]
+        role = record["role"]
+        if role == "HISTORICAL_PUBLICATION_SNAPSHOT":
+            commit = provenance["commit"]
+            if commit != "e630c5adcff0a8993bbf565edfb98b7820038ab3":
+                raise InventoryError(f"commit snapshot incohérent pour {path}")
+            blob_oid = _git_blob_oid(root, commit, path)
+            origin = provenance["canonical_origin_path"]
+            origin_oid = _git_blob_oid(root, commit, origin)
+            if (
+                blob_oid != provenance["blob_oid"]
+                or origin_oid != provenance["canonical_origin_blob_oid"]
+                or blob_oid != origin_oid
+            ):
+                raise InventoryError(f"preuve blob snapshot incohérente pour {path}")
+            if _git_blob_sha256(root, blob_oid) != record["pdf_sha256"]:
+                raise InventoryError(f"blob Git et SHA PDF divergents pour {path}")
+            origin_attribution = _pdf_core.attribute_pdf(origin, attribution_model)
+            if (
+                origin_attribution["manual"] != record["manual"]
+                or origin_attribution["variant"] != record["variant"]
+            ):
+                raise InventoryError(f"origine canonique incohérente pour {path}")
+        elif role == "OFFICIAL_PROGRAM_AUTHORITY":
+            authority = _authority_record(
+                authority_payload,
+                provenance["authority_key"],
+            )
+            expected = {
+                "arrete": provenance["authority_code"],
+                "url": provenance["landing_url"],
+                "annexe_pdf": provenance["pdf_url"],
+                "fichier": path,
+                "sha256": record["pdf_sha256"].removeprefix("sha256:"),
+            }
+            for field, value in expected.items():
+                if authority.get(field) != value:
+                    raise InventoryError(
+                        f"autorité programme incohérente pour {path}: {field}"
+                    )
+        elif role == "HARVEST_NON_PUBLISHABLE_HISTORICAL_RENDER":
+            import_commit = provenance["import_commit"]
+            if import_commit != "10a15746bdbb043c44d461eac40fa4041d23988e":
+                raise InventoryError(f"commit P13 incohérent pour {path}")
+            pdf_blob_oid = _git_blob_oid(root, import_commit, path)
+            if pdf_blob_oid != provenance["pdf_blob_oid"]:
+                raise InventoryError(f"blob P13 incohérent pour {path}")
+            if _git_blob_sha256(root, pdf_blob_oid) != record["pdf_sha256"]:
+                raise InventoryError(f"blob Git et SHA PDF divergents pour {path}")
+            recipe = provenance["declared_recipe_path"]
+            if (
+                _git_blob_oid(root, import_commit, recipe)
+                != provenance["declared_recipe_blob_oid"]
+            ):
+                raise InventoryError(f"recette P13 incohérente pour {path}")
+            if provenance.get("build_observed") is not False:
+                raise InventoryError(f"fausse observation de build P13 pour {path}")
+            if record.get("audience") != expected_p13_audiences.get(
+                PurePosixPath(path).name
+            ):
+                raise InventoryError(f"audience P13 incohérente pour {path}")
+        else:  # schema already rejects this; keep the business rule explicit.
+            raise InventoryError(f"rôle PDF inconnu pour {path}: {role}")
+        immutable[path] = _deep_freeze(record)
+    return MappingProxyType(immutable), str(validated["control_digest"])
+
+
 def _load_json_payload(path: Path, *, default: Any = None) -> Any:
     if not path.is_file():
         return default
@@ -524,6 +994,7 @@ def _validate_control_payload(
     payload: Mapping[str, Any],
     *,
     artifact_type: str,
+    schema_payload: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     normalized = dict(payload)
     if normalized.get("artifact_type") != artifact_type:
@@ -535,6 +1006,7 @@ def _validate_control_payload(
         normalized,
         root=root,
         path=Path(relative_path),
+        schema_payload=schema_payload,
     )
     expected_digest = _control_digest(normalized)
     if normalized.get("control_digest") != expected_digest:
@@ -1625,6 +2097,7 @@ def _validate_artifact_schema(
     *,
     root: Path,
     path: Path,
+    schema_payload: Mapping[str, Any] | None = None,
 ) -> None:
     artifact_type = payload.get("artifact_type")
     schema_version = payload.get("schema_version")
@@ -1635,16 +2108,31 @@ def _validate_artifact_schema(
         raise InventoryError(f"schema_version invalide dans {path}")
     if not isinstance(schema_ref, str) or not schema_ref:
         raise InventoryError(f"schema_ref invalide dans {path}")
-    schema = _load_artifact_schema(
-        root,
-        artifact_type=artifact_type,
-        schema_version=schema_version,
-        schema_ref=schema_ref,
-    )
+    if schema_payload is None:
+        schema = _load_artifact_schema(
+            root,
+            artifact_type=artifact_type,
+            schema_version=schema_version,
+            schema_ref=schema_ref,
+        )
+    else:
+        expected_ref = _schema_ref_for(artifact_type, schema_version)
+        if schema_ref != expected_ref:
+            raise InventoryError(
+                f"schema_ref incohérent pour {artifact_type}: "
+                f"attendu {expected_ref}, reçu {schema_ref}"
+            )
+        schema = dict(schema_payload)
     try:
         import jsonschema
     except ImportError as exc:
         raise InventoryError("jsonschema indisponible") from exc
+    try:
+        jsonschema.Draft202012Validator.check_schema(schema)
+    except jsonschema.SchemaError as exc:
+        raise InventoryError(
+            f"schéma Draft 2020-12 invalide pour {artifact_type}: {exc.message}"
+        ) from exc
     errors = sorted(
         jsonschema.Draft202012Validator(schema).iter_errors(payload),
         key=lambda error: tuple(str(part) for part in error.absolute_path),
@@ -1939,6 +2427,7 @@ def _load_observed_build_manifest(
     pdfinfo_counter: Any,
     python_counter: Any,
     source_files: tuple[str, ...] | None = None,
+    source_digest_overrides: Mapping[str, tuple[bytes, str]] | None = None,
     empty_manifest_refresh_capability: object | None = None,
     owned_generation_lock: Mapping[str, tuple[int, int]] | None = None,
 ) -> list[dict[str, Any]]:
@@ -2057,7 +2546,12 @@ def _load_observed_build_manifest(
                 )
             if (
                 source_files is not None
-                and _source_digest(root, source_files) != source_digest
+                and _source_digest(
+                    root,
+                    source_files,
+                    overrides=source_digest_overrides,
+                )
+                != source_digest
             ):
                 raise InventoryError(
                     "source_digest modifié pendant la validation du manifeste"
@@ -4802,7 +5296,6 @@ def _build_inventory(
             raise InventoryError(
                 f"Git provenance unavailable: {exc}"
             ) from exc
-    object_type_ontology = _load_object_type_ontology(root)
     try:
         tracked = git_tracked_files(root)
     except (OSError, subprocess.CalledProcessError) as exc:
@@ -4811,11 +5304,36 @@ def _build_inventory(
                 "Git provenance unavailable: git tracked files unavailable"
             ) from exc
         raise
+    with _read_stable_tracked_controls(root, tracked) as controls:
+        return _build_inventory_with_stable_controls(
+            root,
+            managed_output_paths=managed_output_paths,
+            require_git_provenance=require_git_provenance,
+            qualification_today=qualification_today,
+            empty_manifest_refresh_capability=empty_manifest_refresh_capability,
+            owned_generation_lock=owned_generation_lock,
+            tracked=tracked,
+            controls=controls,
+        )
+
+
+def _build_inventory_with_stable_controls(
+    repository: Path | str,
+    *,
+    managed_output_paths: Iterable[str] = (),
+    require_git_provenance: bool = False,
+    qualification_today: datetime.date | None = None,
+    empty_manifest_refresh_capability: object | None = None,
+    owned_generation_lock: Mapping[str, tuple[int, int]] | None = None,
+    tracked: tuple[str, ...],
+    controls: _StableTrackedControlSession,
+) -> dict[str, Any]:
+    root = Path(repository).resolve()
+    object_type_ontology = _load_object_type_ontology(root)
     tracked_set = frozenset(tracked)
     role_patterns, default_role, role_order = _collect_role_patterns(root)
     source_roles = _load_source_roles(root, tracked)
     dispositions = _load_dispositions(root)
-
     def _is_production(path: str) -> bool:
         return _classify_is_production(
             path,
@@ -4834,6 +5352,9 @@ def _build_inventory(
         path
         for path in tracked
         if _is_digest_model_source(path, source_roles[path]) or _is_production(path)
+    )
+    model_sources = tuple(
+        sorted(set(model_sources) | set(STABLE_TRACKED_CONTROL_FILES))
     )
     metadata_error_paths: set[str] = set()
 
@@ -5188,11 +5709,20 @@ def _build_inventory(
         ),
         skipped_paths=metadata_error_paths,
     )
+    artifact_registry, artifact_registry_digest = _load_pdf_artifact_registry(
+        root,
+        tracked,
+        source_roles,
+        controls=controls,
+        attribution_model=inventory,
+    )
     inventory["pdfs"] = _inventory_pdfs(
         root,
         tuple(path for path in tracked if source_roles[path] != "validation_reference"),
         inventory,
         source_roles=source_roles,
+        artifact_registry=artifact_registry,
+        registry_digest=artifact_registry_digest,
     )
     _aggregate_pdf_artifacts(inventory)
     inventory["anomalies"] = {
@@ -5227,6 +5757,9 @@ def _build_inventory(
         managed_output_paths=managed_output_paths,
         require_git=require_git_provenance,
     )
+    inventory["provenance"][
+        "pdf_artifact_registry_digest"
+    ] = artifact_registry_digest
     report_sources = report_source_paths(root, tracked)
     inventory["report_reconciliation"] = reconcile_reports(
         root, inventory, report_sources
@@ -5248,7 +5781,11 @@ def _build_inventory(
             - {BUILD_MANIFEST_FILE}
         )
     )
-    inventory["source_digest"] = _source_digest(root, model_sources)
+    inventory["source_digest"] = _source_digest(
+        root,
+        model_sources,
+        overrides=controls.overrides,
+    )
     inventory["source_file_count"] = len(model_sources)
     inventory["source_files"] = list(model_sources)
     for values in anomalies.values():
@@ -5271,6 +5808,7 @@ def _build_inventory(
         pdfinfo_counter=_page_count_with_pdfinfo,
         python_counter=_page_count_with_python,
         source_files=model_sources,
+        source_digest_overrides=controls.overrides,
         empty_manifest_refresh_capability=empty_manifest_refresh_capability,
         owned_generation_lock=owned_generation_lock,
     )
@@ -5917,15 +6455,22 @@ def _inventory_pdfs(
     inventory: dict[str, Any],
     *,
     source_roles: Mapping[str, str],
+    artifact_registry: Mapping[str, Mapping[str, Any]] | None = None,
+    registry_digest: str | None = None,
 ) -> list[dict[str, Any]]:
-    return _pdf_core.inventory_pdfs(
-        root,
-        tracked,
-        inventory,
-        source_roles=source_roles,
-        pdfinfo_counter=_page_count_with_pdfinfo,
-        python_counter=_page_count_with_python,
-    )
+    try:
+        return _pdf_core.inventory_pdfs(
+            root,
+            tracked,
+            inventory,
+            source_roles=source_roles,
+            pdfinfo_counter=_page_count_with_pdfinfo,
+            python_counter=_page_count_with_python,
+            artifact_registry=artifact_registry,
+            registry_digest=registry_digest,
+        )
+    except _pdf_core.PdfArtifactRegistryError as exc:
+        raise InventoryError(str(exc)) from exc
 
 
 def _attribute_pdf(path: str, inventory: Mapping[str, Any]) -> dict[str, Any]:
@@ -6262,6 +6807,62 @@ def _collection_blockers(
                     "source": f"anomalies.{category}",
                 }
             )
+    registered_artifacts = [
+        artifact
+        for artifact in inventory.get("pdfs", [])
+        if isinstance(artifact, Mapping) and "artifact_role" in artifact
+    ]
+    if registered_artifacts:
+        provenance = inventory.get("provenance")
+        projection_digest = (
+            provenance.get("pdf_artifact_registry_digest")
+            if isinstance(provenance, Mapping)
+            else None
+        )
+        if not isinstance(projection_digest, str) or not re.fullmatch(
+            r"sha256:[0-9a-f]{64}", projection_digest
+        ):
+            raise InventoryError(
+                "pdf_artifact_registry_digest de projection invalide"
+            )
+        for artifact in registered_artifacts:
+            registry_digest = artifact.get("registry_digest")
+            if (
+                not isinstance(registry_digest, str)
+                or not re.fullmatch(r"sha256:[0-9a-f]{64}", registry_digest)
+                or registry_digest != projection_digest
+            ):
+                raise InventoryError(
+                    "registry_digest PDF divergent de la projection chargée: "
+                    f"{artifact.get('path')}"
+                )
+    stale_snapshots = [
+        artifact
+        for artifact in registered_artifacts
+        if artifact.get("artifact_role")
+        == "HISTORICAL_PUBLICATION_SNAPSHOT"
+        and artifact.get("release_state") == "STALE_UNDECIDED"
+    ]
+    snapshot_artifacts = [
+        artifact
+        for artifact in registered_artifacts
+        if artifact.get("artifact_role")
+        == "HISTORICAL_PUBLICATION_SNAPSHOT"
+    ]
+    if registered_artifacts and (
+        len(snapshot_artifacts) != 12 or len(stale_snapshots) != 12
+    ):
+        raise InventoryError(
+            "projection du registre PDF: exactement 12 snapshots stale requis"
+        )
+    if stale_snapshots:
+        blockers.append(
+            {
+                "code": "publication_snapshots",
+                "detail": str(len(stale_snapshots)),
+                "source": "stale_undecided",
+            }
+        )
     return blockers
 
 
@@ -6672,8 +7273,13 @@ def _record_context_mismatch(
     )
 
 
-def _source_digest(root: Path, paths: tuple[str, ...]) -> str:
-    return _graph_core.source_digest(root, paths)
+def _source_digest(
+    root: Path,
+    paths: tuple[str, ...],
+    *,
+    overrides: Mapping[str, tuple[bytes, str]] | None = None,
+) -> str:
+    return _graph_core.source_digest(root, paths, overrides=overrides)
 
 
 def _anomaly_sort_key(item: Mapping[str, Any]) -> tuple[str, ...]:

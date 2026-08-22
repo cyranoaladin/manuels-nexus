@@ -90,21 +90,37 @@ def latex_inputs(source: str) -> list[tuple[str, str]]:
     return references
 
 
-def source_digest(root: Path, paths: tuple[str, ...]) -> str:
+def source_digest(
+    root: Path,
+    paths: tuple[str, ...],
+    *,
+    overrides: Mapping[str, tuple[bytes, str]] | None = None,
+) -> str:
     digest = hashlib.sha256()
+    pinned = overrides or {}
     for path in paths:
         encoded_path = path.encode("utf-8", errors="surrogateescape")
         digest.update(len(encoded_path).to_bytes(8, "big"))
         digest.update(encoded_path)
-        source = root / path
-        if source.is_file():
+        override = pinned.get(path)
+        if override is not None:
+            content, expected_digest = override
+            actual_digest = "sha256:" + hashlib.sha256(content).hexdigest()
+            if actual_digest != expected_digest:
+                raise ValueError(f"override de digest incohérent pour {path}")
             digest.update(b"F")
-            content = source.read_bytes()
             digest.update(len(content).to_bytes(8, "big"))
             digest.update(content)
         else:
-            digest.update(b"M")
-            digest.update((0).to_bytes(8, "big"))
+            source = root / path
+            if source.is_file():
+                digest.update(b"F")
+                content = source.read_bytes()
+                digest.update(len(content).to_bytes(8, "big"))
+                digest.update(content)
+            else:
+                digest.update(b"M")
+                digest.update((0).to_bytes(8, "big"))
     return "sha256:" + digest.hexdigest()
 
 

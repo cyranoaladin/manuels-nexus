@@ -25,6 +25,10 @@ class _PdfAccessError(Exception):
     """Expected refusal while pinning or snapshotting a tracked PDF."""
 
 
+class PdfArtifactRegistryError(ValueError):
+    """A registered PDF no longer matches its pinned attribution record."""
+
+
 def page_count_with_pdfinfo(
     path: Path,
     *,
@@ -473,12 +477,25 @@ def inventory_pdfs(
     source_roles: Mapping[str, str],
     pdfinfo_counter: Callable[[Path], tuple[int | None, str | None]],
     python_counter: Callable[[Path], tuple[int | None, str | None]],
+    artifact_registry: Mapping[str, Mapping[str, Any]] | None = None,
+    registry_digest: str | None = None,
 ) -> list[dict[str, Any]]:
     """Attribute and count every tracked PDF with bounded fallbacks."""
 
     artifacts: list[dict[str, Any]] = []
+    registry = artifact_registry or {}
     for path in (path for path in tracked if path.lower().endswith(".pdf")):
         attribution = attribute_pdf(path, inventory)
+        registry_record: Mapping[str, Any] | None = None
+        if attribution["manual"] is None:
+            registry_record = registry.get(path)
+            if registry_record is not None:
+                attribution = {
+                    "chapter": registry_record["chapter"],
+                    "manual": registry_record["manual"],
+                    "scope": registry_record["scope"],
+                    "variant": registry_record["variant"],
+                }
         base = {
             "chapter": attribution["chapter"],
             "manual": attribution["manual"],
@@ -487,6 +504,22 @@ def inventory_pdfs(
             "source_role": source_roles[path],
             "variant": attribution["variant"],
         }
+        if registry_record is not None:
+            if registry_digest is None:
+                raise PdfArtifactRegistryError(
+                    f"digest du registre absent pour {path}"
+                )
+            base.update(
+                {
+                    "artifact_role": registry_record["role"],
+                    "compilation_evidence": False,
+                    "registry_digest": registry_digest,
+                    "registry_source": "audit/PDF_ARTIFACT_REGISTRY.yaml",
+                    "release_state": registry_record["release_state"],
+                }
+            )
+            if "audience" in registry_record:
+                base["audience"] = registry_record["audience"]
         if attribution["manual"] is None:
             inventory["anomalies"]["unattributed_pdfs"].append(
                 {
@@ -496,18 +529,27 @@ def inventory_pdfs(
                     "source": path,
                 }
             )
-        count, method, reason = _count_stable_pdf(
+        digest, count, method, reason = inspect_stable_pdf(
             root,
             path,
             pdfinfo_counter=pdfinfo_counter,
             python_counter=python_counter,
         )
+        if registry_record is not None and (
+            digest != registry_record["pdf_sha256"]
+            or count != registry_record["page_count"]
+        ):
+            raise PdfArtifactRegistryError(
+                "PDF enregistré divergent: "
+                f"{path}: digest={digest}; pages={count}"
+            )
         artifacts.append(
             base
             | {
                 "page_count": count,
                 "page_count_method": method,
                 "reason": reason,
+                "sha256": digest,
                 "status": (
                     "counted" if count is not None else "page_count_unavailable"
                 ),
