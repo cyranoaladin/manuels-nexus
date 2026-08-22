@@ -20396,3 +20396,298 @@ def test_repository_pdf_artifact_registry_attribution(inventory_module) -> None:
         if ".git" not in path.parts
     }
     assert after == before
+
+
+# ---------------------------------------------------------------------------
+# Governed-PDF completeness: DISCOVERED_GOVERNED_PDFS == REGISTERED_GOVERNED_PDFS
+#
+# `_load_pdf_artifact_registry` derives DISCOVERED_GOVERNED_PDFS from the
+# repository's own tracked-file list filtered by the three governed prefixes
+# (audit/PDF_ARTIFACT_REGISTRY.yaml's coverage check), not from a literal list
+# of the 22 real paths — that hardcoded duplicate check
+# (PDF_ARTIFACT_REGISTRY_V1_PATHS / _ROLE_COUNTS) was removed from
+# scripts/inventory_collection.py because it broke ~199 unrelated synthetic
+# fixtures. These tests prove the derived invariant still holds on a small,
+# independent synthetic repository — not the real one.
+#
+# One real, closed piece of domain data is reused here on purpose: the
+# OFFICIAL_PROGRAM_AUTHORITY role's schema branch pins the exact path,
+# manual, and BO authority identifiers for the two real NSI decrees (there
+# really are only two). That pinning is legitimate schema *data*, not a
+# hardcoded completeness constant, and it is not touched by these tests. The
+# PDF bytes/SHA-256 and the git history are entirely fixture-local.
+# ---------------------------------------------------------------------------
+
+_GOVERNED_OFFICIAL_AUTHORITY_FIXTURES = {
+    "premiere": {
+        "path": "NSI/corpus_nsi/00_programmes_officiels/programme_nsi_premiere.pdf",
+        "manual": "1NSI",
+        "authority_key": "SRC-BO2019-NSI-PREMIERE",
+        "authority_code": "MENE1901633A",
+        "landing_url": "https://www.education.gouv.fr/bo/19/Special1/MENE1901633A.htm",
+        "pdf_url": (
+            "https://cache.media.education.gouv.fr/file/SP1-MEN-22-1-2019/26/8/"
+            "spe633_annexe_1063268.pdf"
+        ),
+    },
+    "terminale": {
+        "path": "NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf",
+        "manual": "TNSI",
+        "authority_key": "SRC-BO2019-NSI-TERMINALE",
+        "authority_code": "MENE1921247A",
+        "landing_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921247A.htm",
+        "pdf_url": (
+            "https://cache.media.education.gouv.fr/file/SPE8_MENJ_25_7_2019/93/3/"
+            "spe247_annexe_1158933.pdf"
+        ),
+    },
+}
+
+
+def _minimal_valid_pdf_bytes(marker: bytes) -> bytes:
+    """A tiny, genuinely one-page, pdfinfo-parseable PDF (not just PDF-shaped
+    text), so tests that exercise the full page-count dispatch don't hit a
+    spurious "pages=None" divergence unrelated to what they're testing."""
+    return (
+        b"%PDF-1.4\n"
+        b"%% " + marker + b"\n"
+        b"1 0 obj<< /Type /Catalog /Pages 2 0 R >>endobj\n"
+        b"2 0 obj<< /Type /Pages /Kids [3 0 R] /Count 1 >>endobj\n"
+        b"3 0 obj<< /Type /Page /Parent 2 0 R /MediaBox [0 0 200 200] >>endobj\n"
+        b"xref\n0 4\n0000000000 65535 f \ntrailer<< /Size 4 /Root 1 0 R >>\n"
+        b"startxref\n0\n%%EOF\n"
+    )
+
+
+def _write_governed_official_authority_pdf(
+    repository: Path, fixture: str, *, pdf_bytes: bytes, track: bool = True
+) -> dict[str, str]:
+    info = dict(_GOVERNED_OFFICIAL_AUTHORITY_FIXTURES[fixture])
+    pdf_sha256 = hashlib.sha256(pdf_bytes).hexdigest()
+    info["pdf_sha256"] = pdf_sha256
+    authority_yaml_path = repository / "docs/programmes/PROGRAMMES_2026_2027.yaml"
+    existing = (
+        yaml.safe_load(authority_yaml_path.read_text(encoding="utf-8"))
+        if authority_yaml_path.is_file()
+        else {"sources": {}}
+    )
+    existing.setdefault("sources", {})[info["authority_key"]] = {
+        "intitule": "Programme de test (fixture isolee)",
+        "reference_bo": "BO fixture",
+        "arrete": info["authority_code"],
+        "url": info["landing_url"],
+        "annexe_pdf": info["pdf_url"],
+        "fichier": info["path"],
+        "sha256": pdf_sha256,
+    }
+    _write(
+        authority_yaml_path,
+        yaml.safe_dump(existing, allow_unicode=True, sort_keys=False),
+    )
+    tracked = ["docs/programmes/PROGRAMMES_2026_2027.yaml"]
+    if track:
+        (repository / info["path"]).parent.mkdir(parents=True, exist_ok=True)
+        (repository / info["path"]).write_bytes(pdf_bytes)
+        tracked.append(info["path"])
+    _track(repository, *tracked)
+    return info
+
+
+def _official_authority_record(info: Mapping[str, str], **overrides: object) -> dict:
+    record = {
+        "path": info["path"],
+        "role": "OFFICIAL_PROGRAM_AUTHORITY",
+        "manual": info["manual"],
+        "chapter": None,
+        "variant": None,
+        "scope": "official_program_authority",
+        "tracking": "TRACKED",
+        "source_role": "transversal",
+        "pdf_sha256": f"sha256:{info['pdf_sha256']}",
+        "page_count": 1,
+        "compilation_evidence": False,
+        "release_state": "REFERENCE_ONLY",
+        "provenance": {
+            "kind": "OFFICIAL_PROGRAM_RECORD",
+            "authority_path": "docs/programmes/PROGRAMMES_2026_2027.yaml",
+            "authority_key": f"sources.{info['authority_key']}",
+            "authority_code": info["authority_code"],
+            "landing_url": info["landing_url"],
+            "pdf_url": info["pdf_url"],
+        },
+    }
+    record.update(overrides)
+    return record
+
+
+def _write_governed_pdf_registry(
+    repository: Path, records: list[Mapping[str, object]], module
+) -> None:
+    schema_relative = "audit/schemas/v1/pdf-artifact-registry.schema.json"
+    (repository / schema_relative).parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(ROOT / schema_relative, repository / schema_relative)
+    _relax_pdf_artifact_registry_schema(repository)
+    payload: dict[str, object] = {
+        "artifact_type": "pdf_artifact_registry",
+        "schema_version": 1,
+        "schema_ref": schema_relative,
+        "control_digest": "sha256:placeholder",
+        "records": list(records),
+    }
+    payload["control_digest"] = module._control_digest(payload)
+    _write(
+        repository / "audit/PDF_ARTIFACT_REGISTRY.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=False),
+    )
+    _track(repository, "audit/PDF_ARTIFACT_REGISTRY.yaml", schema_relative)
+
+
+def test_governed_pdf_coverage_small_fixture_passes_without_real_repo_paths(
+    tmp_path: Path, inventory_module
+) -> None:
+    """Case D: an isolated fixture with its own single PDF passes without
+    needing any of the real repository's 22 governed paths."""
+    _init_repository(tmp_path, with_pdf_artifact_controls=False)
+    info = _write_governed_official_authority_pdf(
+        tmp_path,
+        "premiere",
+        pdf_bytes=_minimal_valid_pdf_bytes(b"fixture-D own PDF"),
+    )
+    _write_governed_pdf_registry(
+        tmp_path, [_official_authority_record(info)], inventory_module
+    )
+    _commit_repository(tmp_path, "case-d-small-fixture")
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert inventory["anomalies"]["unattributed_pdfs"] == []
+    registered = [row for row in inventory["pdfs"] if "artifact_role" in row]
+    assert len(registered) == 1
+    assert registered[0]["artifact_role"] == "OFFICIAL_PROGRAM_AUTHORITY"
+    assert registered[0]["sha256"] == f"sha256:{info['pdf_sha256']}"
+
+
+def test_governed_pdf_coverage_fails_when_registry_entry_removed(
+    tmp_path: Path, inventory_module
+) -> None:
+    """Case A: a governed PDF exists but its registry entry was removed."""
+    _init_repository(tmp_path, with_pdf_artifact_controls=False)
+    _write_governed_official_authority_pdf(
+        tmp_path, "premiere", pdf_bytes=b"%PDF-1.4\n%fixture-A orphaned PDF\n"
+    )
+    _write_governed_pdf_registry(tmp_path, [], inventory_module)
+    _commit_repository(tmp_path, "case-a-pdf-without-registry-entry")
+
+    with pytest.raises(
+        inventory_module.InventoryError, match="couverture du registre PDF"
+    ) as excinfo:
+        inventory_module.build_inventory(tmp_path)
+    assert "programme_nsi_premiere.pdf" in str(excinfo.value)
+
+
+def test_governed_pdf_coverage_fails_on_phantom_registry_entry(
+    tmp_path: Path, inventory_module
+) -> None:
+    """Case B: a registry entry references a PDF that was never tracked."""
+    _init_repository(tmp_path, with_pdf_artifact_controls=False)
+    info = _write_governed_official_authority_pdf(
+        tmp_path,
+        "premiere",
+        pdf_bytes=b"%PDF-1.4\n%fixture-B phantom PDF\n",
+        track=False,
+    )
+    _write_governed_pdf_registry(
+        tmp_path, [_official_authority_record(info)], inventory_module
+    )
+    _commit_repository(tmp_path, "case-b-phantom-registry-entry")
+
+    with pytest.raises(
+        inventory_module.InventoryError, match="couverture du registre PDF"
+    ) as excinfo:
+        inventory_module.build_inventory(tmp_path)
+    assert "programme_nsi_premiere.pdf" in str(excinfo.value)
+
+
+def test_governed_pdf_coverage_fails_on_misattributed_manual(
+    tmp_path: Path, inventory_module
+) -> None:
+    """Case C: a registry entry names the wrong manual for its path/authority.
+
+    The path, manual, and BO authority identifiers are pinned together by
+    the schema's own oneOf per real official decree, so declaring the
+    Premiere decree's PDF under the wrong manual is rejected as a whole
+    record, not silently accepted.
+    """
+    _init_repository(tmp_path, with_pdf_artifact_controls=False)
+    info = _write_governed_official_authority_pdf(
+        tmp_path, "premiere", pdf_bytes=b"%PDF-1.4\n%fixture-C wrong manual\n"
+    )
+    misattributed = _official_authority_record(info, manual="TEXPERTES")
+    _write_governed_pdf_registry(tmp_path, [misattributed], inventory_module)
+    _commit_repository(tmp_path, "case-c-wrong-manual")
+
+    with pytest.raises(inventory_module.InventoryError):
+        inventory_module.build_inventory(tmp_path)
+
+
+def test_governed_pdf_coverage_fails_when_new_pdf_added_without_registry_update(
+    tmp_path: Path, inventory_module
+) -> None:
+    """Case E: a new governed PDF is added to the repo; the registry is not
+    updated to match. The coverage check must fail automatically, not wait
+    for a human to notice."""
+    _init_repository(tmp_path, with_pdf_artifact_controls=False)
+    info = _write_governed_official_authority_pdf(
+        tmp_path,
+        "premiere",
+        pdf_bytes=_minimal_valid_pdf_bytes(b"fixture-E first PDF"),
+    )
+    _write_governed_pdf_registry(
+        tmp_path, [_official_authority_record(info)], inventory_module
+    )
+    _commit_repository(tmp_path, "case-e-initial-valid-registry")
+    assert (
+        inventory_module.build_inventory(tmp_path)["anomalies"]["unattributed_pdfs"]
+        == []
+    )
+
+    second = _GOVERNED_OFFICIAL_AUTHORITY_FIXTURES["terminale"]["path"]
+    (tmp_path / second).parent.mkdir(parents=True, exist_ok=True)
+    (tmp_path / second).write_bytes(
+        _minimal_valid_pdf_bytes(b"fixture-E second PDF, unregistered")
+    )
+    _track(tmp_path, second)
+    _commit_repository(tmp_path, "case-e-add-pdf-without-registry-update")
+
+    with pytest.raises(
+        inventory_module.InventoryError, match="couverture du registre PDF"
+    ) as excinfo:
+        inventory_module.build_inventory(tmp_path)
+    assert "programme_nsi_terminale.pdf" in str(excinfo.value)
+
+
+def test_governed_pdf_coverage_ignores_pdfs_outside_governed_prefixes(
+    tmp_path: Path, inventory_module
+) -> None:
+    """Case F: a PDF that is explicitly out of the registry's governed scope
+    (not under any of the three governed prefixes) must not be required in
+    the registry, and must not be silently marked "attributed" by it either."""
+    _init_repository(tmp_path, with_pdf_artifact_controls=False)
+    _write(tmp_path / "docs/programmes/PROGRAMMES_2026_2027.yaml", "sources: {}\n")
+    _track(tmp_path, "docs/programmes/PROGRAMMES_2026_2027.yaml")
+    out_of_scope = "Mathematiques/manuel-maths/build/scratch/out_of_scope.pdf"
+    (tmp_path / out_of_scope).parent.mkdir(parents=True, exist_ok=True)
+    (tmp_path / out_of_scope).write_bytes(
+        _minimal_valid_pdf_bytes(b"fixture-F out of scope")
+    )
+    _track(tmp_path, out_of_scope)
+    _write_governed_pdf_registry(tmp_path, [], inventory_module)
+    _commit_repository(tmp_path, "case-f-out-of-scope-pdf")
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    registered = [row for row in inventory["pdfs"] if "artifact_role" in row]
+    assert registered == []
+    matching = [row for row in inventory["pdfs"] if row["path"] == out_of_scope]
+    assert len(matching) == 1
+    assert "artifact_role" not in matching[0]
