@@ -19,7 +19,6 @@
 |---|---|
 | blocking_statuses | 2222 |
 | unassembled_objects | 52 |
-| unattributed_pdfs | 22 |
 | orphan_files | 12 |
 
 ### Échantillon déterministe
@@ -38,11 +37,6 @@
 - unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unattributed_pdfs: source=MANUELS_PDF_PUBLICATION/01_Maths_1re_Spe_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/01_Maths_1re_Spe_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- unattributed_pdfs: source=MANUELS_PDF_PUBLICATION/02_Maths_1re_Spe_Professeur.pdf, cible=MANUELS_PDF_PUBLICATION/02_Maths_1re_Spe_Professeur.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- unattributed_pdfs: source=MANUELS_PDF_PUBLICATION/03_Maths_Tle_Spe_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/03_Maths_Tle_Spe_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- unattributed_pdfs: source=MANUELS_PDF_PUBLICATION/04_Maths_Tle_Spe_Professeur.pdf, cible=MANUELS_PDF_PUBLICATION/04_Maths_Tle_Spe_Professeur.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- unattributed_pdfs: source=MANUELS_PDF_PUBLICATION/05_Maths_Tle_Expertes_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/05_Maths_Tle_Expertes_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
 
 ## Réconciliation des rapports
 

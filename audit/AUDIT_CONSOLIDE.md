@@ -145,29 +145,8 @@
 - source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-13.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/cours/TSPE-GEOMETRIE-ESPACE-COURS-13.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - … 22 autres.
 
-### unattributed_pdfs (22)
-- source=MANUELS_PDF_PUBLICATION/01_Maths_1re_Spe_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/01_Maths_1re_Spe_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=MANUELS_PDF_PUBLICATION/02_Maths_1re_Spe_Professeur.pdf, cible=MANUELS_PDF_PUBLICATION/02_Maths_1re_Spe_Professeur.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=MANUELS_PDF_PUBLICATION/03_Maths_Tle_Spe_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/03_Maths_Tle_Spe_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=MANUELS_PDF_PUBLICATION/04_Maths_Tle_Spe_Professeur.pdf, cible=MANUELS_PDF_PUBLICATION/04_Maths_Tle_Spe_Professeur.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=MANUELS_PDF_PUBLICATION/05_Maths_Tle_Expertes_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/05_Maths_Tle_Expertes_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=MANUELS_PDF_PUBLICATION/06_Maths_Tle_Expertes_Professeur.pdf, cible=MANUELS_PDF_PUBLICATION/06_Maths_Tle_Expertes_Professeur.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=MANUELS_PDF_PUBLICATION/07_Maths_Tle_Complementaires_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/07_Maths_Tle_Complementaires_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=MANUELS_PDF_PUBLICATION/08_Maths_Tle_Complementaires_Professeur.pdf, cible=MANUELS_PDF_PUBLICATION/08_Maths_Tle_Complementaires_Professeur.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=MANUELS_PDF_PUBLICATION/09_NSI_1re_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/09_NSI_1re_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=MANUELS_PDF_PUBLICATION/10_NSI_1re_Professeur.pdf, cible=MANUELS_PDF_PUBLICATION/10_NSI_1re_Professeur.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=MANUELS_PDF_PUBLICATION/11_NSI_Tle_Eleve.pdf, cible=MANUELS_PDF_PUBLICATION/11_NSI_Tle_Eleve.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=MANUELS_PDF_PUBLICATION/12_NSI_Tle_Professeur.pdf, cible=MANUELS_PDF_PUBLICATION/12_NSI_Tle_Professeur.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=NSI/corpus_nsi/00_programmes_officiels/programme_nsi_premiere.pdf, cible=NSI/corpus_nsi/00_programmes_officiels/programme_nsi_premiere.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf, cible=NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_aides.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_aides.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_corrige.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_corrige.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_cours.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_cours.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_evaluation.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_evaluation.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_fiche_methode.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_fiche_methode.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_td.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_td.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_tp.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_tp.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_trace.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_trace.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+### unattributed_pdfs (0)
+- Aucune.
 
 ### unavailable_inspiration_sources (0)
 - Aucune.
