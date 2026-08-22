@@ -1,0 +1,280 @@
+# Autorité réglementaire officielle — édition 2026-2027 — six manuels Nexus
+#
+# Sources exclusives : Bulletin officiel (education.gouv.fr/bo/...),
+# Légifrance (JORF, pour la date et le texte de l'arrêté), Éduscol
+# (ressources d'accompagnement). Aucun blog, aucun manuel concurrent, aucune
+# ancienne matrice interne utilisée seule comme autorité.
+#
+# Chaque entrée a été vérifiée indépendamment le 2026-08-22 par récupération
+# directe des pages education.gouv.fr/bo/... et/ou legifrance.gouv.fr (JORF),
+# pas seulement recopiée d'un registre interne préexistant. Le registre
+# opérationnel préexistant `docs/programmes/PROGRAMMES_2026_2027.yaml`
+# (généré et vérifié le 2026-08-11, textes déposés et empreintés SHA-256
+# sous `Mathematiques/manuel-maths/sources/txt/` et
+# `NSI/corpus_nsi/00_programmes_officiels/`) reste la source de vérité
+# opérationnelle consommée par le pipeline d'inventaire (registre PDF,
+# gates). Ce fichier est la couche d'audit T2 : il ajoute la date de
+# vérification, la distinction explicite applicable/non-applicable et une
+# trouvaille nouvelle (modalités d'épreuve TNSI 2026) absente du registre
+# opérationnel. Il ne le contredit sur aucun point commun.
+
+schema_version: 1
+edition: "2026-2027"
+verified_on: "2026-08-22"
+verification_method: >-
+  Recherche web + récupération directe des pages officielles
+  education.gouv.fr/bo/... et legifrance.gouv.fr/jorf/... pour chacun des
+  six manuels, indépendamment du registre opérationnel préexistant.
+
+programs:
+
+  1SPE:
+    manual: "1SPE"
+    niveau: "Première"
+    enseignement: "Spécialité mathématiques"
+    official_ref: "MENE2602917A"
+    official_title: >-
+      Programme d'enseignement de spécialité de mathématiques de la classe
+      de première de la voie générale
+    arrete_date: "2026-02-26"
+    jo_date: "2026-03-27"
+    bo_number: "14"
+    bo_date: "2026-04-02"
+    effective_from: "2026-2027"
+    effective_until: null
+    applicable_2026_2027: true
+    supersedes: "arrêté du 17 janvier 2019 (annexe programme spé maths 1re)"
+    superseded_by: null
+    authority_url: "https://www.education.gouv.fr/bo/2026/Hebdo14/MENE2602917A"
+    legifrance_url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053723235"
+    eduscol_url: "https://eduscol.education.gouv.fr/5817/programmes-et-ressources-en-mathematiques-voie-gt"
+    local_archival_digest: "sha256:4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df"
+    local_archival_file: "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt"
+    prior_program_ref: "MENE1901633A-1SPE (arrêté 2019-01-17, BO spécial n°1 du 22-01-2019)"
+    prior_program_local_digest: "sha256:d2aad141af7eb50559c7c5f76b2cd582de2974f0fb38d929cc447b4beae8df53"
+    domains: ["algèbre (suites, second degré)", "analyse (dérivation)", "géométrie (produit scalaire, trigonométrie)", "probabilités (loi binomiale)", "algorithmique"]
+    note: >-
+      Seul des six manuels à changer de programme pour cette édition. Le BO
+      2026 retire de la première les formules d'addition/duplication, les
+      équations trigonométriques et l'étude des fonctions cosinus/sinus :
+      ces contenus rejoignent le programme de Terminale 2027 (backlog, hors
+      périmètre de l'édition 2026-2027). Conformité chapitre-par-chapitre
+      déjà auditée dans `Mathematiques/manuel-maths/referentiel/CONFORMITE_BO2026.md`
+      (validation humaine finale encore requise).
+
+  TSPE_2026_2027:
+    manual: "TSPE_2026_2027"
+    niveau: "Terminale"
+    enseignement: "Spécialité mathématiques"
+    official_ref: "MENE1921246A"
+    official_title: >-
+      Programme de l'enseignement de spécialité de mathématiques de la
+      classe terminale de la voie générale
+    arrete_date: "2019-07-19"
+    jo_date: null
+    bo_number: "spécial 8"
+    bo_date: "2019-07-25"
+    effective_from: "2020-2021"
+    effective_until: "2026-2027"
+    applicable_2026_2027: true
+    supersedes: null
+    superseded_by: "MENE2602919A (arrêté 2026-02-26, BO n°14 du 2026-04-02) — applicable seulement à compter de 2027-2028"
+    authority_url: "https://www.education.gouv.fr/bo/19/Special8/MENE1921246A.htm"
+    legifrance_url: null
+    eduscol_url: null
+    local_archival_digest: "sha256:65eb5a55df14a2b3025a96db72fbcb1d917b55e8da7feb13669e28b903712210"
+    local_archival_file: "Mathematiques/manuel-maths/sources/txt/BO2019_TSPE_specialite.txt"
+    future_program_ref: "MENE2602919A"
+    future_program_arrete_date: "2026-02-26"
+    future_program_jo_date: "2026-03-27"
+    future_program_bo: "n°14 du 2 avril 2026"
+    future_program_legifrance_url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053723251"
+    future_program_effective_from: "2027-2028"
+    future_program_effective_from_confirmed: true
+    future_program_effective_from_evidence: >-
+      Article 2 de l'arrêté MENE2602919A (Légifrance) : "Les dispositions du
+      présent arrêté entrent en application à la rentrée de l'année scolaire
+      2027-2028." Vérifié directement, pas déduit.
+    future_program_local_digest: "sha256:597e0424c620f02759665f561f8e997ac8ac85213db0b6498eb576f59fbee8e6"
+    future_program_local_file: "Mathematiques/manuel-maths/sources/txt/BO2026_TSPE_specialite_r2027.txt"
+    domains: ["analyse (suites, limites, dérivation, continuité, exponentielle/logarithme, intégration)", "géométrie dans l'espace (produit scalaire, droites/plans)", "probabilités (lois continues, loi normale, échantillonnage)", "algorithmique/Python"]
+    note: >-
+      Les élèves de Terminale 2026-2027 ont suivi la Première sous le
+      programme 2019 : cohérence pédagogique du programme 2019 pour toute
+      leur scolarité au lycée. Le nouveau programme (backlog_tspe_v2)
+      n'entre en application qu'en 2027-2028.
+    exam_modality:
+      status: "à vérifier — non confirmé par source officielle directe dans cette vérification"
+      note: >-
+        Épreuve écrite de spécialité au printemps de Terminale, coefficient
+        16. Format exact (nombre d'exercices) pour la session 2027 trouvé
+        uniquement sur sources secondaires (digischool.fr, annabac.com) lors
+        de cette vérification — pas de confirmation education.gouv.fr/Éduscol
+        directe. Ne pas déclarer vérifié tant qu'aucune source primaire n'est
+        déposée.
+
+  TCOMPL:
+    manual: "TCOMPL"
+    niveau: "Terminale"
+    enseignement: "Mathématiques complémentaires (option)"
+    official_ref: "MENE1921265A"
+    official_title: >-
+      Programme de l'enseignement optionnel de mathématiques complémentaires
+      de la classe terminale de la voie générale
+    arrete_date: "2019-07-19"
+    jo_date: null
+    bo_number: "spécial 8"
+    bo_date: "2019-07-25"
+    effective_from: "2020-2021"
+    effective_until: "2026-2027"
+    applicable_2026_2027: true
+    supersedes: null
+    superseded_by: "MENE2902920A (arrêté 2026-02-26, BO n°14 du 2026-04-02) — applicable seulement à compter de 2027-2028"
+    authority_url: "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm"
+    legifrance_url: null
+    eduscol_url: null
+    local_archival_digest: "sha256:dad0e4941fc0eb7e93a727bfabd49b3298b1e378eafb7fbe1bbdee35b9c4ac27"
+    local_archival_file: "Mathematiques/manuel-maths/sources/txt/BO2019_TCOMPL_optionnel.txt"
+    future_program_ref: "MENE2902920A"
+    future_program_arrete_date: "2026-02-26"
+    future_program_bo: "n°14 du 2 avril 2026"
+    future_program_legifrance_url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053723259"
+    future_program_authority_url: "https://www.education.gouv.fr/bo/2026/Hebdo14/MENE2902920A"
+    future_program_effective_from: "2027-2028"
+    future_program_effective_from_confirmed: true
+    future_program_effective_from_evidence: >-
+      Article 2 de l'arrêté (Légifrance), formulation identique à
+      MENE2602919A : entrée en application à la rentrée 2027-2028.
+    note: >-
+      NOR corrigé après vérification croisée : deux formulations
+      (MENE2602920A / MENE2902920A) sont apparues dans les recherches
+      préparatoires ; l'URL officielle réellement servie par
+      education.gouv.fr est MENE2902920A (confirmé par requête directe le
+      2026-08-22). Même règle d'application différée que TSPE.
+
+  TEXPERTES:
+    manual: "TEXPERTES"
+    niveau: "Terminale"
+    enseignement: "Mathématiques expertes (option)"
+    official_ref: "MENE1921264A"
+    official_title: >-
+      Programme de l'enseignement optionnel de mathématiques expertes de la
+      classe terminale de la voie générale
+    arrete_date: "2019-07-19"
+    jo_date: "2019-07-23"
+    bo_number: "spécial 8"
+    bo_date: "2019-07-25"
+    effective_from: "2020-2021"
+    effective_until: null
+    applicable_2026_2027: true
+    supersedes: null
+    superseded_by: null
+    superseded_by_search_evidence: >-
+      Aucun arrêté 2025/2026 trouvé. Le sommaire du BO n°14 du 2 avril 2026
+      (qui publie la réforme maths lycée 2026 : seconde GT, 1re spécialité,
+      1re techno, enseignement scientifique, terminale spécialité,
+      mathématiques complémentaires) ne contient AUCUNE entrée
+      "mathématiques expertes". Preuve raisonnablement forte mais pas une
+      preuve formelle d'inexistence absolue d'un texte non indexé.
+    authority_url: "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm"
+    legifrance_url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000038799998"
+    eduscol_url: null
+    local_archival_digest: "sha256:a427dd12f3ff774dd0bdd31a26aaa77423509947bf60589e72430b6f5054a1c5"
+    local_archival_file: "Mathematiques/manuel-maths/sources/txt/BO2019_TEXPERTES_optionnel.txt"
+    domains: ["arithmétique des entiers (congruences)", "nombres complexes", "matrices", "graphes"]
+    note: "Aucun changement trouvé. Reste l'autorité applicable pour 2026-2027."
+
+  1NSI:
+    manual: "1NSI"
+    niveau: "Première"
+    enseignement: "Spécialité NSI"
+    official_ref: "MENE1901633A"
+    official_title: >-
+      Programme de spécialité numérique et sciences informatiques de la
+      classe de première
+    arrete_date: "2019-01-17"
+    jo_date: null
+    bo_number: "spécial 1"
+    bo_date: "2019-01-22"
+    effective_from: "2019-2020"
+    effective_until: null
+    applicable_2026_2027: true
+    supersedes: null
+    superseded_by: null
+    authority_url: "https://www.education.gouv.fr/bo/19/Special1/MENE1901633A.htm"
+    legifrance_url: null
+    eduscol_url: "https://eduscol.education.gouv.fr/5823/programmes-et-ressources-en-numerique-et-sciences-informatiques-voie-g"
+    local_archival_digest: "sha256:7ca9a32e1823be6c1120cb0417324c3cb01688d1d194c7614a88ea851ccc60b0"
+    local_archival_file: "NSI/corpus_nsi/00_programmes_officiels/programme_nsi_premiere.pdf"
+    domains: ["histoire de l'informatique", "représentation des données (types construits)", "traitement de données en tables", "interactions humain-machine sur le Web", "architectures matérielles et systèmes d'exploitation", "langages et programmation", "algorithmique"]
+    note: "Aucune réforme 2024-2026 trouvée. Reste l'autorité applicable pour 2026-2027."
+
+  TNSI:
+    manual: "TNSI"
+    niveau: "Terminale"
+    enseignement: "Spécialité NSI"
+    official_ref: "MENE1921247A"
+    official_title: >-
+      Programme de spécialité numérique et sciences informatiques de la
+      classe terminale
+    arrete_date: "2019-07-19"
+    jo_date: null
+    bo_number: "spécial 8"
+    bo_date: "2019-07-25"
+    effective_from: "2020-2021"
+    effective_until: null
+    applicable_2026_2027: true
+    supersedes: null
+    superseded_by: null
+    authority_url: "https://www.education.gouv.fr/bo/19/Special8/MENE1921247A.htm"
+    legifrance_url: null
+    eduscol_url: "https://eduscol.education.gouv.fr/5823/programmes-et-ressources-en-numerique-et-sciences-informatiques-voie-g"
+    local_archival_digest: "sha256:10ce34666edd722a3d8d86642a9f1ac205c7a9d128d6142a17effcba2fb85e69"
+    local_archival_file: "NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf"
+    domains: ["algorithmique", "architectures matérielles et systèmes", "bases de données", "langages et programmation", "structures de données", "histoire de l'informatique"]
+    note: "Aucune réforme 2024-2026 trouvée pour le programme. Reste l'autorité applicable pour 2026-2027."
+    exam_modality:
+      official_ref: "MENE2516123N"
+      official_title: >-
+        Épreuve de l'enseignement de spécialité numérique et sciences
+        informatiques de la classe de terminale de la voie générale à
+        compter de la session 2026 de l'examen du baccalauréat
+      note_date: "2025-07-04"
+      bo_number: "31"
+      bo_date: "2025-08-21"
+      authority_url: "https://www.education.gouv.fr/bo/2025/Hebdo31/MENE2516123N"
+      mirror_url: "https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes/bac-voie-generale/specialite-nsi-numerique-et-sciences-informatiques/18323-boenjs-n31-du-21-08-2025.pdf"
+      replaces: "note de service n° 2020-30 du 11 février 2020"
+      applicable_from_session: 2026
+      applicable_2027_confirmed: false
+      applicable_2027_note: >-
+        Le texte dit "à compter de la session 2026" sans date de fin ; couvre
+        donc la session 2027 sauf texte ultérieur non trouvé. Absence de
+        contre-indication, pas confirmation positive absolue.
+      ecrit_points_sur_20: 15
+      ecrit_duree_h: 3.5
+      ecrit_structure: "trois exercices indépendants"
+      pratique_points_sur_20: 5
+      pratique_duree_h: 1
+      pratique_banque_url: "https://sujets.examens-concours.gouv.fr/delos/public/bgt/nsi"
+      deposit_status: >-
+        NON déposé/empreinté localement (fetch direct education.gouv.fr en
+        403 ; PDF miroir académique trop volumineux pour être récupéré dans
+        cette passe). Trouvaille nouvelle par rapport au registre
+        opérationnel préexistant, qui marquait ce point
+        `declare_par_instruction_humaine` / `source_deposee: false`. Ce
+        texte comble ce point mais reste à déposer avant d'être cité comme
+        preuve vérifiée dans le pipeline (règle R7 du dépôt).
+    prior_exam_modality_ref: "note de service n°2020-30 du 11 février 2020 (points écrit/pratique 12/8, remplacée)"
+
+reconciliation_with_operational_registry:
+  file: "docs/programmes/PROGRAMMES_2026_2027.yaml"
+  status: "cohérent sur tous les points communs, aucune contradiction trouvée"
+  additions_not_yet_in_operational_registry:
+    - "TNSI.exam_modality (MENE2516123N) — trouvé par cette vérification, non déposé"
+    - "TCOMPL.superseded_by NOR corrigé (MENE2902920A, pas MENE2602920A)"
+  action_required: >-
+    Aucune modification du registre opérationnel effectuée dans ce lot
+    (fichier consommé par le pipeline d'inventaire — modification hors
+    périmètre T2 immédiat). Signalé pour un lot de dépôt de source dédié
+    (R7) avant intégration.
