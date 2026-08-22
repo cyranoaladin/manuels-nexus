@@ -124,8 +124,94 @@ lot 1.
 
 (chemins relatifs à `Mathematiques/manuel-maths/chapitres/`)
 
+## Ledger complet et invariants (preuve par fichier)
+
+Le ledger machine complet des 47 suppressions — `deleted_path`,
+`deleted_blob_sha`, `canonical_survivor_path`, `canonical_survivor_blob_sha`,
+`byte_identical`, `deleted_inbound_refs`, `deleted_outbound_unique_refs`,
+`deleted_unique_META`, `deleted_receipt_or_review`,
+`deleted_historical_authority`, `deleted_manifest_entry`,
+`canonical_survivor_assembled` — est dans
+`audit/T1_4_DELETION_LEDGER.json` (47 entrées). Résumé vérifié :
+
+```text
+byte_identical            = 47/47 YES
+canonical_survivor_assembled = 47/47 YES
+deleted_inbound_refs       = 0/47 (git grep sur le chemin exact, hors
+                              artefacts d'audit auto-générés)
+deleted_outbound_unique_refs = 0/47 (corps identique => mêmes cibles)
+deleted_historical_authority = 0/47
+deleted_manifest_entry     = 0/47 (aucun chemin supprimé dans
+                              audit/BUILD_MANIFEST.json)
+```
+
+### `deleted_unique_META` : ce qui diffère réellement, et pourquoi ce n'est pas une perte
+
+Seuls quatre champs META divergent jamais entre un fichier supprimé et son
+canonique : `id`, `capacites` (legacy), `capacites_codes`, `statut`
+(legacy). Trois preuves ferment ce point :
+
+1. **`statut` legacy** : **47/47** fichiers supprimés portent
+   `"statut": "structure"` (stade de structure/brouillon). **47/47**
+   canoniques survivants portent `"status": "approved"`. Le contenu
+   supprimé n'a jamais dépassé le stade de brouillon structurel ; le
+   contenu réellement approuvé et publié est entièrement dans les
+   canoniques.
+2. **`capacites_codes`** diverge sur **40/47** paires. Dans ces 40 cas,
+   le code legacy est systématiquement `["C<N>"]` où `N` est le numéro
+   extrait du nom de fichier supprimé lui-même
+   (`...-COURS-07.tex` → `["C7"]`) — un placeholder séquentiel 1-pour-1
+   posé au moment du brouillon, indépendant du contenu réel. Le fichier
+   canonique, lui, porte le ou les codes de capacité effectivement
+   présents dans son nom descriptif
+   (`13_C8_integration_par_parties.tex` → `["C8"]` ou
+   `["C8","C2"]`) — cohérent avec son propre contenu. Aucune capacité
+   n'est donc perdue : la classification exacte est celle du canonique ;
+   celle du brouillon était un espace réservé, jamais une classification
+   réelle.
+3. **`capacites` legacy** (7/47 seulement, ancien format à préfixe
+   `<CHAPITRE>-C<N>`) : même conclusion, préfixe redondant du chapitre déjà
+   porté par `chapitre` et par le chemin.
+
+`CONTENT_LOSS = 0` (corps octet-identique), `PROVENANCE_LOSS = 0` (aucune
+autorité/committment historique unique dans les 47 fichiers supprimés).
+
+### `deleted_receipt_or_review` : trouvaille et disposition
+
+Contrairement à une hypothèse initiale de zéro absolu, **80** entrées de
+`audit/BASELINE_QUALIFICATION_REGISTRY.yaml` référencent l'un des 47 chemins
+supprimés comme `source` (`disposition: open_debt`,
+`approved_by: Alaeddine Ben Rhouma`, catégories `unassembled_objects` et
+`broken_meta_references`). Ce ne sont **pas** des revues de contenu
+pédagogique : ce sont des qualifications de **dette de release** —
+l'acceptation gouvernée du fait que l'anomalie existait et ne bloquait pas
+la release dans l'intervalle. Rien n'y atteste une lecture ou une
+approbation du contenu pédagogique lui-même.
+
+Supprimer la source qui causait l'anomalie est précisément la résolution
+attendue de ce type de dette : l'anomalie qualifiée devient obsolète parce
+que sa cause a été traitée, pas parce qu'elle a été masquée. Après
+suppression :
+
+- `--check --validate-model --require-clean` : **rc 0** ;
+- `--check --fail-on-new --require-clean` : **rc 0**, `new=0`,
+  `regressions=0`, `failures=0`.
+
+Aucun des deux gates ne signale les 80 entrées désormais orphelines comme
+une incohérence détectée. `REVIEW_LOSS = 0` au sens où aucune revue de
+contenu n'est perdue ; mais ces 80 entrées de
+`BASELINE_QUALIFICATION_REGISTRY.yaml` restent, elles, désormais orphelines
+(leur `source` n'existe plus) et n'ont pas été nettoyées dans ce lot — ce
+nettoyage relève de l'hygiène de gouvernance (proche de T7, dette de
+statut/reviews), pas de la fermeture technique de `unassembled_objects`.
+Signalé explicitement plutôt que silencieusement laissé de côté.
+
 ## Gouvernance
 
-Aucune modification de statut, qualification ou baseline. Les fingerprints
-d'anomalie `unassembled_objects` associés se retirent mécaniquement à la
-régénération de l'inventaire qui suit chaque lot. Aucun push, aucun merge.
+Aucune modification de statut, qualification ou baseline effectuée dans ce
+lot. Les fingerprints d'anomalie `unassembled_objects` associés se
+retirent mécaniquement à la régénération de l'inventaire qui suit chaque
+lot. Les 80 entrées de dette désormais orphelines dans
+`BASELINE_QUALIFICATION_REGISTRY.yaml` sont documentées ci-dessus comme
+reste à traiter (T7), non promues, non supprimées. Aucun push, aucun
+merge.
