@@ -5,6 +5,19 @@
 # (ressources d'accompagnement). Aucun blog, aucun manuel concurrent, aucune
 # ancienne matrice interne utilisée seule comme autorité.
 #
+# Trois namespaces JAMAIS mélangés :
+#
+#   programme_d_enseignement : ce qui doit être enseigné (BO programme).
+#   definition_d_epreuve     : durée, structure, pondération, calculatrice,
+#                              nature des parties — le texte qui DÉFINIT
+#                              l'épreuve, pas un sujet réel.
+#   sujets_d_examen          : preuves empiriques de mise en œuvre (sujets
+#                              réels, banques). Jamais une autorité
+#                              suffisante pour ajouter ou retirer une notion
+#                              du programme. Toujours daté par cohorte —
+#                              un sujet composé sous l'ancien programme ne
+#                              prouve rien sur le nouveau.
+#
 # Chaque entrée a été vérifiée indépendamment le 2026-08-22 par récupération
 # directe des pages education.gouv.fr/bo/... et/ou legifrance.gouv.fr (JORF),
 # pas seulement recopiée d'un registre interne préexistant. Le registre
@@ -14,11 +27,11 @@
 # `NSI/corpus_nsi/00_programmes_officiels/`) reste la source de vérité
 # opérationnelle consommée par le pipeline d'inventaire (registre PDF,
 # gates). Ce fichier est la couche d'audit T2 : il ajoute la date de
-# vérification, la distinction explicite applicable/non-applicable et une
-# trouvaille nouvelle (modalités d'épreuve TNSI 2026) absente du registre
-# opérationnel. Il ne le contredit sur aucun point commun.
+# vérification, la distinction programme/épreuve/sujets, et des trouvailles
+# absentes du registre opérationnel. Il ne le contredit sur aucun point
+# commun du namespace programme_d_enseignement.
 
-schema_version: 1
+schema_version: 2
 edition: "2026-2027"
 verified_on: "2026-08-22"
 verification_method: >-
@@ -26,7 +39,10 @@ verification_method: >-
   education.gouv.fr/bo/... et legifrance.gouv.fr/jorf/... pour chacun des
   six manuels, indépendamment du registre opérationnel préexistant.
 
-programs:
+# =============================================================================
+# NAMESPACE A — PROGRAMME_D_ENSEIGNEMENT
+# =============================================================================
+programme_d_enseignement:
 
   1SPE:
     manual: "1SPE"
@@ -59,8 +75,9 @@ programs:
       équations trigonométriques et l'étude des fonctions cosinus/sinus :
       ces contenus rejoignent le programme de Terminale 2027 (backlog, hors
       périmètre de l'édition 2026-2027). Conformité chapitre-par-chapitre
-      déjà auditée dans `Mathematiques/manuel-maths/referentiel/CONFORMITE_BO2026.md`
-      (validation humaine finale encore requise).
+      pré-auditée (à recalculer contre ce texte, pas à réutiliser comme
+      preuve intrinsèque) dans
+      `Mathematiques/manuel-maths/referentiel/CONFORMITE_BO2026.md`.
 
   TSPE_2026_2027:
     manual: "TSPE_2026_2027"
@@ -103,15 +120,6 @@ programs:
       programme 2019 : cohérence pédagogique du programme 2019 pour toute
       leur scolarité au lycée. Le nouveau programme (backlog_tspe_v2)
       n'entre en application qu'en 2027-2028.
-    exam_modality:
-      status: "à vérifier — non confirmé par source officielle directe dans cette vérification"
-      note: >-
-        Épreuve écrite de spécialité au printemps de Terminale, coefficient
-        16. Format exact (nombre d'exercices) pour la session 2027 trouvé
-        uniquement sur sources secondaires (digischool.fr, annabac.com) lors
-        de cette vérification — pas de confirmation education.gouv.fr/Éduscol
-        directe. Ne pas déclarer vérifié tant qu'aucune source primaire n'est
-        déposée.
 
   TCOMPL:
     manual: "TCOMPL"
@@ -233,46 +241,197 @@ programs:
     local_archival_file: "NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf"
     domains: ["algorithmique", "architectures matérielles et systèmes", "bases de données", "langages et programmation", "structures de données", "histoire de l'informatique"]
     note: "Aucune réforme 2024-2026 trouvée pour le programme. Reste l'autorité applicable pour 2026-2027."
-    exam_modality:
-      official_ref: "MENE2516123N"
-      official_title: >-
-        Épreuve de l'enseignement de spécialité numérique et sciences
-        informatiques de la classe de terminale de la voie générale à
-        compter de la session 2026 de l'examen du baccalauréat
-      note_date: "2025-07-04"
-      bo_number: "31"
-      bo_date: "2025-08-21"
-      authority_url: "https://www.education.gouv.fr/bo/2025/Hebdo31/MENE2516123N"
-      mirror_url: "https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes/bac-voie-generale/specialite-nsi-numerique-et-sciences-informatiques/18323-boenjs-n31-du-21-08-2025.pdf"
-      replaces: "note de service n° 2020-30 du 11 février 2020"
-      applicable_from_session: 2026
-      applicable_2027_confirmed: false
-      applicable_2027_note: >-
-        Le texte dit "à compter de la session 2026" sans date de fin ; couvre
-        donc la session 2027 sauf texte ultérieur non trouvé. Absence de
-        contre-indication, pas confirmation positive absolue.
-      ecrit_points_sur_20: 15
-      ecrit_duree_h: 3.5
-      ecrit_structure: "trois exercices indépendants"
-      pratique_points_sur_20: 5
-      pratique_duree_h: 1
-      pratique_banque_url: "https://sujets.examens-concours.gouv.fr/delos/public/bgt/nsi"
-      deposit_status: >-
-        NON déposé/empreinté localement (fetch direct education.gouv.fr en
-        403 ; PDF miroir académique trop volumineux pour être récupéré dans
-        cette passe). Trouvaille nouvelle par rapport au registre
-        opérationnel préexistant, qui marquait ce point
-        `declare_par_instruction_humaine` / `source_deposee: false`. Ce
-        texte comble ce point mais reste à déposer avant d'être cité comme
-        preuve vérifiée dans le pipeline (règle R7 du dépôt).
-    prior_exam_modality_ref: "note de service n°2020-30 du 11 février 2020 (points écrit/pratique 12/8, remplacée)"
+
+# =============================================================================
+# NAMESPACE B — DEFINITION_D_EPREUVE
+# =============================================================================
+# Durée, structure, pondération, calculatrice, nature des parties. Ne
+# détermine JAMAIS ce qui doit être enseigné — voir programme_d_enseignement.
+definition_d_epreuve:
+
+  1SPE_EPREUVE_ANTICIPEE:
+    manual: "1SPE"
+    intitule: "Épreuve anticipée de mathématiques (voie générale)"
+    structure_verification_status: CONFIRMED
+    duree_h: 2
+    coefficient: 2
+    calculatrice: false
+    partie_1:
+      contenu: "QCM automatismes"
+      points_sur_20: 6
+    partie_2:
+      contenu: "2 à 3 exercices indépendants"
+      points_sur_20: 14
+    structure_evidence: >-
+      Structure (2h, coeff 2, sans calculatrice, QCM 6pts + exercices 14pts)
+      confirmée par la page évergreen education.gouv.fr
+      (reussir-au-lycee/epreuve-anticipee-de-mathematiques-en-classe-de-premiere-450607)
+      décrivant la réforme de façon générale, pas limitée à une session, et
+      cohérente avec les textes session 2027 (MENE2515469N). Fetch direct de
+      la page en 403 ; contenu confirmé par extraits WebSearch indexés.
+    annual_annexe_note: >-
+      Seule l'annexe listant les automatismes évaluables est republiée
+      chaque année pour chaque session (ex. MENE2516240N pour la session
+      2027). Le texte structurant lui-même (2h/coeff2/QCM6+14) n'est pas
+      republié annuellement.
+    cohort_evidence:
+      session_2027_confirmed:
+        official_ref: "MENE2515469N"
+        note_date: "2025-06-10"
+        bo: "Hebdo n°24/2025"
+        authority_url: "https://www.education.gouv.fr/bo/2025/Hebdo24/MENE2515469N"
+        annexe_automatismes_ref: "MENE2516240N"
+        cohort: "élèves de Première durant l'année scolaire 2025-2026"
+      session_2028_relevant_cohort:
+        cohort: "élèves de Première durant l'année scolaire 2026-2027 (édition Nexus 2026-2027)"
+        session_specific_text_found: false
+        note: >-
+          AMBIGUÏTÉ RÉELLE NON PLEINEMENT FERMÉE : aucun texte "session 2028"
+          spécifique trouvé (ni structure, ni annexe automatismes). La
+          continuité de la structure (2h/coeff2/QCM6+14) au-delà de la
+          session 2027 est une inférence raisonnable (page évergreen
+          education.gouv.fr, réforme structurelle et non annuelle), pas une
+          confirmation positive absolue par un texte session 2028 nommément
+          daté. Revérifier avant publication finale si un texte "session
+          2028" paraît (généralement publié au printemps précédent, donc
+          possible dès 2027).
+
+  TSPE_EPREUVE_SPECIALITE:
+    manual: "TSPE_2026_2027"
+    intitule: >-
+      Épreuve de l'enseignement de spécialité mathématiques de la classe
+      terminale de la voie générale à compter de la session 2021
+    official_ref: "MENE2001796N"
+    bo: "spécial n°2/2020"
+    authority_url: "https://www.education.gouv.fr/bo/20/Special2/MENE2001796N.htm"
+    verification_status: PARTIAL
+    confirmed:
+      note_sur_20: true
+      bareme_par_exercice: "chaque exercice noté de 4 à 8 points"
+    not_confirmed_this_pass:
+      - "durée exacte"
+      - "usage calculatrice"
+      - "nombre précis d'exercices"
+      - "coefficient exact (16 cité par le mandat, non re-vérifié dans cette passe précise)"
+    unconfirmed_note: >-
+      Fetch direct en 403, aucun miroir texte intégral trouvé pour ce
+      document précis. Aucun texte plus récent trouvé qui le remplacerait
+      pour la session 2027 (cohorte de l'édition 2026-2027) — présomption de
+      continuité, pas confirmation positive. À compléter avant citation
+      comme preuve pleinement vérifiée dans une matrice de couverture.
+
+  TCOMPL_REGIME:
+    manual: "TCOMPL"
+    intitule: "Régime d'évaluation — mathématiques complémentaires"
+    assessment_regime: continuous_assessment
+    official_ref: "MENE2215445N"
+    official_title: >-
+      Place des mathématiques dans les parcours de formation des élèves de
+      cycle terminal et pour le baccalauréat
+    bo: "Hebdo n°30 du 22 septembre 2022"
+    authority_url: "https://www.education.gouv.fr/bo/22/Hebdo30/MENE2215445N.htm"
+    coefficient: 2
+    note: >-
+      Contrôle continu (moyennes du livret scolaire), pas d'épreuve
+      terminale spécifique. Ne pas en inventer une.
+
+  TEXPERTES_REGIME:
+    manual: "TEXPERTES"
+    intitule: "Régime d'évaluation — mathématiques expertes"
+    assessment_regime: continuous_assessment
+    official_ref: "MENE2215445N"
+    bo: "Hebdo n°30 du 22 septembre 2022"
+    authority_url: "https://www.education.gouv.fr/bo/22/Hebdo30/MENE2215445N.htm"
+    coefficient: 2
+    note: "Même autorité et régime que TCOMPL. Pas d'épreuve terminale spécifique."
+
+  TNSI_EPREUVE:
+    manual: "TNSI"
+    intitule: >-
+      Épreuve de l'enseignement de spécialité numérique et sciences
+      informatiques de la classe de terminale de la voie générale à compter
+      de la session 2026 de l'examen du baccalauréat
+    official_ref: "MENE2516123N"
+    note_date: "2025-07-04"
+    bo_number: "31"
+    bo_date: "2025-08-21"
+    authority_url: "https://www.education.gouv.fr/bo/2025/Hebdo31/MENE2516123N"
+    mirror_url: "https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes/bac-voie-generale/specialite-nsi-numerique-et-sciences-informatiques/18323-boenjs-n31-du-21-08-2025.pdf"
+    replaces: "note de service n° 2020-30 du 11 février 2020"
+    applicable_from_session: 2026
+    applicable_2027_confirmed: false
+    applicable_2027_note: >-
+      Le texte dit "à compter de la session 2026" sans date de fin ; couvre
+      donc la session 2027 sauf texte ultérieur non trouvé. Absence de
+      contre-indication, pas confirmation positive absolue.
+    # Représentation correcte : deux épreuves notées chacune sur 20, la note
+    # finale étant une moyenne pondérée. Ne PAS stocker written_points=15/
+    # practical_points=5 comme si l'écrit était noté directement sur 15 et
+    # la pratique sur 5 — corrigé après relecture du mandat.
+    ecrit:
+      duree_h: 3.5
+      structure: "trois exercices indépendants"
+      raw_scale: 20
+      weight: 0.75
+    pratique:
+      duree_h: 1
+      structure: "résolution de problèmes + programmation sur machine"
+      raw_scale: 20
+      weight: 0.25
+      banque_url: "https://sujets.examens-concours.gouv.fr/delos/public/bgt/nsi"
+    equivalent_contribution_pedagogical_explanation_only: "15/20 + 5/20 (ne pas stocker comme échelle réelle)"
+    candidats_particuliers:
+      scolaires: "écrit + pratique"
+      individuels_ou_prive_hors_contrat: >-
+        Dispense de l'épreuve pratique selon la note officielle ; note
+        constituée à partir de l'écrit selon le texte (détail exact du
+        mécanisme de substitution non extrait dans cette passe — à confirmer
+        avant de le citer comme preuve vérifiée). Ceci ne modifie en rien le
+        programme d'enseignement : le manuel peut fournir un parcours
+        "épreuve pratique" optionnel, le cours canonique reste fondé sur le
+        programme.
+    prior_ref: "note de service n°2020-30 du 11 février 2020 (points écrit/pratique 12/8, remplacée)"
+    deposit_status: >-
+      NON déposé/empreinté localement (fetch direct education.gouv.fr en
+      403 ; PDF miroir académique trop volumineux pour être récupéré dans
+      cette passe). Trouvaille nouvelle par rapport au registre opérationnel
+      préexistant, qui marquait ce point `declare_par_instruction_humaine` /
+      `source_deposee: false`. Comble ce point mais reste à déposer avant
+      d'être cité comme preuve vérifiée dans le pipeline (règle R7).
+
+# =============================================================================
+# NAMESPACE C — SUJETS_D_EXAMEN
+# =============================================================================
+# Preuves empiriques de mise en œuvre. JAMAIS une autorité suffisante pour
+# ajouter ou retirer une notion du programme_d_enseignement. Toujours daté
+# par cohorte scolaire, jamais par date de composition seule.
+sujets_d_examen:
+
+  1SPE_SUJETS_JUIN_2026:
+    manual: "1SPE"
+    cohort_school_year: "2025-2026"
+    program_in_force_for_this_cohort: "MENE1901633A-1SPE (2019, ancien programme)"
+    subject_2026_program_authority: false
+    rule: >-
+      Les sujets de juin 2026 correspondent à l'année scolaire 2025-2026,
+      donc à l'ANCIEN programme alors en vigueur. Le nouveau programme
+      MENE2602917A entre en application à la rentrée de septembre 2026.
+      SUBJECT_2026_PROGRAM_AUTHORITY = FALSE : ces sujets ne peuvent PAS
+      servir de preuve de couverture du nouveau programme 1SPE 2026. Usage
+      autorisé uniquement : format, durée, style, niveau de rédaction,
+      types de consignes, organisation de l'épreuve — jamais contenu
+      exigible du nouveau programme.
+    future_use: >-
+      Si des sujets zéro ou documents officiels explicitement rattachés au
+      programme 2026 apparaissent, les intégrer séparément ici avec leur
+      propre date et autorité — ne jamais les fusionner avec cette entrée.
 
 reconciliation_with_operational_registry:
   file: "docs/programmes/PROGRAMMES_2026_2027.yaml"
-  status: "cohérent sur tous les points communs, aucune contradiction trouvée"
+  status: "cohérent sur tous les points communs du namespace programme_d_enseignement, aucune contradiction trouvée"
   additions_not_yet_in_operational_registry:
-    - "TNSI.exam_modality (MENE2516123N) — trouvé par cette vérification, non déposé"
-    - "TCOMPL.superseded_by NOR corrigé (MENE2902920A, pas MENE2602920A)"
+    - "definition_d_epreuve.TNSI_EPREUVE (MENE2516123N) — trouvé par cette vérification, non déposé"
+    - "programme_d_enseignement.TCOMPL.superseded_by NOR corrigé (MENE2902920A, pas MENE2602920A)"
   action_required: >-
     Aucune modification du registre opérationnel effectuée dans ce lot
     (fichier consommé par le pipeline d'inventaire — modification hors
