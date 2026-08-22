@@ -19,7 +19,6 @@
 |---|---|
 | blocking_statuses | 2222 |
 | unassembled_objects | 52 |
-| orphan_files | 12 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
@@ -27,11 +26,6 @@
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-003, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-004, scope=object
-- orphan_files: source=Mathematiques/manuel-maths/gabarits/nexus-code.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-code.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- orphan_files: source=Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- orphan_files: source=Mathematiques/manuel-maths/gabarits/nexus-figures.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-figures.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- orphan_files: source=Mathematiques/manuel-maths/gabarits/nexus-icons.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-icons.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- orphan_files: source=Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
 - unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares

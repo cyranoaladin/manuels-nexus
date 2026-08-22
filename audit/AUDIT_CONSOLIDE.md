@@ -98,19 +98,8 @@
 ### missing_corrections (0)
 - Aucune.
 
-### orphan_files (12)
-- source=Mathematiques/manuel-maths/gabarits/nexus-code.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-code.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/gabarits/nexus-figures.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-figures.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/gabarits/nexus-icons.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-icons.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/gabarits/nexus-signatures.tex, cible=Mathematiques/manuel-maths/gabarits/nexus-signatures.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=NSI/gabarits/nexus-code.tex, cible=NSI/gabarits/nexus-code.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=NSI/gabarits/nexus-figures-nsi.tex, cible=NSI/gabarits/nexus-figures-nsi.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=NSI/gabarits/nexus-figures.tex, cible=NSI/gabarits/nexus-figures.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=NSI/gabarits/nexus-icons.tex, cible=NSI/gabarits/nexus-icons.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=NSI/gabarits/nexus-margin-rail.tex, cible=NSI/gabarits/nexus-margin-rail.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=NSI/gabarits/nexus-signatures.tex, cible=NSI/gabarits/nexus-signatures.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
+### orphan_files (0)
+- Aucune.
 
 ### unassembled_objects (52)
 - source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares

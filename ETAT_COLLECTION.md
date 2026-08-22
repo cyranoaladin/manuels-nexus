@@ -4,12 +4,12 @@
 
 ## État global
 - Digest source: `sha256:d1decc461ef38373295440156f8ff0e4530f0a15ca193fb6bd738b258cb8c012`
-- Digest modèle: `sha256:3d7ac7dfcdbc9bded964f8f3b28d4115f84bda0de110c751733e73c394ba2023`
+- Digest modèle: `sha256:8e186b289961cd1fb2cf544e9034dbf04428df919eb5cdcbd07af8e404d67f21`
 - Fichiers scannés: 6285
-- Gate `release-strict`: ROUGE (67 bloqueurs)
+- Gate `release-strict`: ROUGE (66 bloqueurs)
 
 ## Provenance synthétique
-- SHA Git: `4bce7a1186e8ffce75b4f545a6451a1444b26193`
+- SHA Git: `5f36bfba062e5c1ce098da562946124e54d62e7d`
 - Branche: `audit/adversarial-reconciliation-2026`
 - Dépôt sale: non
 
