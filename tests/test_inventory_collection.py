@@ -9907,6 +9907,115 @@ def test_unassembled_objects_excludes_companions_input_by_an_assembled_object(
     assert unrelated_orphan in unassembled
 
 
+def test_unassembled_objects_closure_follows_nested_transitive_input(
+    tmp_path: Path, inventory_module
+) -> None:
+    """A -> B -> C: only A is selected by the declared assembler's glob, but
+    B and C must both end up counted as assembled through the closure, not
+    just the one-hop companion of an already-assembled object."""
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    chapter_assembler = "Mathematiques/manuel-maths/scripts/assemble.py"
+    a = f"{base}/cours/10_cours.tex"
+    b = f"{base}/cours/sub/11_b.tex"
+    c = f"{base}/cours/sub/deep/12_c.tex"
+    sources = {
+        f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
+        a: _meta(id="1SPE-TEST-COURS-C1", status="approved") + f"\\input{{{b}}}\n",
+        b: _meta(id="1SPE-TEST-ALGO-B", type_objet="algorithme", status="approved")
+        + f"\\input{{{c}}}\n",
+        c: _meta(id="1SPE-TEST-ALGO-C", type_objet="algorithme", status="approved"),
+        chapter_assembler: 'ORDER = [("cours", "1*")]\nVARIANTS = ["complet"]\n',
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    unassembled = {
+        item["cible"] for item in inventory["anomalies"]["unassembled_objects"]
+    }
+    assert b not in unassembled
+    assert c not in unassembled
+
+
+def test_unassembled_objects_closure_terminates_on_input_cycle(
+    tmp_path: Path, inventory_module
+) -> None:
+    """A -> B -> C -> B: a cycle among companions must not hang the closure,
+    and every node reachable from the assembled root must still end up
+    counted as assembled exactly once."""
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    chapter_assembler = "Mathematiques/manuel-maths/scripts/assemble.py"
+    a = f"{base}/cours/10_cours.tex"
+    b = f"{base}/cours/sub/11_b.tex"
+    c = f"{base}/cours/sub/12_c.tex"
+    sources = {
+        f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
+        a: _meta(id="1SPE-TEST-COURS-C1", status="approved") + f"\\input{{{b}}}\n",
+        b: _meta(id="1SPE-TEST-ALGO-B", type_objet="algorithme", status="approved")
+        + f"\\input{{{c}}}\n",
+        c: _meta(id="1SPE-TEST-ALGO-C", type_objet="algorithme", status="approved")
+        + f"\\input{{{b}}}\n",
+        chapter_assembler: 'ORDER = [("cours", "1*")]\nVARIANTS = ["complet"]\n',
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    unassembled = {
+        item["cible"] for item in inventory["anomalies"]["unassembled_objects"]
+    }
+    assert b not in unassembled
+    assert c not in unassembled
+
+
+def test_unassembled_objects_closure_does_not_trigger_duplicate_assembly(
+    tmp_path: Path, inventory_module
+) -> None:
+    """A companion reached via \\input from an assembled object must not be
+    reported as duplicate_assembly_objects: that anomaly tracks the
+    assembler's own glob-selected paths, which the \\input closure never
+    touches."""
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    manual_assembler = "Mathematiques/manuel-maths/scripts/assemble_manuel.py"
+    a = f"{base}/cours/10_cours.tex"
+    companion = f"{base}/cours/sub/11_companion.tex"
+    sources = {
+        f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
+        a: (
+            _meta(id="1SPE-TEST-COURS-C1", status="approved")
+            + f"\\input{{{companion}}}\n"
+        ),
+        companion: _meta(
+            id="1SPE-TEST-ALGO-COMPANION", type_objet="algorithme", status="approved"
+        ),
+        manual_assembler: (
+            'CHAPITRES = ["1SPE-TEST"]\n'
+            'ORDER = [("cours", "1*")]\n'
+            'VARIANTS = ["professeur", "eleve"]\n'
+            'ELEVE_EXCLUDES = {"evaluations", "corriges"}\n'
+            'ELEVE_ALLOWED_TYPES = {"cours", "algorithme"}\n'
+        ),
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert inventory["anomalies"]["duplicate_assembly_objects"] == []
+    unassembled = {
+        item["cible"] for item in inventory["anomalies"]["unassembled_objects"]
+    }
+    assert companion not in unassembled
+
+
 def test_manual_assembler_gaps_and_chapters_outside_manual_are_explicit(
     tmp_path: Path, inventory_module
 ) -> None:
