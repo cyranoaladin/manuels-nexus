@@ -2341,6 +2341,24 @@ def add_unassembled_objects(inventory: dict[str, Any]) -> None:
         for assembly in inventory["assemblies"]
         for path in assembly["included_objects"]
     }
+    # A META-tagged companion object \input by an already-assembled object
+    # (e.g. a cours section pulling in per-experimentation sub-files) is
+    # genuinely present in the compiled book, even though the declared
+    # assembler's own glob selection only ever names its parent. Close the
+    # LaTeX \input closure over the reference graph so such companions are
+    # not misreported as unassembled.
+    adjacency: dict[str, list[str]] = defaultdict(list)
+    for edge in inventory["reference_graph"]:
+        if edge["kind"] == "latex" and edge["resolved"]:
+            adjacency[edge["source"]].append(edge["cible"])
+    pending = list(assembled)
+    while pending:
+        current = pending.pop()
+        for target in adjacency.get(current, ()):
+            if target in assembled:
+                continue
+            assembled.add(target)
+            pending.append(target)
     for item in _all_objects(inventory):
         if item["path"] not in assembled:
             inventory["anomalies"]["unassembled_objects"].append(

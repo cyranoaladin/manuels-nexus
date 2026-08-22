@@ -9860,6 +9860,53 @@ ELEVE_ALLOWED_TYPES = {"cours", "exercice"}
     assert chapter_model["declared_variants"] == manual_model["declared_variants"]
 
 
+def test_unassembled_objects_excludes_companions_input_by_an_assembled_object(
+    tmp_path: Path, inventory_module
+) -> None:
+    """A META-tagged companion object \\input by an object that the
+    declared assembler *does* select (e.g. a cours section pulling in
+    per-experimentation sub-files) is genuinely present in the compiled
+    book. It must not be reported as unassembled just because the
+    assembler's own glob selection only ever names its parent."""
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    chapter_assembler = "Mathematiques/manuel-maths/scripts/assemble.py"
+    parent = f"{base}/cours/10_cours.tex"
+    companion = f"{base}/cours/experimentations/02_companion.tex"
+    unrelated_orphan = f"{base}/cours/experimentations/03_never_input.tex"
+    sources = {
+        f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
+        parent: (
+            _meta(id="1SPE-TEST-COURS-C1", status="approved")
+            + f"\\input{{{companion}}}\n"
+        ),
+        companion: _meta(
+            id="1SPE-TEST-ALGO-001", type_objet="algorithme", status="approved"
+        ),
+        unrelated_orphan: _meta(
+            id="1SPE-TEST-ALGO-002", type_objet="algorithme", status="approved"
+        ),
+        chapter_assembler: 'ORDER = [("cours", "1*")]\nVARIANTS = ["complet"]\n',
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert any(
+        edge["source"] == parent
+        and edge["cible"] == companion
+        and edge["resolved"] is True
+        for edge in inventory["reference_graph"]
+    )
+    unassembled = {
+        item["cible"] for item in inventory["anomalies"]["unassembled_objects"]
+    }
+    assert companion not in unassembled
+    assert unrelated_orphan in unassembled
+
+
 def test_manual_assembler_gaps_and_chapters_outside_manual_are_explicit(
     tmp_path: Path, inventory_module
 ) -> None:
