@@ -9,7 +9,7 @@
 - Gate `release-strict`: ROUGE (64 bloqueurs)
 
 ## Provenance synthétique
-- SHA Git: `8b7d378f030d1fbcf0f2fcaa8c23ec0461448967`
+- SHA Git: `5bc1ab0402993c0802653decb4fdc0575784b806`
 - Branche: `audit/adversarial-reconciliation-2026`
 - Dépôt sale: non
 
