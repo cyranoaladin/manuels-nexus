@@ -1114,13 +1114,37 @@ def student_text_violations(text: str) -> list[str]:
     checks = (
         ("identifiant interne", r"\b1SPE-[A-Z0-9]+(?:-[A-Z0-9]+)*"),
         ("corrigé", r"(?i:\bcorrig[ée]s?\b)"),
-        ("barème enseignant", r"(?i:\bbar[èe]me indicatif\b)"),
+        ("barème enseignant", r"(?i:\bbar[èe]me\b)"),
         (
             "note enseignant",
             r"(?i:\b(?:note|réponse|reponse)\s+(?:professeur|enseignant)\b)",
         ),
+        ("clé de correction", r"(?i:\bcl[ée]\s+de\s+correction\b)"),
+        (
+            "réponses réservées",
+            r"(?i:\br[ée]ponses?\s+r[ée]serv[ée]es?\b)",
+        ),
+        ("marqueur teacher-only", r"(?i:\bteacher[- ]only\b)"),
     )
     return [reason for reason, pattern in checks if re.search(pattern, text)]
+
+
+TEACHER_KEY_PATTERN = re.compile(
+    r"(?i:\b(?:cl[ée]\s+de\s+correction|correction\s+et\s+diagnostics)\b)"
+)
+
+
+def teacher_key_count(text: str) -> int:
+    """Count the two canonical Math QCM answer-key headings."""
+
+    return len(TEACHER_KEY_PATTERN.findall(text))
+
+
+def teacher_key_count_violations(text: str, *, expected: int) -> list[str]:
+    observed = teacher_key_count(text)
+    if observed == expected:
+        return []
+    return [f"clés QCM professeur: attendu {expected}, observé {observed}"]
 
 
 def _verify_student_pdf_text(
@@ -1149,6 +1173,36 @@ def _verify_student_pdf_text(
         raise AssemblyError(
             "séparation élève rouge: " + ", ".join(violations)
         )
+
+
+def _verify_teacher_pdf_text(
+    pdf_path: Path,
+    *,
+    expected_keys: int,
+    runner: Callable[..., Any],
+    environment: Mapping[str, str],
+) -> None:
+    try:
+        completed = _run_with_environment(
+            runner,
+            environment,
+            ["pdftotext", "-layout", str(pdf_path), "-"],
+            capture_output=True,
+            text=True,
+            errors="replace",
+            check=False,
+            timeout=60,
+        )
+    except (OSError, subprocess.TimeoutExpired) as error:
+        raise AssemblyError("contrôle textuel professeur indisponible") from error
+    if completed.returncode != 0:
+        raise AssemblyError("extraction textuelle professeur en échec")
+    violations = teacher_key_count_violations(
+        completed.stdout,
+        expected=expected_keys,
+    )
+    if violations:
+        raise AssemblyError("complétude professeur rouge: " + ", ".join(violations))
 
 
 def _first_version_line(completed: Any, tool: str) -> str:
@@ -1372,6 +1426,13 @@ def _main_locked(
             if variant == "eleve":
                 _verify_student_pdf_text(
                     run_pdf_path,
+                    runner=active_runner,
+                    environment=environment,
+                )
+            else:
+                _verify_teacher_pdf_text(
+                    run_pdf_path,
+                    expected_keys=len(MANUAL_CHAPTERS[manual]),
                     runner=active_runner,
                     environment=environment,
                 )

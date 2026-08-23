@@ -141,11 +141,11 @@
 
 \item[] \textbf{Capacite C6}
 
-\item \textbf{[Q16]} On decoupe des carres de cote $x$ aux coins d'une feuille $30 \times 20$ pour former une boite. Le volume est $V(x) = x(30-2x)(20-2x)$. Quelle est la valeur de $x$ pour $x = 4$ ?
+\item \textbf{[Q16]} On decoupe des carres de cote $x$ aux coins d'une feuille $30 \times 20$ pour former une boite. Le volume est $V(x) = x(30-2x)(20-2x)$. Quelle est la valeur de $V(4)$ ?
   \begin{enumerate}[label=\Alph*.]
-    \item $V(4) = 1344$
-    \item $V(4) = 1280$
-    \item $V(4) = 2640$
+    \item $V(4) = 1664$
+    \item $V(4) = 2400$
+    \item $V(4) = 264$
     \item $V(4) = 1056$
   \end{enumerate}
 
@@ -167,6 +167,8 @@
 
 \end{enumerate}
 
+% NEXUS-QCM-TEACHER-ONLY-BEGIN
+\ifnxVersionProfesseur
 \clearpage
 \section*{Cle de correction — reservee au professeur}
 
@@ -190,7 +192,7 @@ Q12 & C4 & \textbf{C} \\
 Q13 & C5 & \textbf{A} \\
 Q14 & C5 & \textbf{B} \\
 Q15 & C5 & \textbf{C} \\
-Q16 & C6 & \textbf{A} \\
+Q16 & C6 & \textbf{D} \\
 Q17 & C6 & \textbf{B} \\
 Q18 & C6 & \textbf{C} \\
 \hline
@@ -252,15 +254,13 @@ Q18 & C6 & \textbf{C} \\
   \begin{itemize}
     \item \textbf{B} — L'eleve a applique les formules avec un signe erronne : $x = (-b \pm \sqrt{\Delta})/(2a)$ avec $b = 3$ mais a oublie que $b = -3$. Les formules donnent $x = (3 \pm 5)/2$, soit $x_1 = -1$ et $x_2 = 4$. \emph{Renvoi : C3, formule des racines.}
     \item \textbf{C} — L'eleve a trouve les bonnes valeurs en module mais a attribue les mauvais signes aux deux racines. $\Delta = 9 + 16 = 25$, $x_1 = (3-5)/2 = -1$ et $x_2 = (3+5)/2 = 4$. \emph{Renvoi : C3, formule des racines.}
-    \item \textbf{D} — L'eleve a peut-etre factorise par inspection en cherchant deux entiers de somme $-3$ et produit $-4$ : il faut $(-1) \times 4 = -4$ et $(-1) + 4 = 3 
-eq -3$. Confusion des signes. \emph{Renvoi : C3, formule des racines.}
+    \item \textbf{D} — L'eleve a peut-etre factorise par inspection en cherchant deux entiers de somme $-3$ et produit $-4$ : il faut $(-1) \times 4 = -4$ et $(-1) + 4 = 3 \neq -3$. Confusion des signes. \emph{Renvoi : C3, formule des racines.}
   \end{itemize}
   \item \textbf{Q10}
   \begin{itemize}
     \item \textbf{A} — L'eleve a oublie le facteur $a = 2$ dans la forme factorisee $f(x) = a(x - x_1)(x - x_2)$. La formule impose de conserver le coefficient dominant. \emph{Renvoi : C4, factorisation.}
     \item \textbf{C} — L'eleve a utilise $+x_1$ et $+x_2$ au lieu de $-x_1$ et $-x_2$ : la forme factorisee est $a(x - x_1)(x - x_2)$, pas $a(x + x_1)(x + x_2)$. \emph{Renvoi : C4, factorisation.}
-    \item \textbf{D} — L'eleve a reparti le coefficient $a = 2$ sur chacun des deux facteurs : $(2x - x_1)(2x - x_2)$ n'est pas la forme correcte, car $2 \times 2 = 4 
-eq a = 2$. \emph{Renvoi : C4, factorisation.}
+    \item \textbf{D} — L'eleve a reparti le coefficient $a = 2$ sur chacun des deux facteurs : $(2x - x_1)(2x - x_2)$ n'est pas la forme correcte, car $2 \times 2 = 4 \neq a = 2$. \emph{Renvoi : C4, factorisation.}
   \end{itemize}
   \item \textbf{Q11}
   \begin{itemize}
@@ -294,9 +294,9 @@ eq a = 2$. \emph{Renvoi : C4, factorisation.}
   \end{itemize}
   \item \textbf{Q16}
   \begin{itemize}
-    \item \textbf{B} — L'eleve a calcule $V(4) = 4 \times (30-4) \times (20-4) = 4 \times 26 \times 16 = 1664$... ou a substitue $2x = 4$ au lieu de $x = 4$ dans un facteur : $V(4) = 4 \times 22 \times 12 = 1056$. Erreur sur $30 - 2 \times 4 = 22$ et $20 - 2 \times 4 = 12$. \emph{Renvoi : C6, evaluation d'une expression.}
-    \item \textbf{C} — L'eleve a calcule $4 \times 30 \times 20 = 2400$ ou a omis le $-2x$ dans les facteurs. Il n'a pas tenu compte des decoupes. \emph{Renvoi : C6, mise en equation.}
-    \item \textbf{D} — L'eleve a calcule $V(4) = 4 \times (30 - 4) \times (20 - 4) = 4 \times 26 \times ... $  ou $4 \times 22 \times 12 = 1056$ (confusion $30 - x$ et $30 - 2x$). \emph{Renvoi : C6, mise en equation.}
+    \item \textbf{A} — L'eleve a remplace $2x$ par $x$ dans les deux dimensions : $4 \times (30-4) \times (20-4) = 4 \times 26 \times 16 = 1664$. Il faut calculer $2 \times 4 = 8$. \emph{Renvoi : C6, evaluation d'une expression.}
+    \item \textbf{B} — L'eleve a calcule $4 \times 30 \times 20 = 2400$ : il a conserve les dimensions de la feuille sans retirer les deux bandes de largeur $4$. \emph{Renvoi : C6, mise en equation.}
+    \item \textbf{C} — L'eleve a calcule seulement l'aire de la base : $(30-8)(20-8) = 22 \times 12 = 264$. Pour obtenir le volume, il faut encore multiplier par la hauteur $x = 4$. \emph{Renvoi : C6, evaluation d'une expression.}
   \end{itemize}
   \item \textbf{Q17}
   \begin{itemize}
@@ -311,3 +311,5 @@ eq a = 2$. \emph{Renvoi : C4, factorisation.}
     \item \textbf{D} — L'eleve a confondu $b = 20$ avec l'instant du maximum. L'abscisse du sommet est $\alpha = -b/(2a) = -20/(-10) = 2$ s. \emph{Renvoi : C6, abscisse du sommet.}
   \end{itemize}
 \end{itemize}
+\fi
+% NEXUS-QCM-TEACHER-ONLY-END

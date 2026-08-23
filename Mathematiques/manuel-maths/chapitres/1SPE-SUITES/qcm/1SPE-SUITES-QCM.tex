@@ -102,7 +102,7 @@
     \item $40$
     \item $121$
     \item $242$
-    \item $15$
+    \item $10$
   \end{enumerate}
 
 \item \textbf{[Q12]} On calcule la somme $u_0 + u_1 + \cdots + u_{14}$ des termes d'une suite arithmetique. Combien y a-t-il de termes dans cette somme ?
@@ -223,6 +223,8 @@ Quelle erreur contient ce code ?
 
 \end{enumerate}
 
+% NEXUS-QCM-TEACHER-ONLY-BEGIN
+\ifnxVersionProfesseur
 \clearpage
 \section*{Cle de correction — reservee au professeur}
 
@@ -310,8 +312,7 @@ Q21 & C7 & \textbf{B} \\
   \item \textbf{Q9}
   \begin{itemize}
     \item \textbf{A} — Preuve insuffisante : verifier deux egalites de quotients consecutifs ne prouve pas la constance pour tout $n$. Il faut un raisonnement general valable pour tout $n \in \mathbb{N}$. \emph{Renvoi : M3, etape 4.}
-    \item \textbf{B} — Une suite geometrique ne peut pas avoir de terme nul (le quotient $u_{n+1}/u_n$ serait une division par zero). C'est une condition necessaire : $u_n 
-eq 0$ pour tout $n$. \emph{Renvoi : M3, etape 1.}
+    \item \textbf{B} — Une suite geometrique ne peut pas avoir de terme nul (le quotient $u_{n+1}/u_n$ serait une division par zero). C'est une condition necessaire : $u_n \neq 0$ pour tout $n$. \emph{Renvoi : M3, etape 1.}
     \item \textbf{D} — La raison peut etre n'importe quel reel non nul : elle peut etre negative (ex. $q = -2$), fractionnaire (ex. $q = 1/3$) ou irrationnelle. \emph{Renvoi : M3.}
   \end{itemize}
   \item \textbf{Q10}
@@ -323,7 +324,7 @@ eq 0$ pour tout $n$. \emph{Renvoi : M3, etape 1.}
   \item \textbf{Q11}
   \begin{itemize}
     \item \textbf{A} — L'eleve a calcule $1 + 3 + 9 + 27 = 40$ en sommant seulement 4 termes ($u_0$ a $u_3$) au lieu de 5 termes ($u_0$ a $u_4$). Erreur sur le nombre de termes. \emph{Renvoi : M4, etape 1.}
-    \item \textbf{C} — L'eleve a applique la formule avec $n+1 = 5$ mais a ecrit $1 \times (1 - 3^6)/(1-3) = (1-729)/(-2) = 364$... ou a confondu l'exposant : $1 \times (1-3^5)/(1-3) = -242/(-2) = 121$ est correct, mais $3^6$ a la place de $3^5$ donne $242$. Erreur sur l'exposant dans la formule geometrique. \emph{Renvoi : M4, etape 3.}
+    \item \textbf{C} — L'option $242$ est le double de la somme correcte : l'eleve a calcule $3^5-1=242$ mais a oublie de diviser par $3-1=2$. \emph{Renvoi : M4, etape 3.}
     \item \textbf{D} — L'eleve a additionne les indices au lieu des termes : $0 + 1 + 2 + 3 + 4 = 10$, ou a utilise $u_k = k$ au lieu de $u_k = 3^k$. \emph{Renvoi : M4, cas 2.}
   \end{itemize}
   \item \textbf{Q12}
@@ -387,3 +388,5 @@ eq 0$ pour tout $n$. \emph{Renvoi : M3, etape 1.}
     \item \textbf{D} — Une boucle `for` est parfaitement adaptee au calcul d'une somme avec un nombre connu d'iterations. La boucle `while` est reservee a la recherche de seuil (nombre d'iterations inconnu). Cette assertion est fausse. \emph{Renvoi : M7, Modele B.}
   \end{itemize}
 \end{itemize}
+\fi
+% NEXUS-QCM-TEACHER-ONLY-END

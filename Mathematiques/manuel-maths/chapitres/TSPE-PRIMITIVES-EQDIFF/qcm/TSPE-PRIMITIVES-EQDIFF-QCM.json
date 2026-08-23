@@ -31,20 +31,23 @@
       "enonce": "Si $F$ et $G$ sont deux primitives de la meme fonction $f$ continue sur un intervalle $I$, alors :",
       "options": {
         "A": "$F=G$.",
-        "B": "$F-G$ est une fonction affine.",
+        "B": "$F-G$ est une fonction affine de pente non nulle.",
         "C": "$F-G$ est constante.",
         "D": "$F \\times G$ est constante."
       },
-      "correcte": "A",
+      "correcte": "C",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "Deux primitives d'une meme fonction ne sont pas necessairement egales ; elles peuvent differer d'une constante.",
+          "renvoi": "C1, ensemble des primitives"
         },
-        "C": {
-          "erreur": "Consulter le cours correspondant"
+        "B": {
+          "erreur": "Puisque $(F-G)'=f-f=0$, la difference est constante : elle ne peut donc pas etre affine de pente non nulle.",
+          "renvoi": "C1, ensemble des primitives"
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Aucune propriete generale ne rend le produit de deux primitives constant.",
+          "renvoi": "C1, ensemble des primitives"
         }
       }
     },

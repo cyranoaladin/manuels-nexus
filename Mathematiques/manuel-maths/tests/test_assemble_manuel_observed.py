@@ -125,6 +125,13 @@ class FakeProductionRunner:
                 return self._completed(returncode=4, stderr="broken pdf")
             pages = 0 if self.failing_stage == "pdfinfo_zero_pages" else 17
             return self._completed(stdout=f"Title: Fixture\nPages: {pages}\n")
+        if command[0] == "pdftotext":
+            pdf_path = Path(command[2])
+            if pdf_path.stem.endswith("_professeur"):
+                return self._completed(
+                    stdout="\n".join(["Cle de correction"] * 10)
+                )
+            return self._completed(stdout="Contenu eleve sans marqueur reserve\n")
         if command[:2] == [sys.executable, str(Path(command[1]))]:
             self.events.append("recorder")
             self.receipt_existed_at_recorder = Path(command[-1]).is_file()
@@ -760,7 +767,13 @@ def test_render_master_configures_closed_student_redaction() -> None:
         ("Corrigé — Évaluation A", "corrigé"),
         ("CORRIGES", "corrigé"),
         ("Barème indicatif : 4 points", "barème enseignant"),
+        ("Barème professeur : 4 points", "barème enseignant"),
+        ("Barème enseignant : 4 points", "barème enseignant"),
+        ("Barème : 4 points", "barème enseignant"),
         ("Note professeur : relancer", "note enseignant"),
+        ("Clé de correction — réservée au professeur", "clé de correction"),
+        ("Réponses réservées à l'enseignant", "réponses réservées"),
+        ("teacher-only marker", "marqueur teacher-only"),
     ],
 )
 def test_student_pdf_text_gate_rejects_teacher_leaks(
@@ -774,6 +787,16 @@ def test_student_pdf_text_gate_accepts_student_instructions() -> None:
     assert assemble_manuel.student_text_violations(
         "Compléter le programme. Solution : x appartient à [0 ; 1]."
     ) == []
+
+
+def test_teacher_key_gate_requires_every_chapter_key() -> None:
+    text = "\n".join(
+        ["Cle de correction — reservee au professeur"] * 9
+        + ["Correction et diagnostics"]
+    )
+    assert assemble_manuel.teacher_key_count(text) == 10
+    assert assemble_manuel.teacher_key_count_violations(text, expected=10) == []
+    assert assemble_manuel.teacher_key_count_violations(text, expected=11)
 
 
 def test_real_professor_order_matches_declared_inventory() -> None:

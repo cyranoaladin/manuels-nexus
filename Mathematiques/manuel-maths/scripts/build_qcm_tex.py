@@ -46,7 +46,6 @@ def _entete(chapitre: str, source: str) -> str:
 def _clean_text(s: str) -> str:
     if not isinstance(s, str):
         return s
-    s = s.replace("\\n", "\n")
     s = s.replace("`^`", "\\code{\\textasciicircum}")
     parts = s.split('$')
     for i in range(0, len(parts), 2):
@@ -87,8 +86,14 @@ def rendre(donnees: dict) -> str:
         out.append("  \\end{enumerate}\n")
     out.append("\n\\end{enumerate}\n")
 
-    # Cle professeur : reponses, erreurs diagnostiquees et renvois.
-    out.append("\n\\clearpage\n\\section*{Cle de correction — reservee au professeur}\n\n")
+    # Cle professeur : reponses, erreurs diagnostiquees et renvois. La source
+    # TeX est commune aux deux variantes ; le drapeau est defini par le gabarit
+    # canonique et ferme toute la zone reservee.
+    out.append(
+        "\n% NEXUS-QCM-TEACHER-ONLY-BEGIN\n"
+        "\\ifnxVersionProfesseur\n"
+        "\\clearpage\n\\section*{Cle de correction — reservee au professeur}\n\n"
+    )
     out.append("\\begin{center}\n\\begin{tabular}{lll}\n\\hline\n")
     out.append("Question & Capacite & Reponse exacte \\\\\n\\hline\n")
     for question in questions:
@@ -108,7 +113,11 @@ def rendre(donnees: dict) -> str:
                     f"\\emph{{Renvoi : {renvoi_txt}.}}\n"
                 )
         out.append("  \\end{itemize}\n")
-    out.append("\\end{itemize}\n")
+    out.append(
+        "\\end{itemize}\n"
+        "\\fi\n"
+        "% NEXUS-QCM-TEACHER-ONLY-END\n"
+    )
     return "".join(out)
 
 

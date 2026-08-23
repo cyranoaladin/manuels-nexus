@@ -43,6 +43,61 @@ CHAPITRES_SOURCE_UNIQUE = sorted(
 )
 
 
+def _question(chapitre: str, question_id: str) -> dict:
+    donnees = json.loads(SOURCES[chapitre].read_text(encoding="utf-8"))
+    return next(item for item in donnees["questions"] if item["id"] == question_id)
+
+
+def test_second_degre_q16_cle_correspond_au_calcul_independant() -> None:
+    """Régression SCIENTIFIC_P0 : la clé doit désigner l'unique valeur V(4)."""
+    question = _question("1SPE-SECOND-DEGRE", "Q16")
+    valeur_attendue = 4 * (30 - 2 * 4) * (20 - 2 * 4)
+    options_correctes = [
+        lettre
+        for lettre, option in question["options"].items()
+        if option.strip() == f"$V(4) = {valeur_attendue}$"
+    ]
+
+    assert valeur_attendue == 1056
+    assert question["enonce"].endswith("Quelle est la valeur de $V(4)$ ?")
+    assert options_correctes == ["D"]
+    assert question["correcte"] == options_correctes[0]
+    assert set(question["diagnostics"]) == set(question["options"]) - {"D"}
+    assert "1664" in question["diagnostics"]["A"]["erreur"]
+    assert "2400" in question["diagnostics"]["B"]["erreur"]
+    assert "264" in question["diagnostics"]["C"]["erreur"]
+
+
+def test_primitives_q2_a_une_unique_reponse_correcte() -> None:
+    """Deux primitives diffèrent d'une constante, pas d'une affine non constante."""
+    question = _question("TSPE-PRIMITIVES-EQDIFF", "Q2")
+
+    assert question["correcte"] == "C"
+    assert "constante" in question["options"]["C"]
+    assert "pente non nulle" in question["options"]["B"]
+    assert set(question["diagnostics"]) == {"A", "B", "D"}
+    assert "differer d'une constante" in question["diagnostics"]["A"]["erreur"]
+    assert "$(F-G)'=f-f=0$" in question["diagnostics"]["B"]["erreur"]
+
+
+def test_suites_q11_distracteurs_correspondent_aux_erreurs_annoncees() -> None:
+    """La somme vaut 121 ; 242 oublie /2 et 10 additionne les indices."""
+    question = _question("1SPE-SUITES", "Q11")
+    valeur_attendue = sum(3**k for k in range(5))
+
+    assert valeur_attendue == 121
+    matching = [
+        lettre
+        for lettre, option in question["options"].items()
+        if option == f"${valeur_attendue}$"
+    ]
+    assert matching == [question["correcte"]]
+    assert question["options"]["C"] == "$242$"
+    assert "oublie de diviser" in question["diagnostics"]["C"]["erreur"]
+    assert question["options"]["D"] == "$10$"
+    assert "0 + 1 + 2 + 3 + 4 = 10" in question["diagnostics"]["D"]["erreur"]
+
+
 @pytest.mark.parametrize("chapitre", CHAPITRES)
 def test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi(chapitre: str) -> None:
     """Diagnostics/renvois de distracteurs sous contrat de dette declare.
@@ -156,3 +211,74 @@ def test_le_tex_ne_diverge_pas_de_sa_source_json(chapitre: str) -> None:
         f"{chapitre} : le .tex a diverge de son .json. "
         f"Regenerer avec build_qcm_tex.py --chap {chapitre}.\n{resultat.stderr}"
     )
+
+
+@pytest.mark.parametrize("chapitre", CHAPITRES_SOURCE_UNIQUE)
+def test_la_cle_generee_est_conditionnee_a_la_variante_professeur(chapitre: str) -> None:
+    tex = SOURCES[chapitre].with_suffix(".tex").read_text(encoding="utf-8")
+    debut = tex.index("\\ifnxVersionProfesseur")
+    cle = tex.index("Cle de correction")
+    fin = tex.rindex("\\fi")
+
+    assert debut < cle < fin
+
+
+def test_la_cle_legacy_est_conditionnee_a_la_variante_professeur() -> None:
+    tex = SOURCES["1SPE-DERIVATION-LOCAL"].with_suffix(".tex").read_text(
+        encoding="utf-8"
+    )
+    debut = tex.index("\\ifnxVersionProfesseur")
+    cle = tex.index("Correction et diagnostics")
+    fin = tex.rindex("\\fi")
+
+    assert debut < cle < fin
+
+
+def test_le_gate_des_cles_couvre_exactement_les_35_qcm() -> None:
+    assert len(SOURCES) == 35
+    assert len(CHAPITRES_SOURCE_UNIQUE) == 34
+    assert set(CHAPITRES_SOURCE_UNIQUE) | {"1SPE-DERIVATION-LOCAL"} == set(SOURCES)
+
+
+def test_le_total_de_dette_diagnostique_est_derive_des_lignes() -> None:
+    ledger = json.loads(
+        (RACINE.parents[1] / "audit/QCM_CAPACITY_COVERAGE_DEBT.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    observed = sum(
+        len(gaps)
+        for questions in ledger["distractor_gaps_by_chapter"].values()
+        for gaps in questions.values()
+    )
+    assert ledger["total_distractor_gaps"] == observed
+
+
+@pytest.mark.parametrize(
+    "chapitre",
+    [
+        chapitre
+        for chapitre in CHAPITRES_SOURCE_UNIQUE
+        if "\\neq" in SOURCES[chapitre].read_text(encoding="utf-8")
+    ],
+)
+def test_la_generation_preserve_les_commandes_neq(chapitre: str) -> None:
+    source = SOURCES[chapitre].read_text(encoding="utf-8")
+    tex = SOURCES[chapitre].with_suffix(".tex").read_text(encoding="utf-8")
+
+    assert tex.count("\\neq") == source.count("\\\\neq")
+
+
+def test_les_sauts_de_ligne_python_sont_des_newlines_json_reels() -> None:
+    donnees = json.loads(SOURCES["1SPE-SUITES"].read_text(encoding="utf-8"))
+    q19 = next(question for question in donnees["questions"] if question["id"] == "Q19")
+    q20 = next(question for question in donnees["questions"] if question["id"] == "Q20")
+    q21 = next(question for question in donnees["questions"] if question["id"] == "Q21")
+
+    assert "\ndef terme(n):" in q19["enonce"]
+    assert "\nn = 0\nwhile" in q20["options"]["B"]
+    assert "\nS = 0\nfor" in q21["enonce"]
+
+    tex = SOURCES["1SPE-SUITES"].with_suffix(".tex").read_text(encoding="utf-8")
+    for invalid_command in ("\\ndef", "\\nQuelle", "\\nn", "\\nwhile", "\\nfor", "\\nS"):
+        assert invalid_command not in tex
