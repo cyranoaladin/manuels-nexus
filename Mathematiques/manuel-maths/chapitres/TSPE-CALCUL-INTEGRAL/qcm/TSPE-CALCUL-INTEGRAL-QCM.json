@@ -4,7 +4,7 @@
   "questions": [
     {
       "id": "Q1",
-      "capacite": "C1",
+      "capacite": "C2",
       "enonce": "Soit $f(x) = x^2$. L'integrale $\\int_{0}^{3} f(x) dx$ vaut :",
       "correcte": "B",
       "options": {
@@ -16,21 +16,21 @@
       "diagnostics": {
         "A": {
           "erreur": "Erreur de primitive $x$ au lieu de $x^3/3$.",
-          "renvoi": "C1"
+          "renvoi": "C2"
         },
         "C": {
-          "erreur": "Erreur de puissance $3^3$.",
-          "renvoi": "C1"
+          "erreur": "Le calcul $3^3=27$ oublie le facteur $1/3$ de la primitive $x^3/3$ ; la valeur correcte est donc $27/3=9$.",
+          "renvoi": "C2"
         },
         "D": {
-          "erreur": "Erreur de facteur.",
-          "renvoi": "C1"
+          "erreur": "Le resultat $18$ double a tort la valeur correcte $9$ ; aucune symetrie ni aucun coefficient ne justifie ce facteur $2$ sur $[0,3]$.",
+          "renvoi": "C2"
         }
       }
     },
     {
       "id": "Q2",
-      "capacite": "C1",
+      "capacite": "C2",
       "enonce": "La valeur moyenne de $f(x) = 2x$ sur $[0, 4]$ est :",
       "correcte": "C",
       "options": {
@@ -41,75 +41,75 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Division incorrecte par 4.",
-          "renvoi": "C1"
+          "erreur": "Le choix $2$ remplace la valeur moyenne sur tout l'intervalle par la valeur ponctuelle $f(1)=2$, qui ne tient pas compte de $[0,4]$.",
+          "renvoi": "C2"
         },
         "B": {
-          "erreur": "Oubli de la division par (b-a).",
-          "renvoi": "C1"
+          "erreur": "Le resultat $8$ est $f(4)=8$ : il evalue la fonction a la borne droite au lieu de calculer puis moyenner l'integrale.",
+          "renvoi": "C2"
         },
         "D": {
-          "erreur": "Calcul de $f(4)$ au lieu de l'integrale.",
-          "renvoi": "C1"
+          "erreur": "L'integrale vaut $16$ ; choisir $16$ oublie ensuite le facteur $1/(4-0)$ indispensable dans la definition de la valeur moyenne.",
+          "renvoi": "C2"
         }
       }
     },
     {
       "id": "Q3",
-      "capacite": "C2",
-      "enonce": "Si $F$ est une primitive de $f$ sur $[a, b]$, alors $\\int_a^b f(x) dx$ est :",
-      "correcte": "A",
+      "capacite": "C1",
+      "enonce": "On sait que $2 \\leqslant f(x) \\leqslant 5$ sur $[0,3]$. En notant $I=\\int_0^3 f(x)\\,dx$, quel encadrement est garanti ?",
+      "correcte": "B",
       "options": {
-        "A": "$F(b) - F(a)$",
-        "B": "$F(a) - F(b)$",
-        "C": "$f(b) - f(a)$",
-        "D": "$F(b) + F(a)$"
+        "A": "$2 \\leqslant I \\leqslant 5$",
+        "B": "$6 \\leqslant I \\leqslant 15$",
+        "C": "$0 \\leqslant I \\leqslant 3$",
+        "D": "$10 \\leqslant I \\leqslant 25$"
       },
       "diagnostics": {
-        "B": {
-          "erreur": "Ordre inverse des bornes.",
-          "renvoi": "C2"
+        "A": {
+          "erreur": "Les bornes $2$ et $5$ concernent les valeurs de $f$ ; leur integration sur un intervalle de longueur $3$ multiplie chacune par $3$.",
+          "renvoi": "C1"
         },
         "C": {
-          "erreur": "Utilisation de $f$ au lieu de $F$.",
-          "renvoi": "C2"
+          "erreur": "La positivite donne seulement $I\\geq0$ ; la majoration $I\\leq3$ oublie que $f$ peut atteindre $5$ sur un intervalle de longueur $3$.",
+          "renvoi": "C1"
         },
         "D": {
-          "erreur": "Addition au lieu de soustraction.",
-          "renvoi": "C2"
+          "erreur": "Multiplier les bornes de $f$ par $5$ utilise la borne superieure comme longueur ; la longueur de $[0,3]$ vaut $3$.",
+          "renvoi": "C1"
         }
       }
     },
     {
       "id": "Q4",
-      "capacite": "C2",
-      "enonce": "$\\int_0^1 e^{2x} dx$ est egale a :",
-      "correcte": "B",
+      "capacite": "C3",
+      "enonce": "Si $f(x) \\leqslant g(x)$ pour tout $x\\in[0,1]$, avec $f$ et $g$ continues, alors :",
+      "correcte": "A",
       "options": {
-        "A": "$e^2 - 1$",
-        "B": "$\\frac{e^2 - 1}{2}$",
-        "C": "$2(e^2 - 1)$",
-        "D": "$e^2$"
+        "A": "$\\int_0^1 f(x)\\,dx \\leqslant \\int_0^1 g(x)\\,dx$",
+        "B": "$\\int_0^1 f(x)\\,dx \\geqslant \\int_0^1 g(x)\\,dx$",
+        "C": "$\\int_0^1 f(x)\\,dx = \\int_0^1 g(x)\\,dx$",
+        "D": "$\\int_0^1 f(x)\\,dx \\leqslant 0$"
       },
       "diagnostics": {
-        "A": {
-          "erreur": "Oubli du facteur $1/2$ de la primitive.",
-          "renvoi": "C2"
+        "B": {
+          "erreur": "Le sens de l'inegalite est inverse : l'integration conserve l'ordre entre deux fonctions continues comparees sur le meme intervalle.",
+          "renvoi": "C3"
         },
         "C": {
-          "erreur": "Multiplication par 2 au lieu de division par 2.",
-          "renvoi": "C2"
+          "erreur": "L'hypothese $f\\leqslant g$ n'impose pas leur egalite ; par exemple $f=0$ et $g=1$ donnent des integrales distinctes.",
+          "renvoi": "C3"
         },
         "D": {
-          "erreur": "Oubli de la valeur en 0.",
-          "renvoi": "C2"
+          "erreur": "La comparaison entre $f$ et $g$ ne donne aucun signe absolu pour $f$ ; il faudrait en plus supposer $f\\leqslant0$.",
+          "renvoi": "C3"
         }
       }
     },
     {
       "id": "Q5",
-      "capacite": "C3",
-      "enonce": "Par integration par parties de $\\int x e^x dx$, la primitive est :",
+      "capacite": "C2",
+      "enonce": "Par integration par parties de $\\int x e^x dx$, une primitive est :",
       "correcte": "D",
       "options": {
         "A": "$x e^x$",
@@ -120,15 +120,15 @@
       "diagnostics": {
         "A": {
           "erreur": "Oubli du terme du a la derivee de $x$.",
-          "renvoi": "C3"
+          "renvoi": "C2"
         },
         "B": {
-          "erreur": "Primitive incomplete.",
-          "renvoi": "C3"
+          "erreur": "Choisir $e^x$ revient a supprimer le facteur $x$ avant d'integrer ; sa derivee vaut seulement $e^x$, et non $xe^x$.",
+          "renvoi": "C2"
         },
         "C": {
           "erreur": "Erreur de signe dans le terme $-e^x$.",
-          "renvoi": "C3"
+          "renvoi": "C2"
         }
       }
     }

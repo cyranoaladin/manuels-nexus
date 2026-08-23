@@ -75,7 +75,7 @@
           "renvoi": "C1, formes indeterminees"
         },
         "D": {
-          "erreur": "Confusion avec une autre forme.",
+          "erreur": "Choisir $0$ applique a tort le resultat $1/x\\to0$ en $+\\infty$ a un quotient dont le numerateur et le denominateur tendent tous deux vers $+\\infty$.",
           "renvoi": "C1, formes indeterminees"
         }
       }
@@ -264,7 +264,7 @@
     },
     {
       "id": "Q11",
-      "capacite": "C3",
+      "capacite": "C1",
       "enonce": "$\\lim_{x \\to +\\infty} \\dfrac{\\mathrm{e}^x}{x^3}$",
       "options": {
         "A": "$0$",
@@ -276,11 +276,11 @@
       "diagnostics": {
         "A": {
           "erreur": "L'eleve a inverse numerateur et denominateur dans la croissance comparee.",
-          "renvoi": "C3, theoreme"
+          "renvoi": "C1, croissances comparees"
         },
         "D": {
           "erreur": "L'eleve a divise l'exposant par le degre.",
-          "renvoi": "C3, theoreme"
+          "renvoi": "C1, croissances comparees"
         },
         "B": {
           "erreur": "L'eleve traite le quotient comme une forme indeterminee resolue par simplification ; c'est la croissance comparee qui tranche, l'exponentielle l'emportant sur toute puissance.",
@@ -290,7 +290,7 @@
     },
     {
       "id": "Q12",
-      "capacite": "C3",
+      "capacite": "C1",
       "enonce": "$\\lim_{x \\to -\\infty} x^2\\,\\mathrm{e}^x$",
       "options": {
         "A": "$+\\infty$",
@@ -302,11 +302,11 @@
       "diagnostics": {
         "A": {
           "erreur": "L'eleve ne considere que $x^2 \\to +\\infty$ et oublie $\\mathrm{e}^x \\to 0$.",
-          "renvoi": "C3, consequence en $-\\infty$"
+          "renvoi": "C1, croissances comparees"
         },
         "C": {
           "erreur": "L'eleve confond $x$ et $x^2$ (le signe).",
-          "renvoi": "C3, consequence en $-\\infty$"
+          "renvoi": "C1, croissances comparees"
         },
         "D": {
           "erreur": "Resultat obtenu en evaluant en x = 0 au lieu de faire tendre x vers moins l'infini, ou l'exponentielle ecrase le facteur polynomial.",
@@ -316,7 +316,7 @@
     },
     {
       "id": "Q13",
-      "capacite": "C3",
+      "capacite": "C1",
       "enonce": "Pour $\\lim_{+\\infty}(\\mathrm{e}^x - x^2)$, quelle reecriture utilise directement la limite usuelle $x^2/\\mathrm{e}^x \\to 0$ ?",
       "options": {
         "A": "$+\\infty - \\infty = 0$",
@@ -368,7 +368,7 @@
     },
     {
       "id": "Q15",
-      "capacite": "C3",
+      "capacite": "C1",
       "enonce": "$\\lim_{x \\to +\\infty} \\dfrac{x^{100}}{\\mathrm{e}^x}$",
       "options": {
         "A": "$+\\infty$",
@@ -380,11 +380,11 @@
       "diagnostics": {
         "A": {
           "erreur": "L'eleve pense que $x^{100}$ croit plus vite que $\\mathrm{e}^x$.",
-          "renvoi": "C3, theoreme : pour TOUT $n$"
+          "renvoi": "C1, croissances comparees"
         },
         "B": {
           "erreur": "L'exposant n'intervient pas dans la valeur de la limite.",
-          "renvoi": "C3, theoreme"
+          "renvoi": "C1, croissances comparees"
         },
         "D": {
           "erreur": "Meme confusion qu'en Q12 : l'exposant 100, si grand soit-il, ne change pas la hierarchie des croissances comparees.",

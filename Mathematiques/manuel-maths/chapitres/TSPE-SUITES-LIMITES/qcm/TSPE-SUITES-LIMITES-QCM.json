@@ -119,11 +119,11 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Erreur de calcul dans $20/(1-0{,}9)$.",
+          "erreur": "Le resultat $180$ applique encore le facteur $0{,}9$ au point fixe correct $200$ ; une limite doit verifier directement $\\ell=0{,}9\\ell+20$.",
           "renvoi": "M3, etape 1"
         },
         "C": {
-          "erreur": "L'eleve a resolu $\\ell = 0{,}9\\ell + 20$ incorrectement.",
+          "erreur": "Le resultat $220$ ajoute $20$ au point fixe $200$ une seconde fois ; dans l'equation, ce terme est deja pris en compte avant la division par $0{,}1$.",
           "renvoi": "M3, etape 1"
         },
         "D": {

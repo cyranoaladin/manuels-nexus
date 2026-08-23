@@ -14,14 +14,14 @@
       },
       "correcte": "B",
       "diagnostics": {
-        "A": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "A": { "erreur": "Une seule solution oublie la symetrie du cosinus : avec $\\cos(\\pi/3)=1/2$, on a aussi $\\cos(-\\pi/3)=1/2$." },
+        "C": { "erreur": "Ajouter $0$ comme troisieme solution est faux, car $\\cos(0)=1$ ; seules $-\\pi/3$ et $\\pi/3$ conviennent sur l'intervalle." },
+        "D": { "erreur": "Le cercle trigonometrique fournit explicitement $\\cos(\\pi/3)=1/2$ et, par parite, la seconde solution $-\\pi/3$." }
       }
     },
     {
       "id": "Q2",
-      "capacite": "C1",
+      "capacite": "C2",
       "enonce": "sin'(x) vaut :",
       "options": {
         "A": "-cos x",
@@ -31,14 +31,14 @@
       },
       "correcte": "B",
       "diagnostics": {
-        "A": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "A": { "erreur": "Le signe moins appartient a la formule $(\\cos x)'=-\\sin x$ ; la derivee de $\\sin x$ est $\\cos x$ sans changement de signe." },
+        "C": { "erreur": "Le resultat $-\\sin x$ est la derivee de $\\cos x$, pas celle de $\\sin x$ ; les deux formules de reference ont ete interverties." },
+        "D": { "erreur": "Conserver $\\sin x$ revient a ne pas deriver la fonction ; le taux de variation de $\\sin$ est donne par $\\cos x$." }
       }
     },
     {
       "id": "Q3",
-      "capacite": "C1",
+      "capacite": "C2",
       "enonce": "cos'(x) vaut :",
       "options": {
         "A": "sin x",
@@ -48,9 +48,9 @@
       },
       "correcte": "B",
       "diagnostics": {
-        "A": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "A": { "erreur": "Le signe moins manque dans la formule de reference $(\\cos x)'=-\\sin x$ ; $\\sin x$ seul donne donc le signe oppose." },
+        "C": { "erreur": "Conserver $\\cos x$ revient a ne pas deriver ; la derivee fait intervenir l'autre fonction trigonometrique, $-\\sin x$." },
+        "D": { "erreur": "Le resultat $-\\cos x$ serait la derivee de $-\\sin x$ ; pour $\\cos x$, il faut changer de fonction et obtenir $-\\sin x$." }
       }
     },
     {
@@ -65,9 +65,9 @@
       },
       "correcte": "B",
       "diagnostics": {
-        "A": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "A": { "erreur": "La derivee exterieure est correcte, mais la regle de chaine exige de multiplier par la derivee de $3x$, qui vaut $3$." },
+        "C": { "erreur": "Le facteur $3$ est present, mais l'argument de la fonction cosinus doit rester $3x$ apres derivation de la composee." },
+        "D": { "erreur": "Ce choix perd simultanement le facteur interieur $3$ et remplace a tort l'argument $3x$ par $x$." }
       }
     },
     {

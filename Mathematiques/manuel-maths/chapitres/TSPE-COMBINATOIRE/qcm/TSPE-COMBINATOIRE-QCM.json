@@ -4,7 +4,7 @@
   "questions": [
     {
       "id": "Q1",
-      "capacite": "C1",
+      "capacite": "C2",
       "enonce": "Le nombre de k-listes d'un ensemble a n elements est :",
       "correcte": "A",
       "options": {
@@ -16,21 +16,21 @@
       "diagnostics": {
         "B": {
           "erreur": "Inversion de la base et de l'exposant.",
-          "renvoi": "C1"
+          "renvoi": "C2"
         },
         "C": {
           "erreur": "Formule des permutations.",
-          "renvoi": "C1"
+          "renvoi": "C2"
         },
         "D": {
           "erreur": "Formule des combinaisons.",
-          "renvoi": "C1"
+          "renvoi": "C2"
         }
       }
     },
     {
       "id": "Q2",
-      "capacite": "C1",
+      "capacite": "C2",
       "enonce": "Le nombre d'arrangements sans repetition $A_n^k$ est :",
       "correcte": "C",
       "options": {
@@ -42,73 +42,73 @@
       "diagnostics": {
         "A": {
           "erreur": "Formule avec remise.",
-          "renvoi": "C1"
+          "renvoi": "C2"
         },
         "B": {
-          "erreur": "Erreur de denominateur.",
-          "renvoi": "C1"
+          "erreur": "Le denominateur $k!$ ne retire pas les $n-k$ facteurs inutilises ; une k-liste sans repetition conserve exactement $n!/(n-k)!$.",
+          "renvoi": "C2"
         },
         "D": {
           "erreur": "Formule sans ordre.",
-          "renvoi": "C1"
+          "renvoi": "C2"
         }
       }
     },
     {
       "id": "Q3",
-      "capacite": "C2",
-      "enonce": "Le nombre de combinaisons $\\binom{5}{2}$ vaut :",
+      "capacite": "C1",
+      "enonce": "Un choix se fait en trois etapes offrant successivement $2$, $3$ puis $4$ possibilites. Quelle demarche represente correctement le denombrement ?",
       "correcte": "B",
       "options": {
-        "A": "20",
-        "B": "10",
-        "C": "5",
-        "D": "25"
+        "A": "Additionner les branches : $2+3+4=9$",
+        "B": "Utiliser un arbre et le principe multiplicatif : $2\\times3\\times4=24$",
+        "C": "Choisir trois elements parmi quatre : $\\binom{4}{3}=4$",
+        "D": "Permuter les quatre possibilites finales : $4!=24$"
       },
       "diagnostics": {
         "A": {
-          "erreur": "Oubli de diviser par $2!$.",
-          "renvoi": "C2"
+          "erreur": "Le principe additif convient a des cas disjoints alternatifs ; ici chaque choix du premier niveau se combine avec les choix suivants.",
+          "renvoi": "C1"
         },
         "C": {
-          "erreur": "Confusions avec $n$.",
-          "renvoi": "C2"
+          "erreur": "La combinaison $\\binom{4}{3}$ choisirait un sous-ensemble sans ordre ; elle ne represente pas trois etapes successives de tailles differentes.",
+          "renvoi": "C1"
         },
         "D": {
-          "erreur": "Calcul de $5^2$.",
-          "renvoi": "C2"
+          "erreur": "Le nombre $4!$ correspond aux permutations de quatre objets distincts ; son egalite numerique a $24$ est fortuite et le modele est inadapte.",
+          "renvoi": "C1"
         }
       }
     },
     {
       "id": "Q4",
-      "capacite": "C2",
-      "enonce": "Propriete de symetrie des coefficients binomiaux :",
+      "capacite": "C3",
+      "enonce": "Quelle egalite traduit le denombrement de toutes les parties d'un ensemble a $n$ elements selon leur cardinal ?",
       "correcte": "A",
       "options": {
-        "A": "$\\binom{n}{k} = \\binom{n}{n-k}$",
-        "B": "$\\binom{n}{k} = \\binom{n-1}{k}$",
-        "C": "$\\binom{n}{k} = \\binom{k}{n}$",
-        "D": "$\\binom{n}{k} = \\binom{n}{k+1}$"
+        "A": "$\\displaystyle\\sum_{k=0}^{n} \\binom{n}{k}=2^n$",
+        "B": "$\\displaystyle\\sum_{k=0}^{n} \\binom{n}{k}=n$",
+        "C": "$\\displaystyle\\prod_{k=0}^{n} \\binom{n}{k}=2^n$",
+        "D": "$\\displaystyle\\sum_{k=1}^{n} k=n!$"
       },
       "diagnostics": {
         "B": {
-          "erreur": "Formule incomplete de Pascal.",
-          "renvoi": "C2"
+          "erreur": "La somme compte toutes les parties, pas seulement les $n$ singletons ; un ensemble a $n$ elements possede $2^n$ parties.",
+          "renvoi": "C3"
         },
         "C": {
-          "erreur": "Inversion de n et k.",
-          "renvoi": "C2"
+          "erreur": "Les classes de parties de cardinal $k$ sont disjointes et doivent etre additionnees ; leur produit ne denombre pas leur reunion.",
+          "renvoi": "C3"
         },
         "D": {
-          "erreur": "Relation de recurrence fausse.",
-          "renvoi": "C2"
+          "erreur": "La somme $1+\\cdots+n$ ne fait intervenir aucun coefficient binomial et vaut $n(n+1)/2$, pas $n!$ en general.",
+          "renvoi": "C3"
         }
       }
     },
     {
       "id": "Q5",
-      "capacite": "C3",
+      "capacite": "C4",
       "enonce": "Le triangle de Pascal donne $\\binom{n}{k} + \\binom{n}{k+1} =$",
       "correcte": "D",
       "options": {
@@ -119,16 +119,16 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Erreur sur l'indice k.",
-          "renvoi": "C3"
+          "erreur": "Le choix $\\binom{n}{k+2}$ decale deux fois l'indice inferieur sans passer a la ligne $n+1$ du triangle de Pascal.",
+          "renvoi": "C4"
         },
         "B": {
-          "erreur": "Erreur sur l'indice n.",
-          "renvoi": "C3"
+          "erreur": "Le choix $\\binom{n+2}{k}$ avance de deux lignes alors que la somme de deux coefficients voisins produit un coefficient de la seule ligne $n+1$.",
+          "renvoi": "C4"
         },
         "C": {
-          "erreur": "Choix de l'indice k incorrect.",
-          "renvoi": "C3"
+          "erreur": "Pour obtenir $\\binom{n+1}{k}$, il faudrait additionner $\\binom{n}{k-1}$ et $\\binom{n}{k}$ ; ici les indices sont $k$ et $k+1$.",
+          "renvoi": "C4"
         }
       }
     }

@@ -9,7 +9,7 @@
 
 \begin{enumerate}
 
-\item[] \textbf{Capacite C1}
+\item[] \textbf{Capacite C2}
 
 \item \textbf{[Q1]} Soit $f(x) = x^2$. L'integrale $\int_{0}^{3} f(x) dx$ vaut :
   \begin{enumerate}[label=\Alph*.]
@@ -27,27 +27,29 @@
     \item 16
   \end{enumerate}
 
-\item[] \textbf{Capacite C2}
+\item[] \textbf{Capacite C1}
 
-\item \textbf{[Q3]} Si $F$ est une primitive de $f$ sur $[a, b]$, alors $\int_a^b f(x) dx$ est :
+\item \textbf{[Q3]} On sait que $2 \leqslant f(x) \leqslant 5$ sur $[0,3]$. En notant $I=\int_0^3 f(x)\,dx$, quel encadrement est garanti ?
   \begin{enumerate}[label=\Alph*.]
-    \item $F(b) - F(a)$
-    \item $F(a) - F(b)$
-    \item $f(b) - f(a)$
-    \item $F(b) + F(a)$
-  \end{enumerate}
-
-\item \textbf{[Q4]} $\int_0^1 e^{2x} dx$ est egale a :
-  \begin{enumerate}[label=\Alph*.]
-    \item $e^2 - 1$
-    \item $\frac{e^2 - 1}{2}$
-    \item $2(e^2 - 1)$
-    \item $e^2$
+    \item $2 \leqslant I \leqslant 5$
+    \item $6 \leqslant I \leqslant 15$
+    \item $0 \leqslant I \leqslant 3$
+    \item $10 \leqslant I \leqslant 25$
   \end{enumerate}
 
 \item[] \textbf{Capacite C3}
 
-\item \textbf{[Q5]} Par integration par parties de $\int x e^x dx$, la primitive est :
+\item \textbf{[Q4]} Si $f(x) \leqslant g(x)$ pour tout $x\in[0,1]$, avec $f$ et $g$ continues, alors :
+  \begin{enumerate}[label=\Alph*.]
+    \item $\int_0^1 f(x)\,dx \leqslant \int_0^1 g(x)\,dx$
+    \item $\int_0^1 f(x)\,dx \geqslant \int_0^1 g(x)\,dx$
+    \item $\int_0^1 f(x)\,dx = \int_0^1 g(x)\,dx$
+    \item $\int_0^1 f(x)\,dx \leqslant 0$
+  \end{enumerate}
+
+\item[] \textbf{Capacite C2}
+
+\item \textbf{[Q5]} Par integration par parties de $\int x e^x dx$, une primitive est :
   \begin{enumerate}[label=\Alph*.]
     \item $x e^x$
     \item $e^x$
@@ -67,11 +69,11 @@
 \hline
 Question & Capacite & Reponse exacte \\
 \hline
-Q1 & C1 & \textbf{B} \\
-Q2 & C1 & \textbf{C} \\
-Q3 & C2 & \textbf{A} \\
-Q4 & C2 & \textbf{B} \\
-Q5 & C3 & \textbf{D} \\
+Q1 & C2 & \textbf{B} \\
+Q2 & C2 & \textbf{C} \\
+Q3 & C1 & \textbf{B} \\
+Q4 & C3 & \textbf{A} \\
+Q5 & C2 & \textbf{D} \\
 \hline
 \end{tabular}
 \end{center}
@@ -81,33 +83,33 @@ Q5 & C3 & \textbf{D} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — Erreur de primitive $x$ au lieu de $x^3/3$. \emph{Renvoi : C1.}
-    \item \textbf{C} — Erreur de puissance $3^3$. \emph{Renvoi : C1.}
-    \item \textbf{D} — Erreur de facteur. \emph{Renvoi : C1.}
+    \item \textbf{A} — Erreur de primitive $x$ au lieu de $x^3/3$. \emph{Renvoi : C2.}
+    \item \textbf{C} — Le calcul $3^3=27$ oublie le facteur $1/3$ de la primitive $x^3/3$ ; la valeur correcte est donc $27/3=9$. \emph{Renvoi : C2.}
+    \item \textbf{D} — Le resultat $18$ double a tort la valeur correcte $9$ ; aucune symetrie ni aucun coefficient ne justifie ce facteur $2$ sur $[0,3]$. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Division incorrecte par 4. \emph{Renvoi : C1.}
-    \item \textbf{B} — Oubli de la division par (b-a). \emph{Renvoi : C1.}
-    \item \textbf{D} — Calcul de $f(4)$ au lieu de l'integrale. \emph{Renvoi : C1.}
+    \item \textbf{A} — Le choix $2$ remplace la valeur moyenne sur tout l'intervalle par la valeur ponctuelle $f(1)=2$, qui ne tient pas compte de $[0,4]$. \emph{Renvoi : C2.}
+    \item \textbf{B} — Le resultat $8$ est $f(4)=8$ : il evalue la fonction a la borne droite au lieu de calculer puis moyenner l'integrale. \emph{Renvoi : C2.}
+    \item \textbf{D} — L'integrale vaut $16$ ; choisir $16$ oublie ensuite le facteur $1/(4-0)$ indispensable dans la definition de la valeur moyenne. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{B} — Ordre inverse des bornes. \emph{Renvoi : C2.}
-    \item \textbf{C} — Utilisation de $f$ au lieu de $F$. \emph{Renvoi : C2.}
-    \item \textbf{D} — Addition au lieu de soustraction. \emph{Renvoi : C2.}
+    \item \textbf{A} — Les bornes $2$ et $5$ concernent les valeurs de $f$ ; leur integration sur un intervalle de longueur $3$ multiplie chacune par $3$. \emph{Renvoi : C1.}
+    \item \textbf{C} — La positivite donne seulement $I\geq0$ ; la majoration $I\leq3$ oublie que $f$ peut atteindre $5$ sur un intervalle de longueur $3$. \emph{Renvoi : C1.}
+    \item \textbf{D} — Multiplier les bornes de $f$ par $5$ utilise la borne superieure comme longueur ; la longueur de $[0,3]$ vaut $3$. \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{A} — Oubli du facteur $1/2$ de la primitive. \emph{Renvoi : C2.}
-    \item \textbf{C} — Multiplication par 2 au lieu de division par 2. \emph{Renvoi : C2.}
-    \item \textbf{D} — Oubli de la valeur en 0. \emph{Renvoi : C2.}
+    \item \textbf{B} — Le sens de l'inegalite est inverse : l'integration conserve l'ordre entre deux fonctions continues comparees sur le meme intervalle. \emph{Renvoi : C3.}
+    \item \textbf{C} — L'hypothese $f\leqslant g$ n'impose pas leur egalite ; par exemple $f=0$ et $g=1$ donnent des integrales distinctes. \emph{Renvoi : C3.}
+    \item \textbf{D} — La comparaison entre $f$ et $g$ ne donne aucun signe absolu pour $f$ ; il faudrait en plus supposer $f\leqslant0$. \emph{Renvoi : C3.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
-    \item \textbf{A} — Oubli du terme du a la derivee de $x$. \emph{Renvoi : C3.}
-    \item \textbf{B} — Primitive incomplete. \emph{Renvoi : C3.}
-    \item \textbf{C} — Erreur de signe dans le terme $-e^x$. \emph{Renvoi : C3.}
+    \item \textbf{A} — Oubli du terme du a la derivee de $x$. \emph{Renvoi : C2.}
+    \item \textbf{B} — Choisir $e^x$ revient a supprimer le facteur $x$ avant d'integrer ; sa derivee vaut seulement $e^x$, et non $xe^x$. \emph{Renvoi : C2.}
+    \item \textbf{C} — Erreur de signe dans le terme $-e^x$. \emph{Renvoi : C2.}
   \end{itemize}
 \end{itemize}
 \fi

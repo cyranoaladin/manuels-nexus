@@ -9,7 +9,7 @@
 
 \begin{enumerate}
 
-\item[] \textbf{Capacite C2}
+\item[] \textbf{Capacite C5}
 
 \item \textbf{[Q1]} Si X suit B(n,p), alors P(X=k) vaut :
   \begin{enumerate}[label=\Alph*.]
@@ -18,6 +18,8 @@
     \item C(n,k) p\textasciicircum{}k
     \item np\textasciicircum{}k
   \end{enumerate}
+
+\item[] \textbf{Capacite C2}
 
 \item \textbf{[Q2]} Un schema de Bernoulli suppose que les epreuves sont :
   \begin{enumerate}[label=\Alph*.]
@@ -37,6 +39,8 @@
     \item jamais
   \end{enumerate}
 
+\item[] \textbf{Capacite C8}
+
 \item \textbf{[Q4]} L'additivite de la variance V(X+Y)=V(X)+V(Y) necessite :
   \begin{enumerate}[label=\Alph*.]
     \item que X et Y soient independantes
@@ -45,7 +49,7 @@
     \item que E(X)=E(Y)
   \end{enumerate}
 
-\item[] \textbf{Capacite C8}
+\item[] \textbf{Capacite C9}
 
 \item \textbf{[Q5]} Pour X ~ B(n,p), V(X) vaut :
   \begin{enumerate}[label=\Alph*.]
@@ -77,11 +81,11 @@
 \hline
 Question & Capacite & Reponse exacte \\
 \hline
-Q1 & C2 & \textbf{B} \\
+Q1 & C5 & \textbf{B} \\
 Q2 & C2 & \textbf{B} \\
 Q3 & C7 & \textbf{B} \\
-Q4 & C7 & \textbf{A} \\
-Q5 & C8 & \textbf{B} \\
+Q4 & C8 & \textbf{A} \\
+Q5 & C9 & \textbf{B} \\
 Q6 & C10 & \textbf{A} \\
 \hline
 \end{tabular}
@@ -92,21 +96,21 @@ Q6 & C10 & \textbf{A} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — Cette expression donne la probabilite d'une configuration precise de $k$ succes ; elle oublie les $C(n,k)$ positions possibles des succes. \emph{Renvoi : M1.}
+    \item \textbf{C} — Le facteur $(1-p)^{n-k}$ manque : les $n-k$ echecs de chaque configuration doivent eux aussi contribuer a sa probabilite. \emph{Renvoi : M1.}
+    \item \textbf{D} — Le produit $np^k$ ne compte ni les choix des $k$ succes ni la probabilite des $n-k$ echecs ; ce n'est pas une probabilite binomiale. \emph{Renvoi : M1.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — La dependance contredit la definition du schema : la probabilite d'un succes doit rester $p$ d'une epreuve a l'autre. \emph{Renvoi : M1.}
+    \item \textbf{C} — Des epreuves differentes peuvent avoir des probabilites de succes distinctes ; un schema de Bernoulli repete la meme epreuve. \emph{Renvoi : M1.}
+    \item \textbf{D} — La probabilite de succes est un reel $p$ quelconque de $[0,1]$ ; la valeur $1/2$ n'est imposee que pour une piece equilibree. \emph{Renvoi : M1.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — L'independance est requise pour additionner les variances, pas pour la linearite de l'esperance de variables integrables. \emph{Renvoi : M1.}
+    \item \textbf{C} — L'egalite $X=Y$ n'est pas necessaire : la somme des esperances vaut l'esperance de la somme pour deux variables quelconques. \emph{Renvoi : M1.}
+    \item \textbf{D} — La propriete est toujours valable ; par exemple pour deux constantes $X=1$ et $Y=2$, les deux membres valent $3$. \emph{Renvoi : M1.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
@@ -116,15 +120,15 @@ Q6 & C10 & \textbf{A} \\
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
-    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — Le produit $np$ est l'esperance de la loi binomiale ; la variance comporte aussi le facteur de dispersion $1-p$. \emph{Renvoi : M1.}
+    \item \textbf{C} — L'expression $n(1-p)$ oublie le facteur $p$ associe aux succes ; chaque indicatrice de Bernoulli a pour variance $p(1-p)$. \emph{Renvoi : M1.}
+    \item \textbf{D} — Le produit $p(1-p)$ est la variance d'une seule epreuve de Bernoulli ; la somme de $n$ epreuves independantes apporte le facteur $n$. \emph{Renvoi : M1.}
   \end{itemize}
   \item \textbf{Q6}
   \begin{itemize}
-    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{B} — L'esperance $E(Y)$ est le centre de l'evenement de deviation ; l'inegalite ne cherche pas a majorer cette valeur. \emph{Renvoi : M1.}
+    \item \textbf{C} — La variance intervient dans le majorant $V(Y)/\delta^2$, mais la quantite majoree est la probabilite d'un ecart a la moyenne. \emph{Renvoi : M1.}
+    \item \textbf{D} — Bienayme-Tchebychev concerne l'evenement $|Y-\mu|\geq\delta$, pas la probabilite ponctuelle que $Y$ soit exactement egal a $\mu$. \emph{Renvoi : M1.}
   \end{itemize}
 \end{itemize}
 \fi

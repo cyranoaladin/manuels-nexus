@@ -41,7 +41,7 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "La derivabilite sert a etablir la monotonie, mais ce n'est pas elle qui donne l'unicite.",
+          "erreur": "La derivabilite seule n'assure pas la stricte monotonie : il faut encore etudier le signe de $f'$ pour obtenir l'unicite.",
           "renvoi": "M1, etape 4"
         },
         "C": {
@@ -331,7 +331,7 @@
           "renvoi": "M5, quand l'utiliser"
         },
         "B": {
-          "erreur": "Une $f$ croissante produit au contraire une suite monotone, pas alternee.",
+          "erreur": "La croissance de $f$ ne garantit ni que la suite est bornee ni qu'elle converge ; il faut un encadrement ou une contraction supplementaire.",
           "renvoi": "cours C2"
         },
         "D": {

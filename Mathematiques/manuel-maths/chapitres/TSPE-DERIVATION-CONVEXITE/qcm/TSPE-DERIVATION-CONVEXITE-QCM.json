@@ -15,13 +15,13 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La derivee de l'exponentielle est conservee, mais la derivee de la fonction interieure $x^2$ fournit aussi le facteur $2x$."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le facteur $x$ correspond a une derivee incomplete de $x^2$ : on a $(x^2)'=2x$, et non simplement $x$."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le facteur $2$ oublie la variable dans $(x^2)'=2x$ ; la regle de chaine donne donc $2x\\,\\mathrm{e}^{x^2}$."
         }
       }
     },
@@ -38,13 +38,13 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La formule $(\\ln u)'=u'/u$ exige le numerateur $u'=2x$ ; choisir $1$ revient a oublier toute la derivee de $x^2+1$."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le numerateur $2$ remplace a tort $(x^2)'=2x$ par une constante et perd donc le facteur variable $x$."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le numerateur $x$ oublie le coefficient $2$ dans $(x^2+1)'=2x$ ; le denominateur seul ne corrige pas cet oubli."
         }
       }
     },
@@ -84,13 +84,13 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le signe plus suppose a tort que $(\\mathrm{e}^{-x})'=\\mathrm{e}^{-x}$ ; la derivee de $-x$ impose le terme $-x\\mathrm{e}^{-x}$."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le resultat $-\\mathrm{e}^{-x}$ ne conserve que la derivee de l'exponentielle et omet le terme obtenu en derivant le facteur $x$."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le produit $x\\mathrm{e}^{-x}$ est la fonction initiale : aucun des deux termes de la formule $(uv)'=u'v+uv'$ n'a ete calcule."
         }
       }
     },
@@ -107,13 +107,13 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Choisir $+\\infty$ ne compare que les divergences separees de $\\ln x$ et de $x$ ; le denominateur croit plus vite et impose la limite nulle."
         },
         "B": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La valeur $1$ supposerait des croissances equivalentes ; or $\\ln x=o(x)$, donc leur quotient tend vers $0$."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Pour $x>1$, $\\ln x$ et $x$ sont positifs : leur quotient ne peut pas tendre vers $-\\infty$, et la croissance comparee donne $0$."
         }
       }
     },
@@ -142,7 +142,7 @@
     },
     {
       "id": "Q7",
-      "capacite": "C3",
+      "capacite": "C5",
       "enonce": "La fonction $f(x) = \\mathrm{e}^x$ est :",
       "options": {
         "A": "convexe sur $\\mathbb{R}$",
@@ -153,13 +153,13 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La concavite exigerait $f''(x)\\leq 0$ ; ici $f''(x)=\\mathrm{e}^x>0$ sur tout $\\mathbb{R}$."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le signe de $x$ ne change pas celui de $f''(x)=\\mathrm{e}^x$, qui reste strictement positif sur les deux demi-droites."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La derivee seconde $f''(x)=\\mathrm{e}^x$ est positive partout ; ce critere etablit directement la convexite sur $\\mathbb{R}$."
         }
       }
     },
@@ -176,19 +176,19 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Restreindre l'inegalite a $x\\geq0$ oublie que la convexite de l'exponentielle place sa courbe au-dessus de la tangente en $0$ sur tout $\\mathbb{R}$."
         },
         "B": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Restreindre l'inegalite a $x\\leq0$ oublie la meme propriete de tangente, valable sur tout le domaine de l'exponentielle."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "L'egalite a lieu en $x=0$, mais l'inegalite reste stricte pour tout $x\\neq0$ car l'exponentielle est strictement convexe."
         }
       }
     },
     {
       "id": "Q9",
-      "capacite": "C3",
+      "capacite": "C5",
       "enonce": "La fonction $f(x) = \\ln x$ est :",
       "options": {
         "A": "convexe sur $]0, +\\infty[$",
@@ -199,13 +199,13 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La convexite exigerait $f''(x)\\geq0$ ; pour $f(x)=\\ln x$, on a $f''(x)=-1/x^2<0$ sur $]0,+\\infty[$."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Aucun changement de convexite ne se produit : $f''(x)=-1/x^2$ reste strictement negatif sur tout le domaine."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le signe constant $f''(x)=-1/x^2<0$ fournit precisement une conclusion : $\\ln$ est concave sur $]0,+\\infty[$."
         }
       }
     },
@@ -222,19 +222,19 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La concavite correspond au signe oppose $f''\\leq0$ ; une derivee seconde strictement positive caracterise ici la convexite."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le signe de $f''$ decrit la variation de $f'$ et la convexite, pas le signe de $f'$ necessaire pour conclure que $f$ est croissante."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Une derivee seconde positive n'impose pas $f'\\leq0$ ; elle rend $f'$ croissante et ne suffit pas a rendre $f$ decroissante."
         }
       }
     },
     {
       "id": "Q11",
-      "capacite": "C4",
+      "capacite": "C5",
       "enonce": "Un point d'inflexion est un point ou :",
       "options": {
         "A": "$f'(x) = 0$",
@@ -246,15 +246,15 @@
       "diagnostics": {
         "A": {
           "erreur": "$f'(x)=0$ caracterise un point critique lorsque $f$ est derivable, pas un changement de convexite.",
-          "renvoi": "cours C4, definition"
+          "renvoi": "cours C5, definition"
         },
         "C": {
           "erreur": "$f''(x)=0$ ne suffit pas : par exemple $f(x)=x^4$ verifie $f''(0)=0$ sans changer de convexite en 0.",
-          "renvoi": "cours C4, point d'inflexion"
+          "renvoi": "cours C5, point d'inflexion"
         },
         "D": {
           "erreur": "$f(x)=0$ indique une intersection avec l'axe des abscisses, sans information sur la convexite.",
-          "renvoi": "cours C4, definition"
+          "renvoi": "cours C5, definition"
         }
       }
     },
@@ -266,18 +266,18 @@
         "A": "au-dessus de ses tangentes",
         "B": "au-dessous de ses tangentes",
         "C": "au-dessus de ses cordes",
-        "D": "au-dessous de ses cordes"
+        "D": "au-dessus de ses tangentes et de ses cordes"
       },
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La position est inversee : une fonction convexe a sa courbe au-dessus de chaque tangente, et non au-dessous."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Pour deux points de la courbe d'une fonction convexe, le segment de corde se situe au-dessus de la courbe, pas au-dessous."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La premiere partie est vraie, mais la courbe est au-dessous de ses cordes ; l'affirmation conjointe est donc fausse."
         }
       }
     },
@@ -294,13 +294,13 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La condition $f'(0)=0$ indique seulement une tangente horizontale ; elle n'implique pas que la courbe traverse cette tangente."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "L'egalite $f(0)=0$ place le point sur l'axe des abscisses, mais ne donne aucune information sur un changement de convexite."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La fonction $x^3$ est croissante sur $\\mathbb{R}$ ; surtout, la monotonie ne caracterise pas le franchissement d'une tangente."
         }
       }
     },
@@ -317,13 +317,13 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le sens $\\leq$ correspondrait a une fonction concave ; une fonction convexe reste au-dessus de sa tangente en $a$."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "L'egalite avec la tangente pour tous $a,x$ caracteriserait une fonction affine ; la convexite ne donne qu'une inegalite."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La convexite compare $f(x)$ a la tangente $f(a)+f'(a)(x-a)$, pas a la seule valeur $f(a)$ ; aucune croissance n'est supposee."
         }
       }
     },

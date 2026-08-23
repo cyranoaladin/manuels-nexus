@@ -4,7 +4,7 @@
   "questions": [
     {
       "id": "Q1",
-      "capacite": "C2",
+      "capacite": "C5",
       "enonce": "Si X suit B(n,p), alors P(X=k) vaut :",
       "options": {
         "A": "p^k (1-p)^(n-k)",
@@ -15,13 +15,13 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Cette expression donne la probabilite d'une configuration precise de $k$ succes ; elle oublie les $C(n,k)$ positions possibles des succes."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le facteur $(1-p)^{n-k}$ manque : les $n-k$ echecs de chaque configuration doivent eux aussi contribuer a sa probabilite."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le produit $np^k$ ne compte ni les choix des $k$ succes ni la probabilite des $n-k$ echecs ; ce n'est pas une probabilite binomiale."
         }
       }
     },
@@ -38,13 +38,13 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La dependance contredit la definition du schema : la probabilite d'un succes doit rester $p$ d'une epreuve a l'autre."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Des epreuves differentes peuvent avoir des probabilites de succes distinctes ; un schema de Bernoulli repete la meme epreuve."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La probabilite de succes est un reel $p$ quelconque de $[0,1]$ ; la valeur $1/2$ n'est imposee que pour une piece equilibree."
         }
       }
     },
@@ -61,19 +61,19 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "L'independance est requise pour additionner les variances, pas pour la linearite de l'esperance de variables integrables."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "L'egalite $X=Y$ n'est pas necessaire : la somme des esperances vaut l'esperance de la somme pour deux variables quelconques."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La propriete est toujours valable ; par exemple pour deux constantes $X=1$ et $Y=2$, les deux membres valent $3$."
         }
       }
     },
     {
       "id": "Q4",
-      "capacite": "C7",
+      "capacite": "C8",
       "enonce": "L'additivite de la variance V(X+Y)=V(X)+V(Y) necessite :",
       "options": {
         "A": "que X et Y soient independantes",
@@ -96,7 +96,7 @@
     },
     {
       "id": "Q5",
-      "capacite": "C8",
+      "capacite": "C9",
       "enonce": "Pour X ~ B(n,p), V(X) vaut :",
       "options": {
         "A": "np",
@@ -107,13 +107,13 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le produit $np$ est l'esperance de la loi binomiale ; la variance comporte aussi le facteur de dispersion $1-p$."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "L'expression $n(1-p)$ oublie le facteur $p$ associe aux succes ; chaque indicatrice de Bernoulli a pour variance $p(1-p)$."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le produit $p(1-p)$ est la variance d'une seule epreuve de Bernoulli ; la somme de $n$ epreuves independantes apporte le facteur $n$."
         }
       }
     },
@@ -130,13 +130,13 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "L'esperance $E(Y)$ est le centre de l'evenement de deviation ; l'inegalite ne cherche pas a majorer cette valeur."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La variance intervient dans le majorant $V(Y)/\\delta^2$, mais la quantite majoree est la probabilite d'un ecart a la moyenne."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Bienayme-Tchebychev concerne l'evenement $|Y-\\mu|\\geq\\delta$, pas la probabilite ponctuelle que $Y$ soit exactement egal a $\\mu$."
         }
       }
     }
