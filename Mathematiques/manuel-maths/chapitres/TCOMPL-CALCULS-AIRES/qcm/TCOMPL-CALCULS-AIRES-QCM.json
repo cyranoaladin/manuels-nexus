@@ -4,8 +4,8 @@
   "questions": [
     {
       "id": "Q1",
-      "capacite": "C4",
-      "enonce": "Deux primitives d'une meme fonction continue sur un intervalle differents :",
+      "capacite": "C5",
+      "enonce": "Deux primitives d'une meme fonction continue sur un intervalle different :",
       "options": {
         "A": "d'un facteur multiplicatif.",
         "B": "d'une constante additive.",
@@ -14,14 +14,23 @@
       },
       "correcte": "B",
       "diagnostics": {
-        "A": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "A": {
+          "erreur": "Un facteur multiplicatif changerait la dérivée, sauf cas particulier, et ne conserve donc pas la même fonction dérivée. Comme (F-G)'=f-f=0 sur l'intervalle, deux primitives diffèrent d'une constante additive.",
+          "renvoi": "C5"
+        },
+        "C": {
+          "erreur": "La constante de différence peut être n'importe quel réel et n'est pas toujours égale à 1. Comme (F-G)'=f-f=0 sur l'intervalle, deux primitives diffèrent d'une constante additive.",
+          "renvoi": "C5"
+        },
+        "D": {
+          "erreur": "Deux primitives peuvent avoir des constantes d'intégration différentes et ne sont donc pas nécessairement égales. Comme (F-G)'=f-f=0 sur l'intervalle, deux primitives diffèrent d'une constante additive.",
+          "renvoi": "C5"
+        }
       }
     },
     {
       "id": "Q2",
-      "capacite": "C5",
+      "capacite": "C4",
       "enonce": "Une primitive de u'/u (avec u>0) est :",
       "options": {
         "A": "u^2",
@@ -31,9 +40,18 @@
       },
       "correcte": "B",
       "diagnostics": {
-        "A": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "A": {
+          "erreur": "La dérivée de $u^2$ vaut $2uu'$ et ne produit pas le quotient $u'/u$. La formule (ln u)'=u'/u pour u>0 montre qu'une primitive de u'/u est ln(u).",
+          "renvoi": "C4"
+        },
+        "C": {
+          "erreur": "La dérivée de $e^u$ vaut $u'e^u$, pas $u'/u$. La formule (ln u)'=u'/u pour u>0 montre qu'une primitive de u'/u est ln(u).",
+          "renvoi": "C4"
+        },
+        "D": {
+          "erreur": "La dérivée de $1/u$ vaut $-u'/u^2$, avec un signe et une puissance de dénominateur différents. La formule (ln u)'=u'/u pour u>0 montre qu'une primitive de u'/u est ln(u).",
+          "renvoi": "C4"
+        }
       }
     },
     {
@@ -48,9 +66,18 @@
       },
       "correcte": "B",
       "diagnostics": {
-        "A": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "A": {
+          "erreur": "La pente d'une tangente est une dérivée ponctuelle et non une accumulation sur tout l'intervalle. Pour f continue positive, l'intégrale entre a et b représente l'aire sous la courbe sur cet intervalle.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "La différence $f(b)-f(a)$ compare deux valeurs de la fonction et non l'aire accumulée sous sa courbe. Pour f continue positive, l'intégrale entre a et b représente l'aire sous la courbe sur cet intervalle.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "La positivité de f rend au contraire son intégrale positive ou nulle. Pour f continue positive, l'intégrale entre a et b représente l'aire sous la courbe sur cet intervalle.",
+          "renvoi": "C1"
+        }
       }
     },
     {
@@ -65,9 +92,18 @@
       },
       "correcte": "B",
       "diagnostics": {
-        "A": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "A": {
+          "erreur": "Cette différence inverse les bornes et donne l'opposé de l'intégrale demandée. Le théorème fondamental donne directement l'intégrale de f entre a et b égale à F(b)-F(a).",
+          "renvoi": "C3"
+        },
+        "C": {
+          "erreur": "Le théorème fondamental utilise une différence des valeurs de la primitive et non leur somme. Le théorème fondamental donne directement l'intégrale de f entre a et b égale à F(b)-F(a).",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "Aucun produit des valeurs de la primitive n'intervient dans le calcul d'une intégrale définie. Le théorème fondamental donne directement l'intégrale de f entre a et b égale à F(b)-F(a).",
+          "renvoi": "C3"
+        }
       }
     },
     {
@@ -82,9 +118,18 @@
       },
       "correcte": "B",
       "diagnostics": {
-        "A": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "A": {
+          "erreur": "Pour une fonction croissante, la hauteur gauche est plus petite que les valeurs prises ensuite sur chaque sous-intervalle. Pour une fonction croissante, chaque hauteur prise à gauche est inférieure aux valeurs suivantes : la somme est un minorant.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Les rectangles ne donnent la valeur exacte que dans des cas particuliers, par exemple pour une fonction constante. Pour une fonction croissante, chaque hauteur prise à gauche est inférieure aux valeurs suivantes : la somme est un minorant.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Une fonction croissante peut être positive ou négative ; la méthode n'impose pas le signe de la somme obtenue. Pour une fonction croissante, chaque hauteur prise à gauche est inférieure aux valeurs suivantes : la somme est un minorant.",
+          "renvoi": "C2"
+        }
       }
     },
     {
@@ -99,9 +144,18 @@
       },
       "correcte": "A",
       "diagnostics": {
-        "B": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "B": {
+          "erreur": "L'égalité F=f' échange la fonction intégrale et la dérivée de l'intégrande sans justification. Le théorème de la fonction intégrale donne F'(x)=f(x) lorsque f est continue sur l'intervalle.",
+          "renvoi": "C6"
+        },
+        "C": {
+          "erreur": "Comme F'=f et que f est positive, F est croissante plutôt que constante sauf si f est nulle. Le théorème de la fonction intégrale donne F'(x)=f(x) lorsque f est continue sur l'intervalle.",
+          "renvoi": "C6"
+        },
+        "D": {
+          "erreur": "La continuité de f est précisément l'hypothèse qui garantit la dérivabilité de la fonction intégrale. Le théorème de la fonction intégrale donne F'(x)=f(x) lorsque f est continue sur l'intervalle.",
+          "renvoi": "C6"
+        }
       }
     }
   ]

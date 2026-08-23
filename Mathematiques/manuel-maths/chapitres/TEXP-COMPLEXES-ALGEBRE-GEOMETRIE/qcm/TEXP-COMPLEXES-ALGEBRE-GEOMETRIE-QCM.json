@@ -15,15 +15,15 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Oubli de i^2 = -1.",
+          "erreur": "Choisir $2$ oublie que $i^2=-1$ annule les deux termes réels $1+i^2$ ; le développement donne $(1+i)^2=2i$.",
           "renvoi": "C1"
         },
         "B": {
-          "erreur": "Erreur de signe.",
+          "erreur": "Choisir $-2$ conserve à tort une partie réelle négative ; comme $1+i^2=0$, le développement laisse uniquement le terme $2i$.",
           "renvoi": "C1"
         },
         "D": {
-          "erreur": "Erreur de signe du produit.",
+          "erreur": "Erreur de signe du produit. Le développement (1+i)^2=1+2i+i^2=2i.",
           "renvoi": "C1"
         }
       }
@@ -41,22 +41,22 @@
       },
       "diagnostics": {
         "B": {
-          "erreur": "Changement de signe de la partie reelle.",
+          "erreur": "Changement de signe de la partie reelle. La conjugaison change le signe de la partie imaginaire : le conjugué de 3-4i est 3+4i.",
           "renvoi": "C1"
         },
         "C": {
-          "erreur": "Changement des deux signes.",
+          "erreur": "Changement des deux signes. La conjugaison change le signe de la partie imaginaire : le conjugué de 3-4i est 3+4i.",
           "renvoi": "C1"
         },
         "D": {
-          "erreur": "Inversion des parties reelle et imaginaire.",
+          "erreur": "Inversion des parties reelle et imaginaire. La conjugaison change le signe de la partie imaginaire : le conjugué de 3-4i est 3+4i.",
           "renvoi": "C1"
         }
       }
     },
     {
       "id": "Q3",
-      "capacite": "C2",
+      "capacite": "C4",
       "enonce": "Le module de $z = 3 + 4i$ vaut :",
       "correcte": "B",
       "options": {
@@ -67,22 +67,22 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Addition des parties au lieu des carres.",
-          "renvoi": "C2"
+          "erreur": "Addition des parties au lieu des carres. Le module de 3+4i vaut racine(3^2+4^2)=5.",
+          "renvoi": "C4"
         },
         "C": {
-          "erreur": "Oubli de la racine carree.",
-          "renvoi": "C2"
+          "erreur": "Oubli de la racine carree. Le module de 3+4i vaut racine(3^2+4^2)=5.",
+          "renvoi": "C4"
         },
         "D": {
-          "erreur": "Soustraction des carres.",
-          "renvoi": "C2"
+          "erreur": "Soustraction des carres. Le module de 3+4i vaut racine(3^2+4^2)=5.",
+          "renvoi": "C4"
         }
       }
     },
     {
       "id": "Q4",
-      "capacite": "C2",
+      "capacite": "C4",
       "enonce": "Un argument de $z = -1 + i$ est :",
       "correcte": "D",
       "options": {
@@ -93,41 +93,41 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Premier quadrant au lieu du second.",
-          "renvoi": "C2"
+          "erreur": "Premier quadrant au lieu du second. Le point (-1,1) est dans le deuxième quadrant et forme un angle 3pi/4 avec l'axe réel positif.",
+          "renvoi": "C4"
         },
         "B": {
-          "erreur": "Quatrieme quadrant.",
-          "renvoi": "C2"
+          "erreur": "Quatrieme quadrant. Le point (-1,1) est dans le deuxième quadrant et forme un angle 3pi/4 avec l'axe réel positif.",
+          "renvoi": "C4"
         },
         "C": {
-          "erreur": "Troisieme quadrant.",
-          "renvoi": "C2"
+          "erreur": "Troisieme quadrant. Le point (-1,1) est dans le deuxième quadrant et forme un angle 3pi/4 avec l'axe réel positif.",
+          "renvoi": "C4"
         }
       }
     },
     {
       "id": "Q5",
       "capacite": "C3",
-      "enonce": "L'equation $z^2 + 1 = 0$ a pour solutions dans $\\mathbb{C}$ :",
-      "correcte": "B",
+      "enonce": "Pour tous nombres complexes $z$ et $w$, le conjugue du produit $zw$ est :",
+      "correcte": "D",
       "options": {
-        "A": "1 et -1",
-        "B": "i et -i",
-        "C": "1+i et 1-i",
-        "D": "Pas de solution"
+        "A": "$\\bar z+w$",
+        "B": "$z\\bar w$",
+        "C": "$\\bar z-\\bar w$",
+        "D": "$\\bar z\\,\\bar w$"
       },
       "diagnostics": {
         "A": {
-          "erreur": "Solutions dans R pour z^2 - 1 = 0.",
+          "erreur": "Cette expression remplace le produit par une somme et ne conjugue pas le second facteur. La conjugaison est multiplicative : le conjugué de zw est le produit des conjugués de z et de w.",
+          "renvoi": "C3"
+        },
+        "B": {
+          "erreur": "Conjuguer un produit exige de conjuguer chacun des deux facteurs, pas seulement $w$. La conjugaison est multiplicative : le conjugué de zw est le produit des conjugués de z et de w.",
           "renvoi": "C3"
         },
         "C": {
-          "erreur": "Solutions incorrectes.",
-          "renvoi": "C3"
-        },
-        "D": {
-          "erreur": "Vrai dans R mais faux dans C.",
+          "erreur": "La conjugaison conserve le produit ; elle ne le transforme pas en une différence. La conjugaison est multiplicative : le conjugué de zw est le produit des conjugués de z et de w.",
           "renvoi": "C3"
         }
       }

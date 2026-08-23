@@ -27,15 +27,17 @@
     \item Le carre du nombre de sommets
   \end{enumerate}
 
-\item[] \textbf{Capacite C2}
+\item[] \textbf{Capacite C3}
 
-\item \textbf{[Q3]} Un graphe admet une chaine eulerienne si et seulement si le nombre de sommets de degre impair est :
+\item \textbf{[Q3]} La matrice d'adjacence d'un graphe simple non oriente est :
   \begin{enumerate}[label=\Alph*.]
-    \item 0 ou 2
-    \item Exactement 1
-    \item Un nombre pair quelconque
-    \item Toujours 0
+    \item antisymétrique avec diagonale égale à 1
+    \item symétrique avec diagonale nulle
+    \item toujours triangulaire
+    \item une matrice dont chaque ligne somme à 1
   \end{enumerate}
+
+\item[] \textbf{Capacite C4}
 
 \item \textbf{[Q4]} Si M est la matrice d'adjacence, le nombre de chemins de longueur k de i a j est donne par le coefficient $(i,j)$ de :
   \begin{enumerate}[label=\Alph*.]
@@ -45,14 +47,14 @@
     \item $M^k$
   \end{enumerate}
 
-\item[] \textbf{Capacite C3}
+\item[] \textbf{Capacite C5}
 
-\item \textbf{[Q5]} L'algorithme de Dijkstra permet de trouver :
+\item \textbf{[Q5]} Pourquoi le coefficient $(i,j)$ de $M^{n+1}$ compte-t-il les chemins de longueur $n+1$ de $i$ a $j$ ?
   \begin{enumerate}[label=\Alph*.]
-    \item Un cycle eulerien
-    \item La matrice d'adjacence
-    \item Le plus court chemin dans un graphe a poids positifs
-    \item La coloration minimale
+    \item parce que tous les coefficients de $M$ valent 1
+    \item parce que $M^{n+1}=M+n+1$
+    \item car $\sum_k(M^n)_{ik}M_{kj}$ classe les chemins selon l'avant-dernier sommet $k$
+    \item car un graphe possède toujours un unique chemin entre deux sommets
   \end{enumerate}
 
 \end{enumerate}
@@ -69,9 +71,9 @@ Question & Capacite & Reponse exacte \\
 \hline
 Q1 & C1 & \textbf{B} \\
 Q2 & C1 & \textbf{C} \\
-Q3 & C2 & \textbf{A} \\
-Q4 & C2 & \textbf{D} \\
-Q5 & C3 & \textbf{C} \\
+Q3 & C3 & \textbf{B} \\
+Q4 & C4 & \textbf{D} \\
+Q5 & C5 & \textbf{C} \\
 \hline
 \end{tabular}
 \end{center}
@@ -81,33 +83,33 @@ Q5 & C3 & \textbf{C} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — Compte incluant le sommet lui-meme sans boucle. \emph{Renvoi : C1.}
-    \item \textbf{C} — Valeur trop grande. \emph{Renvoi : C1.}
-    \item \textbf{D} — Valeur quadratique fausse. \emph{Renvoi : C1.}
+    \item \textbf{A} — Compte incluant le sommet lui-meme sans boucle. Dans un graphe simple d'ordre n, un sommet peut être adjacent aux n-1 autres sommets au maximum. \emph{Renvoi : C1.}
+    \item \textbf{C} — Valeur trop grande. Dans un graphe simple d'ordre n, un sommet peut être adjacent aux n-1 autres sommets au maximum. \emph{Renvoi : C1.}
+    \item \textbf{D} — Valeur quadratique fausse. Dans un graphe simple d'ordre n, un sommet peut être adjacent aux n-1 autres sommets au maximum. \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Chaque arete contribue pour 2 degres. \emph{Renvoi : C1.}
-    \item \textbf{B} — Confusions entre sommets et aretes. \emph{Renvoi : C1.}
-    \item \textbf{D} — Formule quadratique incorrecte. \emph{Renvoi : C1.}
+    \item \textbf{A} — Chaque arete contribue pour 2 degres. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes. \emph{Renvoi : C1.}
+    \item \textbf{B} — Confusions entre sommets et aretes. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes. \emph{Renvoi : C1.}
+    \item \textbf{D} — Formule quadratique incorrecte. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes. \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{B} — Impossible d'avoir un seul sommet de degre impair. \emph{Renvoi : C2.}
-    \item \textbf{C} — Seuls 0 et 2 sont autorises. \emph{Renvoi : C2.}
-    \item \textbf{D} — Cas du cycle eulerien uniquement. \emph{Renvoi : C2.}
+    \item \textbf{A} — L'absence de boucle impose une diagonale nulle, et une arête non orientée produit deux coefficients égaux. La matrice d'adjacence d'un graphe simple non orienté est symétrique et sa diagonale est nulle. \emph{Renvoi : C3.}
+    \item \textbf{C} — Aucun ordre général des sommets ne rend la matrice triangulaire lorsqu'il existe des arêtes dans les deux directions matricielles. La matrice d'adjacence d'un graphe simple non orienté est symétrique et sa diagonale est nulle. \emph{Renvoi : C3.}
+    \item \textbf{D} — La somme d'une ligne est le degré du sommet correspondant, qui n'est généralement pas égal à 1. La matrice d'adjacence d'un graphe simple non orienté est symétrique et sa diagonale est nulle. \emph{Renvoi : C3.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{A} — Addition incorrecte. \emph{Renvoi : C2.}
-    \item \textbf{B} — Multiplication par un scalaire. \emph{Renvoi : C2.}
-    \item \textbf{C} — Puissance decalee de 1. \emph{Renvoi : C2.}
+    \item \textbf{A} — Addition incorrecte. Le coefficient (i,j) de M\textasciicircum{}k compte les chemins de longueur k allant du sommet i au sommet j. \emph{Renvoi : C4.}
+    \item \textbf{B} — Multiplication par un scalaire. Le coefficient (i,j) de M\textasciicircum{}k compte les chemins de longueur k allant du sommet i au sommet j. \emph{Renvoi : C4.}
+    \item \textbf{C} — Puissance decalee de 1. Le coefficient (i,j) de M\textasciicircum{}k compte les chemins de longueur k allant du sommet i au sommet j. \emph{Renvoi : C4.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
-    \item \textbf{A} — Probleme d'Euler, pas de chemin le plus court. \emph{Renvoi : C3.}
-    \item \textbf{B} — Donnee d'entree, pas le resultat. \emph{Renvoi : C3.}
-    \item \textbf{D} — Probleme de coloration. \emph{Renvoi : C3.}
+    \item \textbf{A} — Une matrice d'adjacence contient aussi des zéros ; le comptage vient du produit matriciel, pas de coefficients tous égaux à 1. La formule (M\textasciicircum{}(n+1))\_(i,j)=somme\_k (M\textasciicircum{}n)\_(i,k)M\_(k,j) classe les chemins selon leur avant-dernier sommet k. \emph{Renvoi : C5.}
+    \item \textbf{B} — Une puissance matricielle est obtenue par produits successifs et ne se réduit pas à une addition scalaire. La formule (M\textasciicircum{}(n+1))\_(i,j)=somme\_k (M\textasciicircum{}n)\_(i,k)M\_(k,j) classe les chemins selon leur avant-dernier sommet k. \emph{Renvoi : C5.}
+    \item \textbf{D} — Un graphe peut avoir zéro, un ou plusieurs chemins entre deux sommets ; l'unicité n'est pas une propriété générale. La formule (M\textasciicircum{}(n+1))\_(i,j)=somme\_k (M\textasciicircum{}n)\_(i,k)M\_(k,j) classe les chemins selon leur avant-dernier sommet k. \emph{Renvoi : C5.}
   \end{itemize}
 \end{itemize}
 \fi

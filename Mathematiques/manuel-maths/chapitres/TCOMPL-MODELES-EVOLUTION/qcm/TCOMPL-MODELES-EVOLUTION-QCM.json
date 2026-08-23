@@ -15,48 +15,48 @@
       },
       "diagnostics": {
         "B": {
-          "erreur": "Formule d'une suite geometrique.",
+          "erreur": "Formule d'une suite geometrique. Une suite arithmétique de raison r vérifie u_n=u_0+nr.",
           "renvoi": "C1"
         },
         "C": {
-          "erreur": "Formule incorrecte.",
+          "erreur": "Formule incorrecte. Une suite arithmétique de raison r vérifie u_n=u_0+nr.",
           "renvoi": "C1"
         },
         "D": {
-          "erreur": "Produit au lieu d'addition.",
+          "erreur": "Produit au lieu d'addition. Une suite arithmétique de raison r vérifie u_n=u_0+nr.",
           "renvoi": "C1"
         }
       }
     },
     {
       "id": "Q2",
-      "capacite": "C1",
-      "enonce": "Une suite geometrique de raison $q > 1$ et $u_0 > 0$ est :",
-      "correcte": "C",
+      "capacite": "C2",
+      "enonce": "Pour $0<q<1$, la somme $1+q+q^2+\\cdots$ vaut :",
+      "correcte": "B",
       "options": {
-        "A": "Decroissante et converge vers 0",
-        "B": "Constante",
-        "C": "Strictement croissante et diverge vers $+\\infty$",
-        "D": "Alternée"
+        "A": "$1-q$",
+        "B": "$1/(1-q)$",
+        "C": "$1/q$",
+        "D": "$+\\infty$"
       },
       "diagnostics": {
         "A": {
-          "erreur": "Comportement pour 0 < q < 1.",
-          "renvoi": "C1"
+          "erreur": "La différence $1-q$ apparaît au dénominateur après multiplication et soustraction de la série, pas comme résultat. Pour 0<q<1, la somme géométrique infinie 1+q+q^2+... vaut 1/(1-q).",
+          "renvoi": "C2"
         },
-        "B": {
-          "erreur": "Comportement pour q = 1.",
-          "renvoi": "C1"
+        "C": {
+          "erreur": "La valeur $1/q$ ne vérifie pas l'identité S=1+qS obtenue à partir de la série. Pour 0<q<1, la somme géométrique infinie 1+q+q^2+... vaut 1/(1-q).",
+          "renvoi": "C2"
         },
         "D": {
-          "erreur": "Comportement pour q < 0.",
-          "renvoi": "C1"
+          "erreur": "Comme la raison est strictement comprise entre 0 et 1, les sommes partielles convergent vers une limite finie. Pour 0<q<1, la somme géométrique infinie 1+q+q^2+... vaut 1/(1-q).",
+          "renvoi": "C2"
         }
       }
     },
     {
       "id": "Q3",
-      "capacite": "C2",
+      "capacite": "C5",
       "enonce": "L'equation differentielle $y' = a y$ a pour solutions les fonctions :",
       "correcte": "B",
       "options": {
@@ -67,22 +67,22 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Solution de y' = a.",
-          "renvoi": "C2"
+          "erreur": "Solution de y' = a. Toutes les solutions de y'=ay sont y(x)=C exp(ax), avec C réel.",
+          "renvoi": "C5"
         },
         "C": {
-          "erreur": "Erreur de signe dans l'exposant.",
-          "renvoi": "C2"
+          "erreur": "Erreur de signe dans l'exposant. Toutes les solutions de y'=ay sont y(x)=C exp(ax), avec C réel.",
+          "renvoi": "C5"
         },
         "D": {
-          "erreur": "Fonction puissance au lieu d'exponentielle.",
-          "renvoi": "C2"
+          "erreur": "Fonction puissance au lieu d'exponentielle. Toutes les solutions de y'=ay sont y(x)=C exp(ax), avec C réel.",
+          "renvoi": "C5"
         }
       }
     },
     {
       "id": "Q4",
-      "capacite": "C2",
+      "capacite": "C5",
       "enonce": "Le modele de Malthus suppose un taux de croissance :",
       "correcte": "D",
       "options": {
@@ -93,42 +93,42 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Hypothese du modele de Verhulst.",
-          "renvoi": "C2"
+          "erreur": "Hypothese du modele de Verhulst. Le modèle de Malthus s'écrit y'=ay : le coefficient de croissance a est constant et la variation est proportionnelle à la population.",
+          "renvoi": "C5"
         },
         "B": {
-          "erreur": "Population constante.",
-          "renvoi": "C2"
+          "erreur": "Population constante. Le modèle de Malthus s'écrit y'=ay : le coefficient de croissance a est constant et la variation est proportionnelle à la population.",
+          "renvoi": "C5"
         },
         "C": {
-          "erreur": "Modele avec capacite d'accueil.",
-          "renvoi": "C2"
+          "erreur": "Modele avec capacite d'accueil. Le modèle de Malthus s'écrit y'=ay : le coefficient de croissance a est constant et la variation est proportionnelle à la population.",
+          "renvoi": "C5"
         }
       }
     },
     {
       "id": "Q5",
-      "capacite": "C3",
-      "enonce": "Le modele logistique de Verhulst comporte une capacite d'accueil K qui est :",
-      "correcte": "A",
+      "capacite": "C4",
+      "enonce": "Une solution constante de $u_{n+1}=0{,}8u_n+10$ vaut :",
+      "correcte": "C",
       "options": {
-        "A": "La limite de la population quand $t \\to +\\infty$",
-        "B": "La population initiale $u_0$",
-        "C": "Le taux de croissance initial",
-        "D": "Le temps de demi-vie"
+        "A": "$10$",
+        "B": "$40$",
+        "C": "$50$",
+        "D": "$80$"
       },
       "diagnostics": {
-        "B": {
-          "erreur": "K est l'asymptote horizontale.",
-          "renvoi": "C3"
+        "A": {
+          "erreur": "La constante additive 10 n'est pas le point fixe, car $0{,}8*10+10=18$. Une solution constante de u_(n+1)=0,8u_n+10 vérifie ell=0,8ell+10, donc ell=50.",
+          "renvoi": "C4"
         },
-        "C": {
-          "erreur": "K n'est pas un taux.",
-          "renvoi": "C3"
+        "B": {
+          "erreur": "La valeur 40 ne satisfait pas l'équation fixe : $0{,}8*40+10=42$. Une solution constante de u_(n+1)=0,8u_n+10 vérifie ell=0,8ell+10, donc ell=50.",
+          "renvoi": "C4"
         },
         "D": {
-          "erreur": "K est une taille de population, pas un temps.",
-          "renvoi": "C3"
+          "erreur": "La valeur 80 ne satisfait pas l'équation fixe : $0{,}8*80+10=74$. Une solution constante de u_(n+1)=0,8u_n+10 vérifie ell=0,8ell+10, donc ell=50.",
+          "renvoi": "C4"
         }
       }
     }

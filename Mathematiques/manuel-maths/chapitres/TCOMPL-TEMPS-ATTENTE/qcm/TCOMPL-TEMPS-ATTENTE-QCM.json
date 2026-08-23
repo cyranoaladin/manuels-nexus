@@ -15,22 +15,22 @@
       },
       "diagnostics": {
         "B": {
-          "erreur": "Formule de la variance.",
+          "erreur": "Formule de la variance. Avec la convention X=nombre d'essais jusqu'au premier succès, l'espérance de G(p) vaut 1/p.",
           "renvoi": "C1"
         },
         "C": {
-          "erreur": "Parametre p.",
+          "erreur": "Parametre p. Avec la convention X=nombre d'essais jusqu'au premier succès, l'espérance de G(p) vaut 1/p.",
           "renvoi": "C1"
         },
         "D": {
-          "erreur": "Probabilite d'echec.",
+          "erreur": "Probabilite d'echec. Avec la convention X=nombre d'essais jusqu'au premier succès, l'espérance de G(p) vaut 1/p.",
           "renvoi": "C1"
         }
       }
     },
     {
       "id": "Q2",
-      "capacite": "C1",
+      "capacite": "C2",
       "enonce": "Pour $k \\ge 1$, la probabilite $P(X = k)$ d'une loi geometrique $G(p)$ vaut :",
       "correcte": "C",
       "options": {
@@ -41,22 +41,22 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Inversion des roles de succes et echec.",
-          "renvoi": "C1"
+          "erreur": "Inversion des roles de succes et echec. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)^(k-1)p.",
+          "renvoi": "C2"
         },
         "B": {
-          "erreur": "Erreur d'exposant k au lieu de k-1.",
-          "renvoi": "C1"
+          "erreur": "Erreur d'exposant k au lieu de k-1. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)^(k-1)p.",
+          "renvoi": "C2"
         },
         "D": {
-          "erreur": "Formule de la loi binomiale.",
-          "renvoi": "C1"
+          "erreur": "Formule de la loi binomiale. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)^(k-1)p.",
+          "renvoi": "C2"
         }
       }
     },
     {
       "id": "Q3",
-      "capacite": "C2",
+      "capacite": "C3",
       "enonce": "La propriete de perte de memoire de la loi geometrique s'ecrit $P_{X > n}(X > n+k) =$",
       "correcte": "B",
       "options": {
@@ -67,16 +67,16 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Temps n au lieu de k.",
-          "renvoi": "C2"
+          "erreur": "Temps n au lieu de k. L'absence de mémoire donne P(X>n+k | X>n)=P(X>k).",
+          "renvoi": "C3"
         },
         "C": {
-          "erreur": "Egalite au lieu d'une superiocrite stricte.",
-          "renvoi": "C2"
+          "erreur": "Egalite au lieu d'une superiocrite stricte. L'absence de mémoire donne P(X>n+k | X>n)=P(X>k).",
+          "renvoi": "C3"
         },
         "D": {
-          "erreur": "Evenement contraire.",
-          "renvoi": "C2"
+          "erreur": "Evenement contraire. L'absence de mémoire donne P(X>n+k | X>n)=P(X>k).",
+          "renvoi": "C3"
         }
       }
     },
@@ -93,22 +93,22 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Utilisation de p au lieu de (1-p).",
+          "erreur": "Utilisation de p au lieu de (1-p). L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)^k.",
           "renvoi": "C2"
         },
         "B": {
-          "erreur": "Formule fausse.",
+          "erreur": "Formule fausse. L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)^k.",
           "renvoi": "C2"
         },
         "C": {
-          "erreur": "Probabilite P(X <= k).",
+          "erreur": "Probabilite P(X <= k). L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)^k.",
           "renvoi": "C2"
         }
       }
     },
     {
       "id": "Q5",
-      "capacite": "C3",
+      "capacite": "C1",
       "enonce": "Si $p = 0{,}2$, le temps d'attente moyen du premier succes est :",
       "correcte": "C",
       "options": {
@@ -119,16 +119,16 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Calcul 1/0.5.",
-          "renvoi": "C3"
+          "erreur": "Calcul 1/0.5. Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais.",
+          "renvoi": "C1"
         },
         "B": {
-          "erreur": "Calcul (1-p)/p = 0.8/0.2 = 4.",
-          "renvoi": "C3"
+          "erreur": "Calcul (1-p)/p = 0.8/0.2 = 4. Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais.",
+          "renvoi": "C1"
         },
         "D": {
-          "erreur": "Calcul 1/(0.2^2).",
-          "renvoi": "C3"
+          "erreur": "Calcul 1/(0.2^2). Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais.",
+          "renvoi": "C1"
         }
       }
     }

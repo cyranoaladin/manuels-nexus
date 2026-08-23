@@ -11,48 +11,52 @@
 
 \item[] \textbf{Capacite C1}
 
-\item \textbf{[Q1]} L'inegalite de Bienayme-Tchebycheff s'ecrit $P(|X - \mu| \ge a) \le$
+\item \textbf{[Q1]} Sur une courbe de Lorenz, le point $(x,L(x))$ represente :
   \begin{enumerate}[label=\Alph*.]
-    \item $\frac{V(X)}{a}$
-    \item $\frac{V(X)}{a^2}$
-    \item $a^2 V(X)$
-    \item $\frac{\sigma}{a}$
-  \end{enumerate}
-
-\item \textbf{[Q2]} L'inegalite de Markov s'applique a une variable aleatoire X a valeurs :
-  \begin{enumerate}[label=\Alph*.]
-    \item Quelconques
-    \item Strictement negatives
-    \item Positives ou nulles
-    \item Entieres relatives
+    \item la part cumulée de population $L(x)$ et la part cumulée de richesse $x$
+    \item la part cumulée de population $x$ et la part cumulée de richesse $L(x)$
+    \item deux probabilités indépendantes
+    \item la moyenne et la variance de la répartition
   \end{enumerate}
 
 \item[] \textbf{Capacite C2}
 
-\item \textbf{[Q3]} L'inegalite de Markov affirme pour $X \ge 0$ et $a > 0$ que $P(X \ge a) \le$
+\item \textbf{[Q2]} Pour une repartition inegale, une courbe de Lorenz est en general :
   \begin{enumerate}[label=\Alph*.]
-    \item $\frac{E(X)}{a}$
-    \item $\frac{E(X)}{a^2}$
-    \item $\frac{V(X)}{a}$
-    \item $a E(X)$
-  \end{enumerate}
-
-\item \textbf{[Q4]} La loi forte des grands nombres stipule que la moyenne d'un echantillon converge vers :
-  \begin{enumerate}[label=\Alph*.]
-    \item L'ecart-type
-    \item La variance
-    \item 0
-    \item L'esperance mathématique
+    \item au-dessus de la droite $y=x$
+    \item confondue avec la droite $y=x$
+    \item convexe et au-dessous de la droite $y=x$
+    \item décroissante de 1 vers 0
   \end{enumerate}
 
 \item[] \textbf{Capacite C3}
 
-\item \textbf{[Q5]} Si $V(X) = 4$, la probabilite $P(|X - E(X)| \ge 4)$ est majoree par :
+\item \textbf{[Q3]} Un indice de Gini proche de $0$ indique :
   \begin{enumerate}[label=\Alph*.]
-    \item 1
-    \item 1/4
-    \item 1/2
-    \item 1/16
+    \item une répartition presque égalitaire
+    \item une inégalité maximale
+    \item une variance nécessairement nulle
+    \item une courbe de Lorenz au-dessus de $y=x$
+  \end{enumerate}
+
+\item[] \textbf{Capacite C4}
+
+\item \textbf{[Q4]} Si $L$ est deux fois derivable sur $[0,1]$, quelle condition suffit a sa convexite ?
+  \begin{enumerate}[label=\Alph*.]
+    \item $L'(x)\leq0$
+    \item $L''(x)\leq0$
+    \item $L''(x)\geq0$
+    \item $L(x)=0$
+  \end{enumerate}
+
+\item[] \textbf{Capacite C5}
+
+\item \textbf{[Q5]} Pour la courbe de Lorenz $L(x)=x^2$, l'indice $G=1-2\int_0^1L(x)\,dx$ vaut :
+  \begin{enumerate}[label=\Alph*.]
+    \item $0$
+    \item $1/3$
+    \item $2/3$
+    \item $1$
   \end{enumerate}
 
 \end{enumerate}
@@ -68,10 +72,10 @@
 Question & Capacite & Reponse exacte \\
 \hline
 Q1 & C1 & \textbf{B} \\
-Q2 & C1 & \textbf{C} \\
-Q3 & C2 & \textbf{A} \\
-Q4 & C2 & \textbf{D} \\
-Q5 & C3 & \textbf{B} \\
+Q2 & C2 & \textbf{C} \\
+Q3 & C3 & \textbf{A} \\
+Q4 & C4 & \textbf{C} \\
+Q5 & C5 & \textbf{B} \\
 \hline
 \end{tabular}
 \end{center}
@@ -81,33 +85,33 @@ Q5 & C3 & \textbf{B} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — Oubli du carre sur a. \emph{Renvoi : C1.}
-    \item \textbf{C} — Facteur multiplicatif au lieu d'une division. \emph{Renvoi : C1.}
-    \item \textbf{D} — Utilisation de l'ecart-type sans carre. \emph{Renvoi : C1.}
+    \item \textbf{A} — Cette réponse échange les deux axes : la population cumulée est portée en abscisse. Sur une courbe de Lorenz, x est la part cumulée de population et L(x) la part cumulée de la grandeur étudiée. \emph{Renvoi : C1.}
+    \item \textbf{C} — Les deux coordonnées sont des parts cumulées d'une même répartition et non deux probabilités indépendantes. Sur une courbe de Lorenz, x est la part cumulée de population et L(x) la part cumulée de la grandeur étudiée. \emph{Renvoi : C1.}
+    \item \textbf{D} — Une courbe de Lorenz ne place ni la moyenne ni la variance sur ses axes. Sur une courbe de Lorenz, x est la part cumulée de population et L(x) la part cumulée de la grandeur étudiée. \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Condition de positivite indispensable. \emph{Renvoi : C1.}
-    \item \textbf{B} — La variable doit etre positive. \emph{Renvoi : C1.}
-    \item \textbf{D} — Valable aussi pour les variables continues positives. \emph{Renvoi : C1.}
+    \item \textbf{A} — La part détenue par les x pour cent les moins dotés ne peut pas dépasser x dans le modèle ordonné usuel. Une courbe de Lorenz d'une répartition inégale est convexe et située sous la première bissectrice y=x. \emph{Renvoi : C2.}
+    \item \textbf{B} — La première bissectrice correspond à l'égalité parfaite, pas à une répartition inégale. Une courbe de Lorenz d'une répartition inégale est convexe et située sous la première bissectrice y=x. \emph{Renvoi : C2.}
+    \item \textbf{D} — Une courbe de Lorenz est croissante de (0,0) vers (1,1), elle ne décroît pas. Une courbe de Lorenz d'une répartition inégale est convexe et située sous la première bissectrice y=x. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{B} — Carre inutile pour Markov. \emph{Renvoi : C2.}
-    \item \textbf{C} — Utilisation de la variance au lieu de l'esperance. \emph{Renvoi : C2.}
-    \item \textbf{D} — Multiplication au lieu de division. \emph{Renvoi : C2.}
+    \item \textbf{B} — Une inégalité forte éloigne la courbe de Lorenz de la bissectrice et augmente l'indice vers 1. Un indice de Gini proche de 0 décrit une répartition presque égalitaire ; plus il augmente, plus l'inégalité est forte. \emph{Renvoi : C3.}
+    \item \textbf{C} — L'indice mesure une aire relative et ne détermine pas à lui seul la variance des données. Un indice de Gini proche de 0 décrit une répartition presque égalitaire ; plus il augmente, plus l'inégalité est forte. \emph{Renvoi : C3.}
+    \item \textbf{D} — Dans le modèle de Lorenz, la courbe reste sous la première bissectrice ; l'égalité la confond avec celle-ci. Un indice de Gini proche de 0 décrit une répartition presque égalitaire ; plus il augmente, plus l'inégalité est forte. \emph{Renvoi : C3.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{A} — L'ecart-type est la dispersion. \emph{Renvoi : C2.}
-    \item \textbf{B} — La variance est la moyenne des carres des ecarts. \emph{Renvoi : C2.}
-    \item \textbf{C} — La limite est l'esperance mu, pas necessairement 0. \emph{Renvoi : C2.}
+    \item \textbf{A} — Le signe négatif de la dérivée décrirait une décroissance et ne caractérise pas la convexité. Pour une fonction deux fois dérivable, la condition f''>=0 sur l'intervalle assure sa convexité. \emph{Renvoi : C4.}
+    \item \textbf{B} — Une dérivée seconde négative caractérise la concavité, c'est le signe opposé à celui recherché. Pour une fonction deux fois dérivable, la condition f''>=0 sur l'intervalle assure sa convexité. \emph{Renvoi : C4.}
+    \item \textbf{D} — La fonction nulle est un exemple particulier mais cette égalité n'est pas la condition générale de convexité. Pour une fonction deux fois dérivable, la condition f''>=0 sur l'intervalle assure sa convexité. \emph{Renvoi : C4.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
-    \item \textbf{A} — Majoration triviale par 1 non optimale. \emph{Renvoi : C3.}
-    \item \textbf{C} — Erreur de calcul 4/16 = 1/4. \emph{Renvoi : C3.}
-    \item \textbf{D} — Division par 4\textasciicircum{}3. \emph{Renvoi : C3.}
+    \item \textbf{A} — La valeur zéro correspondrait à la bissectrice $L(x)=x$, dont l'aire vaut $1/2$, pas à $x^2$. La formule G=1-2 fois l'intégrale de L sur [0,1] donne, pour L(x)=x\textasciicircum{}2, G=1-2/3=1/3. \emph{Renvoi : C5.}
+    \item \textbf{C} — La valeur $2/3$ est le double de l'intégrale de $x^2$ ; il reste à la soustraire à 1. La formule G=1-2 fois l'intégrale de L sur [0,1] donne, pour L(x)=x\textasciicircum{}2, G=1-2/3=1/3. \emph{Renvoi : C5.}
+    \item \textbf{D} — La valeur 1 exigerait une aire nulle sous la courbe, alors que l'intégrale de $x^2$ vaut $1/3$. La formule G=1-2 fois l'intégrale de L sur [0,1] donne, pour L(x)=x\textasciicircum{}2, G=1-2/3=1/3. \emph{Renvoi : C5.}
   \end{itemize}
 \end{itemize}
 \fi

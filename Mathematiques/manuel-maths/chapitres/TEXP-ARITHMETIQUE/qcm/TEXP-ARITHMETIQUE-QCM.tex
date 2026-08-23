@@ -11,7 +11,7 @@
 
 \item[] \textbf{Capacite C1}
 
-\item \textbf{[Q1]} Soient a et b entiers. Si a divise b et b divise c alors :
+\item \textbf{[Q1]} Soient a, b et c entiers. Si a divise b et b divise c alors :
   \begin{enumerate}[label=\Alph*.]
     \item a divise b+c uniquement
     \item a divise c
@@ -27,8 +27,6 @@
     \item 3
   \end{enumerate}
 
-\item[] \textbf{Capacite C2}
-
 \item \textbf{[Q3]} Le PGCD de 48 et 18 est :
   \begin{enumerate}[label=\Alph*.]
     \item 6
@@ -36,6 +34,8 @@
     \item 3
     \item 2
   \end{enumerate}
+
+\item[] \textbf{Capacite C5}
 
 \item \textbf{[Q4]} Le theoreme de Bezout affirme que PGCD(a,b)=1 si et seulement si :
   \begin{enumerate}[label=\Alph*.]
@@ -45,7 +45,7 @@
     \item $\exists u,v \in \mathbb{Z}, au+bv=1$
   \end{enumerate}
 
-\item[] \textbf{Capacite C3}
+\item[] \textbf{Capacite C2}
 
 \item \textbf{[Q5]} Si $a \equiv b \pmod{n}$, alors :
   \begin{enumerate}[label=\Alph*.]
@@ -69,9 +69,9 @@ Question & Capacite & Reponse exacte \\
 \hline
 Q1 & C1 & \textbf{B} \\
 Q2 & C1 & \textbf{C} \\
-Q3 & C2 & \textbf{A} \\
-Q4 & C2 & \textbf{D} \\
-Q5 & C3 & \textbf{A} \\
+Q3 & C1 & \textbf{A} \\
+Q4 & C5 & \textbf{D} \\
+Q5 & C2 & \textbf{A} \\
 \hline
 \end{tabular}
 \end{center}
@@ -81,33 +81,33 @@ Q5 & C3 & \textbf{A} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — Propriete trop restreinte. \emph{Renvoi : C1.}
-    \item \textbf{C} — Sens de divisibilite inverse. \emph{Renvoi : C1.}
-    \item \textbf{D} — Egalite non necessaire. \emph{Renvoi : C1.}
+    \item \textbf{A} — Propriete trop restreinte. Si b=ak et c=bm, alors c=a(km), donc a divise c. \emph{Renvoi : C1.}
+    \item \textbf{C} — Sens de divisibilite inverse. Si b=ak et c=bm, alors c=a(km), donc a divise c. \emph{Renvoi : C1.}
+    \item \textbf{D} — Egalite non necessaire. Si b=ak et c=bm, alors c=a(km), donc a divise c. \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Quotient faux. \emph{Renvoi : C1.}
-    \item \textbf{B} — Erreur de calcul. \emph{Renvoi : C1.}
-    \item \textbf{D} — Reste incorrect. \emph{Renvoi : C1.}
+    \item \textbf{A} — Quotient faux. La division 25=3*7+4 donne le reste 4, compris entre 0 et 6. \emph{Renvoi : C1.}
+    \item \textbf{B} — Erreur de calcul. La division 25=3*7+4 donne le reste 4, compris entre 0 et 6. \emph{Renvoi : C1.}
+    \item \textbf{D} — Reste incorrect. La division 25=3*7+4 donne le reste 4, compris entre 0 et 6. \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{B} — 12 ne divise pas 18. \emph{Renvoi : C2.}
-    \item \textbf{C} — 3 n'est pas le PLUS GRAND diviseur. \emph{Renvoi : C2.}
-    \item \textbf{D} — 2 n'est pas le plus grand diviseur. \emph{Renvoi : C2.}
+    \item \textbf{B} — 12 ne divise pas 18. L'algorithme d'Euclide donne 48=2*18+12, 18=1*12+6, puis le PGCD vaut 6. \emph{Renvoi : C1.}
+    \item \textbf{C} — 3 n'est pas le PLUS GRAND diviseur. L'algorithme d'Euclide donne 48=2*18+12, 18=1*12+6, puis le PGCD vaut 6. \emph{Renvoi : C1.}
+    \item \textbf{D} — 2 n'est pas le plus grand diviseur. L'algorithme d'Euclide donne 48=2*18+12, 18=1*12+6, puis le PGCD vaut 6. \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{A} — Equation trop simple. \emph{Renvoi : C2.}
-    \item \textbf{B} — Produit egal a 1. \emph{Renvoi : C2.}
-    \item \textbf{C} — Equation homogene. \emph{Renvoi : C2.}
+    \item \textbf{A} — Equation trop simple. Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1. \emph{Renvoi : C5.}
+    \item \textbf{B} — Produit egal a 1. Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1. \emph{Renvoi : C5.}
+    \item \textbf{C} — Equation homogene. Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1. \emph{Renvoi : C5.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
-    \item \textbf{B} — Sens du diviseur inverse. \emph{Renvoi : C3.}
-    \item \textbf{C} — Egalite non necessaire. \emph{Renvoi : C3.}
-    \item \textbf{D} — Somme au lieu de difference. \emph{Renvoi : C3.}
+    \item \textbf{B} — Sens du diviseur inverse. La congruence a équivalent à b modulo n signifie exactement que n divise a-b. \emph{Renvoi : C2.}
+    \item \textbf{C} — Egalite non necessaire. La congruence a équivalent à b modulo n signifie exactement que n divise a-b. \emph{Renvoi : C2.}
+    \item \textbf{D} — Somme au lieu de difference. La congruence a équivalent à b modulo n signifie exactement que n divise a-b. \emph{Renvoi : C2.}
   \end{itemize}
 \end{itemize}
 \fi

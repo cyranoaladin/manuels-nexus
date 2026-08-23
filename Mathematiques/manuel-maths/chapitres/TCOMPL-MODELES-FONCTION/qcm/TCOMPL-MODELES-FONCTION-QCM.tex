@@ -19,7 +19,9 @@
     \item $-x e^{-x^2}$
   \end{enumerate}
 
-\item \textbf{[Q2]} Une fonction f est convexe sur un intervalle I si et seulement si sa derivee seconde $f''$ est :
+\item[] \textbf{Capacite C5}
+
+\item \textbf{[Q2]} Une fonction $f$ deux fois derivable est convexe sur un intervalle $I$ si et seulement si sa derivee seconde $f''$ est :
   \begin{enumerate}[label=\Alph*.]
     \item Négative
     \item Nulle
@@ -27,15 +29,17 @@
     \item Strictement decroissante
   \end{enumerate}
 
-\item[] \textbf{Capacite C2}
+\item[] \textbf{Capacite C4}
 
-\item \textbf{[Q3]} Un point d'inflexion de la courbe de f est un point ou :
+\item \textbf{[Q3]} Si $f''$ s'annule en $a$ et change de signe en $a$, alors le point $(a,f(a))$ est :
   \begin{enumerate}[label=\Alph*.]
     \item $f''$ s'annule en changeant de signe
     \item $f'$ s'annule
     \item $f$ s'annule
     \item $f''$ est maximale
   \end{enumerate}
+
+\item[] \textbf{Capacite C1}
 
 \item \textbf{[Q4]} La limite de $\frac{e^x}{x}$ quand $x \to +\infty$ est par croissance comparee :
   \begin{enumerate}[label=\Alph*.]
@@ -44,8 +48,6 @@
     \item e
     \item $+\infty$
   \end{enumerate}
-
-\item[] \textbf{Capacite C3}
 
 \item \textbf{[Q5]} Si $f(x) = \ln(2x+1)$, la derivee $f'(x)$ vaut :
   \begin{enumerate}[label=\Alph*.]
@@ -68,10 +70,10 @@
 Question & Capacite & Reponse exacte \\
 \hline
 Q1 & C1 & \textbf{B} \\
-Q2 & C1 & \textbf{C} \\
-Q3 & C2 & \textbf{A} \\
-Q4 & C2 & \textbf{D} \\
-Q5 & C3 & \textbf{B} \\
+Q2 & C5 & \textbf{C} \\
+Q3 & C4 & \textbf{A} \\
+Q4 & C1 & \textbf{D} \\
+Q5 & C1 & \textbf{B} \\
 \hline
 \end{tabular}
 \end{center}
@@ -81,33 +83,33 @@ Q5 & C3 & \textbf{B} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — Oubli de dériver l'interieur. \emph{Renvoi : C1.}
-    \item \textbf{C} — Erreur de signe de la derivee de -x\textasciicircum{}2. \emph{Renvoi : C1.}
-    \item \textbf{D} — Oubli du facteur 2. \emph{Renvoi : C1.}
+    \item \textbf{A} — Oubli de dériver l'interieur. Par la règle de chaîne, la dérivée de exp(-x\textasciicircum{}2) est -2x exp(-x\textasciicircum{}2). \emph{Renvoi : C1.}
+    \item \textbf{C} — Erreur de signe de la derivee de -x\textasciicircum{}2. Par la règle de chaîne, la dérivée de exp(-x\textasciicircum{}2) est -2x exp(-x\textasciicircum{}2). \emph{Renvoi : C1.}
+    \item \textbf{D} — Oubli du facteur 2. Par la règle de chaîne, la dérivée de exp(-x\textasciicircum{}2) est -2x exp(-x\textasciicircum{}2). \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Condition de concavite. \emph{Renvoi : C1.}
-    \item \textbf{B} — Fonction affine. \emph{Renvoi : C1.}
-    \item \textbf{D} — Condition incorrecte. \emph{Renvoi : C1.}
+    \item \textbf{A} — Condition de concavite. Pour une fonction deux fois dérivable, la convexité équivaut à f''>=0 sur l'intervalle. \emph{Renvoi : C5.}
+    \item \textbf{B} — Fonction affine. Pour une fonction deux fois dérivable, la convexité équivaut à f''>=0 sur l'intervalle. \emph{Renvoi : C5.}
+    \item \textbf{D} — Condition incorrecte. Pour une fonction deux fois dérivable, la convexité équivaut à f''>=0 sur l'intervalle. \emph{Renvoi : C5.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{B} — Extremum local de f, pas inflexion. \emph{Renvoi : C2.}
-    \item \textbf{C} — Racine de f. \emph{Renvoi : C2.}
-    \item \textbf{D} — Pas de changement de concavite requis par le max de f''. \emph{Renvoi : C2.}
+    \item \textbf{B} — Extremum local de f, pas inflexion. Si f'' s'annule en a et change de signe, la convexité change et le point (a,f(a)) est un point d'inflexion. \emph{Renvoi : C4.}
+    \item \textbf{C} — Racine de f. Si f'' s'annule en a et change de signe, la convexité change et le point (a,f(a)) est un point d'inflexion. \emph{Renvoi : C4.}
+    \item \textbf{D} — Pas de changement de concavite requis par le max de f''. Si f'' s'annule en a et change de signe, la convexité change et le point (a,f(a)) est un point d'inflexion. \emph{Renvoi : C4.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{A} — Inverse x/e\textasciicircum{}x tend vers 0. \emph{Renvoi : C2.}
-    \item \textbf{B} — Forme indeterminee non levee. \emph{Renvoi : C2.}
-    \item \textbf{C} — Valeur en x=1. \emph{Renvoi : C2.}
+    \item \textbf{A} — Inverse x/e\textasciicircum{}x tend vers 0. L'exponentielle domine x à l'infini, donc exp(x)/x tend vers +infini. \emph{Renvoi : C1.}
+    \item \textbf{B} — Forme indeterminee non levee. L'exponentielle domine x à l'infini, donc exp(x)/x tend vers +infini. \emph{Renvoi : C1.}
+    \item \textbf{C} — Valeur en x=1. L'exponentielle domine x à l'infini, donc exp(x)/x tend vers +infini. \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
-    \item \textbf{A} — Oubli de la derivee de u(x) = 2x+1. \emph{Renvoi : C3.}
-    \item \textbf{C} — Simplification abusive. \emph{Renvoi : C3.}
-    \item \textbf{D} — Multiplication au lieu de derivation. \emph{Renvoi : C3.}
+    \item \textbf{A} — Oubli de la derivee de u(x) = 2x+1. Pour u=2x+1, la règle (ln u)'=u'/u donne 2/(2x+1) sur le domaine de définition. \emph{Renvoi : C1.}
+    \item \textbf{C} — Simplification abusive. Pour u=2x+1, la règle (ln u)'=u'/u donne 2/(2x+1) sur le domaine de définition. \emph{Renvoi : C1.}
+    \item \textbf{D} — Multiplication au lieu de derivation. Pour u=2x+1, la règle (ln u)'=u'/u donne 2/(2x+1) sur le domaine de définition. \emph{Renvoi : C1.}
   \end{itemize}
 \end{itemize}
 \fi

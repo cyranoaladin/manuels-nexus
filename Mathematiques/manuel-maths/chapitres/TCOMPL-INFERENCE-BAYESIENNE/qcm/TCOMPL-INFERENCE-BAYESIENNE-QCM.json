@@ -4,7 +4,7 @@
   "questions": [
     {
       "id": "Q1",
-      "capacite": "C1",
+      "capacite": "C2",
       "enonce": "La formule de Bayes s'ecrit $P(A|B) =$",
       "correcte": "A",
       "options": {
@@ -15,16 +15,16 @@
       },
       "diagnostics": {
         "B": {
-          "erreur": "Tautologie sans inversion.",
-          "renvoi": "C1"
+          "erreur": "Tautologie sans inversion. La formule de Bayes est P(A|B)=P(B|A)P(A)/P(B), lorsque P(B)>0.",
+          "renvoi": "C2"
         },
         "C": {
-          "erreur": "Independance non supposee.",
-          "renvoi": "C1"
+          "erreur": "Independance non supposee. La formule de Bayes est P(A|B)=P(B|A)P(A)/P(B), lorsque P(B)>0.",
+          "renvoi": "C2"
         },
         "D": {
-          "erreur": "Oubli de la division par P(B).",
-          "renvoi": "C1"
+          "erreur": "Oubli de la division par P(B). La formule de Bayes est P(A|B)=P(B|A)P(A)/P(B), lorsque P(B)>0.",
+          "renvoi": "C2"
         }
       }
     },
@@ -41,22 +41,22 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Formule d'evenements disjoints.",
+          "erreur": "Formule d'evenements disjoints. L'indépendance donne P(A inter B)=P(A)P(B).",
           "renvoi": "C1"
         },
         "B": {
-          "erreur": "Probabilite conditionnelle.",
+          "erreur": "Probabilite conditionnelle. L'indépendance donne P(A inter B)=P(A)P(B).",
           "renvoi": "C1"
         },
         "D": {
-          "erreur": "Rapport incorrect.",
+          "erreur": "Rapport incorrect. L'indépendance donne P(A inter B)=P(A)P(B).",
           "renvoi": "C1"
         }
       }
     },
     {
       "id": "Q3",
-      "capacite": "C2",
+      "capacite": "C1",
       "enonce": "La formule des probabilites totales pour une partition $(A_k)$ s'ecrit $P(B) =$",
       "correcte": "B",
       "options": {
@@ -67,22 +67,22 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "La somme des P(A_k) vaut 1.",
-          "renvoi": "C2"
+          "erreur": "La somme des P(A_k) vaut 1. Pour une partition (A_k), la formule totale est P(B)=somme_k P(B|A_k)P(A_k).",
+          "renvoi": "C1"
         },
         "C": {
-          "erreur": "Produit au lieu d'une somme.",
-          "renvoi": "C2"
+          "erreur": "Produit au lieu d'une somme. Pour une partition (A_k), la formule totale est P(B)=somme_k P(B|A_k)P(A_k).",
+          "renvoi": "C1"
         },
         "D": {
-          "erreur": "Seul le premier terme considere.",
-          "renvoi": "C2"
+          "erreur": "Seul le premier terme considere. Pour une partition (A_k), la formule totale est P(B)=somme_k P(B|A_k)P(A_k).",
+          "renvoi": "C1"
         }
       }
     },
     {
       "id": "Q4",
-      "capacite": "C2",
+      "capacite": "C3",
       "enonce": "En inference bayesienne, la probabilite $P(A)$ avant de connaitre B s'appelle :",
       "correcte": "D",
       "options": {
@@ -93,22 +93,22 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "P(A|B) est la probabilite a posteriori.",
-          "renvoi": "C2"
+          "erreur": "P(A|B) est la probabilite a posteriori. La probabilité attribuée à A avant l'observation de B est la probabilité a priori.",
+          "renvoi": "C3"
         },
         "B": {
-          "erreur": "P(B|A) est la vraisemblance.",
-          "renvoi": "C2"
+          "erreur": "P(B|A) est la vraisemblance. La probabilité attribuée à A avant l'observation de B est la probabilité a priori.",
+          "renvoi": "C3"
         },
         "C": {
-          "erreur": "Terme de test d'hypothese.",
-          "renvoi": "C2"
+          "erreur": "Terme de test d'hypothese. La probabilité attribuée à A avant l'observation de B est la probabilité a priori.",
+          "renvoi": "C3"
         }
       }
     },
     {
       "id": "Q5",
-      "capacite": "C3",
+      "capacite": "C4",
       "enonce": "Un test de sensibilite 95% et specificite 90% sur une maladie rare (1%) donne une VPP :",
       "correcte": "A",
       "options": {
@@ -119,16 +119,16 @@
       },
       "diagnostics": {
         "B": {
-          "erreur": "Oubli de l'effet du biais de rarete (paradoxe du faux positif).",
-          "renvoi": "C3"
+          "erreur": "Oubli de l'effet du biais de rarete (paradoxe du faux positif). La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 %, donc moins de 10 %.",
+          "renvoi": "C4"
         },
         "C": {
-          "erreur": "Valeur arbitraire.",
-          "renvoi": "C3"
+          "erreur": "Valeur arbitraire. La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 %, donc moins de 10 %.",
+          "renvoi": "C4"
         },
         "D": {
-          "erreur": "Confusion avec la specificite.",
-          "renvoi": "C3"
+          "erreur": "Confusion avec la specificite. La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 %, donc moins de 10 %.",
+          "renvoi": "C4"
         }
       }
     }

@@ -19,6 +19,8 @@
     \item $1-p$
   \end{enumerate}
 
+\item[] \textbf{Capacite C2}
+
 \item \textbf{[Q2]} Pour $k \ge 1$, la probabilite $P(X = k)$ d'une loi geometrique $G(p)$ vaut :
   \begin{enumerate}[label=\Alph*.]
     \item $p^k (1-p)$
@@ -27,7 +29,7 @@
     \item $\binom{n}{k} p^k (1-p)^{n-k}$
   \end{enumerate}
 
-\item[] \textbf{Capacite C2}
+\item[] \textbf{Capacite C3}
 
 \item \textbf{[Q3]} La propriete de perte de memoire de la loi geometrique s'ecrit $P_{X > n}(X > n+k) =$
   \begin{enumerate}[label=\Alph*.]
@@ -37,6 +39,8 @@
     \item $1 - P(X > k)$
   \end{enumerate}
 
+\item[] \textbf{Capacite C2}
+
 \item \textbf{[Q4]} Pour une loi geometrique $G(p)$, $P(X > k) =$
   \begin{enumerate}[label=\Alph*.]
     \item $p^k$
@@ -45,7 +49,7 @@
     \item $(1-p)^k$
   \end{enumerate}
 
-\item[] \textbf{Capacite C3}
+\item[] \textbf{Capacite C1}
 
 \item \textbf{[Q5]} Si $p = 0{,}2$, le temps d'attente moyen du premier succes est :
   \begin{enumerate}[label=\Alph*.]
@@ -68,10 +72,10 @@
 Question & Capacite & Reponse exacte \\
 \hline
 Q1 & C1 & \textbf{A} \\
-Q2 & C1 & \textbf{C} \\
-Q3 & C2 & \textbf{B} \\
+Q2 & C2 & \textbf{C} \\
+Q3 & C3 & \textbf{B} \\
 Q4 & C2 & \textbf{D} \\
-Q5 & C3 & \textbf{C} \\
+Q5 & C1 & \textbf{C} \\
 \hline
 \end{tabular}
 \end{center}
@@ -81,33 +85,33 @@ Q5 & C3 & \textbf{C} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{B} — Formule de la variance. \emph{Renvoi : C1.}
-    \item \textbf{C} — Parametre p. \emph{Renvoi : C1.}
-    \item \textbf{D} — Probabilite d'echec. \emph{Renvoi : C1.}
+    \item \textbf{B} — Formule de la variance. Avec la convention X=nombre d'essais jusqu'au premier succès, l'espérance de G(p) vaut 1/p. \emph{Renvoi : C1.}
+    \item \textbf{C} — Parametre p. Avec la convention X=nombre d'essais jusqu'au premier succès, l'espérance de G(p) vaut 1/p. \emph{Renvoi : C1.}
+    \item \textbf{D} — Probabilite d'echec. Avec la convention X=nombre d'essais jusqu'au premier succès, l'espérance de G(p) vaut 1/p. \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Inversion des roles de succes et echec. \emph{Renvoi : C1.}
-    \item \textbf{B} — Erreur d'exposant k au lieu de k-1. \emph{Renvoi : C1.}
-    \item \textbf{D} — Formule de la loi binomiale. \emph{Renvoi : C1.}
+    \item \textbf{A} — Inversion des roles de succes et echec. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)\textasciicircum{}(k-1)p. \emph{Renvoi : C2.}
+    \item \textbf{B} — Erreur d'exposant k au lieu de k-1. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)\textasciicircum{}(k-1)p. \emph{Renvoi : C2.}
+    \item \textbf{D} — Formule de la loi binomiale. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)\textasciicircum{}(k-1)p. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{A} — Temps n au lieu de k. \emph{Renvoi : C2.}
-    \item \textbf{C} — Egalite au lieu d'une superiocrite stricte. \emph{Renvoi : C2.}
-    \item \textbf{D} — Evenement contraire. \emph{Renvoi : C2.}
+    \item \textbf{A} — Temps n au lieu de k. L'absence de mémoire donne P(X>n+k | X>n)=P(X>k). \emph{Renvoi : C3.}
+    \item \textbf{C} — Egalite au lieu d'une superiocrite stricte. L'absence de mémoire donne P(X>n+k | X>n)=P(X>k). \emph{Renvoi : C3.}
+    \item \textbf{D} — Evenement contraire. L'absence de mémoire donne P(X>n+k | X>n)=P(X>k). \emph{Renvoi : C3.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{A} — Utilisation de p au lieu de (1-p). \emph{Renvoi : C2.}
-    \item \textbf{B} — Formule fausse. \emph{Renvoi : C2.}
-    \item \textbf{C} — Probabilite P(X <= k). \emph{Renvoi : C2.}
+    \item \textbf{A} — Utilisation de p au lieu de (1-p). L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)\textasciicircum{}k. \emph{Renvoi : C2.}
+    \item \textbf{B} — Formule fausse. L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)\textasciicircum{}k. \emph{Renvoi : C2.}
+    \item \textbf{C} — Probabilite P(X <= k). L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)\textasciicircum{}k. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
-    \item \textbf{A} — Calcul 1/0.5. \emph{Renvoi : C3.}
-    \item \textbf{B} — Calcul (1-p)/p = 0.8/0.2 = 4. \emph{Renvoi : C3.}
-    \item \textbf{D} — Calcul 1/(0.2\textasciicircum{}2). \emph{Renvoi : C3.}
+    \item \textbf{A} — Calcul 1/0.5. Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais. \emph{Renvoi : C1.}
+    \item \textbf{B} — Calcul (1-p)/p = 0.8/0.2 = 4. Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais. \emph{Renvoi : C1.}
+    \item \textbf{D} — Calcul 1/(0.2\textasciicircum{}2). Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais. \emph{Renvoi : C1.}
   \end{itemize}
 \end{itemize}
 \fi

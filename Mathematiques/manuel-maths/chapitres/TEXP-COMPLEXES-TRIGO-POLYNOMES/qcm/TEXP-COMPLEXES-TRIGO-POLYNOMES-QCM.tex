@@ -19,6 +19,8 @@
     \item $2e^{-i\pi/3}$
   \end{enumerate}
 
+\item[] \textbf{Capacite C2}
+
 \item \textbf{[Q2]} D'apres la formule de Euler, $\cos(\theta) =$
   \begin{enumerate}[label=\Alph*.]
     \item $\frac{e^{i\theta} - e^{-i\theta}}{2}$
@@ -26,8 +28,6 @@
     \item $\frac{e^{i\theta} + e^{-i\theta}}{2}$
     \item $e^{i\theta} + e^{-i\theta}$
   \end{enumerate}
-
-\item[] \textbf{Capacite C2}
 
 \item \textbf{[Q3]} La formule de Moivre donne $(\cos\theta + i\sin\theta)^n =$
   \begin{enumerate}[label=\Alph*.]
@@ -37,6 +37,8 @@
     \item $\cos(n\theta) - i\sin(n\theta)$
   \end{enumerate}
 
+\item[] \textbf{Capacite C7}
+
 \item \textbf{[Q4]} Les racines n-iemes de l'unite sont au nombre de :
   \begin{enumerate}[label=\Alph*.]
     \item 1
@@ -45,14 +47,14 @@
     \item n
   \end{enumerate}
 
-\item[] \textbf{Capacite C3}
+\item[] \textbf{Capacite C5}
 
-\item \textbf{[Q5]} Un polynome de degre n a coefficients complexes admet dans $\mathbb{C}$ :
+\item \textbf{[Q5]} Si $P$ est un polynome complexe et $P(a)=0$, alors :
   \begin{enumerate}[label=\Alph*.]
-    \item Exactement n racines comptees avec multiplicite
-    \item Au plus n-1 racines
-    \item Toujours 0 racine
-    \item Infini de racines
+    \item $z-a$ divise $P(z)$
+    \item $z+a$ divise toujours $P(z)$
+    \item $P$ est le polynôme nul
+    \item $a$ est l'unique racine de $P$
   \end{enumerate}
 
 \end{enumerate}
@@ -68,10 +70,10 @@
 Question & Capacite & Reponse exacte \\
 \hline
 Q1 & C1 & \textbf{A} \\
-Q2 & C1 & \textbf{C} \\
+Q2 & C2 & \textbf{C} \\
 Q3 & C2 & \textbf{B} \\
-Q4 & C2 & \textbf{D} \\
-Q5 & C3 & \textbf{A} \\
+Q4 & C7 & \textbf{D} \\
+Q5 & C5 & \textbf{A} \\
 \hline
 \end{tabular}
 \end{center}
@@ -81,33 +83,33 @@ Q5 & C3 & \textbf{A} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{B} — Erreur d'angle pi/6 au lieu de pi/3. \emph{Renvoi : C1.}
-    \item \textbf{C} — Module faux (1 au lieu de 2). \emph{Renvoi : C1.}
-    \item \textbf{D} — Erreur de signe d'argument. \emph{Renvoi : C1.}
+    \item \textbf{B} — Erreur d'angle pi/6 au lieu de pi/3. Le module de 1+i racine(3) vaut 2 et son argument principal vaut pi/3, donc z=2 exp(i pi/3). \emph{Renvoi : C1.}
+    \item \textbf{C} — Module faux (1 au lieu de 2). Le module de 1+i racine(3) vaut 2 et son argument principal vaut pi/3, donc z=2 exp(i pi/3). \emph{Renvoi : C1.}
+    \item \textbf{D} — Erreur de signe d'argument. Le module de 1+i racine(3) vaut 2 et son argument principal vaut pi/3, donc z=2 exp(i pi/3). \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Formule de sin(theta) sans le i. \emph{Renvoi : C1.}
-    \item \textbf{B} — Facteur 2i au lieu de 2. \emph{Renvoi : C1.}
-    \item \textbf{D} — Oubli de diviser par 2. \emph{Renvoi : C1.}
+    \item \textbf{A} — Formule de sin(theta) sans le i. En additionnant les formules d'Euler, cos(theta)=(exp(i theta)+exp(-i theta))/2. \emph{Renvoi : C2.}
+    \item \textbf{B} — Facteur 2i au lieu de 2. En additionnant les formules d'Euler, cos(theta)=(exp(i theta)+exp(-i theta))/2. \emph{Renvoi : C2.}
+    \item \textbf{D} — Oubli de diviser par 2. En additionnant les formules d'Euler, cos(theta)=(exp(i theta)+exp(-i theta))/2. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{A} — Puissance appliquee aux fonctions. \emph{Renvoi : C2.}
-    \item \textbf{C} — Facteur n devant cos et sin. \emph{Renvoi : C2.}
-    \item \textbf{D} — Erreur de signe. \emph{Renvoi : C2.}
+    \item \textbf{A} — Puissance appliquee aux fonctions. La formule de Moivre donne (cos theta+i sin theta)\textasciicircum{}n=cos(n theta)+i sin(n theta). \emph{Renvoi : C2.}
+    \item \textbf{C} — Facteur n devant cos et sin. La formule de Moivre donne (cos theta+i sin theta)\textasciicircum{}n=cos(n theta)+i sin(n theta). \emph{Renvoi : C2.}
+    \item \textbf{D} — Erreur de signe. La formule de Moivre donne (cos theta+i sin theta)\textasciicircum{}n=cos(n theta)+i sin(n theta). \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{A} — Seule la racine 1 comptee dans R. \emph{Renvoi : C2.}
-    \item \textbf{B} — Racines reelles uniquement. \emph{Renvoi : C2.}
-    \item \textbf{C} — Compte incorrect. \emph{Renvoi : C2.}
+    \item \textbf{A} — Seule la racine 1 comptee dans R. L'équation z\textasciicircum{}n=1 possède exactement les n solutions exp(2ikpi/n), pour k de 0 à n-1. \emph{Renvoi : C7.}
+    \item \textbf{B} — Racines reelles uniquement. L'équation z\textasciicircum{}n=1 possède exactement les n solutions exp(2ikpi/n), pour k de 0 à n-1. \emph{Renvoi : C7.}
+    \item \textbf{C} — Compte incorrect. L'équation z\textasciicircum{}n=1 possède exactement les n solutions exp(2ikpi/n), pour k de 0 à n-1. \emph{Renvoi : C7.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
-    \item \textbf{B} — Nombre insuffisant de racines. \emph{Renvoi : C3.}
-    \item \textbf{C} — Contradiction du theoreme d'Alembert-Gauss. \emph{Renvoi : C3.}
-    \item \textbf{D} — Nombre infini impossible. \emph{Renvoi : C3.}
+    \item \textbf{B} — La racine $a$ fournit le facteur $z-a$ ; le facteur $z+a$ correspondrait à la racine $-a$. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z). \emph{Renvoi : C5.}
+    \item \textbf{C} — Un polynôme non nul peut avoir des racines ; l'annulation en un point n'implique pas l'annulation identique. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z). \emph{Renvoi : C5.}
+    \item \textbf{D} — La factorisation par $z-a$ n'interdit pas d'autres facteurs et donc d'autres racines. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z). \emph{Renvoi : C5.}
   \end{itemize}
 \end{itemize}
 \fi

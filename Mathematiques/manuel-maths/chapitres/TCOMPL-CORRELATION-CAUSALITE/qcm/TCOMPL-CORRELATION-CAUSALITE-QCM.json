@@ -4,7 +4,7 @@
   "questions": [
     {
       "id": "Q1",
-      "capacite": "C1",
+      "capacite": "C2",
       "enonce": "La droite des moindres carres passe toujours par :",
       "options": {
         "A": "l'origine du repere.",
@@ -14,9 +14,18 @@
       },
       "correcte": "B",
       "diagnostics": {
-        "A": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "A": {
+          "erreur": "La droite ne passe par l'origine que si l'ordonnée moyenne est compatible avec une ordonnée à l'origine nulle. Les équations normales des moindres carrés imposent à la droite de régression de passer par le point moyen G.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Le premier point n'a aucun rôle privilégié dans la minimisation de la somme des carrés des résidus. Les équations normales des moindres carrés imposent à la droite de régression de passer par le point moyen G.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "Les équations normales imposent au contraire le passage par un point déterminé du nuage, le point moyen. Les équations normales des moindres carrés imposent à la droite de régression de passer par le point moyen G.",
+          "renvoi": "C2"
+        }
       }
     },
     {
@@ -31,15 +40,24 @@
       },
       "correcte": "B",
       "diagnostics": {
-        "A": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "A": {
+          "erreur": "Une valeur absolue proche de 1 indique une forte liaison linéaire, pas une absence de lien. La valeur r=0,98, proche de 1, indique une forte liaison linéaire et donc un ajustement affine de bonne qualité.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Le coefficient mesure une association linéaire et ne permet pas d'identifier un mécanisme causal certain. La valeur r=0,98, proche de 1, indique une forte liaison linéaire et donc un ajustement affine de bonne qualité.",
+          "renvoi": "C2"
+        },
+        "D": {
+          "erreur": "La valeur 0,98 appartient bien à [-1,1] et n'indique donc aucune erreur de calcul. La valeur r=0,98, proche de 1, indique une forte liaison linéaire et donc un ajustement affine de bonne qualité.",
+          "renvoi": "C2"
+        }
       }
     },
     {
       "id": "Q3",
       "capacite": "C3",
-      "enonce": "Pour lineariser une relation y = Ax^b, on pose :",
+      "enonce": "Pour lineariser une relation $y=Ax^b$ avec $A>0$ et $x>0$, on pose :",
       "options": {
         "A": "X = x^2, Y = y^2",
         "B": "X = ln(x), Y = ln(y)",
@@ -48,9 +66,18 @@
       },
       "correcte": "B",
       "diagnostics": {
-        "A": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "A": {
+          "erreur": "Élever x et y au carré transforme la loi de puissance sans la rendre affine en général. Prendre les logarithmes donne ln(y)=ln(A)+b ln(x), relation affine entre X=ln(x) et Y=ln(y).",
+          "renvoi": "C3"
+        },
+        "C": {
+          "erreur": "Prendre les inverses conserve une puissance non linéaire de X et ne sépare pas l'exposant b. Prendre les logarithmes donne ln(y)=ln(A)+b ln(x), relation affine entre X=ln(x) et Y=ln(y).",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "Le logarithme transforme effectivement le produit et la puissance en somme et coefficient, donc un changement est possible. Prendre les logarithmes donne ln(y)=ln(A)+b ln(x), relation affine entre X=ln(x) et Y=ln(y).",
+          "renvoi": "C3"
+        }
       }
     },
     {
@@ -65,9 +92,18 @@
       },
       "correcte": "B",
       "diagnostics": {
-        "A": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "A": {
+          "erreur": "L'interpolation concerne une valeur située à l'intérieur de la plage des observations, contrairement à l'énoncé. Une estimation hors de l'intervalle couvert par les données observées est une extrapolation.",
+          "renvoi": "C4"
+        },
+        "C": {
+          "erreur": "Calculer le point moyen résume le nuage mais ne produit pas l'estimation extérieure demandée. Une estimation hors de l'intervalle couvert par les données observées est une extrapolation.",
+          "renvoi": "C4"
+        },
+        "D": {
+          "erreur": "Une extrapolation est calculable, même si sa fiabilité doit être discutée et décroît hors de la plage observée. Une estimation hors de l'intervalle couvert par les données observées est une extrapolation.",
+          "renvoi": "C4"
+        }
       }
     },
     {
@@ -82,9 +118,18 @@
       },
       "correcte": "B",
       "diagnostics": {
-        "A": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "A": {
+          "erreur": "Une variable cachée ou une causalité inverse peut produire la corrélation sans que X cause Y. Une corrélation, même forte, n'établit pas à elle seule un mécanisme causal entre les deux variables.",
+          "renvoi": "C5"
+        },
+        "C": {
+          "erreur": "Le même coefficient est compatible avec X causant Y, Y causant X ou une cause commune ; il ne tranche pas. Une corrélation, même forte, n'établit pas à elle seule un mécanisme causal entre les deux variables.",
+          "renvoi": "C5"
+        },
+        "D": {
+          "erreur": "Une corrélation peut refléter une relation réelle sans être causale et n'est donc pas toujours due au hasard. Une corrélation, même forte, n'établit pas à elle seule un mécanisme causal entre les deux variables.",
+          "renvoi": "C5"
+        }
       }
     },
     {
@@ -99,9 +144,18 @@
       },
       "correcte": "A",
       "diagnostics": {
-        "B": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "B": {
+          "erreur": "Une cause commune explique la variation conjointe sans rendre nécessaire une action directe de X sur Y. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y.",
+          "renvoi": "C5"
+        },
+        "C": {
+          "erreur": "La corrélation observée peut être statistiquement réelle même si son interprétation causale directe est fausse. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y.",
+          "renvoi": "C5"
+        },
+        "D": {
+          "erreur": "La variable cachée fournit précisément un mécanisme explicatif à l'association mesurée entre X et Y. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y.",
+          "renvoi": "C5"
+        }
       }
     }
   ]

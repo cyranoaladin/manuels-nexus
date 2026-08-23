@@ -4,7 +4,7 @@
   "questions": [
     {
       "id": "Q1",
-      "capacite": "C1",
+      "capacite": "C4",
       "enonce": "Une matrice de transition d'une chaine de Markov a pour propriete :",
       "correcte": "B",
       "options": {
@@ -15,22 +15,22 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Confusions entre lignes et colonnes.",
-          "renvoi": "C1"
+          "erreur": "Confusions entre lignes et colonnes. Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1.",
+          "renvoi": "C4"
         },
         "C": {
-          "erreur": "Les probabilites sont positives.",
-          "renvoi": "C1"
+          "erreur": "Les probabilites sont positives. Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1.",
+          "renvoi": "C4"
         },
         "D": {
-          "erreur": "Symetrie non requise.",
-          "renvoi": "C1"
+          "erreur": "Symetrie non requise. Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1.",
+          "renvoi": "C4"
         }
       }
     },
     {
       "id": "Q2",
-      "capacite": "C1",
+      "capacite": "C5",
       "enonce": "Si $P$ est la matrice de transition et $P_0$ l'etat initial (vecteur ligne), alors $P_n =$",
       "correcte": "A",
       "options": {
@@ -41,22 +41,22 @@
       },
       "diagnostics": {
         "B": {
-          "erreur": "Ordre des facteurs incorrect avec vecteur ligne.",
-          "renvoi": "C1"
+          "erreur": "Ordre des facteurs incorrect avec vecteur ligne. Après n transitions, une distribution ligne initiale pi_0 devient pi_n=pi_0 P^n.",
+          "renvoi": "C5"
         },
         "C": {
-          "erreur": "Addition au lieu de produit matriciel.",
-          "renvoi": "C1"
+          "erreur": "Addition au lieu de produit matriciel. Après n transitions, une distribution ligne initiale pi_0 devient pi_n=pi_0 P^n.",
+          "renvoi": "C5"
         },
         "D": {
-          "erreur": "Multiplication par n au lieu de la puissance n.",
-          "renvoi": "C1"
+          "erreur": "Multiplication par n au lieu de la puissance n. Après n transitions, une distribution ligne initiale pi_0 devient pi_n=pi_0 P^n.",
+          "renvoi": "C5"
         }
       }
     },
     {
       "id": "Q3",
-      "capacite": "C2",
+      "capacite": "C7",
       "enonce": "Un etat stable $X$ d'une chaine de Markov verifie :",
       "correcte": "C",
       "options": {
@@ -67,48 +67,48 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Vecteur colonne au lieu de vecteur ligne.",
-          "renvoi": "C2"
+          "erreur": "Vecteur colonne au lieu de vecteur ligne. Une distribution invariante ligne X vérifie XP=X, avec composantes positives de somme 1.",
+          "renvoi": "C7"
         },
         "B": {
-          "erreur": "Produit nul incorrect.",
-          "renvoi": "C2"
+          "erreur": "Produit nul incorrect. Une distribution invariante ligne X vérifie XP=X, avec composantes positives de somme 1.",
+          "renvoi": "C7"
         },
         "D": {
-          "erreur": "Carre matriciel incorrect.",
-          "renvoi": "C2"
+          "erreur": "Carre matriciel incorrect. Une distribution invariante ligne X vérifie XP=X, avec composantes positives de somme 1.",
+          "renvoi": "C7"
         }
       }
     },
     {
       "id": "Q4",
-      "capacite": "C2",
-      "enonce": "Si une matrice de transition $P$ n'a aucun coefficient nul, la chaine de Markov est :",
-      "correcte": "D",
+      "capacite": "C3",
+      "enonce": "Une suite de matrices colonnes verifie $U_{n+1}=AU_n+C$. Une solution constante $U$ satisfait :",
+      "correcte": "B",
       "options": {
-        "A": "Instable",
-        "B": "Periodique",
-        "C": "Divergente",
-        "D": "Ergodique et admet un unique etat stable"
+        "A": "$AU=C$",
+        "B": "$(I-A)U=C$",
+        "C": "$U=A+C$",
+        "D": "$U=0$ dans tous les cas"
       },
       "diagnostics": {
         "A": {
-          "erreur": "Propriete d'ergodicite implique la stabilite.",
-          "renvoi": "C2"
-        },
-        "B": {
-          "erreur": "Pas de periodicite avec coefficients strictement positifs.",
-          "renvoi": "C2"
+          "erreur": "Substituer une suite constante donne U=AU+C ; oublier le terme U du membre gauche mène à l'équation incomplète AU=C. Une solution constante U de U_(n+1)=AU_n+C vérifie U=AU+C, donc (I-A)U=C.",
+          "renvoi": "C3"
         },
         "C": {
-          "erreur": "La suite des etats converge.",
-          "renvoi": "C2"
+          "erreur": "L'addition A+C mélange une matrice et un vecteur sans appliquer A à U et ne traduit pas la récurrence. Une solution constante U de U_(n+1)=AU_n+C vérifie U=AU+C, donc (I-A)U=C.",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "Le vecteur nul n'est solution que si C=0 ; aucune telle hypothèse n'est donnée. Une solution constante U de U_(n+1)=AU_n+C vérifie U=AU+C, donc (I-A)U=C.",
+          "renvoi": "C3"
         }
       }
     },
     {
       "id": "Q5",
-      "capacite": "C3",
+      "capacite": "C1",
       "enonce": "Pour inverser une matrice 2x2 $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$, le determinant est :",
       "correcte": "A",
       "options": {
@@ -119,16 +119,16 @@
       },
       "diagnostics": {
         "B": {
-          "erreur": "Erreur de formule du determinant.",
-          "renvoi": "C3"
+          "erreur": "Erreur de formule du determinant. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc.",
+          "renvoi": "C1"
         },
         "C": {
-          "erreur": "Signe + au lieu de -.",
-          "renvoi": "C3"
+          "erreur": "Signe + au lieu de -. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc.",
+          "renvoi": "C1"
         },
         "D": {
-          "erreur": "Somme des termes.",
-          "renvoi": "C3"
+          "erreur": "Somme des termes. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc.",
+          "renvoi": "C1"
         }
       }
     }

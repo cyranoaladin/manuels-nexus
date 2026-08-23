@@ -9,7 +9,7 @@
 
 \begin{enumerate}
 
-\item[] \textbf{Capacite C1}
+\item[] \textbf{Capacite C4}
 
 \item \textbf{[Q1]} Une matrice de transition d'une chaine de Markov a pour propriete :
   \begin{enumerate}[label=\Alph*.]
@@ -19,6 +19,8 @@
     \item Elle est toujours symetrique
   \end{enumerate}
 
+\item[] \textbf{Capacite C5}
+
 \item \textbf{[Q2]} Si $P$ est la matrice de transition et $P_0$ l'etat initial (vecteur ligne), alors $P_n =$
   \begin{enumerate}[label=\Alph*.]
     \item $P_0 P^n$
@@ -27,7 +29,7 @@
     \item $P_0 P n$
   \end{enumerate}
 
-\item[] \textbf{Capacite C2}
+\item[] \textbf{Capacite C7}
 
 \item \textbf{[Q3]} Un etat stable $X$ d'une chaine de Markov verifie :
   \begin{enumerate}[label=\Alph*.]
@@ -37,15 +39,17 @@
     \item $X^2 = P$
   \end{enumerate}
 
-\item \textbf{[Q4]} Si une matrice de transition $P$ n'a aucun coefficient nul, la chaine de Markov est :
+\item[] \textbf{Capacite C3}
+
+\item \textbf{[Q4]} Une suite de matrices colonnes verifie $U_{n+1}=AU_n+C$. Une solution constante $U$ satisfait :
   \begin{enumerate}[label=\Alph*.]
-    \item Instable
-    \item Periodique
-    \item Divergente
-    \item Ergodique et admet un unique etat stable
+    \item $AU=C$
+    \item $(I-A)U=C$
+    \item $U=A+C$
+    \item $U=0$ dans tous les cas
   \end{enumerate}
 
-\item[] \textbf{Capacite C3}
+\item[] \textbf{Capacite C1}
 
 \item \textbf{[Q5]} Pour inverser une matrice 2x2 $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$, le determinant est :
   \begin{enumerate}[label=\Alph*.]
@@ -67,11 +71,11 @@
 \hline
 Question & Capacite & Reponse exacte \\
 \hline
-Q1 & C1 & \textbf{B} \\
-Q2 & C1 & \textbf{A} \\
-Q3 & C2 & \textbf{C} \\
-Q4 & C2 & \textbf{D} \\
-Q5 & C3 & \textbf{A} \\
+Q1 & C4 & \textbf{B} \\
+Q2 & C5 & \textbf{A} \\
+Q3 & C7 & \textbf{C} \\
+Q4 & C3 & \textbf{B} \\
+Q5 & C1 & \textbf{A} \\
 \hline
 \end{tabular}
 \end{center}
@@ -81,33 +85,33 @@ Q5 & C3 & \textbf{A} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — Confusions entre lignes et colonnes. \emph{Renvoi : C1.}
-    \item \textbf{C} — Les probabilites sont positives. \emph{Renvoi : C1.}
-    \item \textbf{D} — Symetrie non requise. \emph{Renvoi : C1.}
+    \item \textbf{A} — Confusions entre lignes et colonnes. Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1. \emph{Renvoi : C4.}
+    \item \textbf{C} — Les probabilites sont positives. Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1. \emph{Renvoi : C4.}
+    \item \textbf{D} — Symetrie non requise. Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1. \emph{Renvoi : C4.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{B} — Ordre des facteurs incorrect avec vecteur ligne. \emph{Renvoi : C1.}
-    \item \textbf{C} — Addition au lieu de produit matriciel. \emph{Renvoi : C1.}
-    \item \textbf{D} — Multiplication par n au lieu de la puissance n. \emph{Renvoi : C1.}
+    \item \textbf{B} — Ordre des facteurs incorrect avec vecteur ligne. Après n transitions, une distribution ligne initiale pi\_0 devient pi\_n=pi\_0 P\textasciicircum{}n. \emph{Renvoi : C5.}
+    \item \textbf{C} — Addition au lieu de produit matriciel. Après n transitions, une distribution ligne initiale pi\_0 devient pi\_n=pi\_0 P\textasciicircum{}n. \emph{Renvoi : C5.}
+    \item \textbf{D} — Multiplication par n au lieu de la puissance n. Après n transitions, une distribution ligne initiale pi\_0 devient pi\_n=pi\_0 P\textasciicircum{}n. \emph{Renvoi : C5.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{A} — Vecteur colonne au lieu de vecteur ligne. \emph{Renvoi : C2.}
-    \item \textbf{B} — Produit nul incorrect. \emph{Renvoi : C2.}
-    \item \textbf{D} — Carre matriciel incorrect. \emph{Renvoi : C2.}
+    \item \textbf{A} — Vecteur colonne au lieu de vecteur ligne. Une distribution invariante ligne X vérifie XP=X, avec composantes positives de somme 1. \emph{Renvoi : C7.}
+    \item \textbf{B} — Produit nul incorrect. Une distribution invariante ligne X vérifie XP=X, avec composantes positives de somme 1. \emph{Renvoi : C7.}
+    \item \textbf{D} — Carre matriciel incorrect. Une distribution invariante ligne X vérifie XP=X, avec composantes positives de somme 1. \emph{Renvoi : C7.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{A} — Propriete d'ergodicite implique la stabilite. \emph{Renvoi : C2.}
-    \item \textbf{B} — Pas de periodicite avec coefficients strictement positifs. \emph{Renvoi : C2.}
-    \item \textbf{C} — La suite des etats converge. \emph{Renvoi : C2.}
+    \item \textbf{A} — Substituer une suite constante donne U=AU+C ; oublier le terme U du membre gauche mène à l'équation incomplète AU=C. Une solution constante U de U\_(n+1)=AU\_n+C vérifie U=AU+C, donc (I-A)U=C. \emph{Renvoi : C3.}
+    \item \textbf{C} — L'addition A+C mélange une matrice et un vecteur sans appliquer A à U et ne traduit pas la récurrence. Une solution constante U de U\_(n+1)=AU\_n+C vérifie U=AU+C, donc (I-A)U=C. \emph{Renvoi : C3.}
+    \item \textbf{D} — Le vecteur nul n'est solution que si C=0 ; aucune telle hypothèse n'est donnée. Une solution constante U de U\_(n+1)=AU\_n+C vérifie U=AU+C, donc (I-A)U=C. \emph{Renvoi : C3.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
-    \item \textbf{B} — Erreur de formule du determinant. \emph{Renvoi : C3.}
-    \item \textbf{C} — Signe + au lieu de -. \emph{Renvoi : C3.}
-    \item \textbf{D} — Somme des termes. \emph{Renvoi : C3.}
+    \item \textbf{B} — Erreur de formule du determinant. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc. \emph{Renvoi : C1.}
+    \item \textbf{C} — Signe + au lieu de -. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc. \emph{Renvoi : C1.}
+    \item \textbf{D} — Somme des termes. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc. \emph{Renvoi : C1.}
   \end{itemize}
 \end{itemize}
 \fi

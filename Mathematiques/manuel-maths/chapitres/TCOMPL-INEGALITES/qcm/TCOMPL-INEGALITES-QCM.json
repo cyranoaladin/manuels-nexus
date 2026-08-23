@@ -5,130 +5,130 @@
     {
       "id": "Q1",
       "capacite": "C1",
-      "enonce": "L'inegalite de Bienayme-Tchebycheff s'ecrit $P(|X - \\mu| \\ge a) \\le$",
+      "enonce": "Sur une courbe de Lorenz, le point $(x,L(x))$ represente :",
       "correcte": "B",
       "options": {
-        "A": "$\\frac{V(X)}{a}$",
-        "B": "$\\frac{V(X)}{a^2}$",
-        "C": "$a^2 V(X)$",
-        "D": "$\\frac{\\sigma}{a}$"
+        "A": "la part cumulée de population $L(x)$ et la part cumulée de richesse $x$",
+        "B": "la part cumulée de population $x$ et la part cumulée de richesse $L(x)$",
+        "C": "deux probabilités indépendantes",
+        "D": "la moyenne et la variance de la répartition"
       },
       "diagnostics": {
         "A": {
-          "erreur": "Oubli du carre sur a.",
+          "erreur": "Cette réponse échange les deux axes : la population cumulée est portée en abscisse. Sur une courbe de Lorenz, x est la part cumulée de population et L(x) la part cumulée de la grandeur étudiée.",
           "renvoi": "C1"
         },
         "C": {
-          "erreur": "Facteur multiplicatif au lieu d'une division.",
+          "erreur": "Les deux coordonnées sont des parts cumulées d'une même répartition et non deux probabilités indépendantes. Sur une courbe de Lorenz, x est la part cumulée de population et L(x) la part cumulée de la grandeur étudiée.",
           "renvoi": "C1"
         },
         "D": {
-          "erreur": "Utilisation de l'ecart-type sans carre.",
+          "erreur": "Une courbe de Lorenz ne place ni la moyenne ni la variance sur ses axes. Sur une courbe de Lorenz, x est la part cumulée de population et L(x) la part cumulée de la grandeur étudiée.",
           "renvoi": "C1"
         }
       }
     },
     {
       "id": "Q2",
-      "capacite": "C1",
-      "enonce": "L'inegalite de Markov s'applique a une variable aleatoire X a valeurs :",
+      "capacite": "C2",
+      "enonce": "Pour une repartition inegale, une courbe de Lorenz est en general :",
       "correcte": "C",
       "options": {
-        "A": "Quelconques",
-        "B": "Strictement negatives",
-        "C": "Positives ou nulles",
-        "D": "Entieres relatives"
+        "A": "au-dessus de la droite $y=x$",
+        "B": "confondue avec la droite $y=x$",
+        "C": "convexe et au-dessous de la droite $y=x$",
+        "D": "décroissante de 1 vers 0"
       },
       "diagnostics": {
         "A": {
-          "erreur": "Condition de positivite indispensable.",
-          "renvoi": "C1"
+          "erreur": "La part détenue par les x pour cent les moins dotés ne peut pas dépasser x dans le modèle ordonné usuel. Une courbe de Lorenz d'une répartition inégale est convexe et située sous la première bissectrice y=x.",
+          "renvoi": "C2"
         },
         "B": {
-          "erreur": "La variable doit etre positive.",
-          "renvoi": "C1"
+          "erreur": "La première bissectrice correspond à l'égalité parfaite, pas à une répartition inégale. Une courbe de Lorenz d'une répartition inégale est convexe et située sous la première bissectrice y=x.",
+          "renvoi": "C2"
         },
         "D": {
-          "erreur": "Valable aussi pour les variables continues positives.",
-          "renvoi": "C1"
+          "erreur": "Une courbe de Lorenz est croissante de (0,0) vers (1,1), elle ne décroît pas. Une courbe de Lorenz d'une répartition inégale est convexe et située sous la première bissectrice y=x.",
+          "renvoi": "C2"
         }
       }
     },
     {
       "id": "Q3",
-      "capacite": "C2",
-      "enonce": "L'inegalite de Markov affirme pour $X \\ge 0$ et $a > 0$ que $P(X \\ge a) \\le$",
+      "capacite": "C3",
+      "enonce": "Un indice de Gini proche de $0$ indique :",
       "correcte": "A",
       "options": {
-        "A": "$\\frac{E(X)}{a}$",
-        "B": "$\\frac{E(X)}{a^2}$",
-        "C": "$\\frac{V(X)}{a}$",
-        "D": "$a E(X)$"
+        "A": "une répartition presque égalitaire",
+        "B": "une inégalité maximale",
+        "C": "une variance nécessairement nulle",
+        "D": "une courbe de Lorenz au-dessus de $y=x$"
       },
       "diagnostics": {
         "B": {
-          "erreur": "Carre inutile pour Markov.",
-          "renvoi": "C2"
+          "erreur": "Une inégalité forte éloigne la courbe de Lorenz de la bissectrice et augmente l'indice vers 1. Un indice de Gini proche de 0 décrit une répartition presque égalitaire ; plus il augmente, plus l'inégalité est forte.",
+          "renvoi": "C3"
         },
         "C": {
-          "erreur": "Utilisation de la variance au lieu de l'esperance.",
-          "renvoi": "C2"
+          "erreur": "L'indice mesure une aire relative et ne détermine pas à lui seul la variance des données. Un indice de Gini proche de 0 décrit une répartition presque égalitaire ; plus il augmente, plus l'inégalité est forte.",
+          "renvoi": "C3"
         },
         "D": {
-          "erreur": "Multiplication au lieu de division.",
-          "renvoi": "C2"
+          "erreur": "Dans le modèle de Lorenz, la courbe reste sous la première bissectrice ; l'égalité la confond avec celle-ci. Un indice de Gini proche de 0 décrit une répartition presque égalitaire ; plus il augmente, plus l'inégalité est forte.",
+          "renvoi": "C3"
         }
       }
     },
     {
       "id": "Q4",
-      "capacite": "C2",
-      "enonce": "La loi forte des grands nombres stipule que la moyenne d'un echantillon converge vers :",
-      "correcte": "D",
+      "capacite": "C4",
+      "enonce": "Si $L$ est deux fois derivable sur $[0,1]$, quelle condition suffit a sa convexite ?",
+      "correcte": "C",
       "options": {
-        "A": "L'ecart-type",
-        "B": "La variance",
-        "C": "0",
-        "D": "L'esperance mathématique"
+        "A": "$L'(x)\\leq0$",
+        "B": "$L''(x)\\leq0$",
+        "C": "$L''(x)\\geq0$",
+        "D": "$L(x)=0$"
       },
       "diagnostics": {
         "A": {
-          "erreur": "L'ecart-type est la dispersion.",
-          "renvoi": "C2"
+          "erreur": "Le signe négatif de la dérivée décrirait une décroissance et ne caractérise pas la convexité. Pour une fonction deux fois dérivable, la condition f''>=0 sur l'intervalle assure sa convexité.",
+          "renvoi": "C4"
         },
         "B": {
-          "erreur": "La variance est la moyenne des carres des ecarts.",
-          "renvoi": "C2"
+          "erreur": "Une dérivée seconde négative caractérise la concavité, c'est le signe opposé à celui recherché. Pour une fonction deux fois dérivable, la condition f''>=0 sur l'intervalle assure sa convexité.",
+          "renvoi": "C4"
         },
-        "C": {
-          "erreur": "La limite est l'esperance mu, pas necessairement 0.",
-          "renvoi": "C2"
+        "D": {
+          "erreur": "La fonction nulle est un exemple particulier mais cette égalité n'est pas la condition générale de convexité. Pour une fonction deux fois dérivable, la condition f''>=0 sur l'intervalle assure sa convexité.",
+          "renvoi": "C4"
         }
       }
     },
     {
       "id": "Q5",
-      "capacite": "C3",
-      "enonce": "Si $V(X) = 4$, la probabilite $P(|X - E(X)| \\ge 4)$ est majoree par :",
+      "capacite": "C5",
+      "enonce": "Pour la courbe de Lorenz $L(x)=x^2$, l'indice $G=1-2\\int_0^1L(x)\\,dx$ vaut :",
       "correcte": "B",
       "options": {
-        "A": "1",
-        "B": "1/4",
-        "C": "1/2",
-        "D": "1/16"
+        "A": "$0$",
+        "B": "$1/3$",
+        "C": "$2/3$",
+        "D": "$1$"
       },
       "diagnostics": {
         "A": {
-          "erreur": "Majoration triviale par 1 non optimale.",
-          "renvoi": "C3"
+          "erreur": "La valeur zéro correspondrait à la bissectrice $L(x)=x$, dont l'aire vaut $1/2$, pas à $x^2$. La formule G=1-2 fois l'intégrale de L sur [0,1] donne, pour L(x)=x^2, G=1-2/3=1/3.",
+          "renvoi": "C5"
         },
         "C": {
-          "erreur": "Erreur de calcul 4/16 = 1/4.",
-          "renvoi": "C3"
+          "erreur": "La valeur $2/3$ est le double de l'intégrale de $x^2$ ; il reste à la soustraire à 1. La formule G=1-2 fois l'intégrale de L sur [0,1] donne, pour L(x)=x^2, G=1-2/3=1/3.",
+          "renvoi": "C5"
         },
         "D": {
-          "erreur": "Division par 4^3.",
-          "renvoi": "C3"
+          "erreur": "La valeur 1 exigerait une aire nulle sous la courbe, alors que l'intégrale de $x^2$ vaut $1/3$. La formule G=1-2 fois l'intégrale de L sur [0,1] donne, pour L(x)=x^2, G=1-2/3=1/3.",
+          "renvoi": "C5"
         }
       }
     }

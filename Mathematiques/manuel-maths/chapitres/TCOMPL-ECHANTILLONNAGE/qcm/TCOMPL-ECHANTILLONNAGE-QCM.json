@@ -5,130 +5,130 @@
     {
       "id": "Q1",
       "capacite": "C1",
-      "enonce": "L'intervalle de confiance usuel au niveau 95% pour une proportion p avec un echantillon de taille n est :",
-      "correcte": "A",
+      "enonce": "Le nombre $X$ de succes dans $n$ repetitions independantes d'une meme epreuve de probabilite de succes $p$ suit :",
+      "correcte": "B",
       "options": {
-        "A": "$[f - \\frac{1}{\\sqrt{n}} ; f + \\frac{1}{\\sqrt{n}}]$",
-        "B": "$[f - \\frac{1}{n} ; f + \\frac{1}{n}]$",
-        "C": "$[f - 1,96 ; f + 1,96]$",
-        "D": "$[0 ; 1]$"
+        "A": "une loi uniforme",
+        "B": "la loi binomiale $\\mathcal B(n,p)$",
+        "C": "une loi exponentielle",
+        "D": "une loi normale dans tous les cas"
       },
       "diagnostics": {
-        "B": {
-          "erreur": "Erreur d'exposant sur n.",
+        "A": {
+          "erreur": "Une loi uniforme attribuerait la même probabilité à toutes les valeurs, ce que le nombre de succès ne fait pas. Le nombre de succès dans n répétitions indépendantes de même probabilité p suit la loi binomiale B(n,p).",
           "renvoi": "C1"
         },
         "C": {
-          "erreur": "Oubli de diviser par sqrt(n).",
+          "erreur": "La loi exponentielle modélise un temps d'attente continu, pas un nombre discret de succès. Le nombre de succès dans n répétitions indépendantes de même probabilité p suit la loi binomiale B(n,p).",
           "renvoi": "C1"
         },
         "D": {
-          "erreur": "Intervalle trivial non informatif.",
+          "erreur": "Une approximation normale peut parfois être utilisée, mais elle n'est ni exacte ni valable dans tous les cas. Le nombre de succès dans n répétitions indépendantes de même probabilité p suit la loi binomiale B(n,p).",
           "renvoi": "C1"
         }
       }
     },
     {
       "id": "Q2",
-      "capacite": "C1",
-      "enonce": "Pour diviser la largeur de l'intervalle de confiance par 2, la taille n de l'echantillon doit etre :",
+      "capacite": "C2",
+      "enonce": "Quelle relation du triangle de Pascal permet de calculer $\\binom{n}{k}$ ?",
       "correcte": "C",
       "options": {
-        "A": "Doublee",
-        "B": "Triplee",
-        "C": "Multipliee par 4",
-        "D": "Divisee par 2"
+        "A": "$\\binom{n}{k}=\\binom{n-1}{k-1}-\\binom{n-1}{k}$",
+        "B": "$\\binom{n}{k}=n^k$",
+        "C": "$\\binom{n}{k}=\\binom{n-1}{k-1}+\\binom{n-1}{k}$",
+        "D": "$\\binom{n}{k}=\\binom{k}{n}$"
       },
       "diagnostics": {
         "A": {
-          "erreur": "Oubli de la racine carree au denominateur.",
-          "renvoi": "C1"
+          "erreur": "Les deux classes disjointes se réunissent par addition et non par soustraction. La relation de Pascal est C(n,k)=C(n-1,k-1)+C(n-1,k), obtenue selon que l'élément distingué est choisi ou non.",
+          "renvoi": "C2"
         },
         "B": {
-          "erreur": "Facteur 3 incorrect.",
-          "renvoi": "C1"
+          "erreur": "La puissance $n^k$ compte des listes ordonnées avec répétition, pas des sous-ensembles de taille $k$. La relation de Pascal est C(n,k)=C(n-1,k-1)+C(n-1,k), obtenue selon que l'élément distingué est choisi ou non.",
+          "renvoi": "C2"
         },
         "D": {
-          "erreur": "Effet inverse.",
-          "renvoi": "C1"
+          "erreur": "Inverser $n$ et $k$ rend généralement le coefficient nul ou non défini et ne traduit pas la relation de Pascal. La relation de Pascal est C(n,k)=C(n-1,k-1)+C(n-1,k), obtenue selon que l'élément distingué est choisi ou non.",
+          "renvoi": "C2"
         }
       }
     },
     {
       "id": "Q3",
-      "capacite": "C2",
-      "enonce": "La frequence observee f sur un echantillon de taille n suit approximativement :",
+      "capacite": "C3",
+      "enonce": "Si $X$ suit $\\mathcal B(3,1/2)$, alors $P(X=2)$ vaut :",
       "correcte": "B",
       "options": {
-        "A": "Une loi uniforme",
-        "B": "Une loi normale sous les conditions d'application",
-        "C": "Une loi de Poisson",
-        "D": "Une loi d'exponentielle"
+        "A": "$1/8$",
+        "B": "$3/8$",
+        "C": "$1/2$",
+        "D": "$3/4$"
       },
       "diagnostics": {
         "A": {
-          "erreur": "Theoreme central limite implique la loi normale.",
-          "renvoi": "C2"
+          "erreur": "La valeur $1/8$ est la probabilité d'une configuration précise de deux succès et oublie les trois positions possibles. Pour X suivant B(3,1/2), P(X=2)=C(3,2)(1/2)^2(1/2)=3/8.",
+          "renvoi": "C3"
         },
         "C": {
-          "erreur": "Loi de Poisson pas adaptee aux frequences.",
-          "renvoi": "C2"
+          "erreur": "La valeur $1/2$ ne résulte pas de la formule binomiale et confond le paramètre $p$ avec la probabilité de deux succès. Pour X suivant B(3,1/2), P(X=2)=C(3,2)(1/2)^2(1/2)=3/8.",
+          "renvoi": "C3"
         },
         "D": {
-          "erreur": "Loi continue non symetrique.",
-          "renvoi": "C2"
+          "erreur": "La valeur $3/4$ oublie le facteur $(1/2)^3$ associé aux trois résultats de chaque configuration. Pour X suivant B(3,1/2), P(X=2)=C(3,2)(1/2)^2(1/2)=3/8.",
+          "renvoi": "C3"
         }
       }
     },
     {
       "id": "Q4",
-      "capacite": "C2",
-      "enonce": "Un estimateur sans biais du milieu d'un intervalle de confiance est :",
+      "capacite": "C4",
+      "enonce": "Si $X$ suit $\\mathcal B(4,1/2)$, alors $P(1\\leq X\\leq3)$ vaut :",
       "correcte": "D",
       "options": {
-        "A": "La taille n",
-        "B": "La variance",
-        "C": "L'ecart-type",
-        "D": "La frequence observee f"
+        "A": "$1/4$",
+        "B": "$1/2$",
+        "C": "$3/4$",
+        "D": "$7/8$"
       },
       "diagnostics": {
         "A": {
-          "erreur": "La taille n est un parametre de conception.",
-          "renvoi": "C2"
+          "erreur": "La valeur $1/4$ ne somme pas les probabilités des trois valeurs 1, 2 et 3 de l'intervalle. Pour X suivant B(4,1/2), P(1<=X<=3)=(4+6+4)/16=14/16=7/8.",
+          "renvoi": "C4"
         },
         "B": {
-          "erreur": "La variance mesure la dispersion.",
-          "renvoi": "C2"
+          "erreur": "La valeur $1/2$ ne tient compte que du coefficient central et omet les cas $X=1$ et $X=3$. Pour X suivant B(4,1/2), P(1<=X<=3)=(4+6+4)/16=14/16=7/8.",
+          "renvoi": "C4"
         },
         "C": {
-          "erreur": "L'ecart-type mesure la variabilite.",
-          "renvoi": "C2"
+          "erreur": "La valeur $3/4$ retranche à tort quatre issues sur seize, alors que seules $X=0$ et $X=4$ sont exclues. Pour X suivant B(4,1/2), P(1<=X<=3)=(4+6+4)/16=14/16=7/8.",
+          "renvoi": "C4"
         }
       }
     },
     {
       "id": "Q5",
-      "capacite": "C3",
-      "enonce": "Les conditions standard $n \\ge 30$, $nf \\ge 5$ et $n(1-f) \\ge 5$ permettent d'assurer :",
+      "capacite": "C5",
+      "enonce": "Quelle expression Python renvoie la moyenne d'un echantillon de $n$ variables de Bernoulli de parametre $p$ ?",
       "correcte": "A",
       "options": {
-        "A": "La validite de l'approximation normale de la frequence",
-        "B": "Que la taille n est infinie",
-        "C": "Que p est exactement egal a f",
-        "D": "Que la variance est nulle"
+        "A": "sum(random() < p for _ in range(n)) / n",
+        "B": "sum(random() < p for _ in range(n))",
+        "C": "random() < p / n",
+        "D": "sum(range(n)) / p"
       },
       "diagnostics": {
         "B": {
-          "erreur": "n reste fini.",
-          "renvoi": "C3"
+          "erreur": "Cette expression renvoie le nombre de succès, mais oublie la division par la taille $n$ nécessaire pour obtenir la moyenne. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n.",
+          "renvoi": "C5"
         },
         "C": {
-          "erreur": "f est une estimation, pas une egalite exacte.",
-          "renvoi": "C3"
+          "erreur": "Cette expression ne simule qu'une seule épreuve et modifie en plus sa probabilité en utilisant $p/n$. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n.",
+          "renvoi": "C5"
         },
         "D": {
-          "erreur": "La variance d'echantillonnage n'est pas nulle.",
-          "renvoi": "C3"
+          "erreur": "La somme des indices ne simule aucune variable de Bernoulli et la division par $p$ n'a pas de sens statistique. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n.",
+          "renvoi": "C5"
         }
       }
     }

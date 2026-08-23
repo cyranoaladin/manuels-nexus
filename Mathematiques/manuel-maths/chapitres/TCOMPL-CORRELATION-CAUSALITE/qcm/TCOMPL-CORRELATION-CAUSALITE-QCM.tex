@@ -9,7 +9,7 @@
 
 \begin{enumerate}
 
-\item[] \textbf{Capacite C1}
+\item[] \textbf{Capacite C2}
 
 \item \textbf{[Q1]} La droite des moindres carres passe toujours par :
   \begin{enumerate}[label=\Alph*.]
@@ -18,8 +18,6 @@
     \item le premier point du nuage.
     \item aucun point particulier.
   \end{enumerate}
-
-\item[] \textbf{Capacite C2}
 
 \item \textbf{[Q2]} Un coefficient de correlation r=0,98 indique :
   \begin{enumerate}[label=\Alph*.]
@@ -31,7 +29,7 @@
 
 \item[] \textbf{Capacite C3}
 
-\item \textbf{[Q3]} Pour lineariser une relation y = Ax\textasciicircum{}b, on pose :
+\item \textbf{[Q3]} Pour lineariser une relation $y=Ax^b$ avec $A>0$ et $x>0$, on pose :
   \begin{enumerate}[label=\Alph*.]
     \item X = x\textasciicircum{}2, Y = y\textasciicircum{}2
     \item X = ln(x), Y = ln(y)
@@ -79,7 +77,7 @@
 \hline
 Question & Capacite & Reponse exacte \\
 \hline
-Q1 & C1 & \textbf{B} \\
+Q1 & C2 & \textbf{B} \\
 Q2 & C2 & \textbf{B} \\
 Q3 & C3 & \textbf{B} \\
 Q4 & C4 & \textbf{B} \\
@@ -94,39 +92,39 @@ Q6 & C5 & \textbf{A} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — La droite ne passe par l'origine que si l'ordonnée moyenne est compatible avec une ordonnée à l'origine nulle. Les équations normales des moindres carrés imposent à la droite de régression de passer par le point moyen G. \emph{Renvoi : C2.}
+    \item \textbf{C} — Le premier point n'a aucun rôle privilégié dans la minimisation de la somme des carrés des résidus. Les équations normales des moindres carrés imposent à la droite de régression de passer par le point moyen G. \emph{Renvoi : C2.}
+    \item \textbf{D} — Les équations normales imposent au contraire le passage par un point déterminé du nuage, le point moyen. Les équations normales des moindres carrés imposent à la droite de régression de passer par le point moyen G. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — Une valeur absolue proche de 1 indique une forte liaison linéaire, pas une absence de lien. La valeur r=0,98, proche de 1, indique une forte liaison linéaire et donc un ajustement affine de bonne qualité. \emph{Renvoi : C2.}
+    \item \textbf{C} — Le coefficient mesure une association linéaire et ne permet pas d'identifier un mécanisme causal certain. La valeur r=0,98, proche de 1, indique une forte liaison linéaire et donc un ajustement affine de bonne qualité. \emph{Renvoi : C2.}
+    \item \textbf{D} — La valeur 0,98 appartient bien à [-1,1] et n'indique donc aucune erreur de calcul. La valeur r=0,98, proche de 1, indique une forte liaison linéaire et donc un ajustement affine de bonne qualité. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — Élever x et y au carré transforme la loi de puissance sans la rendre affine en général. Prendre les logarithmes donne ln(y)=ln(A)+b ln(x), relation affine entre X=ln(x) et Y=ln(y). \emph{Renvoi : C3.}
+    \item \textbf{C} — Prendre les inverses conserve une puissance non linéaire de X et ne sépare pas l'exposant b. Prendre les logarithmes donne ln(y)=ln(A)+b ln(x), relation affine entre X=ln(x) et Y=ln(y). \emph{Renvoi : C3.}
+    \item \textbf{D} — Le logarithme transforme effectivement le produit et la puissance en somme et coefficient, donc un changement est possible. Prendre les logarithmes donne ln(y)=ln(A)+b ln(x), relation affine entre X=ln(x) et Y=ln(y). \emph{Renvoi : C3.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — L'interpolation concerne une valeur située à l'intérieur de la plage des observations, contrairement à l'énoncé. Une estimation hors de l'intervalle couvert par les données observées est une extrapolation. \emph{Renvoi : C4.}
+    \item \textbf{C} — Calculer le point moyen résume le nuage mais ne produit pas l'estimation extérieure demandée. Une estimation hors de l'intervalle couvert par les données observées est une extrapolation. \emph{Renvoi : C4.}
+    \item \textbf{D} — Une extrapolation est calculable, même si sa fiabilité doit être discutée et décroît hors de la plage observée. Une estimation hors de l'intervalle couvert par les données observées est une extrapolation. \emph{Renvoi : C4.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
-    \item \textbf{A} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — Une variable cachée ou une causalité inverse peut produire la corrélation sans que X cause Y. Une corrélation, même forte, n'établit pas à elle seule un mécanisme causal entre les deux variables. \emph{Renvoi : C5.}
+    \item \textbf{C} — Le même coefficient est compatible avec X causant Y, Y causant X ou une cause commune ; il ne tranche pas. Une corrélation, même forte, n'établit pas à elle seule un mécanisme causal entre les deux variables. \emph{Renvoi : C5.}
+    \item \textbf{D} — Une corrélation peut refléter une relation réelle sans être causale et n'est donc pas toujours due au hasard. Une corrélation, même forte, n'établit pas à elle seule un mécanisme causal entre les deux variables. \emph{Renvoi : C5.}
   \end{itemize}
   \item \textbf{Q6}
   \begin{itemize}
-    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{B} — Une cause commune explique la variation conjointe sans rendre nécessaire une action directe de X sur Y. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y. \emph{Renvoi : C5.}
+    \item \textbf{C} — La corrélation observée peut être statistiquement réelle même si son interprétation causale directe est fausse. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y. \emph{Renvoi : C5.}
+    \item \textbf{D} — La variable cachée fournit précisément un mécanisme explicatif à l'association mesurée entre X et Y. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y. \emph{Renvoi : C5.}
   \end{itemize}
 \end{itemize}
 \fi

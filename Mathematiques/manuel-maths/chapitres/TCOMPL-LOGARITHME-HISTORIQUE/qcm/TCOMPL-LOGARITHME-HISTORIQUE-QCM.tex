@@ -19,6 +19,8 @@
     \item $\mathbb{R}^*$
   \end{enumerate}
 
+\item[] \textbf{Capacite C2}
+
 \item \textbf{[Q2]} Pour tous $a,b > 0$, $\ln(a \times b) =$
   \begin{enumerate}[label=\Alph*.]
     \item $\ln(a) + \ln(b)$
@@ -27,7 +29,7 @@
     \item $\ln(a) - \ln(b)$
   \end{enumerate}
 
-\item[] \textbf{Capacite C2}
+\item[] \textbf{Capacite C5}
 
 \item \textbf{[Q3]} La derivee de $f(x) = \ln(x)$ sur $]0, +\infty[$ est :
   \begin{enumerate}[label=\Alph*.]
@@ -36,6 +38,8 @@
     \item $\frac{1}{x}$
     \item $-\frac{1}{x^2}$
   \end{enumerate}
+
+\item[] \textbf{Capacite C1}
 
 \item \textbf{[Q4]} La limite de $\ln(x)$ quand $x \to 0^+$ est :
   \begin{enumerate}[label=\Alph*.]
@@ -47,7 +51,7 @@
 
 \item[] \textbf{Capacite C3}
 
-\item \textbf{[Q5]} Pour tout entier $n$, $\ln(a^n) =$
+\item \textbf{[Q5]} Pour $a>0$ et tout entier $n$, $\ln(a^n) =$
   \begin{enumerate}[label=\Alph*.]
     \item $\ln(a)^n$
     \item $n \ln(a)$
@@ -68,9 +72,9 @@
 Question & Capacite & Reponse exacte \\
 \hline
 Q1 & C1 & \textbf{B} \\
-Q2 & C1 & \textbf{A} \\
-Q3 & C2 & \textbf{C} \\
-Q4 & C2 & \textbf{D} \\
+Q2 & C2 & \textbf{A} \\
+Q3 & C5 & \textbf{C} \\
+Q4 & C1 & \textbf{D} \\
 Q5 & C3 & \textbf{B} \\
 \hline
 \end{tabular}
@@ -81,33 +85,33 @@ Q5 & C3 & \textbf{B} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — Les nombres negatifs n'ont pas de logarithme reel. \emph{Renvoi : C1.}
-    \item \textbf{C} — ln(0) n'est pas defini. \emph{Renvoi : C1.}
-    \item \textbf{D} — Exclusion des nombres strictement negatifs. \emph{Renvoi : C1.}
+    \item \textbf{A} — Les nombres negatifs n'ont pas de logarithme reel. Le logarithme népérien, réciproque de l'exponentielle, est défini exactement sur ]0,+infini[. \emph{Renvoi : C1.}
+    \item \textbf{C} — ln(0) n'est pas defini. Le logarithme népérien, réciproque de l'exponentielle, est défini exactement sur ]0,+infini[. \emph{Renvoi : C1.}
+    \item \textbf{D} — Exclusion des nombres strictement negatifs. Le logarithme népérien, réciproque de l'exponentielle, est défini exactement sur ]0,+infini[. \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{B} — Transformation du produit en somme, pas en produit. \emph{Renvoi : C1.}
-    \item \textbf{C} — ln ne conserve pas l'addition. \emph{Renvoi : C1.}
-    \item \textbf{D} — Formule du quotient. \emph{Renvoi : C1.}
+    \item \textbf{B} — Transformation du produit en somme, pas en produit. L'équation fonctionnelle donne ln(ab)=ln(a)+ln(b) pour a et b strictement positifs. \emph{Renvoi : C2.}
+    \item \textbf{C} — ln ne conserve pas l'addition. L'équation fonctionnelle donne ln(ab)=ln(a)+ln(b) pour a et b strictement positifs. \emph{Renvoi : C2.}
+    \item \textbf{D} — Formule du quotient. L'équation fonctionnelle donne ln(ab)=ln(a)+ln(b) pour a et b strictement positifs. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{A} — Derivee de l'exponentielle. \emph{Renvoi : C2.}
-    \item \textbf{B} — Pas de changement par derivation. \emph{Renvoi : C2.}
-    \item \textbf{D} — Derivee de 1/x. \emph{Renvoi : C2.}
+    \item \textbf{A} — Derivee de l'exponentielle. Sur ]0,+infini[, la dérivée du logarithme népérien est la fonction x vers 1/x. \emph{Renvoi : C5.}
+    \item \textbf{B} — Pas de changement par derivation. Sur ]0,+infini[, la dérivée du logarithme népérien est la fonction x vers 1/x. \emph{Renvoi : C5.}
+    \item \textbf{D} — Derivee de 1/x. Sur ]0,+infini[, la dérivée du logarithme népérien est la fonction x vers 1/x. \emph{Renvoi : C5.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{A} — ln(1) = 0, pas la limite en 0. \emph{Renvoi : C2.}
-    \item \textbf{B} — Valeur erronee. \emph{Renvoi : C2.}
-    \item \textbf{C} — Erreur de signe de l'infini. \emph{Renvoi : C2.}
+    \item \textbf{A} — ln(1) = 0, pas la limite en 0. Lorsque x tend vers 0 par valeurs positives, ln(x) décroît sans borne et tend vers -infini. \emph{Renvoi : C1.}
+    \item \textbf{B} — Valeur erronee. Lorsque x tend vers 0 par valeurs positives, ln(x) décroît sans borne et tend vers -infini. \emph{Renvoi : C1.}
+    \item \textbf{C} — Erreur de signe de l'infini. Lorsque x tend vers 0 par valeurs positives, ln(x) décroît sans borne et tend vers -infini. \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
-    \item \textbf{A} — Puissance a l'exterieur du logarithme. \emph{Renvoi : C3.}
-    \item \textbf{C} — Inverse du facteur. \emph{Renvoi : C3.}
-    \item \textbf{D} — Inversion de a et n. \emph{Renvoi : C3.}
+    \item \textbf{A} — Puissance a l'exterieur du logarithme. Pour a>0 et n entier, l'équation fonctionnelle itérée donne ln(a\textasciicircum{}n)=n ln(a). \emph{Renvoi : C3.}
+    \item \textbf{C} — Inverse du facteur. Pour a>0 et n entier, l'équation fonctionnelle itérée donne ln(a\textasciicircum{}n)=n ln(a). \emph{Renvoi : C3.}
+    \item \textbf{D} — Inversion de a et n. Pour a>0 et n entier, l'équation fonctionnelle itérée donne ln(a\textasciicircum{}n)=n ln(a). \emph{Renvoi : C3.}
   \end{itemize}
 \end{itemize}
 \fi
