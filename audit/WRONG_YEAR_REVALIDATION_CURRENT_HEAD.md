@@ -2,31 +2,23 @@
 
 Base d’intégration : `10cb5f07772842d6630d2a2f78531f6900371023`.
 
-## WRONG_YEAR #1
+## Deux cas historiques demandés
 
-- Candidate : `SRC-BO2026-TSPE-R2027`
-- Manuel : `TSPE`; chapitre : aucun
-- Source : `docs/programmes/PROGRAMMES_2026_2027.yaml`
-- Autorité candidate : `MENE2602919A`
-- Autorité correcte 2026-2027 : `MENE1921246A`
-- Contenu affecté : **NO**
-- Classification : `AUDIT_METADATA_ONLY`
-- État courant : déjà neutralisé; le texte 2026 est explicitement hors périmètre jusqu’en 2027-2028.
+1. `SRC-BO2026-TSPE-R2027` est neutralisé : `MENE2602919A` ne s'applique qu'en 2027-2028. L'autorité TSPE 2026-2027 reste `MENE1921246A`. Aucun contenu n'était dérivé du mauvais programme.
+2. L'alias A5 `MENE2602920A` est neutralisé : l'autorité TCOMPL 2026-2027 reste `MENE1921265A` et le futur NOR exact est `MENE2902920A`, applicable en 2027-2028. Aucun contenu n'était affecté.
 
-## WRONG_YEAR #2
+Classification des deux cas : `AUDIT_METADATA_ONLY`. Restant : 0.
 
-- Candidate : alias A5 `MENE2602920A`
-- Manuel : `TCOMPL`; chapitre : aucun
-- Source : `audit/OFFICIAL_PROGRAM_AUTHORITY_2026_2027.yaml`
-- Autorité candidate : `MENE2602920A`
-- Autorité correcte 2026-2027 : `MENE1921265A`; futur NOR exact `MENE2902920A`, applicable en 2027-2028
-- Contenu affecté : **NO**
-- Classification : `AUDIT_METADATA_ONLY`
-- État courant : déjà neutralisé; la matrice TCOMPL utilise le programme 2019.
+## Findings de portée résolus
 
-Les deux cas demandés sont donc fermés au HEAD courant sans correction de contenu.
+- Trigonométrie 1SPE C3/C4/C5 : ressources conservées exclusivement comme `OPTIONAL_EXTENSION`, label « Approfondissement — Vers la Terminale ».
+- Loi binomiale nommée en 1SPE : socle recentré sur les répétitions de Bernoulli pour `n <= 4`; formalisation binomiale conservée comme `OPTIONAL_EXTENSION` avec le même label.
+- Mutabilité 1NSI : conservée comme `METHODOLOGY`, non comme atom officiel autonome.
 
-## Findings réglementaires distincts encore ouverts
+Les lignes correspondantes restent traçables dans les matrices avec `AUDIT_METADATA_ONLY` et sont exclues du registre des atoms officiels.
 
-- `1SPE-TRIGONOMETRIE-C3/C4/C5` : trois lignes `WRONG_YEAR`, avec contenu encore présent dans des méthodes, exercices et évaluations. Classification `CONTENT_DERIVED_FROM_WRONG_PROGRAMME`, décision humaine requise entre retrait et approfondissement explicitement non exigible.
-- `1SPE-VARIABLES-ALEATOIRES-C3/C4` : deux lignes `UNSUPPORTED_CLAIM` relatives à la loi binomiale, absente comme notion nommée du programme 1SPE 2026. Décision éditoriale humaine requise.
+## Compteurs
+
+- `wrong_year = 0`
+- `unsupported_claim = 0`
+- décision humaine restante pour ces arbitrages : 0

@@ -1006,7 +1006,7 @@
     "mandatory": false,
     "chapter": "1SPE-TRIGONOMETRIE",
     "contract_capacity": "1SPE-TRIGONOMETRIE-C3",
-    "coverage_status": "WRONG_YEAR",
+    "coverage_status": "AUDIT_METADATA_ONLY",
     "evidence_paths": {
       "course_sources": [],
       "method_sources": null,
@@ -1014,7 +1014,7 @@
       "assessment_sources": null,
       "remediation_sources": null
     },
-    "notes": "TROUVAILLE : referentiel/capacites_1SPE_TRIGONOMETRIE.json liste encore 1SPE-TRIGONOMETRIE-C3 comme capacité BO. Absent du texte BO2026 (MENE2602917A) — ces contenus sont retirés du programme 1SPE 2026 et déplacés au programme Terminale 2027 (backlog_tspe_v2), confirmé par audit/../CONFORMITE_BO2026.md (E5/E6/E7) et par l'absence physique des fichiers cours/12_C3*, 13_C4*, 14_C5* dans le chapitre (seuls 10_C1 et 11_C2 existent). Le référentiel JSON (source de vérité protégée, non modifié dans ce lot sans instruction explicite) est donc en dérive par rapport au contenu réel et au programme applicable : à corriger (retirer C3/C4/C5 du référentiel local) dans un lot dédié, avec instruction explicite conformément à Mathematiques/manuel-maths/CLAUDE.md.",
+    "notes": "RÉSOLU AU HEAD COURANT : absent de MENE2602917A et non exigible en Première. Le référentiel et le contrat canoniques ne contiennent plus C3 ; les ressources conservées portent X1, programme_alignment=OPTIONAL_EXTENSION et le label éditorial « Approfondissement — Vers la Terminale ». Cette ligne est une trace d'audit interne, pas un atom officiel.",
     "row_id": "1SPE-MATRIX-043"
   },
   {
@@ -1028,7 +1028,7 @@
     "mandatory": false,
     "chapter": "1SPE-TRIGONOMETRIE",
     "contract_capacity": "1SPE-TRIGONOMETRIE-C4",
-    "coverage_status": "WRONG_YEAR",
+    "coverage_status": "AUDIT_METADATA_ONLY",
     "evidence_paths": {
       "course_sources": [],
       "method_sources": null,
@@ -1036,7 +1036,7 @@
       "assessment_sources": null,
       "remediation_sources": null
     },
-    "notes": "TROUVAILLE : referentiel/capacites_1SPE_TRIGONOMETRIE.json liste encore 1SPE-TRIGONOMETRIE-C4 comme capacité BO. Absent du texte BO2026 (MENE2602917A) — ces contenus sont retirés du programme 1SPE 2026 et déplacés au programme Terminale 2027 (backlog_tspe_v2), confirmé par audit/../CONFORMITE_BO2026.md (E5/E6/E7) et par l'absence physique des fichiers cours/12_C3*, 13_C4*, 14_C5* dans le chapitre (seuls 10_C1 et 11_C2 existent). Le référentiel JSON (source de vérité protégée, non modifié dans ce lot sans instruction explicite) est donc en dérive par rapport au contenu réel et au programme applicable : à corriger (retirer C3/C4/C5 du référentiel local) dans un lot dédié, avec instruction explicite conformément à Mathematiques/manuel-maths/CLAUDE.md.",
+    "notes": "RÉSOLU AU HEAD COURANT : absent de MENE2602917A et non exigible en Première. Le référentiel et le contrat canoniques ne contiennent plus C4 ; les ressources conservées portent X2, programme_alignment=OPTIONAL_EXTENSION et le label éditorial « Approfondissement — Vers la Terminale ». Cette ligne est une trace d'audit interne, pas un atom officiel.",
     "row_id": "1SPE-MATRIX-044"
   },
   {
@@ -1050,7 +1050,7 @@
     "mandatory": false,
     "chapter": "1SPE-TRIGONOMETRIE",
     "contract_capacity": "1SPE-TRIGONOMETRIE-C5",
-    "coverage_status": "WRONG_YEAR",
+    "coverage_status": "AUDIT_METADATA_ONLY",
     "evidence_paths": {
       "course_sources": [],
       "method_sources": null,
@@ -1058,7 +1058,7 @@
       "assessment_sources": null,
       "remediation_sources": null
     },
-    "notes": "TROUVAILLE : referentiel/capacites_1SPE_TRIGONOMETRIE.json liste encore 1SPE-TRIGONOMETRIE-C5 comme capacité BO. Absent du texte BO2026 (MENE2602917A) — ces contenus sont retirés du programme 1SPE 2026 et déplacés au programme Terminale 2027 (backlog_tspe_v2), confirmé par audit/../CONFORMITE_BO2026.md (E5/E6/E7) et par l'absence physique des fichiers cours/12_C3*, 13_C4*, 14_C5* dans le chapitre (seuls 10_C1 et 11_C2 existent). Le référentiel JSON (source de vérité protégée, non modifié dans ce lot sans instruction explicite) est donc en dérive par rapport au contenu réel et au programme applicable : à corriger (retirer C3/C4/C5 du référentiel local) dans un lot dédié, avec instruction explicite conformément à Mathematiques/manuel-maths/CLAUDE.md.",
+    "notes": "RÉSOLU AU HEAD COURANT : absent de MENE2602917A et non exigible en Première. Le référentiel et le contrat canoniques ne contiennent plus C5 ; les ressources conservées portent X3, programme_alignment=OPTIONAL_EXTENSION et le label éditorial « Approfondissement — Vers la Terminale ». Cette ligne est une trace d'audit interne, pas un atom officiel.",
     "row_id": "1SPE-MATRIX-045"
   },
   {
@@ -1618,7 +1618,7 @@
     "mandatory": false,
     "chapter": "1SPE-VARIABLES-ALEATOIRES",
     "contract_capacity": "1SPE-VARIABLES-ALEATOIRES-C3",
-    "coverage_status": "UNSUPPORTED_CLAIM",
+    "coverage_status": "AUDIT_METADATA_ONLY",
     "evidence_paths": {
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/12_C3_bernoulli_binomiale.tex",
@@ -1629,7 +1629,7 @@
       "assessment_sources": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/",
       "remediation_sources": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/remediation/"
     },
-    "notes": "TROUVAILLE MAJEURE : referentiel/capacites_1SPE_VARIABLES_ALEATOIRES.json affirme que 1SPE-VARIABLES-ALEATOIRES-C3 cite le BO ('libelle_bo') pour la loi binomiale. Le mot 'binomiale' n'apparaît NULLE PART dans le texte officiel MENE2602917A (grep exhaustif sur le texte déposé et empreinté, 0 occurrence). Le programme 2026 mentionne seulement, dans la section Probabilités conditionnelles, 'pour n<=4, répétition de n épreuves de Bernoulli' (PROBA-COND-C5) — sans jamais formaliser ni nommer une 'loi binomiale', ni ses formules d'espérance/variance. Du contenu substantiel existe pourtant : cours/12_C3_bernoulli_binomiale.tex et cours/13_C4_esperance_binomiale.tex (status META actuel: 'generated', donc déjà non approuvé), plus exercices, corrigés, remédiation (remediation/1SPE-VARALEA-RE-C3.tex), validations sympy/similarity. CONFORMITE_BO2026.md n'a PAS détecté cet écart (a validé le chapitre 'CONFORME' sur C1/C2 sans vérifier que C3/C4 sont réellement fondés sur le BO). Aucun contenu supprimé dans ce lot : décision éditoriale réelle nécessaire (reclassifier en \\approfondissement explicite, déplacer en backlog comme pour TRIGONOMETRIE C3-C5, ou conserver tel quel avec justification) — HUMAN GATE, pas une correction mécanique.",
+    "notes": "RÉSOLU AU HEAD COURANT : MENE2602917A exige pour n <= 4 la répétition d'épreuves de Bernoulli indépendantes et identiques, mais ne nomme pas la loi binomiale. Le socle C3 a été réécrit en arbres et nombre de succès ; la formalisation binomiale conservée porte X1, programme_alignment=OPTIONAL_EXTENSION et le label « Approfondissement — Vers la Terminale ». Cette ligne est une trace d'audit interne, pas un atom officiel.",
     "row_id": "1SPE-MATRIX-069"
   },
   {
@@ -1643,7 +1643,7 @@
     "mandatory": false,
     "chapter": "1SPE-VARIABLES-ALEATOIRES",
     "contract_capacity": "1SPE-VARIABLES-ALEATOIRES-C4",
-    "coverage_status": "UNSUPPORTED_CLAIM",
+    "coverage_status": "AUDIT_METADATA_ONLY",
     "evidence_paths": {
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/12_C3_bernoulli_binomiale.tex",
@@ -1654,7 +1654,7 @@
       "assessment_sources": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/",
       "remediation_sources": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/remediation/"
     },
-    "notes": "TROUVAILLE MAJEURE : referentiel/capacites_1SPE_VARIABLES_ALEATOIRES.json affirme que 1SPE-VARIABLES-ALEATOIRES-C4 cite le BO ('libelle_bo') pour la loi binomiale. Le mot 'binomiale' n'apparaît NULLE PART dans le texte officiel MENE2602917A (grep exhaustif sur le texte déposé et empreinté, 0 occurrence). Le programme 2026 mentionne seulement, dans la section Probabilités conditionnelles, 'pour n<=4, répétition de n épreuves de Bernoulli' (PROBA-COND-C5) — sans jamais formaliser ni nommer une 'loi binomiale', ni ses formules d'espérance/variance. Du contenu substantiel existe pourtant : cours/12_C3_bernoulli_binomiale.tex et cours/13_C4_esperance_binomiale.tex (status META actuel: 'generated', donc déjà non approuvé), plus exercices, corrigés, remédiation (remediation/1SPE-VARALEA-RE-C3.tex), validations sympy/similarity. CONFORMITE_BO2026.md n'a PAS détecté cet écart (a validé le chapitre 'CONFORME' sur C1/C2 sans vérifier que C3/C4 sont réellement fondés sur le BO). Aucun contenu supprimé dans ce lot : décision éditoriale réelle nécessaire (reclassifier en \\approfondissement explicite, déplacer en backlog comme pour TRIGONOMETRIE C3-C5, ou conserver tel quel avec justification) — HUMAN GATE, pas une correction mécanique.",
+    "notes": "RÉSOLU AU HEAD COURANT : les formules E(X)=np et V(X)=np(1-p) pour une loi binomiale nommée ne sont pas exigibles par MENE2602917A. Le socle C4 traite désormais la transformation affine aX+b ; les formules binomiales conservées portent X2, programme_alignment=OPTIONAL_EXTENSION et le label « Approfondissement — Vers la Terminale ». Cette ligne est une trace d'audit interne, pas un atom officiel.",
     "row_id": "1SPE-MATRIX-070"
   },
   {
