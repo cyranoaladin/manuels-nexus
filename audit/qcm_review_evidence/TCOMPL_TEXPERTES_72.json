@@ -1,0 +1,3986 @@
+{
+  "artifact": "TCOMPL_TEXPERTES_QCM_INDEPENDENT_REVIEW_HANDOFF",
+  "schema_version": "1.0",
+  "source_commit": "c51ca5ddc28e2d0a33692ff4119501c7ed4e4e44",
+  "scope": {
+    "total_questions": 72,
+    "TCOMPL": 47,
+    "TEXPERTES": 25,
+    "independently_recalculated": 72,
+    "answer_keys_pass": 72,
+    "unique_answer_pass": 72,
+    "diagnostic_causal_consistency_pass": 72,
+    "programme_alignment_pass": 72,
+    "wrong_answer_key": 0,
+    "multiple_correct_options": 0,
+    "no_correct_option": 0,
+    "no_unique_answer": 0,
+    "invalid_diagnostic": 0,
+    "generic_diagnostic_unjustified": 0,
+    "wrong_capacity": 0,
+    "wrong_programme_year": 0,
+    "student_teacher_visibility_failures": 0
+  },
+  "questions": [
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CALCULS-AIRES",
+      "question_id": "Q1",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/qcm/TCOMPL-CALCULS-AIRES-QCM.json",
+      "source_sha256": "df12ec1e0f59e64e22d321de074037debe72bb58794be74b83dfebed385c8b1f",
+      "capacity": "C5",
+      "capacity_contract_wording": "Je sais démontrer que deux primitives d'une même fonction continue sur un intervalle diffèrent d'une constante.",
+      "statement": "Deux primitives d'une meme fonction continue sur un intervalle different :",
+      "options": {
+        "A": "d'un facteur multiplicatif.",
+        "B": "d'une constante additive.",
+        "C": "toujours de 1.",
+        "D": "elles sont necessairement egales."
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Comme (F-G)'=f-f=0 sur l'intervalle, deux primitives diffèrent d'une constante additive.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Un facteur multiplicatif changerait la dérivée, sauf cas particulier, et ne conserve donc pas la même fonction dérivée. Comme (F-G)'=f-f=0 sur l'intervalle, deux primitives diffèrent d'une constante additive.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "C",
+          "error_model": "La constante de différence peut être n'importe quel réel et n'est pas toujours égale à 1. Comme (F-G)'=f-f=0 sur l'intervalle, deux primitives diffèrent d'une constante additive.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "D",
+          "error_model": "Deux primitives peuvent avoir des constantes d'intégration différentes et ne sont donc pas nécessairement égales. Comme (F-G)'=f-f=0 sur l'intervalle, deux primitives diffèrent d'une constante additive.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CALCULS-AIRES",
+      "question_id": "Q2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/qcm/TCOMPL-CALCULS-AIRES-QCM.json",
+      "source_sha256": "df12ec1e0f59e64e22d321de074037debe72bb58794be74b83dfebed385c8b1f",
+      "capacity": "C4",
+      "capacity_contract_wording": "Je sais déterminer les primitives d'une fonction en reconnaissant une forme usuelle.",
+      "statement": "Une primitive de u'/u (avec u>0) est :",
+      "options": {
+        "A": "u^2",
+        "B": "ln(u)",
+        "C": "e^u",
+        "D": "1/u"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "La formule (ln u)'=u'/u pour u>0 montre qu'une primitive de u'/u est ln(u).",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "La dérivée de $u^2$ vaut $2uu'$ et ne produit pas le quotient $u'/u$. La formule (ln u)'=u'/u pour u>0 montre qu'une primitive de u'/u est ln(u).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "C",
+          "error_model": "La dérivée de $e^u$ vaut $u'e^u$, pas $u'/u$. La formule (ln u)'=u'/u pour u>0 montre qu'une primitive de u'/u est ln(u).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "D",
+          "error_model": "La dérivée de $1/u$ vaut $-u'/u^2$, avec un signe et une puissance de dénominateur différents. La formule (ln u)'=u'/u pour u>0 montre qu'une primitive de u'/u est ln(u).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CALCULS-AIRES",
+      "question_id": "Q3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/qcm/TCOMPL-CALCULS-AIRES-QCM.json",
+      "source_sha256": "df12ec1e0f59e64e22d321de074037debe72bb58794be74b83dfebed385c8b1f",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais définir l'intégrale d'une fonction continue positive comme aire sous la courbe, et utiliser la relation de Chasles.",
+      "statement": "Pour f continue et positive sur [a,b], l'integrale de f de a a b represente :",
+      "options": {
+        "A": "la pente de la tangente a la courbe.",
+        "B": "l'aire sous la courbe entre a et b.",
+        "C": "la valeur de f en b moins celle en a.",
+        "D": "toujours un nombre negatif."
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Pour f continue positive, l'intégrale entre a et b représente l'aire sous la courbe sur cet intervalle.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "La pente d'une tangente est une dérivée ponctuelle et non une accumulation sur tout l'intervalle. Pour f continue positive, l'intégrale entre a et b représente l'aire sous la courbe sur cet intervalle.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "La différence $f(b)-f(a)$ compare deux valeurs de la fonction et non l'aire accumulée sous sa courbe. Pour f continue positive, l'intégrale entre a et b représente l'aire sous la courbe sur cet intervalle.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "La positivité de f rend au contraire son intégrale positive ou nulle. Pour f continue positive, l'intégrale entre a et b représente l'aire sous la courbe sur cet intervalle.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CALCULS-AIRES",
+      "question_id": "Q4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/qcm/TCOMPL-CALCULS-AIRES-QCM.json",
+      "source_sha256": "df12ec1e0f59e64e22d321de074037debe72bb58794be74b83dfebed385c8b1f",
+      "capacity": "C3",
+      "capacity_contract_wording": "Je sais calculer une intégrale, une valeur moyenne, une aire sous une courbe ou entre deux courbes.",
+      "statement": "Si F est une primitive de f, alors l'integrale de a a b de f(x)dx vaut :",
+      "options": {
+        "A": "F(a)-F(b)",
+        "B": "F(b)-F(a)",
+        "C": "F(a)+F(b)",
+        "D": "F(b)*F(a)"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Le théorème fondamental donne directement l'intégrale de f entre a et b égale à F(b)-F(a).",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Cette différence inverse les bornes et donne l'opposé de l'intégrale demandée. Le théorème fondamental donne directement l'intégrale de f entre a et b égale à F(b)-F(a).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "C",
+          "error_model": "Le théorème fondamental utilise une différence des valeurs de la primitive et non leur somme. Le théorème fondamental donne directement l'intégrale de f entre a et b égale à F(b)-F(a).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "D",
+          "error_model": "Aucun produit des valeurs de la primitive n'intervient dans le calcul d'une intégrale définie. Le théorème fondamental donne directement l'intégrale de f entre a et b égale à F(b)-F(a).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CALCULS-AIRES",
+      "question_id": "Q5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/qcm/TCOMPL-CALCULS-AIRES-QCM.json",
+      "source_sha256": "df12ec1e0f59e64e22d321de074037debe72bb58794be74b83dfebed385c8b1f",
+      "capacity": "C2",
+      "capacity_contract_wording": "Je sais estimer graphiquement ou encadrer une intégrale ou une valeur moyenne.",
+      "statement": "Pour une fonction croissante, la methode des rectangles a gauche donne :",
+      "options": {
+        "A": "un majorant de l'integrale.",
+        "B": "un minorant de l'integrale.",
+        "C": "la valeur exacte de l'integrale.",
+        "D": "une valeur negative."
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Pour une fonction croissante, chaque hauteur prise à gauche est inférieure aux valeurs suivantes : la somme est un minorant.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Pour une fonction croissante, la hauteur gauche est plus petite que les valeurs prises ensuite sur chaque sous-intervalle. Pour une fonction croissante, chaque hauteur prise à gauche est inférieure aux valeurs suivantes : la somme est un minorant.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "C",
+          "error_model": "Les rectangles ne donnent la valeur exacte que dans des cas particuliers, par exemple pour une fonction constante. Pour une fonction croissante, chaque hauteur prise à gauche est inférieure aux valeurs suivantes : la somme est un minorant.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "D",
+          "error_model": "Une fonction croissante peut être positive ou négative ; la méthode n'impose pas le signe de la somme obtenue. Pour une fonction croissante, chaque hauteur prise à gauche est inférieure aux valeurs suivantes : la somme est un minorant.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CALCULS-AIRES",
+      "question_id": "Q6",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/qcm/TCOMPL-CALCULS-AIRES-QCM.json",
+      "source_sha256": "df12ec1e0f59e64e22d321de074037debe72bb58794be74b83dfebed385c8b1f",
+      "capacity": "C6",
+      "capacity_contract_wording": "Je sais démontrer que la fonction intégrale $F(x)=\\int_a^x f(t)\\,dt$ a pour dérivée $f$, lorsque $f$ est continue, positive et croissante.",
+      "statement": "Pour f continue, positive et croissante, la fonction F(x)=integrale de a a x de f(t)dt verifie :",
+      "options": {
+        "A": "F'=f",
+        "B": "F=f'",
+        "C": "F est constante.",
+        "D": "F n'est pas derivee."
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "Le théorème de la fonction intégrale donne F'(x)=f(x) lorsque f est continue sur l'intervalle.",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "L'égalité F=f' échange la fonction intégrale et la dérivée de l'intégrande sans justification. Le théorème de la fonction intégrale donne F'(x)=f(x) lorsque f est continue sur l'intervalle.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C6"
+        },
+        {
+          "option": "C",
+          "error_model": "Comme F'=f et que f est positive, F est croissante plutôt que constante sauf si f est nulle. Le théorème de la fonction intégrale donne F'(x)=f(x) lorsque f est continue sur l'intervalle.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C6"
+        },
+        {
+          "option": "D",
+          "error_model": "La continuité de f est précisément l'hypothèse qui garantit la dérivabilité de la fonction intégrale. Le théorème de la fonction intégrale donne F'(x)=f(x) lorsque f est continue sur l'intervalle.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C6"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CORRELATION-CAUSALITE",
+      "question_id": "Q1",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/qcm/TCOMPL-CORRELATION-CAUSALITE-QCM.json",
+      "source_sha256": "90f28ecd1f981c9c8403fb0ec3cd5271230fdbf30368c231f8fcb281ca063b16",
+      "capacity": "C2",
+      "capacity_contract_wording": "Je sais déterminer la droite des moindres carrés d'un ajustement affine et calculer un coefficient de corrélation.",
+      "statement": "La droite des moindres carres passe toujours par :",
+      "options": {
+        "A": "l'origine du repere.",
+        "B": "le point moyen G.",
+        "C": "le premier point du nuage.",
+        "D": "aucun point particulier."
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Les équations normales des moindres carrés imposent à la droite de régression de passer par le point moyen G.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "La droite ne passe par l'origine que si l'ordonnée moyenne est compatible avec une ordonnée à l'origine nulle. Les équations normales des moindres carrés imposent à la droite de régression de passer par le point moyen G.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "C",
+          "error_model": "Le premier point n'a aucun rôle privilégié dans la minimisation de la somme des carrés des résidus. Les équations normales des moindres carrés imposent à la droite de régression de passer par le point moyen G.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "D",
+          "error_model": "Les équations normales imposent au contraire le passage par un point déterminé du nuage, le point moyen. Les équations normales des moindres carrés imposent à la droite de régression de passer par le point moyen G.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CORRELATION-CAUSALITE",
+      "question_id": "Q2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/qcm/TCOMPL-CORRELATION-CAUSALITE-QCM.json",
+      "source_sha256": "90f28ecd1f981c9c8403fb0ec3cd5271230fdbf30368c231f8fcb281ca063b16",
+      "capacity": "C2",
+      "capacity_contract_wording": "Je sais déterminer la droite des moindres carrés d'un ajustement affine et calculer un coefficient de corrélation.",
+      "statement": "Un coefficient de correlation r=0,98 indique :",
+      "options": {
+        "A": "une absence totale de lien.",
+        "B": "un ajustement affine de bonne qualite.",
+        "C": "une relation de causalite certaine.",
+        "D": "une erreur de calcul."
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "La valeur r=0,98, proche de 1, indique une forte liaison linéaire et donc un ajustement affine de bonne qualité.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Une valeur absolue proche de 1 indique une forte liaison linéaire, pas une absence de lien. La valeur r=0,98, proche de 1, indique une forte liaison linéaire et donc un ajustement affine de bonne qualité.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "C",
+          "error_model": "Le coefficient mesure une association linéaire et ne permet pas d'identifier un mécanisme causal certain. La valeur r=0,98, proche de 1, indique une forte liaison linéaire et donc un ajustement affine de bonne qualité.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "D",
+          "error_model": "La valeur 0,98 appartient bien à [-1,1] et n'indique donc aucune erreur de calcul. La valeur r=0,98, proche de 1, indique une forte liaison linéaire et donc un ajustement affine de bonne qualité.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CORRELATION-CAUSALITE",
+      "question_id": "Q3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/qcm/TCOMPL-CORRELATION-CAUSALITE-QCM.json",
+      "source_sha256": "90f28ecd1f981c9c8403fb0ec3cd5271230fdbf30368c231f8fcb281ca063b16",
+      "capacity": "C3",
+      "capacity_contract_wording": "Je sais me ramener à un ajustement affine par changement de variable.",
+      "statement": "Pour lineariser une relation $y=Ax^b$ avec $A>0$ et $x>0$, on pose :",
+      "options": {
+        "A": "X = x^2, Y = y^2",
+        "B": "X = ln(x), Y = ln(y)",
+        "C": "X = 1/x, Y = 1/y",
+        "D": "Aucun changement n'est possible."
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Prendre les logarithmes donne ln(y)=ln(A)+b ln(x), relation affine entre X=ln(x) et Y=ln(y).",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Élever x et y au carré transforme la loi de puissance sans la rendre affine en général. Prendre les logarithmes donne ln(y)=ln(A)+b ln(x), relation affine entre X=ln(x) et Y=ln(y).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "C",
+          "error_model": "Prendre les inverses conserve une puissance non linéaire de X et ne sépare pas l'exposant b. Prendre les logarithmes donne ln(y)=ln(A)+b ln(x), relation affine entre X=ln(x) et Y=ln(y).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "D",
+          "error_model": "Le logarithme transforme effectivement le produit et la puissance en somme et coefficient, donc un changement est possible. Prendre les logarithmes donne ln(y)=ln(A)+b ln(x), relation affine entre X=ln(x) et Y=ln(y).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CORRELATION-CAUSALITE",
+      "question_id": "Q4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/qcm/TCOMPL-CORRELATION-CAUSALITE-QCM.json",
+      "source_sha256": "90f28ecd1f981c9c8403fb0ec3cd5271230fdbf30368c231f8fcb281ca063b16",
+      "capacity": "C4",
+      "capacity_contract_wording": "Je sais utiliser un ajustement affine pour interpoler ou extrapoler une valeur, avec un regard critique sur la validité de l'extrapolation.",
+      "statement": "Estimer une valeur en dehors de la plage des donnees observees, c'est :",
+      "options": {
+        "A": "interpoler.",
+        "B": "extrapoler.",
+        "C": "calculer le point moyen.",
+        "D": "impossible."
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Une estimation hors de l'intervalle couvert par les données observées est une extrapolation.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "L'interpolation concerne une valeur située à l'intérieur de la plage des observations, contrairement à l'énoncé. Une estimation hors de l'intervalle couvert par les données observées est une extrapolation.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "C",
+          "error_model": "Calculer le point moyen résume le nuage mais ne produit pas l'estimation extérieure demandée. Une estimation hors de l'intervalle couvert par les données observées est une extrapolation.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "D",
+          "error_model": "Une extrapolation est calculable, même si sa fiabilité doit être discutée et décroît hors de la plage observée. Une estimation hors de l'intervalle couvert par les données observées est une extrapolation.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CORRELATION-CAUSALITE",
+      "question_id": "Q5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/qcm/TCOMPL-CORRELATION-CAUSALITE-QCM.json",
+      "source_sha256": "90f28ecd1f981c9c8403fb0ec3cd5271230fdbf30368c231f8fcb281ca063b16",
+      "capacity": "C5",
+      "capacity_contract_wording": "Je sais expliquer pourquoi une forte corrélation entre deux variables ne prouve pas une relation de cause à effet.",
+      "statement": "Une forte correlation entre deux variables X et Y :",
+      "options": {
+        "A": "prouve toujours que X cause Y.",
+        "B": "ne prouve pas, seule, une relation de cause a effet.",
+        "C": "prouve que Y cause X.",
+        "D": "est toujours due au hasard."
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Une corrélation, même forte, n'établit pas à elle seule un mécanisme causal entre les deux variables.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Une variable cachée ou une causalité inverse peut produire la corrélation sans que X cause Y. Une corrélation, même forte, n'établit pas à elle seule un mécanisme causal entre les deux variables.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "C",
+          "error_model": "Le même coefficient est compatible avec X causant Y, Y causant X ou une cause commune ; il ne tranche pas. Une corrélation, même forte, n'établit pas à elle seule un mécanisme causal entre les deux variables.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "D",
+          "error_model": "Une corrélation peut refléter une relation réelle sans être causale et n'est donc pas toujours due au hasard. Une corrélation, même forte, n'établit pas à elle seule un mécanisme causal entre les deux variables.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CORRELATION-CAUSALITE",
+      "question_id": "Q6",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/qcm/TCOMPL-CORRELATION-CAUSALITE-QCM.json",
+      "source_sha256": "90f28ecd1f981c9c8403fb0ec3cd5271230fdbf30368c231f8fcb281ca063b16",
+      "capacity": "C5",
+      "capacity_contract_wording": "Je sais expliquer pourquoi une forte corrélation entre deux variables ne prouve pas une relation de cause à effet.",
+      "statement": "Une variable cachee Z qui cause a la fois X et Y peut expliquer :",
+      "options": {
+        "A": "une correlation entre X et Y sans lien de causalite direct entre elles.",
+        "B": "que X cause necessairement Y.",
+        "C": "que la correlation entre X et Y est fausse.",
+        "D": "rien du tout."
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y.",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "Une cause commune explique la variation conjointe sans rendre nécessaire une action directe de X sur Y. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "C",
+          "error_model": "La corrélation observée peut être statistiquement réelle même si son interprétation causale directe est fausse. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "D",
+          "error_model": "La variable cachée fournit précisément un mécanisme explicatif à l'association mesurée entre X et Y. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "question_id": "Q1",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/qcm/TCOMPL-ECHANTILLONNAGE-QCM.json",
+      "source_sha256": "2e5e72553ce7ae839731e12c02dcc621b3b367cbd3e6921e08da154dcb894db9",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais identifier une situation où une variable aléatoire suit une loi de Bernoulli ou une loi binomiale.",
+      "statement": "Le nombre $X$ de succes dans $n$ repetitions independantes d'une meme epreuve de probabilite de succes $p$ suit :",
+      "options": {
+        "A": "une loi uniforme",
+        "B": "la loi binomiale $\\mathcal B(n,p)$",
+        "C": "une loi exponentielle",
+        "D": "une loi normale dans tous les cas"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Le nombre de succès dans n répétitions indépendantes de même probabilité p suit la loi binomiale B(n,p).",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Une loi uniforme attribuerait la même probabilité à toutes les valeurs, ce que le nombre de succès ne fait pas. Le nombre de succès dans n répétitions indépendantes de même probabilité p suit la loi binomiale B(n,p).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "La loi exponentielle modélise un temps d'attente continu, pas un nombre discret de succès. Le nombre de succès dans n répétitions indépendantes de même probabilité p suit la loi binomiale B(n,p).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Une approximation normale peut parfois être utilisée, mais elle n'est ni exacte ni valable dans tous les cas. Le nombre de succès dans n répétitions indépendantes de même probabilité p suit la loi binomiale B(n,p).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "question_id": "Q2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/qcm/TCOMPL-ECHANTILLONNAGE-QCM.json",
+      "source_sha256": "2e5e72553ce7ae839731e12c02dcc621b3b367cbd3e6921e08da154dcb894db9",
+      "capacity": "C2",
+      "capacity_contract_wording": "Je sais déterminer des coefficients binomiaux à l'aide du triangle de Pascal.",
+      "statement": "Quelle relation du triangle de Pascal permet de calculer $\\binom{n}{k}$ ?",
+      "options": {
+        "A": "$\\binom{n}{k}=\\binom{n-1}{k-1}-\\binom{n-1}{k}$",
+        "B": "$\\binom{n}{k}=n^k$",
+        "C": "$\\binom{n}{k}=\\binom{n-1}{k-1}+\\binom{n-1}{k}$",
+        "D": "$\\binom{n}{k}=\\binom{k}{n}$"
+      },
+      "declared_answer_current_source": "C",
+      "independent_solution": "La relation de Pascal est C(n,k)=C(n-1,k-1)+C(n-1,k), obtenue selon que l'élément distingué est choisi ou non.",
+      "correct_answer": "C",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Les deux classes disjointes se réunissent par addition et non par soustraction. La relation de Pascal est C(n,k)=C(n-1,k-1)+C(n-1,k), obtenue selon que l'élément distingué est choisi ou non.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "B",
+          "error_model": "La puissance $n^k$ compte des listes ordonnées avec répétition, pas des sous-ensembles de taille $k$. La relation de Pascal est C(n,k)=C(n-1,k-1)+C(n-1,k), obtenue selon que l'élément distingué est choisi ou non.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "D",
+          "error_model": "Inverser $n$ et $k$ rend généralement le coefficient nul ou non défini et ne traduit pas la relation de Pascal. La relation de Pascal est C(n,k)=C(n-1,k-1)+C(n-1,k), obtenue selon que l'élément distingué est choisi ou non.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "question_id": "Q3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/qcm/TCOMPL-ECHANTILLONNAGE-QCM.json",
+      "source_sha256": "2e5e72553ce7ae839731e12c02dcc621b3b367cbd3e6921e08da154dcb894db9",
+      "capacity": "C3",
+      "capacity_contract_wording": "Je sais calculer, à la calculatrice ou en Python, des probabilités P(X=k) ou P(X≤k) pour X suivant une loi binomiale.",
+      "statement": "Si $X$ suit $\\mathcal B(3,1/2)$, alors $P(X=2)$ vaut :",
+      "options": {
+        "A": "$1/8$",
+        "B": "$3/8$",
+        "C": "$1/2$",
+        "D": "$3/4$"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Pour X suivant B(3,1/2), P(X=2)=C(3,2)(1/2)^2(1/2)=3/8.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "La valeur $1/8$ est la probabilité d'une configuration précise de deux succès et oublie les trois positions possibles. Pour X suivant B(3,1/2), P(X=2)=C(3,2)(1/2)^2(1/2)=3/8.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "C",
+          "error_model": "La valeur $1/2$ ne résulte pas de la formule binomiale et confond le paramètre $p$ avec la probabilité de deux succès. Pour X suivant B(3,1/2), P(X=2)=C(3,2)(1/2)^2(1/2)=3/8.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "D",
+          "error_model": "La valeur $3/4$ oublie le facteur $(1/2)^3$ associé aux trois résultats de chaque configuration. Pour X suivant B(3,1/2), P(X=2)=C(3,2)(1/2)^2(1/2)=3/8.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "question_id": "Q4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/qcm/TCOMPL-ECHANTILLONNAGE-QCM.json",
+      "source_sha256": "2e5e72553ce7ae839731e12c02dcc621b3b367cbd3e6921e08da154dcb894db9",
+      "capacity": "C4",
+      "capacity_contract_wording": "Je sais déterminer un intervalle de fluctuation I tel que P(X∈I) ≥ 1-α pour X suivant une loi binomiale.",
+      "statement": "Si $X$ suit $\\mathcal B(4,1/2)$, alors $P(1\\leq X\\leq3)$ vaut :",
+      "options": {
+        "A": "$1/4$",
+        "B": "$1/2$",
+        "C": "$3/4$",
+        "D": "$7/8$"
+      },
+      "declared_answer_current_source": "D",
+      "independent_solution": "Pour X suivant B(4,1/2), P(1<=X<=3)=(4+6+4)/16=14/16=7/8.",
+      "correct_answer": "D",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "La valeur $1/4$ ne somme pas les probabilités des trois valeurs 1, 2 et 3 de l'intervalle. Pour X suivant B(4,1/2), P(1<=X<=3)=(4+6+4)/16=14/16=7/8.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "B",
+          "error_model": "La valeur $1/2$ ne tient compte que du coefficient central et omet les cas $X=1$ et $X=3$. Pour X suivant B(4,1/2), P(1<=X<=3)=(4+6+4)/16=14/16=7/8.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "C",
+          "error_model": "La valeur $3/4$ retranche à tort quatre issues sur seize, alors que seules $X=0$ et $X=4$ sont exclues. Pour X suivant B(4,1/2), P(1<=X<=3)=(4+6+4)/16=14/16=7/8.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "question_id": "Q5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/qcm/TCOMPL-ECHANTILLONNAGE-QCM.json",
+      "source_sha256": "2e5e72553ce7ae839731e12c02dcc621b3b367cbd3e6921e08da154dcb894db9",
+      "capacity": "C5",
+      "capacity_contract_wording": "Je sais simuler en Python un échantillon de taille n d'une variable aléatoire, et calculer la série des moyennes de N échantillons.",
+      "statement": "Quelle expression Python renvoie la moyenne d'un echantillon de $n$ variables de Bernoulli de parametre $p$ ?",
+      "options": {
+        "A": "sum(random() < p for _ in range(n)) / n",
+        "B": "sum(random() < p for _ in range(n))",
+        "C": "random() < p / n",
+        "D": "sum(range(n)) / p"
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n.",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "Cette expression renvoie le nombre de succès, mais oublie la division par la taille $n$ nécessaire pour obtenir la moyenne. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "C",
+          "error_model": "Cette expression ne simule qu'une seule épreuve et modifie en plus sa probabilité en utilisant $p/n$. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "D",
+          "error_model": "La somme des indices ne simule aucune variable de Bernoulli et la division par $p$ n'a pas de sens statistique. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INEGALITES",
+      "question_id": "Q1",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/qcm/TCOMPL-INEGALITES-QCM.json",
+      "source_sha256": "a72aa99fc80f478725b379f08171c78ccdae6c7f61fc96c9ad6006929fab3ca1",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais construire et interpréter une courbe de Lorenz à partir de données réelles (quantiles d'une répartition).",
+      "statement": "Sur une courbe de Lorenz, le point $(x,L(x))$ represente :",
+      "options": {
+        "A": "la part cumulée de population $L(x)$ et la part cumulée de richesse $x$",
+        "B": "la part cumulée de population $x$ et la part cumulée de richesse $L(x)$",
+        "C": "deux probabilités indépendantes",
+        "D": "la moyenne et la variance de la répartition"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Sur une courbe de Lorenz, x est la part cumulée de population et L(x) la part cumulée de la grandeur étudiée.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Cette réponse échange les deux axes : la population cumulée est portée en abscisse. Sur une courbe de Lorenz, x est la part cumulée de population et L(x) la part cumulée de la grandeur étudiée.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "Les deux coordonnées sont des parts cumulées d'une même répartition et non deux probabilités indépendantes. Sur une courbe de Lorenz, x est la part cumulée de population et L(x) la part cumulée de la grandeur étudiée.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Une courbe de Lorenz ne place ni la moyenne ni la variance sur ses axes. Sur une courbe de Lorenz, x est la part cumulée de population et L(x) la part cumulée de la grandeur étudiée.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INEGALITES",
+      "question_id": "Q2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/qcm/TCOMPL-INEGALITES-QCM.json",
+      "source_sha256": "a72aa99fc80f478725b379f08171c78ccdae6c7f61fc96c9ad6006929fab3ca1",
+      "capacity": "C2",
+      "capacity_contract_wording": "Je sais modéliser une courbe de Lorenz par une fonction convexe de [0,1] dans [0,1] et interpréter sa position par rapport à la première bissectrice.",
+      "statement": "Pour une repartition inegale, une courbe de Lorenz est en general :",
+      "options": {
+        "A": "au-dessus de la droite $y=x$",
+        "B": "confondue avec la droite $y=x$",
+        "C": "convexe et au-dessous de la droite $y=x$",
+        "D": "décroissante de 1 vers 0"
+      },
+      "declared_answer_current_source": "C",
+      "independent_solution": "Une courbe de Lorenz d'une répartition inégale est convexe et située sous la première bissectrice y=x.",
+      "correct_answer": "C",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "La part détenue par les x pour cent les moins dotés ne peut pas dépasser x dans le modèle ordonné usuel. Une courbe de Lorenz d'une répartition inégale est convexe et située sous la première bissectrice y=x.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "B",
+          "error_model": "La première bissectrice correspond à l'égalité parfaite, pas à une répartition inégale. Une courbe de Lorenz d'une répartition inégale est convexe et située sous la première bissectrice y=x.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "D",
+          "error_model": "Une courbe de Lorenz est croissante de (0,0) vers (1,1), elle ne décroît pas. Une courbe de Lorenz d'une répartition inégale est convexe et située sous la première bissectrice y=x.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INEGALITES",
+      "question_id": "Q3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/qcm/TCOMPL-INEGALITES-QCM.json",
+      "source_sha256": "a72aa99fc80f478725b379f08171c78ccdae6c7f61fc96c9ad6006929fab3ca1",
+      "capacity": "C3",
+      "capacity_contract_wording": "Je sais calculer un indice de Gini et l'interpréter comme mesure du degré d'inégalité d'une répartition.",
+      "statement": "Un indice de Gini proche de $0$ indique :",
+      "options": {
+        "A": "une répartition presque égalitaire",
+        "B": "une inégalité maximale",
+        "C": "une variance nécessairement nulle",
+        "D": "une courbe de Lorenz au-dessus de $y=x$"
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "Un indice de Gini proche de 0 décrit une répartition presque égalitaire ; plus il augmente, plus l'inégalité est forte.",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "Une inégalité forte éloigne la courbe de Lorenz de la bissectrice et augmente l'indice vers 1. Un indice de Gini proche de 0 décrit une répartition presque égalitaire ; plus il augmente, plus l'inégalité est forte.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "C",
+          "error_model": "L'indice mesure une aire relative et ne détermine pas à lui seul la variance des données. Un indice de Gini proche de 0 décrit une répartition presque égalitaire ; plus il augmente, plus l'inégalité est forte.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "D",
+          "error_model": "Dans le modèle de Lorenz, la courbe reste sous la première bissectrice ; l'égalité la confond avec celle-ci. Un indice de Gini proche de 0 décrit une répartition presque égalitaire ; plus il augmente, plus l'inégalité est forte.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INEGALITES",
+      "question_id": "Q4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/qcm/TCOMPL-INEGALITES-QCM.json",
+      "source_sha256": "a72aa99fc80f478725b379f08171c78ccdae6c7f61fc96c9ad6006929fab3ca1",
+      "capacity": "C4",
+      "capacity_contract_wording": "Je sais étudier la convexité d'une fonction modélisant une courbe de Lorenz à l'aide de sa dérivée seconde.",
+      "statement": "Si $L$ est deux fois derivable sur $[0,1]$, quelle condition suffit a sa convexite ?",
+      "options": {
+        "A": "$L'(x)\\leq0$",
+        "B": "$L''(x)\\leq0$",
+        "C": "$L''(x)\\geq0$",
+        "D": "$L(x)=0$"
+      },
+      "declared_answer_current_source": "C",
+      "independent_solution": "Pour une fonction deux fois dérivable, la condition f''>=0 sur l'intervalle assure sa convexité.",
+      "correct_answer": "C",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Le signe négatif de la dérivée décrirait une décroissance et ne caractérise pas la convexité. Pour une fonction deux fois dérivable, la condition f''>=0 sur l'intervalle assure sa convexité.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "B",
+          "error_model": "Une dérivée seconde négative caractérise la concavité, c'est le signe opposé à celui recherché. Pour une fonction deux fois dérivable, la condition f''>=0 sur l'intervalle assure sa convexité.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "D",
+          "error_model": "La fonction nulle est un exemple particulier mais cette égalité n'est pas la condition générale de convexité. Pour une fonction deux fois dérivable, la condition f''>=0 sur l'intervalle assure sa convexité.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INEGALITES",
+      "question_id": "Q5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/qcm/TCOMPL-INEGALITES-QCM.json",
+      "source_sha256": "a72aa99fc80f478725b379f08171c78ccdae6c7f61fc96c9ad6006929fab3ca1",
+      "capacity": "C5",
+      "capacity_contract_wording": "Je sais calculer, par une intégrale, l'aire entre une courbe de Lorenz et la première bissectrice pour en déduire l'indice de Gini.",
+      "statement": "Pour la courbe de Lorenz $L(x)=x^2$, l'indice $G=1-2\\int_0^1L(x)\\,dx$ vaut :",
+      "options": {
+        "A": "$0$",
+        "B": "$1/3$",
+        "C": "$2/3$",
+        "D": "$1$"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "La formule G=1-2 fois l'intégrale de L sur [0,1] donne, pour L(x)=x^2, G=1-2/3=1/3.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "La valeur zéro correspondrait à la bissectrice $L(x)=x$, dont l'aire vaut $1/2$, pas à $x^2$. La formule G=1-2 fois l'intégrale de L sur [0,1] donne, pour L(x)=x^2, G=1-2/3=1/3.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "C",
+          "error_model": "La valeur $2/3$ est le double de l'intégrale de $x^2$ ; il reste à la soustraire à 1. La formule G=1-2 fois l'intégrale de L sur [0,1] donne, pour L(x)=x^2, G=1-2/3=1/3.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "D",
+          "error_model": "La valeur 1 exigerait une aire nulle sous la courbe, alors que l'intégrale de $x^2$ vaut $1/3$. La formule G=1-2 fois l'intégrale de L sur [0,1] donne, pour L(x)=x^2, G=1-2/3=1/3.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+      "question_id": "Q1",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/qcm/TCOMPL-INFERENCE-BAYESIENNE-QCM.json",
+      "source_sha256": "53085513b75096b44b63533dc0cf1e0590365fac4a17f282e0aedebe0f5595e3",
+      "capacity": "C2",
+      "capacity_contract_wording": "Je sais utiliser la formule de Bayes pour calculer une probabilité a posteriori $P_B(A)$ à partir de $P_A(B)$, $P(A)$ et $P(B)$.",
+      "statement": "La formule de Bayes s'ecrit $P(A|B) =$",
+      "options": {
+        "A": "$\\frac{P(B|A)P(A)}{P(B)}$",
+        "B": "$\\frac{P(A|B)P(B)}{P(A)}$",
+        "C": "$P(A) P(B)$",
+        "D": "$P(A \\cap B)$"
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "La formule de Bayes est P(A|B)=P(B|A)P(A)/P(B), lorsque P(B)>0.",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "Tautologie sans inversion. La formule de Bayes est P(A|B)=P(B|A)P(A)/P(B), lorsque P(B)>0.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "C",
+          "error_model": "Independance non supposee. La formule de Bayes est P(A|B)=P(B|A)P(A)/P(B), lorsque P(B)>0.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "D",
+          "error_model": "Oubli de la division par P(B). La formule de Bayes est P(A|B)=P(B|A)P(A)/P(B), lorsque P(B)>0.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+      "question_id": "Q2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/qcm/TCOMPL-INFERENCE-BAYESIENNE-QCM.json",
+      "source_sha256": "53085513b75096b44b63533dc0cf1e0590365fac4a17f282e0aedebe0f5595e3",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais calculer des probabilités dans des situations faisant intervenir des probabilités conditionnelles.",
+      "statement": "Si A et B sont independants, alors $P(A \\cap B) =$",
+      "options": {
+        "A": "$P(A) + P(B)$",
+        "B": "$P(A|B)$",
+        "C": "$P(A) \\times P(B)$",
+        "D": "$P(A)/P(B)$"
+      },
+      "declared_answer_current_source": "C",
+      "independent_solution": "L'indépendance donne P(A inter B)=P(A)P(B).",
+      "correct_answer": "C",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Formule d'evenements disjoints. L'indépendance donne P(A inter B)=P(A)P(B).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "B",
+          "error_model": "Probabilite conditionnelle. L'indépendance donne P(A inter B)=P(A)P(B).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Rapport incorrect. L'indépendance donne P(A inter B)=P(A)P(B).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+      "question_id": "Q3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/qcm/TCOMPL-INFERENCE-BAYESIENNE-QCM.json",
+      "source_sha256": "53085513b75096b44b63533dc0cf1e0590365fac4a17f282e0aedebe0f5595e3",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais calculer des probabilités dans des situations faisant intervenir des probabilités conditionnelles.",
+      "statement": "La formule des probabilites totales pour une partition $(A_k)$ s'ecrit $P(B) =$",
+      "options": {
+        "A": "$\\sum P(A_k)$",
+        "B": "$\\sum P(B|A_k) P(A_k)$",
+        "C": "$\\prod P(B|A_k)$",
+        "D": "$P(B|A_1)$"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Pour une partition (A_k), la formule totale est P(B)=somme_k P(B|A_k)P(A_k).",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "La somme des P(A_k) vaut 1. Pour une partition (A_k), la formule totale est P(B)=somme_k P(B|A_k)P(A_k).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "Produit au lieu d'une somme. Pour une partition (A_k), la formule totale est P(B)=somme_k P(B|A_k)P(A_k).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Seul le premier terme considere. Pour une partition (A_k), la formule totale est P(B)=somme_k P(B|A_k)P(A_k).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+      "question_id": "Q4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/qcm/TCOMPL-INFERENCE-BAYESIENNE-QCM.json",
+      "source_sha256": "53085513b75096b44b63533dc0cf1e0590365fac4a17f282e0aedebe0f5595e3",
+      "capacity": "C3",
+      "capacity_contract_wording": "Je sais distinguer $P_B(A)$ (probabilité a posteriori) de $P_A(B)$ (probabilité a priori inversée) dans un problème concret.",
+      "statement": "En inference bayesienne, la probabilite $P(A)$ avant de connaitre B s'appelle :",
+      "options": {
+        "A": "La probabilite a posteriori",
+        "B": "La vraisemblance",
+        "C": "La valeur p",
+        "D": "La probabilite a priori"
+      },
+      "declared_answer_current_source": "D",
+      "independent_solution": "La probabilité attribuée à A avant l'observation de B est la probabilité a priori.",
+      "correct_answer": "D",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "P(A|B) est la probabilite a posteriori. La probabilité attribuée à A avant l'observation de B est la probabilité a priori.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "B",
+          "error_model": "P(B|A) est la vraisemblance. La probabilité attribuée à A avant l'observation de B est la probabilité a priori.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "C",
+          "error_model": "Terme de test d'hypothese. La probabilité attribuée à A avant l'observation de B est la probabilité a priori.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+      "question_id": "Q5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/qcm/TCOMPL-INFERENCE-BAYESIENNE-QCM.json",
+      "source_sha256": "53085513b75096b44b63533dc0cf1e0590365fac4a17f282e0aedebe0f5595e3",
+      "capacity": "C4",
+      "capacity_contract_wording": "Je sais définir sensibilité, spécificité, valeur prédictive positive et négative d'un test, et les relier aux probabilités conditionnelles.",
+      "statement": "Un test de sensibilite 95% et specificite 90% sur une maladie rare (1%) donne une VPP :",
+      "options": {
+        "A": "Faible (inférieure à 10%) car la maladie est rare",
+        "B": "Tres forte (95%)",
+        "C": "Egale a 50%",
+        "D": "Exactement 90%"
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 %, donc moins de 10 %.",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "Oubli de l'effet du biais de rarete (paradoxe du faux positif). La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 %, donc moins de 10 %.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "C",
+          "error_model": "Valeur arbitraire. La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 %, donc moins de 10 %.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "D",
+          "error_model": "Confusion avec la specificite. La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 %, donc moins de 10 %.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "question_id": "Q1",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/qcm/TCOMPL-LOGARITHME-HISTORIQUE-QCM.json",
+      "source_sha256": "eb4d4c59cecb45edc12a8ec11e0a99c2a00f56b596b53d73247de07f25124dac",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais présenter la fonction logarithme népérien comme réciproque de l'exponentielle : limites, représentation graphique, équation fonctionnelle, dérivée.",
+      "statement": "La fonction logarithme neperien $\\ln(x)$ est definie sur :",
+      "options": {
+        "A": "$\\mathbb{R}$",
+        "B": "$]0, +\\infty[$",
+        "C": "$[0, +\\infty[$",
+        "D": "$\\mathbb{R}^*$"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Le logarithme népérien, réciproque de l'exponentielle, est défini exactement sur ]0,+infini[.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Les nombres negatifs n'ont pas de logarithme reel. Le logarithme népérien, réciproque de l'exponentielle, est défini exactement sur ]0,+infini[.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "ln(0) n'est pas defini. Le logarithme népérien, réciproque de l'exponentielle, est défini exactement sur ]0,+infini[.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Exclusion des nombres strictement negatifs. Le logarithme népérien, réciproque de l'exponentielle, est défini exactement sur ]0,+infini[.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "question_id": "Q2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/qcm/TCOMPL-LOGARITHME-HISTORIQUE-QCM.json",
+      "source_sha256": "eb4d4c59cecb45edc12a8ec11e0a99c2a00f56b596b53d73247de07f25124dac",
+      "capacity": "C2",
+      "capacity_contract_wording": "Je sais utiliser l'équation fonctionnelle du logarithme pour transformer une écriture ou résoudre une équation/inéquation.",
+      "statement": "Pour tous $a,b > 0$, $\\ln(a \\times b) =$",
+      "options": {
+        "A": "$\\ln(a) + \\ln(b)$",
+        "B": "$\\ln(a) \\times \\ln(b)$",
+        "C": "$\\ln(a+b)$",
+        "D": "$\\ln(a) - \\ln(b)$"
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "L'équation fonctionnelle donne ln(ab)=ln(a)+ln(b) pour a et b strictement positifs.",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "Transformation du produit en somme, pas en produit. L'équation fonctionnelle donne ln(ab)=ln(a)+ln(b) pour a et b strictement positifs.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "C",
+          "error_model": "ln ne conserve pas l'addition. L'équation fonctionnelle donne ln(ab)=ln(a)+ln(b) pour a et b strictement positifs.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "D",
+          "error_model": "Formule du quotient. L'équation fonctionnelle donne ln(ab)=ln(a)+ln(b) pour a et b strictement positifs.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "question_id": "Q3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/qcm/TCOMPL-LOGARITHME-HISTORIQUE-QCM.json",
+      "source_sha256": "eb4d4c59cecb45edc12a8ec11e0a99c2a00f56b596b53d73247de07f25124dac",
+      "capacity": "C5",
+      "capacity_contract_wording": "Je sais démontrer que la dérivée de ln est x ↦ 1/x, en admettant la dérivabilité.",
+      "statement": "La derivee de $f(x) = \\ln(x)$ sur $]0, +\\infty[$ est :",
+      "options": {
+        "A": "$e^x$",
+        "B": "$\\ln(x)$",
+        "C": "$\\frac{1}{x}$",
+        "D": "$-\\frac{1}{x^2}$"
+      },
+      "declared_answer_current_source": "C",
+      "independent_solution": "Sur ]0,+infini[, la dérivée du logarithme népérien est la fonction x vers 1/x.",
+      "correct_answer": "C",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Derivee de l'exponentielle. Sur ]0,+infini[, la dérivée du logarithme népérien est la fonction x vers 1/x.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "B",
+          "error_model": "Pas de changement par derivation. Sur ]0,+infini[, la dérivée du logarithme népérien est la fonction x vers 1/x.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "D",
+          "error_model": "Derivee de 1/x. Sur ]0,+infini[, la dérivée du logarithme népérien est la fonction x vers 1/x.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "question_id": "Q4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/qcm/TCOMPL-LOGARITHME-HISTORIQUE-QCM.json",
+      "source_sha256": "eb4d4c59cecb45edc12a8ec11e0a99c2a00f56b596b53d73247de07f25124dac",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais présenter la fonction logarithme népérien comme réciproque de l'exponentielle : limites, représentation graphique, équation fonctionnelle, dérivée.",
+      "statement": "La limite de $\\ln(x)$ quand $x \\to 0^+$ est :",
+      "options": {
+        "A": "$0$",
+        "B": "$1$",
+        "C": "$+\\infty$",
+        "D": "$-\\infty$"
+      },
+      "declared_answer_current_source": "D",
+      "independent_solution": "Lorsque x tend vers 0 par valeurs positives, ln(x) décroît sans borne et tend vers -infini.",
+      "correct_answer": "D",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "ln(1) = 0, pas la limite en 0. Lorsque x tend vers 0 par valeurs positives, ln(x) décroît sans borne et tend vers -infini.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "B",
+          "error_model": "Valeur erronee. Lorsque x tend vers 0 par valeurs positives, ln(x) décroît sans borne et tend vers -infini.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "Erreur de signe de l'infini. Lorsque x tend vers 0 par valeurs positives, ln(x) décroît sans borne et tend vers -infini.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "question_id": "Q5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/qcm/TCOMPL-LOGARITHME-HISTORIQUE-QCM.json",
+      "source_sha256": "eb4d4c59cecb45edc12a8ec11e0a99c2a00f56b596b53d73247de07f25124dac",
+      "capacity": "C3",
+      "capacity_contract_wording": "Je sais utiliser $\\ln(q^n) = n \\ln(q)$ pour déterminer un seuil (par exemple dans une suite géométrique).",
+      "statement": "Pour $a>0$ et tout entier $n$, $\\ln(a^n) =$",
+      "options": {
+        "A": "$\\ln(a)^n$",
+        "B": "$n \\ln(a)$",
+        "C": "$\\frac{1}{n} \\ln(a)$",
+        "D": "$a \\ln(n)$"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Pour a>0 et n entier, l'équation fonctionnelle itérée donne ln(a^n)=n ln(a).",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Puissance a l'exterieur du logarithme. Pour a>0 et n entier, l'équation fonctionnelle itérée donne ln(a^n)=n ln(a).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "C",
+          "error_model": "Inverse du facteur. Pour a>0 et n entier, l'équation fonctionnelle itérée donne ln(a^n)=n ln(a).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "D",
+          "error_model": "Inversion de a et n. Pour a>0 et n entier, l'équation fonctionnelle itérée donne ln(a^n)=n ln(a).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "question_id": "Q1",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.json",
+      "source_sha256": "166261a4f1230d352fcb10aaa69412c2e22e121e4bfa9e162126312fe503db83",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais modéliser un problème d'évolution par une suite définie explicitement ou par récurrence.",
+      "statement": "Une suite arithmetique de raison r et premier terme $u_0$ a pour terme general :",
+      "options": {
+        "A": "$u_n = u_0 + n r$",
+        "B": "$u_n = u_0 \\times r^n$",
+        "C": "$u_n = u_0 + r^n$",
+        "D": "$u_n = u_0 n r$"
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "Une suite arithmétique de raison r vérifie u_n=u_0+nr.",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "Formule d'une suite geometrique. Une suite arithmétique de raison r vérifie u_n=u_0+nr.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "Formule incorrecte. Une suite arithmétique de raison r vérifie u_n=u_0+nr.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Produit au lieu d'addition. Une suite arithmétique de raison r vérifie u_n=u_0+nr.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "question_id": "Q2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.json",
+      "source_sha256": "166261a4f1230d352fcb10aaa69412c2e22e121e4bfa9e162126312fe503db83",
+      "capacity": "C2",
+      "capacity_contract_wording": "Je sais calculer la limite d'une suite géométrique et la limite de la somme de ses termes lorsque la raison est dans ]0;1[.",
+      "statement": "Pour $0<q<1$, la somme $1+q+q^2+\\cdots$ vaut :",
+      "options": {
+        "A": "$1-q$",
+        "B": "$1/(1-q)$",
+        "C": "$1/q$",
+        "D": "$+\\infty$"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Pour 0<q<1, la somme géométrique infinie 1+q+q^2+... vaut 1/(1-q).",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "La différence $1-q$ apparaît au dénominateur après multiplication et soustraction de la série, pas comme résultat. Pour 0<q<1, la somme géométrique infinie 1+q+q^2+... vaut 1/(1-q).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "C",
+          "error_model": "La valeur $1/q$ ne vérifie pas l'identité S=1+qS obtenue à partir de la série. Pour 0<q<1, la somme géométrique infinie 1+q+q^2+... vaut 1/(1-q).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "D",
+          "error_model": "Comme la raison est strictement comprise entre 0 et 1, les sommes partielles convergent vers une limite finie. Pour 0<q<1, la somme géométrique infinie 1+q+q^2+... vaut 1/(1-q).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "question_id": "Q3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.json",
+      "source_sha256": "166261a4f1230d352fcb10aaa69412c2e22e121e4bfa9e162126312fe503db83",
+      "capacity": "C5",
+      "capacity_contract_wording": "Je sais résoudre une équation différentielle y'=ay, et y'=ay+b en cherchant une solution particulière constante.",
+      "statement": "L'equation differentielle $y' = a y$ a pour solutions les fonctions :",
+      "options": {
+        "A": "$f(x) = a x + C$",
+        "B": "$f(x) = C e^{a x}$",
+        "C": "$f(x) = C e^{-a x}$",
+        "D": "$f(x) = C x^a$"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Toutes les solutions de y'=ay sont y(x)=C exp(ax), avec C réel.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Solution de y' = a. Toutes les solutions de y'=ay sont y(x)=C exp(ax), avec C réel.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "C",
+          "error_model": "Erreur de signe dans l'exposant. Toutes les solutions de y'=ay sont y(x)=C exp(ax), avec C réel.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "D",
+          "error_model": "Fonction puissance au lieu d'exponentielle. Toutes les solutions de y'=ay sont y(x)=C exp(ax), avec C réel.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "question_id": "Q4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.json",
+      "source_sha256": "166261a4f1230d352fcb10aaa69412c2e22e121e4bfa9e162126312fe503db83",
+      "capacity": "C5",
+      "capacity_contract_wording": "Je sais résoudre une équation différentielle y'=ay, et y'=ay+b en cherchant une solution particulière constante.",
+      "statement": "Le modele de Malthus suppose un taux de croissance :",
+      "options": {
+        "A": "Decroissant",
+        "B": "Nul",
+        "C": "Logistique",
+        "D": "Constant et proportionnel a la population"
+      },
+      "declared_answer_current_source": "D",
+      "independent_solution": "Le modèle de Malthus s'écrit y'=ay : le coefficient de croissance a est constant et la variation est proportionnelle à la population.",
+      "correct_answer": "D",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Hypothese du modele de Verhulst. Le modèle de Malthus s'écrit y'=ay : le coefficient de croissance a est constant et la variation est proportionnelle à la population.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "B",
+          "error_model": "Population constante. Le modèle de Malthus s'écrit y'=ay : le coefficient de croissance a est constant et la variation est proportionnelle à la population.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "C",
+          "error_model": "Modele avec capacite d'accueil. Le modèle de Malthus s'écrit y'=ay : le coefficient de croissance a est constant et la variation est proportionnelle à la population.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "question_id": "Q5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.json",
+      "source_sha256": "166261a4f1230d352fcb10aaa69412c2e22e121e4bfa9e162126312fe503db83",
+      "capacity": "C4",
+      "capacity_contract_wording": "Je sais résoudre une suite arithmético-géométrique en cherchant sa solution constante puis en m'y ramenant.",
+      "statement": "Une solution constante de $u_{n+1}=0{,}8u_n+10$ vaut :",
+      "options": {
+        "A": "$10$",
+        "B": "$40$",
+        "C": "$50$",
+        "D": "$80$"
+      },
+      "declared_answer_current_source": "C",
+      "independent_solution": "Une solution constante de u_(n+1)=0,8u_n+10 vérifie ell=0,8ell+10, donc ell=50.",
+      "correct_answer": "C",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "La constante additive 10 n'est pas le point fixe, car $0{,}8*10+10=18$. Une solution constante de u_(n+1)=0,8u_n+10 vérifie ell=0,8ell+10, donc ell=50.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "B",
+          "error_model": "La valeur 40 ne satisfait pas l'équation fixe : $0{,}8*40+10=42$. Une solution constante de u_(n+1)=0,8u_n+10 vérifie ell=0,8ell+10, donc ell=50.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "D",
+          "error_model": "La valeur 80 ne satisfait pas l'équation fixe : $0{,}8*80+10=74$. Une solution constante de u_(n+1)=0,8u_n+10 vérifie ell=0,8ell+10, donc ell=50.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "question_id": "Q1",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json",
+      "source_sha256": "847d7079a4ba3c7ee3192d391e2bc597b2587038abd82fb7f42c1ac9e4cbb95e",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais calculer la dérivée d'une fonction, calculer des limites, et dresser un tableau de variation.",
+      "statement": "La derivee de $f(x) = e^{-x^2}$ est :",
+      "options": {
+        "A": "$e^{-x^2}$",
+        "B": "$-2x e^{-x^2}$",
+        "C": "$2x e^{-x^2}$",
+        "D": "$-x e^{-x^2}$"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Par la règle de chaîne, la dérivée de exp(-x^2) est -2x exp(-x^2).",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Oubli de dériver l'interieur. Par la règle de chaîne, la dérivée de exp(-x^2) est -2x exp(-x^2).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "Erreur de signe de la derivee de -x^2. Par la règle de chaîne, la dérivée de exp(-x^2) est -2x exp(-x^2).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Oubli du facteur 2. Par la règle de chaîne, la dérivée de exp(-x^2) est -2x exp(-x^2).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "question_id": "Q2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json",
+      "source_sha256": "847d7079a4ba3c7ee3192d391e2bc597b2587038abd82fb7f42c1ac9e4cbb95e",
+      "capacity": "C5",
+      "capacity_contract_wording": "Je sais étudier la convexité ou la concavité d'une fonction deux fois dérivable.",
+      "statement": "Une fonction $f$ deux fois derivable est convexe sur un intervalle $I$ si et seulement si sa derivee seconde $f''$ est :",
+      "options": {
+        "A": "Négative",
+        "B": "Nulle",
+        "C": "Positive ou nulle",
+        "D": "Strictement decroissante"
+      },
+      "declared_answer_current_source": "C",
+      "independent_solution": "Pour une fonction deux fois dérivable, la convexité équivaut à f''>=0 sur l'intervalle.",
+      "correct_answer": "C",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Condition de concavite. Pour une fonction deux fois dérivable, la convexité équivaut à f''>=0 sur l'intervalle.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "B",
+          "error_model": "Fonction affine. Pour une fonction deux fois dérivable, la convexité équivaut à f''>=0 sur l'intervalle.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "D",
+          "error_model": "Condition incorrecte. Pour une fonction deux fois dérivable, la convexité équivaut à f''>=0 sur l'intervalle.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "question_id": "Q3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json",
+      "source_sha256": "847d7079a4ba3c7ee3192d391e2bc597b2587038abd82fb7f42c1ac9e4cbb95e",
+      "capacity": "C4",
+      "capacity_contract_wording": "Je sais reconnaître graphiquement une fonction convexe, concave, ou un point d'inflexion.",
+      "statement": "Si $f''$ s'annule en $a$ et change de signe en $a$, alors le point $(a,f(a))$ est :",
+      "options": {
+        "A": "$f''$ s'annule en changeant de signe",
+        "B": "$f'$ s'annule",
+        "C": "$f$ s'annule",
+        "D": "$f''$ est maximale"
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "Si f'' s'annule en a et change de signe, la convexité change et le point (a,f(a)) est un point d'inflexion.",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "Extremum local de f, pas inflexion. Si f'' s'annule en a et change de signe, la convexité change et le point (a,f(a)) est un point d'inflexion.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "C",
+          "error_model": "Racine de f. Si f'' s'annule en a et change de signe, la convexité change et le point (a,f(a)) est un point d'inflexion.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "D",
+          "error_model": "Pas de changement de concavite requis par le max de f''. Si f'' s'annule en a et change de signe, la convexité change et le point (a,f(a)) est un point d'inflexion.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "question_id": "Q4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json",
+      "source_sha256": "847d7079a4ba3c7ee3192d391e2bc597b2587038abd82fb7f42c1ac9e4cbb95e",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais calculer la dérivée d'une fonction, calculer des limites, et dresser un tableau de variation.",
+      "statement": "La limite de $\\frac{e^x}{x}$ quand $x \\to +\\infty$ est par croissance comparee :",
+      "options": {
+        "A": "0",
+        "B": "1",
+        "C": "e",
+        "D": "$+\\infty$"
+      },
+      "declared_answer_current_source": "D",
+      "independent_solution": "L'exponentielle domine x à l'infini, donc exp(x)/x tend vers +infini.",
+      "correct_answer": "D",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Inverse x/e^x tend vers 0. L'exponentielle domine x à l'infini, donc exp(x)/x tend vers +infini.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "B",
+          "error_model": "Forme indeterminee non levee. L'exponentielle domine x à l'infini, donc exp(x)/x tend vers +infini.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "Valeur en x=1. L'exponentielle domine x à l'infini, donc exp(x)/x tend vers +infini.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "question_id": "Q5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json",
+      "source_sha256": "847d7079a4ba3c7ee3192d391e2bc597b2587038abd82fb7f42c1ac9e4cbb95e",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais calculer la dérivée d'une fonction, calculer des limites, et dresser un tableau de variation.",
+      "statement": "Si $f(x) = \\ln(2x+1)$, la derivee $f'(x)$ vaut :",
+      "options": {
+        "A": "$\\frac{1}{2x+1}$",
+        "B": "$\\frac{2}{2x+1}$",
+        "C": "$\\frac{1}{x}$",
+        "D": "$2 \\ln(2x+1)$"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Pour u=2x+1, la règle (ln u)'=u'/u donne 2/(2x+1) sur le domaine de définition.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Oubli de la derivee de u(x) = 2x+1. Pour u=2x+1, la règle (ln u)'=u'/u donne 2/(2x+1) sur le domaine de définition.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "Simplification abusive. Pour u=2x+1, la règle (ln u)'=u'/u donne 2/(2x+1) sur le domaine de définition.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Multiplication au lieu de derivation. Pour u=2x+1, la règle (ln u)'=u'/u donne 2/(2x+1) sur le domaine de définition.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "question_id": "Q1",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json",
+      "source_sha256": "4ca8d7ad6e33f29c813e48aad50499df515053d5ada2d246bd70419ac17ef6e3",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais définir la loi géométrique, son espérance, et sa propriété d'absence de mémoire.",
+      "statement": "Une variable aleatoire X suivant une loi geometrique de parametre p a pour esperance :",
+      "options": {
+        "A": "$\\frac{1}{p}$",
+        "B": "$\\frac{1-p}{p^2}$",
+        "C": "$p$",
+        "D": "$1-p$"
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "Avec la convention X=nombre d'essais jusqu'au premier succès, l'espérance de G(p) vaut 1/p.",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "Formule de la variance. Avec la convention X=nombre d'essais jusqu'au premier succès, l'espérance de G(p) vaut 1/p.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "Parametre p. Avec la convention X=nombre d'essais jusqu'au premier succès, l'espérance de G(p) vaut 1/p.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Probabilite d'echec. Avec la convention X=nombre d'essais jusqu'au premier succès, l'espérance de G(p) vaut 1/p.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "question_id": "Q2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json",
+      "source_sha256": "4ca8d7ad6e33f29c813e48aad50499df515053d5ada2d246bd70419ac17ef6e3",
+      "capacity": "C2",
+      "capacity_contract_wording": "Je sais calculer explicitement des probabilités pour une variable aléatoire suivant une loi géométrique.",
+      "statement": "Pour $k \\ge 1$, la probabilite $P(X = k)$ d'une loi geometrique $G(p)$ vaut :",
+      "options": {
+        "A": "$p^k (1-p)$",
+        "B": "$p (1-p)^k$",
+        "C": "$(1-p)^{k-1} p$",
+        "D": "$\\binom{n}{k} p^k (1-p)^{n-k}$"
+      },
+      "declared_answer_current_source": "C",
+      "independent_solution": "Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)^(k-1)p.",
+      "correct_answer": "C",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Inversion des roles de succes et echec. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)^(k-1)p.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "B",
+          "error_model": "Erreur d'exposant k au lieu de k-1. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)^(k-1)p.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "D",
+          "error_model": "Formule de la loi binomiale. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)^(k-1)p.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "question_id": "Q3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json",
+      "source_sha256": "4ca8d7ad6e33f29c813e48aad50499df515053d5ada2d246bd70419ac17ef6e3",
+      "capacity": "C3",
+      "capacity_contract_wording": "Je sais utiliser la caractérisation d'une loi géométrique par l'absence de mémoire dans un problème concret.",
+      "statement": "La propriete de perte de memoire de la loi geometrique s'ecrit $P_{X > n}(X > n+k) =$",
+      "options": {
+        "A": "$P(X > n)$",
+        "B": "$P(X > k)$",
+        "C": "$P(X = k)$",
+        "D": "$1 - P(X > k)$"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "L'absence de mémoire donne P(X>n+k | X>n)=P(X>k).",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Temps n au lieu de k. L'absence de mémoire donne P(X>n+k | X>n)=P(X>k).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "C",
+          "error_model": "Egalite au lieu d'une superiocrite stricte. L'absence de mémoire donne P(X>n+k | X>n)=P(X>k).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "D",
+          "error_model": "Evenement contraire. L'absence de mémoire donne P(X>n+k | X>n)=P(X>k).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "question_id": "Q4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json",
+      "source_sha256": "4ca8d7ad6e33f29c813e48aad50499df515053d5ada2d246bd70419ac17ef6e3",
+      "capacity": "C2",
+      "capacity_contract_wording": "Je sais calculer explicitement des probabilités pour une variable aléatoire suivant une loi géométrique.",
+      "statement": "Pour une loi geometrique $G(p)$, $P(X > k) =$",
+      "options": {
+        "A": "$p^k$",
+        "B": "$1 - p^k$",
+        "C": "1 - (1-p)^k",
+        "D": "$(1-p)^k$"
+      },
+      "declared_answer_current_source": "D",
+      "independent_solution": "L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)^k.",
+      "correct_answer": "D",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Utilisation de p au lieu de (1-p). L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)^k.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "B",
+          "error_model": "Formule fausse. L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)^k.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "C",
+          "error_model": "Probabilite P(X <= k). L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)^k.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "question_id": "Q5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json",
+      "source_sha256": "4ca8d7ad6e33f29c813e48aad50499df515053d5ada2d246bd70419ac17ef6e3",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais définir la loi géométrique, son espérance, et sa propriété d'absence de mémoire.",
+      "statement": "Si $p = 0{,}2$, le temps d'attente moyen du premier succes est :",
+      "options": {
+        "A": "2 d'essais",
+        "B": "4 d'essais",
+        "C": "5 d'essais",
+        "D": "10 d'essais"
+      },
+      "declared_answer_current_source": "C",
+      "independent_solution": "Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais.",
+      "correct_answer": "C",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Calcul 1/0.5. Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "B",
+          "error_model": "Calcul (1-p)/p = 0.8/0.2 = 4. Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Calcul 1/(0.2^2). Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921265A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-ARITHMETIQUE",
+      "question_id": "Q1",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json",
+      "source_sha256": "0b5e532d43bb2fc4a24c034606132c19220ed3144f446d18470cfd1d3616fe5f",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais déterminer les diviseurs d'un entier et le PGCD de deux entiers (algorithme d'Euclide).",
+      "statement": "Soient a, b et c entiers. Si a divise b et b divise c alors :",
+      "options": {
+        "A": "a divise b+c uniquement",
+        "B": "a divise c",
+        "C": "c divise a",
+        "D": "a = c"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Si b=ak et c=bm, alors c=a(km), donc a divise c.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Propriete trop restreinte. Si b=ak et c=bm, alors c=a(km), donc a divise c.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "Sens de divisibilite inverse. Si b=ak et c=bm, alors c=a(km), donc a divise c.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Egalite non necessaire. Si b=ak et c=bm, alors c=a(km), donc a divise c.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-ARITHMETIQUE",
+      "question_id": "Q2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json",
+      "source_sha256": "0b5e532d43bb2fc4a24c034606132c19220ed3144f446d18470cfd1d3616fe5f",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais déterminer les diviseurs d'un entier et le PGCD de deux entiers (algorithme d'Euclide).",
+      "statement": "La division euclidienne de 25 par 7 donne pour reste :",
+      "options": {
+        "A": "1",
+        "B": "2",
+        "C": "4",
+        "D": "3"
+      },
+      "declared_answer_current_source": "C",
+      "independent_solution": "La division 25=3*7+4 donne le reste 4, compris entre 0 et 6.",
+      "correct_answer": "C",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Quotient faux. La division 25=3*7+4 donne le reste 4, compris entre 0 et 6.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "B",
+          "error_model": "Erreur de calcul. La division 25=3*7+4 donne le reste 4, compris entre 0 et 6.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Reste incorrect. La division 25=3*7+4 donne le reste 4, compris entre 0 et 6.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-ARITHMETIQUE",
+      "question_id": "Q3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json",
+      "source_sha256": "0b5e532d43bb2fc4a24c034606132c19220ed3144f446d18470cfd1d3616fe5f",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais déterminer les diviseurs d'un entier et le PGCD de deux entiers (algorithme d'Euclide).",
+      "statement": "Le PGCD de 48 et 18 est :",
+      "options": {
+        "A": "6",
+        "B": "12",
+        "C": "3",
+        "D": "2"
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "L'algorithme d'Euclide donne 48=2*18+12, 18=1*12+6, puis le PGCD vaut 6.",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "12 ne divise pas 18. L'algorithme d'Euclide donne 48=2*18+12, 18=1*12+6, puis le PGCD vaut 6.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "3 n'est pas le PLUS GRAND diviseur. L'algorithme d'Euclide donne 48=2*18+12, 18=1*12+6, puis le PGCD vaut 6.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "2 n'est pas le plus grand diviseur. L'algorithme d'Euclide donne 48=2*18+12, 18=1*12+6, puis le PGCD vaut 6.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-ARITHMETIQUE",
+      "question_id": "Q4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json",
+      "source_sha256": "0b5e532d43bb2fc4a24c034606132c19220ed3144f446d18470cfd1d3616fe5f",
+      "capacity": "C5",
+      "capacity_contract_wording": "Je sais démontrer le théorème de Bézout : le PGCD de a et b s'écrit ax+by pour des entiers x,y.",
+      "statement": "Le theoreme de Bezout affirme que PGCD(a,b)=1 si et seulement si :",
+      "options": {
+        "A": "$a+b=1$",
+        "B": "$a b = 1$",
+        "C": "$\\exists u,v \\in \\mathbb{Z}, au-bv=0$",
+        "D": "$\\exists u,v \\in \\mathbb{Z}, au+bv=1$"
+      },
+      "declared_answer_current_source": "D",
+      "independent_solution": "Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1.",
+      "correct_answer": "D",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Equation trop simple. Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "B",
+          "error_model": "Produit egal a 1. Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "C",
+          "error_model": "Equation homogene. Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-ARITHMETIQUE",
+      "question_id": "Q5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json",
+      "source_sha256": "0b5e532d43bb2fc4a24c034606132c19220ed3144f446d18470cfd1d3616fe5f",
+      "capacity": "C2",
+      "capacity_contract_wording": "Je sais résoudre une congruence ax≡b [n] et déterminer un inverse de a modulo n quand a et n sont premiers entre eux.",
+      "statement": "Si $a \\equiv b \\pmod{n}$, alors :",
+      "options": {
+        "A": "$n$ divise $a-b$",
+        "B": "$a$ divise $b-n$",
+        "C": "$a-b = n$",
+        "D": "$a+b$ est multiple de $n$"
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "La congruence a équivalent à b modulo n signifie exactement que n divise a-b.",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "Sens du diviseur inverse. La congruence a équivalent à b modulo n signifie exactement que n divise a-b.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "C",
+          "error_model": "Egalite non necessaire. La congruence a équivalent à b modulo n signifie exactement que n divise a-b.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "D",
+          "error_model": "Somme au lieu de difference. La congruence a équivalent à b modulo n signifie exactement que n divise a-b.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "question_id": "Q1",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.json",
+      "source_sha256": "ab1ae08ef5da0a635cf56b9d2a3eb1ee5c78efa24be9e38a0a129315f7a9993d",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais effectuer des calculs algébriques avec des nombres complexes (somme, produit, conjugué, inverse).",
+      "statement": "La forme algebrique de $(1+i)^2$ est :",
+      "options": {
+        "A": "2",
+        "B": "-2",
+        "C": "2i",
+        "D": "-2i"
+      },
+      "declared_answer_current_source": "C",
+      "independent_solution": "Le développement (1+i)^2=1+2i+i^2=2i.",
+      "correct_answer": "C",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Choisir $2$ oublie que $i^2=-1$ annule les deux termes réels $1+i^2$ ; le développement donne $(1+i)^2=2i$.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "B",
+          "error_model": "Choisir $-2$ conserve à tort une partie réelle négative ; comme $1+i^2=0$, le développement laisse uniquement le terme $2i$.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Erreur de signe du produit. Le développement (1+i)^2=1+2i+i^2=2i.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "question_id": "Q2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.json",
+      "source_sha256": "ab1ae08ef5da0a635cf56b9d2a3eb1ee5c78efa24be9e38a0a129315f7a9993d",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais effectuer des calculs algébriques avec des nombres complexes (somme, produit, conjugué, inverse).",
+      "statement": "Le conjugue de $z = 3 - 4i$ est :",
+      "options": {
+        "A": "3 + 4i",
+        "B": "-3 + 4i",
+        "C": "-3 - 4i",
+        "D": "4 - 3i"
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "La conjugaison change le signe de la partie imaginaire : le conjugué de 3-4i est 3+4i.",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "Changement de signe de la partie reelle. La conjugaison change le signe de la partie imaginaire : le conjugué de 3-4i est 3+4i.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "Changement des deux signes. La conjugaison change le signe de la partie imaginaire : le conjugué de 3-4i est 3+4i.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Inversion des parties reelle et imaginaire. La conjugaison change le signe de la partie imaginaire : le conjugué de 3-4i est 3+4i.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "question_id": "Q3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.json",
+      "source_sha256": "ab1ae08ef5da0a635cf56b9d2a3eb1ee5c78efa24be9e38a0a129315f7a9993d",
+      "capacity": "C4",
+      "capacity_contract_wording": "Je sais déterminer le module et un argument d'un nombre complexe, et représenter/déterminer une affixe.",
+      "statement": "Le module de $z = 3 + 4i$ vaut :",
+      "options": {
+        "A": "7",
+        "B": "5",
+        "C": "25",
+        "D": "1"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Le module de 3+4i vaut racine(3^2+4^2)=5.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Addition des parties au lieu des carres. Le module de 3+4i vaut racine(3^2+4^2)=5.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "C",
+          "error_model": "Oubli de la racine carree. Le module de 3+4i vaut racine(3^2+4^2)=5.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "D",
+          "error_model": "Soustraction des carres. Le module de 3+4i vaut racine(3^2+4^2)=5.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "question_id": "Q4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.json",
+      "source_sha256": "ab1ae08ef5da0a635cf56b9d2a3eb1ee5c78efa24be9e38a0a129315f7a9993d",
+      "capacity": "C4",
+      "capacity_contract_wording": "Je sais déterminer le module et un argument d'un nombre complexe, et représenter/déterminer une affixe.",
+      "statement": "Un argument de $z = -1 + i$ est :",
+      "options": {
+        "A": "$\\pi/4$",
+        "B": "$-\\pi/4$",
+        "C": "$-3\\pi/4$",
+        "D": "$3\\pi/4$"
+      },
+      "declared_answer_current_source": "D",
+      "independent_solution": "Le point (-1,1) est dans le deuxième quadrant et forme un angle 3pi/4 avec l'axe réel positif.",
+      "correct_answer": "D",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Premier quadrant au lieu du second. Le point (-1,1) est dans le deuxième quadrant et forme un angle 3pi/4 avec l'axe réel positif.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "B",
+          "error_model": "Quatrieme quadrant. Le point (-1,1) est dans le deuxième quadrant et forme un angle 3pi/4 avec l'axe réel positif.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "C",
+          "error_model": "Troisieme quadrant. Le point (-1,1) est dans le deuxième quadrant et forme un angle 3pi/4 avec l'axe réel positif.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "question_id": "Q5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.json",
+      "source_sha256": "ab1ae08ef5da0a635cf56b9d2a3eb1ee5c78efa24be9e38a0a129315f7a9993d",
+      "capacity": "C3",
+      "capacity_contract_wording": "Je sais démontrer les propriétés du conjugué d'un produit, d'un inverse, d'une puissance, et la formule du binôme dans $\\mathbb{C}$.",
+      "statement": "Pour tous nombres complexes $z$ et $w$, le conjugue du produit $zw$ est :",
+      "options": {
+        "A": "$\\bar z+w$",
+        "B": "$z\\bar w$",
+        "C": "$\\bar z-\\bar w$",
+        "D": "$\\bar z\\,\\bar w$"
+      },
+      "declared_answer_current_source": "D",
+      "independent_solution": "La conjugaison est multiplicative : le conjugué de zw est le produit des conjugués de z et de w.",
+      "correct_answer": "D",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Cette expression remplace le produit par une somme et ne conjugue pas le second facteur. La conjugaison est multiplicative : le conjugué de zw est le produit des conjugués de z et de w.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "B",
+          "error_model": "Conjuguer un produit exige de conjuguer chacun des deux facteurs, pas seulement $w$. La conjugaison est multiplicative : le conjugué de zw est le produit des conjugués de z et de w.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "C",
+          "error_model": "La conjugaison conserve le produit ; elle ne le transforme pas en une différence. La conjugaison est multiplicative : le conjugué de zw est le produit des conjugués de z et de w.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "question_id": "Q1",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json",
+      "source_sha256": "2068db2c4753e2948bc46c7c8ac2786db13c2b6b584b4c3228d45a91ecba130b",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais passer de la forme algébrique d'un nombre complexe à sa forme trigonométrique ou exponentielle, et inversement.",
+      "statement": "La forme exponentielle de $z = 1 + i\\sqrt{3}$ est :",
+      "options": {
+        "A": "$2e^{i\\pi/3}$",
+        "B": "$2e^{i\\pi/6}$",
+        "C": "$e^{i\\pi/3}$",
+        "D": "$2e^{-i\\pi/3}$"
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "Le module de 1+i racine(3) vaut 2 et son argument principal vaut pi/3, donc z=2 exp(i pi/3).",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "Erreur d'angle pi/6 au lieu de pi/3. Le module de 1+i racine(3) vaut 2 et son argument principal vaut pi/3, donc z=2 exp(i pi/3).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "Module faux (1 au lieu de 2). Le module de 1+i racine(3) vaut 2 et son argument principal vaut pi/3, donc z=2 exp(i pi/3).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Erreur de signe d'argument. Le module de 1+i racine(3) vaut 2 et son argument principal vaut pi/3, donc z=2 exp(i pi/3).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "question_id": "Q2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json",
+      "source_sha256": "2068db2c4753e2948bc46c7c8ac2786db13c2b6b584b4c3228d45a91ecba130b",
+      "capacity": "C2",
+      "capacity_contract_wording": "Je sais utiliser les formules d'Euler et de Moivre pour transformer des expressions trigonométriques et calculer des puissances de nombres complexes.",
+      "statement": "D'apres la formule de Euler, $\\cos(\\theta) =$",
+      "options": {
+        "A": "$\\frac{e^{i\\theta} - e^{-i\\theta}}{2}$",
+        "B": "$\\frac{e^{i\\theta} + e^{-i\\theta}}{2i}$",
+        "C": "$\\frac{e^{i\\theta} + e^{-i\\theta}}{2}$",
+        "D": "$e^{i\\theta} + e^{-i\\theta}$"
+      },
+      "declared_answer_current_source": "C",
+      "independent_solution": "En additionnant les formules d'Euler, cos(theta)=(exp(i theta)+exp(-i theta))/2.",
+      "correct_answer": "C",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Formule de sin(theta) sans le i. En additionnant les formules d'Euler, cos(theta)=(exp(i theta)+exp(-i theta))/2.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "B",
+          "error_model": "Facteur 2i au lieu de 2. En additionnant les formules d'Euler, cos(theta)=(exp(i theta)+exp(-i theta))/2.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "D",
+          "error_model": "Oubli de diviser par 2. En additionnant les formules d'Euler, cos(theta)=(exp(i theta)+exp(-i theta))/2.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "question_id": "Q3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json",
+      "source_sha256": "2068db2c4753e2948bc46c7c8ac2786db13c2b6b584b4c3228d45a91ecba130b",
+      "capacity": "C2",
+      "capacity_contract_wording": "Je sais utiliser les formules d'Euler et de Moivre pour transformer des expressions trigonométriques et calculer des puissances de nombres complexes.",
+      "statement": "La formule de Moivre donne $(\\cos\\theta + i\\sin\\theta)^n =$",
+      "options": {
+        "A": "$\\cos^n\\theta + i\\sin^n\\theta$",
+        "B": "$\\cos(n\\theta) + i\\sin(n\\theta)$",
+        "C": "$n\\cos\\theta + in\\sin\\theta$",
+        "D": "$\\cos(n\\theta) - i\\sin(n\\theta)$"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "La formule de Moivre donne (cos theta+i sin theta)^n=cos(n theta)+i sin(n theta).",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Puissance appliquee aux fonctions. La formule de Moivre donne (cos theta+i sin theta)^n=cos(n theta)+i sin(n theta).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "C",
+          "error_model": "Facteur n devant cos et sin. La formule de Moivre donne (cos theta+i sin theta)^n=cos(n theta)+i sin(n theta).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        },
+        {
+          "option": "D",
+          "error_model": "Erreur de signe. La formule de Moivre donne (cos theta+i sin theta)^n=cos(n theta)+i sin(n theta).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C2"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "question_id": "Q4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json",
+      "source_sha256": "2068db2c4753e2948bc46c7c8ac2786db13c2b6b584b4c3228d45a91ecba130b",
+      "capacity": "C7",
+      "capacity_contract_wording": "Je sais déterminer l'ensemble des racines n-ièmes de l'unité et les utiliser pour étudier des polygones réguliers.",
+      "statement": "Les racines n-iemes de l'unite sont au nombre de :",
+      "options": {
+        "A": "1",
+        "B": "2",
+        "C": "n-1",
+        "D": "n"
+      },
+      "declared_answer_current_source": "D",
+      "independent_solution": "L'équation z^n=1 possède exactement les n solutions exp(2ikpi/n), pour k de 0 à n-1.",
+      "correct_answer": "D",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Seule la racine 1 comptee dans R. L'équation z^n=1 possède exactement les n solutions exp(2ikpi/n), pour k de 0 à n-1.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C7"
+        },
+        {
+          "option": "B",
+          "error_model": "Racines reelles uniquement. L'équation z^n=1 possède exactement les n solutions exp(2ikpi/n), pour k de 0 à n-1.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C7"
+        },
+        {
+          "option": "C",
+          "error_model": "Compte incorrect. L'équation z^n=1 possède exactement les n solutions exp(2ikpi/n), pour k de 0 à n-1.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C7"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "question_id": "Q5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json",
+      "source_sha256": "2068db2c4753e2948bc46c7c8ac2786db13c2b6b584b4c3228d45a91ecba130b",
+      "capacity": "C5",
+      "capacity_contract_wording": "Je sais démontrer la factorisation de $z^n-a^n$ par $z-a$, celle de $P(z)$ par $z-a$ si $P(a)=0$, et que le nombre de racines d'un polynôme est majoré par son degré.",
+      "statement": "Si $P$ est un polynome complexe et $P(a)=0$, alors :",
+      "options": {
+        "A": "$z-a$ divise $P(z)$",
+        "B": "$z+a$ divise toujours $P(z)$",
+        "C": "$P$ est le polynôme nul",
+        "D": "$a$ est l'unique racine de $P$"
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z).",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "La racine $a$ fournit le facteur $z-a$ ; le facteur $z+a$ correspondrait à la racine $-a$. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "C",
+          "error_model": "Un polynôme non nul peut avoir des racines ; l'annulation en un point n'implique pas l'annulation identique. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "D",
+          "error_model": "La factorisation par $z-a$ n'interdit pas d'autres facteurs et donc d'autres racines. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z).",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-GRAPHES",
+      "question_id": "Q1",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.json",
+      "source_sha256": "8ee0b1f0fe79549ba38a8ea4b669948c024e1eb80cea1825475c7ac8b1d15feb",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais utiliser le vocabulaire des graphes : sommets, arêtes, adjacence, degré, ordre, chaîne, connexité, graphe complet.",
+      "statement": "Dans un graphe simple non oriente d'ordre n, le degre maximal d'un sommet est :",
+      "options": {
+        "A": "n",
+        "B": "n-1",
+        "C": "2n",
+        "D": "n^2"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Dans un graphe simple d'ordre n, un sommet peut être adjacent aux n-1 autres sommets au maximum.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Compte incluant le sommet lui-meme sans boucle. Dans un graphe simple d'ordre n, un sommet peut être adjacent aux n-1 autres sommets au maximum.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "Valeur trop grande. Dans un graphe simple d'ordre n, un sommet peut être adjacent aux n-1 autres sommets au maximum.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Valeur quadratique fausse. Dans un graphe simple d'ordre n, un sommet peut être adjacent aux n-1 autres sommets au maximum.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-GRAPHES",
+      "question_id": "Q2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.json",
+      "source_sha256": "8ee0b1f0fe79549ba38a8ea4b669948c024e1eb80cea1825475c7ac8b1d15feb",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais utiliser le vocabulaire des graphes : sommets, arêtes, adjacence, degré, ordre, chaîne, connexité, graphe complet.",
+      "statement": "La somme des degres de tous les sommets d'un graphe est egale a :",
+      "options": {
+        "A": "Le nombre d'aretes",
+        "B": "Le double du nombre de sommets",
+        "C": "Le double du nombre d'aretes",
+        "D": "Le carre du nombre de sommets"
+      },
+      "declared_answer_current_source": "C",
+      "independent_solution": "Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes.",
+      "correct_answer": "C",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Chaque arete contribue pour 2 degres. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "B",
+          "error_model": "Confusions entre sommets et aretes. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Formule quadratique incorrecte. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-GRAPHES",
+      "question_id": "Q3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.json",
+      "source_sha256": "8ee0b1f0fe79549ba38a8ea4b669948c024e1eb80cea1825475c7ac8b1d15feb",
+      "capacity": "C3",
+      "capacity_contract_wording": "Je sais construire la matrice d'adjacence d'un graphe.",
+      "statement": "La matrice d'adjacence d'un graphe simple non oriente est :",
+      "options": {
+        "A": "antisymétrique avec diagonale égale à 1",
+        "B": "symétrique avec diagonale nulle",
+        "C": "toujours triangulaire",
+        "D": "une matrice dont chaque ligne somme à 1"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "La matrice d'adjacence d'un graphe simple non orienté est symétrique et sa diagonale est nulle.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "L'absence de boucle impose une diagonale nulle, et une arête non orientée produit deux coefficients égaux. La matrice d'adjacence d'un graphe simple non orienté est symétrique et sa diagonale est nulle.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "C",
+          "error_model": "Aucun ordre général des sommets ne rend la matrice triangulaire lorsqu'il existe des arêtes dans les deux directions matricielles. La matrice d'adjacence d'un graphe simple non orienté est symétrique et sa diagonale est nulle.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "D",
+          "error_model": "La somme d'une ligne est le degré du sommet correspondant, qui n'est généralement pas égal à 1. La matrice d'adjacence d'un graphe simple non orienté est symétrique et sa diagonale est nulle.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-GRAPHES",
+      "question_id": "Q4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.json",
+      "source_sha256": "8ee0b1f0fe79549ba38a8ea4b669948c024e1eb80cea1825475c7ac8b1d15feb",
+      "capacity": "C4",
+      "capacity_contract_wording": "Je sais calculer le nombre de chemins de longueur donnée entre deux sommets d'un graphe à l'aide des puissances de la matrice d'adjacence.",
+      "statement": "Si M est la matrice d'adjacence, le nombre de chemins de longueur k de i a j est donne par le coefficient $(i,j)$ de :",
+      "options": {
+        "A": "$M + k$",
+        "B": "$k M$",
+        "C": "$M^{k-1}$",
+        "D": "$M^k$"
+      },
+      "declared_answer_current_source": "D",
+      "independent_solution": "Le coefficient (i,j) de M^k compte les chemins de longueur k allant du sommet i au sommet j.",
+      "correct_answer": "D",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Addition incorrecte. Le coefficient (i,j) de M^k compte les chemins de longueur k allant du sommet i au sommet j.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "B",
+          "error_model": "Multiplication par un scalaire. Le coefficient (i,j) de M^k compte les chemins de longueur k allant du sommet i au sommet j.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "C",
+          "error_model": "Puissance decalee de 1. Le coefficient (i,j) de M^k compte les chemins de longueur k allant du sommet i au sommet j.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-GRAPHES",
+      "question_id": "Q5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.json",
+      "source_sha256": "8ee0b1f0fe79549ba38a8ea4b669948c024e1eb80cea1825475c7ac8b1d15feb",
+      "capacity": "C5",
+      "capacity_contract_wording": "Je sais démontrer que le coefficient (i,j) de la puissance n-ième de la matrice d'adjacence donne le nombre de chemins de longueur n entre les sommets i et j.",
+      "statement": "Pourquoi le coefficient $(i,j)$ de $M^{n+1}$ compte-t-il les chemins de longueur $n+1$ de $i$ a $j$ ?",
+      "options": {
+        "A": "parce que tous les coefficients de $M$ valent 1",
+        "B": "parce que $M^{n+1}=M+n+1$",
+        "C": "car $\\sum_k(M^n)_{ik}M_{kj}$ classe les chemins selon l'avant-dernier sommet $k$",
+        "D": "car un graphe possède toujours un unique chemin entre deux sommets"
+      },
+      "declared_answer_current_source": "C",
+      "independent_solution": "La formule (M^(n+1))_(i,j)=somme_k (M^n)_(i,k)M_(k,j) classe les chemins selon leur avant-dernier sommet k.",
+      "correct_answer": "C",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Une matrice d'adjacence contient aussi des zéros ; le comptage vient du produit matriciel, pas de coefficients tous égaux à 1. La formule (M^(n+1))_(i,j)=somme_k (M^n)_(i,k)M_(k,j) classe les chemins selon leur avant-dernier sommet k.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "B",
+          "error_model": "Une puissance matricielle est obtenue par produits successifs et ne se réduit pas à une addition scalaire. La formule (M^(n+1))_(i,j)=somme_k (M^n)_(i,k)M_(k,j) classe les chemins selon leur avant-dernier sommet k.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "D",
+          "error_model": "Un graphe peut avoir zéro, un ou plusieurs chemins entre deux sommets ; l'unicité n'est pas une propriété générale. La formule (M^(n+1))_(i,j)=somme_k (M^n)_(i,k)M_(k,j) classe les chemins selon leur avant-dernier sommet k.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "question_id": "Q1",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.json",
+      "source_sha256": "a71da6d36e722150c6a00e331be0a65fc234caeee59d4276cb07ca0c2eccb0d3",
+      "capacity": "C4",
+      "capacity_contract_wording": "Je sais associer un graphe orienté pondéré à une chaîne de Markov à deux ou trois états, et représenter distribution initiale et matrice de transition.",
+      "statement": "Une matrice de transition d'une chaine de Markov a pour propriete :",
+      "options": {
+        "A": "La somme des colonnes vaut 1",
+        "B": "La somme de chaque ligne vaut 1",
+        "C": "Tous ses coefficients sont negatifs",
+        "D": "Elle est toujours symetrique"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Confusions entre lignes et colonnes. Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "C",
+          "error_model": "Les probabilites sont positives. Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        },
+        {
+          "option": "D",
+          "error_model": "Symetrie non requise. Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C4"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "question_id": "Q2",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.json",
+      "source_sha256": "a71da6d36e722150c6a00e331be0a65fc234caeee59d4276cb07ca0c2eccb0d3",
+      "capacity": "C5",
+      "capacity_contract_wording": "Je sais calculer, pour une chaîne de Markov, la distribution après n transitions et interpréter le coefficient (i,j) de la puissance n-ième de la matrice de transition.",
+      "statement": "Si $P$ est la matrice de transition et $P_0$ l'etat initial (vecteur ligne), alors $P_n =$",
+      "options": {
+        "A": "$P_0 P^n$",
+        "B": "$P^n P_0$",
+        "C": "$P_0 + n P$",
+        "D": "$P_0 P n$"
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "Après n transitions, une distribution ligne initiale pi_0 devient pi_n=pi_0 P^n.",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "Ordre des facteurs incorrect avec vecteur ligne. Après n transitions, une distribution ligne initiale pi_0 devient pi_n=pi_0 P^n.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "C",
+          "error_model": "Addition au lieu de produit matriciel. Après n transitions, une distribution ligne initiale pi_0 devient pi_n=pi_0 P^n.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        },
+        {
+          "option": "D",
+          "error_model": "Multiplication par n au lieu de la puissance n. Après n transitions, une distribution ligne initiale pi_0 devient pi_n=pi_0 P^n.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C5"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "FOUNDATIONAL",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "question_id": "Q3",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.json",
+      "source_sha256": "a71da6d36e722150c6a00e331be0a65fc234caeee59d4276cb07ca0c2eccb0d3",
+      "capacity": "C7",
+      "capacity_contract_wording": "Je sais déterminer une distribution invariante d'une chaîne de Markov à deux ou trois états.",
+      "statement": "Un etat stable $X$ d'une chaine de Markov verifie :",
+      "options": {
+        "A": "$P X = X$",
+        "B": "$X P = 0$",
+        "C": "$X P = X$ et la somme des composantes vaut 1",
+        "D": "$X^2 = P$"
+      },
+      "declared_answer_current_source": "C",
+      "independent_solution": "Une distribution invariante ligne X vérifie XP=X, avec composantes positives de somme 1.",
+      "correct_answer": "C",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Vecteur colonne au lieu de vecteur ligne. Une distribution invariante ligne X vérifie XP=X, avec composantes positives de somme 1.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C7"
+        },
+        {
+          "option": "B",
+          "error_model": "Produit nul incorrect. Une distribution invariante ligne X vérifie XP=X, avec composantes positives de somme 1.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C7"
+        },
+        {
+          "option": "D",
+          "error_model": "Carre matriciel incorrect. Une distribution invariante ligne X vérifie XP=X, avec composantes positives de somme 1.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C7"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "question_id": "Q4",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.json",
+      "source_sha256": "a71da6d36e722150c6a00e331be0a65fc234caeee59d4276cb07ca0c2eccb0d3",
+      "capacity": "C3",
+      "capacity_contract_wording": "Je sais étudier une suite de matrices colonnes vérifiant $U_{n+1}=AU_n+C$, en résolvant un système linéaire ou une suite récurrente.",
+      "statement": "Une suite de matrices colonnes verifie $U_{n+1}=AU_n+C$. Une solution constante $U$ satisfait :",
+      "options": {
+        "A": "$AU=C$",
+        "B": "$(I-A)U=C$",
+        "C": "$U=A+C$",
+        "D": "$U=0$ dans tous les cas"
+      },
+      "declared_answer_current_source": "B",
+      "independent_solution": "Une solution constante U de U_(n+1)=AU_n+C vérifie U=AU+C, donc (I-A)U=C.",
+      "correct_answer": "B",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "A",
+          "error_model": "Substituer une suite constante donne U=AU+C ; oublier le terme U du membre gauche mène à l'équation incomplète AU=C. Une solution constante U de U_(n+1)=AU_n+C vérifie U=AU+C, donc (I-A)U=C.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "C",
+          "error_model": "L'addition A+C mélange une matrice et un vecteur sans appliquer A à U et ne traduit pas la récurrence. Une solution constante U de U_(n+1)=AU_n+C vérifie U=AU+C, donc (I-A)U=C.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        },
+        {
+          "option": "D",
+          "error_model": "Le vecteur nul n'est solution que si C=0 ; aucune telle hypothèse n'est donnée. Une solution constante U de U_(n+1)=AU_n+C vérifie U=AU+C, donc (I-A)U=C.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C3"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    },
+    {
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "question_id": "Q5",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.json",
+      "source_sha256": "a71da6d36e722150c6a00e331be0a65fc234caeee59d4276cb07ca0c2eccb0d3",
+      "capacity": "C1",
+      "capacity_contract_wording": "Je sais effectuer les opérations sur les matrices (somme, produit, inverse, puissance).",
+      "statement": "Pour inverser une matrice 2x2 $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$, le determinant est :",
+      "options": {
+        "A": "$ad - bc$",
+        "B": "$ac - bd$",
+        "C": "$ad + bc$",
+        "D": "$a+b+c+d$"
+      },
+      "declared_answer_current_source": "A",
+      "independent_solution": "Le déterminant de la matrice [[a,b],[c,d]] est ad-bc.",
+      "correct_answer": "A",
+      "answer_key_status": "PASS",
+      "unique_correct_option": "PASS",
+      "diagnostics": [
+        {
+          "option": "B",
+          "error_model": "Erreur de formule du determinant. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "C",
+          "error_model": "Signe + au lieu de -. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        },
+        {
+          "option": "D",
+          "error_model": "Somme des termes. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc.",
+          "causal_consistency": "PASS",
+          "specificity": "PASS",
+          "remediation_reference": "C1"
+        }
+      ],
+      "diagnostic_consistency": "PASS",
+      "generic_diagnostics_requiring_rewrite": [],
+      "programme_authority": "MENE1921264A",
+      "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
+      "effective_school_year": "2026-2027",
+      "programme_alignment": "PASS",
+      "capacity_alignment": "PASS",
+      "wrong_programme_year": false,
+      "difficulty": "STANDARD",
+      "variant_visibility": "STUDENT_QUESTION_ONLY_TEACHER_KEY_AND_DIAGNOSTICS",
+      "minimal_correction": "NONE_CURRENT_SOURCE_AFTER_REVIEW"
+    }
+  ]
+}
