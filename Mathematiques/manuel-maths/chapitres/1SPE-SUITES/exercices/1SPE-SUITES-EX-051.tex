@@ -1,0 +1,18 @@
+% META: {"id":"1SPE-SUITES-EX-051","chapitre":"1SPE-SUITES","type_objet":"exercice","capacites":["1SPE-SUITES-C8"],"capacites_codes":["C8"],"methodes":["M8"],"parcours":2,"competences":["calculer","representer","raisonner","communiquer"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-051.tex","corrige_tex":"chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-051.tex","status":"generated"}
+% BEGIN-VERIFY
+% from fractions import Fraction
+% assert [3 + Fraction(1, 2**n) for n in (0, 1, 2, 5, 10)] == [4, Fraction(7,2), Fraction(13,4), Fraction(97,32), Fraction(3073,1024)]
+% assert [n*n for n in (0, 1, 2, 5, 10)] == [0, 1, 4, 25, 100]
+% assert [(-1)**n for n in range(6)] == [1, -1, 1, -1, 1, -1]
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-051}{2}{15}
+On considère les suites
+\[u_n=3+\left(\frac12\right)^n,\qquad v_n=n^2,\qquad w_n=(-1)^n.\]
+
+\begin{enumerate}
+  \item Calculer leurs termes aux rangs $0$, $1$, $2$, $5$ et $10$.
+  \item Associer à chaque suite l'un des comportements suivants : limite finie, limite infinie, absence de limite.
+  \item Pour la suite ayant une limite finie, conjecturer cette limite.
+  \item Rédiger chaque conclusion en précisant qu'il s'agit d'une observation intuitive, sans démonstration formelle.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,23 @@
+% META: {"id":"1SPE-SUITES-ME-008","chapitre":"1SPE-SUITES","type_objet":"methode","capacites_codes":["C8"],"methodes":["M8"],"sources_inspiration":[],"status":"generated"}
+
+\begin{fichemethode}{M8}{Conjecturer le comportement à long terme d'une suite}
+\quandUtiliser{Lorsque l'on demande de décrire intuitivement le comportement d'une suite pour de grands rangs, sans démonstration formelle.}
+
+\pasApas{
+\begin{enumerate}
+  \item Calculer ou faire calculer plusieurs termes, dont certains de rang élevé.
+  \item Représenter si possible les points $(n\,;\,u_n)$.
+  \item Rechercher l'un des trois comportements : rapprochement vers un réel, croissance sans borne dans un même sens, ou absence de stabilisation.
+  \item Conclure prudemment par une conjecture : limite finie, limite infinie ou absence de limite.
+\end{enumerate}
+}
+
+\exempleRedige{
+Pour $u_n=2+0{,}5^n$, on obtient $u_5\approx2{,}031$, $u_{10}\approx2{,}001$ et $u_{20}\approx2{,}000001$. Les termes semblent se rapprocher de $2$ : on conjecture une limite finie égale à $2$.
+}
+
+\pieges{Trois valeurs ne suffisent pas à prévoir un comportement à long terme. Une oscillation, comme celle de $(-1)^n$, ne constitue pas un rapprochement vers $0$.}
+
+\verifier{La conclusion est formulée comme une conjecture et n'invoque aucun théorème de convergence.}
+\sEntrainer{\refExos{M8}}
+\end{fichemethode}

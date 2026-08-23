@@ -27,12 +27,14 @@
     \item $22$
   \end{enumerate}
 
-\item \textbf{[Q3]} Parmi les assertions suivantes, laquelle est exacte concernant une suite definie par recurrence ?
+\item[] \textbf{Capacite C8}
+
+\item \textbf{[Q3]} On observe une suite dont les termes successifs sont $1$, $-1$, $1$, $-1$, $1$, $-1$, et ce motif se repete. Quelle conjecture intuitive est adaptee ?
   \begin{enumerate}[label=\Alph*.]
-    \item On peut calculer $u_{10}$ directement en substituant $n = 10$ dans la relation $u_{n+1} = f(u_n)$.
-    \item Pour calculer $u_1$, on substitue $n = 0$ dans la relation $u_{n+1} = f(u_n)$.
-    \item Une suite definie par formule explicite necessite de connaitre le terme precedent.
-    \item Une suite doit obligatoirement etre notee $u(n)$ et ne peut jamais etre notee $u_n$.
+    \item Elle semble avoir une limite finie egale a $0$.
+    \item Elle semble avoir une limite infinie egale a $+\infty$.
+    \item Elle semble ne pas avoir de limite.
+    \item Elle semble avoir une limite finie egale a $1$.
   \end{enumerate}
 
 \item[] \textbf{Capacite C2}
@@ -235,7 +237,7 @@ Question & Capacite & Reponse exacte \\
 \hline
 Q1 & C1 & \textbf{C} \\
 Q2 & C1 & \textbf{B} \\
-Q3 & C1 & \textbf{B} \\
+Q3 & C8 & \textbf{C} \\
 Q4 & C2 & \textbf{C} \\
 Q5 & C2 & \textbf{A} \\
 Q6 & C2 & \textbf{C} \\
@@ -275,9 +277,9 @@ Q21 & C7 & \textbf{B} \\
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{A} — Confusion entre formule explicite et recurrence : en recurrence, on ne peut pas substituer directement $n = 10$, il faut calculer tous les termes intermediaires $u_1, \ldots, u_9$. \emph{Renvoi : M1, etape 1.}
-    \item \textbf{C} — Definition inversee : c'est la suite par RECURRENCE qui necessite le terme precedent. La formule explicite donne $u_n$ directement en fonction de $n$. \emph{Renvoi : M1, etape 1.}
-    \item \textbf{D} — Le programme admet explicitement les deux notations $u(n)$ et $u_n$ ; aucune des deux n'est obligatoire a l'exclusion de l'autre. \emph{Renvoi : R5.}
+    \item \textbf{A} — Prendre la moyenne $0$ des deux valeurs alternees ne decrit pas les termes : ils restent a distance $1$ de $0$ et ne s'en rapprochent pas. \emph{Renvoi : M8, etape 3.}
+    \item \textbf{B} — Les termes restent egaux a $1$ ou $-1$ ; ils ne deviennent pas arbitrairement grands. \emph{Renvoi : M8, etape 3.}
+    \item \textbf{D} — Un terme sur deux vaut $-1$ : la suite ne se rapproche pas de $1$, elle continue d'osciller. \emph{Renvoi : M8, etape 3.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}

@@ -174,19 +174,25 @@
     "review_status": "needs_review",
     "official_section": "Suites numériques, modèles discrets (Algèbre)",
     "official_wording_or_short_paraphrase": "Sensibilisation intuitive à la notion de limite (finie/infinie/absence), toute formalisation exclue",
+    "explicit_limitation": "Toute formalisation de la notion de limite est exclue.",
     "obligation_type": "MANDATORY_EXPECTED_CAPACITY",
     "mandatory": true,
     "chapter": "1SPE-SUITES",
-    "contract_capacity": null,
-    "coverage_status": "UNMAPPED_TO_CAPACITY",
+    "contract_capacity": "1SPE-SUITES-C8",
+    "coverage_status": "CONTENT_REVIEW_PENDING",
     "evidence_paths": {
-      "course_sources": [],
-      "method_sources": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/ (grep par capacité, non énuméré exhaustivement ici)",
-      "exercise_sources": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/ (grep par capacité, non énuméré exhaustivement ici)",
-      "assessment_sources": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/",
-      "remediation_sources": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/"
+      "course_sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/17_C8_limites_intuitives.tex"
+      ],
+      "method_sources": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-008.tex",
+      "exercise_sources": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-051.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-051.tex"
+      ],
+      "assessment_sources": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json#Q3",
+      "remediation_sources": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-RE-C8.tex"
     },
-    "notes": "Non repéré comme capacité dédiée dans le référentiel (C1-C7). Peut être diffus dans plusieurs fichiers (14_C5 variations, algorithmique) — à vérifier lors de l'audit de contenu, pas seulement structurel.",
+    "notes": "Capacité C8 créée directement depuis MENE2602917A. La revue scientifique et pédagogique reste requise avant FULL ; la formalisation est explicitement exclue.",
     "row_id": "1SPE-MATRIX-008"
   },
   {

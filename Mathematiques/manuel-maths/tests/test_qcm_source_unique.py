@@ -169,12 +169,13 @@ def test_proba_conditionnelle_q18_decrit_les_donnees_qui_appellent_bayes() -> No
     assert question["correcte"] == "B"
 
 
-def test_suites_q3_reconnait_les_deux_notations_officielles() -> None:
+def test_suites_q3_evalue_l_absence_de_limite_sans_formalisation() -> None:
     question = _question("1SPE-SUITES", "Q3")
 
-    assert question["correcte"] == "B"
-    assert "obligatoirement" in question["options"]["D"]
-    assert "$u(n)$ et $u_n$" in question["diagnostics"]["D"]["erreur"]
+    assert question["capacite"] == "C8"
+    assert question["correcte"] == "C"
+    assert "ne pas avoir de limite" in question["options"]["C"]
+    assert "continue d'osciller" in question["diagnostics"]["D"]["erreur"]
 
 
 def test_suites_q14_demande_un_critere_objectif() -> None:

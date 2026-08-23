@@ -56,27 +56,27 @@
     },
     {
       "id": "Q3",
-      "capacite": "C1",
-      "enonce": "Parmi les assertions suivantes, laquelle est exacte concernant une suite definie par recurrence ?",
+      "capacite": "C8",
+      "enonce": "On observe une suite dont les termes successifs sont $1$, $-1$, $1$, $-1$, $1$, $-1$, et ce motif se repete. Quelle conjecture intuitive est adaptee ?",
       "options": {
-        "A": "On peut calculer $u_{10}$ directement en substituant $n = 10$ dans la relation $u_{n+1} = f(u_n)$.",
-        "B": "Pour calculer $u_1$, on substitue $n = 0$ dans la relation $u_{n+1} = f(u_n)$.",
-        "C": "Une suite definie par formule explicite necessite de connaitre le terme precedent.",
-        "D": "Une suite doit obligatoirement etre notee $u(n)$ et ne peut jamais etre notee $u_n$."
+        "A": "Elle semble avoir une limite finie egale a $0$.",
+        "B": "Elle semble avoir une limite infinie egale a $+\\infty$.",
+        "C": "Elle semble ne pas avoir de limite.",
+        "D": "Elle semble avoir une limite finie egale a $1$."
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "Confusion entre formule explicite et recurrence : en recurrence, on ne peut pas substituer directement $n = 10$, il faut calculer tous les termes intermediaires $u_1, \\ldots, u_9$.",
-          "renvoi": "M1, etape 1"
+          "erreur": "Prendre la moyenne $0$ des deux valeurs alternees ne decrit pas les termes : ils restent a distance $1$ de $0$ et ne s'en rapprochent pas.",
+          "renvoi": "M8, etape 3"
         },
-        "C": {
-          "erreur": "Definition inversee : c'est la suite par RECURRENCE qui necessite le terme precedent. La formule explicite donne $u_n$ directement en fonction de $n$.",
-          "renvoi": "M1, etape 1"
+        "B": {
+          "erreur": "Les termes restent egaux a $1$ ou $-1$ ; ils ne deviennent pas arbitrairement grands.",
+          "renvoi": "M8, etape 3"
         },
         "D": {
-          "erreur": "Le programme admet explicitement les deux notations $u(n)$ et $u_n$ ; aucune des deux n'est obligatoire a l'exclusion de l'autre.",
-          "renvoi": "R5"
+          "erreur": "Un terme sur deux vaut $-1$ : la suite ne se rapproche pas de $1$, elle continue d'osciller.",
+          "renvoi": "M8, etape 3"
         }
       }
     },

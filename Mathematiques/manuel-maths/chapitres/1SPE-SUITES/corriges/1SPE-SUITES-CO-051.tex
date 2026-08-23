@@ -1,0 +1,25 @@
+% META: {"id":"1SPE-SUITES-CO-051","chapitre":"1SPE-SUITES","type_objet":"corrige","exercice_ref":"1SPE-SUITES-EX-051","capacites_codes":["C8"],"sources_inspiration":[],"status":"generated"}
+% BEGIN-VERIFY
+% from fractions import Fraction
+% assert 3 + Fraction(1, 2**10) == Fraction(3073,1024)
+% assert 10**2 == 100
+% assert (-1)**10 == 1
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-051}
+\begin{center}
+\begin{tabular}{c|ccccc}
+$n$ & $0$ & $1$ & $2$ & $5$ & $10$ \\ \hline
+$u_n$ & $4$ & $3{,}5$ & $3{,}25$ & $3{,}03125$ & $3{,}00098$ \\
+$v_n$ & $0$ & $1$ & $4$ & $25$ & $100$ \\
+$w_n$ & $1$ & $-1$ & $1$ & $-1$ & $1$
+\end{tabular}
+\end{center}
+
+Les termes de $(u_n)$ semblent se rapprocher de $3$ : on conjecture une \textbf{limite finie} égale à $3$.
+
+Les termes de $(v_n)$ deviennent arbitrairement grands : on conjecture une \textbf{limite infinie} égale à $+\infty$.
+
+Les termes de $(w_n)$ alternent entre $1$ et $-1$ : on conjecture une \textbf{absence de limite}.
+
+Ces conclusions relèvent ici d'une observation intuitive, \textbf{sans démonstration formelle}.
+\end{corrige}
