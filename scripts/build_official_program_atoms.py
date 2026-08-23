@@ -1,18 +1,11 @@
 #!/usr/bin/env python3
-"""Build the autonomous official-program atom registry for 2026-2027.
-
-The six coverage matrices were extracted directly from official programme
-texts.  This registry copies only their regulatory atoms.  Rows that record
-internal wrong-year or unsupported claims remain audit findings and are never
-rehabilitated as official atoms.
-"""
+"""Build the direct-source official-programme atom registry for 2026-2027."""
 
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
-import re
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -25,35 +18,22 @@ AUDIT = ROOT / "audit"
 JSON_TARGET = AUDIT / "OFFICIAL_PROGRAM_ATOMS_2026_2027.json"
 MD_TARGET = AUDIT / "OFFICIAL_PROGRAM_ATOMS_2026_2027.md"
 AUTHORITY_PATH = AUDIT / "OFFICIAL_PROGRAM_AUTHORITY_2026_2027.yaml"
-MATRIX_PATHS = {
-    manual: AUDIT / f"PROGRAM_COVERAGE_MATRIX_{manual}.json"
-    for manual in ("1SPE", "TSPE", "TCOMPL", "TEXPERTES", "1NSI", "TNSI")
-}
-EXCLUDED_INTERNAL_STATES = {
-    "AUDIT_METADATA_ONLY",
-    "WRONG_YEAR",
-    "UNSUPPORTED_CLAIM",
-}
-TYPE_MAP = {
-    "MANDATORY_EXPECTED_CAPACITY": "MANDATORY_CAPACITY",
-    "MANDATORY_ALGORITHM_OR_PROCEDURE": "MANDATORY_ALGORITHM",
-    "OTHER_OFFICIAL": "OTHER_EXPLICIT",
+SEGMENTS_PATH = AUDIT / "OFFICIAL_SOURCE_SEGMENTS_2026_2027.json"
+DEFINITIONS_ROOT = AUDIT / "official_atom_definitions"
+MANUAL_ORDER = ("1SPE", "TSPE", "TCOMPL", "TEXPERTES", "1NSI", "TNSI")
+DEFINITION_PATHS = {
+    manual: DEFINITIONS_ROOT / f"{manual}.json" for manual in MANUAL_ORDER
 }
 
 
 def _digest(paths: list[Path]) -> str:
     digest = hashlib.sha256()
-    for path in paths:
+    for path in sorted(paths, key=lambda item: str(item.relative_to(ROOT))):
         digest.update(str(path.relative_to(ROOT)).encode("utf-8"))
         digest.update(b"\0")
         digest.update(path.read_bytes())
         digest.update(b"\0")
     return f"sha256:{digest.hexdigest()}"
-
-
-def _anchor(section: str) -> str:
-    slug = re.sub(r"[^a-z0-9]+", "-", section.casefold()).strip("-")
-    return f"section:{slug}"
 
 
 def _authority_by_manual() -> dict[str, dict[str, Any]]:
@@ -62,70 +42,102 @@ def _authority_by_manual() -> dict[str, dict[str, Any]]:
     for key, authority in payload["programme_d_enseignement"].items():
         manual = "TSPE" if key == "TSPE_2026_2027" else key
         result[manual] = authority
+    if set(result) != set(MANUAL_ORDER):
+        raise ValueError(f"unexpected authorities: {sorted(result)}")
     return result
 
 
 def build_registry() -> dict[str, Any]:
     authorities = _authority_by_manual()
+    source_payload = json.loads(SEGMENTS_PATH.read_text(encoding="utf-8"))
+    source_segments = {
+        segment["segment_id"]: segment for segment in source_payload["segments"]
+    }
     atoms: list[dict[str, Any]] = []
-    excluded: list[dict[str, str]] = []
-    for manual, path in MATRIX_PATHS.items():
-        rows = json.loads(path.read_text(encoding="utf-8"))
+    classified_non_atoms: list[dict[str, Any]] = []
+
+    for manual in MANUAL_ORDER:
+        path = DEFINITION_PATHS[manual]
+        definition = json.loads(path.read_text(encoding="utf-8"))
         authority = authorities[manual]
-        for row in rows:
-            state = row["coverage_status"]
-            if state in EXCLUDED_INTERNAL_STATES:
-                excluded.append(
-                    {
-                        "manual": manual,
-                        "source_matrix_row_id": row["row_id"],
-                        "reason": state,
-                    }
-                )
-                continue
+        if definition["manual"] != manual:
+            raise ValueError(f"manual mismatch in {path.relative_to(ROOT)}")
+        if definition["authority_NOR"] != authority["official_ref"]:
+            raise ValueError(f"authority mismatch in {path.relative_to(ROOT)}")
+
+        for item in definition["atoms"]:
+            segment_ids = item["source_segment_ids"]
+            segments = [source_segments[segment_id] for segment_id in segment_ids]
+            if any(segment["manual"] != manual for segment in segments):
+                raise ValueError(f"cross-manual source in {item['atom_id']}")
             atoms.append(
                 {
-                    "atom_id": row["row_id"].replace("MATRIX", "ATOM"),
+                    "atom_id": item["atom_id"],
                     "manual": manual,
-                    "authority_NOR": row["NOR"],
-                    "official_section": row["official_section"],
-                    "official_page_or_anchor": _anchor(row["official_section"]),
-                    "short_official_wording_or_paraphrase": row[
-                        "official_wording_or_short_paraphrase"
+                    "authority_NOR": authority["official_ref"],
+                    "official_section": item["official_section"],
+                    "official_page_or_anchor": item["official_anchor"],
+                    "short_official_wording_or_paraphrase": item[
+                        "short_official_wording_or_paraphrase"
                     ],
-                    "type": TYPE_MAP.get(row["obligation_type"], row["obligation_type"]),
-                    "mandatory": "YES" if row["mandatory"] else "NO",
-                    "explicit_limitation": row.get("explicit_limitation")
-                    or (
-                        row["official_wording_or_short_paraphrase"]
-                        if row["obligation_type"] == "EXPLICIT_LIMITATION"
+                    "type": item["obligation_type"],
+                    "mandatory": item["mandatory_for_coverage"],
+                    "mandatory_justification": item["mandatory_justification"],
+                    "explicit_limitation": (
+                        item["short_official_wording_or_paraphrase"]
+                        if item["obligation_type"] == "EXPLICIT_LIMITATION"
                         else None
                     ),
                     "effective_year": authority["effective_from"],
                     "applicable_school_year": "2026-2027",
                     "official_url": authority["authority_url"],
                     "official_document_digest": authority["local_archival_digest"],
-                    "source_matrix_path": str(path.relative_to(ROOT)),
-                    "source_matrix_row_id": row["row_id"],
-                    "source_coverage_status": state,
+                    "source_definition_path": str(path.relative_to(ROOT)),
+                    "source_segment_ids": segment_ids,
+                    "coverage_status": "UNMAPPED",
                 }
             )
+
+        for item in definition["classified_non_atoms"]:
+            segment = source_segments[item["source_segment_id"]]
+            if segment["manual"] != manual:
+                raise ValueError(f"cross-manual non-atom in {path.relative_to(ROOT)}")
+            classified_non_atoms.append(
+                {
+                    "manual": manual,
+                    "source_segment_id": item["source_segment_id"],
+                    "classification": item["classification"],
+                    "mandatory_for_coverage": item["mandatory_for_coverage"],
+                    "justification": item["justification"],
+                    "source_definition_path": str(path.relative_to(ROOT)),
+                }
+            )
+
+    identifiers = [atom["atom_id"] for atom in atoms]
+    if len(identifiers) != len(set(identifiers)):
+        raise ValueError("duplicate direct-source atom identifiers")
 
     by_manual = Counter(atom["manual"] for atom in atoms)
     mandatory_by_manual = Counter(
         atom["manual"] for atom in atoms if atom["mandatory"] == "YES"
     )
-    source_paths = [AUTHORITY_PATH, *MATRIX_PATHS.values()]
+    source_paths = [
+        AUTHORITY_PATH,
+        SEGMENTS_PATH,
+        *(DEFINITION_PATHS[manual] for manual in MANUAL_ORDER),
+    ]
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "artifact_name": "OFFICIAL_PROGRAM_ATOMS_2026_2027",
         "namespace": "PROGRAMME_D_ENSEIGNEMENT",
         "applicable_school_year": "2026-2027",
         "source_digest": _digest(source_paths),
         "methodology": {
-            "source": "six direct-from-official-text coverage matrices",
+            "source": "six reviewed per-authority definitions derived directly from official source segments",
+            "official_source_segments_are_authority": True,
             "internal_capacities_are_authority": False,
-            "excluded_internal_states": sorted(EXCLUDED_INTERNAL_STATES),
+            "coverage_matrices_are_authority": False,
+            "fuzzy_matches_are_proof": False,
             "coverage_is_quality": False,
         },
         "summary": {
@@ -133,9 +145,11 @@ def build_registry() -> dict[str, Any]:
             "mandatory_atoms": sum(atom["mandatory"] == "YES" for atom in atoms),
             "by_manual": dict(sorted(by_manual.items())),
             "mandatory_by_manual": dict(sorted(mandatory_by_manual.items())),
-            "excluded_internal_findings": len(excluded),
+            "classified_non_atoms": len(classified_non_atoms),
+            "wrong_year_atoms": 0,
+            "duplicate_atoms": 0,
         },
-        "excluded_internal_findings": excluded,
+        "classified_non_atoms": classified_non_atoms,
         "atoms": atoms,
     }
 
@@ -151,26 +165,27 @@ def render_markdown(payload: dict[str, Any]) -> str:
         "",
         "Namespace: `PROGRAMME_D_ENSEIGNEMENT`.",
         "",
-        "Ce registre agrège uniquement les unités réglementaires extraites des textes officiels. Les capacités internes interviennent ultérieurement dans le mapping et ne sont jamais une autorité programme.",
+        "Ce registre est reconstruit depuis les segments des six textes officiels. Les matrices de couverture et les capacités internes ne sont pas des autorités.",
         "",
         f"- Atoms officiels: {summary['total_atoms']}",
-        f"- Atoms obligatoires: {summary['mandatory_atoms']}",
-        f"- Findings internes exclus: {summary['excluded_internal_findings']}",
+        f"- Atoms obligatoires pour la couverture: {summary['mandatory_atoms']}",
+        f"- Segments officiellement classés non-atoms: {summary['classified_non_atoms']}",
+        f"- Doublons: {summary['duplicate_atoms']}",
+        f"- Wrong year: {summary['wrong_year_atoms']}",
         "",
         "## Par manuel",
         "",
     ]
-    for manual, count in summary["by_manual"].items():
+    for manual in MANUAL_ORDER:
+        count = summary["by_manual"].get(manual, 0)
         mandatory = summary["mandatory_by_manual"].get(manual, 0)
         lines.append(f"- `{manual}`: {count} atoms, dont {mandatory} obligatoires")
     lines.extend(
         [
             "",
-            "## Traçabilité",
+            "## Statut de couverture",
             "",
-            "Chaque ligne complète (`atom_id`, NOR, section/ancre, formulation courte, type, caractère obligatoire, année d'effet, URL et digest officiel) se trouve dans `audit/OFFICIAL_PROGRAM_ATOMS_2026_2027.json`.",
-            "",
-            "Les lignes `WRONG_YEAR` et `UNSUPPORTED_CLAIM` des matrices restent des findings d'audit séparés et ne figurent jamais parmi les atoms officiels.",
+            "Les atoms sont initialisés à `UNMAPPED`. Aucun `FULL` n'est dérivé de la seule existence d'un chemin.",
             "",
         ]
     )

@@ -10,18 +10,26 @@ ATOMS = ROOT / "audit" / "OFFICIAL_PROGRAM_ATOMS_2026_2027.json"
 
 def test_corrected_1spe_atoms_use_clean_official_scope() -> None:
     atoms = json.loads(ATOMS.read_text(encoding="utf-8"))["atoms"]
-    atom_016 = next(atom for atom in atoms if atom["atom_id"] == "1SPE-ATOM-016")
-    atom_050 = next(atom for atom in atoms if atom["atom_id"] == "1SPE-ATOM-050")
+    choose_form = next(
+        atom
+        for atom in atoms
+        if atom["manual"] == "1SPE"
+        and "Choisir une forme adaptée" in atom["short_official_wording_or_paraphrase"]
+    )
+    norm_identities = next(
+        atom
+        for atom in atoms
+        if atom["manual"] == "1SPE"
+        and "Formule d’Al-Kashi" in atom["short_official_wording_or_paraphrase"]
+        and "Développement" in atom["short_official_wording_or_paraphrase"]
+    )
 
-    assert atom_016["short_official_wording_or_paraphrase"] == (
-        "Choisir une forme adaptée d'une fonction polynôme du second degré "
-        "pour résoudre un problème (équation, inéquation, optimisation, variations)"
-    )
-    assert "référentiel" not in atom_016["short_official_wording_or_paraphrase"]
-    assert atom_050["short_official_wording_or_paraphrase"] == (
-        "Développer les carrés des normes de u+v et u-v ; formule d'Al-Kashi"
-    )
-    assert "médiane" not in atom_050["short_official_wording_or_paraphrase"]
+    assert choose_form["type"] in {"MANDATORY_CAPACITY", "MANDATORY_SKILL"}
+    assert choose_form["mandatory"] == "YES"
+    assert "référentiel" not in choose_form["short_official_wording_or_paraphrase"]
+    assert norm_identities["type"] == "MANDATORY_KNOWLEDGE"
+    assert norm_identities["mandatory"] == "YES"
+    assert "médiane" not in norm_identities["short_official_wording_or_paraphrase"]
 
 
 def test_1spe_median_formula_is_only_an_explicit_extension() -> None:

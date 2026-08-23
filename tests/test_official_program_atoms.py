@@ -43,32 +43,36 @@ def test_official_program_atoms_have_required_traceability() -> None:
     for atom in atoms:
         assert atom["authority_NOR"]
         assert atom["official_section"]
-        assert atom["official_page_or_anchor"].startswith("section:")
+        assert atom["official_page_or_anchor"]
         assert atom["short_official_wording_or_paraphrase"]
         assert atom["type"] in ALLOWED_TYPES
         assert atom["mandatory"] in {"YES", "NO"}
         assert atom["effective_year"] in {"2019-2020", "2020-2021", "2026-2027"}
         assert atom["applicable_school_year"] == "2026-2027"
-        assert atom["source_matrix_path"].startswith("audit/PROGRAM_COVERAGE_MATRIX_")
-        assert atom["source_matrix_row_id"]
+        assert atom["mandatory_justification"]
+        assert atom["source_definition_path"] == (
+            f"audit/official_atom_definitions/{atom['manual']}.json"
+        )
+        assert atom["source_segment_ids"]
+        assert atom["coverage_status"] == "UNMAPPED"
 
 
-def test_internal_findings_are_not_rehabilitated_as_official_atoms() -> None:
+def test_registry_is_direct_source_and_has_no_wrong_year_or_duplicate_atoms() -> None:
     payload = json.loads(REGISTRY.read_text(encoding="utf-8"))
-    atoms = payload["atoms"]
+    assert payload["schema_version"] == 2
+    assert payload["methodology"]["official_source_segments_are_authority"] is True
+    assert payload["methodology"]["internal_capacities_are_authority"] is False
+    assert payload["methodology"]["coverage_matrices_are_authority"] is False
+    assert payload["methodology"]["fuzzy_matches_are_proof"] is False
+    assert payload["summary"]["wrong_year_atoms"] == 0
+    assert payload["summary"]["duplicate_atoms"] == 0
 
-    assert not [
-        atom
-        for atom in atoms
-        if atom["source_coverage_status"]
-        in {"AUDIT_METADATA_ONLY", "WRONG_YEAR", "UNSUPPORTED_CLAIM"}
+
+def test_explicit_limitations_are_preserved_without_becoming_mandatory_content() -> None:
+    payload = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    limitations = [
+        atom for atom in payload["atoms"] if atom["type"] == "EXPLICIT_LIMITATION"
     ]
-    assert payload["summary"]["excluded_internal_findings"] == 11
-
-
-def test_embedded_explicit_limitation_is_preserved_on_mandatory_atom() -> None:
-    payload = json.loads(REGISTRY.read_text(encoding="utf-8"))
-    atom = next(item for item in payload["atoms"] if item["atom_id"] == "1SPE-ATOM-008")
-
-    assert atom["source_coverage_status"] == "CONTENT_REVIEW_PENDING"
-    assert atom["explicit_limitation"] == "Toute formalisation de la notion de limite est exclue."
+    assert limitations
+    assert all(atom["explicit_limitation"] for atom in limitations)
+    assert all(atom["mandatory"] == "NO" for atom in limitations)

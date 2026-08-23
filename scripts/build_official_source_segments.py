@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
-"""Build a source-first official-programme-segment ↔ atom proof.
-
-Population is extracted from the six archived official TXT/PDF files before
-the atom ledger is consulted.  Atom wording is used only in the second,
-mapping phase.  This ordering is intentional: deleting an atom must leave an
-official mandatory source segment visibly unparsed.
-"""
+"""Extract reviewed official-programme segments without atom dependencies."""
 
 from __future__ import annotations
 
@@ -27,7 +21,6 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[1]
 AUDIT = ROOT / "audit"
 AUTHORITY_PATH = AUDIT / "OFFICIAL_PROGRAM_AUTHORITY_2026_2027.yaml"
-ATOMS_PATH = AUDIT / "OFFICIAL_PROGRAM_ATOMS_2026_2027.json"
 JSON_TARGET = AUDIT / "OFFICIAL_SOURCE_SEGMENTS_2026_2027.json"
 MD_TARGET = AUDIT / "OFFICIAL_SOURCE_SEGMENTS_2026_2027.md"
 MANUAL_ORDER = ("1SPE", "TSPE", "TCOMPL", "TEXPERTES", "1NSI", "TNSI")
@@ -162,6 +155,76 @@ KNOWN_MISLEADING_ATOM_WORDING = (
         "required_rewording": "Approfondissements possibles : démonstration de l'unicité, de exp(x+y)=exp(x)exp(y), et de la positivité/croissance stricte",
     },
 )
+
+
+# Direct source-review units that the generic rubric/bullet state machine
+# cannot infer safely.  The archived authorities are digest-pinned, so exact
+# physical line anchors are deterministic.  Each entry records a substantive
+# official unit; atom wording and fuzzy matching play no role in population.
+REVIEWED_MATH_SOURCE_UNITS: dict[str, tuple[tuple[int, int, str, str, str], ...]] = {
+    "1SPE": (
+        # Vocabulaire ensembliste et logique.
+        (192, 194, "IMPLEMENTATION_GUIDANCE", "NO", "Vocabulaire ensembliste et logique — mise en œuvre transversale"),
+        (195, 201, "CONTENTS", "YES", "Vocabulaire ensembliste et logique — connaissances"),
+        (203, 203, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (204, 204, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (205, 205, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (206, 206, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (207, 207, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (208, 208, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (209, 210, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (211, 211, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (212, 213, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — raisonnements"),
+        # Automatismes : les intertitres thématiques interrompaient à tort la
+        # catégorie après « Évolutions et variations ».
+        (268, 268, "AUTOMATISMS", "YES", "Automatismes — calcul numérique et algébrique"),
+        (269, 269, "AUTOMATISMS", "YES", "Automatismes — calcul numérique et algébrique"),
+        (270, 270, "AUTOMATISMS", "YES", "Automatismes — calcul numérique et algébrique"),
+        (273, 273, "AUTOMATISMS", "YES", "Automatismes — fonctions et représentations"),
+        (274, 274, "AUTOMATISMS", "YES", "Automatismes — fonctions et représentations"),
+        (275, 275, "AUTOMATISMS", "YES", "Automatismes — fonctions et représentations"),
+        (276, 276, "AUTOMATISMS", "YES", "Automatismes — fonctions et représentations"),
+        (277, 277, "AUTOMATISMS", "YES", "Automatismes — fonctions et représentations"),
+        (280, 281, "AUTOMATISMS", "YES", "Automatismes — statistiques"),
+        (282, 282, "AUTOMATISMS", "YES", "Automatismes — statistiques"),
+        (283, 283, "AUTOMATISMS", "YES", "Automatismes — statistiques"),
+        (286, 287, "AUTOMATISMS", "YES", "Automatismes — probabilités"),
+        (288, 288, "AUTOMATISMS", "YES", "Automatismes — probabilités"),
+        # Dérivation : les intertitres « Point de vue local/global » avaient
+        # interrompu à tort la rubrique Contenus.
+        (435, 435, "CONTENTS", "YES", "Dérivation — point de vue local"),
+        (436, 436, "CONTENTS", "YES", "Dérivation — point de vue local"),
+        (437, 438, "CONTENTS", "YES", "Dérivation — point de vue local"),
+        (439, 439, "CONTENTS", "YES", "Dérivation — point de vue local"),
+        (441, 441, "CONTENTS", "YES", "Dérivation — point de vue global"),
+        (442, 442, "CONTENTS", "YES", "Dérivation — point de vue global"),
+        (443, 443, "CONTENTS", "YES", "Dérivation — point de vue global"),
+        (444, 444, "CONTENTS", "YES", "Dérivation — point de vue global"),
+        (445, 445, "CONTENTS", "YES", "Dérivation — point de vue global"),
+    ),
+    "TSPE": (
+        # Objectifs et notions structurantes de combinatoire/dénombrement.
+        (204, 205, "EXPECTED_CAPACITIES", "YES", "Algèbre et géométrie — objectifs de combinatoire"),
+        (206, 208, "EXPECTED_CAPACITIES", "YES", "Algèbre et géométrie — objectifs de combinatoire"),
+        (259, 262, "CONTENTS", "YES", "Combinatoire et dénombrement — notions ensemblistes"),
+        # Vocabulaire ensembliste et logique.
+        (985, 988, "IMPLEMENTATION_GUIDANCE", "NO", "Vocabulaire ensembliste et logique — mise en œuvre transversale"),
+        (989, 995, "CONTENTS", "YES", "Vocabulaire ensembliste et logique — connaissances"),
+        (996, 1004, "IMPLEMENTATION_GUIDANCE", "NO", "Vocabulaire ensembliste et logique — articulation avec les fonctions"),
+        (1005, 1007, "EXPLICIT_LIMITATIONS", "NO", "Vocabulaire ensembliste et logique — limitation sur le symbole de somme"),
+        (1009, 1010, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (1011, 1011, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (1012, 1013, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (1014, 1014, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (1015, 1016, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (1017, 1017, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (1018, 1019, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (1020, 1020, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (1021, 1021, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (1022, 1022, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+        (1023, 1023, "EXPECTED_CAPACITIES", "YES", "Vocabulaire ensembliste et logique — capacités"),
+    ),
+}
 
 # Peer-reviewed omissions found by reading MENE2602917A from source to atom.
 # These anchors must stay unmapped until a dedicated atom represents the
@@ -374,6 +437,76 @@ def _looks_like_heading(line: str) -> bool:
     return not stripped.startswith(("−", "", "-", "•", "", "©"))
 
 
+def _reviewed_math_segments(
+    manual: str,
+    authority: dict[str, Any],
+    lines: list[str],
+) -> list[Segment]:
+    """Extract peer-reviewed units missed by the generic rubric state machine.
+
+    The source files are digest-pinned in the authority registry.  Exact line
+    anchors are therefore stable evidence, and wording is always reread from
+    the official file rather than copied into this extractor.
+    """
+    relative = authority["local_archival_file"]
+    result: list[Segment] = []
+    for start, end, classification, mandatory, section in REVIEWED_MATH_SOURCE_UNITS.get(manual, ()):
+        if start < 1 or end > len(lines) or start > end:
+            raise ValueError(f"invalid reviewed source range for {manual}: {start}-{end}")
+        parts: list[str] = []
+        for raw in lines[start - 1 : end]:
+            stripped = raw.strip().lstrip("\f").strip()
+            if not stripped or stripped.startswith("© Ministère"):
+                continue
+            stripped = re.sub(r"^(?:−||-|•|)\s*", "", stripped)
+            parts.append(stripped)
+        wording = _compact(" ".join(parts))
+        if len(_tokens(wording)) < 2:
+            raise ValueError(f"empty reviewed source unit for {manual}: {start}-{end}")
+        result.append(
+            Segment(
+                manual,
+                authority["official_ref"],
+                relative,
+                f"lines:{start}" if start == end else f"lines:{start}-{end}",
+                wording,
+                classification,
+                mandatory,
+                section,
+                [],
+            )
+        )
+    return result
+
+
+def _math_anchor_bounds(anchor: str) -> tuple[int, int] | None:
+    match = re.fullmatch(r"lines:(\d+)(?:-(\d+))?", anchor)
+    if not match:
+        return None
+    start = int(match.group(1))
+    return start, int(match.group(2) or start)
+
+
+def _math_segment_source_order(segment: Segment) -> tuple[int, int, int, str]:
+    bounds = _math_anchor_bounds(segment.source_anchor)
+    if bounds is None:
+        return (10**9, 10**9, 10**9, segment.classification)
+    priority = {
+        "IMPLEMENTATION_GUIDANCE": 0,
+        "HISTORY_CONTEXT": 1,
+        "CONTENTS": 2,
+        "EXPECTED_CAPACITIES": 3,
+        "MANDATORY_PROOFS": 4,
+        "AUTOMATISMS": 5,
+        "ALGORITHMS": 6,
+        "OPTIONAL_EXTENSIONS": 7,
+        "CROSS_CUTTING_COMPETENCIES": 8,
+        "OTHER_OFFICIAL": 9,
+        "EXPLICIT_LIMITATIONS": 10,
+    }
+    return bounds[0], priority.get(segment.classification, 99), bounds[1], segment.classification
+
+
 def _extract_math_segments(manual: str, authority: dict[str, Any]) -> list[Segment]:
     relative = authority["local_archival_file"]
     path = ROOT / relative
@@ -448,6 +581,8 @@ def _extract_math_segments(manual: str, authority: dict[str, Any]) -> list[Segme
         and not re.fullmatch(r"\d+ generale", _normalise(segment.source_wording_short))
     ]
 
+    segments.extend(_reviewed_math_segments(manual, authority, lines))
+
     if manual == "TCOMPL":
         # This source-first organisational requirement sits outside the
         # recurring content/capacity rubrics: all nine themes must be treated,
@@ -465,13 +600,22 @@ def _extract_math_segments(manual: str, authority: dict[str, Any]) -> list[Segme
         normal = _normalise(raw)
         if any(marker in normal for marker in LIMITATION_MARKERS):
             wording = _compact(raw)
-            if wording and not any(_normalise(item.source_wording_short) == normal for item in segments):
+            already_reviewed = any(
+                item.classification == "EXPLICIT_LIMITATIONS"
+                and (bounds := _math_anchor_bounds(item.source_anchor)) is not None
+                and bounds[0] <= index <= bounds[1]
+                for item in segments
+            )
+            if (wording and not already_reviewed
+                    and not any(_normalise(item.source_wording_short) == normal for item in segments)):
                 segments.append(
                     Segment(
                         manual, authority["official_ref"], relative, f"lines:{index}", wording,
                         "EXPLICIT_LIMITATIONS", "NO", "Limitation explicite", [],
                     )
                 )
+    if manual in REVIEWED_MATH_SOURCE_UNITS:
+        segments.sort(key=_math_segment_source_order)
     return segments
 
 
@@ -690,13 +834,10 @@ def _duplicate_groups(atoms: list[dict[str, Any]], segments: list[Segment]) -> l
     ]
 
 
-def build_registry(atoms_override: list[dict[str, Any]] | None = None) -> dict[str, Any]:
+def build_registry() -> dict[str, Any]:
     authorities = _authorities()
-    atoms_payload = json.loads(ATOMS_PATH.read_text(encoding="utf-8"))
-    atoms = atoms_payload["atoms"] if atoms_override is None else atoms_override
     source_documents: dict[str, dict[str, Any]] = {}
     source_paths: list[Path] = []
-    wrong_year: list[str] = []
     for manual in MANUAL_ORDER:
         authority = authorities[manual]
         relative = authority["local_archival_file"]
@@ -718,37 +859,7 @@ def build_registry(atoms_override: list[dict[str, Any]] | None = None) -> dict[s
             "authority_registry_digest": expected,
             "digest_matches_authority_registry": True,
         }
-    for atom in atoms:
-        authority = authorities[atom["manual"]]
-        if (atom["authority_NOR"] != authority["official_ref"] or
-                atom["applicable_school_year"] != "2026-2027" or
-                atom["official_document_digest"] != authority["local_archival_digest"]):
-            wrong_year.append(atom["atom_id"])
-
     segments = extract_source_segments(authorities)
-    _map_atoms(segments, atoms)
-    mapped_ids = {atom_id for segment in segments for atom_id in segment.atom_ids}
-    all_ids = {atom["atom_id"] for atom in atoms}
-    mandatory_ids = {atom["atom_id"] for atom in atoms if atom["mandatory"] == "YES"}
-    unparsed = [segment for segment in segments if segment.mandatory == "YES" and not segment.atom_ids]
-    ambiguous = sorted(all_ids - mapped_ids)
-    duplicates = _duplicate_groups(atoms, segments)
-    atoms_by_id = {atom["atom_id"]: atom for atom in atoms}
-    false_mandatory = [
-        {
-            **finding,
-            "current_wording": atoms_by_id[finding["atom_id"]]["short_official_wording_or_paraphrase"],
-            "current_mandatory": atoms_by_id[finding["atom_id"]]["mandatory"],
-        }
-        for finding in KNOWN_FALSE_MANDATORY_ATOMS
-        if finding["atom_id"] in atoms_by_id
-    ]
-    wrong_types = [
-        finding for finding in KNOWN_WRONG_OBLIGATION_TYPES
-        if finding["atom_id"] in atoms_by_id
-        and atoms_by_id[finding["atom_id"]]["type"] == finding["current_type"]
-    ]
-
     serialised_segments = [
         {
             "segment_id": getattr(segment, "segment_id"),
@@ -760,14 +871,6 @@ def build_registry(atoms_override: list[dict[str, Any]] | None = None) -> dict[s
             "source_wording_short": segment.source_wording_short,
             "classification": segment.classification,
             "mandatory": segment.mandatory,
-            "atom_ids": segment.atom_ids,
-            "candidate_atom_ids": segment.candidate_atom_ids or [],
-            "mapping_review_status": "REVIEWED" if segment.atom_ids else "UNMAPPED",
-            "non_atomic_justification": segment.non_atomic_justification,
-            "best_atom_score": segment.best_atom_score,
-            "regulatory_finding": KNOWN_UNPARSED_SOURCE_ANCHORS.get(
-                (segment.manual, segment.source_anchor)
-            ),
         }
         for segment in segments
     ]
@@ -775,77 +878,32 @@ def build_registry(atoms_override: list[dict[str, Any]] | None = None) -> dict[s
         manual: {
             "source_segments": sum(item.manual == manual for item in segments),
             "mandatory_source_segments": sum(item.manual == manual and item.mandatory == "YES" for item in segments),
-            "unparsed_mandatory_segments": sum(item.manual == manual and item.mandatory == "YES" and not item.atom_ids for item in segments),
-            "atoms": sum(atom["manual"] == manual for atom in atoms),
-            "mapped_atoms": sum(atom["manual"] == manual and atom["atom_id"] in mapped_ids for atom in atoms),
         }
         for manual in MANUAL_ORDER
     }
     return {
-        "schema_version": 2,
+        "schema_version": 3,
         "artifact_name": "OFFICIAL_SOURCE_SEGMENTS_2026_2027",
         "namespace": "PROGRAMME_D_ENSEIGNEMENT",
         "applicable_school_year": "2026-2027",
-        "source_digest": _composite_digest([AUTHORITY_PATH, ATOMS_PATH, *source_paths]),
+        "source_digest": _composite_digest([AUTHORITY_PATH, *source_paths]),
         "methodology": {
             "official_files_are_source": True,
             "internal_capacities_are_source": False,
             "coverage_matrices_are_source": False,
-            "population_order": "official sources first; atom mapping second",
+            "population_order": "official sources only; atom mapping is a separate downstream artifact",
             "math_segmentation": "each official bullet under regulatory category plus explicit narrative limitations",
             "nsi_segmentation": "each substantive PDF table cell item plus project quota and cross-cutting bullets",
-            "atom_registry_role": "mapping target only; never source population",
-            "mapping_policy": "fail-closed: atom_ids only from reviewed explicit mappings; fuzzy matches are candidate_atom_ids",
-            "nsi_row_propagation": False,
-            "current_atom_registry_mandatory_count": len(mandatory_ids),
+            "atom_registry_dependency": False,
+            "fuzzy_mapping": False,
         },
         "source_documents": source_documents,
         "summary": {
-            "regulatory_status": "RED" if any((unparsed, duplicates, false_mandatory, wrong_types, KNOWN_AMBIGUOUS_OBLIGATIONS)) else "PASS",
+            "source_extraction_status": "REVIEWED",
             "official_authorities": 6,
-            "official_atoms": len(atoms),
-            "mandatory_atoms": len(mandatory_ids),
-            "mapped_atoms": len(mapped_ids),
-            "mapped_mandatory_atoms": len(mapped_ids & mandatory_ids),
             "source_segments": len(segments),
             "mandatory_source_segments": sum(item.mandatory == "YES" for item in segments),
-            "unparsed_mandatory_segments": len(unparsed),
-            "duplicate_atoms": len(duplicates),
-            "ambiguous_atoms": len(ambiguous),
-            "wrong_year_atoms": len(set(wrong_year)),
-            "false_mandatory_atoms": len(false_mandatory),
-            "wrong_obligation_types": len(wrong_types),
-            "ambiguous_obligations": len(KNOWN_AMBIGUOUS_OBLIGATIONS),
-            "compound_atoms": len(KNOWN_COMPOUND_ATOMS),
-            "misleading_atom_wording": len(KNOWN_MISLEADING_ATOM_WORDING),
             "by_manual": by_manual,
-        },
-        "findings": {
-            "unparsed_mandatory_segment_ids": [getattr(item, "segment_id") for item in unparsed],
-            "unparsed_mandatory_segments": [
-                {
-                    "segment_id": getattr(item, "segment_id"),
-                    "manual": item.manual,
-                    "source_anchor": item.source_anchor,
-                    "source_wording_short": item.source_wording_short,
-                    "reason": KNOWN_UNPARSED_SOURCE_ANCHORS.get(
-                        (item.manual, item.source_anchor),
-                        "source-first mandatory segment has no mapped atom",
-                    ),
-                }
-                for item in unparsed
-            ],
-            "duplicate_atom_groups": duplicates,
-            "ambiguous_atom_ids": ambiguous,
-            "wrong_year_atom_ids": sorted(set(wrong_year)),
-            "false_mandatory_atoms": false_mandatory,
-            "wrong_obligation_types": list(wrong_types),
-            "ambiguous_obligations": list(KNOWN_AMBIGUOUS_OBLIGATIONS),
-            "compound_atoms": [
-                {**finding, "atom_ids": list(finding["atom_ids"])}
-                for finding in KNOWN_COMPOUND_ATOMS
-            ],
-            "misleading_atom_wording": list(KNOWN_MISLEADING_ATOM_WORDING),
         },
         "segments": serialised_segments,
     }
@@ -862,86 +920,30 @@ def _cell(value: Any) -> str:
 def render_markdown(payload: dict[str, Any]) -> str:
     summary = payload["summary"]
     lines = [
-        "# OFFICIAL SOURCE SEGMENTS ↔ ATOMS — 2026-2027", "",
-        "Population dérivée **source-first** des six TXT/PDF officiels. Les atoms n'interviennent qu'après extraction.", "",
+        "# OFFICIAL SOURCE SEGMENTS — 2026-2027", "",
+        "Population purement **source-first** des six TXT/PDF officiels. Le registre d'atoms et les matrices de couverture sont des consommateurs en aval et ne participent ni à l'extraction ni à son digest.", "",
         "## Compteurs", "",
         f"- authorities: {summary['official_authorities']}/6",
         f"- source segments: {summary['source_segments']} ({summary['mandatory_source_segments']} mandatory)",
-        f"- atoms mapped: {summary['mapped_atoms']}/{summary['official_atoms']}",
-        f"- mandatory atoms mapped: {summary['mapped_mandatory_atoms']}/{summary['mandatory_atoms']}",
-        f"- unparsed_mandatory_segments: **{summary['unparsed_mandatory_segments']}**",
-        f"- duplicate_atoms: **{summary['duplicate_atoms']}**",
-        f"- false_mandatory_atoms: **{summary['false_mandatory_atoms']}**",
-        f"- wrong_obligation_types: **{summary['wrong_obligation_types']}**",
-        f"- ambiguous_obligations: **{summary['ambiguous_obligations']}**",
-        f"- compound_atoms: **{summary['compound_atoms']}**",
-        f"- misleading_atom_wording: **{summary['misleading_atom_wording']}**",
-        f"- ambiguous_atoms: **{summary['ambiguous_atoms']}**",
-        f"- wrong_year_atoms: **{summary['wrong_year_atoms']}**", "",
+        f"- source extraction: **{summary['source_extraction_status']}**", "",
         "## Sources", "", "| Manuel | NOR | Source | Digest |", "|---|---|---|---|",
     ]
     for manual in MANUAL_ORDER:
         source = payload["source_documents"][manual]
         lines.append(f"| {manual} | {source['authority_NOR']} | `{source['source_path']}` | `{source['digest']}` |")
-    lines.extend(["", "## Finding réglementaire ouvert", ""])
-    lines.append(
-        "**REGULATORY_P0 — ledger RED.** Le registre courant reste inchangé ; "
-        "les omissions, doublons et faux mandatory ci-dessous doivent être réconciliés avant toute preuve de complétude."
-    )
-    lines.extend(["", "### Segments obligatoires sans atom", ""])
-    for finding in payload["findings"]["unparsed_mandatory_segments"]:
-        lines.append(
-            f"- **{finding['segment_id']}** — {finding['manual']} `{finding['source_anchor']}` — "
-            f"{finding['reason']} — « {finding['source_wording_short']} »"
-        )
-    lines.extend(["", "### Doublons sémantiques", ""])
-    for group in payload["findings"]["duplicate_atom_groups"]:
-        lines.append(
-            f"- **P0 duplicate atom** — {group['manual']} {', '.join(group['atom_ids'])}, "
-            f"source unique `{group['official_source_anchor']}` — {group['reason']}."
-        )
-    lines.extend(["", "### Atoms marqués mandatory à tort", ""])
-    for finding in payload["findings"]["false_mandatory_atoms"]:
-        lines.append(
-            f"- **{finding['atom_id']}** — `{finding['source_anchor']}` — {finding['reason']}."
-        )
-    lines.extend(["", "### Types, atomicité et formulations à corriger", ""])
-    for finding in payload["findings"]["wrong_obligation_types"]:
-        lines.append(
-            f"- **{finding['atom_id']}** — `{finding['current_type']}` → `{finding['correct_type']}` — {finding['reason']}."
-        )
-    for finding in payload["findings"]["ambiguous_obligations"]:
-        lines.append(
-            f"- **AMBIGUOUS mandatory_for_coverage {finding['atom_id']}** — {finding['reason']}."
-        )
-    for finding in payload["findings"]["compound_atoms"]:
-        lines.append(
-            f"- **COMPOUND {', '.join(finding['atom_ids'])}** — {finding['capacity_count']} capacités : {finding['reason']}."
-        )
-    for finding in payload["findings"]["misleading_atom_wording"]:
-        lines.append(
-            f"- **MISLEADING {finding['atom_id']}** — {finding['reason']}. Formulation requise : {finding['required_rewording']}."
-        )
-    lines.extend([
-        "",
-        "Le dénominateur contractuel courant est conservé dans cet artefact. "
-        "Aucune correction de dénominateur n'est appliquée arbitrairement avant réconciliation du registre source.",
-        "",
-    ])
+    lines.append("")
     for manual in MANUAL_ORDER:
         lines.extend([
             f"## {manual}", "",
-            "| Segment | Ancre | Classe | Mandatory | Atoms revus / justification | Candidats fuzzy (non-preuve) | Wording source |",
-            "|---|---|---|---|---|---|---|",
+            "| Segment | Ancre | Classe | Mandatory | Wording source |",
+            "|---|---|---|---|---|",
         ])
         for segment in payload["segments"]:
             if segment["manual"] != manual:
                 continue
-            mapping = ", ".join(segment["atom_ids"]) or segment["non_atomic_justification"] or "**UNPARSED**"
             lines.append("| " + " | ".join(_cell(value) for value in (
                 segment["segment_id"], segment["source_anchor"], segment["classification"],
-                segment["mandatory"], mapping, ", ".join(segment["candidate_atom_ids"]),
-                segment["source_wording_short"],
+                segment["mandatory"], segment["source_wording_short"],
             )) + " |")
         lines.append("")
     return "\n".join(lines).rstrip() + "\n"

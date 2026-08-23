@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import hashlib
-import importlib.util
 import json
 import subprocess
 import sys
@@ -11,7 +10,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "build_official_source_segments.py"
 REGISTRY = ROOT / "audit" / "OFFICIAL_SOURCE_SEGMENTS_2026_2027.json"
-ATOMS = ROOT / "audit" / "OFFICIAL_PROGRAM_ATOMS_2026_2027.json"
 MANUALS = {"1SPE", "TSPE", "TCOMPL", "TEXPERTES", "1NSI", "TNSI"}
 CLASSIFICATIONS = {
     "CONTENTS",
@@ -46,8 +44,8 @@ def test_official_source_segments_are_directly_anchored_in_six_authorities() -> 
     assert payload["methodology"]["official_files_are_source"] is True
     assert payload["methodology"]["internal_capacities_are_source"] is False
     assert payload["methodology"]["coverage_matrices_are_source"] is False
-    assert payload["methodology"]["mapping_policy"].startswith("fail-closed")
-    assert payload["methodology"]["nsi_row_propagation"] is False
+    assert payload["methodology"]["atom_registry_dependency"] is False
+    assert payload["methodology"]["fuzzy_mapping"] is False
 
     for manual, source in payload["source_documents"].items():
         path = ROOT / source["source_path"]
@@ -63,50 +61,25 @@ def test_official_source_segments_are_directly_anchored_in_six_authorities() -> 
         assert segment["source_anchor"]
         assert segment["source_wording_short"]
         assert segment["classification"] in CLASSIFICATIONS
-        if segment["atom_ids"]:
-            assert segment["non_atomic_justification"] is None
-        elif segment["mandatory"] == "NO":
-            assert segment["non_atomic_justification"]
-        else:
-            assert segment["mapping_review_status"] == "UNMAPPED"
-        assert set(segment["atom_ids"]).isdisjoint(segment["candidate_atom_ids"])
+        assert segment["mandatory"] in {"YES", "NO"}
+        assert "atom_ids" not in segment
+        assert "candidate_atom_ids" not in segment
 
 
-def test_official_source_segments_fail_closed_on_current_regulatory_findings() -> None:
+def test_official_source_segments_are_a_pure_reviewed_population() -> None:
     payload = json.loads(REGISTRY.read_text(encoding="utf-8"))
-    atoms_payload = json.loads(ATOMS.read_text(encoding="utf-8"))
-    mandatory_atoms = {
-        atom["atom_id"]
-        for atom in atoms_payload["atoms"]
-        if atom["mandatory"] == "YES"
-    }
-    assert payload["summary"]["mandatory_atoms"] == len(mandatory_atoms)
-    assert payload["summary"]["regulatory_status"] == "RED"
-    assert payload["summary"]["mapped_mandatory_atoms"] < len(mandatory_atoms)
-    assert payload["summary"]["unparsed_mandatory_segments"] > 0
-    assert payload["summary"]["duplicate_atoms"] == 3
-    assert {
-        tuple(group["atom_ids"])
-        for group in payload["findings"]["duplicate_atom_groups"]
-    } == {
-        ("TCOMPL-ATOM-003", "TCOMPL-ATOM-022"),
-        ("TCOMPL-ATOM-007", "TCOMPL-ATOM-043"),
-        ("TCOMPL-ATOM-021", "TCOMPL-ATOM-042"),
-    }
-    assert {item["atom_id"] for item in payload["findings"]["false_mandatory_atoms"]} == {
-        "TCOMPL-ATOM-017", "TCOMPL-ATOM-018", "TCOMPL-ATOM-019",
-        "TCOMPL-ATOM-020", "TCOMPL-ATOM-026", "TCOMPL-ATOM-027",
-        "TNSI-ATOM-025",
-    }
-    assert {item["atom_id"] for item in payload["findings"]["wrong_obligation_types"]} == {
-        "1NSI-ATOM-025", "1NSI-ATOM-052",
-    }
-    assert payload["summary"]["ambiguous_obligations"] == 1
-    assert payload["summary"]["compound_atoms"] == 3
-    assert payload["summary"]["wrong_year_atoms"] == 0
+    segments = payload["segments"]
+
+    assert payload["schema_version"] == 3
+    assert payload["summary"]["source_extraction_status"] == "REVIEWED"
+    assert payload["summary"]["source_segments"] == len(segments)
+    assert payload["summary"]["mandatory_source_segments"] == sum(
+        segment["mandatory"] == "YES" for segment in segments
+    )
+    assert "findings" not in payload
 
 
-def test_confirmed_missing_source_units_cannot_be_hidden_by_fuzzy_candidates() -> None:
+def test_confirmed_regulatory_units_are_present_without_fuzzy_mapping() -> None:
     payload = json.loads(REGISTRY.read_text(encoding="utf-8"))
     by_key = {
         (segment["manual"], segment["source_anchor"]): segment
@@ -130,11 +103,97 @@ def test_confirmed_missing_source_units_cannot_be_hidden_by_fuzzy_candidates() -
     for key in required_missing:
         assert key in by_key
         assert by_key[key]["mandatory"] == "YES"
-        assert by_key[key]["atom_ids"] == []
-        assert by_key[key]["mapping_review_status"] == "UNMAPPED"
 
-    sql_capacity = by_key[("TNSI", "pdf-page:6;table:1;row:1;column:capacites;item:2")]
-    assert "TNSI-ATOM-025" not in sql_capacity["atom_ids"]
+
+def test_reviewed_1spe_mandatory_blocks_are_extracted_source_first() -> None:
+    payload = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    by_key = {
+        (segment["manual"], segment["source_anchor"]): segment
+        for segment in payload["segments"]
+    }
+    expected = {
+        # Vocabulaire ensembliste et logique.
+        "lines:195-201": "CONTENTS",
+        "lines:203": "EXPECTED_CAPACITIES",
+        "lines:204": "EXPECTED_CAPACITIES",
+        "lines:205": "EXPECTED_CAPACITIES",
+        "lines:206": "EXPECTED_CAPACITIES",
+        "lines:207": "EXPECTED_CAPACITIES",
+        "lines:208": "EXPECTED_CAPACITIES",
+        "lines:209-210": "EXPECTED_CAPACITIES",
+        "lines:211": "EXPECTED_CAPACITIES",
+        "lines:212-213": "EXPECTED_CAPACITIES",
+        # Automatismes au-delà du seul bloc « Évolutions et variations ».
+        "lines:268": "AUTOMATISMS",
+        "lines:269": "AUTOMATISMS",
+        "lines:270": "AUTOMATISMS",
+        "lines:273": "AUTOMATISMS",
+        "lines:274": "AUTOMATISMS",
+        "lines:275": "AUTOMATISMS",
+        "lines:276": "AUTOMATISMS",
+        "lines:277": "AUTOMATISMS",
+        "lines:280-281": "AUTOMATISMS",
+        "lines:282": "AUTOMATISMS",
+        "lines:283": "AUTOMATISMS",
+        "lines:286-287": "AUTOMATISMS",
+        "lines:288": "AUTOMATISMS",
+        # Dérivation — contenus, et pas seulement capacités/démonstrations.
+        "lines:435": "CONTENTS",
+        "lines:436": "CONTENTS",
+        "lines:437-438": "CONTENTS",
+        "lines:439": "CONTENTS",
+        "lines:441": "CONTENTS",
+        "lines:442": "CONTENTS",
+        "lines:443": "CONTENTS",
+        "lines:444": "CONTENTS",
+        "lines:445": "CONTENTS",
+    }
+    for anchor, classification in expected.items():
+        segment = by_key[("1SPE", anchor)]
+        assert segment["classification"] == classification
+        assert segment["mandatory"] == "YES"
+
+    framework = by_key[("1SPE", "lines:192-194")]
+    assert framework["classification"] == "IMPLEMENTATION_GUIDANCE"
+    assert framework["mandatory"] == "NO"
+
+
+def test_reviewed_tspe_combinatorics_and_logic_blocks_are_extracted_source_first() -> None:
+    payload = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    by_key = {
+        (segment["manual"], segment["source_anchor"]): segment
+        for segment in payload["segments"]
+    }
+    expected_mandatory = {
+        "lines:204-205": "EXPECTED_CAPACITIES",
+        "lines:206-208": "EXPECTED_CAPACITIES",
+        "lines:259-262": "CONTENTS",
+        "lines:989-995": "CONTENTS",
+        "lines:1009-1010": "EXPECTED_CAPACITIES",
+        "lines:1011": "EXPECTED_CAPACITIES",
+        "lines:1012-1013": "EXPECTED_CAPACITIES",
+        "lines:1014": "EXPECTED_CAPACITIES",
+        "lines:1015-1016": "EXPECTED_CAPACITIES",
+        "lines:1017": "EXPECTED_CAPACITIES",
+        "lines:1018-1019": "EXPECTED_CAPACITIES",
+        "lines:1020": "EXPECTED_CAPACITIES",
+        "lines:1021": "EXPECTED_CAPACITIES",
+        "lines:1022": "EXPECTED_CAPACITIES",
+        "lines:1023": "EXPECTED_CAPACITIES",
+    }
+    for anchor, classification in expected_mandatory.items():
+        segment = by_key[("TSPE", anchor)]
+        assert segment["classification"] == classification
+        assert segment["mandatory"] == "YES"
+
+    for anchor, classification in {
+        "lines:985-988": "IMPLEMENTATION_GUIDANCE",
+        "lines:996-1004": "IMPLEMENTATION_GUIDANCE",
+        "lines:1005-1007": "EXPLICIT_LIMITATIONS",
+    }.items():
+        segment = by_key[("TSPE", anchor)]
+        assert segment["classification"] == classification
+        assert segment["mandatory"] == "NO"
 
 
 def test_sql_comment_is_split_into_guidance_and_explicit_limitation() -> None:
@@ -149,37 +208,3 @@ def test_sql_comment_is_split_into_guidance_and_explicit_limitation() -> None:
     assert guidance["classification"] == "IMPLEMENTATION_GUIDANCE"
     assert limitation["classification"] == "EXPLICIT_LIMITATIONS"
     assert guidance["mandatory"] == limitation["mandatory"] == "NO"
-
-
-def test_source_first_population_exposes_a_deleted_mandatory_atom() -> None:
-    spec = importlib.util.spec_from_file_location("official_source_segments", SCRIPT)
-    assert spec and spec.loader
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
-    atoms = json.loads(ATOMS.read_text(encoding="utf-8"))["atoms"]
-    baseline = module.build_registry()
-    without_project_atom = [
-        atom for atom in atoms if atom["atom_id"] != "TNSI-ATOM-060"
-    ]
-
-    mutated = module.build_registry(atoms_override=without_project_atom)
-    assert [
-        (item["segment_id"], item["source_anchor"], item["source_wording_short"])
-        for item in baseline["segments"]
-    ] == [
-        (item["segment_id"], item["source_anchor"], item["source_wording_short"])
-        for item in mutated["segments"]
-    ]
-    unparsed = {
-        segment["segment_id"]: segment
-        for segment in mutated["segments"]
-        if segment["mandatory"] == "YES" and not segment["atom_ids"]
-    }
-
-    assert mutated["summary"]["unparsed_mandatory_segments"] >= 1
-    assert any(
-        segment["manual"] == "TNSI"
-        and "quart" in segment["source_wording_short"].casefold()
-        for segment in unparsed.values()
-    )
