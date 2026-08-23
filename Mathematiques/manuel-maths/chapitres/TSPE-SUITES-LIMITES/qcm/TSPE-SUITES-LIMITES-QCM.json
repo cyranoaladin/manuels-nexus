@@ -23,7 +23,7 @@
           "renvoi": "M1, etape 2"
         },
         "D": {
-          "erreur": "L'eleve confond avec une suite du type 1/n.",
+          "erreur": "Conclure $0$ applique a tort la limite de $1/n$ au quotient entier ; les termes dominants $5n$ et $2n$ donnent au contraire $5/2$.",
           "renvoi": "M1, etape 1"
         }
       }
@@ -41,15 +41,15 @@
       "correcte": "D",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve ne considere que le terme 1/n.",
+          "erreur": "Ne regarder que $1/n\\to0$ oublie le terme oscillant $(-1)^n$ ; les sous-suites paires et impaires ont des limites differentes.",
           "renvoi": "C1, definition divergence"
         },
         "B": {
-          "erreur": "L'eleve ne considere que les termes pairs.",
+          "erreur": "Les termes pairs tendent bien vers $1$, mais les termes impairs tendent vers $-1$ ; la suite complete ne peut donc pas converger vers $1$.",
           "renvoi": "C1, unicite limite"
         },
         "C": {
-          "erreur": "L'eleve confond avec n+1/n.",
+          "erreur": "Le facteur $(-1)^n$ reste borne entre $-1$ et $1$ et $1/n\\to0$ ; aucun terme ne croit sans borne vers $+\\infty$.",
           "renvoi": "C1, exemples"
         }
       }
@@ -67,11 +67,11 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "C'est l'initialisation, pas l'heredite.",
+          "erreur": "Verifier $P(0)$ ou le premier rang etablit seulement l'initialisation ; l'heredite doit partir de $P(n)$ pour obtenir $P(n+1)$.",
           "renvoi": "M2, etape 1"
         },
         "C": {
-          "erreur": "C'est la conclusion, pas l'heredite.",
+          "erreur": "Affirmer directement $P(n)$ pour tout $n$ est la conclusion de la recurrence ; il manque l'implication de $P(n)$ vers $P(n+1)$.",
           "renvoi": "M2, etape 4"
         },
         "D": {
@@ -127,7 +127,7 @@
           "renvoi": "M3, etape 1"
         },
         "D": {
-          "erreur": "L'eleve confond avec $0{,}9^n \\to 0$.",
+          "erreur": "La limite n'est pas celle de $0{,}9^n$ seul : le terme additif $20$ deplace le point fixe, qui verifie $\\ell=0{,}9\\ell+20$.",
           "renvoi": "M3, etape 6"
         }
       }
@@ -135,7 +135,7 @@
     {
       "id": "Q6",
       "capacite": "C3",
-      "enonce": "$u_{n+1}=0{,}7u_n+9$. Raison de $(v_n)$ ?",
+      "enonce": "$u_{n+1}=0{,}7u_n+9$ et $v_n=u_n-30$. Quelle est la raison de $(v_n)$ ?",
       "options": {
         "A": "9",
         "B": "0,7",
@@ -149,11 +149,11 @@
           "renvoi": "M3, etape 3"
         },
         "C": {
-          "erreur": "C'est le point fixe $\\ell = 9/0{,}3 = 30$.",
+          "erreur": "La valeur $30=9/(1-0{,}7)$ est le point fixe soustrait pour definir $v_n$ ; la relation obtenue est $v_{n+1}=0{,}7v_n$.",
           "renvoi": "M3, etape 1"
         },
         "D": {
-          "erreur": "C'est $1-a$, pas $a$.",
+          "erreur": "Le nombre $0{,}3=1-0{,}7$ intervient dans le calcul du point fixe $9/0{,}3$ ; le coefficient multiplicatif de $v_n$ reste $0{,}7$.",
           "renvoi": "M3, etape 3"
         }
       }
@@ -175,7 +175,7 @@
           "renvoi": "C4, theoreme"
         },
         "C": {
-          "erreur": "Il faut aussi la monotonie.",
+          "erreur": "Etre majoree ne suffit pas : la suite $(-1)^n$ est majoree mais diverge ; le theoreme exige aussi que la suite soit croissante.",
           "renvoi": "C4, theoreme"
         },
         "D": {
@@ -223,7 +223,7 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Inversion du sens de l'inegalite.",
+          "erreur": "Le sens $\\leqslant$ est inverse : pour $a=1$ et $n=2$, on obtient $4$ a gauche et $3$ a droite, donc seule l'inegalite $\\geqslant$ est vraie.",
           "renvoi": "C5, theoreme"
         },
         "C": {
@@ -249,11 +249,11 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "C'est pour $q > 1$.",
+          "erreur": "La divergence vers $+\\infty$ concerne une raison $q>1$ ; ici $0<0{,}95<1$, donc les puissances decroissent vers $0$.",
           "renvoi": "C5, tableau"
         },
         "B": {
-          "erreur": "Confusion entre $q$ et $\\lim q^n$.",
+          "erreur": "La valeur $0{,}95$ est la raison et le premier facteur, pas la limite ; multiplier indefiniment par un nombre de $]0,1[$ conduit a $0$.",
           "renvoi": "C5, tableau"
         },
         "D": {
@@ -275,11 +275,11 @@
       "correcte": "D",
       "diagnostics": {
         "A": {
-          "erreur": "C'est pour $|q|<1$.",
+          "erreur": "La limite $0$ vaut seulement lorsque $|q|<1$ ; ici $q=1{,}02>1$, donc les puissances croissent sans borne.",
           "renvoi": "C5, tableau"
         },
         "B": {
-          "erreur": "C'est pour $q=1$.",
+          "erreur": "Une limite egale a $1$ correspondrait a la suite constante de raison $q=1$ ; avec $q=1{,}02$, chaque multiplication augmente le terme.",
           "renvoi": "C5, tableau"
         },
         "C": {
@@ -301,7 +301,7 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Contradiction : $v_n \\geq u_n \\to +\\infty$.",
+          "erreur": "La conclusion $v_n\\to0$ contredit $v_n\\geq u_n$ : pour tout seuil $A$, les termes $u_n$ puis $v_n$ finissent par depasser $A$.",
           "renvoi": "C6, theoreme comparaison"
         },
         "D": {
@@ -331,7 +331,7 @@
           "renvoi": "C6, theoreme gendarmes"
         },
         "C": {
-          "erreur": "Les DEUX bornes doivent tendre vers $\\ell$.",
+          "erreur": "Connaitre la limite d'une seule borne ne suffit pas a coincer la suite ; les deux suites encadrantes doivent tendre vers la meme limite $\\ell$.",
           "renvoi": "C6, theoreme gendarmes"
         },
         "D": {
@@ -357,7 +357,7 @@
           "renvoi": "C7, demonstration"
         },
         "C": {
-          "erreur": "$e^0 = 1$ mais $\\lim_{-\\infty} e^x \\neq 1$.",
+          "erreur": "La valeur $1$ est seulement $e^0$ ; lorsque $x$ decroit sans borne, $e^x=1/e^{-x}$ et le denominateur tend vers $+\\infty$, donc la limite vaut $0$.",
           "renvoi": "C7, demonstration"
         },
         "D": {

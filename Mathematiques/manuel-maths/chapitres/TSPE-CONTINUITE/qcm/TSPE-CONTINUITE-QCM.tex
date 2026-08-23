@@ -35,7 +35,7 @@
     \item a une infinite de solutions.
   \end{enumerate}
 
-\item \textbf{[Q4]} Une fonction $f$ continue sur $[0\,;6]$ croit de $-1$ a $4$, puis decroit de $4$ a $2$. Le nombre de solutions de $f(x) = 3$ est :
+\item \textbf{[Q4]} Une fonction $f$ continue sur $[0\,;6]$ est strictement croissante de $-1$ a $4$, puis strictement decroissante de $4$ a $2$. Le nombre de solutions de $f(x) = 3$ est :
   \begin{enumerate}[label=\Alph*.]
     \item $0$
     \item $1$
@@ -183,7 +183,7 @@ Q15 & C2 & \textbf{B} \\
   \begin{itemize}
     \item \textbf{A} — L'eleve verifie si $3$ est compris entre les bornes dans le mauvais ordre : $-2 < 3 < 7$ convient. \emph{Renvoi : M1, etape 2.}
     \item \textbf{C} — Sur un intervalle de stricte monotonie, une valeur ne peut etre atteinte qu'une fois. \emph{Renvoi : M4, etape 3.}
-    \item \textbf{D} — Confusion avec une fonction constante. \emph{Renvoi : RE-C1.}
+    \item \textbf{D} — Une infinite de solutions exigerait que $f$ reste egale a $3$ sur un intervalle ; cela contredit la stricte decroissance supposee. \emph{Renvoi : RE-C1.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
@@ -194,13 +194,13 @@ Q15 & C2 & \textbf{B} \\
   \item \textbf{Q5}
   \begin{itemize}
     \item \textbf{B} — L'eleve applique le TVI sans verifier que $5$ depasse le maximum de $f$, qui vaut $4$. \emph{Renvoi : M4, etape 3.}
-    \item \textbf{C} — Meme erreur, appliquee deux fois. \emph{Renvoi : M4, etape 3.}
+    \item \textbf{C} — Compter deux solutions suppose un passage au niveau $5$ sur chacune des deux branches ; or les deux culminent au maximum $4$. \emph{Renvoi : M4, etape 3.}
     \item \textbf{D} — Le tableau de variations suffit : le maximum est connu. \emph{Renvoi : M4, verification.}
   \end{itemize}
   \item \textbf{Q6}
   \begin{itemize}
     \item \textbf{A} — Sens de lecture inverse : pour une fonction croissante, $f$ est negative avant $\alpha$. \emph{Renvoi : M3, piege 1.}
-    \item \textbf{C} — Meme inversion, dans l'autre sens. \emph{Renvoi : M3, piege 1.}
+    \item \textbf{C} — Comme $f(2{,}5)>0$ et que $f$ est croissante, la racine a deja ete franchie avant $2{,}5$ ; elle ne peut donc pas etre a droite. \emph{Renvoi : M3, piege 1.}
     \item \textbf{D} — L'encadrement ne donne pas le milieu : la solution n'est pas necessairement au centre. \emph{Renvoi : M3, etape 4.}
   \end{itemize}
   \item \textbf{Q7}
@@ -211,14 +211,14 @@ Q15 & C2 & \textbf{B} \\
   \end{itemize}
   \item \textbf{Q8}
   \begin{itemize}
-    \item \textbf{A} — C'est precisement ce que fait le theoreme. \emph{Renvoi : cours C1.}
+    \item \textbf{A} — Le TVI affirme qu'une valeur intermediaire est atteinte par une fonction continue ; l'existence d'une solution est donc bien sa conclusion. \emph{Renvoi : cours C1.}
     \item \textbf{C} — La continuite est bien l'hypothese centrale, sans laquelle le theoreme est faux. \emph{Renvoi : cours C1.}
-    \item \textbf{D} — L'enonce porte bien sur un intervalle. \emph{Renvoi : cours C1.}
+    \item \textbf{D} — Le TVI compare les images des bornes d'un intervalle et garantit les valeurs intermediaires sur cet intervalle ; cette affirmation est vraie. \emph{Renvoi : cours C1.}
   \end{itemize}
   \item \textbf{Q9}
   \begin{itemize}
     \item \textbf{A} — Confusion entre point fixe et racine de la fonction. \emph{Renvoi : M2, etape finale.}
-    \item \textbf{C} — Aucune raison que la limite soit nulle. \emph{Renvoi : RE-C2.}
+    \item \textbf{C} — Le passage a la limite donne seulement $f(\ell)=\ell$ ; aucune hypothese n'impose que l'unique point fixe considere soit $0$. \emph{Renvoi : RE-C2.}
     \item \textbf{D} — La monotonie de $f$ n'est ni supposee ni deduite. \emph{Renvoi : cours C2.}
   \end{itemize}
   \item \textbf{Q10}
@@ -230,7 +230,7 @@ Q15 & C2 & \textbf{B} \\
   \item \textbf{Q11}
   \begin{itemize}
     \item \textbf{A} — Erreur classique : la limite est le plus petit majorant, pas n'importe quel majorant. \emph{Renvoi : RE-C2.}
-    \item \textbf{C} — Contradictoire avec le fait d'etre majoree. \emph{Renvoi : cours C2.}
+    \item \textbf{C} — Diverger vers $+\infty$ signifie depasser tout reel, ce qui est impossible pour une suite majoree par un reel fixe. \emph{Renvoi : cours C2.}
     \item \textbf{D} — Aucun lien entre monotonie bornee et nature geometrique. \emph{Renvoi : RE-C2.}
   \end{itemize}
   \item \textbf{Q12}
@@ -248,7 +248,7 @@ Q15 & C2 & \textbf{B} \\
   \item \textbf{Q14}
   \begin{itemize}
     \item \textbf{A} — Une seule application de l'inegalite au lieu de cinq. \emph{Renvoi : M5, etape 4.}
-    \item \textbf{B} — Trois applications au lieu de cinq. \emph{Renvoi : M5, etape 4.}
+    \item \textbf{B} — La valeur $0{,}5$ correspond a $4(1/2)^3$ et n'applique la contraction que trois fois ; au rang $5$, il faut calculer $4(1/2)^5$. \emph{Renvoi : M5, etape 4.}
     \item \textbf{D} — La majoration tend vers zero mais ne l'atteint a aucun rang fini. \emph{Renvoi : M5, etape 5.}
   \end{itemize}
   \item \textbf{Q15}

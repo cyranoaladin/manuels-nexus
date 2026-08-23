@@ -55,7 +55,7 @@
     \item 0
   \end{enumerate}
 
-\item \textbf{[Q6]} $u_{n+1}=0{,}7u_n+9$. Raison de $(v_n)$ ?
+\item \textbf{[Q6]} $u_{n+1}=0{,}7u_n+9$ et $v_n=u_n-30$. Quelle est la raison de $(v_n)$ ?
   \begin{enumerate}[label=\Alph*.]
     \item 9
     \item 0,7
@@ -181,18 +181,18 @@ Q15 & C7 & \textbf{C} \\
   \begin{itemize}
     \item \textbf{A} — L'eleve a divise les termes constants (-1 et 3) au lieu des coefficients dominants. \emph{Renvoi : M1, etape 3.}
     \item \textbf{C} — L'eleve pense que tout quotient de polynomes diverge. \emph{Renvoi : M1, etape 2.}
-    \item \textbf{D} — L'eleve confond avec une suite du type 1/n. \emph{Renvoi : M1, etape 1.}
+    \item \textbf{D} — Conclure $0$ applique a tort la limite de $1/n$ au quotient entier ; les termes dominants $5n$ et $2n$ donnent au contraire $5/2$. \emph{Renvoi : M1, etape 1.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — L'eleve ne considere que le terme 1/n. \emph{Renvoi : C1, definition divergence.}
-    \item \textbf{B} — L'eleve ne considere que les termes pairs. \emph{Renvoi : C1, unicite limite.}
-    \item \textbf{C} — L'eleve confond avec n+1/n. \emph{Renvoi : C1, exemples.}
+    \item \textbf{A} — Ne regarder que $1/n\to0$ oublie le terme oscillant $(-1)^n$ ; les sous-suites paires et impaires ont des limites differentes. \emph{Renvoi : C1, definition divergence.}
+    \item \textbf{B} — Les termes pairs tendent bien vers $1$, mais les termes impairs tendent vers $-1$ ; la suite complete ne peut donc pas converger vers $1$. \emph{Renvoi : C1, unicite limite.}
+    \item \textbf{C} — Le facteur $(-1)^n$ reste borne entre $-1$ et $1$ et $1/n\to0$ ; aucun terme ne croit sans borne vers $+\infty$. \emph{Renvoi : C1, exemples.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{A} — C'est l'initialisation, pas l'heredite. \emph{Renvoi : M2, etape 1.}
-    \item \textbf{C} — C'est la conclusion, pas l'heredite. \emph{Renvoi : M2, etape 4.}
+    \item \textbf{A} — Verifier $P(0)$ ou le premier rang etablit seulement l'initialisation ; l'heredite doit partir de $P(n)$ pour obtenir $P(n+1)$. \emph{Renvoi : M2, etape 1.}
+    \item \textbf{C} — Affirmer directement $P(n)$ pour tout $n$ est la conclusion de la recurrence ; il manque l'implication de $P(n)$ vers $P(n+1)$. \emph{Renvoi : M2, etape 4.}
     \item \textbf{D} — On ne remplace pas mecaniquement; on doit utiliser l'hypothese. \emph{Renvoi : M2, piege 3.}
   \end{itemize}
   \item \textbf{Q4}
@@ -205,18 +205,18 @@ Q15 & C7 & \textbf{C} \\
   \begin{itemize}
     \item \textbf{A} — Le resultat $180$ applique encore le facteur $0{,}9$ au point fixe correct $200$ ; une limite doit verifier directement $\ell=0{,}9\ell+20$. \emph{Renvoi : M3, etape 1.}
     \item \textbf{C} — Le resultat $220$ ajoute $20$ au point fixe $200$ une seconde fois ; dans l'equation, ce terme est deja pris en compte avant la division par $0{,}1$. \emph{Renvoi : M3, etape 1.}
-    \item \textbf{D} — L'eleve confond avec $0{,}9^n \to 0$. \emph{Renvoi : M3, etape 6.}
+    \item \textbf{D} — La limite n'est pas celle de $0{,}9^n$ seul : le terme additif $20$ deplace le point fixe, qui verifie $\ell=0{,}9\ell+20$. \emph{Renvoi : M3, etape 6.}
   \end{itemize}
   \item \textbf{Q6}
   \begin{itemize}
     \item \textbf{A} — Confusion entre la constante additive et la raison. \emph{Renvoi : M3, etape 3.}
-    \item \textbf{C} — C'est le point fixe $\ell = 9/0{,}3 = 30$. \emph{Renvoi : M3, etape 1.}
-    \item \textbf{D} — C'est $1-a$, pas $a$. \emph{Renvoi : M3, etape 3.}
+    \item \textbf{C} — La valeur $30=9/(1-0{,}7)$ est le point fixe soustrait pour definir $v_n$ ; la relation obtenue est $v_{n+1}=0{,}7v_n$. \emph{Renvoi : M3, etape 1.}
+    \item \textbf{D} — Le nombre $0{,}3=1-0{,}7$ intervient dans le calcul du point fixe $9/0{,}3$ ; le coefficient multiplicatif de $v_n$ reste $0{,}7$. \emph{Renvoi : M3, etape 3.}
   \end{itemize}
   \item \textbf{Q7}
   \begin{itemize}
     \item \textbf{A} — Contre-exemple : $u_n = 1-1/n$ croissante, converge vers 1. \emph{Renvoi : C4, theoreme.}
-    \item \textbf{C} — Il faut aussi la monotonie. \emph{Renvoi : C4, theoreme.}
+    \item \textbf{C} — Etre majoree ne suffit pas : la suite $(-1)^n$ est majoree mais diverge ; le theoreme exige aussi que la suite soit croissante. \emph{Renvoi : C4, theoreme.}
     \item \textbf{D} — Contre-exemple : $u_n = (-1)^n/n$ converge vers 0 sans etre croissante. \emph{Renvoi : C1, definition.}
   \end{itemize}
   \item \textbf{Q8}
@@ -227,38 +227,38 @@ Q15 & C7 & \textbf{C} \\
   \end{itemize}
   \item \textbf{Q9}
   \begin{itemize}
-    \item \textbf{A} — Inversion du sens de l'inegalite. \emph{Renvoi : C5, theoreme.}
+    \item \textbf{A} — Le sens $\leqslant$ est inverse : pour $a=1$ et $n=2$, on obtient $4$ a gauche et $3$ a droite, donc seule l'inegalite $\geqslant$ est vraie. \emph{Renvoi : C5, theoreme.}
     \item \textbf{C} — C'est une inegalite, pas une egalite (sauf si $a=0$ ou $n \leq 1$). \emph{Renvoi : C5, theoreme.}
     \item \textbf{D} — Le coefficient de $a$ est $n$, pas $n^2$ ; par exemple $a=1$ et $n=2$ donnent $4 \not\geqslant 5$. \emph{Renvoi : cours C5.}
   \end{itemize}
   \item \textbf{Q10}
   \begin{itemize}
-    \item \textbf{A} — C'est pour $q > 1$. \emph{Renvoi : C5, tableau.}
-    \item \textbf{B} — Confusion entre $q$ et $\lim q^n$. \emph{Renvoi : C5, tableau.}
+    \item \textbf{A} — La divergence vers $+\infty$ concerne une raison $q>1$ ; ici $0<0{,}95<1$, donc les puissances decroissent vers $0$. \emph{Renvoi : C5, tableau.}
+    \item \textbf{B} — La valeur $0{,}95$ est la raison et le premier facteur, pas la limite ; multiplier indefiniment par un nombre de $]0,1[$ conduit a $0$. \emph{Renvoi : C5, tableau.}
     \item \textbf{D} — Une suite geometrique de raison strictement comprise entre 0 et 1 converge vers 0 ; l'absence de limite concerne les raisons inferieures ou egales a -1. \emph{Renvoi : M4, suites geometriques.}
   \end{itemize}
   \item \textbf{Q11}
   \begin{itemize}
-    \item \textbf{A} — C'est pour $|q|<1$. \emph{Renvoi : C5, tableau.}
-    \item \textbf{B} — C'est pour $q=1$. \emph{Renvoi : C5, tableau.}
+    \item \textbf{A} — La limite $0$ vaut seulement lorsque $|q|<1$ ; ici $q=1{,}02>1$, donc les puissances croissent sans borne. \emph{Renvoi : C5, tableau.}
+    \item \textbf{B} — Une limite egale a $1$ correspondrait a la suite constante de raison $q=1$ ; avec $q=1{,}02$, chaque multiplication augmente le terme. \emph{Renvoi : C5, tableau.}
     \item \textbf{C} — Confusion entre la raison de la suite et sa limite : la raison 1,02 est superieure a 1, donc la suite diverge vers plus l'infini. \emph{Renvoi : M4, suites geometriques.}
   \end{itemize}
   \item \textbf{Q12}
   \begin{itemize}
-    \item \textbf{B} — Contradiction : $v_n \geq u_n \to +\infty$. \emph{Renvoi : C6, theoreme comparaison.}
+    \item \textbf{B} — La conclusion $v_n\to0$ contredit $v_n\geq u_n$ : pour tout seuil $A$, les termes $u_n$ puis $v_n$ finissent par depasser $A$. \emph{Renvoi : C6, theoreme comparaison.}
     \item \textbf{C} — La minoration par une suite tendant vers plus l'infini interdit la convergence : v\_n est repousse vers plus l'infini. \emph{Renvoi : M5, theoreme de comparaison.}
     \item \textbf{D} — Le theoreme de comparaison donne une conclusion precise. \emph{Renvoi : C6, theoreme comparaison.}
   \end{itemize}
   \item \textbf{Q13}
   \begin{itemize}
     \item \textbf{B} — Si les limites sont differentes, on ne peut pas conclure. \emph{Renvoi : C6, theoreme gendarmes.}
-    \item \textbf{C} — Les DEUX bornes doivent tendre vers $\ell$. \emph{Renvoi : C6, theoreme gendarmes.}
+    \item \textbf{C} — Connaitre la limite d'une seule borne ne suffit pas a coincer la suite ; les deux suites encadrantes doivent tendre vers la meme limite $\ell$. \emph{Renvoi : C6, theoreme gendarmes.}
     \item \textbf{D} — Le theoreme des gendarmes conclut a une convergence : il encadre par deux suites de meme limite finie, il ne s'applique pas a une divergence. \emph{Renvoi : M5, theoreme des gendarmes.}
   \end{itemize}
   \item \textbf{Q14}
   \begin{itemize}
     \item \textbf{A} — $e^x > 0$ pour tout $x$, donc la limite ne peut etre $-\infty$. \emph{Renvoi : C7, demonstration.}
-    \item \textbf{C} — $e^0 = 1$ mais $\lim_{-\infty} e^x \neq 1$. \emph{Renvoi : C7, demonstration.}
+    \item \textbf{C} — La valeur $1$ est seulement $e^0$ ; lorsque $x$ decroit sans borne, $e^x=1/e^{-x}$ et le denominateur tend vers $+\infty$, donc la limite vaut $0$. \emph{Renvoi : C7, demonstration.}
     \item \textbf{D} — Sens de variation inverse : l'exponentielle tend vers 0 en moins l'infini et vers plus l'infini en plus l'infini. \emph{Renvoi : cours C7.}
   \end{itemize}
   \item \textbf{Q15}

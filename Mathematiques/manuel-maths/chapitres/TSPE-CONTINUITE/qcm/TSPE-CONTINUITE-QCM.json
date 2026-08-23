@@ -75,7 +75,7 @@
           "renvoi": "M4, etape 3"
         },
         "D": {
-          "erreur": "Confusion avec une fonction constante.",
+          "erreur": "Une infinite de solutions exigerait que $f$ reste egale a $3$ sur un intervalle ; cela contredit la stricte decroissance supposee.",
           "renvoi": "RE-C1"
         }
       }
@@ -83,7 +83,7 @@
     {
       "id": "Q4",
       "capacite": "C1",
-      "enonce": "Une fonction $f$ continue sur $[0\\,;6]$ croit de $-1$ a $4$, puis decroit de $4$ a $2$. Le nombre de solutions de $f(x) = 3$ est :",
+      "enonce": "Une fonction $f$ continue sur $[0\\,;6]$ est strictement croissante de $-1$ a $4$, puis strictement decroissante de $4$ a $2$. Le nombre de solutions de $f(x) = 3$ est :",
       "options": {
         "A": "$0$",
         "B": "$1$",
@@ -123,7 +123,7 @@
           "renvoi": "M4, etape 3"
         },
         "C": {
-          "erreur": "Meme erreur, appliquee deux fois.",
+          "erreur": "Compter deux solutions suppose un passage au niveau $5$ sur chacune des deux branches ; or les deux culminent au maximum $4$.",
           "renvoi": "M4, etape 3"
         },
         "D": {
@@ -149,7 +149,7 @@
           "renvoi": "M3, piege 1"
         },
         "C": {
-          "erreur": "Meme inversion, dans l'autre sens.",
+          "erreur": "Comme $f(2{,}5)>0$ et que $f$ est croissante, la racine a deja ete franchie avant $2{,}5$ ; elle ne peut donc pas etre a droite.",
           "renvoi": "M3, piege 1"
         },
         "D": {
@@ -197,7 +197,7 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "C'est precisement ce que fait le theoreme.",
+          "erreur": "Le TVI affirme qu'une valeur intermediaire est atteinte par une fonction continue ; l'existence d'une solution est donc bien sa conclusion.",
           "renvoi": "cours C1"
         },
         "C": {
@@ -205,7 +205,7 @@
           "renvoi": "cours C1"
         },
         "D": {
-          "erreur": "L'enonce porte bien sur un intervalle.",
+          "erreur": "Le TVI compare les images des bornes d'un intervalle et garantit les valeurs intermediaires sur cet intervalle ; cette affirmation est vraie.",
           "renvoi": "cours C1"
         }
       }
@@ -227,7 +227,7 @@
           "renvoi": "M2, etape finale"
         },
         "C": {
-          "erreur": "Aucune raison que la limite soit nulle.",
+          "erreur": "Le passage a la limite donne seulement $f(\\ell)=\\ell$ ; aucune hypothese n'impose que l'unique point fixe considere soit $0$.",
           "renvoi": "RE-C2"
         },
         "D": {
@@ -279,7 +279,7 @@
           "renvoi": "RE-C2"
         },
         "C": {
-          "erreur": "Contradictoire avec le fait d'etre majoree.",
+          "erreur": "Diverger vers $+\\infty$ signifie depasser tout reel, ce qui est impossible pour une suite majoree par un reel fixe.",
           "renvoi": "cours C2"
         },
         "D": {
@@ -357,7 +357,7 @@
           "renvoi": "M5, etape 4"
         },
         "B": {
-          "erreur": "Trois applications au lieu de cinq.",
+          "erreur": "La valeur $0{,}5$ correspond a $4(1/2)^3$ et n'applique la contraction que trois fois ; au rang $5$, il faut calculer $4(1/2)^5$.",
           "renvoi": "M5, etape 4"
         },
         "D": {

@@ -15,7 +15,7 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Erreur de primitive $x$ au lieu de $x^3/3$.",
+        "erreur": "Choisir $3$ revient a prendre $x$ pour primitive de $x^2$ puis a calculer $[x]_0^3$ ; or une primitive correcte est $x^3/3$.",
           "renvoi": "C2"
         },
         "C": {
@@ -119,7 +119,7 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Oubli du terme du a la derivee de $x$.",
+        "erreur": "La derivee de $xe^x$ vaut $e^x+xe^x$ : le terme $e^x$ issu de la derivee de $x$ empeche cette expression d'etre une primitive de $xe^x$.",
           "renvoi": "C2"
         },
         "B": {
@@ -127,7 +127,7 @@
           "renvoi": "C2"
         },
         "C": {
-          "erreur": "Erreur de signe dans le terme $-e^x$.",
+        "erreur": "La derivee de $(x+1)e^x$ vaut $(x+2)e^x$ ; l'integration par parties soustrait $e^x$ et conduit a $(x-1)e^x$.",
           "renvoi": "C2"
         }
       }

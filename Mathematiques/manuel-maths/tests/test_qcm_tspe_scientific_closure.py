@@ -110,6 +110,57 @@ HISTORICAL_EXPECTED_ANSWERS_AND_CAPACITIES = {
 }
 
 
+SHORT_DIAGNOSTICS_CLOSURE = {
+    ("TSPE-CALCUL-INTEGRAL", "Q1", "A"),
+    ("TSPE-CALCUL-INTEGRAL", "Q5", "A"),
+    ("TSPE-CALCUL-INTEGRAL", "Q5", "C"),
+    ("TSPE-COMBINATOIRE", "Q1", "B"),
+    ("TSPE-COMBINATOIRE", "Q1", "C"),
+    ("TSPE-COMBINATOIRE", "Q1", "D"),
+    ("TSPE-COMBINATOIRE", "Q2", "A"),
+    ("TSPE-COMBINATOIRE", "Q2", "D"),
+    ("TSPE-CONTINUITE", "Q3", "D"),
+    ("TSPE-CONTINUITE", "Q5", "C"),
+    ("TSPE-CONTINUITE", "Q6", "C"),
+    ("TSPE-CONTINUITE", "Q8", "A"),
+    ("TSPE-CONTINUITE", "Q8", "D"),
+    ("TSPE-CONTINUITE", "Q9", "C"),
+    ("TSPE-CONTINUITE", "Q11", "C"),
+    ("TSPE-CONTINUITE", "Q14", "B"),
+    ("TSPE-LIMITES-FONCTIONS", "Q2", "A"),
+    ("TSPE-LIMITES-FONCTIONS", "Q3", "B"),
+    ("TSPE-LIMITES-FONCTIONS", "Q4", "D"),
+    ("TSPE-LIMITES-FONCTIONS", "Q5", "A"),
+    ("TSPE-LIMITES-FONCTIONS", "Q5", "C"),
+    ("TSPE-LIMITES-FONCTIONS", "Q6", "A"),
+    ("TSPE-LIMITES-FONCTIONS", "Q6", "B"),
+    ("TSPE-LIMITES-FONCTIONS", "Q6", "D"),
+    ("TSPE-LIMITES-FONCTIONS", "Q7", "C"),
+    ("TSPE-LIMITES-FONCTIONS", "Q9", "A"),
+    ("TSPE-LIMITES-FONCTIONS", "Q10", "A"),
+    ("TSPE-LIMITES-FONCTIONS", "Q11", "D"),
+    ("TSPE-LIMITES-FONCTIONS", "Q12", "C"),
+    ("TSPE-SUITES-LIMITES", "Q1", "D"),
+    ("TSPE-SUITES-LIMITES", "Q2", "A"),
+    ("TSPE-SUITES-LIMITES", "Q2", "B"),
+    ("TSPE-SUITES-LIMITES", "Q2", "C"),
+    ("TSPE-SUITES-LIMITES", "Q3", "A"),
+    ("TSPE-SUITES-LIMITES", "Q3", "C"),
+    ("TSPE-SUITES-LIMITES", "Q5", "D"),
+    ("TSPE-SUITES-LIMITES", "Q6", "C"),
+    ("TSPE-SUITES-LIMITES", "Q6", "D"),
+    ("TSPE-SUITES-LIMITES", "Q7", "C"),
+    ("TSPE-SUITES-LIMITES", "Q9", "A"),
+    ("TSPE-SUITES-LIMITES", "Q10", "A"),
+    ("TSPE-SUITES-LIMITES", "Q10", "B"),
+    ("TSPE-SUITES-LIMITES", "Q11", "A"),
+    ("TSPE-SUITES-LIMITES", "Q11", "B"),
+    ("TSPE-SUITES-LIMITES", "Q12", "B"),
+    ("TSPE-SUITES-LIMITES", "Q13", "C"),
+    ("TSPE-SUITES-LIMITES", "Q14", "C"),
+}
+
+
 BANNED_GENERIC_FRAGMENTS = (
     "Consulter le cours correspondant",
     "Erreur de facteur",
@@ -238,3 +289,25 @@ def test_derivation_q6_distingue_les_extrema_locaux_des_extrema_globaux() -> Non
     assert "extrema locaux" in question["enonce"]
     assert "maximum local" in question["options"]["B"]
     assert "minimum local" in question["options"]["B"]
+
+
+def test_les_47_diagnostics_tspe_courts_explicitent_le_calcul_causal() -> None:
+    assert len(SHORT_DIAGNOSTICS_CLOSURE) == 47
+    for chapter, question_id, letter in SHORT_DIAGNOSTICS_CLOSURE:
+        error = _question(chapter, question_id)["diagnostics"][letter]["erreur"]
+        assert len(error) >= 60, f"{chapter}/{question_id}/{letter}: {error}"
+
+
+def test_suites_q6_definit_la_suite_auxiliaire_dont_on_demande_la_raison() -> None:
+    question = _question("TSPE-SUITES-LIMITES", "Q6")
+
+    assert "$v_n=u_n-30$" in question["enonce"]
+    assert question["correcte"] == "B"
+    assert question["options"]["B"] == "0,7"
+
+
+def test_continuite_q4_garantit_exactement_deux_solutions() -> None:
+    question = _question("TSPE-CONTINUITE", "Q4")
+
+    assert question["enonce"].count("strictement") == 2
+    assert question["correcte"] == "C"

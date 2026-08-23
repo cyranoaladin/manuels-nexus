@@ -41,7 +41,7 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve a garde seulement le terme constant.",
+          "erreur": "Conserver seulement le terme constant $1$ ignore que $x^2$ domine $-3x+1$ ; apres factorisation, le polynome se comporte comme $x^2$.",
           "renvoi": "C1, terme preponderant"
         },
         "B": {
@@ -71,7 +71,7 @@
           "renvoi": "C1, formes indeterminees"
         },
         "B": {
-          "erreur": "L'eleve pense que +inf/+inf = +inf.",
+          "erreur": "Conclure $+\\infty$ traite le symbole infini comme un nombre ; par exemple $x/x^2$ et $x^2/x$ ont pourtant des limites differentes.",
           "renvoi": "C1, formes indeterminees"
         },
         "D": {
@@ -97,7 +97,7 @@
           "renvoi": "C1, limite en un point"
         },
         "D": {
-          "erreur": "L'eleve confond $0^+$ et $0^-$.",
+          "erreur": "La limite $-\\infty$ correspond a $x\\to0^-$, ou $1/x$ est negatif ; ici $x\\to0^+$ et le quotient reste positif.",
           "renvoi": "C1, limites a gauche/droite"
         },
         "B": {
@@ -119,11 +119,11 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve croit que $x \\to +\\infty$ l'emporte.",
+          "erreur": "Ne retenir que $x\\to+\\infty$ ignore que $e^{-x}=1/e^x$ decroit plus vite ; la croissance comparee impose $x/e^x\\to0$.",
           "renvoi": "M3, croissances comparees"
         },
         "C": {
-          "erreur": "L'eleve confond avec un taux de variation.",
+          "erreur": "La valeur $1$ ne vient d'aucune simplification du produit ; la croissance comparee donne $x/e^x\\to0$, et non un quotient equivalent a $1$.",
           "renvoi": "C3, resultat fondamental"
         },
         "D": {
@@ -145,15 +145,15 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "Confusion entre AH et zero de la fonction.",
+          "erreur": "L'egalite $f(2)=0$ indique seulement un zero d'abscisse $2$ ; une asymptote horizontale depend d'une limite lorsque $x$ tend vers l'infini.",
           "renvoi": "C2, definition AH"
         },
         "B": {
-          "erreur": "C'est la definition d'une AV, pas d'une AH.",
+          "erreur": "Une limite infinie lorsque $x\\to2$ caracterise la droite verticale $x=2$ ; une asymptote horizontale exige une limite finie a l'infini.",
           "renvoi": "C2, definition AV"
         },
         "D": {
-          "erreur": "L'intersection n'est pas le critere.",
+          "erreur": "Couper la droite $y=2$ en un point ne renseigne pas sur le comportement a l'infini ; seule la limite de $f(x)$ permet d'affirmer l'asymptote.",
           "renvoi": "C2, erreur frequente"
         }
       }
@@ -175,7 +175,7 @@
           "renvoi": "M2, etape 2"
         },
         "C": {
-          "erreur": "C'est l'AH, pas l'AV.",
+          "erreur": "La droite $y=1$ est horizontale et provient de la limite du quotient a l'infini ; elle ne peut pas etre l'asymptote verticale demandee.",
           "renvoi": "C2, definition AH vs AV"
         },
         "D": {
@@ -223,7 +223,7 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "L'exponentielle n'a pas de valeur interdite.",
+          "erreur": "La fonction $e^{-x}+3$ est definie pour tout reel, donc $x=3$ ne peut pas etre une asymptote verticale ; de plus sa limite vaut $3$, pas $0$.",
           "renvoi": "C2, AV seulement aux valeurs interdites"
         },
         "C": {
@@ -249,7 +249,7 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Confusion AH/AV.",
+          "erreur": "La limite est prise lorsque $x$ tend vers la valeur finie $5$ et devient infinie : elle definit l'asymptote verticale $x=5$, pas l'horizontale $y=5$.",
           "renvoi": "C2, definitions"
         },
         "C": {
@@ -279,7 +279,7 @@
           "renvoi": "C1, croissances comparees"
         },
         "D": {
-          "erreur": "L'eleve a divise l'exposant par le degre.",
+          "erreur": "La valeur $1/3$ provient d'une division sans fondement entre l'exposant de $e^x$ et le degre de $x^3$ ; la croissance comparee donne $+\\infty$.",
           "renvoi": "C1, croissances comparees"
         },
         "B": {
@@ -305,7 +305,7 @@
           "renvoi": "C1, croissances comparees"
         },
         "C": {
-          "erreur": "L'eleve confond $x$ et $x^2$ (le signe).",
+          "erreur": "Le terme $x^2$ est toujours positif ; le produit $x^2e^x$ ne peut donc pas tendre vers $-\\infty$, et la croissance comparee donne $0$.",
           "renvoi": "C1, croissances comparees"
         },
         "D": {
