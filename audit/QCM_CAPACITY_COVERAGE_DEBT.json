@@ -1,390 +1,627 @@
 {
- "artifact_name": "QCM_CONTENT_DEBT",
- "created": "2026-08-19",
- "status": "PENDING_CONTENT_LOT",
- "reason": "Trous de couverture QCM x capacites anterieurs a la campagne A4 (les QCM ont ete produits avant la completion des contrats). La production de questions releve d'un lot de contenu QCM (LOT 5, gates distracteur<->erreur documentee + validation humaine) — NON demarre (cloture A4 §17). Ce registre fige l'ecart EXACT : toute derive (nouvelle capacite non interrogee, ou capacite couverte sans mise a jour du registre) refait echouer le test. S'y ajoutent les distracteurs P1 sans diagnostic/renvoi de remediation (registre exact ci-dessous), meme lot de contenu QCM.",
- "no_go_carrier": "release-strict — ce statut PENDING ne leve aucun blocage de publication",
- "missing_by_chapter": {
-  "TCOMPL-ECHANTILLONNAGE": [
-   "C4",
-   "C5",
-   "C6"
-  ],
-  "TCOMPL-INEGALITES": [
-   "C4",
-   "C5"
-  ],
-  "TCOMPL-INFERENCE-BAYESIENNE": [
-   "C4",
-   "C5"
-  ],
-  "TCOMPL-LOGARITHME-HISTORIQUE": [
-   "C4",
-   "C5"
-  ],
-  "TCOMPL-MODELES-EVOLUTION": [
-   "C4",
-   "C5"
-  ],
-  "TCOMPL-MODELES-FONCTION": [
-   "C4",
-   "C5",
-   "C6",
-   "C7"
-  ],
-  "TCOMPL-TEMPS-ATTENTE": [
-   "C4",
-   "C5",
-   "C6"
-  ],
-  "TEXP-ARITHMETIQUE": [
-   "C4",
-   "C5",
-   "C6",
-   "C7",
-   "C8",
-   "C9"
-  ],
-  "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE": [
-   "C4",
-   "C5"
-  ],
-  "TEXP-COMPLEXES-TRIGO-POLYNOMES": [
-   "C4",
-   "C5",
-   "C6",
-   "C7"
-  ],
-  "TEXP-GRAPHES": [
-   "C4",
-   "C5"
-  ],
-  "TEXP-MATRICES-MARKOV": [
-   "C4",
-   "C5",
-   "C6",
-   "C7"
-  ],
-  "TSPE-CALCUL-INTEGRAL": [
-   "C4",
-   "C5",
-   "C6",
-   "C7",
-   "C8"
-  ],
-  "TSPE-COMBINATOIRE": [
-   "C4"
-  ],
-  "TSPE-GEOMETRIE-ESPACE": [
-   "C2",
-   "C3",
-   "C4",
-   "C5",
-   "C6",
-   "C7",
-   "C8",
-   "C9",
-   "C10",
-   "C11",
-   "C12",
-   "C13",
-   "C14",
-   "C15",
-   "C16"
-  ],
-  "TSPE-LOGARITHME": [
-   "C2",
-   "C3",
-   "C4"
-  ],
-  "TSPE-PRIMITIVES-EQDIFF": [
-   "C2",
-   "C3",
-   "C4",
-   "C5"
-  ],
-  "TSPE-PROBABILITES": [
-   "C1",
-   "C3",
-   "C4",
-   "C5",
-   "C6",
-   "C9"
-  ]
- },
- "total_missing": 70,
- "distractor_gaps_by_chapter": {
-  "TCOMPL-CALCULS-AIRES": {
-   "Q1": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q2": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q3": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q4": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q5": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q6": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ]
+  "schema_version": 2,
+  "artifact_name": "QCM_CAPACITY_COVERAGE_DEBT",
+  "status": "PENDING_CONTENT_LOT",
+  "reason": "Registre déterministe des capacités contractuelles sans question QCM et des distracteurs sans diagnostic/renvoi complet. Une ligne disparaît uniquement lorsque la source et le contrat courants prouvent sa clôture.",
+  "no_go_carrier": "release-strict — toute dette non nulle reste bloquante; un zéro objectif ne vaut pas approbation humaine",
+  "methodology": {
+    "capacity_debt": "contract capacites.code minus QCM questions.capacite",
+    "distractor_debt": "every wrong option requires non-empty erreur and renvoi",
+    "source_currentness": "whole-file SHA256 for every QCM JSON and contrat.yaml",
+    "human_approval_inferred": false
   },
-  "TCOMPL-CORRELATION-CAUSALITE": {
-   "Q1": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q2": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q3": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q4": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q5": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q6": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ]
+  "source_digest": "sha256:86c2c28c9e1e7a0a154330fcfc9c6acfd231a69f34d44c98eed91aa2ded04adb",
+  "source_inputs": [
+    {
+      "chapter": "1SPE-DERIVATION-GLOBAL",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/qcm/1SPE-DERIVATION-GLOBAL-QCM.json",
+      "qcm_sha256": "sha256:59225da0bfaa9e6a984edefd4a2a7e00117bd7bf51fcc6f43fb855c608cb5caa",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml",
+      "contract_sha256": "sha256:00c3fb0f84ff9c09da76479b49a30dc9d5e2759b94ab3f1cf6bd907f49b8f7c3",
+      "question_count": 15,
+      "contract_capacity_count": 5
+    },
+    {
+      "chapter": "1SPE-DERIVATION-LOCAL",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/qcm/1SPE-DERIVATION-LOCAL-QCM.json",
+      "qcm_sha256": "sha256:201ab5e9dfa724ba88dced7a1456911e408b1cf2b250663fe6fbb04cca15066b",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/contrat.yaml",
+      "contract_sha256": "sha256:afc82bd969d0832c9c4bb86fd73ff23e36e73a6613e9c49e1ebd7b83d2f41ace",
+      "question_count": 15,
+      "contract_capacity_count": 5
+    },
+    {
+      "chapter": "1SPE-EXPONENTIELLE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
+      "qcm_sha256": "sha256:705e05cbc1c4fe771a5994a40483c86ca18b0f4691a9c7375424a9e73afe6e46",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/contrat.yaml",
+      "contract_sha256": "sha256:c40d25efe24042db63f4cb83adb97d75fdf91ac8939ceaeda781e81ad7a1c3e8",
+      "question_count": 15,
+      "contract_capacity_count": 5
+    },
+    {
+      "chapter": "1SPE-GEOMETRIE-REPEREE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/qcm/1SPE-GEOREP-QCM.json",
+      "qcm_sha256": "sha256:3e360a989356a66686cccdc3a1817c634b4f98b1d1b8071a89b3fcc752d102e4",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/contrat.yaml",
+      "contract_sha256": "sha256:3f423acc4355eab176e76efa52b19b3f28415904791f06c873ac32a95426fa48",
+      "question_count": 15,
+      "contract_capacity_count": 5
+    },
+    {
+      "chapter": "1SPE-PROBA-COND",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/qcm/1SPE-PROBCOND-QCM.json",
+      "qcm_sha256": "sha256:d3c08f4a8a64c555a1ba1f67516fd0847a67ff007dcdabf98a0dfb93a6c2c51b",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/contrat.yaml",
+      "contract_sha256": "sha256:a0dcb795861fd6f4b8bf369ab1ce3b9782586073e2fca6db82d6d717774b2974",
+      "question_count": 18,
+      "contract_capacity_count": 5
+    },
+    {
+      "chapter": "1SPE-PRODUIT-SCALAIRE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/qcm/1SPE-PRODUIT-SCALAIRE-QCM.json",
+      "qcm_sha256": "sha256:ac9278c7b96ea4788cb5861397d964271489f31d39a79c6548847b61093b04ea",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/contrat.yaml",
+      "contract_sha256": "sha256:117c631c2ecfdfefa11df522a86a215e632d000a9f60aa64132d3f7f5f031baa",
+      "question_count": 15,
+      "contract_capacity_count": 5
+    },
+    {
+      "chapter": "1SPE-SECOND-DEGRE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/1SPE-SECDEG-QCM.json",
+      "qcm_sha256": "sha256:02f1d18c8072bdbfb84b82c9f50e1a1e631db9e0bb8d93b5d90e687fba0f4d9a",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml",
+      "contract_sha256": "sha256:77fc35142c1b30142a781f8ca1221ba517d4479f492a6467416cbd09d6d9c678",
+      "question_count": 18,
+      "contract_capacity_count": 6
+    },
+    {
+      "chapter": "1SPE-SUITES",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json",
+      "qcm_sha256": "sha256:df282723b3532463ebfa701614b91ac0e7f2f414bcdcda0bb599c390d526e029",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/contrat.yaml",
+      "contract_sha256": "sha256:532c186525120ee729c7a1eeddbba6d3cea1ff59c86aa6bcdd1dbd94fe91acda",
+      "question_count": 21,
+      "contract_capacity_count": 8
+    },
+    {
+      "chapter": "1SPE-TRIGONOMETRIE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/qcm/1SPE-TRIGONOMETRIE-QCM.json",
+      "qcm_sha256": "sha256:66d79369f6394415bf1878a730da578dd0a60ca5c8f79af1cf6937bf3d73dfd8",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/contrat.yaml",
+      "contract_sha256": "sha256:1cfc5e2f73e7f9cd31dd02ba3f517fd39482a45920cc3eda941e28fd27e66303",
+      "question_count": 15,
+      "contract_capacity_count": 2
+    },
+    {
+      "chapter": "1SPE-VARIABLES-ALEATOIRES",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
+      "qcm_sha256": "sha256:4ff9d7cf05effc83414d3e9ad84266a8530fff16617568c241e9fdf6afdc0f24",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/contrat.yaml",
+      "contract_sha256": "sha256:1e1919098ce99674a163e4091cdfff6d16cf8a9e6330b6e3132864da2f80384b",
+      "question_count": 15,
+      "contract_capacity_count": 5
+    },
+    {
+      "chapter": "TCOMPL-CALCULS-AIRES",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/qcm/TCOMPL-CALCULS-AIRES-QCM.json",
+      "qcm_sha256": "sha256:df12ec1e0f59e64e22d321de074037debe72bb58794be74b83dfebed385c8b1f",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/contrat.yaml",
+      "contract_sha256": "sha256:4ee9d7ffc8516bee9d8b9362888dfc1301f2cd5e11c5bcc4f2cb52b9aa51f08a",
+      "question_count": 6,
+      "contract_capacity_count": 6
+    },
+    {
+      "chapter": "TCOMPL-CORRELATION-CAUSALITE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/qcm/TCOMPL-CORRELATION-CAUSALITE-QCM.json",
+      "qcm_sha256": "sha256:90f28ecd1f981c9c8403fb0ec3cd5271230fdbf30368c231f8fcb281ca063b16",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/contrat.yaml",
+      "contract_sha256": "sha256:1e2c2dcfa36f1c8ede8eecae6b0cd1441a27f701c7f26c42d113969919a185e6",
+      "question_count": 6,
+      "contract_capacity_count": 5
+    },
+    {
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/qcm/TCOMPL-ECHANTILLONNAGE-QCM.json",
+      "qcm_sha256": "sha256:2e5e72553ce7ae839731e12c02dcc621b3b367cbd3e6921e08da154dcb894db9",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/contrat.yaml",
+      "contract_sha256": "sha256:170640653c762ca58745e37fd10019913282d6911fccfd29e4f59d368127b17f",
+      "question_count": 5,
+      "contract_capacity_count": 6
+    },
+    {
+      "chapter": "TCOMPL-INEGALITES",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/qcm/TCOMPL-INEGALITES-QCM.json",
+      "qcm_sha256": "sha256:a72aa99fc80f478725b379f08171c78ccdae6c7f61fc96c9ad6006929fab3ca1",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/contrat.yaml",
+      "contract_sha256": "sha256:9b3cd8f0a309a75f65316930b895d1bf0c5c3296fd387d4b0dabd4d6f4c7d34e",
+      "question_count": 5,
+      "contract_capacity_count": 5
+    },
+    {
+      "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/qcm/TCOMPL-INFERENCE-BAYESIENNE-QCM.json",
+      "qcm_sha256": "sha256:53085513b75096b44b63533dc0cf1e0590365fac4a17f282e0aedebe0f5595e3",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/contrat.yaml",
+      "contract_sha256": "sha256:6ce0393f5a3a78da9388173662b4260315c33ccb23001325cebad8f025bb6f81",
+      "question_count": 5,
+      "contract_capacity_count": 5
+    },
+    {
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/qcm/TCOMPL-LOGARITHME-HISTORIQUE-QCM.json",
+      "qcm_sha256": "sha256:eb4d4c59cecb45edc12a8ec11e0a99c2a00f56b596b53d73247de07f25124dac",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/contrat.yaml",
+      "contract_sha256": "sha256:483e1f63534cd55095db53668d4629f76c4915ed2a96c9d1e998a5511076d268",
+      "question_count": 5,
+      "contract_capacity_count": 5
+    },
+    {
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.json",
+      "qcm_sha256": "sha256:166261a4f1230d352fcb10aaa69412c2e22e121e4bfa9e162126312fe503db83",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/contrat.yaml",
+      "contract_sha256": "sha256:62155dc3ce834474ca9a42c66fc6384b15550960e26eed01d1a653a17073503f",
+      "question_count": 5,
+      "contract_capacity_count": 5
+    },
+    {
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json",
+      "qcm_sha256": "sha256:847d7079a4ba3c7ee3192d391e2bc597b2587038abd82fb7f42c1ac9e4cbb95e",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/contrat.yaml",
+      "contract_sha256": "sha256:cd15dd370d6ed01f8a7554128b3658952fea28f967e883f9cea269a7bc70a56c",
+      "question_count": 5,
+      "contract_capacity_count": 7
+    },
+    {
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json",
+      "qcm_sha256": "sha256:4ca8d7ad6e33f29c813e48aad50499df515053d5ada2d246bd70419ac17ef6e3",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/contrat.yaml",
+      "contract_sha256": "sha256:b7c93157eccaa6f0e3a95901746247cf1b01b549058028e22d7321369f83f61e",
+      "question_count": 5,
+      "contract_capacity_count": 6
+    },
+    {
+      "chapter": "TEXP-ARITHMETIQUE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json",
+      "qcm_sha256": "sha256:0b5e532d43bb2fc4a24c034606132c19220ed3144f446d18470cfd1d3616fe5f",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/contrat.yaml",
+      "contract_sha256": "sha256:b4ab59461ee809f94882b378d7af3f449570509700dc741c532b8bc517191ac4",
+      "question_count": 5,
+      "contract_capacity_count": 9
+    },
+    {
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.json",
+      "qcm_sha256": "sha256:ab1ae08ef5da0a635cf56b9d2a3eb1ee5c78efa24be9e38a0a129315f7a9993d",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/contrat.yaml",
+      "contract_sha256": "sha256:4ffeafb279aeb6a9dd79c4f0f96595e26fb73256d85defde1e6276715529871f",
+      "question_count": 5,
+      "contract_capacity_count": 5
+    },
+    {
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json",
+      "qcm_sha256": "sha256:2068db2c4753e2948bc46c7c8ac2786db13c2b6b584b4c3228d45a91ecba130b",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/contrat.yaml",
+      "contract_sha256": "sha256:07d9afb8f79bbdc9b6c9e0cedca36fe8ce58fd5ef397afcd70ed75d8a2cac0c3",
+      "question_count": 5,
+      "contract_capacity_count": 7
+    },
+    {
+      "chapter": "TEXP-GRAPHES",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.json",
+      "qcm_sha256": "sha256:8ee0b1f0fe79549ba38a8ea4b669948c024e1eb80cea1825475c7ac8b1d15feb",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/contrat.yaml",
+      "contract_sha256": "sha256:4d622ef69478b7734dfe8af6ebe3803b0f6d1512484e9a722641b86e1c3ec628",
+      "question_count": 5,
+      "contract_capacity_count": 5
+    },
+    {
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.json",
+      "qcm_sha256": "sha256:a71da6d36e722150c6a00e331be0a65fc234caeee59d4276cb07ca0c2eccb0d3",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/contrat.yaml",
+      "contract_sha256": "sha256:6a31ddba887ed5f1202fcecf75431b74db067a2270c06c1f059d408dfa0244e3",
+      "question_count": 5,
+      "contract_capacity_count": 7
+    },
+    {
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.json",
+      "qcm_sha256": "sha256:b7ea2b9acf759627bcce61a390ced40bfcd4a631a8834805e89bed6ccba96fc5",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/contrat.yaml",
+      "contract_sha256": "sha256:77289528bb6a27ecbaf4ef56f54087744c878d92f530639ab49951e98e16709d",
+      "question_count": 5,
+      "contract_capacity_count": 8
+    },
+    {
+      "chapter": "TSPE-COMBINATOIRE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/qcm/TSPE-COMBINATOIRE-QCM.json",
+      "qcm_sha256": "sha256:8bb26dea90f53e37500513c0433d581bcec23bbb0e68ec75e3c9ac8c4329be35",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/contrat.yaml",
+      "contract_sha256": "sha256:2d91e775c903efd358a7d2fdce5799c0ad222d1d64f357844bac415588485618",
+      "question_count": 5,
+      "contract_capacity_count": 4
+    },
+    {
+      "chapter": "TSPE-CONTINUITE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/qcm/TSPE-CONTINUITE-QCM.json",
+      "qcm_sha256": "sha256:8c6d65c3baf4e388264ea680e24ac1f4c86101326f3721115004f9a5f4ef6f42",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/contrat.yaml",
+      "contract_sha256": "sha256:decba65ddf87d19aa4204164af00a61034631be4fa8b69b1a3e186c71f15ddf3",
+      "question_count": 15,
+      "contract_capacity_count": 2
+    },
+    {
+      "chapter": "TSPE-DERIVATION-CONVEXITE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/qcm/TSPE-DERIVATION-CONVEXITE-QCM.json",
+      "qcm_sha256": "sha256:92231135e5c8434808706fbb1e6b5bab2321855486030b96e1399f69db8a978f",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/contrat.yaml",
+      "contract_sha256": "sha256:eaa2d3d6ba8f54072be3a8c71f787c5236eff9c448cf6e4586052202e147fa12",
+      "question_count": 15,
+      "contract_capacity_count": 6
+    },
+    {
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/qcm/TSPE-GEOMETRIE-ESPACE-QCM.json",
+      "qcm_sha256": "sha256:565b7d3423ebfc3093e3a37adb9a614de643d8559af8eff3ca558381b8f50432",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/contrat.yaml",
+      "contract_sha256": "sha256:cfb9fa1abc8e2b3da265f5ee070d445778385d7f595a433ae2e41219a8e68ab3",
+      "question_count": 5,
+      "contract_capacity_count": 16
+    },
+    {
+      "chapter": "TSPE-LIMITES-FONCTIONS",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/qcm/TSPE-LIMITES-FONCTIONS-QCM.json",
+      "qcm_sha256": "sha256:8dd128188ec93aec454bbf58e190a0ec725eeed7f24c6eccdcf9abccb304b406",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/contrat.yaml",
+      "contract_sha256": "sha256:81774e8cd15df4962be7cba35b8e4f947d5ad6c8a05ef73e958409315113520f",
+      "question_count": 15,
+      "contract_capacity_count": 3
+    },
+    {
+      "chapter": "TSPE-LOGARITHME",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/qcm/TSPE-LOGARITHME-QCM.json",
+      "qcm_sha256": "sha256:5c18ea3a9ad6b784630ceac334e7c4abf1932a9b8b090436e9aefb1d7fc68c9c",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/contrat.yaml",
+      "contract_sha256": "sha256:e1c622e811baa7ab3316cf6ec340f070a6c21fbb97a1389bb70e7d608e08159e",
+      "question_count": 5,
+      "contract_capacity_count": 4
+    },
+    {
+      "chapter": "TSPE-PRIMITIVES-EQDIFF",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/qcm/TSPE-PRIMITIVES-EQDIFF-QCM.json",
+      "qcm_sha256": "sha256:c93fa5c109740ebcf10043d17fc838391f116b82ba2ad295d4c6d6ac5c3a32af",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/contrat.yaml",
+      "contract_sha256": "sha256:62b2f88ab8077ef2b40b38879bb807ab542ca0dca0c8c353c17e60b07d4f44b0",
+      "question_count": 5,
+      "contract_capacity_count": 5
+    },
+    {
+      "chapter": "TSPE-PROBABILITES",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json",
+      "qcm_sha256": "sha256:d716dba2410ef4ce7a1073a0a1a8801bc1225b4c9ed4e960cb2f5d37e0320ab3",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/contrat.yaml",
+      "contract_sha256": "sha256:0078515ed184cd6d917f8ac17e6d4a9c0821ca90c8ceb91fb38ca57564f97ba4",
+      "question_count": 6,
+      "contract_capacity_count": 10
+    },
+    {
+      "chapter": "TSPE-SUITES-LIMITES",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/qcm/TSPE-SUITES-LIMITES-QCM.json",
+      "qcm_sha256": "sha256:6e264dcb548082da3b185794749c61451abd1965b3149acce9b4fca281ed2bee",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/contrat.yaml",
+      "contract_sha256": "sha256:a0df90a339eae8d5016dd499fbb4cc48ec4a044e62ba58ed8dca4c52ab6feb4d",
+      "question_count": 15,
+      "contract_capacity_count": 7
+    },
+    {
+      "chapter": "TSPE-TRIGONOMETRIE",
+      "qcm_path": "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/qcm/TSPE-TRIGONOMETRIE-QCM.json",
+      "qcm_sha256": "sha256:6f9ee45b0f8f626fdf03373f695b63ac4c822ab5473f69c4195d597a1afd2f4f",
+      "contract_path": "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/contrat.yaml",
+      "contract_sha256": "sha256:d2e504cab02990144370e3107928132d9e738e53a5b62e002312e5ed9fd6d08b",
+      "question_count": 5,
+      "contract_capacity_count": 2
+    }
+  ],
+  "inventory": {
+    "qcm_files": 35,
+    "chapters": 35,
+    "questions": 330
   },
-  "TSPE-DERIVATION-CONVEXITE": {
-   "Q1": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q2": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q3": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q4": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q5": [
-    "A:renvoi-vide",
-    "B:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q6": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q7": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q8": [
-    "A:renvoi-vide",
-    "B:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q9": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q10": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q12": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q13": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q14": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q15": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ]
+  "missing_by_chapter": {
+    "TCOMPL-CORRELATION-CAUSALITE": [
+      "C1"
+    ],
+    "TCOMPL-ECHANTILLONNAGE": [
+      "C6"
+    ],
+    "TCOMPL-INFERENCE-BAYESIENNE": [
+      "C5"
+    ],
+    "TCOMPL-LOGARITHME-HISTORIQUE": [
+      "C4"
+    ],
+    "TCOMPL-MODELES-EVOLUTION": [
+      "C3"
+    ],
+    "TCOMPL-MODELES-FONCTION": [
+      "C2",
+      "C3",
+      "C6",
+      "C7"
+    ],
+    "TCOMPL-TEMPS-ATTENTE": [
+      "C4",
+      "C5",
+      "C6"
+    ],
+    "TEXP-ARITHMETIQUE": [
+      "C3",
+      "C4",
+      "C6",
+      "C7",
+      "C8",
+      "C9"
+    ],
+    "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE": [
+      "C2",
+      "C5"
+    ],
+    "TEXP-COMPLEXES-TRIGO-POLYNOMES": [
+      "C3",
+      "C4",
+      "C6"
+    ],
+    "TEXP-GRAPHES": [
+      "C2"
+    ],
+    "TEXP-MATRICES-MARKOV": [
+      "C2",
+      "C6"
+    ],
+    "TSPE-CALCUL-INTEGRAL": [
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8"
+    ],
+    "TSPE-GEOMETRIE-ESPACE": [
+      "C1",
+      "C10",
+      "C14",
+      "C15",
+      "C16",
+      "C2",
+      "C4",
+      "C5",
+      "C6",
+      "C8",
+      "C9"
+    ],
+    "TSPE-PROBABILITES": [
+      "C1",
+      "C3",
+      "C4",
+      "C6"
+    ]
   },
-  "TSPE-GEOMETRIE-ESPACE": {
-   "Q1": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q2": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q3": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q4": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q5": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ]
+  "total_missing": 46,
+  "distractor_gaps_by_chapter": {
+    "TSPE-DERIVATION-CONVEXITE": {
+      "Q1": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q2": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q3": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q4": [
+        "B:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q5": [
+        "A:renvoi-vide",
+        "B:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q6": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q7": [
+        "B:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q8": [
+        "A:renvoi-vide",
+        "B:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q9": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q10": [
+        "B:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q12": [
+        "B:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q13": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q14": [
+        "B:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q15": [
+        "B:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ]
+    },
+    "TSPE-GEOMETRIE-ESPACE": {
+      "Q1": [
+        "A:renvoi-vide",
+        "B:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q2": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q3": [
+        "B:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q4": [
+        "B:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q5": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ]
+    },
+    "TSPE-LOGARITHME": {
+      "Q1": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q2": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q3": [
+        "A:renvoi-vide",
+        "B:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q4": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q5": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ]
+    },
+    "TSPE-PRIMITIVES-EQDIFF": {
+      "Q1": [
+        "A:renvoi-vide",
+        "B:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q3": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q4": [
+        "B:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q5": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ]
+    },
+    "TSPE-PROBABILITES": {
+      "Q1": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q2": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q3": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q4": [
+        "B:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q5": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q6": [
+        "B:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ]
+    },
+    "TSPE-TRIGONOMETRIE": {
+      "Q1": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q2": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q3": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q4": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ],
+      "Q5": [
+        "A:renvoi-vide",
+        "C:renvoi-vide",
+        "D:renvoi-vide"
+      ]
+    }
   },
-  "TSPE-LOGARITHME": {
-   "Q1": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q2": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q3": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q4": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q5": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ]
-  },
-  "TSPE-PRIMITIVES-EQDIFF": {
-   "Q1": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q3": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q4": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q5": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ]
-  },
-  "TSPE-PROBABILITES": {
-   "Q1": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q2": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q3": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q4": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q5": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q6": [
-    "B:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ]
-  },
-  "TSPE-TRIGONOMETRIE": {
-   "Q1": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q2": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q3": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q4": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ],
-   "Q5": [
-    "A:renvoi-vide",
-    "C:renvoi-vide",
-    "D:renvoi-vide"
-   ]
-  }
- },
-  "total_distractor_gaps": 153
+  "total_distractor_gaps": 117,
+  "objective_zero": false,
+  "human_approval_complete": false
 }

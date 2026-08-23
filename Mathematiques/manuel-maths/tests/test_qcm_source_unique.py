@@ -21,6 +21,8 @@ import pytest
 
 RACINE = Path(__file__).resolve().parents[1]
 GENERATEUR = RACINE / "scripts" / "build_qcm_tex.py"
+DEBT_BUILDER = RACINE.parents[1] / "scripts" / "build_qcm_capacity_coverage_debt.py"
+DEBT_LEDGER = RACINE.parents[1] / "audit" / "QCM_CAPACITY_COVERAGE_DEBT.json"
 
 
 def _sources_qcm() -> dict[str, Path]:
@@ -46,6 +48,21 @@ CHAPITRES_SOURCE_UNIQUE = sorted(
 def _question(chapitre: str, question_id: str) -> dict:
     donnees = json.loads(SOURCES[chapitre].read_text(encoding="utf-8"))
     return next(item for item in donnees["questions"] if item["id"] == question_id)
+
+
+def _debt_ledger() -> dict:
+    return json.loads(DEBT_LEDGER.read_text(encoding="utf-8"))
+
+
+def _assert_debt_status_is_derived(ledger: dict) -> None:
+    expected = (
+        "PENDING_CONTENT_LOT"
+        if ledger["total_missing"] or ledger["total_distractor_gaps"]
+        else "CLOSED_OBJECTIVE_ZERO"
+    )
+    assert ledger["status"] == expected
+    assert ledger["objective_zero"] is (expected == "CLOSED_OBJECTIVE_ZERO")
+    assert ledger["human_approval_complete"] is False
 
 
 def test_second_degre_q16_cle_correspond_au_calcul_independant() -> None:
@@ -248,20 +265,13 @@ def test_diagnostic_1spe_explique_exactement_son_distracteur(
 def test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi(chapitre: str) -> None:
     """Diagnostics/renvois de distracteurs sous contrat de dette declare.
 
-    Les lacunes P1 anterieures (distracteurs livres sans diagnostic ou sans
-    renvoi de remediation) sont FIGEES question par question dans
-    audit/QCM_CAPACITY_COVERAGE_DEBT.json (status PENDING_CONTENT_LOT). Vert
-    si et seulement si l'ecart observe est EXACTEMENT l'ecart declare ; toute
-    nouvelle lacune, ou lacune resorbee sans mise a jour du registre, echoue.
-    Le NO-GO reste porte par release-strict.
+    Les lacunes sont dérivées question par question dans le registre. Vert si
+    et seulement si l'écart observé est EXACTEMENT l'écart déclaré ; toute
+    nouvelle lacune ou clôture non recalculée échoue.
     """
     donnees = json.loads(SOURCES[chapitre].read_text(encoding="utf-8"))
-    ledger = json.loads(
-        (RACINE.parents[1] / "audit" / "QCM_CAPACITY_COVERAGE_DEBT.json").read_text(
-            encoding="utf-8"
-        )
-    )
-    assert ledger["status"] == "PENDING_CONTENT_LOT"
+    ledger = _debt_ledger()
+    _assert_debt_status_is_derived(ledger)
     declarees = ledger.get("distractor_gaps_by_chapter", {}).get(chapitre, {})
 
     observees: dict[str, list[str]] = {}
@@ -312,12 +322,10 @@ def test_identifiants_de_questions_uniques(chapitre: str) -> None:
 def test_toutes_les_capacites_du_contrat_sont_interrogees(chapitre: str) -> None:
     """Couverture QCM x capacites sous contrat de dette declare (cloture A4).
 
-    Les trous de couverture anterieurs a la campagne sont FIGES dans
-    audit/QCM_CAPACITY_COVERAGE_DEBT.json (status PENDING_CONTENT_LOT,
-    production de questions = lot QCM non demarre). Le test est VERT si et
-    seulement si l'ecart observe est EXACTEMENT l'ecart declare : toute
-    nouvelle capacite non interrogee echoue, et toute capacite couverte
-    depuis doit sortir du registre. Le NO-GO reste porte par release-strict.
+    Le registre est recalculé depuis les contrats et les sources QCM. Le test
+    est vert si et seulement si l'écart observé est exactement l'écart
+    déclaré : toute nouvelle lacune et toute ligne résolue mais périmée font
+    échouer le gate.
     """
     import yaml
 
@@ -329,9 +337,8 @@ def test_toutes_les_capacites_du_contrat_sont_interrogees(chapitre: str) -> None
     interrogees = {question["capacite"] for question in donnees["questions"]}
     manquantes = attendues - interrogees
 
-    ledger_path = RACINE.parents[1] / "audit" / "QCM_CAPACITY_COVERAGE_DEBT.json"
-    ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
-    assert ledger["status"] == "PENDING_CONTENT_LOT"
+    ledger = _debt_ledger()
+    _assert_debt_status_is_derived(ledger)
     declarees = set(ledger["missing_by_chapter"].get(chapitre, []))
 
     nouvelles = manquantes - declarees
@@ -376,17 +383,36 @@ def test_le_gate_des_cles_couvre_exactement_les_35_qcm() -> None:
 
 
 def test_le_total_de_dette_diagnostique_est_derive_des_lignes() -> None:
-    ledger = json.loads(
-        (RACINE.parents[1] / "audit/QCM_CAPACITY_COVERAGE_DEBT.json").read_text(
-            encoding="utf-8"
-        )
-    )
+    ledger = _debt_ledger()
     observed = sum(
         len(gaps)
         for questions in ledger["distractor_gaps_by_chapter"].values()
         for gaps in questions.values()
     )
     assert ledger["total_distractor_gaps"] == observed
+
+
+def test_le_total_de_capacites_manquantes_est_derive_des_lignes() -> None:
+    ledger = _debt_ledger()
+    observed = sum(len(capacities) for capacities in ledger["missing_by_chapter"].values())
+    assert ledger["total_missing"] == observed
+
+
+def test_le_registre_de_dette_est_courant_et_reproductible() -> None:
+    result = subprocess.run(
+        [sys.executable, str(DEBT_BUILDER), "--check"],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    ledger = _debt_ledger()
+    assert ledger["inventory"] == {
+        "qcm_files": 35,
+        "chapters": 35,
+        "questions": 330,
+    }
+    assert len(ledger["source_inputs"]) == 35
+    _assert_debt_status_is_derived(ledger)
 
 
 @pytest.mark.parametrize(
