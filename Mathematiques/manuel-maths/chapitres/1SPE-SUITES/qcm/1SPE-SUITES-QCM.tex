@@ -32,7 +32,7 @@
     \item On peut calculer $u_{10}$ directement en substituant $n = 10$ dans la relation $u_{n+1} = f(u_n)$.
     \item Pour calculer $u_1$, on substitue $n = 0$ dans la relation $u_{n+1} = f(u_n)$.
     \item Une suite definie par formule explicite necessite de connaitre le terme precedent.
-    \item La notation $u(n)$ avec des parentheses est la notation mathematique standard pour une suite.
+    \item Une suite doit obligatoirement etre notee $u(n)$ et ne peut jamais etre notee $u_n$.
   \end{enumerate}
 
 \item[] \textbf{Capacite C2}
@@ -123,7 +123,7 @@
     \item D'abord croissante, puis decroissante
   \end{enumerate}
 
-\item \textbf{[Q14]} Pour etudier le sens de variation de la suite $(u_n)$ definie par $u_n = 5 \times (0{,}8)^n$ (avec $u_n > 0$ pour tout $n$), quelle est la methode la plus efficace ?
+\item \textbf{[Q14]} Pour etudier le sens de variation de la suite $(u_n)$ definie par $u_n = 5 \times (0{,}8)^n$ avec $u_n>0$, quelle methode utilise directement la raison $q=0{,}8$ ?
   \begin{enumerate}[label=\Alph*.]
     \item Methode A : calculer le signe de $u_{n+1} - u_n$.
     \item Methode B : comparer le quotient $u_{n+1}/u_n$ a $1$.
@@ -277,7 +277,7 @@ Q21 & C7 & \textbf{B} \\
   \begin{itemize}
     \item \textbf{A} — Confusion entre formule explicite et recurrence : en recurrence, on ne peut pas substituer directement $n = 10$, il faut calculer tous les termes intermediaires $u_1, \ldots, u_9$. \emph{Renvoi : M1, etape 1.}
     \item \textbf{C} — Definition inversee : c'est la suite par RECURRENCE qui necessite le terme precedent. La formule explicite donne $u_n$ directement en fonction de $n$. \emph{Renvoi : M1, etape 1.}
-    \item \textbf{D} — La notation $u(n)$ est la notation algorithmique/fonctionnelle ; la notation mathematique standard d'une suite est $u_n$ (indice en bas). \emph{Renvoi : R5.}
+    \item \textbf{D} — Le programme admet explicitement les deux notations $u(n)$ et $u_n$ ; aucune des deux n'est obligatoire a l'exclusion de l'autre. \emph{Renvoi : R5.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
@@ -341,7 +341,7 @@ Q21 & C7 & \textbf{B} \\
   \end{itemize}
   \item \textbf{Q14}
   \begin{itemize}
-    \item \textbf{A} — La methode A fonctionne mais est moins efficace ici : $u_{n+1} - u_n = 5 \times (0{,}8)^n \times (0{,}8 - 1) = -1 \times 5 \times (0{,}8)^n$ donne un signe, mais la methode B est directe car le quotient $u_{n+1}/u_n = 0{,}8$ est immediatement visible. \emph{Renvoi : M5, arbre de decision.}
+    \item \textbf{A} — La methode A fonctionne aussi : $u_{n+1}-u_n=5(0{,}8)^n(0{,}8-1)<0$. Elle n'utilise toutefois pas directement la raison par comparaison du quotient a 1, contrairement a la methode demandee. \emph{Renvoi : M5, arbre de decision.}
     \item \textbf{C} — La methode C necessite de connaitre la derivee de $x \mapsto (0{,}8)^x = e^{x \ln(0{,}8)}$, hors programme de premiere. La methode B est la voie adaptee pour les suites geometriques a termes positifs. \emph{Renvoi : M5, arbre de decision.}
     \item \textbf{D} — Observer quelques valeurs ne constitue pas une preuve. Il faut un raisonnement valide pour tout $n \in \mathbb{N}$, pas seulement pour $n = 0, 1, 2, 3, 4$. \emph{Renvoi : M5, Piege 1.}
   \end{itemize}

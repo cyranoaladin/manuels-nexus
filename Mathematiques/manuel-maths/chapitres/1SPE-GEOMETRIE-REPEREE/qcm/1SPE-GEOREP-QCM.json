@@ -174,12 +174,12 @@
       "id": "Q15",
       "capacite": "C5",
       "enonce": "Si $ABCD$ est un parallelogramme et $AC = BD$, alors $ABCD$ est :",
-      "options": {"A": "un losange", "B": "un rectangle", "C": "un carre", "D": "un trapeze"},
+      "options": {"A": "un losange", "B": "un rectangle", "C": "un carre", "D": "un trapeze non parallelogramme"},
       "correcte": "B",
       "diagnostics": {
         "A": {"erreur": "Un losange a ses diagonales perpendiculaires, pas necessairement egales.", "renvoi": "Cours C5, propriete 1"},
         "C": {"erreur": "Un carre est un cas particulier (rectangle ET losange), on n'a pas assez d'information.", "renvoi": "Cours C5"},
-        "D": {"erreur": "Un parallelogramme est un cas particulier de trapeze, mais la propriete le precise en rectangle.", "renvoi": "Cours C5"}
+        "D": {"erreur": "Avec la definition inclusive, un parallelogramme est bien un trapeze ; l'option precise toutefois 'non parallelogramme', ce qui contredit l'hypothese.", "renvoi": "Cours C5"}
       }
     }
   ]

@@ -62,7 +62,7 @@
         "A": "On peut calculer $u_{10}$ directement en substituant $n = 10$ dans la relation $u_{n+1} = f(u_n)$.",
         "B": "Pour calculer $u_1$, on substitue $n = 0$ dans la relation $u_{n+1} = f(u_n)$.",
         "C": "Une suite definie par formule explicite necessite de connaitre le terme precedent.",
-        "D": "La notation $u(n)$ avec des parentheses est la notation mathematique standard pour une suite."
+        "D": "Une suite doit obligatoirement etre notee $u(n)$ et ne peut jamais etre notee $u_n$."
       },
       "correcte": "B",
       "diagnostics": {
@@ -75,7 +75,7 @@
           "renvoi": "M1, etape 1"
         },
         "D": {
-          "erreur": "La notation $u(n)$ est la notation algorithmique/fonctionnelle ; la notation mathematique standard d'une suite est $u_n$ (indice en bas).",
+          "erreur": "Le programme admet explicitement les deux notations $u(n)$ et $u_n$ ; aucune des deux n'est obligatoire a l'exclusion de l'autre.",
           "renvoi": "R5"
         }
       }
@@ -343,7 +343,7 @@
     {
       "id": "Q14",
       "capacite": "C5",
-      "enonce": "Pour etudier le sens de variation de la suite $(u_n)$ definie par $u_n = 5 \\times (0{,}8)^n$ (avec $u_n > 0$ pour tout $n$), quelle est la methode la plus efficace ?",
+      "enonce": "Pour etudier le sens de variation de la suite $(u_n)$ definie par $u_n = 5 \\times (0{,}8)^n$ avec $u_n>0$, quelle methode utilise directement la raison $q=0{,}8$ ?",
       "options": {
         "A": "Methode A : calculer le signe de $u_{n+1} - u_n$.",
         "B": "Methode B : comparer le quotient $u_{n+1}/u_n$ a $1$.",
@@ -353,7 +353,7 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "La methode A fonctionne mais est moins efficace ici : $u_{n+1} - u_n = 5 \\times (0{,}8)^n \\times (0{,}8 - 1) = -1 \\times 5 \\times (0{,}8)^n$ donne un signe, mais la methode B est directe car le quotient $u_{n+1}/u_n = 0{,}8$ est immediatement visible.",
+          "erreur": "La methode A fonctionne aussi : $u_{n+1}-u_n=5(0{,}8)^n(0{,}8-1)<0$. Elle n'utilise toutefois pas directement la raison par comparaison du quotient a 1, contrairement a la methode demandee.",
           "renvoi": "M5, arbre de decision"
         },
         "C": {

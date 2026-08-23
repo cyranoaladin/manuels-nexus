@@ -153,6 +153,38 @@ def test_convexite_q11_definit_inflexion_par_changement_de_convexite() -> None:
     )
 
 
+def test_geometrie_reperee_q15_ecarte_le_trapeze_inclusif() -> None:
+    question = _question("1SPE-GEOMETRIE-REPEREE", "Q15")
+
+    assert question["correcte"] == "B"
+    assert "non parallelogramme" in question["options"]["D"]
+    assert "definition inclusive" in question["diagnostics"]["D"]["erreur"]
+
+
+def test_proba_conditionnelle_q18_decrit_les_donnees_qui_appellent_bayes() -> None:
+    question = _question("1SPE-PROBA-COND", "Q18")
+
+    assert "parts de production" in question["enonce"]
+    assert "sachant qu'une piece est defectueuse" in question["enonce"]
+    assert question["correcte"] == "B"
+
+
+def test_suites_q3_reconnait_les_deux_notations_officielles() -> None:
+    question = _question("1SPE-SUITES", "Q3")
+
+    assert question["correcte"] == "B"
+    assert "obligatoirement" in question["options"]["D"]
+    assert "$u(n)$ et $u_n$" in question["diagnostics"]["D"]["erreur"]
+
+
+def test_suites_q14_demande_un_critere_objectif() -> None:
+    question = _question("1SPE-SUITES", "Q14")
+
+    assert "utilise directement la raison" in question["enonce"]
+    assert question["correcte"] == "B"
+    assert "fonctionne aussi" in question["diagnostics"]["A"]["erreur"]
+
+
 @pytest.mark.parametrize("chapitre", CHAPITRES)
 def test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi(chapitre: str) -> None:
     """Diagnostics/renvois de distracteurs sous contrat de dette declare.
