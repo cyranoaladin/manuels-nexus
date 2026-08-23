@@ -1,0 +1,469 @@
+{
+  "artifact_name": "STUDENT_PDF_PUBLISH_PREFLIGHT_CURRENT_HEAD",
+  "build_evidence": {
+    "1SPE": {
+      "student_forbidden_markers": [],
+      "student_key_count": 0,
+      "student_pdf": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
+      "student_pdf_sha256": "22e652a389c052b089adb51999cc46d2d90bb35397fc6a67efb9fb705c596757",
+      "teacher_key_count_expected": 10,
+      "teacher_key_count_observed": 10,
+      "teacher_pdf": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf",
+      "teacher_pdf_sha256": "1115cfcc1abc1be540ea863de5ddae6fdf13b2e613b9e776c0435fea590e378b"
+    },
+    "TCOMPL": {
+      "student_forbidden_markers": [],
+      "student_key_count": 0,
+      "student_pdf": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf",
+      "student_pdf_sha256": "3c150e6311373c88bcbdc56ab64ad099ff1bb8d4d43062457576ae6f2a190188",
+      "teacher_key_count_expected": 9,
+      "teacher_key_count_observed": 9,
+      "teacher_pdf": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.pdf",
+      "teacher_pdf_sha256": "c02692437fef07dea757213b151c59f088e0898d64eacc4eaf784565db7e669c"
+    },
+    "TEXPERTES": {
+      "student_forbidden_markers": [],
+      "student_key_count": 0,
+      "student_pdf": "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_eleve.pdf",
+      "student_pdf_sha256": "f43877915b98282a10f90e9c636659520af6ab90b10cb1014d09af361d188a2f",
+      "teacher_key_count_expected": 5,
+      "teacher_key_count_observed": 5,
+      "teacher_pdf": "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_professeur.pdf",
+      "teacher_pdf_sha256": "e00845eba7c9c26bd27f8c23de217fefb4cad809a32dff6e19ac9e482574366f"
+    },
+    "TSPE": {
+      "student_forbidden_markers": [],
+      "student_key_count": 0,
+      "student_pdf": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.pdf",
+      "student_pdf_sha256": "fdfea9da34c06c9b4779798a97873e6f899e16b65db7bc0ec6599aeb9a15f850",
+      "teacher_key_count_expected": 11,
+      "teacher_key_count_observed": 11,
+      "teacher_pdf": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_professeur.pdf",
+      "teacher_pdf_sha256": "3642b8f5dbef061b1110162000cc4008bcbccc29abadc9d41553bfc792ad3556"
+    }
+  },
+  "deferred_findings": [
+    {
+      "evidence": "pdfinfo exposes no Title/Author and mutool show outline returns no entries",
+      "finding": "PDF_METADATA_INCOMPLETE / PDF_NAVIGATION_MISSING",
+      "owner_phase": "FINAL_PDF_PREFLIGHT / T9",
+      "requirement": "AGENTS.md requires metadata, bookmarks, links and embedded fonts in final PDFs",
+      "status": "CONFIRMED_ON_FOUR_STUDENT_PDFS"
+    }
+  ],
+  "integration_base_sha": "10cb5f07772842d6630d2a2f78531f6900371023",
+  "keys": [
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/qcm/1SPE-DERIVATION-GLOBAL-QCM.json",
+      "chapter": "1SPE-DERIVATION-GLOBAL",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "1SPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/qcm/1SPE-DERIVATION-GLOBAL-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/qcm/1SPE-DERIVATION-LOCAL-QCM.json",
+      "chapter": "1SPE-DERIVATION-LOCAL",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "1SPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/qcm/1SPE-DERIVATION-LOCAL-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
+      "chapter": "1SPE-EXPONENTIELLE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "1SPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/qcm/1SPE-GEOREP-QCM.json",
+      "chapter": "1SPE-GEOMETRIE-REPEREE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "1SPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/qcm/1SPE-GEOREP-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/qcm/1SPE-PROBCOND-QCM.json",
+      "chapter": "1SPE-PROBA-COND",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "1SPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/qcm/1SPE-PROBCOND-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/qcm/1SPE-PRODUIT-SCALAIRE-QCM.json",
+      "chapter": "1SPE-PRODUIT-SCALAIRE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "1SPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/qcm/1SPE-PRODUIT-SCALAIRE-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/1SPE-SECDEG-QCM.json",
+      "chapter": "1SPE-SECOND-DEGRE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "1SPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/1SPE-SECDEG-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json",
+      "chapter": "1SPE-SUITES",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "1SPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/qcm/1SPE-TRIGONOMETRIE-QCM.json",
+      "chapter": "1SPE-TRIGONOMETRIE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "1SPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/qcm/1SPE-TRIGONOMETRIE-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
+      "chapter": "1SPE-VARIABLES-ALEATOIRES",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "1SPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/qcm/TCOMPL-CALCULS-AIRES-QCM.json",
+      "chapter": "TCOMPL-CALCULS-AIRES",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TCOMPL",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/qcm/TCOMPL-CALCULS-AIRES-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/qcm/TCOMPL-CORRELATION-CAUSALITE-QCM.json",
+      "chapter": "TCOMPL-CORRELATION-CAUSALITE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TCOMPL",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/qcm/TCOMPL-CORRELATION-CAUSALITE-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/qcm/TCOMPL-ECHANTILLONNAGE-QCM.json",
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TCOMPL",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/qcm/TCOMPL-ECHANTILLONNAGE-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/qcm/TCOMPL-INEGALITES-QCM.json",
+      "chapter": "TCOMPL-INEGALITES",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TCOMPL",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/qcm/TCOMPL-INEGALITES-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/qcm/TCOMPL-INFERENCE-BAYESIENNE-QCM.json",
+      "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TCOMPL",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/qcm/TCOMPL-INFERENCE-BAYESIENNE-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/qcm/TCOMPL-LOGARITHME-HISTORIQUE-QCM.json",
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TCOMPL",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/qcm/TCOMPL-LOGARITHME-HISTORIQUE-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.json",
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TCOMPL",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json",
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TCOMPL",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json",
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TCOMPL",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json",
+      "chapter": "TEXP-ARITHMETIQUE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TEXPERTES",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.json",
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TEXPERTES",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json",
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TEXPERTES",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.json",
+      "chapter": "TEXP-GRAPHES",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TEXPERTES",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.json",
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TEXPERTES",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.json",
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TSPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/qcm/TSPE-COMBINATOIRE-QCM.json",
+      "chapter": "TSPE-COMBINATOIRE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TSPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/qcm/TSPE-COMBINATOIRE-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/qcm/TSPE-CONTINUITE-QCM.json",
+      "chapter": "TSPE-CONTINUITE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TSPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/qcm/TSPE-CONTINUITE-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/qcm/TSPE-DERIVATION-CONVEXITE-QCM.json",
+      "chapter": "TSPE-DERIVATION-CONVEXITE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TSPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/qcm/TSPE-DERIVATION-CONVEXITE-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/qcm/TSPE-GEOMETRIE-ESPACE-QCM.json",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TSPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/qcm/TSPE-GEOMETRIE-ESPACE-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/qcm/TSPE-LIMITES-FONCTIONS-QCM.json",
+      "chapter": "TSPE-LIMITES-FONCTIONS",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TSPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/qcm/TSPE-LIMITES-FONCTIONS-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/qcm/TSPE-LOGARITHME-QCM.json",
+      "chapter": "TSPE-LOGARITHME",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TSPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/qcm/TSPE-LOGARITHME-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/qcm/TSPE-PRIMITIVES-EQDIFF-QCM.json",
+      "chapter": "TSPE-PRIMITIVES-EQDIFF",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TSPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/qcm/TSPE-PRIMITIVES-EQDIFF-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json",
+      "chapter": "TSPE-PROBABILITES",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TSPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/qcm/TSPE-SUITES-LIMITES-QCM.json",
+      "chapter": "TSPE-SUITES-LIMITES",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TSPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/qcm/TSPE-SUITES-LIMITES-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    },
+    {
+      "canonical_source_of_truth": "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/qcm/TSPE-TRIGONOMETRIE-QCM.json",
+      "chapter": "TSPE-TRIGONOMETRIE",
+      "guard_mechanism": "\\ifnxVersionProfesseur delimited by NEXUS-QCM-TEACHER-ONLY markers",
+      "manual": "TSPE",
+      "source_guard_status": "PASS",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/qcm/TSPE-TRIGONOMETRIE-QCM.tex",
+      "student_visibility_before": "VISIBLE",
+      "student_visibility_current": "HIDDEN",
+      "teacher_visibility_current": "VISIBLE"
+    }
+  ],
+  "qcm_source_digest": "sha256:e2c21f31d61ff206bb645b00d6838439263deafbf4585b816ab9a5990af5564a",
+  "schema_version": 1,
+  "scope": "eight current Math PDF variants",
+  "summary": {
+    "eight_math_builds_passed": true,
+    "qcm_key_zones": 35,
+    "student_teacher_only_leaks": 0,
+    "teacher_keys_by_manual": {
+      "1SPE": {
+        "expected": 10,
+        "observed": 10
+      },
+      "TCOMPL": {
+        "expected": 9,
+        "observed": 9
+      },
+      "TEXPERTES": {
+        "expected": 5,
+        "observed": 5
+      },
+      "TSPE": {
+        "expected": 11,
+        "observed": 11
+      }
+    },
+    "teacher_required_keys_present": true
+  }
+}

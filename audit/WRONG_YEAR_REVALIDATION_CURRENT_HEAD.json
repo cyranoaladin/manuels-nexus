@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "artifact_name": "WRONG_YEAR_REVALIDATION_CURRENT_HEAD",
+  "integration_base_sha": "10cb5f07772842d6630d2a2f78531f6900371023",
+  "requested_cases": [
+    {
+      "case_id": "WRONG_YEAR-001",
+      "official_or_candidate_id": "SRC-BO2026-TSPE-R2027",
+      "manual": "TSPE",
+      "chapter": null,
+      "source_path": "docs/programmes/PROGRAMMES_2026_2027.yaml",
+      "claimed_authority": "MENE2602919A — programme Terminale spécialité publié en 2026",
+      "correct_authority": "MENE1921246A — programme applicable à l'édition 2026-2027",
+      "content_affected": "NO",
+      "classification": "AUDIT_METADATA_ONLY",
+      "current_head_status": "ALREADY_NEUTRALIZED",
+      "proof": "Le candidat 2026 est explicitement marqué hors périmètre et applicable seulement en 2027-2028; TSPE pointe sur SRC-BO2019-TSPE."
+    },
+    {
+      "case_id": "WRONG_YEAR-002",
+      "official_or_candidate_id": "A5-CANDIDATE-MENE2602920A",
+      "manual": "TCOMPL",
+      "chapter": null,
+      "source_path": "audit/OFFICIAL_PROGRAM_AUTHORITY_2026_2027.yaml",
+      "claimed_authority": "MENE2602920A — alias A5 erroné d'un programme 2026",
+      "correct_authority": "MENE1921265A — programme applicable à l'édition 2026-2027; futur NOR exact MENE2902920A applicable en 2027-2028",
+      "content_affected": "NO",
+      "classification": "AUDIT_METADATA_ONLY",
+      "current_head_status": "ALREADY_NEUTRALIZED",
+      "proof": "La matrice TCOMPL courante est recalculée contre MENE1921265A et le registre d'autorité corrige explicitement le futur NOR en MENE2902920A."
+    }
+  ],
+  "requested_cases_remaining": 0,
+  "distinct_current_regulatory_findings": [
+    {
+      "finding": "1SPE-TRIGONOMETRIE-C3/C4/C5",
+      "matrix_rows": [
+        "1SPE-MATRIX-043",
+        "1SPE-MATRIX-044",
+        "1SPE-MATRIX-045"
+      ],
+      "classification": "CONTENT_DERIVED_FROM_WRONG_PROGRAMME",
+      "content_affected": "YES",
+      "status": "HUMAN_DECISION_REQUIRED",
+      "decision": "Retirer ces objets de l'édition 1SPE ou les conserver exclusivement comme approfondissements explicitement non exigibles."
+    },
+    {
+      "finding": "1SPE-VARIABLES-ALEATOIRES-C3/C4 loi binomiale",
+      "matrix_rows": [
+        "1SPE-MATRIX-069",
+        "1SPE-MATRIX-070"
+      ],
+      "classification": "UNSUPPORTED_CLAIM",
+      "content_affected": "YES",
+      "status": "HUMAN_DECISION_REQUIRED",
+      "decision": "Reclassifier explicitement en approfondissement ou retirer du parcours canonique 1SPE."
+    }
+  ]
+}
