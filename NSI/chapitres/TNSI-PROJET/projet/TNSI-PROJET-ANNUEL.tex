@@ -1,0 +1,147 @@
+% META: {"id":"TNSI-PROJET-ANNUEL","chapitre":"TNSI-PROJET","type_objet":"projet","capacites":["TNSI-PROJET-BO-01","TNSI-PROJET-BO-02"],"capacites_codes":["C1","C2"],"mode_creation":"ex_nihilo","sources_inspiration":[],"status":"needs_review"}
+
+\section{Conduire un projet informatique en Terminale}
+
+\margeAppui{Autorité programme : BO spécial n\textsuperscript{o} 8 du 25 juillet 2019,
+NOR MENE1921247A, préambule « Démarche de projet ».}
+
+\theoreme[Contrat horaire officiel]{
+Le programme réserve \textbf{au moins 25\,\%} de l'horaire total de la spécialité à la
+conception et à l'élaboration de projets conduits par les élèves. Sur une référence de
+$216$ heures ($6$ heures hebdomadaires pendant $36$ semaines), cela représente au moins
+$54$ heures. Si l'horaire effectivement assuré diffère, le plan annuel est ajusté pour
+préserver la proportion minimale d'un quart.
+}
+
+\subsection*{Programme d'enseignement et Définition de l'épreuve}
+
+Cette unité met en œuvre une obligation du \textbf{Programme d'enseignement}
+(MENE1921247A). Elle ne constitue pas une nouvelle partie de l'examen et
+\textbf{ne remplace pas l'épreuve pratique}. La \textbf{Définition de l'épreuve} relève
+d'une autorité distincte : la note de service MENE2516123N définit, à compter de la
+session 2026, une partie écrite de $3$~h~$30$ et une partie pratique d'une heure, chacune
+notée sur $20$, avec des poids respectifs de $0{,}75$ et $0{,}25$. Le projet prépare des
+compétences utiles, mais son volume, ses livrables et sa grille ci-dessous relèvent de
+l'enseignement et non du format de l'épreuve.
+
+\subsection*{Prérequis}
+
+Avant le cadrage, chaque équipe vérifie qu'elle sait :
+\begin{itemize}
+  \item écrire, exécuter et tester un programme Python ;
+  \item mobiliser au moins une notion du programme de Terminale NSI ;
+  \item conserver un historique des versions et attribuer chaque contribution ;
+  \item partager uniquement des données licites, documentées et dépourvues de données
+        personnelles d'élèves ;
+  \item expliquer une décision technique à l'oral et par écrit.
+\end{itemize}
+
+\subsection*{Question de départ et périmètre}
+
+Le projet répond à une question formulée par l'équipe et validée avec le professeur. Le
+thème peut provenir d'une autre discipline ou mobiliser, par exemple, une base de données,
+un graphe, une structure complexe, un traitement d'image ou de son, un site Web, un objet
+connecté ou un module d'intelligence artificielle. Le choix reste compatible avec les
+ressources disponibles et une réalisation complète en $54$ heures de référence.
+
+Le cahier des charges distingue :
+\begin{itemize}
+  \item un \textbf{produit minimal viable}, indispensable et démontrable ;
+  \item des fonctionnalités souhaitables, réalisées seulement après validation du socle ;
+  \item les limites connues, hypothèses, dépendances, licences et données utilisées ;
+  \item les critères observables qui permettront d'accepter ou de refuser chaque fonction.
+\end{itemize}
+
+\erreurFrequente{Accumuler des fonctionnalités sans produit minimal testable. Le programme
+demande une ambition raisonnable : une fonctionnalité non indispensable est reportée si
+elle met en danger l'aboutissement, les tests ou la documentation.}
+
+\subsection*{Jalons communs — plan de référence de 54 heures}
+
+Chaque jalon se termine par un point d'étape avec le professeur. L'équipe présente une
+preuve vérifiable, consigne la décision et met à jour les objectifs.
+
+\begin{center}
+\begin{tabular}{|p{0.08\linewidth}|p{0.46\linewidth}|p{0.12\linewidth}|p{0.22\linewidth}|}
+\hline
+\textbf{Jalon} & \textbf{Travail attendu} & \textbf{Durée} & \textbf{Preuve de passage} \\
+\hline
+J0 & Problème, équipe, responsabilités, contraintes et risques & 3 h & Note de cadrage validée \\
+\hline
+J1 & Cahier des charges, cas d'usage et critères d'acceptation & 6 h & Spécification versionnée \\
+\hline
+J2 & Architecture, données, interfaces et prototype exploratoire & 6 h & Schéma et prototype exécutable \\
+\hline
+J3 & Développement du produit minimal viable & 9 h & Démonstration du socle \\
+\hline
+J4 & Deuxième itération et intégration des contributions & 9 h & Version intégrée et journal de décisions \\
+\hline
+J5 & Tests normaux, cas limites, correction et robustesse & 9 h & Rapport de tests reproductible \\
+\hline
+J6 & Documentation utilisateur et technique, licences, limites & 6 h & Documentation relue \\
+\hline
+J7 & Stabilisation, démonstration, oral et bilan individuel & 6 h & Version finale et rétrospective \\
+\hline
+\multicolumn{2}{|r|}{\textbf{Total}} & \textbf{54 h} & \\
+\hline
+\end{tabular}
+\end{center}
+
+À chaque point d'étape, l'équipe répond à quatre questions : qu'est-ce qui fonctionne ?
+Quelle preuve le montre ? Quel obstacle reste prioritaire ? Quel objectif faut-il conserver,
+réduire ou redéfinir ? Une modification de périmètre n'efface jamais l'historique de la
+décision.
+
+\subsection*{Livrables obligatoires}
+
+\begin{enumerate}
+  \item une note de cadrage et un cahier des charges datés ;
+  \item un découpage en tâches, des responsabilités et un calendrier de jalons ;
+  \item les sources exécutables avec historique des versions et instructions de lancement ;
+  \item un jeu de tests couvrant les fonctions centrales et des cas limites ;
+  \item une documentation utilisateur et une documentation technique ;
+  \item un registre des données, bibliothèques, licences, hypothèses et limites ;
+  \item une démonstration finale reproductible ;
+  \item un bilan individuel identifiant contributions, apprentissages et améliorations.
+\end{enumerate}
+
+\subsection*{Grille d'évaluation}
+
+La grille est communiquée dès J0. L'évaluation croise une production collective et des
+preuves individuelles ; elle ne se réduit ni au volume de code ni à la seule démonstration
+finale.
+
+\begin{center}
+\begin{tabular}{|p{0.54\linewidth}|p{0.14\linewidth}|p{0.2\linewidth}|}
+\hline
+\textbf{Critère} & \textbf{Poids} & \textbf{Preuve principale} \\
+\hline
+Problème, périmètre et critères d'acceptation & 15\,\% & Cadrage et cahier des charges \\
+\hline
+Architecture et choix techniques justifiés & 15\,\% & Schémas et journal de décisions \\
+\hline
+Exactitude et fonctionnement du produit & 25\,\% & Version exécutable \\
+\hline
+Tests, cas limites et traitement des erreurs & 20\,\% & Rapport de tests \\
+\hline
+Documentation, reproductibilité et provenance & 10\,\% & Guides et registre des sources \\
+\hline
+Organisation, jalons et contributions individuelles & 10\,\% & Historique et bilans \\
+\hline
+Démonstration et argumentation orale & 5\,\% & Présentation finale \\
+\hline
+\textbf{Total} & \textbf{100\,\%} & \\
+\hline
+\end{tabular}
+\end{center}
+
+Un produit non exécutable ne peut pas obtenir les points de fonctionnement sur la base
+d'une simple intention. Inversement, un projet modeste mais complet, testé, documenté et
+argumenté satisfait mieux le contrat qu'un prototype ambitieux impossible à reproduire.
+
+\subsection*{Bilan final}
+
+Le bilan collectif compare le résultat au cahier des charges. Le bilan individuel explicite
+une contribution précise, un problème rencontré, la méthode utilisée pour le résoudre et
+une amélioration possible. Les limites connues sont documentées ; elles ne sont ni masquées
+ni présentées comme des fonctionnalités achevées.

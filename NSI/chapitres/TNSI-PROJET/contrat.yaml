@@ -1,0 +1,33 @@
+chapitre: TNSI-PROJET
+niveau: TNSI
+theme: DEMARCHE-DE-PROJET
+titre: "Conduire un projet informatique"
+statut: needs_review
+
+capacites:
+  - { code: C1, ref_capacite: TNSI-PROJET-BO-01, libelle_eleve: "Je sais concevoir et élaborer en équipe un projet informatique répondant à un problème explicite." }
+  - { code: C2, ref_capacite: TNSI-PROJET-BO-02, libelle_eleve: "Je sais organiser des points d'étape, contrôler l'avancement et adapter des objectifs pour faire aboutir un projet d'ambition raisonnable." }
+
+prerequis:
+  - { code: R1, libelle: "Écrire, exécuter et tester un programme Python", chapitre_origine: "TNSI-LANGAGES-ET-PROGRAMMATION" }
+  - { code: R2, libelle: "Choisir et mobiliser au moins une notion du programme de Terminale NSI", chapitre_origine: "TNSI" }
+  - { code: R3, libelle: "Partager des fichiers sans données personnelles et conserver un historique des versions" }
+
+situation_accroche: >
+  Une équipe doit transformer un problème réel en un produit informatique démontrable,
+  testé et documenté. Elle devra limiter son ambition, distribuer le travail, rendre
+  visibles ses décisions et valider régulièrement son avancement avec le professeur.
+
+programme_officiel:
+  NOR: MENE1921247A
+  section: "Démarche de projet (préambule)"
+  part_minimale: 0.25
+  volume_annuel_reference_h: 216
+  volume_projet_reference_h: 54
+  regle: "Réserver au projet au moins 25 % de l'horaire effectivement assuré ; 54 h correspondent à la référence de 216 h (6 h hebdomadaires sur 36 semaines)."
+
+regime_evaluation:
+  programme: "La démarche de projet organise une part obligatoire de l'enseignement."
+  epreuve: "Elle ne modifie ni la définition ni la pondération de l'épreuve terminale de NSI."
+
+temps_estime_h: { parcours1: 54, parcours2: 54, parcours3: 54 }
