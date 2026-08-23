@@ -131,7 +131,7 @@ manuals:
   1SPE:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '1427'
+      detail: '1428'
       source: anomalies.blocking_statuses
     - code: livrable_non_compile
       detail: absent
@@ -143,7 +143,7 @@ manuals:
       detail: partial
       source: deliverable_matrix.1SPE.variants.livret_remediation
     - code: statuts_non_approuves
-      detail: objets=1417; contrats=10
+      detail: objets=1418; contrats=10
       source: manuals.1SPE.statuses
     current:
       artifacts:
@@ -163,7 +163,7 @@ manuals:
       - 1SPE-VARIABLES-ALEATOIRES
       statuses:
         approved: 16
-        generated: 1402
+        generated: 1403
         needs_review: 7
         verified: 8
       totals:
@@ -177,7 +177,7 @@ manuals:
         projets: 0
         qcm: 10
         remediations: 98
-        sections_cours: 64
+        sections_cours: 65
         td: 20
     objective:
       directive: MISSION_PRIORITAIRE §8
@@ -589,24 +589,24 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:638eb7d0f2cd505d94484d93988e069e2e7a62ffce82c0206201876da6cb87c4
+model_digest: sha256:9fb3f50d6f8b65841a9355d3ad5b7b6f7f37d4da6376022e8031949b0aa977a2
 provenance:
   branch: codex/t2-current-10cb5f0
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-23T14:52:06Z'
+  generated_at_utc: '2026-08-23T15:48:30Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:9067ac4158409689e1374f51fb99cc6b59e66395989b328dfc06cbcf9d2e7841
     scripts/build_manifest.py: sha256:08fe2fdb7003a611e807fbb8dac8835c2745758ea2dd6c0a70270a1fa597e084
     scripts/inventory_assembly.py: sha256:8a2eeaaa869413ae29c761b1972787f77bc2d0f4baf49aa653b70af98092dd0e
-    scripts/inventory_collection.py: sha256:b63e0301fa9c43bcaf5f471d6a3a6bb7a263432a5f69d1e2891bdf5f5ee95899
+    scripts/inventory_collection.py: sha256:c8b91feb584912473b309ef3994b93bfa0bcc8ddbbad7ef258528738d05ff9e8
     scripts/inventory_graph.py: sha256:dcffb860b1fb2ba214ad254586506b58f762f3fca62b82ab3dffb07cd76633d8
     scripts/inventory_pdf.py: sha256:4d87858492b6f00a9eaf48a717a9c2ddfc423cbe533278747cb199ae885d90b8
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:29dabe28f42268c704802378f689adba172a7a6bb0bd2d77d9fdf8112b905085
+  generator_sha256: sha256:afc2a0751fd56abba930a46cf3d07fcaf5890fff472350bb27329d5f8a069336
   generator_version: 1
   git_available: true
-  head_sha: 4a317a4f684a474aa03c152f555fbd33b9ecb822
+  head_sha: ec3f32b99668330cf5531c936d06a18647ca9c5e
   modified_tracked: []
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
@@ -618,4 +618,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:6dd5d9b90ffa12198777f3bbd1c1594a7bc710bddac89027128491dcebbae726
+source_digest: sha256:4eab7e5b7873c8a39da2893eef22935a29e331f999678e9c43c55cf70cce77b4
