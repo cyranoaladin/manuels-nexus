@@ -8,8 +8,8 @@
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 345 | 942 | 942 | manual |
 | 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 53 | 477 | 1420 | 1420 | manual |
-| TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 50 | 300 | 782 | 782 | manual |
-| TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 194 | 508 | 508 | manual |
+| TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 50 | 300 | 777 | 777 | manual |
+| TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 194 | 503 | 503 | manual |
 | TNSI | NSI Terminale | NSI | Terminale | courante | 6 | 59 | 266 | 719 | 719 | manual |
 | TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 11 | 67 | 448 | 1201 | 1201 | manual |
 
