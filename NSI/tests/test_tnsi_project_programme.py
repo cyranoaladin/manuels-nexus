@@ -55,4 +55,3 @@ def test_tnsi_project_unit_contains_operational_contract_and_exam_boundary():
     }
     missing = sorted(marker for marker in required_markers if marker not in source)
     assert missing == []
-
