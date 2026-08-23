@@ -18,3 +18,13 @@ def test_product_scalar_optional_extension_uses_canonical_contract_field() -> No
 
     assert "extensions" not in contract
     assert {item["code"] for item in contract["extensions_facultatives"]} == {"X1"}
+
+
+def test_tnsi_project_contract_keeps_review_debt_in_a_valid_draft_state() -> None:
+    contract = yaml.safe_load(
+        (ROOT / "NSI/chapitres/TNSI-PROJET/contrat.yaml").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    assert contract["statut"] == "draft"
