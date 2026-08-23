@@ -189,7 +189,7 @@ def test_suites_q14_demande_un_critere_objectif() -> None:
 @pytest.mark.parametrize(
     ("chapitre", "question_id", "option", "fragments"),
     [
-        ("1SPE-DERIVATION-GLOBAL", "Q3", "D", ("primitive", "pas la derivee")),
+        ("1SPE-DERIVATION-GLOBAL", "Q3", "D", ("recopie la fonction", "sans la deriver")),
         ("1SPE-DERIVATION-GLOBAL", "Q14", "A", ("hors de l'intervalle",)),
         ("1SPE-DERIVATION-GLOBAL", "Q14", "B", ("120 - 3x", "x=40")),
         ("1SPE-DERIVATION-GLOBAL", "Q14", "D", ("60 - 6x", "x=10")),

@@ -54,12 +54,12 @@
       "id": "Q5",
       "capacite": "C2",
       "enonce": "Un vecteur directeur de la droite $2x + 5y - 1 = 0$ est :",
-      "options": {"A": "$\\vec{u}(2 ; 5)$", "B": "$\\vec{u}(-5 ; 2)$", "C": "$\\vec{u}(5 ; 2)$", "D": "$\\vec{u}(5 ; -2)$"},
+      "options": {"A": "$\\vec{u}(2 ; 5)$", "B": "$\\vec{u}(-5 ; 2)$", "C": "$\\vec{u}(5 ; 2)$", "D": "$\\vec{u}(-5 ; -2)$"},
       "correcte": "B",
       "diagnostics": {
         "A": {"erreur": "C'est le vecteur normal, pas le vecteur directeur.", "renvoi": "M2, etape 1"},
         "C": {"erreur": "Oubli du signe negatif sur la premiere coordonnee.", "renvoi": "M2, etape 1"},
-        "D": {"erreur": "Le signe negatif est sur la premiere coordonnee, pas la deuxieme.", "renvoi": "M2, etape 1"}
+        "D": {"erreur": "La premiere coordonnee est correcte, mais la seconde doit valoir $2$ : $(2;5)\\cdot(-5;-2)=-20\\neq0$.", "renvoi": "M2, etape 1"}
       }
     },
     {

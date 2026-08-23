@@ -191,7 +191,7 @@
       "options": {
         "A": "colinéaires",
         "B": "orthogonaux",
-        "C": "de même norme",
+        "C": "de normes différentes",
         "D": "de sens contraire"
       },
       "correcte": "B",
@@ -201,11 +201,11 @@
           "renvoi": "M3"
         },
         "C": {
-          "erreur": "$\\Vert\\vec{u}\\Vert = \\Vert\\vec{v}\\Vert = \\sqrt{13}$ est vrai mais l'orthogonalité est la propriété caractérisée.",
+          "erreur": "$\\Vert\\vec{u}\\Vert = \\Vert\\vec{v}\\Vert = \\sqrt{13}$ : leurs normes sont egales, et non differentes.",
           "renvoi": "M3"
         },
         "D": {
-          "erreur": "Option incorrecte.",
+          "erreur": "Des vecteurs de sens contraire sont colineaires avec un coefficient negatif ; ici leur determinant vaut $-13 \\neq 0$, donc ils ne sont pas colineaires.",
           "renvoi": "M3"
         }
       }
@@ -213,7 +213,7 @@
     {
       "id": "Q9",
       "capacite": "C3",
-      "enonce": "Quel est l'angle orienté entre les vecteurs $(1,0)$ et $(1,1)$ ?",
+      "enonce": "Quel est l'angle géométrique entre les vecteurs $(1,0)$ et $(1,1)$ ?",
       "options": {
         "A": "$\\dfrac{\\pi}{6}$",
         "B": "$\\dfrac{\\pi}{4}$",

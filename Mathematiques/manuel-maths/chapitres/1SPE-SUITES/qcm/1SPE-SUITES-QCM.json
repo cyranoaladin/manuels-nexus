@@ -9,21 +9,21 @@
       "options": {
         "A": "$10$",
         "B": "$19$",
-        "C": "$8$",
-        "D": "$7$"
+        "C": "$-2$",
+        "D": "$8$"
       },
-      "correcte": "C",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
-          "erreur": "L'eleve a calcule $2 \\times 3^2 - 3 \\times 3 + 1 = 18 - 9 + 1$ mais a oublie le coefficient 2 dans $2 \\times 9 = 18$ et a pose $2 \\times 3 + 1 = 10$. Erreur de calcul partiel.",
+        "B": {
+          "erreur": "L'eleve oublie le terme $-3n$ et calcule seulement $2 \\times 3^2+1=19$.",
           "renvoi": "M1, etape 2"
         },
-        "B": {
-          "erreur": "L'eleve a remplace $n$ par $4$ au lieu de $3$ (decalage d'indice : confusion entre 'le 3e terme' et $u_3$).",
-          "renvoi": "M1, etape 1"
+        "C": {
+          "erreur": "L'eleve remplace $n^2$ par $n$ et calcule $2 \\times 3-3 \\times 3+1=-2$.",
+          "renvoi": "M1, etape 2"
         },
         "D": {
-          "erreur": "L'eleve a calcule $2 \\times 3 - 3 + 1 = 4$ ou a confondu $n^2$ avec $n$ dans la formule, obtenant $2 \\times 3 - 3 + 1 = 4$ ou une variante. Erreur sur l'evaluation de $n^2$.",
+          "erreur": "L'eleve remplace le terme constant $+1$ par $-1$ et obtient $18-9-1=8$.",
           "renvoi": "M1, etape 2"
         }
       }
@@ -101,7 +101,7 @@
           "renvoi": "M2, etape 3"
         },
         "D": {
-          "erreur": "L'eleve a calcule $u_0 = 4 \\times 0 - 7 = -3$ et a confondu le premier terme avec la raison. $u_0 = -3$ est le premier terme, la raison est $r = u_1 - u_0 = -3 - (-3) = ...$. Confusion premier terme / raison.",
+          "erreur": "L'eleve calcule $u_1=4 \\times 1-7=-3$ et confond ce terme avec la raison. Or $u_0=-7$ et $u_1-u_0=-3-(-7)=4$.",
           "renvoi": "M2, etape 3"
         }
       }
@@ -213,11 +213,11 @@
     {
       "id": "Q9",
       "capacite": "C3",
-      "enonce": "Parmi les assertions suivantes, laquelle est exacte pour identifier une suite geometrique ?",
+      "enonce": "Parmi les assertions suivantes, laquelle donne la definition exacte d'une suite geometrique ?",
       "options": {
         "A": "Il suffit de verifier que $u_1/u_0 = u_2/u_1$ pour conclure que la suite est geometrique.",
-        "B": "Une suite geometrique peut comporter un terme nul.",
-        "C": "Pour montrer qu'une suite est geometrique, il faut calculer $u_{n+1}/u_n$ et verifier que ce quotient est constant pour tout $n$.",
+        "B": "Le quotient $u_{n+1}/u_n$ peut dependre de $n$.",
+        "C": "Il existe un reel $q$ tel que, pour tout $n$, $u_{n+1}=q u_n$.",
         "D": "La raison d'une suite geometrique est toujours un entier positif."
       },
       "correcte": "C",
@@ -227,11 +227,11 @@
           "renvoi": "M3, etape 4"
         },
         "B": {
-          "erreur": "Une suite geometrique ne peut pas avoir de terme nul (le quotient $u_{n+1}/u_n$ serait une division par zero). C'est une condition necessaire : $u_n \\neq 0$ pour tout $n$.",
+          "erreur": "Pour une suite geometrique de raison $q$, la relation $u_{n+1}=q u_n$ utilise le meme reel $q$ pour tout $n$ ; il ne depend pas de l'indice.",
           "renvoi": "M3, etape 1"
         },
         "D": {
-          "erreur": "La raison peut etre n'importe quel reel non nul : elle peut etre negative (ex. $q = -2$), fractionnaire (ex. $q = 1/3$) ou irrationnelle.",
+          "erreur": "La raison peut etre n'importe quel reel, notamment negative, fractionnaire ou nulle ; elle n'est pas necessairement un entier positif.",
           "renvoi": "M3"
         }
       }
@@ -357,7 +357,7 @@
           "renvoi": "M5, arbre de decision"
         },
         "C": {
-          "erreur": "La methode C necessite de connaitre la derivee de $x \\mapsto (0{,}8)^x = e^{x \\ln(0{,}8)}$, hors programme de premiere. La methode B est la voie adaptee pour les suites geometriques a termes positifs.",
+          "erreur": "La derivation de $x\\mapsto(0{,}8)^x$ n'est pas un outil attendu ici. La methode B exploite directement la raison de la suite geometrique positive.",
           "renvoi": "M5, arbre de decision"
         },
         "D": {
@@ -477,7 +477,7 @@
       "options": {
         "A": "$7$",
         "B": "$21$",
-        "C": "$64$",
+        "C": "$67$",
         "D": "$22$"
       },
       "correcte": "C",

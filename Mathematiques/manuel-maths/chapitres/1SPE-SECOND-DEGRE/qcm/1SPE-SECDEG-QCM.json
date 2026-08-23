@@ -62,7 +62,7 @@
         "A": "$3x^2 - 6x + 8$",
         "B": "$3x^2 - 6x + 3$",
         "C": "$3x^2 - 3x + 8$",
-        "D": "$3x^2 + 8$"
+        "D": "$3x^2 + 2$"
       },
       "correcte": "A",
       "diagnostics": {
@@ -165,7 +165,7 @@
       "options": {
         "A": "$\\Delta = 1$",
         "B": "$\\Delta = 49$",
-        "C": "$\\Delta = -11$",
+        "C": "$\\Delta = -1$",
         "D": "$\\Delta = 25$"
       },
       "correcte": "A",
@@ -175,7 +175,7 @@
           "renvoi": "C3, discriminant"
         },
         "C": {
-          "erreur": "L'eleve a utilise $\\Delta = -b^2 + 4ac = -25 + 24 = -1$... ou a calcule $\\Delta = b^2 - 4ac$ avec $b = -5$ et $c = 1$, $a = 6$ (permutation des coefficients). Erreur d'identification de $a$, $b$, $c$.",
+          "erreur": "L'eleve a inverse les deux termes de la formule et calcule $-b^2 + 4ac = -25 + 24 = -1$ au lieu de $b^2 - 4ac = 1$.",
           "renvoi": "C3, discriminant"
         },
         "D": {
@@ -447,7 +447,7 @@
     {
       "id": "Q18",
       "capacite": "C6",
-      "enonce": "Un balle est lancee verticalement. Sa hauteur est $h(t) = -5t^2 + 20t$ (en metres, $t$ en secondes). A quel instant atteint-elle sa hauteur maximale ?",
+      "enonce": "Une balle est lancee verticalement. Sa hauteur est $h(t) = -5t^2 + 20t$ (en metres, $t$ en secondes). A quel instant atteint-elle sa hauteur maximale ?",
       "options": {
         "A": "$t = 4$ s",
         "B": "$t = 1$ s",

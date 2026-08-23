@@ -7,7 +7,7 @@
       "capacite": "C1",
       "enonce": "Parmi les proprietes suivantes, laquelle caracterise la fonction exponentielle ?",
       "options": {
-        "A": "C'est la seule fonction derivable sur $\\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(1) = \\mathrm{e}$.",
+        "A": "C'est la seule fonction derivable sur $\\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(1) = 1$.",
         "B": "C'est la seule fonction derivable sur $\\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(0) = 1$.",
         "C": "C'est la seule fonction derivable sur $\\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(0) = 0$.",
         "D": "C'est la seule fonction derivable sur $\\mathbb{R}$ telle que $f'(x) = x f(x)$ pour tout $x$ et $f(0) = 1$."
@@ -15,7 +15,7 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "La condition initiale correcte est $f(0) = 1$, pas $f(1) = \\mathrm{e}$. L'eleve confond la condition qui definit l'exponentielle avec une consequence ($\\exp(1) = \\mathrm{e}$).",
+          "erreur": "La condition $f(1)=1$ definit la fonction $x\\mapsto \\mathrm{e}^{x-1}$, pas la fonction exponentielle $x\\mapsto \\mathrm{e}^x$, qui verifie $f(0)=1$.",
           "renvoi": "M1, etape 1"
         },
         "C": {

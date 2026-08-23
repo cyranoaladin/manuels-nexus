@@ -62,7 +62,7 @@
         "A": "$\\dfrac{1}{x^2}$",
         "B": "$-x^2$",
         "C": "$-\\dfrac{1}{x^2}$",
-        "D": "$\\ln(x)$"
+        "D": "$\\dfrac{1}{x}$"
       },
       "correcte": "C",
       "diagnostics": {
@@ -75,7 +75,7 @@
           "renvoi": "M1"
         },
         "D": {
-          "erreur": "$\\ln(x)$ est une primitive de $1/x$ sur $]0,+\\infty[$, pas la derivee de $1/x$ ; la derivee de $1/x$ vaut $-1/x^2$.",
+          "erreur": "L'eleve recopie la fonction $1/x$ sans la deriver ; sa derivee vaut $-1/x^2$.",
           "renvoi": "M1"
         }
       }
@@ -205,7 +205,7 @@
           "renvoi": "M3"
         },
         "D": {
-          "erreur": "$f'(4)=4 \\neq 0$, pas la racine de $f'$.",
+          "erreur": "Le signe de $f'$ determine les variations de $f$, pas sa convexite. La convexite s'etudie a l'aide de $f''$.",
           "renvoi": "M3"
         }
       }
@@ -231,7 +231,7 @@
           "renvoi": "M4"
         },
         "D": {
-          "erreur": "$f'(3)=0$ ne signifie pas asymptote.",
+          "erreur": "Une asymptote verticale se detecte par le comportement limite de $f$ au voisinage de $a$, pas par l'annulation de $f'$ en $a$.",
           "renvoi": "M3"
         }
       }
