@@ -5915,6 +5915,7 @@ def _add_reference_graph(
         objects_by_id[item["id"]].append(item)
     capacity_refs: dict[str, set[str]] = defaultdict(set)
     capacity_codes: dict[str, dict[str, str]] = defaultdict(dict)
+    optional_extension_codes: dict[str, set[str]] = defaultdict(set)
     prerequisite_codes: dict[str, set[str]] = defaultdict(set)
     for manual in inventory["manuals"].values():
         for chapter_id, chapter in manual["chapters"].items():
@@ -5926,6 +5927,18 @@ def _add_reference_graph(
                     if isinstance(code, str):
                         capacity_codes[chapter_id][code] = reference
             contract = chapter.get("contract")
+            optional_extensions = (
+                contract.get("extensions_facultatives", [])
+                if isinstance(contract, Mapping)
+                else []
+            )
+            if isinstance(optional_extensions, list):
+                optional_extension_codes[chapter_id].update(
+                    extension["code"]
+                    for extension in optional_extensions
+                    if isinstance(extension, Mapping)
+                    and isinstance(extension.get("code"), str)
+                )
             prerequisites = (
                 contract.get("prerequis", []) if isinstance(contract, Mapping) else []
             )
@@ -6074,7 +6087,12 @@ def _add_reference_graph(
                             "capacite META absente du contrat du chapitre",
                         )
                     )
-        for family in ("capacites_codes", "methodes", "coups_de_pouce"):
+        for family in (
+            "capacites_codes",
+            "extension_codes",
+            "methodes",
+            "coups_de_pouce",
+        ):
             values = metadata.get(family)
             if values is None:
                 continue
@@ -6111,6 +6129,10 @@ def _add_reference_graph(
                         resolved = True
                     else:
                         kind = "capacity_or_prerequisite"
+                elif family == "extension_codes":
+                    target = f"{chapter_id}:optional-extension:{value}"
+                    kind = "optional_extension"
+                    resolved = value in optional_extension_codes[chapter_id]
                 elif family == "methodes":
                     kind = "method"
                     if _graph_core.METHOD_ALIAS_RE.fullmatch(value):

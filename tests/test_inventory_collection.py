@@ -13312,6 +13312,51 @@ def test_meta_graph_resolves_capacity_prerequisite_method_and_hint_families(
     assert ("coups_de_pouce[1]", hint, "hint_path", True) in edges
 
 
+def test_meta_graph_resolves_declared_optional_extension_codes(
+    tmp_path: Path, inventory_module
+) -> None:
+    _init_repository(tmp_path)
+    chapter = "1SPE-TEST"
+    base = _chapter_path("1SPE", chapter)
+    contract = f"{base}/contrat.yaml"
+    extension = f"{base}/methodes/1SPE-TEST-ME-001.tex"
+    _write(
+        tmp_path / contract,
+        _contract(chapter, "1SPE", capacities=1)
+        + "extensions_facultatives:\n"
+        + "  - {code: X1, label: 'Approfondissement — Vers la Terminale', "
+        + "libelle: Extension test, programme_alignment: OPTIONAL_EXTENSION}\n",
+    )
+    _write(
+        tmp_path / extension,
+        _meta(
+            id="1SPE-TEST-ME-001",
+            type_objet="methode",
+            status="approved",
+            extension_codes=["X1"],
+            programme_alignment="OPTIONAL_EXTENSION",
+        ),
+    )
+    _track(tmp_path, contract, extension)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    edges = [
+        edge
+        for edge in inventory["reference_graph"]
+        if edge["source"] == extension and edge["champ"] == "extension_codes[0]"
+    ]
+
+    assert edges == [
+        {
+            "champ": "extension_codes[0]",
+            "cible": "1SPE-TEST:optional-extension:X1",
+            "kind": "optional_extension",
+            "resolved": True,
+            "source": extension,
+        }
+    ]
+
+
 def test_meta_graph_reports_unknown_and_invalid_reference_forms_by_family(
     tmp_path: Path, inventory_module
 ) -> None:

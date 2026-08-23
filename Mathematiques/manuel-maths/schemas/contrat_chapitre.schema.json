@@ -21,6 +21,19 @@
         }
       }
     },
+    "extensions_facultatives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "label", "libelle", "programme_alignment"],
+        "properties": {
+          "code": { "type": "string", "pattern": "^X[0-9]+$" },
+          "label": { "const": "Approfondissement — Vers la Terminale" },
+          "libelle": { "type": "string", "minLength": 1 },
+          "programme_alignment": { "const": "OPTIONAL_EXTENSION" }
+        }
+      }
+    },
     "prerequis": {
       "type": "array",
       "items": {

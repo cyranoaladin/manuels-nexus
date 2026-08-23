@@ -3,11 +3,28 @@
   "$id": "exercice.schema.json",
   "title": "Métadonnées d'un exercice du manuel",
   "type": "object",
-  "required": ["id", "chapitre", "capacites", "parcours", "competences", "duree_min", "mode_creation", "fichier_tex", "status"],
+  "required": ["id", "chapitre", "parcours", "competences", "duree_min", "mode_creation", "fichier_tex", "status"],
+  "oneOf": [
+    {
+      "required": ["capacites"],
+      "not": { "required": ["extension_codes"] }
+    },
+    {
+      "required": ["extension_codes", "programme_alignment", "extension_label"],
+      "not": { "required": ["capacites"] }
+    }
+  ],
   "properties": {
     "id": { "type": "string", "pattern": "^[A-Z0-9]+-[A-Z]+-EX-[0-9]{3}$" },
     "chapitre": { "type": "string" },
     "capacites": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "extension_codes": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^X[0-9]+$" },
+      "minItems": 1
+    },
+    "programme_alignment": { "const": "OPTIONAL_EXTENSION" },
+    "extension_label": { "const": "Approfondissement — Vers la Terminale" },
     "methodes": { "type": "array", "items": { "type": "string" } },
     "parcours": { "type": "integer", "minimum": 1, "maximum": 3 },
     "competences": {

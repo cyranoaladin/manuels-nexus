@@ -48,6 +48,29 @@ def test_contrats_schema():
         v(yaml.safe_load(c.read_text(encoding="utf-8")), schema)
 
 
+def test_un_exercice_d_approfondissement_reference_une_extension_pas_une_capacite() -> None:
+    meta = {
+        "id": "1SPE-TRIGO-EX-999",
+        "chapitre": "1SPE-TRIGONOMETRIE",
+        "type_objet": "exercice",
+        "extension_codes": ["X2"],
+        "programme_alignment": "OPTIONAL_EXTENSION",
+        "extension_label": "Approfondissement — Vers la Terminale",
+        "parcours": 3,
+        "competences": ["raisonner"],
+        "duree_min": 10,
+        "mode_creation": "ex_nihilo",
+        "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-999.tex",
+        "status": "needs_review",
+    }
+
+    validate(meta, EX_SCHEMA)
+
+    meta["capacites"] = ["1SPE-TRIGONOMETRIE-C2"]
+    with pytest.raises(Exception):
+        validate(meta, EX_SCHEMA)
+
+
 MARGIN_PROOFS = (
     (
         "margin-layout.schema.json",
