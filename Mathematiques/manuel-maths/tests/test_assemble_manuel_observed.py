@@ -828,13 +828,14 @@ def test_real_professor_order_matches_declared_inventory() -> None:
     )
     professor_paths = _professor_paths()
 
-    # Effectif re-atteste le 2026-08-19 (cloture A4) : l'arbre vivant et
-    # audit/INVENTAIRE_COLLECTION.json regenere donnent tous deux 1415
-    # objets, dans le meme ordre (1396 attestes le 2026-08-11 + 16 objets des
-    # lots scelles depuis + 3 fiches methodes TRIGO de la campagne A4).
+    # Effectif re-atteste le 2026-08-23 apres regeneration canonique : l'arbre
+    # vivant et audit/INVENTAIRE_COLLECTION.json donnent tous deux 1428 objets,
+    # dans le meme ordre. Les 13 ajouts depuis A4 sont les 12 sources eleve des
+    # lots programme (suites, exponentielle, repetitions de Bernoulli) et le
+    # corrige professeur de l'exercice 1SPE-SUITES-EX-051.
     # Ce garde-fou reste en dur pour detecter une derive simultanee du vivant
     # et du declare, cas que l'egalite ligne suivante ne verrait pas.
-    assert len(professor_paths) == 1415
+    assert len(professor_paths) == 1428
     assert all(
         path.startswith("Mathematiques/manuel-maths/") for path in professor_paths
     )
@@ -853,9 +854,9 @@ def test_real_student_order_keeps_evaluations_and_excludes_teacher_objects() -> 
     student_paths = _student_paths()
 
     # Meme constat que pour la variante professeur : effectif re-atteste a
-    # 918 (cloture A4 2026-08-19), identique dans l'arbre vivant et dans
-    # l'inventaire regenere.
-    assert len(student_paths) == 918
+    # 930 le 2026-08-23, avec les 12 sources eleve des lots programme ajoutees
+    # depuis la cloture A4, sans retrait d'objet.
+    assert len(student_paths) == 930
     assert student_paths == assembly["included_objects"]
     # 20 = 10 chapitres x (EV-A + EV-B) — les evaluations TRIGO (lot BO 2026
     # scelle) ont rejoint l'assemblage depuis l'attestation du 2026-08-11.
