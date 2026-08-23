@@ -116,7 +116,7 @@ def test_exponentielle_referentiel_reproduit_les_capacites_2026() -> None:
     ]
     assert "limite" not in joined
     assert "e^{u(x)}" not in joined
-    assert "t → e^{at}" in labels[3]
+    assert "t → $e^{at}$" in labels[3]
     assert "modéliser" in labels[4].lower()
     assert [item["code"] for item in contract["capacites"]] == [
         f"C{index}" for index in range(1, 6)
@@ -127,6 +127,14 @@ def test_exponentielle_referentiel_reproduit_les_capacites_2026() -> None:
         "X3",
         "X4",
     }
+
+
+def test_exponentielle_contract_math_is_delimited_for_latex_assembly() -> None:
+    contract = yaml.safe_load(
+        (CHAPTERS / "1SPE-EXPONENTIELLE/contrat.yaml").read_text(encoding="utf-8")
+    )
+
+    assert "t → $e^{at}$" in contract["capacites"][3]["libelle_eleve"]
 
 
 def test_exponentielle_qcm_exclut_limites_et_derivation_generale() -> None:
