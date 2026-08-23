@@ -799,6 +799,24 @@ def test_teacher_key_gate_requires_every_chapter_key() -> None:
     assert assemble_manuel.teacher_key_count_violations(text, expected=11)
 
 
+@pytest.mark.parametrize(
+    "filename",
+    [
+        "TSPE-DERIVATION-CONVEXITE-EV-A.tex",
+        "TSPE-DERIVATION-CONVEXITE-EV-B.tex",
+    ],
+)
+def test_tspe_student_evaluations_redact_the_grading_scale(filename: str) -> None:
+    source = (
+        MANUAL_ROOT
+        / "chapitres/TSPE-DERIVATION-CONVEXITE/evaluations"
+        / filename
+    ).read_text(encoding="utf-8")
+
+    assert "\\baremeIndicatif{20 points}" in source
+    assert "Duree : 55 min -- Bareme : 20 points" not in source
+
+
 def test_real_professor_order_matches_declared_inventory() -> None:
     inventory = json.loads(
         (GIT_ROOT / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8")
