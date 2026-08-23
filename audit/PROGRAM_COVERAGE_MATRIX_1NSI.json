@@ -266,11 +266,11 @@
     "review_status": "needs_review",
     "official_section": "Représentation des données : types construits",
     "official_wording_or_short_paraphrase": "(référentiel local) Distinguer types mutables/immuables ; effets d'une affectation ou d'un passage en argument",
-    "obligation_type": "MANDATORY_KNOWLEDGE",
+    "obligation_type": "IMPLEMENTATION_GUIDANCE",
     "mandatory": false,
     "chapter": "1NSI-TYPES-CONSTRUITS",
     "contract_capacity": "1NSI-TYPES-CONSTRUITS-C5",
-    "coverage_status": "UNSUPPORTED_CLAIM",
+    "coverage_status": "AUDIT_METADATA_ONLY",
     "evidence_paths": {
       "course_sources": [
         "NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C5.tex"
@@ -280,7 +280,7 @@
       "assessment_sources": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/evaluations/",
       "remediation_sources": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/remediation/"
     },
-    "notes": "TROUVAILLE CONFIRMÉE (déjà repérée par audit/../_a_verifier.json, revérifiée ici indépendamment) : les mots 'mutable'/'immuable' n'apparaissent NULLE PART dans le texte officiel MENE1901633A (grep exhaustif sur le texte extrait du PDF officiel déposé). La section 'Représentation des données : types construits' du BO ne couvre que p-uplets/tableaux/dictionnaires (accès, construction, itération) — jamais la sémantique mutabilité/copie/passage par référence. Contenu réel existant (1NSI-TC-COURS-C5.tex, status actuel dans le fichier à vérifier). Contrairement à la conclusion antérieure de _a_verifier.json ('formulation paraphrasée, pas une erreur de programme'), cette vérification indépendante ne trouve AUCUNE base textuelle, même paraphrasée — c'est un concept Python général enseigné en sus du programme, pas une reformulation d'un attendu existant. Ne pas supprimer (contenu potentiellement utile et correct) : décision éditoriale (reclassifier en \\approfondissement ou conserver avec justification pédagogique explicite) — HUMAN GATE, cohérent avec la trouvaille symétrique 1SPE-VARIABLES-ALEATOIRES loi binomiale.",
+    "notes": "RÉSOLU AU HEAD COURANT : les mots 'mutable'/'immuable' n'apparaissent pas dans MENE1901633A et ce libellé interne n'est pas un atom officiel autonome. Le contenu est conservé comme méthodologie Python utile pour réaliser les capacités officielles sur les p-uplets, tableaux et dictionnaires. Le contrat marque explicitement C5 METHODOLOGY, mandatory_for_coverage=false et official_atom_ids=[]. Cette ligne reste une trace d'audit interne et est exclue du registre des atoms officiels.",
     "row_id": "1NSI-MATRIX-012"
   },
   {

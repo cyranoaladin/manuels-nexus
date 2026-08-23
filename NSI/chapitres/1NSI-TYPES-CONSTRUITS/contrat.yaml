@@ -9,7 +9,7 @@ capacites:
   - { code: C2, ref_capacite: 1NSI-TYPES-CONSTRUITS-C2, libelle_eleve: "Je sais lire, modifier et construire des tableaux, y compris en compréhension." }
   - { code: C3, ref_capacite: 1NSI-TYPES-CONSTRUITS-C3, libelle_eleve: "Je sais représenter et parcourir une grille avec un tableau de tableaux." }
   - { code: C4, ref_capacite: 1NSI-TYPES-CONSTRUITS-C4, libelle_eleve: "Je sais créer, modifier et parcourir un dictionnaire." }
-  - { code: C5, ref_capacite: 1NSI-TYPES-CONSTRUITS-C5, libelle_eleve: "Je sais prévoir l'effet d'une affectation sur un objet mutable." }
+  - { code: C5, ref_capacite: 1NSI-TYPES-CONSTRUITS-C5, libelle_eleve: "Je sais prévoir l'effet d'une affectation sur un objet mutable.", programme_alignment: METHODOLOGY, mandatory_for_coverage: false, official_atom_ids: [] }
 
 prerequis:
   - { code: R1, libelle: "Variables, affectation, types de base (int, float, bool, str)", chapitre_origine: "1NSI-TYPES-BASE" }
