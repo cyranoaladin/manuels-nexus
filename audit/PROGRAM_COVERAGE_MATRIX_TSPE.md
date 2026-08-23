@@ -62,9 +62,9 @@ audit T2 :
 - **Loi binomiale** : confirmée présente et explicitement exigée dans le
   texte TSPE 2019 (schéma de Bernoulli, loi binomiale ℬ(n,p), espérance et
   variance de la loi binomiale — lignes 820, 827-833, 881, 892 du texte
-  archivé). Contrairement à 1SPE 2026 (où ce terme est absent du texte et
-  où du contenu binomiale existant est classé `UNSUPPORTED_CLAIM`), ici
-  c'est un attendu officiel réel du programme TSPE 2019 — aucune confusion.
+  archivé). En 1SPE 2026, la formalisation nommée est désormais classée
+  `OPTIONAL_EXTENSION`; ici c'est un attendu officiel réel du programme
+  TSPE 2019 — aucune confusion.
 - **Trigonométrie** : le chapitre `TSPE-TRIGONOMETRIE` (2019, en vigueur)
   couvre dérivées/variations/courbes de cosinus et sinus, et la résolution
   d'équations `cos(x)=a` — contenu **distinct** de ce qui a été retiré de
