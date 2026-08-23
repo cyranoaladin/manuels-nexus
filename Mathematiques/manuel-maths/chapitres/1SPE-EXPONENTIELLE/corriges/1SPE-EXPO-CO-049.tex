@@ -9,8 +9,6 @@
 % assert solve(f, x) == [Rational(1, 2)]
 % assert f.subs(x, Rational(1, 2)) == 0
 % assert f.subs(x, Rational(-1, 2)) == -2*exp(Rational(-1, 2))
-% assert limit(f, x, oo) == oo
-% assert limit(f, x, -oo) == 0
 % END-VERIFY
 \begin{corrige}{1SPE-EXPO-EX-049}
 \begin{enumerate}
@@ -42,8 +40,6 @@ L'unique solution est $\boxed{x = \dfrac{1}{2}}$.
 \item $f(x) > 0$ si $x > \dfrac{1}{2}$.
 \end{itemize}
 
-\item \textbf{Limite en $+\infty$ :} $\lim_{x \to +\infty}(2x - 1) = +\infty$ et $\lim_{x \to +\infty}\mathrm{e}^x = +\infty$, donc $\lim_{x \to +\infty} f(x) = +\infty$.
-
-\textbf{Limite en $-\infty$ :} on écrit $f(x) = (2x - 1)\mathrm{e}^x$. Or $\lim_{x \to -\infty} x\,\mathrm{e}^x = 0$ (croissance comparée), donc $\lim_{x \to -\infty} f(x) = 0$.
+\item $f(0)=-1$ et $f(1)=\mathrm{e}$. Ces points, le minimum et les variations précédentes déterminent une esquisse cohérente de la courbe.
 \end{enumerate}
 \end{corrige}

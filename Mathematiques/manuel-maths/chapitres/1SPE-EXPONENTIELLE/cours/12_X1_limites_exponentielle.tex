@@ -1,0 +1,25 @@
+% META: {"id":"1SPE-EXPO-COURS-X1","chapitre":"1SPE-EXPONENTIELLE","type_objet":"cours","extension_codes":["X1"],"programme_alignment":"OPTIONAL_EXTENSION","extension_label":"Approfondissement — Vers la Terminale","status":"generated"}
+
+\begin{center}\textbf{Approfondissement — Vers la Terminale}\end{center}
+\section*{Limites de la fonction exponentielle}
+
+Cette section facultative n'appartient pas au socle exigible de Première
+2026-2027.
+
+\propriete[Limites et croissance comparée]{
+\[
+\lim_{x\to+\infty}\mathrm{e}^x=+\infty,
+\qquad
+\lim_{x\to-\infty}\mathrm{e}^x=0.
+\]
+En Terminale, on étudie aussi la croissance comparée de l'exponentielle et
+des puissances de $x$.
+}
+
+% BEGIN-VERIFY
+% from sympy import exp, limit, oo, symbols
+% x = symbols('x', real=True)
+% assert limit(exp(x), x, oo) == oo
+% assert limit(exp(x), x, -oo) == 0
+% assert limit(exp(x)/x**3, x, oo) == oo
+% END-VERIFY

@@ -1,0 +1,18 @@
+% META: {"id":"1SPE-EXPO-COURS-X2","chapitre":"1SPE-EXPONENTIELLE","type_objet":"cours","extension_codes":["X2"],"programme_alignment":"OPTIONAL_EXTENSION","extension_label":"Approfondissement — Vers la Terminale","status":"generated"}
+
+\begin{center}\textbf{Approfondissement — Vers la Terminale}\end{center}
+\section*{Dérivation générale de $\mathrm{e}^{u(x)}$}
+
+Si $u$ est dérivable, la règle de chaîne donne
+\[
+(\mathrm{e}^{u(x)})'=u'(x)\mathrm{e}^{u(x)}.
+\]
+Cette généralisation, notamment pour un exposant quadratique, est facultative
+en Première 2026-2027.
+
+% BEGIN-VERIFY
+% from sympy import Function, diff, exp, symbols
+% x = symbols('x')
+% u = Function('u')(x)
+% assert diff(exp(u), x) == diff(u, x)*exp(u)
+% END-VERIFY

@@ -5,36 +5,19 @@
 % f = exp(2*x - 1)
 % fp = diff(f, x)
 % assert simplify(fp - 2*exp(2*x - 1)) == 0
-% assert limit(f, x, oo) == oo
-% assert limit(f, x, -oo) == 0
 % END-VERIFY
 \begin{corrige}{1SPE-EXPO-EX-026}
-\textbf{1.} La fonction $f(x) = \mathrm{e}^{2x-1}$ est de la forme $\mathrm{e}^{u(x)}$ avec $u(x) = 2x - 1$, donc $u'(x) = 2$.
-
-On a $f'(x) = u'(x)\,\mathrm{e}^{u(x)} = 2\,\mathrm{e}^{2x-1}$.
+\textbf{1.} Par la propriété $\mathrm{e}^{a+b}=\mathrm{e}^a\mathrm{e}^b$,
+\[f(x)=\mathrm{e}^{-1}\mathrm{e}^{2x}.\]
+La dérivée de $x\mapsto\mathrm{e}^{2x}$ vaut $2\mathrm{e}^{2x}$, donc
+\[f'(x)=\mathrm{e}^{-1}\times 2\mathrm{e}^{2x}=2\mathrm{e}^{2x-1}.\]
 
 Comme $\mathrm{e}^{2x-1} > 0$ pour tout réel $x$, on a $f'(x) = 2\,\mathrm{e}^{2x-1} > 0$ pour tout réel $x$.
 
 \textbf{2.} Puisque $f'(x) > 0$ pour tout $x \in \mathbb{R}$, la fonction $f$ est \textbf{strictement croissante} sur $\mathbb{R}$.
 
-\textbf{3.} Quand $x \to +\infty$, on a $2x - 1 \to +\infty$, donc $\displaystyle\lim_{x \to +\infty} f(x) = \lim_{x \to +\infty} \mathrm{e}^{2x-1} = +\infty$.
+\textbf{3.} On obtient
+\[f(-1)=\mathrm{e}^{-3},\qquad f(0)=\mathrm{e}^{-1},\qquad f(1)=\mathrm{e}.\]
 
-Quand $x \to -\infty$, on a $2x - 1 \to -\infty$, donc $\displaystyle\lim_{x \to -\infty} f(x) = \lim_{x \to -\infty} \mathrm{e}^{2x-1} = 0$.
-
-\textbf{4.} Tableau de variations de $f$ :
-
-\begin{center}
-\begin{tabular}{|c|ccc|}
-\hline
-$x$ & $-\infty$ & & $+\infty$ \\
-\hline
-$f'(x)$ & & $+$ & \\
-\hline
-$f(x)$ & $0$ & $
-earrow$ & $+\infty$ \\
-\hline
-\end{tabular}
-\end{center}
-
-L'axe des abscisses ($y = 0$) est asymptote horizontale en $-\infty$.
+\textbf{4.} La courbe passe par $(-1;\mathrm{e}^{-3})$, $(0;\mathrm{e}^{-1})$ et $(1;\mathrm{e})$ et elle est strictement croissante sur $\mathbb{R}$.
 \end{corrige}

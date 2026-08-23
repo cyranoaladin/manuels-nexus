@@ -3,29 +3,53 @@
   "mode": "ex_nihilo",
   "capacites": {
     "C1": {
-      "approche": "Introduction historique (intérêts composés, croissance continue). Définition axiomatique : exp est l'unique fonction dérivable sur R telle que exp'=exp et exp(0)=1. Conséquences immédiates : exp ne s'annule jamais, exp(x)>0 pour tout x. Notation e=exp(1).",
+      "approche": "Introduction historique (intérêts composés, croissance continue). Définition axiomatique : exp est l'unique fonction dérivable sur R telle que exp'=exp et exp(0)=1. Conséquences immédiates : exp ne s'annule jamais, exp(x)>0 pour tout x. Notation e=exp(1). Construction numérique approchée par la méthode d'Euler et conjecture de e à partir de (1+1/n)^n, sans formalisation de limite.",
       "erreurs_types": ["Croire que exp(0)=0 au lieu de exp(0)=1", "Confondre exp(x) avec x^e ou e*x", "Oublier que exp est toujours strictement positive"],
       "format_examen": "Vérifier la propriété y'=y sur des candidats, QCM sur les valeurs remarquables"
     },
     "C2": {
-      "approche": "Relation fonctionnelle exp(a+b)=exp(a)exp(b) démontrée (exigible). En découlent : exp(-a)=1/exp(a), exp(a-b)=exp(a)/exp(b), exp(na)=(exp(a))^n. Notation e^x=exp(x) justifiée par les règles de puissance.",
+      "approche": "Utilisation de la relation fonctionnelle exp(a+b)=exp(a)exp(b), admise dans le socle. En découlent : exp(-a)=1/exp(a), exp(a-b)=exp(a)/exp(b), exp(na)=(exp(a))^n. La démonstration de la relation fonctionnelle est un approfondissement possible, non un attendu obligatoire.",
       "erreurs_types": ["Écrire exp(a+b)=exp(a)+exp(b) (confusion avec la linéarité)", "Écrire exp(ab)=exp(a)*exp(b) au lieu de exp(a+b)", "Confondre exp(2x) et 2*exp(x)"],
-      "format_examen": "Simplification d'expressions, démonstration de la relation fonctionnelle, passage de forme exp à forme e^x"
+      "format_examen": "Simplification d'expressions et passage de la notation exp à la notation e^x"
     },
     "C3": {
-      "approche": "exp'=exp>0 donc exp strictement croissante sur R. Conséquences sur l'ordre : exp(a)<=exp(b) ssi a<=b. Limites : lim_{x->+inf} exp(x)=+inf, lim_{x->-inf} exp(x)=0. Croissance comparée avec x^n (hors programme strict mais mentionnable en approfondissement).",
-      "erreurs_types": ["Oublier que exp(-inf)=0 (pas -inf)", "Inverser le sens de l'inégalité en oubliant que exp est croissante", "Confondre limite en -inf de exp (qui est 0) avec celle de ln"],
-      "format_examen": "Tableau de variations de fonctions avec exp, calcul de limites, comparaison d'exponentielles"
+      "approche": "Exploiter exp'=exp>0 pour le signe et la stricte croissance de exp sur R. Lire et construire sa courbe représentative, puis relier croissance exponentielle continue et suite géométrique discrète.",
+      "erreurs_types": ["Croire qu'un exposant négatif donne une valeur négative", "Inverser le sens d'une comparaison malgré la croissance de exp", "Confondre une croissance exponentielle continue avec une évolution additive"],
+      "format_examen": "Signe, sens de variation, lecture de courbe et comparaison d'exponentielles"
     },
     "C4": {
-      "approche": "Théorème : si u est dérivable, alors e^{u(x)} est dérivable et (e^{u(x)})'=u'(x)*e^{u(x)}. Cas particulier u(x)=x : (e^x)'=e^x. Applications systématiques : u linéaire, u polynôme, u quotient.",
-      "erreurs_types": ["Oublier le facteur u'(x) devant e^{u(x)}", "Écrire (e^{2x})'=e^{2x} au lieu de 2e^{2x}", "Confondre la dérivée de x*e^x (produit) avec e^x"],
-      "format_examen": "Calcul de dérivées, étude de variations de fonctions du type f(x)=P(x)*e^{ax}"
+      "approche": "Pour un réel a, établir et utiliser la dérivée de t↦e^{at}, égale à t↦a e^{at}. Le socle n'étend pas cette règle à une fonction u générale.",
+      "erreurs_types": ["Oublier le facteur a", "Perdre le signe de a", "Remplacer à tort l'exposant at par a lors de la dérivation"],
+      "format_examen": "Dériver t↦e^{at} pour une valeur réelle de a"
     },
     "C5": {
-      "approche": "Résolution d'équations : exp(A)=exp(B) ssi A=B (injectivité). exp(A)=k avec k>0 ssi A=ln(k). Inéquations : exp(A)>=exp(B) ssi A>=B (croissance). Méthode : tout ramener à une comparaison d'arguments.",
-      "erreurs_types": ["Oublier que exp(x)=k n'a pas de solution si k<=0", "Résoudre exp(x)>=0 (toujours vrai, pas d'information)", "Diviser par exp(x) sans justifier que exp(x)>0"],
-      "format_examen": "Résolution d'équations et inéquations, problèmes contextualisés (croissance/décroissance exponentielle)"
+      "approche": "Pour k>0, représenter les fonctions t↦e^{kt} et t↦e^{-kt}. Identifier valeur initiale et coefficient d'évolution, puis modéliser une croissance ou une décroissance exponentielle dans un contexte explicite. Mobiliser une construction d'Euler pour y'=y comme situation algorithmique du programme.",
+      "erreurs_types": ["Confondre le coefficient initial et le taux continu", "Perdre le signe dans un modèle de décroissance", "Traiter une évolution exponentielle comme une évolution additive"],
+      "format_examen": "Lecture de courbes et problèmes contextualisés de croissance ou décroissance exponentielle"
+    },
+    "X1": {
+      "programme_alignment": "OPTIONAL_EXTENSION",
+      "extension_label": "Approfondissement — Vers la Terminale",
+      "approche": "Limites de la fonction exponentielle et croissances comparées.",
+      "format_extension": "Calculs de limites, hors socle Première 2026-2027"
+    },
+    "X2": {
+      "programme_alignment": "OPTIONAL_EXTENSION",
+      "extension_label": "Approfondissement — Vers la Terminale",
+      "approche": "Dérivation générale de e^{u(x)} lorsque u est dérivable.",
+      "format_extension": "Dérivées composées, hors socle Première 2026-2027"
+    },
+    "X3": {
+      "programme_alignment": "OPTIONAL_EXTENSION",
+      "extension_label": "Approfondissement — Vers la Terminale",
+      "approche": "Équations et inéquations exponentielles, avec logarithme népérien lorsque nécessaire.",
+      "format_extension": "Résolutions exponentielles, hors socle Première 2026-2027"
+    },
+    "X4": {
+      "programme_alignment": "OPTIONAL_EXTENSION",
+      "extension_label": "Approfondissement — Vers la Terminale",
+      "approche": "Démonstrations proposées en approfondissement par le programme 2026 : unicité, relation fonctionnelle, positivité et croissance.",
+      "format_extension": "Démonstrations facultatives, hors critères obligatoires de couverture"
     }
   }
 }

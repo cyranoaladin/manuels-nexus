@@ -1,22 +1,22 @@
-% META: {"id":"1SPE-EXPO-EX-044","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C5"],"capacites_codes":["C5"],"methodes":["M4"],"parcours":2,"competences":["chercher","calculer"],"duree_min":10,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-044.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-044.tex","status":"generated"}
+% META: {"id":"1SPE-EXPO-EX-044","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C5"],"capacites_codes":["C5"],"methodes":["M4"],"parcours":2,"competences":["calculer","modeliser","communiquer"],"duree_min":12,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-044.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-044.tex","status":"generated"}
 % BEGIN-VERIFY
 % from sympy import *
-% x = symbols('x', real=True)
-% X = symbols('X')
-% # e^(2x) - e^x - 2 = 0, poser X = e^x
-% eq_X = X**2 - X - 2
-% sols_X = solve(eq_X, X)
-% assert set(sols_X) == {-1, 2}
-% # X = e^x > 0 donc X = -1 impossible, seul X = 2
-% sols_x = solve(exp(2*x) - exp(x) - 2, x)
-% assert sols_x == [log(2)]
-% # e^x >= 2 <=> x >= ln(2)
+% t = symbols('t', real=True)
+% M = 80*exp(-Rational(3, 10)*t)
+% assert M.subs(t, 0) == 80
+% assert M.subs(t, 10) == 80*exp(-3)
+% assert round(float(M.subs(t, 10)), 1) == 4.0
+% assert simplify(M.subs(t, t + 1)/M - exp(-Rational(3, 10))) == 0
 % END-VERIFY
-\begin{exercice}{1SPE-EXPO-EX-044}{2}{10}
-\begin{enumerate}
-\item Résoudre dans $\mathbb{R}$ l'équation $\mathrm{e}^{2x} - \mathrm{e}^x - 2 = 0$.
+\begin{exercice}{1SPE-EXPO-EX-044}{2}{12}
+La masse, en grammes, d'une substance est modélisée par
+\[M(t)=80\,\mathrm{e}^{-0{,}3t},\]
+où $t$ est exprimé en jours.
 
-\textit{On posera $X = \mathrm{e}^x$ et on tiendra compte du signe de $X$.}
-\item Résoudre dans $\mathbb{R}$ l'inéquation $\mathrm{e}^x \geqslant 2$.
+\begin{enumerate}
+\item Déterminer la masse initiale.
+\item Calculer $M(10)$ et arrondir au dixième de gramme.
+\item Calculer $\dfrac{M(t+1)}{M(t)}$ et interpréter ce quotient.
+\item Justifier que le modèle décrit une décroissance.
 \end{enumerate}
 \end{exercice}

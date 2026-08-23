@@ -7,7 +7,7 @@
   "capacites": [
     {
       "id": "1SPE-EXPONENTIELLE-C1",
-      "libelle_bo": "Connaître la définition de la fonction exponentielle comme unique solution de y'=y, y(0)=1.",
+      "libelle_bo": "Connaître la définition de la fonction exponentielle comme unique fonction dérivable sur ℝ vérifiant f'=f et f(0)=1.",
       "libelle_eleve": "Je sais que la fonction exponentielle est l'unique fonction égale à sa dérivée valant 1 en 0.",
       "demonstration_exigible": false
     },
@@ -15,26 +15,66 @@
       "id": "1SPE-EXPONENTIELLE-C2",
       "libelle_bo": "Connaître et utiliser les propriétés algébriques de la fonction exponentielle : exp(a+b)=exp(a)exp(b), exp(-a)=1/exp(a), exp(na)=(exp(a))^n.",
       "libelle_eleve": "Je sais utiliser les propriétés algébriques de l'exponentielle (somme, produit, puissance).",
-      "demonstration_exigible": true,
-      "demonstration": "Démonstration de exp(a+b)=exp(a)exp(b) à partir de la relation fonctionnelle."
+      "demonstration_exigible": false
     },
     {
       "id": "1SPE-EXPONENTIELLE-C3",
-      "libelle_bo": "Étudier les variations de la fonction exponentielle, connaître ses limites en ±∞.",
-      "libelle_eleve": "Je sais que l'exponentielle est strictement croissante sur R et connaître ses limites.",
+      "libelle_bo": "Connaître le signe, le sens de variation et la courbe représentative de la fonction exponentielle ; faire le lien avec les suites géométriques.",
+      "libelle_eleve": "Je sais exploiter le signe, la croissance et la courbe de l'exponentielle, en lien avec les suites géométriques.",
       "demonstration_exigible": false
     },
     {
       "id": "1SPE-EXPONENTIELLE-C4",
-      "libelle_bo": "Dériver des fonctions du type x → e^{u(x)} où u est une fonction dérivable.",
-      "libelle_eleve": "Je sais dériver une fonction de la forme e^{u(x)}.",
+      "libelle_bo": "Pour a réel, déterminer la dérivée de la fonction t → e^{at}.",
+      "libelle_eleve": "Je sais dériver la fonction t → e^{at} pour un réel a.",
       "demonstration_exigible": false
     },
     {
       "id": "1SPE-EXPONENTIELLE-C5",
-      "libelle_bo": "Résoudre des équations et inéquations faisant intervenir la fonction exponentielle.",
-      "libelle_eleve": "Je sais résoudre des équations et inéquations avec l'exponentielle.",
+      "libelle_bo": "Pour k strictement positif, représenter t → e^{-kt} et t → e^{kt} ; modéliser une croissance ou une décroissance exponentielle.",
+      "libelle_eleve": "Je sais représenter et utiliser un modèle de croissance ou de décroissance exponentielle.",
       "demonstration_exigible": false
+    }
+  ],
+  "situations_algorithmiques": [
+    {
+      "programme_reference": "MENE2602917A",
+      "type": "IMPLEMENTATION_GUIDANCE",
+      "libelle": "Construction de l'exponentielle par la méthode d'Euler.",
+      "mandatory_for_coverage": false
+    },
+    {
+      "programme_reference": "MENE2602917A",
+      "type": "IMPLEMENTATION_GUIDANCE",
+      "libelle": "Détermination d'une valeur approchée de e à l'aide de (1+1/n)^n.",
+      "mandatory_for_coverage": false,
+      "formalisation_limite_exclue": true
+    }
+  ],
+  "optional_extensions": [
+    {
+      "code": "X1",
+      "programme_alignment": "OPTIONAL_EXTENSION",
+      "label": "Approfondissement — Vers la Terminale",
+      "libelle": "Limites de la fonction exponentielle"
+    },
+    {
+      "code": "X2",
+      "programme_alignment": "OPTIONAL_EXTENSION",
+      "label": "Approfondissement — Vers la Terminale",
+      "libelle": "Dérivation générale de e^{u(x)}"
+    },
+    {
+      "code": "X3",
+      "programme_alignment": "OPTIONAL_EXTENSION",
+      "label": "Approfondissement — Vers la Terminale",
+      "libelle": "Équations et inéquations exponentielles, logarithme népérien"
+    },
+    {
+      "code": "X4",
+      "programme_alignment": "OPTIONAL_EXTENSION",
+      "label": "Approfondissement — Vers la Terminale",
+      "libelle": "Démonstrations proposées en approfondissement par le programme 2026"
     }
   ]
 }

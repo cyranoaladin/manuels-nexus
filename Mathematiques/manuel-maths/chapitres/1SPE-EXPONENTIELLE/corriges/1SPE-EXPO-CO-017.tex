@@ -1,13 +1,11 @@
 % META: {"id":"1SPE-EXPO-CO-017","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-017","status":"generated"}
 % BEGIN-VERIFY
-% from sympy import symbols, exp, simplify, log, Rational
+% from sympy import symbols, exp, simplify, Rational
 % x = symbols('x')
 % A = (exp(2*x) - 1)*(exp(2*x) + 1)
 % assert simplify(A - (exp(4*x) - 1)) == 0
 % B = (exp(x) + exp(-x))**2
 % assert simplify(B - (exp(2*x) + 2 + exp(-2*x))) == 0
-% val = exp(3*log(2)) + exp(-3*log(2))
-% assert simplify(val - Rational(65, 8)) == 0
 % C = exp(3*x)*exp(-x) / (exp(x))**2
 % assert simplify(C - 1) == 0
 % END-VERIFY
@@ -23,7 +21,7 @@ A = \left(\mathrm{e}^{2x}\right)^2 - 1^2 = \mathrm{e}^{4x} - 1.
 B = \left(\mathrm{e}^x\right)^2 + 2 \times \mathrm{e}^x \times \mathrm{e}^{-x} + \left(\mathrm{e}^{-x}\right)^2 = \mathrm{e}^{2x} + 2 \times 1 + \mathrm{e}^{-2x} = \mathrm{e}^{2x} + 2 + \mathrm{e}^{-2x}.
 \]
 
-\textbf{Question 3.} Si $x = \ln 2$, alors $\mathrm{e}^x = 2$, donc :
+\textbf{Question 3.} Comme $\mathrm{e}^x = 2$, on obtient :
 \[
 \mathrm{e}^{3x} + \mathrm{e}^{-3x} = \left(\mathrm{e}^x\right)^3 + \left(\mathrm{e}^{-x}\right)^3 = 2^3 + \left(\frac{1}{2}\right)^3 = 8 + \frac{1}{8} = \frac{65}{8}.
 \]

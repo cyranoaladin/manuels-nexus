@@ -1,30 +1,18 @@
 % META: {"id":"1SPE-EXPO-CO-044","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-044","status":"generated"}
 % BEGIN-VERIFY
 % from sympy import *
-% x = symbols('x', real=True)
-% X = symbols('X')
-% assert set(solve(X**2 - X - 2, X)) == {-1, 2}
-% assert solve(exp(2*x) - exp(x) - 2, x) == [log(2)]
+% t = symbols('t', real=True)
+% M = 80*exp(-Rational(3, 10)*t)
+% assert round(float(M.subs(t, 10)), 1) == 4.0
+% assert simplify(M.subs(t, t + 1)/M - exp(-Rational(3, 10))) == 0
 % END-VERIFY
 \begin{corrige}{1SPE-EXPO-EX-044}
 \begin{enumerate}
-\item On pose $X = \mathrm{e}^x$. Comme $\mathrm{e}^{2x} = X^2$, l'équation devient :
-\[X^2 - X - 2 = 0.\]
-
-On calcule le discriminant : $\Delta = 1 + 8 = 9 > 0$.
-
-Les solutions sont :
-\[X_1 = \dfrac{1 - 3}{2} = -1 \quad \text{et} \quad X_2 = \dfrac{1 + 3}{2} = 2.\]
-
-Or $X = \mathrm{e}^x > 0$ pour tout réel $x$, donc $X = -1$ est impossible.
-
-Seule la valeur $X = 2$ convient : $\mathrm{e}^x = 2 \iff x = \ln 2$.
-
-L'ensemble des solutions est $\boxed{S = \{\ln 2\}}$.
-
-\item La fonction exponentielle est strictement croissante, donc :
-\[\mathrm{e}^x \geqslant 2 \iff \mathrm{e}^x \geqslant \mathrm{e}^{\ln 2} \iff x \geqslant \ln 2.\]
-
-L'ensemble des solutions est $\boxed{S = [\ln 2\,;+\infty[}$.
+\item $M(0)=80$ : la masse initiale est de $80$ g.
+\item $M(10)=80\,\mathrm{e}^{-3}\approx 4{,}0$ g.
+\item
+\[\frac{M(t+1)}{M(t)}=\mathrm{e}^{-0{,}3}\approx 0{,}741.\]
+Chaque jour, la masse est donc multipliée par le même facteur, inférieur à $1$.
+\item Le coefficient $-0{,}3$ est négatif : la fonction $t\mapsto \mathrm{e}^{-0{,}3t}$ est décroissante. Le modèle décrit une décroissance.
 \end{enumerate}
 \end{corrige}

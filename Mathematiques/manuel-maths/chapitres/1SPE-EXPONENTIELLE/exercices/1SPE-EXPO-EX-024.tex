@@ -7,14 +7,12 @@
 % assert exp(0) > 0
 % assert exp(-100) > 0
 % # e^x ne peut pas etre negatif : VRAI (donc l'affirmation "peut etre negatif" est FAUSSE)
-% # e^{-x} tend vers +inf quand x->+inf : FAUX, tend vers 0
-% assert limit(exp(-x), x, oo) == 0
 % END-VERIFY
 \begin{exercice}{1SPE-EXPO-EX-024}{1}{5}
 Dire si chaque affirmation est \textbf{vraie} ou \textbf{fausse}, et justifier :
 \begin{enumerate}
   \item « Pour tout réel $x$, $\mathrm{e}^x > 0$. »
   \item « Il existe un réel $x$ tel que $\mathrm{e}^x$ soit négatif. »
-  \item « $\mathrm{e}^{-x}$ tend vers $+\infty$ quand $x$ tend vers $+\infty$. »
+  \item « Pour tout réel positif $x$, $0 < \mathrm{e}^{-x} \leqslant 1$. »
 \end{enumerate}
 \end{exercice}

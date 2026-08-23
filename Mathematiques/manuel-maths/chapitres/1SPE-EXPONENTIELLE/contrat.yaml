@@ -7,9 +7,15 @@ statut: complete
 capacites:
   - { code: C1, ref_capacite: 1SPE-EXPONENTIELLE-C1, libelle_eleve: "Je sais que la fonction exponentielle est l'unique fonction égale à sa dérivée valant 1 en 0." }
   - { code: C2, ref_capacite: 1SPE-EXPONENTIELLE-C2, libelle_eleve: "Je sais utiliser les propriétés algébriques de l'exponentielle (somme, produit, puissance)." }
-  - { code: C3, ref_capacite: 1SPE-EXPONENTIELLE-C3, libelle_eleve: "Je sais que l'exponentielle est strictement croissante sur R et connaître ses limites." }
-  - { code: C4, ref_capacite: 1SPE-EXPONENTIELLE-C4, libelle_eleve: "Je sais dériver une fonction de la forme $\\mathrm{e}^{u(x)}$." }
-  - { code: C5, ref_capacite: 1SPE-EXPONENTIELLE-C5, libelle_eleve: "Je sais résoudre des équations et inéquations avec l'exponentielle." }
+  - { code: C3, ref_capacite: 1SPE-EXPONENTIELLE-C3, libelle_eleve: "Je sais exploiter le signe, la croissance et la courbe de l'exponentielle, en lien avec les suites géométriques." }
+  - { code: C4, ref_capacite: 1SPE-EXPONENTIELLE-C4, libelle_eleve: "Je sais dériver la fonction t → e^{at} pour un réel a." }
+  - { code: C5, ref_capacite: 1SPE-EXPONENTIELLE-C5, libelle_eleve: "Je sais représenter et utiliser un modèle de croissance ou de décroissance exponentielle." }
+
+extensions_facultatives:
+  - { code: X1, label: "Approfondissement — Vers la Terminale", libelle: "Limites de la fonction exponentielle", programme_alignment: OPTIONAL_EXTENSION }
+  - { code: X2, label: "Approfondissement — Vers la Terminale", libelle: "Dérivation générale de e^{u(x)}", programme_alignment: OPTIONAL_EXTENSION }
+  - { code: X3, label: "Approfondissement — Vers la Terminale", libelle: "Équations et inéquations exponentielles, logarithme népérien", programme_alignment: OPTIONAL_EXTENSION }
+  - { code: X4, label: "Approfondissement — Vers la Terminale", libelle: "Démonstrations proposées en approfondissement par le programme 2026", programme_alignment: OPTIONAL_EXTENSION }
 
 prerequis:
   - { code: R1, libelle: "Dérivée d'une somme, d'un produit, d'un quotient", chapitre_origine: "1SPE-DERIVATION-GLOBAL" }

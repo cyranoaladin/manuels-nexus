@@ -97,7 +97,7 @@
           "renvoi": "M2, regle 1"
         },
         "C": {
-          "erreur": "L'eleve a additionne les coefficients devant $\\mathrm{e}$ (comme $1 + 1 = 2$) en traitant $\\mathrm{e}^3$ et $\\mathrm{e}^5$ comme des termes au lieu de facteurs.",
+          "erreur": "L'eleve a bien additionne les exposants, mais a ensuite additionne a tort les coefficients implicites $1+1$. Dans un produit, ces coefficients se multiplient : $1\\times1=1$.",
           "renvoi": "M2, regle 1 ; R4"
         },
         "D": {
@@ -145,7 +145,7 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve a calcule $(\\mathrm{e}^2)^3 = \\mathrm{e}^{2+3} = \\mathrm{e}^5$ (addition au lieu de multiplication) puis $5 + (-4) = 1$... Non, plus probablement $\\mathrm{e}^{2} \\times \\mathrm{e}^{-4} = \\mathrm{e}^{-2}$ en oubliant la puissance 3.",
+          "erreur": "L'eleve a oublie la puissance $3$ et a seulement calcule $\\mathrm{e}^{2}\\times\\mathrm{e}^{-4}=\\mathrm{e}^{-2}$.",
           "renvoi": "M2, regle 3 ; R4"
         },
         "B": {
@@ -187,26 +187,26 @@
     {
       "id": "Q8",
       "capacite": "C3",
-      "enonce": "Quelle est la limite de $\\mathrm{e}^x$ lorsque $x \\to +\\infty$ ?",
+      "enonce": "Pour un reel $x<0$, quelle affirmation situe correctement $\\mathrm{e}^x$ ?",
       "options": {
-        "A": "$0$",
-        "B": "$1$",
-        "C": "$\\mathrm{e}$",
-        "D": "$+\\infty$"
+        "A": "$\\mathrm{e}^x<0$",
+        "B": "$\\mathrm{e}^x=0$",
+        "C": "$0<\\mathrm{e}^x<1$",
+        "D": "$\\mathrm{e}^x>1$"
       },
-      "correcte": "D",
+      "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "C'est la limite en $-\\infty$ qui vaut $0$ ($\\lim_{x \\to -\\infty} \\mathrm{e}^x = 0$). Confusion entre les deux limites aux infinis.",
-          "renvoi": "M3, etape 2"
+          "erreur": "Un exposant negatif ne rend pas la valeur negative : $\\mathrm{e}^x$ est strictement positif pour tout reel $x$.",
+          "renvoi": "C3, signe de l'exponentielle"
         },
         "B": {
-          "erreur": "L'eleve confond la valeur en $0$ ($\\mathrm{e}^0 = 1$) avec la limite en $+\\infty$.",
-          "renvoi": "M3, etape 2"
+          "erreur": "La courbe de l'exponentielle ne coupe jamais l'axe des abscisses : $\\mathrm{e}^x>0$.",
+          "renvoi": "C3, courbe representative"
         },
-        "C": {
-          "erreur": "L'eleve confond la valeur en $1$ ($\\mathrm{e}^1 = \\mathrm{e}$) avec la limite en $+\\infty$.",
-          "renvoi": "M3, etape 2"
+        "D": {
+          "erreur": "Comme $x<0$ et que l'exponentielle est croissante, $\\mathrm{e}^x<\\mathrm{e}^0=1$.",
+          "renvoi": "C3, croissance de l'exponentielle"
         }
       }
     },
@@ -239,156 +239,156 @@
     {
       "id": "Q10",
       "capacite": "C4",
-      "enonce": "Soit $f(x) = \\mathrm{e}^{3x+1}$. Quelle est $f'(x)$ ?",
+      "enonce": "Soit $f(t) = \\mathrm{e}^{3t}$. Quelle est $f'(t)$ ?",
       "options": {
-        "A": "$\\mathrm{e}^{3x+1}$",
-        "B": "$(3x+1)\\,\\mathrm{e}^{3x+1}$",
-        "C": "$3\\,\\mathrm{e}^{3x+1}$",
+        "A": "$\\mathrm{e}^{3t}$",
+        "B": "$3t\\,\\mathrm{e}^{3t}$",
+        "C": "$3\\,\\mathrm{e}^{3t}$",
         "D": "$3\\,\\mathrm{e}^{3}$"
       },
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve a oublie de multiplier par $u'(x) = 3$. La formule $(\\mathrm{e}^u)' = u' \\mathrm{e}^u$ necessite le facteur $u'$.",
-          "renvoi": "M4, etape 2"
+          "erreur": "L'eleve a oublie le facteur constant $3$ : la derivee de $t\\mapsto\\mathrm{e}^{at}$ est $t\\mapsto a\\mathrm{e}^{at}$.",
+          "renvoi": "C4, derivee de $t\\mapsto\\mathrm{e}^{at}$"
         },
         "B": {
-          "erreur": "L'eleve a confondu $u'(x)$ avec $u(x)$ : il a ecrit $u(x) \\cdot \\mathrm{e}^{u(x)}$ au lieu de $u'(x) \\cdot \\mathrm{e}^{u(x)}$.",
-          "renvoi": "M4, etape 1 ; R1"
+          "erreur": "L'eleve a multiplie par l'exposant $3t$ au lieu du coefficient constant $3$.",
+          "renvoi": "C4, coefficient $a$"
         },
         "D": {
-          "erreur": "La derivee de $u(x) = 3x + 1$ est bien $3$, mais l'exponentielle reste $\\mathrm{e}^{3x+1}$ (pas $\\mathrm{e}^3$).",
-          "renvoi": "M4, etape 2"
+          "erreur": "Le facteur $3$ est correct, mais la fonction exponentielle conserve la variable : $\\mathrm{e}^{3t}$ ne devient pas $\\mathrm{e}^3$.",
+          "renvoi": "C4, derivee de $t\\mapsto\\mathrm{e}^{at}$"
         }
       }
     },
     {
       "id": "Q11",
       "capacite": "C4",
-      "enonce": "Soit $g(x) = \\mathrm{e}^{x^2}$. Quelle est $g'(x)$ ?",
+      "enonce": "Soit $g(t) = \\mathrm{e}^{-2t}$. Quelle est $g'(t)$ ?",
       "options": {
-        "A": "$\\mathrm{e}^{x^2}$",
-        "B": "$x^2\\,\\mathrm{e}^{x^2}$",
-        "C": "$2x\\,\\mathrm{e}^{x^2}$",
-        "D": "$2x\\,\\mathrm{e}^{2x}$"
+        "A": "$\\mathrm{e}^{-2t}$",
+        "B": "$2\\,\\mathrm{e}^{-2t}$",
+        "C": "$-2\\,\\mathrm{e}^{-2t}$",
+        "D": "$-2\\,\\mathrm{e}^{2t}$"
       },
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve a oublie le facteur $u'(x) = 2x$ dans la formule $(\\mathrm{e}^u)' = u' \\mathrm{e}^u$.",
-          "renvoi": "M4, etape 2"
+          "erreur": "L'eleve a oublie le coefficient $-2$ qui multiplie $t$ dans l'exposant.",
+          "renvoi": "C4, derivee de $t\\mapsto\\mathrm{e}^{at}$"
         },
         "B": {
-          "erreur": "L'eleve a confondu $u'(x) = 2x$ avec $u(x) = x^2$. Il a ecrit $u \\cdot \\mathrm{e}^u$ au lieu de $u' \\cdot \\mathrm{e}^u$.",
-          "renvoi": "M4, etape 1 ; R1"
+          "erreur": "Le coefficient a pour valeur $-2$, pas $2$ : le signe negatif a ete perdu.",
+          "renvoi": "C4, coefficient $a=-2$"
         },
         "D": {
-          "erreur": "La derivee $u'(x) = 2x$ est correcte, mais l'exposant reste $x^2$ et non $2x$. L'eleve a remplace l'exposant par la derivee.",
-          "renvoi": "M4, etape 2"
+          "erreur": "Le facteur $-2$ est correct, mais l'exposant reste $-2t$ : son signe ne change pas lors de la derivation.",
+          "renvoi": "C4, derivee de $t\\mapsto\\mathrm{e}^{at}$"
         }
       }
     },
     {
       "id": "Q12",
       "capacite": "C4",
-      "enonce": "Soit $h(x) = x\\,\\mathrm{e}^{x}$. Quelle est $h'(x)$ ?",
+      "enonce": "Soit $h(t) = \\mathrm{e}^{0{,}5t}$. Quelle est $h'(t)$ ?",
       "options": {
-        "A": "$\\mathrm{e}^x$",
-        "B": "$x\\,\\mathrm{e}^x$",
-        "C": "$(1+x)\\,\\mathrm{e}^x$",
-        "D": "$(x-1)\\,\\mathrm{e}^x$"
+        "A": "$\\mathrm{e}^{0{,}5t}$",
+        "B": "$0{,}5t\\,\\mathrm{e}^{0{,}5t}$",
+        "C": "$0{,}5\\,\\mathrm{e}^{0{,}5t}$",
+        "D": "$2\\,\\mathrm{e}^{0{,}5t}$"
       },
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve a derive uniquement $x$ (donnant $1$) et multiplie par $\\mathrm{e}^x$, en oubliant la derivee de $\\mathrm{e}^x$ multipliee par $x$ : formule du produit $(uv)' = u'v + uv'$ non appliquee.",
-          "renvoi": "M4 ; R1"
+          "erreur": "L'eleve a oublie le coefficient $0{,}5$ qui multiplie $t$ dans l'exposant.",
+          "renvoi": "C4, coefficient $a=0{,}5$"
         },
         "B": {
-          "erreur": "L'eleve a oublie le terme $u'v = 1 \\cdot \\mathrm{e}^x$ dans la formule du produit. Il n'a garde que $uv' = x \\cdot \\mathrm{e}^x$.",
-          "renvoi": "M4 ; R1"
+          "erreur": "L'eleve a multiplie par l'exposant $0{,}5t$ au lieu du coefficient constant $0{,}5$.",
+          "renvoi": "C4, coefficient $a$"
         },
         "D": {
-          "erreur": "L'eleve a obtenu $x - 1$ au lieu de $x + 1$. Erreur de signe dans l'application de la formule du produit.",
-          "renvoi": "M4 ; R1"
+          "erreur": "$2$ est l'inverse de $0{,}5$, pas le coefficient de $t$ dans l'exposant.",
+          "renvoi": "C4, coefficient $a=0{,}5$"
         }
       }
     },
     {
       "id": "Q13",
       "capacite": "C5",
-      "enonce": "Resoudre $\\mathrm{e}^{x} = \\mathrm{e}^{5}$.",
+      "enonce": "Une population est modelisee par $N(t)=500\\,\\mathrm{e}^{0{,}2t}$. Quelle est sa valeur initiale ?",
       "options": {
-        "A": "$x = \\mathrm{e}^5$",
-        "B": "$x = 5$",
-        "C": "$x = \\ln 5$",
-        "D": "Pas de solution."
+        "A": "$0$",
+        "B": "$500$",
+        "C": "$500\\mathrm{e}^{0{,}2}$",
+        "D": "$0{,}2$"
       },
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve a confondu l'egalite des exponentielles avec la valeur de l'exponentielle : $\\mathrm{e}^x = \\mathrm{e}^5$ implique $x = 5$ (injectivite), pas $x = \\mathrm{e}^5$.",
-          "renvoi": "M5, etape 1"
+          "erreur": "La valeur initiale est obtenue pour $t=0$ : le facteur exponentiel vaut alors $1$, pas $0$.",
+          "renvoi": "C5, modele exponentiel"
         },
         "C": {
-          "erreur": "Le logarithme neperien n'est pas necessaire ici. L'injectivite de l'exponentielle donne directement $x = 5$. $\\ln 5$ serait la solution de $\\mathrm{e}^x = 5$.",
-          "renvoi": "M5, etape 1"
+          "erreur": "$500\\mathrm{e}^{0{,}2}$ est la valeur au temps $t=1$, pas au temps initial $t=0$.",
+          "renvoi": "C5, substitution de $t=0$"
         },
         "D": {
-          "erreur": "L'equation admet bien une solution ($x = 5$). L'eleve a peut-etre cru que les exponentielles ne pouvaient pas etre egales.",
-          "renvoi": "M5, etape 1"
+          "erreur": "$0{,}2$ est le taux continu du modele ; ce n'est pas la valeur de la population.",
+          "renvoi": "C5, parametres du modele"
         }
       }
     },
     {
       "id": "Q14",
       "capacite": "C5",
-      "enonce": "Resoudre l'inequation $\\mathrm{e}^{2x-1} \\geqslant 1$.",
+      "enonce": "Une masse est modelisee par $M(t)=80\\,\\mathrm{e}^{-0{,}3t}$. Quel est le quotient $M(t+1)/M(t)$ ?",
       "options": {
-        "A": "$x \\geqslant 1$",
-        "B": "$x \\geqslant \\dfrac{1}{2}$",
-        "C": "$x \\leqslant \\dfrac{1}{2}$",
-        "D": "$x \\geqslant 0$"
+        "A": "$\\mathrm{e}^{0{,}3}$",
+        "B": "$\\mathrm{e}^{-0{,}3}$",
+        "C": "$80\\mathrm{e}^{-0{,}3}$",
+        "D": "$-0{,}3$"
       },
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve a resolu $2x - 1 \\geqslant 1$ au lieu de $2x - 1 \\geqslant 0$ (oubli que $1 = \\mathrm{e}^0$, pas $\\mathrm{e}^1$).",
-          "renvoi": "M5, etape 2"
+          "erreur": "Le signe de l'exposant a ete inverse : le modele de decroissance conserve le facteur $\\mathrm{e}^{-0{,}3}$ d'une unite de temps a la suivante.",
+          "renvoi": "C5, decroissance exponentielle"
         },
         "C": {
-          "erreur": "L'eleve a inverse le sens de l'inequation. L'exponentielle etant strictement croissante, elle conserve le sens des inegalites.",
-          "renvoi": "M5, etape 2 ; M3"
+          "erreur": "Le coefficient initial $80$ se simplifie dans le quotient $M(t+1)/M(t)$.",
+          "renvoi": "C5, coefficient multiplicateur"
         },
         "D": {
-          "erreur": "L'eleve a ecrit $\\mathrm{e}^{2x-1} \\geqslant \\mathrm{e}^0$ puis $2x \\geqslant 0$ en oubliant le $-1$ dans l'exposant.",
-          "renvoi": "M5, etape 2"
+          "erreur": "$-0{,}3$ est le coefficient dans l'exposant ; le coefficient multiplicateur est son exponentielle $\\mathrm{e}^{-0{,}3}$.",
+          "renvoi": "C5, modele exponentiel"
         }
       }
     },
     {
       "id": "Q15",
       "capacite": "C5",
-      "enonce": "Resoudre $\\mathrm{e}^{x^2 - 4} = 1$.",
+      "enonce": "Pour $k>0$, quelle affirmation decrit la courbe de $t\\mapsto\\mathrm{e}^{-kt}$ ?",
       "options": {
-        "A": "$x = 4$",
-        "B": "$x = 2$",
-        "C": "$x = -2$ ou $x = 2$",
-        "D": "$x = 0$"
+        "A": "Elle est croissante et passe par $(0;0)$.",
+        "B": "Elle est decroissante et passe par $(0;1)$.",
+        "C": "Elle est constante et egale a $1$.",
+        "D": "Elle prend des valeurs negatives pour $t>0$."
       },
-      "correcte": "C",
+      "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve a resolu $x^2 = 4$ mais a donne $x = 4$ au lieu de $x = \\pm 2$. Confusion entre $x^2 = 4$ et $x = 4$.",
-          "renvoi": "M5, etape 1 ; R3"
+          "erreur": "La courbe passe par $(0;1)$ car $\\mathrm{e}^{0}=1$, et le coefficient $-k<0$ produit une decroissance.",
+          "renvoi": "C5, courbe de $t\\mapsto\\mathrm{e}^{-kt}$"
         },
-        "B": {
-          "erreur": "L'eleve a oublie la solution $x = -2$. L'equation $x^2 = 4$ admet deux solutions : $x = 2$ et $x = -2$.",
-          "renvoi": "M5, etape 1 ; R3"
+        "C": {
+          "erreur": "La fonction n'est constante que si le coefficient de $t$ dans l'exposant vaut $0$, or $-k<0$.",
+          "renvoi": "C5, parametre $k>0$"
         },
         "D": {
-          "erreur": "L'eleve a teste $x = 0$ : $\\mathrm{e}^{0 - 4} = \\mathrm{e}^{-4} \\neq 1$. Il faut $x^2 - 4 = 0$, pas $x = 0$.",
-          "renvoi": "M5, etape 1"
+          "erreur": "Une exponentielle est toujours strictement positive, y compris lorsque son exposant est negatif.",
+          "renvoi": "C3, signe ; C5, decroissance"
         }
       }
     }

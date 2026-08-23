@@ -1,158 +1,58 @@
 % META: {"id":"1SPE-EXPO-COURS-C3","chapitre":"1SPE-EXPONENTIELLE","type_objet":"cours","capacites_codes":["C3"],"status":"generated"}
 
-\section{Variations et limites de la fonction exponentielle}
+\section{Signe, variations et courbe de la fonction exponentielle}
 
-\margeAppui{Dérivée strictement positive : croissance sur $\mathbb{R}$.}
+\margeAppui{La fonction exponentielle est strictement positive et croissante sur $\mathbb{R}$.}
 
-\theoreme[Variations de la fonction exponentielle]{
-La fonction exponentielle est \textbf{strictement croissante} sur $\mathbb{R}$.
+\propriete[Signe et variations]{
+Pour tout réel $x$, $\mathrm{e}^x>0$. Comme
+$(\mathrm{e}^x)'=\mathrm{e}^x>0$, la fonction exponentielle est strictement
+croissante sur $\mathbb{R}$.
 }
-
-\demonstration{
-Pour tout $x \in \mathbb{R}$, $\exp'(x) = \exp(x) > 0$. Donc, d'après le théorème liant le signe de la dérivée aux variations, $\exp$ est strictement croissante sur $\mathbb{R}$.
-}
-
-% BEGIN-VERIFY
-% from sympy import symbols, exp, diff
-% x = symbols('x')
-% assert diff(exp(x), x) == exp(x)
-% # exp(x) > 0 for all x, verified symbolically via positivity
-% from sympy import oo
-% assert exp(0) == 1  # positive
-% assert exp(1) > 0
-% assert exp(-100) > 0
-% END-VERIFY
 
 \propriete[Conservation de l'ordre]{
 Pour tous réels $a$ et $b$ :
 \[
-\mathrm{e}^a \leqslant \mathrm{e}^b \iff a \leqslant b, \qquad \mathrm{e}^a = \mathrm{e}^b \iff a = b.
+\mathrm{e}^a<\mathrm{e}^b\iff a<b,
+\qquad
+\mathrm{e}^a=\mathrm{e}^b\iff a=b.
 \]
+En particulier, $\mathrm{e}^x<1$ si $x<0$, $\mathrm{e}^0=1$ et
+$\mathrm{e}^x>1$ si $x>0$.
 }
 
-\definition[Conséquence sur les inégalités]{
-La stricte croissance de $\exp$ permet de comparer les exposants :
-\begin{itemize}
-  \item $\mathrm{e}^a < \mathrm{e}^b \iff a < b$
-  \item $\mathrm{e}^a \geqslant 1 \iff a \geqslant 0$ \quad (car $\mathrm{e}^0 = 1$)
-  \item $\mathrm{e}^a < 1 \iff a < 0$
-\end{itemize}
+\propriete[Courbe représentative]{
+La courbe passe par $(0\,;\,1)$ et par $(1\,;\,\mathrm{e})$. Elle reste
+strictement au-dessus de l'axe des abscisses et monte lorsque l'abscisse
+augmente.
+}
+
+\exemple{
+Comparer $\mathrm{e}^{2{,}5}$ et $\mathrm{e}^{\sqrt7}$ sans calculatrice.
+Comme $2{,}5^2=6{,}25<7$, on a $2{,}5<\sqrt7$, donc
+$\mathrm{e}^{2{,}5}<\mathrm{e}^{\sqrt7}$.
+}
+
+\propriete[Lien avec les suites géométriques]{
+Pour un pas de temps $h$ fixé et $u_n=A\mathrm{e}^{knh}$,
+\[
+\frac{u_{n+1}}{u_n}=\mathrm{e}^{kh}.
+\]
+Les valeurs d'un modèle exponentiel observées à intervalles de temps réguliers
+forment donc une suite géométrique de raison $\mathrm{e}^{kh}$.
 }
 
 % BEGIN-VERIFY
-% from sympy import exp, log
-% # e^a >= 1 iff a >= 0
+% from sympy import Rational, exp, simplify, sqrt, symbols
+% A, k, h, n = symbols('A k h n', real=True, nonzero=True)
 % assert exp(0) == 1
 % assert exp(1) > 1
-% assert exp(-1) < 1
-% END-VERIFY
-
-\exemple{
-Comparer $\mathrm{e}^{3}$ et $\mathrm{e}^{\pi}$.
-
-Comme $3 < \pi$ et que $\exp$ est strictement croissante, on a $\mathrm{e}^{3} < \mathrm{e}^{\pi}$.
-}
-
-% BEGIN-VERIFY
-% from sympy import exp, pi, N
-% assert float(N(exp(3))) < float(N(exp(pi)))
-% END-VERIFY
-
-\exemple{
-Résoudre $\mathrm{e}^{x} \geqslant 1$.
-
-$\mathrm{e}^x \geqslant 1 = \mathrm{e}^0 \iff x \geqslant 0$.
-
-L'ensemble des solutions est $[0\,;\,+\infty[$.
-}
-
-\theoreme[Limites de la fonction exponentielle]{
-\[
-\lim_{x \to +\infty} \mathrm{e}^x = +\infty, \qquad \lim_{x \to -\infty} \mathrm{e}^x = 0.
-\]
-}
-
-% BEGIN-VERIFY
-% from sympy import exp, oo, limit, symbols
-% x = symbols('x')
-% assert limit(exp(x), x, oo) == oo
-% assert limit(exp(x), x, -oo) == 0
-% END-VERIFY
-
-\margeAppui{La droite d'équation $y = 0$ (l'axe des abscisses) est asymptote horizontale à la courbe de $\exp$ en $-\infty$.}
-
-\propriete[Asymptote et position par rapport aux axes]{
-\begin{itemize}
-  \item La courbe de $\exp$ admet l'axe des abscisses ($y = 0$) comme \textbf{asymptote horizontale} en $-\infty$.
-  \item La courbe passe par le point $(0\,;\,1)$.
-  \item La courbe est au-dessus de la droite $y = 1$ pour $x > 0$ et en dessous pour $x < 0$.
-\end{itemize}
-}
-
-\exemple{
-Déterminer $\displaystyle\lim_{x \to +\infty} (3\mathrm{e}^x - 5)$.
-
-Comme $\lim_{x \to +\infty} \mathrm{e}^x = +\infty$, on a $\lim_{x \to +\infty} 3\mathrm{e}^x = +\infty$, donc :
-\[
-\lim_{x \to +\infty} (3\mathrm{e}^x - 5) = +\infty.
-\]
-}
-
-% BEGIN-VERIFY
-% from sympy import symbols, exp, limit, oo
-% x = symbols('x')
-% assert limit(3*exp(x) - 5, x, oo) == oo
-% END-VERIFY
-
-\exemple{
-Déterminer $\displaystyle\lim_{x \to -\infty} (2\mathrm{e}^x + 7)$.
-
-Comme $\lim_{x \to -\infty} \mathrm{e}^x = 0$, on a $\lim_{x \to -\infty} 2\mathrm{e}^x = 0$, donc :
-\[
-\lim_{x \to -\infty} (2\mathrm{e}^x + 7) = 7.
-\]
-}
-
-% BEGIN-VERIFY
-% from sympy import symbols, exp, limit, oo
-% x = symbols('x')
-% assert limit(2*exp(x) + 7, x, -oo) == 7
-% END-VERIFY
-
-\propriete[Croissances comparées (admise)]{
-La fonction exponentielle l'emporte sur toute puissance de $x$ en $+\infty$ :
-\[
-\lim_{x \to +\infty} \frac{\mathrm{e}^x}{x^n} = +\infty \quad \text{pour tout } n \in \mathbb{N}.
-\]
-En particulier : $\displaystyle\lim_{x \to +\infty} \frac{\mathrm{e}^x}{x} = +\infty$.
-}
-
-% BEGIN-VERIFY
-% from sympy import symbols, exp, limit, oo
-% x = symbols('x')
-% assert limit(exp(x)/x, x, oo) == oo
-% assert limit(exp(x)/x**2, x, oo) == oo
-% assert limit(exp(x)/x**10, x, oo) == oo
+% assert Rational(5, 2)**2 < 7
+% ratio = simplify((A*exp(k*(n+1)*h))/(A*exp(k*n*h)))
+% assert simplify(ratio-exp(k*h)) == 0
 % END-VERIFY
 
 \erreurFrequente{
-Écrire $\lim_{x \to -\infty} \mathrm{e}^x = -\infty$. L'exponentielle est toujours \emph{strictement positive} : sa limite en $-\infty$ est $0$ (et non $-\infty$).
+Un exposant négatif ne donne pas une valeur négative : $\mathrm{e}^x$ est
+toujours strictement positif.
 }
-
-\erreurFrequente{
-Confondre le comportement en $+\infty$ et en $-\infty$. En $+\infty$, l'exponentielle tend vers $+\infty$ ; en $-\infty$, elle tend vers $0$. Ce sont des comportements très différents.
-}
-
-\contreexemple{
-La fonction $f(x) = -\mathrm{e}^x$ vérifie $\lim_{x \to +\infty} f(x) = -\infty$ et $\lim_{x \to -\infty} f(x) = 0^-$. Attention au signe devant l'exponentielle : le signe de la limite change.
-}
-
-\approfondissement{
-La croissance comparée $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x^n} = +\infty$ signifie que l'exponentielle croît « plus vite » que n'importe quel polynôme. En analyse, on exprime cela en disant que la croissance de $\exp$ est \emph{surexponentielle} par rapport aux polynômes. Réciproquement, en $-\infty$ : $\lim_{x \to -\infty} x^n \mathrm{e}^x = 0$.
-}
-
-% BEGIN-VERIFY
-% from sympy import symbols, exp, limit, oo
-% x = symbols('x')
-% assert limit(x**3 * exp(x), x, -oo) == 0
-% END-VERIFY

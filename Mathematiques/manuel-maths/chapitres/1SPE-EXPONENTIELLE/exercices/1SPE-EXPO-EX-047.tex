@@ -9,9 +9,6 @@
 % assert solve(fp, x) == [0]
 % # f(0) = 1 - 2 = -1
 % assert f.subs(x, 0) == -1
-% # limites
-% assert limit(f, x, oo) == oo
-% assert limit(f, x, -oo) == 0
 % END-VERIFY
 \begin{exercice}{1SPE-EXPO-EX-047}{3}{15}
 On considère la fonction $f$ définie sur $\mathbb{R}$ par $f(x) = \mathrm{e}^{2x} - 2\mathrm{e}^x$.
@@ -19,6 +16,6 @@ On considère la fonction $f$ définie sur $\mathbb{R}$ par $f(x) = \mathrm{e}^{
 \item Montrer que pour tout réel $x$, $f'(x) = 2\mathrm{e}^x(\mathrm{e}^x - 1)$.
 \item Étudier le signe de $f'(x)$ et en déduire le tableau de variations de $f$.
 \item Calculer $f(0)$ et déterminer le minimum de $f$ sur $\mathbb{R}$.
-\item Déterminer les limites de $f$ en $+\infty$ et en $-\infty$.
+\item Calculer $f(-1)$ et $f(1)$, puis esquisser la courbe de $f$ à partir du tableau de variations.
 \end{enumerate}
 \end{exercice}

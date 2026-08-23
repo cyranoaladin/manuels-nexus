@@ -1,0 +1,28 @@
+% META: {"id":"1SPE-EXPO-COURS-C5-ALGORITHMES","chapitre":"1SPE-EXPONENTIELLE","type_objet":"cours","capacites_codes":["C1","C5"],"status":"generated","programme_reference":"MENE2602917A"}
+
+\section{Algorithmes — Construire et approcher l'exponentielle}
+
+\subsection*{Construction approchée par la méthode d'Euler}
+Pour approcher la fonction vérifiant $y'=y$ et $y(0)=1$, on choisit un pas $h>0$ et on part de $x_0=0$, $y_0=1$. On répète :
+\[
+x_{k+1}=x_k+h,\qquad y_{k+1}=y_k+h\,y_k.
+\]
+Les points $(x_k;y_k)$ donnent une construction numérique approchée de la courbe. Réduire le pas permet de comparer plusieurs approximations, sans constituer ici une démonstration d'existence.
+
+\subsection*{Approcher numériquement le nombre $\mathrm{e}$}
+Calculer, pour des entiers $n$ de plus en plus grands,
+\[
+a_n=\left(1+\dfrac{1}{n}\right)^n.
+\]
+Un tableau de valeurs permet de conjecturer que $a_n$ se rapproche de $2{,}718\ldots$, valeur approchée de $\mathrm{e}$. Cette observation numérique n'est pas une formalisation de limite.
+
+% BEGIN-VERIFY
+% from math import e
+% a10000 = (1 + 1/10000)**10000
+% assert 0 < e - a10000 < 0.001
+% h = 0.1
+% y = 1.0
+% for _ in range(10):
+%     y = y + h*y
+% assert abs(y - 2.5937424601) < 1e-10
+% END-VERIFY

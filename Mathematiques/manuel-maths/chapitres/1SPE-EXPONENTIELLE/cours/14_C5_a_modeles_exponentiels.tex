@@ -1,0 +1,48 @@
+% META: {"id":"1SPE-EXPO-COURS-C5","chapitre":"1SPE-EXPONENTIELLE","type_objet":"cours","capacites_codes":["C5"],"status":"generated"}
+
+\section{Croissances et décroissances exponentielles}
+
+\propriete[Deux familles de courbes]{
+Pour une valeur numérique $k>0$ :
+\begin{itemize}
+  \item $t\mapsto\mathrm{e}^{kt}$ est strictement croissante et passe par $(0\,;\,1)$ ;
+  \item $t\mapsto\mathrm{e}^{-kt}$ est strictement décroissante et passe par $(0\,;\,1)$.
+\end{itemize}
+Ces deux fonctions sont strictement positives.
+}
+
+\definition[Modèle exponentiel]{
+Une grandeur $Q$ suivant une évolution exponentielle continue peut s'écrire
+\[
+Q(t)=Q_0\mathrm{e}^{at},
+\]
+où $Q_0=Q(0)$ est la valeur initiale. Si $a>0$, le modèle décrit une
+croissance ; si $a<0$, il décrit une décroissance.
+}
+
+\exemple{
+Une masse radioactive est modélisée par
+$M(t)=80\mathrm{e}^{-0{,}3t}$. Sa valeur initiale est $80$ et, d'une unité
+de temps à la suivante, elle est multipliée par $\mathrm{e}^{-0{,}3}<1$.
+}
+
+\propriete[Lien discret-continu]{
+Pour un pas $h>0$, les valeurs $Q(nh)$ forment une suite géométrique de
+raison $\mathrm{e}^{ah}$. Le modèle continu prolonge ainsi une évolution
+géométrique observée à temps réguliers.
+}
+
+% BEGIN-VERIFY
+% from sympy import Rational, exp, simplify, symbols
+% t, h, a = symbols('t h a', real=True)
+% q0 = symbols('q_0', nonzero=True)
+% q = q0*exp(a*t)
+% assert q.subs(t, 0) == q0
+% assert simplify(q.subs(t, t+h)/q-exp(a*h)) == 0
+% assert exp(-Rational(3, 10)) < 1
+% END-VERIFY
+
+\erreurFrequente{
+Dans $Q_0\mathrm{e}^{at}$, $Q_0$ est la valeur initiale et $a$ pilote le
+sens de l'évolution : ce sont deux paramètres de rôles différents.
+}

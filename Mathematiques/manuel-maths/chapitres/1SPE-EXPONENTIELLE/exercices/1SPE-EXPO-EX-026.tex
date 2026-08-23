@@ -6,15 +6,13 @@
 % fp = diff(f, x)
 % assert simplify(fp - 2*exp(2*x - 1)) == 0
 % assert fp.subs(x, 0) > 0
-% assert limit(f, x, oo) == oo
-% assert limit(f, x, -oo) == 0
 % END-VERIFY
 \begin{exercice}{1SPE-EXPO-EX-026}{2}{10}
 On considère la fonction $f$ définie sur $\mathbb{R}$ par $f(x) = \mathrm{e}^{2x-1}$.
 \begin{enumerate}
-  \item Calculer $f'(x)$ et en déduire le signe de $f'(x)$ sur $\mathbb{R}$.
+  \item Écrire $f(x)=\mathrm{e}^{-1}\mathrm{e}^{2x}$, puis calculer $f'(x)$.
   \item En déduire le sens de variation de $f$ sur $\mathbb{R}$.
-  \item Déterminer les limites de $f$ en $+\infty$ et en $-\infty$.
-  \item Dresser le tableau de variations complet de $f$.
+  \item Calculer $f(-1)$, $f(0)$ et $f(1)$, puis placer les points correspondants.
+  \item Esquisser la courbe de $f$ en utilisant sa croissance et ces trois points.
 \end{enumerate}
 \end{exercice}

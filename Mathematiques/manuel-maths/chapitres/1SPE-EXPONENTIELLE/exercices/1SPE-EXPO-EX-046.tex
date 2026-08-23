@@ -3,10 +3,8 @@
 % from sympy import *
 % t = symbols('t', real=True)
 % P = 1000 * exp(Rational(5, 100) * t)
-% # P(t) = 5000 => e^(0.05t) = 5 => t = ln(5)/0.05 = 20*ln(5)
-% sol_eq = solve(P - 5000, t)
-% assert len(sol_eq) == 1 and simplify(sol_eq[0] - 20*log(5)) == 0
-% # P(t) >= 10000 => e^(0.05t) >= 10 => t >= 20*ln(10)
+% assert P.subs(t, 0) == 1000
+% assert float(N(P.subs(t, 20))) > 2718 and float(N(P.subs(t, 20))) < 2719
 % END-VERIFY
 \begin{exercice}{1SPE-EXPO-EX-046}{3}{15}
 La population d'une culture bactérienne est modélisée par la fonction :
@@ -14,7 +12,8 @@ La population d'une culture bactérienne est modélisée par la fonction :
 où $t$ est le temps en heures et $P(t)$ le nombre de bactéries.
 \begin{enumerate}
 \item Calculer $P(0)$. Interpréter ce résultat.
-\item Déterminer à quel instant $t$ la population atteint $5000$ bactéries. On donnera la valeur exacte puis une valeur approchée à l'unité.
-\item Résoudre l'inéquation $P(t) \geqslant 10\,000$. Interpréter le résultat.
+\item Calculer $P(20)$ et $P(40)$, puis arrondir à l'unité.
+\item Comparer $P(t+10)$ et $P(t)$. Interpréter le coefficient obtenu.
+\item Justifier que la population modélisée est croissante.
 \end{enumerate}
 \end{exercice}

@@ -4,8 +4,8 @@
 % t = symbols('t', real=True)
 % P = 1000 * exp(Rational(5, 100) * t)
 % assert P.subs(t, 0) == 1000
-% sol = solve(P - 5000, t)
-% assert len(sol) == 1 and simplify(sol[0] - 20*log(5)) == 0
+% assert abs(float(N(P.subs(t, 20))) - 2718.281828) < 1e-5
+% assert abs(float(N(P.subs(t, 40))) - 7389.056099) < 1e-5
 % END-VERIFY
 \begin{corrige}{1SPE-EXPO-EX-046}
 \begin{enumerate}
@@ -13,16 +13,10 @@
 \[P(0) = 1000\,\mathrm{e}^{0{,}05 \times 0} = 1000\,\mathrm{e}^0 = 1000.\]
 \textbf{Interprétation :} au temps initial ($t = 0$), la population compte $1000$ bactéries.
 
-\item On résout $P(t) = 5000$ :
-\[1000\,\mathrm{e}^{0{,}05t} = 5000 \iff \mathrm{e}^{0{,}05t} = 5 \iff 0{,}05t = \ln 5 \iff t = \dfrac{\ln 5}{0{,}05} = 20\ln 5.\]
+\item $P(20)=1000\mathrm{e}\approx\boxed{2718}$ et $P(40)=1000\mathrm{e}^{2}\approx\boxed{7389}$.
 
-Valeur exacte : $\boxed{t = 20\ln 5}$. Valeur approchée : $t \approx 20 \times 1{,}609 \approx 32$ heures.
+\item $P(t+10)=1000\mathrm{e}^{0{,}05t+0{,}5}=\mathrm{e}^{0{,}5}P(t)$. Toutes les dix heures, la population est donc multipliée par le même coefficient $\mathrm{e}^{0{,}5}\approx1{,}65$.
 
-\item On résout $P(t) \geqslant 10\,000$ :
-\[1000\,\mathrm{e}^{0{,}05t} \geqslant 10\,000 \iff \mathrm{e}^{0{,}05t} \geqslant 10 \iff 0{,}05t \geqslant \ln 10 \iff t \geqslant 20\ln 10.\]
-
-L'ensemble des solutions est $S = [20\ln 10\,;+\infty[$.
-
-\textbf{Interprétation :} la population atteint ou dépasse $10\,000$ bactéries à partir de $t = 20\ln 10 \approx 46$ heures.
+\item $P'(t)=50\mathrm{e}^{0{,}05t}>0$ pour tout $t\geqslant0$. Le modèle décrit donc une population croissante.
 \end{enumerate}
 \end{corrige}

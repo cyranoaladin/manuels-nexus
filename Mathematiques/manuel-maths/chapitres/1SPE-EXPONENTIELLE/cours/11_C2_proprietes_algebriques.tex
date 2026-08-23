@@ -4,13 +4,14 @@
 
 \margeAppui{La relation fonctionnelle $\exp(a+b) = \exp(a) \times \exp(b)$ est le résultat central : elle transforme une somme en produit. C'est cette propriété qui justifie la notation $\mathrm{e}^x$.}
 
-\theoreme[Relation fonctionnelle — Démonstration exigible]{
+\theoreme[Relation fonctionnelle — Propriété admise dans le socle]{
 Pour tous réels $a$ et $b$ :
 \[
 \exp(a + b) = \exp(a) \times \exp(b).
 \]
 }
 
+\begin{center}\textbf{Approfondissement — Vers la Terminale : démonstration facultative}\end{center}
 \demonstration{
 Soit $a \in \mathbb{R}$ fixé. Posons $f(x) = \exp(x + a)$ et $g(x) = \exp(a) \times \exp(x)$.
 
@@ -66,6 +67,7 @@ Pour tous réels $a$ et $b$, et pour tout entier relatif $n$ :
 % assert simplify(exp(3*a) - exp(a)**3) == 0
 % END-VERIFY
 
+\begin{center}\textbf{Approfondissement — Vers la Terminale : démonstrations facultatives}\end{center}
 \demonstration{
 \textbf{Preuve de $\exp(-a) = \dfrac{1}{\exp(a)}$.}
 
@@ -174,5 +176,6 @@ On peut vérifier numériquement : $\mathrm{e}^{1+2} = \mathrm{e}^3 \approx 20{,
 % END-VERIFY
 
 \approfondissement{
+\textbf{Approfondissement — Vers la Terminale.}
 La relation fonctionnelle $\exp(a+b) = \exp(a) \exp(b)$ caractérise les morphismes du groupe $(\mathbb{R}, +)$ vers le groupe $(\mathbb{R}^*_+, \times)$. La fonction exponentielle est le seul morphisme continu vérifiant $\exp(1) = \mathrm{e}$. Sa réciproque, le logarithme népérien, transforme les produits en sommes : $\ln(AB) = \ln A + \ln B$.
 }

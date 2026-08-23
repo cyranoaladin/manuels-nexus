@@ -4,12 +4,9 @@
 % x = symbols('x')
 % f = x*exp(x) - exp(x) + 1
 % fp = f.diff(x)
-% fpp = f.diff(x, 2)
 % assert simplify(f.subs(x, 0)) == 0, "f(0) = 0"
 % assert simplify(fp.subs(x, 0)) == 0, "f'(0) = 0"
-% assert simplify(fpp.subs(x, 0)) == 1, "f''(0) = 1 > 0"
 % assert simplify(fp) == x*exp(x), "f'(x) = x*exp(x)"
-% assert simplify(fpp) == (x + 1)*exp(x), "f''(x) = (x+1)*exp(x)"
 % END-VERIFY
 \begin{exercice}{1SPE-EXPO-EX-010}{3}{12}
 On considère la fonction $f$ définie sur $\mathbb{R}$ par $f(x) = x\mathrm{e}^x - \mathrm{e}^x + 1$.
@@ -17,9 +14,8 @@ On considère la fonction $f$ définie sur $\mathbb{R}$ par $f(x) = x\mathrm{e}^
 \item Calculer $f(0)$.
 \item Calculer $f'(x)$ et vérifier que $f'(x) = x\mathrm{e}^x$.
 \item En déduire $f'(0)$.
-\item Calculer $f''(x)$ et montrer que $f''(x) = (x+1)\mathrm{e}^x$.
-\item Calculer $f''(0)$. En déduire la nature du point critique $x = 0$.
-\item Dresser le tableau de variations de $f$ et montrer que $f(x) \geqslant 0$ pour tout réel $x$.
+\item Étudier le signe de $f'(x)$, puis dresser le tableau de variations de $f$.
+\item Montrer que $f(x) \geqslant 0$ pour tout réel $x$.
 \item En déduire l'inégalité $x\mathrm{e}^x \geqslant \mathrm{e}^x - 1$ pour tout réel $x$.
 \end{enumerate}
 \end{exercice}

@@ -8,17 +8,17 @@
 % assert diff(exp(2*x - 3), x) == 2*exp(2*x - 3)
 % END-VERIFY
 \begin{corrige}{1SPE-EXPO-EX-031}
-On applique la formule $(\mathrm{e}^{u})' = u' \mathrm{e}^{u}$.
+On utilise la dérivée officielle de $x\mapsto\mathrm{e}^{ax}$ et, lorsque l'exposant contient une constante, la propriété $\mathrm{e}^{ax+b}=\mathrm{e}^{b}\mathrm{e}^{ax}$.
 
-\textbf{Question 1.} On pose $u(x) = 3x$, donc $u'(x) = 3$.
+\textbf{Question 1.} Pour $a=3$,
 \[f'(x) = 3\,\mathrm{e}^{3x}.\]
 
-\textbf{Question 2.} On pose $u(x) = -x$, donc $u'(x) = -1$.
+\textbf{Question 2.} Pour $a=-1$,
 \[g'(x) = -\mathrm{e}^{-x}.\]
 
-\textbf{Question 3.} On pose $u(x) = x + 1$, donc $u'(x) = 1$.
+\textbf{Question 3.} Comme $\mathrm{e}^{x+1}=\mathrm{e}\,\mathrm{e}^{x}$,
 \[h'(x) = \mathrm{e}^{x+1}.\]
 
-\textbf{Question 4.} On pose $u(x) = 2x - 3$, donc $u'(x) = 2$.
+\textbf{Question 4.} Comme $\mathrm{e}^{2x-3}=\mathrm{e}^{-3}\mathrm{e}^{2x}$,
 \[k'(x) = 2\,\mathrm{e}^{2x-3}.\]
 \end{corrige}

@@ -1,28 +1,13 @@
 % META: {"id":"1SPE-EXPO-CO-043","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-043","status":"generated"}
 % BEGIN-VERIFY
 % from sympy import *
-% x = symbols('x', real=True)
-% X = symbols('X')
-% eq_X = X**2 - 5*X + 6
-% assert set(solve(eq_X, X)) == {2, 3}
-% assert set(solve(exp(2*x) - 5*exp(x) + 6, x)) == {log(2), log(3)}
+% assert 500*exp(Rational(1, 5)*5) == 500*E
+% assert round(float(500*E)) == 1359
 % END-VERIFY
 \begin{corrige}{1SPE-EXPO-EX-043}
-On pose $X = \mathrm{e}^x$. Comme $\mathrm{e}^{2x} = (\mathrm{e}^x)^2 = X^2$, l'équation devient :
-\[X^2 - 5X + 6 = 0.\]
-
-On calcule le discriminant : $\Delta = 25 - 24 = 1 > 0$.
-
-Les solutions sont :
-\[X_1 = \dfrac{5 - 1}{2} = 2 \quad \text{et} \quad X_2 = \dfrac{5 + 1}{2} = 3.\]
-
-On revient à la variable $x$ en résolvant $\mathrm{e}^x = X$ pour chaque valeur :
-\begin{itemize}
-\item Si $\mathrm{e}^x = 2$, alors $x = \ln 2$.
-\item Si $\mathrm{e}^x = 3$, alors $x = \ln 3$.
-\end{itemize}
-
-Les deux valeurs $X_1 = 2$ et $X_2 = 3$ sont positives, donc les deux solutions sont valides.
-
-L'ensemble des solutions est $\boxed{S = \{\ln 2\,;\,\ln 3\}}$.
+\begin{enumerate}
+\item $N(0)=500\,\mathrm{e}^{0}=500$. La population initiale est de $500$ bactéries.
+\item $N(5)=500\,\mathrm{e}^{1}=500\mathrm{e}\approx 1\,359$ bactéries.
+\item Le coefficient $0{,}2$ est positif. La fonction $t\mapsto \mathrm{e}^{0{,}2t}$ est croissante : le modèle décrit donc une croissance.
+\end{enumerate}
 \end{corrige}
