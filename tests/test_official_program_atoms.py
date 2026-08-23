@@ -60,7 +60,8 @@ def test_internal_findings_are_not_rehabilitated_as_official_atoms() -> None:
     assert not [
         atom
         for atom in atoms
-        if atom["source_coverage_status"] in {"WRONG_YEAR", "UNSUPPORTED_CLAIM"}
+        if atom["source_coverage_status"]
+        in {"AUDIT_METADATA_ONLY", "WRONG_YEAR", "UNSUPPORTED_CLAIM"}
     ]
     assert payload["summary"]["excluded_internal_findings"] == 11
 
