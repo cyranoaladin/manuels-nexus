@@ -137,6 +137,17 @@ def test_exponentielle_contract_math_is_delimited_for_latex_assembly() -> None:
     assert "t → $e^{at}$" in contract["capacites"][3]["libelle_eleve"]
 
 
+def test_repetitions_bernoulli_uses_the_canonical_method_environment() -> None:
+    source = (
+        CHAPTERS
+        / "1SPE-VARIABLES-ALEATOIRES/cours/12_C3_repetitions_bernoulli.tex"
+    ).read_text(encoding="utf-8")
+
+    assert "\\methode{" not in source
+    assert "\\begin{methodeV}" in source
+    assert "\\end{methodeV}" in source
+
+
 def test_exponentielle_qcm_exclut_limites_et_derivation_generale() -> None:
     qcm = _json(CHAPTERS / "1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json")
     statements = " ".join(question["enonce"] for question in qcm["questions"])
