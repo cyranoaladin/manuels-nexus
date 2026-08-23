@@ -14,6 +14,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import subprocess
 import tempfile
 from typing import Any, Mapping
 
@@ -64,6 +65,20 @@ def _source_sha(path: Path) -> str:
     if not path.is_file():
         raise ValueError(f"source résiduelle absente: {path}")
     return f"sha256:{_sha256_bytes(path.read_bytes())}"
+
+
+def _git_head(root: Path) -> str:
+    result = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=root,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    head = result.stdout.strip()
+    if len(head) != 40 or any(character not in "0123456789abcdef" for character in head):
+        raise ValueError(f"SHA Git forensique invalide: {head!r}")
+    return head
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -295,6 +310,7 @@ def build_reports(
     input_digest = "sha256:" + _sha256_bytes(
         initial_bytes + b"\0" + initial_md_path.read_bytes() + b"\0" + inventory_bytes
     )
+    forensic_source_sha = _git_head(root)
     evidence = {
         "frozen_initial_json": str(INITIAL_JSON_REL),
         "frozen_initial_json_sha256": "sha256:" + FROZEN_SHA256[INITIAL_JSON_REL],
@@ -314,6 +330,7 @@ def build_reports(
         "baseline_modified": False,
         "policy_modified": False,
         "release_acceptance": False,
+        "forensic_source_sha": forensic_source_sha,
         "counts": dict(COUNTS),
         "evidence": evidence,
         "entries": entries,
@@ -324,6 +341,7 @@ def build_reports(
         "baseline_modified": False,
         "policy_modified": False,
         "release_acceptance": False,
+        "forensic_source_sha": forensic_source_sha,
         "counts": dict(COUNTS),
         "equation": (
             "RESIDUAL_TRUE_NEW = TRUE_NEW_INITIAL - ACTIVE_FINGERPRINTS_CLOSED "
@@ -366,6 +384,8 @@ def _forensics_markdown(payload: Mapping[str, Any]) -> str:
         "Projection déterministe de la dette de revue active. Cette preuve ne modifie "
         "ni baseline, ni policy, ni oracle et n'accorde aucune acceptation release.",
         "",
+        f"`FORENSIC_SOURCE_SHA = {payload['forensic_source_sha']}`",
+        "",
         "## Counts",
         "",
     ]
@@ -404,6 +424,8 @@ def _forensics_markdown(payload: Mapping[str, Any]) -> str:
 def _algebra_markdown(payload: Mapping[str, Any]) -> str:
     lines = [
         "# Current anomaly set algebra — residual",
+        "",
+        f"`FORENSIC_SOURCE_SHA = {payload['forensic_source_sha']}`",
         "",
         f"`{payload['equation']}`",
         "",

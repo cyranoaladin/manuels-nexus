@@ -5,6 +5,7 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
+import subprocess
 
 import pytest
 
@@ -62,6 +63,15 @@ def test_builds_exact_residual_without_mutating_frozen_inputs(tmp_path: Path) ->
 
     residual = reports["residual_forensics"]
     algebra = reports["residual_algebra"]
+    forensic_source_sha = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    assert residual["forensic_source_sha"] == forensic_source_sha
+    assert algebra["forensic_source_sha"] == forensic_source_sha
     expected_counts = {
         "TRUE_NEW_INITIAL": 18,
         "ACTIVE_FINGERPRINTS_CLOSED": 0,
