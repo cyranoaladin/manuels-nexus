@@ -98,6 +98,61 @@ def test_suites_q11_distracteurs_correspondent_aux_erreurs_annoncees() -> None:
     assert "0 + 1 + 2 + 3 + 4 = 10" in question["diagnostics"]["D"]["erreur"]
 
 
+def test_continuite_q12_exclut_explicitement_un_troisieme_point_fixe() -> None:
+    question = _question("TSPE-CONTINUITE", "Q12")
+
+    assert "exactement deux points fixes" in question["enonce"]
+    assert question["correcte"] == "C"
+
+
+def test_limites_fonctions_q7_diagnostic_de_x_zero_est_exact() -> None:
+    question = _question("TSPE-LIMITES-FONCTIONS", "Q7")
+    diagnostic = question["diagnostics"]["D"]["erreur"]
+
+    assert "n'annule pas le denominateur" in diagnostic
+    assert "annule le numerateur" not in diagnostic
+
+
+def test_limites_fonctions_q13_q14_ont_un_critere_de_reponse_unique() -> None:
+    q13 = _question("TSPE-LIMITES-FONCTIONS", "Q13")
+    q14 = _question("TSPE-LIMITES-FONCTIONS", "Q14")
+
+    assert "utilise directement la limite usuelle" in q13["enonce"]
+    assert q13["correcte"] == "B"
+    assert "egalement valide" in q13["diagnostics"]["C"]["erreur"]
+    assert "methode au programme" in q14["enonce"]
+    assert q14["correcte"] == "B"
+
+
+def test_suites_limites_q4_presente_une_seule_heredite_complete() -> None:
+    question = _question("TSPE-SUITES-LIMITES", "Q4")
+
+    assert question["correcte"] == "A"
+    assert "2^{n+1} = 2\\times 2^n > 2n" in question["options"]["A"]
+    assert "n \\geqslant 1" in question["options"]["A"]
+    assert set(question["diagnostics"]) == {"B", "C", "D"}
+
+
+def test_suites_limites_q9_enonce_les_hypotheses_et_une_seule_conclusion() -> None:
+    question = _question("TSPE-SUITES-LIMITES", "Q9")
+
+    assert "a \\geqslant -1" in question["enonce"]
+    assert "n \\in \\mathbb{N}" in question["enonce"]
+    assert question["correcte"] == "B"
+    assert question["options"]["D"] == "$(1+a)^n \\geqslant 1+n^2a$"
+
+
+def test_convexite_q11_definit_inflexion_par_changement_de_convexite() -> None:
+    question = _question("TSPE-DERIVATION-CONVEXITE", "Q11")
+
+    assert question["correcte"] == "B"
+    assert "convexite change" in question["options"]["B"]
+    assert all(
+        diagnostic["erreur"] != "Consulter le cours correspondant"
+        for diagnostic in question["diagnostics"].values()
+    )
+
+
 @pytest.mark.parametrize("chapitre", CHAPITRES)
 def test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi(chapitre: str) -> None:
     """Diagnostics/renvois de distracteurs sous contrat de dette declare.

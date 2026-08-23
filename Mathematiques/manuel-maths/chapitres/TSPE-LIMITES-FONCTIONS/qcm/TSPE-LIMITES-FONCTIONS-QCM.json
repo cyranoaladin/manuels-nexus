@@ -179,7 +179,7 @@
           "renvoi": "C2, definition AH vs AV"
         },
         "D": {
-          "erreur": "x = 0 annule le numerateur, pas le denominateur : c'est un zero de la fonction, pas une asymptote verticale.",
+          "erreur": "x = 0 n'annule pas le denominateur : la fonction y est definie ($f(0)=-1/3$), donc il n'y a pas d'asymptote verticale en 0.",
           "renvoi": "M2, etape 1"
         }
       }
@@ -317,7 +317,7 @@
     {
       "id": "Q13",
       "capacite": "C3",
-      "enonce": "Pour $\\lim_{+\\infty}(\\mathrm{e}^x - x^2)$ :",
+      "enonce": "Pour $\\lim_{+\\infty}(\\mathrm{e}^x - x^2)$, quelle reecriture utilise directement la limite usuelle $x^2/\\mathrm{e}^x \\to 0$ ?",
       "options": {
         "A": "$+\\infty - \\infty = 0$",
         "B": "Factoriser par $\\mathrm{e}^x$, utiliser $x^2/\\mathrm{e}^x \\to 0$",
@@ -335,7 +335,7 @@
           "renvoi": "M3, pas a pas"
         },
         "C": {
-          "erreur": "Factoriser par x^2 laisse le quotient exp(x)/x^2 en facteur, dont la limite reste a determiner : on n'a pas leve l'indetermination, on l'a deplacee.",
+          "erreur": "Factoriser par $x^2$ est egalement valide avec la croissance comparee $\\mathrm{e}^x/x^2 \\to +\\infty$, mais ce n'est pas la reecriture demandee, qui utilise directement $x^2/\\mathrm{e}^x \\to 0$.",
           "renvoi": "M3, methode de factorisation"
         }
       }
@@ -343,7 +343,7 @@
     {
       "id": "Q14",
       "capacite": "C3",
-      "enonce": "$\\mathrm{e}^x \\geq 1 + x$ pour $x \\geq 0$ s'obtient par :",
+      "enonce": "Quelle methode au programme permet de demontrer $\\mathrm{e}^x \\geq 1 + x$ pour $x \\geq 0$ ?",
       "options": {
         "A": "Recurrence",
         "B": "Etude de $g(x) = \\mathrm{e}^x - 1 - x$",

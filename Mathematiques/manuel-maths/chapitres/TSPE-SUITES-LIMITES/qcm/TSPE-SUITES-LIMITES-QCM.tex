@@ -37,12 +37,12 @@
     \item Remplacer n par n+1
   \end{enumerate}
 
-\item \textbf{[Q4]} Heredite pour $2^n > n$, $n \geq 1$ :
+\item \textbf{[Q4]} Dans l'heredite de la propriete $2^n > n$ pour $n \geqslant 1$, quelle redaction est complete ?
   \begin{enumerate}[label=\Alph*.]
-    \item $2^{n+1} > n+1$ via $2^n > n$
-    \item Montrer $2^n > n$ directement
-    \item $2^{n+1} = 2 \times 2^n > 2n \geq n+1$
-    \item A et C correctes
+    \item $2^{n+1} = 2\times 2^n > 2n \geqslant n+1$, car $n \geqslant 1$
+    \item $2^{n+1} > n+1$ directement par l'hypothese de recurrence
+    \item $2^{n+1} = 2\times 2^n > 2n$, donc $2^{n+1}>n+1$ sans autre justification
+    \item Montrer de nouveau $2^n>n$ sans supposer l'hypothese de recurrence
   \end{enumerate}
 
 \item[] \textbf{Capacite C3}
@@ -83,12 +83,12 @@
 
 \item[] \textbf{Capacite C5}
 
-\item \textbf{[Q9]} Inegalite de Bernoulli :
+\item \textbf{[Q9]} Pour $a \geqslant -1$ et $n \in \mathbb{N}$, l'inegalite de Bernoulli affirme :
   \begin{enumerate}[label=\Alph*.]
     \item $(1+a)^n \leq 1+na$
     \item $(1+a)^n \geq 1+na$
     \item $(1+a)^n = 1+na$
-    \item $(1+a)^n \geq na$
+    \item $(1+a)^n \geqslant 1+n^2a$
   \end{enumerate}
 
 \item \textbf{[Q10]} $\lim 0{,}95^n$ ?
@@ -158,7 +158,7 @@ Question & Capacite & Reponse exacte \\
 Q1 & C1 & \textbf{B} \\
 Q2 & C1 & \textbf{D} \\
 Q3 & C2 & \textbf{B} \\
-Q4 & C2 & \textbf{D} \\
+Q4 & C2 & \textbf{A} \\
 Q5 & C3 & \textbf{B} \\
 Q6 & C3 & \textbf{B} \\
 Q7 & C4 & \textbf{B} \\
@@ -197,9 +197,9 @@ Q15 & C7 & \textbf{C} \\
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{A} — L'implication est annoncee sans etre justifiee : passer de 2\textasciicircum{}n > n a 2\textasciicircum{}(n+1) > n+1 demande le calcul intermediaire, pas seulement l'hypothese de recurrence. \emph{Renvoi : M2, redaction de l'heredite.}
-    \item \textbf{B} — L'heredite suppose P(n), elle ne le demontre pas. \emph{Renvoi : M2, piege 2.}
-    \item \textbf{C} — La chaine est juste mais incomplete : elle etablit 2\textasciicircum{}(n+1) > 2n, puis affirme 2n >= n+1 sans preciser que cela suppose n >= 1, hypothese pourtant disponible. \emph{Renvoi : M2, redaction de l'heredite.}
+    \item \textbf{B} — L'hypothese $2^n>n$ ne donne pas directement $2^{n+1}>n+1$ : il faut multiplier par 2 puis comparer $2n$ et $n+1$. \emph{Renvoi : M2, redaction de l'heredite.}
+    \item \textbf{C} — La chaine omet la justification finale $2n \geqslant n+1$, qui repose sur l'hypothese $n \geqslant 1$. \emph{Renvoi : M2, redaction de l'heredite.}
+    \item \textbf{D} — L'heredite suppose la propriete au rang $n$ et doit demontrer celle au rang $n+1$ ; redemontrer le rang $n$ ne fait pas avancer la preuve. \emph{Renvoi : M2, piege 2.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
@@ -229,7 +229,7 @@ Q15 & C7 & \textbf{C} \\
   \begin{itemize}
     \item \textbf{A} — Inversion du sens de l'inegalite. \emph{Renvoi : C5, theoreme.}
     \item \textbf{C} — C'est une inegalite, pas une egalite (sauf si $a=0$ ou $n \leq 1$). \emph{Renvoi : C5, theoreme.}
-    \item \textbf{D} — Membre de droite errone : l'inegalite de Bernoulli majore par 1 + na, et non par na, ce qui la rendrait fausse pour n = 0. \emph{Renvoi : cours C5.}
+    \item \textbf{D} — Le coefficient de $a$ est $n$, pas $n^2$ ; par exemple $a=1$ et $n=2$ donnent $4 \not\geqslant 5$. \emph{Renvoi : cours C5.}
   \end{itemize}
   \item \textbf{Q10}
   \begin{itemize}

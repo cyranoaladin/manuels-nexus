@@ -238,20 +238,23 @@
       "enonce": "Un point d'inflexion est un point ou :",
       "options": {
         "A": "$f'(x) = 0$",
-        "B": "$f''(x) = 0$ et $f''$ change de signe",
+        "B": "la convexite change au passage de ce point",
         "C": "$f''(x) = 0$ seulement",
         "D": "$f(x) = 0$"
       },
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "$f'(x)=0$ caracterise un point critique lorsque $f$ est derivable, pas un changement de convexite.",
+          "renvoi": "cours C4, definition"
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "$f''(x)=0$ ne suffit pas : par exemple $f(x)=x^4$ verifie $f''(0)=0$ sans changer de convexite en 0.",
+          "renvoi": "cours C4, point d'inflexion"
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "$f(x)=0$ indique une intersection avec l'axe des abscisses, sans information sur la convexite.",
+          "renvoi": "cours C4, definition"
         }
       }
     },

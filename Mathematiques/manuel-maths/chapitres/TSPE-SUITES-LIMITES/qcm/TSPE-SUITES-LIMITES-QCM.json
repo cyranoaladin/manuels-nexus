@@ -83,26 +83,26 @@
     {
       "id": "Q4",
       "capacite": "C2",
-      "enonce": "Heredite pour $2^n > n$, $n \\geq 1$ :",
+      "enonce": "Dans l'heredite de la propriete $2^n > n$ pour $n \\geqslant 1$, quelle redaction est complete ?",
       "options": {
-        "A": "$2^{n+1} > n+1$ via $2^n > n$",
-        "B": "Montrer $2^n > n$ directement",
-        "C": "$2^{n+1} = 2 \\times 2^n > 2n \\geq n+1$",
-        "D": "A et C correctes"
+        "A": "$2^{n+1} = 2\\times 2^n > 2n \\geqslant n+1$, car $n \\geqslant 1$",
+        "B": "$2^{n+1} > n+1$ directement par l'hypothese de recurrence",
+        "C": "$2^{n+1} = 2\\times 2^n > 2n$, donc $2^{n+1}>n+1$ sans autre justification",
+        "D": "Montrer de nouveau $2^n>n$ sans supposer l'hypothese de recurrence"
       },
-      "correcte": "D",
+      "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "L'heredite suppose P(n), elle ne le demontre pas.",
-          "renvoi": "M2, piege 2"
-        },
-        "A": {
-          "erreur": "L'implication est annoncee sans etre justifiee : passer de 2^n > n a 2^(n+1) > n+1 demande le calcul intermediaire, pas seulement l'hypothese de recurrence.",
+          "erreur": "L'hypothese $2^n>n$ ne donne pas directement $2^{n+1}>n+1$ : il faut multiplier par 2 puis comparer $2n$ et $n+1$.",
           "renvoi": "M2, redaction de l'heredite"
         },
         "C": {
-          "erreur": "La chaine est juste mais incomplete : elle etablit 2^(n+1) > 2n, puis affirme 2n >= n+1 sans preciser que cela suppose n >= 1, hypothese pourtant disponible.",
+          "erreur": "La chaine omet la justification finale $2n \\geqslant n+1$, qui repose sur l'hypothese $n \\geqslant 1$.",
           "renvoi": "M2, redaction de l'heredite"
+        },
+        "D": {
+          "erreur": "L'heredite suppose la propriete au rang $n$ et doit demontrer celle au rang $n+1$ ; redemontrer le rang $n$ ne fait pas avancer la preuve.",
+          "renvoi": "M2, piege 2"
         }
       }
     },
@@ -213,12 +213,12 @@
     {
       "id": "Q9",
       "capacite": "C5",
-      "enonce": "Inegalite de Bernoulli :",
+      "enonce": "Pour $a \\geqslant -1$ et $n \\in \\mathbb{N}$, l'inegalite de Bernoulli affirme :",
       "options": {
         "A": "$(1+a)^n \\leq 1+na$",
         "B": "$(1+a)^n \\geq 1+na$",
         "C": "$(1+a)^n = 1+na$",
-        "D": "$(1+a)^n \\geq na$"
+        "D": "$(1+a)^n \\geqslant 1+n^2a$"
       },
       "correcte": "B",
       "diagnostics": {
@@ -231,7 +231,7 @@
           "renvoi": "C5, theoreme"
         },
         "D": {
-          "erreur": "Membre de droite errone : l'inegalite de Bernoulli majore par 1 + na, et non par na, ce qui la rendrait fausse pour n = 0.",
+          "erreur": "Le coefficient de $a$ est $n$, pas $n^2$ ; par exemple $a=1$ et $n=2$ donnent $4 \\not\\geqslant 5$.",
           "renvoi": "cours C5"
         }
       }
