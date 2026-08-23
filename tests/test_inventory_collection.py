@@ -2250,6 +2250,38 @@ def test_materialization_revalidations_use_only_the_owned_lock_identity(
     assert not (repository / inventory_module.GENERIC_LOCK_FILE).exists()
 
 
+def test_materialization_preserves_explicit_optional_extension_decisions(
+    inventory_module,
+) -> None:
+    disposition_path = ROOT / "audit/ANOMALY_DISPOSITIONS.yaml"
+    source = disposition_path.read_text(encoding="utf-8")
+    payload = yaml.safe_load(source)
+    dispositions = payload["dispositions"]
+    optional_extension_fingerprints = {
+        fingerprint
+        for fingerprint, disposition in dispositions.items()
+        if disposition.get("review_condition")
+        == "OPTIONAL_EXTENSION_REVIEW_PENDING"
+    }
+    policy = yaml.safe_load(
+        (ROOT / "audit/BASELINE_QUALIFICATION_POLICY.yaml").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    assert optional_extension_fingerprints == {
+        "70dfcb9ea3d7e1ec",
+        "baf25a2d0a53d6dc",
+        "dc0025fc58dc2e34",
+    }
+    assert (
+        policy["approved_set"]["fingerprint_count"]
+        - len(optional_extension_fingerprints)
+        == 186
+    )
+    assert inventory_module._render_anomaly_dispositions(payload) == source
+
+
 def _synthetic_materialization_plan(
     *,
     marker: str = "stable",

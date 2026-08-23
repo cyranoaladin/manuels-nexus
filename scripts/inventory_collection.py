@@ -11948,10 +11948,8 @@ def _baseline_materialization_plan(
         ],
     }
     if not plan["unqualified"]:
-        rendered[Path(ANOMALY_DISPOSITIONS_FILE)] = yaml.safe_dump(
-            dispositions,
-            allow_unicode=True,
-            sort_keys=True,
+        rendered[Path(ANOMALY_DISPOSITIONS_FILE)] = (
+            _render_anomaly_dispositions(dispositions)
         )
     plan["rendered"] = rendered
     plan["policy_file_digest"] = _sha256_file(
@@ -11964,6 +11962,35 @@ def _baseline_materialization_plan(
         else None
     )
     return plan
+
+
+class _AnomalyDispositionsDumper(yaml.SafeDumper):
+    """Keep explicit human decision identities stable in the YAML ledger."""
+
+
+def _represent_anomaly_disposition_string(
+    dumper: yaml.SafeDumper,
+    value: str,
+) -> yaml.nodes.ScalarNode:
+    node = yaml.SafeDumper.represent_str(dumper, value)
+    if value.startswith("human-decision:"):
+        node.style = "'"
+    return node
+
+
+_AnomalyDispositionsDumper.add_representer(
+    str,
+    _represent_anomaly_disposition_string,
+)
+
+
+def _render_anomaly_dispositions(payload: Mapping[str, Any]) -> str:
+    return yaml.dump(
+        payload,
+        Dumper=_AnomalyDispositionsDumper,
+        allow_unicode=True,
+        sort_keys=True,
+    )
 
 
 def _materialization_plan_identity(plan: Mapping[str, Any]) -> dict[str, Any]:
