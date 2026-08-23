@@ -1,14 +1,13 @@
-% META: {"id": "1SPE-VARALEA-CO-030", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-030", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-VARALEA-CO-030", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-030", "capacites_codes": ["C1", "C2", "C3"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
-% from sympy import binomial, Rational
-% p = Rational(1,2); n = 3
-% E = sum(k*binomial(3,k)*p**3 for k in range(4))
+% from sympy import Rational
+% probabilities = [Rational(1,8), Rational(3,8), Rational(3,8), Rational(1,8)]
+% E = sum(k*probabilities[k] for k in range(4))
 % assert E == Rational(3,2)
-% assert E == n*p
 % END-VERIFY
 \begin{corrige}{1SPE-VARALEA-EX-030}
 
-\textbf{1.}
+\textbf{1.} L'arbre comporte huit chemins équiprobables. Un chemin donne zéro Pile, trois chemins exactement un Pile, trois chemins exactement deux Pile et un chemin trois Pile. Donc :
 \[
 \begin{array}{|c|c|c|c|c|}
 \hline
@@ -24,7 +23,5 @@ P(X=k) & \frac{1}{8} & \frac{3}{8} & \frac{3}{8} & \frac{1}{8} \\
 
 \medskip
 \textbf{3.} $E(X) = 0 \times \frac{1}{8} + 1 \times \frac{3}{8} + 2 \times \frac{3}{8} + 3 \times \frac{1}{8} = \frac{0+3+6+3}{8} = \frac{12}{8} = \frac{3}{2}$.
-
-$np = 3 \times \frac{1}{2} = \frac{3}{2}$. \checkmark
 
 \end{corrige}

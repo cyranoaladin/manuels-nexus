@@ -1,0 +1,35 @@
+% META: {"id": "1SPE-VARALEA-CR-012", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "cours", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "needs_review"}
+
+\section{Répéter une épreuve de Bernoulli avec un arbre}
+
+Une \textbf{épreuve de Bernoulli} a deux issues : le succès $S$, de probabilité
+$p$, et l'échec $\overline S$, de probabilité $1-p$. Lorsqu'on répète de deux
+à quatre fois la même épreuve, de façon indépendante, l'arbre porte les mêmes
+probabilités à chaque niveau.
+
+\methode{
+Pour calculer la probabilité d'obtenir exactement $k$ succès :
+\begin{enumerate}
+  \item construire l'arbre jusqu'au nombre d'épreuves demandé ;
+  \item repérer tous les chemins qui contiennent exactement $k$ succès ;
+  \item multiplier les probabilités le long de chaque chemin ;
+  \item additionner les probabilités des chemins retenus.
+\end{enumerate}
+}
+
+\exemple{
+On lance trois fois une pièce telle que $P(S)=\frac13$. Pour obtenir exactement
+deux succès, les chemins sont $SS\overline S$, $S\overline SS$ et
+$\overline SSS$. Chacun a pour probabilité
+$\frac13\times\frac13\times\frac23=\frac{2}{27}$. Ainsi,
+\[
+P(\text{exactement deux succès})=3\times\frac{2}{27}=\frac29.
+\]
+Le facteur $3$ vient ici des trois chemins lus sur l'arbre ; aucune formule
+générale n'est nécessaire.
+}
+
+\erreurFrequente{
+Sur un chemin, on \textbf{multiplie} les probabilités. Entre plusieurs chemins
+qui réalisent le même événement, on \textbf{additionne} leurs probabilités.
+}

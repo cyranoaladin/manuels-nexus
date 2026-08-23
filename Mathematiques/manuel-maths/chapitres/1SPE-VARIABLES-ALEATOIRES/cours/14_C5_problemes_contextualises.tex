@@ -31,15 +31,13 @@ Le jeu est équitable.
 % ============================================================
 
 \propriete{
-Dans un problème de \textbf{contrôle qualité}, si l'on prélève $n$ pièces indépendamment dans une production dont le taux de défaut est $p$, le nombre $X$ de pièces défectueuses suit une loi binomiale $\mathcal{B}(n, p)$ (à condition que la production soit assez grande pour considérer les tirages comme indépendants).
+Dans un problème de \textbf{contrôle qualité}, on peut associer à chaque pièce une variable qui vaut $1$ si elle est défectueuse et $0$ sinon. Pour un prélèvement de deux à quatre pièces indépendantes, un arbre pondéré permet de déterminer la loi du nombre $X$ de pièces défectueuses.
 }
 
 \exemple{
-Une machine produit $5\,\%$ de pièces défectueuses. On prélève $20$ pièces au hasard.
+Une machine produit $5\,\%$ de pièces défectueuses. On prélève deux pièces de façon indépendante. L'arbre comporte à chaque niveau une branche « défectueuse » de probabilité $0{,}05$ et une branche « conforme » de probabilité $0{,}95$.
 
-$X \sim \mathcal{B}(20, 0{,}05)$. On a $E(X) = 20 \times 0{,}05 = 1$ et $\sigma(X) = \sqrt{20 \times 0{,}05 \times 0{,}95} \approx 0{,}97$.
-
-En moyenne, on s'attend à $1$ pièce défectueuse dans l'échantillon.
+Ainsi, $P(X=0)=0{,}95^2=0{,}9025$, $P(X=1)=2\times0{,}05\times0{,}95=0{,}095$ et $P(X=2)=0{,}05^2=0{,}0025$. Ces trois probabilités forment la loi de $X$.
 }
 
 % ============================================================

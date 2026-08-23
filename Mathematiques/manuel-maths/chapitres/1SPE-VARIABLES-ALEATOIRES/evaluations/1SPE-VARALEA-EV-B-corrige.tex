@@ -1,6 +1,6 @@
 % META: {"id": "1SPE-VARALEA-EV-B-corrige", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-VARALEA-EV-B", "version": "B", "capacites_codes": ["C1","C2","C3","C4","C5"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
-% from sympy import Rational, binomial, sqrt
+% from sympy import Rational, sqrt
 % # Ex 1
 % E = 2*Rational(1,2)+5*Rational(3,10)+8*Rational(1,5)
 % assert E == Rational(41,10)
@@ -10,10 +10,13 @@
 % E_Y = 2*E - 3; assert E_Y == Rational(82-30,10); assert E_Y == Rational(52,10)
 % V_Y = 4*V; assert V_Y == Rational(549,25)
 % # Ex 2
-% P0 = Rational(3,4)**5; assert P0 == Rational(243,1024)
-% P3 = binomial(5,3)*Rational(1,4)**3*Rational(3,4)**2; assert P3 == Rational(45,512)
-% E_X = Rational(5,4); V_X = Rational(15,16)
-% Pge1 = 1 - P0; assert Pge1 == Rational(781,1024)
+% probabilities = [Rational(81,256), Rational(108,256), Rational(54,256), Rational(12,256), Rational(1,256)]
+% P0 = probabilities[0]; P1 = probabilities[1]
+% assert P0 == Rational(81,256) and P1 == Rational(27,64)
+% E_X = sum(k*probabilities[k] for k in range(5)); assert E_X == 1
+% V_X = sum(k*k*probabilities[k] for k in range(5))-E_X**2
+% assert V_X == Rational(3,4)
+% Pge1 = 1-P0; assert Pge1 == Rational(175,256)
 % # Ex 3
 % E_B = 80 - 2000*Rational(1,50); assert E_B == 40
 % B_500 = 500*40; assert B_500 == 20000
@@ -61,24 +64,29 @@ $E(Y) = 2E(X) - 3 = 2 \times 4{,}1 - 3 = 5{,}2$.
 $V(Y) = 4V(X) = 4 \times 5{,}49 = 21{,}96$.
 
 %===============================================================
-\section*{Exercice 2 \hfill (7 points) — C3, C4}
+\section*{Exercice 2 \hfill (7 points) — C2, C3}
 %===============================================================
 
-\textbf{Question 1.} Chaque lancer est une épreuve de Bernoulli ($p = \frac{1}{4}$), les $5$ lancers sont indépendants : $X \sim \mathcal{B}(5, \frac{1}{4})$.
+\textbf{Question 1.} L'arbre comporte quatre niveaux. À chaque nœud, la branche « réussi » porte $\frac14$ et la branche « manqué » $\frac34$.
 
 \medskip
-\textbf{Question 2.} $P(X=0) = \left(\frac{3}{4}\right)^5 = \frac{243}{1024} \approx 0{,}237$.
+\textbf{Question 2.} $P(X=0)=\left(\frac34\right)^4=\frac{81}{256}$.
 
 \medskip
-\textbf{Question 3.} $P(X=3) = \binom{5}{3}\left(\frac{1}{4}\right)^3\left(\frac{3}{4}\right)^2 = 10 \times \frac{1}{64} \times \frac{9}{16} = \frac{90}{1024} = \frac{45}{512} \approx 0{,}088$.
+\textbf{Question 3.} Chacun des quatre chemins comportant exactement une réussite a pour probabilité $\frac14\left(\frac34\right)^3=\frac{27}{256}$. Donc $P(X=1)=4\times\frac{27}{256}=\frac{27}{64}$.
 
 \medskip
-\textbf{Question 4.} $E(X) = 5 \times \frac{1}{4} = \frac{5}{4} = 1{,}25$.
-
-$V(X) = 5 \times \frac{1}{4} \times \frac{3}{4} = \frac{15}{16} \approx 0{,}94$. $\sigma(X) = \sqrt{\frac{15}{16}} \approx 0{,}97$.
+\textbf{Question 4.}
+\[
+\begin{array}{|c|c|c|c|c|c|}\hline
+x&0&1&2&3&4\\ \hline
+P(X=x)&\frac{81}{256}&\frac{108}{256}&\frac{54}{256}&\frac{12}{256}&\frac1{256}\\ \hline
+\end{array}
+\]
+On obtient $E(X)=1$, $E(X^2)=\frac74$, donc $V(X)=\frac34$ et $\sigma(X)=\frac{\sqrt3}{2}$.
 
 \medskip
-\textbf{Question 5.} $P(X \geq 1) = 1 - P(X=0) = 1 - \frac{243}{1024} = \frac{781}{1024} \approx 0{,}763$.
+\textbf{Question 5.} $P(X\geq1)=1-P(X=0)=1-\frac{81}{256}=\frac{175}{256}$.
 
 %===============================================================
 \section*{Exercice 3 \hfill (5 points) — C5}

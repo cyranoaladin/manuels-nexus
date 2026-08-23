@@ -2,14 +2,10 @@
 % BEGIN-VERIFY
 % from sympy import Rational
 % # Tirage sans remise 2 boules parmi 3R+2B, X = nb rouges
-% # P(X=0) = C(2,2)/C(5,2) = 1/10
-% # P(X=1) = C(3,1)*C(2,1)/C(5,2) = 6/10
-% # P(X=2) = C(3,2)/C(5,2) = 3/10
-% from sympy import binomial
-% assert binomial(5,2) == 10
-% p0 = Rational(binomial(2,2), binomial(5,2))
-% p1 = Rational(binomial(3,1)*binomial(2,1), binomial(5,2))
-% p2 = Rational(binomial(3,2), binomial(5,2))
+% # Calcul par l'arbre ordonne des deux tirages sans remise
+% p0 = Rational(2,5)*Rational(1,4)
+% p1 = Rational(3,5)*Rational(2,4) + Rational(2,5)*Rational(3,4)
+% p2 = Rational(3,5)*Rational(2,4)
 % assert p0 == Rational(1,10)
 % assert p1 == Rational(6,10)
 % assert p2 == Rational(3,10)
@@ -20,7 +16,7 @@ Une urne contient $3$ boules rouges et $2$ boules bleues. On tire $2$ boules au 
 
 \begin{enumerate}
   \item Quelles sont les valeurs possibles de $X$ ?
-  \item Calculer $P(X=0)$, $P(X=1)$ et $P(X=2)$ à l'aide des coefficients binomiaux.
+  \item Construire l'arbre des deux tirages, puis calculer $P(X=0)$, $P(X=1)$ et $P(X=2)$.
   \item Dresser le tableau de loi de $X$ et vérifier.
 \end{enumerate}
 \end{exercice}

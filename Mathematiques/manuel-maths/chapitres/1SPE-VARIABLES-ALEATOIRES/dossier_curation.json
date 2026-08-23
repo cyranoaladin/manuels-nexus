@@ -15,18 +15,32 @@
     },
     "C3": {
       "chunks_retenus": [],
-      "brief": "Loi de Bernoulli B(p) : X vaut 1 (succes) avec probabilite p, 0 (echec) avec probabilite 1-p. Schema de Bernoulli : repetition de n epreuves de Bernoulli independantes. Loi binomiale B(n,p) : X = nombre de succes parmi n epreuves. P(X=k) = C(n,k) * p^k * (1-p)^(n-k). Coefficients binomiaux : C(n,k) = n! / (k!(n-k)!), triangle de Pascal, formule de symetrie C(n,k) = C(n,n-k). Erreurs types : (1) oublier la condition d'independance ; (2) erreur dans le calcul de C(n,k) ; (3) confondre p^k et p^(n-k).",
+      "brief": "Pour n <= 4, repetition d'epreuves de Bernoulli independantes et identiques. Representer l'experience par un arbre pondere, reperer les chemins comportant k succes et additionner leurs probabilites. Erreurs types : (1) oublier la condition d'independance ; (2) oublier un chemin ; (3) additionner les probabilites le long d'un chemin au lieu de les multiplier.",
       "angles_morts": []
     },
     "C4": {
       "chunks_retenus": [],
-      "brief": "Pour X ~ B(n,p) : E(X) = np, V(X) = np(1-p), sigma(X) = sqrt(np(1-p)). Demonstration exigible de E(X) = np par linearite de l'esperance ou par calcul direct avec somme des k*C(n,k)*p^k*(1-p)^(n-k). Utilisation pour determiner des parametres n et p a partir de E(X) et V(X). Erreurs types : (1) confondre np et n/p ; (2) ecrire V(X) = npq avec q=p au lieu de q=1-p ; (3) ne pas justifier les etapes de la demonstration.",
+      "brief": "Linearite de l'esperance : E(aX+b)=aE(X)+b. Pour une transformation affine Y=aX+b : V(Y)=a^2V(X) et sigma(Y)=|a|sigma(X). Erreurs types : (1) ecrire V(aX+b)=aV(X)+b ; (2) oublier le carre sur a ; (3) oublier la valeur absolue pour l'ecart type.",
       "angles_morts": []
     },
     "C5": {
       "chunks_retenus": [],
       "brief": "Modelisation de situations concretes : jeux de hasard (gain algebrique), controle qualite (nombre de defauts), assurances (indemnisation), decisions (seuil de rentabilite). Methode : (1) definir la variable aleatoire X adaptee, (2) determiner sa loi, (3) calculer E(X) pour conclure. Jeu equitable : E(X) = 0. Erreurs types : (1) oublier la mise initiale dans le gain algebrique ; (2) ne pas definir clairement la variable aleatoire ; (3) confondre gain et probabilite.",
       "angles_morts": []
+    },
+    "X1": {
+      "chunks_retenus": [],
+      "brief": "Formalisation par la loi binomiale nommee, coefficients binomiaux et formule generale.",
+      "angles_morts": [],
+      "programme_alignment": "OPTIONAL_EXTENSION",
+      "extension_label": "Approfondissement — Vers la Terminale"
+    },
+    "X2": {
+      "chunks_retenus": [],
+      "brief": "Formules des moments d'une loi binomiale et demonstrations associees.",
+      "angles_morts": [],
+      "programme_alignment": "OPTIONAL_EXTENSION",
+      "extension_label": "Approfondissement — Vers la Terminale"
     }
   }
 }

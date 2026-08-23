@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-VARALEA-ME-006", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M6"], "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M6}{Étudier un nombre de succès avec un arbre}
+  \textbf{Quand l'utiliser ?}
+
+  Pour la répétition indépendante et identique de deux à quatre épreuves de
+  Bernoulli.
+
+  \textbf{Procédure}
+  \begin{enumerate}
+    \item Nommer le succès et relever sa probabilité $p$.
+    \item Construire l'arbre avec $p$ et $1-p$ à chaque niveau.
+    \item Entourer les chemins qui comportent le nombre de succès demandé.
+    \item Multiplier sur chaque chemin, puis additionner entre les chemins.
+  \end{enumerate}
+
+  \textbf{Contrôle}
+
+  Les probabilités de tous les chemins terminaux doivent avoir pour somme $1$.
+\end{fichemethode}

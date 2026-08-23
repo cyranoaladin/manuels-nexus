@@ -1,6 +1,6 @@
-% META: {"id": "1SPE-VARALEA-EV-A-corrige", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-VARALEA-EV-A", "version": "A", "capacites_codes": ["C1","C2","C3","C4","C5"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-VARALEA-EV-A-corrige", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-VARALEA-EV-A", "version": "A", "capacites_codes": ["C1","C2","C3","C5"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
-% from sympy import Rational, binomial, sqrt
+% from sympy import Rational, sqrt
 % # Ex 1
 % p_R = Rational(1,2); p_B = Rational(3,8); p_V = Rational(1,8)
 % E = 1*p_R + 3*p_B + 10*p_V
@@ -10,10 +10,13 @@
 % V = E2 - E**2; assert V == Rational(519,64)
 % E_G = E - 3; assert E_G == Rational(23-24, 8); assert E_G == Rational(-1,8)
 % # Ex 2
-% P0 = Rational(2,3)**6; assert P0 == Rational(64,729)
-% P2 = binomial(6,2)*Rational(1,9)*Rational(16,81); assert P2 == Rational(240,729)
-% E_X = 2; V_X = Rational(4,3)
-% Pge1 = 1 - P0; assert Pge1 == Rational(665,729)
+% probabilities = [Rational(8,27), Rational(12,27), Rational(6,27), Rational(1,27)]
+% P0 = probabilities[0]; P2 = probabilities[2]
+% assert P0 == Rational(8,27) and P2 == Rational(2,9)
+% E_X = sum(k*probabilities[k] for k in range(4)); assert E_X == 1
+% V_X = sum(k*k*probabilities[k] for k in range(4))-E_X**2
+% assert V_X == Rational(2,3)
+% Pge1 = 1-P0; assert Pge1 == Rational(19,27)
 % # Ex 3
 % E_G3 = 12*Rational(1,6) + (-3)*Rational(5,6)
 % assert E_G3 == Rational(-1,2)
@@ -73,22 +76,29 @@ $E(G) = E(X) - 3 = \frac{23}{8} - 3 = -\frac{1}{8} = -0{,}125$.
 $E(G) < 0$ : le jeu est défavorable au joueur.
 
 %===============================================================
-\section*{Exercice 2 \hfill (7 points) — C3, C4}
+\section*{Exercice 2 \hfill (7 points) — C2, C3}
 %===============================================================
 
-\textbf{Question 1.} Chaque tir est une épreuve de Bernoulli (succès $= $ atteindre, $p = \frac{1}{3}$). Les $6$ tirs sont indépendants. $X$ compte le nombre de succès : $X \sim \mathcal{B}(6, \frac{1}{3})$.
+\textbf{Question 1.} L'arbre comporte trois niveaux. À chaque nœud, la branche « atteint » porte $\frac13$ et la branche « manque » $\frac23$.
 
 \medskip
-\textbf{Question 2.} $P(X=0) = \left(\frac{2}{3}\right)^6 = \frac{64}{729} \approx 0{,}088$.
+\textbf{Question 2.} $P(X=0)=\left(\frac23\right)^3=\frac8{27}$.
 
 \medskip
-\textbf{Question 3.} $P(X=2) = \binom{6}{2}\left(\frac{1}{3}\right)^2\left(\frac{2}{3}\right)^4 = 15 \times \frac{1}{9} \times \frac{16}{81} = \frac{240}{729} = \frac{80}{243} \approx 0{,}329$.
+\textbf{Question 3.} Les trois chemins « atteint, atteint, manque » et ses deux permutations ont chacun pour probabilité $\frac13\times\frac13\times\frac23=\frac2{27}$. Donc $P(X=2)=3\times\frac2{27}=\frac29$.
 
 \medskip
-\textbf{Question 4.} $E(X) = 6 \times \frac{1}{3} = 2$. \quad $V(X) = 6 \times \frac{1}{3} \times \frac{2}{3} = \frac{4}{3} \approx 1{,}33$.
+\textbf{Question 4.}
+\[
+\begin{array}{|c|c|c|c|c|}\hline
+x&0&1&2&3\\ \hline
+P(X=x)&\frac8{27}&\frac{12}{27}&\frac6{27}&\frac1{27}\\ \hline
+\end{array}
+\]
+Ainsi $E(X)=1$ et $E(X^2)=\frac53$, donc $V(X)=\frac53-1=\frac23$.
 
 \medskip
-\textbf{Question 5.} $P(X \geq 1) = 1 - P(X=0) = 1 - \frac{64}{729} = \frac{665}{729} \approx 0{,}912$.
+\textbf{Question 5.} $P(X\geq1)=1-P(X=0)=1-\frac8{27}=\frac{19}{27}$.
 
 %===============================================================
 \section*{Exercice 3 \hfill (5 points) — C5}

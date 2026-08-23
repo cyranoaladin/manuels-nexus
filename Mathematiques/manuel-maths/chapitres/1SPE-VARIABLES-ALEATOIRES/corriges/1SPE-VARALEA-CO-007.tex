@@ -1,6 +1,6 @@
 % META: {"id": "1SPE-VARALEA-CO-007", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-007", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
-% from sympy import Rational, binomial
+% from sympy import Rational
 % p0 = Rational(1,10); p1 = Rational(6,10); p2 = Rational(3,10)
 % assert p0+p1+p2 == 1
 % END-VERIFY
@@ -9,13 +9,13 @@
 \textbf{1.} $X \in \{0, 1, 2\}$.
 
 \medskip
-\textbf{2.} Il y a $\binom{5}{2} = 10$ tirages possibles.
-
-$P(X=0) = \frac{\binom{2}{2}}{\binom{5}{2}} = \frac{1}{10}$.
-
-$P(X=1) = \frac{\binom{3}{1}\binom{2}{1}}{\binom{5}{2}} = \frac{6}{10} = \frac{3}{5}$.
-
-$P(X=2) = \frac{\binom{3}{2}}{\binom{5}{2}} = \frac{3}{10}$.
+\textbf{2.} L'arbre donne
+$P(X=0)=\frac25\times\frac14=\frac1{10}$,
+$P(X=2)=\frac35\times\frac24=\frac3{10}$ et
+\[
+P(X=1)=\frac35\times\frac24+\frac25\times\frac34
+=\frac3{10}+\frac3{10}=\frac35.
+\]
 
 \medskip
 \textbf{3.}

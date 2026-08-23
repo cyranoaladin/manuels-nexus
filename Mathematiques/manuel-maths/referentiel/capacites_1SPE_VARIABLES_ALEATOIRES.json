@@ -7,8 +7,8 @@
   "capacites": [
     {
       "id": "1SPE-VARIABLES-ALEATOIRES-C1",
-      "libelle_bo": "Déterminer la loi de probabilité d'une variable aléatoire discrète finie.",
-      "libelle_eleve": "Je sais déterminer la loi de probabilité d'une variable aléatoire.",
+      "libelle_bo": "Interpréter les événements liés à une variable aléatoire et déterminer sa loi de probabilité sur un univers fini.",
+      "libelle_eleve": "Je sais interpréter les événements liés à X et déterminer la loi de X.",
       "demonstration_exigible": false
     },
     {
@@ -19,22 +19,35 @@
     },
     {
       "id": "1SPE-VARIABLES-ALEATOIRES-C3",
-      "libelle_bo": "Connaître et utiliser la loi de Bernoulli et la loi binomiale.",
-      "libelle_eleve": "Je sais reconnaître et utiliser les lois de Bernoulli et binomiale.",
+      "libelle_bo": "Pour n ≤ 4, représenter par un arbre la répétition d'épreuves de Bernoulli indépendantes et identiques afin de calculer les probabilités liées au nombre de succès.",
+      "libelle_eleve": "Je sais utiliser un arbre pour étudier le nombre de succès dans deux à quatre épreuves de Bernoulli indépendantes et identiques.",
       "demonstration_exigible": false
     },
     {
       "id": "1SPE-VARIABLES-ALEATOIRES-C4",
-      "libelle_bo": "Calculer E(X) et V(X) pour une loi binomiale B(n,p).",
-      "libelle_eleve": "Je sais que E(X)=np et V(X)=np(1-p) pour X~B(n,p).",
-      "demonstration_exigible": true,
-      "demonstration": "Démonstration de E(X)=np par linéarité de l'espérance."
+      "libelle_bo": "Utiliser la linéarité de l'espérance et les formules de l'espérance et de la variance d'une fonction affine d'une variable aléatoire.",
+      "libelle_eleve": "Je sais calculer l'espérance et la variance de aX+b.",
+      "demonstration_exigible": false
     },
     {
       "id": "1SPE-VARIABLES-ALEATOIRES-C5",
       "libelle_bo": "Résoudre des problèmes contextualisés faisant intervenir des variables aléatoires.",
       "libelle_eleve": "Je sais modéliser une situation par une variable aléatoire et interpréter E(X).",
       "demonstration_exigible": false
+    }
+  ],
+  "optional_extensions": [
+    {
+      "code": "X1",
+      "programme_alignment": "OPTIONAL_EXTENSION",
+      "label": "Approfondissement — Vers la Terminale",
+      "libelle": "Loi binomiale nommée, coefficients binomiaux et formule des probabilités"
+    },
+    {
+      "code": "X2",
+      "programme_alignment": "OPTIONAL_EXTENSION",
+      "label": "Approfondissement — Vers la Terminale",
+      "libelle": "Espérance, variance et écart type d'une loi binomiale"
     }
   ]
 }

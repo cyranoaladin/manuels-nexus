@@ -1,0 +1,25 @@
+% META: {"id": "1SPE-VARALEA-CR-013", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "cours", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "needs_review"}
+
+\section{Transformer une variable aléatoire}
+
+\propriete{
+Si $Y=aX+b$, où $a$ et $b$ sont deux réels, alors
+\[
+E(Y)=aE(X)+b,\qquad V(Y)=a^2V(X),\qquad
+\sigma(Y)=|a|\sigma(X).
+\]
+Ajouter une constante déplace toutes les valeurs sans modifier leur
+dispersion ; multiplier par $a$ multiplie les écarts à la moyenne par $|a|$.
+}
+
+\exemple{
+Une recette $X$, exprimée en euros, vérifie $E(X)=12$ et $V(X)=5$. Après des
+frais fixes de $3$ euros, le bénéfice est $Y=X-3$. Alors
+$E(Y)=9$ et $V(Y)=5$. Si toutes les sommes sont ensuite doublées, pour
+$Z=2Y$ on obtient $E(Z)=18$ et $V(Z)=20$.
+}
+
+\erreurFrequente{
+La variance n'est pas affine : $V(aX+b)$ ne vaut ni $aV(X)+b$ ni
+$aV(X)$. Le coefficient est mis au carré et la constante $b$ disparaît.
+}

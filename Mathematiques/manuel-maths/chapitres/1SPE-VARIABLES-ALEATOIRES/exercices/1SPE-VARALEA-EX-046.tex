@@ -1,17 +1,17 @@
-% META: {"id": "1SPE-VARALEA-EX-046", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C5"], "capacites_codes": ["C5"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-046.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-046.tex", "status": "generated"}
+% META: {"id": "1SPE-VARALEA-EX-046", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C1", "1SPE-VARIABLES-ALEATOIRES-C2", "1SPE-VARIABLES-ALEATOIRES-C3", "1SPE-VARIABLES-ALEATOIRES-C4", "1SPE-VARIABLES-ALEATOIRES-C5"], "capacites_codes": ["C1", "C2", "C3", "C4", "C5"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-046.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-046.tex", "status": "generated"}
 % BEGIN-VERIFY
-% from sympy import Rational, binomial
+% from sympy import Rational
 % # Jeu: lancer 3 des. Gain = 10*(nb de 6) - 5 (mise).
-% # X = nb de 6 ~ B(3, 1/6). G = 10X - 5.
-% p = Rational(1,6); n = 3
-% E_X = n*p; assert E_X == Rational(1,2)
+% # Loi obtenue par les 216 chemins ordonnes des trois lancers.
+% probabilities = [Rational(125,216), Rational(75,216), Rational(15,216), Rational(1,216)]
+% E_X = sum(k*probabilities[k] for k in range(4)); assert E_X == Rational(1,2)
 % E_G = 10*E_X - 5; assert E_G == 0
 % END-VERIFY
 \begin{exercice}{1SPE-VARALEA-EX-046}{3}{20}
 On paie $5$~euros pour lancer $3$ dés. Pour chaque $6$ obtenu, on reçoit $10$~euros. Soit $X$ le nombre de $6$ et $G = 10X - 5$ le gain algébrique.
 
 \begin{enumerate}
-  \item Quelle est la loi de $X$ ?
+  \item À l'aide de l'arbre des trois lancers, déterminer la loi de $X$.
   \item Dresser le tableau de loi de $G$.
   \item Calculer $E(G)$. Le jeu est-il équitable ?
   \item Calculer $V(G)$ et $\sigma(G)$.

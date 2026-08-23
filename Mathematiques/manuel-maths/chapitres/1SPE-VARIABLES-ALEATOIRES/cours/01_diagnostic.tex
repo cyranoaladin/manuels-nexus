@@ -1,6 +1,6 @@
-% META: {"id": "1SPE-VARALEA-CR-001", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "cours", "sous_type": "diagnostic", "titre": "Diagnostic d'entree", "temps_gabarit": 2, "duree_min": 20, "prerequis_testes": ["R1", "R2", "R3", "R4", "R5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-VARALEA-CR-001", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "cours", "sous_type": "diagnostic", "titre": "Diagnostic d'entree", "temps_gabarit": 2, "duree_min": 20, "prerequis_testes": ["R1", "R2", "R4", "R5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
-% from sympy import Rational, factorial, symbols, summation
+% from sympy import Rational, symbols, summation
 % # Q1 : probabilite d'un evenement simple (de)
 % p_pair = Rational(3, 6)
 % assert p_pair == Rational(1, 2)
@@ -11,10 +11,9 @@
 % # P(A) = P(A|B)*P(B) + P(A|Bc)*P(Bc) = 0.3*0.4 + 0.1*0.6 = 0.18
 % pA = Rational(3,10)*Rational(2,5) + Rational(1,10)*Rational(3,5)
 % assert pA == Rational(18,100)
-% # Q4 : denombrement tirages
-% # Nombre de facons de choisir 2 parmi 5 = C(5,2) = 10
-% from sympy import binomial
-% assert binomial(5, 2) == 10
+% # Q4 : arbre de probabilites simple
+% # Deux branches de probabilites 2/5 et 3/5
+% assert Rational(2,5) + Rational(3,5) == 1
 % # Q5 : somme 1+2+...+10
 % n = symbols('n')
 % assert sum(range(1, 11)) == 55
@@ -27,8 +26,8 @@
 % # somme de (1/2)^k pour k=0..3 = 1 + 1/2 + 1/4 + 1/8 = 15/8
 % s = sum(Rational(1,2)**k for k in range(4))
 % assert s == Rational(15, 8)
-% # Q9 : factorielle
-% assert factorial(5) == 120
+% # Q9 : somme des probabilites d'une partition
+% assert Rational(1,4) + Rational(3,4) == 1
 % # Q10 : arbre
 % p_RR = Rational(3,5) * Rational(2,4)
 % assert p_RR == Rational(3,10)
@@ -60,12 +59,12 @@ Réponds à chaque question sur ta copie. Ne cherche pas à aller vite : l'objec
 
 \end{enumerate}
 
-\subsection*{R3 — Combinatoire de base}
+\subsection*{R2 — Lire un arbre pondéré}
 
 \begin{enumerate}
   \setcounter{enumi}{3}
 
-  \item De combien de façons peut-on choisir $2$ élèves parmi $5$ (sans tenir compte de l'ordre) ?
+  \item À un nœud d'un arbre pondéré, une branche porte la probabilité $\frac{2}{5}$. Quelle probabilité porte l'autre branche ?
 
 \end{enumerate}
 
@@ -89,7 +88,7 @@ Réponds à chaque question sur ta copie. Ne cherche pas à aller vite : l'objec
 
   \item On lance $3$ fois une pièce équilibrée. En admettant l'indépendance des lancers, quelle est la probabilité d'obtenir $3$ fois Pile ?
 
-  \item Calculer $5!$ (factorielle $5$).
+  \item Deux événements complémentaires ont pour probabilités $\frac{1}{4}$ et $p$. Déterminer $p$.
 
   \item Une urne contient $3$ boules rouges et $2$ boules vertes. On tire successivement $2$ boules \emph{sans remise}. Quelle est la probabilité d'obtenir $2$ boules rouges ?
 
@@ -106,15 +105,13 @@ Reporte tes résultats dans ce tableau, puis suis les conseils de remédiation a
 \hline
 \textbf{Questions} & \textbf{Prérequis testé} & \textbf{Si tu as échoué\ldots} & \textbf{Fiche à lire} \\
 \hline
-1 et 2 & R1 — Probabilités de base & \ldots avant de commencer C1 & Fiche R1 \\
+1, 2 et 9 & R1 — Probabilités de base & \ldots avant de commencer C1 & Fiche R1 \\
 \hline
-3 & R2 — Probabilités conditionnelles & \ldots avant de commencer C1, C3 & Fiche R2 \\
-\hline
-4 & R3 — Combinatoire de base & \ldots avant de commencer C3 & Fiche R3 \\
+3, 4, 8 et 10 & R2 — Probabilités et arbres & \ldots avant de commencer C1, C3 & Fiche R2 \\
 \hline
 5 et 6 & R4 — Suites et sommes & \ldots avant de commencer C2, C4 & Fiche R4 \\
 \hline
-7, 8, 9 et 10 & R5 — Puissances & \ldots avant de commencer C3, C4 & Fiche R5 \\
+7 & R5 — Puissances & \ldots avant de commencer C3 & Fiche R5 \\
 \hline
 \end{tabular}
 \end{center}

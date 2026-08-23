@@ -1,14 +1,15 @@
-% META: {"id": "1SPE-VARALEA-CO-039", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-039", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-VARALEA-CO-039", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-039", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational
 % p = Rational(2,5)
-% assert 1*p == Rational(2,5)
-% assert 1*p*(1-p) == Rational(6,25)
+% assert p == Rational(2,5)
+% assert p - p**2 == Rational(6,25)
 % END-VERIFY
 \begin{corrige}{1SPE-VARALEA-EX-039}
 
-\textbf{1.} $E(X) = np = 1 \times \frac{2}{5} = \frac{2}{5} = p$. \checkmark
+\textbf{1.} $E(X)=0\times\frac35+1\times\frac25=\frac25$.
 
-\textbf{2.} $V(X) = np(1-p) = 1 \times \frac{2}{5} \times \frac{3}{5} = \frac{6}{25}$. \checkmark
+\textbf{2.} $E(X^2)=0^2\times\frac35+1^2\times\frac25=\frac25$, donc
+$V(X)=E(X^2)-E(X)^2=\frac25-\frac4{25}=\frac6{25}$.
 
 \end{corrige}

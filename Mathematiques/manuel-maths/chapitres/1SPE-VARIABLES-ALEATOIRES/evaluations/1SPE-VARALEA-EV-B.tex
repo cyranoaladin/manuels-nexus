@@ -1,6 +1,6 @@
 % META: {"id": "1SPE-VARALEA-EV-B", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1","C2","C3","C4","C5"], "competences": ["chercher","modeliser","representer","calculer","raisonner","communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
-% from sympy import Rational, binomial, sqrt
+% from sympy import Rational, sqrt
 %
 % # ---- Exercice 1 : loi de X (sac de bonbons) ----
 % # 5 rouges(2pts), 3 jaunes(5pts), 2 verts(8pts). Total 10.
@@ -17,16 +17,14 @@
 % assert V == Rational(2230-1681, 100)
 % assert V == Rational(549,100)
 %
-% # ---- Exercice 2 : loi binomiale ----
-% # X ~ B(5, 1/4)
-% n, p = 5, Rational(1,4)
-% P0 = Rational(3,4)**5; assert P0 == Rational(243,1024)
-% P3 = binomial(5,3)*Rational(1,4)**3*Rational(3,4)**2
-% assert P3 == 10*Rational(1,64)*Rational(9,16)
-% assert P3 == Rational(90,1024)
-% assert P3 == Rational(45,512)
-% E_X = n*p; assert E_X == Rational(5,4)
-% V_X = n*p*(1-p); assert V_X == Rational(15,16)
+% # ---- Exercice 2 : quatre repetitions et arbre ----
+% probabilities = [Rational(81,256), Rational(108,256), Rational(54,256), Rational(12,256), Rational(1,256)]
+% assert sum(probabilities) == 1
+% P0 = probabilities[0]; assert P0 == Rational(81,256)
+% P1 = probabilities[1]; assert P1 == Rational(27,64)
+% E_X = sum(k*probabilities[k] for k in range(5)); assert E_X == 1
+% V_X = sum(k*k*probabilities[k] for k in range(5))-E_X**2
+% assert V_X == Rational(3,4)
 %
 % # ---- Exercice 3 : assurance (C5) ----
 % # Prime 80, sinistre 2000, p = 1/50
@@ -65,25 +63,25 @@ Un sac contient $5$ bonbons rouges ($2$ points chacun), $3$ bonbons jaunes ($5$ 
 \end{enumerate}
 
 %===============================================================
-\section*{Exercice 2 \hfill (7 points) \hfill Capacités C3, C4}
+\section*{Exercice 2 \hfill (7 points) \hfill Capacités C2, C3}
 %===============================================================
 
 \textit{Compétences évaluées : calculer, raisonner.}
 
 \medskip
-Un joueur de basket réussit un lancer franc avec probabilité $\frac{1}{4}$. Il effectue $5$ lancers indépendants. Soit $X$ le nombre de lancers réussis.
+Un joueur de basket réussit un lancer franc avec probabilité $\frac{1}{4}$. Il effectue $4$ lancers indépendants. Soit $X$ le nombre de lancers réussis.
 
 \begin{enumerate}
-  \item Justifier que $X \sim \mathcal{B}(5, \frac{1}{4})$.
+  \item Construire l'arbre pondéré des quatre lancers.
   \hfill\textit{(1 pt — raisonner)}
 
   \item Calculer $P(X = 0)$.
   \hfill\textit{(1 pt — calculer)}
 
-  \item Calculer $P(X = 3)$.
+  \item Calculer $P(X = 1)$ en repérant les quatre chemins favorables.
   \hfill\textit{(2 pts — calculer)}
 
-  \item Calculer $E(X)$, $V(X)$ et $\sigma(X)$.
+  \item Dresser la loi de $X$, puis calculer $E(X)$, $V(X)$ et $\sigma(X)$ à partir de cette loi.
   \hfill\textit{(2 pts — calculer)}
 
   \item Calculer $P(X \geq 1)$.
