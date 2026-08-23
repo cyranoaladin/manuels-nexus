@@ -28,7 +28,7 @@ def test_tnsi_project_contract_materialises_at_least_one_quarter_of_schedule():
 
     assert contract["chapitre"] == CHAPTER_ID
     assert contract["niveau"] == "TNSI"
-    assert contract["statut"] == "needs_review"
+    assert contract["statut"] == "draft"
     official = contract["programme_officiel"]
     assert official["NOR"] == "MENE1921247A"
     assert official["part_minimale"] == 0.25
