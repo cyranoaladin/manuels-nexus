@@ -81,3 +81,53 @@ assert nsi_assemble.verify_pdf is nsi_pdf_integrity.verify_pdf
     )
 
     assert completed.returncode == 0, completed.stdout + completed.stderr
+
+
+@pytest.mark.parametrize("probe_cwd", ("repository", "external"))
+def test_direct_nsi_manual_loader_uses_its_sibling_assembler_when_math_is_cached(
+    probe_cwd: str,
+    tmp_path: Path,
+) -> None:
+    script = r"""
+import importlib
+import importlib.util
+from pathlib import Path
+import sys
+
+repository_root = Path(sys.argv[1]).resolve()
+math_root = repository_root / "Mathematiques" / "manuel-maths"
+nsi_root = repository_root / "NSI"
+math_scripts = str(math_root / "scripts")
+nsi_scripts = str(nsi_root / "scripts")
+
+sys.path.insert(0, math_scripts)
+math_assemble = importlib.import_module("assemble")
+sys.path.insert(0, nsi_scripts)
+
+manual_path = nsi_root / "scripts" / "assemble_manuel.py"
+spec = importlib.util.spec_from_file_location("assemble_manuel_live", manual_path)
+assert spec is not None and spec.loader is not None
+runtime = importlib.util.module_from_spec(spec)
+sys.modules[spec.name] = runtime
+spec.loader.exec_module(runtime)
+
+assert runtime.legacy is not math_assemble
+assert runtime.legacy.__name__ == "_nexus_nsi_assemble"
+assert Path(runtime.legacy.__file__).resolve() == nsi_root / "scripts" / "assemble.py"
+assert Path(runtime.legacy.ROOT).resolve() == nsi_root
+assert Path(runtime.ROOT).resolve() == nsi_root
+"""
+    environment = os.environ.copy()
+    environment["PYTHONDONTWRITEBYTECODE"] = "1"
+    cwd = REPOSITORY_ROOT if probe_cwd == "repository" else tmp_path
+    completed = subprocess.run(
+        [sys.executable, "-c", script, str(REPOSITORY_ROOT)],
+        cwd=cwd,
+        env=environment,
+        capture_output=True,
+        text=True,
+        timeout=30,
+        check=False,
+    )
+
+    assert completed.returncode == 0, completed.stdout + completed.stderr
