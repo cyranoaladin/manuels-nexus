@@ -23,7 +23,7 @@
           "renvoi": "C1, definition"
         },
         "D": {
-          "erreur": "L'eleve a confondu $\\frac{1}{x^2} = x^{-2}$ (puissance negative) avec $x^2$ (second degre). Un polynome n'admet que des puissances entieres positives.",
+          "erreur": "L'eleve a confondu $\\frac{1}{x^2} = x^{-2}$ (puissance negative) avec $x^2$ (second degre). Un polynome n'admet que des exposants entiers naturels, donc positifs ou nuls.",
           "renvoi": "C1, definition"
         }
       }
@@ -383,7 +383,7 @@
           "renvoi": "C5, discriminant nul"
         },
         "B": {
-          "erreur": "L'eleve a confondu $k$ avec $b = -2$ ou avec $b^2/4 = 1$... il a peut-etre pose $\\Delta = b - 4k = 0$. Le discriminant est $\\Delta = b^2 - 4ac = 4 - 4k$.",
+          "erreur": "L'eleve a remplace a tort le terme $4ac$ du discriminant par $2ac$ et a ecrit $\\Delta=4-2k$ ; resoudre $4-2k=0$ conduit exactement a $k=2$.",
           "renvoi": "C5, discriminant nul"
         },
         "D": {
@@ -461,7 +461,7 @@
           "renvoi": "C6, distinction sommet / racines"
         },
         "B": {
-          "erreur": "L'eleve a divise $b = 20$ par $2a = -10$ sans le signe moins : $\\alpha = -b/(2a) = -20/(2 \\times (-5)) = 2$, pas $1$. Erreur dans l'application de la formule.",
+          "erreur": "L'eleve a utilise a tort $-b/(4a)$ au lieu de $-b/(2a)$ pour l'abscisse du sommet ; $-20/(4\\times(-5))=1$ conduit exactement a $t=1$.",
           "renvoi": "C6, abscisse du sommet"
         },
         "D": {

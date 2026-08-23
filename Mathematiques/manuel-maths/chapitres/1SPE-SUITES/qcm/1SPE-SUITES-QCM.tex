@@ -48,7 +48,7 @@
 \item \textbf{[Q5]} Soit $(u_n)$ une suite arithmetique de raison $r = -3$ et de premier terme $u_1 = 8$. Quelle est la valeur de $u_6$ ?
   \begin{enumerate}[label=\Alph*.]
     \item $-7$
-    \item $-22$
+    \item $-4$
     \item $-10$
     \item $u_6 = 8 + 6 \times (-3) = -10$
   \end{enumerate}
@@ -270,8 +270,8 @@ Q21 & C7 & \textbf{B} \\
   \item \textbf{Q2}
   \begin{itemize}
     \item \textbf{A} — L'eleve a calcule $v_1$ uniquement : $v_1 = 3 \times 4 - 2 = 10$, et a confondu $v_1$ avec $v_2$. Arret premature d'une iteration. \emph{Renvoi : M1, etape 3.}
-    \item \textbf{C} — L'eleve a remplace $n$ par $2$ directement dans la relation : $v_3 = 3 \times 2 - 2 = 4$, ou a calcule $3 \times v_2 - 2$ avec $v_2 = 12$. Confusion entre l'indice $n$ et la valeur $v_n$. \emph{Renvoi : M1, etape 3.}
-    \item \textbf{D} — L'eleve a calcule $v_1 = 3 \times 4 - 2 = 10$ puis $v_2 = 3 \times 10 - 2 = 28$ mais a commis une erreur arithmetique ($3 \times 8 - 2 = 22$) en utilisant $v_1 = 8$ (probable confusion avec $2 \times 4 = 8$). \emph{Renvoi : M1, etape 3.}
+    \item \textbf{C} — L'eleve a oublie le $-2$ au premier passage et calcule $v_1=3\times4=12$, puis applique la recurrence au terme suivant : $v_2=3\times12-2=34$. \emph{Renvoi : M1, etape 3.}
+    \item \textbf{D} — L'eleve a soustrait $v_0=4$ au lieu de la constante $2$ au premier passage, d'ou $v_1=3\times4-4=8$, puis $v_2=3\times8-2=22$. \emph{Renvoi : M1, etape 3.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
@@ -287,7 +287,7 @@ Q21 & C7 & \textbf{B} \\
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
-    \item \textbf{B} — L'eleve a applique la formule $u_n = u_0 + nr$ avec $u_0 = 8$ et $n = 6$ en confondant $u_1$ et $u_0$ : $8 + 6 \times (-5) = -22$. Erreur sur le terme de depart de la formule. \emph{Renvoi : M2, etape 4.}
+    \item \textbf{B} — L'eleve a compte seulement quatre accroissements entre $u_1$ et $u_6$ et calcule $8+4\times(-3)=-4$ ; il y en a cinq, donc $u_6=8+5\times(-3)=-7$. \emph{Renvoi : M2, etape 4.}
     \item \textbf{C} — L'eleve a utilise $u_n = u_0 + nr$ avec $u_0 = 8$ en oubliant que le premier terme donne est $u_1$ et non $u_0$ : calcul $8 + 6 \times (-3) = -10$ au lieu de $8 + 5 \times (-3) = -7$. \emph{Renvoi : M2, etape 4.}
     \item \textbf{D} — Meme erreur que C : formule $u_n = u_1 + n \times r$ au lieu de $u_n = u_1 + (n-1) \times r$. L'option D presente le calcul errone de facon explicite. \emph{Renvoi : M2, etape 4.}
   \end{itemize}
@@ -317,7 +317,7 @@ Q21 & C7 & \textbf{B} \\
   \end{itemize}
   \item \textbf{Q10}
   \begin{itemize}
-    \item \textbf{A} — L'eleve a calcule $20 \times 10 = 200$ (moyenne $\times$ dernier terme au lieu de moyenne $\times$ nombre de termes). Erreur sur la formule de Gauss. \emph{Renvoi : M4, cas 1.}
+    \item \textbf{A} — L'eleve a utilise a tort $n^2/2$ et calcule $20^2/2=200$ ; la formule correcte est $n(n+1)/2=20\times21/2=210$. \emph{Renvoi : M4, cas 1.}
     \item \textbf{C} — L'eleve a utilise la formule avec $n = 19$ au lieu de $n = 20$ : $19 \times 20/2 = 190$. Erreur sur le nombre de termes (confusion entre $n$ et $n+1$ termes). \emph{Renvoi : M4, etape 1.}
     \item \textbf{D} — L'eleve a calcule $20 \times 21 = 420$ en oubliant de diviser par $2$ dans la formule $n(n+1)/2$. \emph{Renvoi : M4, cas 1.}
   \end{itemize}
@@ -331,7 +331,7 @@ Q21 & C7 & \textbf{B} \\
   \begin{itemize}
     \item \textbf{A} — L'eleve a compte $14$ termes en confondant le nombre de termes avec l'indice maximal. De $u_0$ a $u_{14}$, les indices sont $0, 1, 2, \ldots, 14$ : il y a bien $14 - 0 + 1 = 15$ termes. \emph{Renvoi : M4, etape 1.}
     \item \textbf{B} — L'eleve a soustrait $1$ au lieu d'ajouter $1$ : $14 - 1 = 13$. Confusion sur la formule 'nombre de termes = $n_{\max} - n_{\min} + 1$'. \emph{Renvoi : M4, etape 1.}
-    \item \textbf{D} — L'eleve a ajoute $2$ a l'indice maximal : $14 + 2 = 16$. Erreur probable due a une confusion avec la formule $n+1$ appliquee a partir de $n=15$. \emph{Renvoi : M4, etape 1.}
+    \item \textbf{D} — L'eleve ajoute $2$ au lieu de $1$ dans le comptage inclusif et obtient l'option $16$ par $14+2$ ; de $0$ a $14$, il y a $14-0+1=15$ termes. \emph{Renvoi : M4, etape 1.}
   \end{itemize}
   \item \textbf{Q13}
   \begin{itemize}
@@ -378,7 +378,7 @@ Q21 & C7 & \textbf{B} \\
   \item \textbf{Q20}
   \begin{itemize}
     \item \textbf{A} — La condition `while u > 100` est la negation inverse : la boucle s'execute tant que $u > 100$, donc elle ne tourne jamais car $u = 1 \leq 100$ initialement. L'eleve a oublie de prendre la NEGATION du seuil cherche. \emph{Renvoi : M7, Modele C, etape 2.}
-    \item \textbf{C} — Une boucle `for` sur un nombre fixe d'iterations ne permet pas de rechercher un seuil inconnu a l'avance. Si le seuil est atteint avant ou apres 100 iterations, le resultat est faux. Il faut une boucle `while`. \emph{Renvoi : M7, Modele C.}
+    \item \textbf{C} — Ce code ne contient aucun test de seuil ni instruction `break` : il effectue toujours 100 iterations et renvoie $n=100$, au lieu du premier rang ou $u_n>100$. \emph{Renvoi : M7, Modele C.}
     \item \textbf{D} — L'initialisation `u = 0` est erronnee : $2 \times 0 = 0$ pour toutes les iterations, la boucle est infinie. Il faut initialiser $u$ a la valeur du PREMIER TERME $u_0 = 1$. \emph{Renvoi : M7, Piege 1.}
   \end{itemize}
   \item \textbf{Q21}

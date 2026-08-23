@@ -10,7 +10,7 @@
       "diagnostics": {
         "B": {"erreur": "L'eleve a confondu P_A(B) avec P(A). P_A(B) = P(A inter B)/P(A) = (1/6)/(1/2) = 1/3.", "renvoi": "C1, definition"},
         "C": {"erreur": "L'eleve a donne P(A inter B) au lieu de calculer le quotient.", "renvoi": "C1, formule"},
-        "D": {"erreur": "L'eleve a inverse la fraction : P(A)/P(A inter B) = 3 au lieu de P(A inter B)/P(A) = 1/3.", "renvoi": "C1, formule"}
+        "D": {"erreur": "L'eleve a calcule le complementaire de $P_A(B)=1/3$ et obtenu $1-1/3=2/3$ ; ce $2/3$ vaut $P_A(\\overline B)$, pas $P_A(B)$.", "renvoi": "C1, formule"}
       }
     },
     {
@@ -30,9 +30,9 @@
       "options": {"A": "3/20", "B": "3/10", "C": "23/20", "D": "6/5"},
       "correcte": "B",
       "diagnostics": {
-        "A": {"erreur": "L'eleve a divise au lieu de multiplier : P(A inter B) = P(A) x P_A(B), pas P(A) / P_A(B).", "renvoi": "C1, formule de multiplication"},
+        "A": {"erreur": "L'eleve a multiplie $1/5$ par $3/4$ en oubliant le facteur $2$ au numerateur de $P(A)=2/5$, ce qui donne exactement $3/20$ au lieu de $3/10$.", "renvoi": "C1, formule de multiplication"},
         "C": {"erreur": "L'eleve a additionne P(A) + P_A(B) au lieu de les multiplier.", "renvoi": "C1, formule de multiplication"},
-        "D": {"erreur": "L'eleve a calcule P_A(B)/P(A) = (3/4)/(2/5) = 15/8 ou une autre erreur de calcul.", "renvoi": "C1, formule de multiplication"}
+        "D": {"erreur": "L'eleve a multiplie les numerateurs $2 \\times 3$ mais a oublie le denominateur $4$ de $P_A(B)=3/4$, obtenant $6/5$ au lieu de $(2 \\times 3)/(5 \\times 4)=3/10$.", "renvoi": "C1, formule de multiplication"}
       }
     },
     {
@@ -98,7 +98,7 @@
       "diagnostics": {
         "A": {"erreur": "L'independance n'est pas requise ; c'est la structure de partition qui est necessaire.", "renvoi": "C3, hypothese"},
         "C": {"erreur": "L'equiprobabilite n'est pas necessaire.", "renvoi": "C3, hypothese"},
-        "D": {"erreur": "Il suffit que P(Bi) > 0.", "renvoi": "C3, hypothese"}
+        "D": {"erreur": "Si les trois evenements verifiaient chacun $P(B_i)>1/2$, la somme de leurs probabilites serait strictement superieure a 1 : ils ne pourraient donc pas former une partition.", "renvoi": "C3, hypothese"}
       }
     },
     {
@@ -130,7 +130,7 @@
       "correcte": "C",
       "diagnostics": {
         "A": {"erreur": "P(A inter B) = 0 signifie incompatibilite, pas independance.", "renvoi": "C4, definition"},
-        "B": {"erreur": "P(A inter B) = P(A) + P(B) est impossible (depasse 1 en general).", "renvoi": "C4, definition"},
+        "B": {"erreur": "L'eleve a additionne les probabilites au lieu de les multiplier. Cette egalite viole aussi la borne $P(A\\cap B)\\leqslant \\min(P(A),P(B))$, sauf dans le cas trivial ou les deux probabilites sont nulles.", "renvoi": "C4, definition"},
         "D": {"erreur": "La formule de l'union est P(A union B) = P(A) + P(B) - P(A inter B), pas un produit.", "renvoi": "C4, definition"}
       }
     },
@@ -195,8 +195,8 @@
       "options": {"A": "l'independance", "B": "formule de Bayes (prob totales + cond inversee)", "C": "uniquement des prob simples", "D": "theoreme des valeurs intermediaires"},
       "correcte": "B",
       "diagnostics": {
-        "A": {"erreur": "L'independance peut intervenir mais l'outil central est la formule des probabilites totales.", "renvoi": "C5, methode"},
-        "C": {"erreur": "Le probleme necessite des probabilites conditionnelles.", "renvoi": "C5, methode"},
+        "A": {"erreur": "Les taux de defaut dependent de la machine : l'origine et le defaut ne sont donc pas supposes independants. Il faut calculer la probabilite totale du defaut puis appliquer Bayes.", "renvoi": "C5, methode"},
+        "C": {"erreur": "Les probabilites simples $P(M_i)$ et conditionnelles $P(D\\mid M_i)$ doivent etre combinees pour calculer la probabilite inverse $P(M_i\\mid D)$ ; elles ne suffisent pas prises separement.", "renvoi": "C5, methode"},
         "D": {"erreur": "Le TVI est un theoreme d'analyse, sans rapport avec les probabilites.", "renvoi": "C5, hors sujet"}
       }
     }

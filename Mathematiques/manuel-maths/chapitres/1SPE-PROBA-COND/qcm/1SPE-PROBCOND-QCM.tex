@@ -204,7 +204,7 @@ Q18 & C5 & \textbf{B} \\
   \begin{itemize}
     \item \textbf{B} — L'eleve a confondu P\_A(B) avec P(A). P\_A(B) = P(A inter B)/P(A) = (1/6)/(1/2) = 1/3. \emph{Renvoi : C1, definition.}
     \item \textbf{C} — L'eleve a donne P(A inter B) au lieu de calculer le quotient. \emph{Renvoi : C1, formule.}
-    \item \textbf{D} — L'eleve a inverse la fraction : P(A)/P(A inter B) = 3 au lieu de P(A inter B)/P(A) = 1/3. \emph{Renvoi : C1, formule.}
+    \item \textbf{D} — L'eleve a calcule le complementaire de $P_A(B)=1/3$ et obtenu $1-1/3=2/3$ ; ce $2/3$ vaut $P_A(\overline B)$, pas $P_A(B)$. \emph{Renvoi : C1, formule.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
@@ -214,9 +214,9 @@ Q18 & C5 & \textbf{B} \\
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{A} — L'eleve a divise au lieu de multiplier : P(A inter B) = P(A) x P\_A(B), pas P(A) / P\_A(B). \emph{Renvoi : C1, formule de multiplication.}
+    \item \textbf{A} — L'eleve a multiplie $1/5$ par $3/4$ en oubliant le facteur $2$ au numerateur de $P(A)=2/5$, ce qui donne exactement $3/20$ au lieu de $3/10$. \emph{Renvoi : C1, formule de multiplication.}
     \item \textbf{C} — L'eleve a additionne P(A) + P\_A(B) au lieu de les multiplier. \emph{Renvoi : C1, formule de multiplication.}
-    \item \textbf{D} — L'eleve a calcule P\_A(B)/P(A) = (3/4)/(2/5) = 15/8 ou une autre erreur de calcul. \emph{Renvoi : C1, formule de multiplication.}
+    \item \textbf{D} — L'eleve a multiplie les numerateurs $2 \times 3$ mais a oublie le denominateur $4$ de $P_A(B)=3/4$, obtenant $6/5$ au lieu de $(2 \times 3)/(5 \times 4)=3/10$. \emph{Renvoi : C1, formule de multiplication.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
@@ -252,7 +252,7 @@ Q18 & C5 & \textbf{B} \\
   \begin{itemize}
     \item \textbf{A} — L'independance n'est pas requise ; c'est la structure de partition qui est necessaire. \emph{Renvoi : C3, hypothese.}
     \item \textbf{C} — L'equiprobabilite n'est pas necessaire. \emph{Renvoi : C3, hypothese.}
-    \item \textbf{D} — Il suffit que P(Bi) > 0. \emph{Renvoi : C3, hypothese.}
+    \item \textbf{D} — Si les trois evenements verifiaient chacun $P(B_i)>1/2$, la somme de leurs probabilites serait strictement superieure a 1 : ils ne pourraient donc pas former une partition. \emph{Renvoi : C3, hypothese.}
   \end{itemize}
   \item \textbf{Q10}
   \begin{itemize}
@@ -269,7 +269,7 @@ Q18 & C5 & \textbf{B} \\
   \item \textbf{Q12}
   \begin{itemize}
     \item \textbf{A} — P(A inter B) = 0 signifie incompatibilite, pas independance. \emph{Renvoi : C4, definition.}
-    \item \textbf{B} — P(A inter B) = P(A) + P(B) est impossible (depasse 1 en general). \emph{Renvoi : C4, definition.}
+    \item \textbf{B} — L'eleve a additionne les probabilites au lieu de les multiplier. Cette egalite viole aussi la borne $P(A\cap B)\leqslant \min(P(A),P(B))$, sauf dans le cas trivial ou les deux probabilites sont nulles. \emph{Renvoi : C4, definition.}
     \item \textbf{D} — La formule de l'union est P(A union B) = P(A) + P(B) - P(A inter B), pas un produit. \emph{Renvoi : C4, definition.}
   \end{itemize}
   \item \textbf{Q13}
@@ -304,8 +304,8 @@ Q18 & C5 & \textbf{B} \\
   \end{itemize}
   \item \textbf{Q18}
   \begin{itemize}
-    \item \textbf{A} — L'independance peut intervenir mais l'outil central est la formule des probabilites totales. \emph{Renvoi : C5, methode.}
-    \item \textbf{C} — Le probleme necessite des probabilites conditionnelles. \emph{Renvoi : C5, methode.}
+    \item \textbf{A} — Les taux de defaut dependent de la machine : l'origine et le defaut ne sont donc pas supposes independants. Il faut calculer la probabilite totale du defaut puis appliquer Bayes. \emph{Renvoi : C5, methode.}
+    \item \textbf{C} — Les probabilites simples $P(M_i)$ et conditionnelles $P(D\mid M_i)$ doivent etre combinees pour calculer la probabilite inverse $P(M_i\mid D)$ ; elles ne suffisent pas prises separement. \emph{Renvoi : C5, methode.}
     \item \textbf{D} — Le TVI est un theoreme d'analyse, sans rapport avec les probabilites. \emph{Renvoi : C5, hors sujet.}
   \end{itemize}
 \end{itemize}

@@ -185,6 +185,64 @@ def test_suites_q14_demande_un_critere_objectif() -> None:
     assert "fonctionne aussi" in question["diagnostics"]["A"]["erreur"]
 
 
+@pytest.mark.parametrize(
+    ("chapitre", "question_id", "option", "fragments"),
+    [
+        ("1SPE-DERIVATION-GLOBAL", "Q3", "D", ("primitive", "pas la derivee")),
+        ("1SPE-DERIVATION-GLOBAL", "Q14", "A", ("hors de l'intervalle",)),
+        ("1SPE-DERIVATION-GLOBAL", "Q14", "B", ("120 - 3x", "x=40")),
+        ("1SPE-DERIVATION-GLOBAL", "Q14", "D", ("60 - 6x", "x=10")),
+        ("1SPE-DERIVATION-LOCAL", "Q4", "B", ("correct est $x-a$",)),
+        ("1SPE-DERIVATION-LOCAL", "Q5", "B", ("$f(2+h)$", "sans former le taux")),
+        ("1SPE-DERIVATION-LOCAL", "Q5", "C", ("$f(2)=4$",)),
+        ("1SPE-DERIVATION-LOCAL", "Q9", "A", ("ordonnee a l'origine", "coefficient directeur")),
+        ("1SPE-DERIVATION-LOCAL", "Q9", "B", ("abscisse du point", "coefficient directeur")),
+        ("1SPE-DERIVATION-LOCAL", "Q12", "C", ("passe par l'origine",)),
+        ("1SPE-DERIVATION-LOCAL", "Q12", "D", ("pente $f'(a)$", "ordonnee a l'origine")),
+        ("1SPE-GEOMETRIE-REPEREE", "Q1", "C", ("ajuste la constante", "point $A$", "point $B$")),
+        ("1SPE-GEOMETRIE-REPEREE", "Q1", "D", ("vecteur normal $(1;2)$", "point $B$")),
+        ("1SPE-GEOMETRIE-REPEREE", "Q13", "D", ("multiplie par $2$", "$48$")),
+        ("1SPE-PROBA-COND", "Q1", "D", ("complementaire", "$2/3$")),
+        ("1SPE-PROBA-COND", "Q3", "A", ("facteur $2$", "$3/20$")),
+        ("1SPE-PROBA-COND", "Q3", "D", ("denominateur $4$", "$6/5$")),
+        ("1SPE-PROBA-COND", "Q9", "D", ("serait strictement superieure a 1",)),
+        ("1SPE-PROBA-COND", "Q12", "B", ("borne", "$P(A\\cap B)\\leqslant",)),
+        ("1SPE-PROBA-COND", "Q18", "A", ("taux de defaut dependent", "Bayes")),
+        ("1SPE-PROBA-COND", "Q18", "C", ("$P(M_i\\mid D)$", "conditionnelles")),
+        ("1SPE-PRODUIT-SCALAIRE", "Q1", "B", ("$3-(-2)=5$",)),
+        ("1SPE-PRODUIT-SCALAIRE", "Q1", "C", ("$-3-8=-11$",)),
+        ("1SPE-PRODUIT-SCALAIRE", "Q1", "D", ("$3+8=11$",)),
+        ("1SPE-PRODUIT-SCALAIRE", "Q2", "D", ("$\\cos(\\pi/4)=\\sqrt{2}/2$",)),
+        ("1SPE-PRODUIT-SCALAIRE", "Q5", "C", ("additionne deux normes",)),
+        ("1SPE-PRODUIT-SCALAIRE", "Q6", "C", ("inegalite triangulaire",)),
+        ("1SPE-PRODUIT-SCALAIRE", "Q7", "B", ("angle obtus",)),
+        ("1SPE-PRODUIT-SCALAIRE", "Q9", "A", ("$\\tan(\\theta)=1/\\sqrt{3}$",)),
+        ("1SPE-PRODUIT-SCALAIRE", "Q9", "C", ("$\\tan(\\theta)=\\sqrt{3}$",)),
+        ("1SPE-PRODUIT-SCALAIRE", "Q14", "D", ("$(8-5)^2=9$",)),
+        ("1SPE-PRODUIT-SCALAIRE", "Q15", "C", ("terme $2bc", "pas $a^2$")),
+        ("1SPE-SECOND-DEGRE", "Q1", "D", ("exposants entiers naturels",)),
+        ("1SPE-SECOND-DEGRE", "Q15", "B", ("$4-2k=0$", "$k=2$")),
+        ("1SPE-SECOND-DEGRE", "Q18", "B", ("$-b/(4a)$", "$t=1$")),
+        ("1SPE-SUITES", "Q2", "C", ("oublie le $-2$", "$v_1=3\\times4=12$", "$v_2=3\\times12-2=34$")),
+        ("1SPE-SUITES", "Q2", "D", ("soustrait $v_0=4$", "$v_2=3\\times8-2=22$")),
+        ("1SPE-SUITES", "Q5", "B", ("quatre accroissements", "$8+4\\times(-3)=-4$")),
+        ("1SPE-SUITES", "Q10", "A", ("$n^2/2$", "$20^2/2=200$")),
+        ("1SPE-SUITES", "Q12", "D", ("ajoute $2$", "$16$")),
+        ("1SPE-SUITES", "Q20", "C", ("aucun test de seuil", "100 iterations")),
+    ],
+)
+def test_diagnostic_1spe_explique_exactement_son_distracteur(
+    chapitre: str, question_id: str, option: str, fragments: tuple[str, ...]
+) -> None:
+    diagnostic = _question(chapitre, question_id)["diagnostics"][option]["erreur"]
+
+    for fragment in fragments:
+        assert fragment in diagnostic, (
+            f"{chapitre}/{question_id}/{option}: le diagnostic ne prouve pas "
+            f"le distracteur par le fragment attendu {fragment!r}"
+        )
+
+
 @pytest.mark.parametrize("chapitre", CHAPITRES)
 def test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi(chapitre: str) -> None:
     """Diagnostics/renvois de distracteurs sous contrat de dette declare.
@@ -310,21 +368,10 @@ def test_la_cle_generee_est_conditionnee_a_la_variante_professeur(chapitre: str)
     assert debut < cle < fin
 
 
-def test_la_cle_legacy_est_conditionnee_a_la_variante_professeur() -> None:
-    tex = SOURCES["1SPE-DERIVATION-LOCAL"].with_suffix(".tex").read_text(
-        encoding="utf-8"
-    )
-    debut = tex.index("\\ifnxVersionProfesseur")
-    cle = tex.index("Correction et diagnostics")
-    fin = tex.rindex("\\fi")
-
-    assert debut < cle < fin
-
-
 def test_le_gate_des_cles_couvre_exactement_les_35_qcm() -> None:
     assert len(SOURCES) == 35
-    assert len(CHAPITRES_SOURCE_UNIQUE) == 34
-    assert set(CHAPITRES_SOURCE_UNIQUE) | {"1SPE-DERIVATION-LOCAL"} == set(SOURCES)
+    assert len(CHAPITRES_SOURCE_UNIQUE) == 35
+    assert set(CHAPITRES_SOURCE_UNIQUE) == set(SOURCES)
 
 
 def test_le_total_de_dette_diagnostique_est_derive_des_lignes() -> None:

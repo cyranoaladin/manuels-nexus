@@ -93,7 +93,7 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Pente de sécante confondue avec pente de tangente.",
+          "erreur": "L'eleve a ecrit le numerateur d'une pente de secante mais a conserve $x$ au denominateur ; le denominateur correct est $x-a$, avant passage a la limite.",
           "renvoi": "M2"
         },
         "C": {
@@ -119,11 +119,11 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Développement incorrect de $(2+h)^2$.",
+          "erreur": "L'eleve a developpe incompletement $(2+h)^2$ en $4+h^2$ puis a donne $f(2+h)$ sans former le taux $[f(2+h)-f(2)]/h$.",
           "renvoi": "R2"
         },
         "C": {
-          "erreur": "Erreur d'identification du terme 4.",
+          "erreur": "L'eleve a donne la valeur $f(2)=4$ au lieu de calculer le taux d'accroissement, qui vaut $4+h$.",
           "renvoi": "R2"
         },
         "D": {
@@ -223,11 +223,11 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "Sans la pente, la tangente n'est pas déterminée.",
+          "erreur": "L'eleve a confondu l'ordonnee a l'origine de la tangente avec son coefficient directeur ; $f'(a)$ represente le coefficient directeur.",
           "renvoi": "M3"
         },
         "B": {
-          "erreur": "Sans le point de contact, la tangente n'est pas positionnée.",
+          "erreur": "L'eleve a donne l'abscisse du point de contact $a$ au lieu du coefficient directeur de la tangente, qui est $f'(a)$.",
           "renvoi": "M3, M4"
         },
         "D": {
@@ -305,11 +305,11 @@
           "renvoi": "M4"
         },
         "C": {
-          "erreur": "La tangente passe par $(a, f(a))$, pas par $(a, 0)$.",
+          "erreur": "L'eleve a impose a tort que la tangente passe par l'origine, ce qui donnerait $p=0$ ; elle passe en general par $(a,f(a))$.",
           "renvoi": "M4"
         },
         "D": {
-          "erreur": "$y(a)$ doit valoir $f(a)$, pas $f'(a)$.",
+          "erreur": "L'eleve a confondu la pente $f'(a)$ avec l'ordonnee a l'origine $p$ ; la relation $f(a)=af'(a)+p$ donne $p=f(a)-af'(a)$.",
           "renvoi": "M4"
         }
       }

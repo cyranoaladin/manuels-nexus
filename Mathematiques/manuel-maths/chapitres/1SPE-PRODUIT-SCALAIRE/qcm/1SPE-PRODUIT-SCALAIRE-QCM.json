@@ -15,15 +15,15 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Oubli du signe dans $(-2) \\times 4$.",
+          "erreur": "L'eleve a soustrait les deux composantes de $\\vec u$ et calcule $3-(-2)=5$, au lieu de former les produits de composantes $3\\times1+(-2)\\times4$.",
           "renvoi": "M1"
         },
         "C": {
-          "erreur": "Erreur de calcul dans le produit des composantes.",
+          "erreur": "L'eleve a change a tort le signe du premier produit et calcule $-3-8=-11$ au lieu de $3-8=-5$.",
           "renvoi": "M1"
         },
         "D": {
-          "erreur": "Addition des composantes au lieu du produit scalaire.",
+          "erreur": "L'eleve a oublie le signe negatif de la deuxieme composante et calcule $3+8=11$ au lieu de $3+(-8)=-5$.",
           "renvoi": "M1"
         }
       }
@@ -49,7 +49,7 @@
           "renvoi": "M1; R3"
         },
         "D": {
-          "erreur": "Mauvaise valeur du cosinus de l'angle.",
+          "erreur": "L'eleve a utilise a tort $\\cos(\\pi/4)=\\sqrt{2}/2$ a la place de $\\cos(\\pi/3)=1/2$, obtenant $5\\times4\\times\\sqrt{2}/2=10\\sqrt{2}$.",
           "renvoi": "M1; R3"
         }
       }
@@ -123,7 +123,7 @@
           "renvoi": "M2"
         },
         "C": {
-          "erreur": "Confusion de coefficient.",
+          "erreur": "L'eleve a interprete $\\vec u\\cdot\\vec u$ comme la somme de deux exemplaires de la norme et additionne deux normes, d'ou $2\\Vert\\vec u\\Vert$ au lieu de $\\Vert\\vec u\\Vert^2$.",
           "renvoi": "M2"
         },
         "D": {
@@ -149,7 +149,7 @@
           "renvoi": "M2"
         },
         "C": {
-          "erreur": "Erreur d'application de la formule.",
+          "erreur": "L'eleve a transforme l'inegalite triangulaire $\\Vert\\vec u+\\vec v\\Vert\\leqslant\\Vert\\vec u\\Vert+\\Vert\\vec v\\Vert$ en egalite et obtenu $3+4=7$ ; l'egalite n'est pas justifiee ici.",
           "renvoi": "M2"
         },
         "D": {
@@ -175,7 +175,7 @@
           "renvoi": "M3"
         },
         "B": {
-          "erreur": "Idem.",
+          "erreur": "Un produit scalaire negatif caracterise un angle obtus, pas un angle droit ; l'orthogonalite exige un produit scalaire nul.",
           "renvoi": "M3"
         },
         "D": {
@@ -223,11 +223,11 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Confusion dans les valeurs remarquables de l'angle.",
+          "erreur": "L'eleve a utilise a tort $\\tan(\\theta)=1/\\sqrt{3}$, ce qui conduit a $\\theta=\\pi/6$ ; les coordonnees de $(1,1)$ donnent en realite $\\tan(\\theta)=1$.",
           "renvoi": "M3; R3"
         },
         "C": {
-          "erreur": "Confusion de valeur remarquable.",
+          "erreur": "L'eleve a utilise a tort $\\tan(\\theta)=\\sqrt{3}$, ce qui conduit a $\\theta=\\pi/3$ ; la pente du vecteur $(1,1)$ vaut $1$.",
           "renvoi": "M3; R3"
         },
         "D": {
@@ -361,7 +361,7 @@
           "renvoi": "M5"
         },
         "D": {
-          "erreur": "Erreur de calcul.",
+          "erreur": "L'eleve a calcule le carre de la difference des deux longueurs, $(8-5)^2=9$, au lieu d'appliquer $a^2=b^2+c^2-2bc\\cos(A)$.",
           "renvoi": "M5"
         }
       }
@@ -383,7 +383,7 @@
           "renvoi": "M5; R5"
         },
         "C": {
-          "erreur": "Formule incorrecte.",
+          "erreur": "L'eleve a conserve le terme $2bc$ et l'a pris pour $a^2$ ; lorsque $A=\\pi/2$, le terme $2bc\\cos(A)$ est nul, pas $a^2$.",
           "renvoi": "M5; R5"
         },
         "D": {

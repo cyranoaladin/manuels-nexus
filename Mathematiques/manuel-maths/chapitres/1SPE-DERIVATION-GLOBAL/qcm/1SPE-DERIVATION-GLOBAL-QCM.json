@@ -75,7 +75,7 @@
           "renvoi": "M1"
         },
         "D": {
-          "erreur": "Confusion avec la dérivée de $\\ln(x)$.",
+          "erreur": "$\\ln(x)$ est une primitive de $1/x$ sur $]0,+\\infty[$, pas la derivee de $1/x$ ; la derivee de $1/x$ vaut $-1/x^2$.",
           "renvoi": "M1"
         }
       }
@@ -353,15 +353,15 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "$x=60$ donne un volume nul $V(60)=0$.",
+          "erreur": "$V'(60)=0$, mais $60$ est hors de l'intervalle ouvert $]0;60[$ impose par l'enonce ; ce n'est donc pas une valeur admissible de $x$.",
           "renvoi": "M5"
         },
         "B": {
-          "erreur": "$x=40$ ne donne pas la racine de $V'(x)$.",
+          "erreur": "L'eleve a remplace a tort le facteur $120 - 6x$ de $V'(x)=(120-2x)(120-6x)$ par $120 - 3x$ ; resoudre $120 - 3x=0$ conduit exactement a $x=40$.",
           "renvoi": "M5"
         },
         "D": {
-          "erreur": "$x=10$ donne $V'(10) \\neq 0$.",
+          "erreur": "L'eleve a remplace a tort le facteur $120 - 6x$ par $60 - 6x$ ; resoudre $60 - 6x=0$ conduit exactement a $x=10$.",
           "renvoi": "M5"
         }
       }

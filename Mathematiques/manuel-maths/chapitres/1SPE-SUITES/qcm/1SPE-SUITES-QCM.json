@@ -45,11 +45,11 @@
           "renvoi": "M1, etape 3"
         },
         "C": {
-          "erreur": "L'eleve a remplace $n$ par $2$ directement dans la relation : $v_3 = 3 \\times 2 - 2 = 4$, ou a calcule $3 \\times v_2 - 2$ avec $v_2 = 12$. Confusion entre l'indice $n$ et la valeur $v_n$.",
+          "erreur": "L'eleve a oublie le $-2$ au premier passage et calcule $v_1=3\\times4=12$, puis applique la recurrence au terme suivant : $v_2=3\\times12-2=34$.",
           "renvoi": "M1, etape 3"
         },
         "D": {
-          "erreur": "L'eleve a calcule $v_1 = 3 \\times 4 - 2 = 10$ puis $v_2 = 3 \\times 10 - 2 = 28$ mais a commis une erreur arithmetique ($3 \\times 8 - 2 = 22$) en utilisant $v_1 = 8$ (probable confusion avec $2 \\times 4 = 8$).",
+          "erreur": "L'eleve a soustrait $v_0=4$ au lieu de la constante $2$ au premier passage, d'ou $v_1=3\\times4-4=8$, puis $v_2=3\\times8-2=22$.",
           "renvoi": "M1, etape 3"
         }
       }
@@ -112,14 +112,14 @@
       "enonce": "Soit $(u_n)$ une suite arithmetique de raison $r = -3$ et de premier terme $u_1 = 8$. Quelle est la valeur de $u_6$ ?",
       "options": {
         "A": "$-7$",
-        "B": "$-22$",
+        "B": "$-4$",
         "C": "$-10$",
         "D": "$u_6 = 8 + 6 \\times (-3) = -10$"
       },
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "L'eleve a applique la formule $u_n = u_0 + nr$ avec $u_0 = 8$ et $n = 6$ en confondant $u_1$ et $u_0$ : $8 + 6 \\times (-5) = -22$. Erreur sur le terme de depart de la formule.",
+          "erreur": "L'eleve a compte seulement quatre accroissements entre $u_1$ et $u_6$ et calcule $8+4\\times(-3)=-4$ ; il y en a cinq, donc $u_6=8+5\\times(-3)=-7$.",
           "renvoi": "M2, etape 4"
         },
         "C": {
@@ -249,7 +249,7 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve a calcule $20 \\times 10 = 200$ (moyenne $\\times$ dernier terme au lieu de moyenne $\\times$ nombre de termes). Erreur sur la formule de Gauss.",
+          "erreur": "L'eleve a utilise a tort $n^2/2$ et calcule $20^2/2=200$ ; la formule correcte est $n(n+1)/2=20\\times21/2=210$.",
           "renvoi": "M4, cas 1"
         },
         "C": {
@@ -309,7 +309,7 @@
           "renvoi": "M4, etape 1"
         },
         "D": {
-          "erreur": "L'eleve a ajoute $2$ a l'indice maximal : $14 + 2 = 16$. Erreur probable due a une confusion avec la formule $n+1$ appliquee a partir de $n=15$.",
+          "erreur": "L'eleve ajoute $2$ au lieu de $1$ dans le comptage inclusif et obtient l'option $16$ par $14+2$ ; de $0$ a $14$, il y a $14-0+1=15$ termes.",
           "renvoi": "M4, etape 1"
         }
       }
@@ -513,7 +513,7 @@
           "renvoi": "M7, Modele C, etape 2"
         },
         "C": {
-          "erreur": "Une boucle `for` sur un nombre fixe d'iterations ne permet pas de rechercher un seuil inconnu a l'avance. Si le seuil est atteint avant ou apres 100 iterations, le resultat est faux. Il faut une boucle `while`.",
+          "erreur": "Ce code ne contient aucun test de seuil ni instruction `break` : il effectue toujours 100 iterations et renvoie $n=100$, au lieu du premier rang ou $u_n>100$.",
           "renvoi": "M7, Modele C"
         },
         "D": {

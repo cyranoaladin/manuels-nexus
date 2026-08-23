@@ -10,8 +10,8 @@
       "correcte": "A",
       "diagnostics": {
         "B": {"erreur": "Inversion du coefficient directeur (1/2 au lieu de 2).", "renvoi": "M1, etape 1"},
-        "C": {"erreur": "Erreur de signe sur le coefficient de y.", "renvoi": "M1, etape 2"},
-        "D": {"erreur": "Confusion entre les coefficients a et b.", "renvoi": "M1, etape 2"}
+        "C": {"erreur": "L'eleve a choisi le vecteur normal $(2;1)$ puis ajuste la constante pour que le point $A$ verifie $2x+y-5=0$, sans verifier le point $B$, qui ne satisfait pas cette equation.", "renvoi": "M1, etape 2"},
+        "D": {"erreur": "L'eleve a choisi le vecteur normal $(1;2)$ et ajuste la constante avec le seul point $A$ ; le point $B$ ne verifie pas $x+2y-7=0$.", "renvoi": "M1, etape 2"}
       }
     },
     {
@@ -155,7 +155,7 @@
       "diagnostics": {
         "A": {"erreur": "Oubli du facteur $1/2$ dans la formule de l'aire.", "renvoi": "Cours C5, propriete 4"},
         "C": {"erreur": "Erreur de calcul : le determinant vaut $24$, pas $20$.", "renvoi": "Cours C5, propriete 4"},
-        "D": {"erreur": "Erreur de calcul : l'aire est $|4 \\times 6|/2 = 12$, pas $48$.", "renvoi": "Cours C5"}
+        "D": {"erreur": "L'eleve a calcule le determinant $|4 \\times 6|=24$ puis l'a multiplie par $2$ au lieu de le diviser par $2$, obtenant $48$.", "renvoi": "Cours C5"}
       }
     },
     {
