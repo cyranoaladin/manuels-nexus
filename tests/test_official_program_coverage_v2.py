@@ -1,12 +1,16 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 ATOMS_PATH = ROOT / "audit" / "OFFICIAL_PROGRAM_ATOMS_2026_2027.json"
 MATRIX_ROOT = ROOT / "audit" / "official_program_coverage"
+SCRIPT = ROOT / "scripts" / "build_official_program_coverage.py"
+REGISTRY = ROOT / "audit" / "OFFICIAL_PROGRAM_COVERAGE_2026_2027.json"
 MANUALS = ("1SPE", "TSPE", "TCOMPL", "TEXPERTES", "1NSI", "TNSI")
 STATES = {
     "UNMAPPED",
@@ -38,6 +42,16 @@ def _rows() -> list[dict]:
 
 def test_six_current_official_programme_matrices_exist() -> None:
     assert {path.stem for path in MATRIX_ROOT.glob("*.json")} == set(MANUALS)
+
+
+def test_official_programme_coverage_registry_is_current() -> None:
+    result = subprocess.run(
+        [sys.executable, str(SCRIPT), "--check"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
 
 
 def test_every_mandatory_atom_has_exactly_one_coverage_row() -> None:
@@ -96,3 +110,20 @@ def test_coverage_rows_are_traceable_and_do_not_fake_full() -> None:
             assert row["scientific_state"] == "PASS"
             assert row["pedagogical_state"] == "PASS"
             assert row["assessment_alignment_state"] == "PASS"
+
+
+def test_coverage_summary_is_derived_from_rows() -> None:
+    payload = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    rows = _rows()
+    summary = payload["summary"]
+
+    assert summary["mandatory_atoms"] == len(rows)
+    assert summary["mapped_mandatory_atoms"] == sum(
+        row["coverage_status"] != "UNMAPPED" for row in rows
+    )
+    assert summary["unmapped_mandatory_atoms"] == sum(
+        row["coverage_status"] == "UNMAPPED" for row in rows
+    )
+    assert summary["full_atoms"] == sum(
+        row["coverage_status"] == "FULL" for row in rows
+    )
