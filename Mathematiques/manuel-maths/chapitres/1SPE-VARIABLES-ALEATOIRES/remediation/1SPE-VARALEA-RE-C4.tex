@@ -1,25 +1,23 @@
 % META: {"id": "1SPE-VARALEA-RE-C4", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "remediation", "capacites_codes": ["C4"], "status": "generated"}
 
 \begin{exercice}{1SPE-VARALEA-RE-C4-EX1}{1}{10}
-Une variable aléatoire $X$ vérifie $E(X)=3$ et $V(X)=\frac94$. On pose $Y=2X-5$.
+Une variable aléatoire $X$ vérifie $E(X)=3$. On pose $Y=2X-5$.
 \begin{enumerate}
   \item Calculer $E(Y)$.
-  \item Calculer $V(Y)$ et $\sigma(Y)$.
-  \item On pose $Z=-X+4$. Calculer $E(Z)$ et $V(Z)$.
+  \item On pose $Z=-X+4$. Calculer $E(Z)$.
+  \item On pose $T=5-3X$. Calculer $E(T)$.
 \end{enumerate}
 \end{exercice}
 
 % BEGIN-VERIFY
-% from sympy import Rational
-% E, V = 3, Rational(9,4)
+% E = 3
 % assert 2*E-5 == 1
-% assert 4*V == 9
 % assert -E+4 == 1
-% assert V == Rational(9,4)
+% assert 5-3*E == -4
 % END-VERIFY
 
 \begin{corrige}{1SPE-VARALEA-RE-C4-EX1}
 \textbf{1.} $E(Y)=2E(X)-5=2\times3-5=1$.
-\textbf{2.} $V(Y)=2^2V(X)=4\times\frac94=9$, donc $\sigma(Y)=3$.
-\textbf{3.} $E(Z)=-E(X)+4=1$ et $V(Z)=(-1)^2V(X)=\frac94$.
+\textbf{2.} $E(Z)=-E(X)+4=-3+4=1$.
+\textbf{3.} $E(T)=5-3E(X)=5-3\times3=-4$.
 \end{corrige}

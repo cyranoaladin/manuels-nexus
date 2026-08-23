@@ -114,24 +114,24 @@
     },
     {
       "id": "Q11", "capacite": "C4",
-      "enonce": "On sait que $V(X)=5$ et on pose $Y=-2X+7$. Quelle est $V(Y)$ ?",
-      "options": {"A": "$-10$", "B": "$20$", "C": "$3$", "D": "$5$"},
+      "enonce": "On sait que $E(X)=5$ et on pose $Y=-2X+7$. Quelle est $E(Y)$ ?",
+      "options": {"A": "$-10$", "B": "$-3$", "C": "$17$", "D": "$12$"},
       "correcte": "B",
       "diagnostics": {
-        "A": {"erreur": "L'eleve multiplie V(X) par -2 sans mettre le coefficient au carre, ce qui produit une variance negative impossible.", "renvoi": "C4, variance affine"},
-        "C": {"erreur": "L'eleve calcule V(X)-2 et traite a tort le coefficient comme un terme soustrait.", "renvoi": "C4, variance affine"},
-        "D": {"erreur": "L'eleve pense que ni la multiplication par -2 ni l'ajout de 7 ne modifient la variance.", "renvoi": "C4, variance affine"}
+        "A": {"erreur": "L'eleve calcule -2E(X)=-10 mais oublie d'ajouter le terme constant 7.", "renvoi": "C4, linearite"},
+        "C": {"erreur": "L'eleve remplace le coefficient -2 par 2 et calcule 2E(X)+7=17.", "renvoi": "C4, linearite"},
+        "D": {"erreur": "L'eleve calcule E(X)+7=12 et oublie le coefficient -2 devant X.", "renvoi": "C4, linearite"}
       }
     },
     {
       "id": "Q12", "capacite": "C4",
-      "enonce": "On sait que $\\sigma(X)=3$ et on pose $Y=-4X+1$. Quelle est $\\sigma(Y)$ ?",
-      "options": {"A": "$-12$", "B": "$12$", "C": "$48$", "D": "$3$"},
+      "enonce": "On sait que $E(X)=-3$ et on pose $Y=-4X+1$. Quelle est $E(Y)$ ?",
+      "options": {"A": "$-13$", "B": "$13$", "C": "$-11$", "D": "$-2$"},
       "correcte": "B",
       "diagnostics": {
-        "A": {"erreur": "L'eleve multiplie l'ecart type par -4 sans prendre la valeur absolue ; un ecart type ne peut pas etre negatif.", "renvoi": "C4, ecart type affine"},
-        "C": {"erreur": "L'eleve utilise le carre du coefficient, regle de la variance, au lieu de sa valeur absolue pour l'ecart type : 4^2 fois 3=48.", "renvoi": "C4, ecart type affine"},
-        "D": {"erreur": "L'eleve pense que la multiplication par -4 ne modifie pas l'ecart type et conserve sigma(X)=3.", "renvoi": "C4, ecart type affine"}
+        "A": {"erreur": "L'eleve calcule 4E(X)-1=4 fois (-3)-1=-13 en changeant les deux signes de l'expression.", "renvoi": "C4, linearite"},
+        "C": {"erreur": "L'eleve remplace le coefficient -4 par 4 et calcule 4E(X)+1=-11.", "renvoi": "C4, linearite"},
+        "D": {"erreur": "L'eleve calcule E(X)+1=-2 et oublie le coefficient -4 devant X.", "renvoi": "C4, linearite"}
       }
     },
     {

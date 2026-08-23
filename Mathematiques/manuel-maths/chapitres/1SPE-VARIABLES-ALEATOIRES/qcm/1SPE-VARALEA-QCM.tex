@@ -97,20 +97,20 @@
     \item $2$
   \end{enumerate}
 
-\item \textbf{[Q11]} On sait que $V(X)=5$ et on pose $Y=-2X+7$. Quelle est $V(Y)$ ?
+\item \textbf{[Q11]} On sait que $E(X)=5$ et on pose $Y=-2X+7$. Quelle est $E(Y)$ ?
   \begin{enumerate}[label=\Alph*.]
     \item $-10$
-    \item $20$
-    \item $3$
-    \item $5$
+    \item $-3$
+    \item $17$
+    \item $12$
   \end{enumerate}
 
-\item \textbf{[Q12]} On sait que $\sigma(X)=3$ et on pose $Y=-4X+1$. Quelle est $\sigma(Y)$ ?
+\item \textbf{[Q12]} On sait que $E(X)=-3$ et on pose $Y=-4X+1$. Quelle est $E(Y)$ ?
   \begin{enumerate}[label=\Alph*.]
-    \item $-12$
-    \item $12$
-    \item $48$
-    \item $3$
+    \item $-13$
+    \item $13$
+    \item $-11$
+    \item $-2$
   \end{enumerate}
 
 \item[] \textbf{Capacite C5}
@@ -235,15 +235,15 @@ Q15 & C5 & \textbf{B} \\
   \end{itemize}
   \item \textbf{Q11}
   \begin{itemize}
-    \item \textbf{A} — L'eleve multiplie V(X) par -2 sans mettre le coefficient au carre, ce qui produit une variance negative impossible. \emph{Renvoi : C4, variance affine.}
-    \item \textbf{C} — L'eleve calcule V(X)-2 et traite a tort le coefficient comme un terme soustrait. \emph{Renvoi : C4, variance affine.}
-    \item \textbf{D} — L'eleve pense que ni la multiplication par -2 ni l'ajout de 7 ne modifient la variance. \emph{Renvoi : C4, variance affine.}
+    \item \textbf{A} — L'eleve calcule -2E(X)=-10 mais oublie d'ajouter le terme constant 7. \emph{Renvoi : C4, linearite.}
+    \item \textbf{C} — L'eleve remplace le coefficient -2 par 2 et calcule 2E(X)+7=17. \emph{Renvoi : C4, linearite.}
+    \item \textbf{D} — L'eleve calcule E(X)+7=12 et oublie le coefficient -2 devant X. \emph{Renvoi : C4, linearite.}
   \end{itemize}
   \item \textbf{Q12}
   \begin{itemize}
-    \item \textbf{A} — L'eleve multiplie l'ecart type par -4 sans prendre la valeur absolue ; un ecart type ne peut pas etre negatif. \emph{Renvoi : C4, ecart type affine.}
-    \item \textbf{C} — L'eleve utilise le carre du coefficient, regle de la variance, au lieu de sa valeur absolue pour l'ecart type : 4\textasciicircum{}2 fois 3=48. \emph{Renvoi : C4, ecart type affine.}
-    \item \textbf{D} — L'eleve pense que la multiplication par -4 ne modifie pas l'ecart type et conserve sigma(X)=3. \emph{Renvoi : C4, ecart type affine.}
+    \item \textbf{A} — L'eleve calcule 4E(X)-1=4 fois (-3)-1=-13 en changeant les deux signes de l'expression. \emph{Renvoi : C4, linearite.}
+    \item \textbf{C} — L'eleve remplace le coefficient -4 par 4 et calcule 4E(X)+1=-11. \emph{Renvoi : C4, linearite.}
+    \item \textbf{D} — L'eleve calcule E(X)+1=-2 et oublie le coefficient -4 devant X. \emph{Renvoi : C4, linearite.}
   \end{itemize}
   \item \textbf{Q13}
   \begin{itemize}

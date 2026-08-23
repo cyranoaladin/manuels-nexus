@@ -2,7 +2,7 @@
   "artifact_name": "QCM_SCIENTIFIC_ANSWER_KEY_AUDIT",
   "evidence_partitions": [
     {
-      "evidence_digest": "sha256:bd216110bed1f970e777e32563927a0b185ebf83e14de2858541c53dd8bc011f",
+      "evidence_digest": "sha256:01236d3ce3a5bfba5cd8b484292e29e880e1677bb2e68c09d9aecd8109747c33",
       "name": "1SPE",
       "path": "audit/qcm_review_evidence/1SPE_162.json",
       "question_count": 162,
@@ -29,7 +29,7 @@
     "scope": "all 330 Math QCM questions; no sampling",
     "source_currentness": "per-source SHA256 equality required"
   },
-  "qcm_source_digest": "sha256:9b907834b95dd13f7e4415926968bb72eb98bdfa4309099cc77dd5760961dbff",
+  "qcm_source_digest": "sha256:e88136cc428a85e3dfcddc5553ec317c5ad6828128d45537e51e6c72cfbcd7b1",
   "questions": [
     {
       "answer_key_status": "PASS",
@@ -9047,7 +9047,7 @@
       "question_id": "Q1",
       "review_status": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
-      "source_sha256": "4ff9d7cf05effc83414d3e9ad84266a8530fff16617568c241e9fdf6afdc0f24",
+      "source_sha256": "41e0e593b4cb45b92ff22e16f0eb20e9f6dcf2716cdba749f830b965b9b5d2a3",
       "statement": "On lance un de equilibre. Soit $X$ le resultat. Quelle est $P(X = 3)$ ?",
       "unique_correct_option": "PASS",
       "variant_visibility": {
@@ -9108,7 +9108,7 @@
       "question_id": "Q10",
       "review_status": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
-      "source_sha256": "4ff9d7cf05effc83414d3e9ad84266a8530fff16617568c241e9fdf6afdc0f24",
+      "source_sha256": "41e0e593b4cb45b92ff22e16f0eb20e9f6dcf2716cdba749f830b965b9b5d2a3",
       "statement": "On sait que $E(X)=4$ et on pose $Y=3X-2$. Quelle est $E(Y)$ ?",
       "unique_correct_option": "PASS",
       "variant_visibility": {
@@ -9131,23 +9131,23 @@
       "diagnostics": [
         {
           "causal_consistency": "PASS",
-          "error_model": "L'eleve multiplie V(X) par -2 sans mettre le coefficient au carre, ce qui produit une variance negative impossible.",
+          "error_model": "L'eleve calcule -2E(X)=-10 mais oublie d'ajouter le terme constant 7.",
           "option": "A",
-          "remediation_reference": "C4, variance affine",
+          "remediation_reference": "C4, linearite",
           "specificity": "PASS"
         },
         {
           "causal_consistency": "PASS",
-          "error_model": "L'eleve calcule V(X)-2 et traite a tort le coefficient comme un terme soustrait.",
+          "error_model": "L'eleve remplace le coefficient -2 par 2 et calcule 2E(X)+7=17.",
           "option": "C",
-          "remediation_reference": "C4, variance affine",
+          "remediation_reference": "C4, linearite",
           "specificity": "PASS"
         },
         {
           "causal_consistency": "PASS",
-          "error_model": "L'eleve pense que ni la multiplication par -2 ni l'ajout de 7 ne modifient la variance.",
+          "error_model": "L'eleve calcule E(X)+7=12 et oublie le coefficient -2 devant X.",
           "option": "D",
-          "remediation_reference": "C4, variance affine",
+          "remediation_reference": "C4, linearite",
           "specificity": "PASS"
         }
       ],
@@ -9155,22 +9155,22 @@
       "evidence_partition": "audit/qcm_review_evidence/1SPE_162.json",
       "evidence_source_sha": "56839d4314ad4a9574d1d4992ec19c20f2e1c1e1",
       "generic_diagnostics_requiring_rewrite": [],
-      "independent_solution": "V(-2X+7)=(-2)^2 V(X)=4*5=20 : B.",
+      "independent_solution": "E(-2X+7)=-2E(X)+7=-2*5+7=-3 : B.",
       "manual": "1SPE",
       "minimal_correction": null,
       "options": {
         "A": "$-10$",
-        "B": "$20$",
-        "C": "$3$",
-        "D": "$5$"
+        "B": "$-3$",
+        "C": "$17$",
+        "D": "$12$"
       },
       "programme_alignment": "MANDATORY_PROGRAMME",
       "programme_authority": "MENE2602917A",
       "question_id": "Q11",
       "review_status": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
-      "source_sha256": "4ff9d7cf05effc83414d3e9ad84266a8530fff16617568c241e9fdf6afdc0f24",
-      "statement": "On sait que $V(X)=5$ et on pose $Y=-2X+7$. Quelle est $V(Y)$ ?",
+      "source_sha256": "41e0e593b4cb45b92ff22e16f0eb20e9f6dcf2716cdba749f830b965b9b5d2a3",
+      "statement": "On sait que $E(X)=5$ et on pose $Y=-2X+7$. Quelle est $E(Y)$ ?",
       "unique_correct_option": "PASS",
       "variant_visibility": {
         "status": "PASS",
@@ -9192,23 +9192,23 @@
       "diagnostics": [
         {
           "causal_consistency": "PASS",
-          "error_model": "L'eleve multiplie l'ecart type par -4 sans prendre la valeur absolue ; un ecart type ne peut pas etre negatif.",
+          "error_model": "L'eleve calcule 4E(X)-1=4 fois (-3)-1=-13 en changeant les deux signes de l'expression.",
           "option": "A",
-          "remediation_reference": "C4, ecart type affine",
+          "remediation_reference": "C4, linearite",
           "specificity": "PASS"
         },
         {
           "causal_consistency": "PASS",
-          "error_model": "L'eleve utilise le carre du coefficient, regle de la variance, au lieu de sa valeur absolue pour l'ecart type : 4^2 fois 3=48.",
+          "error_model": "L'eleve remplace le coefficient -4 par 4 et calcule 4E(X)+1=-11.",
           "option": "C",
-          "remediation_reference": "C4, ecart type affine",
+          "remediation_reference": "C4, linearite",
           "specificity": "PASS"
         },
         {
           "causal_consistency": "PASS",
-          "error_model": "L'eleve pense que la multiplication par -4 ne modifie pas l'ecart type et conserve sigma(X)=3.",
+          "error_model": "L'eleve calcule E(X)+1=-2 et oublie le coefficient -4 devant X.",
           "option": "D",
-          "remediation_reference": "C4, ecart type affine",
+          "remediation_reference": "C4, linearite",
           "specificity": "PASS"
         }
       ],
@@ -9216,22 +9216,22 @@
       "evidence_partition": "audit/qcm_review_evidence/1SPE_162.json",
       "evidence_source_sha": "56839d4314ad4a9574d1d4992ec19c20f2e1c1e1",
       "generic_diagnostics_requiring_rewrite": [],
-      "independent_solution": "sigma(-4X+1)=|-4| sigma(X)=4*3=12 : B.",
+      "independent_solution": "E(-4X+1)=-4E(X)+1=-4*(-3)+1=13 : B.",
       "manual": "1SPE",
       "minimal_correction": null,
       "options": {
-        "A": "$-12$",
-        "B": "$12$",
-        "C": "$48$",
-        "D": "$3$"
+        "A": "$-13$",
+        "B": "$13$",
+        "C": "$-11$",
+        "D": "$-2$"
       },
       "programme_alignment": "MANDATORY_PROGRAMME",
       "programme_authority": "MENE2602917A",
       "question_id": "Q12",
       "review_status": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
-      "source_sha256": "4ff9d7cf05effc83414d3e9ad84266a8530fff16617568c241e9fdf6afdc0f24",
-      "statement": "On sait que $\\sigma(X)=3$ et on pose $Y=-4X+1$. Quelle est $\\sigma(Y)$ ?",
+      "source_sha256": "41e0e593b4cb45b92ff22e16f0eb20e9f6dcf2716cdba749f830b965b9b5d2a3",
+      "statement": "On sait que $E(X)=-3$ et on pose $Y=-4X+1$. Quelle est $E(Y)$ ?",
       "unique_correct_option": "PASS",
       "variant_visibility": {
         "status": "PASS",
@@ -9291,7 +9291,7 @@
       "question_id": "Q13",
       "review_status": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
-      "source_sha256": "4ff9d7cf05effc83414d3e9ad84266a8530fff16617568c241e9fdf6afdc0f24",
+      "source_sha256": "41e0e593b4cb45b92ff22e16f0eb20e9f6dcf2716cdba749f830b965b9b5d2a3",
       "statement": "Un joueur paie 3 euros et recoit 15 euros s'il obtient un 6 au de. Gain algebrique si 6 ?",
       "unique_correct_option": "PASS",
       "variant_visibility": {
@@ -9352,7 +9352,7 @@
       "question_id": "Q14",
       "review_status": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
-      "source_sha256": "4ff9d7cf05effc83414d3e9ad84266a8530fff16617568c241e9fdf6afdc0f24",
+      "source_sha256": "41e0e593b4cb45b92ff22e16f0eb20e9f6dcf2716cdba749f830b965b9b5d2a3",
       "statement": "Un jeu a un gain moyen $E(G) = -0{,}5$ euro. Le jeu est :",
       "unique_correct_option": "PASS",
       "variant_visibility": {
@@ -9413,7 +9413,7 @@
       "question_id": "Q15",
       "review_status": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
-      "source_sha256": "4ff9d7cf05effc83414d3e9ad84266a8530fff16617568c241e9fdf6afdc0f24",
+      "source_sha256": "41e0e593b4cb45b92ff22e16f0eb20e9f6dcf2716cdba749f830b965b9b5d2a3",
       "statement": "Prime $c=60$ euros, sinistre $1000$ euros, probabilite $1/25$. Benefice moyen ?",
       "unique_correct_option": "PASS",
       "variant_visibility": {
@@ -9474,7 +9474,7 @@
       "question_id": "Q2",
       "review_status": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
-      "source_sha256": "4ff9d7cf05effc83414d3e9ad84266a8530fff16617568c241e9fdf6afdc0f24",
+      "source_sha256": "41e0e593b4cb45b92ff22e16f0eb20e9f6dcf2716cdba749f830b965b9b5d2a3",
       "statement": "La somme des probabilites d'un tableau de loi vaut toujours :",
       "unique_correct_option": "PASS",
       "variant_visibility": {
@@ -9535,7 +9535,7 @@
       "question_id": "Q3",
       "review_status": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
-      "source_sha256": "4ff9d7cf05effc83414d3e9ad84266a8530fff16617568c241e9fdf6afdc0f24",
+      "source_sha256": "41e0e593b4cb45b92ff22e16f0eb20e9f6dcf2716cdba749f830b965b9b5d2a3",
       "statement": "On lance deux pieces. Soit $X$ le nombre de Pile. Quelle est $P(X = 1)$ ?",
       "unique_correct_option": "PASS",
       "variant_visibility": {
@@ -9596,7 +9596,7 @@
       "question_id": "Q4",
       "review_status": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
-      "source_sha256": "4ff9d7cf05effc83414d3e9ad84266a8530fff16617568c241e9fdf6afdc0f24",
+      "source_sha256": "41e0e593b4cb45b92ff22e16f0eb20e9f6dcf2716cdba749f830b965b9b5d2a3",
       "statement": "On lance un de equilibre. Quelle est l'esperance $E(X)$ du resultat ?",
       "unique_correct_option": "PASS",
       "variant_visibility": {
@@ -9657,7 +9657,7 @@
       "question_id": "Q5",
       "review_status": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
-      "source_sha256": "4ff9d7cf05effc83414d3e9ad84266a8530fff16617568c241e9fdf6afdc0f24",
+      "source_sha256": "41e0e593b4cb45b92ff22e16f0eb20e9f6dcf2716cdba749f830b965b9b5d2a3",
       "statement": "Si $V(X) = 9$, alors $\\sigma(X)$ vaut :",
       "unique_correct_option": "PASS",
       "variant_visibility": {
@@ -9718,7 +9718,7 @@
       "question_id": "Q6",
       "review_status": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
-      "source_sha256": "4ff9d7cf05effc83414d3e9ad84266a8530fff16617568c241e9fdf6afdc0f24",
+      "source_sha256": "41e0e593b4cb45b92ff22e16f0eb20e9f6dcf2716cdba749f830b965b9b5d2a3",
       "statement": "Si $E(X) = 4$ et $V(X) = 5$, quelle est $E(X^2)$ ?",
       "unique_correct_option": "PASS",
       "variant_visibility": {
@@ -9779,7 +9779,7 @@
       "question_id": "Q7",
       "review_status": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
-      "source_sha256": "4ff9d7cf05effc83414d3e9ad84266a8530fff16617568c241e9fdf6afdc0f24",
+      "source_sha256": "41e0e593b4cb45b92ff22e16f0eb20e9f6dcf2716cdba749f830b965b9b5d2a3",
       "statement": "On repete trois fois, de facon independante, une epreuve dont le succes a probabilite $\\frac{1}{2}$. Quelle est la probabilite d'obtenir trois succes ?",
       "unique_correct_option": "PASS",
       "variant_visibility": {
@@ -9840,7 +9840,7 @@
       "question_id": "Q8",
       "review_status": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
-      "source_sha256": "4ff9d7cf05effc83414d3e9ad84266a8530fff16617568c241e9fdf6afdc0f24",
+      "source_sha256": "41e0e593b4cb45b92ff22e16f0eb20e9f6dcf2716cdba749f830b965b9b5d2a3",
       "statement": "On repete deux fois, de facon independante, une epreuve dont le succes a probabilite $\\frac{1}{3}$. Quelle est la probabilite d'obtenir exactement un succes ?",
       "unique_correct_option": "PASS",
       "variant_visibility": {
@@ -9901,7 +9901,7 @@
       "question_id": "Q9",
       "review_status": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
-      "source_sha256": "4ff9d7cf05effc83414d3e9ad84266a8530fff16617568c241e9fdf6afdc0f24",
+      "source_sha256": "41e0e593b4cb45b92ff22e16f0eb20e9f6dcf2716cdba749f830b965b9b5d2a3",
       "statement": "Une epreuve a deux issues. On la repete trois fois. Combien l'arbre complet possede-t-il de chemins terminaux ?",
       "unique_correct_option": "PASS",
       "variant_visibility": {

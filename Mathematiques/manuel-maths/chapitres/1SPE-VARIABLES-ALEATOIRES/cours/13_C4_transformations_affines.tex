@@ -5,21 +5,21 @@
 \propriete{
 Si $Y=aX+b$, où $a$ et $b$ sont deux réels, alors
 \[
-E(Y)=aE(X)+b,\qquad V(Y)=a^2V(X),\qquad
-\sigma(Y)=|a|\sigma(X).
+E(Y)=aE(X)+b.
 \]
-Ajouter une constante déplace toutes les valeurs sans modifier leur
-dispersion ; multiplier par $a$ multiplie les écarts à la moyenne par $|a|$.
+Cette propriété est la \textbf{linéarité de l'espérance}. Elle permet de
+calculer la valeur moyenne d'une grandeur obtenue par changement d'échelle
+et ajout d'une constante, sans reconstruire toute sa loi.
 }
 
 \exemple{
-Une recette $X$, exprimée en euros, vérifie $E(X)=12$ et $V(X)=5$. Après des
-frais fixes de $3$ euros, le bénéfice est $Y=X-3$. Alors
-$E(Y)=9$ et $V(Y)=5$. Si toutes les sommes sont ensuite doublées, pour
-$Z=2Y$ on obtient $E(Z)=18$ et $V(Z)=20$.
+Une recette $X$, exprimée en euros, vérifie $E(X)=12$. Après des frais fixes
+de $3$ euros, le bénéfice est $Y=X-3$. Alors
+$E(Y)=E(X)-3=9$. Si toutes les sommes sont ensuite doublées, pour $Z=2Y$ on
+obtient $E(Z)=2E(Y)=18$.
 }
 
 \erreurFrequente{
-La variance n'est pas affine : $V(aX+b)$ ne vaut ni $aV(X)+b$ ni
-$aV(X)$. Le coefficient est mis au carré et la constante $b$ disparaît.
+Dans $E(aX+b)=aE(X)+b$, le terme constant $b$ n'est pas multiplié par $a$.
+Par exemple, $E(2X-3)=2E(X)-3$, et non $2\bigl(E(X)-3\bigr)$.
 }

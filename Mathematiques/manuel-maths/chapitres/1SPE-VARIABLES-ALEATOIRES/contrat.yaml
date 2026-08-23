@@ -8,12 +8,13 @@ capacites:
   - { code: C1, ref_capacite: 1SPE-VARIABLES-ALEATOIRES-C1, libelle_eleve: "Je sais interpreter les evenements lies a une variable aleatoire et determiner sa loi de probabilite." }
   - { code: C2, ref_capacite: 1SPE-VARIABLES-ALEATOIRES-C2, libelle_eleve: "Je sais calculer l'esperance E(X), la variance V(X) et l'ecart type sigma(X) d'une variable aleatoire." }
   - { code: C3, ref_capacite: 1SPE-VARIABLES-ALEATOIRES-C3, libelle_eleve: "Je sais representer par un arbre la repetition de n <= 4 epreuves de Bernoulli independantes et identiques, puis etudier le nombre de succes." }
-  - { code: C4, ref_capacite: 1SPE-VARIABLES-ALEATOIRES-C4, libelle_eleve: "Je sais utiliser la linearite de l'esperance et les formules d'une transformation affine d'une variable aleatoire." }
+  - { code: C4, ref_capacite: 1SPE-VARIABLES-ALEATOIRES-C4, libelle_eleve: "Je sais utiliser la linearite de l'esperance pour calculer E(aX+b)." }
   - { code: C5, ref_capacite: 1SPE-VARIABLES-ALEATOIRES-C5, libelle_eleve: "Je sais resoudre des problemes contextualises (jeux, decisions, assurances) a l'aide de variables aleatoires." }
 
 extensions_facultatives:
   - { code: X1, label: "Approfondissement — Vers la Terminale", libelle: "Loi binomiale nommee, coefficients binomiaux et formule des probabilites", programme_alignment: OPTIONAL_EXTENSION }
   - { code: X2, label: "Approfondissement — Vers la Terminale", libelle: "Esperance, variance et ecart type d'une loi binomiale", programme_alignment: OPTIONAL_EXTENSION }
+  - { code: X3, label: "Approfondissement — Vers la Terminale", libelle: "Variance et ecart type d'une transformation affine d'une variable aleatoire", programme_alignment: OPTIONAL_EXTENSION }
 
 prerequis:
   - { code: R1, libelle: "Probabilites de base : experience aleatoire, univers, evenements, probabilite d'un evenement", chapitre_origine: "2GT" }

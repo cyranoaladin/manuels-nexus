@@ -6,7 +6,10 @@
 % assert E_G == 0
 % E_X2 = sum(k*k*probabilities[k] for k in range(4))
 % V_X = E_X2-E_X**2; assert V_X == Rational(5,12)
-% V_G = 100*V_X; assert V_G == Rational(500,12)
+% probabilities_G = [Rational(125,216), Rational(75,216), Rational(15,216), Rational(1,216)]
+% values_G = [-5, 5, 15, 25]
+% E_G2 = sum(g*g*p for g,p in zip(values_G, probabilities_G))
+% V_G = E_G2-E_G**2; assert V_G == Rational(125,3)
 % END-VERIFY
 \begin{corrige}{1SPE-VARALEA-EX-046}
 
@@ -33,9 +36,12 @@ P & \frac{125}{216} & \frac{75}{216} & \frac{15}{216} & \frac{1}{216} \\
 $E(G)=10E(X)-5=10\times\frac12-5=0$. Le jeu est équitable.
 
 \medskip
-\textbf{4.} Le tableau donne $E(X^2)=\frac23$, donc
-$V(X)=\frac23-\left(\frac12\right)^2=\frac5{12}$.
-Ainsi, $V(G)=100V(X)=\frac{125}{3}\approx41{,}7$ et
-$\sigma(G)=10\sqrt{\frac5{12}}\approx6{,}45$~euros.
+\textbf{4.} À partir du tableau de loi de $G$,
+\[
+E(G^2)=25\times\frac{125}{216}+25\times\frac{75}{216}
++225\times\frac{15}{216}+625\times\frac{1}{216}=\frac{125}{3}.
+\]
+Comme $E(G)=0$, on obtient $V(G)=E(G^2)-[E(G)]^2=\frac{125}{3}
+\approx41{,}7$ et $\sigma(G)=\sqrt{\frac{125}{3}}\approx6{,}45$~euros.
 
 \end{corrige}

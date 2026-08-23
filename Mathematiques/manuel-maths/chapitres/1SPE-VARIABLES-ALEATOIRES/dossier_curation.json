@@ -20,7 +20,7 @@
     },
     "C4": {
       "chunks_retenus": [],
-      "brief": "Linearite de l'esperance : E(aX+b)=aE(X)+b. Pour une transformation affine Y=aX+b : V(Y)=a^2V(X) et sigma(Y)=|a|sigma(X). Erreurs types : (1) ecrire V(aX+b)=aV(X)+b ; (2) oublier le carre sur a ; (3) oublier la valeur absolue pour l'ecart type.",
+      "brief": "Linearite de l'esperance : E(aX+b)=aE(X)+b. Erreurs types : (1) oublier le terme constant b ; (2) multiplier b par a ; (3) oublier le signe du coefficient a.",
       "angles_morts": []
     },
     "C5": {
@@ -38,6 +38,13 @@
     "X2": {
       "chunks_retenus": [],
       "brief": "Formules des moments d'une loi binomiale et demonstrations associees.",
+      "angles_morts": [],
+      "programme_alignment": "OPTIONAL_EXTENSION",
+      "extension_label": "Approfondissement — Vers la Terminale"
+    },
+    "X3": {
+      "chunks_retenus": [],
+      "brief": "Variance et ecart type d'une transformation affine : V(aX+b)=a^2V(X) et sigma(aX+b)=|a|sigma(X).",
       "angles_morts": [],
       "programme_alignment": "OPTIONAL_EXTENSION",
       "extension_label": "Approfondissement — Vers la Terminale"
