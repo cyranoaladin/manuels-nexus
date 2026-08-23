@@ -3,17 +3,14 @@
 from __future__ import annotations
 
 from pathlib import Path
-import sys
 
 import pytest
+from NSI.scripts import pdf_integrity
 
 fitz = pytest.importorskip("fitz")
 
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts"))
-
-import pdf_integrity  # noqa: E402
 
 
 def _write_pdf(

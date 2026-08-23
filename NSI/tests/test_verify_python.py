@@ -4,10 +4,10 @@ import subprocess
 import sys
 from pathlib import Path
 
+from NSI.scripts import verify_python
+from NSI.scripts.verify_python import check_object
+
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts"))
-import verify_python  # noqa: E402
-from verify_python import check_object  # noqa: E402
 
 GOOD = "% BEGIN-TRACE\n% print(1 + 1)\n% EXPECTED\n% 2\n% END-TRACE\n"
 BAD = "% BEGIN-TRACE\n% print(1 + 1)\n% EXPECTED\n% 3\n% END-TRACE\n"

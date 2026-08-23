@@ -8,26 +8,15 @@ Fige le comportement apres chaque assouplissement :
 - « a completer » entre backticks ou dans un env python (trous ECE) → VERT
 """
 import json
-import importlib.util
 import re
 import tempfile
 from pathlib import Path
 
 import pytest
 import yaml
+from NSI.scripts import assemble
 
-# Import gate logic
-import sys
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts"))
-
-_ASSEMBLE_SPEC = importlib.util.spec_from_file_location(
-    "nexus_nsi_assemble_gates", ROOT / "scripts/assemble.py"
-)
-assert _ASSEMBLE_SPEC is not None and _ASSEMBLE_SPEC.loader is not None
-assemble = importlib.util.module_from_spec(_ASSEMBLE_SPEC)
-sys.modules[_ASSEMBLE_SPEC.name] = assemble
-_ASSEMBLE_SPEC.loader.exec_module(assemble)
 
 
 LANGUAGE_SPECIFICATION_REFS = {
@@ -71,8 +60,8 @@ def test_language_specification_capacities_are_traced_individually():
 
 # --- check_eleve_no_corrige patterns ---
 
-from gates_corpus import check_eleve_no_corrige as eleve_no_corrige  # noqa: E402
-from gates_corpus.check_eleve_no_corrige import FORBIDDEN, is_allowed  # noqa: E402
+from NSI.scripts.gates_corpus import check_eleve_no_corrige as eleve_no_corrige
+from NSI.scripts.gates_corpus.check_eleve_no_corrige import FORBIDDEN, is_allowed
 
 
 def _scan_content(text: str) -> list[str]:
@@ -229,14 +218,14 @@ La réponse est 42.
 
     def test_qcm_diagnostic_adjacent_fails(self):
         """Diagnostic adjacent a une option QCM = ROUGE (revele la reponse)."""
-        from gates_corpus.check_eleve_no_corrige import QCM_DIAG_RE
+        from NSI.scripts.gates_corpus.check_eleve_no_corrige import QCM_DIAG_RE
         text = r"""\item \lstinline{<class 'list'>}
         \quad\textit{Si tu as répondu A : tu confonds tuple et liste.}"""
         assert QCM_DIAG_RE.search(text) is not None
 
     def test_qcm_clean_options_pass(self):
         """Options QCM propres (sans diagnostic) = VERT."""
-        from gates_corpus.check_eleve_no_corrige import QCM_DIAG_RE
+        from NSI.scripts.gates_corpus.check_eleve_no_corrige import QCM_DIAG_RE
         text = r"""\item \lstinline{<class 'list'>}
   \item \lstinline{<class 'tuple'>}
   \item \lstinline{<class 'int'>}"""
@@ -285,7 +274,7 @@ class TestEleveNoCorrigeCli:
 
 # --- check_no_placeholders patterns ---
 
-from gates_corpus.check_no_placeholders import PLACEHOLDER_RE, SKIP_DIRS
+from NSI.scripts.gates_corpus.check_no_placeholders import PLACEHOLDER_RE, SKIP_DIRS
 
 
 class TestNoPlaceholders:
@@ -336,7 +325,7 @@ def mystere(n):
         """Les fichiers .md a la racine (workflow docs) sont exclus.
         Faux positif demontre : PILOTE_A_VALIDER.md contient 'a completer'
         dans la description de la version amenagee (trous pedagogiques)."""
-        from gates_corpus.check_no_placeholders import ROOT as NP_ROOT
+        from NSI.scripts.gates_corpus.check_no_placeholders import ROOT as NP_ROOT
         # Le gate skip les .md dont le parent est ROOT
         root_md = NP_ROOT / "PILOTE_A_VALIDER.md"
         assert root_md.parent == NP_ROOT, "PILOTE est bien a la racine"
@@ -344,7 +333,7 @@ def mystere(n):
 
 # --- check_accents_contenu patterns ---
 
-from gates_corpus.check_accents_contenu import find_violations
+from NSI.scripts.gates_corpus.check_accents_contenu import find_violations
 
 
 class TestAccentsContenu:
@@ -420,7 +409,10 @@ Le résultat est correct. % sequence en commentaire
 
 # --- check_ascii_code patterns ---
 
-from gates_corpus.check_ascii_code import FORBIDDEN_CHARACTERS, find_violations as find_ascii_violations
+from NSI.scripts.gates_corpus.check_ascii_code import (
+    FORBIDDEN_CHARACTERS,
+    find_violations as find_ascii_violations,
+)
 
 
 @pytest.mark.parametrize("character", FORBIDDEN_CHARACTERS)

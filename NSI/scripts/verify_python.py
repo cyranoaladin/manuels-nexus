@@ -20,7 +20,10 @@ import sys
 import tempfile
 from pathlib import Path
 
-from common import ROOT, write_json
+if __package__:
+    from .common import ROOT, write_json
+else:  # Compatibilite avec `python scripts/verify_python.py` depuis NSI/.
+    from common import ROOT, write_json
 
 VERIFY = re.compile(r"% BEGIN-VERIFY\n(.*?)% END-VERIFY", re.S)
 TRACE = re.compile(r"% BEGIN-TRACE\n(.*?)% EXPECTED\n(.*?)% END-TRACE", re.S)

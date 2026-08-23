@@ -16,8 +16,12 @@ import sys
 import tempfile
 from pathlib import Path
 
-from common import ROOT
-from pdf_integrity import preflight_book_pdf, verify_pdf
+if __package__:
+    from .common import ROOT
+    from .pdf_integrity import preflight_book_pdf, verify_pdf
+else:  # Compatibilite avec `python scripts/assemble.py` depuis NSI/.
+    from common import ROOT
+    from pdf_integrity import preflight_book_pdf, verify_pdf
 
 VARIANTS = [
     "eleve",

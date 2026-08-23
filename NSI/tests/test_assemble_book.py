@@ -1,6 +1,5 @@
 """Tests rouges/verts du mode assembleur manuel NSI."""
 import json
-import importlib.util
 import os
 import re
 from pathlib import Path
@@ -8,16 +7,9 @@ import subprocess
 import sys
 import pytest
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts"))
+from NSI.scripts import assemble
 
-_ASSEMBLE_SPEC = importlib.util.spec_from_file_location(
-    "nexus_nsi_assemble", ROOT / "scripts/assemble.py"
-)
-assert _ASSEMBLE_SPEC is not None and _ASSEMBLE_SPEC.loader is not None
-assemble = importlib.util.module_from_spec(_ASSEMBLE_SPEC)
-sys.modules[_ASSEMBLE_SPEC.name] = assemble
-_ASSEMBLE_SPEC.loader.exec_module(assemble)
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def _valid_manifest(**overrides):

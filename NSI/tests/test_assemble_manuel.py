@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import importlib.util
+import importlib
 import hashlib
 import inspect
 import json
@@ -14,6 +14,8 @@ import sys
 from types import SimpleNamespace
 
 import pytest
+
+from NSI.scripts import assemble_manuel as canonical_assembler
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -57,26 +59,7 @@ TOOL_VERSIONS = {
 
 def _load_assembler():
     assert ASSEMBLER_PATH.is_file(), "assemble_manuel.py doit etre cree"
-    scripts = str(ROOT / "scripts")
-    if scripts not in sys.path:
-        sys.path.insert(0, scripts)
-    for module_name in ("common", "pdf_integrity", "assemble", "assemble_manuel"):
-        sys.modules.pop(module_name, None)
-    for module_name in ("common", "pdf_integrity", "assemble"):
-        dependency_spec = importlib.util.spec_from_file_location(
-            module_name,
-            ROOT / "scripts" / f"{module_name}.py",
-        )
-        assert dependency_spec is not None and dependency_spec.loader is not None
-        dependency = importlib.util.module_from_spec(dependency_spec)
-        sys.modules[module_name] = dependency
-        dependency_spec.loader.exec_module(dependency)
-    spec = importlib.util.spec_from_file_location("assemble_manuel", ASSEMBLER_PATH)
-    assert spec is not None and spec.loader is not None
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
-    return module
+    return importlib.reload(canonical_assembler)
 
 
 @pytest.fixture()

@@ -23,8 +23,12 @@ import sys
 import tempfile
 from typing import Any
 
-import assemble as legacy
-from common import ROOT as PROJECT_ROOT
+if __package__:
+    from . import assemble as legacy
+    from .common import ROOT as PROJECT_ROOT
+else:  # Compatibilite avec `python scripts/assemble_manuel.py` depuis NSI/.
+    import assemble as legacy
+    from common import ROOT as PROJECT_ROOT
 
 
 ROOT = PROJECT_ROOT
