@@ -12,22 +12,22 @@
         "C": "$\\ln 2 \\times \\ln x$.",
         "D": "$(\\ln x)^2$."
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "Le coefficient $2$ a ete traite comme un exposant de $x$ ; la regle correcte pour le produit est $\\ln(2x)=\\ln 2+\\ln x$."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le logarithme d'un produit devient une somme de logarithmes, pas leur produit : $\\ln(ab)=\\ln a+\\ln b$."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le carre $(\\ln x)^2$ ne provient d'aucune propriete du produit $2x$ ; il confond le facteur $2$ avec une puissance de $\\ln x$."
         }
       }
     },
     {
       "id": "Q2",
-      "capacite": "C1",
+      "capacite": "C3",
       "enonce": "La derivee de $\\ln(5x+1)$ est :",
       "options": {
         "A": "$\\dfrac{1}{5x+1}$.",
@@ -35,22 +35,22 @@
         "C": "$\\dfrac{5x+1}{5}$.",
         "D": "$5\\ln(5x+1)$."
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "La formule $(\\ln u)'=u'/u$ exige le numerateur $u'=5$ ; choisir $1$ oublie la derivee de la fonction affine interieure."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le quotient a ete inverse : pour $u=5x+1$, on doit calculer $u'/u=5/(5x+1)$, et non $u/u'$."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Multiplier le logarithme initial par $5$ ne le derive pas ; la regle de chaine donne le quotient $5/(5x+1)$."
         }
       }
     },
     {
       "id": "Q3",
-      "capacite": "C1",
+      "capacite": "C2",
       "enonce": "$\\displaystyle\\lim_{x \\to +\\infty} \\ln x$ vaut :",
       "options": {
         "A": "$0$.",
@@ -58,22 +58,22 @@
         "C": "$+\\infty$.",
         "D": "$1$."
       },
-      "correcte": "A",
+      "correcte": "C",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "La valeur $0$ est celle de $\\ln 1$, pas une limite a l'infini ; comme $\\ln$ est croissante et non majoree, elle tend vers $+\\infty$."
         },
-        "C": {
-          "erreur": "Consulter le cours correspondant"
+        "B": {
+          "erreur": "La limite $-\\infty$ correspond a $x\\to0^+$ ; a l'infini, la croissance de $\\ln x$ conduit au contraire vers $+\\infty$."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La valeur $1$ est $\\ln(\\mathrm e)$, une valeur ponctuelle ; elle ne decrit pas le comportement non borne de $\\ln x$ quand $x\\to+\\infty$."
         }
       }
     },
     {
       "id": "Q4",
-      "capacite": "C1",
+      "capacite": "C4",
       "enonce": "$\\displaystyle\\lim_{x \\to 0^+} x\\ln x$ vaut :",
       "options": {
         "A": "$-\\infty$.",
@@ -81,16 +81,16 @@
         "C": "$1$.",
         "D": "Cette limite n'existe pas."
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "Cette reponse ne retient que $\\ln x\\to-\\infty$ et ignore le facteur $x\\to0$ ; la comparaison des croissances donne $x\\ln x\\to0$."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La valeur $1$ ne resulte pas du produit $x\\ln x$ ; en posant $x=\\mathrm e^{-t}$, on obtient $-t\\mathrm e^{-t}\\to0$."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La forme $0\\times(-\\infty)$ est indeterminee mais pas sans limite ; une transformation ou un resultat de croissance comparee donne la limite $0$."
         }
       }
     },
@@ -104,16 +104,16 @@
         "C": "la fonction exponentielle a nouveau.",
         "D": "l'inverse."
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "La fonction carre n'est pas la reciproque de l'exponentielle et transforme l'equation en $\\mathrm e^{4x}=49$ sans isoler $x$."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Appliquer encore l'exponentielle compose une seconde fois au lieu d'inverser la premiere ; seul $\\ln$ donne $2x=\\ln 7$."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Prendre les inverses donne $\\mathrm e^{-2x}=1/7$, une equation equivalente mais qui n'isole pas $x$ ; il faut ensuite appliquer $\\ln$."
         }
       }
     }

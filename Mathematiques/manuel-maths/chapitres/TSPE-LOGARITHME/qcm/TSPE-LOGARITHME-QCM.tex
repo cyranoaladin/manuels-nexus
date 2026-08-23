@@ -19,6 +19,8 @@
     \item $(\ln x)^2$.
   \end{enumerate}
 
+\item[] \textbf{Capacite C3}
+
 \item \textbf{[Q2]} La derivee de $\ln(5x+1)$ est :
   \begin{enumerate}[label=\Alph*.]
     \item $\dfrac{1}{5x+1}$.
@@ -26,6 +28,8 @@
     \item $\dfrac{5x+1}{5}$.
     \item $5\ln(5x+1)$.
   \end{enumerate}
+
+\item[] \textbf{Capacite C2}
 
 \item \textbf{[Q3]} $\displaystyle\lim_{x \to +\infty} \ln x$ vaut :
   \begin{enumerate}[label=\Alph*.]
@@ -35,6 +39,8 @@
     \item $1$.
   \end{enumerate}
 
+\item[] \textbf{Capacite C4}
+
 \item \textbf{[Q4]} $\displaystyle\lim_{x \to 0^+} x\ln x$ vaut :
   \begin{enumerate}[label=\Alph*.]
     \item $-\infty$.
@@ -42,6 +48,8 @@
     \item $1$.
     \item Cette limite n'existe pas.
   \end{enumerate}
+
+\item[] \textbf{Capacite C1}
 
 \item \textbf{[Q5]} Pour resoudre $\mathrm{e}^{2x} = 7$, on applique aux deux membres :
   \begin{enumerate}[label=\Alph*.]
@@ -63,11 +71,11 @@
 \hline
 Question & Capacite & Reponse exacte \\
 \hline
-Q1 & C1 & \textbf{A} \\
-Q2 & C1 & \textbf{A} \\
-Q3 & C1 & \textbf{A} \\
-Q4 & C1 & \textbf{A} \\
-Q5 & C1 & \textbf{A} \\
+Q1 & C1 & \textbf{B} \\
+Q2 & C3 & \textbf{B} \\
+Q3 & C2 & \textbf{C} \\
+Q4 & C4 & \textbf{B} \\
+Q5 & C1 & \textbf{B} \\
 \hline
 \end{tabular}
 \end{center}
@@ -77,33 +85,33 @@ Q5 & C1 & \textbf{A} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — Le coefficient $2$ a ete traite comme un exposant de $x$ ; la regle correcte pour le produit est $\ln(2x)=\ln 2+\ln x$. \emph{Renvoi : M1.}
+    \item \textbf{C} — Le logarithme d'un produit devient une somme de logarithmes, pas leur produit : $\ln(ab)=\ln a+\ln b$. \emph{Renvoi : M1.}
+    \item \textbf{D} — Le carre $(\ln x)^2$ ne provient d'aucune propriete du produit $2x$ ; il confond le facteur $2$ avec une puissance de $\ln x$. \emph{Renvoi : M1.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — La formule $(\ln u)'=u'/u$ exige le numerateur $u'=5$ ; choisir $1$ oublie la derivee de la fonction affine interieure. \emph{Renvoi : M1.}
+    \item \textbf{C} — Le quotient a ete inverse : pour $u=5x+1$, on doit calculer $u'/u=5/(5x+1)$, et non $u/u'$. \emph{Renvoi : M1.}
+    \item \textbf{D} — Multiplier le logarithme initial par $5$ ne le derive pas ; la regle de chaine donne le quotient $5/(5x+1)$. \emph{Renvoi : M1.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — La valeur $0$ est celle de $\ln 1$, pas une limite a l'infini ; comme $\ln$ est croissante et non majoree, elle tend vers $+\infty$. \emph{Renvoi : M1.}
+    \item \textbf{B} — La limite $-\infty$ correspond a $x\to0^+$ ; a l'infini, la croissance de $\ln x$ conduit au contraire vers $+\infty$. \emph{Renvoi : M1.}
+    \item \textbf{D} — La valeur $1$ est $\ln(\mathrm e)$, une valeur ponctuelle ; elle ne decrit pas le comportement non borne de $\ln x$ quand $x\to+\infty$. \emph{Renvoi : M1.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — Cette reponse ne retient que $\ln x\to-\infty$ et ignore le facteur $x\to0$ ; la comparaison des croissances donne $x\ln x\to0$. \emph{Renvoi : M1.}
+    \item \textbf{C} — La valeur $1$ ne resulte pas du produit $x\ln x$ ; en posant $x=\mathrm e^{-t}$, on obtient $-t\mathrm e^{-t}\to0$. \emph{Renvoi : M1.}
+    \item \textbf{D} — La forme $0\times(-\infty)$ est indeterminee mais pas sans limite ; une transformation ou un resultat de croissance comparee donne la limite $0$. \emph{Renvoi : M1.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
-    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — La fonction carre n'est pas la reciproque de l'exponentielle et transforme l'equation en $\mathrm e^{4x}=49$ sans isoler $x$. \emph{Renvoi : M1.}
+    \item \textbf{C} — Appliquer encore l'exponentielle compose une seconde fois au lieu d'inverser la premiere ; seul $\ln$ donne $2x=\ln 7$. \emph{Renvoi : M1.}
+    \item \textbf{D} — Prendre les inverses donne $\mathrm e^{-2x}=1/7$, une equation equivalente mais qui n'isole pas $x$ ; il faut ensuite appliquer $\ln$. \emph{Renvoi : M1.}
   \end{itemize}
 \end{itemize}
 \fi

@@ -12,22 +12,22 @@
         "C": "$\\dfrac{1}{3}\\mathrm{e}^{3x}$.",
         "D": "$\\mathrm{e}^{3x+1}$."
       },
-      "correcte": "A",
+      "correcte": "C",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "La derivee de $3\\mathrm e^{3x}$ vaut $9\\mathrm e^{3x}$ ; ce choix multiplie par $3$ au lieu de compenser la derivee de $3x$."
         },
-        "C": {
-          "erreur": "Consulter le cours correspondant"
+        "B": {
+          "erreur": "La derivee de $\\mathrm e^{3x}$ vaut $3\\mathrm e^{3x}$ ; il faut donc le facteur $1/3$ pour retrouver exactement $\\mathrm e^{3x}$."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Comme $\\mathrm e^{3x+1}=\\mathrm e\\,\\mathrm e^{3x}$, sa derivee vaut $3\\mathrm e\\,\\mathrm e^{3x}$ et non $\\mathrm e^{3x}$."
         }
       }
     },
     {
       "id": "Q2",
-      "capacite": "C1",
+      "capacite": "C4",
       "enonce": "Si $F$ et $G$ sont deux primitives de la meme fonction $f$ continue sur un intervalle $I$, alors :",
       "options": {
         "A": "$F=G$.",
@@ -53,7 +53,7 @@
     },
     {
       "id": "Q3",
-      "capacite": "C1",
+      "capacite": "C5",
       "enonce": "Les solutions de $y'=5y$ sur $\\mathbb{R}$ sont :",
       "options": {
         "A": "$y(x) = 5x + C$.",
@@ -61,22 +61,22 @@
         "C": "$y(x) = C\\mathrm{e}^{-5x}$.",
         "D": "$y(x) = 5\\mathrm{e}^{Cx}$."
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "Pour $y=5x+C$, on a $y'=5$ alors que $5y=25x+5C$ ; l'egalite differentielle n'est donc pas satisfaite en general."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La derivee de $C\\mathrm e^{-5x}$ vaut $-5y$ ; cette famille resout $y'=-5y$, et non l'equation $y'=5y$."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Pour $y=5\\mathrm e^{Cx}$, on obtient $y'=Cy$ ; cette expression ne satisfait $y'=5y$ que pour $C=5$ et ne donne pas toute la famille."
         }
       }
     },
     {
       "id": "Q4",
-      "capacite": "C1",
+      "capacite": "C2",
       "enonce": "Pour $y' = 3y - 12$, la solution particuliere constante est :",
       "options": {
         "A": "$y_0 = 4$.",
@@ -86,20 +86,20 @@
       },
       "correcte": "A",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+      "B": {
+          "erreur": "Pour la constante $y_0=-4$, le membre de gauche vaut $0$ mais $3y_0-12=-24$ ; l'equation n'est pas verifiee."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Pour $y_0=12$, on a $3y_0-12=24$ au lieu de $0$ ; cette constante n'est donc pas une solution particuliere."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Pour $y_0=-36$, le second membre vaut $3(-36)-12=-120$, tandis que la derivee de la constante vaut $0$."
         }
       }
     },
     {
       "id": "Q5",
-      "capacite": "C1",
+      "capacite": "C3",
       "enonce": "Pour utiliser une solution particuliere $y_p$ donnee de $y'=ay+f$, il faut d'abord :",
       "options": {
         "A": "calculer $y_p(0)$.",
@@ -107,16 +107,16 @@
         "C": "deriver $f$.",
         "D": "resoudre $y_p=0$."
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "La valeur $y_p(0)$ peut servir ensuite avec une condition initiale, mais elle ne prouve pas que $y_p'=ay_p+f$ sur l'intervalle."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Deriver $f$ n'est pas la verification demandee ; il faut calculer $y_p'$ puis comparer cette derivee a $ay_p+f$."
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Les zeros de $y_p$ ne disent pas si la fonction satisfait l'equation differentielle ; il faut substituer $y_p$ et $y_p'$ dans celle-ci."
         }
       }
     }

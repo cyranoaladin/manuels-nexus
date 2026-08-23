@@ -76,15 +76,15 @@
       "enonce": "Pour trouver le maximum d'une fonction f construite avec sin ou cos sur un intervalle, on cherche :",
       "options": {
         "A": "les points ou f s'annule.",
-        "B": "les points ou f' s'annule en changeant de signe de + vers -.",
+        "B": "les points critiques interieurs et les bornes, puis on compare les valeurs de f.",
         "C": "les points ou f' est maximale.",
         "D": "les bornes de l'intervalle uniquement."
       },
       "correcte": "B",
       "diagnostics": {
-        "A": { "erreur": "Consulter le cours correspondant" },
-        "C": { "erreur": "Consulter le cours correspondant" },
-        "D": { "erreur": "Consulter le cours correspondant" }
+        "A": { "erreur": "Les zeros de $f$ donnent les intersections avec l'axe des abscisses, pas ses maxima : une valeur maximale peut etre non nulle." },
+        "C": { "erreur": "Un maximum de $f'$ localise la croissance la plus rapide de $f$, et non une valeur maximale de $f$ sur l'intervalle." },
+        "D": { "erreur": "Comparer seulement les bornes peut manquer un maximum interieur : il faut aussi examiner les points critiques de l'intervalle." }
       }
     }
   ]

@@ -86,6 +86,30 @@ TARGETED_INVALID_DIAGNOSTICS = {
 }
 
 
+HISTORICAL_EXPECTED_ANSWERS_AND_CAPACITIES = {
+    ("TSPE-DERIVATION-CONVEXITE", "Q3"): ("B", "C1"),
+    ("TSPE-DERIVATION-CONVEXITE", "Q6"): ("B", "C2"),
+    ("TSPE-DERIVATION-CONVEXITE", "Q15"): ("A", "C6"),
+    ("TSPE-PROBABILITES", "Q4"): ("A", "C8"),
+    ("TSPE-TRIGONOMETRIE", "Q5"): ("B", "C2"),
+    ("TSPE-LOGARITHME", "Q1"): ("B", "C1"),
+    ("TSPE-LOGARITHME", "Q2"): ("B", "C3"),
+    ("TSPE-LOGARITHME", "Q3"): ("C", "C2"),
+    ("TSPE-LOGARITHME", "Q4"): ("B", "C4"),
+    ("TSPE-LOGARITHME", "Q5"): ("B", "C1"),
+    ("TSPE-GEOMETRIE-ESPACE", "Q1"): ("C", "C3"),
+    ("TSPE-GEOMETRIE-ESPACE", "Q2"): ("B", "C7"),
+    ("TSPE-GEOMETRIE-ESPACE", "Q3"): ("A", "C13"),
+    ("TSPE-GEOMETRIE-ESPACE", "Q4"): ("A", "C12"),
+    ("TSPE-GEOMETRIE-ESPACE", "Q5"): ("B", "C11"),
+    ("TSPE-PRIMITIVES-EQDIFF", "Q1"): ("C", "C1"),
+    ("TSPE-PRIMITIVES-EQDIFF", "Q2"): ("C", "C4"),
+    ("TSPE-PRIMITIVES-EQDIFF", "Q3"): ("B", "C5"),
+    ("TSPE-PRIMITIVES-EQDIFF", "Q4"): ("A", "C2"),
+    ("TSPE-PRIMITIVES-EQDIFF", "Q5"): ("B", "C3"),
+}
+
+
 BANNED_GENERIC_FRAGMENTS = (
     "Consulter le cours correspondant",
     "Erreur de facteur",
@@ -163,3 +187,54 @@ def test_combinatoire_c1_et_c3_sont_evaluees_par_des_questions_dediees() -> None
     assert somme["capacite"] == "C3"
     assert somme["correcte"] == "A"
     assert "2^n" in somme["options"]["A"]
+
+
+def test_les_qcm_tspe_historiques_ont_les_bonnes_cles_et_capacites() -> None:
+    assert len(HISTORICAL_EXPECTED_ANSWERS_AND_CAPACITIES) == 20
+    for (chapter, question_id), (answer, capacity) in (
+        HISTORICAL_EXPECTED_ANSWERS_AND_CAPACITIES.items()
+    ):
+        question = _question(chapter, question_id)
+        assert question["correcte"] == answer, f"{chapter}/{question_id}: mauvaise cle"
+        assert question["capacite"] == capacity, (
+            f"{chapter}/{question_id}: {question['capacite']} != {capacity}"
+        )
+
+
+def test_les_diagnostics_tspe_historiques_expliquent_une_erreur_causale() -> None:
+    for chapter, question_id in HISTORICAL_EXPECTED_ANSWERS_AND_CAPACITIES:
+        question = _question(chapter, question_id)
+        assert set(question["diagnostics"]) == set(question["options"]) - {
+            question["correcte"]
+        }
+        for letter, diagnostic in question["diagnostics"].items():
+            error = diagnostic["erreur"]
+            assert len(error) >= 60, f"{chapter}/{question_id}/{letter}: {error}"
+            assert "Consulter le cours" not in error
+
+
+def test_les_questions_tspe_historiques_nont_plus_de_reponse_dupliquee_ou_incomplete() -> None:
+    derivation = _question("TSPE-DERIVATION-CONVEXITE", "Q3")
+    trigonometrie = _question("TSPE-TRIGONOMETRIE", "Q5")
+    geometrie = _question("TSPE-GEOMETRIE-ESPACE", "Q3")
+
+    assert derivation["options"]["B"] != derivation["options"]["D"]
+    assert "points critiques interieurs" in trigonometrie["options"]["B"]
+    assert "bornes" in trigonometrie["options"]["B"]
+    assert geometrie["options"]["D"] == "$(-2,3,1)$."
+
+
+def test_probabilites_q4_presente_lindependance_comme_une_condition_suffisante() -> None:
+    question = _question("TSPE-PROBABILITES", "Q4")
+
+    assert "est garantie lorsque" in question["enonce"]
+    assert "necessite" not in question["enonce"]
+    assert question["correcte"] == "A"
+
+
+def test_derivation_q6_distingue_les_extrema_locaux_des_extrema_globaux() -> None:
+    question = _question("TSPE-DERIVATION-CONVEXITE", "Q6")
+
+    assert "extrema locaux" in question["enonce"]
+    assert "maximum local" in question["options"]["B"]
+    assert "minimum local" in question["options"]["B"]

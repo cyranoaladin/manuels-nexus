@@ -74,7 +74,7 @@
     {
       "id": "Q4",
       "capacite": "C8",
-      "enonce": "L'additivite de la variance V(X+Y)=V(X)+V(Y) necessite :",
+    "enonce": "L'additivite de la variance V(X+Y)=V(X)+V(Y) est garantie lorsque :",
       "options": {
         "A": "que X et Y soient independantes",
         "B": "que X=Y",
@@ -84,13 +84,13 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Consulter le cours correspondant"
+        "erreur": "Si $X=Y$, alors $V(X+Y)=V(2X)=4V(X)$, tandis que $V(X)+V(Y)=2V(X)$ : l'egalite n'est donc pas garantie."
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+        "erreur": "Sans hypothese, la formule comporte le terme $2\\operatorname{Cov}(X,Y)$ : l'independance permet precisement d'annuler cette covariance."
         },
         "D": {
-          "erreur": "Consulter le cours applicable"
+        "erreur": "L'egalite des esperances ne renseigne pas sur la covariance de $X$ et $Y$ : elle ne suffit donc pas a rendre les variances additives."
         }
       }
     },
