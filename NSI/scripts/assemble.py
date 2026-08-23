@@ -20,8 +20,19 @@ if __package__:
     from .common import ROOT
     from .pdf_integrity import preflight_book_pdf, verify_pdf
 else:  # Compatibilite avec `python scripts/assemble.py` depuis NSI/.
-    from common import ROOT
-    from pdf_integrity import preflight_book_pdf, verify_pdf
+    from _nexus_nsi_module_loader import load_sibling_module
+
+    _common = load_sibling_module(
+        anchor=__file__, filename="common.py", private_name="_nexus_nsi_common"
+    )
+    _pdf_integrity = load_sibling_module(
+        anchor=__file__,
+        filename="pdf_integrity.py",
+        private_name="_nexus_nsi_pdf_integrity",
+    )
+    ROOT = _common.ROOT
+    preflight_book_pdf = _pdf_integrity.preflight_book_pdf
+    verify_pdf = _pdf_integrity.verify_pdf
 
 VARIANTS = [
     "eleve",

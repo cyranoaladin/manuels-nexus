@@ -27,8 +27,14 @@ if __package__:
     from . import assemble as legacy
     from .common import ROOT as PROJECT_ROOT
 else:  # Compatibilite avec `python scripts/assemble_manuel.py` depuis NSI/.
-    import assemble as legacy
-    from common import ROOT as PROJECT_ROOT
+    from _nexus_nsi_module_loader import load_sibling_module
+
+    legacy = load_sibling_module(
+        anchor=__file__,
+        filename="assemble.py",
+        private_name="_nexus_nsi_assemble",
+    )
+    PROJECT_ROOT = legacy.ROOT
 
 
 ROOT = PROJECT_ROOT
