@@ -4,7 +4,8 @@
 % x = symbols('x', real=True)
 % assert trigsimp(cos(x) + cos(pi - x)) == 0
 % assert trigsimp(sin(x) + sin(pi - x) - 2*sin(x)) == 0
-% assert trigsimp(sin(x)*sin(pi-x) + cos(x)*cos(pi-x) + cos(2*x)) == 0
+% expr = sin(x)*sin(pi-x) + cos(x)*cos(pi-x)
+% assert trigsimp(expr - (sin(x)**2 - cos(x)**2)) == 0
 % END-VERIFY
 \begin{corrige}{1SPE-TRIGO-EX-016}
 
@@ -12,6 +13,6 @@
 
 \textbf{2.} $\sin x + \sin(\pi-x) = \sin x + \sin x = 2\sin x$.
 
-\textbf{3.} $\sin x \sin(\pi-x) + \cos x \cos(\pi-x) = \sin x \cdot \sin x + \cos x \cdot (-\cos x) = \sin^2 x - \cos^2 x = -\cos(2x)$.
+\textbf{3.} $\sin x \sin(\pi-x) + \cos x \cos(\pi-x) = \sin x \cdot \sin x + \cos x \cdot (-\cos x) = \sin^2 x - \cos^2 x$.
 
 \end{corrige}

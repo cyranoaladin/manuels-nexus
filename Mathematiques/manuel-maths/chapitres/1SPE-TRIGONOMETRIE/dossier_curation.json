@@ -19,29 +19,35 @@
       "erreurs_types": ["Inverser cos(pi/3) et cos(pi/6)", "Erreur de signe dans sin(pi-x)", "Confondre cos^2(x) et cos(x^2)"],
       "format_examen": "Calculer des expressions trigonometriques exactes, simplifier avec les formules de symetrie"
     },
-    "C3": {
+    "X1": {
+      "programme_alignment": "OPTIONAL_EXTENSION",
+      "extension_label": "Approfondissement — Vers la Terminale",
       "chunks_retenus": [],
-      "brief": "Formules d'addition : cos(a+b)=cos(a)cos(b)-sin(a)sin(b), sin(a+b)=sin(a)cos(b)+cos(a)sin(b). Formules de soustraction (changer le signe de b). Formules de duplication : cos(2a)=cos^2(a)-sin^2(a)=2cos^2(a)-1=1-2sin^2(a), sin(2a)=2sin(a)cos(a). Demonstration exigible de cos(a+b) par le produit scalaire ou la distance. Erreurs types : (1) se tromper de signe dans cos(a+b) (le signe - est devant sin.sin) ; (2) confondre cos(2a)=cos^2-sin^2 et cos(2a)=cos^2+sin^2 ; (3) oublier le facteur 2 dans sin(2a)=2sin.cos.",
+      "brief": "Extension facultative vers la Terminale : formules d'addition et de duplication. Ce contenu n'est ni obligatoire en Premiere 2026-2027 ni mobilisable dans les evaluations du socle.",
       "angles_morts": [],
       "approche": "Demontrer cos(a+b) par la methode de la distance (rotation). Deduire toutes les autres formules par specialisation.",
       "erreurs_types": ["Erreur de signe dans cos(a+b)", "Oublier le 2 dans sin(2a)", "Confondre les trois formes de cos(2a)"],
-      "format_examen": "Calculer cos(pi/12), sin(7pi/12), lineariser, demontrer une identite"
+      "format_extension": "Calculer cos(pi/12), sin(7pi/12), lineariser, demontrer une identite"
     },
-    "C4": {
+    "X2": {
+      "programme_alignment": "OPTIONAL_EXTENSION",
+      "extension_label": "Approfondissement — Vers la Terminale",
       "chunks_retenus": [],
       "brief": "Resolution de cos(x)=a : si a dans [-1;1], solutions x = arccos(a) + 2k*pi ou x = -arccos(a) + 2k*pi (k entier). Resolution de sin(x)=a : si a dans [-1;1], solutions x = arcsin(a) + 2k*pi ou x = pi-arcsin(a) + 2k*pi. Inequations : cos(x)>=a se resout en utilisant le cercle trigonometrique (lire les arcs ou cos>=a). Erreurs types : (1) oublier la deuxieme famille de solutions ; (2) ecrire les solutions sans le +2k*pi ; (3) confondre les formules de resolution pour cos et sin.",
       "angles_morts": [],
       "approche": "Toujours partir du cercle trigonometrique pour visualiser les solutions. Insister sur les deux familles de solutions.",
       "erreurs_types": ["Oublier une famille de solutions", "Pas de +2k*pi", "Confondre resolution cos et sin"],
-      "format_examen": "Resoudre cos(x)=1/2, sin(2x)=sqrt(3)/2, cos(x)>=0 sur [0;2pi]"
+      "format_extension": "Resoudre cos(x)=1/2, sin(2x)=sqrt(3)/2, cos(x)>=0 sur [0;2pi]"
     },
-    "C5": {
+    "X3": {
+      "programme_alignment": "OPTIONAL_EXTENSION",
+      "extension_label": "Approfondissement — Vers la Terminale",
       "chunks_retenus": [],
       "brief": "Fonctions x->cos(x) et x->sin(x) definies sur R, a valeurs dans [-1;1], periodiques de periode 2pi. Variations sur [0;2pi] : cos decroissante sur [0;pi], croissante sur [pi;2pi] ; sin croissante sur [0;pi/2], decroissante sur [pi/2;3pi/2], croissante sur [3pi/2;2pi]. Parite : cos est paire, sin est impaire. Courbes representatives. Erreurs types : (1) se tromper sur les intervalles de monotonie ; (2) confondre les courbes de cos et sin ; (3) oublier que la periode est 2pi et non pi.",
       "angles_morts": [],
       "approche": "Construire les courbes point par point a partir du cercle trigonometrique (projection sur les axes). Exploiter la parite et la periodicite pour simplifier l'etude.",
       "erreurs_types": ["Erreur sur les intervalles de monotonie de sin", "Confondre les courbes cos et sin", "Periode 2pi et non pi"],
-      "format_examen": "Dresser le tableau de variations, lire graphiquement des solutions, etudier f(x)=2cos(x)+1"
+      "format_extension": "Dresser le tableau de variations, lire graphiquement des solutions, etudier f(x)=2cos(x)+1"
     }
   }
 }

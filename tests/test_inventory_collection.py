@@ -12438,9 +12438,9 @@ def test_trigonometrie_contract_covers_bo_referentiel(
 ) -> None:
     """A4.7a: le contrat 1SPE-TRIGONOMETRIE couvre le référentiel BO.
 
-    Autorité: referentiel/capacites_1SPE_TRIGONOMETRIE.json (C1..C5). Les
-    évaluations et EX-024 référencent C3-C5 conformément au référentiel; le
-    contrat ne doit pas rester sous-déclaré.
+    Autorité: MENE2602917A, matérialisée par le référentiel C1-C2. Les
+    enrichissements de Terminale sont déclarés séparément comme extensions
+    facultatives et ne peuvent élargir le socle du contrat.
     """
     referentiel = json.loads(
         (

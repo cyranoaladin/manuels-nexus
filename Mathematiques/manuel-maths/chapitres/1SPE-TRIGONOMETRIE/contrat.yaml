@@ -7,13 +7,11 @@ statut: complete
 capacites:
   - { code: C1, ref_capacite: 1SPE-TRIGONOMETRIE-C1, libelle_eleve: "Je sais placer un angle oriente sur le cercle trigonometrique et convertir degres/radians." }
   - { code: C2, ref_capacite: 1SPE-TRIGONOMETRIE-C2, libelle_eleve: "Je sais determiner les cosinus et sinus de valeurs remarquables et d'angles associes par lecture du cercle trigonometrique." }
-  # C3-C5 : complétées le 2026-08-19 depuis le référentiel BO
-  # (referentiel/capacites_1SPE_TRIGONOMETRIE.json, libellés verbatim) —
-  # le contrat était sous-déclaré alors que les évaluations et EX-024
-  # référencent ces capacités du programme.
-  - { code: C3, ref_capacite: 1SPE-TRIGONOMETRIE-C3, libelle_eleve: "Je sais utiliser cos(a+b), sin(a+b), cos(2a), sin(2a)." }
-  - { code: C4, ref_capacite: 1SPE-TRIGONOMETRIE-C4, libelle_eleve: "Je sais résoudre cos(x)=a, sin(x)=a et les inéquations associées." }
-  - { code: C5, ref_capacite: 1SPE-TRIGONOMETRIE-C5, libelle_eleve: "Je connais les variations de cos et sin sur [0;2π] et leur périodicité." }
+
+extensions_facultatives:
+  - { code: X1, label: "Approfondissement — Vers la Terminale", libelle: "Formules d'addition et de duplication", programme_alignment: OPTIONAL_EXTENSION }
+  - { code: X2, label: "Approfondissement — Vers la Terminale", libelle: "Equations et inequations trigonometriques", programme_alignment: OPTIONAL_EXTENSION }
+  - { code: X3, label: "Approfondissement — Vers la Terminale", libelle: "Fonctions sinus et cosinus : periodicite, parite et variations", programme_alignment: OPTIONAL_EXTENSION }
 
 prerequis:
   - { code: R1, libelle: "Theoreme de Pythagore", chapitre_origine: "2GT" }
