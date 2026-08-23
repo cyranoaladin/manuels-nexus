@@ -84,6 +84,8 @@
           "pattern": "^sha256:[0-9a-f]{64}$"
         },
         "policy_id": { "$ref": "#/$defs/non_empty_string" },
+        "object_id": { "$ref": "#/$defs/non_empty_string" },
+        "extension_code": { "$ref": "#/$defs/non_empty_string" },
         "method_source_sha": {
           "type": "string",
           "pattern": "^[0-9a-f]{64}$"
@@ -92,6 +94,11 @@
         "capacity_ref": { "type": ["string", "null"] },
         "review_packet": { "$ref": "#/$defs/non_empty_string" },
         "review_packet_sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "historical_review_packet": { "$ref": "#/$defs/non_empty_string" },
+        "historical_review_packet_sha": {
           "type": "string",
           "pattern": "^[0-9a-f]{64}$"
         },
