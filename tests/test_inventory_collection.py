@@ -3769,15 +3769,46 @@ def test_repository_baseline_is_frozen_schema_valid_and_gate_green(
     assert payload["fingerprint_schema_version"] == 1
 
 
-def test_repository_fail_on_new_gate_is_green(
+RESIDUAL_TRUE_NEW_FINGERPRINTS = {
+    "18c7b3aa6301ef4c",
+    "265dbdeec1fc2b62",
+    "2e189d4bed9a9520",
+    "33e9818ffc70892c",
+    "47fd672690479f1f",
+    "4b9a00c4ef815951",
+    "634c54857f49fcc0",
+    "65b5b9f56ca8900a",
+    "7c204b3da8fcb9a9",
+    "80b7b42e7d6a78ba",
+    "85454c002c0a1d6a",
+    "873a020438d7e00a",
+    "8ca4f3f2a9212e39",
+    "bd63d2a316c26b0c",
+    "d6985b17d7cab316",
+    "dc8e5dcc030bb539",
+    "e79a0d7257787b02",
+    "e8ac154947fefcdb",
+    "fac802b8993558c3",
+}
+
+
+def _new_fingerprints_from_gate(gate: dict[str, object]) -> set[str]:
+    return {
+        match.group(1)
+        for reason in gate["reasons"]
+        if (match := re.fullmatch(r"anomalie nouvelle fp=([0-9a-f]{16})", reason))
+    }
+
+
+def test_repository_fail_on_new_gate_blocks_exact_residual_review_debt(
     inventory_module,
 ) -> None:
-    """CURRENT_NO_REGRESSION only: live debt versus the frozen baseline."""
+    """Le test reste vert quand le gate porte honnêtement le NO-GO courant."""
     gate = inventory_module._fail_on_new_gate(ROOT)
 
-    assert gate["success"] is True
-    assert gate["exit_code"] == 0
-    assert gate["reasons"] == []
+    assert gate["success"] is False
+    assert gate["exit_code"] == 5
+    assert _new_fingerprints_from_gate(gate) == RESIDUAL_TRUE_NEW_FINGERPRINTS
 
 
 def test_build_manifest_provenance_is_not_self_attesting(
@@ -12623,16 +12654,18 @@ def test_optional_extension_review_f_fourth_extension_is_not_authorized(
     assert any("non autorisé" in violation for violation in violations)
 
 
-def test_repository_fail_on_new_accepts_only_declared_review_debt(
+def test_repository_fail_on_new_preserves_prior_qualifications_and_blocks_residual(
     inventory_module,
 ) -> None:
-    """Le gate passe, et ses nouveautés acceptées sont EXACTEMENT la dette
-    de review déclarée (fiches méthodes qualifiées A4) — rien d'autre."""
+    """La dette déjà qualifiée reste visible sans absorber les 19 résiduels."""
     gate = inventory_module._fail_on_new_gate(ROOT)
 
-    assert gate["success"] is True, gate["reasons"][:4]
+    assert gate["success"] is False
+    assert gate["exit_code"] == 5
+    assert _new_fingerprints_from_gate(gate) == RESIDUAL_TRUE_NEW_FINGERPRINTS
     declared = gate.get("comparison", {}).get("expected_review_debt", [])
     assert declared, "la dette déclarée doit rester visible dans le gate"
+    assert RESIDUAL_TRUE_NEW_FINGERPRINTS.isdisjoint(declared)
     for fingerprint in declared:
         assert re.fullmatch(r"[0-9a-f]{16}", fingerprint)
 
@@ -18961,7 +18994,7 @@ def test_pre_a6_repository_projects_only_the_exact_nine_qualifications(
         hashlib.sha256(
             (ROOT / "audit/ANOMALY_DISPOSITIONS.yaml").read_bytes()
         ).hexdigest()
-        == "49595a0f28745eee0b8f080a4cbeb2fa7265a798455f2747a93d9d532635cda6"
+        == "107e12bd9a653daf090ce14e6b8f1a886c1da64b717cd42c820f3623fac5b725"
     )
     assert (
         hashlib.sha256(
@@ -20918,10 +20951,14 @@ def test_publication_snapshots_blocker_requires_exactly_twelve_stale_snapshots(
 
 
 def test_repository_pdf_artifact_registry_attribution(inventory_module) -> None:
+    tracked_pdfs = {
+        path
+        for path in inventory_module.git_tracked_files(ROOT)
+        if path.lower().endswith(".pdf")
+    }
     before = {
-        path.relative_to(ROOT).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
-        for path in ROOT.rglob("*.pdf")
-        if ".git" not in path.parts
+        path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
+        for path in tracked_pdfs
     }
     inventory = inventory_module.build_inventory(ROOT)
     registered = [row for row in inventory["pdfs"] if "artifact_role" in row]
@@ -20956,9 +20993,8 @@ def test_repository_pdf_artifact_registry_attribution(inventory_module) -> None:
         "source": "stale_undecided",
     }
     after = {
-        path.relative_to(ROOT).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
-        for path in ROOT.rglob("*.pdf")
-        if ".git" not in path.parts
+        path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
+        for path in tracked_pdfs
     }
     assert after == before
 
