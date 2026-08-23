@@ -1,0 +1,88 @@
+schema_version: 1
+artifact_name: OFFICIAL_PROGRAM_EDITORIAL_CLOSURE_CONTRACT
+manual: TSPE
+namespace: PROGRAMME_D_ENSEIGNEMENT
+official_authority_NOR: MENE1921246A
+applicable_school_year: 2026-2027
+warning: Ce contrat transversal ferme uniquement le lien réglementaire atom → unité éditoriale → capacité. Il ne prouve ni
+  l'existence ni la suffisance d'un cours, d'une méthode, d'un exercice, d'un corrigé, d'une évaluation ou d'une remédiation.
+  Toute capacité ci-dessous reste non couverte tant que source_content_state vaut MISSING.
+capacites:
+- ref_capacite: TSPE-TRANSVERSAL-LISTES-C1
+  target_editorial_unit: TRANSVERSAL-ALGORITHMIQUE-LISTES
+  libelle: Générer une liste en extension, par ajouts successifs ou en compréhension.
+  official_atom_ids:
+  - TSPE-OFFICIAL-204
+  source_content_state: MISSING
+  content_creation_required: true
+  coverage_claim: NONE
+- ref_capacite: TSPE-TRANSVERSAL-LISTES-C2
+  target_editorial_unit: TRANSVERSAL-ALGORITHMIQUE-LISTES
+  libelle: Manipuler les éléments et les indices d’une liste, notamment ajouter et supprimer un élément.
+  official_atom_ids:
+  - TSPE-OFFICIAL-205
+  source_content_state: MISSING
+  content_creation_required: true
+  coverage_claim: NONE
+- ref_capacite: TSPE-TRANSVERSAL-LISTES-C3
+  target_editorial_unit: TRANSVERSAL-ALGORITHMIQUE-LISTES
+  libelle: Parcourir une liste et itérer sur ses éléments.
+  official_atom_ids:
+  - TSPE-OFFICIAL-206
+  - TSPE-OFFICIAL-207
+  source_content_state: MISSING
+  content_creation_required: true
+  coverage_claim: NONE
+- ref_capacite: TSPE-TRANSVERSAL-LOGIQUE-C1
+  target_editorial_unit: TRANSVERSAL-LOGIQUE-ENSEMBLES
+  libelle: Utiliser les notions et notations ensemblistes, les n-uplets et les produits cartésiens indiqués par le programme.
+  official_atom_ids:
+  - TSPE-OFFICIAL-209
+  source_content_state: MISSING
+  content_creation_required: true
+  coverage_claim: NONE
+- ref_capacite: TSPE-TRANSVERSAL-LOGIQUE-C2
+  target_editorial_unit: TRANSVERSAL-LOGIQUE-ENSEMBLES
+  libelle: Reconnaître et écrire des propositions mathématiques à l’aide de variables et des connecteurs « et », « ou ».
+  official_atom_ids:
+  - TSPE-OFFICIAL-212
+  - TSPE-OFFICIAL-213
+  source_content_state: MISSING
+  content_creation_required: true
+  coverage_claim: NONE
+- ref_capacite: TSPE-TRANSVERSAL-LOGIQUE-C3
+  target_editorial_unit: TRANSVERSAL-LOGIQUE-ENSEMBLES
+  libelle: Lire les quantifications universelles ou existentielles et formuler la négation de propositions comportant jusqu’à
+    deux quantificateurs.
+  official_atom_ids:
+  - TSPE-OFFICIAL-214
+  - TSPE-OFFICIAL-218
+  source_content_state: MISSING
+  content_creation_required: true
+  coverage_claim: NONE
+- ref_capacite: TSPE-TRANSVERSAL-LOGIQUE-C4
+  target_editorial_unit: TRANSVERSAL-LOGIQUE-ENSEMBLES
+  libelle: Mobiliser un contre-exemple et raisonner par disjonction de cas, par l’absurde ou par contraposée.
+  official_atom_ids:
+  - TSPE-OFFICIAL-215
+  - TSPE-OFFICIAL-220
+  source_content_state: MISSING
+  content_creation_required: true
+  coverage_claim: NONE
+- ref_capacite: TSPE-TRANSVERSAL-LOGIQUE-C5
+  target_editorial_unit: TRANSVERSAL-LOGIQUE-ENSEMBLES
+  libelle: Mobiliser implication, équivalence, réciproque, contraposée, propriété caractéristique et conditions nécessaire
+    ou suffisante.
+  official_atom_ids:
+  - TSPE-OFFICIAL-216
+  - TSPE-OFFICIAL-217
+  - TSPE-OFFICIAL-221
+  - TSPE-OFFICIAL-222
+  source_content_state: MISSING
+  content_creation_required: true
+  coverage_claim: NONE
+summary:
+  capacity_count: 8
+  official_atom_count: 15
+  source_content_state: MISSING
+  full_coverage_claims: 0

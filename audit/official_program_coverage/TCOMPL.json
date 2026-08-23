@@ -16,14 +16,14 @@
       "assessment_alignment_state": "PENDING",
       "assessment_sources": [],
       "atom_id": "TCOMPL-OFFICIAL-002",
-      "chapter": null,
-      "contract_capacity": null,
+      "chapter": "TCOMPL-MODELES-FONCTION + TCOMPL-MODELES-EVOLUTION + TCOMPL-LOGARITHME-HISTORIQUE + TCOMPL-CALCULS-AIRES + TCOMPL-INEGALITES + TCOMPL-INFERENCE-BAYESIENNE + TCOMPL-ECHANTILLONNAGE + TCOMPL-TEMPS-ATTENTE + TCOMPL-CORRELATION-CAUSALITE",
+      "contract_capacity": "TCOMPL-MF-C1 + TCOMPL-MF-C2 + TCOMPL-MF-C3 + TCOMPL-MF-C4 + TCOMPL-MF-C5 + TCOMPL-MF-C6 + TCOMPL-MF-C7 + TCOMPL-ME-C1 + TCOMPL-ME-C2 + TCOMPL-ME-C3 + TCOMPL-ME-C4 + TCOMPL-ME-C5 + TCOMPL-ME-C6 + TCOMPL-LOG-C1 + TCOMPL-LOG-C2 + TCOMPL-LOG-C3 + TCOMPL-LOG-C4 + TCOMPL-LOG-C5 + TCOMPL-AIR-C1 + TCOMPL-AIR-C2 + TCOMPL-AIR-C3 + TCOMPL-AIR-C4 + TCOMPL-AIR-C5 + TCOMPL-AIR-C6 + TCOMPL-INEG-C1 + TCOMPL-INEG-C2 + TCOMPL-INEG-C3 + TCOMPL-INEG-C4 + TCOMPL-INEG-C5 + TCOMPL-BAYES-C1 + TCOMPL-BAYES-C2 + TCOMPL-BAYES-C3 + TCOMPL-BAYES-C4 + TCOMPL-BAYES-C5 + TCOMPL-ECH-C1 + TCOMPL-ECH-C2 + TCOMPL-ECH-C3 + TCOMPL-ECH-C4 + TCOMPL-ECH-C5 + TCOMPL-ECH-C6 + TCOMPL-ECH-C7 + TCOMPL-ATT-C1 + TCOMPL-ATT-C2 + TCOMPL-ATT-C3 + TCOMPL-ATT-C4 + TCOMPL-ATT-C5 + TCOMPL-ATT-C6 + TCOMPL-ATT-C7 + TCOMPL-CORR-C1 + TCOMPL-CORR-C2 + TCOMPL-CORR-C3 + TCOMPL-CORR-C4 + TCOMPL-CORR-C5",
       "correction_sources": [],
       "course_sources": [],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [],
       "exercise_sources": [],
-      "gap_reason": "Cet atom impose l'abord des neuf thèmes et décrit la fonction du second volet ; les neuf chapitres existent, mais aucun contrat de capacité agrégé ne matérialise cette obligation transversale.",
+      "gap_reason": "Les neuf thèmes sont désormais reliés explicitement aux neuf contrats de chapitre et à leurs 53 capacités réelles. La dette CHAPTER_SCOPE_WRONG est conservée jusqu'à l'existence d'un gate agrégé vérifiant leur présence et leur assemblage, sans capacité globale fictive.",
       "gap_type": "CHAPTER_SCOPE_WRONG",
       "mandatory": "YES",
       "manual": "TCOMPL",
@@ -35,6 +35,18 @@
       "official_wording_or_short_paraphrase": "Le programme comporte neuf thèmes d'étude à tous aborder ; le second volet précise l'ensemble des contenus et capacités attendues, les problèmes possibles restant au choix du professeur.",
       "pedagogical_state": "PENDING",
       "programme_state": "PASS",
+      "contract_mapping_note": "Mapping agrégé explicite des neuf thèmes ; aucune capacité globale synthétique n'est créée.",
+      "theme_contract_paths": [
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/contrat.yaml",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/contrat.yaml",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/contrat.yaml",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/contrat.yaml",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/contrat.yaml",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/contrat.yaml",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/contrat.yaml",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/contrat.yaml",
+        "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/contrat.yaml"
+      ],
       "remediation_sources": [],
       "review_status": "PROGRAM_REVIEWED",
       "row_id": "TCOMPL-COVERAGE-002",
@@ -48,14 +60,14 @@
       ],
       "atom_id": "TCOMPL-OFFICIAL-079",
       "chapter": "TCOMPL-MODELES-EVOLUTION",
-      "contract_capacity": "TCOMPL-ME-C2",
+      "contract_capacity": "TCOMPL-ME-C6",
       "correction_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/corriges/TCOMPL-ME-CO-001.tex"
       ],
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/10_C1_suites_geometriques.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/corriges/TCOMPL-ME-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/10_C1_suites_geometriques.tex",
@@ -66,8 +78,10 @@
       "exercise_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/exercices/TCOMPL-ME-EX-001.tex"
       ],
-      "gap_reason": "Le chapitre Modèles d'évolution contient des limites géométriques, mais son contrat C2 ne couvre pas toute l'approche intuitive officielle des limites, opérations, passage dans les inégalités et théorème des gendarmes.",
+      "gap_reason": "TCOMPL-ME-C6 ferme le mapping contractuel. La dette CONTRACT_MISSING est conservée comme dette de contenu et de chaîne : les sources existantes ne couvrent que des éléments partiels liés à C2 et aucun des six maillons n'est encore attribué à C6.",
       "gap_type": "CONTRACT_MISSING",
+      "existing_related_chapter": "TCOMPL-MODELES-EVOLUTION",
+      "existing_related_contract_capacity": "TCOMPL-ME-C2",
       "mandatory": "YES",
       "manual": "TCOMPL",
       "method_sources": [
@@ -80,6 +94,7 @@
       "official_wording_or_short_paraphrase": "Approche intuitive de la notion de limite, finie ou infinie, d’une suite, des opérations sur les limites, du passage à la limite dans les inégalités et du théorème des gendarmes.",
       "pedagogical_state": "PENDING",
       "programme_state": "PASS",
+      "contract_closure": "TCOMPL-ME-C6 ajoutée au contrat canonique ; contenu et chaîne à produire.",
       "remediation_sources": [],
       "review_status": "PROGRAM_REVIEWED",
       "row_id": "TCOMPL-COVERAGE-079",
@@ -100,7 +115,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/10_C1_suites_geometriques.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/corriges/TCOMPL-ME-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/10_C1_suites_geometriques.tex",
@@ -145,7 +160,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/10_C1_suites_geometriques.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/corriges/TCOMPL-ME-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/10_C1_suites_geometriques.tex",
@@ -190,7 +205,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/11_C2_recurrence_arithmetico_geometrique.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/corriges/TCOMPL-ME-CO-002.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/11_C2_recurrence_arithmetico_geometrique.tex",
@@ -235,7 +250,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/10_C1_suites_geometriques.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/corriges/TCOMPL-ME-CO-004.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/10_C1_suites_geometriques.tex",
@@ -280,7 +295,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/10_C1_suites_geometriques.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/corriges/TCOMPL-ME-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/10_C1_suites_geometriques.tex",
@@ -325,7 +340,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/11_C2_recurrence_arithmetico_geometrique.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/corriges/TCOMPL-ME-CO-004.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/11_C2_recurrence_arithmetico_geometrique.tex",
@@ -370,7 +385,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/11_C2_recurrence_arithmetico_geometrique.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/corriges/TCOMPL-ME-CO-002.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/cours/11_C2_recurrence_arithmetico_geometrique.tex",
@@ -463,7 +478,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-002.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
@@ -508,7 +523,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-002.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
@@ -553,7 +568,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/cours/10_C1_definition_ln.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/corriges/TCOMPL-LOG-CO-006.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/cours/10_C1_definition_ln.tex",
@@ -742,7 +757,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-002.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
@@ -787,7 +802,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-010.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/10_C1_etude_fonction.tex",
@@ -832,7 +847,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/cours/11_C2_equation_fonctionnelle.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/corriges/TCOMPL-LOG-CO-002.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/cours/11_C2_equation_fonctionnelle.tex",
@@ -974,7 +989,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_primitives.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-005.tex",
@@ -1267,7 +1282,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/11_C2_convexite.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-011.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/11_C2_convexite.tex",
@@ -1408,7 +1423,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/11_C2_convexite.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-011.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/cours/11_C2_convexite.tex",
@@ -1499,7 +1514,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/11_C2_integrale_aire.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-007.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/11_C2_integrale_aire.tex",
@@ -1543,7 +1558,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/11_C2_integrale_aire.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-004.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/11_C2_integrale_aire.tex",
@@ -1588,7 +1603,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/11_C2_integrale_aire.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-004.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/11_C2_integrale_aire.tex",
@@ -1633,7 +1648,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/12_C3_calcul_integral.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-002.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/12_C3_calcul_integral.tex",
@@ -1678,7 +1693,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/12_C3_calcul_integral.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-006.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/12_C3_calcul_integral.tex",
@@ -1723,7 +1738,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/12_C3_calcul_integral.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-002.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/12_C3_calcul_integral.tex",
@@ -1768,7 +1783,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/11_C2_integrale_aire.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-004.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/11_C2_integrale_aire.tex",
@@ -1813,7 +1828,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/12_C3_calcul_integral.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-002.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/12_C3_calcul_integral.tex",
@@ -1858,7 +1873,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/12_C3_calcul_integral.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-002.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/12_C3_calcul_integral.tex",
@@ -1903,7 +1918,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/12_C3_calcul_integral.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-002.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/12_C3_calcul_integral.tex",
@@ -1938,14 +1953,14 @@
       "assessment_alignment_state": "PENDING",
       "assessment_sources": [],
       "atom_id": "TCOMPL-OFFICIAL-140",
-      "chapter": null,
-      "contract_capacity": null,
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "contract_capacity": "TCOMPL-ECH-C7",
       "correction_sources": [],
       "course_sources": [],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [],
       "exercise_sources": [],
-      "gap_reason": "Aucun contrat canonique actuel ne porte la loi uniforme discrète sur {1,…,n} et son espérance.",
+      "gap_reason": "TCOMPL-ECH-C7 ferme le mapping contractuel. La dette CONTENT_MISSING est conservée : aucun des six maillons de contenu n'existe encore pour la loi uniforme discrète et son espérance.",
       "gap_type": "CONTENT_MISSING",
       "mandatory": "YES",
       "manual": "TCOMPL",
@@ -1957,6 +1972,7 @@
       "official_wording_or_short_paraphrase": "Loi uniforme sur {1,2,…,n}. Espérance.",
       "pedagogical_state": "PENDING",
       "programme_state": "PASS",
+      "contract_closure": "TCOMPL-ECH-C7 ajoutée au contrat canonique ; contenu et chaîne à produire.",
       "remediation_sources": [],
       "review_status": "PROGRAM_REVIEWED",
       "row_id": "TCOMPL-COVERAGE-140",
@@ -1977,7 +1993,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex",
@@ -2022,7 +2038,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex",
@@ -2067,7 +2083,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-002.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex",
@@ -2112,7 +2128,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex",
@@ -2157,7 +2173,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/10_C1_loi_geometrique.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/10_C1_loi_geometrique.tex",
@@ -2205,7 +2221,7 @@
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/10_C1_loi_geometrique.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex",
@@ -2257,7 +2273,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-002.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex",
@@ -2305,7 +2321,7 @@
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/11_C2_calculs_esperance.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/10_C1_loi_geometrique.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/11_C2_calculs_esperance.tex",
@@ -2360,7 +2376,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/12_C3_intervalle_simulation.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-003.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/12_C3_intervalle_simulation.tex",
@@ -2411,7 +2427,7 @@
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/10_C1_loi_geometrique.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/11_C2_loi_exponentielle.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-004.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/11_C2_calculs_esperance.tex",
@@ -2470,7 +2486,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/10_C1_loi_geometrique.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-002.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/10_C1_loi_geometrique.tex",
@@ -2518,7 +2534,7 @@
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/cours/10_C1_formule_bayes.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/cours/10_C1_loi_binomiale.tex",
@@ -2618,7 +2634,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/11_C2_loi_exponentielle.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-004.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/11_C2_loi_exponentielle.tex",
@@ -2653,14 +2669,14 @@
       "assessment_alignment_state": "PENDING",
       "assessment_sources": [],
       "atom_id": "TCOMPL-OFFICIAL-159",
-      "chapter": null,
-      "contract_capacity": null,
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "contract_capacity": "TCOMPL-ATT-C7",
       "correction_sources": [],
       "course_sources": [],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [],
       "exercise_sources": [],
-      "gap_reason": "Aucun contrat canonique actuel ne porte la loi uniforme continue sur [0,1] puis [a,b], sa densité, sa fonction de répartition, son espérance et sa variance.",
+      "gap_reason": "TCOMPL-ATT-C7 ferme le mapping contractuel. La dette CONTENT_MISSING est conservée : aucun des six maillons de contenu n'existe encore pour la loi uniforme continue, sa densité, sa fonction de répartition, son espérance et sa variance.",
       "gap_type": "CONTENT_MISSING",
       "mandatory": "YES",
       "manual": "TCOMPL",
@@ -2672,6 +2688,7 @@
       "official_wording_or_short_paraphrase": "Loi uniforme sur [0,1] puis sur [a,b]. Fonction de densité, fonction de répartition. Espérance et variance.",
       "pedagogical_state": "PENDING",
       "programme_state": "PASS",
+      "contract_closure": "TCOMPL-ATT-C7 ajoutée au contrat canonique ; contenu et chaîne à produire.",
       "remediation_sources": [],
       "review_status": "PROGRAM_REVIEWED",
       "row_id": "TCOMPL-COVERAGE-159",
@@ -2692,7 +2709,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/11_C2_loi_exponentielle.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-010.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/11_C2_loi_exponentielle.tex",
@@ -2785,7 +2802,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/11_C2_loi_exponentielle.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-004.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/cours/11_C2_loi_exponentielle.tex",
@@ -2830,7 +2847,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex",
@@ -2875,7 +2892,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex",
@@ -2920,7 +2937,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/11_C2_changement_variable.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-003.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/11_C2_changement_variable.tex",
@@ -2965,7 +2982,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/11_C2_changement_variable.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-002.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/11_C2_changement_variable.tex",
@@ -3010,7 +3027,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex",
@@ -3055,7 +3072,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex",
@@ -3100,7 +3117,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-001.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex",
@@ -3145,7 +3162,7 @@
       "course_sources": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/11_C2_changement_variable.tex"
       ],
-      "coverage_status": "UNMAPPED",
+      "coverage_status": "STRUCTURALLY_MAPPED",
       "evidence_paths": [
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-002.tex",
         "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/11_C2_changement_variable.tex",
@@ -3180,7 +3197,7 @@
   "summary": {
     "by_status": {
       "CONTENT_REVIEW_PENDING": 16,
-      "UNMAPPED": 53
+      "STRUCTURALLY_MAPPED": 53
     },
     "full": 0,
     "gaps_by_type": {
@@ -3190,7 +3207,7 @@
       "CONTRACT_MISSING": 1
     },
     "mandatory_atoms": 69,
-    "mapped": 16,
-    "unmapped": 53
+    "mapped": 69,
+    "unmapped": 0
   }
 }

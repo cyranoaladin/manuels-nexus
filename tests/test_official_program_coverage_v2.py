@@ -1,9 +1,12 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
+
+import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -99,6 +102,13 @@ def test_coverage_rows_are_traceable_and_do_not_fake_full() -> None:
         if row["coverage_status"] != "UNMAPPED":
             assert row["chapter"]
             assert row["contract_capacity"]
+
+        if row["coverage_status"] in {
+            "CONTENT_REVIEW_PENDING",
+            "SCIENTIFIC_PASS",
+            "PEDAGOGICAL_PASS",
+            "FULL",
+        }:
             for field in SOURCE_FIELDS:
                 assert row[field], (row["atom_id"], field)
             assert row["evidence_paths"]
@@ -110,6 +120,48 @@ def test_coverage_rows_are_traceable_and_do_not_fake_full() -> None:
             assert row["scientific_state"] == "PASS"
             assert row["pedagogical_state"] == "PASS"
             assert row["assessment_alignment_state"] == "PASS"
+
+
+def test_every_mandatory_atom_is_structurally_mapped() -> None:
+    rows = _rows()
+
+    assert all(row["coverage_status"] != "UNMAPPED" for row in rows)
+
+
+def test_every_structural_mapping_names_a_real_contract_capacity() -> None:
+    rows = _rows()
+    contract_refs = {
+        capacity["ref_capacite"]
+        for path in (ROOT / "Mathematiques" / "manuel-maths" / "chapitres").glob(
+            "*/contrat.yaml"
+        )
+        for capacity in yaml.safe_load(path.read_text(encoding="utf-8")).get(
+            "capacites", []
+        )
+    }
+    contract_refs.update(
+        capacity["ref_capacite"]
+        for path in (ROOT / "NSI" / "chapitres").glob("*/contrat.yaml")
+        for capacity in yaml.safe_load(path.read_text(encoding="utf-8")).get(
+            "capacites", []
+        )
+    )
+    contract_refs.update(
+        capacity["ref_capacite"]
+        for path in (ROOT / "audit" / "official_program_contracts").glob("*.yaml")
+        for capacity in yaml.safe_load(path.read_text(encoding="utf-8")).get(
+            "capacites", []
+        )
+    )
+
+    for row in rows:
+        if row["coverage_status"] == "UNMAPPED":
+            continue
+        refs = re.split(r"\s*(?:/|\+)\s*", row["contract_capacity"])
+        assert all(ref in contract_refs for ref in refs), (
+            row["atom_id"],
+            row["contract_capacity"],
+        )
 
 
 def test_coverage_summary_is_derived_from_rows() -> None:
