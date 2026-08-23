@@ -1,5 +1,5 @@
 artifact_type: anomaly_dispositions
-control_digest: sha256:59e316f5c4e3bb0d13b9f1b48e886e38cde2e5001fa6681da8862432536be790
+control_digest: sha256:02ed3509a5e8343baec1832e4d77b71fe97bf1e4c1b666056aaf6f5f04115e30
 dispositions:
   0030282f546d3d82:
     approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine
@@ -72017,34 +72017,35 @@ dispositions:
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-046.tex
   70dfcb9ea3d7e1ec:
-    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine
-      de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode
-      n'est revendiquée)
+    approved_by: 'human-decision:decision-1spe-trigo-optional-extensions-2026-08-23
+      (autorisation de gouvernance uniquement; aucune approbation de contenu)'
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
-    capacity_id: 1SPE-TRIGONOMETRIE-C5
-    capacity_ref: 1SPE-TRIGONOMETRIE-C5
     category: blocking_statuses
     chapter: 1SPE-TRIGONOMETRIE
-    decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
+    decision_ref: audit/HUMAN_DECISION_1SPE_TRIGO_OPTIONAL_EXTENSIONS_2026-08-23.md#decision-1spe-trigo-optional-extensions-2026-08-23
     disposition: open_debt
+    extension_code: X3
     fingerprint: 70dfcb9ea3d7e1ec
     fingerprint_schema_version: 1
-    justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i),
-      statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
+    historical_review_packet: audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/1SPE-TRIGO-ME-005.review.json
+    historical_review_packet_sha: 833e82ebd340f4b7a1f0a28d3bc90d7979c7bb2ecca43c5a44764151d7fabf1a
+    justification: 'OPTIONAL_EXTENSION_REVIEW_PENDING: packet courant lié au SHA;
+      revues scientifique, pédagogique, éditoriale et variante PENDING; reste bloquant
+      release.'
     manual: 1SPE
-    method_source_sha: 1b44bcc7a8f49e0c27a3fbc596360929db51412862efea1c9206cf6038515c95
+    method_source_sha: 1166d8df0e97def48f03a71e9410fa95406950f5a8fe317096c49558dd166ee4
+    object_id: 1SPE-TRIGO-ME-005
     owner: direction_scientifique_programme
-    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
-    qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
-    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication
-      approuvé.
-    reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
+    qualification_digest: sha256:7a49505cd43dcaab50b10f559cce8b45a157415112aa61a0432836b817403dfe
+    qualification_policy_digest: sha256:13107fc484ca24807bb127286b1af36aff4569d13bbbf7b64e541bad357ba0b5
+    qualification_reason: Contenu disciplinaire sans statut de publication approuvé.
+    reason: Contenu disciplinaire sans statut de publication approuvé.
     release_blocking: true
-    review_packet: audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/1SPE-TRIGO-ME-005.review.json
-    review_packet_sha: 833e82ebd340f4b7a1f0a28d3bc90d7979c7bb2ecca43c5a44764151d7fabf1a
+    review_condition: OPTIONAL_EXTENSION_REVIEW_PENDING
+    review_packet: audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/current/1SPE-TRIGO-ME-005.optional-extension-review.json
+    review_packet_sha: 47e7bc6915a2996be28778242f93ce1f2255c2a94c198afd11de1cb7d3472462
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/methodes/1SPE-TRIGO-ME-005.tex
   70e74035a135f3bc:
@@ -119167,34 +119168,35 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-014.tex
   baf25a2d0a53d6dc:
-    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine
-      de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode
-      n'est revendiquée)
+    approved_by: 'human-decision:decision-1spe-trigo-optional-extensions-2026-08-23
+      (autorisation de gouvernance uniquement; aucune approbation de contenu)'
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
-    capacity_id: 1SPE-TRIGONOMETRIE-C3
-    capacity_ref: 1SPE-TRIGONOMETRIE-C3
     category: blocking_statuses
     chapter: 1SPE-TRIGONOMETRIE
-    decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
+    decision_ref: audit/HUMAN_DECISION_1SPE_TRIGO_OPTIONAL_EXTENSIONS_2026-08-23.md#decision-1spe-trigo-optional-extensions-2026-08-23
     disposition: open_debt
+    extension_code: X1
     fingerprint: baf25a2d0a53d6dc
     fingerprint_schema_version: 1
-    justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i),
-      statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
+    historical_review_packet: audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/1SPE-TRIGO-ME-003.review.json
+    historical_review_packet_sha: 214679c5dae5afff77ae40dd4377c63f906f92a8d1c14ad0107cd8c8b15f9ee6
+    justification: 'OPTIONAL_EXTENSION_REVIEW_PENDING: packet courant lié au SHA;
+      revues scientifique, pédagogique, éditoriale et variante PENDING; reste bloquant
+      release.'
     manual: 1SPE
-    method_source_sha: 14c464b5306333ac1e6b4e63a064b566cd7ae1717dc52a8547f83a7b73ef5d90
+    method_source_sha: 3f40a2be975d3f4189555fba859170e2f91558d26f1725e8937ad7e783023fe4
+    object_id: 1SPE-TRIGO-ME-003
     owner: direction_scientifique_programme
-    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
-    qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
-    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication
-      approuvé.
-    reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
+    qualification_digest: sha256:7a49505cd43dcaab50b10f559cce8b45a157415112aa61a0432836b817403dfe
+    qualification_policy_digest: sha256:13107fc484ca24807bb127286b1af36aff4569d13bbbf7b64e541bad357ba0b5
+    qualification_reason: Contenu disciplinaire sans statut de publication approuvé.
+    reason: Contenu disciplinaire sans statut de publication approuvé.
     release_blocking: true
-    review_packet: audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/1SPE-TRIGO-ME-003.review.json
-    review_packet_sha: 214679c5dae5afff77ae40dd4377c63f906f92a8d1c14ad0107cd8c8b15f9ee6
+    review_condition: OPTIONAL_EXTENSION_REVIEW_PENDING
+    review_packet: audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/current/1SPE-TRIGO-ME-003.optional-extension-review.json
+    review_packet_sha: 177efd2fa5952c5274148b73b96cf1a69db65b8cf8750d59646935725052c39a
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/methodes/1SPE-TRIGO-ME-003.tex
   baf8ecdaa180ce84:
@@ -140808,34 +140810,35 @@ dispositions:
     severity: blocking
     source: NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EV-B-corrige.tex
   dc0025fc58dc2e34:
-    approved_by: policy:decision-a4-method-review-debt-2026-08-19 (décision humaine
-      de classe du 2026-08-19 — aucune approbation humaine individuelle de la méthode
-      n'est revendiquée)
+    approved_by: 'human-decision:decision-1spe-trigo-optional-extensions-2026-08-23
+      (autorisation de gouvernance uniquement; aucune approbation de contenu)'
     baseline_sha: 7752988ae7041a7a5de700fcf4609bd47a4fba3a
     blocking: true
-    capacity_id: 1SPE-TRIGONOMETRIE-C4
-    capacity_ref: 1SPE-TRIGONOMETRIE-C4
     category: blocking_statuses
     chapter: 1SPE-TRIGONOMETRIE
-    decision_ref: audit/A4_METHOD_REVIEW_DEBT_POLICY.md#decision-a4-method-review-debt-2026-08-19
+    decision_ref: audit/HUMAN_DECISION_1SPE_TRIGO_OPTIONAL_EXTENSIONS_2026-08-23.md#decision-1spe-trigo-optional-extensions-2026-08-23
     disposition: open_debt
+    extension_code: X2
     fingerprint: dc0025fc58dc2e34
     fingerprint_schema_version: 1
-    justification: 'EXPECTED_REVIEW_DEBT A4: fiche méthode nouvellement produite (C_i<->M_i),
-      statut needs_review, packet de revue scellé; reste bloquante jusqu''à revue.'
+    historical_review_packet: audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/1SPE-TRIGO-ME-004.review.json
+    historical_review_packet_sha: 00f0b70944893437689a7e83c9ee611404df967e2a8c565328f26ebb4d76adf8
+    justification: 'OPTIONAL_EXTENSION_REVIEW_PENDING: packet courant lié au SHA;
+      revues scientifique, pédagogique, éditoriale et variante PENDING; reste bloquant
+      release.'
     manual: 1SPE
-    method_source_sha: e39611c6b2de2bee0dc0c03e7668473455b930af338f953d6e64813c53dc4709
+    method_source_sha: 2e55e4efe104f2b2be37155332a026bdf97f10c354025ae222d8daa1e397c2ca
+    object_id: 1SPE-TRIGO-ME-004
     owner: direction_scientifique_programme
-    policy_id: decision-a4-method-review-debt-2026-08-19
     policy_rule: blocking-scientific-object
-    qualification_digest: sha256:e7c083f3fd4999b1bef0ae0b075604d6ed533cb05e14dfd2f2d5d54903a6f517
-    qualification_policy_digest: sha256:07597ede77c7fce1a167a87227178f05a10faabbad4ca1e04d7bb2048fda12a7
-    qualification_reason: Contenu disciplinaire ou corrigé sans statut de publication
-      approuvé.
-    reason: Contenu disciplinaire ou corrigé sans statut de publication approuvé.
+    qualification_digest: sha256:7a49505cd43dcaab50b10f559cce8b45a157415112aa61a0432836b817403dfe
+    qualification_policy_digest: sha256:13107fc484ca24807bb127286b1af36aff4569d13bbbf7b64e541bad357ba0b5
+    qualification_reason: Contenu disciplinaire sans statut de publication approuvé.
+    reason: Contenu disciplinaire sans statut de publication approuvé.
     release_blocking: true
-    review_packet: audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/1SPE-TRIGO-ME-004.review.json
-    review_packet_sha: 00f0b70944893437689a7e83c9ee611404df967e2a8c565328f26ebb4d76adf8
+    review_condition: OPTIONAL_EXTENSION_REVIEW_PENDING
+    review_packet: audit/reviews/methods/1SPE/1SPE-TRIGONOMETRIE/current/1SPE-TRIGO-ME-004.optional-extension-review.json
+    review_packet_sha: c0b64ee602bd5ad3aeb630d44cbcd772d40e7d954ccc111e11b1cdd3afb8cfff
     severity: blocking
     source: Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/methodes/1SPE-TRIGO-ME-004.tex
   dc0af25ba94e247a:

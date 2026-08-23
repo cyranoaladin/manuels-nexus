@@ -1445,6 +1445,259 @@ def _a4_method_review_debt_violations(
                     f"({meta.get('status')}) alors que la dette A4 est "
                     f"ouverte fp={fingerprint}: {source}"
                 )
+            if (
+                meta.get("programme_alignment") == "OPTIONAL_EXTENSION"
+                or meta.get("extension_codes")
+            ):
+                violations.append(
+                    "OPTIONAL_EXTENSION hors du périmètre C_i↔M_i A4 "
+                    f"fp={fingerprint}: {source}"
+                )
+    return violations
+
+
+def _optional_extension_review_debt_violations(
+    root: Path, record: Mapping[str, Any]
+) -> list[str]:
+    """Validate the exact human-authorised pending-review transition.
+
+    This decision is deliberately nominative.  It preserves the former A4
+    receipts as historical evidence while binding a new PENDING packet to the
+    current source.  It never approves the content and never accepts a fourth
+    object through a path pattern.
+    """
+    fingerprint = str(record.get("fingerprint", ""))
+    object_id = str(record.get("object_id", ""))
+    violations: list[str] = []
+    expected = OPTIONAL_EXTENSION_REVIEW_AUTHORIZED_OBJECTS.get(object_id)
+    if expected is None:
+        return [
+            "objet OPTIONAL_EXTENSION non autorisé par la décision nominative "
+            f"fp={fingerprint}: {object_id}"
+        ]
+
+    decision_path = root / OPTIONAL_EXTENSION_REVIEW_DECISION_JSON
+    decision_md_path = root / OPTIONAL_EXTENSION_REVIEW_DECISION_MD
+    try:
+        decision = json.loads(decision_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError):
+        return [
+            "décision OPTIONAL_EXTENSION_REVIEW_PENDING absente ou illisible "
+            f"fp={fingerprint}"
+        ]
+    if not isinstance(decision, Mapping):
+        return [f"décision OPTIONAL_EXTENSION invalide fp={fingerprint}"]
+    decision_file_sha = "sha256:" + hashlib.sha256(
+        decision_path.read_bytes()
+    ).hexdigest()
+    if decision.get("control_digest") != _control_digest(decision):
+        violations.append(
+            f"control_digest de décision OPTIONAL_EXTENSION invalide fp={fingerprint}"
+        )
+    if not decision_md_path.is_file():
+        violations.append(
+            f"décision humaine Markdown introuvable fp={fingerprint}"
+        )
+    elif decision.get("decision_markdown_sha256") != hashlib.sha256(
+        decision_md_path.read_bytes()
+    ).hexdigest():
+        violations.append(
+            f"décision humaine Markdown modifiée (STALE) fp={fingerprint}"
+        )
+
+    exact_decision_fields = {
+        "decision_ref": OPTIONAL_EXTENSION_REVIEW_DECISION_REF,
+        "decision_date": "2026-08-23",
+        "integration_sha": "10cb5f07772842d6630d2a2f78531f6900371023",
+        "operator_authorization": (
+            "HUMAN_OPERATOR_EXPLICIT_GOVERNANCE_AUTHORIZATION"
+        ),
+        "content_approval": False,
+        "state": "OPTIONAL_EXTENSION_REVIEW_PENDING",
+        "source_status": "needs_review",
+        "programme_scope": "OPTIONAL_EXTENSION",
+        "review_state": "PENDING",
+        "release_blocking": True,
+        "invalidate_on_source_change": True,
+        "wildcards_authorized": False,
+    }
+    for field, value in exact_decision_fields.items():
+        if decision.get(field) != value:
+            violations.append(
+                f"champ décision {field} invalide fp={fingerprint}"
+            )
+    exact_exclusions = [
+        "MANDATORY_PROGRAMME_COVERAGE",
+        "ANTICIPATED_EXAM",
+        "MANDATORY_QCM",
+        "CORE_REMEDIATION",
+    ]
+    if decision.get("excluded_from") != exact_exclusions:
+        violations.append(f"exclusions de socle invalides fp={fingerprint}")
+    if decision.get("required_reviews") != {
+        "scientific": "PENDING",
+        "pedagogical": "PENDING",
+        "editorial": "PENDING",
+        "variant": "PENDING",
+    }:
+        violations.append(f"revues PENDING incomplètes fp={fingerprint}")
+
+    decision_objects = decision.get("objects")
+    if not isinstance(decision_objects, list):
+        violations.append(f"liste d'objets de décision invalide fp={fingerprint}")
+        decision_by_id: dict[str, Mapping[str, Any]] = {}
+    else:
+        decision_by_id = {
+            str(item.get("object_id")): item
+            for item in decision_objects
+            if isinstance(item, Mapping)
+        }
+        if set(decision_by_id) != set(
+            OPTIONAL_EXTENSION_REVIEW_AUTHORIZED_OBJECTS
+        ) or len(decision_objects) != len(decision_by_id):
+            violations.append(
+                "périmètre nominatif OPTIONAL_EXTENSION altéré "
+                f"fp={fingerprint}"
+            )
+    decision_object = decision_by_id.get(object_id, {})
+    if not isinstance(decision_object, Mapping):
+        decision_object = {}
+
+    expected_fingerprint, extension_code, source_rel = expected
+    if fingerprint != expected_fingerprint:
+        violations.append(
+            f"fingerprint non autorisé pour {object_id}: {fingerprint}"
+        )
+    for field, value in (
+        ("object_id", object_id),
+        ("extension_code", extension_code),
+        ("source_path", source_rel),
+        ("new_role", "OPTIONAL_EXTENSION_REVIEW_PENDING"),
+        ("historical_receipt_role", "HISTORICAL_STALE_RECEIPT"),
+    ):
+        if decision_object.get(field) != value:
+            violations.append(
+                f"objet de décision {field} invalide fp={fingerprint}"
+            )
+
+    current_source_sha = str(decision_object.get("current_source_sha", ""))
+    current_packet_rel = str(decision_object.get("current_packet_path", ""))
+    current_packet_sha = str(
+        decision_object.get("current_packet_sha256", "")
+    )
+    historical_rel = str(
+        decision_object.get("historical_receipt_path", "")
+    )
+    historical_sha = str(
+        decision_object.get("historical_receipt_sha256", "")
+    )
+    record_fields = {
+        "decision_ref": OPTIONAL_EXTENSION_REVIEW_DECISION_REF,
+        "disposition": "open_debt",
+        "blocking": True,
+        "release_blocking": True,
+        "review_condition": "OPTIONAL_EXTENSION_REVIEW_PENDING",
+        "object_id": object_id,
+        "extension_code": extension_code,
+        "source": source_rel,
+        "method_source_sha": current_source_sha,
+        "review_packet": current_packet_rel,
+        "review_packet_sha": current_packet_sha,
+        "historical_review_packet": historical_rel,
+        "historical_review_packet_sha": historical_sha,
+        "qualification_policy_digest": decision_file_sha,
+    }
+    for field, value in record_fields.items():
+        if record.get(field) != value:
+            violations.append(
+                f"disposition courante {field} invalide fp={fingerprint}"
+            )
+
+    source_path = root / source_rel
+    if not source_path.is_file():
+        violations.append(f"source courante introuvable fp={fingerprint}")
+        meta: Mapping[str, Any] = {}
+    else:
+        observed_source_sha = hashlib.sha256(source_path.read_bytes()).hexdigest()
+        if observed_source_sha != current_source_sha:
+            violations.append(
+                f"source OPTIONAL_EXTENSION modifiée (STALE) fp={fingerprint}"
+            )
+        try:
+            first_line = source_path.read_text(encoding="utf-8").splitlines()[0]
+            meta = json.loads(first_line.split("% META:", 1)[1])
+        except (IndexError, OSError, ValueError, UnicodeDecodeError):
+            meta = {}
+            violations.append(f"META source illisible fp={fingerprint}")
+    if meta.get("id") != object_id:
+        violations.append(f"identité source invalide fp={fingerprint}")
+    if meta.get("status") != "needs_review":
+        violations.append(
+            "statut source promu sans revue; approved interdit "
+            f"fp={fingerprint}: {meta.get('status')}"
+        )
+    if meta.get("extension_codes") != [extension_code] or meta.get(
+        "programme_alignment"
+    ) != "OPTIONAL_EXTENSION":
+        violations.append(f"mapping extension {extension_code} invalide fp={fingerprint}")
+    if meta.get("capacites_codes"):
+        violations.append(f"capacité obligatoire résiduelle fp={fingerprint}")
+
+    packet_path = root / current_packet_rel
+    try:
+        packet_bytes = packet_path.read_bytes()
+        packet = json.loads(packet_bytes.decode("utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError):
+        packet = {}
+        packet_bytes = b""
+        violations.append(f"packet courant absent ou illisible fp={fingerprint}")
+    if hashlib.sha256(packet_bytes).hexdigest() != current_packet_sha:
+        violations.append(f"packet courant modifié (STALE) fp={fingerprint}")
+    expected_packet_fields = {
+        "artifact_type": "optional_extension_review_packet",
+        "schema_version": 1,
+        "object_id": object_id,
+        "current_source_sha": current_source_sha,
+        "source_path": source_rel,
+        "source_status": "needs_review",
+        "extension_code": extension_code,
+        "new_role": "OPTIONAL_EXTENSION_REVIEW_PENDING",
+        "programme_scope": "OPTIONAL_EXTENSION",
+        "review_state": "PENDING",
+        "scientific_review": "PENDING",
+        "pedagogical_review": "PENDING",
+        "editorial_review": "PENDING",
+        "variant_review": "PENDING",
+        "release_blocking": True,
+        "invalidate_on_source_change": True,
+        "excluded_from": exact_exclusions,
+        "decision_ref": OPTIONAL_EXTENSION_REVIEW_DECISION_REF,
+    }
+    for field, value in expected_packet_fields.items():
+        if packet.get(field) != value:
+            violations.append(f"packet courant {field} invalide fp={fingerprint}")
+    historical = packet.get("historical_receipt")
+    if not isinstance(historical, Mapping) or dict(historical) != {
+        "path": historical_rel,
+        "sha256": historical_sha,
+        "role": "HISTORICAL_STALE_RECEIPT",
+    }:
+        violations.append(f"classement du receipt historique invalide fp={fingerprint}")
+
+    historical_path = root / historical_rel
+    try:
+        historical_bytes = historical_path.read_bytes()
+        historical_packet = json.loads(historical_bytes.decode("utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError):
+        historical_bytes = b""
+        historical_packet = {}
+        violations.append(f"receipt historique absent ou illisible fp={fingerprint}")
+    if hashlib.sha256(historical_bytes).hexdigest() != historical_sha:
+        violations.append(f"receipt historique modifié fp={fingerprint}")
+    if historical_packet.get("source_sha256") == current_source_sha:
+        violations.append(
+            f"receipt historique rebindi au source courant fp={fingerprint}"
+        )
     return violations
 
 
@@ -1547,6 +1800,10 @@ def _load_dispositions(root: Path) -> dict[str, dict[str, Any]]:
                 _parse_disposition_expiry(value[expiry_field])
         if value.get("decision_ref") == A4_METHOD_REVIEW_DEBT_DECISION_REF:
             violations = _a4_method_review_debt_violations(root, value)
+            if violations:
+                raise InventoryError("; ".join(violations))
+        if value.get("decision_ref") == OPTIONAL_EXTENSION_REVIEW_DECISION_REF:
+            violations = _optional_extension_review_debt_violations(root, value)
             if violations:
                 raise InventoryError("; ".join(violations))
         raw_dispositions[fingerprint] = _canonicalize(dict(value))
@@ -3079,6 +3336,38 @@ A4_METHOD_REVIEW_DEBT_DECISION_REF = (
     "audit/A4_METHOD_REVIEW_DEBT_POLICY.md"
     "#decision-a4-method-review-debt-2026-08-19"
 )
+OPTIONAL_EXTENSION_REVIEW_DECISION_MD = (
+    "audit/HUMAN_DECISION_1SPE_TRIGO_OPTIONAL_EXTENSIONS_2026-08-23.md"
+)
+OPTIONAL_EXTENSION_REVIEW_DECISION_JSON = (
+    "audit/HUMAN_DECISION_1SPE_TRIGO_OPTIONAL_EXTENSIONS_2026-08-23.json"
+)
+OPTIONAL_EXTENSION_REVIEW_DECISION_REF = (
+    OPTIONAL_EXTENSION_REVIEW_DECISION_MD
+    + "#decision-1spe-trigo-optional-extensions-2026-08-23"
+)
+OPTIONAL_EXTENSION_REVIEW_AUTHORIZED_OBJECTS = MappingProxyType(
+    {
+        "1SPE-TRIGO-ME-003": (
+            "baf25a2d0a53d6dc",
+            "X1",
+            "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/"
+            "methodes/1SPE-TRIGO-ME-003.tex",
+        ),
+        "1SPE-TRIGO-ME-004": (
+            "dc0025fc58dc2e34",
+            "X2",
+            "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/"
+            "methodes/1SPE-TRIGO-ME-004.tex",
+        ),
+        "1SPE-TRIGO-ME-005": (
+            "70dfcb9ea3d7e1ec",
+            "X3",
+            "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/"
+            "methodes/1SPE-TRIGO-ME-005.tex",
+        ),
+    }
+)
 
 
 def _is_expected_review_debt(entry: Mapping[str, Any]) -> bool:
@@ -3094,7 +3383,11 @@ def _is_expected_review_debt(entry: Mapping[str, Any]) -> bool:
         or entry.get("disposition") != "open_debt"
         or entry.get("blocking") is not True
         or entry.get("qualified") is not True
-        or entry.get("decision_ref") != A4_METHOD_REVIEW_DEBT_DECISION_REF
+        or entry.get("decision_ref")
+        not in {
+            A4_METHOD_REVIEW_DEBT_DECISION_REF,
+            OPTIONAL_EXTENSION_REVIEW_DECISION_REF,
+        }
     ):
         return False
     try:

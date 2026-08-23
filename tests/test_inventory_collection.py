@@ -12317,6 +12317,42 @@ def test_a4_review_debt_method_edit_makes_qualification_stale(
     assert any("STALE" in v for v in violations)
 
 
+def test_a4_a_optional_extension_cannot_remain_current_a4_debt(
+    inventory_module, tmp_path
+) -> None:
+    """A — une méthode reclassée Xn n'est plus une fiche C_i↔M_i A4."""
+    import hashlib as _hashlib
+
+    root, _, source, packet, record = _a4_debt_fixture(tmp_path)
+    optional = source.read_text(encoding="utf-8").replace(
+        '"capacites_codes": ["C2"]',
+        '"extension_codes": ["X2"],'
+        ' "programme_alignment": "OPTIONAL_EXTENSION"',
+    )
+    source.write_text(optional, encoding="utf-8")
+    record["method_source_sha"] = _hashlib.sha256(
+        source.read_bytes()
+    ).hexdigest()
+    packet.write_text(
+        json.dumps(
+            {
+                "source_sha256": record["method_source_sha"],
+                "status": "needs_review",
+            }
+        ),
+        encoding="utf-8",
+    )
+    record["review_packet_sha"] = _hashlib.sha256(
+        packet.read_bytes()
+    ).hexdigest()
+
+    violations = inventory_module._a4_method_review_debt_violations(
+        root, record
+    )
+
+    assert any("OPTIONAL_EXTENSION" in violation for violation in violations)
+
+
 def test_a4_review_debt_missing_packet_invalidates_qualification(
     inventory_module, tmp_path
 ) -> None:
@@ -12398,6 +12434,161 @@ def test_repository_a4_derived_qualifications_reference_class_policy(
             inventory_module._a4_method_review_debt_violations(ROOT, record)
             == []
         ), record["fingerprint"]
+
+
+def _optional_extension_review_records(inventory_module):
+    doc = yaml.safe_load(
+        (ROOT / "audit/ANOMALY_DISPOSITIONS.yaml").read_text(
+            encoding="utf-8"
+        )
+    )
+    return [
+        record
+        for record in doc["dispositions"].values()
+        if record.get("decision_ref")
+        == inventory_module.OPTIONAL_EXTENSION_REVIEW_DECISION_REF
+    ]
+
+
+def _copy_optional_extension_review_fixture(tmp_path: Path, record) -> Path:
+    import shutil
+
+    paths = (
+        "audit/HUMAN_DECISION_1SPE_TRIGO_OPTIONAL_EXTENSIONS_2026-08-23.md",
+        "audit/HUMAN_DECISION_1SPE_TRIGO_OPTIONAL_EXTENSIONS_2026-08-23.json",
+        str(record["source"]),
+        str(record["review_packet"]),
+        str(record["historical_review_packet"]),
+    )
+    for relative in paths:
+        target = tmp_path / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / relative, target)
+    return tmp_path
+
+
+def test_optional_extension_review_b_exact_current_packets_validate(
+    inventory_module,
+) -> None:
+    """B — seuls ME-003/004/005 possèdent un packet courant exact."""
+    records = _optional_extension_review_records(inventory_module)
+
+    assert {record["object_id"] for record in records} == {
+        "1SPE-TRIGO-ME-003",
+        "1SPE-TRIGO-ME-004",
+        "1SPE-TRIGO-ME-005",
+    }
+    for record in records:
+        assert (
+            inventory_module._optional_extension_review_debt_violations(
+                ROOT, record
+            )
+            == []
+        ), record["object_id"]
+
+
+def test_optional_extension_review_c_remains_release_blocking(
+    inventory_module,
+) -> None:
+    """C — la décision de gouvernance ne vaut jamais approbation release."""
+    records = _optional_extension_review_records(inventory_module)
+    inventory = _release_strict_collection_contract_inventory()
+    for record in records:
+        _release_strict_collection_contract_add_anomaly(
+            inventory_module,
+            inventory,
+            category="blocking_statuses",
+            anomaly={
+                "manual": "1SPE",
+                "chapter": "1SPE-TRIGONOMETRIE",
+                "source": record["source"],
+                "status": "needs_review",
+                "id": record["object_id"],
+            },
+        )
+    _release_strict_collection_contract_manual_blockers(
+        inventory_module, inventory
+    )
+    inventory["deliverable_matrix"]["manuals"]["1SPE"][
+        "publication_eligible"
+    ] = False
+
+    gate = inventory_module._release_strict_gate(inventory)
+
+    assert gate["success"] is False
+    assert gate["exit_code"] == inventory_module.GATE_RELEASE_CODE
+    assert (
+        "1SPE:anomalie:blocking_statuses:anomalies.blocking_statuses:3"
+        in gate["reasons"]
+    )
+
+
+def test_optional_extension_review_d_false_approved_status_fails(
+    inventory_module, tmp_path
+) -> None:
+    """D — une promotion approved sans revue invalide le packet."""
+    import hashlib as _hashlib
+
+    record = dict(_optional_extension_review_records(inventory_module)[0])
+    root = _copy_optional_extension_review_fixture(tmp_path, record)
+    source = root / record["source"]
+    source.write_text(
+        source.read_text(encoding="utf-8").replace(
+            '"status": "needs_review"', '"status": "approved"'
+        ),
+        encoding="utf-8",
+    )
+    record["method_source_sha"] = _hashlib.sha256(
+        source.read_bytes()
+    ).hexdigest()
+
+    violations = inventory_module._optional_extension_review_debt_violations(
+        root, record
+    )
+
+    assert any("approved" in violation for violation in violations)
+
+
+def test_optional_extension_review_e_source_change_makes_packet_stale(
+    inventory_module, tmp_path
+) -> None:
+    """E — toute variation source invalide immédiatement le packet courant."""
+    record = dict(_optional_extension_review_records(inventory_module)[0])
+    root = _copy_optional_extension_review_fixture(tmp_path, record)
+    source = root / record["source"]
+    source.write_text(
+        source.read_text(encoding="utf-8") + "% mutation\n",
+        encoding="utf-8",
+    )
+
+    violations = inventory_module._optional_extension_review_debt_violations(
+        root, record
+    )
+
+    assert any("STALE" in violation for violation in violations)
+
+
+def test_optional_extension_review_f_fourth_extension_is_not_authorized(
+    inventory_module,
+) -> None:
+    """F — la décision est nominative, sans wildcard ni quatrième objet."""
+    record = dict(_optional_extension_review_records(inventory_module)[0])
+    record.update(
+        {
+            "fingerprint": "feedfacefeedface",
+            "object_id": "1SPE-TRIGO-ME-006",
+            "source": (
+                "Mathematiques/manuel-maths/chapitres/"
+                "1SPE-TRIGONOMETRIE/methodes/1SPE-TRIGO-ME-006.tex"
+            ),
+        }
+    )
+
+    violations = inventory_module._optional_extension_review_debt_violations(
+        ROOT, record
+    )
+
+    assert any("non autorisé" in violation for violation in violations)
 
 
 def test_repository_fail_on_new_accepts_only_declared_review_debt(
