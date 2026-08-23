@@ -17,7 +17,9 @@ Une grandeur $Q$ suivant une évolution exponentielle continue peut s'écrire
 Q(t)=Q_0\mathrm{e}^{at},
 \]
 où $Q_0=Q(0)$ est la valeur initiale. Si $a>0$, le modèle décrit une
-croissance ; si $a<0$, il décrit une décroissance.
+croissance ; si $a<0$, il décrit une décroissance, à condition que
+$Q_0>0$. Plus précisément, si $Q_0>0$ et $a>0$, $Q$ est strictement
+croissante ; si $Q_0>0$ et $a<0$, $Q$ est strictement décroissante.
 }
 
 \exemple{
@@ -35,7 +37,7 @@ géométrique observée à temps réguliers.
 % BEGIN-VERIFY
 % from sympy import Rational, exp, simplify, symbols
 % t, h, a = symbols('t h a', real=True)
-% q0 = symbols('q_0', nonzero=True)
+% q0 = symbols('q_0', positive=True)
 % q = q0*exp(a*t)
 % assert q.subs(t, 0) == q0
 % assert simplify(q.subs(t, t+h)/q-exp(a*h)) == 0

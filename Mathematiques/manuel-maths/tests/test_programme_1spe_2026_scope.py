@@ -245,14 +245,40 @@ def test_exponentielle_exercices_avances_039_040_sont_des_extensions_x1() -> Non
 
 
 def test_exponentielle_algorithmes_restent_numeriques_et_conjecturaux() -> None:
-    algorithm = (
+    path = (
         CHAPTERS / "1SPE-EXPONENTIELLE/cours/15_C5_algorithmes_exponentielle.tex"
-    ).read_text(encoding="utf-8")
+    )
+    algorithm = path.read_text(encoding="utf-8")
+    meta = _meta(path)
 
     assert "méthode d'Euler" in algorithm
     assert r"\left(1+\dfrac{1}{n}\right)^n" in algorithm
     assert "conjecturer" in algorithm
     assert r"\lim" not in algorithm
+    assert meta.get("capacites_codes", []) == []
+    assert meta["programme_alignment"] == "IMPLEMENTATION_GUIDANCE"
+    assert "Mise en œuvre algorithmique — non exigible" in algorithm
+
+
+def test_modele_exponentiel_conditionne_le_sens_de_variation_a_q0_positif() -> None:
+    course = (
+        CHAPTERS / "1SPE-EXPONENTIELLE/cours/14_C5_a_modeles_exponentiels.tex"
+    ).read_text(encoding="utf-8")
+    normalized = " ".join(course.split())
+
+    assert r"Q_0>0" in course
+    assert "si $Q_0>0$ et $a>0$" in normalized
+
+
+def test_extension_equations_exponentielles_definit_son_prerequis_logarithme() -> None:
+    course = (
+        CHAPTERS / "1SPE-EXPONENTIELLE/cours/14_C5_equations_inequations.tex"
+    ).read_text(encoding="utf-8")
+    normalized = " ".join(course.split())
+
+    assert "Prérequis de cet approfondissement" in course
+    assert "logarithme népérien" in normalized
+    assert r"\mathrm{e}^{\ln(k)}=k" in course
 
 
 def test_exponentielle_enonces_tangente_et_unicite_sont_logiquement_corrects() -> None:
@@ -298,3 +324,13 @@ def test_suites_limites_intuitives_couvrent_les_trois_comportements_sans_formali
     assert limit_question["capacite"] == "C8"
     assert limit_question["correcte"] == "C"
     assert set(limit_question["diagnostics"]) == {"A", "B", "D"}
+
+
+def test_remediation_c8_definit_les_suites_avant_de_conjecturer() -> None:
+    remediation = (
+        CHAPTERS / "1SPE-SUITES/remediation/1SPE-SUITES-RE-C8.tex"
+    ).read_text(encoding="utf-8")
+
+    assert r"a_n=1+2^{-n}" in remediation
+    assert r"b_n=2^n" in remediation
+    assert r"c_n=\dfrac{1+(-1)^n}{2}" in remediation

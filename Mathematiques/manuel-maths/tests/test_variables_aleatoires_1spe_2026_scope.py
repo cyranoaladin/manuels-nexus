@@ -141,3 +141,25 @@ def test_qcm_reclasses_ont_une_cle_unique_et_des_diagnostics_specifiques() -> No
             not generic.search(diagnostic["erreur"])
             for diagnostic in question["diagnostics"].values()
         )
+
+
+def test_extension_binomiale_distingue_exactement_modele_et_approximation() -> None:
+    course = (
+        CHAPTER / "cours/12_C3_bernoulli_binomiale.tex"
+    ).read_text(encoding="utf-8")
+    normalized = " ".join(course.split())
+
+    assert "sauf si la population est très grande" not in course
+    assert "reste un tirage sans remise" in normalized
+    assert "peut parfois être approchée" in normalized
+    assert "fraction prélevée est faible" in normalized
+
+
+def test_extension_moments_binomiaux_annonce_les_conditions_de_recuperation() -> None:
+    course = (
+        CHAPTER / "cours/13_C4_esperance_binomiale.tex"
+    ).read_text(encoding="utf-8")
+
+    assert "Démonstration exigible" not in course
+    assert r"E(X)>0" in course
+    assert r"0<p\leqslant 1" in course
