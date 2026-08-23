@@ -13297,7 +13297,7 @@ anomalies:
     manual: TNSI
     path: NSI/chapitres/TNSI-PROJET/contrat.yaml
     scope: contract
-    status: needs_review
+    status: draft
   - chapter: TNSI-PROJET
     id: TNSI-PROJET-ANNUEL
     manual: TNSI
@@ -13436,12 +13436,7 @@ anomalies:
   duplicate_ids: []
   invalid_capacities: []
   invalid_meta_references: []
-  invalid_statuses:
-  - normalized_status: needs_review
-    path: NSI/chapitres/TNSI-PROJET/contrat.yaml
-    reason: statut inconnu
-    scope: contract
-    source_status: needs_review
+  invalid_statuses: []
   latex_cycles: []
   metadata_invalid: []
   metadata_missing: []
@@ -14702,12 +14697,12 @@ counts:
   claims_contredits: 28
   claims_ouverts: 53
 generated_by: inventory_collection.py
-model_digest: sha256:3a279ac27715a27ce1e45d0deba4bb62fa4ff20e7e6f5e90189621b4b5dc72c6
+model_digest: sha256:638eb7d0f2cd505d94484d93988e069e2e7a62ffce82c0206201876da6cb87c4
 provenance:
   branch: codex/t2-current-10cb5f0
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-23T14:13:58Z'
+  generated_at_utc: '2026-08-23T14:36:07Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:9067ac4158409689e1374f51fb99cc6b59e66395989b328dfc06cbcf9d2e7841
     scripts/build_manifest.py: sha256:08fe2fdb7003a611e807fbb8dac8835c2745758ea2dd6c0a70270a1fa597e084
@@ -14719,7 +14714,7 @@ provenance:
   generator_sha256: sha256:29dabe28f42268c704802378f689adba172a7a6bb0bd2d77d9fdf8112b905085
   generator_version: 1
   git_available: true
-  head_sha: ee071adabd11f2bb304475dfcd97a71ca3f4fb7e
+  head_sha: 5bcf9747126b558d034de1ad53327480dbb86da3
   modified_tracked: []
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
@@ -14731,4 +14726,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/ecarts-et-contradictions.schema.json
 schema_version: 1
-source_digest: sha256:c4ae7f3b67bceffe0ba8c3122efe1e160b822694134aa3e060dd18afac44fa26
+source_digest: sha256:6dd5d9b90ffa12198777f3bbd1c1594a7bc710bddac89027128491dcebbae726

@@ -80,8 +80,8 @@
 ### invalid_meta_references (0)
 - Aucune.
 
-### invalid_statuses (1)
-- path=NSI/chapitres/TNSI-PROJET/contrat.yaml, scope=contract, reason=statut inconnu, normalized_status=needs_review, source_status=needs_review
+### invalid_statuses (0)
+- Aucune.
 
 ### latex_cycles (0)
 - Aucune.
