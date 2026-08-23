@@ -1,0 +1,56 @@
+{
+  "artifact_type": "mandatory_unmapped_atoms_closure",
+  "integration_base_sha": "10cb5f07772842d6630d2a2f78531f6900371023",
+  "source_registry": "audit/OFFICIAL_PROGRAM_ATOMS_2026_2027.json",
+  "unknown": 0,
+  "atoms": [
+    {
+      "atom_id": "1SPE-ATOM-008",
+      "NOR": "MENE2602917A",
+      "official_section": "Suites numériques, modèles discrets (Algèbre)",
+      "official_wording": "Sur des exemples, introduction intuitive de la notion de limite, finie ou infinie, ou l'absence de limite d'une suite ; toute formalisation est exclue.",
+      "manual": "1SPE",
+      "why_unmapped": "Le contrat ne porte pas explicitement le triptyque limite finie, limite infinie et absence de limite. Les sources existantes couvrent des cas finis ou infinis, parfois avec une formalisation de Terminale, mais aucun bloc socle ne traite proprement l'absence de limite.",
+      "existing_related_content": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/12_C3_suites_geometriques.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/14_C5_variations.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-037.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-040.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-042.tex"
+      ],
+      "gap_type": "CONTENT_PRESENT_BUT_INSUFFICIENT",
+      "correct_action": "Ajouter au socle une approche numérique et graphique de trois exemples : limite finie, limite infinie et absence de limite ; inscrire explicitement l'interdiction de toute formalisation ; reclasser les raisonnements formels existants en approfondissement.",
+      "closure_evidence": [
+        "Mathematiques/manuel-maths/referentiel/capacites_1SPE_SUITES.json#1SPE-SUITES-C8",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/17_C8_limites_intuitives.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-008.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-051.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-051.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json#Q3",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-RE-C8.tex"
+      ],
+      "closure_status": "CONTENT_REVIEW_PENDING"
+    },
+    {
+      "atom_id": "TNSI-ATOM-060",
+      "NOR": "MENE1921247A",
+      "official_section": "Démarche de projet (préambule)",
+      "official_wording": "Un quart au moins de l'horaire total de la spécialité est réservé à la conception et à l'élaboration de projets conduits par les élèves.",
+      "manual": "TNSI",
+      "why_unmapped": "Le manifeste TNSI n'assemble aucun dispositif transversal de projet et les six chapitres notionnels ne matérialisent ni volume horaire, ni jalons, ni restitution.",
+      "existing_related_content": [
+        "NSI/referentiel/capacites_TNSI_LANGAGES-ET-PROGRAMMATION.json",
+        "NSI/manifests/books/TNSI.json"
+      ],
+      "gap_type": "CONTENT_MISSING",
+      "correct_action": "Créer un dossier transversal élève/professeur de conduite de projet couvrant au moins 25 % de l'horaire, avec cahier des charges, jalons, tests, documentation, restitution et évaluation ; l'assembler dans TNSI sans inventer un chapitre notionnel.",
+      "closure_evidence": [
+        "NSI/referentiel/capacites_TNSI_PROJET.json#TNSI-PROJET-BO-01",
+        "NSI/chapitres/TNSI-PROJET/contrat.yaml",
+        "NSI/chapitres/TNSI-PROJET/projet/TNSI-PROJET-ANNUEL.tex",
+        "NSI/manifests/books/TNSI.json"
+      ],
+      "closure_status": "CONTENT_REVIEW_PENDING"
+    }
+  ]
+}

@@ -91,7 +91,8 @@ def build_registry() -> dict[str, Any]:
                     ],
                     "type": TYPE_MAP.get(row["obligation_type"], row["obligation_type"]),
                     "mandatory": "YES" if row["mandatory"] else "NO",
-                    "explicit_limitation": (
+                    "explicit_limitation": row.get("explicit_limitation")
+                    or (
                         row["official_wording_or_short_paraphrase"]
                         if row["obligation_type"] == "EXPLICIT_LIMITATION"
                         else None

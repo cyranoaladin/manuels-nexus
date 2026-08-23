@@ -63,3 +63,11 @@ def test_internal_findings_are_not_rehabilitated_as_official_atoms() -> None:
         if atom["source_coverage_status"] in {"WRONG_YEAR", "UNSUPPORTED_CLAIM"}
     ]
     assert payload["summary"]["excluded_internal_findings"] == 11
+
+
+def test_embedded_explicit_limitation_is_preserved_on_mandatory_atom() -> None:
+    payload = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    atom = next(item for item in payload["atoms"] if item["atom_id"] == "1SPE-ATOM-008")
+
+    assert atom["source_coverage_status"] == "CONTENT_REVIEW_PENDING"
+    assert atom["explicit_limitation"] == "Toute formalisation de la notion de limite est exclue."
