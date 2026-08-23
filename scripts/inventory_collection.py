@@ -10781,6 +10781,16 @@ def _validate_model_gate(
         except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
             reasons.append(f"inventaire:recalcul_impossible:{_stable_gate_reason(exc, root)}")
         else:
+            for invalid_status in current_inventory.get("anomalies", {}).get(
+                "invalid_statuses",
+                [],
+            ):
+                reasons.append(
+                    "inventaire:invalid_statuses:"
+                    f"{invalid_status.get('scope')}:"
+                    f"{invalid_status.get('path')}:"
+                    f"{invalid_status.get('source_status')}"
+                )
             for fingerprint, qualification in current_inventory.get(
                 "anomaly_qualifications",
                 {},

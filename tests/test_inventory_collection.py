@@ -18670,6 +18670,60 @@ def test_validate_model_gate_accepts_valid_outputs_and_rejects_digest_drift(
     assert any("model_digest" in reason for reason in invalid_payload["reasons"])
 
 
+def test_validate_model_rejects_noncanonical_contract_status_even_when_artifacts_are_current(
+    tmp_path: Path, inventory_module
+) -> None:
+    tracked = _seed_cli_repository(tmp_path)
+    contract_path = tmp_path / tracked[0]
+    contract_path.write_text(
+        contract_path.read_text(encoding="utf-8").replace(
+            "statut: approved", "statut: needs_review"
+        ),
+        encoding="utf-8",
+    )
+    _commit_repository(tmp_path, "invalid contract status")
+    inventory_module.build_inventory_artifacts(tmp_path)
+
+    completed = _run_inventory_cli(tmp_path, "--validate-model")
+    result = json.loads(completed.stdout)
+
+    assert completed.returncode == 6
+    assert result["success"] is False
+    assert any(
+        "invalid_statuses" in reason and "needs_review" in reason
+        for reason in result["reasons"]
+    )
+
+
+def test_draft_contract_is_model_valid_but_remains_release_blocking(
+    tmp_path: Path, inventory_module
+) -> None:
+    tracked = _seed_cli_repository(tmp_path)
+    contract_path = tmp_path / tracked[0]
+    contract_path.write_text(
+        contract_path.read_text(encoding="utf-8").replace(
+            "statut: approved", "statut: draft"
+        ),
+        encoding="utf-8",
+    )
+    _commit_repository(tmp_path, "draft contract")
+    inventory_module.build_inventory_artifacts(tmp_path)
+
+    validate = _run_inventory_cli(tmp_path, "--validate-model")
+    release = _run_inventory_cli(tmp_path, "--release-strict")
+    validate_payload = json.loads(validate.stdout)
+    release_payload = json.loads(release.stdout)
+
+    assert validate.returncode == 0
+    assert validate_payload["success"] is True
+    assert release.returncode == 7
+    assert release_payload["success"] is False
+    assert any(
+        "blocking_statuses" in reason or "publication" in reason
+        for reason in release_payload["reasons"]
+    )
+
+
 @pytest.mark.parametrize(
     ("relative_path", "projection"),
     [
