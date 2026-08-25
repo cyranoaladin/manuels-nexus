@@ -948,6 +948,9 @@ def _synthetic_policy_contract(
         "fingerprint_digest": qualification_module.fingerprint_set_digest(
             [str(record["fingerprint"]) for record in records]
         ),
+        "fingerprints": sorted(
+            str(record["fingerprint"]) for record in records
+        ),
         "owner_counts": dict(
             Counter(str(record["owner"]) for record in records)
         ),
@@ -1701,6 +1704,7 @@ def test_unqualified_reports_are_deterministic_for_an_unknown_anomaly(
     changed["approved_set"]["fingerprint_digest"] = _digest_fingerprints(
         ["a" * 16]
     )
+    changed["approved_set"]["fingerprints"] = ["a" * 16]
     changed["approved_set"]["category_counts"] = {"unknown": 1}
     changed["approved_set"]["owner_counts"] = {}
     changed["approved_set"]["observed_source_digest_before_materialization"] = (
