@@ -9,7 +9,7 @@
 - Gate `release-strict`: ROUGE (64 bloqueurs)
 
 ## Provenance synthétique
-- SHA Git: `6e8e35b46803412d828ab0cc8d7e54dffa876dac`
+- SHA Git: `63786c46eae068fa53b1f779e83cc81b0f38b5a8`
 - Branche: `codex/t2-current-audit-continue`
 - Dépôt sale: non
 
