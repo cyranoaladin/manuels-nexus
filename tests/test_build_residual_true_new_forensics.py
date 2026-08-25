@@ -100,7 +100,7 @@ def test_builds_exact_residual_without_mutating_frozen_inputs(tmp_path: Path) ->
     assert algebra["counts"] == expected_counts
     assert len(residual["entries"]) == 13
     assert algebra["equalities"] == {
-        "initial_still_active_unqualified": True,
+        "initial_still_active_open_debt": True,
         "no_new_after_triage": True,
         "residual_equation": True,
     }
@@ -133,8 +133,11 @@ def test_builds_exact_residual_without_mutating_frozen_inputs(tmp_path: Path) ->
     assert all(required <= set(entry) for entry in residual["entries"])
     assert all(
         entry["triage_class"] == "LEGITIMATE_REVIEW_DEBT"
+        and entry["current_review_state"]
+        == "PENDING_QUALIFIED_OPEN_DEBT"
         and entry["release_acceptance"] is False
         and entry["source_sha"].startswith("sha256:")
+        and "qualified=true" in entry["why_cannot_close"]
         for entry in residual["entries"]
     )
     assert all(
@@ -225,6 +228,27 @@ def test_rejects_any_unexpected_active_unqualified_fingerprint(
         ValueError,
         match="ensemble actif non qualifié inattendu",
     ):
+        module.build_reports(ROOT, inventory_path=mutated)
+
+
+def test_rejects_a_qualified_residual_that_stops_blocking_release(
+    tmp_path: Path,
+) -> None:
+    module = _load_module()
+    inventory = copy.deepcopy(json.loads(INVENTORY.read_text(encoding="utf-8")))
+    initial = json.loads(INITIAL_JSON.read_text(encoding="utf-8"))
+    fingerprint = next(
+        entry["fingerprint"]
+        for entry in initial["entries"]
+        if entry["triage_class"] == "LEGITIMATE_REVIEW_DEBT"
+    )
+    qualification = inventory["anomaly_qualifications"][fingerprint]
+    qualification["blocking"] = False
+    qualification["release_blocking"] = False
+    mutated = tmp_path / "inventory-non-blocking.json"
+    mutated.write_text(json.dumps(inventory), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="non bloquante ou clôturée"):
         module.build_reports(ROOT, inventory_path=mutated)
 
 

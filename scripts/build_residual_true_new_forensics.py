@@ -227,6 +227,17 @@ def _active_unqualified(qualifications: Mapping[str, Any]) -> set[str]:
     }
 
 
+def _active_open_debt(qualifications: Mapping[str, Any]) -> set[str]:
+    """Return active debt independently of its non-regression qualification."""
+
+    return {
+        str(fingerprint)
+        for fingerprint, qualification in qualifications.items()
+        if isinstance(qualification, Mapping)
+        and qualification.get("disposition") == "open_debt"
+    }
+
+
 def _current_anomaly(
     inventory: Mapping[str, Any],
     *,
@@ -262,6 +273,14 @@ def _initial_entry(
     path = str(entry["path"])
     anomaly = _current_anomaly(inventory, category=category, path=path)
     qualification = inventory["anomaly_qualifications"][fingerprint]
+    if (
+        qualification.get("disposition") != "open_debt"
+        or qualification.get("blocking") is not True
+        or qualification.get("release_blocking") is not True
+    ):
+        raise ValueError(
+            f"dette résiduelle non bloquante ou clôturée: {fingerprint}"
+        )
     current_sha = _source_sha(root / path)
     original_class = str(entry["triage_class"])
     content_fixed = original_class == "FIX_NOW"
@@ -345,7 +364,11 @@ def _initial_entry(
             f"disposition={qualification['disposition']}, "
             f"qualified={str(qualification['qualified']).lower()}."
         ),
-        "current_review_state": "PENDING_UNQUALIFIED",
+        "current_review_state": (
+            "PENDING_QUALIFIED_OPEN_DEBT"
+            if qualification.get("qualified") is True
+            else "PENDING_UNQUALIFIED"
+        ),
         "owner": str(entry["owner"]),
         "closure_phase": str(entry["intended_closure_phase"]),
         "release_acceptance": False,
@@ -391,6 +414,7 @@ def build_reports(
     if not isinstance(qualifications, Mapping):
         raise ValueError("inventaire sans qualifications d'anomalies")
     active_unqualified = _active_unqualified(qualifications)
+    active_open_debt = _active_open_debt(qualifications)
     extra = sorted(active_unqualified - initial_fingerprints)
     if extra:
         raise ValueError(
@@ -427,9 +451,9 @@ def build_reports(
     review_closed = set()
     for fingerprint, entry in initial_by_fingerprint.items():
         path_exists = (root / str(entry["path"])).exists()
-        is_active = fingerprint in active_unqualified
+        is_active = fingerprint in active_open_debt
         if fingerprint in should_not_exist:
-            if is_active or path_exists:
+            if fingerprint in qualifications or path_exists:
                 raise ValueError(
                     f"objet SHOULD_NOT_EXIST encore présent: {fingerprint}"
                 )
@@ -456,11 +480,12 @@ def build_reports(
     residual_fingerprints = (
         initial_fingerprints - removed - fixed - review_closed
     )
-    if active_unqualified != residual_fingerprints:
+    active_residual_debt = active_open_debt & initial_fingerprints
+    if active_residual_debt != residual_fingerprints:
         raise ValueError(
             "projection résiduelle incohérente: "
             f"attendu={sorted(residual_fingerprints)} "
-            f"observé={sorted(active_unqualified)}"
+            f"observé={sorted(active_residual_debt)}"
         )
     entries = [
         _initial_entry(
@@ -612,8 +637,8 @@ def build_reports(
             f"- {len(fixed)} - {len(removed)} - {len(review_closed)} + 0"
         ),
         "equalities": {
-            "initial_still_active_unqualified": (
-                active_unqualified == residual_fingerprints
+            "initial_still_active_open_debt": (
+                active_residual_debt == residual_fingerprints
             ),
             "no_new_after_triage": not (
                 active_unqualified - initial_fingerprints
