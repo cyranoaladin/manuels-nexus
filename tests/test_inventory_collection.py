@@ -3782,40 +3782,24 @@ def test_repository_baseline_is_frozen_schema_valid_and_gate_green(
     assert payload["fingerprint_schema_version"] == 1
 
 
-RESIDUAL_TRUE_NEW_FINGERPRINTS = {
-    "18c7b3aa6301ef4c",
-    "33e9818ffc70892c",
-    "47fd672690479f1f",
-    "4b9a00c4ef815951",
-    "634c54857f49fcc0",
-    "80b7b42e7d6a78ba",
-    "85454c002c0a1d6a",
-    "873a020438d7e00a",
-    "8ca4f3f2a9212e39",
-    "bd63d2a316c26b0c",
-    "d6985b17d7cab316",
-    "dc8e5dcc030bb539",
-    "e8ac154947fefcdb",
-}
-
-
-def _new_fingerprints_from_gate(gate: dict[str, object]) -> set[str]:
-    return {
-        match.group(1)
-        for reason in gate["reasons"]
-        if (match := re.fullmatch(r"anomalie nouvelle fp=([0-9a-f]{16})", reason))
-    }
-
-
-def test_repository_fail_on_new_gate_blocks_exact_residual_review_debt(
+def test_repository_fail_on_new_gate_accepts_exact_residual_extension(
     inventory_module,
 ) -> None:
-    """Le test reste vert quand le gate porte honnêtement le NO-GO courant."""
+    """L'extension exacte absorbe les 13 sans affaiblir fail-on-new."""
     gate = inventory_module._fail_on_new_gate(ROOT)
 
-    assert gate["success"] is False
-    assert gate["exit_code"] == 5
-    assert _new_fingerprints_from_gate(gate) == RESIDUAL_TRUE_NEW_FINGERPRINTS
+    assert gate["success"] is True
+    assert gate["exit_code"] == 0
+    assert gate["reasons"] == []
+    comparison = gate["comparison"]
+    assert comparison["success"] is True
+    assert comparison["failures"] == []
+    assert comparison["new"] == []
+    assert comparison["resolved"] == []
+    assert comparison["modified"] == []
+    assert comparison["regressions"] == []
+    assert comparison["expected_review_debt"] == []
+    assert len(comparison["unchanged"]) == 2232
 
 
 def test_build_manifest_provenance_is_not_self_attesting(
@@ -12946,20 +12930,31 @@ def test_optional_extension_review_f_fourth_extension_is_not_authorized(
     assert any("non autorisé" in violation for violation in violations)
 
 
-def test_repository_fail_on_new_preserves_prior_qualifications_and_blocks_residual(
+def test_repository_fail_on_new_preserves_all_qualified_active_debt(
     inventory_module,
 ) -> None:
-    """La dette déjà qualifiée reste visible sans absorber les 13 résiduels."""
+    """Les 2 232 qualifications restent visibles et release-blocking."""
+    baseline = inventory_module._load_validated_baseline(ROOT)
+    active = baseline["active"]
+    active_fingerprints = {
+        record["fingerprint"]
+        for record in active
+    }
+
+    assert len(active) == len(active_fingerprints) == 2232
+    assert all(record["qualified"] is True for record in active)
+    assert all(record["disposition"] == "open_debt" for record in active)
+    assert all(record["blocking"] is True for record in active)
+
     gate = inventory_module._fail_on_new_gate(ROOT)
 
-    assert gate["success"] is False
-    assert gate["exit_code"] == 5
-    assert _new_fingerprints_from_gate(gate) == RESIDUAL_TRUE_NEW_FINGERPRINTS
-    declared = gate.get("comparison", {}).get("expected_review_debt", [])
-    assert declared, "la dette déclarée doit rester visible dans le gate"
-    assert RESIDUAL_TRUE_NEW_FINGERPRINTS.isdisjoint(declared)
-    for fingerprint in declared:
-        assert re.fullmatch(r"[0-9a-f]{16}", fingerprint)
+    assert gate["success"] is True
+    assert gate["exit_code"] == 0
+    assert gate["reasons"] == []
+    comparison = gate["comparison"]
+    assert comparison["failures"] == []
+    assert comparison["expected_review_debt"] == []
+    assert set(comparison["unchanged"]) == active_fingerprints
 
 
 def test_repository_method_aliases_are_unambiguous(
