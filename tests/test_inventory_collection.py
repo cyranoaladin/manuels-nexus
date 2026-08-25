@@ -4645,6 +4645,43 @@ def test_approved_baseline_extension_diagnosis_preserves_pure_extension_mode(
     assert offending == []
 
 
+def test_approved_extension_preserves_retained_decision_ref_enrichment(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = _approved_transition_case(inventory_module)
+    retained_fingerprint = "a" * 16
+    decision_ref = "audit/DECISION_ANTERIEURE.md#decision-retained"
+    case["current_active"][0]["decision_ref"] = decision_ref
+    case["dispositions"][retained_fingerprint] = {
+        "decision_ref": decision_ref,
+        "fingerprint": retained_fingerprint,
+    }
+    _refresh_transition_comparison(case, inventory_module)
+
+    approved, offending = _diagnose_approved_transition(
+        tmp_path,
+        inventory_module,
+        monkeypatch,
+        case,
+    )
+    baseline_active = inventory_module._approved_extension_baseline_active(
+        case["current_active"],
+        case["baseline_payload"]["active"],
+        case["dispositions"],
+    )
+    baseline_by_fingerprint = {
+        entry["fingerprint"]: entry for entry in baseline_active
+    }
+
+    assert approved is True
+    assert offending == []
+    assert baseline_by_fingerprint[retained_fingerprint] == (
+        case["baseline_payload"]["active"][0]
+    )
+
+
 def test_approved_baseline_extension_diagnosis_rejects_forged_pure_extension(
     tmp_path: Path,
     inventory_module,

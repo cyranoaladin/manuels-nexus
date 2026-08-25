@@ -3791,6 +3791,57 @@ def _qualification_digest_bootstrap_diagnosis(
     return pure, sorted(set(offending))
 
 
+def _approved_retained_entry_equivalent(
+    current: Mapping[str, Any],
+    previous: Mapping[str, Any],
+    disposition: Mapping[str, Any] | None,
+) -> bool:
+    if _canonicalize(current) == _canonicalize(previous):
+        return True
+    current_without_ref = dict(current)
+    previous_without_ref = dict(previous)
+    current_decision_ref = current_without_ref.pop("decision_ref", None)
+    previous_decision_ref = previous_without_ref.pop("decision_ref", None)
+    return bool(
+        previous_decision_ref in {None, ""}
+        and isinstance(disposition, Mapping)
+        and current_decision_ref == disposition.get("decision_ref")
+        and isinstance(current_decision_ref, str)
+        and current_decision_ref
+        and _canonicalize(current_without_ref)
+        == _canonicalize(previous_without_ref)
+    )
+
+
+def _approved_extension_baseline_active(
+    current_active: Sequence[Mapping[str, Any]],
+    baseline_active: Sequence[Mapping[str, Any]],
+    dispositions: Mapping[str, Mapping[str, Any]],
+) -> list[dict[str, Any]]:
+    """Preserve byte-stable retained debt while adding the approved sets."""
+
+    previous = _coalesce_active_debt(baseline_active)
+    active: list[dict[str, Any]] = []
+    for current_entry in current_active:
+        fingerprint = str(current_entry.get("fingerprint", ""))
+        previous_entry = previous.get(fingerprint)
+        if previous_entry is not None and _approved_retained_entry_equivalent(
+            current_entry,
+            previous_entry,
+            dispositions.get(fingerprint),
+        ):
+            active.append(dict(previous_entry))
+        else:
+            active.append(dict(current_entry))
+    return sorted(
+        active,
+        key=lambda entry: (
+            str(entry.get("fingerprint", "")),
+            str(entry.get("locator_key", "")),
+        ),
+    )
+
+
 def _approved_baseline_extension_diagnosis(
     root: Path,
     current_active: Sequence[Mapping[str, Any]],
@@ -3851,8 +3902,10 @@ def _approved_baseline_extension_diagnosis(
     approved_new_fingerprints = list(new_fingerprints)
     retained_fingerprints = sorted(set(current) & set(previous))
     for fingerprint in retained_fingerprints:
-        if _canonicalize(current[fingerprint]) != _canonicalize(
-            previous[fingerprint]
+        if not _approved_retained_entry_equivalent(
+            current[fingerprint],
+            previous[fingerprint],
+            dispositions.get(fingerprint),
         ):
             offending.append(
                 "fingerprint conservé modifié intégralement:"
@@ -11909,6 +11962,15 @@ def _update_baseline_gate(
                     "approved_baseline_extension refusée pendant l'écriture: "
                     + "; ".join(offending[:5])
                 )
+        baseline_active = (
+            _approved_extension_baseline_active(
+                current_active,
+                old_active,
+                _load_dispositions(root),
+            )
+            if allow_approved_baseline_extension
+            else current_active
+        )
         resolved_by_fingerprint = {
             str(entry.get("fingerprint", "")): dict(entry)
             for entry in old_resolved
@@ -11951,7 +12013,7 @@ def _update_baseline_gate(
             else []
         )
         payload: dict[str, Any] = {
-            "active": current_active,
+            "active": baseline_active,
             "artifact_type": "anomalies_baseline",
             "baseline_purpose": "debt_regression_control",
             "fingerprint_schema_version": FINGERPRINT_SCHEMA_VERSION,
@@ -11973,7 +12035,7 @@ def _update_baseline_gate(
             "schema_version": SCHEMA_VERSION,
             "source_digest": inventory["source_digest"],
             "summary": {
-                "active": len(current_active),
+                "active": len(baseline_active),
                 "resolved": len(resolved_by_fingerprint),
             },
             "updates": updates,
