@@ -51,7 +51,6 @@ def test_referentiel_et_contrat_separent_socle_et_extensions() -> None:
     assert {item["code"] for item in contract["extensions_facultatives"]} == {
         "X1",
         "X2",
-        "X3",
     }
     for item in contract["extensions_facultatives"]:
         assert item["programme_alignment"] == "OPTIONAL_EXTENSION"
@@ -71,31 +70,20 @@ def test_referentiel_et_contrat_separent_socle_et_extensions() -> None:
     assert c4["libelle_bo"] == "Utiliser la linéarité de l'espérance."
     assert "variance" not in c4["libelle_eleve"].lower()
 
-    x3_referential = next(
-        item for item in referential["optional_extensions"] if item["code"] == "X3"
-    )
-    x3_contract = next(
-        item for item in contract["extensions_facultatives"] if item["code"] == "X3"
-    )
-    for extension in (x3_referential, x3_contract):
-        assert extension["programme_alignment"] == "OPTIONAL_EXTENSION"
-        assert extension["label"] == LABEL
-        assert "variance" in extension["libelle"].lower()
+    assert {item["code"] for item in referential["optional_extensions"]} == {
+        "X1",
+        "X2",
+    }
 
 
-def test_variance_affine_est_uniquement_une_extension_x3() -> None:
+def test_variance_affine_post_gel_ne_cree_pas_une_extension_x3() -> None:
     extension = CHAPTER / "cours/13_X3_variance_affine.tex"
-    meta = _meta(extension)
-    text = extension.read_text(encoding="utf-8")
+    assert not extension.exists()
 
-    assert meta.get("capacites", []) == []
-    assert meta.get("capacites_codes", []) == []
-    assert meta["extension_codes"] == ["X3"]
-    assert meta["programme_alignment"] == "OPTIONAL_EXTENSION"
-    assert meta["extension_label"] == LABEL
-    assert LABEL in text
-    assert r"V(Y)=a^2V(X)" in text
-    assert r"\sigma(Y)=|a|\sigma(X)" in text
+
+def test_extensions_optionnelles_sans_besoin_editorial_prouve_sont_absentes() -> None:
+    assert not (CHAPTER / "cours/12_C3_bernoulli_binomiale.tex").exists()
+    assert not (CHAPTER / "cours/13_C4_esperance_binomiale.tex").exists()
 
 
 def test_variance_affine_n_est_jamais_exigible_dans_le_socle() -> None:
@@ -220,25 +208,3 @@ def test_qcm_reclasses_ont_une_cle_unique_et_des_diagnostics_specifiques() -> No
             not generic.search(diagnostic["erreur"])
             for diagnostic in question["diagnostics"].values()
         )
-
-
-def test_extension_binomiale_distingue_exactement_modele_et_approximation() -> None:
-    course = (
-        CHAPTER / "cours/12_C3_bernoulli_binomiale.tex"
-    ).read_text(encoding="utf-8")
-    normalized = " ".join(course.split())
-
-    assert "sauf si la population est très grande" not in course
-    assert "reste un tirage sans remise" in normalized
-    assert "peut parfois être approchée" in normalized
-    assert "fraction prélevée est faible" in normalized
-
-
-def test_extension_moments_binomiaux_annonce_les_conditions_de_recuperation() -> None:
-    course = (
-        CHAPTER / "cours/13_C4_esperance_binomiale.tex"
-    ).read_text(encoding="utf-8")
-
-    assert "Démonstration exigible" not in course
-    assert r"E(X)>0" in course
-    assert r"0<p\leqslant 1" in course

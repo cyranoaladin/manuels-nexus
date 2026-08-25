@@ -129,6 +129,13 @@ def test_exponentielle_referentiel_reproduit_les_capacites_2026() -> None:
     }
 
 
+def test_exponentielle_extensions_sans_besoin_editorial_prouve_sont_absentes() -> None:
+    chapter = CHAPTERS / "1SPE-EXPONENTIELLE/cours"
+    assert not (chapter / "12_X1_limites_exponentielle.tex").exists()
+    assert not (chapter / "13_X2_derivation_generale.tex").exists()
+    assert not (chapter / "14_C5_equations_inequations.tex").exists()
+
+
 def test_exponentielle_contract_math_is_delimited_for_latex_assembly() -> None:
     contract = yaml.safe_load(
         (CHAPTERS / "1SPE-EXPONENTIELLE/contrat.yaml").read_text(encoding="utf-8")
@@ -268,17 +275,6 @@ def test_modele_exponentiel_conditionne_le_sens_de_variation_a_q0_positif() -> N
 
     assert r"Q_0>0" in course
     assert "si $Q_0>0$ et $a>0$" in normalized
-
-
-def test_extension_equations_exponentielles_definit_son_prerequis_logarithme() -> None:
-    course = (
-        CHAPTERS / "1SPE-EXPONENTIELLE/cours/14_C5_equations_inequations.tex"
-    ).read_text(encoding="utf-8")
-    normalized = " ".join(course.split())
-
-    assert "Prérequis de cet approfondissement" in course
-    assert "logarithme népérien" in normalized
-    assert r"\mathrm{e}^{\ln(k)}=k" in course
 
 
 def test_exponentielle_enonces_tangente_et_unicite_sont_logiquement_corrects() -> None:
