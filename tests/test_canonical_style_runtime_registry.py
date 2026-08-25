@@ -150,9 +150,10 @@ def test_registry_identifies_canonical_implementations_without_hiding_wrappers()
     assert files["Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls"][
         "role"
     ] == "COMPATIBILITY_CLASS_WRAPPER"
-    assert files["Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls"][
-        "runtime_consumers"
-    ]["fls_observations"]
+    assert (
+        "Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls"
+        in summary["noncanonical_runtime_potential_paths"]
+    )
     assert files[
         "Mathematiques/manuel-maths/gabarits/reference-v4/manuel-kit/manuel.sty"
     ]["historical_only"] is True

@@ -12,7 +12,7 @@ Ce registre inventorie les sources physiques et les preuves de consommation ; il
 - Potentiels runtime non canoniques : **16**
 - Une implémentation canonique de classe : **TRUE**
 - Une implémentation canonique de charte : **TRUE**
-- Runtime sans wrapper de compatibilité observé : **TRUE**
+- Runtime sans wrapper de compatibilité observé : **FALSE**
 
 La présence d'une cible canonique unique n'implique pas encore un runtime sans wrappers. Les `.fls` non attestés ne valent pas preuve d'un build final au SHA courant.
 

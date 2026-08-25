@@ -478,7 +478,11 @@ def build_registry(root: Path = ROOT) -> dict[str, Any]:
             "compatibility_wrappers_observed_current": sorted(current_wrappers),
             "one_canonical_class_implementation_achieved": class_implementations == [CANONICAL_CLASS],
             "one_canonical_style_implementation_achieved": style_implementations == [CANONICAL_STYLE],
-            "runtime_clean_without_compatibility_wrappers_achieved": not current_wrappers,
+            # Fail closed: absence of an observed wrapper is not proof of a
+            # clean runtime while noncanonical runtime candidates still exist.
+            "runtime_clean_without_compatibility_wrappers_achieved": (
+                not current_wrappers and not potential
+            ),
         },
         "fls_recorders": recorders,
         "exact_duplicate_groups": duplicate_groups,
