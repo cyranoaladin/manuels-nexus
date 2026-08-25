@@ -1,28 +1,39 @@
 # Current anomaly set algebra — residual
 
-`FORENSIC_SOURCE_SHA = de8d6d194412d5bd65058ca288359bb76244c957`
+`FORENSIC_SOURCE_SHA = 1caed3541e082de94366bda4c8eb3cc15fdae6fd`
 
-`RESIDUAL_TRUE_NEW = TRUE_NEW_INITIAL - ACTIVE_FINGERPRINTS_CLOSED - REMOVED - REVIEW_CLOSED + NEW_AFTER_TRIAGE`
+`RESIDUAL_TRUE_NEW = TRUE_NEW_INITIAL - FIXED - REMOVED - REVIEW_CLOSED + NEW_AFTER_TRIAGE`
 
-`19 = 18 - 0 - 0 - 0 + 1`
+`13 = 18 - 0 - 5 - 0 + 0`
 
 ## Counts
 
 - `TRUE_NEW_INITIAL`: `18`
-- `ACTIVE_FINGERPRINTS_CLOSED`: `0`
-- `REMOVED`: `0`
+- `FIXED`: `0`
+- `REMOVED`: `5`
 - `REVIEW_CLOSED`: `0`
-- `CONTENT_FINDINGS_FIXED`: `8`
-- `NEW_AFTER_TRIAGE`: `1`
-- `RESIDUAL_TRUE_NEW`: `19`
+- `CONTENT_FINDINGS_FIXED`: `5`
+- `NEW_AFTER_TRIAGE`: `0`
+- `RESIDUAL_TRUE_NEW`: `13`
 
 ## Sets
 
 - `TRUE_NEW_INITIAL`: `18c7b3aa6301ef4c`, `265dbdeec1fc2b62`, `2e189d4bed9a9520`, `33e9818ffc70892c`, `47fd672690479f1f`, `4b9a00c4ef815951`, `634c54857f49fcc0`, `7c204b3da8fcb9a9`, `80b7b42e7d6a78ba`, `85454c002c0a1d6a`, `873a020438d7e00a`, `8ca4f3f2a9212e39`, `bd63d2a316c26b0c`, `d6985b17d7cab316`, `dc8e5dcc030bb539`, `e79a0d7257787b02`, `e8ac154947fefcdb`, `fac802b8993558c3`
-- `ACTIVE_FINGERPRINTS_CLOSED`: ∅
-- `REMOVED`: ∅
+- `FIXED`: ∅
+- `REMOVED`: `265dbdeec1fc2b62`, `2e189d4bed9a9520`, `7c204b3da8fcb9a9`, `e79a0d7257787b02`, `fac802b8993558c3`
 - `REVIEW_CLOSED`: ∅
-- `NEW_AFTER_TRIAGE`: `65b5b9f56ca8900a`
-- `RESIDUAL_TRUE_NEW`: `18c7b3aa6301ef4c`, `265dbdeec1fc2b62`, `2e189d4bed9a9520`, `33e9818ffc70892c`, `47fd672690479f1f`, `4b9a00c4ef815951`, `634c54857f49fcc0`, `65b5b9f56ca8900a`, `7c204b3da8fcb9a9`, `80b7b42e7d6a78ba`, `85454c002c0a1d6a`, `873a020438d7e00a`, `8ca4f3f2a9212e39`, `bd63d2a316c26b0c`, `d6985b17d7cab316`, `dc8e5dcc030bb539`, `e79a0d7257787b02`, `e8ac154947fefcdb`, `fac802b8993558c3`
+- `NEW_AFTER_TRIAGE`: ∅
+- `RESIDUAL_TRUE_NEW`: `18c7b3aa6301ef4c`, `33e9818ffc70892c`, `47fd672690479f1f`, `4b9a00c4ef815951`, `634c54857f49fcc0`, `80b7b42e7d6a78ba`, `85454c002c0a1d6a`, `873a020438d7e00a`, `8ca4f3f2a9212e39`, `bd63d2a316c26b0c`, `d6985b17d7cab316`, `dc8e5dcc030bb539`, `e8ac154947fefcdb`
 
-`release_acceptance = false` — les 19 lignes restent une dette de revue.
+## Algèbre CURRENT_ACTIVE recalculée
+
+`2232 = 2121 + 9 + 89 + 13`
+
+- `CURRENT_ACTIVE`: `2232`
+- `UNCHANGED`: `2121`
+- `APPROVED_TRANSITION_NEW`: `9`
+- `EXPECTED_REVIEW_DEBT`: `89`
+- `TRUE_NEW`: `13`
+- `UNKNOWN`: `0`
+
+`release_acceptance = false` — les 13 lignes restent une dette de revue.
