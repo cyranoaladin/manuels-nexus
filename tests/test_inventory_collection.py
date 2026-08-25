@@ -6010,27 +6010,64 @@ def test_approved_extension_source_digest_verifier_rejects_post_decision_drift(
     inventory_module,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    expected = "sha256:" + "1" * 64
+    disposition_path = tmp_path / "audit/ANOMALY_DISPOSITIONS.yaml"
+    disposition_path.parent.mkdir(parents=True)
+    disposition_path.write_text("materialized\n", encoding="utf-8")
+    content_path = tmp_path / "manual/content.tex"
+    content_path.parent.mkdir(parents=True)
+    content_path.write_text("stable\n", encoding="utf-8")
+    source_files = (
+        "audit/ANOMALY_DISPOSITIONS.yaml",
+        "manual/content.tex",
+    )
+    authorized_dispositions = b"authorized\n"
+    authorized_digest = "sha256:" + hashlib.sha256(
+        authorized_dispositions
+    ).hexdigest()
+    expected = inventory_module._source_digest(
+        tmp_path,
+        source_files,
+        overrides={
+            "audit/ANOMALY_DISPOSITIONS.yaml": (
+                authorized_dispositions,
+                authorized_digest,
+            )
+        },
+    )
     monkeypatch.setattr(
         inventory_module._baseline_qualification,
         "load_policy",
         lambda _path: {
             "approved_set": {
+                "baseline_sha": "1" * 40,
                 "observed_source_digest_before_materialization": expected,
             }
         },
     )
+    monkeypatch.setattr(
+        inventory_module,
+        "_git_blob_bytes",
+        lambda _root, _commit, _path: authorized_dispositions,
+    )
+    inventory = {
+        "source_digest": inventory_module._source_digest(
+            tmp_path,
+            source_files,
+        ),
+        "source_files": list(source_files),
+    }
 
     assert (
         inventory_module._approved_extension_source_digest_violation(
             tmp_path,
-            {"source_digest": expected},
+            inventory,
         )
         is None
     )
+    content_path.write_text("drift\n", encoding="utf-8")
     violation = inventory_module._approved_extension_source_digest_violation(
         tmp_path,
-        {"source_digest": "sha256:" + "2" * 64},
+        inventory,
     )
 
     assert violation is not None

@@ -663,7 +663,14 @@ def test_materialization_plan_preserves_history_and_emits_all_required_fields(
     ]
     assert plan["unqualified"] == []
     payload = plan["dispositions_payload"]
-    assert len(payload["dispositions"]) == len(historical)
+    approved_fingerprints = set(policy["approved_set"]["fingerprints"])
+    assert set(payload["dispositions"]) == (
+        set(historical) | approved_fingerprints
+    )
+    assert all(
+        payload["dispositions"][fingerprint] == record
+        for fingerprint, record in historical.items()
+    )
     required = {
         "approved_by",
         "baseline_sha",

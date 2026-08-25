@@ -743,6 +743,11 @@ def _git_blob_oid(root: Path, commit: str, path: str) -> str:
 
 
 def _git_blob_sha256(root: Path, oid: str) -> str:
+    content = _git_blob_bytes_from_oid(root, oid)
+    return "sha256:" + hashlib.sha256(content).hexdigest()
+
+
+def _git_blob_bytes_from_oid(root: Path, oid: str) -> bytes:
     try:
         completed = subprocess.run(
             ["git", "-C", str(root), "cat-file", "blob", oid],
@@ -752,7 +757,11 @@ def _git_blob_sha256(root: Path, oid: str) -> str:
         )
     except (subprocess.CalledProcessError, OSError) as exc:
         raise InventoryError(f"octets du blob Git indisponibles: {oid}") from exc
-    return "sha256:" + hashlib.sha256(completed.stdout).hexdigest()
+    return completed.stdout
+
+
+def _git_blob_bytes(root: Path, commit: str, path: str) -> bytes:
+    return _git_blob_bytes_from_oid(root, _git_blob_oid(root, commit, path))
 
 
 def _registry_attribution_model() -> dict[str, Any]:
@@ -4111,14 +4120,44 @@ def _approved_extension_source_digest_violation(
     approved_set = policy.get("approved_set")
     if not isinstance(approved_set, Mapping):
         return "jeu approuvé absent de la politique de décision"
+    baseline_sha = approved_set.get("baseline_sha")
+    source_files = inventory.get("source_files")
+    if (
+        not isinstance(baseline_sha, str)
+        or re.fullmatch(r"[0-9a-f]{40}", baseline_sha) is None
+        or not isinstance(source_files, list)
+        or any(not isinstance(path, str) for path in source_files)
+    ):
+        return "snapshot source incomplet pour la décision approuvée"
+    try:
+        authorized_dispositions = _git_blob_bytes(
+            root,
+            baseline_sha,
+            ANOMALY_DISPOSITIONS_FILE,
+        )
+        authorized_dispositions_digest = (
+            "sha256:"
+            + hashlib.sha256(authorized_dispositions).hexdigest()
+        )
+        normalized_source_digest = _source_digest(
+            root,
+            tuple(source_files),
+            overrides={
+                ANOMALY_DISPOSITIONS_FILE: (
+                    authorized_dispositions,
+                    authorized_dispositions_digest,
+                )
+            },
+        )
+    except (InventoryError, OSError, ValueError) as exc:
+        return f"snapshot source de décision indisponible:{exc}"
     expected = approved_set.get(
         "observed_source_digest_before_materialization"
     )
-    observed = inventory.get("source_digest")
-    if observed != expected:
+    if normalized_source_digest != expected:
         return (
             "source_digest différent du SHA de décision:"
-            f"attendu={expected}:observé={observed}"
+            f"attendu={expected}:observé={normalized_source_digest}"
         )
     return None
 
