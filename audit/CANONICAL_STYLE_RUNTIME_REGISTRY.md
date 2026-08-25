@@ -12,7 +12,7 @@ Ce registre inventorie les sources physiques et les preuves de consommation ; il
 - Potentiels runtime non canoniques : **16**
 - Une implémentation canonique de classe : **TRUE**
 - Une implémentation canonique de charte : **TRUE**
-- Runtime sans wrapper de compatibilité observé : **FALSE**
+- Runtime sans wrapper de compatibilité observé : **TRUE**
 
 La présence d'une cible canonique unique n'implique pas encore un runtime sans wrappers. Les `.fls` non attestés ne valent pas preuve d'un build final au SHA courant.
 
@@ -31,14 +31,6 @@ La présence d'une cible canonique unique n'implique pas encore un runtime sans 
 
 | FLS | Manuel | Variante | Fraîcheur | Entrées du registre |
 |---|---|---|---|---:|
-| `Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.fls` | 1SPE | eleve | CURRENT_WORKTREE_UNATTESTED | 17 |
-| `Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.fls` | 1SPE | professeur | CURRENT_WORKTREE_UNATTESTED | 17 |
-| `Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.fls` | TCOMPL | eleve | CURRENT_WORKTREE_UNATTESTED | 17 |
-| `Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.fls` | TCOMPL | professeur | CURRENT_WORKTREE_UNATTESTED | 17 |
-| `Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_eleve.fls` | TEXPERTES | eleve | CURRENT_WORKTREE_UNATTESTED | 17 |
-| `Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_professeur.fls` | TEXPERTES | professeur | CURRENT_WORKTREE_UNATTESTED | 17 |
-| `Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.fls` | TSPE | eleve | CURRENT_WORKTREE_UNATTESTED | 17 |
-| `Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_professeur.fls` | TSPE | professeur | CURRENT_WORKTREE_UNATTESTED | 17 |
 | `audit/D7_VISUAL_REVIEW/runtime/maquette.fls` | D7_MAQUETTE | maquette | STALE_ATTESTED_OTHER_SHA | 9 |
 
 ## Fichiers
@@ -47,21 +39,21 @@ La présence d'une cible canonique unique n'implique pas encore un runtime sans 
 |---|---|:---:|---|---|---:|---:|:---:|:---:|
 | `Mathematiques/manuel-maths/gabarits/chapitre_master.tex` | CHAPTER_RUNTIME_TEMPLATE | NO | `82c0ae2dfd98858c817f30193c7cee6f1f08327fb98f1090c6127902575028c3` | `gabarits/common/chapitre_master.tex` | 1 | 0 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-boites-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `2185848e26ea5152a1570828c1b5c29d5158dcf38b32702be680c617e9f90d36` | — | 0 | 0 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `90391485645cb6fa03ae6ffc3b315d612e714b69dcc3c0efd547a7d8fca38137` | — | 5 | 8 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-code.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `16e74594ae5108e3326b36f92f75ccdb5b30472dc15134ffe5ff943a2a6b6d91` | `gabarits/common/nexus-code.tex` | 0 | 9 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `90391485645cb6fa03ae6ffc3b315d612e714b69dcc3c0efd547a7d8fca38137` | — | 5 | 0 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-code.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `16e74594ae5108e3326b36f92f75ccdb5b30472dc15134ffe5ff943a2a6b6d91` | `gabarits/common/nexus-code.tex` | 0 | 1 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-couverture.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `57327021b50fb44434874fb4fe00583ddb2160908ca8379d4d07d670f257685e` | — | 0 | 0 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-decor.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `1b23d537120ebd2437c9f6c59d5b99c24c4ecd1286028b4cc2441eabf0c758d4` | — | 0 | 0 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-exercices-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `25b72f131634021353e07500252a5cf69110faa106c670659240b796cd59edda` | — | 0 | 0 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-figures-bib.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `d441187e66d487806714abf7bba768aa61b20c6d18638b39f030e6c6ec190bfa` | — | 0 | 0 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `2c7b764764e3db723f752e68e7af5d375171a0f9774f39f749b2598b8a1e931f` | — | 0 | 9 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-figures.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `de13399037827ab8300953a7f5a46bd9e34d5a634b9d17fe8a128066007a831a` | — | 0 | 9 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-icons.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `42af1195dda223dc642255754ff7a94f1d5add6720e7062883de4c429132cc8b` | `gabarits/common/nexus-icons.tex` | 0 | 9 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls` | COMPATIBILITY_CLASS_WRAPPER | NO | `5e1d7fdb258865321ee93a34a41a2de806edd93ad36b256829ed1bce4043a7dc` | — | 3 | 9 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `2c7b764764e3db723f752e68e7af5d375171a0f9774f39f749b2598b8a1e931f` | — | 0 | 1 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-figures.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `de13399037827ab8300953a7f5a46bd9e34d5a634b9d17fe8a128066007a831a` | — | 0 | 1 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-icons.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `42af1195dda223dc642255754ff7a94f1d5add6720e7062883de4c429132cc8b` | `gabarits/common/nexus-icons.tex` | 0 | 1 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls` | COMPATIBILITY_CLASS_WRAPPER | NO | `5e1d7fdb258865321ee93a34a41a2de806edd93ad36b256829ed1bce4043a7dc` | — | 3 | 1 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls` | COMPATIBILITY_CLASS_WRAPPER | NO | `90ea5ae521bcf028fbc5fc240639636c24eb2e1cfc934e0af9a2c94ae7269e07` | — | 6 | 1 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `6ffc96378d2dece2dd7479647b7b7046025fe3c12a1bdd0fcf41d8787e277823` | `gabarits/common/nexus-margin-rail.tex` | 0 | 9 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `6ffc96378d2dece2dd7479647b7b7046025fe3c12a1bdd0fcf41d8787e277823` | `gabarits/common/nexus-margin-rail.tex` | 0 | 1 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-pages-froides.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `4ecc02468ab1ab2859d7fe1f1930538ec35a9058dbfab79a1e86269802234751` | — | 0 | 0 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-pont-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `7345dbceca061abe156240c389ccde57508ec4009f4ccf90a06db8c20b6ea65b` | — | 0 | 0 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-signatures.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `bbf81c1368d7be1b067597803e1429dd94e19c0585dbf0981d408f8f5ea3cc74` | `gabarits/common/nexus-signatures.tex` | 0 | 9 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-signatures.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `bbf81c1368d7be1b067597803e1429dd94e19c0585dbf0981d408f8f5ea3cc74` | `gabarits/common/nexus-signatures.tex` | 0 | 1 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/objet_standalone.tex` | OBJECT_RUNTIME_TEMPLATE | NO | `c9c4c06915ff0cc38ea7393621547a39856705a8d0f19527bb89f3ecd300c769` | — | 0 | 0 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/reference-v4/manuel-kit/chapitres/chap-nsi.tex` | HISTORICAL_REFERENCE | NO | `f753b91d4d14372e83a0a827a5f897788520cf310d541f12af6b26aefe602209` | — | 0 | 0 | YES | YES |
 | `Mathematiques/manuel-maths/gabarits/reference-v4/manuel-kit/chapitres/chap-physique.tex` | HISTORICAL_REFERENCE | NO | `735765f581c017ed67a00895d089c60e0843ba9195e3a8078d459943008c061c` | — | 0 | 0 | YES | YES |
@@ -93,18 +85,18 @@ La présence d'une cible canonique unique n'implique pas encore un runtime sans 
 | `NSI/gabarits/objet_standalone.tex` | OBJECT_RUNTIME_TEMPLATE | NO | `c9c4c06915ff0cc38ea7393621547a39856705a8d0f19527bb89f3ecd300c769` | `Mathematiques/manuel-maths/gabarits/objet_standalone.tex` | 0 | 0 | NO | NO |
 | `NSI/gabarits/specimen.tex` | VISUAL_SPECIMEN_TEMPLATE | NO | `a3dccdf4ceb7d315f02242303135b9e229701d4718ff29a5baab6365f23a2397` | — | 0 | 0 | NO | NO |
 | `gabarits/common/chapitre_master.tex` | CHAPTER_RUNTIME_TEMPLATE | YES | `82c0ae2dfd98858c817f30193c7cee6f1f08327fb98f1090c6127902575028c3` | — | 0 | 0 | NO | NO |
-| `gabarits/common/nexus-boites.sty` | CANONICAL_SUPPORT_STYLE | YES | `9cdecfd826561817a540d95e4eab38bacfc253a8a932956f58e533d83510d2ec` | — | 13 | 8 | NO | NO |
-| `gabarits/common/nexus-charte.sty` | CANONICAL_STYLE_IMPLEMENTATION | YES | `75132957ede070ffa00839547d12bc4289b4aca5888dfd7e98d78c356e4b9b9a` | — | 23 | 8 | NO | NO |
+| `gabarits/common/nexus-boites.sty` | CANONICAL_SUPPORT_STYLE | YES | `9cdecfd826561817a540d95e4eab38bacfc253a8a932956f58e533d83510d2ec` | — | 13 | 0 | NO | NO |
+| `gabarits/common/nexus-charte.sty` | CANONICAL_STYLE_IMPLEMENTATION | YES | `75132957ede070ffa00839547d12bc4289b4aca5888dfd7e98d78c356e4b9b9a` | — | 23 | 0 | NO | NO |
 | `gabarits/common/nexus-code.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `16e74594ae5108e3326b36f92f75ccdb5b30472dc15134ffe5ff943a2a6b6d91` | — | 1 | 0 | NO | NO |
-| `gabarits/common/nexus-couverture.sty` | CANONICAL_SUPPORT_STYLE | YES | `cc687eeeb93df549adc3b08003cea5432aae19e6bd15cecefa07d681b3f915a1` | — | 13 | 8 | NO | NO |
-| `gabarits/common/nexus-decor.sty` | CANONICAL_SUPPORT_STYLE | YES | `bde5267321f2c8b034d06b3913d6589ccb0b96e78091466028b42a6b1a289942` | — | 13 | 8 | NO | NO |
-| `gabarits/common/nexus-exercices.sty` | CANONICAL_SUPPORT_STYLE | YES | `abae58775dc52a29b98a28add1cf6c55404222fc2990b119547f8863358571b7` | — | 13 | 8 | NO | NO |
-| `gabarits/common/nexus-figures-bib.sty` | CANONICAL_SUPPORT_STYLE | YES | `e8fede638c9bd372213cd7ede0d76279106f7a0cc1c9f5f180a01afb197ac4ff` | — | 13 | 8 | NO | NO |
+| `gabarits/common/nexus-couverture.sty` | CANONICAL_SUPPORT_STYLE | YES | `cc687eeeb93df549adc3b08003cea5432aae19e6bd15cecefa07d681b3f915a1` | — | 13 | 0 | NO | NO |
+| `gabarits/common/nexus-decor.sty` | CANONICAL_SUPPORT_STYLE | YES | `bde5267321f2c8b034d06b3913d6589ccb0b96e78091466028b42a6b1a289942` | — | 13 | 0 | NO | NO |
+| `gabarits/common/nexus-exercices.sty` | CANONICAL_SUPPORT_STYLE | YES | `abae58775dc52a29b98a28add1cf6c55404222fc2990b119547f8863358571b7` | — | 13 | 0 | NO | NO |
+| `gabarits/common/nexus-figures-bib.sty` | CANONICAL_SUPPORT_STYLE | YES | `e8fede638c9bd372213cd7ede0d76279106f7a0cc1c9f5f180a01afb197ac4ff` | — | 13 | 0 | NO | NO |
 | `gabarits/common/nexus-icons.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `42af1195dda223dc642255754ff7a94f1d5add6720e7062883de4c429132cc8b` | — | 1 | 0 | NO | NO |
-| `gabarits/common/nexus-manuel.cls` | CANONICAL_CLASS_IMPLEMENTATION | YES | `9a85c337ec1723bb33e90f71eb5b7c35c0954c63cc69b8fbdce77ac2bcea8c56` | — | 21 | 9 | NO | NO |
+| `gabarits/common/nexus-manuel.cls` | CANONICAL_CLASS_IMPLEMENTATION | YES | `9a85c337ec1723bb33e90f71eb5b7c35c0954c63cc69b8fbdce77ac2bcea8c56` | — | 21 | 1 | NO | NO |
 | `gabarits/common/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `6ffc96378d2dece2dd7479647b7b7046025fe3c12a1bdd0fcf41d8787e277823` | — | 0 | 0 | NO | NO |
-| `gabarits/common/nexus-pages-froides.sty` | CANONICAL_SUPPORT_STYLE | YES | `4e1f7fae36ffa3b871bbe728ec9c7fcbf4b473c9f614660edb6cb057f8282bd8` | — | 13 | 8 | NO | NO |
-| `gabarits/common/nexus-pont.sty` | CANONICAL_SUPPORT_STYLE | YES | `2703ad66ef9733c7c45f2176a7c13918a34920f6d4112e70f300d33e8f09d088` | — | 14 | 8 | NO | NO |
+| `gabarits/common/nexus-pages-froides.sty` | CANONICAL_SUPPORT_STYLE | YES | `4e1f7fae36ffa3b871bbe728ec9c7fcbf4b473c9f614660edb6cb057f8282bd8` | — | 13 | 0 | NO | NO |
+| `gabarits/common/nexus-pont.sty` | CANONICAL_SUPPORT_STYLE | YES | `2703ad66ef9733c7c45f2176a7c13918a34920f6d4112e70f300d33e8f09d088` | — | 14 | 0 | NO | NO |
 | `gabarits/common/nexus-signatures.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `bbf81c1368d7be1b067597803e1429dd94e19c0585dbf0981d408f8f5ea3cc74` | — | 1 | 0 | NO | NO |
 | `gabarits/maths/nexus-maths.sty` | CANONICAL_DISCIPLINE_ADAPTER | YES | `c51c5b6a6fc330ccf47c0980716719f37073317b91f7233d8cc01f5fe1bed994` | — | 2 | 0 | NO | NO |
 | `gabarits/nsi/nexus-nsi.sty` | CANONICAL_DISCIPLINE_ADAPTER | YES | `ddb6942951050b49582fbebb4668330fb7994e5cc08569e2451b4e39785ebd08` | — | 2 | 0 | NO | NO |
