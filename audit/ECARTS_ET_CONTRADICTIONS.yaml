@@ -2127,33 +2127,15 @@ anomalies:
     scope: object
     status: generated
   - chapter: 1SPE-EXPONENTIELLE
-    id: 1SPE-EXPO-COURS-X1
-    manual: 1SPE
-    path: Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/cours/12_X1_limites_exponentielle.tex
-    scope: object
-    status: generated
-  - chapter: 1SPE-EXPONENTIELLE
     id: 1SPE-EXPO-COURS-C4
     manual: 1SPE
     path: Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/cours/13_C4_derivation_eu.tex
     scope: object
     status: generated
   - chapter: 1SPE-EXPONENTIELLE
-    id: 1SPE-EXPO-COURS-X2
-    manual: 1SPE
-    path: Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/cours/13_X2_derivation_generale.tex
-    scope: object
-    status: generated
-  - chapter: 1SPE-EXPONENTIELLE
     id: 1SPE-EXPO-COURS-C5
     manual: 1SPE
     path: Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/cours/14_C5_a_modeles_exponentiels.tex
-    scope: object
-    status: generated
-  - chapter: 1SPE-EXPONENTIELLE
-    id: 1SPE-EXPO-COURS-X3
-    manual: 1SPE
-    path: Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/cours/14_C5_equations_inequations.tex
     scope: object
     status: generated
   - chapter: 1SPE-EXPONENTIELLE
@@ -7959,35 +7941,17 @@ anomalies:
     scope: object
     status: generated
   - chapter: 1SPE-VARIABLES-ALEATOIRES
-    id: 1SPE-VARALEA-CR-X1
-    manual: 1SPE
-    path: Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/12_C3_bernoulli_binomiale.tex
-    scope: object
-    status: generated
-  - chapter: 1SPE-VARIABLES-ALEATOIRES
     id: 1SPE-VARALEA-CR-012
     manual: 1SPE
     path: Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/12_C3_repetitions_bernoulli.tex
     scope: object
     status: needs_review
   - chapter: 1SPE-VARIABLES-ALEATOIRES
-    id: 1SPE-VARALEA-CR-X2
-    manual: 1SPE
-    path: Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/13_C4_esperance_binomiale.tex
-    scope: object
-    status: generated
-  - chapter: 1SPE-VARIABLES-ALEATOIRES
     id: 1SPE-VARALEA-CR-013
     manual: 1SPE
     path: Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/13_C4_transformations_affines.tex
     scope: object
     status: needs_review
-  - chapter: 1SPE-VARIABLES-ALEATOIRES
-    id: 1SPE-VARALEA-CR-X3
-    manual: 1SPE
-    path: Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/13_X3_variance_affine.tex
-    scope: object
-    status: generated
   - chapter: 1SPE-VARIABLES-ALEATOIRES
     id: 1SPE-VARALEA-CR-014
     manual: 1SPE
@@ -14703,12 +14667,12 @@ counts:
   claims_contredits: 28
   claims_ouverts: 53
 generated_by: inventory_collection.py
-model_digest: sha256:b183af8545cff1f589bffe39a5ac7ee138b29e9e56968c7a0793acf5d074575f
+model_digest: sha256:9560f7e883448fef80a6bc4643afbc011ef0bf8a94048e5098fd795a8e421aa2
 provenance:
-  branch: codex/t2-current-10cb5f0
+  branch: codex/t2-inventory-refresh
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-23T17:39:14Z'
+  generated_at_utc: '2026-08-25T17:28:54Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:9067ac4158409689e1374f51fb99cc6b59e66395989b328dfc06cbcf9d2e7841
     scripts/build_manifest.py: sha256:08fe2fdb7003a611e807fbb8dac8835c2745758ea2dd6c0a70270a1fa597e084
@@ -14720,7 +14684,7 @@ provenance:
   generator_sha256: sha256:c49d0287ec964db002f857d9e0f7f8eb4cebc8a29dc84dee9c915b89946ba5e6
   generator_version: 1
   git_available: true
-  head_sha: 9b94238adc40f4d659c0eae11a51760647620532
+  head_sha: 98ec74c5082beae1994b2b63294dfd8832c1ad16
   modified_tracked: []
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
@@ -14732,4 +14696,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/ecarts-et-contradictions.schema.json
 schema_version: 1
-source_digest: sha256:b8620a23f025e9008f200643b1db741fb3df11ff3031fa69ad00de38cb5dbb73
+source_digest: sha256:d9186c56f6d05bb5d8d47a644a96ef58819d80f57d0d011e45b4c27b4e370d9c
