@@ -19280,13 +19280,13 @@ def test_pre_a6_repository_projects_only_the_exact_nine_qualifications(
         hashlib.sha256(
             (ROOT / "audit/ANOMALIES_BASELINE.json").read_bytes()
         ).hexdigest()
-        == "3e9225668121a67c2fdea1248ec420ff16bd3910c8557e3a98df8bb7997250e1"
+        == "fe4a4b9788089777ea87f4cc7c4997a98a26ae91efecbfc9b03deeb36d14e75d"
     )
     assert (
         hashlib.sha256(
             (ROOT / "audit/ANOMALY_DISPOSITIONS.yaml").read_bytes()
         ).hexdigest()
-        == "107e12bd9a653daf090ce14e6b8f1a886c1da64b717cd42c820f3623fac5b725"
+        == "87bfa34d4f9a039dda917bf549b8a10530e1da7c03d42db70981e1ab9c71ae55"
     )
     assert (
         hashlib.sha256(
@@ -19428,13 +19428,13 @@ def pre_a6_projection_case():
         ),
         pytest.param(
             "baseline-unqualified",
-            "non qualifié",
-            id="historical-baseline-unqualified",
+            "résolution baseline historique invalide",
+            id="historical-baseline-resolution-invalid",
         ),
         pytest.param(
             "baseline-identity",
-            "identité baseline divergente",
-            id="baseline-identity-drift",
+            "fingerprint historique absent de la baseline",
+            id="baseline-resolved-fingerprint-drift",
         ),
         pytest.param(
             "current-source-hash",
@@ -19478,7 +19478,7 @@ def pre_a6_projection_case():
         ),
         pytest.param(
             "qualification-digest",
-            "qualification baseline divergente.*qualification_digest",
+            "qualification digest historique divergent",
             id="qualification-digest-drift",
         ),
         pytest.param(
@@ -19516,17 +19516,23 @@ def test_pre_a6_projection_rejects_every_mechanical_or_human_drift(
     elif mutation == "baseline-unqualified":
         entry = next(
             entry
-            for entry in case["baseline"]["active"]
+            for entry in (
+                case["baseline"]["active"]
+                + case["baseline"]["resolved"]
+            )
             if entry["fingerprint"] == previous
         )
-        entry["qualified"] = False
+        entry["disposition"] = "open_debt"
     elif mutation == "baseline-identity":
         entry = next(
             entry
-            for entry in case["baseline"]["active"]
+            for entry in (
+                case["baseline"]["active"]
+                + case["baseline"]["resolved"]
+            )
             if entry["fingerprint"] == previous
         )
-        entry["locator_key"] = '{"source":"falsified.tex"}'
+        entry["fingerprint"] = "f" * 16
     elif mutation == "current-source-hash":
         case["migrations"][current]["current_source_sha256"] = (
             "sha256:" + "0" * 64

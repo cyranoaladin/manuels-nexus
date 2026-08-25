@@ -1964,13 +1964,30 @@ def _project_identity_migration_qualifications(
     if not migrations:
         return {str(key): dict(value) for key, value in dispositions.items()}
     baseline_active = baseline.get("active")
-    if not isinstance(baseline_active, list):
-        raise InventoryError("baseline active invalide pour migration d'identité")
-    baseline_by_fingerprint = {
+    baseline_resolved = baseline.get("resolved")
+    if not isinstance(baseline_active, list) or not isinstance(
+        baseline_resolved,
+        list,
+    ):
+        raise InventoryError("historique baseline invalide pour migration d'identité")
+    baseline_resolved_by_fingerprint = {
+        str(entry.get("fingerprint", "")): entry
+        for entry in baseline_resolved
+        if isinstance(entry, Mapping) and entry.get("fingerprint")
+    }
+    baseline_active_by_fingerprint = {
         str(entry.get("fingerprint", "")): entry
         for entry in baseline_active
         if isinstance(entry, Mapping) and entry.get("fingerprint")
     }
+    duplicated_baseline_fingerprints = set(
+        baseline_active_by_fingerprint
+    ).intersection(baseline_resolved_by_fingerprint)
+    if duplicated_baseline_fingerprints:
+        raise InventoryError(
+            "fingerprint présent dans active et resolved: "
+            + ", ".join(sorted(duplicated_baseline_fingerprints))
+        )
     for current_fingerprint, migration in sorted(migrations.items()):
         previous_fingerprint = str(migration.get("previous_fingerprint", ""))
         if current_fingerprint in dispositions:
@@ -1984,10 +2001,12 @@ def _project_identity_migration_qualifications(
                 f"fp={previous_fingerprint}"
             )
         if not isinstance(
-            baseline_by_fingerprint.get(previous_fingerprint), Mapping
+            baseline_active_by_fingerprint.get(previous_fingerprint), Mapping
+        ) and not isinstance(
+            baseline_resolved_by_fingerprint.get(previous_fingerprint), Mapping
         ):
             raise InventoryError(
-                "fingerprint historique absent de la baseline active: "
+                "fingerprint historique absent de la baseline: "
                 f"{previous_fingerprint}"
             )
     transition = policy.get("approved_transition")
@@ -2046,15 +2065,33 @@ def _project_identity_migration_qualifications(
                 "disposition historique absente pour migration "
                 f"fp={previous_fingerprint}"
             )
-        previous_baseline = baseline_by_fingerprint.get(previous_fingerprint)
+        previous_baseline = baseline_active_by_fingerprint.get(
+            previous_fingerprint
+        )
+        previous_baseline_is_active = isinstance(previous_baseline, Mapping)
+        if not previous_baseline_is_active:
+            previous_baseline = baseline_resolved_by_fingerprint.get(
+                previous_fingerprint
+            )
         if not isinstance(previous_baseline, Mapping):
             raise InventoryError(
-                "fingerprint historique absent de la baseline active: "
+                "fingerprint historique absent de la baseline: "
                 f"{previous_fingerprint}"
             )
-        if previous_baseline.get("qualified") is not True:
+        if previous_baseline_is_active and previous_baseline.get(
+            "qualified"
+        ) is not True:
             raise InventoryError(
                 "fingerprint historique non qualifié dans la baseline: "
+                f"{previous_fingerprint}"
+            )
+        if not previous_baseline_is_active and (
+            previous_baseline.get("disposition") != "fixed"
+            or not previous_baseline.get("resolved_at")
+            or not previous_baseline.get("resolved_git_sha")
+        ):
+            raise InventoryError(
+                "résolution baseline historique invalide pour migration fp="
                 f"{previous_fingerprint}"
             )
         historical_disposition_identity = {
@@ -2211,10 +2248,9 @@ def _project_identity_migration_qualifications(
                 "fingerprint historique non reproductible pour migration "
                 f"fp={previous_fingerprint}"
             )
-        if previous_baseline.get("locator_key") != _anomaly_locator_key(
-            previous_anomaly,
-            category=category,
-        ):
+        if previous_baseline_is_active and previous_baseline.get(
+            "locator_key"
+        ) != _anomaly_locator_key(previous_anomaly, category=category):
             raise InventoryError(
                 "identité baseline divergente pour migration fp="
                 f"{previous_fingerprint}"
@@ -2233,12 +2269,13 @@ def _project_identity_migration_qualifications(
             "qualified": True,
             "severity": previous_disposition.get("severity"),
         }
-        for field, expected in baseline_expected.items():
-            if previous_baseline.get(field) != expected:
-                raise InventoryError(
-                    "qualification baseline divergente pour migration "
-                    f"fp={previous_fingerprint}:{field}"
-                )
+        if previous_baseline_is_active:
+            for field, expected in baseline_expected.items():
+                if previous_baseline.get(field) != expected:
+                    raise InventoryError(
+                        "qualification baseline divergente pour migration "
+                        f"fp={previous_fingerprint}:{field}"
+                    )
         if (
             previous_disposition.get("qualification_policy_digest")
             != policy_digest
