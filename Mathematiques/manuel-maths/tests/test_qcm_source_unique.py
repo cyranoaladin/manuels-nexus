@@ -13,6 +13,7 @@ deviendront a mesure de leur migration vers la source unique.
 from __future__ import annotations
 
 import json
+import runpy
 import subprocess
 import sys
 from pathlib import Path
@@ -63,6 +64,36 @@ def _assert_debt_status_is_derived(ledger: dict) -> None:
     assert ledger["status"] == expected
     assert ledger["objective_zero"] is (expected == "CLOSED_OBJECTIVE_ZERO")
     assert ledger["human_approval_complete"] is False
+
+
+def test_le_renderer_ne_forge_pas_un_renvoi_m1_absent() -> None:
+    rendre = runpy.run_path(str(GENERATEUR))["rendre"]
+    donnees = {
+        "_source": "chapitres/TSPE-TEST/qcm/TSPE-TEST-QCM.json",
+        "chapitre": "TSPE-TEST",
+        "titre": "Test des renvois",
+        "questions": [
+            {
+                "id": "Q1",
+                "capacite": "C1",
+                "enonce": "Une question de test.",
+                "options": {"A": "exact", "B": "faux", "C": "faux", "D": "faux"},
+                "correcte": "A",
+                "diagnostics": {
+                    "B": {"erreur": "Erreur B sans renvoi."},
+                    "C": {"erreur": "Erreur C avec renvoi.", "renvoi": "C1"},
+                    "D": {"erreur": "Erreur D avec renvoi vide.", "renvoi": "  "},
+                },
+            }
+        ],
+    }
+
+    rendu = rendre(donnees)
+
+    assert "Erreur B sans renvoi." in rendu
+    assert "Erreur D avec renvoi vide." in rendu
+    assert rendu.count("Renvoi : C1.") == 1
+    assert "Renvoi : M1." not in rendu
 
 
 def test_second_degre_q16_cle_correspond_au_calcul_independant() -> None:

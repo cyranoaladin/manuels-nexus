@@ -107,10 +107,20 @@ def rendre(donnees: dict) -> str:
             diagnostic = question["diagnostics"].get(lettre)
             if diagnostic:
                 err_txt = _clean_text(diagnostic['erreur'])
-                renvoi_txt = diagnostic.get('renvoi', 'M1')
+                raw_renvoi = diagnostic.get('renvoi')
+                renvoi_txt = (
+                    _clean_text(raw_renvoi.strip())
+                    if isinstance(raw_renvoi, str) and raw_renvoi.strip()
+                    else ""
+                )
+                renvoi_suffix = (
+                    f" \\emph{{Renvoi : {renvoi_txt}.}}"
+                    if renvoi_txt
+                    else ""
+                )
                 out.append(
-                    f"    \\item \\textbf{{{lettre}}} — {err_txt} "
-                    f"\\emph{{Renvoi : {renvoi_txt}.}}\n"
+                    f"    \\item \\textbf{{{lettre}}} — {err_txt}"
+                    f"{renvoi_suffix}\n"
                 )
         out.append("  \\end{itemize}\n")
     out.append(
