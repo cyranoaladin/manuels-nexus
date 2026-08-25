@@ -3771,14 +3771,10 @@ def test_repository_baseline_is_frozen_schema_valid_and_gate_green(
 
 RESIDUAL_TRUE_NEW_FINGERPRINTS = {
     "18c7b3aa6301ef4c",
-    "265dbdeec1fc2b62",
-    "2e189d4bed9a9520",
     "33e9818ffc70892c",
     "47fd672690479f1f",
     "4b9a00c4ef815951",
     "634c54857f49fcc0",
-    "65b5b9f56ca8900a",
-    "7c204b3da8fcb9a9",
     "80b7b42e7d6a78ba",
     "85454c002c0a1d6a",
     "873a020438d7e00a",
@@ -3786,9 +3782,7 @@ RESIDUAL_TRUE_NEW_FINGERPRINTS = {
     "bd63d2a316c26b0c",
     "d6985b17d7cab316",
     "dc8e5dcc030bb539",
-    "e79a0d7257787b02",
     "e8ac154947fefcdb",
-    "fac802b8993558c3",
 }
 
 
@@ -12657,7 +12651,7 @@ def test_optional_extension_review_f_fourth_extension_is_not_authorized(
 def test_repository_fail_on_new_preserves_prior_qualifications_and_blocks_residual(
     inventory_module,
 ) -> None:
-    """La dette déjà qualifiée reste visible sans absorber les 19 résiduels."""
+    """La dette déjà qualifiée reste visible sans absorber les 13 résiduels."""
     gate = inventory_module._fail_on_new_gate(ROOT)
 
     assert gate["success"] is False
