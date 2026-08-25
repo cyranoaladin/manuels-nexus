@@ -339,3 +339,60 @@ Digests observés avant matérialisation :
 
 - source : `sha256:8fda81f750904276cff25878f84fb196ac3f1b26c30c62ec054f2f09ab691b81` ;
 - modèle : `sha256:f273dd51de99b09c8ef3846c2974556ed9ce11a8cc5e8cc8cfb0820d42e51548`.
+
+---
+
+<a id="decision-baseline-residual-13-temporary-2026-08-25"></a>
+
+## Qualification temporaire exacte des treize dettes résiduelles
+
+| Champ | Valeur |
+|---|---|
+| Identifiant | `baseline-residual-13-temporary-2026-08-25` |
+| Date | 25 août 2026 |
+| Branche | `codex/t2-current-audit-continue` |
+| `RESIDUAL_AUTHORIZATION_SOURCE_SHA` | `0543df60f4931f0e9e24ce23a9635f203f3a3a53` |
+| `RESIDUAL_TRUE_NEW_COUNT` | `13` |
+| `RESIDUAL_TRUE_NEW_DIGEST` | `sha256:1abe51ad406752b1e09996020c1afb2db3982ac2741cf98ed7b2118f302ace98` |
+| Scope | Qualification temporaire de non-régression du set nominatif ci-dessous uniquement |
+| `baseline_purpose` | `debt_regression_control` |
+| `release_acceptance` | `false` |
+| `disposition` | `open_debt` |
+| `qualified` | `true` |
+| `blocking` / `release_blocking` | `true` / `true` |
+| Approbateur | Alaeddine Ben Rhouma |
+| Rôle | Direction scientifique et éditoriale Nexus Réussite |
+
+L'approbateur autorise exclusivement la qualification temporaire des treize
+fingerprints suivants. Tous conservent `current_review_state=PENDING`, une
+disposition canonique `open_debt`, un caractère bloquant pour la release et
+`release_acceptance=false` :
+
+- `18c7b3aa6301ef4c` — `1SPE-EXPO-COURS-C5` — `SCIENTIFIC_REVIEW` ;
+- `33e9818ffc70892c` — `1SPE-EXPO-COURS-C5-ALGORITHMES` — `PROGRAM_REVIEW` ;
+- `47fd672690479f1f` — `1SPE-VARALEA-ME-006` — `SCIENTIFIC_REVIEW` ;
+- `4b9a00c4ef815951` — `1SPE-SUITES-CR-017` — `SCIENTIFIC_REVIEW` ;
+- `634c54857f49fcc0` — `TNSI-PROJET-ANNUEL` — `PEDAGOGICAL_REVIEW` ;
+- `80b7b42e7d6a78ba` — `1SPE-VARALEA-CR-012` — `SCIENTIFIC_REVIEW` ;
+- `85454c002c0a1d6a` — `1SPE-SUITES-EX-051` — `SCIENTIFIC_REVIEW` ;
+- `873a020438d7e00a` — `1SPE-VARALEA-ME-007` — `PROGRAM_REVIEW` ;
+- `8ca4f3f2a9212e39` — `1SPE-SUITES-RE-C8` — `SCIENTIFIC_REVIEW` ;
+- `bd63d2a316c26b0c` — `TNSI-PROJET-CONTRACT` — `PROGRAM_REVIEW` ;
+- `d6985b17d7cab316` — `1SPE-SUITES-ME-008` — `SCIENTIFIC_REVIEW` ;
+- `dc8e5dcc030bb539` — `1SPE-VARALEA-CR-013` — `PROGRAM_REVIEW` ;
+- `e8ac154947fefcdb` — `1SPE-SUITES-CO-051` — `SCIENTIFIC_REVIEW`.
+
+Cette décision ne ré-approuve ni les neuf migrations d'identité déjà
+gouvernées, ni les 89 dettes de revue antérieures, ni les 4411 résolutions hors
+transition. Le contrat machine les sépare explicitement du set des treize et
+vérifie indépendamment : les neuf paires par
+`sha256:78bea6cea278b3b3850a2f42364fee0b6c51033e90e83f85591dccca51759273`,
+les 89 dettes par
+`sha256:8daf2b85cecb556daa788056c66060ee6e0c20d00a09c976b9bac9f1bd9d8303`,
+les 4411 résolutions hors transition par
+`sha256:0f5290c778717ec21bf8b64861e95b3412044b92b18da73c048d66fc4aadd188`
+et l'archive brute de 4420 fingerprints par
+`sha256:6afe2c9222e176686de4cf57b8c4aa53ecd7b9202326b09ec6dec3c7bd1140e0`.
+Elle ne valide aucun contenu, programme, raisonnement scientifique, dispositif
+pédagogique, choix éditorial, mise en page ou publication. Elle n'autorise ni
+wildcard ni quatorzième fingerprint et ne modifie aucun oracle D7.

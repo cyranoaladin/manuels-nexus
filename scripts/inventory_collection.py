@@ -4096,6 +4096,33 @@ def _approved_baseline_extension_diagnosis(
     return approved, sorted(set(offending))
 
 
+def _approved_extension_source_digest_violation(
+    root: Path,
+    inventory: Mapping[str, Any],
+) -> str | None:
+    """Bind an approved extension to the exact pre-materialization sources."""
+
+    try:
+        policy = _baseline_qualification.load_policy(
+            root / BASELINE_QUALIFICATION_POLICY_FILE
+        )
+    except (OSError, _baseline_qualification.QualificationError) as exc:
+        return f"politique de décision indisponible:{exc}"
+    approved_set = policy.get("approved_set")
+    if not isinstance(approved_set, Mapping):
+        return "jeu approuvé absent de la politique de décision"
+    expected = approved_set.get(
+        "observed_source_digest_before_materialization"
+    )
+    observed = inventory.get("source_digest")
+    if observed != expected:
+        return (
+            "source_digest différent du SHA de décision:"
+            f"attendu={expected}:observé={observed}"
+        )
+    return None
+
+
 def _evaluate_baseline(
     inventory: Mapping[str, Any], baseline_path: Path
 ) -> list[str]:
@@ -11581,6 +11608,7 @@ def _update_baseline_gate(
     )
     validated_head = _repo_head_sha(root, required=True)
     override_checks: dict[str, dict[str, Any]] = {}
+    approved_identity_migrations: Mapping[str, Mapping[str, Any]] = {}
     if (
         allow_qualification_digest_bootstrap
         and validated_baseline.get("provisional") is not True
@@ -11650,6 +11678,9 @@ def _update_baseline_gate(
         try:
             probe_inventory = build_inventory(root)
             probe_current_active = _current_active_debt(probe_inventory)
+            approved_identity_migrations = (
+                _load_anomaly_identity_migrations(root)
+            )
         except (
             InventoryError,
             OSError,
@@ -11665,12 +11696,30 @@ def _update_baseline_gate(
                     f"{_stable_gate_reason(exc, root)}"
                 ],
             )
+        source_digest_violation = (
+            _approved_extension_source_digest_violation(
+                root,
+                probe_inventory,
+            )
+        )
+        if source_digest_violation is not None:
+            return _gate_result(
+                "update-baseline",
+                success=False,
+                failure_code=GATE_BASELINE_UPDATE_CODE,
+                dimensions={"structure": "failed"},
+                reasons=[
+                    "approved_baseline_extension:"
+                    + source_digest_violation
+                ],
+            )
         probe_old_active = validated_baseline.get("active", [])
         probe_old_resolved = validated_baseline.get("resolved", [])
         probe_comparison = _compare_anomaly_debt(
             probe_current_active,
             probe_old_active,
             probe_old_resolved,
+            identity_migrations=approved_identity_migrations,
         )
         if probe_comparison["failures"]:
             approved, offending = _approved_baseline_extension_diagnosis(
@@ -11756,6 +11805,15 @@ def _update_baseline_gate(
                 "HEAD modifié pendant la construction de la provenance"
             )
         current_active = _current_active_debt(inventory)
+        if allow_approved_baseline_extension:
+            source_digest_violation = (
+                _approved_extension_source_digest_violation(
+                    root,
+                    inventory,
+                )
+            )
+            if source_digest_violation is not None:
+                raise InventoryError(source_digest_violation)
         old_payload = _load_validated_baseline(root)
         if _baseline_payload_digest(old_payload) != validated_baseline_digest:
             raise InventoryError(
@@ -11781,6 +11839,11 @@ def _update_baseline_gate(
             current_active,
             old_active,
             old_resolved,
+            identity_migrations=(
+                approved_identity_migrations
+                if allow_approved_baseline_extension
+                else None
+            ),
         )
         if allow_qualification_digest_bootstrap and comparison["failures"]:
             pure, offending = _qualification_digest_bootstrap_diagnosis(

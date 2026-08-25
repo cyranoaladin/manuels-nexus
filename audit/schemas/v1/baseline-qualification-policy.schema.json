@@ -129,42 +129,62 @@
         "category_counts",
         "fingerprint_count",
         "fingerprint_digest",
+        "fingerprints",
         "observed_model_digest_before_materialization",
         "observed_source_digest_before_materialization",
         "owner_counts"
       ],
       "properties": {
         "baseline_sha": {
-          "const": "afae475ee06e8510804c0065ccfd35dfa0199875"
+          "const": "0543df60f4931f0e9e24ce23a9635f203f3a3a53"
         },
         "category_counts": {
           "type": "object",
           "additionalProperties": false,
           "required": ["blocking_statuses"],
           "properties": {
-            "blocking_statuses": { "const": 189 }
+            "blocking_statuses": { "const": 13 }
           }
         },
-        "fingerprint_count": { "const": 189 },
+        "fingerprint_count": { "const": 13 },
         "fingerprint_digest": {
-          "const": "sha256:6a994806a4a3b8c710fb0eb2e089e90e8666543b3380e4ccf0cf5268500f86ca"
+          "const": "sha256:1abe51ad406752b1e09996020c1afb2db3982ac2741cf98ed7b2118f302ace98"
+        },
+        "fingerprints": {
+          "const": [
+            "18c7b3aa6301ef4c",
+            "33e9818ffc70892c",
+            "47fd672690479f1f",
+            "4b9a00c4ef815951",
+            "634c54857f49fcc0",
+            "80b7b42e7d6a78ba",
+            "85454c002c0a1d6a",
+            "873a020438d7e00a",
+            "8ca4f3f2a9212e39",
+            "bd63d2a316c26b0c",
+            "d6985b17d7cab316",
+            "dc8e5dcc030bb539",
+            "e8ac154947fefcdb"
+          ]
         },
         "observed_model_digest_before_materialization": {
-          "const": "sha256:f273dd51de99b09c8ef3846c2974556ed9ce11a8cc5e8cc8cfb0820d42e51548"
+          "const": "sha256:9560f7e883448fef80a6bc4643afbc011ef0bf8a94048e5098fd795a8e421aa2"
         },
         "observed_source_digest_before_materialization": {
-          "const": "sha256:8fda81f750904276cff25878f84fb196ac3f1b26c30c62ec054f2f09ab691b81"
+          "const": "sha256:d9186c56f6d05bb5d8d47a644a96ef58819d80f57d0d011e45b4c27b4e370d9c"
         },
         "owner_counts": {
           "type": "object",
           "additionalProperties": false,
           "required": [
             "direction_editoriale_pedagogique",
-            "direction_scientifique_programme"
+            "direction_scientifique_programme",
+            "ingenierie_build_qualite"
           ],
           "properties": {
-            "direction_editoriale_pedagogique": { "const": 10 },
-            "direction_scientifique_programme": { "const": 179 }
+            "direction_editoriale_pedagogique": { "const": 2 },
+            "direction_scientifique_programme": { "const": 10 },
+            "ingenierie_build_qualite": { "const": 1 }
           }
         }
       }
@@ -174,54 +194,138 @@
       "additionalProperties": false,
       "required": [
         "final_active_fingerprint_count",
+        "expected_review_debt_count",
+        "expected_review_debt_digest",
         "initial_active_fingerprint_count",
         "initial_baseline_digest",
         "initial_resolved_fingerprint_count",
+        "historical_qualification",
         "modified_pairs",
         "modified_pairs_digest",
         "resolved_category_counts",
         "resolved_fingerprint_count",
         "resolved_fingerprint_digest",
+        "resolved_outside_transition_category_counts",
+        "resolved_outside_transition_count",
+        "resolved_outside_transition_digest",
         "retained_fingerprint_count"
       ],
       "properties": {
-        "final_active_fingerprint_count": { "const": 2866 },
-        "initial_active_fingerprint_count": { "const": 2986 },
-        "initial_baseline_digest": {
-          "const": "sha256:ebe9580cae8f994a19bb82960762a845c19e2c9a6e006aae244dcebc26ca3bbb"
+        "expected_review_debt_count": { "const": 89 },
+        "expected_review_debt_digest": {
+          "const": "sha256:8daf2b85cecb556daa788056c66060ee6e0c20d00a09c976b9bac9f1bd9d8303"
         },
-        "initial_resolved_fingerprint_count": { "const": 642 },
+        "historical_qualification": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "approved_by",
+            "baseline_sha",
+            "decision_ref",
+            "qualification_policy_digest"
+          ],
+          "properties": {
+            "approved_by": { "const": "Alaeddine Ben Rhouma" },
+            "baseline_sha": {
+              "const": "afae475ee06e8510804c0065ccfd35dfa0199875"
+            },
+            "decision_ref": {
+              "const": "audit/BASELINE_QUALIFICATION_DECISION.md#decision-baseline-status-governance-1nsi-2026-08-10"
+            },
+            "qualification_policy_digest": {
+              "const": "sha256:34341425e865bb72129064438631fe3ae9af3a78dd0b647b5b7276bdabee77a9"
+            }
+          }
+        },
+        "final_active_fingerprint_count": { "const": 2232 },
+        "initial_active_fingerprint_count": { "const": 6541 },
+        "initial_baseline_digest": {
+          "const": "sha256:c34d3f29085e6421e663c51980d1f47b7b8ccc55f0f178c54cc36c5d2c15927c"
+        },
+        "initial_resolved_fingerprint_count": { "const": 951 },
         "modified_pairs": {
           "type": "array",
-          "minItems": 189,
-          "maxItems": 189,
+          "minItems": 9,
+          "maxItems": 9,
           "items": { "$ref": "#/$defs/modified_pair" },
           "uniqueItems": true
         },
         "modified_pairs_digest": {
-          "const": "sha256:b744f797cb072e7c1200b5e8c87a2ef7b16076578e53e1e70e15b764988ea3e0"
+          "const": "sha256:78bea6cea278b3b3850a2f42364fee0b6c51033e90e83f85591dccca51759273"
         },
         "resolved_category_counts": {
           "type": "object",
           "additionalProperties": false,
           "required": [
             "blocking_statuses",
-            "chapters_not_in_manual",
-            "missing_assemblers",
-            "unassembled_objects"
+            "broken_latex_references",
+            "broken_meta_references",
+            "context_mismatches",
+            "duplicate_assembly_objects",
+            "duplicate_ids",
+            "latex_cycles",
+            "missing_corrections",
+            "orphan_files",
+            "unassembled_objects",
+            "unattributed_pdfs",
+            "unclassified_types"
           ],
           "properties": {
-            "blocking_statuses": { "const": 189 },
-            "chapters_not_in_manual": { "const": 10 },
-            "missing_assemblers": { "const": 1 },
-            "unassembled_objects": { "const": 109 }
+            "blocking_statuses": { "const": 26 },
+            "broken_latex_references": { "const": 5 },
+            "broken_meta_references": { "const": 2845 },
+            "context_mismatches": { "const": 3 },
+            "duplicate_assembly_objects": { "const": 3 },
+            "duplicate_ids": { "const": 125 },
+            "latex_cycles": { "const": 10 },
+            "missing_corrections": { "const": 629 },
+            "orphan_files": { "const": 12 },
+            "unassembled_objects": { "const": 52 },
+            "unattributed_pdfs": { "const": 22 },
+            "unclassified_types": { "const": 688 }
           }
         },
-        "resolved_fingerprint_count": { "const": 309 },
+        "resolved_fingerprint_count": { "const": 4420 },
         "resolved_fingerprint_digest": {
-          "const": "sha256:b652287acfa1d91c62446b1dc3f251b46980ca6363968a14733b3e2e91bf3631"
+          "const": "sha256:6afe2c9222e176686de4cf57b8c4aa53ecd7b9202326b09ec6dec3c7bd1140e0"
         },
-        "retained_fingerprint_count": { "const": 2677 }
+        "resolved_outside_transition_category_counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "blocking_statuses",
+            "broken_latex_references",
+            "broken_meta_references",
+            "context_mismatches",
+            "duplicate_assembly_objects",
+            "duplicate_ids",
+            "latex_cycles",
+            "missing_corrections",
+            "orphan_files",
+            "unassembled_objects",
+            "unattributed_pdfs",
+            "unclassified_types"
+          ],
+          "properties": {
+            "blocking_statuses": { "const": 17 },
+            "broken_latex_references": { "const": 5 },
+            "broken_meta_references": { "const": 2845 },
+            "context_mismatches": { "const": 3 },
+            "duplicate_assembly_objects": { "const": 3 },
+            "duplicate_ids": { "const": 125 },
+            "latex_cycles": { "const": 10 },
+            "missing_corrections": { "const": 629 },
+            "orphan_files": { "const": 12 },
+            "unassembled_objects": { "const": 52 },
+            "unattributed_pdfs": { "const": 22 },
+            "unclassified_types": { "const": 688 }
+          }
+        },
+        "resolved_outside_transition_count": { "const": 4411 },
+        "resolved_outside_transition_digest": {
+          "const": "sha256:0f5290c778717ec21bf8b64861e95b3412044b92b18da73c048d66fc4aadd188"
+        },
+        "retained_fingerprint_count": { "const": 2121 }
       }
     },
     "decision": {
@@ -242,10 +346,10 @@
           "const": "Direction scientifique et éditoriale Nexus Réussite"
         },
         "baseline_purpose": { "const": "debt_regression_control" },
-        "id": { "const": "baseline-status-governance-1nsi-2026-08-10" },
+        "id": { "const": "baseline-residual-13-temporary-2026-08-25" },
         "provisional_after_freeze": { "const": false },
         "ref": {
-          "const": "audit/BASELINE_QUALIFICATION_DECISION.md#decision-baseline-status-governance-1nsi-2026-08-10"
+          "const": "audit/BASELINE_QUALIFICATION_DECISION.md#decision-baseline-residual-13-temporary-2026-08-25"
         },
         "release_acceptance": { "const": false }
       }

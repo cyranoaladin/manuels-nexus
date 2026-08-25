@@ -41,14 +41,14 @@
 - [ ] Enregistrer le SHA source, la date, le scope, les treize empreintes et le digest.
 - [ ] Calculer les neuf paires, les résolutions, comptes et digests de transition.
 - [ ] Recalculer le `control_digest` canonique.
-- [ ] Vérifier la politique et le plan de matérialisation en mode `--check`.
+- [ ] Vérifier la politique et constater en mode `--check` le code 3 et les
+  seuls diffs attendus avant matérialisation, puis le code 0 après.
 - [ ] Commit `[AUDIT] Autoriser exactement treize dettes résiduelles`.
 
 ### Task 3: Générer qualifications et baseline
 
 **Files:**
 - Modify generated: `audit/ANOMALY_DISPOSITIONS.yaml`
-- Modify generated: `audit/BASELINE_QUALIFICATION_REGISTRY.yaml`
 - Modify generated: `audit/UNQUALIFIED_ANOMALIES.{json,md}`
 - Modify generated: `audit/INVENTAIRE_COLLECTION.json`
 - Modify generated: `audit/ANOMALIES_BASELINE.json`
@@ -59,7 +59,10 @@
 - [ ] Vérifier les treize dispositions `open_debt` et `release_blocking=true`.
 - [ ] Commit atomique de qualification générée.
 - [ ] Rafraîchir l'inventaire canonique et le committer séparément si requis par le producteur.
-- [ ] Exécuter `--update-baseline --allow-approved-baseline-extension` depuis un worktree propre.
+- [ ] Revalider le SHA, le `source_digest`, le set exact et son digest après
+  matérialisation, immédiatement avant l'extension.
+- [ ] Exécuter `--update-baseline --allow-approved-baseline-extension` depuis
+  un worktree propre, avec `--reason` et `--approved-by` explicites.
 - [ ] Commit atomique de baseline générée, sans contenu métier.
 
 ## Chunk 3: Preuves et technical trust
@@ -81,7 +84,20 @@
 
 ### Task 5: Sceller les gates
 
-- [ ] Exécuter les mutations A à H.
+- [ ] A : après extension, set exact des 13, `--fail-on-new` code 0 ; avant
+  extension, la matérialisation seule laisse logiquement le code 5.
+- [ ] B : ajout d'un 14e fingerprint, `--fail-on-new` code 5 et extension code 8.
+- [ ] C : retrait d'une qualification, `--validate-model` code 6 et résultat
+  déterministe.
+- [ ] D : mutation produisant un fingerprint différent, `--fail-on-new` code
+  5 ; mutation source sans nouveau fingerprint, extension code 8 par le verrou
+  `source_digest`.
+- [ ] E : `release_acceptance=true`, `--validate-model` code 6.
+- [ ] F : statut approved sans reçu, matérialisation/extension refusée par la
+  dérive du set ou le verrou `source_digest` (codes 3 ou 8 selon la phase).
+- [ ] G : anomalie structurelle injectée dans la classe, `--fail-on-new` code 5
+  et extension code 8.
+- [ ] H : wildcard, validation de schéma ou `--validate-model` code 6.
 - [ ] Exécuter `--validate-model` et exiger 0.
 - [ ] Exécuter `--fail-on-new` et exiger 0.
 - [ ] Exécuter `--release-strict` et exiger un blocage explicite.

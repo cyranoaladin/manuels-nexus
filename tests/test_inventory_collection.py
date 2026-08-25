@@ -2106,7 +2106,7 @@ def test_materialize_baseline_qualifications_check_is_read_only(
 
     payload = json.loads(result.stdout)
     assert payload["gate"] == "materialize-baseline-qualifications"
-    assert payload["approved_fingerprint_count"] == 189
+    assert payload["approved_fingerprint_count"] == 13
     assert payload["unqualified"] == 0
     assert result.returncode in {0, 3}
     assert (result.returncode == 0) is (payload["diffs"] == [])
@@ -2274,10 +2274,23 @@ def test_materialization_preserves_explicit_optional_extension_decisions(
         "baf25a2d0a53d6dc",
         "dc0025fc58dc2e34",
     }
-    assert (
-        policy["approved_set"]["fingerprint_count"]
-        - len(optional_extension_fingerprints)
-        == 186
+    assert optional_extension_fingerprints.isdisjoint(
+        set(policy["approved_set"]["fingerprints"])
+    )
+    assert all(
+        dispositions[fingerprint]["decision_ref"]
+        == (
+            "audit/HUMAN_DECISION_1SPE_TRIGO_OPTIONAL_EXTENSIONS_2026-08-23.md"
+            "#decision-1spe-trigo-optional-extensions-2026-08-23"
+        )
+        and dispositions[fingerprint]["qualification_policy_digest"]
+        == (
+            "sha256:"
+            "13107fc484ca24807bb127286b1af36aff4569d13bbbf7b64e541bad357ba0b5"
+        )
+        and dispositions[fingerprint]["qualification_policy_digest"]
+        != policy["control_digest"]
+        for fingerprint in optional_extension_fingerprints
     )
     assert inventory_module._render_anomaly_dispositions(payload) == source
 
@@ -4816,7 +4829,7 @@ def test_approved_baseline_extension_diagnosis_rejects_addition_outside_lot(
     case = _approved_transition_case(inventory_module)
     case["current_active"].append(
         _active_debt(
-            "f" * 16,
+            "7" * 16,
             locator_key="missing_corrections|1SPE|C1|extra.tex|corrige_tex|EXTRA-1",
         )
     )
@@ -5828,6 +5841,11 @@ def _prepare_bootstrap_repository(
             for entry in current_active
         },
     )
+    monkeypatch.setattr(
+        inventory_module,
+        "_approved_extension_source_digest_violation",
+        lambda _root, _inventory: None,
+    )
     return head_sha
 
 
@@ -5906,6 +5924,159 @@ def test_update_baseline_allows_verified_approved_extension(
         (tmp_path / "audit/ANOMALIES_BASELINE.json").read_text(encoding="utf-8")
     )
     assert payload["active"] == current
+
+
+def test_update_baseline_approved_extension_compares_with_identity_migrations(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    old_entry = _active_debt("a" * 16)
+    migrated_entry = _active_debt(
+        "c" * 16,
+        locator_key=str(old_entry["locator_key"]),
+    )
+    added = _active_debt(
+        "b" * 16,
+        locator_key="blocking_statuses|1SPE|1SPE-SUITES|cours.tex|status|OBJ-1",
+    )
+    current = [migrated_entry, added]
+    _prepare_bootstrap_repository(
+        tmp_path,
+        inventory_module,
+        monkeypatch,
+        old_active=[old_entry],
+        current_active=current,
+    )
+    prepared_inventory = inventory_module.build_inventory(tmp_path)
+    monkeypatch.setattr(
+        inventory_module,
+        "_build_inventory",
+        lambda *_args, **_kwargs: prepared_inventory,
+    )
+    identity_migrations = {
+        str(migrated_entry["fingerprint"]): {
+            "previous_fingerprint": str(old_entry["fingerprint"]),
+        }
+    }
+    monkeypatch.setattr(
+        inventory_module,
+        "_load_anomaly_identity_migrations",
+        lambda _root: identity_migrations,
+    )
+    original_compare = inventory_module._compare_anomaly_debt
+    observed_migrations: list[object] = []
+
+    def compare_with_observation(*args, **kwargs):
+        observed_migrations.append(kwargs.get("identity_migrations"))
+        return original_compare(*args, **kwargs)
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_compare_anomaly_debt",
+        compare_with_observation,
+    )
+
+    def approve_only_recognized_migration(
+        _root, _current, _baseline, comparison, **_kwargs
+    ):
+        assert comparison["modified"] == [
+            {
+                "current": str(migrated_entry["fingerprint"]),
+                "previous": str(old_entry["fingerprint"]),
+            }
+        ]
+        return True, []
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_approved_baseline_extension_diagnosis",
+        approve_only_recognized_migration,
+    )
+
+    result = inventory_module._update_baseline_gate(
+        tmp_path,
+        reason="Extension approuvée avec migration d'identité",
+        approved_by="Alaeddine Ben Rhouma",
+        allow_approved_baseline_extension=True,
+    )
+
+    assert result["success"] is True
+    assert observed_migrations == [identity_migrations, identity_migrations]
+
+
+def test_approved_extension_source_digest_verifier_rejects_post_decision_drift(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    expected = "sha256:" + "1" * 64
+    monkeypatch.setattr(
+        inventory_module._baseline_qualification,
+        "load_policy",
+        lambda _path: {
+            "approved_set": {
+                "observed_source_digest_before_materialization": expected,
+            }
+        },
+    )
+
+    assert (
+        inventory_module._approved_extension_source_digest_violation(
+            tmp_path,
+            {"source_digest": expected},
+        )
+        is None
+    )
+    violation = inventory_module._approved_extension_source_digest_violation(
+        tmp_path,
+        {"source_digest": "sha256:" + "2" * 64},
+    )
+
+    assert violation is not None
+    assert "source_digest" in violation
+    assert "décision" in violation
+
+
+def test_update_baseline_approved_extension_rechecks_source_digest_under_lock(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    old_entry = _active_debt("a" * 16)
+    added = _active_debt(
+        "b" * 16,
+        locator_key="blocking_statuses|1SPE|1SPE-SUITES|cours.tex|status|OBJ-1",
+    )
+    _prepare_bootstrap_repository(
+        tmp_path,
+        inventory_module,
+        monkeypatch,
+        old_active=[old_entry],
+        current_active=[old_entry, added],
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_approved_baseline_extension_diagnosis",
+        lambda *_args, **_kwargs: (True, []),
+    )
+    checks = iter([None, "source_digest différent du SHA de décision"])
+    monkeypatch.setattr(
+        inventory_module,
+        "_approved_extension_source_digest_violation",
+        lambda _root, _inventory: next(checks),
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="source_digest différent du SHA de décision",
+    ):
+        inventory_module._update_baseline_gate(
+            tmp_path,
+            reason="Extension approuvée avec verrou source",
+            approved_by="Alaeddine Ben Rhouma",
+            allow_approved_baseline_extension=True,
+        )
 
 
 def test_update_baseline_without_bootstrap_flag_still_requires_phase0_tests(
@@ -19047,7 +19218,7 @@ def test_pre_a6_repository_projects_only_the_exact_nine_qualifications(
         hashlib.sha256(
             (ROOT / "audit/BASELINE_QUALIFICATION_POLICY.yaml").read_bytes()
         ).hexdigest()
-        == "07d95c5073da77944ab07a3312483fdfda0f43d6f412ee023f3269c770b282d2"
+        == "a25c2270b4244580d8374a592702e6881a08a2293696aeb7ab36050caaa4d0cf"
     )
 
 
@@ -19056,12 +19227,9 @@ def test_pre_a6_projection_keeps_historical_decision_after_policy_rotation(
 ) -> None:
     case = _pre_a6_projection_case(inventory_module)
     rotated = deepcopy(case["policy"])
-    historical = {
-        "approved_by": rotated["decision"]["approved_by"],
-        "baseline_sha": rotated["approved_set"]["baseline_sha"],
-        "decision_ref": rotated["decision"]["ref"],
-        "qualification_policy_digest": rotated["control_digest"],
-    }
+    historical = deepcopy(
+        rotated["approved_transition"]["historical_qualification"]
+    )
     rotated["control_digest"] = "sha256:" + "9" * 64
     rotated["decision"] = {
         **rotated["decision"],
@@ -19226,17 +19394,17 @@ def pre_a6_projection_case():
         ),
         pytest.param(
             "policy-digest",
-            "politique historique invalide",
+            "policy digest divergent",
             id="policy-digest-drift",
         ),
         pytest.param(
             "decision-ref",
-            "politique historique invalide",
+            "décision historique divergente.*decision_ref",
             id="decision-ref-drift",
         ),
         pytest.param(
             "qualification-digest",
-            "politique historique invalide",
+            "qualification baseline divergente.*qualification_digest",
             id="qualification-digest-drift",
         ),
         pytest.param(

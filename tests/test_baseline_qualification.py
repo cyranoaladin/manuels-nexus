@@ -84,35 +84,51 @@ def test_qualification_policy_schema_and_approved_contract(
         "approved_by": "Alaeddine Ben Rhouma",
         "approver_role": "Direction scientifique et éditoriale Nexus Réussite",
         "baseline_purpose": "debt_regression_control",
-        "id": "baseline-status-governance-1nsi-2026-08-10",
+        "id": "baseline-residual-13-temporary-2026-08-25",
         "provisional_after_freeze": False,
         "ref": (
             "audit/BASELINE_QUALIFICATION_DECISION.md"
-            "#decision-baseline-status-governance-1nsi-2026-08-10"
+            "#decision-baseline-residual-13-temporary-2026-08-25"
         ),
         "release_acceptance": False,
     }
     assert payload["approved_set"] == {
-        "baseline_sha": "afae475ee06e8510804c0065ccfd35dfa0199875",
+        "baseline_sha": "0543df60f4931f0e9e24ce23a9635f203f3a3a53",
         "category_counts": {
-            "blocking_statuses": 189,
+            "blocking_statuses": 13,
         },
-        "fingerprint_count": 189,
+        "fingerprint_count": 13,
         "fingerprint_digest": (
             "sha256:"
-            "6a994806a4a3b8c710fb0eb2e089e90e8666543b3380e4ccf0cf5268500f86ca"
+            "1abe51ad406752b1e09996020c1afb2db3982ac2741cf98ed7b2118f302ace98"
         ),
+        "fingerprints": [
+            "18c7b3aa6301ef4c",
+            "33e9818ffc70892c",
+            "47fd672690479f1f",
+            "4b9a00c4ef815951",
+            "634c54857f49fcc0",
+            "80b7b42e7d6a78ba",
+            "85454c002c0a1d6a",
+            "873a020438d7e00a",
+            "8ca4f3f2a9212e39",
+            "bd63d2a316c26b0c",
+            "d6985b17d7cab316",
+            "dc8e5dcc030bb539",
+            "e8ac154947fefcdb",
+        ],
         "observed_model_digest_before_materialization": (
             "sha256:"
-            "f273dd51de99b09c8ef3846c2974556ed9ce11a8cc5e8cc8cfb0820d42e51548"
+            "9560f7e883448fef80a6bc4643afbc011ef0bf8a94048e5098fd795a8e421aa2"
         ),
         "observed_source_digest_before_materialization": (
             "sha256:"
-            "8fda81f750904276cff25878f84fb196ac3f1b26c30c62ec054f2f09ab691b81"
+            "d9186c56f6d05bb5d8d47a644a96ef58819d80f57d0d011e45b4c27b4e370d9c"
         ),
         "owner_counts": {
-            "direction_editoriale_pedagogique": 10,
-            "direction_scientifique_programme": 179,
+            "direction_editoriale_pedagogique": 2,
+            "direction_scientifique_programme": 10,
+            "ingenierie_build_qualite": 1,
         },
     }
     transition = payload["approved_transition"]
@@ -122,34 +138,78 @@ def test_qualification_policy_schema_and_approved_contract(
         for key, value in transition.items()
         if key != "modified_pairs"
     } == {
-        "final_active_fingerprint_count": 2866,
-        "initial_active_fingerprint_count": 2986,
+        "expected_review_debt_count": 89,
+        "expected_review_debt_digest": (
+            "sha256:"
+            "8daf2b85cecb556daa788056c66060ee6e0c20d00a09c976b9bac9f1bd9d8303"
+        ),
+        "final_active_fingerprint_count": 2232,
+        "historical_qualification": {
+            "approved_by": "Alaeddine Ben Rhouma",
+            "baseline_sha": "afae475ee06e8510804c0065ccfd35dfa0199875",
+            "decision_ref": (
+                "audit/BASELINE_QUALIFICATION_DECISION.md"
+                "#decision-baseline-status-governance-1nsi-2026-08-10"
+            ),
+            "qualification_policy_digest": (
+                "sha256:"
+                "34341425e865bb72129064438631fe3ae9af3a78dd0b647b5b7276bdabee77a9"
+            ),
+        },
+        "initial_active_fingerprint_count": 6541,
         "initial_baseline_digest": (
             "sha256:"
-            "ebe9580cae8f994a19bb82960762a845c19e2c9a6e006aae244dcebc26ca3bbb"
+            "c34d3f29085e6421e663c51980d1f47b7b8ccc55f0f178c54cc36c5d2c15927c"
         ),
-        "initial_resolved_fingerprint_count": 642,
+        "initial_resolved_fingerprint_count": 951,
         "modified_pairs_digest": (
             "sha256:"
-            "b744f797cb072e7c1200b5e8c87a2ef7b16076578e53e1e70e15b764988ea3e0"
+            "78bea6cea278b3b3850a2f42364fee0b6c51033e90e83f85591dccca51759273"
         ),
         "resolved_category_counts": {
-            "blocking_statuses": 189,
-            "chapters_not_in_manual": 10,
-            "missing_assemblers": 1,
-            "unassembled_objects": 109,
+            "blocking_statuses": 26,
+            "broken_latex_references": 5,
+            "broken_meta_references": 2845,
+            "context_mismatches": 3,
+            "duplicate_assembly_objects": 3,
+            "duplicate_ids": 125,
+            "latex_cycles": 10,
+            "missing_corrections": 629,
+            "orphan_files": 12,
+            "unassembled_objects": 52,
+            "unattributed_pdfs": 22,
+            "unclassified_types": 688,
         },
-        "resolved_fingerprint_count": 309,
+        "resolved_fingerprint_count": 4420,
         "resolved_fingerprint_digest": (
             "sha256:"
-            "b652287acfa1d91c62446b1dc3f251b46980ca6363968a14733b3e2e91bf3631"
+            "6afe2c9222e176686de4cf57b8c4aa53ecd7b9202326b09ec6dec3c7bd1140e0"
         ),
-        "retained_fingerprint_count": 2677,
+        "resolved_outside_transition_category_counts": {
+            "blocking_statuses": 17,
+            "broken_latex_references": 5,
+            "broken_meta_references": 2845,
+            "context_mismatches": 3,
+            "duplicate_assembly_objects": 3,
+            "duplicate_ids": 125,
+            "latex_cycles": 10,
+            "missing_corrections": 629,
+            "orphan_files": 12,
+            "unassembled_objects": 52,
+            "unattributed_pdfs": 22,
+            "unclassified_types": 688,
+        },
+        "resolved_outside_transition_count": 4411,
+        "resolved_outside_transition_digest": (
+            "sha256:"
+            "0f5290c778717ec21bf8b64861e95b3412044b92b18da73c048d66fc4aadd188"
+        ),
+        "retained_fingerprint_count": 2121,
     }
-    assert len(modified_pairs) == 189
+    assert len(modified_pairs) == 9
     assert len(
         {(pair["previous"], pair["current"]) for pair in modified_pairs}
-    ) == 189
+    ) == 9
     assert _digest_payload(modified_pairs) == transition[
         "modified_pairs_digest"
     ]
@@ -190,17 +250,6 @@ def test_qualification_policy_schema_and_approved_contract(
         }
         for pair in modified_pairs
     }
-    current_by_fingerprint = inventory_module._coalesce_active_debt(
-        current_active
-    )
-    baseline_by_fingerprint = inventory_module._coalesce_active_debt(
-        initial_baseline["active"]
-    )
-    for pair in modified_pairs:
-        assert (
-            current_by_fingerprint[pair["current"]]["locator_key"]
-            == baseline_by_fingerprint[pair["previous"]]["locator_key"]
-        )
     comparison = inventory_module._compare_anomaly_debt(
         current_active,
         initial_baseline["active"],
@@ -211,6 +260,48 @@ def test_qualification_policy_schema_and_approved_contract(
         modified_pairs,
         key=lambda pair: pair["current"],
     ) == comparison["modified"]
+    assert comparison["new"] == payload["approved_set"]["fingerprints"]
+    assert len(comparison["expected_review_debt"]) == 89
+    assert _digest_fingerprints(comparison["expected_review_debt"]) == (
+        transition["expected_review_debt_digest"]
+    )
+    assert len(comparison["resolved"]) == 4411
+    assert _digest_fingerprints(comparison["resolved"]) == (
+        transition["resolved_outside_transition_digest"]
+    )
+    baseline_by_fingerprint = inventory_module._coalesce_active_debt(
+        initial_baseline["active"]
+    )
+    current_by_fingerprint = inventory_module._coalesce_active_debt(
+        current_active
+    )
+    assert Counter(
+        baseline_by_fingerprint[fingerprint]["category"]
+        for fingerprint in comparison["resolved"]
+    ) == Counter(transition["resolved_outside_transition_category_counts"])
+    archived = sorted(
+        set(comparison["resolved"])
+        | {pair["previous"] for pair in modified_pairs}
+    )
+    assert len(archived) == 4420
+    assert _digest_fingerprints(archived) == transition[
+        "resolved_fingerprint_digest"
+    ]
+    assert len(initial_baseline["active"]) == transition[
+        "initial_active_fingerprint_count"
+    ]
+    assert len(initial_baseline["resolved"]) == transition[
+        "initial_resolved_fingerprint_count"
+    ]
+    assert inventory_module._baseline_payload_digest(initial_baseline) == (
+        transition["initial_baseline_digest"]
+    )
+    assert len(current_by_fingerprint) == transition[
+        "final_active_fingerprint_count"
+    ]
+    assert len(set(current_by_fingerprint) & set(baseline_by_fingerprint)) == (
+        transition["retained_fingerprint_count"]
+    )
     assert set(payload["owners"]) == {
         "direction_scientifique_programme",
         "direction_editoriale_pedagogique",
@@ -533,8 +624,8 @@ def test_repository_approved_set_has_exact_category_and_owner_counts(
         )
     }
 
-    assert len(current_entries) == 189
-    assert plan["approved_fingerprint_count"] == 189
+    assert len(current_entries) == 13
+    assert plan["approved_fingerprint_count"] == 13
     assert plan["approved_fingerprint_digest"] == policy["approved_set"][
         "fingerprint_digest"
     ]
@@ -566,7 +657,7 @@ def test_materialization_plan_preserves_history_and_emits_all_required_fields(
         observed_model_digest=inventory_module._model_digest(inventory),
     )
 
-    assert plan["approved_fingerprint_count"] == 189
+    assert plan["approved_fingerprint_count"] == 13
     assert plan["approved_fingerprint_digest"] == policy["approved_set"][
         "fingerprint_digest"
     ]
