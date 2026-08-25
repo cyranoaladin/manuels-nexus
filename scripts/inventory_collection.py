@@ -1981,14 +1981,27 @@ def _project_identity_migration_qualifications(
                 "fingerprint historique absent de la baseline active: "
                 f"{previous_fingerprint}"
             )
-    policy_failures = _baseline_qualification.validate_materialized_registry(
-        policy,
-        dispositions,
+    transition = policy.get("approved_transition")
+    historical_qualification = (
+        transition.get("historical_qualification")
+        if isinstance(transition, Mapping)
+        else None
     )
-    if policy_failures:
+    if historical_qualification is None:
+        policy_failures = (
+            _baseline_qualification.validate_materialized_registry(
+                policy,
+                dispositions,
+            )
+        )
+        if policy_failures:
+            raise InventoryError(
+                "politique historique invalide avant migration d'identité: "
+                + "; ".join(policy_failures[:5])
+            )
+    elif not isinstance(historical_qualification, Mapping):
         raise InventoryError(
-            "politique historique invalide avant migration d'identité: "
-            + "; ".join(policy_failures[:5])
+            "contrat de qualification historique invalide pour migration"
         )
     current_anomalies: dict[
         str, list[tuple[str, Mapping[str, Any]]]
@@ -2005,7 +2018,11 @@ def _project_identity_migration_qualifications(
         str(key): _canonicalize(dict(value))
         for key, value in dispositions.items()
     }
-    policy_digest = str(policy.get("control_digest", ""))
+    policy_digest = str(
+        historical_qualification.get("qualification_policy_digest", "")
+        if isinstance(historical_qualification, Mapping)
+        else policy.get("control_digest", "")
+    )
     policy_rules = {
         str(rule.get("id", "")): rule
         for rule in policy.get("rules", [])
@@ -2230,12 +2247,22 @@ def _project_identity_migration_qualifications(
                 f"{previous_fingerprint}"
             )
         expected_decision = {
-            "approved_by": policy.get("decision", {}).get("approved_by"),
-            "baseline_sha": policy.get("approved_set", {}).get(
-                "baseline_sha"
+            "approved_by": (
+                historical_qualification.get("approved_by")
+                if isinstance(historical_qualification, Mapping)
+                else policy.get("decision", {}).get("approved_by")
+            ),
+            "baseline_sha": (
+                historical_qualification.get("baseline_sha")
+                if isinstance(historical_qualification, Mapping)
+                else policy.get("approved_set", {}).get("baseline_sha")
             ),
             "blocking": decision.get("release_blocking"),
-            "decision_ref": policy.get("decision", {}).get("ref"),
+            "decision_ref": (
+                historical_qualification.get("decision_ref")
+                if isinstance(historical_qualification, Mapping)
+                else policy.get("decision", {}).get("ref")
+            ),
             "disposition": decision.get("disposition"),
             "justification": decision.get("reason"),
             "owner": decision.get("owner"),
@@ -3887,15 +3914,25 @@ def _approved_baseline_extension_diagnosis(
         modified_previous = {
             pair["previous"] for pair in modified_pairs if pair["previous"]
         }
-        expected_new = sorted(set(new_fingerprints) - modified_current)
+        expected_new = sorted(
+            str(value) for value in comparison.get("new", [])
+        )
+        expected_review_debt = sorted(
+            str(value)
+            for value in comparison.get("expected_review_debt", [])
+        )
         approved_new_fingerprints = expected_new
         expected_resolved = sorted(
             set(resolved_fingerprints) - modified_previous
         )
-        if sorted(str(value) for value in comparison.get("new", [])) != (
-            expected_new
-        ):
-            offending.append("jeu new différent de la transition approuvée")
+        expected_unmatched_current = sorted(
+            set(modified_current) | set(expected_review_debt) | set(expected_new)
+        )
+        if new_fingerprints != expected_unmatched_current:
+            offending.append(
+                "jeu courant hors baseline différent de la partition "
+                "migrations/review/new approuvée"
+            )
         if sorted(str(value) for value in comparison.get("resolved", [])) != (
             expected_resolved
         ):
@@ -3904,6 +3941,42 @@ def _approved_baseline_extension_diagnosis(
             )
         if comparison.get("regressions"):
             offending.append("anomalie resolved réapparue pendant l'extension")
+
+        if len(expected_review_debt) != transition.get(
+            "expected_review_debt_count"
+        ):
+            offending.append("nombre de dettes de review attendues différent")
+        if _baseline_qualification.fingerprint_set_digest(
+            expected_review_debt
+        ) != transition.get("expected_review_debt_digest"):
+            offending.append("digest des dettes de review attendues différent")
+
+        if len(expected_resolved) != transition.get(
+            "resolved_outside_transition_count"
+        ):
+            offending.append(
+                "nombre de résolutions hors transitions différent"
+            )
+        if _baseline_qualification.fingerprint_set_digest(
+            expected_resolved
+        ) != transition.get("resolved_outside_transition_digest"):
+            offending.append(
+                "digest des résolutions hors transitions différent"
+            )
+        expected_resolved_category_counts = Counter(
+            str(previous[fingerprint].get("category", ""))
+            for fingerprint in expected_resolved
+        )
+        if dict(sorted(expected_resolved_category_counts.items())) != dict(
+            sorted(
+                transition.get(
+                    "resolved_outside_transition_category_counts", {}
+                ).items()
+            )
+        ):
+            offending.append(
+                "catégories des résolutions hors transitions différentes"
+            )
 
         expected_failures = {
             f"anomalie nouvelle fp={fingerprint}"

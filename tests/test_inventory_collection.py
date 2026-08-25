@@ -4403,12 +4403,33 @@ def _approved_transition_case(inventory_module) -> dict[str, object]:
         "e" * 16,
         locator_key=str(previous_modified["locator_key"]),
     )
+    expected_review_debt = _active_debt(
+        "f" * 16,
+        locator_key=json.dumps(
+            {
+                "category": "blocking_statuses",
+                "source": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/ME-001.tex",
+            },
+            sort_keys=True,
+        ),
+    )
+    expected_review_debt.update(
+        {
+            "category": "blocking_statuses",
+            "decision_ref": inventory_module.A4_METHOD_REVIEW_DEBT_DECISION_REF,
+        }
+    )
     baseline_payload = {
         "active": [retained, resolved, previous_modified],
         "resolved": [],
         "schema_version": 1,
     }
-    current_active = [deepcopy(retained), added, current_modified]
+    current_active = [
+        deepcopy(retained),
+        added,
+        current_modified,
+        expected_review_debt,
+    ]
     identity_migrations = {
         "e" * 16: {"previous_fingerprint": "c" * 16}
     }
@@ -4441,7 +4462,13 @@ def _approved_transition_case(inventory_module) -> dict[str, object]:
             "owner_counts": {"direction_scientifique_programme": 1},
         },
         "approved_transition": {
-            "final_active_fingerprint_count": 3,
+            "expected_review_debt_count": 1,
+            "expected_review_debt_digest": (
+                inventory_module._baseline_qualification.fingerprint_set_digest(
+                    ["f" * 16]
+                )
+            ),
+            "final_active_fingerprint_count": 4,
             "initial_active_fingerprint_count": 3,
             "initial_baseline_digest": inventory_module._baseline_payload_digest(
                 baseline_payload
@@ -4454,6 +4481,15 @@ def _approved_transition_case(inventory_module) -> dict[str, object]:
             "resolved_fingerprint_digest": (
                 inventory_module._baseline_qualification.fingerprint_set_digest(
                     ["b" * 16, "c" * 16]
+                )
+            ),
+            "resolved_outside_transition_category_counts": {
+                "missing_corrections": 1
+            },
+            "resolved_outside_transition_count": 1,
+            "resolved_outside_transition_digest": (
+                inventory_module._baseline_qualification.fingerprint_set_digest(
+                    ["b" * 16]
                 )
             ),
             "retained_fingerprint_count": 1,
@@ -19012,6 +19048,55 @@ def test_pre_a6_repository_projects_only_the_exact_nine_qualifications(
             (ROOT / "audit/BASELINE_QUALIFICATION_POLICY.yaml").read_bytes()
         ).hexdigest()
         == "07d95c5073da77944ab07a3312483fdfda0f43d6f412ee023f3269c770b282d2"
+    )
+
+
+def test_pre_a6_projection_keeps_historical_decision_after_policy_rotation(
+    inventory_module,
+) -> None:
+    case = _pre_a6_projection_case(inventory_module)
+    rotated = deepcopy(case["policy"])
+    historical = {
+        "approved_by": rotated["decision"]["approved_by"],
+        "baseline_sha": rotated["approved_set"]["baseline_sha"],
+        "decision_ref": rotated["decision"]["ref"],
+        "qualification_policy_digest": rotated["control_digest"],
+    }
+    rotated["control_digest"] = "sha256:" + "9" * 64
+    rotated["decision"] = {
+        **rotated["decision"],
+        "id": "later-exact-set",
+        "ref": "audit/later.md#decision-later-exact-set",
+    }
+    rotated["approved_set"] = {
+        **rotated["approved_set"],
+        "baseline_sha": "5" * 40,
+        "category_counts": {"blocking_statuses": 13},
+        "fingerprint_count": 13,
+        "fingerprint_digest": "sha256:" + "8" * 64,
+        "fingerprints": [f"{index:016x}" for index in range(13)],
+        "owner_counts": {
+            "direction_editoriale_pedagogique": 2,
+            "direction_scientifique_programme": 10,
+            "ingenierie_build_qualite": 1,
+        },
+    }
+    rotated["approved_transition"]["historical_qualification"] = historical
+
+    projected = inventory_module._project_identity_migration_qualifications(
+        ROOT,
+        case["anomalies"],
+        case["dispositions"],
+        case["migrations"],
+        case["baseline"],
+        rotated,
+    )
+
+    assert set(PRE_A6_IDENTITY_MIGRATIONS) <= set(projected)
+    assert all(
+        projected[current]["qualification_policy_digest"]
+        == historical["qualification_policy_digest"]
+        for current in PRE_A6_IDENTITY_MIGRATIONS
     )
 
 
