@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import copy
-import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -15,7 +14,23 @@ SCRIPT = ROOT / "scripts" / "build_residual_true_new_forensics.py"
 INITIAL_JSON = ROOT / "audit" / "TRUE_NEW_18_FORENSICS.json"
 INITIAL_MD = ROOT / "audit" / "TRUE_NEW_18_FORENSICS.md"
 INVENTORY = ROOT / "audit" / "INVENTAIRE_COLLECTION.json"
-X3_FINGERPRINT = "65b5b9f56ca8900a"
+REMOVED_FINGERPRINTS = {
+    "265dbdeec1fc2b62",
+    "2e189d4bed9a9520",
+    "7c204b3da8fcb9a9",
+    "e79a0d7257787b02",
+    "fac802b8993558c3",
+}
+
+
+def _git(repo: Path, *args: str) -> str:
+    return subprocess.run(
+        ["git", *args],
+        cwd=repo,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
 
 
 def _load_module():
@@ -74,21 +89,30 @@ def test_builds_exact_residual_without_mutating_frozen_inputs(tmp_path: Path) ->
     assert algebra["forensic_source_sha"] == forensic_source_sha
     expected_counts = {
         "TRUE_NEW_INITIAL": 18,
-        "ACTIVE_FINGERPRINTS_CLOSED": 0,
-        "REMOVED": 0,
+        "FIXED": 0,
+        "REMOVED": 5,
         "REVIEW_CLOSED": 0,
-        "CONTENT_FINDINGS_FIXED": 8,
-        "NEW_AFTER_TRIAGE": 1,
-        "RESIDUAL_TRUE_NEW": 19,
+        "CONTENT_FINDINGS_FIXED": 5,
+        "NEW_AFTER_TRIAGE": 0,
+        "RESIDUAL_TRUE_NEW": 13,
     }
     assert residual["counts"] == expected_counts
     assert algebra["counts"] == expected_counts
-    assert len(residual["entries"]) == 19
+    assert len(residual["entries"]) == 13
     assert algebra["equalities"] == {
         "initial_still_active_unqualified": True,
-        "new_after_triage_is_exactly_x3": True,
+        "no_new_after_triage": True,
         "residual_equation": True,
     }
+    assert set(algebra["sets"]["REMOVED"]) == REMOVED_FINGERPRINTS
+    assert algebra["sets"]["NEW_AFTER_TRIAGE"] == []
+    full = algebra["full_current_algebra"]
+    assert full["cardinality_equation"] == "2232 = 2121 + 9 + 89 + 13"
+    assert full["cardinalities"]["CURRENT_ACTIVE"] == 2232
+    assert full["cardinalities"]["TRUE_NEW"] == 13
+    assert full["equalities"]["current_partition"] is True
+    assert full["equalities"]["current_partition_pairwise_disjoint"] is True
+    assert full["unknown_count"] == 0
 
     required = {
         "fingerprint",
@@ -104,6 +128,7 @@ def test_builds_exact_residual_without_mutating_frozen_inputs(tmp_path: Path) ->
         "source_sha",
         "triage_class",
         "reason_created",
+        "class_b_eligibility",
     }
     assert all(required <= set(entry) for entry in residual["entries"])
     assert all(
@@ -112,16 +137,70 @@ def test_builds_exact_residual_without_mutating_frozen_inputs(tmp_path: Path) ->
         and entry["source_sha"].startswith("sha256:")
         for entry in residual["entries"]
     )
-    x3 = next(
-        entry
+    assert all(
+        all(value in {"PASS", "NO"} for value in entry["class_b_eligibility"].values())
         for entry in residual["entries"]
-        if entry["fingerprint"] == X3_FINGERPRINT
     )
-    assert x3["object_id"] == "1SPE-VARALEA-CR-X3"
-    assert x3["reason_created"] == "OTHER_PROVED_EDITORIAL_NEED"
-    assert x3["source_sha"] == "sha256:" + hashlib.sha256(
-        (ROOT / x3["path"]).read_bytes()
-    ).hexdigest()
+
+
+def test_check_reuses_frozen_source_sha_only_for_report_only_commits(
+    tmp_path: Path,
+) -> None:
+    module = _load_module()
+    repo = tmp_path / "repo"
+    audit = repo / "audit"
+    audit.mkdir(parents=True)
+    _git(repo, "init")
+    _git(repo, "config", "user.email", "tests@example.invalid")
+    _git(repo, "config", "user.name", "Tests")
+    (repo / "source.txt").write_text("source\n", encoding="utf-8")
+    _git(repo, "add", "source.txt")
+    _git(repo, "commit", "-m", "source")
+    source_sha = _git(repo, "rev-parse", "HEAD")
+
+    for names in module.OUTPUT_NAMES.values():
+        (audit / names["json"]).write_text(
+            json.dumps({"forensic_source_sha": source_sha}) + "\n",
+            encoding="utf-8",
+        )
+        (audit / names["md"]).write_text("report\n", encoding="utf-8")
+    _git(repo, "add", "audit")
+    _git(repo, "commit", "-m", "reports")
+
+    assert module._forensic_source_sha_for_check(repo, audit) == source_sha
+
+    (repo / "source.txt").write_text("changed\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="sources modifiées depuis le gel"):
+        module._forensic_source_sha_for_check(repo, audit)
+
+    (repo / "source.txt").write_text("source\n", encoding="utf-8")
+    (repo / "untracked-object.yaml").write_text("new: object\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="sources modifiées depuis le gel"):
+        module._forensic_source_sha_for_check(repo, audit)
+
+
+def test_build_revalidates_source_snapshot_after_projection(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module = _load_module()
+    repo = tmp_path / "repo"
+    audit = repo / "audit"
+    audit.mkdir(parents=True)
+    _git(repo, "init")
+    _git(repo, "config", "user.email", "tests@example.invalid")
+    _git(repo, "config", "user.name", "Tests")
+    (repo / "source.txt").write_text("source\n", encoding="utf-8")
+    _git(repo, "add", "source.txt")
+    _git(repo, "commit", "-m", "source")
+    source_sha = _git(repo, "rev-parse", "HEAD")
+
+    def mutate_during_build(*args, **kwargs):
+        (repo / "late-object.yaml").write_text("late: object\n", encoding="utf-8")
+        return {}
+
+    monkeypatch.setattr(module, "build_reports", mutate_during_build)
+    with pytest.raises(ValueError, match="sources modifiées depuis le gel"):
+        module._build_reports_with_stable_source(repo, audit, source_sha)
 
 
 def test_rejects_any_unexpected_active_unqualified_fingerprint(
@@ -149,21 +228,43 @@ def test_rejects_any_unexpected_active_unqualified_fingerprint(
         module.build_reports(ROOT, inventory_path=mutated)
 
 
-@pytest.mark.parametrize("field,value", [("qualified", True), ("disposition", "fixed")])
-def test_rejects_an_initial_fingerprint_that_is_no_longer_open_unqualified(
+def test_projects_a_review_closed_initial_fingerprint(
     tmp_path: Path,
-    field: str,
-    value: object,
 ) -> None:
     module = _load_module()
     inventory = copy.deepcopy(
         json.loads(INVENTORY.read_text(encoding="utf-8"))
     )
     initial = json.loads(INITIAL_JSON.read_text(encoding="utf-8"))
-    fingerprint = initial["entries"][0]["fingerprint"]
-    inventory["anomaly_qualifications"][fingerprint][field] = value
-    mutated = tmp_path / f"inventory-{field}.json"
+    fingerprint = next(
+        entry["fingerprint"]
+        for entry in initial["entries"]
+        if entry["triage_class"] == "LEGITIMATE_REVIEW_DEBT"
+    )
+    inventory["anomaly_qualifications"].pop(fingerprint)
+    mutated = tmp_path / "inventory-review-closed.json"
     mutated.write_text(json.dumps(inventory), encoding="utf-8")
 
-    with pytest.raises(ValueError, match="18 fingerprints initiaux"):
-        module.build_reports(ROOT, inventory_path=mutated)
+    reports = module.build_reports(ROOT, inventory_path=mutated)
+    assert reports["residual_forensics"]["counts"]["REVIEW_CLOSED"] == 1
+    assert reports["residual_forensics"]["counts"]["RESIDUAL_TRUE_NEW"] == 12
+
+
+def test_projects_a_fixed_initial_fingerprint(tmp_path: Path) -> None:
+    module = _load_module()
+    inventory = copy.deepcopy(json.loads(INVENTORY.read_text(encoding="utf-8")))
+    initial = json.loads(INITIAL_JSON.read_text(encoding="utf-8"))
+    fingerprint = next(
+        entry["fingerprint"]
+        for entry in initial["entries"]
+        if entry["triage_class"] == "FIX_NOW"
+    )
+    inventory["anomaly_qualifications"].pop(fingerprint)
+    mutated = tmp_path / "inventory-fixed.json"
+    mutated.write_text(json.dumps(inventory), encoding="utf-8")
+
+    reports = module.build_reports(ROOT, inventory_path=mutated)
+    counts = reports["residual_forensics"]["counts"]
+    assert counts["FIXED"] == 1
+    assert counts["CONTENT_FINDINGS_FIXED"] == 5
+    assert counts["RESIDUAL_TRUE_NEW"] == 12
