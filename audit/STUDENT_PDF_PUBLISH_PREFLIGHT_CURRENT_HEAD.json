@@ -1,7 +1,9 @@
 {
-  "artifact_name": "STUDENT_PDF_PUBLISH_PREFLIGHT_CURRENT_HEAD",
+  "artifact_name": "STUDENT_TEACHER_KEY_SOURCE_GUARD_AND_TRACKED_PDF_DIAGNOSTIC",
   "build_evidence": {
     "1SPE": {
+      "evidence_scope": "TRACKED_PDF_DIAGNOSTIC_ONLY",
+      "release_evidence": false,
       "student_forbidden_markers": [],
       "student_key_count": 0,
       "student_pdf": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
@@ -12,6 +14,8 @@
       "teacher_pdf_sha256": "1115cfcc1abc1be540ea863de5ddae6fdf13b2e613b9e776c0435fea590e378b"
     },
     "TCOMPL": {
+      "evidence_scope": "TRACKED_PDF_DIAGNOSTIC_ONLY",
+      "release_evidence": false,
       "student_forbidden_markers": [],
       "student_key_count": 0,
       "student_pdf": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf",
@@ -22,6 +26,8 @@
       "teacher_pdf_sha256": "c02692437fef07dea757213b151c59f088e0898d64eacc4eaf784565db7e669c"
     },
     "TEXPERTES": {
+      "evidence_scope": "TRACKED_PDF_DIAGNOSTIC_ONLY",
+      "release_evidence": false,
       "student_forbidden_markers": [],
       "student_key_count": 0,
       "student_pdf": "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_eleve.pdf",
@@ -32,6 +38,8 @@
       "teacher_pdf_sha256": "e00845eba7c9c26bd27f8c23de217fefb4cad809a32dff6e19ac9e482574366f"
     },
     "TSPE": {
+      "evidence_scope": "TRACKED_PDF_DIAGNOSTIC_ONLY",
+      "release_evidence": false,
       "student_forbidden_markers": [],
       "student_key_count": 0,
       "student_pdf": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.pdf",
@@ -439,14 +447,25 @@
       "teacher_visibility_current": "VISIBLE"
     }
   ],
-  "qcm_source_digest": "sha256:2bdeec49373c77c3dda74569113763df4813086976efc2d7ad405600101c88c1",
-  "schema_version": 1,
-  "scope": "eight current Math PDF variants",
+  "pdf_evidence_provenance": {
+    "attests_current_head": false,
+    "canonical_observed_build_count": 0,
+    "release_evidence": false,
+    "status": "UNATTESTED_TRACKED_PDF_DIAGNOSTIC"
+  },
+  "qcm_source_digest": "sha256:b9b169697b5e21237e5ec51365a3255c6543ab403fccb9108d2b71361dd83d2d",
+  "schema_version": 2,
+  "scope": "current QCM source guards plus non-release diagnostics from eight tracked Math PDFs",
+  "source_evidence": {
+    "qcm_guard_count": 35,
+    "qcm_guards_attest_current_sources": true
+  },
   "summary": {
-    "eight_math_builds_passed": true,
+    "eight_math_builds_attested_current_head": false,
     "qcm_key_zones": 35,
-    "student_teacher_only_leaks": 0,
-    "teacher_keys_by_manual": {
+    "tracked_pdf_diagnostics_passed": true,
+    "tracked_pdf_student_teacher_only_leaks": 0,
+    "tracked_pdf_teacher_keys_by_manual": {
       "1SPE": {
         "expected": 10,
         "observed": 10
@@ -464,6 +483,6 @@
         "observed": 11
       }
     },
-    "teacher_required_keys_present": true
+    "tracked_pdf_teacher_required_keys_present": true
   }
 }

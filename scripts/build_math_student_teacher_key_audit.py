@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Build the current-head Math student/professor separation evidence."""
+"""Build current QCM guards and a bounded tracked-PDF diagnostic.
+
+The tracked PDFs are inspected only as historical diagnostics.  In the
+absence of matching canonical observed-build receipts they must never be
+presented as evidence for the current source tree or for release.
+"""
 
 from __future__ import annotations
 
@@ -74,6 +79,27 @@ def _baseline_text(relative: Path) -> str:
     return result.stdout
 
 
+def _canonical_observed_math_build_count() -> int:
+    payload = json.loads(
+        (ROOT / "audit/BUILD_MANIFEST.json").read_text(encoding="utf-8")
+    )
+    expected = {
+        ("1SPE", "eleve"),
+        ("1SPE", "professeur"),
+        ("TSPE_2026_2027", "eleve"),
+        ("TSPE_2026_2027", "professeur"),
+        ("TCOMPL", "eleve"),
+        ("TCOMPL", "professeur"),
+        ("TEXPERTES", "eleve"),
+        ("TEXPERTES", "professeur"),
+    }
+    return sum(
+        (entry.get("manual"), entry.get("variant")) in expected
+        for entry in payload.get("builds", [])
+        if isinstance(entry, dict)
+    )
+
+
 def build_payload() -> dict[str, Any]:
     build_evidence: dict[str, Any] = {}
     for manual, (directory, stem, expected) in BUILDS.items():
@@ -84,6 +110,8 @@ def build_payload() -> dict[str, Any]:
         violations = assemble_manuel.student_text_violations(student_text)
         observed = assemble_manuel.teacher_key_count(teacher_text)
         build_evidence[manual] = {
+            "evidence_scope": "TRACKED_PDF_DIAGNOSTIC_ONLY",
+            "release_evidence": False,
             "student_pdf": str(student_pdf.relative_to(ROOT)),
             "student_pdf_sha256": _sha256(student_pdf),
             "student_forbidden_markers": violations,
@@ -156,18 +184,37 @@ def build_payload() -> dict[str, Any]:
         count["expected"] == count["observed"]
         for count in teacher_counts.values()
     )
+    observed_build_count = _canonical_observed_math_build_count()
     return {
-        "schema_version": 1,
-        "artifact_name": "STUDENT_PDF_PUBLISH_PREFLIGHT_CURRENT_HEAD",
+        "schema_version": 2,
+        "artifact_name": (
+            "STUDENT_TEACHER_KEY_SOURCE_GUARD_AND_TRACKED_PDF_DIAGNOSTIC"
+        ),
         "integration_base_sha": INTEGRATION_BASE_SHA,
-        "scope": "eight current Math PDF variants",
+        "scope": (
+            "current QCM source guards plus non-release diagnostics from "
+            "eight tracked Math PDFs"
+        ),
         "qcm_source_digest": f"sha256:{digest.hexdigest()}",
+        "source_evidence": {
+            "qcm_guard_count": len(rows),
+            "qcm_guards_attest_current_sources": True,
+        },
+        "pdf_evidence_provenance": {
+            "attests_current_head": False,
+            "canonical_observed_build_count": observed_build_count,
+            "release_evidence": False,
+            "status": "UNATTESTED_TRACKED_PDF_DIAGNOSTIC",
+        },
         "summary": {
             "qcm_key_zones": len(rows),
-            "student_teacher_only_leaks": student_leaks,
-            "teacher_required_keys_present": teacher_present,
-            "teacher_keys_by_manual": teacher_counts,
-            "eight_math_builds_passed": student_leaks == 0 and teacher_present,
+            "tracked_pdf_student_teacher_only_leaks": student_leaks,
+            "tracked_pdf_teacher_required_keys_present": teacher_present,
+            "tracked_pdf_teacher_keys_by_manual": teacher_counts,
+            "tracked_pdf_diagnostics_passed": (
+                student_leaks == 0 and teacher_present
+            ),
+            "eight_math_builds_attested_current_head": False,
         },
         "build_evidence": build_evidence,
         "keys": rows,
@@ -190,19 +237,25 @@ def render_json(payload: dict[str, Any]) -> str:
 def render_markdown(payload: dict[str, Any]) -> str:
     summary = payload["summary"]
     lines = [
-        "# Student PDF publish preflight — current head",
+        "# QCM source guards and tracked-PDF diagnostic",
         "",
         f"Integration base: `{payload['integration_base_sha']}`.",
         "",
         f"- QCM teacher-key zones: {summary['qcm_key_zones']}",
-        f"- STUDENT_TEACHER_ONLY_LEAKS: {summary['student_teacher_only_leaks']}",
-        f"- TEACHER_REQUIRED_KEYS_PRESENT: {'YES' if summary['teacher_required_keys_present'] else 'NO'}",
-        f"- Eight Math builds: {'PASS' if summary['eight_math_builds_passed'] else 'FAIL'}",
+        "- Tracked-PDF STUDENT_TEACHER_ONLY_LEAKS: "
+        f"{summary['tracked_pdf_student_teacher_only_leaks']}",
+        "- Tracked-PDF TEACHER_REQUIRED_KEYS_PRESENT: "
+        f"{'YES' if summary['tracked_pdf_teacher_required_keys_present'] else 'NO'}",
+        "- Current QCM source guards: PASS",
+        "- Eight tracked-PDF diagnostics: "
+        f"{'PASS' if summary['tracked_pdf_diagnostics_passed'] else 'FAIL'}",
+        "- Current-head PDF build attestation: NO",
+        "- Release evidence: NO",
         "",
         "## Counts by manual",
         "",
     ]
-    for manual, counts in summary["teacher_keys_by_manual"].items():
+    for manual, counts in summary["tracked_pdf_teacher_keys_by_manual"].items():
         lines.append(
             f"- `{manual}`: student 0; teacher {counts['observed']}/{counts['expected']}"
         )
@@ -210,6 +263,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
         [
             "",
             "The JSON companion records all 35 key zones with manual, chapter, source path, canonical JSON, before/current visibility and guard mechanism.",
+            "",
+            "The eight tracked PDFs have no matching canonical observed-build receipts. Their text checks are historical diagnostics only: they do not attest the current source tree and cannot support release.",
             "",
             "Missing Title/Author metadata and missing outlines are confirmed on the four student PDFs; remediation remains assigned to `FINAL_PDF_PREFLIGHT / T9`.",
             "",
@@ -237,7 +292,10 @@ def main() -> int:
             for path in stale:
                 print(f"STALE_OR_MISSING: {path.relative_to(ROOT)}")
             return 1
-        print("student/professor key audit current: 35/35")
+        print(
+            "QCM source guards current: 35/35; "
+            "tracked PDF diagnostic is non-release evidence"
+        )
         return 0
     for path, content in expected.items():
         path.write_text(content, encoding="utf-8")
