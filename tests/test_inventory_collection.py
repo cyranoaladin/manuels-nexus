@@ -4430,14 +4430,15 @@ def _approved_transition_case(inventory_module) -> dict[str, object]:
             "release_acceptance": False,
         },
         "approved_set": {
-            "category_counts": {"missing_corrections": 2},
-            "fingerprint_count": 2,
+            "category_counts": {"missing_corrections": 1},
+            "fingerprint_count": 1,
             "fingerprint_digest": (
                 inventory_module._baseline_qualification.fingerprint_set_digest(
-                    ["d" * 16, "e" * 16]
+                    ["d" * 16]
                 )
             ),
-            "owner_counts": {"direction_scientifique_programme": 2},
+            "fingerprints": ["d" * 16],
+            "owner_counts": {"direction_scientifique_programme": 1},
         },
         "approved_transition": {
             "final_active_fingerprint_count": 3,
@@ -4753,6 +4754,22 @@ def test_approved_baseline_extension_diagnosis_accepts_exact_reconciliation(
 
     assert approved is True
     assert offending == []
+
+
+def test_approved_baseline_extension_diagnosis_rejects_wildcard_set(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = _approved_transition_case(inventory_module)
+    case["policy"]["approved_set"]["fingerprints"] = ["*"]
+
+    approved, offending = _diagnose_approved_transition(
+        tmp_path, inventory_module, monkeypatch, case
+    )
+
+    assert approved is False
+    assert any("fingerprints autorisés" in value for value in offending)
 
 
 def test_approved_baseline_extension_diagnosis_rejects_addition_outside_lot(

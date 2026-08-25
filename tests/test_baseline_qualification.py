@@ -857,6 +857,60 @@ def _synthetic_policy_contract(
     return mutated
 
 
+def test_materialization_rejects_explicit_fingerprint_set_mismatch(
+    qualification_module,
+    policy,
+) -> None:
+    fingerprint = "a" * 16
+    synthetic_policy = deepcopy(policy)
+    synthetic_policy["approved_set"].update(
+        {
+            "category_counts": {"blocking_statuses": 1},
+            "fingerprint_count": 1,
+            "fingerprint_digest": qualification_module.fingerprint_set_digest(
+                [fingerprint]
+            ),
+            "fingerprints": ["b" * 16],
+            "observed_model_digest_before_materialization": (
+                "sha256:" + "e" * 64
+            ),
+            "observed_source_digest_before_materialization": (
+                "sha256:" + "d" * 64
+            ),
+            "owner_counts": {"direction_scientifique_programme": 1},
+        }
+    )
+    records = [
+        {
+            "anomaly": {
+                "object_type": "cours",
+                "scope": "object",
+                "status": "generated",
+            },
+            "category": "blocking_statuses",
+            "chapter": "1SPE-SUITES",
+            "fingerprint": fingerprint,
+            "fingerprint_schema_version": 1,
+            "manual": "1SPE",
+            "qualified": False,
+            "severity": "blocking",
+            "source": "chapitres/1SPE-SUITES/cours/cours.tex",
+        }
+    ]
+
+    with pytest.raises(
+        qualification_module.QualificationError,
+        match="fingerprint set mismatch",
+    ):
+        qualification_module.plan_materialization(
+            synthetic_policy,
+            records,
+            {},
+            observed_source_digest="sha256:" + "d" * 64,
+            observed_model_digest="sha256:" + "e" * 64,
+        )
+
+
 def test_materialization_preserves_resolved_policy_history_after_freeze(
     qualification_module,
     policy,

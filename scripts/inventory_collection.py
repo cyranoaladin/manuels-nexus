@@ -3812,6 +3812,7 @@ def _approved_baseline_extension_diagnosis(
         offending.append("comparaison de baseline fournie incohérente")
     comparison = recomputed_comparison
     new_fingerprints = sorted(set(current) - set(previous))
+    approved_new_fingerprints = list(new_fingerprints)
     retained_fingerprints = sorted(set(current) & set(previous))
     for fingerprint in retained_fingerprints:
         if _canonicalize(current[fingerprint]) != _canonicalize(
@@ -3887,6 +3888,7 @@ def _approved_baseline_extension_diagnosis(
             pair["previous"] for pair in modified_pairs if pair["previous"]
         }
         expected_new = sorted(set(new_fingerprints) - modified_current)
+        approved_new_fingerprints = expected_new
         expected_resolved = sorted(
             set(resolved_fingerprints) - modified_previous
         )
@@ -3949,14 +3951,35 @@ def _approved_baseline_extension_diagnosis(
         ):
             offending.append("catégories des fingerprints résolus différentes")
 
-    if len(new_fingerprints) != approved_set.get("fingerprint_count"):
+    if len(approved_new_fingerprints) != approved_set.get("fingerprint_count"):
         offending.append("nombre de fingerprints différent du jeu approuvé")
     if _baseline_qualification.fingerprint_set_digest(
-        new_fingerprints
+        approved_new_fingerprints
     ) != approved_set.get("fingerprint_digest"):
         offending.append("digest des fingerprints différent du jeu approuvé")
 
-    added_records = [current[fingerprint] for fingerprint in new_fingerprints]
+    explicit_fingerprints = approved_set.get("fingerprints")
+    if explicit_fingerprints is not None:
+        if (
+            not isinstance(explicit_fingerprints, list)
+            or any(
+                not isinstance(fingerprint, str)
+                or _baseline_qualification.FINGERPRINT_PATTERN.fullmatch(
+                    fingerprint
+                )
+                is None
+                for fingerprint in explicit_fingerprints
+            )
+            or len(set(explicit_fingerprints)) != len(explicit_fingerprints)
+            or sorted(explicit_fingerprints) != approved_new_fingerprints
+        ):
+            offending.append(
+                "fingerprints autorisés différents du jeu approuvé exact"
+            )
+
+    added_records = [
+        current[fingerprint] for fingerprint in approved_new_fingerprints
+    ]
     category_counts = Counter(
         str(record.get("category", "")) for record in added_records
     )

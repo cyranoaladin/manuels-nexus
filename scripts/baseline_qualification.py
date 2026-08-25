@@ -775,6 +775,21 @@ def plan_materialization(
     else:
         approved_fingerprints = set(unqualified_active_fingerprints)
     fingerprints = sorted(approved_fingerprints)
+    explicit_fingerprints = approved.get("fingerprints")
+    if explicit_fingerprints is not None:
+        if (
+            not isinstance(explicit_fingerprints, list)
+            or any(
+                not isinstance(fingerprint, str)
+                or FINGERPRINT_PATTERN.fullmatch(fingerprint) is None
+                for fingerprint in explicit_fingerprints
+            )
+            or len(set(explicit_fingerprints)) != len(explicit_fingerprints)
+            or sorted(explicit_fingerprints) != fingerprints
+        ):
+            raise QualificationError(
+                "jeu approuvé: explicit fingerprint set mismatch"
+            )
     approved_count = len(fingerprints)
     approved_digest = fingerprint_set_digest(fingerprints)
     category_counts = Counter(
