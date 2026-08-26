@@ -6,7 +6,9 @@
 % assert E == 800
 % E2 = 8000**2*p + 10000**2*(1-p)
 % V = E2 - E**2
+% assert V == 77760000
 % sigma = sqrt(V)
+% assert round(float(sigma)) == 8818
 % # 5 projets: X~B(5, 0.6), gain = 1600*X - 2000*5
 % # Oui on fait ca simplement par E et V
 % E5 = 5 * (1600*p + (-2000)*(1-p))
@@ -15,6 +17,9 @@
 % V5 = 5 * (1600**2*p + 2000**2*(1-p) - 160**2)
 % assert V5 == 15552000
 % assert round(float(sqrt(V5))) == 3944
+% assert abs(float(sqrt(V5)) - 3943.602) < 1e-3
+% # l'enonce affirme un ecart type divise par sqrt(5) : on le verifie
+% assert abs(float(sigma/sqrt(V5)) - float(sqrt(5))) < 1e-9
 % END-VERIFY
 \begin{corrige}{1SPE-VARALEA-EX-048}
 
