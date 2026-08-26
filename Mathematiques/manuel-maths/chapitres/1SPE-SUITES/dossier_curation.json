@@ -15,7 +15,7 @@
     },
     "C3": {
       "chunks_retenus": [],
-      "brief": "Reconnaitre et exploiter une suite geometrique. Methode : calculer u(n+1)/u(n) et montrer que c'est constant (condition prealable : u(n) != 0 pour tout n). Formule explicite u_n = u_0 * q^n. Erreurs types : (1) oubli de verifier que les termes sont non nuls avant de calculer le quotient ; (2) confusion raison/premier terme ; (3) erreur dans la puissance : ecrire u_n = u_0 * q^(n-1) au lieu de u_0 * q^n quand le rang initial est 0 ; (4) confusion multiplication/addition (appliquer les formules de la suite arithmetique). Formats bac : evolution en pourcentage constant, placement a interets composes, decroissance radioactive.",
+      "brief": "Reconnaitre et exploiter une suite geometrique. Definition : u(n+1) = q*u(n), avec q reel eventuellement nul. Le quotient est seulement une caracterisation lorsque u(n) != 0 pour tout n. Formule explicite u_n = u_0 * q^n, avec u_0 conserve comme donnee initiale et la formule utilisee pour n >= 1 si q = 0 afin d'eviter 0^0. Erreurs types : (1) utiliser un quotient sans verifier que les termes sont non nuls ; (2) confondre raison et premier terme ; (3) ecrire u_n = u_0 * q^(n-1) au lieu de u_0 * q^n quand le rang initial est 0 ; (4) confondre multiplication et addition. Formats bac : evolution en pourcentage constant, placement a interets composes, decroissance radioactive.",
       "angles_morts": []
     },
     "C4": {

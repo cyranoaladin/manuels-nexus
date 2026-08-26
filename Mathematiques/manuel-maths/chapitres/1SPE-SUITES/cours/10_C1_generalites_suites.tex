@@ -74,7 +74,12 @@ La suite $u_n = 3 \times 2^n$ est donnée par formule explicite. Bien qu'on puis
 \erreurFrequente{
 \textbf{Confusion notation algorithmique / notation mathématique.}
 
-En Python, on écrit souvent \texttt{u = f(n)} avec \texttt{n} comme variable de boucle. Cela correspond bien à $u_n = f(n)$, mais la notation \texttt{u(n)} avec des parenthèses n'est \emph{pas} la notation mathématique d'une suite : on écrit $u_n$ (indice en bas), jamais $u(n)$ dans une copie de mathématiques.
+En Python, on écrit souvent \texttt{u = f(n)} avec \texttt{n} comme variable de
+boucle. Cela correspond bien à $u_n=f(n)$. La notation fonctionnelle $u(n)$ est
+mathématiquement correcte puisque toute suite est une fonction définie sur une
+partie de $\mathbb{N}$. Dans ce manuel et dans les copies, on privilégie la
+notation usuelle $u_n$ afin de distinguer immédiatement les suites des fonctions
+de variable réelle.
 }
 
 \erreurFrequente{

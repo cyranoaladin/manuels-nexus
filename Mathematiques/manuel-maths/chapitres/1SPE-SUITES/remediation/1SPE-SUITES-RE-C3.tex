@@ -38,7 +38,7 @@ On considère la suite $(u_n)$ définie pour tout $n \in \mathbb{N}$ par $u_n = 
 u_0 = 3 \times 2^0 = 3. \quad u_1 = 3 \times 2^1 = 6. \quad u_2 = 3 \times 2^2 = 12. \quad u_3 = 3 \times 2^3 = 24.
 \]
 
-\commentaireMarge{Pour une suite géométrique, on calcule le quotient $u_{n+1}/u_n$ et on vérifie qu'il est constant. Attention : tous les termes doivent être non nuls.}
+\commentaireMarge{Dans cet exercice, les termes sont non nuls : le quotient $u_{n+1}/u_n$ peut servir à reconnaître la suite géométrique.}
 
 \textbf{Question 2.} Pour tout $n \in \mathbb{N}$, $u_n = 3 \times 2^n
 \neq 0$. Le quotient est :
@@ -46,7 +46,7 @@ u_0 = 3 \times 2^0 = 3. \quad u_1 = 3 \times 2^1 = 6. \quad u_2 = 3 \times 2^2 =
 \frac{u_{n+1}}{u_n} = \frac{3 \times 2^{n+1}}{3 \times 2^n} = 2^{n+1-n} = 2.
 \]
 
-\commentaireMarge{Le quotient est constant égal à $2$, indépendant de $n$ : c'est la définition d'une suite géométrique.}
+\commentaireMarge{Le quotient est constant égal à $2$ : c'est une caractérisation par quotient valable ici, car les termes sont non nuls.}
 
 \textbf{Question 3.} Le quotient $\dfrac{u_{n+1}}{u_n} = 2$ est constant. La suite $(u_n)$ est donc géométrique de raison $q = 2$ et de premier terme $u_0 = 3$.
 
@@ -62,13 +62,18 @@ u_0 = 3 \times 2^0 = 3. \quad u_1 = 3 \times 2^1 = 6. \quad u_2 = 3 \times 2^2 =
 On donne les premiers termes : $v_0 = 2$, $v_1 = 6$, $v_2 = 18$, $v_3 = 54$.
 \begin{enumerate}
   \item Calculer $\dfrac{v_1}{v_0}$, $\dfrac{v_2}{v_1}$, $\dfrac{v_3}{v_2}$.
-  \item La suite est-elle géométrique ? Si oui, donner la raison $q$.
-  \item Exprimer le terme général $v_n$ en fonction de $n$.
+  \item Ces trois quotients suffisent-ils à prouver que toute la suite est
+  géométrique ? Justifier.
+  \item On ajoute maintenant l'information : $v_{n+1}=3v_n$ pour tout
+  $n\in\mathbb{N}$. Démontrer que la suite est géométrique et exprimer $v_n$
+  en fonction de $n$.
   \item Calculer $v_6$.
 \end{enumerate}
 \end{exercice}
 
-\coupDePouce{1}{Une suite $(v_n)$ est géométrique si le quotient $\dfrac{v_{n+1}}{v_n}$ est le même pour tous les termes (et si les termes sont tous non nuls). Calculer les trois quotients demandés et les comparer.}
+\coupDePouce{1}{Les quotients observés permettent seulement de proposer une
+raison candidate. Pour une preuve, il faut une relation valable pour tout
+$n$ ; utiliser ensuite l'information $v_{n+1}=3v_n$.}
 
 % BEGIN-VERIFY
 % v = lambda n: 2 * 3**n
@@ -79,6 +84,9 @@ On donne les premiers termes : $v_0 = 2$, $v_1 = 6$, $v_2 = 18$, $v_3 = 54$.
 % assert v(1)/v(0) == 3
 % assert v(2)/v(1) == 3
 % assert v(3)/v(2) == 3
+% # Le même préfixe peut être prolongé par v_4=55 : trois quotients ne prouvent rien au-delà.
+% prefix_with_counterexample = [2, 6, 18, 54, 55]
+% assert prefix_with_counterexample[4] != 3 * prefix_with_counterexample[3]
 % assert v(6) == 2 * 3**6
 % END-VERIFY
 
@@ -89,13 +97,19 @@ On donne les premiers termes : $v_0 = 2$, $v_1 = 6$, $v_2 = 18$, $v_3 = 54$.
 \frac{v_1}{v_0} = \frac{6}{2} = 3. \quad \frac{v_2}{v_1} = \frac{18}{6} = 3. \quad \frac{v_3}{v_2} = \frac{54}{18} = 3.
 \]
 
-\commentaireMarge{Quotients tous égaux à $3$ : suite géométrique de raison $3$.}
+\commentaireMarge{Les trois quotients observés sont égaux à $3$ : cela suggère
+la raison candidate $3$, sans constituer une preuve pour tous les rangs.}
 
-\textbf{Question 2.} Les quotients consécutifs sont tous égaux à $3$. La suite $(v_n)$ est géométrique de raison $q = 3$.
+\textbf{Question 2.} Ces trois quotients ne suffisent pas à déterminer les
+termes suivants. Par exemple, on pourrait avoir $v_4=55$ tout en conservant les
+quatre valeurs données ; ce prolongement ne vérifierait pas $v_4=3v_3$.
 
-\commentaireMarge{Formule : $v_n = v_0 \times q^n$.}
+\commentaireMarge{La relation multiplicative est désormais donnée pour tout
+$n$ : c'est elle qui permet de conclure.}
 
-\textbf{Question 3.} $v_n = v_0 \times q^n = 2 \times 3^n$.
+\textbf{Question 3.} Pour tout $n\in\mathbb{N}$, $v_{n+1}=3v_n$. Par
+définition, $(v_n)$ est donc géométrique de raison $q=3$ et de premier terme
+$v_0=2$. Ainsi, $v_n=2\times3^n$.
 
 \textbf{Question 4.}
 \[

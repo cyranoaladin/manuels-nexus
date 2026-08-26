@@ -119,6 +119,8 @@ Exemple & boucle \texttt{for} & $u_n = u_0 \cdot q^n$ \\
 
 \medskip
 En pratique, pour une suite géométrique, la formule close $u_n = u_0 \cdot q^n$ est préférable.
+Dans un programme, si $q=0$ et $n=0$, retourner directement $u_0$ sans
+demander au langage d'évaluer $0^0$ ; pour $n\geq1$, la formule s'applique.
 En revanche, pour une suite définie par une relation de récurrence complexe (ex. suite de Fibonacci), seule l'approche itérative est directement accessible.
 
 \medskip

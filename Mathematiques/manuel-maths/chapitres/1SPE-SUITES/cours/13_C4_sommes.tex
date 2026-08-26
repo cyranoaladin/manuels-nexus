@@ -37,8 +37,7 @@ La somme des $(n+1)$ premiers termes (de $u_0$ à $u_n$) vaut :
 }
 
 \propriete[2 — Somme des termes d'une suite géométrique]{
-Soit $(u_n)$ une suite géométrique de premier terme $u_0
-\neq 0$ et de raison $q$.
+Soit $(u_n)$ une suite géométrique de premier terme $u_0$ et de raison $q$.
 \begin{itemize}
   \item Si $q
 \neq 1$ :
@@ -61,10 +60,13 @@ Somme : $u_0 + \cdots + u_5 = 6 \times \dfrac{3 + 13}{2} = 48$.
 $v_0 + v_1 + \cdots + v_4 = 2 \times \dfrac{1 - 3^5}{1 - 3} = 2 \times \dfrac{-242}{-2} = 242$.
 }
 
-\contreexemple{
-La suite $(u_n)$ définie par $u_n = (-1)^n$ n'est ni arithmétique ni géométrique (le rapport $u_{n+1}/u_n = -1$ est constant, mais on vérifie $q = -1
-\neq 1$, donc la formule géométrique s'applique bien avec $q = -1$).
-En revanche, la suite $u_n = n^2$ n'est pas géométrique et aucune des deux formules ci-dessus ne s'applique directement.
+\exemple{
+La suite $(u_n)$ définie par $u_n=(-1)^n$ est géométrique de premier terme
+$u_0=1$ et de raison $q=-1$, car $u_{n+1}=-u_n$. La formule géométrique
+s'applique donc bien avec $q=-1$.
+
+En revanche, la suite $v_n=n^2$ n'est ni arithmétique ni géométrique et aucune
+des deux formules ci-dessus ne s'applique directement.
 }
 
 %---------------------------------------------------------------

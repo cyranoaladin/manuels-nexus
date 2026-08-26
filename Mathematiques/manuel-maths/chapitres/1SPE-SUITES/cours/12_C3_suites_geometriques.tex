@@ -7,16 +7,18 @@
 % ============================================================
 
 \definition[5]{
-Une suite $(u_n)$ est dite \textbf{géométrique} s'il existe un réel $q
-\neq 0$, appelé \textbf{raison}, tel que
+Une suite $(u_n)$ est dite \textbf{géométrique} s'il existe un réel $q$, appelé
+\textbf{raison}, tel que
 \[
   u_{n+1} = q \cdot u_n \quad \text{pour tout } n \in \mathbb{N}.
 \]
-Autrement dit, on passe d'un terme au suivant en multipliant toujours par le même réel non nul $q$.
+Autrement dit, on passe d'un terme au suivant en multipliant toujours par le même réel $q$.
 
-\textbf{Remarque.} On suppose de plus $u_0
-\neq 0$ (et donc $u_n
-\neq 0$ pour tout $n$) afin que la raison soit bien définie comme le quotient $\dfrac{u_{n+1}}{u_n}$.
+\textbf{Remarque.} La valeur $q=0$ est autorisée : si $u_0\neq 0$, alors
+$u_1=u_2=\cdots=0$. La suite nulle est donc géométrique (elle vérifie la
+relation pour tout réel $q$). Lorsque les termes sont non nuls, on peut aussi
+retrouver la raison par le quotient $q=\dfrac{u_{n+1}}{u_n}$ ; ce quotient est
+une caractérisation conditionnelle, pas la définition générale.
 }
 
 \exemple{
@@ -34,16 +36,20 @@ Le quotient de deux termes consécutifs n'est pas constant.
 }
 
 \propriete[2]{
-Si $(u_n)$ est une suite géométrique de premier terme $u_0
-\neq 0$ et de raison $q
-\neq 0$, alors pour tout entier naturel $n$ :
+Si $(u_n)$ est une suite géométrique de premier terme $u_0$ et de raison $q$,
+alors, pour tout entier $n\geq1$ :
 \[
   u_n = u_0 \times q^n.
 \]
-Plus généralement, pour tous entiers naturels $n$ et $p$ :
+Pour $n=0$, le terme $u_0$ reste la donnée initiale ; cette formulation évite
+d'avoir à donner un sens à $0^0$ lorsque $q=0$.
+
+Plus généralement, si $n=p$, l'égalité $u_n=u_p$ est immédiate. Si $n>p$ :
 \[
   u_n = u_p \times q^{n-p}.
 \]
+Si $q\neq 0$, cette dernière égalité reste valable pour tous entiers naturels
+$n$ et $p$.
 Cette formule s'appelle la \textbf{formule explicite} (ou terme général) de la suite géométrique.
 }
 
@@ -72,23 +78,33 @@ Le quotient n'est pas constant, même si $w_n$ contient une puissance de $2$.
 }
 
 \erreurFrequente{
-\textbf{Oubli de vérifier que les termes sont non nuls avant de calculer le quotient.}
+\textbf{Utiliser un quotient lorsqu'un terme peut être nul.}
 
-Pour montrer qu'une suite est géométrique, on calcule $\dfrac{u_{n+1}}{u_n}$. Ce quotient n'a de sens que si $u_n
-\neq 0$.
+Pour montrer qu'une suite est géométrique, la voie générale consiste à établir
+$u_{n+1}=q u_n$ avec un même réel $q$ pour tout $n$. On peut calculer
+$\dfrac{u_{n+1}}{u_n}$ uniquement lorsque $u_n\neq 0$.
 
-Si l'énoncé ne précise pas $u_0
-\neq 0$, il faut commencer par vérifier (ou supposer) que tous les termes sont non nuls. En particulier, une suite géométrique ne peut pas avoir de terme nul.
+Si un terme est nul, le quotient correspondant n'est pas défini, mais la suite
+peut tout de même être géométrique. C'est notamment le cas de la suite nulle et
+d'une suite de raison $0$, qui devient nulle dès le rang suivant.
 }
 
 \erreurFrequente{
 \textbf{Confusion entre $q^n$ et $q^{n-1}$ dans la formule explicite.}
 
-La formule est $u_n = u_0 \times q^n$ (exposant $n$, indice du terme), \emph{pas} $u_0 \times q^{n-1}$.
+Pour $n\geq1$, la formule est $u_n = u_0 \times q^n$ (exposant $n$,
+indice du terme), \emph{pas} $u_0 \times q^{n-1}$. Au rang $0$, on conserve
+la donnée initiale $u_0$ ; si $q=0$, la formule s'utilise pour $n\geq1$ afin
+de ne pas introduire $0^0$.
 
-L'exposant $n-1$ apparaît uniquement si on prend $u_1$ comme terme initial : $u_n = u_1 \times q^{n-1}$.
+L'exposant $n-1$ apparaît uniquement si on prend $u_1$ comme terme initial.
+Si $q\neq0$, on a alors $u_n=u_1\times q^{n-1}$ pour tout $n\geq1$ ;
+si $q=0$, on conserve $u_1$ au rang $1$ et on utilise cette formule pour
+$n>1$.
 
-\textbf{Moyen de ne pas confondre :} vérifier le cas $n = 0$ — on doit obtenir $u_0 \times q^0 = u_0$. Si le résultat ne coïncide pas avec le terme initial, la formule est fausse.
+\textbf{Moyen de ne pas confondre :} lorsque $q\neq0$, vérifier le cas $n=0$ :
+$u_0\times q^0=u_0$. Lorsque $q=0$, vérifier plutôt le cas $n=1$ : on doit
+obtenir $u_1=u_0\times0=0$.
 }
 
 \erreurFrequente{

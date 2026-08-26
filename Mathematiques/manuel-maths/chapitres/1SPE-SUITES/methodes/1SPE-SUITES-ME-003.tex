@@ -8,12 +8,16 @@
 
 \pasApas{%
   \begin{enumerate}
-    \item Je vérifie que $u_n
-\neq 0$ pour tout $n \in \mathbb{N}$ (condition indispensable pour former le quotient).
-    \item Je calcule le quotient $\dfrac{u_{n+1}}{u_n}$ en remplaçant $n$ par $n+1$ dans l'expression de $u_n$.
-    \item Je simplifie l'expression obtenue.
-    \item Je vérifie que le résultat est une constante $q$ (indépendante de $n$).
-    \item Je conclus : « La suite $(u_n)$ est géométrique de raison $q = \ldots$ et de premier terme $u_0 = \ldots$ »
+    \item \textbf{Méthode A — relation multiplicative.} Je calcule $u_{n+1}$,
+      puis je cherche à établir $u_{n+1}=q u_n$ avec un même réel $q$ pour tout
+      $n$. Cette méthode reste valable lorsque certains termes sont nuls.
+    \item \textbf{Méthode B — quotient, si les termes sont non nuls.} Après
+      avoir prouvé $u_n\neq 0$ pour tout $n$, je peux calculer et simplifier
+      $\dfrac{u_{n+1}}{u_n}$.
+    \item Je vérifie que la relation multiplicative, ou le quotient lorsque ce
+      dernier est défini, donne une constante $q$ indépendante de $n$.
+    \item Je conclus : « La suite $(u_n)$ est géométrique de raison
+      $q=\ldots$ et de premier terme $u_0=\ldots$ ».
   \end{enumerate}
 }
 
@@ -22,8 +26,7 @@
   Montrer que $(u_n)$ est une suite géométrique et préciser sa raison et son premier terme.
 
   \medskip
-  \commentaireMarge{Vérifier que $u_n
-\neq 0$ pour tout $n$.}%
+  \commentaireMarge{Ici, les termes sont strictement positifs : la méthode du quotient est disponible.}%
   Pour tout $n \in \mathbb{N}$, $3^n > 0$, donc $u_n = 7 \times 3^n > 0$.
   En particulier, $u_n
 \neq 0$ pour tout $n \in \mathbb{N}$.
@@ -52,9 +55,10 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Oublier de vérifier que $u_n
-\neq 0$ avant de former le quotient.
-      Si $u_n = 0$ pour un certain rang, le quotient $u_{n+1}/u_n$ est une division par zéro : la démonstration est invalide.
+    \item \textbf{Piège 1.} Former un quotient sans vérifier que $u_n\neq 0$.
+      Si $u_n=0$ pour un certain rang, cette méthode est indisponible ; il faut
+      revenir à la relation $u_{n+1}=q u_n$. Cela ne prouve pas que la suite
+      n'est pas géométrique.
     \item \textbf{Piège 2.} Conclure à partir d'exemples numériques sans preuve générale.
       Vérifier $u_1/u_0 = u_2/u_1 = 3$ ne suffit pas ; le calcul doit être mené pour tout $n \in \mathbb{N}$.
     \item \textbf{Piège 3.} Lors du calcul de $3^{n+1}/3^n$, écrire $3^{n+1-n} = 3^1 = 3$ est correct,
