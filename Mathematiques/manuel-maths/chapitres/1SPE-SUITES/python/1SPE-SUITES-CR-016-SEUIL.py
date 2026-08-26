@@ -5,7 +5,11 @@ from math import isfinite
 
 def seuil_geometrique(u0, q, seuil):
     """Renvoie le plus petit rang avec u_n > seuil, pour u0 > 0 et q > 1."""
-    if not (isfinite(u0) and isfinite(q) and isfinite(seuil)):
+    try:
+        parametres_finis = isfinite(u0) and isfinite(q) and isfinite(seuil)
+    except (TypeError, ValueError, OverflowError):
+        parametres_finis = False
+    if not parametres_finis:
         raise ValueError("Les paramètres doivent être des nombres réels finis.")
     if u0 <= 0:
         raise ValueError("u0 doit être strictement positif.")
@@ -15,7 +19,10 @@ def seuil_geometrique(u0, q, seuil):
     u = u0
     n = 0
     while u <= seuil:
-        u = q * u
+        u_suivant = q * u
+        if u_suivant <= u:
+            raise ValueError("La précision numérique empêche la suite de progresser.")
+        u = u_suivant
         n = n + 1
     return n, u
 

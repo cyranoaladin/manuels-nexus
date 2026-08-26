@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 import re
 import runpy
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -106,6 +108,8 @@ def test_geometric_threshold_contract_is_explicit_in_source_and_course() -> None
     assert "plus petit rang" in seuil_geometrique.__doc__
     assert "$u_0>0$" in course
     assert "$q>1$" in course
+    assert "la valeur calculée augmente réellement" in course
+    assert "précision numérique" in course
     assert r"\texttt{ValueError}" in course
 
 
@@ -134,15 +138,45 @@ def test_geometric_threshold_handles_initial_and_strict_boundaries() -> None:
         (1, 0.5, 2, "q doit être strictement supérieur à 1"),
         (0, 2, 2, "u0 doit être strictement positif"),
         (1, 2, float("inf"), "paramètres doivent être des nombres réels finis"),
+        (1 + 0j, 2, 3, "paramètres doivent être des nombres réels finis"),
+        ("1", 2, 3, "paramètres doivent être des nombres réels finis"),
     ],
 )
 def test_geometric_threshold_rejects_invalid_or_impossible_cases(
-    u0: float, q: float, threshold: float, message: str
+    u0: object, q: object, threshold: object, message: str
 ) -> None:
     seuil_geometrique = _load_geometric_threshold_function()
 
     with pytest.raises(ValueError, match=message):
         seuil_geometrique(u0, q, threshold)
+
+
+def test_geometric_threshold_rejects_float_stagnation_without_hanging() -> None:
+    script = PYTHON_SOURCES / "1SPE-SUITES-CR-016-SEUIL.py"
+    source = f"""
+from math import inf, nextafter
+import runpy
+
+seuil_geometrique = runpy.run_path({str(script)!r})["seuil_geometrique"]
+try:
+    seuil_geometrique(5e-324, nextafter(1.0, inf), 1e-323)
+except ValueError as error:
+    print(error)
+else:
+    raise AssertionError("La stagnation flottante aurait dû être refusée.")
+"""
+
+    completed = subprocess.run(
+        [sys.executable, "-c", source],
+        text=True,
+        capture_output=True,
+        check=False,
+        timeout=1,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    assert completed.stderr == ""
+    assert "La précision numérique empêche la suite de progresser." in completed.stdout
 
 
 def test_fil_rouge_has_exact_rounding_and_proves_the_only_two_crossings() -> None:

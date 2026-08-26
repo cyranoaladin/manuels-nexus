@@ -27,9 +27,11 @@ une mise à jour correcte, la boucle peut ne jamais s'arrêter.
 
 Le programme ci-dessous, nommé \texttt{seuil\_geometrique}, traite précisément
 le cas croissant $u_0>0$ et $q>1$, avec des paramètres réels finis. Ces
-préconditions garantissent que le seuil est atteint. Si elles ne sont pas
-respectées, le programme s'arrête immédiatement en signalant une
-\texttt{ValueError}, au lieu d'entrer dans une boucle sans fin.
+préconditions garantissent mathématiquement que le seuil est atteint. Le
+programme vérifie aussi, à chaque tour, que la valeur calculée augmente
+réellement. Si une précondition n'est pas respectée ou si la précision numérique
+empêche cette progression, il signale une \texttt{ValueError} au lieu d'entrer
+dans une boucle sans fin.
 }
 
 \lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-CR-016-SEUIL.py}
