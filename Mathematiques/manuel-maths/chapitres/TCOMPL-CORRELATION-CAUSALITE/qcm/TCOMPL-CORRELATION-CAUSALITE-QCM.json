@@ -161,12 +161,12 @@
     {
       "id": "Q7",
       "capacite": "C1",
-      "enonce": "Un nuage est forme des points A(1 ; 2), B(3 ; 4) et C(5 ; 0). Son point moyen est :",
+      "enonce": "Pour les couples (1 ; 2), (3 ; 4) et (5 ; 0), quelle proposition represente correctement le nuage et son point moyen ?",
       "options": {
-        "A": "$G(3 ; 2)$",
-        "B": "$G(9 ; 6)$",
-        "C": "$G(2 ; 3)$",
-        "D": "$G(3 ; 3)$"
+        "A": "Le nuage contient A(1 ; 2), B(3 ; 4), C(5 ; 0) et $G(3 ; 2)$.",
+        "B": "Le nuage contient A(1 ; 2), B(3 ; 4), C(5 ; 0) et $G(9 ; 6)$.",
+        "C": "Le nuage contient A(2 ; 1), B(4 ; 3), C(0 ; 5) et $G(2 ; 3)$.",
+        "D": "Le nuage contient A(1 ; 2), B(3 ; 0), C(5 ; 4) et $G(3 ; 2)$."
       },
       "correcte": "A",
       "diagnostics": {
@@ -175,11 +175,11 @@
           "renvoi": "C1"
         },
         "C": {
-          "erreur": "Les deux moyennes ont été interverties : l'abscisse moyenne vaut 3 et l'ordonnée moyenne vaut 2.",
+          "erreur": "Les coordonnées de chaque point et les deux moyennes ont été interverties : le nuage correct utilise (1 ; 2), (3 ; 4), (5 ; 0), puis $G(3 ; 2)$.",
           "renvoi": "C1"
         },
         "D": {
-          "erreur": "L'abscisse moyenne vaut bien 3, mais l'ordonnée moyenne est $(2+4+0)/3=2$, et non 3.",
+          "erreur": "Le point moyen est correct, mais le nuage ne respecte pas les couples donnés : B doit avoir pour ordonnée 4 et C pour ordonnée 0.",
           "renvoi": "C1"
         }
       }

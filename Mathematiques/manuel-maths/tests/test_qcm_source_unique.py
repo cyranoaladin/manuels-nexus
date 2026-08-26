@@ -221,9 +221,14 @@ def test_correlation_causalite_q7_couvre_le_point_moyen_sans_ambiguite() -> None
     question = _question("TCOMPL-CORRELATION-CAUSALITE", "Q7")
 
     assert question["capacite"] == "C1"
+    assert "represente correctement le nuage" in question["enonce"]
     assert question["correcte"] == "A"
-    assert question["options"]["A"] == "$G(3 ; 2)$"
+    assert "A(1 ; 2), B(3 ; 4), C(5 ; 0)" in question["options"]["A"]
+    assert "$G(3 ; 2)$" in question["options"]["A"]
     assert set(question["diagnostics"]) == {"B", "C", "D"}
+    assert "sommes" in question["diagnostics"]["B"]["erreur"]
+    assert "interverties" in question["diagnostics"]["C"]["erreur"]
+    assert "ne respecte pas les couples" in question["diagnostics"]["D"]["erreur"]
     assert all(
         diagnostic["renvoi"] == "C1"
         for diagnostic in question["diagnostics"].values()
