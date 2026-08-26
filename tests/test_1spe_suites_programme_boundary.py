@@ -19,6 +19,7 @@ EX038 = CHAPTER / "exercices" / "1SPE-SUITES-EX-038.tex"
 CO038 = CHAPTER / "corriges" / "1SPE-SUITES-CO-038.tex"
 EX042 = CHAPTER / "exercices" / "1SPE-SUITES-EX-042.tex"
 CO042 = CHAPTER / "corriges" / "1SPE-SUITES-CO-042.tex"
+C5_COURSE = CHAPTER / "cours" / "14_C5_variations.tex"
 EXPECTED_P0_RELATIVE_PATHS = (
     "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-026.tex",
     "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-026.tex",
@@ -73,6 +74,48 @@ def test_canonical_p0_scope_scan_is_clean() -> None:
     assert producer.scan_canonical_p0_scope() == []
 
 
+def test_canonical_chapter_scope_scans_every_current_tex_and_is_clean() -> None:
+    producer = _producer()
+    expected = tuple(sorted(CHAPTER.rglob("*.tex"), key=lambda path: str(path)))
+
+    assert producer.canonical_chapter_tex_paths() == expected
+    assert producer.scan_canonical_chapter_scope() == []
+
+
+def test_chapter_scope_detects_a_violation_outside_the_exact_nineteen(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    producer = _producer()
+    chapter = tmp_path / "1SPE-SUITES"
+    rogue = chapter / "cours" / "rogue.tex"
+    rogue.parent.mkdir(parents=True)
+    rogue.write_text("La suite est convergente.\n", encoding="utf-8")
+    monkeypatch.setattr(producer, "CHAPTER", chapter)
+    monkeypatch.setattr(producer, "validated_canonical_p0_paths", lambda: ())
+
+    findings = producer.scan_canonical_chapter_scope()
+
+    assert producer.canonical_chapter_tex_paths() == (rogue,)
+    assert _codes(findings) == {"FORMAL_CONVERGENCE_THEOREM"}
+    assert findings[0]["path"] == str(rogue)
+
+
+def test_c5_course_keeps_bounds_but_replaces_formal_limit_with_observation() -> None:
+    producer = _producer()
+    source = _source(C5_COURSE)
+    rendered = producer.normalize_inline_formatting(
+        producer.strip_non_rendered_comments(source)
+    )
+
+    assert all(term in rendered for term in ("majorée", "minorée", "bornée"))
+    assert all(term in rendered for term in (r"u_1=\frac12", r"u_{10}=\frac{10}{11}", r"u_{100}=\frac{100}{101}"))
+    assert "On conjecture que les termes se rapprochent de $1$" in rendered
+    assert "ne constitue pas une preuve" in rendered
+    assert "théorème de la limite monotone" not in rendered
+    assert "converge vers $1$" not in rendered
+    assert producer.scan_text(source, path=str(C5_COURSE)) == []
+
+
 def test_canonical_p0_scope_is_the_exact_external_nineteen_path_contract() -> None:
     producer = _producer()
     relative_paths = tuple(
@@ -106,18 +149,21 @@ def test_cli_success_count_is_derived_from_validated_scope(
     capsys: pytest.CaptureFixture[str],
 ) -> None:
     producer = _producer()
-    paths = (tmp_path / "one.tex", tmp_path / "two.tex")
-    monkeypatch.setattr(producer, "validated_canonical_p0_paths", lambda: paths)
+    p0_paths = (tmp_path / "one.tex", tmp_path / "two.tex")
+    chapter_paths = (*p0_paths, tmp_path / "three.tex")
+    monkeypatch.setattr(producer, "validated_canonical_p0_paths", lambda: p0_paths)
+    monkeypatch.setattr(producer, "canonical_chapter_tex_paths", lambda: chapter_paths)
 
     def clean_scan(observed_paths):
-        assert tuple(observed_paths) == paths
+        assert tuple(observed_paths) == chapter_paths
         return []
 
     monkeypatch.setattr(producer, "scan_paths", clean_scan)
 
     assert producer.main() == 0
     assert capsys.readouterr().out == (
-        "PASS: 1SPE-SUITES P0 programme boundary clean (2 files)\n"
+        "PASS: 1SPE-SUITES programme boundary clean "
+        "(2 P0 files; 3 chapter TeX files)\n"
     )
 
 
@@ -440,8 +486,13 @@ def test_cli_is_green_and_deterministic() -> None:
     commands = [sys.executable, str(SCRIPT)]
     first = subprocess.run(commands, cwd=ROOT, text=True, capture_output=True)
     second = subprocess.run(commands, cwd=ROOT, text=True, capture_output=True)
+    chapter_tex_count = len(tuple(CHAPTER.rglob("*.tex")))
 
     assert first.returncode == 0, first.stdout + first.stderr
     assert second.returncode == 0, second.stdout + second.stderr
     assert first.stdout == second.stdout
-    assert first.stdout == "PASS: 1SPE-SUITES P0 programme boundary clean (19 files)\n"
+    assert first.stdout == (
+        "PASS: 1SPE-SUITES programme boundary clean "
+        f"({len(EXPECTED_P0_RELATIVE_PATHS)} P0 files; "
+        f"{chapter_tex_count} chapter TeX files)\n"
+    )

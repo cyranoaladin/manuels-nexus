@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the exact 1SPE-SUITES P0 scope for rendered Terminale-only reasoning."""
+"""Check all 1SPE-SUITES TeX sources for rendered Terminale-only reasoning."""
 
 from __future__ import annotations
 
@@ -300,9 +300,36 @@ def scan_canonical_p0_scope() -> list[dict[str, object]]:
     return scan_paths(validated_canonical_p0_paths())
 
 
+def canonical_chapter_tex_paths() -> tuple[Path, ...]:
+    if not CHAPTER.is_dir():
+        raise ValueError(f"canonical chapter directory is missing: {CHAPTER}")
+    paths = tuple(sorted(CHAPTER.rglob("*.tex"), key=lambda path: str(path)))
+    if not paths:
+        raise ValueError(f"canonical chapter has no TeX sources: {CHAPTER}")
+    return paths
+
+
+def _complete_chapter_scan_paths(
+    p0_paths: Iterable[Path], chapter_paths: Iterable[Path]
+) -> tuple[Path, ...]:
+    chapter = tuple(Path(path) for path in chapter_paths)
+    observed = {path.resolve() for path in chapter}
+    missing_p0 = tuple(
+        Path(path) for path in p0_paths if Path(path).resolve() not in observed
+    )
+    return (*chapter, *missing_p0)
+
+
+def scan_canonical_chapter_scope() -> list[dict[str, object]]:
+    p0_paths = validated_canonical_p0_paths()
+    chapter_paths = canonical_chapter_tex_paths()
+    return scan_paths(_complete_chapter_scan_paths(p0_paths, chapter_paths))
+
+
 def main() -> int:
-    paths = validated_canonical_p0_paths()
-    findings = scan_paths(paths)
+    p0_paths = validated_canonical_p0_paths()
+    chapter_paths = canonical_chapter_tex_paths()
+    findings = scan_paths(_complete_chapter_scan_paths(p0_paths, chapter_paths))
     if findings:
         for finding in findings:
             print(
@@ -311,7 +338,10 @@ def main() -> int:
             )
         print(f"FAIL: {len(findings)} rendered programme-boundary finding(s)")
         return 1
-    print(f"PASS: 1SPE-SUITES P0 programme boundary clean ({len(paths)} files)")
+    print(
+        "PASS: 1SPE-SUITES programme boundary clean "
+        f"({len(p0_paths)} P0 files; {len(chapter_paths)} chapter TeX files)"
+    )
     return 0
 
 
