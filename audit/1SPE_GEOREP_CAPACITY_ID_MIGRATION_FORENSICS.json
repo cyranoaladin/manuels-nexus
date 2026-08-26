@@ -1,0 +1,148 @@
+{
+  "artifact_type": "georep_capacity_id_migration_forensics",
+  "schema_version": 1,
+  "generated_by": "scripts/reconcile_wip_upstream.py forensics",
+  "target_sha": "10c553092de6faceb95320e8da27a0afff5edec4",
+  "mutation_performed": false,
+  "canonical_authority": "Mathematiques/manuel-maths/referentiel/capacites_1SPE_GEOMETRIE_REPEREE.json",
+  "mapping": [
+    {
+      "old_id": "1SPE-GEOREP-C1",
+      "new_id": "1SPE-GEOMETRIE-REPEREE-C1",
+      "authority_declares_new_id": true,
+      "authority_declares_old_id": false
+    },
+    {
+      "old_id": "1SPE-GEOREP-C2",
+      "new_id": "1SPE-GEOMETRIE-REPEREE-C2",
+      "authority_declares_new_id": true,
+      "authority_declares_old_id": false
+    },
+    {
+      "old_id": "1SPE-GEOREP-C3",
+      "new_id": "1SPE-GEOMETRIE-REPEREE-C3",
+      "authority_declares_new_id": true,
+      "authority_declares_old_id": false
+    },
+    {
+      "old_id": "1SPE-GEOREP-C4",
+      "new_id": "1SPE-GEOMETRIE-REPEREE-C4",
+      "authority_declares_new_id": true,
+      "authority_declares_old_id": false
+    },
+    {
+      "old_id": "1SPE-GEOREP-C5",
+      "new_id": "1SPE-GEOMETRIE-REPEREE-C5",
+      "authority_declares_new_id": true,
+      "authority_declares_old_id": false
+    }
+  ],
+  "counting_rule": "1SPE-GEOREP-C[1-5] non suivi d'un chiffre, d'une lettre ou d'un tiret",
+  "counting_rule_note": "le motif large 1SPE-GEOREP-C capture aussi les identifiants d'objets 1SPE-GEOREP-CO-*, d'ou l'estimation initiale erronee de 109 puis 229 fichiers",
+  "totals": {
+    "files": 54,
+    "occurrences": 330
+  },
+  "consumers": {
+    "CHAPTER_CONTRACT": {
+      "files": 1,
+      "occurrences": 5,
+      "disposition": "EDIT_SOURCE",
+      "producer": null,
+      "paths": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/contrat.yaml"
+      ]
+    },
+    "GENERATED_COVERAGE_REPORT": {
+      "files": 2,
+      "occurrences": 18,
+      "disposition": "REGENERATE",
+      "producer": "scripts/build_official_program_coverage.py",
+      "paths": [
+        "audit/OFFICIAL_PROGRAM_COVERAGE_2026_2027.json",
+        "audit/official_program_coverage/1SPE.json"
+      ]
+    },
+    "GENERATED_INVENTORY": {
+      "files": 1,
+      "occurrences": 257,
+      "disposition": "REGENERATE",
+      "producer": "scripts/inventory_collection.py",
+      "paths": [
+        "audit/INVENTAIRE_COLLECTION.json"
+      ]
+    },
+    "PRODUCTION_OBJECT": {
+      "files": 50,
+      "occurrences": 50,
+      "disposition": "EDIT_SOURCE",
+      "producer": null,
+      "paths": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-001.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-002.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-003.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-004.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-005.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-006.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-007.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-008.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-009.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-010.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-011.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-012.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-013.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-014.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-015.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-016.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-017.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-018.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-019.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-020.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-021.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-022.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-023.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-024.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-025.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-026.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-027.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-028.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-029.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-030.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-031.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-032.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-033.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-034.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-035.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-036.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-037.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-038.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-039.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-040.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-041.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-042.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-043.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-044.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-045.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-046.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-047.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-048.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-049.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-050.tex"
+      ]
+    }
+  },
+  "already_using_new_id": [
+    "Mathematiques/manuel-maths/referentiel/capacites_1SPE_GEOMETRIE_REPEREE.json",
+    "audit/PROGRAM_COVERAGE_MATRIX_1SPE.json"
+  ],
+  "affected_reviews_or_receipts": [],
+  "affected_reviews_note": "aucun recu de revue humaine ne reference ces capacites ; rien a rebinder",
+  "affected_tests": [],
+  "post_migration_invariants": {
+    "LEGACY_GEOREP_CAPACITY_REF": 0,
+    "BROKEN_CAPACITY_REF": 0,
+    "AMBIGUOUS_CAPACITY_ALIAS": 0,
+    "RUNTIME_CAPACITY_ALIAS": 0
+  },
+  "no_permanent_alias": "l'historique est porte par Git ; aucun alias runtime n'est conserve"
+}
