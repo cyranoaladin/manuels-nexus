@@ -179,3 +179,27 @@ def test_coverage_summary_is_derived_from_rows() -> None:
     assert summary["full_atoms"] == sum(
         row["coverage_status"] == "FULL" for row in rows
     )
+
+
+def test_1spe_suites_c8_atoms_reference_the_existing_qcm_assessment() -> None:
+    rows = {
+        row["atom_id"]: row
+        for row in json.loads(
+            (MATRIX_ROOT / "1SPE.json").read_text(encoding="utf-8")
+        )["rows"]
+    }
+    qcm_path = (
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/"
+        "qcm/1SPE-SUITES-QCM.json"
+    )
+
+    for atom_id in ("1SPE-OFFICIAL-053", "1SPE-OFFICIAL-059"):
+        row = rows[atom_id]
+        assert row["contract_capacity"] == "1SPE-SUITES-C8"
+        assert row["assessment_sources"] == [f"{qcm_path}#Q3"]
+        assert qcm_path in row["evidence_paths"]
+        assert row["coverage_status"] == "CONTENT_REVIEW_PENDING"
+        assert row["gap_type"] is None
+        assert row["assessment_alignment_state"] == "PENDING"
+        assert row["scientific_state"] == "PENDING"
+        assert row["pedagogical_state"] == "PENDING"
