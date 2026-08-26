@@ -157,6 +157,32 @@
           "renvoi": "C5"
         }
       }
+    },
+    {
+      "id": "Q7",
+      "capacite": "C1",
+      "enonce": "Un nuage est forme des points A(1 ; 2), B(3 ; 4) et C(5 ; 0). Son point moyen est :",
+      "options": {
+        "A": "$G(3 ; 2)$",
+        "B": "$G(9 ; 6)$",
+        "C": "$G(2 ; 3)$",
+        "D": "$G(3 ; 3)$"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Les coordonnées du point moyen sont les moyennes, pas les sommes : $x_G=(1+3+5)/3=3$ et $y_G=(2+4+0)/3=2$.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "Les deux moyennes ont été interverties : l'abscisse moyenne vaut 3 et l'ordonnée moyenne vaut 2.",
+          "renvoi": "C1"
+        },
+        "D": {
+          "erreur": "L'abscisse moyenne vaut bien 3, mais l'ordonnée moyenne est $(2+4+0)/3=2$, et non 3.",
+          "renvoi": "C1"
+        }
+      }
     }
   ]
 }

@@ -15,13 +15,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Cette expression donne la probabilite d'une configuration precise de $k$ succes ; elle oublie les $C(n,k)$ positions possibles des succes."
+          "erreur": "Cette expression donne la probabilite d'une configuration precise de $k$ succes ; elle oublie les $C(n,k)$ positions possibles des succes.",
+          "renvoi": "C5"
         },
         "C": {
-          "erreur": "Le facteur $(1-p)^{n-k}$ manque : les $n-k$ echecs de chaque configuration doivent eux aussi contribuer a sa probabilite."
+          "erreur": "Le facteur $(1-p)^{n-k}$ manque : les $n-k$ echecs de chaque configuration doivent eux aussi contribuer a sa probabilite.",
+          "renvoi": "C5"
         },
         "D": {
-          "erreur": "Le produit $np^k$ ne compte ni les choix des $k$ succes ni la probabilite des $n-k$ echecs ; ce n'est pas une probabilite binomiale."
+          "erreur": "Le produit $np^k$ ne compte ni les choix des $k$ succes ni la probabilite des $n-k$ echecs ; ce n'est pas une probabilite binomiale.",
+          "renvoi": "C5"
         }
       }
     },

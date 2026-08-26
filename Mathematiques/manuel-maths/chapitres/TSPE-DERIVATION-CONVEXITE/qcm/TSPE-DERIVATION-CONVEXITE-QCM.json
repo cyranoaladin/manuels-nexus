@@ -15,13 +15,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "La derivee de l'exponentielle est conservee, mais la derivee de la fonction interieure $x^2$ fournit aussi le facteur $2x$."
+          "erreur": "La derivee de l'exponentielle est conservee, mais la derivee de la fonction interieure $x^2$ fournit aussi le facteur $2x$.",
+          "renvoi": "C1"
         },
         "C": {
-          "erreur": "Le facteur $x$ correspond a une derivee incomplete de $x^2$ : on a $(x^2)'=2x$, et non simplement $x$."
+          "erreur": "Le facteur $x$ correspond a une derivee incomplete de $x^2$ : on a $(x^2)'=2x$, et non simplement $x$.",
+          "renvoi": "C1"
         },
         "D": {
-          "erreur": "Le facteur $2$ oublie la variable dans $(x^2)'=2x$ ; la regle de chaine donne donc $2x\\,\\mathrm{e}^{x^2}$."
+          "erreur": "Le facteur $2$ oublie la variable dans $(x^2)'=2x$ ; la regle de chaine donne donc $2x\\,\\mathrm{e}^{x^2}$.",
+          "renvoi": "C1"
         }
       }
     },
@@ -61,13 +64,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-        "erreur": "Le facteur exterieur $4$ est present, mais la derivee de la fonction interieure $3x-2$ apporte aussi le facteur $3$."
+        "erreur": "Le facteur exterieur $4$ est present, mais la derivee de la fonction interieure $3x-2$ apporte aussi le facteur $3$.",
+        "renvoi": "C1"
         },
         "C": {
-        "erreur": "Le facteur $3$ vient de la derivee de $3x-2$, mais la puissance doit diminuer de $4$ a $3$ et etre multipliee par $4$."
+        "erreur": "Le facteur $3$ vient de la derivee de $3x-2$, mais la puissance doit diminuer de $4$ a $3$ et etre multipliee par $4$.",
+        "renvoi": "C1"
         },
         "D": {
-        "erreur": "Le coefficient $12$ est correct, mais la derivation de la puissance quatrieme impose $(3x-2)^3$, et non $(3x-2)^4$."
+        "erreur": "Le coefficient $12$ est correct, mais la derivation de la puissance quatrieme impose $(3x-2)^3$, et non $(3x-2)^4$.",
+        "renvoi": "C1"
         }
       }
     },

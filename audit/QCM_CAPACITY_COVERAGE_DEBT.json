@@ -10,7 +10,7 @@
     "source_currentness": "whole-file SHA256 for every QCM JSON and contrat.yaml",
     "human_approval_inferred": false
   },
-  "source_digest": "sha256:04347d6bf47805793780100913e2883d6e4319adaccf71ac79d181a0965f2876",
+  "source_digest": "sha256:1e764cfbae463a783e076d5729701e42d257861a26100bf7d43c97d329640f34",
   "source_inputs": [
     {
       "chapter": "1SPE-DERIVATION-GLOBAL",
@@ -114,10 +114,10 @@
     {
       "chapter": "TCOMPL-CORRELATION-CAUSALITE",
       "qcm_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/qcm/TCOMPL-CORRELATION-CAUSALITE-QCM.json",
-      "qcm_sha256": "sha256:90f28ecd1f981c9c8403fb0ec3cd5271230fdbf30368c231f8fcb281ca063b16",
+      "qcm_sha256": "sha256:603057e31656ab956220e722f35bb1427f55d0daf6cad0b6f5c60d3b0faaabf9",
       "contract_path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/contrat.yaml",
       "contract_sha256": "sha256:1e2c2dcfa36f1c8ede8eecae6b0cd1441a27f701c7f26c42d113969919a185e6",
-      "question_count": 6,
+      "question_count": 7,
       "contract_capacity_count": 5
     },
     {
@@ -258,7 +258,7 @@
     {
       "chapter": "TSPE-DERIVATION-CONVEXITE",
       "qcm_path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/qcm/TSPE-DERIVATION-CONVEXITE-QCM.json",
-      "qcm_sha256": "sha256:8bfbad0e556f8833e12a25c502132881b5ea84ac1272d0225bd1e493c3d9d8c3",
+      "qcm_sha256": "sha256:1f83c72fbc730e90a84e4ea28373cb44116edaa27846ee48b51d2f816b31b9ef",
       "contract_path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/contrat.yaml",
       "contract_sha256": "sha256:eaa2d3d6ba8f54072be3a8c71f787c5236eff9c448cf6e4586052202e147fa12",
       "question_count": 15,
@@ -303,7 +303,7 @@
     {
       "chapter": "TSPE-PROBABILITES",
       "qcm_path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json",
-      "qcm_sha256": "sha256:d716dba2410ef4ce7a1073a0a1a8801bc1225b4c9ed4e960cb2f5d37e0320ab3",
+      "qcm_sha256": "sha256:b2629920abaacba1558e24856e08b02cbfa342fc57f2584c9f2d643a5b4f6e21",
       "contract_path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/contrat.yaml",
       "contract_sha256": "sha256:0078515ed184cd6d917f8ac17e6d4a9c0821ca90c8ceb91fb38ca57564f97ba4",
       "question_count": 6,
@@ -331,12 +331,9 @@
   "inventory": {
     "qcm_files": 35,
     "chapters": 35,
-    "questions": 330
+    "questions": 331
   },
   "missing_by_chapter": {
-    "TCOMPL-CORRELATION-CAUSALITE": [
-      "C1"
-    ],
     "TCOMPL-ECHANTILLONNAGE": [
       "C6",
       "C7"
@@ -414,20 +411,10 @@
       "C6"
     ]
   },
-  "total_missing": 49,
+  "total_missing": 48,
   "distractor_gaps_by_chapter": {
     "TSPE-DERIVATION-CONVEXITE": {
-      "Q1": [
-        "A:renvoi-vide",
-        "C:renvoi-vide",
-        "D:renvoi-vide"
-      ],
       "Q2": [
-        "A:renvoi-vide",
-        "C:renvoi-vide",
-        "D:renvoi-vide"
-      ],
-      "Q3": [
         "A:renvoi-vide",
         "C:renvoi-vide",
         "D:renvoi-vide"
@@ -565,11 +552,6 @@
       ]
     },
     "TSPE-PROBABILITES": {
-      "Q1": [
-        "A:renvoi-vide",
-        "C:renvoi-vide",
-        "D:renvoi-vide"
-      ],
       "Q2": [
         "A:renvoi-vide",
         "C:renvoi-vide",
@@ -624,7 +606,7 @@
       ]
     }
   },
-  "total_distractor_gaps": 117,
+  "total_distractor_gaps": 108,
   "objective_zero": false,
   "human_approval_complete": false
 }

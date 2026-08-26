@@ -217,6 +217,38 @@ def test_proba_conditionnelle_q18_decrit_les_donnees_qui_appellent_bayes() -> No
     assert question["correcte"] == "B"
 
 
+def test_correlation_causalite_q7_couvre_le_point_moyen_sans_ambiguite() -> None:
+    question = _question("TCOMPL-CORRELATION-CAUSALITE", "Q7")
+
+    assert question["capacite"] == "C1"
+    assert question["correcte"] == "A"
+    assert question["options"]["A"] == "$G(3 ; 2)$"
+    assert set(question["diagnostics"]) == {"B", "C", "D"}
+    assert all(
+        diagnostic["renvoi"] == "C1"
+        for diagnostic in question["diagnostics"].values()
+    )
+
+
+@pytest.mark.parametrize(
+    ("chapitre", "question_id", "renvoi"),
+    [
+        ("TSPE-DERIVATION-CONVEXITE", "Q1", "C1"),
+        ("TSPE-DERIVATION-CONVEXITE", "Q3", "C1"),
+        ("TSPE-PROBABILITES", "Q1", "C5"),
+    ],
+)
+def test_renvois_tspe_pointent_vers_la_remediation_precise(
+    chapitre: str, question_id: str, renvoi: str
+) -> None:
+    question = _question(chapitre, question_id)
+
+    assert all(
+        diagnostic.get("renvoi") == renvoi
+        for diagnostic in question["diagnostics"].values()
+    )
+
+
 def test_suites_q3_evalue_l_absence_de_limite_sans_formalisation() -> None:
     question = _question("1SPE-SUITES", "Q3")
 
@@ -440,7 +472,7 @@ def test_le_registre_de_dette_est_courant_et_reproductible() -> None:
     assert ledger["inventory"] == {
         "qcm_files": 35,
         "chapters": 35,
-        "questions": 330,
+        "questions": 331,
     }
     assert len(ledger["source_inputs"]) == 35
     _assert_debt_status_is_derived(ledger)
