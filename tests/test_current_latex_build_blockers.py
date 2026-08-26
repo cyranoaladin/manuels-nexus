@@ -34,3 +34,17 @@ def test_tspe_convexity_diagnostics_have_balanced_inline_math() -> None:
                 option,
                 diagnostic["erreur"],
             )
+
+
+def test_1spe_suites_opening_has_no_truncated_number_commands() -> None:
+    chapter = MATH / "chapitres/1SPE-SUITES"
+    offenders = [
+        (path.relative_to(ROOT), line_number, line)
+        for path in sorted(chapter.rglob("*.tex"))
+        for line_number, line in enumerate(
+            path.read_text(encoding="utf-8").splitlines(), start=1
+        )
+        if line.startswith("ombre{")
+    ]
+
+    assert offenders == []
