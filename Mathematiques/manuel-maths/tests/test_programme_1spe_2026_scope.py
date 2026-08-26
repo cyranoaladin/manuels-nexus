@@ -151,8 +151,9 @@ def test_repetitions_bernoulli_uses_the_canonical_method_environment() -> None:
     ).read_text(encoding="utf-8")
 
     assert "\\methode{" not in source
-    assert "\\begin{methodeV}" in source
-    assert "\\end{methodeV}" in source
+    assert "\\begin{methodeV}" not in source
+    assert "\\begin{fichemethode}{M6}" in source
+    assert "\\end{fichemethode}" in source
 
 
 def test_exponentielle_qcm_exclut_limites_et_derivation_generale() -> None:
