@@ -1,0 +1,208 @@
+{
+  "artifact_type": "wip_dropped_delta_ledger",
+  "schema_version": 1,
+  "generated_by": "analyse de audit/WIP_UPSTREAM_RECONCILIATION.json + lecture des sources",
+  "wip_base_sha": "761508d923d74fd3d93fc055b3f3b1857fb251e1",
+  "upstream_sha": "dc6735d1",
+  "authority_order": [
+    "texte officiel applicable",
+    "cahier des charges",
+    "decisions humaines",
+    "exactitude scientifique",
+    "exactitude pedagogique",
+    "source canonique actuelle",
+    "tests/gates",
+    "chronologie Git"
+  ],
+  "no_recency_rule": "aucune regle 'le plus recent gagne' n'a ete appliquee",
+  "qcm_three_way_totals": {
+    "UPSTREAM_ONLY": 85,
+    "BOTH_DIVERGED": 35,
+    "BOTH_CONVERGED": 3
+  },
+  "wip_only_question_changes": 0,
+  "wip_only_question_changes_note": "Aucune question de QCM n'a ete modifiee par le WIP sans l'avoir ete aussi en amont. Le WIP n'apporte donc aucune couverture de question qui lui soit propre.",
+  "dropped_deltas": [
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/*/qcm/*-QCM.json",
+      "scope": "85 questions verdict UPSTREAM_ONLY",
+      "semantic_change": "l'amont a corrige ces questions, le WIP ne les a pas touchees",
+      "reason_dropped": "SUPERSEDED_BY_CORRECT_UPSTREAM",
+      "proof": "verdict UPSTREAM_ONLY : la version WIP est identique a la base"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/*/qcm/*-QCM.tex",
+      "scope": "35 fichiers",
+      "semantic_change": "reecriture manuelle du .tex genere",
+      "reason_dropped": "NO_LONGER_REQUIRED",
+      "proof": "ces fichiers portent l'en-tete « Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main » et un META genere_depuis pointant le .json ; ils se regenerent apres arbitrage de leur source"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json",
+      "scope": "Q9 : cle de correction",
+      "semantic_change": "le WIP conserve l'enonce et les options de la base mais bascule correcte de C vers B, faisant de « Une suite geometrique peut comporter un terme nul » la reponse exacte, et reclasse C en distracteur",
+      "reason_dropped": "SUPERSEDED_BY_CLEARER_UNAMBIGUOUS_UPSTREAM",
+      "proof": "l'amont fait de la definition « il existe q tel que pour tout n, u_{n+1}=q u_n » la reponse exacte et retire l'option sur le terme nul ; verrouille par tests/test_geometric_sequence_definition.py",
+      "severity": "NOT_A_DEFECT",
+      "previous_classification": "SCIENTIFICALLY_WRONG",
+      "reclassification_reason": "Decision humaine du 2026-08-27. Sous la definition canonique u_{n+1}=q u_n, une suite geometrique PEUT comporter un terme nul (q=0, ou terme initial nul) : l'affirmation du WIP n'etait pas fausse. Le quotient u_{n+1}/u_n n'est qu'une caracterisation conditionnelle. L'amont est retenu parce qu'il remplace la formulation ambigue par une question claire, pas parce que le WIP se trompait."
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
+      "scope": "Q8, Q15 : cles apparemment en desaccord",
+      "semantic_change": "aucune : le WIP conserve la question de base",
+      "reason_dropped": "SUPERSEDED_BY_CORRECT_UPSTREAM",
+      "proof": "l'amont a remplace integralement ces questions (enonce et options differents) ; la difference de cle reflete deux questions distinctes, pas un desaccord scientifique sur la meme question"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/qcm/TSPE-SUITES-LIMITES-QCM.json",
+      "scope": "Q4 : cle apparemment en desaccord",
+      "semantic_change": "aucune : le WIP conserve la question de base",
+      "reason_dropped": "SUPERSEDED_BY_CORRECT_UPSTREAM",
+      "proof": "l'amont reecrit la question d'heredite ; l'option D de la base « A et C correctes » est remplacee par une redaction complete unique. Question differente, pas desaccord."
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.json",
+      "scope": "Q4, options A/B/C : renvoi",
+      "semantic_change": "le WIP conserve renvoi=C2 de la base ; l'amont le porte a C4",
+      "reason_dropped": "SUPERSEDED_BY_CORRECT_UPSTREAM",
+      "proof": "le WIP n'a pas touche ce champ : sa valeur est celle de la base"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.json",
+      "scope": "Q3 : ajout de l'hypothese de connexite a l'enonce eulerien",
+      "semantic_change": "le WIP corrigeait l'enonce en ajoutant « connexe »",
+      "reason_dropped": "SUPERSEDED_BY_CORRECT_UPSTREAM",
+      "proof": "Decision humaine du 2026-08-27 : la version amont est retenue. Elle porte sur la matrice d'adjacence, directement alignee sur le contenu officiel Mathematiques expertes (graphes, connexite, matrices). Le delta WIP etait mathematiquement correct mais visait une question que l'amont a volontairement remplacee ; il n'est donc pas SCIENTIFICALLY_WRONG.",
+      "severity": "NOT_A_DEFECT",
+      "future_option": "une question eulerienne pourra etre reintroduite comme OBJET SEPARE apres audit du chapitre : hypothese de connexite correcte, absence de doublon, role programme explicite, valeur pedagogique reelle. Pas de reintroduction automatique."
+    }
+  ],
+  "deltas_to_port": [
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-048.tex",
+      "delta": "assertions supplementaires du bloc BEGIN-VERIFY",
+      "detail": "l'amont (commit 691b6354) porte deja la correction P0 : V=15 552 000 et round(sqrt(V5))==3944. Le WIP y ajoute assert V == 77760000, round(sigma)==8818, la decomposition E_Y / E_Y2 / V_Y, |sigma_S - 3943.602| < 1e-3 et la relation sigma/sigma_S == sqrt(5).",
+      "verdict": "WIP_ADDS_VALID_DELTA",
+      "action": "porter uniquement les assertions absentes",
+      "p0_preserved_upstream": true
+    },
+    {
+      "path": "scripts/inventory_collection.py",
+      "delta": "enregistrement des deux schemas human-review dans SCHEMA_REGISTRY",
+      "detail": "sans cet enregistrement, test_v1_schema_directory_contains_exactly_the_registered_contracts echoue des que les schemas human-review-governance et human-review-receipt sont presents",
+      "verdict": "WIP_ADDS_VALID_DELTA",
+      "action": "porter le delta a l'identique"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-{DERIVATION-CONVEXITE,GEOMETRIE-ESPACE,LOGARITHME,PRIMITIVES-EQDIFF}/qcm/*.json",
+      "delta": "45 renvois de remediation presents dans le WIP et absents en amont",
+      "detail": {
+        "TSPE-DERIVATION-CONVEXITE": 3,
+        "TSPE-GEOMETRIE-ESPACE": 15,
+        "TSPE-LOGARITHME": 15,
+        "TSPE-PRIMITIVES-EQDIFF": 12
+      },
+      "verdict": "WIP_ADDS_VALID_DELTA",
+      "action": "porter uniquement le champ renvoi de ces 45 distracteurs, sur des questions dont l'enonce et les options sont identiques des deux cotes ; aucun autre champ n'est touche",
+      "mechanically_derivable": true,
+      "justification": "le cahier exige un diagnostic ET un renvoi de remediation par distracteur incorrect ; ces 45 renvois font passer autant de distracteurs de non conforme a conforme"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/qcm/TSPE-DERIVATION-CONVEXITE-QCM.json",
+      "delta": "Q3 options A et C : renvoi affine",
+      "detail": "base=absent, amont='C1', wip='C1, derivee d'une fonction composee'",
+      "verdict": "WIP_ADDS_VALID_DELTA",
+      "action": "porter le libelle plus specifique",
+      "mechanically_derivable": true
+    }
+  ],
+  "deltas_requiring_human_editorial_decision": [],
+  "silent_drops": 0,
+  "diverged_question_breakdown": {
+    "total": 35,
+    "UPSTREAM_REPLACED_QUESTION": {
+      "count": 18,
+      "reason_dropped": "NO_LONGER_REQUIRED",
+      "proof": "l'amont a modifie l'enonce ou les options ; le delta WIP porte sur une question qui n'existe plus sous cette forme"
+    },
+    "DIAGNOSTICS_ONLY_COMPETING": {
+      "count": 17,
+      "reason_dropped": "PARTIELLEMENT_PORTABLE",
+      "proof": "meme enonce et memes options des deux cotes ; seuls les textes de diagnostic different"
+    }
+  },
+  "renvoi_coverage": {
+    "metric": "distracteurs diagnostiques portant un renvoi de remediation",
+    "base": {
+      "total": 990,
+      "with_renvoi": 831,
+      "without": 159
+    },
+    "upstream": {
+      "total": 993,
+      "with_renvoi": 885,
+      "without": 108
+    },
+    "wip": {
+      "total": 990,
+      "with_renvoi": 891,
+      "without": 99
+    },
+    "finding": "ni l'amont ni le WIP n'est un sur-ensemble de l'autre : ils ont complete des distracteurs differents. L'amont en a corrige 51 depuis la base, le WIP 60, sur des ensembles qui se recoupent partiellement."
+  },
+  "accounting": {
+    "wip_files": 59,
+    "generated_derivative": 35,
+    "true_conflicts": 23,
+    "wip_only": 1,
+    "qcm_questions_touched_by_wip": 38,
+    "qcm_questions_touched_only_by_wip": 0,
+    "silent_drops": 0,
+    "every_wip_delta_has_a_recorded_disposition": true,
+    "true_conflicts_resolved": true,
+    "lost_valid_deltas": 0
+  },
+  "resolved_editorial_decisions": [
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/contrat.yaml",
+      "scope": "les 5 ref_capacite",
+      "wip_delta": "1SPE-GEOREP-C* -> 1SPE-GEOMETRIE-REPEREE-C*, alignant le contrat sur le referentiel",
+      "upstream_delta": "aucun : l'amont conserve 1SPE-GEOREP-C*",
+      "conflict": "le referentiel porte bien 1SPE-GEOMETRIE-REPEREE-C*, mais 109 fichiers objets du chapitre referencent encore 1SPE-GEOREP-C*. Applique seul, le delta WIP aligne le contrat et desaligne les 109 objets.",
+      "decision_required": "migrer aussi les 109 objets, declarer un alias, ou renoncer",
+      "authority_cannot_settle": "migration de nommage, non tranchee par le programme",
+      "classification": "VALID_DELTA_REQUIRING_ATOMIC_GRAPH_MIGRATION",
+      "resolution": "APPLIED",
+      "applied_as": "migration atomique du graphe complet : contrat + 50 exercices + matrice de couverture + regeneration des derives ; aucun alias runtime",
+      "migration_forensics": "audit/1SPE_GEOREP_CAPACITY_ID_MIGRATION_FORENSICS.json",
+      "tests": "tests/test_georep_capacity_id_migration.py"
+    }
+  ],
+  "renvoi_port_result": {
+    "candidates": 45,
+    "ported": 11,
+    "rejected": 34,
+    "gates": [
+      "source question current",
+      "statement/options semantic identity",
+      "target remediation current",
+      "capacity alignment",
+      "target canonical",
+      "variant visibility",
+      "legacy/stale target"
+    ],
+    "ported_detail": {
+      "TSPE-LOGARITHME": 6,
+      "TSPE-PRIMITIVES-EQDIFF": 3,
+      "TSPE-DERIVATION-CONVEXITE": 2
+    },
+    "rejected_reason_counts": {
+      "capacity_misalignment_and_missing_target": 15,
+      "capacity_misalignment_only": 18,
+      "aligned_but_target_object_absent": 3
+    },
+    "no_target_fabricated": true,
+    "open_findings": "34 distracteurs restent sans renvoi valide : leur renvoi WIP pointait C1 alors que la question porte C2, C3, C4, C5, C7, C11, C12 ou C13, ou l'objet de remediation cible n'existe pas. Findings laisses ouverts pour vraie correction."
+  }
+}
