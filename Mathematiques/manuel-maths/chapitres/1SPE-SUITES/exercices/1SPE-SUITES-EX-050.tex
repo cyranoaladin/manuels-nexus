@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-EX-050", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C7"], "capacites_codes": ["C7"], "methodes": ["M7"], "parcours": 2, "competences": ["modeliser", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-050.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-050.tex", "status": "generated"}
+% META: {"id": "1SPE-SUITES-EX-050", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C6", "1SPE-SUITES-C7"], "capacites_codes": ["C3", "C6", "C7"], "methodes": ["M3", "M6", "M7"], "parcours": 2, "competences": ["modeliser", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-050.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-050.tex", "status": "generated"}
 % BEGIN-VERIFY
 % v = 500
 % n = 0
@@ -10,6 +10,8 @@
 % assert abs(500 * 1.08**17 - 1850.01) < 0.01
 % assert abs(500 * 1.08**18 - 1998.01) < 0.01
 % assert abs(500 * 1.08**19 - 2157.85) < 0.01
+% assert abs(500 * 1.08**20 - 2330.48) < 0.01
+% assert abs(500 * 1.08**21 - 2516.92) < 0.01
 % assert 500 * 1.08**18 <= 2000
 % assert 500 * 1.08**19 > 2000
 % END-VERIFY
@@ -17,19 +19,15 @@
 Une entreprise place $500$~€ sur un compte dont la valeur augmente de $8\,\%$ chaque année. On note $v_n$ la valeur du placement (en euros) après $n$ années.
 
 \begin{enumerate}
-  \item Exprimer $v_n$ en fonction de $n$.
-  \item Compléter et expliquer le programme Python ci-dessous, qui détermine le premier rang $n$ tel que $v_n > 2\,000$ :
+  \item Montrer que $(v_n)$ est géométrique et exprimer $v_n$ en fonction de $n$.
+  \item La fonction \texttt{premier\_depassement} ci-dessous reçoit une valeur initiale, un taux et un seuil.
 
-  \begin{center}
-  \texttt{v = 500}\\
-  \texttt{n = 0}\\
-  \texttt{while v <= 2000:}\\
-  \texttt{\quad\quad n = n + 1}\\
-  \texttt{\quad\quad v = 1.08 * v}\\
-  \texttt{print(n)}
-  \end{center}
+  \lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-050.py}
 
-  \item Calculer à la main $v_{17}$, $v_{18}$ et $v_{19}$ (arrondir au centime), et vérifier la valeur affichée par le programme.
-  \item Interpréter le résultat dans le contexte.
+  \begin{enumerate}
+    \item Expliquer le rôle des paramètres, de la boucle et de la valeur renvoyée.
+    \item Prévoir le résultat affiché par l'appel fourni. Vérifier en calculant $v_{18}$ et $v_{19}$, puis interpréter.
+  \end{enumerate}
+  \item Modifier seulement l'appel de la fonction afin de déterminer le premier rang où le placement dépasse le seuil de $2\,500$~\euro{}. Prévoir le résultat, puis le vérifier en calculant $v_{20}$ et $v_{21}$.
 \end{enumerate}
 \end{exercice}

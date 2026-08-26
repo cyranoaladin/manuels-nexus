@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-CO-034", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-034", "capacites_codes": ["C6", "C7"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-SUITES-CO-034", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-034", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C6", "1SPE-SUITES-C7"], "capacites_codes": ["C3", "C6", "C7"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational, symbols
 % n = symbols('n', integer=True, nonneg=True)
@@ -11,9 +11,6 @@
 % K5 = float(K0 * (1.05)**5)
 % assert abs(K5 - 2552.56) < 0.01
 % # Seuil : K_n >= 3000 => 2000 * 1.05^n >= 3000 => 1.05^n >= 1.5
-% import math
-% n_seuil = math.ceil(math.log(1.5) / math.log(1.05))
-% assert n_seuil == 9
 % # Verif : 1.05^8 ~ 1.4775, 1.05^9 ~ 1.5513
 % assert 2000 * (1.05**8) < 3000
 % assert 2000 * (1.05**9) >= 3000
@@ -57,21 +54,11 @@ Après $5$ ans, Kévin dispose d'environ $2\,552{,}56$~\euro{}, soit un gain de 
   K_n \geq 3\,000 \iff 2\,000 \times 1{,}05^n \geq 3\,000 \iff 1{,}05^n \geq 1{,}5.
 \]
 
-\textit{b) Programme Python.}
-
-\medskip
-\texttt{K = 2000}\\
-\texttt{n = 0}\\
-\texttt{while K < 3000:}\\
-\hspace*{1.5em}\texttt{K = K * 1.05} \quad \textit{\# On multiplie le capital par 1,05 (gain de 5\%)}\\
-\hspace*{1.5em}\texttt{n = n + 1} \quad \textit{\# On incrémente le compteur d'années}\\
-\texttt{print(n, K)} \quad \textit{\# On affiche l'année et le capital atteint}
-
-\medskip
+\textit{b) Lecture du programme Python.}
 
 \commentaireMarge{La boucle \texttt{while} répète les instructions tant que $K < 3\,000$ : elle s'arrête au premier rang où $K \geq 3\,000$.}
 
-La boucle simule l'évolution du capital année par année. Elle s'arrête dès que \texttt{K} atteint ou dépasse $3\,000$.
+La variable \texttt{K} contient le capital courant et \texttt{n} son rang. À chaque tour, le programme multiplie \texttt{K} par \texttt{1.05}, puis augmente \texttt{n} de $1$. La boucle simule ainsi l'évolution du capital année par année et s'arrête dès que \texttt{K} atteint ou dépasse $3\,000$.
 
 \textit{c) Trois premiers tours de boucle.}
 
@@ -87,9 +74,9 @@ Par essais successifs : $1{,}05^8 \approx 1{,}4775$ ($K_8 \approx 2\,955{,}00 < 
 
 \commentaireMarge{$n = 9$ est le plus petit rang pour lequel $K_n \geq 3\,000$.}
 
-Le programme affiche \texttt{9 3102.66...}
+Le programme affiche \texttt{n=9, K=3102.66}.
 
-Il faut donc \textbf{9 ans} pour que le capital de Kévin dépasse $3\,000$~\euro{}.
+Il faut donc \textbf{9 ans} pour que le capital de Kévin atteigne ou dépasse $3\,000$~\euro{}.
 
-\baremeIndicatif{Q1 : 2 pts (modeliser, raisonner : relation de récurrence 1 pt + terme général 1 pt) ; Q2 : 1 pt (calculer : $K_5$ arrondi) ; Q3a : 1 pt (raisonner : mise en inéquation) ; Q3b : 2 pts (programmer, communiquer : complétion et explication du programme) ; Q3c : 1 pt (calculer : trois tours de boucle) ; Q3d : 1 pt (calculer : résultat et interprétation)}
+\baremeIndicatif{Q1 : 2 pts (modeliser, raisonner : relation de récurrence 1 pt + terme général 1 pt) ; Q2 : 1 pt (calculer : $K_5$ arrondi) ; Q3a : 1 pt (raisonner : mise en inéquation) ; Q3b : 2 pts (programmer, communiquer : lecture et explication du programme) ; Q3c : 1 pt (calculer : trois tours de boucle) ; Q3d : 1 pt (calculer : résultat et interprétation)}
 \end{corrige}

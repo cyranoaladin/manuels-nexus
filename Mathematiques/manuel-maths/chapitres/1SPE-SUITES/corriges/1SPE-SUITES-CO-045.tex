@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-CO-045", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-045", "capacites_codes": ["C1", "C2", "C5"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-SUITES-CO-045", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-045", "capacites": ["1SPE-SUITES-C1", "1SPE-SUITES-C3", "1SPE-SUITES-C5", "1SPE-SUITES-C8"], "capacites_codes": ["C1", "C3", "C5", "C8"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import *
 % n = symbols('n', integer=True, nonnegative=True)
@@ -31,6 +31,7 @@
 % assert u_n_new.subs(n, 0) == 8
 % assert u_n_new.subs(n, 1) == 7
 % assert u_n_new.subs(n, 2) == Rational(13, 2)
+% assert simplify(u_n_new.subs(n, n+1) - u_n_new + q**n) == 0
 % END-VERIFY
 \begin{corrige}{1SPE-SUITES-EX-045}
 
@@ -46,7 +47,7 @@ u_2 = \frac{1}{2} \times \frac{11}{2} + 3 = \frac{11}{4} + 3 = \frac{23}{4} = 5{
 u_3 = \frac{1}{2} \times \frac{23}{4} + 3 = \frac{23}{8} + 3 = \frac{47}{8} = 5{,}875.
 \]
 
-Les valeurs $5 ; 5{,}5 ; 5{,}75 ; 5{,}875$ semblent croître et se rapprocher de $6$. La suite paraît converger vers $6$.
+Les valeurs $5 ; 5{,}5 ; 5{,}75 ; 5{,}875$ semblent croître et se rapprocher de $6$. On conjecture que les termes de la suite se rapprochent de $6$.
 
 \textbf{2. Point fixe.}
 
@@ -118,8 +119,12 @@ Ainsi :
 u_n = 6 + 2 \times \left(\frac{1}{2}\right)^n = 6 + \left(\frac{1}{2}\right)^{n-1}.
 \]
 
-\textit{Variations :} $u_{n+1} - u_n = -\left(\dfrac{1}{2}\right)^{n+1} < 0$ pour tout $n \in \mathbb{N}$.
+\textit{Variations :}
+\[
+u_{n+1}-u_n=-\left(\frac12\right)^n<0
+\]
+pour tout $n \in \mathbb{N}$.
 
-La suite est \textbf{strictement décroissante} (car $w_0 = 2 > 0$, donc $u_n > 6$ et la suite décroît vers $6$).
+La suite est \textbf{strictement décroissante}. Ses premiers termes restent au-dessus de $6$ et s'en rapprochent ; on conjecture ce comportement à partir de l'expression explicite. On conjecture que ses termes se rapprochent de $6$.
 
 \end{corrige}

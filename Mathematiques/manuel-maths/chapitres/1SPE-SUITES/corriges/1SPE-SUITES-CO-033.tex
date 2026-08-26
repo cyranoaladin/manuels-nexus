@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-CO-033", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-033", "capacites_codes": ["C5", "C6"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-SUITES-CO-033", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-033", "capacites": ["1SPE-SUITES-C2", "1SPE-SUITES-C5", "1SPE-SUITES-C6"], "capacites_codes": ["C2", "C5", "C6"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import symbols, simplify
 % n = symbols('n', integer=True, nonnegative=True)
@@ -85,7 +85,7 @@ Le plus petit entier satisfaisant cette condition est $n = 18$.
 
 \textit{Vérification :} $P_{17} = 2\,400 - 80 \times 17 = 2\,400 - 1\,360 = 1\,040 \geq 1\,000$ et $P_{18} = 2\,400 - 80 \times 18 = 2\,400 - 1\,440 = 960 < 1\,000$. \checkmark
 
-\commentaireMarge{La limite de $1\,000$ arbres est franchie à la $18^e$ année (à partir de 2020, cela correspond à l'année 2038).}
+\commentaireMarge{La limite de $1\,000$ arbres est franchie au rang $n=18$.}
 
 À partir de l'année $n = 18$, le nombre d'arbres est inférieur à $1\,000$. Le biologiste recommanderait d'arrêter l'exploitation avant cette date.
 

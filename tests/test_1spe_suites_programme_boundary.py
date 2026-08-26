@@ -499,7 +499,7 @@ def test_vehicle_values_rounding_and_sale_timing_are_exact() -> None:
 
 
 @pytest.mark.parametrize("path", (EX042, CO042))
-def test_telescoping_pair_has_real_c8_metadata(path: Path) -> None:
+def test_geometric_sum_pair_has_real_c8_metadata(path: Path) -> None:
     meta = _meta(path)
 
     assert set(meta["capacites_codes"]) == {"C4", "C5", "C8"}
@@ -510,28 +510,30 @@ def test_telescoping_pair_has_real_c8_metadata(path: Path) -> None:
     }
 
 
-def test_telescoping_question_and_solution_align_on_numeric_conjecture() -> None:
+def test_geometric_sum_question_and_solution_align_on_numeric_conjecture() -> None:
     exercise = _source(EX042)
     correction = _source(CO042)
 
-    assert all(token in exercise for token in (r"S_{10}", r"S_{100}", r"S_{1\,000}"))
+    assert all(token in exercise for token in (r"S_{10}", r"S_{30}", r"S_{100}"))
     assert "conjecturer" in exercise
     assert "En déduire sa nature" not in exercise
-    assert all(token in correction for token in (r"S_{10}", r"S_{100}", r"S_{1\,000}"))
-    assert "semble se rapprocher de $1$" in correction
+    assert all(token in correction for token in (r"S_{10}", r"S_{30}", r"S_{100}"))
+    assert "se rapprochent de $8$" in correction
     assert "On conjecture" in correction
+    assert "sans preuve formelle" in correction
 
 
-def test_telescoping_displayed_values_are_independently_computed() -> None:
+def test_geometric_sum_displayed_values_are_independently_computed() -> None:
     correction = _source(CO042)
-    exact = {n: Fraction(n, n + 1) for n in (10, 100, 1000)}
-
-    assert exact == {
-        10: Fraction(10, 11),
-        100: Fraction(100, 101),
-        1000: Fraction(1000, 1001),
+    exact = {
+        n: 8 * (1 - Fraction(3, 4) ** (n + 1))
+        for n in (10, 30, 100)
     }
-    assert all(value in correction for value in ("0{,}909", "0{,}990", "0{,}999"))
+
+    assert round(float(exact[10]), 3) == 7.662
+    assert round(float(exact[30]), 3) == 7.999
+    assert round(float(exact[100]), 3) == 8.000
+    assert all(value in correction for value in ("7{,}662", "7{,}999", "8{,}000"))
     assert r"\lim" not in _producer().strip_non_rendered_comments(correction)
 
 

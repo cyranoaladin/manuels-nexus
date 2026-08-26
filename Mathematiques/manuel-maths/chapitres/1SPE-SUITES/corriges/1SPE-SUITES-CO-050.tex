@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-CO-050", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-050", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-SUITES-CO-050", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-050", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C6", "1SPE-SUITES-C7"], "capacites_codes": ["C3", "C6", "C7"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % v = 500
 % n = 0
@@ -8,6 +8,8 @@
 % assert n == 19
 % assert abs(500 * 1.08**18 - 1998.01) < 0.01
 % assert abs(500 * 1.08**19 - 2157.85) < 0.01
+% assert abs(500 * 1.08**20 - 2330.48) < 0.01
+% assert abs(500 * 1.08**21 - 2516.92) < 0.01
 % END-VERIFY
 \begin{corrige}{1SPE-SUITES-EX-050}
 
@@ -21,21 +23,27 @@ v_n = 500 \times 1{,}08^n.
 \]
 
 \medskip
-\textbf{2. Analyse du programme.}
+\textbf{2. Analyse de la fonction.}
 
-La variable \texttt{v} est initialisée à $500$ (valeur de $v_0$) et \texttt{n} à $0$. La boucle \texttt{while v <= 2000} applique à chaque itération la relation $v \leftarrow 1{,}08 \times v$ et incrémente \texttt{n}. La boucle s'arrête dès que \texttt{v > 2000}, c'est-à-dire dès que $v_n$ dépasse $2\,000$~€.
+Les paramètres \texttt{valeur\_initiale}, \texttt{taux} et \texttt{seuil} permettent d'utiliser la même fonction pour plusieurs situations. La variable \texttt{valeur} contient le terme courant et \texttt{n} son rang. Tant que le seuil n'est pas strictement dépassé, la boucle calcule le terme suivant. La fonction renvoie le premier rang convenable et la valeur correspondante.
 
 \medskip
-\textbf{3. Calcul à la main.}
+Pour l'appel fourni, on vérifie la frontière :
 
 \[
-v_{17} = 500 \times 1{,}08^{17} \approx 1\,850{,}01 \text{ €}, \qquad v_{18} = 500 \times 1{,}08^{18} \approx 1\,998{,}01 \text{ €}, \qquad v_{19} = 500 \times 1{,}08^{19} \approx 2\,157{,}85 \text{ €}.
+v_{18} = 500 \times 1{,}08^{18} \approx 1\,998{,}01 \text{ €}, \qquad v_{19} = 500 \times 1{,}08^{19} \approx 2\,157{,}85 \text{ €}.
 \]
-On a bien $v_{18} \leqslant 2\,000 < v_{19}$, donc le programme affiche $n = 19$.
+On a bien $v_{18} \leqslant 2\,000 < v_{19}$, donc le programme affiche \texttt{n=19, v=2157.85}. Il faut attendre $19$ ans pour que le placement dépasse $2\,000$~€.
 
 \medskip
-\textbf{4. Interprétation.}
+\textbf{3. Adaptation au seuil de $2\,500$~\euro{}.}
 
-Il faut attendre $19$ ans pour que le placement dépasse $2\,000$~€.
+On remplace l'appel par \texttt{premier\_depassement(500, 0.08, 2500)}. Or
+\[
+v_{20}\approx 2\,330{,}48 \text{ €}\leq 2\,500 \text{ €}
+\quad\text{et}\quad
+v_{21}\approx 2\,516{,}92 \text{ €}>2\,500 \text{ €}.
+\]
+La fonction renvoie donc le rang $21$ et la valeur approchée $2\,516{,}92$~\euro{} : le seuil de $2\,500$~\euro{} est dépassé pour la première fois après $21$ ans.
 
 \end{corrige}

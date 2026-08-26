@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-EX-039", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C6"], "capacites_codes": ["C3", "C6"], "methodes": ["M3", "M6"], "parcours": 2, "competences": ["calculer", "raisonner", "modeliser"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"A0": {"domaine": "entier", "min": 1000, "max": 5000}, "taux": {"domaine": "rationnel", "contrainte": "0.03<=taux<=0.10"}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-039.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-039.tex", "status": "generated"}
+% META: {"id": "1SPE-SUITES-EX-039", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C2", "1SPE-SUITES-C3", "1SPE-SUITES-C6"], "capacites_codes": ["C2", "C3", "C6"], "methodes": ["M2", "M3", "M6"], "parcours": 2, "competences": ["calculer", "raisonner", "modeliser"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"A0": {"domaine": "entier", "min": 1000, "max": 5000}, "taux": {"domaine": "rationnel", "contrainte": "0.03<=taux<=0.10"}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-039.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-039.tex", "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational, symbols, simplify
 % n = symbols('n', integer=True, nonnegative=True)
@@ -46,7 +46,7 @@ Lucie hérite de $3\,000$~\euro{} et souhaite les placer. Deux offres s'offrent 
   \begin{enumerate}
     \item Calculer $A_{10}$ (arrondi au centime) et $B_{10}$. Quelle offre est plus avantageuse après $10$ ans ?
     \item Pour $n = 1$ et $n = 2$, comparer $A_n$ et $B_n$. Conjecturer à partir de quel rang l'offre A devient plus avantageuse.
-    \item Justifier qualitativement pourquoi, à long terme, une croissance géométrique dépasse toujours une croissance arithmétique.
+    \item Pour tout entier $n \geq 1$, comparer les accroissements $A_{n+1}-A_n$ et $B_{n+1}-B_n$. En déduire, dans ce cas précis, que $A_n>B_n$ pour tout entier $n \geq 2$.
   \end{enumerate}
 \end{enumerate}
 \end{exercice}

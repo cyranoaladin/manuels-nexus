@@ -97,12 +97,7 @@ Ainsi, pour tout $n \in \mathbb{N}$, $u_{n+1} > u_n$ : la suite $(u_n)$ est \tex
 
 \textbf{6. Programme Python.}
 
-\begin{lstlisting}[language=Python]
-for n in range(21):
-    u_n = n**2 + n + 1
-    d_n = 2*n + 2
-    print(f"n={n:2d} : u_n={u_n:4d}, d_n={d_n:2d}")
-\end{lstlisting}
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-047.py}
 
 Ce programme affiche pour chaque entier $n$ de $0$ à $20$ les valeurs de $u_n$ et $d_n$. On observe que les valeurs de $d_n$ sont $2, 4, 6, \ldots, 42$ (progression arithmétique de raison $2$) et que les $u_n$ sont strictement croissants.
 

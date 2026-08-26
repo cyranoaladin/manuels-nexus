@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-CO-035", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-035", "capacites_codes": ["C6", "C7"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-SUITES-CO-035", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-035", "capacites": ["1SPE-SUITES-C2", "1SPE-SUITES-C6", "1SPE-SUITES-C7"], "capacites_codes": ["C2", "C6", "C7"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import symbols
 % n = symbols('n', integer=True, nonneg=True)
@@ -14,9 +14,9 @@
 % # Somme S = N0 + N1 + ... + N11 : 12 termes, premier=1200, dernier=1750
 % S = 12 * (1200 + 1750) // 2
 % assert S == 17700
-% # Seuil N_n >= 2000 : 1200 + 50n >= 2000 => n >= 16
-% assert int(N.subs(n, 15)) == 1950
+% # Seuil strict N_n > 2000 : 1200 + 50n > 2000 => n > 16
 % assert int(N.subs(n, 16)) == 2000
+% assert int(N.subs(n, 17)) == 2050
 % END-VERIFY
 \begin{corrige}{1SPE-SUITES-EX-035}
 
@@ -45,17 +45,17 @@ L'année 2031 correspond à $n = 2031 - 2020 = 11$.
 \]
 
 \medskip
-\textbf{Question 3 — Calcul de $S = N_0 + N_1 + \cdots + N_{11}$.}
+\textbf{Question 3 — Somme des douze relevés de population.}
 
 La somme porte sur $12$ termes (de rang $0$ à $11$), de premier terme $N_0 = 1\,200$ et de dernier terme $N_{11} = 1\,750$.
 
-\commentaireMarge{Somme : $\frac{p \times (u_1+u_p)}{2}$.}
+\commentaireMarge{Formule indexée : $S = u_0 + \cdots + u_n = (n+1) \times \frac{u_0+u_n}{2}$.}
 
 \[
   S = \frac{12 \times (N_0 + N_{11})}{2} = \frac{12 \times (1\,200 + 1\,750)}{2} = \frac{12 \times 2\,950}{2} = 6 \times 2\,950 = 17\,700.
 \]
 
-La population cumulée sur les années 2020 à 2031 est de $17\,700$ habitants.
+La somme des douze relevés vaut $17\,700$. Elle ne représente ni la population présente à une date donnée ni un nombre d'habitants distincts : une même personne peut être comptée dans plusieurs relevés annuels.
 
 \medskip
 \textbf{Question 4 — Analyse du programme Python.}
@@ -65,7 +65,7 @@ La population cumulée sur les années 2020 à 2031 est de $17\,700$ habitants.
 \begin{itemize}
   \item \texttt{N = 1200} : initialisation de la population à $1\,200$ (valeur de $N_0$).
   \item \texttt{n = 0} : initialisation du compteur d'années à $0$.
-  \item \texttt{while N < 2000:} : on répète la boucle tant que la population est strictement inférieure à $2\,000$.
+  \item \texttt{while N <= 2000:} : on répète la boucle tant que la population n'a pas encore strictement dépassé $2\,000$.
   \item \texttt{N = N + 50} : on augmente la population de $50$ (passage à l'année suivante).
   \item \texttt{n = n + 1} : on incrémente le compteur d'années.
   \item \texttt{print("Annee :", 2020 + n)} : on affiche l'année calendaire.
@@ -74,26 +74,26 @@ La population cumulée sur les années 2020 à 2031 est de $17\,700$ habitants.
 
 \textit{b) Résultat sans exécution.}
 
-On cherche le plus petit entier $n$ tel que $N_n \geq 2\,000$ :
+On cherche le plus petit entier $n$ tel que $N_n > 2\,000$ :
 \[
-  1\,200 + 50n \geq 2\,000 \iff 50n \geq 800 \iff n \geq 16.
+  1\,200 + 50n > 2\,000 \iff 50n > 800 \iff n > 16.
 \]
 
-\commentaireMarge{Arrêt à $n=16$, affiche $2036$.}
+\commentaireMarge{Arrêt à $n=17$, affiche $2037$.}
 
-Le plus petit entier $n$ vérifiant cette condition est $n = 16$.
+Le plus petit entier $n$ vérifiant cette condition est $n = 17$.
 
-Le programme affiche : \texttt{Annee : 2036} et \texttt{Population : 2000}.
+Le programme affiche \texttt{Annee : 2037} puis \texttt{Population : 2050}.
 
 \textit{c) Vérification.}
 \[
-  N_{15} = 1\,200 + 50 \times 15 = 1\,200 + 750 = 1\,950 < 2\,000 \quad \text{(boucle continue)}.
+  N_{16} = 1\,200 + 50 \times 16 = 2\,000 \quad \text{(la boucle continue encore)}.
 \]
 \[
-  N_{16} = 1\,200 + 50 \times 16 = 1\,200 + 800 = 2\,000 \geq 2\,000 \quad \text{(boucle s'arrête)}. \checkmark
+  N_{17} = 1\,200 + 50 \times 17 = 2\,050 > 2\,000 \quad \text{(la boucle s'arrête)}. \checkmark
 \]
 
-La ville atteindra $2\,000$ habitants au début de l'année 2036.
+La ville dépassera $2\,000$ habitants au début de l'année 2037.
 
-\baremeIndicatif{Q1 : 2 pts (modeliser, raisonner : relation de récurrence 1 pt + terme général 1 pt) ; Q2 : 1 pt (calculer : $N_{11}$ avec identification du rang) ; Q3 : 2 pts (calculer : application formule somme arithmétique) ; Q4a : 2 pts (programmer, communiquer : explication ligne par ligne) ; Q4b : 2 pts (raisonner, calculer : résolution algébrique et résultat) ; Q4c : 1 pt (calculer : vérification $N_{15}$ et $N_{16}$)}
+\baremeIndicatif{Q1 : 2 pts (modeliser, raisonner : relation de récurrence 1 pt + terme général 1 pt) ; Q2 : 1 pt (calculer : $N_{11}$ avec identification du rang) ; Q3 : 2 pts (calculer : somme 1 pt + interprétation 1 pt) ; Q4a : 2 pts (programmer, communiquer : explication ligne par ligne) ; Q4b : 2 pts (raisonner, calculer : résolution algébrique et résultat) ; Q4c : 1 pt (calculer : vérification $N_{16}$ et $N_{17}$)}
 \end{corrige}

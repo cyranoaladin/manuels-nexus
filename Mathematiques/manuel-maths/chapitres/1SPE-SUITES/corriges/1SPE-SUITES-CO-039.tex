@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-CO-039", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-039", "capacites_codes": ["C3", "C6"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-SUITES-CO-039", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-039", "capacites": ["1SPE-SUITES-C2", "1SPE-SUITES-C3", "1SPE-SUITES-C6"], "capacites_codes": ["C2", "C3", "C6"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational, symbols, simplify
 % n = symbols('n', integer=True, nonnegative=True)
@@ -35,6 +35,11 @@
 % assert B1 == 3210
 % assert abs(A2 - 3434.70) < 0.01
 % assert B2 == 3420
+% # Preuve elementaire du cas precis : accroissement A > accroissement B des n=1
+% for k in range(1, 20):
+%     assert 0.07 * float(A.subs(n, k)) >= 224.70
+%     assert 0.07 * float(A.subs(n, k)) > 210
+%     assert float(A.subs(n, k + 1) - B.subs(n, k + 1)) > float(A.subs(n, k) - B.subs(n, k))
 % END-VERIFY
 \begin{corrige}{1SPE-SUITES-EX-039}
 
@@ -117,13 +122,25 @@ Pour $n = 1$, $A_1 = B_1 = 3\,210$~\euro{} : les deux offres sont \textbf{équiv
 
 Pour $n = 2$, $A_2 > B_2$ : l'offre A devient plus avantageuse. On conjecture que l'offre A est plus avantageuse pour tout $n \geq 2$.
 
-\textit{c) Justification qualitative.}
+\textit{c) Comparaison des accroissements dans ce cas précis.}
 
-Une croissance \textbf{géométrique} (intérêts composés) est exponentielle : les intérêts sont recalculés chaque année sur un capital de plus en plus élevé. Une croissance \textbf{arithmétique} (intérêts simples) est linéaire : les intérêts sont toujours calculés sur le même capital initial.
+Pour tout entier $n \geq 1$, la suite $(A_n)$ est croissante, donc
+$A_n \geq A_1=3\,210$. Par conséquent,
+\[
+A_{n+1}-A_n=0{,}07A_n
+\quad\text{et}\quad
+0{,}07A_n \geq 224{,}70 > 210=B_{n+1}-B_n.
+\]
 
-\commentaireMarge{À long terme, l'exponentielle domine le linéaire.}
+Posons $D_n=A_n-B_n$. L'inégalité précédente donne, pour tout $n\geq1$,
+\[
+A_{n+1}-B_{n+1}>A_n-B_n,
+\]
+donc $(D_n)$ est strictement croissante à partir du rang $1$. Or
+$D_1=0$ ; ainsi $D_n>0$ pour tout entier $n\geq2$, c'est-à-dire
+$A_n>B_n$ pour tout entier $n\geq2$.
 
-À long terme, la croissance exponentielle de l'offre A dépasse inévitablement la croissance linéaire de l'offre B, même si les premières années peuvent être comparables. C'est la propriété fondamentale qui distingue les intérêts composés des intérêts simples.
+\commentaireMarge{Cette preuve élémentaire porte uniquement sur les deux suites de l'exercice.}
 
-\baremeIndicatif{Q1a : 2 pts (raisonner, calculer : démonstration géométrique 1 pt + terme général 1 pt) ; Q1b : 1 pt (calculer : $A_5$) ; Q2a : 2 pts (raisonner, calculer : démonstration arithmétique 1 pt + terme général 1 pt) ; Q2b : 1 pt (calculer : $B_5$) ; Q3a : 2 pts (calculer, communiquer : $A_{10}$ et $B_{10}$ 1 pt + comparaison et conclusion 1 pt) ; Q3b : 2 pts (calculer : $A_1$, $B_1$, $A_2$, $B_2$ 1 pt + conjecture 1 pt) ; Q3c : 1 pt (communiquer : justification qualitative)}
+\baremeIndicatif{Q1a : 2 pts (raisonner, calculer : démonstration géométrique 1 pt + terme général 1 pt) ; Q1b : 1 pt (calculer : $A_5$) ; Q2a : 2 pts (raisonner, calculer : démonstration arithmétique 1 pt + terme général 1 pt) ; Q2b : 1 pt (calculer : $B_5$) ; Q3a : 2 pts (calculer, communiquer : $A_{10}$ et $B_{10}$ 1 pt + comparaison et conclusion 1 pt) ; Q3b : 2 pts (calculer : $A_1$, $B_1$, $A_2$, $B_2$ 1 pt + conjecture 1 pt) ; Q3c : 1 pt (raisonner : comparaison des accroissements et conclusion)}
 \end{corrige}
