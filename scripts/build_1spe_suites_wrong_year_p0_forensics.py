@@ -1218,13 +1218,16 @@ def render_markdown(payload: dict[str, Any]) -> str:
 
     lines.extend(("## Objets et claims", ""))
     for row in payload["objects"]:
+        official_atoms = ", ".join(
+            f"`{item}`" for item in row["official_atoms"]
+        ) or "aucun"
         lines.extend((
             f"### {row['object_id']}",
             "",
             f"- Chemin : `{row['path']}`",
             f"- Type / rôle : `{row['object_type']}` / `{row['student_teacher']}`",
             f"- Capacités : {', '.join(f'`{item}`' for item in row['capacities'])}",
-            f"- Atomes officiels : {', '.join(f'`{item}`' for item in row['official_atoms'])}",
+            f"- Atomes officiels : {official_atoms}",
             f"- Source : `{row['source_sha']}` / `{row['source_digest']}`",
             f"- Ensembles : {', '.join(f'`{item}`' for item in row['set_membership'])}",
             "",

@@ -83,7 +83,7 @@ Union physique exacte du checkpoint humain. Les occurrences voisines, notamment 
 - Chemin : `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-031.tex`
 - Type / rôle : `exercice` / `STUDENT_STATEMENT`
 - Capacités : `C3`, `C5`
-- Atomes officiels : 
+- Atomes officiels : aucun
 - Source : `efd544522252c48f50f7e9ede1e1e4c88374bd1e` / `sha256:0db334d0d3f2cd39865b645734072b1bb77fe0fd993c06cab8b6f2991b088bc6`
 - Ensembles : `LOG_OR_FORMAL_THRESHOLD_SET`
 
@@ -96,7 +96,7 @@ Union physique exacte du checkpoint humain. Les occurrences voisines, notamment 
 - Chemin : `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-031.tex`
 - Type / rôle : `corrige` / `TEACHER_CORRECTION`
 - Capacités : `C3`, `C5`
-- Atomes officiels : 
+- Atomes officiels : aucun
 - Source : `efd544522252c48f50f7e9ede1e1e4c88374bd1e` / `sha256:dc6789950a2919f4d0b7ff2359032509db897fe678626f34703bbf981d1fb49e`
 - Ensembles : `LOG_OR_FORMAL_THRESHOLD_SET`
 
@@ -144,7 +144,7 @@ Union physique exacte du checkpoint humain. Les occurrences voisines, notamment 
 - Chemin : `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-044.tex`
 - Type / rôle : `corrige` / `TEACHER_CORRECTION`
 - Capacités : `C3`, `C6`, `C7`
-- Atomes officiels : 
+- Atomes officiels : aucun
 - Source : `efd544522252c48f50f7e9ede1e1e4c88374bd1e` / `sha256:d852ba89c2893887b2f5491f370766a20a638cfa3c216601904ef00bea8252d7`
 - Ensembles : `LOG_OR_FORMAL_THRESHOLD_SET`
 
@@ -219,7 +219,7 @@ Union physique exacte du checkpoint humain. Les occurrences voisines, notamment 
 - Chemin : `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-049.tex`
 - Type / rôle : `corrige` / `TEACHER_CORRECTION`
 - Capacités : `C4`, `C6`, `C7`
-- Atomes officiels : 
+- Atomes officiels : aucun
 - Source : `efd544522252c48f50f7e9ede1e1e4c88374bd1e` / `sha256:047917751697bf7f87f3ede824dd5c007755c5522f1f7c4e48a413a0ede3ceae`
 - Ensembles : `LOG_OR_FORMAL_THRESHOLD_SET`, `FORMAL_LIMIT_CONVERGENCE_SET`
 
@@ -239,7 +239,7 @@ Union physique exacte du checkpoint humain. Les occurrences voisines, notamment 
 - Chemin : `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-027.tex`
 - Type / rôle : `corrige` / `TEACHER_CORRECTION`
 - Capacités : `C3`, `C4`
-- Atomes officiels : 
+- Atomes officiels : aucun
 - Source : `efd544522252c48f50f7e9ede1e1e4c88374bd1e` / `sha256:a1ad2299f2b4401a4d58900a2e761c64615fdfa0338b3af4a0eff38aa590b1e9`
 - Ensembles : `FORMAL_LIMIT_CONVERGENCE_SET`
 
@@ -298,7 +298,7 @@ Union physique exacte du checkpoint humain. Les occurrences voisines, notamment 
 - Chemin : `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-042.tex`
 - Type / rôle : `exercice` / `STUDENT_STATEMENT`
 - Capacités : `C4`, `C5`
-- Atomes officiels : 
+- Atomes officiels : aucun
 - Source : `efd544522252c48f50f7e9ede1e1e4c88374bd1e` / `sha256:a869b6388d90809fd16b5a080285479f0bc1da9b9e9ef0b7e9bc20c4b564c4b6`
 - Ensembles : `FORMAL_LIMIT_CONVERGENCE_SET`
 
@@ -313,7 +313,7 @@ Union physique exacte du checkpoint humain. Les occurrences voisines, notamment 
 - Chemin : `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-042.tex`
 - Type / rôle : `corrige` / `TEACHER_CORRECTION`
 - Capacités : `C4`, `C5`
-- Atomes officiels : 
+- Atomes officiels : aucun
 - Source : `efd544522252c48f50f7e9ede1e1e4c88374bd1e` / `sha256:4928effe3a95f01233c7d6874ac93d6875975df55f6a08d8a28c08f60b47e33b`
 - Ensembles : `FORMAL_LIMIT_CONVERGENCE_SET`
 

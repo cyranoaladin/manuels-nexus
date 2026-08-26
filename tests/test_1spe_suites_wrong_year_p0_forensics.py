@@ -776,3 +776,13 @@ def test_cli_has_fixed_repository_outputs_and_check_is_deterministic() -> None:
 
     payload = json.loads(JSON_OUTPUT.read_text(encoding="utf-8"))
     assert _producer().render_json(payload) == JSON_OUTPUT.read_text(encoding="utf-8")
+
+
+def test_rendered_and_generated_markdown_have_no_trailing_whitespace() -> None:
+    producer = _producer()
+    rendered = producer.render_markdown(producer.build_forensics())
+
+    assert all(line == line.rstrip() for line in rendered.splitlines())
+    assert "- Atomes officiels : aucun" in rendered
+    generated = MD_OUTPUT.read_text(encoding="utf-8")
+    assert all(line == line.rstrip() for line in generated.splitlines())
