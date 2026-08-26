@@ -28,6 +28,8 @@ ORDER = [  # les 9 temps du gabarit (docs/01 Partie 3)
     ("cours", "07_td*"), ("qcm", "*"), ("evaluations", "*"), ("remediation", "*"),
 ]
 CLI_VARIANTS = ("complet", "methodes", "parcours1", "remediation")
+CHAPTER_TOC_VARIANTS = ("complet", "parcours1")
+CHAPTER_TOC_BLOCK = "\\tableofcontents\n\\clearpage\n"
 PROVED_TOOLCHAIN_VARIABLES = (
     "TEXMFDIST",
     "TEXMFVAR",
@@ -584,6 +586,15 @@ def collect(chap_dir: Path, variant: str) -> list[Path]:
     return out
 
 
+def _configure_chapter_toc(master: str, *, variant: str) -> str:
+    """Keep the chapter TOC only for variants that provide its entries."""
+    if variant not in CLI_VARIANTS:
+        raise ValueError(f"variante chapitre invalide: {variant}")
+    if variant in CHAPTER_TOC_VARIANTS:
+        return master
+    return master.replace(CHAPTER_TOC_BLOCK, "", 1)
+
+
 def ouverture_depuis_contrat(chap_dir: Path) -> str:
     """Construit l'ouverture normalisée à partir du contrat du chapitre."""
     contrat = yaml.safe_load((chap_dir / "contrat.yaml").read_text(encoding="utf-8"))
@@ -632,6 +643,7 @@ def _build_chapter(chap: str, variant: str) -> Path:
     template_path = ROOT / "gabarits" / "chapitre_master.tex"
     contract_path = chap_dir / "contrat.yaml"
     master = template_path.read_text(encoding="utf-8")
+    master = _configure_chapter_toc(master, variant=variant)
     master = (master.replace("%%CONTENT%%", inputs)
                     .replace("%%OPENING%%", ouverture)
                     .replace("%%NIVEAU%%", niveau)

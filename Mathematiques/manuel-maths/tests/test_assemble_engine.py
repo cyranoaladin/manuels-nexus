@@ -273,6 +273,50 @@ def _pdf_trailer_id(pdf: Path) -> tuple[str, str]:
     return match.group(1).lower(), match.group(2).lower()
 
 
+def test_chapter_toc_is_only_emitted_for_variants_with_entries(tmp_path):
+    template = r"""\documentclass{article}
+\begin{document}
+\tableofcontents
+\clearpage
+%%CONTENT%%
+\end{document}
+"""
+    expectations = {
+        "complet": (r"\section{Cours}Contenu du cours.", True, 2),
+        "parcours1": (r"\section{Cours}Contenu du parcours.", True, 2),
+        "methodes": ("Contenu des méthodes.", False, 1),
+        "remediation": ("Contenu de remédiation.", False, 1),
+    }
+
+    for variant, (content, expects_toc, expected_pages) in expectations.items():
+        rendered = assemble._configure_chapter_toc(template, variant=variant)
+        assert (r"\tableofcontents" in rendered) is expects_toc
+        tex = tmp_path / f"{variant}.tex"
+        tex.write_text(rendered.replace("%%CONTENT%%", content), encoding="utf-8")
+        build = tmp_path / variant
+        build.mkdir()
+        for _ in range(2):
+            result = subprocess.run(
+                [
+                    "lualatex",
+                    "-interaction=nonstopmode",
+                    "-halt-on-error",
+                    f"-output-directory={build}",
+                    str(tex),
+                ],
+                cwd=tmp_path,
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+            assert result.returncode == 0, result.stdout + result.stderr
+
+        pdf = build / f"{variant}.pdf"
+        text = _pdf_text(pdf)
+        assert _pdf_pages(pdf) == expected_pages
+        assert (b"Contents" in text) is expects_toc
+
+
 def _neutralized_qdf(pdf: Path, output: Path) -> bytes:
     subprocess.run(
         ["qpdf", "--qdf", "--object-streams=disable", str(pdf), str(output)],
