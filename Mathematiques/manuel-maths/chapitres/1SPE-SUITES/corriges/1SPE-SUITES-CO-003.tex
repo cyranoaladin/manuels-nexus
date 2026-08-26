@@ -33,10 +33,13 @@ Donc $u_1 = 13$, $u_2 = 37$ et $u_3 = 109$.
 
 \commentaireMarge{Une suite est définie par récurrence si chaque terme est exprimé en fonction du (ou des) terme(s) précédent(s), et non directement en fonction de l'indice $n$.}
 
-\textbf{Question 2.} Cette suite est définie par \textbf{récurrence}, car chaque terme $u_{n+1}$ est calculé à partir du terme précédent $u_n$ via la relation $u_{n+1} = 3u_n - 2$ : on ne dispose pas d'une formule exprimant $u_n$ directement en fonction de $n$.
+\textbf{Question 2.} Cette suite est définie par une \textbf{relation de récurrence}, car chaque terme $u_{n+1}$ est calculé à partir du terme précédent $u_n$ via la relation $u_{n+1} = 3u_n - 2$ : on ne dispose pas d'une formule exprimant $u_n$ directement en fonction de $n$.
 
-\commentaireMarge{Le calcul d'un terme d'une suite récurrente nécessite impérativement la connaissance du terme précédent.}
+\commentaireMarge{Lorsqu'on utilise uniquement la relation de récurrence donnée, le calcul se fait de proche en proche.}
 
-\textbf{Question 3.} Oui, pour calculer $u_5$, il faut impérativement connaître $u_4$, car la relation de récurrence donne $u_5 = 3u_4 - 2$ : on ne peut pas calculer $u_5$ directement à partir de $n = 5$ sans connaître $u_4$ au préalable.
+\textbf{Question 3.} Avec la seule relation de récurrence donnée, oui : elle fournit
+$u_5 = 3u_4 - 2$, donc le calcul de proche en proche requiert $u_4$.
+Cela n'exclut pas qu'une expression explicite de $u_n$, si elle était établie par ailleurs,
+permette ensuite de calculer un terme à partir de son indice.
 
 \end{corrige}

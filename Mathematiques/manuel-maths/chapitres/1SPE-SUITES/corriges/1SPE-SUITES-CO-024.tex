@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-CO-024", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-024", "capacites_codes": ["C2", "C4"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-SUITES-CO-024", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-024", "capacites": ["1SPE-SUITES-C2", "1SPE-SUITES-C4", "1SPE-SUITES-C6"], "capacites_codes": ["C2", "C4", "C6"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import symbols, simplify, solve, ceiling
 % n = symbols('n', integer=True, nonnegative=True)
@@ -64,7 +64,7 @@ L'entreprise traite $134$ colis lors du $20^e$ jour.
 \medskip
 \textbf{Question 3 — Somme $S = u_0 + u_1 + \cdots + u_{19}$.}
 
-\commentaireMarge{Formule : $S = \frac{k \times (u_1+u_k)}{2}$.}
+\commentaireMarge{Formule indexée : $S_n = u_0 + \cdots + u_n = \frac{(n+1)(u_0+u_n)}{2}$.}
 
 La somme porte sur $20$ termes (de $n = 0$ à $n = 19$), de premier terme $u_0 = 20$ et de dernier terme $u_{19} = 134$ :
 \[
@@ -104,6 +104,8 @@ L'inéquation est vérifiée pour $n \geq 28$ (entier).
 \[
   S_{28} = 29 \times (20 + 3 \times 28) = 29 \times 104 = 3016 \geq 3000. \checkmark
 \]
+
+Ces deux valeurs consécutives prouvent que $n=28$ est le plus petit rang pour lequel $S_n \geq 3\,000$.
 
 L'entreprise aura traité au moins $3\,000$ colis au total après $\boxed{29}$ jours (à partir du rang $n = 28$, c'est-à-dire à la fin du $29^e$ jour).
 
