@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-CO-043", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-043", "capacites_codes": ["C5", "C6"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-SUITES-CO-043", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-043", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C5", "1SPE-SUITES-C6", "1SPE-SUITES-C8"], "capacites_codes": ["C3", "C5", "C6", "C8"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import *
 % n = symbols('n', integer=True, nonnegative=True)
@@ -14,6 +14,9 @@
 % assert u_n.subs(n, 1) == 680
 % assert u_n.subs(n, 2) == Rational(3720, 5)
 % assert u_n.subs(n, 3) == Rational(3976, 5)
+% assert u_n.subs(n, 5) == Rational(108616, 125)
+% assert u_n.subs(n, 10) == Rational(373847784, 390625)
+% assert u_n.subs(n, 20) == Rational(3797105079580584, 3814697265625)
 % for k in range(5):
 %     assert float(u_n.subs(n, k)) < float(u_n.subs(n, k+1))
 % assert limit(u_n, n, oo) == 1000
@@ -71,7 +74,13 @@ Donc $u_n < 1\,000$ pour tout $n$, ce qui entraîne $u_{n+1} - u_n = 200 - 0{,}2
 
 La suite $(u_n)$ est donc \textbf{strictement croissante} et \textbf{majorée par $1\,000$}.
 
-Comportement à long terme : $\left(\dfrac{4}{5}\right)^n \to 0$ quand $n \to +\infty$, donc $u_n \to 1\,000$. La population se stabilise à long terme autour de $\mathbf{1\,000}$ individus.
+À l'aide de $u_n = 1\,000 - 400\left(\dfrac45\right)^n$, on obtient :
+\[
+u_5 = 868{,}928 \approx 868{,}9, \qquad
+u_{10} \approx 957{,}1, \qquad
+u_{20} \approx 995{,}4.
+\]
+Ces valeurs restent inférieures à $1\,000$ et semblent s'en rapprocher. On conjecture que la population se stabilise à long terme autour de $1\,000$ individus.
 
 \textbf{5. Problème d'optimisation.}
 
@@ -80,5 +89,7 @@ Comportement à long terme : $\left(\dfrac{4}{5}\right)^n \to 0$ quand $n \to +\
 \textbf{b)} On veut $\ell(c) \geq 1\,500$, soit $5c \geq 1\,500$, donc $c \geq 300$.
 
 La valeur minimale de réintroduction est $\boxed{c = 300}$ individus par an.
+
+\baremeIndicatif{Q1 : 1 pt ; Q2 : 1,5 pt ; Q3 : 2 pts ; Q4 : 2 pts ; Q5 : 1,5 pt.}
 
 \end{corrige}

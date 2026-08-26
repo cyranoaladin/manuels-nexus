@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-CO-040", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-040", "capacites_codes": ["C1", "C5"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-SUITES-CO-040", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-040", "capacites": ["1SPE-SUITES-C1", "1SPE-SUITES-C5", "1SPE-SUITES-C8"], "capacites_codes": ["C1", "C5", "C8"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import *
 % u0 = Rational(1, 1)
@@ -39,7 +39,7 @@ u_3 = \frac{\left(\frac{7}{4}\right)^2 + 3}{2 \times \frac{7}{4}} = \frac{\frac{
 
 \textbf{2. Conjecture.}
 
-On observe : $u_1 = 2 \approx 2{,}000$, $u_2 = 1{,}750$, $u_3 \approx 1{,}732$. La suite semble \textbf{décroissante} pour $n \geq 1$ et paraît converger vers $\sqrt{3} \approx 1{,}732$.
+On observe : $u_1 = 2 \approx 2{,}000$, $u_2 = 1{,}750$, $u_3 \approx 1{,}732$. Les valeurs semblent se rapprocher de $\sqrt{3} \approx 1{,}732$ tout en décroissant pour $n \geq 1$. On conjecture que ce comportement se poursuit.
 
 \textbf{3. Point fixe et interprétation géométrique.}
 
@@ -47,7 +47,7 @@ On observe : $u_1 = 2 \approx 2{,}000$, $u_2 = 1{,}750$, $u_3 \approx 1{,}732$. 
 
 L'équation $\ell = \dfrac{\ell^2 + 3}{2\ell}$ (avec $\ell > 0$) donne $2\ell^2 = \ell^2 + 3$, soit $\ell^2 = 3$, donc $\ell = \sqrt{3}$.
 
-\textit{Interprétation.} La fonction $f(x) = \dfrac{x^2+3}{2x}$ est la moyenne arithmétique de $x$ et $\dfrac{3}{x}$, qui est la méthode de Héron pour approcher $\sqrt{3}$. La suite converge vers le point fixe $\sqrt{3}$ de $f$.
+\textit{Interprétation.} Dans un repère, $\sqrt{3}$ est l'abscisse de l'intersection positive de la courbe de $f(x) = \dfrac{x^2+3}{2x}$ avec la droite $y=x$. L'itération de Héron fournit ici des valeurs cohérentes avec la conjecture d'un rapprochement vers ce point fixe, sans la prouver.
 
 \textbf{4. Signe de $u_{n+1} - \sqrt{3}$.}
 
@@ -76,14 +76,12 @@ Donc $(u_n)_{n \geq 1}$ est décroissante.
 
 \textbf{6. Conclusion.}
 
-\commentaireMarge{Utiliser le théorème des suites monotones bornées.}
-
-La suite $(u_n)_{n \geq 1}$ est décroissante et minorée par $\sqrt{3}$ (question 4). D'après le théorème de convergence des suites monotones bornées, elle converge vers une limite $\ell \geq \sqrt{3}$.
-
-Si $(u_n)$ converge vers $\ell$, alors par passage à la limite dans la relation de récurrence :
+La question 4 donne $u_{n+1} \geq \sqrt{3}$ et la question 5 donne $u_{n+1} \leq u_n$ pour tout entier $n \geq 1$. Ainsi,
 \[
-\ell = \frac{\ell^2 + 3}{2\ell} \implies \ell = \sqrt{3} \quad (\ell > 0).
+\boxed{\sqrt{3} \leq u_{n+1} \leq u_n.}
 \]
-La conjecture est donc justifiée : $(u_n)$ converge vers $\sqrt{3}$.
+Les termes restent donc au-dessus de $\sqrt{3}$ et la suite est décroissante. Ces propriétés sont compatibles avec la conjecture de la question 2, sans établir formellement une limite.
+
+\baremeIndicatif{Q1 : 1 pt ; Q2 : 1 pt ; Q3 : 1 pt ; Q4 : 2 pts ; Q5 : 2 pts ; Q6 : 1 pt.}
 
 \end{corrige}

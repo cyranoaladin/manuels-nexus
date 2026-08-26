@@ -19,11 +19,26 @@ EX038 = CHAPTER / "exercices" / "1SPE-SUITES-EX-038.tex"
 CO038 = CHAPTER / "corriges" / "1SPE-SUITES-CO-038.tex"
 EX042 = CHAPTER / "exercices" / "1SPE-SUITES-EX-042.tex"
 CO042 = CHAPTER / "corriges" / "1SPE-SUITES-CO-042.tex"
-EXPECTED_PILOT_RELATIVE_PATHS = (
+EXPECTED_P0_RELATIVE_PATHS = (
+    "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-026.tex",
+    "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-026.tex",
+    "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-027.tex",
+    "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-031.tex",
+    "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-031.tex",
+    "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-037.tex",
     "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-038.tex",
     "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-038.tex",
+    "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-040.tex",
+    "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-040.tex",
     "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-042.tex",
     "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-042.tex",
+    "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-043.tex",
+    "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-043.tex",
+    "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-044.tex",
+    "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-046.tex",
+    "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-048.tex",
+    "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-048.tex",
+    "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-049.tex",
 )
 
 
@@ -52,40 +67,58 @@ def _codes(findings: list[dict]) -> set[str]:
     return {finding["code"] for finding in findings}
 
 
-def test_canonical_pilot_scan_is_clean() -> None:
+def test_canonical_p0_scope_scan_is_clean() -> None:
     producer = _producer()
 
-    assert producer.scan_canonical_pilot() == []
+    assert producer.scan_canonical_p0_scope() == []
 
 
-def test_canonical_pilot_scope_is_the_exact_external_four_path_contract() -> None:
+def test_canonical_p0_scope_is_the_exact_external_nineteen_path_contract() -> None:
     producer = _producer()
     relative_paths = tuple(
         path.resolve().relative_to(ROOT.resolve()).as_posix()
-        for path in producer.CANONICAL_PILOT_PATHS
+        for path in producer.CANONICAL_P0_PATHS
     )
 
-    assert relative_paths == EXPECTED_PILOT_RELATIVE_PATHS
+    assert relative_paths == EXPECTED_P0_RELATIVE_PATHS
+    assert len(relative_paths) == 19
 
 
 @pytest.mark.parametrize("mutation", ("omission", "addition"))
-def test_canonical_pilot_rejects_scope_mutations(
+def test_canonical_p0_rejects_scope_mutations(
     monkeypatch: pytest.MonkeyPatch, mutation: str
 ) -> None:
     producer = _producer()
-    paths = list(producer.CANONICAL_PILOT_PATHS)
+    paths = list(producer.CANONICAL_P0_PATHS)
     if mutation == "omission":
         paths.pop()
     else:
         paths.append(SCRIPT)
-    monkeypatch.setattr(producer, "CANONICAL_PILOT_PATHS", tuple(paths))
+    monkeypatch.setattr(producer, "CANONICAL_P0_PATHS", tuple(paths))
 
-    with pytest.raises(ValueError, match="canonical pilot scope mismatch"):
-        producer.scan_canonical_pilot()
+    with pytest.raises(ValueError, match="canonical P0 scope mismatch"):
+        producer.scan_canonical_p0_scope()
 
 
-def test_cli_success_count_is_not_hardcoded() -> None:
-    assert "clean (4 files)" not in _source(SCRIPT)
+def test_cli_success_count_is_derived_from_validated_scope(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    producer = _producer()
+    paths = (tmp_path / "one.tex", tmp_path / "two.tex")
+    monkeypatch.setattr(producer, "validated_canonical_p0_paths", lambda: paths)
+
+    def clean_scan(observed_paths):
+        assert tuple(observed_paths) == paths
+        return []
+
+    monkeypatch.setattr(producer, "scan_paths", clean_scan)
+
+    assert producer.main() == 0
+    assert capsys.readouterr().out == (
+        "PASS: 1SPE-SUITES P0 programme boundary clean (2 files)\n"
+    )
 
 
 def test_non_rendered_comments_and_internal_oracles_are_ignored() -> None:
@@ -112,7 +145,14 @@ La baisse est de 12\,\% et le seuil numérique vaut 9\,000 euros.
         "Les valeurs semblent se rapprocher de 1.",
         "On conjecture que les termes se rapprochent de 1 lorsque n devient grand.",
         "On conjecture que la suite converge vers 1.",
+        r"On conjecture que la suite est \textbf{convergente}.",
         "La suite semble converger vers 1.",
+        "La suite paraît converger vers 6.",
+        r"Un élève conjecture que $(u_n)$ tend vers 6.",
+        "Ces valeurs semblent-elles converger ?",
+        "Ce raisonnement n'invoque aucun théorème de convergence.",
+        "On n'utilise ni limite formelle ni théorème de convergence.",
+        r"La complexité est en $O(\log n)$ ; calculer le coût asymptotique.",
         "La limite de vitesse autorisée est un seuil contextuel.",
         "En passant du rang n vers n+1, on multiplie par 0,88.",
     ),
@@ -145,6 +185,10 @@ def test_allowed_first_spe_wording_is_not_a_raw_word_ban(allowed: str) -> None:
             "FORMAL_CONVERGENCE_THEOREM",
         ),
         (
+            "Une suite croissante et majorée converge.",
+            "FORMAL_CONVERGENCE_THEOREM",
+        ),
+        (
             "D'après le théorème de convergence monotone, la suite admet une limite.",
             "FORMAL_CONVERGENCE_THEOREM",
         ),
@@ -162,6 +206,26 @@ def test_allowed_first_spe_wording_is_not_a_raw_word_ban(allowed: str) -> None:
         ),
         (
             "La suite converge vers 1.",
+            "FORMAL_CONVERGENCE_THEOREM",
+        ),
+        (
+            "La suite est convergente.",
+            "FORMAL_CONVERGENCE_THEOREM",
+        ),
+        (
+            "La suite admet pour limite 1.",
+            "FORMAL_CONVERGENCE_THEOREM",
+        ),
+        (
+            "On démontre la convergence de la suite.",
+            "FORMAL_CONVERGENCE_THEOREM",
+        ),
+        (
+            "On prend la limite dans la relation de récurrence.",
+            "FORMAL_PASSAGE_TO_LIMIT",
+        ),
+        (
+            r"La suite est \textbf{convergente} vers 1.",
             "FORMAL_CONVERGENCE_THEOREM",
         ),
         (
@@ -189,6 +253,18 @@ def test_allowed_first_spe_wording_is_not_a_raw_word_ban(allowed: str) -> None:
         ),
         (
             "La suite a pour limite 1.",
+            "FORMAL_CONVERGENCE_THEOREM",
+        ),
+        (
+            "La suite possède une limite égale à 1.",
+            "FORMAL_CONVERGENCE_THEOREM",
+        ),
+        (
+            "La suite a une limite égale à 1.",
+            "FORMAL_CONVERGENCE_THEOREM",
+        ),
+        (
+            "On prouve que la suite se rapproche de 1.",
             "FORMAL_CONVERGENCE_THEOREM",
         ),
         (
@@ -368,4 +444,4 @@ def test_cli_is_green_and_deterministic() -> None:
     assert first.returncode == 0, first.stdout + first.stderr
     assert second.returncode == 0, second.stdout + second.stderr
     assert first.stdout == second.stdout
-    assert first.stdout == "PASS: 1SPE-SUITES pilot programme boundary clean (4 files)\n"
+    assert first.stdout == "PASS: 1SPE-SUITES P0 programme boundary clean (19 files)\n"

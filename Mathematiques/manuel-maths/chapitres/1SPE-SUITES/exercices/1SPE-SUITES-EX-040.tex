@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-EX-040", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C1", "1SPE-SUITES-C5"], "capacites_codes": ["C1", "C5"], "methodes": ["M1", "M5"], "parcours": 3, "competences": ["chercher", "raisonner", "communiquer"], "duree_min": 30, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"a": 3, "u0": 1}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-040.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-040.tex", "status": "generated"}
+% META: {"id": "1SPE-SUITES-EX-040", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C1", "1SPE-SUITES-C5", "1SPE-SUITES-C8"], "capacites_codes": ["C1", "C5", "C8"], "methodes": ["M1", "M5"], "parcours": 3, "competences": ["chercher", "raisonner", "communiquer"], "duree_min": 30, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"a": 3, "u0": 1}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-040.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-040.tex", "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import *
 % n = symbols('n', integer=True, nonnegative=True)
@@ -32,7 +32,7 @@ On considère la suite $(u_n)$ définie par $u_0 = 1$ et, pour tout entier natur
 \begin{enumerate}
   \item Calculer $u_1$, $u_2$ et $u_3$ (on donnera des valeurs exactes sous forme de fractions).
 
-  \item \textbf{Conjecture.} À partir des valeurs calculées, émettre une conjecture sur le comportement de la suite $(u_n)$ pour $n \geq 1$ : la suite semble-t-elle monotone ? Vers quelle valeur semble-t-elle converger ?
+  \item \textbf{Conjecture.} À partir des valeurs calculées, émettre une conjecture sur le comportement de la suite $(u_n)$ pour $n \geq 1$ : la suite semble-t-elle monotone ? De quelle valeur les termes semblent-ils se rapprocher ?
 
   \item On pose $\ell$ un réel vérifiant $\ell = \dfrac{\ell^2 + 3}{2\ell}$. Résoudre cette équation pour $\ell > 0$ et interpréter géométriquement le résultat.
 
@@ -40,6 +40,10 @@ On considère la suite $(u_n)$ définie par $u_0 = 1$ et, pour tout entier natur
 
   \item Montrer que, pour tout entier $n \geq 1$, la suite $(u_n)$ est décroissante.
 
-  \item \textbf{Conclusion.} Justifier rigoureusement la conjecture émise à la question 2.
+  \item \textbf{Conclusion.} À partir des questions 4 et 5, établir que, pour tout entier $n \geq 1$,
+  \[
+    \sqrt{3} \leq u_{n+1} \leq u_n.
+  \]
+  Expliquer en quoi cet encadrement renforce la conjecture de la question 2, sans constituer une preuve de limite.
 \end{enumerate}
 \end{exercice}

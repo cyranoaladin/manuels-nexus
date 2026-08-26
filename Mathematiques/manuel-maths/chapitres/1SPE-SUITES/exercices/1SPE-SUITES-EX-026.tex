@@ -14,6 +14,8 @@
 % # Somme u0 + ... + u7 : 8 termes, q=2
 % S = u0 * (1 - q**8) / (1 - q)
 % assert S == 765
+% assert u.subs(n, 5) == 96
+% assert u.subs(n, 6) == 192
 % END-VERIFY
 \begin{exercice}{1SPE-SUITES-EX-026}{2}{22}
 Une culture bactérienne contient $3$ millions de bactéries à l'instant initial ($n = 0$). Toutes les heures, la population double.
@@ -25,8 +27,8 @@ On note $u_n$ le nombre de millions de bactéries après $n$ heures.
 
   \item Exprimer $u_n$ en fonction de $n$.
 
-  \item Calculer la somme $S = u_0 + u_1 + \cdots + u_7$, qui représente le nombre total (en millions) de bactéries accumulées sur les $8$ premières heures.
+  \item On additionne les huit relevés de population effectués aux instants $0$ h, $1$ h, $\ldots$, $7$ h. Calculer la somme $S = u_0 + u_1 + \cdots + u_7$ de ces relevés, exprimée en millions.
 
-  \item Déterminer à partir de quelle heure la population dépasse $100$ millions de bactéries. (On pourra utiliser $\log_{10}(2) \approx 0{,}301$.)
+  \item À l'aide d'un tableau de valeurs ou d'essais successifs, calculer $u_5$ et $u_6$, puis déterminer le plus petit entier $n$ tel que $u_n > 100$. Interpréter le rang obtenu en heures.
 \end{enumerate}
 \end{exercice}

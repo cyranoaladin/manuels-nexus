@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-CO-026", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-026", "capacites_codes": ["C3", "C4"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-SUITES-CO-026", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-026", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C4"], "capacites_codes": ["C3", "C4"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational, simplify, symbols, log
 % n = symbols('n', integer=True, nonnegative=True)
@@ -30,15 +30,9 @@ La population double toutes les heures, donc :
   u_{n+1} = 2 \, u_n, \quad u_0 = 3.
 \]
 
-\textit{Démonstration :} Pour tout $n \in \mathbb{N}$, $u_n = 3 \times 2^n > 0$, donc $u_n
-\neq 0$ et on peut calculer le quotient :
-\[
-  \frac{u_{n+1}}{u_n} = \frac{2\,u_n}{u_n} = 2.
-\]
+La relation $u_{n+1} = 2\,u_n$ est, par définition, celle d'une suite géométrique. Ainsi, $(u_n)$ est géométrique de raison $q = 2$ et de premier terme $u_0 = 3$.
 
-\commentaireMarge{Les termes sont non nuls et le quotient $\frac{u_{n+1}}{u_n}$ est constant, égal à $2$ : la caractérisation par quotient s'applique.}
-
-Ce quotient est constant. Donc $(u_n)$ est une suite géométrique de raison $q = 2$ et de premier terme $u_0 = 3$.
+\commentaireMarge{La relation de récurrence suffit : il n'est pas nécessaire de calculer un quotient pour reconnaître ici la suite géométrique.}
 
 \medskip
 \textbf{Question 2 — Expression de $u_n$ en fonction de $n$.}
@@ -60,7 +54,7 @@ La somme porte sur $8$ termes (de rang $0$ à $7$) d'une suite géométrique de 
   S = u_0 \, \frac{q^8 - 1}{q - 1} = 3 \times \frac{2^8 - 1}{2 - 1} = 3 \times \frac{256 - 1}{1} = 3 \times 255 = 765.
 \]
 
-La somme totale est $765$ millions de bactéries accumulées sur les $8$ premières heures.
+La somme des huit relevés effectués aux instants $0$ h à $7$ h vaut donc $765$ millions. Elle ne représente pas une population présente à un instant donné.
 
 \medskip
 \textbf{Question 4 — Heure à partir de laquelle la population dépasse $100$ millions.}
@@ -70,26 +64,12 @@ On cherche le plus petit entier $n$ tel que $u_n > 100$ :
   3 \times 2^n > 100 \iff 2^n > \frac{100}{3} \approx 33{,}33.
 \]
 
-On applique $\log_{10}$ aux deux membres (fonction croissante) :
-\[
-  n \, \log_{10}(2) > \log_{10}\!\left(\frac{100}{3}\right) = \log_{10}(100) - \log_{10}(3) = 2 - \log_{10}(3).
-\]
-
-\commentaireMarge{$\log_{10}(3) \approx 1 - \log_{10}(2) \times \ldots$ On peut utiliser directement $\log_{10}(100/3) \approx \log_{10}(33{,}33) \approx 1{,}523$.}
-
-Avec $\log_{10}(2) \approx 0{,}301$ :
-\[
-  n > \frac{\log_{10}(100/3)}{\log_{10}(2)} \approx \frac{1{,}523}{0{,}301} \approx 5{,}06.
-\]
-
-Le plus petit entier satisfaisant cette condition est $n = 6$.
-
-\textit{Vérification :}
+La suite est strictement croissante puisque son premier terme est positif et sa raison vaut $2>1$. Un tableau de valeurs ou des essais successifs donnent :
 \[
   u_5 = 3 \times 2^5 = 3 \times 32 = 96 \leq 100, \quad u_6 = 3 \times 2^6 = 3 \times 64 = 192 > 100. \checkmark
 \]
 
-À partir de la $\boxed{6^e}$ heure, la population dépasse $100$ millions de bactéries.
+Ces deux valeurs consécutives prouvent que le plus petit rang recherché est $n=6$. La population dépasse donc pour la première fois $100$ millions au bout de $6$ heures.
 
-\baremeIndicatif{Q1 : 2 pts (raisonner : relation de récurrence 1 pt + démonstration géométrique 1 pt) ; Q2 : 1 pt (calculer : terme général) ; Q3 : 2 pts (calculer : application formule somme géométrique) ; Q4 : 3 pts (raisonner, calculer : mise en inéquation 1 pt + passage au log 1 pt + conclusion et vérification 1 pt)}
+\baremeIndicatif{Q1 : 2 pts (raisonner : relation de récurrence 1 pt + identification géométrique, raison et premier terme 1 pt) ; Q2 : 1 pt (calculer : terme général) ; Q3 : 2 pts (calculer : huit termes et formule de somme 1 pt + résultat et interprétation des relevés 1 pt) ; Q4 : 3 pts (raisonner, calculer : mise en inéquation 1 pt + recherche numérique 1 pt + double frontière et interprétation horaire 1 pt)}
 \end{corrige}

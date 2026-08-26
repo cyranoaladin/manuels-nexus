@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the 1SPE-SUITES pilot for rendered Terminale-only reasoning."""
+"""Check the exact 1SPE-SUITES P0 scope for rendered Terminale-only reasoning."""
 
 from __future__ import annotations
 
@@ -11,15 +11,32 @@ from typing import Iterable
 
 ROOT = Path(__file__).resolve().parents[1]
 CHAPTER = ROOT / "Mathematiques" / "manuel-maths" / "chapitres" / "1SPE-SUITES"
-CANONICAL_PILOT_RELATIVE_PATHS = (
+CANONICAL_P0_RELATIVE_PATHS = (
+    Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-026.tex"),
+    Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-026.tex"),
+    Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-027.tex"),
+    Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-031.tex"),
+    Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-031.tex"),
+    Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-037.tex"),
     Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-038.tex"),
     Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-038.tex"),
+    Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-040.tex"),
+    Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-040.tex"),
     Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-042.tex"),
     Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-042.tex"),
+    Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-043.tex"),
+    Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-043.tex"),
+    Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-044.tex"),
+    Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-046.tex"),
+    Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-048.tex"),
+    Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-048.tex"),
+    Path("Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-049.tex"),
 )
-CANONICAL_PILOT_PATHS = tuple(ROOT / path for path in CANONICAL_PILOT_RELATIVE_PATHS)
+CANONICAL_P0_PATHS = tuple(ROOT / path for path in CANONICAL_P0_RELATIVE_PATHS)
 
-LOG_TOKEN = r"(?:\\(?:log|ln)(?![A-Za-z])|\blogarithm(?:e|ique)?s?\b)"
+LOG_TOKEN = (
+    r"(?:(?<!O\()\\(?:log|ln)(?![A-Za-z])|\blogarithm(?:e|ique)?s?\b)"
+)
 SOLVING_CONTEXT = (
     r"(?:résoud\w*|résolution|appliqu\w*|utilis\w*|calcul\w*|détermin\w*|"
     r"rang|inéquation|équation|deux membres|division|passage)"
@@ -34,18 +51,31 @@ FORMAL_IMPLICATION_PATTERNS = (
         r"(?:converg\w*|admet une limite)",
         re.IGNORECASE,
     ),
+    re.compile(
+        r"\bune suite.{0,40}"
+        r"(?:(?:croissante|décroissante|monotone).{0,80}"
+        r"(?:majorée|minorée|bornée)|(?:majorée|minorée|bornée).{0,80}"
+        r"(?:croissante|décroissante|monotone))"
+        r".{0,80}(?:converg\w*|admet une limite)",
+        re.IGNORECASE,
+    ),
     re.compile(r"théorème.{0,100}(?:convergence|converg\w*)", re.IGNORECASE),
 )
 
-SEQUENCE_SUBJECT = r"(?:la suite|elle|\$[^$]+\$|[A-Za-z][A-Za-z0-9_{}]*)"
+SEQUENCE_SUBJECT = (
+    r"(?:la suite|elle|\$[^$]+\$|[A-Za-z][A-Za-z0-9]*_\{?n\}?)"
+)
 FORMAL_DIRECT_ASSERTION_PATTERNS = (
     re.compile(
-        rf"{SEQUENCE_SUBJECT}\s+(?:semble\s+)?"
-        r"(?:converg\w*(?:\s+vers)?|tend\w*\s+vers)\b",
+        rf"{SEQUENCE_SUBJECT}\s+(?:"
+        r"(?:semble\s+)?converg\w*(?:\s+vers)?|"
+        r"est\s+converg\w*(?:\s+vers)?|"
+        r"(?:semble\s+)?tend\w*\s+vers)\b",
         re.IGNORECASE,
     ),
     re.compile(
-        rf"{SEQUENCE_SUBJECT}\s+(?:semble\s+)?admet une limite\b",
+        rf"{SEQUENCE_SUBJECT}\s+(?:semble\s+)?"
+        r"admet\s+(?:une limite|pour limite)\b",
         re.IGNORECASE,
     ),
     re.compile(
@@ -54,6 +84,20 @@ FORMAL_DIRECT_ASSERTION_PATTERNS = (
     ),
     re.compile(
         rf"{SEQUENCE_SUBJECT}\s+(?:semble\s+)?a pour limite\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        rf"{SEQUENCE_SUBJECT}\s+(?:possède|a)\s+une limite\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        rf"(?:on\s+prouve|on\s+démontre|on\s+établit)\s+que\s+"
+        rf"{SEQUENCE_SUBJECT}\s+se rapproche\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        rf"(?:on\s+)?(?:prouve|démontre|établit)\s+"
+        rf"(?:la\s+)?convergence\s+de\s+{SEQUENCE_SUBJECT}\b",
         re.IGNORECASE,
     ),
     re.compile(
@@ -88,11 +132,26 @@ FORBIDDEN_PATTERNS = {
             r"(?:en faisant tendre|on fait tendre).{0,80}vers",
             re.IGNORECASE,
         ),
+        re.compile(
+            r"(?:on\s+)?(?:prend|prendre|prenons)\s+la limite\s+"
+            r"(?:dans|des deux membres|de chaque membre)\b",
+            re.IGNORECASE,
+        ),
     ),
 }
 
+INLINE_FORMATTING_PATTERN = re.compile(
+    r"\\(?:textbf|textit|emph)\s*\{([^{}]*)\}",
+)
+
 DIRECT_CONJECTURE_PREFIX = re.compile(
-    r"(?:on conjecture|conjecturer)\s+que\s*$", re.IGNORECASE
+    r"(?:on|(?:un|une|l['’])\s+[\w-]+)\s+conjecture\s+que\s*$"
+    r"|conjecturer\s+que\s*$",
+    re.IGNORECASE,
+)
+EXPLICIT_NEGATION_PREFIX = re.compile(
+    r"\bn['’][\w-]+\s+(?:aucun|ni)\b[^.!?;:]{0,120}$",
+    re.IGNORECASE,
 )
 
 
@@ -100,6 +159,10 @@ def _is_directly_conjectural(source: str, match: re.Match[str]) -> bool:
     if re.search(r"\bsemble\b", match.group(), re.IGNORECASE):
         return True
     return DIRECT_CONJECTURE_PREFIX.search(source[: match.start()]) is not None
+
+
+def _is_explicitly_negated(source: str, match: re.Match[str]) -> bool:
+    return EXPLICIT_NEGATION_PREFIX.search(source[: match.start()]) is not None
 
 
 def _strip_comment(line: str) -> str:
@@ -122,11 +185,22 @@ def strip_non_rendered_comments(source: str) -> str:
     return "\n".join(_strip_comment(line) for line in source.splitlines())
 
 
+def normalize_inline_formatting(source: str) -> str:
+    """Unwrap simple inline emphasis without changing rendered wording."""
+
+    normalized = source
+    while True:
+        updated, replacements = INLINE_FORMATTING_PATTERN.subn(r"\1", normalized)
+        if replacements == 0:
+            return normalized
+        normalized = updated
+
+
 def scan_text(source: str, *, path: str = "<memory>") -> list[dict[str, object]]:
     """Return deterministic programme-boundary findings for rendered text."""
 
     findings: list[dict[str, object]] = []
-    rendered = strip_non_rendered_comments(source)
+    rendered = normalize_inline_formatting(strip_non_rendered_comments(source))
     fragments: list[str] = []
     fragment_lines: list[int] = []
     for line_number, line in enumerate(rendered.splitlines(), start=1):
@@ -145,6 +219,12 @@ def scan_text(source: str, *, path: str = "<memory>") -> list[dict[str, object]]
     for code, patterns in FORBIDDEN_PATTERNS.items():
         for pattern in patterns:
             for match in pattern.finditer(normalized_source):
+                if (
+                    code == "FORMAL_CONVERGENCE_THEOREM"
+                    and match.group().casefold().startswith("théorème")
+                    and _is_explicitly_negated(normalized_source, match)
+                ):
+                    continue
                 if (
                     code == "FORMAL_CONVERGENCE_THEOREM"
                     and pattern in FORMAL_DIRECT_ASSERTION_PATTERNS
@@ -208,20 +288,20 @@ def scan_paths(paths: Iterable[Path]) -> list[dict[str, object]]:
     )
 
 
-def validated_canonical_pilot_paths() -> tuple[Path, ...]:
-    expected = tuple((ROOT / path).resolve() for path in CANONICAL_PILOT_RELATIVE_PATHS)
-    actual = tuple(Path(path).resolve() for path in CANONICAL_PILOT_PATHS)
+def validated_canonical_p0_paths() -> tuple[Path, ...]:
+    expected = tuple((ROOT / path).resolve() for path in CANONICAL_P0_RELATIVE_PATHS)
+    actual = tuple(Path(path).resolve() for path in CANONICAL_P0_PATHS)
     if actual != expected:
-        raise ValueError("canonical pilot scope mismatch")
-    return tuple(Path(path) for path in CANONICAL_PILOT_PATHS)
+        raise ValueError("canonical P0 scope mismatch")
+    return tuple(Path(path) for path in CANONICAL_P0_PATHS)
 
 
-def scan_canonical_pilot() -> list[dict[str, object]]:
-    return scan_paths(validated_canonical_pilot_paths())
+def scan_canonical_p0_scope() -> list[dict[str, object]]:
+    return scan_paths(validated_canonical_p0_paths())
 
 
 def main() -> int:
-    paths = validated_canonical_pilot_paths()
+    paths = validated_canonical_p0_paths()
     findings = scan_paths(paths)
     if findings:
         for finding in findings:
@@ -231,7 +311,7 @@ def main() -> int:
             )
         print(f"FAIL: {len(findings)} rendered programme-boundary finding(s)")
         return 1
-    print(f"PASS: 1SPE-SUITES pilot programme boundary clean ({len(paths)} files)")
+    print(f"PASS: 1SPE-SUITES P0 programme boundary clean ({len(paths)} files)")
     return 0
 
 

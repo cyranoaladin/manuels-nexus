@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-EX-049", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C4", "1SPE-SUITES-C6", "1SPE-SUITES-C7"], "capacites_codes": ["C4", "C6", "C7"], "methodes": ["M4", "M6", "M7"], "parcours": 3, "competences": ["chercher", "raisonner", "modeliser"], "duree_min": 40, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"N0": 100, "r": "1.05", "K": 500}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-049.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-049.tex", "status": "generated"}
+% META: {"id": "1SPE-SUITES-EX-049", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C4", "1SPE-SUITES-C5", "1SPE-SUITES-C6", "1SPE-SUITES-C7", "1SPE-SUITES-C8"], "capacites_codes": ["C3", "C4", "C5", "C6", "C7", "C8"], "methodes": ["M3", "M4", "M5", "M6", "M7"], "parcours": 3, "competences": ["chercher", "raisonner", "modeliser"], "duree_min": 40, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"N0": 100, "r": "1.05", "K": 500}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-049.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-049.tex", "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import *
 % # Modele 1 : croissance geometrique u_{n+1} = 1.05 * u_n, u_0 = 100
@@ -48,7 +48,7 @@ La population est limitée par les ressources disponibles (capacité maximale : 
   \begin{enumerate}
     \item Écrire la relation de récurrence vérifiée par $(u_n)$.
     \item Montrer que $(u_n)$ est géométrique et exprimer $u_n$ en fonction de $n$.
-    \item Calculer $\displaystyle\sum_{k=0}^{9} u_k$ (production cumulée sur 10 générations).
+    \item Calculer $\displaystyle\sum_{k=0}^{9} u_k$, c'est-à-dire la somme des effectifs modélisés sur $10$ générations.
     \item À partir de quelle génération la population dépasse-t-elle $500$ individus ?
   \end{enumerate}
 
@@ -63,12 +63,4 @@ La population est limitée par les ressources disponibles (capacité maximale : 
 \end{enumerate}
 \end{exercice}
 
-\begin{lstlisting}[language=Python]
-u = 100
-v = 100
-for n in range(1, 21):
-    u = 1.05 * u
-    v = v + 0.05 * v * (1 - v / 500)
-    if n in [5, 10, 20]:
-        print(f"n={n} : u={u:.1f}, v={v:.1f}")
-\end{lstlisting}
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-049.py}

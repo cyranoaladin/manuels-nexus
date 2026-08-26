@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-CO-046", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-046", "capacites_codes": ["C3", "C4", "C6"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-SUITES-CO-046", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-046", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C4", "1SPE-SUITES-C6", "1SPE-SUITES-C8"], "capacites_codes": ["C3", "C4", "C6", "C8"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import *
 % import math
@@ -24,6 +24,8 @@
 % assert abs(S4_float - 40951) < 1
 % S19_float = float(S_formula(19))
 % assert abs(S19_float - 87842) < 2
+% assert S_formula(49) == 100000 * (1 - q**50)
+% assert abs(float(S_formula(49)) - 99484.622479268) < 1e-6
 % # Limite de S_n
 % assert limit(100000*(1 - q**n), n, oo) == 100000
 % # Seuil S_n > 90000
@@ -32,6 +34,8 @@
 % assert n_min == 21
 % assert float(q**22) < 0.1
 % assert float(q**21) > 0.1
+% assert abs(float(S_formula(20)) - 89058.1010868488) < 1e-6
+% assert abs(float(S_formula(21)) - 90152.2909781639) < 1e-6
 % # Usine concurrente : T_n = 5000*(n+1)
 % S_val = lambda m: float(100000 * (1 - (0.9)**(m+1)))
 % T_val = lambda m: 5000 * (m + 1)
@@ -42,10 +46,10 @@
 %     if T_val(m) > S_val(m):
 %         rang = m
 %         break
-% assert rang is not None  # T finit par depasser S
+% assert rang == 16
 % # Verification : T_{rang-1} < S_{rang-1} et T_rang > S_rang
-% if rang > 0:
-%     assert T_val(rang - 1) <= S_val(rang - 1)
+% assert T_val(15) < S_val(15)
+% assert T_val(16) > S_val(16)
 % END-VERIFY
 \begin{corrige}{1SPE-SUITES-EX-046}
 
@@ -70,7 +74,7 @@ u_5 = 10\,000 \times (0{,}9)^5 = 10\,000 \times 0{,}59049 \approx 5\,905 \text{ 
 u_{10} = 10\,000 \times (0{,}9)^{10} = 10\,000 \times 0{,}34868 \approx 3\,487 \text{ pièces.}
 \]
 
-La production est réduite de près de la moitié après 5 ans, et aux deux tiers après 10 ans.
+La sixième année, la production vaut environ $59\,\%$ de celle de la première année ; la onzième année, elle n'en représente plus qu'environ $35\,\%$.
 
 \textbf{3. Production cumulée $S_n$.}
 
@@ -94,13 +98,16 @@ S_4 = 100\,000 \times \left[1 - (0{,}9)^5\right] = 100\,000 \times (1 - 0{,}5904
 S_{19} = 100\,000 \times \left[1 - (0{,}9)^{20}\right] = 100\,000 \times (1 - 0{,}12158) \approx 87\,842 \text{ pièces.}
 \]
 
-\textbf{c)} Quand $n \to +\infty$, $\left(\dfrac{9}{10}\right)^{n+1} \to 0$ (car $0 < \dfrac{9}{10} < 1$), donc $S_n \to 100\,000$.
+\textbf{c)} Calculons une valeur à un rang plus élevé :
+\[
+S_{49}=100\,000\left[1-(0{,}9)^{50}\right]\approx99\,485\text{ pièces.}
+\]
 
-La production cumulée totale de l'usine, sur toute sa durée de vie, ne dépasserait jamais $100\,000$ pièces. C'est cohérent : chaque année la production décroît et tend vers $0$, de sorte que la somme converge.
+Pour tout entier naturel $n$, on a $(0{,}9)^{n+1}>0$, donc $S_n<100\,000$. Les valeurs $S_4\approx40\,951$, $S_{19}\approx87\,842$ et $S_{49}\approx99\,485$ semblent se rapprocher de $100\,000$. On conjecture que $S_n$ se rapproche de $100\,000$ lorsque $n$ devient grand. Dans le modèle, ce nombre représente une valeur plafond suggérée pour la production cumulée.
 
 \textbf{4. Seuil : $S_n > 90\,000$.}
 
-\commentaireMarge{La résolution d'une inégalité avec logarithme est la méthode exacte pour les seuils sur des suites géométriques.}
+\commentaireMarge{La transformation algébrique est exacte ; le premier rang est ensuite établi par deux valeurs consécutives.}
 
 \[
 S_n > 90\,000 \iff 100\,000 \times \left[1 - \left(\frac{9}{10}\right)^{n+1}\right] > 90\,000 \iff 1 - \left(\frac{9}{10}\right)^{n+1} > 0{,}9.
@@ -109,27 +116,19 @@ S_n > 90\,000 \iff 100\,000 \times \left[1 - \left(\frac{9}{10}\right)^{n+1}\rig
 \iff \left(\frac{9}{10}\right)^{n+1} < 0{,}1.
 \]
 
-En passant au logarithme (fonction croissante, et $\ln\!\left(\dfrac{9}{10}\right) < 0$, donc l'inégalité change de sens) :
-
+Une table de valeurs ou des essais successifs donnent :
 \[
-(n+1)\ln\!\left(\frac{9}{10}\right) < \ln(0{,}1) \iff n+1 > \frac{\ln(0{,}1)}{\ln(0{,}9)} = \frac{-\ln 10}{\ln 9 - \ln 10}.
+S_{20}=100\,000\left[1-(0{,}9)^{21}\right]\approx89\,058<90\,000,
+\]
+\[
+S_{21}=100\,000\left[1-(0{,}9)^{22}\right]\approx90\,152>90\,000.
 \]
 
-Numériquement : $\dfrac{\ln(0{,}1)}{\ln(0{,}9)} \approx \dfrac{-2{,}3026}{-0{,}10536} \approx 21{,}85$.
-
-Donc $n + 1 > 21{,}85$, soit $n > 20{,}85$, d'où $n \geq 21$.
-
-\textit{Vérification :}
-\begin{itemize}
-  \item Pour $n = 21$ : $(0{,}9)^{22} \approx 0{,}0985 < 0{,}1$ \checkmark
-  \item Pour $n = 20$ : $(0{,}9)^{21} \approx 0{,}1094 > 0{,}1$ \(\times\)
-\end{itemize}
-
-Le plus petit entier $n$ tel que $S_n > 90\,000$ est $\boxed{n = 21}$ (à partir de la $22^\text{e}$ année).
+La suite $(S_n)$ est strictement croissante puisque $S_{n+1}-S_n=u_{n+1}>0$. Ces deux valeurs consécutives prouvent donc que le plus petit entier recherché est $\boxed{n=21}$, au terme de la $22^\text{e}$ année.
 
 \textbf{5. Comparaison avec l'usine concurrente.}
 
-\commentaireMarge{L'usine concurrente produit une suite arithmétique (production constante), dont la somme croît sans borne, contrairement à la suite géométrique dont la somme converge.}
+\commentaireMarge{Comparer les productions cumulées revient à suivre le signe de leur différence.}
 
 L'usine concurrente produit $5\,000$ pièces par an. Sa production cumulée sur $(n+1)$ années est :
 \[
@@ -150,19 +149,25 @@ $n$ & $S_n$ & $T_n$ \\
 \hline
 $0$ & $10\,000$ & $5\,000$ \\
 $10$ & $65\,132$ & $55\,000$ \\
-$20$ & $87\,842$ & $105\,000$ \\
+$20$ & $89\,058$ & $105\,000$ \\
 \hline
 \end{tabular}
 \end{center}
 
-Entre $n = 10$ et $n = 20$, $T_n$ dépasse $S_n$. En affinant :
+Entre $n=10$ et $n=20$, $T_n$ dépasse $S_n$. Posons $D_n=T_n-S_n$. Un tableau complet jusqu'au premier changement de signe donne notamment :
 
 \begin{itemize}
   \item $n = 14$ : $S_{14} \approx 79\,411$ et $T_{14} = 75\,000$ ($T < S$).
-  \item $n = 15$ : $S_{15} \approx 81\,470$ et $T_{15} = 80\,000$ ($T < S$).
-  \item $n = 16$ : $S_{16} \approx 83\,323$ et $T_{16} = 85\,000$ ($T > S$). \checkmark
+  \item $n = 15$ : $D_{15}=T_{15}-S_{15}\approx-1\,470<0$ ;
+  \item $n = 16$ : $D_{16}=T_{16}-S_{16}\approx1\,677>0$. \checkmark
 \end{itemize}
 
-À partir du rang $n = 16$ (soit la $17^\text{e}$ année), la production cumulée de l'usine concurrente dépasse celle de la première usine.
+Pour justifier qu'il s'agit du premier dépassement, on remarque que
+\[
+D_{n+1}-D_n=5\,000-u_{n+1}.
+\]
+Pour $0\leq n\leq5$, on a $u_{n+1}\geq u_6=5\,314{,}41>5\,000$ : la suite $(D_n)$ décroît à partir de $D_0=-5\,000$ et reste négative. Pour $n\geq6$, on a $u_{n+1}\leq u_7=4\,782{,}969<5\,000$ : $(D_n)$ est alors strictement croissante. Comme $D_{15}<0<D_{16}$, le premier dépassement a lieu au rang $n=16$, au terme de la $17^\text{e}$ année, et il se maintient ensuite.
+
+\baremeIndicatif{Q1 : 1 pt (modeliser : relation et nature géométrique) ; Q2 : 1 pt (calculer : terme général et valeurs) ; Q3 : 4 pts (calculer, raisonner : somme 2 pts + valeurs 1 pt + conjecture contextualisée 1 pt) ; Q4 : 2 pts (raisonner, calculer : transformation exacte 1 pt + double frontière et rang 1 pt) ; Q5 : 2 pts (raisonner : modèle concurrent 1 pt + premier changement de signe et stabilité du dépassement 1 pt)}
 
 \end{corrige}

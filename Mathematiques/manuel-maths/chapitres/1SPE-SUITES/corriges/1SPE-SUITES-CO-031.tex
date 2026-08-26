@@ -1,6 +1,6 @@
-% META: {"id": "1SPE-SUITES-CO-031", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-031", "capacites_codes": ["C3", "C5"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-SUITES-CO-031", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-031", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C5"], "capacites_codes": ["C3", "C5"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
-% from sympy import Rational, simplify, symbols, log, ln
+% from sympy import Rational, simplify, symbols
 % n = symbols('n', integer=True, nonnegative=True)
 % u0 = 2
 % q = Rational(5, 3)
@@ -13,27 +13,21 @@
 % # Difference u_{n+1} - u_n = 2*(5/3)^n * (5/3 - 1) = 2*(5/3)^n * 2/3 > 0
 % diff = u.subs(n, n+1) - u
 % diff_factored = simplify(diff)
-% # v_n = ln(u_n) = ln(2) + n*ln(5/3)
-% # v_{n+1} - v_n = ln(5/3) = constante > 0
-% from sympy import ln as Ln
-% v_diff = Ln(Rational(5,3))
-% assert float(v_diff) > 0
+% # v_n = 1/u_n = (1/2)*(3/5)^n
+% v = 1 / u
+% assert simplify(v - Rational(1, 2) * Rational(3, 5)**n) == 0
+% assert simplify(v.subs(n, n+1) / v) == Rational(3, 5)
+% assert simplify(v.subs(n, n+1) - v + Rational(1, 5) * Rational(3, 5)**n) == 0
 % END-VERIFY
 \begin{corrige}{1SPE-SUITES-EX-031}
 
 \textbf{Question 1 — Nature géométrique de $(u_n)$.}
 
-On a $u_n = 2 \times \left(\dfrac{5}{3}\right)^n$. Vérifions que c'est une suite géométrique en calculant le quotient de deux termes consécutifs.
+On a $u_n = 2 \times \left(\dfrac{5}{3}\right)^n$. Cette expression est directement la forme explicite $u_n=u_0q^n$ d'une suite géométrique, avec $u_0=2$ et $q=\dfrac53$.
 
-Pour tout $n \in \mathbb{N}$, $u_n = 2 \times \left(\dfrac{5}{3}\right)^n > 0$, donc $u_n
-\neq 0$ et le quotient est calculable :
-\[
-  \frac{u_{n+1}}{u_n} = \frac{2 \times \left(\dfrac{5}{3}\right)^{n+1}}{2 \times \left(\dfrac{5}{3}\right)^n} = \frac{5}{3}.
-\]
+Ainsi, $(u_n)$ est une suite géométrique de raison $q = \dfrac{5}{3}$ et de premier terme $u_0 = 2$.
 
-\commentaireMarge{Quotient constant $\frac{5}{3}$ : suite géométrique.}
-
-Ce quotient est constant. Donc $(u_n)$ est une suite géométrique de raison $q = \dfrac{5}{3}$ et de premier terme $u_0 = 2$.
+\commentaireMarge{Lire directement le premier terme et la raison dans la forme $u_n=u_0q^n$ ; le quotient est réservé à l'étude des variations.}
 
 \medskip
 \textbf{Question 2 — Sens de variation.}
@@ -55,34 +49,24 @@ Comme $2 > 0$, $\left(\dfrac{5}{3}\right)^n > 0$ et $\dfrac{2}{3} > 0$, on a $u_
 Les deux méthodes donnent la même conclusion : $(u_n)$ est \textbf{strictement croissante}.
 
 \medskip
-\textbf{Question 3 — Démonstration que $(v_n)$ est arithmétique.}
+\textbf{Question 3 — Étude de la suite réciproque $(v_n)$.}
 
-Pour tout $n \in \mathbb{N}$, $u_n = 2 \times \left(\dfrac{5}{3}\right)^n > 0$, donc $v_n = \ln(u_n)$ est bien défini.
+Pour tout $n \in \mathbb{N}$, $u_n>0$, donc $v_n=\dfrac{1}{u_n}$ est bien défini. On obtient :
 
-En utilisant les propriétés du logarithme :
 \[
-  v_n = \ln(u_n) = \ln\!\left(2 \times \left(\frac{5}{3}\right)^n\right) = \ln(2) + \ln\!\left(\left(\frac{5}{3}\right)^n\right) = \ln(2) + n\,\ln\!\left(\frac{5}{3}\right).
+  v_n = \frac{1}{2\left(\dfrac{5}{3}\right)^n} = \frac{1}{2}\left(\frac{3}{5}\right)^n.
 \]
 
-On calcule la différence :
-\[
-  v_{n+1} - v_n = \bigl(\ln(2) + (n+1)\ln\!\left(\tfrac{5}{3}\right)\bigr) - \bigl(\ln(2) + n\,\ln\!\left(\tfrac{5}{3}\right)\bigr) = \ln\!\left(\frac{5}{3}\right).
-\]
+Cette écriture est celle d'une suite géométrique de premier terme $v_0=\dfrac{1}{2}$ et de raison $q_v = \dfrac{3}{5}$.
 
-\commentaireMarge{Différence constante : $(v_n)$ est arithmétique.}
-
-Cette différence est constante, donc $(v_n)$ est une suite arithmétique de raison $r = \ln\!\left(\dfrac{5}{3}\right)$ et de premier terme $v_0 = \ln(2)$.
+\commentaireMarge{Prendre l'inverse remplace ici la raison $\frac{5}{3}$ par sa réciproque $\frac{3}{5}$.}
 
 \medskip
-\textbf{Question 4 — Sens de variation de $(v_n)$ sans calcul supplémentaire.}
+\textbf{Question 4 — Sens de variation et comparaison.}
 
-La raison de $(v_n)$ est $r = \ln\!\left(\dfrac{5}{3}\right)$.
+La suite $(v_n)$ a un premier terme positif et une raison $q_v=\dfrac35$ comprise strictement entre $0$ et $1$. Elle est donc \textbf{strictement décroissante}.
 
-Comme $\dfrac{5}{3} > 1$, on a $\ln\!\left(\dfrac{5}{3}\right) > 0$, donc $r > 0$.
+Ce comportement est opposé à celui de $(u_n)$, strictement croissante : lorsque les termes positifs $u_n$ augmentent, leurs inverses $v_n=1/u_n$ diminuent.
 
-\commentaireMarge{Une suite arithmétique de raison strictement positive est strictement croissante.}
-
-En déduisant directement du résultat de la question 3 : $(v_n)$ est \textbf{strictement croissante}.
-
-\baremeIndicatif{Q1 : 2 pts (raisonner : $u_n > 0$ 1 pt + calcul du quotient et identification 1 pt) ; Q2 : 2 pts (calculer, raisonner : méthode quotient 1 pt + méthode différence avec factorisation 1 pt) ; Q3 : 3 pts (raisonner, communiquer : utilisation des propriétés du $\ln$ 1 pt + calcul de $v_n$ 1 pt + calcul de la différence et conclusion 1 pt) ; Q4 : 1 pt (raisonner : signe de la raison sans calcul)}
+\baremeIndicatif{Q1 : 2 pts (raisonner : identification directe de la forme géométrique 1 pt + raison et premier terme 1 pt) ; Q2 : 2 pts (calculer, raisonner : méthode quotient 1 pt + méthode différence avec factorisation 1 pt) ; Q3 : 3 pts (calculer, raisonner : écriture réciproque 1 pt + forme géométrique 1 pt + raison et premier terme 1 pt) ; Q4 : 1 pt (raisonner : variation et comparaison avec $(u_n)$)}
 \end{corrige}

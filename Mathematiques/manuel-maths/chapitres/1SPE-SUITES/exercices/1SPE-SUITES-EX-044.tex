@@ -48,17 +48,8 @@ On note $C_n$ le capital restant dû au début du mois $n$ (avec $C_0 = 120\,000
 
   \item \textbf{Durée de remboursement.} Déterminer le nombre de mensualités nécessaires pour solder l'emprunt, c'est-à-dire le plus petit entier $n$ tel que $C_n \leq 0$.
 
-  \item \textbf{Script Python.} Le code suivant simule le remboursement. Recopier et compléter les lignes manquantes, puis indiquer ce qu'affiche la variable \texttt{n} à la fin de l'exécution.
+  \item \textbf{Script Python.} Le script source suivant simule le remboursement selon le modèle. Expliquer le rôle de la boucle, puis indiquer ce qu'affiche la variable \texttt{n} à la fin de l'exécution.
 \end{enumerate}
 \end{exercice}
 
-\begin{lstlisting}[language=Python]
-C = 120000
-t = 0.005
-m = 800
-n = 0
-while C > 0:
-    C = (1 + t) * C - m   # ligne a completer si necessaire
-    n = n + 1
-print(n)
-\end{lstlisting}
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-044.py}

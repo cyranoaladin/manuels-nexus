@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-CO-044", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-044", "capacites_codes": ["C3", "C6", "C7"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-SUITES-CO-044", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-044", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C6", "1SPE-SUITES-C7"], "capacites_codes": ["C3", "C6", "C7"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import *
 % import math
@@ -19,6 +19,10 @@
 % assert n_min == 278
 % assert float((Rational(201,200))**278) > 4
 % assert float((Rational(201,200))**277) < 4
+% assert abs(float(C_n(277)) - 757.4593788400) < 1e-6
+% assert abs(float(C_n(278)) + 38.7533242658) < 1e-6
+% last_payment = q * C_n(277)
+% assert abs(float(last_payment) - 761.2466757342) < 1e-6
 % END-VERIFY
 \begin{corrige}{1SPE-SUITES-EX-044}
 
@@ -61,23 +65,32 @@ $(v_n)$ est géométrique de raison $q = 1{,}005$ et de premier terme $v_0 = 120
 
 $C_n \leq 0 \Leftrightarrow 160\,000 - 40\,000 \times 1{,}005^n \leq 0 \Leftrightarrow 1{,}005^n \geq 4$.
 
-En passant au logarithme (fonction croissante) :
+Comme $1{,}005>1$, la suite de terme général $1{,}005^n$ est strictement croissante. Une table de valeurs, la calculatrice ou le script donnent :
 \[
-n \geq \frac{\ln 4}{\ln 1{,}005}.
+1{,}005^{277}\approx3{,}981<4,
+\qquad
+1{,}005^{278}\approx4{,}001>4.
 \]
 
-Calcul numérique : $\dfrac{\ln 4}{\ln 1{,}005} = \dfrac{2\ln 2}{\ln 1{,}005} \approx \dfrac{2 \times 0{,}6931}{0{,}004988} \approx 277{,}9$.
-
-Le plus petit entier vérifiant cette inégalité est $n = 278$.
+Ces deux valeurs consécutives prouvent que le plus petit entier vérifiant l'inégalité est $n=278$.
 
 Le ménage rembourse l'emprunt en \textbf{278 mensualités}, soit environ 23 ans et 2 mois.
 
-\textbf{Vérification :} $1{,}005^{278} \approx 4{,}001 > 4$ et $1{,}005^{277} \approx 3{,}981 < 4$. \checkmark
+Les capitaux frontières confirment ce rang :
+\[
+C_{277}\approx757{,}46\text{ €}>0,
+\qquad
+C_{278}\approx-38{,}75\text{ €}\leq0.
+\]
+
+Dans le modèle, une mensualité entière de $800$ € rend donc le solde négatif à la $278^\text{e}$ itération. En pratique, après les intérêts du dernier mois, la dernière mensualité serait ajustée à environ $761{,}25$ € afin de ramener exactement le capital à zéro.
 
 \textbf{5. Script Python.}
 
-Le code est déjà complet. Il simule le remboursement mois par mois, en appliquant $C \leftarrow 1{,}005 \times C - 800$ et en incrémentant $n$ tant que $C > 0$.
+Le script source simule le remboursement mois par mois, en appliquant $C \leftarrow 1{,}005 \times C - 800$ et en incrémentant $n$ tant que $C > 0$.
 
 À la fin de l'exécution, la variable \texttt{n} affiche $\mathbf{278}$, confirmant le calcul algébrique.
+
+\baremeIndicatif{Q1 : 1 pt (modeliser : relation de récurrence) ; Q2 : 1 pt (calculer : $C_1$ et $C_2$) ; Q3 : 3 pts (raisonner : point fixe 1 pt + suite géométrique 1 pt + expression de $C_n$ 1 pt) ; Q4 : 3 pts (raisonner, calculer : inéquation 1 pt + recherche numérique 1 pt + double frontière et dernière échéance 1 pt) ; Q5 : 2 pts (algorithmique : rôle de la boucle 1 pt + sortie 1 pt)}
 
 \end{corrige}

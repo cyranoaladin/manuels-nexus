@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-CO-049", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-049", "capacites_codes": ["C4", "C6", "C7"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-SUITES-CO-049", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-049", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C4", "1SPE-SUITES-C5", "1SPE-SUITES-C6", "1SPE-SUITES-C7", "1SPE-SUITES-C8"], "capacites_codes": ["C3", "C4", "C5", "C6", "C7", "C8"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import *
 % import math
@@ -46,6 +46,20 @@
 % # Croissance : v_{n+1} - v_n = 0.05*v_n*(1 - v_n/500) > 0 si 0 < v_n < 500
 % for i in range(len(v)-1):
 %     assert v[i+1] > v[i]
+% # Sortie exacte du script publie (calcul flottant Python)
+% u_float = 100.0
+% v_float = 100.0
+% output = []
+% for generation in range(1, 21):
+%     u_float = 1.05 * u_float
+%     v_float = v_float + 0.05 * v_float * (1 - v_float / 500)
+%     if generation in [5, 10, 20]:
+%         output.append(f"n={generation} : u={u_float:.1f}, v={v_float:.1f}")
+% assert output == [
+%     "n=5 : u=127.6, v=121.2",
+%     "n=10 : u=162.9, v=145.3",
+%     "n=20 : u=265.3, v=201.1",
+% ]
 % END-VERIFY
 \begin{corrige}{1SPE-SUITES-EX-049}
 
@@ -62,7 +76,7 @@ u_{n+1} = u_n + 0{,}05\,u_n = 1{,}05\,u_n.
 
 \textbf{b) Nature de $(u_n)$ et expression explicite.}
 
-Pour tout $n \in \mathbb{N}$, $\dfrac{u_{n+1}}{u_n} = 1{,}05$ (constant). La suite $(u_n)$ est \textbf{géométrique} de premier terme $u_0 = 100$ et de raison $q = 1{,}05$.
+Pour tout $n \in \mathbb{N}$, $u_{n+1}=1{,}05\,u_n$. Par définition, la suite $(u_n)$ est \textbf{géométrique} de premier terme $u_0 = 100$ et de raison $q = 1{,}05$.
 
 \[
 \boxed{u_n = 100 \times (1{,}05)^n.}
@@ -82,24 +96,17 @@ Numériquement : $(1{,}05)^{10} \approx 1{,}6289$, donc :
 \sum_{k=0}^{9} u_k \approx 100 \times \frac{0{,}6289}{0{,}05} \approx 100 \times 12{,}578 \approx 1\,257{,}8 \text{ individus.}
 \]
 
-La population cumulée sur $10$ générations est d'environ $\mathbf{1\,258}$ individus.
+La somme des effectifs modélisés sur $10$ générations est d'environ $\mathbf{1\,258}$ individus.
 
 \textbf{d) Seuil : $u_n > 500$.}
 
-\commentaireMarge{On passe au logarithme pour résoudre une inégalité sur une exponentielle.}
-
+Comme $u_0>0$ et $1{,}05>1$, la suite $(u_n)$ est strictement croissante. Une calculatrice ou un tableau de valeurs donne les deux termes consécutifs :
 \[
-u_n > 500 \iff 100 \times (1{,}05)^n > 500 \iff (1{,}05)^n > 5.
+u_{32}=100\times(1{,}05)^{32}\approx 476{,}5<500,
+\qquad
+u_{33}=100\times(1{,}05)^{33}\approx 500{,}3>500.
 \]
-
-En passant au logarithme (fonction croissante, $\ln(1{,}05) > 0$) :
-\[
-n > \frac{\ln 5}{\ln 1{,}05} \approx \frac{1{,}6094}{0{,}04879} \approx 32{,}99.
-\]
-
-Le plus petit entier vérifiant cette inégalité est $n = 33$.
-
-\textit{Vérification :} $(1{,}05)^{33} \approx 5{,}003 > 5$ \checkmark \quad et \quad $(1{,}05)^{32} \approx 4{,}765 < 5$.
+Le plus petit entier vérifiant l'inégalité est donc $n=33$.
 
 La population dépasse $500$ individus à partir de la \textbf{génération $n = 33$}.
 
@@ -112,7 +119,11 @@ v_1 = v_0 + 0{,}05 \times v_0 \times \left(1 - \frac{v_0}{500}\right) = 100 + 0{
 \]
 
 \[
-v_2 = 104 + 0{,}05 \times 104 \times \left(1 - \frac{104}{500}\right) = 104 + 5{,}2 \times \frac{396}{500} = 104 + 5{,}2 \times 0{,}792 = 104 + 4{,}118 \approx 108{,}1.
+v_2 = 104 + 0{,}05 \times 104 \times \left(1 - \frac{104}{500}\right) = 104 + 5{,}2 \times \frac{396}{500}.
+\]
+Comme $5{,}2 \times 0{,}792 = 4{,}1184$, on obtient
+\[
+v_2 = 104 + 4{,}1184 = 108{,}1184 \approx 108{,}1.
 \]
 
 \textbf{b) Invariance de l'encadrement $0 < v_n < 500$ par récurrence.}
@@ -165,25 +176,27 @@ Le script simule les deux modèles sur 20 générations. Les valeurs affichées 
 \hline
 $n$ & $u_n$ (géométrique) & $v_n$ (logistique) \\
 \hline
-$5$  & $127{,}6$ & $122{,}0$ \\
-$10$ & $162{,}9$ & $144{,}5$ \\
-$20$ & $265{,}3$ & $196{,}4$ \\
+$5$  & $127{,}6$ & $121{,}2$ \\
+$10$ & $162{,}9$ & $145{,}3$ \\
+$20$ & $265{,}3$ & $201{,}1$ \\
 \hline
 \end{tabular}
 \end{center}
 
 \textit{(Valeurs approximatives, calculées par le script.)}
 
-\textbf{Comportements à long terme :}
+\textbf{Observations et conjectures à long terme :}
 
 \begin{itemize}
-  \item \textbf{Modèle 1 $(u_n)$} : la suite est géométrique de raison $1{,}05 > 1$, donc $u_n \to +\infty$. La population croît indéfiniment, sans limite. Ce modèle est irréaliste car il ignore les contraintes de ressources.
+  \item \textbf{Modèle 1 $(u_n)$} : les valeurs calculées augmentent de plus en plus. On conjecture que les effectifs croissent sans borne. Ce modèle ignore les contraintes de ressources.
 
-  \item \textbf{Modèle 2 $(v_n)$} : la suite est croissante et majorée par $500$, donc elle converge. On peut montrer que la limite est $500$ (la capacité d'accueil $K$). La population croît mais se stabilise en dessous de la capacité maximale. Ce modèle est plus réaliste biologiquement.
+  \item \textbf{Modèle 2 $(v_n)$} : on a prouvé que les valeurs sont croissantes et restent inférieures à $500$ ; les valeurs simulées semblent se rapprocher de $500$. On conjecture que la population se stabilise autour de la capacité d'accueil. Ce modèle est plus réaliste biologiquement.
 \end{itemize}
 
 \commentaireMarge{Le modèle logistique est fondamental en biologie des populations : il intègre la compétition pour les ressources via le terme $(1 - v_n/K)$.}
 
-Les deux populations se comportent de façon similaire au début (faibles effectifs, le terme logistique est proche de $1$), mais divergent à moyen et long terme : le modèle géométrique explose tandis que le modèle logistique sature autour de $K = 500$.
+Les deux populations se comportent de façon similaire au début (faibles effectifs, le facteur logistique est proche de $1$), mais leurs valeurs s'écartent progressivement : le modèle géométrique continue d'augmenter tandis que le modèle logistique semble se stabiliser.
+
+\baremeIndicatif{Q1 : 4 pts ; Q2 : 5 pts ; Q3 : 3 pts.}
 
 \end{corrige}

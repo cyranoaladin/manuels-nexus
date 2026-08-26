@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-EX-027", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C4"], "capacites_codes": ["C3", "C4"], "methodes": ["M3", "M4"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0": {"domaine": "entier", "min": 100, "max": 500}, "q": {"domaine": "rationnel", "contrainte": "0<q<1"}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-027.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-027.tex", "status": "generated"}
+% META: {"id": "1SPE-SUITES-EX-027", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C4", "1SPE-SUITES-C8"], "capacites_codes": ["C3", "C4", "C8"], "methodes": ["M3", "M4"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0": {"domaine": "entier", "min": 100, "max": 500}, "q": {"domaine": "rationnel", "contrainte": "0<q<1"}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-027.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-027.tex", "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational, simplify, symbols
 % n = symbols('n', integer=True, nonnegative=True)
@@ -15,11 +15,13 @@
 % assert S == 510
 % END-VERIFY
 \begin{exercice}{1SPE-SUITES-EX-027}{2}{20}
-Soit $(u_n)$ la suite géométrique de premier terme $u_0 = 256$ et de raison $q = \dfrac{1}{2}$.
+Soit $(u_n)$ la suite définie par $u_0=256$ et, pour tout entier naturel $n$, par
+\[
+u_{n+1}=\dfrac{1}{2}u_n.
+\]
 
 \begin{enumerate}
-  \item Vérifier que $u_n
-\neq 0$ pour tout $n \in \mathbb{N}$, puis calculer $\dfrac{u_{n+1}}{u_n}$ et conclure.
+  \item Reconnaître directement, à partir de la relation de récurrence, que $(u_n)$ est une suite géométrique. Préciser sa raison et son premier terme.
 
   \item Exprimer $u_n$ en fonction de $n$.
 

@@ -12,12 +12,15 @@
 % # q > 1 => suite croissante
 % assert ratio > 1
 % # u_n croissante : u_{n+1}/u_n = 5/3 > 1
+% v = 1 / u
+% assert simplify(v - Rational(1, 2) * Rational(3, 5)**n) == 0
+% assert simplify(v.subs(n, n+1) / v) == Rational(3, 5)
 % END-VERIFY
 \begin{exercice}{1SPE-SUITES-EX-031}{2}{20}
 Soit $(u_n)$ la suite définie pour tout entier naturel $n$ par $u_n = 2 \times \left(\dfrac{5}{3}\right)^n$.
 
 \begin{enumerate}
-  \item Montrer que $(u_n)$ est une suite géométrique. Préciser sa raison et son premier terme.
+  \item Reconnaître directement, à partir de sa forme explicite, que $(u_n)$ est une suite géométrique. Préciser sa raison et son premier terme.
 
   \item Étudier le sens de variation de $(u_n)$ :
   \begin{enumerate}
@@ -26,8 +29,8 @@ Soit $(u_n)$ la suite définie pour tout entier naturel $n$ par $u_n = 2 \times 
   \end{enumerate}
   Vérifier que les deux méthodes donnent la même conclusion.
 
-  \item Montrer que la suite $(v_n)$ définie par $v_n = \ln(u_n)$ est une suite arithmétique. (On rappelle que $\ln(ab) = \ln a + \ln b$ et $\ln(a^n) = n\ln a$.)
+  \item Pour tout entier naturel $n$, on pose $v_n = \dfrac{1}{u_n}$. Exprimer $v_n$ en fonction de $n$, puis montrer que $(v_n)$ est une suite géométrique. Préciser sa raison et son premier terme.
 
-  \item En déduire le sens de variation de $(v_n)$ sans nouveau calcul.
+  \item En déduire le sens de variation de $(v_n)$ sans nouveau calcul, puis comparer ce comportement à celui de $(u_n)$.
 \end{enumerate}
 \end{exercice}
