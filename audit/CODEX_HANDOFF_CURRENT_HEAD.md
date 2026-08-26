@@ -1,176 +1,127 @@
-# Codex side-car handoff — jalon PROGRAMME + QCM
+# Codex side-car handoff — gel Suites et poursuite T3
 
 ## Provenance
 
-- Integration branch (lecture seule): `audit/adversarial-reconciliation-2026`
-- Integration base SHA: `10cb5f07772842d6630d2a2f78531f6900371023`
-- Codex branch: `codex/t2-current-10cb5f0`
-- Source SHA soumise aux builds isolés: `75492cf05bcae6c7319e9ec91709e4cc7166e22b`
-- Push: aucun
-- Merge: aucun
-- Baseline/oracle/receipt promu: aucun
+- Branche d'intégration (lecture seule) : `audit/adversarial-reconciliation-2026`
+- Base d'intégration : `10cb5f07772842d6630d2a2f78531f6900371023`
+- Branche Codex : `codex/t2-current-audit-continue`
+- HEAD de contenu et de gates couvert par ce handoff :
+  `f65538d9750fc291ead944011d06f38ded31054b`
+- Candidat 1SPE-SUITES gelé pour revue humaine :
+  `c667f12b1792f31981b6b5894c8c604df1bce634`
+- Nombre de commits dans la side-car depuis la base d'intégration : 198
+- Push : aucun
+- Merge : aucun
+- Nouvelle extension de baseline : aucune depuis le jalon autorisé des treize
+- Oracle D7 modifié : non
+- Approbation humaine matérialisée : aucune
 
-## Résultat PROGRAMME
+Le SHA du commit documentaire qui contient ce fichier n'est pas une nouvelle
+source de contenu. Les preuves Suites restent liées au candidat `c667f12b` ; les
+gates globaux courants sont liés au HEAD de contenu `f65538d`.
 
-Le dénominateur historique de 333 atoms obligatoires a été rejeté après
-réextraction directe et double contrôle des documents officiels. Il omettait des
-segments obligatoires et ne pouvait pas servir de preuve publish-ready.
+## Liste de commits et ordre d'intégration
 
-- Segments officiels analysés: 985
-- Atoms officiels: 919
-- Atoms obligatoires: 596
-- Atoms obligatoires structurellement mappés: 596/596
-- Atoms `FULL`: 0/596
-- `CONTENT_REVIEW_PENDING`: 322
-- `STRUCTURALLY_MAPPED`: 274
-- Mandatory unmapped: 0
-- Wrong year: 0
-- Unsupported claims: 0
-- Segments obligatoires non parsés: 0
-- Duplicates / ambiguïtés d'atoms: 0 / 0
+La liste complète et ordonnée est définie sans ambiguïté par :
 
-Répartition mandatory mapped:
+```text
+git log --reverse --format='%H %s' \
+  10cb5f07772842d6630d2a2f78531f6900371023..f65538d9750fc291ead944011d06f38ded31054b
+```
 
-- 1SPE: 133/133
-- TSPE: 155/155
-- TCOMPL: 69/69
-- TEXPERTES: 74/74
-- 1NSI: 87/87
-- TNSI: 78/78
+L'ordre de cherry-pick est exactement cet ordre topologique. Le dernier delta,
+postérieur au gel du contenu Suites, est :
 
-Les 274 mappings purement structurels restent explicitement non couverts. Les
-contrats transversaux d'audit 1SPE/TSPE qui n'ont pas de source éditoriale portent
-`source_content_state: MISSING` et `coverage_claim: NONE`; aucun chemin existant
-n'a été assimilé à une validation scientifique ou pédagogique.
+1. `fe8f4a8b` `[AUDIT] Add exact Suites review freeze producer`
+2. `80ee391c` `[AUDIT] Freeze exact Suites human review source`
+3. `cfff896a` `[AUDIT] Derive Suites human gate contract fail closed`
+4. `0d2eb702` `[AUDIT] Record incomplete Suites human review governance`
+5. `c1814cbe` `[LATEX] Fix Variables aléatoires remediation line break`
+6. `00fee5ac` `[AUDIT] Consigner les warnings pytest racine`
+7. `d542ad00` `[AUDIT] Consigner les warnings layout 1SPE`
+8. `8fb48197` `[AUDIT] Add neutral Suites human review packet producer`
+9. `ced0b740` `[AUDIT] Publish neutral Suites role review packets`
+10. `691b6354` `[MATH] Correct diversification standard deviation`
+11. `cc319840` `[LATEX] Use runtime-safe method box in Bernoulli course`
+12. `61c16d88` `[AUDIT] Separate Suites content freeze from build envelope`
+13. `93687821` `[AUDIT] Cartographier le runtime complet de la charte`
+14. `d785a4ed` `[AUDIT] Refresh empty build manifest after T3 sources`
+15. `f65538d9` `[AUDIT] Refresh canonical inventory after T3 fixes`
 
-Preuves principales:
+Les commits source de ce delta sont `c1814cbe`, `691b6354` et `cc319840`.
+Les autres commits produisent des tests, des ledgers, des packets ou des
+artefacts dérivés. Les trois commits source doivent être intégrés avant les
+rafraîchissements `d785a4ed` et `f65538d9`.
 
-- `audit/OFFICIAL_SOURCE_SEGMENTS_2026_2027.*`
-- `audit/OFFICIAL_PROGRAM_ATOMS_2026_2027.*`
-- `audit/OFFICIAL_SOURCE_ATOM_CROSSWALK_2026_2027.*`
-- `audit/OFFICIAL_PROGRAM_COVERAGE_2026_2027.*`
-- `audit/MANDATORY_UNMAPPED_ATOMS_CLOSURE.*`
+## Gel et packets 1SPE-SUITES
 
-## Résultat QCM
+- Ensemble gelé : 161 objets, sans modification de source après `c667f12b`.
+- Digest de l'ensemble :
+  `sha256:67d8006298299b44029de8ba8f85b500d9b3619997a0c596e63c20e1cffeee2d`.
+- Digest d'autorité programme :
+  `sha256:58dc6df881f4f4e6fc6a934ca1837077639dff13da483b587c7a260b70b0a0e1`.
+- Packets neutres : EXPERT_MATHEMATIQUE et
+  EXPERT_PROGRAMME_PEDAGOGIE.
+- Les packets n'enregistrent aucun verdict et ne constituent aucun receipt.
+- État des deux revues : `PENDING_UNASSIGNED`.
+- État humain QCM : `HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL`.
 
-- Sources QCM Math: 35
-- Questions recomputées indépendamment: 330/330
-- Wrong answer key: 0
-- Multiple correct options: 0
-- No correct option / no unique answer: 0 / 0
-- Invalid or generic unjustified diagnostic: 0 / 0
-- Wrong capacity / wrong programme year: 0 / 0
-- Variant visibility failure: 0
-- Unresolved: 0
-- État de gouvernance: `HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL`
+Le dépôt impose les deux rôles de revue et interdit l'auto-approbation, mais ne
+définit pas complètement le contrat exécutable d'un receipt d'approbation :
+identité, cumul de rôles, granularité, binding SHA/PDF, staleness des dépendances
+partagées et autorité des transitions en masse restent non spécifiés. Toute
+matérialisation d'une approbation est donc arrêtée en mode fail-closed.
 
-La dette de couverture demeure distincte de cette validation:
+## Corrections T3 après gel
 
-- 49 capacités de contrat sans QCM;
-- 117 champs de renvoi de remédiation absents dans les distracteurs TSPE.
+- `1SPE-VARALEA-FR-R2` : formule de probabilités totales sortie de la ligne ;
+  le build ciblé de remédiation est propre.
+- `1SPE-VARALEA-CO-048` : P0 scientifique corrigé. L'écart-type exact vaut
+  environ `3 943,60 €`, donc `3 944 €` à l'euro près, et non `3 946 €`.
+- Cours Bernoulli Variables aléatoires : environnement de méthode remplacé par
+  le contrat réellement fourni par la classe active ; le chapitre complet
+  compile de nouveau.
 
-## Corrections source supplémentaires du jalon
+Ces changements ne touchent aucune source de 1SPE-SUITES.
 
-- Reclassification explicite des approfondissements trigonométriques et de la
-  loi binomiale 1SPE selon l'arbitrage fourni.
-- Correction des faux verts QCM et des diagnostics causaux, avec tests de
-  régression indépendants.
-- Correction de la définition de l'écart-type et des périmètres probabilités /
-  exponentielle.
-- Correction de commandes LaTeX tronquées, d'une commande `\attention` non
-  définie, d'un diagnostic QCM au mode mathématique non fermé et du libellé
-  exponentielle `e^{at}` injecté hors mode mathématique.
-- Les 35 clés QCM et les deux barèmes TSPE restent absents des variantes élèves
-  et présents dans les variantes professeur par gardes structurelles.
+## Preuves et artefacts exclus
 
-## Science et pédagogie
+Les PDF de chapitre servant au packet sont des dérivés locaux ignorés. Ils ne
+sont ni des PDF de publication ni une preuve D7. Les PDF suivis historiques et
+les enveloppes de build intermédiaires doivent être régénérés après intégration ;
+ils ne doivent pas être cherry-pickés comme attestation du nouveau HEAD.
 
-- Chapitres canoniques actuels: 52 (1SPE 10, TSPE 11, TCOMPL 9,
-  TEXPERTES 5, 1NSI 10, TNSI 7).
-- Audit scientifique exhaustif de chapitre: 0/52.
-- Audit pédagogique exhaustif de chapitre: 0/52.
-- Couche QCM Math examinée: 35/35 chapitres Math.
+Artefacts de preuve principaux :
 
-La couverture structurelle et le zéro QCM ne sont donc pas une déclaration de
-qualité intégrale ni de publication.
+- `audit/1SPE_SUITES_REVIEW_SOURCE_FREEZE.json`
+- `audit/HUMAN_REVIEW_GATE_CONTRACT_1SPE_SUITES.{json,md}`
+- `audit/1SPE_SUITES_EXPERT_MATHEMATIQUE_NEUTRAL_REVIEW_PACKET.{json,md}`
+- `audit/1SPE_SUITES_EXPERT_PROGRAMME_PEDAGOGIE_NEUTRAL_REVIEW_PACKET.{json,md}`
+- `audit/ROOT_PYTEST_WARNING_LEDGER.json`
+- `audit/LATEX_LAYOUT_WARNING_LEDGER.json`
+- `audit/CANONICAL_STYLE_RUNTIME_REGISTRY.{json,md}`
+- `audit/STYLE_CONSUMER_GRAPH.{json,md}`
+- `audit/STYLE_DUPLICATE_FORENSICS.{json,md}`
 
-## Charte et runtime
+## Gates ouverts
 
-- Registre déterministe courant: PASS.
-- Fichiers physiques: 63; contenus uniques: 42.
-- Duplicatas exacts: 21 fichiers dans 18 groupes.
-- Implémentation canonique classe/style identifiée: oui / oui.
-- Runtime sans wrapper de compatibilité: non.
-- Wrappers observés: `nexus-charte-v6.sty`, `nexus-manuel-v5.cls` côté Math.
-- Chemins non canoniques potentiellement runtime: 16.
+- 1SPE-SUITES : machine content review PASS, mais science, pédagogie et
+  éditorial restent non complets sans les vrais receipts exigés.
+- Les 15 atoms Suites restent `FULL = 0/15`.
+- Les cinq dettes `RESIDUAL_13` du chapitre restent ouvertes.
+- `PREVIOUS_89` dans Suites : intersection vide.
+- `release-strict` doit rester rouge jusqu'à fermeture réelle de la dette de
+  publication.
+- La revue visuelle finale, la charte/D7, le prépresse et les douze builds A/B
+  restent distincts des revues humaines de contenu.
+- La side-car n'est ni publish-ready, ni print-ready, ni distribution-ready.
 
-## Structure et gouvernance
+## Reprise recommandée
 
-Le scan structurel courant, avec neutralisation explicite et uniquement
-diagnostique du receipt A4 stale et du manifeste de builds stale, donne les neuf
-invariants source suivants à zéro:
-
-- context mismatches
-- unattributed PDFs
-- orphan files
-- unassembled objects
-- unclassified types
-- broken meta references
-- broken LaTeX references
-- LaTeX cycles
-- duplicate assembly objects
-
-Cette mesure ne contourne pas les gates de gouvernance. Ceux-ci restent rouges
-sur le receipt A4 obsolète de
-`1SPE-TRIGONOMETRIE/methodes/1SPE-TRIGO-ME-005.tex` (fingerprint
-`70dfcb9ea3d7e1ec`). Le statut `needs_review` du projet TNSI reste lui aussi
-préservé; aucune promotion administrative n'a été faite.
-
-## Tests et gates
-
-- Builders déterministes atoms/crosswalk/coverage/closure/QCM/style: PASS.
-- Suite ciblée programme + QCM au source SHA: 81 passed.
-- Suite NSI complète au SHA source précédent sans changement NSI: 2203 passed.
-- Suite Math complète avant le dernier correctif LaTeX: 4844 passed, 22 failed;
-  les échecs restants sont 2 inventaires observés stale et 20 oracles D7/maquette
-  volontairement non mis à jour.
-- Suite racine: 1336 passed, 24 failed, 16 errors; échecs dominés par le receipt
-  A4 stale et l'audit PDF suivi stale.
-- `validate-model`: rc 6, rouge honnête (receipt A4 stale).
-- `fail-on-new`: rc 5, rouge honnête (même receipt stale).
-- `release-strict`: non exécuté à ce jalon; il doit rester rouge tant que la
-  dette réelle n'est pas fermée.
-
-## Builds et séparation
-
-Les preuves A/B au SHA source exact sont produites hors dépôt dans des
-worktrees propres; aucun ancien PDF de `MANUELS_PDF_PUBLICATION` n'est autorité.
-
-- Math run A: 6/8 PASS au dernier relevé; 1SPE professeur et TSPE professeur
-  encore actifs. Les quatre variantes élève ont déjà compilé, notamment 1SPE
-  après correction des deux bloqueurs LaTeX.
-- Math run B: 5/8 PASS au dernier relevé; trois variantes professeur actives.
-- NSI 1NSI élève: A/B PASS; 1NSI professeur A/B actifs.
-- NSI TNSI: élève et professeur échouent symétriquement A/B au préflight
-  pour `Overfull \\hbox` et `Underfull \\hbox`; le diagnostic de lignes exactes
-  est ouvert et aucun PDF staging n'a été promu.
-
-La garde source structurée des 35 clés QCM et des deux barèmes reste verte;
-le gate PDF global 12/12 reste volontairement non acquis tant que TNSI ne
-compile pas et que les comparaisons finales A/B ne sont pas closes.
-
-## Ordre de reprise / dépendances
-
-Le lot contient des changements source, tests et rapports de preuve. Les commits
-PDF, inventaire et manifest historiques (`e53365c4`, `a92e46b2`, `abb5eab0`)
-ne doivent pas être repris comme artefacts courants: régénérer après intégration
-des sources. L'intégrateur doit revalider les changements sémantiques au nouveau
-HEAD et appliquer les commits sources/tests dans leur ordre historique.
-
-## État du handoff
-
-Le side-car est prêt pour revue sélective des sources et tests, mais il n'est ni
-publish-ready, ni print-ready, ni distribution-ready. Les campagnes science,
-pédagogie, langue, fermeture des statuses/receipts, nettoyage runtime, 12 PDF
-finaux, visual QA, prépresse, reproductibilité, D7 et métadonnées administratives
-restent à exécuter ou à fermer.
+1. Examiner les trois commits source du delta.
+2. Rejouer leurs tests ciblés et les builds affectés.
+3. Intégrer les producteurs/tests de preuve.
+4. Régénérer les rapports, le manifeste et l'inventaire au HEAD d'intégration.
+5. Ne matérialiser aucun receipt humain tant que le contrat de gouvernance
+   incomplet n'a pas une autorité canonique explicite.
+6. Ne jamais reprendre un PDF intermédiaire comme preuve de release.
