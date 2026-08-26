@@ -76,6 +76,16 @@
       "proof": "Decision humaine du 2026-08-27 : la version amont est retenue. Elle porte sur la matrice d'adjacence, directement alignee sur le contenu officiel Mathematiques expertes (graphes, connexite, matrices). Le delta WIP etait mathematiquement correct mais visait une question que l'amont a volontairement remplacee ; il n'est donc pas SCIENTIFICALLY_WRONG.",
       "severity": "NOT_A_DEFECT",
       "future_option": "une question eulerienne pourra etre reintroduite comme OBJET SEPARE apres audit du chapitre : hypothese de connexite correcte, absence de doublon, role programme explicite, valeur pedagogique reelle. Pas de reintroduction automatique."
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/qcm/TSPE-DERIVATION-CONVEXITE-QCM.json",
+      "scope": "Q3 options A et C : libelle du renvoi",
+      "semantic_change": "le WIP remplacait le renvoi 'C1' par 'C1, derivee d'une fonction composee'",
+      "reason_dropped": "OTHER_EXPLICIT",
+      "explicit_reason": "TARGET_NOT_CANONICAL_FOR_THIS_QUESTION",
+      "proof": "tests/test_qcm_source_unique.py::test_renvois_tspe_pointent_vers_la_remediation_precise epingle par egalite exacte renvoi == 'C1' pour TSPE-DERIVATION-CONVEXITE Q1 et Q3 ainsi que TSPE-PROBABILITES Q1. Les deux formes de renvoi coexistent dans le corpus (373 codes bruts, 474 libelles), mais ces questions-la sont contractuellement en forme brute. Le portage a ete annule et le derive regenere.",
+      "severity": "NOT_A_DEFECT",
+      "detected_by": "execution de la matrice de tests, pas par la validation initiale des gates"
     }
   ],
   "deltas_to_port": [
@@ -95,26 +105,16 @@
       "action": "porter le delta a l'identique"
     },
     {
-      "path": "Mathematiques/manuel-maths/chapitres/TSPE-{DERIVATION-CONVEXITE,GEOMETRIE-ESPACE,LOGARITHME,PRIMITIVES-EQDIFF}/qcm/*.json",
-      "delta": "45 renvois de remediation presents dans le WIP et absents en amont",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-{LOGARITHME,PRIMITIVES-EQDIFF}/qcm/*.json",
+      "delta": "9 renvois de remediation presents dans le WIP et absents en amont",
       "detail": {
-        "TSPE-DERIVATION-CONVEXITE": 3,
-        "TSPE-GEOMETRIE-ESPACE": 15,
-        "TSPE-LOGARITHME": 15,
-        "TSPE-PRIMITIVES-EQDIFF": 12
+        "TSPE-LOGARITHME": 6,
+        "TSPE-PRIMITIVES-EQDIFF": 3
       },
       "verdict": "WIP_ADDS_VALID_DELTA",
       "action": "porter uniquement le champ renvoi de ces 45 distracteurs, sur des questions dont l'enonce et les options sont identiques des deux cotes ; aucun autre champ n'est touche",
       "mechanically_derivable": true,
       "justification": "le cahier exige un diagnostic ET un renvoi de remediation par distracteur incorrect ; ces 45 renvois font passer autant de distracteurs de non conforme a conforme"
-    },
-    {
-      "path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/qcm/TSPE-DERIVATION-CONVEXITE-QCM.json",
-      "delta": "Q3 options A et C : renvoi affine",
-      "detail": "base=absent, amont='C1', wip='C1, derivee d'une fonction composee'",
-      "verdict": "WIP_ADDS_VALID_DELTA",
-      "action": "porter le libelle plus specifique",
-      "mechanically_derivable": true
     }
   ],
   "deltas_requiring_human_editorial_decision": [],
@@ -181,8 +181,8 @@
   ],
   "renvoi_port_result": {
     "candidates": 45,
-    "ported": 11,
-    "rejected": 34,
+    "ported": 9,
+    "rejected": 36,
     "gates": [
       "source question current",
       "statement/options semantic identity",
@@ -194,8 +194,7 @@
     ],
     "ported_detail": {
       "TSPE-LOGARITHME": 6,
-      "TSPE-PRIMITIVES-EQDIFF": 3,
-      "TSPE-DERIVATION-CONVEXITE": 2
+      "TSPE-PRIMITIVES-EQDIFF": 3
     },
     "rejected_reason_counts": {
       "capacity_misalignment_and_missing_target": 15,
@@ -203,6 +202,7 @@
       "aligned_but_target_object_absent": 3
     },
     "no_target_fabricated": true,
-    "open_findings": "34 distracteurs restent sans renvoi valide : leur renvoi WIP pointait C1 alors que la question porte C2, C3, C4, C5, C7, C11, C12 ou C13, ou l'objet de remediation cible n'existe pas. Findings laisses ouverts pour vraie correction."
+    "open_findings": "34 distracteurs restent sans renvoi valide : leur renvoi WIP pointait C1 alors que la question porte C2, C3, C4, C5, C7, C11, C12 ou C13, ou l'objet de remediation cible n'existe pas. Findings laisses ouverts pour vraie correction.",
+    "gate_learned": "le gate 'target canonical' doit aussi verifier qu'aucun test amont n'epingle la forme exacte du renvoi ; deux portages initialement valides ont ete annules a ce titre"
   }
 }

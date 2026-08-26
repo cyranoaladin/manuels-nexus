@@ -230,7 +230,7 @@ def test_no_remediation_target_was_fabricated() -> None:
     result = _json(LEDGER)["renvoi_port_result"]
     assert result["no_target_fabricated"] is True
     assert result["ported"] + result["rejected"] == result["candidates"] == 45
-    assert result["ported"] == 11
+    assert result["ported"] == 9
     assert result["open_findings"]
 
 
