@@ -5,10 +5,39 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts/build_math_student_teacher_key_audit.py"
 AUDIT = ROOT / "audit/STUDENT_PDF_PUBLISH_PREFLIGHT_CURRENT_HEAD.json"
+
+
+@pytest.mark.parametrize("mutation", ("fi_before_key", "key_removed"))
+def test_teacher_only_source_guard_rejects_incomplete_block(mutation: str) -> None:
+    probe = r"""
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+sys.path.insert(0, str(root / "scripts"))
+import build_math_student_teacher_key_audit as builder
+
+source = (root / "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.tex").read_text(encoding="utf-8")
+if sys.argv[2] == "fi_before_key":
+    source = source.replace("\\fi\n% NEXUS-QCM-TEACHER-ONLY-END", "% NEXUS-QCM-TEACHER-ONLY-END", 1)
+    source = source.replace("\\section*{Cle de correction", "\\fi\n\\section*{Cle de correction", 1)
+else:
+    source = source.replace("Cle de correction", "Corrige", 1)
+raise SystemExit(0 if not builder._teacher_only_guard_is_complete(source) else 1)
+"""
+    result = subprocess.run(
+        [sys.executable, "-c", probe, str(ROOT), mutation],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
 
 
 def test_math_student_teacher_key_audit_is_current() -> None:

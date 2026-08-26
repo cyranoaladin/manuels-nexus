@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -25,6 +26,7 @@ MD_TARGET = ROOT / "audit/STUDENT_PDF_PUBLISH_PREFLIGHT_CURRENT_HEAD.md"
 INTEGRATION_BASE_SHA = "10cb5f07772842d6630d2a2f78531f6900371023"
 BEGIN = "% NEXUS-QCM-TEACHER-ONLY-BEGIN"
 END = "% NEXUS-QCM-TEACHER-ONLY-END"
+KEY_HEADINGS = ("Cle de correction", "Correction et diagnostics")
 
 sys.path.insert(0, str(MATH / "scripts"))
 import assemble_manuel  # noqa: E402
@@ -100,6 +102,38 @@ def _canonical_observed_math_build_count() -> int:
     )
 
 
+def _teacher_only_guard_is_complete(source: str) -> bool:
+    if source.count(BEGIN) != 1 or source.count(END) != 1:
+        return False
+    conditionals = list(
+        re.finditer(
+            r"(?m)^[ \t]*\\ifnxVersionProfesseur[ \t]*(?:%.*)?$",
+            source,
+        )
+    )
+    closures = list(
+        re.finditer(r"(?m)^[ \t]*\\fi[ \t]*(?:%.*)?$", source)
+    )
+    heading_positions = [
+        source.index(heading)
+        for heading in KEY_HEADINGS
+        if source.count(heading) == 1
+    ]
+    if (
+        len(conditionals) != 1
+        or len(closures) != 1
+        or len(heading_positions) != 1
+        or sum(source.count(heading) for heading in KEY_HEADINGS) != 1
+    ):
+        return False
+    begin = source.index(BEGIN)
+    conditional = conditionals[0].start()
+    heading = heading_positions[0]
+    closure = closures[0].start()
+    end = source.index(END)
+    return begin < conditional < heading < closure < end
+
+
 def build_payload() -> dict[str, Any]:
     build_evidence: dict[str, Any] = {}
     for manual, (directory, stem, expected) in BUILDS.items():
@@ -133,17 +167,8 @@ def build_payload() -> dict[str, Any]:
             raise RuntimeError(f"canonical JSON ambiguous for {relative}")
         source = tex_path.read_text(encoding="utf-8")
         baseline = _baseline_text(relative)
-        guarded = (
-            source.count(BEGIN) == 1
-            and source.count(END) == 1
-            and "\\ifnxVersionProfesseur" in source
-            and source.index(BEGIN) < source.index("\\ifnxVersionProfesseur")
-            < source.index(END)
-        )
-        baseline_key = (
-            "Cle de correction" in baseline
-            or "Correction et diagnostics" in baseline
-        )
+        guarded = _teacher_only_guard_is_complete(source)
+        baseline_key = any(heading in baseline for heading in KEY_HEADINGS)
         baseline_unguarded = "\\ifnxVersionProfesseur" not in baseline
         if not guarded or not baseline_key or not baseline_unguarded:
             raise RuntimeError(f"guard/baseline proof failed for {relative}")
