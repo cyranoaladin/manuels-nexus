@@ -15,13 +15,15 @@
 % # B demarre en tete (capital initial 1000 euros) puis A reprend l'avantage des le rang 6
 % assert B(5) > A(5)
 % assert B(6) <= A(6)
-% # Recherche du seuil de depassement DEFINITIF de B sur A (rang >= 10 pour ignorer le sursaut initial)
+% # Recherche du premier depassement de B sur A a partir du rang 10
 % k = 10
 % while B(k) <= A(k):
 %     k += 1
 % assert k == 1415
 % assert B(1415) > A(1415)
 % assert B(1414) <= A(1414)
+% assert B(1416) - B(1415) > 200
+% assert abs((B(1416) - B(1415)) - 0.004 * B(1415)) < 1e-9
 % # Verification valeurs approximatives
 % assert abs(B(1415) - 1000 * 1.004**1415) < 1e-6
 % assert A(1415) == 283000
@@ -145,9 +147,11 @@ Sur 5 ans, l'offre B ne fait croître le capital que de $270$~€, bien loin des
 
 \begin{enumerate}
   \item Vérifier que $B_5 > A_5$ et que $B_6 \leqslant A_6$. Que peut-on en conclure sur les tout premiers mois ?
-  \item Compléter et expliquer le programme Python ci-dessous, qui détermine le premier rang $n$ (à partir du rang $10$) tel que $B_n$ dépasse \emph{définitivement} $A_n$.
+  \item Compléter et expliquer le programme Python ci-dessous, qui détermine
+  le premier rang $n$ (à partir du rang $10$) tel que $B_n>A_n$.
   \item Exécuter mentalement les deux premiers tours de boucle (vérifier les valeurs de \texttt{A}, \texttt{B} et \texttt{n}).
-  \item Donner le rang $n$ de dépassement définitif et interpréter le résultat dans le contexte.
+  \item Donner le rang obtenu, puis montrer que cet avantage est ensuite
+  conservé en comparant les accroissements mensuels des deux offres.
 \end{enumerate}
 
 \end{exercice}
@@ -157,7 +161,7 @@ Sur 5 ans, l'offre B ne fait croître le capital que de $270$~€, bien loin des
 
 \begin{python}
 # Recherche du premier mois n (a partir du rang 10) tel que B_n
-# depasse DEFINITIVEMENT A_n
+# depasse A_n
 # A_n = 200*n  (offre A : suite arithmetique)
 # B_n = 1000 * 1.004**n  (offre B : suite geometrique)
 
@@ -170,7 +174,7 @@ while B <= A:
     A = 200 * n        # mise a jour de A_n
     B = 1000 * 1.004**n  # mise a jour de B_n
 
-print("Premier mois de depassement definitif : n =", n)
+print("Premier mois de depassement apres le rang 10 : n =", n)
 print("A_n =", A, "euros")
 print("B_n =", round(B, 2), "euros")
 \end{python}
@@ -191,7 +195,12 @@ Donc $B_6 \leqslant A_6$ : dès le $6^{\text{e}}$ mois, les versements régulier
 
 On en conclut que l'avantage de l'offre B au démarrage est très éphémère : dès le sixième mois, l'offre A reprend la tête, et il faudra étudier ce qui se passe beaucoup plus loin pour savoir si $(B_n)$ finit par revenir devant $(A_n)$.
 
-\textbf{Question 2.} On sait par la question 1 que l'offre A est en tête à partir du rang $6$ ; on initialise donc directement au rang $10$ (largement après ce sursaut initial) pour ne pas re-détecter ce premier croisement sans intérêt. La boucle \texttt{while B <= A} tourne ensuite tant que l'offre B n'a pas repris l'avantage. À chaque itération, on incrémente $n$ puis on recalcule les deux capitaux avec les formules explicites. La boucle s'arrête dès que $B_n > A_n$, ce qui donne le rang du dépassement \emph{définitif}.
+\textbf{Question 2.} On sait par la question 1 que l'offre A est en tête au
+rang $6$ ; on initialise au rang $10$ afin de chercher le croisement beaucoup
+plus tardif. La boucle \texttt{while B <= A} tourne tant que l'offre B n'a pas
+repris l'avantage. À chaque itération, on incrémente $n$ puis on recalcule les
+deux capitaux avec les formules explicites. La boucle s'arrête au premier rang
+$n\geqslant10$ tel que $B_n>A_n$.
 
 \textbf{Question 3.} Exécution des deux premiers tours (après l'initialisation au rang $10$) :
 
@@ -209,11 +218,25 @@ $12$ & $2\,400$ & $1\,049{,}07$ & Vrai \\
 \end{tabular}
 \end{center}
 
-\textbf{Question 4.} Le programme affiche \texttt{n = 1415}. Donc le premier mois pour lequel $B_n$ dépasse définitivement $A_n$ est $n = 1\,415$, soit environ $118$ ans — un horizon qui dépasse très largement une vie humaine.
+\textbf{Question 4.} Le programme affiche \texttt{n = 1415}. Le premier rang
+$n\geqslant10$ pour lequel $B_n>A_n$ est donc $n=1\,415$, soit environ
+$118$ ans — un horizon qui dépasse très largement une vie humaine.
 
 \[
   A_{1415} = 200 \times 1\,415 = 283\,000 \text{ €}, \quad B_{1415} = 1\,000 \times 1{,}004^{1415} \approx 283\,925 \text{ €.}
 \]
+
+Pour tout $n\geqslant1\,415$,
+\[
+B_{n+1}-B_n=0{,}004B_n
+\quad\text{et}\quad
+A_{n+1}-A_n=200.
+\]
+Comme $(B_n)$ est croissante et
+$0{,}004B_{1415}\approx1\,135{,}70>200$, l'accroissement de l'offre B reste
+supérieur à celui de l'offre A à partir de ce rang. Puisque
+$B_{1415}>A_{1415}$, un raisonnement par récurrence montre alors que
+$B_n>A_n$ pour tout $n\geqslant1\,415$.
 
 \end{corrige}
 
@@ -229,8 +252,11 @@ $12$ & $2\,400$ & $1\,049{,}07$ & Vrai \\
 
 \begin{enumerate}
   \item Quelle offre est plus avantageuse sur un horizon de $5$ ans ? De $10$ ans ? Justifier avec les calculs des parties précédentes.
-  \item À partir du rang $n = 1\,415$, que se passe-t-il pour les valeurs de $B_n$ par rapport à $A_n$ ? Justifier qualitativement sans calcul.
-  \item \pictoOral{} \textit{Question orale.} « Expliquer en quelques phrases pourquoi une suite géométrique de raison proche de $1$ est d'abord dominée par une suite arithmétique à forte raison, puis finit par la dépasser. Quel rôle jouent le capital initial et la raison dans la dynamique à long terme ? »
+  \item Expliquer pourquoi la comparaison des accroissements établie dans la
+  partie C garantit que l'offre B conserve son avance après le rang $1\,415$.
+  \item \pictoOral{} \textit{Question orale.} « Expliquer en quelques phrases
+  les deux croisements observés entre les offres. Quel rôle jouent le capital
+  initial, le versement mensuel et les intérêts composés ? »
 \end{enumerate}
 
 \end{exercice}
@@ -245,9 +271,14 @@ Sur $10$ ans ($n = 120$) : $A_{120} = 24\,000$~€ contre $B_{120} = 1\,000 \tim
 
 \commentaireMarge{Sur tout horizon d'épargne raisonnable (quelques dizaines d'années), l'offre A (versements réguliers) reste bien plus efficace.}
 
-\textbf{Conclusion :} Pour tout horizon inférieur à $1\,415$ mois (environ $118$ ans), l'offre A est plus avantageuse — c'est-à-dire pour toute durée d'épargne réaliste.
+\textbf{Conclusion :} Sur les horizons de $5$ et $10$ ans étudiés, l'offre A
+est plus avantageuse. Le programme vérifie aussi $A_n\geqslant B_n$ pour les
+rangs testés de $10$ à $1\,414$.
 
-\textbf{Question 2.} À partir du rang $1\,415$, la suite géométrique $(B_n)$ dépasse définitivement $(A_n)$. En effet, $(B_n)$ croît de manière exponentielle (multiplication par $1{,}004$ à chaque étape) tandis que $(A_n)$ croît de manière linéaire (addition de $200$ à chaque étape). Sur le long terme, toute croissance exponentielle, même de raison très proche de $1$, l'emporte sur une croissance linéaire — mais ce terme peut être extrêmement lointain, comme ici où il dépasse une vie humaine.
+\textbf{Question 2.} Au rang $1\,415$, l'offre B est devant. À partir de ce
+rang, son accroissement mensuel est supérieur à $200$~€, tandis que celui de
+l'offre A vaut exactement $200$~€. La preuve de la partie C montre donc que
+l'écart en faveur de B ne peut plus se refermer.
 
 \textbf{Question 3 — Éléments de réponse orale.}
 
@@ -255,6 +286,8 @@ Une suite géométrique de raison $q$ légèrement supérieure à $1$ croît len
 
 Le capital initial de l'offre B ($1\,000$~€) est modeste par rapport aux versements mensuels de l'offre A ($200$~€/mois). Pendant des années, les intérêts composés de $0{,}4\,\%$ par mois sur $1\,000$~€ restent inférieurs aux $200$~€ mensuels ajoutés dans l'offre A.
 
-Mais la croissance exponentielle s'emballe : chaque mois, les intérêts sont calculés sur un capital de plus en plus grand. À terme, le coefficient $1{,}004^n$ dépasse toute fonction linéaire $200n$, quel que soit le coefficient. C'est la propriété fondamentale de la croissance géométrique à long terme.
+Au croisement observé au rang $1\,415$, les intérêts mensuels de l'offre B
+dépassent enfin le versement fixe de $200$~€. La comparaison des accroissements
+explique alors, dans ce cas précis, pourquoi l'offre B conserve son avance.
 
 \end{corrige}
