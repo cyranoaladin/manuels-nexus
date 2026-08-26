@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-COURS-00", "chapitre": "1SPE-SUITES", "type_objet": "cours", "sous_type": "ouverture", "titre": "Suites numeriques", "temps_gabarit": 1, "parcours_duree": {"P1": "14h", "P2": "11h", "P3": "10h"}, "prerequis": ["R1", "R2", "R3", "R4", "R5"], "capacites": ["C1", "C2", "C3", "C4", "C5", "C6", "C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-SUITES-COURS-00", "chapitre": "1SPE-SUITES", "type_objet": "cours", "sous_type": "ouverture", "titre": "Suites numeriques", "temps_gabarit": 1, "parcours_duree": {"P1": "14h", "P2": "11h", "P3": "10h"}, "prerequis": ["R1", "R2", "R3", "R4", "R5"], "capacites": ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 
 \section*{Contrat du chapitre}
 
@@ -14,6 +14,7 @@
   \item[\textbf{C5}] Étudier le sens de variation d'une suite en choisissant la méthode adaptée (signe de $u_{n+1} - u_n$, rapport $\dfrac{u_{n+1}}{u_n}$, comparaison à une fonction).
   \item[\textbf{C6}] Modéliser une situation concrète par une suite arithmétique ou géométrique et répondre à des questions de la vie courante.
   \item[\textbf{C7}] Écrire et lire un programme Python calculant un terme, une somme ou un seuil de dépassement.
+  \item[\textbf{C8}] Reconnaître intuitivement, sur des exemples, une limite finie, une limite infinie ou une absence de limite, sans formalisation.
 \end{itemize}
 
 \subsection*{Ce dont tu as besoin avant de commencer}
@@ -40,21 +41,20 @@ Si une fiche R te concerne, lis-la avant d'aborder le cours : chaque notion manq
 
 \subsection*{Situation d'accroche — Deux offres d'épargne}
 
-Un établissement bancaire propose deux formules d'épargne pour placer
-$1\,000$~€ :
+Un établissement bancaire propose deux formules d'épargne :
 
 \begin{itemize}
-  \item \textbf{Offre A (versement fixe)} : le capital augmente de
-  $50$~€ chaque mois.
-  \item \textbf{Offre B (intérêts composés)} : le capital est multiplié par $1{,}04$ chaque mois (soit $+4$~\% par mois).
+  \item \textbf{Offre A (versement fixe)} : on dépose $200$~€ par mois sur
+  un livret initialement vide et sans intérêts.
+  \item \textbf{Offre B (intérêts composés)} : un capital initial de
+  $1\,000$~€ est placé au taux mensuel de $0{,}4\,\%$.
 \end{itemize}
-
-Les deux offres partent du même capital initial de $1\,000$~€.
 
 \begin{itemize}
   \item Calcule les capitaux obtenus après 1, 2, 3 et 4 mois pour chaque offre.
-  \item À partir de quel mois l'offre B dépasse-t-elle l'offre A ?
-  \item Peux-tu répondre à cette question sans tout calculer un à un ?
+  \item À quel moment l'offre A rattrape-t-elle d'abord l'offre B ?
+  \item Beaucoup plus tard, quand l'offre B reprend-elle ensuite l'avantage ?
+  Peux-tu le déterminer sans écrire tous les termes à la main ?
 \end{itemize}
 
 Cette situation sera entièrement résolue au Temps~7 (TD fil rouge), avec les outils du chapitre et un programme Python calculant le seuil de dépassement.
