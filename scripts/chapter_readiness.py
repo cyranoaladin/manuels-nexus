@@ -27,6 +27,8 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
+from collections.abc import Mapping
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 
@@ -131,16 +133,53 @@ def _versions_programme() -> dict:
     }
 
 
-def _pdfs_construits() -> set[str]:
-    trouves = set()
-    for base in (RACINE / "Mathematiques/manuel-maths/build", RACINE / "NSI/build"):
-        if base.exists():
-            for pdf in base.rglob("*.pdf"):
-                trouves.add(pdf.name.lower())
-    return trouves
+def _builds_observes() -> dict[str, set[str]]:
+    manifeste = RACINE / "audit/BUILD_MANIFEST.json"
+    try:
+        apercu = json.loads(manifeste.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    builds = apercu.get("builds") if isinstance(apercu, Mapping) else None
+    if not isinstance(builds, list) or not builds:
+        return {}
+
+    try:
+        try:
+            from scripts import inventory_collection
+        except ModuleNotFoundError:  # exécution directe depuis scripts/
+            import inventory_collection  # type: ignore[no-redef]
+        inventaire = inventory_collection.build_inventory(
+            RACINE,
+            require_git_provenance=True,
+        )
+    except (
+        ModuleNotFoundError,
+        OSError,
+        ValueError,
+        subprocess.SubprocessError,
+    ):
+        return {}
+
+    observes = inventaire.get("observed_builds")
+    if not isinstance(observes, list):
+        return {}
+    variantes: dict[str, set[str]] = {}
+    for build in observes:
+        if not isinstance(build, Mapping):
+            return {}
+        manuel = build.get("manual")
+        variante = build.get("variant")
+        if not isinstance(manuel, str) or not isinstance(variante, str):
+            return {}
+        variantes.setdefault(manuel, set()).add(variante)
+    return variantes
 
 
-def analyser(dossier: Path, versions: dict, pdfs: set[str]) -> Chapitre:
+def analyser(
+    dossier: Path,
+    versions: dict,
+    builds_observes: Mapping[str, set[str]],
+) -> Chapitre:
     nom = dossier.name
     ch = Chapitre(chapter_id=nom, manual_id=manuel_de(nom))
     ch.programme_version = versions.get(ch.manual_id or "")
@@ -272,20 +311,9 @@ def analyser(dossier: Path, versions: dict, pdfs: set[str]) -> Chapitre:
         ch.programme_review = "rattachement_incomplet"
 
     # --- builds ---------------------------------------------------------------
-    # Les noms de PDF ne reprennent pas toujours l'identifiant du manuel tel
-    # quel : TSPE_2026_2027 se materialise en MANUEL_TSPE_2026-2027_*.pdf. On
-    # compare donc sur une forme normalisee, sans separateurs.
-    def _normaliser(valeur: str) -> str:
-        return re.sub(r"[^a-z0-9]", "", valeur.lower())
-
-    manuel = _normaliser(ch.manual_id or "")
-    normalises = {_normaliser(nom): nom for nom in pdfs}
-    ch.student_build = any(
-        manuel and manuel in cle and "eleve" in cle for cle in normalises
-    )
-    ch.teacher_build = any(
-        manuel and manuel in cle and "professeur" in cle for cle in normalises
-    )
+    variantes_observees = builds_observes.get(ch.manual_id or "", set())
+    ch.student_build = "eleve" in variantes_observees
+    ch.teacher_build = "professeur" in variantes_observees
 
     # --- constats bloquants ---------------------------------------------------
     b = ch.blocking_findings
@@ -349,14 +377,14 @@ def analyser(dossier: Path, versions: dict, pdfs: set[str]) -> Chapitre:
 
 def collecter() -> list[Chapitre]:
     versions = _versions_programme()
-    pdfs = _pdfs_construits()
+    builds_observes = _builds_observes()
     chapitres = []
     for base in RACINES_CHAPITRES:
         if not base.exists():
             continue
         for dossier in sorted(base.iterdir()):
             if dossier.is_dir() and (dossier / "contrat.yaml").exists():
-                chapitres.append(analyser(dossier, versions, pdfs))
+                chapitres.append(analyser(dossier, versions, builds_observes))
     return chapitres
 
 
