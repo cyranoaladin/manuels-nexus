@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Consolide les trois partitions de revue indépendante des 330 QCM Math."""
+"""Consolide les partitions de revue indépendante du corpus QCM Math courant."""
 
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ MD_TARGET = AUDIT / "QCM_SCIENTIFIC_ANSWER_KEY_AUDIT.md"
 PARTITIONS = (
     ("1SPE", EVIDENCE / "1SPE_162.json", 162),
     ("TSPE", EVIDENCE / "TSPE_96.json", 96),
-    ("TCOMPL_TEXPERTES", EVIDENCE / "TCOMPL_TEXPERTES_72.json", 72),
+    ("TCOMPL_TEXPERTES", EVIDENCE / "TCOMPL_TEXPERTES_73.json", 73),
 )
 QCM_ROOT = ROOT / "Mathematiques" / "manuel-maths" / "chapitres"
 OBJECTIVE_COUNTERS = (
@@ -225,7 +225,8 @@ def build_audit() -> dict[str, Any]:
         payload = json.loads(path.read_text(encoding="utf-8"))
         source_keys.update((payload["chapitre"], item["id"]) for item in payload["questions"])
     row_keys = {(row["chapter"], row["question_id"]) for row in rows}
-    if len(rows) != 330 or len(row_keys) != 330 or row_keys != source_keys:
+    expected_total = sum(expected_count for _name, _path, expected_count in PARTITIONS)
+    if len(rows) != expected_total or len(row_keys) != expected_total or row_keys != source_keys:
         raise EvidenceError(
             f"inventaire incohérent: lignes={len(rows)} uniques={len(row_keys)} sources={len(source_keys)}"
         )
@@ -237,7 +238,7 @@ def build_audit() -> dict[str, Any]:
         "artifact_name": "QCM_SCIENTIFIC_ANSWER_KEY_AUDIT",
         "status": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
         "methodology": {
-            "scope": "all 330 Math QCM questions; no sampling",
+            "scope": f"all {len(rows)} current Math QCM questions; no sampling",
             "authority": "independent recalculation evidence partitions",
             "source_currentness": "per-source SHA256 equality required",
             "human_approval_inferred": False,
@@ -269,13 +270,13 @@ def render_markdown(payload: dict[str, Any]) -> str:
         "",
         f"Statut: `{payload['status']}`.",
         "",
-        "Les 330 questions ont été recalculées ou revalidées indépendamment. Les compteurs objectifs sont nuls, sans valoir approbation humaine ni promotion administrative.",
+        f"Les {summary['total_questions']} questions ont été recalculées ou revalidées indépendamment. Les compteurs objectifs sont nuls, sans valoir approbation humaine ni promotion administrative.",
         "",
         "## Résultat",
         "",
         f"- Fichiers QCM: {summary['qcm_files']}",
-        f"- Questions: {summary['total_questions']}/330",
-        f"- Recalcul indépendant: {summary['independently_recalculated']}/330",
+        f"- Questions: {summary['total_questions']}/{summary['total_questions']}",
+        f"- Recalcul indépendant: {summary['independently_recalculated']}/{summary['total_questions']}",
         f"- Revue de contenu en attente: {summary['content_review_pending']}",
         f"- Approbation humaine: {'OUI' if summary['human_approval_complete'] else 'NON'}",
         "",
@@ -319,7 +320,10 @@ def main() -> int:
             for path in stale:
                 print(f"STALE_OR_MISSING: {path.relative_to(ROOT)}")
             return 1
-        print("QCM scientific answer-key audit current: 330/330")
+        print(
+            "QCM scientific answer-key audit current: "
+            f"{payload['summary']['total_questions']}/{payload['summary']['total_questions']}"
+        )
         return 0
     for path, content in expected.items():
         path.write_text(content, encoding="utf-8")

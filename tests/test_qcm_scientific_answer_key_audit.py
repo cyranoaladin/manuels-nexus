@@ -15,7 +15,7 @@ EVIDENCE = ROOT / "audit/qcm_review_evidence"
 PARTITIONS = {
     "1SPE": (EVIDENCE / "1SPE_162.json", 162),
     "TSPE": (EVIDENCE / "TSPE_96.json", 96),
-    "TCOMPL_TEXPERTES": (EVIDENCE / "TCOMPL_TEXPERTES_72.json", 72),
+    "TCOMPL_TEXPERTES": (EVIDENCE / "TCOMPL_TEXPERTES_73.json", 73),
 }
 
 
@@ -48,12 +48,12 @@ def test_qcm_scientific_audit_inventory_and_digest_are_current() -> None:
 
     assert {(row["chapter"], row["question_id"]) for row in rows} == _source_keys()
     assert payload["qcm_source_digest"] == _source_digest()
-    assert payload["summary"]["total_questions"] == 330
-    assert payload["summary"]["independently_recalculated"] == 330
+    assert payload["summary"]["total_questions"] == 331
+    assert payload["summary"]["independently_recalculated"] == 331
     assert payload["summary"]["content_review_pending"] == 0
     assert payload["summary"]["by_manual"] == {
         "1SPE": 162,
-        "TCOMPL": 47,
+        "TCOMPL": 48,
         "TEXPERTES": 25,
         "TSPE": 96,
     }

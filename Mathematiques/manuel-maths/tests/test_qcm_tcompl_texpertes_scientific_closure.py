@@ -1,4 +1,4 @@
-"""Régressions scientifiques des 72 QCM TCOMPL et Math expertes."""
+"""Régressions scientifiques des 73 QCM TCOMPL et Math expertes."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 EXPECTED = {
     "TCOMPL-CALCULS-AIRES": ["C5", "C4", "C1", "C3", "C2", "C6"],
-    "TCOMPL-CORRELATION-CAUSALITE": ["C2", "C2", "C3", "C4", "C5", "C5"],
+    "TCOMPL-CORRELATION-CAUSALITE": ["C2", "C2", "C3", "C4", "C5", "C5", "C1"],
     "TCOMPL-ECHANTILLONNAGE": ["C1", "C2", "C3", "C4", "C5"],
     "TCOMPL-INEGALITES": ["C1", "C2", "C3", "C4", "C5"],
     "TCOMPL-INFERENCE-BAYESIENNE": ["C2", "C1", "C1", "C3", "C4"],
@@ -38,8 +38,8 @@ def _question(chapter: str, question_id: str) -> dict:
     return next(q for q in _data(chapter)["questions"] if q["id"] == question_id)
 
 
-def test_les_72_questions_sont_rattachees_a_leur_capacite_reelle() -> None:
-    assert sum(len(capacities) for capacities in EXPECTED.values()) == 72
+def test_les_73_questions_sont_rattachees_a_leur_capacite_reelle() -> None:
+    assert sum(len(capacities) for capacities in EXPECTED.values()) == 73
     for chapter, capacities in EXPECTED.items():
         questions = _data(chapter)["questions"]
         assert [q["capacite"] for q in questions] == capacities
@@ -50,7 +50,7 @@ def test_les_72_questions_sont_rattachees_a_leur_capacite_reelle() -> None:
         assert set(capacities) <= contract_codes
 
 
-def test_les_216_distracteurs_portent_un_modele_derreur_specifique() -> None:
+def test_les_219_distracteurs_portent_un_modele_derreur_specifique() -> None:
     diagnostics = []
     for chapter in EXPECTED:
         for question in _data(chapter)["questions"]:
@@ -61,7 +61,7 @@ def test_les_216_distracteurs_portent_un_modele_derreur_specifique() -> None:
             diagnostics.extend(
                 diagnostic["erreur"] for diagnostic in question["diagnostics"].values()
             )
-    assert len(diagnostics) == 216
+    assert len(diagnostics) == 219
     assert all(len(error) >= 60 for error in diagnostics)
     assert all("Consulter le cours" not in error for error in diagnostics)
 
