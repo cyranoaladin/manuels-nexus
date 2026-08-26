@@ -87,24 +87,26 @@ $u_n=u_0q^n$ est utilisée seulement pour $n\geq1$.
 %---------------------------------------------------------------
 
 \approfondissement{
-\textbf{Limites des modèles et aperçu des suites arithmético-géométriques.}
+\textbf{Vérifier la validité d'un modèle.}
 
 \medskip
-Les modèles arithmétiques et géométriques supposent une évolution parfaitement régulière, ce qui est rarement vérifié en pratique sur le long terme.
-En particulier :
+Les modèles arithmétiques et géométriques supposent une évolution parfaitement
+régulière, ce qui est rarement vérifié en pratique pendant une durée
+arbitrairement longue. Avant d'utiliser un modèle, il faut donc préciser son
+\textbf{domaine de validité} et confronter ses résultats au contexte.
+
+\medskip
+Un tableau de valeurs permet notamment de repérer des prévisions
+invraisemblables :
 \begin{itemize}
-  \item un modèle géométrique de croissance ($q > 1$) implique une croissance non bornée, irréaliste pour une population soumise à des ressources limitées ;
-  \item un modèle arithmétique peut donner des valeurs négatives si $r < 0$ et $u_0$ fini.
+  \item pour une quantité initiale positive et un coefficient $q>1$, les
+  valeurs d'un modèle géométrique peuvent devenir incompatibles avec des
+  ressources limitées ;
+  \item un modèle arithmétique de raison négative peut finir par produire une
+  valeur négative, impossible pour une population ou une masse.
 \end{itemize}
 
 \medskip
-\textbf{Suites arithmético-géométriques (aperçu).}
-Certains phénomènes combinent les deux effets :
-\[
-  u_{n+1} = q \cdot u_n + r \quad (q
-\neq 1,\; r
-\neq 0).
-\]
-On montre (hors programme de première) qu'en posant $\ell = \dfrac{r}{1-q}$, la suite $(v_n)$ définie par $v_n = u_n - \ell$ est géométrique de raison $q$.
-Ce type de suite modélise par exemple le remboursement d'un emprunt à taux fixe.
+Une prévision numérique ne vaut donc que dans les hypothèses et sur la période
+où le modèle reste pertinent.
 }

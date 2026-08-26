@@ -13,6 +13,7 @@ CHAPTER = (
 OPENING = CHAPTER / "cours" / "00_ouverture.tex"
 FIL_ROUGE = CHAPTER / "cours" / "07_td_fil_rouge.tex"
 CONTRACT = CHAPTER / "contrat.yaml"
+C6_COURSE = CHAPTER / "cours" / "15_C6_modelisation.tex"
 
 
 def _metadata(path: Path) -> dict:
@@ -47,3 +48,18 @@ def test_opening_and_fil_rouge_use_the_same_savings_scenario() -> None:
     assert "Les deux offres partent du même capital initial" not in opening
     assert "À quel moment l'offre A rattrape-t-elle d'abord l'offre B" in opening
     assert "l'offre B reprend-elle ensuite l'avantage" in opening
+
+
+def test_c6_course_keeps_model_limits_inside_the_1spe_scope() -> None:
+    source = C6_COURSE.read_text(encoding="utf-8")
+
+    assert "Vérifier la validité d'un modèle" in source
+    assert "tableau de valeurs" in source
+    assert "domaine de validité" in source
+    for forbidden in (
+        "suites arithmético-géométriques",
+        "hors programme de première",
+        "croissance non bornée",
+        r"\ell = \dfrac{r}{1-q}",
+    ):
+        assert forbidden not in source
