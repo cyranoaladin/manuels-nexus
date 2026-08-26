@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-EV-B", "chapitre": "1SPE-SUITES", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3", "C4", "C5", "C6", "C7"], "competences": ["chercher", "modeliser", "calculer", "raisonner", "communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0_arith": 5, "r_arith": 3, "u0_geo": 4, "q_geo": 2, "capital": 1000, "taux_annuel": 4, "seuil": 1500}, "fichier_tex": "chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-B.tex", "corrige_tex": "chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-B-corrige.tex", "status": "generated"}
+% META: {"id": "1SPE-SUITES-EV-B", "chapitre": "1SPE-SUITES", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3", "C4", "C5", "C6", "C7"], "competences": ["chercher", "modeliser", "calculer", "raisonner", "communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0_arith": 5, "r_arith": 3, "u0_geo": 4, "q_geo": 2, "capital": 1000, "taux_annuel": 4, "seuil": 1500, "p0_theatre": 18, "r_theatre": 4, "nombre_rangees": 12}, "fichier_tex": "chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-B.tex", "corrige_tex": "chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-B-corrige.tex", "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational, symbols, simplify, log
 % n = symbols('n', integer=True, nonnegative=True)
@@ -48,25 +48,20 @@
 % assert float(u_place.subs(n, 10)) < seuil
 % assert float(u_place.subs(n, 11)) >= seuil
 %
-% # ---- Exercice 4 : somme et variation ----
-% # Suite arithmetique v_n = 2n + 5, somme S_n = sum_{k=0}^{n} v_k
-% v = 5 + 2*n
-% assert v.subs(n, 0) == 5
-% assert v.subs(n, 1) == 7
-% # Somme de (n+1) termes arithmetiques de premier terme 5 et dernier terme 2n+5
-% # S_n = (n+1)*(5 + 2n+5)/2 = (n+1)*(2n+10)/2 = (n+1)*(n+5)
-% S_v = lambda m: (m+1)*(m+5)
-% assert S_v(0) == 5
-% assert S_v(1) == 12
-% assert S_v(4) == 45
-% # Verifier que S_4 = v0+v1+v2+v3+v4
-% assert sum(5 + 2*k for k in range(5)) == S_v(4)
-% # Plus petit n tel que S_n > 200 : (n+1)(n+5) > 200
-% # n=12 : 13*17=221>200; n=11 : 12*16=192<=200
-% assert S_v(11) == 192
-% assert S_v(12) == 221
-% assert S_v(11) <= 200
-% assert S_v(12) > 200
+% # ---- Exercice 4 : rangees d'un theatre ----
+% p = 18 + 4*n
+% assert p.subs(n, 0) == 18
+% assert p.subs(n, 1) == 22
+% assert simplify(p.subs(n, n+1) - p) == 4
+% T = lambda m: (m+1)*(18+2*m)
+% # La formule erronee (n+1)*p_n echoue des n=1 : 40 != 44.
+% assert T(1) == 40
+% assert 2 * p.subs(n, 1) == 44
+% for m in range(12):
+%     assert sum(18 + 4*k for k in range(m+1)) == T(m)
+% # Douze rangees correspondent aux indices 0 a 11.
+% assert T(11) == 480
+% assert sum(18 + 4*k for k in range(12)) == 480
 % END-VERIFY
 
 %---------------------------------------------------------------
@@ -170,30 +165,31 @@ Lucas place $1\,000$\,€ sur un livret d'épargne qui rapporte $4\,\%$ d'intér
 \section*{Exercice 4 \ifnxVersionProfesseur\hfill (4 points)\fi \hfill Capacités C2, C4}
 %===============================================================
 
-\textit{Compétences évaluées : calculer, raisonner, chercher.}
+\textit{Compétences évaluées : modéliser, calculer, raisonner.}
 
 \medskip
-On considère la suite $(v_n)$ définie pour tout entier naturel $n$ par :
-\[
-  v_n = 2n + 5.
-\]
+Dans un théâtre, la première rangée compte $18$ places et chaque nouvelle
+rangée compte $4$ places de plus que la précédente. On note $p_n$ le nombre de
+places de la rangée d'indice $n$ ; ainsi, $n=0$ correspond à la première rangée
+et $p_0=18$.
 
-Pour tout entier naturel $n$, on pose :
+Pour tout entier naturel $n$, on note $T_n$ le nombre total de places des
+$(n+1)$ premières rangées :
 \[
-  S_n = v_0 + v_1 + v_2 + \cdots + v_n = \sum_{k=0}^{n} v_k.
+  T_n=p_0+p_1+\cdots+p_n=\sum_{k=0}^{n}p_k.
 \]
 
 \begin{enumerate}
-  \item Montrer que $(v_n)$ est une suite arithmétique de raison $2$ et de premier terme $v_0 = 5$.
-  \ifnxVersionProfesseur\hfill\textit{(1 pt — raisonner)}\fi
+  \item Exprimer $p_{n+1}$ en fonction de $p_n$, puis justifier que $(p_n)$ est
+  une suite arithmétique et établir $p_n=18+4n$.
+  \ifnxVersionProfesseur\hfill\textit{(1 pt — modéliser, raisonner)}\fi
 
-  \item Établir que $S_n = (n+1)(n+5)$ pour tout entier naturel $n$.
-
-  \textit{On rappelle que la somme de $(n+1)$ termes d'une suite arithmétique de premier terme $a$ et de dernier terme $b$ vaut $\dfrac{(n+1)(a+b)}{2}$.}
+  \item Lina affirme que $T_n=(n+1)\times p_n$. Réfuter cette formule pour
+  $n=1$, puis établir que $T_n=(n+1)(18+2n)$ pour tout entier naturel $n$.
   \ifnxVersionProfesseur\hfill\textit{(2 pts — calculer, raisonner)}\fi
 
-  \item Déterminer le plus petit entier naturel $n$ tel que $S_n > 200$.
-  \ifnxVersionProfesseur\hfill\textit{(1 pt — chercher)}\fi
+  \item Calculer le nombre total de places des $12$ premières rangées.
+  \ifnxVersionProfesseur\hfill\textit{(1 pt — calculer)}\fi
 \end{enumerate}
 
 \end{evaluation}

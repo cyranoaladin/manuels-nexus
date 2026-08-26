@@ -223,6 +223,70 @@ def test_evaluation_metadata_and_exercise_four_capacity_labels_are_exact() -> No
         assert _meta(correction)["status"] == "generated"
 
 
+def _exercise_four(source: str) -> str:
+    return source.split(r"\section*{Exercice 4", maxsplit=1)[1]
+
+
+def test_evaluation_b_exercise_four_is_a_distinct_theatre_sum_problem() -> None:
+    student_a = _text(EVALUATIONS / "1SPE-SUITES-EV-A.tex")
+    student_b = _text(EVALUATIONS / "1SPE-SUITES-EV-B.tex")
+    correction_b = _text(EVALUATIONS / "1SPE-SUITES-EV-B-corrige.tex")
+    exercise_a = _compact(_exercise_four(student_a))
+    exercise_b = _compact(_exercise_four(student_b))
+    answer_b = _compact(_exercise_four(correction_b))
+
+    assert exercise_a != exercise_b
+    assert all(
+        token in exercise_b
+        for token in (
+            "théâtre",
+            "$p_0=18$",
+            "la première rangée",
+            "$p_{n+1}$ en fonction de $p_n$",
+            "$p_n=18+4n$",
+            "$T_n$",
+            "pour $n=1$",
+            "(n+1)\\times p_n",
+            "(n+1)(18+2n)",
+            "$12$ premières rangées",
+        )
+    )
+    assert all(
+        token in answer_b
+        for token in (
+            "p_{n+1}=p_n+4",
+            "raison $4$",
+            "p_n=18+4n",
+            "T_1=p_0+p_1=18+22=40",
+            "2p_1=44",
+            "T_n=(n+1)(18+2n)",
+            "T_{11}=(11+1)(18+2\\times11)=12\\times40=480",
+        )
+    )
+    assert sum(18 + 4 * rank for rank in range(12)) == 480
+    assert "v_n = 2n + 5" not in exercise_b
+    assert "S_n = (n+1)(n+5)" not in answer_b
+    assert "Compétences évaluées : modéliser, calculer, raisonner." in exercise_b
+    assert "(1 pt — modéliser, raisonner)" in exercise_b
+    assert "(2 pts — calculer, raisonner)" in exercise_b
+    assert "(1 pt — calculer)" in exercise_b
+    assert "chercher" not in exercise_b
+    assert (
+        r"\baremeIndicatif{Q1 : 1 pt (modéliser, raisonner) ; "
+        "Q2 : 2 pts (calculer, raisonner) ; Q3 : 1 pt (calculer)}"
+        in answer_b
+    )
+
+    expected_parameters = {
+        "p0_theatre": 18,
+        "r_theatre": 4,
+        "nombre_rangees": 12,
+    }
+    for filename in ("1SPE-SUITES-EV-B.tex", "1SPE-SUITES-EV-B-corrige.tex"):
+        parameters = _meta(EVALUATIONS / filename)["parametres_sympy"]
+        assert all(parameters[key] == value for key, value in expected_parameters.items())
+
+
 def test_evaluation_rounding_and_embedded_oracles_match_published_answers() -> None:
     evaluation_b = _text(EVALUATIONS / "1SPE-SUITES-EV-B.tex")
     correction_a = _text(EVALUATIONS / "1SPE-SUITES-EV-A-corrige.tex")
