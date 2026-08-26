@@ -24,7 +24,7 @@ def test_fil_rouge_asks_for_and_proves_a_first_crossing() -> None:
     normalized = " ".join(source.split())
 
     assert "premier rang $n$ (à partir du rang $10$) tel que $B_n>A_n$" in normalized
-    assert "montrer que cet avantage est ensuite conservé" in normalized
+    assert "montrer que le solde de B reste ensuite supérieur à celui de A" in normalized
     assert "dépasse définitivement" not in source
     assert "croissance exponentielle" not in source
     assert "l'emporte sur une croissance linéaire" not in source
@@ -33,8 +33,12 @@ def test_fil_rouge_asks_for_and_proves_a_first_crossing() -> None:
 def test_fil_rouge_permanence_argument_is_elementary_and_exact() -> None:
     source = _source()
 
-    b = lambda n: 1000 * 1.004**n
-    a = lambda n: 200 * n
+    def b(n: int) -> float:
+        return 1000 * 1.004**n
+
+    def a(n: int) -> int:
+        return 200 * n
+
     assert b(1414) <= a(1414)
     assert b(1415) > a(1415)
     assert abs((b(1416) - b(1415)) - 0.004 * b(1415)) < 1e-9

@@ -46,7 +46,7 @@
 % assert u_place.subs(n, 0) == 1000
 % # Q3
 % assert u_place.subs(n, 1) == 1040
-% assert int(float(u_place.subs(n, 2))) == 1081   # 1081.6 => 1082 arrondi a l'euro
+% assert round(float(u_place.subs(n, 2))) == 1082   # 1081.6 => 1082 arrondi a l'euro
 % # Q4b : seuil
 % n_seuil = math.ceil(math.log(seuil/capital) / math.log(float(q_place)))
 % assert n_seuil == 11
@@ -259,7 +259,7 @@ $n$ & $1\,000 \times 1{,}04^n$ (arrondi à l'euro) & $\geq 1\,500$\,? \\
 Le capital dépasse $1\,500$\,€ pour la première fois après $\boxed{11}$ années. \checkmark
 
 %===============================================================
-\section*{Exercice 4 \hfill (4 points) — C4, C5}
+\section*{Exercice 4 \hfill (4 points) — C2, C4}
 %===============================================================
 
 \baremeIndicatif{Q1 : 1 pt (raisonner) ; Q2 : 2 pts (calculer, raisonner) ; Q3 : 1 pt (chercher)}

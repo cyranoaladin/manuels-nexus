@@ -146,7 +146,17 @@ print(somme(2, 3, 4))
         "242\n",
     ),
     "1SPE-SUITES-CR-016-SEUIL.py": (
-        """def recherche_seuil(u0, q, seuil):
+        """from math import isfinite
+
+def seuil_geometrique(u0, q, seuil):
+    \"\"\"Renvoie le plus petit rang avec u_n > seuil, pour u0 > 0 et q > 1.\"\"\"
+    if not (isfinite(u0) and isfinite(q) and isfinite(seuil)):
+        raise ValueError("Les paramètres doivent être des nombres réels finis.")
+    if u0 <= 0:
+        raise ValueError("u0 doit être strictement positif.")
+    if q <= 1:
+        raise ValueError("q doit être strictement supérieur à 1.")
+
     u = u0
     n = 0
     while u <= seuil:
@@ -154,7 +164,7 @@ print(somme(2, 3, 4))
         n = n + 1
     return n, u
 
-n, val = recherche_seuil(1, 1.05, 2)
+n, val = seuil_geometrique(1, 1.05, 2)
 print(f"n = {n}, u_n = {val:.4f}")
 """,
         "n = 15, u_n = 2.0789\n",

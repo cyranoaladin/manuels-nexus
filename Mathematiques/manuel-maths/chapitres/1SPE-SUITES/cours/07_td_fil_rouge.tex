@@ -15,6 +15,8 @@
 % # B demarre en tete (capital initial 1000 euros) puis A reprend l'avantage des le rang 6
 % assert B(5) > A(5)
 % assert B(6) <= A(6)
+% for j in range(7, 10):
+%     assert B(j) < A(j)
 % # Recherche du premier depassement de B sur A a partir du rang 10
 % k = 10
 % while B(k) <= A(k):
@@ -125,13 +127,16 @@ Le rapport $\dfrac{B_{n+1}}{B_n} = 1{,}004$ est constant et $B_0 = 1\,000
   B_{12} = 1\,000 \times 1{,}004^{12} \approx 1\,000 \times 1{,}0489 \approx 1\,049 \text{ €,}
 \]
 \[
-  B_{24} = 1\,000 \times 1{,}004^{24} \approx 1\,000 \times 1{,}1002 \approx 1\,100 \text{ €,}
+  B_{24} = 1\,000 \times 1{,}004^{24} \approx 1\,000 \times 1{,}1005 \approx 1\,101 \text{ €,}
 \]
 \[
-  B_{60} = 1\,000 \times 1{,}004^{60} \approx 1\,000 \times 1{,}2704 \approx 1\,270 \text{ €.}
+  B_{60} = 1\,000 \times 1{,}004^{60} \approx 1\,000 \times 1{,}2706 \approx 1\,271 \text{ €.}
 \]
 
-Sur 5 ans, l'offre B ne fait croître le capital que de $270$~€, bien loin des $12\,000$~€ de l'offre A. Le capital initial est trop faible par rapport aux versements mensuels.
+Sur 5 ans, le solde de l'offre B augmente d'environ $271$~€. La comparaison
+avec le solde de l'offre A doit tenir compte de flux de versements différents :
+A reçoit $200$~€ chaque mois, tandis que B ne reçoit que le capital initial de
+$1\,000$~€.
 
 \end{corrige}
 
@@ -147,11 +152,11 @@ Sur 5 ans, l'offre B ne fait croître le capital que de $270$~€, bien loin des
 
 \begin{enumerate}
   \item Vérifier que $B_5 > A_5$ et que $B_6 \leqslant A_6$. Que peut-on en conclure sur les tout premiers mois ?
-  \item Compléter et expliquer le programme Python ci-dessous, qui détermine
+  \item Lire et expliquer le programme Python ci-dessous, qui détermine
   le premier rang $n$ (à partir du rang $10$) tel que $B_n>A_n$.
   \item Exécuter mentalement les deux premiers tours de boucle (vérifier les valeurs de \texttt{A}, \texttt{B} et \texttt{n}).
-  \item Donner le rang obtenu, puis montrer que cet avantage est ensuite
-  conservé en comparant les accroissements mensuels des deux offres.
+  \item Donner le rang obtenu, puis montrer que le solde de B reste ensuite
+  supérieur à celui de A en comparant les accroissements mensuels des deux offres.
 \end{enumerate}
 
 \end{exercice}
@@ -167,20 +172,34 @@ Sur 5 ans, l'offre B ne fait croître le capital que de $270$~€, bien loin des
 \[
   A_5 = 200 \times 5 = 1\,000 \text{ €}, \quad B_5 = 1\,000 \times 1{,}004^5 \approx 1\,020{,}16 \text{ €.}
 \]
-Donc $B_5 > A_5$ : grâce à son capital de départ, l'offre B est encore en tête au $5^{\text{e}}$ mois.
+Donc $B_5 > A_5$ : grâce à son capital de départ, le solde de l'offre B est
+encore le plus élevé au $5^{\text{e}}$ mois.
 \[
   A_6 = 200 \times 6 = 1\,200 \text{ €}, \quad B_6 = 1\,000 \times 1{,}004^6 \approx 1\,024{,}24 \text{ €.}
 \]
-Donc $B_6 \leqslant A_6$ : dès le $6^{\text{e}}$ mois, les versements réguliers de l'offre A comblent l'avance initiale de l'offre B.
+Donc $B_6 \leqslant A_6$ : dès le $6^{\text{e}}$ mois, le solde de l'offre A
+devient supérieur à celui de l'offre B.
 
-\commentaireMarge{L'avance de B au départ disparaît vite.}
+De plus,
+\[
+B_7\approx1\,028{,}34<A_7=1\,400,\quad
+B_8\approx1\,032{,}45<A_8=1\,600,\quad
+B_9\approx1\,036{,}58<A_9=1\,800.
+\]
+Ainsi, le solde de A reste supérieur aux rangs $6$ à $9$ ; la recherche qui
+commence au rang $10$ ne laisse aucun croisement intermédiaire de côté.
 
-On en conclut que l'avantage de l'offre B au démarrage est très éphémère : dès le sixième mois, l'offre A reprend la tête, et il faudra étudier ce qui se passe beaucoup plus loin pour savoir si $(B_n)$ finit par revenir devant $(A_n)$.
+\commentaireMarge{Le solde de B, supérieur au départ, est dépassé rapidement.}
 
-\textbf{Question 2.} On sait par la question 1 que l'offre A est en tête au
-rang $6$ ; on initialise au rang $10$ afin de chercher le croisement beaucoup
-plus tardif. La boucle \texttt{while B <= A} tourne tant que l'offre B n'a pas
-repris l'avantage. À chaque itération, on incrémente $n$ puis on recalcule les
+On en conclut que le solde de B, supérieur au démarrage, est dépassé dès le
+sixième mois. Il faut étudier des rangs beaucoup plus élevés pour savoir si
+$B_n$ redevient supérieur à $A_n$.
+
+\textbf{Question 2.} On sait par la question 1 que le solde de l'offre A est
+supérieur à celui de B au rang $6$ et les calculs précédents couvrent les rangs $7$ à $9$ ; on initialise
+au rang $10$ afin de chercher le croisement beaucoup
+plus tardif. La boucle \texttt{while B <= A} tourne tant que le solde de l'offre B
+n'est pas redevenu supérieur à celui de A. À chaque itération, on incrémente $n$ puis on recalcule les
 deux capitaux avec les formules explicites. La boucle s'arrête au premier rang
 $n\geqslant10$ tel que $B_n>A_n$.
 
@@ -233,11 +252,13 @@ $B_n>A_n$ pour tout $n\geqslant1\,415$.
 \textbf{Partie D — Synthèse et interprétation économique}
 
 \begin{enumerate}
-  \item Quelle offre est plus avantageuse sur un horizon de $5$ ans ? De $10$ ans ? Justifier avec les calculs des parties précédentes.
+  \item Quel livret présente le solde le plus élevé au bout de $5$ ans ? De
+  $10$ ans ? Justifier avec les calculs des parties précédentes et rappeler que
+  les deux modèles reposent sur des flux de versements différents.
   \item Expliquer pourquoi la comparaison des accroissements établie dans la
-  partie C garantit que l'offre B conserve son avance après le rang $1\,415$.
+  partie C garantit que le solde de B reste supérieur après le rang $1\,415$.
   \item \pictoOral{} \textit{Question orale.} « Expliquer en quelques phrases
-  les deux croisements observés entre les offres. Quel rôle jouent le capital
+  les deux croisements observés entre les soldes. Quel rôle jouent le capital
   initial, le versement mensuel et les intérêts composés ? »
 \end{enumerate}
 
@@ -247,17 +268,22 @@ $B_n>A_n$ pour tout $n\geqslant1\,415$.
 
 \textbf{Question 1.}
 
-Sur $5$ ans ($n = 60$) : $A_{60} = 12\,000$~€ contre $B_{60} \approx 1\,270$~€. L'offre A est très largement supérieure.
+Sur $5$ ans ($n = 60$) : $A_{60} = 12\,000$~€ contre
+$B_{60} \approx 1\,271$~€. Le solde de A est le plus élevé.
 
-Sur $10$ ans ($n = 120$) : $A_{120} = 24\,000$~€ contre $B_{120} = 1\,000 \times 1{,}004^{120} \approx 1\,615$~€. L'offre A reste nettement meilleure.
+Sur $10$ ans ($n = 120$) : $A_{120} = 24\,000$~€ contre
+$B_{120} = 1\,000 \times 1{,}004^{120} \approx 1\,615$~€. Le solde de A reste
+le plus élevé.
 
-\commentaireMarge{Sur tout horizon d'épargne raisonnable (quelques dizaines d'années), l'offre A (versements réguliers) reste bien plus efficace.}
+\commentaireMarge{Les soldes comparent ici des flux différents : versements mensuels pour A, capital initial unique pour B.}
 
-\textbf{Conclusion :} Sur les horizons de $5$ et $10$ ans étudiés, l'offre A
-est plus avantageuse. Le programme vérifie aussi $A_n\geqslant B_n$ pour les
-rangs testés de $10$ à $1\,414$.
+\textbf{Conclusion :} Sur les horizons de $5$ et $10$ ans étudiés, le solde de
+A est supérieur. Ce constat décrit les deux flux choisis ; il ne compare pas
+deux placements alimentés de la même manière. Les calculs couvrent les rangs
+$6$ à $9$, puis le programme vérifie $A_n\geqslant B_n$ pour les rangs testés
+de $10$ à $1\,414$.
 
-\textbf{Question 2.} Au rang $1\,415$, l'offre B est devant. À partir de ce
+\textbf{Question 2.} Au rang $1\,415$, le solde de B est supérieur. À partir de ce
 rang, son accroissement mensuel est supérieur à $200$~€, tandis que celui de
 l'offre A vaut exactement $200$~€. La preuve de la partie C montre donc que
 l'écart en faveur de B ne peut plus se refermer.

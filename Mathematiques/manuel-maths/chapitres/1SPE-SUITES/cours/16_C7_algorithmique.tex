@@ -11,13 +11,25 @@ Pour calculer $u_n$ lorsque la suite est définie par récurrence ($u_{n+1} = f(
 \lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-CR-016-TERME.py}
 
 \propriete[2 — Calcul d'une somme (boucle \texttt{for} avec accumulateur)]{
-Pour calculer $S = u_0 + u_1 + \cdots + u_n$, on utilise une variable accumulateur initialisée à $0$, à laquelle on ajoute chaque terme.
+Pour calculer $S = u_0 + u_1 + \cdots + u_n$ avec le programme ci-dessous,
+on initialise $u$ à $u_0$ et l'accumulateur $S$ à $u_0$. On calcule ensuite
+chacun des $n$ termes suivants avant de l'ajouter à $S$.
 }
 
 \lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-CR-016-SOMME.py}
 
 \propriete[3 — Recherche de seuil (boucle \texttt{while})]{
 Pour trouver le plus petit entier $n$ tel que $u_n > S$ (ou $u_n < s$), on utilise une boucle \texttt{while} dont la condition est la négation du seuil recherché.
+
+Avant de lancer la boucle, il faut vérifier que les termes évoluent dans le bon
+sens et que le seuil peut être atteint dans le modèle étudié. Sinon, même avec
+une mise à jour correcte, la boucle peut ne jamais s'arrêter.
+
+Le programme ci-dessous, nommé \texttt{seuil\_geometrique}, traite précisément
+le cas croissant $u_0>0$ et $q>1$, avec des paramètres réels finis. Ces
+préconditions garantissent que le seuil est atteint. Si elles ne sont pas
+respectées, le programme s'arrête immédiatement en signalant une
+\texttt{ValueError}, au lieu d'entrer dans une boucle sans fin.
 }
 
 \lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-CR-016-SEUIL.py}
@@ -58,33 +70,40 @@ Bien distinguer ce que l'on cherche : le rang $n$-ième ou les $n$ premiers term
 %---------------------------------------------------------------
 
 \approfondissement{
-\textbf{Complexité algorithmique et comparaison itératif / formule close.}
+\textbf{Enrichissement non exigible — comparaison itératif / formule explicite.}
 
 \medskip
-Les algorithmes par boucle présentés ici ont une \textbf{complexité linéaire} : le nombre d'opérations est proportionnel à $n$.
-On note $O(n)$ cette complexité (lecture : \og ordre $n$ \fg).
-
-\medskip
-Lorsqu'une \textbf{formule close} (formule explicite) existe, le calcul du $n$-ième terme ne nécessite qu'un nombre constant d'opérations : complexité $O(1)$.
+Une boucle qui applique la relation de récurrence $n$ fois effectue exactement
+$n$ mises à jour du terme. Une formule explicite évite ces $n$ mises à jour,
+mais l'écriture d'une puissance comme une seule instruction Python ne rend pas
+son coût constant : l'évaluation de cette puissance dépend de l'algorithme
+employé par le langage.
 
 \begin{center}
 \begin{tabular}{|p{4.2cm}|c|c|}
 \hline
- & Approche itérative & Formule close \\
+ & Approche itérative & Formule explicite \\
 \hline
-Coût de calcul & $O(n)$ & $O(1)$ \\
-Applicable si & toujours & formule connue \\
+Mises à jour par récurrence & $n$ & aucune \\
+Applicable si & relation donnée & formule connue \\
 Exemple & boucle \texttt{for} & $u_n = u_0 \cdot q^n$ \\
 \hline
 \end{tabular}
 \end{center}
 
 \medskip
-En pratique, pour une suite géométrique, la formule close $u_n = u_0 \cdot q^n$ est préférable.
+Cette comparaison compte seulement les mises à jour par récurrence et ne
+constitue pas une affirmation de complexité sur toutes les opérations internes.
+En pratique, pour une suite géométrique, la formule explicite
+$u_n = u_0 \cdot q^n$ évite de recalculer les termes précédents.
 Dans un programme, si $q=0$ et $n=0$, retourner directement $u_0$ sans
 demander au langage d'évaluer $0^0$ ; pour $n\geq1$, la formule s'applique.
-En revanche, pour une suite définie par une relation de récurrence complexe (ex. suite de Fibonacci), seule l'approche itérative est directement accessible.
+Pour une suite définie par une relation de récurrence plus complexe, comme la
+suite de Fibonacci, l'approche itérative est immédiatement disponible à partir
+de la définition ; d'autres méthodes existent, mais elles ne sont pas
+mobilisées ici.
 
 \medskip
-\textit{Remarque.} L'exponentiation rapide permet de calculer $q^n$ en $O(\log n)$ opérations, mais ceci dépasse le programme de première.
+\textit{Remarque.} L'étude formelle du coût des algorithmes d'exponentiation
+dépasse le programme de première.
 }

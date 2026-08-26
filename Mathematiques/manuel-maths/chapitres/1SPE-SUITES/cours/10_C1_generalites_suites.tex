@@ -38,7 +38,8 @@ Aucun terme précédent n'est nécessaire pour calculer $v_5$.
 
 \contreexemple{
 La suite définie par $u_0 = 1$ et $u_{n+1} = 2u_n$ \emph{n'est pas} donnée par formule explicite :
-pour calculer $u_3$, on doit d'abord connaître $u_2$, puis $u_1$, puis $u_0$.
+si l'on utilise uniquement la relation de récurrence donnée, on calcule
+successivement $u_1$, $u_2$, puis $u_3$ à partir de $u_0$.
 }
 
 \definition[3]{
@@ -54,7 +55,10 @@ Soit la suite $(w_n)$ définie par $w_0 = 3$ et $w_{n+1} = \dfrac{w_n}{2} + 1$ p
 
 On calcule : $w_1 = \dfrac{3}{2} + 1 = \dfrac{5}{2}$, puis $w_2 = \dfrac{5/2}{2} + 1 = \dfrac{9}{4}$.
 
-Chaque terme dépend du précédent ; on ne peut pas calculer $w_{10}$ sans passer par $w_1, \ldots, w_9$.
+Chaque terme dépend du précédent : si l'on utilise uniquement la relation de
+récurrence donnée, le calcul de $w_{10}$ passe par $w_1, \ldots, w_9$. Une
+formule explicite éventuellement établie par ailleurs permettrait un calcul
+direct.
 }
 
 \contreexemple{
@@ -99,11 +103,15 @@ Pour obtenir $u_2$, on remplace $n$ par $1$ : $u_2 = 2u_1 + 3 = 13$.
 \approfondissement{
 \textbf{Suites définies par plusieurs relations.}
 
-Certaines suites utilisent deux relations de récurrence selon la parité de l'indice. Par exemple :
+Certaines suites utilisent deux relations de récurrence selon la parité de la
+valeur du terme courant. Par exemple, pour un entier strictement positif $a$ :
 \[
-  u_0 = 1, \quad u_{n+1} = \begin{cases} \dfrac{u_n}{2} & \text{si } u_n \text{ est pair,} \\ 3u_n + 1 & \text{si } u_n \text{ est impair.} \end{cases}
+  u_0 = a, \quad u_{n+1} = \begin{cases} \dfrac{u_n}{2} & \text{si } u_n \text{ est pair,} \\ 3u_n + 1 & \text{si } u_n \text{ est impair.} \end{cases}
 \]
-Cette suite est connue sous le nom de \emph{suite de Syracuse}. Son comportement à long terme reste un problème ouvert en mathématiques (conjecture de Collatz).
+Les trajectoires ainsi obtenues sont appelées \emph{suites de Syracuse}. La
+conjecture de Collatz affirme que, quel que soit l'entier initial $a>0$, la
+trajectoire atteint le cycle $1,4,2$. Cette affirmation n'est pas démontrée en
+général ; pour $a=1$, ce comportement est directement vérifié.
 
 \textbf{Sans formule explicite connue.}
 

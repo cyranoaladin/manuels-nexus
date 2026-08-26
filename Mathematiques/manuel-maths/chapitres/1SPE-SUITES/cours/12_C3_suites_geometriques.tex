@@ -74,7 +74,7 @@ Le quotient n'est pas constant, même si $w_n$ contient une puissance de $2$.
 % ============================================================
 
 \margeAppui{
-\textbf{Rappel :} arithmétique, on \emph{ajoute} $r$ ($u_0+nr$, points alignés, lien avec une fonction affine) ; géométrique, on \emph{multiplie} par $q$ ($u_0 \times q^n$, courbe en $q^n$, lien avec une fonction exponentielle).
+\textbf{Rappel :} arithmétique, on \emph{ajoute} $r$ ($u_0+nr$, points alignés, lien avec une fonction affine) ; géométrique, on \emph{multiplie} par $q$ ($u_0 \times q^n$ et, si $q>0$, lien avec une fonction exponentielle).
 }
 
 \erreurFrequente{
@@ -110,7 +110,12 @@ obtenir $u_1=u_0\times0=0$.
 \erreurFrequente{
 \textbf{Représentation graphique : ne pas relier les points.}
 
-Les termes d'une suite géométrique représentés par les points $(n\,;\,u_n)$ suivent une courbe en exponentielle, mais restent des points \emph{isolés} (la suite n'est définie que sur $\mathbb{N}$). On ne trace jamais de courbe continue pour représenter une suite.
+Si $q>0$, les points $(n\,;\,u_n)$ sont situés sur la courbe de la fonction
+$x\mapsto u_0q^x$. Pour $q<0$, les signes peuvent alterner et cette courbe
+exponentielle réelle n'est pas définie ; pour $q=0$, les termes sont nuls à
+partir du rang $1$. Dans tous les cas, les points restent \emph{isolés} puisque
+la suite n'est définie que sur $\mathbb{N}$ : on ne les relie pas pour
+représenter la suite.
 }
 
 % ============================================================
