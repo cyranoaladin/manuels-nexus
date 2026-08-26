@@ -21,6 +21,7 @@ EX042 = CHAPTER / "exercices" / "1SPE-SUITES-EX-042.tex"
 CO042 = CHAPTER / "corriges" / "1SPE-SUITES-CO-042.tex"
 C5_COURSE = CHAPTER / "cours" / "14_C5_variations.tex"
 C1_COURSE = CHAPTER / "cours" / "10_C1_generalites_suites.tex"
+C3_COURSE = CHAPTER / "cours" / "12_C3_suites_geometriques.tex"
 EXPECTED_P0_RELATIVE_PATHS = (
     "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-026.tex",
     "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-026.tex",
@@ -139,6 +140,33 @@ def test_scanner_rejects_later_theory_vocabulary_as_a_c1_study_method() -> None:
     )
 
     assert _codes(producer.scan_text(source)) == {"LATER_THEORY_SCOPE"}
+
+
+def test_c3_course_presents_long_term_behaviour_as_conjecture_only() -> None:
+    producer = _producer()
+    source = _source(C3_COURSE)
+    rendered = producer.normalize_inline_formatting(
+        producer.strip_non_rendered_comments(source)
+    )
+
+    assert "décroît vers $0$" not in rendered
+    assert "croît vers $+\\infty$" not in rendered
+    assert "programme de terminale" not in rendered
+    assert "on conjecture" in rendered.lower()
+    assert "sans preuve formelle" in rendered.lower()
+    assert producer.scan_text(source, path=str(C3_COURSE)) == []
+
+
+def test_scanner_rejects_direct_growth_towards_a_limit() -> None:
+    producer = _producer()
+
+    for statement in (
+        "La suite décroît vers $0$.",
+        "La suite croît vers $+\\infty$.",
+    ):
+        assert _codes(producer.scan_text(statement)) == {
+            "FORMAL_CONVERGENCE_THEOREM"
+        }
 
 
 def test_canonical_p0_scope_is_the_exact_external_nineteen_path_contract() -> None:

@@ -91,6 +91,10 @@ FORMAL_DIRECT_ASSERTION_PATTERNS = (
         re.IGNORECASE,
     ),
     re.compile(
+        rf"{SEQUENCE_SUBJECT}\s+(?:cro[îi]t|décro[îi]t)\s+vers\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
         rf"(?:on\s+prouve|on\s+démontre|on\s+établit)\s+que\s+"
         rf"{SEQUENCE_SUBJECT}\s+se rapproche\b",
         re.IGNORECASE,
