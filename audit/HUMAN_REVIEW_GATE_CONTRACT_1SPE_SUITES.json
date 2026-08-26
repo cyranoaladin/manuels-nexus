@@ -1,0 +1,324 @@
+{
+  "approval_materialization_allowed": false,
+  "artifact_type": "1SPE_SUITES_HUMAN_REVIEW_GATE_CONTRACT",
+  "authorities": [
+    {
+      "authority_id": "CAHIER_TRACEABILITY",
+      "does_not_establish": [
+        "identity_authentication",
+        "receipt_schema"
+      ],
+      "establishes": [
+        "human_decision_must_be_dated_justified_attributed"
+      ],
+      "file_sha256": "sha256:31005df9a4105b4652779b6045333206e98883a58dab41a144f6919c85d2aa7d",
+      "lines": "71-79",
+      "path": "CODEX_CAHIER_DES_CHARGES_MANUEL_1SPE.md"
+    },
+    {
+      "authority_id": "CAHIER_DOUBLE_REVIEW",
+      "does_not_establish": [
+        "two_distinct_human_identities",
+        "dual_role_policy"
+      ],
+      "establishes": [
+        "two_role_reviews_per_chapter",
+        "role_expert_mathématique",
+        "role_expert_programme_pédagogie",
+        "no_agent_self_approval"
+      ],
+      "file_sha256": "sha256:31005df9a4105b4652779b6045333206e98883a58dab41a144f6919c85d2aa7d",
+      "lines": "614-623",
+      "path": "CODEX_CAHIER_DES_CHARGES_MANUEL_1SPE.md"
+    },
+    {
+      "authority_id": "CAHIER_ARCHIVAL",
+      "does_not_establish": [
+        "archive_format",
+        "receipt_schema"
+      ],
+      "establishes": [
+        "double_disciplinary_review",
+        "human_validations_archived"
+      ],
+      "file_sha256": "sha256:31005df9a4105b4652779b6045333206e98883a58dab41a144f6919c85d2aa7d",
+      "lines": "1067-1070",
+      "path": "CODEX_CAHIER_DES_CHARGES_MANUEL_1SPE.md"
+    },
+    {
+      "authority_id": "README_RELEASE_INDEPENDENCE",
+      "does_not_establish": [
+        "chapter_receipt_schema"
+      ],
+      "establishes": [
+        "science_programme_editorial_pdf_reviews_are_independent",
+        "final_human_manual_approval_is_separate"
+      ],
+      "file_sha256": "sha256:dda9cc43946a2d48ef4b1c0f980dd5f89dabdcbf8a4a37d48b74a0e904d2eee9",
+      "lines": "193-214",
+      "path": "README.md"
+    },
+    {
+      "authority_id": "README_REVIEW_CHAIN",
+      "does_not_establish": [
+        "chapter_content_receipt_schema",
+        "qcm_gate_owner"
+      ],
+      "establishes": [
+        "scientific_then_programme_then_editorial_variant_then_pdf_review",
+        "final_human_approver_is_user",
+        "visual_baseline_change_requires_explicit_approval"
+      ],
+      "file_sha256": "sha256:dda9cc43946a2d48ef4b1c0f980dd5f89dabdcbf8a4a37d48b74a0e904d2eee9",
+      "lines": "779-802",
+      "path": "README.md"
+    },
+    {
+      "authority_id": "GENERIC_VALIDATION_SCHEMA",
+      "does_not_establish": [
+        "human_role",
+        "reviewer_identity_verification",
+        "source_sha_binding",
+        "approval_semantics"
+      ],
+      "establishes": [
+        "generic_per_object_validation_shape",
+        "generic_verdicts_pass_fail_warning_manual_review",
+        "reviewer_field_optional"
+      ],
+      "file_sha256": "sha256:95205776090fc3f879b8310d7ed4ed4bd2d00e798826fed562ef194c9aead25c",
+      "lines": "6-13",
+      "path": "Mathematiques/manuel-maths/schemas/validation.schema.json"
+    },
+    {
+      "authority_id": "GENERIC_VALIDATION_DATABASE",
+      "does_not_establish": [
+        "campaign_scope",
+        "receipt_signature",
+        "staleness"
+      ],
+      "establishes": [
+        "generic_per_object_validation_storage",
+        "reviewer_nullable"
+      ],
+      "file_sha256": "sha256:6036793b33818d8137ed728b2f58af4a965bd6107db0411eb3ec5d4715ba761d",
+      "lines": "64-73",
+      "path": "Mathematiques/manuel-maths/db/schema.sql"
+    },
+    {
+      "authority_id": "LEGACY_OBJECT_RECEIPT_CONVENTION",
+      "does_not_establish": [
+        "receipt_content_semantics",
+        "chapter_campaign_semantics"
+      ],
+      "establishes": [
+        "manual_per_object_revue_humaine_filename_convention"
+      ],
+      "file_sha256": "sha256:97e6008ee55bb78c9fb021455ed137fb73a9222657c4c1f5727df26979d4f86a",
+      "lines": "22-26",
+      "path": "Mathematiques/manuel-maths/docs/03_architecture_technique.md"
+    },
+    {
+      "authority_id": "QCM_MACHINE_AUDIT",
+      "does_not_establish": [
+        "qcm_human_owner",
+        "qcm_human_granularity",
+        "qcm_closure_receipt"
+      ],
+      "establishes": [
+        "qcm_machine_rows_are_pending_human_approval",
+        "machine_audit_cannot_infer_human_approval"
+      ],
+      "file_sha256": "sha256:432c095c38b40898be88d8446c4a6480c52213ee76a26c69fc51bfd592d9acaf",
+      "lines": "165-195,234-258",
+      "path": "scripts/build_qcm_scientific_answer_key_audit.py"
+    }
+  ],
+  "auto_approval_allowed": false,
+  "campaign_level_bulk_transition_proved": false,
+  "chapter": "1SPE-SUITES",
+  "chapter_object_set_digest": "sha256:67d8006298299b44029de8ba8f85b500d9b3619997a0c596e63c20e1cffeee2d",
+  "content_review_is_final_visual_or_d7_approval": false,
+  "counts": {
+    "previous89_chapter_debts": 0,
+    "residual13_chapter_debts": 5,
+    "residual13_stale_sunset_source_bindings": 4,
+    "unknown_contract_semantics": 10
+  },
+  "debt_closure_allowed": false,
+  "generic_validation_verdicts_are_not_approval_verdicts": [
+    "pass",
+    "fail",
+    "warning",
+    "manual_review"
+  ],
+  "human_contract_semantics": {
+    "approval_scope_granularity": "UNKNOWN",
+    "bulk_status_transition_authority": "UNKNOWN",
+    "canonical_allowed_approval_verdicts": "UNKNOWN",
+    "canonical_receipt_schema": "UNKNOWN",
+    "distinct_human_reviewers": "UNKNOWN",
+    "identity_authentication_requirements": "UNKNOWN",
+    "one_human_may_satisfy_two_roles": "UNKNOWN",
+    "render_pdf_binding": "UNKNOWN",
+    "shared_dependency_staleness_policy": "UNKNOWN",
+    "source_sha_binding": "UNKNOWN"
+  },
+  "human_decision_minimum_traceability": [
+    "dated",
+    "justified",
+    "attributed"
+  ],
+  "legacy_receipt_filename_is_sufficient_approval_contract": false,
+  "local_packet_role_tokens_are_canonical_authority": false,
+  "materialization_stop_conditions": [
+    "do not record APPROVE/REQUEST_CHANGES/REJECT in a repository receipt",
+    "do not assign a QCM gate owner",
+    "do not transition any of the 161 object statuses",
+    "do not promote any of the 15 atoms to FULL",
+    "do not close any of the five residual13 debts"
+  ],
+  "non_applicable_precedent": {
+    "path": "audit/schemas/v1/1nsi-content-review.schema.json",
+    "reason": "schema is const-bound to artifact_type 1nsi_content_reviews and manual 1NSI"
+  },
+  "previous89_chapter_intersection": [],
+  "qcm_human_gate": {
+    "closure_materialization_allowed": false,
+    "covered_by_math_role": "UNPROVED",
+    "covered_by_programme_pedagogy_role": "UNPROVED",
+    "current_state": "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL",
+    "distinct_campaign_required": "UNPROVED",
+    "granularity": "UNKNOWN",
+    "owner": "UNKNOWN"
+  },
+  "requested_reviewer_choices_without_repository_mapping": [
+    "APPROVE",
+    "REQUEST_CHANGES",
+    "REJECT"
+  ],
+  "required_role_reviews": 2,
+  "required_roles": [
+    "expert mathématique",
+    "expert programme/pédagogie"
+  ],
+  "residual13_chapter_intersection": [
+    {
+      "closure_allowed": false,
+      "closure_condition": "ALL_REQUIRED_REVIEWS_COMPLETE_AND_HUMAN_APPROVAL_RECORDED",
+      "current_source_sha256": "sha256:7890a1506da6a4dd53e94648093e920cf59dde7377b3e5aaf943c81b6900ee5b",
+      "current_status": "generated",
+      "fingerprint": "e8ac154947fefcdb",
+      "human_gate_required": true,
+      "machine_review_state": "MACHINE_PASS",
+      "object_id": "1SPE-SUITES-CO-051",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-051.tex",
+      "remaining_required_reviews": {
+        "editorial": "PENDING",
+        "pedagogical": "PENDING",
+        "programme": "PENDING",
+        "scientific": "PENDING",
+        "variant": "PENDING",
+        "visual": "PENDING"
+      },
+      "sunset_source_binding_stale": true,
+      "sunset_source_sha256": "sha256:d395d82faf248a257c49f449e68f894df7a56f0c1b10ea27fbe90541c354c6d1"
+    },
+    {
+      "closure_allowed": false,
+      "closure_condition": "ALL_REQUIRED_REVIEWS_COMPLETE_AND_HUMAN_APPROVAL_RECORDED",
+      "current_source_sha256": "sha256:5a4e097eb3acae6a4cf9d62c940404ea64f096e8a39e54ddee4513ba18463a92",
+      "current_status": "generated",
+      "fingerprint": "4b9a00c4ef815951",
+      "human_gate_required": true,
+      "machine_review_state": "MACHINE_PASS",
+      "object_id": "1SPE-SUITES-CR-017",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/17_C8_limites_intuitives.tex",
+      "remaining_required_reviews": {
+        "editorial": "PENDING",
+        "pedagogical": "PENDING",
+        "programme": "PENDING",
+        "scientific": "PENDING",
+        "variant": "PENDING",
+        "visual": "PENDING"
+      },
+      "sunset_source_binding_stale": true,
+      "sunset_source_sha256": "sha256:e7357fac25592b9c481a78ab7af05c6e3dbd010c709d2cc37fdfdc49c30dccdf"
+    },
+    {
+      "closure_allowed": false,
+      "closure_condition": "ALL_REQUIRED_REVIEWS_COMPLETE_AND_HUMAN_APPROVAL_RECORDED",
+      "current_source_sha256": "sha256:f42b79390e0ade5320eb4e0a81fe5f3530d409e7539f995c38a6ccb1e328e4d9",
+      "current_status": "generated",
+      "fingerprint": "85454c002c0a1d6a",
+      "human_gate_required": true,
+      "machine_review_state": "MACHINE_PASS",
+      "object_id": "1SPE-SUITES-EX-051",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-051.tex",
+      "remaining_required_reviews": {
+        "editorial": "PENDING",
+        "pedagogical": "PENDING",
+        "programme": "PENDING",
+        "scientific": "PENDING",
+        "variant": "PENDING",
+        "visual": "PENDING"
+      },
+      "sunset_source_binding_stale": true,
+      "sunset_source_sha256": "sha256:1ec5e367511170816353754b8bed76453f57b7a52d092d97bd3b144fcd7e73e1"
+    },
+    {
+      "closure_allowed": false,
+      "closure_condition": "ALL_REQUIRED_REVIEWS_COMPLETE_AND_HUMAN_APPROVAL_RECORDED",
+      "current_source_sha256": "sha256:aba73ded2ca34d66e5c06513aa9767ca3071a7a0f944fb4269b3629e4cf22ead",
+      "current_status": "generated",
+      "fingerprint": "d6985b17d7cab316",
+      "human_gate_required": true,
+      "machine_review_state": "MACHINE_PASS",
+      "object_id": "1SPE-SUITES-ME-008",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-008.tex",
+      "remaining_required_reviews": {
+        "editorial": "PENDING",
+        "pedagogical": "PENDING",
+        "programme": "PENDING",
+        "scientific": "PENDING",
+        "variant": "PENDING",
+        "visual": "PENDING"
+      },
+      "sunset_source_binding_stale": false,
+      "sunset_source_sha256": "sha256:aba73ded2ca34d66e5c06513aa9767ca3071a7a0f944fb4269b3629e4cf22ead"
+    },
+    {
+      "closure_allowed": false,
+      "closure_condition": "ALL_REQUIRED_REVIEWS_COMPLETE_AND_HUMAN_APPROVAL_RECORDED",
+      "current_source_sha256": "sha256:71d3048821fe1b5565f3bde13ddf8f7e32a4e78dc174b365472af7b367a7155f",
+      "current_status": "generated",
+      "fingerprint": "8ca4f3f2a9212e39",
+      "human_gate_required": true,
+      "machine_review_state": "MACHINE_PASS",
+      "object_id": "1SPE-SUITES-RE-C8",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-RE-C8.tex",
+      "remaining_required_reviews": {
+        "editorial": "PENDING",
+        "pedagogical": "PENDING",
+        "programme": "PENDING",
+        "scientific": "PENDING",
+        "variant": "PENDING",
+        "visual": "PENDING"
+      },
+      "sunset_source_binding_stale": true,
+      "sunset_source_sha256": "sha256:317fdac3a4e3c3483d8af392df4cd9d72366364ba073d95e802144537ecb0637"
+    }
+  ],
+  "review_separation": {
+    "content_science_pedagogy_review": "REQUIRED_PENDING",
+    "d7_final_visual_approval": "SEPARATE_REQUIRED_PENDING",
+    "editorial_variant_review": "SEPARATE_REQUIRED_PENDING",
+    "print_release_approval": "SEPARATE_REQUIRED_PENDING",
+    "visual_pdf_review": "SEPARATE_REQUIRED_PENDING"
+  },
+  "review_source_sha": "c667f12b1792f31981b6b5894c8c604df1bce634",
+  "schema_version": 1,
+  "status_transition_allowed": false,
+  "unknown_contract_semantics": 10,
+  "verdict": "GOVERNANCE_CONTRACT_INCOMPLETE"
+}
