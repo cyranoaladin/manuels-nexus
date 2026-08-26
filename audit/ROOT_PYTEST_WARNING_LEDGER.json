@@ -1,0 +1,151 @@
+{
+  "artifact_type": "root_pytest_warning_ledger",
+  "dependency_versions": {
+    "Bottleneck": "1.3.5",
+    "FlagEmbedding": "1.4.0",
+    "numexpr": "2.9.0",
+    "pandas": "3.0.1",
+    "sentencepiece": "0.2.1"
+  },
+  "observation": {
+    "command": "python -m pytest -q -W default Mathematiques/manuel-maths/tests/test_retrieval.py",
+    "pytest_version": "9.0.2",
+    "python_version": "3.12.3",
+    "warning_capture": "default; no warning suppression"
+  },
+  "observed_result": {
+    "errors": 0,
+    "failed": 0,
+    "passed": 5,
+    "post_summary_interpreter_warnings": 1,
+    "pytest_summary_warnings": 4
+  },
+  "observed_source_sha": "c667f12b1792f31981b6b5894c8c604df1bce634",
+  "release_statement": "All five events originate in external packages but are project-actionable through the controlled dependency contract; none is release evidence.",
+  "summary": {
+    "external_origin_count": 5,
+    "post_summary_interpreter_warning_count": 1,
+    "project_actionable_count": 5,
+    "project_origin_count": 0,
+    "pytest_summary_warning_count": 4,
+    "total_observed_warning_events": 5,
+    "unknown_count": 0
+  },
+  "trigger": {
+    "call_line": 22,
+    "import_line": 22,
+    "import_path": "Mathematiques/manuel-maths/mcp/mcp_corpus/server.py",
+    "project_sources": [
+      {
+        "path": "Mathematiques/manuel-maths/tests/test_retrieval.py",
+        "role": "warning trigger test",
+        "sha256": "422c75926ed6b0e36708b02b8fe8fe988992f7e2539de5f7a1b0eb9b80d85566"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/mcp/mcp_corpus/server.py",
+        "role": "lazy FlagEmbedding import",
+        "sha256": "d24945cc0bd579d854d9de304d19b705886077c0148e36ebb2cb87587d71ed4a"
+      },
+      {
+        "path": "Mathematiques/manuel-maths/requirements.txt",
+        "role": "dependency contract",
+        "sha256": "c3aa12be9779d4a610645346c6c9a53d70acff4ffca3ec7c4dce18398f523470"
+      }
+    ],
+    "test_line": 16,
+    "test_path": "Mathematiques/manuel-maths/tests/test_retrieval.py"
+  },
+  "warning_suppression": "NONE",
+  "warnings": [
+    {
+      "actionability": "Project dependency constraints permit this incompatible or deprecated external combination; resolve the controlled dependency contract.",
+      "actionable": true,
+      "causal_dependency": "numexpr==2.9.0 (minimum required by pandas: 2.10.2)",
+      "disposition": "OPEN",
+      "message": "Pandas requires version '2.10.2' or newer of 'numexpr' (version '2.9.0' currently installed).",
+      "origin": "/home/alaeddine/.local/lib/python3.12/site-packages/pandas/core/computation/expressions.py",
+      "origin_line": 22,
+      "origin_ownership": "EXTERNAL",
+      "origin_package": "pandas",
+      "origin_package_version": "3.0.1",
+      "project_trigger": "search_corpus imports FlagEmbedding lazily",
+      "pytest_summary_member": true,
+      "release_relevance": "TECHNICAL_REPRODUCIBILITY",
+      "trigger_ownership": "PROJECT",
+      "warning_id": "ROOT-PYTEST-W001",
+      "warning_type": "UserWarning"
+    },
+    {
+      "actionability": "Project dependency constraints permit this incompatible or deprecated external combination; resolve the controlled dependency contract.",
+      "actionable": true,
+      "causal_dependency": "Bottleneck==1.3.5 (minimum required by pandas: 1.4.2)",
+      "disposition": "OPEN",
+      "message": "Pandas requires version '1.4.2' or newer of 'bottleneck' (version '1.3.5' currently installed).",
+      "origin": "/home/alaeddine/.local/lib/python3.12/site-packages/pandas/core/arrays/masked.py",
+      "origin_line": 56,
+      "origin_ownership": "EXTERNAL",
+      "origin_package": "pandas",
+      "origin_package_version": "3.0.1",
+      "project_trigger": "search_corpus imports FlagEmbedding lazily",
+      "pytest_summary_member": true,
+      "release_relevance": "TECHNICAL_REPRODUCIBILITY",
+      "trigger_ownership": "PROJECT",
+      "warning_id": "ROOT-PYTEST-W002",
+      "warning_type": "UserWarning"
+    },
+    {
+      "actionability": "Project dependency constraints permit this incompatible or deprecated external combination; resolve the controlled dependency contract.",
+      "actionable": true,
+      "causal_dependency": "sentencepiece._sentencepiece loaded by FlagEmbedding==1.4.0",
+      "disposition": "OPEN",
+      "message": "builtin type SwigPyPacked has no __module__ attribute",
+      "origin": "<frozen importlib._bootstrap>",
+      "origin_line": 488,
+      "origin_ownership": "EXTERNAL",
+      "origin_package": "sentencepiece",
+      "origin_package_version": "0.2.1",
+      "project_trigger": "search_corpus imports FlagEmbedding lazily",
+      "pytest_summary_member": true,
+      "release_relevance": "TECHNICAL_REPRODUCIBILITY",
+      "trigger_ownership": "PROJECT",
+      "warning_id": "ROOT-PYTEST-W003",
+      "warning_type": "DeprecationWarning"
+    },
+    {
+      "actionability": "Project dependency constraints permit this incompatible or deprecated external combination; resolve the controlled dependency contract.",
+      "actionable": true,
+      "causal_dependency": "sentencepiece._sentencepiece loaded by FlagEmbedding==1.4.0",
+      "disposition": "OPEN",
+      "message": "builtin type SwigPyObject has no __module__ attribute",
+      "origin": "<frozen importlib._bootstrap>",
+      "origin_line": 488,
+      "origin_ownership": "EXTERNAL",
+      "origin_package": "sentencepiece",
+      "origin_package_version": "0.2.1",
+      "project_trigger": "search_corpus imports FlagEmbedding lazily",
+      "pytest_summary_member": true,
+      "release_relevance": "TECHNICAL_REPRODUCIBILITY",
+      "trigger_ownership": "PROJECT",
+      "warning_id": "ROOT-PYTEST-W004",
+      "warning_type": "DeprecationWarning"
+    },
+    {
+      "actionability": "Project dependency constraints permit this incompatible or deprecated external combination; resolve the controlled dependency contract.",
+      "actionable": true,
+      "causal_dependency": "sentencepiece._sentencepiece interpreter shutdown via FlagEmbedding==1.4.0",
+      "disposition": "OPEN",
+      "message": "builtin type swigvarlink has no __module__ attribute",
+      "origin": "sys",
+      "origin_line": 1,
+      "origin_ownership": "EXTERNAL",
+      "origin_package": "sentencepiece",
+      "origin_package_version": "0.2.1",
+      "project_trigger": "search_corpus imports FlagEmbedding lazily",
+      "pytest_summary_member": false,
+      "release_relevance": "TECHNICAL_REPRODUCIBILITY",
+      "trigger_ownership": "PROJECT",
+      "warning_id": "ROOT-PYTEST-W005",
+      "warning_type": "DeprecationWarning"
+    }
+  ]
+}
