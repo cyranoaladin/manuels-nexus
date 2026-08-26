@@ -59,21 +59,21 @@
         "A": "$4(3x-2)^3$",
         "B": "$12(3x-2)^3$",
         "C": "$3(3x-2)^4$",
-      "D": "$12(3x-2)^4$"
+        "D": "$12(3x-2)^4$"
       },
       "correcte": "B",
       "diagnostics": {
         "A": {
-        "erreur": "Le facteur exterieur $4$ est present, mais la derivee de la fonction interieure $3x-2$ apporte aussi le facteur $3$.",
-        "renvoi": "C1"
+          "erreur": "Le facteur exterieur $4$ est present, mais la derivee de la fonction interieure $3x-2$ apporte aussi le facteur $3$.",
+          "renvoi": "C1"
         },
         "C": {
-        "erreur": "Le facteur $3$ vient de la derivee de $3x-2$, mais la puissance doit diminuer de $4$ a $3$ et etre multipliee par $4$.",
-        "renvoi": "C1"
+          "erreur": "Le facteur $3$ vient de la derivee de $3x-2$, mais la puissance doit diminuer de $4$ a $3$ et etre multipliee par $4$.",
+          "renvoi": "C1"
         },
         "D": {
-        "erreur": "Le coefficient $12$ est correct, mais la derivation de la puissance quatrieme impose $(3x-2)^3$, et non $(3x-2)^4$.",
-        "renvoi": "C1"
+          "erreur": "Le coefficient $12$ est correct, mais la derivation de la puissance quatrieme impose $(3x-2)^3$, et non $(3x-2)^4$.",
+          "renvoi": "C1"
         }
       }
     },
@@ -126,23 +126,23 @@
     {
       "id": "Q6",
       "capacite": "C2",
-    "enonce": "La fonction $f(x) = x^3 - 3x$ admet comme extrema locaux :",
+      "enonce": "La fonction $f(x) = x^3 - 3x$ admet comme extrema locaux :",
       "options": {
-      "A": "un maximum local en $x = 1$ et un minimum local en $x = -1$",
-      "B": "un maximum local en $x = -1$ et un minimum local en $x = 1$",
-      "C": "un maximum local en $x = 0$",
-      "D": "aucun extremum local"
+        "A": "un maximum local en $x = 1$ et un minimum local en $x = -1$",
+        "B": "un maximum local en $x = -1$ et un minimum local en $x = 1$",
+        "C": "un maximum local en $x = 0$",
+        "D": "aucun extremum local"
       },
       "correcte": "B",
       "diagnostics": {
         "A": {
-        "erreur": "Cette reponse inverse les deux extrema : $f'=3(x^2-1)$ est positive, puis negative, puis positive, donc le maximum est en $-1$."
+          "erreur": "Cette reponse inverse les deux extrema : $f'=3(x^2-1)$ est positive, puis negative, puis positive, donc le maximum est en $-1$."
         },
         "C": {
-        "erreur": "Le point $0$ n'est pas critique puisque $f'(0)=-3$ ; il ne peut donc pas etre le maximum local annonce."
+          "erreur": "Le point $0$ n'est pas critique puisque $f'(0)=-3$ ; il ne peut donc pas etre le maximum local annonce."
         },
         "D": {
-        "erreur": "La derivee $3(x^2-1)$ change deux fois de signe, en $-1$ puis en $1$\u00a0: la fonction admet donc bien deux extrema locaux."
+          "erreur": "La derivee $3(x^2-1)$ change deux fois de signe, en $-1$ puis en $1$ : la fonction admet donc bien deux extrema locaux."
         }
       }
     },
@@ -343,17 +343,17 @@
         "C": "exacte",
         "D": "impossible a determiner"
       },
-    "correcte": "A",
-    "diagnostics": {
-      "B": {
-        "erreur": "La fonction exponentielle est strictement convexe\u00a0: sa courbe est au-dessus de sa tangente en $0$, donc $\\mathrm{e}^{0{,}1}>1{,}1$."
-      },
-      "C": {
-        "erreur": "La tangente ne coincide avec la courbe qu'au point de contact $x=0$\u00a0; a $x=0{,}1$, la stricte convexite exclut l'egalite."
-      },
-      "D": {
-        "erreur": "La convexite determine le sens de l'approximation\u00a0: la courbe est au-dessus de toute tangente, donc $1{,}1$ est une valeur par defaut."
-      }
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "La fonction exponentielle est strictement convexe : sa courbe est au-dessus de sa tangente en $0$, donc $\\mathrm{e}^{0{,}1}>1{,}1$."
+        },
+        "C": {
+          "erreur": "La tangente ne coincide avec la courbe qu'au point de contact $x=0$ ; a $x=0{,}1$, la stricte convexite exclut l'egalite."
+        },
+        "D": {
+          "erreur": "La convexite determine le sens de l'approximation : la courbe est au-dessus de toute tangente, donc $1{,}1$ est une valeur par defaut."
+        }
       }
     }
   ]
