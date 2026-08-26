@@ -19,6 +19,14 @@ def _text(kind: str, number: str) -> str:
     return _path(kind, number).read_text(encoding="utf-8")
 
 
+def _cdp_text(number: str) -> str:
+    return (
+        CHAPTER
+        / "exercices"
+        / f"1SPE-SUITES-EX-{number}-CDP.tex"
+    ).read_text(encoding="utf-8")
+
+
 def _rendered(source: str) -> str:
     rendered: list[str] = []
     for line in source.splitlines():
@@ -90,7 +98,7 @@ def _pedagogical_signature(source: str) -> PedagogicalSignature:
     )
 
     differentiating_markers = {
-        "error_analysis": ("affirme", "propose", "réfuter", "ne convient pas"),
+        "error_analysis": ("réfuter", "ne convient pas"),
         "inverse_rank": ("rang", "$u_n=192$", "$u_n = 192$"),
         "compare_models": ("modèle additif", "comparer les deux", "comparaison"),
         "interpret_model": ("valeurs décimales", "nombre entier", "arrondir à l'unité"),
@@ -115,15 +123,10 @@ def _is_accidental_near_duplicate(left: str, right: str) -> bool:
         left_signature.differentiating_moves
         | right_signature.differentiating_moves
     )
-    contextual_diversity = (
-        left_signature.surface_context != right_signature.surface_context
-        and bool(differentiating_moves)
-    )
     cognitive_diversity = len(differentiating_moves) >= 2
     return (
         left_signature.mathematical_family == right_signature.mathematical_family
-        and len(shared_generic_moves) >= 3
-        and not contextual_diversity
+        and len(shared_generic_moves) >= 2
         and not cognitive_diversity
     )
 
@@ -139,6 +142,9 @@ def test_contextual_detector_catches_templates_but_allows_justified_repetition()
         " Lina affirme qu'elle est arithmétique : réfuter son affirmation, "
         "puis déterminer le rang tel que $u_n=192$."
     )
+    narration_only = abstract_clone + (
+        " Lina affirme qu'elle est arithmétique. Calculer les termes demandés."
+    )
 
     finance_template = r"""
     Un capital augmente de $5\,\%$. Quel est le coefficient multiplicateur ?
@@ -150,12 +156,19 @@ def test_contextual_detector_catches_templates_but_allows_justified_repetition()
     Exprimer $N_{n+1}$ en fonction de $N_n$, puis $N_n$ en fonction de $n$.
     La suite est-elle arithmétique ou géométrique ? Calculer $N_1$.
     """
+    contextual_narration_only = biology_surface_clone + (
+        " Lina affirme que ce modèle convient."
+    )
 
     assert _is_accidental_near_duplicate(abstract_template, abstract_clone)
+    assert _is_accidental_near_duplicate(abstract_template, narration_only)
     assert not _is_accidental_near_duplicate(
         abstract_template, contextualized_repeat
     )
     assert _is_accidental_near_duplicate(finance_template, biology_surface_clone)
+    assert _is_accidental_near_duplicate(
+        finance_template, contextual_narration_only
+    )
 
 
 def test_001_and_009_now_have_distinct_cognitive_contracts() -> None:
@@ -223,12 +236,39 @@ def test_richness_changes_preserve_object_identity_and_true_capacities() -> None
             assert metadata["capacites_codes"] == capacities
             assert metadata["status"] == "generated"
 
+    assert _meta("EX", "009")["competences"] == ["calculer", "raisonner"]
+    exercise_019_parameters = _meta("EX", "019")["parametres_sympy"]
+    assert exercise_019_parameters["taux_horaire"] == 0.02
+    assert "taux_annuel" not in exercise_019_parameters
+
 
 def test_changed_sources_keep_the_existing_help_contracts_true() -> None:
-    exercise_009 = _rendered(_text("EX", "009"))
-    exercise_019 = _rendered(_text("EX", "019"))
+    cdp_009_source = _cdp_text("009")
+    cdp_019_source = _cdp_text("019")
+    cdp_009 = _rendered(cdp_009_source)
+    cdp_019 = _rendered(cdp_019_source)
 
-    assert r"u_n = 6 \times 2^n" in exercise_009
-    assert r"\dfrac{u_{n+1}}{u_n}" in exercise_009
-    assert r"croît de $2\,\%$ par heure" in exercise_019
-    assert r"1{,}02" in exercise_019
+    cdp_009_meta = json.loads(
+        cdp_009_source.splitlines()[0].removeprefix("% META: ")
+    )
+    cdp_019_meta = json.loads(
+        cdp_019_source.splitlines()[0].removeprefix("% META: ")
+    )
+    assert cdp_009_meta == {
+        "id": "1SPE-SUITES-EX-009-CDP",
+        "chapitre": "1SPE-SUITES",
+        "type_objet": "coup_de_pouce",
+        "exercice_id": "1SPE-SUITES-EX-009",
+        "status": "generated",
+    }
+    assert cdp_019_meta == {
+        "id": "1SPE-SUITES-EX-019-CDP",
+        "chapitre": "1SPE-SUITES",
+        "type_objet": "coup_de_pouce",
+        "exercice_id": "1SPE-SUITES-EX-019",
+        "status": "generated",
+    }
+    assert r"u_n = 6 \times 2^n" in cdp_009
+    assert r"\dfrac{u_{n+1}}{u_n}" in cdp_009
+    assert r"2\,\%$ par heure" in cdp_019
+    assert r"1{,}02" in cdp_019
