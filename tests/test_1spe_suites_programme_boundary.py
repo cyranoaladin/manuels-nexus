@@ -20,6 +20,7 @@ CO038 = CHAPTER / "corriges" / "1SPE-SUITES-CO-038.tex"
 EX042 = CHAPTER / "exercices" / "1SPE-SUITES-EX-042.tex"
 CO042 = CHAPTER / "corriges" / "1SPE-SUITES-CO-042.tex"
 C5_COURSE = CHAPTER / "cours" / "14_C5_variations.tex"
+C1_COURSE = CHAPTER / "cours" / "10_C1_generalites_suites.tex"
 EXPECTED_P0_RELATIVE_PATHS = (
     "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-026.tex",
     "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-026.tex",
@@ -114,6 +115,30 @@ def test_c5_course_keeps_bounds_but_replaces_formal_limit_with_observation() -> 
     assert "théorème de la limite monotone" not in rendered
     assert "converge vers $1$" not in rendered
     assert producer.scan_text(source, path=str(C5_COURSE)) == []
+
+
+def test_c1_course_does_not_import_later_limit_theory() -> None:
+    producer = _producer()
+    source = _source(C1_COURSE)
+    rendered = producer.normalize_inline_formatting(
+        producer.strip_non_rendered_comments(source)
+    )
+
+    assert "relation de récurrence" in rendered
+    assert "formule explicite" in rendered
+    assert "classes préparatoires" not in rendered
+    assert "propriétés (monotonie, convergence, limite)" not in rendered
+    assert producer.scan_text(source, path=str(C1_COURSE)) == []
+
+
+def test_scanner_rejects_later_theory_vocabulary_as_a_c1_study_method() -> None:
+    producer = _producer()
+    source = (
+        "Sans formule explicite, on peut seulement étudier les propriétés "
+        "(monotonie, convergence, limite) de la suite."
+    )
+
+    assert _codes(producer.scan_text(source)) == {"LATER_THEORY_SCOPE"}
 
 
 def test_canonical_p0_scope_is_the_exact_external_nineteen_path_contract() -> None:

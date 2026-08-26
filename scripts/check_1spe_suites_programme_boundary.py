@@ -138,6 +138,17 @@ FORBIDDEN_PATTERNS = {
             re.IGNORECASE,
         ),
     ),
+    "LATER_THEORY_SCOPE": (
+        re.compile(
+            r"étudi\w*.{0,80}propriétés\s*\([^)]*"
+            r"\bconvergence\b[^)]*\blimite\b",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            r"(?:relève|réserv\w*)\s+(?:de|des)\s+classes préparatoires",
+            re.IGNORECASE,
+        ),
+    ),
 }
 
 INLINE_FORMATTING_PATTERN = re.compile(
