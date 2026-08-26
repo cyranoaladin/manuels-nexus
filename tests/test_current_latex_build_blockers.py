@@ -14,8 +14,9 @@ def test_1spe_intuitive_limits_uses_a_defined_canonical_notice_box() -> None:
     ).read_text(encoding="utf-8")
 
     assert r"\attention" not in source
-    assert r"\begin{remarqueV}" in source
-    assert r"\end{remarqueV}" in source
+    assert r"\begin{remarqueV}" not in source
+    assert r"\end{remarqueV}" not in source
+    assert r"\erreurFrequente{" in source
 
 
 def test_tspe_convexity_diagnostics_have_balanced_inline_math() -> None:
