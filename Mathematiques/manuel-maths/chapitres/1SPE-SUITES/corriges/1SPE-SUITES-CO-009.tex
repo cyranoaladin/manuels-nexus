@@ -7,11 +7,15 @@
 % assert u.subs(n, 1) == 12
 % assert u.subs(n, 2) == 24
 % assert u.subs(n, 3) == 48
+% # Les deux premiers ecarts sont differents : la suite n'est pas arithmetique.
+% assert u.subs(n, 1) - u.subs(n, 0) == 6
+% assert u.subs(n, 2) - u.subs(n, 1) == 12
 % # Quotient u_{n+1}/u_n
 % quotient = u.subs(n, n+1) / u
 % assert simplify(quotient - 2) == 0
-% # u_{n+1} = 2*u_n
-% assert simplify(u.subs(n, n+1) - 2*u) == 0
+% # Le rang 5 est le premier, et l'unique, rang auquel u_n vaut 192.
+% assert u.subs(n, 5) == 192
+% assert all(u.subs(n, k) != 192 for k in range(5))
 % END-VERIFY
 \begin{corrige}{1SPE-SUITES-EX-009}
 
@@ -34,9 +38,20 @@ u_3 = 6 \times 2^3 = 6 \times 8 = 48.
 
 Donc $u_0 = 6$, $u_1 = 12$, $u_2 = 24$ et $u_3 = 48$.
 
-\commentaireMarge{Suite géométrique : quotient de deux termes consécutifs constant.}
+\commentaireMarge{Une seule différence ne suffit pas à reconnaître une suite arithmétique.}
 
-\textbf{Question 2.} Puisque $u_n = 6 \times 2^n > 0$ pour tout $n \in \mathbb{N}$, le quotient $\dfrac{u_{n+1}}{u_n}$ est bien défini. On calcule :
+\textbf{Question 2.} Les deux premières différences valent
+\[
+u_1-u_0=12-6=6,
+\qquad
+u_2-u_1=24-12=12.
+\]
+Elles sont différentes : les différences ne sont pas constantes. L'affirmation
+de Lina est donc fausse et la suite n'est pas arithmétique.
+
+\commentaireMarge{Le quotient de deux termes consécutifs permet ici de reconnaître le modèle multiplicatif.}
+
+\textbf{Question 3.} Puisque $u_n = 6 \times 2^n > 0$ pour tout $n \in \mathbb{N}$, le quotient $\dfrac{u_{n+1}}{u_n}$ est bien défini. On calcule :
 \[
 \frac{u_{n+1}}{u_n} = \frac{6 \times 2^{n+1}}{6 \times 2^n} = 2^{n+1-n} = 2.
 \]
@@ -45,11 +60,16 @@ Ce quotient est constant, égal à $2$, pour tout $n \in \mathbb{N}$.
 
 Donc la suite $(u_n)$ est une suite \textbf{géométrique} de raison $q = 2$.
 
-\commentaireMarge{La relation de récurrence d'une suite géométrique est $u_{n+1} = q \cdot u_n$.}
+\commentaireMarge{La recherche d'un rang exact revient ici à reconnaître une puissance de $2$.}
 
-\textbf{Question 3.} Pour tout $n \in \mathbb{N}$ :
+\textbf{Question 4.} On résout
 \[
-\boxed{u_{n+1} = 2 \times u_n.}
+u_n=192
+\quad\Longleftrightarrow\quad
+6\times 2^n=192
+\quad\Longleftrightarrow\quad
+2^n=32=2^5.
 \]
+Ainsi, le rang cherché est $n=5$.
 
 \end{corrige}

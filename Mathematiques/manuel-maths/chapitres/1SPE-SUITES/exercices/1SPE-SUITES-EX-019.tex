@@ -3,21 +3,36 @@
 % from sympy import Rational, symbols
 % n = symbols('n', integer=True, nonnegative=True)
 % N = 1200 * Rational(102, 100)**n
+% A = 1200 + 24*n
 % assert N.subs(n, 0) == 1200
 % assert N.subs(n, 1) == 1224
+% assert A.subs(n, 1) == 1224
 % # n=2 : 1200*1.02^2 = 1200*1.0404 = 1248.48
 % assert N.subs(n, 2) == Rational(31212, 25)
-% # Modele geometrique, raison q=1.02, taux t=0.02
+% assert A.subs(n, 2) == 1248
+% # Au rang 10, les deux modeles donnent des predictions distinctes.
+% N10 = N.subs(n, 10)
+% assert abs(float(N10) - 1462.7933039937086) < 1e-12
+% assert A.subs(n, 10) == 1440
+% assert abs(float(N10 - A.subs(n, 10)) - 22.7933039937086) < 1e-12
 % END-VERIFY
 \begin{exercice}{1SPE-SUITES-EX-019}{1}{10}
 Une colonie de bactéries compte $1\,200$ individus à l'instant initial.
 Elle croît de $2\,\%$ par heure.
 
 On note $N_n$ le nombre de bactéries après $n$ heures.
+Pour modéliser cette évolution, on retient $N_0=1200$ et
+$N_{n+1}=1{,}02N_n$. Lina propose à la place le modèle additif
+$A_n=1200+24n$, car la colonie gagne $24$ bactéries pendant la première heure.
 \begin{enumerate}
-  \item Quel modèle (arithmétique ou géométrique) convient-il d'utiliser ? Justifier.
-  \item Exprimer $N_n$ en fonction de $n$.
-  \item Calculer $N_1$ et $N_2$.
-  \item Quel est le taux d'évolution horaire ? Quel est le coefficient multiplicateur horaire ?
+  \item Expliquer le coefficient multiplicateur $1{,}02$, puis préciser pourquoi
+  la suite $(N_n)$ est géométrique.
+  \item Calculer $N_1$, $A_1$, $N_2$ et $A_2$. Que montre cette comparaison sur
+  le modèle additif proposé par Lina ?
+  \item Calculer $N_{10}$ et $A_{10}$, au centième près si nécessaire. Comparer
+  les deux modèles après dix heures.
+  \item Les valeurs décimales données par $(N_n)$ sont-elles contradictoires avec
+  le fait qu'une population est un nombre entier ? Donner les prévisions de ce
+  modèle après deux heures et dix heures, arrondies à l'unité.
 \end{enumerate}
 \end{exercice}

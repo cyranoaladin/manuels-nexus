@@ -7,15 +7,25 @@
 % assert u.subs(n, 1) == 12
 % assert u.subs(n, 2) == 24
 % assert u.subs(n, 3) == 48
-% # Verification quotient constant
+% # Les ecarts 6 puis 12 refutent le modele arithmetique propose.
+% assert u.subs(n, 1) - u.subs(n, 0) == 6
+% assert u.subs(n, 2) - u.subs(n, 1) == 12
+% # Le quotient constant prouve que la suite est geometrique.
 % assert simplify(u.subs(n, n+1) / u - 2) == 0
+% # Recherche exacte du rang correspondant a 192.
+% assert u.subs(n, 5) == 192
+% assert all(u.subs(n, k) != 192 for k in range(5))
 % END-VERIFY
 \begin{exercice}{1SPE-SUITES-EX-009}{1}{10}
 On considère la suite $(u_n)$ définie pour tout entier naturel $n$ par
 $u_n = 6 \times 2^n$.
 \begin{enumerate}
   \item Calculer $u_0$, $u_1$, $u_2$ et $u_3$.
-  \item Montrer que la suite $(u_n)$ est géométrique et préciser sa raison.
-  \item Exprimer $u_{n+1}$ en fonction de $u_n$.
+  \item Lina affirme : « Puisque $u_1-u_0=6$, la suite $(u_n)$ est une suite
+  arithmétique de raison $6$. » Réfuter cette affirmation à l'aide des termes
+  calculés.
+  \item Calculer $\dfrac{u_{n+1}}{u_n}$, puis en déduire que la suite $(u_n)$
+  est géométrique et préciser sa raison.
+  \item Déterminer le rang $n$ pour lequel $u_n=192$.
 \end{enumerate}
 \end{exercice}
