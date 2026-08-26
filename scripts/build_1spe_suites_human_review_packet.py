@@ -458,7 +458,7 @@ def build_packet() -> dict[str, Any]:
             ],
             "targeted_tests": {
                 "command": "pytest -q tests/test_1spe_suites*.py Mathematiques/manuel-maths/tests/test_1spe_suites*.py Mathematiques/manuel-maths/tests/test_meta_schemas.py",
-                "passed": 4339,
+                "passed": 4345,
                 "failed": 0,
                 "errors": 0,
             },
@@ -599,7 +599,7 @@ def validate_packet(payload: dict[str, Any]) -> None:
         raise ValueError("machine reviewers must never be represented as humans")
     tests = campaign.get("targeted_tests", {})
     if (
-        tests.get("passed") != 4339
+        tests.get("passed") != 4345
         or tests.get("failed") != 0
         or tests.get("errors") != 0
     ):

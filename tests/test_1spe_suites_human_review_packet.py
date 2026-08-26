@@ -148,7 +148,7 @@ def test_machine_evidence_and_human_states_are_conservative() -> None:
     ).stdout.strip()
     assert payload["review_source_sha"] == expected_source_sha
     assert payload["machine_review_campaign"]["reviewed_objects"] == 161
-    assert payload["machine_review_campaign"]["targeted_tests"]["passed"] == 4339
+    assert payload["machine_review_campaign"]["targeted_tests"]["passed"] == 4345
     assert payload["machine_review_campaign"]["render_qa"]["pages_inspected"] == 209
     assert payload["machine_review_campaign"]["render_qa"]["visible_defects"] == 0
 
