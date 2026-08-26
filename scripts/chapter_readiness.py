@@ -231,7 +231,15 @@ def analyser(dossier: Path, versions: dict, pdfs: set[str]) -> Chapitre:
     # --- statuts des objets ---------------------------------------------------
     # Un objet `generated` n'a franchi aucune revue : le pipeline de statuts
     # interdit qu'il paraisse dans une release. On les compte donc a part.
-    for sous in ("cours", "methodes", "exercices", "corriges", "remediation", "evaluations"):
+    for sous in (
+        "cours",
+        "methodes",
+        "exercices",
+        "corriges",
+        "qcm",
+        "remediation",
+        "evaluations",
+    ):
         rep = dossier / sous
         if not rep.exists():
             continue
