@@ -1,0 +1,1115 @@
+{
+  "artifact_type": "qcm_gap_metrics",
+  "schema_version": 1,
+  "generated_by": "scripts/build_qcm_gap_metrics.py",
+  "source_sha": "d10c6defde47779ce3fa8002ba058014b8b1829e",
+  "inventory": {
+    "chapters": 35,
+    "questions": 331,
+    "contract_capacity_pairs": 204,
+    "distractors": 993
+  },
+  "UNIQUE_CAPACITY_IDS_WITHOUT_ANY_QCM": {
+    "count": 48,
+    "ids": [
+      "TCOMPL-ATT-C4",
+      "TCOMPL-ATT-C5",
+      "TCOMPL-ATT-C6",
+      "TCOMPL-ATT-C7",
+      "TCOMPL-BAYES-C5",
+      "TCOMPL-ECH-C6",
+      "TCOMPL-ECH-C7",
+      "TCOMPL-LOG-C4",
+      "TCOMPL-ME-C3",
+      "TCOMPL-ME-C6",
+      "TCOMPL-MF-C2",
+      "TCOMPL-MF-C3",
+      "TCOMPL-MF-C6",
+      "TCOMPL-MF-C7",
+      "TEXP-ARI-C3",
+      "TEXP-ARI-C4",
+      "TEXP-ARI-C6",
+      "TEXP-ARI-C7",
+      "TEXP-ARI-C8",
+      "TEXP-ARI-C9",
+      "TEXP-CAG-C2",
+      "TEXP-CAG-C5",
+      "TEXP-CTP-C3",
+      "TEXP-CTP-C4",
+      "TEXP-CTP-C6",
+      "TEXP-GRA-C2",
+      "TEXP-MAT-C2",
+      "TEXP-MAT-C6",
+      "TSPE-GEOESPACE-C1",
+      "TSPE-GEOESPACE-C10",
+      "TSPE-GEOESPACE-C14",
+      "TSPE-GEOESPACE-C15",
+      "TSPE-GEOESPACE-C16",
+      "TSPE-GEOESPACE-C2",
+      "TSPE-GEOESPACE-C4",
+      "TSPE-GEOESPACE-C5",
+      "TSPE-GEOESPACE-C6",
+      "TSPE-GEOESPACE-C8",
+      "TSPE-GEOESPACE-C9",
+      "TSPE-INTEG-C4",
+      "TSPE-INTEG-C5",
+      "TSPE-INTEG-C6",
+      "TSPE-INTEG-C7",
+      "TSPE-INTEG-C8",
+      "TSPE-PROBA-C1",
+      "TSPE-PROBA-C3",
+      "TSPE-PROBA-C4",
+      "TSPE-PROBA-C6"
+    ]
+  },
+  "CHAPTER_CAPACITY_PAIRS_WITHOUT_ANY_QCM": {
+    "count": 48,
+    "by_chapter": {
+      "TCOMPL-ECHANTILLONNAGE": [
+        "C6",
+        "C7"
+      ],
+      "TCOMPL-INFERENCE-BAYESIENNE": [
+        "C5"
+      ],
+      "TCOMPL-LOGARITHME-HISTORIQUE": [
+        "C4"
+      ],
+      "TCOMPL-MODELES-EVOLUTION": [
+        "C3",
+        "C6"
+      ],
+      "TCOMPL-MODELES-FONCTION": [
+        "C2",
+        "C3",
+        "C6",
+        "C7"
+      ],
+      "TCOMPL-TEMPS-ATTENTE": [
+        "C4",
+        "C5",
+        "C6",
+        "C7"
+      ],
+      "TEXP-ARITHMETIQUE": [
+        "C3",
+        "C4",
+        "C6",
+        "C7",
+        "C8",
+        "C9"
+      ],
+      "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE": [
+        "C2",
+        "C5"
+      ],
+      "TEXP-COMPLEXES-TRIGO-POLYNOMES": [
+        "C3",
+        "C4",
+        "C6"
+      ],
+      "TEXP-GRAPHES": [
+        "C2"
+      ],
+      "TEXP-MATRICES-MARKOV": [
+        "C2",
+        "C6"
+      ],
+      "TSPE-CALCUL-INTEGRAL": [
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C8"
+      ],
+      "TSPE-GEOMETRIE-ESPACE": [
+        "C1",
+        "C10",
+        "C14",
+        "C15",
+        "C16",
+        "C2",
+        "C4",
+        "C5",
+        "C6",
+        "C8",
+        "C9"
+      ],
+      "TSPE-PROBABILITES": [
+        "C1",
+        "C3",
+        "C4",
+        "C6"
+      ]
+    }
+  },
+  "MANDATORY_ASSESSED_CAPACITY_PAIRS_WITHOUT_QCM": {
+    "count": 43,
+    "pairs": [
+      {
+        "chapter": "TCOMPL-ECHANTILLONNAGE",
+        "capacity_code": "C7",
+        "capacity_id": "TCOMPL-ECH-C7",
+        "mandatory": true
+      },
+      {
+        "chapter": "TCOMPL-MODELES-EVOLUTION",
+        "capacity_code": "C3",
+        "capacity_id": "TCOMPL-ME-C3",
+        "mandatory": true
+      },
+      {
+        "chapter": "TCOMPL-MODELES-EVOLUTION",
+        "capacity_code": "C6",
+        "capacity_id": "TCOMPL-ME-C6",
+        "mandatory": true
+      },
+      {
+        "chapter": "TCOMPL-MODELES-FONCTION",
+        "capacity_code": "C2",
+        "capacity_id": "TCOMPL-MF-C2",
+        "mandatory": true
+      },
+      {
+        "chapter": "TCOMPL-MODELES-FONCTION",
+        "capacity_code": "C3",
+        "capacity_id": "TCOMPL-MF-C3",
+        "mandatory": true
+      },
+      {
+        "chapter": "TCOMPL-TEMPS-ATTENTE",
+        "capacity_code": "C4",
+        "capacity_id": "TCOMPL-ATT-C4",
+        "mandatory": true
+      },
+      {
+        "chapter": "TCOMPL-TEMPS-ATTENTE",
+        "capacity_code": "C5",
+        "capacity_id": "TCOMPL-ATT-C5",
+        "mandatory": true
+      },
+      {
+        "chapter": "TCOMPL-TEMPS-ATTENTE",
+        "capacity_code": "C6",
+        "capacity_id": "TCOMPL-ATT-C6",
+        "mandatory": true
+      },
+      {
+        "chapter": "TCOMPL-TEMPS-ATTENTE",
+        "capacity_code": "C7",
+        "capacity_id": "TCOMPL-ATT-C7",
+        "mandatory": true
+      },
+      {
+        "chapter": "TEXP-ARITHMETIQUE",
+        "capacity_code": "C3",
+        "capacity_id": "TEXP-ARI-C3",
+        "mandatory": true
+      },
+      {
+        "chapter": "TEXP-ARITHMETIQUE",
+        "capacity_code": "C4",
+        "capacity_id": "TEXP-ARI-C4",
+        "mandatory": true
+      },
+      {
+        "chapter": "TEXP-ARITHMETIQUE",
+        "capacity_code": "C6",
+        "capacity_id": "TEXP-ARI-C6",
+        "mandatory": true
+      },
+      {
+        "chapter": "TEXP-ARITHMETIQUE",
+        "capacity_code": "C7",
+        "capacity_id": "TEXP-ARI-C7",
+        "mandatory": true
+      },
+      {
+        "chapter": "TEXP-ARITHMETIQUE",
+        "capacity_code": "C8",
+        "capacity_id": "TEXP-ARI-C8",
+        "mandatory": true
+      },
+      {
+        "chapter": "TEXP-ARITHMETIQUE",
+        "capacity_code": "C9",
+        "capacity_id": "TEXP-ARI-C9",
+        "mandatory": true
+      },
+      {
+        "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+        "capacity_code": "C2",
+        "capacity_id": "TEXP-CAG-C2",
+        "mandatory": true
+      },
+      {
+        "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+        "capacity_code": "C5",
+        "capacity_id": "TEXP-CAG-C5",
+        "mandatory": true
+      },
+      {
+        "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+        "capacity_code": "C3",
+        "capacity_id": "TEXP-CTP-C3",
+        "mandatory": true
+      },
+      {
+        "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+        "capacity_code": "C4",
+        "capacity_id": "TEXP-CTP-C4",
+        "mandatory": true
+      },
+      {
+        "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+        "capacity_code": "C6",
+        "capacity_id": "TEXP-CTP-C6",
+        "mandatory": true
+      },
+      {
+        "chapter": "TEXP-GRAPHES",
+        "capacity_code": "C2",
+        "capacity_id": "TEXP-GRA-C2",
+        "mandatory": true
+      },
+      {
+        "chapter": "TEXP-MATRICES-MARKOV",
+        "capacity_code": "C2",
+        "capacity_id": "TEXP-MAT-C2",
+        "mandatory": true
+      },
+      {
+        "chapter": "TEXP-MATRICES-MARKOV",
+        "capacity_code": "C6",
+        "capacity_id": "TEXP-MAT-C6",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-CALCUL-INTEGRAL",
+        "capacity_code": "C4",
+        "capacity_id": "TSPE-INTEG-C4",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-CALCUL-INTEGRAL",
+        "capacity_code": "C5",
+        "capacity_id": "TSPE-INTEG-C5",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-CALCUL-INTEGRAL",
+        "capacity_code": "C6",
+        "capacity_id": "TSPE-INTEG-C6",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-CALCUL-INTEGRAL",
+        "capacity_code": "C7",
+        "capacity_id": "TSPE-INTEG-C7",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-CALCUL-INTEGRAL",
+        "capacity_code": "C8",
+        "capacity_id": "TSPE-INTEG-C8",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "capacity_code": "C1",
+        "capacity_id": "TSPE-GEOESPACE-C1",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "capacity_code": "C2",
+        "capacity_id": "TSPE-GEOESPACE-C2",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "capacity_code": "C4",
+        "capacity_id": "TSPE-GEOESPACE-C4",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "capacity_code": "C5",
+        "capacity_id": "TSPE-GEOESPACE-C5",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "capacity_code": "C6",
+        "capacity_id": "TSPE-GEOESPACE-C6",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "capacity_code": "C8",
+        "capacity_id": "TSPE-GEOESPACE-C8",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "capacity_code": "C9",
+        "capacity_id": "TSPE-GEOESPACE-C9",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "capacity_code": "C10",
+        "capacity_id": "TSPE-GEOESPACE-C10",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "capacity_code": "C14",
+        "capacity_id": "TSPE-GEOESPACE-C14",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "capacity_code": "C15",
+        "capacity_id": "TSPE-GEOESPACE-C15",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "capacity_code": "C16",
+        "capacity_id": "TSPE-GEOESPACE-C16",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "capacity_code": "C1",
+        "capacity_id": "TSPE-PROBA-C1",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "capacity_code": "C3",
+        "capacity_id": "TSPE-PROBA-C3",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "capacity_code": "C4",
+        "capacity_id": "TSPE-PROBA-C4",
+        "mandatory": true
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "capacity_code": "C6",
+        "capacity_id": "TSPE-PROBA-C6",
+        "mandatory": true
+      }
+    ],
+    "authority": "audit/OFFICIAL_PROGRAM_COVERAGE_2026_2027.json, colonne mandatory"
+  },
+  "PEDAGOGICALLY_REQUIRED_QCM_GAPS": {
+    "count": 43,
+    "definition": "couple (chapitre, capacite) sans aucune question alors que la capacite porte un atome officiel obligatoire ; seule metrique dont l'objectif contractuel est zero",
+    "objective": 0
+  },
+  "REQUIRED_DISTRACTOR_WITHOUT_DIAGNOSTIC": {
+    "count": 99,
+    "rule": "tout distracteur incorrect exige une erreur documentee ET un renvoi",
+    "objective": 0,
+    "entries": [
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q2",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q2",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q2",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q4",
+        "option": "B",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q4",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q4",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q5",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q5",
+        "option": "B",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q5",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q6",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q6",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q6",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q7",
+        "option": "B",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q7",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q7",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q8",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q8",
+        "option": "B",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q8",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q9",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q9",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q9",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q10",
+        "option": "B",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q10",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q10",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q12",
+        "option": "B",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q12",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q12",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q13",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q13",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q13",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q14",
+        "option": "B",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q14",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q14",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q15",
+        "option": "B",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q15",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-DERIVATION-CONVEXITE",
+        "question": "Q15",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "question": "Q1",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "question": "Q1",
+        "option": "B",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "question": "Q1",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "question": "Q2",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "question": "Q2",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "question": "Q2",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "question": "Q3",
+        "option": "B",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "question": "Q3",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "question": "Q3",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "question": "Q4",
+        "option": "B",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "question": "Q4",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "question": "Q4",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "question": "Q5",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "question": "Q5",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-GEOMETRIE-ESPACE",
+        "question": "Q5",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-LOGARITHME",
+        "question": "Q2",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-LOGARITHME",
+        "question": "Q2",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-LOGARITHME",
+        "question": "Q2",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-LOGARITHME",
+        "question": "Q3",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-LOGARITHME",
+        "question": "Q3",
+        "option": "B",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-LOGARITHME",
+        "question": "Q3",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-LOGARITHME",
+        "question": "Q4",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-LOGARITHME",
+        "question": "Q4",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-LOGARITHME",
+        "question": "Q4",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PRIMITIVES-EQDIFF",
+        "question": "Q3",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PRIMITIVES-EQDIFF",
+        "question": "Q3",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PRIMITIVES-EQDIFF",
+        "question": "Q3",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PRIMITIVES-EQDIFF",
+        "question": "Q4",
+        "option": "B",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PRIMITIVES-EQDIFF",
+        "question": "Q4",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PRIMITIVES-EQDIFF",
+        "question": "Q4",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PRIMITIVES-EQDIFF",
+        "question": "Q5",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PRIMITIVES-EQDIFF",
+        "question": "Q5",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PRIMITIVES-EQDIFF",
+        "question": "Q5",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "question": "Q2",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "question": "Q2",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "question": "Q2",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "question": "Q3",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "question": "Q3",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "question": "Q3",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "question": "Q4",
+        "option": "B",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "question": "Q4",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "question": "Q4",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "question": "Q5",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "question": "Q5",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "question": "Q5",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "question": "Q6",
+        "option": "B",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "question": "Q6",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-PROBABILITES",
+        "question": "Q6",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-TRIGONOMETRIE",
+        "question": "Q1",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-TRIGONOMETRIE",
+        "question": "Q1",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-TRIGONOMETRIE",
+        "question": "Q1",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-TRIGONOMETRIE",
+        "question": "Q2",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-TRIGONOMETRIE",
+        "question": "Q2",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-TRIGONOMETRIE",
+        "question": "Q2",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-TRIGONOMETRIE",
+        "question": "Q3",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-TRIGONOMETRIE",
+        "question": "Q3",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-TRIGONOMETRIE",
+        "question": "Q3",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-TRIGONOMETRIE",
+        "question": "Q4",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-TRIGONOMETRIE",
+        "question": "Q4",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-TRIGONOMETRIE",
+        "question": "Q4",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-TRIGONOMETRIE",
+        "question": "Q5",
+        "option": "A",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-TRIGONOMETRIE",
+        "question": "Q5",
+        "option": "C",
+        "has_erreur": true,
+        "has_renvoi": false
+      },
+      {
+        "chapter": "TSPE-TRIGONOMETRIE",
+        "question": "Q5",
+        "option": "D",
+        "has_erreur": true,
+        "has_renvoi": false
+      }
+    ]
+  }
+}
