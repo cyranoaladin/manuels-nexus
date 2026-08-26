@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import ast
 import hashlib
+import importlib.util
 import json
 import subprocess
 import sys
@@ -12,8 +13,49 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "build_canonical_style_runtime_registry.py"
 REGISTRY = ROOT / "audit" / "CANONICAL_STYLE_RUNTIME_REGISTRY.json"
 MARKDOWN = ROOT / "audit" / "CANONICAL_STYLE_RUNTIME_REGISTRY.md"
+CONSUMER_GRAPH = ROOT / "audit" / "STYLE_CONSUMER_GRAPH.json"
+CONSUMER_GRAPH_MARKDOWN = ROOT / "audit" / "STYLE_CONSUMER_GRAPH.md"
+DUPLICATE_FORENSICS = ROOT / "audit" / "STYLE_DUPLICATE_FORENSICS.json"
+DUPLICATE_FORENSICS_MARKDOWN = ROOT / "audit" / "STYLE_DUPLICATE_FORENSICS.md"
+
+SPEC = importlib.util.spec_from_file_location("style_registry_builder", SCRIPT)
+assert SPEC is not None and SPEC.loader is not None
+builder = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(builder)
 
 EXCLUDED_PARTS = {".git", ".worktrees", "build", "node_modules", "tmp"}
+
+EXPECTED_NONCANONICAL_PRODUCTION_INPUTS = {
+    "Mathematiques/manuel-maths/gabarits/chapitre_master.tex",
+    "Mathematiques/manuel-maths/gabarits/logo_nexus.png",
+    "Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty",
+    "Mathematiques/manuel-maths/gabarits/nexus-code.tex",
+    "Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex",
+    "Mathematiques/manuel-maths/gabarits/nexus-figures.tex",
+    "Mathematiques/manuel-maths/gabarits/nexus-icons.tex",
+    "Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls",
+    "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls",
+    "Mathematiques/manuel-maths/gabarits/nexus-margin-json.lua",
+    "Mathematiques/manuel-maths/gabarits/nexus-margin-layout.lua",
+    "Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex",
+    "Mathematiques/manuel-maths/gabarits/nexus-margin-shipout.lua",
+    "Mathematiques/manuel-maths/gabarits/nexus-signatures.tex",
+    "NSI/gabarits/book_master.tex",
+    "NSI/gabarits/chapitre_master.tex",
+    "NSI/gabarits/logo_nexus.png",
+    "NSI/gabarits/nexus-charte-v6.sty",
+    "NSI/gabarits/nexus-code.tex",
+    "NSI/gabarits/nexus-figures-nsi.tex",
+    "NSI/gabarits/nexus-figures.tex",
+    "NSI/gabarits/nexus-icons.tex",
+    "NSI/gabarits/nexus-manuel-v5.cls",
+    "NSI/gabarits/nexus-manuel.cls",
+    "NSI/gabarits/nexus-margin-json.lua",
+    "NSI/gabarits/nexus-margin-layout.lua",
+    "NSI/gabarits/nexus-margin-rail.tex",
+    "NSI/gabarits/nexus-margin-shipout.lua",
+    "NSI/gabarits/nexus-signatures.tex",
+}
 
 
 def _source_style_and_template_paths() -> set[str]:
@@ -176,3 +218,146 @@ def test_current_canonical_manifest_chapters_come_from_consumed_sources() -> Non
             "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
             "NSI/scripts/assemble_manuel.py",
         }
+
+
+def test_unattested_build_recorders_do_not_change_canonical_evidence(tmp_path: Path) -> None:
+    build = tmp_path / "Mathematiques/manuel-maths/build/MANUEL_1SPE"
+    build.mkdir(parents=True)
+    (build / "MANUEL_1SPE_eleve.fls").write_text(
+        "PWD /tmp/arbitrary\nINPUT ./gabarits/nexus-manuel-v5.cls\n",
+        encoding="utf-8",
+    )
+    audit = tmp_path / "audit/proved"
+    audit.mkdir(parents=True)
+    (audit / "manifest.json").write_text(
+        json.dumps({"git_sha": "abc123"}), encoding="utf-8"
+    )
+    (audit / "proved.fls").write_text(
+        "PWD /tmp/arbitrary\nINPUT ./gabarits/nexus-manuel-v5.cls\n",
+        encoding="utf-8",
+    )
+
+    _, recorders = builder.fls_observations(tmp_path, ())
+
+    assert [entry["fls_path"] for entry in recorders] == ["audit/proved/proved.fls"]
+    assert recorders[0]["attested_git_sha"] == "abc123"
+
+
+def test_fls_freshness_requires_an_exact_source_sha_match() -> None:
+    assert builder._classify_fls_freshness("abc123", "abc123") == (
+        "ATTESTED_CURRENT",
+        False,
+    )
+    assert builder._classify_fls_freshness("abc123", "def456") == (
+        "STALE_ATTESTED_OTHER_SHA",
+        True,
+    )
+    assert builder._classify_fls_freshness(None, "def456") == (
+        "UNATTESTED_IGNORED",
+        None,
+    )
+
+
+def test_extended_asset_inventory_and_duplicate_counts_are_exact() -> None:
+    registry, graph, forensics = builder.build_artifacts(ROOT)
+
+    assert registry["summary"] == {
+        **registry["summary"],
+        "physical_files": 63,
+        "unique_contents": 42,
+        "exact_duplicate_files": 21,
+        "exact_duplicate_groups": 18,
+    }
+    assert graph["summary"]["physical_assets"] == 126
+    assert graph["summary"]["unique_asset_contents"] == 63
+    assert forensics["summary"]["extended_duplicate_files"] == 63
+    assert forensics["summary"]["extended_duplicate_groups"] == 39
+    assert len(graph["assets"]) == 126
+    assert {entry["path"] for entry in graph["assets"]} == {
+        path.relative_to(ROOT).as_posix() for path in builder.asset_files(ROOT)
+    }
+
+
+def test_lifecycle_sets_and_noncanonical_production_inputs_are_closed() -> None:
+    _, graph, forensics = builder.build_artifacts(ROOT)
+    lifecycle = graph["lifecycle_sets"]
+
+    assert set(graph["noncanonical_production_inputs"]) == EXPECTED_NONCANONICAL_PRODUCTION_INPUTS
+    assert len(graph["noncanonical_production_inputs"]) == 29
+    assert lifecycle["OBSOLETE_PROVED"] == []
+    assert len(lifecycle["HISTORICAL_ONLY"]) == 5
+    assert len(lifecycle["VISUAL_FIXTURE"]) == 4
+    assert len(lifecycle["ACTIVE_COMPATIBILITY_WRAPPER"]) == 6
+    assert len(lifecycle["DORMANT_COMPATIBILITY_WRAPPER"]) == 14
+    assert graph["summary"]["unknown_lifecycle"] == 0
+    reconciliation = graph["legacy_registry_reconciliation"]
+    assert len(reconciliation["confirmed_production_inputs"]) == 15
+    assert reconciliation["reference_only_false_positives"] == [
+        "NSI/corpus_nsi/02_modeles_documents/nsi-preamble.sty"
+    ]
+    assert len(reconciliation["newly_explicit_production_inputs"]) == 14
+    assert forensics["summary"]["runtime_safe_to_delete"] == 0
+    assert all(
+        not member["safe_to_delete"]
+        for group in forensics["groups"]
+        for member in group["members"]
+        if member["runtime"]
+    )
+
+    evidence = graph["noncanonical_production_evidence"]
+    assert {entry["path"] for entry in evidence} == EXPECTED_NONCANONICAL_PRODUCTION_INPUTS
+    for entry in evidence:
+        assert entry["reason_code"]
+        assert entry["reason"]
+        assert entry["production_consumers"]
+        assert entry["proof"]
+        for proof in entry["proof"]:
+            source = ROOT / proof["path"]
+            assert source.is_file()
+            lines = source.read_text(encoding="utf-8", errors="ignore").splitlines()
+            assert 1 <= proof["line"] <= len(lines)
+            assert proof["needle"] in lines[proof["line"] - 1]
+
+
+def test_graph_validator_rejects_missing_targets_and_runtime_deletion() -> None:
+    _, graph, forensics = builder.build_artifacts(ROOT)
+    broken_graph = json.loads(json.dumps(graph))
+    broken_graph["edges"][0]["target"] = "missing/style/source.sty"
+    try:
+        builder.validate_consumer_graph(broken_graph)
+    except ValueError as error:
+        assert "cible absente" in str(error)
+    else:
+        raise AssertionError("une cible de graphe absente doit être refusée")
+
+    broken_forensics = json.loads(json.dumps(forensics))
+    runtime_member = next(
+        member
+        for group in broken_forensics["groups"]
+        for member in group["members"]
+        if member["runtime"]
+    )
+    runtime_member["safe_to_delete"] = True
+    try:
+        builder.validate_duplicate_forensics(broken_forensics)
+    except ValueError as error:
+        assert "runtime" in str(error)
+    else:
+        raise AssertionError("un duplicata runtime ne doit jamais être supprimable")
+
+
+def test_all_three_style_reports_are_deterministic_and_current() -> None:
+    first = builder.build_artifacts(ROOT)
+    second = builder.build_artifacts(ROOT)
+    assert first == second
+
+    expected = {
+        REGISTRY: builder.serialise(first[0])[0],
+        MARKDOWN: builder.serialise(first[0])[1],
+        CONSUMER_GRAPH: builder.serialise_consumer_graph(first[1])[0],
+        CONSUMER_GRAPH_MARKDOWN: builder.serialise_consumer_graph(first[1])[1],
+        DUPLICATE_FORENSICS: builder.serialise_duplicate_forensics(first[2])[0],
+        DUPLICATE_FORENSICS_MARKDOWN: builder.serialise_duplicate_forensics(first[2])[1],
+    }
+    for path, content in expected.items():
+        assert path.read_bytes() == content

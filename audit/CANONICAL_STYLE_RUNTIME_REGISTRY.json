@@ -4,7 +4,7 @@
   "methodology": {
     "source_scope": "Physical source *.cls/*.sty and *.tex below a gabarits directory; build/tmp/node_modules excluded",
     "direct_reference_scope": "Executable LaTeX commands and assembler literals; docs/tests excluded",
-    "fls_policy": "Observed inputs are evidence only; other-worktree records are stale and current-worktree records without an attested SHA remain unverified",
+    "fls_policy": "Only .fls copied below audit/ beside a manifest git_sha are evidence; ignored build products and unattested recorders are omitted, and ATTESTED_CURRENT requires an exact HEAD SHA match",
     "no_build_or_charter_mutation": true
   },
   "canonical_targets": {
@@ -2206,6 +2206,12 @@
           {
             "path": "scripts/build_d7_proof_bundle.py",
             "line": 377,
+            "kind": "ASSEMBLER_LITERAL",
+            "target_literal": "gabarits/common/nexus-pages-froides.sty"
+          },
+          {
+            "path": "scripts/build_latex_layout_warning_ledger.py",
+            "line": 22,
             "kind": "ASSEMBLER_LITERAL",
             "target_literal": "gabarits/common/nexus-pages-froides.sty"
           }

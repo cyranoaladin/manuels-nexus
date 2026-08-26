@@ -95,7 +95,7 @@ La présence d'une cible canonique unique n'implique pas encore un runtime sans 
 | `gabarits/common/nexus-icons.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `42af1195dda223dc642255754ff7a94f1d5add6720e7062883de4c429132cc8b` | — | 1 | 0 | NO | NO |
 | `gabarits/common/nexus-manuel.cls` | CANONICAL_CLASS_IMPLEMENTATION | YES | `9a85c337ec1723bb33e90f71eb5b7c35c0954c63cc69b8fbdce77ac2bcea8c56` | — | 21 | 1 | NO | NO |
 | `gabarits/common/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `6ffc96378d2dece2dd7479647b7b7046025fe3c12a1bdd0fcf41d8787e277823` | — | 0 | 0 | NO | NO |
-| `gabarits/common/nexus-pages-froides.sty` | CANONICAL_SUPPORT_STYLE | YES | `4e1f7fae36ffa3b871bbe728ec9c7fcbf4b473c9f614660edb6cb057f8282bd8` | — | 13 | 0 | NO | NO |
+| `gabarits/common/nexus-pages-froides.sty` | CANONICAL_SUPPORT_STYLE | YES | `4e1f7fae36ffa3b871bbe728ec9c7fcbf4b473c9f614660edb6cb057f8282bd8` | — | 14 | 0 | NO | NO |
 | `gabarits/common/nexus-pont.sty` | CANONICAL_SUPPORT_STYLE | YES | `2703ad66ef9733c7c45f2176a7c13918a34920f6d4112e70f300d33e8f09d088` | — | 14 | 0 | NO | NO |
 | `gabarits/common/nexus-signatures.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `bbf81c1368d7be1b067597803e1429dd94e19c0585dbf0981d408f8f5ea3cc74` | — | 1 | 0 | NO | NO |
 | `gabarits/maths/nexus-maths.sty` | CANONICAL_DISCIPLINE_ADAPTER | YES | `c51c5b6a6fc330ccf47c0980716719f37073317b91f7233d8cc01f5fe1bed994` | — | 2 | 0 | NO | NO |
