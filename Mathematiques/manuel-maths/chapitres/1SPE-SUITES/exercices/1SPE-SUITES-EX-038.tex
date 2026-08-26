@@ -11,7 +11,7 @@
 % # V_3 = 18000 * 0.88^3 = 18000 * 0.681472 = 12266.496
 % V3 = float(V0 * q**3)
 % assert abs(V3 - 12266.496) < 0.01
-% # Seuil V_n <= 9000 : 0.88^n <= 0.5 => n >= log(0.5)/log(0.88)
+% # Seuil V_n < 9000 : 0.88^n < 0.5 => n > log(0.5)/log(0.88)
 % import math
 % n_seuil = math.ceil(math.log(0.5)/math.log(0.88))
 % assert n_seuil == 6
@@ -31,8 +31,8 @@ Théo achète un véhicule d'occasion à $18\,000$~\euro{}. Ce véhicule perd $1
   \item Théo souhaite revendre son véhicule avant que sa valeur ne tombe en dessous de $9\,000$~\euro{}.
   \begin{enumerate}
     \item Écrire une inéquation traduisant cette condition.
-    \item Montrer par essais successifs (ou en utilisant $\log_{10}(0{,}88) \approx -0{,}0555$ et $\log_{10}(0{,}5) \approx -0{,}301$) que la valeur passe en dessous de $9\,000$~\euro{} lors de la $7^e$ année.
-    \item Conclure : au bout de combien d'années Théo doit-il vendre au plus tard son véhicule ?
+    \item À l'aide d'une calculatrice, d'un tableau de valeurs ou d'essais successifs, calculer $V_5$ et $V_6$, arrondies à l'euro, puis identifier le premier anniversaire auquel la valeur est inférieure à $9\,000$~\euro{}.
+    \item Conclure : à quel anniversaire Théo doit-il vendre au plus tard son véhicule ?
   \end{enumerate}
 \end{enumerate}
 \end{exercice}
