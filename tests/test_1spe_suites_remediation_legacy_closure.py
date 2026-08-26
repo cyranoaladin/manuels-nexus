@@ -132,7 +132,6 @@ def test_deterministic_scientific_and_editorial_findings_are_closed() -> None:
     assert "salaire mensuel" in c6
 
     r2 = _text("1SPE-SUITES-FR-R2.tex")
-    assert "Une bactérie se multiplie" in r2
     assert "round(C10) == 2688" in r2
     assert "2687.0" not in r2
 
@@ -140,6 +139,37 @@ def test_deterministic_scientific_and_editorial_findings_are_closed() -> None:
     assert "h(x) = 2^x" not in r3
     assert "2**(-1)" not in r3
     assert "fonction affine" in r3
+
+
+def test_re_c6_proves_the_threshold_remains_crossed_after_rank_seven() -> None:
+    source = _normalized("1SPE-SUITES-RE-C6.tex")
+
+    assert r"P_n=P_7\times 0{,}985^{n-7}" in source
+    assert r"P_n\leq P_7<18\,000" in source
+    assert r"l'inégalité reste vraie pour tout $n\geq 7$" in source
+
+
+def test_fr_r5_names_the_ten_values_after_u_zero_without_ambiguity() -> None:
+    source = _text("1SPE-SUITES-FR-R5.tex")
+
+    assert source.count(r"les dix termes suivants $u_1, u_2, \ldots, u_{10}$") == 2
+    assert "les $10$ premiers termes" not in source
+    assert "1SPE-SUITES-FR-R5-EX1-TRACE.py" in source
+
+
+def test_re_c7_bounds_update_order_to_the_s_equals_v_zero_invariant() -> None:
+    source = _normalized("1SPE-SUITES-RE-C7.tex")
+
+    assert r"l'accumulateur est initialisé à $S=v_0$" in source
+    assert r"$S=v_0+v_1+\cdots+v_k$ après $k$ itérations" in source
+    assert "Pour une somme, mettre à jour le terme avant de l'ajouter" not in source
+
+
+def test_fr_r2_models_a_population_not_one_bacterium() -> None:
+    source = _text("1SPE-SUITES-FR-R2.tex")
+
+    assert "Une population de bactéries double toutes les heures" in source
+    assert "Une bactérie se multiplie" not in source
 
 
 def test_all_published_remediation_programs_use_exact_canonical_sources() -> None:

@@ -17,8 +17,10 @@ l'aide graduée. En cas de réussite immédiate, passer à la revalidation.
 
 \subsection*{Rappel ciblé}
 La variable porte d'abord le terme initial. Une boucle de $n$ itérations
-calcule alors le terme de rang $n$. Pour une somme, mettre à jour le terme
-avant de l'ajouter ; pour un seuil, vérifier la valeur juste avant l'arrêt.
+calcule alors le terme de rang $n$. Pour calculer $S_n=v_0+\cdots+v_n$
+lorsque l'accumulateur est initialisé à $S=v_0$, mettre à jour le terme avant
+de l'ajouter : $S=v_0+v_1+\cdots+v_k$ après $k$ itérations. Pour un seuil,
+vérifier la valeur juste avant l'arrêt.
 
 \subsection*{Aide graduée}
 Construire un tableau avec une ligne initiale, puis une ligne par itération.
