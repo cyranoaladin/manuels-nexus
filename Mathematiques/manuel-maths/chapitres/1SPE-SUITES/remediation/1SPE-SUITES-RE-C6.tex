@@ -5,6 +5,27 @@
 % Modéliser une situation concrète par une suite
 %---------------------------------------------------------------
 
+\subsection*{Diagnostic de l'erreur}
+Erreur ciblée : confondre évolution additive et multiplicative, ou choisir un
+indice sans vérifier qu'il est le premier à satisfaire la contrainte.
+
+\subsection*{Orientation}
+Si l'erreur diagnostiquée concerne le coefficient d'évolution, reprendre le
+rappel et l'activité guidée. Si elle concerne un seuil ou un croisement,
+suivre aussi l'aide graduée. En cas de réussite immédiate, passer à la
+revalidation.
+
+\subsection*{Rappel ciblé}
+Une variation absolue constante produit une suite arithmétique ; un taux
+constant produit une suite géométrique. Pour « à partir de », vérifier le rang
+frontière et prouver que l'inégalité reste vraie ensuite.
+
+\subsection*{Aide graduée}
+Nommer la grandeur, son unité et l'origine des indices. Pour un croisement,
+étudier la différence des deux modèles plutôt que quelques valeurs isolées.
+
+\subsection*{Activité guidée}
+
 %---------------------------------------------------------------
 % EXERCICE 1 — Corrigé pas à pas
 %---------------------------------------------------------------
@@ -56,6 +77,8 @@ C_{10} = 500 \times 1{,}02^{10} \approx 500 \times 1{,}2190 \approx 610 \text{ �
 
 \end{corrige}
 
+\subsection*{Exercice autonome}
+
 %---------------------------------------------------------------
 % EXERCICE 2 — Avec coup de pouce
 %---------------------------------------------------------------
@@ -69,8 +92,6 @@ Une ville comptait $20\,000$ habitants en 2020. Sa population diminue de $1{,}5\
   \item À partir de quel rang $n$ la population passe-t-elle sous $18\,000$ habitants ? (Essayer les valeurs $n = 5, 6, 7, 8$.)
 \end{enumerate}
 \end{exercice}
-
-\coupDePouce{1}{Une diminution de $1{,}5\,\%$ correspond à un coefficient multiplicateur $CM = 1 - \dfrac{1{,}5}{100} = 0{,}985$. Donc $P_{n+1} = 0{,}985 \times P_n$.}
 
 % BEGIN-VERIFY
 % P0 = 20000
@@ -114,6 +135,8 @@ La population passe sous $18\,000$ à partir de $n = 7$, c'est-à-dire en 2027.
 
 \end{corrige}
 
+\subsection*{Revalidation}
+
 %---------------------------------------------------------------
 % EXERCICE 3 — En autonomie
 %---------------------------------------------------------------
@@ -123,7 +146,9 @@ Une entreprise verse à un employé un salaire mensuel de $1\,500$~€ la premi�
 
 Par ailleurs, un concurrent propose $1\,600$~€ par mois la première année, avec une augmentation fixe de $30$~€ par an.
 
-On note $A_n$ le salaire annuel (mensuel) chez l'entreprise A après $n$ années ($n = 0$ : première année), et $B_n$ le salaire chez l'entreprise B.
+On note $A_n$ le salaire mensuel chez l'entreprise A pendant l'année de rang
+$n$ ($n = 0$ : première année), et $B_n$ le salaire mensuel chez l'entreprise
+B pendant cette même année.
 \begin{enumerate}
   \item Exprimer $A_n$ et $B_n$ en fonction de $n$.
   \item Calculer $A_0$, $A_1$, $A_5$ et $B_0$, $B_1$, $B_5$.
@@ -136,6 +161,8 @@ On note $A_n$ le salaire annuel (mensuel) chez l'entreprise A après $n$ années
 % B = lambda n: 1600 + 30*n
 % assert A(0) == 1500
 % assert abs(A(1) - 1545) < 1
+% assert round(A(3)) == 1639
+% assert round(A(4)) == 1688
 % assert abs(A(5) - 1738.91) < 1
 % assert B(0) == 1600
 % assert B(1) == 1630
@@ -143,6 +170,7 @@ On note $A_n$ le salaire annuel (mensuel) chez l'entreprise A après $n$ années
 % # A depasse B des le rang n=6
 % assert A(5) < B(5)
 % assert A(6) > B(6)
+% assert all((A(n+1)-B(n+1)) > (A(n)-B(n)) for n in range(8))
 % END-VERIFY
 
 \begin{corrige}{1SPE-SUITES-RE-C6-EX3}
@@ -166,8 +194,8 @@ B_0 = 1\,600. \quad B_1 = 1\,630. \quad B_5 = 1\,750.
 \hline
 $n$ & $A_n$ (arrondi) & $B_n$ & Meilleure offre \\
 \hline
-$3$ & $1\,637$ & $1\,690$ & B \\
-$4$ & $1\,686$ & $1\,720$ & B \\
+$3$ & $1\,639$ & $1\,690$ & B \\
+$4$ & $1\,688$ & $1\,720$ & B \\
 $5$ & $1\,739$ & $1\,750$ & B \\
 $6$ & $1\,791$ & $1\,780$ & A \\
 $7$ & $1\,845$ & $1\,810$ & A \\
@@ -175,6 +203,13 @@ $7$ & $1\,845$ & $1\,810$ & A \\
 \end{tabular}
 \end{center}
 
-À partir de $n = 6$ (la $7^{\text{e}}$ année), l'entreprise A devient plus avantageuse.
+Posons $D_n=A_n-B_n$. Comme $A_n\geq A_0=1\,500$ pour tout $n$, on a
+\[
+D_{n+1}-D_n=0{,}03A_n-30\geq 15>0.
+\]
+La suite $(D_n)$ est donc strictement croissante. Or $D_5<0$ et $D_6>0$ :
+$n=6$ est le premier rang où A dépasse B, et l'inégalité reste vraie à tous
+les rangs suivants. À partir de $n = 6$ (la $7^{\text{e}}$ année),
+l'entreprise A devient plus avantageuse.
 
 \end{corrige}

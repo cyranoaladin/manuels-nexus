@@ -5,6 +5,26 @@
 % Somme des premiers entiers et somme d'une suite géométrique
 %---------------------------------------------------------------
 
+\subsection*{Diagnostic de l'erreur}
+Erreur ciblée : mal compter le nombre de termes d'une somme ou décaler le
+premier et le dernier indice dans une formule.
+
+\subsection*{Orientation}
+Si l'erreur diagnostiquée porte sur les indices, reprendre le rappel et
+l'activité guidée. Si elle porte sur la formule géométrique, utiliser aussi
+l'aide graduée. En cas de réussite immédiate, passer à la revalidation.
+
+\subsection*{Rappel ciblé}
+De l'indice $p$ à l'indice $n$ inclus, il y a $n-p+1$ termes. Avant toute
+formule, écrire explicitement le premier terme, le dernier terme et leur
+nombre.
+
+\subsection*{Aide graduée}
+Pour une somme géométrique, factoriser le premier terme puis ramener la somme
+à $1+q+\cdots+q^m$ ; l'exposant maximal $m$ donne $m+1$ termes.
+
+\subsection*{Activité guidée}
+
 %---------------------------------------------------------------
 % EXERCICE 1 — Corrigé pas à pas
 %---------------------------------------------------------------
@@ -56,7 +76,8 @@ Formule : $\dfrac{5 \times 6}{2} = \dfrac{30}{2} = 15$. \checkmark
 6 + 7 + \cdots + 15 = \frac{15 \times 16}{2} - \frac{5 \times 6}{2} = 120 - 15 = 105.
 \]
 
-\commentaireMarge{Formule : $S = \frac{(u_1+u_k)\times k}{2}$.}
+\commentaireMarge{Somme arithmétique : nombre de termes multiplié par la
+moyenne du premier et du dernier terme.}
 
 \textbf{Question 4.} Les termes sont $u_k = 3 + 2k$ pour $k = 0, 1, \ldots, 9$. Il y a $10$ termes, $u_0 = 3$ et $u_9 = 3 + 18 = 21$.
 \[
@@ -64,6 +85,8 @@ u_0 + u_1 + \cdots + u_9 = \frac{(u_0 + u_9) \times 10}{2} = \frac{(3 + 21) \tim
 \]
 
 \end{corrige}
+
+\subsection*{Exercice autonome}
 
 %---------------------------------------------------------------
 % EXERCICE 2 — Avec coup de pouce
@@ -83,8 +106,6 @@ Soit la suite $(v_n)$ définie par $v_n = 3^n$ pour tout $n \in \mathbb{N}$.
   \item Calculer $v_0 + v_1 + \cdots + v_9$.
 \end{enumerate}
 \end{exercice}
-
-\coupDePouce{1}{Pour la question 3, on a $u_0 = v_0 = 1$, $q = 3$, $n = 3$. La formule donne $1 \times \dfrac{1 - 3^{3+1}}{1 - 3} = \dfrac{1 - 81}{-2}$. Calculer cette expression.}
 
 % BEGIN-VERIFY
 % v = lambda n: 3**n
@@ -128,6 +149,8 @@ v_0 + v_1 + \cdots + v_9 = 1 \times \frac{1 - 3^{10}}{1 - 3} = \frac{1 - 59049}{
 
 \end{corrige}
 
+\subsection*{Revalidation}
+
 %---------------------------------------------------------------
 % EXERCICE 3 — En autonomie
 %---------------------------------------------------------------
@@ -135,7 +158,11 @@ v_0 + v_1 + \cdots + v_9 = 1 \times \frac{1 - 3^{10}}{1 - 3} = \frac{1 - 59049}{
 \begin{exercice}{1SPE-SUITES-RE-C4-EX3}{1}{12}
 Un épargnant place $100$~€ par mois sur un livret. Au bout du $1^{\text{er}}$ mois, le livret contient $100$~€. Au bout du $2^{\text{e}}$ mois : $200$~€. Etc. On note $S_n = 100n$ la somme après $n$ mois.
 
-En réalité, le livret offre $0{,}5\,\%$ d'intérêts par mois. Ainsi le $1^{\text{er}}$ versement de $100$~€ vaut au bout de $n$ mois : $100 \times 1{,}005^{n-1}$. Le $k^{\text{e}}$ versement (effectué au début du mois $k$) vaut au bout du $n^{\text{e}}$ mois : $100 \times 1{,}005^{n-k}$.
+En réalité, le livret offre $0{,}5\,\%$ d'intérêts par mois. Les versements
+sont effectués en fin de mois. Ainsi le $1^{\text{er}}$ versement de $100$~€
+vaut au bout de $n$ mois : $100 \times 1{,}005^{n-1}$. Le $k^{\text{e}}$
+versement (effectué à la fin du mois $k$) vaut au bout du $n^{\text{e}}$ mois :
+$100 \times 1{,}005^{n-k}$.
 \begin{enumerate}
   \item Exprimer la somme totale $T_n$ après $n$ mois comme une somme géométrique.
   \item La raison de cette suite géométrique est $q = 1{,}005$. Combien de termes y a-t-il dans $T_n$ ?

@@ -5,6 +5,26 @@
 % Suites géométriques : caractérisation et terme général
 %---------------------------------------------------------------
 
+\subsection*{Diagnostic de l'erreur}
+Erreur ciblée : oublier de vérifier la relation multiplicative pour tout rang,
+ou former un quotient alors qu'un terme peut être nul.
+
+\subsection*{Orientation}
+Si l'erreur diagnostiquée concerne le quotient, reprendre le rappel et
+l'activité guidée. Si elle concerne la portée d'une observation, suivre aussi
+l'aide graduée. En cas de réussite immédiate, passer à la revalidation.
+
+\subsection*{Rappel ciblé}
+La définition sûre est $u_{n+1}=q u_n$ pour tout rang. Le quotient
+$u_{n+1}/u_n$ n'est utilisable que lorsque tous les termes concernés sont non
+nuls.
+
+\subsection*{Aide graduée}
+Avant de diviser, prouver la non-nullité. Puis distinguer une raison seulement
+observée sur quelques termes d'une relation démontrée pour tout $n$.
+
+\subsection*{Activité guidée}
+
 %---------------------------------------------------------------
 % EXERCICE 1 — Corrigé pas à pas
 %---------------------------------------------------------------
@@ -54,6 +74,8 @@ u_0 = 3 \times 2^0 = 3. \quad u_1 = 3 \times 2^1 = 6. \quad u_2 = 3 \times 2^2 =
 
 \end{corrige}
 
+\subsection*{Exercice autonome}
+
 %---------------------------------------------------------------
 % EXERCICE 2 — Avec coup de pouce
 %---------------------------------------------------------------
@@ -70,10 +92,6 @@ On donne les premiers termes : $v_0 = 2$, $v_1 = 6$, $v_2 = 18$, $v_3 = 54$.
   \item Calculer $v_6$.
 \end{enumerate}
 \end{exercice}
-
-\coupDePouce{1}{Les quotients observés permettent seulement de proposer une
-raison candidate. Pour une preuve, il faut une relation valable pour tout
-$n$ ; utiliser ensuite l'information $v_{n+1}=3v_n$.}
 
 % BEGIN-VERIFY
 % v = lambda n: 2 * 3**n
@@ -117,6 +135,8 @@ v_6 = 2 \times 3^6 = 2 \times 729 = 1\,458.
 \]
 
 \end{corrige}
+
+\subsection*{Revalidation}
 
 %---------------------------------------------------------------
 % EXERCICE 3 — En autonomie

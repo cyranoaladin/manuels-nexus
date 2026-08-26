@@ -5,6 +5,26 @@
 % Suites arithmétiques : caractérisation et terme général
 %---------------------------------------------------------------
 
+\subsection*{Diagnostic de l'erreur}
+Erreur ciblée : conclure à partir d'un préfixe qu'une suite entière est
+arithmétique, sans disposer d'une relation valable pour tout rang.
+
+\subsection*{Orientation}
+Si l'erreur diagnostiquée concerne le calcul d'une différence, reprendre le
+rappel et l'activité guidée. Si elle concerne la preuve, suivre aussi l'aide
+graduée. En cas de réussite immédiate, passer à la revalidation.
+
+\subsection*{Rappel ciblé}
+Quelques différences égales suggèrent une raison candidate, mais ne prouvent
+rien sur les termes non donnés. Pour conclure, il faut établir
+$u_{n+1}-u_n=r$ pour tout $n$, ou disposer d'une relation équivalente.
+
+\subsection*{Aide graduée}
+Distinguer sur la copie « observation sur les valeurs données » et
+« propriété démontrée pour tout rang ».
+
+\subsection*{Activité guidée}
+
 %---------------------------------------------------------------
 % EXERCICE 1 — Corrigé pas à pas
 %---------------------------------------------------------------
@@ -55,6 +75,8 @@ u_{n+1} - u_n = [5(n+1) - 3] - [5n - 3] = 5n + 5 - 3 - 5n + 3 = 5.
 
 \end{corrige}
 
+\subsection*{Exercice autonome}
+
 %---------------------------------------------------------------
 % EXERCICE 2 — Avec coup de pouce
 %---------------------------------------------------------------
@@ -63,13 +85,14 @@ u_{n+1} - u_n = [5(n+1) - 3] - [5n - 3] = 5n + 5 - 3 - 5n + 3 = 5.
 On donne les premiers termes d'une suite : $v_0 = 7$, $v_1 = 4$, $v_2 = 1$, $v_3 = -2$.
 \begin{enumerate}
   \item Calculer $v_1 - v_0$, $v_2 - v_1$, $v_3 - v_2$.
-  \item La suite $(v_n)$ est-elle arithmétique ? Si oui, préciser sa raison.
-  \item Exprimer le terme général $v_n$ en fonction de $n$.
+  \item Ces trois différences suffisent-elles à prouver que toute la suite est
+  arithmétique ? Justifier.
+  \item On ajoute l'information $v_{n+1}=v_n-3$ pour tout
+  $n\in\mathbb{N}$. Démontrer que la suite est arithmétique, puis exprimer
+  $v_n$ en fonction de $n$.
   \item Calculer $v_{20}$ et $v_{100}$.
 \end{enumerate}
 \end{exercice}
-
-\coupDePouce{1}{Pour vérifier qu'une suite est arithmétique, il suffit de vérifier que toutes les différences consécutives $v_{n+1} - v_n$ sont égales à la même constante $r$. Ici, calculer les trois différences demandées.}
 
 % BEGIN-VERIFY
 % v = lambda n: 7 - 3*n
@@ -80,6 +103,8 @@ On donne les premiers termes d'une suite : $v_0 = 7$, $v_1 = 4$, $v_2 = 1$, $v_3
 % assert v(1) - v(0) == -3
 % assert v(2) - v(1) == -3
 % assert v(3) - v(2) == -3
+% prefix_with_counterexample = [7, 4, 1, -2, 0]
+% assert prefix_with_counterexample[4] != prefix_with_counterexample[3] - 3
 % assert v(20) == 7 - 3*20
 % assert v(100) == 7 - 3*100
 % END-VERIFY
@@ -91,13 +116,20 @@ On donne les premiers termes d'une suite : $v_0 = 7$, $v_1 = 4$, $v_2 = 1$, $v_3
 v_1 - v_0 = 4 - 7 = -3. \quad v_2 - v_1 = 1 - 4 = -3. \quad v_3 - v_2 = -2 - 1 = -3.
 \]
 
-\commentaireMarge{Les trois différences sont toutes égales à $-3$ : c'est la caractérisation d'une suite arithmétique.}
+\commentaireMarge{Les trois différences observées suggèrent $-3$, mais une
+preuve doit porter sur tous les rangs.}
 
-\textbf{Question 2.} Les différences consécutives sont toutes égales à $-3$. La suite $(v_n)$ est arithmétique de raison $r = -3$.
+\textbf{Question 2.} Ces trois différences ne suffisent pas à déterminer les
+termes suivants. Par exemple, on pourrait choisir $v_4=0$ tout en conservant
+les quatre valeurs données ; ce prolongement ne vérifierait pas
+$v_4-v_3=-3$.
 
-\commentaireMarge{Formule du terme général d'une suite arithmétique : $v_n = v_0 + r \times n$.}
+\commentaireMarge{La nouvelle relation vaut pour tout $n$ : elle permet cette
+fois de conclure.}
 
-\textbf{Question 3.} $v_n = v_0 + rn = 7 + (-3)n = 7 - 3n$.
+\textbf{Question 3.} Puisque $v_{n+1}=v_n-3$ pour tout
+$n\in\mathbb{N}$, la suite est arithmétique de raison $-3$. Ainsi
+$v_n=v_0-3n=7-3n$.
 
 \textbf{Question 4.}
 \[
@@ -108,6 +140,8 @@ v_{100} = 7 - 3 \times 100 = 7 - 300 = -293.
 \]
 
 \end{corrige}
+
+\subsection*{Revalidation}
 
 %---------------------------------------------------------------
 % EXERCICE 3 — En autonomie

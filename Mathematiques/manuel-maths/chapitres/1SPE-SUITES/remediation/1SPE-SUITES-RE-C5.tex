@@ -5,6 +5,26 @@
 % Sens de variation d'une suite
 %---------------------------------------------------------------
 
+\subsection*{Diagnostic de l'erreur}
+Erreur ciblée : choisir une méthode sans vérifier ses conditions, notamment
+utiliser un quotient sans établir la positivité des termes.
+
+\subsection*{Orientation}
+Si l'erreur diagnostiquée concerne le signe d'une différence, reprendre le
+rappel et l'activité guidée. Si elle concerne un quotient, suivre aussi
+l'aide graduée. En cas de réussite immédiate, passer à la revalidation.
+
+\subsection*{Rappel ciblé}
+La différence $u_{n+1}-u_n$ permet toujours de comparer deux termes
+consécutifs. La comparaison d'un quotient à $1$ exige de connaître le signe
+des termes avant de conclure.
+
+\subsection*{Aide graduée}
+Écrire dans cet ordre : expression de comparaison, conditions de signe, signe
+obtenu, puis conclusion sur les variations.
+
+\subsection*{Activité guidée}
+
 %---------------------------------------------------------------
 % EXERCICE 1 — Corrigé pas à pas
 %---------------------------------------------------------------
@@ -55,6 +75,8 @@ On a bien $8 > 5 > 2$ : la suite est décroissante. \checkmark
 
 \end{corrige}
 
+\subsection*{Exercice autonome}
+
 %---------------------------------------------------------------
 % EXERCICE 2 — Avec coup de pouce
 %---------------------------------------------------------------
@@ -67,8 +89,6 @@ Soit la suite $(v_n)$ définie par $v_0 = 10$ et $v_{n+1} = \dfrac{v_n}{2} + 3$ 
   \item On admet que $v_n > 6$ pour tout $n \in \mathbb{N}$. En déduire le signe de $v_{n+1} - v_n$, puis le sens de variation de $(v_n)$.
 \end{enumerate}
 \end{exercice}
-
-\coupDePouce{1}{Pour la question 2, écrire $v_{n+1} - v_n = \dfrac{v_n}{2} + 3 - v_n$ et regrouper les termes en $v_n$.}
 
 % BEGIN-VERIFY
 % from sympy import symbols, Rational
@@ -114,6 +134,8 @@ v_{n+1} - v_n = \frac{6 - v_n}{2} < 0.
 La suite $(v_n)$ est strictement décroissante. (Cela est cohérent : $10 > 8 > 7 > 6{,}5 > \ldots$)
 
 \end{corrige}
+
+\subsection*{Revalidation}
 
 %---------------------------------------------------------------
 % EXERCICE 3 — En autonomie

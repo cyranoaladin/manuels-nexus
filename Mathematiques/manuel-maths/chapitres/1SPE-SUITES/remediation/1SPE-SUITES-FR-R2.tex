@@ -81,7 +81,7 @@ Un capital de $2\,000$~€ est placé sur un livret qui rapporte $3\,\%$ d'inté
 % C2 = C0 * q**2
 % assert abs(C2 - 2121.80) < 0.01
 % C10 = C0 * q**10
-% assert abs(C10 - 2687.0) < 1.0
+% assert round(C10) == 2688
 % END-VERIFY
 
 \begin{corrige}{1SPE-SUITES-FR-R2-EX2}
@@ -165,7 +165,7 @@ Sur deux ans, le prix a diminué de $1\,\%$.
 %---------------------------------------------------------------
 
 \begin{exercice}{1SPE-SUITES-FR-R2-EX4}{1}{7}
-Un bactérie se multiplie : la population double toutes les heures. Au départ, on compte $500$ bactéries.
+Une bactérie se multiplie : la population double toutes les heures. Au départ, on compte $500$ bactéries.
 \begin{enumerate}
   \item Quel est le taux d'augmentation horaire ? Le coefficient multiplicateur ?
   \item Donner l'expression de la population $P_n$ après $n$ heures.

@@ -30,13 +30,7 @@ Lire et compléter.
 On considère le programme suivant (ne pas chercher à l'exécuter, lire ligne par ligne) :
 
 \medskip
-\verb|u = 3|
-
-\verb|for k in range(4):|
-
-\verb|    u = u + 2|
-
-\verb|    print(u)|
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX1-TRACE.py}
 
 \begin{enumerate}
   \item Combien de fois la boucle s'exécute-t-elle ? Quelles sont les valeurs de \verb|k| ?
@@ -98,13 +92,7 @@ Tour & \verb|k| & \verb|u| \\
   \item Décrire ce que fait le programme suivant :
 
 \medskip
-\verb|u = 1|
-
-\verb|for k in range(5):|
-
-\verb|    u = 3 * u|
-
-\verb|print(u)|
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX2.py}
 
   \item Quelle valeur affiche-t-il ? Justifier sans calculer terme à terme.
   \item Écrire un programme similaire qui calcule et affiche le terme $u_8$ de la suite géométrique de premier terme $u_0 = 2$ et de raison $q = 5$.
@@ -123,13 +111,7 @@ Tour & \verb|k| & \verb|u| \\
 \textbf{Question 3.} Programme pour $u_8$ avec $u_0 = 2$ et $q = 5$ :
 
 \medskip
-\verb|u = 2|
-
-\verb|for k in range(8):|
-
-\verb|    u = 5 * u|
-
-\verb|print(u)|
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX2-MODIFIE.py}
 
 \medskip
 On vérifie : $u_8 = 2 \times 5^8 = 2 \times 390625 = 781250$.
@@ -149,17 +131,7 @@ On souhaite trouver le plus petit entier $n$ tel que $2^n > 1000$.
   \item Lire le programme suivant et expliquer le rôle de chaque ligne :
 
 \medskip
-\verb|u = 1|
-
-\verb|n = 0|
-
-\verb|while u <= 1000:|
-
-\verb|    u = 2 * u|
-
-\verb|    n = n + 1|
-
-\verb|print(n, u)|
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX3-SEUIL.py}
 
   \item Donner un tableau de trace des $4$ premiers tours de boucle.
   \item Quelle valeur de $n$ le programme affiche-t-il ? Vérifier que $2^9 \leq 1000$ et $2^{10} > 1000$.
@@ -168,13 +140,6 @@ On souhaite trouver le plus petit entier $n$ tel que $2^n > 1000$.
 \end{exercice}
 
 % BEGIN-VERIFY
-% u = 1
-% n = 0
-% while u <= 1000:
-%     u = 2 * u
-%     n = n + 1
-% assert n == 10
-% assert u == 1024
 % assert 2**9 <= 1000 and 2**10 > 1000
 % END-VERIFY
 
@@ -225,15 +190,7 @@ On considère la suite $(s_n)$ définie par $s_n = 1 + 2 + 3 + \cdots + n$ (somm
   \item Expliquer pourquoi le programme ci-dessous calcule $s_n$ pour $n$ donné :
 
 \medskip
-\verb|n = 10|
-
-\verb|S = 0|
-
-\verb|for k in range(1, n+1):|
-
-\verb|    S = S + k|
-
-\verb|print(S)|
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX4-SOMME.py}
 
   \item Que vaut \texttt{range(1, n+1)} pour $n = 4$ ? Dérouler la boucle manuellement pour $n = 4$.
   \item Modifier le programme pour calculer la somme $1^2 + 2^2 + 3^2 + \cdots + n^2$ (somme des carrés).
@@ -246,21 +203,9 @@ On considère la suite $(s_n)$ définie par $s_n = 1 + 2 + 3 + \cdots + n$ (somm
 % assert 1+2 == 3
 % assert 1+2+3 == 6
 % assert 1+2+3+4 == 10
-% # Verification du programme pour n=10
-% S = 0
-% for k in range(1, 11):
-%     S = S + k
-% assert S == 55
-% # Verification n=4
-% S4 = 0
-% for k in range(1, 5):
-%     S4 = S4 + k
-% assert S4 == 10
-% # Somme des carres n=5
-% SC = 0
-% for k in range(1, 6):
-%     SC = SC + k**2
-% assert SC == 55
+% assert sum(range(1, 11)) == 55
+% assert sum(range(1, 5)) == 10
+% assert sum(k**2 for k in range(1, 11)) == 385
 % END-VERIFY
 
 \begin{corrige}{1SPE-SUITES-FR-R5-EX4}
@@ -296,14 +241,6 @@ Tour & \verb|k| & \verb|S| \\
 \textbf{Question 4.} Programme pour la somme des carrés :
 
 \medskip
-\verb|n = 10|
-
-\verb|S = 0|
-
-\verb|for k in range(1, n+1):|
-
-\verb|    S = S + k**2|
-
-\verb|print(S)|
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX4-CARRES.py}
 
 \end{corrige}

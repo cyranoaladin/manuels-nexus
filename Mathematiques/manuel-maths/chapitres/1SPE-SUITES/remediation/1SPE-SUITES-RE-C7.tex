@@ -3,9 +3,28 @@
 %---------------------------------------------------------------
 % FICHE DE REMÉDIATION — C7
 % Algorithmes Python : terme, somme, seuil
-% Note : le code Python est présenté avec \verb et \texttt
-% pour rester compatible avec les macros d'environnements.
+% Les programmes publiés proviennent des sources canoniques du dossier python/.
 %---------------------------------------------------------------
+
+\subsection*{Diagnostic de l'erreur}
+Erreur ciblée : décaler le nombre d'itérations, oublier l'initialisation ou
+mettre à jour un accumulateur dans le mauvais ordre.
+
+\subsection*{Orientation}
+Si l'erreur diagnostiquée concerne une boucle bornée, reprendre le rappel et
+l'activité guidée. Si elle concerne une somme ou un seuil, suivre aussi
+l'aide graduée. En cas de réussite immédiate, passer à la revalidation.
+
+\subsection*{Rappel ciblé}
+La variable porte d'abord le terme initial. Une boucle de $n$ itérations
+calcule alors le terme de rang $n$. Pour une somme, mettre à jour le terme
+avant de l'ajouter ; pour un seuil, vérifier la valeur juste avant l'arrêt.
+
+\subsection*{Aide graduée}
+Construire un tableau avec une ligne initiale, puis une ligne par itération.
+Relier chaque mise à jour Python à l'égalité mathématique correspondante.
+
+\subsection*{Activité guidée}
 
 %---------------------------------------------------------------
 % EXERCICE 1 — Corrigé pas à pas
@@ -21,15 +40,7 @@ On veut écrire un programme Python calculant $u_n$ pour un rang $n$ donné.
   \item Lire et analyser le programme suivant, ligne par ligne :
 
 \medskip
-\verb|def terme(n):|
-
-\verb|    u = 1|
-
-\verb|    for k in range(n):|
-
-\verb|        u = 2 * u + 3|
-
-\verb|    return u|
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-RE-C7-EX1-TERME.py}
 
   \item Vérifier que \texttt{terme(3)} renvoie bien la valeur de $u_3$ calculée en question 1.
   \item Que renvoie \texttt{terme(0)} ? Est-ce cohérent ?
@@ -37,15 +48,9 @@ On veut écrire un programme Python calculant $u_n$ pour un rang $n$ donné.
 \end{exercice}
 
 % BEGIN-VERIFY
-% def terme(n):
-%     u = 1
-%     for k in range(n):
-%         u = 2 * u + 3
-%     return u
-% assert terme(0) == 1
-% assert terme(1) == 5
-% assert terme(2) == 13
-% assert terme(3) == 29
+% assert 2 * 1 + 3 == 5
+% assert 2 * 5 + 3 == 13
+% assert 2 * 13 + 3 == 29
 % END-VERIFY
 
 \begin{corrige}{1SPE-SUITES-RE-C7-EX1}
@@ -76,6 +81,8 @@ Après $3$ étapes, \texttt{u} vaut $29 = u_3$. \checkmark
 
 \end{corrige}
 
+\subsection*{Exercice autonome}
+
 %---------------------------------------------------------------
 % EXERCICE 2 — Avec coup de pouce
 %---------------------------------------------------------------
@@ -90,40 +97,15 @@ On veut calculer la somme $S_n = v_0 + v_1 + \cdots + v_n$.
   \item Lire le programme suivant :
 
 \medskip
-\verb|def somme(n):|
-
-\verb|    v = 2|
-
-\verb|    S = 2|
-
-\verb|    for k in range(n):|
-
-\verb|        v = 3 * v|
-
-\verb|        S = S + v|
-
-\verb|    return S|
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-RE-C7-EX2-SOMME.py}
 
   \item Dérouler le programme pour $n = 3$ (tableau de trace) et vérifier que \texttt{somme(3)} renvoie $S_3$.
   \item Modifier ce programme pour calculer la somme $v_0 + v_1 + \cdots + v_n$ si $v_0 = 5$ et $q = 4$.
 \end{enumerate}
 \end{exercice}
 
-\coupDePouce{1}{Pour la question 3, faire un tableau avec les colonnes \texttt{k}, \texttt{v} et \texttt{S}. La valeur initiale est \texttt{v = 2} et \texttt{S = 2}. À chaque tour, \texttt{v} devient \texttt{3*v} et \texttt{S} s'augmente de la nouvelle valeur de \texttt{v}.}
-
 % BEGIN-VERIFY
-% def somme(n):
-%     v = 2
-%     S = 2
-%     for k in range(n):
-%         v = 3 * v
-%         S = S + v
-%     return S
-% assert somme(0) == 2
-% assert somme(1) == 2+6
-% assert somme(3) == 2+6+18+54
-% assert somme(3) == 80
-% # Verification formule
+% assert 2+6+18+54 == 80
 % S3_formule = 2*(1-3**4)/(1-3)
 % assert abs(S3_formule - 80) < 1e-9
 % END-VERIFY
@@ -166,21 +148,11 @@ init. & -- & $2$ & $2$ \\
 \textbf{Question 4.} Pour $v_0 = 5$ et $q = 4$, on remplace les initialisations et le facteur de récurrence :
 
 \medskip
-\verb|def somme(n):|
-
-\verb|    v = 5|
-
-\verb|    S = 5|
-
-\verb|    for k in range(n):|
-
-\verb|        v = 4 * v|
-
-\verb|        S = S + v|
-
-\verb|    return S|
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-RE-C7-EX2-ADAPTATION.py}
 
 \end{corrige}
+
+\subsection*{Revalidation}
 
 %---------------------------------------------------------------
 % EXERCICE 3 — En autonomie
@@ -193,17 +165,7 @@ Un capital de $1\,000$~€ est placé avec un taux d'intérêt de $5\,\%$ par an
   \item Analyser le programme suivant et expliquer ce qu'il calcule :
 
 \medskip
-\verb|C = 1000|
-
-\verb|n = 0|
-
-\verb|while C <= 1500:|
-
-\verb|    C = 1.05 * C|
-
-\verb|    n = n + 1|
-
-\verb|print(n, C)|
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-RE-C7-EX3-SEUIL.py}
 
   \item Dérouler les $3$ premiers tours de boucle (tableau de trace).
   \item Déterminer la valeur de $n$ affichée. Vérifier que $C_{n-1} \leq 1\,500$ et $C_n > 1\,500$.
@@ -211,13 +173,6 @@ Un capital de $1\,000$~€ est placé avec un taux d'intérêt de $5\,\%$ par an
 \end{exercice}
 
 % BEGIN-VERIFY
-% C = 1000
-% n = 0
-% while C <= 1500:
-%     C = 1.05 * C
-%     n = n + 1
-% assert n == 9
-% assert abs(C - 1000*1.05**9) < 1e-6
 % Cn_prev = 1000*1.05**8
 % assert Cn_prev <= 1500
 % assert 1000*1.05**9 > 1500
