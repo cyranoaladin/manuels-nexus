@@ -15,13 +15,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Le coefficient $2$ a ete traite comme un exposant de $x$ ; la regle correcte pour le produit est $\\ln(2x)=\\ln 2+\\ln x$."
+          "erreur": "Le coefficient $2$ a ete traite comme un exposant de $x$ ; la regle correcte pour le produit est $\\ln(2x)=\\ln 2+\\ln x$.",
+          "renvoi": "C1, logarithme d'un produit"
         },
         "C": {
-          "erreur": "Le logarithme d'un produit devient une somme de logarithmes, pas leur produit : $\\ln(ab)=\\ln a+\\ln b$."
+          "erreur": "Le logarithme d'un produit devient une somme de logarithmes, pas leur produit : $\\ln(ab)=\\ln a+\\ln b$.",
+          "renvoi": "C1, logarithme d'un produit"
         },
         "D": {
-          "erreur": "Le carre $(\\ln x)^2$ ne provient d'aucune propriete du produit $2x$ ; il confond le facteur $2$ avec une puissance de $\\ln x$."
+          "erreur": "Le carre $(\\ln x)^2$ ne provient d'aucune propriete du produit $2x$ ; il confond le facteur $2$ avec une puissance de $\\ln x$.",
+          "renvoi": "C1, logarithme d'un produit"
         }
       }
     },
@@ -107,13 +110,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "La fonction carre n'est pas la reciproque de l'exponentielle et transforme l'equation en $\\mathrm e^{4x}=49$ sans isoler $x$."
+          "erreur": "La fonction carre n'est pas la reciproque de l'exponentielle et transforme l'equation en $\\mathrm e^{4x}=49$ sans isoler $x$.",
+          "renvoi": "C1, equations exponentielles"
         },
         "C": {
-          "erreur": "Appliquer encore l'exponentielle compose une seconde fois au lieu d'inverser la premiere ; seul $\\ln$ donne $2x=\\ln 7$."
+          "erreur": "Appliquer encore l'exponentielle compose une seconde fois au lieu d'inverser la premiere ; seul $\\ln$ donne $2x=\\ln 7$.",
+          "renvoi": "C1, equations exponentielles"
         },
         "D": {
-          "erreur": "Prendre les inverses donne $\\mathrm e^{-2x}=1/7$, une equation equivalente mais qui n'isole pas $x$ ; il faut ensuite appliquer $\\ln$."
+          "erreur": "Prendre les inverses donne $\\mathrm e^{-2x}=1/7$, une equation equivalente mais qui n'isole pas $x$ ; il faut ensuite appliquer $\\ln$.",
+          "renvoi": "C1, equations exponentielles"
         }
       }
     }
