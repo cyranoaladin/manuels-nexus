@@ -177,46 +177,19 @@ $M_n \leq 50$ ? & Non & Non & Non & Oui & Oui \\
 
 \noindent\textbf{Programme à lire (question 3) :}
 
-\begin{python}
-q = 0.9879
-M = 100
-n = 0
-while M > 50:
-    M = q * M
-    n = n + 1
-print("Demi-vie :", n, "siecles")
-print("Masse :", round(M, 2), "g")
-\end{python}
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-TD-CONTEXTUALISE-LECTURE.py}
 
 \begin{corrige}{1SPE-SUITES-COURS-07-TC-EX3}
 
 \textbf{Question 1.} Programme d'affichage des valeurs de $M_n$ pour $n \in \{0, 10, 20, \ldots, 100\}$ :
 
-\begin{python}
-# Affichage de M_n pour n = 0, 10, 20, ..., 100
-q = 0.9879
-for n in range(0, 101, 10):
-    M_n = 100 * q**n
-    print(f"n = {n} siecles : M_n = {round(M_n, 2)} g")
-\end{python}
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-TD-CONTEXTUALISE-VALEURS.py}
 
 \commentaireMarge{On utilise la formule explicite $M_n = 100 \times 0{,}9879^n$ pour calculer directement chaque valeur sans boucle de récurrence.}
 
 \textbf{Question 2.} Programme de recherche de la demi-vie (boucle \texttt{while}) :
 
-\begin{python}
-# Recherche du premier n tel que M_n <= 50
-q = 0.9879
-M = 100.0   # M_0
-n = 0
-
-while M > 50:
-    M = q * M   # M_{n+1} = q * M_n
-    n = n + 1   # mise a jour de l'indice
-
-print("Demi-vie :", n, "siecles, soit", n * 100, "ans")
-print("Masse atteinte :", round(M, 2), "g")
-\end{python}
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-TD-CONTEXTUALISE-DEMI-VIE.py}
 
 Le programme affiche :
 \begin{itemize}

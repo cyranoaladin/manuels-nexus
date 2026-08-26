@@ -55,15 +55,7 @@ Utiliser cette m\'ethode lorsque l'\'enonc\'e demande de :
 
 \commentaireMarge{Mod\`ele A : boucle \texttt{for}, on applique $n$ fois la relation $u_{n+1} = 1{,}04 \times u_n$.}
 
-\begin{python}
-def capital(n):
-    u = 1500
-    for k in range(n):
-        u = 1.04 * u
-    return u
-
-print(capital(10))
-\end{python}
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-ME-007-CAPITAL.py}
 
 Ainsi, $u_{10} = 1500 \times 1{,}04^{10} \approx 2\,220{,}37$~\euro.
 
@@ -72,23 +64,14 @@ Ainsi, $u_{10} = 1500 \times 1{,}04^{10} \approx 2\,220{,}37$~\euro.
 
 \commentaireMarge{Mod\`ele C : boucle \texttt{while}. Ne pas oublier \texttt{n = n + 1}.}
 
-\begin{python}
-u = 1500
-n = 0
-while u < 3000:
-    u = 1.04 * u
-    n = n + 1
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-ME-007-SEUIL.py}
 
-print("Rang :", n)
-print("Capital :", round(u, 2))
-\end{python}
-
-Le programme affiche \texttt{Rang : 18} et \texttt{Capital : 3040.49}.
+Le programme affiche \texttt{Rang : 18} et \texttt{Capital : 3038.72}.
 
 \textbf{Conclusion.} Le plus petit entier $n$ tel que $u_n \geq 3\,000$ est $n = 18$. Le capital d\'epasse $3\,000$~\euro{} pour la premi\`ere fois apr\`es $\mathbf{18}$ ann\'ees.
 
 \medskip
-\textit{V\'erification :} $u_{17} = 1500 \times 1{,}04^{17} \approx 2\,923{,}55 < 3\,000$ et $u_{18} \approx 3\,040{,}49 > 3\,000$. Coh\'erent.
+\textit{V\'erification :} $u_{17} = 1500 \times 1{,}04^{17} \approx 2\,921{,}85 < 3\,000$ et $u_{18} \approx 3\,038{,}72 > 3\,000$. Coh\'erent.
 
 \paragraph{Les pi\`eges (M7).}
 

@@ -157,27 +157,9 @@ Sur 5 ans, l'offre B ne fait croître le capital que de $270$~€, bien loin des
 \end{exercice}
 
 
-\noindent\textbf{Programme à compléter :}
+\noindent\textbf{Programme à exécuter et à analyser :}
 
-\begin{python}
-# Recherche du premier mois n (a partir du rang 10) tel que B_n
-# depasse A_n
-# A_n = 200*n  (offre A : suite arithmetique)
-# B_n = 1000 * 1.004**n  (offre B : suite geometrique)
-
-n = 10
-A = 200 * n
-B = 1000 * 1.004**n
-
-while B <= A:
-    n = n + 1
-    A = 200 * n        # mise a jour de A_n
-    B = 1000 * 1.004**n  # mise a jour de B_n
-
-print("Premier mois de depassement apres le rang 10 : n =", n)
-print("A_n =", A, "euros")
-print("B_n =", round(B, 2), "euros")
-\end{python}
+\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-TD-FIL-ROUGE-CROISEMENT.py}
 
 \begin{corrige}{1SPE-SUITES-COURS-07-FR-EX3}
 
