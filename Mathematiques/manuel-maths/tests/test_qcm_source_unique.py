@@ -223,6 +223,8 @@ def test_correlation_causalite_q7_couvre_le_point_moyen_sans_ambiguite() -> None
     assert question["capacite"] == "C1"
     assert "represente correctement le nuage" in question["enonce"]
     assert question["correcte"] == "A"
+    assert all("le point moyen est" in option for option in question["options"].values())
+    assert all("Le nuage contient" not in option for option in question["options"].values())
     assert "A(1 ; 2), B(3 ; 4), C(5 ; 0)" in question["options"]["A"]
     assert "$G(3 ; 2)$" in question["options"]["A"]
     assert set(question["diagnostics"]) == {"B", "C", "D"}
