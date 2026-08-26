@@ -144,6 +144,22 @@ def test_fixed_output_and_check_cli_are_deterministic_when_present() -> None:
         assert "161 objects" in runs[0].stdout
 
 
+def test_derived_manifest_envelope_drift_does_not_rebind_content_freeze(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    producer = _producer()
+    payload = producer.build_freeze()
+    original = producer._current_blob
+
+    def current_blob(path: str) -> str:
+        if path == "audit/BUILD_MANIFEST.json":
+            raise AssertionError("derived manifest must not be a live content binding")
+        return original(path)
+
+    monkeypatch.setattr(producer, "_current_blob", current_blob)
+    producer.validate_current_bindings(payload)
+
+
 def test_cli_has_no_arbitrary_output_or_source_override() -> None:
     run = subprocess.run(
         [sys.executable, str(SCRIPT), "--help"],

@@ -233,7 +233,10 @@ def validate_current_bindings(payload: dict[str, Any]) -> None:
     bindings = list(payload["objects"])
     bindings.extend((payload["contract"], payload["qcm"]["generated_tex"]))
     bindings.extend(payload["programme_authority"]["sources"])
-    bindings.append(payload["relevant_manifest"])
+    # BUILD_MANIFEST is frozen above as contextual evidence at SOURCE_SHA.  Its
+    # empty derived envelope is refreshed whenever repository sources advance;
+    # that mechanical refresh must not rebind otherwise unchanged chapter
+    # content.  A future receipt policy may add a separate render binding.
     seen: set[str] = set()
     for row in bindings:
         path = row["path"]
