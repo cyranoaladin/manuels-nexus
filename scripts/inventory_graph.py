@@ -87,6 +87,14 @@ def latex_inputs(source: str) -> list[tuple[str, str]]:
             r"\\documentclass(?:\[[^]]*\])?\s*\{([^{}]+)\}", uncommented
         )
     )
+    references.extend(
+        ("lstinputlisting", match.group(1).strip())
+        for match in re.finditer(
+            r"\\lstinputlisting(?:\s*\[[^]]*\])?\s*\{([^{}]+)\}",
+            uncommented,
+        )
+        if not any(token in match.group(1) for token in ("\\", "%", "#"))
+    )
     return references
 
 

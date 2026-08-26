@@ -14264,6 +14264,60 @@ def test_latex_comment_parser_preserves_escaped_percent(inventory_module) -> Non
     assert inventory_module._latex_inputs(source) == [("input", "visible")]
 
 
+def test_latex_input_parser_recognizes_lstinputlisting_with_options(
+    inventory_module,
+) -> None:
+    source = r"""
+\lstinputlisting[language=Python, firstline=2]{chapitres/1SPE-SUITES/python/demo.py}
+% \lstinputlisting{chapitres/1SPE-SUITES/python/commented.py}
+"""
+
+    assert inventory_module._latex_inputs(source) == [
+        ("lstinputlisting", "chapitres/1SPE-SUITES/python/demo.py")
+    ]
+
+
+def test_lstinputlisting_python_source_is_a_resolved_reference_graph_edge(
+    tmp_path: Path, inventory_module
+) -> None:
+    source = (
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/"
+        "1SPE-SUITES-EX-044.tex"
+    )
+    target = (
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/"
+        "1SPE-SUITES-EX-044.py"
+    )
+    _write(
+        tmp_path / source,
+        r"\lstinputlisting[language=Python]{chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-044.py}",
+    )
+    _write(tmp_path / target, "print(278)\n")
+    tracked = frozenset({source, target})
+    inventory = {
+        "reference_graph": [],
+        "anomalies": {"broken_latex_references": []},
+    }
+
+    inventory_module._add_latex_graph(
+        inventory,
+        tmp_path,
+        tracked,
+        source_roles={source: "production_object", target: "production_object"},
+    )
+
+    assert inventory["reference_graph"] == [
+        {
+            "champ": "lstinputlisting",
+            "cible": target,
+            "kind": "latex",
+            "resolved": True,
+            "source": source,
+        }
+    ]
+    assert inventory["anomalies"]["broken_latex_references"] == []
+
+
 def test_static_latex_cycle_is_reported_and_deep_chain_is_iterative(
     tmp_path: Path, inventory_module
 ) -> None:
