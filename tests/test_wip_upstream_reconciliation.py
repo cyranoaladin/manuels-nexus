@@ -159,6 +159,9 @@ def test_generated_files_are_never_treated_as_conflicts() -> None:
 def test_no_wip_delta_is_dropped_silently() -> None:
     ledger = _json(LEDGER)
     assert ledger["silent_drops"] == 0
+    assert ledger["accounting"]["dispositioned"] == "59/59"
+    assert ledger["accounting"]["lost_valid_deltas"] == 0
+    assert ledger["accounting"]["unknown"] == 0
     assert ledger["accounting"]["every_wip_delta_has_a_recorded_disposition"] is True
     allowed = {
         "SUPERSEDED_BY_CORRECT_UPSTREAM",

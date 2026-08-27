@@ -3,7 +3,7 @@
   "schema_version": 1,
   "generated_by": "analyse de audit/WIP_UPSTREAM_RECONCILIATION.json + lecture des sources",
   "wip_base_sha": "761508d923d74fd3d93fc055b3f3b1857fb251e1",
-  "upstream_sha": "dc6735d1",
+  "upstream_sha": "28d2cac7a3ccc44c49543f35086db08b8771715e",
   "authority_order": [
     "texte officiel applicable",
     "cahier des charges",
@@ -153,13 +153,16 @@
     "wip_files": 59,
     "generated_derivative": 35,
     "true_conflicts": 23,
-    "wip_only": 1,
-    "qcm_questions_touched_by_wip": 38,
+    "semantically_equivalent": 1,
+    "wip_only": 0,
+    "wip_only_resolution": "le seul fichier WIP_ONLY etait le contrat GEOMETRIE-REPEREE ; apres la migration atomique il est SEMANTICALLY_EQUIVALENT a l'amont",
     "qcm_questions_touched_only_by_wip": 0,
+    "unknown": 0,
     "silent_drops": 0,
+    "lost_valid_deltas": 0,
     "every_wip_delta_has_a_recorded_disposition": true,
     "true_conflicts_resolved": true,
-    "lost_valid_deltas": 0
+    "dispositioned": "59/59"
   },
   "resolved_editorial_decisions": [
     {
@@ -209,5 +212,17 @@
       "decision": "portage annule ; les QCM sont restaures a l'octet pres sur l'amont. Ajouter un renvoi a un QCM revu est un acte de revue, pas une operation mecanique.",
       "escalated": true
     }
+  },
+  "final_state": {
+    "ported": [
+      "migration atomique des identifiants de capacite GEOREP",
+      "trois assertions d'oracle supplementaires sur 1SPE-VARALEA-CO-048",
+      "enregistrement des deux schemas human-review dans SCHEMA_REGISTRY",
+      "outillage de gouvernance et de reconciliation"
+    ],
+    "not_ported": [
+      "les 45 renvois de remediation : 36 rejetes aux gates, 9 annules parce que leur portage perime la preuve de revue independante liee au sha256 du fichier entier"
+    ],
+    "commits": "atomiques et locaux sur codex/t2-current-audit-continue, aucun push"
   }
 }
