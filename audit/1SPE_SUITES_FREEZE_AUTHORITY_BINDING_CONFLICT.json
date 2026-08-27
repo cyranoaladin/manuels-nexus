@@ -1,0 +1,48 @@
+{
+  "artifact_type": "suites_freeze_authority_binding_conflict",
+  "schema_version": 1,
+  "status": "HUMAN_DECISION_REQUIRED",
+  "blocking": true,
+  "freeze": {
+    "source_sha": "c667f12b1792f31981b6b5894c8c604df1bce634",
+    "chapter_object_set_digest": "sha256:67d8006298299b44029de8ba8f85b500d9b3619997a0c596e63c20e1cffeee2d",
+    "chapter_objects": 161,
+    "pinned_by": [
+      "scripts/build_1spe_suites_review_source_freeze.py",
+      "scripts/build_1spe_suites_neutral_review_packets.py"
+    ],
+    "pin_message": "packet is not bound to the c667/161 freeze"
+  },
+  "current_head": "c6fe44ec61e3a1012ae6f950acb38fc8574a0186",
+  "chapter_content_identical_between_freeze_and_head": true,
+  "chapter_diff": "vide : Mathematiques/manuel-maths/chapitres/1SPE-SUITES est byte-identique",
+  "authority_binding_drift": [
+    {
+      "path": "audit/official_program_coverage/1SPE.json",
+      "blob_at_freeze": "ef61b063d86d3b4f2d7bc73b295897b0a88f579f",
+      "blob_at_head": "ba4d8c396cb2ef63436572717edf9206483b4c01"
+    }
+  ],
+  "cause": "la migration des identifiants de capacite GEOREP, ordonnee le 2026-08-27, a renomme 1SPE-GEOREP-C* en 1SPE-GEOMETRIE-REPEREE-C* dans audit/official_program_coverage/1SPE.json. Ce fichier est lie par le gel comme source d'autorite programme. Les lignes modifiees concernent le chapitre GEOMETRIE-REPEREE, pas 1SPE-SUITES.",
+  "effect": "validate_current_bindings leve STALE freeze binding ; tests/test_1spe_suites_review_source_freeze.py echoue sur deux tests",
+  "why_the_machine_did_not_resolve_it": "avancer SOURCE_SHA regenere un gel dont chapter_object_set_digest reste identique (sha256:67d80062..., 161 objets), mais brise l'identite c667/161 epinglee dans deux producteurs et une dizaine d'artefacts, dont la decision humaine du 2026-08-26. Choisir l'identite du gel est une decision humaine.",
+  "structural_finding": "deuxieme occurrence du meme motif : une preuve de revue liee au sha256 d'un FICHIER ENTIER est perimee par une edition qui ne touche aucune ligne revue. Voir aussi INDEPENDENT_QCM_REVIEW_EVIDENCE_IS_WHOLE_FILE_BOUND.",
+  "options": [
+    {
+      "option": "A",
+      "decision": "re-emettre le gel sur le HEAD courant",
+      "effect": "chapter_object_set_digest inchange (verifie), autorite rebindee ; exige d'avancer SOURCE_SHA dans les deux producteurs et de regenerer les packets",
+      "verified": "regeneration testee : digest et compte d'objets identiques"
+    },
+    {
+      "option": "B",
+      "decision": "conserver le gel a c667f12b et l'assumer STALE",
+      "effect": "deux tests restent rouges tant que le gel n'est pas re-emis"
+    },
+    {
+      "option": "C",
+      "decision": "restreindre la liaison d'autorite aux lignes du chapitre gele",
+      "effect": "supprime la classe de faux positifs, mais modifie la semantique du gel : changement de contrat, pas simple correction"
+    }
+  ]
+}

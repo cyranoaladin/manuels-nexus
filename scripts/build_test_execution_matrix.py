@@ -60,7 +60,27 @@ def parse_capture(path: Path) -> dict[str, Any]:
     return result
 
 
-def build_report(captures: dict[str, Path]) -> dict[str, Any]:
+def _timings(directory: Path) -> dict[str, dict[str, Any]]:
+    """Horodatage et code de sortie reels, non masques par une pipeline."""
+
+    path = directory / "results.tsv"
+    if not path.is_file():
+        return {}
+    rows: dict[str, dict[str, Any]] = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        parts = line.split("\t")
+        if len(parts) == 5:
+            rows[parts[0]] = {
+                "cwd_absolute": parts[1],
+                "start": parts[2],
+                "end": parts[3],
+                "exit_code": int(parts[4]),
+            }
+    return rows
+
+
+def build_report(captures: dict[str, Path], directory: Path) -> dict[str, Any]:
+    timings = _timings(directory)
     commands = [
         {
             "id": "nsi_canonical",
@@ -69,7 +89,7 @@ def build_report(captures: dict[str, Path]) -> dict[str, Any]:
             "scope": "suites NSI",
             "declared_in": [".github/workflows/ci-nsi.yml", "NSI/Makefile"],
             "support_status": "SUPPORTED_CI",
-            "capture": "nsi-canonical.txt",
+            "capture": "nsi_canonical.log",
         },
         {
             "id": "maths_ci",
@@ -78,7 +98,7 @@ def build_report(captures: dict[str, Path]) -> dict[str, Any]:
             "scope": "schemas META du manuel de mathematiques",
             "declared_in": [".github/workflows/ci-mathematiques.yml"],
             "support_status": "SUPPORTED_CI",
-            "capture": "maths-ci.txt",
+            "capture": "maths_ci.log",
         },
         {
             "id": "maths_full",
@@ -86,8 +106,8 @@ def build_report(captures: dict[str, Path]) -> dict[str, Any]:
             "cwd": "Mathematiques/manuel-maths",
             "scope": "suites du manuel de mathematiques",
             "declared_in": ["Mathematiques/manuel-maths/Makefile"],
-            "support_status": "SUPPORTED_LOCAL",
-            "capture": "maths-full.txt",
+            "support_status": "SUPPORTED_CANONICAL",
+            "capture": "maths_full.log",
         },
         {
             "id": "root_audit_tests",
@@ -95,8 +115,8 @@ def build_report(captures: dict[str, Path]) -> dict[str, Any]:
             "cwd": ".",
             "scope": "suites d'audit de la racine",
             "declared_in": ["usage courant"],
-            "support_status": "SUPPORTED_LOCAL",
-            "capture": "root-tests.txt",
+            "support_status": "SUPPORTED_CANONICAL",
+            "capture": "root_audit_tests.log",
         },
         {
             "id": "root_umbrella",
@@ -105,13 +125,16 @@ def build_report(captures: dict[str, Path]) -> dict[str, Any]:
             "scope": "les trois testpaths de pyproject.toml",
             "declared_in": [".github/workflows/ci-audit-collection.yml", "pyproject.toml"],
             "support_status": "SUPPORTED_CI",
-            "capture": "root-umbrella.txt",
+            "capture": "root_umbrella.log",
         },
     ]
     rows = []
     for entry in commands:
         path = captures.get(entry["capture"])
         observed = parse_capture(path) if path and path.is_file() else None
+        if observed is not None:
+            observed.update(timings.get(entry["id"], {}))
+            observed["timeout"] = observed.get("exit_code") == 124
         row = {**entry, "observed": observed}
         if observed is not None:
             row["green"] = observed["failed"] == 0 and observed["errors"] == 0
@@ -143,8 +166,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     directory = Path(args.captures)
-    captures = {path.name: path for path in directory.glob("*.txt")}
-    report = build_report(captures)
+    captures = {path.name: path for path in directory.glob("*.log")}
+    report = build_report(captures, directory)
     payload = json.dumps(report, indent=2, ensure_ascii=False) + "\n"
     if args.out:
         Path(args.out).write_text(payload, encoding="utf-8")
