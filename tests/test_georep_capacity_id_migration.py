@@ -37,8 +37,8 @@ FORENSICS = ROOT / "audit" / "1SPE_GEOREP_CAPACITY_ID_MIGRATION_FORENSICS.json"
 #: Une reference de CAPACITE, jamais un identifiant d'objet.
 LEGACY = re.compile(r"1SPE-GEOREP-C[1-5](?![0-9A-Za-z-])")
 CANONICAL = re.compile(r"1SPE-GEOMETRIE-REPEREE-C[1-5](?![0-9])")
-#: Commit precedant immediatement la migration.
-PRE_MIGRATION = "10c55309"
+#: Arbre amont de reference, avant toute intervention de reconciliation.
+PRE_MIGRATION = "dc6735d1"
 
 
 def _git(*args: str) -> str:
@@ -125,9 +125,8 @@ def test_C_contract_objects_and_referentiel_agree() -> None:
 def test_D_a_non_georep_chapter_is_untouched() -> None:
     changed = _git("diff", "--name-only", PRE_MIGRATION, "HEAD", "--",
                    "Mathematiques/manuel-maths/chapitres").split()
-    # Chapitres modifies pour d'autres motifs traces dans le meme intervalle :
-    # l'oracle CO-048 et l'annulation des deux renvois TSPE.
-    unrelated = ("1SPE-VARIABLES-ALEATOIRES", "TSPE-DERIVATION-CONVEXITE")
+    # Seul CO-048 est modifie hors GEOREP, pour ses trois assertions d'oracle.
+    unrelated = ("1SPE-VARALEA-CO-048.tex",)
     foreign = [
         path
         for path in changed
