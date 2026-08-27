@@ -85,8 +85,11 @@ def test_B_no_production_object_still_carries_a_legacy_capacity_ref() -> None:
 def test_B_the_repository_keeps_legacy_refs_only_in_the_migration_ledger() -> None:
     tracked = [
         line
-        for line in _git("grep", "-lE", r"1SPE-GEOREP-C[1-5]([^0-9A-Za-z-]|$)", "--", ".").splitlines()
-        if line
+        for line in _git(
+            "grep", "-lE", r"1SPE-GEOREP-C[1-5]([^0-9A-Za-z-]|$)", "--", "."
+        ).splitlines()
+        # Ce fichier de test cite l'ancien motif pour pouvoir le traquer.
+        if line and line != "tests/test_georep_capacity_id_migration.py"
     ]
     assert tracked == ["audit/1SPE_GEOREP_CAPACITY_ID_MIGRATION_FORENSICS.json"]
 
@@ -122,11 +125,14 @@ def test_C_contract_objects_and_referentiel_agree() -> None:
 def test_D_a_non_georep_chapter_is_untouched() -> None:
     changed = _git("diff", "--name-only", PRE_MIGRATION, "HEAD", "--",
                    "Mathematiques/manuel-maths/chapitres").split()
+    # Chapitres modifies pour d'autres motifs traces dans le meme intervalle :
+    # l'oracle CO-048 et l'annulation des deux renvois TSPE.
+    unrelated = ("1SPE-VARIABLES-ALEATOIRES", "TSPE-DERIVATION-CONVEXITE")
     foreign = [
         path
         for path in changed
         if f"/chapitres/{CHAPTER}/" not in path
-        and "1SPE-VARIABLES-ALEATOIRES" not in path
+        and not any(name in path for name in unrelated)
     ]
     assert foreign == [], foreign
 

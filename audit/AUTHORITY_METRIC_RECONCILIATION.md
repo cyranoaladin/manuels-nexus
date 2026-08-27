@@ -75,11 +75,13 @@ Le terme « QCM gaps » n'est plus utilise.
 | `CHAPTER_CAPACITY_PAIRS_WITHOUT_ANY_QCM` | 48 | — |
 | `MANDATORY_ASSESSED_CAPACITY_PAIRS_WITHOUT_QCM` | 43 | — |
 | `PEDAGOGICALLY_REQUIRED_QCM_GAPS` | 43 | **0** |
-| `REQUIRED_DISTRACTOR_WITHOUT_DIAGNOSTIC` | 99 | **0** |
+| `REQUIRED_DISTRACTOR_WITHOUT_DIAGNOSTIC` | 108 | **0** |
 
 L'ecart **70 contre 48** est le meme indicateur mesure sur deux arbres : 70 sur
 `761508d9` augmente du WIP, 48 sur l'arbre canonique. Meme definition, meme
 generateur, deux sources.
 
-La dette de diagnostic passe de 108 a 99 apres le portage des 11 renvois
-valides du WIP.
+La dette de diagnostic reste a **108**. Le 99 mesure sur le WIP venait de
+9 renvois dont le portage a du etre annule : il perimait la preuve de revue
+independante `TSPE_QCM_INDEPENDENT_REVIEW_HANDOFF`, liee au sha256 du fichier
+entier. Ajouter un renvoi a un QCM deja revu est un acte de revue.

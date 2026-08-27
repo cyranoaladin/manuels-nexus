@@ -102,7 +102,7 @@ différents**. C'est la démonstration concrète que « plus récent » ne vaut 
 
 `silent_drops = 0`.
 
-### `1SPE-SUITES` Q9 — un P0 dans le WIP
+### `1SPE-SUITES` Q9 — pas un défaut, mais l'amont est plus clair
 
 Le WIP conserve l'énoncé et les options de la base mais bascule `correcte` de
 **C** vers **B**, et déplace les diagnostics de `{A,B,D}` vers `{A,C,D}`. Il fait
@@ -115,20 +115,27 @@ la réponse exacte, et reclasse en distracteur :
 > C. « Pour montrer qu'une suite est géométrique, il faut calculer $u_{n+1}/u_n$
 >    et vérifier que ce quotient est constant pour tout $n$. »
 
-Sous la définition en vigueur dans le chapitre, un terme nul rend le quotient
-$u_{n+1}/u_n$ indéfini : B est au mieux ambiguë. L'amont lève l'ambiguïté
-autrement et correctement — il remplace l'option C par la définition
-« il existe un réel $q$ tel que, pour tout $n$, $u_{n+1}=q\,u_n$ », remplace B
-par « le quotient $u_{n+1}/u_n$ peut dépendre de $n$ », et garde `correcte = C`.
+**Correction de ma qualification initiale.** J'avais classé ce delta
+`SCIENTIFICALLY_WRONG` ; c'était faux. Sous la définition canonique
+$u_{n+1}=q\,u_n$, une suite géométrique **peut** comporter un terme nul : il
+suffit de $q=0$, ou d'un terme initial nul. Le quotient $u_{n+1}/u_n$ n'est
+qu'une caractérisation **conditionnelle**, valable lorsque les termes sont non
+nuls ; ce n'est pas la définition générale.
 
-La version amont est exacte et non ambiguë. Le delta WIP est abandonné.
-**Confirmation humaine demandée** : l'abandon porte sur une clé de correction.
+L'amont est retenu parce qu'il lève l'ambiguïté — il remplace l'option C par la
+définition « il existe un réel $q$ tel que, pour tout $n$, $u_{n+1}=q\,u_n$ »,
+remplace B par « le quotient $u_{n+1}/u_n$ peut dépendre de $n$ », et garde
+`correcte = C`. Classification finale :
+`SUPERSEDED_BY_CLEARER_UNAMBIGUOUS_UPSTREAM`, sévérité `NOT_A_DEFECT`.
 
-## Les deux décisions qui vous reviennent
+Quatre régressions verrouillent désormais la définition canonique, et un
+contrôle balaie les 35 chapitres : `ZERO_TERM_MISCONCEPTION = 0`,
+`QUOTIENT_AS_GENERAL_DEFINITION = 0`. Les trois occurrences qui subsistaient sur
+l'arbre périmé étaient déjà corrigées en amont.
 
-Ce sont les seuls `TRUE_CONFLICT` qu'aucune autorité du dépôt ne tranche.
+## Les deux décisions, rendues le 2026-08-27
 
-### 1. `TEXP-GRAPHES` Q3 — une correction valide sur une question supprimée
+### 1. `TEXP-GRAPHES` Q3 — **version amont conservée**
 
 Le WIP corrige l'énoncé en ajoutant **« connexe »** :
 
@@ -141,11 +148,18 @@ l'équivalence est fausse.
 L'amont a **remplacé entièrement Q3** par une question sur la matrice
 d'adjacence, retirant la question eulérienne du QCM.
 
-Porter la correction revient à rétablir une question que l'amont a délibérément
-remplacée. **Décision : conserver la question eulérienne corrigée, ou accepter
-son remplacement ?**
+**Décision rendue : la version amont est conservée.** Elle est directement
+alignée sur le contenu officiel Mathématiques expertes — graphes, connexité,
+matrices, matrice d'adjacence. Le delta WIP est classé
+`SUPERSEDED_BY_CORRECT_UPSTREAM`, et **non** `SCIENTIFICALLY_WRONG` : il était
+mathématiquement correct, mais visait une question volontairement remplacée.
 
-### 2. `1SPE-GEOMETRIE-REPEREE/contrat.yaml` — migration de nommage à moitié faite
+Une question eulérienne pourra être réintroduite plus tard comme **objet
+séparé**, après audit du chapitre : hypothèse de connexité correcte, absence de
+doublon, rôle programme explicite, valeur pédagogique réelle. Aucune
+réintroduction automatique.
+
+### 2. `1SPE-GEOMETRIE-REPEREE` — **migration atomique effectuée**
 
 C'est le seul fichier `WIP_ONLY`. Il renomme les cinq `ref_capacite` de
 `1SPE-GEOREP-C*` vers `1SPE-GEOMETRIE-REPEREE-C*`.
@@ -155,11 +169,45 @@ C'est le seul fichier `WIP_ONLY`. Il renomme les cinq `ref_capacite` de
 - Mais **109 fichiers objets** du chapitre référencent encore `1SPE-GEOREP-C*`,
   et l'amont conserve `1SPE-GEOREP-C*` dans le contrat.
 
-Appliqué seul, ce delta aligne le contrat et désaligne les 109 objets.
-**Décision : migrer aussi les 109 objets, déclarer un alias, ou renoncer ?**
+**Décision rendue : migration complète du graphe de consommateurs, sans alias
+runtime.** Le delta est reclassé
+`VALID_DELTA_REQUIRING_ATOMIC_GRAPH_MIGRATION`, puis appliqué.
 
-## Ce qui n'a pas été fait
+Le dénominateur exact a été recalculé avant mutation : **54 fichiers**, et non
+109 ni 229. Le motif large `1SPE-GEOREP-C` capture aussi les identifiants
+d'objets (`1SPE-GEOREP-CO-*`), d'où les estimations initiales. Les références de
+capacité se comptent avec la borne `(?![0-9A-Za-z-])`.
 
-Rien n'a été appliqué, commité ni supprimé. Conformément à la section 11, le
-report du set validé se fera sur `dc6735d1`, en commits atomiques, **après** ces
-deux arbitrages.
+| Disposition | Fichiers | Occurrences |
+|---|---:|---:|
+| contrat de chapitre — édité | 1 | 5 |
+| exercices, champ META `capacites` — édités | 50 | 50 |
+| matrice de couverture officielle — éditée | 1 | 9 |
+| inventaire et agrégat de couverture — régénérés | 2 | 266 |
+
+Après migration : `LEGACY_GEOREP_CAPACITY_REF = 0`, `BROKEN_CAPACITY_REF = 0`,
+`AMBIGUOUS_CAPACITY_ALIAS = 0`, `RUNTIME_CAPACITY_ALIAS = 0`. Les cinq seules
+occurrences restantes de la forme courte sont les champs `old_id` du ledger de
+migration. Neuf tests A→I verrouillent le résultat.
+
+## Portage des renvois : 9 retenus sur 45
+
+Chacun des 45 candidats a été confronté aux gates. **9 passent** et sont portés
+(`TSPE-LOGARITHME` 6, `TSPE-PRIMITIVES-EQDIFF` 3). **36 sont rejetés** : 33 pour
+désalignement de capacité — le renvoi pointe `C1` alors que la question porte
+`C2`, `C3`, `C4`, `C5`, `C7`, `C11`, `C12` ou `C13` — et 3 parce que l'objet de
+remédiation cible n'existe pas. **Aucune cible n'a été fabriquée** ; les 36
+findings restent ouverts.
+
+Deux portages initialement validés ont été **annulés après exécution de la
+matrice de tests** : `TSPE-DERIVATION-CONVEXITE` Q3 A et C. Un test amont épingle
+par égalité exacte `renvoi == "C1"` pour ces questions. Les deux formes de renvoi
+coexistent dans le corpus — 373 codes bruts, 474 libellés — mais celles-ci sont
+contractuellement en forme brute. Le gate « target canonical » a été complété en
+conséquence.
+
+## État final
+
+Les 59 fichiers ont tous une disposition. `UNKNOWN = 0`,
+`LOST_VALID_DELTA = 0`, `SILENT_DROP = 0`. Le report a été appliqué sur
+`dc6735d1` en commits atomiques, sans push ni merge.

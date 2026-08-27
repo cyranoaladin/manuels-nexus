@@ -86,6 +86,16 @@
       "proof": "tests/test_qcm_source_unique.py::test_renvois_tspe_pointent_vers_la_remediation_precise epingle par egalite exacte renvoi == 'C1' pour TSPE-DERIVATION-CONVEXITE Q1 et Q3 ainsi que TSPE-PROBABILITES Q1. Les deux formes de renvoi coexistent dans le corpus (373 codes bruts, 474 libelles), mais ces questions-la sont contractuellement en forme brute. Le portage a ete annule et le derive regenere.",
       "severity": "NOT_A_DEFECT",
       "detected_by": "execution de la matrice de tests, pas par la validation initiale des gates"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-{LOGARITHME,PRIMITIVES-EQDIFF}/qcm/*.json",
+      "scope": "9 renvois de remediation initialement retenus",
+      "semantic_change": "ajout du champ renvoi sur 9 distracteurs sans renvoi en amont",
+      "reason_dropped": "OTHER_EXPLICIT",
+      "explicit_reason": "WOULD_INVALIDATE_INDEPENDENT_REVIEW_EVIDENCE",
+      "proof": "audit/qcm_review_evidence/TSPE_96.json lie chaque question revue au sha256 du fichier entier. Le portage faisait echouer build_qcm_scientific_answer_key_audit.py sur « digest perime » pour TSPE-LOGARITHME/Q1 puis TSPE-PRIMITIVES-EQDIFF/Q1. Rebinder la preuve serait un acte de revue humaine, pas une regeneration.",
+      "severity": "NOT_A_DEFECT",
+      "detected_by": "execution du producteur d'audit scientifique apres portage"
     }
   ],
   "deltas_to_port": [
@@ -103,18 +113,6 @@
       "detail": "sans cet enregistrement, test_v1_schema_directory_contains_exactly_the_registered_contracts echoue des que les schemas human-review-governance et human-review-receipt sont presents",
       "verdict": "WIP_ADDS_VALID_DELTA",
       "action": "porter le delta a l'identique"
-    },
-    {
-      "path": "Mathematiques/manuel-maths/chapitres/TSPE-{LOGARITHME,PRIMITIVES-EQDIFF}/qcm/*.json",
-      "delta": "9 renvois de remediation presents dans le WIP et absents en amont",
-      "detail": {
-        "TSPE-LOGARITHME": 6,
-        "TSPE-PRIMITIVES-EQDIFF": 3
-      },
-      "verdict": "WIP_ADDS_VALID_DELTA",
-      "action": "porter uniquement le champ renvoi de ces 45 distracteurs, sur des questions dont l'enonce et les options sont identiques des deux cotes ; aucun autre champ n'est touche",
-      "mechanically_derivable": true,
-      "justification": "le cahier exige un diagnostic ET un renvoi de remediation par distracteur incorrect ; ces 45 renvois font passer autant de distracteurs de non conforme a conforme"
     }
   ],
   "deltas_requiring_human_editorial_decision": [],
@@ -181,8 +179,8 @@
   ],
   "renvoi_port_result": {
     "candidates": 45,
-    "ported": 9,
-    "rejected": 36,
+    "ported": 0,
+    "rejected": 45,
     "gates": [
       "source question current",
       "statement/options semantic identity",
@@ -192,10 +190,7 @@
       "variant visibility",
       "legacy/stale target"
     ],
-    "ported_detail": {
-      "TSPE-LOGARITHME": 6,
-      "TSPE-PRIMITIVES-EQDIFF": 3
-    },
+    "ported_detail": {},
     "rejected_reason_counts": {
       "capacity_misalignment_and_missing_target": 15,
       "capacity_misalignment_only": 18,
@@ -203,6 +198,16 @@
     },
     "no_target_fabricated": true,
     "open_findings": "34 distracteurs restent sans renvoi valide : leur renvoi WIP pointait C1 alors que la question porte C2, C3, C4, C5, C7, C11, C12 ou C13, ou l'objet de remediation cible n'existe pas. Findings laisses ouverts pour vraie correction.",
-    "gate_learned": "le gate 'target canonical' doit aussi verifier qu'aucun test amont n'epingle la forme exacte du renvoi ; deux portages initialement valides ont ete annules a ce titre"
+    "gate_learned": "le gate 'target canonical' doit aussi verifier qu'aucun test amont n'epingle la forme exacte du renvoi ; deux portages initialement valides ont ete annules a ce titre",
+    "blocking_constraint_discovered": {
+      "name": "INDEPENDENT_QCM_REVIEW_EVIDENCE_IS_WHOLE_FILE_BOUND",
+      "artifact": "audit/qcm_review_evidence/TSPE_96.json",
+      "artifact_kind": "TSPE_QCM_INDEPENDENT_REVIEW_HANDOFF",
+      "binding": "source_sha256 du FICHIER entier, par question revue",
+      "effect": "toute edition d'un QCM deja revu invalide la preuve de revue independante de TOUTES ses questions ; scripts/build_qcm_scientific_answer_key_audit.py refuse alors de produire et ne rebinde jamais automatiquement",
+      "measured": "le portage des 9 renvois perimait 10 questions revues : TSPE-LOGARITHME 5 et TSPE-PRIMITIVES-EQDIFF 5",
+      "decision": "portage annule ; les QCM sont restaures a l'octet pres sur l'amont. Ajouter un renvoi a un QCM revu est un acte de revue, pas une operation mecanique.",
+      "escalated": true
+    }
   }
 }
