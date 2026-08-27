@@ -1,0 +1,348 @@
+{
+  "artifact_type": "dependency_warning_and_pinning_ledger",
+  "schema_version": 1,
+  "generated_by": "scripts/build_dependency_warning_ledger.py",
+  "read_only": true,
+  "python_version_here": "3.12.3",
+  "pinning": {
+    "pinned_requirements_file": "requirements-ci-audit.txt",
+    "pinned_package_count": 30,
+    "match_count": 21,
+    "drift_count": 8,
+    "absent_count": 1,
+    "packages": [
+      {
+        "package": "Deprecated",
+        "pinned": "1.3.1",
+        "installed_here": "1.2.18",
+        "state": "DRIFT"
+      },
+      {
+        "package": "PyYAML",
+        "pinned": "6.0.3",
+        "installed_here": "6.0.1",
+        "state": "DRIFT"
+      },
+      {
+        "package": "Pygments",
+        "pinned": "2.19.2",
+        "installed_here": "2.19.2",
+        "state": "MATCH"
+      },
+      {
+        "package": "ast-serialize",
+        "pinned": "0.6.0",
+        "installed_here": "0.6.0",
+        "state": "MATCH"
+      },
+      {
+        "package": "attrs",
+        "pinned": "25.4.0",
+        "installed_here": "23.2.0",
+        "state": "DRIFT"
+      },
+      {
+        "package": "coverage",
+        "pinned": "7.13.2",
+        "installed_here": "7.13.2",
+        "state": "MATCH"
+      },
+      {
+        "package": "iniconfig",
+        "pinned": "2.3.0",
+        "installed_here": "2.3.0",
+        "state": "MATCH"
+      },
+      {
+        "package": "jsonschema",
+        "pinned": "4.26.0",
+        "installed_here": "4.26.0",
+        "state": "MATCH"
+      },
+      {
+        "package": "jsonschema-specifications",
+        "pinned": "2025.9.1",
+        "installed_here": "2025.9.1",
+        "state": "MATCH"
+      },
+      {
+        "package": "librt",
+        "pinned": "0.13.0",
+        "installed_here": "0.12.0",
+        "state": "DRIFT"
+      },
+      {
+        "package": "lxml",
+        "pinned": "6.1.1",
+        "installed_here": "6.1.1",
+        "state": "MATCH"
+      },
+      {
+        "package": "mpmath",
+        "pinned": "1.3.0",
+        "installed_here": "1.3.0",
+        "state": "MATCH"
+      },
+      {
+        "package": "mypy",
+        "pinned": "2.1.0",
+        "installed_here": "2.1.0",
+        "state": "MATCH"
+      },
+      {
+        "package": "mypy_extensions",
+        "pinned": "1.1.0",
+        "installed_here": "1.1.0",
+        "state": "MATCH"
+      },
+      {
+        "package": "packaging",
+        "pinned": "25.0",
+        "installed_here": "25.0",
+        "state": "MATCH"
+      },
+      {
+        "package": "pathspec",
+        "pinned": "1.1.1",
+        "installed_here": "1.1.1",
+        "state": "MATCH"
+      },
+      {
+        "package": "pikepdf",
+        "pinned": "8.7.1",
+        "installed_here": "8.7.1",
+        "state": "MATCH"
+      },
+      {
+        "package": "pillow",
+        "pinned": "12.3.0",
+        "installed_here": "12.3.0",
+        "state": "MATCH"
+      },
+      {
+        "package": "pluggy",
+        "pinned": "1.6.0",
+        "installed_here": "1.6.0",
+        "state": "MATCH"
+      },
+      {
+        "package": "pytest",
+        "pinned": "9.0.2",
+        "installed_here": "9.0.2",
+        "state": "MATCH"
+      },
+      {
+        "package": "pytest-cov",
+        "pinned": "7.0.0",
+        "installed_here": "7.0.0",
+        "state": "MATCH"
+      },
+      {
+        "package": "python-dotenv",
+        "pinned": "1.2.1",
+        "installed_here": "1.2.2",
+        "state": "DRIFT"
+      },
+      {
+        "package": "referencing",
+        "pinned": "0.37.0",
+        "installed_here": "0.37.0",
+        "state": "MATCH"
+      },
+      {
+        "package": "rpds-py",
+        "pinned": "0.30.0",
+        "installed_here": "0.30.0",
+        "state": "MATCH"
+      },
+      {
+        "package": "ruff",
+        "pinned": "0.6.9",
+        "installed_here": "0.6.9",
+        "state": "MATCH"
+      },
+      {
+        "package": "sympy",
+        "pinned": "1.14.0",
+        "installed_here": "1.14.0",
+        "state": "MATCH"
+      },
+      {
+        "package": "types-PyYAML",
+        "pinned": "6.0.12.20260724",
+        "installed_here": "6.0.12.20260518",
+        "state": "DRIFT"
+      },
+      {
+        "package": "types-jsonschema",
+        "pinned": "4.26.0.20260518",
+        "installed_here": null,
+        "state": "ABSENT"
+      },
+      {
+        "package": "typing_extensions",
+        "pinned": "4.15.0",
+        "installed_here": "4.16.0",
+        "state": "DRIFT"
+      },
+      {
+        "package": "wrapt",
+        "pinned": "2.3.0",
+        "installed_here": "1.17.2",
+        "state": "DRIFT"
+      }
+    ]
+  },
+  "unbounded_declarations": [
+    {
+      "declaration_file": "NSI/requirements.txt",
+      "requirement": "httpx>=0.27",
+      "bound": "lower_only"
+    },
+    {
+      "declaration_file": "NSI/requirements.txt",
+      "requirement": "trafilatura>=1.9",
+      "bound": "lower_only"
+    },
+    {
+      "declaration_file": "NSI/requirements.txt",
+      "requirement": "pymupdf>=1.24",
+      "bound": "lower_only"
+    },
+    {
+      "declaration_file": "NSI/requirements.txt",
+      "requirement": "beautifulsoup4>=4.12",
+      "bound": "lower_only"
+    },
+    {
+      "declaration_file": "NSI/requirements.txt",
+      "requirement": "lxml>=5.0",
+      "bound": "lower_only"
+    },
+    {
+      "declaration_file": "NSI/requirements.txt",
+      "requirement": "sentence-transformers>=3.0",
+      "bound": "lower_only"
+    },
+    {
+      "declaration_file": "NSI/requirements.txt",
+      "requirement": "anthropic>=0.40",
+      "bound": "lower_only"
+    },
+    {
+      "declaration_file": "NSI/requirements.txt",
+      "requirement": "fastmcp>=2.0",
+      "bound": "lower_only"
+    },
+    {
+      "declaration_file": "NSI/requirements.txt",
+      "requirement": "pyyaml>=6.0",
+      "bound": "lower_only"
+    },
+    {
+      "declaration_file": "NSI/requirements.txt",
+      "requirement": "jsonschema>=4.22",
+      "bound": "lower_only"
+    },
+    {
+      "declaration_file": "NSI/requirements.txt",
+      "requirement": "python-dotenv>=1.0",
+      "bound": "lower_only"
+    },
+    {
+      "declaration_file": "NSI/requirements.txt",
+      "requirement": "rich>=13.0",
+      "bound": "lower_only"
+    },
+    {
+      "declaration_file": "NSI/requirements.txt",
+      "requirement": "pytest>=8.0",
+      "bound": "lower_only"
+    },
+    {
+      "declaration_file": "NSI/requirements.txt",
+      "requirement": "ruff>=0.6",
+      "bound": "lower_only"
+    }
+  ],
+  "workflow_install_policy": [
+    {
+      "workflow": ".github/workflows/ci-audit-collection.yml",
+      "installs_pinned_requirements": true,
+      "uses_no_deps": true,
+      "runs_pip_check": true,
+      "uses_hashes": false
+    },
+    {
+      "workflow": ".github/workflows/ci-mathematiques.yml",
+      "installs_pinned_requirements": true,
+      "uses_no_deps": true,
+      "runs_pip_check": true,
+      "uses_hashes": false
+    },
+    {
+      "workflow": ".github/workflows/ci-nsi.yml",
+      "installs_pinned_requirements": true,
+      "uses_no_deps": true,
+      "runs_pip_check": true,
+      "uses_hashes": false
+    }
+  ],
+  "pytest_warnings": {
+    "source_capture_sha256": "sha256:304421dc67012f58bef4c0e2029e035a85b6955a829670dee105d0a97be144a2",
+    "source_capture_name": "root_umbrella.log",
+    "count": 5,
+    "project_owned": 0,
+    "upstream_owned": 5,
+    "warnings": [
+      {
+        "location": "/home/alaeddine/.local/lib/python3.12/site-packages/pandas/core/computation/expressions.py",
+        "line": "22",
+        "category": "UserWarning",
+        "message": "Pandas requires version '2.10.2' or newer of 'numexpr' (version '2.9.0' currently installed).",
+        "owner": "upstream",
+        "phase": "summary"
+      },
+      {
+        "location": "/home/alaeddine/.local/lib/python3.12/site-packages/pandas/core/arrays/masked.py",
+        "line": "56",
+        "category": "UserWarning",
+        "message": "Pandas requires version '1.4.2' or newer of 'bottleneck' (version '1.3.5' currently installed).",
+        "owner": "upstream",
+        "phase": "summary"
+      },
+      {
+        "location": "<frozen importlib._bootstrap>",
+        "line": "488",
+        "category": "DeprecationWarning",
+        "message": "builtin type SwigPyPacked has no __module__ attribute",
+        "owner": "upstream",
+        "phase": "summary"
+      },
+      {
+        "location": "<frozen importlib._bootstrap>",
+        "line": "488",
+        "category": "DeprecationWarning",
+        "message": "builtin type SwigPyObject has no __module__ attribute",
+        "owner": "upstream",
+        "phase": "summary"
+      },
+      {
+        "location": "sys",
+        "line": "1",
+        "category": "DeprecationWarning",
+        "message": "builtin type swigvarlink has no __module__ attribute",
+        "owner": "upstream",
+        "phase": "post_summary"
+      }
+    ]
+  },
+  "final_reproducibility_requirements": [
+    "un fichier de contraintes reproductible couvrant l'environnement de test local et la CI",
+    "pip check vert dans l'environnement effectivement utilise",
+    "la CI et le poste de developpement resolvant le meme ensemble de versions",
+    "chaque avertissement soit corrige, soit trace comme dette amont assumee"
+  ],
+  "closure_planned_before": "FINAL_SOURCE_SHA",
+  "changes_nothing_now": "aucune version n'est modifiee pendant la wave de contenu, conformement a la decision de gouvernance"
+}

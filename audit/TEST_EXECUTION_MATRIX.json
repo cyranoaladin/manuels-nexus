@@ -1,0 +1,185 @@
+{
+  "artifact_type": "test_execution_matrix",
+  "schema_version": 1,
+  "generated_by": "scripts/build_test_execution_matrix.py",
+  "source_sha": "bdbbb9090f01c6deb2d46354a2cd256a6aa3ee77",
+  "results_are_read_from_real_captures": true,
+  "commands": [
+    {
+      "id": "nsi_canonical",
+      "command": "python -m pytest tests/ -q",
+      "cwd": "NSI",
+      "scope": "suites NSI",
+      "declared_in": [
+        ".github/workflows/ci-nsi.yml",
+        "NSI/Makefile"
+      ],
+      "support_status": "SUPPORTED_CI",
+      "capture": "nsi_canonical.log",
+      "observed": {
+        "capture": "nsi_canonical.log",
+        "capture_sha256": "sha256:73709f9b2481b2272f83ac4ca2a07c9d6ed08cc1f26582b98807e3169e64e13a",
+        "passed": 2204,
+        "failed": 0,
+        "errors": 0,
+        "warnings": 0,
+        "failed_tests": [],
+        "cwd_absolute": "/home/alaeddine/Documents/Manuels_Nexus/.worktrees/t2-current-audit/NSI",
+        "start": "2026-08-27T06:49:40Z",
+        "end": "2026-08-27T06:50:59Z",
+        "exit_code": 0,
+        "timeout": false
+      },
+      "green": true
+    },
+    {
+      "id": "maths_ci",
+      "command": "python -m pytest tests/test_meta_schemas.py -q",
+      "cwd": "Mathematiques/manuel-maths",
+      "scope": "schemas META du manuel de mathematiques",
+      "declared_in": [
+        ".github/workflows/ci-mathematiques.yml"
+      ],
+      "support_status": "SUPPORTED_CI",
+      "capture": "maths_ci.log",
+      "observed": {
+        "capture": "maths_ci.log",
+        "capture_sha256": "sha256:ce83ab98f912f647a34ce3ed2ff38844b56903f89cfc2c07b615371cccf9f61d",
+        "passed": 4053,
+        "failed": 0,
+        "errors": 0,
+        "warnings": 0,
+        "failed_tests": [],
+        "cwd_absolute": "/home/alaeddine/Documents/Manuels_Nexus/.worktrees/t2-current-audit/Mathematiques/manuel-maths",
+        "start": "2026-08-27T06:50:59Z",
+        "end": "2026-08-27T06:51:17Z",
+        "exit_code": 0,
+        "timeout": false
+      },
+      "green": true
+    },
+    {
+      "id": "maths_full",
+      "command": "python -m pytest tests/ -q",
+      "cwd": "Mathematiques/manuel-maths",
+      "scope": "suites du manuel de mathematiques",
+      "declared_in": [
+        "Mathematiques/manuel-maths/Makefile"
+      ],
+      "support_status": "SUPPORTED_CANONICAL",
+      "capture": "maths_full.log",
+      "observed": {
+        "capture": "maths_full.log",
+        "capture_sha256": "sha256:c9231821b3c48ab45ee45a306f816eb859d0613fbdc9a9bd1d40a8e8af521740",
+        "passed": 4893,
+        "failed": 0,
+        "errors": 0,
+        "warnings": 4,
+        "failed_tests": [],
+        "cwd_absolute": "/home/alaeddine/Documents/Manuels_Nexus/.worktrees/t2-current-audit/Mathematiques/manuel-maths",
+        "start": "2026-08-27T06:51:23Z",
+        "end": "2026-08-27T06:59:55Z",
+        "exit_code": 0,
+        "timeout": false
+      },
+      "green": true
+    },
+    {
+      "id": "root_audit_tests",
+      "command": "python -m pytest tests/ -q",
+      "cwd": ".",
+      "scope": "suites d'audit de la racine",
+      "declared_in": [
+        "usage courant"
+      ],
+      "support_status": "SUPPORTED_CANONICAL",
+      "capture": "root_audit_tests.log",
+      "observed": {
+        "capture": "root_audit_tests.log",
+        "capture_sha256": "sha256:cca27189f331ff9d36a34263ac2532674ad611b49eec0fb8e874ea939db8a98e",
+        "passed": 1942,
+        "failed": 2,
+        "errors": 0,
+        "warnings": 0,
+        "failed_tests": [
+          "tests/test_1spe_suites_review_source_freeze.py::test_derived_manifest_envelope_drift_does_not_rebind_content_freeze",
+          "tests/test_1spe_suites_review_source_freeze.py::test_fixed_output_and_check_cli_are_deterministic_when_present"
+        ],
+        "cwd_absolute": "/home/alaeddine/Documents/Manuels_Nexus/.worktrees/t2-current-audit",
+        "start": "2026-08-27T21:08:19Z",
+        "end": "2026-08-27T21:40:33Z",
+        "exit_code": 1,
+        "timeout": false
+      },
+      "green": false
+    },
+    {
+      "id": "root_umbrella",
+      "command": "python -m pytest --import-mode=importlib --cov=scripts",
+      "cwd": ".",
+      "scope": "les trois testpaths de pyproject.toml",
+      "declared_in": [
+        ".github/workflows/ci-audit-collection.yml",
+        "pyproject.toml"
+      ],
+      "support_status": "SUPPORTED_CI",
+      "capture": "root_umbrella.log",
+      "observed": {
+        "capture": "root_umbrella.log",
+        "capture_sha256": "sha256:304421dc67012f58bef4c0e2029e035a85b6955a829670dee105d0a97be144a2",
+        "passed": 9039,
+        "failed": 2,
+        "errors": 0,
+        "warnings": 4,
+        "failed_tests": [
+          "tests/test_1spe_suites_review_source_freeze.py::test_derived_manifest_envelope_drift_does_not_rebind_content_freeze",
+          "tests/test_1spe_suites_review_source_freeze.py::test_fixed_output_and_check_cli_are_deterministic_when_present"
+        ],
+        "cwd_absolute": "/home/alaeddine/Documents/Manuels_Nexus/.worktrees/t2-current-audit",
+        "start": "2026-08-27T20:19:57Z",
+        "end": "2026-08-27T21:05:26Z",
+        "exit_code": 1,
+        "timeout": false
+      },
+      "green": false
+    }
+  ],
+  "supported_command_count": 5,
+  "supported_commands_green": 3,
+  "ambiguous_entrypoints": [],
+  "final_requirement": "toute commande supportee ou CI : failed = 0 et errors = 0",
+  "single_blocking_cause": {
+    "failing_tests": [
+      "tests/test_1spe_suites_review_source_freeze.py::test_fixed_output_and_check_cli_are_deterministic_when_present",
+      "tests/test_1spe_suites_review_source_freeze.py::test_derived_manifest_envelope_drift_does_not_rebind_content_freeze"
+    ],
+    "cause": "STALE freeze binding: audit/official_program_coverage/1SPE.json",
+    "detail": "audit/1SPE_SUITES_FREEZE_AUTHORITY_BINDING_CONFLICT.json",
+    "is_a_test_defect": false,
+    "note": "les deux commandes rouges echouent sur la MEME cause unique, pas sur des defauts distincts"
+  },
+  "import_collision": {
+    "previously_reported": "110 failed / 63 errors sur l'invocation umbrella",
+    "measured_now": "2 failed / 0 errors",
+    "resolution": "les 63 erreurs etaient les suites NSI executees depuis la racine sur l'arbre perime 761508d9 ; elles n'existent plus sur l'arbre canonique. Aucune collision de modules entre les assembleurs Math et NSI ne subsiste dans l'invocation umbrella.",
+    "verification": "root_umbrella : 9039 passes, 0 erreur, --import-mode=importlib",
+    "residual_ambiguous_entrypoint": false
+  },
+  "infra_interruptions": [
+    {
+      "event": "exit code 144 lors d'un run anterieur",
+      "classification": "INFRA_EXECUTION_INTERRUPTED",
+      "diagnosis": "provoque par un pkill -f visant le motif de la commande pytest, qui a aussi correspondu au shell hote du harnais. Le run etait a 2 % et ne portait aucune ligne FAILED. Ce n'est ni un echec de test, ni un timeout, ni un epuisement de ressource.",
+      "is_a_test_failure": false,
+      "remedy": "harnais dedie ecrivant code de sortie et horodatage sans pipeline masquante"
+    },
+    {
+      "event": "12 echecs supplementaires dans un premier run umbrella",
+      "classification": "INFRA_EXECUTION_INTERRUPTED",
+      "diagnosis": "des artefacts ont ete ecrits dans l'arbre pendant l'execution ; les suites inventory et baseline refusent sur depot sale. Run rejoue sur arbre propre : 16 failed -> 2 failed.",
+      "is_a_test_failure": false,
+      "log_preserved": "audit/test_matrix_logs/root_umbrella.dirty-tree.log"
+    }
+  ],
+  "entrypoint_policy": "les cinq commandes sont supportees et documentees ; aucune n'est LEGACY_UNSUPPORTED ni INVALID_INVOCATION. Une commande lancee depuis un autre repertoire que son cwd declare n'est pas un point d'entree du projet."
+}

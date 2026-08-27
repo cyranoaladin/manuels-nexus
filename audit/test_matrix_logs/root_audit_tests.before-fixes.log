@@ -1,0 +1,140 @@
+........................................................................ [  3%]
+........................................................................ [  7%]
+.............................FF......................................... [ 11%]
+........................................................................ [ 14%]
+........................................................................ [ 18%]
+........................................................................ [ 22%]
+........................................................................ [ 25%]
+........................................................................ [ 29%]
+........................................................................ [ 33%]
+........................................................................ [ 37%]
+.........................................................F.............. [ 40%]
+........................................................................ [ 44%]
+........................................................................ [ 48%]
+........................................................................ [ 51%]
+........................................................................ [ 55%]
+........................................................................ [ 59%]
+........................................................................ [ 62%]
+........................................................................ [ 66%]
+........................................................................ [ 70%]
+........................................................................ [ 74%]
+........................................................................ [ 77%]
+........................................................................ [ 81%]
+........................................................................ [ 85%]
+........................................................................ [ 88%]
+......................................F................................. [ 92%]
+........................................................................ [ 96%]
+........................................................................ [100%]
+=================================== FAILURES ===================================
+________ test_fixed_output_and_check_cli_are_deterministic_when_present ________
+
+    def test_fixed_output_and_check_cli_are_deterministic_when_present() -> None:
+        producer = _producer()
+        payload = producer.build_freeze()
+        if OUTPUT.exists():
+            assert OUTPUT.read_text(encoding="utf-8") == producer.render_json(payload)
+            runs = [
+                subprocess.run(
+                    [sys.executable, str(SCRIPT), "--check"],
+                    cwd=ROOT,
+                    text=True,
+                    capture_output=True,
+                    check=False,
+                    timeout=30,
+                )
+                for _ in range(2)
+            ]
+>           assert [run.returncode for run in runs] == [0, 0]
+E           assert [1, 1] == [0, 0]
+E             
+E             At index 0 diff: 1 != 0
+E             Use -v to get more diff
+
+tests/test_1spe_suites_review_source_freeze.py:141: AssertionError
+_____ test_derived_manifest_envelope_drift_does_not_rebind_content_freeze ______
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x779fb752f1d0>
+
+    def test_derived_manifest_envelope_drift_does_not_rebind_content_freeze(
+        monkeypatch: pytest.MonkeyPatch,
+    ) -> None:
+        producer = _producer()
+        payload = producer.build_freeze()
+        original = producer._current_blob
+    
+        def current_blob(path: str) -> str:
+            if path == "audit/BUILD_MANIFEST.json":
+                raise AssertionError("derived manifest must not be a live content binding")
+            return original(path)
+    
+        monkeypatch.setattr(producer, "_current_blob", current_blob)
+>       producer.validate_current_bindings(payload)
+
+tests/test_1spe_suites_review_source_freeze.py:160: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'chapter': '1SPE-SUITES', 'chapter_object_set_digest': 'sha256:67d8006298299b44029de8ba8f85b500d9b3619997a0c596e63c20...s': {'chapter_objects': 161, 'remediation_sources': 13, 'synthetic_qcm_objects': 1, 'tex_meta_objects': 160, ...}, ...}
+
+    def validate_current_bindings(payload: dict[str, Any]) -> None:
+        bindings = list(payload["objects"])
+        bindings.extend((payload["contract"], payload["qcm"]["generated_tex"]))
+        bindings.extend(payload["programme_authority"]["sources"])
+        # BUILD_MANIFEST is frozen above as contextual evidence at SOURCE_SHA.  Its
+        # empty derived envelope is refreshed whenever repository sources advance;
+        # that mechanical refresh must not rebind otherwise unchanged chapter
+        # content.  A future receipt policy may add a separate render binding.
+        seen: set[str] = set()
+        for row in bindings:
+            path = row["path"]
+            if path in seen:
+                continue
+            seen.add(path)
+            if _current_blob(path) != row["git_blob_sha1"]:
+>               raise ValueError(f"STALE freeze binding: {path}")
+E               ValueError: STALE freeze binding: audit/official_program_coverage/1SPE.json
+
+scripts/build_1spe_suites_review_source_freeze.py:247: ValueError
+___________________ test_D_a_non_georep_chapter_is_untouched ___________________
+
+    def test_D_a_non_georep_chapter_is_untouched() -> None:
+        changed = _git("diff", "--name-only", PRE_MIGRATION, "HEAD", "--",
+                       "Mathematiques/manuel-maths/chapitres").split()
+        # Chapitres modifies pour d'autres motifs traces dans le meme intervalle :
+        # l'oracle CO-048 et l'annulation des deux renvois TSPE.
+        unrelated = ("1SPE-VARIABLES-ALEATOIRES", "TSPE-DERIVATION-CONVEXITE")
+        foreign = [
+            path
+            for path in changed
+            if f"/chapitres/{CHAPTER}/" not in path
+            and not any(name in path for name in unrelated)
+        ]
+>       assert foreign == [], foreign
+E       AssertionError: ['Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/qcm/TSPE-LOGARITHME-QCM.json', 'Mathematiques/manuel-maths/chap...VES-EQDIFF-QCM.json', 'Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/qcm/TSPE-PRIMITIVES-EQDIFF-QCM.tex']
+E       assert ['Mathematiqu...DIFF-QCM.tex'] == []
+E         
+E         Left contains 4 more items, first extra item: 'Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/qcm/TSPE-LOGARITHME-QCM.json'
+E         Use -v to get more diff
+
+tests/test_georep_capacity_id_migration.py:137: AssertionError
+________________ test_math_student_teacher_key_audit_is_current ________________
+
+    def test_math_student_teacher_key_audit_is_current() -> None:
+        result = subprocess.run(
+            [sys.executable, str(SCRIPT), "--check"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: STALE_OR_MISSING: audit/STUDENT_PDF_PUBLISH_PREFLIGHT_CURRENT_HEAD.json
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/usr/bin/python3', '/home/alaeddine/Documents/Manuels_Nexus/.worktrees/t2-current-audit/script...--check'], returncode=1, stdout='STALE_OR_MISSING: audit/STUDENT_PDF_PUBLISH_PREFLIGHT_CURRENT_HEAD.json\n', stderr='').returncode
+
+tests/test_math_student_teacher_key_audit.py:50: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_1spe_suites_review_source_freeze.py::test_fixed_output_and_check_cli_are_deterministic_when_present
+FAILED tests/test_1spe_suites_review_source_freeze.py::test_derived_manifest_envelope_drift_does_not_rebind_content_freeze
+FAILED tests/test_georep_capacity_id_migration.py::test_D_a_non_georep_chapter_is_untouched
+FAILED tests/test_math_student_teacher_key_audit.py::test_math_student_teacher_key_audit_is_current
+4 failed, 1940 passed in 1599.49s (0:26:39)
