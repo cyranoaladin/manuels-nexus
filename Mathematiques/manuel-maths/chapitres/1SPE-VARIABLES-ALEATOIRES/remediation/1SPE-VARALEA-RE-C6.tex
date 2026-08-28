@@ -1,0 +1,42 @@
+% META: {"id": "1SPE-VARALEA-RE-C6", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "remediation", "capacites_codes": ["C6"], "status": "generated"}
+
+\begin{exercice}{1SPE-VARALEA-RE-C6-EX1}{1}{10}
+On reprend la loi utilisée dans les expérimentations :
+\[
+\begin{array}{|c|c|c|c|}
+\hline
+x_i & -2 & 1 & 4 \\
+\hline
+P(X=x_i) & 0{,}2 & 0{,}5 & 0{,}3 \\
+\hline
+\end{array}
+\]
+\begin{enumerate}
+  \item On partage $[0\,;1[$ en trois intervalles de longueurs $0{,}2$,
+        $0{,}5$ et $0{,}3$, dans cet ordre. Quelle valeur de $X$ obtient-on
+        si le tirage au hasard donne $u=0{,}15$ ? Et si $u=0{,}8$ ?
+  \item Un échantillon de taille $n=5$ a donné les valeurs
+        $1$, $4$, $-2$, $1$, $1$. Calculer sa moyenne $m$.
+  \item Écrire, en une ligne, ce que renvoie une fonction
+        \code{moyenne\_echantillon(n, graine)} : la loi de $X$, un échantillon,
+        ou la moyenne d'un échantillon ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% # 1. simulation par intervalles cumules : 0,2 puis 0,7 puis 1
+% VALEURS = (-2, 1, 4)
+% CUMULS = (0.2, 0.7, 1.0)
+% def valeur(u):
+%     for v, c in zip(VALEURS, CUMULS):
+%         if u < c:
+%             return v
+%     return VALEURS[-1]
+% assert valeur(0.15) == -2
+% assert valeur(0.8) == 4
+% # 2. moyenne de l'echantillon
+% m = Rational(1 + 4 - 2 + 1 + 1, 5)
+% assert m == Rational(5, 5)
+% assert m == 1
+% END-VERIFY
