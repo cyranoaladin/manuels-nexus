@@ -2,10 +2,14 @@
   "artifact_type": "coverage_regression_forensics",
   "attribution": {
     "coverage_after_lot_code": 69.32,
+    "coverage_after_meaningful_test_fix": 70.27,
     "coverage_before_lot": 69.77,
     "coverage_without_new_lot_modules": 69.73,
+    "lot_regression_recovered": true,
     "lot_regression_total": -0.45,
     "method": "recalcul de la couverture combinee en retirant du numerateur et du denominateur les instructions et branches des modules nouveaux, a partir du meme fichier de donnees de couverture",
+    "net_vs_before_lot": 0.5,
+    "note_on_measurement_sha": "coverage_after_lot_code (69.32) a ete mesure au SHA precedent, avant que les tests unitaires de recuperation n'existent ; coverage_after_meaningful_test_fix (70.27) est mesure au SHA de ce lot",
     "of_which_edits_to_existing_modules": -0.04,
     "of_which_new_modules": -0.41
   },
@@ -47,6 +51,21 @@
       "statements": 5102
     }
   ],
+  "final_measurement": {
+    "assertions": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 9126
+    },
+    "combined_percent": 70.27,
+    "command": "python -m pytest --import-mode=importlib --cov=scripts",
+    "coverage_data_sha256": "sha256:e0a4b992c1d1e6d2e36ead3c924ced4ef53e153e9efbcb37ae54b7167374c106",
+    "exit_cause": "COVERAGE_GATE",
+    "exit_code": 1,
+    "isolation_note": "deux mesures anterieures ont ete interrompues par SIGTERM a 89 % et 95 % ; celle-ci a ete conduite dans une session detachee (setsid) et est allee au bout",
+    "log_sha256": "sha256:7a217b4a16123b0970bf8845a80e600793708bf437a9e00b4004cb668d5d43e6",
+    "measured_at_sha": "ae4ace830cb97f58f85c571f3d45a3752935576c"
+  },
   "measurement": {
     "assertions": {
       "errors": 0,
