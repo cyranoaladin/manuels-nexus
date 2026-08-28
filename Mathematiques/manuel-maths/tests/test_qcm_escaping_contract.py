@@ -83,18 +83,43 @@ def test_le_pre_echappement_produit_une_sequence_invalide(producteur) -> None:
     assert producteur._clean_text("simuler\\_variable") == "simuler\\\\_variable"
 
 
-@pytest.mark.parametrize("caractere", ["%", "#", "&", "{", "}", "\\"])
-def test_les_autres_caracteres_speciaux_ne_sont_pas_reecrits(
-    producteur, caractere: str
-) -> None:
+@pytest.mark.parametrize("caractere", ["{", "}", "\\"])
+def test_le_balisage_reste_a_l_auteur(producteur, caractere: str) -> None:
     """Le producteur ne fabrique pas un sanitizer generique.
 
-    Elargir l'echappement a { } \\ casserait tous les champs mathematiques et
-    les macros legitimes. Ces caracteres restent sous la responsabilite de
-    l'auteur, et le smoke de compilation ci-dessous en est le garde-fou.
+    Elargir l'echappement a { } \\ casserait les macros legitimes ecrites dans
+    ces champs, par exemple \\code{...}. Ces trois caracteres restent donc a
+    l'auteur, et le smoke de compilation en est le garde-fou.
     """
 
     assert producteur._clean_text(f"texte {caractere} suite") == f"texte {caractere} suite"
+
+
+@pytest.mark.parametrize(
+    ("brut", "attendu"),
+    [
+        ("99% de reussite", "99\\% de reussite"),
+        ("cas #3 retenu", "cas \\#3 retenu"),
+        ("A & B", "A \\& B"),
+    ],
+)
+def test_le_producteur_possede_aussi_pourcent_diese_et_esperluette(
+    producteur, brut: str, attendu: str
+) -> None:
+    """Regression : un % non echappe avalait silencieusement la fin de ligne.
+
+    Mesure sur le corpus : 1SPE-PROBA-COND Q17 s'imprimait « Sensibilite 99 »
+    et perdait tout l'enonce suivant, sans erreur de compilation. Une perte de
+    contenu muette est plus dangereuse qu'un echec de build.
+    """
+
+    assert producteur._clean_text(brut) == attendu
+
+
+def test_les_segments_mathematiques_gardent_pourcent_diese_esperluette(
+    producteur,
+) -> None:
+    assert producteur._clean_text("$a \\% b$") == "$a \\% b$"
 
 
 # ------------------------------------------------- scan de classe (sources) --
@@ -161,3 +186,96 @@ def test_le_tex_qcm_genere_compile(tmp_path: Path) -> None:
     )
     assert run.returncode == 0, run.stdout[-2500:]
     assert (tmp_path / "smoke.pdf").is_file()
+
+
+# ------------------------------------------ mutations compilees par caractere ---
+
+CARACTERES_TEXTE = ["_", "%", "#", "&", "{", "}", "\\"]
+
+
+def _document_synthetique(marqueur: str) -> dict:
+    return {
+        "chapitre": "1SPE-VARIABLES-ALEATOIRES",
+        "titre": "Mutation",
+        "_source": "mutation.json",
+        "questions": [
+            {
+                "id": "M1",
+                "capacite": "C1",
+                "enonce": f"Texte simple {marqueur} suite, et un segment $x_1$ intact.",
+                "options": {
+                    "A": f"option {marqueur} A",
+                    "B": "option B",
+                    "C": "$\\frac{1}{2}$",
+                    "D": "option D",
+                },
+                "correcte": "B",
+                "diagnostics": {
+                    "A": {"erreur": f"erreur {marqueur}", "renvoi": "C1"},
+                    "C": {"erreur": "erreur C", "renvoi": "C1"},
+                    "D": {"erreur": "erreur D", "renvoi": "C1"},
+                },
+            }
+        ],
+    }
+
+
+@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
+@pytest.mark.parametrize("marqueur", CARACTERES_TEXTE)
+def test_chaque_caractere_special_traverse_source_producteur_et_compilation(
+    producteur, tmp_path: Path, marqueur: str
+) -> None:
+    """source -> generateur -> TeX -> compilation reelle, caractere par caractere.
+
+    L'inspection du producteur ne suffit pas : seul un vrai passage de lualatex
+    prouve que le document tient. Les segments mathematiques restent hors de
+    cette regle et doivent survivre intacts.
+    """
+
+    tex = producteur.rendre(_document_synthetique(marqueur))
+
+    assert "$x_1$" in tex, "le segment mathematique doit rester intact"
+
+    corps = "\n".join(l for l in tex.splitlines() if not l.startswith("% "))
+    document = tmp_path / f"mut.tex"
+    document.write_text(
+        "\\documentclass[11pt]{article}\n"
+        "\\usepackage[T1]{fontenc}\\usepackage[utf8]{inputenc}\n"
+        "\\usepackage[french]{babel}\\usepackage{amsmath,amssymb,xcolor}\n"
+        "\\usepackage{enumitem,array}\n"
+        "\\definecolor{chapcolor}{RGB}{0,90,140}\n"
+        "\\newcommand{\\code}[1]{\\texttt{#1}}\n"
+        "\\newif\\ifnxVersionProfesseur\\nxVersionProfesseurtrue\n"
+        "\\begin{document}\n" + corps + "\n\\end{document}\n",
+        encoding="utf-8",
+    )
+    run = subprocess.run(
+        ["lualatex", "-interaction=nonstopmode", "-halt-on-error", document.name],
+        cwd=tmp_path,
+        capture_output=True,
+        text=True,
+        timeout=300,
+    )
+    compile_ok = run.returncode == 0 and (tmp_path / "mut.pdf").is_file()
+
+    # Contrat mesure, pas presume :
+    #   _ % # &   le producteur les possede -> compile ET contenu conserve
+    #   { }       portent du balisage reel -> laisses a l'auteur, ne compilent
+    #             pas seuls ; le smoke de compilation est le garde-fou
+    #   \\         absorbe par TeX, compile
+    POSSEDES = {"_", "%", "#", "&"}
+    AUTEUR = {"{", "}"}
+    if marqueur in POSSEDES:
+        assert compile_ok, run.stdout[-2000:]
+        rendu = subprocess.run(
+            ["pdftotext", str(tmp_path / "mut.pdf"), "-"],
+            capture_output=True, text=True, timeout=60,
+        ).stdout
+        assert "suite" in rendu, "le texte suivant le caractere doit survivre"
+    elif marqueur in AUTEUR:
+        assert not compile_ok, (
+            "si ce caractere compile desormais, le contrat a change et doit "
+            "etre reecrit plutot que contourne"
+        )
+    else:
+        assert compile_ok, run.stdout[-2000:]

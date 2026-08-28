@@ -49,6 +49,16 @@ def _clean_text(s: str) -> str:
     s = s.replace("`^`", "\\code{\\textasciicircum}")
     parts = s.split('$')
     for i in range(0, len(parts), 2):
+        # Hors mode mathematique, ces caracteres ne sont jamais du balisage
+        # legitime dans un champ de QCM : le producteur les possede.
+        # Mesure a l'appui : sans echappement, # & } { font echouer la
+        # compilation, et % avale silencieusement la fin de la ligne -- plus
+        # dangereux qu'une erreur, car la perte de contenu passe inapercue.
+        # { } et \ restent a l'auteur : ils portent du balisage reel
+        # (\code{...} par exemple), et le smoke de compilation est le garde-fou.
+        parts[i] = parts[i].replace("%", "\\%")
+        parts[i] = parts[i].replace("#", "\\#")
+        parts[i] = parts[i].replace("&", "\\&")
         parts[i] = parts[i].replace("_", "\\_")
         parts[i] = parts[i].replace("^", "\\textasciicircum{}")
     return "$".join(parts)

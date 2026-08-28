@@ -1,0 +1,39 @@
+{
+  "SUPPORTED_STUDENT_ENTRYPOINT_LEAKS": 0,
+  "artifact_type": "variant_entrypoint_ledger",
+  "entrypoints": [
+    {
+      "audience_variants": [],
+      "classification": "NON_PRODUCTION_STUDENT_ENTRYPOINT",
+      "declared_producer": false,
+      "entrypoint": "Mathematiques/manuel-maths/scripts/assemble.py",
+      "neutralises_corrige": false,
+      "produces_student_artifact": false
+    },
+    {
+      "audience_variants": [],
+      "classification": "NON_PRODUCTION_STUDENT_ENTRYPOINT",
+      "declared_producer": false,
+      "entrypoint": "Mathematiques/manuel-maths/scripts/assemble_livrets.py",
+      "neutralises_corrige": false,
+      "produces_student_artifact": false
+    },
+    {
+      "audience_variants": [
+        "eleve",
+        "professeur"
+      ],
+      "classification": "PRODUCTION_STUDENT_ENTRYPOINT",
+      "declared_producer": true,
+      "entrypoint": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+      "neutralises_corrige": true,
+      "produces_student_artifact": true
+    }
+  ],
+  "generated_by": "scripts/build_variant_entrypoint_ledger.py",
+  "guard_class": "BUILD_PATH_DEPENDENT_VARIANT_GUARD",
+  "guard_location": "preambule de l'assembleur de manuel, pas la classe",
+  "leaking_entrypoints": [],
+  "non_production_note": "les variantes de assemble.py (complet, methodes, parcours1, remediation) selectionnent des rubriques, pas une audience : ce point d'entree n'a aucune variante eleve et n'est pas un producteur declare. Ses sorties parcours1 et remediation contiennent des corriges et ne doivent pas etre remises a un eleve.",
+  "schema_version": 1
+}
