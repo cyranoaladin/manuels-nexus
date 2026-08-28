@@ -82,12 +82,12 @@
     {
       "id": "Q8", "capacite": "C3",
       "enonce": "Si P(B) = 1/3, P_B(A) = 1/2 et P_Bbar(A) = 1/4, alors P(A) vaut :",
-      "options": {"A": "1/3", "B": "1/6 + 1/6 = 1/3", "C": "1/6 + 1/4 = 5/12", "D": "1/6 + 2/12 = 1/3"},
+      "options": {"A": "$1/4$", "B": "$1/6$", "C": "$5/12$", "D": "$1/3$"},
       "correcte": "D",
       "diagnostics": {
-        "A": {"erreur": "L'eleve a repondu P(B) au lieu de calculer P(A) par les probabilites totales.", "renvoi": "C3, formule"},
-        "B": {"erreur": "L'eleve a calcule P(B)*P_B(A) = 1/6 correctement mais a oublie d'utiliser P(Bbar) = 2/3 pour le second terme.", "renvoi": "C3, formule"},
-        "C": {"erreur": "Le second terme doit etre P(Bbar)*P_Bbar(A) = 2/3 * 1/4 = 1/6, pas 1/4.", "renvoi": "C3, formule"}
+        "A": {"erreur": "L'eleve a repris directement $P_{\\overline B}(A)=1/4$ sans ponderer par $P(\\overline B)=2/3$ ni ajouter la branche $B$.", "renvoi": "C3, formule"},
+        "B": {"erreur": "L'eleve a calcule seulement la branche $P(B)P_B(A)=1/6$ et a oublie la branche complementaire.", "renvoi": "C3, formule"},
+        "C": {"erreur": "L'eleve a additionne $P(B)P_B(A)=1/6$ et la probabilite conditionnelle $1/4$ sans la ponderer par $P(\\overline B)=2/3$.", "renvoi": "C3, formule"}
       }
     },
     {
@@ -180,13 +180,13 @@
     },
     {
       "id": "Q17", "capacite": "C5",
-      "enonce": "Sensibilite 99%, prevalence 0,1%. La VPP sera :",
-      "options": {"A": "proche de 99%", "B": "proche de 50%", "C": "probablement faible", "D": "exactement 0,1%"},
+      "enonce": "Un test a une sensibilite de 99 %, une specificite de 99 % et la prevalence est de 0,1 %. Sa valeur predictive positive est environ :",
+      "options": {"A": "proche de 99 %", "B": "proche de 50 %", "C": "proche de 9 %", "D": "exactement 0,1 %"},
       "correcte": "C",
       "diagnostics": {
-        "A": {"erreur": "Meme avec une tres bonne sensibilite, la VPP est faible si la prevalence est tres basse (beaucoup de faux positifs).", "renvoi": "C5, VPP et prevalence"},
-        "B": {"erreur": "Avec 0,1% de prevalence, la VPP sera bien en dessous de 50%.", "renvoi": "C5, VPP et prevalence"},
-        "D": {"erreur": "La VPP n'est pas egale a la prevalence.", "renvoi": "C5, formule de Bayes"}
+        "A": {"erreur": "La sensibilite n'est pas la valeur predictive positive. La tres faible prevalence rend les faux positifs nombreux relativement aux vrais positifs.", "renvoi": "C5, VPP et prevalence"},
+        "B": {"erreur": "Le calcul donne $0{,}00099/(0{,}00099+0{,}00999)\\approx0{,}090$, donc environ 9 %, pas 50 %.", "renvoi": "C5, VPP et prevalence"},
+        "D": {"erreur": "La valeur predictive positive n'est pas la prevalence : elle rapporte les vrais positifs a l'ensemble des tests positifs.", "renvoi": "C5, formule de Bayes"}
       }
     },
     {

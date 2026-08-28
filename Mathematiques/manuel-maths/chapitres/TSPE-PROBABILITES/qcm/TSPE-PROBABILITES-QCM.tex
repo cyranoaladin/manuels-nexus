@@ -37,10 +37,10 @@
     \item jamais
   \end{enumerate}
 
-\item \textbf{[Q4]} L'additivite de la variance V(X+Y)=V(X)+V(Y) necessite :
+\item \textbf{[Q4]} La condition necessaire et suffisante pour avoir V(X+Y)=V(X)+V(Y) est :
   \begin{enumerate}[label=\Alph*.]
+    \item que Cov(X,Y)=0
     \item que X et Y soient independantes
-    \item que X=Y
     \item rien de particulier
     \item que E(X)=E(Y)
   \end{enumerate}
@@ -67,6 +67,7 @@
 
 \end{enumerate}
 
+\ifnxVersionProfesseur
 \clearpage
 \section*{Cle de correction — reservee au professeur}
 
@@ -108,9 +109,9 @@ Q6 & C10 & \textbf{A} \\
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours applicable \emph{Renvoi : M1.}
+    \item \textbf{B} — L'independance est une condition suffisante, mais plus forte que necessaire : une covariance nulle suffit. \emph{Renvoi : C7, variance d'une somme.}
+    \item \textbf{C} — En general, $V(X+Y)=V(X)+V(Y)+2\operatorname{Cov}(X,Y)$ ; il faut donc annuler la covariance. \emph{Renvoi : C7, variance d'une somme.}
+    \item \textbf{D} — L'egalite des esperances ne controle pas la covariance et n'implique pas l'additivite des variances. \emph{Renvoi : C7, variance d'une somme.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
@@ -125,3 +126,4 @@ Q6 & C10 & \textbf{A} \\
     \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
   \end{itemize}
 \end{itemize}
+\fi

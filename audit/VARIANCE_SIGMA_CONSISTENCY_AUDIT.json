@@ -1,0 +1,63 @@
+{
+  "artifact_type": "variance_sigma_consistency_audit",
+  "schema_version": 1,
+  "generated_by": "scripts/audit_variance_sigma_consistency.py",
+  "defect_classes": [
+    "VARIANCE_SIGMA_SWAP",
+    "ROOT_MISMATCH",
+    "ROUNDING_MISMATCH",
+    "UNIT_ON_VARIANCE",
+    "SIGMA_WITHOUT_ORACLE",
+    "SIGMA_NOT_SELF_CONTAINED"
+  ],
+  "scope_chapters": [
+    "1SPE-DERIVATION-GLOBAL",
+    "1SPE-DERIVATION-LOCAL",
+    "1SPE-EXPONENTIELLE",
+    "1SPE-GEOMETRIE-REPEREE",
+    "1SPE-PROBA-COND",
+    "1SPE-PRODUIT-SCALAIRE",
+    "1SPE-SECOND-DEGRE",
+    "1SPE-SUITES",
+    "1SPE-TRIGONOMETRIE",
+    "1SPE-VARIABLES-ALEATOIRES",
+    "TCOMPL-CALCULS-AIRES",
+    "TCOMPL-CORRELATION-CAUSALITE",
+    "TCOMPL-ECHANTILLONNAGE",
+    "TCOMPL-INEGALITES",
+    "TCOMPL-INFERENCE-BAYESIENNE",
+    "TCOMPL-LOGARITHME-HISTORIQUE",
+    "TCOMPL-MODELES-EVOLUTION",
+    "TCOMPL-MODELES-FONCTION",
+    "TCOMPL-TEMPS-ATTENTE",
+    "TEXP-ARITHMETIQUE",
+    "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+    "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+    "TEXP-GRAPHES",
+    "TEXP-MATRICES-MARKOV",
+    "TSPE-CALCUL-INTEGRAL",
+    "TSPE-COMBINATOIRE",
+    "TSPE-CONTINUITE",
+    "TSPE-DERIVATION-CONVEXITE",
+    "TSPE-GEOMETRIE-ESPACE",
+    "TSPE-LIMITES-FONCTIONS",
+    "TSPE-LOGARITHME",
+    "TSPE-PRIMITIVES-EQDIFF",
+    "TSPE-PROBABILITES",
+    "TSPE-SUITES-LIMITES",
+    "TSPE-TRIGONOMETRIE"
+  ],
+  "findings": [
+    {
+      "finding_id": "1SPE-VARALEA-EXP-004-SIGMA_NOT_SELF_CONTAINED-01",
+      "chapter_id": "1SPE-VARIABLES-ALEATOIRES",
+      "object_id": "1SPE-VARALEA-EXP-004",
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex",
+      "defect_class": "SIGMA_NOT_SELF_CONTAINED",
+      "severity": "P2",
+      "description": "ecart-type 2{,}1 exact mais etabli dans un autre objet du chapitre : l'objet ne porte ni variance ecrite ni oracle propre"
+    }
+  ],
+  "finding_count": 1,
+  "p0_count": 0
+}

@@ -12,16 +12,19 @@
         "C": "secantes ou non coplanaires.",
         "D": "toujours confondues."
       },
-      "correcte": "A",
+      "correcte": "C",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "Deux droites non paralleles peuvent etre non coplanaires ; dans ce cas elles ne sont pas secantes.",
+          "renvoi": "C1, positions relatives de deux droites"
         },
-        "C": {
-          "erreur": "Consulter le cours correspondant"
+        "B": {
+          "erreur": "Deux droites non paralleles peuvent aussi etre coplanaires et secantes ; elles ne sont donc pas toujours non coplanaires.",
+          "renvoi": "C1, positions relatives de deux droites"
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Deux droites confondues sont paralleles ; cette option contredit l'hypothese de droites non paralleles.",
+          "renvoi": "C1, positions relatives de deux droites"
         }
       }
     },
@@ -35,16 +38,19 @@
         "C": "$\\vec{u}=\\vec{v}$.",
         "D": "$\\|\\vec{u}\\|=\\|\\vec{v}\\|$."
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "Un produit scalaire egal a $1$ ne caracterise pas l'orthogonalite ; il doit etre nul.",
+          "renvoi": "C1, produit scalaire et orthogonalite"
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Deux vecteurs egaux ne sont orthogonaux que dans le cas particulier du vecteur nul.",
+          "renvoi": "C1, produit scalaire et orthogonalite"
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "L'egalite des normes ne donne aucune orthogonalite ; deux vecteurs de meme norme peuvent former n'importe quel angle.",
+          "renvoi": "C1, produit scalaire et orthogonalite"
         }
       }
     },
@@ -56,18 +62,21 @@
         "A": "$(2,-3,1)$.",
         "B": "$(2,3,1)$.",
         "C": "$(1,-3,2)$.",
-        "D": "$(-2,3,-1)$."
+        "D": "$(-2,3,1)$."
       },
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le signe du coefficient de $y$ doit etre negatif : le vecteur normal canonique est $(2,-3,1)$.",
+          "renvoi": "C1, equation cartesienne d'un plan"
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Les coordonnees d'un vecteur normal sont les coefficients de $x$, $y$ et $z$ dans cet ordre.",
+          "renvoi": "C1, equation cartesienne d'un plan"
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le vecteur $(-2,3,1)$ n'est pas proportionnel a $(2,-3,1)$ : le signe de la troisieme coordonnee devrait aussi changer.",
+          "renvoi": "C1, equation cartesienne d'un plan"
         }
       }
     },
@@ -84,13 +93,16 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Deux parametres independants decrivent en general un plan ; une droite affine n'en requiert qu'un.",
+          "renvoi": "C1, representation parametrique d'une droite"
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Trois coordonnees ne signifient pas trois parametres : elles dependent toutes du meme parametre reel.",
+          "renvoi": "C1, representation parametrique d'une droite"
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Sans parametre, on decrirait un point fixe et non l'ensemble des points d'une droite.",
+          "renvoi": "C1, representation parametrique d'une droite"
         }
       }
     },
@@ -104,16 +116,19 @@
         "C": "$H$ est un point quelconque de $\\mathcal{P}$.",
         "D": "$H=M$ toujours."
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "Le projete orthogonal minimise la distance a $M$ parmi les points du plan ; il n'est pas le plus eloigne.",
+          "renvoi": "C1, projection orthogonale sur un plan"
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le point $H$ est impose par la perpendiculaire au plan passant par $M$ ; ce n'est pas un point quelconque.",
+          "renvoi": "C1, projection orthogonale sur un plan"
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "$H=M$ uniquement lorsque $M$ appartient deja au plan ; ce n'est pas vrai en general.",
+          "renvoi": "C1, projection orthogonale sur un plan"
         }
       }
     }

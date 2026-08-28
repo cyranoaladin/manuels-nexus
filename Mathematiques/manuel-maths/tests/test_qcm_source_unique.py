@@ -43,6 +43,34 @@ CHAPITRES_SOURCE_UNIQUE = sorted(
 )
 
 
+def test_second_degre_q16_cle_correspond_au_calcul_independant() -> None:
+    """Regression SCIENTIFIC_P0 : la cle doit designer l'unique valeur V(4)."""
+    donnees = json.loads(SOURCES["1SPE-SECOND-DEGRE"].read_text(encoding="utf-8"))
+    question = next(item for item in donnees["questions"] if item["id"] == "Q16")
+
+    valeur_attendue = 4 * (30 - 2 * 4) * (20 - 2 * 4)
+    assert valeur_attendue == 1056
+    options_correctes = [
+        lettre
+        for lettre, option in question["options"].items()
+        if option.strip() == f"$V(4) = {valeur_attendue}$"
+    ]
+
+    assert options_correctes == ["D"], "Q16 doit proposer une unique option egale a V(4)"
+    assert question["correcte"] == options_correctes[0]
+    assert question["correcte"] not in question["diagnostics"]
+    assert set(question["diagnostics"]) == set(question["options"]) - {question["correcte"]}
+
+
+def test_generation_ne_transforme_pas_neq_en_saut_de_ligne() -> None:
+    tex = SOURCES["1SPE-DERIVATION-LOCAL"].with_suffix(".tex").read_text(
+        encoding="utf-8"
+    )
+    assert "$a \\neq b$" in tex
+    assert "$h \\neq 0$" in tex
+    assert "$x_A \\neq x_B$" in tex
+
+
 @pytest.mark.parametrize("chapitre", CHAPITRES)
 def test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi(chapitre: str) -> None:
     """Diagnostics/renvois de distracteurs sous contrat de dette declare.
@@ -156,3 +184,13 @@ def test_le_tex_ne_diverge_pas_de_sa_source_json(chapitre: str) -> None:
         f"{chapitre} : le .tex a diverge de son .json. "
         f"Regenerer avec build_qcm_tex.py --chap {chapitre}.\n{resultat.stderr}"
     )
+
+
+@pytest.mark.parametrize("chapitre", CHAPITRES_SOURCE_UNIQUE)
+def test_la_cle_qcm_est_conditionnee_a_la_variante_professeur(chapitre: str) -> None:
+    tex = SOURCES[chapitre].with_suffix(".tex").read_text(encoding="utf-8")
+    debut = tex.index("\\ifnxVersionProfesseur")
+    cle = tex.index("Cle de correction")
+    fin = tex.rindex("\\fi")
+
+    assert debut < cle < fin

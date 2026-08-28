@@ -57,7 +57,7 @@
     {
       "id": "Q3",
       "capacite": "C2",
-      "enonce": "Un graphe admet une chaine eulerienne si et seulement si le nombre de sommets de degre impair est :",
+      "enonce": "Un graphe connexe admet une chaine eulerienne si et seulement si le nombre de sommets de degre impair est :",
       "correcte": "A",
       "options": {
         "A": "0 ou 2",
@@ -67,15 +67,15 @@
       },
       "diagnostics": {
         "B": {
-          "erreur": "Impossible d'avoir un seul sommet de degre impair.",
+          "erreur": "Le lemme des poignees impose un nombre pair de sommets de degre impair ; il ne peut donc pas y en avoir exactement un.",
           "renvoi": "C2"
         },
         "C": {
-          "erreur": "Seuls 0 et 2 sont autorises.",
+          "erreur": "Pour une chaine eulerienne dans un graphe connexe, seuls $0$ ou $2$ sommets de degre impair sont possibles.",
           "renvoi": "C2"
         },
         "D": {
-          "erreur": "Cas du cycle eulerien uniquement.",
+          "erreur": "Le cas $0$ correspond a un cycle eulerien ; une chaine eulerienne ouverte existe aussi avec exactement $2$ sommets impairs.",
           "renvoi": "C2"
         }
       }

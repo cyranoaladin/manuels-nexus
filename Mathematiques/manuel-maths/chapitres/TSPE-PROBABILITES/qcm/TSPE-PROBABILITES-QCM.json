@@ -74,23 +74,26 @@
     {
       "id": "Q4",
       "capacite": "C7",
-      "enonce": "L'additivite de la variance V(X+Y)=V(X)+V(Y) necessite :",
+      "enonce": "La condition necessaire et suffisante pour avoir V(X+Y)=V(X)+V(Y) est :",
       "options": {
-        "A": "que X et Y soient independantes",
-        "B": "que X=Y",
+        "A": "que Cov(X,Y)=0",
+        "B": "que X et Y soient independantes",
         "C": "rien de particulier",
         "D": "que E(X)=E(Y)"
       },
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "L'independance est une condition suffisante, mais plus forte que necessaire : une covariance nulle suffit.",
+          "renvoi": "C7, variance d'une somme"
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "En general, $V(X+Y)=V(X)+V(Y)+2\\operatorname{Cov}(X,Y)$ ; il faut donc annuler la covariance.",
+          "renvoi": "C7, variance d'une somme"
         },
         "D": {
-          "erreur": "Consulter le cours applicable"
+          "erreur": "L'egalite des esperances ne controle pas la covariance et n'implique pas l'additivite des variances.",
+          "renvoi": "C7, variance d'une somme"
         }
       }
     },

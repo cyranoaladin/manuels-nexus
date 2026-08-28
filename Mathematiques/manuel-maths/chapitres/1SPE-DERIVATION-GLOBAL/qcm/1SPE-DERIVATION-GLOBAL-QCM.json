@@ -201,11 +201,11 @@
           "renvoi": "M3"
         },
         "B": {
-          "erreur": "Racine de $f$ au lieu du signe de $f'$.",
+          "erreur": "Le signe negatif de $f'$ renseigne sur les variations de $f$ ; il ne permet pas d'affirmer que $f(2{,}5)=0$.",
           "renvoi": "M3"
         },
         "D": {
-          "erreur": "$f'(4)=4 \\neq 0$, pas la racine de $f'$.",
+          "erreur": "Le signe de $f'$ renseigne sur les variations de $f$, pas sur la convexite, qui s'etudie avec les variations de $f'$ ou le signe de $f''$.",
           "renvoi": "M3"
         }
       }
@@ -231,7 +231,7 @@
           "renvoi": "M4"
         },
         "D": {
-          "erreur": "$f'(3)=0$ ne signifie pas asymptote.",
+          "erreur": "Une asymptote verticale concerne le comportement de $f$ au voisinage d'une valeur ; l'annulation de $f'$ avec changement de signe decrit ici un extremum.",
           "renvoi": "M3"
         }
       }

@@ -22,7 +22,7 @@
 \item \textbf{[Q2]} Si $F$ et $G$ sont deux primitives de la meme fonction $f$ continue sur un intervalle $I$, alors :
   \begin{enumerate}[label=\Alph*.]
     \item $F=G$.
-    \item $F-G$ est une fonction affine.
+    \item $F-G$ est une fonction affine de pente non nulle.
     \item $F-G$ est constante.
     \item $F \times G$ est constante.
   \end{enumerate}
@@ -53,6 +53,7 @@
 
 \end{enumerate}
 
+\ifnxVersionProfesseur
 \clearpage
 \section*{Cle de correction — reservee au professeur}
 
@@ -61,11 +62,11 @@
 \hline
 Question & Capacite & Reponse exacte \\
 \hline
-Q1 & C1 & \textbf{A} \\
-Q2 & C1 & \textbf{A} \\
-Q3 & C1 & \textbf{A} \\
+Q1 & C1 & \textbf{C} \\
+Q2 & C1 & \textbf{C} \\
+Q3 & C1 & \textbf{B} \\
 Q4 & C1 & \textbf{A} \\
-Q5 & C1 & \textbf{A} \\
+Q5 & C1 & \textbf{B} \\
 \hline
 \end{tabular}
 \end{center}
@@ -75,32 +76,33 @@ Q5 & C1 & \textbf{A} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — La derivee de $3\mathrm e^{3x}$ vaut $9\mathrm e^{3x}$ ; le facteur devant une primitive doit etre $1/3$. \emph{Renvoi : C1, primitives de fonctions exponentielles.}
+    \item \textbf{B} — La derivee de $\mathrm e^{3x}$ vaut $3\mathrm e^{3x}$, pas $\mathrm e^{3x}$. \emph{Renvoi : C1, primitives de fonctions exponentielles.}
+    \item \textbf{D} — $\mathrm e^{3x+1}=\mathrm e\,\mathrm e^{3x}$ a pour derivee $3\mathrm e^{3x+1}$ ; ce n'est pas une primitive demandee. \emph{Renvoi : C1, primitives de fonctions exponentielles.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — Deux primitives d'une meme fonction ne sont pas necessairement egales ; elles peuvent differer d'une constante. \emph{Renvoi : C1, ensemble des primitives.}
+    \item \textbf{B} — Puisque $(F-G)'=f-f=0$, la difference est constante : elle ne peut donc pas etre affine de pente non nulle. \emph{Renvoi : C1, ensemble des primitives.}
+    \item \textbf{D} — Aucune propriete generale ne rend le produit de deux primitives constant. \emph{Renvoi : C1, ensemble des primitives.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — La derivee de $5x+C$ vaut $5$, et non $5(5x+C)$ en general. \emph{Renvoi : C1, equation differentielle y'=ay.}
+    \item \textbf{C} — $C\mathrm e^{-5x}$ satisfait $y'=-5y$, pas $y'=5y$. \emph{Renvoi : C1, equation differentielle y'=ay.}
+    \item \textbf{D} — Le parametre arbitraire doit multiplier $\mathrm e^{5x}$ ; il ne remplace pas le coefficient $5$ dans l'exposant. \emph{Renvoi : C1, equation differentielle y'=ay.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{B} — En posant $y_0=-4$, le membre de droite vaut $3(-4)-12=-24$, alors que la derivee d'une constante vaut $0$. \emph{Renvoi : C1, solution constante.}
+    \item \textbf{C} — La constante $12$ annule seulement le terme soustrait ; elle ne verifie pas $3y_0-12=0$. \emph{Renvoi : C1, solution constante.}
+    \item \textbf{D} — Le produit $3\times(-12)$ n'est pas la condition d'equilibre ; il faut resoudre $3y_0-12=0$. \emph{Renvoi : C1, solution constante.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
-    \item \textbf{B} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{C} — Consulter le cours correspondant \emph{Renvoi : M1.}
-    \item \textbf{D} — Consulter le cours correspondant \emph{Renvoi : M1.}
+    \item \textbf{A} — La valeur initiale $y_p(0)$ n'etablit pas que $y_p$ satisfait l'equation differentielle sur tout l'intervalle. \emph{Renvoi : C1, solution particuliere.}
+    \item \textbf{C} — Deriver $f$ n'est pas la verification demandee ; il faut calculer $y_p'$ puis comparer a $ay_p+f$. \emph{Renvoi : C1, solution particuliere.}
+    \item \textbf{D} — Resoudre $y_p=0$ ne verifie pas l'equation ; une solution particuliere peut ne jamais s'annuler. \emph{Renvoi : C1, solution particuliere.}
   \end{itemize}
 \end{itemize}
+\fi

@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nexus.local/schemas/v1/human-review-receipt.schema.json",
+  "title": "Nexus human review receipt",
+  "description": "Recu canonique d'une revue humaine de contenu portant sur un chapitre gele. Un recu n'est jamais produit par une machine : une machine peut seulement enregistrer fidelement un verdict humain reellement recu.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "human_review_receipt_schema_version",
+    "review_id",
+    "chapter_id",
+    "manual_id",
+    "review_role",
+    "reviewer_name",
+    "reviewer_identity_reference",
+    "reviewer_is_human",
+    "review_timestamp",
+    "verdict",
+    "repository_source_sha",
+    "semantic_review_digest",
+    "review_render_digest",
+    "object_set_digest",
+    "object_count",
+    "programme_authority_digest",
+    "packet_digest",
+    "comments",
+    "blocking_findings",
+    "attestation_text"
+  ],
+  "properties": {
+    "human_review_receipt_schema_version": {
+      "const": 1
+    },
+    "review_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{2,127}$"
+    },
+    "chapter_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "manual_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "review_role": {
+      "enum": [
+        "EXPERT_MATHEMATIQUE",
+        "EXPERT_NSI",
+        "EXPERT_PROGRAMME_PEDAGOGIE"
+      ]
+    },
+    "reviewer_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewer_identity_reference": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Reference d'identite stable et non secrete distinguant deux humains (identifiant interne de personne, adresse professionnelle, numero de dossier). Jamais un secret."
+    },
+    "reviewer_is_human": {
+      "const": true
+    },
+    "review_timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "verdict": {
+      "enum": [
+        "APPROVED",
+        "CHANGES_REQUESTED",
+        "REJECTED"
+      ]
+    },
+    "repository_source_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "semantic_review_digest": {
+      "$ref": "#/$defs/digest"
+    },
+    "review_render_digest": {
+      "$ref": "#/$defs/digest"
+    },
+    "object_set_digest": {
+      "$ref": "#/$defs/digest"
+    },
+    "object_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "programme_authority_digest": {
+      "$ref": "#/$defs/digest"
+    },
+    "packet_digest": {
+      "$ref": "#/$defs/digest"
+    },
+    "comments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "comment_id",
+          "classification",
+          "text"
+        ],
+        "properties": {
+          "comment_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "classification": {
+            "enum": [
+              "NON_BLOCKING_OBSERVATION"
+            ]
+          },
+          "object_ref": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "blocking_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "finding_id",
+          "object_ref",
+          "severity",
+          "description"
+        ],
+        "properties": {
+          "finding_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "object_ref": {
+            "type": "string",
+            "minLength": 1,
+            "description": "object_id ou chemin relatif au depot d'un objet appartenant a l'ensemble gele."
+          },
+          "severity": {
+            "enum": [
+              "P0",
+              "P1",
+              "P2"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "attestation_text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "receipt_state": {
+      "enum": [
+        "CURRENT",
+        "HISTORICAL_STALE"
+      ]
+    },
+    "recorded_by": {
+      "type": "string",
+      "description": "Acteur ayant transcrit le verdict humain. N'est jamais le reviewer."
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

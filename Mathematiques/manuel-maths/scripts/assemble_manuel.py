@@ -1148,6 +1148,12 @@ def student_text_violations(text: str) -> list[str]:
             "note enseignant",
             r"(?i:\b(?:note|réponse|reponse)\s+(?:professeur|enseignant)\b)",
         ),
+        ("clé de correction", r"(?i:\bcl[ée]\s+de\s+correction\b)"),
+        (
+            "réponses réservées",
+            r"(?i:\br[ée]ponses?\s+r[ée]serv[ée]es?\b)",
+        ),
+        ("marqueur teacher-only", r"(?i:\bteacher[- ]only\b)"),
     )
     return [reason for reason, pattern in checks if re.search(pattern, text)]
 

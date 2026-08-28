@@ -6,12 +6,25 @@
 % assert E == 800
 % E2 = 8000**2*p + 10000**2*(1-p)
 % V = E2 - E**2
+% assert V == 77760000
 % sigma = sqrt(V)
-% # 5 projets: X~B(5, 0.6), gain = 1600*X - 2000*5
-% # Oui on fait ca simplement par E et V
-% E5 = 5 * (1600*p + (-2000)*(1-p))
-% assert E5 == 5*(960-800)
+% assert round(float(sigma)) == 8818
+% # 5 projets independants : Y = gain d'un projet, S = gain total
+% E_Y = 1600*p + (-2000)*(1-p)
+% assert E_Y == 160
+% E_Y2 = 1600**2*p + 2000**2*(1-p)
+% assert E_Y2 == 3136000
+% V_Y = E_Y2 - E_Y**2
+% assert V_Y == 3110400
+% E5 = 5 * E_Y
 % assert E5 == 800
+% V_S = 5 * V_Y
+% assert V_S == 15552000
+% sigma_S = sqrt(V_S)
+% assert abs(float(sigma_S) - 3943.602) < 1e-3
+% assert round(float(sigma_S)) == 3944
+% # la diversification divise l'ecart-type par sqrt(5)
+% assert abs(float(sigma/sigma_S) - float(sqrt(5))) < 1e-9
 % END-VERIFY
 \begin{corrige}{1SPE-VARALEA-EX-048}
 
@@ -26,6 +39,10 @@
 $V(G) = 78\,400\,000 - 640\,000 = 77\,760\,000$. $\sigma(G) \approx 8\,818$~euros. Le risque est élevé.
 
 \medskip
-\textbf{4.} Avec $5$ projets à $2000$~euros : gain par projet $= 1600$ (succès) ou $-2000$ (échec). $E = 5 \times 160 = 800$~euros (même espérance). Mais $\sigma \approx 3946$~euros (divisé par $\sqrt{5}$ environ) : le risque est réduit par la diversification.
+\textbf{4.} Avec $5$ projets à $2000$~euros : le gain $Y$ d'un projet vaut $1600$ (succès) ou $-2000$ (échec), donc $E(Y) = 1600 \times 0{,}6 + (-2000) \times 0{,}4 = 160$ et le gain total $S$ vérifie $E(S) = 5 \times 160 = 800$~euros : même espérance.
+
+$E(Y^2) = 1600^2 \times 0{,}6 + 2000^2 \times 0{,}4 = 1\,536\,000 + 1\,600\,000 = 3\,136\,000$, donc $V(Y) = 3\,136\,000 - 160^2 = 3\,110\,400$.
+
+Les cinq projets étant indépendants, $V(S) = 5 \times 3\,110\,400 = 15\,552\,000$ et $\sigma(S) = \sqrt{15\,552\,000} \approx 3\,944$~euros. L'écart type est exactement divisé par $\sqrt{5}$ par rapport au projet unique ($8\,818 / \sqrt{5} \approx 3\,944$) : le risque est réduit par la diversification.
 
 \end{corrige}

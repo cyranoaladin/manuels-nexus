@@ -13,7 +13,7 @@
 
 \item \textbf{[Q1]} Parmi les proprietes suivantes, laquelle caracterise la fonction exponentielle ?
   \begin{enumerate}[label=\Alph*.]
-    \item C'est la seule fonction derivable sur $\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(1) = \mathrm{e}$.
+    \item C'est la seule fonction derivable sur $\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(1) = 1$.
     \item C'est la seule fonction derivable sur $\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(0) = 1$.
     \item C'est la seule fonction derivable sur $\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(0) = 0$.
     \item C'est la seule fonction derivable sur $\mathbb{R}$ telle que $f'(x) = x f(x)$ pour tout $x$ et $f(0) = 1$.
@@ -141,6 +141,7 @@
 
 \end{enumerate}
 
+\ifnxVersionProfesseur
 \clearpage
 \section*{Cle de correction — reservee au professeur}
 
@@ -173,7 +174,7 @@ Q15 & C5 & \textbf{C} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — La condition initiale correcte est $f(0) = 1$, pas $f(1) = \mathrm{e}$. L'eleve confond la condition qui definit l'exponentielle avec une consequence ($\exp(1) = \mathrm{e}$). \emph{Renvoi : M1, etape 1.}
+    \item \textbf{A} — La solution de $f'=f$ telle que $f(1)=1$ est $f(x)=\mathrm{e}^{x-1}$, pas la fonction exponentielle $x\mapsto\mathrm{e}^x$. \emph{Renvoi : M1, etape 1.}
     \item \textbf{C} — Avec $f(0) = 0$, la seule solution de $f' = f$ est la fonction nulle $f = 0$, pas l'exponentielle. La condition initiale $f(0) = 1$ est essentielle. \emph{Renvoi : M1, etape 1.}
     \item \textbf{D} — L'equation differentielle de l'exponentielle est $f' = f$, pas $f'(x) = xf(x)$. Confusion entre deux equations differentielles distinctes. \emph{Renvoi : M1, etape 1.}
   \end{itemize}
@@ -222,9 +223,7 @@ Q15 & C5 & \textbf{C} \\
   \item \textbf{Q9}
   \begin{itemize}
     \item \textbf{B} — L'eleve a mal compare les exposants. Or $2{,}5^2 = 6{,}25 < 7$ donc $2{,}5 < \sqrt{7}$, et par croissance de l'exponentielle, $\mathrm{e}^{2{,}5} < \mathrm{e}^{\sqrt{7}}$. \emph{Renvoi : M3, etape 3.}
-    \item \textbf{C} — $2{,}5 
-eq \sqrt{7}$ car $2{,}5^2 = 6{,}25 
-eq 7$. Comme les exposants sont differents et l'exponentielle est injective, les images sont differentes. \emph{Renvoi : M3 ; R3.}
+    \item \textbf{C} — $2{,}5 \neq \sqrt{7}$ car $2{,}5^2 = 6{,}25 \neq 7$. Comme les exposants sont differents et l'exponentielle est injective, les images sont differentes. \emph{Renvoi : M3 ; R3.}
     \item \textbf{D} — On peut comparer sans calculatrice en comparant les exposants : $2{,}5^2 = 6{,}25 < 7$ donc $2{,}5 < \sqrt{7}$, et on utilise la croissance de $\exp$. \emph{Renvoi : M3, etape 3.}
   \end{itemize}
   \item \textbf{Q10}
@@ -261,7 +260,7 @@ eq 7$. Comme les exposants sont differents et l'exponentielle est injective, les
   \begin{itemize}
     \item \textbf{A} — L'eleve a resolu $x^2 = 4$ mais a donne $x = 4$ au lieu de $x = \pm 2$. Confusion entre $x^2 = 4$ et $x = 4$. \emph{Renvoi : M5, etape 1 ; R3.}
     \item \textbf{B} — L'eleve a oublie la solution $x = -2$. L'equation $x^2 = 4$ admet deux solutions : $x = 2$ et $x = -2$. \emph{Renvoi : M5, etape 1 ; R3.}
-    \item \textbf{D} — L'eleve a teste $x = 0$ : $\mathrm{e}^{0 - 4} = \mathrm{e}^{-4} 
-eq 1$. Il faut $x^2 - 4 = 0$, pas $x = 0$. \emph{Renvoi : M5, etape 1.}
+    \item \textbf{D} — L'eleve a teste $x = 0$ : $\mathrm{e}^{0 - 4} = \mathrm{e}^{-4} \neq 1$. Il faut $x^2 - 4 = 0$, pas $x = 0$. \emph{Renvoi : M5, etape 1.}
   \end{itemize}
 \end{itemize}
+\fi

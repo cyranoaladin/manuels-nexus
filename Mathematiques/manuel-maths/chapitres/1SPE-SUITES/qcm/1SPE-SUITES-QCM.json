@@ -12,18 +12,18 @@
         "C": "$8$",
         "D": "$7$"
       },
-      "correcte": "C",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
-          "erreur": "L'eleve a calcule $2 \\times 3^2 - 3 \\times 3 + 1 = 18 - 9 + 1$ mais a oublie le coefficient 2 dans $2 \\times 9 = 18$ et a pose $2 \\times 3 + 1 = 10$. Erreur de calcul partiel.",
+        "B": {
+          "erreur": "L'eleve a calcule $2 \\times 3^2 + 1 = 19$ en oubliant le terme $-3 \\times 3 = -9$.",
           "renvoi": "M1, etape 2"
         },
-        "B": {
-          "erreur": "L'eleve a remplace $n$ par $4$ au lieu de $3$ (decalage d'indice : confusion entre 'le 3e terme' et $u_3$).",
-          "renvoi": "M1, etape 1"
+        "C": {
+          "erreur": "L'eleve a calcule $18-9-1=8$ en utilisant $-1$ au lieu du terme constant $+1$.",
+          "renvoi": "M1, etape 2"
         },
         "D": {
-          "erreur": "L'eleve a calcule $2 \\times 3 - 3 + 1 = 4$ ou a confondu $n^2$ avec $n$ dans la formule, obtenant $2 \\times 3 - 3 + 1 = 4$ ou une variante. Erreur sur l'evaluation de $n^2$.",
+          "erreur": "L'eleve a conserve seulement $2 \\times 3 + 1 = 7$ : il a remplace $n^2$ par $n$ et omis le terme $-3n$.",
           "renvoi": "M1, etape 2"
         }
       }
@@ -101,7 +101,7 @@
           "renvoi": "M2, etape 3"
         },
         "D": {
-          "erreur": "L'eleve a calcule $u_0 = 4 \\times 0 - 7 = -3$ et a confondu le premier terme avec la raison. $u_0 = -3$ est le premier terme, la raison est $r = u_1 - u_0 = -3 - (-3) = ...$. Confusion premier terme / raison.",
+          "erreur": "L'eleve a calcule $u_1=4-7=-3$ et a confondu ce terme avec la raison. Or $u_0=-7$, donc la difference vaut $4$ : $u_1-u_0=-3-(-7)=4$.",
           "renvoi": "M2, etape 3"
         }
       }
@@ -220,18 +220,18 @@
         "C": "Pour montrer qu'une suite est geometrique, il faut calculer $u_{n+1}/u_n$ et verifier que ce quotient est constant pour tout $n$.",
         "D": "La raison d'une suite geometrique est toujours un entier positif."
       },
-      "correcte": "C",
+      "correcte": "B",
       "diagnostics": {
         "A": {
           "erreur": "Preuve insuffisante : verifier deux egalites de quotients consecutifs ne prouve pas la constance pour tout $n$. Il faut un raisonnement general valable pour tout $n \\in \\mathbb{N}$.",
           "renvoi": "M3, etape 4"
         },
-        "B": {
-          "erreur": "Une suite geometrique ne peut pas avoir de terme nul (le quotient $u_{n+1}/u_n$ serait une division par zero). C'est une condition necessaire : $u_n \\neq 0$ pour tout $n$.",
-          "renvoi": "M3, etape 1"
+        "C": {
+          "erreur": "La methode des quotients n'est valable que lorsque tous les termes utilises au denominateur sont non nuls. La definition generale est $u_{n+1}=q u_n$ pour tout $n$.",
+          "renvoi": "M3, etapes 1 et 4"
         },
         "D": {
-          "erreur": "La raison peut etre n'importe quel reel non nul : elle peut etre negative (ex. $q = -2$), fractionnaire (ex. $q = 1/3$) ou irrationnelle.",
+          "erreur": "La raison peut etre n'importe quel reel, y compris $0$ ; elle peut aussi etre negative, fractionnaire ou irrationnelle.",
           "renvoi": "M3"
         }
       }
@@ -270,7 +270,7 @@
         "A": "$40$",
         "B": "$121$",
         "C": "$242$",
-        "D": "$15$"
+        "D": "$10$"
       },
       "correcte": "B",
       "diagnostics": {
@@ -279,7 +279,7 @@
           "renvoi": "M4, etape 1"
         },
         "C": {
-          "erreur": "L'eleve a applique la formule avec $n+1 = 5$ mais a ecrit $1 \\times (1 - 3^6)/(1-3) = (1-729)/(-2) = 364$... ou a confondu l'exposant : $1 \\times (1-3^5)/(1-3) = -242/(-2) = 121$ est correct, mais $3^6$ a la place de $3^5$ donne $242$. Erreur sur l'exposant dans la formule geometrique.",
+          "erreur": "L'option $242$ est le double de la somme correcte : l'eleve a calcule $3^5-1=242$ mais a oublie de diviser par $3-1=2$.",
           "renvoi": "M4, etape 3"
         },
         "D": {
@@ -477,7 +477,7 @@
       "options": {
         "A": "$7$",
         "B": "$21$",
-        "C": "$64$",
+        "C": "$67$",
         "D": "$22$"
       },
       "correcte": "C",

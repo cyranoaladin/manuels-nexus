@@ -56,18 +56,21 @@
         "A": "$4(3x-2)^3$",
         "B": "$12(3x-2)^3$",
         "C": "$3(3x-2)^4$",
-        "D": "$4 \\cdot 3 \\cdot (3x-2)^3$"
+        "D": "$12(3x-2)^4$"
       },
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "L'eleve a derive la puissance exterieure mais a oublie de multiplier par la derivee $3$ de $3x-2$.",
+          "renvoi": "C1, derivee d'une fonction composee"
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "L'eleve a multiplie par la derivee interieure $3$ sans deriver la puissance quatrieme.",
+          "renvoi": "C1, derivee d'une fonction composee"
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le coefficient $12$ est correct, mais l'exposant doit diminuer de $4$ a $3$ lors de la derivation.",
+          "renvoi": "C1, derivee d'une puissance"
         }
       }
     },
@@ -130,13 +133,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Les extremums sont inverses : le signe de $f'$ passe de $+$ a $-$ en $-1$ puis de $-$ a $+$ en $1$.",
+          "renvoi": "C2, variations et extremums"
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "$f'(0)=-3$ n'est pas nul ; $x=0$ ne peut donc pas etre l'extremum annonce.",
+          "renvoi": "C2, variations et extremums"
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "$f'$ s'annule en $-1$ et $1$ avec changement de signe ; la fonction admet donc deux extremums locaux.",
+          "renvoi": "C2, variations et extremums"
         }
       }
     },
@@ -334,16 +340,19 @@
         "C": "exacte",
         "D": "impossible a determiner"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
-          "erreur": "Consulter le cours correspondant"
+        "B": {
+          "erreur": "La fonction exponentielle est convexe : sa courbe est au-dessus de chacune de ses tangentes, donc $\\mathrm{e}^{0{,}1}>1{,}1$.",
+          "renvoi": "C6, convexite et tangentes"
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La tangente fournit une approximation au premier ordre, pas une egalite exacte hors du point de tangence $0$.",
+          "renvoi": "C6, approximation affine"
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La convexite determine le sens de l'erreur : $\\mathrm{e}^{0{,}1}\\approx1{,}10517>1{,}1$.",
+          "renvoi": "C6, convexite et tangentes"
         }
       }
     }

@@ -12,16 +12,19 @@
         "C": "$\\ln 2 \\times \\ln x$.",
         "D": "$(\\ln x)^2$."
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "Le coefficient $2$ est a l'interieur du logarithme : la propriete donne $\\ln(2x)=\\ln 2+\\ln x$, pas $2\\ln x$.",
+          "renvoi": "C1, logarithme d'un produit"
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Le logarithme transforme un produit en somme, pas en produit de logarithmes.",
+          "renvoi": "C1, logarithme d'un produit"
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Aucune propriete ne transforme $\\ln(2x)$ en $(\\ln x)^2$ ; il faut separer les deux facteurs.",
+          "renvoi": "C1, logarithme d'un produit"
         }
       }
     },
@@ -35,16 +38,19 @@
         "C": "$\\dfrac{5x+1}{5}$.",
         "D": "$5\\ln(5x+1)$."
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "L'eleve a utilise $(\\ln u)'=1/u$ sans multiplier par $u'=5$.",
+          "renvoi": "C1, derivee de ln(u)"
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La formule est $u'/u$, et non $u/u'$ : le numerateur doit etre la derivee $5$.",
+          "renvoi": "C1, derivee de ln(u)"
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Deriver une composee logarithmique ne consiste pas a multiplier le logarithme par la derivee interieure.",
+          "renvoi": "C1, derivee de ln(u)"
         }
       }
     },
@@ -58,16 +64,19 @@
         "C": "$+\\infty$.",
         "D": "$1$."
       },
-      "correcte": "A",
+      "correcte": "C",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "$\\ln x$ ne tend pas vers $0$ lorsque $x$ tend vers $+\\infty$ ; sa croissance est lente mais non bornee.",
+          "renvoi": "C1, limites du logarithme"
         },
-        "C": {
-          "erreur": "Consulter le cours correspondant"
+        "B": {
+          "erreur": "$\\ln x$ est croissante sur $]0,+\\infty[$ ; elle ne peut pas tendre vers $-\\infty$ a droite.",
+          "renvoi": "C1, limites du logarithme"
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "$1$ est la valeur $\\ln(\\mathrm e)$, pas la limite de $\\ln x$ en $+\\infty$.",
+          "renvoi": "C1, limites du logarithme"
         }
       }
     },
@@ -81,16 +90,19 @@
         "C": "$1$.",
         "D": "Cette limite n'existe pas."
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "Bien que $\\ln x$ tende vers $-\\infty$, le facteur $x$ tend vers $0$ assez vite pour que le produit tende vers $0$.",
+          "renvoi": "C1, croissance comparee"
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La limite remarquable $x\\ln x$ en $0^+$ vaut $0$, et non $1$.",
+          "renvoi": "C1, croissance comparee"
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "La limite existe : en posant $x=1/t$, on obtient $-\\ln(t)/t$, qui tend vers $0$.",
+          "renvoi": "C1, croissance comparee"
         }
       }
     },
@@ -104,16 +116,19 @@
         "C": "la fonction exponentielle a nouveau.",
         "D": "l'inverse."
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
-          "erreur": "Consulter le cours correspondant"
+        "A": {
+          "erreur": "La fonction carre ne transforme pas directement l'equation exponentielle en une equation lineaire en $x$.",
+          "renvoi": "C1, equations exponentielles"
         },
         "C": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Appliquer encore l'exponentielle complique l'equation ; $\\ln$ est la fonction reciproque adaptee.",
+          "renvoi": "C1, equations exponentielles"
         },
         "D": {
-          "erreur": "Consulter le cours correspondant"
+          "erreur": "Prendre les inverses donne $\\mathrm e^{-2x}=1/7$ sans isoler directement $x$ ; appliquer $\\ln$ donne $2x=\\ln 7$.",
+          "renvoi": "C1, equations exponentielles"
         }
       }
     }

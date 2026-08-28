@@ -1,0 +1,415 @@
+artifact_type: human_review_governance
+schema_version: 1
+schema_ref: audit/schemas/v1/human-review-governance.schema.json
+human_review_receipt_schema_version: 1
+generated_by: scripts/human_review_governance.py
+
+decision:
+  id: nexus-human-review-contract-2026-08-26
+  date: '2026-08-26'
+  human_instruction: >-
+    Fermer de maniere generique l'ambiguite de revue humaine constatee sur
+    1SPE-SUITES : deux revues humaines distinctes, granularite chapitre gele,
+    trois verdicts canoniques, binding semantique separe du binding de rendu.
+  scope: gouvernance des reviews uniquement
+  approves_no_chapter: true
+  publication_approval: false
+  release_acceptance: false
+  baseline_update: false
+  d7_oracle_modified: false
+
+# ---------------------------------------------------------------- section 1
+roles:
+  MATH:
+    manuals: [1SPE, TSPE, TCOMPL, TEXPERTES]
+    review_a: EXPERT_MATHEMATIQUE
+    review_b: EXPERT_PROGRAMME_PEDAGOGIE
+  NSI:
+    manuals: [1NSI, TNSI]
+    review_a: EXPERT_NSI
+    review_b: EXPERT_PROGRAMME_PEDAGOGIE
+    role_provenance: >-
+      audit/schemas/v1/1nsi-content-review.schema.json ne porte que
+      reviewer_id / reviewer_model pour des revues machine (dimensions
+      scientific et pedagogical de audit/1NSI_CONTENT_REVIEW_POLICY.yaml) et ne
+      definit aucun nom de role humain. EXPERT_NSI est donc adopte comme nom
+      disciplinaire canonique, projete sur la dimension scientific existante ;
+      EXPERT_PROGRAMME_PEDAGOGIE est partage avec les manuels de mathematiques
+      et se projette sur la dimension pedagogical existante. Aucun nom de role
+      preexistant n'a ete remplace.
+    human_authorisation:
+      decision_date: '2026-08-26'
+      authorised: true
+      statement: >-
+        Le role EXPERT_NSI est autorise en HUMAN_REVIEW_GOVERNANCE v1 comme
+        equivalent disciplinaire d'EXPERT_MATHEMATIQUE pour les chapitres NSI.
+        Un chapitre NSI exige EXPERT_NSI + EXPERT_PROGRAMME_PEDAGOGIE, portes
+        par deux humains distincts, sous le meme contrat d'independance.
+      constitutes_no_nsi_review: true
+
+role_dimensions:
+  EXPERT_MATHEMATIQUE: scientific
+  EXPERT_NSI: scientific
+  EXPERT_PROGRAMME_PEDAGOGIE: pedagogical
+
+machine_actors_forbidden_as_reviewer: true
+forbidden_reviewer_identity_patterns:
+  - '(?i)\bcodex\b'
+  - '(?i)\bclaude\b'
+  - '(?i)\bcopilot\b'
+  - '(?i)\bchatgpt\b'
+  - '(?i)\bgpt-?[0-9]'
+  - '(?i)\bgemini\b'
+  - '(?i)\bllama\b'
+  - '(?i)\bmistral\b'
+  - '(?i)\bcursor\b'
+  - '(?i)\bdevin\b'
+  - '(?i)\bagent\b'
+  - '(?i)\bbot\b'
+  - '(?i)\bassistant\b'
+  - '(?i)\bautomat'
+  - '(?i)\bmachine\b'
+  - '(?i)\bai[-_ ]?reviewer\b'
+  - '(?i)\bllm\b'
+  - '(?i)\bmodel\b'
+machine_permitted_actions:
+  - preparer le packet
+  - produire les controles machine
+  - enregistrer fidelement un verdict humain reellement recu
+machine_forbidden_actions:
+  - rendre un verdict
+  - se declarer reviewer
+  - approuver un objet
+  - promouvoir un statut sans recu humain requis
+
+# ---------------------------------------------------------------- section 2
+granularity: frozen_chapter
+frozen_set_rules:
+  approval_scope: chapter_object_set_only
+  implicit_promotion_by_file_proximity: forbidden
+  implicit_promotion_by_capability: forbidden
+  any_covered_object_failing_blocks_role: true
+
+# ---------------------------------------------------------------- section 3
+verdicts:
+  - APPROVED
+  - CHANGES_REQUESTED
+  - REJECTED
+forbidden_verdicts:
+  - AUTO_APPROVED
+  - APPROVED_BY_MACHINE
+  - ASSUMED_APPROVED
+  - APPROVED_WITHOUT_REVIEW
+comment_classes:
+  - NON_BLOCKING_OBSERVATION
+  - BLOCKING_FINDING
+non_blocking_observation_rule: >-
+  Une observation scientifique ou pedagogique reellement non resolue ne peut pas
+  etre classee NON_BLOCKING_OBSERVATION.
+
+# ---------------------------------------------------------------- section 4-5
+digests:
+  algorithm: sha256
+  encoding: canonical_json_utf8_sorted_keys_compact
+  prefix: 'sha256:'
+  object_set_digest:
+    name: OBJECT_SET_DIGEST
+    algorithm_id: NEXUS_OBJECT_SET_DIGEST_V1
+    covers: [object_id, object_type, section, path]
+  semantic_review_digest:
+    name: SEMANTIC_REVIEW_DIGEST
+    algorithm_id: NEXUS_SEMANTIC_REVIEW_DIGEST_V1
+    covers:
+      - tous les objets publishables du chapitre
+      - contenu source normalise de chaque objet
+      - contrat du chapitre
+      - capacites
+      - mapping programme
+      - qcm
+      - remediations
+      - evaluations
+      - corrections
+      - ordre d'assemblage eleve et professeur
+      - regles de variante affectant le contenu eleve/professeur
+      - autorite programme applicable
+    excludes:
+      - timestamp
+      - cwd
+      - run_id
+      - chemin absolu
+      - pdf binaire
+      - metadonnees de build non semantiques
+      - fichiers de rapport auto-referents
+      - champ de gouvernance META.status
+      - champ de gouvernance contrat.statut
+    governance_exclusion_allowlist:
+      meta_fields: [status]
+      contract_fields: [statut]
+      closed: true
+      widening_requires: [contract change, schema change, mutation test update]
+    governance_status_exclusion_rationale: >-
+      META.status et contrat.statut sont les champs que la revue elle-meme fait
+      evoluer. Les inclure rendrait tout recu STALE au moment meme de la
+      promotion qu'il autorise.
+  review_render_digest:
+    name: REVIEW_RENDER_DIGEST
+    algorithm_id: NEXUS_REVIEW_RENDER_DIGEST_V1
+    covers: [chemin relatif du rendu, sha256 du rendu]
+    independent_from_semantic: true
+  programme_authority_digest:
+    name: PROGRAMME_AUTHORITY_DIGEST
+    algorithm_id: NEXUS_PROGRAMME_AUTHORITY_DIGEST_V1
+    source: audit/OFFICIAL_AUTHORITIES_2026_2027.json
+    covers: ["manuals[manual].PROGRAMME_D_ENSEIGNEMENT"]
+  packet_digest:
+    name: PACKET_DIGEST
+    algorithm_id: NEXUS_REVIEW_PACKET_DIGEST_V1
+    excludes: [generated_at, packet_digest, repository_source_sha]
+traceability:
+  repository_source_sha_recorded: true
+  repository_source_sha_in_semantic_digest: false
+
+# ---------------------------------------------------------------- section 6
+staleness:
+  content_receipt_stale_when_changed:
+    - source couvert
+    - contrat
+    - capacite
+    - qcm
+    - correction
+    - remediation
+    - evaluation
+    - mapping programme pertinent
+    - autorite programme
+    - ordre semantique d'assemblage
+    - regle de variante affectant le contenu visible
+  style_only_change_keeps_content_receipt_current_if:
+    - semantic_review_digest strictement identique
+    - extracted_semantic_content_identical
+    - object_order_identical
+    - student_teacher_visibility_identical
+  style_only_extensions: ['.cls', '.sty']
+  style_only_dimensions: [charte, pagination, couleur, police, composition_visuelle]
+  visual_evidence_stale_when_render_digest_changes: true
+  content_review_and_visual_review_are_independent_authorities: true
+
+# ---------------------------------------------------------------- section 7
+packet_a_controls:
+  role: DISCIPLINARY
+  minimum_controls:
+    - exactitude de chaque definition
+    - proprietes
+    - hypotheses
+    - demonstrations
+    - raisonnements
+    - exemples
+    - exercices
+    - corrections
+    - qcm
+    - diagnostics qcm
+    - remediations
+    - evaluations
+    - graphiques scientifiques
+    - algorithmes
+    - valeurs numeriques
+    - arrondis
+    - unites
+    - coherence exercice/correction
+    - absence de contenu wrong-year utilise comme exigible
+  reviewer_must_examine_current_content_not_only_diffs: true
+
+# ---------------------------------------------------------------- section 8
+packet_b_controls:
+  role: EXPERT_PROGRAMME_PEDAGOGIE
+  minimum_controls:
+    - conformite au BO applicable
+    - exhaustivite des attendus obligatoires
+    - bonne classification des extensions
+    - niveau de classe
+    - progression
+    - prerequis
+    - charge cognitive
+    - qualite des activites
+    - qualite des methodes
+    - progressivite des exercices
+    - diagnostics
+    - qcm
+    - remediations
+    - evaluations
+    - differenciation
+    - coherence didactique
+    - absence d'exigence anticipee de terminale
+    - respect du cahier des charges nexus
+  reviewer_must_examine_current_content_not_only_diffs: true
+
+# ---------------------------------------------------------------- section 9
+qcm_human_gate:
+  third_independent_reviewer_required: false
+  condition_a: toutes les questions du chapitre incluses dans le packet du role disciplinaire
+  condition_b: toutes les questions du chapitre incluses dans le packet EXPERT_PROGRAMME_PEDAGOGIE
+  satisfied_when:
+    review_a: APPROVED
+    review_b: APPROVED
+  otherwise: PENDING
+  out_of_set_qcm_never_benefits_from_chapter_receipt: true
+
+# ---------------------------------------------------------------- section 10
+receipt:
+  schema_version: 1
+  schema_ref: audit/schemas/v1/human-review-receipt.schema.json
+  required_fields:
+    - review_id
+    - chapter_id
+    - review_role
+    - reviewer_name
+    - reviewer_identity_reference
+    - reviewer_is_human
+    - review_timestamp
+    - verdict
+    - repository_source_sha
+    - semantic_review_digest
+    - review_render_digest
+    - object_set_digest
+    - object_count
+    - programme_authority_digest
+    - packet_digest
+    - comments
+    - blocking_findings
+    - attestation_text
+  no_secrets: true
+  no_fake_cryptographic_signature: true
+
+# ---------------------------------------------------------------- section 11
+attestation:
+  machine_format: >-
+    I reviewed the frozen chapter {chapter_id}, object set {object_set_digest},
+    packet {packet_digest}, as {review_role}. Verdict: {verdict}.
+  human_language_free: true
+  recording_requires_real_received_verdict: true
+
+# ---------------------------------------------------------------- section 12
+approval_rule:
+  approved_requires_empty_blocking_findings: true
+  changes_requested_requires_findings: true
+  finding_required_fields: [finding_id, object_ref, severity, description]
+  after_correction:
+    previous_receipt_state: HISTORICAL_STALE
+    new_review_required_on_new_semantic_digest: true
+    mutation_of_previous_receipt: forbidden
+
+# ---------------------------------------------------------------- section 13
+independence:
+  distinct_reviewer_identity_reference_required: true
+  same_human_cannot_satisfy_both_roles: true
+  distinct_organisations_required: false
+  meaning: au minimum deux humains distincts rendant deux decisions distinctes
+
+# ---------------------------------------------------------------- section 14
+status_transitions:
+  canonical_status_enum:
+    source: Mathematiques/manuel-maths/schemas/exercice.schema.json
+    values: [draft, generated, verified, manual_review, needs_review, ready, approved, rejected]
+  table:
+    - current_status: generated
+      required_machine_dimensions: [mapping, content_sufficiency, science, pedagogy, editorial, assessment, year]
+      required_human_receipts: []
+      next_canonical_status: verified
+    - current_status: manual_review
+      required_machine_dimensions: [science]
+      required_human_receipts: []
+      next_canonical_status: needs_review
+      note: sortie d'un controle machine exigeant une inspection humaine du recu d'execution
+    - current_status: verified
+      required_machine_dimensions: [mapping, content_sufficiency, science, pedagogy, editorial, assessment, year, semantic_evidence_current]
+      required_human_receipts: []
+      next_canonical_status: needs_review
+      note: le chapitre devient eligible a la revue humaine, les packets sont emis
+    - current_status: needs_review
+      required_machine_dimensions: [mapping, content_sufficiency, science, pedagogy, editorial, assessment, year, semantic_evidence_current]
+      required_human_receipts: [review_a_approved_current, review_b_approved_current]
+      next_canonical_status: approved
+    - current_status: approved
+      required_machine_dimensions: [render_evidence_current]
+      required_human_receipts: [d7_visual_approved]
+      next_canonical_status: ready
+      note: ready signifie print/publish ready et reste gouverne par le gate D7 independant
+    - current_status: any
+      required_machine_dimensions: []
+      required_human_receipts: [any_receipt_rejected]
+      next_canonical_status: rejected
+  contract_transitions:
+    - current_status: draft
+      required_human_receipts: [review_a_approved_current, review_b_approved_current]
+      next_canonical_status: valide
+  prohibited_without_human_receipt: [approved, ready, rejected]
+  out_of_frozen_set_promotion: forbidden
+
+# ---------------------------------------------------------------- section 15
+full_atom_criteria:
+  - mapping
+  - content_sufficiency
+  - science_machine
+  - pedagogy_machine
+  - editorial_machine
+  - assessment
+  - year
+  - semantic_evidence_current
+  - human_expert_disciplinary_approved
+  - human_programme_pedagogy_approved
+  - qcm_human_gate_satisfied
+any_pending_criterion_forbids_full: true
+
+# ---------------------------------------------------------------- section 16
+visual_authority:
+  d7_independent_of_content_completion: true
+  content_completion_does_not_imply:
+    - VISUAL_COMPLETE
+    - D7_APPROVED
+    - PRINT_READY
+    - PUBLISH_READY
+  d7_registry: audit/D7_VISUAL_PENDING.json
+
+# ---------------------------------------------------------------- section 17
+mutation_tests:
+  - id: A
+    description: meme humain pour A et B
+    expected: FAIL
+  - id: B
+    description: agent IA comme reviewer
+    expected: FAIL
+  - id: C
+    description: mauvais object_set_digest
+    expected: FAIL
+  - id: D
+    description: mauvaise semantic_review_digest
+    expected: FAIL
+  - id: E
+    description: mauvais packet digest
+    expected: FAIL
+  - id: F
+    description: APPROVED avec blocking_findings
+    expected: FAIL
+  - id: G
+    description: source semantique modifiee apres review
+    expected: STALE
+  - id: H
+    description: changement style-only avec semantic digest identique
+    expected: CONTENT_CURRENT_VISUAL_STALE
+  - id: I
+    description: QCM ajoute apres review
+    expected: STALE
+  - id: J
+    description: objet externe au frozen set
+    expected: NO_BENEFIT
+  - id: K
+    description: verdict inconnu
+    expected: FAIL
+
+# ---------------------------------------------------------------- section 18
+chapter_states:
+  1SPE-SUITES:
+    review_a: PENDING_UNASSIGNED
+    review_b: PENDING_UNASSIGNED
+    qcm_human: PENDING
+    full: 0
+    statuses_changed: false

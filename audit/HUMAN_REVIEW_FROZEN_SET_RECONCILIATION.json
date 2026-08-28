@@ -1,0 +1,81 @@
+{
+  "artifact_type": "human_review_frozen_set_reconciliation",
+  "schema_version": 1,
+  "generated_by": "scripts/human_review_governance.py",
+  "decision_reference": "nexus-human-review-contract-2026-08-26",
+  "status": "SUPERSEDED_ROOT_CAUSE_FOUND",
+  "blocking": true,
+  "effect": "Aucun reviewer ne peut etre assigne sur 1SPE-SUITES tant que l'ensemble gele n'est pas reconcilie.",
+  "rationale": "La section 2 de la decision humaine declare object_count = 161 et un object_set_digest. Ni la valeur ni le digest ne sont reproductibles a partir du depot : aucun artefact du depot ne contient ce digest, et aucun algorithme d'enumeration documente ne produit 161. La machine n'a pas le droit de fabriquer une concordance ; elle enregistre l'ecart exact.",
+  "chapter_id": "1SPE-SUITES",
+  "declared_by_human": {
+    "object_count": 161,
+    "object_set_digest": "sha256:67d8006298299b44029de8ba8f85b500d9b3619997a0c596e63c20e1cffeee2d",
+    "provenance": "section 2 de la decision humaine du 2026-08-26",
+    "reproducible_from_repository": false,
+    "digest_found_in_repository": false,
+    "enumeration_algorithm_documented": false
+  },
+  "computed_by_machine": {
+    "algorithm_id": "NEXUS_OBJECT_SET_DIGEST_V1",
+    "object_count": 156,
+    "object_set_digest": "sha256:9d9ab4b6f290c1629c3b77f79a8b73c7c6af751f7b0483630392ceecc0c569f7",
+    "semantic_review_digest": "sha256:9b7e3fceb0b8a0f004dfdf08940055af66ea1a898410a94a3e8a8ea95cb0cd37",
+    "programme_authority_digest": "sha256:172cd283ef2404b2957f7042a2a0dcd33bd2996968ee8b8619a8ef18888e4840",
+    "repository_source_sha": "761508d923d74fd3d93fc055b3f3b1857fb251e1",
+    "rule": "un objet publishable = exactement un bloc % META dans un repertoire editorial declare par l'assembleur du manuel, y compris les objets inclus transitivement par \\input depuis un objet de premier niveau",
+    "by_object_type": {
+      "corrige": 50,
+      "corrige_evaluation": 2,
+      "coup_de_pouce": 21,
+      "cours": 11,
+      "evaluation": 2,
+      "exercice": 50,
+      "methode": 7,
+      "qcm": 1,
+      "remediation": 12
+    },
+    "student_visible": 104,
+    "teacher_visible": 156,
+    "unassembled_objects": [],
+    "qcm_question_count": 21
+  },
+  "delta": {
+    "declared_minus_computed": 5,
+    "candidate_explanations_examined": [
+      {
+        "hypothesis": "objects_total du rapport chapter_readiness",
+        "value": 155,
+        "verdict": "REJECTED",
+        "note": "audit/CHAPTER_READINESS_1SPE_SUITES.json compte 155 : c'est 156 moins l'objet qcm. Ne donne pas 161."
+      },
+      {
+        "hypothesis": "156 objets META plus les 5 fiches de rappel FR-R1..FR-R5",
+        "value": 161,
+        "verdict": "REJECTED_THEN_DISPROVEN_AS_EXPLANATION",
+        "note": "Rejetee a l'origine comme double comptage, puis refutee : les 5 objets de l'ecart ne sont pas les fiches FR-R mais CR-017, ME-008, EX-051, CO-051 et RE-C8, qui implementent la capacite C8 a c667f12b."
+      },
+      {
+        "hypothesis": "156 objets META plus contrat.yaml, qcm JSON et dossier_curation.json",
+        "value": 159,
+        "verdict": "REJECTED",
+        "note": "Ces trois fichiers ne sont pas des objets publishables : ils entrent dans le digest semantique comme sources de chapitre, pas comme membres de l'object set."
+      },
+      {
+        "hypothesis": "156 objets META moins le qcm plus les 21 questions de QCM",
+        "value": 176,
+        "verdict": "REJECTED",
+        "note": "Ne donne pas 161."
+      }
+    ],
+    "conclusion": "L'ecart de 5 est explique : ce sont les 5 objets de la capacite C8 presents a c667f12b et absents de 761508d9. Il ne s'agit d'aucun double comptage."
+  },
+  "resolution_required_from_human": [
+    "Option A : geler sur 761508d9 a 156 objets, en actant que le gel exclut la capacite C8.",
+    "Option B : geler sur c667f12b a 161 objets, ce qui couvre C8.",
+    "Option C : integrer C8 dans la branche courante puis recalculer le gel."
+  ],
+  "machine_position": "La machine n'assigne aucun reviewer, ne cree aucun recu et ne promeut aucun statut tant que cette reconciliation n'est pas tranchee par un humain.",
+  "superseded_by": "audit/1SPE_SUITES_REVIEW_FREEZE_CORRECTION_DECISION.json",
+  "correction_notice": "L'hypothese '161 = 156 + les 5 fiches FR-R, donc double comptage' consignee ici est FAUSSE. La comparaison des objets Git entre 761508d9 et c667f12b montre 0 doublon aux deux commits : 161 est le compte du meme chapitre a c667f12b, qui ajoute la capacite C8 et les 5 objets qui l'implementent. Voir la decision de correction du gel."
+}

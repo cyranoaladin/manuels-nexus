@@ -29,7 +29,7 @@
 
 \item[] \textbf{Capacite C2}
 
-\item \textbf{[Q3]} Un graphe admet une chaine eulerienne si et seulement si le nombre de sommets de degre impair est :
+\item \textbf{[Q3]} Un graphe connexe admet une chaine eulerienne si et seulement si le nombre de sommets de degre impair est :
   \begin{enumerate}[label=\Alph*.]
     \item 0 ou 2
     \item Exactement 1
@@ -57,6 +57,7 @@
 
 \end{enumerate}
 
+\ifnxVersionProfesseur
 \clearpage
 \section*{Cle de correction — reservee au professeur}
 
@@ -91,9 +92,9 @@ Q5 & C3 & \textbf{C} \\
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{B} — Impossible d'avoir un seul sommet de degre impair. \emph{Renvoi : C2.}
-    \item \textbf{C} — Seuls 0 et 2 sont autorises. \emph{Renvoi : C2.}
-    \item \textbf{D} — Cas du cycle eulerien uniquement. \emph{Renvoi : C2.}
+    \item \textbf{B} — Le lemme des poignees impose un nombre pair de sommets de degre impair ; il ne peut donc pas y en avoir exactement un. \emph{Renvoi : C2.}
+    \item \textbf{C} — Pour une chaine eulerienne dans un graphe connexe, seuls $0$ ou $2$ sommets de degre impair sont possibles. \emph{Renvoi : C2.}
+    \item \textbf{D} — Le cas $0$ correspond a un cycle eulerien ; une chaine eulerienne ouverte existe aussi avec exactement $2$ sommets impairs. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
@@ -108,3 +109,4 @@ Q5 & C3 & \textbf{C} \\
     \item \textbf{D} — Probleme de coloration. \emph{Renvoi : C3.}
   \end{itemize}
 \end{itemize}
+\fi

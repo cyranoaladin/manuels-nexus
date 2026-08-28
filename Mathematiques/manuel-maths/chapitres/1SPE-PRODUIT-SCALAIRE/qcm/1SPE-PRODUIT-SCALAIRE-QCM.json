@@ -191,7 +191,7 @@
       "options": {
         "A": "colinéaires",
         "B": "orthogonaux",
-        "C": "de même norme",
+        "C": "de normes differentes",
         "D": "de sens contraire"
       },
       "correcte": "B",
@@ -201,11 +201,11 @@
           "renvoi": "M3"
         },
         "C": {
-          "erreur": "$\\Vert\\vec{u}\\Vert = \\Vert\\vec{v}\\Vert = \\sqrt{13}$ est vrai mais l'orthogonalité est la propriété caractérisée.",
+          "erreur": "Les deux normes valent $\\sqrt{13}$ ; elles ne sont donc pas differentes. Leur produit scalaire nul etablit l'orthogonalite.",
           "renvoi": "M3"
         },
         "D": {
-          "erreur": "Option incorrecte.",
+          "erreur": "Deux vecteurs de sens contraire sont colineaires avec un coefficient negatif ; ici leur determinant vaut $-13$, donc ils ne sont pas colineaires.",
           "renvoi": "M3"
         }
       }

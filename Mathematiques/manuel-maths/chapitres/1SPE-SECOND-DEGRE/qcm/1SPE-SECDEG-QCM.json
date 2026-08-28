@@ -75,7 +75,7 @@
           "renvoi": "R1, identites remarquables"
         },
         "D": {
-          "erreur": "L'eleve a confondu $(x-1)^2$ avec $x^2 - 1$ (difference de carres au lieu du carre d'un binome) : $3(x^2 - 1) + 5 = 3x^2 + 2$. Double erreur de formule.",
+          "erreur": "L'option $3x^2+8$ omet le terme lineaire $-6x$ : dans $(x-1)^2=x^2-2x+1$, le terme $-2x$ ne disparait pas.",
           "renvoi": "R1, identites remarquables"
         }
       }
@@ -175,7 +175,7 @@
           "renvoi": "C3, discriminant"
         },
         "C": {
-          "erreur": "L'eleve a utilise $\\Delta = -b^2 + 4ac = -25 + 24 = -1$... ou a calcule $\\Delta = b^2 - 4ac$ avec $b = -5$ et $c = 1$, $a = 6$ (permutation des coefficients). Erreur d'identification de $a$, $b$, $c$.",
+          "erreur": "Pour obtenir $-11$, l'eleve a vraisemblablement mal identifie les coefficients ou mal effectue $b^2-4ac$. Ici $a=1$, $b=-5$, $c=6$, donc $25-24=1$.",
           "renvoi": "C3, discriminant"
         },
         "D": {
@@ -395,26 +395,26 @@
     {
       "id": "Q16",
       "capacite": "C6",
-      "enonce": "On decoupe des carres de cote $x$ aux coins d'une feuille $30 \\times 20$ pour former une boite. Le volume est $V(x) = x(30-2x)(20-2x)$. Quelle est la valeur de $x$ pour $x = 4$ ?",
+      "enonce": "On decoupe des carres de cote $x$ aux coins d'une feuille $30 \\times 20$ pour former une boite. Le volume est $V(x) = x(30-2x)(20-2x)$. Quelle est la valeur de $V(4)$ ?",
       "options": {
-        "A": "$V(4) = 1344$",
-        "B": "$V(4) = 1280$",
-        "C": "$V(4) = 2640$",
+        "A": "$V(4) = 1664$",
+        "B": "$V(4) = 2400$",
+        "C": "$V(4) = 264$",
         "D": "$V(4) = 1056$"
       },
-      "correcte": "A",
+      "correcte": "D",
       "diagnostics": {
-        "B": {
-          "erreur": "L'eleve a calcule $V(4) = 4 \\times (30-4) \\times (20-4) = 4 \\times 26 \\times 16 = 1664$... ou a substitue $2x = 4$ au lieu de $x = 4$ dans un facteur : $V(4) = 4 \\times 22 \\times 12 = 1056$. Erreur sur $30 - 2 \\times 4 = 22$ et $20 - 2 \\times 4 = 12$.",
+        "A": {
+          "erreur": "L'eleve a remplace $2x$ par $x$ dans les deux dimensions : $4 \\times (30-4) \\times (20-4) = 4 \\times 26 \\times 16 = 1664$. Il faut calculer $2 \\times 4 = 8$.",
           "renvoi": "C6, evaluation d'une expression"
         },
-        "C": {
-          "erreur": "L'eleve a calcule $4 \\times 30 \\times 20 = 2400$ ou a omis le $-2x$ dans les facteurs. Il n'a pas tenu compte des decoupes.",
+        "B": {
+          "erreur": "L'eleve a calcule $4 \\times 30 \\times 20 = 2400$ : il a conserve les dimensions de la feuille sans retirer les deux bandes de largeur $4$.",
           "renvoi": "C6, mise en equation"
         },
-        "D": {
-          "erreur": "L'eleve a calcule $V(4) = 4 \\times (30 - 4) \\times (20 - 4) = 4 \\times 26 \\times ... $  ou $4 \\times 22 \\times 12 = 1056$ (confusion $30 - x$ et $30 - 2x$).",
-          "renvoi": "C6, mise en equation"
+        "C": {
+          "erreur": "L'eleve a calcule seulement l'aire de la base : $(30-8)(20-8) = 22 \\times 12 = 264$. Pour obtenir le volume, il faut encore multiplier par la hauteur $x = 4$.",
+          "renvoi": "C6, evaluation d'une expression"
         }
       }
     },

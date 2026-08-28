@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -46,7 +47,10 @@ def _entete(chapitre: str, source: str) -> str:
 def _clean_text(s: str) -> str:
     if not isinstance(s, str):
         return s
-    s = s.replace("\\n", "\n")
+    # Certains corpus hérités utilisent la séquence littérale ``\n`` comme
+    # saut de ligne. Ne jamais la confondre avec le début d'une commande TeX
+    # telle que ``\neq``.
+    s = re.sub(r"\\n(?![A-Za-z])", "\n", s)
     s = s.replace("`^`", "\\code{\\textasciicircum}")
     parts = s.split('$')
     for i in range(0, len(parts), 2):
@@ -87,8 +91,10 @@ def rendre(donnees: dict) -> str:
         out.append("  \\end{enumerate}\n")
     out.append("\n\\end{enumerate}\n")
 
-    # Cle professeur : reponses, erreurs diagnostiquees et renvois.
-    out.append("\n\\clearpage\n\\section*{Cle de correction — reservee au professeur}\n\n")
+    # Cle professeur : reponses, erreurs diagnostiquees et renvois. La source
+    # TeX reste commune aux deux variantes, donc tout le bloc est ferme par le
+    # drapeau de variante defini dans le gabarit canonique.
+    out.append("\n\\ifnxVersionProfesseur\n\\clearpage\n\\section*{Cle de correction — reservee au professeur}\n\n")
     out.append("\\begin{center}\n\\begin{tabular}{lll}\n\\hline\n")
     out.append("Question & Capacite & Reponse exacte \\\\\n\\hline\n")
     for question in questions:
@@ -108,7 +114,7 @@ def rendre(donnees: dict) -> str:
                     f"\\emph{{Renvoi : {renvoi_txt}.}}\n"
                 )
         out.append("  \\end{itemize}\n")
-    out.append("\\end{itemize}\n")
+    out.append("\\end{itemize}\n\\fi\n")
     return "".join(out)
 
 

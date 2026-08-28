@@ -1,0 +1,125 @@
+{
+  "artifact_type": "STUDENT_PDF_PUBLISH_PREFLIGHT",
+  "schema_version": 1,
+  "generated_on": "2026-08-23",
+  "scope": "six canonical student build PDFs; MANUELS_PDF_PUBLICATION explicitly excluded",
+  "provenance": {
+    "current_source_sha": "761508d923d74fd3d93fc055b3f3b1857fb251e1",
+    "working_tree_dirty": true,
+    "build_manifest_source_sha": "331ab4d7e1eb9770d153d9de0867be1fd2e87f5f",
+    "build_manifest_source_digest": "sha256:cc3a0610bb937a59f856094399208064b97ab9775d7688c205bddc765a14a6b1",
+    "final_source_sha_match": false
+  },
+  "summary": {
+    "variants_scanned": 6,
+    "teacher_only_content_leak_documents": 4,
+    "pdf_metadata_incomplete": 4,
+    "pdf_navigation_missing": 4,
+    "pdf_missing": 0,
+    "release_candidate_eligible": false
+  },
+  "variants": [
+    {
+      "manual": "1SPE",
+      "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
+      "exists": true,
+      "pdf_sha256": "sha256:c863e3b71e0f9cf8f0be356e10497054bfd5c0a3171075a5ea0d47ee1adeb4ff",
+      "pages": 375,
+      "teacher_only_content_leak": 9,
+      "marker_occurrences": {
+        "CLE_DE_CORRECTION": 9
+      },
+      "title": null,
+      "author": null,
+      "bookmark_count": 0,
+      "findings": [
+        "TEACHER_ONLY_CONTENT_LEAK",
+        "PDF_METADATA_INCOMPLETE",
+        "PDF_NAVIGATION_MISSING"
+      ]
+    },
+    {
+      "manual": "TSPE",
+      "path": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.pdf",
+      "exists": true,
+      "pdf_sha256": "sha256:865664ee4d815a5d265775f20a8bd9176668b46d6f56b6d8f2ca261414f95ced",
+      "pages": 223,
+      "teacher_only_content_leak": 11,
+      "marker_occurrences": {
+        "CLE_DE_CORRECTION": 11
+      },
+      "title": null,
+      "author": null,
+      "bookmark_count": 0,
+      "findings": [
+        "TEACHER_ONLY_CONTENT_LEAK",
+        "PDF_METADATA_INCOMPLETE",
+        "PDF_NAVIGATION_MISSING"
+      ]
+    },
+    {
+      "manual": "TCOMPL",
+      "path": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf",
+      "exists": true,
+      "pdf_sha256": "sha256:ea694dea3ae0701325409bf0365b2fdc3beb6fb2331c141a15b898bfd1443e2d",
+      "pages": 164,
+      "teacher_only_content_leak": 9,
+      "marker_occurrences": {
+        "CLE_DE_CORRECTION": 9
+      },
+      "title": null,
+      "author": null,
+      "bookmark_count": 0,
+      "findings": [
+        "TEACHER_ONLY_CONTENT_LEAK",
+        "PDF_METADATA_INCOMPLETE",
+        "PDF_NAVIGATION_MISSING"
+      ]
+    },
+    {
+      "manual": "TEXPERTES",
+      "path": "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_eleve.pdf",
+      "exists": true,
+      "pdf_sha256": "sha256:16e2e3797b751cb9fd933cd943fbba2f1ede8a32f1a5dc1cfe52748f6ae6f759",
+      "pages": 109,
+      "teacher_only_content_leak": 5,
+      "marker_occurrences": {
+        "CLE_DE_CORRECTION": 5
+      },
+      "title": null,
+      "author": null,
+      "bookmark_count": 0,
+      "findings": [
+        "TEACHER_ONLY_CONTENT_LEAK",
+        "PDF_METADATA_INCOMPLETE",
+        "PDF_NAVIGATION_MISSING"
+      ]
+    },
+    {
+      "manual": "1NSI",
+      "path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf",
+      "exists": true,
+      "pdf_sha256": "sha256:7396cc0051fe488d3dad1f00537d919bbdac13eb839770784acace3edea24d39",
+      "pages": 235,
+      "teacher_only_content_leak": 0,
+      "marker_occurrences": {},
+      "title": "Manuel NSI Première",
+      "author": "Nexus Réussite",
+      "bookmark_count": 103,
+      "findings": []
+    },
+    {
+      "manual": "TNSI",
+      "path": "NSI/build/MANUEL_TNSI/MANUEL_TNSI_eleve.pdf",
+      "exists": true,
+      "pdf_sha256": "sha256:b6ccc819046e5a8fa324360471b9355bf99dfb9a731e1bb79a642088493b929c",
+      "pages": 149,
+      "teacher_only_content_leak": 0,
+      "marker_occurrences": {},
+      "title": "Manuel NSI Terminale",
+      "author": "Nexus Réussite",
+      "bookmark_count": 93,
+      "findings": []
+    }
+  ]
+}

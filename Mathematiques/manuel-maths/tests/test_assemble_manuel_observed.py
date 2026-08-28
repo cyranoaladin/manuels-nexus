@@ -681,6 +681,9 @@ def test_render_master_configures_closed_student_redaction() -> None:
         ("CORRIGES", "corrigé"),
         ("Barème indicatif : 4 points", "barème enseignant"),
         ("Note professeur : relancer", "note enseignant"),
+        ("Clé de correction — réservée au professeur", "clé de correction"),
+        ("Réponses réservées à l'enseignant", "réponses réservées"),
+        ("teacher-only marker", "marqueur teacher-only"),
     ],
 )
 def test_student_pdf_text_gate_rejects_teacher_leaks(

@@ -1,0 +1,148 @@
+{
+  "artifact_type": "suites_review_freeze_correction_decision",
+  "schema_version": 1,
+  "generated_by": "scripts/human_review_governance.py + git object comparison",
+  "status": "RESOLVED_FREEZE_161_CANONICAL",
+  "blocking": false,
+  "human_decision_received": {
+    "date": "2026-08-26",
+    "canonical_human_review_object_count": 156,
+    "declared_old_state": "INVALIDATED_DOUBLE_COUNT",
+    "declared_new_source_sha": "c667f12b1792f31981b6b5894c8c604df1bce634",
+    "rationale_given": "les cinq FR-R* auraient ete comptes une seconde fois",
+    "superseded_by_decision": {
+      "date": "2026-08-26",
+      "option": "B",
+      "canonical_human_review_object_count": 161,
+      "canonical_source_sha": "c667f12b1792f31981b6b5894c8c604df1bce634",
+      "old_156_decision_state": "INVALIDATED_PREMISE_DISPROVEN",
+      "note": "la decision 156 n'est pas simplement SUPERSEDED : sa premisse (double comptage des FR-R) a ete refutee par le depot"
+    }
+  },
+  "machine_verdict": "La premisse du double comptage est refutee par le depot.",
+  "evidence": {
+    "at_761508d9": {
+      "unique_meta_object_ids": 156,
+      "duplicate_ids": 0
+    },
+    "at_c667f12b": {
+      "unique_meta_object_ids": 161,
+      "duplicate_ids": 0
+    },
+    "fr_r_occurrences_at_761508d9": {
+      "1SPE-SUITES-FR-R1": 1,
+      "1SPE-SUITES-FR-R2": 1,
+      "1SPE-SUITES-FR-R3": 1,
+      "1SPE-SUITES-FR-R4": 1,
+      "1SPE-SUITES-FR-R5": 1
+    },
+    "fr_r_occurrences_at_c667f12b": {
+      "1SPE-SUITES-FR-R1": 1,
+      "1SPE-SUITES-FR-R2": 1,
+      "1SPE-SUITES-FR-R3": 1,
+      "1SPE-SUITES-FR-R4": 1,
+      "1SPE-SUITES-FR-R5": 1
+    },
+    "objects_present_at_c667f12b_and_absent_at_761508d9": [
+      {
+        "object_id": "1SPE-SUITES-CO-051",
+        "type_objet": "corrige",
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-051.tex"
+      },
+      {
+        "object_id": "1SPE-SUITES-CR-017",
+        "type_objet": "cours",
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/17_C8_limites_intuitives.tex"
+      },
+      {
+        "object_id": "1SPE-SUITES-EX-051",
+        "type_objet": "exercice",
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-051.tex"
+      },
+      {
+        "object_id": "1SPE-SUITES-ME-008",
+        "type_objet": "methode",
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-008.tex"
+      },
+      {
+        "object_id": "1SPE-SUITES-RE-C8",
+        "type_objet": "remediation",
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-RE-C8.tex"
+      }
+    ],
+    "objects_removed": [],
+    "delta": "strictement additif : +5 objets, 0 retrait"
+  },
+  "root_cause": {
+    "finding": "161 et 156 comptent le meme chapitre a deux commits differents, pas deux fois les memes objets.",
+    "explanation": "c667f12b ajoute une huitieme capacite C8 au contrat et au referentiel, et les cinq objets qui l'implementent : un cours, une methode, un exercice, son corrige et une fiche de remediation.",
+    "capacity_added": "1SPE-SUITES-C8",
+    "capacity_libelle_bo": "Sensibilisation intuitive a la notion de limite d'une suite : limite finie, limite infinie et absence de limite ; toute formalisation est exclue.",
+    "programme_authority_at_761508d9": "BO special n°1 du 22 janvier 2019",
+    "programme_authority_at_c667f12b": "MENE2602917A (rentree 2026-2027)",
+    "double_counting": false
+  },
+  "consequence": {
+    "freezing_at_156_would": "geler un chapitre depourvu d'une capacite declaree par le programme 2026",
+    "human_review_at_156_would": "faire approuver un chapitre incomplet au regard de MENE2602917A",
+    "declared_sha_contradicts_declared_count": "c667f12b porte 161 objets uniques, pas 156"
+  },
+  "not_written_and_why": {
+    "old_state_INVALIDATED_DOUBLE_COUNT": "non ecrit : la machine ne peut pas enregistrer un fait refute par le depot",
+    "new_source_sha_c667f12b_with_count_156": "non ecrit : ces deux valeurs sont mutuellement incoherentes"
+  },
+  "options_for_the_human": [
+    {
+      "option": "A",
+      "decision": "Geler sur 761508d9 a 156 objets",
+      "implication": "le gel exclut explicitement la capacite C8 ; le packet doit porter cette exclusion et la revue programme ne peut pas conclure a la conformite MENE2602917A."
+    },
+    {
+      "option": "B",
+      "decision": "Geler sur c667f12b a 161 objets",
+      "implication": "le gel couvre C8 ; 161 redevient le compte canonique et n'a jamais ete un double comptage. Exige d'integrer c667f12b dans la branche courante."
+    },
+    {
+      "option": "C",
+      "decision": "Geler apres integration de C8 dans la branche courante",
+      "implication": "compte a recalculer apres integration ; aucun gel avant."
+    }
+  ],
+  "machine_position": "Gel canonique etabli et reproduit. Aucun reviewer assigne, aucun recu, aucun statut promu : la revue humaine reste entierement a faire.",
+  "canonical_freeze": {
+    "source_sha": "c667f12b1792f31981b6b5894c8c604df1bce634",
+    "object_count": 161,
+    "unique_object_ids": 161,
+    "duplicate_object_ids": 0,
+    "canonical_object_set_digest": "sha256:67d8006298299b44029de8ba8f85b500d9b3619997a0c596e63c20e1cffeee2d",
+    "canonical_generator": "scripts/build_1spe_suites_review_source_freeze.py",
+    "canonical_artifact": "audit/1SPE_SUITES_REVIEW_SOURCE_FREEZE.json",
+    "ORIGINAL_161_FREEZE_REPRODUCED": "YES",
+    "reproduction_method": "execution du producteur canonique sur la base d'objets Git a SOURCE_SHA, sans checkout",
+    "reproduction_is_byte_identical_to_upstream_artifact": true,
+    "independent_enumeration": {
+      "generator": "scripts/human_review_governance.py",
+      "object_count": 161,
+      "object_set_digest": "sha256:fac8d9dc89cd3699c20ae65783a82b7cfb068007a357721549edfa055858b135",
+      "semantic_review_digest": "sha256:5471eb8e488e3657fe6d6a43f43088594da11e44272d2c27ae8fd05f65d8cda9",
+      "programme_authority_digest": "sha256:85763623a5407f39e74a26439dcd30979a74c1d9a13ec013d090ee41a02b71ea",
+      "note": "digest distinct du digest canonique : autre generateur, autres champs couverts ; les deux cardinalites concordent a 161"
+    }
+  },
+  "packets": {
+    "invalidated": {
+      "directory": "audit/reviews/human/1SPE-SUITES/superseded/freeze-156-761508d9",
+      "state": "INVALIDATED_WRONG_SOURCE_SCOPE",
+      "receipt_may_attach": false,
+      "preserved": true
+    },
+    "current": {
+      "directory": "audit/reviews/human/1SPE-SUITES/freeze-161-c667f12b",
+      "review_a": "PENDING_UNASSIGNED",
+      "review_b": "PENDING_UNASSIGNED",
+      "qcm_human_approval": "PENDING",
+      "reviewer_assigned": false,
+      "verdict": null
+    }
+  }
+}

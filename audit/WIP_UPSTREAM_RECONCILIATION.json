@@ -1,0 +1,3175 @@
+{
+  "artifact_type": "wip_upstream_reconciliation",
+  "schema_version": 1,
+  "generated_by": "scripts/reconcile_wip_upstream.py",
+  "modifies_nothing": true,
+  "wip_base_sha": "761508d923d74fd3d93fc055b3f3b1857fb251e1",
+  "upstream_sha": "dc6735d1",
+  "wip_file_count": 59,
+  "wip_overlap_with_upstream": 58,
+  "wip_only": 1,
+  "classification_counts": {
+    "GENERATED_DERIVATIVE": 35,
+    "UPSTREAM_SUPERSEDES_WIP": 0,
+    "WIP_ADDS_VALID_DELTA": 1,
+    "SEMANTICALLY_EQUIVALENT": 0,
+    "TRUE_CONFLICT": 23,
+    "WIP_OBSOLETE_OR_WRONG": 0,
+    "WIP_ONLY": 0,
+    "OTHER_EXPLICIT": 0
+  },
+  "unknown": 0,
+  "needs_human_editorial_decision": 23,
+  "files": [
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/qcm/1SPE-DERIVATION-GLOBAL-QCM.json",
+      "base_blob": "e85bd38254d37806e7388174726cdaa8a99c16dd",
+      "upstream_blob": "c1939be9323551aa679eb9f722e10a2b9bae0a14",
+      "wip_blob": "sha256:c7b87515111b5fc1805b860a0d9878f49b196f3bf7c8e96442bb766cd90d102f",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {
+        "kind": "qcm_canonical",
+        "base_to_upstream": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q14": [
+              "diagnostics"
+            ],
+            "Q3": [
+              "options",
+              "diagnostics"
+            ],
+            "Q8": [
+              "diagnostics"
+            ],
+            "Q9": [
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": [
+            "Q14",
+            "Q3",
+            "Q8",
+            "Q9"
+          ]
+        },
+        "base_to_wip": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q8": [
+              "diagnostics"
+            ],
+            "Q9": [
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": [
+            "Q8",
+            "Q9"
+          ]
+        },
+        "sides_touch_disjoint_questions": false,
+        "three_way": {
+          "questions": {
+            "Q14": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q3": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q8": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q9": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            }
+          },
+          "counts": {
+            "UPSTREAM_ONLY": 2,
+            "BOTH_DIVERGED": 2
+          },
+          "wip_only_changes": [],
+          "diverged": [
+            "Q8",
+            "Q9"
+          ],
+          "answer_key_disagreements": []
+        }
+      },
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/qcm/1SPE-DERIVATION-GLOBAL-QCM.tex",
+      "base_blob": "5e2ec084573ab1b5f278381846188dd2c6721663",
+      "upstream_blob": "21264b956aef1aa7c712ecfc71e6609ef5c8dc93",
+      "wip_blob": "sha256:ba614adf13cce06c7b1fd044fea7937e3036a2b894a1d54d57a2bd0868ba0567",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/qcm/1SPE-DERIVATION-GLOBAL-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/qcm/1SPE-DERIVATION-GLOBAL-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/qcm/1SPE-DERIVATION-LOCAL-QCM.tex",
+      "base_blob": "21155d02aa8beddc09e055f39594fbd943db92fe",
+      "upstream_blob": "1f32a56a9c60b42da636f1332370c939a4d8e879",
+      "wip_blob": "sha256:74fbdbae80467520a955b8f4acc5d7b458fb247d9803c5a4702048823d8fa68c",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/qcm/1SPE-DERIVATION-LOCAL-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/qcm/1SPE-DERIVATION-LOCAL-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
+      "base_blob": "46e5eab1492e33172d7d2633506f29bc2d709b78",
+      "upstream_blob": "7f6df30a86787034f8de997abd5f9e713b4df09e",
+      "wip_blob": "sha256:43749f0bbac96dc7d31426024697d51e5615410c9739b4bd70d89fafd5affd32",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {
+        "kind": "qcm_canonical",
+        "base_to_upstream": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "options",
+              "diagnostics"
+            ],
+            "Q10": [
+              "enonce",
+              "options",
+              "diagnostics"
+            ],
+            "Q11": [
+              "enonce",
+              "options",
+              "diagnostics"
+            ],
+            "Q12": [
+              "enonce",
+              "options",
+              "diagnostics"
+            ],
+            "Q13": [
+              "enonce",
+              "options",
+              "diagnostics"
+            ],
+            "Q14": [
+              "enonce",
+              "options",
+              "diagnostics"
+            ],
+            "Q15": [
+              "enonce",
+              "options",
+              "correcte",
+              "diagnostics"
+            ],
+            "Q4": [
+              "diagnostics"
+            ],
+            "Q6": [
+              "diagnostics"
+            ],
+            "Q8": [
+              "enonce",
+              "options",
+              "correcte",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [
+            "Q15",
+            "Q8"
+          ],
+          "diagnostics_changed": [
+            "Q1",
+            "Q10",
+            "Q11",
+            "Q12",
+            "Q13",
+            "Q14",
+            "Q15",
+            "Q4",
+            "Q6",
+            "Q8"
+          ]
+        },
+        "base_to_wip": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "options",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": [
+            "Q1"
+          ]
+        },
+        "sides_touch_disjoint_questions": false,
+        "three_way": {
+          "questions": {
+            "Q1": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q10": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q11": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q12": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q13": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q14": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q15": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "options",
+                "correcte",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": true
+            },
+            "Q4": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q6": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q8": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "options",
+                "correcte",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": true
+            }
+          },
+          "counts": {
+            "BOTH_DIVERGED": 1,
+            "UPSTREAM_ONLY": 9
+          },
+          "wip_only_changes": [],
+          "diverged": [
+            "Q1"
+          ],
+          "answer_key_disagreements": [
+            "Q15",
+            "Q8"
+          ]
+        }
+      },
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.tex",
+      "base_blob": "5d5ae5d3febfb5e6ca1060eb8f7a742574ea70fe",
+      "upstream_blob": "525b69ab8a27239e3f6c7c2307d547510790e560",
+      "wip_blob": "sha256:fe978d2fdd015ad753e54ff77d583b5de4269526d908113433fbcd96ee058750",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/contrat.yaml",
+      "base_blob": "5d3bc3dd4bad686d2638ad350125ebf939563645",
+      "upstream_blob": "5d3bc3dd4bad686d2638ad350125ebf939563645",
+      "wip_blob": "sha256:66231b989863c7ec77e8749f47573106fe5df55555854a7647dfa825e194cc0d",
+      "upstream_changed": false,
+      "wip_changed": true,
+      "classification": "WIP_ADDS_VALID_DELTA",
+      "rationale": "seul le WIP a bouge depuis la base ; l'amont n'a pas touche ce fichier (aucun chevauchement avec l'amont)",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/qcm/1SPE-GEOREP-QCM.json",
+      "base_blob": "221bbe3286a7b331ba39a39d6962cccafa9f30d9",
+      "upstream_blob": "f8881d732e578117e5f128851445e8e64537655c",
+      "wip_blob": "sha256:056ce0637c297a7e3ca1ed6633bdf1317377cf75acf86a36f649b50ab38bf876",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {
+        "kind": "qcm_canonical",
+        "base_to_upstream": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "diagnostics"
+            ],
+            "Q13": [
+              "diagnostics"
+            ],
+            "Q15": [
+              "options",
+              "diagnostics"
+            ],
+            "Q5": [
+              "options",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": [
+            "Q1",
+            "Q13",
+            "Q15",
+            "Q5"
+          ]
+        },
+        "base_to_wip": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q5": [
+              "options",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": [
+            "Q5"
+          ]
+        },
+        "sides_touch_disjoint_questions": false,
+        "three_way": {
+          "questions": {
+            "Q1": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q13": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q15": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q5": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            }
+          },
+          "counts": {
+            "UPSTREAM_ONLY": 3,
+            "BOTH_DIVERGED": 1
+          },
+          "wip_only_changes": [],
+          "diverged": [
+            "Q5"
+          ],
+          "answer_key_disagreements": []
+        }
+      },
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/qcm/1SPE-GEOREP-QCM.tex",
+      "base_blob": "353d97a4cfe83b2238ea65ebbe706be4f95741ea",
+      "upstream_blob": "02a7e7494ff7c6c823459aaf0b3651fe5e9d40f0",
+      "wip_blob": "sha256:c03acb84134265b5ef4382e6ca464d49653a220eacf479538e9a4cd847dc5a4d",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/qcm/1SPE-GEOREP-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/qcm/1SPE-GEOREP-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/qcm/1SPE-PROBCOND-QCM.json",
+      "base_blob": "8b266d8d46098b3ca6826fe35e0680ba19363bb5",
+      "upstream_blob": "67c571369be9225db6551d501725ff9976d0b09d",
+      "wip_blob": "sha256:2b67e35fb0ff3ac7876e716c432ae52ae5de66d1913978589918e1b5cb99336c",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {
+        "kind": "qcm_canonical",
+        "base_to_upstream": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "diagnostics"
+            ],
+            "Q12": [
+              "diagnostics"
+            ],
+            "Q17": [
+              "enonce",
+              "options",
+              "diagnostics"
+            ],
+            "Q18": [
+              "enonce",
+              "diagnostics"
+            ],
+            "Q3": [
+              "diagnostics"
+            ],
+            "Q8": [
+              "options",
+              "diagnostics"
+            ],
+            "Q9": [
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": [
+            "Q1",
+            "Q12",
+            "Q17",
+            "Q18",
+            "Q3",
+            "Q8",
+            "Q9"
+          ]
+        },
+        "base_to_wip": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q17": [
+              "enonce",
+              "options",
+              "diagnostics"
+            ],
+            "Q8": [
+              "options",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": [
+            "Q17",
+            "Q8"
+          ]
+        },
+        "sides_touch_disjoint_questions": false,
+        "three_way": {
+          "questions": {
+            "Q1": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q12": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q17": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q18": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q3": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q8": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q9": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            }
+          },
+          "counts": {
+            "UPSTREAM_ONLY": 5,
+            "BOTH_DIVERGED": 2
+          },
+          "wip_only_changes": [],
+          "diverged": [
+            "Q17",
+            "Q8"
+          ],
+          "answer_key_disagreements": []
+        }
+      },
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/qcm/1SPE-PROBCOND-QCM.tex",
+      "base_blob": "447bc39c9d5a6f7b17595c25d2c24b037844075c",
+      "upstream_blob": "b860e0c39df7bd55a9cdabea17d02eaf17fa61f1",
+      "wip_blob": "sha256:8fc824334d961e653748b3fcf79ccdb69ee1f07bb2ea038a3ef79e2c973a8456",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/qcm/1SPE-PROBCOND-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/qcm/1SPE-PROBCOND-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/qcm/1SPE-PRODUIT-SCALAIRE-QCM.json",
+      "base_blob": "90cacf08eb1a2789c136dc8eaf0c6a46f89318cf",
+      "upstream_blob": "a42bad39eaaaad92d246ea77c8715c69c3a1b7d1",
+      "wip_blob": "sha256:3981ce3de8f89d97728b9d831ec99f51717e4342f13de3ecb139fda23ee0cc90",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {
+        "kind": "qcm_canonical",
+        "base_to_upstream": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "diagnostics"
+            ],
+            "Q14": [
+              "diagnostics"
+            ],
+            "Q15": [
+              "diagnostics"
+            ],
+            "Q2": [
+              "diagnostics"
+            ],
+            "Q5": [
+              "diagnostics"
+            ],
+            "Q6": [
+              "diagnostics"
+            ],
+            "Q7": [
+              "diagnostics"
+            ],
+            "Q8": [
+              "options",
+              "diagnostics"
+            ],
+            "Q9": [
+              "enonce",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": [
+            "Q1",
+            "Q14",
+            "Q15",
+            "Q2",
+            "Q5",
+            "Q6",
+            "Q7",
+            "Q8",
+            "Q9"
+          ]
+        },
+        "base_to_wip": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q8": [
+              "options",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": [
+            "Q8"
+          ]
+        },
+        "sides_touch_disjoint_questions": false,
+        "three_way": {
+          "questions": {
+            "Q1": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q14": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q15": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q2": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q5": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q6": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q7": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q8": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q9": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            }
+          },
+          "counts": {
+            "UPSTREAM_ONLY": 8,
+            "BOTH_DIVERGED": 1
+          },
+          "wip_only_changes": [],
+          "diverged": [
+            "Q8"
+          ],
+          "answer_key_disagreements": []
+        }
+      },
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/qcm/1SPE-PRODUIT-SCALAIRE-QCM.tex",
+      "base_blob": "7add4aa68cb9d1ceed35513ffe8feb8a4564e9a3",
+      "upstream_blob": "566e5b735bb1ff5a1a1aa673ac61984273575caa",
+      "wip_blob": "sha256:b97a330d12c6a4b0e39fc94921bc003d5752c976464e0db6b185f1f5a7af7147",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/qcm/1SPE-PRODUIT-SCALAIRE-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/qcm/1SPE-PRODUIT-SCALAIRE-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/1SPE-SECDEG-QCM.json",
+      "base_blob": "3101f8753a199fadb61db21b3a5435d9c6b0a5c7",
+      "upstream_blob": "a3f244417db228aad82409593ee3db870eaa6768",
+      "wip_blob": "sha256:99d24caa11f0dabb2afefc15a73d923418acc233e132a209a072ab663eec751d",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {
+        "kind": "qcm_canonical",
+        "base_to_upstream": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "diagnostics"
+            ],
+            "Q15": [
+              "diagnostics"
+            ],
+            "Q16": [
+              "enonce",
+              "options",
+              "correcte",
+              "diagnostics"
+            ],
+            "Q18": [
+              "enonce",
+              "diagnostics"
+            ],
+            "Q3": [
+              "options"
+            ],
+            "Q7": [
+              "options",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [
+            "Q16"
+          ],
+          "diagnostics_changed": [
+            "Q1",
+            "Q15",
+            "Q16",
+            "Q18",
+            "Q7"
+          ]
+        },
+        "base_to_wip": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q16": [
+              "enonce",
+              "options",
+              "correcte",
+              "diagnostics"
+            ],
+            "Q3": [
+              "diagnostics"
+            ],
+            "Q7": [
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [
+            "Q16"
+          ],
+          "diagnostics_changed": [
+            "Q16",
+            "Q3",
+            "Q7"
+          ]
+        },
+        "sides_touch_disjoint_questions": false,
+        "three_way": {
+          "questions": {
+            "Q1": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q15": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q16": {
+              "verdict": "BOTH_CONVERGED",
+              "upstream_vs_wip_differing_fields": [],
+              "answer_key_disagreement": false
+            },
+            "Q18": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q3": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q7": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            }
+          },
+          "counts": {
+            "UPSTREAM_ONLY": 3,
+            "BOTH_CONVERGED": 1,
+            "BOTH_DIVERGED": 2
+          },
+          "wip_only_changes": [],
+          "diverged": [
+            "Q3",
+            "Q7"
+          ],
+          "answer_key_disagreements": []
+        }
+      },
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/1SPE-SECDEG-QCM.tex",
+      "base_blob": "d5c070e78b1795eccf7c232ed9c9c08e64efac07",
+      "upstream_blob": "4de24db921bcf9ba9e8c79478efe6d7c9ee3bc7a",
+      "wip_blob": "sha256:9f3ae0f69cad4361e72444ba81b6683ad80b5ac5324976d64a2d1ed3d3d56699",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/1SPE-SECDEG-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/1SPE-SECDEG-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json",
+      "base_blob": "1b527c77177a348f739561da06ac19d73d8f2213",
+      "upstream_blob": "049780743f76b03170127d5c0dd17db9c64cb791",
+      "wip_blob": "sha256:e6a6707323ff79b76edf647f07b65a274af5ac936310e7ef3d997dbacc4813d2",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {
+        "kind": "qcm_canonical",
+        "base_to_upstream": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "options",
+              "correcte",
+              "diagnostics"
+            ],
+            "Q10": [
+              "diagnostics"
+            ],
+            "Q11": [
+              "options",
+              "diagnostics"
+            ],
+            "Q12": [
+              "diagnostics"
+            ],
+            "Q14": [
+              "enonce",
+              "diagnostics"
+            ],
+            "Q19": [
+              "enonce",
+              "options"
+            ],
+            "Q2": [
+              "diagnostics"
+            ],
+            "Q20": [
+              "options",
+              "diagnostics"
+            ],
+            "Q21": [
+              "enonce"
+            ],
+            "Q3": [
+              "enonce",
+              "options",
+              "correcte",
+              "diagnostics",
+              "capacite"
+            ],
+            "Q4": [
+              "diagnostics"
+            ],
+            "Q5": [
+              "options",
+              "diagnostics"
+            ],
+            "Q9": [
+              "enonce",
+              "options",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [
+            "Q1",
+            "Q3"
+          ],
+          "diagnostics_changed": [
+            "Q1",
+            "Q10",
+            "Q11",
+            "Q12",
+            "Q14",
+            "Q2",
+            "Q20",
+            "Q3",
+            "Q4",
+            "Q5",
+            "Q9"
+          ]
+        },
+        "base_to_wip": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "correcte",
+              "diagnostics"
+            ],
+            "Q11": [
+              "options",
+              "diagnostics"
+            ],
+            "Q19": [
+              "options"
+            ],
+            "Q4": [
+              "diagnostics"
+            ],
+            "Q9": [
+              "correcte",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [
+            "Q1",
+            "Q9"
+          ],
+          "diagnostics_changed": [
+            "Q1",
+            "Q11",
+            "Q4",
+            "Q9"
+          ]
+        },
+        "sides_touch_disjoint_questions": false,
+        "three_way": {
+          "questions": {
+            "Q1": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q10": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q11": {
+              "verdict": "BOTH_CONVERGED",
+              "upstream_vs_wip_differing_fields": [],
+              "answer_key_disagreement": false
+            },
+            "Q12": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q14": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q19": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "enonce"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q2": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q20": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q21": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q3": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "options",
+                "correcte",
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": true
+            },
+            "Q4": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q5": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q9": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "options",
+                "correcte",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": true
+            }
+          },
+          "counts": {
+            "BOTH_DIVERGED": 4,
+            "UPSTREAM_ONLY": 8,
+            "BOTH_CONVERGED": 1
+          },
+          "wip_only_changes": [],
+          "diverged": [
+            "Q1",
+            "Q19",
+            "Q4",
+            "Q9"
+          ],
+          "answer_key_disagreements": [
+            "Q3",
+            "Q9"
+          ]
+        }
+      },
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.tex",
+      "base_blob": "52de025ff74abca23f96cf56b84a518392185b6e",
+      "upstream_blob": "5908cac6accb150460043b570d02dcecec083375",
+      "wip_blob": "sha256:235db1b2bb008408954c7bee5b163741b1440d481841c2cb481f3db163f11d15",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/qcm/1SPE-TRIGONOMETRIE-QCM.tex",
+      "base_blob": "4455e24b2bcae84658712324dc2511a551b2d14c",
+      "upstream_blob": "542f1bdbe966b1e5cc648e9a439322de666d9a3b",
+      "wip_blob": "sha256:a743c2ad85dc146d328636a8320f1ad0ba5d9a7f43abe38237bc10e84bd4f883",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/qcm/1SPE-TRIGONOMETRIE-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/qcm/1SPE-TRIGONOMETRIE-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-048.tex",
+      "base_blob": "718730691f27b8d9dd4c9c9a28d7f885e81dda62",
+      "upstream_blob": "1efffdfad2c355062a7a683ca5f9b6ed078a9970",
+      "wip_blob": "sha256:0d0f5ee922bad1784f0672463ebe7e958cde6e5b75a88cc4792389d7a2e01112",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.tex",
+      "base_blob": "f6892399ae0ac3521012a5bd33052f7aede3c3f1",
+      "upstream_blob": "26defa30c28999061470261b93c53b0f7e922a8d",
+      "wip_blob": "sha256:a42345af863be6089c451cb8cb1dd3b09fb523db65e7e66d92631df7c1cb126a",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/qcm/TCOMPL-CALCULS-AIRES-QCM.tex",
+      "base_blob": "8551524b8e43a83c7b48d5de7f99f92894c72067",
+      "upstream_blob": "0f0f3b5aab91a14157a523455e054f3217e12f47",
+      "wip_blob": "sha256:7d1aa6c43b91bf2b0e4dc9064eb2c4a1f358ac9a9307af02497a14e023ac0814",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/qcm/TCOMPL-CALCULS-AIRES-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/qcm/TCOMPL-CALCULS-AIRES-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/qcm/TCOMPL-CORRELATION-CAUSALITE-QCM.tex",
+      "base_blob": "32879ff85e4ab0d37086632336ce499a1956fdf3",
+      "upstream_blob": "b2a121f9eb92b999dfd8f780ad50d4bfcb5c85e3",
+      "wip_blob": "sha256:b0b6482a3595af536f86b1f7d6189233f00b24109a07714b90ec42f6cae0a495",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/qcm/TCOMPL-CORRELATION-CAUSALITE-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/qcm/TCOMPL-CORRELATION-CAUSALITE-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/qcm/TCOMPL-ECHANTILLONNAGE-QCM.tex",
+      "base_blob": "39bf682ebadc2c4edbad6857e6385f478a4b316b",
+      "upstream_blob": "321ba9390ad1d2827fd009cb6ae88f4b851e0033",
+      "wip_blob": "sha256:ac4081a3a8488e1fb4eb0bf10ec1b47eb93c5df5ae5d549bbf2321cf73488c9d",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/qcm/TCOMPL-ECHANTILLONNAGE-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/qcm/TCOMPL-ECHANTILLONNAGE-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/qcm/TCOMPL-INEGALITES-QCM.tex",
+      "base_blob": "7e9911ca5c8715c5bb70514ea90ef54fa2a23132",
+      "upstream_blob": "2b083ffc80f1b08cc479ef2c12e6c917ac559057",
+      "wip_blob": "sha256:fe17cca2bb2108e36d365e37343406c0e67e8ced1c00f563928b88cdc1fd782a",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/qcm/TCOMPL-INEGALITES-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/qcm/TCOMPL-INEGALITES-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/qcm/TCOMPL-INFERENCE-BAYESIENNE-QCM.tex",
+      "base_blob": "48e95abc6ce73e988deaea7257900d30352bedaf",
+      "upstream_blob": "ae4129e2f85a0f60c7164aabf825034464628e3e",
+      "wip_blob": "sha256:8e517bd544479f2ccc1b446a578f494364ac2f3a7734b4bd8984d4e2936fcb0c",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/qcm/TCOMPL-INFERENCE-BAYESIENNE-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/qcm/TCOMPL-INFERENCE-BAYESIENNE-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/qcm/TCOMPL-LOGARITHME-HISTORIQUE-QCM.tex",
+      "base_blob": "ec2cdadd87b1313eb4ad19a91f2d3acd4821bafe",
+      "upstream_blob": "6ff910d97e881fcd54326952c35d59666af8fd72",
+      "wip_blob": "sha256:34c6551728ef70e3fdbacb682c60031462fb0356eb293a2c1bdffd3c42ecaf9d",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/qcm/TCOMPL-LOGARITHME-HISTORIQUE-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/qcm/TCOMPL-LOGARITHME-HISTORIQUE-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.tex",
+      "base_blob": "77a6ca94d58d283a1d5511ed3f064430d8f6a85c",
+      "upstream_blob": "ed52be7519edd9136abe53dc59147d699b7f5243",
+      "wip_blob": "sha256:c8016c4f8cb13766f2ab86999a5010dce84b46cc0d4602193120103c0da99449",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.tex",
+      "base_blob": "a34b319bda8a200fc093e73f4c64138efe5f5a7b",
+      "upstream_blob": "f5dd0349269ded932b38b0d7bc22c7b155ba559f",
+      "wip_blob": "sha256:e24adb4a3b9def6825e090f5565733ee5409211df865279948ee0a2c3d398d04",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.tex",
+      "base_blob": "a4a843be4710d8f279924a9b0ff9a3f31a703a54",
+      "upstream_blob": "8e5c3d58b28348dd5a5b73bbcc0b03812bbd4be2",
+      "wip_blob": "sha256:3529521c2f66dda10d63532be897eba272f842848b83709d58d5f51c45a37637",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.tex",
+      "base_blob": "e373ca4c3947df8370ec6f75f87568e5e8498f16",
+      "upstream_blob": "730410b40510fe47466aaf28dbcd21a5230e9c01",
+      "wip_blob": "sha256:9a87a23ce55852cd15712ae97d101d16f967df8caa1a858359c6e9c34d58cfaf",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.tex",
+      "base_blob": "e2703efd88007db198366588c9e1d0bc96fb5d45",
+      "upstream_blob": "4849720e69e5028ecba2c889809c94b4ac4cecdf",
+      "wip_blob": "sha256:09374cadfd5702874d6763d0f88dcd72406bb516def656f5a6d927d58f67f991",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.tex",
+      "base_blob": "c0614ef93322464455b35a8f7133d9e0e873a186",
+      "upstream_blob": "8df7ab0c6119d2e0c11b61c8c3dafa8dd03429f4",
+      "wip_blob": "sha256:5a53c8ebc49ce1e4da8858293c41781c29affba8014abc03582d190476652e43",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.json",
+      "base_blob": "e72b645a0459bbacb5e5780ab09f8780901cef75",
+      "upstream_blob": "a0d210519c7234fa80caf79c177e585296b4bc0d",
+      "wip_blob": "sha256:19adea5d68f782ac4704d76484b547e0c1e0e1ae6dcdba6a6f55e44e77d82155",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {
+        "kind": "qcm_canonical",
+        "base_to_upstream": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "diagnostics"
+            ],
+            "Q2": [
+              "diagnostics"
+            ],
+            "Q3": [
+              "enonce",
+              "options",
+              "correcte",
+              "diagnostics",
+              "capacite"
+            ],
+            "Q4": [
+              "diagnostics",
+              "capacite"
+            ],
+            "Q5": [
+              "enonce",
+              "options",
+              "diagnostics",
+              "capacite"
+            ]
+          },
+          "answer_key_changed": [
+            "Q3"
+          ],
+          "diagnostics_changed": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5"
+          ]
+        },
+        "base_to_wip": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q3": [
+              "enonce",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": [
+            "Q3"
+          ]
+        },
+        "sides_touch_disjoint_questions": false,
+        "three_way": {
+          "questions": {
+            "Q1": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q2": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q3": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "options",
+                "correcte",
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": true
+            },
+            "Q4": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q5": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "options",
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            }
+          },
+          "counts": {
+            "UPSTREAM_ONLY": 4,
+            "BOTH_DIVERGED": 1
+          },
+          "wip_only_changes": [],
+          "diverged": [
+            "Q3"
+          ],
+          "answer_key_disagreements": [
+            "Q3"
+          ]
+        }
+      },
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.tex",
+      "base_blob": "99b82402cea363327ad4a91e4f33740ce7fd0e5e",
+      "upstream_blob": "5ca34e47b27a2e902fc08ebb82a7780ce5bf1927",
+      "wip_blob": "sha256:8445444777550a27515fad879b24a661f8593dd6ab5408576686d7e7a3241c72",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.tex",
+      "base_blob": "6bcdd3ef50386df91480f35950a29de3cadfeeff",
+      "upstream_blob": "0cb6037d7797eb4028c1d3d4c266919269178fb0",
+      "wip_blob": "sha256:2f4eeb95a35e08a5ba562fb5c7a2e1f4978272b581796397fbde656326dbc929",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.tex",
+      "base_blob": "16c3d1073c07931653e18d5ab57dace560f5b4b7",
+      "upstream_blob": "558c14cc61d93d6cc68a4ecad9a43a848de24a5d",
+      "wip_blob": "sha256:991e8ff46d791c50a7f0e802d4b4611732f007a580e217c116bc349858ff3527",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/qcm/TSPE-COMBINATOIRE-QCM.tex",
+      "base_blob": "925ad86a71062e0dd60fdcc164175288b4be7435",
+      "upstream_blob": "98d01b9d0aea1076c31ca44c867d3de280ebe40e",
+      "wip_blob": "sha256:e674792f224d32007e11fbfc815c7365ad66e79666d9f63f2239930f5640256b",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/qcm/TSPE-COMBINATOIRE-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/qcm/TSPE-COMBINATOIRE-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/qcm/TSPE-CONTINUITE-QCM.json",
+      "base_blob": "458017a16a32911e6bf73619a1b0a8cdfec3d080",
+      "upstream_blob": "0a1b1fadb0dfd524681242f4c98bd03ae361327e",
+      "wip_blob": "sha256:43a1dcabe4d3b689a9d12692d3cbfaf85a1a21ec2b3d157211ac4bba98cae723",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {
+        "kind": "qcm_canonical",
+        "base_to_upstream": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q11": [
+              "diagnostics"
+            ],
+            "Q12": [
+              "enonce"
+            ],
+            "Q13": [
+              "diagnostics"
+            ],
+            "Q14": [
+              "diagnostics"
+            ],
+            "Q2": [
+              "diagnostics"
+            ],
+            "Q3": [
+              "diagnostics"
+            ],
+            "Q4": [
+              "enonce"
+            ],
+            "Q5": [
+              "diagnostics"
+            ],
+            "Q6": [
+              "diagnostics"
+            ],
+            "Q8": [
+              "diagnostics"
+            ],
+            "Q9": [
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": [
+            "Q11",
+            "Q13",
+            "Q14",
+            "Q2",
+            "Q3",
+            "Q5",
+            "Q6",
+            "Q8",
+            "Q9"
+          ]
+        },
+        "base_to_wip": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q4": [
+              "enonce"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": []
+        },
+        "sides_touch_disjoint_questions": false,
+        "three_way": {
+          "questions": {
+            "Q11": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q12": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q13": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q14": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q2": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q3": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q4": {
+              "verdict": "BOTH_CONVERGED",
+              "upstream_vs_wip_differing_fields": [],
+              "answer_key_disagreement": false
+            },
+            "Q5": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q6": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q8": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q9": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            }
+          },
+          "counts": {
+            "UPSTREAM_ONLY": 10,
+            "BOTH_CONVERGED": 1
+          },
+          "wip_only_changes": [],
+          "diverged": [],
+          "answer_key_disagreements": []
+        }
+      },
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/qcm/TSPE-CONTINUITE-QCM.tex",
+      "base_blob": "485ef1636e3afca5e79f5760a91521e3b58d5179",
+      "upstream_blob": "c3b28afa954d47ce71d6b5a4bb0a9a3400562497",
+      "wip_blob": "sha256:97d324cd86ef6273e0f69c99b6ea668cea94e9d18bc8c03b421b1580eb978516",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/qcm/TSPE-CONTINUITE-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/qcm/TSPE-CONTINUITE-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/qcm/TSPE-DERIVATION-CONVEXITE-QCM.json",
+      "base_blob": "6d2d49459e0d9b3aa78d99f1358e899b9d2e6aad",
+      "upstream_blob": "8d9d7c87a02a97085e029cb3074e720ac4db0f61",
+      "wip_blob": "sha256:80bfb53abbbe48349c87852a72536f0558d5ea917efdf8c2d4f249d5915258dc",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {
+        "kind": "qcm_canonical",
+        "base_to_upstream": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "diagnostics"
+            ],
+            "Q10": [
+              "diagnostics"
+            ],
+            "Q11": [
+              "options",
+              "diagnostics",
+              "capacite"
+            ],
+            "Q12": [
+              "options",
+              "diagnostics"
+            ],
+            "Q13": [
+              "diagnostics"
+            ],
+            "Q14": [
+              "diagnostics"
+            ],
+            "Q15": [
+              "correcte",
+              "diagnostics"
+            ],
+            "Q2": [
+              "diagnostics"
+            ],
+            "Q3": [
+              "options",
+              "diagnostics"
+            ],
+            "Q4": [
+              "diagnostics"
+            ],
+            "Q5": [
+              "diagnostics"
+            ],
+            "Q6": [
+              "enonce",
+              "options",
+              "diagnostics"
+            ],
+            "Q7": [
+              "diagnostics",
+              "capacite"
+            ],
+            "Q8": [
+              "diagnostics"
+            ],
+            "Q9": [
+              "diagnostics",
+              "capacite"
+            ]
+          },
+          "answer_key_changed": [
+            "Q15"
+          ],
+          "diagnostics_changed": [
+            "Q1",
+            "Q10",
+            "Q11",
+            "Q12",
+            "Q13",
+            "Q14",
+            "Q15",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5",
+            "Q6",
+            "Q7",
+            "Q8",
+            "Q9"
+          ]
+        },
+        "base_to_wip": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q15": [
+              "correcte",
+              "diagnostics"
+            ],
+            "Q3": [
+              "options",
+              "diagnostics"
+            ],
+            "Q6": [
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [
+            "Q15"
+          ],
+          "diagnostics_changed": [
+            "Q15",
+            "Q3",
+            "Q6"
+          ]
+        },
+        "sides_touch_disjoint_questions": false,
+        "three_way": {
+          "questions": {
+            "Q1": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q10": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q11": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "options",
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q12": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q13": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q14": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q15": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q2": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q3": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q4": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q5": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q6": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q7": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q8": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q9": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            }
+          },
+          "counts": {
+            "UPSTREAM_ONLY": 12,
+            "BOTH_DIVERGED": 3
+          },
+          "wip_only_changes": [],
+          "diverged": [
+            "Q15",
+            "Q3",
+            "Q6"
+          ],
+          "answer_key_disagreements": []
+        }
+      },
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/qcm/TSPE-DERIVATION-CONVEXITE-QCM.tex",
+      "base_blob": "7a2bf0ec5940d42a9eb2fdde6e86707d1e1c0646",
+      "upstream_blob": "2fbc7da2926834130112f0e46f65c25bfb59cd8b",
+      "wip_blob": "sha256:033ccc5e50c711b729d2f36e9f48b1f1aa15ee1c2b54687436bf967e0aeed401",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/qcm/TSPE-DERIVATION-CONVEXITE-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/qcm/TSPE-DERIVATION-CONVEXITE-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/qcm/TSPE-GEOMETRIE-ESPACE-QCM.json",
+      "base_blob": "d9ec8505ff47f68de69bd197776259d6c8654484",
+      "upstream_blob": "92a8d341c150f3dda7a12bf879ce2f727cd298ea",
+      "wip_blob": "sha256:ffc5a43ffcd0b0ca522b0780db55d1349f7892e43c7836803f37ef35d5e04a0c",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {
+        "kind": "qcm_canonical",
+        "base_to_upstream": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "correcte",
+              "diagnostics",
+              "capacite"
+            ],
+            "Q2": [
+              "correcte",
+              "diagnostics",
+              "capacite"
+            ],
+            "Q3": [
+              "options",
+              "diagnostics",
+              "capacite"
+            ],
+            "Q4": [
+              "diagnostics",
+              "capacite"
+            ],
+            "Q5": [
+              "correcte",
+              "diagnostics",
+              "capacite"
+            ]
+          },
+          "answer_key_changed": [
+            "Q1",
+            "Q2",
+            "Q5"
+          ],
+          "diagnostics_changed": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5"
+          ]
+        },
+        "base_to_wip": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "correcte",
+              "diagnostics"
+            ],
+            "Q2": [
+              "correcte",
+              "diagnostics"
+            ],
+            "Q3": [
+              "options",
+              "diagnostics"
+            ],
+            "Q4": [
+              "diagnostics"
+            ],
+            "Q5": [
+              "correcte",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [
+            "Q1",
+            "Q2",
+            "Q5"
+          ],
+          "diagnostics_changed": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5"
+          ]
+        },
+        "sides_touch_disjoint_questions": false,
+        "three_way": {
+          "questions": {
+            "Q1": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q2": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q3": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q4": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q5": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            }
+          },
+          "counts": {
+            "BOTH_DIVERGED": 5
+          },
+          "wip_only_changes": [],
+          "diverged": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5"
+          ],
+          "answer_key_disagreements": []
+        }
+      },
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/qcm/TSPE-GEOMETRIE-ESPACE-QCM.tex",
+      "base_blob": "75634ab287c92e3a094fa31ff7d26ea480aac189",
+      "upstream_blob": "54bda7fb22955187b8a952f747c4336cef6e6b35",
+      "wip_blob": "sha256:a4ba93733c7448b2eeecad403f3d73c615fe68e95e68c1af6640338516140bdb",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/qcm/TSPE-GEOMETRIE-ESPACE-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/qcm/TSPE-GEOMETRIE-ESPACE-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/qcm/TSPE-LIMITES-FONCTIONS-QCM.tex",
+      "base_blob": "42861c20714ca55f5b3ca8354c3d887811017920",
+      "upstream_blob": "a61692ab53d24ed5dc9c3448ac10e1d0f21b1d37",
+      "wip_blob": "sha256:60922218c90e95628ddb36b0c86abe6f55ef1af3e66940b4217a3355a436b819",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/qcm/TSPE-LIMITES-FONCTIONS-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/qcm/TSPE-LIMITES-FONCTIONS-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/qcm/TSPE-LOGARITHME-QCM.json",
+      "base_blob": "42c4933ba8d3389f76dd6573137d8b9c127caa1c",
+      "upstream_blob": "3c5a7f227de64e1e2198e3f39c64a94697b39cc1",
+      "wip_blob": "sha256:361826ae317184daa1d2e92e26ca91d4552d785cadf894e872eb432a77ffad2d",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {
+        "kind": "qcm_canonical",
+        "base_to_upstream": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "correcte",
+              "diagnostics"
+            ],
+            "Q2": [
+              "correcte",
+              "diagnostics",
+              "capacite"
+            ],
+            "Q3": [
+              "correcte",
+              "diagnostics",
+              "capacite"
+            ],
+            "Q4": [
+              "correcte",
+              "diagnostics",
+              "capacite"
+            ],
+            "Q5": [
+              "correcte",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5"
+          ],
+          "diagnostics_changed": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5"
+          ]
+        },
+        "base_to_wip": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "correcte",
+              "diagnostics"
+            ],
+            "Q2": [
+              "correcte",
+              "diagnostics"
+            ],
+            "Q3": [
+              "correcte",
+              "diagnostics"
+            ],
+            "Q4": [
+              "correcte",
+              "diagnostics"
+            ],
+            "Q5": [
+              "correcte",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5"
+          ],
+          "diagnostics_changed": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5"
+          ]
+        },
+        "sides_touch_disjoint_questions": false,
+        "three_way": {
+          "questions": {
+            "Q1": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q2": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q3": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q4": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q5": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            }
+          },
+          "counts": {
+            "BOTH_DIVERGED": 5
+          },
+          "wip_only_changes": [],
+          "diverged": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5"
+          ],
+          "answer_key_disagreements": []
+        }
+      },
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/qcm/TSPE-LOGARITHME-QCM.tex",
+      "base_blob": "b9940ab41e9c904852c7736b20b40601a9680179",
+      "upstream_blob": "63be6fe2b2ad9cb1104bfe186e329a185ddc870c",
+      "wip_blob": "sha256:1e3fbb58e0f62b4762138dfe6c45cb1e3dd2b46d46a78c6f3d87c7ad7ed9123f",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/qcm/TSPE-LOGARITHME-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/qcm/TSPE-LOGARITHME-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/qcm/TSPE-PRIMITIVES-EQDIFF-QCM.json",
+      "base_blob": "75cc72636b4783d68885e80b6ba4c214bd5956c3",
+      "upstream_blob": "b5c686ab12919b1db1ba06382189d51e645285f2",
+      "wip_blob": "sha256:b99f8da5a1c507c1c18b8b3c8a0ae511307d2a5c0090003f636a46f0cc91bf37",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {
+        "kind": "qcm_canonical",
+        "base_to_upstream": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "correcte",
+              "diagnostics"
+            ],
+            "Q2": [
+              "options",
+              "correcte",
+              "diagnostics",
+              "capacite"
+            ],
+            "Q3": [
+              "correcte",
+              "diagnostics",
+              "capacite"
+            ],
+            "Q4": [
+              "diagnostics",
+              "capacite"
+            ],
+            "Q5": [
+              "correcte",
+              "diagnostics",
+              "capacite"
+            ]
+          },
+          "answer_key_changed": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q5"
+          ],
+          "diagnostics_changed": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5"
+          ]
+        },
+        "base_to_wip": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "correcte",
+              "diagnostics"
+            ],
+            "Q2": [
+              "options",
+              "correcte",
+              "diagnostics"
+            ],
+            "Q3": [
+              "correcte",
+              "diagnostics"
+            ],
+            "Q4": [
+              "diagnostics"
+            ],
+            "Q5": [
+              "correcte",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q5"
+          ],
+          "diagnostics_changed": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5"
+          ]
+        },
+        "sides_touch_disjoint_questions": false,
+        "three_way": {
+          "questions": {
+            "Q1": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q2": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q3": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q4": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q5": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            }
+          },
+          "counts": {
+            "BOTH_DIVERGED": 5
+          },
+          "wip_only_changes": [],
+          "diverged": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5"
+          ],
+          "answer_key_disagreements": []
+        }
+      },
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/qcm/TSPE-PRIMITIVES-EQDIFF-QCM.tex",
+      "base_blob": "cd45c32a257abd54efe9e9733ad9682e5976ea86",
+      "upstream_blob": "a9e9fd12433ce7d1049d52c79815707251594aa4",
+      "wip_blob": "sha256:642276a1e9e587d4ab863e6c5f5d11bd16609b600e34b824b6d3d50680a04399",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/qcm/TSPE-PRIMITIVES-EQDIFF-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/qcm/TSPE-PRIMITIVES-EQDIFF-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json",
+      "base_blob": "5bd64c09c71dbf88e6ef9e21eeb7f7229b74f43f",
+      "upstream_blob": "c6a54ef400a141baf23aec48e2310b5cf7d6b73a",
+      "wip_blob": "sha256:2e7bfb3b22439014dfdead42ae61cd7808471c7bcac8883a83784890928920ee",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {
+        "kind": "qcm_canonical",
+        "base_to_upstream": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "diagnostics",
+              "capacite"
+            ],
+            "Q2": [
+              "diagnostics"
+            ],
+            "Q3": [
+              "diagnostics"
+            ],
+            "Q4": [
+              "enonce",
+              "diagnostics",
+              "capacite"
+            ],
+            "Q5": [
+              "diagnostics",
+              "capacite"
+            ],
+            "Q6": [
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5",
+            "Q6"
+          ]
+        },
+        "base_to_wip": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q4": [
+              "enonce",
+              "options",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": [
+            "Q4"
+          ]
+        },
+        "sides_touch_disjoint_questions": false,
+        "three_way": {
+          "questions": {
+            "Q1": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q2": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q3": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q4": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "options",
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q5": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q6": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            }
+          },
+          "counts": {
+            "UPSTREAM_ONLY": 5,
+            "BOTH_DIVERGED": 1
+          },
+          "wip_only_changes": [],
+          "diverged": [
+            "Q4"
+          ],
+          "answer_key_disagreements": []
+        }
+      },
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.tex",
+      "base_blob": "ffb527abb4f7ec27e75e1c7b1da713f6946d9524",
+      "upstream_blob": "b556fc5ec0241f5bd78f93ff81534042f931e366",
+      "wip_blob": "sha256:38646089f74d08744b6bb79da138bd352e3032eeceb2607d7feb6b6dda086a1c",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/qcm/TSPE-SUITES-LIMITES-QCM.json",
+      "base_blob": "7829273077ee77e2fbd96ec4197b65cbc38e394d",
+      "upstream_blob": "f180cc51889ab93bcca0363803c8a9dcd77f5f2b",
+      "wip_blob": "sha256:22a768125f959934af8110d29ef7b9a73f2f81423c4189b872e1111dbe1bd03f",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {
+        "kind": "qcm_canonical",
+        "base_to_upstream": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "diagnostics"
+            ],
+            "Q10": [
+              "diagnostics"
+            ],
+            "Q11": [
+              "diagnostics"
+            ],
+            "Q12": [
+              "diagnostics"
+            ],
+            "Q13": [
+              "diagnostics"
+            ],
+            "Q14": [
+              "diagnostics"
+            ],
+            "Q2": [
+              "diagnostics"
+            ],
+            "Q3": [
+              "diagnostics"
+            ],
+            "Q4": [
+              "enonce",
+              "options",
+              "correcte",
+              "diagnostics"
+            ],
+            "Q5": [
+              "diagnostics"
+            ],
+            "Q6": [
+              "enonce",
+              "diagnostics"
+            ],
+            "Q7": [
+              "diagnostics"
+            ],
+            "Q9": [
+              "enonce",
+              "options",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [
+            "Q4"
+          ],
+          "diagnostics_changed": [
+            "Q1",
+            "Q10",
+            "Q11",
+            "Q12",
+            "Q13",
+            "Q14",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5",
+            "Q6",
+            "Q7",
+            "Q9"
+          ]
+        },
+        "base_to_wip": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q6": [
+              "enonce",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": [
+            "Q6"
+          ]
+        },
+        "sides_touch_disjoint_questions": false,
+        "three_way": {
+          "questions": {
+            "Q1": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q10": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q11": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q12": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q13": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q14": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q2": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q3": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q4": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "options",
+                "correcte",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": true
+            },
+            "Q5": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q6": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q7": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q9": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "enonce",
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            }
+          },
+          "counts": {
+            "UPSTREAM_ONLY": 12,
+            "BOTH_DIVERGED": 1
+          },
+          "wip_only_changes": [],
+          "diverged": [
+            "Q6"
+          ],
+          "answer_key_disagreements": [
+            "Q4"
+          ]
+        }
+      },
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/qcm/TSPE-SUITES-LIMITES-QCM.tex",
+      "base_blob": "7c2ff18591c431f6da3fac1556a480a16352022c",
+      "upstream_blob": "9f83fad33e0772521d97c80585fee02fadc92e6f",
+      "wip_blob": "sha256:7f702049a7b6820800e8541ed9f9ac3ef32917ccf5b3f92f692d56063e593c0b",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/qcm/TSPE-SUITES-LIMITES-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/qcm/TSPE-SUITES-LIMITES-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/qcm/TSPE-TRIGONOMETRIE-QCM.json",
+      "base_blob": "2e08663626be2725e6a32a6d39b45fd2c9d10331",
+      "upstream_blob": "033af8eeab08dcef13b914f68eac883c0312cd35",
+      "wip_blob": "sha256:bdbc07437cb4c042f78b27efa2d14eaf69b33241d93a926e70b253cb139f3a08",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {
+        "kind": "qcm_canonical",
+        "base_to_upstream": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q1": [
+              "diagnostics"
+            ],
+            "Q2": [
+              "diagnostics",
+              "capacite"
+            ],
+            "Q3": [
+              "diagnostics",
+              "capacite"
+            ],
+            "Q4": [
+              "diagnostics"
+            ],
+            "Q5": [
+              "options",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5"
+          ]
+        },
+        "base_to_wip": {
+          "questions_added": [],
+          "questions_removed": [],
+          "questions_changed": {
+            "Q5": [
+              "options",
+              "diagnostics"
+            ]
+          },
+          "answer_key_changed": [],
+          "diagnostics_changed": [
+            "Q5"
+          ]
+        },
+        "sides_touch_disjoint_questions": false,
+        "three_way": {
+          "questions": {
+            "Q1": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q2": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q3": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics",
+                "capacite"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q4": {
+              "verdict": "UPSTREAM_ONLY",
+              "upstream_vs_wip_differing_fields": [
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            },
+            "Q5": {
+              "verdict": "BOTH_DIVERGED",
+              "upstream_vs_wip_differing_fields": [
+                "options",
+                "diagnostics"
+              ],
+              "answer_key_disagreement": false
+            }
+          },
+          "counts": {
+            "UPSTREAM_ONLY": 4,
+            "BOTH_DIVERGED": 1
+          },
+          "wip_only_changes": [],
+          "diverged": [
+            "Q5"
+          ],
+          "answer_key_disagreements": []
+        }
+      },
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/qcm/TSPE-TRIGONOMETRIE-QCM.tex",
+      "base_blob": "2759da2c830b547dd19b7b7fdf5596a0c7eead37",
+      "upstream_blob": "4f3536dffaed117a3486793cda767a8c3482c8d1",
+      "wip_blob": "sha256:2a554ca345ba95b36e311afe36e84d26b35cfbd1455ae877d0d2702f0e82c3ff",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "GENERATED_DERIVATIVE",
+      "rationale": "fichier genere par scripts/build_qcm_tex.py depuis Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/qcm/TSPE-TRIGONOMETRIE-QCM.json ; il ne se reconcilie pas directement, il se regenere apres arbitrage de sa source",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": false,
+      "derived_from": "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/qcm/TSPE-TRIGONOMETRIE-QCM.json",
+      "producer": "scripts/build_qcm_tex.py"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+      "base_blob": "44e635254f5343d7aa6d62399e7d1ac8a784842b",
+      "upstream_blob": "a7c255d35c3c6498aad7c73087ced6269332adc6",
+      "wip_blob": "sha256:cbfa86c2cdd5d2ec1865c76ee69390a111219100f829c61cec7bdaaa6ce31ed8",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/scripts/build_qcm_tex.py",
+      "base_blob": "1701911b0e3316b00b8c04f5ef6b773d59262cea",
+      "upstream_blob": "1ff7e1fd6820d3f7a22842cc984c7f3042d932fe",
+      "wip_blob": "sha256:f2ac6f29fba42ad2edf75275fcf8efc25a75c0f74a660a6f8c87ab6bb706f02c",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py",
+      "base_blob": "17883a5794928e72505f3d1ed5ca8ce2cbc5834e",
+      "upstream_blob": "46b9db29737754e838eb882856aee2e4a2ed5e5e",
+      "wip_blob": "sha256:468fb12e6783b60a4fd27beeb201ce56f745e71c7187d6b1ad9158c57201d74f",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py",
+      "base_blob": "045553f9e2b0f683cfa173a10259508c04f02a69",
+      "upstream_blob": "f4d297df9ae5ecc9fc59c17b34e5e62c135df215",
+      "wip_blob": "sha256:ecad3df89826eb26772ae09a9af280fc601788add80df60834f7c572baedab2f",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "audit/QCM_CAPACITY_COVERAGE_DEBT.json",
+      "base_blob": "05684c5cbced273f00232f76f7702c87e02b6462",
+      "upstream_blob": "f231f1cc9b87d424e56727e2f03ce34e501cf3f8",
+      "wip_blob": "sha256:f0902fe5fcd22ad1221798381d766e26630fc5754107a5e99fc18484f846a1fb",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    },
+    {
+      "path": "scripts/inventory_collection.py",
+      "base_blob": "dd588cf755574810816da55843220c029f8c3b5a",
+      "upstream_blob": "5823c481b12ca857c18ee724419ff988b1fe3f9f",
+      "wip_blob": "sha256:909583380140d8a69cf8f3eaa671844fc4bcc9428816e2299f7b76299b0b17e8",
+      "upstream_changed": true,
+      "wip_changed": true,
+      "classification": "TRUE_CONFLICT",
+      "rationale": "les deux cotes ont modifie ce fichier differemment depuis la base",
+      "semantic_delta": {},
+      "needs_human_editorial_decision": true,
+      "derived_from": null,
+      "producer": null
+    }
+  ]
+}

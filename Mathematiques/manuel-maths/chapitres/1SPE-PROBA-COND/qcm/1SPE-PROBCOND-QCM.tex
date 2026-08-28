@@ -73,10 +73,10 @@
 
 \item \textbf{[Q8]} Si P(B) = 1/3, P\_B(A) = 1/2 et P\_Bbar(A) = 1/4, alors P(A) vaut :
   \begin{enumerate}[label=\Alph*.]
-    \item 1/3
-    \item 1/6 + 1/6 = 1/3
-    \item 1/6 + 1/4 = 5/12
-    \item 1/6 + 2/12 = 1/3
+    \item $1/4$
+    \item $1/6$
+    \item $5/12$
+    \item $1/3$
   \end{enumerate}
 
 \item \textbf{[Q9]} Pour appliquer la formule des probabilites totales avec {B1, B2, B3}, il faut que :
@@ -147,12 +147,12 @@
     \item P(Mbar | T-)
   \end{enumerate}
 
-\item \textbf{[Q17]} Sensibilite 99%, prevalence 0,1%. La VPP sera :
+\item \textbf{[Q17]} Un test a une sensibilite de 99 %, une specificite de 99 % et la prevalence est de 0,1 %. Sa valeur predictive positive est environ :
   \begin{enumerate}[label=\Alph*.]
-    \item proche de 99%
-    \item proche de 50%
-    \item probablement faible
-    \item exactement 0,1%
+    \item proche de 99 %
+    \item proche de 50 %
+    \item proche de 9 %
+    \item exactement 0,1 %
   \end{enumerate}
 
 \item \textbf{[Q18]} Controle qualite avec 3 machines, on utilise :
@@ -165,6 +165,7 @@
 
 \end{enumerate}
 
+\ifnxVersionProfesseur
 \clearpage
 \section*{Cle de correction — reservee au professeur}
 
@@ -242,9 +243,9 @@ Q18 & C5 & \textbf{B} \\
   \end{itemize}
   \item \textbf{Q8}
   \begin{itemize}
-    \item \textbf{A} — L'eleve a repondu P(B) au lieu de calculer P(A) par les probabilites totales. \emph{Renvoi : C3, formule.}
-    \item \textbf{B} — L'eleve a calcule P(B)*P\_B(A) = 1/6 correctement mais a oublie d'utiliser P(Bbar) = 2/3 pour le second terme. \emph{Renvoi : C3, formule.}
-    \item \textbf{C} — Le second terme doit etre P(Bbar)*P\_Bbar(A) = 2/3 * 1/4 = 1/6, pas 1/4. \emph{Renvoi : C3, formule.}
+    \item \textbf{A} — L'eleve a repris directement $P_{\overline B}(A)=1/4$ sans ponderer par $P(\overline B)=2/3$ ni ajouter la branche $B$. \emph{Renvoi : C3, formule.}
+    \item \textbf{B} — L'eleve a calcule seulement la branche $P(B)P_B(A)=1/6$ et a oublie la branche complementaire. \emph{Renvoi : C3, formule.}
+    \item \textbf{C} — L'eleve a additionne $P(B)P_B(A)=1/6$ et la probabilite conditionnelle $1/4$ sans la ponderer par $P(\overline B)=2/3$. \emph{Renvoi : C3, formule.}
   \end{itemize}
   \item \textbf{Q9}
   \begin{itemize}
@@ -296,9 +297,9 @@ Q18 & C5 & \textbf{B} \\
   \end{itemize}
   \item \textbf{Q17}
   \begin{itemize}
-    \item \textbf{A} — Meme avec une tres bonne sensibilite, la VPP est faible si la prevalence est tres basse (beaucoup de faux positifs). \emph{Renvoi : C5, VPP et prevalence.}
-    \item \textbf{B} — Avec 0,1% de prevalence, la VPP sera bien en dessous de 50%. \emph{Renvoi : C5, VPP et prevalence.}
-    \item \textbf{D} — La VPP n'est pas egale a la prevalence. \emph{Renvoi : C5, formule de Bayes.}
+    \item \textbf{A} — La sensibilite n'est pas la valeur predictive positive. La tres faible prevalence rend les faux positifs nombreux relativement aux vrais positifs. \emph{Renvoi : C5, VPP et prevalence.}
+    \item \textbf{B} — Le calcul donne $0{,}00099/(0{,}00099+0{,}00999)\approx0{,}090$, donc environ 9 %, pas 50 %. \emph{Renvoi : C5, VPP et prevalence.}
+    \item \textbf{D} — La valeur predictive positive n'est pas la prevalence : elle rapporte les vrais positifs a l'ensemble des tests positifs. \emph{Renvoi : C5, formule de Bayes.}
   \end{itemize}
   \item \textbf{Q18}
   \begin{itemize}
@@ -307,3 +308,4 @@ Q18 & C5 & \textbf{B} \\
     \item \textbf{D} — Le TVI est un theoreme d'analyse, sans rapport avec les probabilites. \emph{Renvoi : C5, hors sujet.}
   \end{itemize}
 \end{itemize}
+\fi
