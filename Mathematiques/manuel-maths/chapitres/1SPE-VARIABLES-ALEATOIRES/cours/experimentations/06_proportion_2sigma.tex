@@ -55,3 +55,32 @@ d'une valeur universelle. Il faut conserver $n$, $N$, $\mu$, $\sigma$ et la
 graine avec le résultat afin que l'expérience soit interprétable et
 reproductible.
 }
+
+\subsection*{À toi de jouer — exploiter $N$ échantillons}
+
+\begin{enumerate}
+  \item Exécuter \code{proportion\_dans\_borne(50, 400, 1729)} puis reprendre
+        avec la graine $20250901$. Les deux proportions sont-elles égales ?
+        Pourquoi ?
+  \item Reprendre avec $n=200$ à graine fixée. La borne
+        $\frac{2\sigma}{\sqrt{n}}$ augmente-t-elle ou diminue-t-elle ?
+        La proportion observée s'effondre-t-elle pour autant ?
+  \item Rédiger en deux phrases ce que l'on peut, et ce que l'on ne peut pas,
+        conclure d'une telle simulation.
+\end{enumerate}
+
+\ifnxVersionProfesseur
+\begin{corrige}{1SPE-VARALEA-EXP-004-ATOI}
+\textbf{1.} $0{,}94$ puis $0{,}9525$ : les proportions diffèrent car chaque
+graine produit d'autres échantillons. L'ordre de grandeur, lui, se conserve.
+
+\textbf{2.} Pour $n=200$ la borne passe de $0{,}594$ à $0{,}297$ : elle
+diminue comme $1/\sqrt{n}$. La proportion reste voisine ($0{,}935$ à la graine
+$1729$) car les moyennes se resserrent au même rythme que la borne.
+
+\textbf{3.} On peut constater qu'une large majorité des moyennes tombe dans
+l'intervalle annoncé, et que ce constat se reproduit sur d'autres graines. On
+ne peut pas en déduire une valeur exacte ni une propriété démontrée : c'est
+une observation empirique, dépendante de $n$, de $N$ et de la graine.
+\end{corrige}
+\fi

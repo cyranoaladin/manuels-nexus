@@ -91,6 +91,46 @@ terminaux, et le nombre de chemins à exactement $k$ succès se compte sur
 l'arbre, il ne se devine pas.
 }
 
+\subsection*{À toi de jouer — construire l'arbre de quatre épreuves}
+
+\begin{enumerate}
+  \item Reprendre l'arbre complet de trois épreuves ci-dessus et lui ajouter
+        une quatrième épreuve : chaque chemin se dédouble en $S$ et
+        $\overline S$. Combien de chemins terminaux l'arbre obtenu
+        possède-t-il ?
+  \item Compléter le tableau du nombre de chemins selon le nombre $k$ de
+        succès.
+
+        \begin{center}
+        \begin{tabular}{c|ccccc}
+          $k$ & $0$ & $1$ & $2$ & $3$ & $4$\\ \hline
+          nombre de chemins & $1$ & \ldots & \ldots & \ldots & $1$
+        \end{tabular}
+        \end{center}
+
+  \item On prend $p=\tfrac12$. Calculer $P(\text{exactement deux succès})$ à
+        partir de l'arbre, sans utiliser de formule apprise par cœur.
+  \item Vérifier que la somme des probabilités des $16$ chemins vaut $1$.
+\end{enumerate}
+
+\ifnxVersionProfesseur
+\begin{corrige}{1SPE-VARALEA-CR-012-ATOI}
+\textbf{1.} Chaque chemin de l'arbre à trois épreuves donne deux chemins :
+$2\times 8 = 16$ chemins terminaux, soit $2^4$.
+
+\textbf{2.} $1$, $4$, $6$, $4$, $1$. On les lit en dédoublant les comptes de
+$n=3$ ($1$, $3$, $3$, $1$) : un chemin à $k$ succès pour $n=4$ provient d'un
+chemin à $k$ succès suivi d'un échec, ou d'un chemin à $k-1$ succès suivi d'un
+succès.
+
+\textbf{3.} Chaque chemin a pour probabilité $\left(\tfrac12\right)^4 =
+\tfrac1{16}$, et $6$ chemins contiennent exactement deux succès :
+$P = 6\times\tfrac1{16} = \tfrac{6}{16} = \tfrac38$.
+
+\textbf{4.} $\tfrac{1+4+6+4+1}{16} = \tfrac{16}{16} = 1$.
+\end{corrige}
+\fi
+
 \begin{fichemethode}{M6}{Calculer une probabilité sur un arbre répété}
 Pour calculer la probabilité d'obtenir exactement $k$ succès :
 \begin{enumerate}

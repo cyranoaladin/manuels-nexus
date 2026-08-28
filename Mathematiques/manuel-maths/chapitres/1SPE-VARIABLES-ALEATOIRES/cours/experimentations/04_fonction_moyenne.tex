@@ -36,3 +36,33 @@ Avec $n=40$ et la graine $1729$, la fonction renvoie $m=1{,}9$.
 Cette valeur dépend de l'échantillon; elle n'est pas une nouvelle valeur
 théorique de $E(X)$.
 }
+
+\subsection*{À toi de jouer — écrire la fonction}
+
+On veut une fonction \code{ecart\_a\_esperance(n, graine)} qui renvoie
+$\lvert m-E(X)\rvert$, où $m$ est la moyenne d'un échantillon de taille $n$.
+
+\begin{enumerate}
+  \item Recopier et compléter les deux lignes manquantes.
+  \item Tester avec $n=40$ et la graine $1729$, puis avec $n=400$ et la même
+        graine. Que constate-t-on ?
+\end{enumerate}
+
+\begin{python}
+ESPERANCE = 1.3
+
+def ecart_a_esperance(n, graine):
+    moyenne = ...          # a completer : reutiliser moyenne_echantillon
+    return ...             # a completer : la distance a ESPERANCE
+\end{python}
+
+\ifnxVersionProfesseur
+\begin{corrige}{1SPE-VARALEA-EXP-002-ATOI}
+\textbf{1.} \code{moyenne = moyenne\_echantillon(n, graine)} puis
+\code{return abs(moyenne - ESPERANCE)}.
+
+\textbf{2.} Avec $n=40$ on obtient $\lvert 1{,}9-1{,}3\rvert = 0{,}6$; avec
+$n=400$ la moyenne vaut $1{,}54$ et l'écart tombe à $0{,}24$. Augmenter la taille de l'échantillon
+rapproche la moyenne observée de l'espérance, sans jamais garantir l'égalité.
+\end{corrige}
+\fi

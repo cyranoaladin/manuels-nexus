@@ -52,15 +52,32 @@ def numeric_value(raw: Any) -> Fraction | None:
     return value
 
 
+def classify_option(raw: Any) -> str:
+    """Domaine d'analyse d'une option, pour borner le claim global."""
+
+    s = " ".join(str(raw).split()).strip().strip("$").strip()
+    if not s:
+        return "NOT_APPLICABLE"
+    if numeric_value(raw) is not None:
+        return "SUCCESSFULLY_NORMALIZED"
+    if re.search(r"[a-zA-ZÀ-ÿ]{3,}", re.sub(r"\\[a-zA-Z]+", "", s)):
+        return "NOT_APPLICABLE"          # option redigee en langue naturelle
+    if re.search(r"\\(sqrt|frac|dfrac|pi|sigma|mu|times|cdot)|[a-zA-Z]", s):
+        return "SYMBOLIC_COMPARISON"     # numerique mais non normalise ici
+    return "PARSE_FAILURE"
+
+
 def audit_chapter(path: Path) -> dict[str, Any]:
     document = json.loads(path.read_text(encoding="utf-8"))
     questions = document.get("questions") or []
     equivalences, comparable, total_options = [], 0, 0
+    domains: Counter[str] = Counter()
     for question in questions:
         options = question.get("options") or {}
         values: dict[Fraction, list[str]] = {}
         for letter, text in options.items():
             total_options += 1
+            domains[classify_option(text)] += 1
             value = numeric_value(text)
             if value is None:
                 continue
@@ -95,6 +112,7 @@ def audit_chapter(path: Path) -> dict[str, Any]:
         "questions": len(questions),
         "options_total": total_options,
         "options_numerically_comparable": comparable,
+        "parser_domains": dict(sorted(domains.items())),
         "equivalent_option_groups": equivalences,
         "key_distribution": counts,
         "key_spread": spread,
@@ -115,12 +133,64 @@ def build_report() -> dict[str, Any]:
             "max_consecutive_identical_keys": 2,
             "all_positions_used": True,
         },
+        "parser_coverage": {
+            "TOTAL_QUESTIONS": sum(c["questions"] for c in chapters),
+            "TOTAL_OPTIONS": sum(c["options_total"] for c in chapters),
+            "ELIGIBLE_NUMERIC_COMPARISONS": sum(
+                c["parser_domains"].get("SUCCESSFULLY_NORMALIZED", 0)
+                + c["parser_domains"].get("SYMBOLIC_COMPARISON", 0)
+                + c["parser_domains"].get("PARSE_FAILURE", 0)
+                for c in chapters
+            ),
+            "SUCCESSFULLY_NORMALIZED": sum(
+                c["parser_domains"].get("SUCCESSFULLY_NORMALIZED", 0) for c in chapters
+            ),
+            "SYMBOLIC_COMPARISONS": sum(
+                c["parser_domains"].get("SYMBOLIC_COMPARISON", 0) for c in chapters
+            ),
+            "NOT_APPLICABLE": sum(
+                c["parser_domains"].get("NOT_APPLICABLE", 0) for c in chapters
+            ),
+            "PARSE_FAILURES": sum(
+                c["parser_domains"].get("PARSE_FAILURE", 0) for c in chapters
+            ),
+            "UNKNOWN": 0,
+            "claim_scope": (
+                "l'absence d'equivalence n'est affirmee que sur les options "
+                "effectivement normalisees ; les options symboliques et les "
+                "options redigees en langue naturelle sont hors domaine"
+            ),
+        },
         "totals": {
             "chapters": len(chapters),
             "questions": sum(c["questions"] for c in chapters),
             "equivalent_option_groups": sum(len(c["equivalent_option_groups"]) for c in chapters),
             "chapters_failing_distribution": sum(
                 1 for c in chapters if not c["distribution_contract_met"]
+            ),
+        },
+        "key_distribution_ledger": {
+            "policy": "regle editoriale Nexus, PAS une exigence du BO",
+            "rule": "toutes les positions utilisees, ecart max-min <= 1, suite <= 2",
+            "chapters_out_of_policy": sorted(
+                (
+                    {
+                        "chapter": c["chapter"],
+                        "question_count": c["questions"],
+                        "distribution": c["key_distribution"],
+                        "spread": c["key_spread"],
+                        "longest_identical_run": c["max_consecutive_identical_keys"],
+                        "severity": (
+                            "PRIORITY_EXPLOITABLE"
+                            if c["key_spread"] >= 8
+                            or min(c["key_distribution"].values()) == 0
+                            else "STANDARD"
+                        ),
+                    }
+                    for c in chapters
+                    if not c["distribution_contract_met"]
+                ),
+                key=lambda row: (-row["spread"], row["chapter"]),
             ),
         },
         "chapters": chapters,
