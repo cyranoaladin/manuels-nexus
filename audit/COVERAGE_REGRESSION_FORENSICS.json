@@ -62,7 +62,33 @@
     "coverage_data_sha256": "sha256:e0a4b992c1d1e6d2e36ead3c924ced4ef53e153e9efbcb37ae54b7167374c106",
     "exit_cause": "COVERAGE_GATE",
     "exit_code": 1,
-    "isolation_note": "deux mesures anterieures ont ete interrompues par SIGTERM a 89 % et 95 % ; celle-ci a ete conduite dans une session detachee (setsid) et est allee au bout",
+    "interrupted_attempts": {
+      "cause": "UNKNOWN",
+      "classification": "EXTERNAL_PROCESS_GROUP_TERMINATION",
+      "exit_code": 143,
+      "not_to_be_confused_with": "HARNESS_WAITER_TERMINATED, qui designe uniquement les boucles de veille arretees volontairement (exit 144) et n'a jamais concerne un processus de test",
+      "occurrences": [
+        {
+          "progress": "95%",
+          "run": "b_umbrella",
+          "sha": "aef0f87ae36342b44098ddeea9eeb81b40df240b"
+        },
+        {
+          "progress": "89%",
+          "run": "a_umbrella",
+          "sha": "aef0f87ae36342b44098ddeea9eeb81b40df240b"
+        }
+      ],
+      "resolution": "mesure conduite dans une session detachee (setsid), menee a terme",
+      "ruled_out": [
+        "systemd-oomd inactif",
+        "18 Go disponibles sur 31, aucune trace OOM",
+        "le tueur OOM enverrait SIGKILL (137), pas SIGTERM (143)"
+      ],
+      "signal": "SIGTERM",
+      "test_failure": false
+    },
+    "isolation_note": "deux mesures anterieures ont ete interrompues par un signal externe adresse au groupe de processus ; voir interrupted_attempts",
     "log_sha256": "sha256:7a217b4a16123b0970bf8845a80e600793708bf437a9e00b4004cb668d5d43e6",
     "measured_at_sha": "ae4ace830cb97f58f85c571f3d45a3752935576c"
   },
