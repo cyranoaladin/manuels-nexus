@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -43,9 +44,39 @@ def _entete(chapitre: str, source: str) -> str:
     return f"% META: {meta}\n% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.\n"
 
 
-def _clean_text(s: str) -> str:
+#: Balisage inline autorise dans un champ texte de QCM. Tout le reste est
+#: refuse : « responsabilite de l'auteur » n'est pas un contrat verifiable,
+#: et une macro inconnue peut tronquer ou deformer le rendu sans erreur.
+MACROS_TEXTE_AUTORISEES = frozenset({"code", "emph", "textbf", "textit", "verb"})
+
+_MACRO = re.compile(r"\\([a-zA-Z]+)")
+
+
+class QcmMarkupError(ValueError):
+    """Balisage non autorise dans un champ texte de QCM."""
+
+
+def valider_balisage_texte(champ: str, valeur: str) -> None:
+    """Refuse toute macro hors liste blanche en dehors du mode mathematique."""
+
+    if not isinstance(valeur, str):
+        return
+    hors_math = "".join(re.split(r"\$[^$]*\$", valeur))
+    inconnues = sorted(
+        {m.group(1) for m in _MACRO.finditer(hors_math)} - MACROS_TEXTE_AUTORISEES
+    )
+    if inconnues:
+        raise QcmMarkupError(
+            f"{champ} : balisage non autorise en texte : "
+            + ", ".join("\\" + name for name in inconnues)
+            + f" (autorise : {', '.join(sorted(MACROS_TEXTE_AUTORISEES))})"
+        )
+
+
+def _clean_text(s: str, champ: str = "champ") -> str:
     if not isinstance(s, str):
         return s
+    valider_balisage_texte(champ, s)
     s = s.replace("`^`", "\\code{\\textasciicircum}")
     parts = s.split('$')
     for i in range(0, len(parts), 2):
@@ -79,7 +110,10 @@ def rendre(donnees: dict) -> str:
         if question["capacite"] != capacite_courante:
             capacite_courante = question["capacite"]
             out.append(f"\n\\item[] \\textbf{{Capacite {capacite_courante}}}\n")
-        enonce = _clean_text(question.get("enonce") or question.get("texte", ""))
+        enonce = _clean_text(
+            question.get("enonce") or question.get("texte", ""),
+            f"{question.get('id')}/enonce",
+        )
         out.append(f"\n\\item \\textbf{{[{question['id']}]}} {enonce}\n")
         out.append("  \\begin{enumerate}[label=\\Alph*.]\n")
         raw_opts = question.get("options") or {}
@@ -91,7 +125,7 @@ def rendre(donnees: dict) -> str:
             opts = {}
         for lettre in LETTRES:
             if lettre in opts:
-                opt_text = _clean_text(opts[lettre])
+                opt_text = _clean_text(opts[lettre], f"{question.get('id')}/options.{lettre}")
                 out.append(f"    \\item {opt_text}\n")
         out.append("  \\end{enumerate}\n")
     out.append("\n\\end{enumerate}\n")
@@ -116,7 +150,9 @@ def rendre(donnees: dict) -> str:
         for lettre in LETTRES:
             diagnostic = question["diagnostics"].get(lettre)
             if diagnostic:
-                err_txt = _clean_text(diagnostic['erreur'])
+                err_txt = _clean_text(
+                    diagnostic['erreur'], f"{question.get('id')}/diagnostics.{lettre}"
+                )
                 raw_renvoi = diagnostic.get('renvoi')
                 renvoi_txt = (
                     _clean_text(raw_renvoi.strip())
