@@ -7,6 +7,90 @@ $p$, et l'échec $\overline S$, de probabilité $1-p$. Lorsqu'on répète de deu
 à quatre fois la même épreuve, de façon indépendante, l'arbre porte les mêmes
 probabilités à chaque niveau.
 
+
+\subsection*{Construire l'arbre de deux épreuves indépendantes}
+
+On répète deux fois la même épreuve de Bernoulli de paramètre $p$. On note $S$
+le succès et $\overline S$ l'échec. Chaque branche porte sa probabilité, et
+elle est la même à chaque répétition : c'est ce que signifie \emph{identiques
+et indépendantes}.
+
+\begin{center}
+\begin{tikzpicture}[x=26mm, y=13mm, >={Stealth[length=2mm]},
+    every node/.style={font=\small}]
+  \node (r) at (0,0) {};
+  \node (s)  at (1, 1) {$S$};
+  \node (e)  at (1,-1) {$\overline S$};
+  \node (ss) at (2, 1.6) {$SS$};
+  \node (se) at (2, 0.4) {$S\overline S$};
+  \node (es) at (2,-0.4) {$\overline S S$};
+  \node (ee) at (2,-1.6) {$\overline S\,\overline S$};
+  \draw[->] (r) -- node[above, pos=.55] {$p$} (s);
+  \draw[->] (r) -- node[below, pos=.55] {$1-p$} (e);
+  \draw[->] (s) -- node[above, pos=.6] {$p$} (ss);
+  \draw[->] (s) -- node[below, pos=.6] {$1-p$} (se);
+  \draw[->] (e) -- node[above, pos=.6] {$p$} (es);
+  \draw[->] (e) -- node[below, pos=.6] {$1-p$} (ee);
+  \node[anchor=west, font=\footnotesize] at (2.35, 1.6) {$p^2$};
+  \node[anchor=west, font=\footnotesize] at (2.35, 0.4) {$p(1-p)$};
+  \node[anchor=west, font=\footnotesize] at (2.35,-0.4) {$(1-p)p$};
+  \node[anchor=west, font=\footnotesize] at (2.35,-1.6) {$(1-p)^2$};
+\end{tikzpicture}
+\end{center}
+
+Sur un chemin on \textbf{multiplie} les probabilités rencontrées. Pour obtenir
+la probabilité d'un événement, on \textbf{additionne} les probabilités des
+chemins qui le réalisent. Ici $P(\text{exactement un succès}) = p(1-p) + (1-p)p
+= 2p(1-p)$ : les deux chemins $S\overline S$ et $\overline S S$ conviennent.
+
+\subsection*{L'arbre complet de trois épreuves}
+
+Pour $n=3$, l'arbre possède $2^3 = 8$ chemins terminaux. On lit sur chaque
+feuille le nombre de succès du chemin.
+
+\begin{center}
+\begin{tikzpicture}[x=22mm, y=7.5mm, >={Stealth[length=2mm]},
+    every node/.style={font=\small}]
+  \node (r) at (0,0) {};
+  \node (a1) at (1, 4) {$S$};
+  \node (a2) at (1,-4) {$\overline S$};
+  \node (b1) at (2, 6) {$S$};
+  \node (b2) at (2, 2) {$\overline S$};
+  \node (b3) at (2,-2) {$S$};
+  \node (b4) at (2,-6) {$\overline S$};
+  \draw[->] (r) -- node[above, pos=.55, font=\footnotesize] {$p$} (a1);
+  \draw[->] (r) -- node[below, pos=.55, font=\footnotesize] {$1-p$} (a2);
+  \foreach \s/\t/\l in {a1/b1/{$p$}, a1/b2/{$1-p$}, a2/b3/{$p$}, a2/b4/{$1-p$}}
+    \draw[->] (\s) -- node[midway, above, font=\footnotesize] {\l} (\t);
+  \node (c1) at (3, 7) {$S$};   \node (c2) at (3, 5) {$\overline S$};
+  \node (c3) at (3, 3) {$S$};   \node (c4) at (3, 1) {$\overline S$};
+  \node (c5) at (3,-1) {$S$};   \node (c6) at (3,-3) {$\overline S$};
+  \node (c7) at (3,-5) {$S$};   \node (c8) at (3,-7) {$\overline S$};
+  \foreach \s/\t/\l in {b1/c1/{$p$}, b1/c2/{$1-p$}, b2/c3/{$p$}, b2/c4/{$1-p$},
+                        b3/c5/{$p$}, b3/c6/{$1-p$}, b4/c7/{$p$}, b4/c8/{$1-p$}}
+    \draw[->] (\s) -- node[midway, above, font=\footnotesize] {\l} (\t);
+  \foreach \n/\k in {c1/3, c2/2, c3/2, c4/1, c5/2, c6/1, c7/1, c8/0}
+    \node[anchor=west, font=\footnotesize] at ($(\n)+(4mm,0)$) {$k=\k$};
+\end{tikzpicture}
+\end{center}
+
+Un chemin comportant $k$ succès a pour probabilité $p^{k}(1-p)^{3-k}$, quel que
+soit l'ordre des succès. Il reste à compter les chemins : $k=0$ en compte $1$,
+$k=1$ en compte $3$, $k=2$ en compte $3$ et $k=3$ en compte $1$.
+
+\subsection*{Passer à quatre épreuves}
+
+Pour $n=4$, l'arbre possède $2^4 = 16$ chemins terminaux. On ne le dessine pas
+toujours en entier : on peut se contenter de compter les chemins réalisant
+l'événement cherché. La méthode est inchangée : probabilité d'un chemin
+$p^{k}(1-p)^{4-k}$, puis somme sur les chemins retenus.
+
+\erreurFrequente{
+Le nombre de chemins n'est pas $n$ : pour $n$ épreuves il y a $2^n$ chemins
+terminaux, et le nombre de chemins à exactement $k$ succès se compte sur
+l'arbre, il ne se devine pas.
+}
+
 \begin{fichemethode}{M6}{Calculer une probabilité sur un arbre répété}
 Pour calculer la probabilité d'obtenir exactement $k$ succès :
 \begin{enumerate}

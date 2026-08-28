@@ -476,10 +476,12 @@ def test_le_registre_de_dette_est_courant_et_reproductible() -> None:
     )
     assert result.returncode == 0, result.stdout + result.stderr
     ledger = _debt_ledger()
+    # 337 depuis l'ajout des six questions C6/C7 de 1SPE-VARIABLES-ALEATOIRES :
+    # les capacites « Experimentations » n'etaient pas evaluees.
     assert ledger["inventory"] == {
         "qcm_files": 35,
         "chapters": 35,
-        "questions": 331,
+        "questions": 337,
     }
     assert len(ledger["source_inputs"]) == 35
     _assert_debt_status_is_derived(ledger)

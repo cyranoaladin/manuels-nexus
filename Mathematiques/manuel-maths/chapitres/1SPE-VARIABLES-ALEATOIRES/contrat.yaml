@@ -10,6 +10,11 @@ capacites:
   - { code: C3, ref_capacite: 1SPE-VARIABLES-ALEATOIRES-C3, libelle_eleve: "Je sais representer par un arbre la repetition de n <= 4 epreuves de Bernoulli independantes et identiques, puis etudier le nombre de succes." }
   - { code: C4, ref_capacite: 1SPE-VARIABLES-ALEATOIRES-C4, libelle_eleve: "Je sais utiliser la linearite de l'esperance pour calculer E(aX+b)." }
   - { code: C5, ref_capacite: 1SPE-VARIABLES-ALEATOIRES-C5, libelle_eleve: "Je sais resoudre des problemes contextualises (jeux, decisions, assurances) a l'aide de variables aleatoires." }
+  # C6 et C7 sont des capacites INTERNES Nexus derivees de la rubrique
+  # « Experimentations » du programme 1SPE 2026, et non des libelles recopies
+  # sous le sous-titre officiel « Capacites attendues ».
+  - { code: C6, ref_capacite: 1SPE-VARIABLES-ALEATOIRES-C6, origine: CAPACITE_INTERNE_DERIVEE, rubrique_officielle: "Experimentations", libelle_eleve: "Je sais simuler une variable aleatoire et des echantillons, et lire, comprendre et ecrire une fonction Python renvoyant la moyenne d'un echantillon de taille n." }
+  - { code: C7, ref_capacite: 1SPE-VARIABLES-ALEATOIRES-C7, origine: CAPACITE_INTERNE_DERIVEE, rubrique_officielle: "Experimentations", libelle_eleve: "Je sais etudier experimentalement la fluctuation des moyennes d'echantillons autour de l'esperance, simuler N echantillons et interpreter l'ecart entre moyenne empirique et esperance, notamment au regard de 2 sigma / racine(n)." }
 
 extensions_facultatives:
   - { code: X1, label: "Approfondissement — Vers la Terminale", libelle: "Loi binomiale nommee, coefficients binomiaux et formule des probabilites", programme_alignment: OPTIONAL_EXTENSION }
