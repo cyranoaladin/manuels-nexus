@@ -1,11 +1,11 @@
 {
  "chapitre": "1SPE-VARIABLES-ALEATOIRES",
- "titre": "Variables aleatoires — QCM d'auto-evaluation",
+ "titre": "Variables aléatoires — QCM d'auto-evaluation",
  "questions": [
   {
    "id": "Q1",
    "capacite": "C1",
-   "enonce": "On lance un de equilibre. Soit $X$ le resultat. Quelle est $P(X = 3)$ ?",
+   "enonce": "On lance un de équilibré. Soit $X$ le résultat. Quelle est $P(X = 3)$ ?",
    "options": {
     "A": "$\\frac{1}{6}$",
     "B": "$\\frac{1}{3}$",
@@ -15,15 +15,15 @@
    "correcte": "A",
    "diagnostics": {
     "B": {
-     "erreur": "L'eleve divise 1 par la valeur de X au lieu du nombre de faces.",
+     "erreur": "L'élève divise 1 par la valeur de X au lieu du nombre de faces.",
      "renvoi": "C1, definition"
     },
     "C": {
-     "erreur": "L'eleve confond P(X=3) et P(X<=3).",
-     "renvoi": "C1, loi de probabilite"
+     "erreur": "L'élève confond P(X=3) et P(X<=3).",
+     "renvoi": "C1, loi de probabilité"
     },
     "D": {
-     "erreur": "L'eleve divise par le nombre de faces restantes (5) au lieu du nombre total de faces (6).",
+     "erreur": "L'élève divise par le nombre de faces restantes (5) au lieu du nombre total de faces (6).",
      "renvoi": "C1, denombrement des issues possibles"
     }
    }
@@ -31,7 +31,7 @@
   {
    "id": "Q2",
    "capacite": "C1",
-   "enonce": "La somme des probabilites d'un tableau de loi vaut toujours :",
+   "enonce": "La somme des probabilités d'un tableau de loi vaut toujours :",
    "options": {
     "A": "$0$",
     "B": "$1$",
@@ -41,15 +41,15 @@
    "correcte": "B",
    "diagnostics": {
     "A": {
-     "erreur": "L'eleve retient seulement la borne inferieure 0 de chaque probabilite au lieu de sommer toutes les probabilites de la loi.",
+     "erreur": "L'élève retient seulement la borne inferieure 0 de chaque probabilité au lieu de sommer toutes les probabilités de la loi.",
      "renvoi": "C1, propriete"
     },
     "C": {
-     "erreur": "L'eleve suppose a tort que la somme vaut 1/2 parce qu'il imagine deux issues equiprobables, alors que la somme d'une loi complete vaut 1.",
+     "erreur": "L'élève suppose a tort que la somme vaut 1/2 parce qu'il imagine deux issues equiprobables, alors que la somme d'une loi complete vaut 1.",
      "renvoi": "C1, propriete"
     },
     "D": {
-     "erreur": "Confusion entre somme des probabilites et cardinal de X(Omega).",
+     "erreur": "Confusion entre somme des probabilités et cardinal de X(Omega).",
      "renvoi": "C1, propriete"
     }
    }
@@ -67,23 +67,23 @@
    "correcte": "C",
    "diagnostics": {
     "A": {
-     "erreur": "L'eleve ne compte qu'une seule issue (PF ou FP) au lieu des deux.",
+     "erreur": "L'élève ne compte qu'une seule issue (PF ou FP) au lieu des deux.",
      "renvoi": "C1, construction loi"
     },
     "B": {
-     "erreur": "L'eleve divise par 3 valeurs au lieu de 4 issues.",
+     "erreur": "L'élève divise par 3 valeurs au lieu de 4 issues.",
      "renvoi": "C1, construction loi"
     },
     "D": {
-     "erreur": "L'eleve calcule P(X>=1) au lieu de P(X=1).",
-     "renvoi": "C1, loi de probabilite"
+     "erreur": "L'élève calcule P(X>=1) au lieu de P(X=1).",
+     "renvoi": "C1, loi de probabilité"
     }
    }
   },
   {
    "id": "Q4",
    "capacite": "C2",
-   "enonce": "On lance un de equilibre. Quelle est l'esperance $E(X)$ du resultat ?",
+   "enonce": "On lance un de équilibré. Quelle est l'espérance $E(X)$ du résultat ?",
    "options": {
     "A": "$3$",
     "B": "$6$",
@@ -93,16 +93,16 @@
    "correcte": "D",
    "diagnostics": {
     "A": {
-     "erreur": "L'eleve moyenne seulement les faces 1 a 5 : (1+2+3+4+5)/5=3, en oubliant la face 6.",
-     "renvoi": "C2, esperance"
+     "erreur": "L'élève moyenne seulement les faces 1 a 5 : (1+2+3+4+5)/5=3, en oubliant la face 6.",
+     "renvoi": "C2, espérance"
     },
     "B": {
-     "erreur": "Confusion esperance et valeur maximale.",
-     "renvoi": "C2, esperance"
+     "erreur": "Confusion espérance et valeur maximale.",
+     "renvoi": "C2, espérance"
     },
     "C": {
-     "erreur": "L'eleve moyenne seulement les faces 2 a 6 : (2+3+4+5+6)/5=4, en oubliant la face 1.",
-     "renvoi": "C2, esperance"
+     "erreur": "L'élève moyenne seulement les faces 2 a 6 : (2+3+4+5+6)/5=4, en oubliant la face 1.",
+     "renvoi": "C2, espérance"
     }
    }
   },
@@ -119,16 +119,16 @@
    "correcte": "A",
    "diagnostics": {
     "B": {
-     "erreur": "L'eleve confond variance et ecart type.",
-     "renvoi": "C2, ecart type"
+     "erreur": "L'élève confond variance et écart type.",
+     "renvoi": "C2, écart type"
     },
     "C": {
-     "erreur": "L'eleve met V au carre au lieu de prendre la racine.",
-     "renvoi": "C2, ecart type"
+     "erreur": "L'élève met V au carré au lieu de prendre la racine.",
+     "renvoi": "C2, écart type"
     },
     "D": {
-     "erreur": "L'eleve divise V par 2.",
-     "renvoi": "C2, ecart type"
+     "erreur": "L'élève divise V par 2.",
+     "renvoi": "C2, écart type"
     }
    }
   },
@@ -145,15 +145,15 @@
    "correcte": "B",
    "diagnostics": {
     "A": {
-     "erreur": "L'eleve calcule E(X)+V(X) = 9.",
+     "erreur": "L'élève calcule E(X)+V(X) = 9.",
      "renvoi": "C2, Koenig-Huygens"
     },
     "C": {
-     "erreur": "L'eleve donne [E(X)]^2 = 16.",
+     "erreur": "L'élève donne [E(X)]^2 = 16.",
      "renvoi": "C2, Koenig-Huygens"
     },
     "D": {
-     "erreur": "L'eleve calcule E(X)*V(X).",
+     "erreur": "L'élève calcule E(X)*V(X).",
      "renvoi": "C2, Koenig-Huygens"
     }
    }
@@ -161,7 +161,7 @@
   {
    "id": "Q7",
    "capacite": "C3",
-   "enonce": "On repete trois fois, de facon independante, une epreuve dont le succes a probabilite $\\frac{1}{2}$. Quelle est la probabilite d'obtenir trois succes ?",
+   "enonce": "On répète trois fois, de facon indépendante, une épreuve dont le succès a probabilité $\\frac{1}{2}$. Quelle est la probabilité d'obtenir trois succès ?",
    "options": {
     "A": "$\\frac{1}{6}$",
     "B": "$\\frac{3}{8}$",
@@ -171,15 +171,15 @@
    "correcte": "C",
    "diagnostics": {
     "A": {
-     "erreur": "L'eleve divise 1 par deux fois le nombre d'epreuves, au lieu de multiplier les trois probabilites du chemin SSS.",
+     "erreur": "L'élève divise 1 par deux fois le nombre d'épreuves, au lieu de multiplier les trois probabilités du chemin SSS.",
      "renvoi": "C3, arbre pondere"
     },
     "B": {
-     "erreur": "L'eleve compte trois positions possibles pour un echec ; il calcule ainsi la probabilite d'exactement deux succes.",
-     "renvoi": "C3, nombre de succes"
+     "erreur": "L'élève compte trois positions possibles pour un échec ; il calcule ainsi la probabilité d'exactement deux succès.",
+     "renvoi": "C3, nombre de succès"
     },
     "D": {
-     "erreur": "L'eleve conserve la probabilite d'un seul succes et ne multiplie pas le long des trois branches du chemin SSS.",
+     "erreur": "L'élève conserve la probabilité d'un seul succès et ne multiplie pas le long des trois branches du chemin SSS.",
      "renvoi": "C3, arbre pondere"
     }
    }
@@ -187,7 +187,7 @@
   {
    "id": "Q8",
    "capacite": "C3",
-   "enonce": "On repete deux fois, de facon independante, une epreuve dont le succes a probabilite $\\frac{1}{3}$. Quelle est la probabilite d'obtenir exactement un succes ?",
+   "enonce": "On répète deux fois, de facon indépendante, une épreuve dont le succès a probabilité $\\frac{1}{3}$. Quelle est la probabilité d'obtenir exactement un succès ?",
    "options": {
     "A": "$\\frac{2}{9}$",
     "B": "$\\frac{2}{3}$",
@@ -197,23 +197,23 @@
    "correcte": "D",
    "diagnostics": {
     "A": {
-     "erreur": "L'eleve calcule la probabilite d'un seul chemin, succes puis echec, et oublie le chemin echec puis succes.",
+     "erreur": "L'élève calcule la probabilité d'un seul chemin, succès puis échec, et oublie le chemin échec puis succès.",
      "renvoi": "C3, arbre pondere"
     },
     "B": {
-     "erreur": "L'eleve additionne 1/3 et 1/3 au lieu de multiplier sur chaque chemin puis d'additionner les deux chemins favorables.",
+     "erreur": "L'élève additionne 1/3 et 1/3 au lieu de multiplier sur chaque chemin puis d'additionner les deux chemins favorables.",
      "renvoi": "C3, arbre pondere"
     },
     "C": {
-     "erreur": "L'eleve calcule la probabilite de deux succes : (1/3)^2=1/9.",
-     "renvoi": "C3, nombre de succes"
+     "erreur": "L'élève calcule la probabilité de deux succès : (1/3)^2=1/9.",
+     "renvoi": "C3, nombre de succès"
     }
    }
   },
   {
    "id": "Q9",
    "capacite": "C3",
-   "enonce": "Une epreuve a deux issues. On la repete trois fois. Combien l'arbre complet possede-t-il de chemins terminaux ?",
+   "enonce": "Une épreuve a deux issues. On la répète trois fois. Combien l'arbre complet possede-t-il de chemins terminaux ?",
    "options": {
     "A": "$8$",
     "B": "$3$",
@@ -223,15 +223,15 @@
    "correcte": "A",
    "diagnostics": {
     "B": {
-     "erreur": "L'eleve donne le nombre de niveaux de l'arbre au lieu du nombre de chemins terminaux.",
+     "erreur": "L'élève donne le nombre de niveaux de l'arbre au lieu du nombre de chemins terminaux.",
      "renvoi": "C3, arbre pondere"
     },
     "C": {
-     "erreur": "L'eleve calcule 2 fois 3, alors que le nombre de chemins double a chaque niveau.",
+     "erreur": "L'élève calcule 2 fois 3, alors que le nombre de chemins double a chaque niveau.",
      "renvoi": "C3, arbre pondere"
     },
     "D": {
-     "erreur": "L'eleve calcule 3 au carre, comme s'il y avait trois issues par epreuve au lieu de deux.",
+     "erreur": "L'élève calcule 3 au carré, comme s'il y avait trois issues par épreuve au lieu de deux.",
      "renvoi": "C3, arbre pondere"
     }
    }
@@ -249,16 +249,16 @@
    "correcte": "B",
    "diagnostics": {
     "A": {
-     "erreur": "L'eleve calcule 3E(X) mais oublie le terme constant -2.",
-     "renvoi": "C4, linearite"
+     "erreur": "L'élève calcule 3E(X) mais oublie le terme constant -2.",
+     "renvoi": "C4, linéarité"
     },
     "C": {
-     "erreur": "L'eleve calcule 2E(X)-2 en utilisant 2 comme coefficient de X.",
-     "renvoi": "C4, linearite"
+     "erreur": "L'élève calcule 2E(X)-2 en utilisant 2 comme coefficient de X.",
+     "renvoi": "C4, linéarité"
     },
     "D": {
-     "erreur": "L'eleve soustrait seulement 2 a E(X) et oublie la multiplication par 3.",
-     "renvoi": "C4, linearite"
+     "erreur": "L'élève soustrait seulement 2 a E(X) et oublie la multiplication par 3.",
+     "renvoi": "C4, linéarité"
     }
    }
   },
@@ -275,16 +275,16 @@
    "correcte": "C",
    "diagnostics": {
     "A": {
-     "erreur": "L'eleve calcule -2E(X)=-10 mais oublie d'ajouter le terme constant 7.",
-     "renvoi": "C4, linearite"
+     "erreur": "L'élève calcule -2E(X)=-10 mais oublie d'ajouter le terme constant 7.",
+     "renvoi": "C4, linéarité"
     },
     "B": {
-     "erreur": "L'eleve remplace le coefficient -2 par 2 et calcule 2E(X)+7=17.",
-     "renvoi": "C4, linearite"
+     "erreur": "L'élève remplace le coefficient -2 par 2 et calcule 2E(X)+7=17.",
+     "renvoi": "C4, linéarité"
     },
     "D": {
-     "erreur": "L'eleve calcule E(X)+7=12 et oublie le coefficient -2 devant X.",
-     "renvoi": "C4, linearite"
+     "erreur": "L'élève calcule E(X)+7=12 et oublie le coefficient -2 devant X.",
+     "renvoi": "C4, linéarité"
     }
    }
   },
@@ -301,16 +301,16 @@
    "correcte": "D",
    "diagnostics": {
     "A": {
-     "erreur": "L'eleve calcule 4E(X)-1=4 fois (-3)-1=-13 en changeant les deux signes de l'expression.",
-     "renvoi": "C4, linearite"
+     "erreur": "L'élève calcule 4E(X)-1=4 fois (-3)-1=-13 en changeant les deux signes de l'expression.",
+     "renvoi": "C4, linéarité"
     },
     "B": {
-     "erreur": "L'eleve calcule E(X)+1=-2 et oublie le coefficient -4 devant X.",
-     "renvoi": "C4, linearite"
+     "erreur": "L'élève calcule E(X)+1=-2 et oublie le coefficient -4 devant X.",
+     "renvoi": "C4, linéarité"
     },
     "C": {
-     "erreur": "L'eleve remplace le coefficient -4 par 4 et calcule 4E(X)+1=-11.",
-     "renvoi": "C4, linearite"
+     "erreur": "L'élève remplace le coefficient -4 par 4 et calcule 4E(X)+1=-11.",
+     "renvoi": "C4, linéarité"
     }
    }
   },
@@ -345,31 +345,31 @@
    "capacite": "C5",
    "enonce": "Un jeu a un gain moyen $E(G) = -0{,}5$ euro. Le jeu est :",
    "options": {
-    "A": "Equitable",
-    "B": "Defavorable au joueur",
+    "A": "Équitable",
+    "B": "Défavorable au joueur",
     "C": "Favorable au joueur",
-    "D": "Impossible a determiner"
+    "D": "Impossible a déterminer"
    },
    "correcte": "B",
    "diagnostics": {
     "A": {
-     "erreur": "Confusion E(G)=0 (equitable) et E(G)<0.",
-     "renvoi": "C5, jeu equitable"
+     "erreur": "Confusion E(G)=0 (équitable) et E(G)<0.",
+     "renvoi": "C5, jeu équitable"
     },
     "C": {
      "erreur": "Signe de E(G) inverse.",
-     "renvoi": "C5, interpretation esperance"
+     "renvoi": "C5, interprétation espérance"
     },
     "D": {
-     "erreur": "L'eleve pense que l'esperance ne suffit pas.",
-     "renvoi": "C5, interpretation esperance"
+     "erreur": "L'élève pense que l'espérance ne suffit pas.",
+     "renvoi": "C5, interprétation espérance"
     }
    }
   },
   {
    "id": "Q15",
    "capacite": "C5",
-   "enonce": "Prime $c=60$ euros, sinistre $1000$ euros, probabilite $1/25$. Benefice moyen ?",
+   "enonce": "Prime $c=60$ euros, sinistre $1000$ euros, probabilité $1/25$. Benefice moyen ?",
    "options": {
     "A": "$60$ euros",
     "B": "$-40$ euros",
@@ -379,15 +379,15 @@
    "correcte": "C",
    "diagnostics": {
     "A": {
-     "erreur": "L'eleve donne la prime sans soustraire l'esperance du sinistre.",
+     "erreur": "L'élève donne la prime sans soustraire l'espérance du sinistre.",
      "renvoi": "C5, assurance"
     },
     "B": {
-     "erreur": "L'eleve donne l'oppose du cout moyen du sinistre, -pI=-40, sans ajouter la prime de 60 euros.",
+     "erreur": "L'élève donne l'oppose du cout moyen du sinistre, -pI=-40, sans ajouter la prime de 60 euros.",
      "renvoi": "C5, assurance"
     },
     "D": {
-     "erreur": "L'eleve calcule correctement le cout moyen du sinistre pI=40 mais le confond avec le benefice moyen c-pI.",
+     "erreur": "L'élève calcule correctement le cout moyen du sinistre pI=40 mais le confond avec le benefice moyen c-pI.",
      "renvoi": "C5, assurance"
     }
    }
@@ -399,29 +399,29 @@
    "options": {
     "A": "Le nombre de valeurs prises par $X$",
     "B": "La graine du generateur",
-    "C": "Le nombre d'echantillons simules",
-    "D": "La taille de l'echantillon simule"
+    "C": "Le nombre d'échantillons simules",
+    "D": "La taille de l'échantillon simule"
    },
    "correcte": "D",
    "diagnostics": {
     "A": {
-     "erreur": "L'eleve confond la taille de l'echantillon avec le nombre de valeurs de la loi.",
-     "renvoi": "C6, taille d'un echantillon"
+     "erreur": "L'élève confond la taille de l'échantillon avec le nombre de valeurs de la loi.",
+     "renvoi": "C6, taille d'un échantillon"
     },
     "B": {
-     "erreur": "L'eleve confond le parametre de taille et la graine de reproductibilite.",
+     "erreur": "L'élève confond le paramètre de taille et la graine de reproductibilite.",
      "renvoi": "C6, role de la graine"
     },
     "C": {
-     "erreur": "L'eleve confond n (taille d'un echantillon) et N (nombre d'echantillons).",
-     "renvoi": "C7, N echantillons"
+     "erreur": "L'élève confond n (taille d'un échantillon) et N (nombre d'échantillons).",
+     "renvoi": "C7, N échantillons"
     }
    }
   },
   {
    "id": "Q17",
    "capacite": "C6",
-   "enonce": "Une fonction renvoie la moyenne d'un echantillon de taille $n$ stocke dans \\code{somme}. Quelle ligne faut-il ecrire ?",
+   "enonce": "Une fonction renvoie la moyenne d'un échantillon de taille $n$ stocke dans \\code{somme}. Quelle ligne faut-il ecrire ?",
    "options": {
     "A": "\\code{return somme / n}",
     "B": "\\code{return somme}",
@@ -431,16 +431,16 @@
    "correcte": "A",
    "diagnostics": {
     "B": {
-     "erreur": "L'eleve renvoie la somme et non la moyenne : il oublie de diviser.",
-     "renvoi": "C6, moyenne d'un echantillon"
+     "erreur": "L'élève renvoie la somme et non la moyenne : il oublie de diviser.",
+     "renvoi": "C6, moyenne d'un échantillon"
     },
     "C": {
-     "erreur": "L'eleve divise par le nombre de valeurs de la loi au lieu de la taille de l'echantillon.",
-     "renvoi": "C6, taille d'un echantillon"
+     "erreur": "L'élève divise par le nombre de valeurs de la loi au lieu de la taille de l'échantillon.",
+     "renvoi": "C6, taille d'un échantillon"
     },
     "D": {
-     "erreur": "L'eleve inverse le quotient.",
-     "renvoi": "C6, moyenne d'un echantillon"
+     "erreur": "L'élève inverse le quotient.",
+     "renvoi": "C6, moyenne d'un échantillon"
     }
    }
   },
@@ -457,23 +457,23 @@
    "correcte": "B",
    "diagnostics": {
     "A": {
-     "erreur": "L'eleve s'arrete au premier intervalle sans cumuler les probabilites.",
+     "erreur": "L'élève s'arrete au premier intervalle sans cumuler les probabilités.",
      "renvoi": "C6, simulation par intervalles cumules"
     },
     "C": {
-     "erreur": "L'eleve compare u a la derniere probabilite au lieu du cumul.",
+     "erreur": "L'élève compare u a la derniere probabilité au lieu du cumul.",
      "renvoi": "C6, simulation par intervalles cumules"
     },
     "D": {
-     "erreur": "L'eleve renvoie le nombre tire au hasard au lieu de la valeur de X associee.",
-     "renvoi": "C6, simuler une variable aleatoire"
+     "erreur": "L'élève renvoie le nombre tire au hasard au lieu de la valeur de X associee.",
+     "renvoi": "C6, simuler une variable aléatoire"
     }
    }
   },
   {
    "id": "Q19",
    "capacite": "C7",
-   "enonce": "Pour la variable du chapitre, $\\mu=1{,}3$ et $\\sigma=2{,}1$. Pour un echantillon de taille $n=100$, que vaut $\\dfrac{2\\sigma}{\\sqrt{n}}$ ?",
+   "enonce": "Pour la variable du chapitre, $\\mu=1{,}3$ et $\\sigma=2{,}1$. Pour un échantillon de taille $n=100$, que vaut $\\dfrac{2\\sigma}{\\sqrt{n}}$ ?",
    "options": {
     "A": "$0{,}21$",
     "B": "$4{,}2$",
@@ -483,15 +483,15 @@
    "correcte": "C",
    "diagnostics": {
     "A": {
-     "erreur": "L'eleve oublie le facteur 2 au numerateur.",
+     "erreur": "L'élève oublie le facteur 2 au numérateur.",
      "renvoi": "C7, seuil 2 sigma sur racine de n"
     },
     "B": {
-     "erreur": "L'eleve oublie de diviser par racine de n.",
+     "erreur": "L'élève oublie de diviser par racine de n.",
      "renvoi": "C7, seuil 2 sigma sur racine de n"
     },
     "D": {
-     "erreur": "L'eleve renvoie sigma sans appliquer la formule.",
+     "erreur": "L'élève renvoie sigma sans appliquer la formule.",
      "renvoi": "C7, fluctuation des moyennes"
     }
    }
@@ -499,7 +499,7 @@
   {
    "id": "Q20",
    "capacite": "C7",
-   "enonce": "On simule des echantillons de taille $n$ de plus en plus grande. L'ecart typique entre la moyenne $m$ d'un echantillon et l'esperance $\\mu$ :",
+   "enonce": "On simule des échantillons de taille $n$ de plus en plus grande. L'écart typique entre la moyenne $m$ d'un échantillon et l'espérance $\\mu$ :",
    "options": {
     "A": "augmente",
     "B": "devient nul des que $n>30$",
@@ -509,15 +509,15 @@
    "correcte": "D",
    "diagnostics": {
     "A": {
-     "erreur": "L'eleve pense que davantage de tirages disperse davantage la moyenne.",
+     "erreur": "L'élève pense que davantage de tirages disperse davantage la moyenne.",
      "renvoi": "C7, fluctuation des moyennes"
     },
     "B": {
-     "erreur": "L'eleve croit a un seuil au-dela duquel la fluctuation disparait.",
+     "erreur": "L'élève croit a un seuil au-dela duquel la fluctuation disparait.",
      "renvoi": "C7, fluctuation des moyennes"
     },
     "C": {
-     "erreur": "L'eleve ne relie pas la dispersion de la moyenne a la taille de l'echantillon.",
+     "erreur": "L'élève ne relie pas la dispersion de la moyenne a la taille de l'échantillon.",
      "renvoi": "C7, fluctuation des moyennes"
     }
    }
@@ -525,7 +525,7 @@
   {
    "id": "Q21",
    "capacite": "C7",
-   "enonce": "On simule $N$ echantillons de taille $n$ et on compte ceux pour lesquels $|m-\\mu|\\leq \\dfrac{2\\sigma}{\\sqrt{n}}$. La proportion observee est proche de :",
+   "enonce": "On simule $N$ échantillons de taille $n$ et on compte ceux pour lesquels $|m-\\mu|\\leq \\dfrac{2\\sigma}{\\sqrt{n}}$. La proportion observee est proche de :",
    "options": {
     "A": "$95\\,\\%$",
     "B": "$50\\,\\%$",
@@ -535,15 +535,15 @@
    "correcte": "A",
    "diagnostics": {
     "B": {
-     "erreur": "L'eleve confond la proportion attendue avec une chance sur deux.",
+     "erreur": "L'élève confond la proportion attendue avec une chance sur deux.",
      "renvoi": "C7, proportion dans l'intervalle 2 sigma"
     },
     "C": {
-     "erreur": "L'eleve croit l'encadrement toujours verifie.",
+     "erreur": "L'élève croit l'encadrement toujours vérifie.",
      "renvoi": "C7, proportion dans l'intervalle 2 sigma"
     },
     "D": {
-     "erreur": "L'eleve donne la proportion des cas hors de l'intervalle.",
+     "erreur": "L'élève donne la proportion des cas hors de l'intervalle.",
      "renvoi": "C7, proportion dans l'intervalle 2 sigma"
     }
    }
