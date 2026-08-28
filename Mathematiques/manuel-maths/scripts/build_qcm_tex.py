@@ -87,6 +87,9 @@ def _clean_text(s: str, champ: str = "champ") -> str:
         # dangereux qu'une erreur, car la perte de contenu passe inapercue.
         # { } et \ restent a l'auteur : ils portent du balisage reel
         # (\code{...} par exemple), et le smoke de compilation est le garde-fou.
+        # ~ est un espace insecable en LaTeX : « X ~ B(n,p) » s'imprime
+        # « X B(n,p) » et le symbole « suit la loi » disparait sans erreur.
+        parts[i] = parts[i].replace("~", "\\textasciitilde{}")
         parts[i] = parts[i].replace("%", "\\%")
         parts[i] = parts[i].replace("#", "\\#")
         parts[i] = parts[i].replace("&", "\\&")

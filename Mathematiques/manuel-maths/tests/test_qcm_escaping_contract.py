@@ -99,6 +99,7 @@ def test_le_balisage_reste_a_l_auteur(producteur, caractere: str) -> None:
     ("brut", "attendu"),
     [
         ("99% de reussite", "99\\% de reussite"),
+        ("X ~ B(n,p)", "X \\textasciitilde{} B(n,p)"),
         ("cas #3 retenu", "cas \\#3 retenu"),
         ("A & B", "A \\& B"),
     ],
@@ -190,7 +191,7 @@ def test_le_tex_qcm_genere_compile(tmp_path: Path) -> None:
 
 # ------------------------------------------ mutations compilees par caractere ---
 
-CARACTERES_TEXTE = ["_", "%", "#", "&", "{", "}", "\\"]
+CARACTERES_TEXTE = ["_", "%", "#", "&", "~", "{", "}", "\\"]
 
 
 def _document_synthetique(marqueur: str) -> dict:
@@ -263,7 +264,7 @@ def test_chaque_caractere_special_traverse_source_producteur_et_compilation(
     #   { }       portent du balisage reel -> laisses a l'auteur, ne compilent
     #             pas seuls ; le smoke de compilation est le garde-fou
     #   \\         absorbe par TeX, compile
-    POSSEDES = {"_", "%", "#", "&"}
+    POSSEDES = {"_", "%", "#", "&", "~"}
     AUTEUR = {"{", "}"}
     if marqueur in POSSEDES:
         assert compile_ok, run.stdout[-2000:]

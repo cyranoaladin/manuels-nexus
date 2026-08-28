@@ -173,6 +173,7 @@ def test_la_fixture_historique_echoue_sans_la_correction(producteur, tmp_path: P
         ("Un taux de 99 % puis APRES.", "Un taux de 99 % puis APRES."),
         ("Le cas # 3 puis APRES.", "Le cas # 3 puis APRES."),
         ("A & B puis APRES.", "A & B puis APRES."),
+        ("Pour X ~ B(n,p) puis APRES.", "Pour X ~ B(n,p) puis APRES."),
     ],
 )
 def test_le_texte_simple_est_integralement_restitue(
@@ -205,3 +206,30 @@ def test_les_contenus_mathematiques_ne_sont_pas_alteres(
     corps = "\n".join(l for l in tex.splitlines() if not l.startswith("% "))
     rendu = _compiler(corps, tmp_path)
     assert _normalise("puis APRES.") in rendu
+
+
+@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
+def test_le_cas_reel_tspe_probabilites_q5_conserve_le_symbole_de_loi(
+    producteur, tmp_path: Path
+) -> None:
+    """Perte d'un TOKEN, sans troncature : le tilde s'evaporait.
+
+    « Pour X ~ B(n,p) » s'imprimait « Pour X B(n,p) » : le symbole « suit la
+    loi » disparaissait sans erreur de compilation, car ~ est un espace
+    insecable en LaTeX.
+    """
+
+    source = json.loads(
+        (CHAPITRES / "TSPE-PROBABILITES" / "qcm" / "TSPE-PROBABILITES-QCM.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    question = next(q for q in source["questions"] if q["id"] == "Q5")
+
+    assert "~" in question["enonce"], "la fixture historique doit contenir le tilde"
+
+    rendu = _rendre_et_extraire(
+        producteur, _document(question["enonce"], question["options"]), tmp_path
+    )
+
+    assert "~" in rendu, "le symbole de loi doit rester visible dans le PDF"
