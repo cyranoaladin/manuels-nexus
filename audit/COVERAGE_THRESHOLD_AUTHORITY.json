@@ -1,0 +1,41 @@
+{
+  "artifact_type": "coverage_threshold_authority",
+  "calibration_command": "python -m pytest tests -q --cov=scripts --cov-branch",
+  "calibration_vs_enforcement": {
+    "note": "le seuil a ete calibre sur la seule suite racine tests/ ; il est applique a l'invocation umbrella qui collecte tout le depot. Executer davantage de tests ne peut qu'augmenter la couverture de scripts/, donc l'ecart ne vient pas de la commande mais de la croissance du denominateur.",
+    "same_command": false
+  },
+  "configuration_key": "[tool.coverage.report] fail_under",
+  "configuration_path": "pyproject.toml",
+  "documented_rationale": "audit/COVERAGE_TRAJECTORY.md",
+  "enforced_command": "python -m pytest --import-mode=importlib --cov=scripts",
+  "introduced_at_74_by": {
+    "commit": "9e3fe7c34a9968c4145d5922afbb3d9818d21ec6",
+    "date": "2026-07-30",
+    "subject": "[CI][AUDIT] branche les gates de Phase 0.1",
+    "value": 74
+  },
+  "last_known_commit_where_supported_umbrella_met_threshold": "NEVER_PROVEN",
+  "never_proven_evidence": "aucune mesure archivee de l'invocation umbrella au-dessus du seuil : la seule mesure de reference documentee porte sur la commande de calibration, et les trois releves umbrella disponibles donnent 69,77 %, 69,42 % et 69,32 %",
+  "raised_to_76_83_by": {
+    "commit": "ad5d38537f652b4791a7fbf44bcec5f55ae01a62",
+    "date": "2026-07-30",
+    "subject": "[CI][COUVERTURE] verrouille le plancher de Phase 0",
+    "value": 76.83
+  },
+  "rationale_summary": "cliquet : le seuil a ete verrouille sur la mesure du jour, 4556/5799 lignes et 1705/2350 branches, soit 76,83 % combines. Le document le qualifie explicitement de plancher de Phase 0, non d'un niveau suffisant pour une release.",
+  "schema_version": 1,
+  "scope": {
+    "branch_coverage": true,
+    "denominator_growth_factor": 2.93,
+    "include_patterns": [],
+    "omit_patterns": [],
+    "source": [
+      "scripts"
+    ],
+    "statements_at_calibration": 5799,
+    "statements_now": 16991
+  },
+  "threshold": 76.83,
+  "threshold_modified_by_this_lot": false
+}

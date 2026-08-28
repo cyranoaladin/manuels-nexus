@@ -1,0 +1,60 @@
+{
+  "artifact_type": "suites_current_freeze_binding",
+  "binding_state": "CURRENT_EQUIVALENT_TO_FROZEN_CONTENT",
+  "current_branch": {
+    "binding": "INFORMATIONAL_ONLY",
+    "note": "le nom de branche n'entre dans aucun verdict",
+    "value": "codex/t3-publish-readiness-current"
+  },
+  "current_object_count": 161,
+  "current_object_set_digest": "sha256:0be376f21539b674a0e7e2bad2b49bdff5aab7ed7ae537dc372a9cd8ea1a574d",
+  "current_repository_sha": "c22184c579d354d6d80e3d52461956e4cd4eb60c",
+  "decision_ref": "decision humaine 2026-08-28 : conserver le gel c667f12b / 161",
+  "digest_semantics": {
+    "comparable_pair": "freeze_content_projection vs current_object_set_digest",
+    "excluded_from_comparison": [
+      "git_blob_sha1",
+      "source_commit_sha",
+      "HEAD",
+      "nom de branche",
+      "chemin absolu",
+      "worktree"
+    ],
+    "freeze_object_set_digest": "enveloppe historique du gel, inclut le blob Git et le commit d'origine ; non comparable a un autre commit"
+  },
+  "findings": {
+    "covered_source_drift": [],
+    "missing_objects": [],
+    "modified_objects": [],
+    "programme_authority_drift": [],
+    "supplementary_objects": []
+  },
+  "freeze_content_projection": "sha256:0be376f21539b674a0e7e2bad2b49bdff5aab7ed7ae537dc372a9cd8ea1a574d",
+  "freeze_object_count": 161,
+  "freeze_object_set_digest": "sha256:67d8006298299b44029de8ba8f85b500d9b3619997a0c596e63c20e1cffeee2d",
+  "freeze_source_sha": "c667f12b1792f31981b6b5894c8c604df1bce634",
+  "object_blob_identity_pass": true,
+  "programme_authority_identity_pass": true,
+  "review_state": {
+    "human_receipts": 0,
+    "publication_approval": false,
+    "review_a": "PENDING_UNASSIGNED",
+    "review_b": "PENDING_UNASSIGNED"
+  },
+  "schema_version": 1,
+  "semantic_identity_pass": true,
+  "staleness_rules": {
+    "authority_line_of_another_chapter": "NOT_STALE",
+    "automatic_rebind": "FORBIDDEN",
+    "branch_renamed": "NOT_STALE",
+    "chapter_programme_mapping_changed": "STALE_CONTENT_CHANGED",
+    "covered_source_content_changed": "STALE_CONTENT_CHANGED",
+    "derived_envelope_refreshed": "NOT_STALE",
+    "head_advanced": "NOT_STALE",
+    "object_added_or_removed": "STALE_CONTENT_CHANGED",
+    "other_worktree": "NOT_STALE",
+    "qcm_correction_or_remediation_changed": "STALE_CONTENT_CHANGED",
+    "variant_visibility_changed": "STALE_CONTENT_CHANGED"
+  },
+  "variant_semantic_identity_pass": true
+}

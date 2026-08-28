@@ -15,6 +15,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "audit" / "1SPE_SUITES_REVIEW_SOURCE_FREEZE.json"
 SOURCE_SHA = "c667f12b1792f31981b6b5894c8c604df1bce634"
+CHAPTER_ID = "1SPE-SUITES"
 CHAPTER_PREFIX = "Mathematiques/manuel-maths/chapitres/1SPE-SUITES"
 QCM_JSON = f"{CHAPTER_PREFIX}/qcm/1SPE-SUITES-QCM.json"
 QCM_TEX = f"{CHAPTER_PREFIX}/qcm/1SPE-SUITES-QCM.tex"
@@ -229,21 +230,71 @@ def _current_blob(path: str) -> str:
     return str(_git("hash-object", path)).strip()
 
 
+#: Sources d'autorite structurees par chapitre : une ligne d'un AUTRE chapitre
+#: ne concerne pas cette revue. Voir programme_authority_projection.
+CHAPTER_SCOPED_AUTHORITY_PATHS = ("audit/official_program_coverage/1SPE.json",)
+
+
+def _current_bytes(path: str) -> bytes:
+    candidate = ROOT / path
+    if not candidate.is_file():
+        raise ValueError(f"current source missing: {path}")
+    return candidate.read_bytes()
+
+
+def programme_authority_projection(path: str, payload: bytes) -> str:
+    """Projection de la source d'autorite limitee au chapitre gele.
+
+    Une source d'autorite couvre un manuel entier. Lier le gel au sha256 du
+    FICHIER ENTIER perime la revue d'un chapitre des qu'une ligne d'un autre
+    chapitre bouge : c'est le defaut structurel deja releve deux fois dans cet
+    audit. La projection ne retient que ce qui porte sur CHAPTER_ID ; pour une
+    source non structuree par chapitre, elle degenere en digest integral, ce
+    qui reste le comportement conservateur.
+    """
+
+    if path not in CHAPTER_SCOPED_AUTHORITY_PATHS:
+        return "sha256:" + hashlib.sha256(payload).hexdigest()
+    document = json.loads(payload.decode("utf-8"))
+    rows = [row for row in document.get("rows", []) if row.get("chapter") == CHAPTER_ID]
+    return canonical_digest(
+        {
+            "artifact_name": document.get("artifact_name"),
+            "manual": document.get("manual"),
+            "applicable_school_year": document.get("applicable_school_year"),
+            "schema_version": document.get("schema_version"),
+            "chapter": CHAPTER_ID,
+            "rows": rows,
+        }
+    )
+
+
 def validate_current_bindings(payload: dict[str, Any]) -> None:
-    bindings = list(payload["objects"])
-    bindings.extend((payload["contract"], payload["qcm"]["generated_tex"]))
-    bindings.extend(payload["programme_authority"]["sources"])
-    # BUILD_MANIFEST is frozen above as contextual evidence at SOURCE_SHA.  Its
-    # empty derived envelope is refreshed whenever repository sources advance;
-    # that mechanical refresh must not rebind otherwise unchanged chapter
-    # content.  A future receipt policy may add a separate render binding.
+    """Le gel est une identite de CONTENU, pas une exigence de commit fige.
+
+    Les sources du chapitre sont liees a l'octet : toute edition les perime.
+    Les sources d'autorite programme sont liees par projection de chapitre :
+    une edition qui ne touche aucune ligne du chapitre ne rebinde rien.
+    BUILD_MANIFEST reste hors liaison vivante : son enveloppe derivee est
+    rafraichie des que le depot avance et ce mecanisme ne dit rien du contenu.
+    """
+
+    content_bindings = list(payload["objects"])
+    content_bindings.extend((payload["contract"], payload["qcm"]["generated_tex"]))
     seen: set[str] = set()
-    for row in bindings:
+    for row in content_bindings:
         path = row["path"]
         if path in seen:
             continue
         seen.add(path)
         if _current_blob(path) != row["git_blob_sha1"]:
+            raise ValueError(f"STALE freeze binding: {path}")
+
+    for row in payload["programme_authority"]["sources"]:
+        path = row["path"]
+        frozen = programme_authority_projection(path, _source_bytes(path))
+        current = programme_authority_projection(path, _current_bytes(path))
+        if frozen != current:
             raise ValueError(f"STALE freeze binding: {path}")
 
 

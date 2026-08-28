@@ -1,0 +1,36 @@
+{
+  "V1_CURRENT_BUILD_RECEIPTS": 0,
+  "V1_CURRENT_MANIFESTS": 0,
+  "V1_RUNTIME_CONSUMERS": 1,
+  "V1_RUNTIME_CONSUMER_PATHS": [
+    {
+      "class": "HISTORICAL_MIGRATION_ONLY",
+      "path": "scripts/inventory_collection.py",
+      "restriction": "enveloppe vide uniquement, aucun build observe",
+      "symbol": "legacy_envelope_migration"
+    }
+  ],
+  "V1_RUNTIME_PRODUCERS": 0,
+  "V1_RUNTIME_PRODUCER_PATHS": [],
+  "V1_SCHEMA_CLASS": "HISTORICAL_MIGRATION_ONLY",
+  "V1_SCHEMA_PRESENT": true,
+  "artifact_type": "build_manifest_v1_sunset",
+  "generated_by": "scripts/build_manifest_v1_sunset_ledger.py",
+  "manifests": [
+    {
+      "observed_builds": 0,
+      "path": "audit/BUILD_MANIFEST.json",
+      "provenance_binding_version": 2,
+      "schema_version": 2
+    }
+  ],
+  "no_current_build_can_be_attested_in_v1": true,
+  "publish_ready_requirement": {
+    "V1_CURRENT_BUILD_RECEIPTS": 0,
+    "V1_CURRENT_MANIFESTS": 0,
+    "V1_RUNTIME_CONSUMERS": 0,
+    "V1_RUNTIME_PRODUCERS": 0
+  },
+  "receipts": [],
+  "schema_version": 1
+}

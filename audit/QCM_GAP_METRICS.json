@@ -2,7 +2,296 @@
   "artifact_type": "qcm_gap_metrics",
   "schema_version": 1,
   "generated_by": "scripts/build_qcm_gap_metrics.py",
-  "source_sha": "b685bd7bec4b13d4d3f11ffd9891cf3182c79053",
+  "observed_source_sha": "c22184c579d354d6d80e3d52461956e4cd4eb60c",
+  "source_digest": "sha256:9f6bd150c7fd57bfece4e016125849ba5ecda7889daa2713a6a9acb4fcf9caa0",
+  "source_inputs": [
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/qcm/1SPE-DERIVATION-GLOBAL-QCM.json",
+      "sha256": "sha256:59225da0bfaa9e6a984edefd4a2a7e00117bd7bf51fcc6f43fb855c608cb5caa"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/qcm/1SPE-DERIVATION-LOCAL-QCM.json",
+      "sha256": "sha256:201ab5e9dfa724ba88dced7a1456911e408b1cf2b250663fe6fbb04cca15066b"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
+      "sha256": "sha256:705e05cbc1c4fe771a5994a40483c86ca18b0f4691a9c7375424a9e73afe6e46"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/qcm/1SPE-GEOREP-QCM.json",
+      "sha256": "sha256:3e360a989356a66686cccdc3a1817c634b4f98b1d1b8071a89b3fcc752d102e4"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/qcm/1SPE-PROBCOND-QCM.json",
+      "sha256": "sha256:d3c08f4a8a64c555a1ba1f67516fd0847a67ff007dcdabf98a0dfb93a6c2c51b"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/qcm/1SPE-PRODUIT-SCALAIRE-QCM.json",
+      "sha256": "sha256:ac9278c7b96ea4788cb5861397d964271489f31d39a79c6548847b61093b04ea"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/qcm/1SPE-SECDEG-QCM.json",
+      "sha256": "sha256:02f1d18c8072bdbfb84b82c9f50e1a1e631db9e0bb8d93b5d90e687fba0f4d9a"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json",
+      "sha256": "sha256:df282723b3532463ebfa701614b91ac0e7f2f414bcdcda0bb599c390d526e029"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/qcm/1SPE-TRIGONOMETRIE-QCM.json",
+      "sha256": "sha256:66d79369f6394415bf1878a730da578dd0a60ca5c8f79af1cf6937bf3d73dfd8"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
+      "sha256": "sha256:41e0e593b4cb45b92ff22e16f0eb20e9f6dcf2716cdba749f830b965b9b5d2a3"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/qcm/TCOMPL-CALCULS-AIRES-QCM.json",
+      "sha256": "sha256:df12ec1e0f59e64e22d321de074037debe72bb58794be74b83dfebed385c8b1f"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/qcm/TCOMPL-CORRELATION-CAUSALITE-QCM.json",
+      "sha256": "sha256:132a1125fcaa669efe2e183d40da1c04a3b9501803c0d1c4d16c52c6525b39d5"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/qcm/TCOMPL-ECHANTILLONNAGE-QCM.json",
+      "sha256": "sha256:2e5e72553ce7ae839731e12c02dcc621b3b367cbd3e6921e08da154dcb894db9"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/qcm/TCOMPL-INEGALITES-QCM.json",
+      "sha256": "sha256:a72aa99fc80f478725b379f08171c78ccdae6c7f61fc96c9ad6006929fab3ca1"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/qcm/TCOMPL-INFERENCE-BAYESIENNE-QCM.json",
+      "sha256": "sha256:53085513b75096b44b63533dc0cf1e0590365fac4a17f282e0aedebe0f5595e3"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/qcm/TCOMPL-LOGARITHME-HISTORIQUE-QCM.json",
+      "sha256": "sha256:eb4d4c59cecb45edc12a8ec11e0a99c2a00f56b596b53d73247de07f25124dac"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/qcm/TCOMPL-MODELES-EVOLUTION-QCM.json",
+      "sha256": "sha256:166261a4f1230d352fcb10aaa69412c2e22e121e4bfa9e162126312fe503db83"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/qcm/TCOMPL-MODELES-FONCTION-QCM.json",
+      "sha256": "sha256:847d7079a4ba3c7ee3192d391e2bc597b2587038abd82fb7f42c1ac9e4cbb95e"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/qcm/TCOMPL-TEMPS-ATTENTE-QCM.json",
+      "sha256": "sha256:4ca8d7ad6e33f29c813e48aad50499df515053d5ada2d246bd70419ac17ef6e3"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.json",
+      "sha256": "sha256:0b5e532d43bb2fc4a24c034606132c19220ed3144f446d18470cfd1d3616fe5f"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.json",
+      "sha256": "sha256:ab1ae08ef5da0a635cf56b9d2a3eb1ee5c78efa24be9e38a0a129315f7a9993d"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.json",
+      "sha256": "sha256:2068db2c4753e2948bc46c7c8ac2786db13c2b6b584b4c3228d45a91ecba130b"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.json",
+      "sha256": "sha256:8ee0b1f0fe79549ba38a8ea4b669948c024e1eb80cea1825475c7ac8b1d15feb"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.json",
+      "sha256": "sha256:a71da6d36e722150c6a00e331be0a65fc234caeee59d4276cb07ca0c2eccb0d3"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/qcm/TSPE-CALCUL-INTEGRAL-QCM.json",
+      "sha256": "sha256:b7ea2b9acf759627bcce61a390ced40bfcd4a631a8834805e89bed6ccba96fc5"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/qcm/TSPE-COMBINATOIRE-QCM.json",
+      "sha256": "sha256:8bb26dea90f53e37500513c0433d581bcec23bbb0e68ec75e3c9ac8c4329be35"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/qcm/TSPE-CONTINUITE-QCM.json",
+      "sha256": "sha256:8c6d65c3baf4e388264ea680e24ac1f4c86101326f3721115004f9a5f4ef6f42"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/qcm/TSPE-DERIVATION-CONVEXITE-QCM.json",
+      "sha256": "sha256:1f83c72fbc730e90a84e4ea28373cb44116edaa27846ee48b51d2f816b31b9ef"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/qcm/TSPE-GEOMETRIE-ESPACE-QCM.json",
+      "sha256": "sha256:565b7d3423ebfc3093e3a37adb9a614de643d8559af8eff3ca558381b8f50432"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/qcm/TSPE-LIMITES-FONCTIONS-QCM.json",
+      "sha256": "sha256:8dd128188ec93aec454bbf58e190a0ec725eeed7f24c6eccdcf9abccb304b406"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/qcm/TSPE-LOGARITHME-QCM.json",
+      "sha256": "sha256:5c18ea3a9ad6b784630ceac334e7c4abf1932a9b8b090436e9aefb1d7fc68c9c"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/qcm/TSPE-PRIMITIVES-EQDIFF-QCM.json",
+      "sha256": "sha256:c93fa5c109740ebcf10043d17fc838391f116b82ba2ad295d4c6d6ac5c3a32af"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json",
+      "sha256": "sha256:b2629920abaacba1558e24856e08b02cbfa342fc57f2584c9f2d643a5b4f6e21"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/qcm/TSPE-SUITES-LIMITES-QCM.json",
+      "sha256": "sha256:6e264dcb548082da3b185794749c61451abd1965b3149acce9b4fca281ed2bee"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/qcm/TSPE-TRIGONOMETRIE-QCM.json",
+      "sha256": "sha256:6f9ee45b0f8f626fdf03373f695b63ac4c822ab5473f69c4195d597a1afd2f4f"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml",
+      "sha256": "sha256:00c3fb0f84ff9c09da76479b49a30dc9d5e2759b94ab3f1cf6bd907f49b8f7c3"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/contrat.yaml",
+      "sha256": "sha256:afc82bd969d0832c9c4bb86fd73ff23e36e73a6613e9c49e1ebd7b83d2f41ace"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/contrat.yaml",
+      "sha256": "sha256:1bb0727b244c6352c671d3381e95b5c7ce9966c07b5f3f074b73a70bdf4f9893"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/contrat.yaml",
+      "sha256": "sha256:66231b989863c7ec77e8749f47573106fe5df55555854a7647dfa825e194cc0d"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/contrat.yaml",
+      "sha256": "sha256:a0dcb795861fd6f4b8bf369ab1ce3b9782586073e2fca6db82d6d717774b2974"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/contrat.yaml",
+      "sha256": "sha256:34a1330543130b5c7d999e3d9c9a9c49c6a887ceed62878f4a0d8e8a0a90876c"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/contrat.yaml",
+      "sha256": "sha256:77fc35142c1b30142a781f8ca1221ba517d4479f492a6467416cbd09d6d9c678"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/contrat.yaml",
+      "sha256": "sha256:532c186525120ee729c7a1eeddbba6d3cea1ff59c86aa6bcdd1dbd94fe91acda"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-TRIGONOMETRIE/contrat.yaml",
+      "sha256": "sha256:1cfc5e2f73e7f9cd31dd02ba3f517fd39482a45920cc3eda941e28fd27e66303"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/contrat.yaml",
+      "sha256": "sha256:b17b9e0b657b2ae37bc8150896273d3109f50fedbed120992bdc43400f7a3907"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/contrat.yaml",
+      "sha256": "sha256:4ee9d7ffc8516bee9d8b9362888dfc1301f2cd5e11c5bcc4f2cb52b9aa51f08a"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/contrat.yaml",
+      "sha256": "sha256:1e2c2dcfa36f1c8ede8eecae6b0cd1441a27f701c7f26c42d113969919a185e6"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/contrat.yaml",
+      "sha256": "sha256:5833fe6598de80905986ab938c012babf72a87d440283c4cfebce975d0e3266d"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/contrat.yaml",
+      "sha256": "sha256:9b3cd8f0a309a75f65316930b895d1bf0c5c3296fd387d4b0dabd4d6f4c7d34e"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/contrat.yaml",
+      "sha256": "sha256:6ce0393f5a3a78da9388173662b4260315c33ccb23001325cebad8f025bb6f81"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/contrat.yaml",
+      "sha256": "sha256:483e1f63534cd55095db53668d4629f76c4915ed2a96c9d1e998a5511076d268"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/contrat.yaml",
+      "sha256": "sha256:5fd4975a4af099095d9c137adbcb2159c05f38dc22a53d2a173cc46b05e24e13"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/contrat.yaml",
+      "sha256": "sha256:cd15dd370d6ed01f8a7554128b3658952fea28f967e883f9cea269a7bc70a56c"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/contrat.yaml",
+      "sha256": "sha256:3ffb86c2149342ccc0a7b39366d6576da6fe6a590d86af6af235bb7cb827b377"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/contrat.yaml",
+      "sha256": "sha256:b4ab59461ee809f94882b378d7af3f449570509700dc741c532b8bc517191ac4"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/contrat.yaml",
+      "sha256": "sha256:4ffeafb279aeb6a9dd79c4f0f96595e26fb73256d85defde1e6276715529871f"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/contrat.yaml",
+      "sha256": "sha256:07d9afb8f79bbdc9b6c9e0cedca36fe8ce58fd5ef397afcd70ed75d8a2cac0c3"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/contrat.yaml",
+      "sha256": "sha256:4d622ef69478b7734dfe8af6ebe3803b0f6d1512484e9a722641b86e1c3ec628"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/contrat.yaml",
+      "sha256": "sha256:6a31ddba887ed5f1202fcecf75431b74db067a2270c06c1f059d408dfa0244e3"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/contrat.yaml",
+      "sha256": "sha256:77289528bb6a27ecbaf4ef56f54087744c878d92f530639ab49951e98e16709d"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/contrat.yaml",
+      "sha256": "sha256:2d91e775c903efd358a7d2fdce5799c0ad222d1d64f357844bac415588485618"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/contrat.yaml",
+      "sha256": "sha256:decba65ddf87d19aa4204164af00a61034631be4fa8b69b1a3e186c71f15ddf3"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/contrat.yaml",
+      "sha256": "sha256:eaa2d3d6ba8f54072be3a8c71f787c5236eff9c448cf6e4586052202e147fa12"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/contrat.yaml",
+      "sha256": "sha256:cfb9fa1abc8e2b3da265f5ee070d445778385d7f595a433ae2e41219a8e68ab3"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/contrat.yaml",
+      "sha256": "sha256:81774e8cd15df4962be7cba35b8e4f947d5ad6c8a05ef73e958409315113520f"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/contrat.yaml",
+      "sha256": "sha256:e1c622e811baa7ab3316cf6ec340f070a6c21fbb97a1389bb70e7d608e08159e"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/contrat.yaml",
+      "sha256": "sha256:62b2f88ab8077ef2b40b38879bb807ab542ca0dca0c8c353c17e60b07d4f44b0"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/contrat.yaml",
+      "sha256": "sha256:0078515ed184cd6d917f8ac17e6d4a9c0821ca90c8ceb91fb38ca57564f97ba4"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/contrat.yaml",
+      "sha256": "sha256:a0df90a339eae8d5016dd499fbb4cc48ec4a044e62ba58ed8dca4c52ab6feb4d"
+    },
+    {
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/contrat.yaml",
+      "sha256": "sha256:d2e504cab02990144370e3107928132d9e738e53a5b62e002312e5ed9fd6d08b"
+    },
+    {
+      "path": "audit/OFFICIAL_PROGRAM_COVERAGE_2026_2027.json",
+      "sha256": "sha256:5492fc914f271570ff1a9cd1b37cfa427d7aa35eb3fae5388e7697fb220348c3"
+    }
+  ],
+  "freshness_authority": "source_digest",
+  "freshness_note": "observed_source_sha est un constat ; il n'est jamais une condition de fraicheur. Un artefact de rapport epingle a un SHA serait perime par le commit qui le publie.",
   "inventory": {
     "chapters": 35,
     "questions": 331,

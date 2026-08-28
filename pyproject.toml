@@ -9,6 +9,11 @@ testpaths = [
 [tool.coverage.run]
 branch = true
 source = ["scripts"]
+# Le fichier de donnees de couverture ne doit jamais atterrir dans l'arbre de
+# travail : un `.coverage` non suivi suffit a faire echouer les gates du
+# manifeste sur "depot Git sale". La CI positionne deja COVERAGE_FILE, qui a
+# la priorite sur cette valeur ; ceci couvre les executions locales.
+data_file = "/tmp/nexus-coverage/.coverage"
 
 [tool.coverage.report]
 fail_under = 76.83

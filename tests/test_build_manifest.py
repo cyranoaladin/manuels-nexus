@@ -56,7 +56,7 @@ def test_inventory_error_diagnostic_allows_only_canonical_messages(
     manifest_module,
 ) -> None:
     allowed = inventory_module.InventoryError(
-        "branche de provenance du manifeste incohérente"
+        "dépôt Git sale pour le manifeste observé"
     )
     unsafe = inventory_module.InventoryError(
         "/tmp/private.yaml: api_key=SECRET_MARKER: YAML fragment"
@@ -76,7 +76,7 @@ def test_inventory_error_diagnostic_allows_only_canonical_messages(
         RuntimeError("api_key=do-not-expose"),
     )
 
-    assert allowed_diagnostic == "branche de provenance du manifeste incohérente"
+    assert allowed_diagnostic == "dépôt Git sale pour le manifeste observé"
     assert len(allowed_diagnostic) <= 240
     assert unsafe_diagnostic == "InventoryError"
     assert "SECRET_MARKER" not in unsafe_diagnostic
@@ -253,6 +253,22 @@ def _state_digest(builds: list[dict[str, object]]) -> str:
     return "sha256:" + hashlib.sha256(canonical).hexdigest()
 
 
+MANIFEST_SCHEMA_REF = "audit/schemas/v1/build-manifest-provenance-v2.schema.json"
+LEGACY_MANIFEST_SCHEMA_REF = "audit/schemas/v1/build-manifest.schema.json"
+
+
+def _provenance(branch: str | None, head: str, *, dirty: bool) -> dict[str, object]:
+    """Provenance v2 : la branche est constatee, elle ne lie rien."""
+
+    return {
+        "branch_binding": "NON_BINDING",
+        "dirty": dirty,
+        "head_sha": head,
+        "observed_branch": branch,
+        "provenance_binding_version": 2,
+    }
+
+
 def _manifest(head: str, builds: list[dict[str, object]]) -> dict[str, object]:
     return {
         "artifact_type": "build_manifest",
@@ -260,13 +276,9 @@ def _manifest(head: str, builds: list[dict[str, object]]) -> dict[str, object]:
         "builds": builds,
         "generated_by": "build_manifest.py",
         "model_digest": SHA256_B,
-        "provenance": {
-            "branch": "master",
-            "dirty": not bool(builds),
-            "head_sha": head,
-        },
-        "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
-        "schema_version": 1,
+        "provenance": _provenance("master", head, dirty=not bool(builds)),
+        "schema_ref": MANIFEST_SCHEMA_REF,
+        "schema_version": 2,
         "source_digest": SHA256_A,
     }
 
@@ -681,10 +693,10 @@ def _retarget_receipt_to_1nsi(
 
 
 def _install_schema(repository: Path) -> None:
-    schema = ROOT / "audit/schemas/v1/build-manifest.schema.json"
-    target = repository / "audit/schemas/v1/build-manifest.schema.json"
-    target.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(schema, target)
+    for relative in (LEGACY_MANIFEST_SCHEMA_REF, MANIFEST_SCHEMA_REF):
+        target = repository / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / relative, target)
 
 
 def _write_manifest(repository: Path, payload: dict[str, object]) -> None:
@@ -793,7 +805,7 @@ def _committed_observed_manifest_repository(
     provenance = payload["provenance"]
     assert isinstance(provenance, dict)
     provenance["dirty"] = False
-    provenance["branch"] = subprocess.run(
+    provenance["observed_branch"] = subprocess.run(
         ["git", "-C", str(repository), "branch", "--show-current"],
         check=True,
         capture_output=True,
@@ -847,7 +859,6 @@ def test_committed_manifest_accepts_ancestor_through_managed_report_commit(
     [
         ("provenance-nonancestor", "ancêtre"),
         ("build-nonancestor", "ancêtre"),
-        ("branch", "branche|provenance"),
         ("dirty", "provenance"),
         ("worktree-dirty", "provenance|sale"),
         ("source", "source_digest"),
@@ -878,7 +889,7 @@ def test_committed_manifest_rejects_ancestor_or_content_drift(
         build["git_sha"] = _unrelated_commit(tmp_path)
         _commit_manifest_payload(tmp_path, payload, "forge build ancestry")
     elif mutation == "branch":
-        provenance["branch"] = "other-branch"
+        provenance["observed_branch"] = "other-branch"
         _commit_manifest_payload(tmp_path, payload, "forge branch")
     elif mutation == "dirty":
         provenance["dirty"] = True
@@ -1158,11 +1169,9 @@ def _branch_rebind_manifest_repository(
     )
     _install_schema(repository)
     payload = _manifest(ancestor, [])
-    payload["provenance"] = {
-        "branch": "finalisation/collection-v1",
-        "dirty": False,
-        "head_sha": ancestor,
-    }
+    payload["provenance"] = _provenance(
+        "finalisation/collection-v1", ancestor, dirty=False
+    )
     manifest_path = repository / "audit/BUILD_MANIFEST.json"
     manifest_path.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
@@ -1275,11 +1284,9 @@ def test_refresh_empty_manifest_rebinds_empty_ancestor_manifest_to_current_branc
     assert refreshed["build_state_digest"] == _state_digest([])
     assert refreshed["source_digest"] == SHA256_A
     assert refreshed["model_digest"] == SHA256_B
-    assert refreshed["provenance"] == {
-        "branch": "integration/1spe-bo2026-traceability",
-        "dirty": False,
-        "head_sha": current_head,
-    }
+    assert refreshed["provenance"] == _provenance(
+        "integration/1spe-bo2026-traceability", current_head, dirty=False
+    )
 
 
 def test_refresh_empty_manifest_rejects_concurrent_empty_manifest_replacement(
@@ -1295,17 +1302,13 @@ def test_refresh_empty_manifest_rejects_concurrent_empty_manifest_replacement(
         text=True,
     ).stdout.strip()
     envelope = _manifest(current_head, [])
-    envelope["provenance"] = {
-        "branch": "integration/1spe-bo2026-traceability",
-        "dirty": False,
-        "head_sha": current_head,
-    }
+    envelope["provenance"] = _provenance(
+        "integration/1spe-bo2026-traceability", current_head, dirty=False
+    )
     substituted = deepcopy(payload)
-    substituted["provenance"] = {
-        "branch": "finalisation/collection-v1",
-        "dirty": False,
-        "head_sha": current_head,
-    }
+    substituted["provenance"] = _provenance(
+        "finalisation/collection-v1", current_head, dirty=False
+    )
     substituted_bytes = (
         json.dumps(
             substituted,
@@ -1454,7 +1457,9 @@ def test_branch_rebind_loader_allows_same_branch_same_head_empty_digest_refresh(
     ).stdout.strip()
     stale = _manifest(head, [])
     stale["provenance"] = {
-        "branch": branch,
+        "branch_binding": "NON_BINDING",
+        "observed_branch": branch,
+        "provenance_binding_version": 2,
         "dirty": False,
         "head_sha": head,
     }
@@ -1484,11 +1489,8 @@ def test_branch_rebind_loader_allows_same_branch_same_head_empty_digest_refresh(
 @pytest.mark.parametrize(
     ("invalid_context", "expected"),
     [
-        ("nonempty", "branche"),
+        ("nonempty", "variant non déclaré"),
         ("nonancestor", "ancêtre|ancetre"),
-        ("equal-head", "strict"),
-        ("detached", "branch|branche"),
-        ("missing-capability", "branche"),
         ("dirty", "sale"),
         ("invalid-digest", "build_state_digest"),
     ],
@@ -1569,6 +1571,60 @@ def test_refresh_empty_manifest_branch_rebind_refuses_unbounded_context(
             python_counter=lambda _path: (None, "unused"),
             empty_manifest_refresh_capability=capability,
         )
+
+
+@pytest.mark.parametrize(
+    "context", ["equal-head", "detached", "other-branch", "missing-capability"]
+)
+def test_branch_rebind_accepts_every_purely_non_semantic_context(
+    tmp_path: Path,
+    inventory_module,
+    context: str,
+) -> None:
+    """Aucun de ces contextes ne dit quoi que ce soit du contenu.
+
+    En liaison v1 les trois refusaient : HEAD identique exigeait un ancetre
+    strict, HEAD detachee exigeait une branche, et une autre branche exigeait
+    un rebind. Aucun ne touche une source ; ils sont donc acceptes en v2.
+    """
+
+    payload, manifest_path = _branch_rebind_manifest_repository(tmp_path)
+    provenance = payload["provenance"]
+    assert isinstance(provenance, dict)
+    if context == "equal-head":
+        provenance["head_sha"] = subprocess.run(
+            ["git", "-C", str(tmp_path), "rev-parse", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        manifest_path.write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True)
+            + "\n",
+            encoding="utf-8",
+        )
+    elif context == "detached":
+        subprocess.run(
+            ["git", "-C", str(tmp_path), "switch", "--detach", "-q"],
+            check=True,
+        )
+
+    capability = (
+        None
+        if context == "missing-capability"
+        else inventory_module._EMPTY_MANIFEST_BRANCH_REBIND_CAPABILITY
+    )
+    observed = inventory_module._load_observed_build_manifest(
+        tmp_path,
+        source_digest=SHA256_A,
+        model_digest=SHA256_B,
+        declared_assemblies=[],
+        pdfinfo_counter=lambda _path: (7, None),
+        python_counter=lambda _path: (None, "unused"),
+        empty_manifest_refresh_capability=capability,
+    )
+
+    assert observed == []
 
 
 def test_bounded_refresh_loader_never_ignores_nonempty_manifest_digests(
@@ -1667,12 +1723,14 @@ def test_empty_refresh_derivation_uses_only_the_bounded_inventory_path(
         "generated_by": "build_manifest.py",
         "model_digest": SHA256_B,
         "provenance": {
-            "branch": "fixture",
+            "branch_binding": "NON_BINDING",
+            "observed_branch": "fixture",
+            "provenance_binding_version": 2,
             "dirty": True,
             "head_sha": "a" * 40,
         },
-        "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
-        "schema_version": 1,
+        "schema_ref": MANIFEST_SCHEMA_REF,
+        "schema_version": 2,
         "source_digest": SHA256_A,
     }
 
@@ -2058,12 +2116,14 @@ def test_derive_stale_invalidation_envelope_uses_only_the_bounded_inventory_path
         "generated_by": "build_manifest.py",
         "model_digest": SHA256_B,
         "provenance": {
-            "branch": "fixture",
+            "branch_binding": "NON_BINDING",
+            "observed_branch": "fixture",
+            "provenance_binding_version": 2,
             "dirty": True,
             "head_sha": "a" * 40,
         },
-        "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
-        "schema_version": 1,
+        "schema_ref": MANIFEST_SCHEMA_REF,
+        "schema_version": 2,
         "source_digest": SHA256_A,
     }
 
@@ -2629,7 +2689,7 @@ def test_manifest_rejects_duplicate_manual_variant(
 
 @pytest.mark.parametrize(
     "mutation",
-    ["unrelated-head", "forged-branch", "dirty-observed-build"],
+    ["unrelated-head", "dirty-observed-build"],
 )
 def test_manifest_rejects_incoherent_envelope_provenance(
     tmp_path: Path,
@@ -2646,8 +2706,6 @@ def test_manifest_rejects_incoherent_envelope_provenance(
     payload = _manifest(head, [_build(head, pdf_path, pdf_bytes)])
     if mutation == "unrelated-head":
         payload["provenance"]["head_sha"] = "0" * 40  # type: ignore[index]
-    elif mutation == "forged-branch":
-        payload["provenance"]["branch"] = "forged"  # type: ignore[index]
     else:
         payload["provenance"]["dirty"] = True  # type: ignore[index]
     _write_manifest(tmp_path, payload)
@@ -3075,7 +3133,7 @@ def test_record_helper_refuses_failed_compile_or_preflight(
     assert path.read_bytes() == original
 
 
-@pytest.mark.parametrize("mutation", ["branch", "dirty"])
+@pytest.mark.parametrize("mutation", ["dirty"])
 def test_record_helper_rejects_forged_repository_provenance(
     tmp_path: Path,
     manifest_module,
@@ -3088,7 +3146,7 @@ def test_record_helper_rejects_forged_repository_provenance(
     original = path.read_bytes()
     forged = deepcopy(envelope)
     if mutation == "branch":
-        forged["provenance"]["branch"] = "forged"  # type: ignore[index]
+        forged["provenance"]["observed_branch"] = "forged"  # type: ignore[index]
     else:
         forged["provenance"]["dirty"] = False  # type: ignore[index]
     build = _build(head, "build/manual.pdf", b"%PDF")
@@ -3204,11 +3262,7 @@ def test_record_helper_advances_provenance_when_appending_after_commit(
         text=True,
     ).stdout.strip()
     envelope = deepcopy(current)
-    envelope["provenance"] = {
-        "branch": "master",
-        "dirty": False,
-        "head_sha": new_head,
-    }
+    envelope["provenance"] = _provenance("master", new_head, dirty=False)
     student = _build(new_head, "build/eleve.pdf", b"%PDF student")
     student["variant"] = "eleve"
     student["gates"]["student_separation"] = {"passed": True}  # type: ignore[index]
@@ -3747,11 +3801,7 @@ def test_receipt_derivation_recomputes_all_derived_evidence(
 
     assert envelope["source_digest"] == SHA256_A
     assert envelope["model_digest"] == SHA256_B
-    assert envelope["provenance"] == {
-        "branch": "master",
-        "dirty": True,
-        "head_sha": head,
-    }
+    assert envelope["provenance"] == _provenance("master", head, dirty=True)
     assert build["git_sha"] == head
     assert build["source_digest"] == SHA256_A
     assert build["model_digest"] == SHA256_B
@@ -5420,24 +5470,26 @@ def test_receipt_cli_activates_first_build_from_clean_stale_empty_manifest(
         "validator",
     ]
     payload = json.loads(manifest_path.read_text(encoding="utf-8"))
-    assert payload["provenance"] == {
-        "branch": "master",
-        "dirty": False,
-        "head_sha": head,
-    }
+    assert payload["provenance"] == _provenance("master", head, dirty=False)
     assert payload["builds"] == [build]
     assert payload["build_state_digest"] == _state_digest([build])
 
 
-def test_record_from_receipt_refuses_empty_manifest_from_other_branch(
+def test_empty_manifest_refresh_is_unaffected_by_a_branch_rename(
     tmp_path: Path,
     inventory_module,
-    manifest_module,
-    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    _head, receipt_path, manifest_path, _tracked_source = (
+    """Un renommage de branche ne dit rien du contenu : il ne refuse rien.
+
+    En liaison de provenance v1 ce scenario levait "branche de provenance du
+    manifeste incoherente". La v2 valide par identite de contenu ; la branche
+    est constatee et ne lie plus rien.
+    """
+
+    _head, _receipt_path, manifest_path, _tracked_source = (
         _install_clean_receipt_entrypoint_fixture(tmp_path)
     )
+    before = json.loads(manifest_path.read_text(encoding="utf-8"))
     subprocess.run(
         [
             "git",
@@ -5449,100 +5501,23 @@ def test_record_from_receipt_refuses_empty_manifest_from_other_branch(
         ],
         check=True,
     )
-    original = manifest_path.read_bytes()
 
-    def strict_bounded_builder(root: Path) -> dict[str, object]:
-        inventory_module._load_observed_build_manifest(
-            root,
-            source_digest=SHA256_A,
-            model_digest=SHA256_B,
-            declared_assemblies=[],
-            pdfinfo_counter=lambda _path: (7, None),
-            python_counter=lambda _path: (None, "unused"),
-            empty_manifest_refresh_capability=(
-                inventory_module._EMPTY_MANIFEST_REFRESH_CAPABILITY
-            ),
-        )
-        pytest.fail("le chemin receipt ne doit pas rattacher la branche")
-
-    fake_inventory = _bootstrap_inventory_module(
-        inventory_module,
-        bounded_builder=strict_bounded_builder,
-        strict_builder=lambda _root: pytest.fail(
-            "le chemin receipt ne doit pas appeler build_inventory"
+    observed = inventory_module._load_observed_build_manifest(
+        tmp_path,
+        source_digest=SHA256_A,
+        model_digest=SHA256_B,
+        declared_assemblies=[],
+        pdfinfo_counter=lambda _path: (7, None),
+        python_counter=lambda _path: (None, "unused"),
+        empty_manifest_refresh_capability=(
+            inventory_module._EMPTY_MANIFEST_REFRESH_CAPABILITY
         ),
     )
-    monkeypatch.setattr(
-        manifest_module,
-        "_load_inventory_module",
-        lambda: fake_inventory,
-    )
 
-    with pytest.raises(manifest_module.BuildManifestError) as captured:
-        manifest_module.record_from_receipt(receipt_path)
-
-    assert isinstance(captured.value.__cause__, inventory_module.InventoryError)
-    assert "branche" in str(captured.value.__cause__)
-    assert manifest_path.read_bytes() == original
-
-
-def test_receipt_cli_reports_inventory_branch_diagnostic(
-    tmp_path: Path,
-    inventory_module,
-    manifest_module,
-    monkeypatch: pytest.MonkeyPatch,
-    capsys: pytest.CaptureFixture[str],
-) -> None:
-    _head, receipt_path, manifest_path, _tracked_source = (
-        _install_clean_receipt_entrypoint_fixture(tmp_path)
-    )
-    subprocess.run(
-        [
-            "git",
-            "-C",
-            str(tmp_path),
-            "branch",
-            "-m",
-            "integration/1spe-bo2026-traceability",
-        ],
-        check=True,
-    )
-    original = manifest_path.read_bytes()
-
-    def strict_bounded_builder(root: Path) -> dict[str, object]:
-        inventory_module._load_observed_build_manifest(
-            root,
-            source_digest=SHA256_A,
-            model_digest=SHA256_B,
-            declared_assemblies=[],
-            pdfinfo_counter=lambda _path: (7, None),
-            python_counter=lambda _path: (None, "unused"),
-            empty_manifest_refresh_capability=(
-                inventory_module._EMPTY_MANIFEST_REFRESH_CAPABILITY
-            ),
-        )
-        pytest.fail("le chemin receipt ne doit pas rattacher la branche")
-
-    fake_inventory = _bootstrap_inventory_module(
-        inventory_module,
-        bounded_builder=strict_bounded_builder,
-        strict_builder=lambda _root: pytest.fail(
-            "le chemin receipt ne doit pas appeler build_inventory"
-        ),
-    )
-    monkeypatch.setattr(
-        manifest_module,
-        "_load_inventory_module",
-        lambda: fake_inventory,
-    )
-
-    assert manifest_module._run(["--receipt", str(receipt_path)]) == 2
-
-    captured = capsys.readouterr()
-    assert "branche de provenance du manifeste incohérente" in captured.err
-    assert "InventoryError" not in captured.err
-    assert "Traceback" not in captured.err
-    assert manifest_path.read_bytes() == original
+    assert observed == []
+    after = json.loads(manifest_path.read_text(encoding="utf-8"))
+    assert after["source_digest"] == before["source_digest"]
+    assert after["build_state_digest"] == before["build_state_digest"]
 
 
 def test_nonempty_receipt_cli_reports_inventory_business_diagnostic(

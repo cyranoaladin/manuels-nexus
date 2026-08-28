@@ -101,6 +101,9 @@ UNQUALIFIED_ANOMALIES_JSON_FILE = "audit/UNQUALIFIED_ANOMALIES.json"
 UNQUALIFIED_ANOMALIES_MD_FILE = "audit/UNQUALIFIED_ANOMALIES.md"
 BASELINE_UPDATE_REPORT_FILE = "audit/BASELINE_UPDATE_REPORT.md"
 BASELINE_FREEZE_REPORT_FILE = "audit/BASELINE_FREEZE_REPORT.md"
+#: v1 : provenance couplee au nom de branche. v2 : provenance adressee
+#: par le contenu ; la branche observee ne lie plus rien.
+_PROVENANCE_BINDING_VERSION = 2
 BUILD_MANIFEST_FILE = "audit/BUILD_MANIFEST.json"
 BUILD_PRODUCERS_FILE = "audit/BUILD_PRODUCERS.yaml"
 PDF_ARTIFACT_REGISTRY_FILE = "audit/PDF_ARTIFACT_REGISTRY.yaml"
@@ -151,7 +154,10 @@ SCHEMA_REGISTRY: Mapping[str, Mapping[int, str]] = MappingProxyType(
             {1: "audit/schemas/v1/anomalies-baseline.schema.json"}
         ),
         "build_manifest": MappingProxyType(
-            {1: "audit/schemas/v1/build-manifest.schema.json"}
+            {
+                1: "audit/schemas/v1/build-manifest.schema.json",
+                2: "audit/schemas/v1/build-manifest-provenance-v2.schema.json",
+            }
         ),
         "build_producers": MappingProxyType(
             {1: "audit/schemas/v1/build-producers.schema.json"}
@@ -2673,11 +2679,10 @@ def _observed_git_state(
             ("rev-parse", "HEAD"),
             description="git HEAD",
         ),
-        _git_required_value(
-            root,
-            ("branch", "--show-current"),
-            description="git branch",
-        ),
+        # HEAD detachee : la branche est vide. Depuis la liaison de provenance
+        # v2 elle ne lie rien, donc elle ne peut plus rendre indisponible
+        # l'etat Git observe.
+        _git_value(root, ("branch", "--show-current"), ""),
         dirty,
     )
 
@@ -2838,20 +2843,39 @@ def _load_observed_build_manifest(
             raise InventoryError("provenance du manifeste invalide")
         if dirty:
             raise InventoryError("dépôt Git sale pour le manifeste observé")
-        recorded_branch = provenance.get("branch")
-        branch_differs = recorded_branch != branch
-        if may_rebind_empty_branch and not branch:
-            raise InventoryError("branche Git détachée ou indisponible")
-        if branch_differs and not may_rebind_empty_branch:
-            raise InventoryError("branche de provenance du manifeste incohérente")
-        if (
-            branch_differs
-            and may_rebind_empty_branch
-            and provenance.get("head_sha") == head_sha
-        ):
-            raise InventoryError(
-                "provenance du manifeste sans ancêtre Git strict"
-            )
+        # PROVENANCE_BINDING_VERSION 2 : le nom de branche n'est plus une
+        # autorite de contenu. En v1 un simple renommage de branche invalidait
+        # le manifeste a sources strictement identiques -- 16 tests racine
+        # rouges sans qu'aucune source ne change. L'identite du manifeste est
+        # desormais portee par source_digest, model_digest et
+        # build_state_digest, plus l'ascendance Git de head_sha.
+        # Migration unique v1 -> v2, bornee a une enveloppe SANS build observe :
+        # aucune preuve de build ne peut etre blanchie par ce chemin.
+        legacy_envelope_migration = (
+            (may_refresh_empty or may_rebind_empty_branch)
+            and not builds
+            and payload.get("schema_version") == 1
+        )
+        if not legacy_envelope_migration:
+            if (
+                provenance.get("provenance_binding_version")
+                != _PROVENANCE_BINDING_VERSION
+            ):
+                raise InventoryError(
+                    "version de liaison de provenance non supportée"
+                )
+            if provenance.get("branch_binding") != "NON_BINDING":
+                raise InventoryError(
+                    "liaison de branche interdite dans la provenance"
+                )
+            if "branch" in provenance:
+                raise InventoryError(
+                    "champ de branche contraignant hérité dans la provenance"
+                )
+        # En v1, un rebind consecutif a un changement de branche exigeait un
+        # HEAD strictement plus recent. La branche ne liant plus rien, un HEAD
+        # identique n'est plus qu'un rafraichissement de digests sur enveloppe
+        # vide : le refuser reintroduirait une dependance au nom de branche.
         if builds and provenance.get("dirty") is not False:
             raise InventoryError(
                 "provenance du manifeste sale pour des builds observés"
@@ -4792,7 +4816,13 @@ def _build_provenance(
         **common,
         "git_available": True,
         "head_sha": head_sha,
-        "branch": branch,
+        # BRANCH_NAME_BINDING = FORBIDDEN. Le nom de branche etait recopie ici
+        # et se retrouvait donc dans QUATRE artefacts rendus compares octet a
+        # octet ; le meme arbre, vu depuis une autre branche, faisait echouer
+        # --check avec quatre diffs. La branche observee reste disponible via
+        # Git a tout instant : la graver dans un rendu la transforme en
+        # autorite de contenu, ce qu'elle n'est pas.
+        "branch": None,
         "dirty": bool(generation_status),
         "modified_tracked": _git_modified_tracked(root, status=generation_status),
         "untracked_relevant": _git_relevant_untracked(
@@ -5840,7 +5870,8 @@ def _build_inventory(
     if require_git_provenance:
         try:
             _repo_head_sha(root, required=True)
-            _repo_branch(root, required=True)
+            # La branche n'est plus une precondition de provenance : elle ne
+            # porte aucune identite de contenu (liaison de provenance v2).
             _git_status(root, required=True)
             _generation_timestamp(root, required=True)
         except InventoryError as exc:
@@ -6433,7 +6464,9 @@ def _build_inventory_for_stale_manifest_invalidation(
 
     Unlike :func:`_build_inventory_for_empty_manifest_refresh`, this tolerates a
     *non-empty* ``builds`` list on disk, provided every other manifest
-    invariant (schema, branch, clean tree, provenance ancestry) still holds.
+    invariant (schema, clean tree, provenance ancestry) still holds. The
+    observed branch name is not part of that invariant since provenance
+    binding v2.
     The discarded observed builds are treated as ``[]`` for this computation;
     callers are responsible for the higher-level preconditions (explicit
     human reason/approver, CI refusal) before invoking this.
@@ -10553,7 +10586,8 @@ def _render_etat_collection(
             [
                 "## Provenance synthétique",
                 f"- SHA Git: `{provenance.get('head_sha') or 'indisponible'}`",
-                f"- Branche: `{provenance.get('branch') or 'indisponible'}`",
+                "- Branche observée: **non enregistrée** — le nom de "
+                "branche ne lie aucun contenu",
                 f"- Dépôt sale: {'oui' if provenance.get('dirty') else 'non'}",
                 "",
             ]

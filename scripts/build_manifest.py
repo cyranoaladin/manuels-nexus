@@ -31,6 +31,11 @@ _DIRECTORY_FLAGS = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC
 _FILE_FLAGS = os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC | os.O_NONBLOCK
 _TEMP_FLAGS = os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW | os.O_CLOEXEC
 _MANIFEST_RELATIVE = Path("audit/BUILD_MANIFEST.json")
+#: v1 : provenance couplee au nom de branche. v2 : provenance adressee par
+#: le contenu ; la branche observee ne lie plus rien.
+_PROVENANCE_BINDING_VERSION = 2
+_MANIFEST_SCHEMA_VERSION = 2
+_MANIFEST_SCHEMA_REF = "audit/schemas/v1/build-manifest-provenance-v2.schema.json"
 _REPRODUCIBILITY_CONFIG = (
     "Mathematiques/manuel-maths/config/reproducible-build.json"
 )
@@ -108,12 +113,10 @@ _1NSI_STUDENT_VARIANTS = frozenset(
 _INVENTORY_ERROR_DIAGNOSTIC_LIMIT = 240
 _INVENTORY_ERROR_DIAGNOSTICS = frozenset(
     {
-        "branche de provenance du manifeste incohérente",
         "provenance du manifeste sans ancêtre Git strict",
         "provenance du manifeste sans ancêtre Git valide",
         "provenance du manifeste Git invalide",
         "provenance du manifeste Git invérifiable",
-        "branche Git détachée ou indisponible",
         "dépôt Git sale pour le manifeste observé",
         "build_state_digest incohérent",
         "source_digest du manifeste de build incohérent",
@@ -125,7 +128,6 @@ _INVENTORY_ERROR_DIAGNOSTICS = frozenset(
     }
 )
 _INVENTORY_ERROR_DIAGNOSTIC_ALIASES = {
-    "git branch unavailable": "branche Git détachée ou indisponible",
 }
 
 
@@ -290,9 +292,10 @@ def _git_state(root: Path) -> tuple[str, str, bool]:
         role="état Git indisponible",
         text=False,
     ).stdout
-    if not branch:
-        raise BuildManifestError("branche Git détachée ou indisponible")
-    return head, branch, _status_is_dirty_outside_manifest(status_payload)
+    # HEAD detachee : la branche est simplement absente. Depuis la liaison de
+    # provenance v2 elle ne lie plus rien, donc elle ne peut plus refuser un
+    # manifeste dont les sources sont pourtant identiques.
+    return head, branch or None, _status_is_dirty_outside_manifest(status_payload)
 
 
 def _git_evidence_fingerprint(root: Path) -> str:
@@ -435,8 +438,7 @@ def _same_envelope(
     ):
         return False
     if (
-        current_provenance.get("branch") != expected_provenance.get("branch")
-        or current_provenance.get("dirty") is not False
+        current_provenance.get("dirty") is not False
         or expected_provenance.get("dirty") is not False
     ):
         return False
@@ -856,7 +858,6 @@ def record_successful_build(
     if (
         not isinstance(provenance, Mapping)
         or provenance.get("head_sha") != current_head
-        or provenance.get("branch") != current_branch
         or provenance.get("dirty") is not current_dirty
     ):
         raise BuildManifestError("provenance de l'enveloppe périmée ou forgée")
@@ -1898,12 +1899,14 @@ def _derive_receipt_evidence(
         "generated_by": "build_manifest.py",
         "model_digest": model_digest,
         "provenance": {
-            "branch": branch,
+            "branch_binding": "NON_BINDING",
             "dirty": dirty,
             "head_sha": head,
+            "observed_branch": branch or None,
+            "provenance_binding_version": _PROVENANCE_BINDING_VERSION,
         },
-        "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
-        "schema_version": 1,
+        "schema_ref": _MANIFEST_SCHEMA_REF,
+        "schema_version": _MANIFEST_SCHEMA_VERSION,
         "source_digest": source_digest,
     }
 
@@ -2166,7 +2169,6 @@ def record_from_receipt(receipt_path: Path) -> None:
         if (
             not isinstance(provenance, Mapping)
             or provenance.get("head_sha") != current_head
-            or provenance.get("branch") != current_branch
             or provenance.get("dirty") is not current_dirty
         ):
             raise BuildManifestError(
@@ -2253,12 +2255,14 @@ def _derive_empty_refresh_envelope(root: Path) -> dict[str, Any]:
         "generated_by": "build_manifest.py",
         "model_digest": model_digest,
         "provenance": {
-            "branch": branch,
+            "branch_binding": "NON_BINDING",
             "dirty": dirty,
             "head_sha": head,
+            "observed_branch": branch or None,
+            "provenance_binding_version": _PROVENANCE_BINDING_VERSION,
         },
-        "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
-        "schema_version": 1,
+        "schema_ref": _MANIFEST_SCHEMA_REF,
+        "schema_version": _MANIFEST_SCHEMA_VERSION,
         "source_digest": source_digest,
     }
 
@@ -2282,7 +2286,6 @@ def refresh_empty_manifest(manifest_path: Path) -> None:
     if (
         not isinstance(provenance, Mapping)
         or provenance.get("head_sha") != initial_git_state[0]
-        or provenance.get("branch") != initial_git_state[1]
         or provenance.get("dirty") is not initial_git_state[2]
     ):
         raise BuildManifestError("provenance rafraîchie incohérente")
@@ -2389,12 +2392,14 @@ def _derive_stale_invalidation_envelope(root: Path) -> dict[str, Any]:
         "generated_by": "build_manifest.py",
         "model_digest": model_digest,
         "provenance": {
-            "branch": branch,
+            "branch_binding": "NON_BINDING",
             "dirty": dirty,
             "head_sha": head,
+            "observed_branch": branch or None,
+            "provenance_binding_version": _PROVENANCE_BINDING_VERSION,
         },
-        "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
-        "schema_version": 1,
+        "schema_ref": _MANIFEST_SCHEMA_REF,
+        "schema_version": _MANIFEST_SCHEMA_VERSION,
         "source_digest": source_digest,
     }
 
@@ -2442,7 +2447,6 @@ def invalidate_stale_manifest(
     if (
         not isinstance(provenance, Mapping)
         or provenance.get("head_sha") != initial_git_state[0]
-        or provenance.get("branch") != initial_git_state[1]
         or provenance.get("dirty") is not initial_git_state[2]
     ):
         raise BuildManifestError("provenance rafraîchie incohérente")

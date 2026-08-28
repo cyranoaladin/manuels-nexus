@@ -6944,12 +6944,16 @@ def test_build_manifest_is_excluded_from_source_and_model_digests(
         "generated_by": "build_manifest.py",
         "model_digest": inventory_module._model_digest(before),
         "provenance": {
-            "branch": branch,
+            "branch_binding": "NON_BINDING",
             "dirty": False,
             "head_sha": head_sha,
+            "observed_branch": branch,
+            "provenance_binding_version": 2,
         },
-        "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
-        "schema_version": 1,
+        "schema_ref": (
+            "audit/schemas/v1/build-manifest-provenance-v2.schema.json"
+        ),
+        "schema_version": 2,
         "source_digest": before["source_digest"],
     }
     _write(

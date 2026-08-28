@@ -1,0 +1,124 @@
+{
+  "artifact_type": "coverage_regression_forensics",
+  "attribution": {
+    "coverage_after_lot_code": 69.32,
+    "coverage_before_lot": 69.77,
+    "coverage_without_new_lot_modules": 69.73,
+    "lot_regression_total": -0.45,
+    "method": "recalcul de la couverture combinee en retirant du numerateur et du denominateur les instructions et branches des modules nouveaux, a partir du meme fichier de donnees de couverture",
+    "of_which_edits_to_existing_modules": -0.04,
+    "of_which_new_modules": -0.41
+  },
+  "edited_modules": [
+    {
+      "branches": 40,
+      "covered_branches": 25,
+      "covered_lines": 111,
+      "missing_lines": 25,
+      "module": "scripts/build_1spe_suites_review_source_freeze.py",
+      "percent_covered": 77.27,
+      "statements": 136
+    },
+    {
+      "branches": 444,
+      "covered_branches": 335,
+      "covered_lines": 938,
+      "missing_lines": 156,
+      "module": "scripts/build_manifest.py",
+      "percent_covered": 82.77,
+      "statements": 1094
+    },
+    {
+      "branches": 32,
+      "covered_branches": 0,
+      "covered_lines": 0,
+      "missing_lines": 93,
+      "module": "scripts/build_qcm_gap_metrics.py",
+      "percent_covered": 0.0,
+      "statements": 93
+    },
+    {
+      "branches": 2206,
+      "covered_branches": 1630,
+      "covered_lines": 4093,
+      "missing_lines": 1009,
+      "module": "scripts/inventory_collection.py",
+      "percent_covered": 78.31,
+      "statements": 5102
+    }
+  ],
+  "measurement": {
+    "assertions": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 9097
+    },
+    "command": "python -m pytest --import-mode=importlib --cov=scripts",
+    "coverage_data_sha256": "sha256:0172d2cf9a8dc4c0a0513497790ea8a4bcd1bee2725830fe1e674cc13994f175",
+    "log_sha256": "sha256:0c8fdb4cf5f3f2dbe483a939adb96f2092462fcc430f46b288863c0c3e573e68",
+    "observed_source_sha": "2d46c0c6ba9d20e4b245cb55aea27a9649bbb4e0",
+    "report_commit_sha": "aef0f87ae36342b44098ddeea9eeb81b40df240b",
+    "worktree_branch": "codex/t3-publish-readiness-current"
+  },
+  "new_modules": [
+    {
+      "branches": 24,
+      "covered_branches": 0,
+      "covered_lines": 0,
+      "missing_lines": 122,
+      "module": "scripts/build_1spe_suites_current_freeze_binding.py",
+      "percent_covered": 0.0,
+      "statements": 122
+    },
+    {
+      "branches": 24,
+      "covered_branches": 14,
+      "covered_lines": 69,
+      "missing_lines": 24,
+      "module": "scripts/build_debt_set_algebra_reconciliation.py",
+      "percent_covered": 70.94,
+      "statements": 93
+    },
+    {
+      "branches": 50,
+      "covered_branches": 30,
+      "covered_lines": 97,
+      "missing_lines": 31,
+      "module": "scripts/build_qcm_reference_debt_metrics.py",
+      "percent_covered": 71.35,
+      "statements": 128
+    }
+  ],
+  "remediation_strategy": {
+    "forbidden": [
+      "pragma: no cover",
+      "omit",
+      "coverage ignore",
+      "reduction du scope source",
+      "abaissement du seuil"
+    ],
+    "planned_properties": [
+      "determinisme du rendu",
+      "exclusion des champs d'observation volatils (non auto-peremption)",
+      "exclusion des metadonnees de commit de la projection de contenu",
+      "regle de variante eleve/professeur",
+      "contrat CLI --check en cours de processus",
+      "mode d'echec sur entree invalide"
+    ],
+    "principle": "des tests reels, pas des appels de marquage de lignes"
+  },
+  "root_cause": {
+    "authority": "audit/COVERAGE_TRAJECTORY.md : « Les appels subprocess doivent etre mesures ou doubles par des tests unitaires des fonctions qu'ils exercent ; une execution non mesuree ne vaut pas preuve de couverture. »",
+    "explanation": "les tests exercent ces producteurs en lancant leur CLI par subprocess ; coverage.py n'instrumente pas le processus fils, donc aucune ligne n'est comptee alors que le comportement EST verifie",
+    "name": "SUBPROCESS_EXECUTION_IS_NOT_MEASURED_COVERAGE",
+    "worst_case": "scripts/build_1spe_suites_current_freeze_binding.py a 0.00%"
+  },
+  "schema_version": 1,
+  "totals": {
+    "branches": 6922,
+    "combined_percent": 69.32,
+    "covered_branches": 4619,
+    "missing_lines": 5034,
+    "statements": 16991
+  }
+}

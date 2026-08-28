@@ -1,0 +1,147 @@
+{
+  "artifact_type": "debt_set_algebra_reconciliation",
+  "generated_by": "scripts/build_debt_set_algebra_reconciliation.py",
+  "invariants": {
+    "current_partition_exact": true,
+    "no_untraced_reference_fingerprint": true,
+    "pairwise_disjoint": true,
+    "reference_partition_exact": true,
+    "union_equals_current_active": true,
+    "unknown_is_zero": true
+  },
+  "metric_renaming": {
+    "baseline_field": "resolved",
+    "correct_name": "RESOLVED_ARCHIVE_ALL_GENERATIONS",
+    "decomposition": {
+      "RESOLVED_PRE_REFERENCE": 951,
+      "RESOLVED_REFERENCE": 4420
+    },
+    "is_reference_baseline_resolved": false,
+    "observed_cardinality": 5371,
+    "rationale": "le mot resolved designait deux ensembles differents ; le champ de la baseline n'est pas renomme car aucune mise a jour de baseline n'est autorisee, mais la METRIQUE publiee l'est"
+  },
+  "modifies_no_baseline": true,
+  "naive_subtraction": {
+    "correct_expression": "|REFERENCE_BASELINE| - |RESOLVED_REFERENCE| + |POST_REFERENCE_ACTIVE| = 6541 - 4420 + 111 = 2232",
+    "expression": "6541 - 5371",
+    "is_wrong": true,
+    "value": 1170,
+    "why": "951 des 5371 empreintes archivees n'ont jamais appartenu a la baseline de reference"
+  },
+  "partition": {
+    "cardinality_equation": "2232 = 2121 + 86 + 13 + 9 + 3",
+    "classes": [
+      "A4_METHOD_REVIEW_DEBT",
+      "NSI_STATUS_GOVERNANCE_DEBT",
+      "RESIDUAL_QUALIFIED_REVIEW_DEBT",
+      "SURVIVING_REFERENCE",
+      "TRIGO_OPTIONAL_EXTENSION_DEBT"
+    ],
+    "pairwise_disjoint": true,
+    "union_equals_current_active": true,
+    "unknown": 0
+  },
+  "reference_baseline": {
+    "anchor_ambiguity": "deux versions distinctes du fichier de baseline portent le meme git_sha 7752988a (2866 puis 6541 actives) : l'ancre par git_sha ne designe pas un ensemble unique, le blob si",
+    "blob_commit": "28cf690381bed58544fc606f11396e159bc200c3",
+    "declared_digest": "sha256:3757764ead6d1a4fbd0aef0f8d01637f10c80cd5c044350e2108ffe1614ee056",
+    "described_git_sha": "7752988ae7041a7a5de700fcf4609bd47a4fba3a",
+    "digest_reproduced": true,
+    "historical_stale_provenance_metadata": {
+      "actual_blob_commit_containing_the_reference_set": "28cf690381bed58544fc606f11396e159bc200c3",
+      "actual_blob_id": "e66f1db022065965385c0ecf6073b5f29577ebf1",
+      "actual_set_size_at_declared_commit": 2866,
+      "baseline_modified": false,
+      "blob_id_at_declared_commit": "e61432ba92a36d9f571cbf746606bff15b43a947",
+      "classification": "HISTORICAL_STALE_PROVENANCE_METADATA",
+      "current_authority": [
+        "exact fingerprint set",
+        "set digest",
+        "actual containing blob id and commit"
+      ],
+      "declared_reference_commit": "7752988ae7041a7a5de700fcf4609bd47a4fba3a",
+      "history_rewritten": false,
+      "internal_git_sha_is_authoritative": false,
+      "internal_stale_git_sha": "7752988ae7041a7a5de700fcf4609bd47a4fba3a",
+      "note": "le champ git_sha interne de la baseline ne designe pas un ensemble unique : deux blobs distincts le portent. L'autorite courante est l'ensemble d'empreintes et son digest, ancres sur le blob reel.",
+      "reference_set_size": 6541
+    },
+    "recomputed_digest": "sha256:3757764ead6d1a4fbd0aef0f8d01637f10c80cd5c044350e2108ffe1614ee056"
+  },
+  "release_acceptance": false,
+  "schema_version": 1,
+  "sets": [
+    {
+      "cardinality": 6541,
+      "note": "empreintes actives de la baseline de reference gelee ; aucune autorite humaine exacte ne la couvre (EXACT_HUMAN_AUTHORITY=NONE)",
+      "set": "REFERENCE_BASELINE",
+      "set_digest": "sha256:3757764ead6d1a4fbd0aef0f8d01637f10c80cd5c044350e2108ffe1614ee056"
+    },
+    {
+      "cardinality": 4420,
+      "note": "empreintes de reference effectivement resolues depuis le gel",
+      "set": "RESOLVED_REFERENCE",
+      "set_digest": "sha256:6afe2c9222e176686de4cf57b8c4aa53ecd7b9202326b09ec6dec3c7bd1140e0"
+    },
+    {
+      "cardinality": 2121,
+      "note": "empreintes de reference encore actives ; elles ne portent aucun decision_ref car elles precedent toute qualification de classe",
+      "set": "SURVIVING_REFERENCE",
+      "set_digest": "sha256:2e34cc80ac659d4229768f722c01c8270ab78987cadeb17cac33f7575537c133"
+    },
+    {
+      "cardinality": 0,
+      "note": "empreintes de reference ni actives ni archivees : doit valoir 0",
+      "set": "REFERENCE_UNTRACED",
+      "set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cardinality": 951,
+      "note": "archivees AVANT le gel de reference ; c'est exactement ce que la soustraction naive 6541-5371 comptait a tort",
+      "set": "RESOLVED_PRE_REFERENCE",
+      "set_digest": "sha256:e3446ae1871fc6500efc9cbf0e870494dc4248b93a4507e3bd35fc5468bf2118"
+    },
+    {
+      "cardinality": 111,
+      "note": "dettes qualifiees apparues apres le gel de reference",
+      "set": "POST_REFERENCE_ACTIVE",
+      "set_digest": "sha256:ccac6002f6792f75c9de28d6466cb3bd2800d05f5a66d703680379416b2a537e"
+    },
+    {
+      "cardinality": 86,
+      "note": "dette de revue des fiches methode sous politique de classe A4 ; le chiffre historique 89 agregeait cette classe et les extensions optionnelles TRIGO, qui relevent d'une AUTRE decision humaine",
+      "set": "A4_METHOD_REVIEW_DEBT",
+      "set_digest": "sha256:efd51c1aa6186d777628947b877476a68f134776d97009a63d16d780b6ec74be"
+    },
+    {
+      "cardinality": 3,
+      "note": "extensions optionnelles 1SPE-TRIGONOMETRIE ; decision humaine distincte, jamais a fondre dans la classe A4",
+      "set": "TRIGO_OPTIONAL_EXTENSION_DEBT",
+      "set_digest": "sha256:55ae8601afda2e8adb636f976ed06a7ce516c57876a8d4a5e02eebeb34b60b27"
+    },
+    {
+      "cardinality": 13,
+      "note": "les treize dettes residuelles qualifiees temporairement ; leur sunset exige de les garder distinctes",
+      "set": "RESIDUAL_QUALIFIED_REVIEW_DEBT",
+      "set_digest": "sha256:1abe51ad406752b1e09996020c1afb2db3982ac2741cf98ed7b2118f302ace98"
+    },
+    {
+      "cardinality": 9,
+      "note": "gouvernance des statuts 1NSI",
+      "set": "NSI_STATUS_GOVERNANCE_DEBT",
+      "set_digest": "sha256:6bbc27478ab13ccf34ac2071f31ffe5cf0a75be9279d7bebc5381e5f81e3ec4d"
+    },
+    {
+      "cardinality": 0,
+      "note": "aucune dette courante hors des classes nommees",
+      "set": "OTHER_CURRENT_DEBT",
+      "set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cardinality": 2232,
+      "note": "actif courant total",
+      "set": "CURRENT_ACTIVE",
+      "set_digest": "sha256:fe10197d9af6d566020fb424e3803483d3512509e5f2d0040b4f4a1d4c8fbc99"
+    }
+  ]
+}

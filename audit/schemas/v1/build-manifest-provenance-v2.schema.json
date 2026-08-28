@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:nexus:audit:schema:v1:build-manifest",
-  "title": "Nexus observed build manifest v1",
+  "$id": "urn:nexus:audit:schema:v1:build-manifest-provenance-v2",
+  "title": "build_manifest (provenance adressee par le contenu)",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -38,10 +38,10 @@
       "$ref": "#/$defs/provenance"
     },
     "schema_ref": {
-      "const": "audit/schemas/v1/build-manifest.schema.json"
+      "const": "audit/schemas/v1/build-manifest-provenance-v2.schema.json"
     },
     "schema_version": {
-      "const": 1
+      "const": 2
     },
     "source_digest": {
       "$ref": "#/$defs/sha256"
@@ -211,14 +211,26 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "branch",
+        "branch_binding",
         "dirty",
-        "head_sha"
+        "head_sha",
+        "observed_branch",
+        "provenance_binding_version"
       ],
       "properties": {
-        "branch": {
-          "type": "string",
-          "minLength": 1
+        "provenance_binding_version": {
+          "const": 2
+        },
+        "branch_binding": {
+          "const": "NON_BINDING",
+          "description": "le nom de branche n'est jamais une autorite de contenu"
+        },
+        "observed_branch": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "constat informatif ; null en HEAD detachee"
         },
         "dirty": {
           "type": "boolean"
@@ -227,8 +239,7 @@
           "type": "string",
           "pattern": "^[0-9a-f]{40}$"
         }
-      },
-      "description": "DEPRECIE (provenance couplee au nom de branche). Conserve pour valider une enveloppe heritee sans build observe, le temps de la migrer vers build-manifest-provenance-v2.schema.json. Aucun consommateur runtime ne doit dependre de ce modele."
+      }
     },
     "sha256": {
       "type": "string",
@@ -251,5 +262,6 @@
       },
       "uniqueItems": true
     }
-  }
+  },
+  "description": "PROVENANCE_BINDING_VERSION 2. La v1 liait l'identite du manifeste au nom de branche observe : un renommage de branche invalidait le manifeste a sources strictement identiques. En v2 l'identite est portee par source_digest, model_digest et build_state_digest, plus l'ascendance Git de head_sha. La branche est constatee et ne lie rien."
 }

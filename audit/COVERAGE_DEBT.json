@@ -1,0 +1,248 @@
+{
+  "artifact_type": "coverage_debt",
+  "baselined_as_acceptable": false,
+  "gap_points": 7.51,
+  "measured": 69.32,
+  "modules_at_zero_percent": {
+    "count": 27,
+    "modules": [
+      "scripts/analyze_v5_page_shift.py",
+      "scripts/build_1spe_suites_current_freeze_binding.py",
+      "scripts/build_d7_proof_bundle.py",
+      "scripts/build_feature_reconciliation.py",
+      "scripts/build_file_role_registry.py",
+      "scripts/build_graphic_charter_decisions.py",
+      "scripts/build_mandatory_unmapped_atoms_closure.py",
+      "scripts/build_manual_rendering_matrix.py",
+      "scripts/build_math_student_teacher_key_audit.py",
+      "scripts/build_official_program_atoms.py",
+      "scripts/build_official_program_coverage.py",
+      "scripts/build_official_source_atom_crosswalk.py",
+      "scripts/build_official_source_segments.py",
+      "scripts/build_orphan_audit.py",
+      "scripts/build_qcm_capacity_coverage_debt.py",
+      "scripts/build_qcm_gap_metrics.py",
+      "scripts/build_qcm_scientific_answer_key_audit.py",
+      "scripts/build_style_inventory.py",
+      "scripts/build_style_version_matrix.py",
+      "scripts/build_test_execution_matrix.py",
+      "scripts/check_no_legacy_charter_refs.py",
+      "scripts/check_runtime_charter_provenance.py",
+      "scripts/collection_dashboard.py",
+      "scripts/find_15_page_commit.py",
+      "scripts/refresh_audit_reports.py",
+      "scripts/run_forensic_experiments.py",
+      "scripts/unify_legacy_gabarits_wrappers.py"
+    ]
+  },
+  "no_blind_line_chasing": "les modules a zero pour cent ne sont pas tous a couvrir : certains sont des scripts forensiques a usage unique dont la vraie disposition est la suppression apres preuve, pas un test de facade",
+  "priority_order": [
+    "P1_BUILD_INTEGRITY",
+    "P2_GOVERNANCE",
+    "P3_ASSEMBLY",
+    "P4_STUDENT_TEACHER_SEPARATION",
+    "P5_INVENTORY_MODEL",
+    "P6_SCIENTIFIC_TOOLING",
+    "P7_OTHER_ACTIVE_RUNTIME",
+    "P8_ONE_SHOT_FORENSIC"
+  ],
+  "publish_ready_requirement": {
+    "coverage_gate": "PASS",
+    "coverage_minimum": 76.83,
+    "supported_umbrella_rc": 0
+  },
+  "schema_version": 1,
+  "status": "OPEN_RELEASE_BLOCKER",
+  "structural_cause": "chaque producteur ajoute depuis la Phase 0 n'est teste que par son CLI en subprocess : le comportement est verifie mais aucune ligne n'est mesuree. Le denominateur a triple sans que le numerateur suive.",
+  "threshold": 76.83,
+  "threshold_lowered": false,
+  "top_deficits": [
+    {
+      "criticality": "P1_BUILD_INTEGRITY",
+      "missing_lines": 1009,
+      "module": "scripts/inventory_collection.py",
+      "percent_covered": 78.31,
+      "production": true,
+      "runtime": true,
+      "statements": 5102
+    },
+    {
+      "criticality": "P6_SCIENTIFIC_TOOLING",
+      "missing_lines": 381,
+      "module": "scripts/build_official_source_segments.py",
+      "percent_covered": 0.0,
+      "production": true,
+      "runtime": true,
+      "statements": 381
+    },
+    {
+      "criticality": "P7_OTHER_ACTIVE_RUNTIME",
+      "missing_lines": 228,
+      "module": "scripts/build_d7_proof_bundle.py",
+      "percent_covered": 0.0,
+      "production": true,
+      "runtime": true,
+      "statements": 228
+    },
+    {
+      "criticality": "P7_OTHER_ACTIVE_RUNTIME",
+      "missing_lines": 191,
+      "module": "scripts/review_1nsi_content.py",
+      "percent_covered": 77.21,
+      "production": true,
+      "runtime": true,
+      "statements": 915
+    },
+    {
+      "criticality": "P1_BUILD_INTEGRITY",
+      "missing_lines": 156,
+      "module": "scripts/build_manifest.py",
+      "percent_covered": 82.77,
+      "production": true,
+      "runtime": true,
+      "statements": 1094
+    },
+    {
+      "criticality": "P6_SCIENTIFIC_TOOLING",
+      "missing_lines": 152,
+      "module": "scripts/build_qcm_scientific_answer_key_audit.py",
+      "percent_covered": 0.0,
+      "production": true,
+      "runtime": true,
+      "statements": 152
+    },
+    {
+      "criticality": "P7_OTHER_ACTIVE_RUNTIME",
+      "missing_lines": 139,
+      "module": "scripts/reconcile_wip_upstream.py",
+      "percent_covered": 17.92,
+      "production": true,
+      "runtime": true,
+      "statements": 182
+    },
+    {
+      "criticality": "P4_STUDENT_TEACHER_SEPARATION",
+      "missing_lines": 127,
+      "module": "scripts/build_math_student_teacher_key_audit.py",
+      "percent_covered": 0.0,
+      "production": true,
+      "runtime": true,
+      "statements": 127
+    },
+    {
+      "criticality": "P2_GOVERNANCE",
+      "missing_lines": 122,
+      "module": "scripts/build_1spe_suites_current_freeze_binding.py",
+      "percent_covered": 0.0,
+      "production": true,
+      "runtime": true,
+      "statements": 122
+    },
+    {
+      "criticality": "P7_OTHER_ACTIVE_RUNTIME",
+      "missing_lines": 120,
+      "module": "scripts/build_1spe_suites_human_review_packet.py",
+      "percent_covered": 63.91,
+      "production": true,
+      "runtime": true,
+      "statements": 362
+    },
+    {
+      "criticality": "P7_OTHER_ACTIVE_RUNTIME",
+      "missing_lines": 119,
+      "module": "scripts/ci_audit_collection.py",
+      "percent_covered": 59.69,
+      "production": true,
+      "runtime": true,
+      "statements": 284
+    },
+    {
+      "criticality": "P7_OTHER_ACTIVE_RUNTIME",
+      "missing_lines": 99,
+      "module": "scripts/build_file_role_registry.py",
+      "percent_covered": 0.0,
+      "production": true,
+      "runtime": true,
+      "statements": 99
+    },
+    {
+      "criticality": "P6_SCIENTIFIC_TOOLING",
+      "missing_lines": 97,
+      "module": "scripts/build_official_program_atoms.py",
+      "percent_covered": 0.0,
+      "production": true,
+      "runtime": true,
+      "statements": 97
+    },
+    {
+      "criticality": "P6_SCIENTIFIC_TOOLING",
+      "missing_lines": 97,
+      "module": "scripts/build_qcm_capacity_coverage_debt.py",
+      "percent_covered": 0.0,
+      "production": true,
+      "runtime": true,
+      "statements": 97
+    },
+    {
+      "criticality": "P6_SCIENTIFIC_TOOLING",
+      "missing_lines": 93,
+      "module": "scripts/build_qcm_gap_metrics.py",
+      "percent_covered": 0.0,
+      "production": true,
+      "runtime": true,
+      "statements": 93
+    },
+    {
+      "criticality": "P2_GOVERNANCE",
+      "missing_lines": 91,
+      "module": "scripts/human_review_governance.py",
+      "percent_covered": 81.08,
+      "production": true,
+      "runtime": true,
+      "statements": 531
+    },
+    {
+      "criticality": "P6_SCIENTIFIC_TOOLING",
+      "missing_lines": 90,
+      "module": "scripts/build_official_source_atom_crosswalk.py",
+      "percent_covered": 0.0,
+      "production": true,
+      "runtime": true,
+      "statements": 90
+    },
+    {
+      "criticality": "P3_ASSEMBLY",
+      "missing_lines": 84,
+      "module": "scripts/inventory_assembly.py",
+      "percent_covered": 92.08,
+      "production": true,
+      "runtime": true,
+      "statements": 1267
+    },
+    {
+      "criticality": "P8_ONE_SHOT_FORENSIC",
+      "missing_lines": 81,
+      "module": "scripts/run_forensic_experiments.py",
+      "percent_covered": 0.0,
+      "production": false,
+      "runtime": false,
+      "statements": 81
+    },
+    {
+      "criticality": "P8_ONE_SHOT_FORENSIC",
+      "missing_lines": 79,
+      "module": "scripts/analyze_v5_page_shift.py",
+      "percent_covered": 0.0,
+      "production": false,
+      "runtime": false,
+      "statements": 79
+    }
+  ],
+  "totals": {
+    "branches": 6922,
+    "covered_branches": 4619,
+    "missing_lines": 5034,
+    "statements": 16991
+  },
+  "xfail_or_skip_added": false
+}

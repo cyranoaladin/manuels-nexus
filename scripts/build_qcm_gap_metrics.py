@@ -27,6 +27,7 @@ erreur documentee ET un renvoi de remediation.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import subprocess
 import sys
@@ -41,10 +42,42 @@ CHAPTERS = ROOT / "Mathematiques" / "manuel-maths" / "chapitres"
 COVERAGE = ROOT / "audit" / "OFFICIAL_PROGRAM_COVERAGE_2026_2027.json"
 
 
-def _source_sha() -> str:
+def _observed_source_sha() -> str:
+    """Constat informatif du HEAD au moment de la mesure.
+
+    Ce champ ne dit PAS que l'artefact serait perime des que HEAD avance :
+    epingler un artefact de rapport a un SHA le rend auto-perime au commit
+    suivant, y compris au commit qui le publie. L'autorite de fraicheur est le
+    digest de contenu ci-dessous, non auto-referent.
+    """
+
     return subprocess.run(
         ["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=True
     ).stdout.strip()
+
+
+def _source_inputs() -> list[dict[str, str]]:
+    """Les entrees reelles de la mesure : QCM, contrats, couverture officielle."""
+
+    rows: list[dict[str, str]] = []
+    for path in sorted(CHAPTERS.glob("*/qcm/*-QCM.json")) + sorted(
+        CHAPTERS.glob("*/contrat.yaml")
+    ) + [COVERAGE]:
+        if not path.is_file():
+            continue
+        rows.append(
+            {
+                "path": path.relative_to(ROOT).as_posix(),
+                "sha256": "sha256:"
+                + hashlib.sha256(path.read_bytes()).hexdigest(),
+            }
+        )
+    return rows
+
+
+def _source_digest(inputs: list[dict[str, str]]) -> str:
+    payload = json.dumps(inputs, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return "sha256:" + hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
 def _contract(chapter: Path) -> dict[str, Any] | None:
@@ -139,7 +172,15 @@ def build_report() -> dict[str, Any]:
         "artifact_type": "qcm_gap_metrics",
         "schema_version": 1,
         "generated_by": "scripts/build_qcm_gap_metrics.py",
-        "source_sha": _source_sha(),
+        "observed_source_sha": _observed_source_sha(),
+        "source_digest": _source_digest(_source_inputs()),
+        "source_inputs": _source_inputs(),
+        "freshness_authority": "source_digest",
+        "freshness_note": (
+            "observed_source_sha est un constat ; il n'est jamais une condition "
+            "de fraicheur. Un artefact de rapport epingle a un SHA serait "
+            "perime par le commit qui le publie."
+        ),
         "inventory": {
             "chapters": chapters,
             "questions": questions_total,
