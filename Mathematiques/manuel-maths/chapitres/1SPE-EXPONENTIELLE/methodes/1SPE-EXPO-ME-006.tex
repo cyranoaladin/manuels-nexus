@@ -1,0 +1,34 @@
+% META: {"id":"1SPE-EXPO-ME-006","chapitre":"1SPE-EXPONENTIELLE","type_objet":"methode","capacites_codes":["C1"],"status":"generated"}
+\begin{fichemethode}{M6}{Reconnaître la fonction exponentielle par sa caractérisation}
+\quandUtiliser{J'utilise cette méthode lorsque l'énoncé me donne une fonction $f$ dérivable sur $\mathbb{R}$ et me demande de décider si $f$ est la fonction exponentielle, ou de justifier qu'elle ne l'est pas. Deux conditions, et deux seulement, sont à contrôler : $f' = f$ sur $\mathbb{R}$, et $f(0) = 1$.}
+\pasApas{\begin{enumerate}
+  \item Je calcule $f'(x)$.
+  \item Je compare $f'(x)$ et $f(x)$. Si les deux expressions ne coïncident pas pour tout réel $x$, je conclus immédiatement : $f$ n'est pas la fonction exponentielle, et je n'ai pas besoin de la seconde condition.
+  \item Si $f' = f$, je calcule $f(0)$.
+  \item Je conclus :
+    \begin{itemize}
+      \item si $f' = f$ et $f(0) = 1$, alors $f = \exp$, par l'unicité admise dans le cours ;
+      \item si $f' = f$ mais $f(0) \neq 1$, alors $f$ n'est pas $\exp$ ; c'est la fonction $x \mapsto f(0)\,\mathrm{e}^x$.
+    \end{itemize}
+\end{enumerate}}
+\exempleRedige{La fonction $h$ définie sur $\mathbb{R}$ par $h(x) = 3\mathrm{e}^x - 2$ est-elle la fonction exponentielle ?
+
+\commentaireMarge{Étape 1.}
+$h$ est dérivable sur $\mathbb{R}$ et $h'(x) = 3\mathrm{e}^x$.
+
+\commentaireMarge{Étape 2.}
+Or $h(x) = 3\mathrm{e}^x - 2$. Donc $h'(x) - h(x) = 2 \neq 0$ : la condition $h' = h$ n'est pas vérifiée.
+
+\commentaireMarge{Étape 4.}
+La première condition suffit à conclure.
+\[h \neq \exp.\]
+On remarque pourtant que $h(0) = 3 - 2 = 1$ : la condition en $0$ est vérifiée, mais elle ne suffit pas. Les deux conditions sont nécessaires ensemble.}
+\pieges{\begin{itemize}
+  \item Ne contrôler que $f(0) = 1$ : beaucoup de fonctions valent $1$ en $0$ sans être l'exponentielle, comme $x \mapsto 3\mathrm{e}^x - 2$ ou $x \mapsto x + 1$.
+  \item Ne contrôler que $f' = f$ : la fonction nulle vérifie $f' = f$ et n'est pas l'exponentielle. C'est la condition $f(0) = 1$ qui écarte ce cas.
+  \item Confondre l'équation $y' = y$ avec $y' = xy$ : seule la première caractérise l'exponentielle.
+  \item Conclure $f = \exp$ à partir d'une vérification sur quelques valeurs de $x$ : l'égalité $f' = f$ doit être établie pour tout réel $x$.
+\end{itemize}}
+\verifier{Je vérifie mes deux conditions séparément : d'abord l'égalité des expressions de $f'$ et de $f$, ensuite la valeur en $0$. Si l'une des deux échoue, la conclusion est négative, et je sais laquelle des deux a échoué.}
+\sEntrainer{\refExos{M6}}
+\end{fichemethode}
