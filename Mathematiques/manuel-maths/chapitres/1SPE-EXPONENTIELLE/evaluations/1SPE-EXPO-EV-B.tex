@@ -4,7 +4,7 @@
 
 \textbf{Exercice 1 — 5 points — C1, C2}
 \begin{enumerate}
-\item Expliquer pourquoi $\mathrm{e}^x$ est toujours strictement positif. \hfill(2 pts)
+\item La fonction $h$ définie sur $\mathbb{R}$ par $h(x)=2\mathrm{e}^{x}$ vérifie-t-elle $h'=h$ ? Vérifie-t-elle $h(0)=1$ ? Conclure. \hfill(2 pts)
 \item Simplifier $\mathrm{e}^{3x+2}\mathrm{e}^{-x-2}$ et $\dfrac{\mathrm{e}^{-2x}}{\mathrm{e}^{x}}$. \hfill(3 pts)
 \end{enumerate}
 
@@ -32,6 +32,9 @@ La concentration d'un médicament est modélisée par $C(t)=80\mathrm{e}^{-0{,}1
 % BEGIN-VERIFY
 % from sympy import symbols, exp, diff, simplify
 % x,t=symbols('x t')
+% # h = 2*exp(x) verifie h' = h mais pas h(0) = 1 : ce n'est pas exp.
+% assert simplify(diff(2*exp(x),x) - 2*exp(x)) == 0
+% assert (2*exp(x)).subs(x,0) == 2 != 1
 % assert simplify(exp(3*x+2)*exp(-x-2)-exp(2*x)) == 0
 % assert diff(exp(0.3*x),x) == 0.3*exp(0.3*x)
 % assert simplify(80*exp(-0.15*(t+2))-exp(-0.3)*80*exp(-0.15*t)) == 0
