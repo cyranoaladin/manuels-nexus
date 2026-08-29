@@ -6,8 +6,8 @@
   "status": "PENDING_UNASSIGNED"
  },
  "blocking_algebra": {
-  "CURRENT_BLOCKING_FINGERPRINTS": 158,
-  "CURRENT_OBJECTS": 157,
+  "CURRENT_BLOCKING_FINGERPRINTS": 168,
+  "CURRENT_OBJECTS": 167,
   "UNKNOWN": 0,
   "chapter_level_blocking": 1,
   "chapter_level_detail": [
@@ -18,158 +18,156 @@
     "status": "draft"
    }
   ],
-  "equation": "157*1 + 0 + 1 = 158",
+  "equation": "167*1 + 0 + 1 = 168",
   "objects_with_0_blocking": 0,
-  "objects_with_0_blocking_detail": [],
-  "objects_with_1_blocking": 157,
+  "objects_with_1_blocking": 167,
   "objects_with_2plus_blocking": 0,
   "objects_with_2plus_detail": {},
-  "producer": "audit/INVENTAIRE_COLLECTION.json (regenere)",
-  "source_sha": "31261fc96364d9c8ef8bbc2164110e36b9a7c18f"
+  "source_sha": "3558807a4775445b9c4fd261ea1c518ddc545a77"
  },
  "build_receipts": {
   "DONE": true,
+  "FINAL_SOURCE_SHA": "f41bbc49928550b089d532ebcbf3695449bcc0f5",
   "OBSERVED_BUILDS_REGISTERED": 0,
   "PRE_RUNDIRS": 0,
   "PRE_WRITERS": 0,
   "builds": [
    {
     "commande": "python Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual 1SPE --variant eleve",
-    "end_utc": "00:26:46",
+    "end_utc": "01:44:49",
     "log_sha256": "0868ea9cb5e59fb04e2a535638b2ad23441dbfc1bef3729276d397c8f8730570",
     "manuel": "1SPE",
-    "pages": 355,
+    "pages": 357,
     "pdf": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
-    "pdf_sha256": "fb7f98b6b4c971c5da8125dae202e92e5247fedb1a85d4027d0b3b3a75111404",
-    "pid": 1049781,
+    "pdf_sha256": "a10061610f829f9b662f8a64eaa514f1723c677229caf6584bf8366e5ca0a9c4",
+    "pid": 1249246,
     "rc": 0,
-    "source_sha": "ec459b29f2942d0e58f012698f710b274e28d897",
-    "start_utc": "00:22:04",
+    "source_sha": "f41bbc49928550b089d532ebcbf3695449bcc0f5",
+    "start_utc": "01:40:17",
     "variante": "eleve"
    },
    {
     "commande": "python Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual 1SPE --variant professeur",
-    "end_utc": "00:33:40",
+    "end_utc": "01:51:21",
     "log_sha256": "6363b8d158abb1558d93b9eff99165b79481e702b36f53d55ebfd1ea3034a857",
     "manuel": "1SPE",
-    "pages": 623,
+    "pages": 629,
     "pdf": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf",
-    "pdf_sha256": "a3063587686090d6507966b921590334effa54613dc5a95fef9788f3f1ea305a",
-    "pid": 1059341,
+    "pdf_sha256": "ff8129db07b4dd22d54e2a8c98c250e9694047dd0985dead08599f82a947a93a",
+    "pid": 1258311,
     "rc": 0,
-    "source_sha": "ec459b29f2942d0e58f012698f710b274e28d897",
-    "start_utc": "00:26:46",
+    "source_sha": "f41bbc49928550b089d532ebcbf3695449bcc0f5",
+    "start_utc": "01:44:49",
     "variante": "professeur"
    },
    {
     "commande": "python Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual TCOMPL --variant eleve",
-    "end_utc": "00:35:50",
+    "end_utc": "01:53:23",
     "log_sha256": "6286e17f742ce6bb5d15af89365bc60916b4b609d1984fc510d0cedf64f22044",
     "manuel": "TCOMPL",
     "pages": 146,
     "pdf": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf",
     "pdf_sha256": "734af2d6fa5595b22516ee696eea7288e17a17bfea8fb0529931a94358761198",
-    "pid": 1076173,
+    "pid": 1270319,
     "rc": 0,
-    "source_sha": "ec459b29f2942d0e58f012698f710b274e28d897",
-    "start_utc": "00:33:40",
+    "source_sha": "f41bbc49928550b089d532ebcbf3695449bcc0f5",
+    "start_utc": "01:51:21",
     "variante": "eleve"
    },
    {
     "commande": "python Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual TCOMPL --variant professeur",
-    "end_utc": "00:38:55",
+    "end_utc": "01:56:13",
     "log_sha256": "04ae4de8ab130b79cec0d750de66c7ddd14815acceb8beebf15d23e417c5efed",
     "manuel": "TCOMPL",
     "pages": 224,
     "pdf": "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.pdf",
     "pdf_sha256": "d67ba835f65a066daef6803a492e5d1654881030a3ca67585f20a884d4621635",
-    "pid": 1081340,
+    "pid": 1274089,
     "rc": 0,
-    "source_sha": "ec459b29f2942d0e58f012698f710b274e28d897",
-    "start_utc": "00:35:50",
+    "source_sha": "f41bbc49928550b089d532ebcbf3695449bcc0f5",
+    "start_utc": "01:53:23",
     "variante": "professeur"
    },
    {
     "commande": "python Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual TSPE_2026_2027 --variant eleve",
-    "end_utc": "00:42:19",
+    "end_utc": "01:59:08",
     "log_sha256": "459aeb210d8998eb342a6e95a27cdd75e17abb880011827691b2968c3b4334f6",
     "manuel": "TSPE_2026_2027",
     "pages": 206,
     "pdf": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.pdf",
     "pdf_sha256": "c49ce9954b5933f2936788255e8534c7ba8cac525940a7b17d0d7895168a9703",
-    "pid": 1087969,
+    "pid": 1279437,
     "rc": 0,
-    "source_sha": "ec459b29f2942d0e58f012698f710b274e28d897",
-    "start_utc": "00:38:55",
+    "source_sha": "f41bbc49928550b089d532ebcbf3695449bcc0f5",
+    "start_utc": "01:56:13",
     "variante": "eleve"
    },
    {
     "commande": "python Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual TSPE_2026_2027 --variant professeur",
-    "end_utc": "00:48:42",
+    "end_utc": "02:03:15",
     "log_sha256": "6a3e24ba1f08ac1dfa072beff2a47f118cb4f00f207d892d594b38ee613ba037",
     "manuel": "TSPE_2026_2027",
     "pages": 339,
     "pdf": "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_professeur.pdf",
     "pdf_sha256": "68224bf39e16aac2c90fccbf6d6a981b4f8164bf8810d698625b1e1cbcfe11c2",
-    "pid": 1097044,
+    "pid": 1285061,
     "rc": 0,
-    "source_sha": "ec459b29f2942d0e58f012698f710b274e28d897",
-    "start_utc": "00:42:19",
+    "source_sha": "f41bbc49928550b089d532ebcbf3695449bcc0f5",
+    "start_utc": "01:59:08",
     "variante": "professeur"
    },
    {
     "commande": "python Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual TEXPERTES --variant eleve",
-    "end_utc": "00:50:35",
+    "end_utc": "02:04:44",
     "log_sha256": "4e723d1b6671dc3c572a2d8c4ef214e8be89b664c6375f1532665b66ca9e9280",
     "manuel": "TEXPERTES",
     "pages": 97,
     "pdf": "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_eleve.pdf",
     "pdf_sha256": "1a40421f379bb93930e69517da3b5f317c615e365f63ad5638e450eea1132424",
-    "pid": 1130543,
+    "pid": 1292729,
     "rc": 0,
-    "source_sha": "ec459b29f2942d0e58f012698f710b274e28d897",
-    "start_utc": "00:48:48",
+    "source_sha": "f41bbc49928550b089d532ebcbf3695449bcc0f5",
+    "start_utc": "02:03:15",
     "variante": "eleve"
    },
    {
     "commande": "python Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual TEXPERTES --variant professeur",
-    "end_utc": "00:52:51",
+    "end_utc": "02:06:44",
     "log_sha256": "edf0c52d6045a37f4864a2b2ad7730b106b95f10c7dba7fce6192a8b948245c3",
     "manuel": "TEXPERTES",
     "pages": 149,
     "pdf": "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_professeur.pdf",
     "pdf_sha256": "97e4a79bb03a331748b6a139a5e9dcd9a033c3e554e1a83735be04f8be3b2562",
-    "pid": 1134559,
+    "pid": 1295472,
     "rc": 0,
-    "source_sha": "ec459b29f2942d0e58f012698f710b274e28d897",
-    "start_utc": "00:50:35",
+    "source_sha": "f41bbc49928550b089d532ebcbf3695449bcc0f5",
+    "start_utc": "02:04:44",
     "variante": "professeur"
    }
   ],
   "exit_codes": [
    0
   ],
-  "observed_registration_note": "les builds ont tourne sans --record-observed (defaut False) ; audit/BUILD_MANIFEST.json reste vide. Aucune invalidation --invalidate-stale n'a ete tentee : elle exige un approbateur humain.",
-  "runner_pgid": 1049778,
-  "runner_pid": 1049778,
-  "runner_sid": 1049778,
-  "texpertes_runner_pid": 1094108,
+  "observed_registration_note": "builds lances sans --record-observed (defaut False) ; BUILD_MANIFEST reste vide ; --invalidate-stale exige un approbateur humain",
+  "runner_pgid": 1249243,
+  "runner_pid": 1249241,
+  "runner_sid": 1249243,
   "writer_max_concurrency": 1
  },
  "chapter": "1SPE-VARIABLES-ALEATOIRES",
  "counts": {
   "capacites": 7,
-  "objects": 157,
+  "objects": 167,
   "par_type": {
    "algorithme": 2,
-   "corrige": 50,
+   "corrige": 54,
    "corrige_evaluation": 2,
    "coup_de_pouce": 18,
    "cours": 7,
    "evaluation": 2,
-   "exercice": 50,
+   "exercice": 54,
    "experimentation": 4,
-   "methode": 7,
+   "methode": 9,
    "qcm": 1,
    "remediation": 12,
    "td": 2
@@ -180,15 +178,15 @@
   "chapter_pdfs": [
    {
     "exists": true,
-    "pages": 355,
+    "pages": 357,
     "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
-    "sha256": "sha256:fb7f98b6b4c971c5da8125dae202e92e5247fedb1a85d4027d0b3b3a75111404"
+    "sha256": "sha256:a10061610f829f9b662f8a64eaa514f1723c677229caf6584bf8366e5ca0a9c4"
    },
    {
     "exists": true,
-    "pages": 623,
+    "pages": 629,
     "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf",
-    "sha256": "sha256:a3063587686090d6507966b921590334effa54613dc5a95fef9788f3f1ea305a"
+    "sha256": "sha256:ff8129db07b4dd22d54e2a8c98c250e9694047dd0985dead08599f82a947a93a"
    }
   ],
   "objects": [
@@ -493,6 +491,30 @@
     "type": "corrige"
    },
    {
+    "id": "1SPE-VARALEA-CO-051",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-051.tex",
+    "sha256": "sha256:cb64dc5bd927b7d267f123b5daf81289e4aba3ae20f5959278977e60381f4139",
+    "type": "corrige"
+   },
+   {
+    "id": "1SPE-VARALEA-CO-052",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-052.tex",
+    "sha256": "sha256:abd5baaf5dcbc6ee7813c6ee4e076d3ebb4a2d5df5856a2f8d34e3a7de1f4547",
+    "type": "corrige"
+   },
+   {
+    "id": "1SPE-VARALEA-CO-053",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-053.tex",
+    "sha256": "sha256:6f95e23faba8de7a563c3bbe51dc2f670537624e652b37bf68158275fc5cf1cc",
+    "type": "corrige"
+   },
+   {
+    "id": "1SPE-VARALEA-CO-054",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-054.tex",
+    "sha256": "sha256:2089dd2719c1b73a80f554fbc9518973547926c0a04050af5a35dcb9fad271fd",
+    "type": "corrige"
+   },
+   {
     "id": "1SPE-VARALEA-CR-000",
     "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/00_ouverture.tex",
     "sha256": "sha256:a5d6915b0ffd01a8397f9f1e0fb008f9fd2934f86f40c38172aae42ce8ba8a1b",
@@ -585,25 +607,25 @@
    {
     "id": "1SPE-VARALEA-EV-A-corrige",
     "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/1SPE-VARALEA-EV-A-corrige.tex",
-    "sha256": "sha256:670b10a04888e4a7fab558663d9f5fa80d796682e6d1ca64d68fb06d729d61bc",
+    "sha256": "sha256:1cf93162963155a33e03fa49973d487ca39bde01f062fc8cc8635c00d2726816",
     "type": "corrige_evaluation"
    },
    {
     "id": "1SPE-VARALEA-EV-A",
     "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/1SPE-VARALEA-EV-A.tex",
-    "sha256": "sha256:c554c06959086e2a243926d4a940995eac03f520cca2cd9446465d0cb5e16df5",
+    "sha256": "sha256:5b17b0b6f81becc7bdf8aa8bcab2c4f85da5cb1e613bff39aeed3511581ad198",
     "type": "evaluation"
    },
    {
     "id": "1SPE-VARALEA-EV-B-corrige",
     "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/1SPE-VARALEA-EV-B-corrige.tex",
-    "sha256": "sha256:489f9811286ce67c69bd3acffeaa480375ce21eeff1f1cb6015bf4a8038b757c",
+    "sha256": "sha256:790ced4a1d1cfe4a64623300160ec78f55d3c5b1336269617aad1275bbf22d15",
     "type": "corrige_evaluation"
    },
    {
     "id": "1SPE-VARALEA-EV-B",
     "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/1SPE-VARALEA-EV-B.tex",
-    "sha256": "sha256:ca30ae5de0fb5788f125cfd267479e49d0f14de88431f72a69c4cb47cd3e9e35",
+    "sha256": "sha256:e7cded60374cd8f8eeeb7f190ecebd04c0aa99b3eeb1d7e423f76ca826699482",
     "type": "evaluation"
    },
    {
@@ -1015,6 +1037,30 @@
     "type": "exercice"
    },
    {
+    "id": "1SPE-VARALEA-EX-051",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-051.tex",
+    "sha256": "sha256:a9dd2908f3e2db2d6b1c07276cd05b4cd03865da81fe995a81901fbb3ec1dea3",
+    "type": "exercice"
+   },
+   {
+    "id": "1SPE-VARALEA-EX-052",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-052.tex",
+    "sha256": "sha256:7eefb81aca7c4244fca140f93165d7e32d9aa179c76ef6db49adadb037ef2133",
+    "type": "exercice"
+   },
+   {
+    "id": "1SPE-VARALEA-EX-053",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-053.tex",
+    "sha256": "sha256:8efd49f004dba5d1514697d2b2f54171dffba8d1755b4bc8b784c70622ce35a6",
+    "type": "exercice"
+   },
+   {
+    "id": "1SPE-VARALEA-EX-054",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-054.tex",
+    "sha256": "sha256:c17fa2937bd370d8d345388acc301d2851e9c6a7869bd37d20e6e23408f7509b",
+    "type": "exercice"
+   },
+   {
     "id": "1SPE-VARALEA-ME-001",
     "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/methodes/1SPE-VARALEA-ME-001.tex",
     "sha256": "sha256:4272fe2ed94bf85b3c1187cd45ac8f1f683eb9a6297f496975239a87cc931467",
@@ -1054,6 +1100,18 @@
     "id": "1SPE-VARALEA-ME-007",
     "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/methodes/1SPE-VARALEA-ME-007.tex",
     "sha256": "sha256:af699a632f58b14ef2360503da4bd6d8b39d20cba15dafa41d779952253f20de",
+    "type": "methode"
+   },
+   {
+    "id": "1SPE-VARALEA-ME-008",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/methodes/1SPE-VARALEA-ME-008.tex",
+    "sha256": "sha256:a9b9549f1c19e8adbd9ddbd9fb4f3eb4c4a2edcbb116091c390aa9740d95a13f",
+    "type": "methode"
+   },
+   {
+    "id": "1SPE-VARALEA-ME-009",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/methodes/1SPE-VARALEA-ME-009.tex",
+    "sha256": "sha256:5b934dc7dd37e059c8d07ce0786e4e9934af25f4662a200236de95896dad2cd7",
     "type": "methode"
    },
    {
@@ -1142,7 +1200,7 @@
    "metric": "FULL_SOURCE_EDITORIAL_DIACRITICS_DEBT",
    "occurrences": 4000,
    "scanned_chapters": 52,
-   "scanned_files": 5592,
+   "scanned_files": 5602,
    "set_digest": "sha256:52a33399a3a9285078b3979ce82339cf642c9b5da417dc67b55807e7ce823f61",
    "tracked_forms": 36,
    "varalea_remaining": 0
@@ -1167,8 +1225,8 @@
  },
  "findings_history": {
   "editorial": {
-   "fixed": 8,
-   "found": 8,
+   "fixed": 9,
+   "found": 9,
    "items": [
     {
      "class": "QCM_RENDER_SEMANTIC_PRESERVATION_FAILURE",
@@ -1231,6 +1289,15 @@
      "status": "FIXED"
     },
     {
+     "defect": "l'accentuation du gabarit a change le sha256 du QCM de reference 1SPE-DERIVATION-LOCAL ; 17 tests de test_maquette_v5.py echouaient, hors de ma batterie ciblee",
+     "fixed_by": "f41bbc49",
+     "found_in": "build/maquette-v5/manifest.json",
+     "id": "EDI-09",
+     "note": "diff verifie ligne a ligne avant re-epingle : 18 lignes, toutes orthographiques, aucune sur le contenu des questions",
+     "severity": "P2",
+     "status": "FIXED"
+    },
+    {
      "defect": "l'enonce disait l'echantillon « stocke dans somme » alors que somme contient la somme ; la cle n'etait coherente qu'avec la seconde lecture",
      "fixed_by": "ec459b29",
      "found_in": "QCM VARALEA Q17",
@@ -1242,8 +1309,8 @@
    "unresolved": 0
   },
   "pedagogy": {
-   "fixed": 6,
-   "found": 6,
+   "fixed": 7,
+   "found": 7,
    "items": [
     {
      "defect": "cinq atomes officiels obligatoires (1SPE-OFFICIAL-175 a 179) visaient deux capacites absentes du contrat",
@@ -1296,6 +1363,23 @@
      "id": "PED-06",
      "severity": "P1",
      "status": "FIXED"
+    },
+    {
+     "artefacts": [
+      "ME-008",
+      "ME-009",
+      "EX-051..054",
+      "CO-051..054",
+      "EV-A ex.4",
+      "EV-B ex.4"
+     ],
+     "cause_racine": "le verificateur pedagogique exemptait explicitement C6 et C7 du controle d'alignement d'evaluation, puis la version suivante avait perdu le predicat ; corrige par PED-CHAINE-* et PED-EVAL-ALIGN sans exemption",
+     "defect": "C6 et C7 n'avaient ni fiche methode, ni exercice, ni corrige, ni item d'evaluation ; les cinq atomes officiels 175 a 179 restaient en gap_type=CONTENT_MISSING",
+     "fixed_by": "f41bbc49",
+     "found_in": "chaine des six maillons",
+     "id": "PED-07",
+     "severity": "P1",
+     "status": "FIXED"
     }
    ],
    "unresolved": 0
@@ -1344,7 +1428,7 @@
  "machine_evidence_context": {
   "editorial_coverage": {
    "findings": 0,
-   "reviewed": 157
+   "reviewed": 167
   },
   "human_content_review": "PENDING",
   "limitations": [
@@ -1354,7 +1438,7 @@
   ],
   "pedagogy_coverage": {
    "findings": 0,
-   "reviewed": 157
+   "reviewed": 167
   },
   "requalifications": [
    {
@@ -1447,12 +1531,12 @@
    "dispositions": {
     "ALGORITHM_EXECUTED": 6,
     "FIGURE_CHECKED": 1,
-    "FORMALLY_CHECKED": 29,
-    "RECOMPUTED": 120,
+    "FORMALLY_CHECKED": 31,
+    "RECOMPUTED": 128,
     "SEMANTICALLY_CHECKED": 1
    },
    "failed": 0,
-   "reviewed": 157,
+   "reviewed": 167,
    "unknown": 0
   }
  },
@@ -1463,14 +1547,13 @@
   "prechecked_decision": false,
   "status_or_full_transition": false
  },
- "packet_id": "1SPE-VARALEA-EXPERT_PROGRAMME_PEDAGOGIE-NEUTRAL-31261fc9",
+ "packet_id": "1SPE-VARALEA-EXPERT_PROGRAMME_PEDAGOGIE-NEUTRAL-3558807a",
  "raster_qa": [
   {
    "UNKNOWN": 0,
    "VISIBLE_DEFECT": 0,
    "chapitre_debut": 314,
    "defauts": [],
-   "pages": 356,
    "variante": "eleve"
   },
   {
@@ -1478,7 +1561,6 @@
    "VISIBLE_DEFECT": 0,
    "chapitre_debut": 567,
    "defauts": [],
-   "pages": 624,
    "variante": "professeur"
   }
  ],
@@ -1639,10 +1721,10 @@
   "qcm_render_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.tex"
  },
  "source_state": {
-  "object_count": 157,
-  "object_set_digest": "sha256:e401dbc3aa23c69a309efe7fec014ab4cb75c8277423eac66b609a0fbd65a726",
-  "render_digest": "sha256:8567ab9ad0af803a2c4b03c5e8e36f2c890c6aaa75a8cb767578979d739f43e1",
-  "semantic_review_digest": "sha256:39e62a17fabb0ecd0c9b323e1d3fdbb350678a436b2dd952f29889b472c03141",
-  "source_sha": "31261fc96364d9c8ef8bbc2164110e36b9a7c18f"
+  "object_count": 167,
+  "object_set_digest": "sha256:c2cb414a04fedd23b828e3d218b8d2450313ccaf867d76d0d70bfd02dc0a6bbf",
+  "render_digest": "sha256:eaf0143ada1781bd23b77e97a49b80bb7174be611253948b95216a846a038f8e",
+  "semantic_review_digest": "sha256:ada0462679efb8d374493a1c18d0ba795b496c59a5a97a526ab4120892753a3c",
+  "source_sha": "3558807a4775445b9c4fd261ea1c518ddc545a77"
  }
 }
