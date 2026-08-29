@@ -97,7 +97,8 @@ def test_a_key_that_only_moves_letter_is_not_a_value_change(payload: dict) -> No
         for e in payload["reproof_required"]
         if "KEY_POSITION_CHANGED_BUT_VALUE_SAME" in e["delta_classes"]
     ]
-    assert len(changed) == 14
+    # 14 sur VARALEA, 5 sur EXPONENTIELLE apres le reequilibrage des cles.
+    assert len(changed) == 19
     assert not any(
         "KEY_VALUE_CHANGED" in e["delta_classes"] for e in payload["reproof_required"]
     )
@@ -112,10 +113,11 @@ def test_a_varalea_change_never_invalidates_another_chapter(payload: dict) -> No
     foreign = {
         e["chapter"] for e in payload["reproof_required"] if e["chapter"] != VARALEA
     }
-    # Le seul autre chapitre concerne l'est pour sa PROPRE divergence, pas par
-    # contagion : la preuve de TSPE-DERIVATION-CONVEXITE Q6 omet un $ que la
-    # source porte.
-    assert foreign == {"TSPE-DERIVATION-CONVEXITE"}
+    # Les autres chapitres concernes le sont pour leur PROPRE divergence, pas
+    # par contagion : la preuve de TSPE-DERIVATION-CONVEXITE Q6 omet un $ que
+    # la source porte, et EXPONENTIELLE a vu cinq questions permutees lors du
+    # reequilibrage de ses cles.
+    assert foreign == {"TSPE-DERIVATION-CONVEXITE", "1SPE-EXPONENTIELLE"}
     entry = next(
         e for e in payload["reproof_required"] if e["chapter"] == "TSPE-DERIVATION-CONVEXITE"
     )
@@ -175,7 +177,7 @@ def test_uncaptured_renvois_are_reported_not_absorbed(payload: dict) -> None:
     """La preuve historique n'a pas capture renvoi ; l'ecart doit etre visible."""
 
     gaps = payload["proof_field_coverage_gaps"]
-    assert len(gaps) == 17
+    assert len(gaps) == 22
     assert {gap["field"] for gap in gaps} == {"diagnostics.renvoi"}
     assert all(gap["options"] for gap in gaps)
     assert payload["semantic_digest_contract"]["excluded"] == ["diagnostics.renvoi"]
