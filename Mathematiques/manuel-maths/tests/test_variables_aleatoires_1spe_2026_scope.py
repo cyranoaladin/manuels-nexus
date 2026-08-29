@@ -45,9 +45,17 @@ def test_referentiel_et_contrat_separent_socle_et_extensions() -> None:
     assert [item["id"] for item in referential["capacites"]] == [
         f"1SPE-VARIABLES-ALEATOIRES-C{i}" for i in range(1, 6)
     ]
-    assert [item["code"] for item in contract["capacites"]] == [
-        f"C{i}" for i in range(1, 6)
-    ]
+    # Le referentiel ne porte que les cinq capacites attendues du B.O. C6 et C7
+    # sont des capacites INTERNES derivees de la rubrique « Experimentations » :
+    # elles doivent etre tracees comme telles et rester absentes du referentiel.
+    socle = [item for item in contract["capacites"] if "origine" not in item]
+    internes = [item for item in contract["capacites"] if "origine" in item]
+    assert [item["code"] for item in socle] == [f"C{i}" for i in range(1, 6)]
+    assert [item["code"] for item in internes] == ["C6", "C7"]
+    for item in internes:
+        assert item["origine"] == "CAPACITE_INTERNE_DERIVEE"
+        assert item["rubrique_officielle"] == "Experimentations"
+        assert item["ref_capacite"] not in [c["id"] for c in referential["capacites"]]
     assert {item["code"] for item in contract["extensions_facultatives"]} == {
         "X1",
         "X2",
@@ -148,7 +156,8 @@ def test_aucune_ressource_obligatoire_ne_formalise_la_loi_binomiale() -> None:
 
 def test_qcm_evaluations_diagnostics_et_remediations_restent_dans_le_socle() -> None:
     qcm = json.loads((CHAPTER / "qcm/1SPE-VARALEA-QCM.json").read_text(encoding="utf-8"))
-    assert len(qcm["questions"]) == 15
+    # 21 questions depuis la couverture de C6 et C7 (trois questions par capacite).
+    assert len(qcm["questions"]) == 21
     assert not FORBIDDEN.search(json.dumps(qcm, ensure_ascii=False))
 
     mandatory_paths = [
@@ -178,21 +187,25 @@ def test_repetitions_obligatoires_sont_bornees_a_quatre_epreuves() -> None:
 def test_qcm_reclasses_ont_une_cle_unique_et_des_diagnostics_specifiques() -> None:
     data = json.loads((CHAPTER / "qcm/1SPE-VARALEA-QCM.json").read_text(encoding="utf-8"))
     questions = {question["id"]: question for question in data["questions"]}
+    # Les lettres ont ete permutees pour respecter le contrat de distribution
+    # des cles (ecart max-min <= 1). La valeur attendue reste calculee ici, sans
+    # lire le JSON : le test verifie toujours que la cle designe l'unique option
+    # egale a cette valeur.
     expected = {
-        "Q7": ("B", Fraction(1, 2) ** 3),
-        "Q8": ("B", 2 * Fraction(1, 3) * Fraction(2, 3)),
-        "Q9": ("B", 2**3),
+        "Q7": ("C", Fraction(1, 2) ** 3),
+        "Q8": ("D", 2 * Fraction(1, 3) * Fraction(2, 3)),
+        "Q9": ("A", 2**3),
         "Q10": ("B", 3 * 4 - 2),
-        "Q11": ("B", -2 * 5 + 7),
-        "Q12": ("B", -4 * (-3) + 1),
+        "Q11": ("C", -2 * 5 + 7),
+        "Q12": ("D", -4 * (-3) + 1),
     }
     rendered_answers = {
-        "Q7": {"A": Fraction(1, 6), "B": Fraction(1, 8), "C": Fraction(3, 8), "D": Fraction(1, 2)},
-        "Q8": {"A": Fraction(2, 9), "B": Fraction(4, 9), "C": Fraction(1, 9), "D": Fraction(2, 3)},
-        "Q9": {"A": 3, "B": 8, "C": 6, "D": 9},
+        "Q7": {"A": Fraction(1, 6), "B": Fraction(3, 8), "C": Fraction(1, 8), "D": Fraction(1, 2)},
+        "Q8": {"A": Fraction(2, 9), "B": Fraction(2, 3), "C": Fraction(1, 9), "D": Fraction(4, 9)},
+        "Q9": {"A": 8, "B": 3, "C": 6, "D": 9},
         "Q10": {"A": 12, "B": 10, "C": 6, "D": 2},
-        "Q11": {"A": -10, "B": -3, "C": 17, "D": 12},
-        "Q12": {"A": -13, "B": 13, "C": -11, "D": -2},
+        "Q11": {"A": -10, "B": 17, "C": -3, "D": 12},
+        "Q12": {"A": -13, "B": -2, "C": -11, "D": 13},
     }
     generic = re.compile(r"arbitraire|erreur de calcul|confusion totale", re.IGNORECASE)
     for question_id, (answer, value) in expected.items():

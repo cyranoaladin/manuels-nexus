@@ -129,7 +129,7 @@ class FakeProductionRunner:
             pdf_path = Path(command[2])
             if pdf_path.stem.endswith("_professeur"):
                 return self._completed(
-                    stdout="\n".join(["Cle de correction"] * 10)
+                    stdout="\n".join(["Clé de correction"] * 10)
                 )
             return self._completed(stdout="Contenu eleve sans marqueur reserve\n")
         if command[:2] == [sys.executable, str(Path(command[1]))]:
@@ -791,7 +791,7 @@ def test_student_pdf_text_gate_accepts_student_instructions() -> None:
 
 def test_teacher_key_gate_requires_every_chapter_key() -> None:
     text = "\n".join(
-        ["Cle de correction — reservee au professeur"] * 9
+        ["Clé de correction — réservée au professeur"] * 9
         + ["Correction et diagnostics"]
     )
     assert assemble_manuel.teacher_key_count(text) == 10
@@ -834,7 +834,9 @@ def test_real_professor_order_matches_declared_inventory() -> None:
     # comme l'objet X3 cree apres ce gel.
     # Ce garde-fou reste en dur pour detecter une derive simultanee du vivant
     # et du declare, cas que l'egalite ligne suivante ne verrait pas.
-    assert len(professor_paths) == 1423
+    # 1425 depuis l'ajout de 1SPE-VARALEA-RE-C6 et RE-C7 : les capacites C6 et
+    # C7 du contrat VARALEA n'avaient aucune remediation.
+    assert len(professor_paths) == 1425
     assert all(
         path.startswith("Mathematiques/manuel-maths/") for path in professor_paths
     )
@@ -855,7 +857,8 @@ def test_real_student_order_keeps_evaluations_and_excludes_teacher_objects() -> 
     # Meme constat que pour la variante professeur : effectif re-atteste a
     # 925 apres retrait des cinq extensions sans besoin editorial prouve et de
     # l'objet X3 variance-affine cree apres le gel.
-    assert len(student_paths) == 925
+    # 927 : meme ajout de RE-C6 et RE-C7 que pour la variante professeur.
+    assert len(student_paths) == 927
     assert student_paths == assembly["included_objects"]
     # 20 = 10 chapitres x (EV-A + EV-B) — les evaluations TRIGO (lot BO 2026
     # scelle) ont rejoint l'assemblage depuis l'attestation du 2026-08-11.

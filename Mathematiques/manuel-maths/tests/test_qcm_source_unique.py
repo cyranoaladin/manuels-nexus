@@ -440,7 +440,7 @@ def test_le_tex_ne_diverge_pas_de_sa_source_json(chapitre: str) -> None:
 def test_la_cle_generee_est_conditionnee_a_la_variante_professeur(chapitre: str) -> None:
     tex = SOURCES[chapitre].with_suffix(".tex").read_text(encoding="utf-8")
     debut = tex.index("\\ifnxVersionProfesseur")
-    cle = tex.index("Cle de correction")
+    cle = tex.index("Clé de correction")
     fin = tex.rindex("\\fi")
 
     assert debut < cle < fin

@@ -104,7 +104,7 @@ def rendre(donnees: dict) -> str:
     questions = donnees.get("questions", [])
     out = [_entete(chapitre, donnees["_source"]), f"\n\\section*{{\\textcolor{{chapcolor}}{{\\MakeUppercase{{{titre}}}}}}}\n"]
     out.append(
-        "\n\\begin{center}\n\\textit{Pour chaque question, une seule reponse est exacte.}\n"
+        "\n\\begin{center}\n\\textit{Pour chaque question, une seule réponse est exacte.}\n"
         "\\end{center}\n\n\\begin{enumerate}\n"
     )
 
@@ -112,7 +112,7 @@ def rendre(donnees: dict) -> str:
     for question in questions:
         if question["capacite"] != capacite_courante:
             capacite_courante = question["capacite"]
-            out.append(f"\n\\item[] \\textbf{{Capacite {capacite_courante}}}\n")
+            out.append(f"\n\\item[] \\textbf{{Capacité {capacite_courante}}}\n")
         enonce = _clean_text(
             question.get("enonce") or question.get("texte", ""),
             f"{question.get('id')}/enonce",
@@ -139,15 +139,15 @@ def rendre(donnees: dict) -> str:
     out.append(
         "\n% NEXUS-QCM-TEACHER-ONLY-BEGIN\n"
         "\\ifnxVersionProfesseur\n"
-        "\\clearpage\n\\section*{Cle de correction — reservee au professeur}\n\n"
+        "\\clearpage\n\\section*{Clé de correction — réservée au professeur}\n\n"
     )
     out.append("\\begin{center}\n\\begin{tabular}{lll}\n\\hline\n")
-    out.append("Question & Capacite & Reponse exacte \\\\\n\\hline\n")
+    out.append("Question & Capacité & Réponse exacte \\\\\n\\hline\n")
     for question in questions:
         out.append(f"{question['id']} & {question['capacite']} & \\textbf{{{question['correcte']}}} \\\\\n")
     out.append("\\hline\n\\end{tabular}\n\\end{center}\n\n")
 
-    out.append("\\subsection*{Diagnostic des reponses erronees}\n\n\\begin{itemize}\n")
+    out.append("\\subsection*{Diagnostic des réponses erronées}\n\n\\begin{itemize}\n")
     for question in questions:
         out.append(f"  \\item \\textbf{{{question['id']}}}\n  \\begin{{itemize}}\n")
         for lettre in LETTRES:
