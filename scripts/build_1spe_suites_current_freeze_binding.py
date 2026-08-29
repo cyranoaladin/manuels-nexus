@@ -131,21 +131,46 @@ def build_binding() -> dict[str, Any]:
     object_blob_identity_pass = not missing and not modified and not supplementary
 
     # --- identite semantique des sources couvertes ----------------------------
-    covered = [freeze["contract"], freeze["qcm"]["canonical"], freeze["qcm"]["generated_tex"]]
-    covered.extend(freeze["remediation"]["sources"])
+    #
+    # Contrat d'autorite du QCM :
+    #   QCM_SEMANTIC_AUTHORITY = le JSON canonique
+    #   QCM_RENDER_ARTIFACT    = le TeX genere
+    #
+    # Le TeX genere est un DERIVE du JSON par build_qcm_tex.py. Le compter
+    # parmi les sources semantiques en faisait une seconde autorite
+    # concurrente : une correction typographique du gabarit (campagne
+    # diacritiques) perimait un gel dont aucune question, aucune option,
+    # aucune cle et aucun diagnostic n'avaient bouge. Un changement de rendu
+    # n'est pas un changement de contenu.
     def _frozen_sha256(binding: dict[str, Any]) -> str:
         # Le gel nomme le condense "sha256" pour les liaisons nommees et
         # "source_sha256" pour les objets et les remediations.
         return binding.get("sha256") or binding["source_sha256"]
 
-    semantic_drift = [
-        binding["path"]
-        for binding in covered
-        if not (ROOT / binding["path"]).is_file()
-        or hashlib.sha256((ROOT / binding["path"]).read_bytes()).hexdigest()
-        != _frozen_sha256(binding)
-    ]
+    def _drift(bindings: list[dict[str, Any]]) -> list[str]:
+        return [
+            binding["path"]
+            for binding in bindings
+            if not (ROOT / binding["path"]).is_file()
+            or hashlib.sha256((ROOT / binding["path"]).read_bytes()).hexdigest()
+            != _frozen_sha256(binding)
+        ]
+
+    covered = [freeze["contract"], freeze["qcm"]["canonical"]]
+    covered.extend(freeze["remediation"]["sources"])
+    render_artifacts = [freeze["qcm"]["generated_tex"]]
+
+    semantic_drift = _drift(covered)
+    render_drift = _drift(render_artifacts)
     semantic_identity_pass = object_blob_identity_pass and not semantic_drift
+    qcm_canonical_path = freeze["qcm"]["canonical"]["path"]
+    qcm_render_path = freeze["qcm"]["generated_tex"]["path"]
+    qcm_semantic_digest = (
+        "sha256:"
+        + hashlib.sha256((ROOT / qcm_canonical_path).read_bytes()).hexdigest()
+        if (ROOT / qcm_canonical_path).is_file()
+        else None
+    )
 
     # --- identite de l'autorite programme, par projection de chapitre ---------
     authority_drift: list[str] = []
@@ -168,10 +193,20 @@ def build_binding() -> dict[str, Any]:
     key_is_conditioned = False
     if qcm_tex.is_file():
         text = qcm_tex.read_text(encoding="utf-8")
-        if "\\ifnxVersionProfesseur" in text and "Cle de correction" in text:
+        # Le producteur canonique emet la forme accentuee depuis la campagne
+        # diacritiques ; la forme ASCII reste acceptee pour les arbres anterieurs.
+        heading = next(
+            (
+                candidate
+                for candidate in ("Cl\u00e9 de correction", "Cle de correction")
+                if candidate in text
+            ),
+            None,
+        )
+        if "\\ifnxVersionProfesseur" in text and heading is not None:
             key_is_conditioned = (
                 text.index("\\ifnxVersionProfesseur")
-                < text.index("Cle de correction")
+                < text.index(heading)
                 < text.rindex("\\fi")
             )
     variant_semantic_identity_pass = (
@@ -213,11 +248,24 @@ def build_binding() -> dict[str, Any]:
         "programme_authority_identity_pass": programme_authority_identity_pass,
         "variant_semantic_identity_pass": variant_semantic_identity_pass,
         "binding_state": binding_state,
+        "qcm_semantic_authority": qcm_canonical_path,
+        "qcm_render_artifact": qcm_render_path,
+        "qcm_semantic_digest": qcm_semantic_digest,
+        "render_evidence_state": "RENDER_CHANGED" if render_drift else "RENDER_CURRENT",
+        "authority_contract": {
+            "semantic_source": "JSON canonique du QCM",
+            "render_artifact": "TeX genere par build_qcm_tex.py",
+            "note": (
+                "un changement du seul artefact de rendu ne perime pas le gel ; "
+                "il est signale par render_evidence_state, jamais par binding_state"
+            ),
+        },
         "findings": {
             "missing_objects": missing,
             "modified_objects": modified,
             "supplementary_objects": supplementary,
             "covered_source_drift": semantic_drift,
+            "render_artifact_drift": render_drift,
             "programme_authority_drift": authority_drift,
         },
         "staleness_rules": {
@@ -226,6 +274,7 @@ def build_binding() -> dict[str, Any]:
             "other_worktree": "NOT_STALE",
             "derived_envelope_refreshed": "NOT_STALE",
             "authority_line_of_another_chapter": "NOT_STALE",
+            "generated_render_only_changed": "NOT_STALE",
             "covered_source_content_changed": "STALE_CONTENT_CHANGED",
             "object_added_or_removed": "STALE_CONTENT_CHANGED",
             "qcm_correction_or_remediation_changed": "STALE_CONTENT_CHANGED",

@@ -76,13 +76,23 @@ def test_the_binding_reports_the_frozen_identity_and_passes_every_check(
         "variant_semantic_identity_pass",
     ):
         assert binding_payload[check] is True, check
+    # Le TeX genere du QCM est un artefact de RENDU, pas une source semantique :
+    # la campagne diacritiques a change ses octets sans toucher une seule
+    # question du JSON canonique. Sa derive est signalee a part et n'entre pas
+    # dans le verdict de fraicheur du gel.
     assert binding_payload["findings"] == {
         "missing_objects": [],
         "modified_objects": [],
         "supplementary_objects": [],
         "covered_source_drift": [],
+        "render_artifact_drift": [
+            "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.tex"
+        ],
         "programme_authority_drift": [],
     }
+    assert binding_payload["render_evidence_state"] == "RENDER_CHANGED"
+    assert binding_payload["qcm_semantic_authority"].endswith("1SPE-SUITES-QCM.json")
+    assert binding_payload["qcm_render_artifact"].endswith("1SPE-SUITES-QCM.tex")
 
 
 def test_the_content_projection_ignores_commit_metadata(freeze_binding) -> None:

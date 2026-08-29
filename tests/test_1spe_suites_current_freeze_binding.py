@@ -124,6 +124,125 @@ def test_c_ter_authority_line_of_another_chapter_does_not_rebind(clean_repo: Pat
     assert payload["binding_state"] == CURRENT
 
 
+# -- Autorite semantique vs artefact de rendu --------------------------------
+#
+# QCM_SEMANTIC_AUTHORITY = JSON canonique
+# QCM_RENDER_ARTIFACT    = TeX genere
+#
+# Le TeX genere ne doit jamais devenir une seconde autorite semantique
+# concurrente du JSON : une correction typographique du gabarit change ses
+# octets sans changer une seule reponse.
+
+QCM_JSON = f"{CHAPTER}/qcm/1SPE-SUITES-QCM.json"
+QCM_TEX = f"{CHAPTER}/qcm/1SPE-SUITES-QCM.tex"
+
+
+def _mutate(repo: Path, relative: str, old: str, new: str) -> None:
+    """Remplace `old` par `new` et refuse une mutation qui ne mute rien."""
+
+    target = repo / relative
+    text = target.read_text(encoding="utf-8")
+    mutant = text.replace(old, new, 1)
+    assert mutant != text, f"TEST_SETUP_FAILURE: {old!r} absent de {relative}"
+    target.write_text(mutant, encoding="utf-8")
+
+
+def test_e_accent_only_change_of_the_generated_tex_keeps_the_freeze_current(
+    clean_repo: Path,
+) -> None:
+    """1. TeX genere accentue, JSON canonique inchange => gel CURRENT."""
+
+    before = _binding_state(clean_repo)
+    json_before = (clean_repo / QCM_JSON).read_bytes()
+    _mutate(clean_repo, QCM_TEX, "numeriques", "num\u00e9riques")
+    payload = _binding_state(clean_repo)
+
+    assert (clean_repo / QCM_JSON).read_bytes() == json_before
+    assert payload["binding_state"] == CURRENT
+    assert payload["semantic_identity_pass"] is True
+    assert payload["findings"]["covered_source_drift"] == []
+    assert payload["findings"]["render_artifact_drift"] == [QCM_TEX]
+    assert payload["render_evidence_state"] == "RENDER_CHANGED"
+    assert before["qcm_semantic_digest"] == payload["qcm_semantic_digest"]
+
+
+def test_f_typography_only_template_change_keeps_the_freeze_current(
+    clean_repo: Path,
+) -> None:
+    """2. Le gabarit ne change que la typographie => gel CURRENT."""
+
+    _mutate(clean_repo, QCM_TEX, "definie", "d\u00e9finie")
+    payload = _binding_state(clean_repo)
+
+    assert payload["binding_state"] == CURRENT
+    assert payload["qcm_semantic_authority"] == QCM_JSON
+    assert payload["qcm_render_artifact"] == QCM_TEX
+
+
+def test_g_a_canonical_option_change_makes_the_freeze_stale(clean_repo: Path) -> None:
+    """3. Une option du JSON canonique change => gel STALE."""
+
+    document = json.loads((clean_repo / QCM_JSON).read_text(encoding="utf-8"))
+    question = document["questions"][0]
+    letter = next(iter(question["options"]))
+    question["options"][letter] = question["options"][letter] + " (modifie)"
+    (clean_repo / QCM_JSON).write_text(
+        json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    payload = _binding_state(clean_repo)
+
+    assert payload["binding_state"] == STALE
+    assert QCM_JSON in payload["findings"]["covered_source_drift"]
+
+
+def test_h_a_canonical_key_change_makes_the_freeze_stale(clean_repo: Path) -> None:
+    """4. La bonne reponse du JSON canonique change => gel STALE."""
+
+    document = json.loads((clean_repo / QCM_JSON).read_text(encoding="utf-8"))
+    question = document["questions"][0]
+    other = next(
+        letter for letter in question["options"] if letter != question["correcte"]
+    )
+    question["correcte"] = other
+    (clean_repo / QCM_JSON).write_text(
+        json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    payload = _binding_state(clean_repo)
+
+    assert payload["binding_state"] == STALE
+    assert QCM_JSON in payload["findings"]["covered_source_drift"]
+
+
+def test_i_a_diagnostic_change_makes_the_freeze_stale(clean_repo: Path) -> None:
+    """5. Un diagnostic du JSON canonique change => gel STALE."""
+
+    document = json.loads((clean_repo / QCM_JSON).read_text(encoding="utf-8"))
+    question = next(item for item in document["questions"] if item.get("diagnostics"))
+    letter = next(iter(question["diagnostics"]))
+    entry = question["diagnostics"][letter]
+    entry["erreur"] = str(entry.get("erreur", "")) + " (modifie)"
+    (clean_repo / QCM_JSON).write_text(
+        json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    payload = _binding_state(clean_repo)
+
+    assert payload["binding_state"] == STALE
+    assert QCM_JSON in payload["findings"]["covered_source_drift"]
+
+
+def test_j_a_remediation_change_still_makes_the_freeze_stale(clean_repo: Path) -> None:
+    """La remediation reste une source semantique couverte."""
+
+    remediation = sorted((clean_repo / CHAPTER / "remediation").glob("*.tex"))[0]
+    remediation.write_text(
+        remediation.read_text(encoding="utf-8") + "\n% derive semantique\n",
+        encoding="utf-8",
+    )
+    payload = _binding_state(clean_repo)
+
+    assert payload["binding_state"] == STALE
+
+
 def test_d_covered_source_change_makes_the_binding_stale(clean_repo: Path) -> None:
     course = clean_repo / CHAPTER / "cours" / "10_C1_generalites_suites.tex"
     course.write_text(course.read_text(encoding="utf-8") + "\n% derive\n", encoding="utf-8")

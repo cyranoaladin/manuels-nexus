@@ -279,8 +279,13 @@ def validate_current_bindings(payload: dict[str, Any]) -> None:
     rafraichie des que le depot avance et ce mecanisme ne dit rien du contenu.
     """
 
+    # Contrat d'autorite du QCM : le JSON canonique est la source semantique,
+    # le TeX genere n'en est qu'un rendu produit par build_qcm_tex.py. Lier le
+    # rendu a l'octet ferait perimer le gel a la moindre correction
+    # typographique du gabarit, sans qu'aucune question, option, cle ou
+    # diagnostic n'ait change. Seule la source semantique lie le gel.
     content_bindings = list(payload["objects"])
-    content_bindings.extend((payload["contract"], payload["qcm"]["generated_tex"]))
+    content_bindings.extend((payload["contract"], payload["qcm"]["canonical"]))
     seen: set[str] = set()
     for row in content_bindings:
         path = row["path"]
