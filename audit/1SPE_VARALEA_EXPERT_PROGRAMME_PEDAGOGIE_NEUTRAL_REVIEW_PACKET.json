@@ -182,13 +182,13 @@
     "exists": true,
     "pages": 357,
     "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
-    "sha256": "sha256:2a807d43e9f40fc6a9d12ef223de018d52385cd68ffd640051205a79c1c2561c"
+    "sha256": "sha256:7f0d49982069fe42a93edef66b4d8464a6de012eec9c8188e4b3af90254a6f43"
    },
    {
     "exists": true,
     "pages": 629,
     "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf",
-    "sha256": "sha256:5254f5a242c2f9d28935c9ff60fe31fa820f6e7d0fa44a9b012c5562acd8ed22"
+    "sha256": "sha256:90ce4d750e8ab829396ec2bee5136a54d4c02dd859d68c56b66218688f61aebb"
    }
   ],
   "objects": [
@@ -609,13 +609,13 @@
    {
     "id": "1SPE-VARALEA-EV-A-corrige",
     "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/1SPE-VARALEA-EV-A-corrige.tex",
-    "sha256": "sha256:b2e6cc5ad67a833aedf1f1f7aaf2a851dd8e5eaccec2b3621b5eeda3ca3d191b",
+    "sha256": "sha256:e8fa669da9266ffa6a8a4c97cd59d48353f2ffe35a0f5f363cfdcf42da86cec4",
     "type": "corrige_evaluation"
    },
    {
     "id": "1SPE-VARALEA-EV-A",
     "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/1SPE-VARALEA-EV-A.tex",
-    "sha256": "sha256:6944bdf9439e7e6dafc66cea8dfc3f59575f5aead54c886a18f7d343451e4207",
+    "sha256": "sha256:e8d20118ceba88fdb61dc1ae995a92fcf6d54d87481007779e58de8cdc72e04b",
     "type": "evaluation"
    },
    {
@@ -1227,8 +1227,8 @@
  },
  "findings_history": {
   "editorial": {
-   "fixed": 9,
-   "found": 9,
+   "fixed": 10,
+   "found": 10,
    "items": [
     {
      "class": "QCM_RENDER_SEMANTIC_PRESERVATION_FAILURE",
@@ -1291,6 +1291,15 @@
      "status": "FIXED"
     },
     {
+     "defect": "ma completion C6/C7 avait fait deriver le bareme de 20 a 25 points et la duree de 55 a 70 minutes, sans aucune autorite : docs/01 fixe 55 min, la collection compte 60 evaluations a 20 points, et l'historique VARALEA donnait 55/20",
+     "fixed_by": "c6f00e6f",
+     "found_in": "evaluations EV-A et EV-B",
+     "id": "EDI-10",
+     "note": "retour au format par retrait de deux redondances reelles et rebalancement des ponderations ; C6 et C7 restent evaluees dans les deux versions et l'equivalence structurelle A/B devient exacte",
+     "severity": "P2",
+     "status": "FIXED"
+    },
+    {
      "defect": "l'accentuation du gabarit a change le sha256 du QCM de reference 1SPE-DERIVATION-LOCAL ; 17 tests de test_maquette_v5.py echouaient, hors de ma batterie ciblee",
      "fixed_by": "f41bbc49",
      "found_in": "build/maquette-v5/manifest.json",
@@ -1311,8 +1320,8 @@
    "unresolved": 0
   },
   "pedagogy": {
-   "fixed": 7,
-   "found": 7,
+   "fixed": 8,
+   "found": 8,
    "items": [
     {
      "defect": "cinq atomes officiels obligatoires (1SPE-OFFICIAL-175 a 179) visaient deux capacites absentes du contrat",
@@ -1363,6 +1372,15 @@
      "fixed_by": "954edd9e",
      "found_in": "cours/00_ouverture",
      "id": "PED-06",
+     "severity": "P1",
+     "status": "FIXED"
+    },
+    {
+     "defect": "EV-A evaluait C1,C2,C3,C5,C6,C7 et EV-B ajoutait C4 : deux versions donnees a des eleves differents dans les memes conditions n'evaluaient pas le meme jeu de capacites, donc les notes n'etaient pas comparables",
+     "fixed_by": "6bad8d73a",
+     "found_in": "evaluations EV-A et EV-B",
+     "id": "PED-08",
+     "note": "defaut anterieur a cette campagne, present depuis 4c7d9740 ; je l'avais signale comme historique et laisse ouvert, ce qui n'etait pas une justification. Corrige en remplacant la question intermediaire E(X^2) de EV-A, qui n'est pas une capacite, par une vraie tache de linearite E(2X+1) ; format, structure et duree inchanges. Controle automatique ajoute : test_varalea_assessment_blueprint.py",
      "severity": "P1",
      "status": "FIXED"
     },
@@ -1644,7 +1662,7 @@
   "release_acceptance": false,
   "release_blocking": true
  },
- "packet_id": "1SPE-VARALEA-EXPERT_PROGRAMME_PEDAGOGIE-NEUTRAL-76497725",
+ "packet_id": "1SPE-VARALEA-EXPERT_PROGRAMME_PEDAGOGIE-NEUTRAL-9e9146a0",
  "raster_qa": [
   {
    "UNKNOWN": 0,
@@ -1820,8 +1838,8 @@
  "source_state": {
   "object_count": 167,
   "object_set_digest": "sha256:c2cb414a04fedd23b828e3d218b8d2450313ccaf867d76d0d70bfd02dc0a6bbf",
-  "render_digest": "sha256:99f45ed1c7c9875ef099bf7ff595405ce21197fb52bf595313e1328b264efbc1",
-  "semantic_review_digest": "sha256:f104edb566e1a32b388db92842d6f00869fa0d8d50a8a371c9cc23a9838d4d64",
-  "source_sha": "76497725cf21544e220fb5402758ef1d77499b00"
+  "render_digest": "sha256:09076f65cd491ff89399a5e80b62efe46d6482a81277787255ffedd33a1f1193",
+  "semantic_review_digest": "sha256:9c047546a2893ed1ceecd0da72d48b86dc85dfff1689565974636e58008720ed",
+  "source_sha": "9e9146a006c1fc4521247f0e956c29c57d1d0bbf"
  }
 }
