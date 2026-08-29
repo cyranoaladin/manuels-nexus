@@ -1,0 +1,71 @@
+{
+  "artifact_type": "render_resolution_evidence",
+  "schema_version": 1,
+  "generated_by": "session preflight de convergence",
+  "findings": [
+    "1SPE-LAYOUT-W024",
+    "1SPE-LAYOUT-W025"
+  ],
+  "previous_classification": "VISIBLE_FORMULA_LINEBREAK_DEFECT",
+  "previous_observation": "The P(A)= prefix is isolated at the right edge and the summation begins on the following line; the defect is visible.",
+  "previous_build_source_sha": "5d935e720a82e207d7a8769f6bd2608ef1160322",
+  "object_id": "1SPE-VARALEA-FR-R2",
+  "chapter": "1SPE-VARIABLES-ALEATOIRES",
+  "source": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/remediation/1SPE-VARALEA-FR-R2.tex",
+  "source_sha256": "sha256:27cd21ee6130e11f7afae365f602f0527bf6b44ad8893377381c69fe7de1debb",
+  "source_sha256_at_defect": "sha256:92ceac6e53a53a324049d84503f90e73cefbc8df13a81e6919601946533fec29",
+  "repair": "la formule des probabilites totales est passee en equation hors texte \\[...\\] : elle ne peut plus se couper entre le prefixe et la sommation",
+  "observed_build_source_sha": "a32a3c0dfb7866504eae9630f23a47fd2a5fdda8",
+  "build_evidence_scope": "DIAGNOSTIC_BUILD_NOT_RECORDED_OBSERVED",
+  "variants": {
+    "eleve": {
+      "pdf": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
+      "pdf_sha256": "sha256:7f0d49982069fe42a93edef66b4d8464a6de012eec9c8188e4b3af90254a6f43",
+      "pdf_reproduces_tracked_artifact": true,
+      "log": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.log",
+      "log_sha256": "sha256:d2d31b7758f7e56a6421d18977acb5fdab51b030cd37812b06d432c5a01ed2ec",
+      "pdf_page_of_FR_R2": 348,
+      "pdf_page_at_defect": 342,
+      "underfull_hbox_in_this_log": [
+        {
+          "log_line": 12893,
+          "text": "Underfull \\hbox (badness 5217) in paragraph at lines 21--21"
+        }
+      ],
+      "underfull_on_FR_R2": 0,
+      "crop": "audit/render_evidence/VARALEA_FR_R2/eleve-p348-FR-R2-formule-300dpi.png",
+      "crop_sha256": "sha256:cc1669c434358080f3c5cc14cb5efb34dfd12d0b8243bec3db837deb73a75bad"
+    },
+    "professeur": {
+      "pdf": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf",
+      "pdf_sha256": "sha256:90ce4d750e8ab829396ec2bee5136a54d4c02dd859d68c56b66218688f61aebb",
+      "pdf_reproduces_tracked_artifact": true,
+      "log": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.log",
+      "log_sha256": "sha256:4ba05c3779bb1351e7c7a26748c459a10776178f961cad492894f70ea96f911a",
+      "pdf_page_of_FR_R2": 607,
+      "pdf_page_at_defect": 600,
+      "underfull_hbox_in_this_log": [
+        {
+          "log_line": 21113,
+          "text": "Underfull \\hbox (badness 5217) in paragraph at lines 21--21"
+        }
+      ],
+      "underfull_on_FR_R2": 0,
+      "crop": "audit/render_evidence/VARALEA_FR_R2/professeur-p607-FR-R2-formule-300dpi.png",
+      "crop_sha256": "sha256:c8e00e65af1dd60b7a7e6d27289bdf4945c2d3097f8551cdee3dfb9f448798e9"
+    }
+  },
+  "resolution_state": "RESOLVED_WITH_RENDER_PROOF",
+  "raster": {
+    "dpi": 300,
+    "method": "pdftoppm -r 300 + inspection machine + lecture visuelle"
+  },
+  "proven": {
+    "prefix_not_isolated": true,
+    "summation_on_the_same_baseline": true,
+    "no_line_break_inside_the_formula": true,
+    "limits_composed_above_and_below": true,
+    "clipping": 0,
+    "overlap": 0
+  }
+}
