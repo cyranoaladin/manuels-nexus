@@ -219,6 +219,23 @@ def chapter_variance_values(chapter_dir: Path) -> list[float]:
     return values
 
 
+#: Debut d'une question de QCM. Absent des autres objets : le cloisonnement
+#: est alors sans effet et le fichier entier reste une seule portee.
+QUESTION_RE = re.compile(r"\\item\s*\\textbf\{\[Q\d+\]\}")
+
+
+def _scope_start(question_starts: list[int], position: int) -> int:
+    """Debut de la portee d'appariement contenant `position`."""
+
+    start = 0
+    for boundary in question_starts:
+        if boundary <= position:
+            start = boundary
+        else:
+            break
+    return start
+
+
 def audit_object(
     path: Path, chapter_id: str, chapter_variances: list[float] | None = None
 ) -> list[Finding]:
@@ -230,6 +247,11 @@ def audit_object(
     body = text[verify_match.end() :] if verify_match else text
 
     claims = extract_claims(body)
+    # Un QCM est une suite de questions independantes : une variance affirmee
+    # dans une question ne dit rien d'un ecart-type affirme dans une autre.
+    # Sans ce cloisonnement, la derniere variance du fichier est appariee a
+    # n'importe quel sigma ulterieur et fabrique un faux P0.
+    question_starts = [match.start() for match in QUESTION_RE.finditer(body)]
     findings: list[Finding] = []
     relative = (
         path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else path.as_posix()
@@ -263,10 +285,11 @@ def audit_object(
                 )
             continue
 
+        scope_start = _scope_start(question_starts, sigma.position)
         upstream = [
             claim
             for claim in variances
-            if claim.position < sigma.position
+            if scope_start <= claim.position < sigma.position
             and (sigma.variable is None or claim.variable == sigma.variable)
         ]
         if not upstream:

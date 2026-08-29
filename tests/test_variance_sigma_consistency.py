@@ -75,6 +75,21 @@ def _audit_text(tmp_path: Path, body: str, verify: str = "") -> list:
     return audit.audit_object(path, "TEST", [])
 
 
+def _audit_qcm(tmp_path: Path, body: str, chapter_variances: list | None = None) -> list:
+    """Comme _audit_text, mais pour un objet QCM : le cloisonnement par
+    question ne s'applique qu'aux fichiers qui portent des marqueurs [Qn]."""
+
+    meta = {
+        "id": "TEST-QCM",
+        "chapitre": "TEST",
+        "type_objet": "qcm",
+        "status": "generated",
+    }
+    path = tmp_path / "TEST-QCM.tex"
+    path.write_text(f"% META: {json.dumps(meta)}\n{body}\n", encoding="utf-8")
+    return audit.audit_object(path, "TEST", chapter_variances or [])
+
+
 def test_detects_variance_sigma_swap(tmp_path: Path) -> None:
     findings = _audit_text(tmp_path, r"$V(X) = 9$ donc $\sigma(X) = 9$.")
     assert [f.defect_class for f in findings] == ["VARIANCE_SIGMA_SWAP"]
@@ -103,6 +118,37 @@ def test_detects_sigma_without_any_oracle(tmp_path: Path) -> None:
     findings = _audit_text(tmp_path, r"Mais $\sigma \approx 3946$~euros.")
     assert [f.defect_class for f in findings] == ["SIGMA_WITHOUT_ORACLE"]
     assert findings[0].severity == "P0"
+
+
+def test_two_independent_qcm_questions_are_never_paired(tmp_path: Path) -> None:
+    r"""Un QCM est une suite de questions independantes.
+
+    La variance affirmee dans une question ne dit rien de l'ecart-type
+    affirme dans une autre : les apparier fabrique un faux P0.
+    Cas reel : VARALEA Q6 porte $V(X) = 5$, Q19 porte $\sigma=2{,}1$ pour
+    la variable du chapitre (V = 4,41). Les deux enonces sont exacts.
+    """
+
+    body = (
+        r"\item \textbf{[Q6]} Si $E(X) = 4$ et $V(X) = 5$, quelle est $E(X^2)$ ?"
+        "\n\n"
+        r"\item \textbf{[Q19]} Pour la variable du chapitre, $\mu=1{,}3$ et "
+        r"$\sigma=2{,}1$. Que vaut $\dfrac{2\sigma}{\sqrt{n}}$ ?"
+    )
+    findings = _audit_qcm(tmp_path, body, chapter_variances=[4.41])
+    assert [f.defect_class for f in findings if f.severity == "P0"] == []
+
+
+def test_a_root_mismatch_inside_one_question_is_still_detected(tmp_path: Path) -> None:
+    """Le cloisonnement par question ne doit pas eteindre la detection."""
+
+    body = (
+        r"\item \textbf{[Q1]} Rien ici."
+        "\n\n"
+        r"\item \textbf{[Q2]} Si $V(X) = 100$ alors $\sigma(X) = 4$."
+    )
+    findings = _audit_qcm(tmp_path, body)
+    assert [f.defect_class for f in findings] == ["ROOT_MISMATCH"]
 
 
 def test_a_sigma_covered_by_the_sympy_oracle_is_accepted(tmp_path: Path) -> None:
