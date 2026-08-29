@@ -23,15 +23,17 @@ RACINE = Path(__file__).resolve().parents[1]
 CHAPITRE = RACINE / "chapitres" / "1SPE-VARIABLES-ALEATOIRES"
 
 # Repartition scellee a la cloture verticale du chapitre.
-# 155 objets a l'ouverture de la cloture ; RE-C6 et RE-C7 ont ete ajoutees
-# parce que les capacites C6 et C7 n'avaient aucune remediation.
+# 155 objets a l'ouverture de la cloture. RE-C6 et RE-C7 ont ete ajoutees parce
+# que C6 et C7 n'avaient aucune remediation (155 -> 157), puis ME-008, ME-009,
+# EX-051 a EX-054 et leurs corriges parce que les memes capacites n'avaient ni
+# methode, ni exercice, ni corrige (157 -> 167).
 REPARTITION_ATTENDUE = {
-    "corrige": 50,
-    "exercice": 50,
+    "corrige": 54,
+    "exercice": 54,
     "coup_de_pouce": 18,
     "remediation": 12,
+    "methode": 9,
     "cours": 7,
-    "methode": 7,
     "experimentation": 4,
     "algorithme": 2,
     "td": 2,
@@ -39,7 +41,7 @@ REPARTITION_ATTENDUE = {
     "corrige_evaluation": 2,
     "qcm": 1,
 }
-TOTAL_ATTENDU = 157
+TOTAL_ATTENDU = 167
 
 _META = re.compile(r"^%\s*META:\s*(\{.*\})\s*$", re.M)
 
@@ -113,3 +115,42 @@ def test_chaque_capacite_du_contrat_a_une_remediation() -> None:
         for chemin in (CHAPITRE / "remediation").glob("*-RE-*.tex")
     }
     assert codes <= presentes, f"capacites sans remediation : {sorted(codes - presentes)}"
+
+
+def test_chaque_capacite_du_contrat_a_la_chaine_des_six_maillons() -> None:
+    """Regression : C6 et C7 avaient une remediation et un QCM, mais aucune
+    methode, aucun exercice, aucun corrige et aucun item d'evaluation.
+
+    Le defaut avait survecu a une premiere revue parce que le verificateur
+    exemptait explicitement C6 et C7 du controle d'alignement d'evaluation.
+    Aucune capacite du contrat n'est exemptee ici.
+    """
+    import yaml
+
+    contrat = yaml.safe_load((CHAPITRE / "contrat.yaml").read_text(encoding="utf-8"))
+    codes = [capacite["code"] for capacite in contrat["capacites"]]
+    objets = _objets()
+
+    maillons = {
+        "cours": ("cours", "experimentation", "algorithme"),
+        "methode": ("methode",),
+        "exercice": ("exercice",),
+        "corrige": ("corrige",),
+        "evaluation": ("evaluation",),
+        "remediation": ("remediation",),
+    }
+    incomplets: dict[str, list[str]] = {}
+    for code in codes:
+        absents = [
+            nom
+            for nom, types in maillons.items()
+            if not any(
+                objet.get("type_objet") in types
+                and code in (objet.get("capacites_codes") or [])
+                for objet in objets
+            )
+        ]
+        if absents:
+            incomplets[code] = absents
+
+    assert incomplets == {}, f"chaines de maillons incompletes : {incomplets}"

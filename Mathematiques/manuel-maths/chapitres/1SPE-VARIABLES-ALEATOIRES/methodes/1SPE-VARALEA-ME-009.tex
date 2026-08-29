@@ -1,0 +1,27 @@
+% META: {"id": "1SPE-VARALEA-ME-009", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "methode", "capacites_codes": ["C7"], "methodes": ["M9"], "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M9}{Étudier la fluctuation de la moyenne d'un échantillon}
+  \textbf{Quand l'utiliser ?}
+
+  Pour situer l'écart entre la moyenne $m$ d'un échantillon simulé de taille
+  $n$ et l'espérance $\mu$ de la variable aléatoire.
+
+  \textbf{Procédure}
+  \begin{enumerate}
+    \item Relever $\mu$ et $\sigma$ dans l'énoncé, ou les calculer à partir de
+          la loi.
+    \item Calculer le seuil $\dfrac{2\sigma}{\sqrt{n}}$.
+    \item Comparer l'écart observé $|m - \mu|$ à ce seuil.
+    \item Sur $N$ échantillons simulés, compter ceux qui vérifient
+          $|m - \mu| \leq \dfrac{2\sigma}{\sqrt{n}}$, puis calculer la
+          proportion correspondante.
+    \item Comparer cette proportion à l'ordre de grandeur attendu, environ
+          $95\,\%$.
+  \end{enumerate}
+
+  \textbf{Contrôle}
+
+  Le seuil dépend de $n$, pas de $N$. Quadrupler $n$ divise le seuil par $2$ :
+  si la valeur trouvée ne bouge pas quand $n$ change, c'est que $\sqrt{n}$ a
+  été oublié. Et un unique échantillon hors de l'intervalle ne contredit
+  rien : environ un sur vingt en sort.
+\end{fichemethode}

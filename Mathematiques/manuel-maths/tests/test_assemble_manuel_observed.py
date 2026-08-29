@@ -834,9 +834,10 @@ def test_real_professor_order_matches_declared_inventory() -> None:
     # comme l'objet X3 cree apres ce gel.
     # Ce garde-fou reste en dur pour detecter une derive simultanee du vivant
     # et du declare, cas que l'egalite ligne suivante ne verrait pas.
-    # 1425 depuis l'ajout de 1SPE-VARALEA-RE-C6 et RE-C7 : les capacites C6 et
-    # C7 du contrat VARALEA n'avaient aucune remediation.
-    assert len(professor_paths) == 1425
+    # 1435 : RE-C6 et RE-C7 (remediation absente pour C6 et C7), puis ME-008,
+    # ME-009, EX-051 a EX-054 et leurs quatre corriges (ni methode, ni exercice,
+    # ni corrige pour ces deux memes capacites).
+    assert len(professor_paths) == 1435
     assert all(
         path.startswith("Mathematiques/manuel-maths/") for path in professor_paths
     )
@@ -857,8 +858,9 @@ def test_real_student_order_keeps_evaluations_and_excludes_teacher_objects() -> 
     # Meme constat que pour la variante professeur : effectif re-atteste a
     # 925 apres retrait des cinq extensions sans besoin editorial prouve et de
     # l'objet X3 variance-affine cree apres le gel.
-    # 927 : meme ajout de RE-C6 et RE-C7 que pour la variante professeur.
-    assert len(student_paths) == 927
+    # 933 : meme campagne que pour la variante professeur, moins les quatre
+    # corriges, qui ne sont pas assembles cote eleve.
+    assert len(student_paths) == 933
     assert student_paths == assembly["included_objects"]
     # 20 = 10 chapitres x (EV-A + EV-B) — les evaluations TRIGO (lot BO 2026
     # scelle) ont rejoint l'assemblage depuis l'attestation du 2026-08-11.

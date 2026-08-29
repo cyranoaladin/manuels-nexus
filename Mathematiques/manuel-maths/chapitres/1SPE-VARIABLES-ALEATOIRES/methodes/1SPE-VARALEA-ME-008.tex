@@ -1,0 +1,28 @@
+% META: {"id": "1SPE-VARALEA-ME-008", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "methode", "capacites_codes": ["C6"], "methodes": ["M8"], "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M8}{Écrire une fonction qui renvoie la moyenne d'un échantillon}
+  \textbf{Quand l'utiliser ?}
+
+  Dès qu'on doit simuler un échantillon de taille $n$ d'une variable aléatoire
+  puis en calculer la moyenne, avec Python ou un tableur.
+
+  \textbf{Procédure}
+  \begin{enumerate}
+    \item Écrire la loi sous forme de deux listes parallèles : les valeurs
+          $x_i$ et leurs probabilités $p_i$.
+    \item Cumuler les probabilités : $p_1$, $p_1+p_2$, \dots{} jusqu'à $1$.
+    \item Tirer $u$ au hasard dans $[0\,;1[$, puis renvoyer la première valeur
+          dont le cumul dépasse $u$ : c'est une simulation de $X$.
+    \item Répéter $n$ fois, additionner les valeurs obtenues dans une variable
+          \code{somme}, et renvoyer \code{somme / n}.
+    \item Fixer la graine du générateur si l'on veut pouvoir refaire
+          exactement le même échantillon.
+  \end{enumerate}
+
+  \textbf{Contrôle}
+
+  Trois réflexes. Le dernier cumul doit valoir exactement $1$. La division
+  finale porte sur $n$, la taille de l'échantillon, et non sur le nombre de
+  valeurs possibles de $X$. Et la moyenne obtenue doit rester dans l'intervalle
+  des valeurs prises par $X$ : une moyenne hors de cet intervalle signale une
+  erreur de code, pas un aléa défavorable.
+\end{fichemethode}

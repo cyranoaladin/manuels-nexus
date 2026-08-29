@@ -1,0 +1,38 @@
+% META: {"id": "1SPE-VARALEA-CO-053", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-053", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt
+% mu = Rational(13,10); sigma = Rational(21,10)
+% assert 2*sigma/sqrt(25) == Rational(84,100)
+% assert 2*sigma/sqrt(100) == Rational(42,100)
+% assert 2*sigma/sqrt(400) == Rational(21,100)
+% assert Rational(25,10) - mu == Rational(12,10)
+% assert Rational(12,10) > Rational(84,100)
+% assert (2*sigma/sqrt(25)) / (2*sigma/sqrt(100)) == 2
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-053}
+
+\textbf{1.} $\sqrt{25} = 5$, donc
+\[
+\frac{2\sigma}{\sqrt{25}} = \frac{2 \times 2{,}1}{5} = \frac{4{,}2}{5} = 0{,}84.
+\]
+
+\medskip
+\textbf{2.} $|m - \mu| = |2{,}5 - 1{,}3| = 1{,}2$.
+
+Or $1{,}2 > 0{,}84$ : l'écart dépasse le seuil. Cet échantillon est atypique,
+sans être impossible : environ un échantillon sur vingt sort de cet intervalle.
+
+\medskip
+\textbf{3.} $\sqrt{100} = 10$ et $\sqrt{400} = 20$, donc
+\[
+\frac{2\sigma}{\sqrt{100}} = \frac{4{,}2}{10} = 0{,}42,
+\qquad
+\frac{2\sigma}{\sqrt{400}} = \frac{4{,}2}{20} = 0{,}21.
+\]
+
+\medskip
+\textbf{4.} De $n = 25$ à $n = 100$, la quantité passe de $0{,}84$ à $0{,}42$ ;
+de $n = 100$ à $n = 400$, de $0{,}42$ à $0{,}21$. Multiplier $n$ par $4$
+multiplie $\sqrt{n}$ par $2$, donc \textbf{divise la quantité par $2$}.
+
+\end{corrige}

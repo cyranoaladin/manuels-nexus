@@ -1,0 +1,50 @@
+% META: {"id": "1SPE-VARALEA-CO-054", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-054", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt
+% sigma = Rational(21,10)
+% assert 2*sigma/sqrt(100) == Rational(42,100)
+% assert Rational(948,1000) == Rational(237,250)
+% assert Rational(948,1000)*100 == Rational(474,5)
+% n = 1
+% while 2*sigma/sqrt(n) > Rational(1,10):
+%     n += 1
+% assert n == 1764 and sqrt(1764) == 42
+% assert 2*sigma/sqrt(1764) == Rational(1,10)
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-054}
+
+\textbf{1.} $\sqrt{100} = 10$, donc
+$\dfrac{2\sigma}{\sqrt{100}} = \dfrac{4{,}2}{10} = 0{,}42$.
+
+\medskip
+\textbf{2.} La proportion vaut
+\[
+\frac{948}{1000} = 0{,}948 = 94{,}8\,\%.
+\]
+
+\medskip
+\textbf{3.} Oui. L'intervalle centré en $\mu$ et de demi-largeur
+$\dfrac{2\sigma}{\sqrt{n}}$ contient environ $95\,\%$ des moyennes
+d'échantillons. La valeur observée, $94{,}8\,\%$, en est très proche : l'écart
+de $0{,}2$ point relève de la fluctuation de la simulation.
+
+\medskip
+\textbf{4.} Le seuil $\dfrac{2\sigma}{\sqrt{n}}$ ne dépend que de $\sigma$ et de
+$n$, la taille de chaque échantillon. $N$ est le nombre d'échantillons simulés :
+l'augmenter rend seulement la proportion observée plus stable autour de
+$95\,\%$, mais ne change pas le seuil. C'est $n$, et lui seul, qui resserre
+l'intervalle.
+
+\medskip
+\textbf{5.} On cherche $n$ tel que
+\[
+\frac{4{,}2}{\sqrt{n}} \leq 0{,}1
+\quad\text{soit}\quad
+\sqrt{n} \geq \frac{4{,}2}{0{,}1} = 42
+\quad\text{soit}\quad
+n \geq 42^2 = 1764.
+\]
+La plus petite taille convenable est $n = 1764$, et l'on a alors exactement
+$\dfrac{4{,}2}{42} = 0{,}1$.
+
+\end{corrige}

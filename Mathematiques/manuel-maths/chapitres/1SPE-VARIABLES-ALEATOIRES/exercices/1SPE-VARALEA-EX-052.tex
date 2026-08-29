@@ -1,0 +1,41 @@
+% META: {"id": "1SPE-VARALEA-EX-052", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C6"], "capacites_codes": ["C6"], "parcours": 2, "competences": ["modeliser", "representer", "communiquer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-052.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-052.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% VALEURS = (0, 3, 7)
+% PROBAS = (Rational(1,2), Rational(3,10), Rational(2,10))
+% assert sum(PROBAS) == 1
+% CUMULS = []
+% c = Rational(0)
+% for p in PROBAS:
+%     c = c + p
+%     CUMULS.append(c)
+% assert CUMULS == [Rational(1,2), Rational(8,10), Rational(1)]
+% def valeur(u):
+%     for v, k in zip(VALEURS, CUMULS):
+%         if u < k:
+%             return v
+%     return VALEURS[-1]
+% assert valeur(Rational(1,4)) == 0
+% assert valeur(Rational(6,10)) == 3
+% assert valeur(Rational(9,10)) == 7
+% mu = sum(v*p for v, p in zip(VALEURS, PROBAS))
+% assert mu == Rational(23, 10)
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-052}{2}{15}
+Une variable aléatoire $Y$ prend les valeurs $0$, $3$ et $7$ avec les
+probabilités $0{,}5$, $0{,}3$ et $0{,}2$.
+
+\begin{enumerate}
+  \item Calculer les probabilités cumulées, dans cet ordre, et vérifier que la
+        dernière vaut $1$.
+  \item Écrire une fonction \code{simuler\_valeur(u)} qui, à partir d'un réel
+        $u$ de $[0\,;1[$, renvoie la valeur de $Y$ obtenue en partageant
+        $[0\,;1[$ selon ces cumuls.
+  \item Quelle valeur renvoie-t-elle pour $u = 0{,}25$ ? Pour $u = 0{,}6$ ?
+        Pour $u = 0{,}9$ ?
+  \item Écrire une fonction \code{moyenne\_echantillon(n, graine)} qui simule
+        un échantillon de taille $n$ de $Y$ et renvoie sa moyenne.
+  \item Calculer $E(Y)$. Vers quelle valeur la moyenne d'un échantillon
+        doit-elle se rapprocher quand $n$ devient grand ?
+\end{enumerate}
+\end{exercice}

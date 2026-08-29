@@ -1,0 +1,39 @@
+% META: {"id": "1SPE-VARALEA-CO-051", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-051", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% ech = [4, 1, -2, 4, 1, 1, 4, -2, 1, 4]
+% assert sum(ech) == 16 and len(ech) == 10
+% assert Rational(16, 10) == Rational(8, 5)
+% mu = Rational(2,10)*(-2) + Rational(5,10)*1 + Rational(3,10)*4
+% assert mu == Rational(13, 10)
+% assert Rational(8,5) - mu == Rational(3, 10)
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-051}
+
+\textbf{1.} La fonction doit renvoyer la moyenne, donc la somme divisée par la
+taille de l'échantillon :
+
+\begin{python}
+    return somme / n
+\end{python}
+
+\medskip
+\textbf{2.} La somme des dix valeurs vaut
+$4+1-2+4+1+1+4-2+1+4 = 16$, donc
+\[
+m = \frac{16}{10} = 1{,}6.
+\]
+
+\medskip
+\textbf{3.} $E(X) = 0{,}2 \times (-2) + 0{,}5 \times 1 + 0{,}3 \times 4
+= -0{,}4 + 0{,}5 + 1{,}2 = 1{,}3$.
+
+L'écart vaut $m - E(X) = 1{,}6 - 1{,}3 = 0{,}3$. La moyenne de cet échantillon
+est légèrement supérieure à l'espérance, ce qui est attendu : sur un échantillon
+de taille $10$, la moyenne fluctue autour de $E(X)$.
+
+\medskip
+\textbf{4.} Elle renverrait la \textbf{somme} des valeurs, soit $16$, et non la
+moyenne. Diviser par $n$ est justement ce qui transforme la somme en moyenne.
+
+\end{corrige}

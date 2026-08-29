@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-VARALEA-EV-A-corrige", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-VARALEA-EV-A", "version": "A", "capacites_codes": ["C1","C2","C3","C5"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-VARALEA-EV-A-corrige", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-VARALEA-EV-A", "version": "A", "capacites_codes": ["C1","C2","C3","C5","C6","C7"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational, sqrt
 % # Ex 1
@@ -17,6 +17,14 @@
 % V_X = sum(k*k*probabilities[k] for k in range(4))-E_X**2
 % assert V_X == Rational(2,3)
 % Pge1 = 1-P0; assert Pge1 == Rational(19,27)
+% # Ex 4 : simulation et fluctuation
+% mu_4 = Rational(15,10); sigma_4 = Rational(24,10)
+% seuil_4 = 2*sigma_4/sqrt(64)
+% assert seuil_4 == Rational(6,10)
+% assert Rational(23,10) - mu_4 == Rational(8,10)
+% assert Rational(8,10) > seuil_4
+% assert Rational(472,500) == Rational(944,1000)
+% assert Rational(472,500)*100 == Rational(472,5)
 % # Ex 3
 % E_G3 = 12*Rational(1,6) + (-3)*Rational(5,6)
 % assert E_G3 == Rational(-1,2)
@@ -123,5 +131,43 @@ P(G=g_i) & \frac{5}{6} & \frac{1}{6} \\
 \textbf{Question 3.} $E(G) = 12 \times \frac{1}{6} + (-3) \times \frac{5}{6} = 2 - \frac{5}{2} = -\frac{1}{2}$.
 
 $E(G) = -0{,}5 < 0$ : le jeu est défavorable au joueur.
+
+%===============================================================
+\section*{Exercice 4 \hfill (5 points) — C6, C7}
+%===============================================================
+
+\baremeIndicatif{Q1: 1 pt; Q2: 1 pt; Q3: 1,5 pt; Q4: 1,5 pt}
+
+\bigskip
+\textbf{Question 1 — Ligne Python.}
+
+\commentaireMarge{La division porte sur la taille de l'échantillon.}
+
+\begin{python}
+    return somme / n
+\end{python}
+
+\medskip
+\textbf{Question 2.} $\sqrt{64} = 8$, donc
+\[
+\frac{2\sigma}{\sqrt{n}} = \frac{2 \times 2{,}4}{8} = \frac{4{,}8}{8} = 0{,}6.
+\]
+
+\medskip
+\textbf{Question 3.} $|m - \mu| = |2{,}3 - 1{,}5| = 0{,}8$.
+
+\commentaireMarge{Comparer l'écart au seuil, pas la moyenne à l'espérance.}
+
+Or $0{,}8 > 0{,}6$ : l'écart \textbf{dépasse} le seuil. Cet échantillon est
+atypique. Il n'est pas pour autant impossible : environ un échantillon sur
+vingt sort de cet intervalle.
+
+\medskip
+\textbf{Question 4.} La proportion vaut
+\[
+\frac{472}{500} = 0{,}944 = 94{,}4\,\%.
+\]
+Elle est cohérente avec l'ordre de grandeur attendu, environ $95\,\%$ :
+l'écart de $0{,}6$ point relève de la fluctuation de la simulation.
 
 \end{corrige}

@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-VARALEA-EV-B", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1","C2","C3","C4","C5"], "competences": ["chercher","modeliser","representer","calculer","raisonner","communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-VARALEA-EV-B", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "evaluation", "version": "B", "duree_min": 70, "bareme_total": 25, "capacites_codes": ["C1","C2","C3","C4","C5","C6","C7"], "competences": ["chercher","modeliser","representer","calculer","raisonner","communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational, sqrt
 %
@@ -26,6 +26,17 @@
 % V_X = sum(k*k*probabilities[k] for k in range(5))-E_X**2
 % assert V_X == Rational(3,4)
 %
+% # ---- Exercice 4 : simulation et fluctuation (C6, C7) ----
+% mu_4 = Rational(25,10); sigma_4 = Rational(18,10)
+% seuil_4 = 2*sigma_4/sqrt(81)
+% assert seuil_4 == Rational(4,10)
+% ecart_4 = Rational(29,10) - mu_4
+% assert ecart_4 == Rational(4,10)
+% assert not (ecart_4 > seuil_4)
+% assert ecart_4 == seuil_4
+% assert Rational(381,400) == Rational(9525,10000)
+% assert Rational(381,400)*100 == Rational(1905,20)
+%
 % # ---- Exercice 3 : assurance (C5) ----
 % # Prime 80, sinistre 2000, p = 1/50
 % E_B = 80 - 2000*Rational(1,50)
@@ -34,10 +45,10 @@
 % END-VERIFY
 
 %---------------------------------------------------------------
-% Durée : 55 minutes — Barème : 20 points
+% Durée : 70 minutes — Barème : 25 points
 %---------------------------------------------------------------
 
-\begin{evaluation}{1SPE-VARALEA-EV-B}{55}
+\begin{evaluation}{1SPE-VARALEA-EV-B}{70}
 
 %===============================================================
 \section*{Exercice 1 \hfill (8 points) \hfill Capacités C1, C2, C4}
@@ -109,6 +120,36 @@ Un assureur propose un contrat annuel : prime de $80$~euros. En cas de sinistre 
 
   \item Pour $500$ contrats, quel bénéfice total moyen l'assureur espère-t-il ?
   \hfill\textit{(1 pt — calculer)}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 4 \hfill (5 points) \hfill Capacités C6, C7}
+%===============================================================
+
+\textit{Compétences évaluées : calculer, raisonner, communiquer.}
+
+\medskip
+Une variable aléatoire $Y$ a pour espérance $\mu = 2{,}5$ et pour écart type
+$\sigma = 1{,}8$. On simule des échantillons de taille $n$ de cette variable.
+
+\begin{enumerate}
+  \item Une fonction Python a stocké dans la variable \code{somme} la somme
+        des valeurs d'un échantillon de taille \code{n}. Écrire la ligne qui
+        renvoie la moyenne de cet échantillon.
+  \hfill\textit{(1 pt — calculer)}
+
+  \item Calculer $\dfrac{2\sigma}{\sqrt{n}}$ pour $n = 81$.
+  \hfill\textit{(1 pt — calculer)}
+
+  \item Un échantillon de taille $81$ a pour moyenne $m = 2{,}9$.
+        Cet échantillon vérifie-t-il $|m - \mu| \leq \dfrac{2\sigma}{\sqrt{n}}$ ?
+        Justifier avec soin.
+  \hfill\textit{(1{,}5 pt — raisonner)}
+
+  \item On simule $N = 400$ échantillons de taille $81$ : $381$ d'entre eux
+        vérifient cette condition. Calculer la proportion correspondante et
+        dire si elle est cohérente avec l'ordre de grandeur attendu.
+  \hfill\textit{(1{,}5 pt — calculer, communiquer)}
 \end{enumerate}
 
 \end{evaluation}

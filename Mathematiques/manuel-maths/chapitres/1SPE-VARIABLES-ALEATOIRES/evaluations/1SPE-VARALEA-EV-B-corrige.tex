@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-VARALEA-EV-B-corrige", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-VARALEA-EV-B", "version": "B", "capacites_codes": ["C1","C2","C3","C4","C5"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-VARALEA-EV-B-corrige", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-VARALEA-EV-B", "version": "B", "capacites_codes": ["C1","C2","C3","C4","C5","C6","C7"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational, sqrt
 % # Ex 1
@@ -19,6 +19,14 @@
 % # Ex 3
 % E_B = 80 - 2000*Rational(1,50); assert E_B == 40
 % B_500 = 500*40; assert B_500 == 20000
+% # Ex 4 : simulation et fluctuation
+% mu_4 = Rational(25,10); sigma_4 = Rational(18,10)
+% seuil_4 = 2*sigma_4/sqrt(81)
+% assert seuil_4 == Rational(4,10)
+% assert Rational(29,10) - mu_4 == Rational(4,10)
+% assert (Rational(29,10) - mu_4) == seuil_4
+% assert Rational(381,400) == Rational(9525,10000)
+% assert Rational(381,400)*100 == Rational(1905,20)
 % END-VERIFY
 
 \begin{corrige}{1SPE-VARALEA-EV-B}
@@ -111,5 +119,43 @@ $E(B) > 0$ : le contrat est rentable pour l'assureur.
 
 \medskip
 \textbf{Question 4.} Bénéfice total moyen : $500 \times 40 = 20\,000$~euros.
+
+%===============================================================
+\section*{Exercice 4 \hfill (5 points) — C6, C7}
+%===============================================================
+
+\baremeIndicatif{Q1: 1 pt; Q2: 1 pt; Q3: 1,5 pt; Q4: 1,5 pt}
+
+\bigskip
+\textbf{Question 1 — Ligne Python.}
+
+\commentaireMarge{La division porte sur la taille de l'échantillon.}
+
+\begin{python}
+    return somme / n
+\end{python}
+
+\medskip
+\textbf{Question 2.} $\sqrt{81} = 9$, donc
+\[
+\frac{2\sigma}{\sqrt{n}} = \frac{2 \times 1{,}8}{9} = \frac{3{,}6}{9} = 0{,}4.
+\]
+
+\medskip
+\textbf{Question 3.} $|m - \mu| = |2{,}9 - 2{,}5| = 0{,}4$.
+
+\commentaireMarge{Cas limite : l'inégalité est large, l'égalité convient.}
+
+L'écart vaut exactement $0{,}4$, c'est-à-dire le seuil lui-même. L'inégalité
+demandée étant large, la condition $|m - \mu| \leq \dfrac{2\sigma}{\sqrt{n}}$
+est \textbf{vérifiée}. Cet échantillon est donc compté parmi ceux de
+l'intervalle.
+
+\medskip
+\textbf{Question 4.} La proportion vaut
+\[
+\frac{381}{400} = 0{,}9525 = 95{,}25\,\%.
+\]
+Elle est cohérente avec l'ordre de grandeur attendu, environ $95\,\%$.
 
 \end{corrige}

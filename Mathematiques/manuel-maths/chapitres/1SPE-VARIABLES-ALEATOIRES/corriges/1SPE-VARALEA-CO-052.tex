@@ -1,0 +1,65 @@
+% META: {"id": "1SPE-VARALEA-CO-052", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-052", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% PROBAS = (Rational(5,10), Rational(3,10), Rational(2,10))
+% assert sum(PROBAS) == 1
+% assert [Rational(5,10), Rational(8,10), Rational(1)] == [Rational(1,2), Rational(4,5), Rational(1)]
+% VALEURS = (0, 3, 7)
+% CUMULS = (Rational(5,10), Rational(8,10), Rational(1))
+% def valeur(u):
+%     for v, k in zip(VALEURS, CUMULS):
+%         if u < k:
+%             return v
+%     return VALEURS[-1]
+% assert valeur(Rational(25,100)) == 0
+% assert valeur(Rational(60,100)) == 3
+% assert valeur(Rational(90,100)) == 7
+% mu = sum(v*p for v, p in zip(VALEURS, PROBAS))
+% assert mu == Rational(23,10)
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-052}
+
+\textbf{1.} Les cumuls sont $0{,}5$, puis $0{,}5+0{,}3 = 0{,}8$, puis
+$0{,}8+0{,}2 = 1$. Le dernier vaut bien $1$ : la loi est complète.
+
+\medskip
+\textbf{2.} On parcourt les valeurs dans l'ordre et on renvoie la première dont
+le cumul dépasse $u$ :
+
+\begin{python}
+VALEURS = [0, 3, 7]
+CUMULS = [0.5, 0.8, 1.0]
+
+def simuler_valeur(u):
+    for i in range(len(VALEURS)):
+        if u < CUMULS[i]:
+            return VALEURS[i]
+    return VALEURS[-1]
+\end{python}
+
+\medskip
+\textbf{3.} $u = 0{,}25 < 0{,}5$ donne $Y = 0$.
+$u = 0{,}6$ vérifie $0{,}5 \leq 0{,}6 < 0{,}8$ et donne $Y = 3$.
+$u = 0{,}9$ vérifie $0{,}8 \leq 0{,}9 < 1$ et donne $Y = 7$.
+
+\medskip
+\textbf{4.} On répète $n$ tirages et on divise la somme par $n$ :
+
+\begin{python}
+import random
+
+def moyenne_echantillon(n, graine):
+    random.seed(graine)
+    somme = 0
+    for i in range(n):
+        somme = somme + simuler_valeur(random.random())
+    return somme / n
+\end{python}
+
+\medskip
+\textbf{5.} $E(Y) = 0{,}5 \times 0 + 0{,}3 \times 3 + 0{,}2 \times 7
+= 0 + 0{,}9 + 1{,}4 = 2{,}3$.
+
+Quand $n$ devient grand, la moyenne d'un échantillon se rapproche de $E(Y) = 2{,}3$.
+
+\end{corrige}
