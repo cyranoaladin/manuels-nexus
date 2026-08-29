@@ -1,11 +1,11 @@
 {
   "chapitre": "1SPE-EXPONENTIELLE",
-  "titre": "Fonction exponentielle — QCM d'auto-evaluation",
+  "titre": "Fonction exponentielle — QCM d'auto-évaluation",
   "questions": [
     {
       "id": "Q1",
       "capacite": "C1",
-      "enonce": "Parmi les propriétés suivantes, laquelle caracterise la fonction exponentielle ?",
+      "enonce": "Parmi les propriétés suivantes, laquelle caractérise la fonction exponentielle ?",
       "options": {
         "A": "C'est la seule fonction dérivable sur $\\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(1) = 1$.",
         "B": "C'est la seule fonction dérivable sur $\\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(0) = 1$.",
@@ -61,7 +61,7 @@
       "options": {
         "A": "$\\mathrm{e}^x > 0$",
         "B": "$\\mathrm{e}^x \\geqslant 0$ (avec $\\mathrm{e}^x = 0$ possible)",
-        "C": "$\\mathrm{e}^x$ peut etre négatif si $x < 0$",
+        "C": "$\\mathrm{e}^x$ peut être négatif si $x < 0$",
         "D": "$\\mathrm{e}^x > 1$ pour tout $x \\in \\mathbb{R}$"
       },
       "correcte": "A",
@@ -202,7 +202,7 @@
         },
         "B": {
           "erreur": "La courbe de l'exponentielle ne coupe jamais l'axe des abscisses : $\\mathrm{e}^x>0$.",
-          "renvoi": "C3, courbe representative"
+          "renvoi": "C3, courbe représentative"
         },
         "D": {
           "erreur": "Comme $x<0$ et que l'exponentielle est croissante, $\\mathrm{e}^x<\\mathrm{e}^0=1$.",
@@ -279,7 +279,7 @@
           "renvoi": "C4, dérivée de $t\\mapsto\\mathrm{e}^{at}$"
         },
         "B": {
-          "erreur": "Le coefficient a pour valeur $-2$, pas $2$ : le signe négatif a ete perdu.",
+          "erreur": "Le coefficient a pour valeur $-2$, pas $2$ : le signe négatif a été perdu.",
           "renvoi": "C4, coefficient $a=-2$"
         },
         "D": {
@@ -328,15 +328,15 @@
       "diagnostics": {
         "A": {
           "erreur": "La valeur initiale est obtenue pour $t=0$ : le facteur exponentiel vaut alors $1$, pas $0$.",
-          "renvoi": "C5, modele exponentiel"
+          "renvoi": "C5, modèle exponentiel"
         },
         "C": {
           "erreur": "$500\\mathrm{e}^{0{,}2}$ est la valeur au temps $t=1$, pas au temps initial $t=0$.",
           "renvoi": "C5, substitution de $t=0$"
         },
         "D": {
-          "erreur": "$0{,}2$ est le taux continu du modele ; ce n'est pas la valeur de la population.",
-          "renvoi": "C5, paramètres du modele"
+          "erreur": "$0{,}2$ est le taux continu du modèle ; ce n'est pas la valeur de la population.",
+          "renvoi": "C5, paramètres du modèle"
         }
       }
     },
@@ -353,7 +353,7 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Le signe de l'exposant a ete inverse : le modele de décroissance conserve le facteur $\\mathrm{e}^{-0{,}3}$ d'une unite de temps a la suivante.",
+          "erreur": "Le signe de l'exposant a été inverse : le modèle de décroissance conserve le facteur $\\mathrm{e}^{-0{,}3}$ d'une unité de temps a la suivante.",
           "renvoi": "C5, décroissance exponentielle"
         },
         "C": {
@@ -362,14 +362,14 @@
         },
         "D": {
           "erreur": "$-0{,}3$ est le coefficient dans l'exposant ; le coefficient multiplicateur est son exponentielle $\\mathrm{e}^{-0{,}3}$.",
-          "renvoi": "C5, modele exponentiel"
+          "renvoi": "C5, modèle exponentiel"
         }
       }
     },
     {
       "id": "Q15",
       "capacite": "C5",
-      "enonce": "Pour $k>0$, quelle affirmation decrit la courbe de $t\\mapsto\\mathrm{e}^{-kt}$ ?",
+      "enonce": "Pour $k>0$, quelle affirmation décrit la courbe de $t\\mapsto\\mathrm{e}^{-kt}$ ?",
       "options": {
         "A": "Elle est croissante et passe par $(0;0)$.",
         "B": "Elle est décroissante et passe par $(0;1)$.",

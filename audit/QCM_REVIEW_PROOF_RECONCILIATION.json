@@ -1,5 +1,5 @@
 {
-  "aggregate_current_set_digest": "sha256:b95b854fd75ca7ac5bf7eedab42105321f4675f6e9c481734c68fbcf0d839210",
+  "aggregate_current_set_digest": "sha256:6ef21e2683c67c845c33dea7a420df0469ceb3b2f0f8957ef8acb2be73ba0ccf",
   "approves_nothing": true,
   "artifact_type": "qcm_review_proof_reconciliation",
   "carried_forward": [
@@ -222,13 +222,6 @@
     },
     {
       "chapter": "1SPE-EXPONENTIELLE",
-      "question_id": "Q10",
-      "semantic_digest": "sha256:6b436c8c27ff3548abafdb7244a78a151e1c39c39be508e68ebc9a1637e6cb21",
-      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
-      "status": "CARRIED_FORWARD_UNCHANGED"
-    },
-    {
-      "chapter": "1SPE-EXPONENTIELLE",
       "question_id": "Q11",
       "semantic_digest": "sha256:6392558c9e49b479edc516e34aa133426e333f0c017482780bf52c47c2f6d982",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
@@ -236,22 +229,8 @@
     },
     {
       "chapter": "1SPE-EXPONENTIELLE",
-      "question_id": "Q12",
-      "semantic_digest": "sha256:821c774d68a1c5e6fba4a3d0cca07dc55e78a9a416ea18a547e39cdc7f2358d7",
-      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
-      "status": "CARRIED_FORWARD_UNCHANGED"
-    },
-    {
-      "chapter": "1SPE-EXPONENTIELLE",
       "question_id": "Q13",
       "semantic_digest": "sha256:5fe21c9b40aefe21a3d68a7c69ef114d4eebf5e487e05378e69314aec9a07b3c",
-      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
-      "status": "CARRIED_FORWARD_UNCHANGED"
-    },
-    {
-      "chapter": "1SPE-EXPONENTIELLE",
-      "question_id": "Q14",
-      "semantic_digest": "sha256:e6e14cc91edb5319c24d96873e46d8fec6050712ba31f7786f9bf003cbb521ee",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
       "status": "CARRIED_FORWARD_UNCHANGED"
     },
@@ -273,20 +252,6 @@
       "chapter": "1SPE-EXPONENTIELLE",
       "question_id": "Q3",
       "semantic_digest": "sha256:965b5e1194999d7ec5506e9daf2c6cb8ff0a8f50c0b935f3477e4516328fa6fa",
-      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
-      "status": "CARRIED_FORWARD_UNCHANGED"
-    },
-    {
-      "chapter": "1SPE-EXPONENTIELLE",
-      "question_id": "Q4",
-      "semantic_digest": "sha256:a3e34bfbddc948a949f3274e3b2b2a67a6266d408ceae8a4886f1b9b9ee31eea",
-      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
-      "status": "CARRIED_FORWARD_UNCHANGED"
-    },
-    {
-      "chapter": "1SPE-EXPONENTIELLE",
-      "question_id": "Q5",
-      "semantic_digest": "sha256:f5abd0dc473a7943a03b0405824d3e467bcb0bf4d56066d33520eaf30119620a",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
       "status": "CARRIED_FORWARD_UNCHANGED"
     },
@@ -2210,16 +2175,61 @@
     }
   ],
   "counts": {
-    "CARRIED_FORWARD_UNCHANGED": 315,
+    "CARRIED_FORWARD_UNCHANGED": 310,
     "CURRENT_QCM_QUESTION_COUNT": 337,
     "OLD_PROOF_QUESTION_COUNT": 331,
     "PROOF_ROWS_WITHOUT_CURRENT_QUESTION": 0,
-    "REPROOF_REQUIRED": 22
+    "REPROOF_REQUIRED": 27
   },
-  "equation": "337 = 315 + 22",
+  "equation": "337 = 310 + 27",
   "generated_by": "scripts/build_qcm_review_proof_reconciliation.py",
   "historical_proof_status": "HISTORICAL",
   "proof_field_coverage_gaps": [
+    {
+      "chapter": "1SPE-EXPONENTIELLE",
+      "field": "diagnostics.renvoi",
+      "note": "la source porte un renvoi que la preuve historique n'a jamais capture ; le verificateur courant ne compare pas ce champ",
+      "options": [
+        "C"
+      ],
+      "question_id": "Q10"
+    },
+    {
+      "chapter": "1SPE-EXPONENTIELLE",
+      "field": "diagnostics.renvoi",
+      "note": "la source porte un renvoi que la preuve historique n'a jamais capture ; le verificateur courant ne compare pas ce champ",
+      "options": [
+        "C"
+      ],
+      "question_id": "Q12"
+    },
+    {
+      "chapter": "1SPE-EXPONENTIELLE",
+      "field": "diagnostics.renvoi",
+      "note": "la source porte un renvoi que la preuve historique n'a jamais capture ; le verificateur courant ne compare pas ce champ",
+      "options": [
+        "B"
+      ],
+      "question_id": "Q14"
+    },
+    {
+      "chapter": "1SPE-EXPONENTIELLE",
+      "field": "diagnostics.renvoi",
+      "note": "la source porte un renvoi que la preuve historique n'a jamais capture ; le verificateur courant ne compare pas ce champ",
+      "options": [
+        "B"
+      ],
+      "question_id": "Q4"
+    },
+    {
+      "chapter": "1SPE-EXPONENTIELLE",
+      "field": "diagnostics.renvoi",
+      "note": "la source porte un renvoi que la preuve historique n'a jamais capture ; le verificateur courant ne compare pas ce champ",
+      "options": [
+        "C"
+      ],
+      "question_id": "Q5"
+    },
     {
       "chapter": "1SPE-VARIABLES-ALEATOIRES",
       "field": "diagnostics.renvoi",
@@ -2383,6 +2393,72 @@
   "proof_rows_without_current_question": [],
   "rebinds_nothing": true,
   "reproof_required": [
+    {
+      "chapter": "1SPE-EXPONENTIELLE",
+      "current_semantic_digest": "sha256:a0a3d661efc7928ddb88abe96081d6aea60a5783bc8953eb52bc52ee3dd3bad6",
+      "delta_classes": [
+        "OPTION_REORDER_ONLY",
+        "KEY_POSITION_CHANGED_BUT_VALUE_SAME",
+        "DIAGNOSTIC_TEXT_CHANGE"
+      ],
+      "proof_semantic_digest": "sha256:6b436c8c27ff3548abafdb7244a78a151e1c39c39be508e68ebc9a1637e6cb21",
+      "question_id": "Q10",
+      "reason": "SEMANTIC_CHANGE",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json"
+    },
+    {
+      "chapter": "1SPE-EXPONENTIELLE",
+      "current_semantic_digest": "sha256:2f2b175c1f2bc35424d99bbe794663f072360eac1bca311383785be00a6ad28b",
+      "delta_classes": [
+        "OPTION_REORDER_ONLY",
+        "KEY_POSITION_CHANGED_BUT_VALUE_SAME",
+        "DIAGNOSTIC_TEXT_CHANGE"
+      ],
+      "proof_semantic_digest": "sha256:821c774d68a1c5e6fba4a3d0cca07dc55e78a9a416ea18a547e39cdc7f2358d7",
+      "question_id": "Q12",
+      "reason": "SEMANTIC_CHANGE",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json"
+    },
+    {
+      "chapter": "1SPE-EXPONENTIELLE",
+      "current_semantic_digest": "sha256:dc7b5a76e34139444cc9a1a017dc3e857fdc721f40cc552d187608a6e2ca795c",
+      "delta_classes": [
+        "ACCENT_ONLY",
+        "OPTION_REORDER_ONLY",
+        "KEY_POSITION_CHANGED_BUT_VALUE_SAME",
+        "DIAGNOSTIC_TEXT_CHANGE"
+      ],
+      "proof_semantic_digest": "sha256:e6e14cc91edb5319c24d96873e46d8fec6050712ba31f7786f9bf003cbb521ee",
+      "question_id": "Q14",
+      "reason": "SEMANTIC_CHANGE",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json"
+    },
+    {
+      "chapter": "1SPE-EXPONENTIELLE",
+      "current_semantic_digest": "sha256:843b23214042c10b4efa1451f445b99961ecbb210de4b858c09062c649114e5a",
+      "delta_classes": [
+        "OPTION_REORDER_ONLY",
+        "KEY_POSITION_CHANGED_BUT_VALUE_SAME",
+        "DIAGNOSTIC_TEXT_CHANGE"
+      ],
+      "proof_semantic_digest": "sha256:a3e34bfbddc948a949f3274e3b2b2a67a6266d408ceae8a4886f1b9b9ee31eea",
+      "question_id": "Q4",
+      "reason": "SEMANTIC_CHANGE",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json"
+    },
+    {
+      "chapter": "1SPE-EXPONENTIELLE",
+      "current_semantic_digest": "sha256:981e8fbb24f2b54cb4b0847ccbdd20b9a4c80c6e7b3c6414bd19b4cce829cc4f",
+      "delta_classes": [
+        "OPTION_REORDER_ONLY",
+        "KEY_POSITION_CHANGED_BUT_VALUE_SAME",
+        "DIAGNOSTIC_TEXT_CHANGE"
+      ],
+      "proof_semantic_digest": "sha256:f5abd0dc473a7943a03b0405824d3e467bcb0bf4d56066d33520eaf30119620a",
+      "question_id": "Q5",
+      "reason": "SEMANTIC_CHANGE",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json"
+    },
     {
       "chapter": "1SPE-VARIABLES-ALEATOIRES",
       "current_semantic_digest": "sha256:a16dc0ca64a56163de8c77c9a3360d6d5061d799dc72ddcb08f9e17b017f390c",

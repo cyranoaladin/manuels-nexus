@@ -6,15 +6,20 @@ Cet artefact n'approuve rien et ne rebinde rien.
 
 - Lignes de preuve historique : 331
 - Questions du corpus courant : 337
-- Preuve reportable a l'identique : 315
-- Preuve a refaire : 22
-- Equation : 337 = 315 + 22
-- Condense d'ensemble courant : `sha256:b95b854fd75ca7ac5bf7eedab42105321f4675f6e9c481734c68fbcf0d839210`
+- Preuve reportable a l'identique : 310
+- Preuve a refaire : 27
+- Equation : 337 = 310 + 27
+- Condense d'ensemble courant : `sha256:6ef21e2683c67c845c33dea7a420df0469ceb3b2f0f8957ef8acb2be73ba0ccf`
 
 ## Questions dont la preuve doit etre refaite
 
 | chapitre | question | motif | classes de delta |
 |---|---|---|---|
+| 1SPE-EXPONENTIELLE | Q10 | SEMANTIC_CHANGE | OPTION_REORDER_ONLY, KEY_POSITION_CHANGED_BUT_VALUE_SAME, DIAGNOSTIC_TEXT_CHANGE |
+| 1SPE-EXPONENTIELLE | Q12 | SEMANTIC_CHANGE | OPTION_REORDER_ONLY, KEY_POSITION_CHANGED_BUT_VALUE_SAME, DIAGNOSTIC_TEXT_CHANGE |
+| 1SPE-EXPONENTIELLE | Q14 | SEMANTIC_CHANGE | ACCENT_ONLY, OPTION_REORDER_ONLY, KEY_POSITION_CHANGED_BUT_VALUE_SAME, DIAGNOSTIC_TEXT_CHANGE |
+| 1SPE-EXPONENTIELLE | Q4 | SEMANTIC_CHANGE | OPTION_REORDER_ONLY, KEY_POSITION_CHANGED_BUT_VALUE_SAME, DIAGNOSTIC_TEXT_CHANGE |
+| 1SPE-EXPONENTIELLE | Q5 | SEMANTIC_CHANGE | OPTION_REORDER_ONLY, KEY_POSITION_CHANGED_BUT_VALUE_SAME, DIAGNOSTIC_TEXT_CHANGE |
 | 1SPE-VARIABLES-ALEATOIRES | Q1 | SEMANTIC_CHANGE | ACCENT_ONLY, DISTRACTOR_SEMANTIC_CHANGE, KEY_POSITION_CHANGED_BUT_VALUE_SAME, DIAGNOSTIC_TEXT_CHANGE |
 | 1SPE-VARIABLES-ALEATOIRES | Q10 | CHAPTER_SCOPE_CHANGED_FULL_REPROOF | — |
 | 1SPE-VARIABLES-ALEATOIRES | Q11 | SEMANTIC_CHANGE | OPTION_REORDER_ONLY, KEY_POSITION_CHANGED_BUT_VALUE_SAME, DIAGNOSTIC_TEXT_CHANGE |
@@ -40,10 +45,15 @@ Cet artefact n'approuve rien et ne rebinde rien.
 
 ## Lacunes de couverture de la preuve historique
 
-17 question(s) dont la source porte un renvoi que la preuve n'a jamais capture.
+22 question(s) dont la source porte un renvoi que la preuve n'a jamais capture.
 
 | chapitre | question | champ | options |
 |---|---|---|---|
+| 1SPE-EXPONENTIELLE | Q10 | diagnostics.renvoi | C |
+| 1SPE-EXPONENTIELLE | Q12 | diagnostics.renvoi | C |
+| 1SPE-EXPONENTIELLE | Q14 | diagnostics.renvoi | B |
+| 1SPE-EXPONENTIELLE | Q4 | diagnostics.renvoi | B |
+| 1SPE-EXPONENTIELLE | Q5 | diagnostics.renvoi | C |
 | 1SPE-VARIABLES-ALEATOIRES | Q1 | diagnostics.renvoi | B |
 | 1SPE-VARIABLES-ALEATOIRES | Q11 | diagnostics.renvoi | B |
 | 1SPE-VARIABLES-ALEATOIRES | Q12 | diagnostics.renvoi | B |

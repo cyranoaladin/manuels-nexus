@@ -6,11 +6,11 @@ Une identite par question. La v1 reste l'enregistrement historique.
 Cet artefact n'approuve rien.
 
 - Questions du corpus : 337
-- Report d'identite : 315
-- Recalcul independant : 21
+- Report d'identite : 310
+- Recalcul independant : 26
 - Revue humaine requise : 1
 - UNKNOWN : 0
-- Equation : 337 = 315 + 21 + 1
+- Equation : 337 = 310 + 26 + 1
 - EVIDENCE_ROUTING_COMPLETE : True
 - ALL_QCM_HUMAN_REVIEW_COMPLETE : False
 
@@ -30,14 +30,22 @@ Cet artefact n'approuve rien.
 - `SAMPLE_MEAN_FLUCTUATION_MONOTONICITY`
 - `SAMPLE_MEAN_FLUCTUATION_SCALE`
 - `STANDARD_DEVIATION_FROM_VARIANCE`
+- `SYMBOLIC_DERIVATIVE`
+- `SYMBOLIC_SIMPLIFICATION`
 - `TWO_SIGMA_COVERAGE_PROPORTION`
 - `UNIFORM_DISCRETE_EXPECTATION`
 - `UNIFORM_DISCRETE_PROBABILITY`
+- `UNIT_SHIFT_RATIO`
 
 ## Questions recalculees independamment
 
 | chapitre | question | famille | verite calculee | cle declaree | verdict |
 |---|---|---|---|---|---|
+| 1SPE-EXPONENTIELLE | Q10 | SYMBOLIC_DERIVATIVE | D | D | PASS |
+| 1SPE-EXPONENTIELLE | Q12 | SYMBOLIC_DERIVATIVE | D | D | PASS |
+| 1SPE-EXPONENTIELLE | Q14 | UNIT_SHIFT_RATIO | A | A | PASS |
+| 1SPE-EXPONENTIELLE | Q4 | SYMBOLIC_SIMPLIFICATION | A | A | PASS |
+| 1SPE-EXPONENTIELLE | Q5 | SYMBOLIC_SIMPLIFICATION | D | D | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q1 | UNIFORM_DISCRETE_PROBABILITY | A | A | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q10 | LINEAR_EXPECTATION | B | B | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q11 | LINEAR_EXPECTATION | C | C | PASS |

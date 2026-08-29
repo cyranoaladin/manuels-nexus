@@ -1,13 +1,13 @@
 {
   "ALL_QCM_HUMAN_REVIEW_COMPLETE": false,
   "EVIDENCE_ROUTING_COMPLETE": true,
-  "answer_key_verified_by_independent_computation": 21,
+  "answer_key_verified_by_independent_computation": 26,
   "approves_nothing": true,
   "artifact_type": "qcm_independent_evidence_v2",
   "counts": {
-    "CARRIED_FORWARD_IDENTICAL": 315,
+    "CARRIED_FORWARD_IDENTICAL": 310,
     "HUMAN_REVIEW_REQUIRED": 1,
-    "MACHINE_RECALCULATED": 21,
+    "MACHINE_RECALCULATED": 26,
     "UNKNOWN": 0,
     "question_count": 337
   },
@@ -24,7 +24,7 @@
     }
   ],
   "diagnostic_coverage_is_release_blocking": true,
-  "equation": "337 = 315 + 21 + 1",
+  "equation": "337 = 310 + 26 + 1",
   "evidence_schema_fields": [
     "statement",
     "options",
@@ -589,19 +589,55 @@
     {
       "capacity": "C4",
       "chapter": "1SPE-EXPONENTIELLE",
-      "computed_option_truths": {},
-      "computed_unique_answer": null,
-      "evidence_digest": "sha256:17dc751dc9e7bc32a6291d41001aacb88542eb52637c982bb56298c42da47caf",
-      "evidence_status": "CARRIED_FORWARD_IDENTICAL",
+      "computed_option_truths": {
+        "A": false,
+        "B": false,
+        "C": false,
+        "D": true
+      },
+      "computed_unique_answer": "D",
+      "computed_value": "3*exp(3*t)",
+      "delta_classes": [
+        "OPTION_REORDER_ONLY",
+        "KEY_POSITION_CHANGED_BUT_VALUE_SAME",
+        "DIAGNOSTIC_TEXT_CHANGE"
+      ],
+      "evidence_digest": "sha256:6011232c3236531f4ad94c6fa7a69aabc74b89b845f951935c503054d32b3ed3",
+      "evidence_status": "MACHINE_RECALCULATED",
       "human_review_required": false,
-      "independent_evidence": "condense semantique identique a la preuve independante v1 ; report d'identite, aucun recalcul necessaire",
+      "independent_evidence": "Derivee symbolique de \\mathrm{e}^{3t} par rapport a t : 3*exp(3*t).",
       "question_id": "Q10",
-      "semantic_question_digest": "sha256:6b436c8c27ff3548abafdb7244a78a151e1c39c39be508e68ebc9a1637e6cb21",
-      "solver_family": null,
-      "solver_input_digest": null,
-      "solver_version": null,
+      "semantic_question_digest": "sha256:a0a3d661efc7928ddb88abe96081d6aea60a5783bc8953eb52bc52ee3dd3bad6",
+      "solver_family": "SYMBOLIC_DERIVATIVE",
+      "solver_input_digest": "sha256:42c156d521d4780c3898ac8788d2d9cf9c1b79e059514955fd3facd2ae462e07",
+      "solver_output_digest": "sha256:8c74af7b1a30082bc790dec23542e755cef95e39ada3792d624ffc31e47b2a7d",
+      "solver_version": "1.0.0",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
-      "verification": null
+      "verification": {
+        "answer_key_verdict": "PASS",
+        "capacity": "C4",
+        "capacity_declared": true,
+        "computed_unique_answer": "D",
+        "coverage_verdict": "PASS",
+        "declared_key": "D",
+        "declared_key_matches_computation": true,
+        "diagnostic_coverage": {
+          "complete": true,
+          "diagnostic_on_the_correct_option": [],
+          "distractors": [
+            "A",
+            "B",
+            "C"
+          ],
+          "missing_error_model": [],
+          "missing_remediation_reference": []
+        },
+        "equivalent_option_groups": [],
+        "no_equivalent_options": true,
+        "true_option_count": 1,
+        "unique_true_option": true,
+        "verdict": "PASS"
+      }
     },
     {
       "capacity": "C4",
@@ -623,19 +659,55 @@
     {
       "capacity": "C4",
       "chapter": "1SPE-EXPONENTIELLE",
-      "computed_option_truths": {},
-      "computed_unique_answer": null,
-      "evidence_digest": "sha256:af8fc97c87ca7810070383239c10bffac8a00ba982a771eb11bf9ae41ea7ca5d",
-      "evidence_status": "CARRIED_FORWARD_IDENTICAL",
+      "computed_option_truths": {
+        "A": false,
+        "B": false,
+        "C": false,
+        "D": true
+      },
+      "computed_unique_answer": "D",
+      "computed_value": "0.5*exp(0.5*t)",
+      "delta_classes": [
+        "OPTION_REORDER_ONLY",
+        "KEY_POSITION_CHANGED_BUT_VALUE_SAME",
+        "DIAGNOSTIC_TEXT_CHANGE"
+      ],
+      "evidence_digest": "sha256:3042245eb0b08a45572338582c04e1093bcc2b1719a724a97b88e4bb85816792",
+      "evidence_status": "MACHINE_RECALCULATED",
       "human_review_required": false,
-      "independent_evidence": "condense semantique identique a la preuve independante v1 ; report d'identite, aucun recalcul necessaire",
+      "independent_evidence": "Derivee symbolique de \\mathrm{e}^{0{,}5t} par rapport a t : 0.5*exp(0.5*t).",
       "question_id": "Q12",
-      "semantic_question_digest": "sha256:821c774d68a1c5e6fba4a3d0cca07dc55e78a9a416ea18a547e39cdc7f2358d7",
-      "solver_family": null,
-      "solver_input_digest": null,
-      "solver_version": null,
+      "semantic_question_digest": "sha256:2f2b175c1f2bc35424d99bbe794663f072360eac1bca311383785be00a6ad28b",
+      "solver_family": "SYMBOLIC_DERIVATIVE",
+      "solver_input_digest": "sha256:501cb30375168c6aa446a4d771373de09cd667eb26d1a576748eca94a09483ef",
+      "solver_output_digest": "sha256:af32e57c78ccd67218b849f08f5381c1b7531f04a61dc6e098047cc04dd6bf21",
+      "solver_version": "1.0.0",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
-      "verification": null
+      "verification": {
+        "answer_key_verdict": "PASS",
+        "capacity": "C4",
+        "capacity_declared": true,
+        "computed_unique_answer": "D",
+        "coverage_verdict": "PASS",
+        "declared_key": "D",
+        "declared_key_matches_computation": true,
+        "diagnostic_coverage": {
+          "complete": true,
+          "diagnostic_on_the_correct_option": [],
+          "distractors": [
+            "A",
+            "B",
+            "C"
+          ],
+          "missing_error_model": [],
+          "missing_remediation_reference": []
+        },
+        "equivalent_option_groups": [],
+        "no_equivalent_options": true,
+        "true_option_count": 1,
+        "unique_true_option": true,
+        "verdict": "PASS"
+      }
     },
     {
       "capacity": "C5",
@@ -657,19 +729,56 @@
     {
       "capacity": "C5",
       "chapter": "1SPE-EXPONENTIELLE",
-      "computed_option_truths": {},
-      "computed_unique_answer": null,
-      "evidence_digest": "sha256:7cdbe8a8cd86c170edd7bf2c86460542dfd816a469047efedaa0f6ae7c473e37",
-      "evidence_status": "CARRIED_FORWARD_IDENTICAL",
+      "computed_option_truths": {
+        "A": true,
+        "B": false,
+        "C": false,
+        "D": false
+      },
+      "computed_unique_answer": "A",
+      "computed_value": "0.740818220681718",
+      "delta_classes": [
+        "ACCENT_ONLY",
+        "OPTION_REORDER_ONLY",
+        "KEY_POSITION_CHANGED_BUT_VALUE_SAME",
+        "DIAGNOSTIC_TEXT_CHANGE"
+      ],
+      "evidence_digest": "sha256:73b7a32d8bbbaa971659aabdc434c6597869c1248ea377d5505a6ac74019d5d2",
+      "evidence_status": "MACHINE_RECALCULATED",
       "human_review_required": false,
-      "independent_evidence": "condense semantique identique a la preuve independante v1 ; report d'identite, aucun recalcul necessaire",
+      "independent_evidence": "Quotient sur un pas unite de 80\\,\\mathrm{e}^{-0{,}3t} : f(t+1)/f(t) = 0.740818220681718.",
       "question_id": "Q14",
-      "semantic_question_digest": "sha256:e6e14cc91edb5319c24d96873e46d8fec6050712ba31f7786f9bf003cbb521ee",
-      "solver_family": null,
-      "solver_input_digest": null,
-      "solver_version": null,
+      "semantic_question_digest": "sha256:dc7b5a76e34139444cc9a1a017dc3e857fdc721f40cc552d187608a6e2ca795c",
+      "solver_family": "UNIT_SHIFT_RATIO",
+      "solver_input_digest": "sha256:a26395282ef295dc402aa265e1d79adcafd4380dd143f35f03cfc039ae1a0b5a",
+      "solver_output_digest": "sha256:f1585ff1fad3aad64f9c7cee69242fd1b7b9f44c31fcbe7152d7c528226d052b",
+      "solver_version": "1.0.0",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
-      "verification": null
+      "verification": {
+        "answer_key_verdict": "PASS",
+        "capacity": "C5",
+        "capacity_declared": true,
+        "computed_unique_answer": "A",
+        "coverage_verdict": "PASS",
+        "declared_key": "A",
+        "declared_key_matches_computation": true,
+        "diagnostic_coverage": {
+          "complete": true,
+          "diagnostic_on_the_correct_option": [],
+          "distractors": [
+            "B",
+            "C",
+            "D"
+          ],
+          "missing_error_model": [],
+          "missing_remediation_reference": []
+        },
+        "equivalent_option_groups": [],
+        "no_equivalent_options": true,
+        "true_option_count": 1,
+        "unique_true_option": true,
+        "verdict": "PASS"
+      }
     },
     {
       "capacity": "C5",
@@ -725,36 +834,108 @@
     {
       "capacity": "C2",
       "chapter": "1SPE-EXPONENTIELLE",
-      "computed_option_truths": {},
-      "computed_unique_answer": null,
-      "evidence_digest": "sha256:25783dafcd67e94725c4a5a537fb411968c57a10161d42da694541734ea9cc46",
-      "evidence_status": "CARRIED_FORWARD_IDENTICAL",
+      "computed_option_truths": {
+        "A": true,
+        "B": false,
+        "C": false,
+        "D": false
+      },
+      "computed_unique_answer": "A",
+      "computed_value": "exp(8)",
+      "delta_classes": [
+        "OPTION_REORDER_ONLY",
+        "KEY_POSITION_CHANGED_BUT_VALUE_SAME",
+        "DIAGNOSTIC_TEXT_CHANGE"
+      ],
+      "evidence_digest": "sha256:451bea57c59d21edb74c825c95bfd4f3b06ac05932ca208d1ef56942639d52b2",
+      "evidence_status": "MACHINE_RECALCULATED",
       "human_review_required": false,
-      "independent_evidence": "condense semantique identique a la preuve independante v1 ; report d'identite, aucun recalcul necessaire",
+      "independent_evidence": "Simplification symbolique : \\mathrm{e}^3 \\times \\mathrm{e}^5 = exp(8).",
       "question_id": "Q4",
-      "semantic_question_digest": "sha256:a3e34bfbddc948a949f3274e3b2b2a67a6266d408ceae8a4886f1b9b9ee31eea",
-      "solver_family": null,
-      "solver_input_digest": null,
-      "solver_version": null,
+      "semantic_question_digest": "sha256:843b23214042c10b4efa1451f445b99961ecbb210de4b858c09062c649114e5a",
+      "solver_family": "SYMBOLIC_SIMPLIFICATION",
+      "solver_input_digest": "sha256:a5120363748dc77f0be8f5b550d4286bbe609c87edadf2eb528c0cea9a705e5b",
+      "solver_output_digest": "sha256:8a5c1b58039dffe5741f914401c7ae5b97b947b056f793f7a64cf20e62dcf9bc",
+      "solver_version": "1.0.0",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
-      "verification": null
+      "verification": {
+        "answer_key_verdict": "PASS",
+        "capacity": "C2",
+        "capacity_declared": true,
+        "computed_unique_answer": "A",
+        "coverage_verdict": "PASS",
+        "declared_key": "A",
+        "declared_key_matches_computation": true,
+        "diagnostic_coverage": {
+          "complete": true,
+          "diagnostic_on_the_correct_option": [],
+          "distractors": [
+            "B",
+            "C",
+            "D"
+          ],
+          "missing_error_model": [],
+          "missing_remediation_reference": []
+        },
+        "equivalent_option_groups": [],
+        "no_equivalent_options": true,
+        "true_option_count": 1,
+        "unique_true_option": true,
+        "verdict": "PASS"
+      }
     },
     {
       "capacity": "C2",
       "chapter": "1SPE-EXPONENTIELLE",
-      "computed_option_truths": {},
-      "computed_unique_answer": null,
-      "evidence_digest": "sha256:79569a3ab090e7b964c99010877c5d122a7b91bc0e5c42e9ab63b941c2ad9ad3",
-      "evidence_status": "CARRIED_FORWARD_IDENTICAL",
+      "computed_option_truths": {
+        "A": false,
+        "B": false,
+        "C": false,
+        "D": true
+      },
+      "computed_unique_answer": "D",
+      "computed_value": "exp(4)",
+      "delta_classes": [
+        "OPTION_REORDER_ONLY",
+        "KEY_POSITION_CHANGED_BUT_VALUE_SAME",
+        "DIAGNOSTIC_TEXT_CHANGE"
+      ],
+      "evidence_digest": "sha256:52f2ee056e2a83375af6f84900f0c7546d9ab72308a18db39f544b8b1778f2ac",
+      "evidence_status": "MACHINE_RECALCULATED",
       "human_review_required": false,
-      "independent_evidence": "condense semantique identique a la preuve independante v1 ; report d'identite, aucun recalcul necessaire",
+      "independent_evidence": "Simplification symbolique : \\dfrac{\\mathrm{e}^{7}}{\\mathrm{e}^{3}} = exp(4).",
       "question_id": "Q5",
-      "semantic_question_digest": "sha256:f5abd0dc473a7943a03b0405824d3e467bcb0bf4d56066d33520eaf30119620a",
-      "solver_family": null,
-      "solver_input_digest": null,
-      "solver_version": null,
+      "semantic_question_digest": "sha256:981e8fbb24f2b54cb4b0847ccbdd20b9a4c80c6e7b3c6414bd19b4cce829cc4f",
+      "solver_family": "SYMBOLIC_SIMPLIFICATION",
+      "solver_input_digest": "sha256:35b7464df1181436b67eef774a902e6be6ebb8efe03e06f2d95812123e95285d",
+      "solver_output_digest": "sha256:7113c94d3f9b2cffe9dfd685c1e92b007e33031858fde0ec117862a9c6c1a9fa",
+      "solver_version": "1.0.0",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/qcm/1SPE-EXPONENTIELLE-QCM.json",
-      "verification": null
+      "verification": {
+        "answer_key_verdict": "PASS",
+        "capacity": "C2",
+        "capacity_declared": true,
+        "computed_unique_answer": "D",
+        "coverage_verdict": "PASS",
+        "declared_key": "D",
+        "declared_key_matches_computation": true,
+        "diagnostic_coverage": {
+          "complete": true,
+          "diagnostic_on_the_correct_option": [],
+          "distractors": [
+            "A",
+            "B",
+            "C"
+          ],
+          "missing_error_model": [],
+          "missing_remediation_reference": []
+        },
+        "equivalent_option_groups": [],
+        "no_equivalent_options": true,
+        "true_option_count": 1,
+        "unique_true_option": true,
+        "verdict": "PASS"
+      }
     },
     {
       "capacity": "C2",
@@ -6536,7 +6717,7 @@
     }
   ],
   "schema_version": 2,
-  "set_digest": "sha256:e8e6f5efe1bce38851c1ace351eb3f17c58a389488216f0641cb11931f7289ed",
+  "set_digest": "sha256:01483cfc6579498465e3d598b46bd94da5933acafd71244462e775cc4b74f72b",
   "solver_families_used": [
     "ALGEBRAIC_GAIN",
     "BINARY_TREE_TERMINAL_PATHS",
@@ -6552,9 +6733,12 @@
     "SAMPLE_MEAN_FLUCTUATION_MONOTONICITY",
     "SAMPLE_MEAN_FLUCTUATION_SCALE",
     "STANDARD_DEVIATION_FROM_VARIANCE",
+    "SYMBOLIC_DERIVATIVE",
+    "SYMBOLIC_SIMPLIFICATION",
     "TWO_SIGMA_COVERAGE_PROPORTION",
     "UNIFORM_DISCRETE_EXPECTATION",
-    "UNIFORM_DISCRETE_PROBABILITY"
+    "UNIFORM_DISCRETE_PROBABILITY",
+    "UNIT_SHIFT_RATIO"
   ],
   "solver_version": "1.0.0",
   "supersedes_without_rewriting": "audit/qcm_review_evidence/*.json (v1, HISTORICAL)"
