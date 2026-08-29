@@ -39,6 +39,11 @@ LEGACY = re.compile(r"1SPE-GEOREP-C[1-5](?![0-9A-Za-z-])")
 CANONICAL = re.compile(r"1SPE-GEOMETRIE-REPEREE-C[1-5](?![0-9])")
 #: Arbre amont de reference, avant toute intervention de reconciliation.
 PRE_MIGRATION = "dc6735d1"
+#: Le commit de migration lui-meme. Les proprietes prouvees ici portent sur CE
+#: commit, jamais sur HEAD : la branche avance, la migration non. Comparer a
+#: HEAD ferait echouer ces tests a chaque commit ulterieur legitime, ce qui
+#: mesure la marche de la branche et non la migration.
+MIGRATION = "beae537b"
 
 
 def _git(*args: str) -> str:
@@ -123,16 +128,10 @@ def test_C_contract_objects_and_referentiel_agree() -> None:
 
 
 def test_D_a_non_georep_chapter_is_untouched() -> None:
-    changed = _git("diff", "--name-only", PRE_MIGRATION, "HEAD", "--",
+    changed = _git("diff", "--name-only", f"{MIGRATION}^", MIGRATION, "--",
                    "Mathematiques/manuel-maths/chapitres").split()
-    # Seul CO-048 est modifie hors GEOREP, pour ses trois assertions d'oracle.
-    unrelated = ("1SPE-VARALEA-CO-048.tex",)
-    foreign = [
-        path
-        for path in changed
-        if f"/chapitres/{CHAPTER}/" not in path
-        and not any(name in path for name in unrelated)
-    ]
+    assert changed, "le commit de migration doit toucher des fichiers de chapitre"
+    foreign = [path for path in changed if f"/chapitres/{CHAPTER}/" not in path]
     assert foreign == [], foreign
 
 
@@ -185,8 +184,8 @@ def test_H_programme_mapping_is_semantically_unchanged() -> None:
     """Seul le libelle de l'identifiant change, jamais l'atome qu'il rattache."""
 
     path = "audit/official_program_coverage/1SPE.json"
-    before = json.loads(_git("show", f"{PRE_MIGRATION}:{path}"))
-    after = json.loads((ROOT / path).read_text(encoding="utf-8"))
+    before = json.loads(_git("show", f"{MIGRATION}^:{path}"))
+    after = json.loads(_git("show", f"{MIGRATION}:{path}"))
 
     def normalise(rows: list[dict]) -> list[tuple]:
         return [
