@@ -1,0 +1,164 @@
+{
+  "artifact_type": "human_review_queue",
+  "schema_version": 1,
+  "generated_by": "campagne de publication, fermeture verticale par chapitre",
+  "source_sha": "e6ba94fbf063c8619fbed26fd56c8275c80bfd5a",
+  "approves_nothing": true,
+  "no_verdict_is_ever_produced_by_a_machine": true,
+  "roles": {
+    "MATH": [
+      "EXPERT_MATHEMATIQUE",
+      "EXPERT_PROGRAMME_PEDAGOGIE"
+    ],
+    "NSI": [
+      "EXPERT_NSI",
+      "EXPERT_PROGRAMME_PEDAGOGIE"
+    ],
+    "note": "deux identites humaines distinctes, aucune auto-approbation"
+  },
+  "chapter_states": {
+    "1SPE-VARIABLES-ALEATOIRES": {
+      "object_count": 167,
+      "object_set_digest": "sha256:32b2dd9bff3bc3c7c82007986ef3a2009ee89d1aecb9fcad87cf1670af00490e",
+      "review_a": "PENDING_UNASSIGNED",
+      "review_b": "PENDING_UNASSIGNED",
+      "qcm_human_approval": "PENDING",
+      "human_content_approval": "PENDING",
+      "publication_approval": false
+    },
+    "1SPE-EXPONENTIELLE": {
+      "object_count": 147,
+      "object_set_digest": "sha256:c67e1bd9a552906b11f0df7f15bf1d59e04ef5f832dee6befb8d0568e87dd703",
+      "review_a": "PENDING_UNASSIGNED",
+      "review_b": "PENDING_UNASSIGNED",
+      "qcm_human_approval": "PENDING",
+      "human_content_approval": "PENDING",
+      "publication_approval": false
+    },
+    "1SPE-SUITES": {
+      "object_count": 161,
+      "object_set_digest": "sha256:fac8d9dc89cd3699c20ae65783a82b7cfb068007a357721549edfa055858b135",
+      "review_a": "PENDING_UNASSIGNED",
+      "review_b": "PENDING_UNASSIGNED",
+      "qcm_human_approval": "PENDING",
+      "human_content_approval": "PENDING",
+      "publication_approval": false
+    }
+  },
+  "items": [
+    {
+      "item_id": "VARALEA_C6C7_REVIEW_DEBT_12",
+      "kind": "NEW_OBJECTS_REQUIRING_REVIEW",
+      "chapter": "1SPE-VARIABLES-ALEATOIRES",
+      "count": 12,
+      "object_ids": [
+        "1SPE-VARALEA-CO-051",
+        "1SPE-VARALEA-CO-052",
+        "1SPE-VARALEA-CO-053",
+        "1SPE-VARALEA-CO-054",
+        "1SPE-VARALEA-EX-051",
+        "1SPE-VARALEA-EX-052",
+        "1SPE-VARALEA-EX-053",
+        "1SPE-VARALEA-EX-054",
+        "1SPE-VARALEA-ME-008",
+        "1SPE-VARALEA-ME-009",
+        "1SPE-VARALEA-RE-C6",
+        "1SPE-VARALEA-RE-C7"
+      ],
+      "fingerprint_set_digest": "sha256:c28b82aad3d8d65c428ae3d28ab92e9f6fbf06656cfba2abf9ae245bb0a8e507",
+      "owners": [
+        "direction_editoriale_pedagogique",
+        "direction_scientifique_programme"
+      ],
+      "release_blocking": true,
+      "ledger": "audit/VARALEA_C6C7_REVIEW_DEBT_12.json"
+    },
+    {
+      "item_id": "EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1",
+      "kind": "NEW_OBJECTS_REQUIRING_REVIEW",
+      "chapter": "1SPE-EXPONENTIELLE",
+      "count": 1,
+      "object_ids": [
+        "1SPE-EXPO-ME-006"
+      ],
+      "fingerprint_set_digest": "sha256:d876ec40026df67e515724665868bdfd1ff48e824815570d057937e28940b537",
+      "owners": [
+        "direction_editoriale_pedagogique"
+      ],
+      "release_blocking": true,
+      "ledger": "audit/EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1.json"
+    },
+    {
+      "item_id": "QCM_QUESTIONS_NOT_MACHINE_RESOLVABLE",
+      "kind": "QCM_INDEPENDENT_PROOF_IMPOSSIBLE_BY_MACHINE",
+      "questions": [
+        "1SPE-VARIABLES-ALEATOIRES/Q16"
+      ],
+      "count": 1,
+      "why": "aucune famille mathematique generique ne modelise ces enonces sans ecrire une derivation propre a la question ; le solveur s'abstient au lieu d'inventer",
+      "release_blocking": true,
+      "evidence": "audit/QCM_INDEPENDENT_EVIDENCE_V2.json"
+    },
+    {
+      "item_id": "QCM_EVIDENCE_SCHEMA_COVERAGE_GAP",
+      "kind": "HISTORICAL_PROOF_NEVER_CAPTURED_THE_FIELD",
+      "count": 22,
+      "field": "diagnostics.renvoi",
+      "chapters": [
+        "1SPE-EXPONENTIELLE",
+        "1SPE-VARIABLES-ALEATOIRES",
+        "TSPE-DERIVATION-CONVEXITE",
+        "TSPE-PROBABILITES"
+      ],
+      "questions": [
+        "1SPE-EXPONENTIELLE/Q10",
+        "1SPE-EXPONENTIELLE/Q12",
+        "1SPE-EXPONENTIELLE/Q14",
+        "1SPE-EXPONENTIELLE/Q4",
+        "1SPE-EXPONENTIELLE/Q5",
+        "1SPE-VARIABLES-ALEATOIRES/Q1",
+        "1SPE-VARIABLES-ALEATOIRES/Q11",
+        "1SPE-VARIABLES-ALEATOIRES/Q12",
+        "1SPE-VARIABLES-ALEATOIRES/Q13",
+        "1SPE-VARIABLES-ALEATOIRES/Q14",
+        "1SPE-VARIABLES-ALEATOIRES/Q15",
+        "1SPE-VARIABLES-ALEATOIRES/Q2",
+        "1SPE-VARIABLES-ALEATOIRES/Q3",
+        "1SPE-VARIABLES-ALEATOIRES/Q4",
+        "1SPE-VARIABLES-ALEATOIRES/Q5",
+        "1SPE-VARIABLES-ALEATOIRES/Q6",
+        "1SPE-VARIABLES-ALEATOIRES/Q7",
+        "1SPE-VARIABLES-ALEATOIRES/Q8",
+        "1SPE-VARIABLES-ALEATOIRES/Q9",
+        "TSPE-DERIVATION-CONVEXITE/Q1",
+        "TSPE-DERIVATION-CONVEXITE/Q3",
+        "TSPE-PROBABILITES/Q1"
+      ],
+      "release_blocking": true
+    },
+    {
+      "item_id": "QCM_REMEDIATION_COVERAGE_FAIL",
+      "kind": "CONTENT_GAP_TO_FIX_IN_THE_CHAPTER_VERTICAL",
+      "count": 1,
+      "entries": [
+        {
+          "chapter": "TSPE-DERIVATION-CONVEXITE",
+          "missing_error_model": [],
+          "missing_remediation_reference": [
+            "A",
+            "C",
+            "D"
+          ],
+          "question_id": "Q6"
+        }
+      ],
+      "note": "ANSWER_KEY_VERDICT = PASS, REMEDIATION_COVERAGE = FAIL. A corriger lors de la verticale TSPE correspondante ; a ne pas confondre avec QCM_EVIDENCE_SCHEMA_COVERAGE_GAP, qui porte sur la preuve et non sur la source.",
+      "release_blocking": true
+    }
+  ],
+  "totals": {
+    "release_blocking_items": 5,
+    "new_objects_awaiting_review": 13,
+    "qcm_questions_awaiting_human_proof": 1
+  }
+}
