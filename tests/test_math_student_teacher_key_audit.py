@@ -24,11 +24,21 @@ sys.path.insert(0, str(root / "scripts"))
 import build_math_student_teacher_key_audit as builder
 
 source = (root / "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.tex").read_text(encoding="utf-8")
+
+# Une mutation qui ne mute rien ferait passer le test sans rien prouver :
+# le garde peut deja etre rouge pour une raison etrangere a la mutation.
+if not builder._teacher_only_guard_is_complete(source):
+    raise SystemExit("TEST_SETUP_FAILURE: le garde est deja rouge avant mutation")
+
+original = source
 if sys.argv[2] == "fi_before_key":
     source = source.replace("\\fi\n% NEXUS-QCM-TEACHER-ONLY-END", "% NEXUS-QCM-TEACHER-ONLY-END", 1)
     source = source.replace("\\section*{Cl\u00e9 de correction", "\\fi\n\\section*{Cl\u00e9 de correction", 1)
 else:
     source = source.replace("Cl\u00e9 de correction", "Corrige", 1)
+if source == original:
+    raise SystemExit("TEST_SETUP_FAILURE: la mutation n'a rien remplace")
+
 raise SystemExit(0 if not builder._teacher_only_guard_is_complete(source) else 1)
 """
     result = subprocess.run(
