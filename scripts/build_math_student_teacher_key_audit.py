@@ -26,7 +26,14 @@ MD_TARGET = ROOT / "audit/STUDENT_PDF_PUBLISH_PREFLIGHT_CURRENT_HEAD.md"
 INTEGRATION_BASE_SHA = "10cb5f07772842d6630d2a2f78531f6900371023"
 BEGIN = "% NEXUS-QCM-TEACHER-ONLY-BEGIN"
 END = "% NEXUS-QCM-TEACHER-ONLY-END"
-KEY_HEADINGS = ("Cle de correction", "Correction et diagnostics")
+# Le producteur canonique Mathematiques/manuel-maths/scripts/build_qcm_tex.py
+# emet la forme accentuee. La forme non accentuee reste necessaire pour lire
+# la ligne de base INTEGRATION_BASE_SHA, anterieure a la campagne diacritiques.
+KEY_HEADINGS = (
+    "Cl\u00e9 de correction",
+    "Cle de correction",
+    "Correction et diagnostics",
+)
 
 sys.path.insert(0, str(MATH / "scripts"))
 import assemble_manuel  # noqa: E402
