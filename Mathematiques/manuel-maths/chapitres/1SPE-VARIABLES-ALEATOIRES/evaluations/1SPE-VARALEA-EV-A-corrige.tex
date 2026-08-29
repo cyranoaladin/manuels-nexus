@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-VARALEA-EV-A-corrige", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-VARALEA-EV-A", "version": "A", "capacites_codes": ["C1","C2","C3","C5","C6","C7"], "sources_inspiration": [], "status": "generated"}
+% META: {"id": "1SPE-VARALEA-EV-A-corrige", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-VARALEA-EV-A", "version": "A", "capacites_codes": ["C1","C2","C3","C4","C5","C6","C7"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational, sqrt
 % # Ex 1
@@ -8,6 +8,7 @@
 % E2 = 1*p_R + 9*p_B + 100*p_V
 % assert E2 == Rational(131,8)
 % V = E2 - E**2; assert V == Rational(519,64)
+% E_Y = 2*E + 1; assert E_Y == Rational(27,4)
 % # Ex 2
 % probabilities = [Rational(8,27), Rational(12,27), Rational(6,27), Rational(1,27)]
 % P0 = probabilities[0]; P2 = probabilities[2]
@@ -32,10 +33,10 @@
 \begin{corrige}{1SPE-VARALEA-EV-A}
 
 %===============================================================
-\section*{Exercice 1 \hfill (6 points) — C1, C2}
+\section*{Exercice 1 \hfill (6 points) — C1, C2, C4}
 %===============================================================
 
-\baremeIndicatif{Q1: 1,5 pt; Q2: 1,5 pt; Q3: 1 pt; Q4: 2 pts}
+\baremeIndicatif{Q1: 1,5 pt; Q2: 1,5 pt; Q3: 2 pts; Q4: 1 pt}
 
 \bigskip
 \textbf{Question 1 — Tableau de loi.}
@@ -64,16 +65,25 @@ $E(X) = 1 \times \frac{1}{2} + 3 \times \frac{3}{8} + 10 \times \frac{1}{8} = \f
 En moyenne, le gain par tirage est de $2{,}875$~euros.
 
 \medskip
-\textbf{Question 3 — $E(X^2)$.}
+\textbf{Question 3 — Variance et écart type.}
+
+\commentaireMarge{Kœnig-Huygens : calculer d'abord $E(X^2)$.}
 
 $E(X^2) = 1 \times \frac{1}{2} + 9 \times \frac{3}{8} + 100 \times \frac{1}{8} = \frac{4+27+100}{8} = \frac{131}{8}$.
-
-\medskip
-\textbf{Question 4 — Variance et écart type.}
 
 $V(X) = \frac{131}{8} - \left(\frac{23}{8}\right)^2 = \frac{131}{8} - \frac{529}{64} = \frac{1048-529}{64} = \frac{519}{64} \approx 8{,}11$.
 
 $\sigma(X) = \sqrt{\frac{519}{64}} \approx 2{,}85$.
+
+\medskip
+\textbf{Question 4 — Linéarité de l'espérance.}
+
+\commentaireMarge{Ne pas recalculer une loi : $E(aX+b) = aE(X)+b$.}
+
+$E(Y) = E(2X + 1) = 2E(X) + 1 = 2 \times \frac{23}{8} + 1
+= \frac{23}{4} + 1 = \frac{27}{4} = 6{,}75$.
+
+La loi de $Y$ n'a pas à être dressée : la linéarité de l'espérance suffit.
 
 %===============================================================
 \section*{Exercice 2 \hfill (5 points) — C2, C3}
