@@ -444,9 +444,10 @@ def test_G_status_promotion_alone_does_not_invalidate_the_receipt(
     before = g.build_scope(CHAPTER, mutable_root)
     target = mutable_root / before.objects[0].path
     text = target.read_text(encoding="utf-8")
-    target.write_text(
-        text.replace('"status": "generated"', '"status": "verified"', 1), encoding="utf-8"
-    )
+    mutant = text.replace('"status": "generated"', '"status": "verified"', 1)
+    # Une mutation qui ne mute rien rendrait l'invariance trivialement vraie.
+    assert mutant != text, "TEST_SETUP_FAILURE: aucun statut generated a promouvoir"
+    target.write_text(mutant, encoding="utf-8")
     after = g.build_scope(CHAPTER, mutable_root)
     assert after.semantic_review_digest == before.semantic_review_digest
 
@@ -979,7 +980,12 @@ def test_transitively_included_objects_belong_to_the_frozen_set() -> None:
         assert "cours/experimentations/" in entry.path
         assert entry.teacher_visible, entry.object_id
     assert varalea.unassembled_object_ids() == []
-    assert varalea.object_count == 155
+    # 167 = les 155 objets du gel initial + les 12 objets de la chaine C6/C7
+    # (commit f41bbc49), dont le registre exact est
+    # audit/VARALEA_C6C7_REVIEW_DEBT_12.json. Le total est corrobore par les
+    # deux enumerations independantes d'audit/VARALEA_BLOCKING_ALGEBRA.json
+    # (CANONICAL_PRODUCER_COUNT = INDEPENDENT_ENUMERATION_COUNT = 167).
+    assert varalea.object_count == 167
 
 
 def test_an_object_reachable_by_no_assembly_path_is_reported(
@@ -1078,9 +1084,9 @@ def test_status_only_change_keeps_the_semantic_digest(mutable_root: Path) -> Non
     before = g.build_scope(CHAPTER, mutable_root)
     target = mutable_root / before.objects[0].path
     text = target.read_text(encoding="utf-8")
-    target.write_text(
-        text.replace('"status": "generated"', '"status": "approved"', 1), encoding="utf-8"
-    )
+    mutant = text.replace('"status": "generated"', '"status": "approved"', 1)
+    assert mutant != text, "TEST_SETUP_FAILURE: aucun statut generated a promouvoir"
+    target.write_text(mutant, encoding="utf-8")
     assert g.build_scope(CHAPTER, mutable_root).semantic_review_digest == (
         before.semantic_review_digest
     )
@@ -1091,10 +1097,12 @@ def test_contract_status_only_change_keeps_the_semantic_digest(
 ) -> None:
     before = g.build_scope(CHAPTER, mutable_root)
     contract = mutable_root / "Mathematiques/manuel-maths/chapitres" / CHAPTER / "contrat.yaml"
-    contract.write_text(
-        contract.read_text(encoding="utf-8").replace("statut: draft", "statut: valide", 1),
-        encoding="utf-8",
+    contract_text = contract.read_text(encoding="utf-8")
+    contract_mutant = contract_text.replace("statut: draft", "statut: valide", 1)
+    assert contract_mutant != contract_text, (
+        "TEST_SETUP_FAILURE: le contrat ne porte pas statut: draft"
     )
+    contract.write_text(contract_mutant, encoding="utf-8")
     assert g.build_scope(CHAPTER, mutable_root).semantic_review_digest == (
         before.semantic_review_digest
     )
