@@ -3,7 +3,7 @@
 > Entrée de revue uniquement : ce document ne constitue ni une approbation de publication, ni une acceptation de release.
 
 - État chapitre : `PENDING_HUMAN`
-- SHA source revue : `ec459b29f2942d0e58f012698f710b274e28d897`
+- SHA source revue : `5da147f9c9566fb2d4594bf264c85e7699e15659`
 - SHA outillage de rendu : `5d935e720a82e207d7a8769f6bd2608ef1160322`
 - Contrat : `draft`
 - Approbation publication : `false`

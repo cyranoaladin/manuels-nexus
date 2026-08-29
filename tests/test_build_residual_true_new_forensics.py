@@ -107,15 +107,18 @@ def test_builds_exact_residual_without_mutating_frozen_inputs(tmp_path: Path) ->
     assert set(algebra["sets"]["REMOVED"]) == REMOVED_FINGERPRINTS
     assert algebra["sets"]["NEW_AFTER_TRIAGE"] == []
     full = algebra["full_current_algebra"]
-    # La dette VARALEA C6/C7 est un CINQUIEME composant nomme et disjoint,
-    # jamais fondu dans le residuel gele des 18 : 2244 = 2232 + 12.
-    assert full["cardinality_equation"] == "2244 = 2121 + 9 + 89 + 13 + 12"
-    assert full["cardinalities"]["CURRENT_ACTIVE"] == 2244
+    # Chaque dette declaree separement est un composant NOMME et disjoint de
+    # l'algebre courante, jamais fondu dans le residuel gele des 18. La
+    # campagne en ajoute un par chapitre qui cree des objets.
+    assert full["cardinality_equation"] == "2245 = 2121 + 9 + 89 + 13 + 12 + 1"
+    assert full["cardinalities"]["CURRENT_ACTIVE"] == 2245
     assert full["cardinalities"]["TRUE_NEW"] == 13
-    assert full["cardinalities"]["VARALEA_C6C7_REVIEW_DEBT"] == 12
-    assert set(full["sets"]["VARALEA_C6C7_REVIEW_DEBT"]).isdisjoint(
-        full["sets"]["TRUE_NEW"]
-    )
+    assert full["cardinalities"]["VARALEA_C6C7_REVIEW_DEBT_12"] == 12
+    assert full["cardinalities"]["EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1"] == 1
+    declared = ("VARALEA_C6C7_REVIEW_DEBT_12", "EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1")
+    for name in declared:
+        assert set(full["sets"][name]).isdisjoint(full["sets"]["TRUE_NEW"])
+    assert set(full["sets"][declared[0]]).isdisjoint(set(full["sets"][declared[1]]))
     assert full["equalities"]["current_partition"] is True
     assert full["equalities"]["current_partition_pairwise_disjoint"] is True
     assert full["unknown_count"] == 0

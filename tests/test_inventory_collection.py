@@ -3782,15 +3782,27 @@ def test_repository_baseline_is_frozen_schema_valid_and_gate_green(
     assert payload["fingerprint_schema_version"] == 1
 
 
-def _declared_varalea_c6c7_fingerprints() -> set[str]:
-    """Les 12 empreintes telles que leur registre autoritaire les declare."""
+#: Un registre par chapitre qui cree des objets. La campagne en ajoute au fil
+#: des fermetures verticales ; ils restent des ensembles SEPARES.
+DECLARED_DEBT_LEDGERS = (
+    "audit/VARALEA_C6C7_REVIEW_DEBT_12.json",
+    "audit/EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1.json",
+)
 
-    ledger = json.loads(
-        (ROOT / "audit/VARALEA_C6C7_REVIEW_DEBT_12.json").read_text(encoding="utf-8")
-    )
-    assert ledger["release_blocking"] is True
-    assert ledger["in_approved_baseline"] is False
-    return {str(entry["fingerprint"]) for entry in ledger["entries"]}
+
+def _declared_open_debt_fingerprints() -> set[str]:
+    """Les empreintes telles que leurs registres autoritaires les declarent."""
+
+    declared: set[str] = set()
+    for relative in DECLARED_DEBT_LEDGERS:
+        ledger = json.loads((ROOT / relative).read_text(encoding="utf-8"))
+        assert ledger["release_blocking"] is True
+        assert ledger["in_approved_baseline"] is False
+        assert len(ledger["entries"]) == ledger["count"]
+        fingerprints = {str(entry["fingerprint"]) for entry in ledger["entries"]}
+        assert declared.isdisjoint(fingerprints), relative
+        declared |= fingerprints
+    return declared
 
 
 def test_repository_fail_on_new_gate_accepts_exact_residual_extension(
@@ -3799,16 +3811,19 @@ def test_repository_fail_on_new_gate_accepts_exact_residual_extension(
     """L'extension exacte absorbe les 13 sans affaiblir fail-on-new.
 
     Le gate est ROUGE, et il doit l'etre : la chaine C6/C7 de VARALEA a
-    ajoute 12 objets declares NEW / OPEN_DEBT / HUMAN_REVIEW_REQUIRED /
-    RELEASE_BLOCKING. audit/VARALEA_C6C7_REVIEW_DEBT_12.json fixe le
-    comportement attendu : "rouge sur exactement ces 12 empreintes". Le
-    test epingle donc l'ensemble exact : une 13e nouveaute le casse, et
-    la fermeture des 12 ne viendra que du cycle de statut apres revue
-    humaine, jamais d'une extension de baseline.
+    ajoute 12 objets, et la fermeture verticale d'EXPONENTIELLE la fiche
+    methode de sa capacite C1, tous declares NEW / OPEN_DEBT /
+    HUMAN_REVIEW_REQUIRED / RELEASE_BLOCKING. Chaque chapitre porte son
+    propre registre, et chaque registre fixe le comportement attendu du
+    gate. Le test epingle l'union EXACTE de ces registres : une nouveaute
+    non declaree le casse, et la fermeture ne viendra que du cycle de
+    statut apres revue humaine, jamais d'une extension de baseline.
     """
     gate = inventory_module._fail_on_new_gate(ROOT)
-    declared = _declared_varalea_c6c7_fingerprints()
-    assert len(declared) == 12
+    declared = _declared_open_debt_fingerprints()
+    # 12 objets de la chaine C6/C7 de VARALEA + la fiche methode C1
+    # d'EXPONENTIELLE, chacun dans son propre registre.
+    assert len(declared) == 13
 
     assert gate["success"] is False
     assert gate["exit_code"] == 5
@@ -12972,9 +12987,9 @@ def test_repository_fail_on_new_preserves_all_qualified_active_debt(
 
     gate = inventory_module._fail_on_new_gate(ROOT)
 
-    # Le rouge du gate porte UNIQUEMENT sur les 12 nouveautes declarees :
+    # Le rouge du gate porte UNIQUEMENT sur les nouveautes declarees :
     # aucune des 2 232 dettes qualifiees n'est perdue ni requalifiee.
-    declared = _declared_varalea_c6c7_fingerprints()
+    declared = _declared_open_debt_fingerprints()
     assert gate["success"] is False
     assert gate["exit_code"] == 5
     comparison = gate["comparison"]

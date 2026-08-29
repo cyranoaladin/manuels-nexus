@@ -1,0 +1,39 @@
+{
+ "artifact_type": "BLOCKING_REVIEW_DEBT_LEDGER",
+ "ledger_id": "EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1",
+ "schema_version": 1,
+ "source_sha": "6c2cf3e5fad94ae8ae49bff693b7140928f24adb",
+ "chapter": "1SPE-EXPONENTIELLE",
+ "count": 1,
+ "fingerprint_set_digest": "sha256:d876ec40026df67e515724665868bdfd1ff48e824815570d057937e28940b537",
+ "human_review_required": true,
+ "release_blocking": true,
+ "release_acceptance": false,
+ "in_approved_baseline": false,
+ "is_baseline_qualification": false,
+ "is_gate_exception": false,
+ "semantics": "Registre d'observation. Il n'inscrit rien dans la baseline approuvee, ne materialise aucune qualification, et ne doit rendre vert ni validate-model ni fail-on-new. La fermeture doit venir du cycle de statut apres revue humaine.",
+ "why_created": "La capacite C1 du chapitre n'avait aucune fiche methode alors qu'elle porte l'atome officiel obligatoire 1SPE-OFFICIAL-108, et ses sept exercices pointaient vers M1, la methode de C2. L'objet est cree parce que l'autorite programme et le contrat pedagogique l'exigent.",
+ "expected_gate_behaviour": {
+  "check": "rc 0",
+  "validate-model": "rouge sur cette empreinte, en plus des douze de VARALEA",
+  "fail-on-new": "rouge sur cette empreinte, en plus des douze de VARALEA",
+  "release-strict": "rouge"
+ },
+ "entries": [
+  {
+   "object_id": "1SPE-EXPO-ME-006",
+   "path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/methodes/1SPE-EXPO-ME-006.tex",
+   "category": "blocking_statuses",
+   "status": "generated",
+   "scope": "object",
+   "fingerprint": "d345016805e04089",
+   "logical_owner": "direction_editoriale_pedagogique",
+   "policy_disposition": "open_debt",
+   "in_approved_baseline": false,
+   "human_review_required": true,
+   "release_blocking": true,
+   "release_acceptance": false
+  }
+ ]
+}
