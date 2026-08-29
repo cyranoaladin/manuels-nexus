@@ -42,8 +42,8 @@
   ]
  },
  "pedagogy": {
-  "found": 7,
-  "fixed": 7,
+  "found": 8,
+  "fixed": 8,
   "unresolved": 0,
   "items": [
    {
@@ -97,6 +97,15 @@
     "defect": "le contrat eleve annoncait cinq capacites alors que le chapitre en enseigne, remedie et evalue sept",
     "fixed_by": "954edd9e",
     "status": "FIXED"
+   },
+   {
+    "id": "PED-08",
+    "severity": "P1",
+    "found_in": "evaluations EV-A et EV-B",
+    "defect": "EV-A evaluait C1,C2,C3,C5,C6,C7 et EV-B ajoutait C4 : deux versions donnees a des eleves differents dans les memes conditions n'evaluaient pas le meme jeu de capacites, donc les notes n'etaient pas comparables",
+    "fixed_by": "6bad8d73a",
+    "status": "FIXED",
+    "note": "defaut anterieur a cette campagne, present depuis 4c7d9740 ; je l'avais signale comme historique et laisse ouvert, ce qui n'etait pas une justification. Corrige en remplacant la question intermediaire E(X^2) de EV-A, qui n'est pas une capacite, par une vraie tache de linearite E(2X+1) ; format, structure et duree inchanges. Controle automatique ajoute : test_varalea_assessment_blueprint.py"
    },
    {
     "id": "PED-07",
