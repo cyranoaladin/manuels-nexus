@@ -3782,19 +3782,39 @@ def test_repository_baseline_is_frozen_schema_valid_and_gate_green(
     assert payload["fingerprint_schema_version"] == 1
 
 
+def _declared_varalea_c6c7_fingerprints() -> set[str]:
+    """Les 12 empreintes telles que leur registre autoritaire les declare."""
+
+    ledger = json.loads(
+        (ROOT / "audit/VARALEA_C6C7_REVIEW_DEBT_12.json").read_text(encoding="utf-8")
+    )
+    assert ledger["release_blocking"] is True
+    assert ledger["in_approved_baseline"] is False
+    return {str(entry["fingerprint"]) for entry in ledger["entries"]}
+
+
 def test_repository_fail_on_new_gate_accepts_exact_residual_extension(
     inventory_module,
 ) -> None:
-    """L'extension exacte absorbe les 13 sans affaiblir fail-on-new."""
-    gate = inventory_module._fail_on_new_gate(ROOT)
+    """L'extension exacte absorbe les 13 sans affaiblir fail-on-new.
 
-    assert gate["success"] is True
-    assert gate["exit_code"] == 0
-    assert gate["reasons"] == []
+    Le gate est ROUGE, et il doit l'etre : la chaine C6/C7 de VARALEA a
+    ajoute 12 objets declares NEW / OPEN_DEBT / HUMAN_REVIEW_REQUIRED /
+    RELEASE_BLOCKING. audit/VARALEA_C6C7_REVIEW_DEBT_12.json fixe le
+    comportement attendu : "rouge sur exactement ces 12 empreintes". Le
+    test epingle donc l'ensemble exact : une 13e nouveaute le casse, et
+    la fermeture des 12 ne viendra que du cycle de statut apres revue
+    humaine, jamais d'une extension de baseline.
+    """
+    gate = inventory_module._fail_on_new_gate(ROOT)
+    declared = _declared_varalea_c6c7_fingerprints()
+    assert len(declared) == 12
+
+    assert gate["success"] is False
+    assert gate["exit_code"] == 5
     comparison = gate["comparison"]
-    assert comparison["success"] is True
-    assert comparison["failures"] == []
-    assert comparison["new"] == []
+    assert comparison["success"] is False
+    assert set(comparison["new"]) == declared
     assert comparison["resolved"] == []
     assert comparison["modified"] == []
     assert comparison["regressions"] == []
@@ -12952,13 +12972,16 @@ def test_repository_fail_on_new_preserves_all_qualified_active_debt(
 
     gate = inventory_module._fail_on_new_gate(ROOT)
 
-    assert gate["success"] is True
-    assert gate["exit_code"] == 0
-    assert gate["reasons"] == []
+    # Le rouge du gate porte UNIQUEMENT sur les 12 nouveautes declarees :
+    # aucune des 2 232 dettes qualifiees n'est perdue ni requalifiee.
+    declared = _declared_varalea_c6c7_fingerprints()
+    assert gate["success"] is False
+    assert gate["exit_code"] == 5
     comparison = gate["comparison"]
-    assert comparison["failures"] == []
+    assert set(comparison["new"]) == declared
     assert comparison["expected_review_debt"] == []
     assert set(comparison["unchanged"]) == active_fingerprints
+    assert declared.isdisjoint(active_fingerprints)
 
 
 def test_repository_method_aliases_are_unambiguous(
