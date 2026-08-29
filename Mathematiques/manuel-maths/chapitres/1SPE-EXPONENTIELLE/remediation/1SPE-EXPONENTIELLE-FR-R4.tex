@@ -5,24 +5,24 @@
 % Prerequis issu de 2GT
 %---------------------------------------------------------------
 
-\subsection*{Rappel — Puissances entieres et regles de calcul}
+\subsection*{Rappel — Puissances entieres et règles de calcul}
 
-Pour tout reel $a
+Pour tout réel $a
 \neq 0$ et tous entiers relatifs $m$, $n$ :
 \begin{itemize}
-  \item $a^m \times a^n = a^{m+n}$ \quad (produit de puissances de meme base)
-  \item $\dfrac{a^m}{a^n} = a^{m-n}$ \quad (quotient de puissances de meme base)
+  \item $a^m \times a^n = a^{m+n}$ \quad (produit de puissances de même base)
+  \item $\dfrac{a^m}{a^n} = a^{m-n}$ \quad (quotient de puissances de même base)
   \item $(a^m)^n = a^{m \times n}$ \quad (puissance d'une puissance)
   \item $a^0 = 1$ \quad et \quad $a^{-n} = \dfrac{1}{a^n}$
 \end{itemize}
 
-Ces regles sont exactement celles que l'on retrouve pour les exposants de l'exponentielle :
+Ces règles sont exactement celles que l'on retrouve pour les exposants de l'exponentielle :
 $\mathrm{e}^a \times \mathrm{e}^b = \mathrm{e}^{a+b}$, $\dfrac{\mathrm{e}^a}{\mathrm{e}^b} = \mathrm{e}^{a-b}$, $(\mathrm{e}^a)^n = \mathrm{e}^{na}$.
 
 %---------------------------------------------------------------
 
 \begin{exercice}{1SPE-EXPO-FR-R4-EX1}{1}{5}
-Simplifier en utilisant les regles des puissances.
+Simplifier en utilisant les règles des puissances.
 \begin{enumerate}
   \item $2^3 \times 2^5$
   \item $\dfrac{5^7}{5^3}$
@@ -48,7 +48,7 @@ Simplifier en utilisant les regles des puissances.
 
 \textbf{Question 3.} $(3^2)^4 = 3^{2 \times 4} = 3^8 = 6561$.
 
-\textbf{Question 4.} $7^0 = 1$ (par convention pour tout reel non nul).
+\textbf{Question 4.} $7^0 = 1$ (par convention pour tout réel non nul).
 
 \end{corrige}
 
@@ -63,7 +63,7 @@ Ecrire sous la forme $a^n$ (une seule puissance).
 \end{enumerate}
 \end{exercice}
 
-\coupDePouce{1}{Traiter etape par etape : d'abord le numerateur, puis le quotient, puis la puissance exterieure s'il y en a une.}
+\coupDePouce{1}{Traiter étape par étape : d'abord le numerateur, puis le quotient, puis la puissance exterieure s'il y en a une.}
 
 % BEGIN-VERIFY
 % assert (10**5 * 10**3) // 10**2 == 10**6
@@ -101,7 +101,7 @@ Par analogie avec les puissances, simplifier les expressions suivantes (ecrire s
 \end{enumerate}
 \end{exercice}
 
-\coupDePouce{1}{Les regles sont les memes : $\mathrm{e}^a \times \mathrm{e}^b = \mathrm{e}^{a+b}$, $(\mathrm{e}^a)^n = \mathrm{e}^{na}$, $\mathrm{e}^a / \mathrm{e}^b = \mathrm{e}^{a-b}$.}
+\coupDePouce{1}{Les règles sont les mêmes : $\mathrm{e}^a \times \mathrm{e}^b = \mathrm{e}^{a+b}$, $(\mathrm{e}^a)^n = \mathrm{e}^{na}$, $\mathrm{e}^a / \mathrm{e}^b = \mathrm{e}^{a-b}$.}
 
 % BEGIN-VERIFY
 % from sympy import exp, simplify, E

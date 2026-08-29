@@ -1,24 +1,24 @@
 % META: {"id": "1SPE-EXPONENTIELLE-FR-R5", "chapitre": "1SPE-EXPONENTIELLE", "type_objet": "remediation", "capacites_codes": ["R5"], "status": "generated"}
 
 %---------------------------------------------------------------
-% FICHE DE REMISE A NIVEAU — R5 : Suites geometriques
+% FICHE DE REMISE A NIVEAU — R5 : Suites géométriques
 % Prerequis issu de 1SPE-SUITES
 %---------------------------------------------------------------
 
-\subsection*{Rappel — Suites geometriques et coefficient multiplicateur}
+\subsection*{Rappel — Suites géométriques et coefficient multiplicateur}
 
-Une suite $(u_n)$ est \textbf{geometrique} de raison $q$ si pour tout $n$ : $u_{n+1} = q \times u_n$.
+Une suite $(u_n)$ est \textbf{géométrique} de raison $q$ si pour tout $n$ : $u_{n+1} = q \times u_n$.
 
 Formule explicite : $u_n = u_0 \times q^n$.
 
-Lien avec l'exponentielle : la suite $u_n = u_0 \times \mathrm{e}^{rn}$ est geometrique de raison $q = \mathrm{e}^r$, car $u_{n+1} = u_0 \times \mathrm{e}^{r(n+1)} = \mathrm{e}^r \times u_n$.
+Lien avec l'exponentielle : la suite $u_n = u_0 \times \mathrm{e}^{rn}$ est géométrique de raison $q = \mathrm{e}^r$, car $u_{n+1} = u_0 \times \mathrm{e}^{r(n+1)} = \mathrm{e}^r \times u_n$.
 
 Le coefficient multiplicateur d'une augmentation de $t\,\%$ est $q = 1 + \dfrac{t}{100}$.
 
 %---------------------------------------------------------------
 
 \begin{exercice}{1SPE-EXPO-FR-R5-EX1}{1}{5}
-Soit $(u_n)$ la suite geometrique de premier terme $u_0 = 5$ et de raison $q = 2$.
+Soit $(u_n)$ la suite géométrique de premier terme $u_0 = 5$ et de raison $q = 2$.
 \begin{enumerate}
   \item Calculer $u_1$, $u_2$, $u_3$.
   \item Donner la formule explicite de $u_n$.
@@ -78,7 +78,7 @@ Un capital de $1\,000$~euros est place a un taux annuel de $3\,\%$. On note $C_n
 
 \textbf{Question 1.} Le coefficient multiplicateur est $q = 1 + \frac{3}{100} = 1{,}03$.
 
-\textbf{Question 2.} $(C_n)$ est geometrique de raison $1{,}03$ et $C_0 = 1000$.
+\textbf{Question 2.} $(C_n)$ est géométrique de raison $1{,}03$ et $C_0 = 1000$.
 \[
 C_n = 1000 \times 1{,}03^n.
 \]
@@ -91,9 +91,9 @@ $C_5 = 1000 \times 1{,}03^5 \approx 1000 \times 1{,}15927 \approx 1159{,}27$~eur
 %---------------------------------------------------------------
 
 \begin{exercice}{1SPE-EXPO-FR-R5-EX3}{2}{6}
-Une population de bacteries est modelisee par $P_n = 500 \times (1{,}5)^n$ ou $n$ est le nombre d'heures.
+Une population de bacteries est modélisée par $P_n = 500 \times (1{,}5)^n$ ou $n$ est le nombre d'heures.
 \begin{enumerate}
-  \item Justifier que $(P_n)$ est une suite geometrique. Donner sa raison.
+  \item Justifier que $(P_n)$ est une suite géométrique. Donner sa raison.
   \item Calculer $P_0$, $P_1$, $P_2$ et $P_3$.
   \item A partir de quel rang $n$ a-t-on $P_n > 5\,000$ ? (on pourra tester quelques valeurs)
 \end{enumerate}
@@ -121,7 +121,7 @@ Une population de bacteries est modelisee par $P_n = 500 \times (1{,}5)^n$ ou $n
 
 \textbf{Question 1.} $P_{n+1} = 500 \times (1{,}5)^{n+1} = 1{,}5 \times 500 \times (1{,}5)^n = 1{,}5 \times P_n$.
 
-Le quotient $P_{n+1}/P_n = 1{,}5$ est constant : $(P_n)$ est geometrique de raison $q = 1{,}5$.
+Le quotient $P_{n+1}/P_n = 1{,}5$ est constant : $(P_n)$ est géométrique de raison $q = 1{,}5$.
 
 \textbf{Question 2.}
 $P_0 = 500$, $P_1 = 750$, $P_2 = 1125$, $P_3 = 1687{,}5$.

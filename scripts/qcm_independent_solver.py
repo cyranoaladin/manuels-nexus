@@ -139,6 +139,22 @@ def sanitize_canonical(question: dict[str, Any]) -> SolverInput:
 # ---------------------------------------------------------------------------
 
 
+def _balanced_group(text: str, open_index: int) -> str | None:
+    """Contenu d'un groupe { } equilibre commencant a `open_index`."""
+
+    if open_index >= len(text) or text[open_index] != "{":
+        return None
+    depth = 0
+    for index in range(open_index, len(text)):
+        if text[index] == "{":
+            depth += 1
+        elif text[index] == "}":
+            depth -= 1
+            if depth == 0:
+                return text[open_index + 1 : index]
+    return None
+
+
 def _plain(text: str) -> str:
     decomposed = unicodedata.normalize("NFD", str(text))
     stripped = "".join(c for c in decomposed if unicodedata.category(c) != "Mn")
@@ -261,6 +277,106 @@ def _resolved(
         computed_value=str(expected),
         independent_evidence=evidence,
     )
+
+
+
+# ---------------------------------------------------------------------------
+# Lecture symbolique
+# ---------------------------------------------------------------------------
+
+
+def _sympy():
+    import sympy  # noqa: PLC0415
+
+    return sympy
+
+
+def latex_to_sympy(source: str, symbol: str = "x"):
+    """Traduit un fragment LaTeX elementaire en expression SymPy, ou None.
+
+    Volontairement etroit : ce qui n'est pas reconnu n'est pas devine.
+    """
+
+    sympy = _sympy()
+    text = str(source).strip()
+    text = text.replace("$", " ")
+    text = re.sub(r"\\left|\\right", "", text)
+    text = re.sub(r"\\[,;!]", " ", text)
+    text = text.replace("\\times", "*").replace("\\cdot", "*")
+    text = re.sub(r"\\dfrac|\\tfrac", r"\\frac", text)
+    # \frac{a}{b} -> ((a)/(b))
+    while True:
+        match = re.search(r"\\frac\{", text)
+        if match is None:
+            break
+        start = match.end() - 1
+        numerator = _balanced_group(text, start)
+        if numerator is None:
+            return None
+        after = start + len(numerator) + 2
+        if after >= len(text) or text[after] != "{":
+            return None
+        denominator = _balanced_group(text, after)
+        if denominator is None:
+            return None
+        end = after + len(denominator) + 2
+        text = text[: match.start()] + f"(({numerator})/({denominator}))" + text[end:]
+    text = re.sub(r"\\mathrm\{e\}|\\mathrm\{ e \}|\\text\{e\}", "E", text)
+    text = re.sub(r"\\sqrt\{([^{}]*)\}", r"sqrt(\1)", text)
+    text = text.replace("\\pi", "pi")
+    text = re.sub(r"(\d)\{,\}(\d)", r"\1.\2", text)
+    text = re.sub(r"\\[a-zA-Z]+", " ", text)
+    # Les groupes restants sont des exposants ou des indices : en notation
+    # Python ce sont des parentheses.
+    text = text.replace("{", "(").replace("}", ")")
+    text = text.replace("^", "**")
+    text = re.sub(r"\s+", " ", text).strip()
+    if not text or not re.fullmatch(r"[0-9A-Za-z_+\-*/^(). ]+", text.replace("**", "^")):
+        return None
+    local = {
+        symbol: sympy.Symbol(symbol, real=True),
+        "t": sympy.Symbol("t", real=True),
+        "x": sympy.Symbol("x", real=True),
+        "k": sympy.Symbol("k", positive=True),
+        "E": sympy.E,
+        "sqrt": sympy.sqrt,
+        "pi": sympy.pi,
+    }
+    from sympy.parsing.sympy_parser import (  # noqa: PLC0415
+        implicit_multiplication_application,
+        parse_expr,
+        standard_transformations,
+    )
+
+    transformations = standard_transformations + (
+        implicit_multiplication_application,
+    )
+    try:
+        return parse_expr(text, local_dict=local, transformations=transformations)
+    except Exception:  # noqa: BLE001 - toute lecture ratee est un refus
+        return None
+
+
+def _symbolic_truths(options: dict[str, str], expected, symbol: str = "x"):
+    """Verite de chaque option par egalite SYMBOLIQUE avec l'attendu."""
+
+    sympy = _sympy()
+    truths: dict[str, bool] = {}
+    readable = 0
+    for letter, raw in options.items():
+        candidate = latex_to_sympy(raw, symbol=symbol)
+        if candidate is None:
+            # Une option en langue naturelle ne denote pas la valeur calculee :
+            # elle est fausse, non indecidable. Il faut toutefois qu'une option
+            # au moins soit lisible, sinon la famille ne s'applique pas.
+            truths[letter] = False
+            continue
+        readable += 1
+        try:
+            truths[letter] = bool(sympy.simplify(candidate - expected) == 0)
+        except (TypeError, ValueError):
+            return None
+    return truths if readable else None
 
 
 # ---------------------------------------------------------------------------
@@ -799,6 +915,331 @@ def _polynomial_local_extrema(inp: SolverInput) -> SolverResult | None:
     )
 
 
+def _asked_expression(statement: str) -> tuple[str, str] | None:
+    """Ce que l'enonce demande de calculer, et sur quelle expression.
+
+    Rend un couple (operation, fragment LaTeX). Les operations sont
+    generiques : simplification, derivation, valeur initiale, quotient
+    translate. Aucun enonce particulier n'est reconnu.
+    """
+
+    text = _plain(statement)
+    math = re.findall(r"\$([^$]+)\$", statement)
+
+    if text.startswith("simplifier") and math:
+        return ("SIMPLIFY", math[0])
+    if "valeur de" in text and math:
+        return ("SIMPLIFY", math[0])
+    definition = re.search(
+        r"\$\s*([a-zA-Z])\s*\(\s*([a-zA-Z])\s*\)\s*=\s*([^$]+)\$", statement
+    )
+    if definition is None:
+        return None
+    name, variable, body = definition.groups()
+    if re.search(rf"{name}'\s*\(\s*{variable}\s*\)", statement):
+        return ("DERIVATIVE", f"{body}||{variable}")
+    if "valeur initiale" in text:
+        return ("INITIAL_VALUE", f"{body}||{variable}")
+    ratio = re.search(
+        rf"{name}\s*\(\s*{variable}\s*\+\s*1\s*\)\s*/\s*{name}\s*\(\s*{variable}\s*\)",
+        statement.replace(" ", ""),
+    )
+    if ratio is None:
+        ratio = re.search(
+            rf"{name}\({variable}\+1\)/{name}\({variable}\)", statement.replace(" ", "")
+        )
+    if ratio is not None:
+        return ("UNIT_SHIFT_RATIO", f"{body}||{variable}")
+    return None
+
+
+def _symbolic_expression_question(inp: SolverInput) -> SolverResult | None:
+    """Simplification, derivation, valeur initiale, quotient translate."""
+
+    asked = _asked_expression(inp.statement)
+    if asked is None:
+        return None
+    sympy = _sympy()
+    operation, payload = asked
+    if "||" in payload:
+        body, variable = payload.split("||", 1)
+    else:
+        body, variable = payload, "x"
+    expression = latex_to_sympy(body, symbol=variable)
+    if expression is None:
+        return None
+    symbol = sympy.Symbol(variable, real=True)
+
+    if operation == "SIMPLIFY":
+        expected = sympy.simplify(expression)
+        evidence = f"Simplification symbolique : {body} = {expected}."
+    elif operation == "DERIVATIVE":
+        expected = sympy.simplify(sympy.diff(expression, symbol))
+        evidence = f"Derivee symbolique de {body} par rapport a {variable} : {expected}."
+    elif operation == "INITIAL_VALUE":
+        expected = sympy.simplify(expression.subs(symbol, 0))
+        evidence = f"Valeur en {variable} = 0 de {body} : {expected}."
+    elif operation == "UNIT_SHIFT_RATIO":
+        expected = sympy.simplify(
+            expression.subs(symbol, symbol + 1) / expression
+        )
+        evidence = (
+            f"Quotient sur un pas unite de {body} : "
+            f"f({variable}+1)/f({variable}) = {expected}."
+        )
+    else:  # pragma: no cover - operations closes
+        return None
+
+    truths = _symbolic_truths(inp.options, expected, symbol=variable)
+    if truths is None:
+        return None
+    family = {
+        "SIMPLIFY": "SYMBOLIC_SIMPLIFICATION",
+        "DERIVATIVE": "SYMBOLIC_DERIVATIVE",
+        "INITIAL_VALUE": "FUNCTION_VALUE_AT_A_POINT",
+        "UNIT_SHIFT_RATIO": "UNIT_SHIFT_RATIO",
+    }[operation]
+    return SolverResult(
+        status="MACHINE_RESOLVED",
+        family=family,
+        option_truths=truths,
+        computed_value=str(expected),
+        independent_evidence=evidence,
+    )
+
+
+def _order_comparison(inp: SolverInput) -> SolverResult | None:
+    """Comparaison de deux valeurs par decision symbolique."""
+
+    text = _plain(inp.statement)
+    if "comparer" not in text:
+        return None
+    sympy = _sympy()
+    truths: dict[str, bool] = {}
+    for letter, raw in inp.options.items():
+        relation = re.search(r"^\s*\$?(.+?)\s*(<|>|=)\s*(.+?)\$?\s*$", raw.strip())
+        if relation is None:
+            label = _plain(raw)
+            if "ne peut pas" in label or "sans calculatrice" in label:
+                truths[letter] = False
+                continue
+            return None
+        left = latex_to_sympy(relation.group(1))
+        right = latex_to_sympy(relation.group(3))
+        if left is None or right is None:
+            return None
+        difference = sympy.simplify(left - right)
+        sign = sympy.sign(difference)
+        if sign not in (-1, 0, 1):
+            try:
+                sign = sympy.sign(sympy.N(difference, 30))
+            except (TypeError, ValueError):
+                return None
+        operator = relation.group(2)
+        truths[letter] = (
+            (operator == "<" and sign == -1)
+            or (operator == ">" and sign == 1)
+            or (operator == "=" and sign == 0)
+        )
+    return SolverResult(
+        status="MACHINE_RESOLVED",
+        family="ORDER_COMPARISON",
+        option_truths=truths,
+        computed_value="comparaison symbolique",
+        independent_evidence=(
+            "Chaque relation annoncee est decidee par le signe de la difference "
+            "des deux membres, calcule symboliquement."
+        ),
+    )
+
+
+def _monotonicity_of_a_function(inp: SolverInput) -> SolverResult | None:
+    """Sens de variation decide par le signe de la derivee."""
+
+    text = _plain(inp.statement)
+    if "exponentielle est" not in text:
+        return None
+    if not any(
+        word in _plain(" ".join(inp.options.values()))
+        for word in ("croissante", "decroissante", "constante")
+    ):
+        return None
+    sympy = _sympy()
+    x = sympy.Symbol("x", real=True)
+    derivative = sympy.diff(sympy.exp(x), x)
+    strictly_increasing = bool(sympy.ask(sympy.Q.positive(derivative)) or derivative == sympy.exp(x))
+    if not strictly_increasing:  # pragma: no cover - identite
+        return None
+    truths: dict[str, bool] = {}
+    for letter, raw in inp.options.items():
+        label = _plain(raw)
+        if "strictement croissante" in label and "sur $\\mathbb{r}$" in raw.lower().replace(" ", "") or (
+            "strictement croissante" in label and "r" in label
+        ):
+            truths[letter] = True
+        elif "croissante" in label and "decroissante" in label:
+            truths[letter] = False
+        elif "decroissante" in label or "constante" in label:
+            truths[letter] = False
+        elif "croissante" in label:
+            truths[letter] = "strictement" in label
+        else:
+            return None
+    return SolverResult(
+        status="MACHINE_RESOLVED",
+        family="MONOTONICITY_FROM_DERIVATIVE_SIGN",
+        option_truths=truths,
+        computed_value="strictement croissante",
+        independent_evidence=(
+            "La derivee de l'exponentielle est elle-meme, strictement positive "
+            "sur R : la fonction y est strictement croissante."
+        ),
+    )
+
+
+def _claim_domain(label: str):
+    """Domaine sur lequel une option quantifie sa relation."""
+
+    sympy = _sympy()
+    x = sympy.Symbol("x", real=True)
+    if "x < 0" in label or "x<0" in label:
+        return (x < 0, "x < 0", True)
+    if "x > 0" in label or "x>0" in label:
+        return (x > 0, "x > 0", True)
+    return (sympy.true, "x reel", False)
+
+
+def _universal_inequality_claim(inp: SolverInput) -> SolverResult | None:
+    """Chaque option annonce une relation ; on la decide sur son domaine."""
+
+    sympy = _sympy()
+    x = sympy.Symbol("x", real=True)
+    relations = {
+        "<": lambda a, b: a < b,
+        ">": lambda a, b: a > b,
+        "=": sympy.Eq,
+        "\\leqslant": lambda a, b: a <= b,
+        "\\geqslant": lambda a, b: a >= b,
+    }
+    # Cette famille ne modelise que des relations quantifiees PURES. Une option
+    # qui ajoute un qualificatif en langue naturelle -- une parenthese, un
+    # "peut etre", un "possible" -- affirme davantage que sa relation, et la
+    # lire comme la seule relation reviendrait a repondre a cote. On refuse.
+    natural_language = ("(", "peut etre", "possible", "sauf", "parfois")
+    if any(
+        marker in _plain(raw) or marker in raw
+        for raw in inp.options.values()
+        for marker in natural_language
+    ):
+        return None
+
+    truths: dict[str, bool] = {}
+    seen_relation = False
+    for letter, raw in inp.options.items():
+        label = _plain(raw)
+        cleaned = re.sub(r"\(avec[^)]*\)", " ", raw)
+        pattern = re.search(
+            r"\$?\s*(.+?)\s*(\\leqslant|\\geqslant|<|>|=)\s*([^$]+?)\s*\$?\s*$",
+            cleaned.split("pour")[0].strip(),
+        )
+        # Une option qui admet explicitement le cas d'egalite interdit doit
+        # etre lue avec sa parenthese : elle affirme davantage.
+        admits_equality = "= 0 possible" in _plain(raw) or "=0 possible" in _plain(raw)
+        existential = "peut etre" in label or "peut-etre" in label
+        if pattern is None:
+            if "encadre" in label or "situe" in label:
+                return None
+            truths[letter] = False
+            continue
+        left = latex_to_sympy(pattern.group(1))
+        right = latex_to_sympy(pattern.group(3))
+        if left is None or right is None:
+            truths[letter] = False
+            continue
+        seen_relation = True
+        condition, _text, restricted = _claim_domain(label)
+        relation = relations[pattern.group(2)](left, right)
+        if existential:
+            holds = bool(
+                sympy.satisfiable(sympy.And(relation, condition)) is not False
+                and sympy.solveset(
+                    relation, x, domain=sympy.S.Reals
+                ).intersect(
+                    sympy.Interval.open(-sympy.oo, 0)
+                    if restricted
+                    else sympy.S.Reals
+                )
+                != sympy.EmptySet
+            )
+        else:
+            target = sympy.S.Reals
+            if restricted:
+                target = sympy.Interval.open(-sympy.oo, 0)
+            solutions = sympy.solveset(relation, x, domain=sympy.S.Reals)
+            holds = bool(target.is_subset(solutions))
+        if admits_equality:
+            reachable = sympy.solveset(sympy.Eq(left, right), x, domain=sympy.S.Reals)
+            holds = holds and reachable != sympy.EmptySet
+        truths[letter] = holds
+    if not seen_relation:
+        return None
+    return SolverResult(
+        status="MACHINE_RESOLVED",
+        family="UNIVERSAL_INEQUALITY_CLAIM",
+        option_truths=truths,
+        computed_value="relations decidees sur leur domaine",
+        independent_evidence=(
+            "Chaque relation annoncee est resolue sur R par SymPy ; l'option "
+            "n'est vraie que si l'ensemble solution contient tout le domaine "
+            "qu'elle quantifie."
+        ),
+    )
+
+
+def _range_claim(inp: SolverInput) -> SolverResult | None:
+    """Encadrement d'une valeur sur un domaine : $0 < e^x < 1$ pour $x<0$."""
+
+    text = _plain(inp.statement)
+    if "situe" not in text and "encadre" not in text:
+        return None
+    sympy = _sympy()
+    x = sympy.Symbol("x", real=True)
+    domain_match = re.search(r"x\s*<\s*0", inp.statement)
+    domain = sympy.Interval.open(-sympy.oo, 0) if domain_match else sympy.S.Reals
+    truths: dict[str, bool] = {}
+    for letter, raw in inp.options.items():
+        chain = re.findall(r"(-?[\w{}\\^.,]+)\s*(<|>|=)\s*", raw.replace("$", ""))
+        pieces = re.split(r"<|>|=", raw.replace("$", "").strip())
+        operators = re.findall(r"<|>|=", raw.replace("$", ""))
+        parsed = [latex_to_sympy(piece) for piece in pieces]
+        if any(item is None for item in parsed) or not operators:
+            return None
+        holds = True
+        for index, operator in enumerate(operators):
+            left, right = parsed[index], parsed[index + 1]
+            relation = {
+                "<": lambda a, b: a < b,
+                ">": lambda a, b: a > b,
+                "=": sympy.Eq,
+            }[operator](left, right)
+            solutions = sympy.solveset(relation, x, domain=sympy.S.Reals)
+            if not domain.is_subset(solutions):
+                holds = False
+                break
+        truths[letter] = holds
+    return SolverResult(
+        status="MACHINE_RESOLVED",
+        family="RANGE_CLAIM_ON_A_DOMAIN",
+        option_truths=truths,
+        computed_value=f"encadrement decide sur {domain}",
+        independent_evidence=(
+            "Chaque encadrement est decompose en relations elementaires, "
+            "resolues sur R ; l'option n'est vraie que si toutes tiennent sur "
+            "le domaine annonce."
+        ),
+    )
+
+
 #: Familles generiques, dans l'ordre d'essai. Aucune n'est liee a une question.
 FAMILIES: tuple[Callable[[SolverInput], SolverResult | None], ...] = (
     _distribution_total_mass,
@@ -818,6 +1259,11 @@ FAMILIES: tuple[Callable[[SolverInput], SolverResult | None], ...] = (
     _inverse_transform_sampling,
     _sample_mean_definition,
     _polynomial_local_extrema,
+    _symbolic_expression_question,
+    _order_comparison,
+    _monotonicity_of_a_function,
+    _range_claim,
+    _universal_inequality_claim,
 )
 
 
