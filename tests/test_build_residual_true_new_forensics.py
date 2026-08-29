@@ -107,9 +107,15 @@ def test_builds_exact_residual_without_mutating_frozen_inputs(tmp_path: Path) ->
     assert set(algebra["sets"]["REMOVED"]) == REMOVED_FINGERPRINTS
     assert algebra["sets"]["NEW_AFTER_TRIAGE"] == []
     full = algebra["full_current_algebra"]
-    assert full["cardinality_equation"] == "2232 = 2121 + 9 + 89 + 13"
-    assert full["cardinalities"]["CURRENT_ACTIVE"] == 2232
+    # La dette VARALEA C6/C7 est un CINQUIEME composant nomme et disjoint,
+    # jamais fondu dans le residuel gele des 18 : 2244 = 2232 + 12.
+    assert full["cardinality_equation"] == "2244 = 2121 + 9 + 89 + 13 + 12"
+    assert full["cardinalities"]["CURRENT_ACTIVE"] == 2244
     assert full["cardinalities"]["TRUE_NEW"] == 13
+    assert full["cardinalities"]["VARALEA_C6C7_REVIEW_DEBT"] == 12
+    assert set(full["sets"]["VARALEA_C6C7_REVIEW_DEBT"]).isdisjoint(
+        full["sets"]["TRUE_NEW"]
+    )
     assert full["equalities"]["current_partition"] is True
     assert full["equalities"]["current_partition_pairwise_disjoint"] is True
     assert full["unknown_count"] == 0

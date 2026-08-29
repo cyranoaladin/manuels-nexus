@@ -25,6 +25,10 @@ INITIAL_JSON_REL = Path("audit/TRUE_NEW_18_FORENSICS.json")
 INITIAL_MD_REL = Path("audit/TRUE_NEW_18_FORENSICS.md")
 INVENTORY_REL = Path("audit/INVENTAIRE_COLLECTION.json")
 INITIAL_ALGEBRA_REL = Path("audit/CURRENT_ANOMALY_SET_ALGEBRA.json")
+#: Classe de dette declaree separement, posterieure au gel des 18.
+#: Elle n'est jamais fondue dans le modele residuel : elle en est un
+#: composant nomme, disjoint et explicitement bloquant pour la release.
+VARALEA_DEBT_REL = Path("audit/VARALEA_C6C7_REVIEW_DEBT_12.json")
 
 FROZEN_SHA256 = {
     INITIAL_JSON_REL: "4833f06833633d7d7d27cfb00de4f4c1bb4083288aa1cf784e5e08bc037c76b5",
@@ -199,6 +203,37 @@ def _read_json(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ValueError(f"racine JSON non objet: {path}")
     return value
+
+
+def _declared_varalea_debt(root: Path) -> set[str]:
+    """Empreintes de la dette VARALEA C6/C7, telle que son registre la declare.
+
+    Le registre est une autorite d'OBSERVATION : il n'inscrit rien dans la
+    baseline et ne qualifie rien. Le lire ici sert uniquement a ne pas
+    confondre cette classe avec le residuel gele des 18.
+    """
+
+    ledger = _read_json(root / VARALEA_DEBT_REL)
+    entries = ledger.get("entries")
+    if not isinstance(entries, list) or len(entries) != ledger.get("count"):
+        raise ValueError("registre VARALEA C6/C7 incoherent")
+    fingerprints = {str(entry["fingerprint"]) for entry in entries}
+    if len(fingerprints) != len(entries):
+        raise ValueError("empreintes VARALEA C6/C7 non univoques")
+    if ledger.get("in_approved_baseline") is not False:
+        raise ValueError("la dette VARALEA C6/C7 ne doit pas etre en baseline")
+    if ledger.get("release_blocking") is not True:
+        raise ValueError("la dette VARALEA C6/C7 doit rester bloquante")
+    for entry in entries:
+        if (
+            entry.get("policy_disposition") != "open_debt"
+            or entry.get("release_acceptance") is not False
+            or entry.get("in_approved_baseline") is not False
+        ):
+            raise ValueError(
+                f"ligne VARALEA C6/C7 non conforme: {entry.get('fingerprint')}"
+            )
+    return fingerprints
 
 
 def _validate_frozen_inputs(root: Path) -> tuple[Path, Path]:
@@ -415,7 +450,8 @@ def build_reports(
         raise ValueError("inventaire sans qualifications d'anomalies")
     active_unqualified = _active_unqualified(qualifications)
     active_open_debt = _active_open_debt(qualifications)
-    extra = sorted(active_unqualified - initial_fingerprints)
+    varalea_debt = _declared_varalea_debt(root)
+    extra = sorted(active_unqualified - initial_fingerprints - varalea_debt)
     if extra:
         raise ValueError(
             "ensemble actif non qualifié inattendu: "
@@ -548,12 +584,14 @@ def build_reports(
         | transition_new
         | expected_review_debt
         | residual_fingerprints
+        | varalea_debt
     )
     current_components = (
         unchanged,
         transition_new,
         expected_review_debt,
         residual_fingerprints,
+        varalea_debt,
     )
     current_pairwise_disjoint = all(
         not left & right
@@ -570,6 +608,7 @@ def build_reports(
         "APPROVED_TRANSITION_OLD": transition_old,
         "APPROVED_TRANSITION_NEW": transition_new,
         "TRUE_NEW": residual_fingerprints,
+        "VARALEA_C6C7_REVIEW_DEBT": varalea_debt,
         "CURRENT_ACTIVE": current_active,
         "UNCHANGED": unchanged,
     }
@@ -594,7 +633,7 @@ def build_reports(
         "cardinality_equation": (
             f"{len(current_active)} = {len(unchanged)} + "
             f"{len(transition_new)} + {len(expected_review_debt)} + "
-            f"{len(residual_fingerprints)}"
+            f"{len(residual_fingerprints)} + {len(varalea_debt)}"
         ),
         "equalities": {
             "baseline_partition": (
@@ -640,8 +679,11 @@ def build_reports(
             "initial_still_active_open_debt": (
                 active_residual_debt == residual_fingerprints
             ),
+            # Le modele residuel porte sur le gel des 18. La dette VARALEA
+            # C6/C7 en est exclue par construction : elle est comptee, nommee
+            # et bloquante dans son propre composant de l'algebre courante.
             "no_new_after_triage": not (
-                active_unqualified - initial_fingerprints
+                active_unqualified - initial_fingerprints - varalea_debt
             ),
             "residual_equation": (
                 len(residual_fingerprints)
@@ -658,6 +700,9 @@ def build_reports(
             "REVIEW_CLOSED": sorted(review_closed),
             "NEW_AFTER_TRIAGE": [],
             "RESIDUAL_TRUE_NEW": residual_set,
+            "EXCLUDED_DECLARED_SEPARATE_DEBT": {
+                "VARALEA_C6C7_REVIEW_DEBT": sorted(varalea_debt),
+            },
         },
         "full_current_algebra": full_current_algebra,
         "evidence": evidence,
