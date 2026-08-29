@@ -6,8 +6,10 @@
   "status": "PENDING_UNASSIGNED"
  },
  "blocking_algebra": {
+  "CANONICAL_PRODUCER_COUNT": 167,
   "CURRENT_BLOCKING_FINGERPRINTS": 168,
   "CURRENT_OBJECTS": 167,
+  "INDEPENDENT_ENUMERATION_COUNT": 167,
   "UNKNOWN": 0,
   "chapter_level_blocking": 1,
   "chapter_level_detail": [
@@ -18,12 +20,12 @@
     "status": "draft"
    }
   ],
+  "ecart_symetrique": [],
   "equation": "167*1 + 0 + 1 = 168",
   "objects_with_0_blocking": 0,
   "objects_with_1_blocking": 167,
   "objects_with_2plus_blocking": 0,
-  "objects_with_2plus_detail": {},
-  "source_sha": "3558807a4775445b9c4fd261ea1c518ddc545a77"
+  "source_sha": "76497725cf21544e220fb5402758ef1d77499b00"
  },
  "build_receipts": {
   "DONE": true,
@@ -180,13 +182,13 @@
     "exists": true,
     "pages": 357,
     "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
-    "sha256": "sha256:a10061610f829f9b662f8a64eaa514f1723c677229caf6584bf8366e5ca0a9c4"
+    "sha256": "sha256:2a807d43e9f40fc6a9d12ef223de018d52385cd68ffd640051205a79c1c2561c"
    },
    {
     "exists": true,
     "pages": 629,
     "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf",
-    "sha256": "sha256:ff8129db07b4dd22d54e2a8c98c250e9694047dd0985dead08599f82a947a93a"
+    "sha256": "sha256:5254f5a242c2f9d28935c9ff60fe31fa820f6e7d0fa44a9b012c5562acd8ed22"
    }
   ],
   "objects": [
@@ -607,25 +609,25 @@
    {
     "id": "1SPE-VARALEA-EV-A-corrige",
     "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/1SPE-VARALEA-EV-A-corrige.tex",
-    "sha256": "sha256:1cf93162963155a33e03fa49973d487ca39bde01f062fc8cc8635c00d2726816",
+    "sha256": "sha256:b2e6cc5ad67a833aedf1f1f7aaf2a851dd8e5eaccec2b3621b5eeda3ca3d191b",
     "type": "corrige_evaluation"
    },
    {
     "id": "1SPE-VARALEA-EV-A",
     "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/1SPE-VARALEA-EV-A.tex",
-    "sha256": "sha256:5b17b0b6f81becc7bdf8aa8bcab2c4f85da5cb1e613bff39aeed3511581ad198",
+    "sha256": "sha256:6944bdf9439e7e6dafc66cea8dfc3f59575f5aead54c886a18f7d343451e4207",
     "type": "evaluation"
    },
    {
     "id": "1SPE-VARALEA-EV-B-corrige",
     "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/1SPE-VARALEA-EV-B-corrige.tex",
-    "sha256": "sha256:790ced4a1d1cfe4a64623300160ec78f55d3c5b1336269617aad1275bbf22d15",
+    "sha256": "sha256:a63baadecf231ff8f9f9c888d03f7f79487a86aeec97a06c0df3316788a47819",
     "type": "corrige_evaluation"
    },
    {
     "id": "1SPE-VARALEA-EV-B",
     "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/1SPE-VARALEA-EV-B.tex",
-    "sha256": "sha256:e7cded60374cd8f8eeeb7f190ecebd04c0aa99b3eeb1d7e423f76ca826699482",
+    "sha256": "sha256:58daff51d7542078523712ef8a19df5df02cc71fcb7cf3d6d1656c2d83513cc7",
     "type": "evaluation"
    },
    {
@@ -1547,7 +1549,102 @@
   "prechecked_decision": false,
   "status_or_full_transition": false
  },
- "packet_id": "1SPE-VARALEA-EXPERT_PROGRAMME_PEDAGOGIE-NEUTRAL-3558807a",
+ "new_objects_in_scope": {
+  "count": 12,
+  "fingerprint_set_digest": "sha256:c28b82aad3d8d65c428ae3d28ab92e9f6fbf06656cfba2abf9ae245bb0a8e507",
+  "human_review_required": true,
+  "ledger_id": "VARALEA_C6C7_REVIEW_DEBT_12",
+  "note": "Ces douze objets ont ete crees pour completer la chaine des six maillons de C6 et C7. Leur creation est autorisee ; leur CONTENU n'est pas approuve. Ils font partie integrante du perimetre de cette revue.",
+  "objects": [
+   {
+    "fingerprint": "0dd5732440ea28e0",
+    "logical_owner": "direction_scientifique_programme",
+    "object_id": "1SPE-VARALEA-CO-051",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-051.tex",
+    "status": "generated"
+   },
+   {
+    "fingerprint": "c179f6fe227a7e00",
+    "logical_owner": "direction_scientifique_programme",
+    "object_id": "1SPE-VARALEA-CO-052",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-052.tex",
+    "status": "generated"
+   },
+   {
+    "fingerprint": "7f9c8c639d17cad7",
+    "logical_owner": "direction_scientifique_programme",
+    "object_id": "1SPE-VARALEA-CO-053",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-053.tex",
+    "status": "generated"
+   },
+   {
+    "fingerprint": "d918dc77985a97b3",
+    "logical_owner": "direction_scientifique_programme",
+    "object_id": "1SPE-VARALEA-CO-054",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-054.tex",
+    "status": "generated"
+   },
+   {
+    "fingerprint": "920c28acd7b14bfc",
+    "logical_owner": "direction_scientifique_programme",
+    "object_id": "1SPE-VARALEA-EX-051",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-051.tex",
+    "status": "generated"
+   },
+   {
+    "fingerprint": "04f8fa9d3f54a619",
+    "logical_owner": "direction_scientifique_programme",
+    "object_id": "1SPE-VARALEA-EX-052",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-052.tex",
+    "status": "generated"
+   },
+   {
+    "fingerprint": "747e0072f8708757",
+    "logical_owner": "direction_scientifique_programme",
+    "object_id": "1SPE-VARALEA-EX-053",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-053.tex",
+    "status": "generated"
+   },
+   {
+    "fingerprint": "e8f17e2dd150d6b2",
+    "logical_owner": "direction_scientifique_programme",
+    "object_id": "1SPE-VARALEA-EX-054",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-054.tex",
+    "status": "generated"
+   },
+   {
+    "fingerprint": "8359be36ea9b8fb5",
+    "logical_owner": "direction_scientifique_programme",
+    "object_id": "1SPE-VARALEA-ME-008",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/methodes/1SPE-VARALEA-ME-008.tex",
+    "status": "needs_review"
+   },
+   {
+    "fingerprint": "b9b9287443b9aca2",
+    "logical_owner": "direction_scientifique_programme",
+    "object_id": "1SPE-VARALEA-ME-009",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/methodes/1SPE-VARALEA-ME-009.tex",
+    "status": "needs_review"
+   },
+   {
+    "fingerprint": "69e1e84e7fc96997",
+    "logical_owner": "direction_editoriale_pedagogique",
+    "object_id": "1SPE-VARALEA-RE-C6",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/remediation/1SPE-VARALEA-RE-C6.tex",
+    "status": "generated"
+   },
+   {
+    "fingerprint": "2f19b6e6ebd745d8",
+    "logical_owner": "direction_editoriale_pedagogique",
+    "object_id": "1SPE-VARALEA-RE-C7",
+    "path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/remediation/1SPE-VARALEA-RE-C7.tex",
+    "status": "generated"
+   }
+  ],
+  "release_acceptance": false,
+  "release_blocking": true
+ },
+ "packet_id": "1SPE-VARALEA-EXPERT_PROGRAMME_PEDAGOGIE-NEUTRAL-76497725",
  "raster_qa": [
   {
    "UNKNOWN": 0,
@@ -1723,8 +1820,8 @@
  "source_state": {
   "object_count": 167,
   "object_set_digest": "sha256:c2cb414a04fedd23b828e3d218b8d2450313ccaf867d76d0d70bfd02dc0a6bbf",
-  "render_digest": "sha256:eaf0143ada1781bd23b77e97a49b80bb7174be611253948b95216a846a038f8e",
-  "semantic_review_digest": "sha256:ada0462679efb8d374493a1c18d0ba795b496c59a5a97a526ab4120892753a3c",
-  "source_sha": "3558807a4775445b9c4fd261ea1c518ddc545a77"
+  "render_digest": "sha256:99f45ed1c7c9875ef099bf7ff595405ce21197fb52bf595313e1328b264efbc1",
+  "semantic_review_digest": "sha256:f104edb566e1a32b388db92842d6f00869fa0d8d50a8a371c9cc23a9838d4d64",
+  "source_sha": "76497725cf21544e220fb5402758ef1d77499b00"
  }
 }

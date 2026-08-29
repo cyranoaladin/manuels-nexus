@@ -1,0 +1,281 @@
+{
+ "chapter": "1SPE-VARIABLES-ALEATOIRES",
+ "source_sha": "c6f00e6f3117250c55f4dd7a052c3f5199493534",
+ "science": {
+  "found": 4,
+  "fixed": 4,
+  "unresolved": 0,
+  "items": [
+   {
+    "id": "SCI-01",
+    "severity": "P0",
+    "found_in": "CO-048",
+    "defect": "ecart type de diversification faux",
+    "fixed_by": "691b6354",
+    "status": "FIXED"
+   },
+   {
+    "id": "SCI-02",
+    "severity": "P1",
+    "found_in": "CO-048",
+    "defect": "trois affirmations du texte (V(G), sigma(G), sigma divise par racine de 5) n'etaient assertees par aucun oracle",
+    "fixed_by": "a51e212d",
+    "status": "FIXED"
+   },
+   {
+    "id": "SCI-03",
+    "severity": "P1",
+    "found_in": "cours/experimentations 05 et 06",
+    "defect": "deux assertions sur sigma sans variance locale calculee",
+    "fixed_by": "4315d536",
+    "status": "FIXED"
+   },
+   {
+    "id": "SCI-04",
+    "severity": "P1",
+    "found_in": "nouveaux corriges C6/C7",
+    "defect": "trois valeurs annoncees fausses avant verification (ecart a n=400 et deux proportions)",
+    "fixed_by": "fa62abd7",
+    "status": "FIXED",
+    "note": "defauts introduits par la redaction machine, detectes par execution avant publication"
+   }
+  ]
+ },
+ "pedagogy": {
+  "found": 7,
+  "fixed": 7,
+  "unresolved": 0,
+  "items": [
+   {
+    "id": "PED-01",
+    "severity": "P1",
+    "found_in": "contrat.yaml",
+    "defect": "cinq atomes officiels obligatoires (1SPE-OFFICIAL-175 a 179) visaient deux capacites absentes du contrat",
+    "fixed_by": "4315d536",
+    "status": "FIXED"
+   },
+   {
+    "id": "PED-02",
+    "severity": "P1",
+    "found_in": "QCM Q1",
+    "defect": "deux options egales a 1/2 (3/6 et 1/2) avec deux diagnostics distincts : l'eleve devenait indiagnosticable",
+    "fixed_by": "4315d536",
+    "status": "FIXED"
+   },
+   {
+    "id": "PED-03",
+    "severity": "P1",
+    "found_in": "cours/experimentations",
+    "defect": "contenu purement expositif : aucune tache ne demandait d'ecrire du Python, alors que le programme exige « lire, comprendre ET ecrire »",
+    "fixed_by": "fa62abd7",
+    "status": "FIXED"
+   },
+   {
+    "id": "PED-04",
+    "severity": "P1",
+    "found_in": "cours/12_C3",
+    "defect": "aucune tache de construction de l'arbre de quatre epreuves ; un paragraphe de transfert ne suffit pas",
+    "fixed_by": "fa62abd7",
+    "status": "FIXED"
+   },
+   {
+    "id": "PED-05",
+    "severity": "P1",
+    "found_in": "remediation",
+    "defect": "C6 et C7 n'avaient aucune remediation alors que les dix autres capacites en avaient une",
+    "fixed_by": "8e77e47b",
+    "status": "FIXED",
+    "artefacts": [
+     "RE-C6",
+     "RE-C7"
+    ]
+   },
+   {
+    "id": "PED-06",
+    "severity": "P1",
+    "found_in": "cours/00_ouverture",
+    "defect": "le contrat eleve annoncait cinq capacites alors que le chapitre en enseigne, remedie et evalue sept",
+    "fixed_by": "954edd9e",
+    "status": "FIXED"
+   },
+   {
+    "id": "PED-07",
+    "severity": "P1",
+    "found_in": "chaine des six maillons",
+    "defect": "C6 et C7 n'avaient ni fiche methode, ni exercice, ni corrige, ni item d'evaluation ; les cinq atomes officiels 175 a 179 restaient en gap_type=CONTENT_MISSING",
+    "fixed_by": "f41bbc49",
+    "status": "FIXED",
+    "artefacts": [
+     "ME-008",
+     "ME-009",
+     "EX-051..054",
+     "CO-051..054",
+     "EV-A ex.4",
+     "EV-B ex.4"
+    ],
+    "cause_racine": "le verificateur pedagogique exemptait explicitement C6 et C7 du controle d'alignement d'evaluation, puis la version suivante avait perdu le predicat ; corrige par PED-CHAINE-* et PED-EVAL-ALIGN sans exemption"
+   }
+  ]
+ },
+ "editorial": {
+  "found": 10,
+  "fixed": 10,
+  "unresolved": 0,
+  "items": [
+   {
+    "id": "EDI-01",
+    "severity": "P0",
+    "found_in": "scripts/build_qcm_tex.py",
+    "defect": "le producteur n'echappait pas %, # et & hors mode mathematique : troncature silencieuse au rendu",
+    "fixed_by": "beecb52c + 4344c1c4",
+    "status": "FIXED",
+    "class": "QCM_RENDER_SEMANTIC_PRESERVATION_FAILURE"
+   },
+   {
+    "id": "EDI-02",
+    "severity": "P0",
+    "found_in": "scripts/build_qcm_tex.py",
+    "defect": "le tilde etait rendu comme espace insecable : perte du symbole de loi X ~ B(n,p)",
+    "fixed_by": "98a32930",
+    "status": "FIXED",
+    "class": "QCM_RENDER_SEMANTIC_PRESERVATION_FAILURE"
+   },
+   {
+    "id": "EDI-03",
+    "severity": "P0",
+    "found_in": "QCM VARALEA Q16",
+    "defect": "double echappement de l'underscore : erreur LaTeX fatale, aucun PDF produit pour les deux variantes",
+    "fixed_by": "48148a12",
+    "status": "FIXED"
+   },
+   {
+    "id": "EDI-04",
+    "severity": "P2",
+    "found_in": "QCM VARALEA (JSON)",
+    "defect": "formes francaises non accentuees dans les enonces, options et diagnostics",
+    "fixed_by": "fc39e029",
+    "status": "FIXED"
+   },
+   {
+    "id": "EDI-05",
+    "severity": "P2",
+    "found_in": "QCM VARALEA (JSON)",
+    "defect": "31 champs encore non accentues, non couverts par la campagne precedente",
+    "fixed_by": "ec459b29",
+    "status": "FIXED",
+    "note": "invalide l'annonce anterieure « VARALEA 0 restant », faite sur une liste de formes trop etroite"
+   },
+   {
+    "id": "EDI-06",
+    "severity": "P2",
+    "found_in": "scripts/build_qcm_tex.py",
+    "defect": "cinq chaines du gabarit rendues sans accents dans les 35 QCM de la collection",
+    "fixed_by": "ec459b29",
+    "status": "FIXED",
+    "blast_radius": "35 QCM regeneres, 0 ligne hors gabarit hors VARALEA"
+   },
+   {
+    "id": "EDI-07",
+    "severity": "P2",
+    "found_in": "cours/00_ouverture",
+    "defect": "« cinq familles de prerequis » pour quatre listees",
+    "fixed_by": "954edd9e",
+    "status": "FIXED"
+   },
+   {
+    "id": "EDI-10",
+    "severity": "P2",
+    "found_in": "evaluations EV-A et EV-B",
+    "defect": "ma completion C6/C7 avait fait deriver le bareme de 20 a 25 points et la duree de 55 a 70 minutes, sans aucune autorite : docs/01 fixe 55 min, la collection compte 60 evaluations a 20 points, et l'historique VARALEA donnait 55/20",
+    "fixed_by": "c6f00e6f",
+    "status": "FIXED",
+    "note": "retour au format par retrait de deux redondances reelles et rebalancement des ponderations ; C6 et C7 restent evaluees dans les deux versions et l'equivalence structurelle A/B devient exacte"
+   },
+   {
+    "id": "EDI-09",
+    "severity": "P2",
+    "found_in": "build/maquette-v5/manifest.json",
+    "defect": "l'accentuation du gabarit a change le sha256 du QCM de reference 1SPE-DERIVATION-LOCAL ; 17 tests de test_maquette_v5.py echouaient, hors de ma batterie ciblee",
+    "fixed_by": "f41bbc49",
+    "status": "FIXED",
+    "note": "diff verifie ligne a ligne avant re-epingle : 18 lignes, toutes orthographiques, aucune sur le contenu des questions"
+   },
+   {
+    "id": "EDI-08",
+    "severity": "P1",
+    "found_in": "QCM VARALEA Q17",
+    "defect": "l'enonce disait l'echantillon « stocke dans somme » alors que somme contient la somme ; la cle n'etait coherente qu'avec la seconde lecture",
+    "fixed_by": "ec459b29",
+    "status": "FIXED"
+   }
+  ]
+ },
+ "requalified_false_positives": [
+  {
+   "check": "sigma class audit",
+   "faux_positifs": 6,
+   "cause": "le parseur prenait le premier membre d'une chaine d'egalites et tronquait un radicande a accolades imbriquees"
+  },
+  {
+   "check": "verification des cles QCM",
+   "faux_positifs": "parseur",
+   "cause": "suppression aveugle des accolades, unites « euros » et signe pourcent non geres"
+  },
+  {
+   "check": "exercices sans capacite",
+   "faux_positifs": 19,
+   "cause": "objets correctement tagues extension_codes X1 / OPTIONAL_EXTENSION"
+  },
+  {
+   "check": "ED-TYP-01 espaces multiples",
+   "faux_positifs": 597,
+   "cause": "artefact du retrait des segments math par le verificateur lui-meme"
+  },
+  {
+   "check": "ED-NOT-01 decimales a point",
+   "faux_positifs": 13,
+   "cause": "motif franchissant la frontiere entre deux segments $...$ ; les 31 occurrences reelles sont en commentaire, coordonnee TikZ ou code Python"
+  },
+  {
+   "check": "ED-ACC-01 dans le code",
+   "faux_positifs": 32,
+   "cause": "identifiants et chaines Python : convention ASCII verifiee sur toute la collection (0 chaine accentuee sur 15)"
+  },
+  {
+   "check": "ED-ACC-01 noms de macros",
+   "faux_positifs": 16,
+   "cause": "\\propriete, \\definition, \\verifier sont des noms de macros et doivent rester ASCII"
+  },
+  {
+   "check": "PED-CAP-01 coups de pouce",
+   "faux_positifs": 18,
+   "cause": "capacite heritee de l'exercice via exercice_id"
+  },
+  {
+   "check": "PED-EX-03 questions numerotees",
+   "faux_positifs": 4,
+   "cause": "un exercice a tache unique n'a pas besoin d'enumerate"
+  },
+  {
+   "check": "PED-BODY-02 inachevement",
+   "faux_positifs": 1,
+   "cause": "« a completer » est une consigne adressee a l'eleve dans un squelette Python"
+  },
+  {
+   "check": "ED-CON-01 consigne",
+   "faux_positifs": 2,
+   "cause": "« Demontrer » et « En deduire » manquaient a la liste de verbes"
+  },
+  {
+   "check": "corriges retrouves au PDF",
+   "faux_positifs": "46 puis 15",
+   "cause": "rapprochement par fragments : le PDF replie les lignes et ma regex laissait {ID} dans le texte compare ; remplace par la preuve structurelle des masters"
+  },
+  {
+   "check": "fuite de CO-011 cote eleve",
+   "faux_positifs": 1,
+   "cause": "la phrase figure a l'identique dans le cours, donc legitimement visible"
+  }
+ ],
+ "note": "« 167/167, 0 constat » decrit l'etat final, pas la passe : celle-ci a trouve 21 defauts reels."
+}
