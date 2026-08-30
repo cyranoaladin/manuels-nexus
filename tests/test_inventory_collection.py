@@ -3787,6 +3787,8 @@ def test_repository_baseline_is_frozen_schema_valid_and_gate_green(
 DECLARED_DEBT_LEDGERS = (
     "audit/VARALEA_C6C7_REVIEW_DEBT_12.json",
     "audit/EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1.json",
+    "audit/NSI_TC_QCM_AND_EVAL_REVIEW_DEBT_4.json",
+    "audit/TNSI_PROJET_QCM_REVIEW_DEBT_1.json",
 )
 
 

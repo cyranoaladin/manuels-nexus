@@ -1,0 +1,81 @@
+{
+ "artifact_type": "BLOCKING_REVIEW_DEBT_LEDGER",
+ "ledger_id": "NSI_TC_QCM_AND_EVAL_REVIEW_DEBT_4",
+ "schema_version": 1,
+ "source_sha": "76d0a5ebc91cfc064c33945f7a3e2395e1256a84",
+ "chapter": "1NSI-TYPES-CONSTRUITS",
+ "count": 4,
+ "fingerprint_set_digest": "sha256:8885ad1dc797ce66490cb8ce083f42536aa7b637c2221aac9e459c3cf49fa706",
+ "human_review_required": true,
+ "release_blocking": true,
+ "release_acceptance": false,
+ "in_approved_baseline": false,
+ "is_baseline_qualification": false,
+ "is_gate_exception": false,
+ "semantics": "Registre d'observation. Il n'inscrit rien dans la baseline approuvee, ne materialise aucune qualification, et ne doit rendre vert ni validate-model ni fail-on-new. La fermeture doit venir du cycle de statut apres revue humaine.",
+ "why_created": "Le chapitre livrait ses deux evaluations sans corrige, et son QCM sans cle : le .json d'autorite etait vide tandis que le .tex portait des questions sans reponse tracee. Les deux corriges sont ecrits et leur bloc VERIFY est execute ; le QCM et sa fiche de diagnostics derivent desormais du .json, ce qui change leur statut en genere. Les quatre objets attendent la revue humaine du chapitre.",
+ "expected_gate_behaviour": {
+  "check": "rouge sur ces empreintes",
+  "validate-model": "rouge sur ces empreintes",
+  "fail-on-new": "rouge sur ces empreintes",
+  "release-strict": "rouge"
+ },
+ "entries": [
+  {
+   "object_id": "1NSI-TC-EVAL-A-corrige",
+   "path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/evaluations/1NSI-TC-EVAL-A-corrige.tex",
+   "category": "blocking_statuses",
+   "status": "needs_review",
+   "scope": "object",
+   "fingerprint": "78debe70b4c20a54",
+   "logical_owner": "direction_scientifique_programme",
+   "policy_disposition": "open_debt",
+   "in_approved_baseline": false,
+   "human_review_required": true,
+   "release_blocking": true,
+   "release_acceptance": false
+  },
+  {
+   "object_id": "1NSI-TC-EVAL-B-corrige",
+   "path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/evaluations/1NSI-TC-EVAL-B-corrige.tex",
+   "category": "blocking_statuses",
+   "status": "needs_review",
+   "scope": "object",
+   "fingerprint": "04b4b3795a01188f",
+   "logical_owner": "direction_scientifique_programme",
+   "policy_disposition": "open_debt",
+   "in_approved_baseline": false,
+   "human_review_required": true,
+   "release_blocking": true,
+   "release_acceptance": false
+  },
+  {
+   "object_id": "1NSI-TC-QCM",
+   "path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.tex",
+   "category": "blocking_statuses",
+   "status": "generated",
+   "scope": "object",
+   "fingerprint": "4f4eaae5c6448ad1",
+   "logical_owner": "direction_scientifique_programme",
+   "policy_disposition": "open_debt",
+   "in_approved_baseline": false,
+   "human_review_required": true,
+   "release_blocking": true,
+   "release_acceptance": false
+  },
+  {
+   "object_id": "1NSI-TC-QCM-DIAG",
+   "path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM-DIAG.tex",
+   "category": "blocking_statuses",
+   "status": "generated",
+   "scope": "object",
+   "fingerprint": "4806d2ac73472370",
+   "logical_owner": "direction_scientifique_programme",
+   "policy_disposition": "open_debt",
+   "in_approved_baseline": false,
+   "human_review_required": true,
+   "release_blocking": true,
+   "release_acceptance": false
+  }
+ ]
+}
