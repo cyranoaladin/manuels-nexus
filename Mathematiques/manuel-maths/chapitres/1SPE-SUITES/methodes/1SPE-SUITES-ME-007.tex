@@ -1,12 +1,12 @@
 % META: {"id": "1SPE-SUITES-ME-007", "chapitre": "1SPE-SUITES", "type_objet": "methode", "capacites_codes": ["C7"], "methodes": ["M7"], "sources_inspiration": [], "status": "generated"}
 
-\begin{fichemethode}{M7}{\'Ecrire un programme Python de calcul de terme, somme ou seuil}
+\begin{fichemethode}{M7}{\'Écrire un programme Python de calcul de terme, somme ou seuil}
 
 \quandUtiliser{
 Utiliser cette m\'ethode lorsque l'\'enonc\'e demande de :
 \begin{itemize}
-  \item \og \'ecrire un programme (ou un algorithme) calculant le $n$-i\`eme terme de la suite \fg ;
-  \item \og \'ecrire un programme calculant la somme $u_0 + u_1 + \cdots + u_n$ \fg ;
+  \item \og \'écrire un programme (ou un algorithme) calculant le $n$-i\`eme terme de la suite \fg ;
+  \item \og \'écrire un programme calculant la somme $u_0 + u_1 + \cdots + u_n$ \fg ;
   \item \og d\'eterminer le plus petit entier $n$ tel que $u_n > S$ \fg ;
   \item \og \`a l'aide d'un algorithme, d\'eterminer le rang \`a partir duquel\ldots \fg.
 \end{itemize}
@@ -16,7 +16,7 @@ Utiliser cette m\'ethode lorsque l'\'enonc\'e demande de :
 \textbf{Mod\`ele A --- Calcul du $n$-i\`eme terme (boucle \texttt{for})}
 \begin{enumerate}
   \item Initialiser la variable \texttt{u} \`a $u_0$.
-  \item \'Ecrire une boucle \texttt{for k in range(n)} : \`a chaque it\'eration, mettre \`a jour \texttt{u} par la relation de r\'ecurrence.
+  \item \'Écrire une boucle \texttt{for k in range(n)} : \`a chaque it\'eration, mettre \`a jour \texttt{u} par la relation de r\'ecurrence.
   \item Apr\`es la boucle, \texttt{u} contient $u_n$.
 \end{enumerate}
 
@@ -32,7 +32,7 @@ Utiliser cette m\'ethode lorsque l'\'enonc\'e demande de :
 \textbf{Mod\`ele C --- Recherche de seuil (boucle \texttt{while})}
 \begin{enumerate}
   \item Initialiser \texttt{u} \`a $u_0$ et le compteur \texttt{n} \`a $0$.
-  \item \'Ecrire une boucle \texttt{while} dont la condition est la \textbf{n\'egation} du seuil cherch\'e.
+  \item \'Écrire une boucle \texttt{while} dont la condition est la \textbf{n\'egation} du seuil cherch\'e.
   \item Dans le corps : mettre \`a jour \texttt{u} par la r\'ecurrence, puis \texttt{n = n + 1}.
   \item Apr\`es la boucle, \texttt{n} est le rang cherch\'e.
 \end{enumerate}
@@ -46,8 +46,8 @@ Utiliser cette m\'ethode lorsque l'\'enonc\'e demande de :
 \textbf{\'Enonc\'e.} On place un capital initial de $1\,500$~\euro{} sur un livret r\'emun\'er\'e \`a $4\,\%$ par an. On note $u_n$ le capital (en euros) apr\`es $n$ ann\'ees.
 
 \begin{enumerate}
-  \item \'Ecrire un programme Python qui calcule $u_n$ pour un entier $n$ donn\'e.
-  \item \'Ecrire un programme Python qui d\'etermine le plus petit entier $n$ tel que $u_n \geq 3\,000$.
+  \item \'Écrire un programme Python qui calcule $u_n$ pour un entier $n$ donn\'e.
+  \item \'Écrire un programme Python qui d\'etermine le plus petit entier $n$ tel que $u_n \geq 3\,000$.
 \end{enumerate}
 
 \medskip
