@@ -12353,6 +12353,9 @@ def _baseline_materialization_plan(
         observed_source_digest=str(inventory["source_digest"]),
         observed_model_digest=_model_digest(inventory),
         allow_unqualified=True,
+        suspended_fingerprints={
+            entry["fingerprint"] for entry in invalid_qualifications(root)
+        },
     )
     dispositions = plan["dispositions_payload"]
     unqualified = plan["unqualified_json"]

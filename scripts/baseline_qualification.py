@@ -683,8 +683,18 @@ def plan_materialization(
     observed_source_digest: str,
     observed_model_digest: str,
     allow_unqualified: bool = False,
+    suspended_fingerprints: frozenset[str] | set[str] = frozenset(),
 ) -> dict[str, Any]:
-    """Plan the one-shot approved materialization without writing files."""
+    """Plan the one-shot approved materialization without writing files.
+
+    `suspended_fingerprints` : empreintes dont la qualification enregistree ne
+    s'applique plus parce que son objet a change apres la decision humaine.
+    Elles apparaissent actives et non qualifiees TOUT EN restant inscrites au
+    registre -- etat que la garde anti-derive prendrait pour une corruption.
+    Ce n'est pas une derive : c'est une suspension, fermee uniquement par une
+    re-qualification humaine. Le plan ne doit ni les re-approuver ni les
+    confondre avec du drift.
+    """
 
     approved = policy.get("approved_set")
     if not isinstance(approved, Mapping):
@@ -763,9 +773,10 @@ def plan_materialization(
         for fingerprint, record in by_fingerprint.items()
         if record.get("qualified") is not True
     }
-    foreign_registered = unqualified_active_fingerprints & (
-        registered_fingerprints - policy_generated_fingerprints
-    )
+    foreign_registered = (
+        unqualified_active_fingerprints
+        & (registered_fingerprints - policy_generated_fingerprints)
+    ) - set(suspended_fingerprints)
     if foreign_registered:
         raise QualificationError(
             "jeu approuvé: active unqualified fingerprints belong to prior policy"
@@ -773,7 +784,9 @@ def plan_materialization(
     if policy_generated_fingerprints:
         approved_fingerprints = set(policy_generated_fingerprints)
     else:
-        approved_fingerprints = set(unqualified_active_fingerprints)
+        approved_fingerprints = set(unqualified_active_fingerprints) - set(
+            suspended_fingerprints
+        )
     fingerprints = sorted(approved_fingerprints)
     explicit_fingerprints = approved.get("fingerprints")
     if explicit_fingerprints is not None:

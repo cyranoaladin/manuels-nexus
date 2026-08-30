@@ -611,6 +611,13 @@ def test_repository_approved_set_has_exact_category_and_owner_counts(
         dispositions,
         observed_source_digest=inventory["source_digest"],
         observed_model_digest=inventory_module._model_digest(inventory),
+        # Les qualifications suspendues par la campagne diacritiques restent
+        # inscrites au registre sans s'appliquer : le plan ne doit ni les
+        # re-approuver ni les prendre pour une derive.
+        suspended_fingerprints={
+            entry["fingerprint"]
+            for entry in inventory_module.invalid_qualifications(ROOT)
+        },
     )
     current_entries = {
         fingerprint: entry
@@ -775,6 +782,13 @@ def test_repository_registry_excludes_prior_policy_from_current_policy(
         dispositions,
         observed_source_digest=inventory["source_digest"],
         observed_model_digest=inventory_module._model_digest(inventory),
+        # Les qualifications suspendues par la campagne diacritiques restent
+        # inscrites au registre sans s'appliquer : le plan ne doit ni les
+        # re-approuver ni les prendre pour une derive.
+        suspended_fingerprints={
+            entry["fingerprint"]
+            for entry in inventory_module.invalid_qualifications(ROOT)
+        },
     )
     planned_dispositions = plan["dispositions_payload"]["dispositions"]
 
