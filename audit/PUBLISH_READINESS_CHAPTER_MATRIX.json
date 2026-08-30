@@ -742,7 +742,7 @@
       },
       "manual": "1NSI",
       "object_count": 165,
-      "object_set_digest": "sha256:9ba8f2c8260df50f37f911f8b610492d78df4ba31ab783bd01bc1c7fca27cd6b",
+      "object_set_digest": "sha256:cbfa9e9512f1741df72563cc9495bb203685e85e9cd55ba7ad11a91fc79294ec",
       "oracle": {
         "fail": 0,
         "manual_review": 0,
@@ -4058,13 +4058,13 @@
       "chapter": "TSPE-LIMITES-FONCTIONS",
       "declared_review_debt": [],
       "diacritics": {
-        "ambiguous": 76,
-        "status": "COMPLETE",
-        "unambiguous": 0
+        "ambiguous": 77,
+        "status": "GAP",
+        "unambiguous": 2
       },
       "evidence_routing": {
-        "carried_forward": 15,
-        "human_review_required": 0,
+        "carried_forward": 14,
+        "human_review_required": 1,
         "machine_recalculated": 0,
         "questions_routed": 15,
         "status": "COMPLETE",
@@ -4079,7 +4079,7 @@
       "human_closure_status": "PENDING",
       "machine_dimensions": {
         "assessments": "COMPLETE",
-        "diacritics": "COMPLETE",
+        "diacritics": "GAP",
         "evidence_routing": "COMPLETE",
         "oracle": "COMPLETE",
         "programme": "COMPLETE",
@@ -4124,9 +4124,9 @@
         "questions": 15,
         "status": "COMPLETE"
       },
-      "risk_score": 0,
+      "risk_score": 4,
       "unassembled_object_ids": [],
-      "vertical_machine_status": "MACHINE_REVIEW_COMPLETE"
+      "vertical_machine_status": "INCOMPLETE"
     },
     {
       "assessments": {
@@ -4566,8 +4566,8 @@
   "counts": {
     "chapters": 52,
     "human_closed": 0,
-    "machine_review_complete": 51,
-    "machine_review_incomplete": 1,
+    "machine_review_complete": 50,
+    "machine_review_incomplete": 2,
     "manuals": 6
   },
   "generated_by": "scripts/build_publish_readiness_chapter_matrix.py",
@@ -4584,6 +4584,11 @@
       "chapter": "TNSI-PROJET",
       "manual": "TNSI",
       "risk_score": 20
+    },
+    {
+      "chapter": "TSPE-LIMITES-FONCTIONS",
+      "manual": "TSPE_2026_2027",
+      "risk_score": 4
     }
   ],
   "schema_version": 1

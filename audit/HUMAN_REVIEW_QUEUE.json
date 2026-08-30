@@ -94,7 +94,7 @@
       "questions": [
         "1SPE-VARIABLES-ALEATOIRES/Q16"
       ],
-      "count": 144,
+      "count": 145,
       "why": "aucune famille mathematique generique ne modelise ces enonces sans ecrire une derivation propre a la question ; le solveur s'abstient au lieu d'inventer",
       "release_blocking": true,
       "evidence": "audit/QCM_INDEPENDENT_EVIDENCE_V2.json",
@@ -136,25 +136,6 @@
         "TSPE-DERIVATION-CONVEXITE/Q3",
         "TSPE-PROBABILITES/Q1"
       ],
-      "release_blocking": true
-    },
-    {
-      "item_id": "QCM_REMEDIATION_COVERAGE_FAIL",
-      "kind": "CONTENT_GAP_TO_FIX_IN_THE_CHAPTER_VERTICAL",
-      "count": 1,
-      "entries": [
-        {
-          "chapter": "TSPE-DERIVATION-CONVEXITE",
-          "missing_error_model": [],
-          "missing_remediation_reference": [
-            "A",
-            "C",
-            "D"
-          ],
-          "question_id": "Q6"
-        }
-      ],
-      "note": "ANSWER_KEY_VERDICT = PASS, REMEDIATION_COVERAGE = FAIL. A corriger lors de la verticale TSPE correspondante ; a ne pas confondre avec QCM_EVIDENCE_SCHEMA_COVERAGE_GAP, qui porte sur la preuve et non sur la source.",
       "release_blocking": true
     },
     {
@@ -202,9 +183,9 @@
     }
   ],
   "totals": {
-    "release_blocking_items": 7,
+    "release_blocking_items": 6,
     "new_objects_awaiting_review": 13,
-    "qcm_questions_awaiting_human_proof": 144,
+    "qcm_questions_awaiting_human_proof": 145,
     "method_qualifications_awaiting_requalification": 86
   }
 }

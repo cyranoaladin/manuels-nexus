@@ -5,15 +5,15 @@
   "approves_nothing": true,
   "artifact_type": "qcm_independent_evidence_v2",
   "counts": {
-    "CARRIED_FORWARD_IDENTICAL": 314,
-    "HUMAN_REVIEW_REQUIRED": 144,
+    "CARRIED_FORWARD_IDENTICAL": 313,
+    "HUMAN_REVIEW_REQUIRED": 145,
     "MACHINE_RECALCULATED": 21,
     "UNKNOWN": 0,
     "question_count": 479
   },
   "diagnostic_coverage_findings": [],
   "diagnostic_coverage_is_release_blocking": true,
-  "equation": "479 = 314 + 21 + 144",
+  "equation": "479 = 313 + 21 + 145",
   "evidence_schema_fields": [
     "statement",
     "options",
@@ -168,7 +168,8 @@
     "TNSI-STRUCTURES-DONNEES/Q6",
     "TNSI-STRUCTURES-DONNEES/Q7",
     "TNSI-STRUCTURES-DONNEES/Q8",
-    "TNSI-STRUCTURES-DONNEES/Q9"
+    "TNSI-STRUCTURES-DONNEES/Q9",
+    "TSPE-LIMITES-FONCTIONS/Q3"
   ],
   "independence_contract": {
     "enforced_by": "qcm_independent_solver.sanitize (leve DeclaredAnswerLeak)",
@@ -8725,15 +8726,21 @@
       "chapter": "TSPE-LIMITES-FONCTIONS",
       "computed_option_truths": {},
       "computed_unique_answer": null,
-      "evidence_digest": "sha256:352b7568d773db8b17af5c15849cd1fc4a121c2eb1167b7cf3c49cbfdbfaf9cc",
-      "evidence_status": "CARRIED_FORWARD_IDENTICAL",
-      "human_review_required": false,
-      "independent_evidence": "condense semantique identique a la preuve independante v1 ; report d'identite, aucun recalcul necessaire",
+      "delta_classes": [
+        "OPTION_REORDER_ONLY",
+        "DIAGNOSTIC_TEXT_CHANGE"
+      ],
+      "evidence_digest": "sha256:9ca9d97f019b10c0c714b77c1484a33e20ea701f489a7748d4b1ce2c9c2f9820",
+      "evidence_status": "HUMAN_REVIEW_REQUIRED",
+      "human_review_required": true,
+      "independent_evidence": "",
       "question_id": "Q3",
-      "semantic_question_digest": "sha256:ed1970ee52de09a64f1d2a0f4c7e0f387d885b6e039e82c873403193888f5e5f",
+      "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+      "release_blocking": true,
+      "semantic_question_digest": "sha256:c5273aa98940713895e418530eef8d2b1bba894e739df1da8a5da76d0a775b77",
       "solver_family": null,
-      "solver_input_digest": null,
-      "solver_version": null,
+      "solver_input_digest": "sha256:ea7b55093aafeed4e3287784e23079e84b032b5a0f2058e7f76cae9dbc141d67",
+      "solver_version": "1.0.0",
       "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/qcm/TSPE-LIMITES-FONCTIONS-QCM.json",
       "verification": null
     },
@@ -9453,7 +9460,7 @@
     }
   ],
   "schema_version": 2,
-  "set_digest": "sha256:4ddafccf31959b936dce229f69ca7f0c5a37b61073e33245cbd89b3042acfce5",
+  "set_digest": "sha256:0a1f140e0a4b95c9d35ac5f8d47cb49b6bb0faa8467c315274f456ea42492e95",
   "solver_families_used": [
     "ALGEBRAIC_GAIN",
     "BINARY_TREE_TERMINAL_PATHS",

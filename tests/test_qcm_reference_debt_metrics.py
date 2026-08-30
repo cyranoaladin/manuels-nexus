@@ -48,8 +48,12 @@ def test_the_two_metrics_are_distinct_objects(payload) -> None:
     missing = metrics["GLOBAL_DISTRACTORS_MISSING_DIAGNOSTIC_OR_REFERENCE"]
 
     assert broken["metric"] != missing["metric"]
-    assert broken["set_digest"] != missing["set_digest"]
-    assert payload["disambiguation"]["same_set"] is False
+    # Deux metriques a zero portent inevitablement le digest de l'ensemble
+    # vide : l'egalite des digests ne prouve la confusion des objets que si
+    # au moins un ensemble est habite.
+    if broken["count"] or missing["count"]:
+        assert broken["set_digest"] != missing["set_digest"]
+        assert payload["disambiguation"]["same_set"] is False
 
 
 def test_every_metric_carries_its_exact_ids_and_distribution(payload) -> None:

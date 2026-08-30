@@ -139,7 +139,14 @@ def test_a_varalea_change_never_invalidates_another_chapter(payload: dict) -> No
     # Le seul autre chapitre concerne l'est pour sa PROPRE divergence, pas par
     # contagion : la preuve de TSPE-DERIVATION-CONVEXITE Q6 omet un $ que la
     # source porte. Le reequilibrage des cles, lui, ne perime aucune preuve.
-    assert foreign == {"1SPE-PRODUIT-SCALAIRE", "TSPE-DERIVATION-CONVEXITE"}
+    # TSPE-LIMITES-FONCTIONS s'ajoute pour sa PROPRE cause : le diagnostic
+    # trop court de Q3/A a ete complete par un contre-exemple, et un modele
+    # d'erreur modifie doit etre re-prouve.
+    assert foreign == {
+        "1SPE-PRODUIT-SCALAIRE",
+        "TSPE-DERIVATION-CONVEXITE",
+        "TSPE-LIMITES-FONCTIONS",
+    }
     entry = next(
         e for e in payload["reproof_required"] if e["chapter"] == "TSPE-DERIVATION-CONVEXITE"
     )
@@ -203,7 +210,9 @@ def test_uncaptured_renvois_are_reported_not_absorbed(payload: dict) -> None:
     """La preuve historique n'a pas capture renvoi ; l'ecart doit etre visible."""
 
     gaps = payload["proof_field_coverage_gaps"]
-    assert len(gaps) == 5
+    # 41 depuis l'entree du corpus NSI dans le routage : la preuve historique
+    # n'a jamais capture le champ renvoi, quel que soit le manuel.
+    assert len(gaps) == 41
     assert {gap["field"] for gap in gaps} == {"diagnostics.renvoi"}
     assert all(gap["options"] for gap in gaps)
     assert payload["semantic_digest_contract"]["excluded"] == ["diagnostics.renvoi"]

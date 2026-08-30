@@ -1,5 +1,5 @@
 {
-  "aggregate_current_set_digest": "sha256:6d40ec51c6694fe59496c34219f8f20e238ecd1bf9601ab7da0efcb00e062f53",
+  "aggregate_current_set_digest": "sha256:11414eaf343ececfc215d2a467427885720cf8fcca61ee5494feca6f08020cb8",
   "approves_nothing": true,
   "artifact_type": "qcm_review_proof_reconciliation",
   "carried_forward": [
@@ -1902,13 +1902,6 @@
     },
     {
       "chapter": "TSPE-LIMITES-FONCTIONS",
-      "question_id": "Q3",
-      "semantic_digest": "sha256:ed1970ee52de09a64f1d2a0f4c7e0f387d885b6e039e82c873403193888f5e5f",
-      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/qcm/TSPE-LIMITES-FONCTIONS-QCM.json",
-      "status": "CARRIED_FORWARD_UNCHANGED"
-    },
-    {
-      "chapter": "TSPE-LIMITES-FONCTIONS",
       "question_id": "Q4",
       "semantic_digest": "sha256:f08d9d00cab566e0aa5962a7c91dcabcab763a8207f622c6ba5b5b7cae11c5f0",
       "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/qcm/TSPE-LIMITES-FONCTIONS-QCM.json",
@@ -2203,13 +2196,13 @@
     }
   ],
   "counts": {
-    "CARRIED_FORWARD_UNCHANGED": 314,
+    "CARRIED_FORWARD_UNCHANGED": 313,
     "CURRENT_QCM_QUESTION_COUNT": 479,
     "OLD_PROOF_QUESTION_COUNT": 331,
     "PROOF_ROWS_WITHOUT_CURRENT_QUESTION": 0,
-    "REPROOF_REQUIRED": 165
+    "REPROOF_REQUIRED": 166
   },
-  "equation": "479 = 314 + 165",
+  "equation": "479 = 313 + 166",
   "generated_by": "scripts/build_qcm_review_proof_reconciliation.py",
   "historical_proof_status": "HISTORICAL",
   "proof_field_coverage_gaps": [
@@ -4013,6 +4006,18 @@
       "question_id": "Q6",
       "reason": "SEMANTIC_CHANGE",
       "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/qcm/TSPE-DERIVATION-CONVEXITE-QCM.json"
+    },
+    {
+      "chapter": "TSPE-LIMITES-FONCTIONS",
+      "current_semantic_digest": "sha256:c5273aa98940713895e418530eef8d2b1bba894e739df1da8a5da76d0a775b77",
+      "delta_classes": [
+        "OPTION_REORDER_ONLY",
+        "DIAGNOSTIC_TEXT_CHANGE"
+      ],
+      "proof_semantic_digest": "sha256:ed1970ee52de09a64f1d2a0f4c7e0f387d885b6e039e82c873403193888f5e5f",
+      "question_id": "Q3",
+      "reason": "SEMANTIC_CHANGE",
+      "source_path": "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/qcm/TSPE-LIMITES-FONCTIONS-QCM.json"
     }
   ],
   "schema_version": 1,

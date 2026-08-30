@@ -6,11 +6,11 @@ Une identite par question. La v1 reste l'enregistrement historique.
 Cet artefact n'approuve rien.
 
 - Questions du corpus : 479
-- Report d'identite : 314
+- Report d'identite : 313
 - Recalcul independant : 21
-- Revue humaine requise : 144
+- Revue humaine requise : 145
 - UNKNOWN : 0
-- Equation : 479 = 314 + 21 + 144
+- Equation : 479 = 313 + 21 + 145
 - EVIDENCE_ROUTING_COMPLETE : True
 - ALL_QCM_HUMAN_REVIEW_COMPLETE : False
 
@@ -210,3 +210,4 @@ Comportement correct du solveur, pas un echec : aucune regle mathematique generi
 | TNSI-STRUCTURES-DONNEES | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TNSI-STRUCTURES-DONNEES | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TNSI-STRUCTURES-DONNEES | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-LIMITES-FONCTIONS | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |

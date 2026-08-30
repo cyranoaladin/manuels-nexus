@@ -6,10 +6,10 @@ Cet artefact n'approuve rien et ne rebinde rien.
 
 - Lignes de preuve historique : 331
 - Questions du corpus courant : 479
-- Preuve reportable a l'identique : 314
-- Preuve a refaire : 165
-- Equation : 479 = 314 + 165
-- Condense d'ensemble courant : `sha256:6d40ec51c6694fe59496c34219f8f20e238ecd1bf9601ab7da0efcb00e062f53`
+- Preuve reportable a l'identique : 313
+- Preuve a refaire : 166
+- Equation : 479 = 313 + 166
+- Condense d'ensemble courant : `sha256:11414eaf343ececfc215d2a467427885720cf8fcca61ee5494feca6f08020cb8`
 
 ## Questions dont la preuve doit etre refaite
 
@@ -180,6 +180,7 @@ Cet artefact n'approuve rien et ne rebinde rien.
 | TNSI-STRUCTURES-DONNEES | Q8 | NEW_QUESTION_NEVER_PROVEN | — |
 | TNSI-STRUCTURES-DONNEES | Q9 | NEW_QUESTION_NEVER_PROVEN | — |
 | TSPE-DERIVATION-CONVEXITE | Q6 | SEMANTIC_CHANGE | OPTION_REORDER_ONLY, KEY_POSITION_CHANGED_BUT_VALUE_SAME, DIAGNOSTIC_TEXT_CHANGE |
+| TSPE-LIMITES-FONCTIONS | Q3 | SEMANTIC_CHANGE | OPTION_REORDER_ONLY, DIAGNOSTIC_TEXT_CHANGE |
 
 ## Lacunes de couverture de la preuve historique
 

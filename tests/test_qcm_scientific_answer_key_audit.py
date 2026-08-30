@@ -24,7 +24,12 @@ PARTITIONS = {
 
 
 def _sources() -> list[Path]:
-    return sorted(QCM_ROOT.glob("*/qcm/*-QCM.json"))
+    # Le corpus route couvre mathematiques ET NSI depuis que les QCM NSI
+    # portent une cle : le perimetre du test suit celui de la reconciliation.
+    racines = (QCM_ROOT, ROOT / "NSI" / "chapitres")
+    return sorted(
+        path for racine in racines for path in racine.glob("*/qcm/*-QCM.json")
+    )
 
 
 def _source_keys() -> set[tuple[str, str]]:
@@ -62,9 +67,13 @@ def test_the_v1_audit_is_historical_and_no_longer_covers_the_current_corpus() ->
     current = _source_keys()
 
     assert len(historical) == 331
-    assert len(current) == 337
+    # 479 depuis l'entree des 142 questions NSI dans le corpus route.
+    assert len(current) == 479
     assert historical < current, "la v1 est un sous-ensemble strict du corpus"
-    assert sorted(question for _chapter, question in current - historical) == [
+    delta = current - historical
+    nsi = {key for key in delta if key[0].startswith(("1NSI", "TNSI"))}
+    assert len(nsi) == 142
+    assert sorted(question for _chapter, question in delta - nsi) == [
         "Q16",
         "Q17",
         "Q18",
@@ -72,9 +81,11 @@ def test_the_v1_audit_is_historical_and_no_longer_covers_the_current_corpus() ->
         "Q20",
         "Q21",
     ]
-    assert {chapter for chapter, _question in current - historical} == {
+    hors_v1 = {chapter for chapter, _question in current - historical}
+    assert {c for c in hors_v1 if not c.startswith(("1NSI", "TNSI"))} == {
         "1SPE-VARIABLES-ALEATOIRES"
     }
+    assert len({c for c in hors_v1 if c.startswith(("1NSI", "TNSI"))}) == 17
 
     v2 = V2.build_evidence()
     assert v2["counts"]["question_count"] == len(current)
@@ -132,7 +143,7 @@ def test_every_historical_row_is_accounted_for_by_the_v2_evidence() -> None:
     )
 
     carried = {key for key in observed if states[key] == "CARRIED_FORWARD_IDENTICAL"}
-    assert len(carried) == 314
+    assert len(carried) == 313
     assert not any(chapter == "1SPE-VARIABLES-ALEATOIRES" for chapter, _q in carried)
 
 
@@ -180,7 +191,7 @@ def test_the_v1_builder_refuses_to_produce_on_a_changed_corpus() -> None:
 def test_the_v2_evidence_accounts_for_every_question_without_unknown() -> None:
     v2 = V2.build_evidence()
     counts = v2["counts"]
-    assert counts["question_count"] == 337
+    assert counts["question_count"] == 479
     assert (
         counts["CARRIED_FORWARD_IDENTICAL"]
         + counts["MACHINE_RECALCULATED"]
