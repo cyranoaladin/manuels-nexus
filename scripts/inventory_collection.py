@@ -1846,18 +1846,19 @@ def _load_dispositions(
             violations = _a4_method_review_debt_violations(root, value)
         elif value.get("decision_ref") == OPTIONAL_EXTENSION_REVIEW_DECISION_REF:
             violations = _optional_extension_review_debt_violations(root, value)
-        if violations:
-            if invalid is not None:
-                invalid.append(
-                    {
-                        "fingerprint": fingerprint,
-                        "decision_ref": str(value.get("decision_ref", "")),
-                        "source": str(value.get("source", "")),
-                        "violations": list(violations),
-                    }
-                )
-            # Ecartee : l'anomalie couverte redevient une dette ouverte.
-            continue
+        if violations and invalid is not None:
+            invalid.append(
+                {
+                    "fingerprint": fingerprint,
+                    "decision_ref": str(value.get("decision_ref", "")),
+                    "source": str(value.get("source", "")),
+                    "violations": list(violations),
+                }
+            )
+        # La disposition reste dans le jeu retourne : le materialiseur reecrit
+        # ce fichier a partir de ce qu'il lit, et la retirer ici EFFACERAIT la
+        # qualification du disque. C'est au moment d'APPLIQUER la qualification
+        # qu'une entree invalide doit etre ignoree, pas au moment de la lire.
         raw_dispositions[fingerprint] = _canonicalize(dict(value))
     return raw_dispositions
 
@@ -5954,7 +5955,18 @@ def _build_inventory_with_stable_controls(
     tracked_set = frozenset(tracked)
     role_patterns, default_role, role_order = _collect_role_patterns(root)
     source_roles = _load_source_roles(root, tracked)
-    dispositions = _load_dispositions(root)
+    invalides: list[dict[str, Any]] = []
+    dispositions = _load_dispositions(root, invalid=invalides)
+    # Une qualification dont l'objet a change ne s'applique plus : l'anomalie
+    # qu'elle couvrait redevient une dette ouverte et bloquante. Elle demeure
+    # sur le disque -- seule son APPLICATION est suspendue.
+    if invalides:
+        suspendues = {entry["fingerprint"] for entry in invalides}
+        dispositions = {
+            fingerprint: record
+            for fingerprint, record in dispositions.items()
+            if fingerprint not in suspendues
+        }
     def _is_production(path: str) -> bool:
         return _classify_is_production(
             path,
