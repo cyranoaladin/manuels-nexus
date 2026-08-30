@@ -1269,13 +1269,13 @@
       "chapter": "1SPE-PRODUIT-SCALAIRE",
       "declared_review_debt": [],
       "diacritics": {
-        "ambiguous": 96,
+        "ambiguous": 97,
         "status": "COMPLETE",
         "unambiguous": 0
       },
       "evidence_routing": {
-        "carried_forward": 15,
-        "human_review_required": 0,
+        "carried_forward": 14,
+        "human_review_required": 1,
         "machine_recalculated": 0,
         "questions_routed": 15,
         "status": "COMPLETE",
@@ -1294,7 +1294,7 @@
         "evidence_routing": "COMPLETE",
         "oracle": "COMPLETE",
         "programme": "COMPLETE",
-        "qcm": "GAP"
+        "qcm": "COMPLETE"
       },
       "manual": "1SPE",
       "object_count": 145,
@@ -1324,9 +1324,7 @@
         ],
         "diagnostic_or_remediation_gaps": [],
         "distribution_contract_met": true,
-        "equivalent_option_questions": [
-          "Q6"
-        ],
+        "equivalent_option_questions": [],
         "key_distribution": {
           "A": 4,
           "B": 4,
@@ -1337,11 +1335,11 @@
         "longest_identical_run": 1,
         "present": true,
         "questions": 15,
-        "status": "GAP"
+        "status": "COMPLETE"
       },
-      "risk_score": 25,
+      "risk_score": 0,
       "unassembled_object_ids": [],
-      "vertical_machine_status": "INCOMPLETE"
+      "vertical_machine_status": "MACHINE_REVIEW_COMPLETE"
     },
     {
       "assessments": {
@@ -4463,8 +4461,8 @@
   "counts": {
     "chapters": 52,
     "human_closed": 0,
-    "machine_review_complete": 28,
-    "machine_review_incomplete": 24,
+    "machine_review_complete": 29,
+    "machine_review_incomplete": 23,
     "manuals": 6
   },
   "generated_by": "scripts/build_publish_readiness_chapter_matrix.py",
@@ -4560,11 +4558,6 @@
     {
       "chapter": "1NSI-WEB-IHM",
       "manual": "1NSI",
-      "risk_score": 25
-    },
-    {
-      "chapter": "1SPE-PRODUIT-SCALAIRE",
-      "manual": "1SPE",
       "risk_score": 25
     },
     {
