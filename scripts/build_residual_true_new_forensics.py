@@ -735,8 +735,14 @@ def build_reports(
             # Le modele residuel porte sur le gel des 18. La dette VARALEA
             # C6/C7 en est exclue par construction : elle est comptee, nommee
             # et bloquante dans son propre composant de l'algebre courante.
+            # Les qualifications suspendues ne sont pas des nouveautes de
+            # triage : leur classe est comptee a part et fermee par une
+            # re-qualification humaine, jamais par le triage residuel.
             "no_new_after_triage": not (
-                active_unqualified - initial_fingerprints - separate_debt
+                active_unqualified
+                - initial_fingerprints
+                - separate_debt
+                - suspended
             ),
             "residual_equation": (
                 len(residual_fingerprints)
