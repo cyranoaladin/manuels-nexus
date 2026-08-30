@@ -12989,16 +12989,36 @@ def test_repository_fail_on_new_preserves_all_qualified_active_debt(
 
     gate = inventory_module._fail_on_new_gate(ROOT)
 
-    # Le rouge du gate porte UNIQUEMENT sur les nouveautes declarees :
-    # aucune des 2 232 dettes qualifiees n'est perdue ni requalifiee.
+    # Le rouge du gate porte UNIQUEMENT sur des mouvements DECLARES : les
+    # nouveautes de leurs registres, et la transition de statut des rendus QCM
+    # 1NSI, qui passent de needs_review a generated depuis qu'ils derivent du
+    # .json d'autorite. Aucune dette n'est perdue ni requalifiee : les onze
+    # empreintes qui se resolvent sont remplacees par celles du nouveau statut,
+    # elles aussi bloquantes.
     declared = _declared_open_debt_fingerprints()
+    transition = json.loads(
+        (ROOT / "audit/NSI_QCM_RENDER_STATUS_TRANSITION.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert transition["qualifies_nothing"] is True
+    assert transition["in_approved_baseline"] is False
+    resolved_by_transition = {
+        entry["fingerprint"] for entry in transition["resolved_previous"]
+    }
+    regressed_by_transition = {
+        entry["fingerprint"] for entry in transition["regressed"]
+    }
     assert gate["success"] is False
     assert gate["exit_code"] == 5
     comparison = gate["comparison"]
     assert set(comparison["new"]) == declared
     assert comparison["expected_review_debt"] == []
-    assert set(comparison["unchanged"]) == active_fingerprints
+    assert set(comparison["resolved"]) == resolved_by_transition
+    assert set(comparison["regressions"]) == regressed_by_transition
+    assert set(comparison["unchanged"]) == active_fingerprints - resolved_by_transition
     assert declared.isdisjoint(active_fingerprints)
+    assert resolved_by_transition.isdisjoint(declared)
 
 
 def test_repository_method_aliases_are_unambiguous(
