@@ -12,8 +12,8 @@
     "TRUE_NEW_INITIAL": 18
   },
   "equalities": {
-    "initial_still_active_unqualified": true,
-    "no_new_after_triage": true,
+    "initial_still_active_open_debt": true,
+    "no_new_after_triage": false,
     "residual_equation": true
   },
   "equation": "RESIDUAL_TRUE_NEW = TRUE_NEW_INITIAL - FIXED - REMOVED - REVIEW_CLOSED + NEW_AFTER_TRIAGE",
@@ -22,26 +22,30 @@
     "frozen_initial_json_sha256": "sha256:4833f06833633d7d7d27cfb00de4f4c1bb4083288aa1cf784e5e08bc037c76b5",
     "frozen_initial_md": "audit/TRUE_NEW_18_FORENSICS.md",
     "frozen_initial_md_sha256": "sha256:337b2977665a4419e205cfa4d431a6a9c1b7deb89b3544cd9124057762608efd",
-    "input_digest": "sha256:7ee17f033a6efd66b0345b610e03615c1e82e7eb247f8cec6cc5228a6be86bdf",
+    "input_digest": "sha256:70b52b5e07e0828318a22c1f18a32e220b01bcfe3dda3c4fd9a74bb4c8529320",
     "inventory": "audit/INVENTAIRE_COLLECTION.json",
-    "inventory_sha256": "sha256:d8bf5ff7ead1a3dcd335aad28529fb4ecbf4bfcae9db324afe4f1cae527b1570",
-    "inventory_source_digest": "sha256:d9186c56f6d05bb5d8d47a644a96ef58819d80f57d0d011e45b4c27b4e370d9c"
+    "inventory_sha256": "sha256:1832ef87e4855659b2b555f6f3edd6e34be9a149cb974f05271961c77a660157",
+    "inventory_source_digest": "sha256:d8e78860e06fd0a15d4d7061d0f32cf320f6b1df895e053a1d5848e23fd96be2"
   },
-  "forensic_source_sha": "5aaf00ae4d36e3c9dd5fe4c900bd4b6df7326be7",
+  "forensic_source_sha": "92463de35c30a957c98c41efab0d4e3d230a420a",
   "full_current_algebra": {
     "cardinalities": {
       "APPROVED_TRANSITION_NEW": 9,
       "APPROVED_TRANSITION_OLD": 9,
       "BASELINE": 6541,
-      "CURRENT_ACTIVE": 2232,
+      "CURRENT_ACTIVE": 2248,
       "EXPECTED_REVIEW_DEBT": 89,
+      "EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1": 1,
+      "NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2": 2,
       "PREVIOUSLY_QUALIFIED_ACTIVE_DEBT": 89,
       "RESOLVED_BASELINE": 4411,
       "SURVIVING_BASELINE": 2130,
+      "TNSI_PROJET_QCM_REVIEW_DEBT_1": 1,
       "TRUE_NEW": 13,
-      "UNCHANGED": 2121
+      "UNCHANGED": 2121,
+      "VARALEA_C6C7_REVIEW_DEBT_12": 12
     },
-    "cardinality_equation": "2232 = 2121 + 9 + 89 + 13",
+    "cardinality_equation": "2248 = 2121 + 9 + 89 + 13 + 12 + 1 + 2 + 1",
     "equalities": {
       "baseline_partition": true,
       "current_partition": true,
@@ -15472,6 +15476,50 @@
         "right": "CURRENT_ACTIVE"
       },
       {
+        "cardinality": 12,
+        "fingerprints": [
+          "04f8fa9d3f54a619",
+          "0dd5732440ea28e0",
+          "2f19b6e6ebd745d8",
+          "69e1e84e7fc96997",
+          "747e0072f8708757",
+          "7f9c8c639d17cad7",
+          "8359be36ea9b8fb5",
+          "920c28acd7b14bfc",
+          "b9b9287443b9aca2",
+          "c179f6fe227a7e00",
+          "d918dc77985a97b3",
+          "e8f17e2dd150d6b2"
+        ],
+        "left": "VARALEA_C6C7_REVIEW_DEBT_12",
+        "right": "CURRENT_ACTIVE"
+      },
+      {
+        "cardinality": 1,
+        "fingerprints": [
+          "d345016805e04089"
+        ],
+        "left": "EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1",
+        "right": "CURRENT_ACTIVE"
+      },
+      {
+        "cardinality": 2,
+        "fingerprints": [
+          "04b4b3795a01188f",
+          "78debe70b4c20a54"
+        ],
+        "left": "NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2",
+        "right": "CURRENT_ACTIVE"
+      },
+      {
+        "cardinality": 1,
+        "fingerprints": [
+          "90350f9fd7890dcf"
+        ],
+        "left": "TNSI_PROJET_QCM_REVIEW_DEBT_1",
+        "right": "CURRENT_ACTIVE"
+      },
+      {
         "cardinality": 2121,
         "fingerprints": [
           "0039a2dd21589133",
@@ -24204,11 +24252,13 @@
         "0451dec94400d77a",
         "047968075b923f13",
         "04915900fa534557",
+        "04b4b3795a01188f",
         "04bb171e4a706a75",
         "04cd9f5b2598287f",
         "04e96facdb738fa4",
         "04ee6a3e440948bb",
         "04f3e4cb45df7416",
+        "04f8fa9d3f54a619",
         "04fcf15f76a75a79",
         "04fde90da0396078",
         "050990b092d00a1d",
@@ -24293,6 +24343,7 @@
         "0d8d823014ffa805",
         "0d92156ed41747a9",
         "0dc7a7f5f0b5d9cd",
+        "0dd5732440ea28e0",
         "0de7fb974a436a19",
         "0e02164386a60789",
         "0e04fd2eee6b8979",
@@ -24587,6 +24638,7 @@
         "2f0c2d1c1d5fb949",
         "2f139ea928757739",
         "2f15b92d6ec50f69",
+        "2f19b6e6ebd745d8",
         "2f25eca1b8b2c816",
         "2f47c5bcb0c1123e",
         "2f7783cd454f7459",
@@ -25116,6 +25168,7 @@
         "69b7eb6e44cebad8",
         "69bc2f380e7361d8",
         "69cfb60ed48e7085",
+        "69e1e84e7fc96997",
         "69ec75c98d6e23b7",
         "69f3a3356d04d605",
         "6a13f009d9de5c92",
@@ -25214,6 +25267,7 @@
         "742023d72ab4ca4f",
         "7440135a1476ff96",
         "744698bd77d354bc",
+        "747e0072f8708757",
         "7489aeaa4d7e1d84",
         "74aacd756bac15f4",
         "74eab0ed8f71afdb",
@@ -25258,6 +25312,7 @@
         "7870049afb6751b0",
         "78731e15299aa29a",
         "789cf7fb43918c00",
+        "78debe70b4c20a54",
         "79787e624370cda5",
         "79f23943895de354",
         "7a03349a2da58855",
@@ -25310,6 +25365,7 @@
         "7f7371409ab3e7c0",
         "7f7c50a0192f6769",
         "7f86f6527c7b4f3a",
+        "7f9c8c639d17cad7",
         "7fa9f4f3f27bb0d8",
         "7fac373325a9ddfd",
         "7fc8ad5f7aa3f150",
@@ -25350,6 +25406,7 @@
         "8320aa8773df7e25",
         "8329c92cd44710d2",
         "834ac01e32586b4d",
+        "8359be36ea9b8fb5",
         "836e0c49753f2b14",
         "8392171151e30ca2",
         "83989c3720c75dfe",
@@ -25480,6 +25537,7 @@
         "901fe58c38ea7e88",
         "90209719663f20f8",
         "90241c1c71b7b749",
+        "90350f9fd7890dcf",
         "9079ec298bf2207e",
         "909254120ba4b7ed",
         "909ad1b88979fff5",
@@ -25496,6 +25554,7 @@
         "919bdd9798daf99c",
         "919c347ec9c04b63",
         "91ebbe0815769479",
+        "920c28acd7b14bfc",
         "922d58052222116d",
         "922de0dcce14d837",
         "923339e9e6521626",
@@ -25818,6 +25877,7 @@
         "b96c632038213851",
         "b994e1da857e5e52",
         "b9b55b2e05c2086f",
+        "b9b9287443b9aca2",
         "b9f0a5b53096e1e0",
         "b9f6beeb54768531",
         "ba372b99675877be",
@@ -25890,6 +25950,7 @@
         "c1412a811ad29bcf",
         "c144aa0e73e8dc69",
         "c1599171d51b3532",
+        "c179f6fe227a7e00",
         "c1d5f5a9202446f6",
         "c1ec9e3d414642d6",
         "c1fe134238bf2cd6",
@@ -26050,6 +26111,7 @@
         "d3148742fc1af66a",
         "d31550e1ff936917",
         "d330569c13fe5e75",
+        "d345016805e04089",
         "d36c21121732a2e1",
         "d37be98c05b56657",
         "d38643d5d5d05816",
@@ -26099,6 +26161,7 @@
         "d8ae21caab51afae",
         "d8befb7bcd217b71",
         "d8fbfc017567302b",
+        "d918dc77985a97b3",
         "d960733fa0bd1035",
         "d98a677a5c49c0e1",
         "d98ffc1932e5f79d",
@@ -26203,6 +26266,7 @@
         "e89bdf4bf03db3e2",
         "e8ac154947fefcdb",
         "e8ade3c3fbe5ebf8",
+        "e8f17e2dd150d6b2",
         "e9555de48aa677e0",
         "e9577a0c3bc2ffcc",
         "e97223868a0576ec",
@@ -26490,6 +26554,13 @@
         "f49896a42f0000d4",
         "f55beaf4faa24cc5",
         "f7bcb21fb088ddda"
+      ],
+      "EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1": [
+        "d345016805e04089"
+      ],
+      "NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2": [
+        "04b4b3795a01188f",
+        "78debe70b4c20a54"
       ],
       "PREVIOUSLY_QUALIFIED_ACTIVE_DEBT": [
         "0030282f546d3d82",
@@ -33127,6 +33198,9 @@
         "ffc16f2950f758a0",
         "ffce4c4163d5c9c0"
       ],
+      "TNSI_PROJET_QCM_REVIEW_DEBT_1": [
+        "90350f9fd7890dcf"
+      ],
       "TRUE_NEW": [
         "18c7b3aa6301ef4c",
         "33e9818ffc70892c",
@@ -35264,6 +35338,20 @@
         "ffbed5423ba71796",
         "ffc16f2950f758a0",
         "ffce4c4163d5c9c0"
+      ],
+      "VARALEA_C6C7_REVIEW_DEBT_12": [
+        "04f8fa9d3f54a619",
+        "0dd5732440ea28e0",
+        "2f19b6e6ebd745d8",
+        "69e1e84e7fc96997",
+        "747e0072f8708757",
+        "7f9c8c639d17cad7",
+        "8359be36ea9b8fb5",
+        "920c28acd7b14bfc",
+        "b9b9287443b9aca2",
+        "c179f6fe227a7e00",
+        "d918dc77985a97b3",
+        "e8f17e2dd150d6b2"
       ]
     },
     "unknown_count": 0
@@ -35272,6 +35360,32 @@
   "release_acceptance": false,
   "schema_version": 1,
   "sets": {
+    "EXCLUDED_DECLARED_SEPARATE_DEBT": {
+      "EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1": [
+        "d345016805e04089"
+      ],
+      "NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2": [
+        "04b4b3795a01188f",
+        "78debe70b4c20a54"
+      ],
+      "TNSI_PROJET_QCM_REVIEW_DEBT_1": [
+        "90350f9fd7890dcf"
+      ],
+      "VARALEA_C6C7_REVIEW_DEBT_12": [
+        "04f8fa9d3f54a619",
+        "0dd5732440ea28e0",
+        "2f19b6e6ebd745d8",
+        "69e1e84e7fc96997",
+        "747e0072f8708757",
+        "7f9c8c639d17cad7",
+        "8359be36ea9b8fb5",
+        "920c28acd7b14bfc",
+        "b9b9287443b9aca2",
+        "c179f6fe227a7e00",
+        "d918dc77985a97b3",
+        "e8f17e2dd150d6b2"
+      ]
+    },
     "FIXED": [],
     "NEW_AFTER_TRIAGE": [],
     "REMOVED": [
