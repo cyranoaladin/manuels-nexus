@@ -1722,11 +1722,7 @@ def _optional_extension_review_debt_violations(
     return violations
 
 
-def _load_dispositions(
-    root: Path,
-    *,
-    invalid: list[dict[str, Any]] | None = None,
-) -> dict[str, dict[str, Any]]:
+def _load_dispositions(root: Path) -> dict[str, dict[str, Any]]:
     """Dispositions applicables, les qualifications invalides etant ECARTEES.
 
     Une qualification derivee d'une decision de classe cesse de s'appliquer des
@@ -1846,15 +1842,9 @@ def _load_dispositions(
             violations = _a4_method_review_debt_violations(root, value)
         elif value.get("decision_ref") == OPTIONAL_EXTENSION_REVIEW_DECISION_REF:
             violations = _optional_extension_review_debt_violations(root, value)
-        if violations and invalid is not None:
-            invalid.append(
-                {
-                    "fingerprint": fingerprint,
-                    "decision_ref": str(value.get("decision_ref", "")),
-                    "source": str(value.get("source", "")),
-                    "violations": list(violations),
-                }
-            )
+        # Les violations sont relevees par `invalid_qualifications`, qui lit la
+        # meme source : ce chargeur n'a pas a en rendre compte.
+        del violations
         # La disposition reste dans le jeu retourne : le materialiseur reecrit
         # ce fichier a partir de ce qu'il lit, et la retirer ici EFFACERAIT la
         # qualification du disque. C'est au moment d'APPLIQUER la qualification
@@ -1864,10 +1854,43 @@ def _load_dispositions(
 
 
 def invalid_qualifications(root: Path) -> list[dict[str, Any]]:
-    """Qualifications derivees devenues invalides, dans l'ordre des empreintes."""
+    """Qualifications derivees devenues invalides, par empreinte croissante.
 
+    Autonome a dessein : elle relit la meme source que `_load_dispositions`
+    plutot que de lui ajouter un parametre de sortie. Le chargeur est
+    monkeypatche par une dizaine de tests, et elargir sa signature les
+    casserait tous sans rien apporter.
+    """
+
+    payload = _load_control_yaml_payload(
+        root / ANOMALY_DISPOSITIONS_FILE,
+        default={},
+    )
+    if not isinstance(payload, Mapping):
+        return []
+    records = payload.get("dispositions")
+    if not isinstance(records, Mapping):
+        return []
     collected: list[dict[str, Any]] = []
-    _load_dispositions(root, invalid=collected)
+    for fingerprint, value in records.items():
+        if not isinstance(value, Mapping):
+            continue
+        decision = value.get("decision_ref")
+        if decision == A4_METHOD_REVIEW_DEBT_DECISION_REF:
+            violations = _a4_method_review_debt_violations(root, value)
+        elif decision == OPTIONAL_EXTENSION_REVIEW_DECISION_REF:
+            violations = _optional_extension_review_debt_violations(root, value)
+        else:
+            continue
+        if violations:
+            collected.append(
+                {
+                    "fingerprint": str(fingerprint),
+                    "decision_ref": str(decision),
+                    "source": str(value.get("source", "")),
+                    "violations": list(violations),
+                }
+            )
     return sorted(collected, key=lambda entry: entry["fingerprint"])
 
 
@@ -5955,8 +5978,8 @@ def _build_inventory_with_stable_controls(
     tracked_set = frozenset(tracked)
     role_patterns, default_role, role_order = _collect_role_patterns(root)
     source_roles = _load_source_roles(root, tracked)
-    invalides: list[dict[str, Any]] = []
-    dispositions = _load_dispositions(root, invalid=invalides)
+    dispositions = _load_dispositions(root)
+    invalides = invalid_qualifications(root)
     # Une qualification dont l'objet a change ne s'applique plus : l'anomalie
     # qu'elle couvrait redevient une dette ouverte et bloquante. Elle demeure
     # sur le disque -- seule son APPLICATION est suspendue.

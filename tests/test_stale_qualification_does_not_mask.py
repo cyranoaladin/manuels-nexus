@@ -113,13 +113,14 @@ def test_one_invalid_qualification_never_hides_the_others(tmp_path: Path) -> Non
         tmp_path, {**saines, invalide: _a4_bound_to_missing_method(invalide)}
     )
 
-    collected: list[dict] = []
-    applicables = I._load_dispositions(root, invalid=collected)
+    signalees = I.invalid_qualifications(root)
+    applicables = I._load_dispositions(root)
 
-    assert len(collected) == 1, "l'invalide doit etre signalee, pas levee"
-    assert collected[0]["fingerprint"] == invalide
-    assert invalide not in applicables, "une qualification invalide ne s'applique plus"
-    assert set(applicables) == set(saines), "les autres dispositions sont intactes"
+    assert len(signalees) == 1, "l'invalide doit etre signalee, pas levee"
+    assert signalees[0]["fingerprint"] == invalide
+    assert set(applicables) == set(saines) | {invalide}, (
+        "la disposition reste sur le disque : seule son application est suspendue"
+    )
 
 
 def test_the_loader_no_longer_raises_on_an_invalid_qualification(
@@ -128,7 +129,8 @@ def test_the_loader_no_longer_raises_on_an_invalid_qualification(
     invalide = "f" * 16
     root = _minimal_root(tmp_path, {invalide: _a4_bound_to_missing_method(invalide)})
 
-    assert I._load_dispositions(root) == {}
+    assert set(I._load_dispositions(root)) == {invalide}
+    assert len(I.invalid_qualifications(root)) == 1
 
 
 def test_unreadable_control_still_raises(tmp_path: Path) -> None:

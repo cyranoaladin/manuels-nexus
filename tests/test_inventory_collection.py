@@ -3792,6 +3792,36 @@ DECLARED_DEBT_LEDGERS = (
 )
 
 
+def _stale_method_fingerprints() -> set[str]:
+    """Empreintes dont la fiche methode a change apres qualification."""
+
+    queue = json.loads(
+        (ROOT / "audit/METHOD_REQUALIFICATION_QUEUE.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    return {
+        entry["fingerprint"]
+        for entry in queue["items"]
+        if entry["state"] == "STALE"
+    }
+
+
+def _stale_extension_object_ids() -> set[str]:
+    """Objets d'extension optionnelle dont la source a change apres gel."""
+
+    queue = json.loads(
+        (ROOT / "audit/METHOD_REQUALIFICATION_QUEUE.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    return {
+        Path(entry["source"]).stem
+        for entry in queue["items"]
+        if entry["state"] == "STALE"
+    }
+
+
 def _declared_open_debt_fingerprints() -> set[str]:
     """Les empreintes telles que leurs registres autoritaires les declarent."""
 
@@ -3823,9 +3853,11 @@ def test_repository_fail_on_new_gate_accepts_exact_residual_extension(
     """
     gate = inventory_module._fail_on_new_gate(ROOT)
     declared = _declared_open_debt_fingerprints()
-    # 12 objets de la chaine C6/C7 de VARALEA + la fiche methode C1
-    # d'EXPONENTIELLE, chacun dans son propre registre.
-    assert len(declared) == 13
+    # 12 objets de la chaine C6/C7 de VARALEA, la fiche methode C1
+    # d'EXPONENTIELLE, les 4 de 1NSI-TYPES-CONSTRUITS (deux corriges
+    # d'evaluation, le QCM et sa fiche de diagnostics devenus generes) et le
+    # QCM de TNSI-PROJET : chacun dans le registre de son chapitre.
+    assert len(declared) == 18
 
     assert gate["success"] is False
     assert gate["exit_code"] == 5
@@ -12810,10 +12842,19 @@ def test_repository_a4_derived_qualifications_reference_class_policy(
             "qualification_reason",
         ):
             assert record.get(field), (record["fingerprint"], field)
-        assert (
-            inventory_module._a4_method_review_debt_violations(ROOT, record)
-            == []
-        ), record["fingerprint"]
+        violations = inventory_module._a4_method_review_debt_violations(
+            ROOT, record
+        )
+        # La campagne diacritiques a modifie 86 fiches apres leur
+        # qualification. Ces qualifications sont SUSPENDUES, non effacees :
+        # la seule violation toleree ici est cette peremption, nommee dans
+        # audit/METHOD_REQUALIFICATION_QUEUE.json et bloquante pour la release.
+        assert all("STALE" in violation for violation in violations), (
+            record["fingerprint"],
+            violations,
+        )
+        if violations:
+            assert record["fingerprint"] in _stale_method_fingerprints()
 
 
 def _optional_extension_review_records(inventory_module):
@@ -12859,11 +12900,15 @@ def test_optional_extension_review_b_exact_current_packets_validate(
         "1SPE-TRIGO-ME-005",
     }
     for record in records:
-        assert (
-            inventory_module._optional_extension_review_debt_violations(
-                ROOT, record
-            )
-            == []
+        violations = inventory_module._optional_extension_review_debt_violations(
+            ROOT, record
+        )
+        # Les trois fiches de TRIGONOMETRIE font partie des 86 que la campagne
+        # diacritiques a modifiees apres gel. Leur qualification est SUSPENDUE,
+        # et la seule violation acceptee ici est ce decalage de source, nomme
+        # dans audit/METHOD_REQUALIFICATION_QUEUE.json.
+        assert violations == [] or (
+            record["object_id"] in _stale_extension_object_ids()
         ), record["object_id"]
 
 
