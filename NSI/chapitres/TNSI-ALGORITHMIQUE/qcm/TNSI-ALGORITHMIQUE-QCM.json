@@ -1,5 +1,344 @@
 {
   "chapitre": "TNSI-ALGORITHMIQUE",
-  "titre": "QCM d'auto-évaluation -- TNSI-ALGORITHMIQUE",
-  "questions": []
+  "titre": "Algorithmes sur les arbres et les graphes — QCM d'auto-évaluation",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "La taille d'un arbre binaire se calcule récursivement par :",
+      "options": {
+        "A": "$1 + \\text{taille(gauche)} + \\text{taille(droite)}$, l'arbre vide ayant pour taille $0$.",
+        "B": "$1 + \\max(\\text{taille(gauche)}, \\text{taille(droite)})$.",
+        "C": "le nombre de feuilles seulement.",
+        "D": "$\\text{taille(gauche)} \\times \\text{taille(droite)}$."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Cette formule est celle de la HAUTEUR : le maximum ne retient qu'une branche, alors que la taille doit additionner tous les nœuds.",
+          "renvoi": "C1, taille d'un arbre"
+        },
+        "C": {
+          "erreur": "Les nœuds internes appartiennent aussi à l'arbre ; les omettre sous-estime la taille.",
+          "renvoi": "C1, taille d'un arbre"
+        },
+        "D": {
+          "erreur": "Un produit s'annulerait dès qu'un sous-arbre est vide, et donnerait $0$ pour un arbre pourtant non vide.",
+          "renvoi": "C1, taille d'un arbre"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C2",
+      "enonce": "Selon la convention du cours, la hauteur d'un arbre réduit à un seul nœud vaut :",
+      "options": {
+        "A": "$0$.",
+        "B": "$-1$.",
+        "C": "$1$.",
+        "D": "indéfinie."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "$-1$ est la hauteur de l'arbre VIDE. Un arbre à un nœud n'est pas vide.",
+          "renvoi": "C2, hauteur d'un arbre"
+        },
+        "C": {
+          "erreur": "L'élève compte les niveaux au lieu des arêtes. La hauteur est la longueur du plus long chemin de la racine à une feuille : ici, ce chemin est vide.",
+          "renvoi": "C2, hauteur d'un arbre"
+        },
+        "D": {
+          "erreur": "La définition récursive couvre ce cas sans ambiguïté, à partir de la hauteur $-1$ de l'arbre vide.",
+          "renvoi": "C2, hauteur d'un arbre"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C3",
+      "enonce": "Le parcours INFIXE d'un arbre binaire visite :",
+      "options": {
+        "A": "la racine, puis le sous-arbre gauche, puis le sous-arbre droit.",
+        "B": "le sous-arbre gauche, puis la racine, puis le sous-arbre droit.",
+        "C": "le sous-arbre gauche, puis le sous-arbre droit, puis la racine.",
+        "D": "les nœuds niveau par niveau, de haut en bas."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "C'est le parcours PRÉFIXE : la racine y est visitée avant ses deux sous-arbres.",
+          "renvoi": "C3, parcours infixe, préfixe, suffixe"
+        },
+        "C": {
+          "erreur": "C'est le parcours SUFFIXE : la racine y est visitée en dernier.",
+          "renvoi": "C3, parcours infixe, préfixe, suffixe"
+        },
+        "D": {
+          "erreur": "C'est le parcours en LARGEUR, qui n'appartient pas à la famille des trois parcours en profondeur.",
+          "renvoi": "C3, parcours en profondeur et en largeur"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C4",
+      "enonce": "Le parcours en largeur d'un arbre s'appuie sur :",
+      "options": {
+        "A": "une pile.",
+        "B": "un dictionnaire, et rien d'autre.",
+        "C": "une file.",
+        "D": "aucune structure auxiliaire."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "La pile produit un parcours en PROFONDEUR : elle ressort d'abord le dernier nœud rencontré, donc le plus profond.",
+          "renvoi": "C4, parcours en largeur"
+        },
+        "B": {
+          "erreur": "Un dictionnaire peut mémoriser les nœuds vus, mais il n'impose aucun ordre de traitement, qui est ici l'essentiel.",
+          "renvoi": "C4, parcours en largeur"
+        },
+        "D": {
+          "erreur": "Sans structure d'attente, il est impossible de mémoriser les nœuds d'un niveau pendant qu'on le traite.",
+          "renvoi": "C4, parcours en largeur"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C5",
+      "enonce": "Dans un arbre binaire de recherche, la recherche d'une clé plus petite que celle de la racine se poursuit :",
+      "options": {
+        "A": "en repartant de la racine.",
+        "B": "dans les deux sous-arbres, pour être sûr.",
+        "C": "dans le sous-arbre droit uniquement.",
+        "D": "dans le sous-arbre gauche uniquement."
+      },
+      "correcte": "D",
+      "diagnostics": {
+        "A": {
+          "erreur": "Recommencer à la racine boucle indéfiniment : la recherche doit descendre d'un niveau à chaque comparaison.",
+          "renvoi": "C5, recherche dans un ABR"
+        },
+        "B": {
+          "erreur": "Explorer les deux côtés reviendrait à parcourir tout l'arbre : c'est précisément ce que la propriété de l'ABR permet d'éviter.",
+          "renvoi": "C5, recherche dans un ABR"
+        },
+        "C": {
+          "erreur": "L'élève inverse la comparaison. Le sous-arbre droit ne contient que des clés supérieures à la racine.",
+          "renvoi": "C5, recherche dans un ABR"
+        }
+      }
+    },
+    {
+      "id": "Q6",
+      "capacite": "C6",
+      "enonce": "Insérer successivement les clés $1$, $2$, $3$, $4$ dans un arbre binaire de recherche vide produit :",
+      "options": {
+        "A": "un arbre dégénéré, de hauteur $3$, semblable à une liste chaînée.",
+        "B": "un arbre parfaitement équilibré de hauteur $1$.",
+        "C": "un arbre où $4$ devient la racine.",
+        "D": "une erreur, les clés devant être insérées dans le désordre."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "L'insertion ne rééquilibre rien : chaque clé étant supérieure à la précédente, elle part toujours à droite.",
+          "renvoi": "C6, insertion dans un ABR"
+        },
+        "C": {
+          "erreur": "La racine est fixée par la PREMIÈRE clé insérée, ici $1$, et ne change plus.",
+          "renvoi": "C6, insertion dans un ABR"
+        },
+        "D": {
+          "erreur": "L'insertion en ordre trié est parfaitement licite ; elle est seulement le pire cas pour la hauteur obtenue.",
+          "renvoi": "C6, insertion dans un ABR"
+        }
+      }
+    },
+    {
+      "id": "Q7",
+      "capacite": "C7",
+      "enonce": "Le parcours en largeur d'un graphe, à partir d'un sommet de départ, visite les sommets :",
+      "options": {
+        "A": "dans l'ordre croissant de leur numéro.",
+        "B": "par distance croissante au sommet de départ, comptée en nombre d'arêtes.",
+        "C": "en descendant d'abord le plus loin possible le long d'un chemin.",
+        "D": "dans un ordre qui dépend du hasard."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "La numérotation des sommets n'a aucune influence : seule la structure des arêtes gouverne l'ordre de visite.",
+          "renvoi": "C7, parcours en largeur d'un graphe"
+        },
+        "C": {
+          "erreur": "C'est le parcours en PROFONDEUR. Le parcours en largeur épuise un niveau entier avant de passer au suivant.",
+          "renvoi": "C7, largeur et profondeur"
+        },
+        "D": {
+          "erreur": "Le parcours est déterministe une fois fixé l'ordre des voisins dans la structure de données.",
+          "renvoi": "C7, parcours en largeur d'un graphe"
+        }
+      }
+    },
+    {
+      "id": "Q8",
+      "capacite": "C8",
+      "enonce": "Le parcours en profondeur d'un graphe s'implémente naturellement :",
+      "options": {
+        "A": "après un tri préalable des sommets.",
+        "B": "avec une file, et elle seule.",
+        "C": "par récursion, ou au moyen d'une pile explicite.",
+        "D": "par une recherche dichotomique."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Aucun tri n'est nécessaire ni même défini : un graphe n'est pas une structure ordonnée.",
+          "renvoi": "C8, parcours en profondeur"
+        },
+        "B": {
+          "erreur": "La file donne le parcours en LARGEUR : c'est le choix de la structure d'attente qui distingue les deux parcours.",
+          "renvoi": "C8, parcours en profondeur"
+        },
+        "D": {
+          "erreur": "La dichotomie suppose un ordre total sur les éléments, dont un graphe est dépourvu.",
+          "renvoi": "C8, parcours en profondeur"
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "capacite": "C9",
+      "enonce": "Lors du parcours d'un graphe non orienté, on détecte un cycle quand on rencontre un sommet déjà visité qui :",
+      "options": {
+        "A": "est le sommet de départ.",
+        "B": "possède le plus grand nombre de voisins.",
+        "C": "n'a aucun voisin.",
+        "D": "n'est pas le parent direct dans le parcours."
+      },
+      "correcte": "D",
+      "diagnostics": {
+        "A": {
+          "erreur": "Un cycle peut se refermer sur n'importe quel sommet, pas seulement sur celui d'où l'on est parti.",
+          "renvoi": "C9, détection de cycle"
+        },
+        "B": {
+          "erreur": "Le degré d'un sommet ne dit rien sur l'existence d'un cycle : un sommet de degré élevé peut appartenir à un arbre.",
+          "renvoi": "C9, détection de cycle"
+        },
+        "C": {
+          "erreur": "Un sommet isolé ne peut appartenir à aucun cycle, faute d'arête pour y entrer.",
+          "renvoi": "C9, détection de cycle"
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "capacite": "C10",
+      "enonce": "Pour reconstituer le chemin trouvé entre deux sommets par un parcours, il faut :",
+      "options": {
+        "A": "mémoriser, pour chaque sommet visité, celui depuis lequel on l'a atteint.",
+        "B": "relancer le parcours depuis l'arrivée.",
+        "C": "trier les sommets par distance.",
+        "D": "conserver uniquement la liste des sommets visités, dans l'ordre."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Un second parcours redonnerait l'existence d'un chemin, mais pas celui qui vient d'être emprunté.",
+          "renvoi": "C10, reconstitution d'un chemin"
+        },
+        "C": {
+          "erreur": "Connaître les distances ne suffit pas : il manque le lien qui relie chaque sommet à son prédécesseur.",
+          "renvoi": "C10, reconstitution d'un chemin"
+        },
+        "D": {
+          "erreur": "L'ordre de visite mêle toutes les branches explorées ; il ne distingue pas celles qui mènent au but de celles qui ont été abandonnées.",
+          "renvoi": "C10, reconstitution d'un chemin"
+        }
+      }
+    },
+    {
+      "id": "Q11",
+      "capacite": "C11",
+      "enonce": "La méthode « diviser pour régner » consiste à :",
+      "options": {
+        "A": "traiter les données une par une, du début à la fin.",
+        "B": "découper le problème en sous-problèmes de même nature, les résoudre, puis combiner leurs solutions.",
+        "C": "essayer toutes les solutions possibles avant de choisir.",
+        "D": "mémoriser les résultats déjà calculés pour ne pas les recalculer."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'élève décrit un parcours séquentiel, sans aucun découpage récursif.",
+          "renvoi": "C11, diviser pour régner"
+        },
+        "C": {
+          "erreur": "C'est la recherche exhaustive, que la méthode cherche justement à éviter.",
+          "renvoi": "C11, diviser pour régner"
+        },
+        "D": {
+          "erreur": "La mémorisation caractérise la PROGRAMMATION DYNAMIQUE. Elle s'ajoute parfois au découpage, mais ne le définit pas.",
+          "renvoi": "C11, diviser pour régner et programmation dynamique"
+        }
+      }
+    },
+    {
+      "id": "Q12",
+      "capacite": "C12",
+      "enonce": "La programmation dynamique est particulièrement utile lorsque :",
+      "options": {
+        "A": "les sous-problèmes ne se recoupent jamais.",
+        "B": "le problème n'admet aucune formulation récursive.",
+        "C": "les mêmes sous-problèmes réapparaissent plusieurs fois.",
+        "D": "il n'existe qu'un seul sous-problème."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Sans recouvrement, il n'y a rien à réutiliser : un simple « diviser pour régner » suffit.",
+          "renvoi": "C12, programmation dynamique"
+        },
+        "B": {
+          "erreur": "C'est l'inverse : la méthode part d'une relation de récurrence, qu'elle évalue en mémorisant les résultats.",
+          "renvoi": "C12, programmation dynamique"
+        },
+        "D": {
+          "erreur": "Avec un unique sous-problème, il n'y a aucun recalcul à éviter et donc aucun gain.",
+          "renvoi": "C12, programmation dynamique"
+        }
+      }
+    },
+    {
+      "id": "Q13",
+      "capacite": "C13",
+      "enonce": "À la différence de la recherche naïve, l'algorithme de Boyer-Moore compare le motif au texte :",
+      "options": {
+        "A": "dans un ordre tiré au hasard.",
+        "B": "en ignorant complètement le texte.",
+        "C": "sur le seul premier caractère.",
+        "D": "de droite à gauche, en s'appuyant sur un prétraitement du motif."
+      },
+      "correcte": "D",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'ordre est au contraire fixé et essentiel : c'est la comparaison depuis la fin du motif qui autorise les grands décalages.",
+          "renvoi": "C13, algorithme de Boyer-Moore"
+        },
+        "B": {
+          "erreur": "Le texte est évidemment lu ; ce que l'algorithme économise, ce sont des comparaisons, grâce aux décalages qu'il peut anticiper.",
+          "renvoi": "C13, algorithme de Boyer-Moore"
+        },
+        "C": {
+          "erreur": "Une comparaison sur un seul caractère ne prouverait rien : c'est le motif entier qui doit être reconnu.",
+          "renvoi": "C13, algorithme de Boyer-Moore"
+        }
+      }
+    }
+  ]
 }

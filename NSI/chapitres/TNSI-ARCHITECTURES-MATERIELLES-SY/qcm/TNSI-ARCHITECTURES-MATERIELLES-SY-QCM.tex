@@ -1,79 +1,152 @@
-% META: {"id": "TNSI-ARCHITECTURES-MATERIELLES-SY-QCM", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "qcm", "capacites_codes": ["C1","C2","C4","C5","C6","C7"], "status": "generated"}
+% META: {"id": "TNSI-ARCHITECTURES-MATERIELLES-SY-QCM", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "qcm", "genere_depuis": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/qcm/TNSI-ARCHITECTURES-MATERIELLES-SY-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Architectures, systèmes, réseaux}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Architectures matérielles, systèmes d'exploitation et réseaux — QCM d'auto-évaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule réponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C01/C02A --- Système sur puce, processus}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} L'inconvénient principal d'un système sur puce (SoC) par rapport à des composants séparés est :
+\item[] \textbf{Capacité C1}
+
+\item \textbf{[Q1]} Par rapport à des composants séparés, le principal inconvénient d'un système sur puce est :
   \begin{enumerate}[label=\Alph*.]
-    \item une consommation énergétique plus élevée.
-    \item la perte de modularité (impossible de remplacer un seul composant défaillant).
-    \item une taille plus importante.
-    \item un coût de fabrication toujours plus élevé.
+    \item la perte de modularité : un composant défaillant ne peut pas être remplacé seul.
+    \item une consommation d'énergie plus élevée.
+    \item un encombrement plus important.
+    \item un coût de fabrication systématiquement supérieur.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C2}
 
 \item \textbf{[Q2]} Créer un processus consiste, pour le système d'exploitation, à :
   \begin{enumerate}[label=\Alph*.]
-    \item lui allouer de la mémoire et l'inscrire dans la liste des processus à exécuter.
-    \item éteindre tous les autres processus.
-    \item compiler son code source.
+    \item compiler le code source du programme.
+    \item lui allouer de la mémoire et l'inscrire parmi les processus à exécuter.
+    \item arrêter tous les autres processus.
     \item lui attribuer une adresse IP.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C3}
 
-\subsection*{C02C --- Interblocage}
-
-\item \textbf{[Q3]} Un interblocage se traduit, dans le graphe d'attente, par :
+\item \textbf{[Q3]} L'ordonnanceur du système d'exploitation a pour rôle de :
   \begin{enumerate}[label=\Alph*.]
-    \item un sommet isolé.
-    \item un cycle.
-    \item un arbre.
-    \item un graphe vide.
+    \item trier les fichiers sur le disque.
+    \item compiler les programmes avant leur lancement.
+    \item décider quel processus prêt obtient le processeur, et pour combien de temps.
+    \item supprimer les processus terminés de la mémoire, et rien d'autre.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C4}
 
-\subsection*{C03 --- Routage}
-
-\item \textbf{[Q4]} Le protocole RIP choisit la route qui minimise :
+\item \textbf{[Q4]} Dans le graphe d'attente des processus, un interblocage se manifeste par :
   \begin{enumerate}[label=\Alph*.]
-    \item le coût cumulé des liaisons.
+    \item un cycle.
+    \item un arbre.
+    \item un graphe sans aucune arête.
+    \item un sommet isolé.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C5}
+
+\item \textbf{[Q5]} Le protocole de routage RIP choisit la route qui minimise :
+  \begin{enumerate}[label=\Alph*.]
+    \item le coût cumulé des liaisons traversées.
     \item le nombre de sauts.
     \item la latence mesurée en temps réel.
     \item le nombre d'utilisateurs connectés.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C6}
 
-\subsection*{C04A/C04B --- Chiffrement, HTTPS}
-
-\item \textbf{[Q5]} Le chiffrement asymétrique utilise :
+\item \textbf{[Q6]} Le chiffrement asymétrique repose sur :
   \begin{enumerate}[label=\Alph*.]
-    \item une seule clé secrète partagée.
-    \item une paire de clés, l'une publique et l'une privée.
-    \item aucune clé.
-    \item une clé différente à chaque caractère.
+    \item une unique clé secrète, partagée par les deux correspondants.
+    \item l'absence de toute clé.
+    \item une paire de clés, l'une publique et l'autre privée.
+    \item une clé différente pour chaque caractère du message.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C7}
 
-\item \textbf{[Q6]} Lors d'une connexion HTTPS, le chiffrement asymétrique sert principalement à :
+\item \textbf{[Q7]} Au cours d'une connexion HTTPS, le chiffrement asymétrique sert principalement à :
   \begin{enumerate}[label=\Alph*.]
-    \item chiffrer l'intégralité des données échangées de bout en bout.
-    \item échanger en toute sécurité une clé symétrique de session.
+    \item chiffrer la totalité des données échangées pendant toute la session.
+    \item compresser les données avant leur envoi.
     \item afficher le cadenas dans le navigateur.
-    \item compresser les données.
+    \item convenir en sécurité d'une clé symétrique de session.
   \end{enumerate}
 
 \end{enumerate}
+
+% NEXUS-QCM-TEACHER-ONLY-BEGIN
+\ifnxVersionProfesseur
+\clearpage
+\section*{Clé de correction — réservée au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacité & Réponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C2 & \textbf{B} \\
+Q3 & C3 & \textbf{C} \\
+Q4 & C4 & \textbf{A} \\
+Q5 & C5 & \textbf{B} \\
+Q6 & C6 & \textbf{C} \\
+Q7 & C7 & \textbf{D} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des réponses erronées}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — L'intégration réduit au contraire les distances parcourues par les signaux, donc la consommation. C'est un de ses avantages. \emph{Renvoi : C1, système sur puce.}
+    \item \textbf{C} — Regrouper les composants sur une même puce diminue la taille : c'est ce qui rend possibles les appareils mobiles. \emph{Renvoi : C1, système sur puce.}
+    \item \textbf{D} — En grande série, l'intégration abaisse le coût unitaire. Le défaut porte sur la réparabilité, non sur le prix. \emph{Renvoi : C1, système sur puce.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — La compilation précède l'exécution et relève d'un autre outil. Le système lance un programme déjà exécutable. \emph{Renvoi : C2, création d'un processus.}
+    \item \textbf{C} — C'est le contraire de la multiprogrammation : de nombreux processus coexistent, et l'ordonnanceur les fait alterner. \emph{Renvoi : C2, création d'un processus.}
+    \item \textbf{D} — L'adresse IP identifie une machine sur un réseau, non un processus sur une machine. \emph{Renvoi : C2, création d'un processus.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — L'élève confond ordonnancement des processus et organisation du système de fichiers, qui sont deux fonctions distinctes. \emph{Renvoi : C3, ordonnancement des processus.}
+    \item \textbf{B} — La compilation est antérieure et extérieure au système ; l'ordonnanceur ne manipule que des processus déjà créés. \emph{Renvoi : C3, ordonnancement des processus.}
+    \item \textbf{D} — La libération de mémoire suit la fin d'un processus. L'ordonnanceur, lui, décide de l'ATTRIBUTION du processeur aux processus prêts. \emph{Renvoi : C3, ordonnancement des processus.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{B} — Un arbre est par définition sans cycle : les attentes y remontent vers une racine et finissent donc par se résoudre. \emph{Renvoi : C4, interblocage.}
+    \item \textbf{C} — Sans arête, aucun processus n'attend de ressource détenue par un autre. \emph{Renvoi : C4, interblocage.}
+    \item \textbf{D} — Un sommet isolé désigne un processus qui n'attend rien : c'est exactement le contraire d'un blocage. \emph{Renvoi : C4, interblocage.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — Le coût cumulé, qui tient compte du débit des liaisons, est le critère d'OSPF. RIP ignore la qualité des liens. \emph{Renvoi : C5, protocoles de routage.}
+    \item \textbf{C} — RIP ne mesure rien en temps réel : sa métrique est fixe et se contente de dénombrer les routeurs traversés. \emph{Renvoi : C5, protocoles de routage.}
+    \item \textbf{D} — La charge des machines n'intervient ni dans la métrique de RIP ni dans celle d'OSPF. \emph{Renvoi : C5, protocoles de routage.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — C'est la définition du chiffrement SYMÉTRIQUE, dont la difficulté est précisément de transmettre cette clé unique. \emph{Renvoi : C6, chiffrement symétrique et asymétrique.}
+    \item \textbf{B} — Sans clé, il n'y a plus de secret : n'importe qui pourrait déchiffrer le message. \emph{Renvoi : C6, chiffrement symétrique et asymétrique.}
+    \item \textbf{D} — L'élève décrit un chiffrement par flot avec masque jetable, qui reste symétrique et ne correspond pas à la question. \emph{Renvoi : C6, chiffrement symétrique et asymétrique.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — Le chiffrement asymétrique est bien trop lent pour un flux entier. Il n'intervient qu'à l'établissement de la connexion. \emph{Renvoi : C7, échange de clé et HTTPS.}
+    \item \textbf{B} — Chiffrer et compresser sont deux opérations distinctes ; le protocole ne confond pas les deux. \emph{Renvoi : C7, échange de clé et HTTPS.}
+    \item \textbf{C} — Le cadenas n'est qu'un indicateur affiché par le navigateur : il rend compte de la sécurité obtenue, il ne la produit pas. \emph{Renvoi : C7, échange de clé et HTTPS.}
+  \end{itemize}
+\end{itemize}
+\fi
+% NEXUS-QCM-TEACHER-ONLY-END

@@ -1,18 +1,17 @@
-% META: {"id": "TNSI-HISTOIRE-INFORMATIQUE-QCM", "chapitre": "TNSI-HISTOIRE-INFORMATIQUE", "type_objet": "qcm", "capacites_codes": ["C1","C2"], "status": "generated"}
+% META: {"id": "TNSI-HISTOIRE-INFORMATIQUE-QCM", "chapitre": "TNSI-HISTOIRE-INFORMATIQUE", "type_objet": "qcm", "genere_depuis": "chapitres/TNSI-HISTOIRE-INFORMATIQUE/qcm/TNSI-HISTOIRE-INFORMATIQUE-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation — Histoire de l'informatique}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Histoire de l'informatique — QCM d'auto-évaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule reponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule réponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1 — Repères chronologiques}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Le concept de machine universelle est formalise par Alan Turing en :
+\item[] \textbf{Capacité C1}
+
+\item \textbf{[Q1]} Alan Turing formalise le concept de machine universelle en :
   \begin{enumerate}[label=\Alph*.]
     \item 1936.
     \item 1948.
@@ -20,9 +19,7 @@
     \item 1991.
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q2]} ARPANET, ancetre d'Internet, est mis en service en :
+\item \textbf{[Q2]} ARPANET, ancêtre d'Internet, est mis en service en :
   \begin{enumerate}[label=\Alph*.]
     \item 1948.
     \item 1969.
@@ -30,26 +27,71 @@
     \item 2000.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C2}
 
-\subsection*{C2 — Évolution logiciel/matériel}
-
-\item \textbf{[Q3]} Depuis les debuts de l'informatique, le role du matériel a evolue vers :
+\item \textbf{[Q3]} Depuis les débuts de l'informatique, le rôle du matériel a évolué vers :
   \begin{enumerate}[label=\Alph*.]
-    \item plus de specialisation.
-    \item plus de generite (matériel generique, logique portee par le logiciel).
-    \item une disparition progressive.
-    \item aucune evolution notable.
+    \item une spécialisation croissante, chaque machine ne traitant qu'une seule tâche.
+    \item une disparition progressive au profit du seul logiciel.
+    \item davantage de généricité, la logique particulière étant portée par le logiciel.
+    \item aucune évolution notable.
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q4]} Internet et le World Wide Web :
+\item \textbf{[Q4]} Internet et le World Wide Web sont dans le rapport suivant :
   \begin{enumerate}[label=\Alph*.]
-    \item designent exactement la même chose.
-    \item sont deux reseaux physiques distincts et indépendants.
-    \item le Web est un service qui fonctionne au-dessus du reseau Internet.
+    \item ce sont deux noms de la même chose.
+    \item ce sont deux réseaux physiques distincts et indépendants.
     \item Internet est un service qui fonctionne au-dessus du Web.
+    \item le Web est un service qui fonctionne au-dessus du réseau Internet.
   \end{enumerate}
 
 \end{enumerate}
+
+% NEXUS-QCM-TEACHER-ONLY-BEGIN
+\ifnxVersionProfesseur
+\clearpage
+\section*{Clé de correction — réservée au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacité & Réponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C1 & \textbf{B} \\
+Q3 & C2 & \textbf{C} \\
+Q4 & C2 & \textbf{D} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des réponses erronées}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — 1948 est l'époque des premières machines à programme enregistré. Le modèle théorique les précède de plus de dix ans. \emph{Renvoi : C1, repères chronologiques.}
+    \item \textbf{C} — 1969 est la mise en service d'ARPANET, un jalon des réseaux et non du modèle de calcul. \emph{Renvoi : C1, repères chronologiques.}
+    \item \textbf{D} — 1991 est la naissance de Python et l'ouverture du Web au public : bien après les fondements théoriques. \emph{Renvoi : C1, repères chronologiques.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — 1948 précède l'existence même des ordinateurs interconnectés ; les premières machines à programme enregistré datent de cette période. \emph{Renvoi : C1, repères chronologiques.}
+    \item \textbf{C} — 1989 est l'année où Tim Berners-Lee propose le Web, soit vingt ans APRÈS le réseau qui le porte. \emph{Renvoi : C1, Internet et le Web.}
+    \item \textbf{D} — L'élève date le réseau de sa diffusion grand public, largement postérieure à sa création. \emph{Renvoi : C1, repères chronologiques.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — C'est l'inverse du mouvement historique : les premières machines étaient câblées pour une tâche, et le programme enregistré les a rendues polyvalentes. \emph{Renvoi : C2, rôles relatifs du logiciel et du matériel.}
+    \item \textbf{B} — Tout logiciel s'exécute sur du matériel. Sa part relative dans la valeur a crû, mais le support n'a pas disparu. \emph{Renvoi : C2, rôles relatifs du logiciel et du matériel.}
+    \item \textbf{D} — Le déplacement de la logique du câblage vers le logiciel est l'une des évolutions majeures de la discipline. \emph{Renvoi : C2, rôles relatifs du logiciel et du matériel.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — Le courriel et bien d'autres services empruntent Internet sans passer par le Web : les deux ne se confondent donc pas. \emph{Renvoi : C2, Internet et le Web.}
+    \item \textbf{B} — Le Web n'est pas un réseau physique : c'est un ensemble de pages liées, échangées grâce au protocole HTTP. \emph{Renvoi : C2, Internet et le Web.}
+    \item \textbf{C} — L'élève intervertit les deux niveaux. L'infrastructure est Internet ; le Web est l'un des services qu'elle transporte. \emph{Renvoi : C2, Internet et le Web.}
+  \end{itemize}
+\end{itemize}
+\fi
+% NEXUS-QCM-TEACHER-ONLY-END

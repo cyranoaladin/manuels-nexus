@@ -1,77 +1,271 @@
-% META: {"id": "TNSI-STRUCTURES-DONNEES-QCM", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "qcm", "capacites_codes": ["C2","C4","C6","C8","C10","C12"], "status": "generated"}
+% META: {"id": "TNSI-STRUCTURES-DONNEES-QCM", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "qcm", "genere_depuis": "chapitres/TNSI-STRUCTURES-DONNEES/qcm/TNSI-STRUCTURES-DONNEES-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation — Structures de données}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Structures de données — QCM d'auto-évaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule reponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule réponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C01B/C02A — Interface, classes}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} L'interface d'une structure de donnees décrit :
+\item[] \textbf{Capacité C1}
+
+\item \textbf{[Q1]} L'interface d'une structure de données décrit :
   \begin{enumerate}[label=\Alph*.]
-    \item comment les donnees sont stockees en memoire.
-    \item les opérations disponibles, sans preciser leur realisation.
-    \item le nombre d'octets utilises.
-    \item le langage de programmation utilise.
+    \item les opérations disponibles, sans préciser comment elles sont réalisées.
+    \item la façon dont les données sont rangées en mémoire.
+    \item le nombre d'octets occupés.
+    \item le langage de programmation employé.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C2}
 
-\item \textbf{[Q2]} Dans une classe Python, le paramètre \lstinline{self} designe :
+\item \textbf{[Q2]} Passer d'une implémentation d'une pile par tableau à une implémentation par liste chaînée, sans changer son interface :
   \begin{enumerate}[label=\Alph*.]
+    \item oblige à réécrire tous les programmes qui utilisent la pile.
+    \item laisse inchangés les programmes qui n'utilisent que \code{empiler} et \code{depiler}.
+    \item change le principe LIFO en principe FIFO.
+    \item est impossible : l'interface dépend de l'implémentation.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C3}
+
+\item \textbf{[Q3]} Une file peut être implémentée par une liste Python où l'on retire en tête avec \code{pop(0)}, ou par deux piles. Ces deux implémentations :
+  \begin{enumerate}[label=\Alph*.]
+    \item respectent le même contrat, mais n'ont pas le même coût.
+    \item sont interdites : une file n'admet qu'une implémentation.
+    \item produisent des ordres de sortie différents.
+    \item ont exactement les mêmes performances.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C4}
+
+\item \textbf{[Q4]} Dans la définition d'une classe Python, la méthode chargée d'initialiser un nouvel objet se nomme :
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{init}
+    \item \code{\_\_init\_\_}
+    \item \code{create}
+    \item \code{new}
+  \end{enumerate}
+
+\item[] \textbf{Capacité C5}
+
+\item \textbf{[Q5]} Dans une méthode de classe Python, le paramètre \code{self} désigne :
+  \begin{enumerate}[label=\Alph*.]
+    \item le premier attribut déclaré.
     \item la classe elle-même.
-    \item l'objet sur lequel la méthode est appelee.
-    \item le premier attribut de la classe.
-    \item rien de particulier, il est optionnel.
+    \item l'objet sur lequel la méthode est appelée.
+    \item rien de particulier : il est facultatif.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C6}
 
-\subsection*{C03A/C03C — Piles, files, recherche}
-
-\item \textbf{[Q3]} Une pile fonctionne selon le principe :
+\item \textbf{[Q6]} On empile successivement $1$, puis $2$, puis $3$ dans une pile vide, puis on dépile une fois. La valeur obtenue est :
   \begin{enumerate}[label=\Alph*.]
-    \item FIFO.
-    \item LIFO.
-    \item aleatoire.
-    \item trie.
+    \item $1$
+    \item la plus petite des trois.
+    \item $2$
+    \item $3$
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C7}
 
-\item \textbf{[Q4]} Rechercher une valeur associee a une cle dans un dictionnaire est, en moyenne, plus rapide que dans une liste car :
+\item \textbf{[Q7]} Pour mémoriser les pages visitées afin de revenir en arrière dans un navigateur, la structure adaptée est :
   \begin{enumerate}[label=\Alph*.]
-    \item le dictionnaire est toujours plus petit.
-    \item l'acces se fait directement via une table de hachage, independamment de la taille.
-    \item les dictionnaires sont tries automatiquement.
-    \item ce n'est pas vrai, c'est toujours identique.
+    \item une pile.
+    \item un arbre binaire de recherche.
+    \item une file.
+    \item une matrice d'adjacence.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C8}
 
-\subsection*{C04B/C05B — Arbres, graphes}
-
-\item \textbf{[Q5]} La hauteur d'un arbre reduit a une seule feuille (racine sans enfant) vaut :
+\item \textbf{[Q8]} Rechercher une valeur associée à une clé est en moyenne plus rapide dans un dictionnaire que dans une liste, parce que :
   \begin{enumerate}[label=\Alph*.]
-    \item $-1$.
-    \item $0$.
-    \item $1$.
-    \item indefinie.
+    \item un dictionnaire est toujours plus petit qu'une liste.
+    \item l'accès passe par une table de hachage, sans dépendre du nombre d'éléments.
+    \item l'affirmation est fausse : les deux coûtent autant.
+    \item les dictionnaires sont triés automatiquement.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C9}
 
-\item \textbf{[Q6]} Dans une matrice d'adjacence d'un graphe a $n$ sommets, la case $(i,j)$ vaut $1$ si :
+\item \textbf{[Q9]} Parmi ces situations, laquelle appelle le plus naturellement une structure arborescente ?
   \begin{enumerate}[label=\Alph*.]
-    \item les sommets $i$ et $j$ ont le même numero.
-    \item il existe une arête de $i$ vers $j$.
+    \item La liste des élèves d'une classe, par ordre alphabétique.
+    \item La file d'attente des travaux d'impression.
+    \item L'arborescence des dossiers et fichiers d'un disque.
+    \item Le relevé des températures d'une journée, heure par heure.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C10}
+
+\item \textbf{[Q10]} La taille d'un arbre binaire est :
+  \begin{enumerate}[label=\Alph*.]
+    \item la longueur du plus long chemin de la racine à une feuille.
+    \item le nombre de ses niveaux moins un.
+    \item son nombre de feuilles.
+    \item son nombre de nœuds.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C11}
+
+\item \textbf{[Q11]} Pour modéliser un réseau social où l'amitié est réciproque, on emploie :
+  \begin{enumerate}[label=\Alph*.]
+    \item un graphe non orienté, les personnes étant les sommets et les amitiés les arêtes.
+    \item une pile de profils.
+    \item un arbre binaire de recherche.
+    \item un graphe orienté, car l'amitié a toujours un sens.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C12}
+
+\item \textbf{[Q12]} Dans la matrice d'adjacence d'un graphe à $n$ sommets, la case $(i, j)$ vaut $1$ lorsque :
+  \begin{enumerate}[label=\Alph*.]
+    \item les sommets $i$ et $j$ portent le même numéro.
+    \item il existe une arête reliant $i$ à $j$.
     \item le sommet $i$ est une feuille.
-    \item $i+j=n$.
+    \item la somme $i + j$ vaut $n$.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C13}
+
+\item \textbf{[Q13]} Dans une implémentation par listes de successeurs, l'espace occupé par un graphe à $n$ sommets et $m$ arêtes est de l'ordre de :
+  \begin{enumerate}[label=\Alph*.]
+    \item $n^2$, quel que soit $m$.
+    \item $m$ seulement, sans dépendre de $n$.
+    \item $n + m$.
+    \item $n \times m$.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C14}
+
+\item \textbf{[Q14]} Pour convertir une matrice d'adjacence en listes de successeurs, il faut :
+  \begin{enumerate}[label=\Alph*.]
+    \item conserver seulement la diagonale de la matrice.
+    \item trier les sommets par nombre de voisins.
+    \item recopier chaque ligne de la matrice telle quelle, zéros compris.
+    \item pour chaque sommet, retenir les indices des colonnes dont la case vaut $1$.
   \end{enumerate}
 
 \end{enumerate}
+
+% NEXUS-QCM-TEACHER-ONLY-BEGIN
+\ifnxVersionProfesseur
+\clearpage
+\section*{Clé de correction — réservée au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacité & Réponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C2 & \textbf{B} \\
+Q3 & C3 & \textbf{A} \\
+Q4 & C4 & \textbf{B} \\
+Q5 & C5 & \textbf{C} \\
+Q6 & C6 & \textbf{D} \\
+Q7 & C7 & \textbf{A} \\
+Q8 & C8 & \textbf{B} \\
+Q9 & C9 & \textbf{C} \\
+Q10 & C10 & \textbf{D} \\
+Q11 & C11 & \textbf{A} \\
+Q12 & C12 & \textbf{B} \\
+Q13 & C13 & \textbf{C} \\
+Q14 & C14 & \textbf{D} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des réponses erronées}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — L'élève décrit l'IMPLÉMENTATION. L'interface énonce le contrat ; le rangement en mémoire est un choix de réalisation qu'elle laisse libre. \emph{Renvoi : C1, spécification par l'interface.}
+    \item \textbf{C} — L'encombrement dépend de l'implémentation retenue, et varie donc d'une réalisation à l'autre pour une même interface. \emph{Renvoi : C1, spécification par l'interface.}
+    \item \textbf{D} — Une même interface, par exemple celle d'une pile, se retrouve dans tous les langages : elle en est indépendante. \emph{Renvoi : C1, spécification par l'interface.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — C'est précisément ce que la séparation évite. Tant que les opérations gardent leur nom et leur comportement, le code appelant ne voit rien. \emph{Renvoi : C2, interface et implémentation.}
+    \item \textbf{C} — L'ordre de service fait partie du contrat, donc de l'interface. Changer d'implémentation ne peut pas le modifier. \emph{Renvoi : C2, interface et implémentation.}
+    \item \textbf{D} — L'élève inverse la dépendance : c'est l'implémentation qui doit respecter l'interface, et non l'inverse. \emph{Renvoi : C2, interface et implémentation.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{B} — C'est l'inverse : pouvoir réaliser une même structure de plusieurs façons est justement l'intérêt de la séparation entre interface et implémentation. \emph{Renvoi : C3, implémentations multiples.}
+    \item \textbf{C} — Si l'ordre différait, l'une des deux ne serait pas une file. Toutes deux servent les éléments dans leur ordre d'arrivée. \emph{Renvoi : C3, implémentations multiples.}
+    \item \textbf{D} — \code{pop(0)} décale tous les éléments restants, à un coût linéaire, alors que la version à deux piles amortit ce coût. \emph{Renvoi : C3, coût d'une implémentation.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — Sans les doubles soulignements, la méthode est ordinaire : Python ne l'appelle pas automatiquement à la construction. \emph{Renvoi : C4, définition d'une classe.}
+    \item \textbf{C} — Aucune convention Python ne reconnaît ce nom ; la méthode ne serait jamais appelée d'elle-même. \emph{Renvoi : C4, définition d'une classe.}
+    \item \textbf{D} — L'élève transpose le mot-clé d'autres langages. En Python, l'instanciation s'écrit sans \code{new}. \emph{Renvoi : C4, définition d'une classe.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — \code{self} donne accès à TOUS les attributs, par exemple \code{self.taille} ; il n'en désigne aucun en particulier. \emph{Renvoi : C5, attributs et méthodes.}
+    \item \textbf{B} — La classe est le moule ; \code{self} désigne l'exemplaire. Deux objets d'une même classe reçoivent des \code{self} différents. \emph{Renvoi : C5, attributs et méthodes.}
+    \item \textbf{D} — Il est au contraire indispensable : l'omettre prive la méthode de tout accès à l'objet et provoque une erreur à l'appel. \emph{Renvoi : C5, attributs et méthodes.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — L'élève applique le principe FIFO, celui de la FILE. Une pile sert en dernier entré, premier sorti : c'est $3$ qui ressort. \emph{Renvoi : C6, LIFO et FIFO.}
+    \item \textbf{B} — Une pile ne compare jamais les valeurs ; elle ne connaît que l'ordre d'arrivée. \emph{Renvoi : C6, LIFO et FIFO.}
+    \item \textbf{C} — Aucun élément intermédiaire n'est accessible : seul le sommet de la pile peut être retiré. \emph{Renvoi : C6, LIFO et FIFO.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{B} — L'arbre de recherche organise les données par valeur. Ici, c'est l'ordre de visite qui compte, non un ordre sur les adresses. \emph{Renvoi : C7, choix d'une structure.}
+    \item \textbf{C} — Une file rendrait d'abord la page la PLUS ANCIENNE, alors que le retour arrière doit rendre la plus récente. \emph{Renvoi : C7, choix d'une structure.}
+    \item \textbf{D} — La matrice d'adjacence décrit des liens entre sommets ; elle ne mémorise aucune chronologie. \emph{Renvoi : C7, choix d'une structure.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{A} — La taille n'entre pas en jeu : l'écart tient à la méthode d'accès, et il grandit justement avec le nombre d'éléments. \emph{Renvoi : C8, recherche par clé et par parcours.}
+    \item \textbf{C} — La recherche dans une liste parcourt les éléments un à un, à un coût linéaire, tandis que l'accès par clé est en temps quasi constant. \emph{Renvoi : C8, recherche par clé et par parcours.}
+    \item \textbf{D} — Aucun tri n'a lieu, et il ne servirait pas ici : le hachage calcule directement l'emplacement de la clé. \emph{Renvoi : C8, recherche par clé et par parcours.}
+  \end{itemize}
+  \item \textbf{Q9}
+  \begin{itemize}
+    \item \textbf{A} — Une liste ordonnée est linéaire. Un arbre ne s'impose que si l'on veut de surcroît accélérer les recherches. \emph{Renvoi : C9, situations arborescentes.}
+    \item \textbf{B} — Une file d'attente est purement linéaire : chaque travail a un seul suivant, sans ramification. \emph{Renvoi : C9, situations arborescentes.}
+    \item \textbf{D} — Une suite de mesures indexée par le temps est un tableau ; aucune hiérarchie n'y apparaît. \emph{Renvoi : C9, situations arborescentes.}
+  \end{itemize}
+  \item \textbf{Q10}
+  \begin{itemize}
+    \item \textbf{A} — L'élève définit la HAUTEUR. Les deux mesures diffèrent : un arbre dégénéré à $n$ nœuds a pour taille $n$ et pour hauteur $n-1$. \emph{Renvoi : C10, taille, hauteur et feuilles.}
+    \item \textbf{B} — C'est encore la hauteur, exprimée par le nombre de niveaux. La taille dénombre les nœuds, pas les niveaux. \emph{Renvoi : C10, taille, hauteur et feuilles.}
+    \item \textbf{C} — Les feuilles ne forment qu'une partie des nœuds ; les nœuds internes comptent aussi dans la taille. \emph{Renvoi : C10, taille, hauteur et feuilles.}
+  \end{itemize}
+  \item \textbf{Q11}
+  \begin{itemize}
+    \item \textbf{B} — Une pile ordonne dans le temps ; elle ne représente aucune relation entre deux éléments. \emph{Renvoi : C11, modélisation par un graphe.}
+    \item \textbf{C} — Un arbre interdit les cycles et impose une racine. Or trois personnes amies deux à deux forment un cycle, situation banale ici. \emph{Renvoi : C11, modélisation par un graphe.}
+    \item \textbf{D} — L'orientation ne s'impose que si la relation est à sens unique, comme l'abonnement. Une amitié réciproque se représente par une arête sans direction. \emph{Renvoi : C11, graphes orientés et non orientés.}
+  \end{itemize}
+  \item \textbf{Q12}
+  \begin{itemize}
+    \item \textbf{A} — La diagonale ne vaut $1$ que si le graphe comporte une boucle sur ce sommet, ce qui est un cas particulier et non la règle. \emph{Renvoi : C12, matrice d'adjacence.}
+    \item \textbf{C} — La notion de feuille appartient au vocabulaire des arbres ; la matrice code des arêtes, non des rôles de sommets. \emph{Renvoi : C12, matrice d'adjacence.}
+    \item \textbf{D} — L'élève invente une relation arithmétique entre indices. Le contenu de la matrice décrit le graphe, non la numérotation. \emph{Renvoi : C12, matrice d'adjacence.}
+  \end{itemize}
+  \item \textbf{Q13}
+  \begin{itemize}
+    \item \textbf{A} — C'est le coût de la MATRICE d'adjacence, qui réserve une case par couple de sommets, même absent. Les listes de successeurs ne stockent que les arêtes présentes. \emph{Renvoi : C13, listes de successeurs.}
+    \item \textbf{B} — Il faut de toute façon une entrée par sommet, y compris pour un sommet isolé sans aucune arête. \emph{Renvoi : C13, listes de successeurs.}
+    \item \textbf{D} — Aucune structure ne duplique les arêtes pour chaque sommet ; chaque arête n'est enregistrée qu'une ou deux fois. \emph{Renvoi : C13, listes de successeurs.}
+  \end{itemize}
+  \item \textbf{Q14}
+  \begin{itemize}
+    \item \textbf{A} — La diagonale ne renseigne que sur d'éventuelles boucles ; toutes les autres arêtes seraient perdues. \emph{Renvoi : C14, conversion entre représentations.}
+    \item \textbf{B} — Le tri modifierait l'ordre sans rien apporter : la conversion doit préserver exactement les mêmes arêtes. \emph{Renvoi : C14, conversion entre représentations.}
+    \item \textbf{C} — Conserver les zéros reviendrait à garder la matrice sous un autre nom, et à perdre le gain de place recherché. \emph{Renvoi : C14, conversion entre représentations.}
+  \end{itemize}
+\end{itemize}
+\fi
+% NEXUS-QCM-TEACHER-ONLY-END

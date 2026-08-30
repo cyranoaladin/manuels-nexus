@@ -1,5 +1,188 @@
 {
   "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY",
-  "titre": "QCM d'auto-évaluation -- TNSI-ARCHITECTURES-MATERIELLES-SY",
-  "questions": []
+  "titre": "Architectures matérielles, systèmes d'exploitation et réseaux — QCM d'auto-évaluation",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "Par rapport à des composants séparés, le principal inconvénient d'un système sur puce est :",
+      "options": {
+        "A": "la perte de modularité : un composant défaillant ne peut pas être remplacé seul.",
+        "B": "une consommation d'énergie plus élevée.",
+        "C": "un encombrement plus important.",
+        "D": "un coût de fabrication systématiquement supérieur."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "L'intégration réduit au contraire les distances parcourues par les signaux, donc la consommation. C'est un de ses avantages.",
+          "renvoi": "C1, système sur puce"
+        },
+        "C": {
+          "erreur": "Regrouper les composants sur une même puce diminue la taille : c'est ce qui rend possibles les appareils mobiles.",
+          "renvoi": "C1, système sur puce"
+        },
+        "D": {
+          "erreur": "En grande série, l'intégration abaisse le coût unitaire. Le défaut porte sur la réparabilité, non sur le prix.",
+          "renvoi": "C1, système sur puce"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C2",
+      "enonce": "Créer un processus consiste, pour le système d'exploitation, à :",
+      "options": {
+        "A": "compiler le code source du programme.",
+        "B": "lui allouer de la mémoire et l'inscrire parmi les processus à exécuter.",
+        "C": "arrêter tous les autres processus.",
+        "D": "lui attribuer une adresse IP."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "La compilation précède l'exécution et relève d'un autre outil. Le système lance un programme déjà exécutable.",
+          "renvoi": "C2, création d'un processus"
+        },
+        "C": {
+          "erreur": "C'est le contraire de la multiprogrammation : de nombreux processus coexistent, et l'ordonnanceur les fait alterner.",
+          "renvoi": "C2, création d'un processus"
+        },
+        "D": {
+          "erreur": "L'adresse IP identifie une machine sur un réseau, non un processus sur une machine.",
+          "renvoi": "C2, création d'un processus"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C3",
+      "enonce": "L'ordonnanceur du système d'exploitation a pour rôle de :",
+      "options": {
+        "A": "trier les fichiers sur le disque.",
+        "B": "compiler les programmes avant leur lancement.",
+        "C": "décider quel processus prêt obtient le processeur, et pour combien de temps.",
+        "D": "supprimer les processus terminés de la mémoire, et rien d'autre."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'élève confond ordonnancement des processus et organisation du système de fichiers, qui sont deux fonctions distinctes.",
+          "renvoi": "C3, ordonnancement des processus"
+        },
+        "B": {
+          "erreur": "La compilation est antérieure et extérieure au système ; l'ordonnanceur ne manipule que des processus déjà créés.",
+          "renvoi": "C3, ordonnancement des processus"
+        },
+        "D": {
+          "erreur": "La libération de mémoire suit la fin d'un processus. L'ordonnanceur, lui, décide de l'ATTRIBUTION du processeur aux processus prêts.",
+          "renvoi": "C3, ordonnancement des processus"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C4",
+      "enonce": "Dans le graphe d'attente des processus, un interblocage se manifeste par :",
+      "options": {
+        "A": "un cycle.",
+        "B": "un arbre.",
+        "C": "un graphe sans aucune arête.",
+        "D": "un sommet isolé."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Un arbre est par définition sans cycle : les attentes y remontent vers une racine et finissent donc par se résoudre.",
+          "renvoi": "C4, interblocage"
+        },
+        "C": {
+          "erreur": "Sans arête, aucun processus n'attend de ressource détenue par un autre.",
+          "renvoi": "C4, interblocage"
+        },
+        "D": {
+          "erreur": "Un sommet isolé désigne un processus qui n'attend rien : c'est exactement le contraire d'un blocage.",
+          "renvoi": "C4, interblocage"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C5",
+      "enonce": "Le protocole de routage RIP choisit la route qui minimise :",
+      "options": {
+        "A": "le coût cumulé des liaisons traversées.",
+        "B": "le nombre de sauts.",
+        "C": "la latence mesurée en temps réel.",
+        "D": "le nombre d'utilisateurs connectés."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Le coût cumulé, qui tient compte du débit des liaisons, est le critère d'OSPF. RIP ignore la qualité des liens.",
+          "renvoi": "C5, protocoles de routage"
+        },
+        "C": {
+          "erreur": "RIP ne mesure rien en temps réel : sa métrique est fixe et se contente de dénombrer les routeurs traversés.",
+          "renvoi": "C5, protocoles de routage"
+        },
+        "D": {
+          "erreur": "La charge des machines n'intervient ni dans la métrique de RIP ni dans celle d'OSPF.",
+          "renvoi": "C5, protocoles de routage"
+        }
+      }
+    },
+    {
+      "id": "Q6",
+      "capacite": "C6",
+      "enonce": "Le chiffrement asymétrique repose sur :",
+      "options": {
+        "A": "une unique clé secrète, partagée par les deux correspondants.",
+        "B": "l'absence de toute clé.",
+        "C": "une paire de clés, l'une publique et l'autre privée.",
+        "D": "une clé différente pour chaque caractère du message."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "C'est la définition du chiffrement SYMÉTRIQUE, dont la difficulté est précisément de transmettre cette clé unique.",
+          "renvoi": "C6, chiffrement symétrique et asymétrique"
+        },
+        "B": {
+          "erreur": "Sans clé, il n'y a plus de secret : n'importe qui pourrait déchiffrer le message.",
+          "renvoi": "C6, chiffrement symétrique et asymétrique"
+        },
+        "D": {
+          "erreur": "L'élève décrit un chiffrement par flot avec masque jetable, qui reste symétrique et ne correspond pas à la question.",
+          "renvoi": "C6, chiffrement symétrique et asymétrique"
+        }
+      }
+    },
+    {
+      "id": "Q7",
+      "capacite": "C7",
+      "enonce": "Au cours d'une connexion HTTPS, le chiffrement asymétrique sert principalement à :",
+      "options": {
+        "A": "chiffrer la totalité des données échangées pendant toute la session.",
+        "B": "compresser les données avant leur envoi.",
+        "C": "afficher le cadenas dans le navigateur.",
+        "D": "convenir en sécurité d'une clé symétrique de session."
+      },
+      "correcte": "D",
+      "diagnostics": {
+        "A": {
+          "erreur": "Le chiffrement asymétrique est bien trop lent pour un flux entier. Il n'intervient qu'à l'établissement de la connexion.",
+          "renvoi": "C7, échange de clé et HTTPS"
+        },
+        "B": {
+          "erreur": "Chiffrer et compresser sont deux opérations distinctes ; le protocole ne confond pas les deux.",
+          "renvoi": "C7, échange de clé et HTTPS"
+        },
+        "C": {
+          "erreur": "Le cadenas n'est qu'un indicateur affiché par le navigateur : il rend compte de la sécurité obtenue, il ne la produit pas.",
+          "renvoi": "C7, échange de clé et HTTPS"
+        }
+      }
+    }
+  ]
 }

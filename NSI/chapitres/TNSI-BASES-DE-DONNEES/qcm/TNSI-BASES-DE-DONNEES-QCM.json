@@ -1,5 +1,318 @@
 {
   "chapitre": "TNSI-BASES-DE-DONNEES",
-  "titre": "QCM d'auto-évaluation -- TNSI-BASES-DE-DONNEES",
-  "questions": []
+  "titre": "Bases de données relationnelles — QCM d'auto-évaluation",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "Dans une relation, un attribut est défini sur :",
+      "options": {
+        "A": "un domaine, c'est-à-dire l'ensemble des valeurs qu'il peut prendre.",
+        "B": "un tuple.",
+        "C": "une clé étrangère, et rien d'autre.",
+        "D": "une autre relation."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "L'élève intervertit les deux notions. Le tuple est une LIGNE ; l'attribut est une colonne, définie par le domaine de ses valeurs.",
+          "renvoi": "C1, relation, attribut, domaine"
+        },
+        "C": {
+          "erreur": "Une clé étrangère est un rôle particulier joué par certains attributs, non la façon dont tout attribut est défini.",
+          "renvoi": "C1, relation, attribut, domaine"
+        },
+        "D": {
+          "erreur": "Un attribut n'est pas défini par une relation : c'est la relation qui est définie par ses attributs.",
+          "renvoi": "C1, relation, attribut, domaine"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C2",
+      "enonce": "Le schéma d'une base de données décrit :",
+      "options": {
+        "A": "les valeurs actuellement enregistrées dans les tables.",
+        "B": "la structure : les relations, leurs attributs, leurs domaines et leurs clés.",
+        "C": "le nombre de lignes de chaque table.",
+        "D": "l'historique des requêtes exécutées."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'élève décrit le CONTENU. Celui-ci change à chaque insertion, alors que le schéma demeure.",
+          "renvoi": "C2, structure et contenu"
+        },
+        "C": {
+          "erreur": "L'effectif est une propriété du contenu, variable dans le temps, et non de la structure.",
+          "renvoi": "C2, structure et contenu"
+        },
+        "D": {
+          "erreur": "Le journal des requêtes relève de l'exploitation du système ; il ne fait pas partie de la description de la base.",
+          "renvoi": "C2, structure et contenu"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C3",
+      "enonce": "Répéter le titre et l'auteur d'un livre sur chaque ligne d'une table d'emprunts, au lieu de les placer dans une table dédiée, entraîne :",
+      "options": {
+        "A": "un gain de temps de calcul systématique.",
+        "B": "une amélioration de la sécurité.",
+        "C": "une duplication des données et un risque d'incohérence lors des mises à jour.",
+        "D": "aucune conséquence particulière."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'élève ne retient que l'économie d'une jointure. La redondance alourdit la base et rend les mises à jour bien plus coûteuses.",
+          "renvoi": "C3, anomalies de schéma"
+        },
+        "B": {
+          "erreur": "Multiplier les copies d'une même donnée multiplie les endroits où elle peut être altérée : la sécurité en pâtit.",
+          "renvoi": "C3, anomalies de schéma"
+        },
+        "D": {
+          "erreur": "Corriger un titre mal orthographié exigerait de modifier toutes les lignes concernées, et en oublier une suffit à rendre la base incohérente.",
+          "renvoi": "C3, anomalies de schéma"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C4",
+      "enonce": "Le service de persistance d'un SGBD garantit que :",
+      "options": {
+        "A": "les mots de passe sont chiffrés.",
+        "B": "les requêtes s'exécutent instantanément.",
+        "C": "deux utilisateurs n'accèdent jamais à la base en même temps.",
+        "D": "les données restent conservées durablement, même après l'arrêt du programme."
+      },
+      "correcte": "D",
+      "diagnostics": {
+        "A": {
+          "erreur": "Le chiffrement relève du service de SÉCURISATION, distinct de la conservation durable des données.",
+          "renvoi": "C4, services d'un SGBD"
+        },
+        "B": {
+          "erreur": "La rapidité relève du service d'EFFICACITÉ, et aucun système ne promet l'instantanéité.",
+          "renvoi": "C4, services d'un SGBD"
+        },
+        "C": {
+          "erreur": "L'accès simultané est au contraire permis : c'est le service de gestion de la CONCURRENCE qui l'organise sans conflit.",
+          "renvoi": "C4, services d'un SGBD"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C5",
+      "enonce": "Dans la requête \\code{SELECT nom FROM Client WHERE ville = 'Lyon';}, la clause \\code{FROM} indique :",
+      "options": {
+        "A": "la relation dans laquelle les données sont puisées.",
+        "B": "les colonnes à afficher.",
+        "C": "la condition que les lignes doivent vérifier.",
+        "D": "l'ordre d'affichage du résultat."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Les colonnes affichées sont énumérées après \\code{SELECT}. Chaque clause a un rôle distinct.",
+          "renvoi": "C5, composants d'une requête"
+        },
+        "C": {
+          "erreur": "La condition est portée par \\code{WHERE} ; \\code{FROM} ne filtre rien.",
+          "renvoi": "C5, composants d'une requête"
+        },
+        "D": {
+          "erreur": "L'ordre d'affichage relève de \\code{ORDER BY}, absent de cette requête.",
+          "renvoi": "C5, composants d'une requête"
+        }
+      }
+    },
+    {
+      "id": "Q6",
+      "capacite": "C6",
+      "enonce": "La requête \\code{SELECT nom FROM Client WHERE ville = 'Lyon';} affiche :",
+      "options": {
+        "A": "toutes les colonnes des clients lyonnais.",
+        "B": "le seul nom des clients habitant Lyon.",
+        "C": "le nombre de clients lyonnais.",
+        "D": "toutes les villes des clients."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Afficher toutes les colonnes exigerait \\code{SELECT *}. Ici, une seule colonne est demandée.",
+          "renvoi": "C6, SELECT et FROM"
+        },
+        "C": {
+          "erreur": "Compter demanderait \\code{COUNT}. La requête énumère les noms, elle ne les dénombre pas.",
+          "renvoi": "C6, SELECT et FROM"
+        },
+        "D": {
+          "erreur": "La ville figure dans la CONDITION, non dans la projection : elle n'apparaît donc pas dans le résultat.",
+          "renvoi": "C6, SELECT et FROM"
+        }
+      }
+    },
+    {
+      "id": "Q7",
+      "capacite": "C7",
+      "enonce": "Écrire \\code{WHERE ville = Lyon} sans apostrophes, au lieu de \\code{WHERE ville = 'Lyon'} :",
+      "options": {
+        "A": "ne change rien au résultat.",
+        "B": "rend la requête plus rapide.",
+        "C": "est une erreur : \\code{Lyon} est alors compris comme un nom de colonne.",
+        "D": "est obligatoire pour les textes courts."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "La différence est essentielle : les apostrophes distinguent une valeur littérale d'un identifiant de colonne.",
+          "renvoi": "C7, littéraux et identifiants dans WHERE"
+        },
+        "B": {
+          "erreur": "Aucun gain de vitesse n'est en jeu ; la requête est simplement rejetée ou renvoie un résultat faux.",
+          "renvoi": "C7, littéraux et identifiants dans WHERE"
+        },
+        "D": {
+          "erreur": "La longueur du texte n'entre pas en ligne de compte : toute chaîne littérale est délimitée par des apostrophes.",
+          "renvoi": "C7, littéraux et identifiants dans WHERE"
+        }
+      }
+    },
+    {
+      "id": "Q8",
+      "capacite": "C8",
+      "enonce": "La clause \\code{JOIN B ON A.x = B.y} permet :",
+      "options": {
+        "A": "de trier les résultats de la table \\code{A}.",
+        "B": "de renommer la colonne \\code{x} en \\code{y}.",
+        "C": "de supprimer les doublons de \\code{A}.",
+        "D": "de rapprocher les tuples de \\code{A} et de \\code{B} dont les valeurs de \\code{x} et de \\code{y} coïncident."
+      },
+      "correcte": "D",
+      "diagnostics": {
+        "A": {
+          "erreur": "Le tri relève de \\code{ORDER BY} ; une jointure ne garantit aucun ordre du résultat.",
+          "renvoi": "C8, jointure"
+        },
+        "B": {
+          "erreur": "Le renommage s'écrit avec \\code{AS}. La condition \\code{ON} compare deux colonnes, elle n'en rebaptise aucune.",
+          "renvoi": "C8, jointure"
+        },
+        "C": {
+          "erreur": "L'élimination des doublons s'obtient par \\code{DISTINCT}. Une jointure peut au contraire en produire.",
+          "renvoi": "C8, jointure"
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "capacite": "C9",
+      "enonce": "Pour afficher les clients du plus jeune au plus âgé, on complète la requête par :",
+      "options": {
+        "A": "\\code{ORDER BY age ASC}",
+        "B": "\\code{WHERE age}",
+        "C": "\\code{GROUP BY age}",
+        "D": "\\code{ORDER BY age DESC}"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "\\code{WHERE} filtre les lignes retenues, sans jamais les réordonner. La clause est de surcroît incomplète.",
+          "renvoi": "C9, ORDER BY"
+        },
+        "C": {
+          "erreur": "\\code{GROUP BY} regroupe les lignes pour les agréger ; il ne définit pas l'ordre d'affichage.",
+          "renvoi": "C9, ORDER BY"
+        },
+        "D": {
+          "erreur": "\\code{DESC} trie du plus grand au plus petit, donc du plus âgé au plus jeune : c'est l'ordre inverse de celui qui est demandé.",
+          "renvoi": "C9, ORDER BY"
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "capacite": "C10",
+      "enonce": "Pour ajouter un client nommé Dupont, domicilié à Lyon, dans la table \\code{Client(nom, ville)}, on écrit :",
+      "options": {
+        "A": "\\code{UPDATE Client SET nom = 'Dupont', ville = 'Lyon';}",
+        "B": "\\code{INSERT INTO Client (nom, ville) VALUES ('Dupont', 'Lyon');}",
+        "C": "\\code{SELECT 'Dupont', 'Lyon' FROM Client;}",
+        "D": "\\code{INSERT Client VALUES nom = 'Dupont';}"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "\\code{UPDATE} modifie des lignes existantes. Sans \\code{WHERE}, cette requête écraserait de surcroît TOUTES les lignes de la table.",
+          "renvoi": "C10, INSERT"
+        },
+        "C": {
+          "erreur": "\\code{SELECT} interroge la base sans jamais la modifier : aucune ligne ne serait ajoutée.",
+          "renvoi": "C10, INSERT"
+        },
+        "D": {
+          "erreur": "La syntaxe mêle deux formes : \\code{INSERT} attend \\code{INTO} puis une liste de valeurs, jamais des affectations.",
+          "renvoi": "C10, INSERT"
+        }
+      }
+    },
+    {
+      "id": "Q11",
+      "capacite": "C11",
+      "enonce": "Dans une requête \\code{UPDATE}, omettre la clause \\code{WHERE} a pour effet :",
+      "options": {
+        "A": "de faire échouer la requête.",
+        "B": "de n'appliquer la modification qu'à la première ligne.",
+        "C": "de modifier toutes les lignes de la table.",
+        "D": "de créer une nouvelle table."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "La requête est parfaitement valide : c'est bien ce qui la rend dangereuse, puisque rien ne signale l'oubli.",
+          "renvoi": "C11, UPDATE"
+        },
+        "B": {
+          "erreur": "Aucune limitation implicite n'existe. Sans condition, la mise à jour porte sur l'intégralité de la relation.",
+          "renvoi": "C11, UPDATE"
+        },
+        "D": {
+          "erreur": "\\code{UPDATE} agit sur les données d'une table existante ; il ne touche jamais au schéma.",
+          "renvoi": "C11, UPDATE"
+        }
+      }
+    },
+    {
+      "id": "Q12",
+      "capacite": "C12",
+      "enonce": "La requête \\code{DELETE FROM Emprunt WHERE date_retour IS NOT NULL;} :",
+      "options": {
+        "A": "supprime la table \\code{Emprunt} tout entière.",
+        "B": "vide la colonne \\code{date_retour} des lignes concernées.",
+        "C": "supprime toutes les lignes de la table, la condition étant ignorée.",
+        "D": "supprime les lignes dont la date de retour est renseignée."
+      },
+      "correcte": "D",
+      "diagnostics": {
+        "A": {
+          "erreur": "Supprimer la table demanderait \\code{DROP TABLE}. \\code{DELETE} retire des lignes et laisse la structure en place.",
+          "renvoi": "C12, DELETE"
+        },
+        "B": {
+          "erreur": "\\code{DELETE} supprime des LIGNES entières ; vider une seule colonne relèverait d'un \\code{UPDATE}.",
+          "renvoi": "C12, DELETE"
+        },
+        "C": {
+          "erreur": "La condition est bien prise en compte : seules les lignes qui la vérifient sont supprimées.",
+          "renvoi": "C12, DELETE"
+        }
+      }
+    }
+  ]
 }

@@ -1,81 +1,235 @@
-% META: {"id": "TNSI-LANGAGES-ET-PROGRAMMATION-QCM", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "qcm", "capacites_codes": ["C3","C5","C6","C9","C11"], "status": "generated"}
+% META: {"id": "TNSI-LANGAGES-ET-PROGRAMMATION-QCM", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "qcm", "genere_depuis": "chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/qcm/TNSI-LANGAGES-ET-PROGRAMMATION-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Langages et programmation}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Langages, récursivité et paradigmes — QCM d'auto-évaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule réponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C01C --- Problème de l'arrêt}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Le problème de l'arrêt étant indécidable signifie que :
+\item[] \textbf{Capacité C1}
+
+\item \textbf{[Q1]} Affirmer qu'un programme est aussi une donnée signifie que :
   \begin{enumerate}[label=\Alph*.]
-    \item aucun programme ne s'arrête jamais.
-    \item aucun programme unique ne peut décider, pour tous les programmes et toutes les entrées, si l'exécution s'arrête.
-    \item on ne peut jamais prouver qu'un programme particulier s'arrête.
-    \item ce problème n'existe qu'en Python.
+    \item un programme peut être lu, transformé ou exécuté par un autre programme.
+    \item un programme n'a aucun effet lorsqu'on l'exécute.
+    \item les programmes et les données occupent la même quantité de mémoire.
+    \item un programme ne peut être écrit que par une machine.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C2}
 
-\subsection*{C02B --- Analyse de récursivité}
-
-\item \textbf{[Q2]} Un grand nombre d'appels dans l'arbre d'appels d'une fonction récursive signifie que :
+\item \textbf{[Q2]} Dire que la calculabilité ne dépend pas du langage employé signifie que :
   \begin{enumerate}[label=\Alph*.]
+    \item tous les langages s'exécutent à la même vitesse.
+    \item ce qui est calculable dans un langage l'est dans tout autre langage universel.
+    \item tous les langages ont la même syntaxe.
+    \item un algorithme ne peut s'écrire que dans un seul langage.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C3}
+
+\item \textbf{[Q3]} Dire que le problème de l'arrêt est indécidable signifie que :
+  \begin{enumerate}[label=\Alph*.]
+    \item aucun programme ne s'arrête jamais.
+    \item on ne peut jamais prouver qu'un programme donné s'arrête.
+    \item aucun programme unique ne peut décider, pour tout programme et toute entrée, si l'exécution s'arrête.
+    \item cette difficulté ne concerne que Python.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C4}
+
+\item \textbf{[Q4]} Dans une fonction récursive, le cas de base sert à :
+  \begin{enumerate}[label=\Alph*.]
+    \item accélérer le calcul.
+    \item déclarer les variables locales.
+    \item vérifier le type des arguments reçus.
+    \item arrêter la récursion en fournissant une valeur sans nouvel appel.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C5}
+
+\item \textbf{[Q5]} Un grand nombre d'appels dans l'arbre d'appels d'une fonction récursive indique que :
+  \begin{enumerate}[label=\Alph*.]
+    \item la fonction termine, mais peut coûter cher en temps.
+    \item le code comporte nécessairement une erreur.
     \item la fonction ne termine jamais.
-    \item la fonction termine, mais potentiellement avec un coût élevé.
-    \item il y a forcément une erreur dans le code.
     \item le cas de base est mal écrit.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C6}
 
-\subsection*{C03A --- API et bibliothèques}
-
-\item \textbf{[Q3]} L'API d'une bibliothèque désigne :
+\item \textbf{[Q6]} L'API d'une bibliothèque désigne :
   \begin{enumerate}[label=\Alph*.]
     \item son code source complet.
-    \item l'ensemble des fonctions et paramètres qu'elle expose à l'utilisateur.
-    \item sa vitesse d'exécution.
+    \item l'ensemble des fonctions et des paramètres qu'elle met à disposition.
     \item le nom de son auteur.
+    \item sa vitesse d'exécution.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C7}
 
-\subsection*{C04A --- Paradigmes}
-
-\item \textbf{[Q4]} Un même programme Python peut mobiliser :
+\item \textbf{[Q7]} La documentation d'une fonction indique qu'elle « renvoie \code{None} si la clé est absente ». Le programme appelant doit :
   \begin{enumerate}[label=\Alph*.]
-    \item un seul paradigme, imposé par le langage.
-    \item plusieurs paradigmes à la fois (impératif, fonctionnel, objet).
-    \item uniquement le paradigme objet.
-    \item aucun paradigme particulier.
+    \item modifier la bibliothèque pour qu'elle lève une exception.
+    \item ignorer cette mention, qui ne concerne que les développeurs de la bibliothèque.
+    \item traiter explicitement ce cas avant d'utiliser la valeur renvoyée.
+    \item supposer que la clé est toujours présente.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C8}
 
-\subsection*{C05 --- Débogage}
+\item \textbf{[Q8]} Dans un module Python destiné à être réutilisé, le bloc \code{if \_\_name\_\_ == "\_\_main\_\_":} sert à :
+  \begin{enumerate}[label=\Alph*.]
+    \item déclarer les fonctions exportées par le module.
+    \item documenter le module.
+    \item importer automatiquement toutes les dépendances.
+    \item n'exécuter le code de démonstration ou de test que si le fichier est lancé directement.
+  \end{enumerate}
 
-\item \textbf{[Q5]} Comparer deux nombres flottants avec l'opérateur \lstinline{==} est risqué car :
+\item[] \textbf{Capacité C9}
+
+\item \textbf{[Q9]} Un même programme Python peut mobiliser :
+  \begin{enumerate}[label=\Alph*.]
+    \item plusieurs paradigmes à la fois : impératif, fonctionnel et objet.
+    \item le seul paradigme objet.
+    \item un seul paradigme, imposé par le langage.
+    \item aucun paradigme identifiable.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C10}
+
+\item \textbf{[Q10]} Pour appliquer une même transformation à chaque élément d'une liste, sans modifier la liste de départ, le style le mieux adapté est :
+  \begin{enumerate}[label=\Alph*.]
+    \item impératif, en modifiant la liste sur place case par case.
+    \item fonctionnel, par une compréhension ou une application de fonction produisant une nouvelle liste.
+    \item objet, en créant une classe par élément.
+    \item aucun : cette transformation est impossible.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C11}
+
+\item \textbf{[Q11]} Comparer deux nombres flottants avec l'opérateur \code{==} est une source de bugs parce que :
   \begin{enumerate}[label=\Alph*.]
     \item Python interdit cette comparaison.
+    \item l'opérateur ne fonctionne qu'entre entiers.
     \item les flottants ne représentent pas exactement toutes les valeurs décimales.
-    \item cela ne fonctionne qu'avec des entiers.
-    \item les flottants sont toujours égaux entre eux.
+    \item tous les flottants sont considérés comme égaux entre eux.
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q6]} Écrire \lstinline{b = a} où \lstinline{a} est une liste :
+\item \textbf{[Q12]} Écrire \code{b = a}, où \code{a} est une liste :
   \begin{enumerate}[label=\Alph*.]
-    \item crée une copie indépendante de \lstinline{a}.
-    \item fait pointer \lstinline{b} vers le même objet que \lstinline{a}.
+    \item vide la liste \code{a}.
+    \item crée une copie indépendante de \code{a}.
     \item provoque une erreur.
-    \item vide la liste \lstinline{a}.
+    \item fait désigner à \code{b} le même objet que \code{a}.
   \end{enumerate}
 
 \end{enumerate}
+
+% NEXUS-QCM-TEACHER-ONLY-BEGIN
+\ifnxVersionProfesseur
+\clearpage
+\section*{Clé de correction — réservée au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacité & Réponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C2 & \textbf{B} \\
+Q3 & C3 & \textbf{C} \\
+Q4 & C4 & \textbf{D} \\
+Q5 & C5 & \textbf{A} \\
+Q6 & C6 & \textbf{B} \\
+Q7 & C7 & \textbf{C} \\
+Q8 & C8 & \textbf{D} \\
+Q9 & C9 & \textbf{A} \\
+Q10 & C10 & \textbf{B} \\
+Q11 & C11 & \textbf{C} \\
+Q12 & C11 & \textbf{D} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des réponses erronées}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — Être une donnée ne l'empêche pas d'être exécutable : c'est justement de porter les deux statuts qui fait sa force. \emph{Renvoi : C1, programme et donnée.}
+    \item \textbf{C} — L'élève rapproche deux notions sans rapport. Il s'agit de la NATURE du programme, non de son encombrement. \emph{Renvoi : C1, programme et donnée.}
+    \item \textbf{D} — Que des programmes puissent en produire d'autres, comme le fait un compilateur, ne retire rien à l'écriture humaine. \emph{Renvoi : C1, programme et donnée.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — L'élève confond calculabilité et performance. Le résultat porte sur ce qui est possible, jamais sur le temps mis à l'obtenir. \emph{Renvoi : C2, calculabilité et langages.}
+    \item \textbf{C} — Les syntaxes diffèrent nettement ; c'est le POUVOIR d'expression qui coïncide, non l'écriture. \emph{Renvoi : C2, calculabilité et langages.}
+    \item \textbf{D} — C'est exactement l'inverse : un même algorithme s'écrit dans n'importe quel langage universel. \emph{Renvoi : C2, calculabilité et langages.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — Beaucoup de programmes s'arrêtent, et on le constate. Ce qui est impossible est de trancher pour TOUS les cas par un procédé unique. \emph{Renvoi : C3, indécidabilité du problème de l'arrêt.}
+    \item \textbf{B} — L'élève passe du général au particulier. Pour un programme donné, une preuve est souvent accessible ; c'est la méthode universelle qui n'existe pas. \emph{Renvoi : C3, indécidabilité du problème de l'arrêt.}
+    \item \textbf{D} — Le résultat est indépendant du langage : il vaut pour tout modèle de calcul universel. \emph{Renvoi : C3, indécidabilité du problème de l'arrêt.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — Le cas de base ne vise pas la rapidité mais la TERMINAISON : sans lui, les appels se poursuivent jusqu'au débordement de la pile. \emph{Renvoi : C4, écrire un programme récursif.}
+    \item \textbf{B} — La déclaration de variables n'a aucun rapport avec la condition d'arrêt des appels. \emph{Renvoi : C4, écrire un programme récursif.}
+    \item \textbf{C} — La vérification des arguments est une précaution indépendante, qui n'interrompt pas la récursion. \emph{Renvoi : C4, écrire un programme récursif.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{B} — La récursion naïve du calcul de Fibonacci est correcte, tout en engendrant un nombre exponentiel d'appels. \emph{Renvoi : C5, analyse d'un programme récursif.}
+    \item \textbf{C} — Un arbre d'appels FINI, même vaste, décrit précisément une exécution qui se termine. \emph{Renvoi : C5, analyse d'un programme récursif.}
+    \item \textbf{D} — Un cas de base fautif produirait une récursion sans fin, donc une erreur d'exécution, et non simplement un grand arbre. \emph{Renvoi : C5, analyse d'un programme récursif.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — L'élève confond l'interface et sa réalisation. L'API est ce que la bibliothèque promet ; le code source est la façon dont elle tient sa promesse. \emph{Renvoi : C6, utiliser une API.}
+    \item \textbf{C} — La paternité relève des métadonnées du paquet, sans rapport avec les points d'entrée disponibles. \emph{Renvoi : C6, utiliser une API.}
+    \item \textbf{D} — La performance est une propriété mesurée, et non une description de ce qui est offert. \emph{Renvoi : C6, utiliser une API.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — Modifier une dépendance pour éviter d'en lire le contrat est disproportionné, et rend toute mise à jour impossible. \emph{Renvoi : C7, exploiter une documentation.}
+    \item \textbf{B} — Cette mention s'adresse au contraire à l'appelant : elle décrit ce qu'il recevra, et donc ce qu'il doit prévoir. \emph{Renvoi : C7, exploiter une documentation.}
+    \item \textbf{D} — La documentation avertit précisément du contraire. L'ignorer conduira à manipuler \code{None} comme s'il s'agissait d'une valeur. \emph{Renvoi : C7, exploiter une documentation.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{A} — Les fonctions sont exportées du seul fait d'être définies ; ce bloc n'en déclare aucune. \emph{Renvoi : C8, créer et documenter un module.}
+    \item \textbf{B} — La documentation est portée par la docstring placée en tête du module, non par une condition d'exécution. \emph{Renvoi : C8, créer et documenter un module.}
+    \item \textbf{C} — Les imports s'écrivent explicitement en tête de fichier ; aucun mécanisme automatique n'existe. \emph{Renvoi : C8, créer et documenter un module.}
+  \end{itemize}
+  \item \textbf{Q9}
+  \begin{itemize}
+    \item \textbf{B} — Une simple boucle \code{for} qui modifie une variable relève de l'impératif, sans le moindre objet défini par le programmeur. \emph{Renvoi : C9, paradigmes de programmation.}
+    \item \textbf{C} — Python est un langage multiparadigme : il n'en impose aucun et les laisse coexister. \emph{Renvoi : C9, paradigmes de programmation.}
+    \item \textbf{D} — Tout programme relève d'au moins un style d'organisation ; l'absence de paradigme n'a pas de sens. \emph{Renvoi : C9, paradigmes de programmation.}
+  \end{itemize}
+  \item \textbf{Q10}
+  \begin{itemize}
+    \item \textbf{A} — Modifier sur place contredit l'exigence énoncée : la liste initiale doit rester intacte. \emph{Renvoi : C10, choisir un paradigme adapté.}
+    \item \textbf{C} — Introduire une classe par élément alourdit considérablement le programme sans rien apporter à une simple transformation. \emph{Renvoi : C10, choisir un paradigme adapté.}
+    \item \textbf{D} — L'opération est au contraire courante ; c'est même l'exemple type du style fonctionnel. \emph{Renvoi : C10, choisir un paradigme adapté.}
+  \end{itemize}
+  \item \textbf{Q11}
+  \begin{itemize}
+    \item \textbf{A} — La comparaison est autorisée et ne lève aucune erreur : c'est bien ce qui la rend trompeuse. \emph{Renvoi : C11, causes typiques de bugs.}
+    \item \textbf{B} — \code{==} s'applique à tous les types ; le problème vient de la représentation des flottants, non de l'opérateur. \emph{Renvoi : C11, causes typiques de bugs.}
+    \item \textbf{D} — Deux flottants distincts sont bien reconnus comme différents. La difficulté est que deux calculs mathématiquement égaux peuvent donner deux valeurs distinctes. \emph{Renvoi : C11, causes typiques de bugs.}
+  \end{itemize}
+  \item \textbf{Q12}
+  \begin{itemize}
+    \item \textbf{A} — Le contenu de \code{a} n'est en rien affecté : seul un nouveau nom est introduit. \emph{Renvoi : C11, alias et objets mutables.}
+    \item \textbf{B} — L'affectation ne copie jamais un objet mutable : elle ne fait que lui donner un second nom, et toute modification par l'un se voit par l'autre. \emph{Renvoi : C11, alias et objets mutables.}
+    \item \textbf{C} — L'opération est parfaitement licite ; elle est même très courante, ce qui explique que le piège passe inaperçu. \emph{Renvoi : C11, alias et objets mutables.}
+  \end{itemize}
+\end{itemize}
+\fi
+% NEXUS-QCM-TEACHER-ONLY-END

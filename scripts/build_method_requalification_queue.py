@@ -60,7 +60,42 @@ def _blob_at(rev: str, relative: str) -> str | None:
     return result.stdout.decode("utf-8")
 
 
-def build_queue(rev: str = "HEAD") -> dict[str, Any]:
+def _qualified_blob(relative: str, qualified_sha: str) -> str | None:
+    """Contenu du fichier a la revision ou son sha256 valait `qualified_sha`."""
+
+    revisions = subprocess.run(
+        ["git", "rev-list", "HEAD", "--", relative],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    for revision in revisions.stdout.split():
+        blob = subprocess.run(
+            ["git", "show", f"{revision}:{relative}"],
+            cwd=ROOT,
+            capture_output=True,
+        )
+        if blob.returncode != 0:
+            continue
+        if hashlib.sha256(blob.stdout).hexdigest() == qualified_sha:
+            return blob.stdout.decode("utf-8")
+    return None
+
+
+def build_queue() -> dict[str, Any]:
+    """La comparaison se fait contre le texte exact qui a ete qualifie.
+
+    Deux references plus commodes sont fausses. HEAD est instable : sitot la
+    correction commitee, il porte le texte modifie et le changement s'evanouit.
+    `baseline_sha` ne convient pas davantage : c'est la baseline du jeu
+    d'anomalies, et non la revision du contenu -- 72 fiches n'y existent meme
+    pas encore.
+
+    Ce que la decision humaine a reellement fige, c'est `method_source_sha`.
+    On remonte donc l'historique du fichier jusqu'a la revision dont le
+    contenu porte ce condense : c'est, par construction, le texte approuve.
+    """
+
     document = yaml.safe_load(DISPOSITIONS.read_text(encoding="utf-8"))
     dispositions = document.get("dispositions", document)
 
@@ -87,7 +122,7 @@ def build_queue(rev: str = "HEAD") -> dict[str, Any]:
         if actual == qualified_sha:
             current += 1
             continue
-        before = _blob_at(rev, relative)
+        before = _qualified_blob(relative, qualified_sha)
         items.append(
             {
                 "fingerprint": fingerprint,
@@ -126,7 +161,7 @@ def build_queue(rev: str = "HEAD") -> dict[str, Any]:
             "campagne diacritiques editoriales : la correction des formes non "
             "ambigues modifie le texte qualifie, donc le sha lie a la decision"
         ),
-        "compared_against_revision": rev,
+        "compared_against": "method_source_sha de chaque qualification",
         "totals": {
             "method_qualifications": current + len(items),
             "still_current": current,
@@ -174,10 +209,9 @@ def render_markdown(payload: dict[str, Any]) -> str:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--rev", default="HEAD")
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args(argv)
-    payload = build_queue(args.rev)
+    payload = build_queue()
     if args.write:
         OUT_JSON.write_text(render_json(payload), encoding="utf-8")
         OUT_MD.write_text(render_markdown(payload), encoding="utf-8")

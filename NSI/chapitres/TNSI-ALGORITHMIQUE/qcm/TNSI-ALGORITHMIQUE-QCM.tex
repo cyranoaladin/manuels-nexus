@@ -1,77 +1,254 @@
-% META: {"id": "TNSI-ALGORITHMIQUE-QCM", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "qcm", "capacites_codes": ["C2","C4","C8","C9","C12","C13"], "status": "generated"}
+% META: {"id": "TNSI-ALGORITHMIQUE-QCM", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "qcm", "genere_depuis": "chapitres/TNSI-ALGORITHMIQUE/qcm/TNSI-ALGORITHMIQUE-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Algorithmique}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Algorithmes sur les arbres et les graphes — QCM d'auto-évaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule réponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C01B/C01D --- Arbres}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} La hauteur d'un arbre réduit à un seul nœud (une feuille) vaut :
+\item[] \textbf{Capacité C1}
+
+\item \textbf{[Q1]} La taille d'un arbre binaire se calcule récursivement par :
   \begin{enumerate}[label=\Alph*.]
-    \item $-1$.
+    \item $1 + \text{taille(gauche)} + \text{taille(droite)}$, l'arbre vide ayant pour taille $0$.
+    \item $1 + \max(\text{taille(gauche)}, \text{taille(droite)})$.
+    \item le nombre de feuilles seulement.
+    \item $\text{taille(gauche)} \times \text{taille(droite)}$.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C2}
+
+\item \textbf{[Q2]} Selon la convention du cours, la hauteur d'un arbre réduit à un seul nœud vaut :
+  \begin{enumerate}[label=\Alph*.]
     \item $0$.
+    \item $-1$.
     \item $1$.
     \item indéfinie.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C3}
 
-\item \textbf{[Q2]} Un parcours en largeur d'un arbre utilise :
+\item \textbf{[Q3]} Le parcours INFIXE d'un arbre binaire visite :
+  \begin{enumerate}[label=\Alph*.]
+    \item la racine, puis le sous-arbre gauche, puis le sous-arbre droit.
+    \item le sous-arbre gauche, puis la racine, puis le sous-arbre droit.
+    \item le sous-arbre gauche, puis le sous-arbre droit, puis la racine.
+    \item les nœuds niveau par niveau, de haut en bas.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C4}
+
+\item \textbf{[Q4]} Le parcours en largeur d'un arbre s'appuie sur :
   \begin{enumerate}[label=\Alph*.]
     \item une pile.
+    \item un dictionnaire, et rien d'autre.
     \item une file.
-    \item un dictionnaire uniquement.
     \item aucune structure auxiliaire.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C5}
 
-\subsection*{C02B/C02C --- Graphes}
-
-\item \textbf{[Q3]} Le parcours en profondeur d'un graphe (DFS) s'implémente naturellement par :
+\item \textbf{[Q5]} Dans un arbre binaire de recherche, la recherche d'une clé plus petite que celle de la racine se poursuit :
   \begin{enumerate}[label=\Alph*.]
-    \item récursion (ou une pile explicite).
-    \item une file uniquement.
-    \item un tri préalable des sommets.
-    \item une recherche dichotomique.
+    \item en repartant de la racine.
+    \item dans les deux sous-arbres, pour être sûr.
+    \item dans le sous-arbre droit uniquement.
+    \item dans le sous-arbre gauche uniquement.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C6}
 
-\item \textbf{[Q4]} Lors d'un parcours d'un graphe non orienté, on détecte un cycle lorsque l'on rencontre un sommet déjà visité qui :
+\item \textbf{[Q6]} Insérer successivement les clés $1$, $2$, $3$, $4$ dans un arbre binaire de recherche vide produit :
+  \begin{enumerate}[label=\Alph*.]
+    \item un arbre dégénéré, de hauteur $3$, semblable à une liste chaînée.
+    \item un arbre parfaitement équilibré de hauteur $1$.
+    \item un arbre où $4$ devient la racine.
+    \item une erreur, les clés devant être insérées dans le désordre.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C7}
+
+\item \textbf{[Q7]} Le parcours en largeur d'un graphe, à partir d'un sommet de départ, visite les sommets :
+  \begin{enumerate}[label=\Alph*.]
+    \item dans l'ordre croissant de leur numéro.
+    \item par distance croissante au sommet de départ, comptée en nombre d'arêtes.
+    \item en descendant d'abord le plus loin possible le long d'un chemin.
+    \item dans un ordre qui dépend du hasard.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C8}
+
+\item \textbf{[Q8]} Le parcours en profondeur d'un graphe s'implémente naturellement :
+  \begin{enumerate}[label=\Alph*.]
+    \item après un tri préalable des sommets.
+    \item avec une file, et elle seule.
+    \item par récursion, ou au moyen d'une pile explicite.
+    \item par une recherche dichotomique.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C9}
+
+\item \textbf{[Q9]} Lors du parcours d'un graphe non orienté, on détecte un cycle quand on rencontre un sommet déjà visité qui :
   \begin{enumerate}[label=\Alph*.]
     \item est le sommet de départ.
-    \item n'est pas le parent direct dans le parcours.
-    \item a le plus grand nombre de voisins.
+    \item possède le plus grand nombre de voisins.
     \item n'a aucun voisin.
+    \item n'est pas le parent direct dans le parcours.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C10}
 
-\subsection*{C04/C05 --- Programmation dynamique, recherche de motif}
+\item \textbf{[Q10]} Pour reconstituer le chemin trouvé entre deux sommets par un parcours, il faut :
+  \begin{enumerate}[label=\Alph*.]
+    \item mémoriser, pour chaque sommet visité, celui depuis lequel on l'a atteint.
+    \item relancer le parcours depuis l'arrivée.
+    \item trier les sommets par distance.
+    \item conserver uniquement la liste des sommets visités, dans l'ordre.
+  \end{enumerate}
 
-\item \textbf{[Q5]} La programmation dynamique est particulièrement utile lorsque :
+\item[] \textbf{Capacité C11}
+
+\item \textbf{[Q11]} La méthode « diviser pour régner » consiste à :
+  \begin{enumerate}[label=\Alph*.]
+    \item traiter les données une par une, du début à la fin.
+    \item découper le problème en sous-problèmes de même nature, les résoudre, puis combiner leurs solutions.
+    \item essayer toutes les solutions possibles avant de choisir.
+    \item mémoriser les résultats déjà calculés pour ne pas les recalculer.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C12}
+
+\item \textbf{[Q12]} La programmation dynamique est particulièrement utile lorsque :
   \begin{enumerate}[label=\Alph*.]
     \item les sous-problèmes ne se recoupent jamais.
+    \item le problème n'admet aucune formulation récursive.
     \item les mêmes sous-problèmes réapparaissent plusieurs fois.
-    \item le problème n'a pas de solution récursive.
-    \item il n'y a qu'un seul sous-problème.
+    \item il n'existe qu'un seul sous-problème.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C13}
 
-\item \textbf{[Q6]} Contrairement à la recherche naïve, l'algorithme de Boyer-Moore compare le motif au texte :
+\item \textbf{[Q13]} À la différence de la recherche naïve, l'algorithme de Boyer-Moore compare le motif au texte :
   \begin{enumerate}[label=\Alph*.]
+    \item dans un ordre tiré au hasard.
+    \item en ignorant complètement le texte.
+    \item sur le seul premier caractère.
     \item de droite à gauche, en s'appuyant sur un prétraitement du motif.
-    \item en ignorant totalement le texte.
-    \item uniquement sur le premier caractère.
-    \item dans un ordre aléatoire.
   \end{enumerate}
 
 \end{enumerate}
+
+% NEXUS-QCM-TEACHER-ONLY-BEGIN
+\ifnxVersionProfesseur
+\clearpage
+\section*{Clé de correction — réservée au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacité & Réponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C2 & \textbf{A} \\
+Q3 & C3 & \textbf{B} \\
+Q4 & C4 & \textbf{C} \\
+Q5 & C5 & \textbf{D} \\
+Q6 & C6 & \textbf{A} \\
+Q7 & C7 & \textbf{B} \\
+Q8 & C8 & \textbf{C} \\
+Q9 & C9 & \textbf{D} \\
+Q10 & C10 & \textbf{A} \\
+Q11 & C11 & \textbf{B} \\
+Q12 & C12 & \textbf{C} \\
+Q13 & C13 & \textbf{D} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des réponses erronées}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — Cette formule est celle de la HAUTEUR : le maximum ne retient qu'une branche, alors que la taille doit additionner tous les nœuds. \emph{Renvoi : C1, taille d'un arbre.}
+    \item \textbf{C} — Les nœuds internes appartiennent aussi à l'arbre ; les omettre sous-estime la taille. \emph{Renvoi : C1, taille d'un arbre.}
+    \item \textbf{D} — Un produit s'annulerait dès qu'un sous-arbre est vide, et donnerait $0$ pour un arbre pourtant non vide. \emph{Renvoi : C1, taille d'un arbre.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{B} — $-1$ est la hauteur de l'arbre VIDE. Un arbre à un nœud n'est pas vide. \emph{Renvoi : C2, hauteur d'un arbre.}
+    \item \textbf{C} — L'élève compte les niveaux au lieu des arêtes. La hauteur est la longueur du plus long chemin de la racine à une feuille : ici, ce chemin est vide. \emph{Renvoi : C2, hauteur d'un arbre.}
+    \item \textbf{D} — La définition récursive couvre ce cas sans ambiguïté, à partir de la hauteur $-1$ de l'arbre vide. \emph{Renvoi : C2, hauteur d'un arbre.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — C'est le parcours PRÉFIXE : la racine y est visitée avant ses deux sous-arbres. \emph{Renvoi : C3, parcours infixe, préfixe, suffixe.}
+    \item \textbf{C} — C'est le parcours SUFFIXE : la racine y est visitée en dernier. \emph{Renvoi : C3, parcours infixe, préfixe, suffixe.}
+    \item \textbf{D} — C'est le parcours en LARGEUR, qui n'appartient pas à la famille des trois parcours en profondeur. \emph{Renvoi : C3, parcours en profondeur et en largeur.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — La pile produit un parcours en PROFONDEUR : elle ressort d'abord le dernier nœud rencontré, donc le plus profond. \emph{Renvoi : C4, parcours en largeur.}
+    \item \textbf{B} — Un dictionnaire peut mémoriser les nœuds vus, mais il n'impose aucun ordre de traitement, qui est ici l'essentiel. \emph{Renvoi : C4, parcours en largeur.}
+    \item \textbf{D} — Sans structure d'attente, il est impossible de mémoriser les nœuds d'un niveau pendant qu'on le traite. \emph{Renvoi : C4, parcours en largeur.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — Recommencer à la racine boucle indéfiniment : la recherche doit descendre d'un niveau à chaque comparaison. \emph{Renvoi : C5, recherche dans un ABR.}
+    \item \textbf{B} — Explorer les deux côtés reviendrait à parcourir tout l'arbre : c'est précisément ce que la propriété de l'ABR permet d'éviter. \emph{Renvoi : C5, recherche dans un ABR.}
+    \item \textbf{C} — L'élève inverse la comparaison. Le sous-arbre droit ne contient que des clés supérieures à la racine. \emph{Renvoi : C5, recherche dans un ABR.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{B} — L'insertion ne rééquilibre rien : chaque clé étant supérieure à la précédente, elle part toujours à droite. \emph{Renvoi : C6, insertion dans un ABR.}
+    \item \textbf{C} — La racine est fixée par la PREMIÈRE clé insérée, ici $1$, et ne change plus. \emph{Renvoi : C6, insertion dans un ABR.}
+    \item \textbf{D} — L'insertion en ordre trié est parfaitement licite ; elle est seulement le pire cas pour la hauteur obtenue. \emph{Renvoi : C6, insertion dans un ABR.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — La numérotation des sommets n'a aucune influence : seule la structure des arêtes gouverne l'ordre de visite. \emph{Renvoi : C7, parcours en largeur d'un graphe.}
+    \item \textbf{C} — C'est le parcours en PROFONDEUR. Le parcours en largeur épuise un niveau entier avant de passer au suivant. \emph{Renvoi : C7, largeur et profondeur.}
+    \item \textbf{D} — Le parcours est déterministe une fois fixé l'ordre des voisins dans la structure de données. \emph{Renvoi : C7, parcours en largeur d'un graphe.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{A} — Aucun tri n'est nécessaire ni même défini : un graphe n'est pas une structure ordonnée. \emph{Renvoi : C8, parcours en profondeur.}
+    \item \textbf{B} — La file donne le parcours en LARGEUR : c'est le choix de la structure d'attente qui distingue les deux parcours. \emph{Renvoi : C8, parcours en profondeur.}
+    \item \textbf{D} — La dichotomie suppose un ordre total sur les éléments, dont un graphe est dépourvu. \emph{Renvoi : C8, parcours en profondeur.}
+  \end{itemize}
+  \item \textbf{Q9}
+  \begin{itemize}
+    \item \textbf{A} — Un cycle peut se refermer sur n'importe quel sommet, pas seulement sur celui d'où l'on est parti. \emph{Renvoi : C9, détection de cycle.}
+    \item \textbf{B} — Le degré d'un sommet ne dit rien sur l'existence d'un cycle : un sommet de degré élevé peut appartenir à un arbre. \emph{Renvoi : C9, détection de cycle.}
+    \item \textbf{C} — Un sommet isolé ne peut appartenir à aucun cycle, faute d'arête pour y entrer. \emph{Renvoi : C9, détection de cycle.}
+  \end{itemize}
+  \item \textbf{Q10}
+  \begin{itemize}
+    \item \textbf{B} — Un second parcours redonnerait l'existence d'un chemin, mais pas celui qui vient d'être emprunté. \emph{Renvoi : C10, reconstitution d'un chemin.}
+    \item \textbf{C} — Connaître les distances ne suffit pas : il manque le lien qui relie chaque sommet à son prédécesseur. \emph{Renvoi : C10, reconstitution d'un chemin.}
+    \item \textbf{D} — L'ordre de visite mêle toutes les branches explorées ; il ne distingue pas celles qui mènent au but de celles qui ont été abandonnées. \emph{Renvoi : C10, reconstitution d'un chemin.}
+  \end{itemize}
+  \item \textbf{Q11}
+  \begin{itemize}
+    \item \textbf{A} — L'élève décrit un parcours séquentiel, sans aucun découpage récursif. \emph{Renvoi : C11, diviser pour régner.}
+    \item \textbf{C} — C'est la recherche exhaustive, que la méthode cherche justement à éviter. \emph{Renvoi : C11, diviser pour régner.}
+    \item \textbf{D} — La mémorisation caractérise la PROGRAMMATION DYNAMIQUE. Elle s'ajoute parfois au découpage, mais ne le définit pas. \emph{Renvoi : C11, diviser pour régner et programmation dynamique.}
+  \end{itemize}
+  \item \textbf{Q12}
+  \begin{itemize}
+    \item \textbf{A} — Sans recouvrement, il n'y a rien à réutiliser : un simple « diviser pour régner » suffit. \emph{Renvoi : C12, programmation dynamique.}
+    \item \textbf{B} — C'est l'inverse : la méthode part d'une relation de récurrence, qu'elle évalue en mémorisant les résultats. \emph{Renvoi : C12, programmation dynamique.}
+    \item \textbf{D} — Avec un unique sous-problème, il n'y a aucun recalcul à éviter et donc aucun gain. \emph{Renvoi : C12, programmation dynamique.}
+  \end{itemize}
+  \item \textbf{Q13}
+  \begin{itemize}
+    \item \textbf{A} — L'ordre est au contraire fixé et essentiel : c'est la comparaison depuis la fin du motif qui autorise les grands décalages. \emph{Renvoi : C13, algorithme de Boyer-Moore.}
+    \item \textbf{B} — Le texte est évidemment lu ; ce que l'algorithme économise, ce sont des comparaisons, grâce aux décalages qu'il peut anticiper. \emph{Renvoi : C13, algorithme de Boyer-Moore.}
+    \item \textbf{C} — Une comparaison sur un seul caractère ne prouverait rien : c'est le motif entier qui doit être reconnu. \emph{Renvoi : C13, algorithme de Boyer-Moore.}
+  \end{itemize}
+\end{itemize}
+\fi
+% NEXUS-QCM-TEACHER-ONLY-END

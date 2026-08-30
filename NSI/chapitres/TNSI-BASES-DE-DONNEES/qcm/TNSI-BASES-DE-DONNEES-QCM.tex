@@ -1,79 +1,237 @@
-% META: {"id": "TNSI-BASES-DE-DONNEES-QCM", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "qcm", "capacites_codes": ["C1","C3","C4","C6","C7","C8"], "status": "generated"}
+% META: {"id": "TNSI-BASES-DE-DONNEES-QCM", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "qcm", "genere_depuis": "chapitres/TNSI-BASES-DE-DONNEES/qcm/TNSI-BASES-DE-DONNEES-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Bases de données}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Bases de données relationnelles — QCM d'auto-évaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule réponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C01A/C01C --- Modèle relationnel}
 
 \begin{enumerate}
 
+\item[] \textbf{Capacité C1}
+
 \item \textbf{[Q1]} Dans une relation, un attribut est défini sur :
   \begin{enumerate}[label=\Alph*.]
+    \item un domaine, c'est-à-dire l'ensemble des valeurs qu'il peut prendre.
     \item un tuple.
-    \item un domaine (ensemble des valeurs possibles).
-    \item une clé étrangère uniquement.
+    \item une clé étrangère, et rien d'autre.
     \item une autre relation.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C2}
 
-\item \textbf{[Q2]} Stocker le titre et l'auteur d'un livre à chaque ligne d'une table d'emprunts (au lieu d'une table \texttt{Livre} séparée) provoque :
+\item \textbf{[Q2]} Le schéma d'une base de données décrit :
+  \begin{enumerate}[label=\Alph*.]
+    \item les valeurs actuellement enregistrées dans les tables.
+    \item la structure : les relations, leurs attributs, leurs domaines et leurs clés.
+    \item le nombre de lignes de chaque table.
+    \item l'historique des requêtes exécutées.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C3}
+
+\item \textbf{[Q3]} Répéter le titre et l'auteur d'un livre sur chaque ligne d'une table d'emprunts, au lieu de les placer dans une table dédiée, entraîne :
   \begin{enumerate}[label=\Alph*.]
     \item un gain de temps de calcul systématique.
-    \item une duplication de données et un risque d'incohérence lors des mises à jour.
     \item une amélioration de la sécurité.
-    \item aucun problème particulier.
+    \item une duplication des données et un risque d'incohérence lors des mises à jour.
+    \item aucune conséquence particulière.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C4}
 
-\subsection*{C02 --- Services d'un SGBD}
-
-\item \textbf{[Q3]} Le service de \textbf{persistance} d'un SGBD garantit que :
+\item \textbf{[Q4]} Le service de persistance d'un SGBD garantit que :
   \begin{enumerate}[label=\Alph*.]
-    \item les données restent stockées durablement, même après la fin du programme.
-    \item les requêtes s'exécutent instantanément.
-    \item deux utilisateurs ne peuvent jamais accéder à la base en même temps.
     \item les mots de passe sont chiffrés.
+    \item les requêtes s'exécutent instantanément.
+    \item deux utilisateurs n'accèdent jamais à la base en même temps.
+    \item les données restent conservées durablement, même après l'arrêt du programme.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C5}
 
-\subsection*{C03B/C03C --- SELECT, WHERE}
-
-\item \textbf{[Q4]} La requête \texttt{SELECT nom FROM Client WHERE ville = 'Lyon';} affiche :
+\item \textbf{[Q5]} Dans la requête \code{SELECT nom FROM Client WHERE ville = 'Lyon';}, la clause \code{FROM} indique :
   \begin{enumerate}[label=\Alph*.]
-    \item toutes les colonnes des clients de Lyon.
-    \item uniquement le nom des clients habitant à Lyon.
-    \item le nombre de clients de Lyon.
+    \item la relation dans laquelle les données sont puisées.
+    \item les colonnes à afficher.
+    \item la condition que les lignes doivent vérifier.
+    \item l'ordre d'affichage du résultat.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C6}
+
+\item \textbf{[Q6]} La requête \code{SELECT nom FROM Client WHERE ville = 'Lyon';} affiche :
+  \begin{enumerate}[label=\Alph*.]
+    \item toutes les colonnes des clients lyonnais.
+    \item le seul nom des clients habitant Lyon.
+    \item le nombre de clients lyonnais.
     \item toutes les villes des clients.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C7}
 
-\item \textbf{[Q5]} Écrire \texttt{WHERE ville = Lyon} (sans apostrophes) au lieu de \texttt{WHERE ville = 'Lyon'} :
+\item \textbf{[Q7]} Écrire \code{WHERE ville = Lyon} sans apostrophes, au lieu de \code{WHERE ville = 'Lyon'} :
   \begin{enumerate}[label=\Alph*.]
     \item ne change rien au résultat.
-    \item est une erreur : \texttt{Lyon} est interprété comme un nom de colonne.
     \item rend la requête plus rapide.
+    \item est une erreur : \code{Lyon} est alors compris comme un nom de colonne.
     \item est obligatoire pour les textes courts.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C8}
 
-\subsection*{C03D --- JOIN}
-
-\item \textbf{[Q6]} La clause \texttt{JOIN ... ON A.x = B.y} permet de :
+\item \textbf{[Q8]} La clause \code{JOIN B ON A.x = B.y} permet :
   \begin{enumerate}[label=\Alph*.]
-    \item trier les résultats de la table \texttt{A}.
-    \item combiner les tuples de \texttt{A} et \texttt{B} dont les valeurs de \texttt{x} et \texttt{y} coïncident.
-    \item supprimer les doublons de \texttt{A}.
-    \item renommer la colonne \texttt{x} en \texttt{y}.
+    \item de trier les résultats de la table \code{A}.
+    \item de renommer la colonne \code{x} en \code{y}.
+    \item de supprimer les doublons de \code{A}.
+    \item de rapprocher les tuples de \code{A} et de \code{B} dont les valeurs de \code{x} et de \code{y} coïncident.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C9}
+
+\item \textbf{[Q9]} Pour afficher les clients du plus jeune au plus âgé, on complète la requête par :
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{ORDER BY age ASC}
+    \item \code{WHERE age}
+    \item \code{GROUP BY age}
+    \item \code{ORDER BY age DESC}
+  \end{enumerate}
+
+\item[] \textbf{Capacité C10}
+
+\item \textbf{[Q10]} Pour ajouter un client nommé Dupont, domicilié à Lyon, dans la table \code{Client(nom, ville)}, on écrit :
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{UPDATE Client SET nom = 'Dupont', ville = 'Lyon';}
+    \item \code{INSERT INTO Client (nom, ville) VALUES ('Dupont', 'Lyon');}
+    \item \code{SELECT 'Dupont', 'Lyon' FROM Client;}
+    \item \code{INSERT Client VALUES nom = 'Dupont';}
+  \end{enumerate}
+
+\item[] \textbf{Capacité C11}
+
+\item \textbf{[Q11]} Dans une requête \code{UPDATE}, omettre la clause \code{WHERE} a pour effet :
+  \begin{enumerate}[label=\Alph*.]
+    \item de faire échouer la requête.
+    \item de n'appliquer la modification qu'à la première ligne.
+    \item de modifier toutes les lignes de la table.
+    \item de créer une nouvelle table.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C12}
+
+\item \textbf{[Q12]} La requête \code{DELETE FROM Emprunt WHERE date\_retour IS NOT NULL;} :
+  \begin{enumerate}[label=\Alph*.]
+    \item supprime la table \code{Emprunt} tout entière.
+    \item vide la colonne \code{date\_retour} des lignes concernées.
+    \item supprime toutes les lignes de la table, la condition étant ignorée.
+    \item supprime les lignes dont la date de retour est renseignée.
   \end{enumerate}
 
 \end{enumerate}
+
+% NEXUS-QCM-TEACHER-ONLY-BEGIN
+\ifnxVersionProfesseur
+\clearpage
+\section*{Clé de correction — réservée au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacité & Réponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C2 & \textbf{B} \\
+Q3 & C3 & \textbf{C} \\
+Q4 & C4 & \textbf{D} \\
+Q5 & C5 & \textbf{A} \\
+Q6 & C6 & \textbf{B} \\
+Q7 & C7 & \textbf{C} \\
+Q8 & C8 & \textbf{D} \\
+Q9 & C9 & \textbf{A} \\
+Q10 & C10 & \textbf{B} \\
+Q11 & C11 & \textbf{C} \\
+Q12 & C12 & \textbf{D} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des réponses erronées}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — L'élève intervertit les deux notions. Le tuple est une LIGNE ; l'attribut est une colonne, définie par le domaine de ses valeurs. \emph{Renvoi : C1, relation, attribut, domaine.}
+    \item \textbf{C} — Une clé étrangère est un rôle particulier joué par certains attributs, non la façon dont tout attribut est défini. \emph{Renvoi : C1, relation, attribut, domaine.}
+    \item \textbf{D} — Un attribut n'est pas défini par une relation : c'est la relation qui est définie par ses attributs. \emph{Renvoi : C1, relation, attribut, domaine.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — L'élève décrit le CONTENU. Celui-ci change à chaque insertion, alors que le schéma demeure. \emph{Renvoi : C2, structure et contenu.}
+    \item \textbf{C} — L'effectif est une propriété du contenu, variable dans le temps, et non de la structure. \emph{Renvoi : C2, structure et contenu.}
+    \item \textbf{D} — Le journal des requêtes relève de l'exploitation du système ; il ne fait pas partie de la description de la base. \emph{Renvoi : C2, structure et contenu.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — L'élève ne retient que l'économie d'une jointure. La redondance alourdit la base et rend les mises à jour bien plus coûteuses. \emph{Renvoi : C3, anomalies de schéma.}
+    \item \textbf{B} — Multiplier les copies d'une même donnée multiplie les endroits où elle peut être altérée : la sécurité en pâtit. \emph{Renvoi : C3, anomalies de schéma.}
+    \item \textbf{D} — Corriger un titre mal orthographié exigerait de modifier toutes les lignes concernées, et en oublier une suffit à rendre la base incohérente. \emph{Renvoi : C3, anomalies de schéma.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — Le chiffrement relève du service de SÉCURISATION, distinct de la conservation durable des données. \emph{Renvoi : C4, services d'un SGBD.}
+    \item \textbf{B} — La rapidité relève du service d'EFFICACITÉ, et aucun système ne promet l'instantanéité. \emph{Renvoi : C4, services d'un SGBD.}
+    \item \textbf{C} — L'accès simultané est au contraire permis : c'est le service de gestion de la CONCURRENCE qui l'organise sans conflit. \emph{Renvoi : C4, services d'un SGBD.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{B} — Les colonnes affichées sont énumérées après \code{SELECT}. Chaque clause a un rôle distinct. \emph{Renvoi : C5, composants d'une requête.}
+    \item \textbf{C} — La condition est portée par \code{WHERE} ; \code{FROM} ne filtre rien. \emph{Renvoi : C5, composants d'une requête.}
+    \item \textbf{D} — L'ordre d'affichage relève de \code{ORDER BY}, absent de cette requête. \emph{Renvoi : C5, composants d'une requête.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — Afficher toutes les colonnes exigerait \code{SELECT *}. Ici, une seule colonne est demandée. \emph{Renvoi : C6, SELECT et FROM.}
+    \item \textbf{C} — Compter demanderait \code{COUNT}. La requête énumère les noms, elle ne les dénombre pas. \emph{Renvoi : C6, SELECT et FROM.}
+    \item \textbf{D} — La ville figure dans la CONDITION, non dans la projection : elle n'apparaît donc pas dans le résultat. \emph{Renvoi : C6, SELECT et FROM.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — La différence est essentielle : les apostrophes distinguent une valeur littérale d'un identifiant de colonne. \emph{Renvoi : C7, littéraux et identifiants dans WHERE.}
+    \item \textbf{B} — Aucun gain de vitesse n'est en jeu ; la requête est simplement rejetée ou renvoie un résultat faux. \emph{Renvoi : C7, littéraux et identifiants dans WHERE.}
+    \item \textbf{D} — La longueur du texte n'entre pas en ligne de compte : toute chaîne littérale est délimitée par des apostrophes. \emph{Renvoi : C7, littéraux et identifiants dans WHERE.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{A} — Le tri relève de \code{ORDER BY} ; une jointure ne garantit aucun ordre du résultat. \emph{Renvoi : C8, jointure.}
+    \item \textbf{B} — Le renommage s'écrit avec \code{AS}. La condition \code{ON} compare deux colonnes, elle n'en rebaptise aucune. \emph{Renvoi : C8, jointure.}
+    \item \textbf{C} — L'élimination des doublons s'obtient par \code{DISTINCT}. Une jointure peut au contraire en produire. \emph{Renvoi : C8, jointure.}
+  \end{itemize}
+  \item \textbf{Q9}
+  \begin{itemize}
+    \item \textbf{B} — \code{WHERE} filtre les lignes retenues, sans jamais les réordonner. La clause est de surcroît incomplète. \emph{Renvoi : C9, ORDER BY.}
+    \item \textbf{C} — \code{GROUP BY} regroupe les lignes pour les agréger ; il ne définit pas l'ordre d'affichage. \emph{Renvoi : C9, ORDER BY.}
+    \item \textbf{D} — \code{DESC} trie du plus grand au plus petit, donc du plus âgé au plus jeune : c'est l'ordre inverse de celui qui est demandé. \emph{Renvoi : C9, ORDER BY.}
+  \end{itemize}
+  \item \textbf{Q10}
+  \begin{itemize}
+    \item \textbf{A} — \code{UPDATE} modifie des lignes existantes. Sans \code{WHERE}, cette requête écraserait de surcroît TOUTES les lignes de la table. \emph{Renvoi : C10, INSERT.}
+    \item \textbf{C} — \code{SELECT} interroge la base sans jamais la modifier : aucune ligne ne serait ajoutée. \emph{Renvoi : C10, INSERT.}
+    \item \textbf{D} — La syntaxe mêle deux formes : \code{INSERT} attend \code{INTO} puis une liste de valeurs, jamais des affectations. \emph{Renvoi : C10, INSERT.}
+  \end{itemize}
+  \item \textbf{Q11}
+  \begin{itemize}
+    \item \textbf{A} — La requête est parfaitement valide : c'est bien ce qui la rend dangereuse, puisque rien ne signale l'oubli. \emph{Renvoi : C11, UPDATE.}
+    \item \textbf{B} — Aucune limitation implicite n'existe. Sans condition, la mise à jour porte sur l'intégralité de la relation. \emph{Renvoi : C11, UPDATE.}
+    \item \textbf{D} — \code{UPDATE} agit sur les données d'une table existante ; il ne touche jamais au schéma. \emph{Renvoi : C11, UPDATE.}
+  \end{itemize}
+  \item \textbf{Q12}
+  \begin{itemize}
+    \item \textbf{A} — Supprimer la table demanderait \code{DROP TABLE}. \code{DELETE} retire des lignes et laisse la structure en place. \emph{Renvoi : C12, DELETE.}
+    \item \textbf{B} — \code{DELETE} supprime des LIGNES entières ; vider une seule colonne relèverait d'un \code{UPDATE}. \emph{Renvoi : C12, DELETE.}
+    \item \textbf{C} — La condition est bien prise en compte : seules les lignes qui la vérifient sont supprimées. \emph{Renvoi : C12, DELETE.}
+  \end{itemize}
+\end{itemize}
+\fi
+% NEXUS-QCM-TEACHER-ONLY-END

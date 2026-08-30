@@ -1,5 +1,370 @@
 {
   "chapitre": "TNSI-STRUCTURES-DONNEES",
-  "titre": "QCM d'auto-évaluation -- TNSI-STRUCTURES-DONNEES",
-  "questions": []
+  "titre": "Structures de données — QCM d'auto-évaluation",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "L'interface d'une structure de données décrit :",
+      "options": {
+        "A": "les opérations disponibles, sans préciser comment elles sont réalisées.",
+        "B": "la façon dont les données sont rangées en mémoire.",
+        "C": "le nombre d'octets occupés.",
+        "D": "le langage de programmation employé."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "L'élève décrit l'IMPLÉMENTATION. L'interface énonce le contrat ; le rangement en mémoire est un choix de réalisation qu'elle laisse libre.",
+          "renvoi": "C1, spécification par l'interface"
+        },
+        "C": {
+          "erreur": "L'encombrement dépend de l'implémentation retenue, et varie donc d'une réalisation à l'autre pour une même interface.",
+          "renvoi": "C1, spécification par l'interface"
+        },
+        "D": {
+          "erreur": "Une même interface, par exemple celle d'une pile, se retrouve dans tous les langages : elle en est indépendante.",
+          "renvoi": "C1, spécification par l'interface"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C2",
+      "enonce": "Passer d'une implémentation d'une pile par tableau à une implémentation par liste chaînée, sans changer son interface :",
+      "options": {
+        "A": "oblige à réécrire tous les programmes qui utilisent la pile.",
+        "B": "laisse inchangés les programmes qui n'utilisent que \\code{empiler} et \\code{depiler}.",
+        "C": "change le principe LIFO en principe FIFO.",
+        "D": "est impossible : l'interface dépend de l'implémentation."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "C'est précisément ce que la séparation évite. Tant que les opérations gardent leur nom et leur comportement, le code appelant ne voit rien.",
+          "renvoi": "C2, interface et implémentation"
+        },
+        "C": {
+          "erreur": "L'ordre de service fait partie du contrat, donc de l'interface. Changer d'implémentation ne peut pas le modifier.",
+          "renvoi": "C2, interface et implémentation"
+        },
+        "D": {
+          "erreur": "L'élève inverse la dépendance : c'est l'implémentation qui doit respecter l'interface, et non l'inverse.",
+          "renvoi": "C2, interface et implémentation"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C3",
+      "enonce": "Une file peut être implémentée par une liste Python où l'on retire en tête avec \\code{pop(0)}, ou par deux piles. Ces deux implémentations :",
+      "options": {
+        "A": "respectent le même contrat, mais n'ont pas le même coût.",
+        "B": "sont interdites : une file n'admet qu'une implémentation.",
+        "C": "produisent des ordres de sortie différents.",
+        "D": "ont exactement les mêmes performances."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "C'est l'inverse : pouvoir réaliser une même structure de plusieurs façons est justement l'intérêt de la séparation entre interface et implémentation.",
+          "renvoi": "C3, implémentations multiples"
+        },
+        "C": {
+          "erreur": "Si l'ordre différait, l'une des deux ne serait pas une file. Toutes deux servent les éléments dans leur ordre d'arrivée.",
+          "renvoi": "C3, implémentations multiples"
+        },
+        "D": {
+          "erreur": "\\code{pop(0)} décale tous les éléments restants, à un coût linéaire, alors que la version à deux piles amortit ce coût.",
+          "renvoi": "C3, coût d'une implémentation"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C4",
+      "enonce": "Dans la définition d'une classe Python, la méthode chargée d'initialiser un nouvel objet se nomme :",
+      "options": {
+        "A": "\\code{init}",
+        "B": "\\code{__init__}",
+        "C": "\\code{create}",
+        "D": "\\code{new}"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Sans les doubles soulignements, la méthode est ordinaire : Python ne l'appelle pas automatiquement à la construction.",
+          "renvoi": "C4, définition d'une classe"
+        },
+        "C": {
+          "erreur": "Aucune convention Python ne reconnaît ce nom ; la méthode ne serait jamais appelée d'elle-même.",
+          "renvoi": "C4, définition d'une classe"
+        },
+        "D": {
+          "erreur": "L'élève transpose le mot-clé d'autres langages. En Python, l'instanciation s'écrit sans \\code{new}.",
+          "renvoi": "C4, définition d'une classe"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C5",
+      "enonce": "Dans une méthode de classe Python, le paramètre \\code{self} désigne :",
+      "options": {
+        "A": "le premier attribut déclaré.",
+        "B": "la classe elle-même.",
+        "C": "l'objet sur lequel la méthode est appelée.",
+        "D": "rien de particulier : il est facultatif."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "\\code{self} donne accès à TOUS les attributs, par exemple \\code{self.taille} ; il n'en désigne aucun en particulier.",
+          "renvoi": "C5, attributs et méthodes"
+        },
+        "B": {
+          "erreur": "La classe est le moule ; \\code{self} désigne l'exemplaire. Deux objets d'une même classe reçoivent des \\code{self} différents.",
+          "renvoi": "C5, attributs et méthodes"
+        },
+        "D": {
+          "erreur": "Il est au contraire indispensable : l'omettre prive la méthode de tout accès à l'objet et provoque une erreur à l'appel.",
+          "renvoi": "C5, attributs et méthodes"
+        }
+      }
+    },
+    {
+      "id": "Q6",
+      "capacite": "C6",
+      "enonce": "On empile successivement $1$, puis $2$, puis $3$ dans une pile vide, puis on dépile une fois. La valeur obtenue est :",
+      "options": {
+        "A": "$1$",
+        "B": "la plus petite des trois.",
+        "C": "$2$",
+        "D": "$3$"
+      },
+      "correcte": "D",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'élève applique le principe FIFO, celui de la FILE. Une pile sert en dernier entré, premier sorti : c'est $3$ qui ressort.",
+          "renvoi": "C6, LIFO et FIFO"
+        },
+        "B": {
+          "erreur": "Une pile ne compare jamais les valeurs ; elle ne connaît que l'ordre d'arrivée.",
+          "renvoi": "C6, LIFO et FIFO"
+        },
+        "C": {
+          "erreur": "Aucun élément intermédiaire n'est accessible : seul le sommet de la pile peut être retiré.",
+          "renvoi": "C6, LIFO et FIFO"
+        }
+      }
+    },
+    {
+      "id": "Q7",
+      "capacite": "C7",
+      "enonce": "Pour mémoriser les pages visitées afin de revenir en arrière dans un navigateur, la structure adaptée est :",
+      "options": {
+        "A": "une pile.",
+        "B": "un arbre binaire de recherche.",
+        "C": "une file.",
+        "D": "une matrice d'adjacence."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "L'arbre de recherche organise les données par valeur. Ici, c'est l'ordre de visite qui compte, non un ordre sur les adresses.",
+          "renvoi": "C7, choix d'une structure"
+        },
+        "C": {
+          "erreur": "Une file rendrait d'abord la page la PLUS ANCIENNE, alors que le retour arrière doit rendre la plus récente.",
+          "renvoi": "C7, choix d'une structure"
+        },
+        "D": {
+          "erreur": "La matrice d'adjacence décrit des liens entre sommets ; elle ne mémorise aucune chronologie.",
+          "renvoi": "C7, choix d'une structure"
+        }
+      }
+    },
+    {
+      "id": "Q8",
+      "capacite": "C8",
+      "enonce": "Rechercher une valeur associée à une clé est en moyenne plus rapide dans un dictionnaire que dans une liste, parce que :",
+      "options": {
+        "A": "un dictionnaire est toujours plus petit qu'une liste.",
+        "B": "l'accès passe par une table de hachage, sans dépendre du nombre d'éléments.",
+        "C": "l'affirmation est fausse : les deux coûtent autant.",
+        "D": "les dictionnaires sont triés automatiquement."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "La taille n'entre pas en jeu : l'écart tient à la méthode d'accès, et il grandit justement avec le nombre d'éléments.",
+          "renvoi": "C8, recherche par clé et par parcours"
+        },
+        "C": {
+          "erreur": "La recherche dans une liste parcourt les éléments un à un, à un coût linéaire, tandis que l'accès par clé est en temps quasi constant.",
+          "renvoi": "C8, recherche par clé et par parcours"
+        },
+        "D": {
+          "erreur": "Aucun tri n'a lieu, et il ne servirait pas ici : le hachage calcule directement l'emplacement de la clé.",
+          "renvoi": "C8, recherche par clé et par parcours"
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "capacite": "C9",
+      "enonce": "Parmi ces situations, laquelle appelle le plus naturellement une structure arborescente ?",
+      "options": {
+        "A": "La liste des élèves d'une classe, par ordre alphabétique.",
+        "B": "La file d'attente des travaux d'impression.",
+        "C": "L'arborescence des dossiers et fichiers d'un disque.",
+        "D": "Le relevé des températures d'une journée, heure par heure."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Une liste ordonnée est linéaire. Un arbre ne s'impose que si l'on veut de surcroît accélérer les recherches.",
+          "renvoi": "C9, situations arborescentes"
+        },
+        "B": {
+          "erreur": "Une file d'attente est purement linéaire : chaque travail a un seul suivant, sans ramification.",
+          "renvoi": "C9, situations arborescentes"
+        },
+        "D": {
+          "erreur": "Une suite de mesures indexée par le temps est un tableau ; aucune hiérarchie n'y apparaît.",
+          "renvoi": "C9, situations arborescentes"
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "capacite": "C10",
+      "enonce": "La taille d'un arbre binaire est :",
+      "options": {
+        "A": "la longueur du plus long chemin de la racine à une feuille.",
+        "B": "le nombre de ses niveaux moins un.",
+        "C": "son nombre de feuilles.",
+        "D": "son nombre de nœuds."
+      },
+      "correcte": "D",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'élève définit la HAUTEUR. Les deux mesures diffèrent : un arbre dégénéré à $n$ nœuds a pour taille $n$ et pour hauteur $n-1$.",
+          "renvoi": "C10, taille, hauteur et feuilles"
+        },
+        "B": {
+          "erreur": "C'est encore la hauteur, exprimée par le nombre de niveaux. La taille dénombre les nœuds, pas les niveaux.",
+          "renvoi": "C10, taille, hauteur et feuilles"
+        },
+        "C": {
+          "erreur": "Les feuilles ne forment qu'une partie des nœuds ; les nœuds internes comptent aussi dans la taille.",
+          "renvoi": "C10, taille, hauteur et feuilles"
+        }
+      }
+    },
+    {
+      "id": "Q11",
+      "capacite": "C11",
+      "enonce": "Pour modéliser un réseau social où l'amitié est réciproque, on emploie :",
+      "options": {
+        "A": "un graphe non orienté, les personnes étant les sommets et les amitiés les arêtes.",
+        "B": "une pile de profils.",
+        "C": "un arbre binaire de recherche.",
+        "D": "un graphe orienté, car l'amitié a toujours un sens."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Une pile ordonne dans le temps ; elle ne représente aucune relation entre deux éléments.",
+          "renvoi": "C11, modélisation par un graphe"
+        },
+        "C": {
+          "erreur": "Un arbre interdit les cycles et impose une racine. Or trois personnes amies deux à deux forment un cycle, situation banale ici.",
+          "renvoi": "C11, modélisation par un graphe"
+        },
+        "D": {
+          "erreur": "L'orientation ne s'impose que si la relation est à sens unique, comme l'abonnement. Une amitié réciproque se représente par une arête sans direction.",
+          "renvoi": "C11, graphes orientés et non orientés"
+        }
+      }
+    },
+    {
+      "id": "Q12",
+      "capacite": "C12",
+      "enonce": "Dans la matrice d'adjacence d'un graphe à $n$ sommets, la case $(i, j)$ vaut $1$ lorsque :",
+      "options": {
+        "A": "les sommets $i$ et $j$ portent le même numéro.",
+        "B": "il existe une arête reliant $i$ à $j$.",
+        "C": "le sommet $i$ est une feuille.",
+        "D": "la somme $i + j$ vaut $n$."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "La diagonale ne vaut $1$ que si le graphe comporte une boucle sur ce sommet, ce qui est un cas particulier et non la règle.",
+          "renvoi": "C12, matrice d'adjacence"
+        },
+        "C": {
+          "erreur": "La notion de feuille appartient au vocabulaire des arbres ; la matrice code des arêtes, non des rôles de sommets.",
+          "renvoi": "C12, matrice d'adjacence"
+        },
+        "D": {
+          "erreur": "L'élève invente une relation arithmétique entre indices. Le contenu de la matrice décrit le graphe, non la numérotation.",
+          "renvoi": "C12, matrice d'adjacence"
+        }
+      }
+    },
+    {
+      "id": "Q13",
+      "capacite": "C13",
+      "enonce": "Dans une implémentation par listes de successeurs, l'espace occupé par un graphe à $n$ sommets et $m$ arêtes est de l'ordre de :",
+      "options": {
+        "A": "$n^2$, quel que soit $m$.",
+        "B": "$m$ seulement, sans dépendre de $n$.",
+        "C": "$n + m$.",
+        "D": "$n \\times m$."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "C'est le coût de la MATRICE d'adjacence, qui réserve une case par couple de sommets, même absent. Les listes de successeurs ne stockent que les arêtes présentes.",
+          "renvoi": "C13, listes de successeurs"
+        },
+        "B": {
+          "erreur": "Il faut de toute façon une entrée par sommet, y compris pour un sommet isolé sans aucune arête.",
+          "renvoi": "C13, listes de successeurs"
+        },
+        "D": {
+          "erreur": "Aucune structure ne duplique les arêtes pour chaque sommet ; chaque arête n'est enregistrée qu'une ou deux fois.",
+          "renvoi": "C13, listes de successeurs"
+        }
+      }
+    },
+    {
+      "id": "Q14",
+      "capacite": "C14",
+      "enonce": "Pour convertir une matrice d'adjacence en listes de successeurs, il faut :",
+      "options": {
+        "A": "conserver seulement la diagonale de la matrice.",
+        "B": "trier les sommets par nombre de voisins.",
+        "C": "recopier chaque ligne de la matrice telle quelle, zéros compris.",
+        "D": "pour chaque sommet, retenir les indices des colonnes dont la case vaut $1$."
+      },
+      "correcte": "D",
+      "diagnostics": {
+        "A": {
+          "erreur": "La diagonale ne renseigne que sur d'éventuelles boucles ; toutes les autres arêtes seraient perdues.",
+          "renvoi": "C14, conversion entre représentations"
+        },
+        "B": {
+          "erreur": "Le tri modifierait l'ordre sans rien apporter : la conversion doit préserver exactement les mêmes arêtes.",
+          "renvoi": "C14, conversion entre représentations"
+        },
+        "C": {
+          "erreur": "Conserver les zéros reviendrait à garder la matrice sous un autre nom, et à perdre le gain de place recherché.",
+          "renvoi": "C14, conversion entre représentations"
+        }
+      }
+    }
+  ]
 }

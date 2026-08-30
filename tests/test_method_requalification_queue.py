@@ -83,6 +83,19 @@ def test_every_stale_entry_stays_release_blocking(payload: dict) -> None:
     assert all(item["release_blocking"] is True for item in stale)
 
 
+def test_the_comparison_never_uses_a_moving_reference(payload: dict) -> None:
+    """Le texte compare est celui que la decision a fige, pas HEAD.
+
+    Contre HEAD, la classe s'evanouissait des le commit de la correction ;
+    contre `baseline_sha`, 72 fiches n'existaient pas encore. La reference est
+    donc la revision dont le contenu porte `method_source_sha`.
+    """
+
+    assert payload["compared_against"] == "method_source_sha de chaque qualification"
+    stale = [item for item in payload["items"] if item["state"] == "STALE"]
+    assert payload["change_classes"] == {"ACCENT_ONLY": len(stale)}
+
+
 def test_the_totals_close(payload: dict) -> None:
     totals = payload["totals"]
     assert totals["still_current"] + len(payload["items"]) == (
