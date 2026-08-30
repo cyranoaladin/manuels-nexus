@@ -4059,8 +4059,8 @@
       "declared_review_debt": [],
       "diacritics": {
         "ambiguous": 77,
-        "status": "GAP",
-        "unambiguous": 2
+        "status": "COMPLETE",
+        "unambiguous": 0
       },
       "evidence_routing": {
         "carried_forward": 14,
@@ -4079,7 +4079,7 @@
       "human_closure_status": "PENDING",
       "machine_dimensions": {
         "assessments": "COMPLETE",
-        "diacritics": "GAP",
+        "diacritics": "COMPLETE",
         "evidence_routing": "COMPLETE",
         "oracle": "COMPLETE",
         "programme": "COMPLETE",
@@ -4124,9 +4124,9 @@
         "questions": 15,
         "status": "COMPLETE"
       },
-      "risk_score": 4,
+      "risk_score": 0,
       "unassembled_object_ids": [],
-      "vertical_machine_status": "INCOMPLETE"
+      "vertical_machine_status": "MACHINE_REVIEW_COMPLETE"
     },
     {
       "assessments": {
@@ -4566,8 +4566,8 @@
   "counts": {
     "chapters": 52,
     "human_closed": 0,
-    "machine_review_complete": 50,
-    "machine_review_incomplete": 2,
+    "machine_review_complete": 51,
+    "machine_review_incomplete": 1,
     "manuals": 6
   },
   "generated_by": "scripts/build_publish_readiness_chapter_matrix.py",
@@ -4584,11 +4584,6 @@
       "chapter": "TNSI-PROJET",
       "manual": "TNSI",
       "risk_score": 20
-    },
-    {
-      "chapter": "TSPE-LIMITES-FONCTIONS",
-      "manual": "TSPE_2026_2027",
-      "risk_score": 4
     }
   ],
   "schema_version": 1
