@@ -6,11 +6,11 @@ Une identite par question. La v1 reste l'enregistrement historique.
 Cet artefact n'approuve rien.
 
 - Questions du corpus : 337
-- Report d'identite : 315
+- Report d'identite : 314
 - Recalcul independant : 21
-- Revue humaine requise : 1
+- Revue humaine requise : 2
 - UNKNOWN : 0
-- Equation : 337 = 315 + 21 + 1
+- Equation : 337 = 314 + 21 + 2
 - EVIDENCE_ROUTING_COMPLETE : True
 - ALL_QCM_HUMAN_REVIEW_COMPLETE : False
 
@@ -66,4 +66,5 @@ Comportement correct du solveur, pas un echec : aucune regle mathematique generi
 
 | chapitre | question | motif |
 |---|---|---|
+| 1SPE-PRODUIT-SCALAIRE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | 1SPE-VARIABLES-ALEATOIRES | Q16 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |

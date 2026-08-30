@@ -5,8 +5,8 @@
   "approves_nothing": true,
   "artifact_type": "qcm_independent_evidence_v2",
   "counts": {
-    "CARRIED_FORWARD_IDENTICAL": 315,
-    "HUMAN_REVIEW_REQUIRED": 1,
+    "CARRIED_FORWARD_IDENTICAL": 314,
+    "HUMAN_REVIEW_REQUIRED": 2,
     "MACHINE_RECALCULATED": 21,
     "UNKNOWN": 0,
     "question_count": 337
@@ -24,7 +24,7 @@
     }
   ],
   "diagnostic_coverage_is_release_blocking": true,
-  "equation": "337 = 315 + 21 + 1",
+  "equation": "337 = 314 + 21 + 2",
   "evidence_schema_fields": [
     "statement",
     "options",
@@ -36,6 +36,7 @@
   "generated_by": "scripts/build_qcm_independent_evidence_v2.py",
   "human_review_is_release_blocking": true,
   "human_review_required_questions": [
+    "1SPE-PRODUIT-SCALAIRE/Q6",
     "1SPE-VARIABLES-ALEATOIRES/Q16"
   ],
   "independence_contract": {
@@ -1577,15 +1578,22 @@
       "chapter": "1SPE-PRODUIT-SCALAIRE",
       "computed_option_truths": {},
       "computed_unique_answer": null,
-      "evidence_digest": "sha256:1b11a82eefb0e8d6611d0113c2ada514c26bd4066cd749fff2f58d90acec3b2a",
-      "evidence_status": "CARRIED_FORWARD_IDENTICAL",
-      "human_review_required": false,
-      "independent_evidence": "condense semantique identique a la preuve independante v1 ; report d'identite, aucun recalcul necessaire",
+      "delta_classes": [
+        "DISTRACTOR_SEMANTIC_CHANGE",
+        "KEY_POSITION_CHANGED_BUT_VALUE_SAME",
+        "DIAGNOSTIC_TEXT_CHANGE"
+      ],
+      "evidence_digest": "sha256:f66368fe15ef0424c8b7e9c535bec7f6894141307ef98910983495b608913a8f",
+      "evidence_status": "HUMAN_REVIEW_REQUIRED",
+      "human_review_required": true,
+      "independent_evidence": "",
       "question_id": "Q6",
-      "semantic_question_digest": "sha256:67232045f830924b5a9bd7ae21aa4238837081427aa262ff3d804b629462eff8",
+      "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
+      "release_blocking": true,
+      "semantic_question_digest": "sha256:85302e5f9a21a16b47bc34242e2e86b6c12ad42d79c61b6f7fd0a6ec38ae7f2b",
       "solver_family": null,
-      "solver_input_digest": null,
-      "solver_version": null,
+      "solver_input_digest": "sha256:c9d0ddd241ac0c183f741ac68408ea9be64eced1db68bbafe09a80f6c8b183a6",
+      "solver_version": "1.0.0",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/qcm/1SPE-PRODUIT-SCALAIRE-QCM.json",
       "verification": null
     },
@@ -6478,7 +6486,7 @@
     }
   ],
   "schema_version": 2,
-  "set_digest": "sha256:eca73271a6d9c287fdb11d448a53b3eba8f62be166650cc12f60e91704530983",
+  "set_digest": "sha256:a1dbe192a02d00a62e0b918515cfa58afd446f7f692db26ed60fbf80c148c5bc",
   "solver_families_used": [
     "ALGEBRAIC_GAIN",
     "BINARY_TREE_TERMINAL_PATHS",

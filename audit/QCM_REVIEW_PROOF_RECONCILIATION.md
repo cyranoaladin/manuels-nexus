@@ -6,15 +6,16 @@ Cet artefact n'approuve rien et ne rebinde rien.
 
 - Lignes de preuve historique : 331
 - Questions du corpus courant : 337
-- Preuve reportable a l'identique : 315
-- Preuve a refaire : 22
-- Equation : 337 = 315 + 22
-- Condense d'ensemble courant : `sha256:f3c399f1e40d50ba8cf348f9c33a27c8971715332d21ebd61ace1ffb7de59fb3`
+- Preuve reportable a l'identique : 314
+- Preuve a refaire : 23
+- Equation : 337 = 314 + 23
+- Condense d'ensemble courant : `sha256:2a9e93e04729ab40f3730fe1f9c95bb0f9c93f67b1676bbf7ea2261082d8ffcc`
 
 ## Questions dont la preuve doit etre refaite
 
 | chapitre | question | motif | classes de delta |
 |---|---|---|---|
+| 1SPE-PRODUIT-SCALAIRE | Q6 | SEMANTIC_CHANGE | DISTRACTOR_SEMANTIC_CHANGE, KEY_POSITION_CHANGED_BUT_VALUE_SAME, DIAGNOSTIC_TEXT_CHANGE |
 | 1SPE-VARIABLES-ALEATOIRES | Q1 | SEMANTIC_CHANGE | ACCENT_ONLY, DISTRACTOR_SEMANTIC_CHANGE, KEY_POSITION_CHANGED_BUT_VALUE_SAME, DIAGNOSTIC_TEXT_CHANGE |
 | 1SPE-VARIABLES-ALEATOIRES | Q10 | CHAPTER_SCOPE_CHANGED_FULL_REPROOF | — |
 | 1SPE-VARIABLES-ALEATOIRES | Q11 | CHAPTER_SCOPE_CHANGED_FULL_REPROOF | — |
@@ -40,10 +41,11 @@ Cet artefact n'approuve rien et ne rebinde rien.
 
 ## Lacunes de couverture de la preuve historique
 
-4 question(s) dont la source porte un renvoi que la preuve n'a jamais capture.
+5 question(s) dont la source porte un renvoi que la preuve n'a jamais capture.
 
 | chapitre | question | champ | options |
 |---|---|---|---|
+| 1SPE-PRODUIT-SCALAIRE | Q6 | diagnostics.renvoi | $35$ |
 | 1SPE-VARIABLES-ALEATOIRES | Q1 | diagnostics.renvoi | $\frac{1}{5}$ |
 | TSPE-DERIVATION-CONVEXITE | Q1 | diagnostics.renvoi | $2\,\mathrm{e}^{x^2}$, $\mathrm{e}^{x^2}$, $x\,\mathrm{e}^{x^2}$ |
 | TSPE-DERIVATION-CONVEXITE | Q3 | diagnostics.renvoi | $12(3x-2)^4$, $3(3x-2)^4$, $4(3x-2)^3$ |

@@ -1,5 +1,5 @@
 {
-  "aggregate_current_set_digest": "sha256:f3c399f1e40d50ba8cf348f9c33a27c8971715332d21ebd61ace1ffb7de59fb3",
+  "aggregate_current_set_digest": "sha256:2a9e93e04729ab40f3730fe1f9c95bb0f9c93f67b1676bbf7ea2261082d8ffcc",
   "approves_nothing": true,
   "artifact_type": "qcm_review_proof_reconciliation",
   "carried_forward": [
@@ -623,13 +623,6 @@
       "chapter": "1SPE-PRODUIT-SCALAIRE",
       "question_id": "Q5",
       "semantic_digest": "sha256:d04f621416528e3eac94fa5f4c4c2c6164293c7419a67643fbe51198f375dd73",
-      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/qcm/1SPE-PRODUIT-SCALAIRE-QCM.json",
-      "status": "CARRIED_FORWARD_UNCHANGED"
-    },
-    {
-      "chapter": "1SPE-PRODUIT-SCALAIRE",
-      "question_id": "Q6",
-      "semantic_digest": "sha256:67232045f830924b5a9bd7ae21aa4238837081427aa262ff3d804b629462eff8",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/qcm/1SPE-PRODUIT-SCALAIRE-QCM.json",
       "status": "CARRIED_FORWARD_UNCHANGED"
     },
@@ -2210,16 +2203,25 @@
     }
   ],
   "counts": {
-    "CARRIED_FORWARD_UNCHANGED": 315,
+    "CARRIED_FORWARD_UNCHANGED": 314,
     "CURRENT_QCM_QUESTION_COUNT": 337,
     "OLD_PROOF_QUESTION_COUNT": 331,
     "PROOF_ROWS_WITHOUT_CURRENT_QUESTION": 0,
-    "REPROOF_REQUIRED": 22
+    "REPROOF_REQUIRED": 23
   },
-  "equation": "337 = 315 + 22",
+  "equation": "337 = 314 + 23",
   "generated_by": "scripts/build_qcm_review_proof_reconciliation.py",
   "historical_proof_status": "HISTORICAL",
   "proof_field_coverage_gaps": [
+    {
+      "chapter": "1SPE-PRODUIT-SCALAIRE",
+      "field": "diagnostics.renvoi",
+      "note": "la source porte un renvoi que la preuve historique n'a jamais capture ; le verificateur courant ne compare pas ce champ",
+      "options": [
+        "$35$"
+      ],
+      "question_id": "Q6"
+    },
     {
       "chapter": "1SPE-VARIABLES-ALEATOIRES",
       "field": "diagnostics.renvoi",
@@ -2266,6 +2268,19 @@
   "proof_rows_without_current_question": [],
   "rebinds_nothing": true,
   "reproof_required": [
+    {
+      "chapter": "1SPE-PRODUIT-SCALAIRE",
+      "current_semantic_digest": "sha256:85302e5f9a21a16b47bc34242e2e86b6c12ad42d79c61b6f7fd0a6ec38ae7f2b",
+      "delta_classes": [
+        "DISTRACTOR_SEMANTIC_CHANGE",
+        "KEY_POSITION_CHANGED_BUT_VALUE_SAME",
+        "DIAGNOSTIC_TEXT_CHANGE"
+      ],
+      "proof_semantic_digest": "sha256:67232045f830924b5a9bd7ae21aa4238837081427aa262ff3d804b629462eff8",
+      "question_id": "Q6",
+      "reason": "SEMANTIC_CHANGE",
+      "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/qcm/1SPE-PRODUIT-SCALAIRE-QCM.json"
+    },
     {
       "chapter": "1SPE-VARIABLES-ALEATOIRES",
       "current_semantic_digest": "sha256:ab1887e49f6e487630bed7f2b0ce8b9685ad48b5d428572a59377a5317dd3624",
