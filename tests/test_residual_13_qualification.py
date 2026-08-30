@@ -441,3 +441,31 @@ def test_residual_13_markdown_reports_are_exact_and_object_visible() -> None:
     for fingerprint in fingerprints:
         assert exact_diff.count(f"`{fingerprint}`") == 1
         assert sunset.count(f"`{fingerprint}`") == 1
+
+
+def test_the_two_ledgers_are_derived_not_hand_maintained() -> None:
+    """Ces deux registres ont derive parce qu'ils n'avaient pas de producteur.
+
+    Ecrits a la main en meme temps que ce test, ils sont restes sur l'etat de
+    revue que la campagne avait depasse -- PENDING_UNQUALIFIED quand le modele
+    residuel portait deja PENDING_QUALIFIED_OPEN_DEBT -- et sur l'empreinte
+    d'un modele residuel qui n'existait plus. Les lier a leur producteur rend
+    la derive impossible plutot que detectable apres coup.
+    """
+
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "residual_13_ledgers", ROOT / "scripts/build_residual_13_ledgers.py"
+    )
+    assert spec and spec.loader
+    producer = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(producer)
+
+    assert EXACT_DIFF_PATH.read_text(encoding="utf-8") == producer.render(
+        producer.build_exact_diff()
+    )
+    assert SUNSET_PATH.read_text(encoding="utf-8") == producer.render(
+        producer.build_sunset_ledger()
+    )
+    assert producer.main(["--check"]) == 0
