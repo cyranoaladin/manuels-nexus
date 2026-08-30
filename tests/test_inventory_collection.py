@@ -3864,11 +3864,26 @@ def test_repository_fail_on_new_gate_accepts_exact_residual_extension(
     comparison = gate["comparison"]
     assert comparison["success"] is False
     assert set(comparison["new"]) == declared
-    assert comparison["resolved"] == []
     assert comparison["modified"] == []
-    assert comparison["regressions"] == []
     assert comparison["expected_review_debt"] == []
-    assert len(comparison["unchanged"]) == 2232
+    # Les rendus QCM 1NSI derivent desormais du .json d'autorite : leur statut
+    # passe de needs_review a generated, ce qui resout onze empreintes et en
+    # fait reapparaitre neuf. La transition est declaree, exacte, et ne
+    # qualifie rien.
+    transition = json.loads(
+        (ROOT / "audit/NSI_QCM_RENDER_STATUS_TRANSITION.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    resolved_by_transition = {
+        entry["fingerprint"] for entry in transition["resolved_previous"]
+    }
+    regressed_by_transition = {
+        entry["fingerprint"] for entry in transition["regressed"]
+    }
+    assert set(comparison["resolved"]) == resolved_by_transition
+    assert set(comparison["regressions"]) == regressed_by_transition
+    assert len(comparison["unchanged"]) == 2232 - len(resolved_by_transition)
 
 
 def test_build_manifest_provenance_is_not_self_attesting(
