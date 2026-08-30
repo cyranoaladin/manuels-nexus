@@ -321,6 +321,20 @@ def test_residual_13_exact_diff_matches_all_canonical_sources() -> None:
 
 
 def test_residual_13_sunset_ledger_is_pending_and_release_blocking() -> None:
+    """Le sunset ledger est un GEL, pas un miroir du modele residuel courant.
+
+    Trois champs par entree -- `source_sha`, `source_status` et
+    `forensic_review_state_at_freeze` -- constatent l'etat au moment du gel.
+    Les re-deriver depuis le modele residuel courant relierait silencieusement
+    une revue humaine a un contenu qu'elle n'a jamais vu, et priverait
+    `build_1spe_suites_human_gate_contract` du seul signal qui lui permet de
+    declarer une liaison perimee : son compteur tomberait structurellement a
+    zero alors que quatre liaisons le sont reellement.
+
+    Ce test verifie donc ce qui DOIT suivre la politique, et laisse les trois
+    champs geles diverger du modele residuel : c'est leur fonction.
+    """
+
     policy, dispositions, _baseline, forensics = _load_sources()
     ledger = json.loads(SUNSET_PATH.read_text(encoding="utf-8"))
     approved = policy["approved_set"]
@@ -328,6 +342,7 @@ def test_residual_13_sunset_ledger_is_pending_and_release_blocking() -> None:
     forensics_by_fp = {
         record["fingerprint"]: record for record in forensics["entries"]
     }
+    frozen_by_fp = {entry["fingerprint"]: entry for entry in ledger["entries"]}
 
     expected_entries = []
     for fingerprint in sorted(authorized):
@@ -343,8 +358,8 @@ def test_residual_13_sunset_ledger_is_pending_and_release_blocking() -> None:
                 "closure_milestone": forensic["closure_phase"],
                 "current_owner": forensic["owner"],
                 "fingerprint": fingerprint,
-                "forensic_review_state_at_freeze": forensic[
-                    "current_review_state"
+                "forensic_review_state_at_freeze": frozen_by_fp[fingerprint][
+                    "forensic_review_state_at_freeze"
                 ],
                 "human_review_required": True,
                 "human_review_state": "PENDING",
@@ -360,8 +375,8 @@ def test_residual_13_sunset_ledger_is_pending_and_release_blocking() -> None:
                 "release_acceptance": False,
                 "release_blocking": disposition["release_blocking"],
                 "required_reviews": REQUIRED_REVIEWS,
-                "source_sha": forensic["source_sha"],
-                "source_status": forensic["source_status"],
+                "source_sha": frozen_by_fp[fingerprint]["source_sha"],
+                "source_status": frozen_by_fp[fingerprint]["source_status"],
                 "sunset_state": "PENDING",
                 "visual_review_required": True,
             }
@@ -469,3 +484,48 @@ def test_the_two_ledgers_are_derived_not_hand_maintained() -> None:
         producer.build_sunset_ledger()
     )
     assert producer.main(["--check"]) == 0
+
+
+def test_the_frozen_fields_are_not_rebound_by_the_producer() -> None:
+    """Le producteur ne doit jamais relier un gel a un contenu plus recent.
+
+    Sans ce test, l'assertion precedente serait satisfaite par un producteur
+    qui recopie le modele residuel courant dans le gel : les champs geles
+    seraient egaux a eux-memes et la derive deviendrait indetectable. On
+    verifie donc que le producteur PRESERVE ce qui est deja sur le disque.
+    """
+
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "residual_13_ledgers_frozen", ROOT / "scripts/build_residual_13_ledgers.py"
+    )
+    assert spec and spec.loader
+    producer = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(producer)
+
+    ledger = json.loads(SUNSET_PATH.read_text(encoding="utf-8"))
+    forensics = json.loads(FORENSICS_PATH.read_text(encoding="utf-8"))
+    forensic_states = {
+        row["fingerprint"]: row["current_review_state"] for row in forensics["entries"]
+    }
+
+    frozen_states = {
+        entry["fingerprint"]: entry["forensic_review_state_at_freeze"]
+        for entry in ledger["entries"]
+    }
+    assert frozen_states, "le gel doit porter des entrees"
+    # Le gel a ete pris avant la qualification : il doit encore le dire.
+    assert any(
+        frozen_states[fingerprint] != forensic_states[fingerprint]
+        for fingerprint in frozen_states
+    ), "un gel qui coincide en tout point avec le courant ne gele plus rien"
+
+    rebuilt = producer.build_sunset_ledger()
+    for entry in rebuilt["entries"]:
+        for field in producer.FROZEN_FIELDS:
+            assert entry[field] == next(
+                row[field]
+                for row in ledger["entries"]
+                if row["fingerprint"] == entry["fingerprint"]
+            ), f"le producteur a rebindé {field}"

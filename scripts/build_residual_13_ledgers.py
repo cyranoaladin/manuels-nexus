@@ -319,11 +319,27 @@ def build_exact_diff() -> dict[str, Any]:
     }
 
 
+#: Champs GELES au moment de la prise du gel. Les re-deriver depuis le modele
+#: residuel courant reviendrait a relier silencieusement une revue humaine a un
+#: contenu qu'elle n'a jamais vu : le gel perdrait sa seule raison d'etre, et
+#: `build_1spe_suites_human_gate_contract` ne pourrait plus signaler une
+#: liaison perimee -- son compteur tomberait structurellement a zero.
+FROZEN_FIELDS = ("source_sha", "source_status", "forensic_review_state_at_freeze")
+
+
+def _frozen_entries() -> dict[str, dict[str, Any]]:
+    if not SUNSET_PATH.is_file():
+        return {}
+    payload = json.loads(SUNSET_PATH.read_text(encoding="utf-8"))
+    return {entry["fingerprint"]: entry for entry in payload.get("entries", [])}
+
+
 def build_sunset_ledger() -> dict[str, Any]:
     policy, dispositions, _baseline, forensics = load_sources()
     approved = policy["approved_set"]
     authorized = set(approved["fingerprints"])
     forensics_by_fp = {r["fingerprint"]: r for r in forensics["entries"]}
+    frozen = _frozen_entries()
 
     entries = []
     for fingerprint in sorted(authorized):
@@ -358,6 +374,13 @@ def build_sunset_ledger() -> dict[str, Any]:
                 "visual_review_required": True,
             }
         )
+        # Une entree deja gelee garde ses champs geles ; seule une entree
+        # NOUVELLE les prend au modele residuel courant.
+        previous = frozen.get(fingerprint)
+        if previous:
+            for field in FROZEN_FIELDS:
+                if field in previous:
+                    entries[-1][field] = previous[field]
 
     total = len(entries)
     return {
