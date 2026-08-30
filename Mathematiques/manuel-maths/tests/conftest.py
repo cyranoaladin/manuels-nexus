@@ -19,7 +19,9 @@ from pathlib import Path
 
 RACINE_MANUEL = Path(__file__).resolve().parents[1]
 RACINE_DEPOT = RACINE_MANUEL.parents[1]
+#: Les aides partagees entre modules de tests vivent a cote d'eux.
+DOSSIER_TESTS = Path(__file__).resolve().parent
 
-for chemin in (RACINE_DEPOT, RACINE_MANUEL):
+for chemin in (RACINE_DEPOT, RACINE_MANUEL, DOSSIER_TESTS):
     if str(chemin) not in sys.path:
         sys.path.insert(0, str(chemin))

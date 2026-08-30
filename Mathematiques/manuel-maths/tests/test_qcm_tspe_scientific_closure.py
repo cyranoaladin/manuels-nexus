@@ -14,6 +14,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+import _qcm_par_contenu as _par_contenu
+
+
 def _question(chapter: str, question_id: str) -> dict:
     source = next((ROOT / "chapitres" / chapter / "qcm").glob("*-QCM.json"))
     data = json.loads(source.read_text(encoding="utf-8"))
@@ -194,17 +197,37 @@ def test_les_renvois_directs_suivent_les_capacites_corrigees() -> None:
 
 
 def test_les_diagnostics_generiques_tspe_sont_remplaces_par_un_modele_derreur() -> None:
+    """L'exigence porte sur TOUS les distracteurs des questions visees.
+
+    La table designait chaque diagnostic par sa lettre. Le reequilibrage des
+    cles permute les options, si bien que la lettre ne designe plus le meme
+    diagnostic ; l'exiger de chaque distracteur de ces questions est a la fois
+    insensible a la permutation et plus strict.
+    """
+
     assert len(TARGETED_GENERIC_DIAGNOSTICS) == 71
-    for chapter, question_id, letter in TARGETED_GENERIC_DIAGNOSTICS:
-        error = _question(chapter, question_id)["diagnostics"][letter]["erreur"]
-        assert len(error) >= 60, f"{chapter}/{question_id}/{letter}: {error}"
-        assert not any(fragment in error for fragment in BANNED_GENERIC_FRAGMENTS)
+    questions = {(chapter, qid) for chapter, qid, _ in TARGETED_GENERIC_DIAGNOSTICS}
+    for chapter, question_id in sorted(questions):
+        question = _question(chapter, question_id)
+        for letter, error in _par_contenu.diagnostics_de_distracteurs(question).items():
+            assert len(error) >= 60, f"{chapter}/{question_id}/{letter}: {error}"
+            assert not any(
+                fragment in error for fragment in BANNED_GENERIC_FRAGMENTS
+            ), f"{chapter}/{question_id}/{letter}: {error}"
 
 
 def test_les_six_diagnostics_causalement_faux_restants_sont_corriges() -> None:
+    """Le fragment attendu doit figurer dans UN diagnostic, et un seul.
+
+    Le distracteur vise reste identifie par son texte : c'est l'unicite qui
+    porte la preuve, non la lettre que le reequilibrage deplace.
+    """
+
     for (chapter, question_id, letter), expected in TARGETED_INVALID_DIAGNOSTICS.items():
-        error = _question(chapter, question_id)["diagnostics"][letter]["erreur"]
-        assert expected in error, f"{chapter}/{question_id}/{letter}: {error}"
+        question = _question(chapter, question_id)
+        assert _par_contenu.diagnostic_unique_contenant(question, expected), (
+            f"{chapter}/{question_id} (jadis {letter}): {expected}"
+        )
 
 
 def test_convexite_q12_ne_propose_pas_deux_proprietes_vraies() -> None:
