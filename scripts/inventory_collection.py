@@ -1722,7 +1722,29 @@ def _optional_extension_review_debt_violations(
     return violations
 
 
-def _load_dispositions(root: Path) -> dict[str, dict[str, Any]]:
+def _load_dispositions(
+    root: Path,
+    *,
+    invalid: list[dict[str, Any]] | None = None,
+) -> dict[str, dict[str, Any]]:
+    """Dispositions applicables, les qualifications invalides etant ECARTEES.
+
+    Une qualification derivee d'une decision de classe cesse de s'appliquer des
+    que son objet a change : c'est le sens meme d'une decision humaine portant
+    sur un texte precis. Elle etait auparavant signalee en levant, ce qui
+    interrompait la construction de l'inventaire et rendait INVISIBLES tous les
+    autres blockers -- une campagne publish-ready ne peut pas se piloter a
+    l'aveugle.
+
+    L'invalidite est desormais representee, non levee. La disposition est
+    retiree, donc l'anomalie qu'elle couvrait redevient une dette ouverte et
+    bloquante : le comportement reste fail-closed. Le motif precis est verse
+    dans `invalid`, pour que les gates l'affichent a cote des autres blockers.
+
+    `InventoryError` demeure pour ce qui est reellement illisible : schema
+    absent, controle versionne invalide, donnees non analysables.
+    """
+
     payload = _load_control_yaml_payload(
         root / ANOMALY_DISPOSITIONS_FILE,
         default={},
@@ -1819,16 +1841,33 @@ def _load_dispositions(root: Path) -> dict[str, dict[str, Any]]:
         for expiry_field in ("expires_at", "expiry"):
             if expiry_field in value:
                 _parse_disposition_expiry(value[expiry_field])
+        violations: list[str] = []
         if value.get("decision_ref") == A4_METHOD_REVIEW_DEBT_DECISION_REF:
             violations = _a4_method_review_debt_violations(root, value)
-            if violations:
-                raise InventoryError("; ".join(violations))
-        if value.get("decision_ref") == OPTIONAL_EXTENSION_REVIEW_DECISION_REF:
+        elif value.get("decision_ref") == OPTIONAL_EXTENSION_REVIEW_DECISION_REF:
             violations = _optional_extension_review_debt_violations(root, value)
-            if violations:
-                raise InventoryError("; ".join(violations))
+        if violations:
+            if invalid is not None:
+                invalid.append(
+                    {
+                        "fingerprint": fingerprint,
+                        "decision_ref": str(value.get("decision_ref", "")),
+                        "source": str(value.get("source", "")),
+                        "violations": list(violations),
+                    }
+                )
+            # Ecartee : l'anomalie couverte redevient une dette ouverte.
+            continue
         raw_dispositions[fingerprint] = _canonicalize(dict(value))
     return raw_dispositions
+
+
+def invalid_qualifications(root: Path) -> list[dict[str, Any]]:
+    """Qualifications derivees devenues invalides, dans l'ordre des empreintes."""
+
+    collected: list[dict[str, Any]] = []
+    _load_dispositions(root, invalid=collected)
+    return sorted(collected, key=lambda entry: entry["fingerprint"])
 
 
 def _load_anomaly_identity_migrations(
@@ -10772,6 +10811,26 @@ def _render_matrice_livrables(inventory: Mapping[str, Any]) -> str:
     )
 
 
+def _invalid_qualification_reasons(root: Path) -> list[str]:
+    """Motifs des qualifications derivees devenues invalides.
+
+    Elles sont ecartees par `_load_dispositions`, si bien que les anomalies
+    qu'elles couvraient redeviennent des dettes ouvertes et bloquantes. Sans
+    ces motifs, la cause resterait invisible : on verrait la dette reapparaitre
+    sans savoir qu'une decision humaine a ete invalidee.
+    """
+
+    try:
+        invalides = invalid_qualifications(root)
+    except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
+        return [f"qualifications_illisibles:{_stable_gate_reason(exc, root)}"]
+    return [
+        f"qualification_invalide:{entry['fingerprint']}:{violation}"
+        for entry in invalides
+        for violation in entry["violations"]
+    ]
+
+
 def _gate_result(
     name: str,
     *,
@@ -10997,7 +11056,7 @@ def _validate_model_gate(
     today: datetime.date | None = None,
 ) -> dict[str, Any]:
     evaluation_date = today or datetime.datetime.now(datetime.UTC).date()
-    reasons: list[str] = []
+    reasons: list[str] = list(_invalid_qualification_reasons(root))
     payloads: dict[str, dict[str, Any]] = {}
     reasons.extend(
         _qualification_policy_control_failures(root, inventory=None)
@@ -11441,6 +11500,7 @@ def _check_gate(root: Path, *, audit_directory: str, etat_path: str) -> dict[str
         ]
     except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
         reasons = [f"check_error:{_stable_gate_reason(exc, root)}"]
+    reasons = _invalid_qualification_reasons(root) + reasons
     return _gate_result(
         "check",
         success=not reasons,
@@ -11473,6 +11533,7 @@ def _fail_on_new_gate(root: Path) -> dict[str, Any]:
             "comparaison fingerprint-v1 impossible:"
             f"{_stable_gate_reason(exc, root)}"
         ]
+    reasons = _invalid_qualification_reasons(root) + reasons
     result = _gate_result(
         "fail-on-new",
         success=not reasons,
@@ -12594,7 +12655,15 @@ def _release_strict_gate_for_root(
             dimensions={"structure": "failed", "execution": "failed"},
             reasons=[f"inventaire_indisponible:{_stable_gate_reason(exc, root)}"],
         )
-    return _release_strict_gate(inventory)
+    result = _release_strict_gate(inventory)
+    invalides = _invalid_qualification_reasons(root)
+    if invalides:
+        result["reasons"] = invalides + list(result.get("reasons", []))
+        result["blocker_count"] = len(result["reasons"])
+        result["success"] = False
+        result["exit_code"] = GATE_RELEASE_CODE
+        result["dimensions"] = {**result.get("dimensions", {}), "structure": "failed"}
+    return result
 
 
 def _print_gate_result(result: Mapping[str, Any]) -> None:
