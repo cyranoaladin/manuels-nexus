@@ -7,38 +7,38 @@
 % assert diff(log(x), x) == 1/x
 % assert simplify(exp(log(x)) - x) == 0 and log(1) == 0 and log(E) == 1
 % END-VERIFY
-\begin{fichemethode}{M1}{Mobiliser le logarithme comme réciproque de l'exponentielle}
+\begin{fichemethode}{M1}{Mobiliser le logarithme comme reciproque de l'exponentielle}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé demande de justifier une propriété de
-  $\ln$ (valeurs remarquables, limites, allure de la courbe, dérivée) a partir
-  de sa DEFINITION : $\ln$ est la fonction réciproque de $\exp$.
+  Utiliser cette methode lorsque l'enonce demande de justifier une propriete de
+  $\ln$ (valeurs remarquables, limites, allure de la courbe, derivee) a partir
+  de sa DEFINITION : $\ln$ est la fonction reciproque de $\exp$.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Poser la définition : pour $x > 0$, $y = \ln(x) \iff x = e^y$ ;
+    \item Poser la definition : pour $x > 0$, $y = \ln(x) \iff x = e^y$ ;
       autrement dit $e^{\ln x} = x$ (pour $x > 0$) et $\ln(e^y) = y$ (pour tout
       $y$).
-    \item En déduire les valeurs remarquables : $\ln(1) = 0$ (car $e^0 = 1$) et
+    \item En deduire les valeurs remarquables : $\ln(1) = 0$ (car $e^0 = 1$) et
       $\ln(e) = 1$ (car $e^1 = e$).
-    \item Transferer les propriétés de $\exp$ : $\ln$ est définie sur
+    \item Transferer les proprietes de $\exp$ : $\ln$ est definie sur
       $]0\,;\,+\infty[$, strictement croissante, et
       $\lim_{x \to 0^+} \ln x = -\infty$, $\lim_{x \to +\infty} \ln x = +\infty$.
     \item Pour la courbe : celle de $\ln$ est la symetrique de celle de $\exp$
       par rapport a la droite $y = x$.
-    \item Utiliser la dérivée $\ln'(x) = \dfrac{1}{x}$ (démonstration : fiche
+    \item Utiliser la derivee $\ln'(x) = \dfrac{1}{x}$ (demonstration : fiche
       M5) pour les tangentes et variations.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Justifier que $\ln(e^2) = 2$ et déterminer la tangente a la courbe de $\ln$
+  Justifier que $\ln(e^2) = 2$ et determiner la tangente a la courbe de $\ln$
   au point d'abscisse 1.
 
   \medskip
   \commentaireMarge{Appliquer $\ln(e^y) = y$.}%
-  Par définition de la réciproque, $\ln(e^2) = 2$.
+  Par definition de la reciproque, $\ln(e^2) = 2$.
 
   \medskip
   \commentaireMarge{$T : y = f'(a)(x-a) + f(a)$.}%
@@ -48,19 +48,19 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Écrire $\ln(x)$ pour $x \leq 0$ : le logarithme
-      n'est défini que sur $]0\,;\,+\infty[$.
-    \item \textbf{Piège 2.} Utiliser $e^{\ln x} = x$ sans la condition $x > 0$
-      (alors que $\ln(e^y) = y$ vaut pour tout réel $y$).
-    \item \textbf{Piège 3.} Confondre les courbes : celle de $\ln$ est SOUS la
+    \item \textbf{Piege 1.} Ecrire $\ln(x)$ pour $x \leq 0$ : le logarithme
+      n'est defini que sur $]0\,;\,+\infty[$.
+    \item \textbf{Piege 2.} Utiliser $e^{\ln x} = x$ sans la condition $x > 0$
+      (alors que $\ln(e^y) = y$ vaut pour tout reel $y$).
+    \item \textbf{Piege 3.} Confondre les courbes : celle de $\ln$ est SOUS la
       droite $y = x - 1$ partout sauf au point de tangence, et la symetrie avec
       $\exp$ se fait par rapport a $y = x$, pas par rapport a un axe.
   \end{itemize}
 }
 
 \verifier{%
-  Contrôler chaque propriété en revenant a $\exp$ (une égalité sur $\ln$ doit se
-  traduire en égalité vraie sur $\exp$), et vérifier les limites par lecture de
+  Controler chaque propriete en revenant a $\exp$ (une egalite sur $\ln$ doit se
+  traduire en egalite vraie sur $\exp$), et verifier les limites par lecture de
   la courbe symetrique.
 }
 

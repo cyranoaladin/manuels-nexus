@@ -6,31 +6,31 @@
 % moyenne_des_frequences = sum(ech) / len(ech) / 100
 % assert abs(moyenne_des_frequences - 0.3) < 0.02
 % END-VERIFY
-\begin{fichemethode}{M5}{Simuler des échantillons en Python et étudier la serie des moyennes}
+\begin{fichemethode}{M5}{Simuler des echantillons en Python et etudier la serie des moyennes}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé demande de simuler en Python un
-  échantillon de taille $n$ d'une variable aleatoire, puis de calculer et
-  d'observer la serie des moyennes de $N$ échantillons.
+  Utiliser cette methode lorsque l'enonce demande de simuler en Python un
+  echantillon de taille $n$ d'une variable aleatoire, puis de calculer et
+  d'observer la serie des moyennes de $N$ echantillons.
 }
 
 \pasApas{%
   \begin{enumerate}
     \item Simuler UNE observation : \texttt{random.random() < p} renvoie
-      \texttt{True} (succès) avec probabilité $p$.
-    \item Simuler UN échantillon de taille $n$ : compter les succès sur $n$ tirages
+      \texttt{True} (succes) avec probabilite $p$.
+    \item Simuler UN echantillon de taille $n$ : compter les succes sur $n$ tirages
       dans une boucle ou une comprehension.
-    \item Repeter $N$ fois pour obtenir $N$ échantillons, et stocker chaque
+    \item Repeter $N$ fois pour obtenir $N$ echantillons, et stocker chaque
       moyenne (ou frequence) dans une liste.
     \item Calculer la moyenne de la serie des moyennes et son etendue ; comparer
-      a la valeur theorique attendue ($p$ pour une frequence de succès).
+      a la valeur theorique attendue ($p$ pour une frequence de succes).
     \item Observer l'effet de $n$ et de $N$ : les moyennes se resserrent autour de
       la valeur theorique quand $n$ augmente.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Simuler $N = 200$ échantillons de taille $n = 100$ d'une Bernoulli de paramètre
+  Simuler $N = 200$ echantillons de taille $n = 100$ d'une Bernoulli de parametre
   $p = 0{,}3$ et calculer la moyenne des frequences observees.
 
   \medskip
@@ -38,10 +38,10 @@
   import random\\
   random.seed(42)\quad\# simulation reproductible\\
   frequences = []\\
-  for \_ in range(200):\quad\# N échantillons\\
-  \hspace*{1.2em}succès = sum(1 for \_ in range(100)\\
+  for \_ in range(200):\quad\# N echantillons\\
+  \hspace*{1.2em}succes = sum(1 for \_ in range(100)\\
   \hspace*{3.4em}if random.random() < 0.3)\\
-  \hspace*{1.2em}frequences.append(succès / 100)\\
+  \hspace*{1.2em}frequences.append(succes / 100)\\
   moyenne = sum(frequences) / len(frequences)
   \end{flushleft}
 
@@ -52,19 +52,19 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Écrire \texttt{random.random() < p} avec $p$ en
+    \item \textbf{Piege 1.} Ecrire \texttt{random.random() < p} avec $p$ en
       pourcentage (30 au lieu de 0,3).
-    \item \textbf{Piège 2.} Confondre $n$ (taille d'un échantillon) et $N$
-      (nombre d'échantillons).
-    \item \textbf{Piège 3.} Oublier de diviser par $n$ pour passer du nombre de
-      succès a la frequence.
+    \item \textbf{Piege 2.} Confondre $n$ (taille d'un echantillon) et $N$
+      (nombre d'echantillons).
+    \item \textbf{Piege 3.} Oublier de diviser par $n$ pour passer du nombre de
+      succes a la frequence.
   \end{itemize}
 }
 
 \verifier{%
-  Contrôler que chaque frequence est dans $[0\,;\,1]$, que la moyenne des
+  Controler que chaque frequence est dans $[0\,;\,1]$, que la moyenne des
   frequences est proche de $p$, et relancer la simulation avec une autre graine
-  pour vérifier la stabilite.
+  pour verifier la stabilite.
 }
 
 \sEntrainer{\refExos{M5}}

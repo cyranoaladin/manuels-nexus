@@ -7,33 +7,33 @@
 % pi0 = Matrix([[Rational(1,2), Rational(1,2)]])
 % assert sum(pi0) == 1
 % END-VERIFY
-\begin{fichemethode}{M4}{Représenter une chaine de Markov : graphe pondere, distribution initiale, matrice de transition}
+\begin{fichemethode}{M4}{Representer une chaine de Markov : graphe pondere, distribution initiale, matrice de transition}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsqu'une situation a 2 ou 3 etats evolue par étapes
-  avec des probabilités de passage NE DEPENDANT que de l'etat courant : il faut
+  Utiliser cette methode lorsqu'une situation a 2 ou 3 etats evolue par etapes
+  avec des probabilites de passage NE DEPENDANT que de l'etat courant : il faut
   construire le graphe oriente pondere, la matrice de transition et la
   distribution initiale.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Identifier les ETATS (2 ou 3) et vérifier la propriété de Markov :
-      les probabilités de transition ne dependent que de l'etat present.
+    \item Identifier les ETATS (2 ou 3) et verifier la propriete de Markov :
+      les probabilites de transition ne dependent que de l'etat present.
     \item Dessiner le graphe oriente : un sommet par etat, un arc $i \to j$
-      pondere par la probabilité de passer de $i$ a $j$ (boucles comprises).
-    \item Contrôler que la somme des poids SORTANT de chaque sommet vaut 1.
+      pondere par la probabilite de passer de $i$ a $j$ (boucles comprises).
+    \item Controler que la somme des poids SORTANT de chaque sommet vaut 1.
     \item Ranger ces poids dans la matrice de transition $P$ : LIGNE $i$ =
       etat de depart, colonne $j$ = etat d'arrivee ; chaque ligne somme a 1.
-    \item Représenter la distribution initiale par une matrice LIGNE
+    \item Representer la distribution initiale par une matrice LIGNE
       $\pi_0 = (p_1\ \dots)$ dont les coefficients somment a 1.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Chaque année, 10\,\% des abonnes d'un operateur $A$ partent chez $B$, et
+  Chaque annee, 10\,\% des abonnes d'un operateur $A$ partent chez $B$, et
   30\,\% des abonnes de $B$ viennent chez $A$. Au depart, les parts sont
-  égales. Représenter la chaine.
+  egales. Representer la chaine.
 
   \medskip
   \commentaireMarge{Deux etats, quatre arcs (dont deux boucles).}%
@@ -49,18 +49,18 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Oublier les BOUCLES $i \to i$ : sans elles, les
+    \item \textbf{Piege 1.} Oublier les BOUCLES $i \to i$ : sans elles, les
       sorties ne somment pas a 1.
-    \item \textbf{Piège 2.} Transposer la matrice (colonnes qui somment a 1) :
+    \item \textbf{Piege 2.} Transposer la matrice (colonnes qui somment a 1) :
       la convention ici est lignes $=$ etat de depart.
-    \item \textbf{Piège 3.} Confondre proportions d'une distribution
-      (photographie a l'instant $n$) et probabilités de transition (passage
-      d'une étape a la suivante).
+    \item \textbf{Piege 3.} Confondre proportions d'une distribution
+      (photographie a l'instant $n$) et probabilites de transition (passage
+      d'une etape a la suivante).
   \end{itemize}
 }
 
 \verifier{%
-  Vérifier que chaque ligne de $P$ et que $\pi_0$ somment a 1, et que chaque
+  Verifier que chaque ligne de $P$ et que $\pi_0$ somment a 1, et que chaque
   poids du graphe se retrouve au bon emplacement $(i\,;\,j)$ de la matrice.
 }
 

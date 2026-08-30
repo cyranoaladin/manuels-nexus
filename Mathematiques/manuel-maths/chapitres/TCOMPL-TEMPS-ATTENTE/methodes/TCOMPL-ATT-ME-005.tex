@@ -9,23 +9,23 @@
 % assert simplify(P13 - (exp(Rational(-1,2)) - exp(Rational(-3,2)))) == 0
 % assert 0 < float(P13) < 1
 % END-VERIFY
-\begin{fichemethode}{M5}{Vérifier une densite de probabilité et calculer des probabilités}
+\begin{fichemethode}{M5}{Verifier une densite de probabilite et calculer des probabilites}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé donne une fonction $f$ et demande de
-  VERIFIER que c'est une densite de probabilité, puis de calculer des
-  probabilités du type $P(a \leq T \leq b)$ ou $P(T > a)$.
+  Utiliser cette methode lorsque l'enonce donne une fonction $f$ et demande de
+  VERIFIER que c'est une densite de probabilite, puis de calculer des
+  probabilites du type $P(a \leq T \leq b)$ ou $P(T > a)$.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Vérifier la POSITIVITE : $f(t) \geq 0$ sur l'intervalle ou elle est
-      définie (justifier, ex. exponentielle $> 0$).
-    \item Vérifier la MASSE TOTALE : $\displaystyle\int f = 1$ sur le domaine
-      (intégrale sur $[0\,;\,+\infty[$ : calculer $\int_0^A f$ puis faire
+    \item Verifier la POSITIVITE : $f(t) \geq 0$ sur l'intervalle ou elle est
+      definie (justifier, ex. exponentielle $> 0$).
+    \item Verifier la MASSE TOTALE : $\displaystyle\int f = 1$ sur le domaine
+      (integrale sur $[0\,;\,+\infty[$ : calculer $\int_0^A f$ puis faire
       tendre $A$ vers $+\infty$).
-    \item Conclure : $f$ positive et d'intégrale 1 est une densite.
-    \item Probabilités : $P(a \leq T \leq b) = \displaystyle\int_a^b f(t)\,dt$
+    \item Conclure : $f$ positive et d'integrale 1 est une densite.
+    \item Probabilites : $P(a \leq T \leq b) = \displaystyle\int_a^b f(t)\,dt$
       (les bornes larges ou strictes ne changent rien en continu).
     \item Pour $P(T > a)$ : utiliser le complementaire $1 - \int_0^a f$, ou la
       forme directe $e^{-\lambda a}$ pour une exponentielle.
@@ -33,38 +33,38 @@
 }
 
 \exempleRedige{%
-  Vérifier que $f(t) = \dfrac{1}{2}\,e^{-t/2}$ ($t \geq 0$) est une densite,
+  Verifier que $f(t) = \dfrac{1}{2}\,e^{-t/2}$ ($t \geq 0$) est une densite,
   puis calculer $P(1 \leq T \leq 3)$.
 
   \medskip
-  \commentaireMarge{Positivité + intégrale égale a 1.}%
+  \commentaireMarge{Positivite + integrale egale a 1.}%
   Pour tout $t \geq 0$, $f(t) > 0$. De plus
   $\displaystyle\int_0^A \dfrac{1}{2}e^{-t/2}\,dt
   = \left[-e^{-t/2}\right]_0^A = 1 - e^{-A/2} \xrightarrow[A \to +\infty]{} 1$.
-  Donc $f$ est une densite de probabilité.
+  Donc $f$ est une densite de probabilite.
 
   \medskip
-  \commentaireMarge{Intégrale entre les deux bornes.}%
+  \commentaireMarge{Integrale entre les deux bornes.}%
   $P(1 \leq T \leq 3) = \displaystyle\int_1^3 \dfrac{1}{2}e^{-t/2}\,dt
   = \left[-e^{-t/2}\right]_1^3 = e^{-1/2} - e^{-3/2} \approx 0{,}383$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Oublier l'une des DEUX conditions (positivité ET
-      intégrale 1) : les deux sont necessaires.
-    \item \textbf{Piège 2.} Erreur de signe dans la primitive :
+    \item \textbf{Piege 1.} Oublier l'une des DEUX conditions (positivite ET
+      integrale 1) : les deux sont necessaires.
+    \item \textbf{Piege 2.} Erreur de signe dans la primitive :
       une primitive de $\lambda e^{-\lambda t}$ est $-e^{-\lambda t}$
-      (contrôler en derivant).
-    \item \textbf{Piège 3.} Traiter l'intégrale impropre sans limite : écrire
+      (controler en derivant).
+    \item \textbf{Piege 3.} Traiter l'integrale impropre sans limite : ecrire
       $\int_0^A$ puis $A \to +\infty$, pas directement $\infty$ dans le
       crochet.
   \end{itemize}
 }
 
 \verifier{%
-  Dériver la primitive pour retrouver $f$, contrôler que chaque probabilité est
-  dans $[0\,;\,1]$, et vérifier
+  Deriver la primitive pour retrouver $f$, controler que chaque probabilite est
+  dans $[0\,;\,1]$, et verifier
   $P(T \leq a) + P(T > a) = 1$ sur un exemple.
 }
 

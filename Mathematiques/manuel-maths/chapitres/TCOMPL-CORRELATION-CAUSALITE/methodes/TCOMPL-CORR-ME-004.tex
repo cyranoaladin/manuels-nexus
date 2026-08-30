@@ -8,22 +8,22 @@
 \begin{fichemethode}{M4}{Interpoler ou extrapoler avec un ajustement affine, avec regard critique}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé demande d'ESTIMER une valeur a partir
+  Utiliser cette methode lorsque l'enonce demande d'ESTIMER une valeur a partir
   de la droite d'ajustement $y = ax + b$ : a l'interieur de la plage observee
   (interpolation) ou au-dela (extrapolation).
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Écrire l'équation de l'ajustement $y = ax + b$ (fiche M2) et noter la
+    \item Ecrire l'equation de l'ajustement $y = ax + b$ (fiche M2) et noter la
       plage des $x$ observes $[x_{\min}\,;\,x_{\max}]$.
     \item Substituer la valeur demandee $x_0$ : $y_0 = a x_0 + b$.
     \item Qualifier l'estimation : INTERPOLATION si
       $x_0 \in [x_{\min}\,;\,x_{\max}]$, EXTRAPOLATION sinon.
     \item Porter un regard critique sur une extrapolation : plus $x_0$ s'eloigne
-      des donnees, moins l'estimation est fiable (le modèle peut cesser d'être
+      des donnees, moins l'estimation est fiable (le modele peut cesser d'etre
       valable : saturation, changement de regime...).
-    \item Conclure avec une phrase qui précise l'unité, l'arrondi et la reserve
+    \item Conclure avec une phrase qui precise l'unite, l'arrondi et la reserve
       de validite.
   \end{enumerate}
 }
@@ -40,23 +40,23 @@
   \medskip
   \commentaireMarge{$6 \notin [1\,;\,4]$ : extrapolation.}%
   Pour $x_0 = 6$ : $y_0 = 1{,}4 \times 6 + 0{,}5 = 8{,}9$ — extrapolation au-dela
-  des donnees : l'estimation suppose que la tendance linéaire se prolonge, ce
-  qui doit être justifie par le contexte.
+  des donnees : l'estimation suppose que la tendance lineaire se prolonge, ce
+  qui doit etre justifie par le contexte.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Presenter une extrapolation lointaine comme une
-      certitude : le modèle n'est valide que pres des donnees observees.
-    \item \textbf{Piège 2.} Utiliser la droite pour predire dans le sens inverse
+    \item \textbf{Piege 1.} Presenter une extrapolation lointaine comme une
+      certitude : le modele n'est valide que pres des donnees observees.
+    \item \textbf{Piege 2.} Utiliser la droite pour predire dans le sens inverse
       ($x$ en fonction de $y$) sans refaire de regression.
-    \item \textbf{Piège 3.} Oublier les unités ou sur-arrondir les coefficients
-      avant la substitution (arrondir seulement le résultat final).
+    \item \textbf{Piege 3.} Oublier les unites ou sur-arrondir les coefficients
+      avant la substitution (arrondir seulement le resultat final).
   \end{itemize}
 }
 
 \verifier{%
-  Contrôler que l'estimation est coherente avec le nuage (ordre de grandeur), et
+  Controler que l'estimation est coherente avec le nuage (ordre de grandeur), et
   toujours indiquer si l'on interpole ou si l'on extrapole.
 }
 

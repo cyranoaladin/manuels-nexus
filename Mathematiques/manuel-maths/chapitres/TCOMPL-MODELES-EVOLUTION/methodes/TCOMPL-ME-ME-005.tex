@@ -8,37 +8,37 @@
 % g = 4*exp(2*t) - 3
 % assert simplify(g.diff(t) - (2*g + 6)) == 0
 % END-VERIFY
-\begin{fichemethode}{M5}{Résoudre y' = ay puis y' = ay + b avec une solution particulière constante}
+\begin{fichemethode}{M5}{Resoudre y' = ay puis y' = ay + b avec une solution particuliere constante}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé demande de résoudre une équation
-  différentielle du type $y' = ay$ ou $y' = ay + b$ ($a \neq 0$), avec
+  Utiliser cette methode lorsque l'enonce demande de resoudre une equation
+  differentielle du type $y' = ay$ ou $y' = ay + b$ ($a \neq 0$), avec
   eventuellement une condition initiale.
 }
 
 \pasApas{%
   \begin{enumerate}
     \item Cas $y' = ay$ : les solutions sont exactement les fonctions
-      $y(t) = C\,e^{at}$, $C \in \mathbb{R}$ (résultat de cours).
-    \item Cas $y' = ay + b$ : chercher une solution particulière CONSTANTE
+      $y(t) = C\,e^{at}$, $C \in \mathbb{R}$ (resultat de cours).
+    \item Cas $y' = ay + b$ : chercher une solution particuliere CONSTANTE
       $y_p = c$ ; alors $y_p' = 0$ donne $0 = ac + b$, soit
       $c = -\dfrac{b}{a}$.
-    \item Écrire la solution generale : somme de la solution generale de
-      $y' = ay$ et de la solution particulière,
+    \item Ecrire la solution generale : somme de la solution generale de
+      $y' = ay$ et de la solution particuliere,
       $y(t) = C\,e^{at} - \dfrac{b}{a}$.
-    \item Déterminer $C$ avec la condition initiale : substituer $t = 0$ et
-      résoudre en $C$.
-    \item Contrôler en derivant la solution obtenue et en verifiant l'équation
+    \item Determiner $C$ avec la condition initiale : substituer $t = 0$ et
+      resoudre en $C$.
+    \item Controler en derivant la solution obtenue et en verifiant l'equation
       ET la condition initiale.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Résoudre $y' = 2y + 6$ avec $y(0) = 1$.
+  Resoudre $y' = 2y + 6$ avec $y(0) = 1$.
 
   \medskip
   \commentaireMarge{Solution constante : $0 = 2c + 6$.}%
-  Solution particulière constante : $c = -\dfrac{6}{2} = -3$.
+  Solution particuliere constante : $c = -\dfrac{6}{2} = -3$.
   Solutions generales : $y(t) = C\,e^{2t} - 3$, $C \in \mathbb{R}$.
 
   \medskip
@@ -47,25 +47,25 @@
   $y(t) = 4\,e^{2t} - 3$.
 
   \medskip
-  Contrôle : $y'(t) = 8\,e^{2t}$ et
+  Controle : $y'(t) = 8\,e^{2t}$ et
   $2y(t) + 6 = 8\,e^{2t} - 6 + 6 = 8\,e^{2t}$ ; de plus $y(0) = 4 - 3 = 1$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Erreur de signe dans la solution particulière :
+    \item \textbf{Piege 1.} Erreur de signe dans la solution particuliere :
       $c = -\frac{b}{a}$, pas $\frac{b}{a}$.
-    \item \textbf{Piège 2.} Appliquer la condition initiale AVANT d'avoir ecrit
+    \item \textbf{Piege 2.} Appliquer la condition initiale AVANT d'avoir ecrit
       la solution generale complete (le $-\frac{b}{a}$ doit y figurer).
-    \item \textbf{Piège 3.} Confondre le cadre discret (suites
-      arithmetico-géométriques, fiche M4) et le cadre continu : la structure
+    \item \textbf{Piege 3.} Confondre le cadre discret (suites
+      arithmetico-geometriques, fiche M4) et le cadre continu : la structure
       est analogue mais $e^{at}$ remplace $a^n$.
   \end{itemize}
 }
 
 \verifier{%
-  Dériver la solution finale et substituer dans l'équation (égalité pour tout
-  $t$), vérifier la condition initiale, et contrôler le comportement en
+  Deriver la solution finale et substituer dans l'equation (egalite pour tout
+  $t$), verifier la condition initiale, et controler le comportement en
   $+\infty$ selon le signe de $a$.
 }
 

@@ -8,29 +8,29 @@
 % assert simplify(G2 - (3-E)/(E-1)) == 0
 % assert 0 < float(G2) < 1
 % END-VERIFY
-\begin{fichemethode}{M5}{Calculer l'indice de Gini par une intégrale}
+\begin{fichemethode}{M5}{Calculer l'indice de Gini par une integrale}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque la courbe de Lorenz est modélisée par une
-  fonction $L$ et que l'énoncé demande le calcul EXACT de l'indice de Gini par
-  une intégrale.
+  Utiliser cette methode lorsque la courbe de Lorenz est modelisee par une
+  fonction $L$ et que l'enonce demande le calcul EXACT de l'indice de Gini par
+  une integrale.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Écrire l'aire entre la bissectrice et la courbe :
+    \item Ecrire l'aire entre la bissectrice et la courbe :
       $\mathcal{A} = \displaystyle\int_0^1 \bigl(x - L(x)\bigr)\,dx$
       (la bissectrice est au-dessus car $L$ est convexe avec $L(0)=0$, $L(1)=1$).
-    \item Déterminer une primitive de $x - L(x)$ (fiches primitives usuelles).
-    \item Calculer l'intégrale avec $\bigl[F(x)\bigr]_0^1 = F(1) - F(0)$.
+    \item Determiner une primitive de $x - L(x)$ (fiches primitives usuelles).
+    \item Calculer l'integrale avec $\bigl[F(x)\bigr]_0^1 = F(1) - F(0)$.
     \item Conclure $G = 2\mathcal{A}$ et donner la valeur exacte puis un arrondi.
-    \item Interpréter la valeur obtenue (proche de 0 : egalitaire ; proche de
-      1 : très inegalitaire) et comparer si l'énoncé fournit un autre modèle.
+    \item Interpreter la valeur obtenue (proche de 0 : egalitaire ; proche de
+      1 : tres inegalitaire) et comparer si l'enonce fournit un autre modele.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Calculer l'indice de Gini du modèle $L(x) = \dfrac{e^x - 1}{e - 1}$.
+  Calculer l'indice de Gini du modele $L(x) = \dfrac{e^x - 1}{e - 1}$.
 
   \medskip
   \commentaireMarge{Primitive de $x$ : $\frac{x^2}{2}$ ; de $e^x$ : $e^x$.}%
@@ -40,21 +40,21 @@
 
   \medskip
   D'ou $G = 2\mathcal{A} = 1 - \dfrac{2(e-2)}{e-1} = \dfrac{3-e}{e-1}
-  \approx 0{,}16$ : repartition assez proche de l'égalité.
+  \approx 0{,}16$ : repartition assez proche de l'egalite.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Inverser l'ordre : integrer $L(x) - x$ donne une aire
-      négative.
-    \item \textbf{Piège 2.} Oublier le facteur 2 dans $G = 2\mathcal{A}$.
-    \item \textbf{Piège 3.} Faute de primitive sur le terme constant
+    \item \textbf{Piege 1.} Inverser l'ordre : integrer $L(x) - x$ donne une aire
+      negative.
+    \item \textbf{Piege 2.} Oublier le facteur 2 dans $G = 2\mathcal{A}$.
+    \item \textbf{Piege 3.} Faute de primitive sur le terme constant
       ($\frac{1}{e-1}$ se primitive en $\frac{x}{e-1}$, a ne pas oublier).
   \end{itemize}
 }
 
 \verifier{%
-  Contrôler $0 \leq G \leq 1$, retrouver l'ordre de grandeur par lecture
+  Controler $0 \leq G \leq 1$, retrouver l'ordre de grandeur par lecture
   graphique de l'aire, et tester le cas limite $L(x) = x$ (qui doit donner
   $G = 0$).
 }

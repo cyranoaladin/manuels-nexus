@@ -5,31 +5,31 @@
 % assert integrate(x, (x, 0, 3)) == Rational(9,2)
 % assert integrate(x, (x, 0, 1)) + integrate(x, (x, 1, 3)) == Rational(9,2)
 % END-VERIFY
-\begin{fichemethode}{M1}{Interpréter une intégrale comme une aire et utiliser Chasles}
+\begin{fichemethode}{M1}{Interpreter une integrale comme une aire et utiliser Chasles}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé demande d'interpréter $\int_a^b f(x)\,dx$
-  pour une fonction continue \textbf{positive}, de lire une intégrale sur un graphique,
+  Utiliser cette methode lorsque l'enonce demande d'interpreter $\int_a^b f(x)\,dx$
+  pour une fonction continue \textbf{positive}, de lire une integrale sur un graphique,
   ou de decouper un calcul d'aire avec la relation de Chasles.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Vérifier que $f$ est continue et \textbf{positive} sur $[a\,;\,b]$ :
-      alors $\int_a^b f(x)\,dx$ est l'aire, en unités d'aire, du domaine compris
+    \item Verifier que $f$ est continue et \textbf{positive} sur $[a\,;\,b]$ :
+      alors $\int_a^b f(x)\,dx$ est l'aire, en unites d'aire, du domaine compris
       entre la courbe de $f$, l'axe des abscisses et les droites $x=a$ et $x=b$.
     \item Identifier le domaine sur la figure (le hachurer si besoin).
     \item Si le domaine est une figure usuelle (rectangle, triangle, trapeze),
-      calculer son aire geometriquement : c'est la valeur de l'intégrale.
+      calculer son aire geometriquement : c'est la valeur de l'integrale.
     \item Pour decouper le calcul en morceaux, appliquer la relation de Chasles :
       pour tout $c$, $\displaystyle\int_a^b f = \int_a^c f + \int_c^b f$.
-    \item Convertir en unités d'aire si le repere n'est pas orthonorme d'unité 1.
+    \item Convertir en unites d'aire si le repere n'est pas orthonorme d'unite 1.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Calculer $I = \displaystyle\int_0^3 x\,dx$ par interprétation géométrique,
-  puis retrouver le résultat avec Chasles en $c = 1$.
+  Calculer $I = \displaystyle\int_0^3 x\,dx$ par interpretation geometrique,
+  puis retrouver le resultat avec Chasles en $c = 1$.
 
   \medskip
   \commentaireMarge{Le domaine est un triangle rectangle.}%
@@ -46,20 +46,20 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Oublier l'hypothèse $f \geq 0$ : si $f$ change de signe,
-      l'intégrale n'est plus l'aire du domaine (les parties sous l'axe comptent negativement).
-    \item \textbf{Piège 2.} Confondre unité d'aire et cm$^2$ : l'unité d'aire depend
-      des unités des axes du repere.
-    \item \textbf{Piège 3.} Écrire Chasles avec un signe faux :
+    \item \textbf{Piege 1.} Oublier l'hypothese $f \geq 0$ : si $f$ change de signe,
+      l'integrale n'est plus l'aire du domaine (les parties sous l'axe comptent negativement).
+    \item \textbf{Piege 2.} Confondre unite d'aire et cm$^2$ : l'unite d'aire depend
+      des unites des axes du repere.
+    \item \textbf{Piege 3.} Ecrire Chasles avec un signe faux :
       $\int_a^b = \int_a^c + \int_c^b$ vaut pour TOUT $c$, mais chaque borne doit
-      être recopiee dans le bon ordre.
+      etre recopiee dans le bon ordre.
   \end{itemize}
 }
 
 \verifier{%
-  Comparer le résultat a un ordre de grandeur lu sur la figure (encadrer le domaine
-  par un rectangle) et vérifier que la somme des morceaux de Chasles redonne
-  exactement l'intégrale totale.
+  Comparer le resultat a un ordre de grandeur lu sur la figure (encadrer le domaine
+  par un rectangle) et verifier que la somme des morceaux de Chasles redonne
+  exactement l'integrale totale.
 }
 
 \sEntrainer{\refExos{M1}}

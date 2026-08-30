@@ -7,17 +7,17 @@
 % assert (3*3) % 7 == 2
 % assert (5*2) % 7 == 3
 % END-VERIFY
-\begin{fichemethode}{M2}{Résoudre ax = b [n] avec un inverse modulaire}
+\begin{fichemethode}{M2}{Resoudre ax = b [n] avec un inverse modulaire}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé demande de résoudre une congruence
-  $ax \equiv b\ [n]$ et que $a$ et $n$ sont premiers entre eux : on déterminé
+  Utiliser cette methode lorsque l'enonce demande de resoudre une congruence
+  $ax \equiv b\ [n]$ et que $a$ et $n$ sont premiers entre eux : on determine
   un inverse de $a$ modulo $n$ puis on l'applique.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Vérifier $\mathrm{PGCD}(a\,;\,n) = 1$ : c'est la condition d'existence d'un
+    \item Verifier $\mathrm{PGCD}(a\,;\,n) = 1$ : c'est la condition d'existence d'un
       inverse de $a$ modulo $n$.
     \item Chercher l'inverse $u$ de $a$ : un entier tel que
       $au \equiv 1\ [n]$ (essais sur les restes $1, 2, \dots, n-1$, ou
@@ -27,12 +27,12 @@
     \item Reduire $ub$ modulo $n$ pour donner le representant dans
       $\{0, \dots, n-1\}$.
     \item Conclure : les solutions sont les entiers
-      $x \equiv x_0\ [n]$, et contrôler en substituant.
+      $x \equiv x_0\ [n]$, et controler en substituant.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Résoudre $5x \equiv 3\ [7]$.
+  Resoudre $5x \equiv 3\ [7]$.
 
   \medskip
   \commentaireMarge{$5$ et $7$ premiers entre eux : inverse garanti.}%
@@ -44,23 +44,23 @@
   $5x \equiv 3\ [7] \iff x \equiv 3 \times 3 \equiv 9 \equiv 2\ [7]$.
 
   \medskip
-  Les solutions sont les entiers $x \equiv 2\ [7]$. Contrôle :
+  Les solutions sont les entiers $x \equiv 2\ [7]$. Controle :
   $5 \times 2 = 10 \equiv 3\ [7]$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} « Diviser » une congruence : on ne divise jamais,
+    \item \textbf{Piege 1.} « Diviser » une congruence : on ne divise jamais,
       on MULTIPLIE par un inverse (qui n'existe que si $\mathrm{PGCD}(a\,;\,n)=1$).
-    \item \textbf{Piège 2.} Oublier de reduire le résultat modulo $n$ (donner 9
+    \item \textbf{Piege 2.} Oublier de reduire le resultat modulo $n$ (donner 9
       au lieu de 2 modulo 7).
-    \item \textbf{Piège 3.} Conclure a une solution UNIQUE : l'ensemble des
+    \item \textbf{Piege 3.} Conclure a une solution UNIQUE : l'ensemble des
       solutions est une classe de congruence entiere.
   \end{itemize}
 }
 
 \verifier{%
-  Substituer le representant trouve dans la congruence initiale, et contrôler
+  Substituer le representant trouve dans la congruence initiale, et controler
   l'inverse par le produit $au$ reduit modulo $n$ (il doit donner 1).
 }
 

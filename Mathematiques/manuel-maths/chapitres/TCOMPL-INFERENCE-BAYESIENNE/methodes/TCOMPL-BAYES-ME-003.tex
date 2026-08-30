@@ -11,25 +11,25 @@
 \begin{fichemethode}{M3}{Distinguer les deux sens du conditionnement dans un probleme concret}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsqu'un énoncé en langage courant (« proportion de
+  Utiliser cette methode lorsqu'un enonce en langage courant (« proportion de
   malades parmi les tests positifs », « taux de positifs parmi les malades »)
   risque de faire confondre les deux conditionnements $P_A(B)$ et $P_B(A)$.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Traduire chaque phrase en identifiant l'événement CONDITIONNANT :
+    \item Traduire chaque phrase en identifiant l'evenement CONDITIONNANT :
       « parmi les $X$ » ou « sachant $X$ » $\Rightarrow$ le conditionnement est
       $P_X(\cdot)$.
-    \item Écrire les deux quantités en jeu ($P_A(B)$ et $P_B(A)$) et reperer
+    \item Ecrire les deux quantites en jeu ($P_A(B)$ et $P_B(A)$) et reperer
       laquelle est DONNEE, laquelle est DEMANDEE.
-    \item Se rappeler qu'elles n'ont aucune raison d'être égales : elles ne
-      partagent que le numérateur $P(A \cap B)$, mais se rapportent a des
-      populations de référence différentes.
-    \item Si la quantité demandee est « dans l'autre sens », appliquer la
+    \item Se rappeler qu'elles n'ont aucune raison d'etre egales : elles ne
+      partagent que le numerateur $P(A \cap B)$, mais se rapportent a des
+      populations de reference differentes.
+    \item Si la quantite demandee est « dans l'autre sens », appliquer la
       formule de Bayes (fiche M2).
     \item Reformuler la conclusion en langage courant en nommant explicitement
-      la population de référence.
+      la population de reference.
   \end{enumerate}
 }
 
@@ -39,34 +39,34 @@
   tests positifs concernent de vrais malades. Y a-t-il contradiction ?
 
   \medskip
-  \commentaireMarge{Deux populations de référence différentes.}%
-  Non. « Positif pour 90\,\% des malades » est $P_M(T) = 0{,}9$ : la référence
+  \commentaireMarge{Deux populations de reference differentes.}%
+  Non. « Positif pour 90\,\% des malades » est $P_M(T) = 0{,}9$ : la reference
   est la population des MALADES. « 15\,\% des positifs sont malades » est
-  $P_T(M) = \dfrac{2}{13}$ : la référence est la population des TESTS POSITIFS.
+  $P_T(M) = \dfrac{2}{13}$ : la reference est la population des TESTS POSITIFS.
 
   \medskip
   Comme la maladie est rare, les faux positifs issus des 99\,\% de non-malades
-  submergent les vrais positifs : $P_M(T)$ et $P_T(M)$ différent fortement sans
+  submergent les vrais positifs : $P_M(T)$ et $P_T(M)$ different fortement sans
   aucune contradiction.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Croire que $P_A(B) = P_B(A)$ : c'est l'« erreur du
+    \item \textbf{Piege 1.} Croire que $P_A(B) = P_B(A)$ : c'est l'« erreur du
       conditionnement inverse », source classique de contresens (tests medicaux,
       justice).
-    \item \textbf{Piège 2.} Mal identifier la population de référence dans une
+    \item \textbf{Piege 2.} Mal identifier la population de reference dans une
       phrase en pourcentage (« 90\,\% des malades » $\neq$ « 90\,\% des
       positifs »).
-    \item \textbf{Piège 3.} Oublier la prevalence : quand $A$ est rare, $P_B(A)$
-      peut être faible même si $P_A(B)$ est proche de 1.
+    \item \textbf{Piege 3.} Oublier la prevalence : quand $A$ est rare, $P_B(A)$
+      peut etre faible meme si $P_A(B)$ est proche de 1.
   \end{itemize}
 }
 
 \verifier{%
-  Reecrire chaque probabilité sous la forme $P_{\text{reference}}(\text{cible})$
-  et contrôler avec un tableau d'effectifs fictif (ex. 10\,000 individus) : les
-  deux quotients n'ont pas le même dénominateur.
+  Reecrire chaque probabilite sous la forme $P_{\text{reference}}(\text{cible})$
+  et controler avec un tableau d'effectifs fictif (ex. 10\,000 individus) : les
+  deux quotients n'ont pas le meme denominateur.
 }
 
 \sEntrainer{\refExos{M3}}

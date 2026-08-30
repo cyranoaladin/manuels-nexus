@@ -8,10 +8,10 @@
 % assert expand((1 + I)**4) == -4
 % assert sum(binomial(4, k)*I**k for k in range(5)) == -4
 % END-VERIFY
-\begin{fichemethode}{M3}{Démontrer les propriétés du conjugue et utiliser le binome dans C}
+\begin{fichemethode}{M3}{Demontrer les proprietes du conjugue et utiliser le binome dans C}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé demande de DEMONTRER
+  Utiliser cette methode lorsque l'enonce demande de DEMONTRER
   $\overline{z_1 z_2} = \overline{z_1}\,\overline{z_2}$,
   $\overline{z^{-1}} = \overline{z}^{-1}$,
   $\overline{z^n} = \overline{z}^n$, ou de developper $(a+b)^n$ dans
@@ -20,20 +20,20 @@
 
 \pasApas{%
   \begin{enumerate}
-    \item Produit : poser $z_1 = a + ib$, $z_2 = c + id$ ($a,b,c,d$ réels),
+    \item Produit : poser $z_1 = a + ib$, $z_2 = c + id$ ($a,b,c,d$ reels),
       calculer separement $\overline{z_1 z_2}$ et
-      $\overline{z_1}\,\overline{z_2}$, et constater l'égalité.
-    \item Inverse : partir de $z\,z^{-1} = 1$, conjuguer avec la propriété du
+      $\overline{z_1}\,\overline{z_2}$, et constater l'egalite.
+    \item Inverse : partir de $z\,z^{-1} = 1$, conjuguer avec la propriete du
       produit : $\overline{z}\,\overline{z^{-1}} = 1$, donc
       $\overline{z^{-1}} = \left(\overline{z}\right)^{-1}$.
-    \item Puissance : récurrence sur $n$ — initialisation $n = 1$, heredite
+    \item Puissance : recurrence sur $n$ — initialisation $n = 1$, heredite
       par $\overline{z^{n+1}} = \overline{z^n \cdot z}
       = \overline{z^n}\,\overline{z} = \overline{z}^{n+1}$.
     \item Binome : $(a + b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^k$ reste
       valable dans $\mathbb{C}$ (la preuve n'utilise que la commutativite) ;
       reduire ensuite les puissances de $i$ par le cycle
       $i, -1, -i, 1$.
-    \item Conclure en citant a chaque étape la propriété utilisee.
+    \item Conclure en citant a chaque etape la propriete utilisee.
   \end{enumerate}
 }
 
@@ -51,23 +51,23 @@
   $= 1 + 4i - 6 - 4i + 1 = -4$.
 
   \medskip
-  Contrôle par le module : $|1 + i| = \sqrt{2}$, donc $|(1+i)^4| = 4$, et
+  Controle par le module : $|1 + i| = \sqrt{2}$, donc $|(1+i)^4| = 4$, et
   $|-4| = 4$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Démontrer la propriété du produit en l'utilisant
-      (circularite) : la preuve de base passe par les formes algébriques.
-    \item \textbf{Piège 2.} Erreur de cycle sur les puissances de $i$
+    \item \textbf{Piege 1.} Demontrer la propriete du produit en l'utilisant
+      (circularite) : la preuve de base passe par les formes algebriques.
+    \item \textbf{Piege 2.} Erreur de cycle sur les puissances de $i$
       ($i^3 = -i$, pas $i$).
-    \item \textbf{Piège 3.} Dans la récurrence, oublier l'appel a la propriété
+    \item \textbf{Piege 3.} Dans la recurrence, oublier l'appel a la propriete
       du PRODUIT dans l'heredite : c'est elle qui fait fonctionner le pas.
   \end{itemize}
 }
 
 \verifier{%
-  Tester chaque propriété demontree sur un exemple numérique, et contrôler un
+  Tester chaque propriete demontree sur un exemple numerique, et controler un
   developpement du binome par le module (ou par un calcul direct de
   $(1+i)^2 = 2i$ puis elevation au carre).
 }

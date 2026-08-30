@@ -5,31 +5,31 @@
 % assert solve(Eq(log(x) + log(2*x), log(8)), x) == [2]
 % assert solve(Eq(3*x - 1, x + 5), x) == [3]
 % END-VERIFY
-\begin{fichemethode}{M2}{Résoudre équations et inéquations avec l'équation fonctionnelle de ln}
+\begin{fichemethode}{M2}{Resoudre equations et inequations avec l'equation fonctionnelle de ln}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'équation ou l'inéquation contient des
+  Utiliser cette methode lorsque l'equation ou l'inequation contient des
   logarithmes ($\ln(u) + \ln(v)$, $\ln(u) = \ln(v)$, $\ln(u) \leq \ln(v)$...)
   et qu'on peut la transformer grace a $\ln(ab) = \ln a + \ln b$.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Déterminer l'ensemble de définition : chaque argument de $\ln$ doit
-      être STRICTEMENT positif (intersection des conditions).
-    \item Regrouper les logarithmes avec l'équation fonctionnelle :
+    \item Determiner l'ensemble de definition : chaque argument de $\ln$ doit
+      etre STRICTEMENT positif (intersection des conditions).
+    \item Regrouper les logarithmes avec l'equation fonctionnelle :
       $\ln u + \ln v = \ln(uv)$, $\ln u - \ln v = \ln\!\dfrac{u}{v}$.
     \item Se ramener a $\ln(A) = \ln(B)$ ou $\ln(A) \leq \ln(B)$.
     \item Supprimer les logarithmes : $\ln$ etant strictement croissante,
       $\ln A = \ln B \iff A = B$ et $\ln A \leq \ln B \iff A \leq B$
       (avec $A, B > 0$).
-    \item Résoudre l'équation obtenue, puis NE GARDER que les solutions
-      appartenant a l'ensemble de définition.
+    \item Resoudre l'equation obtenue, puis NE GARDER que les solutions
+      appartenant a l'ensemble de definition.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Résoudre $\ln(x) + \ln(2x) = \ln 8$.
+  Resoudre $\ln(x) + \ln(2x) = \ln 8$.
 
   \medskip
   \commentaireMarge{Conditions d'existence d'abord.}%
@@ -37,29 +37,29 @@
 
   \medskip
   \commentaireMarge{$\ln u + \ln v = \ln(uv)$.}%
-  $\ln(x) + \ln(2x) = \ln(2x^2)$, donc l'équation s'ecrit
+  $\ln(x) + \ln(2x) = \ln(2x^2)$, donc l'equation s'ecrit
   $\ln(2x^2) = \ln 8$, soit $2x^2 = 8$, c'est-a-dire $x^2 = 4$.
 
   \medskip
-  Les solutions de $x^2 = 4$ sont $-2$ et $2$ ; seule $x = 2$ vérifie $x > 0$.
+  Les solutions de $x^2 = 4$ sont $-2$ et $2$ ; seule $x = 2$ verifie $x > 0$.
   $\mathcal{S} = \{2\}$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Oublier les conditions d'existence et garder une
+    \item \textbf{Piege 1.} Oublier les conditions d'existence et garder une
       solution parasite (ici $x = -2$).
-    \item \textbf{Piège 2.} Écrire $\ln(a+b) = \ln a + \ln b$ : l'équation
+    \item \textbf{Piege 2.} Ecrire $\ln(a+b) = \ln a + \ln b$ : l'equation
       fonctionnelle porte sur le PRODUIT, pas la somme.
-    \item \textbf{Piège 3.} Pour une inéquation, oublier que la croissance
-      stricte de $\ln$ CONSERVE le sens : pas de retournement d'inégalité
-      (contrairement a une multiplication par un négatif).
+    \item \textbf{Piege 3.} Pour une inequation, oublier que la croissance
+      stricte de $\ln$ CONSERVE le sens : pas de retournement d'inegalite
+      (contrairement a une multiplication par un negatif).
   \end{itemize}
 }
 
 \verifier{%
-  Substituer chaque solution dans l'équation initiale (les deux membres doivent
-  être définis et égaux) et contrôler qu'elle respecte toutes les conditions
+  Substituer chaque solution dans l'equation initiale (les deux membres doivent
+  etre definis et egaux) et controler qu'elle respecte toutes les conditions
   d'existence.
 }
 

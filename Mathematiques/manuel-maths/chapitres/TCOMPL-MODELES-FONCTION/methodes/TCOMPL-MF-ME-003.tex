@@ -11,8 +11,8 @@
 \begin{fichemethode}{M3}{Encadrer une solution de f(x) = k par balayage ou dichotomie}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'existence d'une solution de $f(x) = k$ est
-  acquise (fiche M2) mais qu'on ne sait pas la calculer exactement : l'énoncé
+  Utiliser cette methode lorsque l'existence d'une solution de $f(x) = k$ est
+  acquise (fiche M2) mais qu'on ne sait pas la calculer exactement : l'enonce
   demande un encadrement ou une valeur approchee a une precision donnee.
 }
 
@@ -40,7 +40,7 @@
   $f(0) = 1 > 0$ et $f(0{,}5) = -0{,}375 < 0$.
 
   \medskip
-  \commentaireMarge{A chaque étape, la largeur est divisée par 2.}%
+  \commentaireMarge{A chaque etape, la largeur est divisee par 2.}%
   Milieu $0{,}25$ : $f(0{,}25) = \dfrac{17}{64} > 0$, donc
   $\alpha \in [0{,}25\,;\,0{,}5]$.
   Milieu $0{,}375$ : $f(0{,}375) = -\dfrac{37}{512} < 0$, donc
@@ -48,23 +48,23 @@
 
   \medskip
   La largeur vaut $0{,}125$ : $\alpha \approx 0{,}3$ a $0{,}125$ pres
-  (valeur de référence : $\alpha \approx 0{,}347$).
+  (valeur de reference : $\alpha \approx 0{,}347$).
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Garder la mauvaise moitie après le calcul au
+    \item \textbf{Piege 1.} Garder la mauvaise moitie apres le calcul au
       milieu : on conserve celle ou les signes aux bornes RESTENT opposes.
-    \item \textbf{Piège 2.} Confondre precision et nombre d'étapes : la
-      dichotomie divise la largeur par 2 a chaque étape, il faut la comparer a
+    \item \textbf{Piege 2.} Confondre precision et nombre d'etapes : la
+      dichotomie divise la largeur par 2 a chaque etape, il faut la comparer a
       la precision demandee.
-    \item \textbf{Piège 3.} Appliquer la méthode sans avoir justifie
+    \item \textbf{Piege 3.} Appliquer la methode sans avoir justifie
       l'existence et l'unicite de la solution sur l'intervalle (fiche M2).
   \end{itemize}
 }
 
 \verifier{%
-  Contrôler que $f$ change bien de signe sur l'encadrement final, que sa largeur
+  Controler que $f$ change bien de signe sur l'encadrement final, que sa largeur
   est conforme a la precision demandee, et comparer avec la valeur donnee par la
   calculatrice.
 }

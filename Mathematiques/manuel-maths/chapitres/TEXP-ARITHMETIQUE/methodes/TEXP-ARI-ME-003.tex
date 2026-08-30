@@ -13,16 +13,16 @@
 \begin{fichemethode}{M3}{Tests de divisibilite, primalite et chiffrements simples}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé demande d'etablir un test de
+  Utiliser cette methode lorsque l'enonce demande d'etablir un test de
   divisibilite avec les congruences, de decider si un entier est premier, ou
-  d'étudier un chiffrement simple (Cesar, affine).
+  d'etudier un chiffrement simple (Cesar, affine).
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Test de divisibilite : écrire $n$ en base 10
+    \item Test de divisibilite : ecrire $n$ en base 10
       ($n = \sum c_k 10^k$), reduire $10^k$ modulo $d$ (ex. $10 \equiv 1\ [9]$
-      donc $10^k \equiv 1\ [9]$), et en déduire un critere sur les chiffres.
+      donc $10^k \equiv 1\ [9]$), et en deduire un critere sur les chiffres.
     \item Primalite de $n$ : tester la divisibilite par tous les PREMIERS
       $p \leq \sqrt{n}$ ; si aucun ne divise $n$, alors $n$ est premier.
     \item Justifier la borne : si $n = ab$ avec $1 < a \leq b$, alors
@@ -52,19 +52,19 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Tester la primalite avec TOUS les entiers jusqu'a
+    \item \textbf{Piege 1.} Tester la primalite avec TOUS les entiers jusqu'a
       $n$ : la borne $\sqrt{n}$ (et les premiers seulement) suffit.
-    \item \textbf{Piège 2.} Pour un chiffrement affine, choisir $a$ non premier
+    \item \textbf{Piege 2.} Pour un chiffrement affine, choisir $a$ non premier
       avec 26 : la fonction n'est alors pas bijective, dechiffrement
       impossible.
-    \item \textbf{Piège 3.} Enoncer un test de divisibilite sans le démontrer
-      par congruences quand l'énoncé demande de l'ETABLIR.
+    \item \textbf{Piege 3.} Enoncer un test de divisibilite sans le demontrer
+      par congruences quand l'enonce demande de l'ETABLIR.
   \end{itemize}
 }
 
 \verifier{%
-  Contrôler un test de divisibilite sur un exemple dont on connait le reste,
-  vérifier une primalite avec la decomposition (fiche M7), et dechiffrer le
+  Controler un test de divisibilite sur un exemple dont on connait le reste,
+  verifier une primalite avec la decomposition (fiche M7), et dechiffrer le
   message code pour retrouver l'original.
 }
 

@@ -6,11 +6,11 @@
 % assert arg(z) == pi/3
 % assert simplify(2*(cos(pi/3) + I*sin(pi/3)) - z) == 0
 % END-VERIFY
-\begin{fichemethode}{M4}{Déterminer module, argument et affixe}
+\begin{fichemethode}{M4}{Determiner module, argument et affixe}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé demande le module et un argument d'un
-  complexe donne sous forme algébrique, ou de lire/placer une affixe dans le
+  Utiliser cette methode lorsque l'enonce demande le module et un argument d'un
+  complexe donne sous forme algebrique, ou de lire/placer une affixe dans le
   plan complexe.
 }
 
@@ -25,21 +25,21 @@
       deux conditions ensemble determinent $\theta$ modulo $2\pi$.
     \item Reconnaitre les angles usuels
       ($\frac{\pi}{6}, \frac{\pi}{4}, \frac{\pi}{3}$...) ou donner une valeur
-      approchee ; écrire alors $z = |z|(\cos\theta + i\sin\theta)$.
-    \item Contrôler sur la figure : le quadrant du point doit correspondre au
+      approchee ; ecrire alors $z = |z|(\cos\theta + i\sin\theta)$.
+    \item Controler sur la figure : le quadrant du point doit correspondre au
       signe de $\cos\theta$ et $\sin\theta$.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Déterminer le module et un argument de $z = 1 + i\sqrt{3}$.
+  Determiner le module et un argument de $z = 1 + i\sqrt{3}$.
 
   \medskip
   \commentaireMarge{$|z| = \sqrt{a^2 + b^2}$.}%
   $|z| = \sqrt{1 + 3} = 2$.
 
   \medskip
-  \commentaireMarge{Les DEUX lignes trigonométriques sont necessaires.}%
+  \commentaireMarge{Les DEUX lignes trigonometriques sont necessaires.}%
   On cherche $\theta$ avec $\cos\theta = \dfrac{1}{2}$ et
   $\sin\theta = \dfrac{\sqrt{3}}{2}$ : $\theta = \dfrac{\pi}{3}$ convient.
 
@@ -51,18 +51,18 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Déterminer $\theta$ avec la seule tangente
+    \item \textbf{Piege 1.} Determiner $\theta$ avec la seule tangente
       $\frac{b}{a}$ : elle ne distingue pas $\theta$ de $\theta + \pi$ —
-      contrôler les signes de $\cos$ et $\sin$.
-    \item \textbf{Piège 2.} Écrire $|z| = a^2 + b^2$ (oubli de la racine).
-    \item \textbf{Piège 3.} Confondre l'affixe du point $M(a\,;\,b)$ avec le
+      controler les signes de $\cos$ et $\sin$.
+    \item \textbf{Piege 2.} Ecrire $|z| = a^2 + b^2$ (oubli de la racine).
+    \item \textbf{Piege 3.} Confondre l'affixe du point $M(a\,;\,b)$ avec le
       couple : l'affixe est le NOMBRE $a + ib$.
   \end{itemize}
 }
 
 \verifier{%
-  Reconstituer $|z|(\cos\theta + i\sin\theta)$ et vérifier qu'on retrouve la
-  forme algébrique de depart ; placer le point pour contrôler le quadrant.
+  Reconstituer $|z|(\cos\theta + i\sin\theta)$ et verifier qu'on retrouve la
+  forme algebrique de depart ; placer le point pour controler le quadrant.
 }
 
 \sEntrainer{\refExos{M4}}

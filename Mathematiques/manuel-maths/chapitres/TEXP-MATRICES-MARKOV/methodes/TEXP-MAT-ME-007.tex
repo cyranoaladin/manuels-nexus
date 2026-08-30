@@ -9,10 +9,10 @@
 % assert pi*P == pi
 % assert sum(pi) == 1
 % END-VERIFY
-\begin{fichemethode}{M7}{Déterminer une distribution invariante}
+\begin{fichemethode}{M7}{Determiner une distribution invariante}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé demande la distribution invariante
+  Utiliser cette methode lorsque l'enonce demande la distribution invariante
   (etat stable) d'une chaine de Markov a 2 ou 3 etats : une distribution
   $\pi$ verifiant $\pi P = \pi$.
 }
@@ -21,52 +21,52 @@
   \begin{enumerate}
     \item Poser l'inconnue : $\pi = (a\ \ 1-a)$ pour deux etats (la contrainte
       de somme 1 est integree d'emblee) ; $(a\ \ b\ \ 1-a-b)$ pour trois.
-    \item Écrire l'équation $\pi P = \pi$ et developper coordonnée par
-      coordonnée.
-    \item Constater qu'une équation est redondante (les colonnes de
-      l'équation se compensent) : il reste un système reduit a résoudre avec
+    \item Ecrire l'equation $\pi P = \pi$ et developper coordonnee par
+      coordonnee.
+    \item Constater qu'une equation est redondante (les colonnes de
+      l'equation se compensent) : il reste un systeme reduit a resoudre avec
       la contrainte de somme.
-    \item Résoudre et donner $\pi$ ; vérifier $0 \leq$ chaque coefficient
+    \item Resoudre et donner $\pi$ ; verifier $0 \leq$ chaque coefficient
       $\leq 1$.
-    \item Interpréter : repartition qui se REPRODUIT d'étape en étape (et,
+    \item Interpreter : repartition qui se REPRODUIT d'etape en etape (et,
       dans les situations du programme, limite des $\pi_n$).
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Déterminer la distribution invariante de
+  Determiner la distribution invariante de
   $P = \begin{pmatrix} 0{,}9 & 0{,}1\\ 0{,}3 & 0{,}7 \end{pmatrix}$.
 
   \medskip
   \commentaireMarge{Une seule inconnue grace a la somme 1.}%
-  Posons $\pi = (a\ \ 1-a)$. La première coordonnée de $\pi P = \pi$ s'ecrit :
+  Posons $\pi = (a\ \ 1-a)$. La premiere coordonnee de $\pi P = \pi$ s'ecrit :
   $0{,}9\,a + 0{,}3\,(1 - a) = a$, soit $0{,}3 = 0{,}4\,a$, donc
   $a = \dfrac{3}{4}$.
 
   \medskip
-  \commentaireMarge{La seconde équation est automatiquement verifiee.}%
-  Ainsi $\pi = \left(\dfrac{3}{4}\ \ \dfrac{1}{4}\right)$. Contrôle :
+  \commentaireMarge{La seconde equation est automatiquement verifiee.}%
+  Ainsi $\pi = \left(\dfrac{3}{4}\ \ \dfrac{1}{4}\right)$. Controle :
   $\pi P = (0{,}675 + 0{,}075\ \ ;\ \ 0{,}075 + 0{,}175)
   = (0{,}75\ \ 0{,}25) = \pi$.
 
   \medskip
-  A l'équilibré, l'operateur $A$ detient 75\,\% du marche.
+  A l'equilibre, l'operateur $A$ detient 75\,\% du marche.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Résoudre $P\pi = \pi$ avec $\pi$ en ligne (mauvais
+    \item \textbf{Piege 1.} Resoudre $P\pi = \pi$ avec $\pi$ en ligne (mauvais
       sens du produit) : l'invariance s'ecrit $\pi P = \pi$.
-    \item \textbf{Piège 2.} Oublier la contrainte de somme 1 : sans elle, le
-      système $\pi P = \pi$ a une infinite de solutions proportionnelles.
-    \item \textbf{Piège 3.} Confondre distribution invariante et distribution
+    \item \textbf{Piege 2.} Oublier la contrainte de somme 1 : sans elle, le
+      systeme $\pi P = \pi$ a une infinite de solutions proportionnelles.
+    \item \textbf{Piege 3.} Confondre distribution invariante et distribution
       initiale : $\pi$ ne depend pas de $\pi_0$.
   \end{itemize}
 }
 
 \verifier{%
-  Calculer effectivement $\pi P$ et retrouver $\pi$, contrôler la somme 1 et la
-  positivité, et comparer avec $\pi_n$ pour $n$ grand a la calculatrice.
+  Calculer effectivement $\pi P$ et retrouver $\pi$, controler la somme 1 et la
+  positivite, et comparer avec $\pi_n$ pour $n$ grand a la calculatrice.
 }
 
 \sEntrainer{\refExos{M7}}

@@ -5,23 +5,23 @@
 % assert integrate(exp(x), (x, 0, 1)) == E - 1
 % assert integrate(x - x**2, (x, 0, 1)) == Rational(1, 6)
 % END-VERIFY
-\begin{fichemethode}{M3}{Calculer une intégrale, une valeur moyenne ou une aire entre deux courbes}
+\begin{fichemethode}{M3}{Calculer une integrale, une valeur moyenne ou une aire entre deux courbes}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé demande de \textbf{calculer exactement}
+  Utiliser cette methode lorsque l'enonce demande de \textbf{calculer exactement}
   $\int_a^b f(x)\,dx$, une valeur moyenne, l'aire sous une courbe ou l'aire entre
   deux courbes.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Déterminer une primitive $F$ de $f$ (formes usuelles : voir fiche M4).
+    \item Determiner une primitive $F$ de $f$ (formes usuelles : voir fiche M4).
     \item Appliquer $\displaystyle\int_a^b f(x)\,dx = \bigl[F(x)\bigr]_a^b = F(b) - F(a)$.
     \item Valeur moyenne : $\mu = \dfrac{1}{b-a}\displaystyle\int_a^b f(x)\,dx$.
-    \item Aire entre deux courbes : vérifier d'abord laquelle est au-dessus
-      (étudier le signe de $f - g$), puis calculer
+    \item Aire entre deux courbes : verifier d'abord laquelle est au-dessus
+      (etudier le signe de $f - g$), puis calculer
       $\displaystyle\int_a^b \bigl(f(x) - g(x)\bigr)\,dx$ avec $f \geq g$ sur $[a\,;\,b]$.
-    \item Donner le résultat exact, puis une valeur approchee si demandee.
+    \item Donner le resultat exact, puis une valeur approchee si demandee.
   \end{enumerate}
 }
 
@@ -41,22 +41,22 @@
   Pour $x \in [0\,;\,1]$, $x - x^2 = x(1-x) \geq 0$, donc
   $\mathcal{A} = \displaystyle\int_0^1 (x - x^2)\,dx
   = \left[\dfrac{x^2}{2} - \dfrac{x^3}{3}\right]_0^1
-  = \dfrac{1}{2} - \dfrac{1}{3} = \dfrac{1}{6}$ unité d'aire.
+  = \dfrac{1}{2} - \dfrac{1}{3} = \dfrac{1}{6}$ unite d'aire.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Écrire $F(a) - F(b)$ au lieu de $F(b) - F(a)$.
-    \item \textbf{Piège 2.} Pour une aire entre deux courbes, integrer $f - g$
-      sans avoir vérifie que $f \geq g$ : si les courbes se croisent, decouper
+    \item \textbf{Piege 1.} Ecrire $F(a) - F(b)$ au lieu de $F(b) - F(a)$.
+    \item \textbf{Piege 2.} Pour une aire entre deux courbes, integrer $f - g$
+      sans avoir verifie que $f \geq g$ : si les courbes se croisent, decouper
       l'intervalle au point de croisement.
-    \item \textbf{Piège 3.} Oublier le facteur $\frac{1}{b-a}$ de la valeur moyenne,
-      ou confondre valeur moyenne et intégrale.
+    \item \textbf{Piege 3.} Oublier le facteur $\frac{1}{b-a}$ de la valeur moyenne,
+      ou confondre valeur moyenne et integrale.
   \end{itemize}
 }
 
 \verifier{%
-  Dériver la primitive choisie pour retrouver $f$, contrôler le signe du résultat
+  Deriver la primitive choisie pour retrouver $f$, controler le signe du resultat
   (une aire est positive) et comparer a un encadrement rapide par rectangles
   (fiche M2).
 }

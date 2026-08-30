@@ -9,21 +9,21 @@
 \begin{fichemethode}{M2}{Utiliser la formule de Bayes pour renverser un conditionnement}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé donne $P_A(B)$ (et les probabilités
-  de $A$ et de $B$) mais demande la probabilité « dans l'autre sens » :
-  $P_B(A)$, la probabilité a posteriori de $A$ sachant $B$.
+  Utiliser cette methode lorsque l'enonce donne $P_A(B)$ (et les probabilites
+  de $A$ et de $B$) mais demande la probabilite « dans l'autre sens » :
+  $P_B(A)$, la probabilite a posteriori de $A$ sachant $B$.
 }
 
 \pasApas{%
   \begin{enumerate}
     \item Identifier ce qui est CONNU : $P(A)$, $P_A(B)$, et $P(B)$ (ou de quoi
-      le calculer par probabilités totales, fiche M1).
-    \item Écrire la formule de Bayes :
+      le calculer par probabilites totales, fiche M1).
+    \item Ecrire la formule de Bayes :
       $P_B(A) = \dfrac{P_A(B) \times P(A)}{P(B)}$.
     \item Si $P(B)$ n'est pas donne, le calculer :
       $P(B) = P(A)\,P_A(B) + P(\overline{A})\,P_{\overline{A}}(B)$.
     \item Substituer les valeurs et simplifier (fraction exacte, puis arrondi).
-    \item Interpréter : $P_B(A)$ actualise la probabilité de $A$ APRES
+    \item Interpreter : $P_B(A)$ actualise la probabilite de $A$ APRES
       l'observation de $B$.
   \end{enumerate}
 }
@@ -32,31 +32,31 @@
   Avec $P(A) = 0{,}3$, $P_A(B) = 0{,}6$ et $P(B) = 0{,}32$, calculer $P_B(A)$.
 
   \medskip
-  \commentaireMarge{Numérateur : le chemin $A$ puis $B$ ; dénominateur : tous les
+  \commentaireMarge{Numerateur : le chemin $A$ puis $B$ ; denominateur : tous les
   chemins vers $B$.}%
   $P_B(A) = \dfrac{P_A(B)\,P(A)}{P(B)} = \dfrac{0{,}6 \times 0{,}3}{0{,}32}
   = \dfrac{0{,}18}{0{,}32} = \dfrac{9}{16} = 0{,}5625$.
 
   \medskip
-  Avant l'observation, $P(A) = 0{,}3$ ; après avoir observe $B$, la probabilité
+  Avant l'observation, $P(A) = 0{,}3$ ; apres avoir observe $B$, la probabilite
   de $A$ est reevaluee a $\dfrac{9}{16} \approx 0{,}56$ : l'observation de $B$
   rend $A$ nettement plus plausible.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Confondre $P_B(A)$ et $P_A(B)$ : la formule de Bayes
+    \item \textbf{Piege 1.} Confondre $P_B(A)$ et $P_A(B)$ : la formule de Bayes
       sert precisement a passer de l'un a l'autre (voir fiche M3).
-    \item \textbf{Piège 2.} Utiliser un $P(B)$ incomplet (oublier le chemin par
-      $\overline{A}$ dans les probabilités totales).
-    \item \textbf{Piège 3.} Obtenir un résultat hors de $[0\,;\,1]$ et ne pas
+    \item \textbf{Piege 2.} Utiliser un $P(B)$ incomplet (oublier le chemin par
+      $\overline{A}$ dans les probabilites totales).
+    \item \textbf{Piege 3.} Obtenir un resultat hors de $[0\,;\,1]$ et ne pas
       s'en alarmer : c'est le signe d'une erreur de substitution.
   \end{itemize}
 }
 
 \verifier{%
-  Contrôler que $P_B(A) \in [0\,;\,1]$, retrouver le même résultat par
-  $P_B(A) = \dfrac{P(A \cap B)}{P(B)}$, et vérifier la cohérence du sens de
+  Controler que $P_B(A) \in [0\,;\,1]$, retrouver le meme resultat par
+  $P_B(A) = \dfrac{P(A \cap B)}{P(B)}$, et verifier la coherence du sens de
   variation : si $B$ est plus frequent chez $A$, alors $P_B(A) > P(A)$.
 }
 

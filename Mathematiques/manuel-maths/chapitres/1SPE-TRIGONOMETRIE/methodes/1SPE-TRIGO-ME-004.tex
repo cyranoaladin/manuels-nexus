@@ -13,41 +13,41 @@
 % assert sols2 == FiniteSet(pi/6, 5*pi/6)
 % END-VERIFY
 \begin{center}\textbf{Approfondissement — Vers la Terminale}\end{center}
-\begin{fichemethode}{M4}{Résoudre cos(x) = a ou sin(x) = a sur un intervalle}
+\begin{fichemethode}{M4}{Resoudre cos(x) = a ou sin(x) = a sur un intervalle}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé demande de résoudre une équation
-  $\cos(x) = a$ ou $\sin(x) = a$ (ou une inéquation associee) sur un
+  Utiliser cette methode lorsque l'enonce demande de resoudre une equation
+  $\cos(x) = a$ ou $\sin(x) = a$ (ou une inequation associee) sur un
   intervalle donne, le plus souvent $]-\pi\,;\,\pi]$ ou $[0\,;\,2\pi[$.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Vérifier que $a \in [-1\,;\,1]$ : sinon l'équation n'a aucune solution.
-    \item Reconnaitre une valeur remarquable : écrire $a$ sous la forme
+    \item Verifier que $a \in [-1\,;\,1]$ : sinon l'equation n'a aucune solution.
+    \item Reconnaitre une valeur remarquable : ecrire $a$ sous la forme
       $\cos(\alpha)$ (ou $\sin(\alpha)$) avec $\alpha$ un angle connu
       ($0$, $\frac{\pi}{6}$, $\frac{\pi}{4}$, $\frac{\pi}{3}$, $\frac{\pi}{2}$...).
-    \item Écrire TOUTES les solutions :
+    \item Ecrire TOUTES les solutions :
       \begin{itemize}
         \item $\cos(x) = \cos(\alpha) \iff x = \alpha + 2k\pi$ ou $x = -\alpha + 2k\pi$, $k \in \mathbb{Z}$ ;
         \item $\sin(x) = \sin(\alpha) \iff x = \alpha + 2k\pi$ ou $x = \pi - \alpha + 2k\pi$, $k \in \mathbb{Z}$.
       \end{itemize}
     \item Selectionner les solutions appartenant a l'intervalle demande en
       choisissant les valeurs de $k$ convenables.
-    \item Contrôler chaque solution sur le cercle trigonométrique.
+    \item Controler chaque solution sur le cercle trigonometrique.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Résoudre dans $]-\pi\,;\,\pi]$ l'équation $\cos(x) = \dfrac{\sqrt{2}}{2}$.
+  Resoudre dans $]-\pi\,;\,\pi]$ l'equation $\cos(x) = \dfrac{\sqrt{2}}{2}$.
 
   \medskip
   \commentaireMarge{$\frac{\sqrt{2}}{2} = \cos\frac{\pi}{4}$ : valeur remarquable.}%
   On reconnait $\dfrac{\sqrt{2}}{2} = \cos\left(\dfrac{\pi}{4}\right)$, donc
-  l'équation s'ecrit $\cos(x) = \cos\left(\dfrac{\pi}{4}\right)$.
+  l'equation s'ecrit $\cos(x) = \cos\left(\dfrac{\pi}{4}\right)$.
 
   \medskip
-  Les solutions réelles sont $x = \dfrac{\pi}{4} + 2k\pi$ ou
+  Les solutions reelles sont $x = \dfrac{\pi}{4} + 2k\pi$ ou
   $x = -\dfrac{\pi}{4} + 2k\pi$, avec $k \in \mathbb{Z}$.
 
   \medskip
@@ -60,21 +60,21 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Oublier la seconde famille de solutions :
+    \item \textbf{Piege 1.} Oublier la seconde famille de solutions :
       $\cos(x) = \cos(\alpha)$ donne $x = \alpha$ \emph{et} $x = -\alpha$
       (a $2k\pi$ pres) ; pour le sinus c'est $\alpha$ \emph{et} $\pi - \alpha$.
-    \item \textbf{Piège 2.} Confondre les deux règles : pour
+    \item \textbf{Piege 2.} Confondre les deux regles : pour
       $\sin(x) = \frac{1}{2}$ sur $]-\pi\,;\,\pi]$, les solutions sont
       $\frac{\pi}{6}$ et $\frac{5\pi}{6}$ — pas $-\frac{\pi}{6}$.
-    \item \textbf{Piège 3.} Ne pas ajuster $k$ a l'intervalle demande :
-      sur $[0\,;\,2\pi[$, la solution négative $-\frac{\pi}{4}$ devient
+    \item \textbf{Piege 3.} Ne pas ajuster $k$ a l'intervalle demande :
+      sur $[0\,;\,2\pi[$, la solution negative $-\frac{\pi}{4}$ devient
       $-\frac{\pi}{4} + 2\pi = \frac{7\pi}{4}$.
   \end{itemize}
 }
 
 \verifier{%
-  Remplacer chaque solution dans l'équation de depart, et vérifier sur le
-  cercle trigonométrique que le nombre de points d'intersection avec la
+  Remplacer chaque solution dans l'equation de depart, et verifier sur le
+  cercle trigonometrique que le nombre de points d'intersection avec la
   droite $x = a$ (ou $y = a$) correspond au nombre de solutions trouvees
   dans l'intervalle.
 }

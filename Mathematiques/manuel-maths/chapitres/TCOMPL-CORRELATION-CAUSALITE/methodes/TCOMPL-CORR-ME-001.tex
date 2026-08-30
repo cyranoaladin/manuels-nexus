@@ -5,11 +5,11 @@
 % gx = Rational(sum(xs), 4); gy = Rational(sum(ys), 4)
 % assert (gx, gy) == (Rational(5, 2), 4)
 % END-VERIFY
-\begin{fichemethode}{M1}{Représenter un nuage de points et calculer le point moyen}
+\begin{fichemethode}{M1}{Representer un nuage de points et calculer le point moyen}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé fournit une serie statistique a deux
-  variables $(x_i\,;\,y_i)$ et demande de représenter le nuage de points ou de
+  Utiliser cette methode lorsque l'enonce fournit une serie statistique a deux
+  variables $(x_i\,;\,y_i)$ et demande de representer le nuage de points ou de
   calculer son point moyen $G$.
 }
 
@@ -30,28 +30,28 @@
   Serie : $(1\,;\,2)$, $(2\,;\,3)$, $(3\,;\,5)$, $(4\,;\,6)$. Calculer $G$.
 
   \medskip
-  \commentaireMarge{Moyenne des abscisses puis des ordonnées.}%
+  \commentaireMarge{Moyenne des abscisses puis des ordonnees.}%
   $\bar{x} = \dfrac{1+2+3+4}{4} = \dfrac{10}{4} = 2{,}5$ et
   $\bar{y} = \dfrac{2+3+5+6}{4} = \dfrac{16}{4} = 4$.
 
   \medskip
   Le point moyen est $G(2{,}5\,;\,4)$ — il se place au « centre de gravite » du
-  nuage, sans être necessairement un point de la serie.
+  nuage, sans etre necessairement un point de la serie.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Relier les points du nuage : un nuage statistique
+    \item \textbf{Piege 1.} Relier les points du nuage : un nuage statistique
       n'est pas une courbe de fonction.
-    \item \textbf{Piège 2.} Croire que $G$ est toujours un point observe de la
+    \item \textbf{Piege 2.} Croire que $G$ est toujours un point observe de la
       serie : c'est faux en general.
-    \item \textbf{Piège 3.} Melanger les roles des variables (echanger $x$ et $y$
+    \item \textbf{Piege 3.} Melanger les roles des variables (echanger $x$ et $y$
       change le nuage et le point moyen).
   \end{itemize}
 }
 
 \verifier{%
-  Contrôler que $\bar{x}$ est entre le minimum et le maximum des $x_i$ (idem pour
+  Controler que $\bar{x}$ est entre le minimum et le maximum des $x_i$ (idem pour
   $\bar{y}$), et que $G$ tombe visuellement au centre du nuage.
 }
 

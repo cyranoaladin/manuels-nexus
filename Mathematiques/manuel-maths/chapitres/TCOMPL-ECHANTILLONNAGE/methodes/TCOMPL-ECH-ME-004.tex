@@ -12,10 +12,10 @@
 % assert (a, b) == (18, 32)
 % assert cdf(50, 0.5, b) - cdf(50, 0.5, a-1) >= 0.95
 % END-VERIFY
-\begin{fichemethode}{M4}{Déterminer un intervalle de fluctuation au seuil 1-alpha}
+\begin{fichemethode}{M4}{Determiner un intervalle de fluctuation au seuil 1-alpha}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque $X \sim \mathcal{B}(n\,;\,p)$ et que l'énoncé
+  Utiliser cette methode lorsque $X \sim \mathcal{B}(n\,;\,p)$ et que l'enonce
   demande un intervalle $I = [a\,;\,b]$ tel que $P(X \in I) \geq 1 - \alpha$
   (souvent $\alpha = 0{,}05$), par exemple pour une prise de decision.
 }
@@ -26,11 +26,11 @@
     \item Chercher $a$ = le plus petit entier tel que $P(X \leq a) > \dfrac{\alpha}{2}$
       (a la calculatrice ou en Python, en parcourant la table des $P(X \leq k)$).
     \item Chercher $b$ = le plus petit entier tel que $P(X \leq b) \geq 1 - \dfrac{\alpha}{2}$.
-    \item Poser $I = [a\,;\,b]$ et vérifier
+    \item Poser $I = [a\,;\,b]$ et verifier
       $P(a \leq X \leq b) = P(X \leq b) - P(X \leq a-1) \geq 1-\alpha$.
     \item Pour une frequence observee : diviser les bornes par $n$
       ($I_f = \left[\frac{a}{n}\,;\,\frac{b}{n}\right]$) et conclure (rejet ou non
-      de l'hypothèse sur $p$ au seuil $\alpha$).
+      de l'hypothese sur $p$ au seuil $\alpha$).
   \end{enumerate}
 }
 
@@ -41,7 +41,7 @@
   \commentaireMarge{Table des $P(X \leq k)$ a la calculatrice.}%
   La table cumulative donne $P(X \leq 17) \approx 0{,}016 \leq 0{,}025$ et
   $P(X \leq 18) \approx 0{,}032 > 0{,}025$ : donc $a = 18$.
-  De même $P(X \leq 31) \approx 0{,}968 < 0{,}975$ et
+  De meme $P(X \leq 31) \approx 0{,}968 < 0{,}975$ et
   $P(X \leq 32) \approx 0{,}984 \geq 0{,}975$ : donc $b = 32$.
 
   \medskip
@@ -51,17 +51,17 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Utiliser $\alpha$ au lieu de $\dfrac{\alpha}{2}$ pour
+    \item \textbf{Piege 1.} Utiliser $\alpha$ au lieu de $\dfrac{\alpha}{2}$ pour
       chaque queue de la distribution.
-    \item \textbf{Piège 2.} Vérifier avec $P(X \leq a)$ au lieu de $P(X \leq a-1)$
+    \item \textbf{Piege 2.} Verifier avec $P(X \leq a)$ au lieu de $P(X \leq a-1)$
       dans $P(a \leq X \leq b)$.
-    \item \textbf{Piège 3.} Oublier de diviser par $n$ quand la question porte sur
-      la FREQUENCE observee et non sur le nombre de succès.
+    \item \textbf{Piege 3.} Oublier de diviser par $n$ quand la question porte sur
+      la FREQUENCE observee et non sur le nombre de succes.
   \end{itemize}
 }
 
 \verifier{%
-  Contrôler numeriquement $P(X \leq b) - P(X \leq a-1) \geq 1-\alpha$ et que
+  Controler numeriquement $P(X \leq b) - P(X \leq a-1) \geq 1-\alpha$ et que
   retrecir l'intervalle d'un entier fait tomber sous le seuil (bornes minimales).
 }
 

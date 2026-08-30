@@ -6,12 +6,12 @@
 % assert 1 - q**3 == Rational(91,216)
 % assert q**4 == Rational(625,1296)
 % END-VERIFY
-\begin{fichemethode}{M2}{Calculer des probabilités pour une loi géométrique}
+\begin{fichemethode}{M2}{Calculer des probabilites pour une loi geometrique}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque $X$ suit une loi géométrique de paramètre $p$
-  et que l'énoncé demande $P(X = k)$, $P(X \leq n)$, $P(X > n)$ ou une
-  probabilité du type « entre $a$ et $b$ ».
+  Utiliser cette methode lorsque $X$ suit une loi geometrique de parametre $p$
+  et que l'enonce demande $P(X = k)$, $P(X \leq n)$, $P(X > n)$ ou une
+  probabilite du type « entre $a$ et $b$ ».
 }
 
 \pasApas{%
@@ -23,7 +23,7 @@
     \item Intervalle : $P(a \leq X \leq b) = P(X > a-1) - P(X > b)
       = (1-p)^{a-1} - (1-p)^{b}$.
     \item Donner la valeur exacte (fraction ou puissance) puis un arrondi, et
-      interpréter dans le contexte.
+      interpreter dans le contexte.
   \end{enumerate}
 }
 
@@ -32,36 +32,36 @@
   $P(X \leq 3)$ et $P(X > 4)$.
 
   \medskip
-  \commentaireMarge{Deux echecs puis un succès.}%
+  \commentaireMarge{Deux echecs puis un succes.}%
   $P(X = 3) = \left(\dfrac{5}{6}\right)^{2} \times \dfrac{1}{6}
   = \dfrac{25}{216} \approx 0{,}116$.
 
   \medskip
-  \commentaireMarge{Passer par l'événement contraire.}%
+  \commentaireMarge{Passer par l'evenement contraire.}%
   $P(X \leq 3) = 1 - \left(\dfrac{5}{6}\right)^{3} = \dfrac{91}{216}
   \approx 0{,}421$.
 
   \medskip
   $P(X > 4) = \left(\dfrac{5}{6}\right)^{4} = \dfrac{625}{1296}
   \approx 0{,}482$ : pres d'une fois sur deux, le premier 6 n'est toujours pas
-  sorti après 4 lancers.
+  sorti apres 4 lancers.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Decaler l'exposant : $P(X > n) = (1-p)^n$ mais
+    \item \textbf{Piege 1.} Decaler l'exposant : $P(X > n) = (1-p)^n$ mais
       $P(X = k)$ contient $(1-p)^{k-1}$.
-    \item \textbf{Piège 2.} Confondre $P(X \leq n)$ et $P(X < n)$ : pour une
+    \item \textbf{Piege 2.} Confondre $P(X \leq n)$ et $P(X < n)$ : pour une
       variable entiere, $P(X < n) = P(X \leq n-1)$.
-    \item \textbf{Piège 3.} Sommer terme a terme $P(X=1) + \dots + P(X=n)$ sans
-      reconnaitre que le complementaire $(1-p)^n$ donne le résultat en une
+    \item \textbf{Piege 3.} Sommer terme a terme $P(X=1) + \dots + P(X=n)$ sans
+      reconnaitre que le complementaire $(1-p)^n$ donne le resultat en une
       ligne.
   \end{itemize}
 }
 
 \verifier{%
-  Contrôler que chaque probabilité est dans $[0\,;\,1]$, que
-  $P(X \leq n) + P(X > n) = 1$, et retrouver un résultat par l'autre chemin
+  Controler que chaque probabilite est dans $[0\,;\,1]$, que
+  $P(X \leq n) + P(X > n) = 1$, et retrouver un resultat par l'autre chemin
   (somme directe contre complementaire).
 }
 

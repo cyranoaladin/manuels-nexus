@@ -11,8 +11,8 @@
 \begin{fichemethode}{M2}{Modeliser une situation concrete par un graphe}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsqu'une situation (reseau de transport, tournoi,
-  relations d'incompatibilite, plan de taches...) doit être traduite en graphe
+  Utiliser cette methode lorsqu'une situation (reseau de transport, tournoi,
+  relations d'incompatibilite, plan de taches...) doit etre traduite en graphe
   avant tout raisonnement.
 }
 
@@ -23,12 +23,12 @@
     \item Choisir les ARETES : la relation binaire pertinente (liaison
       directe, rencontre, incompatibilite...) ; se demander si elle est
       symetrique (graphe non oriente) ou non (graphe oriente).
-    \item Dessiner le graphe ou dresser la liste sommets/arêtes ; une relation
-      mentionnee deux fois ne cree qu'UNE arête.
-    \item Vérifier la fidelite du modèle : chaque contrainte de l'énoncé doit
-      correspondre a une arête (ou une absence d'arête), rien de plus.
-    \item Reformuler la QUESTION de l'énoncé en termes de graphe (existence
-      d'une chaine, degré maximal, nombre de chemins... — fiches M1 et M4).
+    \item Dessiner le graphe ou dresser la liste sommets/aretes ; une relation
+      mentionnee deux fois ne cree qu'UNE arete.
+    \item Verifier la fidelite du modele : chaque contrainte de l'enonce doit
+      correspondre a une arete (ou une absence d'arete), rien de plus.
+    \item Reformuler la QUESTION de l'enonce en termes de graphe (existence
+      d'une chaine, degre maximal, nombre de chemins... — fiches M1 et M4).
   \end{enumerate}
 }
 
@@ -38,9 +38,9 @@
   question « peut-on aller de $A$ a $D$ ? ».
 
   \medskip
-  \commentaireMarge{Sommets $=$ villes, arêtes $=$ routes directes.}%
-  On prend pour sommets les quatre villes et pour arêtes les quatre liaisons
-  routieres — la relation « être relie par une route » est symetrique : graphe
+  \commentaireMarge{Sommets $=$ villes, aretes $=$ routes directes.}%
+  On prend pour sommets les quatre villes et pour aretes les quatre liaisons
+  routieres — la relation « etre relie par une route » est symetrique : graphe
   NON oriente d'ordre 4 (celui de la fiche M1).
 
   \medskip
@@ -52,19 +52,19 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Prendre pour sommets les relations (routes) au lieu
-      des objets (villes) : inverser sommets et arêtes ruine le modèle.
-    \item \textbf{Piège 2.} Ignorer l'orientation quand la relation n'est pas
+    \item \textbf{Piege 1.} Prendre pour sommets les relations (routes) au lieu
+      des objets (villes) : inverser sommets et aretes ruine le modele.
+    \item \textbf{Piege 2.} Ignorer l'orientation quand la relation n'est pas
       symetrique (sens uniques, « $x$ bat $y$ ») : il faut alors un graphe
       oriente.
-    \item \textbf{Piège 3.} Ajouter des arêtes que l'énoncé ne donne pas
+    \item \textbf{Piege 3.} Ajouter des aretes que l'enonce ne donne pas
       (liaisons « evidentes » mais non declarees).
   \end{itemize}
 }
 
 \verifier{%
-  Relire chaque phrase de l'énoncé et pointer l'élément du graphe qui la
-  traduit ; contrôler ordre et nombre d'arêtes ; vérifier que la reponse
+  Relire chaque phrase de l'enonce et pointer l'element du graphe qui la
+  traduit ; controler ordre et nombre d'aretes ; verifier que la reponse
   « graphe » se retraduit bien en reponse concrete.
 }
 

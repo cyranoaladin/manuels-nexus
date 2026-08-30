@@ -6,13 +6,13 @@
 % assert simplify(expand_log(log(1/a), force=True) + log(a)) == 0
 % assert simplify(exp(log(a) + log(b)) - a*b) == 0
 % END-VERIFY
-\begin{fichemethode}{M4}{Démontrer ln(ab) = ln(a) + ln(b) et ln(1/a) = -ln(a)}
+\begin{fichemethode}{M4}{Demontrer ln(ab) = ln(a) + ln(b) et ln(1/a) = -ln(a)}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé demande de DEMONTRER les propriétés
-  algébriques du logarithme a partir de la relation fonctionnelle de
-  l'exponentielle ($e^{u+v} = e^u e^v$) et de la définition de $\ln$ comme
-  réciproque.
+  Utiliser cette methode lorsque l'enonce demande de DEMONTRER les proprietes
+  algebriques du logarithme a partir de la relation fonctionnelle de
+  l'exponentielle ($e^{u+v} = e^u e^v$) et de la definition de $\ln$ comme
+  reciproque.
 }
 
 \pasApas{%
@@ -21,51 +21,51 @@
       $e^{u+v} = e^u\,e^v$ et $e^{\ln x} = x$ pour $x > 0$.
     \item Calculer $e^{\ln a + \ln b}$ avec la relation fonctionnelle :
       $e^{\ln a + \ln b} = e^{\ln a}\,e^{\ln b} = ab$.
-    \item Comparer : on a aussi $e^{\ln(ab)} = ab$. Deux réels ayant la même
-      image par $\exp$ sont égaux ($\exp$ est strictement croissante donc
+    \item Comparer : on a aussi $e^{\ln(ab)} = ab$. Deux reels ayant la meme
+      image par $\exp$ sont egaux ($\exp$ est strictement croissante donc
       injective) : $\ln(ab) = \ln a + \ln b$.
-    \item Pour $\ln\!\dfrac{1}{a}$ : appliquer la propriété a
+    \item Pour $\ln\!\dfrac{1}{a}$ : appliquer la propriete a
       $a \times \dfrac{1}{a} = 1$ :
       $\ln(a) + \ln\!\dfrac{1}{a} = \ln(1) = 0$, d'ou
       $\ln\!\dfrac{1}{a} = -\ln(a)$.
-    \item Citer a chaque étape la propriété utilisee (relation fonctionnelle,
-      réciproque, injectivite) : c'est une démonstration, pas un calcul.
+    \item Citer a chaque etape la propriete utilisee (relation fonctionnelle,
+      reciproque, injectivite) : c'est une demonstration, pas un calcul.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Démontrer que pour tous $a, b > 0$, $\ln(ab) = \ln(a) + \ln(b)$.
+  Demontrer que pour tous $a, b > 0$, $\ln(ab) = \ln(a) + \ln(b)$.
 
   \medskip
   \commentaireMarge{Tout passe par l'exponentielle.}%
-  D'une part $e^{\ln(ab)} = ab$ (définition de la réciproque, $ab > 0$).
+  D'une part $e^{\ln(ab)} = ab$ (definition de la reciproque, $ab > 0$).
   D'autre part
   $e^{\ln a + \ln b} = e^{\ln a} \times e^{\ln b} = a \times b$
-  (relation fonctionnelle de $\exp$, puis définition de la réciproque).
+  (relation fonctionnelle de $\exp$, puis definition de la reciproque).
 
   \medskip
   \commentaireMarge{Injectivite de $\exp$.}%
   Ainsi $e^{\ln(ab)} = e^{\ln a + \ln b}$. La fonction $\exp$ etant strictement
-  croissante sur $\mathbb{R}$, elle ne prend jamais deux fois la même valeur :
+  croissante sur $\mathbb{R}$, elle ne prend jamais deux fois la meme valeur :
   $\ln(ab) = \ln(a) + \ln(b)$. \hfill$\square$
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Utiliser la propriété a démontrer dans sa propre
-      démonstration (raisonnement circulaire).
-    \item \textbf{Piège 2.} Oublier de justifier le passage
+    \item \textbf{Piege 1.} Utiliser la propriete a demontrer dans sa propre
+      demonstration (raisonnement circulaire).
+    \item \textbf{Piege 2.} Oublier de justifier le passage
       $e^X = e^Y \Rightarrow X = Y$ (injectivite / stricte croissance de
       $\exp$).
-    \item \textbf{Piège 3.} Negliger les hypothèses $a > 0$, $b > 0$ : sans
+    \item \textbf{Piege 3.} Negliger les hypotheses $a > 0$, $b > 0$ : sans
       elles, $\ln(a)$ ou $\ln(b)$ n'existe pas.
   \end{itemize}
 }
 
 \verifier{%
-  Tester la propriété demontree sur des valeurs concretes ($a = e$, $b = e^2$ :
+  Tester la propriete demontree sur des valeurs concretes ($a = e$, $b = e^2$ :
   $\ln(e^3) = 3 = 1 + 2$), et relire la chaine deductive pour s'assurer
-  qu'aucune étape n'utilise le résultat final.
+  qu'aucune etape n'utilise le resultat final.
 }
 
 \sEntrainer{\refExos{M4}}

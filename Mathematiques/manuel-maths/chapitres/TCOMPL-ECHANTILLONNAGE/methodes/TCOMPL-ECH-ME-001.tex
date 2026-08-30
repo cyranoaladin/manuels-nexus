@@ -2,23 +2,23 @@
 \begin{fichemethode}{M1}{Reconnaitre une loi de Bernoulli ou une loi binomiale}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé décrit une expérience aleatoire repetee
-  et demande d'identifier la loi suivie par une variable aleatoire (succès/echec,
-  nombre de succès).
+  Utiliser cette methode lorsque l'enonce decrit une experience aleatoire repetee
+  et demande d'identifier la loi suivie par une variable aleatoire (succes/echec,
+  nombre de succes).
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Reperer une epreuve a DEUX issues : succès (probabilité $p$) et echec
-      (probabilité $1-p$). La variable qui vaut 1 en cas de succès et 0 sinon
-      suit la loi de Bernoulli de paramètre $p$.
-    \item Vérifier les trois conditions du schema de Bernoulli :
-      la même epreuve est repetee $n$ fois ; les repetitions sont
-      \textbf{indépendantes} ; la probabilité de succès $p$ est \textbf{constante}.
-    \item Definir $X$ = nombre de succès obtenus au cours des $n$ repetitions.
-    \item Conclure : $X$ suit la loi binomiale de paramètres $n$ et $p$,
+    \item Reperer une epreuve a DEUX issues : succes (probabilite $p$) et echec
+      (probabilite $1-p$). La variable qui vaut 1 en cas de succes et 0 sinon
+      suit la loi de Bernoulli de parametre $p$.
+    \item Verifier les trois conditions du schema de Bernoulli :
+      la meme epreuve est repetee $n$ fois ; les repetitions sont
+      \textbf{independantes} ; la probabilite de succes $p$ est \textbf{constante}.
+    \item Definir $X$ = nombre de succes obtenus au cours des $n$ repetitions.
+    \item Conclure : $X$ suit la loi binomiale de parametres $n$ et $p$,
       notee $\mathcal{B}(n\,;\,p)$.
-    \item Rediger la justification en citant explicitement l'indépendance et la
+    \item Rediger la justification en citant explicitement l'independance et la
       constance de $p$ — pas seulement les valeurs de $n$ et $p$.
   \end{enumerate}
 }
@@ -28,27 +28,27 @@
   et on note $X$ le nombre de boules rouges tirees. Quelle est la loi de $X$ ?
 
   \medskip
-  \commentaireMarge{Le tirage AVEC remise garantit indépendance et $p$ constant.}%
-  Chaque tirage est une epreuve de Bernoulli : succès « la boule est rouge » de
-  probabilité $p = 0{,}3$. Les 10 tirages sont identiques et indépendants (remise),
-  et $p$ reste constant. $X$ compte les succès :
+  \commentaireMarge{Le tirage AVEC remise garantit independance et $p$ constant.}%
+  Chaque tirage est une epreuve de Bernoulli : succes « la boule est rouge » de
+  probabilite $p = 0{,}3$. Les 10 tirages sont identiques et independants (remise),
+  et $p$ reste constant. $X$ compte les succes :
   $X$ suit la loi binomiale $\mathcal{B}(10\,;\,0{,}3)$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Tirage SANS remise : $p$ change a chaque tirage, les
-      epreuves ne sont plus indépendantes — ce n'est PAS une loi binomiale.
-    \item \textbf{Piège 2.} Confondre Bernoulli (UNE epreuve, valeurs 0/1) et
-      binomiale (nombre de succès sur $n$ epreuves, valeurs $0,\dots,n$).
-    \item \textbf{Piège 3.} Prendre pour $p$ la probabilité de l'echec, ou definir
-      mal le « succès » par rapport a la question posee.
+    \item \textbf{Piege 1.} Tirage SANS remise : $p$ change a chaque tirage, les
+      epreuves ne sont plus independantes — ce n'est PAS une loi binomiale.
+    \item \textbf{Piege 2.} Confondre Bernoulli (UNE epreuve, valeurs 0/1) et
+      binomiale (nombre de succes sur $n$ epreuves, valeurs $0,\dots,n$).
+    \item \textbf{Piege 3.} Prendre pour $p$ la probabilite de l'echec, ou definir
+      mal le « succes » par rapport a la question posee.
   \end{itemize}
 }
 
 \verifier{%
-  Contrôler que les valeurs possibles de $X$ sont bien $0, 1, \dots, n$, et que la
-  redaction mentionne les trois mots-cles : repetition, indépendance, probabilité
+  Controler que les valeurs possibles de $X$ sont bien $0, 1, \dots, n$, et que la
+  redaction mentionne les trois mots-cles : repetition, independance, probabilite
   constante.
 }
 

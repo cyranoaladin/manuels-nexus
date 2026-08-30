@@ -6,10 +6,10 @@
 % divs60 = [d for d in range(1, 61) if 60 % d == 0]
 % assert len(divs60) == 12 and divs60[:4] == [1, 2, 3, 4]
 % END-VERIFY
-\begin{fichemethode}{M1}{Déterminer les diviseurs d'un entier et le PGCD par l'algorithme d'Euclide}
+\begin{fichemethode}{M1}{Determiner les diviseurs d'un entier et le PGCD par l'algorithme d'Euclide}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé demande la liste des diviseurs d'un
+  Utiliser cette methode lorsque l'enonce demande la liste des diviseurs d'un
   entier, ou le PGCD de deux entiers par divisions euclidiennes successives.
 }
 
@@ -24,7 +24,7 @@
       $\mathrm{PGCD}(a\,;\,b) = \mathrm{PGCD}(b\,;\,r)$.
     \item S'arreter quand le reste est NUL : le PGCD est le DERNIER RESTE NON
       NUL.
-    \item Contrôler que le résultat divise bien $a$ et $b$.
+    \item Controler que le resultat divise bien $a$ et $b$.
   \end{enumerate}
 }
 
@@ -41,22 +41,22 @@
 
   \medskip
   Le dernier reste non nul est 18 : $\mathrm{PGCD}(252\,;\,198) = 18$.
-  Contrôle : $252 = 18 \times 14$ et $198 = 18 \times 11$.
+  Controle : $252 = 18 \times 14$ et $198 = 18 \times 11$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Prendre le dernier QUOTIENT ou le dernier reste
+    \item \textbf{Piege 1.} Prendre le dernier QUOTIENT ou le dernier reste
       (nul) au lieu du dernier reste NON NUL.
-    \item \textbf{Piège 2.} Pour les diviseurs, s'arreter avant $\sqrt{n}$ ou
+    \item \textbf{Piege 2.} Pour les diviseurs, s'arreter avant $\sqrt{n}$ ou
       oublier les diviseurs associes $\frac{n}{d}$.
-    \item \textbf{Piège 3.} Poursuivre l'algorithme avec le couple (quotient,
+    \item \textbf{Piege 3.} Poursuivre l'algorithme avec le couple (quotient,
       reste) au lieu de (diviseur, reste).
   \end{itemize}
 }
 
 \verifier{%
-  Vérifier que le PGCD trouve divise les deux entiers de depart, et que les
+  Verifier que le PGCD trouve divise les deux entiers de depart, et que les
   quotients $\frac{a}{d}$ et $\frac{b}{d}$ obtenus sont premiers entre eux.
 }
 

@@ -7,32 +7,32 @@
 % assert limit(q**n, n, oo) == 0
 % assert summation(q**k, (k, 0, oo)) == Rational(3,2)
 % END-VERIFY
-\begin{fichemethode}{M2}{Calculer la limite d'une suite géométrique et de la somme de ses termes}
+\begin{fichemethode}{M2}{Calculer la limite d'une suite geometrique et de la somme de ses termes}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque la raison $q$ vérifie $0 < q < 1$ et que
-  l'énoncé demande la limite de $(u_0\,q^n)$ ou celle de la somme
+  Utiliser cette methode lorsque la raison $q$ verifie $0 < q < 1$ et que
+  l'enonce demande la limite de $(u_0\,q^n)$ ou celle de la somme
   $S_n = u_0 + u_0 q + \dots + u_0 q^n$.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Identifier $u_0$ et la raison $q$, et vérifier $0 < q < 1$.
-    \item Limite de la suite : citer le résultat de cours
+    \item Identifier $u_0$ et la raison $q$, et verifier $0 < q < 1$.
+    \item Limite de la suite : citer le resultat de cours
       $\lim\limits_{n \to +\infty} q^n = 0$ pour $0 < q < 1$, donc
       $\lim u_0\,q^n = 0$.
-    \item Somme des termes : écrire
+    \item Somme des termes : ecrire
       $S_n = u_0\,\dfrac{1 - q^{n+1}}{1 - q}$.
     \item Passer a la limite : comme $q^{n+1} \to 0$,
       $\lim\limits_{n \to +\infty} S_n = \dfrac{u_0}{1 - q}$.
-    \item Interpréter dans le contexte (valeur d'équilibré, quantité totale
+    \item Interpreter dans le contexte (valeur d'equilibre, quantite totale
       cumulee...).
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Soit $(u_n)$ géométrique de premier terme $u_0 = 1$ et de raison
-  $q = \dfrac{1}{3}$. Déterminer $\lim u_n$ et $\lim S_n$ ou
+  Soit $(u_n)$ geometrique de premier terme $u_0 = 1$ et de raison
+  $q = \dfrac{1}{3}$. Determiner $\lim u_n$ et $\lim S_n$ ou
   $S_n = u_0 + \dots + u_n$.
 
   \medskip
@@ -52,18 +52,18 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Confondre limite de la SUITE (0) et limite de la
+    \item \textbf{Piege 1.} Confondre limite de la SUITE (0) et limite de la
       SOMME ($\frac{u_0}{1-q}$).
-    \item \textbf{Piège 2.} Erreur d'exposant dans la formule de somme :
+    \item \textbf{Piege 2.} Erreur d'exposant dans la formule de somme :
       $S_n$ compte $n+1$ termes, d'ou $1 - q^{n+1}$.
-    \item \textbf{Piège 3.} Appliquer $q^n \to 0$ sans avoir vérifie
+    \item \textbf{Piege 3.} Appliquer $q^n \to 0$ sans avoir verifie
       $0 < q < 1$ (faux si $q > 1$, ou la suite diverge vers $+\infty$).
   \end{itemize}
 }
 
 \verifier{%
-  Contrôler numeriquement avec quelques termes (la somme doit s'approcher de
-  $\frac{u_0}{1-q}$ par valeurs inferieures pour $u_0 > 0$), et vérifier
+  Controler numeriquement avec quelques termes (la somme doit s'approcher de
+  $\frac{u_0}{1-q}$ par valeurs inferieures pour $u_0 > 0$), et verifier
   l'ordre de grandeur dans le contexte.
 }
 

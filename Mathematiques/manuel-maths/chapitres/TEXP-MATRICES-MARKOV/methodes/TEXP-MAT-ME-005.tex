@@ -9,24 +9,24 @@
 % assert pi0*P**2 == pi2
 % assert sum(pi2) == 1
 % END-VERIFY
-\begin{fichemethode}{M5}{Calculer la distribution après n transitions et lire P puissance n}
+\begin{fichemethode}{M5}{Calculer la distribution apres n transitions et lire P puissance n}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé demande la repartition entre les
-  etats après $n$ étapes d'une chaine de Markov, ou l'interprétation d'un
+  Utiliser cette methode lorsque l'enonce demande la repartition entre les
+  etats apres $n$ etapes d'une chaine de Markov, ou l'interpretation d'un
   coefficient de $P^n$.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Écrire $P$ et $\pi_0$ (fiche M4), en ligne pour la distribution.
-    \item Une étape : $\pi_1 = \pi_0 P$ (produit ligne par matrice).
-    \item $n$ étapes : $\pi_n = \pi_0 P^n$ (démonstration : fiche M6) ;
+    \item Ecrire $P$ et $\pi_0$ (fiche M4), en ligne pour la distribution.
+    \item Une etape : $\pi_1 = \pi_0 P$ (produit ligne par matrice).
+    \item $n$ etapes : $\pi_n = \pi_0 P^n$ (demonstration : fiche M6) ;
       calculer $P^n$ par produits successifs ou a la calculatrice.
-    \item Interpréter le coefficient $(i\,;\,j)$ de $P^n$ : c'est la
-      probabilité d'être a l'etat $j$ au bout de $n$ étapes EN PARTANT de
+    \item Interpreter le coefficient $(i\,;\,j)$ de $P^n$ : c'est la
+      probabilite d'etre a l'etat $j$ au bout de $n$ etapes EN PARTANT de
       l'etat $i$.
-    \item Contrôler que $\pi_n$ somme a 1 et interpréter les proportions dans
+    \item Controler que $\pi_n$ somme a 1 et interpreter les proportions dans
       le contexte.
   \end{enumerate}
 }
@@ -48,24 +48,24 @@
   \medskip
   \commentaireMarge{Lecture de $P^2$.}%
   Le coefficient $(1\,;\,2)$ de $P^2$ vaut $0{,}16$ : partant de $A$, la
-  probabilité d'être chez $B$ après 2 ans est $0{,}16$.
+  probabilite d'etre chez $B$ apres 2 ans est $0{,}16$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Multiplier dans le mauvais sens ($P\,\pi_0$ avec
+    \item \textbf{Piege 1.} Multiplier dans le mauvais sens ($P\,\pi_0$ avec
       $\pi_0$ en ligne) : avec la convention en ligne, la distribution
       multiplie $P$ A GAUCHE.
-    \item \textbf{Piège 2.} Confondre $\pi_n$ (distribution, depend de
-      $\pi_0$) et $P^n$ (transitions en $n$ étapes, indépendant de $\pi_0$).
-    \item \textbf{Piège 3.} Calculer $P^n$ en elevant chaque coefficient a la
+    \item \textbf{Piege 2.} Confondre $\pi_n$ (distribution, depend de
+      $\pi_0$) et $P^n$ (transitions en $n$ etapes, independant de $\pi_0$).
+    \item \textbf{Piege 3.} Calculer $P^n$ en elevant chaque coefficient a la
       puissance $n$.
   \end{itemize}
 }
 
 \verifier{%
-  Vérifier que chaque $\pi_k$ somme a 1, recouper $\pi_2$ par les deux chemins
-  ($\pi_1 P$ et $\pi_0 P^2$), et contrôler que les lignes de $P^n$ somment
+  Verifier que chaque $\pi_k$ somme a 1, recouper $\pi_2$ par les deux chemins
+  ($\pi_1 P$ et $\pi_0 P^2$), et controler que les lignes de $P^n$ somment
   a 1.
 }
 

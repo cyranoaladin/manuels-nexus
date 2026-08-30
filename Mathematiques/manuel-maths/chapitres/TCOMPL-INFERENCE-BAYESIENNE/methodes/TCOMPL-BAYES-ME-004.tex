@@ -12,14 +12,14 @@
 \begin{fichemethode}{M4}{Definir et calculer sensibilite, specificite, VPP et VPN d'un test}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé porte sur un test de depistage et
+  Utiliser cette methode lorsque l'enonce porte sur un test de depistage et
   demande de definir ou de calculer sensibilite, specificite, valeur predictive
-  positive (VPP) ou négative (VPN).
+  positive (VPP) ou negative (VPN).
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Noter $M$ « être malade » et $T$ « test positif », et traduire :
+    \item Noter $M$ « etre malade » et $T$ « test positif », et traduire :
       sensibilite $= P_M(T)$ ; specificite $= P_{\overline{M}}(\overline{T})$ ;
       VPP $= P_T(M)$ ; VPN $= P_{\overline{T}}(\overline{M})$.
     \item Reperer que sensibilite/specificite conditionnent par l'ETAT DE SANTE,
@@ -30,7 +30,7 @@
       renverser par Bayes (fiche M2) :
       $\text{VPP} = \dfrac{p \cdot \text{Se}}{P(T)}$,
       $\text{VPN} = \dfrac{(1-p)\,\text{Sp}}{1 - P(T)}$.
-    \item Donner les valeurs exactes puis arrondies, et interpréter chacune dans
+    \item Donner les valeurs exactes puis arrondies, et interpreter chacune dans
       le contexte.
   \end{enumerate}
 }
@@ -40,7 +40,7 @@
   une specificite de $0{,}95$. Calculer VPP et VPN.
 
   \medskip
-  \commentaireMarge{$P(T)$ par probabilités totales.}%
+  \commentaireMarge{$P(T)$ par probabilites totales.}%
   $P(T) = 0{,}01 \times 0{,}9 + 0{,}99 \times 0{,}05 = 0{,}0585$.
 
   \medskip
@@ -52,25 +52,25 @@
   \approx 0{,}999$.
 
   \medskip
-  Un résultat négatif est très fiable (VPN $\approx 99{,}9\,\%$), mais un
-  résultat positif ne signifie une maladie que dans environ 15\,\% des cas.
+  Un resultat negatif est tres fiable (VPN $\approx 99{,}9\,\%$), mais un
+  resultat positif ne signifie une maladie que dans environ 15\,\% des cas.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Confondre sensibilite ($P_M(T)$) et VPP ($P_T(M)$) :
+    \item \textbf{Piege 1.} Confondre sensibilite ($P_M(T)$) et VPP ($P_T(M)$) :
       le conditionnement est inverse (fiche M3).
-    \item \textbf{Piège 2.} Écrire la specificite comme $P_{\overline{M}}(T)$ :
-      c'est la probabilité du test NEGATIF chez les non-malades,
+    \item \textbf{Piege 2.} Ecrire la specificite comme $P_{\overline{M}}(T)$ :
+      c'est la probabilite du test NEGATIF chez les non-malades,
       $P_{\overline{M}}(\overline{T})$.
-    \item \textbf{Piège 3.} Calculer la VPN avec $P(T)$ au dénominateur au lieu
+    \item \textbf{Piege 3.} Calculer la VPN avec $P(T)$ au denominateur au lieu
       de $1 - P(T) = P(\overline{T})$.
   \end{itemize}
 }
 
 \verifier{%
-  Contrôler les quatre valeurs sur un tableau d'effectifs (10\,000 personnes :
-  100 malades dont 90 positifs ; 9\,900 saines dont 495 positives), et vérifier
+  Controler les quatre valeurs sur un tableau d'effectifs (10\,000 personnes :
+  100 malades dont 90 positifs ; 9\,900 saines dont 495 positives), et verifier
   que chaque valeur est dans $[0\,;\,1]$.
 }
 

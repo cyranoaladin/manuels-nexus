@@ -8,32 +8,32 @@
 % zn = 3 + 2*I
 % assert simplify(Abs(zn**4) - Abs(zn)**4) == 0
 % END-VERIFY
-\begin{fichemethode}{M5}{Démontrer l'identite du module carre et les propriétés du module}
+\begin{fichemethode}{M5}{Demontrer l'identite du module carre et les proprietes du module}
 
 \quandUtiliser{%
-  Utiliser cette méthode lorsque l'énoncé demande de DEMONTRER l'identite
-  $|z|^2 = z\bar{z}$, puis d'en déduire $|z_1 z_2| = |z_1|\,|z_2|$ et
+  Utiliser cette methode lorsque l'enonce demande de DEMONTRER l'identite
+  $|z|^2 = z\bar{z}$, puis d'en deduire $|z_1 z_2| = |z_1|\,|z_2|$ et
   $|z^n| = |z|^n$.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Identite fondamentale : poser $z = a + ib$ ($a, b$ réels) et
+    \item Identite fondamentale : poser $z = a + ib$ ($a, b$ reels) et
       calculer $z\bar{z} = (a + ib)(a - ib) = a^2 + b^2 = |z|^2$.
-    \item Produit : écrire $|z_1 z_2|^2 = (z_1 z_2)\overline{(z_1 z_2)}$ et
+    \item Produit : ecrire $|z_1 z_2|^2 = (z_1 z_2)\overline{(z_1 z_2)}$ et
       utiliser $\overline{z_1 z_2} = \overline{z_1}\,\overline{z_2}$
       (fiche M3).
     \item Regrouper : $|z_1 z_2|^2 = (z_1\overline{z_1})(z_2\overline{z_2})
       = |z_1|^2\,|z_2|^2$.
     \item Conclure par passage a la racine (modules positifs) :
       $|z_1 z_2| = |z_1|\,|z_2|$.
-    \item Puissance : récurrence sur $n$ avec la propriété du produit dans
+    \item Puissance : recurrence sur $n$ avec la propriete du produit dans
       l'heredite : $|z^{n+1}| = |z^n \cdot z| = |z^n|\,|z| = |z|^{n+1}$.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Démontrer que pour tous $z_1, z_2 \in \mathbb{C}$,
+  Demontrer que pour tous $z_1, z_2 \in \mathbb{C}$,
   $|z_1 z_2| = |z_1|\,|z_2|$.
 
   \medskip
@@ -45,29 +45,29 @@
 
   \medskip
   \commentaireMarge{La racine est legitime : les deux membres sont positifs.}%
-  Les deux membres etant des réels positifs, on prend la racine carrée :
+  Les deux membres etant des reels positifs, on prend la racine carree :
   $|z_1 z_2| = |z_1|\,|z_2|$. \hfill$\square$
 
   \medskip
-  Contrôle numérique : $|(3+2i)^4| = |3+2i|^4 = 13^2 = 169$.
+  Controle numerique : $|(3+2i)^4| = |3+2i|^4 = 13^2 = 169$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piège 1.} Écrire $|z|^2 = z^2$ : c'est $z\bar{z}$, un RÉEL
+    \item \textbf{Piege 1.} Ecrire $|z|^2 = z^2$ : c'est $z\bar{z}$, un REEL
       positif, pas le carre complexe.
-    \item \textbf{Piège 2.} Passer a la racine sans mentionner que les deux
+    \item \textbf{Piege 2.} Passer a la racine sans mentionner que les deux
       membres sont positifs.
-    \item \textbf{Piège 3.} Croire que le module est additif :
-      $|z_1 + z_2| \neq |z_1| + |z_2|$ en general (seulement une inégalité
+    \item \textbf{Piege 3.} Croire que le module est additif :
+      $|z_1 + z_2| \neq |z_1| + |z_2|$ en general (seulement une inegalite
       triangulaire).
   \end{itemize}
 }
 
 \verifier{%
-  Tester l'identite et les propriétés sur des valeurs concretes
+  Tester l'identite et les proprietes sur des valeurs concretes
   ($z = 3 + 2i$ : $z\bar{z} = 13 = |z|^2$), et relire la chaine en verifiant
-  l'usage de la propriété du conjugue du produit.
+  l'usage de la propriete du conjugue du produit.
 }
 
 \sEntrainer{\refExos{M5}}
