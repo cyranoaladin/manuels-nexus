@@ -3,20 +3,20 @@
 \section{Dérivée de la fonction logarithme népérien}
 
 % ============================================================
-% STRATE 1 — Demonstration exigible
+% STRATE 1 — Démonstration exigible
 % ============================================================
 
 \theoreme{
-La fonction $\ln$ est derivable sur $]0, +\infty[$ (derivabilite admise), et pour tout $x > 0$ :
+La fonction $\ln$ est dérivable sur $]0, +\infty[$ (derivabilite admise), et pour tout $x > 0$ :
 \[
   \ln'(x) = \frac{1}{x}.
 \]
 }
 
 \demonstration{
-On admet que $\ln$ est derivable sur $]0,+\infty[$. Pour tout $x > 0$, on a par definition $\mathrm{e}^{\ln x} = x$.
+On admet que $\ln$ est dérivable sur $]0,+\infty[$. Pour tout $x > 0$, on a par définition $\mathrm{e}^{\ln x} = x$.
 
-Derivons les deux membres de cette egalite (le membre de gauche est une fonction composee $\mathrm{e}^{u(x)}$ avec $u(x) = \ln x$, de derivee $u'(x)\,\mathrm{e}^{u(x)}$) :
+Derivons les deux membres de cette égalité (le membre de gauche est une fonction composee $\mathrm{e}^{u(x)}$ avec $u(x) = \ln x$, de dérivée $u'(x)\,\mathrm{e}^{u(x)}$) :
 \[
   \ln'(x) \times \mathrm{e}^{\ln x} = 1.
 \]
@@ -31,11 +31,11 @@ Comme $x
 }
 
 \margeAppui{
-Ce raisonnement (deriver les deux membres d'une egalite $f(g(x))=x$) est une technique classique pour retrouver la derivee d'une fonction reciproque.
+Ce raisonnement (dériver les deux membres d'une égalité $f(g(x))=x$) est une technique classique pour retrouver la dérivée d'une fonction réciproque.
 }
 
 \exemple{
-Soit $f(x) = \ln(2x+3)$ sur son ensemble de definition. Comme $f = \ln \circ u$ avec $u(x)=2x+3$, on a $f'(x) = u'(x) \times \dfrac{1}{u(x)} = \dfrac{2}{2x+3}$, defini pour $2x+3>0$, soit $x > -\dfrac{3}{2}$.
+Soit $f(x) = \ln(2x+3)$ sur son ensemble de définition. Comme $f = \ln \circ u$ avec $u(x)=2x+3$, on a $f'(x) = u'(x) \times \dfrac{1}{u(x)} = \dfrac{2}{2x+3}$, défini pour $2x+3>0$, soit $x > -\dfrac{3}{2}$.
 
 % BEGIN-VERIFY
 % from sympy import symbols, ln, diff
@@ -46,7 +46,7 @@ Soit $f(x) = \ln(2x+3)$ sur son ensemble de definition. Comme $f = \ln \circ u$ 
 }
 
 \propriete[Dérivée de $\ln(u)$]{
-Si $u$ est une fonction derivable et strictement positive sur un intervalle $I$, alors $\ln(u)$ est derivable sur $I$ et :
+Si $u$ est une fonction dérivable et strictement positive sur un intervalle $I$, alors $\ln(u)$ est dérivable sur $I$ et :
 \[
   (\ln u)'(x) = \frac{u'(x)}{u(x)}.
 \]
@@ -57,5 +57,5 @@ Si $u$ est une fonction derivable et strictement positive sur un intervalle $I$,
 % ============================================================
 
 \erreurFrequente{
-\textbf{Oublier la derivee de $u$ dans $(\ln u)'=u'/u$.} Pour $f(x)=\ln(3x^2+1)$, la derivee est $\dfrac{6x}{3x^2+1}$ (avec $u'(x)=6x$ au numerateur), pas $\dfrac{1}{3x^2+1}$.
+\textbf{Oublier la dérivée de $u$ dans $(\ln u)'=u'/u$.} Pour $f(x)=\ln(3x^2+1)$, la dérivée est $\dfrac{6x}{3x^2+1}$ (avec $u'(x)=6x$ au numérateur), pas $\dfrac{1}{3x^2+1}$.
 }

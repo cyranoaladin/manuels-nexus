@@ -15,16 +15,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve confond avec une fraction dont le degre du numerateur est inferieur.",
-          "renvoi": "M1, etape 3"
+          "erreur": "L'élève confond avec une fraction dont le degré du numérateur est inferieur.",
+          "renvoi": "M1, étape 3"
         },
         "C": {
-          "erreur": "L'eleve a divise les termes constants (-1 et 5) au lieu des coefficients dominants.",
-          "renvoi": "M1, etape 3"
+          "erreur": "L'élève a divise les termes constants (-1 et 5) au lieu des coefficients dominants.",
+          "renvoi": "M1, étape 3"
         },
         "D": {
-          "erreur": "L'eleve pense que tout quotient de polynomes de meme degre diverge.",
-          "renvoi": "M1, etape 2"
+          "erreur": "L'élève pense que tout quotient de polynômes de même degré diverge.",
+          "renvoi": "M1, étape 2"
         }
       }
     },
@@ -41,16 +41,16 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "Conserver seulement le terme constant $1$ ignore que $x^2$ domine $-3x+1$ ; apres factorisation, le polynome se comporte comme $x^2$.",
+          "erreur": "Conserver seulement le terme constant $1$ ignore que $x^2$ domine $-3x+1$ ; après factorisation, le polynôme se comporte comme $x^2$.",
           "renvoi": "C1, terme preponderant"
         },
         "B": {
-          "erreur": "L'eleve a regarde le coefficient de $-3x$ au lieu de $x^2$.",
+          "erreur": "L'élève a regarde le coefficient de $-3x$ au lieu de $x^2$.",
           "renvoi": "C1, terme preponderant"
         },
         "D": {
-          "erreur": "L'eleve croit que $+\\infty - \\infty$ est toujours indetermine, meme apres factorisation.",
-          "renvoi": "M1, piege 1"
+          "erreur": "L'élève croit que $+\\infty - \\infty$ est toujours indetermine, même après factorisation.",
+          "renvoi": "M1, piège 1"
         }
       }
     },
@@ -59,23 +59,23 @@
       "capacite": "C1",
       "enonce": "La forme $\\dfrac{+\\infty}{+\\infty}$ est :",
       "options": {
-        "A": "egale a 1",
-        "B": "egale a $+\\infty$",
+        "A": "égale a 1",
+        "B": "égale a $+\\infty$",
         "C": "une forme indeterminee",
-        "D": "egale a 0"
+        "D": "égale a 0"
       },
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve simplifie mecaniquement infini/infini = 1.",
+          "erreur": "L'élève simplifie mecaniquement infini/infini = 1.",
           "renvoi": "C1, formes indeterminees"
         },
         "B": {
-          "erreur": "Conclure $+\\infty$ traite le symbole infini comme un nombre ; par exemple $x/x^2$ et $x^2/x$ ont pourtant des limites differentes.",
+          "erreur": "Conclure $+\\infty$ traite le symbole infini comme un nombre ; par exemple $x/x^2$ et $x^2/x$ ont pourtant des limites différentes.",
           "renvoi": "C1, formes indeterminees"
         },
         "D": {
-          "erreur": "Choisir $0$ applique a tort le resultat $1/x\\to0$ en $+\\infty$ a un quotient dont le numerateur et le denominateur tendent tous deux vers $+\\infty$.",
+          "erreur": "Choisir $0$ applique a tort le résultat $1/x\\to0$ en $+\\infty$ a un quotient dont le numérateur et le dénominateur tendent tous deux vers $+\\infty$.",
           "renvoi": "C1, formes indeterminees"
         }
       }
@@ -93,15 +93,15 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve confond avec $\\lim_{x \\to +\\infty} 1/x$.",
+          "erreur": "L'élève confond avec $\\lim_{x \\to +\\infty} 1/x$.",
           "renvoi": "C1, limite en un point"
         },
         "D": {
-          "erreur": "La limite $-\\infty$ correspond a $x\\to0^-$, ou $1/x$ est negatif ; ici $x\\to0^+$ et le quotient reste positif.",
+          "erreur": "La limite $-\\infty$ correspond a $x\\to0^-$, ou $1/x$ est négatif ; ici $x\\to0^+$ et le quotient reste positif.",
           "renvoi": "C1, limites a gauche/droite"
         },
         "B": {
-          "erreur": "L'eleve evalue l'inverse en une valeur non nulle au lieu de faire tendre x vers 0 : 1/x explose, il ne se stabilise pas a 1.",
+          "erreur": "L'élève evalue l'inverse en une valeur non nulle au lieu de faire tendre x vers 0 : 1/x explose, il ne se stabilise pas a 1.",
           "renvoi": "M1, limites en un point"
         }
       }
@@ -119,12 +119,12 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Ne retenir que $x\\to+\\infty$ ignore que $e^{-x}=1/e^x$ decroit plus vite ; la croissance comparee impose $x/e^x\\to0$.",
+          "erreur": "Ne retenir que $x\\to+\\infty$ ignore que $e^{-x}=1/e^x$ décroît plus vite ; la croissance comparee impose $x/e^x\\to0$.",
           "renvoi": "M3, croissances comparees"
         },
         "C": {
-          "erreur": "La valeur $1$ ne vient d'aucune simplification du produit ; la croissance comparee donne $x/e^x\\to0$, et non un quotient equivalent a $1$.",
-          "renvoi": "C3, resultat fondamental"
+          "erreur": "La valeur $1$ ne vient d'aucune simplification du produit ; la croissance comparee donne $x/e^x\\to0$, et non un quotient équivalent a $1$.",
+          "renvoi": "C3, résultat fondamental"
         },
         "D": {
           "erreur": "Signe errone : x et exp(-x) sont tous deux positifs pour x > 0, le produit ne peut pas tendre vers moins l'infini.",
@@ -145,12 +145,12 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "L'egalite $f(2)=0$ indique seulement un zero d'abscisse $2$ ; une asymptote horizontale depend d'une limite lorsque $x$ tend vers l'infini.",
-          "renvoi": "C2, definition AH"
+          "erreur": "L'égalité $f(2)=0$ indique seulement un zero d'abscisse $2$ ; une asymptote horizontale depend d'une limite lorsque $x$ tend vers l'infini.",
+          "renvoi": "C2, définition AH"
         },
         "B": {
-          "erreur": "Une limite infinie lorsque $x\\to2$ caracterise la droite verticale $x=2$ ; une asymptote horizontale exige une limite finie a l'infini.",
-          "renvoi": "C2, definition AV"
+          "erreur": "Une limite infinie lorsque $x\\to2$ caractérise la droite verticale $x=2$ ; une asymptote horizontale exige une limite finie a l'infini.",
+          "renvoi": "C2, définition AV"
         },
         "D": {
           "erreur": "Couper la droite $y=2$ en un point ne renseigne pas sur le comportement a l'infini ; seule la limite de $f(x)$ permet d'affirmer l'asymptote.",
@@ -171,16 +171,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve a pris le zero du numerateur au lieu du denominateur.",
-          "renvoi": "M2, etape 2"
+          "erreur": "L'élève a pris le zero du numérateur au lieu du dénominateur.",
+          "renvoi": "M2, étape 2"
         },
         "C": {
-          "erreur": "La droite $y=1$ est horizontale et provient de la limite du quotient a l'infini ; elle ne peut pas etre l'asymptote verticale demandee.",
-          "renvoi": "C2, definition AH vs AV"
+          "erreur": "La droite $y=1$ est horizontale et provient de la limite du quotient a l'infini ; elle ne peut pas être l'asymptote verticale demandee.",
+          "renvoi": "C2, définition AH vs AV"
         },
         "D": {
-          "erreur": "x = 0 n'annule pas le denominateur : la fonction y est definie ($f(0)=-1/3$), donc il n'y a pas d'asymptote verticale en 0.",
-          "renvoi": "M2, etape 1"
+          "erreur": "x = 0 n'annule pas le dénominateur : la fonction y est définie ($f(0)=-1/3$), donc il n'y a pas d'asymptote verticale en 0.",
+          "renvoi": "M2, étape 1"
         }
       }
     },
@@ -197,16 +197,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve confond avec le cas deg(num) < deg(den).",
-          "renvoi": "M1, etape 3"
+          "erreur": "L'élève confond avec le cas deg(num) < deg(den).",
+          "renvoi": "M1, étape 3"
         },
         "C": {
-          "erreur": "L'eleve a calcule le rapport des termes constants.",
-          "renvoi": "M1, etape 3"
+          "erreur": "L'élève a calcule le rapport des termes constants.",
+          "renvoi": "M1, étape 3"
         },
         "D": {
-          "erreur": "L'eleve conclut a l'absence d'asymptote horizontale des qu'il y a une asymptote verticale ; les deux sont independantes.",
-          "renvoi": "M2, etape 3"
+          "erreur": "L'élève conclut a l'absence d'asymptote horizontale des qu'il y a une asymptote verticale ; les deux sont indépendantes.",
+          "renvoi": "M2, étape 3"
         }
       }
     },
@@ -223,7 +223,7 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "La fonction $e^{-x}+3$ est definie pour tout reel, donc $x=3$ ne peut pas etre une asymptote verticale ; de plus sa limite vaut $3$, pas $0$.",
+          "erreur": "La fonction $e^{-x}+3$ est définie pour tout réel, donc $x=3$ ne peut pas être une asymptote verticale ; de plus sa limite vaut $3$, pas $0$.",
           "renvoi": "C2, AV seulement aux valeurs interdites"
         },
         "C": {
@@ -232,7 +232,7 @@
         },
         "D": {
           "erreur": "exp(-x) tend vers 0 en plus l'infini, donc f tend vers 3 : la droite y = 3 est bien asymptote horizontale.",
-          "renvoi": "M2, etape 3"
+          "renvoi": "M2, étape 3"
         }
       }
     },
@@ -249,16 +249,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "La limite est prise lorsque $x$ tend vers la valeur finie $5$ et devient infinie : elle definit l'asymptote verticale $x=5$, pas l'horizontale $y=5$.",
-          "renvoi": "C2, definitions"
+          "erreur": "La limite est prise lorsque $x$ tend vers la valeur finie $5$ et devient infinie : elle définit l'asymptote verticale $x=5$, pas l'horizontale $y=5$.",
+          "renvoi": "C2, définitions"
         },
         "C": {
-          "erreur": "$f(5)$ n'est pas defini en general, la limite n'est pas une valeur.",
-          "renvoi": "C2, definition AV"
+          "erreur": "$f(5)$ n'est pas défini en general, la limite n'est pas une valeur.",
+          "renvoi": "C2, définition AV"
         },
         "D": {
           "erreur": "Une limite infinie en 5 signifie que la courbe s'echappe vers le bas au voisinage de 5, elle ne coupe pas l'axe des abscisses en ce point.",
-          "renvoi": "M2, etape 2"
+          "renvoi": "M2, étape 2"
         }
       }
     },
@@ -275,15 +275,15 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve a inverse numerateur et denominateur dans la croissance comparee.",
+          "erreur": "L'élève a inverse numérateur et dénominateur dans la croissance comparee.",
           "renvoi": "C1, croissances comparees"
         },
         "D": {
-          "erreur": "La valeur $1/3$ provient d'une division sans fondement entre l'exposant de $e^x$ et le degre de $x^3$ ; la croissance comparee donne $+\\infty$.",
+          "erreur": "La valeur $1/3$ provient d'une division sans fondement entre l'exposant de $e^x$ et le degré de $x^3$ ; la croissance comparee donne $+\\infty$.",
           "renvoi": "C1, croissances comparees"
         },
         "B": {
-          "erreur": "L'eleve traite le quotient comme une forme indeterminee resolue par simplification ; c'est la croissance comparee qui tranche, l'exponentielle l'emportant sur toute puissance.",
+          "erreur": "L'élève traite le quotient comme une forme indeterminee resolue par simplification ; c'est la croissance comparee qui tranche, l'exponentielle l'emportant sur toute puissance.",
           "renvoi": "M3, croissances comparees"
         }
       }
@@ -301,7 +301,7 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve ne considere que $x^2 \\to +\\infty$ et oublie $\\mathrm{e}^x \\to 0$.",
+          "erreur": "L'élève ne considere que $x^2 \\to +\\infty$ et oublie $\\mathrm{e}^x \\to 0$.",
           "renvoi": "C1, croissances comparees"
         },
         "C": {
@@ -309,7 +309,7 @@
           "renvoi": "C1, croissances comparees"
         },
         "D": {
-          "erreur": "Resultat obtenu en evaluant en x = 0 au lieu de faire tendre x vers moins l'infini, ou l'exponentielle ecrase le facteur polynomial.",
+          "erreur": "Résultat obtenu en evaluant en x = 0 au lieu de faire tendre x vers moins l'infini, ou l'exponentielle ecrase le facteur polynomial.",
           "renvoi": "M3, croissances comparees"
         }
       }
@@ -327,7 +327,7 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "$+\\infty - \\infty$ est une FI, pas un resultat.",
+          "erreur": "$+\\infty - \\infty$ est une FI, pas un résultat.",
           "renvoi": "C1, formes indeterminees"
         },
         "D": {
@@ -336,33 +336,33 @@
         },
         "C": {
           "erreur": "Factoriser par $x^2$ est egalement valide avec la croissance comparee $\\mathrm{e}^x/x^2 \\to +\\infty$, mais ce n'est pas la reecriture demandee, qui utilise directement $x^2/\\mathrm{e}^x \\to 0$.",
-          "renvoi": "M3, methode de factorisation"
+          "renvoi": "M3, méthode de factorisation"
         }
       }
     },
     {
       "id": "Q14",
       "capacite": "C3",
-      "enonce": "Quelle methode au programme permet de demontrer $\\mathrm{e}^x \\geq 1 + x$ pour $x \\geq 0$ ?",
+      "enonce": "Quelle méthode au programme permet de démontrer $\\mathrm{e}^x \\geq 1 + x$ pour $x \\geq 0$ ?",
       "options": {
-        "A": "Recurrence",
-        "B": "Etude de $g(x) = \\mathrm{e}^x - 1 - x$",
+        "A": "Récurrence",
+        "B": "Étude de $g(x) = \\mathrm{e}^x - 1 - x$",
         "C": "Division euclidienne",
         "D": "Formule de Taylor"
       },
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "La recurrence s'applique aux entiers, pas aux reels.",
-          "renvoi": "C3, demonstration"
+          "erreur": "La récurrence s'applique aux entiers, pas aux réels.",
+          "renvoi": "C3, démonstration"
         },
         "C": {
-          "erreur": "La division euclidienne concerne les polynomes.",
-          "renvoi": "C3, demonstration"
+          "erreur": "La division euclidienne concerne les polynômes.",
+          "renvoi": "C3, démonstration"
         },
         "D": {
-          "erreur": "La formule de Taylor n'est pas au programme de terminale ; l'inegalite s'obtient par etude du signe de la fonction x -> exp(x) - 1 - x.",
-          "renvoi": "cours C3, inegalite de convexite"
+          "erreur": "La formule de Taylor n'est pas au programme de terminale ; l'inégalité s'obtient par étude du signe de la fonction x -> exp(x) - 1 - x.",
+          "renvoi": "cours C3, inégalité de convexité"
         }
       }
     },
@@ -379,7 +379,7 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve pense que $x^{100}$ croit plus vite que $\\mathrm{e}^x$.",
+          "erreur": "L'élève pense que $x^{100}$ croit plus vite que $\\mathrm{e}^x$.",
           "renvoi": "C1, croissances comparees"
         },
         "B": {
@@ -387,7 +387,7 @@
           "renvoi": "C1, croissances comparees"
         },
         "D": {
-          "erreur": "Meme confusion qu'en Q12 : l'exposant 100, si grand soit-il, ne change pas la hierarchie des croissances comparees.",
+          "erreur": "Même confusion qu'en Q12 : l'exposant 100, si grand soit-il, ne change pas la hierarchie des croissances comparees.",
           "renvoi": "M3, croissances comparees"
         }
       }

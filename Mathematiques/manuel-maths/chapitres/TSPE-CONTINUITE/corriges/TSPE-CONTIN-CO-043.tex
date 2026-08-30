@@ -24,15 +24,15 @@
 % END-VERIFY
 \begin{corrige}{TSPE-CONTIN-EX-043}
 
-\textbf{Q1.} $u_1 = \dfrac{1}{2}\left(2 + \dfrac32\right) = \dfrac{7}{4} = 1{,}75$ ; $u_2 = \dfrac{1}{2}\left(1{,}75 + \dfrac{3}{1{,}75}\right) \approx 1{,}7321429$ ; $u_3 \approx 1{,}7320508$. Des le rang $3$, les sept premieres decimales de $\sqrt3$ sont exactes : la convergence est remarquablement rapide.
+\textbf{Q1.} $u_1 = \dfrac{1}{2}\left(2 + \dfrac32\right) = \dfrac{7}{4} = 1{,}75$ ; $u_2 = \dfrac{1}{2}\left(1{,}75 + \dfrac{3}{1{,}75}\right) \approx 1{,}7321429$ ; $u_3 \approx 1{,}7320508$. Des le rang $3$, les sept premieres décimales de $\sqrt3$ sont exactes : la convergence est remarquablement rapide.
 
 \textbf{Q2.} Pour $x > 0$ : $\dfrac{1}{2}\left(x + \dfrac3x\right) = x$ equivaut a $x + \dfrac3x = 2x$, soit $\dfrac3x = x$, donc $x^2 = 3$. Sur $\left]0\,;+\infty\right[$ l'unique solution est $x = \sqrt3$.
 
 \textbf{Q3.} On calcule, pour $x > 0$ :
 \[ f(x) - \sqrt3 = \frac{x}{2} + \frac{3}{2x} - \sqrt3 = \frac{x^2 + 3 - 2\sqrt3\,x}{2x} = \frac{\left(x - \sqrt3\right)^2}{2x}. \]
-Le numerateur est un carre, donc positif, et $2x > 0$ : par consequent $f(x) \geq \sqrt3$ pour tout $x > 0$. Comme $u_0 = 2 > 0$ et que $f$ envoie les reels strictement positifs sur des reels superieurs a $\sqrt3 > 0$, tous les termes sont strictement positifs et, pour $n \geq 1$, $u_n = f(u_{n-1}) \geq \sqrt3$.
+Le numérateur est un carre, donc positif, et $2x > 0$ : par conséquent $f(x) \geq \sqrt3$ pour tout $x > 0$. Comme $u_0 = 2 > 0$ et que $f$ envoie les réels strictement positifs sur des réels superieurs a $\sqrt3 > 0$, tous les termes sont strictement positifs et, pour $n \geq 1$, $u_n = f(u_{n-1}) \geq \sqrt3$.
 
-\textbf{Q4.} $f(x) - x = \dfrac{x}{2} + \dfrac{3}{2x} - x = \dfrac{3 - x^2}{2x}$. Pour $n \geq 1$ on a $u_n \geq \sqrt3$, donc $u_n^2 \geq 3$ et $3 - u_n^2 \leq 0$ ; comme $2u_n > 0$, on obtient $u_{n+1} - u_n = f(u_n) - u_n \leq 0$. La suite est donc decroissante a partir du rang $1$.
+\textbf{Q4.} $f(x) - x = \dfrac{x}{2} + \dfrac{3}{2x} - x = \dfrac{3 - x^2}{2x}$. Pour $n \geq 1$ on a $u_n \geq \sqrt3$, donc $u_n^2 \geq 3$ et $3 - u_n^2 \leq 0$ ; comme $2u_n > 0$, on obtient $u_{n+1} - u_n = f(u_n) - u_n \leq 0$. La suite est donc décroissante a partir du rang $1$.
 
-\textbf{Q5.} A partir du rang $1$, $(u_n)$ est decroissante et minoree par $\sqrt3$ : elle converge vers un reel $\ell \geq \sqrt3$. La fonction $f$ est continue sur $\left]0\,;+\infty\right[$ (quotient dont le denominateur ne s'annule pas), donc $\ell$ verifie $f(\ell) = \ell$, c'est-a-dire $\ell^2 = 3$ d'apres Q2. Comme $\ell \geq \sqrt3 > 0$, on conclut $\ell = \sqrt3$.
+\textbf{Q5.} A partir du rang $1$, $(u_n)$ est décroissante et minorée par $\sqrt3$ : elle converge vers un réel $\ell \geq \sqrt3$. La fonction $f$ est continue sur $\left]0\,;+\infty\right[$ (quotient dont le dénominateur ne s'annule pas), donc $\ell$ vérifie $f(\ell) = \ell$, c'est-a-dire $\ell^2 = 3$ d'après Q2. Comme $\ell \geq \sqrt3 > 0$, on conclut $\ell = \sqrt3$.
 \end{corrige}

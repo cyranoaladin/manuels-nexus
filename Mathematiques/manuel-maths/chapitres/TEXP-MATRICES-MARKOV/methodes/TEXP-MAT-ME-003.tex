@@ -10,26 +10,26 @@
 % assert U1 == Matrix([3, 4]) and U2 == Matrix([Rational(5,2), Rational(10,3)])
 % assert A**2*(U0 - L) + L == U2
 % END-VERIFY
-\begin{fichemethode}{M3}{Etudier une suite U(n+1) = A U(n) + C}
+\begin{fichemethode}{M3}{Étudier une suite U(n+1) = A U(n) + C}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsqu'une suite de matrices colonnes verifie
-  $U_{n+1} = A\,U_n + C$ et que l'enonce demande une expression de $U_n$, son
+  Utiliser cette méthode lorsqu'une suite de matrices colonnes vérifie
+  $U_{n+1} = A\,U_n + C$ et que l'énoncé demande une expression de $U_n$, son
   comportement, ou un etat stable.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Chercher l'etat stable $L$ : resoudre $L = A\,L + C$, c'est-a-dire
-      le systeme lineaire $(I - A)L = C$ (inverse de $I - A$ ou resolution
+    \item Chercher l'etat stable $L$ : résoudre $L = A\,L + C$, c'est-a-dire
+      le système linéaire $(I - A)L = C$ (inverse de $I - A$ ou résolution
       directe).
     \item Poser la suite auxiliaire $V_n = U_n - L$.
     \item Montrer que $V_{n+1} = A\,V_n$ :
       $V_{n+1} = A U_n + C - (AL + C) = A(U_n - L)$.
-    \item En deduire $V_n = A^n V_0$, puis
+    \item En déduire $V_n = A^n V_0$, puis
       $U_n = A^n\left(U_0 - L\right) + L$.
-    \item Etudier le comportement : si $A^n \to 0$ (coefficients), alors
-      $U_n \to L$ — interpreter l'etat stable dans le contexte.
+    \item Étudier le comportement : si $A^n \to 0$ (coefficients), alors
+      $U_n \to L$ — interpréter l'etat stable dans le contexte.
   \end{enumerate}
 }
 
@@ -46,8 +46,8 @@
   \end{pmatrix}$.
 
   \medskip
-  \commentaireMarge{Suite auxiliaire geometrique matricielle.}%
-  $V_n = U_n - L$ verifie $V_{n+1} = A V_n$, donc $V_n = A^n V_0$ avec
+  \commentaireMarge{Suite auxiliaire géométrique matricielle.}%
+  $V_n = U_n - L$ vérifie $V_{n+1} = A V_n$, donc $V_n = A^n V_0$ avec
   $V_0 = \begin{pmatrix} 2\\ 3 \end{pmatrix}$ :
   $U_n = A^n \begin{pmatrix} 2\\ 3 \end{pmatrix} + \begin{pmatrix} 2\\ 3
   \end{pmatrix} = \begin{pmatrix} 2 + 2/2^n\\ 3 + 3/3^n \end{pmatrix}$.
@@ -59,17 +59,17 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Ecrire $U_n = A^n U_0 + C$ : la constante ne se
+    \item \textbf{Piège 1.} Écrire $U_n = A^n U_0 + C$ : la constante ne se
       propage pas ainsi — passer par l'etat stable.
-    \item \textbf{Piege 2.} Inverser $I - A$ sans verifier qu'il est
+    \item \textbf{Piège 2.} Inverser $I - A$ sans vérifier qu'il est
       inversible ($\det(I - A) \neq 0$).
-    \item \textbf{Piege 3.} Multiplier par $A$ du mauvais cote dans la suite
+    \item \textbf{Piège 3.} Multiplier par $A$ du mauvais cote dans la suite
       auxiliaire ($V_{n+1} = A V_n$, l'ordre compte).
   \end{itemize}
 }
 
 \verifier{%
-  Controler la formule sur $U_1$ et $U_2$ par la recurrence directe, verifier
+  Contrôler la formule sur $U_1$ et $U_2$ par la récurrence directe, vérifier
   $L = AL + C$, et confronter la limite au sens concret de l'etat stable.
 }
 

@@ -35,7 +35,7 @@
 \textbf{Q1.} Pour $x > 0$ :
 \[ \frac{1}{2}\left(x + \frac{a}{x}\right) - \sqrt a = \frac{x^2 + a - 2\sqrt a\,x}{2x} = \frac{\left(x - \sqrt a\right)^2}{2x}. \]
 
-\textbf{Q2.} Si $u_n > 0$, alors $u_{n+1} = \dfrac{1}{2}\left(u_n + \dfrac{a}{u_n}\right) > 0$ : tous les termes sont strictement positifs. D'apres Q1, $u_{n+1} - \sqrt a = \dfrac{\left(u_n - \sqrt a\right)^2}{2u_n}$, quotient d'un carre par un reel strictement positif, donc positif ou nul. Ainsi $u_{n+1} \geq \sqrt a$ pour tout $n \geq 0$, c'est-a-dire $u_n \geq \sqrt a$ des le rang $1$, quel que soit le point de depart strictement positif.
+\textbf{Q2.} Si $u_n > 0$, alors $u_{n+1} = \dfrac{1}{2}\left(u_n + \dfrac{a}{u_n}\right) > 0$ : tous les termes sont strictement positifs. D'après Q1, $u_{n+1} - \sqrt a = \dfrac{\left(u_n - \sqrt a\right)^2}{2u_n}$, quotient d'un carre par un réel strictement positif, donc positif ou nul. Ainsi $u_{n+1} \geq \sqrt a$ pour tout $n \geq 0$, c'est-a-dire $u_n \geq \sqrt a$ des le rang $1$, quel que soit le point de depart strictement positif.
 
 \textbf{Q3.} Pour $n \geq 1$, on a $u_n \geq \sqrt a$, donc $2u_n \geq 2\sqrt a$ et
 \[ \left|u_{n+1} - \sqrt a\right| = \frac{\left(u_n - \sqrt a\right)^2}{2u_n} \leq \frac{\left(u_n - \sqrt a\right)^2}{2\sqrt a} = \frac{1}{2\sqrt a}\left|u_n - \sqrt a\right|^2. \]
@@ -53,9 +53,9 @@ $4$ & $1{,}732050807568877\dots$ & $\approx 1{,}72 \times 10^{-18}$ \\
 \hline
 \end{tabular}
 \end{center}
-Le nombre de decimales exactes passe d'environ $2$ a $4$, puis $8$, puis $17$ : il \textbf{double} a chaque etape.
+Le nombre de décimales exactes passe d'environ $2$ a $4$, puis $8$, puis $17$ : il \textbf{double} a chaque étape.
 
-\textbf{Q5.} A l'exercice \textsc{ex-046}, l'ecart etait multiplie par la constante $\dfrac{1}{2\sqrt2} \approx 0{,}354$ : il decroit alors comme une suite geometrique, et l'on gagne un nombre \emph{fixe} de decimales par etape (ici environ une demi-decimale). Il fallait $14$ iterations pour atteindre $10^{-6}$.
+\textbf{Q5.} A l'exercice \textsc{ex-046}, l'ecart etait multiplie par la constante $\dfrac{1}{2\sqrt2} \approx 0{,}354$ : il décroît alors comme une suite géométrique, et l'on gagne un nombre \emph{fixe} de décimales par étape (ici environ une demi-décimale). Il fallait $14$ iterations pour atteindre $10^{-6}$.
 
-Ici, l'ecart est majore par une constante fois le \emph{carre} de l'ecart precedent. Des que l'on est un peu proche de la limite, chaque etape double le nombre de decimales exactes : la precision $10^{-6}$ est atteinte des la troisieme iteration. C'est ce qu'on appelle une convergence \emph{quadratique}, et c'est la raison pour laquelle l'algorithme de Heron reste utilise pour le calcul effectif des racines carrees.
+Ici, l'ecart est majoré par une constante fois le \emph{carre} de l'ecart précédent. Des que l'on est un peu proche de la limite, chaque étape double le nombre de décimales exactes : la precision $10^{-6}$ est atteinte des la troisième iteration. C'est ce qu'on appelle une convergence \emph{quadratique}, et c'est la raison pour laquelle l'algorithme de Heron reste utilise pour le calcul effectif des racines carrees.
 \end{corrige}

@@ -1,22 +1,22 @@
 % META: {"id": "1SPE-TRIGO-ME-001", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "sources_inspiration": [], "status": "generated"}
-\begin{fichemethode}{M1}{Placer un point sur le cercle trigonometrique et trouver la mesure principale}
+\begin{fichemethode}{M1}{Placer un point sur le cercle trigonométrique et trouver la mesure principale}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande de placer un angle sur le cercle trigonometrique,
-  de convertir degres/radians, ou de trouver la mesure principale d'un angle.
+  Utiliser cette méthode lorsque l'énoncé demande de placer un angle sur le cercle trigonométrique,
+  de convertir degrés/radians, ou de trouver la mesure principale d'un angle.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Pour convertir de degres en radians : multiplier par $\dfrac{\pi}{180}$.
-    \item Pour convertir de radians en degres : multiplier par $\dfrac{180}{\pi}$.
+    \item Pour convertir de degrés en radians : multiplier par $\dfrac{\pi}{180}$.
+    \item Pour convertir de radians en degrés : multiplier par $\dfrac{180}{\pi}$.
     \item Pour trouver la mesure principale d'un angle $t$ :
       \begin{itemize}
-        \item Ajouter ou retrancher des multiples de $2\pi$ jusqu'a obtenir un reel dans $]-\pi\,;\,\pi]$.
+        \item Ajouter ou retrancher des multiples de $2\pi$ jusqu'a obtenir un réel dans $]-\pi\,;\,\pi]$.
         \item Concretement : calculer $\dfrac{t}{2\pi}$, garder la partie fractionnaire, multiplier par $2\pi$.
       \end{itemize}
     \item Pour placer le point sur le cercle : partir de $A = (1;0)$ et parcourir l'arc de longueur $|t|$
-      dans le sens positif (si $t > 0$) ou negatif (si $t < 0$).
+      dans le sens positif (si $t > 0$) ou négatif (si $t < 0$).
   \end{enumerate}
 }
 
@@ -35,14 +35,14 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Confondre $2\pi$ et $\pi$ : on ajoute ou retranche $2\pi$ (un tour complet), pas $\pi$.
-    \item \textbf{Piege 2.} Oublier que la mesure principale doit etre dans $]-\pi;\pi]$ (borne $-\pi$ exclue, borne $\pi$ incluse).
-    \item \textbf{Piege 3.} Melanger degres et radians dans un meme calcul.
+    \item \textbf{Piège 1.} Confondre $2\pi$ et $\pi$ : on ajoute ou retranche $2\pi$ (un tour complet), pas $\pi$.
+    \item \textbf{Piège 2.} Oublier que la mesure principale doit être dans $]-\pi;\pi]$ (borne $-\pi$ exclue, borne $\pi$ incluse).
+    \item \textbf{Piège 3.} Melanger degrés et radians dans un même calcul.
   \end{itemize}
 }
 
 \verifier{%
-  Verifier que la mesure principale $t_0$ est bien dans $]-\pi;\pi]$ et que $t - t_0$ est un multiple de $2\pi$.
+  Vérifier que la mesure principale $t_0$ est bien dans $]-\pi;\pi]$ et que $t - t_0$ est un multiple de $2\pi$.
 }
 
 \sEntrainer{\refExos{M1}}

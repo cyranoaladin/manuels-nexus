@@ -3,10 +3,10 @@
 \section{Croissance comparee de $x^n$ et $\mathrm{e}^x$}
 
 % ============================================================
-% STRATE 1 — Theoreme et demonstration exigible
+% STRATE 1 — Théorème et démonstration exigible
 % ============================================================
 
-\subsection{Resultat fondamental}
+\subsection{Résultat fondamental}
 
 \theoreme{
 Pour tout entier naturel $n$ :
@@ -16,16 +16,16 @@ Pour tout entier naturel $n$ :
 Autrement dit, l'exponentielle croit plus vite que toute puissance de $x$ en $+\infty$.
 }
 
-\subsection{Demonstration exigible}
+\subsection{Démonstration exigible}
 
 \demonstration{
-\textbf{Etape 1 : cas $n = 1$, c'est-a-dire $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x} = +\infty$.}
+\textbf{Étape 1 : cas $n = 1$, c'est-a-dire $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x} = +\infty$.}
 
 \medskip
 
-Pour tout $x \geq 0$, on a l'inegalite $\mathrm{e}^x \geq 1 + x$ (admise, ou obtenue par etude de $g(x) = \mathrm{e}^x - 1 - x$ qui verifie $g'(x) = \mathrm{e}^x - 1 \geq 0$ pour $x \geq 0$, $g(0) = 0$, donc $g(x) \geq 0$).
+Pour tout $x \geq 0$, on a l'inégalité $\mathrm{e}^x \geq 1 + x$ (admise, ou obtenue par étude de $g(x) = \mathrm{e}^x - 1 - x$ qui vérifie $g'(x) = \mathrm{e}^x - 1 \geq 0$ pour $x \geq 0$, $g(0) = 0$, donc $g(x) \geq 0$).
 
-Appliquons cette inegalite a $x/2$ : pour tout $x \geq 0$,
+Appliquons cette inégalité a $x/2$ : pour tout $x \geq 0$,
 \[
   \mathrm{e}^{x/2} \geq 1 + \frac{x}{2}.
 \]
@@ -47,7 +47,7 @@ Or $\lim_{x \to +\infty} \dfrac{x}{4} = +\infty$, donc par comparaison :
 
 \medskip
 
-\textbf{Etape 2 : cas general, c'est-a-dire $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x^n} = +\infty$ pour tout $n \geq 1$.}
+\textbf{Étape 2 : cas general, c'est-a-dire $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x^n} = +\infty$ pour tout $n \geq 1$.}
 
 \medskip
 
@@ -56,7 +56,7 @@ On pose $X = x/n$, soit $x = nX$. Quand $x \to +\infty$, $X \to +\infty$.
   \frac{\mathrm{e}^x}{x^n} = \frac{\mathrm{e}^{nX}}{(nX)^n} = \frac{(\mathrm{e}^X)^n}{n^n \, X^n} = \frac{1}{n^n}\left(\frac{\mathrm{e}^X}{X}\right)^n.
 \]
 
-D'apres l'etape 1, $\dfrac{\mathrm{e}^X}{X} \to +\infty$ quand $X \to +\infty$.
+D'après l'étape 1, $\dfrac{\mathrm{e}^X}{X} \to +\infty$ quand $X \to +\infty$.
 
 Donc $\left(\dfrac{\mathrm{e}^X}{X}\right)^n \to +\infty$, et $\dfrac{\mathrm{e}^x}{x^n} \to +\infty$.
 }
@@ -74,7 +74,7 @@ Pour tout entier naturel $n$ :
 \[
   x^n \, \mathrm{e}^x = (-X)^n \, \mathrm{e}^{-X} = (-1)^n \frac{X^n}{\mathrm{e}^X} \to 0
 \]
-d'apres la premiere limite.
+d'après la première limite.
 
 \exemple{
 $\lim_{x \to +\infty} x^{100}\, \mathrm{e}^{-x} = \lim_{x \to +\infty} \dfrac{x^{100}}{\mathrm{e}^x} = 0$.
@@ -97,7 +97,7 @@ $\lim_{x \to -\infty} x^2 \, \mathrm{e}^x = 0$ par croissances comparees.
 % ============================================================
 
 \margeAppui{
-\textbf{Hierarchie des croissances en $+\infty$ (n $\geq$ 2), par ordre croissant :} $\ln x$, puis $x^{1/n}$, puis $x$, puis $x^n$, puis $\mathrm{e}^x$. Chaque fonction croit infiniment plus vite que la precedente. Pour le programme de terminale, on retient surtout $x^n \ll \mathrm{e}^x$.
+\textbf{Hierarchie des croissances en $+\infty$ (n $\geq$ 2), par ordre croissant :} $\ln x$, puis $x^{1/n}$, puis $x$, puis $x^n$, puis $\mathrm{e}^x$. Chaque fonction croit infiniment plus vite que la précédente. Pour le programme de terminale, on retient surtout $x^n \ll \mathrm{e}^x$.
 }
 
 \margeAppui{
@@ -107,11 +107,11 @@ $\lim_{x \to -\infty} x^2 \, \mathrm{e}^x = 0$ par croissances comparees.
 \erreurFrequente{
 \textbf{Appliquer les croissances comparees en $-\infty$ sans changement de variable.}
 
-La limite $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x^n} = +\infty$ est un resultat en $+\infty$. En $-\infty$, on pose $X = -x$ ou on utilise la consequence $\lim_{x \to -\infty} x^n\,\mathrm{e}^x = 0$.
+La limite $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x^n} = +\infty$ est un résultat en $+\infty$. En $-\infty$, on pose $X = -x$ ou on utilise la consequence $\lim_{x \to -\infty} x^n\,\mathrm{e}^x = 0$.
 }
 
 \erreurFrequente{
-\textbf{Ecrire $\mathrm{e}^x - x^n = \mathrm{e}^x$ « car l'exponentielle domine ».}
+\textbf{Écrire $\mathrm{e}^x - x^n = \mathrm{e}^x$ « car l'exponentielle domine ».}
 
 Les croissances comparees donnent le comportement du \emph{rapport}, pas de la difference. Pour la difference $\mathrm{e}^x - x^n$, il faut factoriser par $\mathrm{e}^x$ et utiliser $\dfrac{x^n}{\mathrm{e}^x} \to 0$.
 }

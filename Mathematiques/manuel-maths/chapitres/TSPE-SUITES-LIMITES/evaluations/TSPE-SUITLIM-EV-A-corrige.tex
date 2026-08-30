@@ -37,7 +37,7 @@
 % assert abs(u4[2] - 3**0.75) < 1e-10
 % END-VERIFY
 
-\textbf{Corrige de l'evaluation A — TSPE-SUITLIM-EV-A}
+\textbf{Corrige de l'évaluation A — TSPE-SUITLIM-EV-A}
 
 \bigskip
 
@@ -67,7 +67,7 @@
 
 \textit{Heredite.} Supposons $4^n \geq 3n+1$. $4^{n+1} = 4 \times 4^n \geq 4(3n+1) = 12n + 4$. Or $12n + 4 \geq 3(n+1) + 1 = 3n + 4$ (car $9n \geq 0$). Donc $4^{n+1} \geq 3(n+1)+1$. $\mathcal{P}(n+1)$ vraie.
 
-\textit{Conclusion.} Par recurrence, $4^n \geq 3n+1$ pour tout $n \in \mathbb{N}$.
+\textit{Conclusion.} Par récurrence, $4^n \geq 3n+1$ pour tout $n \in \mathbb{N}$.
 
 \textbf{2.} $3n + 1 \to +\infty$ et $4^n \geq 3n + 1$. Par comparaison, $\boxed{\lim 4^n = +\infty}$.
 
@@ -79,13 +79,13 @@
 
 \textbf{Exercice 3.}
 
-\textbf{1.} $u_0 = 500$. Chaque annee, il reste $90\,\%$ de la population plus $80$ : $u_{n+1} = 0{,}9\,u_n + 80$.
+\textbf{1.} $u_0 = 500$. Chaque année, il reste $90\,\%$ de la population plus $80$ : $u_{n+1} = 0{,}9\,u_n + 80$.
 
 \textbf{2.} $u_1 = 0{,}9 \times 500 + 80 = 530$. $u_2 = 0{,}9 \times 530 + 80 = 557$.
 
 \textbf{3.} $\ell = 0{,}9\ell + 80 \Rightarrow 0{,}1\ell = 80 \Rightarrow \ell = 800$.
 
-$v_n = u_n - 800$, $v_{n+1} = 0{,}9(u_n - 800) = 0{,}9\,v_n$. Geometrique de raison $0{,}9$, $v_0 = -300$.
+$v_n = u_n - 800$, $v_{n+1} = 0{,}9(u_n - 800) = 0{,}9\,v_n$. Géométrique de raison $0{,}9$, $v_0 = -300$.
 
 $v_n = -300 \times 0{,}9^n$, donc $u_n = 800 - 300 \times 0{,}9^n$.
 
@@ -103,6 +103,6 @@ $v_n = -300 \times 0{,}9^n$, donc $u_n = 800 - 300 \times 0{,}9^n$.
 
 \textbf{2.} $\mathcal{P}(n)$ : « $0 < u_n \leq 3$ ». $u_0 = 1 \in ]0, 3]$. Si $0 < u_n \leq 3$ : $u_{n+1} = \sqrt{3u_n} > 0$ et $u_{n+1} = \sqrt{3u_n} \leq \sqrt{3 \times 3} = \sqrt{9} = 3$. Vrai.
 
-\textbf{3.} $u_{n+1} \geq u_n \iff \sqrt{3u_n} \geq u_n \iff 3u_n \geq u_n^2$ (car $u_n > 0$) $\iff u_n(3 - u_n) \geq 0$. Or $0 < u_n \leq 3$, donc $3 - u_n \geq 0$ et $u_n > 0$. L'inegalite est verifiee. $(u_n)$ est croissante.
+\textbf{3.} $u_{n+1} \geq u_n \iff \sqrt{3u_n} \geq u_n \iff 3u_n \geq u_n^2$ (car $u_n > 0$) $\iff u_n(3 - u_n) \geq 0$. Or $0 < u_n \leq 3$, donc $3 - u_n \geq 0$ et $u_n > 0$. L'inégalité est verifiee. $(u_n)$ est croissante.
 
-\textbf{4.} Croissante et majoree par $3$ : converge (theoreme). Si $\ell = \lim u_n$, alors $\ell = \sqrt{3\ell}$, $\ell^2 = 3\ell$, $\ell(\ell - 3) = 0$. Comme $\ell \geq u_0 = 1 > 0$, on obtient $\boxed{\ell = 3}$.
+\textbf{4.} Croissante et majorée par $3$ : converge (théorème). Si $\ell = \lim u_n$, alors $\ell = \sqrt{3\ell}$, $\ell^2 = 3\ell$, $\ell(\ell - 3) = 0$. Comme $\ell \geq u_0 = 1 > 0$, on obtient $\boxed{\ell = 3}$.

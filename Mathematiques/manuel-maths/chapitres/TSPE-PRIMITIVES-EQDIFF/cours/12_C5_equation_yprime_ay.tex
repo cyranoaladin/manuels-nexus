@@ -3,41 +3,41 @@
 \section{Équation différentielle $y' = ay$}
 
 % ============================================================
-% STRATE 1 — Demonstration exigible
+% STRATE 1 — Démonstration exigible
 % ============================================================
 
 \definition[1]{
-Une \textbf{equation differentielle} est une equation dont l'inconnue est une fonction $y$, reliant $y$ a sa (ou ses) derivee(s). Une \textbf{solution} sur un intervalle $I$ est une fonction derivable sur $I$ qui verifie l'equation pour tout $x \in I$.
+Une \textbf{équation différentielle} est une équation dont l'inconnue est une fonction $y$, reliant $y$ a sa (ou ses) dérivée(s). Une \textbf{solution} sur un intervalle $I$ est une fonction dérivable sur $I$ qui vérifie l'équation pour tout $x \in I$.
 }
 
 \theoreme{
-Soit $a \in \mathbb{R}$. Les solutions sur $\mathbb{R}$ de l'equation differentielle $y' = ay$ sont exactement les fonctions
+Soit $a \in \mathbb{R}$. Les solutions sur $\mathbb{R}$ de l'équation différentielle $y' = ay$ sont exactement les fonctions
 \[
   x \mapsto C\,\mathrm{e}^{ax}, \qquad C \in \mathbb{R}.
 \]
 }
 
 \demonstration{
-\textbf{Les fonctions $C\mathrm{e}^{ax}$ sont solutions.} Pour $y(x) = C\mathrm{e}^{ax}$, on a $y'(x) = C \times a\,\mathrm{e}^{ax} = a \times \left(C\mathrm{e}^{ax}\right) = a\,y(x)$ : l'equation est bien verifiee.
+\textbf{Les fonctions $C\mathrm{e}^{ax}$ sont solutions.} Pour $y(x) = C\mathrm{e}^{ax}$, on a $y'(x) = C \times a\,\mathrm{e}^{ax} = a \times \left(C\mathrm{e}^{ax}\right) = a\,y(x)$ : l'équation est bien verifiee.
 
 \textbf{Il n'y a pas d'autre solution.} Soit $y$ une solution de $y'=ay$ sur $\mathbb{R}$. Considerons la fonction $z(x) = y(x)\,\mathrm{e}^{-ax}$.
 
-$z$ est derivable (produit de fonctions derivables) et :
+$z$ est dérivable (produit de fonctions derivables) et :
 \[
   z'(x) = y'(x)\,\mathrm{e}^{-ax} + y(x) \times (-a)\,\mathrm{e}^{-ax} = \left(y'(x) - a\,y(x)\right) \mathrm{e}^{-ax}.
 \]
 
 Comme $y'=ay$, on a $y'(x) - a y(x) = 0$ pour tout $x$, donc $z'(x) = 0$ sur $\mathbb{R}$.
 
-D'apres la propriete admise (une fonction de derivee nulle sur un intervalle est constante), $z$ est constante : il existe $C \in \mathbb{R}$ tel que $z(x) = C$ pour tout $x$, c'est-a-dire $y(x)\,\mathrm{e}^{-ax} = C$, soit $y(x) = C\,\mathrm{e}^{ax}$.
+D'après la propriété admise (une fonction de dérivée nulle sur un intervalle est constante), $z$ est constante : il existe $C \in \mathbb{R}$ tel que $z(x) = C$ pour tout $x$, c'est-a-dire $y(x)\,\mathrm{e}^{-ax} = C$, soit $y(x) = C\,\mathrm{e}^{ax}$.
 }
 
 \margeAppui{
-La technique de la demonstration (multiplier par $\mathrm{e}^{-ax}$ pour faire apparaitre une derivee nulle) est caracteristique de ce type d'equation differentielle : elle se generalise a $y'=ay+b$ et $y'=ay+f$.
+La technique de la démonstration (multiplier par $\mathrm{e}^{-ax}$ pour faire apparaitre une dérivée nulle) est caracteristique de ce type d'équation différentielle : elle se generalise a $y'=ay+b$ et $y'=ay+f$.
 }
 
 \exemple{
-Determiner la solution de $y' = 3y$ telle que $y(0) = 5$.
+Déterminer la solution de $y' = 3y$ telle que $y(0) = 5$.
 
 Les solutions sont $y(x) = C\mathrm{e}^{3x}$. La condition $y(0)=5$ donne $C\mathrm{e}^0 = C = 5$. La solution cherchee est $y(x) = 5\mathrm{e}^{3x}$.
 
@@ -55,5 +55,5 @@ Les solutions sont $y(x) = C\mathrm{e}^{3x}$. La condition $y(0)=5$ donne $C\mat
 % ============================================================
 
 \erreurFrequente{
-\textbf{Oublier une famille de solutions (la constante $C$).} L'equation $y'=ay$ a une infinite de solutions (une pour chaque $C \in \mathbb{R}$), pas une seule. Une condition supplementaire (comme $y(0)=\ldots$) est necessaire pour determiner $C$ de maniere unique.
+\textbf{Oublier une famille de solutions (la constante $C$).} L'équation $y'=ay$ a une infinite de solutions (une pour chaque $C \in \mathbb{R}$), pas une seule. Une condition supplementaire (comme $y(0)=\ldots$) est nécessaire pour déterminer $C$ de maniere unique.
 }

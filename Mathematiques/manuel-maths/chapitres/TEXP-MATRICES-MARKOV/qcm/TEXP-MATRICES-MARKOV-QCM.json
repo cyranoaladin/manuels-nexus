@@ -5,12 +5,12 @@
     {
       "id": "Q1",
       "capacite": "C4",
-      "enonce": "Une matrice de transition d'une chaine de Markov a pour propriete :",
+      "enonce": "Une matrice de transition d'une chaine de Markov a pour propriété :",
       "correcte": "B",
       "options": {
         "A": "La somme des colonnes vaut 1",
         "B": "La somme de chaque ligne vaut 1",
-        "C": "Tous ses coefficients sont negatifs",
+        "C": "Tous ses coefficients sont négatifs",
         "D": "Elle est toujours symetrique"
       },
       "diagnostics": {
@@ -19,7 +19,7 @@
           "renvoi": "C4"
         },
         "C": {
-          "erreur": "Les probabilites sont positives. Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1.",
+          "erreur": "Les probabilités sont positives. Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1.",
           "renvoi": "C4"
         },
         "D": {
@@ -57,7 +57,7 @@
     {
       "id": "Q3",
       "capacite": "C7",
-      "enonce": "Un etat stable $X$ d'une chaine de Markov verifie :",
+      "enonce": "Un etat stable $X$ d'une chaine de Markov vérifie :",
       "correcte": "C",
       "options": {
         "A": "$P X = X$",
@@ -83,7 +83,7 @@
     {
       "id": "Q4",
       "capacite": "C3",
-      "enonce": "Une suite de matrices colonnes verifie $U_{n+1}=AU_n+C$. Une solution constante $U$ satisfait :",
+      "enonce": "Une suite de matrices colonnes vérifie $U_{n+1}=AU_n+C$. Une solution constante $U$ satisfait :",
       "correcte": "B",
       "options": {
         "A": "$AU=C$",

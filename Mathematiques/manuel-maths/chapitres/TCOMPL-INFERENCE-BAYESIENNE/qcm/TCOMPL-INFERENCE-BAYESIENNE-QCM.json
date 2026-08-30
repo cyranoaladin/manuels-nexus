@@ -19,7 +19,7 @@
           "renvoi": "C2"
         },
         "C": {
-          "erreur": "Independance non supposee. La formule de Bayes est P(A|B)=P(B|A)P(A)/P(B), lorsque P(B)>0.",
+          "erreur": "Indépendance non supposee. La formule de Bayes est P(A|B)=P(B|A)P(A)/P(B), lorsque P(B)>0.",
           "renvoi": "C2"
         },
         "D": {
@@ -31,7 +31,7 @@
     {
       "id": "Q2",
       "capacite": "C1",
-      "enonce": "Si A et B sont independants, alors $P(A \\cap B) =$",
+      "enonce": "Si A et B sont indépendants, alors $P(A \\cap B) =$",
       "correcte": "C",
       "options": {
         "A": "$P(A) + P(B)$",
@@ -41,11 +41,11 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Formule d'evenements disjoints. L'indépendance donne P(A inter B)=P(A)P(B).",
+          "erreur": "Formule d'événements disjoints. L'indépendance donne P(A inter B)=P(A)P(B).",
           "renvoi": "C1"
         },
         "B": {
-          "erreur": "Probabilite conditionnelle. L'indépendance donne P(A inter B)=P(A)P(B).",
+          "erreur": "Probabilité conditionnelle. L'indépendance donne P(A inter B)=P(A)P(B).",
           "renvoi": "C1"
         },
         "D": {
@@ -57,7 +57,7 @@
     {
       "id": "Q3",
       "capacite": "C1",
-      "enonce": "La formule des probabilites totales pour une partition $(A_k)$ s'ecrit $P(B) =$",
+      "enonce": "La formule des probabilités totales pour une partition $(A_k)$ s'ecrit $P(B) =$",
       "correcte": "B",
       "options": {
         "A": "$\\sum P(A_k)$",
@@ -83,17 +83,17 @@
     {
       "id": "Q4",
       "capacite": "C3",
-      "enonce": "En inference bayesienne, la probabilite $P(A)$ avant de connaitre B s'appelle :",
+      "enonce": "En inference bayesienne, la probabilité $P(A)$ avant de connaitre B s'appelle :",
       "correcte": "D",
       "options": {
-        "A": "La probabilite a posteriori",
+        "A": "La probabilité a posteriori",
         "B": "La vraisemblance",
         "C": "La valeur p",
-        "D": "La probabilite a priori"
+        "D": "La probabilité a priori"
       },
       "diagnostics": {
         "A": {
-          "erreur": "P(A|B) est la probabilite a posteriori. La probabilité attribuée à A avant l'observation de B est la probabilité a priori.",
+          "erreur": "P(A|B) est la probabilité a posteriori. La probabilité attribuée à A avant l'observation de B est la probabilité a priori.",
           "renvoi": "C3"
         },
         "B": {
@@ -101,7 +101,7 @@
           "renvoi": "C3"
         },
         "C": {
-          "erreur": "Terme de test d'hypothese. La probabilité attribuée à A avant l'observation de B est la probabilité a priori.",
+          "erreur": "Terme de test d'hypothèse. La probabilité attribuée à A avant l'observation de B est la probabilité a priori.",
           "renvoi": "C3"
         }
       }
@@ -113,8 +113,8 @@
       "correcte": "A",
       "options": {
         "A": "Faible (inférieure à 10%) car la maladie est rare",
-        "B": "Tres forte (95%)",
-        "C": "Egale a 50%",
+        "B": "Très forte (95%)",
+        "C": "Égale a 50%",
         "D": "Exactement 90%"
       },
       "diagnostics": {

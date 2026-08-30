@@ -7,11 +7,11 @@
 % assert fpp == 6*x
 % assert fpp.subs(x, -1) < 0 and fpp.subs(x, 1) > 0 and fpp.subs(x, 0) == 0
 % END-VERIFY
-\begin{fichemethode}{M4}{Reconnaitre graphiquement convexite, concavite et point d'inflexion}
+\begin{fichemethode}{M4}{Reconnaitre graphiquement convexité, concavité et point d'inflexion}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce fournit une COURBE (ou un trace de
-  tangentes) et demande de reperer les zones de convexite, de concavite, et les
+  Utiliser cette méthode lorsque l'énoncé fournit une COURBE (ou un trace de
+  tangentes) et demande de reperer les zones de convexité, de concavité, et les
   eventuels points d'inflexion.
 }
 
@@ -25,14 +25,14 @@
     \item Reperer visuellement l'orientation : « creux vers le haut » (cuvette)
       $\to$ convexe ; « creux vers le bas » (dome) $\to$ concave.
     \item Point d'inflexion : point ou la courbe TRAVERSE sa tangente — la
-      convexite y change de nature.
-    \item Conclure en donnant les intervalles (abscisses) de convexite, de
-      concavite, et les coordonnees des points d'inflexion.
+      convexité y change de nature.
+    \item Conclure en donnant les intervalles (abscisses) de convexité, de
+      concavité, et les coordonnées des points d'inflexion.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  La courbe de $f(x) = x^3 - 3x + 1$ est donnee. Decrire sa convexite.
+  La courbe de $f(x) = x^3 - 3x + 1$ est donnee. Decrire sa convexité.
 
   \medskip
   \commentaireMarge{Un dome a gauche, une cuvette a droite.}%
@@ -42,25 +42,25 @@
 
   \medskip
   \commentaireMarge{La courbe traverse sa tangente au point d'inflexion.}%
-  Au point d'abscisse 0 (de coordonnees $(0\,;\,1)$), la courbe traverse sa
+  Au point d'abscisse 0 (de coordonnées $(0\,;\,1)$), la courbe traverse sa
   tangente : c'est un point d'inflexion.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Confondre variations et convexite : une fonction
-      peut etre decroissante ET convexe — les deux notions sont independantes.
-    \item \textbf{Piege 2.} Prendre un extremum local pour un point
+    \item \textbf{Piège 1.} Confondre variations et convexité : une fonction
+      peut être décroissante ET convexe — les deux notions sont indépendantes.
+    \item \textbf{Piège 2.} Prendre un extremum local pour un point
       d'inflexion : a l'inflexion, c'est la COURBURE qui change, pas
       necessairement le sens de variation.
-    \item \textbf{Piege 3.} Conclure d'une seule tangente : la position doit
-      etre verifiee pour TOUTES les tangentes de la zone consideree.
+    \item \textbf{Piège 3.} Conclure d'une seule tangente : la position doit
+      être verifiee pour TOUTES les tangentes de la zone consideree.
   \end{itemize}
 }
 
 \verifier{%
   Tracer deux ou trois tangentes (ou cordes) dans chaque zone pour confirmer la
-  position de la courbe, et controler la coherence avec le signe de $f''$
+  position de la courbe, et contrôler la cohérence avec le signe de $f''$
   lorsqu'il est calculable (fiche M5).
 }
 

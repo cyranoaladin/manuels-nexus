@@ -3,15 +3,15 @@
 \section{Interface et implémentation d'une structure de données}
 
 % ============================================================
-% STRATE 1 — Definitions et exemple contraste
+% STRATE 1 — Définitions et exemple contraste
 % ============================================================
 
 \definition[1]{
-L'\textbf{interface} d'une structure de donnees est l'ensemble des \textbf{operations} qu'elle propose (ce que l'on peut faire), \textbf{sans preciser comment} elles sont realisees. Une \textbf{implementation} est une facon concrete de coder ces operations (avec quelles donnees internes, quel algorithme).
+L'\textbf{interface} d'une structure de donnees est l'ensemble des \textbf{opérations} qu'elle propose (ce que l'on peut faire), \textbf{sans preciser comment} elles sont realisees. Une \textbf{implementation} est une facon concrete de coder ces opérations (avec quelles donnees internes, quel algorithme).
 }
 
 \margeAppui{
-Une meme interface peut avoir \textbf{plusieurs implementations} differentes : l'utilisateur de la structure n'a pas besoin de connaitre l'implementation pour utiliser l'interface.
+Une même interface peut avoir \textbf{plusieurs implementations} différentes : l'utilisateur de la structure n'a pas besoin de connaitre l'implementation pour utiliser l'interface.
 }
 
 \exemple{
@@ -100,7 +100,7 @@ class PileChainee:
 % END-VERIFY
 
 \exemple{
-Ces deux implementations offrent \textbf{exactement la meme interface} (memes trois methodes, meme comportement observable), mais des structures de donnees internes totalement differentes (tableau dynamique contre liste chainee).
+Ces deux implementations offrent \textbf{exactement la même interface} (mêmes trois methodes, même comportement observable), mais des structures de donnees internes totalement différentes (tableau dynamique contre liste chainee).
 }
 
 % ============================================================
@@ -108,5 +108,5 @@ Ces deux implementations offrent \textbf{exactement la meme interface} (memes tr
 % ============================================================
 
 \erreurFrequente{
-\textbf{Confondre interface et implementation lors d'un test.} Un test doit porter sur le comportement observable via l'interface (par exemple : apres avoir empile 1, 2, 3, depiler doit renvoyer 3), pas sur les details internes (comme la structure exacte de \lstinline{_donnees}). Cela permet au meme jeu de tests de valider plusieurs implementations.
+\textbf{Confondre interface et implementation lors d'un test.} Un test doit porter sur le comportement observable via l'interface (par exemple : après avoir empile 1, 2, 3, depiler doit renvoyer 3), pas sur les details internes (comme la structure exacte de \lstinline{_donnees}). Cela permet au même jeu de tests de valider plusieurs implementations.
 }

@@ -30,17 +30,17 @@
 % END-VERIFY
 \begin{corrige}{TSPE-CONTIN-EX-023}
 
-\textbf{Q1.} $f$ est continue et ne s'annule qu'en $\alpha$. Si $f(a)$ et $f(m)$ sont de signes contraires (produit strictement negatif), alors $\alpha$ est compris entre $a$ et $m$ : la solution est dans la moitie gauche, et on remplace $b$ par $m$. Si le produit est nul, c'est que $m$ est exactement la solution. Sinon, $f(a)$ et $f(m)$ ont le meme signe, $\alpha$ est dans la moitie droite, et on remplace $a$ par $m$.
+\textbf{Q1.} $f$ est continue et ne s'annule qu'en $\alpha$. Si $f(a)$ et $f(m)$ sont de signes contraires (produit strictement négatif), alors $\alpha$ est compris entre $a$ et $m$ : la solution est dans la moitie gauche, et on remplace $b$ par $m$. Si le produit est nul, c'est que $m$ est exactement la solution. Sinon, $f(a)$ et $f(m)$ ont le même signe, $\alpha$ est dans la moitie droite, et on remplace $a$ par $m$.
 
 \textbf{Q2.} Depart : $[0\,;1]$ avec $f(0) = -1$ et $f(1) = 1$.
 
-\emph{Etape 1.} $m = 0{,}5$, $f(0{,}5) = 0{,}125 + 0{,}5 - 1 = -0{,}375$. Le produit $f(0)f(0{,}5) = (-1)\times(-0{,}375) > 0$ : on pose $a = 0{,}5$. Intervalle $[0{,}5\,;1]$.
+\emph{Étape 1.} $m = 0{,}5$, $f(0{,}5) = 0{,}125 + 0{,}5 - 1 = -0{,}375$. Le produit $f(0)f(0{,}5) = (-1)\times(-0{,}375) > 0$ : on pose $a = 0{,}5$. Intervalle $[0{,}5\,;1]$.
 
-\emph{Etape 2.} $m = 0{,}75$, $f(0{,}75) = 0{,}421875 + 0{,}75 - 1 = 0{,}171875$. Le produit $f(0{,}5)f(0{,}75) < 0$ : on pose $b = 0{,}75$. Intervalle $[0{,}5\,;0{,}75]$.
+\emph{Étape 2.} $m = 0{,}75$, $f(0{,}75) = 0{,}421875 + 0{,}75 - 1 = 0{,}171875$. Le produit $f(0{,}5)f(0{,}75) < 0$ : on pose $b = 0{,}75$. Intervalle $[0{,}5\,;0{,}75]$.
 
-\emph{Etape 3.} $m = 0{,}625$, $f(0{,}625) = 0{,}244140625 + 0{,}625 - 1 = -0{,}130859375$. Le produit $f(0{,}5)f(0{,}625) > 0$ : on pose $a = 0{,}625$. Intervalle $[0{,}625\,;0{,}75]$.
+\emph{Étape 3.} $m = 0{,}625$, $f(0{,}625) = 0{,}244140625 + 0{,}625 - 1 = -0{,}130859375$. Le produit $f(0{,}5)f(0{,}625) > 0$ : on pose $a = 0{,}625$. Intervalle $[0{,}625\,;0{,}75]$.
 
-\textbf{Q3.} A chaque etape la longueur de l'intervalle est divisee par $2$ : apres $n$ etapes elle vaut $\dfrac{1}{2^n}$. La boucle s'arrete des que $\dfrac{1}{2^n} \leq 0{,}01$. Or $\dfrac{1}{2^6} = 0{,}015625 > 0{,}01$ et $\dfrac{1}{2^7} = 0{,}0078125 \leq 0{,}01$ : l'algorithme effectue \textbf{7} etapes.
+\textbf{Q3.} A chaque étape la longueur de l'intervalle est divisée par $2$ : après $n$ étapes elle vaut $\dfrac{1}{2^n}$. La boucle s'arrete des que $\dfrac{1}{2^n} \leq 0{,}01$. Or $\dfrac{1}{2^6} = 0{,}015625 > 0{,}01$ et $\dfrac{1}{2^7} = 0{,}0078125 \leq 0{,}01$ : l'algorithme effectue \textbf{7} étapes.
 
 \textbf{Q4.} L'encadrement final est $0{,}6796875 < \alpha < 0{,}6875$, d'amplitude $0{,}0078125 < 10^{-2}$. On en deduit $\alpha \approx 0{,}68$ a $10^{-2}$ pres.
 \end{corrige}

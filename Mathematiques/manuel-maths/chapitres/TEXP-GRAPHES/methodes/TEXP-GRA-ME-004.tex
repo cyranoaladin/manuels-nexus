@@ -11,29 +11,29 @@
 \begin{fichemethode}{M4}{Compter les chemins de longueur donnee avec les puissances de la matrice}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande le NOMBRE de chemins (ou
+  Utiliser cette méthode lorsque l'énoncé demande le NOMBRE de chemins (ou
   chaines) de longueur $n$ entre deux sommets : il se lit dans la puissance
   $n$-ieme de la matrice d'adjacence.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Ecrire la matrice d'adjacence $M$ dans un ordre de sommets fixe
+    \item Écrire la matrice d'adjacence $M$ dans un ordre de sommets fixe
       (fiche M3).
     \item Calculer $M^n$ (produits successifs, ou calculatrice pour $n$
       grand) — attention, produit MATRICIEL, pas coefficient par coefficient.
-    \item Citer le theoreme (demonstration : fiche M5) : le coefficient
+    \item Citer le théorème (démonstration : fiche M5) : le coefficient
       $(i\,;\,j)$ de $M^n$ est le nombre de chemins de longueur $n$ du sommet
       $i$ au sommet $j$.
     \item Lire le coefficient demande, a l'intersection de la bonne ligne
       (depart) et de la bonne colonne (arrivee).
     \item Si possible, ENUMERER les chemins pour une petite longueur afin de
-      controler la lecture.
+      contrôler la lecture.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Graphe d'aretes $AB$, $AC$, $BC$, $CD$. Combien de chaines de longueur 2 de
+  Graphe d'arêtes $AB$, $AC$, $BC$, $CD$. Combien de chaines de longueur 2 de
   $A$ a $D$ ? de longueur 3 de $A$ a $B$ ?
 
   \medskip
@@ -47,7 +47,7 @@
   chaine est $A - C - D$.
 
   \medskip
-  \commentaireMarge{Enumeration de controle.}%
+  \commentaireMarge{Enumeration de contrôle.}%
   Le coefficient ligne $A$, colonne $B$ de $M^3$ vaut 3 : les trois chaines de
   longueur 3 de $A$ a $B$ sont $A\,B\,A\,B$, $A\,C\,A\,B$ et $A\,B\,C\,B$
   (une chaine peut repasser par un sommet deja visite).
@@ -55,20 +55,20 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Elever les coefficients au carre un par un :
+    \item \textbf{Piège 1.} Elever les coefficients au carre un par un :
       $M^2$ est un produit MATRICIEL.
-    \item \textbf{Piege 2.} Confondre ligne et colonne : la ligne est le
+    \item \textbf{Piège 2.} Confondre ligne et colonne : la ligne est le
       DEPART, la colonne l'ARRIVEE (indifferent ici par symetrie, crucial en
       oriente).
-    \item \textbf{Piege 3.} Oublier que les chemins comptes peuvent repasser
-      par un meme sommet ou une meme arete : ce ne sont pas des chemins
+    \item \textbf{Piège 3.} Oublier que les chemins comptes peuvent repasser
+      par un même sommet ou une même arête : ce ne sont pas des chemins
       « sans repetition ».
   \end{itemize}
 }
 
 \verifier{%
   Enumerer les chemins a la main pour une petite longueur et comparer au
-  coefficient, et controler $M^{n} = M^{n-1} M$ sur un produit.
+  coefficient, et contrôler $M^{n} = M^{n-1} M$ sur un produit.
 }
 
 \sEntrainer{\refExos{M4}}

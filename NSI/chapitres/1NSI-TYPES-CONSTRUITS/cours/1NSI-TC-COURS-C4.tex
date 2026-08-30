@@ -20,8 +20,8 @@ print(mesures["temperature"])  # 21
 \end{python}
 
 % BEGIN-TRACE
-% mesures = {"temperature": 21, "vent": 12, "humidite": 65}
-% print(mesures["temperature"])
+% mesures = {"température": 21, "vent": 12, "humidite": 65}
+% print(mesures["température"])
 % EXPECTED
 % 21
 % END-TRACE
@@ -104,7 +104,7 @@ print(stations_chaudes(stations, 17))  # ["Nord", "Sud", "Est"]
 
 \approfondissement{Un dictionnaire en compréhension s'écrit
 \lstinline|\{cle: valeur for cle, valeur in iterable\}|.
-Par exemple, \lstinline|\{s["nom"]: s["temperature"] for s in stations\}|
+Par exemple, \lstinline|\{s["nom"]: s["température"] for s in stations\}|
 produit \lstinline|\{"Nord": 18, "Sud": 24, "Est": 20\}|.}
 
 \alamachine{Crée un dictionnaire \lstinline{eleve} contenant les clés

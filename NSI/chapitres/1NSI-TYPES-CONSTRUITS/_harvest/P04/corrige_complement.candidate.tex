@@ -178,13 +178,13 @@ photo["taille"] = (6000, 4000)
 \texttt{200}. La seconde affectation remplace la valeur précédente. Un
 dictionnaire ne peut pas contenir deux entrées avec la même clé.
 
-\textbf{4d.} L'instruction \texttt{d{[}{[}1,\ 2{]}{]}\ =\ "coordonnees"}
+\textbf{4d.} L'instruction \texttt{d{[}{[}1,\ 2{]}{]}\ =\ "coordonnées"}
 provoque
 \texttt{TypeError:\ unhashable\ type:\ \textquotesingle{}list\textquotesingle{}}.
 Les clés d'un dictionnaire doivent être de type immuable (hashable). Une
 liste est mutable et ne peut donc pas servir de clé. On pourrait
 utiliser un tuple a la place :
-\texttt{d{[}(1,\ 2){]}\ =\ "coordonnees"}.
+\texttt{d{[}(1,\ 2){]}\ =\ "coordonnées"}.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -240,7 +240,7 @@ def cles_superieures(d, seuil):
 \end{python}
 
 Exemple : \texttt{cles\_superieures(meteo,\ 20)} renvoie
-\texttt{{[}"temperature",\ "humidite",\ "pression"{]}}.
+\texttt{{[}"température",\ "humidite",\ "pression"{]}}.
 
 \textbf{5d.} Itérer sur un dictionnaire vide \texttt{\{\}} ne provoque
 pas d'erreur. La boucle \texttt{for} ne s'exécute simplement pas car il
@@ -555,7 +555,7 @@ choisir et comment organiser les accès ?
 \subsection{Activité d’entrée}
 
 Écrire une fonction Python qui reçoit deux nombres et renvoie à la fois
-leur somme et leur produit. Tester avec \lstinline|print(resultat[0], resultat[1])|.
+leur somme et leur produit. Tester avec \lstinline|print(résultat[0], résultat[1])|.
 
 \subsection{Exercices}
 
@@ -639,14 +639,14 @@ L'élément \texttt{matrice{[}1{]}{[}2{]}} vaut \texttt{5} et
 Réponse détaillée avec justification.
 
 Le dictionnaire donne
-\texttt{\{\textquotesingle{}titre\textquotesingle{}:\ \textquotesingle{}Interstellar\textquotesingle{},\ \textquotesingle{}realisateur\textquotesingle{}:\ \textquotesingle{}Christopher\ Nolan\textquotesingle{},\ \textquotesingle{}annee\textquotesingle{}:\ 2014\}}.
+\texttt{\{\textquotesingle{}titre\textquotesingle{}:\ \textquotesingle{}Interstellar\textquotesingle{},\ \textquotesingle{}realisateur\textquotesingle{}:\ \textquotesingle{}Christopher\ Nolan\textquotesingle{},\ \textquotesingle{}année\textquotesingle{}:\ 2014\}}.
 
 \subsubsection{Corrigé exercice 5}
 
 Réponse détaillée avec justification.
 
 \texttt{d.keys()} renvoie
-\texttt{dict\_keys({[}\textquotesingle{}temperature\textquotesingle{},\ \textquotesingle{}humidite\textquotesingle{},\ \textquotesingle{}vent\textquotesingle{},\ \textquotesingle{}pression\textquotesingle{}{]})}
+\texttt{dict\_keys({[}\textquotesingle{}température\textquotesingle{},\ \textquotesingle{}humidite\textquotesingle{},\ \textquotesingle{}vent\textquotesingle{},\ \textquotesingle{}pression\textquotesingle{}{]})}
 (une vue, pas une liste) pour le dictionnaire météo.
 
 \subsubsection{Corrigé exercice 6}

@@ -9,35 +9,35 @@
 % assert P.subs(z, 1) == 0
 % assert expand((z - 1)*(z**2 - 2*z + 5) - P) == 0
 % END-VERIFY
-\begin{fichemethode}{M5}{Demontrer les factorisations par z - a et la majoration du nombre de racines}
+\begin{fichemethode}{M5}{Démontrer les factorisations par z - a et la majoration du nombre de racines}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande de DEMONTRER que $z - a$
+  Utiliser cette méthode lorsque l'énoncé demande de DEMONTRER que $z - a$
   divise $z^n - a^n$, que $P(a) = 0$ entraine la factorisation de $P$ par
-  $z - a$, ou qu'un polynome de degre $n$ a au plus $n$ racines.
+  $z - a$, ou qu'un polynôme de degré $n$ a au plus $n$ racines.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Identite cle : verifier en developpant (somme telescopique) que
+    \item Identite cle : vérifier en developpant (somme telescopique) que
       $z^n - a^n = (z - a)\left(z^{n-1} + a\,z^{n-2} + \dots + a^{n-1}\right)$.
-    \item Factorisation de $P$ avec $P(a) = 0$ : ecrire
+    \item Factorisation de $P$ avec $P(a) = 0$ : écrire
       $P(z) = P(z) - P(a) = \sum_k c_k (z^k - a^k)$, et factoriser CHAQUE
-      $z^k - a^k$ par $z - a$ (etape 1) ; en factorisant globalement,
+      $z^k - a^k$ par $z - a$ (étape 1) ; en factorisant globalement,
       $P(z) = (z - a)\,Q(z)$ avec $\deg Q = \deg P - 1$.
-    \item Majoration des racines : raisonner par recurrence sur le degre $n$.
-      Un polynome de degre 0 non nul n'a pas de racine.
-    \item Heredite : si $P$ de degre $n$ a une racine $a$, alors
+    \item Majoration des racines : raisonner par récurrence sur le degré $n$.
+      Un polynôme de degré 0 non nul n'a pas de racine.
+    \item Heredite : si $P$ de degré $n$ a une racine $a$, alors
       $P = (z - a)Q$ avec $\deg Q = n - 1$ ; toute autre racine de $P$ annule
       $Q$ (produit nul), donc $P$ a au plus $1 + (n-1) = n$ racines.
-    \item Conclure et signaler la consequence : deux polynomes de degre
-      $\leq n$ egaux en $n + 1$ points sont egaux.
+    \item Conclure et signaler la consequence : deux polynômes de degré
+      $\leq n$ égaux en $n + 1$ points sont égaux.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Demontrer que $z - a$ divise $z^3 - a^3$, puis factoriser
-  $P(z) = z^3 - 3z^2 + 7z - 5$ (qui verifie $P(1) = 0$).
+  Démontrer que $z - a$ divise $z^3 - a^3$, puis factoriser
+  $P(z) = z^3 - 3z^2 + 7z - 5$ (qui vérifie $P(1) = 0$).
 
   \medskip
   \commentaireMarge{Developpement telescopique.}%
@@ -54,18 +54,18 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Se tromper dans la somme telescopique : les termes
+    \item \textbf{Piège 1.} Se tromper dans la somme telescopique : les termes
       intermediaires doivent s'annuler DEUX a DEUX — developper soigneusement.
-    \item \textbf{Piege 2.} Dans la recurrence, oublier l'argument « produit
+    \item \textbf{Piège 2.} Dans la récurrence, oublier l'argument « produit
       nul dans $\mathbb{C}$ » qui reporte les autres racines sur $Q$.
-    \item \textbf{Piege 3.} Enoncer « exactement $n$ racines » : le theoreme
-      demontre ici est une MAJORATION (au plus $n$).
+    \item \textbf{Piège 3.} Enoncer « exactement $n$ racines » : le théorème
+      démontré ici est une MAJORATION (au plus $n$).
   \end{itemize}
 }
 
 \verifier{%
   Redevelopper chaque factorisation obtenue, tester l'identite $z^n - a^n$ sur
-  des valeurs numeriques, et controler le degre du quotient.
+  des valeurs numériques, et contrôler le degré du quotient.
 }
 
 \sEntrainer{\refExos{M5}}

@@ -5,7 +5,7 @@
     {
       "id": "Q1",
       "capacite": "C1",
-      "enonce": "Dans un graphe simple non oriente d'ordre n, le degre maximal d'un sommet est :",
+      "enonce": "Dans un graphe simple non oriente d'ordre n, le degré maximal d'un sommet est :",
       "correcte": "B",
       "options": {
         "A": "n",
@@ -15,7 +15,7 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Compte incluant le sommet lui-meme sans boucle. Dans un graphe simple d'ordre n, un sommet peut être adjacent aux n-1 autres sommets au maximum.",
+          "erreur": "Compte incluant le sommet lui-même sans boucle. Dans un graphe simple d'ordre n, un sommet peut être adjacent aux n-1 autres sommets au maximum.",
           "renvoi": "C1"
         },
         "C": {
@@ -31,21 +31,21 @@
     {
       "id": "Q2",
       "capacite": "C1",
-      "enonce": "La somme des degres de tous les sommets d'un graphe est egale a :",
+      "enonce": "La somme des degrés de tous les sommets d'un graphe est égale a :",
       "correcte": "C",
       "options": {
-        "A": "Le nombre d'aretes",
+        "A": "Le nombre d'arêtes",
         "B": "Le double du nombre de sommets",
-        "C": "Le double du nombre d'aretes",
+        "C": "Le double du nombre d'arêtes",
         "D": "Le carre du nombre de sommets"
       },
       "diagnostics": {
         "A": {
-          "erreur": "Chaque arete contribue pour 2 degres. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes.",
+          "erreur": "Chaque arête contribue pour 2 degrés. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes.",
           "renvoi": "C1"
         },
         "B": {
-          "erreur": "Confusions entre sommets et aretes. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes.",
+          "erreur": "Confusions entre sommets et arêtes. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes.",
           "renvoi": "C1"
         },
         "D": {

@@ -31,14 +31,14 @@
 
 Numerateurs et denominateurs sont des termes consecutifs de la suite de Fibonacci $1, 1, 2, 3, 5, 8, 13, 21, \dots$ : on a $u_n = \dfrac{F_{n+1}}{F_{n+2}}$.
 
-\textbf{Q2.} Montrons par recurrence que $u_n \in \left[\dfrac12\,;1\right]$. C'est vrai pour $u_0 = 1$. Si $\dfrac12 \leq u_n \leq 1$, alors $\dfrac32 \leq 1 + u_n \leq 2$, donc par decroissance de l'inverse sur les reels strictement positifs, $\dfrac12 \leq \dfrac{1}{1+u_n} \leq \dfrac23$, et en particulier $u_{n+1} \in \left[\dfrac12\,;1\right]$.
+\textbf{Q2.} Montrons par récurrence que $u_n \in \left[\dfrac12\,;1\right]$. C'est vrai pour $u_0 = 1$. Si $\dfrac12 \leq u_n \leq 1$, alors $\dfrac32 \leq 1 + u_n \leq 2$, donc par décroissance de l'inverse sur les réels strictement positifs, $\dfrac12 \leq \dfrac{1}{1+u_n} \leq \dfrac23$, et en particulier $u_{n+1} \in \left[\dfrac12\,;1\right]$.
 
 \textbf{Q3.} $\dfrac{1}{1+x} = x$ equivaut, pour $x
 \neq -1$, a $1 = x(1+x)$, soit $x^2 + x - 1 = 0$. Le discriminant vaut $5$, d'ou les racines $\dfrac{-1 \pm \sqrt5}{2}$. Sur $\left]0\,;+\infty\right[$, seule $\varphi = \dfrac{\sqrt5 - 1}{2} \approx 0{,}618$ convient. C'est l'inverse du nombre d'or.
 
-\textbf{Q4.} La fonction $f$ est strictement decroissante sur $\left]0\,;+\infty\right[$, car $f'(x) = -\dfrac{1}{(1+x)^2} < 0$. Donc si $u_n < \varphi$, alors $f(u_n) > f(\varphi) = \varphi$, c'est-a-dire $u_{n+1} > \varphi$, et reciproquement : les termes alternent autour de $\varphi$, ce qui interdit toute monotonie.
+\textbf{Q4.} La fonction $f$ est strictement décroissante sur $\left]0\,;+\infty\right[$, car $f'(x) = -\dfrac{1}{(1+x)^2} < 0$. Donc si $u_n < \varphi$, alors $f(u_n) > f(\varphi) = \varphi$, c'est-a-dire $u_{n+1} > \varphi$, et reciproquement : les termes alternent autour de $\varphi$, ce qui interdit toute monotonie.
 
-En revanche, $f \circ f$ est croissante (composee de deux fonctions decroissantes), et $u_{n+2} = f(f(u_n))$. Les sous-suites $(u_{2n})$ et $(u_{2n+1})$ sont donc monotones. Les valeurs calculees montrent que $(u_{2n})$ part de $u_0 = 1 > \varphi$ et decroit, tandis que $(u_{2n+1})$ part de $u_1 = 0{,}5 < \varphi$ et croit : elles convergent l'une vers l'autre en encadrant $\varphi$.
+En revanche, $f \circ f$ est croissante (composee de deux fonctions décroissantes), et $u_{n+2} = f(f(u_n))$. Les sous-suites $(u_{2n})$ et $(u_{2n+1})$ sont donc monotones. Les valeurs calculees montrent que $(u_{2n})$ part de $u_0 = 1 > \varphi$ et décroît, tandis que $(u_{2n+1})$ part de $u_1 = 0{,}5 < \varphi$ et croit : elles convergent l'une vers l'autre en encadrant $\varphi$.
 
 \textbf{Q5.} Pour tout $x \geq \dfrac12$ :
 \[ f(x) - \varphi = \frac{1}{1+x} - \frac{1}{1+\varphi} = \frac{(1+\varphi) - (1+x)}{(1+x)(1+\varphi)} = \frac{-(x - \varphi)}{(1+x)(1+\varphi)}, \]
@@ -46,5 +46,5 @@ en utilisant $f(\varphi) = \varphi = \dfrac{1}{1+\varphi}$. Comme $x \geq \dfrac
 \[ \left|f(x) - \varphi\right| = \frac{|x - \varphi|}{(1+x)(1+\varphi)} \leq \frac{|x-\varphi|}{\frac32 \times 1} = \frac{2}{3}\left|x - \varphi\right|. \]
 Tous les termes etant dans $\left[\dfrac12\,;1\right]$, on en deduit $\left|u_{n+1} - \varphi\right| \leq \dfrac23\left|u_n - \varphi\right|$, puis par iteration
 \[ \left|u_n - \varphi\right| \leq \left(\frac23\right)^{n}\left|u_0 - \varphi\right|. \]
-Comme $0 < \dfrac23 < 1$, le majorant tend vers $0$ : la suite $(u_n)$ converge vers $\varphi$, sans jamais avoir ete monotone.
+Comme $0 < \dfrac23 < 1$, le majorant tend vers $0$ : la suite $(u_n)$ converge vers $\varphi$, sans jamais avoir été monotone.
 \end{corrige}

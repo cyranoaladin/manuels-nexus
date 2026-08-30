@@ -5,7 +5,7 @@
     {
       "id": "Q1",
       "capacite": "C1",
-      "enonce": "La fonction logarithme neperien $\\ln(x)$ est definie sur :",
+      "enonce": "La fonction logarithme neperien $\\ln(x)$ est définie sur :",
       "correcte": "B",
       "options": {
         "A": "$\\mathbb{R}$",
@@ -15,15 +15,15 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Les nombres negatifs n'ont pas de logarithme reel. Le logarithme népérien, réciproque de l'exponentielle, est défini exactement sur ]0,+infini[.",
+          "erreur": "Les nombres négatifs n'ont pas de logarithme réel. Le logarithme népérien, réciproque de l'exponentielle, est défini exactement sur ]0,+infini[.",
           "renvoi": "C1"
         },
         "C": {
-          "erreur": "ln(0) n'est pas defini. Le logarithme népérien, réciproque de l'exponentielle, est défini exactement sur ]0,+infini[.",
+          "erreur": "ln(0) n'est pas défini. Le logarithme népérien, réciproque de l'exponentielle, est défini exactement sur ]0,+infini[.",
           "renvoi": "C1"
         },
         "D": {
-          "erreur": "Exclusion des nombres strictement negatifs. Le logarithme népérien, réciproque de l'exponentielle, est défini exactement sur ]0,+infini[.",
+          "erreur": "Exclusion des nombres strictement négatifs. Le logarithme népérien, réciproque de l'exponentielle, est défini exactement sur ]0,+infini[.",
           "renvoi": "C1"
         }
       }
@@ -57,7 +57,7 @@
     {
       "id": "Q3",
       "capacite": "C5",
-      "enonce": "La derivee de $f(x) = \\ln(x)$ sur $]0, +\\infty[$ est :",
+      "enonce": "La dérivée de $f(x) = \\ln(x)$ sur $]0, +\\infty[$ est :",
       "correcte": "C",
       "options": {
         "A": "$e^x$",
@@ -67,15 +67,15 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Derivee de l'exponentielle. Sur ]0,+infini[, la dérivée du logarithme népérien est la fonction x vers 1/x.",
+          "erreur": "Dérivée de l'exponentielle. Sur ]0,+infini[, la dérivée du logarithme népérien est la fonction x vers 1/x.",
           "renvoi": "C5"
         },
         "B": {
-          "erreur": "Pas de changement par derivation. Sur ]0,+infini[, la dérivée du logarithme népérien est la fonction x vers 1/x.",
+          "erreur": "Pas de changement par dérivation. Sur ]0,+infini[, la dérivée du logarithme népérien est la fonction x vers 1/x.",
           "renvoi": "C5"
         },
         "D": {
-          "erreur": "Derivee de 1/x. Sur ]0,+infini[, la dérivée du logarithme népérien est la fonction x vers 1/x.",
+          "erreur": "Dérivée de 1/x. Sur ]0,+infini[, la dérivée du logarithme népérien est la fonction x vers 1/x.",
           "renvoi": "C5"
         }
       }
@@ -119,7 +119,7 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Puissance a l'exterieur du logarithme. Pour a>0 et n entier, l'équation fonctionnelle itérée donne ln(a^n)=n ln(a).",
+          "erreur": "Puissance a l'extérieur du logarithme. Pour a>0 et n entier, l'équation fonctionnelle itérée donne ln(a^n)=n ln(a).",
           "renvoi": "C3"
         },
         "C": {

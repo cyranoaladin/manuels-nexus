@@ -1,49 +1,49 @@
 % META: {"id": "TSPE-SUITLIM-CR-013", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "cours", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "approved"}
 
-\section{Suite croissante non majoree}
+\section{Suite croissante non majorée}
 
 % ============================================================
-% STRATE 1 — Theoreme et demonstration exigible
+% STRATE 1 — Théorème et démonstration exigible
 % ============================================================
 
 \theoreme{
-Toute suite croissante non majoree diverge vers $+\infty$.
+Toute suite croissante non majorée diverge vers $+\infty$.
 }
 
 \demonstration{
-Soit $(u_n)$ une suite croissante non majoree. Montrons que $\lim_{n \to +\infty} u_n = +\infty$.
+Soit $(u_n)$ une suite croissante non majorée. Montrons que $\lim_{n \to +\infty} u_n = +\infty$.
 
-Soit $A$ un reel quelconque. Montrons qu'il existe un rang $N$ tel que pour tout $n \geq N$, $u_n \geq A$.
+Soit $A$ un réel quelconque. Montrons qu'il existe un rang $N$ tel que pour tout $n \geq N$, $u_n \geq A$.
 
-Puisque $(u_n)$ n'est pas majoree, le reel $A$ n'est pas un majorant de $(u_n)$. Il existe donc un entier $N$ tel que $u_N > A$.
+Puisque $(u_n)$ n'est pas majorée, le réel $A$ n'est pas un majorant de $(u_n)$. Il existe donc un entier $N$ tel que $u_N > A$.
 
 Or la suite $(u_n)$ est croissante : pour tout $n \geq N$, on a $u_n \geq u_N > A$, soit $u_n \geq A$.
 
-On a montre que pour tout reel $A$, il existe $N \in \mathbb{N}$ tel que pour tout $n \geq N$, $u_n \geq A$.
+On a montre que pour tout réel $A$, il existe $N \in \mathbb{N}$ tel que pour tout $n \geq N$, $u_n \geq A$.
 
-Par definition, $\lim_{n \to +\infty} u_n = +\infty$.
+Par définition, $\lim_{n \to +\infty} u_n = +\infty$.
 }
 
 \margeAppui{
-Ce theoreme admet un enonce analogue : toute suite \emph{decroissante} non minoree diverge vers $-\infty$.
+Ce théorème admet un énoncé analogue : toute suite \emph{décroissante} non minorée diverge vers $-\infty$.
 }
 
-\subsection{Theoreme de la suite monotone bornee}
+\subsection{Théorème de la suite monotone bornee}
 
 \theoreme{
-Toute suite croissante et majoree est convergente.
+Toute suite croissante et majorée est convergente.
 
-Toute suite decroissante et minoree est convergente.
+Toute suite décroissante et minorée est convergente.
 }
 
 \margeAppui{
-Ce theoreme (admis) repose sur la propriete de la borne superieure des reels. Il ne donne pas la valeur de la limite, mais garantit son existence.
+Ce théorème (admis) repose sur la propriété de la borne superieure des réels. Il ne donne pas la valeur de la limite, mais garantit son existence.
 }
 
 \exemple{
-Soit $(u_n)$ definie par $u_0 = 0$ et $u_{n+1} = \sqrt{2 + u_n}$.
+Soit $(u_n)$ définie par $u_0 = 0$ et $u_{n+1} = \sqrt{2 + u_n}$.
 
-\textbf{Montrons par recurrence que $0 \leq u_n \leq 2$ pour tout $n$.}
+\textbf{Montrons par récurrence que $0 \leq u_n \leq 2$ pour tout $n$.}
 
 Initialisation : $u_0 = 0 \in [0, 2]$.
 
@@ -53,13 +53,13 @@ Heredite : supposons $0 \leq u_n \leq 2$. Alors $2 \leq 2 + u_n \leq 4$, donc $\
 
 On a $u_{n+1} - u_n = \sqrt{2 + u_n} - u_n$. Posons $g(x) = \sqrt{2 + x} - x$ sur $[0, 2]$.
 
-On a $g'(x) = \dfrac{1}{2\sqrt{2 + x}} - 1 < 0$ pour $x \geq 0$ (car $2\sqrt{2+x} \geq 2\sqrt{2} > 1$). Donc $g$ est decroissante sur $[0,2]$.
+On a $g'(x) = \dfrac{1}{2\sqrt{2 + x}} - 1 < 0$ pour $x \geq 0$ (car $2\sqrt{2+x} \geq 2\sqrt{2} > 1$). Donc $g$ est décroissante sur $[0,2]$.
 
 Or $g(2) = \sqrt{4} - 2 = 0$, donc $g(x) \geq 0$ pour $x \in [0, 2]$, ce qui donne $u_{n+1} \geq u_n$.
 
-\textbf{Conclusion.} La suite $(u_n)$ est croissante et majoree par $2$, donc elle converge.
+\textbf{Conclusion.} La suite $(u_n)$ est croissante et majorée par $2$, donc elle converge.
 
-La limite $\ell$ verifie $\ell = \sqrt{2 + \ell}$, soit $\ell^2 = 2 + \ell$, d'ou $\ell^2 - \ell - 2 = 0$, c'est-a-dire $(\ell - 2)(\ell + 1) = 0$. Comme $\ell \geq 0$, on obtient $\ell = 2$.
+La limite $\ell$ vérifie $\ell = \sqrt{2 + \ell}$, soit $\ell^2 = 2 + \ell$, d'ou $\ell^2 - \ell - 2 = 0$, c'est-a-dire $(\ell - 2)(\ell + 1) = 0$. Comme $\ell \geq 0$, on obtient $\ell = 2$.
 }
 
 % ============================================================
@@ -67,11 +67,11 @@ La limite $\ell$ verifie $\ell = \sqrt{2 + \ell}$, soit $\ell^2 = 2 + \ell$, d'o
 % ============================================================
 
 \margeAppui{
-\textbf{Diverger vers $+\infty$ :} suite croissante et non majoree. \textbf{Converger :} suite monotone et bornee dans le bon sens. Conclure par le theoreme adapte.
+\textbf{Diverger vers $+\infty$ :} suite croissante et non majorée. \textbf{Converger :} suite monotone et bornee dans le bon sens. Conclure par le théorème adapte.
 }
 
 \erreurFrequente{
-\textbf{Confondre « non majoree » et « strictement croissante ».}
+\textbf{Confondre « non majorée » et « strictement croissante ».}
 
-La suite $u_n = (-1)^n \cdot n$ n'est pas majoree, mais elle n'est pas croissante. Le theoreme ne s'applique que si la suite est \emph{a la fois} croissante \emph{et} non majoree.
+La suite $u_n = (-1)^n \cdot n$ n'est pas majorée, mais elle n'est pas croissante. Le théorème ne s'applique que si la suite est \emph{a la fois} croissante \emph{et} non majorée.
 }

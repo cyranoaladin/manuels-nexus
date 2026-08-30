@@ -15,14 +15,14 @@
   \binom{6}{0}+\binom{6}{1}+\binom{6}{2}+\binom{6}{3}+\binom{6}{4}+\binom{6}{5}+\binom{6}{6} = 1+6+15+20+15+6+1 = 64 = 2^6.
 \]
 
-Principe general : on denombre l'ensemble des parties d'un ensemble a $n$ elements de deux facons (par le principe multiplicatif : $2^n$ ; en classant par taille : $\sum_k \dbinom{n}{k}$), ce qui donne l'egalite.
+Principe general : on denombre l'ensemble des parties d'un ensemble a $n$ éléments de deux facons (par le principe multiplicatif : $2^n$ ; en classant par taille : $\sum_k \dbinom{n}{k}$), ce qui donne l'égalité.
 \end{corrige}
 
 \begin{corrige}{TSPE-COMBI-EV-B-EX3}
-Soit $E$ un ensemble a $n$ elements, $a \in E$ fixe. On classe les parties a $k$ elements de $E$ selon qu'elles contiennent $a$ ou non :
+Soit $E$ un ensemble a $n$ éléments, $a \in E$ fixe. On classe les parties a $k$ éléments de $E$ selon qu'elles contiennent $a$ ou non :
 \begin{itemize}
-  \item parties contenant $a$ : choisir les $k-1$ autres elements parmi les $n-1$ restants, soit $\dbinom{n-1}{k-1}$ ;
-  \item parties ne contenant pas $a$ : choisir les $k$ elements parmi les $n-1$ restants, soit $\dbinom{n-1}{k}$.
+  \item parties contenant $a$ : choisir les $k-1$ autres éléments parmi les $n-1$ restants, soit $\dbinom{n-1}{k-1}$ ;
+  \item parties ne contenant pas $a$ : choisir les $k$ éléments parmi les $n-1$ restants, soit $\dbinom{n-1}{k}$.
 \end{itemize}
-Ces deux categories sont disjointes et couvrent toutes les parties a $k$ elements : par le principe additif, $\dbinom{n}{k} = \dbinom{n-1}{k-1}+\dbinom{n-1}{k}$.
+Ces deux categories sont disjointes et couvrent toutes les parties a $k$ éléments : par le principe additif, $\dbinom{n}{k} = \dbinom{n-1}{k-1}+\dbinom{n-1}{k}$.
 \end{corrige}

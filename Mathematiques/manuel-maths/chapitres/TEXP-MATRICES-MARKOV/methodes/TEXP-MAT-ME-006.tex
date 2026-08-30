@@ -9,62 +9,62 @@
 %     pi = pi*P
 %     assert pi == pi0*P**n
 % END-VERIFY
-\begin{fichemethode}{M6}{Demontrer que la distribution apres n transitions est pi0 P puissance n}
+\begin{fichemethode}{M6}{Démontrer que la distribution après n transitions est pi0 P puissance n}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande de DEMONTRER la formule
+  Utiliser cette méthode lorsque l'énoncé demande de DEMONTRER la formule
   $\pi_n = \pi_0 P^n$ pour une chaine de Markov de matrice de transition $P$.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Etablir la relation d'UNE etape : par la formule des probabilites
+    \item Etablir la relation d'UNE étape : par la formule des probabilités
       totales sur l'etat courant,
       $P(X_{n+1} = j) = \sum_i P(X_n = i)\,p_{ij}$, ce qui s'ecrit
       matriciellement $\pi_{n+1} = \pi_n P$.
-    \item Poser la propriete $\mathcal{P}(n)$ : $\pi_n = \pi_0 P^n$.
+    \item Poser la propriété $\mathcal{P}(n)$ : $\pi_n = \pi_0 P^n$.
     \item Initialisation : $n = 0$ — $\pi_0 = \pi_0 P^0 = \pi_0 I$, vraie.
     \item Heredite : si $\pi_n = \pi_0 P^n$, alors
       $\pi_{n+1} = \pi_n P = \left(\pi_0 P^n\right) P = \pi_0 P^{n+1}$
       (associativite du produit matriciel).
-    \item Conclure par recurrence : $\pi_n = \pi_0 P^n$ pour tout entier
+    \item Conclure par récurrence : $\pi_n = \pi_0 P^n$ pour tout entier
       $n \geq 0$.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Rediger la demonstration pour une chaine a deux etats.
+  Rediger la démonstration pour une chaine a deux etats.
 
   \medskip
-  \commentaireMarge{Etape 1 : probabilites totales.}%
-  Le systeme $\{X_n = 1\}$, $\{X_n = 2\}$ est un systeme complet d'evenements.
+  \commentaireMarge{Étape 1 : probabilités totales.}%
+  Le système $\{X_n = 1\}$, $\{X_n = 2\}$ est un système complet d'événements.
   Pour tout etat $j$ :
   $P(X_{n+1} = j) = P(X_n = 1)\,p_{1j} + P(X_n = 2)\,p_{2j}$,
   c'est exactement le coefficient $j$ du produit $\pi_n P$ : donc
   $\pi_{n+1} = \pi_n P$.
 
   \medskip
-  \commentaireMarge{Etape 2 : recurrence immediate.}%
+  \commentaireMarge{Étape 2 : récurrence immediate.}%
   $\mathcal{P}(0)$ est vraie ($P^0 = I$). Si $\pi_n = \pi_0 P^n$, alors
   $\pi_{n+1} = \pi_n P = \pi_0 P^n P = \pi_0 P^{n+1}$ : $\mathcal{P}(n+1)$
-  est vraie. Par recurrence, $\pi_n = \pi_0 P^n$ pour tout $n$.
+  est vraie. Par récurrence, $\pi_n = \pi_0 P^n$ pour tout $n$.
   \hfill$\square$
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Admettre la relation $\pi_{n+1} = \pi_n P$ sans la
-      demontrer : c'est le cœur probabiliste (probabilites totales).
-    \item \textbf{Piege 2.} Ecrire $\pi_{n+1} = P\,\pi_n$ avec des
+    \item \textbf{Piège 1.} Admettre la relation $\pi_{n+1} = \pi_n P$ sans la
+      démontrer : c'est le cœur probabiliste (probabilités totales).
+    \item \textbf{Piège 2.} Écrire $\pi_{n+1} = P\,\pi_n$ avec des
       distributions en ligne : l'ordre du produit suit la convention choisie.
-    \item \textbf{Piege 3.} Utiliser la propriete de Markov implicitement :
+    \item \textbf{Piège 3.} Utiliser la propriété de Markov implicitement :
       dire explicitement que $p_{ij}$ ne depend pas de $n$ ni du passe.
   \end{itemize}
 }
 
 \verifier{%
   Confronter la formule demontree a l'iteration directe sur un exemple
-  numerique ($\pi_1$, $\pi_2$ calcules des deux facons, fiche M5).
+  numérique ($\pi_1$, $\pi_2$ calcules des deux facons, fiche M5).
 }
 
 \sEntrainer{\refExos{M6}}

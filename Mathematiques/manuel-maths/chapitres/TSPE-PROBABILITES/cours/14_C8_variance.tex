@@ -7,18 +7,18 @@
 % ============================================================
 
 \propriete[Additivité de la variance, admise]{
-Si $X_1, \ldots, X_n$ sont des variables aleatoires \textbf{deux a deux independantes}, alors :
+Si $X_1, \ldots, X_n$ sont des variables aleatoires \textbf{deux a deux indépendantes}, alors :
 \[
   V(X_1+\cdots+X_n) = V(X_1)+\cdots+V(X_n).
 \]
 }
 
 \margeAppui{
-Contrairement a l'esperance, cette formule \textbf{necessite} l'independance des variables. Sans cette hypothese, $V(X+Y)$ peut differer de $V(X)+V(Y)$.
+Contrairement a l'espérance, cette formule \textbf{necessite} l'indépendance des variables. Sans cette hypothèse, $V(X+Y)$ peut differer de $V(X)+V(Y)$.
 }
 
 \propriete[Variance d'une variable de Bernoulli]{
-Si $X_i$ suit une loi de Bernoulli de parametre $p$ (c'est-a-dire $P(X_i=1)=p$, $P(X_i=0)=1-p$), alors $V(X_i) = p(1-p)$.
+Si $X_i$ suit une loi de Bernoulli de paramètre $p$ (c'est-a-dire $P(X_i=1)=p$, $P(X_i=0)=1-p$), alors $V(X_i) = p(1-p)$.
 }
 
 % BEGIN-VERIFY
@@ -31,9 +31,9 @@ Si $X_i$ suit une loi de Bernoulli de parametre $p$ (c'est-a-dire $P(X_i=1)=p$, 
 % END-VERIFY
 
 \exemple{
-Deux capteurs independants ont chacun une probabilite $0{,}1$ de tomber en panne dans l'annee. Soit $X_1,X_2$ les variables de Bernoulli associees (1 si panne). Calculer $V(X_1+X_2)$.
+Deux capteurs indépendants ont chacun une probabilité $0{,}1$ de tomber en panne dans l'année. Soit $X_1,X_2$ les variables de Bernoulli associees (1 si panne). Calculer $V(X_1+X_2)$.
 
-$V(X_1)=V(X_2) = 0{,}1\times0{,}9 = 0{,}09$. Par independance, $V(X_1+X_2) = 0{,}09+0{,}09 = 0{,}18$.
+$V(X_1)=V(X_2) = 0{,}1\times0{,}9 = 0{,}09$. Par indépendance, $V(X_1+X_2) = 0{,}09+0{,}09 = 0{,}18$.
 
 % BEGIN-VERIFY
 % from sympy import Rational
@@ -48,6 +48,6 @@ $V(X_1)=V(X_2) = 0{,}1\times0{,}9 = 0{,}09$. Par independance, $V(X_1+X_2) = 0{,
 % ============================================================
 
 \erreurFrequente{
-\textbf{Appliquer l'additivite de la variance sans verifier l'independance.} Si les variables sont dependantes (par exemple $X$ et $-X$), $V(X+(-X))=V(0)=0
-\neq V(X)+V(-X)=2V(X)$ en general : l'additivite est fausse sans l'hypothese d'independance.
+\textbf{Appliquer l'additivite de la variance sans vérifier l'indépendance.} Si les variables sont dependantes (par exemple $X$ et $-X$), $V(X+(-X))=V(0)=0
+\neq V(X)+V(-X)=2V(X)$ en general : l'additivite est fausse sans l'hypothèse d'indépendance.
 }

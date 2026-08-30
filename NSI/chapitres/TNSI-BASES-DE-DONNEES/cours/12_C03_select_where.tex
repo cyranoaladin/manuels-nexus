@@ -16,7 +16,7 @@ Le langage \textbf{SQL} (\textit{Structured Query Language}) permet d'interroger
 
 \textbf{Exemple.} Base d'exemple filée sur tout le chapitre (bibliothèque) :
 \begin{sql}
-CREATE TABLE Livre(id INTEGER PRIMARY KEY, titre TEXT, auteur TEXT, annee INTEGER);
+CREATE TABLE Livre(id INTEGER PRIMARY KEY, titre TEXT, auteur TEXT, année INTEGER);
 INSERT INTO Livre VALUES
   (1, 'Le Petit Prince', 'Saint-Exupery', 1943),
   (2, '1984', 'Orwell', 1949),
@@ -55,7 +55,7 @@ La clause \texttt{WHERE} ne conserve que les tuples vérifiant une \textbf{condi
 
 \textbf{Exemple.} Livres parus après 1945 :
 \begin{sql}
-SELECT titre FROM Livre WHERE annee > 1945;
+SELECT titre FROM Livre WHERE année > 1945;
 \end{sql}
 Livres d'Orwell ou de Camus :
 \begin{sql}

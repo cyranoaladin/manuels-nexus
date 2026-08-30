@@ -1,13 +1,13 @@
 % META: {"id": "TSPE-DERCONV-CR-012", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "cours", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "approved"}
 
-\section{Convexite et inegalites}
+\section{Convexité et inégalités}
 
 % ============================================================
-% STRATE 1 — Definitions
+% STRATE 1 — Définitions
 % ============================================================
 
 \definition[1]{
-Soit $f$ une fonction definie sur un intervalle $I$. On dit que $f$ est \textbf{convexe} sur $I$ si, pour tous $a, b \in I$ et tout $t \in [0, 1]$ :
+Soit $f$ une fonction définie sur un intervalle $I$. On dit que $f$ est \textbf{convexe} sur $I$ si, pour tous $a, b \in I$ et tout $t \in [0, 1]$ :
 \[
   f\bigl(t\,a + (1-t)\,b\bigr) \leq t\,f(a) + (1-t)\,f(b).
 \]
@@ -15,13 +15,13 @@ Geometriquement, le segment $[M_a, M_b]$ reliant deux points de la courbe est au
 }
 
 \definition[2]{
-On dit que $f$ est \textbf{concave} sur $I$ si $-f$ est convexe sur $I$, c'est-a-dire si l'inegalite precedente est inversee.
+On dit que $f$ est \textbf{concave} sur $I$ si $-f$ est convexe sur $I$, c'est-a-dire si l'inégalité précédente est inversee.
 }
 
-\subsection{Convexite et derivee seconde}
+\subsection{Convexité et dérivée seconde}
 
 \theoreme{
-Soit $f$ une fonction deux fois derivable sur un intervalle $I$.
+Soit $f$ une fonction deux fois dérivable sur un intervalle $I$.
 \begin{itemize}
   \item $f$ est convexe sur $I$ si et seulement si $f''(x) \geq 0$ pour tout $x \in I$.
   \item $f$ est concave sur $I$ si et seulement si $f''(x) \leq 0$ pour tout $x \in I$.
@@ -41,10 +41,10 @@ La fonction $h(x) = x^2$ est convexe sur $\mathbb{R}$ car $h''(x) = 2 > 0$.
 }
 
 % ============================================================
-% Application aux inegalites
+% Application aux inégalités
 % ============================================================
 
-\subsection{Demontrer des inegalites par convexite}
+\subsection{Démontrer des inégalités par convexité}
 
 \propriete{
 Si $f$ est convexe sur $I$, alors pour tous $x_1, x_2 \in I$ :
@@ -54,17 +54,17 @@ Si $f$ est convexe sur $I$, alors pour tous $x_1, x_2 \in I$ :
 }
 
 \exemple{
-\textbf{Montrer que $\mathrm{e}^{(a+b)/2} \leq \dfrac{\mathrm{e}^a + \mathrm{e}^b}{2}$ pour tous reels $a, b$.}
+\textbf{Montrer que $\mathrm{e}^{(a+b)/2} \leq \dfrac{\mathrm{e}^a + \mathrm{e}^b}{2}$ pour tous réels $a, b$.}
 
-La fonction $x \mapsto \mathrm{e}^x$ est convexe sur $\mathbb{R}$. On applique l'inegalite de convexite avec $x_1 = a$ et $x_2 = b$.
+La fonction $x \mapsto \mathrm{e}^x$ est convexe sur $\mathbb{R}$. On applique l'inégalité de convexité avec $x_1 = a$ et $x_2 = b$.
 }
 
 \exemple{
 \textbf{Montrer que $\ln\!\left(\dfrac{a+b}{2}\right) \geq \dfrac{\ln a + \ln b}{2}$ pour tous $a, b > 0$.}
 
-La fonction $\ln$ est concave sur $]0, +\infty[$. L'inegalite de convexite est donc inversee.
+La fonction $\ln$ est concave sur $]0, +\infty[$. L'inégalité de convexité est donc inversee.
 
-On obtient $\ln\!\left(\dfrac{a+b}{2}\right) \geq \dfrac{\ln a + \ln b}{2}$, soit $\dfrac{a+b}{2} \geq \sqrt{ab}$ (inegalite arithmetico-geometrique).
+On obtient $\ln\!\left(\dfrac{a+b}{2}\right) \geq \dfrac{\ln a + \ln b}{2}$, soit $\dfrac{a+b}{2} \geq \sqrt{ab}$ (inégalité arithmetico-géométrique).
 }
 
 % ============================================================
@@ -76,7 +76,7 @@ On obtient $\ln\!\left(\dfrac{a+b}{2}\right) \geq \dfrac{\ln a + \ln b}{2}$, soi
 }
 
 \margeAppui{
-\textbf{Astuce.} Pour demontrer une inegalite du type $f(a) + f(b) \geq 2f\!\left(\frac{a+b}{2}\right)$, identifier si la fonction $f$ est convexe (regarder le signe de $f''$) et appliquer la definition.
+\textbf{Astuce.} Pour démontrer une inégalité du type $f(a) + f(b) \geq 2f\!\left(\frac{a+b}{2}\right)$, identifier si la fonction $f$ est convexe (regarder le signe de $f''$) et appliquer la définition.
 }
 
 % ============================================================
@@ -84,9 +84,9 @@ On obtient $\ln\!\left(\dfrac{a+b}{2}\right) \geq \dfrac{\ln a + \ln b}{2}$, soi
 % ============================================================
 
 \approfondissement{
-\textbf{Inegalite de Jensen.} Si $f$ est convexe sur $I$ et $t_1, \dots, t_n \geq 0$ avec $t_1 + \cdots + t_n = 1$, alors :
+\textbf{Inégalité de Jensen.} Si $f$ est convexe sur $I$ et $t_1, \dots, t_n \geq 0$ avec $t_1 + \cdots + t_n = 1$, alors :
 \[
   f(t_1 x_1 + \cdots + t_n x_n) \leq t_1 f(x_1) + \cdots + t_n f(x_n).
 \]
-Le cas $n = 2$ est la definition de la convexite.
+Le cas $n = 2$ est la définition de la convexité.
 }

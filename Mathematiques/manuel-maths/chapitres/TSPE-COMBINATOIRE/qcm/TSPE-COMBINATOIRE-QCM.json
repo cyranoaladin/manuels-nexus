@@ -5,7 +5,7 @@
     {
       "id": "Q1",
       "capacite": "C2",
-      "enonce": "Le nombre de k-listes d'un ensemble a n elements est :",
+      "enonce": "Le nombre de k-listes d'un ensemble a n éléments est :",
       "correcte": "A",
       "options": {
         "A": "$n^k$",
@@ -19,11 +19,11 @@
           "renvoi": "C2"
         },
         "C": {
-          "erreur": "Le nombre $n!$ compte les permutations des $n$ elements utilises chacun une fois ; une $k$-liste autorise $n$ choix a chacune de ses $k$ positions.",
+          "erreur": "Le nombre $n!$ compte les permutations des $n$ éléments utilises chacun une fois ; une $k$-liste autorise $n$ choix a chacune de ses $k$ positions.",
           "renvoi": "C2"
         },
         "D": {
-          "erreur": "Le coefficient $\\binom{n}{k}$ choisit $k$ elements distincts sans ordre ; une $k$-liste est ordonnee et autorise les repetitions, d'ou $n^k$.",
+          "erreur": "Le coefficient $\\binom{n}{k}$ choisit $k$ éléments distincts sans ordre ; une $k$-liste est ordonnée et autorise les repetitions, d'ou $n^k$.",
           "renvoi": "C2"
         }
       }
@@ -41,15 +41,15 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Le nombre $n^k$ conserve $n$ choix a chaque position et autorise donc les repetitions ; un arrangement sans repetition retire un choix a chaque etape.",
+          "erreur": "Le nombre $n^k$ conserve $n$ choix a chaque position et autorise donc les repetitions ; un arrangement sans repetition retire un choix a chaque étape.",
           "renvoi": "C2"
         },
         "B": {
-          "erreur": "Le denominateur $k!$ ne retire pas les $n-k$ facteurs inutilises ; une k-liste sans repetition conserve exactement $n!/(n-k)!$.",
+          "erreur": "Le dénominateur $k!$ ne retire pas les $n-k$ facteurs inutilises ; une k-liste sans repetition conserve exactement $n!/(n-k)!$.",
           "renvoi": "C2"
         },
         "D": {
-          "erreur": "Le coefficient $\\binom{n}{k}$ oublie l'ordre des $k$ elements choisis ; chaque combinaison produit $k!$ arrangements distincts.",
+          "erreur": "Le coefficient $\\binom{n}{k}$ oublie l'ordre des $k$ éléments choisis ; chaque combinaison produit $k!$ arrangements distincts.",
           "renvoi": "C2"
         }
       }
@@ -57,12 +57,12 @@
     {
       "id": "Q3",
       "capacite": "C1",
-      "enonce": "Un choix se fait en trois etapes offrant successivement $2$, $3$ puis $4$ possibilites. Quelle demarche represente correctement le denombrement ?",
+      "enonce": "Un choix se fait en trois étapes offrant successivement $2$, $3$ puis $4$ possibilites. Quelle demarche représente correctement le denombrement ?",
       "correcte": "B",
       "options": {
         "A": "Additionner les branches : $2+3+4=9$",
         "B": "Utiliser un arbre et le principe multiplicatif : $2\\times3\\times4=24$",
-        "C": "Choisir trois elements parmi quatre : $\\binom{4}{3}=4$",
+        "C": "Choisir trois éléments parmi quatre : $\\binom{4}{3}=4$",
         "D": "Permuter les quatre possibilites finales : $4!=24$"
       },
       "diagnostics": {
@@ -71,11 +71,11 @@
           "renvoi": "C1"
         },
         "C": {
-          "erreur": "La combinaison $\\binom{4}{3}$ choisirait un sous-ensemble sans ordre ; elle ne represente pas trois etapes successives de tailles differentes.",
+          "erreur": "La combinaison $\\binom{4}{3}$ choisirait un sous-ensemble sans ordre ; elle ne représente pas trois étapes successives de tailles différentes.",
           "renvoi": "C1"
         },
         "D": {
-          "erreur": "Le nombre $4!$ correspond aux permutations de quatre objets distincts ; son egalite numerique a $24$ est fortuite et le modele est inadapte.",
+          "erreur": "Le nombre $4!$ correspond aux permutations de quatre objets distincts ; son égalité numérique a $24$ est fortuite et le modèle est inadapte.",
           "renvoi": "C1"
         }
       }
@@ -83,7 +83,7 @@
     {
       "id": "Q4",
       "capacite": "C3",
-      "enonce": "Quelle egalite traduit le denombrement de toutes les parties d'un ensemble a $n$ elements selon leur cardinal ?",
+      "enonce": "Quelle égalité traduit le denombrement de toutes les parties d'un ensemble a $n$ éléments selon leur cardinal ?",
       "correcte": "A",
       "options": {
         "A": "$\\displaystyle\\sum_{k=0}^{n} \\binom{n}{k}=2^n$",
@@ -93,11 +93,11 @@
       },
       "diagnostics": {
         "B": {
-          "erreur": "La somme compte toutes les parties, pas seulement les $n$ singletons ; un ensemble a $n$ elements possede $2^n$ parties.",
+          "erreur": "La somme compte toutes les parties, pas seulement les $n$ singletons ; un ensemble a $n$ éléments possede $2^n$ parties.",
           "renvoi": "C3"
         },
         "C": {
-          "erreur": "Les classes de parties de cardinal $k$ sont disjointes et doivent etre additionnees ; leur produit ne denombre pas leur reunion.",
+          "erreur": "Les classes de parties de cardinal $k$ sont disjointes et doivent être additionnees ; leur produit ne denombre pas leur reunion.",
           "renvoi": "C3"
         },
         "D": {

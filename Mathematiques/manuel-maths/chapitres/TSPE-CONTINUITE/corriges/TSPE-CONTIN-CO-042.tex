@@ -25,17 +25,17 @@
 % END-VERIFY
 \begin{corrige}{TSPE-CONTIN-EX-042}
 
-\textbf{Q1.} On conserve les trois quarts de la concentration precedente et on ajoute un quart d'une solution a $20$ g$\cdot$L$^{-1}$ : $s_{n+1} = 0{,}75\,s_n + 0{,}25 \times 20 = 0{,}75\,s_n + 5$.
+\textbf{Q1.} On conserve les trois quarts de la concentration précédente et on ajoute un quart d'une solution a $20$ g$\cdot$L$^{-1}$ : $s_{n+1} = 0{,}75\,s_n + 0{,}25 \times 20 = 0{,}75\,s_n + 5$.
 
 $s_1 = 35$ ; $s_2 = 31{,}25$ ; $s_3 = 28{,}4375$ ; $s_4 = 26{,}328125$.
 
-\textbf{Q2.} Si $x \in [20\,;40]$ alors $15 \leq 0{,}75x \leq 30$, donc $20 \leq f(x) \leq 35$, et en particulier $f(x) \in [20\,;40]$. Recurrence : $s_0 = 40 \in [20\,;40]$, et la stabilite conclut.
+\textbf{Q2.} Si $x \in [20\,;40]$ alors $15 \leq 0{,}75x \leq 30$, donc $20 \leq f(x) \leq 35$, et en particulier $f(x) \in [20\,;40]$. Récurrence : $s_0 = 40 \in [20\,;40]$, et la stabilite conclut.
 
-\textbf{Q3.} $f(x) - x = 5 - 0{,}25x = -\dfrac{x-20}{4}$, negatif sur $[20\,;40]$. Donc $s_{n+1} - s_n \leq 0$ : la suite est decroissante. Minoree par $20$, elle converge.
+\textbf{Q3.} $f(x) - x = 5 - 0{,}25x = -\dfrac{x-20}{4}$, négatif sur $[20\,;40]$. Donc $s_{n+1} - s_n \leq 0$ : la suite est décroissante. Minorée par $20$, elle converge.
 
-\textbf{Q4.} $f$ est continue (affine) et la limite $\ell$ verifie $0{,}75\ell + 5 = \ell$, soit $0{,}25\ell = 5$ et $\ell = 20$. La concentration tend vers celle de l'eau ajoutee : le bassin se rapproche indefiniment de $20$ g$\cdot$L$^{-1}$ sans jamais descendre en dessous, ce qui est coherent puisqu'on n'ajoute jamais d'eau moins salee que $20$.
+\textbf{Q4.} $f$ est continue (affine) et la limite $\ell$ vérifie $0{,}75\ell + 5 = \ell$, soit $0{,}25\ell = 5$ et $\ell = 20$. La concentration tend vers celle de l'eau ajoutee : le bassin se rapproche indefiniment de $20$ g$\cdot$L$^{-1}$ sans jamais descendre en dessous, ce qui est coherent puisqu'on n'ajoute jamais d'eau moins salee que $20$.
 
-\textbf{Q5.} $e_{n+1} = s_{n+1} - 20 = 0{,}75\,s_n + 5 - 20 = 0{,}75(s_n - 20) = 0{,}75\,e_n$. La suite $(e_n)$ est geometrique de raison $0{,}75$ et de premier terme $e_0 = 20$, donc $s_n = 20 + 20 \times 0{,}75^{\,n}$.
+\textbf{Q5.} $e_{n+1} = s_{n+1} - 20 = 0{,}75\,s_n + 5 - 20 = 0{,}75(s_n - 20) = 0{,}75\,e_n$. La suite $(e_n)$ est géométrique de raison $0{,}75$ et de premier terme $e_0 = 20$, donc $s_n = 20 + 20 \times 0{,}75^{\,n}$.
 
 On cherche $s_n < 21$, soit $20 \times 0{,}75^n < 1$, c'est-a-dire $0{,}75^n < 0{,}05$. Or $0{,}75^{10} \approx 0{,}0563 > 0{,}05$ et $0{,}75^{11} \approx 0{,}0422 < 0{,}05$ : la concentration passe sous $21$ g$\cdot$L$^{-1}$ au bout de \textbf{11} jours.
 \end{corrige}

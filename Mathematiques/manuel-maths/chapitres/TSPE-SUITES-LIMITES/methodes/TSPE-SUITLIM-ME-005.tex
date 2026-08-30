@@ -1,13 +1,13 @@
 % META: {"id": "TSPE-SUITLIM-ME-005", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "methode", "capacites_codes": ["C5", "C7"], "methodes": ["M5"], "sources_inspiration": [], "status": "approved"}
-\begin{fichemethode}{M5}{Utiliser l'inegalite de Bernoulli et les croissances comparees}
+\begin{fichemethode}{M5}{Utiliser l'inégalité de Bernoulli et les croissances comparees}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce fait intervenir $(1+a)^n$, $q^n$ avec $q > 1$ ou $|q| < 1$, ou des expressions melant exponentielle et polynomes.
+  Utiliser cette méthode lorsque l'énoncé fait intervenir $(1+a)^n$, $q^n$ avec $q > 1$ ou $|q| < 1$, ou des expressions melant exponentielle et polynômes.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item \textbf{Inegalite de Bernoulli.} Pour minorer $(1+a)^n$ avec $a > 0$ :
+    \item \textbf{Inégalité de Bernoulli.} Pour minorer $(1+a)^n$ avec $a > 0$ :
       \[
         (1+a)^n \geq 1 + na.
       \]
@@ -23,7 +23,7 @@
       \[
         \lim_{n \to +\infty} \frac{\mathrm{e}^n}{n^k} = +\infty \quad \text{pour tout } k \in \mathbb{N}.
       \]
-      L'exponentielle l'emporte sur tout polynome.
+      L'exponentielle l'emporte sur tout polynôme.
   \end{enumerate}
 }
 
@@ -31,38 +31,38 @@
   \textbf{Exemple 1.} Montrer que $\lim_{n \to +\infty} 1{,}05^n = +\infty$.
 
   \medskip
-  \commentaireMarge{Ecrire $1{,}05 = 1 + 0{,}05$ et appliquer Bernoulli.}%
-  On ecrit $1{,}05^n = (1 + 0{,}05)^n$. Par l'inegalite de Bernoulli :
+  \commentaireMarge{Écrire $1{,}05 = 1 + 0{,}05$ et appliquer Bernoulli.}%
+  On ecrit $1{,}05^n = (1 + 0{,}05)^n$. Par l'inégalité de Bernoulli :
   \[
     1{,}05^n \geq 1 + 0{,}05n.
   \]
   Or $\lim(1 + 0{,}05n) = +\infty$. Par comparaison, $\lim 1{,}05^n = +\infty$.
 
   \bigskip
-  \textbf{Exemple 2.} Determiner $\lim_{n \to +\infty} n^3 \times 0{,}9^n$.
+  \textbf{Exemple 2.} Déterminer $\lim_{n \to +\infty} n^3 \times 0{,}9^n$.
 
   \medskip
-  \commentaireMarge{Ecrire le produit comme quotient pour utiliser la croissance comparee.}%
+  \commentaireMarge{Écrire le produit comme quotient pour utiliser la croissance comparee.}%
   On pose $q = 0{,}9$, soit $\dfrac{1}{q} = \dfrac{10}{9} > 1$. On a :
   \[
     n^3 \times 0{,}9^n = \frac{n^3}{(10/9)^n}.
   \]
 
-  Or $(10/9)^n$ croit plus vite que tout polynome (car $10/9 > 1$). Plus precisement, $\dfrac{n^3}{(10/9)^n} \to 0$.
+  Or $(10/9)^n$ croit plus vite que tout polynôme (car $10/9 > 1$). Plus precisement, $\dfrac{n^3}{(10/9)^n} \to 0$.
 
   Donc $\lim_{n \to +\infty} n^3 \times 0{,}9^n = 0$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Appliquer Bernoulli avec $a < -1$ : l'inegalite n'est valide que pour $a \geq -1$.
-    \item \textbf{Piege 2.} Confondre « $q^n \to 0$ quand $|q| < 1$ » avec « $q^n$ est nul ». La suite tend vers $0$ mais n'est jamais nulle.
-    \item \textbf{Piege 3.} Oublier que la croissance comparee $\mathrm{e}^n / n^k \to +\infty$ vaut aussi pour $q^n / n^k$ quand $q > 1$.
+    \item \textbf{Piège 1.} Appliquer Bernoulli avec $a < -1$ : l'inégalité n'est valide que pour $a \geq -1$.
+    \item \textbf{Piège 2.} Confondre « $q^n \to 0$ quand $|q| < 1$ » avec « $q^n$ est nul ». La suite tend vers $0$ mais n'est jamais nulle.
+    \item \textbf{Piège 3.} Oublier que la croissance comparee $\mathrm{e}^n / n^k \to +\infty$ vaut aussi pour $q^n / n^k$ quand $q > 1$.
   \end{itemize}
 }
 
 \verifier{%
-  Verifier numeriquement : $1{,}05^{100} \approx 131{,}5$ (confirme la divergence). Pour $0{,}9^{20} \approx 0{,}12$ : les termes $n^3 \times 0{,}9^n$ decroissent bien vers $0$ pour $n$ grand.
+  Vérifier numeriquement : $1{,}05^{100} \approx 131{,}5$ (confirme la divergence). Pour $0{,}9^{20} \approx 0{,}12$ : les termes $n^3 \times 0{,}9^n$ decroissent bien vers $0$ pour $n$ grand.
 }
 
 \sEntrainer{\refExos{M5}}

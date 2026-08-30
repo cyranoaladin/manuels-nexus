@@ -3,23 +3,23 @@
 \section{Intégration par parties}
 
 % ============================================================
-% STRATE 1 — Demonstration exigible
+% STRATE 1 — Démonstration exigible
 % ============================================================
 
 \theoreme[Formule d'intégration par parties]{
-Soient $u,v$ deux fonctions derivables, de derivees $u',v'$ continues sur $[a,b]$. Alors :
+Soient $u,v$ deux fonctions derivables, de dérivées $u',v'$ continues sur $[a,b]$. Alors :
 \[
   \int_a^b u(x)v'(x)\,\mathrm{d}x = \big[u(x)v(x)\big]_a^b - \int_a^b u'(x)v(x)\,\mathrm{d}x.
 \]
 }
 
 \demonstration{
-La fonction $uv$ est derivable sur $[a,b]$ (produit de fonctions derivables), et par la formule de derivation d'un produit :
+La fonction $uv$ est dérivable sur $[a,b]$ (produit de fonctions derivables), et par la formule de dérivation d'un produit :
 \[
   (uv)' = u'v + uv'.
 \]
 
-En integrant les deux membres de cette egalite entre $a$ et $b$ (les fonctions en jeu sont continues) :
+En integrant les deux membres de cette égalité entre $a$ et $b$ (les fonctions en jeu sont continues) :
 \[
   \int_a^b (uv)'(x)\,\mathrm{d}x = \int_a^b u'(x)v(x)\,\mathrm{d}x + \int_a^b u(x)v'(x)\,\mathrm{d}x.
 \]
@@ -33,7 +33,7 @@ En reorganisant :
 }
 
 \margeAppui{
-On utilise l'integration par parties lorsque l'integrale de $u'v$ est plus simple a calculer que celle de $uv'$ : typiquement pour un produit polynome $\times$ exponentielle, ou polynome $\times$ logarithme.
+On utilise l'integration par parties lorsque l'intégrale de $u'v$ est plus simple a calculer que celle de $uv'$ : typiquement pour un produit polynôme $\times$ exponentielle, ou polynôme $\times$ logarithme.
 }
 
 \exemple{
@@ -56,5 +56,5 @@ On pose $u(x)=x$ (donc $u'(x)=1$) et $v'(x)=\mathrm{e}^x$ (donc $v(x)=\mathrm{e}
 % ============================================================
 
 \erreurFrequente{
-\textbf{Choisir $u$ et $v'$ dans le mauvais sens.} Pour $\int x\,\mathrm{e}^x\,\mathrm{d}x$, poser $u=\mathrm{e}^x$ et $v'=x$ complique le calcul (on introduit un $x^2$). Il faut choisir $u$ de sorte que $u'$ soit plus simple que $u$ (ici $u=x$, polynome, se simplifie en derivant).
+\textbf{Choisir $u$ et $v'$ dans le mauvais sens.} Pour $\int x\,\mathrm{e}^x\,\mathrm{d}x$, poser $u=\mathrm{e}^x$ et $v'=x$ complique le calcul (on introduit un $x^2$). Il faut choisir $u$ de sorte que $u'$ soit plus simple que $u$ (ici $u=x$, polynôme, se simplifie en derivant).
 }

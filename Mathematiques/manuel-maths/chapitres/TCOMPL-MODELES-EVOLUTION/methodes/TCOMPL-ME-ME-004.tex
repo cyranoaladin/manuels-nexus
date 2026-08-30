@@ -7,41 +7,41 @@
 % assert simplify(un.subs(n, n+1) - (un/2 + 2)) == 0
 % assert limit(un, n, oo) == 4
 % END-VERIFY
-\begin{fichemethode}{M4}{Resoudre une suite arithmetico-geometrique via sa solution constante}
+\begin{fichemethode}{M4}{Résoudre une suite arithmetico-géométrique via sa solution constante}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque la suite verifie $u_{n+1} = a\,u_n + b$
-  (avec $a \neq 1$) et que l'enonce demande une formule explicite de $u_n$
+  Utiliser cette méthode lorsque la suite vérifie $u_{n+1} = a\,u_n + b$
+  (avec $a \neq 1$) et que l'énoncé demande une formule explicite de $u_n$
   et/ou sa limite.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Chercher la solution CONSTANTE : resoudre $c = a\,c + b$, soit
+    \item Chercher la solution CONSTANTE : résoudre $c = a\,c + b$, soit
       $c = \dfrac{b}{1-a}$.
     \item Poser la suite auxiliaire $v_n = u_n - c$.
-    \item Montrer que $(v_n)$ est geometrique :
+    \item Montrer que $(v_n)$ est géométrique :
       $v_{n+1} = u_{n+1} - c = a\,u_n + b - (ac + b) = a(u_n - c) = a\,v_n$.
-    \item En deduire $v_n = v_0\,a^n = (u_0 - c)\,a^n$, puis la formule
+    \item En déduire $v_n = v_0\,a^n = (u_0 - c)\,a^n$, puis la formule
       explicite $u_n = c + (u_0 - c)\,a^n$.
     \item Conclure sur la limite : si $|a| < 1$, $a^n \to 0$ donc $u_n \to c$ —
-      la solution constante est la valeur d'equilibre.
+      la solution constante est la valeur d'équilibré.
   \end{enumerate}
 }
 
 \exempleRedige{%
   Soit $u_0 = 1$ et $u_{n+1} = \dfrac{1}{2}\,u_n + 2$. Exprimer $u_n$ en
-  fonction de $n$ et determiner sa limite.
+  fonction de $n$ et déterminer sa limite.
 
   \medskip
   \commentaireMarge{Point fixe : $c = ac + b$.}%
   Solution constante : $c = \dfrac{c}{2} + 2$ donne $c = 4$.
 
   \medskip
-  \commentaireMarge{Suite auxiliaire centree sur l'equilibre.}%
+  \commentaireMarge{Suite auxiliaire centree sur l'équilibré.}%
   Posons $v_n = u_n - 4$. Alors
   $v_{n+1} = u_{n+1} - 4 = \dfrac{u_n}{2} + 2 - 4 = \dfrac{u_n - 4}{2}
-  = \dfrac{v_n}{2}$ : $(v_n)$ est geometrique de raison $\dfrac{1}{2}$ et de
+  = \dfrac{v_n}{2}$ : $(v_n)$ est géométrique de raison $\dfrac{1}{2}$ et de
   premier terme $v_0 = 1 - 4 = -3$.
 
   \medskip
@@ -52,18 +52,18 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Se tromper de suite auxiliaire : c'est $u_n - c$
-      (ecart a l'equilibre), pas $u_n - u_0$.
-    \item \textbf{Piege 2.} Oublier de calculer $v_0$ avec $u_0$ : la formule
+    \item \textbf{Piège 1.} Se tromper de suite auxiliaire : c'est $u_n - c$
+      (ecart a l'équilibré), pas $u_n - u_0$.
+    \item \textbf{Piège 2.} Oublier de calculer $v_0$ avec $u_0$ : la formule
       finale depend de $v_0 = u_0 - c$.
-    \item \textbf{Piege 3.} Conclure $u_n \to c$ sans avoir verifie $|a| < 1$
+    \item \textbf{Piège 3.} Conclure $u_n \to c$ sans avoir vérifie $|a| < 1$
       (si $|a| > 1$ et $u_0 \neq c$, la suite diverge).
   \end{itemize}
 }
 
 \verifier{%
-  Controler la formule explicite sur $u_0$, $u_1$, $u_2$ (recurrence directe),
-  verifier qu'elle satisfait la relation $u_{n+1} = a\,u_n + b$, et confronter
+  Contrôler la formule explicite sur $u_0$, $u_1$, $u_2$ (récurrence directe),
+  vérifier qu'elle satisfait la relation $u_{n+1} = a\,u_n + b$, et confronter
   la limite a la conjecture graphique (fiche M3).
 }
 

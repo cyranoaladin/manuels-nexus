@@ -45,7 +45,7 @@
           "renvoi": "M1, étape 3"
         },
         "C": {
-          "erreur": "L'élève a oublie le $-2$ au premier passage et calcule $v_1=3\\times4=12$, puis applique la recurrence au terme suivant : $v_2=3\\times12-2=34$.",
+          "erreur": "L'élève a oublie le $-2$ au premier passage et calcule $v_1=3\\times4=12$, puis applique la récurrence au terme suivant : $v_2=3\\times12-2=34$.",
           "renvoi": "M1, étape 3"
         },
         "D": {
@@ -83,7 +83,7 @@
     {
       "id": "Q4",
       "capacite": "C2",
-      "enonce": "Soit $(u_n)$ la suite définie pour tout $n \\in \\mathbb{N}$ par $u_n = 4n - 7$. Quelle est la raison de cette suite arithmetique ?",
+      "enonce": "Soit $(u_n)$ la suite définie pour tout $n \\in \\mathbb{N}$ par $u_n = 4n - 7$. Quelle est la raison de cette suite arithmétique ?",
       "options": {
         "A": "$-7$",
         "B": "$4n$",
@@ -97,7 +97,7 @@
           "renvoi": "M2, étape 4"
         },
         "B": {
-          "erreur": "L'élève a donne une expression dependant de $n$ comme raison. La raison d'une suite arithmetique est un réel constant, pas une expression variable.",
+          "erreur": "L'élève a donne une expression dependant de $n$ comme raison. La raison d'une suite arithmétique est un réel constant, pas une expression variable.",
           "renvoi": "M2, étape 3"
         },
         "D": {
@@ -109,7 +109,7 @@
     {
       "id": "Q5",
       "capacite": "C2",
-      "enonce": "Soit $(u_n)$ une suite arithmetique de raison $r = -3$ et de premier terme $u_1 = 8$. Quelle est la valeur de $u_6$ ?",
+      "enonce": "Soit $(u_n)$ une suite arithmétique de raison $r = -3$ et de premier terme $u_1 = 8$. Quelle est la valeur de $u_6$ ?",
       "options": {
         "A": "$-7$",
         "B": "$-4$",
@@ -135,7 +135,7 @@
     {
       "id": "Q6",
       "capacite": "C2",
-      "enonce": "Parmi les suites suivantes, laquelle est arithmetique ?",
+      "enonce": "Parmi les suites suivantes, laquelle est arithmétique ?",
       "options": {
         "A": "$u_n = 3^n$",
         "B": "$u_n = n^2 + 2$",
@@ -145,15 +145,15 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "La suite $u_n = 3^n$ est géométrique (raison $q = 3$), pas arithmetique. L'élève confond suite géométrique et suite arithmetique.",
+          "erreur": "La suite $u_n = 3^n$ est géométrique (raison $q = 3$), pas arithmétique. L'élève confond suite géométrique et suite arithmétique.",
           "renvoi": "M2, étape 1 ; M3"
         },
         "B": {
-          "erreur": "La suite $u_n = n^2 + 2$ n'est pas arithmetique : $u_{n+1} - u_n = (n+1)^2 - n^2 = 2n+1$, qui depend de $n$. L'élève n'a pas vérifie la constance de la difference.",
+          "erreur": "La suite $u_n = n^2 + 2$ n'est pas arithmétique : $u_{n+1} - u_n = (n+1)^2 - n^2 = 2n+1$, qui depend de $n$. L'élève n'a pas vérifie la constance de la difference.",
           "renvoi": "M2, étapes 1-3"
         },
         "D": {
-          "erreur": "La suite $u_n = 1/(n+1)$ n'est pas arithmetique : $u_1 - u_0 = 1/2 - 1 = -1/2$ mais $u_2 - u_1 = 1/3 - 1/2 = -1/6$. L'élève n'a pas vérifie la constance de la difference.",
+          "erreur": "La suite $u_n = 1/(n+1)$ n'est pas arithmétique : $u_1 - u_0 = 1/2 - 1 = -1/2$ mais $u_2 - u_1 = 1/3 - 1/2 = -1/6$. L'élève n'a pas vérifie la constance de la difference.",
           "renvoi": "M2, étapes 1-3"
         }
       }
@@ -171,7 +171,7 @@
       "correcte": "D",
       "diagnostics": {
         "A": {
-          "erreur": "L'élève a applique la formule arithmetique $u_n = u_0 + nr$ au lieu de la formule géométrique $u_n = u_0 \\times q^n$. Confusion suite arithmetique / géométrique.",
+          "erreur": "L'élève a applique la formule arithmétique $u_n = u_0 + nr$ au lieu de la formule géométrique $u_n = u_0 \\times q^n$. Confusion suite arithmétique / géométrique.",
           "renvoi": "M3, étape 5"
         },
         "B": {
@@ -291,7 +291,7 @@
     {
       "id": "Q12",
       "capacite": "C4",
-      "enonce": "On calcule la somme $u_0 + u_1 + \\cdots + u_{14}$ des termes d'une suite arithmetique. Combien y a-t-il de termes dans cette somme ?",
+      "enonce": "On calcule la somme $u_0 + u_1 + \\cdots + u_{14}$ des termes d'une suite arithmétique. Combien y a-t-il de termes dans cette somme ?",
       "options": {
         "A": "$14$",
         "B": "$13$",
@@ -317,7 +317,7 @@
     {
       "id": "Q13",
       "capacite": "C5",
-      "enonce": "Soit $(u_n)$ la suite arithmetique de raison $r = -4$ et de premier terme $u_0 = 10$. Quel est le sens de variation de cette suite ?",
+      "enonce": "Soit $(u_n)$ la suite arithmétique de raison $r = -4$ et de premier terme $u_0 = 10$. Quel est le sens de variation de cette suite ?",
       "options": {
         "A": "Croissante",
         "B": "Constante",
@@ -331,11 +331,11 @@
           "renvoi": "M5, Méthode A"
         },
         "B": {
-          "erreur": "L'élève n'a pas utilise la raison pour determiner la monotonie. Une suite arithmetique est constante seulement si $r = 0$.",
+          "erreur": "L'élève n'a pas utilise la raison pour déterminer la monotonie. Une suite arithmétique est constante seulement si $r = 0$.",
           "renvoi": "M5, Méthode A"
         },
         "D": {
-          "erreur": "L'élève applique un raisonnement valable pour une suite quadratique mais pas pour une suite arithmetique. Une suite arithmetique de raison non nulle est strictement monotone sur $\\mathbb{N}$ tout entier.",
+          "erreur": "L'élève applique un raisonnement valable pour une suite quadratique mais pas pour une suite arithmétique. Une suite arithmétique de raison non nulle est strictement monotone sur $\\mathbb{N}$ tout entier.",
           "renvoi": "M5, Méthode A"
         }
       }
@@ -362,7 +362,7 @@
         },
         "D": {
           "erreur": "Observer quelques valeurs ne constitue pas une preuve. Il faut un raisonnement valide pour tout $n \\in \\mathbb{N}$, pas seulement pour $n = 0, 1, 2, 3, 4$.",
-          "renvoi": "M5, Piege 1"
+          "renvoi": "M5, Piège 1"
         }
       }
     },
@@ -395,7 +395,7 @@
     {
       "id": "Q16",
       "capacite": "C6",
-      "enonce": "Un capital de $2\\,000$ euros est place a un taux annuel de $4\\,\\%$. Quel est le coefficient multiplicateur applicable chaque annee ?",
+      "enonce": "Un capital de $2\\,000$ euros est place a un taux annuel de $4\\,\\%$. Quel est le coefficient multiplicateur applicable chaque année ?",
       "options": {
         "A": "$0{,}04$",
         "B": "$1{,}4$",
@@ -413,7 +413,7 @@
           "renvoi": "M6, étape 4 ; R2"
         },
         "D": {
-          "erreur": "L'élève a utilise le taux en pourcentage ($4$) directement comme coefficient multiplicateur. Un coefficient $q = 4$ signifierait quadrupler le capital chaque annee.",
+          "erreur": "L'élève a utilise le taux en pourcentage ($4$) directement comme coefficient multiplicateur. Un coefficient $q = 4$ signifierait quadrupler le capital chaque année.",
           "renvoi": "M6, étape 4 ; R2"
         }
       }
@@ -424,9 +424,9 @@
       "enonce": "Une ville compte $50\\,000$ habitants et perd $300$ habitants par an. Quel modèle est le plus adapte pour représenter l'evolution de sa population ?",
       "options": {
         "A": "Une suite géométrique, car la population diminue.",
-        "B": "Une suite arithmetique, car la variation absolue annuelle est constante ($-300$).",
-        "C": "Une suite géométrique, car on multiplie chaque annee par un coefficient.",
-        "D": "Ni une suite arithmetique ni une suite géométrique."
+        "B": "Une suite arithmétique, car la variation absolue annuelle est constante ($-300$).",
+        "C": "Une suite géométrique, car on multiplie chaque année par un coefficient.",
+        "D": "Ni une suite arithmétique ni une suite géométrique."
       },
       "correcte": "B",
       "diagnostics": {
@@ -435,11 +435,11 @@
           "renvoi": "M6, étape 3"
         },
         "C": {
-          "erreur": "On multiplie par un coefficient constant uniquement si la variation est relative (pourcentage). Ici, $-300$ habitants par an est une variation absolue constante $\\Rightarrow$ modèle arithmetique.",
+          "erreur": "On multiplie par un coefficient constant uniquement si la variation est relative (pourcentage). Ici, $-300$ habitants par an est une variation absolue constante $\\Rightarrow$ modèle arithmétique.",
           "renvoi": "M6, étape 3"
         },
         "D": {
-          "erreur": "La situation correspond bien a un modèle arithmetique (variation absolue constante de $-300$). L'élève n'a pas applique le critere de distinction variation absolue / relative.",
+          "erreur": "La situation correspond bien a un modèle arithmétique (variation absolue constante de $-300$). L'élève n'a pas applique le critere de distinction variation absolue / relative.",
           "renvoi": "M6, étape 3"
         }
       }
@@ -447,7 +447,7 @@
     {
       "id": "Q18",
       "capacite": "C6",
-      "enonce": "Un placement diminue de $5\\,\\%$ par an. Si le capital initial est $u_0 = 10\\,000$ euros, quelle est l'expression de $u_n$ (capital après $n$ annees) ?",
+      "enonce": "Un placement diminue de $5\\,\\%$ par an. Si le capital initial est $u_0 = 10\\,000$ euros, quelle est l'expression de $u_n$ (capital après $n$ années) ?",
       "options": {
         "A": "$u_n = 10\\,000 - 500n$",
         "B": "$u_n = 10\\,000 \\times 1{,}05^n$",
@@ -457,7 +457,7 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "L'élève a utilise un modèle arithmetique (soustraction de $500 = 5\\,\\% \\times 10\\,000$ chaque annee) alors que la variation est relative (pourcentage). Le modèle arithmetique ne tient pas compte de l'effet compose.",
+          "erreur": "L'élève a utilise un modèle arithmétique (soustraction de $500 = 5\\,\\% \\times 10\\,000$ chaque année) alors que la variation est relative (pourcentage). Le modèle arithmétique ne tient pas compte de l'effet compose.",
           "renvoi": "M6, étape 3"
         },
         "B": {
@@ -487,12 +487,12 @@
           "renvoi": "M7, Modèle A"
         },
         "B": {
-          "erreur": "L'élève a execute deux iterations : $u_1 = 7$, $u_2 = 3 \\times 7 + 1 = 22$... mais a renvoye 21 par une erreur de calcul ($3 \\times 7 = 21$ en oubliant $+1$). Erreur arithmetique lors de la simulation.",
+          "erreur": "L'élève a execute deux iterations : $u_1 = 7$, $u_2 = 3 \\times 7 + 1 = 22$... mais a renvoye 21 par une erreur de calcul ($3 \\times 7 = 21$ en oubliant $+1$). Erreur arithmétique lors de la simulation.",
           "renvoi": "M7, Modèle A"
         },
         "D": {
           "erreur": "L'élève a execute deux iterations correctement ($u_1 = 7$, $u_2 = 22$) mais a arrete après deux tours. Il a confondu range(3) = $\\{0, 1, 2\\}$ (3 iterations) avec 2 iterations.",
-          "renvoi": "M7, Piege 3"
+          "renvoi": "M7, Piège 3"
         }
       }
     },
@@ -518,7 +518,7 @@
         },
         "D": {
           "erreur": "L'initialisation `u = 0` est erronnee : $2 \\times 0 = 0$ pour toutes les iterations, la boucle est infinie. Il faut initialiser $u$ a la valeur du PREMIER TERME $u_0 = 1$.",
-          "renvoi": "M7, Piege 1"
+          "renvoi": "M7, Piège 1"
         }
       }
     },

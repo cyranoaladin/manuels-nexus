@@ -10,12 +10,12 @@
 % assert f.subs(x, Rational(1,2)) == Rational(18,19)
 % assert simplify(diff(f, x) - 18/(17*x+1)**2) == 0
 % END-VERIFY
-\begin{fichemethode}{M5}{Etudier la VPP en fonction de la prevalence}
+\begin{fichemethode}{M5}{Étudier la VPP en fonction de la prevalence}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande d'exprimer la valeur
-  predictive positive comme FONCTION de la prevalence $p$, d'etudier ses
-  variations, et d'interpreter (depistage de masse ou population ciblee).
+  Utiliser cette méthode lorsque l'énoncé demande d'exprimer la valeur
+  predictive positive comme FONCTION de la prevalence $p$, d'étudier ses
+  variations, et d'interpréter (depistage de masse ou population ciblee).
 }
 
 \pasApas{%
@@ -23,13 +23,13 @@
     \item Poser $V(p) = \dfrac{\text{Se} \cdot p}{\text{Se} \cdot p +
       (1-\text{Sp})(1-p)}$ pour $p \in\ ]0\,;\,1[$, ou Se et Sp sont fixees.
     \item Simplifier l'expression en une fonction homographique de $p$.
-    \item Etudier les variations (derivee, ou croissance d'une fonction
+    \item Étudier les variations (dérivée, ou croissance d'une fonction
       homographique de determinant positif) : $V$ est croissante.
     \item Calculer $V$ pour les valeurs de $p$ demandees (fraction exacte puis
       arrondi) et noter les limites : $V(p) \to 0$ quand $p \to 0$,
       $V(p) \to 1$ quand $p \to 1$.
-    \item Interpreter : plus la maladie est rare, moins un test positif est
-      probant — d'ou l'interet de cibler une population a risque avant de
+    \item Interpréter : plus la maladie est rare, moins un test positif est
+      probant — d'ou l'intérêt de cibler une population a risque avant de
       tester.
   \end{enumerate}
 }
@@ -39,34 +39,34 @@
   de la prevalence $p$, puis comparer $p = 1\,\%$ et $p = 50\,\%$.
 
   \medskip
-  \commentaireMarge{Multiplier numerateur et denominateur par 20.}%
+  \commentaireMarge{Multiplier numérateur et dénominateur par 20.}%
   $V(p) = \dfrac{0{,}9\,p}{0{,}9\,p + 0{,}05\,(1-p)} = \dfrac{18p}{17p + 1}$.
 
   \medskip
   $V'(p) = \dfrac{18}{(17p+1)^2} > 0$ : $V$ est croissante sur $]0\,;\,1[$.
 
   \medskip
-  \commentaireMarge{La meme qualite de test, deux fiabilites tres differentes.}%
+  \commentaireMarge{La même qualite de test, deux fiabilites très différentes.}%
   $V(0{,}01) = \dfrac{2}{13} \approx 0{,}15$ et
   $V(0{,}5) = \dfrac{18}{19} \approx 0{,}95$ : en population generale (maladie
   rare), un positif est peu probant ; dans une population ciblee ou la
-  prevalence atteint 50\,\%, le meme test positif devient tres fiable.
+  prevalence atteint 50\,\%, le même test positif devient très fiable.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Croire que la VPP ne depend que de la qualite du
+    \item \textbf{Piège 1.} Croire que la VPP ne depend que de la qualite du
       test : a Se et Sp fixees, elle varie fortement avec la prevalence.
-    \item \textbf{Piege 2.} Oublier le facteur $(1-p)$ devant $(1-\text{Sp})$
-      dans le denominateur.
-    \item \textbf{Piege 3.} Conclure « le test est mauvais » quand la VPP est
+    \item \textbf{Piège 2.} Oublier le facteur $(1-p)$ devant $(1-\text{Sp})$
+      dans le dénominateur.
+    \item \textbf{Piège 3.} Conclure « le test est mauvais » quand la VPP est
       faible : c'est la rarete de la maladie, pas le test, qui est en cause.
   \end{itemize}
 }
 
 \verifier{%
-  Controler $0 < V(p) < 1$, retrouver une valeur particuliere par l'arbre
-  pondere complet (fiche M4), et verifier les comportements limites
+  Contrôler $0 < V(p) < 1$, retrouver une valeur particulière par l'arbre
+  pondere complet (fiche M4), et vérifier les comportements limites
   ($V \to 0$ en $0$, $V \to 1$ en $1$).
 }
 

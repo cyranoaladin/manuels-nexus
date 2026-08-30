@@ -3,11 +3,11 @@
 \section{Probabilités totales}
 
 % ============================================================
-% STRATE 1 --- Enonce et cas usuel
+% STRATE 1 --- Énoncé et cas usuel
 % ============================================================
 
 \definition[1]{
-Une \textbf{partition} de l'univers $\Omega$ est une famille d'evenements $B_1, B_2, \ldots, B_n$ tels que :
+Une \textbf{partition} de l'univers $\Omega$ est une famille d'événements $B_1, B_2, \ldots, B_n$ tels que :
 \begin{itemize}
   \item les $B_i$ sont deux a deux incompatibles : $B_i \cap B_j = \varnothing$ pour $i
 \neq j$ ;
@@ -17,9 +17,9 @@ Une \textbf{partition} de l'univers $\Omega$ est une famille d'evenements $B_1, 
 Le cas le plus courant est la partition $\{B, \overline{B}\}$.
 }
 
-\theoreme[1]{(\textbf{Formule des probabilites totales})
+\theoreme[1]{(\textbf{Formule des probabilités totales})
 
-Si $B_1, B_2, \ldots, B_n$ forment une partition de $\Omega$ avec $P(B_i) > 0$ pour tout $i$, alors pour tout evenement $A$ :
+Si $B_1, B_2, \ldots, B_n$ forment une partition de $\Omega$ avec $P(B_i) > 0$ pour tout $i$, alors pour tout événement $A$ :
 \[
   P(A) = \sum_{i=1}^{n} P(B_i) \times P_{B_i}(A)
          = P(B_1)\,P_{B_1}(A) + P(B_2)\,P_{B_2}(A) + \cdots + P(B_n)\,P_{B_n}(A).
@@ -32,24 +32,24 @@ Si $B_1, B_2, \ldots, B_n$ forment une partition de $\Omega$ avec $P(B_i) > 0$ p
 }
 
 % ============================================================
-% STRATE 3 --- Demonstration exigible
+% STRATE 3 --- Démonstration exigible
 % ============================================================
 
 \demonstration{
-\textbf{Demonstration (exigible au baccalaureat).}
+\textbf{Démonstration (exigible au baccalaureat).}
 
 Comme $\{B, \overline{B}\}$ est une partition de $\Omega$, on a :
 \[
   A = (A \cap B) \cup (A \cap \overline{B}),
 \]
-et les evenements $A \cap B$ et $A \cap \overline{B}$ sont incompatibles.
+et les événements $A \cap B$ et $A \cap \overline{B}$ sont incompatibles.
 
-Par additivite de la probabilite :
+Par additivite de la probabilité :
 \[
   P(A) = P(A \cap B) + P(A \cap \overline{B}).
 \]
 
-Or, par definition de la probabilite conditionnelle :
+Or, par définition de la probabilité conditionnelle :
 \[
   P(A \cap B) = P(B) \times P_B(A) \quad \text{et} \quad P(A \cap \overline{B}) = P(\overline{B}) \times P_{\overline{B}}(A).
 \]
@@ -71,5 +71,5 @@ $\{C_1, C_2\}$ est une partition de $\Omega$.
   P(D) = P(C_1) \times P_{C_1}(D) + P(C_2) \times P_{C_2}(D) = \frac{60}{100} \times \frac{3}{100} + \frac{40}{100} \times \frac{5}{100} = \frac{18}{1000} + \frac{20}{1000} = \frac{38}{1000} = \frac{19}{500}.
 \]
 
-La probabilite qu'une piece soit defectueuse est $\dfrac{19}{500} = 3{,}8\,\%$.
+La probabilité qu'une piece soit defectueuse est $\dfrac{19}{500} = 3{,}8\,\%$.
 }

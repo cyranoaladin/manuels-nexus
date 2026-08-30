@@ -29,26 +29,26 @@
 
 \section*{Temps 7 — TD contextualise : Capital place a taux variable}
 
-\textbf{Contexte.} Un epargnant place un capital de $10\,000$~euros. Le taux d'interet annuel varie : la $n$-ieme annee (a partir de $n = 0$), le taux est
+\textbf{Contexte.} Un epargnant place un capital de $10\,000$~euros. Le taux d'intérêt annuel varie : la $n$-ieme année (a partir de $n = 0$), le taux est
 \[
   t_n = 0{,}03 \times \left(1 - \frac{1}{n+2}\right).
 \]
-On note $C_n$ le capital au debut de l'annee $n$, avec $C_0 = 10\,000$.
+On note $C_n$ le capital au debut de l'année $n$, avec $C_0 = 10\,000$.
 
 On note aussi $D_n$ le capital si le taux etait constant a $3\,\%$, soit $D_n = 10\,000 \times 1{,}03^n$.
 
 \bigskip
 
 %---------------------------------------------------------------
-% PARTIE A — Modelisation
+% PARTIE A — Modélisation
 %---------------------------------------------------------------
 
 \begin{exercice}{TSPE-SUITLIM-COURS-07-TC-EX1}{2}{15}
 
-\textbf{Partie A — Etude du taux et du capital}
+\textbf{Partie A — Étude du taux et du capital}
 
 \begin{enumerate}
-  \item Calculer $t_0$, $t_1$ et $t_2$ sous forme decimale. Le taux est-il croissant ?
+  \item Calculer $t_0$, $t_1$ et $t_2$ sous forme décimale. Le taux est-il croissant ?
   \item Montrer que pour tout $n \in \mathbb{N}$, $0 < t_n < 0{,}03$.
   \item Exprimer $C_{n+1}$ en fonction de $C_n$ et de $t_n$.
   \item Calculer $C_1$ (arrondir au centime).
@@ -71,14 +71,14 @@ On note aussi $D_n$ le capital si le taux etait constant a $3\,\%$, soit $D_n = 
   t_2 = 0{,}03 \times \left(1 - \frac{1}{4}\right) = 0{,}03 \times 0{,}75 = 0{,}0225.
 \]
 
-On observe $t_0 < t_1 < t_2$. On admet que la suite $(t_n)$ est croissante (car $\dfrac{1}{n+2}$ est decroissante).
+On observe $t_0 < t_1 < t_2$. On admet que la suite $(t_n)$ est croissante (car $\dfrac{1}{n+2}$ est décroissante).
 
 \textbf{Question 2.} Pour tout $n \in \mathbb{N}$, on a $0 < \dfrac{1}{n+2} \leq \dfrac{1}{2} < 1$, donc $0 < 1 - \dfrac{1}{n+2} < 1$, et :
 \[
   0 < t_n = 0{,}03 \times \left(1 - \frac{1}{n+2}\right) < 0{,}03.
 \]
 
-\textbf{Question 3.} A la fin de l'annee $n$, le capital est multiplie par $(1 + t_n)$ :
+\textbf{Question 3.} A la fin de l'année $n$, le capital est multiplie par $(1 + t_n)$ :
 \[
   C_{n+1} = C_n \times (1 + t_n).
 \]
@@ -98,18 +98,18 @@ On observe $t_0 < t_1 < t_2$. On admet que la suite $(t_n)$ est croissante (car 
 \textbf{Partie B — Comparaison avec un taux constant}
 
 \begin{enumerate}
-  \item Montrer par recurrence que pour tout $n \geq 1$, $C_n < D_n$.
+  \item Montrer par récurrence que pour tout $n \geq 1$, $C_n < D_n$.
   \item La suite $(D_n)$ est-elle convergente ? Justifier.
   \item Montrer que la suite $(C_n)$ est croissante.
   \item Peut-on affirmer que le capital $C_n$ depasse $20\,000$~euros ? Discuter.
-  \item Calculer le plus petit entier $n$ tel que $D_n \geq 20\,000$. Interpreter.
+  \item Calculer le plus petit entier $n$ tel que $D_n \geq 20\,000$. Interpréter.
 \end{enumerate}
 
 \end{exercice}
 
 \begin{corrige}{TSPE-SUITLIM-COURS-07-TC-EX2}
 
-\commentaireMarge{On compare les deux modeles pour encadrer le comportement du capital.}
+\commentaireMarge{On compare les deux modèles pour encadrer le comportement du capital.}
 
 \textbf{Question 1.} On pose $\mathcal{P}(n)$ : « $C_n < D_n$ ».
 
@@ -121,13 +121,13 @@ On a $C_{n+1} = C_n(1 + t_n)$ et $D_{n+1} = D_n \times 1{,}03$. Puisque $t_n < 0
 
 Donc $C_{n+1} = C_n(1 + t_n) < C_n \times 1{,}03 < D_n \times 1{,}03 = D_{n+1}$ (en utilisant $C_n < D_n$ et $C_n > 0$). Ainsi $\mathcal{P}(n+1)$ est vraie.
 
-\textit{Conclusion :} par recurrence, pour tout $n \geq 1$, $C_n < D_n$.
+\textit{Conclusion :} par récurrence, pour tout $n \geq 1$, $C_n < D_n$.
 
 \textbf{Question 2.} $D_n = 10\,000 \times 1{,}03^n$ avec $q = 1{,}03 > 1$, donc $\lim_{n \to +\infty} D_n = +\infty$. La suite $(D_n)$ diverge vers $+\infty$.
 
 \textbf{Question 3.} On a $C_{n+1} = C_n(1 + t_n)$ avec $t_n > 0$, donc $1 + t_n > 1$ et $C_{n+1} > C_n$ (car $C_n > 0$). La suite $(C_n)$ est strictement croissante.
 
-\textbf{Question 4.} La comparaison $C_n < D_n$ ne permet pas de conclure directement sur la divergence de $(C_n)$ (une suite majoree par une suite divergente peut converger ou diverger). Une etude plus poussee (hors programme) montre que $(C_n)$ diverge aussi vers $+\infty$, mais plus lentement que $(D_n)$.
+\textbf{Question 4.} La comparaison $C_n < D_n$ ne permet pas de conclure directement sur la divergence de $(C_n)$ (une suite majorée par une suite divergente peut converger ou diverger). Une étude plus poussee (hors programme) montre que $(C_n)$ diverge aussi vers $+\infty$, mais plus lentement que $(D_n)$.
 
 \textbf{Question 5.} On resout $D_n \geq 20\,000$, soit $1{,}03^n \geq 2$, donc $n \geq \dfrac{\ln 2}{\ln 1{,}03} \approx 23{,}45$. Le plus petit entier est $n = 24$.
 

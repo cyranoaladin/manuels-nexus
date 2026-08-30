@@ -7,13 +7,13 @@
 % assert simplify(f - sqrt(a) - (x - sqrt(a))**2/(2*x)) == 0
 % END-VERIFY
 \begin{exercice}{TSPE-CONTIN-EX-049}{3}{20}
-On generalise l'algorithme de Heron de l'exercice \textsc{ex-043}. Soit $a > 0$ et $(u_n)$ definie par $u_0 > 0$ et
+On generalise l'algorithme de Heron de l'exercice \textsc{ex-043}. Soit $a > 0$ et $(u_n)$ définie par $u_0 > 0$ et
 \[ u_{n+1} = \frac{1}{2}\left(u_n + \frac{a}{u_n}\right). \]
 \begin{enumerate}
   \item Montrer que, pour tout $x > 0$, $\dfrac{1}{2}\left(x + \dfrac{a}{x}\right) - \sqrt a = \dfrac{\left(x - \sqrt a\right)^2}{2x}$.
-  \item En deduire que $u_n \geq \sqrt a$ pour tout $n \geq 1$, quel que soit $u_0 > 0$.
+  \item En déduire que $u_n \geq \sqrt a$ pour tout $n \geq 1$, quel que soit $u_0 > 0$.
   \item Montrer que, pour $n \geq 1$, $\left|u_{n+1} - \sqrt a\right| \leq \dfrac{1}{2\sqrt a}\left|u_n - \sqrt a\right|^2$.
-  \item On prend $a = 3$ et $u_0 = 2$. Calculer les ecarts $\left|u_n - \sqrt3\right|$ pour $n = 1, 2, 3, 4$. Combien de decimales exactes gagne-t-on a chaque etape ?
+  \item On prend $a = 3$ et $u_0 = 2$. Calculer les ecarts $\left|u_n - \sqrt3\right|$ pour $n = 1, 2, 3, 4$. Combien de décimales exactes gagne-t-on a chaque étape ?
   \item Comparer avec la convergence de l'exercice \textsc{ex-046}, ou l'ecart etait multiplie par une constante. Quel est l'avantage d'une majoration en carre ?
 \end{enumerate}
 \end{exercice}

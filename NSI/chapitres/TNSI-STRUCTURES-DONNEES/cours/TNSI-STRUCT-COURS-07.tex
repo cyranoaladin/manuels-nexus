@@ -6,7 +6,7 @@
 % ============================================================
 
 \definition[1]{
-Une \textbf{classe} est un modele qui decrit la structure (\textbf{attributs}, l'etat) et le comportement (\textbf{methodes}) des objets qui en sont des \textbf{instances}. En Python, une classe se definit avec le mot-cle \lstinline{class}, et le constructeur \lstinline{__init__} initialise les attributs d'une nouvelle instance.
+Une \textbf{classe} est un modèle qui décrit la structure (\textbf{attributs}, l'etat) et le comportement (\textbf{methodes}) des objets qui en sont des \textbf{instances}. En Python, une classe se définit avec le mot-cle \lstinline{class}, et le constructeur \lstinline{__init__} initialise les attributs d'une nouvelle instance.
 }
 
 \textbf{Exemple.}
@@ -54,7 +54,7 @@ print(p.x, p.y)                # 4 5
 \propriete[Vocabulaire]{
 $\bullet$ \textbf{Attribut} : donnee associee a un objet (etat), accedee par \lstinline{objet.attribut}.
 
-$\bullet$ \textbf{Methode} : fonction associee a une classe, appelee par \lstinline{objet.methode(...)}. Le premier parametre \lstinline{self} designe l'objet lui-meme (fourni automatiquement lors de l'appel).
+$\bullet$ \textbf{Méthode} : fonction associee a une classe, appelee par \lstinline{objet.methode(...)}. Le premier paramètre \lstinline{self} designe l'objet lui-même (fourni automatiquement lors de l'appel).
 
 $\bullet$ \textbf{Instance} : un objet particulier cree a partir d'une classe (par exemple \lstinline{p} est une instance de \lstinline{Point}).
 }
@@ -64,5 +64,5 @@ $\bullet$ \textbf{Instance} : un objet particulier cree a partir d'une classe (p
 % ============================================================
 
 \erreurFrequente{
-\textbf{Oublier \lstinline{self} dans la definition d'une methode.} Toute methode d'instance doit avoir \lstinline{self} comme premier parametre (meme si on ne l'appelle jamais explicitement lors de l'appel \lstinline{objet.methode()}) : Python le fournit automatiquement.
+\textbf{Oublier \lstinline{self} dans la définition d'une méthode.} Toute méthode d'instance doit avoir \lstinline{self} comme premier paramètre (même si on ne l'appelle jamais explicitement lors de l'appel \lstinline{objet.methode()}) : Python le fournit automatiquement.
 }

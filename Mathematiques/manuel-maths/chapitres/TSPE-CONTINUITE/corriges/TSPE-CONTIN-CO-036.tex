@@ -27,11 +27,11 @@
 
 \textbf{Q2.} Soit $x \in [0\,;4]$. Alors $4 \leq 3x+4 \leq 16$, donc $2 \leq \sqrt{3x+4} \leq 4$ : $f(x) \in [0\,;4]$.
 
-Recurrence : $u_0 = 0 \in [0\,;4]$ ; si $u_n \in [0\,;4]$ alors $u_{n+1} = f(u_n) \in [0\,;4]$. Donc $0 \leq u_n \leq 4$ pour tout $n$.
+Récurrence : $u_0 = 0 \in [0\,;4]$ ; si $u_n \in [0\,;4]$ alors $u_{n+1} = f(u_n) \in [0\,;4]$. Donc $0 \leq u_n \leq 4$ pour tout $n$.
 
-\textbf{Q3.} Sur $[0\,;4]$, $f(x)$ et $x$ sont positifs, donc $f(x) - x$ a le meme signe que $f(x)^2 - x^2 = 3x + 4 - x^2$. Or $3x + 4 - x^2 = -(x^2 - 3x - 4) = -(x-4)(x+1)$. Sur $[0\,;4[$ : $x - 4 < 0$ et $x + 1 > 0$, donc $-(x-4)(x+1) > 0$ et $f(x) > x$. En $x = 4$, $f(4) = 4$.
+\textbf{Q3.} Sur $[0\,;4]$, $f(x)$ et $x$ sont positifs, donc $f(x) - x$ a le même signe que $f(x)^2 - x^2 = 3x + 4 - x^2$. Or $3x + 4 - x^2 = -(x^2 - 3x - 4) = -(x-4)(x+1)$. Sur $[0\,;4[$ : $x - 4 < 0$ et $x + 1 > 0$, donc $-(x-4)(x+1) > 0$ et $f(x) > x$. En $x = 4$, $f(4) = 4$.
 
 Donc $u_{n+1} - u_n = f(u_n) - u_n \geq 0$ : la suite $(u_n)$ est croissante.
 
-\textbf{Q4.} La suite est croissante et majoree par $4$ : elle converge vers un reel $\ell \in [0\,;4]$ (theoreme de la limite monotone). La fonction $f$ est continue sur $[0\,;4]$, donc $\ell$ verifie $f(\ell) = \ell$, soit $\sqrt{3\ell+4} = \ell$. Les deux membres etant positifs, on eleve au carre : $\ell^2 = 3\ell + 4$, soit $\ell^2 - 3\ell - 4 = 0$, dont les racines sont $-1$ et $4$. Comme $\ell \geq 0$, on obtient $\ell = 4$.
+\textbf{Q4.} La suite est croissante et majorée par $4$ : elle converge vers un réel $\ell \in [0\,;4]$ (théorème de la limite monotone). La fonction $f$ est continue sur $[0\,;4]$, donc $\ell$ vérifie $f(\ell) = \ell$, soit $\sqrt{3\ell+4} = \ell$. Les deux membres etant positifs, on eleve au carre : $\ell^2 = 3\ell + 4$, soit $\ell^2 - 3\ell - 4 = 0$, dont les racines sont $-1$ et $4$. Comme $\ell \geq 0$, on obtient $\ell = 4$.
 \end{corrige}

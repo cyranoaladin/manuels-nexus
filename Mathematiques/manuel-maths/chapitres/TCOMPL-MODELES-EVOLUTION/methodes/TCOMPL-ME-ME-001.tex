@@ -10,61 +10,61 @@
 \begin{fichemethode}{M1}{Modeliser une evolution par une suite (explicite ou recurrente)}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsqu'un enonce concret (population, capital,
-  medicament...) decrit une evolution etape par etape et demande de la traduire
-  par une suite : formule explicite $u_n = f(n)$ ou relation de recurrence
+  Utiliser cette méthode lorsqu'un énoncé concret (population, capital,
+  medicament...) décrit une evolution étape par étape et demande de la traduire
+  par une suite : formule explicite $u_n = f(n)$ ou relation de récurrence
   $u_{n+1} = g(u_n)$.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Definir precisement $u_n$ (grandeur, unite, instant $n$) et relever la
+    \item Definir precisement $u_n$ (grandeur, unité, instant $n$) et relever la
       valeur initiale $u_0$.
     \item Traduire chaque phrase d'evolution : « augmente de $t\,\%$ »
       $\to$ facteur $\left(1 + \frac{t}{100}\right)$ ; « diminue de $t\,\%$ »
       $\to$ facteur $\left(1 - \frac{t}{100}\right)$ ; « on ajoute $b$ »
       $\to$ $+\,b$.
     \item Assembler la relation : evolution multiplicative seule $\to$ suite
-      geometrique ; ajout constant seul $\to$ suite arithmetique ; les deux
-      $\to$ suite arithmetico-geometrique $u_{n+1} = a\,u_n + b$ (fiche M4).
-    \item Chercher une formule explicite quand c'est possible (geometrique :
-      $u_n = u_0\,q^n$) ; sinon garder la recurrence.
-    \item Controler le modele en calculant $u_1$, $u_2$ « a la main » depuis
-      l'enonce et en comparant avec la formule.
+      géométrique ; ajout constant seul $\to$ suite arithmétique ; les deux
+      $\to$ suite arithmetico-géométrique $u_{n+1} = a\,u_n + b$ (fiche M4).
+    \item Chercher une formule explicite quand c'est possible (géométrique :
+      $u_n = u_0\,q^n$) ; sinon garder la récurrence.
+    \item Contrôler le modèle en calculant $u_1$, $u_2$ « a la main » depuis
+      l'énoncé et en comparant avec la formule.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Une association compte 2000 adherents. Chaque annee, le nombre d'adherents
+  Une association compte 2000 adherents. Chaque année, le nombre d'adherents
   augmente de 5\,\% puis 100 nouveaux adherents supplementaires s'inscrivent.
   Modeliser par une suite.
 
   \medskip
   \commentaireMarge{« $+5\,\%$ » $\to$ facteur $1{,}05$ ; « puis $+100$ » $\to$
-  ajout apres la hausse.}%
-  Soit $u_n$ le nombre d'adherents l'annee $n$, avec $u_0 = 2000$. L'evolution
+  ajout après la hausse.}%
+  Soit $u_n$ le nombre d'adherents l'année $n$, avec $u_0 = 2000$. L'evolution
   annuelle donne $u_{n+1} = 1{,}05\,u_n + 100$.
 
   \medskip
-  Controle : $u_1 = 1{,}05 \times 2000 + 100 = 2200$ et
+  Contrôle : $u_1 = 1{,}05 \times 2000 + 100 = 2200$ et
   $u_2 = 1{,}05 \times 2200 + 100 = 2410$, coherent avec une lecture directe de
-  l'enonce.
+  l'énoncé.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Traduire « augmente de 5\,\% » par $+\,0{,}05$ ou
+    \item \textbf{Piège 1.} Traduire « augmente de 5\,\% » par $+\,0{,}05$ ou
       $\times\,0{,}05$ au lieu de $\times\,1{,}05$.
-    \item \textbf{Piege 2.} Inverser l'ordre des operations quand l'enonce dit
+    \item \textbf{Piège 2.} Inverser l'ordre des opérations quand l'énoncé dit
       « augmente PUIS on ajoute » : $a\,u_n + b \neq a(u_n + b)$.
-    \item \textbf{Piege 3.} Chercher une formule explicite geometrique alors que
-      la suite est arithmetico-geometrique ($b \neq 0$).
+    \item \textbf{Piège 3.} Chercher une formule explicite géométrique alors que
+      la suite est arithmetico-géométrique ($b \neq 0$).
   \end{itemize}
 }
 
 \verifier{%
-  Calculer les deux premiers termes directement depuis le texte de l'enonce et
-  verifier que la relation de recurrence redonne exactement ces valeurs, unites
+  Calculer les deux premiers termes directement depuis le texte de l'énoncé et
+  vérifier que la relation de récurrence redonne exactement ces valeurs, unités
   comprises.
 }
 

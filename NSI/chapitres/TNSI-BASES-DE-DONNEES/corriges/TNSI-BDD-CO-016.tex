@@ -15,11 +15,11 @@
 % END-VERIFY
 \begin{corrige}{TNSI-BDD-EX-004}
 \begin{sql}
-INSERT INTO Stock(produit, quantite) VALUES ('Gomme', 25);
+INSERT INTO Stock(produit, quantité) VALUES ('Gomme', 25);
 
-UPDATE Stock SET quantite = quantite - 5 WHERE produit = 'Cahier';
+UPDATE Stock SET quantité = quantité - 5 WHERE produit = 'Cahier';
 
-DELETE FROM Stock WHERE quantite = 0;
+DELETE FROM Stock WHERE quantité = 0;
 \end{sql}
 Le \texttt{UPDATE} utilise \texttt{quantite - 5} pour exprimer la nouvelle valeur \textbf{relativement} à l'ancienne, sans avoir besoin de connaître ni réécrire la valeur numérique finale ($35$). Le \texttt{DELETE} cible précisément \texttt{quantite = 0} : seul \texttt{'Stylo'} est supprimé.
 \end{corrige}

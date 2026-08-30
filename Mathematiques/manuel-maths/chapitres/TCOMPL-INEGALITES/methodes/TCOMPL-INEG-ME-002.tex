@@ -10,53 +10,53 @@
 \begin{fichemethode}{M2}{Modeliser une courbe de Lorenz par une fonction convexe}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce propose de modeliser la courbe de
+  Utiliser cette méthode lorsque l'énoncé propose de modeliser la courbe de
   Lorenz par une fonction $L$ (par exemple $L(x) = x^2$ ou $L(x) = x^p$) et
-  demande de verifier que le modele est acceptable.
+  demande de vérifier que le modèle est acceptable.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Verifier les conditions aux bornes : $L(0) = 0$ et $L(1) = 1$.
-    \item Verifier que $L$ est croissante sur $[0\,;\,1]$ (les cumuls croissent).
-    \item Verifier que $L$ est CONVEXE sur $[0\,;\,1]$ et en deduire que la
+    \item Vérifier les conditions aux bornes : $L(0) = 0$ et $L(1) = 1$.
+    \item Vérifier que $L$ est croissante sur $[0\,;\,1]$ (les cumuls croissent).
+    \item Vérifier que $L$ est CONVEXE sur $[0\,;\,1]$ et en déduire que la
       courbe est sous la bissectrice : $L(x) \leq x$ sur $[0\,;\,1]$.
-    \item Confronter le modele aux donnees : calculer $L(x_i)$ pour quelques
+    \item Confronter le modèle aux donnees : calculer $L(x_i)$ pour quelques
       cumuls observes et comparer.
-    \item Interpreter la position par rapport a $y = x$ : contact avec la
-      bissectrice = egalite parfaite ; courbe tres « creusee » = fortes
-      inegalites.
+    \item Interpréter la position par rapport a $y = x$ : contact avec la
+      bissectrice = égalité parfaite ; courbe très « creusee » = fortes
+      inégalités.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Verifier que $L(x) = x^2$ est un modele de courbe de Lorenz acceptable et
-  interpreter $L(0{,}5)$.
+  Vérifier que $L(x) = x^2$ est un modèle de courbe de Lorenz acceptable et
+  interpréter $L(0{,}5)$.
 
   \medskip
-  \commentaireMarge{Trois verifications : bornes, croissance, convexite.}%
+  \commentaireMarge{Trois verifications : bornes, croissance, convexité.}%
   $L(0) = 0$ et $L(1) = 1$ ; $L'(x) = 2x \geq 0$ sur $[0\,;\,1]$ ($L$
   croissante) ; $L''(x) = 2 > 0$ ($L$ convexe). De plus
   $x^2 \leq x$ sur $[0\,;\,1]$ : la courbe reste sous la bissectrice.
 
   \medskip
-  $L(0{,}5) = 0{,}25$ : dans ce modele, la moitie la plus modeste detient
+  $L(0{,}5) = 0{,}25$ : dans ce modèle, la moitie la plus modeste detient
   25\,\% du total.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier de verifier $L(1) = 1$ : sans cette
-      normalisation, la fonction ne modelise pas une repartition complete.
-    \item \textbf{Piege 2.} Confondre convexe et croissante : les deux
-      proprietes sont necessaires et distinctes.
-    \item \textbf{Piege 3.} Utiliser le modele hors de $[0\,;\,1]$ : il n'y a
+    \item \textbf{Piège 1.} Oublier de vérifier $L(1) = 1$ : sans cette
+      normalisation, la fonction ne modélisé pas une repartition complete.
+    \item \textbf{Piège 2.} Confondre convexe et croissante : les deux
+      propriétés sont necessaires et distinctes.
+    \item \textbf{Piège 3.} Utiliser le modèle hors de $[0\,;\,1]$ : il n'y a
       pas de sens statistique en dehors.
   \end{itemize}
 }
 
 \verifier{%
-  Controler $L(0)=0$, $L(1)=1$, $L' \geq 0$, $L'' \geq 0$ sur $[0\,;\,1]$, et
+  Contrôler $L(0)=0$, $L(1)=1$, $L' \geq 0$, $L'' \geq 0$ sur $[0\,;\,1]$, et
   comparer $L$ aux cumuls observes en deux ou trois points.
 }
 

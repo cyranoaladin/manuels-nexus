@@ -1,8 +1,8 @@
 % META: {"id": "TSPE-DERCONV-ME-001", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "sources_inspiration": [], "status": "approved"}
-\begin{fichemethode}{M1}{Deriver une fonction composee}
+\begin{fichemethode}{M1}{Dériver une fonction composee}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque la fonction a deriver fait intervenir une composition : $\mathrm{e}^{u(x)}$, $\ln(u(x))$, $(u(x))^n$, $\sqrt{u(x)}$, ou plus generalement $v(u(x))$.
+  Utiliser cette méthode lorsque la fonction a dériver fait intervenir une composition : $\mathrm{e}^{u(x)}$, $\ln(u(x))$, $(u(x))^n$, $\sqrt{u(x)}$, ou plus generalement $v(u(x))$.
 }
 
 \pasApas{%
@@ -16,7 +16,7 @@
 }
 
 \exempleRedige{%
-  \textbf{Exemple.} Deriver $f(x) = \mathrm{e}^{x^2 - 3x}$.
+  \textbf{Exemple.} Dériver $f(x) = \mathrm{e}^{x^2 - 3x}$.
 
   \medskip
   \commentaireMarge{Identifier : $v(t) = \mathrm{e}^t$, $u(x) = x^2 - 3x$.}%
@@ -30,13 +30,13 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier $u'(x)$ : ecrire $(\mathrm{e}^{u})' = \mathrm{e}^u$ au lieu de $u'\,\mathrm{e}^u$.
-    \item \textbf{Piege 2.} Pour $(\ln u)'$, oublier le signe de $u$ : verifier que $u > 0$ sur l'intervalle d'etude.
+    \item \textbf{Piège 1.} Oublier $u'(x)$ : écrire $(\mathrm{e}^{u})' = \mathrm{e}^u$ au lieu de $u'\,\mathrm{e}^u$.
+    \item \textbf{Piège 2.} Pour $(\ln u)'$, oublier le signe de $u$ : vérifier que $u > 0$ sur l'intervalle d'étude.
   \end{itemize}
 }
 
 \verifier{%
-  Verifier sur un cas simple : si $u(x) = 2x$, alors $(\mathrm{e}^{2x})' = 2\mathrm{e}^{2x}$ (et non $\mathrm{e}^{2x}$).
+  Vérifier sur un cas simple : si $u(x) = 2x$, alors $(\mathrm{e}^{2x})' = 2\mathrm{e}^{2x}$ (et non $\mathrm{e}^{2x}$).
 }
 
 \sEntrainer{\refExos{M1}}

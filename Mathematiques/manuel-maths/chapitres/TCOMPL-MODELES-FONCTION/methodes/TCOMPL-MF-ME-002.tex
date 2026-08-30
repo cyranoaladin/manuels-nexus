@@ -10,16 +10,16 @@
 \begin{fichemethode}{M2}{Compter les solutions de f(x) = k avec un tableau de variation}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque le tableau de variation de $f$ est connu et que
-  l'enonce demande le NOMBRE de solutions de $f(x) = k$ (ou l'ensemble des
-  solutions de $f(x) \leq k$), sans resolution algebrique.
+  Utiliser cette méthode lorsque le tableau de variation de $f$ est connu et que
+  l'énoncé demande le NOMBRE de solutions de $f(x) = k$ (ou l'ensemble des
+  solutions de $f(x) \leq k$), sans résolution algébrique.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Decouper l'ensemble d'etude selon les intervalles de monotonie du
+    \item Decouper l'ensemble d'étude selon les intervalles de monotonie du
       tableau de variation.
-    \item Sur chaque intervalle, appliquer le corollaire du theoreme des
+    \item Sur chaque intervalle, appliquer le corollaire du théorème des
       valeurs intermediaires : $f$ continue et STRICTEMENT monotone atteint
       exactement une fois chaque valeur comprise entre ses bornes.
     \item Pour chaque intervalle, tester si $k$ est dans l'intervalle image
@@ -31,36 +31,36 @@
 }
 
 \exempleRedige{%
-  $f(x) = x^3 - 3x + 1$ (tableau : fiche M1). Determiner le nombre de solutions
+  $f(x) = x^3 - 3x + 1$ (tableau : fiche M1). Déterminer le nombre de solutions
   de $f(x) = 0$ puis de $f(x) = 4$.
 
   \medskip
   \commentaireMarge{Comparer $k$ aux images extremes de chaque branche.}%
   Pour $k = 0$ : sur $]-\infty\,;\,-1]$, $f$ croit de $-\infty$ a 3 et
-  $0 \in\ ]-\infty\,;\,3]$ : 1 solution. Sur $[-1\,;\,1]$, $f$ decroit de 3 a
+  $0 \in\ ]-\infty\,;\,3]$ : 1 solution. Sur $[-1\,;\,1]$, $f$ décroît de 3 a
   $-1$ et $0 \in [-1\,;\,3]$ : 1 solution. Sur $[1\,;\,+\infty[$, $f$ croit de
   $-1$ a $+\infty$ : 1 solution. Total : 3 solutions.
 
   \medskip
   Pour $k = 4$ : $4 > 3$ (maximum local), donc aucune solution sur les deux
-  premieres branches ($f \leq 3$ y est verifie) ; sur $[1\,;\,+\infty[$,
+  premieres branches ($f \leq 3$ y est vérifie) ; sur $[1\,;\,+\infty[$,
   $4 \in [-1\,;\,+\infty[$ : exactement 1 solution.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier l'hypothese de STRICTE monotonie ou de
+    \item \textbf{Piège 1.} Oublier l'hypothèse de STRICTE monotonie ou de
       continuite en citant le corollaire du TVI.
-    \item \textbf{Piege 2.} Comparer $k$ aux bornes de l'intervalle de depart au
+    \item \textbf{Piège 2.} Comparer $k$ aux bornes de l'intervalle de depart au
       lieu des IMAGES lues dans le tableau.
-    \item \textbf{Piege 3.} Pour $f(x) \leq k$, donner les solutions de
-      l'equation au lieu des INTERVALLES ou l'inegalite est verifiee.
+    \item \textbf{Piège 3.} Pour $f(x) \leq k$, donner les solutions de
+      l'équation au lieu des INTERVALLES ou l'inégalité est verifiee.
   \end{itemize}
 }
 
 \verifier{%
-  Controler le compte avec la courbe a la calculatrice (intersections avec la
-  droite $y = k$), et verifier chaque branche par un calcul d'image test.
+  Contrôler le compte avec la courbe a la calculatrice (intersections avec la
+  droite $y = k$), et vérifier chaque branche par un calcul d'image test.
 }
 
 \sEntrainer{\refExos{M2}}

@@ -1,6 +1,6 @@
 {
   "chapitre": "TEXP-ARITHMETIQUE",
-  "titre": "Arithmetique",
+  "titre": "Arithmétique",
   "questions": [
     {
       "id": "Q1",
@@ -15,7 +15,7 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Propriete trop restreinte. Si b=ak et c=bm, alors c=a(km), donc a divise c.",
+          "erreur": "Propriété trop restreinte. Si b=ak et c=bm, alors c=a(km), donc a divise c.",
           "renvoi": "C1"
         },
         "C": {
@@ -23,7 +23,7 @@
           "renvoi": "C1"
         },
         "D": {
-          "erreur": "Egalite non necessaire. Si b=ak et c=bm, alors c=a(km), donc a divise c.",
+          "erreur": "Égalité non nécessaire. Si b=ak et c=bm, alors c=a(km), donc a divise c.",
           "renvoi": "C1"
         }
       }
@@ -83,7 +83,7 @@
     {
       "id": "Q4",
       "capacite": "C5",
-      "enonce": "Le theoreme de Bezout affirme que PGCD(a,b)=1 si et seulement si :",
+      "enonce": "Le théorème de Bezout affirme que PGCD(a,b)=1 si et seulement si :",
       "correcte": "D",
       "options": {
         "A": "$a+b=1$",
@@ -93,15 +93,15 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Equation trop simple. Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1.",
+          "erreur": "Équation trop simple. Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1.",
           "renvoi": "C5"
         },
         "B": {
-          "erreur": "Produit egal a 1. Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1.",
+          "erreur": "Produit égal a 1. Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1.",
           "renvoi": "C5"
         },
         "C": {
-          "erreur": "Equation homogene. Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1.",
+          "erreur": "Équation homogene. Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1.",
           "renvoi": "C5"
         }
       }
@@ -123,7 +123,7 @@
           "renvoi": "C2"
         },
         "C": {
-          "erreur": "Egalite non necessaire. La congruence a équivalent à b modulo n signifie exactement que n divise a-b.",
+          "erreur": "Égalité non nécessaire. La congruence a équivalent à b modulo n signifie exactement que n divise a-b.",
           "renvoi": "C2"
         },
         "D": {

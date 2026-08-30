@@ -3,7 +3,7 @@
 \section{Limites de la fonction exponentielle}
 
 % ============================================================
-% STRATE 1 — Limites et demonstrations exigibles
+% STRATE 1 — Limites et démonstrations exigibles
 % ============================================================
 
 \subsection{Limite en $+\infty$}
@@ -13,13 +13,13 @@ $\displaystyle\lim_{x \to +\infty} \mathrm{e}^x = +\infty$.
 }
 
 \demonstration{
-Pour tout $x \geq 0$, la derivee de $\mathrm{e}^x$ vaut $\mathrm{e}^x > 0$, donc la fonction exponentielle est strictement croissante sur $\mathbb{R}$.
+Pour tout $x \geq 0$, la dérivée de $\mathrm{e}^x$ vaut $\mathrm{e}^x > 0$, donc la fonction exponentielle est strictement croissante sur $\mathbb{R}$.
 
 Pour tout $n \in \mathbb{N}$, posons $u_n = \mathrm{e}^n$. On a $u_{n+1} = \mathrm{e}^{n+1} = \mathrm{e} \cdot \mathrm{e}^n = \mathrm{e} \cdot u_n$.
 
-La suite $(u_n)$ est geometrique de raison $\mathrm{e} > 1$, donc $\lim_{n \to +\infty} u_n = +\infty$ (d'apres le cours sur la limite de $q^n$ avec $q > 1$).
+La suite $(u_n)$ est géométrique de raison $\mathrm{e} > 1$, donc $\lim_{n \to +\infty} u_n = +\infty$ (d'après le cours sur la limite de $q^n$ avec $q > 1$).
 
-Pour tout reel $x \geq 0$, posons $n = \lfloor x \rfloor$ (partie entiere de $x$). On a $n \leq x$, donc par croissance de l'exponentielle :
+Pour tout réel $x \geq 0$, posons $n = \lfloor x \rfloor$ (partie entiere de $x$). On a $n \leq x$, donc par croissance de l'exponentielle :
 \[
   \mathrm{e}^x \geq \mathrm{e}^n = u_n.
 \]
@@ -55,7 +55,7 @@ Autrement dit, l'exponentielle croit plus vite que toute fonction affine en $+\i
 }
 
 \demonstration{
-Pour tout $x \geq 0$, on a $\mathrm{e}^x \geq 1 + x$ (consequence de la convexite de l'exponentielle, ou de l'inegalite $\mathrm{e}^x \geq 1 + x$ demontree par etude de la fonction $g(x) = \mathrm{e}^x - 1 - x$).
+Pour tout $x \geq 0$, on a $\mathrm{e}^x \geq 1 + x$ (consequence de la convexité de l'exponentielle, ou de l'inégalité $\mathrm{e}^x \geq 1 + x$ demontree par étude de la fonction $g(x) = \mathrm{e}^x - 1 - x$).
 
 Donc pour $x \geq 0$ :
 \[
@@ -83,7 +83,7 @@ $\displaystyle\lim_{x \to -\infty} x\,\mathrm{e}^x = 0$.
 }
 
 \erreurFrequente{
-\textbf{Ecrire $\mathrm{e}^{-\infty} = -\infty$.}
+\textbf{Écrire $\mathrm{e}^{-\infty} = -\infty$.}
 
 La fonction exponentielle est toujours strictement positive. En $-\infty$, $\mathrm{e}^x$ tend vers $0$ (et non vers $-\infty$). L'image de l'exponentielle est $]0, +\infty[$.
 }
@@ -91,5 +91,5 @@ La fonction exponentielle est toujours strictement positive. En $-\infty$, $\mat
 \erreurFrequente{
 \textbf{Oublier la croissance comparee dans une forme indeterminee.}
 
-La limite de $\dfrac{\mathrm{e}^x}{x^2}$ en $+\infty$ est $+\infty$ (et non une forme indeterminee « $\dfrac{\infty}{\infty}$ » sans conclusion). L'exponentielle « l'emporte » sur tout polynome.
+La limite de $\dfrac{\mathrm{e}^x}{x^2}$ en $+\infty$ est $+\infty$ (et non une forme indeterminee « $\dfrac{\infty}{\infty}$ » sans conclusion). L'exponentielle « l'emporte » sur tout polynôme.
 }

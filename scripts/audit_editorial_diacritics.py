@@ -158,6 +158,73 @@ UNAMBIGUOUS: dict[str, str] = {
     "definit": "définit",
     "differentielle": "différentielle",
     "differentielles": "différentielles",
+    "annee": "année",
+    "annees": "années",
+    "arete": "arête",
+    "aretes": "arêtes",
+    "arithmetique": "arithmétique",
+    "boite": "boîte",
+    "boites": "boîtes",
+    "capacite": "capacité",
+    "completer": "compléter",
+    "concavite": "concavité",
+    "controle": "contrôle",
+    "controler": "contrôler",
+    "controles": "contrôles",
+    "convexite": "convexité",
+    "coordonnee": "coordonnée",
+    "coordonnees": "coordonnées",
+    "cout": "coût",
+    "couts": "coûts",
+    "decroit": "décroît",
+    "degre": "degré",
+    "degres": "degrés",
+    "demontre": "démontré",
+    "demontrer": "démontrer",
+    "determine": "déterminé",
+    "determinee": "déterminée",
+    "determiner": "déterminer",
+    "element": "élément",
+    "elements": "éléments",
+    "etude": "étude",
+    "etudes": "études",
+    "extremite": "extrémité",
+    "extremites": "extrémités",
+    "hypothese": "hypothèse",
+    "hypotheses": "hypothèses",
+    "independance": "indépendance",
+    "independant": "indépendant",
+    "independante": "indépendante",
+    "independantes": "indépendantes",
+    "independants": "indépendants",
+    "integrale": "intégrale",
+    "integrales": "intégrales",
+    "interpretation": "interprétation",
+    "interpreter": "interpréter",
+    "majore": "majoré",
+    "majoree": "majorée",
+    "materiel": "matériel",
+    "materielle": "matérielle",
+    "minore": "minoré",
+    "minoree": "minorée",
+    "operation": "opération",
+    "operations": "opérations",
+    "ordonnee": "ordonnée",
+    "ordonnees": "ordonnées",
+    "periodicite": "périodicité",
+    "piege": "piège",
+    "pieges": "pièges",
+    "polynome": "polynôme",
+    "polynomes": "polynômes",
+    "priorite": "priorité",
+    "quantite": "quantité",
+    "quantites": "quantités",
+    "recurrence": "récurrence",
+    "succes": "succès",
+    "temperature": "température",
+    "trigonometrie": "trigonométrie",
+    "trigonometrique": "trigonométrique",
+    "trigonometriques": "trigonométriques",
     "caracterisation": "caractérisation",
     "caracterise": "caractérise",
     "caracteriser": "caractériser",
@@ -244,12 +311,18 @@ _VERIFY_BLOCK = re.compile(r"^% BEGIN-VERIFY.*?^% END-VERIFY\s*$", re.M | re.S)
 _COMMENT = re.compile(r"^%.*$", re.M)
 _DISPLAY_MATH = re.compile(r"\\\[.*?\\\]", re.S)
 _INLINE_MATH = re.compile(r"\$[^$]*\$")
+#: Environnements de code. Les manuels NSI en emploient d'autres que les
+#: manuels de mathematiques : accentuer un identifiant Python ou une requete
+#: SQL casserait le code publie.
 _CODE_ENV = re.compile(
-    r"\\begin\{(verbatim|lstlisting|minted|algorithme|python)\}.*?"
+    r"\\begin\{(verbatim|lstlisting|minted|algorithme|python|sql|console|pseudocode)\}.*?"
     r"\\end\{\1\}",
     re.S,
 )
 _CODE_MACRO = re.compile(r"\\(code|texttt|verb|url|href|lstinline)\s*\{[^{}]*\}")
+#: \verb et \lstinline acceptent un delimiteur libre : \lstinline|code|.
+#: Sans cette forme, un identifiant Python inline etait lu comme de la prose.
+_CODE_DELIMITED = re.compile(r"\\(?:verb|lstinline)\s*([^A-Za-z0-9\s{])(.*?)\1", re.S)
 _STRUCTURAL_MACRO = re.compile(r"\\(label|ref|input|include|includegraphics)\s*\{[^{}]*\}")
 #: `\begin{corrige}` nomme un environnement, pas un participe passe.
 _ENVIRONMENT_NAME = re.compile(r"\\(begin|end)\s*\{[^{}]*\}")
@@ -267,6 +340,7 @@ def prose_only(text: str) -> str:
         _DISPLAY_MATH,
         _INLINE_MATH,
         _CODE_MACRO,
+        _CODE_DELIMITED,
         _STRUCTURAL_MACRO,
         _COMMENT,
         _ENVIRONMENT_NAME,
@@ -303,7 +377,18 @@ def scan_text(text: str) -> tuple[Counter, Counter]:
     return wrong, ambiguous
 
 
+#: Repertoires hors perimetre PUBLIE. `_harvest` contient des candidats de
+#: recuperation qu'aucun assembleur ne reference : les corriger changerait des
+#: fichiers morts et la dette publiee n'en dependrait pas.
+UNPUBLISHED_DIRECTORIES = ("_harvest",)
+
+
+def is_published(path: Path) -> bool:
+    return not any(part in UNPUBLISHED_DIRECTORIES for part in path.parts)
+
+
 def scan_paths(paths: list[Path]) -> dict[str, Any]:
+    paths = [path for path in paths if is_published(path)]
     wrong: Counter = Counter()
     ambiguous: Counter = Counter()
     by_file: dict[str, dict[str, int]] = defaultdict(dict)
@@ -354,10 +439,13 @@ def main(argv: list[str] | None = None) -> int:
             for wrong_form, right_form in UNAMBIGUOUS.items():
                 if wrong_form == right_form:
                     continue
-                for candidate in (wrong_form, wrong_form.capitalize()):
-                    replacement = (
-                        right_form if candidate == wrong_form else right_form.capitalize()
-                    )
+                # minuscules, Capitalise, et CAPITALES : le manuel emploie les
+                # trois, par exemple "un MEME intervalle".
+                for candidate, replacement in (
+                    (wrong_form, right_form),
+                    (wrong_form.capitalize(), right_form.capitalize()),
+                    (wrong_form.upper(), right_form.upper()),
+                ):
                     updated = _replace_in_prose(updated, candidate, replacement)
             if updated != text:
                 path.write_text(updated, encoding="utf-8")
@@ -394,8 +482,12 @@ def _replace_in_prose(text: str, wrong_form: str, right_form: str) -> str:
         _DISPLAY_MATH,
         _INLINE_MATH,
         _CODE_MACRO,
+        _CODE_DELIMITED,
         _STRUCTURAL_MACRO,
         _ENVIRONMENT_NAME,
+        # Un commentaire LaTeX n'est pas compte par le scanner : le protéger
+        # ici garde la mesure et la correction sur le meme perimetre.
+        _COMMENT,
         # Un nom de macro N'EST PAS de la prose. Sans cette protection, la
         # correction produit \theoreme accentue, \definition accentue,
         # \propriete accentue : des macros qui n'existent pas et un manuel

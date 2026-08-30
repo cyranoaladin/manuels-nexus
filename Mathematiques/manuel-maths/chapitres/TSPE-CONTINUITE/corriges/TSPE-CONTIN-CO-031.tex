@@ -22,15 +22,15 @@
 % END-VERIFY
 \begin{corrige}{TSPE-CONTIN-EX-031}
 
-\textbf{Q1.} On factorise par le terme de plus haut degre : $P(x) = x^3\left(1 - \dfrac{4}{x^2} + \dfrac{1}{x^3}\right)$. Le second facteur tend vers $1$ en $\pm\infty$. Donc $\displaystyle\lim_{x \to -\infty}P(x) = -\infty$ et $\displaystyle\lim_{x \to +\infty}P(x) = +\infty$.
+\textbf{Q1.} On factorise par le terme de plus haut degré : $P(x) = x^3\left(1 - \dfrac{4}{x^2} + \dfrac{1}{x^3}\right)$. Le second facteur tend vers $1$ en $\pm\infty$. Donc $\displaystyle\lim_{x \to -\infty}P(x) = -\infty$ et $\displaystyle\lim_{x \to +\infty}P(x) = +\infty$.
 
-Comme $P$ tend vers $-\infty$, il existe un reel $a$ tel que $P(a) < 0$ ; comme $P$ tend vers $+\infty$, il existe $b > a$ tel que $P(b) > 0$. La fonction $P$ est continue sur $[a\,;b]$ (fonction polynome) et $0$ est compris entre $P(a)$ et $P(b)$ : d'apres le theoreme des valeurs intermediaires, il existe $c \in \left]a\,;b\right[$ tel que $P(c) = 0$.
+Comme $P$ tend vers $-\infty$, il existe un réel $a$ tel que $P(a) < 0$ ; comme $P$ tend vers $+\infty$, il existe $b > a$ tel que $P(b) > 0$. La fonction $P$ est continue sur $[a\,;b]$ (fonction polynôme) et $0$ est compris entre $P(a)$ et $P(b)$ : d'après le théorème des valeurs intermediaires, il existe $c \in \left]a\,;b\right[$ tel que $P(c) = 0$.
 
-\textbf{Q2.} $P'(x) = 3x^2 - 4$, qui s'annule en $\pm\dfrac{2}{\sqrt{3}}$. La fonction croit jusqu'a $-\dfrac{2}{\sqrt{3}}$, decroit jusqu'a $\dfrac{2}{\sqrt{3}}$, puis croit. Comme $P\!\left(-\tfrac{2}{\sqrt3}\right) > 0$ et $P\!\left(\tfrac{2}{\sqrt3}\right) < 0$, chacune des trois branches strictement monotones traverse la valeur $0$ exactement une fois : $P$ a \textbf{trois} racines reelles, approximativement $-2{,}115$, $0{,}254$ et $1{,}861$.
+\textbf{Q2.} $P'(x) = 3x^2 - 4$, qui s'annule en $\pm\dfrac{2}{\sqrt{3}}$. La fonction croit jusqu'a $-\dfrac{2}{\sqrt{3}}$, décroît jusqu'a $\dfrac{2}{\sqrt{3}}$, puis croit. Comme $P\!\left(-\tfrac{2}{\sqrt3}\right) > 0$ et $P\!\left(\tfrac{2}{\sqrt3}\right) < 0$, chacune des trois branches strictement monotones traverse la valeur $0$ exactement une fois : $P$ a \textbf{trois} racines réelles, approximativement $-2{,}115$, $0{,}254$ et $1{,}861$.
 
 \textbf{Q3.} Pour $n$ impair, $P(x) = a_n x^n\left(1 + \dfrac{a_{n-1}}{a_n x} + \dots + \dfrac{a_0}{a_n x^n}\right)$, et le facteur entre parentheses tend vers $1$ en $\pm\infty$. Comme $n$ est impair, $x^n$ tend vers $-\infty$ en $-\infty$ et vers $+\infty$ en $+\infty$.
 
-Si $a_n > 0$ : $P$ tend vers $-\infty$ en $-\infty$ et vers $+\infty$ en $+\infty$. Si $a_n < 0$ : les deux limites sont echangees. Dans les deux cas, les limites sont \emph{de signes contraires}, donc $P$ prend une valeur strictement negative en un point $a$ et une valeur strictement positive en un point $b$. Etant continue, elle s'annule entre les deux d'apres le theoreme des valeurs intermediaires. Toute fonction polynome de degre impair admet donc au moins une racine reelle.
+Si $a_n > 0$ : $P$ tend vers $-\infty$ en $-\infty$ et vers $+\infty$ en $+\infty$. Si $a_n < 0$ : les deux limites sont echangees. Dans les deux cas, les limites sont \emph{de signes contraires}, donc $P$ prend une valeur strictement négative en un point $a$ et une valeur strictement positive en un point $b$. Etant continue, elle s'annule entre les deux d'après le théorème des valeurs intermediaires. Toute fonction polynôme de degré impair admet donc au moins une racine réelle.
 
-\textbf{Q4.} Non. Pour $n$ pair, $x^n$ tend vers $+\infty$ aux deux bornes : les limites ont le meme signe et l'argument s'effondre. Contre-exemple : $P(x) = x^2 + 1$ est de degre $2$ et verifie $P(x) \geq 1 > 0$ pour tout reel $x$ : elle n'a aucune racine reelle.
+\textbf{Q4.} Non. Pour $n$ pair, $x^n$ tend vers $+\infty$ aux deux bornes : les limites ont le même signe et l'argument s'effondre. Contre-exemple : $P(x) = x^2 + 1$ est de degré $2$ et vérifie $P(x) \geq 1 > 0$ pour tout réel $x$ : elle n'a aucune racine réelle.
 \end{corrige}

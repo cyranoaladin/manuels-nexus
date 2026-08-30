@@ -3,17 +3,17 @@
 \section{Suites d'intégrales}
 
 % ============================================================
-% STRATE 1 — Methode et exemple avec relation de recurrence
+% STRATE 1 — Méthode et exemple avec relation de récurrence
 % ============================================================
 
-On etudie parfois une suite $\left(I_n\right)$ definie par $I_n = \displaystyle\int_a^b f_n(x)\,\mathrm{d}x$, ou $f_n$ depend d'un entier $n$. On peut etudier son signe, sa monotonie, sa limite, ou etablir une relation de recurrence par integration par parties.
+On etudie parfois une suite $\left(I_n\right)$ définie par $I_n = \displaystyle\int_a^b f_n(x)\,\mathrm{d}x$, ou $f_n$ depend d'un entier $n$. On peut étudier son signe, sa monotonie, sa limite, ou etablir une relation de récurrence par integration par parties.
 
 \exemple{
 Pour $n \in \mathbb{N}$, on pose $I_n = \displaystyle\int_0^1 x^n\,\mathrm{e}^x\,\mathrm{d}x$.
 
-\textbf{Signe.} $x^n\mathrm{e}^x \geq 0$ sur $[0,1]$, donc $I_n \geq 0$ pour tout $n$ (integrale d'une fonction positive).
+\textbf{Signe.} $x^n\mathrm{e}^x \geq 0$ sur $[0,1]$, donc $I_n \geq 0$ pour tout $n$ (intégrale d'une fonction positive).
 
-\textbf{Relation de recurrence.} Par integration par parties avec $u(x)=x^n$ ($u'(x)=nx^{n-1}$) et $v'(x)=\mathrm{e}^x$ ($v(x)=\mathrm{e}^x$) :
+\textbf{Relation de récurrence.} Par integration par parties avec $u(x)=x^n$ ($u'(x)=nx^{n-1}$) et $v'(x)=\mathrm{e}^x$ ($v(x)=\mathrm{e}^x$) :
 \[
   I_n = \big[x^n\mathrm{e}^x\big]_0^1 - \int_0^1 nx^{n-1}\mathrm{e}^x\,\mathrm{d}x = \mathrm{e} - n I_{n-1} \quad (n \geq 1).
 \]
@@ -35,7 +35,7 @@ Pour $n \in \mathbb{N}$, on pose $I_n = \displaystyle\int_0^1 x^n\,\mathrm{e}^x\
 }
 
 \margeAppui{
-Une suite d'integrales positive et decroissante (ou majoree) converge (theoreme de la limite monotone, chapitre Suites) : on peut alors chercher sa limite, par exemple par encadrement.
+Une suite d'intégrales positive et décroissante (ou majorée) converge (théorème de la limite monotone, chapitre Suites) : on peut alors chercher sa limite, par exemple par encadrement.
 }
 
 % ============================================================
@@ -43,5 +43,5 @@ Une suite d'integrales positive et decroissante (ou majoree) converge (theoreme 
 % ============================================================
 
 \erreurFrequente{
-\textbf{Confondre la relation de recurrence avec une formule close.} $I_n = \mathrm{e} - nI_{n-1}$ exprime $I_n$ en fonction de $I_{n-1}$, pas directement en fonction de $n$ seul : il faut it\'erer la relation ou raisonner par recurrence pour obtenir des informations sur $I_n$ (signe, limite...).
+\textbf{Confondre la relation de récurrence avec une formule close.} $I_n = \mathrm{e} - nI_{n-1}$ exprime $I_n$ en fonction de $I_{n-1}$, pas directement en fonction de $n$ seul : il faut it\'erer la relation ou raisonner par récurrence pour obtenir des informations sur $I_n$ (signe, limite...).
 }

@@ -9,8 +9,8 @@
 \begin{fichemethode}{M3}{Construire la matrice d'adjacence d'un graphe}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande la matrice d'adjacence d'un
-  graphe donne (par dessin ou liste d'aretes), ou de reconstruire le graphe
+  Utiliser cette méthode lorsque l'énoncé demande la matrice d'adjacence d'un
+  graphe donne (par dessin ou liste d'arêtes), ou de reconstruire le graphe
   depuis sa matrice.
 }
 
@@ -21,16 +21,16 @@
     \item Remplir : $m_{ij} = 1$ si les sommets $i$ et $j$ sont adjacents,
       $m_{ij} = 0$ sinon.
     \item Diagonale : $m_{ii} = 0$ en l'absence de boucle.
-    \item Controles pour un graphe non oriente : matrice SYMETRIQUE
-      ($m_{ij} = m_{ji}$), et la somme de la ligne $i$ vaut le degre du sommet
+    \item Contrôles pour un graphe non oriente : matrice SYMETRIQUE
+      ($m_{ij} = m_{ji}$), et la somme de la ligne $i$ vaut le degré du sommet
       $i$.
     \item Lecture inverse : chaque 1 au-dessus de la diagonale correspond a
-      une arete — les compter pour retrouver la taille du graphe.
+      une arête — les compter pour retrouver la taille du graphe.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Ecrire la matrice d'adjacence du graphe d'aretes $AB$, $AC$, $BC$, $CD$
+  Écrire la matrice d'adjacence du graphe d'arêtes $AB$, $AC$, $BC$, $CD$
   (sommets ranges dans l'ordre $A, B, C, D$).
 
   \medskip
@@ -43,26 +43,26 @@
   \end{pmatrix}$
 
   \medskip
-  \commentaireMarge{Sommes des lignes $=$ degres.}%
+  \commentaireMarge{Sommes des lignes $=$ degrés.}%
   $M$ est symetrique, de diagonale nulle, et les sommes des lignes donnent
-  $2, 2, 3, 1$ : ce sont bien les degres de $A$, $B$, $C$, $D$ (fiche M1).
+  $2, 2, 3, 1$ : ce sont bien les degrés de $A$, $B$, $C$, $D$ (fiche M1).
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier la symetrie : chaque arete remplit DEUX
+    \item \textbf{Piège 1.} Oublier la symetrie : chaque arête remplit DEUX
       coefficients ($m_{ij}$ ET $m_{ji}$).
-    \item \textbf{Piege 2.} Changer l'ordre des sommets en cours de route : la
+    \item \textbf{Piège 2.} Changer l'ordre des sommets en cours de route : la
       matrice n'a de sens que pour un ordre fixe et annonce.
-    \item \textbf{Piege 3.} Mettre des 1 sur la diagonale sans boucle dans le
+    \item \textbf{Piège 3.} Mettre des 1 sur la diagonale sans boucle dans le
       graphe.
   \end{itemize}
 }
 
 \verifier{%
-  Verifier la symetrie, la diagonale nulle, et que la somme de tous les
-  coefficients vaut $2 \times$ le nombre d'aretes ; reconstruire deux ou trois
-  aretes depuis la matrice pour recouper.
+  Vérifier la symetrie, la diagonale nulle, et que la somme de tous les
+  coefficients vaut $2 \times$ le nombre d'arêtes ; reconstruire deux ou trois
+  arêtes depuis la matrice pour recouper.
 }
 
 \sEntrainer{\refExos{M3}}

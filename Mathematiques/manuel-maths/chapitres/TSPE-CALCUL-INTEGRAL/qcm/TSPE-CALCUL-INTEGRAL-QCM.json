@@ -1,11 +1,11 @@
 {
   "chapitre": "TSPE-CALCUL-INTEGRAL",
-  "titre": "Calcul d'integrales et primitives",
+  "titre": "Calcul d'intégrales et primitives",
   "questions": [
     {
       "id": "Q1",
       "capacite": "C2",
-      "enonce": "Soit $f(x) = x^2$. L'integrale $\\int_{0}^{3} f(x) dx$ vaut :",
+      "enonce": "Soit $f(x) = x^2$. L'intégrale $\\int_{0}^{3} f(x) dx$ vaut :",
       "correcte": "B",
       "options": {
         "A": "3",
@@ -15,7 +15,7 @@
       },
       "diagnostics": {
         "A": {
-        "erreur": "Choisir $3$ revient a prendre $x$ pour primitive de $x^2$ puis a calculer $[x]_0^3$ ; or une primitive correcte est $x^3/3$.",
+          "erreur": "Choisir $3$ revient a prendre $x$ pour primitive de $x^2$ puis a calculer $[x]_0^3$ ; or une primitive correcte est $x^3/3$.",
           "renvoi": "C2"
         },
         "C": {
@@ -23,7 +23,7 @@
           "renvoi": "C2"
         },
         "D": {
-          "erreur": "Le resultat $18$ double a tort la valeur correcte $9$ ; aucune symetrie ni aucun coefficient ne justifie ce facteur $2$ sur $[0,3]$.",
+          "erreur": "Le résultat $18$ double a tort la valeur correcte $9$ ; aucune symetrie ni aucun coefficient ne justifie ce facteur $2$ sur $[0,3]$.",
           "renvoi": "C2"
         }
       }
@@ -45,11 +45,11 @@
           "renvoi": "C2"
         },
         "B": {
-          "erreur": "Le resultat $8$ est $f(4)=8$ : il evalue la fonction a la borne droite au lieu de calculer puis moyenner l'integrale.",
+          "erreur": "Le résultat $8$ est $f(4)=8$ : il evalue la fonction a la borne droite au lieu de calculer puis moyenner l'intégrale.",
           "renvoi": "C2"
         },
         "D": {
-          "erreur": "L'integrale vaut $16$ ; choisir $16$ oublie ensuite le facteur $1/(4-0)$ indispensable dans la definition de la valeur moyenne.",
+          "erreur": "L'intégrale vaut $16$ ; choisir $16$ oublie ensuite le facteur $1/(4-0)$ indispensable dans la définition de la valeur moyenne.",
           "renvoi": "C2"
         }
       }
@@ -71,7 +71,7 @@
           "renvoi": "C1"
         },
         "C": {
-          "erreur": "La positivite donne seulement $I\\geq0$ ; la majoration $I\\leq3$ oublie que $f$ peut atteindre $5$ sur un intervalle de longueur $3$.",
+          "erreur": "La positivité donne seulement $I\\geq0$ ; la majoration $I\\leq3$ oublie que $f$ peut atteindre $5$ sur un intervalle de longueur $3$.",
           "renvoi": "C1"
         },
         "D": {
@@ -93,11 +93,11 @@
       },
       "diagnostics": {
         "B": {
-          "erreur": "Le sens de l'inegalite est inverse : l'integration conserve l'ordre entre deux fonctions continues comparees sur le meme intervalle.",
+          "erreur": "Le sens de l'inégalité est inverse : l'integration conserve l'ordre entre deux fonctions continues comparees sur le même intervalle.",
           "renvoi": "C3"
         },
         "C": {
-          "erreur": "L'hypothese $f\\leqslant g$ n'impose pas leur egalite ; par exemple $f=0$ et $g=1$ donnent des integrales distinctes.",
+          "erreur": "L'hypothèse $f\\leqslant g$ n'impose pas leur égalité ; par exemple $f=0$ et $g=1$ donnent des intégrales distinctes.",
           "renvoi": "C3"
         },
         "D": {
@@ -119,15 +119,15 @@
       },
       "diagnostics": {
         "A": {
-        "erreur": "La derivee de $xe^x$ vaut $e^x+xe^x$ : le terme $e^x$ issu de la derivee de $x$ empeche cette expression d'etre une primitive de $xe^x$.",
+          "erreur": "La dérivée de $xe^x$ vaut $e^x+xe^x$ : le terme $e^x$ issu de la dérivée de $x$ empeche cette expression d'être une primitive de $xe^x$.",
           "renvoi": "C2"
         },
         "B": {
-          "erreur": "Choisir $e^x$ revient a supprimer le facteur $x$ avant d'integrer ; sa derivee vaut seulement $e^x$, et non $xe^x$.",
+          "erreur": "Choisir $e^x$ revient a supprimer le facteur $x$ avant d'integrer ; sa dérivée vaut seulement $e^x$, et non $xe^x$.",
           "renvoi": "C2"
         },
         "C": {
-        "erreur": "La derivee de $(x+1)e^x$ vaut $(x+2)e^x$ ; l'integration par parties soustrait $e^x$ et conduit a $(x-1)e^x$.",
+          "erreur": "La dérivée de $(x+1)e^x$ vaut $(x+2)e^x$ ; l'integration par parties soustrait $e^x$ et conduit a $(x-1)e^x$.",
           "renvoi": "C2"
         }
       }

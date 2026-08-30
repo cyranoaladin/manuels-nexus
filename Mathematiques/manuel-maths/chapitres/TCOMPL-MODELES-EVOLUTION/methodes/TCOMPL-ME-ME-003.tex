@@ -10,20 +10,20 @@
 % assert all(s < 4 for s in seq)
 % assert f(4) == 4
 % END-VERIFY
-\begin{fichemethode}{M3}{Representer graphiquement une suite recurrente et conjecturer son comportement}
+\begin{fichemethode}{M3}{Représenter graphiquement une suite recurrente et conjecturer son comportement}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque la suite est definie par $u_{n+1} = f(u_n)$ et
-  que l'enonce demande une construction graphique « en escalier » (ou « en
+  Utiliser cette méthode lorsque la suite est définie par $u_{n+1} = f(u_n)$ et
+  que l'énoncé demande une construction graphique « en escalier » (ou « en
   colimacon ») et une conjecture sur les variations et la limite.
 }
 
 \pasApas{%
   \begin{enumerate}
     \item Tracer la courbe $\mathcal{C}_f$ de $f$ ET la droite $d : y = x$ dans
-      le meme repere.
+      le même repere.
     \item Placer $u_0$ sur l'axe des abscisses ; monter verticalement jusqu'a
-      $\mathcal{C}_f$ : l'ordonnee atteinte est $u_1 = f(u_0)$.
+      $\mathcal{C}_f$ : l'ordonnée atteinte est $u_1 = f(u_0)$.
     \item Ramener $u_1$ sur l'axe des abscisses en passant HORIZONTALEMENT par
       la droite $y = x$.
     \item Repeter le procede pour construire $u_2$, $u_3$... et observer la
@@ -46,24 +46,24 @@
   escalier donne $u_1 = 2{,}5$ ; $u_2 = 3{,}25$ ; $u_3 = 3{,}625$...
 
   \medskip
-  Conjecture : $(u_n)$ est croissante, majoree par 4, et converge vers 4.
+  Conjecture : $(u_n)$ est croissante, majorée par 4, et converge vers 4.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier de tracer la droite $y = x$ : sans elle, on
+    \item \textbf{Piège 1.} Oublier de tracer la droite $y = x$ : sans elle, on
       ne peut pas rabattre $u_{n+1}$ sur l'axe des abscisses.
-    \item \textbf{Piege 2.} Lire les termes sur l'axe des ORDONNEES : les
+    \item \textbf{Piège 2.} Lire les termes sur l'axe des ORDONNEES : les
       termes successifs se lisent sur l'axe des ABSCISSES.
-    \item \textbf{Piege 3.} Confondre conjecture et preuve : la construction
-      graphique suggere le comportement, elle ne le demontre pas (fiche M4 pour
+    \item \textbf{Piège 3.} Confondre conjecture et preuve : la construction
+      graphique suggere le comportement, elle ne le démontré pas (fiche M4 pour
       la preuve).
   \end{itemize}
 }
 
 \verifier{%
   Recalculer numeriquement $u_1$, $u_2$, $u_3$ et comparer avec la lecture
-  graphique ; controler que la limite conjecturee est bien solution de
+  graphique ; contrôler que la limite conjecturee est bien solution de
   $f(x) = x$.
 }
 

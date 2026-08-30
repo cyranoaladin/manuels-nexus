@@ -21,7 +21,7 @@
 
 \section*{Temps 7 — TD contextualise : Concentration d'un medicament}
 
-\textbf{Contexte.} Apres injection, la concentration (en mg/L) d'un medicament dans le sang au temps $t$ (en heures, $t \geq 0$) est modelisee par :
+\textbf{Contexte.} Après injection, la concentration (en mg/L) d'un medicament dans le sang au temps $t$ (en heures, $t \geq 0$) est modélisée par :
 \[
   C(t) = 5t\,\mathrm{e}^{-0{,}5t}.
 \]
@@ -29,7 +29,7 @@
 \bigskip
 
 %---------------------------------------------------------------
-% PARTIE A — Etude de la concentration
+% PARTIE A — Étude de la concentration
 %---------------------------------------------------------------
 
 \begin{exercice}{TSPE-LIMFCT-COURS-07-TC-EX1}{2}{15}
@@ -37,11 +37,11 @@
 \textbf{Partie A — Limites et variations}
 
 \begin{enumerate}
-  \item Calculer $C(0)$. Interpreter.
-  \item Determiner $\lim_{t \to +\infty} C(t)$. Quelle croissance comparee utilise-t-on ? Interpreter.
+  \item Calculer $C(0)$. Interpréter.
+  \item Déterminer $\lim_{t \to +\infty} C(t)$. Quelle croissance comparee utilise-t-on ? Interpréter.
   \item La droite $y = 0$ est-elle asymptote horizontale a la courbe ? Justifier.
   \item Calculer $C'(t)$ et montrer que $C'(t) = 5\mathrm{e}^{-0{,}5t}\left(1 - \dfrac{t}{2}\right)$.
-  \item En deduire le tableau de variations de $C$.
+  \item En déduire le tableau de variations de $C$.
   \item Calculer la concentration maximale et le temps ou elle est atteinte.
 \end{enumerate}
 
@@ -51,7 +51,7 @@
 
 \commentaireMarge{Appliquer les croissances comparees.}
 
-\textbf{Question 1.} $C(0) = 5 \times 0 \times \mathrm{e}^0 = 0$. Au moment de l'injection, la concentration est nulle (le medicament n'a pas encore ete absorbe).
+\textbf{Question 1.} $C(0) = 5 \times 0 \times \mathrm{e}^0 = 0$. Au moment de l'injection, la concentration est nulle (le medicament n'a pas encore été absorbe).
 
 \textbf{Question 2.} $C(t) = 5t\,\mathrm{e}^{-t/2}$. On pose $X = t/2$ : $C(t) = 10X\,\mathrm{e}^{-X}$, et $\lim_{X \to +\infty} X\,\mathrm{e}^{-X} = 0$ par croissances comparees ($n = 1$). Donc $\lim_{t \to +\infty} C(t) = 0$. A long terme, le medicament est elimine.
 
@@ -62,9 +62,9 @@
   C'(t) = 5\,\mathrm{e}^{-t/2} + 5t \times \left(-\frac{1}{2}\right)\mathrm{e}^{-t/2} = 5\,\mathrm{e}^{-t/2}\left(1 - \frac{t}{2}\right).
 \]
 
-\textbf{Question 5.} $C'(t) = 0 \iff t = 2$ (car $\mathrm{e}^{-t/2} > 0$). $C'(t) > 0$ pour $t < 2$, $C'(t) < 0$ pour $t > 2$. La fonction $C$ est croissante sur $[0, 2]$, decroissante sur $[2, +\infty[$.
+\textbf{Question 5.} $C'(t) = 0 \iff t = 2$ (car $\mathrm{e}^{-t/2} > 0$). $C'(t) > 0$ pour $t < 2$, $C'(t) < 0$ pour $t > 2$. La fonction $C$ est croissante sur $[0, 2]$, décroissante sur $[2, +\infty[$.
 
-\textbf{Question 6.} Maximum en $t = 2$ : $C(2) = 10\,\mathrm{e}^{-1} \approx 3{,}68$ mg/L. La concentration maximale est atteinte 2 heures apres l'injection.
+\textbf{Question 6.} Maximum en $t = 2$ : $C(2) = 10\,\mathrm{e}^{-1} \approx 3{,}68$ mg/L. La concentration maximale est atteinte 2 heures après l'injection.
 
 \end{corrige}
 
@@ -81,7 +81,7 @@
 Le medicament est efficace lorsque $C(t) \geq 1$ mg/L.
 
 \begin{enumerate}
-  \item Expliquer pourquoi l'equation $C(t) = 1$ admet exactement deux solutions $t_1 < t_2$.
+  \item Expliquer pourquoi l'équation $C(t) = 1$ admet exactement deux solutions $t_1 < t_2$.
   \item Donner une valeur approchee de $t_1$ et $t_2$ a l'aide de la calculatrice.
   \item Combien de temps le medicament est-il efficace ?
   \item Quelle est la signification graphique de l'asymptote $y = 0$ dans ce contexte ?
@@ -91,7 +91,7 @@ Le medicament est efficace lorsque $C(t) \geq 1$ mg/L.
 
 \begin{corrige}{TSPE-LIMFCT-COURS-07-TC-EX2}
 
-\textbf{Question 1.} $C$ est continue, croissante sur $[0, 2]$ de $C(0) = 0$ a $C(2) \approx 3{,}68 > 1$, puis decroissante sur $[2, +\infty[$ avec $C(t) \to 0$. Par le theoreme des valeurs intermediaires, $C(t) = 1$ admet exactement une solution $t_1 \in ]0, 2[$ et une solution $t_2 \in ]2, +\infty[$.
+\textbf{Question 1.} $C$ est continue, croissante sur $[0, 2]$ de $C(0) = 0$ a $C(2) \approx 3{,}68 > 1$, puis décroissante sur $[2, +\infty[$ avec $C(t) \to 0$. Par le théorème des valeurs intermediaires, $C(t) = 1$ admet exactement une solution $t_1 \in ]0, 2[$ et une solution $t_2 \in ]2, +\infty[$.
 
 \textbf{Question 2.} A la calculatrice : $t_1 \approx 0{,}23$~h et $t_2 \approx 7{,}15$~h.
 

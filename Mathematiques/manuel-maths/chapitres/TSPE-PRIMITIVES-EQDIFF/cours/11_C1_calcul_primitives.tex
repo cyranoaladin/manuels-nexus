@@ -3,7 +3,7 @@
 \section{Calcul de primitives}
 
 % ============================================================
-% STRATE 1 — Primitives de reference et forme (v'ou)u'
+% STRATE 1 — Primitives de référence et forme (v'ou)u'
 % ============================================================
 
 \propriete[Primitives de référence]{
@@ -30,7 +30,7 @@
 % END-VERIFY
 
 \theoreme[Forme $(v' \circ u) \times u'$]{
-Si $u$ est derivable sur $I$ et $v$ admet une primitive $V$, alors $x \mapsto V(u(x))$ est une primitive de $x \mapsto u'(x) \times v(u(x))$ sur $I$.
+Si $u$ est dérivable sur $I$ et $v$ admet une primitive $V$, alors $x \mapsto V(u(x))$ est une primitive de $x \mapsto u'(x) \times v(u(x))$ sur $I$.
 
 En particulier :
 \begin{itemize}
@@ -71,9 +71,9 @@ On reconnait la forme $u' u^n$ avec $u(x)=x^2+1$, $u'(x)=2x$, $n=2$ : $f(x) = 3 
 % ============================================================
 
 \erreurFrequente{
-\textbf{Confondre derivee et primitive.} Deriver $F$ donne $f$ ; trouver une primitive de $f$ revient a "remonter" a une fonction $F$ dont $f$ est la derivee. Toujours verifier une primitive en la derivant.
+\textbf{Confondre dérivée et primitive.} Dériver $F$ donne $f$ ; trouver une primitive de $f$ revient a "remonter" a une fonction $F$ dont $f$ est la dérivée. Toujours vérifier une primitive en la derivant.
 }
 
 \erreurFrequente{
-\textbf{Oublier le facteur $u'$ dans les formes composees.} $2x \, \mathrm{e}^{x^2}$ a pour primitive $\mathrm{e}^{x^2}$ (car $u=x^2$, $u'=2x$ est deja present) ; mais $\mathrm{e}^{x^2}$ seul (sans le facteur $2x$) n'a pas de primitive elementaire simple.
+\textbf{Oublier le facteur $u'$ dans les formes composees.} $2x \, \mathrm{e}^{x^2}$ a pour primitive $\mathrm{e}^{x^2}$ (car $u=x^2$, $u'=2x$ est deja present) ; mais $\mathrm{e}^{x^2}$ seul (sans le facteur $2x$) n'a pas de primitive élémentaire simple.
 }

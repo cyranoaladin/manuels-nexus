@@ -22,7 +22,7 @@
 
 \section*{Temps 7 — TD fil rouge : Limites, asymptotes et croissances comparees}
 
-\textbf{Objectif.} Mobiliser les trois capacites du chapitre (limites, asymptotes, croissances comparees) dans deux etudes de fonctions.
+\textbf{Objectif.} Mobiliser les trois capacites du chapitre (limites, asymptotes, croissances comparees) dans deux études de fonctions.
 
 \bigskip
 
@@ -32,14 +32,14 @@
 
 \begin{exercice}{TSPE-LIMFCT-COURS-07-FR-EX1}{2}{15}
 
-\textbf{Partie A — Etude d'une fonction rationnelle}
+\textbf{Partie A — Étude d'une fonction rationnelle}
 
-Soit $f(x) = \dfrac{x^2 + 1}{x - 2}$ definie sur $\mathbb{R} \setminus \{2\}$.
+Soit $f(x) = \dfrac{x^2 + 1}{x - 2}$ définie sur $\mathbb{R} \setminus \{2\}$.
 
 \begin{enumerate}
-  \item Determiner les limites de $f$ en $+\infty$ et en $-\infty$.
-  \item Determiner les limites de $f$ en $2^+$ et en $2^-$.
-  \item En deduire les asymptotes de $\mathcal{C}_f$.
+  \item Déterminer les limites de $f$ en $+\infty$ et en $-\infty$.
+  \item Déterminer les limites de $f$ en $2^+$ et en $2^-$.
+  \item En déduire les asymptotes de $\mathcal{C}_f$.
   \item La courbe admet-elle une asymptote horizontale ? Justifier.
 \end{enumerate}
 
@@ -55,7 +55,7 @@ Quand $x \to +\infty$ : $f(x) \sim x \to +\infty$.
 
 Quand $x \to -\infty$ : $f(x) \sim x \to -\infty$.
 
-\textbf{Question 2.} En $x = 2$ : le numerateur $\to 4 + 1 = 5 > 0$.
+\textbf{Question 2.} En $x = 2$ : le numérateur $\to 4 + 1 = 5 > 0$.
 \begin{itemize}
   \item $x \to 2^+$ : $x - 2 \to 0^+$, donc $f(x) \to +\infty$.
   \item $x \to 2^-$ : $x - 2 \to 0^-$, donc $f(x) \to -\infty$.
@@ -75,13 +75,13 @@ Quand $x \to -\infty$ : $f(x) \sim x \to -\infty$.
 
 \begin{exercice}{TSPE-LIMFCT-COURS-07-FR-EX2}{2}{20}
 
-\textbf{Partie B — Etude d'une fonction avec exponentielle}
+\textbf{Partie B — Étude d'une fonction avec exponentielle}
 
-Soit $g(x) = (x^2 - x + 1)\,\mathrm{e}^{-x}$ definie sur $\mathbb{R}$.
+Soit $g(x) = (x^2 - x + 1)\,\mathrm{e}^{-x}$ définie sur $\mathbb{R}$.
 
 \begin{enumerate}
-  \item Determiner $\lim_{x \to +\infty} g(x)$. Quelle technique utilise-t-on ?
-  \item Determiner $\lim_{x \to -\infty} g(x)$.
+  \item Déterminer $\lim_{x \to +\infty} g(x)$. Quelle technique utilise-t-on ?
+  \item Déterminer $\lim_{x \to -\infty} g(x)$.
   \item La courbe $\mathcal{C}_g$ admet-elle des asymptotes ? Lesquelles ?
   \item Calculer $g'(x)$ et montrer que $g'(x) = -(x-1)(x-2)\,\mathrm{e}^{-x}$.
   \item Dresser le tableau de variations complet de $g$.
@@ -94,11 +94,11 @@ Soit $g(x) = (x^2 - x + 1)\,\mathrm{e}^{-x}$ definie sur $\mathbb{R}$.
 
 \commentaireMarge{Les croissances comparees sont la cle.}
 
-\textbf{Question 1.} $g(x) = \dfrac{x^2 - x + 1}{\mathrm{e}^x}$. Le numerateur est un polynome de degre 2. Par les croissances comparees ($\mathrm{e}^x$ croit plus vite que $x^2$), $\lim_{x \to +\infty} g(x) = 0$.
+\textbf{Question 1.} $g(x) = \dfrac{x^2 - x + 1}{\mathrm{e}^x}$. Le numérateur est un polynôme de degré 2. Par les croissances comparees ($\mathrm{e}^x$ croit plus vite que $x^2$), $\lim_{x \to +\infty} g(x) = 0$.
 
-\textbf{Question 2.} Quand $x \to -\infty$ : $x^2 - x + 1 \to +\infty$ et $\mathrm{e}^{-x} \to +\infty$. Produit de deux quantites tendant vers $+\infty$ : $\lim_{x \to -\infty} g(x) = +\infty$.
+\textbf{Question 2.} Quand $x \to -\infty$ : $x^2 - x + 1 \to +\infty$ et $\mathrm{e}^{-x} \to +\infty$. Produit de deux quantités tendant vers $+\infty$ : $\lim_{x \to -\infty} g(x) = +\infty$.
 
-\textbf{Question 3.} Pas d'AV (la fonction est definie sur $\mathbb{R}$). AH en $+\infty$ : $y = 0$ (car $\lim_{+\infty} g = 0$). Pas d'AH en $-\infty$ (limite $+\infty$).
+\textbf{Question 3.} Pas d'AV (la fonction est définie sur $\mathbb{R}$). AH en $+\infty$ : $y = 0$ (car $\lim_{+\infty} g = 0$). Pas d'AH en $-\infty$ (limite $+\infty$).
 
 \textbf{Question 4.} $g'(x) = (2x - 1)\mathrm{e}^{-x} + (x^2 - x + 1)(-1)\mathrm{e}^{-x} = (2x - 1 - x^2 + x - 1)\mathrm{e}^{-x} = (-x^2 + 3x - 2)\mathrm{e}^{-x}$.
 
@@ -106,9 +106,9 @@ Or $-x^2 + 3x - 2 = -(x^2 - 3x + 2) = -(x-1)(x-2)$.
 
 Donc $g'(x) = -(x-1)(x-2)\,\mathrm{e}^{-x}$.
 
-\textbf{Question 5.} $g'(x) = 0 \iff x = 1$ ou $x = 2$. Signe de $-(x-1)(x-2)$ : positif sur $]1, 2[$, negatif sur $]-\infty, 1[$ et $]2, +\infty[$.
+\textbf{Question 5.} $g'(x) = 0 \iff x = 1$ ou $x = 2$. Signe de $-(x-1)(x-2)$ : positif sur $]1, 2[$, négatif sur $]-\infty, 1[$ et $]2, +\infty[$.
 
-$g$ decroissante sur $]-\infty, 1]$, croissante sur $[1, 2]$, decroissante sur $[2, +\infty[$.
+$g$ décroissante sur $]-\infty, 1]$, croissante sur $[1, 2]$, décroissante sur $[2, +\infty[$.
 
 Minimum local en $x = 1$, maximum local en $x = 2$.
 

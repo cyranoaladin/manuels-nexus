@@ -15,20 +15,20 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "La derivee de $3\\mathrm e^{3x}$ vaut $9\\mathrm e^{3x}$ ; ce choix multiplie par $3$ au lieu de compenser la derivee de $3x$."
+          "erreur": "La dérivée de $3\\mathrm e^{3x}$ vaut $9\\mathrm e^{3x}$ ; ce choix multiplie par $3$ au lieu de compenser la dérivée de $3x$."
         },
         "B": {
-          "erreur": "La derivee de $\\mathrm e^{3x}$ vaut $3\\mathrm e^{3x}$ ; il faut donc le facteur $1/3$ pour retrouver exactement $\\mathrm e^{3x}$."
+          "erreur": "La dérivée de $\\mathrm e^{3x}$ vaut $3\\mathrm e^{3x}$ ; il faut donc le facteur $1/3$ pour retrouver exactement $\\mathrm e^{3x}$."
         },
         "D": {
-          "erreur": "Comme $\\mathrm e^{3x+1}=\\mathrm e\\,\\mathrm e^{3x}$, sa derivee vaut $3\\mathrm e\\,\\mathrm e^{3x}$ et non $\\mathrm e^{3x}$."
+          "erreur": "Comme $\\mathrm e^{3x+1}=\\mathrm e\\,\\mathrm e^{3x}$, sa dérivée vaut $3\\mathrm e\\,\\mathrm e^{3x}$ et non $\\mathrm e^{3x}$."
         }
       }
     },
     {
       "id": "Q2",
       "capacite": "C4",
-      "enonce": "Si $F$ et $G$ sont deux primitives de la meme fonction $f$ continue sur un intervalle $I$, alors :",
+      "enonce": "Si $F$ et $G$ sont deux primitives de la même fonction $f$ continue sur un intervalle $I$, alors :",
       "options": {
         "A": "$F=G$.",
         "B": "$F-G$ est une fonction affine de pente non nulle.",
@@ -38,15 +38,15 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "Deux primitives d'une meme fonction ne sont pas necessairement egales ; elles peuvent differer d'une constante.",
+          "erreur": "Deux primitives d'une même fonction ne sont pas necessairement égales ; elles peuvent differer d'une constante.",
           "renvoi": "C1, ensemble des primitives"
         },
         "B": {
-          "erreur": "Puisque $(F-G)'=f-f=0$, la difference est constante : elle ne peut donc pas etre affine de pente non nulle.",
+          "erreur": "Puisque $(F-G)'=f-f=0$, la difference est constante : elle ne peut donc pas être affine de pente non nulle.",
           "renvoi": "C1, ensemble des primitives"
         },
         "D": {
-          "erreur": "Aucune propriete generale ne rend le produit de deux primitives constant.",
+          "erreur": "Aucune propriété generale ne rend le produit de deux primitives constant.",
           "renvoi": "C1, ensemble des primitives"
         }
       }
@@ -64,10 +64,10 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Pour $y=5x+C$, on a $y'=5$ alors que $5y=25x+5C$ ; l'egalite differentielle n'est donc pas satisfaite en general."
+          "erreur": "Pour $y=5x+C$, on a $y'=5$ alors que $5y=25x+5C$ ; l'égalité différentielle n'est donc pas satisfaite en general."
         },
         "C": {
-          "erreur": "La derivee de $C\\mathrm e^{-5x}$ vaut $-5y$ ; cette famille resout $y'=-5y$, et non l'equation $y'=5y$."
+          "erreur": "La dérivée de $C\\mathrm e^{-5x}$ vaut $-5y$ ; cette famille resout $y'=-5y$, et non l'équation $y'=5y$."
         },
         "D": {
           "erreur": "Pour $y=5\\mathrm e^{Cx}$, on obtient $y'=Cy$ ; cette expression ne satisfait $y'=5y$ que pour $C=5$ et ne donne pas toute la famille."
@@ -77,7 +77,7 @@
     {
       "id": "Q4",
       "capacite": "C2",
-      "enonce": "Pour $y' = 3y - 12$, la solution particuliere constante est :",
+      "enonce": "Pour $y' = 3y - 12$, la solution particulière constante est :",
       "options": {
         "A": "$y_0 = 4$.",
         "B": "$y_0 = -4$.",
@@ -86,26 +86,26 @@
       },
       "correcte": "A",
       "diagnostics": {
-      "B": {
-          "erreur": "Pour la constante $y_0=-4$, le membre de gauche vaut $0$ mais $3y_0-12=-24$ ; l'equation n'est pas verifiee."
+        "B": {
+          "erreur": "Pour la constante $y_0=-4$, le membre de gauche vaut $0$ mais $3y_0-12=-24$ ; l'équation n'est pas verifiee."
         },
         "C": {
-          "erreur": "Pour $y_0=12$, on a $3y_0-12=24$ au lieu de $0$ ; cette constante n'est donc pas une solution particuliere."
+          "erreur": "Pour $y_0=12$, on a $3y_0-12=24$ au lieu de $0$ ; cette constante n'est donc pas une solution particulière."
         },
         "D": {
-          "erreur": "Pour $y_0=-36$, le second membre vaut $3(-36)-12=-120$, tandis que la derivee de la constante vaut $0$."
+          "erreur": "Pour $y_0=-36$, le second membre vaut $3(-36)-12=-120$, tandis que la dérivée de la constante vaut $0$."
         }
       }
     },
     {
       "id": "Q5",
       "capacite": "C3",
-      "enonce": "Pour utiliser une solution particuliere $y_p$ donnee de $y'=ay+f$, il faut d'abord :",
+      "enonce": "Pour utiliser une solution particulière $y_p$ donnee de $y'=ay+f$, il faut d'abord :",
       "options": {
         "A": "calculer $y_p(0)$.",
-        "B": "verifier que $y_p$ satisfait bien l'equation.",
-        "C": "deriver $f$.",
-        "D": "resoudre $y_p=0$."
+        "B": "vérifier que $y_p$ satisfait bien l'équation.",
+        "C": "dériver $f$.",
+        "D": "résoudre $y_p=0$."
       },
       "correcte": "B",
       "diagnostics": {
@@ -113,10 +113,10 @@
           "erreur": "La valeur $y_p(0)$ peut servir ensuite avec une condition initiale, mais elle ne prouve pas que $y_p'=ay_p+f$ sur l'intervalle."
         },
         "C": {
-          "erreur": "Deriver $f$ n'est pas la verification demandee ; il faut calculer $y_p'$ puis comparer cette derivee a $ay_p+f$."
+          "erreur": "Dériver $f$ n'est pas la vérification demandee ; il faut calculer $y_p'$ puis comparer cette dérivée a $ay_p+f$."
         },
         "D": {
-          "erreur": "Les zeros de $y_p$ ne disent pas si la fonction satisfait l'equation differentielle ; il faut substituer $y_p$ et $y_p'$ dans celle-ci."
+          "erreur": "Les zeros de $y_p$ ne disent pas si la fonction satisfait l'équation différentielle ; il faut substituer $y_p$ et $y_p'$ dans celle-ci."
         }
       }
     }

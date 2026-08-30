@@ -24,17 +24,17 @@
 % END-VERIFY
 \begin{corrige}{TSPE-CONTIN-EX-039}
 
-\textbf{Q1.} $w_1 = \sqrt5 \approx 2{,}236$ ; $w_2 \approx 2{,}058$ ; $w_3 \approx 2{,}014$. Contrairement a la suite de l'exercice \textsc{ex-034}, qui croissait vers $2$ en partant de $0$, celle-ci \emph{decroit} vers $2$ en partant de $3$.
+\textbf{Q1.} $w_1 = \sqrt5 \approx 2{,}236$ ; $w_2 \approx 2{,}058$ ; $w_3 \approx 2{,}014$. Contrairement a la suite de l'exercice \textsc{ex-034}, qui croissait vers $2$ en partant de $0$, celle-ci \emph{décroît} vers $2$ en partant de $3$.
 
 \textbf{Q2.} Si $x \in [2\,;3]$ alors $4 \leq x+2 \leq 5$, donc $2 \leq \sqrt{x+2} \leq \sqrt5 \approx 2{,}236 \leq 3$ : $f(x) \in [2\,;3]$.
 
-Recurrence : $w_0 = 3 \in [2\,;3]$, et la stabilite propage l'encadrement.
+Récurrence : $w_0 = 3 \in [2\,;3]$, et la stabilite propage l'encadrement.
 
-\textbf{Q3.} Sur $[2\,;3]$, $f(x)$ et $x$ sont positifs, donc $f(x) - x$ a le signe de $x + 2 - x^2 = -(x-2)(x+1)$. Sur $\left]2\,;3\right]$ : $x-2 > 0$ et $x+1 > 0$, donc ce nombre est strictement negatif : $f(x) < x$. En $x = 2$, $f(2) = 2$.
+\textbf{Q3.} Sur $[2\,;3]$, $f(x)$ et $x$ sont positifs, donc $f(x) - x$ a le signe de $x + 2 - x^2 = -(x-2)(x+1)$. Sur $\left]2\,;3\right]$ : $x-2 > 0$ et $x+1 > 0$, donc ce nombre est strictement négatif : $f(x) < x$. En $x = 2$, $f(2) = 2$.
 
-Ainsi $w_{n+1} - w_n = f(w_n) - w_n \leq 0$ : la suite $(w_n)$ est decroissante.
+Ainsi $w_{n+1} - w_n = f(w_n) - w_n \leq 0$ : la suite $(w_n)$ est décroissante.
 
-\textbf{Q4.} $(w_n)$ est decroissante et minoree par $2$ : elle converge vers $\ell \geq 2$. Par continuite de $f$, $\ell$ verifie $\sqrt{\ell+2} = \ell$, soit $\ell^2 - \ell - 2 = 0$, d'ou $\ell \in \{-1\,;2\}$. Comme $\ell \geq 2$, on obtient $\ell = 2$.
+\textbf{Q4.} $(w_n)$ est décroissante et minorée par $2$ : elle converge vers $\ell \geq 2$. Par continuite de $f$, $\ell$ vérifie $\sqrt{\ell+2} = \ell$, soit $\ell^2 - \ell - 2 = 0$, d'ou $\ell \in \{-1\,;2\}$. Comme $\ell \geq 2$, on obtient $\ell = 2$.
 
-\textbf{Q5.} Les deux suites convergent vers $2$, l'une en croissant depuis $0$, l'autre en decroissant depuis $3$. Le point fixe $2$ attire donc les suites situees de part et d'autre : on dit qu'il est \emph{attractif}. Cela se lit sur le signe de $f(x) - x$, positif a gauche de $2$ et negatif a droite : la suite est toujours poussee vers $2$.
+\textbf{Q5.} Les deux suites convergent vers $2$, l'une en croissant depuis $0$, l'autre en decroissant depuis $3$. Le point fixe $2$ attire donc les suites situees de part et d'autre : on dit qu'il est \emph{attractif}. Cela se lit sur le signe de $f(x) - x$, positif a gauche de $2$ et négatif a droite : la suite est toujours poussee vers $2$.
 \end{corrige}

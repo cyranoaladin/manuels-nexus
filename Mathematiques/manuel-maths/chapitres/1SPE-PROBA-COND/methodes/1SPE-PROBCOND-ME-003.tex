@@ -1,14 +1,14 @@
 % META: {"id": "1SPE-PROBCOND-ME-003", "chapitre": "1SPE-PROBA-COND", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "sources_inspiration": [], "status": "generated"}
-\begin{fichemethode}{M3}{Appliquer la formule des probabilites totales}
+\begin{fichemethode}{M3}{Appliquer la formule des probabilités totales}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsqu'on cherche $P(A)$ et que l'on connait les probabilites
+  Utiliser cette méthode lorsqu'on cherche $P(A)$ et que l'on connait les probabilités
   conditionnelles $P_{B_i}(A)$ pour une partition $\{B_1, \ldots, B_n\}$ de l'univers.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item J'identifie une partition de l'univers : des evenements $B_1, \ldots, B_n$ incompatibles et exhaustifs.
+    \item J'identifie une partition de l'univers : des événements $B_1, \ldots, B_n$ incompatibles et exhaustifs.
     \item Je repere les valeurs de $P(B_i)$ et $P_{B_i}(A)$ pour chaque $i$.
     \item J'applique la formule :
     \[
@@ -28,24 +28,24 @@
   \commentaireMarge{Partition $\{T, \overline{T}\}$.}%
   $P(T) = \dfrac{3}{5}$, $P(\overline{T}) = \dfrac{2}{5}$, $P_T(H) = \dfrac{4}{5}$, $P_{\overline{T}}(H) = \dfrac{7}{10}$.
 
-  \commentaireMarge{Probabilites totales.}%
+  \commentaireMarge{Probabilités totales.}%
   \[
     P(H) = P(T) \times P_T(H) + P(\overline{T}) \times P_{\overline{T}}(H) = \frac{3}{5} \times \frac{4}{5} + \frac{2}{5} \times \frac{7}{10} = \frac{12}{25} + \frac{14}{50} = \frac{24}{50} + \frac{14}{50} = \frac{38}{50} = \frac{19}{25}.
   \]
 
-  La probabilite d'arriver a l'heure est $\dfrac{19}{25} = 76\,\%$.
+  La probabilité d'arriver a l'heure est $\dfrac{19}{25} = 76\,\%$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier un terme de la partition (par exemple oublier $P(\overline{B}) \times P_{\overline{B}}(A)$).
-    \item \textbf{Piege 2.} Ne pas verifier que les $B_i$ forment bien une partition.
-    \item \textbf{Piege 3.} Confondre $P(A)$ et $P_B(A)$.
+    \item \textbf{Piège 1.} Oublier un terme de la partition (par exemple oublier $P(\overline{B}) \times P_{\overline{B}}(A)$).
+    \item \textbf{Piège 2.} Ne pas vérifier que les $B_i$ forment bien une partition.
+    \item \textbf{Piège 3.} Confondre $P(A)$ et $P_B(A)$.
   \end{itemize}
 }
 
 \verifier{%
-  On peut verifier en calculant aussi $P(\overline{A})$ par probabilites totales et en verifiant que $P(A) + P(\overline{A}) = 1$.
+  On peut vérifier en calculant aussi $P(\overline{A})$ par probabilités totales et en verifiant que $P(A) + P(\overline{A}) = 1$.
 }
 
 \sEntrainer{\refExos{M3}}

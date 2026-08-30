@@ -1,24 +1,24 @@
 % META: {"id": "TSPE-DERCONV-CR-011", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "cours", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved"}
 
-\section{Etude complete d'une fonction}
+\section{Étude complete d'une fonction}
 
 % ============================================================
-% STRATE 1 — Methode d'etude
+% STRATE 1 — Méthode d'étude
 % ============================================================
 
 \propriete{
-Pour mener l'etude complete d'une fonction $f$ definie sur un intervalle $I$ :
+Pour mener l'étude complete d'une fonction $f$ définie sur un intervalle $I$ :
 \begin{enumerate}
-  \item Determiner le domaine de definition $D_f$.
+  \item Déterminer le domaine de définition $D_f$.
   \item Calculer les limites aux bornes de $D_f$ (asymptotes eventuelles).
-  \item Calculer $f'(x)$, etudier son signe.
+  \item Calculer $f'(x)$, étudier son signe.
   \item Dresser le tableau de variations de $f$.
-  \item Determiner les extremums locaux et globaux.
+  \item Déterminer les extremums locaux et globaux.
 \end{enumerate}
 }
 
 \exemple{
-\textbf{Etude de $f(x) = x\,\mathrm{e}^{-x}$ sur $\mathbb{R}$.}
+\textbf{Étude de $f(x) = x\,\mathrm{e}^{-x}$ sur $\mathbb{R}$.}
 
 \textit{Domaine :} $\mathbb{R}$.
 
@@ -27,27 +27,27 @@ $\lim_{x \to +\infty} x\,\mathrm{e}^{-x} = 0$ (croissances comparees : l'exponen
 
 $\lim_{x \to -\infty} x\,\mathrm{e}^{-x} = -\infty$ (car $\mathrm{e}^{-x} \to +\infty$ et $x \to -\infty$).
 
-\textit{Derivee :} $f'(x) = \mathrm{e}^{-x} + x \times (-\mathrm{e}^{-x}) = (1-x)\,\mathrm{e}^{-x}$.
+\textit{Dérivée :} $f'(x) = \mathrm{e}^{-x} + x \times (-\mathrm{e}^{-x}) = (1-x)\,\mathrm{e}^{-x}$.
 
 Comme $\mathrm{e}^{-x} > 0$, le signe de $f'(x)$ est celui de $(1 - x)$ :
 \begin{itemize}
   \item $f'(x) > 0$ si $x < 1$ (fonction croissante),
-  \item $f'(x) < 0$ si $x > 1$ (fonction decroissante).
+  \item $f'(x) < 0$ si $x > 1$ (fonction décroissante).
 \end{itemize}
 
 \textit{Tableau de variations :}
-$f$ est croissante sur $]-\infty, 1]$ et decroissante sur $[1, +\infty[$, avec un maximum en $x = 1$ : $f(1) = \dfrac{1}{\mathrm{e}}$.
+$f$ est croissante sur $]-\infty, 1]$ et décroissante sur $[1, +\infty[$, avec un maximum en $x = 1$ : $f(1) = \dfrac{1}{\mathrm{e}}$.
 }
 
 \exemple{
-\textbf{Etude de $g(x) = \ln(x) - x + 1$ sur $]0, +\infty[$.}
+\textbf{Étude de $g(x) = \ln(x) - x + 1$ sur $]0, +\infty[$.}
 
 \textit{Limites :}
 $\lim_{x \to 0^+} g(x) = -\infty + 1 = -\infty$ (car $\ln x \to -\infty$).
 
 $\lim_{x \to +\infty} g(x) = -\infty$ (car $\dfrac{\ln x}{x} \to 0$, donc $\ln x - x \to -\infty$).
 
-\textit{Derivee :} $g'(x) = \dfrac{1}{x} - 1 = \dfrac{1-x}{x}$.
+\textit{Dérivée :} $g'(x) = \dfrac{1}{x} - 1 = \dfrac{1-x}{x}$.
 
 Pour $x > 0$ : $g'(x) > 0$ si $x < 1$, $g'(x) < 0$ si $x > 1$.
 
@@ -61,7 +61,7 @@ Donc $g(x) \leq 0$ pour tout $x > 0$, c'est-a-dire $\ln x \leq x - 1$.
 % ============================================================
 
 \erreurFrequente{
-\textbf{Ne pas verifier le domaine de definition.} Avant de deriver $\ln(u)$, il faut s'assurer que $u > 0$ sur l'intervalle considere.
+\textbf{Ne pas vérifier le domaine de définition.} Avant de dériver $\ln(u)$, il faut s'assurer que $u > 0$ sur l'intervalle considere.
 }
 
 \erreurFrequente{

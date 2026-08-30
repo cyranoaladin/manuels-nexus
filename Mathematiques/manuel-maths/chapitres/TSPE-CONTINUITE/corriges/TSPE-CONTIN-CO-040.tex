@@ -26,11 +26,11 @@
 
 \textbf{Q2.} $2x - x^2 = x$ equivaut a $x - x^2 = 0$, soit $x(1-x) = 0$. Les points fixes sont $0$ et $1$.
 
-\textbf{Q3.} On ecrit $f(x) = 2x - x^2 = 1 - (1 - 2x + x^2) = 1 - (1-x)^2$. Pour $x \in [0\,;1]$, on a $0 \leq 1-x \leq 1$, donc $0 \leq (1-x)^2 \leq 1$ et par consequent $0 \leq 1 - (1-x)^2 \leq 1$ : $f(x) \in [0\,;1]$.
+\textbf{Q3.} On ecrit $f(x) = 2x - x^2 = 1 - (1 - 2x + x^2) = 1 - (1-x)^2$. Pour $x \in [0\,;1]$, on a $0 \leq 1-x \leq 1$, donc $0 \leq (1-x)^2 \leq 1$ et par conséquent $0 \leq 1 - (1-x)^2 \leq 1$ : $f(x) \in [0\,;1]$.
 
-Recurrence : $u_0 = 0{,}5 \in [0\,;1]$ ; si $u_n \in [0\,;1]$ alors $u_{n+1} = f(u_n) \in [0\,;1]$. Donc $0 \leq u_n \leq 1$ pour tout $n$.
+Récurrence : $u_0 = 0{,}5 \in [0\,;1]$ ; si $u_n \in [0\,;1]$ alors $u_{n+1} = f(u_n) \in [0\,;1]$. Donc $0 \leq u_n \leq 1$ pour tout $n$.
 
 \textbf{Q4.} $f(x) - x = 2x - x^2 - x = x - x^2 = x(1-x)$. Sur $[0\,;1]$ les deux facteurs sont positifs, donc $f(x) - x \geq 0$. Ainsi $u_{n+1} - u_n \geq 0$ : la suite $(u_n)$ est croissante.
 
-\textbf{Q5.} $(u_n)$ est croissante et majoree par $1$, donc convergente vers un reel $\ell$. La fonction $f$ est un polynome, donc continue sur $[0\,;1]$, et $\ell$ verifie $f(\ell) = \ell$ : d'apres Q2, $\ell = 0$ ou $\ell = 1$. Or la suite est croissante a partir de $u_0 = 0{,}5$, donc $\ell \geq u_0 = 0{,}5 > 0$ : la valeur $0$ est exclue. On conclut $\ell = 1$.
+\textbf{Q5.} $(u_n)$ est croissante et majorée par $1$, donc convergente vers un réel $\ell$. La fonction $f$ est un polynôme, donc continue sur $[0\,;1]$, et $\ell$ vérifie $f(\ell) = \ell$ : d'après Q2, $\ell = 0$ ou $\ell = 1$. Or la suite est croissante a partir de $u_0 = 0{,}5$, donc $\ell \geq u_0 = 0{,}5 > 0$ : la valeur $0$ est exclue. On conclut $\ell = 1$.
 \end{corrige}

@@ -1,11 +1,11 @@
 % META: {"id": "TSPE-SUITES-LIMITES-RE-C2", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "remediation", "capacites_codes": ["C2"], "status": "approved"}
 
 %---------------------------------------------------------------
-% FICHE DE REMEDIATION — C2 : Recurrence
+% FICHE DE REMEDIATION — C2 : Récurrence
 %---------------------------------------------------------------
 
 \begin{exercice}{TSPE-SUITLIM-RE-C2-EX1}{1}{12}
-Demontrer par recurrence que pour tout $n \in \mathbb{N}$, $3^n \geq 1 + 2n$.
+Démontrer par récurrence que pour tout $n \in \mathbb{N}$, $3^n \geq 1 + 2n$.
 \end{exercice}
 
 % BEGIN-VERIFY
@@ -15,5 +15,5 @@ Demontrer par recurrence que pour tout $n \in \mathbb{N}$, $3^n \geq 1 + 2n$.
 % END-VERIFY
 
 \begin{corrige}{TSPE-SUITLIM-RE-C2-EX1}
-$\mathcal{P}(n)$ : « $3^n \geq 1+2n$ ». Init : $3^0=1 \geq 1$. Hered : $3^{n+1} = 3 \times 3^n \geq 3(1+2n) = 3+6n \geq 1+2(n+1)+4n \geq 1+2(n+1)$. Par recurrence, vrai pour tout $n$.
+$\mathcal{P}(n)$ : « $3^n \geq 1+2n$ ». Init : $3^0=1 \geq 1$. Hered : $3^{n+1} = 3 \times 3^n \geq 3(1+2n) = 3+6n \geq 1+2(n+1)+4n \geq 1+2(n+1)$. Par récurrence, vrai pour tout $n$.
 \end{corrige}

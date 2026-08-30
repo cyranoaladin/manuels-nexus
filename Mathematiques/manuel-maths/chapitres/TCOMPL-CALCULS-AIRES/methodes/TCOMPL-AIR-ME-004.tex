@@ -6,32 +6,32 @@
 % assert simplify(diff(log(x**2+1)/2, x) - x/(x**2+1)) == 0
 % assert simplify(diff(exp(x**2)/2, x) - x*exp(x**2)) == 0
 % END-VERIFY
-\begin{fichemethode}{M4}{Determiner une primitive en reconnaissant une forme usuelle}
+\begin{fichemethode}{M4}{Déterminer une primitive en reconnaissant une forme usuelle}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande une \textbf{primitive} et que la
+  Utiliser cette méthode lorsque l'énoncé demande une \textbf{primitive} et que la
   fonction ressemble a une forme du tableau : $u'u^n$, $\dfrac{u'}{u}$, $u'e^u$,
-  ou une combinaison de fonctions de reference.
+  ou une combinaison de fonctions de référence.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Reperer une fonction « interieure » $u(x)$ dont la derivee $u'(x)$
+    \item Reperer une fonction « interieure » $u(x)$ dont la dérivée $u'(x)$
       apparait en facteur (a une constante pres).
     \item Identifier la forme :
       $u'u^n \to \dfrac{u^{n+1}}{n+1}$ \quad ($n \neq -1$) ;\quad
       $\dfrac{u'}{u} \to \ln(u)$ \ (si $u > 0$) ;\quad
       $u'e^u \to e^u$.
     \item Ajuster la constante multiplicative : si le facteur exact est $k\,u'$,
-      multiplier la primitive par $\dfrac{1}{k}$... ou plutot ecrire
+      multiplier la primitive par $\dfrac{1}{k}$... ou plutot écrire
       $f = \dfrac{1}{c}\,(c\,f)$ pour faire apparaitre exactement $u'$.
-    \item Controler en derivant la primitive obtenue : on doit retrouver $f$.
+    \item Contrôler en derivant la primitive obtenue : on doit retrouver $f$.
     \item Ne pas oublier la constante : les primitives sont $F + C$, $C \in \mathbb{R}$.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Determiner une primitive de $f(x) = x\,(x^2+1)^3$ sur $\mathbb{R}$.
+  Déterminer une primitive de $f(x) = x\,(x^2+1)^3$ sur $\mathbb{R}$.
 
   \medskip
   \commentaireMarge{$u = x^2+1$, $u' = 2x$ : il manque un facteur 2.}%
@@ -43,23 +43,23 @@
   $F(x) = \dfrac{1}{2}\cdot\dfrac{(x^2+1)^4}{4} = \dfrac{(x^2+1)^4}{8}$.
 
   \medskip
-  \commentaireMarge{Controle par derivation.}%
-  Verification : $F'(x) = \dfrac{4\,(x^2+1)^3 \cdot 2x}{8} = x\,(x^2+1)^3 = f(x)$.
+  \commentaireMarge{Contrôle par dérivation.}%
+  Vérification : $F'(x) = \dfrac{4\,(x^2+1)^3 \cdot 2x}{8} = x\,(x^2+1)^3 = f(x)$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier d'ajuster la constante multiplicative quand
+    \item \textbf{Piège 1.} Oublier d'ajuster la constante multiplicative quand
       $u'$ n'apparait pas exactement (facteur 2 manquant ci-dessus).
-    \item \textbf{Piege 2.} Appliquer $\frac{u'}{u} \to \ln(u)$ sans verifier
+    \item \textbf{Piège 2.} Appliquer $\frac{u'}{u} \to \ln(u)$ sans vérifier
       $u > 0$ sur l'intervalle.
-    \item \textbf{Piege 3.} Confondre deriver et primitiver : une primitive de
+    \item \textbf{Piège 3.} Confondre dériver et primitiver : une primitive de
       $x^n$ est $\frac{x^{n+1}}{n+1}$, pas $n\,x^{n-1}$.
   \end{itemize}
 }
 
 \verifier{%
-  TOUJOURS deriver la primitive obtenue et comparer terme a terme avec la fonction
+  TOUJOURS dériver la primitive obtenue et comparer terme a terme avec la fonction
   de depart ; en cas d'ecart d'un facteur constant, corriger la constante.
 }
 

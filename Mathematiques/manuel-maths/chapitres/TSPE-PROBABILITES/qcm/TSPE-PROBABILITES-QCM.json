@@ -1,6 +1,6 @@
 {
   "chapitre": "TSPE-PROBABILITES",
-  "titre": "QCM d'auto-évaluation -- Probabilites",
+  "titre": "QCM d'auto-évaluation -- Probabilités",
   "questions": [
     {
       "id": "Q1",
@@ -15,15 +15,15 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Cette expression donne la probabilite d'une configuration precise de $k$ succes ; elle oublie les $C(n,k)$ positions possibles des succes.",
+          "erreur": "Cette expression donne la probabilité d'une configuration précise de $k$ succès ; elle oublie les $C(n,k)$ positions possibles des succès.",
           "renvoi": "C5"
         },
         "C": {
-          "erreur": "Le facteur $(1-p)^{n-k}$ manque : les $n-k$ echecs de chaque configuration doivent eux aussi contribuer a sa probabilite.",
+          "erreur": "Le facteur $(1-p)^{n-k}$ manque : les $n-k$ echecs de chaque configuration doivent eux aussi contribuer a sa probabilité.",
           "renvoi": "C5"
         },
         "D": {
-          "erreur": "Le produit $np^k$ ne compte ni les choix des $k$ succes ni la probabilite des $n-k$ echecs ; ce n'est pas une probabilite binomiale.",
+          "erreur": "Le produit $np^k$ ne compte ni les choix des $k$ succès ni la probabilité des $n-k$ echecs ; ce n'est pas une probabilité binomiale.",
           "renvoi": "C5"
         }
       }
@@ -34,29 +34,29 @@
       "enonce": "Un schema de Bernoulli suppose que les epreuves sont :",
       "options": {
         "A": "dependantes et identiques",
-        "B": "independantes et identiques",
-        "C": "independantes et differentes",
-        "D": "toutes de probabilite 1/2"
+        "B": "indépendantes et identiques",
+        "C": "indépendantes et différentes",
+        "D": "toutes de probabilité 1/2"
       },
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "La dependance contredit la definition du schema : la probabilite d'un succes doit rester $p$ d'une epreuve a l'autre."
+          "erreur": "La dépendance contredit la définition du schema : la probabilité d'un succès doit rester $p$ d'une epreuve a l'autre."
         },
         "C": {
-          "erreur": "Des epreuves differentes peuvent avoir des probabilites de succes distinctes ; un schema de Bernoulli repete la meme epreuve."
+          "erreur": "Des epreuves différentes peuvent avoir des probabilités de succès distinctes ; un schema de Bernoulli repete la même epreuve."
         },
         "D": {
-          "erreur": "La probabilite de succes est un reel $p$ quelconque de $[0,1]$ ; la valeur $1/2$ n'est imposee que pour une piece equilibree."
+          "erreur": "La probabilité de succès est un réel $p$ quelconque de $[0,1]$ ; la valeur $1/2$ n'est imposee que pour une piece equilibree."
         }
       }
     },
     {
       "id": "Q3",
       "capacite": "C7",
-      "enonce": "La linearite de l'esperance E(X+Y)=E(X)+E(Y) est valable :",
+      "enonce": "La linéarité de l'espérance E(X+Y)=E(X)+E(Y) est valable :",
       "options": {
-        "A": "uniquement si X et Y sont independantes",
+        "A": "uniquement si X et Y sont indépendantes",
         "B": "toujours, sans condition d'independence",
         "C": "uniquement si X=Y",
         "D": "jamais"
@@ -64,22 +64,22 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "L'independance est requise pour additionner les variances, pas pour la linearite de l'esperance de variables integrables."
+          "erreur": "L'indépendance est requise pour additionner les variances, pas pour la linéarité de l'espérance de variables integrables."
         },
         "C": {
-          "erreur": "L'egalite $X=Y$ n'est pas necessaire : la somme des esperances vaut l'esperance de la somme pour deux variables quelconques."
+          "erreur": "L'égalité $X=Y$ n'est pas nécessaire : la somme des esperances vaut l'espérance de la somme pour deux variables quelconques."
         },
         "D": {
-          "erreur": "La propriete est toujours valable ; par exemple pour deux constantes $X=1$ et $Y=2$, les deux membres valent $3$."
+          "erreur": "La propriété est toujours valable ; par exemple pour deux constantes $X=1$ et $Y=2$, les deux membres valent $3$."
         }
       }
     },
     {
       "id": "Q4",
       "capacite": "C8",
-    "enonce": "L'additivite de la variance V(X+Y)=V(X)+V(Y) est garantie lorsque :",
+      "enonce": "L'additivite de la variance V(X+Y)=V(X)+V(Y) est garantie lorsque :",
       "options": {
-        "A": "que X et Y soient independantes",
+        "A": "que X et Y soient indépendantes",
         "B": "que X=Y",
         "C": "rien de particulier",
         "D": "que E(X)=E(Y)"
@@ -87,13 +87,13 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-        "erreur": "Si $X=Y$, alors $V(X+Y)=V(2X)=4V(X)$, tandis que $V(X)+V(Y)=2V(X)$ : l'egalite n'est donc pas garantie."
+          "erreur": "Si $X=Y$, alors $V(X+Y)=V(2X)=4V(X)$, tandis que $V(X)+V(Y)=2V(X)$ : l'égalité n'est donc pas garantie."
         },
         "C": {
-        "erreur": "Sans hypothese, la formule comporte le terme $2\\operatorname{Cov}(X,Y)$ : l'independance permet precisement d'annuler cette covariance."
+          "erreur": "Sans hypothèse, la formule comporte le terme $2\\operatorname{Cov}(X,Y)$ : l'indépendance permet precisement d'annuler cette covariance."
         },
         "D": {
-        "erreur": "L'egalite des esperances ne renseigne pas sur la covariance de $X$ et $Y$ : elle ne suffit donc pas a rendre les variances additives."
+          "erreur": "L'égalité des esperances ne renseigne pas sur la covariance de $X$ et $Y$ : elle ne suffit donc pas a rendre les variances additives."
         }
       }
     },
@@ -110,20 +110,20 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Le produit $np$ est l'esperance de la loi binomiale ; la variance comporte aussi le facteur de dispersion $1-p$."
+          "erreur": "Le produit $np$ est l'espérance de la loi binomiale ; la variance comporte aussi le facteur de dispersion $1-p$."
         },
         "C": {
-          "erreur": "L'expression $n(1-p)$ oublie le facteur $p$ associe aux succes ; chaque indicatrice de Bernoulli a pour variance $p(1-p)$."
+          "erreur": "L'expression $n(1-p)$ oublie le facteur $p$ associe aux succès ; chaque indicatrice de Bernoulli a pour variance $p(1-p)$."
         },
         "D": {
-          "erreur": "Le produit $p(1-p)$ est la variance d'une seule epreuve de Bernoulli ; la somme de $n$ epreuves independantes apporte le facteur $n$."
+          "erreur": "Le produit $p(1-p)$ est la variance d'une seule epreuve de Bernoulli ; la somme de $n$ epreuves indépendantes apporte le facteur $n$."
         }
       }
     },
     {
       "id": "Q6",
       "capacite": "C10",
-      "enonce": "L'inégalité de Bienayme-Tchebychev majore :",
+      "enonce": "L'inégalité de Bienayme-Tchebychev majoré :",
       "options": {
         "A": "P(|Y-mu|>=delta)",
         "B": "E(Y)",
@@ -133,13 +133,13 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "L'esperance $E(Y)$ est le centre de l'evenement de deviation ; l'inegalite ne cherche pas a majorer cette valeur."
+          "erreur": "L'espérance $E(Y)$ est le centre de l'événement de deviation ; l'inégalité ne cherche pas a majorer cette valeur."
         },
         "C": {
-          "erreur": "La variance intervient dans le majorant $V(Y)/\\delta^2$, mais la quantite majoree est la probabilite d'un ecart a la moyenne."
+          "erreur": "La variance intervient dans le majorant $V(Y)/\\delta^2$, mais la quantité majorée est la probabilité d'un ecart a la moyenne."
         },
         "D": {
-          "erreur": "Bienayme-Tchebychev concerne l'evenement $|Y-\\mu|\\geq\\delta$, pas la probabilite ponctuelle que $Y$ soit exactement egal a $\\mu$."
+          "erreur": "Bienayme-Tchebychev concerne l'événement $|Y-\\mu|\\geq\\delta$, pas la probabilité ponctuelle que $Y$ soit exactement égal a $\\mu$."
         }
       }
     }

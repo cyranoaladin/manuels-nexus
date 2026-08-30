@@ -1,24 +1,24 @@
 % META: {"id": "TSPE-SUITLIM-CR-011", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "cours", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "approved"}
 
-\section{Raisonnement par recurrence}
+\section{Raisonnement par récurrence}
 
 % ============================================================
 % STRATE 1 — Principe et structure
 % ============================================================
 
 \definition[1]{
-Le \textbf{principe de recurrence} est un mode de demonstration qui permet de prouver qu'une propriete $\mathcal{P}(n)$ est vraie pour tout entier naturel $n \geq n_0$.
+Le \textbf{principe de récurrence} est un mode de démonstration qui permet de prouver qu'une propriété $\mathcal{P}(n)$ est vraie pour tout entier naturel $n \geq n_0$.
 
-Il se deroule en trois etapes :
+Il se deroule en trois étapes :
 \begin{enumerate}
-  \item \textbf{Initialisation} : on verifie que $\mathcal{P}(n_0)$ est vraie.
-  \item \textbf{Heredite} : on suppose que $\mathcal{P}(n)$ est vraie pour un entier $n \geq n_0$ fixe (hypothese de recurrence), et on demontre que $\mathcal{P}(n+1)$ est alors vraie.
-  \item \textbf{Conclusion} : par le principe de recurrence, $\mathcal{P}(n)$ est vraie pour tout entier $n \geq n_0$.
+  \item \textbf{Initialisation} : on vérifie que $\mathcal{P}(n_0)$ est vraie.
+  \item \textbf{Heredite} : on suppose que $\mathcal{P}(n)$ est vraie pour un entier $n \geq n_0$ fixe (hypothèse de récurrence), et on démontré que $\mathcal{P}(n+1)$ est alors vraie.
+  \item \textbf{Conclusion} : par le principe de récurrence, $\mathcal{P}(n)$ est vraie pour tout entier $n \geq n_0$.
 \end{enumerate}
 }
 
 \exemple{
-\textbf{Demontrer par recurrence que pour tout $n \in \mathbb{N}^*$, $\displaystyle\sum_{k=1}^{n} k = \dfrac{n(n+1)}{2}$.}
+\textbf{Démontrer par récurrence que pour tout $n \in \mathbb{N}^*$, $\displaystyle\sum_{k=1}^{n} k = \dfrac{n(n+1)}{2}$.}
 
 \medskip
 
@@ -35,11 +35,11 @@ Calculons $\displaystyle\sum_{k=1}^{n+1} k$ :
 
 C'est bien $\dfrac{(n+1)((n+1)+1)}{2}$, donc $\mathcal{P}(n+1)$ est vraie.
 
-\textbf{Conclusion.} Par le principe de recurrence, $\mathcal{P}(n)$ est vraie pour tout $n \geq 1$.
+\textbf{Conclusion.} Par le principe de récurrence, $\mathcal{P}(n)$ est vraie pour tout $n \geq 1$.
 }
 
 \exemple{
-\textbf{Demontrer par recurrence que pour tout $n \in \mathbb{N}$, $2^n \geq n + 1$.}
+\textbf{Démontrer par récurrence que pour tout $n \in \mathbb{N}$, $2^n \geq n + 1$.}
 
 \medskip
 
@@ -53,7 +53,7 @@ Alors $2^{n+1} = 2 \times 2^n \geq 2(n+1) = 2n + 2$. Or $2n + 2 \geq (n+1) + 1 =
 
 Donc $2^{n+1} \geq (n+1) + 1$ et $\mathcal{P}(n+1)$ est vraie.
 
-\textbf{Conclusion.} Par le principe de recurrence, $\mathcal{P}(n)$ est vraie pour tout $n \in \mathbb{N}$.
+\textbf{Conclusion.} Par le principe de récurrence, $\mathcal{P}(n)$ est vraie pour tout $n \in \mathbb{N}$.
 }
 
 % ============================================================
@@ -61,25 +61,25 @@ Donc $2^{n+1} \geq (n+1) + 1$ et $\mathcal{P}(n+1)$ est vraie.
 % ============================================================
 
 \margeAppui{
-\textbf{Structure de la redaction.} Ecrire explicitement la propriete $\mathcal{P}(n)$, puis \textbf{Initialisation}, \textbf{Heredite} (avec $n \geq n_0$ fixe) et \textbf{Conclusion}. Cette redaction structuree est exigee dans les copies de baccalaureat.
+\textbf{Structure de la redaction.} Écrire explicitement la propriété $\mathcal{P}(n)$, puis \textbf{Initialisation}, \textbf{Heredite} (avec $n \geq n_0$ fixe) et \textbf{Conclusion}. Cette redaction structuree est exigee dans les copies de baccalaureat.
 }
 
 \erreurFrequente{
 \textbf{Oublier l'initialisation.}
 
-L'heredite seule ne suffit pas. Par exemple, la propriete « $n^2 < 0$ » satisfait l'heredite de facon vacuiste, mais n'est vraie pour aucun entier car l'initialisation echoue.
+L'heredite seule ne suffit pas. Par exemple, la propriété « $n^2 < 0$ » satisfait l'heredite de facon vacuiste, mais n'est vraie pour aucun entier car l'initialisation echoue.
 }
 
 \erreurFrequente{
-\textbf{Utiliser l'hypothese de recurrence a mauvais escient.}
+\textbf{Utiliser l'hypothèse de récurrence a mauvais escient.}
 
-Dans l'heredite, on \emph{suppose} $\mathcal{P}(n)$ vraie et on \emph{demontre} $\mathcal{P}(n+1)$. Il ne faut pas « montrer $\mathcal{P}(n)$ » dans l'heredite : c'est l'hypothese, pas la conclusion.
+Dans l'heredite, on \emph{suppose} $\mathcal{P}(n)$ vraie et on \emph{démontré} $\mathcal{P}(n+1)$. Il ne faut pas « montrer $\mathcal{P}(n)$ » dans l'heredite : c'est l'hypothèse, pas la conclusion.
 }
 
 \erreurFrequente{
 \textbf{Confondre l'heredite et la substitution.}
 
-Pour prouver qu'une suite verifie $u_n \leq M$ pour tout $n$, on ne remplace pas $n$ par $n+1$ dans l'inegalite ; on utilise $u_{n+1} = f(u_n)$ et l'hypothese $u_n \leq M$ pour montrer $u_{n+1} \leq M$.
+Pour prouver qu'une suite vérifie $u_n \leq M$ pour tout $n$, on ne remplace pas $n$ par $n+1$ dans l'inégalité ; on utilise $u_{n+1} = f(u_n)$ et l'hypothèse $u_n \leq M$ pour montrer $u_{n+1} \leq M$.
 }
 
 % ============================================================
@@ -87,5 +87,5 @@ Pour prouver qu'une suite verifie $u_n \leq M$ pour tout $n$, on ne remplace pas
 % ============================================================
 
 \approfondissement{
-\textbf{Recurrence forte.} Dans la recurrence forte (ou complete), l'hypothese d'heredite suppose que $\mathcal{P}(k)$ est vraie pour \emph{tous} les entiers $k$ avec $n_0 \leq k \leq n$, et on demontre $\mathcal{P}(n+1)$. Elle est utile lorsque $u_{n+1}$ depend de plusieurs termes precedents.
+\textbf{Récurrence forte.} Dans la récurrence forte (ou complete), l'hypothèse d'heredite suppose que $\mathcal{P}(k)$ est vraie pour \emph{tous} les entiers $k$ avec $n_0 \leq k \leq n$, et on démontré $\mathcal{P}(n+1)$. Elle est utile lorsque $u_{n+1}$ depend de plusieurs termes precedents.
 }

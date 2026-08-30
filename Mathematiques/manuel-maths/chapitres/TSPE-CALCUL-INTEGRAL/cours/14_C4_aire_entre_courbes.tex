@@ -3,7 +3,7 @@
 \section{Aire entre deux courbes}
 
 % ============================================================
-% STRATE 1 — Methode et exemple
+% STRATE 1 — Méthode et exemple
 % ============================================================
 
 \propriete{
@@ -14,7 +14,7 @@ Si $f$ et $g$ sont continues sur $[a,b]$ et $g \leq f$ sur $[a,b]$, l'aire du do
 }
 
 \margeAppui{
-On se ramene ainsi a l'integrale d'une fonction positive ($f-g \geq 0$), meme si $f$ et $g$ ne sont pas positives elles-memes.
+On se ramene ainsi a l'intégrale d'une fonction positive ($f-g \geq 0$), même si $f$ et $g$ ne sont pas positives elles-mêmes.
 }
 
 \exemple{
@@ -22,7 +22,7 @@ Calculer l'aire entre les courbes de $f(x)=-x^2+4$ et $g(x)=x^2-2$ sur l'interva
 
 \textbf{Intersection.} $f(x)=g(x) \iff -x^2+4=x^2-2 \iff 2x^2=6 \iff x^2=3 \iff x=\pm\sqrt{3}$.
 
-Sur $[-\sqrt{3},\sqrt{3}]$, $f(x)-g(x) = -2x^2+6 \geq 0$ (verifie en $x=0$ : $6>0$), donc $g \leq f$ sur cet intervalle.
+Sur $[-\sqrt{3},\sqrt{3}]$, $f(x)-g(x) = -2x^2+6 \geq 0$ (vérifie en $x=0$ : $6>0$), donc $g \leq f$ sur cet intervalle.
 \[
   \mathcal{A} = \int_{-\sqrt{3}}^{\sqrt{3}} (-2x^2+6)\,\mathrm{d}x = \Big[-\frac{2x^3}{3}+6x\Big]_{-\sqrt{3}}^{\sqrt{3}} = 8\sqrt{3} \text{ unites d'aire}.
 \]
@@ -42,5 +42,5 @@ Sur $[-\sqrt{3},\sqrt{3}]$, $f(x)-g(x) = -2x^2+6 \geq 0$ (verifie en $x=0$ : $6>
 % ============================================================
 
 \erreurFrequente{
-\textbf{Oublier de determiner quelle courbe est au-dessus.} Sans verifier le signe de $f-g$ sur l'intervalle, on risque de calculer $\int (f-g)$ avec un resultat negatif (aire algebrique), qui ne represente pas une aire geometrique. Toujours integrer la fonction la plus grande moins la plus petite.
+\textbf{Oublier de déterminer quelle courbe est au-dessus.} Sans vérifier le signe de $f-g$ sur l'intervalle, on risque de calculer $\int (f-g)$ avec un résultat négatif (aire algébrique), qui ne représente pas une aire géométrique. Toujours integrer la fonction la plus grande moins la plus petite.
 }

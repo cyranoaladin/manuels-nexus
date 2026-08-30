@@ -3,22 +3,22 @@
 \section{Concentration, inégalité de Bienaymé-Tchebychev}
 
 % ============================================================
-% STRATE 1 — Inegalite et application (echantillonnage)
+% STRATE 1 — Inégalité et application (echantillonnage)
 % ============================================================
 
 \theoreme[Inégalité de Bienaymé-Tchebychev, admise]{
-Soit $Y$ une variable aleatoire d'esperance $\mu$ et de variance $V$. Pour tout reel $\delta>0$ :
+Soit $Y$ une variable aleatoire d'espérance $\mu$ et de variance $V$. Pour tout réel $\delta>0$ :
 \[
   P(|Y-\mu| \geq \delta) \leq \frac{V}{\delta^2}.
 \]
 }
 
 \margeAppui{
-Cette inegalite quantifie l'idee de \textbf{concentration} : plus la variance est petite, plus $Y$ est « concentree » autour de son esperance.
+Cette inégalité quantifie l'idee de \textbf{concentration} : plus la variance est petite, plus $Y$ est « concentree » autour de son espérance.
 }
 
 \propriete[Application à l'échantillonnage]{
-Soit $X_n$ le nombre de succes dans un schema de Bernoulli de parametres $n,p$, et $M_n = \dfrac{X_n}{n}$ la frequence observee. Alors $E(M_n)=p$ et $V(M_n) = \dfrac{p(1-p)}{n}$, et pour tout $\delta>0$ :
+Soit $X_n$ le nombre de succès dans un schema de Bernoulli de paramètres $n,p$, et $M_n = \dfrac{X_n}{n}$ la frequence observee. Alors $E(M_n)=p$ et $V(M_n) = \dfrac{p(1-p)}{n}$, et pour tout $\delta>0$ :
 \[
   P\big(|M_n-p| \geq \delta\big) \leq \frac{p(1-p)}{n\,\delta^2} \leq \frac{1}{4n\delta^2}.
 \]
@@ -29,7 +29,7 @@ On utilise $p(1-p) \leq \dfrac{1}{4}$ pour tout $p \in [0,1]$ (maximum atteint e
 }
 
 \exemple{
-On souhaite determiner une taille d'echantillon $n$ garantissant $P(|M_n-p|\geq 0{,}02) \leq 0{,}05$, sans connaitre $p$.
+On souhaite déterminer une taille d'échantillon $n$ garantissant $P(|M_n-p|\geq 0{,}02) \leq 0{,}05$, sans connaitre $p$.
 
 On veut $\dfrac{1}{4n\times(0{,}02)^2} \leq 0{,}05$, soit $n \geq \dfrac{1}{4\times(0{,}02)^2\times0{,}05} = \dfrac{1}{0{,}00008} = 12\,500$.
 
@@ -39,7 +39,7 @@ On veut $\dfrac{1}{4n\times(0{,}02)^2} \leq 0{,}05$, soit $n \geq \dfrac{1}{4\ti
 % assert n_min == 12500
 % END-VERIFY
 
-Un echantillon de taille $n=12\,500$ suffit donc a garantir cette precision avec ce risque.
+Un échantillon de taille $n=12\,500$ suffit donc a garantir cette precision avec ce risque.
 }
 
 % ============================================================

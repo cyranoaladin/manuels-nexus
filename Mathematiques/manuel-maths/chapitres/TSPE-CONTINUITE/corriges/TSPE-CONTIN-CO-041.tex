@@ -31,13 +31,13 @@
 
 $u_1 = 2$ ; $u_2 = 0{,}8 \times 2 + 2 = 3{,}6$ ; $u_3 = 4{,}88$ ; $u_4 = 5{,}904$.
 
-\textbf{Q2.} Si $x \in [0\,;10]$ alors $0 \leq 0{,}8x \leq 8$, donc $2 \leq f(x) \leq 10$ : $f(x) \in [0\,;10]$. Par recurrence, $u_0 = 0 \in [0\,;10]$ et la stabilite propage l'encadrement a tout rang.
+\textbf{Q2.} Si $x \in [0\,;10]$ alors $0 \leq 0{,}8x \leq 8$, donc $2 \leq f(x) \leq 10$ : $f(x) \in [0\,;10]$. Par récurrence, $u_0 = 0 \in [0\,;10]$ et la stabilite propage l'encadrement a tout rang.
 
-\textbf{Q3.} $f(x) - x = 0{,}8x + 2 - x = 2 - 0{,}2x = \dfrac{10-x}{5}$, positif sur $[0\,;10]$. Donc $u_{n+1} - u_n \geq 0$ : la suite est croissante. Etant majoree par $10$, elle converge.
+\textbf{Q3.} $f(x) - x = 0{,}8x + 2 - x = 2 - 0{,}2x = \dfrac{10-x}{5}$, positif sur $[0\,;10]$. Donc $u_{n+1} - u_n \geq 0$ : la suite est croissante. Etant majorée par $10$, elle converge.
 
-\textbf{Q4.} $f$ est affine donc continue ; la limite $\ell$ verifie $0{,}8\ell + 2 = \ell$, soit $0{,}2\ell = 2$ et $\ell = 10$. La quantite de medicament dans l'organisme se stabilise a $10$ mg : c'est le \emph{plateau} du traitement, jamais depasse mais approche d'aussi pres que l'on veut.
+\textbf{Q4.} $f$ est affine donc continue ; la limite $\ell$ vérifie $0{,}8\ell + 2 = \ell$, soit $0{,}2\ell = 2$ et $\ell = 10$. La quantité de medicament dans l'organisme se stabilise a $10$ mg : c'est le \emph{plateau} du traitement, jamais depasse mais approche d'aussi pres que l'on veut.
 
-\textbf{Q5.} $d_{n+1} = 10 - u_{n+1} = 10 - 0{,}8u_n - 2 = 8 - 0{,}8u_n = 0{,}8(10 - u_n) = 0{,}8\,d_n$. La suite $(d_n)$ est geometrique de raison $0{,}8$, de premier terme $d_0 = 10$, donc $d_n = 10 \times 0{,}8^n$ et
+\textbf{Q5.} $d_{n+1} = 10 - u_{n+1} = 10 - 0{,}8u_n - 2 = 8 - 0{,}8u_n = 0{,}8(10 - u_n) = 0{,}8\,d_n$. La suite $(d_n)$ est géométrique de raison $0{,}8$, de premier terme $d_0 = 10$, donc $d_n = 10 \times 0{,}8^n$ et
 \[ u_n = 10 - 10 \times 0{,}8^{\,n}. \]
-On cherche le plus petit $n$ tel que $u_n > 9$, c'est-a-dire $10 \times 0{,}8^n < 1$, soit $0{,}8^n < 0{,}1$. En calculant : $0{,}8^{10} \approx 0{,}1074 > 0{,}1$ et $0{,}8^{11} \approx 0{,}0859 < 0{,}1$. Le premier jour ou la quantite depasse $9$ mg est donc le onzieme, $n = 11$.
+On cherche le plus petit $n$ tel que $u_n > 9$, c'est-a-dire $10 \times 0{,}8^n < 1$, soit $0{,}8^n < 0{,}1$. En calculant : $0{,}8^{10} \approx 0{,}1074 > 0{,}1$ et $0{,}8^{11} \approx 0{,}0859 < 0{,}1$. Le premier jour ou la quantité depasse $9$ mg est donc le onzieme, $n = 11$.
 \end{corrige}

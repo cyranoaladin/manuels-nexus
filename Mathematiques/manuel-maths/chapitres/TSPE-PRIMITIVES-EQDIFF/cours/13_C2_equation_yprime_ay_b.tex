@@ -3,11 +3,11 @@
 \section{Équation différentielle $y' = ay + b$}
 
 % ============================================================
-% STRATE 1 — Methode et theoreme
+% STRATE 1 — Méthode et théorème
 % ============================================================
 
 \theoreme{
-Soit $a \in \mathbb{R}^*$ et $b \in \mathbb{R}$. L'equation $y' = ay+b$ admet une unique solution constante $y_0 = -\dfrac{b}{a}$ (solution particuliere).
+Soit $a \in \mathbb{R}^*$ et $b \in \mathbb{R}$. L'équation $y' = ay+b$ admet une unique solution constante $y_0 = -\dfrac{b}{a}$ (solution particulière).
 
 Les solutions de $y'=ay+b$ sur $\mathbb{R}$ sont exactement les fonctions :
 \[
@@ -16,13 +16,13 @@ Les solutions de $y'=ay+b$ sur $\mathbb{R}$ sont exactement les fonctions :
 }
 
 \margeAppui{
-\textbf{Methode.} On cherche d'abord la solution particuliere constante $y_0$ (verifiant $y_0'=0=ay_0+b$, d'ou $y_0=-b/a$). Puis on pose $z = y-y_0$ : $z' = y' = ay+b = a(z+y_0)+b = az + (ay_0+b) = az$ (car $ay_0+b=0$). Donc $z$ verifie $z'=az$, et $z(x)=C\mathrm{e}^{ax}$ ; d'ou $y = z+y_0 = C\mathrm{e}^{ax} - b/a$.
+\textbf{Méthode.} On cherche d'abord la solution particulière constante $y_0$ (verifiant $y_0'=0=ay_0+b$, d'ou $y_0=-b/a$). Puis on pose $z = y-y_0$ : $z' = y' = ay+b = a(z+y_0)+b = az + (ay_0+b) = az$ (car $ay_0+b=0$). Donc $z$ vérifie $z'=az$, et $z(x)=C\mathrm{e}^{ax}$ ; d'ou $y = z+y_0 = C\mathrm{e}^{ax} - b/a$.
 }
 
 \exemple{
-Resoudre $y' = 2y - 6$, puis determiner la solution telle que $y(0)=1$.
+Résoudre $y' = 2y - 6$, puis déterminer la solution telle que $y(0)=1$.
 
-Solution particuliere constante : $y_0 = -\dfrac{-6}{2} = 3$ (on verifie : $y_0'=0$ et $2y_0-6=6-6=0$. \checkmark)
+Solution particulière constante : $y_0 = -\dfrac{-6}{2} = 3$ (on vérifie : $y_0'=0$ et $2y_0-6=6-6=0$. \checkmark)
 
 Solutions generales : $y(x) = C\mathrm{e}^{2x} + 3$.
 
@@ -44,5 +44,5 @@ La solution cherchee est $y(x) = -2\mathrm{e}^{2x}+3$.
 % ============================================================
 
 \erreurFrequente{
-\textbf{Se tromper de signe pour la solution particuliere.} Pour $y'=ay+b$, la solution constante est $y_0 = -\dfrac{b}{a}$ (avec un signe moins), obtenue en resolvant $0 = ay_0+b$. Une erreur frequente est d'ecrire $y_0 = \dfrac{b}{a}$.
+\textbf{Se tromper de signe pour la solution particulière.} Pour $y'=ay+b$, la solution constante est $y_0 = -\dfrac{b}{a}$ (avec un signe moins), obtenue en resolvant $0 = ay_0+b$. Une erreur frequente est d'écrire $y_0 = \dfrac{b}{a}$.
 }

@@ -2,14 +2,14 @@
 
 \section{Formule d'Al-Kashi}
 
-\margeAppui{La formule d'Al-Kashi generalise le theoreme de Pythagore a tout triangle, en reliant les longueurs des trois cotes a l'un des angles. Sa demonstration par le produit scalaire est exigible.}
+\margeAppui{La formule d'Al-Kashi generalise le théorème de Pythagore a tout triangle, en reliant les longueurs des trois cotes a l'un des angles. Sa démonstration par le produit scalaire est exigible.}
 
 \theoreme[Formule d'Al-Kashi]{
 Dans un triangle $ABC$, en notant $a = BC$, $b = AC$, $c = AB$ :
 \[
 a^2 = b^2 + c^2 - 2bc\,\cos(\widehat{BAC}).
 \]
-De meme, par permutation circulaire :
+De même, par permutation circulaire :
 \[
 b^2 = a^2 + c^2 - 2ac\,\cos(\widehat{ABC}), \qquad c^2 = a^2 + b^2 - 2ab\,\cos(\widehat{ACB}).
 \]
@@ -32,7 +32,7 @@ b^2 = a^2 + c^2 - 2ac\,\cos(\widehat{ABC}), \qquad c^2 = a^2 + b^2 - 2ab\,\cos(\
 % END-VERIFY
 
 \demonstration{
-\textbf{Demonstration de la formule d'Al-Kashi (exigible).}
+\textbf{Démonstration de la formule d'Al-Kashi (exigible).}
 
 Dans le triangle $ABC$, on a $\overrightarrow{BC} = \overrightarrow{BA} + \overrightarrow{AC} = \overrightarrow{AC} - \overrightarrow{AB}$.
 
@@ -59,16 +59,16 @@ Donc $a^2 = b^2 + c^2 - 2bc\,\cos(\widehat{BAC})$.
 % assert simplify(a_sq - (b**2 + c**2 - 2*b*c*cos(A_angle))) == 0
 % END-VERIFY
 
-\propriete[Cas particulier : theoreme de Pythagore]{
+\propriete[Cas particulier : théorème de Pythagore]{
 Si $\widehat{BAC} = \dfrac{\pi}{2}$, alors $\cos(\widehat{BAC}) = 0$ et la formule d'Al-Kashi donne :
 \[
 a^2 = b^2 + c^2.
 \]
-C'est le theoreme de Pythagore.
+C'est le théorème de Pythagore.
 }
 
 \begin{center}\textbf{Approfondissement — Vers la Terminale}\end{center}
-\approfondissement{\textbf{Formule de la mediane (consequence, non exigible en Premiere).}
+\approfondissement{\textbf{Formule de la médiane (consequence, non exigible en Première).}
 Soit $M$ le milieu de $[BC]$. Alors :
 \[
 AM^2 = \frac{2\,AB^2 + 2\,AC^2 - BC^2}{4}.
@@ -133,5 +133,5 @@ Confondre la formule d'Al-Kashi avec la loi des sinus $\dfrac{a}{\sin A} = \dfra
 }
 
 \approfondissement{
-La formule d'Al-Kashi est aussi appelee « loi des cosinus » ou « theoreme de la generalisation de Pythagore ». Elle est connue depuis l'Antiquite (Euclide) mais a ete systematisee par le mathematicien persan Al-Kashi au XV\textsuperscript{e} siecle.
+La formule d'Al-Kashi est aussi appelee « loi des cosinus » ou « théorème de la generalisation de Pythagore ». Elle est connue depuis l'Antiquite (Euclide) mais a été systematisee par le mathematicien persan Al-Kashi au XV\textsuperscript{e} siecle.
 }

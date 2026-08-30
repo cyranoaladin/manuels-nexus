@@ -47,11 +47,11 @@
 \section*{TD contextualise — Le seuil de basculement d'une population}
 
 \emph{Duree indicative : 45 min. Ce TD mobilise les deux capacites du chapitre :
-le theoreme des valeurs intermediaires en partie A, les suites recurrentes en
+le théorème des valeurs intermediaires en partie A, les suites recurrentes en
 partie B.}
 
 Une cooperative agricole produit $x$ tonnes d'un produit bio, avec $0 \leq x \leq 8$.
-Son cout total de production, en milliers d'euros, est modelise par
+Son coût total de production, en milliers d'euros, est modélisé par
 \[ C(x) = x^3 - 9x^2 + 30x + 20, \]
 et elle vend chaque tonne $26$ milliers d'euros.
 
@@ -60,27 +60,27 @@ et elle vend chaque tonne $26$ milliers d'euros.
 \begin{enumerate}
   \item Exprimer la recette $R(x)$, puis montrer que le benefice vaut
   $B(x) = -x^3 + 9x^2 - 4x - 20$.
-  \item Calculer $B(0)$ et $B(8)$. Que peut-on en deduire immediatement ?
+  \item Calculer $B(0)$ et $B(8)$. Que peut-on en déduire immédiatement ?
   \item Calculer $B'(x)$. Montrer que $B'$ s'annule en $3 - \dfrac{\sqrt{69}}{3}$ et
   $3 + \dfrac{\sqrt{69}}{3}$, dont on donnera des valeurs approchees, puis dresser
   le tableau de variations de $B$ sur $[0\,;8]$.
-  \item Le tableau fait apparaitre trois branches monotones. Determiner, branche
-  par branche, le nombre de solutions de l'equation $B(x) = 0$ sur $[0\,;8]$.
-  \item Verifier que $2$ est solution evidente, puis factoriser $B(x)$ sous la
-  forme $-(x-2)\left(x^2 - 7x - 10\right)$. En deduire toutes les racines reelles
-  de $B$ et confirmer le decompte de la question precedente.
-  \item Interpreter : a partir de quelle production la cooperative devient-elle
+  \item Le tableau fait apparaitre trois branches monotones. Déterminer, branche
+  par branche, le nombre de solutions de l'équation $B(x) = 0$ sur $[0\,;8]$.
+  \item Vérifier que $2$ est solution evidente, puis factoriser $B(x)$ sous la
+  forme $-(x-2)\left(x^2 - 7x - 10\right)$. En déduire toutes les racines réelles
+  de $B$ et confirmer le decompte de la question précédente.
+  \item Interpréter : a partir de quelle production la cooperative devient-elle
   beneficiaire, et jusqu'a quelle production le reste-t-elle ?
-  \item \emph{Question ouverte.} Que vaut $B(9)$ ? Le modele reste-t-il pertinent
+  \item \emph{Question ouverte.} Que vaut $B(9)$ ? Le modèle reste-t-il pertinent
   au-dela de $8$ tonnes ? Justifier en etudiant la limite de $B$ en $+\infty$.
 \end{enumerate}
 
 \subsection*{Partie B — La conversion des parcelles}
 
-Chaque annee, la cooperative convertit en bio $40\,\%$ des parcelles encore
+Chaque année, la cooperative convertit en bio $40\,\%$ des parcelles encore
 conventionnelles, mais $28\,\%$ de la surface totale est reprise par de
 nouveaux adherents deja convertis. On note $p_n$ la proportion de surface bio
-l'annee $n$, avec $p_0 = 0{,}2$, et on admet que
+l'année $n$, avec $p_0 = 0{,}2$, et on admet que
 \[ p_{n+1} = 0{,}6\,p_n + 0{,}28. \]
 
 \begin{enumerate}
@@ -88,17 +88,17 @@ l'annee $n$, avec $p_0 = 0{,}2$, et on admet que
   \item Montrer que l'intervalle $[0\,;1]$ est stable par $f : x \mapsto 0{,}6x + 0{,}28$,
   puis que $0 \leq p_n \leq 1$ pour tout $n$.
   \item Montrer que $(p_n)$ est croissante.
-  \item En deduire qu'elle converge, puis determiner sa limite. Interpreter :
+  \item En déduire qu'elle converge, puis déterminer sa limite. Interpréter :
   la cooperative atteindra-t-elle un jour $100\,\%$ de surface bio ?
-  \item On pose $d_n = 0{,}7 - p_n$. Montrer que $(d_n)$ est geometrique, en
-  deduire l'expression de $p_n$, puis determiner la premiere annee ou la
+  \item On pose $d_n = 0{,}7 - p_n$. Montrer que $(d_n)$ est géométrique, en
+  déduire l'expression de $p_n$, puis déterminer la première année ou la
   proportion depasse $65\,\%$.
 \end{enumerate}
 
 \subsection*{Partie C — Synthese}
 
 \begin{enumerate}
-  \item Les deux parties utilisent la continuite, mais pas au meme endroit du
+  \item Les deux parties utilisent la continuite, mais pas au même endroit du
   raisonnement. Preciser lequel dans chaque cas.
   \item Dans la partie A, la solution $s$ existe sans qu'on sache la calculer ;
   dans la partie B, la limite se calcule exactement. Expliquer ce qui, dans les

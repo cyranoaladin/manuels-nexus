@@ -28,14 +28,14 @@
 % assert exp(1) > 2
 % END-VERIFY
 
-\section*{Temps 7 — TD fil rouge : Etude complete d'une suite}
+\section*{Temps 7 — TD fil rouge : Étude complete d'une suite}
 
-\textbf{Situation.} On considere la suite $(u_n)$ definie par $u_0 = 1$ et, pour tout $n \in \mathbb{N}$ :
+\textbf{Situation.} On considere la suite $(u_n)$ définie par $u_0 = 1$ et, pour tout $n \in \mathbb{N}$ :
 \[
   u_{n+1} = \frac{u_n + 3}{u_n + 1}.
 \]
 
-On se propose d'etudier le comportement de cette suite en mobilisant les outils du chapitre.
+On se propose d'étudier le comportement de cette suite en mobilisant les outils du chapitre.
 
 \bigskip
 
@@ -70,17 +70,17 @@ u_3 = \frac{5/3 + 3}{5/3 + 1} = \frac{14/3}{8/3} = \frac{14}{8} = \frac{7}{4}.
 \bigskip
 
 %---------------------------------------------------------------
-% PARTIE B — Recurrence (C2)
+% PARTIE B — Récurrence (C2)
 %---------------------------------------------------------------
 
 \begin{exercice}{TSPE-SUITLIM-COURS-07-FR-EX2}{2}{15}
 
-\textbf{Partie B — Encadrement par recurrence}
+\textbf{Partie B — Encadrement par récurrence}
 
 \begin{enumerate}
   \item Montrer que si la suite converge vers $\ell > 0$, alors $\ell = \sqrt{3}$.
-  \item Montrer par recurrence que pour tout $n \in \mathbb{N}$, $u_n > 0$.
-  \item Montrer par recurrence que pour tout $n \in \mathbb{N}$, $1 \leq u_n \leq 2$.
+  \item Montrer par récurrence que pour tout $n \in \mathbb{N}$, $u_n > 0$.
+  \item Montrer par récurrence que pour tout $n \in \mathbb{N}$, $1 \leq u_n \leq 2$.
 \end{enumerate}
 
 \end{exercice}
@@ -93,17 +93,17 @@ u_3 = \frac{5/3 + 3}{5/3 + 1} = \frac{14/3}{8/3} = \frac{14}{8} = \frac{7}{4}.
 \]
 Comme $\ell > 0$, on obtient $\ell = \sqrt{3}$.
 
-\textbf{Question 2.} Par recurrence. $u_0 = 1 > 0$. Si $u_n > 0$, alors $u_{n+1} = \dfrac{u_n + 3}{u_n + 1} > 0$ (quotient de deux reels positifs). Donc $u_n > 0$ pour tout $n$.
+\textbf{Question 2.} Par récurrence. $u_0 = 1 > 0$. Si $u_n > 0$, alors $u_{n+1} = \dfrac{u_n + 3}{u_n + 1} > 0$ (quotient de deux réels positifs). Donc $u_n > 0$ pour tout $n$.
 
 \textbf{Question 3.} Initialisation : $u_0 = 1 \in [1, 2]$.
 
-Heredite : supposons $1 \leq u_n \leq 2$. La fonction $f(x) = \dfrac{x+3}{x+1}$ est decroissante sur $[1, 2]$ (car $f'(x) = \dfrac{-2}{(x+1)^2} < 0$).
+Heredite : supposons $1 \leq u_n \leq 2$. La fonction $f(x) = \dfrac{x+3}{x+1}$ est décroissante sur $[1, 2]$ (car $f'(x) = \dfrac{-2}{(x+1)^2} < 0$).
 
 Donc $f(2) \leq f(u_n) \leq f(1)$, soit $\dfrac{5}{3} \leq u_{n+1} \leq 2$.
 
 En particulier $1 \leq \dfrac{5}{3} \leq u_{n+1} \leq 2$, donc $1 \leq u_{n+1} \leq 2$.
 
-Par recurrence, $1 \leq u_n \leq 2$ pour tout $n$.
+Par récurrence, $1 \leq u_n \leq 2$ pour tout $n$.
 
 \end{corrige}
 
@@ -136,9 +136,9 @@ On pose $v_n = u_n^2 - 3$ pour tout $n \in \mathbb{N}$.
 
 \begin{enumerate}
   \item Montrer que $v_{n+1} = \dfrac{-2\,v_n}{(u_n + 1)^2}$.
-  \item En deduire que $|v_{n+1}| \leq \dfrac{1}{2}\,|v_n|$ pour tout $n$.
+  \item En déduire que $|v_{n+1}| \leq \dfrac{1}{2}\,|v_n|$ pour tout $n$.
   \item Montrer que $|v_n| \leq \dfrac{2}{2^n}$ pour tout $n \in \mathbb{N}$.
-  \item En deduire que la suite $(u_n)$ converge vers $\sqrt{3}$.
+  \item En déduire que la suite $(u_n)$ converge vers $\sqrt{3}$.
 \end{enumerate}
 
 \end{exercice}
@@ -147,7 +147,7 @@ On pose $v_n = u_n^2 - 3$ pour tout $n \in \mathbb{N}$.
 
 \textbf{Question 1.} On a $u_{n+1}^2 - 3 = \left(\dfrac{u_n+3}{u_n+1}\right)^2 - 3 = \dfrac{(u_n+3)^2 - 3(u_n+1)^2}{(u_n+1)^2}$.
 
-Developpons le numerateur :
+Developpons le numérateur :
 \[
 (u_n+3)^2 - 3(u_n+1)^2 = u_n^2 + 6u_n + 9 - 3(u_n^2 + 2u_n + 1) = -2u_n^2 + 6 = -2(u_n^2 - 3).
 \]
@@ -161,7 +161,7 @@ v_{n+1} = u_{n+1}^2 - 3 = \frac{-2(u_n^2 - 3)}{(u_n+1)^2} = \frac{-2\,v_n}{(u_n+
 
 Ainsi $|v_{n+1}| = \dfrac{2\,|v_n|}{(u_n+1)^2} \leq \dfrac{2\,|v_n|}{4} = \dfrac{1}{2}\,|v_n|$.
 
-\textbf{Question 3.} Par recurrence, $|v_n| \leq |v_0| \times \left(\dfrac{1}{2}\right)^n = \dfrac{2}{2^n}$. (Car $v_0 = 1 - 3 = -2$, donc $|v_0| = 2$.)
+\textbf{Question 3.} Par récurrence, $|v_n| \leq |v_0| \times \left(\dfrac{1}{2}\right)^n = \dfrac{2}{2^n}$. (Car $v_0 = 1 - 3 = -2$, donc $|v_0| = 2$.)
 
 \textbf{Question 4.} On a $|u_n^2 - 3| \leq \dfrac{2}{2^n} \to 0$, donc $u_n^2 \to 3$. Puisque $u_n > 0$ pour tout $n$, on en deduit $u_n \to \sqrt{3}$.
 
@@ -182,7 +182,7 @@ On pose $w_n = \dfrac{\mathrm{e}^n}{n}$ pour $n \geq 1$.
 \begin{enumerate}
   \item Calculer $w_1$, $w_2$ et $w_3$ (arrondir au centieme).
   \item Justifier que $\lim_{n \to +\infty} w_n = +\infty$.
-  \item En deduire que la suite $\left(\dfrac{n}{\mathrm{e}^n}\right)$ converge vers $0$.
+  \item En déduire que la suite $\left(\dfrac{n}{\mathrm{e}^n}\right)$ converge vers $0$.
 \end{enumerate}
 
 \end{exercice}

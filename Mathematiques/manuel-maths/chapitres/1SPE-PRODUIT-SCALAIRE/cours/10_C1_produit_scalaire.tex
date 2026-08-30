@@ -2,10 +2,10 @@
 
 \section{Produit scalaire de deux vecteurs}
 
-\margeAppui{Le produit scalaire est une operation qui associe a deux vecteurs un nombre reel. Il permet de traduire algebriquement des notions geometriques comme l'angle, l'orthogonalite et la projection.}
+\margeAppui{Le produit scalaire est une opération qui associe a deux vecteurs un nombre réel. Il permet de traduire algebriquement des notions géométriques comme l'angle, l'orthogonalite et la projection.}
 
-\definition[Produit scalaire (definition geometrique)]{
-Soient $\vec{u}$ et $\vec{v}$ deux vecteurs du plan. Le \textbf{produit scalaire} de $\vec{u}$ et $\vec{v}$ est le nombre reel :
+\definition[Produit scalaire (définition géométrique)]{
+Soient $\vec{u}$ et $\vec{v}$ deux vecteurs du plan. Le \textbf{produit scalaire} de $\vec{u}$ et $\vec{v}$ est le nombre réel :
 \[
 \vec{u} \cdot \vec{v} = \|\vec{u}\| \times \|\vec{v}\| \times \cos(\vec{u}, \vec{v})
 \]
@@ -28,7 +28,7 @@ Si l'un des deux vecteurs est nul, on pose $\vec{u} \cdot \vec{v} = 0$.
 
 \propriete[Cas particuliers]{
 \begin{itemize}
-  \item Si $\vec{u}$ et $\vec{v}$ sont colineaires de meme sens : $\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \|\vec{v}\|$.
+  \item Si $\vec{u}$ et $\vec{v}$ sont colineaires de même sens : $\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \|\vec{v}\|$.
   \item Si $\vec{u}$ et $\vec{v}$ sont colineaires de sens contraire : $\vec{u} \cdot \vec{v} = -\|\vec{u}\| \times \|\vec{v}\|$.
   \item Si $\vec{u}$ et $\vec{v}$ sont orthogonaux : $\vec{u} \cdot \vec{v} = 0$.
   \item $\vec{u} \cdot \vec{u} = \|\vec{u}\|^2$.
@@ -49,11 +49,11 @@ Si l'un des deux vecteurs est nul, on pose $\vec{u} \cdot \vec{v} = 0$.
 % END-VERIFY
 
 \definition[Produit scalaire par projection]{
-Soient $\vec{u}$ et $\vec{v}$ deux vecteurs non nuls. Si $H$ est le projete orthogonal de l'extremite de $\vec{v}$ sur la droite portant $\vec{u}$, alors :
+Soient $\vec{u}$ et $\vec{v}$ deux vecteurs non nuls. Si $H$ est le projete orthogonal de l'extrémité de $\vec{v}$ sur la droite portant $\vec{u}$, alors :
 \[
 \vec{u} \cdot \vec{v} = \|\vec{u}\| \times \overline{OH}
 \]
-ou $\overline{OH}$ est la mesure algebrique de la projection.
+ou $\overline{OH}$ est la mesure algébrique de la projection.
 }
 
 \definition[Expression analytique]{
@@ -92,7 +92,7 @@ $\vec{u} \cdot \vec{v} = 4 \times 3 \times \cos\!\left(\dfrac{\pi}{3}\right) = 1
 % END-VERIFY
 
 \erreurFrequente{
-Oublier le cosinus dans la definition geometrique et ecrire $\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \|\vec{v}\|$. Le cosinus de l'angle est indispensable.
+Oublier le cosinus dans la définition géométrique et écrire $\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \|\vec{v}\|$. Le cosinus de l'angle est indispensable.
 }
 
 \erreurFrequente{
@@ -100,7 +100,7 @@ Utiliser la formule analytique $x_1 x_2 + y_1 y_2$ dans un repere non orthonorme
 }
 
 \erreurFrequente{
-Croire que le produit scalaire est un vecteur. Le produit scalaire est un \textbf{nombre reel}.
+Croire que le produit scalaire est un vecteur. Le produit scalaire est un \textbf{nombre réel}.
 }
 
 \contreexemple{
@@ -109,5 +109,5 @@ Dans un repere non orthonorme, $\vec{i} \cdot \vec{j}
 }
 
 \approfondissement{
-Le produit scalaire se generalise en dimension $n$ : pour $\vec{u} = (x_1, \ldots, x_n)$ et $\vec{v} = (y_1, \ldots, y_n)$, on pose $\vec{u} \cdot \vec{v} = \sum_{k=1}^{n} x_k y_k$. Cette notion est fondamentale en algebre lineaire et en physique.
+Le produit scalaire se generalise en dimension $n$ : pour $\vec{u} = (x_1, \ldots, x_n)$ et $\vec{v} = (y_1, \ldots, y_n)$, on pose $\vec{u} \cdot \vec{v} = \sum_{k=1}^{n} x_k y_k$. Cette notion est fondamentale en algebre linéaire et en physique.
 }

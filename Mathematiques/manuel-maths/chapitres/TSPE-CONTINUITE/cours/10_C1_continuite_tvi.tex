@@ -3,37 +3,37 @@
 \section{Continuité et théorème des valeurs intermédiaires}
 
 % ============================================================
-% STRATE 1 — Definitions et theoreme (admis)
+% STRATE 1 — Définitions et théorème (admis)
 % ============================================================
 
 \definition[1]{
-Soit $f$ une fonction definie sur un intervalle $I$ et $a \in I$. On dit que $f$ est \textbf{continue en $a$} si $\displaystyle\lim_{x \to a} f(x) = f(a)$.
+Soit $f$ une fonction définie sur un intervalle $I$ et $a \in I$. On dit que $f$ est \textbf{continue en $a$} si $\displaystyle\lim_{x \to a} f(x) = f(a)$.
 
 $f$ est \textbf{continue sur $I$} si elle est continue en tout point de $I$.
 }
 
 \margeAppui{
-Intuitivement : la courbe de $f$ se trace sans lever le crayon sur $I$. Toute fonction derivable sur $I$ est continue sur $I$.
+Intuitivement : la courbe de $f$ se trace sans lever le crayon sur $I$. Toute fonction dérivable sur $I$ est continue sur $I$.
 }
 
 \propriete{
-Les fonctions polynomes, la fonction exponentielle, la fonction logarithme neperien, la fonction racine carree, ainsi que les sommes, produits, quotients (la ou le denominateur ne s'annule pas) et composees de fonctions continues sont continues sur leur ensemble de definition.
+Les fonctions polynômes, la fonction exponentielle, la fonction logarithme neperien, la fonction racine carrée, ainsi que les sommes, produits, quotients (la ou le dénominateur ne s'annule pas) et composees de fonctions continues sont continues sur leur ensemble de définition.
 }
 
 \theoreme[Valeurs intermédiaires (TVI), admis]{
-Soit $f$ une fonction continue sur un intervalle $[a, b]$. Pour tout reel $k$ compris entre $f(a)$ et $f(b)$, il existe (au moins) un reel $c \in [a, b]$ tel que $f(c) = k$.
+Soit $f$ une fonction continue sur un intervalle $[a, b]$. Pour tout réel $k$ compris entre $f(a)$ et $f(b)$, il existe (au moins) un réel $c \in [a, b]$ tel que $f(c) = k$.
 }
 
 \margeAppui{
-Ce theoreme est admis : sa demonstration rigoureuse repose sur la construction des nombres reels (propriete de la borne superieure), hors programme de terminale.
+Ce théorème est admis : sa démonstration rigoureuse repose sur la construction des nombres réels (propriété de la borne superieure), hors programme de terminale.
 }
 
 \propriete[Cas strictement monotone (corollaire du TVI)]{
-Si de plus $f$ est \textbf{strictement monotone} sur $[a, b]$, alors pour tout $k$ compris entre $f(a)$ et $f(b)$, le reel $c$ tel que $f(c) = k$ est \textbf{unique}.
+Si de plus $f$ est \textbf{strictement monotone} sur $[a, b]$, alors pour tout $k$ compris entre $f(a)$ et $f(b)$, le réel $c$ tel que $f(c) = k$ est \textbf{unique}.
 }
 
 \exemple{
-Soit $f(x) = x^3 + x - 1$ sur $[0, 1]$. $f$ est continue et strictement croissante sur $[0,1]$ (somme de fonctions strictement croissantes), $f(0) = -1 < 0$ et $f(1) = 1 > 0$. Comme $0$ est compris entre $f(0)$ et $f(1)$, le TVI (cas monotone) donne l'existence et l'unicite d'un reel $c \in [0, 1]$ tel que $f(c) = 0$.
+Soit $f(x) = x^3 + x - 1$ sur $[0, 1]$. $f$ est continue et strictement croissante sur $[0,1]$ (somme de fonctions strictement croissantes), $f(0) = -1 < 0$ et $f(1) = 1 > 0$. Comme $0$ est compris entre $f(0)$ et $f(1)$, le TVI (cas monotone) donne l'existence et l'unicite d'un réel $c \in [0, 1]$ tel que $f(c) = 0$.
 
 % BEGIN-VERIFY
 % from sympy import symbols, Rational, diff, solve, nsolve
@@ -51,7 +51,7 @@ Soit $f(x) = x^3 + x - 1$ sur $[0, 1]$. $f$ est continue et strictement croissan
 
 \subsection{Balayage par dichotomie}
 
-Pour encadrer la solution $c$ de $f(x) = k$ donnee par le TVI, on peut utiliser un \textbf{algorithme de dichotomie} : on partage successivement en deux l'intervalle contenant $c$, en gardant a chaque etape le sous-intervalle sur lequel $f$ change de signe (ou passe par $k$).
+Pour encadrer la solution $c$ de $f(x) = k$ donnee par le TVI, on peut utiliser un \textbf{algorithme de dichotomie} : on partage successivement en deux l'intervalle contenant $c$, en gardant a chaque étape le sous-intervalle sur lequel $f$ change de signe (ou passe par $k$).
 
 \begin{python}
 def dichotomie(f, a, b, precision):
@@ -85,7 +85,7 @@ def dichotomie(f, a, b, precision):
 % ============================================================
 
 \erreurFrequente{
-\textbf{Oublier de justifier la continuite avant d'appliquer le TVI.} Le TVI ne s'applique qu'aux fonctions continues sur l'intervalle considere : la continuite doit toujours etre justifiee (somme/produit/composee de fonctions continues usuelles), jamais admise sans argument.
+\textbf{Oublier de justifier la continuite avant d'appliquer le TVI.} Le TVI ne s'applique qu'aux fonctions continues sur l'intervalle considere : la continuite doit toujours être justifiee (somme/produit/composee de fonctions continues usuelles), jamais admise sans argument.
 }
 
 \erreurFrequente{

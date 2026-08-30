@@ -1,13 +1,13 @@
 % META: {"id": "TSPE-LIMFCT-ME-002", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "methode", "capacites_codes": ["C2"], "methodes": ["M2"], "sources_inspiration": [], "status": "approved"}
-\begin{fichemethode}{M2}{Determiner les asymptotes d'une courbe}
+\begin{fichemethode}{M2}{Déterminer les asymptotes d'une courbe}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande de « determiner les asymptotes », « interpreter graphiquement les limites » ou « etudier le comportement aux bornes du domaine ».
+  Utiliser cette méthode lorsque l'énoncé demande de « déterminer les asymptotes », « interpréter graphiquement les limites » ou « étudier le comportement aux bornes du domaine ».
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item \textbf{Determiner le domaine de definition} et identifier les valeurs interdites.
+    \item \textbf{Déterminer le domaine de définition} et identifier les valeurs interdites.
     \item \textbf{Asymptotes horizontales :} calculer $\lim_{x \to +\infty} f(x)$ et $\lim_{x \to -\infty} f(x)$. Si une limite vaut $\ell$ fini, alors $y = \ell$ est AH.
     \item \textbf{Asymptotes verticales :} pour chaque valeur interdite $a$, calculer $\lim_{x \to a^+} f(x)$ et $\lim_{x \to a^-} f(x)$. Si une limite est $\pm\infty$, alors $x = a$ est AV.
     \item \textbf{Preciser la position de la courbe :} si besoin, indiquer si $f(x) > \ell$ ou $f(x) < \ell$ au voisinage de l'AH, et de quel cote la courbe se situe par rapport a l'AV.
@@ -15,11 +15,11 @@
 }
 
 \exempleRedige{%
-  \textbf{Exemple.} Determiner les asymptotes de $f(x) = \dfrac{3x - 1}{x + 2}$.
+  \textbf{Exemple.} Déterminer les asymptotes de $f(x) = \dfrac{3x - 1}{x + 2}$.
 
   \medskip
   \commentaireMarge{Domaine : $\mathbb{R} \setminus \{-2\}$.}%
-  \textbf{Domaine :} $f$ est definie pour $x
+  \textbf{Domaine :} $f$ est définie pour $x
 \neq -2$.
 
   \commentaireMarge{AH : factoriser par $x$.}%
@@ -27,9 +27,9 @@
 
   La droite $y = 3$ est AH en $+\infty$ et en $-\infty$.
 
-  \commentaireMarge{AV : etudier les limites en $-2$.}%
-  \textbf{AV :} Numerateur en $-2$ : $3(-2) - 1 = -7
-\neq 0$. Denominateur $\to 0$.
+  \commentaireMarge{AV : étudier les limites en $-2$.}%
+  \textbf{AV :} Numérateur en $-2$ : $3(-2) - 1 = -7
+\neq 0$. Dénominateur $\to 0$.
   \begin{itemize}
     \item $x \to (-2)^+$ : $x + 2 \to 0^+$, $f(x) \to \dfrac{-7}{0^+} = -\infty$.
     \item $x \to (-2)^-$ : $x + 2 \to 0^-$, $f(x) \to \dfrac{-7}{0^-} = +\infty$.
@@ -40,14 +40,14 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Chercher une AV en un point ou $f$ est definie et continue.
-    \item \textbf{Piege 2.} Oublier d'etudier separement les limites a gauche et a droite.
-    \item \textbf{Piege 3.} Affirmer sans justification que la courbe « ne coupe pas » l'asymptote.
+    \item \textbf{Piège 1.} Chercher une AV en un point ou $f$ est définie et continue.
+    \item \textbf{Piège 2.} Oublier d'étudier separement les limites a gauche et a droite.
+    \item \textbf{Piège 3.} Affirmer sans justification que la courbe « ne coupe pas » l'asymptote.
   \end{itemize}
 }
 
 \verifier{%
-  Sur la calculatrice graphique, tracer la fonction et verifier visuellement la presence des asymptotes trouvees.
+  Sur la calculatrice graphique, tracer la fonction et vérifier visuellement la presence des asymptotes trouvees.
 }
 
 \sEntrainer{\refExos{M2}}

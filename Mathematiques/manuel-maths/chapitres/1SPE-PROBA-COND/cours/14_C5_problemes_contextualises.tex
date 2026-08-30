@@ -7,12 +7,12 @@
 % ============================================================
 
 \propriete[1]{
-Pour resoudre un probleme de probabilites conditionnelles :
+Pour résoudre un probleme de probabilités conditionnelles :
 \begin{enumerate}
-  \item \textbf{Identifier les evenements} et les nommer avec des lettres.
-  \item \textbf{Extraire les donnees} de l'enonce : probabilites, pourcentages, effectifs.
+  \item \textbf{Identifier les événements} et les nommer avec des lettres.
+  \item \textbf{Extraire les donnees} de l'énoncé : probabilités, pourcentages, effectifs.
   \item \textbf{Construire un arbre pondere} ou un tableau a double entree.
-  \item \textbf{Appliquer les formules} : probabilite conditionnelle, probabilites totales, independance.
+  \item \textbf{Appliquer les formules} : probabilité conditionnelle, probabilités totales, indépendance.
   \item \textbf{Conclure} en revenant au contexte (phrase-reponse).
 \end{enumerate}
 }
@@ -26,7 +26,7 @@ Pour resoudre un probleme de probabilites conditionnelles :
 Un test de depistage a les caracteristiques suivantes :
 \begin{itemize}
   \item \textbf{Sensibilite :} si la personne est malade, le test est positif dans $95\,\%$ des cas.
-  \item \textbf{Specificite :} si la personne est saine, le test est negatif dans $97\,\%$ des cas.
+  \item \textbf{Specificite :} si la personne est saine, le test est négatif dans $97\,\%$ des cas.
   \item \textbf{Prevalence :} $1\,\%$ de la population est malade.
 \end{itemize}
 
@@ -34,7 +34,7 @@ On note $M$ : << la personne est malade >> et $T$ : << le test est positif >>.
 
 \textbf{Donnees :} $P(M) = \dfrac{1}{100}$, $P_M(T) = \dfrac{95}{100}$, $P_{\overline{M}}(\overline{T}) = \dfrac{97}{100}$ donc $P_{\overline{M}}(T) = \dfrac{3}{100}$.
 
-\textbf{Probabilites totales :}
+\textbf{Probabilités totales :}
 \[
   P(T) = P(M) \times P_M(T) + P(\overline{M}) \times P_{\overline{M}}(T) = \frac{1}{100} \times \frac{95}{100} + \frac{99}{100} \times \frac{3}{100} = \frac{95}{10000} + \frac{297}{10000} = \frac{392}{10000} = \frac{49}{1250}.
 \]
@@ -44,16 +44,16 @@ On note $M$ : << la personne est malade >> et $T$ : << le test est positif >>.
   P_T(M) = \frac{P(M \cap T)}{P(T)} = \frac{P(M) \times P_M(T)}{P(T)} = \frac{\frac{95}{10000}}{\frac{392}{10000}} = \frac{95}{392} \approx 0{,}242.
 \]
 
-Resultat surprenant : un test positif ne signifie une maladie reelle que dans environ $24\,\%$ des cas !
+Résultat surprenant : un test positif ne signifie une maladie réelle que dans environ $24\,\%$ des cas !
 }
 
-\exemple{(\textbf{Controle qualite})
+\exemple{(\textbf{Contrôle qualite})
 
 Trois machines $M_1$, $M_2$, $M_3$ produisent respectivement $50\,\%$, $30\,\%$ et $20\,\%$ de la production totale. Les taux de defaut sont respectivement $2\,\%$, $3\,\%$ et $5\,\%$.
 
 On preleve une piece au hasard. On note $D$ : << la piece est defectueuse >>.
 
-Par la formule des probabilites totales :
+Par la formule des probabilités totales :
 \[
   P(D) = 0{,}5 \times 0{,}02 + 0{,}3 \times 0{,}03 + 0{,}2 \times 0{,}05 = 0{,}01 + 0{,}009 + 0{,}01 = 0{,}029.
 \]

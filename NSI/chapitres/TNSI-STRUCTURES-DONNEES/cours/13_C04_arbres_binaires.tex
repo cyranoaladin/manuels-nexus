@@ -7,17 +7,17 @@
 % ============================================================
 
 \definition[1]{
-Un \textbf{arbre binaire} est soit \textbf{vide}, soit constitue d'une \textbf{racine} (une valeur) et de deux \textbf{sous-arbres} (gauche et droit), eux-memes des arbres binaires. Une \textbf{feuille} est un noeud sans sous-arbre (les deux sous-arbres sont vides).
+Un \textbf{arbre binaire} est soit \textbf{vide}, soit constitue d'une \textbf{racine} (une valeur) et de deux \textbf{sous-arbres} (gauche et droit), eux-mêmes des arbres binaires. Une \textbf{feuille} est un noeud sans sous-arbre (les deux sous-arbres sont vides).
 }
 
 \margeAppui{
-Les structures arborescentes sont adaptees a la modelisation de \textbf{hierarchies} (systeme de fichiers, arbre genealogique) ou de processus \textbf{recursifs} par nature (expressions arithmetiques, algorithmes de tri comme le tri fusion).
+Les structures arborescentes sont adaptees a la modélisation de \textbf{hierarchies} (système de fichiers, arbre genealogique) ou de processus \textbf{recursifs} par nature (expressions arithmetiques, algorithmes de tri comme le tri fusion).
 }
 
 \propriete[Mesures usuelles]{
 $\bullet$ La \textbf{taille} d'un arbre est son nombre total de noeuds.
 
-$\bullet$ La \textbf{hauteur} d'un arbre est la longueur du plus long chemin de la racine a une feuille (hauteur $0$ pour un arbre reduit a une seule feuille, hauteur $-1$ ou non definie pour un arbre vide selon la convention retenue).
+$\bullet$ La \textbf{hauteur} d'un arbre est la longueur du plus long chemin de la racine a une feuille (hauteur $0$ pour un arbre reduit a une seule feuille, hauteur $-1$ ou non définie pour un arbre vide selon la convention retenue).
 
 $\bullet$ Le nombre de \textbf{feuilles} est le nombre de noeuds sans sous-arbre.
 }
@@ -48,7 +48,7 @@ def nb_feuilles(a):
     return nb_feuilles(a.gauche) + nb_feuilles(a.droit)
 \end{python}
 
-Pour l'arbre $\left(1, \left(2,(4,\emptyset,\emptyset),\emptyset\right), (3,\emptyset,\emptyset)\right)$ (racine 1, fils gauche 2 ayant lui-meme un fils gauche 4, fils droit 3) :
+Pour l'arbre $\left(1, \left(2,(4,\emptyset,\emptyset),\emptyset\right), (3,\emptyset,\emptyset)\right)$ (racine 1, fils gauche 2 ayant lui-même un fils gauche 4, fils droit 3) :
 
 % BEGIN-VERIFY
 % class Arbre:

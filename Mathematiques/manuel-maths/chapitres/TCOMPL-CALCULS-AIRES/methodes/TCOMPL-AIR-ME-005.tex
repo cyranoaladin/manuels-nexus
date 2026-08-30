@@ -7,12 +7,12 @@
 % assert diff(F1 - F2, x) == 0
 % assert F1 - F2 == 8
 % END-VERIFY
-\begin{fichemethode}{M5}{Demontrer que deux primitives different d'une constante}
+\begin{fichemethode}{M5}{Démontrer que deux primitives différent d'une constante}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande de \textbf{demontrer} que deux
-  primitives d'une meme fonction continue sur un \textbf{intervalle} different
-  d'une constante, ou de determiner LA primitive verifiant une condition initiale.
+  Utiliser cette méthode lorsque l'énoncé demande de \textbf{démontrer} que deux
+  primitives d'une même fonction continue sur un \textbf{intervalle} différent
+  d'une constante, ou de déterminer LA primitive verifiant une condition initiale.
 }
 
 \pasApas{%
@@ -20,19 +20,19 @@
     \item Poser le cadre : $F$ et $G$ sont deux primitives de $f$ sur un
       \textbf{intervalle} $I$, donc $F' = f$ et $G' = f$ sur $I$.
     \item Introduire la fonction auxiliaire $H = F - G$.
-    \item Deriver : $H' = F' - G' = f - f = 0$ sur $I$.
-    \item Invoquer le theoreme : une fonction de derivee nulle sur un
+    \item Dériver : $H' = F' - G' = f - f = 0$ sur $I$.
+    \item Invoquer le théorème : une fonction de dérivée nulle sur un
       \textbf{intervalle} y est constante. Donc il existe $C \in \mathbb{R}$
       tel que $F(x) = G(x) + C$ pour tout $x \in I$.
     \item Pour une condition initiale $F(x_0) = y_0$ : calculer
-      $C = y_0 - G(x_0)$, ce qui determine $F$ de maniere unique.
+      $C = y_0 - G(x_0)$, ce qui déterminé $F$ de maniere unique.
   \end{enumerate}
 }
 
 \exempleRedige{%
   $F_1(x) = \dfrac{x^2}{2} + 3$ et $F_2(x) = \dfrac{x^2}{2} - 5$ sont deux
-  primitives de $f(x) = x$ sur $\mathbb{R}$. Verifier la propriete, puis
-  determiner la primitive $F$ de $f$ telle que $F(2) = 0$.
+  primitives de $f(x) = x$ sur $\mathbb{R}$. Vérifier la propriété, puis
+  déterminer la primitive $F$ de $f$ telle que $F(2) = 0$.
 
   \medskip
   \commentaireMarge{$H' = 0$ sur un intervalle $\Rightarrow$ $H$ constante.}%
@@ -47,18 +47,18 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier l'hypothese d'\textbf{intervalle} : sur une
+    \item \textbf{Piège 1.} Oublier l'hypothèse d'\textbf{intervalle} : sur une
       reunion d'intervalles disjoints (ex. $\mathbb{R}^*$), une fonction de
-      derivee nulle peut prendre une constante differente sur chaque morceau.
-    \item \textbf{Piege 2.} Affirmer « $H' = 0$ donc $H = 0$ » : la conclusion
+      dérivée nulle peut prendre une constante différente sur chaque morceau.
+    \item \textbf{Piège 2.} Affirmer « $H' = 0$ donc $H = 0$ » : la conclusion
       correcte est « $H$ constante », pas « $H$ nulle ».
-    \item \textbf{Piege 3.} Croire qu'une condition initiale change $f$ : elle ne
+    \item \textbf{Piège 3.} Croire qu'une condition initiale change $f$ : elle ne
       fait que selectionner UNE primitive parmi les $F + C$.
   \end{itemize}
 }
 
 \verifier{%
-  Controler que $H = F - G$ a bien une derivee nulle (calcul explicite), que la
+  Contrôler que $H = F - G$ a bien une dérivée nulle (calcul explicite), que la
   constante trouvee est coherente en evaluant $F - G$ en un point, et que la
   primitive selectionnee satisfait exactement la condition initiale.
 }

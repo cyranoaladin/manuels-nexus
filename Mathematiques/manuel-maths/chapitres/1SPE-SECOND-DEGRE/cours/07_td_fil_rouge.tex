@@ -2,33 +2,33 @@
 
 %---------------------------------------------------------------
 % TD FIL ROUGE — Reprise de l'accroche
-% La boite en carton : optimisation du volume
+% La boîte en carton : optimisation du volume
 % Feuille 30 x 20, decoupe x, V(x) = x(30-2x)(20-2x)
 %---------------------------------------------------------------
 
-\section*{TD fil rouge — La boite en carton}
+\section*{TD fil rouge — La boîte en carton}
 
 \subsection*{Mise en situation}
 
 \begin{quotation}
-Un artisan fabrique des boites en carton pour les cadeaux. Il part d'une feuille rectangulaire de $30$~cm sur $20$~cm, decoupe un carre de cote $x$ (en cm) aux quatre coins, puis replie les bords pour former une boite ouverte. Quelle valeur de $x$ maximise le volume de la boite ?
+Un artisan fabrique des boîtes en carton pour les cadeaux. Il part d'une feuille rectangulaire de $30$~cm sur $20$~cm, decoupe un carre de cote $x$ (en cm) aux quatre coins, puis replie les bords pour former une boîte ouverte. Quelle valeur de $x$ maximise le volume de la boîte ?
 \end{quotation}
 
 Ce probleme d'optimisation reunit toutes les capacites du chapitre.
 
 \bigskip
 
-\subsection*{Partie A — Mise en equation}
+\subsection*{Partie A — Mise en équation}
 
 \begin{exercice}{1SPE-SECDEG-TD-FIL-A}{2}{10}
 \begin{enumerate}
-  \item Exprimer en fonction de $x$ la longueur, la largeur et la hauteur de la boite.
-  \item Justifier que $x$ doit verifier $0 < x < 10$ (domaine de validite).
-  \item Montrer que le volume de la boite est :
+  \item Exprimer en fonction de $x$ la longueur, la largeur et la hauteur de la boîte.
+  \item Justifier que $x$ doit vérifier $0 < x < 10$ (domaine de validite).
+  \item Montrer que le volume de la boîte est :
   \[
     V(x) = x(30 - 2x)(20 - 2x).
   \]
-  \item Developper $V(x)$ et identifier les coefficients du polynome obtenu.
+  \item Developper $V(x)$ et identifier les coefficients du polynôme obtenu.
   \item Calculer $V(0)$, $V(5)$ et $V(10)$. Commenter.
 \end{enumerate}
 \end{exercice}
@@ -47,7 +47,7 @@ Ce probleme d'optimisation reunit toutes les capacites du chapitre.
 
 \begin{corrige}{1SPE-SECDEG-TD-FIL-A}
 
-\textbf{Question 1.} Apres decoupe des carres de cote $x$ et pliage :
+\textbf{Question 1.} Après decoupe des carres de cote $x$ et pliage :
 \begin{itemize}
   \item Hauteur : $x$~cm.
   \item Longueur : $30 - 2x$~cm.
@@ -70,7 +70,7 @@ V(x) &= x(30-2x)(20-2x) \\
 &= 4x^3 - 100x^2 + 600x.
 \end{align*}
 
-C'est un polynome de degre $3$ (pas du second degre directement).
+C'est un polynôme de degré $3$ (pas du second degré directement).
 
 \textbf{Question 5.}
 \[
@@ -82,24 +82,24 @@ V(5) = 5 \times 20 \times 10 = 1\,000 \text{ cm}^3,
 \[
 V(10) = 10 \times 10 \times 0 = 0 \text{ cm}^3 \quad (\text{pas de largeur}).
 \]
-Le volume est nul aux extremites du domaine et positif a l'interieur.
+Le volume est nul aux extrémités du domaine et positif a l'interieur.
 
 \end{corrige}
 
 \bigskip
 
-\subsection*{Partie B — Etude sur un sous-domaine (approche second degre)}
+\subsection*{Partie B — Étude sur un sous-domaine (approche second degré)}
 
 \begin{exercice}{1SPE-SECDEG-TD-FIL-B}{2}{12}
 On note $W(x) = \dfrac{V(x)}{x} = (30-2x)(20-2x)$ pour $x \in \,]0\,;\,10[$.
 \begin{enumerate}
   \item Montrer que $W(x) = 4x^2 - 100x + 600$.
-  \item Calculer l'abscisse $\alpha$ et l'ordonnee $\beta$ du sommet de la parabole representant $W$.
+  \item Calculer l'abscisse $\alpha$ et l'ordonnée $\beta$ du sommet de la parabole representant $W$.
   \item La valeur $\alpha$ appartient-elle au domaine $]0\,;\,10[$ ?
-    Que represente $W(\alpha)$ en termes de volume ?
+    Que représente $W(\alpha)$ en termes de volume ?
   \item Dresser le tableau de variations de $W$ sur $]0\,;\,10[$.
-  \item En deduire les valeurs de $x$ pour lesquelles $W(x)$ est croissante ou decroissante.
-    Interpreter geometriquement.
+  \item En déduire les valeurs de $x$ pour lesquelles $W(x)$ est croissante ou décroissante.
+    Interpréter geometriquement.
 \end{enumerate}
 \end{exercice}
 
@@ -133,9 +133,9 @@ W(x) = (30-2x)(20-2x) = 600 - 60x - 40x + 4x^2 = 4x^2 - 100x + 600.
 $\beta = W(12{,}5) = 4 \times 156{,}25 - 100 \times 12{,}5 + 600 = 625 - 1250 + 600 = -25$.
 
 \textbf{Question 3.} $\alpha = 12{,}5 
-otin \,]0\,;\,10[$ : le sommet de $W$ est hors du domaine. Sur $]0\,;\,10[$, on est toujours a gauche du sommet (puisque $\alpha = 12{,}5 > 10$). Comme $a = 4 > 0$, $W$ est \textbf{decroissante} sur tout $]0\,;\,10[$.
+otin \,]0\,;\,10[$ : le sommet de $W$ est hors du domaine. Sur $]0\,;\,10[$, on est toujours a gauche du sommet (puisque $\alpha = 12{,}5 > 10$). Comme $a = 4 > 0$, $W$ est \textbf{décroissante} sur tout $]0\,;\,10[$.
 
-$W(\alpha) = -25 < 0$ n'a pas de sens physique (surface negative) : le sommet est hors du domaine de validite.
+$W(\alpha) = -25 < 0$ n'a pas de sens physique (surface négative) : le sommet est hors du domaine de validite.
 
 \textbf{Question 4. Tableau de variations de $W$ sur $]0\,;\,10[$ :}
 
@@ -149,22 +149,22 @@ $W(x)$ & $600$ & $\searrow$ & $0$ \\
 \end{tabular}
 \end{center}
 
-\textbf{Question 5.} $W$ est strictement decroissante sur $]0\,;\,10[$ : plus on decoupe un grand carre (grande hauteur $x$), plus la base de la boite est petite. Le volume $V(x) = x \cdot W(x)$ resulte d'un compromis entre hauteur et surface de la base.
+\textbf{Question 5.} $W$ est strictement décroissante sur $]0\,;\,10[$ : plus on decoupe un grand carre (grande hauteur $x$), plus la base de la boîte est petite. Le volume $V(x) = x \cdot W(x)$ resulte d'un compromis entre hauteur et surface de la base.
 
 \end{corrige}
 
 \bigskip
 
-\subsection*{Partie C — Optimisation numerique et conclusion}
+\subsection*{Partie C — Optimisation numérique et conclusion}
 
 \begin{exercice}{1SPE-SECDEG-TD-FIL-C}{3}{15}
 \begin{enumerate}
   \item Calculer $V(1)$, $V(2)$, $V(3)$, $V(4)$, $V(5)$, $V(6)$, $V(7)$.
     (On utilisera la formule $V(x) = x(30-2x)(20-2x)$.)
-  \item D'apres ce tableau, entre quelles valeurs entieres consecutives le maximum semble-t-il se situer ?
+  \item D'après ce tableau, entre quelles valeurs entieres consecutives le maximum semble-t-il se situer ?
   \item Affiner : calculer $V(3{,}5)$ et $V(4)$. Lequel est le plus grand ?
   \item \textbf{Bilan} : resumer les trois formes utilisees dans ce TD et les outils du chapitre mobilises.
-  \item \textbf{Question ouverte (oral)} : pourquoi le probleme d'optimisation du volume ne se reduit-il pas directement a un polynome du second degre ?
+  \item \textbf{Question ouverte (oral)} : pourquoi le probleme d'optimisation du volume ne se reduit-il pas directement a un polynôme du second degré ?
 \end{enumerate}
 \end{exercice}
 
@@ -214,16 +214,16 @@ $V(x)$ & $504$ & $832$ & $1\,008$ & $1\,056$ & $1\,000$ & $864$ & $672$ \\
 \textbf{Question 3.} $V(3{,}5) = 3{,}5 \times 23 \times 13 = 3{,}5 \times 299 = 1\,046{,}5$~cm$^3$.
 $V(4) = 1\,056 > 1\,046{,}5 = V(3{,}5)$ : pour $x = 4$, le volume est plus grand.
 
-\commentaireMarge{La valeur exacte du maximum (par derivation en Terminale) est $x = \frac{50 - \sqrt{700}}{6} \approx 3{,}92$~cm.}
+\commentaireMarge{La valeur exacte du maximum (par dérivation en Terminale) est $x = \frac{50 - \sqrt{700}}{6} \approx 3{,}92$~cm.}
 
 \textbf{Question 4. Bilan :}
 \begin{itemize}
-  \item \textbf{Forme developpee} : $V(x) = 4x^3 - 100x^2 + 600x$ (polynome de degre 3).
+  \item \textbf{Forme developpee} : $V(x) = 4x^3 - 100x^2 + 600x$ (polynôme de degré 3).
   \item \textbf{Forme factorisee} : $V(x) = x(30-2x)(20-2x)$ — permet de lire le domaine.
-  \item \textbf{Polynome du second degre} : $W(x) = (30-2x)(20-2x)$ — etude de la base.
-  \item Outils mobilises : formes d'un polynome, sommet, tableau de variations, domaine de validite, etude numerique.
+  \item \textbf{Polynôme du second degré} : $W(x) = (30-2x)(20-2x)$ — étude de la base.
+  \item Outils mobilises : formes d'un polynôme, sommet, tableau de variations, domaine de validite, étude numérique.
 \end{itemize}
 
-\textbf{Question 5.} Le volume $V(x) = x(30-2x)(20-2x)$ est un produit de trois facteurs lineaires, donc un polynome de \textbf{degre 3}. Pour l'optimiser directement, il faudrait utiliser la derivation (programme de Terminale). Dans ce chapitre, on se contente d'une approche numerique ou d'une etude de la fonction auxiliaire $W(x) = V(x)/x$ (polynome du second degre).
+\textbf{Question 5.} Le volume $V(x) = x(30-2x)(20-2x)$ est un produit de trois facteurs lineaires, donc un polynôme de \textbf{degré 3}. Pour l'optimiser directement, il faudrait utiliser la dérivation (programme de Terminale). Dans ce chapitre, on se contente d'une approche numérique ou d'une étude de la fonction auxiliaire $W(x) = V(x)/x$ (polynôme du second degré).
 
 \end{corrige}

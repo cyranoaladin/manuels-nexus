@@ -14,7 +14,7 @@
 % assert f(a) < 0 < f(b)
 % END-VERIFY
 \begin{exercice}{TSPE-CONTIN-EX-023}{2}{15}
-On reprend la fonction $f$ definie sur $[0\,;1]$ par $f(x) = x^3 + x - 1$, dont on a montre qu'elle s'annule en un unique reel $\alpha$ de $[0\,;1]$ (exercice \textsc{ex-009}). On veut encadrer $\alpha$ a $10^{-2}$ pres par dichotomie.
+On reprend la fonction $f$ définie sur $[0\,;1]$ par $f(x) = x^3 + x - 1$, dont on a montre qu'elle s'annule en un unique réel $\alpha$ de $[0\,;1]$ (exercice \textsc{ex-009}). On veut encadrer $\alpha$ a $10^{-2}$ pres par dichotomie.
 
 \begin{center}
 \begin{minipage}{0.8\linewidth}
@@ -32,9 +32,9 @@ def dichotomie(a, b, precision):
 \end{center}
 
 \begin{enumerate}
-  \item Expliquer le role du test \verb|f(a)*f(m) <= 0| : que signifie ce produit lorsqu'il est negatif ou nul ?
-  \item Appliquer l'algorithme a la main pour les trois premieres etapes, en indiquant a chaque fois l'intervalle obtenu.
-  \item Combien d'etapes l'algorithme effectue-t-il avec \verb|precision = 0.01| ? Justifier en raisonnant sur la longueur de l'intervalle.
-  \item Donner l'encadrement final et en deduire une valeur approchee de $\alpha$ a $10^{-2}$ pres.
+  \item Expliquer le role du test \verb|f(a)*f(m) <= 0| : que signifie ce produit lorsqu'il est négatif ou nul ?
+  \item Appliquer l'algorithme a la main pour les trois premieres étapes, en indiquant a chaque fois l'intervalle obtenu.
+  \item Combien d'étapes l'algorithme effectue-t-il avec \verb|precision = 0.01| ? Justifier en raisonnant sur la longueur de l'intervalle.
+  \item Donner l'encadrement final et en déduire une valeur approchee de $\alpha$ a $10^{-2}$ pres.
 \end{enumerate}
 \end{exercice}

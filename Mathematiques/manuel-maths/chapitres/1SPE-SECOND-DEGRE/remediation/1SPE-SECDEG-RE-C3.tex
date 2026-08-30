@@ -2,7 +2,7 @@
 
 %---------------------------------------------------------------
 % FICHE DE REMEDIATION — C3
-% Calculer le discriminant et resoudre une equation du second degre
+% Calculer le discriminant et résoudre une équation du second degré
 %---------------------------------------------------------------
 
 %---------------------------------------------------------------
@@ -10,12 +10,12 @@
 %---------------------------------------------------------------
 
 \begin{exercice}{1SPE-SECDEG-RE-C3-EX1}{1}{8}
-Resoudre l'equation $2x^2 - 7x + 3 = 0$.
+Résoudre l'équation $2x^2 - 7x + 3 = 0$.
 \begin{enumerate}
   \item Identifier $a$, $b$, $c$.
   \item Calculer $\Delta = b^2 - 4ac$.
-  \item Determiner le nombre de solutions et les calculer si elles existent.
-  \item Verifier en substituant les solutions dans l'equation.
+  \item Déterminer le nombre de solutions et les calculer si elles existent.
+  \item Vérifier en substituant les solutions dans l'équation.
 \end{enumerate}
 \end{exercice}
 
@@ -46,7 +46,7 @@ Resoudre l'equation $2x^2 - 7x + 3 = 0$.
 \Delta = (-7)^2 - 4 \times 2 \times 3 = 49 - 24 = 25.
 \]
 
-\commentaireMarge{$\Delta = 25 > 0$ : deux racines reelles distinctes. $\sqrt{25} = 5$.}
+\commentaireMarge{$\Delta = 25 > 0$ : deux racines réelles distinctes. $\sqrt{25} = 5$.}
 
 \textbf{Question 3.} $\Delta = 25 > 0$, donc deux racines :
 \[
@@ -54,7 +54,7 @@ x_1 = \frac{7 - 5}{4} = \frac{2}{4} = \frac{1}{2}, \qquad
 x_2 = \frac{7 + 5}{4} = \frac{12}{4} = 3.
 \]
 
-\textbf{Question 4.} Verification :
+\textbf{Question 4.} Vérification :
 \[
 f\!\left(\tfrac{1}{2}\right) = 2 \times \tfrac{1}{4} - 7 \times \tfrac{1}{2} + 3 = \tfrac{1}{2} - \tfrac{7}{2} + 3 = -3 + 3 = 0. \checkmark
 \]
@@ -69,7 +69,7 @@ f(3) = 2 \times 9 - 7 \times 3 + 3 = 18 - 21 + 3 = 0. \checkmark
 %---------------------------------------------------------------
 
 \begin{exercice}{1SPE-SECDEG-RE-C3-EX2}{1}{8}
-Pour chacune des equations suivantes, calculer $\Delta$ et resoudre.
+Pour chacune des équations suivantes, calculer $\Delta$ et résoudre.
 \begin{enumerate}
   \item $x^2 - 6x + 9 = 0$
   \item $x^2 + x + 1 = 0$
@@ -77,7 +77,7 @@ Pour chacune des equations suivantes, calculer $\Delta$ et resoudre.
 \end{enumerate}
 \end{exercice}
 
-\coupDePouce{1}{Pour l'equation (1) : $\Delta = (-6)^2 - 4 \times 1 \times 9 = 36 - 36 = 0$. Qu'est-ce que $\Delta = 0$ implique pour le nombre de solutions ?}
+\coupDePouce{1}{Pour l'équation (1) : $\Delta = (-6)^2 - 4 \times 1 \times 9 = 36 - 36 = 0$. Qu'est-ce que $\Delta = 0$ implique pour le nombre de solutions ?}
 
 % BEGIN-VERIFY
 % from sympy import symbols, Rational, solve
@@ -106,13 +106,13 @@ Pour chacune des equations suivantes, calculer $\Delta$ et resoudre.
 
 \begin{corrige}{1SPE-SECDEG-RE-C3-EX2}
 
-\commentaireMarge{Trois cas : $\Delta > 0$ (deux racines), $\Delta = 0$ (une racine double), $\Delta < 0$ (pas de racine reelle).}
+\commentaireMarge{Trois cas : $\Delta > 0$ (deux racines), $\Delta = 0$ (une racine double), $\Delta < 0$ (pas de racine réelle).}
 
 \textbf{Question 1.} $a = 1$, $b = -6$, $c = 9$. $\Delta = 36 - 36 = 0$.
 Racine double : $x_0 = \dfrac{6}{2} = 3$. L'ensemble des solutions est $\{3\}$.
 
 \textbf{Question 2.} $a = 1$, $b = 1$, $c = 1$. $\Delta = 1 - 4 = -3 < 0$.
-Aucune racine reelle. L'ensemble des solutions est $\emptyset$.
+Aucune racine réelle. L'ensemble des solutions est $\emptyset$.
 
 \textbf{Question 3.} $a = 3$, $b = -5$, $c = -2$. $\Delta = 25 + 24 = 49 > 0$. $\sqrt{49} = 7$.
 \[
@@ -128,10 +128,10 @@ x_2 = \frac{5 + 7}{6} = \frac{12}{6} = 2.
 
 \begin{exercice}{1SPE-SECDEG-RE-C3-EX3}{1}{10}
 \begin{enumerate}
-  \item Resoudre $x^2 - 5x + 4 = 0$.
-  \item Resoudre $2x^2 + 4x + 2 = 0$.
-  \item Determiner les valeurs de $k$ pour lesquelles $x^2 - 4x + k = 0$ admet deux racines distinctes.
-  \item Application : un rectangle a un perimetre de $14$ cm. Si on note $x$ la longueur, l'equation de l'aire $A = 21$ s'ecrit $x(7-x) = 21$. Montrer que cela conduit a $x^2 - 7x + 21 = 0$ et conclure sur l'existence de solutions.
+  \item Résoudre $x^2 - 5x + 4 = 0$.
+  \item Résoudre $2x^2 + 4x + 2 = 0$.
+  \item Déterminer les valeurs de $k$ pour lesquelles $x^2 - 4x + k = 0$ admet deux racines distinctes.
+  \item Application : un rectangle a un perimetre de $14$ cm. Si on note $x$ la longueur, l'équation de l'aire $A = 21$ s'ecrit $x(7-x) = 21$. Montrer que cela conduit a $x^2 - 7x + 21 = 0$ et conclure sur l'existence de solutions.
 \end{enumerate}
 \end{exercice}
 
@@ -162,6 +162,6 @@ x_2 = \frac{5 + 7}{6} = \frac{12}{6} = 2.
 \textbf{Question 3.} $\Delta = (-4)^2 - 4 \times 1 \times k = 16 - 4k$. Deux racines distinctes $\Leftrightarrow \Delta > 0 \Leftrightarrow 16 - 4k > 0 \Leftrightarrow k < 4$.
 
 \textbf{Question 4.} $x(7-x) = 21 \Leftrightarrow 7x - x^2 = 21 \Leftrightarrow x^2 - 7x + 21 = 0$.
-$\Delta = 49 - 84 = -35 < 0$ : pas de solution reelle. Un tel rectangle n'existe pas.
+$\Delta = 49 - 84 = -35 < 0$ : pas de solution réelle. Un tel rectangle n'existe pas.
 
 \end{corrige}

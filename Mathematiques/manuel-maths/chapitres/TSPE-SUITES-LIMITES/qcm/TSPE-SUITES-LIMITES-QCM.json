@@ -5,7 +5,7 @@
     {
       "id": "Q1",
       "capacite": "C1",
-      "enonce": "Soit $(u_n)$ definie par $u_n = \\dfrac{5n - 1}{2n + 3}$. Quelle est $\\lim_{n \\to +\\infty} u_n$ ?",
+      "enonce": "Soit $(u_n)$ définie par $u_n = \\dfrac{5n - 1}{2n + 3}$. Quelle est $\\lim_{n \\to +\\infty} u_n$ ?",
       "options": {
         "A": "$5/3$",
         "B": "$5/2$",
@@ -15,16 +15,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "L'eleve a divise les termes constants (-1 et 3) au lieu des coefficients dominants.",
-          "renvoi": "M1, etape 3"
+          "erreur": "L'élève a divise les termes constants (-1 et 3) au lieu des coefficients dominants.",
+          "renvoi": "M1, étape 3"
         },
         "C": {
-          "erreur": "L'eleve pense que tout quotient de polynomes diverge.",
-          "renvoi": "M1, etape 2"
+          "erreur": "L'élève pense que tout quotient de polynômes diverge.",
+          "renvoi": "M1, étape 2"
         },
         "D": {
           "erreur": "Conclure $0$ applique a tort la limite de $1/n$ au quotient entier ; les termes dominants $5n$ et $2n$ donnent au contraire $5/2$.",
-          "renvoi": "M1, etape 1"
+          "renvoi": "M1, étape 1"
         }
       }
     },
@@ -41,8 +41,8 @@
       "correcte": "D",
       "diagnostics": {
         "A": {
-          "erreur": "Ne regarder que $1/n\\to0$ oublie le terme oscillant $(-1)^n$ ; les sous-suites paires et impaires ont des limites differentes.",
-          "renvoi": "C1, definition divergence"
+          "erreur": "Ne regarder que $1/n\\to0$ oublie le terme oscillant $(-1)^n$ ; les sous-suites paires et impaires ont des limites différentes.",
+          "renvoi": "C1, définition divergence"
         },
         "B": {
           "erreur": "Les termes pairs tendent bien vers $1$, mais les termes impairs tendent vers $-1$ ; la suite complete ne peut donc pas converger vers $1$.",
@@ -57,9 +57,9 @@
     {
       "id": "Q3",
       "capacite": "C2",
-      "enonce": "Dans une preuve par recurrence, l'etape d'heredite consiste a :",
+      "enonce": "Dans une preuve par récurrence, l'étape d'heredite consiste a :",
       "options": {
-        "A": "Verifier P(0)",
+        "A": "Vérifier P(0)",
         "B": "Supposer P(n) et montrer P(n+1)",
         "C": "Montrer P(n) pour tout n",
         "D": "Remplacer n par n+1"
@@ -67,42 +67,42 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Verifier $P(0)$ ou le premier rang etablit seulement l'initialisation ; l'heredite doit partir de $P(n)$ pour obtenir $P(n+1)$.",
-          "renvoi": "M2, etape 1"
+          "erreur": "Vérifier $P(0)$ ou le premier rang etablit seulement l'initialisation ; l'heredite doit partir de $P(n)$ pour obtenir $P(n+1)$.",
+          "renvoi": "M2, étape 1"
         },
         "C": {
-          "erreur": "Affirmer directement $P(n)$ pour tout $n$ est la conclusion de la recurrence ; il manque l'implication de $P(n)$ vers $P(n+1)$.",
-          "renvoi": "M2, etape 4"
+          "erreur": "Affirmer directement $P(n)$ pour tout $n$ est la conclusion de la récurrence ; il manque l'implication de $P(n)$ vers $P(n+1)$.",
+          "renvoi": "M2, étape 4"
         },
         "D": {
-          "erreur": "On ne remplace pas mecaniquement; on doit utiliser l'hypothese.",
-          "renvoi": "M2, piege 3"
+          "erreur": "On ne remplace pas mecaniquement; on doit utiliser l'hypothèse.",
+          "renvoi": "M2, piège 3"
         }
       }
     },
     {
       "id": "Q4",
       "capacite": "C2",
-      "enonce": "Dans l'heredite de la propriete $2^n > n$ pour $n \\geqslant 1$, quelle redaction est complete ?",
+      "enonce": "Dans l'heredite de la propriété $2^n > n$ pour $n \\geqslant 1$, quelle redaction est complete ?",
       "options": {
         "A": "$2^{n+1} = 2\\times 2^n > 2n \\geqslant n+1$, car $n \\geqslant 1$",
-        "B": "$2^{n+1} > n+1$ directement par l'hypothese de recurrence",
+        "B": "$2^{n+1} > n+1$ directement par l'hypothèse de récurrence",
         "C": "$2^{n+1} = 2\\times 2^n > 2n$, donc $2^{n+1}>n+1$ sans autre justification",
-        "D": "Montrer de nouveau $2^n>n$ sans supposer l'hypothese de recurrence"
+        "D": "Montrer de nouveau $2^n>n$ sans supposer l'hypothèse de récurrence"
       },
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "L'hypothese $2^n>n$ ne donne pas directement $2^{n+1}>n+1$ : il faut multiplier par 2 puis comparer $2n$ et $n+1$.",
+          "erreur": "L'hypothèse $2^n>n$ ne donne pas directement $2^{n+1}>n+1$ : il faut multiplier par 2 puis comparer $2n$ et $n+1$.",
           "renvoi": "M2, redaction de l'heredite"
         },
         "C": {
-          "erreur": "La chaine omet la justification finale $2n \\geqslant n+1$, qui repose sur l'hypothese $n \\geqslant 1$.",
+          "erreur": "La chaine omet la justification finale $2n \\geqslant n+1$, qui repose sur l'hypothèse $n \\geqslant 1$.",
           "renvoi": "M2, redaction de l'heredite"
         },
         "D": {
-          "erreur": "L'heredite suppose la propriete au rang $n$ et doit demontrer celle au rang $n+1$ ; redemontrer le rang $n$ ne fait pas avancer la preuve.",
-          "renvoi": "M2, piege 2"
+          "erreur": "L'heredite suppose la propriété au rang $n$ et doit démontrer celle au rang $n+1$ ; redemontrer le rang $n$ ne fait pas avancer la preuve.",
+          "renvoi": "M2, piège 2"
         }
       }
     },
@@ -119,16 +119,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Le resultat $180$ applique encore le facteur $0{,}9$ au point fixe correct $200$ ; une limite doit verifier directement $\\ell=0{,}9\\ell+20$.",
-          "renvoi": "M3, etape 1"
+          "erreur": "Le résultat $180$ applique encore le facteur $0{,}9$ au point fixe correct $200$ ; une limite doit vérifier directement $\\ell=0{,}9\\ell+20$.",
+          "renvoi": "M3, étape 1"
         },
         "C": {
-          "erreur": "Le resultat $220$ ajoute $20$ au point fixe $200$ une seconde fois ; dans l'equation, ce terme est deja pris en compte avant la division par $0{,}1$.",
-          "renvoi": "M3, etape 1"
+          "erreur": "Le résultat $220$ ajoute $20$ au point fixe $200$ une seconde fois ; dans l'équation, ce terme est deja pris en compte avant la division par $0{,}1$.",
+          "renvoi": "M3, étape 1"
         },
         "D": {
-          "erreur": "La limite n'est pas celle de $0{,}9^n$ seul : le terme additif $20$ deplace le point fixe, qui verifie $\\ell=0{,}9\\ell+20$.",
-          "renvoi": "M3, etape 6"
+          "erreur": "La limite n'est pas celle de $0{,}9^n$ seul : le terme additif $20$ deplace le point fixe, qui vérifie $\\ell=0{,}9\\ell+20$.",
+          "renvoi": "M3, étape 6"
         }
       }
     },
@@ -146,15 +146,15 @@
       "diagnostics": {
         "A": {
           "erreur": "Confusion entre la constante additive et la raison.",
-          "renvoi": "M3, etape 3"
+          "renvoi": "M3, étape 3"
         },
         "C": {
           "erreur": "La valeur $30=9/(1-0{,}7)$ est le point fixe soustrait pour definir $v_n$ ; la relation obtenue est $v_{n+1}=0{,}7v_n$.",
-          "renvoi": "M3, etape 1"
+          "renvoi": "M3, étape 1"
         },
         "D": {
           "erreur": "Le nombre $0{,}3=1-0{,}7$ intervient dans le calcul du point fixe $9/0{,}3$ ; le coefficient multiplicatif de $v_n$ reste $0{,}7$.",
-          "renvoi": "M3, etape 3"
+          "renvoi": "M3, étape 3"
         }
       }
     },
@@ -164,23 +164,23 @@
       "enonce": "Laquelle est vraie ?",
       "options": {
         "A": "Toute suite croissante diverge",
-        "B": "Croissante majoree => converge",
-        "C": "Majoree => converge",
+        "B": "Croissante majorée => converge",
+        "C": "Majorée => converge",
         "D": "Convergente => croissante"
       },
       "correcte": "B",
       "diagnostics": {
         "A": {
           "erreur": "Contre-exemple : $u_n = 1-1/n$ croissante, converge vers 1.",
-          "renvoi": "C4, theoreme"
+          "renvoi": "C4, théorème"
         },
         "C": {
-          "erreur": "Etre majoree ne suffit pas : la suite $(-1)^n$ est majoree mais diverge ; le theoreme exige aussi que la suite soit croissante.",
-          "renvoi": "C4, theoreme"
+          "erreur": "Être majorée ne suffit pas : la suite $(-1)^n$ est majorée mais diverge ; le théorème exige aussi que la suite soit croissante.",
+          "renvoi": "C4, théorème"
         },
         "D": {
-          "erreur": "Contre-exemple : $u_n = (-1)^n/n$ converge vers 0 sans etre croissante.",
-          "renvoi": "C1, definition"
+          "erreur": "Contre-exemple : $u_n = (-1)^n/n$ converge vers 0 sans être croissante.",
+          "renvoi": "C1, définition"
         }
       }
     },
@@ -192,20 +192,20 @@
         "A": "converge vers 1",
         "B": "bornee",
         "C": "diverge vers $+\\infty$",
-        "D": "decroissante"
+        "D": "décroissante"
       },
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "Si $u_n \\geq n$, la suite ne peut converger vers un reel fini.",
-          "renvoi": "C4, theoreme"
+          "erreur": "Si $u_n \\geq n$, la suite ne peut converger vers un réel fini.",
+          "renvoi": "C4, théorème"
         },
         "B": {
-          "erreur": "$u_n \\geq n$ implique que $(u_n)$ n'est pas majoree.",
-          "renvoi": "C4, theoreme"
+          "erreur": "$u_n \\geq n$ implique que $(u_n)$ n'est pas majorée.",
+          "renvoi": "C4, théorème"
         },
         "D": {
-          "erreur": "Contradictoire avec l'hypothese : une suite croissante ne peut pas etre decroissante.",
+          "erreur": "Contradictoire avec l'hypothèse : une suite croissante ne peut pas être décroissante.",
           "renvoi": "RE-C4"
         }
       }
@@ -213,7 +213,7 @@
     {
       "id": "Q9",
       "capacite": "C5",
-      "enonce": "Pour $a \\geqslant -1$ et $n \\in \\mathbb{N}$, l'inegalite de Bernoulli affirme :",
+      "enonce": "Pour $a \\geqslant -1$ et $n \\in \\mathbb{N}$, l'inégalité de Bernoulli affirme :",
       "options": {
         "A": "$(1+a)^n \\leq 1+na$",
         "B": "$(1+a)^n \\geq 1+na$",
@@ -223,12 +223,12 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Le sens $\\leqslant$ est inverse : pour $a=1$ et $n=2$, on obtient $4$ a gauche et $3$ a droite, donc seule l'inegalite $\\geqslant$ est vraie.",
-          "renvoi": "C5, theoreme"
+          "erreur": "Le sens $\\leqslant$ est inverse : pour $a=1$ et $n=2$, on obtient $4$ a gauche et $3$ a droite, donc seule l'inégalité $\\geqslant$ est vraie.",
+          "renvoi": "C5, théorème"
         },
         "C": {
-          "erreur": "C'est une inegalite, pas une egalite (sauf si $a=0$ ou $n \\leq 1$).",
-          "renvoi": "C5, theoreme"
+          "erreur": "C'est une inégalité, pas une égalité (sauf si $a=0$ ou $n \\leq 1$).",
+          "renvoi": "C5, théorème"
         },
         "D": {
           "erreur": "Le coefficient de $a$ est $n$, pas $n^2$ ; par exemple $a=1$ et $n=2$ donnent $4 \\not\\geqslant 5$.",
@@ -257,8 +257,8 @@
           "renvoi": "C5, tableau"
         },
         "D": {
-          "erreur": "Une suite geometrique de raison strictement comprise entre 0 et 1 converge vers 0 ; l'absence de limite concerne les raisons inferieures ou egales a -1.",
-          "renvoi": "M4, suites geometriques"
+          "erreur": "Une suite géométrique de raison strictement comprise entre 0 et 1 converge vers 0 ; l'absence de limite concerne les raisons inferieures ou égales a -1.",
+          "renvoi": "M4, suites géométriques"
         }
       }
     },
@@ -279,12 +279,12 @@
           "renvoi": "C5, tableau"
         },
         "B": {
-          "erreur": "Une limite egale a $1$ correspondrait a la suite constante de raison $q=1$ ; avec $q=1{,}02$, chaque multiplication augmente le terme.",
+          "erreur": "Une limite égale a $1$ correspondrait a la suite constante de raison $q=1$ ; avec $q=1{,}02$, chaque multiplication augmente le terme.",
           "renvoi": "C5, tableau"
         },
         "C": {
           "erreur": "Confusion entre la raison de la suite et sa limite : la raison 1,02 est superieure a 1, donc la suite diverge vers plus l'infini.",
-          "renvoi": "M4, suites geometriques"
+          "renvoi": "M4, suites géométriques"
         }
       }
     },
@@ -302,41 +302,41 @@
       "diagnostics": {
         "B": {
           "erreur": "La conclusion $v_n\\to0$ contredit $v_n\\geq u_n$ : pour tout seuil $A$, les termes $u_n$ puis $v_n$ finissent par depasser $A$.",
-          "renvoi": "C6, theoreme comparaison"
+          "renvoi": "C6, théorème comparaison"
         },
         "D": {
-          "erreur": "Le theoreme de comparaison donne une conclusion precise.",
-          "renvoi": "C6, theoreme comparaison"
+          "erreur": "Le théorème de comparaison donne une conclusion précise.",
+          "renvoi": "C6, théorème comparaison"
         },
         "C": {
           "erreur": "La minoration par une suite tendant vers plus l'infini interdit la convergence : v_n est repousse vers plus l'infini.",
-          "renvoi": "M5, theoreme de comparaison"
+          "renvoi": "M5, théorème de comparaison"
         }
       }
     },
     {
       "id": "Q13",
       "capacite": "C6",
-      "enonce": "Le theoreme des gendarmes s'applique quand :",
+      "enonce": "Le théorème des gendarmes s'applique quand :",
       "options": {
-        "A": "meme limite",
-        "B": "limites differentes",
+        "A": "même limite",
+        "B": "limites différentes",
         "C": "une seule limite",
         "D": "divergence"
       },
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Si les limites sont differentes, on ne peut pas conclure.",
-          "renvoi": "C6, theoreme gendarmes"
+          "erreur": "Si les limites sont différentes, on ne peut pas conclure.",
+          "renvoi": "C6, théorème gendarmes"
         },
         "C": {
-          "erreur": "Connaitre la limite d'une seule borne ne suffit pas a coincer la suite ; les deux suites encadrantes doivent tendre vers la meme limite $\\ell$.",
-          "renvoi": "C6, theoreme gendarmes"
+          "erreur": "Connaitre la limite d'une seule borne ne suffit pas a coincer la suite ; les deux suites encadrantes doivent tendre vers la même limite $\\ell$.",
+          "renvoi": "C6, théorème gendarmes"
         },
         "D": {
-          "erreur": "Le theoreme des gendarmes conclut a une convergence : il encadre par deux suites de meme limite finie, il ne s'applique pas a une divergence.",
-          "renvoi": "M5, theoreme des gendarmes"
+          "erreur": "Le théorème des gendarmes conclut a une convergence : il encadre par deux suites de même limite finie, il ne s'applique pas a une divergence.",
+          "renvoi": "M5, théorème des gendarmes"
         }
       }
     },
@@ -353,12 +353,12 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "$e^x > 0$ pour tout $x$, donc la limite ne peut etre $-\\infty$.",
-          "renvoi": "C7, demonstration"
+          "erreur": "$e^x > 0$ pour tout $x$, donc la limite ne peut être $-\\infty$.",
+          "renvoi": "C7, démonstration"
         },
         "C": {
-          "erreur": "La valeur $1$ est seulement $e^0$ ; lorsque $x$ decroit sans borne, $e^x=1/e^{-x}$ et le denominateur tend vers $+\\infty$, donc la limite vaut $0$.",
-          "renvoi": "C7, demonstration"
+          "erreur": "La valeur $1$ est seulement $e^0$ ; lorsque $x$ décroît sans borne, $e^x=1/e^{-x}$ et le dénominateur tend vers $+\\infty$, donc la limite vaut $0$.",
+          "renvoi": "C7, démonstration"
         },
         "D": {
           "erreur": "Sens de variation inverse : l'exponentielle tend vers 0 en moins l'infini et vers plus l'infini en plus l'infini.",
@@ -379,7 +379,7 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "L'exponentielle croit plus vite que tout polynome.",
+          "erreur": "L'exponentielle croit plus vite que tout polynôme.",
           "renvoi": "C7, croissance comparee"
         },
         "D": {
@@ -387,7 +387,7 @@
           "renvoi": "C7, croissance comparee"
         },
         "B": {
-          "erreur": "L'eleve simplifie comme s'il s'agissait d'un quotient de termes de meme nature ; la croissance comparee donne plus l'infini.",
+          "erreur": "L'élève simplifie comme s'il s'agissait d'un quotient de termes de même nature ; la croissance comparee donne plus l'infini.",
           "renvoi": "M3, croissances comparees"
         }
       }

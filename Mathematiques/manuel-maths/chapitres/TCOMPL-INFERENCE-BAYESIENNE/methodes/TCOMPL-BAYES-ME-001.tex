@@ -6,28 +6,28 @@
 % assert PA*PAB == Rational(9,50)
 % assert PB == Rational(8,25)
 % END-VERIFY
-\begin{fichemethode}{M1}{Calculer avec des probabilites conditionnelles et un arbre pondere}
+\begin{fichemethode}{M1}{Calculer avec des probabilités conditionnelles et un arbre pondere}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce fournit des probabilites
+  Utiliser cette méthode lorsque l'énoncé fournit des probabilités
   conditionnelles ($P_A(B)$, « sachant que... ») et demande de calculer la
-  probabilite d'une intersection ou d'un evenement global : arbre pondere et
-  formule des probabilites totales.
+  probabilité d'une intersection ou d'un événement global : arbre pondere et
+  formule des probabilités totales.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Nommer les evenements et construire l'arbre : premier niveau $A$,
+    \item Nommer les événements et construire l'arbre : premier niveau $A$,
       $\overline{A}$ ; second niveau $B$, $\overline{B}$ conditionne par la
-      branche precedente.
-    \item Reporter les poids : $P(A)$ sur la premiere branche, $P_A(B)$ sur la
+      branche précédente.
+    \item Reporter les poids : $P(A)$ sur la première branche, $P_A(B)$ sur la
       branche suivante — chaque nœud a des branches de somme 1.
     \item Intersection : multiplier le long du chemin,
       $P(A \cap B) = P(A) \times P_A(B)$.
-    \item Probabilites totales : sommer tous les chemins menant a $B$,
+    \item Probabilités totales : sommer tous les chemins menant a $B$,
       $P(B) = P(A)\,P_A(B) + P(\overline{A})\,P_{\overline{A}}(B)$.
-    \item Controler : chaque resultat est dans $[0\,;\,1]$ et les branches issues
-      d'un meme nœud totalisent 1.
+    \item Contrôler : chaque résultat est dans $[0\,;\,1]$ et les branches issues
+      d'un même nœud totalisent 1.
   \end{enumerate}
 }
 
@@ -47,19 +47,19 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Confondre $P(A \cap B)$ (chemin complet) et $P_A(B)$
+    \item \textbf{Piège 1.} Confondre $P(A \cap B)$ (chemin complet) et $P_A(B)$
       (poids d'une seule branche).
-    \item \textbf{Piege 2.} Oublier un chemin dans la formule des probabilites
+    \item \textbf{Piège 2.} Oublier un chemin dans la formule des probabilités
       totales : $B$ peut se realiser via $A$ ET via $\overline{A}$.
-    \item \textbf{Piege 3.} Ecrire $P(\overline{A}) = P(A)$ : c'est
+    \item \textbf{Piège 3.} Écrire $P(\overline{A}) = P(A)$ : c'est
       $1 - P(A)$.
   \end{itemize}
 }
 
 \verifier{%
-  Verifier que les branches issues de chaque nœud somment a 1, que
+  Vérifier que les branches issues de chaque nœud somment a 1, que
   $P(A \cap B) \leq \min\bigl(P(A), P(B)\bigr)$, et que $P(B)$ est bien entre les
-  deux probabilites conditionnelles utilisees.
+  deux probabilités conditionnelles utilisees.
 }
 
 \sEntrainer{\refExos{M1}}

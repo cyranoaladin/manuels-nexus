@@ -5,7 +5,7 @@
     {
       "id": "Q1",
       "capacite": "C1",
-      "enonce": "Une variable aleatoire X suivant une loi geometrique de parametre p a pour esperance :",
+      "enonce": "Une variable aleatoire X suivant une loi géométrique de paramètre p a pour espérance :",
       "correcte": "A",
       "options": {
         "A": "$\\frac{1}{p}$",
@@ -19,11 +19,11 @@
           "renvoi": "C1"
         },
         "C": {
-          "erreur": "Parametre p. Avec la convention X=nombre d'essais jusqu'au premier succès, l'espérance de G(p) vaut 1/p.",
+          "erreur": "Paramètre p. Avec la convention X=nombre d'essais jusqu'au premier succès, l'espérance de G(p) vaut 1/p.",
           "renvoi": "C1"
         },
         "D": {
-          "erreur": "Probabilite d'echec. Avec la convention X=nombre d'essais jusqu'au premier succès, l'espérance de G(p) vaut 1/p.",
+          "erreur": "Probabilité d'echec. Avec la convention X=nombre d'essais jusqu'au premier succès, l'espérance de G(p) vaut 1/p.",
           "renvoi": "C1"
         }
       }
@@ -31,7 +31,7 @@
     {
       "id": "Q2",
       "capacite": "C2",
-      "enonce": "Pour $k \\ge 1$, la probabilite $P(X = k)$ d'une loi geometrique $G(p)$ vaut :",
+      "enonce": "Pour $k \\ge 1$, la probabilité $P(X = k)$ d'une loi géométrique $G(p)$ vaut :",
       "correcte": "C",
       "options": {
         "A": "$p^k (1-p)$",
@@ -41,7 +41,7 @@
       },
       "diagnostics": {
         "A": {
-          "erreur": "Inversion des roles de succes et echec. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)^(k-1)p.",
+          "erreur": "Inversion des roles de succès et echec. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)^(k-1)p.",
           "renvoi": "C2"
         },
         "B": {
@@ -57,7 +57,7 @@
     {
       "id": "Q3",
       "capacite": "C3",
-      "enonce": "La propriete de perte de memoire de la loi geometrique s'ecrit $P_{X > n}(X > n+k) =$",
+      "enonce": "La propriété de perte de memoire de la loi géométrique s'ecrit $P_{X > n}(X > n+k) =$",
       "correcte": "B",
       "options": {
         "A": "$P(X > n)$",
@@ -71,11 +71,11 @@
           "renvoi": "C3"
         },
         "C": {
-          "erreur": "Egalite au lieu d'une superiocrite stricte. L'absence de mémoire donne P(X>n+k | X>n)=P(X>k).",
+          "erreur": "Égalité au lieu d'une superiocrite stricte. L'absence de mémoire donne P(X>n+k | X>n)=P(X>k).",
           "renvoi": "C3"
         },
         "D": {
-          "erreur": "Evenement contraire. L'absence de mémoire donne P(X>n+k | X>n)=P(X>k).",
+          "erreur": "Événement contraire. L'absence de mémoire donne P(X>n+k | X>n)=P(X>k).",
           "renvoi": "C3"
         }
       }
@@ -83,7 +83,7 @@
     {
       "id": "Q4",
       "capacite": "C2",
-      "enonce": "Pour une loi geometrique $G(p)$, $P(X > k) =$",
+      "enonce": "Pour une loi géométrique $G(p)$, $P(X > k) =$",
       "correcte": "D",
       "options": {
         "A": "$p^k$",
@@ -101,7 +101,7 @@
           "renvoi": "C2"
         },
         "C": {
-          "erreur": "Probabilite P(X <= k). L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)^k.",
+          "erreur": "Probabilité P(X <= k). L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)^k.",
           "renvoi": "C2"
         }
       }
@@ -109,7 +109,7 @@
     {
       "id": "Q5",
       "capacite": "C1",
-      "enonce": "Si $p = 0{,}2$, le temps d'attente moyen du premier succes est :",
+      "enonce": "Si $p = 0{,}2$, le temps d'attente moyen du premier succès est :",
       "correcte": "C",
       "options": {
         "A": "2 d'essais",

@@ -3,19 +3,19 @@
 \section{La fonction intégrale est une primitive}
 
 % ============================================================
-% STRATE 1 — Demonstration exigible
+% STRATE 1 — Démonstration exigible
 % ============================================================
 
 \theoreme{
-Soit $f$ une fonction continue, \textbf{positive} et \textbf{croissante} sur $[a,b]$. La fonction $A$ definie sur $[a,b]$ par
+Soit $f$ une fonction continue, \textbf{positive} et \textbf{croissante} sur $[a,b]$. La fonction $A$ définie sur $[a,b]$ par
 \[
   A(x) = \int_a^x f(t)\,\mathrm{d}t
 \]
-est derivable sur $[a,b]$, et $A' = f$ : $A$ est une primitive de $f$ sur $[a,b]$.
+est dérivable sur $[a,b]$, et $A' = f$ : $A$ est une primitive de $f$ sur $[a,b]$.
 }
 
 \demonstration{
-Soit $x_0 \in [a,b[$ et $h>0$ tel que $x_0+h \leq b$. Par definition, $A(x_0+h) - A(x_0)$ est l'aire du domaine sous la courbe de $f$ entre $x_0$ et $x_0+h$ (relation de Chasles pour les aires).
+Soit $x_0 \in [a,b[$ et $h>0$ tel que $x_0+h \leq b$. Par définition, $A(x_0+h) - A(x_0)$ est l'aire du domaine sous la courbe de $f$ entre $x_0$ et $x_0+h$ (relation de Chasles pour les aires).
 
 Comme $f$ est croissante sur $[x_0, x_0+h]$, pour tout $t \in [x_0, x_0+h]$ : $f(x_0) \leq f(t) \leq f(x_0+h)$.
 
@@ -29,9 +29,9 @@ En divisant par $h>0$ :
   f(x_0) \leq \frac{A(x_0+h)-A(x_0)}{h} \leq f(x_0+h).
 \]
 
-Comme $f$ est continue en $x_0$, $f(x_0+h) \to f(x_0)$ quand $h \to 0^+$. Par le theoreme des gendarmes, le taux d'accroissement de $A$ en $x_0$ (a droite) tend vers $f(x_0)$.
+Comme $f$ est continue en $x_0$, $f(x_0+h) \to f(x_0)$ quand $h \to 0^+$. Par le théorème des gendarmes, le taux d'accroissement de $A$ en $x_0$ (a droite) tend vers $f(x_0)$.
 
-Un raisonnement analogue pour $h<0$ (taux d'accroissement a gauche) donne la meme limite. Donc $A$ est derivable en $x_0$ et $A'(x_0) = f(x_0)$.
+Un raisonnement analogue pour $h<0$ (taux d'accroissement a gauche) donne la même limite. Donc $A$ est dérivable en $x_0$ et $A'(x_0) = f(x_0)$.
 
 Ce raisonnement est valable pour tout $x_0 \in [a,b]$ (aux bornes, on considere la derivabilite a droite ou a gauche uniquement), donc $A'=f$ sur $[a,b]$.
 }
@@ -44,7 +44,7 @@ Si $F$ est une primitive quelconque de $f$ continue sur $[a,b]$, alors :
 }
 
 \demonstration{
-$A$ (definie ci-dessus) et $F$ sont deux primitives de $f$ sur $[a,b]$ : elles different d'une constante $k$ (chapitre precedent), soit $F = A + k$.
+$A$ (définie ci-dessus) et $F$ sont deux primitives de $f$ sur $[a,b]$ : elles différent d'une constante $k$ (chapitre précédent), soit $F = A + k$.
 
 Or $A(a) = \displaystyle\int_a^a f(t)\,\mathrm{d}t = 0$ (aire d'un domaine de largeur nulle). Donc $F(a) = A(a)+k = k$.
 
@@ -52,7 +52,7 @@ Ainsi $F(b) - F(a) = (A(b)+k) - k = A(b) = \displaystyle\int_a^b f(t)\,\mathrm{d
 }
 
 \margeAppui{
-Notation : $F(b)-F(a)$ se note aussi $\big[F(x)\big]_a^b$. Ce resultat, etabli ici pour $f$ positive croissante, s'admet en general pour toute fonction continue.
+Notation : $F(b)-F(a)$ se note aussi $\big[F(x)\big]_a^b$. Ce résultat, etabli ici pour $f$ positive croissante, s'admet en general pour toute fonction continue.
 }
 
 \exemple{
@@ -75,5 +75,5 @@ Une primitive de $x \mapsto x^2$ est $F(x) = \dfrac{x^3}{3}$.
 % ============================================================
 
 \erreurFrequente{
-\textbf{Oublier l'hypothese de croissance dans la demonstration.} La demonstration presentee ici suppose $f$ positive \emph{et} croissante (pour encadrer l'aire par deux rectangles). Le resultat final ($A'=f$) reste vrai pour toute fonction continue, mais sa demonstration generale (hors-programme) ne repose pas sur cet encadrement.
+\textbf{Oublier l'hypothèse de croissance dans la démonstration.} La démonstration presentee ici suppose $f$ positive \emph{et} croissante (pour encadrer l'aire par deux rectangles). Le résultat final ($A'=f$) reste vrai pour toute fonction continue, mais sa démonstration generale (hors-programme) ne repose pas sur cet encadrement.
 }

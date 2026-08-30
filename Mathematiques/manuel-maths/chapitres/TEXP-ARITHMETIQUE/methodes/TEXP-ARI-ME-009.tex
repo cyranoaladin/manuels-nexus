@@ -34,7 +34,7 @@
 \begin{fichemethode}{M9}{Programmer Euclide, Bezout, le crible d'Eratosthene et la decomposition}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande d'ecrire (ou de completer) en
+  Utiliser cette méthode lorsque l'énoncé demande d'écrire (ou de compléter) en
   Python l'algorithme d'Euclide, le calcul d'un couple de Bezout, le crible
   d'Eratosthene ou la decomposition en facteurs premiers.
 }
@@ -52,13 +52,13 @@
       de $p^2$.
     \item Decomposition : diviser par les candidats croissants tant que
       $p^2 \leq n$ ; a la fin, si $n > 1$, c'est un dernier facteur premier.
-    \item Tester chaque fonction sur un cas dont le resultat est connu a la
+    \item Tester chaque fonction sur un cas dont le résultat est connu a la
       main (fiches M1, M5, M7).
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Ecrire l'algorithme d'Euclide et l'appliquer a $(252\,;\,198)$.
+  Écrire l'algorithme d'Euclide et l'appliquer a $(252\,;\,198)$.
 
   \medskip
   \commentaireMarge{L'invariant de boucle : le PGCD du couple est conserve.}%
@@ -77,20 +77,20 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Confondre \texttt{a \% b} (reste) et
+    \item \textbf{Piège 1.} Confondre \texttt{a \% b} (reste) et
       \texttt{a // b} (quotient) — les deux interviennent dans Bezout.
-    \item \textbf{Piege 2.} Dans le crible, barrer a partir de $2p$ au lieu de
+    \item \textbf{Piège 2.} Dans le crible, barrer a partir de $2p$ au lieu de
       $p^2$ (correct mais inutilement couteux) ou oublier la borne
       $\sqrt{n}$.
-    \item \textbf{Piege 3.} Dans la decomposition, oublier le facteur final
-      $n > 1$ apres la boucle (ex. le 5 de 360, ou un grand premier).
+    \item \textbf{Piège 3.} Dans la decomposition, oublier le facteur final
+      $n > 1$ après la boucle (ex. le 5 de 360, ou un grand premier).
   \end{itemize}
 }
 
 \verifier{%
   Confronter chaque sortie a un calcul manuel : PGCD par divisions posees,
-  egalite $au + bv = d$ effectivement verifiee, liste des premiers jusqu'a 30,
-  produit de la decomposition egal a l'entier initial.
+  égalité $au + bv = d$ effectivement verifiee, liste des premiers jusqu'a 30,
+  produit de la decomposition égal a l'entier initial.
 }
 
 \sEntrainer{\refExos{M9}}

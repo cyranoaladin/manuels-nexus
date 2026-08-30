@@ -6,39 +6,39 @@
 % assert 5*9 + 7*(-6) == 3
 % assert all(5*(9 + 7*k) + 7*(-6 - 5*k) == 3 for k in range(-4, 5))
 % END-VERIFY
-\begin{fichemethode}{M4}{Resoudre une equation diophantienne ax + by = c}
+\begin{fichemethode}{M4}{Résoudre une équation diophantienne ax + by = c}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande TOUTES les solutions
-  ENTIERES d'une equation $ax + by = c$ : condition d'existence par Bezout,
-  solution particuliere, puis solution generale par le theoreme de Gauss.
+  Utiliser cette méthode lorsque l'énoncé demande TOUTES les solutions
+  ENTIERES d'une équation $ax + by = c$ : condition d'existence par Bezout,
+  solution particulière, puis solution generale par le théorème de Gauss.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Calculer $d = \mathrm{PGCD}(a\,;\,b)$ : l'equation a des solutions entieres
+    \item Calculer $d = \mathrm{PGCD}(a\,;\,b)$ : l'équation a des solutions entieres
       si et seulement si $d$ divise $c$ (sinon, aucune solution).
-    \item Trouver une solution particuliere $(x_0\,;\,y_0)$ : remonter
+    \item Trouver une solution particulière $(x_0\,;\,y_0)$ : remonter
       l'algorithme d'Euclide (ou essais) pour $ax + by = d$, puis multiplier
       par $\frac{c}{d}$.
     \item Soustraire : si $(x\,;\,y)$ est solution, alors
       $a(x - x_0) = -b(y - y_0)$.
-    \item Appliquer le theoreme de Gauss (apres division par $d$) : avec
+    \item Appliquer le théorème de Gauss (après division par $d$) : avec
       $a' = \frac{a}{d}$ et $b' = \frac{b}{d}$ premiers entre eux, $b'$ divise
       $x - x_0$ : $x = x_0 + b'k$, puis $y = y_0 - a'k$, $k \in \mathbb{Z}$.
-    \item Verifier reciproquement que tous ces couples sont solutions, et
+    \item Vérifier reciproquement que tous ces couples sont solutions, et
       conclure.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Resoudre dans $\mathbb{Z}^2$ : $5x + 7y = 3$.
+  Résoudre dans $\mathbb{Z}^2$ : $5x + 7y = 3$.
 
   \medskip
   \commentaireMarge{$\mathrm{PGCD}(5;7)=1$ divise 3 : solutions garanties.}%
   $5$ et $7$ sont premiers entre eux. Comme $5 \times 3 + 7 \times (-2) = 1$,
   en multipliant par 3 : $5 \times 9 + 7 \times (-6) = 3$ : le couple
-  $(9\,;\,-6)$ est une solution particuliere.
+  $(9\,;\,-6)$ est une solution particulière.
 
   \medskip
   \commentaireMarge{Gauss : $7 \mid 5(x-9)$ et $\mathrm{PGCD}(7;5)=1$ donc
@@ -54,19 +54,19 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier la condition d'existence $d \mid c$ : si
+    \item \textbf{Piège 1.} Oublier la condition d'existence $d \mid c$ : si
       elle echoue, conclure directement a l'absence de solution.
-    \item \textbf{Piege 2.} Croiser les coefficients dans la solution
+    \item \textbf{Piège 2.} Croiser les coefficients dans la solution
       generale : $x$ avance par pas de $b'$, $y$ par pas de $a'$ (avec des
       signes opposes).
-    \item \textbf{Piege 3.} Oublier la RECIPROQUE : sans elle, on n'a montre
+    \item \textbf{Piège 3.} Oublier la RECIPROQUE : sans elle, on n'a montre
       qu'une inclusion de l'ensemble des solutions.
   \end{itemize}
 }
 
 \verifier{%
-  Substituer la solution particuliere et deux valeurs de $k$ dans l'equation,
-  et controler que la difference de deux solutions consecutives est bien
+  Substituer la solution particulière et deux valeurs de $k$ dans l'équation,
+  et contrôler que la difference de deux solutions consecutives est bien
   $(b'\,;\,-a')$.
 }
 

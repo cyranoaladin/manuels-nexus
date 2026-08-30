@@ -3,10 +3,10 @@
 \section{Theoremes de comparaison}
 
 % ============================================================
-% STRATE 1 — Theoremes et demonstrations exigibles
+% STRATE 1 — Theoremes et démonstrations exigibles
 % ============================================================
 
-\subsection{Theoreme de comparaison (divergence)}
+\subsection{Théorème de comparaison (divergence)}
 
 \theoreme{
 Soient $(u_n)$ et $(v_n)$ deux suites telles que, a partir d'un certain rang, $u_n \leq v_n$.
@@ -15,9 +15,9 @@ Si $\lim_{n \to +\infty} u_n = +\infty$, alors $\lim_{n \to +\infty} v_n = +\inf
 }
 
 \demonstration{
-Soit $A$ un reel quelconque. Montrons qu'il existe un rang $N$ tel que pour tout $n \geq N$, $v_n \geq A$.
+Soit $A$ un réel quelconque. Montrons qu'il existe un rang $N$ tel que pour tout $n \geq N$, $v_n \geq A$.
 
-Par hypothese, $\lim_{n \to +\infty} u_n = +\infty$. Il existe donc $N_1 \in \mathbb{N}$ tel que pour tout $n \geq N_1$, $u_n \geq A$.
+Par hypothèse, $\lim_{n \to +\infty} u_n = +\infty$. Il existe donc $N_1 \in \mathbb{N}$ tel que pour tout $n \geq N_1$, $u_n \geq A$.
 
 De plus, il existe $N_2 \in \mathbb{N}$ tel que pour tout $n \geq N_2$, $u_n \leq v_n$.
 
@@ -30,16 +30,16 @@ Donc $\lim_{n \to +\infty} v_n = +\infty$.
 }
 
 \margeAppui{
-De meme, si $v_n \leq u_n$ a partir d'un certain rang et $\lim u_n = -\infty$, alors $\lim v_n = -\infty$.
+De même, si $v_n \leq u_n$ a partir d'un certain rang et $\lim u_n = -\infty$, alors $\lim v_n = -\infty$.
 }
 
 \exemple{
 Soit $u_n = n + (-1)^n$. On a $u_n \geq n - 1$ pour tout $n$. Or $\lim_{n \to +\infty}(n-1) = +\infty$.
 
-Par le theoreme de comparaison, $\lim_{n \to +\infty} u_n = +\infty$.
+Par le théorème de comparaison, $\lim_{n \to +\infty} u_n = +\infty$.
 }
 
-\subsection{Theoreme des gendarmes (convergence)}
+\subsection{Théorème des gendarmes (convergence)}
 
 \theoreme{
 Soient $(u_n)$, $(v_n)$ et $(w_n)$ trois suites telles que, a partir d'un certain rang :
@@ -65,7 +65,7 @@ Posons $N = \max(N_1, N_2, N_3)$. Pour tout $n \geq N$ :
 \]
 donc $|v_n - \ell| \leq \varepsilon$.
 
-Par definition, $\lim_{n \to +\infty} v_n = \ell$.
+Par définition, $\lim_{n \to +\infty} v_n = \ell$.
 }
 
 \exemple{
@@ -76,7 +76,7 @@ Soit $u_n = \dfrac{\sin(n)}{n}$ pour $n \geq 1$. On a $-1 \leq \sin(n) \leq 1$, 
 
 Or $\lim_{n \to +\infty}\left(-\dfrac{1}{n}\right) = \lim_{n \to +\infty} \dfrac{1}{n} = 0$.
 
-Par le theoreme des gendarmes, $\lim_{n \to +\infty} \dfrac{\sin(n)}{n} = 0$.
+Par le théorème des gendarmes, $\lim_{n \to +\infty} \dfrac{\sin(n)}{n} = 0$.
 }
 
 % ============================================================
@@ -90,13 +90,13 @@ Par le theoreme des gendarmes, $\lim_{n \to +\infty} \dfrac{\sin(n)}{n} = 0$.
 }
 
 \erreurFrequente{
-\textbf{Appliquer les gendarmes avec des bornes de limites differentes.}
+\textbf{Appliquer les gendarmes avec des bornes de limites différentes.}
 
-Si $u_n \to 0$ et $w_n \to 1$ avec $u_n \leq v_n \leq w_n$, on ne peut \emph{pas} conclure sur la limite de $(v_n)$ par les gendarmes. Le theoreme exige que les deux suites encadrantes tendent vers la \emph{meme} limite.
+Si $u_n \to 0$ et $w_n \to 1$ avec $u_n \leq v_n \leq w_n$, on ne peut \emph{pas} conclure sur la limite de $(v_n)$ par les gendarmes. Le théorème exige que les deux suites encadrantes tendent vers la \emph{même} limite.
 }
 
 \erreurFrequente{
 \textbf{Confondre comparaison et encadrement.}
 
-Le theoreme de comparaison etablit une \emph{divergence} ($v_n \to +\infty$). Le theoreme des gendarmes etablit une \emph{convergence} ($v_n \to \ell$). Ce sont deux outils distincts.
+Le théorème de comparaison etablit une \emph{divergence} ($v_n \to +\infty$). Le théorème des gendarmes etablit une \emph{convergence} ($v_n \to \ell$). Ce sont deux outils distincts.
 }

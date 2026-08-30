@@ -25,11 +25,11 @@
 
 \textbf{Q2.} Si $x \in [1\,;2]$ alors $\dfrac{x}{2} \in \left[\dfrac12\,;1\right]$, donc $f(x) = \dfrac{x}{2} + 1 \in \left[\dfrac32\,;2\right] \subset [1\,;2]$ : l'intervalle est stable.
 
-Recurrence immediate : $u_0 = 1 \in [1\,;2]$, et si $u_n \in [1\,;2]$ alors $u_{n+1} = f(u_n) \in [1\,;2]$.
+Récurrence immediate : $u_0 = 1 \in [1\,;2]$, et si $u_n \in [1\,;2]$ alors $u_{n+1} = f(u_n) \in [1\,;2]$.
 
-\textbf{Q3.} $f(x) - x = \dfrac{x}{2} + 1 - x = \dfrac{2-x}{2}$, positif sur $[1\,;2]$. Donc $u_{n+1} - u_n \geq 0$ : la suite est croissante. Etant de plus majoree par $2$, elle converge d'apres le theoreme de la limite monotone.
+\textbf{Q3.} $f(x) - x = \dfrac{x}{2} + 1 - x = \dfrac{2-x}{2}$, positif sur $[1\,;2]$. Donc $u_{n+1} - u_n \geq 0$ : la suite est croissante. Etant de plus majorée par $2$, elle converge d'après le théorème de la limite monotone.
 
-\textbf{Q4.} \emph{Premiere methode.} $f$ est affine donc continue ; la limite $\ell$ verifie $\dfrac{\ell}{2} + 1 = \ell$, soit $\dfrac{\ell}{2} = 1$ et $\ell = 2$.
+\textbf{Q4.} \emph{Première méthode.} $f$ est affine donc continue ; la limite $\ell$ vérifie $\dfrac{\ell}{2} + 1 = \ell$, soit $\dfrac{\ell}{2} = 1$ et $\ell = 2$.
 
-\emph{Seconde methode.} $t_{n+1} = 2 - u_{n+1} = 2 - \dfrac{u_n}{2} - 1 = \dfrac{2 - u_n}{2} = \dfrac{1}{2}t_n$. La suite $(t_n)$ est geometrique de raison $\dfrac12$ et de premier terme $t_0 = 1$, donc $t_n = \left(\dfrac12\right)^n$ et $u_n = 2 - \left(\dfrac12\right)^n$. Comme $\left(\dfrac12\right)^n \to 0$, on retrouve $u_n \to 2$.
+\emph{Seconde méthode.} $t_{n+1} = 2 - u_{n+1} = 2 - \dfrac{u_n}{2} - 1 = \dfrac{2 - u_n}{2} = \dfrac{1}{2}t_n$. La suite $(t_n)$ est géométrique de raison $\dfrac12$ et de premier terme $t_0 = 1$, donc $t_n = \left(\dfrac12\right)^n$ et $u_n = 2 - \left(\dfrac12\right)^n$. Comme $\left(\dfrac12\right)^n \to 0$, on retrouve $u_n \to 2$.
 \end{corrige}

@@ -10,36 +10,36 @@
 \begin{fichemethode}{M1}{Utiliser le vocabulaire des graphes}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande de decrire un graphe avec le
-  vocabulaire officiel : sommets, aretes, adjacence, degre, ordre, chaine,
+  Utiliser cette méthode lorsque l'énoncé demande de decrire un graphe avec le
+  vocabulaire officiel : sommets, arêtes, adjacence, degré, ordre, chaine,
   connexite, graphe complet.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Identifier l'ORDRE (nombre de sommets) et le nombre d'aretes ; deux
-      sommets relies par une arete sont ADJACENTS.
-    \item Calculer le DEGRE de chaque sommet : nombre d'aretes qui lui sont
+    \item Identifier l'ORDRE (nombre de sommets) et le nombre d'arêtes ; deux
+      sommets relies par une arête sont ADJACENTS.
+    \item Calculer le DEGRE de chaque sommet : nombre d'arêtes qui lui sont
       incidentes.
-    \item Controler avec le lemme des poignees de main : la somme des degres
-      vaut deux fois le nombre d'aretes.
+    \item Contrôler avec le lemme des poignees de main : la somme des degrés
+      vaut deux fois le nombre d'arêtes.
     \item Chaines : une suite de sommets consecutivement adjacents ; sa
-      LONGUEUR est son nombre d'aretes. Le graphe est CONNEXE si deux sommets
+      LONGUEUR est son nombre d'arêtes. Le graphe est CONNEXE si deux sommets
       quelconques sont toujours relies par une chaine.
     \item Graphe COMPLET : toutes les paires de sommets sont adjacentes ; il a
-      alors $\binom{n}{2} = \frac{n(n-1)}{2}$ aretes.
+      alors $\binom{n}{2} = \frac{n(n-1)}{2}$ arêtes.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Soit $G$ le graphe de sommets $A$, $B$, $C$, $D$ et d'aretes $AB$, $AC$,
+  Soit $G$ le graphe de sommets $A$, $B$, $C$, $D$ et d'arêtes $AB$, $AC$,
   $BC$, $CD$. Decrire $G$.
 
   \medskip
-  \commentaireMarge{Compter les aretes incidentes a chaque sommet.}%
-  $G$ est d'ordre 4 avec 4 aretes. Degres : $d(A) = 2$, $d(B) = 2$,
-  $d(C) = 3$, $d(D) = 1$. Controle :
-  $2 + 2 + 3 + 1 = 8 = 2 \times 4$ aretes.
+  \commentaireMarge{Compter les arêtes incidentes a chaque sommet.}%
+  $G$ est d'ordre 4 avec 4 arêtes. Degrés : $d(A) = 2$, $d(B) = 2$,
+  $d(C) = 3$, $d(D) = 1$. Contrôle :
+  $2 + 2 + 3 + 1 = 8 = 2 \times 4$ arêtes.
 
   \medskip
   $G$ est connexe ($D$ est relie au reste via $C$, et $A$, $B$, $C$ forment un
@@ -49,18 +49,18 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Confondre ordre (sommets) et taille (aretes) du
+    \item \textbf{Piège 1.} Confondre ordre (sommets) et taille (arêtes) du
       graphe.
-    \item \textbf{Piege 2.} Confondre longueur d'une chaine (nombre d'ARETES)
+    \item \textbf{Piège 2.} Confondre longueur d'une chaine (nombre d'ARETES)
       et nombre de sommets traverses.
-    \item \textbf{Piege 3.} Declarer un graphe complet des qu'il est connexe :
+    \item \textbf{Piège 3.} Declarer un graphe complet des qu'il est connexe :
       complet exige TOUTES les adjacences possibles.
   \end{itemize}
 }
 
 \verifier{%
-  Verifier le lemme des poignees de main (somme des degres paire, egale a
-  $2 \times$ aretes), et justifier la connexite en exhibant une chaine entre
+  Vérifier le lemme des poignees de main (somme des degrés paire, égale a
+  $2 \times$ arêtes), et justifier la connexite en exhibant une chaine entre
   les sommets « eloignes ».
 }
 

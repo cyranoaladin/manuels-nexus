@@ -1,7 +1,7 @@
 % META: {"id": "TSPE-PROBABILITES-QCM", "chapitre": "TSPE-PROBABILITES", "type_objet": "qcm", "genere_depuis": "chapitres/TSPE-PROBABILITES/qcm/TSPE-PROBABILITES-QCM.json", "status": "generated"}
 % Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{\textcolor{chapcolor}{\MakeUppercase{QCM d'auto-évaluation -- Probabilites}}}
+\section*{\textcolor{chapcolor}{\MakeUppercase{QCM d'auto-évaluation -- Probabilités}}}
 
 \begin{center}
 \textit{Pour chaque question, une seule réponse est exacte.}
@@ -24,16 +24,16 @@
 \item \textbf{[Q2]} Un schema de Bernoulli suppose que les epreuves sont :
   \begin{enumerate}[label=\Alph*.]
     \item dependantes et identiques
-    \item independantes et identiques
-    \item independantes et differentes
-    \item toutes de probabilite 1/2
+    \item indépendantes et identiques
+    \item indépendantes et différentes
+    \item toutes de probabilité 1/2
   \end{enumerate}
 
 \item[] \textbf{Capacité C7}
 
-\item \textbf{[Q3]} La linearite de l'esperance E(X+Y)=E(X)+E(Y) est valable :
+\item \textbf{[Q3]} La linéarité de l'espérance E(X+Y)=E(X)+E(Y) est valable :
   \begin{enumerate}[label=\Alph*.]
-    \item uniquement si X et Y sont independantes
+    \item uniquement si X et Y sont indépendantes
     \item toujours, sans condition d'independence
     \item uniquement si X=Y
     \item jamais
@@ -43,7 +43,7 @@
 
 \item \textbf{[Q4]} L'additivite de la variance V(X+Y)=V(X)+V(Y) est garantie lorsque :
   \begin{enumerate}[label=\Alph*.]
-    \item que X et Y soient independantes
+    \item que X et Y soient indépendantes
     \item que X=Y
     \item rien de particulier
     \item que E(X)=E(Y)
@@ -61,7 +61,7 @@
 
 \item[] \textbf{Capacité C10}
 
-\item \textbf{[Q6]} L'inégalité de Bienayme-Tchebychev majore :
+\item \textbf{[Q6]} L'inégalité de Bienayme-Tchebychev majoré :
   \begin{enumerate}[label=\Alph*.]
     \item P(|Y-mu|>=delta)
     \item E(Y)
@@ -96,39 +96,39 @@ Q6 & C10 & \textbf{A} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — Cette expression donne la probabilite d'une configuration precise de $k$ succes ; elle oublie les $C(n,k)$ positions possibles des succes. \emph{Renvoi : C5.}
-    \item \textbf{C} — Le facteur $(1-p)^{n-k}$ manque : les $n-k$ echecs de chaque configuration doivent eux aussi contribuer a sa probabilite. \emph{Renvoi : C5.}
-    \item \textbf{D} — Le produit $np^k$ ne compte ni les choix des $k$ succes ni la probabilite des $n-k$ echecs ; ce n'est pas une probabilite binomiale. \emph{Renvoi : C5.}
+    \item \textbf{A} — Cette expression donne la probabilité d'une configuration précise de $k$ succès ; elle oublie les $C(n,k)$ positions possibles des succès. \emph{Renvoi : C5.}
+    \item \textbf{C} — Le facteur $(1-p)^{n-k}$ manque : les $n-k$ echecs de chaque configuration doivent eux aussi contribuer a sa probabilité. \emph{Renvoi : C5.}
+    \item \textbf{D} — Le produit $np^k$ ne compte ni les choix des $k$ succès ni la probabilité des $n-k$ echecs ; ce n'est pas une probabilité binomiale. \emph{Renvoi : C5.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — La dependance contredit la definition du schema : la probabilite d'un succes doit rester $p$ d'une epreuve a l'autre.
-    \item \textbf{C} — Des epreuves differentes peuvent avoir des probabilites de succes distinctes ; un schema de Bernoulli repete la meme epreuve.
-    \item \textbf{D} — La probabilite de succes est un reel $p$ quelconque de $[0,1]$ ; la valeur $1/2$ n'est imposee que pour une piece equilibree.
+    \item \textbf{A} — La dépendance contredit la définition du schema : la probabilité d'un succès doit rester $p$ d'une epreuve a l'autre.
+    \item \textbf{C} — Des epreuves différentes peuvent avoir des probabilités de succès distinctes ; un schema de Bernoulli repete la même epreuve.
+    \item \textbf{D} — La probabilité de succès est un réel $p$ quelconque de $[0,1]$ ; la valeur $1/2$ n'est imposee que pour une piece equilibree.
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{A} — L'independance est requise pour additionner les variances, pas pour la linearite de l'esperance de variables integrables.
-    \item \textbf{C} — L'egalite $X=Y$ n'est pas necessaire : la somme des esperances vaut l'esperance de la somme pour deux variables quelconques.
-    \item \textbf{D} — La propriete est toujours valable ; par exemple pour deux constantes $X=1$ et $Y=2$, les deux membres valent $3$.
+    \item \textbf{A} — L'indépendance est requise pour additionner les variances, pas pour la linéarité de l'espérance de variables integrables.
+    \item \textbf{C} — L'égalité $X=Y$ n'est pas nécessaire : la somme des esperances vaut l'espérance de la somme pour deux variables quelconques.
+    \item \textbf{D} — La propriété est toujours valable ; par exemple pour deux constantes $X=1$ et $Y=2$, les deux membres valent $3$.
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{B} — Si $X=Y$, alors $V(X+Y)=V(2X)=4V(X)$, tandis que $V(X)+V(Y)=2V(X)$ : l'egalite n'est donc pas garantie.
-    \item \textbf{C} — Sans hypothese, la formule comporte le terme $2\operatorname{Cov}(X,Y)$ : l'independance permet precisement d'annuler cette covariance.
-    \item \textbf{D} — L'egalite des esperances ne renseigne pas sur la covariance de $X$ et $Y$ : elle ne suffit donc pas a rendre les variances additives.
+    \item \textbf{B} — Si $X=Y$, alors $V(X+Y)=V(2X)=4V(X)$, tandis que $V(X)+V(Y)=2V(X)$ : l'égalité n'est donc pas garantie.
+    \item \textbf{C} — Sans hypothèse, la formule comporte le terme $2\operatorname{Cov}(X,Y)$ : l'indépendance permet precisement d'annuler cette covariance.
+    \item \textbf{D} — L'égalité des esperances ne renseigne pas sur la covariance de $X$ et $Y$ : elle ne suffit donc pas a rendre les variances additives.
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
-    \item \textbf{A} — Le produit $np$ est l'esperance de la loi binomiale ; la variance comporte aussi le facteur de dispersion $1-p$.
-    \item \textbf{C} — L'expression $n(1-p)$ oublie le facteur $p$ associe aux succes ; chaque indicatrice de Bernoulli a pour variance $p(1-p)$.
-    \item \textbf{D} — Le produit $p(1-p)$ est la variance d'une seule epreuve de Bernoulli ; la somme de $n$ epreuves independantes apporte le facteur $n$.
+    \item \textbf{A} — Le produit $np$ est l'espérance de la loi binomiale ; la variance comporte aussi le facteur de dispersion $1-p$.
+    \item \textbf{C} — L'expression $n(1-p)$ oublie le facteur $p$ associe aux succès ; chaque indicatrice de Bernoulli a pour variance $p(1-p)$.
+    \item \textbf{D} — Le produit $p(1-p)$ est la variance d'une seule epreuve de Bernoulli ; la somme de $n$ epreuves indépendantes apporte le facteur $n$.
   \end{itemize}
   \item \textbf{Q6}
   \begin{itemize}
-    \item \textbf{B} — L'esperance $E(Y)$ est le centre de l'evenement de deviation ; l'inegalite ne cherche pas a majorer cette valeur.
-    \item \textbf{C} — La variance intervient dans le majorant $V(Y)/\delta^2$, mais la quantite majoree est la probabilite d'un ecart a la moyenne.
-    \item \textbf{D} — Bienayme-Tchebychev concerne l'evenement $|Y-\mu|\geq\delta$, pas la probabilite ponctuelle que $Y$ soit exactement egal a $\mu$.
+    \item \textbf{B} — L'espérance $E(Y)$ est le centre de l'événement de deviation ; l'inégalité ne cherche pas a majorer cette valeur.
+    \item \textbf{C} — La variance intervient dans le majorant $V(Y)/\delta^2$, mais la quantité majorée est la probabilité d'un ecart a la moyenne.
+    \item \textbf{D} — Bienayme-Tchebychev concerne l'événement $|Y-\mu|\geq\delta$, pas la probabilité ponctuelle que $Y$ soit exactement égal a $\mu$.
   \end{itemize}
 \end{itemize}
 \fi

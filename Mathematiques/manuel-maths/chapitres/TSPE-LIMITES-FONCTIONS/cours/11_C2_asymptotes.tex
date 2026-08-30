@@ -3,13 +3,13 @@
 \section{Asymptotes}
 
 % ============================================================
-% STRATE 1 — Definitions et lien avec les limites
+% STRATE 1 — Définitions et lien avec les limites
 % ============================================================
 
 \subsection{Asymptote horizontale}
 
 \definition[1]{
-La droite d'equation $y = \ell$ est \textbf{asymptote horizontale} a la courbe $\mathcal{C}_f$ en $+\infty$ (resp. en $-\infty$) si et seulement si :
+La droite d'équation $y = \ell$ est \textbf{asymptote horizontale} a la courbe $\mathcal{C}_f$ en $+\infty$ (resp. en $-\infty$) si et seulement si :
 \[
   \lim_{x \to +\infty} f(x) = \ell \qquad \left(\text{resp. } \lim_{x \to -\infty} f(x) = \ell\right).
 \]
@@ -31,7 +31,7 @@ $\mathcal{C}_f$ se rapproche de $y=\ell$ sans forcément l'atteindre.
 \subsection{Asymptote verticale}
 
 \definition[1]{
-La droite d'equation $x = a$ est \textbf{asymptote verticale} a la courbe $\mathcal{C}_f$ si :
+La droite d'équation $x = a$ est \textbf{asymptote verticale} a la courbe $\mathcal{C}_f$ si :
 \[
   \lim_{x \to a^+} f(x) = \pm\infty \qquad \text{ou} \qquad \lim_{x \to a^-} f(x) = \pm\infty.
 \]
@@ -50,23 +50,23 @@ Soit $g(x) = \dfrac{x+1}{(x-1)(x+3)}$.
 
 Les valeurs interdites sont $x = 1$ et $x = -3$.
 
-$\lim_{x \to 1^+} g(x) = +\infty$ (numerateur $\to 2 > 0$, denominateur $\to 0^+ \times 4 = 0^+$).
+$\lim_{x \to 1^+} g(x) = +\infty$ (numérateur $\to 2 > 0$, dénominateur $\to 0^+ \times 4 = 0^+$).
 
 Les droites $x = 1$ et $x = -3$ sont asymptotes verticales.
 }
 
-\subsection{Determination des asymptotes : methode}
+\subsection{Determination des asymptotes : méthode}
 
 \propriete{
 Pour trouver les asymptotes d'une fonction $f$ :
 \begin{enumerate}
   \item \textbf{AH :} calculer $\lim_{x \to +\infty} f(x)$ et $\lim_{x \to -\infty} f(x)$. Si une limite est finie $\ell$, alors $y = \ell$ est AH.
-  \item \textbf{AV :} identifier les valeurs $a$ ou $f$ n'est pas definie et calculer les limites a gauche et a droite en $a$. Si une de ces limites est $\pm\infty$, alors $x = a$ est AV.
+  \item \textbf{AV :} identifier les valeurs $a$ ou $f$ n'est pas définie et calculer les limites a gauche et a droite en $a$. Si une de ces limites est $\pm\infty$, alors $x = a$ est AV.
 \end{enumerate}
 }
 
 \exemple{
-\textbf{Etude complete des asymptotes de $f(x) = \dfrac{x^2}{x^2 - 4}$.}
+\textbf{Étude complete des asymptotes de $f(x) = \dfrac{x^2}{x^2 - 4}$.}
 
 \medskip
 
@@ -74,7 +74,7 @@ Pour trouver les asymptotes d'une fonction $f$ :
 
 \textbf{AH :} $f(x) = \dfrac{x^2}{x^2(1 - 4/x^2)} = \dfrac{1}{1 - 4/x^2} \to 1$ en $\pm\infty$. Donc $y = 1$ est AH.
 
-\textbf{AV :} En $x = 2$ : $x^2 \to 4 > 0$ et $x^2 - 4 \to 0$. Signe de $x^2-4$ : positif pour $x > 2$, negatif pour $x < 2$ (pres de $2$). Donc $\lim_{x \to 2^+} f(x) = +\infty$ et $\lim_{x \to 2^-} f(x) = -\infty$. $x = 2$ est AV.
+\textbf{AV :} En $x = 2$ : $x^2 \to 4 > 0$ et $x^2 - 4 \to 0$. Signe de $x^2-4$ : positif pour $x > 2$, négatif pour $x < 2$ (pres de $2$). Donc $\lim_{x \to 2^+} f(x) = +\infty$ et $\lim_{x \to 2^-} f(x) = -\infty$. $x = 2$ est AV.
 
 Par symetrie ($f$ est paire), $x = -2$ est aussi AV.
 }
@@ -88,9 +88,9 @@ AH : $y=\ell$ si $f\to\ell$ à l'infini. AV : $x=a$ si $f\to\pm\infty$ en $a$.
 }
 
 \erreurFrequente{
-\textbf{Chercher une AV en un point ou $f$ est definie.}
+\textbf{Chercher une AV en un point ou $f$ est définie.}
 
-Les asymptotes verticales ne peuvent se trouver qu'en des points ou $f$ n'est pas definie (valeurs interdites du denominateur). Si $f$ est definie et continue en $a$, il n'y a pas d'AV en $x = a$.
+Les asymptotes verticales ne peuvent se trouver qu'en des points ou $f$ n'est pas définie (valeurs interdites du dénominateur). Si $f$ est définie et continue en $a$, il n'y a pas d'AV en $x = a$.
 }
 
 \erreurFrequente{
@@ -100,7 +100,7 @@ Une courbe peut \emph{couper} son asymptote horizontale. Par exemple, $f(x) = \d
 }
 
 \erreurFrequente{
-\textbf{Oublier d'etudier les limites a gauche et a droite separement.}
+\textbf{Oublier d'étudier les limites a gauche et a droite separement.}
 
-En une valeur interdite, les limites a gauche et a droite peuvent etre differentes ($+\infty$ et $-\infty$). Il faut etudier le signe du denominateur de chaque cote.
+En une valeur interdite, les limites a gauche et a droite peuvent être différentes ($+\infty$ et $-\infty$). Il faut étudier le signe du dénominateur de chaque cote.
 }

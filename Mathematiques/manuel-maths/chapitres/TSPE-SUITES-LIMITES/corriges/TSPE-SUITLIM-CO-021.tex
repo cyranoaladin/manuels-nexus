@@ -26,28 +26,28 @@
 
 \textbf{Question 2.} $\ell = 1{,}02\ell - 12\,000 \Rightarrow -0{,}02\ell = -12\,000 \Rightarrow \ell = 600\,000$.
 
-$v_n = u_n - 600\,000$ geometrique de raison $1{,}02$, $v_0 = -400\,000$.
+$v_n = u_n - 600\,000$ géométrique de raison $1{,}02$, $v_0 = -400\,000$.
 
-\textbf{Question 3.} $(v_n)$ est geometrique de raison $1{,}02$ et de premier terme $v_0 = -400\,000$, donc $v_n = -400\,000 \times 1{,}02^n$. Comme $u_n = v_n + 600\,000$ :
+\textbf{Question 3.} $(v_n)$ est géométrique de raison $1{,}02$ et de premier terme $v_0 = -400\,000$, donc $v_n = -400\,000 \times 1{,}02^n$. Comme $u_n = v_n + 600\,000$ :
 \[
 u_n = 600\,000 - 400\,000 \times 1{,}02^n.
 \]
-Verification : $u_0 = 600\,000 - 400\,000 = 200\,000$. Correct.
+Vérification : $u_0 = 600\,000 - 400\,000 = 200\,000$. Correct.
 
-\textbf{Question 4.} $u_{n+1} - u_n = 0{,}02\,u_n - 12\,000$. Or $u_n < 600\,000$ pour tout $n$ (car $400\,000 \times 1{,}02^n > 0$), donc $0{,}02\,u_n < 12\,000$, soit $u_{n+1} - u_n < 0$ : la suite $(u_n)$ est decroissante.
+\textbf{Question 4.} $u_{n+1} - u_n = 0{,}02\,u_n - 12\,000$. Or $u_n < 600\,000$ pour tout $n$ (car $400\,000 \times 1{,}02^n > 0$), donc $0{,}02\,u_n < 12\,000$, soit $u_{n+1} - u_n < 0$ : la suite $(u_n)$ est décroissante.
 
-Comme $1{,}02 > 1$, $1{,}02^n \to +\infty$, donc $u_n = 600\,000 - 400\,000 \times 1{,}02^n \to -\infty$. La suite decroissante et non minoree finit donc par devenir negative ou nulle : l'emprunt \textbf{est rembourse} (le capital restant du atteint $0$ en temps fini).
+Comme $1{,}02 > 1$, $1{,}02^n \to +\infty$, donc $u_n = 600\,000 - 400\,000 \times 1{,}02^n \to -\infty$. La suite décroissante et non minorée finit donc par devenir négative ou nulle : l'emprunt \textbf{est rembourse} (le capital restant du atteint $0$ en temps fini).
 
 Rang de remboursement : $u_n \leq 0 \iff 400\,000 \times 1{,}02^n \geq 600\,000 \iff 1{,}02^n \geq 1{,}5 \iff n \geq \dfrac{\ln(1{,}5)}{\ln(1{,}02)} \approx 20{,}5$. Le capital restant du s'annule donc au rang $\boxed{n_0 = 21}$.
 
 \textbf{Question 5.} Pour un remboursement annuel $R$ quelconque, le point fixe devient $\ell = \dfrac{R}{0{,}02}$ et $u_n = \ell + (200\,000 - \ell) \times 1{,}02^n$.
 
 \begin{itemize}
-  \item Si $R < 4\,000$ (le montant des interets de la premiere annee) : $\ell < 200\,000 = u_0$, donc $u_0 - \ell > 0$ et $u_n \to +\infty$ : la dette croit indefiniment, l'emprunt n'est jamais rembourse.
+  \item Si $R < 4\,000$ (le montant des interets de la première année) : $\ell < 200\,000 = u_0$, donc $u_0 - \ell > 0$ et $u_n \to +\infty$ : la dette croit indefiniment, l'emprunt n'est jamais rembourse.
   \item Si $R = 4\,000$ : $\ell = u_0$, donc $u_n = u_0 = 200\,000$ pour tout $n$ : le capital restant du est constant, l'emprunt n'est jamais rembourse.
   \item Si $R > 4\,000$ : $\ell > u_0$, donc $u_0 - \ell < 0$ et $u_n \to -\infty$ (comme en question 4) : l'emprunt est rembourse en temps fini.
 \end{itemize}
 
-Il faut donc $R > 4\,000$ euros. (Il n'y a pas de minimum atteint : pour $R$ arbitrairement proche de $4\,000$ euros par valeurs superieures, l'emprunt finit toujours par etre rembourse, mais en un temps qui tend vers $+\infty$.)
+Il faut donc $R > 4\,000$ euros. (Il n'y a pas de minimum atteint : pour $R$ arbitrairement proche de $4\,000$ euros par valeurs superieures, l'emprunt finit toujours par être rembourse, mais en un temps qui tend vers $+\infty$.)
 
 \end{corrige}

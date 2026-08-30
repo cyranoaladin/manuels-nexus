@@ -6,26 +6,26 @@
 % assert simplify(L.subs(x, 0)) == 0 and simplify(L.subs(x, 1)) == 1
 % assert simplify(diff(L, x, 2) - exp(x)/(E - 1)) == 0
 % END-VERIFY
-\begin{fichemethode}{M4}{Etudier la convexite d'un modele de Lorenz par la derivee seconde}
+\begin{fichemethode}{M4}{Étudier la convexité d'un modèle de Lorenz par la dérivée seconde}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande de DEMONTRER qu'une fonction
+  Utiliser cette méthode lorsque l'énoncé demande de DEMONTRER qu'une fonction
   modelisant une courbe de Lorenz est convexe sur $[0\,;\,1]$, a l'aide de sa
-  derivee seconde.
+  dérivée seconde.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Calculer la derivee premiere $L'(x)$, puis la derivee seconde $L''(x)$.
-    \item Etudier le SIGNE de $L''$ sur $[0\,;\,1]$ (tableau de signes si
-      necessaire).
+    \item Calculer la dérivée première $L'(x)$, puis la dérivée seconde $L''(x)$.
+    \item Étudier le SIGNE de $L''$ sur $[0\,;\,1]$ (tableau de signes si
+      nécessaire).
     \item Conclure : $L'' \geq 0$ sur $[0\,;\,1]$ $\Rightarrow$ $L$ est convexe
       sur $[0\,;\,1]$ (la courbe est au-dessus de ses tangentes, sous ses
       cordes).
-    \item Relier a la situation : la convexite avec $L(0)=0$, $L(1)=1$ garantit
+    \item Relier a la situation : la convexité avec $L(0)=0$, $L(1)=1$ garantit
       que la courbe reste sous la bissectrice — coherent avec une courbe de
       Lorenz.
-    \item Si $L''$ change de signe, le modele n'est PAS une courbe de Lorenz
+    \item Si $L''$ change de signe, le modèle n'est PAS une courbe de Lorenz
       acceptable.
   \end{enumerate}
 }
@@ -34,29 +34,29 @@
   Montrer que $L(x) = \dfrac{e^x - 1}{e - 1}$ est convexe sur $[0\,;\,1]$.
 
   \medskip
-  \commentaireMarge{Deriver deux fois, puis argumenter par le signe.}%
+  \commentaireMarge{Dériver deux fois, puis argumenter par le signe.}%
   $L'(x) = \dfrac{e^x}{e-1}$ et $L''(x) = \dfrac{e^x}{e-1}$.
 
   \medskip
   Pour tout $x \in [0\,;\,1]$, $e^x > 0$ et $e - 1 > 0$, donc $L''(x) > 0$ :
   $L$ est convexe sur $[0\,;\,1]$. Comme de plus $L(0) = 0$ et $L(1) = 1$,
-  ce modele a bien l'allure d'une courbe de Lorenz.
+  ce modèle a bien l'allure d'une courbe de Lorenz.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} S'arreter a $L' \geq 0$ : la croissance ne prouve pas
-      la convexite — il faut le signe de $L''$.
-    \item \textbf{Piege 2.} Conclure la convexite d'un signe de $L''$ etudie sur
+    \item \textbf{Piège 1.} S'arreter a $L' \geq 0$ : la croissance ne prouve pas
+      la convexité — il faut le signe de $L''$.
+    \item \textbf{Piège 2.} Conclure la convexité d'un signe de $L''$ etudie sur
       un mauvais intervalle : seul $[0\,;\,1]$ compte ici.
-    \item \textbf{Piege 3.} Erreur de derivation en cascade : une faute dans $L'$
-      fausse $L''$ — controler chaque etape.
+    \item \textbf{Piège 3.} Erreur de dérivation en cascade : une faute dans $L'$
+      fausse $L''$ — contrôler chaque étape.
   \end{itemize}
 }
 
 \verifier{%
-  Controler la derivee seconde en la recalculant (ou en derivant $L'$ pas a pas),
-  et verifier graphiquement que la courbe est bien « creusee vers le bas a
+  Contrôler la dérivée seconde en la recalculant (ou en derivant $L'$ pas a pas),
+  et vérifier graphiquement que la courbe est bien « creusee vers le bas a
   gauche » (sous la bissectrice, au-dessus de ses tangentes).
 }
 

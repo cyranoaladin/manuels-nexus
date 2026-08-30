@@ -29,11 +29,11 @@
 
 \textbf{Q2.} Soit $x \in [1\,;3]$. Alors $4 \leq x + 3 \leq 6$, donc $2 \leq f(x) \leq 3$, et en particulier $f(x) \in [1\,;3]$ : l'intervalle est stable.
 
-Par recurrence : $v_0 = 1 \in [1\,;3]$ ; et si $v_n \in [1\,;3]$, alors $v_{n+1} = f(v_n) \in [1\,;3]$. Donc $1 \leq v_n \leq 3$ pour tout $n$.
+Par récurrence : $v_0 = 1 \in [1\,;3]$ ; et si $v_n \in [1\,;3]$, alors $v_{n+1} = f(v_n) \in [1\,;3]$. Donc $1 \leq v_n \leq 3$ pour tout $n$.
 
 \textbf{Q3.} $f(x) - x = \dfrac{x+3}{2} - x = \dfrac{3-x}{2}$, qui est positif ou nul sur $[1\,;3]$. Donc $v_{n+1} - v_n = f(v_n) - v_n \geq 0$ : la suite est croissante.
 
-\textbf{Q4.} $(v_n)$ est croissante et majoree par $3$, donc convergente vers un reel $\ell$. La fonction $f$ etant continue (fonction affine), $\ell$ verifie $f(\ell) = \ell$, soit $\dfrac{\ell+3}{2} = \ell$, d'ou $\ell + 3 = 2\ell$ et $\ell = 3$.
+\textbf{Q4.} $(v_n)$ est croissante et majorée par $3$, donc convergente vers un réel $\ell$. La fonction $f$ etant continue (fonction affine), $\ell$ vérifie $f(\ell) = \ell$, soit $\dfrac{\ell+3}{2} = \ell$, d'ou $\ell + 3 = 2\ell$ et $\ell = 3$.
 
-\textbf{Q5.} $w_{n+1} = 3 - v_{n+1} = 3 - \dfrac{v_n+3}{2} = \dfrac{6 - v_n - 3}{2} = \dfrac{3 - v_n}{2} = \dfrac{1}{2}w_n$. La suite $(w_n)$ est donc geometrique de raison $\dfrac12$ et de premier terme $w_0 = 3 - 1 = 2$. Ainsi $w_n = 2\left(\dfrac12\right)^n$, d'ou $v_n = 3 - 2\left(\dfrac12\right)^n$. Comme $-1 < \dfrac12 < 1$, $\left(\dfrac12\right)^n$ tend vers $0$ et $v_n$ tend vers $3$ : on retrouve bien la limite de Q4, cette fois par une formule explicite.
+\textbf{Q5.} $w_{n+1} = 3 - v_{n+1} = 3 - \dfrac{v_n+3}{2} = \dfrac{6 - v_n - 3}{2} = \dfrac{3 - v_n}{2} = \dfrac{1}{2}w_n$. La suite $(w_n)$ est donc géométrique de raison $\dfrac12$ et de premier terme $w_0 = 3 - 1 = 2$. Ainsi $w_n = 2\left(\dfrac12\right)^n$, d'ou $v_n = 3 - 2\left(\dfrac12\right)^n$. Comme $-1 < \dfrac12 < 1$, $\left(\dfrac12\right)^n$ tend vers $0$ et $v_n$ tend vers $3$ : on retrouve bien la limite de Q4, cette fois par une formule explicite.
 \end{corrige}

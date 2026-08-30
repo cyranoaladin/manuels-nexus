@@ -8,7 +8,7 @@
 \begin{fichemethode}{M3}{Se ramener a un ajustement affine par changement de variable}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque le nuage $(x_i\,;\,y_i)$ n'est PAS allonge le
+  Utiliser cette méthode lorsque le nuage $(x_i\,;\,y_i)$ n'est PAS allonge le
   long d'une droite (croissance exponentielle, forme en racine...), mais qu'un
   changement de variable comme $z = \ln(y)$, $z = y^2$ ou $t = \ln(x)$ rend le
   nouveau nuage presque aligne.
@@ -16,48 +16,48 @@
 
 \pasApas{%
   \begin{enumerate}
-    \item Observer la forme du nuage et conjecturer un modele : croissance de
-      type exponentiel $\to$ poser $z = \ln(y)$ ; modele en racine
+    \item Observer la forme du nuage et conjecturer un modèle : croissance de
+      type exponentiel $\to$ poser $z = \ln(y)$ ; modèle en racine
       ($y = \sqrt{\dots}$) $\to$ poser $z = y^2$.
-    \item Calculer la nouvelle serie $(x_i\,;\,z_i)$ et verifier que son nuage
+    \item Calculer la nouvelle serie $(x_i\,;\,z_i)$ et vérifier que son nuage
       est sensiblement aligne.
-    \item Determiner la droite des moindres carres $z = ax + b$ (fiche M2).
+    \item Déterminer la droite des moindres carres $z = ax + b$ (fiche M2).
     \item Revenir a la variable d'origine en inversant le changement :
       si $z = \ln(y)$, alors $y = e^{z} = e^{b}\,e^{ax}$.
-    \item Controler le modele final sur une ou deux valeurs observees.
+    \item Contrôler le modèle final sur une ou deux valeurs observees.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Un phenomene suit le modele $y = 2\,e^{x/2}$. Montrer qu'un changement de
+  Un phénomène suit le modèle $y = 2\,e^{x/2}$. Montrer qu'un changement de
   variable le ramene a un ajustement affine.
 
   \medskip
   \commentaireMarge{$\ln$ transforme produit en somme.}%
   Posons $z = \ln(y)$. Alors
   $z = \ln\!\left(2\,e^{x/2}\right) = \ln 2 + \dfrac{x}{2}$ :
-  $z$ est une fonction AFFINE de $x$, de pente $a = \dfrac{1}{2}$ et d'ordonnee
+  $z$ est une fonction AFFINE de $x$, de pente $a = \dfrac{1}{2}$ et d'ordonnée
   a l'origine $b = \ln 2$.
 
   \medskip
   Reciproquement, a partir d'un ajustement $z = 0{,}5x + b$ obtenu sur les
-  donnees, on retrouve $y = e^{b}\,e^{0{,}5x}$ : un modele exponentiel.
+  donnees, on retrouve $y = e^{b}\,e^{0{,}5x}$ : un modèle exponentiel.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Appliquer $\ln$ a des valeurs negatives ou nulles :
+    \item \textbf{Piège 1.} Appliquer $\ln$ a des valeurs négatives ou nulles :
       le changement $z = \ln(y)$ exige $y > 0$.
-    \item \textbf{Piege 2.} Oublier de REVENIR a la variable d'origine : la
+    \item \textbf{Piège 2.} Oublier de REVENIR a la variable d'origine : la
       reponse finale doit exprimer $y$ en fonction de $x$.
-    \item \textbf{Piege 3.} Ecrire $e^{ax+b} = e^{ax} + e^{b}$ : c'est un
+    \item \textbf{Piège 3.} Écrire $e^{ax+b} = e^{ax} + e^{b}$ : c'est un
       produit, $e^{ax+b} = e^{b}\,e^{ax}$.
   \end{itemize}
 }
 
 \verifier{%
-  Controler l'alignement du nuage transforme (ou un $r$ proche de $\pm 1$), puis
-  substituer une valeur observee dans le modele final pour verifier la coherence.
+  Contrôler l'alignement du nuage transforme (ou un $r$ proche de $\pm 1$), puis
+  substituer une valeur observee dans le modèle final pour vérifier la cohérence.
 }
 
 \sEntrainer{\refExos{M3}}

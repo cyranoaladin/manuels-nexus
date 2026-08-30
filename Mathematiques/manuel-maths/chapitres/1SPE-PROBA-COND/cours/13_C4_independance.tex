@@ -1,56 +1,56 @@
 % META: {"id": "1SPE-PROBCOND-CR-013", "chapitre": "1SPE-PROBA-COND", "type_objet": "cours", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
 
-\section{Independance de deux evenements}
+\section{Indépendance de deux événements}
 
 % ============================================================
-% STRATE 1 --- Definition
+% STRATE 1 --- Définition
 % ============================================================
 
 \definition[1]{
-Deux evenements $A$ et $B$ sont \textbf{independants} si et seulement si :
+Deux événements $A$ et $B$ sont \textbf{indépendants} si et seulement si :
 \[
   P(A \cap B) = P(A) \times P(B).
 \]
 }
 
 \propriete[1]{
-Si $P(A) > 0$, alors $A$ et $B$ sont independants si et seulement si :
+Si $P(A) > 0$, alors $A$ et $B$ sont indépendants si et seulement si :
 \[
   P_A(B) = P(B).
 \]
 
-Autrement dit, la realisation de $A$ ne modifie pas la probabilite de $B$.
+Autrement dit, la realisation de $A$ ne modifie pas la probabilité de $B$.
 }
 
 \exemple{
-On lance un de equilibre a six faces. On note $A$ : << le resultat est pair >> et $B$ : << le resultat est superieur ou egal a 5 >>.
+On lance un de équilibré a six faces. On note $A$ : << le résultat est pair >> et $B$ : << le résultat est superieur ou égal a 5 >>.
 
 $P(A) = \dfrac{3}{6} = \dfrac{1}{2}$, \quad $P(B) = \dfrac{2}{6} = \dfrac{1}{3}$, \quad $A \cap B = \{6\}$ donc $P(A \cap B) = \dfrac{1}{6}$.
 
 $P(A) \times P(B) = \dfrac{1}{2} \times \dfrac{1}{3} = \dfrac{1}{6} = P(A \cap B)$.
 
-Les evenements $A$ et $B$ sont independants.
+Les événements $A$ et $B$ sont indépendants.
 }
 
 \contreexemple{
-\textbf{Independance $
+\textbf{Indépendance $
 \neq$ incompatibilite !}
 
-Deux evenements incompatibles ($A \cap B = \varnothing$) ont $P(A \cap B) = 0$. Ils ne sont independants que si $P(A) = 0$ ou $P(B) = 0$.
+Deux événements incompatibles ($A \cap B = \varnothing$) ont $P(A \cap B) = 0$. Ils ne sont indépendants que si $P(A) = 0$ ou $P(B) = 0$.
 
-Deux evenements incompatibles de probabilites non nulles ne sont \textbf{jamais} independants.
+Deux événements incompatibles de probabilités non nulles ne sont \textbf{jamais} indépendants.
 }
 
 % ============================================================
-% STRATE 2 --- Proprietes
+% STRATE 2 --- Propriétés
 % ============================================================
 
 \propriete[2]{
-Si $A$ et $B$ sont independants, alors :
+Si $A$ et $B$ sont indépendants, alors :
 \begin{itemize}
-  \item $A$ et $\overline{B}$ sont independants ;
-  \item $\overline{A}$ et $B$ sont independants ;
-  \item $\overline{A}$ et $\overline{B}$ sont independants.
+  \item $A$ et $\overline{B}$ sont indépendants ;
+  \item $\overline{A}$ et $B$ sont indépendants ;
+  \item $\overline{A}$ et $\overline{B}$ sont indépendants.
 \end{itemize}
 }
 
@@ -59,7 +59,7 @@ On tire une carte dans un jeu de 52. On note $A$ : << la carte est rouge >> ($P(
 
 $P(A \cap B) = \dfrac{2}{52} = \dfrac{1}{26}$ (deux as rouges).
 
-$P(A) \times P(B) = \dfrac{1}{2} \times \dfrac{1}{13} = \dfrac{1}{26}$. Donc $A$ et $B$ sont independants.
+$P(A) \times P(B) = \dfrac{1}{2} \times \dfrac{1}{13} = \dfrac{1}{26}$. Donc $A$ et $B$ sont indépendants.
 
-Verification : $P(A \cap \overline{B}) = \dfrac{24}{52} = \dfrac{12}{26}$ et $P(A) \times P(\overline{B}) = \dfrac{1}{2} \times \dfrac{12}{13} = \dfrac{12}{26}$. \checkmark
+Vérification : $P(A \cap \overline{B}) = \dfrac{24}{52} = \dfrac{12}{26}$ et $P(A) \times P(\overline{B}) = \dfrac{1}{2} \times \dfrac{12}{13} = \dfrac{12}{26}$. \checkmark
 }

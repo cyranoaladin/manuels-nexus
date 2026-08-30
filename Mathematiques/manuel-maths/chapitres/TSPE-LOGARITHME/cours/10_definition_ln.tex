@@ -3,13 +3,13 @@
 \section{Définition et équation fonctionnelle du logarithme népérien}
 
 % ============================================================
-% STRATE 1 — Definition et propriete fondamentale
+% STRATE 1 — Définition et propriété fondamentale
 % ============================================================
 
 \definition[1]{
-Pour tout reel $x > 0$, il existe un unique reel $y$ tel que $\mathrm{e}^y = x$. Ce reel $y$ est appele \textbf{logarithme neperien} de $x$, note $\ln x$.
+Pour tout réel $x > 0$, il existe un unique réel $y$ tel que $\mathrm{e}^y = x$. Ce réel $y$ est appele \textbf{logarithme neperien} de $x$, note $\ln x$.
 
-Autrement dit, la fonction $\ln$ est la fonction reciproque de la fonction exponentielle : pour $x>0$ et $y \in \mathbb{R}$,
+Autrement dit, la fonction $\ln$ est la fonction réciproque de la fonction exponentielle : pour $x>0$ et $y \in \mathbb{R}$,
 \[
   y = \ln x \iff x = \mathrm{e}^y.
 \]
@@ -30,16 +30,16 @@ En particulier $\ln 1 = 0$ et $\ln \mathrm{e} = 1$.
 % END-VERIFY
 
 \theoreme[Équation fonctionnelle]{
-Pour tous reels $a > 0$ et $b > 0$ :
+Pour tous réels $a > 0$ et $b > 0$ :
 \[
   \ln(ab) = \ln a + \ln b.
 \]
 }
 
 \demonstration{
-Posons $A = \ln a$ et $B = \ln b$, de sorte que $a = \mathrm{e}^A$ et $b = \mathrm{e}^B$. Alors $ab = \mathrm{e}^A \times \mathrm{e}^B = \mathrm{e}^{A+B}$ (regle sur l'exponentielle d'une somme).
+Posons $A = \ln a$ et $B = \ln b$, de sorte que $a = \mathrm{e}^A$ et $b = \mathrm{e}^B$. Alors $ab = \mathrm{e}^A \times \mathrm{e}^B = \mathrm{e}^{A+B}$ (règle sur l'exponentielle d'une somme).
 
-Par definition du logarithme, $\ln(ab) = A + B = \ln a + \ln b$.
+Par définition du logarithme, $\ln(ab) = A + B = \ln a + \ln b$.
 }
 
 \propriete[Conséquences]{
@@ -62,7 +62,7 @@ Pour $a, b > 0$ et $n \in \mathbb{Z}$ :
 % END-VERIFY
 
 \margeAppui{
-Cette equation fonctionnelle transforme un produit en somme : c'est l'interet historique et pratique du logarithme (calculs, echelles logarithmiques en sciences).
+Cette équation fonctionnelle transforme un produit en somme : c'est l'intérêt historique et pratique du logarithme (calculs, echelles logarithmiques en sciences).
 }
 
 % ============================================================
@@ -70,10 +70,10 @@ Cette equation fonctionnelle transforme un produit en somme : c'est l'interet hi
 % ============================================================
 
 \erreurFrequente{
-\textbf{Ecrire $\ln(a+b) = \ln a + \ln b$.} C'est faux : l'equation fonctionnelle porte sur le \emph{produit}, pas sur la somme. En general $\ln(a+b)
+\textbf{Écrire $\ln(a+b) = \ln a + \ln b$.} C'est faux : l'équation fonctionnelle porte sur le \emph{produit}, pas sur la somme. En general $\ln(a+b)
 \neq \ln a + \ln b$.
 }
 
 \erreurFrequente{
-\textbf{Oublier le domaine de definition.} $\ln x$ n'est defini que pour $x > 0$. Avant d'ecrire $\ln(f(x))$, il faut toujours verifier que $f(x) > 0$.
+\textbf{Oublier le domaine de définition.} $\ln x$ n'est défini que pour $x > 0$. Avant d'écrire $\ln(f(x))$, il faut toujours vérifier que $f(x) > 0$.
 }

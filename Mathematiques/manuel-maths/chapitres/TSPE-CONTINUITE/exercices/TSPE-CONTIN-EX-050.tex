@@ -12,21 +12,21 @@
 %     assert max(vals) < 1
 % END-VERIFY
 \begin{exercice}{TSPE-CONTIN-EX-050}{3}{20}
-On demontre ici un theoreme general qui englobe la plupart des exercices du chapitre.
+On démontré ici un théorème general qui englobe la plupart des exercices du chapitre.
 
-\textbf{Theoreme.} \emph{Soit $I$ un intervalle ferme et $f$ une fonction derivable sur $I$ telle que :}
+\textbf{Théorème.} \emph{Soit $I$ un intervalle ferme et $f$ une fonction dérivable sur $I$ telle que :}
 \begin{itemize}
   \item \emph{$f(I) \subset I$ (l'intervalle est stable) ;}
   \item \emph{il existe $k \in \left[0\,;1\right[$ tel que $\left|f'(x)\right| \leq k$ pour tout $x \in I$.}
 \end{itemize}
-\emph{Alors $f$ admet dans $I$ un unique point fixe $\ell$, et toute suite definie par $u_0 \in I$ et $u_{n+1} = f(u_n)$ converge vers $\ell$.}
+\emph{Alors $f$ admet dans $I$ un unique point fixe $\ell$, et toute suite définie par $u_0 \in I$ et $u_{n+1} = f(u_n)$ converge vers $\ell$.}
 
 \begin{enumerate}
-  \item Demontrer l'\emph{existence} d'un point fixe. On pourra utiliser la fonction $g(x) = f(x) - x$ et le theoreme des valeurs intermediaires sur $I = [\alpha\,;\beta]$.
-  \item Demontrer l'\emph{unicite} : supposer deux points fixes $\ell_1
-\neq \ell_2$ et utiliser l'inegalite des accroissements finis pour aboutir a une contradiction.
-  \item Demontrer la \emph{convergence} : etablir $\left|u_n - \ell\right| \leq k^{\,n}\left|u_0 - \ell\right|$ puis conclure.
-  \item Verifier que les hypotheses sont satisfaites pour $f(x) = \sqrt{x+2}$ sur $[0\,;3]$, pour $f(x) = \dfrac{x+3}{2}$ sur $[1\,;3]$ et pour $f(x) = \dfrac{1}{1+x}$ sur $\left[\dfrac12\,;1\right]$. Preciser un $k$ dans chaque cas.
-  \item L'hypothese $k < 1$ est-elle indispensable ? Etudier le cas $f(x) = \dfrac{x^2}{4} + 1$ sur $[0\,;2]$ de l'exercice \textsc{ex-044} : que vaut $f'(2)$, et le theoreme s'applique-t-il ?
+  \item Démontrer l'\emph{existence} d'un point fixe. On pourra utiliser la fonction $g(x) = f(x) - x$ et le théorème des valeurs intermediaires sur $I = [\alpha\,;\beta]$.
+  \item Démontrer l'\emph{unicite} : supposer deux points fixes $\ell_1
+\neq \ell_2$ et utiliser l'inégalité des accroissements finis pour aboutir a une contradiction.
+  \item Démontrer la \emph{convergence} : etablir $\left|u_n - \ell\right| \leq k^{\,n}\left|u_0 - \ell\right|$ puis conclure.
+  \item Vérifier que les hypothèses sont satisfaites pour $f(x) = \sqrt{x+2}$ sur $[0\,;3]$, pour $f(x) = \dfrac{x+3}{2}$ sur $[1\,;3]$ et pour $f(x) = \dfrac{1}{1+x}$ sur $\left[\dfrac12\,;1\right]$. Preciser un $k$ dans chaque cas.
+  \item L'hypothèse $k < 1$ est-elle indispensable ? Étudier le cas $f(x) = \dfrac{x^2}{4} + 1$ sur $[0\,;2]$ de l'exercice \textsc{ex-044} : que vaut $f'(2)$, et le théorème s'applique-t-il ?
 \end{enumerate}
 \end{exercice}

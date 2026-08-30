@@ -3,11 +3,11 @@
 \section{Convergence et divergence d'une suite}
 
 % ============================================================
-% STRATE 1 — Definitions formelles
+% STRATE 1 — Définitions formelles
 % ============================================================
 
 \definition[1]{
-Soit $(u_n)$ une suite reelle. On dit que $(u_n)$ \textbf{converge} vers un reel $\ell$ si, pour tout $\varepsilon > 0$, il existe un rang $N \in \mathbb{N}$ tel que, pour tout $n \geq N$,
+Soit $(u_n)$ une suite réelle. On dit que $(u_n)$ \textbf{converge} vers un réel $\ell$ si, pour tout $\varepsilon > 0$, il existe un rang $N \in \mathbb{N}$ tel que, pour tout $n \geq N$,
 \[
   |u_n - \ell| \leq \varepsilon.
 \]
@@ -15,7 +15,7 @@ On note $\lim_{n \to +\infty} u_n = \ell$ et on dit que $\ell$ est la \textbf{li
 }
 
 \exemple{
-Soit $(u_n)$ la suite definie par $u_n = \dfrac{1}{n+1}$ pour $n \in \mathbb{N}$.
+Soit $(u_n)$ la suite définie par $u_n = \dfrac{1}{n+1}$ pour $n \in \mathbb{N}$.
 
 Pour tout $\varepsilon > 0$, on cherche $N$ tel que pour tout $n \geq N$, $\left|\dfrac{1}{n+1} - 0\right| \leq \varepsilon$.
 
@@ -25,7 +25,7 @@ Il suffit de choisir $N = \left\lfloor \dfrac{1}{\varepsilon} \right\rfloor$. Do
 }
 
 \definition[2]{
-On dit que $(u_n)$ \textbf{diverge vers $+\infty$} si, pour tout reel $A > 0$, il existe un rang $N \in \mathbb{N}$ tel que, pour tout $n \geq N$,
+On dit que $(u_n)$ \textbf{diverge vers $+\infty$} si, pour tout réel $A > 0$, il existe un rang $N \in \mathbb{N}$ tel que, pour tout $n \geq N$,
 \[
   u_n \geq A.
 \]
@@ -33,7 +33,7 @@ On note $\lim_{n \to +\infty} u_n = +\infty$.
 }
 
 \definition[3]{
-On dit que $(u_n)$ \textbf{diverge vers $-\infty$} si, pour tout reel $A < 0$, il existe un rang $N \in \mathbb{N}$ tel que, pour tout $n \geq N$,
+On dit que $(u_n)$ \textbf{diverge vers $-\infty$} si, pour tout réel $A < 0$, il existe un rang $N \in \mathbb{N}$ tel que, pour tout $n \geq N$,
 \[
   u_n \leq A.
 \]
@@ -41,7 +41,7 @@ On note $\lim_{n \to +\infty} u_n = -\infty$.
 }
 
 \exemple{
-La suite $(u_n)$ definie par $u_n = n^2$ diverge vers $+\infty$.
+La suite $(u_n)$ définie par $u_n = n^2$ diverge vers $+\infty$.
 
 En effet, pour tout $A > 0$, on a $u_n = n^2 \geq A$ des que $n \geq \lceil\sqrt{A}\rceil$. Il suffit de poser $N = \lceil\sqrt{A}\rceil$.
 }
@@ -51,16 +51,16 @@ On dit qu'une suite \textbf{diverge} si elle ne converge pas. Elle peut diverger
 }
 
 \exemple{
-La suite $(u_n)$ definie par $u_n = (-1)^n$ est divergente sans limite.
+La suite $(u_n)$ définie par $u_n = (-1)^n$ est divergente sans limite.
 
-En effet, les termes alternent entre $1$ et $-1$ : la suite ne se rapproche d'aucun reel fixe, et ne tend ni vers $+\infty$ ni vers $-\infty$.
+En effet, les termes alternent entre $1$ et $-1$ : la suite ne se rapproche d'aucun réel fixe, et ne tend ni vers $+\infty$ ni vers $-\infty$.
 }
 
 % ============================================================
-% Operations sur les limites
+% Opérations sur les limites
 % ============================================================
 
-\subsection{Operations sur les limites}
+\subsection{Opérations sur les limites}
 
 \propriete{
 Soit $(u_n)$ et $(v_n)$ deux suites convergentes, avec $\lim u_n = \ell$ et $\lim v_n = \ell'$. Alors :
@@ -81,11 +81,11 @@ Si $\lim u_n = +\infty$ et $\lim v_n = +\infty$, alors $\lim (u_n + v_n) = +\inf
 }
 
 \erreurFrequente{
-Certaines combinaisons conduisent a des \textbf{formes indeterminees}. Il n'y a pas de regle generale pour :
+Certaines combinaisons conduisent a des \textbf{formes indeterminees}. Il n'y a pas de règle generale pour :
 \[
   +\infty - \infty, \qquad 0 \times \infty, \qquad \frac{\infty}{\infty}, \qquad \frac{0}{0}.
 \]
-Dans ces cas, il faut une etude specifique (factorisation, encadrement, suite auxiliaire, etc.).
+Dans ces cas, il faut une étude specifique (factorisation, encadrement, suite auxiliaire, etc.).
 }
 
 \subsection{Unicite de la limite}
@@ -99,7 +99,7 @@ Si une suite converge, sa limite est unique.
 % ============================================================
 
 \margeAppui{
-\textbf{Convergence :} les termes finissent par rester « arbitrairement proches » du reel $\ell$.
+\textbf{Convergence :} les termes finissent par rester « arbitrairement proches » du réel $\ell$.
 
 \textbf{Divergence vers $+\infty$ :} les termes finissent par depasser tout seuil fixe a l'avance.
 
@@ -109,7 +109,7 @@ Si une suite converge, sa limite est unique.
 \erreurFrequente{
 \textbf{Confondre « la suite croit » et « la suite diverge vers $+\infty$ ».}
 
-La suite $u_n = 1 - \dfrac{1}{n+1}$ est croissante, mais elle converge vers $1$ (elle est majoree par $1$). Une suite croissante ne diverge vers $+\infty$ que si elle n'est pas majoree.
+La suite $u_n = 1 - \dfrac{1}{n+1}$ est croissante, mais elle converge vers $1$ (elle est majorée par $1$). Une suite croissante ne diverge vers $+\infty$ que si elle n'est pas majorée.
 }
 
 \erreurFrequente{
@@ -123,5 +123,5 @@ La suite $u_n = n - n = 0$ a une limite evidente ($0$), mais $v_n = n^2 - n = n(
 % ============================================================
 
 \approfondissement{
-\textbf{Suites de Cauchy.} Une suite $(u_n)$ de reels est dite de Cauchy si, pour tout $\varepsilon > 0$, il existe $N$ tel que pour tous $p, q \geq N$, $|u_p - u_q| \leq \varepsilon$. Dans $\mathbb{R}$, une suite est convergente si et seulement si elle est de Cauchy (completude de $\mathbb{R}$).
+\textbf{Suites de Cauchy.} Une suite $(u_n)$ de réels est dite de Cauchy si, pour tout $\varepsilon > 0$, il existe $N$ tel que pour tous $p, q \geq N$, $|u_p - u_q| \leq \varepsilon$. Dans $\mathbb{R}$, une suite est convergente si et seulement si elle est de Cauchy (completude de $\mathbb{R}$).
 }

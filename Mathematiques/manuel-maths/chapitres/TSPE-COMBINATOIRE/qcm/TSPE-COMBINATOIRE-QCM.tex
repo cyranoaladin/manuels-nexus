@@ -11,7 +11,7 @@
 
 \item[] \textbf{Capacité C2}
 
-\item \textbf{[Q1]} Le nombre de k-listes d'un ensemble a n elements est :
+\item \textbf{[Q1]} Le nombre de k-listes d'un ensemble a n éléments est :
   \begin{enumerate}[label=\Alph*.]
     \item $n^k$
     \item $k^n$
@@ -29,17 +29,17 @@
 
 \item[] \textbf{Capacité C1}
 
-\item \textbf{[Q3]} Un choix se fait en trois etapes offrant successivement $2$, $3$ puis $4$ possibilites. Quelle demarche represente correctement le denombrement ?
+\item \textbf{[Q3]} Un choix se fait en trois étapes offrant successivement $2$, $3$ puis $4$ possibilites. Quelle demarche représente correctement le denombrement ?
   \begin{enumerate}[label=\Alph*.]
     \item Additionner les branches : $2+3+4=9$
     \item Utiliser un arbre et le principe multiplicatif : $2\times3\times4=24$
-    \item Choisir trois elements parmi quatre : $\binom{4}{3}=4$
+    \item Choisir trois éléments parmi quatre : $\binom{4}{3}=4$
     \item Permuter les quatre possibilites finales : $4!=24$
   \end{enumerate}
 
 \item[] \textbf{Capacité C3}
 
-\item \textbf{[Q4]} Quelle egalite traduit le denombrement de toutes les parties d'un ensemble a $n$ elements selon leur cardinal ?
+\item \textbf{[Q4]} Quelle égalité traduit le denombrement de toutes les parties d'un ensemble a $n$ éléments selon leur cardinal ?
   \begin{enumerate}[label=\Alph*.]
     \item $\displaystyle\sum_{k=0}^{n} \binom{n}{k}=2^n$
     \item $\displaystyle\sum_{k=0}^{n} \binom{n}{k}=n$
@@ -84,25 +84,25 @@ Q5 & C4 & \textbf{D} \\
   \item \textbf{Q1}
   \begin{itemize}
     \item \textbf{B} — Le choix $k^n$ attribue $k$ possibilites a chacune de $n$ positions ; une $k$-liste comporte au contraire $k$ positions ayant chacune $n$ choix. \emph{Renvoi : C2.}
-    \item \textbf{C} — Le nombre $n!$ compte les permutations des $n$ elements utilises chacun une fois ; une $k$-liste autorise $n$ choix a chacune de ses $k$ positions. \emph{Renvoi : C2.}
-    \item \textbf{D} — Le coefficient $\binom{n}{k}$ choisit $k$ elements distincts sans ordre ; une $k$-liste est ordonnee et autorise les repetitions, d'ou $n^k$. \emph{Renvoi : C2.}
+    \item \textbf{C} — Le nombre $n!$ compte les permutations des $n$ éléments utilises chacun une fois ; une $k$-liste autorise $n$ choix a chacune de ses $k$ positions. \emph{Renvoi : C2.}
+    \item \textbf{D} — Le coefficient $\binom{n}{k}$ choisit $k$ éléments distincts sans ordre ; une $k$-liste est ordonnée et autorise les repetitions, d'ou $n^k$. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Le nombre $n^k$ conserve $n$ choix a chaque position et autorise donc les repetitions ; un arrangement sans repetition retire un choix a chaque etape. \emph{Renvoi : C2.}
-    \item \textbf{B} — Le denominateur $k!$ ne retire pas les $n-k$ facteurs inutilises ; une k-liste sans repetition conserve exactement $n!/(n-k)!$. \emph{Renvoi : C2.}
-    \item \textbf{D} — Le coefficient $\binom{n}{k}$ oublie l'ordre des $k$ elements choisis ; chaque combinaison produit $k!$ arrangements distincts. \emph{Renvoi : C2.}
+    \item \textbf{A} — Le nombre $n^k$ conserve $n$ choix a chaque position et autorise donc les repetitions ; un arrangement sans repetition retire un choix a chaque étape. \emph{Renvoi : C2.}
+    \item \textbf{B} — Le dénominateur $k!$ ne retire pas les $n-k$ facteurs inutilises ; une k-liste sans repetition conserve exactement $n!/(n-k)!$. \emph{Renvoi : C2.}
+    \item \textbf{D} — Le coefficient $\binom{n}{k}$ oublie l'ordre des $k$ éléments choisis ; chaque combinaison produit $k!$ arrangements distincts. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
     \item \textbf{A} — Le principe additif convient a des cas disjoints alternatifs ; ici chaque choix du premier niveau se combine avec les choix suivants. \emph{Renvoi : C1.}
-    \item \textbf{C} — La combinaison $\binom{4}{3}$ choisirait un sous-ensemble sans ordre ; elle ne represente pas trois etapes successives de tailles differentes. \emph{Renvoi : C1.}
-    \item \textbf{D} — Le nombre $4!$ correspond aux permutations de quatre objets distincts ; son egalite numerique a $24$ est fortuite et le modele est inadapte. \emph{Renvoi : C1.}
+    \item \textbf{C} — La combinaison $\binom{4}{3}$ choisirait un sous-ensemble sans ordre ; elle ne représente pas trois étapes successives de tailles différentes. \emph{Renvoi : C1.}
+    \item \textbf{D} — Le nombre $4!$ correspond aux permutations de quatre objets distincts ; son égalité numérique a $24$ est fortuite et le modèle est inadapte. \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{B} — La somme compte toutes les parties, pas seulement les $n$ singletons ; un ensemble a $n$ elements possede $2^n$ parties. \emph{Renvoi : C3.}
-    \item \textbf{C} — Les classes de parties de cardinal $k$ sont disjointes et doivent etre additionnees ; leur produit ne denombre pas leur reunion. \emph{Renvoi : C3.}
+    \item \textbf{B} — La somme compte toutes les parties, pas seulement les $n$ singletons ; un ensemble a $n$ éléments possede $2^n$ parties. \emph{Renvoi : C3.}
+    \item \textbf{C} — Les classes de parties de cardinal $k$ sont disjointes et doivent être additionnees ; leur produit ne denombre pas leur reunion. \emph{Renvoi : C3.}
     \item \textbf{D} — La somme $1+\cdots+n$ ne fait intervenir aucun coefficient binomial et vaut $n(n+1)/2$, pas $n!$ en general. \emph{Renvoi : C3.}
   \end{itemize}
   \item \textbf{Q5}
