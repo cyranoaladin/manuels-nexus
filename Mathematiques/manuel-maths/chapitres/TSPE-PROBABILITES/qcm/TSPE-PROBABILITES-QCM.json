@@ -7,14 +7,14 @@
       "capacite": "C5",
       "enonce": "Si X suit B(n,p), alors P(X=k) vaut :",
       "options": {
-        "A": "p^k (1-p)^(n-k)",
-        "B": "C(n,k) p^k (1-p)^(n-k)",
+        "A": "C(n,k) p^k (1-p)^(n-k)",
+        "B": "p^k (1-p)^(n-k)",
         "C": "C(n,k) p^k",
         "D": "np^k"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Cette expression donne la probabilité d'une configuration précise de $k$ succès ; elle oublie les $C(n,k)$ positions possibles des succès.",
           "renvoi": "C5"
         },
@@ -56,14 +56,14 @@
       "capacite": "C7",
       "enonce": "La linéarité de l'espérance E(X+Y)=E(X)+E(Y) est valable :",
       "options": {
-        "A": "uniquement si X et Y sont indépendantes",
-        "B": "toujours, sans condition d'independence",
+        "A": "toujours, sans condition d'independence",
+        "B": "uniquement si X et Y sont indépendantes",
         "C": "uniquement si X=Y",
         "D": "jamais"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "L'indépendance est requise pour additionner les variances, pas pour la linéarité de l'espérance de variables integrables."
         },
         "C": {
@@ -79,14 +79,14 @@
       "capacite": "C8",
       "enonce": "L'additivite de la variance V(X+Y)=V(X)+V(Y) est garantie lorsque :",
       "options": {
-        "A": "que X et Y soient indépendantes",
-        "B": "que X=Y",
+        "A": "que X=Y",
+        "B": "que X et Y soient indépendantes",
         "C": "rien de particulier",
         "D": "que E(X)=E(Y)"
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
+        "A": {
           "erreur": "Si $X=Y$, alors $V(X+Y)=V(2X)=4V(X)$, tandis que $V(X)+V(Y)=2V(X)$ : l'égalité n'est donc pas garantie."
         },
         "C": {
@@ -103,16 +103,16 @@
       "enonce": "Pour X ~ B(n,p), V(X) vaut :",
       "options": {
         "A": "np",
-        "B": "np(1-p)",
-        "C": "n(1-p)",
+        "B": "n(1-p)",
+        "C": "np(1-p)",
         "D": "p(1-p)"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Le produit $np$ est l'espérance de la loi binomiale ; la variance comporte aussi le facteur de dispersion $1-p$."
         },
-        "C": {
+        "B": {
           "erreur": "L'expression $n(1-p)$ oublie le facteur $p$ associe aux succès ; chaque indicatrice de Bernoulli a pour variance $p(1-p)$."
         },
         "D": {
@@ -125,21 +125,21 @@
       "capacite": "C10",
       "enonce": "L'inégalité de Bienayme-Tchebychev majoré :",
       "options": {
-        "A": "P(|Y-mu|>=delta)",
+        "A": "P(Y=mu)",
         "B": "E(Y)",
         "C": "V(Y)",
-        "D": "P(Y=mu)"
+        "D": "P(|Y-mu|>=delta)"
       },
-      "correcte": "A",
+      "correcte": "D",
       "diagnostics": {
+        "A": {
+          "erreur": "Bienayme-Tchebychev concerne l'événement $|Y-\\mu|\\geq\\delta$, pas la probabilité ponctuelle que $Y$ soit exactement égal a $\\mu$."
+        },
         "B": {
           "erreur": "L'espérance $E(Y)$ est le centre de l'événement de deviation ; l'inégalité ne cherche pas a majorer cette valeur."
         },
         "C": {
           "erreur": "La variance intervient dans le majorant $V(Y)/\\delta^2$, mais la quantité majorée est la probabilité d'un ecart a la moyenne."
-        },
-        "D": {
-          "erreur": "Bienayme-Tchebychev concerne l'événement $|Y-\\mu|\\geq\\delta$, pas la probabilité ponctuelle que $Y$ soit exactement égal a $\\mu$."
         }
       }
     }

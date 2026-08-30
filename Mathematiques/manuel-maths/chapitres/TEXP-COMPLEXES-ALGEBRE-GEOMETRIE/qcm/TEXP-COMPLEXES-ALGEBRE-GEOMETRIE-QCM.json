@@ -6,20 +6,20 @@
       "id": "Q1",
       "capacite": "C1",
       "enonce": "La forme algébrique de $(1+i)^2$ est :",
-      "correcte": "C",
+      "correcte": "A",
       "options": {
-        "A": "2",
+        "A": "2i",
         "B": "-2",
-        "C": "2i",
+        "C": "2",
         "D": "-2i"
       },
       "diagnostics": {
-        "A": {
-          "erreur": "Choisir $2$ oublie que $i^2=-1$ annule les deux termes réels $1+i^2$ ; le développement donne $(1+i)^2=2i$.",
-          "renvoi": "C1"
-        },
         "B": {
           "erreur": "Choisir $-2$ conserve à tort une partie réelle négative ; comme $1+i^2=0$, le développement laisse uniquement le terme $2i$.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "Choisir $2$ oublie que $i^2=-1$ annule les deux termes réels $1+i^2$ ; le développement donne $(1+i)^2=2i$.",
           "renvoi": "C1"
         },
         "D": {
@@ -84,12 +84,12 @@
       "id": "Q4",
       "capacite": "C4",
       "enonce": "Un argument de $z = -1 + i$ est :",
-      "correcte": "D",
+      "correcte": "C",
       "options": {
         "A": "$\\pi/4$",
         "B": "$-\\pi/4$",
-        "C": "$-3\\pi/4$",
-        "D": "$3\\pi/4$"
+        "C": "$3\\pi/4$",
+        "D": "$-3\\pi/4$"
       },
       "diagnostics": {
         "A": {
@@ -100,7 +100,7 @@
           "erreur": "Quatrieme quadrant. Le point (-1,1) est dans le deuxième quadrant et forme un angle 3pi/4 avec l'axe réel positif.",
           "renvoi": "C4"
         },
-        "C": {
+        "D": {
           "erreur": "Troisième quadrant. Le point (-1,1) est dans le deuxième quadrant et forme un angle 3pi/4 avec l'axe réel positif.",
           "renvoi": "C4"
         }

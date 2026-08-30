@@ -23,9 +23,9 @@
 
 \item \textbf{[Q2]} D'après la formule de Euler, $\cos(\theta) =$
   \begin{enumerate}[label=\Alph*.]
-    \item $\frac{e^{i\theta} - e^{-i\theta}}{2}$
-    \item $\frac{e^{i\theta} + e^{-i\theta}}{2i}$
     \item $\frac{e^{i\theta} + e^{-i\theta}}{2}$
+    \item $\frac{e^{i\theta} + e^{-i\theta}}{2i}$
+    \item $\frac{e^{i\theta} - e^{-i\theta}}{2}$
     \item $e^{i\theta} + e^{-i\theta}$
   \end{enumerate}
 
@@ -43,18 +43,18 @@
   \begin{enumerate}[label=\Alph*.]
     \item 1
     \item 2
-    \item n-1
     \item n
+    \item n-1
   \end{enumerate}
 
 \item[] \textbf{Capacité C5}
 
 \item \textbf{[Q5]} Si $P$ est un polynôme complexe et $P(a)=0$, alors :
   \begin{enumerate}[label=\Alph*.]
-    \item $z-a$ divise $P(z)$
+    \item $a$ est l'unique racine de $P$
     \item $z+a$ divise toujours $P(z)$
     \item $P$ est le polynôme nul
-    \item $a$ est l'unique racine de $P$
+    \item $z-a$ divise $P(z)$
   \end{enumerate}
 
 \end{enumerate}
@@ -70,10 +70,10 @@
 Question & Capacité & Réponse exacte \\
 \hline
 Q1 & C1 & \textbf{A} \\
-Q2 & C2 & \textbf{C} \\
+Q2 & C2 & \textbf{A} \\
 Q3 & C2 & \textbf{B} \\
-Q4 & C7 & \textbf{D} \\
-Q5 & C5 & \textbf{A} \\
+Q4 & C7 & \textbf{C} \\
+Q5 & C5 & \textbf{D} \\
 \hline
 \end{tabular}
 \end{center}
@@ -89,8 +89,8 @@ Q5 & C5 & \textbf{A} \\
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Formule de sin(theta) sans le i. En additionnant les formules d'Euler, cos(theta)=(exp(i theta)+exp(-i theta))/2. \emph{Renvoi : C2.}
     \item \textbf{B} — Facteur 2i au lieu de 2. En additionnant les formules d'Euler, cos(theta)=(exp(i theta)+exp(-i theta))/2. \emph{Renvoi : C2.}
+    \item \textbf{C} — Formule de sin(theta) sans le i. En additionnant les formules d'Euler, cos(theta)=(exp(i theta)+exp(-i theta))/2. \emph{Renvoi : C2.}
     \item \textbf{D} — Oubli de diviser par 2. En additionnant les formules d'Euler, cos(theta)=(exp(i theta)+exp(-i theta))/2. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q3}
@@ -103,13 +103,13 @@ Q5 & C5 & \textbf{A} \\
   \begin{itemize}
     \item \textbf{A} — Seule la racine 1 comptee dans R. L'équation z\textasciicircum{}n=1 possède exactement les n solutions exp(2ikpi/n), pour k de 0 à n-1. \emph{Renvoi : C7.}
     \item \textbf{B} — Racines réelles uniquement. L'équation z\textasciicircum{}n=1 possède exactement les n solutions exp(2ikpi/n), pour k de 0 à n-1. \emph{Renvoi : C7.}
-    \item \textbf{C} — Compte incorrect. L'équation z\textasciicircum{}n=1 possède exactement les n solutions exp(2ikpi/n), pour k de 0 à n-1. \emph{Renvoi : C7.}
+    \item \textbf{D} — Compte incorrect. L'équation z\textasciicircum{}n=1 possède exactement les n solutions exp(2ikpi/n), pour k de 0 à n-1. \emph{Renvoi : C7.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
+    \item \textbf{A} — La factorisation par $z-a$ n'interdit pas d'autres facteurs et donc d'autres racines. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z). \emph{Renvoi : C5.}
     \item \textbf{B} — La racine $a$ fournit le facteur $z-a$ ; le facteur $z+a$ correspondrait à la racine $-a$. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z). \emph{Renvoi : C5.}
     \item \textbf{C} — Un polynôme non nul peut avoir des racines ; l'annulation en un point n'implique pas l'annulation identique. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z). \emph{Renvoi : C5.}
-    \item \textbf{D} — La factorisation par $z-a$ n'interdit pas d'autres facteurs et donc d'autres racines. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z). \emph{Renvoi : C5.}
   \end{itemize}
 \end{itemize}
 \fi

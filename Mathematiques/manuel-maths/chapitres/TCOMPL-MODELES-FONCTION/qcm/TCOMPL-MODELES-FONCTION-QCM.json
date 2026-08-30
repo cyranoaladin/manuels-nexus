@@ -6,15 +6,15 @@
       "id": "Q1",
       "capacite": "C1",
       "enonce": "La dérivée de $f(x) = e^{-x^2}$ est :",
-      "correcte": "B",
+      "correcte": "A",
       "options": {
-        "A": "$e^{-x^2}$",
-        "B": "$-2x e^{-x^2}$",
+        "A": "$-2x e^{-x^2}$",
+        "B": "$e^{-x^2}$",
         "C": "$2x e^{-x^2}$",
         "D": "$-x e^{-x^2}$"
       },
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Oubli de dériver l'interieur. Par la règle de chaîne, la dérivée de exp(-x^2) est -2x exp(-x^2).",
           "renvoi": "C1"
         },
@@ -32,20 +32,20 @@
       "id": "Q2",
       "capacite": "C5",
       "enonce": "Une fonction $f$ deux fois dérivable est convexe sur un intervalle $I$ si et seulement si sa dérivée seconde $f''$ est :",
-      "correcte": "C",
+      "correcte": "A",
       "options": {
-        "A": "Négative",
+        "A": "Positive ou nulle",
         "B": "Nulle",
-        "C": "Positive ou nulle",
+        "C": "Négative",
         "D": "Strictement décroissante"
       },
       "diagnostics": {
-        "A": {
-          "erreur": "Condition de concavité. Pour une fonction deux fois dérivable, la convexité équivaut à f''>=0 sur l'intervalle.",
-          "renvoi": "C5"
-        },
         "B": {
           "erreur": "Fonction affine. Pour une fonction deux fois dérivable, la convexité équivaut à f''>=0 sur l'intervalle.",
+          "renvoi": "C5"
+        },
+        "C": {
+          "erreur": "Condition de concavité. Pour une fonction deux fois dérivable, la convexité équivaut à f''>=0 sur l'intervalle.",
           "renvoi": "C5"
         },
         "D": {
@@ -58,15 +58,15 @@
       "id": "Q3",
       "capacite": "C4",
       "enonce": "Si $f''$ s'annule en $a$ et change de signe en $a$, alors le point $(a,f(a))$ est :",
-      "correcte": "A",
+      "correcte": "B",
       "options": {
-        "A": "$f''$ s'annule en changeant de signe",
-        "B": "$f'$ s'annule",
+        "A": "$f'$ s'annule",
+        "B": "$f''$ s'annule en changeant de signe",
         "C": "$f$ s'annule",
         "D": "$f''$ est maximale"
       },
       "diagnostics": {
-        "B": {
+        "A": {
           "erreur": "Extremum local de f, pas inflexion. Si f'' s'annule en a et change de signe, la convexité change et le point (a,f(a)) est un point d'inflexion.",
           "renvoi": "C4"
         },
@@ -84,12 +84,12 @@
       "id": "Q4",
       "capacite": "C1",
       "enonce": "La limite de $\\frac{e^x}{x}$ quand $x \\to +\\infty$ est par croissance comparee :",
-      "correcte": "D",
+      "correcte": "C",
       "options": {
         "A": "0",
         "B": "1",
-        "C": "e",
-        "D": "$+\\infty$"
+        "C": "$+\\infty$",
+        "D": "e"
       },
       "diagnostics": {
         "A": {
@@ -100,7 +100,7 @@
           "erreur": "Forme indeterminee non levee. L'exponentielle domine x à l'infini, donc exp(x)/x tend vers +infini.",
           "renvoi": "C1"
         },
-        "C": {
+        "D": {
           "erreur": "Valeur en x=1. L'exponentielle domine x à l'infini, donc exp(x)/x tend vers +infini.",
           "renvoi": "C1"
         }
@@ -110,24 +110,24 @@
       "id": "Q5",
       "capacite": "C1",
       "enonce": "Si $f(x) = \\ln(2x+1)$, la dérivée $f'(x)$ vaut :",
-      "correcte": "B",
+      "correcte": "D",
       "options": {
         "A": "$\\frac{1}{2x+1}$",
-        "B": "$\\frac{2}{2x+1}$",
+        "B": "$2 \\ln(2x+1)$",
         "C": "$\\frac{1}{x}$",
-        "D": "$2 \\ln(2x+1)$"
+        "D": "$\\frac{2}{2x+1}$"
       },
       "diagnostics": {
         "A": {
           "erreur": "Oubli de la dérivée de u(x) = 2x+1. Pour u=2x+1, la règle (ln u)'=u'/u donne 2/(2x+1) sur le domaine de définition.",
           "renvoi": "C1"
         },
-        "C": {
-          "erreur": "Simplification abusive. Pour u=2x+1, la règle (ln u)'=u'/u donne 2/(2x+1) sur le domaine de définition.",
+        "B": {
+          "erreur": "Multiplication au lieu de dérivation. Pour u=2x+1, la règle (ln u)'=u'/u donne 2/(2x+1) sur le domaine de définition.",
           "renvoi": "C1"
         },
-        "D": {
-          "erreur": "Multiplication au lieu de dérivation. Pour u=2x+1, la règle (ln u)'=u'/u donne 2/(2x+1) sur le domaine de définition.",
+        "C": {
+          "erreur": "Simplification abusive. Pour u=2x+1, la règle (ln u)'=u'/u donne 2/(2x+1) sur le domaine de définition.",
           "renvoi": "C1"
         }
       }

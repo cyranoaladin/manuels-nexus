@@ -7,14 +7,14 @@
       "capacite": "C1",
       "enonce": "La dérivée de $f(x) = \\mathrm{e}^{x^2}$ est :",
       "options": {
-        "A": "$\\mathrm{e}^{x^2}$",
-        "B": "$2x\\,\\mathrm{e}^{x^2}$",
+        "A": "$2x\\,\\mathrm{e}^{x^2}$",
+        "B": "$\\mathrm{e}^{x^2}$",
         "C": "$x\\,\\mathrm{e}^{x^2}$",
         "D": "$2\\,\\mathrm{e}^{x^2}$"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "La dérivée de l'exponentielle est conservee, mais la dérivée de la fonction interieure $x^2$ fournit aussi le facteur $2x$.",
           "renvoi": "C1"
         },
@@ -57,17 +57,17 @@
       "enonce": "La dérivée de $f(x) = (3x - 2)^4$ est :",
       "options": {
         "A": "$4(3x-2)^3$",
-        "B": "$12(3x-2)^3$",
-        "C": "$3(3x-2)^4$",
+        "B": "$3(3x-2)^4$",
+        "C": "$12(3x-2)^3$",
         "D": "$12(3x-2)^4$"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Le facteur extérieur $4$ est present, mais la dérivée de la fonction interieure $3x-2$ apporte aussi le facteur $3$.",
           "renvoi": "C1"
         },
-        "C": {
+        "B": {
           "erreur": "Le facteur $3$ vient de la dérivée de $3x-2$, mais la puissance doit diminuer de $4$ a $3$ et être multipliée par $4$.",
           "renvoi": "C1"
         },
@@ -106,16 +106,16 @@
       "enonce": "La limite de $f(x) = \\dfrac{\\ln x}{x}$ en $+\\infty$ est :",
       "options": {
         "A": "$+\\infty$",
-        "B": "$1$",
-        "C": "$0$",
+        "B": "$0$",
+        "C": "$1$",
         "D": "$-\\infty$"
       },
-      "correcte": "C",
+      "correcte": "B",
       "diagnostics": {
         "A": {
           "erreur": "Choisir $+\\infty$ ne compare que les divergences separees de $\\ln x$ et de $x$ ; le dénominateur croit plus vite et impose la limite nulle."
         },
-        "B": {
+        "C": {
           "erreur": "La valeur $1$ supposerait des croissances equivalentes ; or $\\ln x=o(x)$, donc leur quotient tend vers $0$."
         },
         "D": {
@@ -129,16 +129,16 @@
       "enonce": "La fonction $f(x) = x^3 - 3x$ admet comme extrema locaux :",
       "options": {
         "A": "un maximum local en $x = 1$ et un minimum local en $x = -1$",
-        "B": "un maximum local en $x = -1$ et un minimum local en $x = 1$",
-        "C": "un maximum local en $x = 0$",
+        "B": "un maximum local en $x = 0$",
+        "C": "un maximum local en $x = -1$ et un minimum local en $x = 1$",
         "D": "aucun extremum local"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Cette reponse inverse les deux extrema : $f'=3(x^2-1)$ est positive, puis négative, puis positive, donc le maximum est en $-1$."
         },
-        "C": {
+        "B": {
           "erreur": "Le point $0$ n'est pas critique puisque $f'(0)=-3$ ; il ne peut donc pas être le maximum local annonce."
         },
         "D": {
@@ -151,21 +151,21 @@
       "capacite": "C5",
       "enonce": "La fonction $f(x) = \\mathrm{e}^x$ est :",
       "options": {
-        "A": "convexe sur $\\mathbb{R}$",
+        "A": "ni convexe ni concave",
         "B": "concave sur $\\mathbb{R}$",
         "C": "convexe sur $\\mathbb{R}^+$ et concave sur $\\mathbb{R}^-$",
-        "D": "ni convexe ni concave"
+        "D": "convexe sur $\\mathbb{R}$"
       },
-      "correcte": "A",
+      "correcte": "D",
       "diagnostics": {
+        "A": {
+          "erreur": "La dérivée seconde $f''(x)=\\mathrm{e}^x$ est positive partout ; ce critere etablit directement la convexité sur $\\mathbb{R}$."
+        },
         "B": {
           "erreur": "La concavité exigerait $f''(x)\\leq 0$ ; ici $f''(x)=\\mathrm{e}^x>0$ sur tout $\\mathbb{R}$."
         },
         "C": {
           "erreur": "Le signe de $x$ ne change pas celui de $f''(x)=\\mathrm{e}^x$, qui reste strictement positif sur les deux demi-droites."
-        },
-        "D": {
-          "erreur": "La dérivée seconde $f''(x)=\\mathrm{e}^x$ est positive partout ; ce critere etablit directement la convexité sur $\\mathbb{R}$."
         }
       }
     },
@@ -174,18 +174,18 @@
       "capacite": "C3",
       "enonce": "L'inégalité $\\mathrm{e}^x \\geq 1 + x$ est valable :",
       "options": {
-        "A": "pour tout $x \\geq 0$",
+        "A": "pour tout $x \\in \\mathbb{R}$",
         "B": "pour tout $x \\leq 0$",
-        "C": "pour tout $x \\in \\mathbb{R}$",
+        "C": "pour tout $x \\geq 0$",
         "D": "seulement en $x = 0$"
       },
-      "correcte": "C",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
-          "erreur": "Restreindre l'inégalité a $x\\geq0$ oublie que la convexité de l'exponentielle place sa courbe au-dessus de la tangente en $0$ sur tout $\\mathbb{R}$."
-        },
         "B": {
           "erreur": "Restreindre l'inégalité a $x\\leq0$ oublie la même propriété de tangente, valable sur tout le domaine de l'exponentielle."
+        },
+        "C": {
+          "erreur": "Restreindre l'inégalité a $x\\geq0$ oublie que la convexité de l'exponentielle place sa courbe au-dessus de la tangente en $0$ sur tout $\\mathbb{R}$."
         },
         "D": {
           "erreur": "L'égalité a lieu en $x=0$, mais l'inégalité reste stricte pour tout $x\\neq0$ car l'exponentielle est strictement convexe."
@@ -220,18 +220,18 @@
       "capacite": "C4",
       "enonce": "Si $f''(x) > 0$ sur un intervalle $I$, alors la courbe de $f$ est :",
       "options": {
-        "A": "convexe (en forme de $\\cup$)",
+        "A": "croissante",
         "B": "concave (en forme de $\\cap$)",
-        "C": "croissante",
+        "C": "convexe (en forme de $\\cup$)",
         "D": "décroissante"
       },
-      "correcte": "A",
+      "correcte": "C",
       "diagnostics": {
+        "A": {
+          "erreur": "Le signe de $f''$ décrit la variation de $f'$ et la convexité, pas le signe de $f'$ nécessaire pour conclure que $f$ est croissante."
+        },
         "B": {
           "erreur": "La concavité correspond au signe oppose $f''\\leq0$ ; une dérivée seconde strictement positive caractérise ici la convexité."
-        },
-        "C": {
-          "erreur": "Le signe de $f''$ décrit la variation de $f'$ et la convexité, pas le signe de $f'$ nécessaire pour conclure que $f$ est croissante."
         },
         "D": {
           "erreur": "Une dérivée seconde positive n'impose pas $f'\\leq0$ ; elle rend $f'$ croissante et ne suffit pas a rendre $f$ décroissante."
@@ -244,23 +244,23 @@
       "enonce": "Un point d'inflexion est un point ou :",
       "options": {
         "A": "$f'(x) = 0$",
-        "B": "la convexité change au passage de ce point",
+        "B": "$f(x) = 0$",
         "C": "$f''(x) = 0$ seulement",
-        "D": "$f(x) = 0$"
+        "D": "la convexité change au passage de ce point"
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "$f'(x)=0$ caractérise un point critique lorsque $f$ est dérivable, pas un changement de convexité.",
           "renvoi": "cours C5, définition"
         },
+        "B": {
+          "erreur": "$f(x)=0$ indique une intersection avec l'axe des abscisses, sans information sur la convexité.",
+          "renvoi": "cours C5, définition"
+        },
         "C": {
           "erreur": "$f''(x)=0$ ne suffit pas : par exemple $f(x)=x^4$ vérifie $f''(0)=0$ sans changer de convexité en 0.",
           "renvoi": "cours C5, point d'inflexion"
-        },
-        "D": {
-          "erreur": "$f(x)=0$ indique une intersection avec l'axe des abscisses, sans information sur la convexité.",
-          "renvoi": "cours C5, définition"
         }
       }
     },
@@ -315,18 +315,18 @@
       "capacite": "C6",
       "enonce": "Si $f''(x) \\geq 0$ sur $I$, alors pour tout $a, x \\in I$ :",
       "options": {
-        "A": "$f(x) \\geq f(a) + f'(a)(x - a)$",
+        "A": "$f(x) = f(a) + f'(a)(x - a)$",
         "B": "$f(x) \\leq f(a) + f'(a)(x - a)$",
-        "C": "$f(x) = f(a) + f'(a)(x - a)$",
+        "C": "$f(x) \\geq f(a) + f'(a)(x - a)$",
         "D": "$f(x) \\geq f(a)$"
       },
-      "correcte": "A",
+      "correcte": "C",
       "diagnostics": {
+        "A": {
+          "erreur": "L'égalité avec la tangente pour tous $a,x$ caracteriserait une fonction affine ; la convexité ne donne qu'une inégalité."
+        },
         "B": {
           "erreur": "Le sens $\\leq$ correspondrait a une fonction concave ; une fonction convexe reste au-dessus de sa tangente en $a$."
-        },
-        "C": {
-          "erreur": "L'égalité avec la tangente pour tous $a,x$ caracteriserait une fonction affine ; la convexité ne donne qu'une inégalité."
         },
         "D": {
           "erreur": "La convexité compare $f(x)$ a la tangente $f(a)+f'(a)(x-a)$, pas a la seule valeur $f(a)$ ; aucune croissance n'est supposee."
@@ -338,21 +338,21 @@
       "capacite": "C6",
       "enonce": "L'approximation $\\mathrm{e}^{0{,}1} \\approx 1{,}1$ obtenue par tangente en $0$ est :",
       "options": {
-        "A": "par defaut (la vraie valeur est plus grande)",
+        "A": "impossible a déterminer",
         "B": "par exces (la vraie valeur est plus petite)",
         "C": "exacte",
-        "D": "impossible a déterminer"
+        "D": "par defaut (la vraie valeur est plus grande)"
       },
-      "correcte": "A",
+      "correcte": "D",
       "diagnostics": {
+        "A": {
+          "erreur": "La convexité déterminé le sens de l'approximation : la courbe est au-dessus de toute tangente, donc $1{,}1$ est une valeur par defaut."
+        },
         "B": {
           "erreur": "La fonction exponentielle est strictement convexe : sa courbe est au-dessus de sa tangente en $0$, donc $\\mathrm{e}^{0{,}1}>1{,}1$."
         },
         "C": {
           "erreur": "La tangente ne coincide avec la courbe qu'au point de contact $x=0$ ; a $x=0{,}1$, la stricte convexité exclut l'égalité."
-        },
-        "D": {
-          "erreur": "La convexité déterminé le sens de l'approximation : la courbe est au-dessus de toute tangente, donc $1{,}1$ est une valeur par defaut."
         }
       }
     }

@@ -19,11 +19,18 @@ exact et non par simple denombrement :
   pas non plus.
 
 Contrat d'identite semantique. Le condense porte sur ce que la preuve atteste
-reellement : capacite, enonce, options, valeur de la bonne reponse et modeles
-d'erreur des distracteurs. Il est insensible aux accents, la campagne
-diacritiques etant une correction editoriale mandatee qui ne change aucune
-mathematique. Il est en revanche sensible a toute option, toute cle et tout
-modele d'erreur.
+reellement : capacite, enonce, ENSEMBLE des options, VALEUR de la bonne
+reponse, et modele d'erreur attache a chaque option par sa valeur.
+
+Il est insensible aux accents, la campagne diacritiques etant une correction
+editoriale mandatee qui ne change aucune mathematique. Il est insensible aussi
+a la POSITION des options : le reequilibrage des cles deplace la bonne reponse
+d'une lettre a l'autre sans toucher a l'enonce, aux options, a la valeur
+correcte ni aux diagnostics. Indexer par la lettre faisait perdre la preuve de
+245 questions pour un reordonnancement purement editorial.
+
+Il reste sensible a toute option ajoutee, retiree ou modifiee, a tout
+changement de la VALEUR correcte et a tout modele d'erreur.
 
 Le champ `renvoi` est exclu du condense : les partitions historiques ne l'ont
 pas capture de facon homogene, certaines lignes portant `remediation_reference:
@@ -131,36 +138,62 @@ def _source_renvois(question: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _by_value(
+    options: dict[str, str], attached: dict[str, Any]
+) -> dict[str, Any]:
+    """Ce qui est attache a une option, indexe par sa VALEUR et non sa lettre."""
+
+    return {
+        _normalise(value): attached.get(letter)
+        for letter, value in options.items()
+        if attached.get(letter) is not None
+    }
+
+
 def _semantic_fields_from_proof(row: dict[str, Any]) -> dict[str, Any]:
+    options = {letter: _normalise(value) for letter, value in row["options"].items()}
+    key = _declared_answer(row)
     return {
         "capacity": _normalise(row["capacity"]),
         "statement": _normalise(row["statement"]),
-        "options": {
-            letter: _normalise(value) for letter, value in row["options"].items()
-        },
-        "declared_answer": _normalise(_declared_answer(row)),
-        "error_models": _proof_error_models(row),
+        "option_values": sorted(options.values()),
+        "correct_value": options[key],
+        "error_models_by_value": _by_value(row["options"], _proof_error_models(row)),
     }
 
 
 def _semantic_fields_from_source(question: dict[str, Any]) -> dict[str, Any]:
+    options = {
+        letter: _normalise(value) for letter, value in question["options"].items()
+    }
+    key = question["correcte"]
     return {
         "capacity": _normalise(question["capacite"]),
         "statement": _normalise(question["enonce"]),
-        "options": {
-            letter: _normalise(value)
-            for letter, value in question["options"].items()
-        },
-        "declared_answer": _normalise(question["correcte"]),
-        "error_models": _source_error_models(question),
+        "option_values": sorted(options.values()),
+        "correct_value": options[key],
+        "error_models_by_value": _by_value(
+            question["options"], _source_error_models(question)
+        ),
     }
 
 
 def semantic_question_digest(fields: dict[str, Any]) -> str:
-    """Condense content-addressed d'une question, independant du fichier."""
+    """Condense content-addressed d'une question, independant du fichier.
+
+    Independant AUSSI de la position des options. Une permutation ne change ni
+    l'enonce, ni l'ensemble des options, ni la VALEUR de la bonne reponse, ni
+    le diagnostic attache a chaque option : elle ne change que la lettre qui
+    les designe. Indexer par la lettre ferait perdre la preuve de 245
+    questions pour un simple reordonnancement editorial.
+    """
 
     payload = json.dumps(fields, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     return "sha256:" + hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def proof_row_options(row: dict[str, Any]) -> dict[str, str]:
+    return dict(row["options"])
 
 
 def _classify_delta(
@@ -177,24 +210,17 @@ def _classify_delta(
         else:
             classes.append("STATEMENT_SEMANTIC_CHANGE")
 
-    proof_values = sorted(proof_fields["options"].values())
-    source_values = sorted(source_fields["options"].values())
-    if proof_values != source_values:
+    if proof_fields["option_values"] != source_fields["option_values"]:
         classes.append("DISTRACTOR_SEMANTIC_CHANGE")
-    elif proof_fields["options"] != source_fields["options"]:
+    elif proof_row_options(proof_row) != question["options"]:
         classes.append("OPTION_REORDER_ONLY")
 
-    proof_key = proof_fields["declared_answer"]
-    source_key = source_fields["declared_answer"]
-    if proof_key != source_key:
-        proof_value = proof_fields["options"].get(proof_key)
-        source_value = source_fields["options"].get(source_key)
-        if proof_value == source_value:
-            classes.append("KEY_POSITION_CHANGED_BUT_VALUE_SAME")
-        else:
-            classes.append("KEY_VALUE_CHANGED")
+    if proof_fields["correct_value"] != source_fields["correct_value"]:
+        classes.append("KEY_VALUE_CHANGED")
+    elif _declared_answer(proof_row) != question["correcte"]:
+        classes.append("KEY_POSITION_CHANGED_BUT_VALUE_SAME")
 
-    if proof_fields["error_models"] != source_fields["error_models"]:
+    if proof_fields["error_models_by_value"] != source_fields["error_models_by_value"]:
         classes.append("DIAGNOSTIC_TEXT_CHANGE")
 
     return classes or ["OTHER"]
@@ -265,12 +291,15 @@ def build_reconciliation() -> dict[str, Any]:
         proof_digest = semantic_question_digest(proof_fields)
         identical = proof_digest == digest
 
-        proof_renvois = _proof_renvois(row)
-        source_renvois = _source_renvois(question)
+        # Indexe par VALEUR d'option : apres un reequilibrage des cles, la
+        # lettre a change sans que le renvoi ait bouge. Comparer par lettre
+        # ferait apparaitre une lacune la ou il n'y en a pas.
+        proof_renvois = _by_value(row["options"], _proof_renvois(row))
+        source_renvois = _by_value(question["options"], _source_renvois(question))
         uncaptured = sorted(
-            letter
-            for letter, value in source_renvois.items()
-            if value is not None and proof_renvois.get(letter) is None
+            option_value
+            for option_value, value in source_renvois.items()
+            if value is not None and proof_renvois.get(option_value) is None
         )
         if uncaptured:
             coverage_gaps.append(
@@ -354,10 +383,15 @@ def build_reconciliation() -> dict[str, Any]:
             "fields": [
                 "capacity",
                 "statement",
-                "options",
-                "declared_answer",
-                "diagnostics.erreur",
+                "option_values",
+                "correct_value",
+                "diagnostics.erreur indexes par valeur d'option",
             ],
+            "position_independent": True,
+            "position_rationale": (
+                "une permutation d'options ne change aucune des choses que la "
+                "revue atteste ; elle change la lettre, pas la mathematique"
+            ),
             "accent_insensitive": True,
             "accent_rationale": (
                 "la campagne diacritiques est une correction editoriale mandatee "

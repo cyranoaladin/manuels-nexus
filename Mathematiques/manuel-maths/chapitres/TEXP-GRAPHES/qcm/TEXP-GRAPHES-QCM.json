@@ -6,15 +6,15 @@
       "id": "Q1",
       "capacite": "C1",
       "enonce": "Dans un graphe simple non oriente d'ordre n, le degré maximal d'un sommet est :",
-      "correcte": "B",
+      "correcte": "A",
       "options": {
-        "A": "n",
-        "B": "n-1",
+        "A": "n-1",
+        "B": "n",
         "C": "2n",
         "D": "n^2"
       },
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Compte incluant le sommet lui-même sans boucle. Dans un graphe simple d'ordre n, un sommet peut être adjacent aux n-1 autres sommets au maximum.",
           "renvoi": "C1"
         },
@@ -32,20 +32,20 @@
       "id": "Q2",
       "capacite": "C1",
       "enonce": "La somme des degrés de tous les sommets d'un graphe est égale a :",
-      "correcte": "C",
+      "correcte": "A",
       "options": {
-        "A": "Le nombre d'arêtes",
+        "A": "Le double du nombre d'arêtes",
         "B": "Le double du nombre de sommets",
-        "C": "Le double du nombre d'arêtes",
+        "C": "Le nombre d'arêtes",
         "D": "Le carre du nombre de sommets"
       },
       "diagnostics": {
-        "A": {
-          "erreur": "Chaque arête contribue pour 2 degrés. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes.",
-          "renvoi": "C1"
-        },
         "B": {
           "erreur": "Confusions entre sommets et arêtes. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes.",
+          "renvoi": "C1"
+        },
+        "C": {
+          "erreur": "Chaque arête contribue pour 2 degrés. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes.",
           "renvoi": "C1"
         },
         "D": {
@@ -84,12 +84,12 @@
       "id": "Q4",
       "capacite": "C4",
       "enonce": "Si M est la matrice d'adjacence, le nombre de chemins de longueur k de i a j est donne par le coefficient $(i,j)$ de :",
-      "correcte": "D",
+      "correcte": "C",
       "options": {
         "A": "$M + k$",
         "B": "$k M$",
-        "C": "$M^{k-1}$",
-        "D": "$M^k$"
+        "C": "$M^k$",
+        "D": "$M^{k-1}$"
       },
       "diagnostics": {
         "A": {
@@ -100,7 +100,7 @@
           "erreur": "Multiplication par un scalaire. Le coefficient (i,j) de M^k compte les chemins de longueur k allant du sommet i au sommet j.",
           "renvoi": "C4"
         },
-        "C": {
+        "D": {
           "erreur": "Puissance decalee de 1. Le coefficient (i,j) de M^k compte les chemins de longueur k allant du sommet i au sommet j.",
           "renvoi": "C4"
         }
@@ -110,12 +110,12 @@
       "id": "Q5",
       "capacite": "C5",
       "enonce": "Pourquoi le coefficient $(i,j)$ de $M^{n+1}$ compte-t-il les chemins de longueur $n+1$ de $i$ a $j$ ?",
-      "correcte": "C",
+      "correcte": "D",
       "options": {
         "A": "parce que tous les coefficients de $M$ valent 1",
         "B": "parce que $M^{n+1}=M+n+1$",
-        "C": "car $\\sum_k(M^n)_{ik}M_{kj}$ classe les chemins selon l'avant-dernier sommet $k$",
-        "D": "car un graphe possède toujours un unique chemin entre deux sommets"
+        "C": "car un graphe possède toujours un unique chemin entre deux sommets",
+        "D": "car $\\sum_k(M^n)_{ik}M_{kj}$ classe les chemins selon l'avant-dernier sommet $k$"
       },
       "diagnostics": {
         "A": {
@@ -126,7 +126,7 @@
           "erreur": "Une puissance matricielle est obtenue par produits successifs et ne se réduit pas à une addition scalaire. La formule (M^(n+1))_(i,j)=somme_k (M^n)_(i,k)M_(k,j) classe les chemins selon leur avant-dernier sommet k.",
           "renvoi": "C5"
         },
-        "D": {
+        "C": {
           "erreur": "Un graphe peut avoir zéro, un ou plusieurs chemins entre deux sommets ; l'unicité n'est pas une propriété générale. La formule (M^(n+1))_(i,j)=somme_k (M^n)_(i,k)M_(k,j) classe les chemins selon leur avant-dernier sommet k.",
           "renvoi": "C5"
         }

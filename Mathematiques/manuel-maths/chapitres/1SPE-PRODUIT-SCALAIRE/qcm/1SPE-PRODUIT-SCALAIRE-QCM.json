@@ -60,17 +60,17 @@
       "enonce": "Le produit scalaire $\\vec{u} \\cdot \\vec{v}$ est :",
       "options": {
         "A": "un vecteur",
-        "B": "un nombre réel",
-        "C": "toujours positif",
+        "B": "toujours positif",
+        "C": "un nombre réel",
         "D": "défini uniquement si $\\vec{u}$ et $\\vec{v}$ sont non nuls"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Confusion avec le produit vectoriel.",
           "renvoi": "M1"
         },
-        "C": {
+        "B": {
           "erreur": "Le produit scalaire peut être négatif si l'angle est obtus.",
           "renvoi": "M1"
         },
@@ -85,14 +85,14 @@
       "capacite": "C2",
       "enonce": "$\\Vert\\vec{u}+\\vec{v}\\Vert^2 = ?$",
       "options": {
-        "A": "$\\Vert\\vec{u}\\Vert^2 + \\Vert\\vec{v}\\Vert^2$",
-        "B": "$\\Vert\\vec{u}\\Vert^2 + 2\\vec{u}\\cdot\\vec{v} + \\Vert\\vec{v}\\Vert^2$",
+        "A": "$\\Vert\\vec{u}\\Vert^2 + 2\\vec{u}\\cdot\\vec{v} + \\Vert\\vec{v}\\Vert^2$",
+        "B": "$\\Vert\\vec{u}\\Vert^2 + \\Vert\\vec{v}\\Vert^2$",
         "C": "$\\Vert\\vec{u}\\Vert^2 - 2\\vec{u}\\cdot\\vec{v} + \\Vert\\vec{v}\\Vert^2$",
         "D": "$(\\vec{u}\\cdot\\vec{v})^2$"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Oubli du double produit $2\\vec{u}\\cdot\\vec{v}$.",
           "renvoi": "M2"
         },
@@ -138,17 +138,17 @@
       "enonce": "Sachant que $\\|\\vec{u}\\|=3$, $\\|\\vec{v}\\|=4$ et $\\vec{u}\\cdot\\vec{v}=5$, quelle est la valeur de $\\|\\vec{u}+\\vec{v}\\|$ ?",
       "options": {
         "A": "$5$",
-        "B": "$\\sqrt{35}$",
-        "C": "$7$",
+        "B": "$7$",
+        "C": "$\\sqrt{35}$",
         "D": "$\\sqrt{25}$"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "$\\sqrt{25}=5$ mais $\\|\\vec{u}+\\vec{v}\\|^2 = 9 + 10 + 16 = 35$.",
           "renvoi": "M2"
         },
-        "C": {
+        "B": {
           "erreur": "L'élève a transforme l'inégalité triangulaire $\\Vert\\vec u+\\vec v\\Vert\\leqslant\\Vert\\vec u\\Vert+\\Vert\\vec v\\Vert$ en égalité et obtenu $3+4=7$ ; l'égalité n'est pas justifiee ici.",
           "renvoi": "M2"
         },
@@ -165,10 +165,10 @@
       "options": {
         "A": "$\\vec{u}\\cdot\\vec{v} > 0$",
         "B": "$\\vec{u}\\cdot\\vec{v} < 0$",
-        "C": "$\\vec{u}\\cdot\\vec{v} = 0$",
-        "D": "$\\Vert\\vec{u}\\Vert = \\Vert\\vec{v}\\Vert$"
+        "C": "$\\Vert\\vec{u}\\Vert = \\Vert\\vec{v}\\Vert$",
+        "D": "$\\vec{u}\\cdot\\vec{v} = 0$"
       },
-      "correcte": "C",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "Le signe strict ne caractérise pas l'orthogonalité.",
@@ -178,7 +178,7 @@
           "erreur": "Un produit scalaire négatif caractérise un angle obtus, pas un angle droit ; l'orthogonalite exige un produit scalaire nul.",
           "renvoi": "M3"
         },
-        "D": {
+        "C": {
           "erreur": "Avoir la même norme ne garantit pas l'orthogonalité.",
           "renvoi": "M3"
         }
@@ -189,14 +189,14 @@
       "capacite": "C3",
       "enonce": "Les vecteurs $\\vec{u}(2,3)$ et $\\vec{v}(3,-2)$ sont :",
       "options": {
-        "A": "colinéaires",
-        "B": "orthogonaux",
+        "A": "orthogonaux",
+        "B": "colinéaires",
         "C": "de normes différentes",
         "D": "de sens contraire"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Le déterminant vaut $2 \\times (-2) - 3 \\times 3 = -13 \\neq 0$.",
           "renvoi": "M3"
         },
@@ -242,17 +242,17 @@
       "enonce": "Un point $M$ appartient à la médiatrice du segment $[AB]$ si et seulement si :",
       "options": {
         "A": "$\\vec{MA} \\cdot \\vec{MB} = 0$",
-        "B": "$MA = MB$",
-        "C": "$\\vec{MA} + \\vec{MB} = \\vec{0}$",
+        "B": "$\\vec{MA} + \\vec{MB} = \\vec{0}$",
+        "C": "$MA = MB$",
         "D": "$MA + MB = AB$"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Ce serait l'équation du cercle de diamètre $[AB]$.",
           "renvoi": "M4"
         },
-        "C": {
+        "B": {
           "erreur": "Ceci caractérise le milieu de $[AB]$.",
           "renvoi": "M4"
         },
@@ -269,10 +269,10 @@
       "options": {
         "A": "$ab \\cos(\\theta)$",
         "B": "$\\dfrac{1}{2} ab \\cos(\\theta)$",
-        "C": "$\\dfrac{1}{2} ab \\sin(\\theta)$",
-        "D": "$ab \\sin(\\theta)$"
+        "C": "$ab \\sin(\\theta)$",
+        "D": "$\\dfrac{1}{2} ab \\sin(\\theta)$"
       },
-      "correcte": "C",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "Cosinus au lieu de sinus et oubli du facteur $1/2$.",
@@ -282,7 +282,7 @@
           "erreur": "Cosinus au lieu de sinus.",
           "renvoi": "M4"
         },
-        "D": {
+        "C": {
           "erreur": "Oubli du facteur $1/2$.",
           "renvoi": "M4"
         }
@@ -293,14 +293,14 @@
       "capacite": "C4",
       "enonce": "Soit $H$ le pied de la hauteur issue de $A$ dans le triangle $ABC$. Quelle relation est exacte ?",
       "options": {
-        "A": "$\\vec{AH} \\cdot \\vec{AB} = 0$",
-        "B": "$\\vec{AH} \\cdot \\vec{BC} = 0$",
+        "A": "$\\vec{AH} \\cdot \\vec{BC} = 0$",
+        "B": "$\\vec{AH} \\cdot \\vec{AB} = 0$",
         "C": "$\\vec{AH} \\cdot \\vec{AC} = 0$",
         "D": "$AH = BH$"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "La hauteur est perpendiculaire au côté opposé $(BC)$, pas à $(AB)$.",
           "renvoi": "M4"
         },
@@ -345,19 +345,19 @@
       "capacite": "C5",
       "enonce": "Dans un triangle avec $b=5$, $c=8$ et $\\widehat{A} = \\dfrac{\\pi}{3}$, que vaut $a^2$ ?",
       "options": {
-        "A": "$49$",
+        "A": "$129$",
         "B": "$89$",
-        "C": "$129$",
+        "C": "$49$",
         "D": "$9$"
       },
-      "correcte": "A",
+      "correcte": "C",
       "diagnostics": {
-        "B": {
-          "erreur": "Oubli du terme $-2bc \\cos(A)$.",
+        "A": {
+          "erreur": "Erreur de signe $+2bc \\cos(A)$ au lieu de $-$.",
           "renvoi": "M5"
         },
-        "C": {
-          "erreur": "Erreur de signe $+2bc \\cos(A)$ au lieu de $-$.",
+        "B": {
+          "erreur": "Oubli du terme $-2bc \\cos(A)$.",
           "renvoi": "M5"
         },
         "D": {
@@ -372,22 +372,22 @@
       "enonce": "Si $\\widehat{A} = \\dfrac{\\pi}{2}$, la formule d'Al-Kashi redonne :",
       "options": {
         "A": "$a^2 = b^2 - c^2$",
-        "B": "$a^2 = b^2 + c^2$",
+        "B": "$a = b + c$",
         "C": "$a^2 = 2bc$",
-        "D": "$a = b + c$"
+        "D": "$a^2 = b^2 + c^2$"
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "Signe $-$ au lieu de $+$.",
           "renvoi": "M5; R5"
         },
-        "C": {
-          "erreur": "L'élève a conserve le terme $2bc$ et l'a pris pour $a^2$ ; lorsque $A=\\pi/2$, le terme $2bc\\cos(A)$ est nul, pas $a^2$.",
+        "B": {
+          "erreur": "Ce n'est pas l'égalité du théorème de Pythagore.",
           "renvoi": "M5; R5"
         },
-        "D": {
-          "erreur": "Ce n'est pas l'égalité du théorème de Pythagore.",
+        "C": {
+          "erreur": "L'élève a conserve le terme $2bc$ et l'a pris pour $a^2$ ; lorsque $A=\\pi/2$, le terme $2bc\\cos(A)$ est nul, pas $a^2$.",
           "renvoi": "M5; R5"
         }
       }

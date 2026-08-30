@@ -21,9 +21,9 @@
 
 \item \textbf{[Q2]} Le nombre d'arrangements sans repetition $A_n^k$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item $n^k$
-    \item $\frac{n!}{k!}$
     \item $\frac{n!}{(n-k)!}$
+    \item $\frac{n!}{k!}$
+    \item $n^k$
     \item $\binom{n}{k}$
   \end{enumerate}
 
@@ -41,9 +41,9 @@
 
 \item \textbf{[Q4]} Quelle égalité traduit le denombrement de toutes les parties d'un ensemble a $n$ éléments selon leur cardinal ?
   \begin{enumerate}[label=\Alph*.]
-    \item $\displaystyle\sum_{k=0}^{n} \binom{n}{k}=2^n$
-    \item $\displaystyle\sum_{k=0}^{n} \binom{n}{k}=n$
     \item $\displaystyle\prod_{k=0}^{n} \binom{n}{k}=2^n$
+    \item $\displaystyle\sum_{k=0}^{n} \binom{n}{k}=n$
+    \item $\displaystyle\sum_{k=0}^{n} \binom{n}{k}=2^n$
     \item $\displaystyle\sum_{k=1}^{n} k=n!$
   \end{enumerate}
 
@@ -70,9 +70,9 @@
 Question & Capacité & Réponse exacte \\
 \hline
 Q1 & C2 & \textbf{A} \\
-Q2 & C2 & \textbf{C} \\
+Q2 & C2 & \textbf{A} \\
 Q3 & C1 & \textbf{B} \\
-Q4 & C3 & \textbf{A} \\
+Q4 & C3 & \textbf{C} \\
 Q5 & C4 & \textbf{D} \\
 \hline
 \end{tabular}
@@ -89,8 +89,8 @@ Q5 & C4 & \textbf{D} \\
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Le nombre $n^k$ conserve $n$ choix a chaque position et autorise donc les repetitions ; un arrangement sans repetition retire un choix a chaque étape. \emph{Renvoi : C2.}
     \item \textbf{B} — Le dénominateur $k!$ ne retire pas les $n-k$ facteurs inutilises ; une k-liste sans repetition conserve exactement $n!/(n-k)!$. \emph{Renvoi : C2.}
+    \item \textbf{C} — Le nombre $n^k$ conserve $n$ choix a chaque position et autorise donc les repetitions ; un arrangement sans repetition retire un choix a chaque étape. \emph{Renvoi : C2.}
     \item \textbf{D} — Le coefficient $\binom{n}{k}$ oublie l'ordre des $k$ éléments choisis ; chaque combinaison produit $k!$ arrangements distincts. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q3}
@@ -101,8 +101,8 @@ Q5 & C4 & \textbf{D} \\
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
+    \item \textbf{A} — Les classes de parties de cardinal $k$ sont disjointes et doivent être additionnees ; leur produit ne denombre pas leur reunion. \emph{Renvoi : C3.}
     \item \textbf{B} — La somme compte toutes les parties, pas seulement les $n$ singletons ; un ensemble a $n$ éléments possede $2^n$ parties. \emph{Renvoi : C3.}
-    \item \textbf{C} — Les classes de parties de cardinal $k$ sont disjointes et doivent être additionnees ; leur produit ne denombre pas leur reunion. \emph{Renvoi : C3.}
     \item \textbf{D} — La somme $1+\cdots+n$ ne fait intervenir aucun coefficient binomial et vaut $n(n+1)/2$, pas $n!$ en general. \emph{Renvoi : C3.}
   \end{itemize}
   \item \textbf{Q5}

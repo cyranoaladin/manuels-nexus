@@ -7,14 +7,14 @@
       "capacite": "C1",
       "enonce": "Soit $(u_n)$ définie par $u_n = \\dfrac{5n - 1}{2n + 3}$. Quelle est $\\lim_{n \\to +\\infty} u_n$ ?",
       "options": {
-        "A": "$5/3$",
-        "B": "$5/2$",
+        "A": "$5/2$",
+        "B": "$5/3$",
         "C": "$+\\infty$",
         "D": "$0$"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "L'élève a divise les termes constants (-1 et 3) au lieu des coefficients dominants.",
           "renvoi": "M1, étape 3"
         },
@@ -34,23 +34,23 @@
       "enonce": "La suite $u_n = (-1)^n + 1/n$ est :",
       "options": {
         "A": "convergente vers 0",
-        "B": "convergente vers 1",
+        "B": "divergente sans limite",
         "C": "divergente vers $+\\infty$",
-        "D": "divergente sans limite"
+        "D": "convergente vers 1"
       },
-      "correcte": "D",
+      "correcte": "B",
       "diagnostics": {
         "A": {
           "erreur": "Ne regarder que $1/n\\to0$ oublie le terme oscillant $(-1)^n$ ; les sous-suites paires et impaires ont des limites différentes.",
           "renvoi": "C1, définition divergence"
         },
-        "B": {
-          "erreur": "Les termes pairs tendent bien vers $1$, mais les termes impairs tendent vers $-1$ ; la suite complete ne peut donc pas converger vers $1$.",
-          "renvoi": "C1, unicite limite"
-        },
         "C": {
           "erreur": "Le facteur $(-1)^n$ reste borne entre $-1$ et $1$ et $1/n\\to0$ ; aucun terme ne croit sans borne vers $+\\infty$.",
           "renvoi": "C1, exemples"
+        },
+        "D": {
+          "erreur": "Les termes pairs tendent bien vers $1$, mais les termes impairs tendent vers $-1$ ; la suite complete ne peut donc pas converger vers $1$.",
+          "renvoi": "C1, unicite limite"
         }
       }
     },
@@ -60,17 +60,17 @@
       "enonce": "Dans une preuve par récurrence, l'étape d'heredite consiste a :",
       "options": {
         "A": "Vérifier P(0)",
-        "B": "Supposer P(n) et montrer P(n+1)",
-        "C": "Montrer P(n) pour tout n",
+        "B": "Montrer P(n) pour tout n",
+        "C": "Supposer P(n) et montrer P(n+1)",
         "D": "Remplacer n par n+1"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Vérifier $P(0)$ ou le premier rang etablit seulement l'initialisation ; l'heredite doit partir de $P(n)$ pour obtenir $P(n+1)$.",
           "renvoi": "M2, étape 1"
         },
-        "C": {
+        "B": {
           "erreur": "Affirmer directement $P(n)$ pour tout $n$ est la conclusion de la récurrence ; il manque l'implication de $P(n)$ vers $P(n+1)$.",
           "renvoi": "M2, étape 4"
         },
@@ -138,17 +138,17 @@
       "enonce": "$u_{n+1}=0{,}7u_n+9$ et $v_n=u_n-30$. Quelle est la raison de $(v_n)$ ?",
       "options": {
         "A": "9",
-        "B": "0,7",
-        "C": "30",
+        "B": "30",
+        "C": "0,7",
         "D": "0,3"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Confusion entre la constante additive et la raison.",
           "renvoi": "M3, étape 3"
         },
-        "C": {
+        "B": {
           "erreur": "La valeur $30=9/(1-0{,}7)$ est le point fixe soustrait pour definir $v_n$ ; la relation obtenue est $v_{n+1}=0{,}7v_n$.",
           "renvoi": "M3, étape 1"
         },
@@ -164,23 +164,23 @@
       "enonce": "Laquelle est vraie ?",
       "options": {
         "A": "Toute suite croissante diverge",
-        "B": "Croissante majorée => converge",
+        "B": "Convergente => croissante",
         "C": "Majorée => converge",
-        "D": "Convergente => croissante"
+        "D": "Croissante majorée => converge"
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "Contre-exemple : $u_n = 1-1/n$ croissante, converge vers 1.",
           "renvoi": "C4, théorème"
         },
+        "B": {
+          "erreur": "Contre-exemple : $u_n = (-1)^n/n$ converge vers 0 sans être croissante.",
+          "renvoi": "C1, définition"
+        },
         "C": {
           "erreur": "Être majorée ne suffit pas : la suite $(-1)^n$ est majorée mais diverge ; le théorème exige aussi que la suite soit croissante.",
           "renvoi": "C4, théorème"
-        },
-        "D": {
-          "erreur": "Contre-exemple : $u_n = (-1)^n/n$ converge vers 0 sans être croissante.",
-          "renvoi": "C1, définition"
         }
       }
     },
@@ -189,19 +189,19 @@
       "capacite": "C4",
       "enonce": "$(u_n)$ croissante, $u_n \\geq n$. Conclusion ?",
       "options": {
-        "A": "converge vers 1",
+        "A": "diverge vers $+\\infty$",
         "B": "bornee",
-        "C": "diverge vers $+\\infty$",
+        "C": "converge vers 1",
         "D": "décroissante"
       },
-      "correcte": "C",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
-          "erreur": "Si $u_n \\geq n$, la suite ne peut converger vers un réel fini.",
-          "renvoi": "C4, théorème"
-        },
         "B": {
           "erreur": "$u_n \\geq n$ implique que $(u_n)$ n'est pas majorée.",
+          "renvoi": "C4, théorème"
+        },
+        "C": {
+          "erreur": "Si $u_n \\geq n$, la suite ne peut converger vers un réel fini.",
           "renvoi": "C4, théorème"
         },
         "D": {
@@ -319,14 +319,14 @@
       "capacite": "C6",
       "enonce": "Le théorème des gendarmes s'applique quand :",
       "options": {
-        "A": "même limite",
-        "B": "limites différentes",
+        "A": "limites différentes",
+        "B": "même limite",
         "C": "une seule limite",
         "D": "divergence"
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
+        "A": {
           "erreur": "Si les limites sont différentes, on ne peut pas conclure.",
           "renvoi": "C6, théorème gendarmes"
         },
@@ -346,17 +346,17 @@
       "enonce": "$\\lim_{x \\to -\\infty} e^x$ ?",
       "options": {
         "A": "$-\\infty$",
-        "B": "0",
-        "C": "1",
+        "B": "1",
+        "C": "0",
         "D": "$+\\infty$"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "$e^x > 0$ pour tout $x$, donc la limite ne peut être $-\\infty$.",
           "renvoi": "C7, démonstration"
         },
-        "C": {
+        "B": {
           "erreur": "La valeur $1$ est seulement $e^0$ ; lorsque $x$ décroît sans borne, $e^x=1/e^{-x}$ et le dénominateur tend vers $+\\infty$, donc la limite vaut $0$.",
           "renvoi": "C7, démonstration"
         },
@@ -373,22 +373,22 @@
       "options": {
         "A": "0",
         "B": "1",
-        "C": "$+\\infty$",
-        "D": "indeterminee"
+        "C": "indeterminee",
+        "D": "$+\\infty$"
       },
-      "correcte": "C",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "L'exponentielle croit plus vite que tout polynôme.",
           "renvoi": "C7, croissance comparee"
         },
-        "D": {
-          "erreur": "C'est une forme indeterminee qui se resout par les croissances comparees.",
-          "renvoi": "C7, croissance comparee"
-        },
         "B": {
           "erreur": "L'élève simplifie comme s'il s'agissait d'un quotient de termes de même nature ; la croissance comparee donne plus l'infini.",
           "renvoi": "M3, croissances comparees"
+        },
+        "C": {
+          "erreur": "C'est une forme indeterminee qui se resout par les croissances comparees.",
+          "renvoi": "C7, croissance comparee"
         }
       }
     }

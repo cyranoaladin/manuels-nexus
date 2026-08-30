@@ -13,17 +13,17 @@
 
 \item \textbf{[Q1]} Soit $f(x) = x^2$. L'intégrale $\int_{0}^{3} f(x) dx$ vaut :
   \begin{enumerate}[label=\Alph*.]
-    \item 3
     \item 9
+    \item 3
     \item 27
     \item 18
   \end{enumerate}
 
 \item \textbf{[Q2]} La valeur moyenne de $f(x) = 2x$ sur $[0, 4]$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item 2
-    \item 8
     \item 4
+    \item 8
+    \item 2
     \item 16
   \end{enumerate}
 
@@ -41,9 +41,9 @@
 
 \item \textbf{[Q4]} Si $f(x) \leqslant g(x)$ pour tout $x\in[0,1]$, avec $f$ et $g$ continues, alors :
   \begin{enumerate}[label=\Alph*.]
-    \item $\int_0^1 f(x)\,dx \leqslant \int_0^1 g(x)\,dx$
-    \item $\int_0^1 f(x)\,dx \geqslant \int_0^1 g(x)\,dx$
     \item $\int_0^1 f(x)\,dx = \int_0^1 g(x)\,dx$
+    \item $\int_0^1 f(x)\,dx \geqslant \int_0^1 g(x)\,dx$
+    \item $\int_0^1 f(x)\,dx \leqslant \int_0^1 g(x)\,dx$
     \item $\int_0^1 f(x)\,dx \leqslant 0$
   \end{enumerate}
 
@@ -69,10 +69,10 @@
 \hline
 Question & Capacité & Réponse exacte \\
 \hline
-Q1 & C2 & \textbf{B} \\
-Q2 & C2 & \textbf{C} \\
+Q1 & C2 & \textbf{A} \\
+Q2 & C2 & \textbf{A} \\
 Q3 & C1 & \textbf{B} \\
-Q4 & C3 & \textbf{A} \\
+Q4 & C3 & \textbf{C} \\
 Q5 & C2 & \textbf{D} \\
 \hline
 \end{tabular}
@@ -83,14 +83,14 @@ Q5 & C2 & \textbf{D} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — Choisir $3$ revient a prendre $x$ pour primitive de $x^2$ puis a calculer $[x]_0^3$ ; or une primitive correcte est $x^3/3$. \emph{Renvoi : C2.}
+    \item \textbf{B} — Choisir $3$ revient a prendre $x$ pour primitive de $x^2$ puis a calculer $[x]_0^3$ ; or une primitive correcte est $x^3/3$. \emph{Renvoi : C2.}
     \item \textbf{C} — Le calcul $3^3=27$ oublie le facteur $1/3$ de la primitive $x^3/3$ ; la valeur correcte est donc $27/3=9$. \emph{Renvoi : C2.}
     \item \textbf{D} — Le résultat $18$ double a tort la valeur correcte $9$ ; aucune symetrie ni aucun coefficient ne justifie ce facteur $2$ sur $[0,3]$. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Le choix $2$ remplace la valeur moyenne sur tout l'intervalle par la valeur ponctuelle $f(1)=2$, qui ne tient pas compte de $[0,4]$. \emph{Renvoi : C2.}
     \item \textbf{B} — Le résultat $8$ est $f(4)=8$ : il evalue la fonction a la borne droite au lieu de calculer puis moyenner l'intégrale. \emph{Renvoi : C2.}
+    \item \textbf{C} — Le choix $2$ remplace la valeur moyenne sur tout l'intervalle par la valeur ponctuelle $f(1)=2$, qui ne tient pas compte de $[0,4]$. \emph{Renvoi : C2.}
     \item \textbf{D} — L'intégrale vaut $16$ ; choisir $16$ oublie ensuite le facteur $1/(4-0)$ indispensable dans la définition de la valeur moyenne. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q3}
@@ -101,8 +101,8 @@ Q5 & C2 & \textbf{D} \\
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
+    \item \textbf{A} — L'hypothèse $f\leqslant g$ n'impose pas leur égalité ; par exemple $f=0$ et $g=1$ donnent des intégrales distinctes. \emph{Renvoi : C3.}
     \item \textbf{B} — Le sens de l'inégalité est inverse : l'integration conserve l'ordre entre deux fonctions continues comparees sur le même intervalle. \emph{Renvoi : C3.}
-    \item \textbf{C} — L'hypothèse $f\leqslant g$ n'impose pas leur égalité ; par exemple $f=0$ et $g=1$ donnent des intégrales distinctes. \emph{Renvoi : C3.}
     \item \textbf{D} — La comparaison entre $f$ et $g$ ne donne aucun signe absolu pour $f$ ; il faudrait en plus supposer $f\leqslant0$. \emph{Renvoi : C3.}
   \end{itemize}
   \item \textbf{Q5}

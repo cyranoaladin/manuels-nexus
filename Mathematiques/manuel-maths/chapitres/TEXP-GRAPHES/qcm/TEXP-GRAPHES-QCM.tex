@@ -13,17 +13,17 @@
 
 \item \textbf{[Q1]} Dans un graphe simple non oriente d'ordre n, le degré maximal d'un sommet est :
   \begin{enumerate}[label=\Alph*.]
-    \item n
     \item n-1
+    \item n
     \item 2n
     \item n\textasciicircum{}2
   \end{enumerate}
 
 \item \textbf{[Q2]} La somme des degrés de tous les sommets d'un graphe est égale a :
   \begin{enumerate}[label=\Alph*.]
-    \item Le nombre d'arêtes
-    \item Le double du nombre de sommets
     \item Le double du nombre d'arêtes
+    \item Le double du nombre de sommets
+    \item Le nombre d'arêtes
     \item Le carre du nombre de sommets
   \end{enumerate}
 
@@ -43,8 +43,8 @@
   \begin{enumerate}[label=\Alph*.]
     \item $M + k$
     \item $k M$
-    \item $M^{k-1}$
     \item $M^k$
+    \item $M^{k-1}$
   \end{enumerate}
 
 \item[] \textbf{Capacité C5}
@@ -53,8 +53,8 @@
   \begin{enumerate}[label=\Alph*.]
     \item parce que tous les coefficients de $M$ valent 1
     \item parce que $M^{n+1}=M+n+1$
-    \item car $\sum_k(M^n)_{ik}M_{kj}$ classe les chemins selon l'avant-dernier sommet $k$
     \item car un graphe possède toujours un unique chemin entre deux sommets
+    \item car $\sum_k(M^n)_{ik}M_{kj}$ classe les chemins selon l'avant-dernier sommet $k$
   \end{enumerate}
 
 \end{enumerate}
@@ -69,11 +69,11 @@
 \hline
 Question & Capacité & Réponse exacte \\
 \hline
-Q1 & C1 & \textbf{B} \\
-Q2 & C1 & \textbf{C} \\
+Q1 & C1 & \textbf{A} \\
+Q2 & C1 & \textbf{A} \\
 Q3 & C3 & \textbf{B} \\
-Q4 & C4 & \textbf{D} \\
-Q5 & C5 & \textbf{C} \\
+Q4 & C4 & \textbf{C} \\
+Q5 & C5 & \textbf{D} \\
 \hline
 \end{tabular}
 \end{center}
@@ -83,14 +83,14 @@ Q5 & C5 & \textbf{C} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — Compte incluant le sommet lui-même sans boucle. Dans un graphe simple d'ordre n, un sommet peut être adjacent aux n-1 autres sommets au maximum. \emph{Renvoi : C1.}
+    \item \textbf{B} — Compte incluant le sommet lui-même sans boucle. Dans un graphe simple d'ordre n, un sommet peut être adjacent aux n-1 autres sommets au maximum. \emph{Renvoi : C1.}
     \item \textbf{C} — Valeur trop grande. Dans un graphe simple d'ordre n, un sommet peut être adjacent aux n-1 autres sommets au maximum. \emph{Renvoi : C1.}
     \item \textbf{D} — Valeur quadratique fausse. Dans un graphe simple d'ordre n, un sommet peut être adjacent aux n-1 autres sommets au maximum. \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Chaque arête contribue pour 2 degrés. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes. \emph{Renvoi : C1.}
     \item \textbf{B} — Confusions entre sommets et arêtes. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes. \emph{Renvoi : C1.}
+    \item \textbf{C} — Chaque arête contribue pour 2 degrés. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes. \emph{Renvoi : C1.}
     \item \textbf{D} — Formule quadratique incorrecte. Chaque arête contribue 1 au degré de chacune de ses deux extrémités, donc la somme des degrés vaut deux fois le nombre d'arêtes. \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q3}
@@ -103,13 +103,13 @@ Q5 & C5 & \textbf{C} \\
   \begin{itemize}
     \item \textbf{A} — Addition incorrecte. Le coefficient (i,j) de M\textasciicircum{}k compte les chemins de longueur k allant du sommet i au sommet j. \emph{Renvoi : C4.}
     \item \textbf{B} — Multiplication par un scalaire. Le coefficient (i,j) de M\textasciicircum{}k compte les chemins de longueur k allant du sommet i au sommet j. \emph{Renvoi : C4.}
-    \item \textbf{C} — Puissance decalee de 1. Le coefficient (i,j) de M\textasciicircum{}k compte les chemins de longueur k allant du sommet i au sommet j. \emph{Renvoi : C4.}
+    \item \textbf{D} — Puissance decalee de 1. Le coefficient (i,j) de M\textasciicircum{}k compte les chemins de longueur k allant du sommet i au sommet j. \emph{Renvoi : C4.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
     \item \textbf{A} — Une matrice d'adjacence contient aussi des zéros ; le comptage vient du produit matriciel, pas de coefficients tous égaux à 1. La formule (M\textasciicircum{}(n+1))\_(i,j)=somme\_k (M\textasciicircum{}n)\_(i,k)M\_(k,j) classe les chemins selon leur avant-dernier sommet k. \emph{Renvoi : C5.}
     \item \textbf{B} — Une puissance matricielle est obtenue par produits successifs et ne se réduit pas à une addition scalaire. La formule (M\textasciicircum{}(n+1))\_(i,j)=somme\_k (M\textasciicircum{}n)\_(i,k)M\_(k,j) classe les chemins selon leur avant-dernier sommet k. \emph{Renvoi : C5.}
-    \item \textbf{D} — Un graphe peut avoir zéro, un ou plusieurs chemins entre deux sommets ; l'unicité n'est pas une propriété générale. La formule (M\textasciicircum{}(n+1))\_(i,j)=somme\_k (M\textasciicircum{}n)\_(i,k)M\_(k,j) classe les chemins selon leur avant-dernier sommet k. \emph{Renvoi : C5.}
+    \item \textbf{C} — Un graphe peut avoir zéro, un ou plusieurs chemins entre deux sommets ; l'unicité n'est pas une propriété générale. La formule (M\textasciicircum{}(n+1))\_(i,j)=somme\_k (M\textasciicircum{}n)\_(i,k)M\_(k,j) classe les chemins selon leur avant-dernier sommet k. \emph{Renvoi : C5.}
   \end{itemize}
 \end{itemize}
 \fi

@@ -7,19 +7,19 @@
       "capacite": "C1",
       "enonce": "Quelle est la mesure en radians de $60°$ ?",
       "options": {
-        "A": "$\\frac{\\pi}{6}$",
+        "A": "$\\frac{\\pi}{3}$",
         "B": "$\\frac{\\pi}{4}$",
-        "C": "$\\frac{\\pi}{3}$",
+        "C": "$\\frac{\\pi}{6}$",
         "D": "$\\frac{\\pi}{2}$"
       },
-      "correcte": "C",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
-          "erreur": "L'élève a confondu 60° et 30°. $\\frac{\\pi}{6}$ correspond a $30°$.",
-          "renvoi": "C1, conversion"
-        },
         "B": {
           "erreur": "L'élève a confondu 60° et 45°. $\\frac{\\pi}{4}$ correspond a $45°$.",
+          "renvoi": "C1, conversion"
+        },
+        "C": {
+          "erreur": "L'élève a confondu 60° et 30°. $\\frac{\\pi}{6}$ correspond a $30°$.",
           "renvoi": "C1, conversion"
         },
         "D": {
@@ -33,14 +33,14 @@
       "capacite": "C1",
       "enonce": "Quelle est la mesure principale de $\\frac{9\\pi}{4}$ ?",
       "options": {
-        "A": "$\\frac{\\pi}{4}$",
-        "B": "$\\frac{9\\pi}{4}$",
+        "A": "$\\frac{9\\pi}{4}$",
+        "B": "$\\frac{\\pi}{4}$",
         "C": "$-\\frac{7\\pi}{4}$",
         "D": "$\\frac{5\\pi}{4}$"
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
+        "A": {
           "erreur": "L'élève n'a pas retranche $2\\pi$. $\\frac{9\\pi}{4}$ n'est pas dans $]-\\pi;\\pi]$.",
           "renvoi": "C1, mesure principale"
         },
@@ -60,17 +60,17 @@
       "enonce": "Combien vaut $180°$ en radians ?",
       "options": {
         "A": "$2\\pi$",
-        "B": "$\\pi$",
-        "C": "$\\frac{\\pi}{2}$",
+        "B": "$\\frac{\\pi}{2}$",
+        "C": "$\\pi$",
         "D": "$\\frac{3\\pi}{2}$"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "L'élève a confondu $180°$ et $360°$.",
           "renvoi": "C1, conversion"
         },
-        "C": {
+        "B": {
           "erreur": "L'élève a confondu $180°$ et $90°$.",
           "renvoi": "C1, conversion"
         },
@@ -85,19 +85,19 @@
       "capacite": "C2",
       "enonce": "Quelle est la valeur de $\\cos\\left(\\frac{\\pi}{3}\\right)$ ?",
       "options": {
-        "A": "$\\frac{\\sqrt{3}}{2}$",
+        "A": "$\\frac{1}{2}$",
         "B": "$\\frac{\\sqrt{2}}{2}$",
-        "C": "$\\frac{1}{2}$",
+        "C": "$\\frac{\\sqrt{3}}{2}$",
         "D": "$0$"
       },
-      "correcte": "C",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
-          "erreur": "L'élève a confondu $\\cos(\\frac{\\pi}{3})$ et $\\cos(\\frac{\\pi}{6})$.",
-          "renvoi": "C2, valeurs remarquables"
-        },
         "B": {
           "erreur": "L'élève a confondu $\\cos(\\frac{\\pi}{3})$ et $\\cos(\\frac{\\pi}{4})$.",
+          "renvoi": "C2, valeurs remarquables"
+        },
+        "C": {
+          "erreur": "L'élève a confondu $\\cos(\\frac{\\pi}{3})$ et $\\cos(\\frac{\\pi}{6})$.",
           "renvoi": "C2, valeurs remarquables"
         },
         "D": {
@@ -138,17 +138,17 @@
       "enonce": "Que vaut $\\cos^2\\left(\\frac{\\pi}{4}\\right) + \\sin^2\\left(\\frac{\\pi}{4}\\right)$ ?",
       "options": {
         "A": "$\\frac{1}{2}$",
-        "B": "$1$",
-        "C": "$\\sqrt{2}$",
+        "B": "$\\sqrt{2}$",
+        "C": "$1$",
         "D": "$2$"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "L'élève a calcule $\\cos^2(\\frac{\\pi}{4})$ seul sans ajouter $\\sin^2$.",
           "renvoi": "C2, relation fondamentale"
         },
-        "C": {
+        "B": {
           "erreur": "L'élève a additionne $\\cos(\\frac{\\pi}{4}) + \\sin(\\frac{\\pi}{4})$ au lieu des carres.",
           "renvoi": "C2, relation fondamentale"
         },
@@ -164,22 +164,22 @@
       "enonce": "Sur un cercle de rayon $3$ cm, quelle est la longueur de l'arc intercepte par un angle de $\\frac{2\\pi}{3}$ radians ?",
       "options": {
         "A": "$\\frac{2\\pi}{3}$ cm",
-        "B": "$2\\pi$ cm",
+        "B": "$6\\pi$ cm",
         "C": "$3\\pi$ cm",
-        "D": "$6\\pi$ cm"
+        "D": "$2\\pi$ cm"
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "Cette valeur est la mesure de l'angle, pas la longueur de l'arc ; il faut multiplier par le rayon.",
           "renvoi": "C1, longueur d'arc"
         },
-        "C": {
-          "erreur": "Le calcul $3\\times\\pi$ oublie le facteur $2/3$ de la mesure en radians.",
+        "B": {
+          "erreur": "$6\\pi$ est le perimetre du cercle entier, pas celui de l'arc correspondant a un tiers de tour.",
           "renvoi": "C1, longueur d'arc"
         },
-        "D": {
-          "erreur": "$6\\pi$ est le perimetre du cercle entier, pas celui de l'arc correspondant a un tiers de tour.",
+        "C": {
+          "erreur": "Le calcul $3\\times\\pi$ oublie le facteur $2/3$ de la mesure en radians.",
           "renvoi": "C1, longueur d'arc"
         }
       }
@@ -243,10 +243,10 @@
       "options": {
         "A": "$(1;0)$",
         "B": "$(0;1)$",
-        "C": "$(-1;0)$",
-        "D": "$(0;-1)$"
+        "C": "$(0;-1)$",
+        "D": "$(-1;0)$"
       },
-      "correcte": "D",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Le point $(1;0)$ correspond au réel $0$.",
@@ -256,7 +256,7 @@
           "erreur": "Le point $(0;1)$ correspond a $\\pi/2$ ; le signe négatif impose le sens horaire.",
           "renvoi": "C1, orientation"
         },
-        "C": {
+        "D": {
           "erreur": "Le point $(-1;0)$ correspond a $\\pi$.",
           "renvoi": "C1, placement"
         }
@@ -268,22 +268,22 @@
       "enonce": "Quelle est la valeur de $\\cos\\left(\\frac{2\\pi}{3}\\right)$ ?",
       "options": {
         "A": "$\\frac{1}{2}$",
-        "B": "$-\\frac{1}{2}$",
+        "B": "$-\\frac{\\sqrt{3}}{2}$",
         "C": "$\\frac{\\sqrt{3}}{2}$",
-        "D": "$-\\frac{\\sqrt{3}}{2}$"
+        "D": "$-\\frac{1}{2}$"
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "La valeur absolue est correcte mais le point est dans le deuxième quadrant, ou le cosinus est négatif.",
           "renvoi": "C2, lecture du cercle"
         },
-        "C": {
-          "erreur": "$\\sqrt3/2$ est le sinus de $2\\pi/3$, pas son cosinus.",
+        "B": {
+          "erreur": "Cette option cumule la confusion sinus/cosinus et un signe incorrect pour le sinus dans le deuxième quadrant.",
           "renvoi": "C2, valeurs remarquables"
         },
-        "D": {
-          "erreur": "Cette option cumule la confusion sinus/cosinus et un signe incorrect pour le sinus dans le deuxième quadrant.",
+        "C": {
+          "erreur": "$\\sqrt3/2$ est le sinus de $2\\pi/3$, pas son cosinus.",
           "renvoi": "C2, valeurs remarquables"
         }
       }
@@ -293,14 +293,14 @@
       "capacite": "C2",
       "enonce": "Quelle est la valeur de $\\sin\\left(\\frac{7\\pi}{6}\\right)$ ?",
       "options": {
-        "A": "$\\frac{1}{2}$",
-        "B": "$-\\frac{1}{2}$",
+        "A": "$-\\frac{1}{2}$",
+        "B": "$\\frac{1}{2}$",
         "C": "$\\frac{\\sqrt{3}}{2}$",
         "D": "$-\\frac{\\sqrt{3}}{2}$"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Le point est dans le troisième quadrant : son ordonnée, donc son sinus, est négative.",
           "renvoi": "C2, lecture du cercle"
         },
@@ -346,17 +346,17 @@
       "enonce": "Le point $M\\left(-\\frac{\\sqrt2}{2};\\frac{\\sqrt2}{2}\\right)$ est l'image de :",
       "options": {
         "A": "$\\frac{\\pi}{4}$",
-        "B": "$\\frac{3\\pi}{4}$",
-        "C": "$\\frac{5\\pi}{4}$",
+        "B": "$\\frac{5\\pi}{4}$",
+        "C": "$\\frac{3\\pi}{4}$",
         "D": "$\\frac{7\\pi}{4}$"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "A $\\pi/4$, les deux coordonnées sont positives.",
           "renvoi": "C2, lecture du cercle"
         },
-        "C": {
+        "B": {
           "erreur": "A $5\\pi/4$, les deux coordonnées sont négatives.",
           "renvoi": "C2, lecture du cercle"
         },
@@ -371,23 +371,23 @@
       "capacite": "C1",
       "enonce": "Sur un cercle de rayon $10$ cm, un arc mesure $5$ cm. Quelle est la mesure de l'angle correspondant en radians ?",
       "options": {
-        "A": "$0{,}5$",
+        "A": "$50$",
         "B": "$2$",
         "C": "$5$",
-        "D": "$50$"
+        "D": "$0{,}5$"
       },
-      "correcte": "A",
+      "correcte": "D",
       "diagnostics": {
+        "A": {
+          "erreur": "$50$ provient du produit $5\\times10$ alors que la relation $s=r\\theta$ impose une division par le rayon.",
+          "renvoi": "C1, radian"
+        },
         "B": {
           "erreur": "Cette valeur inverse le quotient : la mesure vaut longueur d'arc divisée par rayon, soit $5/10$.",
           "renvoi": "C1, radian"
         },
         "C": {
           "erreur": "$5$ est la longueur de l'arc en centimetres, pas la mesure de l'angle en radians.",
-          "renvoi": "C1, radian"
-        },
-        "D": {
-          "erreur": "$50$ provient du produit $5\\times10$ alors que la relation $s=r\\theta$ impose une division par le rayon.",
           "renvoi": "C1, radian"
         }
       }

@@ -6,15 +6,15 @@
       "id": "Q1",
       "capacite": "C1",
       "enonce": "La fonction logarithme neperien $\\ln(x)$ est définie sur :",
-      "correcte": "B",
+      "correcte": "A",
       "options": {
-        "A": "$\\mathbb{R}$",
-        "B": "$]0, +\\infty[$",
+        "A": "$]0, +\\infty[$",
+        "B": "$\\mathbb{R}$",
         "C": "$[0, +\\infty[$",
         "D": "$\\mathbb{R}^*$"
       },
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Les nombres négatifs n'ont pas de logarithme réel. Le logarithme népérien, réciproque de l'exponentielle, est défini exactement sur ]0,+infini[.",
           "renvoi": "C1"
         },
@@ -58,11 +58,11 @@
       "id": "Q3",
       "capacite": "C5",
       "enonce": "La dérivée de $f(x) = \\ln(x)$ sur $]0, +\\infty[$ est :",
-      "correcte": "C",
+      "correcte": "B",
       "options": {
         "A": "$e^x$",
-        "B": "$\\ln(x)$",
-        "C": "$\\frac{1}{x}$",
+        "B": "$\\frac{1}{x}$",
+        "C": "$\\ln(x)$",
         "D": "$-\\frac{1}{x^2}$"
       },
       "diagnostics": {
@@ -70,7 +70,7 @@
           "erreur": "Dérivée de l'exponentielle. Sur ]0,+infini[, la dérivée du logarithme népérien est la fonction x vers 1/x.",
           "renvoi": "C5"
         },
-        "B": {
+        "C": {
           "erreur": "Pas de changement par dérivation. Sur ]0,+infini[, la dérivée du logarithme népérien est la fonction x vers 1/x.",
           "renvoi": "C5"
         },
@@ -84,12 +84,12 @@
       "id": "Q4",
       "capacite": "C1",
       "enonce": "La limite de $\\ln(x)$ quand $x \\to 0^+$ est :",
-      "correcte": "D",
+      "correcte": "C",
       "options": {
         "A": "$0$",
         "B": "$1$",
-        "C": "$+\\infty$",
-        "D": "$-\\infty$"
+        "C": "$-\\infty$",
+        "D": "$+\\infty$"
       },
       "diagnostics": {
         "A": {
@@ -100,7 +100,7 @@
           "erreur": "Valeur erronee. Lorsque x tend vers 0 par valeurs positives, ln(x) décroît sans borne et tend vers -infini.",
           "renvoi": "C1"
         },
-        "C": {
+        "D": {
           "erreur": "Erreur de signe de l'infini. Lorsque x tend vers 0 par valeurs positives, ln(x) décroît sans borne et tend vers -infini.",
           "renvoi": "C1"
         }
@@ -110,24 +110,24 @@
       "id": "Q5",
       "capacite": "C3",
       "enonce": "Pour $a>0$ et tout entier $n$, $\\ln(a^n) =$",
-      "correcte": "B",
+      "correcte": "D",
       "options": {
         "A": "$\\ln(a)^n$",
-        "B": "$n \\ln(a)$",
+        "B": "$a \\ln(n)$",
         "C": "$\\frac{1}{n} \\ln(a)$",
-        "D": "$a \\ln(n)$"
+        "D": "$n \\ln(a)$"
       },
       "diagnostics": {
         "A": {
           "erreur": "Puissance a l'extérieur du logarithme. Pour a>0 et n entier, l'équation fonctionnelle itérée donne ln(a^n)=n ln(a).",
           "renvoi": "C3"
         },
-        "C": {
-          "erreur": "Inverse du facteur. Pour a>0 et n entier, l'équation fonctionnelle itérée donne ln(a^n)=n ln(a).",
+        "B": {
+          "erreur": "Inversion de a et n. Pour a>0 et n entier, l'équation fonctionnelle itérée donne ln(a^n)=n ln(a).",
           "renvoi": "C3"
         },
-        "D": {
-          "erreur": "Inversion de a et n. Pour a>0 et n entier, l'équation fonctionnelle itérée donne ln(a^n)=n ln(a).",
+        "C": {
+          "erreur": "Inverse du facteur. Pour a>0 et n entier, l'équation fonctionnelle itérée donne ln(a^n)=n ln(a).",
           "renvoi": "C3"
         }
       }

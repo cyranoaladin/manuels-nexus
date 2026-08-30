@@ -7,14 +7,14 @@
       "capacite": "C1",
       "enonce": "Parmi les propriétés suivantes, laquelle caractérise la fonction exponentielle ?",
       "options": {
-        "A": "C'est la seule fonction dérivable sur $\\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(1) = 1$.",
-        "B": "C'est la seule fonction dérivable sur $\\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(0) = 1$.",
+        "A": "C'est la seule fonction dérivable sur $\\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(0) = 1$.",
+        "B": "C'est la seule fonction dérivable sur $\\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(1) = 1$.",
         "C": "C'est la seule fonction dérivable sur $\\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(0) = 0$.",
         "D": "C'est la seule fonction dérivable sur $\\mathbb{R}$ telle que $f'(x) = x f(x)$ pour tout $x$ et $f(0) = 1$."
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "La condition $f(1)=1$ définit la fonction $x\\mapsto \\mathrm{e}^{x-1}$, pas la fonction exponentielle $x\\mapsto \\mathrm{e}^x$, qui vérifie $f(0)=1$.",
           "renvoi": "M1, étape 1"
         },
@@ -34,17 +34,17 @@
       "enonce": "Quelle est la valeur de $\\mathrm{e}^0$ ?",
       "options": {
         "A": "$0$",
-        "B": "$\\mathrm{e}$",
-        "C": "$1$",
+        "B": "$1$",
+        "C": "$\\mathrm{e}$",
         "D": "La valeur n'est pas définie."
       },
-      "correcte": "C",
+      "correcte": "B",
       "diagnostics": {
         "A": {
           "erreur": "L'élève confond l'exposant $0$ avec le résultat : $\\mathrm{e}^0 = 1$, pas $0$. Confusion entre puissance nulle et résultat nul.",
           "renvoi": "M1, propriété fondamentale"
         },
-        "B": {
+        "C": {
           "erreur": "L'élève confond $\\mathrm{e}^0$ et $\\mathrm{e}^1$. On a $\\mathrm{e}^1 = \\mathrm{e}$ mais $\\mathrm{e}^0 = 1$.",
           "renvoi": "M1, propriété fondamentale"
         },
@@ -59,19 +59,19 @@
       "capacite": "C1",
       "enonce": "Pour tout réel $x$, on a :",
       "options": {
-        "A": "$\\mathrm{e}^x > 0$",
+        "A": "$\\mathrm{e}^x$ peut être négatif si $x < 0$",
         "B": "$\\mathrm{e}^x \\geqslant 0$ (avec $\\mathrm{e}^x = 0$ possible)",
-        "C": "$\\mathrm{e}^x$ peut être négatif si $x < 0$",
+        "C": "$\\mathrm{e}^x > 0$",
         "D": "$\\mathrm{e}^x > 1$ pour tout $x \\in \\mathbb{R}$"
       },
-      "correcte": "A",
+      "correcte": "C",
       "diagnostics": {
-        "B": {
-          "erreur": "L'exponentielle est strictement positive : $\\mathrm{e}^x > 0$ pour tout $x$, elle n'atteint jamais $0$.",
+        "A": {
+          "erreur": "Pour $x < 0$, $\\mathrm{e}^x$ est positif (par exemple $\\mathrm{e}^{-1} = 1/\\mathrm{e} \\approx 0{,}37 > 0$). L'élève confond exposant négatif et résultat négatif.",
           "renvoi": "M1, étape 2"
         },
-        "C": {
-          "erreur": "Pour $x < 0$, $\\mathrm{e}^x$ est positif (par exemple $\\mathrm{e}^{-1} = 1/\\mathrm{e} \\approx 0{,}37 > 0$). L'élève confond exposant négatif et résultat négatif.",
+        "B": {
+          "erreur": "L'exponentielle est strictement positive : $\\mathrm{e}^x > 0$ pour tout $x$, elle n'atteint jamais $0$.",
           "renvoi": "M1, étape 2"
         },
         "D": {
@@ -112,23 +112,23 @@
       "enonce": "Simplifier $\\dfrac{\\mathrm{e}^{7}}{\\mathrm{e}^{3}}$.",
       "options": {
         "A": "$\\mathrm{e}^{7/3}$",
-        "B": "$\\mathrm{e}^{-21}$",
+        "B": "$\\mathrm{e}^{4}$",
         "C": "$\\mathrm{e}^{10}$",
-        "D": "$\\mathrm{e}^{4}$"
+        "D": "$\\mathrm{e}^{-21}$"
       },
-      "correcte": "D",
+      "correcte": "B",
       "diagnostics": {
         "A": {
           "erreur": "L'élève a divise les exposants ($7/3$) au lieu de les soustraire ($7 - 3 = 4$). Confusion entre quotient d'exponentielles et quotient d'exposants.",
           "renvoi": "M2, règle 2 ; R4"
         },
-        "B": {
-          "erreur": "L'élève a multiplie les exposants avec un signe négatif ($-7 \\times 3 = -21$) au lieu de soustraire.",
-          "renvoi": "M2, règle 2 ; R4"
-        },
         "C": {
           "erreur": "L'élève a additionne les exposants ($7 + 3 = 10$) au lieu de les soustraire. Confusion entre produit et quotient d'exponentielles.",
           "renvoi": "M2, règle 2"
+        },
+        "D": {
+          "erreur": "L'élève a multiplie les exposants avec un signe négatif ($-7 \\times 3 = -21$) au lieu de soustraire.",
+          "renvoi": "M2, règle 2 ; R4"
         }
       }
     },
@@ -164,22 +164,22 @@
       "enonce": "La fonction exponentielle est :",
       "options": {
         "A": "strictement décroissante sur $\\mathbb{R}$",
-        "B": "strictement croissante sur $\\mathbb{R}$",
+        "B": "constante sur $\\mathbb{R}$",
         "C": "croissante sur $]0\\,;+\\infty[$ et décroissante sur $]-\\infty\\,;0[$",
-        "D": "constante sur $\\mathbb{R}$"
+        "D": "strictement croissante sur $\\mathbb{R}$"
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "L'élève confond avec la fonction $x \\mapsto \\mathrm{e}^{-x}$ qui est décroissante. L'exponentielle $x \\mapsto \\mathrm{e}^x$ est strictement croissante car $\\exp'(x) = \\exp(x) > 0$.",
           "renvoi": "M3, étape 1"
         },
-        "C": {
-          "erreur": "L'exponentielle n'a pas de minimum en $x = 0$. Elle est strictement croissante sur $\\mathbb{R}$ tout entier, sans changement de variation.",
+        "B": {
+          "erreur": "La dérivée de l'exponentielle est $\\exp(x) > 0$, donc la fonction est strictement croissante, certainement pas constante.",
           "renvoi": "M3, étape 1"
         },
-        "D": {
-          "erreur": "La dérivée de l'exponentielle est $\\exp(x) > 0$, donc la fonction est strictement croissante, certainement pas constante.",
+        "C": {
+          "erreur": "L'exponentielle n'a pas de minimum en $x = 0$. Elle est strictement croissante sur $\\mathbb{R}$ tout entier, sans changement de variation.",
           "renvoi": "M3, étape 1"
         }
       }
@@ -189,20 +189,20 @@
       "capacite": "C3",
       "enonce": "Pour un réel $x<0$, quelle affirmation situe correctement $\\mathrm{e}^x$ ?",
       "options": {
-        "A": "$\\mathrm{e}^x<0$",
+        "A": "$0<\\mathrm{e}^x<1$",
         "B": "$\\mathrm{e}^x=0$",
-        "C": "$0<\\mathrm{e}^x<1$",
+        "C": "$\\mathrm{e}^x<0$",
         "D": "$\\mathrm{e}^x>1$"
       },
-      "correcte": "C",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
-          "erreur": "Un exposant négatif ne rend pas la valeur négative : $\\mathrm{e}^x$ est strictement positif pour tout réel $x$.",
-          "renvoi": "C3, signe de l'exponentielle"
-        },
         "B": {
           "erreur": "La courbe de l'exponentielle ne coupe jamais l'axe des abscisses : $\\mathrm{e}^x>0$.",
           "renvoi": "C3, courbe représentative"
+        },
+        "C": {
+          "erreur": "Un exposant négatif ne rend pas la valeur négative : $\\mathrm{e}^x$ est strictement positif pour tout réel $x$.",
+          "renvoi": "C3, signe de l'exponentielle"
         },
         "D": {
           "erreur": "Comme $x<0$ et que l'exponentielle est croissante, $\\mathrm{e}^x<\\mathrm{e}^0=1$.",
@@ -215,14 +215,14 @@
       "capacite": "C3",
       "enonce": "Sachant que la fonction exponentielle est strictement croissante, comparer $\\mathrm{e}^{2{,}5}$ et $\\mathrm{e}^{\\sqrt{7}}$.",
       "options": {
-        "A": "$\\mathrm{e}^{2{,}5} < \\mathrm{e}^{\\sqrt{7}}$",
-        "B": "$\\mathrm{e}^{2{,}5} > \\mathrm{e}^{\\sqrt{7}}$",
+        "A": "$\\mathrm{e}^{2{,}5} > \\mathrm{e}^{\\sqrt{7}}$",
+        "B": "$\\mathrm{e}^{2{,}5} < \\mathrm{e}^{\\sqrt{7}}$",
         "C": "$\\mathrm{e}^{2{,}5} = \\mathrm{e}^{\\sqrt{7}}$",
         "D": "On ne peut pas comparer sans calculatrice."
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
+        "A": {
           "erreur": "L'élève a mal compare les exposants. Or $2{,}5^2 = 6{,}25 < 7$ donc $2{,}5 < \\sqrt{7}$, et par croissance de l'exponentielle, $\\mathrm{e}^{2{,}5} < \\mathrm{e}^{\\sqrt{7}}$.",
           "renvoi": "M3, étape 3"
         },
@@ -243,10 +243,10 @@
       "options": {
         "A": "$\\mathrm{e}^{3t}$",
         "B": "$3t\\,\\mathrm{e}^{3t}$",
-        "C": "$3\\,\\mathrm{e}^{3}$",
-        "D": "$3\\,\\mathrm{e}^{3t}$"
+        "C": "$3\\,\\mathrm{e}^{3t}$",
+        "D": "$3\\,\\mathrm{e}^{3}$"
       },
-      "correcte": "D",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "L'élève a oublie le facteur constant $3$ : la dérivée de $t\\mapsto\\mathrm{e}^{at}$ est $t\\mapsto a\\mathrm{e}^{at}$.",
@@ -256,7 +256,7 @@
           "erreur": "L'élève a multiplie par l'exposant $3t$ au lieu du coefficient constant $3$.",
           "renvoi": "C4, coefficient $a$"
         },
-        "C": {
+        "D": {
           "erreur": "Le facteur $3$ est correct, mais la fonction exponentielle conserve la variable : $\\mathrm{e}^{3t}$ ne devient pas $\\mathrm{e}^3$.",
           "renvoi": "C4, dérivée de $t\\mapsto\\mathrm{e}^{at}$"
         }
@@ -269,10 +269,10 @@
       "options": {
         "A": "$\\mathrm{e}^{-2t}$",
         "B": "$2\\,\\mathrm{e}^{-2t}$",
-        "C": "$-2\\,\\mathrm{e}^{-2t}$",
-        "D": "$-2\\,\\mathrm{e}^{2t}$"
+        "C": "$-2\\,\\mathrm{e}^{2t}$",
+        "D": "$-2\\,\\mathrm{e}^{-2t}$"
       },
-      "correcte": "C",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "L'élève a oublie le coefficient $-2$ qui multiplie $t$ dans l'exposant.",
@@ -282,7 +282,7 @@
           "erreur": "Le coefficient a pour valeur $-2$, pas $2$ : le signe négatif a été perdu.",
           "renvoi": "C4, coefficient $a=-2$"
         },
-        "D": {
+        "C": {
           "erreur": "Le facteur $-2$ est correct, mais l'exposant reste $-2t$ : son signe ne change pas lors de la dérivation.",
           "renvoi": "C4, dérivée de $t\\mapsto\\mathrm{e}^{at}$"
         }
@@ -293,23 +293,23 @@
       "capacite": "C4",
       "enonce": "Soit $h(t) = \\mathrm{e}^{0{,}5t}$. Quelle est $h'(t)$ ?",
       "options": {
-        "A": "$\\mathrm{e}^{0{,}5t}$",
+        "A": "$0{,}5\\,\\mathrm{e}^{0{,}5t}$",
         "B": "$0{,}5t\\,\\mathrm{e}^{0{,}5t}$",
         "C": "$2\\,\\mathrm{e}^{0{,}5t}$",
-        "D": "$0{,}5\\,\\mathrm{e}^{0{,}5t}$"
+        "D": "$\\mathrm{e}^{0{,}5t}$"
       },
-      "correcte": "D",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
-          "erreur": "L'élève a oublie le coefficient $0{,}5$ qui multiplie $t$ dans l'exposant.",
-          "renvoi": "C4, coefficient $a=0{,}5$"
-        },
         "B": {
           "erreur": "L'élève a multiplie par l'exposant $0{,}5t$ au lieu du coefficient constant $0{,}5$.",
           "renvoi": "C4, coefficient $a$"
         },
         "C": {
           "erreur": "$2$ est l'inverse de $0{,}5$, pas le coefficient de $t$ dans l'exposant.",
+          "renvoi": "C4, coefficient $a=0{,}5$"
+        },
+        "D": {
+          "erreur": "L'élève a oublie le coefficient $0{,}5$ qui multiplie $t$ dans l'exposant.",
           "renvoi": "C4, coefficient $a=0{,}5$"
         }
       }
@@ -345,20 +345,20 @@
       "capacite": "C5",
       "enonce": "Une masse est modélisée par $M(t)=80\\,\\mathrm{e}^{-0{,}3t}$. Quel est le quotient $M(t+1)/M(t)$ ?",
       "options": {
-        "A": "$\\mathrm{e}^{-0{,}3}$",
+        "A": "$80\\mathrm{e}^{-0{,}3}$",
         "B": "$\\mathrm{e}^{0{,}3}$",
-        "C": "$80\\mathrm{e}^{-0{,}3}$",
+        "C": "$\\mathrm{e}^{-0{,}3}$",
         "D": "$-0{,}3$"
       },
-      "correcte": "A",
+      "correcte": "C",
       "diagnostics": {
+        "A": {
+          "erreur": "Le coefficient initial $80$ se simplifie dans le quotient $M(t+1)/M(t)$.",
+          "renvoi": "C5, coefficient multiplicateur"
+        },
         "B": {
           "erreur": "Le signe de l'exposant a été inverse : le modèle de décroissance conserve le facteur $\\mathrm{e}^{-0{,}3}$ d'une unité de temps a la suivante.",
           "renvoi": "C5, décroissance exponentielle"
-        },
-        "C": {
-          "erreur": "Le coefficient initial $80$ se simplifie dans le quotient $M(t+1)/M(t)$.",
-          "renvoi": "C5, coefficient multiplicateur"
         },
         "D": {
           "erreur": "$-0{,}3$ est le coefficient dans l'exposant ; le coefficient multiplicateur est son exponentielle $\\mathrm{e}^{-0{,}3}$.",
@@ -372,23 +372,23 @@
       "enonce": "Pour $k>0$, quelle affirmation décrit la courbe de $t\\mapsto\\mathrm{e}^{-kt}$ ?",
       "options": {
         "A": "Elle est croissante et passe par $(0;0)$.",
-        "B": "Elle est décroissante et passe par $(0;1)$.",
+        "B": "Elle prend des valeurs négatives pour $t>0$.",
         "C": "Elle est constante et égale a $1$.",
-        "D": "Elle prend des valeurs négatives pour $t>0$."
+        "D": "Elle est décroissante et passe par $(0;1)$."
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "La courbe passe par $(0;1)$ car $\\mathrm{e}^{0}=1$, et le coefficient $-k<0$ produit une décroissance.",
           "renvoi": "C5, courbe de $t\\mapsto\\mathrm{e}^{-kt}$"
         },
+        "B": {
+          "erreur": "Une exponentielle est toujours strictement positive, y compris lorsque son exposant est négatif.",
+          "renvoi": "C3, signe ; C5, décroissance"
+        },
         "C": {
           "erreur": "La fonction n'est constante que si le coefficient de $t$ dans l'exposant vaut $0$, or $-k<0$.",
           "renvoi": "C5, paramètre $k>0$"
-        },
-        "D": {
-          "erreur": "Une exponentielle est toujours strictement positive, y compris lorsque son exposant est négatif.",
-          "renvoi": "C3, signe ; C5, décroissance"
         }
       }
     }

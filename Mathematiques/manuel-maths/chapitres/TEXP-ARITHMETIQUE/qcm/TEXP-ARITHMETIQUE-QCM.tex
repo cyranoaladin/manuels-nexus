@@ -21,9 +21,9 @@
 
 \item \textbf{[Q2]} La division euclidienne de 25 par 7 donne pour reste :
   \begin{enumerate}[label=\Alph*.]
-    \item 1
-    \item 2
     \item 4
+    \item 2
+    \item 1
     \item 3
   \end{enumerate}
 
@@ -41,18 +41,18 @@
   \begin{enumerate}[label=\Alph*.]
     \item $a+b=1$
     \item $a b = 1$
-    \item $\exists u,v \in \mathbb{Z}, au-bv=0$
     \item $\exists u,v \in \mathbb{Z}, au+bv=1$
+    \item $\exists u,v \in \mathbb{Z}, au-bv=0$
   \end{enumerate}
 
 \item[] \textbf{Capacité C2}
 
 \item \textbf{[Q5]} Si $a \equiv b \pmod{n}$, alors :
   \begin{enumerate}[label=\Alph*.]
-    \item $n$ divise $a-b$
+    \item $a+b$ est multiple de $n$
     \item $a$ divise $b-n$
     \item $a-b = n$
-    \item $a+b$ est multiple de $n$
+    \item $n$ divise $a-b$
   \end{enumerate}
 
 \end{enumerate}
@@ -68,10 +68,10 @@
 Question & Capacité & Réponse exacte \\
 \hline
 Q1 & C1 & \textbf{B} \\
-Q2 & C1 & \textbf{C} \\
+Q2 & C1 & \textbf{A} \\
 Q3 & C1 & \textbf{A} \\
-Q4 & C5 & \textbf{D} \\
-Q5 & C2 & \textbf{A} \\
+Q4 & C5 & \textbf{C} \\
+Q5 & C2 & \textbf{D} \\
 \hline
 \end{tabular}
 \end{center}
@@ -87,8 +87,8 @@ Q5 & C2 & \textbf{A} \\
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Quotient faux. La division 25=3*7+4 donne le reste 4, compris entre 0 et 6. \emph{Renvoi : C1.}
     \item \textbf{B} — Erreur de calcul. La division 25=3*7+4 donne le reste 4, compris entre 0 et 6. \emph{Renvoi : C1.}
+    \item \textbf{C} — Quotient faux. La division 25=3*7+4 donne le reste 4, compris entre 0 et 6. \emph{Renvoi : C1.}
     \item \textbf{D} — Reste incorrect. La division 25=3*7+4 donne le reste 4, compris entre 0 et 6. \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q3}
@@ -101,13 +101,13 @@ Q5 & C2 & \textbf{A} \\
   \begin{itemize}
     \item \textbf{A} — Équation trop simple. Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1. \emph{Renvoi : C5.}
     \item \textbf{B} — Produit égal a 1. Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1. \emph{Renvoi : C5.}
-    \item \textbf{C} — Équation homogene. Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1. \emph{Renvoi : C5.}
+    \item \textbf{D} — Équation homogene. Le théorème de Bézout caractérise la coprimalité par l'existence de u,v entiers tels que au+bv=1. \emph{Renvoi : C5.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
+    \item \textbf{A} — Somme au lieu de difference. La congruence a équivalent à b modulo n signifie exactement que n divise a-b. \emph{Renvoi : C2.}
     \item \textbf{B} — Sens du diviseur inverse. La congruence a équivalent à b modulo n signifie exactement que n divise a-b. \emph{Renvoi : C2.}
     \item \textbf{C} — Égalité non nécessaire. La congruence a équivalent à b modulo n signifie exactement que n divise a-b. \emph{Renvoi : C2.}
-    \item \textbf{D} — Somme au lieu de difference. La congruence a équivalent à b modulo n signifie exactement que n divise a-b. \emph{Renvoi : C2.}
   \end{itemize}
 \end{itemize}
 \fi

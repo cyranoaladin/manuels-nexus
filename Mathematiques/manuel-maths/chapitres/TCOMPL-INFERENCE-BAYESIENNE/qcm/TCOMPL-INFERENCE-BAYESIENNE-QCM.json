@@ -58,15 +58,15 @@
       "id": "Q3",
       "capacite": "C1",
       "enonce": "La formule des probabilités totales pour une partition $(A_k)$ s'ecrit $P(B) =$",
-      "correcte": "B",
+      "correcte": "A",
       "options": {
-        "A": "$\\sum P(A_k)$",
-        "B": "$\\sum P(B|A_k) P(A_k)$",
+        "A": "$\\sum P(B|A_k) P(A_k)$",
+        "B": "$\\sum P(A_k)$",
         "C": "$\\prod P(B|A_k)$",
         "D": "$P(B|A_1)$"
       },
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "La somme des P(A_k) vaut 1. Pour une partition (A_k), la formule totale est P(B)=somme_k P(B|A_k)P(A_k).",
           "renvoi": "C1"
         },
@@ -84,24 +84,24 @@
       "id": "Q4",
       "capacite": "C3",
       "enonce": "En inference bayesienne, la probabilité $P(A)$ avant de connaitre B s'appelle :",
-      "correcte": "D",
+      "correcte": "B",
       "options": {
         "A": "La probabilité a posteriori",
-        "B": "La vraisemblance",
+        "B": "La probabilité a priori",
         "C": "La valeur p",
-        "D": "La probabilité a priori"
+        "D": "La vraisemblance"
       },
       "diagnostics": {
         "A": {
           "erreur": "P(A|B) est la probabilité a posteriori. La probabilité attribuée à A avant l'observation de B est la probabilité a priori.",
           "renvoi": "C3"
         },
-        "B": {
-          "erreur": "P(B|A) est la vraisemblance. La probabilité attribuée à A avant l'observation de B est la probabilité a priori.",
-          "renvoi": "C3"
-        },
         "C": {
           "erreur": "Terme de test d'hypothèse. La probabilité attribuée à A avant l'observation de B est la probabilité a priori.",
+          "renvoi": "C3"
+        },
+        "D": {
+          "erreur": "P(B|A) est la vraisemblance. La probabilité attribuée à A avant l'observation de B est la probabilité a priori.",
           "renvoi": "C3"
         }
       }
@@ -110,24 +110,24 @@
       "id": "Q5",
       "capacite": "C4",
       "enonce": "Un test de sensibilite 95% et specificite 90% sur une maladie rare (1%) donne une VPP :",
-      "correcte": "A",
+      "correcte": "D",
       "options": {
-        "A": "Faible (inférieure à 10%) car la maladie est rare",
+        "A": "Exactement 90%",
         "B": "Très forte (95%)",
         "C": "Égale a 50%",
-        "D": "Exactement 90%"
+        "D": "Faible (inférieure à 10%) car la maladie est rare"
       },
       "diagnostics": {
+        "A": {
+          "erreur": "Confusion avec la specificite. La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 %, donc moins de 10 %.",
+          "renvoi": "C4"
+        },
         "B": {
           "erreur": "Oubli de l'effet du biais de rarete (paradoxe du faux positif). La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 %, donc moins de 10 %.",
           "renvoi": "C4"
         },
         "C": {
           "erreur": "Valeur arbitraire. La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 %, donc moins de 10 %.",
-          "renvoi": "C4"
-        },
-        "D": {
-          "erreur": "Confusion avec la specificite. La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 %, donc moins de 10 %.",
           "renvoi": "C4"
         }
       }

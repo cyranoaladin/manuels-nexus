@@ -7,14 +7,14 @@
       "capacite": "C1",
       "enonce": "La dérivée de la fonction $f(x) = x^4$ sur $\\mathbb{R}$ est :",
       "options": {
-        "A": "$x^3$",
-        "B": "$4x^3$",
+        "A": "$4x^3$",
+        "B": "$x^3$",
         "C": "$4x^4$",
         "D": "$3x^3$"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Oubli du coefficient $n$ dans la formule $(x^n)' = n x^{n-1}$.",
           "renvoi": "M1"
         },
@@ -34,17 +34,17 @@
       "enonce": "La fonction $f(x) = \\sqrt{x}$ est dérivable sur $]0 ; +\\infty[$ et sa dérivée est :",
       "options": {
         "A": "$\\dfrac{2}{\\sqrt{x}}$",
-        "B": "$\\dfrac{1}{\\sqrt{x}}$",
-        "C": "$\\dfrac{1}{2\\sqrt{x}}$",
+        "B": "$\\dfrac{1}{2\\sqrt{x}}$",
+        "C": "$\\dfrac{1}{\\sqrt{x}}$",
         "D": "$\\dfrac{\\sqrt{x}}{2}$"
       },
-      "correcte": "C",
+      "correcte": "B",
       "diagnostics": {
         "A": {
           "erreur": "Facteur 2 au numérateur au lieu du dénominateur.",
           "renvoi": "M1"
         },
-        "B": {
+        "C": {
           "erreur": "Dénominateur 2 omis dans la formule de dérivation de $\\sqrt{x}$.",
           "renvoi": "M1"
         },
@@ -112,17 +112,17 @@
       "enonce": "La formule de dérivation d'un produit $(uv)'$ est :",
       "options": {
         "A": "$u'v'$",
-        "B": "$u' + v'$",
-        "C": "$u'v + uv'$",
+        "B": "$u'v + uv'$",
+        "C": "$u' + v'$",
         "D": "$u'v - uv'$"
       },
-      "correcte": "C",
+      "correcte": "B",
       "diagnostics": {
         "A": {
           "erreur": "Produit des dérivées au lieu de la formule Leibniz.",
           "renvoi": "M2"
         },
-        "B": {
+        "C": {
           "erreur": "Somme des dérivées.",
           "renvoi": "M2"
         },
@@ -138,17 +138,17 @@
       "enonce": "La dérivée du quotient $\\left(\\dfrac{u}{v}\\right)'$ est égale à :",
       "options": {
         "A": "$\\dfrac{u'v + uv'}{v^2}$",
-        "B": "$\\dfrac{u'v - uv'}{v^2}$",
-        "C": "$\\dfrac{u'}{v'}$",
+        "B": "$\\dfrac{u'}{v'}$",
+        "C": "$\\dfrac{u'v - uv'}{v^2}$",
         "D": "$\\dfrac{u'v - uv'}{v}$"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Signe $+$ au numérateur au lieu de $-$.",
           "renvoi": "M2"
         },
-        "C": {
+        "B": {
           "erreur": "Quotient des dérivées.",
           "renvoi": "M2"
         },
@@ -165,10 +165,10 @@
       "options": {
         "A": "strictement décroissante sur $I$",
         "B": "constante sur $I$",
-        "C": "strictement croissante sur $I$",
-        "D": "nulle sur $I$"
+        "C": "nulle sur $I$",
+        "D": "strictement croissante sur $I$"
       },
-      "correcte": "C",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "Signe $+$ de $f'$ confondu avec décroissance.",
@@ -178,7 +178,7 @@
           "erreur": "Signe $+$ de $f'$ confondu avec $f'$ nulle.",
           "renvoi": "M3"
         },
-        "D": {
+        "C": {
           "erreur": "Signe de $f'$ confondu avec annulation de $f$.",
           "renvoi": "M3"
         }
@@ -189,19 +189,19 @@
       "capacite": "C3",
       "enonce": "Si le tableau de signe de $f'(x)$ indique $f'(x) < 0$ sur $]1 ; 4[$, alors $f$ est :",
       "options": {
-        "A": "croissante sur $]1 ; 4[$",
+        "A": "strictement décroissante sur $]1 ; 4[$",
         "B": "nulle en $x=2{,}5$",
-        "C": "strictement décroissante sur $]1 ; 4[$",
+        "C": "croissante sur $]1 ; 4[$",
         "D": "convexe sur $]1 ; 4[$"
       },
-      "correcte": "C",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
-          "erreur": "Intervalle de croissance pris au lieu de décroissance.",
-          "renvoi": "M3"
-        },
         "B": {
           "erreur": "Racine de $f$ au lieu du signe de $f'$.",
+          "renvoi": "M3"
+        },
+        "C": {
+          "erreur": "Intervalle de croissance pris au lieu de décroissance.",
           "renvoi": "M3"
         },
         "D": {
@@ -216,17 +216,17 @@
       "enonce": "Si $f'(x)$ s'annule en $x=a$ en passant du signe $+$ au signe $-$, la fonction $f$ admet en $a$ :",
       "options": {
         "A": "un minimum local",
-        "B": "un point d'inflexion",
-        "C": "un maximum local",
+        "B": "un maximum local",
+        "C": "un point d'inflexion",
         "D": "une asymptote verticale"
       },
-      "correcte": "C",
+      "correcte": "B",
       "diagnostics": {
         "A": {
           "erreur": "Changement $+ \\to -$ correspond à un maximum, pas un minimum.",
           "renvoi": "M3, M4"
         },
-        "B": {
+        "C": {
           "erreur": "Annulation de $f'$ avec changement de signe donne un extremum.",
           "renvoi": "M4"
         },
@@ -242,17 +242,17 @@
       "enonce": "Soit $B(x) = -x^2 + 6x - 5$ la fonction bénéfice. Le bénéfice maximal est atteint pour $x$ égal à :",
       "options": {
         "A": "$-3$",
-        "B": "$3$",
-        "C": "$6$",
+        "B": "$6$",
+        "C": "$3$",
         "D": "$0$"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Signe de $-2x$ oublié : $-2x+6=0$ donne $x=3$, pas $-3$.",
           "renvoi": "M4"
         },
-        "C": {
+        "B": {
           "erreur": "$x=6$ correspond à $B'(6) = -6 \\neq 0$.",
           "renvoi": "M4"
         },
@@ -268,22 +268,22 @@
       "enonce": "Pour une fonction polynôme du second degré $f(x) = ax^2 + bx + c$ avec $a < 0$, l'extremum est :",
       "options": {
         "A": "un minimum global",
-        "B": "un maximum global",
+        "B": "inexistant",
         "C": "un point d'inflexion",
-        "D": "inexistant"
+        "D": "un maximum global"
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "Coefficient dominant négatif implique un maximum global, pas un minimum.",
           "renvoi": "M4"
         },
-        "C": {
-          "erreur": "Pas de point d'inflexion pour une parabole.",
+        "B": {
+          "erreur": "$f'$ change de signe donc c'est bien un extremum.",
           "renvoi": "M4"
         },
-        "D": {
-          "erreur": "$f'$ change de signe donc c'est bien un extremum.",
+        "C": {
+          "erreur": "Pas de point d'inflexion pour une parabole.",
           "renvoi": "M4"
         }
       }
@@ -293,14 +293,14 @@
       "capacite": "C4",
       "enonce": "Pour déterminer les extremums locaux d'une fonction dérivable $f$ sur un intervalle ouvert, on cherche :",
       "options": {
-        "A": "les valeurs où $f(x) = 0$",
-        "B": "les valeurs où $f'(x) = 0$ avec changement de signe",
+        "A": "les valeurs où $f'(x) = 0$ avec changement de signe",
+        "B": "les valeurs où $f(x) = 0$",
         "C": "les valeurs où $f''(x) > 0$",
         "D": "les bornes de l'intervalle"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "$f(x)=0$ donne les racines de $f$, pas ses extremums.",
           "renvoi": "M4"
         },
@@ -372,22 +372,22 @@
       "enonce": "Pour trouver le maximum d'une fonction continue $f$ sur un segment fermé $[a, b]$, il faut comparer :",
       "options": {
         "A": "les valeurs de $f'$ aux bornes",
-        "B": "les valeurs de $f$ aux points critiques intérieurs où $f'(x)=0$ et aux bornes $f(a), f(b)$",
+        "B": "uniquement les bornes $f(a)$ et $f(b)$",
         "C": "uniquement les points où $f'(x)=0$",
-        "D": "uniquement les bornes $f(a)$ et $f(b)$"
+        "D": "les valeurs de $f$ aux points critiques intérieurs où $f'(x)=0$ et aux bornes $f(a), f(b)$"
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "Les valeurs de $f'$ ne sont pas les valeurs de la fonction $f$.",
           "renvoi": "M5"
         },
-        "C": {
-          "erreur": "Sur un segment fermé, le maximum peut être atteint sur une borne sans annulation de $f'$.",
+        "B": {
+          "erreur": "Le point critique intérieur doit aussi être vérifié.",
           "renvoi": "M5"
         },
-        "D": {
-          "erreur": "Le point critique intérieur doit aussi être vérifié.",
+        "C": {
+          "erreur": "Sur un segment fermé, le maximum peut être atteint sur une borne sans annulation de $f'$.",
           "renvoi": "M5"
         }
       }

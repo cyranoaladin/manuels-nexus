@@ -32,15 +32,15 @@
       "id": "Q2",
       "capacite": "C2",
       "enonce": "Pour $0<q<1$, la somme $1+q+q^2+\\cdots$ vaut :",
-      "correcte": "B",
+      "correcte": "A",
       "options": {
-        "A": "$1-q$",
-        "B": "$1/(1-q)$",
+        "A": "$1/(1-q)$",
+        "B": "$1-q$",
         "C": "$1/q$",
         "D": "$+\\infty$"
       },
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "La différence $1-q$ apparaît au dénominateur après multiplication et soustraction de la série, pas comme résultat. Pour 0<q<1, la somme géométrique infinie 1+q+q^2+... vaut 1/(1-q).",
           "renvoi": "C2"
         },
@@ -84,12 +84,12 @@
       "id": "Q4",
       "capacite": "C5",
       "enonce": "Le modèle de Malthus suppose un taux de croissance :",
-      "correcte": "D",
+      "correcte": "C",
       "options": {
         "A": "Decroissant",
         "B": "Nul",
-        "C": "Logistique",
-        "D": "Constant et proportionnel a la population"
+        "C": "Constant et proportionnel a la population",
+        "D": "Logistique"
       },
       "diagnostics": {
         "A": {
@@ -100,7 +100,7 @@
           "erreur": "Population constante. Le modèle de Malthus s'écrit y'=ay : le coefficient de croissance a est constant et la variation est proportionnelle à la population.",
           "renvoi": "C5"
         },
-        "C": {
+        "D": {
           "erreur": "Modèle avec capacité d'accueil. Le modèle de Malthus s'écrit y'=ay : le coefficient de croissance a est constant et la variation est proportionnelle à la population.",
           "renvoi": "C5"
         }
@@ -110,12 +110,12 @@
       "id": "Q5",
       "capacite": "C4",
       "enonce": "Une solution constante de $u_{n+1}=0{,}8u_n+10$ vaut :",
-      "correcte": "C",
+      "correcte": "D",
       "options": {
         "A": "$10$",
         "B": "$40$",
-        "C": "$50$",
-        "D": "$80$"
+        "C": "$80$",
+        "D": "$50$"
       },
       "diagnostics": {
         "A": {
@@ -126,7 +126,7 @@
           "erreur": "La valeur 40 ne satisfait pas l'équation fixe : $0{,}8*40+10=42$. Une solution constante de u_(n+1)=0,8u_n+10 vérifie ell=0,8ell+10, donc ell=50.",
           "renvoi": "C4"
         },
-        "D": {
+        "C": {
           "erreur": "La valeur 80 ne satisfait pas l'équation fixe : $0{,}8*80+10=74$. Une solution constante de u_(n+1)=0,8u_n+10 vérifie ell=0,8ell+10, donc ell=50.",
           "renvoi": "C4"
         }

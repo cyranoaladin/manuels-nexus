@@ -32,20 +32,20 @@
       "id": "Q2",
       "capacite": "C2",
       "enonce": "Pour $k \\ge 1$, la probabilité $P(X = k)$ d'une loi géométrique $G(p)$ vaut :",
-      "correcte": "C",
+      "correcte": "A",
       "options": {
-        "A": "$p^k (1-p)$",
+        "A": "$(1-p)^{k-1} p$",
         "B": "$p (1-p)^k$",
-        "C": "$(1-p)^{k-1} p$",
+        "C": "$p^k (1-p)$",
         "D": "$\\binom{n}{k} p^k (1-p)^{n-k}$"
       },
       "diagnostics": {
-        "A": {
-          "erreur": "Inversion des roles de succès et echec. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)^(k-1)p.",
-          "renvoi": "C2"
-        },
         "B": {
           "erreur": "Erreur d'exposant k au lieu de k-1. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)^(k-1)p.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Inversion des roles de succès et echec. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)^(k-1)p.",
           "renvoi": "C2"
         },
         "D": {
@@ -84,12 +84,12 @@
       "id": "Q4",
       "capacite": "C2",
       "enonce": "Pour une loi géométrique $G(p)$, $P(X > k) =$",
-      "correcte": "D",
+      "correcte": "C",
       "options": {
         "A": "$p^k$",
         "B": "$1 - p^k$",
-        "C": "1 - (1-p)^k",
-        "D": "$(1-p)^k$"
+        "C": "$(1-p)^k$",
+        "D": "1 - (1-p)^k"
       },
       "diagnostics": {
         "A": {
@@ -100,7 +100,7 @@
           "erreur": "Formule fausse. L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)^k.",
           "renvoi": "C2"
         },
-        "C": {
+        "D": {
           "erreur": "Probabilité P(X <= k). L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)^k.",
           "renvoi": "C2"
         }
@@ -110,12 +110,12 @@
       "id": "Q5",
       "capacite": "C1",
       "enonce": "Si $p = 0{,}2$, le temps d'attente moyen du premier succès est :",
-      "correcte": "C",
+      "correcte": "D",
       "options": {
         "A": "2 d'essais",
         "B": "4 d'essais",
-        "C": "5 d'essais",
-        "D": "10 d'essais"
+        "C": "10 d'essais",
+        "D": "5 d'essais"
       },
       "diagnostics": {
         "A": {
@@ -126,7 +126,7 @@
           "erreur": "Calcul (1-p)/p = 0.8/0.2 = 4. Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais.",
           "renvoi": "C1"
         },
-        "D": {
+        "C": {
           "erreur": "Calcul 1/(0.2^2). Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais.",
           "renvoi": "C1"
         }

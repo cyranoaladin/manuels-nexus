@@ -23,9 +23,9 @@
 
 \item \textbf{[Q2]} Pour $k \ge 1$, la probabilité $P(X = k)$ d'une loi géométrique $G(p)$ vaut :
   \begin{enumerate}[label=\Alph*.]
-    \item $p^k (1-p)$
-    \item $p (1-p)^k$
     \item $(1-p)^{k-1} p$
+    \item $p (1-p)^k$
+    \item $p^k (1-p)$
     \item $\binom{n}{k} p^k (1-p)^{n-k}$
   \end{enumerate}
 
@@ -45,8 +45,8 @@
   \begin{enumerate}[label=\Alph*.]
     \item $p^k$
     \item $1 - p^k$
-    \item 1 - (1-p)\textasciicircum{}k
     \item $(1-p)^k$
+    \item 1 - (1-p)\textasciicircum{}k
   \end{enumerate}
 
 \item[] \textbf{Capacité C1}
@@ -55,8 +55,8 @@
   \begin{enumerate}[label=\Alph*.]
     \item 2 d'essais
     \item 4 d'essais
-    \item 5 d'essais
     \item 10 d'essais
+    \item 5 d'essais
   \end{enumerate}
 
 \end{enumerate}
@@ -72,10 +72,10 @@
 Question & Capacité & Réponse exacte \\
 \hline
 Q1 & C1 & \textbf{A} \\
-Q2 & C2 & \textbf{C} \\
+Q2 & C2 & \textbf{A} \\
 Q3 & C3 & \textbf{B} \\
-Q4 & C2 & \textbf{D} \\
-Q5 & C1 & \textbf{C} \\
+Q4 & C2 & \textbf{C} \\
+Q5 & C1 & \textbf{D} \\
 \hline
 \end{tabular}
 \end{center}
@@ -91,8 +91,8 @@ Q5 & C1 & \textbf{C} \\
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Inversion des roles de succès et echec. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)\textasciicircum{}(k-1)p. \emph{Renvoi : C2.}
     \item \textbf{B} — Erreur d'exposant k au lieu de k-1. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)\textasciicircum{}(k-1)p. \emph{Renvoi : C2.}
+    \item \textbf{C} — Inversion des roles de succès et echec. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)\textasciicircum{}(k-1)p. \emph{Renvoi : C2.}
     \item \textbf{D} — Formule de la loi binomiale. Avoir le premier succès au rang k exige k-1 échecs puis un succès, donc P(X=k)=(1-p)\textasciicircum{}(k-1)p. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q3}
@@ -105,13 +105,13 @@ Q5 & C1 & \textbf{C} \\
   \begin{itemize}
     \item \textbf{A} — Utilisation de p au lieu de (1-p). L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)\textasciicircum{}k. \emph{Renvoi : C2.}
     \item \textbf{B} — Formule fausse. L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)\textasciicircum{}k. \emph{Renvoi : C2.}
-    \item \textbf{C} — Probabilité P(X <= k). L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)\textasciicircum{}k. \emph{Renvoi : C2.}
+    \item \textbf{D} — Probabilité P(X <= k). L'événement X>k signifie k échecs successifs, donc P(X>k)=(1-p)\textasciicircum{}k. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
     \item \textbf{A} — Calcul 1/0.5. Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais. \emph{Renvoi : C1.}
     \item \textbf{B} — Calcul (1-p)/p = 0.8/0.2 = 4. Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais. \emph{Renvoi : C1.}
-    \item \textbf{D} — Calcul 1/(0.2\textasciicircum{}2). Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais. \emph{Renvoi : C1.}
+    \item \textbf{C} — Calcul 1/(0.2\textasciicircum{}2). Pour p=0,2, le temps moyen vaut E(X)=1/p=5 essais. \emph{Renvoi : C1.}
   \end{itemize}
 \end{itemize}
 \fi

@@ -32,20 +32,20 @@
       "id": "Q2",
       "capacite": "C2",
       "enonce": "Le nombre d'arrangements sans repetition $A_n^k$ est :",
-      "correcte": "C",
+      "correcte": "A",
       "options": {
-        "A": "$n^k$",
+        "A": "$\\frac{n!}{(n-k)!}$",
         "B": "$\\frac{n!}{k!}$",
-        "C": "$\\frac{n!}{(n-k)!}$",
+        "C": "$n^k$",
         "D": "$\\binom{n}{k}$"
       },
       "diagnostics": {
-        "A": {
-          "erreur": "Le nombre $n^k$ conserve $n$ choix a chaque position et autorise donc les repetitions ; un arrangement sans repetition retire un choix a chaque étape.",
-          "renvoi": "C2"
-        },
         "B": {
           "erreur": "Le dénominateur $k!$ ne retire pas les $n-k$ facteurs inutilises ; une k-liste sans repetition conserve exactement $n!/(n-k)!$.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Le nombre $n^k$ conserve $n$ choix a chaque position et autorise donc les repetitions ; un arrangement sans repetition retire un choix a chaque étape.",
           "renvoi": "C2"
         },
         "D": {
@@ -84,20 +84,20 @@
       "id": "Q4",
       "capacite": "C3",
       "enonce": "Quelle égalité traduit le denombrement de toutes les parties d'un ensemble a $n$ éléments selon leur cardinal ?",
-      "correcte": "A",
+      "correcte": "C",
       "options": {
-        "A": "$\\displaystyle\\sum_{k=0}^{n} \\binom{n}{k}=2^n$",
+        "A": "$\\displaystyle\\prod_{k=0}^{n} \\binom{n}{k}=2^n$",
         "B": "$\\displaystyle\\sum_{k=0}^{n} \\binom{n}{k}=n$",
-        "C": "$\\displaystyle\\prod_{k=0}^{n} \\binom{n}{k}=2^n$",
+        "C": "$\\displaystyle\\sum_{k=0}^{n} \\binom{n}{k}=2^n$",
         "D": "$\\displaystyle\\sum_{k=1}^{n} k=n!$"
       },
       "diagnostics": {
-        "B": {
-          "erreur": "La somme compte toutes les parties, pas seulement les $n$ singletons ; un ensemble a $n$ éléments possede $2^n$ parties.",
+        "A": {
+          "erreur": "Les classes de parties de cardinal $k$ sont disjointes et doivent être additionnees ; leur produit ne denombre pas leur reunion.",
           "renvoi": "C3"
         },
-        "C": {
-          "erreur": "Les classes de parties de cardinal $k$ sont disjointes et doivent être additionnees ; leur produit ne denombre pas leur reunion.",
+        "B": {
+          "erreur": "La somme compte toutes les parties, pas seulement les $n$ singletons ; un ensemble a $n$ éléments possede $2^n$ parties.",
           "renvoi": "C3"
         },
         "D": {

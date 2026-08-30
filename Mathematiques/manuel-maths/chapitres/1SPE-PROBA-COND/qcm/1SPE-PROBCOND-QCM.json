@@ -33,20 +33,20 @@
       "capacite": "C1",
       "enonce": "P_A(B) = 3/5 signifie :",
       "options": {
-        "A": "P(A sachant B) = 3/5",
+        "A": "P(B sachant A) = 3/5",
         "B": "P(A inter B) = 3/5",
-        "C": "P(B sachant A) = 3/5",
+        "C": "P(A sachant B) = 3/5",
         "D": "P(A union B) = 3/5"
       },
-      "correcte": "C",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
-          "erreur": "L'élève a inverse l'ordre de conditionnement : P_A(B) est la probabilité de B sachant A, pas de A sachant B.",
-          "renvoi": "C1, notation"
-        },
         "B": {
           "erreur": "P_A(B) n'est pas P(A inter B), c'est le quotient P(A inter B)/P(A).",
           "renvoi": "C1, définition"
+        },
+        "C": {
+          "erreur": "L'élève a inverse l'ordre de conditionnement : P_A(B) est la probabilité de B sachant A, pas de A sachant B.",
+          "renvoi": "C1, notation"
         },
         "D": {
           "erreur": "Confusion entre probabilité conditionnelle et probabilité de l'union.",
@@ -60,22 +60,22 @@
       "enonce": "Si P(A) = 2/5 et P_A(B) = 3/4, que vaut P(A inter B) ?",
       "options": {
         "A": "3/20",
-        "B": "3/10",
+        "B": "6/5",
         "C": "23/20",
-        "D": "6/5"
+        "D": "3/10"
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "L'élève a multiplie $1/5$ par $3/4$ en oubliant le facteur $2$ au numérateur de $P(A)=2/5$, ce qui donne exactement $3/20$ au lieu de $3/10$.",
           "renvoi": "C1, formule de multiplication"
         },
-        "C": {
-          "erreur": "L'élève a additionne P(A) + P_A(B) au lieu de les multiplier.",
+        "B": {
+          "erreur": "L'élève a multiplie les numerateurs $2 \\times 3$ mais a oublie le dénominateur $4$ de $P_A(B)=3/4$, obtenant $6/5$ au lieu de $(2 \\times 3)/(5 \\times 4)=3/10$.",
           "renvoi": "C1, formule de multiplication"
         },
-        "D": {
-          "erreur": "L'élève a multiplie les numerateurs $2 \\times 3$ mais a oublie le dénominateur $4$ de $P_A(B)=3/4$, obtenant $6/5$ au lieu de $(2 \\times 3)/(5 \\times 4)=3/10$.",
+        "C": {
+          "erreur": "L'élève a additionne P(A) + P_A(B) au lieu de les multiplier.",
           "renvoi": "C1, formule de multiplication"
         }
       }
@@ -85,14 +85,14 @@
       "capacite": "C1",
       "enonce": "On donne P_A(B) = 2/3. Que vaut P_A(Bbar) ?",
       "options": {
-        "A": "2/3",
-        "B": "1/3",
+        "A": "1/3",
+        "B": "2/3",
         "C": "On ne peut pas savoir.",
         "D": "0"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "L'élève a recopie P_A(B) au lieu de calculer le complementaire.",
           "renvoi": "C1, complementaire conditionnel"
         },
@@ -112,17 +112,17 @@
       "enonce": "Dans un arbre pondere, la probabilité d'un chemin s'obtient en :",
       "options": {
         "A": "additionnant",
-        "B": "multipliant",
-        "C": "prenant le max",
+        "B": "prenant le max",
+        "C": "multipliant",
         "D": "divisant"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "On additionne les probabilités des chemins pour obtenir la probabilité d'un événement, mais le long d'un chemin on multiplie.",
           "renvoi": "C2, règle du produit"
         },
-        "C": {
+        "B": {
           "erreur": "Erreur de méthode : on multiplie les probabilités le long d'un chemin.",
           "renvoi": "C2, règle du produit"
         },
@@ -139,10 +139,10 @@
       "options": {
         "A": "0",
         "B": "la probabilité du noeud parent",
-        "C": "1",
-        "D": "le nombre de branches"
+        "C": "le nombre de branches",
+        "D": "1"
       },
-      "correcte": "C",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "Les probabilités sont positives, leur somme ne peut pas être nulle.",
@@ -152,7 +152,7 @@
           "erreur": "La somme des probabilités conditionnelles issues d'un noeud vaut 1, pas la probabilité du noeud.",
           "renvoi": "C2, règle de construction"
         },
-        "D": {
+        "C": {
           "erreur": "Confusion entre le nombre de branches et la somme des probabilités.",
           "renvoi": "C2, règle de construction"
         }
@@ -163,14 +163,14 @@
       "capacite": "C2",
       "enonce": "Les probabilités inscrites sur les branches issues d'un noeud A sont :",
       "options": {
-        "A": "P(B), P(Bbar)",
-        "B": "P_A(B), P_A(Bbar)",
+        "A": "P_A(B), P_A(Bbar)",
+        "B": "P(B), P(Bbar)",
         "C": "P(A inter B), P(A inter Bbar)",
         "D": "des frequences"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Ce sont des probabilités conditionnelles, pas des probabilités marginales.",
           "renvoi": "C2, construction"
         },
@@ -190,22 +190,22 @@
       "enonce": "Si P(B) = 1/3, P_B(A) = 1/2 et P_Bbar(A) = 1/4, alors P(A) vaut :",
       "options": {
         "A": "$1/4$",
-        "B": "$1/6$",
+        "B": "$1/3$",
         "C": "$5/12$",
-        "D": "$1/3$"
+        "D": "$1/6$"
       },
-      "correcte": "D",
+      "correcte": "B",
       "diagnostics": {
         "A": {
           "erreur": "L'élève a recopie $P_{\\overline B}(A)=1/4$ sans ponderer les deux branches de la partition.",
           "renvoi": "C3, formule"
         },
-        "B": {
-          "erreur": "L'élève a calcule seulement $P(B)P_B(A)=1/6$ et oublie le second chemin $P(\\overline B)P_{\\overline B}(A)=1/6$.",
-          "renvoi": "C3, formule"
-        },
         "C": {
           "erreur": "L'élève additionne $1/6$ et la probabilité conditionnelle $1/4$ sans la ponderer par $P(\\overline B)=2/3$ ; le second terme vaut $1/6$.",
+          "renvoi": "C3, formule"
+        },
+        "D": {
+          "erreur": "L'élève a calcule seulement $P(B)P_B(A)=1/6$ et oublie le second chemin $P(\\overline B)P_{\\overline B}(A)=1/6$.",
           "renvoi": "C3, formule"
         }
       }
@@ -216,17 +216,17 @@
       "enonce": "Pour appliquer la formule des probabilités totales avec {B1, B2, B3}, il faut que :",
       "options": {
         "A": "Les Bi soient indépendants",
-        "B": "Les Bi forment une partition",
-        "C": "Les Bi soient equiprobables",
+        "B": "Les Bi soient equiprobables",
+        "C": "Les Bi forment une partition",
         "D": "P(Bi) > 1/2"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "L'indépendance n'est pas requise ; c'est la structure de partition qui est nécessaire.",
           "renvoi": "C3, hypothèse"
         },
-        "C": {
+        "B": {
           "erreur": "L'equiprobabilite n'est pas nécessaire.",
           "renvoi": "C3, hypothèse"
         },
@@ -243,10 +243,10 @@
       "options": {
         "A": "P(A) = P(B) + P(Bbar)",
         "B": "P(A) = P(A inter B) x P(A inter Bbar)",
-        "C": "P(A) = P(B)*P_B(A) + P(Bbar)*P_Bbar(A)",
-        "D": "P(A) = P(B)*P(A) + P(Bbar)*P(A)"
+        "C": "P(A) = P(B)*P(A) + P(Bbar)*P(A)",
+        "D": "P(A) = P(B)*P_B(A) + P(Bbar)*P_Bbar(A)"
       },
-      "correcte": "C",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "P(B) + P(Bbar) = 1, pas P(A). Il manque les probabilités conditionnelles.",
@@ -256,7 +256,7 @@
           "erreur": "On additionne les termes, on ne les multiplie pas.",
           "renvoi": "C3, formule"
         },
-        "D": {
+        "C": {
           "erreur": "La formule D se simplifie en P(A) = P(A), ce qui est trivial et inutile.",
           "renvoi": "C3, formule"
         }
@@ -371,14 +371,14 @@
       "capacite": "C5",
       "enonce": "La sensibilite d'un test est :",
       "options": {
-        "A": "P(M | T+)",
-        "B": "P(T+ | M)",
+        "A": "P(T+ | M)",
+        "B": "P(M | T+)",
         "C": "P(T- | Mbar)",
         "D": "P(M)"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "P(M | T+) est la valeur predictive positive, pas la sensibilite.",
           "renvoi": "C5, définitions"
         },
@@ -450,23 +450,23 @@
       "enonce": "Un atelier connait les parts de production de trois machines et, pour chacune, la probabilité de produire une piece defectueuse. Pour déterminer la machine d'origine sachant qu'une piece est defectueuse, on utilise :",
       "options": {
         "A": "l'indépendance",
-        "B": "formule de Bayes (prob totales + cond inversee)",
+        "B": "théorème des valeurs intermediaires",
         "C": "uniquement des prob simples",
-        "D": "théorème des valeurs intermediaires"
+        "D": "formule de Bayes (prob totales + cond inversee)"
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "Les taux de defaut dependent de la machine : l'origine et le defaut ne sont donc pas supposes indépendants. Il faut calculer la probabilité totale du defaut puis appliquer Bayes.",
           "renvoi": "C5, méthode"
         },
+        "B": {
+          "erreur": "Le TVI est un théorème d'analyse, sans rapport avec les probabilités.",
+          "renvoi": "C5, hors sujet"
+        },
         "C": {
           "erreur": "Les probabilités simples $P(M_i)$ et conditionnelles $P(D\\mid M_i)$ doivent être combinees pour calculer la probabilité inverse $P(M_i\\mid D)$ ; elles ne suffisent pas prises separement.",
           "renvoi": "C5, méthode"
-        },
-        "D": {
-          "erreur": "Le TVI est un théorème d'analyse, sans rapport avec les probabilités.",
-          "renvoi": "C5, hors sujet"
         }
       }
     }

@@ -13,8 +13,8 @@
 
 \item \textbf{[Q1]} Le nombre $X$ de succès dans $n$ repetitions indépendantes d'une même epreuve de probabilité de succès $p$ suit :
   \begin{enumerate}[label=\Alph*.]
-    \item une loi uniforme
     \item la loi binomiale $\mathcal B(n,p)$
+    \item une loi uniforme
     \item une loi exponentielle
     \item une loi normale dans tous les cas
   \end{enumerate}
@@ -23,9 +23,9 @@
 
 \item \textbf{[Q2]} Quelle relation du triangle de Pascal permet de calculer $\binom{n}{k}$ ?
   \begin{enumerate}[label=\Alph*.]
-    \item $\binom{n}{k}=\binom{n-1}{k-1}-\binom{n-1}{k}$
-    \item $\binom{n}{k}=n^k$
     \item $\binom{n}{k}=\binom{n-1}{k-1}+\binom{n-1}{k}$
+    \item $\binom{n}{k}=n^k$
+    \item $\binom{n}{k}=\binom{n-1}{k-1}-\binom{n-1}{k}$
     \item $\binom{n}{k}=\binom{k}{n}$
   \end{enumerate}
 
@@ -45,18 +45,18 @@
   \begin{enumerate}[label=\Alph*.]
     \item $1/4$
     \item $1/2$
-    \item $3/4$
     \item $7/8$
+    \item $3/4$
   \end{enumerate}
 
 \item[] \textbf{Capacité C5}
 
 \item \textbf{[Q5]} Quelle expression Python renvoie la moyenne d'un échantillon de $n$ variables de Bernoulli de paramètre $p$ ?
   \begin{enumerate}[label=\Alph*.]
-    \item sum(random() < p for \_ in range(n)) / n
+    \item sum(range(n)) / p
     \item sum(random() < p for \_ in range(n))
     \item random() < p / n
-    \item sum(range(n)) / p
+    \item sum(random() < p for \_ in range(n)) / n
   \end{enumerate}
 
 \end{enumerate}
@@ -71,11 +71,11 @@
 \hline
 Question & Capacité & Réponse exacte \\
 \hline
-Q1 & C1 & \textbf{B} \\
-Q2 & C2 & \textbf{C} \\
+Q1 & C1 & \textbf{A} \\
+Q2 & C2 & \textbf{A} \\
 Q3 & C3 & \textbf{B} \\
-Q4 & C4 & \textbf{D} \\
-Q5 & C5 & \textbf{A} \\
+Q4 & C4 & \textbf{C} \\
+Q5 & C5 & \textbf{D} \\
 \hline
 \end{tabular}
 \end{center}
@@ -85,14 +85,14 @@ Q5 & C5 & \textbf{A} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — Une loi uniforme attribuerait la même probabilité à toutes les valeurs, ce que le nombre de succès ne fait pas. Le nombre de succès dans n répétitions indépendantes de même probabilité p suit la loi binomiale B(n,p). \emph{Renvoi : C1.}
+    \item \textbf{B} — Une loi uniforme attribuerait la même probabilité à toutes les valeurs, ce que le nombre de succès ne fait pas. Le nombre de succès dans n répétitions indépendantes de même probabilité p suit la loi binomiale B(n,p). \emph{Renvoi : C1.}
     \item \textbf{C} — La loi exponentielle modélise un temps d'attente continu, pas un nombre discret de succès. Le nombre de succès dans n répétitions indépendantes de même probabilité p suit la loi binomiale B(n,p). \emph{Renvoi : C1.}
     \item \textbf{D} — Une approximation normale peut parfois être utilisée, mais elle n'est ni exacte ni valable dans tous les cas. Le nombre de succès dans n répétitions indépendantes de même probabilité p suit la loi binomiale B(n,p). \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — Les deux classes disjointes se réunissent par addition et non par soustraction. La relation de Pascal est C(n,k)=C(n-1,k-1)+C(n-1,k), obtenue selon que l'élément distingué est choisi ou non. \emph{Renvoi : C2.}
     \item \textbf{B} — La puissance $n^k$ compte des listes ordonnées avec répétition, pas des sous-ensembles de taille $k$. La relation de Pascal est C(n,k)=C(n-1,k-1)+C(n-1,k), obtenue selon que l'élément distingué est choisi ou non. \emph{Renvoi : C2.}
+    \item \textbf{C} — Les deux classes disjointes se réunissent par addition et non par soustraction. La relation de Pascal est C(n,k)=C(n-1,k-1)+C(n-1,k), obtenue selon que l'élément distingué est choisi ou non. \emph{Renvoi : C2.}
     \item \textbf{D} — Inverser $n$ et $k$ rend généralement le coefficient nul ou non défini et ne traduit pas la relation de Pascal. La relation de Pascal est C(n,k)=C(n-1,k-1)+C(n-1,k), obtenue selon que l'élément distingué est choisi ou non. \emph{Renvoi : C2.}
   \end{itemize}
   \item \textbf{Q3}
@@ -105,13 +105,13 @@ Q5 & C5 & \textbf{A} \\
   \begin{itemize}
     \item \textbf{A} — La valeur $1/4$ ne somme pas les probabilités des trois valeurs 1, 2 et 3 de l'intervalle. Pour X suivant B(4,1/2), P(1<=X<=3)=(4+6+4)/16=14/16=7/8. \emph{Renvoi : C4.}
     \item \textbf{B} — La valeur $1/2$ ne tient compte que du coefficient central et omet les cas $X=1$ et $X=3$. Pour X suivant B(4,1/2), P(1<=X<=3)=(4+6+4)/16=14/16=7/8. \emph{Renvoi : C4.}
-    \item \textbf{C} — La valeur $3/4$ retranche à tort quatre issues sur seize, alors que seules $X=0$ et $X=4$ sont exclues. Pour X suivant B(4,1/2), P(1<=X<=3)=(4+6+4)/16=14/16=7/8. \emph{Renvoi : C4.}
+    \item \textbf{D} — La valeur $3/4$ retranche à tort quatre issues sur seize, alors que seules $X=0$ et $X=4$ sont exclues. Pour X suivant B(4,1/2), P(1<=X<=3)=(4+6+4)/16=14/16=7/8. \emph{Renvoi : C4.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
+    \item \textbf{A} — La somme des indices ne simule aucune variable de Bernoulli et la division par $p$ n'a pas de sens statistique. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n. \emph{Renvoi : C5.}
     \item \textbf{B} — Cette expression renvoie le nombre de succès, mais oublie la division par la taille $n$ nécessaire pour obtenir la moyenne. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n. \emph{Renvoi : C5.}
     \item \textbf{C} — Cette expression ne simule qu'une seule épreuve et modifie en plus sa probabilité en utilisant $p/n$. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n. \emph{Renvoi : C5.}
-    \item \textbf{D} — La somme des indices ne simule aucune variable de Bernoulli et la division par $p$ n'a pas de sens statistique. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n. \emph{Renvoi : C5.}
   \end{itemize}
 \end{itemize}
 \fi

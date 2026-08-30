@@ -13,8 +13,8 @@
 
 \item \textbf{[Q1]} La droite des moindres carres passe toujours par :
   \begin{enumerate}[label=\Alph*.]
-    \item l'origine du repere.
     \item le point moyen G.
+    \item l'origine du repere.
     \item le premier point du nuage.
     \item aucun point particulier.
   \end{enumerate}
@@ -32,8 +32,8 @@
 \item \textbf{[Q3]} Pour lineariser une relation $y=Ax^b$ avec $A>0$ et $x>0$, on pose :
   \begin{enumerate}[label=\Alph*.]
     \item X = x\textasciicircum{}2, Y = y\textasciicircum{}2
-    \item X = ln(x), Y = ln(y)
     \item X = 1/x, Y = 1/y
+    \item X = ln(x), Y = ln(y)
     \item Aucun changement n'est possible.
   \end{enumerate}
 
@@ -41,8 +41,8 @@
 
 \item \textbf{[Q4]} Estimer une valeur en dehors de la plage des donnees observees, c'est :
   \begin{enumerate}[label=\Alph*.]
-    \item interpoler.
     \item extrapoler.
+    \item interpoler.
     \item calculer le point moyen.
     \item impossible.
   \end{enumerate}
@@ -59,9 +59,9 @@
 
 \item \textbf{[Q6]} Une variable cachee Z qui cause a la fois X et Y peut expliquer :
   \begin{enumerate}[label=\Alph*.]
-    \item une correlation entre X et Y sans lien de causalite direct entre elles.
-    \item que X cause necessairement Y.
     \item que la correlation entre X et Y est fausse.
+    \item que X cause necessairement Y.
+    \item une correlation entre X et Y sans lien de causalite direct entre elles.
     \item rien du tout.
   \end{enumerate}
 
@@ -69,10 +69,10 @@
 
 \item \textbf{[Q7]} Pour les couples (1 ; 2), (3 ; 4) et (5 ; 0), quelle proposition représente correctement le nuage et son point moyen ?
   \begin{enumerate}[label=\Alph*.]
-    \item On place A(1 ; 2), B(3 ; 4), C(5 ; 0) ; le point moyen est $G(3 ; 2)$.
+    \item On place A(1 ; 2), B(3 ; 0), C(5 ; 4) ; le point moyen est $G(3 ; 2)$.
     \item On place A(1 ; 2), B(3 ; 4), C(5 ; 0) ; le point moyen est $G(9 ; 6)$.
     \item On place A(2 ; 1), B(4 ; 3), C(0 ; 5) ; le point moyen est $G(2 ; 3)$.
-    \item On place A(1 ; 2), B(3 ; 0), C(5 ; 4) ; le point moyen est $G(3 ; 2)$.
+    \item On place A(1 ; 2), B(3 ; 4), C(5 ; 0) ; le point moyen est $G(3 ; 2)$.
   \end{enumerate}
 
 \end{enumerate}
@@ -87,13 +87,13 @@
 \hline
 Question & Capacité & Réponse exacte \\
 \hline
-Q1 & C2 & \textbf{B} \\
+Q1 & C2 & \textbf{A} \\
 Q2 & C2 & \textbf{B} \\
-Q3 & C3 & \textbf{B} \\
-Q4 & C4 & \textbf{B} \\
+Q3 & C3 & \textbf{C} \\
+Q4 & C4 & \textbf{A} \\
 Q5 & C5 & \textbf{B} \\
-Q6 & C5 & \textbf{A} \\
-Q7 & C1 & \textbf{A} \\
+Q6 & C5 & \textbf{C} \\
+Q7 & C1 & \textbf{D} \\
 \hline
 \end{tabular}
 \end{center}
@@ -103,7 +103,7 @@ Q7 & C1 & \textbf{A} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — La droite ne passe par l'origine que si l'ordonnée moyenne est compatible avec une ordonnée à l'origine nulle. Les équations normales des moindres carrés imposent à la droite de régression de passer par le point moyen G. \emph{Renvoi : C2.}
+    \item \textbf{B} — La droite ne passe par l'origine que si l'ordonnée moyenne est compatible avec une ordonnée à l'origine nulle. Les équations normales des moindres carrés imposent à la droite de régression de passer par le point moyen G. \emph{Renvoi : C2.}
     \item \textbf{C} — Le premier point n'a aucun rôle privilégié dans la minimisation de la somme des carrés des résidus. Les équations normales des moindres carrés imposent à la droite de régression de passer par le point moyen G. \emph{Renvoi : C2.}
     \item \textbf{D} — Les équations normales imposent au contraire le passage par un point déterminé du nuage, le point moyen. Les équations normales des moindres carrés imposent à la droite de régression de passer par le point moyen G. \emph{Renvoi : C2.}
   \end{itemize}
@@ -116,12 +116,12 @@ Q7 & C1 & \textbf{A} \\
   \item \textbf{Q3}
   \begin{itemize}
     \item \textbf{A} — Élever x et y au carré transforme la loi de puissance sans la rendre affine en général. Prendre les logarithmes donne ln(y)=ln(A)+b ln(x), relation affine entre X=ln(x) et Y=ln(y). \emph{Renvoi : C3.}
-    \item \textbf{C} — Prendre les inverses conserve une puissance non linéaire de X et ne sépare pas l'exposant b. Prendre les logarithmes donne ln(y)=ln(A)+b ln(x), relation affine entre X=ln(x) et Y=ln(y). \emph{Renvoi : C3.}
+    \item \textbf{B} — Prendre les inverses conserve une puissance non linéaire de X et ne sépare pas l'exposant b. Prendre les logarithmes donne ln(y)=ln(A)+b ln(x), relation affine entre X=ln(x) et Y=ln(y). \emph{Renvoi : C3.}
     \item \textbf{D} — Le logarithme transforme effectivement le produit et la puissance en somme et coefficient, donc un changement est possible. Prendre les logarithmes donne ln(y)=ln(A)+b ln(x), relation affine entre X=ln(x) et Y=ln(y). \emph{Renvoi : C3.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{A} — L'interpolation concerne une valeur située à l'intérieur de la plage des observations, contrairement à l'énoncé. Une estimation hors de l'intervalle couvert par les données observées est une extrapolation. \emph{Renvoi : C4.}
+    \item \textbf{B} — L'interpolation concerne une valeur située à l'intérieur de la plage des observations, contrairement à l'énoncé. Une estimation hors de l'intervalle couvert par les données observées est une extrapolation. \emph{Renvoi : C4.}
     \item \textbf{C} — Calculer le point moyen résume le nuage mais ne produit pas l'estimation extérieure demandée. Une estimation hors de l'intervalle couvert par les données observées est une extrapolation. \emph{Renvoi : C4.}
     \item \textbf{D} — Une extrapolation est calculable, même si sa fiabilité doit être discutée et décroît hors de la plage observée. Une estimation hors de l'intervalle couvert par les données observées est une extrapolation. \emph{Renvoi : C4.}
   \end{itemize}
@@ -133,15 +133,15 @@ Q7 & C1 & \textbf{A} \\
   \end{itemize}
   \item \textbf{Q6}
   \begin{itemize}
+    \item \textbf{A} — La corrélation observée peut être statistiquement réelle même si son interprétation causale directe est fausse. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y. \emph{Renvoi : C5.}
     \item \textbf{B} — Une cause commune explique la variation conjointe sans rendre nécessaire une action directe de X sur Y. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y. \emph{Renvoi : C5.}
-    \item \textbf{C} — La corrélation observée peut être statistiquement réelle même si son interprétation causale directe est fausse. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y. \emph{Renvoi : C5.}
     \item \textbf{D} — La variable cachée fournit précisément un mécanisme explicatif à l'association mesurée entre X et Y. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y. \emph{Renvoi : C5.}
   \end{itemize}
   \item \textbf{Q7}
   \begin{itemize}
+    \item \textbf{A} — Le point moyen est correct, mais le nuage ne respecte pas les couples donnés : B doit avoir pour ordonnée 4 et C pour ordonnée 0. \emph{Renvoi : C1.}
     \item \textbf{B} — Les coordonnées du point moyen sont les moyennes, pas les sommes : $x_G=(1+3+5)/3=3$ et $y_G=(2+4+0)/3=2$. \emph{Renvoi : C1.}
     \item \textbf{C} — Les coordonnées de chaque point et les deux moyennes ont été interverties : le nuage correct utilise (1 ; 2), (3 ; 4), (5 ; 0), puis $G(3 ; 2)$. \emph{Renvoi : C1.}
-    \item \textbf{D} — Le point moyen est correct, mais le nuage ne respecte pas les couples donnés : B doit avoir pour ordonnée 4 et C pour ordonnée 0. \emph{Renvoi : C1.}
   \end{itemize}
 \end{itemize}
 \fi

@@ -13,8 +13,8 @@
 
 \item \textbf{[Q1]} Si X suit B(n,p), alors P(X=k) vaut :
   \begin{enumerate}[label=\Alph*.]
-    \item p\textasciicircum{}k (1-p)\textasciicircum{}(n-k)
     \item C(n,k) p\textasciicircum{}k (1-p)\textasciicircum{}(n-k)
+    \item p\textasciicircum{}k (1-p)\textasciicircum{}(n-k)
     \item C(n,k) p\textasciicircum{}k
     \item np\textasciicircum{}k
   \end{enumerate}
@@ -33,8 +33,8 @@
 
 \item \textbf{[Q3]} La linéarité de l'espérance E(X+Y)=E(X)+E(Y) est valable :
   \begin{enumerate}[label=\Alph*.]
-    \item uniquement si X et Y sont indépendantes
     \item toujours, sans condition d'independence
+    \item uniquement si X et Y sont indépendantes
     \item uniquement si X=Y
     \item jamais
   \end{enumerate}
@@ -43,8 +43,8 @@
 
 \item \textbf{[Q4]} L'additivite de la variance V(X+Y)=V(X)+V(Y) est garantie lorsque :
   \begin{enumerate}[label=\Alph*.]
-    \item que X et Y soient indépendantes
     \item que X=Y
+    \item que X et Y soient indépendantes
     \item rien de particulier
     \item que E(X)=E(Y)
   \end{enumerate}
@@ -54,8 +54,8 @@
 \item \textbf{[Q5]} Pour X \textasciitilde{} B(n,p), V(X) vaut :
   \begin{enumerate}[label=\Alph*.]
     \item np
-    \item np(1-p)
     \item n(1-p)
+    \item np(1-p)
     \item p(1-p)
   \end{enumerate}
 
@@ -63,10 +63,10 @@
 
 \item \textbf{[Q6]} L'inégalité de Bienayme-Tchebychev majoré :
   \begin{enumerate}[label=\Alph*.]
-    \item P(|Y-mu|>=delta)
+    \item P(Y=mu)
     \item E(Y)
     \item V(Y)
-    \item P(Y=mu)
+    \item P(|Y-mu|>=delta)
   \end{enumerate}
 
 \end{enumerate}
@@ -81,12 +81,12 @@
 \hline
 Question & Capacité & Réponse exacte \\
 \hline
-Q1 & C5 & \textbf{B} \\
+Q1 & C5 & \textbf{A} \\
 Q2 & C2 & \textbf{B} \\
-Q3 & C7 & \textbf{B} \\
-Q4 & C8 & \textbf{A} \\
-Q5 & C9 & \textbf{B} \\
-Q6 & C10 & \textbf{A} \\
+Q3 & C7 & \textbf{A} \\
+Q4 & C8 & \textbf{B} \\
+Q5 & C9 & \textbf{C} \\
+Q6 & C10 & \textbf{D} \\
 \hline
 \end{tabular}
 \end{center}
@@ -96,7 +96,7 @@ Q6 & C10 & \textbf{A} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — Cette expression donne la probabilité d'une configuration précise de $k$ succès ; elle oublie les $C(n,k)$ positions possibles des succès. \emph{Renvoi : C5.}
+    \item \textbf{B} — Cette expression donne la probabilité d'une configuration précise de $k$ succès ; elle oublie les $C(n,k)$ positions possibles des succès. \emph{Renvoi : C5.}
     \item \textbf{C} — Le facteur $(1-p)^{n-k}$ manque : les $n-k$ echecs de chaque configuration doivent eux aussi contribuer a sa probabilité. \emph{Renvoi : C5.}
     \item \textbf{D} — Le produit $np^k$ ne compte ni les choix des $k$ succès ni la probabilité des $n-k$ echecs ; ce n'est pas une probabilité binomiale. \emph{Renvoi : C5.}
   \end{itemize}
@@ -108,27 +108,27 @@ Q6 & C10 & \textbf{A} \\
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{A} — L'indépendance est requise pour additionner les variances, pas pour la linéarité de l'espérance de variables integrables.
+    \item \textbf{B} — L'indépendance est requise pour additionner les variances, pas pour la linéarité de l'espérance de variables integrables.
     \item \textbf{C} — L'égalité $X=Y$ n'est pas nécessaire : la somme des esperances vaut l'espérance de la somme pour deux variables quelconques.
     \item \textbf{D} — La propriété est toujours valable ; par exemple pour deux constantes $X=1$ et $Y=2$, les deux membres valent $3$.
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{B} — Si $X=Y$, alors $V(X+Y)=V(2X)=4V(X)$, tandis que $V(X)+V(Y)=2V(X)$ : l'égalité n'est donc pas garantie.
+    \item \textbf{A} — Si $X=Y$, alors $V(X+Y)=V(2X)=4V(X)$, tandis que $V(X)+V(Y)=2V(X)$ : l'égalité n'est donc pas garantie.
     \item \textbf{C} — Sans hypothèse, la formule comporte le terme $2\operatorname{Cov}(X,Y)$ : l'indépendance permet precisement d'annuler cette covariance.
     \item \textbf{D} — L'égalité des esperances ne renseigne pas sur la covariance de $X$ et $Y$ : elle ne suffit donc pas a rendre les variances additives.
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
     \item \textbf{A} — Le produit $np$ est l'espérance de la loi binomiale ; la variance comporte aussi le facteur de dispersion $1-p$.
-    \item \textbf{C} — L'expression $n(1-p)$ oublie le facteur $p$ associe aux succès ; chaque indicatrice de Bernoulli a pour variance $p(1-p)$.
+    \item \textbf{B} — L'expression $n(1-p)$ oublie le facteur $p$ associe aux succès ; chaque indicatrice de Bernoulli a pour variance $p(1-p)$.
     \item \textbf{D} — Le produit $p(1-p)$ est la variance d'une seule epreuve de Bernoulli ; la somme de $n$ epreuves indépendantes apporte le facteur $n$.
   \end{itemize}
   \item \textbf{Q6}
   \begin{itemize}
+    \item \textbf{A} — Bienayme-Tchebychev concerne l'événement $|Y-\mu|\geq\delta$, pas la probabilité ponctuelle que $Y$ soit exactement égal a $\mu$.
     \item \textbf{B} — L'espérance $E(Y)$ est le centre de l'événement de deviation ; l'inégalité ne cherche pas a majorer cette valeur.
     \item \textbf{C} — La variance intervient dans le majorant $V(Y)/\delta^2$, mais la quantité majorée est la probabilité d'un ecart a la moyenne.
-    \item \textbf{D} — Bienayme-Tchebychev concerne l'événement $|Y-\mu|\geq\delta$, pas la probabilité ponctuelle que $Y$ soit exactement égal a $\mu$.
   \end{itemize}
 \end{itemize}
 \fi

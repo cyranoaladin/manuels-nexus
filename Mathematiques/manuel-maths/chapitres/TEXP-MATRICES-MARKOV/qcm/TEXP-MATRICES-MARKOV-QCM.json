@@ -6,15 +6,15 @@
       "id": "Q1",
       "capacite": "C4",
       "enonce": "Une matrice de transition d'une chaine de Markov a pour propriété :",
-      "correcte": "B",
+      "correcte": "A",
       "options": {
-        "A": "La somme des colonnes vaut 1",
-        "B": "La somme de chaque ligne vaut 1",
+        "A": "La somme de chaque ligne vaut 1",
+        "B": "La somme des colonnes vaut 1",
         "C": "Tous ses coefficients sont négatifs",
         "D": "Elle est toujours symetrique"
       },
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Confusions entre lignes et colonnes. Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1.",
           "renvoi": "C4"
         },
@@ -58,11 +58,11 @@
       "id": "Q3",
       "capacite": "C7",
       "enonce": "Un etat stable $X$ d'une chaine de Markov vérifie :",
-      "correcte": "C",
+      "correcte": "B",
       "options": {
         "A": "$P X = X$",
-        "B": "$X P = 0$",
-        "C": "$X P = X$ et la somme des composantes vaut 1",
+        "B": "$X P = X$ et la somme des composantes vaut 1",
+        "C": "$X P = 0$",
         "D": "$X^2 = P$"
       },
       "diagnostics": {
@@ -70,7 +70,7 @@
           "erreur": "Vecteur colonne au lieu de vecteur ligne. Une distribution invariante ligne X vérifie XP=X, avec composantes positives de somme 1.",
           "renvoi": "C7"
         },
-        "B": {
+        "C": {
           "erreur": "Produit nul incorrect. Une distribution invariante ligne X vérifie XP=X, avec composantes positives de somme 1.",
           "renvoi": "C7"
         },
@@ -84,11 +84,11 @@
       "id": "Q4",
       "capacite": "C3",
       "enonce": "Une suite de matrices colonnes vérifie $U_{n+1}=AU_n+C$. Une solution constante $U$ satisfait :",
-      "correcte": "B",
+      "correcte": "C",
       "options": {
         "A": "$AU=C$",
-        "B": "$(I-A)U=C$",
-        "C": "$U=A+C$",
+        "B": "$U=A+C$",
+        "C": "$(I-A)U=C$",
         "D": "$U=0$ dans tous les cas"
       },
       "diagnostics": {
@@ -96,7 +96,7 @@
           "erreur": "Substituer une suite constante donne U=AU+C ; oublier le terme U du membre gauche mène à l'équation incomplète AU=C. Une solution constante U de U_(n+1)=AU_n+C vérifie U=AU+C, donc (I-A)U=C.",
           "renvoi": "C3"
         },
-        "C": {
+        "B": {
           "erreur": "L'addition A+C mélange une matrice et un vecteur sans appliquer A à U et ne traduit pas la récurrence. Une solution constante U de U_(n+1)=AU_n+C vérifie U=AU+C, donc (I-A)U=C.",
           "renvoi": "C3"
         },
@@ -110,24 +110,24 @@
       "id": "Q5",
       "capacite": "C1",
       "enonce": "Pour inverser une matrice 2x2 $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$, le determinant est :",
-      "correcte": "A",
+      "correcte": "D",
       "options": {
-        "A": "$ad - bc$",
+        "A": "$a+b+c+d$",
         "B": "$ac - bd$",
         "C": "$ad + bc$",
-        "D": "$a+b+c+d$"
+        "D": "$ad - bc$"
       },
       "diagnostics": {
+        "A": {
+          "erreur": "Somme des termes. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc.",
+          "renvoi": "C1"
+        },
         "B": {
           "erreur": "Erreur de formule du determinant. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc.",
           "renvoi": "C1"
         },
         "C": {
           "erreur": "Signe + au lieu de -. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc.",
-          "renvoi": "C1"
-        },
-        "D": {
-          "erreur": "Somme des termes. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc.",
           "renvoi": "C1"
         }
       }

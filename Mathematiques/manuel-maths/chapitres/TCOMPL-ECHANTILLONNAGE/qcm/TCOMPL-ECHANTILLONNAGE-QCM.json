@@ -6,15 +6,15 @@
       "id": "Q1",
       "capacite": "C1",
       "enonce": "Le nombre $X$ de succès dans $n$ repetitions indépendantes d'une même epreuve de probabilité de succès $p$ suit :",
-      "correcte": "B",
+      "correcte": "A",
       "options": {
-        "A": "une loi uniforme",
-        "B": "la loi binomiale $\\mathcal B(n,p)$",
+        "A": "la loi binomiale $\\mathcal B(n,p)$",
+        "B": "une loi uniforme",
         "C": "une loi exponentielle",
         "D": "une loi normale dans tous les cas"
       },
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Une loi uniforme attribuerait la même probabilité à toutes les valeurs, ce que le nombre de succès ne fait pas. Le nombre de succès dans n répétitions indépendantes de même probabilité p suit la loi binomiale B(n,p).",
           "renvoi": "C1"
         },
@@ -32,20 +32,20 @@
       "id": "Q2",
       "capacite": "C2",
       "enonce": "Quelle relation du triangle de Pascal permet de calculer $\\binom{n}{k}$ ?",
-      "correcte": "C",
+      "correcte": "A",
       "options": {
-        "A": "$\\binom{n}{k}=\\binom{n-1}{k-1}-\\binom{n-1}{k}$",
+        "A": "$\\binom{n}{k}=\\binom{n-1}{k-1}+\\binom{n-1}{k}$",
         "B": "$\\binom{n}{k}=n^k$",
-        "C": "$\\binom{n}{k}=\\binom{n-1}{k-1}+\\binom{n-1}{k}$",
+        "C": "$\\binom{n}{k}=\\binom{n-1}{k-1}-\\binom{n-1}{k}$",
         "D": "$\\binom{n}{k}=\\binom{k}{n}$"
       },
       "diagnostics": {
-        "A": {
-          "erreur": "Les deux classes disjointes se réunissent par addition et non par soustraction. La relation de Pascal est C(n,k)=C(n-1,k-1)+C(n-1,k), obtenue selon que l'élément distingué est choisi ou non.",
-          "renvoi": "C2"
-        },
         "B": {
           "erreur": "La puissance $n^k$ compte des listes ordonnées avec répétition, pas des sous-ensembles de taille $k$. La relation de Pascal est C(n,k)=C(n-1,k-1)+C(n-1,k), obtenue selon que l'élément distingué est choisi ou non.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Les deux classes disjointes se réunissent par addition et non par soustraction. La relation de Pascal est C(n,k)=C(n-1,k-1)+C(n-1,k), obtenue selon que l'élément distingué est choisi ou non.",
           "renvoi": "C2"
         },
         "D": {
@@ -84,12 +84,12 @@
       "id": "Q4",
       "capacite": "C4",
       "enonce": "Si $X$ suit $\\mathcal B(4,1/2)$, alors $P(1\\leq X\\leq3)$ vaut :",
-      "correcte": "D",
+      "correcte": "C",
       "options": {
         "A": "$1/4$",
         "B": "$1/2$",
-        "C": "$3/4$",
-        "D": "$7/8$"
+        "C": "$7/8$",
+        "D": "$3/4$"
       },
       "diagnostics": {
         "A": {
@@ -100,7 +100,7 @@
           "erreur": "La valeur $1/2$ ne tient compte que du coefficient central et omet les cas $X=1$ et $X=3$. Pour X suivant B(4,1/2), P(1<=X<=3)=(4+6+4)/16=14/16=7/8.",
           "renvoi": "C4"
         },
-        "C": {
+        "D": {
           "erreur": "La valeur $3/4$ retranche à tort quatre issues sur seize, alors que seules $X=0$ et $X=4$ sont exclues. Pour X suivant B(4,1/2), P(1<=X<=3)=(4+6+4)/16=14/16=7/8.",
           "renvoi": "C4"
         }
@@ -110,24 +110,24 @@
       "id": "Q5",
       "capacite": "C5",
       "enonce": "Quelle expression Python renvoie la moyenne d'un échantillon de $n$ variables de Bernoulli de paramètre $p$ ?",
-      "correcte": "A",
+      "correcte": "D",
       "options": {
-        "A": "sum(random() < p for _ in range(n)) / n",
+        "A": "sum(range(n)) / p",
         "B": "sum(random() < p for _ in range(n))",
         "C": "random() < p / n",
-        "D": "sum(range(n)) / p"
+        "D": "sum(random() < p for _ in range(n)) / n"
       },
       "diagnostics": {
+        "A": {
+          "erreur": "La somme des indices ne simule aucune variable de Bernoulli et la division par $p$ n'a pas de sens statistique. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n.",
+          "renvoi": "C5"
+        },
         "B": {
           "erreur": "Cette expression renvoie le nombre de succès, mais oublie la division par la taille $n$ nécessaire pour obtenir la moyenne. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n.",
           "renvoi": "C5"
         },
         "C": {
           "erreur": "Cette expression ne simule qu'une seule épreuve et modifie en plus sa probabilité en utilisant $p/n$. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n.",
-          "renvoi": "C5"
-        },
-        "D": {
-          "erreur": "La somme des indices ne simule aucune variable de Bernoulli et la division par $p$ n'a pas de sens statistique. La moyenne d'un échantillon de n Bernoulli simulées est la somme des indicatrices divisée par n.",
           "renvoi": "C5"
         }
       }

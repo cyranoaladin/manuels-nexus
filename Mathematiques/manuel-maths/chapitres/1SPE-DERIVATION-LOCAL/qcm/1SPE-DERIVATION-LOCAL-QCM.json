@@ -7,14 +7,14 @@
       "capacite": "C1",
       "enonce": "Le taux de variation de la fonction $f$ entre $a$ et $b$ ($a \\neq b$) est égal à :",
       "options": {
-        "A": "$\\dfrac{f(b)}{b}$",
-        "B": "$\\dfrac{f(b) - f(a)}{b - a}$",
+        "A": "$\\dfrac{f(b) - f(a)}{b - a}$",
+        "B": "$\\dfrac{f(b)}{b}$",
         "C": "$f(b) - f(a)$",
         "D": "$\\dfrac{b - a}{f(b) - f(a)}$"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Quotient $f(b)/b$ au lieu de $(f(b)-f(a))/(b-a)$.",
           "renvoi": "M1"
         },
@@ -111,14 +111,14 @@
       "capacite": "C2",
       "enonce": "Pour $f(x) = x^2$, le taux d'accroissement en $a=2$ vaut :",
       "options": {
-        "A": "$4 + h$",
-        "B": "$4 + h^2$",
+        "A": "$4 + h^2$",
+        "B": "$4 + h$",
         "C": "$4$",
         "D": "$4h$"
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
+        "A": {
           "erreur": "L'élève a developpe incompletement $(2+h)^2$ en $4+h^2$ puis a donne $f(2+h)$ sans former le taux $[f(2+h)-f(2)]/h$.",
           "renvoi": "R2"
         },
@@ -138,17 +138,17 @@
       "enonce": "La vitesse instantanée à l'instant $t=2$ correspond à :",
       "options": {
         "A": "$d(2)$",
-        "B": "$d'(2)$",
-        "C": "$\\dfrac{d(2)}{2}$",
+        "B": "$\\dfrac{d(2)}{2}$",
+        "C": "$d'(2)$",
         "D": "$d''(2)$"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "$d(2)$ est la position, pas la vitesse.",
           "renvoi": "M2"
         },
-        "C": {
+        "B": {
           "erreur": "Vitesse moyenne confondue avec vitesse instantanée.",
           "renvoi": "M1, M2"
         },
@@ -164,22 +164,22 @@
       "enonce": "La pente de la droite passant par $A(x_A, y_A)$ et $B(x_B, y_B)$ ($x_A \\neq x_B$) vaut :",
       "options": {
         "A": "$\\dfrac{y_B}{x_B}$",
-        "B": "$\\dfrac{y_B - y_A}{x_B - x_A}$",
+        "B": "$\\dfrac{x_B - x_A}{y_B - y_A}$",
         "C": "$y_B - y_A$",
-        "D": "$\\dfrac{x_B - x_A}{y_B - y_A}$"
+        "D": "$\\dfrac{y_B - y_A}{x_B - x_A}$"
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "Quotient $y_B/x_B$ au lieu de pente.",
           "renvoi": "R3"
         },
-        "C": {
-          "erreur": "Différence d'ordonnées sans diviser par $\\Delta x$.",
+        "B": {
+          "erreur": "Quotient inversé.",
           "renvoi": "R3"
         },
-        "D": {
-          "erreur": "Quotient inversé.",
+        "C": {
+          "erreur": "Différence d'ordonnées sans diviser par $\\Delta x$.",
           "renvoi": "R3"
         }
       }
@@ -189,14 +189,14 @@
       "capacite": "C3",
       "enonce": "La courbe représentative de $f$ admet une tangente horizontale au point d'abscisse $a$ si :",
       "options": {
-        "A": "$f(a) = 0$",
-        "B": "$f'(a) = 0$",
+        "A": "$f'(a) = 0$",
+        "B": "$f(a) = 0$",
         "C": "$f'(a) = 1$",
         "D": "$f(a) = f'(a)$"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "$f(a)=0$ signifie point sur l'axe, pas tangente horizontale.",
           "renvoi": "M3"
         },
@@ -216,17 +216,17 @@
       "enonce": "Géométriquement, le nombre dérivé $f'(a)$ représente :",
       "options": {
         "A": "l'ordonnée à l'origine de la tangente",
-        "B": "l'abscisse du point de contact",
-        "C": "le coefficient directeur de la tangente en $a$",
+        "B": "le coefficient directeur de la tangente en $a$",
+        "C": "l'abscisse du point de contact",
         "D": "la longueur du segment sécant"
       },
-      "correcte": "C",
+      "correcte": "B",
       "diagnostics": {
         "A": {
           "erreur": "L'élève a confondu l'ordonnée a l'origine de la tangente avec son coefficient directeur ; $f'(a)$ représente le coefficient directeur.",
           "renvoi": "M3"
         },
-        "B": {
+        "C": {
           "erreur": "L'élève a donne l'abscisse du point de contact $a$ au lieu du coefficient directeur de la tangente, qui est $f'(a)$.",
           "renvoi": "M3, M4"
         },
@@ -242,17 +242,17 @@
       "enonce": "L'équation réduite de la tangente à la courbe de $f$ au point d'abscisse $a$ est :",
       "options": {
         "A": "$y = f'(a)x + f(a)$",
-        "B": "$y = f'(a)(x - a) + f(a)$",
-        "C": "$y = f(a)(x - a) + f'(a)$",
+        "B": "$y = f(a)(x - a) + f'(a)$",
+        "C": "$y = f'(a)(x - a) + f(a)$",
         "D": "$y = f'(x)(x - a) + f(a)$"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Ordonnée à l'origine confondue avec $f(a)$ sauf si $a=0$.",
           "renvoi": "M4"
         },
-        "C": {
+        "B": {
           "erreur": "Rôles de $f(a)$ et $f'(a)$ inversés.",
           "renvoi": "M4"
         },
@@ -268,22 +268,22 @@
       "enonce": "Si $f(1)=3$ et $f'(1)=-2$, l'équation de la tangente en $a=1$ est :",
       "options": {
         "A": "$y = -2x + 3$",
-        "B": "$y = -2x + 5$",
+        "B": "$y = -2x - 1$",
         "C": "$y = 3x - 2$",
-        "D": "$y = -2x - 1$"
+        "D": "$y = -2x + 5$"
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "$f'(a)x + f(a)$ au lieu de $f'(a)(x-a)+f(a)$.",
           "renvoi": "M4"
         },
-        "C": {
-          "erreur": "Rôles de $f(a)$ et $f'(a)$ inversés.",
+        "B": {
+          "erreur": "Ordonnée à l'origine mal calculée.",
           "renvoi": "M4"
         },
-        "D": {
-          "erreur": "Ordonnée à l'origine mal calculée.",
+        "C": {
+          "erreur": "Rôles de $f(a)$ et $f'(a)$ inversés.",
           "renvoi": "M4"
         }
       }
@@ -293,14 +293,14 @@
       "capacite": "C4",
       "enonce": "Une droite d'équation $y = mx + p$ passe par $(a, f(a))$ avec pour pente $f'(a)$. Son ordonnée à l'origine $p$ vaut :",
       "options": {
-        "A": "$f(0)$",
-        "B": "$f(a) - a f'(a)$",
+        "A": "$f(a) - a f'(a)$",
+        "B": "$f(0)$",
         "C": "$0$",
         "D": "$f'(a)$"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "$y(0)=f(0)$ n'est vrai que si $a=0$.",
           "renvoi": "M4"
         },
@@ -346,17 +346,17 @@
       "enonce": "L'approximation affine locale est d'autant plus précise que :",
       "options": {
         "A": "$|h|$ est grand",
-        "B": "$|h|$ est très proche de 0",
-        "C": "$f'(a) = 0$",
+        "B": "$f'(a) = 0$",
+        "C": "$|h|$ est très proche de 0",
         "D": "$a = 0$"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Plus $h$ est grand, plus l'approximation est mauvaise.",
           "renvoi": "M5"
         },
-        "C": {
+        "B": {
           "erreur": "$f'(a)=0$ donne $f(a+h) \\approx f(a)$, pas meilleur.",
           "renvoi": "M5"
         },
@@ -372,22 +372,22 @@
       "enonce": "Pour $f(x)=\\sqrt{x}$, comme $f(4)=2$ et $f'(4)=\\dfrac{1}{4}$, une valeur approchée de $\\sqrt{4{,}06}$ est :",
       "options": {
         "A": "$2{,}06$",
-        "B": "$2{,}015$",
+        "B": "$2{,}15$",
         "C": "$0{,}015$",
-        "D": "$2{,}15$"
+        "D": "$2{,}015$"
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "$h=0{,}06$ ajouté à $\\sqrt{4}$ sans multiplier par $f'(4)$.",
           "renvoi": "M5"
         },
-        "C": {
-          "erreur": "Produit $h \\times f'(a)$ sans ajouter $f(a)$.",
+        "B": {
+          "erreur": "Erreur de placement de la virgule.",
           "renvoi": "M5"
         },
-        "D": {
-          "erreur": "Erreur de placement de la virgule.",
+        "C": {
+          "erreur": "Produit $h \\times f'(a)$ sans ajouter $f(a)$.",
           "renvoi": "M5"
         }
       }

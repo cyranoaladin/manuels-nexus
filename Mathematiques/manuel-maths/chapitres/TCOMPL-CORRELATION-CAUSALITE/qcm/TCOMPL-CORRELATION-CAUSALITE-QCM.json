@@ -7,14 +7,14 @@
       "capacite": "C2",
       "enonce": "La droite des moindres carres passe toujours par :",
       "options": {
-        "A": "l'origine du repere.",
-        "B": "le point moyen G.",
+        "A": "le point moyen G.",
+        "B": "l'origine du repere.",
         "C": "le premier point du nuage.",
         "D": "aucun point particulier."
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "La droite ne passe par l'origine que si l'ordonnée moyenne est compatible avec une ordonnée à l'origine nulle. Les équations normales des moindres carrés imposent à la droite de régression de passer par le point moyen G.",
           "renvoi": "C2"
         },
@@ -60,17 +60,17 @@
       "enonce": "Pour lineariser une relation $y=Ax^b$ avec $A>0$ et $x>0$, on pose :",
       "options": {
         "A": "X = x^2, Y = y^2",
-        "B": "X = ln(x), Y = ln(y)",
-        "C": "X = 1/x, Y = 1/y",
+        "B": "X = 1/x, Y = 1/y",
+        "C": "X = ln(x), Y = ln(y)",
         "D": "Aucun changement n'est possible."
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Élever x et y au carré transforme la loi de puissance sans la rendre affine en général. Prendre les logarithmes donne ln(y)=ln(A)+b ln(x), relation affine entre X=ln(x) et Y=ln(y).",
           "renvoi": "C3"
         },
-        "C": {
+        "B": {
           "erreur": "Prendre les inverses conserve une puissance non linéaire de X et ne sépare pas l'exposant b. Prendre les logarithmes donne ln(y)=ln(A)+b ln(x), relation affine entre X=ln(x) et Y=ln(y).",
           "renvoi": "C3"
         },
@@ -85,14 +85,14 @@
       "capacite": "C4",
       "enonce": "Estimer une valeur en dehors de la plage des donnees observees, c'est :",
       "options": {
-        "A": "interpoler.",
-        "B": "extrapoler.",
+        "A": "extrapoler.",
+        "B": "interpoler.",
         "C": "calculer le point moyen.",
         "D": "impossible."
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "L'interpolation concerne une valeur située à l'intérieur de la plage des observations, contrairement à l'énoncé. Une estimation hors de l'intervalle couvert par les données observées est une extrapolation.",
           "renvoi": "C4"
         },
@@ -137,19 +137,19 @@
       "capacite": "C5",
       "enonce": "Une variable cachee Z qui cause a la fois X et Y peut expliquer :",
       "options": {
-        "A": "une correlation entre X et Y sans lien de causalite direct entre elles.",
+        "A": "que la correlation entre X et Y est fausse.",
         "B": "que X cause necessairement Y.",
-        "C": "que la correlation entre X et Y est fausse.",
+        "C": "une correlation entre X et Y sans lien de causalite direct entre elles.",
         "D": "rien du tout."
       },
-      "correcte": "A",
+      "correcte": "C",
       "diagnostics": {
-        "B": {
-          "erreur": "Une cause commune explique la variation conjointe sans rendre nécessaire une action directe de X sur Y. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y.",
+        "A": {
+          "erreur": "La corrélation observée peut être statistiquement réelle même si son interprétation causale directe est fausse. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y.",
           "renvoi": "C5"
         },
-        "C": {
-          "erreur": "La corrélation observée peut être statistiquement réelle même si son interprétation causale directe est fausse. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y.",
+        "B": {
+          "erreur": "Une cause commune explique la variation conjointe sans rendre nécessaire une action directe de X sur Y. Une cause commune Z peut faire varier X et Y ensemble et créer une corrélation sans causalité directe entre X et Y.",
           "renvoi": "C5"
         },
         "D": {
@@ -163,23 +163,23 @@
       "capacite": "C1",
       "enonce": "Pour les couples (1 ; 2), (3 ; 4) et (5 ; 0), quelle proposition représente correctement le nuage et son point moyen ?",
       "options": {
-        "A": "On place A(1 ; 2), B(3 ; 4), C(5 ; 0) ; le point moyen est $G(3 ; 2)$.",
+        "A": "On place A(1 ; 2), B(3 ; 0), C(5 ; 4) ; le point moyen est $G(3 ; 2)$.",
         "B": "On place A(1 ; 2), B(3 ; 4), C(5 ; 0) ; le point moyen est $G(9 ; 6)$.",
         "C": "On place A(2 ; 1), B(4 ; 3), C(0 ; 5) ; le point moyen est $G(2 ; 3)$.",
-        "D": "On place A(1 ; 2), B(3 ; 0), C(5 ; 4) ; le point moyen est $G(3 ; 2)$."
+        "D": "On place A(1 ; 2), B(3 ; 4), C(5 ; 0) ; le point moyen est $G(3 ; 2)$."
       },
-      "correcte": "A",
+      "correcte": "D",
       "diagnostics": {
+        "A": {
+          "erreur": "Le point moyen est correct, mais le nuage ne respecte pas les couples donnés : B doit avoir pour ordonnée 4 et C pour ordonnée 0.",
+          "renvoi": "C1"
+        },
         "B": {
           "erreur": "Les coordonnées du point moyen sont les moyennes, pas les sommes : $x_G=(1+3+5)/3=3$ et $y_G=(2+4+0)/3=2$.",
           "renvoi": "C1"
         },
         "C": {
           "erreur": "Les coordonnées de chaque point et les deux moyennes ont été interverties : le nuage correct utilise (1 ; 2), (3 ; 4), (5 ; 0), puis $G(3 ; 2)$.",
-          "renvoi": "C1"
-        },
-        "D": {
-          "erreur": "Le point moyen est correct, mais le nuage ne respecte pas les couples donnés : B doit avoir pour ordonnée 4 et C pour ordonnée 0.",
           "renvoi": "C1"
         }
       }

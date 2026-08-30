@@ -7,14 +7,14 @@
       "capacite": "C1",
       "enonce": "$\\ln(2x)$ (pour $x>0$) est égal a :",
       "options": {
-        "A": "$2\\ln x$.",
-        "B": "$\\ln 2 + \\ln x$.",
+        "A": "$\\ln 2 + \\ln x$.",
+        "B": "$2\\ln x$.",
         "C": "$\\ln 2 \\times \\ln x$.",
         "D": "$(\\ln x)^2$."
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Le coefficient $2$ a été traite comme un exposant de $x$ ; la règle correcte pour le produit est $\\ln(2x)=\\ln 2+\\ln x$."
         },
         "C": {
@@ -30,14 +30,14 @@
       "capacite": "C3",
       "enonce": "La dérivée de $\\ln(5x+1)$ est :",
       "options": {
-        "A": "$\\dfrac{1}{5x+1}$.",
-        "B": "$\\dfrac{5}{5x+1}$.",
+        "A": "$\\dfrac{5}{5x+1}$.",
+        "B": "$\\dfrac{1}{5x+1}$.",
         "C": "$\\dfrac{5x+1}{5}$.",
         "D": "$5\\ln(5x+1)$."
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "La formule $(\\ln u)'=u'/u$ exige le numérateur $u'=5$ ; choisir $1$ oublie la dérivée de la fonction affine interieure."
         },
         "C": {
@@ -54,16 +54,16 @@
       "enonce": "$\\displaystyle\\lim_{x \\to +\\infty} \\ln x$ vaut :",
       "options": {
         "A": "$0$.",
-        "B": "$-\\infty$.",
-        "C": "$+\\infty$.",
+        "B": "$+\\infty$.",
+        "C": "$-\\infty$.",
         "D": "$1$."
       },
-      "correcte": "C",
+      "correcte": "B",
       "diagnostics": {
         "A": {
           "erreur": "La valeur $0$ est celle de $\\ln 1$, pas une limite a l'infini ; comme $\\ln$ est croissante et non majorée, elle tend vers $+\\infty$."
         },
-        "B": {
+        "C": {
           "erreur": "La limite $-\\infty$ correspond a $x\\to0^+$ ; a l'infini, la croissance de $\\ln x$ conduit au contraire vers $+\\infty$."
         },
         "D": {
@@ -77,16 +77,16 @@
       "enonce": "$\\displaystyle\\lim_{x \\to 0^+} x\\ln x$ vaut :",
       "options": {
         "A": "$-\\infty$.",
-        "B": "$0$.",
-        "C": "$1$.",
+        "B": "$1$.",
+        "C": "$0$.",
         "D": "Cette limite n'existe pas."
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Cette reponse ne retient que $\\ln x\\to-\\infty$ et ignore le facteur $x\\to0$ ; la comparaison des croissances donne $x\\ln x\\to0$."
         },
-        "C": {
+        "B": {
           "erreur": "La valeur $1$ ne resulte pas du produit $x\\ln x$ ; en posant $x=\\mathrm e^{-t}$, on obtient $-t\\mathrm e^{-t}\\to0$."
         },
         "D": {
@@ -100,20 +100,20 @@
       "enonce": "Pour résoudre $\\mathrm{e}^{2x} = 7$, on applique aux deux membres :",
       "options": {
         "A": "la fonction carre.",
-        "B": "la fonction $\\ln$.",
+        "B": "l'inverse.",
         "C": "la fonction exponentielle a nouveau.",
-        "D": "l'inverse."
+        "D": "la fonction $\\ln$."
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "La fonction carre n'est pas la réciproque de l'exponentielle et transforme l'équation en $\\mathrm e^{4x}=49$ sans isoler $x$."
         },
+        "B": {
+          "erreur": "Prendre les inverses donne $\\mathrm e^{-2x}=1/7$, une équation équivalente mais qui n'isole pas $x$ ; il faut ensuite appliquer $\\ln$."
+        },
         "C": {
           "erreur": "Appliquer encore l'exponentielle compose une seconde fois au lieu d'inverser la première ; seul $\\ln$ donne $2x=\\ln 7$."
-        },
-        "D": {
-          "erreur": "Prendre les inverses donne $\\mathrm e^{-2x}=1/7$, une équation équivalente mais qui n'isole pas $x$ ; il faut ensuite appliquer $\\ln$."
         }
       }
     }

@@ -6,15 +6,15 @@
       "id": "Q1",
       "capacite": "C2",
       "enonce": "Soit $f(x) = x^2$. L'intégrale $\\int_{0}^{3} f(x) dx$ vaut :",
-      "correcte": "B",
+      "correcte": "A",
       "options": {
-        "A": "3",
-        "B": "9",
+        "A": "9",
+        "B": "3",
         "C": "27",
         "D": "18"
       },
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Choisir $3$ revient a prendre $x$ pour primitive de $x^2$ puis a calculer $[x]_0^3$ ; or une primitive correcte est $x^3/3$.",
           "renvoi": "C2"
         },
@@ -32,20 +32,20 @@
       "id": "Q2",
       "capacite": "C2",
       "enonce": "La valeur moyenne de $f(x) = 2x$ sur $[0, 4]$ est :",
-      "correcte": "C",
+      "correcte": "A",
       "options": {
-        "A": "2",
+        "A": "4",
         "B": "8",
-        "C": "4",
+        "C": "2",
         "D": "16"
       },
       "diagnostics": {
-        "A": {
-          "erreur": "Le choix $2$ remplace la valeur moyenne sur tout l'intervalle par la valeur ponctuelle $f(1)=2$, qui ne tient pas compte de $[0,4]$.",
-          "renvoi": "C2"
-        },
         "B": {
           "erreur": "Le résultat $8$ est $f(4)=8$ : il evalue la fonction a la borne droite au lieu de calculer puis moyenner l'intégrale.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Le choix $2$ remplace la valeur moyenne sur tout l'intervalle par la valeur ponctuelle $f(1)=2$, qui ne tient pas compte de $[0,4]$.",
           "renvoi": "C2"
         },
         "D": {
@@ -84,20 +84,20 @@
       "id": "Q4",
       "capacite": "C3",
       "enonce": "Si $f(x) \\leqslant g(x)$ pour tout $x\\in[0,1]$, avec $f$ et $g$ continues, alors :",
-      "correcte": "A",
+      "correcte": "C",
       "options": {
-        "A": "$\\int_0^1 f(x)\\,dx \\leqslant \\int_0^1 g(x)\\,dx$",
+        "A": "$\\int_0^1 f(x)\\,dx = \\int_0^1 g(x)\\,dx$",
         "B": "$\\int_0^1 f(x)\\,dx \\geqslant \\int_0^1 g(x)\\,dx$",
-        "C": "$\\int_0^1 f(x)\\,dx = \\int_0^1 g(x)\\,dx$",
+        "C": "$\\int_0^1 f(x)\\,dx \\leqslant \\int_0^1 g(x)\\,dx$",
         "D": "$\\int_0^1 f(x)\\,dx \\leqslant 0$"
       },
       "diagnostics": {
-        "B": {
-          "erreur": "Le sens de l'inégalité est inverse : l'integration conserve l'ordre entre deux fonctions continues comparees sur le même intervalle.",
+        "A": {
+          "erreur": "L'hypothèse $f\\leqslant g$ n'impose pas leur égalité ; par exemple $f=0$ et $g=1$ donnent des intégrales distinctes.",
           "renvoi": "C3"
         },
-        "C": {
-          "erreur": "L'hypothèse $f\\leqslant g$ n'impose pas leur égalité ; par exemple $f=0$ et $g=1$ donnent des intégrales distinctes.",
+        "B": {
+          "erreur": "Le sens de l'inégalité est inverse : l'integration conserve l'ordre entre deux fonctions continues comparees sur le même intervalle.",
           "renvoi": "C3"
         },
         "D": {

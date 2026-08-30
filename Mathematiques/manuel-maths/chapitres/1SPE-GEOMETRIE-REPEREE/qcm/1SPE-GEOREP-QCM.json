@@ -33,14 +33,14 @@
       "capacite": "C1",
       "enonce": "Le point $P(2 ; -1)$ appartient a la droite $3x + 2y - 4 = 0$.",
       "options": {
-        "A": "Vrai",
-        "B": "Faux",
+        "A": "Faux",
+        "B": "Vrai",
         "C": "On ne peut pas savoir",
         "D": "Seulement si le repere est orthonorme"
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
+        "A": {
           "erreur": "Erreur de calcul : $3(2) + 2(-1) - 4 = 6 - 2 - 4 = 0$.",
           "renvoi": "M1, étape 3"
         },
@@ -60,17 +60,17 @@
       "enonce": "La droite d'équation $x = 5$ est :",
       "options": {
         "A": "horizontale",
-        "B": "verticale",
-        "C": "de coefficient directeur $5$",
+        "B": "de coefficient directeur $5$",
+        "C": "verticale",
         "D": "de coefficient directeur $1/5$"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Confusion : $y = 5$ est horizontale, $x = 5$ est verticale.",
           "renvoi": "Cours C1"
         },
-        "C": {
+        "B": {
           "erreur": "La droite $x = 5$ n'a pas de coefficient directeur (verticale).",
           "renvoi": "Cours C1"
         },
@@ -85,14 +85,14 @@
       "capacite": "C2",
       "enonce": "Un vecteur normal a la droite $4x - 3y + 2 = 0$ est :",
       "options": {
-        "A": "$\\vec{n}(3 ; 4)$",
-        "B": "$\\vec{n}(4 ; -3)$",
+        "A": "$\\vec{n}(4 ; -3)$",
+        "B": "$\\vec{n}(3 ; 4)$",
         "C": "$\\vec{n}(-3 ; 4)$",
         "D": "$\\vec{n}(4 ; 3)$"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "C'est le vecteur directeur, pas le vecteur normal.",
           "renvoi": "M2, étape 1"
         },
@@ -165,10 +165,10 @@
       "options": {
         "A": "centre $(3 ; -1)$ et rayon $16$",
         "B": "centre $(3 ; 1)$ et rayon $4$",
-        "C": "centre $(3 ; -1)$ et rayon $4$",
-        "D": "centre $(-3 ; 1)$ et rayon $4$"
+        "C": "centre $(-3 ; 1)$ et rayon $4$",
+        "D": "centre $(3 ; -1)$ et rayon $4$"
       },
-      "correcte": "C",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "Le rayon est $\\sqrt{16} = 4$, pas $16$.",
@@ -178,7 +178,7 @@
           "erreur": "Erreur de signe : $(y + 1)^2 = (y - (-1))^2$, donc le centre a pour ordonnée $-1$.",
           "renvoi": "M3, piège 1"
         },
-        "D": {
+        "C": {
           "erreur": "Erreur de signe sur les deux coordonnées.",
           "renvoi": "M3, piège 1"
         }
@@ -189,14 +189,14 @@
       "capacite": "C3",
       "enonce": "Le cercle de centre $(0 ; 0)$ et de rayon $3$ a pour équation :",
       "options": {
-        "A": "$x^2 + y^2 = 3$",
-        "B": "$x^2 + y^2 = 9$",
+        "A": "$x^2 + y^2 = 9$",
+        "B": "$x^2 + y^2 = 3$",
         "C": "$(x + 3)^2 + (y + 3)^2 = 0$",
         "D": "$x + y = 3$"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Le membre de droite est $r^2 = 9$, pas $r = 3$.",
           "renvoi": "M3, piège 2"
         },
@@ -215,14 +215,14 @@
       "capacite": "C3",
       "enonce": "L'équation $x^2 + y^2 - 2x + 4y - 4 = 0$ représente :",
       "options": {
-        "A": "un cercle de centre $(1 ; -2)$ et de rayon $3$",
-        "B": "un cercle de centre $(-1 ; 2)$ et de rayon $9$",
+        "A": "un cercle de centre $(-1 ; 2)$ et de rayon $9$",
+        "B": "un cercle de centre $(1 ; -2)$ et de rayon $3$",
         "C": "un cercle de centre $(1 ; -2)$ et de rayon $9$",
         "D": "aucun cercle"
       },
-      "correcte": "A",
+      "correcte": "B",
       "diagnostics": {
-        "B": {
+        "A": {
           "erreur": "Erreur de signe sur le centre : c'est $(-A/2, -B/2) = (1, -2)$.",
           "renvoi": "M3, piège 1"
         },
@@ -241,19 +241,19 @@
       "capacite": "C4",
       "enonce": "La distance du point $P(1 ; 2)$ a la droite $3x + 4y - 7 = 0$ est :",
       "options": {
-        "A": "$4/5$",
+        "A": "$7/5$",
         "B": "$4$",
-        "C": "$7/5$",
+        "C": "$4/5$",
         "D": "$0$"
       },
-      "correcte": "A",
+      "correcte": "C",
       "diagnostics": {
-        "B": {
-          "erreur": "Oubli de diviser par $\\sqrt{a^2+b^2}$ : le numérateur est $|3+8-7|=4$, mais il faut diviser par $\\sqrt{9+16}=5$.",
+        "A": {
+          "erreur": "Erreur de calcul dans le numérateur : $|3+8-7|=4$ et non $7$.",
           "renvoi": "M4, étape 1"
         },
-        "C": {
-          "erreur": "Erreur de calcul dans le numérateur : $|3+8-7|=4$ et non $7$.",
+        "B": {
+          "erreur": "Oubli de diviser par $\\sqrt{a^2+b^2}$ : le numérateur est $|3+8-7|=4$, mais il faut diviser par $\\sqrt{9+16}=5$.",
           "renvoi": "M4, étape 1"
         },
         "D": {
@@ -269,10 +269,10 @@
       "options": {
         "A": "la droite est secante au cercle",
         "B": "la droite est exterieure au cercle",
-        "C": "la droite est tangente au cercle",
-        "D": "on ne peut pas conclure"
+        "C": "on ne peut pas conclure",
+        "D": "la droite est tangente au cercle"
       },
-      "correcte": "C",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "La droite est secante si $d < r$, or ici $d = r$.",
@@ -282,7 +282,7 @@
           "erreur": "La droite est exterieure si $d > r$, or ici $d = r$.",
           "renvoi": "Cours C4, propriété 3"
         },
-        "D": {
+        "C": {
           "erreur": "La comparaison $d$ vs $r$ suffit toujours a conclure.",
           "renvoi": "Cours C4, propriété 3"
         }
@@ -293,17 +293,13 @@
       "capacite": "C4",
       "enonce": "Les droites $D_1 : 3x - y + 2 = 0$ et $D_2 : 6x - 2y + 4 = 0$ sont :",
       "options": {
-        "A": "strictement paralleles",
+        "A": "confondues",
         "B": "secantes",
         "C": "perpendiculaires",
-        "D": "confondues"
+        "D": "strictement paralleles"
       },
-      "correcte": "D",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
-          "erreur": "$D_2 = 2 D_1$ exactement (tous les coefficients proportionnels, même $c$), donc confondues.",
-          "renvoi": "Cours C4, propriété 1"
-        },
         "B": {
           "erreur": "Les vecteurs normaux sont colineaires, donc pas secantes.",
           "renvoi": "Cours C4"
@@ -311,6 +307,10 @@
         "C": {
           "erreur": "$a_1 a_2 + b_1 b_2 = 18 + 2 = 20 \\neq 0$.",
           "renvoi": "Cours C2, propriété 3"
+        },
+        "D": {
+          "erreur": "$D_2 = 2 D_1$ exactement (tous les coefficients proportionnels, même $c$), donc confondues.",
+          "renvoi": "Cours C4, propriété 1"
         }
       }
     },
@@ -346,17 +346,17 @@
       "enonce": "Le projete orthogonal de $P$ sur une droite $D$ est :",
       "options": {
         "A": "le milieu de $P$ et du pied de la perpendiculaire",
-        "B": "le point de $D$ le plus proche de $P$",
-        "C": "le symetrique de $P$ par rapport a $D$",
+        "B": "le symetrique de $P$ par rapport a $D$",
+        "C": "le point de $D$ le plus proche de $P$",
         "D": "l'intersection de $D$ avec l'axe des abscisses"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Le projete orthogonal EST le pied de la perpendiculaire, pas le milieu.",
           "renvoi": "Cours C5, propriété 2"
         },
-        "C": {
+        "B": {
           "erreur": "Le symetrique est le point tel que le projete est le milieu de $[PP']$.",
           "renvoi": "Cours C5, propriété 3"
         },
@@ -372,22 +372,22 @@
       "enonce": "Si $ABCD$ est un parallelogramme et $AC = BD$, alors $ABCD$ est :",
       "options": {
         "A": "un losange",
-        "B": "un rectangle",
+        "B": "un trapeze non parallelogramme",
         "C": "un carre",
-        "D": "un trapeze non parallelogramme"
+        "D": "un rectangle"
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "Un losange a ses diagonales perpendiculaires, pas necessairement égales.",
           "renvoi": "Cours C5, propriété 1"
         },
-        "C": {
-          "erreur": "Un carre est un cas particulier (rectangle ET losange), on n'a pas assez d'information.",
+        "B": {
+          "erreur": "Avec la définition inclusive, un parallelogramme est bien un trapeze ; l'option précise toutefois 'non parallelogramme', ce qui contredit l'hypothèse.",
           "renvoi": "Cours C5"
         },
-        "D": {
-          "erreur": "Avec la définition inclusive, un parallelogramme est bien un trapeze ; l'option précise toutefois 'non parallelogramme', ce qui contredit l'hypothèse.",
+        "C": {
+          "erreur": "Un carre est un cas particulier (rectangle ET losange), on n'a pas assez d'information.",
           "renvoi": "Cours C5"
         }
       }

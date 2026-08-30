@@ -6,15 +6,15 @@
       "id": "Q1",
       "capacite": "C1",
       "enonce": "Sur une courbe de Lorenz, le point $(x,L(x))$ représente :",
-      "correcte": "B",
+      "correcte": "A",
       "options": {
-        "A": "la part cumulée de population $L(x)$ et la part cumulée de richesse $x$",
-        "B": "la part cumulée de population $x$ et la part cumulée de richesse $L(x)$",
+        "A": "la part cumulée de population $x$ et la part cumulée de richesse $L(x)$",
+        "B": "la part cumulée de population $L(x)$ et la part cumulée de richesse $x$",
         "C": "deux probabilités indépendantes",
         "D": "la moyenne et la variance de la répartition"
       },
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Cette réponse échange les deux axes : la population cumulée est portée en abscisse. Sur une courbe de Lorenz, x est la part cumulée de population et L(x) la part cumulée de la grandeur étudiée.",
           "renvoi": "C1"
         },
@@ -32,20 +32,20 @@
       "id": "Q2",
       "capacite": "C2",
       "enonce": "Pour une repartition inegale, une courbe de Lorenz est en general :",
-      "correcte": "C",
+      "correcte": "A",
       "options": {
-        "A": "au-dessus de la droite $y=x$",
+        "A": "convexe et au-dessous de la droite $y=x$",
         "B": "confondue avec la droite $y=x$",
-        "C": "convexe et au-dessous de la droite $y=x$",
+        "C": "au-dessus de la droite $y=x$",
         "D": "décroissante de 1 vers 0"
       },
       "diagnostics": {
-        "A": {
-          "erreur": "La part détenue par les x pour cent les moins dotés ne peut pas dépasser x dans le modèle ordonné usuel. Une courbe de Lorenz d'une répartition inégale est convexe et située sous la première bissectrice y=x.",
-          "renvoi": "C2"
-        },
         "B": {
           "erreur": "La première bissectrice correspond à l'égalité parfaite, pas à une répartition inégale. Une courbe de Lorenz d'une répartition inégale est convexe et située sous la première bissectrice y=x.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "La part détenue par les x pour cent les moins dotés ne peut pas dépasser x dans le modèle ordonné usuel. Une courbe de Lorenz d'une répartition inégale est convexe et située sous la première bissectrice y=x.",
           "renvoi": "C2"
         },
         "D": {
@@ -58,15 +58,15 @@
       "id": "Q3",
       "capacite": "C3",
       "enonce": "Un indice de Gini proche de $0$ indique :",
-      "correcte": "A",
+      "correcte": "B",
       "options": {
-        "A": "une répartition presque égalitaire",
-        "B": "une inégalité maximale",
+        "A": "une inégalité maximale",
+        "B": "une répartition presque égalitaire",
         "C": "une variance nécessairement nulle",
         "D": "une courbe de Lorenz au-dessus de $y=x$"
       },
       "diagnostics": {
-        "B": {
+        "A": {
           "erreur": "Une inégalité forte éloigne la courbe de Lorenz de la bissectrice et augmente l'indice vers 1. Un indice de Gini proche de 0 décrit une répartition presque égalitaire ; plus il augmente, plus l'inégalité est forte.",
           "renvoi": "C3"
         },
@@ -110,24 +110,24 @@
       "id": "Q5",
       "capacite": "C5",
       "enonce": "Pour la courbe de Lorenz $L(x)=x^2$, l'indice $G=1-2\\int_0^1L(x)\\,dx$ vaut :",
-      "correcte": "B",
+      "correcte": "D",
       "options": {
         "A": "$0$",
-        "B": "$1/3$",
+        "B": "$1$",
         "C": "$2/3$",
-        "D": "$1$"
+        "D": "$1/3$"
       },
       "diagnostics": {
         "A": {
           "erreur": "La valeur zéro correspondrait à la bissectrice $L(x)=x$, dont l'aire vaut $1/2$, pas à $x^2$. La formule G=1-2 fois l'intégrale de L sur [0,1] donne, pour L(x)=x^2, G=1-2/3=1/3.",
           "renvoi": "C5"
         },
-        "C": {
-          "erreur": "La valeur $2/3$ est le double de l'intégrale de $x^2$ ; il reste à la soustraire à 1. La formule G=1-2 fois l'intégrale de L sur [0,1] donne, pour L(x)=x^2, G=1-2/3=1/3.",
+        "B": {
+          "erreur": "La valeur 1 exigerait une aire nulle sous la courbe, alors que l'intégrale de $x^2$ vaut $1/3$. La formule G=1-2 fois l'intégrale de L sur [0,1] donne, pour L(x)=x^2, G=1-2/3=1/3.",
           "renvoi": "C5"
         },
-        "D": {
-          "erreur": "La valeur 1 exigerait une aire nulle sous la courbe, alors que l'intégrale de $x^2$ vaut $1/3$. La formule G=1-2 fois l'intégrale de L sur [0,1] donne, pour L(x)=x^2, G=1-2/3=1/3.",
+        "C": {
+          "erreur": "La valeur $2/3$ est le double de l'intégrale de $x^2$ ; il reste à la soustraire à 1. La formule G=1-2 fois l'intégrale de L sur [0,1] donne, pour L(x)=x^2, G=1-2/3=1/3.",
           "renvoi": "C5"
         }
       }

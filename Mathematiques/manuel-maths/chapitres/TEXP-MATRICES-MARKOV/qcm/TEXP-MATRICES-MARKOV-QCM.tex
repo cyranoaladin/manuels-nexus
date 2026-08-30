@@ -13,8 +13,8 @@
 
 \item \textbf{[Q1]} Une matrice de transition d'une chaine de Markov a pour propriété :
   \begin{enumerate}[label=\Alph*.]
-    \item La somme des colonnes vaut 1
     \item La somme de chaque ligne vaut 1
+    \item La somme des colonnes vaut 1
     \item Tous ses coefficients sont négatifs
     \item Elle est toujours symetrique
   \end{enumerate}
@@ -34,8 +34,8 @@
 \item \textbf{[Q3]} Un etat stable $X$ d'une chaine de Markov vérifie :
   \begin{enumerate}[label=\Alph*.]
     \item $P X = X$
-    \item $X P = 0$
     \item $X P = X$ et la somme des composantes vaut 1
+    \item $X P = 0$
     \item $X^2 = P$
   \end{enumerate}
 
@@ -44,8 +44,8 @@
 \item \textbf{[Q4]} Une suite de matrices colonnes vérifie $U_{n+1}=AU_n+C$. Une solution constante $U$ satisfait :
   \begin{enumerate}[label=\Alph*.]
     \item $AU=C$
-    \item $(I-A)U=C$
     \item $U=A+C$
+    \item $(I-A)U=C$
     \item $U=0$ dans tous les cas
   \end{enumerate}
 
@@ -53,10 +53,10 @@
 
 \item \textbf{[Q5]} Pour inverser une matrice 2x2 $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$, le determinant est :
   \begin{enumerate}[label=\Alph*.]
-    \item $ad - bc$
+    \item $a+b+c+d$
     \item $ac - bd$
     \item $ad + bc$
-    \item $a+b+c+d$
+    \item $ad - bc$
   \end{enumerate}
 
 \end{enumerate}
@@ -71,11 +71,11 @@
 \hline
 Question & Capacité & Réponse exacte \\
 \hline
-Q1 & C4 & \textbf{B} \\
+Q1 & C4 & \textbf{A} \\
 Q2 & C5 & \textbf{A} \\
-Q3 & C7 & \textbf{C} \\
-Q4 & C3 & \textbf{B} \\
-Q5 & C1 & \textbf{A} \\
+Q3 & C7 & \textbf{B} \\
+Q4 & C3 & \textbf{C} \\
+Q5 & C1 & \textbf{D} \\
 \hline
 \end{tabular}
 \end{center}
@@ -85,7 +85,7 @@ Q5 & C1 & \textbf{A} \\
 \begin{itemize}
   \item \textbf{Q1}
   \begin{itemize}
-    \item \textbf{A} — Confusions entre lignes et colonnes. Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1. \emph{Renvoi : C4.}
+    \item \textbf{B} — Confusions entre lignes et colonnes. Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1. \emph{Renvoi : C4.}
     \item \textbf{C} — Les probabilités sont positives. Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1. \emph{Renvoi : C4.}
     \item \textbf{D} — Symetrie non requise. Avec la convention des distributions lignes, chaque ligne d'une matrice de transition contient des probabilités dont la somme vaut 1. \emph{Renvoi : C4.}
   \end{itemize}
@@ -98,20 +98,20 @@ Q5 & C1 & \textbf{A} \\
   \item \textbf{Q3}
   \begin{itemize}
     \item \textbf{A} — Vecteur colonne au lieu de vecteur ligne. Une distribution invariante ligne X vérifie XP=X, avec composantes positives de somme 1. \emph{Renvoi : C7.}
-    \item \textbf{B} — Produit nul incorrect. Une distribution invariante ligne X vérifie XP=X, avec composantes positives de somme 1. \emph{Renvoi : C7.}
+    \item \textbf{C} — Produit nul incorrect. Une distribution invariante ligne X vérifie XP=X, avec composantes positives de somme 1. \emph{Renvoi : C7.}
     \item \textbf{D} — Carre matriciel incorrect. Une distribution invariante ligne X vérifie XP=X, avec composantes positives de somme 1. \emph{Renvoi : C7.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
     \item \textbf{A} — Substituer une suite constante donne U=AU+C ; oublier le terme U du membre gauche mène à l'équation incomplète AU=C. Une solution constante U de U\_(n+1)=AU\_n+C vérifie U=AU+C, donc (I-A)U=C. \emph{Renvoi : C3.}
-    \item \textbf{C} — L'addition A+C mélange une matrice et un vecteur sans appliquer A à U et ne traduit pas la récurrence. Une solution constante U de U\_(n+1)=AU\_n+C vérifie U=AU+C, donc (I-A)U=C. \emph{Renvoi : C3.}
+    \item \textbf{B} — L'addition A+C mélange une matrice et un vecteur sans appliquer A à U et ne traduit pas la récurrence. Une solution constante U de U\_(n+1)=AU\_n+C vérifie U=AU+C, donc (I-A)U=C. \emph{Renvoi : C3.}
     \item \textbf{D} — Le vecteur nul n'est solution que si C=0 ; aucune telle hypothèse n'est donnée. Une solution constante U de U\_(n+1)=AU\_n+C vérifie U=AU+C, donc (I-A)U=C. \emph{Renvoi : C3.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
+    \item \textbf{A} — Somme des termes. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc. \emph{Renvoi : C1.}
     \item \textbf{B} — Erreur de formule du determinant. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc. \emph{Renvoi : C1.}
     \item \textbf{C} — Signe + au lieu de -. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc. \emph{Renvoi : C1.}
-    \item \textbf{D} — Somme des termes. Le déterminant de la matrice [[a,b],[c,d]] est ad-bc. \emph{Renvoi : C1.}
   \end{itemize}
 \end{itemize}
 \fi

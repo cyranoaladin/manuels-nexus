@@ -7,14 +7,14 @@
       "capacite": "C1",
       "enonce": "L'équation cos x = 1/2 admet sur [-pi,pi] :",
       "options": {
-        "A": "une seule solution.",
-        "B": "deux solutions opposees.",
+        "A": "deux solutions opposees.",
+        "B": "une seule solution.",
         "C": "trois solutions.",
         "D": "aucune solution."
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Une seule solution oublie la symetrie du cosinus : avec $\\cos(\\pi/3)=1/2$, on a aussi $\\cos(-\\pi/3)=1/2$."
         },
         "C": {
@@ -30,14 +30,14 @@
       "capacite": "C2",
       "enonce": "sin'(x) vaut :",
       "options": {
-        "A": "-cos x",
-        "B": "cos x",
+        "A": "cos x",
+        "B": "-cos x",
         "C": "-sin x",
         "D": "sin x"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Le signe moins appartient a la formule $(\\cos x)'=-\\sin x$ ; la dérivée de $\\sin x$ est $\\cos x$ sans changement de signe."
         },
         "C": {
@@ -77,16 +77,16 @@
       "enonce": "Pour dériver x -> sin(3x), on obtient :",
       "options": {
         "A": "cos(3x)",
-        "B": "3cos(3x)",
-        "C": "3cos(x)",
+        "B": "3cos(x)",
+        "C": "3cos(3x)",
         "D": "cos(x)"
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "La dérivée exterieure est correcte, mais la règle de chaine exige de multiplier par la dérivée de $3x$, qui vaut $3$."
         },
-        "C": {
+        "B": {
           "erreur": "Le facteur $3$ est present, mais l'argument de la fonction cosinus doit rester $3x$ après dérivation de la composee."
         },
         "D": {
@@ -100,20 +100,20 @@
       "enonce": "Pour trouver le maximum d'une fonction f construite avec sin ou cos sur un intervalle, on cherche :",
       "options": {
         "A": "les points ou f s'annule.",
-        "B": "les points critiques interieurs et les bornes, puis on compare les valeurs de f.",
+        "B": "les bornes de l'intervalle uniquement.",
         "C": "les points ou f' est maximale.",
-        "D": "les bornes de l'intervalle uniquement."
+        "D": "les points critiques interieurs et les bornes, puis on compare les valeurs de f."
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "Les zeros de $f$ donnent les intersections avec l'axe des abscisses, pas ses maxima : une valeur maximale peut être non nulle."
         },
+        "B": {
+          "erreur": "Comparer seulement les bornes peut manquer un maximum interieur : il faut aussi examiner les points critiques de l'intervalle."
+        },
         "C": {
           "erreur": "Un maximum de $f'$ localise la croissance la plus rapide de $f$, et non une valeur maximale de $f$ sur l'intervalle."
-        },
-        "D": {
-          "erreur": "Comparer seulement les bornes peut manquer un maximum interieur : il faut aussi examiner les points critiques de l'intervalle."
         }
       }
     }

@@ -7,14 +7,14 @@
       "capacite": "C5",
       "enonce": "Deux primitives d'une même fonction continue sur un intervalle différent :",
       "options": {
-        "A": "d'un facteur multiplicatif.",
-        "B": "d'une constante additive.",
+        "A": "d'une constante additive.",
+        "B": "d'un facteur multiplicatif.",
         "C": "toujours de 1.",
         "D": "elles sont necessairement égales."
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "Un facteur multiplicatif changerait la dérivée, sauf cas particulier, et ne conserve donc pas la même fonction dérivée. Comme (F-G)'=f-f=0 sur l'intervalle, deux primitives diffèrent d'une constante additive.",
           "renvoi": "C5"
         },
@@ -33,14 +33,14 @@
       "capacite": "C4",
       "enonce": "Une primitive de u'/u (avec u>0) est :",
       "options": {
-        "A": "u^2",
-        "B": "ln(u)",
+        "A": "ln(u)",
+        "B": "u^2",
         "C": "e^u",
         "D": "1/u"
       },
-      "correcte": "B",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
+        "B": {
           "erreur": "La dérivée de $u^2$ vaut $2uu'$ et ne produit pas le quotient $u'/u$. La formule (ln u)'=u'/u pour u>0 montre qu'une primitive de u'/u est ln(u).",
           "renvoi": "C4"
         },
@@ -112,17 +112,17 @@
       "enonce": "Pour une fonction croissante, la méthode des rectangles a gauche donne :",
       "options": {
         "A": "un majorant de l'intégrale.",
-        "B": "un minorant de l'intégrale.",
-        "C": "la valeur exacte de l'intégrale.",
+        "B": "la valeur exacte de l'intégrale.",
+        "C": "un minorant de l'intégrale.",
         "D": "une valeur négative."
       },
-      "correcte": "B",
+      "correcte": "C",
       "diagnostics": {
         "A": {
           "erreur": "Pour une fonction croissante, la hauteur gauche est plus petite que les valeurs prises ensuite sur chaque sous-intervalle. Pour une fonction croissante, chaque hauteur prise à gauche est inférieure aux valeurs suivantes : la somme est un minorant.",
           "renvoi": "C2"
         },
-        "C": {
+        "B": {
           "erreur": "Les rectangles ne donnent la valeur exacte que dans des cas particuliers, par exemple pour une fonction constante. Pour une fonction croissante, chaque hauteur prise à gauche est inférieure aux valeurs suivantes : la somme est un minorant.",
           "renvoi": "C2"
         },
@@ -137,23 +137,23 @@
       "capacite": "C6",
       "enonce": "Pour f continue, positive et croissante, la fonction F(x)=intégrale de a a x de f(t)dt vérifie :",
       "options": {
-        "A": "F'=f",
+        "A": "F n'est pas dérivée.",
         "B": "F=f'",
         "C": "F est constante.",
-        "D": "F n'est pas dérivée."
+        "D": "F'=f"
       },
-      "correcte": "A",
+      "correcte": "D",
       "diagnostics": {
+        "A": {
+          "erreur": "La continuité de f est précisément l'hypothèse qui garantit la dérivabilité de la fonction intégrale. Le théorème de la fonction intégrale donne F'(x)=f(x) lorsque f est continue sur l'intervalle.",
+          "renvoi": "C6"
+        },
         "B": {
           "erreur": "L'égalité F=f' échange la fonction intégrale et la dérivée de l'intégrande sans justification. Le théorème de la fonction intégrale donne F'(x)=f(x) lorsque f est continue sur l'intervalle.",
           "renvoi": "C6"
         },
         "C": {
           "erreur": "Comme F'=f et que f est positive, F est croissante plutôt que constante sauf si f est nulle. Le théorème de la fonction intégrale donne F'(x)=f(x) lorsque f est continue sur l'intervalle.",
-          "renvoi": "C6"
-        },
-        "D": {
-          "erreur": "La continuité de f est précisément l'hypothèse qui garantit la dérivabilité de la fonction intégrale. Le théorème de la fonction intégrale donne F'(x)=f(x) lorsque f est continue sur l'intervalle.",
           "renvoi": "C6"
         }
       }

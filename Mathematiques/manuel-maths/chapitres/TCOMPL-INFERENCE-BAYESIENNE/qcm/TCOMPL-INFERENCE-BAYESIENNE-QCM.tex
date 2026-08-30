@@ -31,8 +31,8 @@
 
 \item \textbf{[Q3]} La formule des probabilités totales pour une partition $(A_k)$ s'ecrit $P(B) =$
   \begin{enumerate}[label=\Alph*.]
-    \item $\sum P(A_k)$
     \item $\sum P(B|A_k) P(A_k)$
+    \item $\sum P(A_k)$
     \item $\prod P(B|A_k)$
     \item $P(B|A_1)$
   \end{enumerate}
@@ -42,19 +42,19 @@
 \item \textbf{[Q4]} En inference bayesienne, la probabilité $P(A)$ avant de connaitre B s'appelle :
   \begin{enumerate}[label=\Alph*.]
     \item La probabilité a posteriori
-    \item La vraisemblance
-    \item La valeur p
     \item La probabilité a priori
+    \item La valeur p
+    \item La vraisemblance
   \end{enumerate}
 
 \item[] \textbf{Capacité C4}
 
 \item \textbf{[Q5]} Un test de sensibilite 95\% et specificite 90\% sur une maladie rare (1\%) donne une VPP :
   \begin{enumerate}[label=\Alph*.]
-    \item Faible (inférieure à 10\%) car la maladie est rare
+    \item Exactement 90\%
     \item Très forte (95\%)
     \item Égale a 50\%
-    \item Exactement 90\%
+    \item Faible (inférieure à 10\%) car la maladie est rare
   \end{enumerate}
 
 \end{enumerate}
@@ -71,9 +71,9 @@ Question & Capacité & Réponse exacte \\
 \hline
 Q1 & C2 & \textbf{A} \\
 Q2 & C1 & \textbf{C} \\
-Q3 & C1 & \textbf{B} \\
-Q4 & C3 & \textbf{D} \\
-Q5 & C4 & \textbf{A} \\
+Q3 & C1 & \textbf{A} \\
+Q4 & C3 & \textbf{B} \\
+Q5 & C4 & \textbf{D} \\
 \hline
 \end{tabular}
 \end{center}
@@ -95,21 +95,21 @@ Q5 & C4 & \textbf{A} \\
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{A} — La somme des P(A\_k) vaut 1. Pour une partition (A\_k), la formule totale est P(B)=somme\_k P(B|A\_k)P(A\_k). \emph{Renvoi : C1.}
+    \item \textbf{B} — La somme des P(A\_k) vaut 1. Pour une partition (A\_k), la formule totale est P(B)=somme\_k P(B|A\_k)P(A\_k). \emph{Renvoi : C1.}
     \item \textbf{C} — Produit au lieu d'une somme. Pour une partition (A\_k), la formule totale est P(B)=somme\_k P(B|A\_k)P(A\_k). \emph{Renvoi : C1.}
     \item \textbf{D} — Seul le premier terme considere. Pour une partition (A\_k), la formule totale est P(B)=somme\_k P(B|A\_k)P(A\_k). \emph{Renvoi : C1.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
     \item \textbf{A} — P(A|B) est la probabilité a posteriori. La probabilité attribuée à A avant l'observation de B est la probabilité a priori. \emph{Renvoi : C3.}
-    \item \textbf{B} — P(B|A) est la vraisemblance. La probabilité attribuée à A avant l'observation de B est la probabilité a priori. \emph{Renvoi : C3.}
     \item \textbf{C} — Terme de test d'hypothèse. La probabilité attribuée à A avant l'observation de B est la probabilité a priori. \emph{Renvoi : C3.}
+    \item \textbf{D} — P(B|A) est la vraisemblance. La probabilité attribuée à A avant l'observation de B est la probabilité a priori. \emph{Renvoi : C3.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
+    \item \textbf{A} — Confusion avec la specificite. La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 \%, donc moins de 10 \%. \emph{Renvoi : C4.}
     \item \textbf{B} — Oubli de l'effet du biais de rarete (paradoxe du faux positif). La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 \%, donc moins de 10 \%. \emph{Renvoi : C4.}
     \item \textbf{C} — Valeur arbitraire. La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 \%, donc moins de 10 \%. \emph{Renvoi : C4.}
-    \item \textbf{D} — Confusion avec la specificite. La VPP vaut 0,95*0,01/(0,95*0,01+0,10*0,99), soit environ 8,8 \%, donc moins de 10 \%. \emph{Renvoi : C4.}
   \end{itemize}
 \end{itemize}
 \fi

@@ -32,20 +32,20 @@
       "id": "Q2",
       "capacite": "C2",
       "enonce": "D'après la formule de Euler, $\\cos(\\theta) =$",
-      "correcte": "C",
+      "correcte": "A",
       "options": {
-        "A": "$\\frac{e^{i\\theta} - e^{-i\\theta}}{2}$",
+        "A": "$\\frac{e^{i\\theta} + e^{-i\\theta}}{2}$",
         "B": "$\\frac{e^{i\\theta} + e^{-i\\theta}}{2i}$",
-        "C": "$\\frac{e^{i\\theta} + e^{-i\\theta}}{2}$",
+        "C": "$\\frac{e^{i\\theta} - e^{-i\\theta}}{2}$",
         "D": "$e^{i\\theta} + e^{-i\\theta}$"
       },
       "diagnostics": {
-        "A": {
-          "erreur": "Formule de sin(theta) sans le i. En additionnant les formules d'Euler, cos(theta)=(exp(i theta)+exp(-i theta))/2.",
-          "renvoi": "C2"
-        },
         "B": {
           "erreur": "Facteur 2i au lieu de 2. En additionnant les formules d'Euler, cos(theta)=(exp(i theta)+exp(-i theta))/2.",
+          "renvoi": "C2"
+        },
+        "C": {
+          "erreur": "Formule de sin(theta) sans le i. En additionnant les formules d'Euler, cos(theta)=(exp(i theta)+exp(-i theta))/2.",
           "renvoi": "C2"
         },
         "D": {
@@ -84,12 +84,12 @@
       "id": "Q4",
       "capacite": "C7",
       "enonce": "Les racines n-iemes de l'unité sont au nombre de :",
-      "correcte": "D",
+      "correcte": "C",
       "options": {
         "A": "1",
         "B": "2",
-        "C": "n-1",
-        "D": "n"
+        "C": "n",
+        "D": "n-1"
       },
       "diagnostics": {
         "A": {
@@ -100,7 +100,7 @@
           "erreur": "Racines réelles uniquement. L'équation z^n=1 possède exactement les n solutions exp(2ikpi/n), pour k de 0 à n-1.",
           "renvoi": "C7"
         },
-        "C": {
+        "D": {
           "erreur": "Compte incorrect. L'équation z^n=1 possède exactement les n solutions exp(2ikpi/n), pour k de 0 à n-1.",
           "renvoi": "C7"
         }
@@ -110,24 +110,24 @@
       "id": "Q5",
       "capacite": "C5",
       "enonce": "Si $P$ est un polynôme complexe et $P(a)=0$, alors :",
-      "correcte": "A",
+      "correcte": "D",
       "options": {
-        "A": "$z-a$ divise $P(z)$",
+        "A": "$a$ est l'unique racine de $P$",
         "B": "$z+a$ divise toujours $P(z)$",
         "C": "$P$ est le polynôme nul",
-        "D": "$a$ est l'unique racine de $P$"
+        "D": "$z-a$ divise $P(z)$"
       },
       "diagnostics": {
+        "A": {
+          "erreur": "La factorisation par $z-a$ n'interdit pas d'autres facteurs et donc d'autres racines. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z).",
+          "renvoi": "C5"
+        },
         "B": {
           "erreur": "La racine $a$ fournit le facteur $z-a$ ; le facteur $z+a$ correspondrait à la racine $-a$. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z).",
           "renvoi": "C5"
         },
         "C": {
           "erreur": "Un polynôme non nul peut avoir des racines ; l'annulation en un point n'implique pas l'annulation identique. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z).",
-          "renvoi": "C5"
-        },
-        "D": {
-          "erreur": "La factorisation par $z-a$ n'interdit pas d'autres facteurs et donc d'autres racines. Le théorème de factorisation affirme que P(a)=0 si et seulement si z-a divise P(z).",
           "renvoi": "C5"
         }
       }

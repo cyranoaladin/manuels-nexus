@@ -7,18 +7,18 @@
       "capacite": "C1",
       "enonce": "Une primitive de $f(x) = \\mathrm{e}^{3x}$ est :",
       "options": {
-        "A": "$3\\mathrm{e}^{3x}$.",
+        "A": "$\\dfrac{1}{3}\\mathrm{e}^{3x}$.",
         "B": "$\\mathrm{e}^{3x}$.",
-        "C": "$\\dfrac{1}{3}\\mathrm{e}^{3x}$.",
+        "C": "$3\\mathrm{e}^{3x}$.",
         "D": "$\\mathrm{e}^{3x+1}$."
       },
-      "correcte": "C",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
-          "erreur": "La dérivée de $3\\mathrm e^{3x}$ vaut $9\\mathrm e^{3x}$ ; ce choix multiplie par $3$ au lieu de compenser la dérivée de $3x$."
-        },
         "B": {
           "erreur": "La dérivée de $\\mathrm e^{3x}$ vaut $3\\mathrm e^{3x}$ ; il faut donc le facteur $1/3$ pour retrouver exactement $\\mathrm e^{3x}$."
+        },
+        "C": {
+          "erreur": "La dérivée de $3\\mathrm e^{3x}$ vaut $9\\mathrm e^{3x}$ ; ce choix multiplie par $3$ au lieu de compenser la dérivée de $3x$."
         },
         "D": {
           "erreur": "Comme $\\mathrm e^{3x+1}=\\mathrm e\\,\\mathrm e^{3x}$, sa dérivée vaut $3\\mathrm e\\,\\mathrm e^{3x}$ et non $\\mathrm e^{3x}$."
@@ -30,19 +30,19 @@
       "capacite": "C4",
       "enonce": "Si $F$ et $G$ sont deux primitives de la même fonction $f$ continue sur un intervalle $I$, alors :",
       "options": {
-        "A": "$F=G$.",
+        "A": "$F-G$ est constante.",
         "B": "$F-G$ est une fonction affine de pente non nulle.",
-        "C": "$F-G$ est constante.",
+        "C": "$F=G$.",
         "D": "$F \\times G$ est constante."
       },
-      "correcte": "C",
+      "correcte": "A",
       "diagnostics": {
-        "A": {
-          "erreur": "Deux primitives d'une même fonction ne sont pas necessairement égales ; elles peuvent differer d'une constante.",
-          "renvoi": "C1, ensemble des primitives"
-        },
         "B": {
           "erreur": "Puisque $(F-G)'=f-f=0$, la difference est constante : elle ne peut donc pas être affine de pente non nulle.",
+          "renvoi": "C1, ensemble des primitives"
+        },
+        "C": {
+          "erreur": "Deux primitives d'une même fonction ne sont pas necessairement égales ; elles peuvent differer d'une constante.",
           "renvoi": "C1, ensemble des primitives"
         },
         "D": {
@@ -79,18 +79,18 @@
       "capacite": "C2",
       "enonce": "Pour $y' = 3y - 12$, la solution particulière constante est :",
       "options": {
-        "A": "$y_0 = 4$.",
+        "A": "$y_0 = 12$.",
         "B": "$y_0 = -4$.",
-        "C": "$y_0 = 12$.",
+        "C": "$y_0 = 4$.",
         "D": "$y_0 = -36$."
       },
-      "correcte": "A",
+      "correcte": "C",
       "diagnostics": {
+        "A": {
+          "erreur": "Pour $y_0=12$, on a $3y_0-12=24$ au lieu de $0$ ; cette constante n'est donc pas une solution particulière."
+        },
         "B": {
           "erreur": "Pour la constante $y_0=-4$, le membre de gauche vaut $0$ mais $3y_0-12=-24$ ; l'équation n'est pas verifiee."
-        },
-        "C": {
-          "erreur": "Pour $y_0=12$, on a $3y_0-12=24$ au lieu de $0$ ; cette constante n'est donc pas une solution particulière."
         },
         "D": {
           "erreur": "Pour $y_0=-36$, le second membre vaut $3(-36)-12=-120$, tandis que la dérivée de la constante vaut $0$."
@@ -103,20 +103,20 @@
       "enonce": "Pour utiliser une solution particulière $y_p$ donnee de $y'=ay+f$, il faut d'abord :",
       "options": {
         "A": "calculer $y_p(0)$.",
-        "B": "vérifier que $y_p$ satisfait bien l'équation.",
+        "B": "résoudre $y_p=0$.",
         "C": "dériver $f$.",
-        "D": "résoudre $y_p=0$."
+        "D": "vérifier que $y_p$ satisfait bien l'équation."
       },
-      "correcte": "B",
+      "correcte": "D",
       "diagnostics": {
         "A": {
           "erreur": "La valeur $y_p(0)$ peut servir ensuite avec une condition initiale, mais elle ne prouve pas que $y_p'=ay_p+f$ sur l'intervalle."
         },
+        "B": {
+          "erreur": "Les zeros de $y_p$ ne disent pas si la fonction satisfait l'équation différentielle ; il faut substituer $y_p$ et $y_p'$ dans celle-ci."
+        },
         "C": {
           "erreur": "Dériver $f$ n'est pas la vérification demandee ; il faut calculer $y_p'$ puis comparer cette dérivée a $ay_p+f$."
-        },
-        "D": {
-          "erreur": "Les zeros de $y_p$ ne disent pas si la fonction satisfait l'équation différentielle ; il faut substituer $y_p$ et $y_p'$ dans celle-ci."
         }
       }
     }
