@@ -1,0 +1,145 @@
+% META: {"id": "1NSI-TC-EVAL-B-corrige", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-TC-EVAL-B", "capacites": ["1NSI-TYPES-CONSTRUITS-C1", "1NSI-TYPES-CONSTRUITS-C2", "1NSI-TYPES-CONSTRUITS-C3", "1NSI-TYPES-CONSTRUITS-C4", "1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% inventaire = {"pommes": 12, "bananes": 5, "oranges": 8}
+% panier = []
+% for fruit, quantite in inventaire.items():
+%     if quantite > 6:
+%         panier.append((fruit, quantite))
+% assert panier == [("pommes", 12), ("oranges", 8)]
+% assert isinstance(panier[0], tuple)
+% inventaire["pommes"] = 0
+% assert panier == [("pommes", 12), ("oranges", 8)]
+% depart = {"pommes": 12, "bananes": 5, "oranges": 8}
+% assert [(f, q) for f, q in depart.items() if q > 6] == panier
+%
+% def separer(tab, seuil):
+%     return ([x for x in tab if x <= seuil], [x for x in tab if x > seuil])
+%
+% def sans_doublons(tab):
+%     resultat = []
+%     for element in tab:
+%         if element not in resultat:
+%             resultat.append(element)
+%     return resultat
+%
+% def compter(grille, symbole):
+%     total = 0
+%     for ligne in grille:
+%         for case in ligne:
+%             if case == symbole:
+%                 total += 1
+%     return total
+%
+% def diagonale(grille):
+%     return [grille[i][i] for i in range(len(grille))]
+%
+% def ajouter_note(carnet, matiere, note):
+%     if matiere not in carnet:
+%         carnet[matiere] = []
+%     carnet[matiere].append(note)
+%
+% def moyennes(carnet):
+%     return {matiere: sum(notes) / len(notes) for matiere, notes in carnet.items()}
+%
+% assert separer([3, 8, 1, 5, 9, 2], 4) == ([3, 1, 2], [8, 5, 9])
+% assert sans_doublons([3, 1, 3, 2, 1, 4]) == [3, 1, 2, 4]
+% grille = [["X", "O", " "], [" ", "X", " "], ["O", " ", "X"]]
+% assert compter(grille, "X") == 3
+% assert compter(grille, "O") == 2
+% assert diagonale(grille) == ["X", "X", "X"]
+% assert len(set(diagonale(grille))) == 1
+% carnet = {"maths": [15, 12], "nsi": [18, 16, 14]}
+% ajouter_note(carnet, "nsi", 12)
+% ajouter_note(carnet, "physique", 14)
+% assert carnet["nsi"] == [18, 16, 14, 12]
+% assert carnet["physique"] == [14]
+% assert moyennes({"maths": [15, 12], "nsi": [18, 16, 14]}) == {"maths": 13.5, "nsi": 16.0}
+% c1 = {"nsi": [18]}
+% c2 = c1
+% c2["nsi"].append(15)
+% assert c1["nsi"] == [18, 15]
+% END-VERIFY
+
+\begin{corrige}{1NSI-TC-EVAL-B-EX1}
+\textbf{Q1.} \lstinline{panier} vaut \lstinline{[("pommes", 12), ("oranges", 8)]}.
+
+Seules les quantités strictement supérieures à $6$ sont retenues : les $5$ bananes sont écartées.
+
+\textbf{Q2.} Chaque élément est un p-uplet de deux composantes : une chaîne de caractères, puis un entier.
+
+\textbf{Q3.} Non, la valeur $12$ présente dans \lstinline{panier} n'est pas modifiée.
+
+Un entier est immuable, et le p-uplet enregistré dans \lstinline{panier} contient la valeur $12$ elle-même, non un lien vers la case du dictionnaire. Réaffecter \lstinline{inventaire["pommes"]} remplace la valeur associée à cette clé sans toucher au p-uplet déjà construit. La situation est donc l'inverse de celle de l'exercice 4 : c'est bien la mutabilité qui fait la différence.
+
+\textbf{Q4.}
+\begin{python}
+panier = [(fruit, quantite) for fruit, quantite in inventaire.items() if quantite > 6]
+\end{python}
+Cette compréhension doit être évaluée sur l'inventaire initial : appliquée après la ligne \lstinline{inventaire["pommes"] = 0}, elle ne renverrait plus que \lstinline{[("oranges", 8)]}.
+\end{corrige}
+
+\begin{corrige}{1NSI-TC-EVAL-B-EX2}
+\textbf{Q1.}
+\begin{python}
+def separer(tab, seuil):
+    return ([x for x in tab if x <= seuil], [x for x in tab if x > seuil])
+\end{python}
+La fonction renvoie un p-uplet de deux tableaux : c'est un exemple de fonction rendant plusieurs valeurs à la fois. Les deux conditions sont complémentaires, si bien qu'aucun élément n'est perdu ni compté deux fois.
+
+\textbf{Q2.}
+\begin{python}
+def sans_doublons(tab):
+    resultat = []
+    for element in tab:
+        if element not in resultat:
+            resultat.append(element)
+    return resultat
+\end{python}
+L'ordre de première apparition est conservé parce que le parcours suit l'ordre du tableau et que chaque élément est ajouté à la fin. Passer par un ensemble serait plus rapide, mais perdrait précisément cet ordre.
+\end{corrige}
+
+\begin{corrige}{1NSI-TC-EVAL-B-EX3}
+\textbf{Q1.}
+\begin{python}
+def compter(grille, symbole):
+    total = 0
+    for ligne in grille:
+        for case in ligne:
+            if case == symbole:
+                total += 1
+    return total
+\end{python}
+Sur l'exemple, \lstinline{compter(grille, "X")} vaut $3$ et \lstinline{compter(grille, "O")} vaut $2$.
+
+\textbf{Q2.}
+\begin{python}
+def diagonale(grille):
+    return [grille[i][i] for i in range(len(grille))]
+\end{python}
+La diagonale principale est faite des cases dont l'indice de ligne égale l'indice de colonne : un seul indice suffit donc à la parcourir.
+
+\textbf{Q3.} Oui : la diagonale vaut \lstinline{["X", "X", "X"]}. Une expression qui le vérifie est
+\lstinline{len(set(diagonale(grille))) == 1}, qui teste que la diagonale ne contient qu'une seule valeur distincte.
+\end{corrige}
+
+\begin{corrige}{1NSI-TC-EVAL-B-EX4}
+\textbf{Q1.}
+\begin{python}
+def ajouter_note(carnet, matiere, note):
+    if matiere not in carnet:
+        carnet[matiere] = []
+    carnet[matiere].append(note)
+\end{python}
+La matière absente est d'abord créée avec un tableau vide, puis l'ajout se fait dans tous les cas par la même ligne : il n'y a pas à écrire deux fois l'insertion.
+
+\textbf{Q2.}
+\begin{python}
+def moyennes(carnet):
+    return {matiere: sum(notes) / len(notes) for matiere, notes in carnet.items()}
+\end{python}
+La fonction construit un NOUVEAU dictionnaire, comme le demande l'énoncé, et laisse le carnet d'origine intact.
+
+\textbf{Q3.} \lstinline{c1["nsi"]} vaut \lstinline{[18, 15]}.
+
+\lstinline{c2 = c1} ne copie pas le dictionnaire, et \lstinline{c2["nsi"]} désigne la même liste que \lstinline{c1["nsi"]}. La méthode \lstinline{append} modifie cette liste sur place : le changement est donc visible depuis les deux noms.
+\end{corrige}

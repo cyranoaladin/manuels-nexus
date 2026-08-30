@@ -1,0 +1,50 @@
+{
+  "chapitre": "TNSI-PROJET",
+  "titre": "Conduire un projet informatique — QCM d'auto-évaluation",
+  "questions": [
+    {
+      "id": "Q1", "capacite": "C1",
+      "enonce": "Le problème auquel répond un projet informatique doit être formulé :",
+      "options": {"A": "de façon explicite, avec des critères permettant de constater qu'il est résolu.", "B": "de la manière la plus large possible, pour ne rien s'interdire.", "C": "seulement une fois le programme écrit.", "D": "par le professeur seul, et jamais par l'équipe."},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "Un énoncé trop large empêche de savoir quand le projet est terminé, et conduit à une ambition impossible à tenir dans le temps imparti.", "renvoi": "C1, cahier des charges d'un projet"},
+        "C": {"erreur": "L'élève inverse l'ordre : écrire avant de savoir ce que l'on cherche à résoudre expose à produire un programme sans destinataire.", "renvoi": "C1, cahier des charges d'un projet"},
+        "D": {"erreur": "La conception fait partie du travail évalué. Le professeur valide et recadre, mais l'équipe formule.", "renvoi": "C1, conception en équipe"}
+      }
+    },
+    {
+      "id": "Q2", "capacite": "C1",
+      "enonce": "Dans un projet mené en équipe, répartir le travail suppose avant tout :",
+      "options": {"A": "que chacun écrive le même code de son côté, pour comparer ensuite.", "B": "de définir qui fait quoi et comment les parties s'assemblent.", "C": "qu'une seule personne programme et que les autres observent.", "D": "de tirer les tâches au sort."},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Dupliquer le travail gaspille le temps disponible et laisse entière la difficulté véritable : l'assemblage des parties.", "renvoi": "C1, travail en équipe"},
+        "C": {"erreur": "L'évaluation porte sur la contribution de chacun ; concentrer le développement prive les autres de tout travail à présenter.", "renvoi": "C1, travail en équipe"},
+        "D": {"erreur": "La répartition doit tenir compte des compétences et des dépendances entre tâches, ce que le hasard ignore.", "renvoi": "C1, travail en équipe"}
+      }
+    },
+    {
+      "id": "Q3", "capacite": "C2",
+      "enonce": "Un point d'étape est utile à condition de porter sur :",
+      "options": {"A": "le nombre de lignes écrites depuis la dernière séance.", "B": "l'impression générale des membres de l'équipe.", "C": "des critères observables : ce qui fonctionne, ce qui est testé, ce qui reste à faire.", "D": "la seule date de rendu finale."},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "Le volume de code ne mesure pas l'avancement : une fonction courte et testée vaut mieux que cent lignes qui ne s'exécutent pas.", "renvoi": "C2, points d'étape et critères"},
+        "B": {"erreur": "Une impression ne se vérifie pas et ne permet aucune décision. Un jalon doit reposer sur des faits constatables.", "renvoi": "C2, points d'étape et critères"},
+        "D": {"erreur": "Ne regarder que l'échéance finale prive de toute occasion de corriger la trajectoire pendant qu'il en est encore temps.", "renvoi": "C2, points d'étape et critères"}
+      }
+    },
+    {
+      "id": "Q4", "capacite": "C2",
+      "enonce": "À mi-parcours, l'équipe constate qu'une fonctionnalité prévue ne sera pas terminée. La conduite adaptée est :",
+      "options": {"A": "conserver le périmètre initial et rendre un projet inachevé.", "B": "abandonner le projet et en commencer un autre.", "C": "ajouter des membres à l'équipe pour rattraper le retard.", "D": "réduire le périmètre en accord avec le professeur, et livrer un ensemble cohérent et testé."},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "Un produit inachevé ne se démontre pas. Ajuster l'ambition fait explicitement partie de la démarche de projet.", "renvoi": "C2, adapter les objectifs"},
+        "B": {"erreur": "Repartir de zéro à mi-parcours perd tout le travail accompli et rend l'échéance encore moins atteignable.", "renvoi": "C2, adapter les objectifs"},
+        "C": {"erreur": "Renforcer une équipe en cours de route coûte du temps d'explication à ceux qui avancent, et ne rattrape pas le retard.", "renvoi": "C2, adapter les objectifs"}
+      }
+    }
+  ]
+}

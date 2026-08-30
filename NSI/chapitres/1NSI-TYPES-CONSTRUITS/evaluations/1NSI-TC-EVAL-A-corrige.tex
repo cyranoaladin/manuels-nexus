@@ -1,0 +1,140 @@
+% META: {"id": "1NSI-TC-EVAL-A-corrige", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-TC-EVAL-A", "capacites": ["1NSI-TYPES-CONSTRUITS-C1", "1NSI-TYPES-CONSTRUITS-C2", "1NSI-TYPES-CONSTRUITS-C3", "1NSI-TYPES-CONSTRUITS-C4", "1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% joueurs = [{"pseudo": "Ace", "score": 150}, {"pseudo": "Bob", "score": 200}, {"pseudo": "Cat", "score": 180}]
+% meilleur = joueurs[0]
+% for j in joueurs:
+%     if j["score"] > meilleur["score"]:
+%         meilleur = j
+% assert meilleur["pseudo"] == "Bob" and meilleur["score"] == 200
+% meilleur["score"] = 0
+% assert joueurs[1]["score"] == 0
+%
+% def au_dessus(scores, seuil):
+%     return [score for score in scores if score > seuil]
+%
+% def moyenne(scores):
+%     if len(scores) == 0:
+%         raise ValueError("le tableau des scores est vide")
+%     return sum(scores) / len(scores)
+%
+% def classement(scores):
+%     tries = sorted(scores, reverse=True)
+%     return [(rang + 1, tries[rang]) for rang in range(len(tries))]
+%
+% def nb_sombres(image, seuil):
+%     total = 0
+%     for ligne in image:
+%         for pixel in ligne:
+%             if pixel <= seuil:
+%                 total += 1
+%     return total
+%
+% def chercher(contacts, nom):
+%     if nom in contacts:
+%         return contacts[nom]
+%     return "Inconnu"
+%
+% def ajouter(contacts, nom, numero):
+%     contacts[nom] = numero
+%
+% assert au_dessus([150, 200, 180, 210, 170], 175) == [200, 180, 210]
+% assert moyenne([150, 200, 180, 210, 170]) == 182.0
+% try:
+%     moyenne([])
+%     leve = False
+% except ValueError:
+%     leve = True
+% assert leve
+% assert classement([150, 200, 180]) == [(1, 200), (2, 180), (3, 150)]
+% image = [[100, 200, 100], [200, 50, 200], [100, 200, 100]]
+% assert len(image) == 3 and len(image[0]) == 3
+% assert image[1][1] == 50
+% assert nb_sombres(image, 100) == 5
+% contacts = {"Ali": "55123456", "Sara": "55234567"}
+% assert chercher(contacts, "Ali") == "55123456"
+% assert chercher(contacts, "Zoe") == "Inconnu"
+% ajouter(contacts, "Zoe", "55999999")
+% assert contacts["Zoe"] == "55999999"
+% carnet1 = {"Ali": "55123456"}
+% carnet2 = carnet1
+% carnet2["Sara"] = "55234567"
+% assert carnet1 == {"Ali": "55123456", "Sara": "55234567"}
+% END-VERIFY
+
+\begin{corrige}{1NSI-TC-EVAL-A-EX1}
+\textbf{Q1.} Le programme affiche \lstinline{Bob} puis \lstinline{200}.
+
+En détail : \lstinline{meilleur} vaut d'abord le dictionnaire d'\lstinline{Ace}, de score $150$. Au premier tour, \lstinline{Ace} n'est pas strictement supérieur à lui-même. Au deuxième, $200 > 150$ : \lstinline{meilleur} devient \lstinline{Bob}. Au troisième, $180 > 200$ est faux, et \lstinline{Bob} reste retenu.
+
+\textbf{Q2.} Le programme recherche le joueur ayant le meilleur score et affiche son pseudo puis son score.
+
+\textbf{Q3.} \lstinline{joueurs[1]["score"]} vaut alors $0$.
+
+La boucle n'a pas copié le dictionnaire de \lstinline{Bob} : elle a fait de \lstinline{meilleur} un second nom pour ce même objet, qui est aussi \lstinline{joueurs[1]}. Un dictionnaire étant mutable, la modification faite à travers l'un des deux noms est visible par l'autre.
+\end{corrige}
+
+\begin{corrige}{1NSI-TC-EVAL-A-EX2}
+\textbf{Q1.}
+\begin{python}
+def au_dessus(scores, seuil):
+    return [score for score in scores if score > seuil]
+\end{python}
+La comparaison est stricte, conformément à l'énoncé : un score égal au seuil n'est pas retenu.
+
+\textbf{Q2.}
+\begin{python}
+def moyenne(scores):
+    if len(scores) == 0:
+        raise ValueError("le tableau des scores est vide")
+    return sum(scores) / len(scores)
+\end{python}
+Le test de vacuité doit précéder le calcul : sans lui, la division renverrait une \lstinline{ZeroDivisionError}, moins explicite que l'erreur demandée.
+
+\textbf{Q3.}
+\begin{python}
+def classement(scores):
+    tries = sorted(scores, reverse=True)
+    return [(rang + 1, tries[rang]) for rang in range(len(tries))]
+\end{python}
+\lstinline{sorted} construit une nouvelle liste et laisse \lstinline{scores} intact. Le rang affiché commence à $1$, alors que les indices commencent à $0$ : d'où le \lstinline{+ 1}.
+\end{corrige}
+
+\begin{corrige}{1NSI-TC-EVAL-A-EX3}
+\textbf{Q1.} L'image comporte $3$ lignes et $3$ colonnes. Le nombre de lignes est \lstinline{len(image)} ; le nombre de colonnes est \lstinline{len(image[0])}.
+
+\textbf{Q2.} Le pixel central vaut $50$. L'expression est \lstinline{image[1][1]} : le premier indice désigne la ligne, le second la colonne, et la numérotation commence à $0$.
+
+\textbf{Q3.}
+\begin{python}
+def nb_sombres(image, seuil):
+    total = 0
+    for ligne in image:
+        for pixel in ligne:
+            if pixel <= seuil:
+                total += 1
+    return total
+\end{python}
+Deux boucles imbriquées sont nécessaires : la première parcourt les lignes, la seconde les pixels de chaque ligne. Sur l'exemple, \lstinline{nb_sombres(image, 100)} vaut $5$ : les quatre coins à $100$ et le centre à $50$.
+\end{corrige}
+
+\begin{corrige}{1NSI-TC-EVAL-A-EX4}
+\textbf{Q1.}
+\begin{python}
+def chercher(contacts, nom):
+    if nom in contacts:
+        return contacts[nom]
+    return "Inconnu"
+\end{python}
+Interroger directement \lstinline{contacts[nom]} lèverait une \lstinline{KeyError} pour un nom absent : le test d'appartenance est donc indispensable.
+
+\textbf{Q2.}
+\begin{python}
+def ajouter(contacts, nom, numero):
+    contacts[nom] = numero
+\end{python}
+Oui, la fonction modifie le dictionnaire reçu en argument. Un dictionnaire est mutable et n'est pas copié lors de l'appel : la fonction agit sur l'objet du programme appelant, ce qui explique qu'elle n'ait rien à renvoyer.
+
+\textbf{Q3.} \lstinline{carnet1} vaut \lstinline{{"Ali": "55123456", "Sara": "55234567"}}.
+
+L'affectation \lstinline{carnet2 = carnet1} ne crée aucune copie : elle donne un second nom au même dictionnaire. L'ajout effectué par \lstinline{carnet2} est donc visible par \lstinline{carnet1}. Pour obtenir deux carnets indépendants, il faudrait écrire \lstinline{carnet2 = dict(carnet1)}.
+\end{corrige}
