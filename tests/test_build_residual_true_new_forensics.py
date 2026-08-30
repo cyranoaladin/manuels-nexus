@@ -110,12 +110,22 @@ def test_builds_exact_residual_without_mutating_frozen_inputs(tmp_path: Path) ->
     # Chaque dette declaree separement est un composant NOMME et disjoint de
     # l'algebre courante, jamais fondu dans le residuel gele des 18. La
     # campagne en ajoute un par chapitre qui cree des objets.
-    assert full["cardinality_equation"] == "2245 = 2121 + 9 + 89 + 13 + 12 + 1"
-    assert full["cardinalities"]["CURRENT_ACTIVE"] == 2245
+    # 2248 depuis le 2026-08-30 : deux corriges d'evaluation a
+    # 1NSI-TYPES-CONSTRUITS et le QCM de TNSI-PROJET, chacun porte par son
+    # registre. Chaque terme de l'equation a une autorite contractuelle.
+    assert full["cardinality_equation"] == "2248 = 2121 + 9 + 89 + 13 + 12 + 1 + 2 + 1"
+    assert full["cardinalities"]["CURRENT_ACTIVE"] == 2248
     assert full["cardinalities"]["TRUE_NEW"] == 13
     assert full["cardinalities"]["VARALEA_C6C7_REVIEW_DEBT_12"] == 12
     assert full["cardinalities"]["EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1"] == 1
-    declared = ("VARALEA_C6C7_REVIEW_DEBT_12", "EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1")
+    assert full["cardinalities"]["NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2"] == 2
+    assert full["cardinalities"]["TNSI_PROJET_QCM_REVIEW_DEBT_1"] == 1
+    declared = (
+        "VARALEA_C6C7_REVIEW_DEBT_12",
+        "EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1",
+        "NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2",
+        "TNSI_PROJET_QCM_REVIEW_DEBT_1",
+    )
     for name in declared:
         assert set(full["sets"][name]).isdisjoint(full["sets"]["TRUE_NEW"])
     assert set(full["sets"][declared[0]]).isdisjoint(set(full["sets"][declared[1]]))

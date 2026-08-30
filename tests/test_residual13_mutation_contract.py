@@ -119,6 +119,13 @@ def _fail_on_new(
         "_load_anomaly_identity_migrations",
         lambda _root: {},
     )
+    # Ce contrat isole la comparaison des 13 : la racine synthetique ne porte
+    # ni la politique A4 ni les fiches methode, si bien que TOUTES les
+    # qualifications derivees y paraitraient invalides. Leur visibilite est le
+    # sujet de tests/test_stale_qualification_does_not_mask.py, pas d'ici.
+    monkeypatch.setattr(
+        inventory_module, "invalid_qualifications", lambda _root: []
+    )
     return inventory_module._fail_on_new_gate(tmp_path)
 
 
