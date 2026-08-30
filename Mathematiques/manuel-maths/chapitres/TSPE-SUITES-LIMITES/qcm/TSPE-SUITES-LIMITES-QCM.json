@@ -19,7 +19,7 @@
           "renvoi": "M1, étape 3"
         },
         "C": {
-          "erreur": "L'élève pense que tout quotient de polynômes diverge.",
+          "erreur": "L'élève pense que tout quotient diverge parce que le numérateur tend vers $+\\infty$ ; or le dénominateur croît à la même vitesse, et le quotient des termes dominants donne $5n/2n = 5/2$.",
           "renvoi": "M1, étape 2"
         },
         "D": {
@@ -145,7 +145,7 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "Confusion entre la constante additive et la raison.",
+          "erreur": "Confusion entre la constante additive et la raison : le calcul $v_{n+1}=u_{n+1}-30=0{,}7u_n+9-30=0{,}7(u_n-30)=0{,}7v_n$ montre que $9$ disparaît et que la raison est $0{,}7$.",
           "renvoi": "M3, étape 3"
         },
         "B": {
@@ -171,7 +171,7 @@
       "correcte": "D",
       "diagnostics": {
         "A": {
-          "erreur": "Contre-exemple : $u_n = 1-1/n$ croissante, converge vers 1.",
+          "erreur": "Contre-exemple : $u_n = 1-1/n$ est croissante et converge vers $1$ ; une suite croissante ne diverge que si elle n'est pas majorée.",
           "renvoi": "C4, théorème"
         },
         "B": {
@@ -305,7 +305,7 @@
           "renvoi": "C6, théorème comparaison"
         },
         "D": {
-          "erreur": "Le théorème de comparaison donne une conclusion précise.",
+          "erreur": "Le théorème de comparaison conclut précisément : $v_n$ majore une suite qui dépasse tout réel, donc $v_n$ dépasse tout réel aussi et $\\lim v_n = +\\infty$.",
           "renvoi": "C6, théorème comparaison"
         },
         "C": {
@@ -327,7 +327,7 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Si les limites sont différentes, on ne peut pas conclure.",
+          "erreur": "Si les deux suites encadrantes ont des limites différentes, l'encadrement laisse un intervalle entier de valeurs possibles : le théorème exige la même limite des deux côtés.",
           "renvoi": "C6, théorème gendarmes"
         },
         "C": {

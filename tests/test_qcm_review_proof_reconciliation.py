@@ -118,8 +118,10 @@ def test_a_key_that_only_moves_letter_is_not_a_value_change(payload: dict) -> No
     ]
     # Le condense etant indexe par VALEUR, une permutation ne fait plus
     # sortir la question du report : seules restent celles dont la preuve
-    # doit vraiment etre refaite.
-    assert len(changed) == 3
+    # doit vraiment etre refaite. 11 depuis la completion causale des douze
+    # diagnostics courts de la cloture TSPE : huit de ces questions avaient
+    # aussi une permutation de cle, et un modele d'erreur modifie se re-prouve.
+    assert len(changed) == 11
     assert not any(
         "KEY_VALUE_CHANGED" in e["delta_classes"] for e in payload["reproof_required"]
     )
@@ -142,10 +144,14 @@ def test_a_varalea_change_never_invalidates_another_chapter(payload: dict) -> No
     # TSPE-LIMITES-FONCTIONS s'ajoute pour sa PROPRE cause : le diagnostic
     # trop court de Q3/A a ete complete par un contre-exemple, et un modele
     # d'erreur modifie doit etre re-prouve.
+    # TSPE-CONTINUITE et TSPE-SUITES-LIMITES s'ajoutent pour la meme cause
+    # PROPRE : leurs diagnostics courts ont ete completes causalement.
     assert foreign == {
         "1SPE-PRODUIT-SCALAIRE",
+        "TSPE-CONTINUITE",
         "TSPE-DERIVATION-CONVEXITE",
         "TSPE-LIMITES-FONCTIONS",
+        "TSPE-SUITES-LIMITES",
     }
     entry = next(
         e for e in payload["reproof_required"] if e["chapter"] == "TSPE-DERIVATION-CONVEXITE"

@@ -127,7 +127,7 @@
           "renvoi": "M4, étape 3"
         },
         "D": {
-          "erreur": "Le tableau de variations suffit : le maximum est connu.",
+          "erreur": "Le tableau de variations suffit à conclure : connaissant le maximum et les limites aux bornes, chaque branche monotone porte un nombre déterminé de solutions de $f(x)=5$.",
           "renvoi": "M4, vérification"
         }
       }
@@ -223,7 +223,7 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Confusion entre point fixe et racine de la fonction.",
+          "erreur": "Confusion entre point fixe et racine : passer à la limite dans $u_{n+1}=f(u_n)$ donne $\\ell=f(\\ell)$, et non $f(\\ell)=0$, qui caractériserait un zéro de $f$.",
           "renvoi": "M2, étape finale"
         },
         "C": {
@@ -231,7 +231,7 @@
           "renvoi": "RE-C2"
         },
         "D": {
-          "erreur": "La monotonie de $f$ n'est ni supposee ni deduite.",
+          "erreur": "La monotonie de $f$ n'est ni supposée ni déductible : la convergence de $(u_n)$ n'impose que la continuité utilisée au passage à la limite, et une $f$ non monotone peut engendrer une suite convergente.",
           "renvoi": "cours C2"
         }
       }
@@ -279,7 +279,7 @@
           "renvoi": "RE-C2"
         },
         "B": {
-          "erreur": "Aucun lien entre monotonie bornee et nature géométrique.",
+          "erreur": "Être croissante et majorée est un comportement, pas une forme : la suite $u_n = 1 - 1/n$ est croissante et majorée sans être géométrique, aucun quotient $u_{n+1}/u_n$ n'y étant constant.",
           "renvoi": "RE-C2"
         },
         "C": {
@@ -353,7 +353,7 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "Une seule application de l'inégalité au lieu de cinq.",
+          "erreur": "Une seule application de l'inégalité donne $|u_1-\\ell|\\leq 2$ ; il faut l'itérer cinq fois pour atteindre $|u_5-\\ell|\\leq 4/2^5 = 1/8$.",
           "renvoi": "M5, étape 4"
         },
         "B": {

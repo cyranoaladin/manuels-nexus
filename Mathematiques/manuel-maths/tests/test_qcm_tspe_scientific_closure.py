@@ -89,27 +89,38 @@ TARGETED_INVALID_DIAGNOSTICS = {
 }
 
 
+#: L'identite scientifique d'une reponse est sa VALEUR, pas sa lettre : la
+#: politique editoriale de distribution des cles permute les positions en
+#: preservant valeur et diagnostics (verifie par le reequilibreur, question
+#: par question). Chaque entree epingle donc le texte exact de l'option
+#: correcte -- verifiable a la lecture -- et la capacite evaluee.
 HISTORICAL_EXPECTED_ANSWERS_AND_CAPACITIES = {
-    ("TSPE-DERIVATION-CONVEXITE", "Q3"): ("B", "C1"),
-    ("TSPE-DERIVATION-CONVEXITE", "Q6"): ("B", "C2"),
-    ("TSPE-DERIVATION-CONVEXITE", "Q15"): ("A", "C6"),
-    ("TSPE-PROBABILITES", "Q4"): ("A", "C8"),
-    ("TSPE-TRIGONOMETRIE", "Q5"): ("B", "C2"),
-    ("TSPE-LOGARITHME", "Q1"): ("B", "C1"),
-    ("TSPE-LOGARITHME", "Q2"): ("B", "C3"),
-    ("TSPE-LOGARITHME", "Q3"): ("C", "C2"),
-    ("TSPE-LOGARITHME", "Q4"): ("B", "C4"),
-    ("TSPE-LOGARITHME", "Q5"): ("B", "C1"),
-    ("TSPE-GEOMETRIE-ESPACE", "Q1"): ("C", "C3"),
-    ("TSPE-GEOMETRIE-ESPACE", "Q2"): ("B", "C7"),
-    ("TSPE-GEOMETRIE-ESPACE", "Q3"): ("A", "C13"),
-    ("TSPE-GEOMETRIE-ESPACE", "Q4"): ("A", "C12"),
-    ("TSPE-GEOMETRIE-ESPACE", "Q5"): ("B", "C11"),
-    ("TSPE-PRIMITIVES-EQDIFF", "Q1"): ("C", "C1"),
-    ("TSPE-PRIMITIVES-EQDIFF", "Q2"): ("C", "C4"),
-    ("TSPE-PRIMITIVES-EQDIFF", "Q3"): ("B", "C5"),
-    ("TSPE-PRIMITIVES-EQDIFF", "Q4"): ("A", "C2"),
-    ("TSPE-PRIMITIVES-EQDIFF", "Q5"): ("B", "C3"),
+    ("TSPE-DERIVATION-CONVEXITE", "Q3"): ("$12(3x-2)^3$", "C1"),
+    ("TSPE-DERIVATION-CONVEXITE", "Q6"): (
+        "un maximum local en $x = -1$ et un minimum local en $x = 1$", "C2"),
+    ("TSPE-DERIVATION-CONVEXITE", "Q15"): (
+        "par defaut (la vraie valeur est plus grande)", "C6"),
+    ("TSPE-PROBABILITES", "Q4"): ("que X et Y soient indépendantes", "C8"),
+    ("TSPE-TRIGONOMETRIE", "Q5"): (
+        "les points critiques interieurs et les bornes, puis on compare les "
+        "valeurs de f.", "C2"),
+    ("TSPE-LOGARITHME", "Q1"): ("$\\ln 2 + \\ln x$.", "C1"),
+    ("TSPE-LOGARITHME", "Q2"): ("$\\dfrac{5}{5x+1}$.", "C3"),
+    ("TSPE-LOGARITHME", "Q3"): ("$+\\infty$.", "C2"),
+    ("TSPE-LOGARITHME", "Q4"): ("$0$.", "C4"),
+    ("TSPE-LOGARITHME", "Q5"): ("la fonction $\\ln$.", "C1"),
+    ("TSPE-GEOMETRIE-ESPACE", "Q1"): ("secantes ou non coplanaires.", "C3"),
+    ("TSPE-GEOMETRIE-ESPACE", "Q2"): ("$\\vec{u}\\cdot\\vec{v}=0$.", "C7"),
+    ("TSPE-GEOMETRIE-ESPACE", "Q3"): ("$(2,-3,1)$.", "C13"),
+    ("TSPE-GEOMETRIE-ESPACE", "Q4"): ("un seul paramètre.", "C12"),
+    ("TSPE-GEOMETRIE-ESPACE", "Q5"): (
+        "$H$ est le point de $\\mathcal{P}$ le plus proche de $M$.", "C11"),
+    ("TSPE-PRIMITIVES-EQDIFF", "Q1"): ("$\\dfrac{1}{3}\\mathrm{e}^{3x}$.", "C1"),
+    ("TSPE-PRIMITIVES-EQDIFF", "Q2"): ("$F-G$ est constante.", "C4"),
+    ("TSPE-PRIMITIVES-EQDIFF", "Q3"): ("$y(x) = C\\mathrm{e}^{5x}$.", "C5"),
+    ("TSPE-PRIMITIVES-EQDIFF", "Q4"): ("$y_0 = 4$.", "C2"),
+    ("TSPE-PRIMITIVES-EQDIFF", "Q5"): (
+        "vérifier que $y_p$ satisfait bien l'équation.", "C3"),
 }
 
 
@@ -243,11 +254,14 @@ def test_integrales_c1_et_c3_sont_evaluees_par_des_questions_dediees() -> None:
     comparaison = _question("TSPE-CALCUL-INTEGRAL", "Q4")
 
     assert encadrement["capacite"] == "C1"
-    assert encadrement["correcte"] == "B"
-    assert encadrement["options"]["B"] == "$6 \\leqslant I \\leqslant 15$"
+    assert encadrement["correcte"] == _par_contenu.lettre_de_option(
+        encadrement, "$6 \\leqslant I \\leqslant 15$"
+    )
     assert comparaison["capacite"] == "C3"
-    assert comparaison["correcte"] == "A"
-    assert "\\int_0^1 f" in comparaison["options"]["A"]
+    assert comparaison["correcte"] == _par_contenu.lettre_de_option(
+        comparaison,
+        "$\\int_0^1 f(x)\\,dx \\leqslant \\int_0^1 g(x)\\,dx$",
+    )
 
 
 def test_combinatoire_c1_et_c3_sont_evaluees_par_des_questions_dediees() -> None:
@@ -255,12 +269,15 @@ def test_combinatoire_c1_et_c3_sont_evaluees_par_des_questions_dediees() -> None
     somme = _question("TSPE-COMBINATOIRE", "Q4")
 
     assert representation["capacite"] == "C1"
-    assert representation["correcte"] == "B"
-    assert "arbre" in representation["options"]["B"]
-    assert "$2\\times3\\times4=24$" in representation["options"]["B"]
+    bonne = representation["options"][representation["correcte"]]
+    assert representation["correcte"] == _par_contenu.lettre_de_option(
+        representation, "$2\\times3\\times4=24$"
+    )
+    assert "arbre" in bonne
     assert somme["capacite"] == "C3"
-    assert somme["correcte"] == "A"
-    assert "2^n" in somme["options"]["A"]
+    assert somme["correcte"] == _par_contenu.lettre_de_option(
+        somme, "\\sum_{k=0}^{n} \\binom{n}{k}=2^n"
+    )
 
 
 def test_les_qcm_tspe_historiques_ont_les_bonnes_cles_et_capacites() -> None:
@@ -269,7 +286,9 @@ def test_les_qcm_tspe_historiques_ont_les_bonnes_cles_et_capacites() -> None:
         HISTORICAL_EXPECTED_ANSWERS_AND_CAPACITIES.items()
     ):
         question = _question(chapter, question_id)
-        assert question["correcte"] == answer, f"{chapter}/{question_id}: mauvaise cle"
+        assert question["correcte"] == _par_contenu.lettre_de_option(
+            question, answer
+        ), f"{chapter}/{question_id}: la cle ne designe pas la valeur attendue"
         assert question["capacite"] == capacity, (
             f"{chapter}/{question_id}: {question['capacite']} != {capacity}"
         )
@@ -292,10 +311,12 @@ def test_les_questions_tspe_historiques_nont_plus_de_reponse_dupliquee_ou_incomp
     trigonometrie = _question("TSPE-TRIGONOMETRIE", "Q5")
     geometrie = _question("TSPE-GEOMETRIE-ESPACE", "Q3")
 
-    assert derivation["options"]["B"] != derivation["options"]["D"]
-    assert "points critiques interieurs" in trigonometrie["options"]["B"]
-    assert "bornes" in trigonometrie["options"]["B"]
-    assert geometrie["options"]["D"] == "$(-2,3,1)$."
+    assert len(set(derivation["options"].values())) == len(derivation["options"])
+    criticite = trigonometrie["options"][
+        _par_contenu.lettre_de_option(trigonometrie, "points critiques interieurs")
+    ]
+    assert "bornes" in criticite
+    assert _par_contenu.lettre_de_option(geometrie, "$(-2,3,1)$.")
 
 
 def test_probabilites_q4_presente_lindependance_comme_une_condition_suffisante() -> None:
@@ -303,34 +324,47 @@ def test_probabilites_q4_presente_lindependance_comme_une_condition_suffisante()
 
     assert "est garantie lorsque" in question["enonce"]
     assert "necessite" not in question["enonce"]
-    assert question["correcte"] == "A"
+    assert question["correcte"] == _par_contenu.lettre_de_option(
+        question, "que X et Y soient indépendantes"
+    )
 
 
 def test_derivation_q6_distingue_les_extrema_locaux_des_extrema_globaux() -> None:
     question = _question("TSPE-DERIVATION-CONVEXITE", "Q6")
 
     assert "extrema locaux" in question["enonce"]
-    assert "maximum local" in question["options"]["B"]
-    assert "minimum local" in question["options"]["B"]
+    bonne = question["options"][question["correcte"]]
+    assert "maximum local" in bonne
+    assert "minimum local" in bonne
 
 
 def test_les_47_diagnostics_tspe_courts_explicitent_le_calcul_causal() -> None:
+    """Comme pour les 71 : l'exigence porte sur TOUS les distracteurs.
+
+    La table designait chaque diagnostic par sa lettre, que le reequilibrage
+    des cles deplace. Exiger la profondeur causale de chaque distracteur des
+    questions visees est insensible a la permutation et plus strict.
+    """
+
     assert len(SHORT_DIAGNOSTICS_CLOSURE) == 47
-    for chapter, question_id, letter in SHORT_DIAGNOSTICS_CLOSURE:
-        error = _question(chapter, question_id)["diagnostics"][letter]["erreur"]
-        assert len(error) >= 60, f"{chapter}/{question_id}/{letter}: {error}"
+    questions = {(c, q) for c, q, _ in SHORT_DIAGNOSTICS_CLOSURE}
+    for chapter, question_id in sorted(questions):
+        question = _question(chapter, question_id)
+        for letter, error in _par_contenu.diagnostics_de_distracteurs(
+            question
+        ).items():
+            assert len(error) >= 60, f"{chapter}/{question_id}/{letter}: {error}"
 
 
 def test_suites_q6_definit_la_suite_auxiliaire_dont_on_demande_la_raison() -> None:
     question = _question("TSPE-SUITES-LIMITES", "Q6")
 
     assert "$v_n=u_n-30$" in question["enonce"]
-    assert question["correcte"] == "B"
-    assert question["options"]["B"] == "0,7"
+    assert question["correcte"] == _par_contenu.lettre_de_option(question, "0,7")
 
 
 def test_continuite_q4_garantit_exactement_deux_solutions() -> None:
     question = _question("TSPE-CONTINUITE", "Q4")
 
     assert question["enonce"].count("strictement") == 2
-    assert question["correcte"] == "C"
+    assert question["correcte"] == _par_contenu.lettre_de_option(question, "$2$")

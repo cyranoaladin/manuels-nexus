@@ -6,11 +6,11 @@ Une identite par question. La v1 reste l'enregistrement historique.
 Cet artefact n'approuve rien.
 
 - Questions du corpus : 479
-- Report d'identite : 313
+- Report d'identite : 301
 - Recalcul independant : 21
-- Revue humaine requise : 145
+- Revue humaine requise : 157
 - UNKNOWN : 0
-- Equation : 479 = 313 + 21 + 145
+- Equation : 479 = 301 + 21 + 157
 - EVIDENCE_ROUTING_COMPLETE : True
 - ALL_QCM_HUMAN_REVIEW_COMPLETE : False
 
@@ -210,4 +210,16 @@ Comportement correct du solveur, pas un echec : aucune regle mathematique generi
 | TNSI-STRUCTURES-DONNEES | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TNSI-STRUCTURES-DONNEES | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TNSI-STRUCTURES-DONNEES | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-CONTINUITE | Q11 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-CONTINUITE | Q14 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-CONTINUITE | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-CONTINUITE | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-LIMITES-FONCTIONS | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TSPE-LIMITES-FONCTIONS | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-LIMITES-FONCTIONS | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-LIMITES-FONCTIONS | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-SUITES-LIMITES | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-SUITES-LIMITES | Q12 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-SUITES-LIMITES | Q13 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-SUITES-LIMITES | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-SUITES-LIMITES | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |

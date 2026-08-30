@@ -182,7 +182,7 @@ Q15 & C1 & \textbf{D} \\
   \item \textbf{Q2}
   \begin{itemize}
     \item \textbf{A} — Conserver seulement le terme constant $1$ ignore que $x^2$ domine $-3x+1$ ; après factorisation, le polynôme se comporte comme $x^2$. \emph{Renvoi : C1, terme preponderant.}
-    \item \textbf{C} — L'élève a regarde le coefficient de $-3x$ au lieu de $x^2$. \emph{Renvoi : C1, terme preponderant.}
+    \item \textbf{C} — L'élève a regardé le signe de $-3x$ au lieu du terme dominant : en $+\infty$, $x^2$ l'emporte sur $-3x$, et $x^2-3x+1 = x^2(1-3/x+1/x^2)\to+\infty$. \emph{Renvoi : C1, terme preponderant.}
     \item \textbf{D} — L'élève croit que $+\infty - \infty$ est toujours indetermine, même après factorisation. \emph{Renvoi : M1, piège 1.}
   \end{itemize}
   \item \textbf{Q3}
@@ -194,7 +194,7 @@ Q15 & C1 & \textbf{D} \\
   \item \textbf{Q4}
   \begin{itemize}
     \item \textbf{B} — L'élève evalue l'inverse en une valeur non nulle au lieu de faire tendre x vers 0 : 1/x explose, il ne se stabilise pas a 1. \emph{Renvoi : M1, limites en un point.}
-    \item \textbf{C} — L'élève confond avec $\lim_{x \to +\infty} 1/x$. \emph{Renvoi : C1, limite en un point.}
+    \item \textbf{C} — L'élève confond avec $\lim_{x\to+\infty} 1/x = 0$ ; en $0^+$, le dénominateur devient arbitrairement petit et positif, donc $1/x$ dépasse tout réel : la limite est $+\infty$. \emph{Renvoi : C1, limite en un point.}
     \item \textbf{D} — La limite $-\infty$ correspond a $x\to0^-$, ou $1/x$ est négatif ; ici $x\to0^+$ et le quotient reste positif. \emph{Renvoi : C1, limites a gauche/droite.}
   \end{itemize}
   \item \textbf{Q5}
@@ -224,7 +224,7 @@ Q15 & C1 & \textbf{D} \\
   \item \textbf{Q9}
   \begin{itemize}
     \item \textbf{A} — La fonction $e^{-x}+3$ est définie pour tout réel, donc $x=3$ ne peut pas être une asymptote verticale ; de plus sa limite vaut $3$, pas $0$. \emph{Renvoi : C2, AV seulement aux valeurs interdites.}
-    \item \textbf{C} — $\mathrm{e}^{-x} \to 0$ en $+\infty$, pas en $-\infty$. \emph{Renvoi : C1, limites de l'exponentielle.}
+    \item \textbf{C} — Les deux branches sont inversées : $\mathrm{e}^{-x}\to0$ quand $x\to+\infty$, donc l'asymptote $y=3$ est en $+\infty$ ; en $-\infty$, $\mathrm{e}^{-x}\to+\infty$ et il n'y a pas d'asymptote horizontale. \emph{Renvoi : C1, limites de l'exponentielle.}
     \item \textbf{D} — exp(-x) tend vers 0 en plus l'infini, donc f tend vers 3 : la droite y = 3 est bien asymptote horizontale. \emph{Renvoi : M2, étape 3.}
   \end{itemize}
   \item \textbf{Q10}

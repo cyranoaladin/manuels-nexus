@@ -45,7 +45,7 @@
           "renvoi": "C1, terme preponderant"
         },
         "C": {
-          "erreur": "L'élève a regarde le coefficient de $-3x$ au lieu de $x^2$.",
+          "erreur": "L'élève a regardé le signe de $-3x$ au lieu du terme dominant : en $+\\infty$, $x^2$ l'emporte sur $-3x$, et $x^2-3x+1 = x^2(1-3/x+1/x^2)\\to+\\infty$.",
           "renvoi": "C1, terme preponderant"
         },
         "D": {
@@ -97,7 +97,7 @@
           "renvoi": "M1, limites en un point"
         },
         "C": {
-          "erreur": "L'élève confond avec $\\lim_{x \\to +\\infty} 1/x$.",
+          "erreur": "L'élève confond avec $\\lim_{x\\to+\\infty} 1/x = 0$ ; en $0^+$, le dénominateur devient arbitrairement petit et positif, donc $1/x$ dépasse tout réel : la limite est $+\\infty$.",
           "renvoi": "C1, limite en un point"
         },
         "D": {
@@ -227,7 +227,7 @@
           "renvoi": "C2, AV seulement aux valeurs interdites"
         },
         "C": {
-          "erreur": "$\\mathrm{e}^{-x} \\to 0$ en $+\\infty$, pas en $-\\infty$.",
+          "erreur": "Les deux branches sont inversées : $\\mathrm{e}^{-x}\\to0$ quand $x\\to+\\infty$, donc l'asymptote $y=3$ est en $+\\infty$ ; en $-\\infty$, $\\mathrm{e}^{-x}\\to+\\infty$ et il n'y a pas d'asymptote horizontale.",
           "renvoi": "C1, limites de l'exponentielle"
         },
         "D": {

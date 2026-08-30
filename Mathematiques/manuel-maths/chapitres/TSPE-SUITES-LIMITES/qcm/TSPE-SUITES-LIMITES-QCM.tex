@@ -180,7 +180,7 @@ Q15 & C7 & \textbf{D} \\
   \item \textbf{Q1}
   \begin{itemize}
     \item \textbf{B} — L'élève a divise les termes constants (-1 et 3) au lieu des coefficients dominants. \emph{Renvoi : M1, étape 3.}
-    \item \textbf{C} — L'élève pense que tout quotient de polynômes diverge. \emph{Renvoi : M1, étape 2.}
+    \item \textbf{C} — L'élève pense que tout quotient diverge parce que le numérateur tend vers $+\infty$ ; or le dénominateur croît à la même vitesse, et le quotient des termes dominants donne $5n/2n = 5/2$. \emph{Renvoi : M1, étape 2.}
     \item \textbf{D} — Conclure $0$ applique a tort la limite de $1/n$ au quotient entier ; les termes dominants $5n$ et $2n$ donnent au contraire $5/2$. \emph{Renvoi : M1, étape 1.}
   \end{itemize}
   \item \textbf{Q2}
@@ -209,13 +209,13 @@ Q15 & C7 & \textbf{D} \\
   \end{itemize}
   \item \textbf{Q6}
   \begin{itemize}
-    \item \textbf{A} — Confusion entre la constante additive et la raison. \emph{Renvoi : M3, étape 3.}
+    \item \textbf{A} — Confusion entre la constante additive et la raison : le calcul $v_{n+1}=u_{n+1}-30=0{,}7u_n+9-30=0{,}7(u_n-30)=0{,}7v_n$ montre que $9$ disparaît et que la raison est $0{,}7$. \emph{Renvoi : M3, étape 3.}
     \item \textbf{B} — La valeur $30=9/(1-0{,}7)$ est le point fixe soustrait pour definir $v_n$ ; la relation obtenue est $v_{n+1}=0{,}7v_n$. \emph{Renvoi : M3, étape 1.}
     \item \textbf{D} — Le nombre $0{,}3=1-0{,}7$ intervient dans le calcul du point fixe $9/0{,}3$ ; le coefficient multiplicatif de $v_n$ reste $0{,}7$. \emph{Renvoi : M3, étape 3.}
   \end{itemize}
   \item \textbf{Q7}
   \begin{itemize}
-    \item \textbf{A} — Contre-exemple : $u_n = 1-1/n$ croissante, converge vers 1. \emph{Renvoi : C4, théorème.}
+    \item \textbf{A} — Contre-exemple : $u_n = 1-1/n$ est croissante et converge vers $1$ ; une suite croissante ne diverge que si elle n'est pas majorée. \emph{Renvoi : C4, théorème.}
     \item \textbf{B} — Contre-exemple : $u_n = (-1)^n/n$ converge vers 0 sans être croissante. \emph{Renvoi : C1, définition.}
     \item \textbf{C} — Être majorée ne suffit pas : la suite $(-1)^n$ est majorée mais diverge ; le théorème exige aussi que la suite soit croissante. \emph{Renvoi : C4, théorème.}
   \end{itemize}
@@ -247,11 +247,11 @@ Q15 & C7 & \textbf{D} \\
   \begin{itemize}
     \item \textbf{B} — La conclusion $v_n\to0$ contredit $v_n\geq u_n$ : pour tout seuil $A$, les termes $u_n$ puis $v_n$ finissent par depasser $A$. \emph{Renvoi : C6, théorème comparaison.}
     \item \textbf{C} — La minoration par une suite tendant vers plus l'infini interdit la convergence : v\_n est repousse vers plus l'infini. \emph{Renvoi : M5, théorème de comparaison.}
-    \item \textbf{D} — Le théorème de comparaison donne une conclusion précise. \emph{Renvoi : C6, théorème comparaison.}
+    \item \textbf{D} — Le théorème de comparaison conclut précisément : $v_n$ majore une suite qui dépasse tout réel, donc $v_n$ dépasse tout réel aussi et $\lim v_n = +\infty$. \emph{Renvoi : C6, théorème comparaison.}
   \end{itemize}
   \item \textbf{Q13}
   \begin{itemize}
-    \item \textbf{A} — Si les limites sont différentes, on ne peut pas conclure. \emph{Renvoi : C6, théorème gendarmes.}
+    \item \textbf{A} — Si les deux suites encadrantes ont des limites différentes, l'encadrement laisse un intervalle entier de valeurs possibles : le théorème exige la même limite des deux côtés. \emph{Renvoi : C6, théorème gendarmes.}
     \item \textbf{C} — Connaitre la limite d'une seule borne ne suffit pas a coincer la suite ; les deux suites encadrantes doivent tendre vers la même limite $\ell$. \emph{Renvoi : C6, théorème gendarmes.}
     \item \textbf{D} — Le théorème des gendarmes conclut a une convergence : il encadre par deux suites de même limite finie, il ne s'applique pas a une divergence. \emph{Renvoi : M5, théorème des gendarmes.}
   \end{itemize}
