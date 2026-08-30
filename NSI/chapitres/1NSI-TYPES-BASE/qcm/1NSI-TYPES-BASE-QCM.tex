@@ -1,83 +1,133 @@
-% META: {"id": "1NSI-TYPES-BASE-QCM", "chapitre": "1NSI-TYPES-BASE", "type_objet": "qcm", "capacites": ["P-BASE-01","P-BASE-02","P-BASE-03","P-BASE-04","P-BASE-05"], "status": "needs_review"}
+% META: {"id": "1NSI-TYPES-BASE-QCM", "chapitre": "1NSI-TYPES-BASE", "type_objet": "qcm", "genere_depuis": "chapitres/1NSI-TYPES-BASE/qcm/1NSI-TYPES-BASE-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Types et valeurs de base}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Types et valeurs de base — QCM d'auto-évaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule réponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1 --- Écriture dans une base}
 
 \begin{enumerate}
 
+\item[] \textbf{Capacité C1}
+
 \item \textbf{[Q1]} L'écriture $1010_2$ correspond, en base 10, à :
   \begin{enumerate}[label=\Alph*.]
-    \item $8$
     \item $10$
+    \item $8$
     \item $12$
     \item $1010$
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C2}
 
-\subsection*{C2 --- Complément à 2}
-
-\item \textbf{[Q2]} Sur $8$ bits, combien de valeurs entières distinctes peut-on
-représenter ?
+\item \textbf{[Q2]} Sur $8$ bits, combien de valeurs entières distinctes peut-on représenter ?
   \begin{enumerate}[label=\Alph*.]
     \item $8$
+    \item $256$
     \item $128$
     \item $255$
-    \item $256$
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q3]} En complément à 2, le bit de poids fort indique :
+\item \textbf{[Q3]} Dans la représentation en complément à 2, le bit de poids fort indique :
   \begin{enumerate}[label=\Alph*.]
     \item la parité du nombre.
-    \item le signe du nombre.
     \item le nombre de bits utilisés.
+    \item le signe du nombre.
     \item rien de particulier.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C3}
 
-\subsection*{C3 --- Flottants}
-
-\item \textbf{[Q4]} L'expression \lstinline{0.1 + 0.2 == 0.3} en Python renvoie :
+\item \textbf{[Q4]} En Python, l'expression \code{0.1 + 0.2 == 0.3} s'évalue à :
   \begin{enumerate}[label=\Alph*.]
-    \item \lstinline{True}, car $0{,}1+0{,}2=0{,}3$.
-    \item \lstinline{False}, à cause des erreurs d'arrondi de la représentation flottante.
-    \item Une erreur de syntaxe.
-    \item Cela dépend de la version de Python.
+    \item \code{True}, puisque $0{,}1+0{,}2=0{,}3$.
+    \item une erreur de syntaxe.
+    \item un résultat qui dépend de la version de Python.
+    \item \code{False}, à cause de l'arrondi de la représentation flottante.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C4}
 
-\subsection*{C4 --- Booléens}
-
-\item \textbf{[Q5]} L'expression \lstinline{True and False} vaut :
+\item \textbf{[Q5]} L'expression \code{True and False} vaut :
   \begin{enumerate}[label=\Alph*.]
-    \item \lstinline{True}
-    \item \lstinline{False}
-    \item \lstinline{None}
-    \item Une erreur
+    \item \code{False}
+    \item \code{True}
+    \item \code{None}
+    \item une erreur
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C5}
 
-\subsection*{C5 --- Encodage de texte}
-
-\item \textbf{[Q6]} Un texte contenant uniquement des lettres non accentuées et des
-chiffres peut être encodé sans erreur :
+\item \textbf{[Q6]} Un texte composé uniquement de lettres non accentuées et de chiffres peut être encodé sans perte :
   \begin{enumerate}[label=\Alph*.]
-    \item uniquement en UTF-8.
-    \item uniquement en ISO-8859-1.
+    \item en UTF-8 seulement.
     \item en ASCII, en ISO-8859-1 et en UTF-8.
+    \item en ISO-8859-1 seulement.
     \item dans aucun de ces trois encodages.
   \end{enumerate}
 
 \end{enumerate}
+
+% NEXUS-QCM-TEACHER-ONLY-BEGIN
+\ifnxVersionProfesseur
+\clearpage
+\section*{Clé de correction — réservée au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacité & Réponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C2 & \textbf{B} \\
+Q3 & C2 & \textbf{C} \\
+Q4 & C3 & \textbf{D} \\
+Q5 & C4 & \textbf{A} \\
+Q6 & C5 & \textbf{B} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des réponses erronées}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — L'élève n'a compté que le bit de poids fort : $1010_2 = 8 + 2$, et le bit de poids $2$ a été oublié. \emph{Renvoi : C1, conversion binaire vers décimal.}
+    \item \textbf{C} — L'élève a additionné $8+4$ en attribuant un poids au mauvais bit : le troisième bit vaut $0$, c'est le deuxième qui vaut $1$. \emph{Renvoi : C1, poids des bits.}
+    \item \textbf{D} — L'élève lit l'écriture binaire comme si c'était déjà un nombre décimal, sans effectuer de conversion. \emph{Renvoi : C1, conversion binaire vers décimal.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — L'élève confond le nombre de bits et le nombre de combinaisons. Chaque bit double le nombre de valeurs : on obtient $2^8$, pas $8$. \emph{Renvoi : C2, nombre de bits et valeurs représentables.}
+    \item \textbf{C} — L'élève a calculé $2^7$ : c'est le nombre de valeurs sur $7$ bits, ou l'amplitude d'un seul signe en complément à 2. \emph{Renvoi : C2, nombre de bits et valeurs représentables.}
+    \item \textbf{D} — L'élève a donné la plus grande valeur non signée, $255$, au lieu du nombre de valeurs. Il y en a $256$, car $0$ en fait partie. \emph{Renvoi : C2, valeur maximale et cardinal.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — La parité se lit sur le bit de poids FAIBLE, celui des unités, et non sur le bit de poids fort. \emph{Renvoi : C2, complément à 2.}
+    \item \textbf{B} — Le nombre de bits est fixé par le format choisi, en amont ; aucun bit ne le code à l'intérieur du mot. \emph{Renvoi : C2, complément à 2.}
+    \item \textbf{D} — L'élève applique la lecture non signée, où tous les bits ont le même rôle. En complément à 2, le bit de poids fort porte un poids négatif. \emph{Renvoi : C2, complément à 2.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — L'élève raisonne sur les nombres décimaux exacts. Or $0{,}1$ et $0{,}2$ n'ont pas d'écriture binaire finie : la somme calculée vaut $0{,}30000000000000004$, et non $0{,}3$. \emph{Renvoi : C3, égalité de flottants.}
+    \item \textbf{B} — L'expression est syntaxiquement correcte. Le piège porte sur sa valeur, pas sur son écriture. \emph{Renvoi : C3, égalité de flottants.}
+    \item \textbf{C} — Le résultat ne dépend pas de la version : il découle de la norme IEEE 754, commune à toutes les implémentations usuelles. \emph{Renvoi : C3, égalité de flottants.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{B} — L'élève applique la règle du \code{or} : il suffirait alors d'un seul opérande vrai. Le \code{and} exige que les deux le soient. \emph{Renvoi : C4, table de vérité de and.}
+    \item \textbf{C} — \code{None} est l'absence de valeur, pas un booléen. Un opérateur logique renvoie toujours l'un de ses opérandes. \emph{Renvoi : C4, table de vérité de and.}
+    \item \textbf{D} — Combiner deux booléens est l'usage normal de \code{and} ; aucune erreur ne peut en résulter. \emph{Renvoi : C4, table de vérité de and.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — L'élève retient qu'UTF-8 encode tout, ce qui est vrai, et en conclut à tort qu'il est seul à le pouvoir. Les caractères visés appartiennent aussi au jeu ASCII. \emph{Renvoi : C5, jeux de caractères.}
+    \item \textbf{C} — ISO-8859-1 convient, mais l'élève oublie qu'ASCII et UTF-8 conviennent également : les $128$ premiers codes leur sont communs. \emph{Renvoi : C5, jeux de caractères.}
+    \item \textbf{D} — L'élève transpose la difficulté des caractères accentués à des caractères qui ne la présentent pas : lettres non accentuées et chiffres sont dans ASCII. \emph{Renvoi : C5, jeux de caractères.}
+  \end{itemize}
+\end{itemize}
+\fi
+% NEXUS-QCM-TEACHER-ONLY-END

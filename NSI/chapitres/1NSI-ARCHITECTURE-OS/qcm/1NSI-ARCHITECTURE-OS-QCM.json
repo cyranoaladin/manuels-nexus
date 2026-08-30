@@ -1,5 +1,72 @@
 {
   "chapitre": "1NSI-ARCHITECTURE-OS",
-  "titre": "QCM d'auto-évaluation -- 1NSI-ARCHITECTURE-OS",
-  "questions": []
+  "titre": "Architecture de von Neumann et systèmes d'exploitation — QCM d'auto-évaluation",
+  "questions": [
+    {
+      "id": "Q1", "capacite": "C1",
+      "enonce": "Dans l'architecture de von Neumann, les instructions et les données sont rangées :",
+      "options": {"A": "dans deux mémoires physiquement séparées.", "B": "uniquement dans les registres du processeur.", "C": "dans un même espace mémoire.", "D": "uniquement sur le disque dur."},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'élève décrit l'architecture de Harvard. La rupture introduite par von Neumann est précisément le programme enregistré dans la même mémoire que les données.", "renvoi": "C1, architecture de von Neumann"},
+        "B": {"erreur": "Les registres ne contiennent que les quelques valeurs en cours de traitement ; ils sont bien trop peu nombreux pour héberger un programme.", "renvoi": "C1, unités et mémoires"},
+        "D": {"erreur": "Le disque assure la conservation durable. Pour être exécuté, un programme doit d'abord être chargé en mémoire vive.", "renvoi": "C1, unités et mémoires"}
+      }
+    },
+    {
+      "id": "Q2", "capacite": "C2",
+      "enonce": "Les instructions d'un programme en langage machine sont exécutées :",
+      "options": {"A": "dans un ordre aléatoire.", "B": "toutes en même temps.", "C": "dans l'ordre inverse du programme.", "D": "une par une, dans l'ordre du programme, sauf branchement."},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "Le compteur ordinal désigne l'instruction suivante de façon entièrement déterminée ; aucun hasard n'intervient.", "renvoi": "C2, cycle d'exécution"},
+        "B": {"erreur": "L'élève transpose le parallélisme apparent des applications. Sur un cœur, les instructions se succèdent ; l'illusion de simultanéité vient de l'ordonnanceur.", "renvoi": "C2, cycle d'exécution"},
+        "C": {"erreur": "L'élève confond l'ordre d'exécution avec le dépilement d'une pile. Le compteur ordinal progresse, sauf saut explicite.", "renvoi": "C2, cycle d'exécution"}
+      }
+    },
+    {
+      "id": "Q3", "capacite": "C3",
+      "enonce": "La gestion des processus par le système d'exploitation permet notamment :",
+      "options": {"A": "de donner l'illusion que plusieurs programmes s'exécutent en même temps sur un seul cœur.", "B": "d'empêcher tout programme de s'exécuter.", "C": "de remplacer le processeur.", "D": "de n'afficher que des fenêtres graphiques."},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "Le système régule l'accès aux ressources ; le blocage total serait l'exact contraire de sa fonction.", "renvoi": "C3, fonctions du système d'exploitation"},
+        "C": {"erreur": "Un logiciel ne se substitue pas au matériel. Le système ORGANISE l'accès au processeur, il ne le remplace pas.", "renvoi": "C3, fonctions du système d'exploitation"},
+        "D": {"erreur": "L'élève confond le système et son interface graphique. Un système peut fonctionner sans aucun affichage, comme sur un serveur.", "renvoi": "C3, fonctions du système d'exploitation"}
+      }
+    },
+    {
+      "id": "Q4", "capacite": "C4",
+      "enonce": "En ligne de commande, la commande qui affiche le contenu d'un répertoire est :",
+      "options": {"A": "\\code{cd}", "B": "\\code{ls}", "C": "\\code{mkdir}", "D": "\\code{rm}"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "\\code{cd} change de répertoire courant ; elle déplace, elle n'affiche rien.", "renvoi": "C4, commandes de base"},
+        "C": {"erreur": "\\code{mkdir} crée un répertoire au lieu de lire celui qui existe.", "renvoi": "C4, commandes de base"},
+        "D": {"erreur": "\\code{rm} supprime des fichiers. La confondre avec une commande de lecture expose à une perte de données irréversible.", "renvoi": "C4, commandes de base"}
+      }
+    },
+    {
+      "id": "Q5", "capacite": "C5",
+      "enonce": "Dans la chaîne de permissions \\code{rwxr-x---}, les membres du groupe peuvent :",
+      "options": {"A": "lire et écrire, mais pas exécuter.", "B": "tout faire : lire, écrire et exécuter.", "C": "lire et exécuter, mais pas écrire.", "D": "n'effectuer aucune de ces opérations."},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'élève lit \\code{rw} au lieu de \\code{r-x}. Le tiret en deuxième position du triplet du groupe signale précisément l'absence du droit d'écriture.", "renvoi": "C5, lecture d'une chaîne de permissions"},
+        "B": {"erreur": "L'élève lit le premier triplet, celui du PROPRIÉTAIRE. Celui du groupe est le deuxième, soit \\code{r-x}.", "renvoi": "C5, lecture d'une chaîne de permissions"},
+        "D": {"erreur": "L'élève lit le troisième triplet, celui des autres utilisateurs, qui vaut bien \\code{---}.", "renvoi": "C5, lecture d'une chaîne de permissions"}
+      }
+    },
+    {
+      "id": "Q6", "capacite": "C5",
+      "enonce": "La notation octale \\code{644} correspond aux permissions :",
+      "options": {"A": "\\code{rwxrwxrwx}", "B": "\\code{r--r--r--}", "C": "\\code{rw-rw-rw-}", "D": "\\code{rw-r--r--}"},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "\\code{rwxrwxrwx} correspond à $777$. L'élève accorde tous les droits à tout le monde, ce que $644$ ne fait pas.", "renvoi": "C5, notation octale des permissions"},
+        "B": {"erreur": "\\code{r--r--r--} correspond à $444$. L'élève oublie le droit d'écriture du propriétaire, qui vaut $2$ et porte son chiffre à $6$.", "renvoi": "C5, notation octale des permissions"},
+        "C": {"erreur": "\\code{rw-rw-rw-} correspond à $666$. L'élève applique au groupe et aux autres le chiffre du propriétaire.", "renvoi": "C5, notation octale des permissions"}
+      }
+    }
+  ]
 }

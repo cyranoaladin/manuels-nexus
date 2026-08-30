@@ -33,6 +33,11 @@ import pytest
 RACINE = Path(__file__).resolve().parents[1]
 PRODUCTEUR = RACINE / "scripts" / "build_qcm_tex.py"
 CHAPITRES = RACINE / "chapitres"
+#: Les QCM NSI sont produits par le meme generateur : le contrat d'echappement
+#: est donc le meme, et le scan doit les couvrir sous peine de laisser passer
+#: exactement le defaut que ce fichier documente.
+CHAPITRES_NSI = RACINE.parents[1] / "NSI" / "chapitres"
+RACINES_QCM = (CHAPITRES, CHAPITRES_NSI)
 #: hors mode mathematique, ces sequences signalent un pre-echappement
 PRE_ECHAPPE = re.compile(r"\\[_^&#%]")
 
@@ -129,7 +134,12 @@ def test_les_segments_mathematiques_gardent_pourcent_diese_esperluette(
 def test_aucune_source_qcm_ne_pre_echappe_hors_mode_mathematique() -> None:
     fautes: list[str] = []
     champs = 0
-    for source in sorted(CHAPITRES.glob("*/qcm/*-QCM.json")):
+    sources = [
+        source
+        for racine in RACINES_QCM
+        for source in sorted(racine.glob("*/qcm/*-QCM.json"))
+    ]
+    for source in sources:
         document = json.loads(source.read_text(encoding="utf-8"))
         for question in document.get("questions", []):
             valeurs = {"enonce": question.get("enonce", "")}

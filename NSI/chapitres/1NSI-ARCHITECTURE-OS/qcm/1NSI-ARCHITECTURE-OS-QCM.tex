@@ -1,81 +1,133 @@
-% META: {"id": "1NSI-ARCHITECTURE-OS-QCM", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "qcm", "capacites": ["P-ARCH-01A","P-ARCH-01B","P-ARCH-03A","P-ARCH-03B","P-ARCH-03C"], "status": "needs_review"}
+% META: {"id": "1NSI-ARCHITECTURE-OS-QCM", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "qcm", "genere_depuis": "chapitres/1NSI-ARCHITECTURE-OS/qcm/1NSI-ARCHITECTURE-OS-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Architecture de von Neumann et systèmes d'exploitation}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Architecture de von Neumann et systèmes d'exploitation — QCM d'auto-évaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule réponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1 --- Architecture de von Neumann}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Dans l'architecture de von Neumann, instructions et données sont stockées :
+\item[] \textbf{Capacité C1}
+
+\item \textbf{[Q1]} Dans l'architecture de von Neumann, les instructions et les données sont rangées :
   \begin{enumerate}[label=\Alph*.]
     \item dans deux mémoires physiquement séparées.
-    \item dans le même espace mémoire.
     \item uniquement dans les registres du processeur.
+    \item dans un même espace mémoire.
     \item uniquement sur le disque dur.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C2}
 
-\subsection*{C2 --- Exécution d'instructions}
-
-\item \textbf{[Q2]} Les instructions d'un programme machine s'exécutent :
+\item \textbf{[Q2]} Les instructions d'un programme en langage machine sont exécutées :
   \begin{enumerate}[label=\Alph*.]
     \item dans un ordre aléatoire.
     \item toutes en même temps.
-    \item une par une, dans l'ordre du programme (sauf branchement).
     \item dans l'ordre inverse du programme.
+    \item une par une, dans l'ordre du programme, sauf branchement.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C3}
 
-\subsection*{C3 --- Systèmes d'exploitation}
-
-\item \textbf{[Q3]} La gestion des processus par le système d'exploitation permet notamment de :
+\item \textbf{[Q3]} La gestion des processus par le système d'exploitation permet notamment :
   \begin{enumerate}[label=\Alph*.]
-    \item donner l'illusion d'une exécution simultanée de plusieurs programmes sur un seul cœur.
-    \item empêcher tout programme de s'exécuter.
-    \item remplacer le processeur.
-    \item afficher uniquement des fenêtres graphiques.
+    \item de donner l'illusion que plusieurs programmes s'exécutent en même temps sur un seul cœur.
+    \item d'empêcher tout programme de s'exécuter.
+    \item de remplacer le processeur.
+    \item de n'afficher que des fenêtres graphiques.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C4}
 
-\subsection*{C4 --- Ligne de commande}
-
-\item \textbf{[Q4]} La commande qui liste le contenu d'un dossier est :
+\item \textbf{[Q4]} En ligne de commande, la commande qui affiche le contenu d'un répertoire est :
   \begin{enumerate}[label=\Alph*.]
-    \item \lstinline{cd}
-    \item \lstinline{ls}
-    \item \lstinline{mkdir}
-    \item \lstinline{rm}
+    \item \code{cd}
+    \item \code{ls}
+    \item \code{mkdir}
+    \item \code{rm}
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C5}
 
-\subsection*{C5 --- Droits et permissions}
-
-\item \textbf{[Q5]} Dans la chaîne de permissions \lstinline{rwxr-x---}, le \textbf{groupe} peut :
+\item \textbf{[Q5]} Dans la chaîne de permissions \code{rwxr-x---}, les membres du groupe peuvent :
   \begin{enumerate}[label=\Alph*.]
     \item lire et écrire, mais pas exécuter.
+    \item tout faire : lire, écrire et exécuter.
     \item lire et exécuter, mais pas écrire.
-    \item tout faire (lecture, écriture, exécution).
-    \item rien faire du tout.
+    \item n'effectuer aucune de ces opérations.
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q6]} La notation octale \lstinline{644} correspond aux permissions :
+\item \textbf{[Q6]} La notation octale \code{644} correspond aux permissions :
   \begin{enumerate}[label=\Alph*.]
-    \item \lstinline{rw-r--r--}
-    \item \lstinline{rwxrwxrwx}
-    \item \lstinline{r--r--r--}
-    \item \lstinline{rw-rw-rw-}
+    \item \code{rwxrwxrwx}
+    \item \code{r--r--r--}
+    \item \code{rw-rw-rw-}
+    \item \code{rw-r--r--}
   \end{enumerate}
 
 \end{enumerate}
+
+% NEXUS-QCM-TEACHER-ONLY-BEGIN
+\ifnxVersionProfesseur
+\clearpage
+\section*{Clé de correction — réservée au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacité & Réponse exacte \\
+\hline
+Q1 & C1 & \textbf{C} \\
+Q2 & C2 & \textbf{D} \\
+Q3 & C3 & \textbf{A} \\
+Q4 & C4 & \textbf{B} \\
+Q5 & C5 & \textbf{C} \\
+Q6 & C5 & \textbf{D} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des réponses erronées}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{A} — L'élève décrit l'architecture de Harvard. La rupture introduite par von Neumann est précisément le programme enregistré dans la même mémoire que les données. \emph{Renvoi : C1, architecture de von Neumann.}
+    \item \textbf{B} — Les registres ne contiennent que les quelques valeurs en cours de traitement ; ils sont bien trop peu nombreux pour héberger un programme. \emph{Renvoi : C1, unités et mémoires.}
+    \item \textbf{D} — Le disque assure la conservation durable. Pour être exécuté, un programme doit d'abord être chargé en mémoire vive. \emph{Renvoi : C1, unités et mémoires.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Le compteur ordinal désigne l'instruction suivante de façon entièrement déterminée ; aucun hasard n'intervient. \emph{Renvoi : C2, cycle d'exécution.}
+    \item \textbf{B} — L'élève transpose le parallélisme apparent des applications. Sur un cœur, les instructions se succèdent ; l'illusion de simultanéité vient de l'ordonnanceur. \emph{Renvoi : C2, cycle d'exécution.}
+    \item \textbf{C} — L'élève confond l'ordre d'exécution avec le dépilement d'une pile. Le compteur ordinal progresse, sauf saut explicite. \emph{Renvoi : C2, cycle d'exécution.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{B} — Le système régule l'accès aux ressources ; le blocage total serait l'exact contraire de sa fonction. \emph{Renvoi : C3, fonctions du système d'exploitation.}
+    \item \textbf{C} — Un logiciel ne se substitue pas au matériel. Le système ORGANISE l'accès au processeur, il ne le remplace pas. \emph{Renvoi : C3, fonctions du système d'exploitation.}
+    \item \textbf{D} — L'élève confond le système et son interface graphique. Un système peut fonctionner sans aucun affichage, comme sur un serveur. \emph{Renvoi : C3, fonctions du système d'exploitation.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — \code{cd} change de répertoire courant ; elle déplace, elle n'affiche rien. \emph{Renvoi : C4, commandes de base.}
+    \item \textbf{C} — \code{mkdir} crée un répertoire au lieu de lire celui qui existe. \emph{Renvoi : C4, commandes de base.}
+    \item \textbf{D} — \code{rm} supprime des fichiers. La confondre avec une commande de lecture expose à une perte de données irréversible. \emph{Renvoi : C4, commandes de base.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — L'élève lit \code{rw} au lieu de \code{r-x}. Le tiret en deuxième position du triplet du groupe signale précisément l'absence du droit d'écriture. \emph{Renvoi : C5, lecture d'une chaîne de permissions.}
+    \item \textbf{B} — L'élève lit le premier triplet, celui du PROPRIÉTAIRE. Celui du groupe est le deuxième, soit \code{r-x}. \emph{Renvoi : C5, lecture d'une chaîne de permissions.}
+    \item \textbf{D} — L'élève lit le troisième triplet, celui des autres utilisateurs, qui vaut bien \code{---}. \emph{Renvoi : C5, lecture d'une chaîne de permissions.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — \code{rwxrwxrwx} correspond à $777$. L'élève accorde tous les droits à tout le monde, ce que $644$ ne fait pas. \emph{Renvoi : C5, notation octale des permissions.}
+    \item \textbf{B} — \code{r--r--r--} correspond à $444$. L'élève oublie le droit d'écriture du propriétaire, qui vaut $2$ et porte son chiffre à $6$. \emph{Renvoi : C5, notation octale des permissions.}
+    \item \textbf{C} — \code{rw-rw-rw-} correspond à $666$. L'élève applique au groupe et aux autres le chiffre du propriétaire. \emph{Renvoi : C5, notation octale des permissions.}
+  \end{itemize}
+\end{itemize}
+\fi
+% NEXUS-QCM-TEACHER-ONLY-END

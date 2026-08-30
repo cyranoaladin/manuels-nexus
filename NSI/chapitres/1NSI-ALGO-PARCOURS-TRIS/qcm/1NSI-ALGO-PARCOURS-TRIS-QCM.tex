@@ -1,79 +1,135 @@
-% META: {"id": "1NSI-ALGO-PARCOURS-TRIS-QCM", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "qcm", "capacites": ["P-ALGO-01A","P-ALGO-01B","P-ALGO-02A","P-ALGO-02B","P-ALGO-02C","P-ALGO-02D"], "status": "needs_review"}
+% META: {"id": "1NSI-ALGO-PARCOURS-TRIS-QCM", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "qcm", "genere_depuis": "chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Algorithmique 1 : parcours et tris}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Algorithmique 1 : parcours et tris — QCM d'auto-évaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule réponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1 --- Recherche d'occurrence}
 
 \begin{enumerate}
 
+\item[] \textbf{Capacité C1}
+
 \item \textbf{[Q1]} Le coût, dans le pire cas, d'une recherche séquentielle d'une valeur dans un tableau de taille $n$ est :
   \begin{enumerate}[label=\Alph*.]
+    \item linéaire, $O(n)$.
     \item constant.
     \item logarithmique.
-    \item linéaire, $O(n)$.
     \item quadratique, $O(n^2)$.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C2}
 
-\subsection*{C2 --- Extremum}
-
-\item \textbf{[Q2]} Pour rechercher le maximum d'un tableau non vide, il faut initialiser l'accumulateur avec :
+\item \textbf{[Q2]} Pour rechercher le maximum d'un tableau non vide, on initialise l'accumulateur avec :
   \begin{enumerate}[label=\Alph*.]
     \item la valeur $0$.
     \item le premier élément du tableau.
-    \item la plus grande valeur possible.
+    \item la plus grande valeur représentable.
     \item le nombre d'éléments du tableau.
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C3/C4 --- Tri par insertion}
+\item[] \textbf{Capacité C3}
 
 \item \textbf{[Q3]} Le tri par insertion construit la partie triée du tableau en :
   \begin{enumerate}[label=\Alph*.]
-    \item recherchant le minimum de la partie restante à chaque étape.
-    \item insérant chaque nouvel élément à sa bonne place dans la partie déjà triée.
     \item triant d'abord la seconde moitié du tableau.
-    \item échangeant des éléments au hasard.
+    \item recherchant le minimum de la partie restante à chaque étape.
+    \item insérant chaque nouvel élément à sa place dans la partie déjà triée.
+    \item échangeant deux éléments choisis au hasard.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C4}
 
 \item \textbf{[Q4]} L'invariant de boucle du tri par insertion affirme qu'au début de l'itération $i$ :
   \begin{enumerate}[label=\Alph*.]
-    \item le tableau entier est déjà trié.
-    \item le sous-tableau \lstinline{tableau[0:i]} est trié.
-    \item le sous-tableau \lstinline{tableau[i:n]} est trié.
     \item aucune partie du tableau n'est triée.
+    \item le sous-tableau \code{tableau[0:i]} est trié.
+    \item le tableau entier est déjà trié.
+    \item le sous-tableau \code{tableau[i:n]} est trié.
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C5/C6 --- Tri par sélection}
+\item[] \textbf{Capacité C5}
 
 \item \textbf{[Q5]} Le tri par sélection construit la partie triée du tableau en :
   \begin{enumerate}[label=\Alph*.]
-    \item insérant chaque élément à sa bonne place.
-    \item recherchant le minimum de la partie restante et l'échangeant à sa place.
-    \item divisant le tableau en deux moitiés récursivement.
+    \item insérant chaque élément à sa place dans le préfixe trié.
+    \item divisant récursivement le tableau en deux moitiés.
     \item ne comparant jamais deux éléments.
+    \item cherchant le minimum de la partie restante et en l'amenant à sa place.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C6}
 
-\item \textbf{[Q6]} Contrairement au tri par insertion, le tri par sélection effectue, dans TOUS les cas (tableau déjà trié ou non) :
+\item \textbf{[Q6]} Sur un tableau de taille $n$, le tri par sélection effectue :
   \begin{enumerate}[label=\Alph*.]
-    \item un nombre de comparaisons variable selon l'ordre initial.
+    \item un nombre de comparaisons qui varie selon l'ordre initial.
+    \item zéro comparaison si le tableau est déjà trié.
     \item toujours le même nombre de comparaisons, quel que soit l'ordre initial.
-    \item zéro comparaison.
     \item un nombre de comparaisons linéaire, $O(n)$.
   \end{enumerate}
 
 \end{enumerate}
+
+% NEXUS-QCM-TEACHER-ONLY-BEGIN
+\ifnxVersionProfesseur
+\clearpage
+\section*{Clé de correction — réservée au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacité & Réponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C2 & \textbf{B} \\
+Q3 & C3 & \textbf{C} \\
+Q4 & C4 & \textbf{B} \\
+Q5 & C5 & \textbf{D} \\
+Q6 & C6 & \textbf{C} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des réponses erronées}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — L'élève ne considère que le cas favorable, où la valeur est en première position. Le pire cas exige de parcourir les $n$ cases. \emph{Renvoi : C1, coût de la recherche séquentielle.}
+    \item \textbf{C} — L'élève applique le coût de la recherche dichotomique. Celle-ci exige un tableau trié ; la recherche séquentielle n'en suppose rien. \emph{Renvoi : C1, coût de la recherche séquentielle.}
+    \item \textbf{D} — Un coût quadratique supposerait un parcours imbriqué dans un autre. La recherche séquentielle ne parcourt le tableau qu'une fois. \emph{Renvoi : C1, coût de la recherche séquentielle.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Sur un tableau dont toutes les valeurs sont négatives, l'accumulateur resterait à $0$ et l'algorithme renverrait une valeur absente du tableau. \emph{Renvoi : C2, initialisation de l'accumulateur.}
+    \item \textbf{C} — L'élève applique l'initialisation d'une recherche de MINIMUM. Partir du plus grand pour chercher un maximum empêche toute mise à jour. \emph{Renvoi : C2, initialisation de l'accumulateur.}
+    \item \textbf{D} — L'élève confond une donnée sur la taille du tableau et une donnée sur son contenu. La longueur n'a aucun rapport avec les valeurs stockées. \emph{Renvoi : C2, initialisation de l'accumulateur.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — Découper le tableau en moitiés relève du tri fusion, un tri par « diviser pour régner ». Le tri par insertion progresse case par case. \emph{Renvoi : C3, principe du tri par insertion.}
+    \item \textbf{B} — C'est la description du tri par SÉLECTION. L'insertion ne cherche pas de minimum : elle place l'élément courant. \emph{Renvoi : C3, insertion et sélection.}
+    \item \textbf{D} — Un tri est déterministe : chaque échange répond à une comparaison, jamais au hasard. \emph{Renvoi : C3, principe du tri par insertion.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — Un invariant vide ne prouve rien. Il faut une propriété vraie avant la première itération et conservée par chacune : ici, le préfixe est trié dès le départ, car un sous-tableau d'un seul élément l'est. \emph{Renvoi : C4, invariant du tri par insertion.}
+    \item \textbf{C} — L'élève énonce la propriété de SORTIE, vraie seulement à la fin. L'invariant doit être vrai à chaque tour. \emph{Renvoi : C4, invariant du tri par insertion.}
+    \item \textbf{D} — L'élève inverse les deux parties. C'est le préfixe qui est trié, et le suffixe qui reste à traiter. \emph{Renvoi : C4, invariant du tri par insertion.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — C'est la description du tri par INSERTION. Les deux tris construisent bien un préfixe trié, mais la sélection va chercher l'élément voulu au lieu de placer l'élément courant. \emph{Renvoi : C5, insertion et sélection.}
+    \item \textbf{B} — La division récursive relève du tri fusion ou du tri rapide, pas du tri par sélection, qui est itératif. \emph{Renvoi : C5, principe du tri par sélection.}
+    \item \textbf{C} — Chercher un minimum suppose précisément de comparer. Aucun tri par comparaison ne peut s'en dispenser. \emph{Renvoi : C5, principe du tri par sélection.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — L'élève transpose le comportement du tri par insertion, qui s'arrête tôt sur une entrée presque triée. La sélection parcourt intégralement la partie restante à chaque étape, sans condition d'arrêt anticipé. \emph{Renvoi : C6, coût du tri par sélection.}
+    \item \textbf{B} — L'algorithme ne teste jamais si le tableau est déjà trié : il cherche le minimum de la partie restante dans tous les cas. \emph{Renvoi : C6, coût du tri par sélection.}
+    \item \textbf{D} — Chacune des $n$ étapes parcourt la partie restante : le total est de l'ordre de $n^2/2$ comparaisons, donc quadratique. \emph{Renvoi : C6, coût du tri par sélection.}
+  \end{itemize}
+\end{itemize}
+\fi
+% NEXUS-QCM-TEACHER-ONLY-END

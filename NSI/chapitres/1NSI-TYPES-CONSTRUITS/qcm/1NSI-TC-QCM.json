@@ -1,5 +1,182 @@
 {
   "chapitre": "1NSI-TYPES-CONSTRUITS",
-  "titre": "QCM d'auto-évaluation -- 1NSI-TC",
-  "questions": []
+  "titre": "Types construits : p-uplets, tableaux, dictionnaires — QCM d'auto-évaluation",
+  "questions": [
+    {
+      "id": "Q1", "capacite": "C1",
+      "enonce": "Que renvoie \\code{type((3, 5))} ?",
+      "options": {"A": "\\code{<class 'tuple'>}", "B": "\\code{<class 'list'>}", "C": "\\code{<class 'int'>}", "D": "\\code{<class 'set'>}"},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "L'élève confond les délimiteurs : les crochets construisent une liste, les parenthèses un p-uplet.", "renvoi": "C1, p-uplets"},
+        "C": {"erreur": "L'élève lit la parenthèse comme un simple groupement arithmétique. C'est la virgule, et non la parenthèse, qui crée le p-uplet.", "renvoi": "C1, p-uplets"},
+        "D": {"erreur": "Un ensemble s'écrit avec des accolades et ne conserve pas l'ordre ; le p-uplet est ordonné.", "renvoi": "C1, p-uplets"}
+      }
+    },
+    {
+      "id": "Q2", "capacite": "C1",
+      "enonce": "Qu'obtient-on en exécutant \\code{t = (1, 2)} puis \\code{t[0] = 5} ?",
+      "options": {"A": "\\code{t} vaut \\code{(5, 2)}", "B": "une erreur \\code{TypeError}", "C": "\\code{t} vaut \\code{(1, 2, 5)}", "D": "une erreur \\code{IndexError}"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'élève traite le p-uplet comme une liste. Un p-uplet est immuable : aucune de ses cases ne peut être réaffectée après sa création.", "renvoi": "C1, immuabilité des p-uplets"},
+        "C": {"erreur": "L'élève lit l'affectation comme un ajout. Même sur une liste, \\code{t[0] = 5} remplacerait la case $0$ au lieu d'allonger la séquence.", "renvoi": "C1, immuabilité des p-uplets"},
+        "D": {"erreur": "L'indice $0$ est valide pour un p-uplet de deux éléments. Ce n'est pas l'indice qui est refusé, mais la modification.", "renvoi": "C1, immuabilité des p-uplets"}
+      }
+    },
+    {
+      "id": "Q3", "capacite": "C1",
+      "enonce": "Après \\code{a, b = (10, 20)}, quelle est la valeur de \\code{b} ?",
+      "options": {"A": "\\code{10}", "B": "\\code{(10, 20)}", "C": "\\code{20}", "D": "\\code{None}"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'élève inverse l'ordre du dépaquetage : les valeurs sont distribuées de gauche à droite, donc \\code{a} reçoit $10$ et \\code{b} reçoit $20$.", "renvoi": "C1, dépaquetage d'un p-uplet"},
+        "B": {"erreur": "L'élève n'a pas vu le dépaquetage : la virgule à gauche du signe égal répartit les composantes au lieu d'affecter le p-uplet entier.", "renvoi": "C1, dépaquetage d'un p-uplet"},
+        "D": {"erreur": "Le dépaquetage affecte réellement les deux noms. \\code{None} n'apparaîtrait que si la fonction appelée ne renvoyait rien.", "renvoi": "C1, dépaquetage d'un p-uplet"}
+      }
+    },
+    {
+      "id": "Q4", "capacite": "C2",
+      "enonce": "Qu'affiche \\code{t = [3, 1, 4]} suivi de \\code{t.append(1)} puis \\code{print(len(t))} ?",
+      "options": {"A": "\\code{3}", "B": "\\code{5}", "C": "\\code{1}", "D": "\\code{4}"},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "L'élève donne la longueur AVANT l'ajout. La méthode \\code{append} modifie la liste sur place, donc sa longueur augmente.", "renvoi": "C2, modification d'un tableau"},
+        "B": {"erreur": "L'élève compte deux ajouts. \\code{append} n'insère qu'un seul élément, même si sa valeur figure déjà dans la liste.", "renvoi": "C2, modification d'un tableau"},
+        "C": {"erreur": "L'élève affiche la valeur ajoutée au lieu de la longueur. \\code{len} compte les éléments ; il ne les lit pas.", "renvoi": "C2, modification d'un tableau"}
+      }
+    },
+    {
+      "id": "Q5", "capacite": "C2",
+      "enonce": "Quelle expression construit exactement la liste \\code{[0, 2, 4, 6, 8]} ?",
+      "options": {"A": "\\code{[x * 2 for x in range(10)]}", "B": "\\code{[x for x in range(10) if x % 2 == 0]}", "C": "\\code{[x for x in range(8)]}", "D": "\\code{[x + 2 for x in range(5)]}"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'expression produit dix termes, de $0$ à $18$ : l'élève a doublé les valeurs au lieu de filtrer les paires, si bien que la liste dépasse $8$.", "renvoi": "C2, compréhension de liste"},
+        "C": {"erreur": "L'élève retient le dernier terme attendu, $8$, et le prend pour la borne du \\code{range}. L'expression énumère alors tous les entiers de $0$ à $7$, pairs et impairs.", "renvoi": "C2, compréhension de liste"},
+        "D": {"erreur": "L'élève translate au lieu de filtrer : l'expression produit $[2, 3, 4, 5, 6]$, dont les termes ne sont même pas tous pairs.", "renvoi": "C2, compréhension de liste"}
+      }
+    },
+    {
+      "id": "Q6", "capacite": "C2",
+      "enonce": "Qu'obtient-on avec \\code{t = [10, 20, 30]} puis \\code{print(t[3])} ?",
+      "options": {"A": "\\code{30}", "B": "\\code{None}", "C": "une erreur \\code{IndexError}", "D": "\\code{10}"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'élève numérote les cases à partir de $1$. Les indices commencent à $0$ : le dernier élément d'une liste de trois cases porte l'indice $2$.", "renvoi": "C2, indices d'un tableau"},
+        "B": {"erreur": "Un indice hors bornes lève une exception ; il ne renvoie pas discrètement une valeur vide, contrairement à ce qui se passerait pour une clé absente traitée par \\code{get}.", "renvoi": "C2, indices d'un tableau"},
+        "D": {"erreur": "L'élève suppose que l'indexation reboucle au début. Aucun retour circulaire n'a lieu pour un indice positif hors bornes.", "renvoi": "C2, indices d'un tableau"}
+      }
+    },
+    {
+      "id": "Q7", "capacite": "C3",
+      "enonce": "Qu'affiche \\code{g = [[1, 2], [3, 4]]} suivi de \\code{print(g[1][0])} ?",
+      "options": {"A": "\\code{2}", "B": "\\code{1}", "C": "\\code{4}", "D": "\\code{3}"},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "L'élève inverse les deux indices : il a lu \\code{g[0][1]}. Le premier indice choisit la ligne, le second la colonne.", "renvoi": "C3, grille et tableau de tableaux"},
+        "B": {"erreur": "L'élève lit la première case de la première ligne, comme si le premier indice était sans effet.", "renvoi": "C3, grille et tableau de tableaux"},
+        "C": {"erreur": "L'élève lit la dernière case de la deuxième ligne : l'indice de colonne $0$ a été pris pour le dernier au lieu du premier.", "renvoi": "C3, grille et tableau de tableaux"}
+      }
+    },
+    {
+      "id": "Q8", "capacite": "C3",
+      "enonce": "Quelle expression crée une grille de $3$ lignes et $2$ colonnes remplie de zéros, dont les lignes sont indépendantes ?",
+      "options": {"A": "\\code{[[0] * 2 for _ in range(3)]}", "B": "\\code{[[0, 0]] * 3}", "C": "\\code{[[0 for _ in range(3)] for _ in range(2)]}", "D": "\\code{[0] * 6}"},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "L'opérateur \\code{*} recopie la RÉFÉRENCE de la même ligne trois fois. Modifier une case en modifie trois : après \\code{g[0][0] = 9}, la grille vaut \\code{[[9, 0], [9, 0], [9, 0]]}.", "renvoi": "C3, alias dans une grille"},
+        "C": {"erreur": "Les lignes sont bien indépendantes, mais les dimensions sont inversées : cette expression produit $2$ lignes de $3$ cases.", "renvoi": "C3, dimensions d'une grille"},
+        "D": {"erreur": "L'élève construit une liste plate de six zéros. Le nombre de cases est juste, mais la structure à deux niveaux, indispensable à l'accès \\code{g[i][j]}, est perdue.", "renvoi": "C3, grille et tableau de tableaux"}
+      }
+    },
+    {
+      "id": "Q9", "capacite": "C3",
+      "enonce": "Combien de lignes et de colonnes possède la grille \\code{g = [[5, 6, 7], [8, 9, 10]]} ?",
+      "options": {"A": "$3$ lignes et $2$ colonnes", "B": "$6$ lignes et $1$ colonne", "C": "$2$ lignes et $3$ colonnes", "D": "$1$ ligne et $6$ colonnes"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'élève intervertit les deux dimensions. Le nombre de lignes est la longueur de la grille, ici $2$ ; le nombre de colonnes est la longueur d'une ligne, ici $3$.", "renvoi": "C3, dimensions d'une grille"},
+        "B": {"erreur": "L'élève compte les cases au lieu des lignes. Le total de $6$ est le produit des deux dimensions, non l'une d'elles.", "renvoi": "C3, dimensions d'une grille"},
+        "D": {"erreur": "L'élève aplatit la grille et perd le niveau intermédiaire ; la structure comporte bien deux sous-listes distinctes.", "renvoi": "C3, dimensions d'une grille"}
+      }
+    },
+    {
+      "id": "Q10", "capacite": "C4",
+      "enonce": "Qu'obtient-on avec \\code{d = \\{\"a\": 1, \"b\": 2\\}} puis \\code{print(d[\"c\"])} ?",
+      "options": {"A": "\\code{None}", "B": "\\code{0}", "C": "\\code{2}", "D": "une erreur \\code{KeyError}"},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "L'élève attribue à l'accès par crochets le comportement de la méthode \\code{get}, qui renvoie effectivement \\code{None} pour une clé absente. Les crochets, eux, lèvent une exception.", "renvoi": "C4, accès à une clé absente"},
+        "B": {"erreur": "Un dictionnaire ne crée pas de valeur par défaut à la lecture ; aucune clé \\code{\"c\"} n'existe, et rien ne vaut $0$.", "renvoi": "C4, accès à une clé absente"},
+        "C": {"erreur": "L'élève lit la dernière valeur enregistrée, comme si l'accès portait sur une position. Un dictionnaire s'interroge par clé, jamais par rang.", "renvoi": "C4, accès par clé"}
+      }
+    },
+    {
+      "id": "Q11", "capacite": "C4",
+      "enonce": "Comment ajouter au dictionnaire \\code{d} la clé \\code{\"c\"} associée à la valeur $3$ ?",
+      "options": {"A": "\\code{d[\"c\"] = 3}", "B": "\\code{d.append(\"c\", 3)}", "C": "\\code{d.add(\"c\": 3)}", "D": "\\code{d + \\{\"c\": 3\\}}"},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "L'élève transpose une méthode de liste. \\code{append} ajoute en fin de séquence ; un dictionnaire n'a pas de fin, il a des clés.", "renvoi": "C4, ajout dans un dictionnaire"},
+        "C": {"erreur": "Le dictionnaire n'a pas de méthode \\code{add}, et la syntaxe \\code{\"c\": 3} n'est valide qu'à l'intérieur d'une écriture littérale, pas comme argument.", "renvoi": "C4, ajout dans un dictionnaire"},
+        "D": {"erreur": "L'opérateur \\code{+} concatène des séquences ; il n'est pas défini entre deux dictionnaires et lèverait une \\code{TypeError}.", "renvoi": "C4, ajout dans un dictionnaire"}
+      }
+    },
+    {
+      "id": "Q12", "capacite": "C4",
+      "enonce": "Quelle boucle parcourt à la fois les clés et les valeurs d'un dictionnaire \\code{d} ?",
+      "options": {"A": "\\code{for k in d:}", "B": "\\code{for k, v in d.items():}", "C": "\\code{for v in d.values():}", "D": "\\code{for k, v in d:}"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Parcourir directement un dictionnaire ne donne que ses clés ; la valeur doit ensuite être demandée par \\code{d[k]}.", "renvoi": "C4, parcours d'un dictionnaire"},
+        "C": {"erreur": "Cette boucle ne livre que les valeurs, et la clé associée devient inaccessible.", "renvoi": "C4, parcours d'un dictionnaire"},
+        "D": {"erreur": "L'élève attend un couple sans le demander. Il faut \\code{d.items()} pour que chaque tour fournisse la paire clé-valeur ; sans lui, Python tente de dépaqueter une clé et échoue.", "renvoi": "C4, parcours d'un dictionnaire"}
+      }
+    },
+    {
+      "id": "Q13", "capacite": "C5",
+      "enonce": "Qu'affiche \\code{a = [1, 2]} suivi de \\code{b = a}, \\code{b.append(3)} puis \\code{print(a)} ?",
+      "options": {"A": "\\code{[1, 2]}", "B": "une erreur", "C": "\\code{[3]}", "D": "\\code{[1, 2, 3]}"},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "L'élève croit que l'affectation copie la liste. Elle ne crée qu'un second nom pour le MÊME objet : ce que l'on modifie par \\code{b} se voit par \\code{a}.", "renvoi": "C5, alias et objets mutables"},
+        "B": {"erreur": "Aucune règle n'est enfreinte : donner deux noms au même objet est un usage courant, et non une faute.", "renvoi": "C5, alias et objets mutables"},
+        "C": {"erreur": "L'élève croit que \\code{b = a} vide la liste avant l'ajout. L'affectation ne modifie pas le contenu de l'objet désigné.", "renvoi": "C5, alias et objets mutables"}
+      }
+    },
+    {
+      "id": "Q14", "capacite": "C5",
+      "enonce": "Comment obtenir une copie indépendante d'une liste \\code{t} de nombres ?",
+      "options": {"A": "\\code{copie = list(t)}", "B": "\\code{copie = t}", "C": "\\code{copie = t.append()}", "D": "\\code{copie = len(t)}"},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "C'est précisément l'alias à éviter : les deux noms désignent le même objet, et toute modification se répercute.", "renvoi": "C5, copie d'une liste"},
+        "C": {"erreur": "\\code{append} ajoute un élément et renvoie \\code{None} ; appelée sans argument, elle lève de plus une \\code{TypeError}.", "renvoi": "C5, copie d'une liste"},
+        "D": {"erreur": "L'élève récupère le nombre d'éléments, un entier, au lieu de leur contenu.", "renvoi": "C5, copie d'une liste"}
+      }
+    },
+    {
+      "id": "Q15", "capacite": "C5",
+      "enonce": "Qu'affiche \\code{g = [[1], [2]]} suivi de \\code{h = list(g)}, \\code{h[0].append(9)} puis \\code{print(g[0])} ?",
+      "options": {"A": "\\code{[1]}", "B": "\\code{[1, 9]}", "C": "une erreur", "D": "\\code{[9]}"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'élève croit \\code{list(g)} suffisant. La copie est SUPERFICIELLE : elle duplique la liste extérieure, mais ses cases pointent encore vers les mêmes sous-listes.", "renvoi": "C5, copie superficielle et copie profonde"},
+        "C": {"erreur": "Aucune règle n'est enfreinte : la sous-liste est mutable et accepte l'ajout.", "renvoi": "C5, copie superficielle et copie profonde"},
+        "D": {"erreur": "L'ajout ne remplace pas le contenu existant : \\code{append} allonge la sous-liste, qui contenait déjà $1$.", "renvoi": "C5, copie superficielle et copie profonde"}
+      }
+    },
+    {
+      "id": "Q16", "capacite": "C5",
+      "enonce": "Parmi ces couples de types, lequel ne contient que des types mutables ?",
+      "options": {"A": "\\code{int} et \\code{list}", "B": "\\code{tuple} et \\code{str}", "C": "\\code{list} et \\code{dict}", "D": "\\code{str} et \\code{dict}"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "La liste est mutable, mais l'entier ne l'est pas : incrémenter une variable entière crée un nouvel objet plutôt que d'en modifier un.", "renvoi": "C5, types mutables et immuables"},
+        "B": {"erreur": "Ces deux types sont au contraire les immuables les plus courants ; c'est l'exact opposé de ce qui est demandé.", "renvoi": "C5, types mutables et immuables"},
+        "D": {"erreur": "Le dictionnaire est mutable, mais la chaîne ne l'est pas : remplacer un caractère par \\code{s[0] = \"x\"} lève une \\code{TypeError}.", "renvoi": "C5, types mutables et immuables"}
+      }
+    }
+  ]
 }

@@ -1,5 +1,72 @@
 {
   "chapitre": "1NSI-PROJET-METHODES",
-  "titre": "QCM d'auto-évaluation -- 1NSI-PROJET-METHODES",
-  "questions": []
+  "titre": "Projet et méthodes — QCM d'auto-évaluation",
+  "questions": [
+    {
+      "id": "Q1", "capacite": "C1",
+      "enonce": "Le concept de machine universelle, capable en principe d'exécuter n'importe quel algorithme, est introduit par :",
+      "options": {"A": "Alan Turing, en 1936.", "B": "Blaise Pascal, en 1642.", "C": "Guido van Rossum, en 1991.", "D": "Tim Berners-Lee, en 1989."},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "Pascal construit une machine à calculer, capable d'additionner et de soustraire. Elle exécute une opération fixée par sa mécanique, non un programme quelconque.", "renvoi": "C1, jalons de l'histoire de l'informatique"},
+        "C": {"erreur": "Van Rossum crée le langage Python, plus d'un demi-siècle après la formulation du modèle théorique.", "renvoi": "C1, jalons de l'histoire de l'informatique"},
+        "D": {"erreur": "Berners-Lee conçoit le Web, une application des réseaux, et non le modèle de calcul qui les précède.", "renvoi": "C1, jalons de l'histoire de l'informatique"}
+      }
+    },
+    {
+      "id": "Q2", "capacite": "C2",
+      "enonce": "Le programme officiel réserve à la conception et à l'élaboration de projets :",
+      "options": {"A": "moins d'un dixième de l'horaire annuel.", "B": "un quart au moins de l'horaire total de la spécialité.", "C": "la totalité de l'horaire annuel.", "D": "aucune heure dédiée."},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'élève sous-estime nettement la place du projet, que le programme érige en modalité de travail majeure et non en complément.", "renvoi": "C2, place du projet dans le programme"},
+        "C": {"erreur": "Le projet mobilise des notions qui doivent d'abord être enseignées ; il ne remplace pas le reste du programme.", "renvoi": "C2, place du projet dans le programme"},
+        "D": {"erreur": "C'est l'inverse : le programme lui réserve explicitement un quart au moins de l'horaire.", "renvoi": "C2, place du projet dans le programme"}
+      }
+    },
+    {
+      "id": "Q3", "capacite": "C2",
+      "enonce": "Découper un projet en jalons permet notamment :",
+      "options": {"A": "d'éviter tout travail en équipe.", "B": "de garantir qu'aucun bug ne subsistera.", "C": "de suivre la progression et d'ajuster les objectifs en cours de route.", "D": "de se dispenser d'un cahier des charges."},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "Les jalons servent au contraire à coordonner le travail collectif, en fixant des points de rendez-vous communs.", "renvoi": "C2, jalons d'un projet"},
+        "B": {"erreur": "Un jalon organise le travail ; il ne teste rien par lui-même. Seuls des critères de validation exécutables peuvent détecter des erreurs.", "renvoi": "C2, jalons et critères de validation"},
+        "D": {"erreur": "Les jalons découpent le cahier des charges dans le temps ; ils le supposent donc écrit, loin de le remplacer.", "renvoi": "C2, cahier des charges et jalons"}
+      }
+    },
+    {
+      "id": "Q4", "capacite": "C3",
+      "enonce": "Devant un message d'erreur Python, la première chose à faire est :",
+      "options": {"A": "de corriger au hasard une ligne du programme.", "B": "d'ignorer le message et de relancer le programme.", "C": "de supprimer la fonction mise en cause.", "D": "de lire le message en entier pour identifier le type d'erreur et la ligne concernée."},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "Modifier sans diagnostic peut faire disparaître le symptôme en laissant la cause, ou introduire une seconde erreur.", "renvoi": "C3, lecture d'un message d'erreur"},
+        "B": {"erreur": "Une erreur est déterministe : relancer le même code sur les mêmes données produira exactement le même message.", "renvoi": "C3, lecture d'un message d'erreur"},
+        "C": {"erreur": "Supprimer le code fautif supprime aussi la fonctionnalité. Le message désigne un défaut à corriger, pas un morceau à retirer.", "renvoi": "C3, démarche de débogage"}
+      }
+    },
+    {
+      "id": "Q5", "capacite": "C4",
+      "enonce": "Une docstring de fonction bien rédigée précise notamment :",
+      "options": {"A": "le rôle de la fonction, ses préconditions et ses postconditions.", "B": "le seul nom de l'auteur du code.", "C": "la seule date de la dernière modification.", "D": "rien du tout, le code se suffisant à lui-même."},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "L'auteur relève du suivi de version. La docstring s'adresse à qui veut UTILISER la fonction, et doit donc énoncer son contrat.", "renvoi": "C4, documentation d'une fonction"},
+        "C": {"erreur": "La date est déjà tenue par l'outil de gestion de versions, et n'apprend rien sur le comportement de la fonction.", "renvoi": "C4, documentation d'une fonction"},
+        "D": {"erreur": "Le code dit COMMENT la fonction procède, jamais ce qu'elle promet ni ce qu'elle exige. C'est exactement ce que la docstring apporte.", "renvoi": "C4, documentation d'une fonction"}
+      }
+    },
+    {
+      "id": "Q6", "capacite": "C4",
+      "enonce": "Une présentation orale efficace d'un projet informatique met en avant :",
+      "options": {"A": "la lecture du code source, ligne par ligne.", "B": "le raisonnement suivi : problème traité, choix effectués, difficultés surmontées.", "C": "l'énumération de tous les noms de variables employés.", "D": "la récitation de la documentation officielle de Python."},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Le code est disponible à la lecture. L'oral doit apporter ce qu'il ne montre pas : les intentions et les arbitrages.", "renvoi": "C4, présentation orale d'un projet"},
+        "C": {"erreur": "Une énumération de détails d'implémentation n'expose ni le problème ni la solution retenue.", "renvoi": "C4, présentation orale d'un projet"},
+        "D": {"erreur": "La documentation d'un langage n'est pas le projet. L'oral porte sur le travail conduit par l'élève.", "renvoi": "C4, présentation orale d'un projet"}
+      }
+    }
+  ]
 }

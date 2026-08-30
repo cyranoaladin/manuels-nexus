@@ -1,5 +1,162 @@
 {
   "chapitre": "1NSI-TABLES",
-  "titre": "QCM d'auto-évaluation -- 1NSI-TABLES",
-  "questions": []
+  "titre": "Traitement de données en tables — QCM d'auto-évaluation",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "Après import d'un fichier CSV avec \\code{csv.DictReader}, la valeur de la colonne \\code{age} écrite \\code{16} dans le fichier est de type :",
+      "options": {
+        "A": "\\code{int}",
+        "B": "\\code{float}",
+        "C": "\\code{str}",
+        "D": "\\code{bool}"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'élève suppose que le lecteur CSV devine le type. Un fichier CSV ne contient que du texte : \\code{csv.DictReader} renvoie toujours des chaînes, et la conversion en entier reste à la charge du programme.",
+          "renvoi": "C1, import et typage des colonnes"
+        },
+        "B": {
+          "erreur": "Même confusion qu'en A, avec en plus l'idée qu'un nombre lu serait flottant par défaut. Aucune conversion automatique n'a lieu à l'import.",
+          "renvoi": "C1, import et typage des colonnes"
+        },
+        "D": {
+          "erreur": "L'élève confond le type de la valeur et le résultat d'un test sur cette valeur. Une colonne ne devient booléenne que si le programme la convertit explicitement.",
+          "renvoi": "C1, import et typage des colonnes"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "Le « domaine de valeurs » d'une colonne d'une table désigne :",
+      "options": {
+        "A": "le nombre de lignes de la table.",
+        "B": "l'ensemble des valeurs que cette colonne peut prendre.",
+        "C": "le type Python de la colonne, et rien d'autre.",
+        "D": "le nom de la colonne dans le fichier CSV."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'élève confond le domaine, qui décrit la colonne, avec la taille de la table, qui décrit son contenu.",
+          "renvoi": "C1, descripteur d'une table"
+        },
+        "C": {
+          "erreur": "Le type est une contrainte parmi d'autres. Le domaine est plus fin : la colonne \\code{mois} est de type entier, mais son domaine se limite aux valeurs de 1 à 12.",
+          "renvoi": "C1, descripteur d'une table"
+        },
+        "D": {
+          "erreur": "L'élève confond le descripteur, qui nomme la colonne, avec le domaine, qui délimite ses valeurs.",
+          "renvoi": "C1, descripteur d'une table"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C2",
+      "enonce": "Pour extraire les lignes d'une table qui vérifient un critère, sans modifier la table de départ, l'outil adapté en Python est :",
+      "options": {
+        "A": "une compréhension de liste assortie d'une condition.",
+        "B": "une réécriture directe du fichier CSV.",
+        "C": "la fonction \\code{sorted}.",
+        "D": "l'opérateur \\code{+} entre les deux tables."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "L'élève agit sur le fichier au lieu d'agir sur la table chargée en mémoire. Filtrer est une lecture : cela ne doit rien détruire à la source.",
+          "renvoi": "C2, filtrage par compréhension"
+        },
+        "C": {
+          "erreur": "L'élève confond filtrer et trier. \\code{sorted} réordonne toutes les lignes ; il n'en supprime aucune.",
+          "renvoi": "C2, filtrage par compréhension"
+        },
+        "D": {
+          "erreur": "L'élève confond filtrer et concaténer. L'opérateur \\code{+} allonge la table au lieu de la restreindre.",
+          "renvoi": "C2, filtrage par compréhension"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "Pour détecter les doublons sur la colonne \\code{id} d'une table, il faut :",
+      "options": {
+        "A": "comparer chaque ligne entière à toutes les autres.",
+        "B": "trier la table par ordre alphabétique, puis compter les lignes.",
+        "C": "compter les occurrences de chaque valeur de la seule colonne \\code{id}.",
+        "D": "supprimer toutes les lignes strictement identiques."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'élève compare les lignes entières. Deux inscriptions du même identifiant qui diffèrent par une seule autre colonne échappent alors à la détection, alors que ce sont précisément les doublons cherchés.",
+          "renvoi": "C2, doublons sur une colonne"
+        },
+        "B": {
+          "erreur": "Le tri rapproche les doublons mais ne les compte pas. Il reste à comparer les valeurs voisines de la colonne visée.",
+          "renvoi": "C2, doublons sur une colonne"
+        },
+        "D": {
+          "erreur": "L'élève traite les doublons avant de les avoir identifiés, et sur le mauvais critère : la ligne entière au lieu de la colonne \\code{id}.",
+          "renvoi": "C2, doublons sur une colonne"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C3",
+      "enonce": "Que fait l'appel \\code{sorted(table, key=lambda ligne: ligne[\"age\"])} ?",
+      "options": {
+        "A": "Il trie \\code{table} sur place et ne renvoie rien.",
+        "B": "Il provoque une erreur, car \\code{table} contient des dictionnaires.",
+        "C": "Il ne trie que les colonnes numériques, jamais les chaînes.",
+        "D": "Il renvoie une nouvelle liste triée, sans modifier \\code{table}."
+      },
+      "correcte": "D",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'élève confond \\code{sorted} et la méthode \\code{list.sort}. C'est \\code{sort} qui trie sur place et renvoie \\code{None} ; \\code{sorted} construit une nouvelle liste.",
+          "renvoi": "C3, tri suivant une colonne"
+        },
+        "B": {
+          "erreur": "Le paramètre \\code{key} sert exactement à cela : il extrait de chaque ligne la valeur à comparer, si bien que les dictionnaires ne sont jamais comparés entre eux.",
+          "renvoi": "C3, tri suivant une colonne"
+        },
+        "C": {
+          "erreur": "Le tri fonctionne sur toute donnée ordonnable, chaînes comprises, qui sont comparées dans l'ordre lexicographique.",
+          "renvoi": "C3, tri suivant une colonne"
+        }
+      }
+    },
+    {
+      "id": "Q6",
+      "capacite": "C4",
+      "enonce": "Deux tables sont fusionnées sur une colonne commune. Par défaut, une ligne de \\code{table1} dont la clé n'apparaît dans aucune ligne de \\code{table2} :",
+      "options": {
+        "A": "n'apparaît pas dans le résultat.",
+        "B": "provoque l'arrêt du programme.",
+        "C": "apparaît dans le résultat, avec des valeurs vides pour les colonnes de \\code{table2}.",
+        "D": "est recopiée deux fois dans le résultat."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Une clé sans correspondance est un cas ordinaire de fusion, pas une anomalie : le programme continue, la ligne est simplement écartée.",
+          "renvoi": "C4, fusion de deux tables"
+        },
+        "C": {
+          "erreur": "L'élève décrit une fusion qui conserve toutes les lignes de la table de gauche. C'est une autre opération, qu'il faut programmer explicitement ; ce n'est pas le comportement par défaut.",
+          "renvoi": "C4, fusion de deux tables"
+        },
+        "D": {
+          "erreur": "La duplication survient lorsqu'une clé apparaît plusieurs fois dans \\code{table2}, jamais lorsqu'elle en est absente.",
+          "renvoi": "C4, fusion de deux tables"
+        }
+      }
+    }
+  ]
 }

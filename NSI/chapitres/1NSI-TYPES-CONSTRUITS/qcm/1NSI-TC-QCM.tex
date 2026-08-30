@@ -1,121 +1,283 @@
-% META: {"id": "1NSI-TC-QCM", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "qcm", "capacites": ["1NSI-TYPES-CONSTRUITS-C1", "1NSI-TYPES-CONSTRUITS-C2", "1NSI-TYPES-CONSTRUITS-C3", "1NSI-TYPES-CONSTRUITS-C4", "1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
-\section*{QCM --- Types construits}
-\textit{Pour chaque question, une seule réponse est correcte.}
+% META: {"id": "1NSI-TYPES-CONSTRUITS-QCM", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "qcm", "genere_depuis": "chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\bigskip
+\section*{\textcolor{chapcolor}{\MakeUppercase{Types construits : p-uplets, tableaux, dictionnaires — QCM d'auto-évaluation}}}
 
-\textbf{Q1.} (C1) Que renvoie \lstinline{type((3, 5))} ?
-\begin{enumerate}[label=\Alph*.]
-  \item \lstinline{<class 'list'>}
-  \item \lstinline{<class 'tuple'>}
-  \item \lstinline{<class 'int'>}
+\begin{center}
+\textit{Pour chaque question, une seule réponse est exacte.}
+\end{center}
+
+\begin{enumerate}
+
+\item[] \textbf{Capacité C1}
+
+\item \textbf{[Q1]} Que renvoie \code{type((3, 5))} ?
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{<class 'tuple'>}
+    \item \code{<class 'list'>}
+    \item \code{<class 'int'>}
+    \item \code{<class 'set'>}
+  \end{enumerate}
+
+\item \textbf{[Q2]} Qu'obtient-on en exécutant \code{t = (1, 2)} puis \code{t[0] = 5} ?
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{t} vaut \code{(5, 2)}
+    \item une erreur \code{TypeError}
+    \item \code{t} vaut \code{(1, 2, 5)}
+    \item une erreur \code{IndexError}
+  \end{enumerate}
+
+\item \textbf{[Q3]} Après \code{a, b = (10, 20)}, quelle est la valeur de \code{b} ?
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{10}
+    \item \code{(10, 20)}
+    \item \code{20}
+    \item \code{None}
+  \end{enumerate}
+
+\item[] \textbf{Capacité C2}
+
+\item \textbf{[Q4]} Qu'affiche \code{t = [3, 1, 4]} suivi de \code{t.append(1)} puis \code{print(len(t))} ?
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{3}
+    \item \code{5}
+    \item \code{1}
+    \item \code{4}
+  \end{enumerate}
+
+\item \textbf{[Q5]} Quelle expression construit exactement la liste \code{[0, 2, 4, 6, 8]} ?
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{[x * 2 for x in range(10)]}
+    \item \code{[x for x in range(10) if x \% 2 == 0]}
+    \item \code{[x for x in range(8)]}
+    \item \code{[x + 2 for x in range(5)]}
+  \end{enumerate}
+
+\item \textbf{[Q6]} Qu'obtient-on avec \code{t = [10, 20, 30]} puis \code{print(t[3])} ?
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{30}
+    \item \code{None}
+    \item une erreur \code{IndexError}
+    \item \code{10}
+  \end{enumerate}
+
+\item[] \textbf{Capacité C3}
+
+\item \textbf{[Q7]} Qu'affiche \code{g = [[1, 2], [3, 4]]} suivi de \code{print(g[1][0])} ?
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{2}
+    \item \code{1}
+    \item \code{4}
+    \item \code{3}
+  \end{enumerate}
+
+\item \textbf{[Q8]} Quelle expression crée une grille de $3$ lignes et $2$ colonnes remplie de zéros, dont les lignes sont indépendantes ?
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{[[0] * 2 for \_ in range(3)]}
+    \item \code{[[0, 0]] * 3}
+    \item \code{[[0 for \_ in range(3)] for \_ in range(2)]}
+    \item \code{[0] * 6}
+  \end{enumerate}
+
+\item \textbf{[Q9]} Combien de lignes et de colonnes possède la grille \code{g = [[5, 6, 7], [8, 9, 10]]} ?
+  \begin{enumerate}[label=\Alph*.]
+    \item $3$ lignes et $2$ colonnes
+    \item $6$ lignes et $1$ colonne
+    \item $2$ lignes et $3$ colonnes
+    \item $1$ ligne et $6$ colonnes
+  \end{enumerate}
+
+\item[] \textbf{Capacité C4}
+
+\item \textbf{[Q10]} Qu'obtient-on avec \code{d = \{"a": 1, "b": 2\}} puis \code{print(d["c"])} ?
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{None}
+    \item \code{0}
+    \item \code{2}
+    \item une erreur \code{KeyError}
+  \end{enumerate}
+
+\item \textbf{[Q11]} Comment ajouter au dictionnaire \code{d} la clé \code{"c"} associée à la valeur $3$ ?
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{d["c"] = 3}
+    \item \code{d.append("c", 3)}
+    \item \code{d.add("c": 3)}
+    \item \code{d + \{"c": 3\}}
+  \end{enumerate}
+
+\item \textbf{[Q12]} Quelle boucle parcourt à la fois les clés et les valeurs d'un dictionnaire \code{d} ?
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{for k in d:}
+    \item \code{for k, v in d.items():}
+    \item \code{for v in d.values():}
+    \item \code{for k, v in d:}
+  \end{enumerate}
+
+\item[] \textbf{Capacité C5}
+
+\item \textbf{[Q13]} Qu'affiche \code{a = [1, 2]} suivi de \code{b = a}, \code{b.append(3)} puis \code{print(a)} ?
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{[1, 2]}
+    \item une erreur
+    \item \code{[3]}
+    \item \code{[1, 2, 3]}
+  \end{enumerate}
+
+\item \textbf{[Q14]} Comment obtenir une copie indépendante d'une liste \code{t} de nombres ?
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{copie = list(t)}
+    \item \code{copie = t}
+    \item \code{copie = t.append()}
+    \item \code{copie = len(t)}
+  \end{enumerate}
+
+\item \textbf{[Q15]} Qu'affiche \code{g = [[1], [2]]} suivi de \code{h = list(g)}, \code{h[0].append(9)} puis \code{print(g[0])} ?
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{[1]}
+    \item \code{[1, 9]}
+    \item une erreur
+    \item \code{[9]}
+  \end{enumerate}
+
+\item \textbf{[Q16]} Parmi ces couples de types, lequel ne contient que des types mutables ?
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{int} et \code{list}
+    \item \code{tuple} et \code{str}
+    \item \code{list} et \code{dict}
+    \item \code{str} et \code{dict}
+  \end{enumerate}
+
 \end{enumerate}
 
-\textbf{Q2.} (C1) Que se passe-t-il si on exécute ce code ?
-\begin{python}
-t = (1, 2)
-t[0] = 5
-\end{python}
-\begin{enumerate}[label=\Alph*.]
-  \item \lstinline{t} vaut \lstinline{(5, 2)}
-  \item Une erreur \lstinline{TypeError}
-  \item \lstinline{t} vaut \lstinline{(1, 2, 5)}
-\end{enumerate}
+% NEXUS-QCM-TEACHER-ONLY-BEGIN
+\ifnxVersionProfesseur
+\clearpage
+\section*{Clé de correction — réservée au professeur}
 
-\textbf{Q3.} (C1) \lstinline{a, b = (10, 20)}. Quelle est la valeur de \lstinline{b} ?
-\begin{enumerate}[label=\Alph*.]
-  \item \lstinline{10}
-  \item \lstinline{(10, 20)}
-  \item \lstinline{20}
-\end{enumerate}
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacité & Réponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C1 & \textbf{B} \\
+Q3 & C1 & \textbf{C} \\
+Q4 & C2 & \textbf{D} \\
+Q5 & C2 & \textbf{B} \\
+Q6 & C2 & \textbf{C} \\
+Q7 & C3 & \textbf{D} \\
+Q8 & C3 & \textbf{A} \\
+Q9 & C3 & \textbf{C} \\
+Q10 & C4 & \textbf{D} \\
+Q11 & C4 & \textbf{A} \\
+Q12 & C4 & \textbf{B} \\
+Q13 & C5 & \textbf{D} \\
+Q14 & C5 & \textbf{A} \\
+Q15 & C5 & \textbf{B} \\
+Q16 & C5 & \textbf{C} \\
+\hline
+\end{tabular}
+\end{center}
 
-\textbf{Q4.} (C2) \lstinline{t = [3, 1, 4]; t.append(1); print(len(t))}. Qu'affiche ce programme ?
-\begin{enumerate}[label=\Alph*.]
-  \item \lstinline{3}
-  \item \lstinline{4}
-  \item \lstinline{5}
-\end{enumerate}
+\subsection*{Diagnostic des réponses erronées}
 
-\textbf{Q5.} (C2) Quelle expression construit la liste \lstinline{[0, 2, 4, 6, 8]} ?
-\begin{enumerate}[label=\Alph*.]
-  \item \lstinline{[x for x in range(10) if x % 2 == 0]}
-  \item \lstinline{[x * 2 for x in range(10)]}
-  \item \lstinline{[x for x in range(8)]}
-\end{enumerate}
-
-\textbf{Q6.} (C2) \lstinline{t = [10, 20, 30]; print(t[3])}. Qu'obtient-on ?
-\begin{enumerate}[label=\Alph*.]
-  \item \lstinline{30}
-  \item \lstinline{IndexError}
-  \item \lstinline{None}
-\end{enumerate}
-
-\textbf{Q7.} (C3) \lstinline{g = [[1, 2], [3, 4]]; print(g[1][0])}. Qu'affiche ce programme ?
-\begin{enumerate}[label=\Alph*.]
-  \item \lstinline{2}
-  \item \lstinline{3}
-  \item \lstinline{1}
-\end{enumerate}
-
-\textbf{Q8.} (C3) Quelle expression crée une grille 3$\times$2 de zéros sans alias ?
-\begin{enumerate}[label=\Alph*.]
-  \item \lstinline{[[0, 0]] * 3}
-  \item \lstinline{[[0] * 2 for _ in range(3)]}
-  \item \lstinline{[[0 for _ in range(3)] for _ in range(2)]}
-\end{enumerate}
-
-\textbf{Q9.} (C3) Combien de lignes et de colonnes a \lstinline{g = [[5, 6, 7], [8, 9, 10]]} ?
-\begin{enumerate}[label=\Alph*.]
-  \item 3 lignes, 2 colonnes
-  \item 2 lignes, 3 colonnes
-  \item 6 lignes, 1 colonne
-\end{enumerate}
-
-\textbf{Q10.} (C4) \lstinline|d = {"a": 1, "b": 2}; print(d["c"])|. Qu'obtient-on ?
-\begin{enumerate}[label=\Alph*.]
-  \item \lstinline{None}
-  \item \lstinline{0}
-  \item \lstinline{KeyError}
-\end{enumerate}
-
-\textbf{Q11.} (C4) Comment ajouter la clé \lstinline{"c"} avec la valeur 3 à \lstinline{d} ?
-\begin{enumerate}[label=\Alph*.]
-  \item \lstinline{d.append("c", 3)}
-  \item \lstinline|d["c"] = 3|
-  \item \lstinline{d.add("c": 3)}
-\end{enumerate}
-
-\textbf{Q12.} (C4) Quelle boucle parcourt clés ET valeurs d'un dictionnaire \lstinline{d} ?
-\begin{enumerate}[label=\Alph*.]
-  \item \lstinline{for k in d:}
-  \item \lstinline{for k, v in d.items():}
-  \item \lstinline{for v in d.values():}
-\end{enumerate}
-
-\textbf{Q13.} (C5) \lstinline{a = [1, 2]; b = a; b.append(3); print(a)}. Qu'affiche-t-il ?
-\begin{enumerate}[label=\Alph*.]
-  \item \lstinline{[1, 2]}
-  \item \lstinline{[1, 2, 3]}
-  \item Une erreur
-\end{enumerate}
-
-\textbf{Q14.} (C5) Comment obtenir une copie indépendante d'une liste \lstinline{t} ?
-\begin{enumerate}[label=\Alph*.]
-  \item \lstinline{copie = t}
-  \item \lstinline{copie = list(t)}
-  \item \lstinline{copie = t * 1}
-\end{enumerate}
-
-\textbf{Q15.} (C5) \lstinline{g = [[1], [2]]; h = list(g); h[0].append(9); print(g[0])}.
-\begin{enumerate}[label=\Alph*.]
-  \item \lstinline{[1]}
-  \item \lstinline{[1, 9]}
-  \item Une erreur
-\end{enumerate}
-
-\textbf{Q16.} (C5) Parmi ces types, lesquels sont mutables ?
-\begin{enumerate}[label=\Alph*.]
-  \item \lstinline{tuple} et \lstinline{str}
-  \item \lstinline{list} et \lstinline{dict}
-  \item \lstinline{int} et \lstinline{list}
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — L'élève confond les délimiteurs : les crochets construisent une liste, les parenthèses un p-uplet. \emph{Renvoi : C1, p-uplets.}
+    \item \textbf{C} — L'élève lit la parenthèse comme un simple groupement arithmétique. C'est la virgule, et non la parenthèse, qui crée le p-uplet. \emph{Renvoi : C1, p-uplets.}
+    \item \textbf{D} — Un ensemble s'écrit avec des accolades et ne conserve pas l'ordre ; le p-uplet est ordonné. \emph{Renvoi : C1, p-uplets.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — L'élève traite le p-uplet comme une liste. Un p-uplet est immuable : aucune de ses cases ne peut être réaffectée après sa création. \emph{Renvoi : C1, immuabilité des p-uplets.}
+    \item \textbf{C} — L'élève lit l'affectation comme un ajout. Même sur une liste, \code{t[0] = 5} remplacerait la case $0$ au lieu d'allonger la séquence. \emph{Renvoi : C1, immuabilité des p-uplets.}
+    \item \textbf{D} — L'indice $0$ est valide pour un p-uplet de deux éléments. Ce n'est pas l'indice qui est refusé, mais la modification. \emph{Renvoi : C1, immuabilité des p-uplets.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — L'élève inverse l'ordre du dépaquetage : les valeurs sont distribuées de gauche à droite, donc \code{a} reçoit $10$ et \code{b} reçoit $20$. \emph{Renvoi : C1, dépaquetage d'un p-uplet.}
+    \item \textbf{B} — L'élève n'a pas vu le dépaquetage : la virgule à gauche du signe égal répartit les composantes au lieu d'affecter le p-uplet entier. \emph{Renvoi : C1, dépaquetage d'un p-uplet.}
+    \item \textbf{D} — Le dépaquetage affecte réellement les deux noms. \code{None} n'apparaîtrait que si la fonction appelée ne renvoyait rien. \emph{Renvoi : C1, dépaquetage d'un p-uplet.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — L'élève donne la longueur AVANT l'ajout. La méthode \code{append} modifie la liste sur place, donc sa longueur augmente. \emph{Renvoi : C2, modification d'un tableau.}
+    \item \textbf{B} — L'élève compte deux ajouts. \code{append} n'insère qu'un seul élément, même si sa valeur figure déjà dans la liste. \emph{Renvoi : C2, modification d'un tableau.}
+    \item \textbf{C} — L'élève affiche la valeur ajoutée au lieu de la longueur. \code{len} compte les éléments ; il ne les lit pas. \emph{Renvoi : C2, modification d'un tableau.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — L'expression produit dix termes, de $0$ à $18$ : l'élève a doublé les valeurs au lieu de filtrer les paires, si bien que la liste dépasse $8$. \emph{Renvoi : C2, compréhension de liste.}
+    \item \textbf{C} — L'élève retient le dernier terme attendu, $8$, et le prend pour la borne du \code{range}. L'expression énumère alors tous les entiers de $0$ à $7$, pairs et impairs. \emph{Renvoi : C2, compréhension de liste.}
+    \item \textbf{D} — L'élève translate au lieu de filtrer : l'expression produit $[2, 3, 4, 5, 6]$, dont les termes ne sont même pas tous pairs. \emph{Renvoi : C2, compréhension de liste.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — L'élève numérote les cases à partir de $1$. Les indices commencent à $0$ : le dernier élément d'une liste de trois cases porte l'indice $2$. \emph{Renvoi : C2, indices d'un tableau.}
+    \item \textbf{B} — Un indice hors bornes lève une exception ; il ne renvoie pas discrètement une valeur vide, contrairement à ce qui se passerait pour une clé absente traitée par \code{get}. \emph{Renvoi : C2, indices d'un tableau.}
+    \item \textbf{D} — L'élève suppose que l'indexation reboucle au début. Aucun retour circulaire n'a lieu pour un indice positif hors bornes. \emph{Renvoi : C2, indices d'un tableau.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — L'élève inverse les deux indices : il a lu \code{g[0][1]}. Le premier indice choisit la ligne, le second la colonne. \emph{Renvoi : C3, grille et tableau de tableaux.}
+    \item \textbf{B} — L'élève lit la première case de la première ligne, comme si le premier indice était sans effet. \emph{Renvoi : C3, grille et tableau de tableaux.}
+    \item \textbf{C} — L'élève lit la dernière case de la deuxième ligne : l'indice de colonne $0$ a été pris pour le dernier au lieu du premier. \emph{Renvoi : C3, grille et tableau de tableaux.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{B} — L'opérateur \code{*} recopie la RÉFÉRENCE de la même ligne trois fois. Modifier une case en modifie trois : après \code{g[0][0] = 9}, la grille vaut \code{[[9, 0], [9, 0], [9, 0]]}. \emph{Renvoi : C3, alias dans une grille.}
+    \item \textbf{C} — Les lignes sont bien indépendantes, mais les dimensions sont inversées : cette expression produit $2$ lignes de $3$ cases. \emph{Renvoi : C3, dimensions d'une grille.}
+    \item \textbf{D} — L'élève construit une liste plate de six zéros. Le nombre de cases est juste, mais la structure à deux niveaux, indispensable à l'accès \code{g[i][j]}, est perdue. \emph{Renvoi : C3, grille et tableau de tableaux.}
+  \end{itemize}
+  \item \textbf{Q9}
+  \begin{itemize}
+    \item \textbf{A} — L'élève intervertit les deux dimensions. Le nombre de lignes est la longueur de la grille, ici $2$ ; le nombre de colonnes est la longueur d'une ligne, ici $3$. \emph{Renvoi : C3, dimensions d'une grille.}
+    \item \textbf{B} — L'élève compte les cases au lieu des lignes. Le total de $6$ est le produit des deux dimensions, non l'une d'elles. \emph{Renvoi : C3, dimensions d'une grille.}
+    \item \textbf{D} — L'élève aplatit la grille et perd le niveau intermédiaire ; la structure comporte bien deux sous-listes distinctes. \emph{Renvoi : C3, dimensions d'une grille.}
+  \end{itemize}
+  \item \textbf{Q10}
+  \begin{itemize}
+    \item \textbf{A} — L'élève attribue à l'accès par crochets le comportement de la méthode \code{get}, qui renvoie effectivement \code{None} pour une clé absente. Les crochets, eux, lèvent une exception. \emph{Renvoi : C4, accès à une clé absente.}
+    \item \textbf{B} — Un dictionnaire ne crée pas de valeur par défaut à la lecture ; aucune clé \code{"c"} n'existe, et rien ne vaut $0$. \emph{Renvoi : C4, accès à une clé absente.}
+    \item \textbf{C} — L'élève lit la dernière valeur enregistrée, comme si l'accès portait sur une position. Un dictionnaire s'interroge par clé, jamais par rang. \emph{Renvoi : C4, accès par clé.}
+  \end{itemize}
+  \item \textbf{Q11}
+  \begin{itemize}
+    \item \textbf{B} — L'élève transpose une méthode de liste. \code{append} ajoute en fin de séquence ; un dictionnaire n'a pas de fin, il a des clés. \emph{Renvoi : C4, ajout dans un dictionnaire.}
+    \item \textbf{C} — Le dictionnaire n'a pas de méthode \code{add}, et la syntaxe \code{"c": 3} n'est valide qu'à l'intérieur d'une écriture littérale, pas comme argument. \emph{Renvoi : C4, ajout dans un dictionnaire.}
+    \item \textbf{D} — L'opérateur \code{+} concatène des séquences ; il n'est pas défini entre deux dictionnaires et lèverait une \code{TypeError}. \emph{Renvoi : C4, ajout dans un dictionnaire.}
+  \end{itemize}
+  \item \textbf{Q12}
+  \begin{itemize}
+    \item \textbf{A} — Parcourir directement un dictionnaire ne donne que ses clés ; la valeur doit ensuite être demandée par \code{d[k]}. \emph{Renvoi : C4, parcours d'un dictionnaire.}
+    \item \textbf{C} — Cette boucle ne livre que les valeurs, et la clé associée devient inaccessible. \emph{Renvoi : C4, parcours d'un dictionnaire.}
+    \item \textbf{D} — L'élève attend un couple sans le demander. Il faut \code{d.items()} pour que chaque tour fournisse la paire clé-valeur ; sans lui, Python tente de dépaqueter une clé et échoue. \emph{Renvoi : C4, parcours d'un dictionnaire.}
+  \end{itemize}
+  \item \textbf{Q13}
+  \begin{itemize}
+    \item \textbf{A} — L'élève croit que l'affectation copie la liste. Elle ne crée qu'un second nom pour le MÊME objet : ce que l'on modifie par \code{b} se voit par \code{a}. \emph{Renvoi : C5, alias et objets mutables.}
+    \item \textbf{B} — Aucune règle n'est enfreinte : donner deux noms au même objet est un usage courant, et non une faute. \emph{Renvoi : C5, alias et objets mutables.}
+    \item \textbf{C} — L'élève croit que \code{b = a} vide la liste avant l'ajout. L'affectation ne modifie pas le contenu de l'objet désigné. \emph{Renvoi : C5, alias et objets mutables.}
+  \end{itemize}
+  \item \textbf{Q14}
+  \begin{itemize}
+    \item \textbf{B} — C'est précisément l'alias à éviter : les deux noms désignent le même objet, et toute modification se répercute. \emph{Renvoi : C5, copie d'une liste.}
+    \item \textbf{C} — \code{append} ajoute un élément et renvoie \code{None} ; appelée sans argument, elle lève de plus une \code{TypeError}. \emph{Renvoi : C5, copie d'une liste.}
+    \item \textbf{D} — L'élève récupère le nombre d'éléments, un entier, au lieu de leur contenu. \emph{Renvoi : C5, copie d'une liste.}
+  \end{itemize}
+  \item \textbf{Q15}
+  \begin{itemize}
+    \item \textbf{A} — L'élève croit \code{list(g)} suffisant. La copie est SUPERFICIELLE : elle duplique la liste extérieure, mais ses cases pointent encore vers les mêmes sous-listes. \emph{Renvoi : C5, copie superficielle et copie profonde.}
+    \item \textbf{C} — Aucune règle n'est enfreinte : la sous-liste est mutable et accepte l'ajout. \emph{Renvoi : C5, copie superficielle et copie profonde.}
+    \item \textbf{D} — L'ajout ne remplace pas le contenu existant : \code{append} allonge la sous-liste, qui contenait déjà $1$. \emph{Renvoi : C5, copie superficielle et copie profonde.}
+  \end{itemize}
+  \item \textbf{Q16}
+  \begin{itemize}
+    \item \textbf{A} — La liste est mutable, mais l'entier ne l'est pas : incrémenter une variable entière crée un nouvel objet plutôt que d'en modifier un. \emph{Renvoi : C5, types mutables et immuables.}
+    \item \textbf{B} — Ces deux types sont au contraire les immuables les plus courants ; c'est l'exact opposé de ce qui est demandé. \emph{Renvoi : C5, types mutables et immuables.}
+    \item \textbf{D} — Le dictionnaire est mutable, mais la chaîne ne l'est pas : remplacer un caractère par \code{s[0] = "x"} lève une \code{TypeError}. \emph{Renvoi : C5, types mutables et immuables.}
+  \end{itemize}
+\end{itemize}
+\fi
+% NEXUS-QCM-TEACHER-ONLY-END

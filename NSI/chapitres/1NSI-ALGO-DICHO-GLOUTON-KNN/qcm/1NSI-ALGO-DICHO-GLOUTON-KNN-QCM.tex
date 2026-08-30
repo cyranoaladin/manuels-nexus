@@ -1,77 +1,129 @@
-% META: {"id": "1NSI-ALGO-DICHO-GLOUTON-KNN-QCM", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "qcm", "capacites": ["P-ALGO-04","P-ALGO-05","P-ALGO-03"], "status": "needs_review"}
+% META: {"id": "1NSI-ALGO-DICHO-GLOUTON-KNN-QCM", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "qcm", "genere_depuis": "chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Dichotomie, gloutons, k plus proches voisins}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Dichotomie, algorithmes gloutons, k plus proches voisins — QCM d'auto-évaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule réponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1 --- Dichotomie}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} La recherche dichotomique nécessite que le tableau soit :
+\item[] \textbf{Capacité C1}
+
+\item \textbf{[Q1]} La recherche dichotomique exige que le tableau soit :
   \begin{enumerate}[label=\Alph*.]
-    \item de taille paire.
     \item trié.
+    \item de taille paire.
     \item composé uniquement d'entiers.
     \item de taille inférieure à $100$.
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q2]} Le variant de boucle $V=\text{borne\_sup}-\text{borne\_inf}$ de la recherche dichotomique sert à prouver :
+\item \textbf{[Q2]} Dans la recherche dichotomique, le variant de boucle $V = \text{borne sup} - \text{borne inf}$ sert à prouver :
   \begin{enumerate}[label=\Alph*.]
-    \item que l'algorithme trouve toujours la valeur cherchée.
-    \item que la boucle termine en un nombre fini d'itérations.
     \item que le tableau est trié.
+    \item que la boucle se termine en un nombre fini d'itérations.
+    \item que l'algorithme trouve toujours la valeur cherchée.
     \item que le coût est linéaire.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C2}
 
-\subsection*{C2 --- Algorithmes gloutons}
-
-\item \textbf{[Q3]} Un algorithme glouton fait, à chaque étape, le choix :
+\item \textbf{[Q3]} À chaque étape, un algorithme glouton effectue le choix :
   \begin{enumerate}[label=\Alph*.]
-    \item globalement optimal, garanti par calcul exhaustif.
-    \item localement optimal, sans revenir en arrière.
-    \item aléatoire.
     \item identique au choix précédent.
+    \item globalement optimal, garanti par un calcul exhaustif.
+    \item localement optimal, sans jamais revenir en arrière.
+    \item tiré au hasard parmi les possibilités restantes.
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q4]} Avec le système de pièces $\{4, 3, 1\}$, rendre $6$ de façon gloutonne donne :
+\item \textbf{[Q4]} Avec le système de pièces $\{4, 3, 1\}$, rendre la somme $6$ de façon gloutonne conduit à :
   \begin{enumerate}[label=\Alph*.]
-    \item la solution optimale à $2$ pièces.
-    \item une solution à $3$ pièces, non optimale.
+    \item la solution optimale, à $2$ pièces.
     \item une erreur, car $6$ n'est pas atteignable.
     \item une solution à $6$ pièces.
+    \item une solution à $3$ pièces, qui n'est pas optimale.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C3}
 
-\subsection*{C3 --- k plus proches voisins}
-
-\item \textbf{[Q5]} L'algorithme des k plus proches voisins prédit la classe d'un nouvel élément à partir de :
+\item \textbf{[Q5]} L'algorithme des $k$ plus proches voisins prédit la classe d'un nouvel élément à partir :
   \begin{enumerate}[label=\Alph*.]
-    \item la classe majoritaire de ses $k$ plus proches voisins déjà classés.
-    \item la classe du point le plus éloigné.
-    \item une valeur aléatoire.
-    \item la moyenne de toutes les classes existantes.
+    \item de la classe majoritaire parmi ses $k$ voisins les plus proches, déjà classés.
+    \item de la classe du point le plus éloigné.
+    \item d'un tirage aléatoire entre les classes existantes.
+    \item de la moyenne numérique de toutes les classes existantes.
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q6]} Choisir un $k$ égal à la taille totale du jeu de données (tous les points) :
+\item \textbf{[Q6]} Choisir $k$ égal au nombre total de points du jeu de données :
   \begin{enumerate}[label=\Alph*.]
-    \item est toujours la meilleure stratégie.
-    \item fait perdre le sens de la méthode, basée sur la proximité locale.
-    \item accélère toujours le calcul.
     \item est obligatoire pour que l'algorithme fonctionne.
+    \item vide la méthode de son sens, car elle repose sur la proximité locale.
+    \item est toujours la meilleure stratégie.
+    \item accélère toujours le calcul.
   \end{enumerate}
 
 \end{enumerate}
+
+% NEXUS-QCM-TEACHER-ONLY-BEGIN
+\ifnxVersionProfesseur
+\clearpage
+\section*{Clé de correction — réservée au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacité & Réponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C1 & \textbf{B} \\
+Q3 & C2 & \textbf{C} \\
+Q4 & C2 & \textbf{D} \\
+Q5 & C3 & \textbf{A} \\
+Q6 & C3 & \textbf{B} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des réponses erronées}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — L'élève retient que l'algorithme coupe le tableau en deux et en déduit une contrainte de parité. La division entière traite sans difficulté une taille impaire. \emph{Renvoi : C1, précondition de la dichotomie.}
+    \item \textbf{C} — Toute donnée munie d'un ordre convient, les chaînes de caractères comprises. C'est l'ordre qui compte, pas le type. \emph{Renvoi : C1, précondition de la dichotomie.}
+    \item \textbf{D} — L'élève inverse l'intérêt de la méthode : c'est sur les GRANDS tableaux que la dichotomie l'emporte le plus nettement sur le parcours séquentiel. \emph{Renvoi : C1, coût de la dichotomie.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — Le tri est une PRÉCONDITION, supposée vraie avant l'appel. Le variant, lui, est un outil de preuve de terminaison. \emph{Renvoi : C1, variant de boucle.}
+    \item \textbf{C} — L'élève confond terminaison et correction. Le variant garantit que l'algorithme s'arrête ; il ne dit rien de la justesse du résultat, et la valeur peut d'ailleurs être absente. \emph{Renvoi : C1, terminaison et correction.}
+    \item \textbf{D} — Le variant est divisé par deux à chaque tour, ce qui donne un coût logarithmique, et non linéaire. \emph{Renvoi : C1, coût de la dichotomie.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — Le choix est réévalué à chaque étape en fonction de ce qui reste à traiter ; rien n'impose qu'il se répète. \emph{Renvoi : C2, principe glouton.}
+    \item \textbf{B} — L'élève décrit une recherche exhaustive. Un glouton est justement rapide parce qu'il ne l'effectue PAS, ce qui explique qu'il puisse manquer l'optimum. \emph{Renvoi : C2, principe glouton.}
+    \item \textbf{D} — Le choix suit un critère explicite, par exemple la plus grande pièce disponible. Un glouton est déterministe. \emph{Renvoi : C2, principe glouton.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — La solution à $2$ pièces existe bien, $3+3$, mais le glouton ne la trouve pas : il prend d'abord $4$, puis ne peut compléter que par $1+1$. C'est le contre-exemple qui montre qu'un glouton n'est pas toujours optimal. \emph{Renvoi : C2, optimalité d'un algorithme glouton.}
+    \item \textbf{B} — La pièce de $1$ permet d'atteindre n'importe quelle somme entière ; le rendu est toujours possible. \emph{Renvoi : C2, système de pièces.}
+    \item \textbf{C} — L'élève n'emploie que des pièces de $1$. Le glouton commence par la plus grande pièce possible, ici $4$. \emph{Renvoi : C2, principe glouton.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{B} — L'élève inverse le critère de distance. La méthode repose sur l'hypothèse que les points proches se ressemblent ; le point le plus éloigné est le moins informatif. \emph{Renvoi : C3, principe des k plus proches voisins.}
+    \item \textbf{C} — La prédiction est entièrement déterminée par les données d'entraînement et la distance ; aucun hasard n'intervient. \emph{Renvoi : C3, principe des k plus proches voisins.}
+    \item \textbf{D} — Une classe est une étiquette, non un nombre : la moyenne de « chat » et « chien » n'a pas de sens. C'est un vote majoritaire, pas une moyenne. \emph{Renvoi : C3, classes et vote majoritaire.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — L'algorithme fonctionne pour tout $k$ compris entre $1$ et l'effectif total ; ce paramètre est un réglage, pas une contrainte. \emph{Renvoi : C3, choix du paramètre k.}
+    \item \textbf{C} — Avec un tel $k$, tous les points votent pour chaque prédiction : la réponse devient la classe majoritaire globale, identique pour n'importe quel élément. \emph{Renvoi : C3, choix du paramètre k.}
+    \item \textbf{D} — Le calcul est au contraire plus lourd, puisqu'il faut trier et considérer l'ensemble des distances. \emph{Renvoi : C3, choix du paramètre k.}
+  \end{itemize}
+\end{itemize}
+\fi
+% NEXUS-QCM-TEACHER-ONLY-END

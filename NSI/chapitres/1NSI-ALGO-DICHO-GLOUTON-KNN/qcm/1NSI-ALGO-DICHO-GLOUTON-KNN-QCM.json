@@ -1,5 +1,72 @@
 {
   "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-  "titre": "QCM d'auto-évaluation -- 1NSI-ALGO-DICHO-GLOUTON-KNN",
-  "questions": []
+  "titre": "Dichotomie, algorithmes gloutons, k plus proches voisins — QCM d'auto-évaluation",
+  "questions": [
+    {
+      "id": "Q1", "capacite": "C1",
+      "enonce": "La recherche dichotomique exige que le tableau soit :",
+      "options": {"A": "trié.", "B": "de taille paire.", "C": "composé uniquement d'entiers.", "D": "de taille inférieure à $100$."},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "L'élève retient que l'algorithme coupe le tableau en deux et en déduit une contrainte de parité. La division entière traite sans difficulté une taille impaire.", "renvoi": "C1, précondition de la dichotomie"},
+        "C": {"erreur": "Toute donnée munie d'un ordre convient, les chaînes de caractères comprises. C'est l'ordre qui compte, pas le type.", "renvoi": "C1, précondition de la dichotomie"},
+        "D": {"erreur": "L'élève inverse l'intérêt de la méthode : c'est sur les GRANDS tableaux que la dichotomie l'emporte le plus nettement sur le parcours séquentiel.", "renvoi": "C1, coût de la dichotomie"}
+      }
+    },
+    {
+      "id": "Q2", "capacite": "C1",
+      "enonce": "Dans la recherche dichotomique, le variant de boucle $V = \\text{borne sup} - \\text{borne inf}$ sert à prouver :",
+      "options": {"A": "que le tableau est trié.", "B": "que la boucle se termine en un nombre fini d'itérations.", "C": "que l'algorithme trouve toujours la valeur cherchée.", "D": "que le coût est linéaire."},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Le tri est une PRÉCONDITION, supposée vraie avant l'appel. Le variant, lui, est un outil de preuve de terminaison.", "renvoi": "C1, variant de boucle"},
+        "C": {"erreur": "L'élève confond terminaison et correction. Le variant garantit que l'algorithme s'arrête ; il ne dit rien de la justesse du résultat, et la valeur peut d'ailleurs être absente.", "renvoi": "C1, terminaison et correction"},
+        "D": {"erreur": "Le variant est divisé par deux à chaque tour, ce qui donne un coût logarithmique, et non linéaire.", "renvoi": "C1, coût de la dichotomie"}
+      }
+    },
+    {
+      "id": "Q3", "capacite": "C2",
+      "enonce": "À chaque étape, un algorithme glouton effectue le choix :",
+      "options": {"A": "identique au choix précédent.", "B": "globalement optimal, garanti par un calcul exhaustif.", "C": "localement optimal, sans jamais revenir en arrière.", "D": "tiré au hasard parmi les possibilités restantes."},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "Le choix est réévalué à chaque étape en fonction de ce qui reste à traiter ; rien n'impose qu'il se répète.", "renvoi": "C2, principe glouton"},
+        "B": {"erreur": "L'élève décrit une recherche exhaustive. Un glouton est justement rapide parce qu'il ne l'effectue PAS, ce qui explique qu'il puisse manquer l'optimum.", "renvoi": "C2, principe glouton"},
+        "D": {"erreur": "Le choix suit un critère explicite, par exemple la plus grande pièce disponible. Un glouton est déterministe.", "renvoi": "C2, principe glouton"}
+      }
+    },
+    {
+      "id": "Q4", "capacite": "C2",
+      "enonce": "Avec le système de pièces $\\{4, 3, 1\\}$, rendre la somme $6$ de façon gloutonne conduit à :",
+      "options": {"A": "la solution optimale, à $2$ pièces.", "B": "une erreur, car $6$ n'est pas atteignable.", "C": "une solution à $6$ pièces.", "D": "une solution à $3$ pièces, qui n'est pas optimale."},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "La solution à $2$ pièces existe bien, $3+3$, mais le glouton ne la trouve pas : il prend d'abord $4$, puis ne peut compléter que par $1+1$. C'est le contre-exemple qui montre qu'un glouton n'est pas toujours optimal.", "renvoi": "C2, optimalité d'un algorithme glouton"},
+        "B": {"erreur": "La pièce de $1$ permet d'atteindre n'importe quelle somme entière ; le rendu est toujours possible.", "renvoi": "C2, système de pièces"},
+        "C": {"erreur": "L'élève n'emploie que des pièces de $1$. Le glouton commence par la plus grande pièce possible, ici $4$.", "renvoi": "C2, principe glouton"}
+      }
+    },
+    {
+      "id": "Q5", "capacite": "C3",
+      "enonce": "L'algorithme des $k$ plus proches voisins prédit la classe d'un nouvel élément à partir :",
+      "options": {"A": "de la classe majoritaire parmi ses $k$ voisins les plus proches, déjà classés.", "B": "de la classe du point le plus éloigné.", "C": "d'un tirage aléatoire entre les classes existantes.", "D": "de la moyenne numérique de toutes les classes existantes."},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "L'élève inverse le critère de distance. La méthode repose sur l'hypothèse que les points proches se ressemblent ; le point le plus éloigné est le moins informatif.", "renvoi": "C3, principe des k plus proches voisins"},
+        "C": {"erreur": "La prédiction est entièrement déterminée par les données d'entraînement et la distance ; aucun hasard n'intervient.", "renvoi": "C3, principe des k plus proches voisins"},
+        "D": {"erreur": "Une classe est une étiquette, non un nombre : la moyenne de « chat » et « chien » n'a pas de sens. C'est un vote majoritaire, pas une moyenne.", "renvoi": "C3, classes et vote majoritaire"}
+      }
+    },
+    {
+      "id": "Q6", "capacite": "C3",
+      "enonce": "Choisir $k$ égal au nombre total de points du jeu de données :",
+      "options": {"A": "est obligatoire pour que l'algorithme fonctionne.", "B": "vide la méthode de son sens, car elle repose sur la proximité locale.", "C": "est toujours la meilleure stratégie.", "D": "accélère toujours le calcul."},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'algorithme fonctionne pour tout $k$ compris entre $1$ et l'effectif total ; ce paramètre est un réglage, pas une contrainte.", "renvoi": "C3, choix du paramètre k"},
+        "C": {"erreur": "Avec un tel $k$, tous les points votent pour chaque prédiction : la réponse devient la classe majoritaire globale, identique pour n'importe quel élément.", "renvoi": "C3, choix du paramètre k"},
+        "D": {"erreur": "Le calcul est au contraire plus lourd, puisqu'il faut trier et considérer l'ensemble des distances.", "renvoi": "C3, choix du paramètre k"}
+      }
+    }
+  ]
 }

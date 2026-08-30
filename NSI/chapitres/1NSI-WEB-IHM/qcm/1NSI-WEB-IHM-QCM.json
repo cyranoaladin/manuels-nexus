@@ -1,5 +1,116 @@
 {
   "chapitre": "1NSI-WEB-IHM",
-  "titre": "QCM d'auto-évaluation -- 1NSI-WEB-IHM",
-  "questions": []
+  "titre": "Interactions entre l'homme et la machine sur le Web — QCM d'auto-évaluation",
+  "questions": [
+    {
+      "id": "Q1", "capacite": "C1",
+      "enonce": "Dans une page Web, la balise \\code{<input type=\"checkbox\">} produit un composant graphique qui permet à l'utilisateur :",
+      "options": {"A": "de cocher ou décocher une option, indépendamment des autres.", "B": "de saisir une ligne de texte libre.", "C": "de choisir une seule valeur parmi plusieurs exclusives.", "D": "de déclencher l'envoi du formulaire."},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "La saisie de texte relève de \\code{<input type=\"text\">}. Une case à cocher ne transmet qu'un état, coché ou non.", "renvoi": "C1, composants graphiques d'une page"},
+        "C": {"erreur": "L'exclusivité mutuelle est le propre des boutons radio. Plusieurs cases à cocher d'un même formulaire peuvent être cochées ensemble.", "renvoi": "C1, composants graphiques d'une page"},
+        "D": {"erreur": "L'envoi est déclenché par un bouton de soumission. Cocher une case ne provoque à soi seul aucune requête.", "renvoi": "C1, composants graphiques d'une page"}
+      }
+    },
+    {
+      "id": "Q2", "capacite": "C2",
+      "enonce": "Le comportement d'un bouton lorsque l'utilisateur clique dessus est programmé :",
+      "options": {"A": "dans la feuille de style CSS.", "B": "en JavaScript, au moyen d'un gestionnaire d'événement.", "C": "uniquement dans la structure HTML, qui suffit à le décrire.", "D": "nulle part : un tel comportement ne peut pas être programmé."},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "CSS décrit l'apparence, y compris au survol. Il ne peut ni calculer ni modifier des données.", "renvoi": "C2, événements et gestionnaires"},
+        "C": {"erreur": "HTML déclare l'existence du bouton et son libellé. La réaction au clic demande du code, donc un gestionnaire d'événement.", "renvoi": "C2, événements et gestionnaires"},
+        "D": {"erreur": "C'est au contraire le mécanisme central de l'interactivité Web : à chaque événement peut être associée une fonction.", "renvoi": "C2, événements et gestionnaires"}
+      }
+    },
+    {
+      "id": "Q3", "capacite": "C3",
+      "enonce": "Un bouton est associé au gestionnaire \\code{onclick=\"compter()\"}, et la fonction \\code{compter} incrémente une variable puis l'affiche. Si l'on remplace l'appel par \\code{compter} sans les parenthèses dans un appel à \\code{addEventListener} :",
+      "options": {"A": "la fonction est exécutée immédiatement, dès le chargement de la page.", "B": "la page refuse de s'afficher.", "C": "la fonction est correctement enregistrée et sera exécutée à chaque clic.", "D": "le compteur est incrémenté deux fois par clic."},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'élève inverse les deux écritures. C'est justement AVEC les parenthèses que la fonction serait appelée sur-le-champ et son résultat enregistré à sa place.", "renvoi": "C3, gestionnaire d'événement et référence de fonction"},
+        "B": {"erreur": "Le document s'affiche indépendamment du code : une erreur de script laisse la page visible, avec un bouton inerte.", "renvoi": "C3, gestionnaire d'événement et référence de fonction"},
+        "D": {"erreur": "Le double comptage viendrait de deux gestionnaires enregistrés sur le même bouton, non de la présence ou de l'absence de parenthèses.", "renvoi": "C3, gestionnaire d'événement et référence de fonction"}
+      }
+    },
+    {
+      "id": "Q4", "capacite": "C4",
+      "enonce": "Le code exécuté sur le serveur :",
+      "options": {"A": "figure dans le code source de la page reçue par le navigateur.", "B": "s'exécute toujours après le code JavaScript du client.", "C": "ne peut jamais accéder à une base de données.", "D": "n'est jamais visible par l'utilisateur, qui n'en reçoit que le résultat."},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "L'élève confond le programme et sa sortie. Le navigateur reçoit le HTML PRODUIT par le serveur, jamais le code qui l'a produit.", "renvoi": "C4, exécution côté client et côté serveur"},
+        "B": {"erreur": "L'ordre est inverse : le serveur répond d'abord, et le JavaScript du client s'exécute ensuite, sur la page reçue.", "renvoi": "C4, exécution côté client et côté serveur"},
+        "C": {"erreur": "C'est au contraire le rôle habituel du serveur : la base lui est accessible, alors qu'elle ne l'est pas au client.", "renvoi": "C4, exécution côté client et côté serveur"}
+      }
+    },
+    {
+      "id": "Q5", "capacite": "C5",
+      "enonce": "Un cookie déposé par un site est :",
+      "options": {"A": "mémorisé par le navigateur et renvoyé au serveur lors des requêtes suivantes vers ce site.", "B": "conservé sur le serveur, sans jamais quitter celui-ci.", "C": "un programme exécuté automatiquement par le navigateur.", "D": "transmis à tous les sites visités ensuite, quels qu'ils soient."},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "L'élève place la mémorisation du mauvais côté. Le cookie est stocké chez le CLIENT ; c'est ce qui lui permet de reconnaître un visiteur qui revient.", "renvoi": "C5, mémorisation côté client"},
+        "C": {"erreur": "Un cookie est une donnée, généralement un couple nom-valeur, et non du code : il ne s'exécute pas.", "renvoi": "C5, mémorisation côté client"},
+        "D": {"erreur": "Un cookie n'est renvoyé qu'au domaine qui l'a déposé. Sans cette règle, tout site lirait les données de tous les autres.", "renvoi": "C5, portée d'un cookie"}
+      }
+    },
+    {
+      "id": "Q6", "capacite": "C6",
+      "enonce": "Le protocole HTTPS garantit que :",
+      "options": {"A": "le serveur conserve les données de façon sécurisée.", "B": "les données échangées sont illisibles pour un intermédiaire pendant leur transport.", "C": "aucune donnée personnelle n'est collectée.", "D": "le site est honnête et digne de confiance."},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'élève étend la garantie au-delà du transport. Ce qui advient des données une fois arrivées ne relève pas du protocole.", "renvoi": "C6, portée du chiffrement HTTPS"},
+        "C": {"erreur": "HTTPS protège l'acheminement de la collecte, il ne l'empêche pas : un formulaire transmis en HTTPS collecte bel et bien des données.", "renvoi": "C6, portée du chiffrement HTTPS"},
+        "D": {"erreur": "Un site malveillant peut parfaitement obtenir un certificat. Le cadenas atteste l'identité du domaine et le chiffrement, jamais les intentions de l'éditeur.", "renvoi": "C6, portée du chiffrement HTTPS"}
+      }
+    },
+    {
+      "id": "Q7", "capacite": "C7",
+      "enonce": "Dans un formulaire Web, l'attribut \\code{name} d'un champ de saisie sert :",
+      "options": {"A": "à afficher un libellé à côté du champ.", "B": "à fixer la largeur du champ à l'écran.", "C": "à nommer le paramètre sous lequel la valeur saisie parviendra au serveur.", "D": "à vérifier que la saisie est correcte."},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "Le libellé visible est porté par la balise \\code{<label>}. L'attribut \\code{name} n'apparaît pas à l'écran.", "renvoi": "C7, formulaire et paramètres transmis"},
+        "B": {"erreur": "La largeur relève de la présentation, donc de CSS ou de l'attribut \\code{size}.", "renvoi": "C7, formulaire et paramètres transmis"},
+        "D": {"erreur": "La validation est assurée par d'autres attributs, comme \\code{required} ou \\code{pattern}, ou par du code. Un champ sans \\code{name} est simplement absent de l'envoi.", "renvoi": "C7, formulaire et paramètres transmis"}
+      }
+    },
+    {
+      "id": "Q8", "capacite": "C8",
+      "enonce": "Les paramètres d'une requête \\code{POST} sont :",
+      "options": {"A": "visibles dans l'URL affichée par le navigateur.", "B": "chiffrés automatiquement par la méthode elle-même.", "C": "limités à un seul paramètre par requête.", "D": "placés dans le corps de la requête, et donc absents de l'URL."},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "L'élève décrit la méthode GET, dont les paramètres sont bien inscrits dans l'URL.", "renvoi": "C8, GET et POST"},
+        "B": {"erreur": "Confusion fréquente et lourde de conséquences : POST n'est pas chiffré. Seul HTTPS chiffre, et il chiffre GET comme POST.", "renvoi": "C8, POST et chiffrement"},
+        "C": {"erreur": "Le corps d'une requête POST peut porter de nombreux paramètres, et des volumes bien supérieurs à ceux d'une URL.", "renvoi": "C8, GET et POST"}
+      }
+    },
+    {
+      "id": "Q9", "capacite": "C9",
+      "enonce": "Pour transmettre un mot de passe lors d'une connexion, il convient d'employer :",
+      "options": {"A": "POST, afin de ne pas exposer le mot de passe dans l'URL.", "B": "GET, parce que c'est la méthode la plus simple.", "C": "indifféremment GET ou POST, le choix étant sans conséquence.", "D": "ni l'une ni l'autre, un mot de passe ne devant jamais être transmis."},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "Avec GET, le mot de passe s'inscrit dans l'URL, donc dans l'historique du navigateur, les favoris et les journaux du serveur.", "renvoi": "C9, choix de la méthode selon la confidentialité"},
+        "C": {"erreur": "Le choix a des conséquences très concrètes sur les traces laissées. La confidentialité de la valeur transmise est précisément le critère de décision.", "renvoi": "C9, choix de la méthode selon la confidentialité"},
+        "D": {"erreur": "Toute authentification par mot de passe suppose de le transmettre. Ce qu'il faut, c'est le faire sous HTTPS et par POST.", "renvoi": "C9, choix de la méthode selon la confidentialité"}
+      }
+    },
+    {
+      "id": "Q10", "capacite": "C9",
+      "enonce": "Une recherche de produits sur un site marchand, par mots-clés et filtres, emploie généralement :",
+      "options": {"A": "ni GET ni POST, mais uniquement des cookies.", "B": "GET, car les critères ne sont pas confidentiels et l'adresse obtenue peut être partagée.", "C": "POST systématiquement, quelle que soit la nature des données.", "D": "un formulaire sans méthode déclarée."},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Un cookie accompagne une requête, il ne la remplace pas. Interroger le serveur exige une méthode HTTP.", "renvoi": "C9, choix de la méthode selon l'usage"},
+        "C": {"erreur": "POST interdirait de mettre le résultat en favori ou de le partager par lien, alors que rien ici n'est confidentiel.", "renvoi": "C9, choix de la méthode selon l'usage"},
+        "D": {"erreur": "Un formulaire sans attribut \\code{method} n'est pas dépourvu de méthode : il utilise GET par défaut. Ne pas le déclarer masque le choix sans le supprimer.", "renvoi": "C9, choix de la méthode selon l'usage"}
+      }
+    }
+  ]
 }

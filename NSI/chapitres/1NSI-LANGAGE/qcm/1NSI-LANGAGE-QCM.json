@@ -1,5 +1,94 @@
 {
   "chapitre": "1NSI-LANGAGE",
-  "titre": "QCM d'auto-évaluation -- 1NSI-LANGAGE",
-  "questions": []
+  "titre": "Langages et programmation — QCM d'auto-évaluation",
+  "questions": [
+    {
+      "id": "Q1", "capacite": "C1",
+      "enonce": "Une boucle \\code{while} est dite « non bornée » parce que :",
+      "options": {"A": "le nombre d'itérations n'est pas nécessairement connu à l'avance.", "B": "elle ne peut jamais se terminer.", "C": "elle ne contient jamais de condition.", "D": "elle s'exécute plus vite qu'une boucle \\code{for}."},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "L'élève confond « non bornée » et « infinie ». Une boucle \\code{while} se termine dès que sa condition devient fausse ; c'est seulement le nombre de tours qui n'est pas fixé d'avance.", "renvoi": "C1, boucles bornées et non bornées"},
+        "C": {"erreur": "C'est l'inverse : la condition est le cœur même de la boucle \\code{while}, puisqu'elle décide de chaque tour.", "renvoi": "C1, boucles bornées et non bornées"},
+        "D": {"erreur": "L'élève invente une différence de performance. Le choix entre les deux boucles est affaire d'expression du problème, non de vitesse.", "renvoi": "C1, boucles bornées et non bornées"}
+      }
+    },
+    {
+      "id": "Q2", "capacite": "C2",
+      "enonce": "D'un langage impératif à un autre, ce qui varie principalement, c'est :",
+      "options": {"A": "rien du tout : tous les langages sont strictement identiques.", "B": "la syntaxe, et des traits particuliers comme le typage.", "C": "le noyau des constructions élémentaires, différent à chaque fois.", "D": "le fait qu'un algorithme donné ne puisse s'écrire que dans un seul langage."},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'élève efface toute différence. Le noyau est commun, mais l'écriture, le typage et les bibliothèques varient nettement.", "renvoi": "C2, unité et diversité des langages"},
+        "C": {"erreur": "C'est l'affirmation inverse de celle du programme : séquence, affectation, conditionnelle, boucle et appel de fonction se retrouvent partout.", "renvoi": "C2, constructions élémentaires communes"},
+        "D": {"erreur": "Un même algorithme s'écrit dans n'importe quel langage impératif ; c'est précisément ce qui distingue l'algorithme de son écriture.", "renvoi": "C2, algorithme et programme"}
+      }
+    },
+    {
+      "id": "Q3", "capacite": "C3",
+      "enonce": "Prototyper une fonction, c'est en fixer :",
+      "options": {"A": "l'ordre des instructions du corps.", "B": "le nombre de lignes de code.", "C": "le nom, les paramètres et le type de la valeur renvoyée.", "D": "le temps d'exécution maximal."},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'élève décrit l'IMPLÉMENTATION. Le prototype précède le corps : il dit ce que la fonction offre, non comment elle s'y prend.", "renvoi": "C3, prototype d'une fonction"},
+        "B": {"erreur": "La longueur du code n'engage personne et n'apparaît dans aucune signature.", "renvoi": "C3, prototype d'une fonction"},
+        "D": {"erreur": "Le temps d'exécution relève de l'analyse de coût, et non de la signature de la fonction.", "renvoi": "C3, prototype d'une fonction"}
+      }
+    },
+    {
+      "id": "Q4", "capacite": "C4",
+      "enonce": "Un jeu de tests entièrement réussi :",
+      "options": {"A": "prouve que le programme est correct dans tous les cas.", "B": "n'a aucun intérêt dès lors que le programme s'exécute sans erreur.", "C": "garantit qu'aucun bug n'apparaîtra plus jamais.", "D": "montre seulement que le programme se comporte correctement sur les cas testés."},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "Un test explore quelques cas parmi une infinité. Il peut révéler la présence d'erreurs ; il ne peut jamais prouver leur absence.", "renvoi": "C4, portée d'un jeu de tests"},
+        "B": {"erreur": "S'exécuter sans planter ne dit rien du résultat produit. Un programme peut renvoyer une valeur fausse sans lever la moindre erreur.", "renvoi": "C4, portée d'un jeu de tests"},
+        "C": {"erreur": "Toute modification ultérieure du code peut introduire une erreur nouvelle ; c'est la raison d'être des tests de non-régression.", "renvoi": "C4, portée d'un jeu de tests"}
+      }
+    },
+    {
+      "id": "Q5", "capacite": "C5",
+      "enonce": "Avant d'employer une fonction inconnue tirée d'une bibliothèque, il convient de :",
+      "options": {"A": "consulter sa documentation, par exemple par \\code{help(...)}.", "B": "deviner son comportement d'après son nom.", "C": "recopier son code source dans son propre programme.", "D": "ne l'essayer que sur des cas limites."},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "Un nom suggère une intention, jamais un contrat : ni le type des arguments, ni les cas d'erreur, ni la valeur renvoyée n'en découlent.", "renvoi": "C5, lecture d'une documentation"},
+        "C": {"erreur": "Recopier le code prive de toute correction ultérieure et alourdit le programme, alors que l'import suffit.", "renvoi": "C5, usage d'une bibliothèque"},
+        "D": {"erreur": "Les cas limites sont utiles, mais après lecture de la documentation. Les essayer d'abord revient à deviner le contrat au lieu de le lire.", "renvoi": "C5, lecture d'une documentation"}
+      }
+    },
+    {
+      "id": "Q6", "capacite": "C5",
+      "enonce": "Concernant les bibliothèques, le programme de NSI de première demande de savoir :",
+      "options": {"A": "restituer de mémoire toutes les fonctions du module \\code{math}.", "B": "chercher et lire une documentation pour y trouver la fonction adaptée.", "C": "connaître exhaustivement au moins une bibliothèque.", "D": "se passer de toute bibliothèque extérieure."},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'élève transforme une compétence de recherche en exercice de mémorisation. C'est la capacité à consulter qui est visée.", "renvoi": "C5, usage d'une bibliothèque"},
+        "C": {"erreur": "Aucune exhaustivité n'est attendue : les bibliothèques évoluent, et savoir s'y orienter vaut mieux que les connaître par cœur.", "renvoi": "C5, usage d'une bibliothèque"},
+        "D": {"erreur": "C'est l'inverse : réemployer une bibliothèque éprouvée fait partie des compétences visées.", "renvoi": "C5, usage d'une bibliothèque"}
+      }
+    },
+    {
+      "id": "Q7", "capacite": "C6",
+      "enonce": "Une précondition d'une fonction porte sur :",
+      "options": {"A": "le nom de la fonction.", "B": "le nombre de lignes de son corps.", "C": "les arguments qui lui sont transmis.", "D": "la valeur qu'elle renvoie."},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "Le nom relève de la lisibilité, non du contrat. Une précondition énonce ce que l'appelant doit garantir.", "renvoi": "C6, préconditions"},
+        "B": {"erreur": "La longueur du code ne fait l'objet d'aucun engagement envers l'appelant.", "renvoi": "C6, préconditions"},
+        "D": {"erreur": "L'élève intervertit les deux moitiés du contrat : ce qui porte sur le résultat est une POSTcondition.", "renvoi": "C6, préconditions et postconditions"}
+      }
+    },
+    {
+      "id": "Q8", "capacite": "C7",
+      "enonce": "Pour une fonction \\code{racine(x)} calculant une racine carrée, laquelle de ces affirmations est une POSTcondition ?",
+      "options": {"A": "\\code{x} doit être un nombre positif ou nul.", "B": "la fonction doit être appelée après l'import du module \\code{math}.", "C": "la fonction ne doit pas dépasser dix lignes.", "D": "la valeur renvoyée est positive et son carré vaut \\code{x}."},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "C'est une PRÉcondition : elle contraint l'argument, donc ce que l'appelant doit fournir, et non ce que la fonction promet.", "renvoi": "C7, préconditions et postconditions"},
+        "B": {"erreur": "L'élève énonce une contrainte de contexte d'appel, à la charge de l'appelant. Une postcondition décrit le résultat obtenu.", "renvoi": "C7, postconditions"},
+        "C": {"erreur": "Une contrainte de style ne dit rien du résultat. La postcondition doit être vérifiable sur la valeur renvoyée.", "renvoi": "C7, postconditions"}
+      }
+    }
+  ]
 }

@@ -1,81 +1,167 @@
-% META: {"id": "1NSI-LANGAGE-QCM", "chapitre": "1NSI-LANGAGE", "type_objet": "qcm", "capacites": ["P-LANG-01","P-LANG-02","P-LANG-03B","P-LANG-04","P-LANG-05"], "status": "needs_review"}
+% META: {"id": "1NSI-LANGAGE-QCM", "chapitre": "1NSI-LANGAGE", "type_objet": "qcm", "genere_depuis": "chapitres/1NSI-LANGAGE/qcm/1NSI-LANGAGE-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Langages et programmation}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Langages et programmation — QCM d'auto-évaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule réponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1 --- Constructions élémentaires}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Une boucle \lstinline{while} est dite « non bornée » car :
+\item[] \textbf{Capacité C1}
+
+\item \textbf{[Q1]} Une boucle \code{while} est dite « non bornée » parce que :
   \begin{enumerate}[label=\Alph*.]
+    \item le nombre d'itérations n'est pas nécessairement connu à l'avance.
     \item elle ne peut jamais se terminer.
-    \item le nombre d'itérations n'est pas forcément connu à l'avance.
     \item elle ne contient jamais de condition.
-    \item elle est plus rapide qu'une boucle \lstinline{for}.
+    \item elle s'exécute plus vite qu'une boucle \code{for}.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C2}
 
-\subsection*{C2 --- Diversité et unité des langages}
-
-\item \textbf{[Q2]} Ce qui varie principalement d'un langage de programmation impératif à un autre, c'est :
+\item \textbf{[Q2]} D'un langage impératif à un autre, ce qui varie principalement, c'est :
   \begin{enumerate}[label=\Alph*.]
-    \item le noyau de constructions élémentaires (qui est différent à chaque fois).
-    \item la syntaxe et des traits particuliers comme le typage.
-    \item le fait qu'un même algorithme ne puisse s'écrire que dans un seul langage.
-    \item rien : tous les langages sont strictement identiques.
+    \item rien du tout : tous les langages sont strictement identiques.
+    \item la syntaxe, et des traits particuliers comme le typage.
+    \item le noyau des constructions élémentaires, différent à chaque fois.
+    \item le fait qu'un algorithme donné ne puisse s'écrire que dans un seul langage.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C3}
 
-\subsection*{C3 --- Spécification}
-
-\item \textbf{[Q3]} Une précondition d'une fonction porte sur :
+\item \textbf{[Q3]} Prototyper une fonction, c'est en fixer :
   \begin{enumerate}[label=\Alph*.]
-    \item le résultat renvoyé par la fonction.
-    \item les arguments passés à la fonction.
-    \item le nom de la fonction.
-    \item le nombre de lignes de code de la fonction.
+    \item l'ordre des instructions du corps.
+    \item le nombre de lignes de code.
+    \item le nom, les paramètres et le type de la valeur renvoyée.
+    \item le temps d'exécution maximal.
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C4 --- Mise au point}
+\item[] \textbf{Capacité C4}
 
 \item \textbf{[Q4]} Un jeu de tests entièrement réussi :
   \begin{enumerate}[label=\Alph*.]
     \item prouve que le programme est correct dans tous les cas.
-    \item montre seulement que le programme fonctionne sur les cas testés.
-    \item garantit l'absence de tout bug futur.
-    \item n'a aucun intérêt si le programme compile.
+    \item n'a aucun intérêt dès lors que le programme s'exécute sans erreur.
+    \item garantit qu'aucun bug n'apparaîtra plus jamais.
+    \item montre seulement que le programme se comporte correctement sur les cas testés.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C5}
 
-\subsection*{C5 --- Bibliothèques}
-
-\item \textbf{[Q5]} Avant d'utiliser une fonction inconnue d'une bibliothèque, il est recommandé de :
+\item \textbf{[Q5]} Avant d'employer une fonction inconnue tirée d'une bibliothèque, il convient de :
   \begin{enumerate}[label=\Alph*.]
-    \item deviner son comportement à partir de son nom.
-    \item consulter sa documentation (docstring, \lstinline{help(...)}).
-    \item recopier son code source avant de l'utiliser.
-    \item l'essayer uniquement sur des cas limites.
+    \item consulter sa documentation, par exemple par \code{help(...)}.
+    \item deviner son comportement d'après son nom.
+    \item recopier son code source dans son propre programme.
+    \item ne l'essayer que sur des cas limites.
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q6]} Le programme officiel de NSI Première, concernant les bibliothèques, exige :
+\item \textbf{[Q6]} Concernant les bibliothèques, le programme de NSI de première demande de savoir :
   \begin{enumerate}[label=\Alph*.]
-    \item une connaissance exhaustive d'au moins une bibliothèque.
-    \item de savoir chercher et lire une documentation pour trouver la bonne fonction.
-    \item de ne jamais utiliser de bibliothèque externe.
-    \item de mémoriser toutes les fonctions du module \lstinline{math}.
+    \item restituer de mémoire toutes les fonctions du module \code{math}.
+    \item chercher et lire une documentation pour y trouver la fonction adaptée.
+    \item connaître exhaustivement au moins une bibliothèque.
+    \item se passer de toute bibliothèque extérieure.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C6}
+
+\item \textbf{[Q7]} Une précondition d'une fonction porte sur :
+  \begin{enumerate}[label=\Alph*.]
+    \item le nom de la fonction.
+    \item le nombre de lignes de son corps.
+    \item les arguments qui lui sont transmis.
+    \item la valeur qu'elle renvoie.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C7}
+
+\item \textbf{[Q8]} Pour une fonction \code{racine(x)} calculant une racine carrée, laquelle de ces affirmations est une POSTcondition ?
+  \begin{enumerate}[label=\Alph*.]
+    \item \code{x} doit être un nombre positif ou nul.
+    \item la fonction doit être appelée après l'import du module \code{math}.
+    \item la fonction ne doit pas dépasser dix lignes.
+    \item la valeur renvoyée est positive et son carré vaut \code{x}.
   \end{enumerate}
 
 \end{enumerate}
+
+% NEXUS-QCM-TEACHER-ONLY-BEGIN
+\ifnxVersionProfesseur
+\clearpage
+\section*{Clé de correction — réservée au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacité & Réponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C2 & \textbf{B} \\
+Q3 & C3 & \textbf{C} \\
+Q4 & C4 & \textbf{D} \\
+Q5 & C5 & \textbf{A} \\
+Q6 & C5 & \textbf{B} \\
+Q7 & C6 & \textbf{C} \\
+Q8 & C7 & \textbf{D} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des réponses erronées}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — L'élève confond « non bornée » et « infinie ». Une boucle \code{while} se termine dès que sa condition devient fausse ; c'est seulement le nombre de tours qui n'est pas fixé d'avance. \emph{Renvoi : C1, boucles bornées et non bornées.}
+    \item \textbf{C} — C'est l'inverse : la condition est le cœur même de la boucle \code{while}, puisqu'elle décide de chaque tour. \emph{Renvoi : C1, boucles bornées et non bornées.}
+    \item \textbf{D} — L'élève invente une différence de performance. Le choix entre les deux boucles est affaire d'expression du problème, non de vitesse. \emph{Renvoi : C1, boucles bornées et non bornées.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — L'élève efface toute différence. Le noyau est commun, mais l'écriture, le typage et les bibliothèques varient nettement. \emph{Renvoi : C2, unité et diversité des langages.}
+    \item \textbf{C} — C'est l'affirmation inverse de celle du programme : séquence, affectation, conditionnelle, boucle et appel de fonction se retrouvent partout. \emph{Renvoi : C2, constructions élémentaires communes.}
+    \item \textbf{D} — Un même algorithme s'écrit dans n'importe quel langage impératif ; c'est précisément ce qui distingue l'algorithme de son écriture. \emph{Renvoi : C2, algorithme et programme.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — L'élève décrit l'IMPLÉMENTATION. Le prototype précède le corps : il dit ce que la fonction offre, non comment elle s'y prend. \emph{Renvoi : C3, prototype d'une fonction.}
+    \item \textbf{B} — La longueur du code n'engage personne et n'apparaît dans aucune signature. \emph{Renvoi : C3, prototype d'une fonction.}
+    \item \textbf{D} — Le temps d'exécution relève de l'analyse de coût, et non de la signature de la fonction. \emph{Renvoi : C3, prototype d'une fonction.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — Un test explore quelques cas parmi une infinité. Il peut révéler la présence d'erreurs ; il ne peut jamais prouver leur absence. \emph{Renvoi : C4, portée d'un jeu de tests.}
+    \item \textbf{B} — S'exécuter sans planter ne dit rien du résultat produit. Un programme peut renvoyer une valeur fausse sans lever la moindre erreur. \emph{Renvoi : C4, portée d'un jeu de tests.}
+    \item \textbf{C} — Toute modification ultérieure du code peut introduire une erreur nouvelle ; c'est la raison d'être des tests de non-régression. \emph{Renvoi : C4, portée d'un jeu de tests.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{B} — Un nom suggère une intention, jamais un contrat : ni le type des arguments, ni les cas d'erreur, ni la valeur renvoyée n'en découlent. \emph{Renvoi : C5, lecture d'une documentation.}
+    \item \textbf{C} — Recopier le code prive de toute correction ultérieure et alourdit le programme, alors que l'import suffit. \emph{Renvoi : C5, usage d'une bibliothèque.}
+    \item \textbf{D} — Les cas limites sont utiles, mais après lecture de la documentation. Les essayer d'abord revient à deviner le contrat au lieu de le lire. \emph{Renvoi : C5, lecture d'une documentation.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — L'élève transforme une compétence de recherche en exercice de mémorisation. C'est la capacité à consulter qui est visée. \emph{Renvoi : C5, usage d'une bibliothèque.}
+    \item \textbf{C} — Aucune exhaustivité n'est attendue : les bibliothèques évoluent, et savoir s'y orienter vaut mieux que les connaître par cœur. \emph{Renvoi : C5, usage d'une bibliothèque.}
+    \item \textbf{D} — C'est l'inverse : réemployer une bibliothèque éprouvée fait partie des compétences visées. \emph{Renvoi : C5, usage d'une bibliothèque.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — Le nom relève de la lisibilité, non du contrat. Une précondition énonce ce que l'appelant doit garantir. \emph{Renvoi : C6, préconditions.}
+    \item \textbf{B} — La longueur du code ne fait l'objet d'aucun engagement envers l'appelant. \emph{Renvoi : C6, préconditions.}
+    \item \textbf{D} — L'élève intervertit les deux moitiés du contrat : ce qui porte sur le résultat est une POSTcondition. \emph{Renvoi : C6, préconditions et postconditions.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{A} — C'est une PRÉcondition : elle contraint l'argument, donc ce que l'appelant doit fournir, et non ce que la fonction promet. \emph{Renvoi : C7, préconditions et postconditions.}
+    \item \textbf{B} — L'élève énonce une contrainte de contexte d'appel, à la charge de l'appelant. Une postcondition décrit le résultat obtenu. \emph{Renvoi : C7, postconditions.}
+    \item \textbf{C} — Une contrainte de style ne dit rien du résultat. La postcondition doit être vérifiable sur la valeur renvoyée. \emph{Renvoi : C7, postconditions.}
+  \end{itemize}
+\end{itemize}
+\fi
+% NEXUS-QCM-TEACHER-ONLY-END

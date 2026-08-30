@@ -1,81 +1,201 @@
-% META: {"id": "1NSI-WEB-IHM-QCM", "chapitre": "1NSI-WEB-IHM", "type_objet": "qcm", "capacites": ["P-IHM-01A","P-IHM-02","P-IHM-03A","P-IHM-03C","P-IHM-04B","P-IHM-04C"], "status": "needs_review"}
+% META: {"id": "1NSI-WEB-IHM-QCM", "chapitre": "1NSI-WEB-IHM", "type_objet": "qcm", "genere_depuis": "chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Interactions homme-machine sur le Web}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Interactions entre l'homme et la machine sur le Web — QCM d'auto-évaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule réponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1/C2 --- Composants et événements}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Le comportement d'un bouton lorsqu'on clique dessus est généralement programmé :
+\item[] \textbf{Capacité C1}
+
+\item \textbf{[Q1]} Dans une page Web, la balise \code{<input type="checkbox">} produit un composant graphique qui permet à l'utilisateur :
   \begin{enumerate}[label=\Alph*.]
-    \item directement dans le code HTML.
-    \item en JavaScript, via un gestionnaire d'événement.
-    \item dans la feuille de style CSS.
-    \item il n'est jamais possible de programmer un tel comportement.
+    \item de cocher ou décocher une option, indépendamment des autres.
+    \item de saisir une ligne de texte libre.
+    \item de choisir une seule valeur parmi plusieurs exclusives.
+    \item de déclencher l'envoi du formulaire.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C2}
 
-\subsection*{C4 --- Client-serveur}
-
-\item \textbf{[Q2]} Le code exécuté \textbf{sur le serveur} :
+\item \textbf{[Q2]} Le comportement d'un bouton lorsque l'utilisateur clique dessus est programmé :
   \begin{enumerate}[label=\Alph*.]
-    \item est visible dans le code source de la page reçue par le navigateur.
-    \item n'est jamais visible par l'utilisateur.
+    \item dans la feuille de style CSS.
+    \item en JavaScript, au moyen d'un gestionnaire d'événement.
+    \item uniquement dans la structure HTML, qui suffit à le décrire.
+    \item nulle part : un tel comportement ne peut pas être programmé.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C3}
+
+\item \textbf{[Q3]} Un bouton est associé au gestionnaire \code{onclick="compter()"}, et la fonction \code{compter} incrémente une variable puis l'affiche. Si l'on remplace l'appel par \code{compter} sans les parenthèses dans un appel à \code{addEventListener} :
+  \begin{enumerate}[label=\Alph*.]
+    \item la fonction est exécutée immédiatement, dès le chargement de la page.
+    \item la page refuse de s'afficher.
+    \item la fonction est correctement enregistrée et sera exécutée à chaque clic.
+    \item le compteur est incrémenté deux fois par clic.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C4}
+
+\item \textbf{[Q4]} Le code exécuté sur le serveur :
+  \begin{enumerate}[label=\Alph*.]
+    \item figure dans le code source de la page reçue par le navigateur.
     \item s'exécute toujours après le code JavaScript du client.
     \item ne peut jamais accéder à une base de données.
+    \item n'est jamais visible par l'utilisateur, qui n'en reçoit que le résultat.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C5}
 
-\subsection*{C6 --- Chiffrement}
-
-\item \textbf{[Q3]} Le protocole HTTPS garantit que :
+\item \textbf{[Q5]} Un cookie déposé par un site est :
   \begin{enumerate}[label=\Alph*.]
-    \item les données sont illisibles pour un intermédiaire pendant la transmission.
-    \item le serveur stocke les données de façon sécurisée.
-    \item aucune donnée personnelle n'est jamais collectée.
-    \item le site est fiable et digne de confiance.
+    \item mémorisé par le navigateur et renvoyé au serveur lors des requêtes suivantes vers ce site.
+    \item conservé sur le serveur, sans jamais quitter celui-ci.
+    \item un programme exécuté automatiquement par le navigateur.
+    \item transmis à tous les sites visités ensuite, quels qu'ils soient.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C6}
 
-\subsection*{C8 --- GET et POST}
-
-\item \textbf{[Q4]} Les paramètres d'une requête \lstinline{POST} sont :
+\item \textbf{[Q6]} Le protocole HTTPS garantit que :
   \begin{enumerate}[label=\Alph*.]
-    \item visibles dans l'URL de la page.
-    \item placés dans le corps de la requête, invisibles dans l'URL.
-    \item toujours chiffrés automatiquement.
-    \item limités à un seul paramètre.
+    \item le serveur conserve les données de façon sécurisée.
+    \item les données échangées sont illisibles pour un intermédiaire pendant leur transport.
+    \item aucune donnée personnelle n'est collectée.
+    \item le site est honnête et digne de confiance.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C7}
 
-\subsection*{C9 --- Choix du type de requête}
-
-\item \textbf{[Q5]} Pour transmettre un mot de passe lors d'une connexion, il est recommandé d'utiliser :
+\item \textbf{[Q7]} Dans un formulaire Web, l'attribut \code{name} d'un champ de saisie sert :
   \begin{enumerate}[label=\Alph*.]
-    \item GET, car c'est la méthode la plus simple.
-    \item POST, pour ne pas exposer le mot de passe dans l'URL.
-    \item indifféremment GET ou POST, cela n'a aucune importance.
-    \item aucune des deux, un mot de passe ne doit jamais être transmis.
+    \item à afficher un libellé à côté du champ.
+    \item à fixer la largeur du champ à l'écran.
+    \item à nommer le paramètre sous lequel la valeur saisie parviendra au serveur.
+    \item à vérifier que la saisie est correcte.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C8}
 
-\item \textbf{[Q6]} Une recherche de produits sur un site marchand (mots-clés, filtres) utilise généralement :
+\item \textbf{[Q8]} Les paramètres d'une requête \code{POST} sont :
   \begin{enumerate}[label=\Alph*.]
-    \item GET, car les critères ne sont pas confidentiels et l'URL peut être partagée.
-    \item POST, systématiquement, quelle que soit la nature des données.
-    \item ni GET ni POST : uniquement des cookies.
-    \item un formulaire sans méthode définie.
+    \item visibles dans l'URL affichée par le navigateur.
+    \item chiffrés automatiquement par la méthode elle-même.
+    \item limités à un seul paramètre par requête.
+    \item placés dans le corps de la requête, et donc absents de l'URL.
+  \end{enumerate}
+
+\item[] \textbf{Capacité C9}
+
+\item \textbf{[Q9]} Pour transmettre un mot de passe lors d'une connexion, il convient d'employer :
+  \begin{enumerate}[label=\Alph*.]
+    \item POST, afin de ne pas exposer le mot de passe dans l'URL.
+    \item GET, parce que c'est la méthode la plus simple.
+    \item indifféremment GET ou POST, le choix étant sans conséquence.
+    \item ni l'une ni l'autre, un mot de passe ne devant jamais être transmis.
+  \end{enumerate}
+
+\item \textbf{[Q10]} Une recherche de produits sur un site marchand, par mots-clés et filtres, emploie généralement :
+  \begin{enumerate}[label=\Alph*.]
+    \item ni GET ni POST, mais uniquement des cookies.
+    \item GET, car les critères ne sont pas confidentiels et l'adresse obtenue peut être partagée.
+    \item POST systématiquement, quelle que soit la nature des données.
+    \item un formulaire sans méthode déclarée.
   \end{enumerate}
 
 \end{enumerate}
+
+% NEXUS-QCM-TEACHER-ONLY-BEGIN
+\ifnxVersionProfesseur
+\clearpage
+\section*{Clé de correction — réservée au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacité & Réponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C2 & \textbf{B} \\
+Q3 & C3 & \textbf{C} \\
+Q4 & C4 & \textbf{D} \\
+Q5 & C5 & \textbf{A} \\
+Q6 & C6 & \textbf{B} \\
+Q7 & C7 & \textbf{C} \\
+Q8 & C8 & \textbf{D} \\
+Q9 & C9 & \textbf{A} \\
+Q10 & C9 & \textbf{B} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des réponses erronées}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — La saisie de texte relève de \code{<input type="text">}. Une case à cocher ne transmet qu'un état, coché ou non. \emph{Renvoi : C1, composants graphiques d'une page.}
+    \item \textbf{C} — L'exclusivité mutuelle est le propre des boutons radio. Plusieurs cases à cocher d'un même formulaire peuvent être cochées ensemble. \emph{Renvoi : C1, composants graphiques d'une page.}
+    \item \textbf{D} — L'envoi est déclenché par un bouton de soumission. Cocher une case ne provoque à soi seul aucune requête. \emph{Renvoi : C1, composants graphiques d'une page.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — CSS décrit l'apparence, y compris au survol. Il ne peut ni calculer ni modifier des données. \emph{Renvoi : C2, événements et gestionnaires.}
+    \item \textbf{C} — HTML déclare l'existence du bouton et son libellé. La réaction au clic demande du code, donc un gestionnaire d'événement. \emph{Renvoi : C2, événements et gestionnaires.}
+    \item \textbf{D} — C'est au contraire le mécanisme central de l'interactivité Web : à chaque événement peut être associée une fonction. \emph{Renvoi : C2, événements et gestionnaires.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — L'élève inverse les deux écritures. C'est justement AVEC les parenthèses que la fonction serait appelée sur-le-champ et son résultat enregistré à sa place. \emph{Renvoi : C3, gestionnaire d'événement et référence de fonction.}
+    \item \textbf{B} — Le document s'affiche indépendamment du code : une erreur de script laisse la page visible, avec un bouton inerte. \emph{Renvoi : C3, gestionnaire d'événement et référence de fonction.}
+    \item \textbf{D} — Le double comptage viendrait de deux gestionnaires enregistrés sur le même bouton, non de la présence ou de l'absence de parenthèses. \emph{Renvoi : C3, gestionnaire d'événement et référence de fonction.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — L'élève confond le programme et sa sortie. Le navigateur reçoit le HTML PRODUIT par le serveur, jamais le code qui l'a produit. \emph{Renvoi : C4, exécution côté client et côté serveur.}
+    \item \textbf{B} — L'ordre est inverse : le serveur répond d'abord, et le JavaScript du client s'exécute ensuite, sur la page reçue. \emph{Renvoi : C4, exécution côté client et côté serveur.}
+    \item \textbf{C} — C'est au contraire le rôle habituel du serveur : la base lui est accessible, alors qu'elle ne l'est pas au client. \emph{Renvoi : C4, exécution côté client et côté serveur.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{B} — L'élève place la mémorisation du mauvais côté. Le cookie est stocké chez le CLIENT ; c'est ce qui lui permet de reconnaître un visiteur qui revient. \emph{Renvoi : C5, mémorisation côté client.}
+    \item \textbf{C} — Un cookie est une donnée, généralement un couple nom-valeur, et non du code : il ne s'exécute pas. \emph{Renvoi : C5, mémorisation côté client.}
+    \item \textbf{D} — Un cookie n'est renvoyé qu'au domaine qui l'a déposé. Sans cette règle, tout site lirait les données de tous les autres. \emph{Renvoi : C5, portée d'un cookie.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — L'élève étend la garantie au-delà du transport. Ce qui advient des données une fois arrivées ne relève pas du protocole. \emph{Renvoi : C6, portée du chiffrement HTTPS.}
+    \item \textbf{C} — HTTPS protège l'acheminement de la collecte, il ne l'empêche pas : un formulaire transmis en HTTPS collecte bel et bien des données. \emph{Renvoi : C6, portée du chiffrement HTTPS.}
+    \item \textbf{D} — Un site malveillant peut parfaitement obtenir un certificat. Le cadenas atteste l'identité du domaine et le chiffrement, jamais les intentions de l'éditeur. \emph{Renvoi : C6, portée du chiffrement HTTPS.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — Le libellé visible est porté par la balise \code{<label>}. L'attribut \code{name} n'apparaît pas à l'écran. \emph{Renvoi : C7, formulaire et paramètres transmis.}
+    \item \textbf{B} — La largeur relève de la présentation, donc de CSS ou de l'attribut \code{size}. \emph{Renvoi : C7, formulaire et paramètres transmis.}
+    \item \textbf{D} — La validation est assurée par d'autres attributs, comme \code{required} ou \code{pattern}, ou par du code. Un champ sans \code{name} est simplement absent de l'envoi. \emph{Renvoi : C7, formulaire et paramètres transmis.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{A} — L'élève décrit la méthode GET, dont les paramètres sont bien inscrits dans l'URL. \emph{Renvoi : C8, GET et POST.}
+    \item \textbf{B} — Confusion fréquente et lourde de conséquences : POST n'est pas chiffré. Seul HTTPS chiffre, et il chiffre GET comme POST. \emph{Renvoi : C8, POST et chiffrement.}
+    \item \textbf{C} — Le corps d'une requête POST peut porter de nombreux paramètres, et des volumes bien supérieurs à ceux d'une URL. \emph{Renvoi : C8, GET et POST.}
+  \end{itemize}
+  \item \textbf{Q9}
+  \begin{itemize}
+    \item \textbf{B} — Avec GET, le mot de passe s'inscrit dans l'URL, donc dans l'historique du navigateur, les favoris et les journaux du serveur. \emph{Renvoi : C9, choix de la méthode selon la confidentialité.}
+    \item \textbf{C} — Le choix a des conséquences très concrètes sur les traces laissées. La confidentialité de la valeur transmise est précisément le critère de décision. \emph{Renvoi : C9, choix de la méthode selon la confidentialité.}
+    \item \textbf{D} — Toute authentification par mot de passe suppose de le transmettre. Ce qu'il faut, c'est le faire sous HTTPS et par POST. \emph{Renvoi : C9, choix de la méthode selon la confidentialité.}
+  \end{itemize}
+  \item \textbf{Q10}
+  \begin{itemize}
+    \item \textbf{A} — Un cookie accompagne une requête, il ne la remplace pas. Interroger le serveur exige une méthode HTTP. \emph{Renvoi : C9, choix de la méthode selon l'usage.}
+    \item \textbf{C} — POST interdirait de mettre le résultat en favori ou de le partager par lien, alors que rien ici n'est confidentiel. \emph{Renvoi : C9, choix de la méthode selon l'usage.}
+    \item \textbf{D} — Un formulaire sans attribut \code{method} n'est pas dépourvu de méthode : il utilise GET par défaut. Ne pas le déclarer masque le choix sans le supprimer. \emph{Renvoi : C9, choix de la méthode selon l'usage.}
+  \end{itemize}
+\end{itemize}
+\fi
+% NEXUS-QCM-TEACHER-ONLY-END

@@ -1,5 +1,72 @@
 {
   "chapitre": "1NSI-RESEAUX",
-  "titre": "QCM d'auto-évaluation -- 1NSI-RESEAUX",
-  "questions": []
+  "titre": "Réseaux : transmission de données — QCM d'auto-évaluation",
+  "questions": [
+    {
+      "id": "Q1", "capacite": "C1",
+      "enonce": "Dans l'en-tête d'un paquet, le numéro de paquet sert principalement :",
+      "options": {"A": "à chiffrer les données transportées.", "B": "à accélérer la transmission.", "C": "à remettre les paquets dans l'ordre à l'arrivée, quel que soit leur ordre de réception.", "D": "à indiquer la taille du disque du destinataire."},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "Le chiffrement relève d'une autre couche et d'autres protocoles. Un numéro d'ordre est une donnée de service, transmise en clair.", "renvoi": "C1, encapsulation et en-têtes"},
+        "B": {"erreur": "Le numéro n'accélère rien : il ajoute même quelques octets. Ce qu'il apporte est la possibilité de reconstituer le message.", "renvoi": "C1, découpage en paquets"},
+        "D": {"erreur": "L'en-tête décrit le paquet et son acheminement, jamais les caractéristiques matérielles du destinataire.", "renvoi": "C1, encapsulation et en-têtes"}
+      }
+    },
+    {
+      "id": "Q2", "capacite": "C2",
+      "enonce": "Dans le protocole du bit alterné, si l'émetteur ne reçoit pas l'accusé de réception attendu, il :",
+      "options": {"A": "abandonne définitivement l'envoi du message.", "B": "passe directement au paquet suivant.", "C": "retransmet le paquet avec le bit opposé.", "D": "retransmet le même paquet, avec le même bit."},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "L'absence d'accusé est le cas que le protocole est fait pour traiter. Abandonner rendrait la reprise sur perte inutile.", "renvoi": "C2, protocole du bit alterné"},
+        "B": {"erreur": "Avancer sans confirmation ferait perdre le paquet précédent en silence : le récepteur ne le réclamerait jamais.", "renvoi": "C2, protocole du bit alterné"},
+        "C": {"erreur": "Changer de bit annoncerait un NOUVEAU paquet. Le récepteur croirait avoir reçu le précédent, et le trou dans le message passerait inaperçu.", "renvoi": "C2, rôle du bit alterné"}
+      }
+    },
+    {
+      "id": "Q3", "capacite": "C3",
+      "enonce": "Pour qu'une recherche de chemin dans un réseau comportant un cycle ne tourne pas indéfiniment, il faut :",
+      "options": {"A": "marquer les sommets déjà visités.", "B": "interdire tout cycle dans le réseau.", "C": "limiter le réseau à deux machines.", "D": "s'interdire toute fonction récursive."},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "Les cycles sont voulus : ils offrent des routes de secours en cas de panne. C'est l'algorithme qui doit s'y adapter, non le réseau.", "renvoi": "C3, parcours d'un réseau"},
+        "C": {"erreur": "Réduire le réseau supprime le problème en supprimant le réseau. La simulation doit traiter un nombre quelconque de machines.", "renvoi": "C3, parcours d'un réseau"},
+        "D": {"erreur": "Une version itérative boucle exactement de la même façon si elle ne mémorise pas les sommets vus. Ce qui compte est le marquage, non la forme de la boucle.", "renvoi": "C3, parcours d'un réseau"}
+      }
+    },
+    {
+      "id": "Q4", "capacite": "C4",
+      "enonce": "Un capteur de température et un relais commandant un chauffage jouent respectivement le rôle :",
+      "options": {"A": "d'actionneur, puis de capteur.", "B": "de capteur, puis d'actionneur.", "C": "de deux capteurs.", "D": "de deux actionneurs."},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'élève intervertit les deux rôles. Le capteur prend une mesure en entrée ; l'actionneur agit sur le monde en sortie.", "renvoi": "C4, capteurs et actionneurs"},
+        "C": {"erreur": "Le relais ne mesure rien : il ouvre ou ferme un circuit, donc il agit.", "renvoi": "C4, capteurs et actionneurs"},
+        "D": {"erreur": "Le capteur de température n'agit sur rien : il ne fait que transmettre une valeur.", "renvoi": "C4, capteurs et actionneurs"}
+      }
+    },
+    {
+      "id": "Q5", "capacite": "C5",
+      "enonce": "Programmer une interface homme-machine à partir d'un cahier des charges impose en particulier :",
+      "options": {"A": "de ne tester que le scénario de démonstration prévu.", "B": "de renoncer aux tests, le code étant supposé correct.", "C": "de tester aussi les cas limites : valeurs au seuil, changements d'état.", "D": "d'ignorer les exigences qui ne sont pas formulées explicitement."},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "Le scénario de démonstration est choisi pour réussir. Les défauts se logent dans les cas qu'il évite.", "renvoi": "C5, validation d'une IHM"},
+        "B": {"erreur": "Aucun code n'est correct par hypothèse. Le cahier des charges énonce des exigences qu'il faut confronter au programme.", "renvoi": "C5, validation d'une IHM"},
+        "D": {"erreur": "Une exigence implicite mal traitée reste un défaut. Quand elle manque, il faut la faire préciser, non l'écarter.", "renvoi": "C5, cahier des charges d'une IHM"}
+      }
+    },
+    {
+      "id": "Q6", "capacite": "C5",
+      "enonce": "Commander un actionneur avec deux seuils distincts, l'un pour l'activation et l'autre pour l'arrêt, sert :",
+      "options": {"A": "à ralentir volontairement le système.", "B": "à économiser de la mémoire.", "C": "à remplacer le capteur par un actionneur.", "D": "à éviter des activations et des arrêts trop rapprochés autour d'une valeur unique."},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "Le but n'est pas la lenteur mais la stabilité : on empêche des basculements incessants, sans retarder les changements réels.", "renvoi": "C5, régulation par seuils"},
+        "B": {"erreur": "Le procédé ne coûte qu'une comparaison de plus ; il ne concerne en rien l'occupation mémoire.", "renvoi": "C5, régulation par seuils"},
+        "C": {"erreur": "Les deux seuils portent sur la façon de DÉCIDER ; ils ne modifient ni le capteur ni l'actionneur, qui gardent leurs rôles.", "renvoi": "C5, capteurs, actionneurs et régulation"}
+      }
+    }
+  ]
 }

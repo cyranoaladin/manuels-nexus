@@ -1,5 +1,78 @@
 {
   "chapitre": "1NSI-TYPES-BASE",
-  "titre": "QCM d'auto-évaluation -- 1NSI-TYPES-BASE",
-  "questions": []
+  "titre": "Types et valeurs de base — QCM d'auto-évaluation",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "L'écriture $1010_2$ correspond, en base 10, à :",
+      "options": {"A": "$10$", "B": "$8$", "C": "$12$", "D": "$1010$"},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "L'élève n'a compté que le bit de poids fort : $1010_2 = 8 + 2$, et le bit de poids $2$ a été oublié.", "renvoi": "C1, conversion binaire vers décimal"},
+        "C": {"erreur": "L'élève a additionné $8+4$ en attribuant un poids au mauvais bit : le troisième bit vaut $0$, c'est le deuxième qui vaut $1$.", "renvoi": "C1, poids des bits"},
+        "D": {"erreur": "L'élève lit l'écriture binaire comme si c'était déjà un nombre décimal, sans effectuer de conversion.", "renvoi": "C1, conversion binaire vers décimal"}
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C2",
+      "enonce": "Sur $8$ bits, combien de valeurs entières distinctes peut-on représenter ?",
+      "options": {"A": "$8$", "B": "$256$", "C": "$128$", "D": "$255$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'élève confond le nombre de bits et le nombre de combinaisons. Chaque bit double le nombre de valeurs : on obtient $2^8$, pas $8$.", "renvoi": "C2, nombre de bits et valeurs représentables"},
+        "C": {"erreur": "L'élève a calculé $2^7$ : c'est le nombre de valeurs sur $7$ bits, ou l'amplitude d'un seul signe en complément à 2.", "renvoi": "C2, nombre de bits et valeurs représentables"},
+        "D": {"erreur": "L'élève a donné la plus grande valeur non signée, $255$, au lieu du nombre de valeurs. Il y en a $256$, car $0$ en fait partie.", "renvoi": "C2, valeur maximale et cardinal"}
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C2",
+      "enonce": "Dans la représentation en complément à 2, le bit de poids fort indique :",
+      "options": {"A": "la parité du nombre.", "B": "le nombre de bits utilisés.", "C": "le signe du nombre.", "D": "rien de particulier."},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "La parité se lit sur le bit de poids FAIBLE, celui des unités, et non sur le bit de poids fort.", "renvoi": "C2, complément à 2"},
+        "B": {"erreur": "Le nombre de bits est fixé par le format choisi, en amont ; aucun bit ne le code à l'intérieur du mot.", "renvoi": "C2, complément à 2"},
+        "D": {"erreur": "L'élève applique la lecture non signée, où tous les bits ont le même rôle. En complément à 2, le bit de poids fort porte un poids négatif.", "renvoi": "C2, complément à 2"}
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C3",
+      "enonce": "En Python, l'expression \\code{0.1 + 0.2 == 0.3} s'évalue à :",
+      "options": {"A": "\\code{True}, puisque $0{,}1+0{,}2=0{,}3$.", "B": "une erreur de syntaxe.", "C": "un résultat qui dépend de la version de Python.", "D": "\\code{False}, à cause de l'arrondi de la représentation flottante."},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "L'élève raisonne sur les nombres décimaux exacts. Or $0{,}1$ et $0{,}2$ n'ont pas d'écriture binaire finie : la somme calculée vaut $0{,}30000000000000004$, et non $0{,}3$.", "renvoi": "C3, égalité de flottants"},
+        "B": {"erreur": "L'expression est syntaxiquement correcte. Le piège porte sur sa valeur, pas sur son écriture.", "renvoi": "C3, égalité de flottants"},
+        "C": {"erreur": "Le résultat ne dépend pas de la version : il découle de la norme IEEE 754, commune à toutes les implémentations usuelles.", "renvoi": "C3, égalité de flottants"}
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C4",
+      "enonce": "L'expression \\code{True and False} vaut :",
+      "options": {"A": "\\code{False}", "B": "\\code{True}", "C": "\\code{None}", "D": "une erreur"},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "L'élève applique la règle du \\code{or} : il suffirait alors d'un seul opérande vrai. Le \\code{and} exige que les deux le soient.", "renvoi": "C4, table de vérité de and"},
+        "C": {"erreur": "\\code{None} est l'absence de valeur, pas un booléen. Un opérateur logique renvoie toujours l'un de ses opérandes.", "renvoi": "C4, table de vérité de and"},
+        "D": {"erreur": "Combiner deux booléens est l'usage normal de \\code{and} ; aucune erreur ne peut en résulter.", "renvoi": "C4, table de vérité de and"}
+      }
+    },
+    {
+      "id": "Q6",
+      "capacite": "C5",
+      "enonce": "Un texte composé uniquement de lettres non accentuées et de chiffres peut être encodé sans perte :",
+      "options": {"A": "en UTF-8 seulement.", "B": "en ASCII, en ISO-8859-1 et en UTF-8.", "C": "en ISO-8859-1 seulement.", "D": "dans aucun de ces trois encodages."},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'élève retient qu'UTF-8 encode tout, ce qui est vrai, et en conclut à tort qu'il est seul à le pouvoir. Les caractères visés appartiennent aussi au jeu ASCII.", "renvoi": "C5, jeux de caractères"},
+        "C": {"erreur": "ISO-8859-1 convient, mais l'élève oublie qu'ASCII et UTF-8 conviennent également : les $128$ premiers codes leur sont communs.", "renvoi": "C5, jeux de caractères"},
+        "D": {"erreur": "L'élève transpose la difficulté des caractères accentués à des caractères qui ne la présentent pas : lettres non accentuées et chiffres sont dans ASCII.", "renvoi": "C5, jeux de caractères"}
+      }
+    }
+  ]
 }

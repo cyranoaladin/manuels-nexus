@@ -1,81 +1,133 @@
-% META: {"id": "1NSI-RESEAUX-QCM", "chapitre": "1NSI-RESEAUX", "type_objet": "qcm", "capacites": ["P-ARCH-02A","P-ARCH-02B","P-ARCH-02C","P-ARCH-04A","P-ARCH-04B"], "status": "needs_review"}
+% META: {"id": "1NSI-RESEAUX-QCM", "chapitre": "1NSI-RESEAUX", "type_objet": "qcm", "genere_depuis": "chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-évaluation --- Réseaux : transmission de données}
+\section*{\textcolor{chapcolor}{\MakeUppercase{Réseaux : transmission de données — QCM d'auto-évaluation}}}
 
 \begin{center}
-\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule réponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1 --- Paquets et encapsulation}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Dans l'en-tête d'un paquet, le numéro de paquet sert principalement à :
+\item[] \textbf{Capacité C1}
+
+\item \textbf{[Q1]} Dans l'en-tête d'un paquet, le numéro de paquet sert principalement :
   \begin{enumerate}[label=\Alph*.]
-    \item chiffrer les données transmises.
-    \item réordonner les paquets à l'arrivée, quel que soit leur ordre de réception.
-    \item accélérer la transmission.
-    \item indiquer la taille du disque du destinataire.
+    \item à chiffrer les données transportées.
+    \item à accélérer la transmission.
+    \item à remettre les paquets dans l'ordre à l'arrivée, quel que soit leur ordre de réception.
+    \item à indiquer la taille du disque du destinataire.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C2}
 
-\subsection*{C2 --- Protocole du bit alterné}
-
-\item \textbf{[Q2]} Si l'émetteur ne reçoit pas l'accusé de réception attendu, il :
+\item \textbf{[Q2]} Dans le protocole du bit alterné, si l'émetteur ne reçoit pas l'accusé de réception attendu, il :
   \begin{enumerate}[label=\Alph*.]
     \item abandonne définitivement l'envoi du message.
-    \item retransmet le paquet avec le même bit.
+    \item passe directement au paquet suivant.
     \item retransmet le paquet avec le bit opposé.
-    \item envoie directement le paquet suivant.
+    \item retransmet le même paquet, avec le même bit.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C3}
 
-\subsection*{C3 --- Simulation de réseau}
-
-\item \textbf{[Q3]} Pour éviter qu'une recherche de chemin dans un réseau contenant un cycle ne boucle indéfiniment, il faut :
+\item \textbf{[Q3]} Pour qu'une recherche de chemin dans un réseau comportant un cycle ne tourne pas indéfiniment, il faut :
   \begin{enumerate}[label=\Alph*.]
-    \item interdire tout cycle dans le réseau.
     \item marquer les sommets déjà visités.
+    \item interdire tout cycle dans le réseau.
     \item limiter le réseau à deux machines.
-    \item ne jamais utiliser de fonction récursive.
+    \item s'interdire toute fonction récursive.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C4}
 
-\subsection*{C4 --- Capteurs et actionneurs}
-
-\item \textbf{[Q4]} Un capteur de température et un relais de chauffage jouent respectivement les rôles de :
+\item \textbf{[Q4]} Un capteur de température et un relais commandant un chauffage jouent respectivement le rôle :
   \begin{enumerate}[label=\Alph*.]
-    \item actionneur puis capteur.
-    \item capteur puis actionneur.
-    \item deux capteurs.
-    \item deux actionneurs.
+    \item d'actionneur, puis de capteur.
+    \item de capteur, puis d'actionneur.
+    \item de deux capteurs.
+    \item de deux actionneurs.
   \end{enumerate}
 
-\bigskip
+\item[] \textbf{Capacité C5}
 
-\subsection*{C5 --- IHM programmée}
-
-\item \textbf{[Q5]} Programmer une IHM à partir d'un cahier des charges nécessite en particulier de :
+\item \textbf{[Q5]} Programmer une interface homme-machine à partir d'un cahier des charges impose en particulier :
   \begin{enumerate}[label=\Alph*.]
-    \item tester uniquement le cas de démonstration prévu.
-    \item tester aussi les cas limites (valeurs au seuil, changements d'état).
-    \item éviter tout test, le code étant supposé correct.
-    \item ignorer les exigences non précisées explicitement.
+    \item de ne tester que le scénario de démonstration prévu.
+    \item de renoncer aux tests, le code étant supposé correct.
+    \item de tester aussi les cas limites : valeurs au seuil, changements d'état.
+    \item d'ignorer les exigences qui ne sont pas formulées explicitement.
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q6]} Le principe d'hystérésis (deux seuils différents pour activer/désactiver un actionneur) sert à :
+\item \textbf{[Q6]} Commander un actionneur avec deux seuils distincts, l'un pour l'activation et l'autre pour l'arrêt, sert :
   \begin{enumerate}[label=\Alph*.]
-    \item rendre le système plus lent.
-    \item éviter des activations/désactivations trop fréquentes autour d'un seul seuil.
-    \item économiser de la mémoire.
-    \item remplacer le capteur par un actionneur.
+    \item à ralentir volontairement le système.
+    \item à économiser de la mémoire.
+    \item à remplacer le capteur par un actionneur.
+    \item à éviter des activations et des arrêts trop rapprochés autour d'une valeur unique.
   \end{enumerate}
 
 \end{enumerate}
+
+% NEXUS-QCM-TEACHER-ONLY-BEGIN
+\ifnxVersionProfesseur
+\clearpage
+\section*{Clé de correction — réservée au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacité & Réponse exacte \\
+\hline
+Q1 & C1 & \textbf{C} \\
+Q2 & C2 & \textbf{D} \\
+Q3 & C3 & \textbf{A} \\
+Q4 & C4 & \textbf{B} \\
+Q5 & C5 & \textbf{C} \\
+Q6 & C5 & \textbf{D} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des réponses erronées}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{A} — Le chiffrement relève d'une autre couche et d'autres protocoles. Un numéro d'ordre est une donnée de service, transmise en clair. \emph{Renvoi : C1, encapsulation et en-têtes.}
+    \item \textbf{B} — Le numéro n'accélère rien : il ajoute même quelques octets. Ce qu'il apporte est la possibilité de reconstituer le message. \emph{Renvoi : C1, découpage en paquets.}
+    \item \textbf{D} — L'en-tête décrit le paquet et son acheminement, jamais les caractéristiques matérielles du destinataire. \emph{Renvoi : C1, encapsulation et en-têtes.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — L'absence d'accusé est le cas que le protocole est fait pour traiter. Abandonner rendrait la reprise sur perte inutile. \emph{Renvoi : C2, protocole du bit alterné.}
+    \item \textbf{B} — Avancer sans confirmation ferait perdre le paquet précédent en silence : le récepteur ne le réclamerait jamais. \emph{Renvoi : C2, protocole du bit alterné.}
+    \item \textbf{C} — Changer de bit annoncerait un NOUVEAU paquet. Le récepteur croirait avoir reçu le précédent, et le trou dans le message passerait inaperçu. \emph{Renvoi : C2, rôle du bit alterné.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{B} — Les cycles sont voulus : ils offrent des routes de secours en cas de panne. C'est l'algorithme qui doit s'y adapter, non le réseau. \emph{Renvoi : C3, parcours d'un réseau.}
+    \item \textbf{C} — Réduire le réseau supprime le problème en supprimant le réseau. La simulation doit traiter un nombre quelconque de machines. \emph{Renvoi : C3, parcours d'un réseau.}
+    \item \textbf{D} — Une version itérative boucle exactement de la même façon si elle ne mémorise pas les sommets vus. Ce qui compte est le marquage, non la forme de la boucle. \emph{Renvoi : C3, parcours d'un réseau.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — L'élève intervertit les deux rôles. Le capteur prend une mesure en entrée ; l'actionneur agit sur le monde en sortie. \emph{Renvoi : C4, capteurs et actionneurs.}
+    \item \textbf{C} — Le relais ne mesure rien : il ouvre ou ferme un circuit, donc il agit. \emph{Renvoi : C4, capteurs et actionneurs.}
+    \item \textbf{D} — Le capteur de température n'agit sur rien : il ne fait que transmettre une valeur. \emph{Renvoi : C4, capteurs et actionneurs.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{A} — Le scénario de démonstration est choisi pour réussir. Les défauts se logent dans les cas qu'il évite. \emph{Renvoi : C5, validation d'une IHM.}
+    \item \textbf{B} — Aucun code n'est correct par hypothèse. Le cahier des charges énonce des exigences qu'il faut confronter au programme. \emph{Renvoi : C5, validation d'une IHM.}
+    \item \textbf{D} — Une exigence implicite mal traitée reste un défaut. Quand elle manque, il faut la faire préciser, non l'écarter. \emph{Renvoi : C5, cahier des charges d'une IHM.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — Le but n'est pas la lenteur mais la stabilité : on empêche des basculements incessants, sans retarder les changements réels. \emph{Renvoi : C5, régulation par seuils.}
+    \item \textbf{B} — Le procédé ne coûte qu'une comparaison de plus ; il ne concerne en rien l'occupation mémoire. \emph{Renvoi : C5, régulation par seuils.}
+    \item \textbf{C} — Les deux seuils portent sur la façon de DÉCIDER ; ils ne modifient ni le capteur ni l'actionneur, qui gardent leurs rôles. \emph{Renvoi : C5, capteurs, actionneurs et régulation.}
+  \end{itemize}
+\end{itemize}
+\fi
+% NEXUS-QCM-TEACHER-ONLY-END

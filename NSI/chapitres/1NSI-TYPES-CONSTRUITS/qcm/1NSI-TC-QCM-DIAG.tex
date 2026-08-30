@@ -1,96 +1,118 @@
-% META: {"id": "1NSI-TC-QCM-DIAG", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "qcm_diagnostics", "status": "needs_review"}
-\section*{Diagnostics du QCM --- Types construits}
-\textit{Compare tes réponses et lis le diagnostic correspondant.}
+% META: {"id": "1NSI-TC-QCM-DIAG", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "qcm_diagnostics", "genere_depuis": "chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\bigskip
+\section*{\textcolor{chapcolor}{\MakeUppercase{Diagnostics du QCM}}}
 
-\textbf{Q1.} Réponse : B.
+\textit{Compare tes réponses à la clé, puis lis le diagnostic de chaque réponse que tu n'as pas choisie correctement.}
+
+\textbf{Q1.} Réponse : \textbf{A}.
 \begin{itemize}[nosep]
-  \item Si A : tu confonds tuple (parenthèses) et liste (crochets) $\to$ M1.
-  \item Si C : la virgule crée un tuple, pas un entier $\to$ D1.
+  \item Si B — L'élève confond les délimiteurs : les crochets construisent une liste, les parenthèses un p-uplet. \emph{Renvoi : C1, p-uplets.}
+  \item Si C — L'élève lit la parenthèse comme un simple groupement arithmétique. C'est la virgule, et non la parenthèse, qui crée le p-uplet. \emph{Renvoi : C1, p-uplets.}
+  \item Si D — Un ensemble s'écrit avec des accolades et ne conserve pas l'ordre ; le p-uplet est ordonné. \emph{Renvoi : C1, p-uplets.}
 \end{itemize}
 
-\textbf{Q2.} Réponse : B.
+\textbf{Q2.} Réponse : \textbf{B}.
 \begin{itemize}[nosep]
-  \item Si A : un tuple est non mutable, on ne peut pas modifier ses éléments $\to$ EF1.
-  \item Si C : \lstinline{t[0] = 5} n'ajoute pas, il tente une modification interdite $\to$ D1.
+  \item Si A — L'élève traite le p-uplet comme une liste. Un p-uplet est immuable : aucune de ses cases ne peut être réaffectée après sa création. \emph{Renvoi : C1, immuabilité des p-uplets.}
+  \item Si C — L'élève lit l'affectation comme un ajout. Même sur une liste, \code{t[0] = 5} remplacerait la case $0$ au lieu d'allonger la séquence. \emph{Renvoi : C1, immuabilité des p-uplets.}
+  \item Si D — L'indice $0$ est valide pour un p-uplet de deux éléments. Ce n'est pas l'indice qui est refusé, mais la modification. \emph{Renvoi : C1, immuabilité des p-uplets.}
 \end{itemize}
 
-\textbf{Q3.} Réponse : C.
+\textbf{Q3.} Réponse : \textbf{C}.
 \begin{itemize}[nosep]
-  \item Si A : le déballage associe le premier élément à \lstinline{a} $\to$ D3.
-  \item Si B : le déballage sépare les éléments, il ne copie pas le tuple $\to$ D3.
+  \item Si A — L'élève inverse l'ordre du dépaquetage : les valeurs sont distribuées de gauche à droite, donc \code{a} reçoit $10$ et \code{b} reçoit $20$. \emph{Renvoi : C1, dépaquetage d'un p-uplet.}
+  \item Si B — L'élève n'a pas vu le dépaquetage : la virgule à gauche du signe égal répartit les composantes au lieu d'affecter le p-uplet entier. \emph{Renvoi : C1, dépaquetage d'un p-uplet.}
+  \item Si D — Le dépaquetage affecte réellement les deux noms. \code{None} n'apparaîtrait que si la fonction appelée ne renvoyait rien. \emph{Renvoi : C1, dépaquetage d'un p-uplet.}
 \end{itemize}
 
-\textbf{Q4.} Réponse : B.
+\textbf{Q4.} Réponse : \textbf{D}.
 \begin{itemize}[nosep]
-  \item Si A : \lstinline{append} ajoute un élément, la longueur augmente de 1 $\to$ D5.
-  \item Si C : un seul élément est ajouté par \lstinline{append} $\to$ D5.
+  \item Si A — L'élève donne la longueur AVANT l'ajout. La méthode \code{append} modifie la liste sur place, donc sa longueur augmente. \emph{Renvoi : C2, modification d'un tableau.}
+  \item Si B — L'élève compte deux ajouts. \code{append} n'insère qu'un seul élément, même si sa valeur figure déjà dans la liste. \emph{Renvoi : C2, modification d'un tableau.}
+  \item Si C — L'élève affiche la valeur ajoutée au lieu de la longueur. \code{len} compte les éléments ; il ne les lit pas. \emph{Renvoi : C2, modification d'un tableau.}
 \end{itemize}
 
-\textbf{Q5.} Réponse : A.
+\textbf{Q5.} Réponse : \textbf{B}.
 \begin{itemize}[nosep]
-  \item Si B : cette expression produit 10 éléments (0 à 18), pas 5 $\to$ D6.
-  \item Si C : aucun filtre pair, et 8 est exclu de \lstinline{range(8)} $\to$ D6.
+  \item Si A — L'expression produit dix termes, de $0$ à $18$ : l'élève a doublé les valeurs au lieu de filtrer les paires, si bien que la liste dépasse $8$. \emph{Renvoi : C2, compréhension de liste.}
+  \item Si C — L'élève retient le dernier terme attendu, $8$, et le prend pour la borne du \code{range}. L'expression énumère alors tous les entiers de $0$ à $7$, pairs et impairs. \emph{Renvoi : C2, compréhension de liste.}
+  \item Si D — L'élève translate au lieu de filtrer : l'expression produit $[2, 3, 4, 5, 6]$, dont les termes ne sont même pas tous pairs. \emph{Renvoi : C2, compréhension de liste.}
 \end{itemize}
 
-\textbf{Q6.} Réponse : B.
+\textbf{Q6.} Réponse : \textbf{C}.
 \begin{itemize}[nosep]
-  \item Si A : l'indice 3 n'existe pas dans un tableau de 3 éléments (indices 0--2).
-  \item Si C : Python ne renvoie pas \lstinline{None} pour un indice invalide.
+  \item Si A — L'élève numérote les cases à partir de $1$. Les indices commencent à $0$ : le dernier élément d'une liste de trois cases porte l'indice $2$. \emph{Renvoi : C2, indices d'un tableau.}
+  \item Si B — Un indice hors bornes lève une exception ; il ne renvoie pas discrètement une valeur vide, contrairement à ce qui se passerait pour une clé absente traitée par \code{get}. \emph{Renvoi : C2, indices d'un tableau.}
+  \item Si D — L'élève suppose que l'indexation reboucle au début. Aucun retour circulaire n'a lieu pour un indice positif hors bornes. \emph{Renvoi : C2, indices d'un tableau.}
 \end{itemize}
 
-\textbf{Q7.} Réponse : B.
+\textbf{Q7.} Réponse : \textbf{D}.
 \begin{itemize}[nosep]
-  \item Si A : tu confonds ligne et colonne. \lstinline{g[1]} est \lstinline{[3, 4]} $\to$ D7.
-  \item Si C : \lstinline{g[1]} n'est pas \lstinline{[1, 2]} $\to$ D7.
+  \item Si A — L'élève inverse les deux indices : il a lu \code{g[0][1]}. Le premier indice choisit la ligne, le second la colonne. \emph{Renvoi : C3, grille et tableau de tableaux.}
+  \item Si B — L'élève lit la première case de la première ligne, comme si le premier indice était sans effet. \emph{Renvoi : C3, grille et tableau de tableaux.}
+  \item Si C — L'élève lit la dernière case de la deuxième ligne : l'indice de colonne $0$ a été pris pour le dernier au lieu du premier. \emph{Renvoi : C3, grille et tableau de tableaux.}
 \end{itemize}
 
-\textbf{Q8.} Réponse : B.
+\textbf{Q8.} Réponse : \textbf{A}.
 \begin{itemize}[nosep]
-  \item Si A : \lstinline{*} crée des alias de la même ligne $\to$ D8.
-  \item Si C : cette expression crée une grille 2$\times$3, pas 3$\times$2.
+  \item Si B — L'opérateur \code{*} recopie la RÉFÉRENCE de la même ligne trois fois. Modifier une case en modifie trois : après \code{g[0][0] = 9}, la grille vaut \code{[[9, 0], [9, 0], [9, 0]]}. \emph{Renvoi : C3, alias dans une grille.}
+  \item Si C — Les lignes sont bien indépendantes, mais les dimensions sont inversées : cette expression produit $2$ lignes de $3$ cases. \emph{Renvoi : C3, dimensions d'une grille.}
+  \item Si D — L'élève construit une liste plate de six zéros. Le nombre de cases est juste, mais la structure à deux niveaux, indispensable à l'accès \code{g[i][j]}, est perdue. \emph{Renvoi : C3, grille et tableau de tableaux.}
 \end{itemize}
 
-\textbf{Q9.} Réponse : B.
+\textbf{Q9.} Réponse : \textbf{C}.
 \begin{itemize}[nosep]
-  \item Si A : chaque sous-liste est une ligne, il y en a 2 $\to$ D7.
+  \item Si A — L'élève intervertit les deux dimensions. Le nombre de lignes est la longueur de la grille, ici $2$ ; le nombre de colonnes est la longueur d'une ligne, ici $3$. \emph{Renvoi : C3, dimensions d'une grille.}
+  \item Si B — L'élève compte les cases au lieu des lignes. Le total de $6$ est le produit des deux dimensions, non l'une d'elles. \emph{Renvoi : C3, dimensions d'une grille.}
+  \item Si D — L'élève aplatit la grille et perd le niveau intermédiaire ; la structure comporte bien deux sous-listes distinctes. \emph{Renvoi : C3, dimensions d'une grille.}
 \end{itemize}
 
-\textbf{Q10.} Réponse : C.
+\textbf{Q10.} Réponse : \textbf{D}.
 \begin{itemize}[nosep]
-  \item Si A : Python ne renvoie pas \lstinline{None} mais lève une exception $\to$ EF3, D10.
+  \item Si A — L'élève attribue à l'accès par crochets le comportement de la méthode \code{get}, qui renvoie effectivement \code{None} pour une clé absente. Les crochets, eux, lèvent une exception. \emph{Renvoi : C4, accès à une clé absente.}
+  \item Si B — Un dictionnaire ne crée pas de valeur par défaut à la lecture ; aucune clé \code{"c"} n'existe, et rien ne vaut $0$. \emph{Renvoi : C4, accès à une clé absente.}
+  \item Si C — L'élève lit la dernière valeur enregistrée, comme si l'accès portait sur une position. Un dictionnaire s'interroge par clé, jamais par rang. \emph{Renvoi : C4, accès par clé.}
 \end{itemize}
 
-\textbf{Q11.} Réponse : B.
+\textbf{Q11.} Réponse : \textbf{A}.
 \begin{itemize}[nosep]
-  \item Si A : \lstinline{append} est une méthode de liste, pas de dictionnaire $\to$ D10.
+  \item Si B — L'élève transpose une méthode de liste. \code{append} ajoute en fin de séquence ; un dictionnaire n'a pas de fin, il a des clés. \emph{Renvoi : C4, ajout dans un dictionnaire.}
+  \item Si C — Le dictionnaire n'a pas de méthode \code{add}, et la syntaxe \code{"c": 3} n'est valide qu'à l'intérieur d'une écriture littérale, pas comme argument. \emph{Renvoi : C4, ajout dans un dictionnaire.}
+  \item Si D — L'opérateur \code{+} concatène des séquences ; il n'est pas défini entre deux dictionnaires et lèverait une \code{TypeError}. \emph{Renvoi : C4, ajout dans un dictionnaire.}
 \end{itemize}
 
-\textbf{Q12.} Réponse : B.
+\textbf{Q12.} Réponse : \textbf{B}.
 \begin{itemize}[nosep]
-  \item Si A : cette boucle ne donne que les clés.
-  \item Si C : cette boucle ne donne que les valeurs.
+  \item Si A — Parcourir directement un dictionnaire ne donne que ses clés ; la valeur doit ensuite être demandée par \code{d[k]}. \emph{Renvoi : C4, parcours d'un dictionnaire.}
+  \item Si C — Cette boucle ne livre que les valeurs, et la clé associée devient inaccessible. \emph{Renvoi : C4, parcours d'un dictionnaire.}
+  \item Si D — L'élève attend un couple sans le demander. Il faut \code{d.items()} pour que chaque tour fournisse la paire clé-valeur ; sans lui, Python tente de dépaqueter une clé et échoue. \emph{Renvoi : C4, parcours d'un dictionnaire.}
 \end{itemize}
 
-\textbf{Q13.} Réponse : B.
+\textbf{Q13.} Réponse : \textbf{D}.
 \begin{itemize}[nosep]
-  \item Si A : \lstinline{b = a} crée un alias, pas une copie $\to$ D11.
+  \item Si A — L'élève croit que l'affectation copie la liste. Elle ne crée qu'un second nom pour le MÊME objet : ce que l'on modifie par \code{b} se voit par \code{a}. \emph{Renvoi : C5, alias et objets mutables.}
+  \item Si B — Aucune règle n'est enfreinte : donner deux noms au même objet est un usage courant, et non une faute. \emph{Renvoi : C5, alias et objets mutables.}
+  \item Si C — L'élève croit que \code{b = a} vide la liste avant l'ajout. L'affectation ne modifie pas le contenu de l'objet désigné. \emph{Renvoi : C5, alias et objets mutables.}
 \end{itemize}
 
-\textbf{Q14.} Réponse : B.
+\textbf{Q14.} Réponse : \textbf{A}.
 \begin{itemize}[nosep]
-  \item Si A : ceci crée un alias, pas une copie $\to$ D11, D12.
-  \item Si C : \lstinline{t * 1} crée une copie superficielle, mais \lstinline{list(t)} est plus explicite.
+  \item Si B — C'est précisément l'alias à éviter : les deux noms désignent le même objet, et toute modification se répercute. \emph{Renvoi : C5, copie d'une liste.}
+  \item Si C — \code{append} ajoute un élément et renvoie \code{None} ; appelée sans argument, elle lève de plus une \code{TypeError}. \emph{Renvoi : C5, copie d'une liste.}
+  \item Si D — L'élève récupère le nombre d'éléments, un entier, au lieu de leur contenu. \emph{Renvoi : C5, copie d'une liste.}
 \end{itemize}
 
-\textbf{Q15.} Réponse : B.
+\textbf{Q15.} Réponse : \textbf{B}.
 \begin{itemize}[nosep]
-  \item Si A : la copie superficielle ne copie pas les sous-listes $\to$ EF4.
+  \item Si A — L'élève croit \code{list(g)} suffisant. La copie est SUPERFICIELLE : elle duplique la liste extérieure, mais ses cases pointent encore vers les mêmes sous-listes. \emph{Renvoi : C5, copie superficielle et copie profonde.}
+  \item Si C — Aucune règle n'est enfreinte : la sous-liste est mutable et accepte l'ajout. \emph{Renvoi : C5, copie superficielle et copie profonde.}
+  \item Si D — L'ajout ne remplace pas le contenu existant : \code{append} allonge la sous-liste, qui contenait déjà $1$. \emph{Renvoi : C5, copie superficielle et copie profonde.}
 \end{itemize}
 
-\textbf{Q16.} Réponse : B.
+\textbf{Q16.} Réponse : \textbf{C}.
 \begin{itemize}[nosep]
-  \item Si A : \lstinline{tuple} et \lstinline{str} sont non mutables $\to$ D11.
-  \item Si C : \lstinline{int} est non mutable $\to$ D11.
+  \item Si A — La liste est mutable, mais l'entier ne l'est pas : incrémenter une variable entière crée un nouvel objet plutôt que d'en modifier un. \emph{Renvoi : C5, types mutables et immuables.}
+  \item Si B — Ces deux types sont au contraire les immuables les plus courants ; c'est l'exact opposé de ce qui est demandé. \emph{Renvoi : C5, types mutables et immuables.}
+  \item Si D — Le dictionnaire est mutable, mais la chaîne ne l'est pas : remplacer un caractère par \code{s[0] = "x"} lève une \code{TypeError}. \emph{Renvoi : C5, types mutables et immuables.}
 \end{itemize}
