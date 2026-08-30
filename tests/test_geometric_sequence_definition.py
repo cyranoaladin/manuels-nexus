@@ -88,12 +88,16 @@ def test_the_retained_q9_has_a_single_unambiguous_answer() -> None:
         for item in json.loads(SUITES_QCM.read_text(encoding="utf-8"))["questions"]
     }
     question = questions["Q9"]
-    assert question["correcte"] == "C"
-    assert "u_{n+1}=qu_n" in question["options"]["C"].replace(" ", "")
+    # La politique de distribution des cles deplace la bonne reponse d'une
+    # lettre a l'autre sans toucher a la mathematique : ce test porte donc sur
+    # la VALEUR de la bonne reponse, jamais sur sa position.
+    key = question["correcte"]
+    assert "u_{n+1}=qu_n" in question["options"][key].replace(" ", "")
     # La bonne reponse est la definition ; les distracteurs ne le sont pas.
-    assert question["options"]["B"] != question["options"]["C"]
-    assert set(question["diagnostics"]) == {"A", "B", "D"}
-    assert question["correcte"] not in question["diagnostics"]
+    others = [value for letter, value in question["options"].items() if letter != key]
+    assert question["options"][key] not in others
+    assert set(question["diagnostics"]) == set(question["options"]) - {key}
+    assert key not in question["diagnostics"]
 
 
 def test_no_option_of_q9_claims_a_geometric_sequence_excludes_zero_terms() -> None:

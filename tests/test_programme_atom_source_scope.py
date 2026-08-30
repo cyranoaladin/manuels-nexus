@@ -52,7 +52,18 @@ def test_1spe_median_formula_is_only_an_explicit_extension() -> None:
         }
     ]
     course = (chapter / "cours" / "14_C5_al_kashi.tex").read_text(encoding="utf-8")
-    assert course.index("Approfondissement — Vers la Terminale") < course.index("Formule de la mediane")
+    # La campagne diacritiques a accentue le titre : la recherche est faite
+    # sans accents pour rester vraie dans les deux graphies.
+    import unicodedata
+
+    def _plain(text: str) -> str:
+        decomposed = unicodedata.normalize("NFD", text)
+        return "".join(c for c in decomposed if unicodedata.category(c) != "Mn")
+
+    plain_course = _plain(course)
+    assert plain_course.index(_plain("Approfondissement — Vers la Terminale")) < plain_course.index(
+        "Formule de la mediane"
+    )
     for stem in ("045", "048", "050"):
         for folder, prefix in (("exercices", "EX"), ("corriges", "CO")):
             text = (chapter / folder / f"1SPE-PRODSCAL-{prefix}-{stem}.tex").read_text(encoding="utf-8")

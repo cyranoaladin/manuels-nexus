@@ -1,7 +1,7 @@
 # HUMAN REVIEW GATE CONTRACT — 1SPE-SUITES
 
-- Source de revue figée : `c667f12b1792f31981b6b5894c8c604df1bce634`
-- Digest du set des 161 objets : `sha256:67d8006298299b44029de8ba8f85b500d9b3619997a0c596e63c20e1cffeee2d`
+- Source de revue figée : `1057951c1a7e8be8731982b5918effb60f2471cc`
+- Digest du set des 161 objets : `sha256:2cddd2b2ca0c6ed6b85898bcda6ec405b33ed4288f4c4770d272b5c608b5dab8`
 - Verdict : **GOVERNANCE_CONTRACT_INCOMPLETE**
 - Matérialisation d'une approbation : **INTERDITE**
 - Transition de statut, promotion FULL et clôture de dette : **INTERDITES**

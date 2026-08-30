@@ -22,7 +22,16 @@ import reconcile_wip_upstream as rec  # noqa: E402
 
 RECONCILIATION = ROOT / "audit" / "WIP_UPSTREAM_RECONCILIATION.json"
 LEDGER = ROOT / "audit" / "WIP_DROPPED_DELTA_LEDGER.json"
-FREEZE = ROOT / "audit" / "1SPE_SUITES_REVIEW_SOURCE_FREEZE.json"
+#: Ces tests documentent l'HISTOIRE de la reconciliation : le gel c667f12b,
+#: 161 objets. Ce gel a depuis ete reemis explicitement, mais il est conserve
+#: intact sous superseded/ et jamais reecrit. Les faits historiques se lisent
+#: donc sur l'archive, jamais sur le gel courant.
+FREEZE = (
+    ROOT
+    / "audit/reviews/human/1SPE-SUITES/superseded/freeze-161-c667f12b"
+    / "REVIEW_SOURCE_FREEZE.json"
+)
+CURRENT_FREEZE = ROOT / "audit" / "1SPE_SUITES_REVIEW_SOURCE_FREEZE.json"
 C8_PROOF = ROOT / "audit" / "1SPE_SUITES_C8_UNIQUENESS_PROOF.json"
 DECISION = ROOT / "audit" / "1SPE_SUITES_REVIEW_FREEZE_CORRECTION_DECISION.json"
 
@@ -106,7 +115,16 @@ def test_the_156_packets_are_invalidated_and_preserved() -> None:
 
 
 def test_the_current_packets_bind_the_161_freeze() -> None:
-    directory = ROOT / "audit/reviews/human/1SPE-SUITES/freeze-161-c667f12b"
+    """Les paquets archives restent lies au gel qu'ils servaient.
+
+    Ils ont ete deplaces sous superseded/ avec leur gel : ce sont eux qui
+    portent la trace de ce qui aurait ete soumis a la revue si elle avait eu
+    lieu. Aucun n'a recu de verdict.
+    """
+
+    directory = (
+        ROOT / "audit/reviews/human/1SPE-SUITES/superseded/freeze-161-c667f12b"
+    )
     packets = sorted(directory.glob("packet-*.json"))
     assert len(packets) == 2
     for path in packets:
