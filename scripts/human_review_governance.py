@@ -179,11 +179,18 @@ def _load_assembler(manual_id: str, root: Path = ROOT) -> Any:
     # ferait resoudre l'assembleur NSI vers le common des mathematiques.
     preexisting = set(sys.modules)
     sys.path.insert(0, inserted)
+    # Le module doit figurer dans sys.modules AVANT son execution : @dataclass
+    # resout ses annotations via sys.modules[cls.__module__], et un module
+    # absent y vaut None. L'assembleur NSI, qui declare une dataclass, echouait
+    # ainsi sur "'NoneType' object has no attribute '__dict__'" et rendait ses
+    # dix-sept chapitres impossibles a gouverner.
+    sys.modules[spec.name] = module
     try:
         spec.loader.exec_module(module)
     finally:
         if sys.path and sys.path[0] == inserted:
             sys.path.pop(0)
+        sys.modules.pop(spec.name, None)
         for name in set(sys.modules) - preexisting:
             origin = getattr(sys.modules[name], "__file__", None)
             if origin and Path(origin).parent == scripts_dir:
