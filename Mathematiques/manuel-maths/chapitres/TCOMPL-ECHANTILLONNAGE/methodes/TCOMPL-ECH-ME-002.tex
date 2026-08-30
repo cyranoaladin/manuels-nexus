@@ -4,17 +4,17 @@
 % assert C(4,1) + C(4,2) == C(5,2) == 10
 % assert C(5,2) + C(5,3) == C(6,3) == 20
 % END-VERIFY
-\begin{fichemethode}{M2}{Determiner des coefficients binomiaux avec le triangle de Pascal}
+\begin{fichemethode}{M2}{Déterminer des coefficients binomiaux avec le triangle de Pascal}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande un coefficient binomial
+  Utiliser cette méthode lorsque l'énoncé demande un coefficient binomial
   $\binom{n}{k}$ pour de petites valeurs de $n$, ou de construire le triangle de
   Pascal ligne par ligne.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Ecrire la ligne $n=0$ : elle contient le seul nombre 1.
+    \item Écrire la ligne $n=0$ : elle contient le seul nombre 1.
     \item Chaque ligne commence et finit par 1 : $\binom{n}{0} = \binom{n}{n} = 1$.
     \item Relation de Pascal : chaque coefficient interieur est la somme des DEUX
       nombres situes au-dessus :
@@ -26,7 +26,7 @@
 }
 
 \exempleRedige{%
-  Determiner $\binom{5}{2}$ avec le triangle de Pascal.
+  Déterminer $\binom{5}{2}$ avec le triangle de Pascal.
 
   \medskip
   \commentaireMarge{Chaque nombre = somme des deux au-dessus.}%
@@ -42,16 +42,16 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Decaler l'indice $k$ : la ligne commence a $k = 0$,
+    \item \textbf{Piège 1.} Decaler l'indice $k$ : la ligne commence a $k = 0$,
       donc $\binom{5}{2}$ est le TROISIEME nombre de la ligne 5.
-    \item \textbf{Piege 2.} Ecrire la relation de Pascal avec de mauvais indices :
+    \item \textbf{Piège 2.} Écrire la relation de Pascal avec de mauvais indices :
       les deux termes ont pour indice superieur $n-1$, jamais $n$.
-    \item \textbf{Piege 3.} Oublier les 1 des extremites en construisant une ligne.
+    \item \textbf{Piège 3.} Oublier les 1 des extrémités en construisant une ligne.
   \end{itemize}
 }
 
 \verifier{%
-  Controler que la somme de la ligne $n$ vaut $2^n$ (ligne 5 : $1+5+10+10+5+1 = 32$)
+  Contrôler que la somme de la ligne $n$ vaut $2^n$ (ligne 5 : $1+5+10+10+5+1 = 32$)
   et que la ligne est symetrique.
 }
 

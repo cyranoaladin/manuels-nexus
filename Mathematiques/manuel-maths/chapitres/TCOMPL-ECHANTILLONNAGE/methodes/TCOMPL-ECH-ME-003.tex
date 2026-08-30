@@ -10,8 +10,8 @@
 \begin{fichemethode}{M3}{Calculer P(X=k) et P(X<=k) pour une loi binomiale}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque $X$ suit une loi binomiale $\mathcal{B}(n\,;\,p)$
-  et que l'enonce demande $P(X = k)$, $P(X \leq k)$, ou une probabilite du type
+  Utiliser cette méthode lorsque $X$ suit une loi binomiale $\mathcal{B}(n\,;\,p)$
+  et que l'énoncé demande $P(X = k)$, $P(X \leq k)$, ou une probabilité du type
   $P(X \geq k)$, a la calculatrice ou en Python.
 }
 
@@ -21,7 +21,7 @@
       identifier $n$, $p$ et $k$.
     \item Pour une valeur exacte :
       $P(X = k) = \dbinom{n}{k} p^k (1-p)^{n-k}$.
-    \item Pour une probabilite cumulee : $P(X \leq k) = \sum_{i=0}^{k} P(X = i)$
+    \item Pour une probabilité cumulee : $P(X \leq k) = \sum_{i=0}^{k} P(X = i)$
       — a la calculatrice (binomFRep/binomcdf) ou en Python.
     \item Transformer les autres formes : $P(X \geq k) = 1 - P(X \leq k-1)$ ;
       $P(a \leq X \leq b) = P(X \leq b) - P(X \leq a-1)$.
@@ -47,16 +47,16 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Ecrire $P(X \geq k) = 1 - P(X \leq k)$ : il faut
+    \item \textbf{Piège 1.} Écrire $P(X \geq k) = 1 - P(X \leq k)$ : il faut
       $1 - P(X \leq k-1)$ (la valeur $k$ doit rester comptee).
-    \item \textbf{Piege 2.} Echanger $p$ et $1-p$, ou $k$ et $n-k$, dans la formule.
-    \item \textbf{Piege 3.} Arrondir trop tot : garder les valeurs exactes jusqu'au
-      resultat final, puis arrondir a $10^{-3}$ pres.
+    \item \textbf{Piège 2.} Echanger $p$ et $1-p$, ou $k$ et $n-k$, dans la formule.
+    \item \textbf{Piège 3.} Arrondir trop tot : garder les valeurs exactes jusqu'au
+      résultat final, puis arrondir a $10^{-3}$ pres.
   \end{itemize}
 }
 
 \verifier{%
-  Controler que le resultat est dans $[0\,;\,1]$, que
+  Contrôler que le résultat est dans $[0\,;\,1]$, que
   $\sum_{k=0}^{n} P(X=k) = 1$, et croiser calculatrice et Python sur une valeur.
 }
 

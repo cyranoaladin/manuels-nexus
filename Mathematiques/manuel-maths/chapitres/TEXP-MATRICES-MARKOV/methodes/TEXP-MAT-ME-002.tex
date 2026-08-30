@@ -12,8 +12,8 @@
 \begin{fichemethode}{M2}{Modeliser une situation par une matrice}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsqu'une situation a DEUX entrees (usines/produits,
-  liaisons d'un reseau, systeme lineaire...) doit etre codee par une matrice
+  Utiliser cette méthode lorsqu'une situation a DEUX entrees (usines/produits,
+  liaisons d'un reseau, système linéaire...) doit être codee par une matrice
   avant tout calcul.
 }
 
@@ -22,26 +22,26 @@
     \item Choisir la signification des LIGNES et celle des COLONNES, et
       l'annoncer explicitement (ex. : lignes = usines, colonnes = produits).
     \item Remplir la matrice : le coefficient $(i\,;\,j)$ est la donnee croisee
-      de la ligne $i$ et de la colonne $j$ (production, cout, effectif...).
-    \item Traduire les operations de l'enonce : cumul dans le temps $\to$
-      multiplication par un scalaire ou somme ; bilan croise (couts,
+      de la ligne $i$ et de la colonne $j$ (production, coût, effectif...).
+    \item Traduire les opérations de l'énoncé : cumul dans le temps $\to$
+      multiplication par un scalaire ou somme ; bilan croise (coûts,
       totaux) $\to$ produit par un vecteur colonne ou une autre matrice.
-    \item Controler la COHERENCE des dimensions avant chaque produit : c'est
-      le meilleur detecteur d'erreur de modelisation.
-    \item Interpreter chaque coefficient du resultat dans le contexte (unites
+    \item Contrôler la COHERENCE des dimensions avant chaque produit : c'est
+      le meilleur detecteur d'erreur de modélisation.
+    \item Interpréter chaque coefficient du résultat dans le contexte (unités
       comprises).
   \end{enumerate}
 }
 
 \exempleRedige{%
   Deux usines fabriquent trois produits ; les productions journalieres sont :
-  usine 1 : 10, 5, 8 ; usine 2 : 4, 12, 6. Les couts unitaires des produits
-  sont 2, 3, 1 (en euros). Modeliser et calculer le cout journalier par usine.
+  usine 1 : 10, 5, 8 ; usine 2 : 4, 12, 6. Les coûts unitaires des produits
+  sont 2, 3, 1 (en euros). Modeliser et calculer le coût journalier par usine.
 
   \medskip
   \commentaireMarge{Lignes $=$ usines, colonnes $=$ produits.}%
   $P = \begin{pmatrix} 10 & 5 & 8\\ 4 & 12 & 6 \end{pmatrix}$ et le vecteur
-  des couts $C = \begin{pmatrix} 2\\ 3\\ 1 \end{pmatrix}$.
+  des coûts $C = \begin{pmatrix} 2\\ 3\\ 1 \end{pmatrix}$.
 
   \medskip
   \commentaireMarge{Dimensions : $(2\times 3)(3 \times 1) = 2 \times 1$.}%
@@ -53,18 +53,18 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Ne pas annoncer la convention lignes/colonnes : la
+    \item \textbf{Piège 1.} Ne pas annoncer la convention lignes/colonnes : la
       matrice transposee code une autre lecture et fausse les produits.
-    \item \textbf{Piege 2.} Multiplier dans le mauvais sens ($CP$ au lieu de
+    \item \textbf{Piège 2.} Multiplier dans le mauvais sens ($CP$ au lieu de
       $PC$) : les dimensions ne s'enchainent plus.
-    \item \textbf{Piege 3.} Additionner des matrices codant des grandeurs
-      d'unites differentes.
+    \item \textbf{Piège 3.} Additionner des matrices codant des grandeurs
+      d'unités différentes.
   \end{itemize}
 }
 
 \verifier{%
-  Recalculer un coefficient du resultat directement depuis l'enonce (43 euros
-  pour l'usine 1), et verifier que dimensions et unites sont coherentes.
+  Recalculer un coefficient du résultat directement depuis l'énoncé (43 euros
+  pour l'usine 1), et vérifier que dimensions et unités sont coherentes.
 }
 
 \sEntrainer{\refExos{M2}}

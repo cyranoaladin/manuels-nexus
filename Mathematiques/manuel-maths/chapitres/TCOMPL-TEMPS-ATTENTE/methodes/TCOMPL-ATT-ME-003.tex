@@ -5,38 +5,38 @@
 % assert (q**10)/(q**4) == q**6
 % assert q**6 == Rational(15625,46656)
 % END-VERIFY
-\begin{fichemethode}{M3}{Exploiter l'absence de memoire de la loi geometrique}
+\begin{fichemethode}{M3}{Exploiter l'absence de memoire de la loi géométrique}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsqu'un enonce conditionne par le passe (« sachant
-  qu'il y a deja eu $m$ echecs... ») et demande une probabilite sur la suite de
+  Utiliser cette méthode lorsqu'un énoncé conditionne par le passe (« sachant
+  qu'il y a deja eu $m$ echecs... ») et demande une probabilité sur la suite de
   l'attente : l'absence de memoire permet de « remettre le compteur a zero ».
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Reperer la structure : une probabilite CONDITIONNELLE de la forme
+    \item Reperer la structure : une probabilité CONDITIONNELLE de la forme
       $P_{(X > m)}(X > m + n)$.
-    \item Citer la propriete d'absence de memoire :
+    \item Citer la propriété d'absence de memoire :
       $P_{(X > m)}(X > m + n) = P(X > n)$.
     \item (Justification si demandee :
       $P_{(X>m)}(X > m+n) = \dfrac{P(X > m+n)}{P(X > m)}
       = \dfrac{(1-p)^{m+n}}{(1-p)^m} = (1-p)^n$.)
     \item Calculer $P(X > n) = (1-p)^n$ avec le $n$ RESTANT (pas $m+n$).
-    \item Interpreter : les echecs passes ne changent rien aux chances futures
+    \item Interpréter : les echecs passes ne changent rien aux chances futures
       — et denoncer l'intuition contraire (« le 6 est du »).
   \end{enumerate}
 }
 
 \exempleRedige{%
   On lance un de jusqu'au premier 6. Sachant que les 4 premiers lancers n'ont
-  pas donne de 6, quelle est la probabilite qu'il n'y ait toujours pas de 6
-  apres 10 lancers ?
+  pas donne de 6, quelle est la probabilité qu'il n'y ait toujours pas de 6
+  après 10 lancers ?
 
   \medskip
   \commentaireMarge{Conditionnement du type $X > m$ : absence de memoire.}%
   On cherche $P_{(X > 4)}(X > 10)$. Par absence de memoire de la loi
-  geometrique, $P_{(X > 4)}(X > 10) = P(X > 6)$.
+  géométrique, $P_{(X > 4)}(X > 10) = P(X > 6)$.
 
   \medskip
   $P(X > 6) = \left(\dfrac{5}{6}\right)^{6} = \dfrac{15625}{46656}
@@ -46,20 +46,20 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Croire qu'apres beaucoup d'echecs le succes devient
-      plus probable (« sophisme du joueur ») : la propriete dit exactement le
+    \item \textbf{Piège 1.} Croire qu'après beaucoup d'echecs le succès devient
+      plus probable (« sophisme du joueur ») : la propriété dit exactement le
       contraire.
-    \item \textbf{Piege 2.} Utiliser $m + n$ au lieu du $n$ restant dans
-      $P(X > n)$ apres la remise a zero.
-    \item \textbf{Piege 3.} Appliquer l'absence de memoire a un conditionnement
-      qui n'est pas du type $X > m$ (par exemple $X = m$) : la propriete ne s'y
+    \item \textbf{Piège 2.} Utiliser $m + n$ au lieu du $n$ restant dans
+      $P(X > n)$ après la remise a zero.
+    \item \textbf{Piège 3.} Appliquer l'absence de memoire a un conditionnement
+      qui n'est pas du type $X > m$ (par exemple $X = m$) : la propriété ne s'y
       applique pas.
   \end{itemize}
 }
 
 \verifier{%
-  Retrouver le resultat par le calcul direct du quotient
-  $\frac{P(X > m+n)}{P(X > m)}$, et controler que la reponse ne depend que de la
+  Retrouver le résultat par le calcul direct du quotient
+  $\frac{P(X > m+n)}{P(X > m)}$, et contrôler que la reponse ne depend que de la
   duree restante $n$.
 }
 

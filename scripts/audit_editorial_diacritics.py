@@ -80,7 +80,6 @@ UNAMBIGUOUS: dict[str, str] = {
     "enonces": "énoncés",
     "equation": "équation",
     "equations": "équations",
-    "equilibre": "équilibré",
     "equivalent": "équivalent",
     "equivalente": "équivalente",
     "esperance": "espérance",
@@ -103,7 +102,6 @@ UNAMBIGUOUS: dict[str, str] = {
     "memes": "mêmes",
     "methode": "méthode",
     "modelisation": "modélisation",
-    "modelise": "modélisé",
     "modelisee": "modélisée",
     "necessaire": "nécessaire",
     "negatif": "négatif",
@@ -179,9 +177,7 @@ UNAMBIGUOUS: dict[str, str] = {
     "decroit": "décroît",
     "degre": "degré",
     "degres": "degrés",
-    "demontre": "démontré",
     "demontrer": "démontrer",
-    "determine": "déterminé",
     "determinee": "déterminée",
     "determiner": "déterminer",
     "element": "élément",
@@ -201,11 +197,9 @@ UNAMBIGUOUS: dict[str, str] = {
     "integrales": "intégrales",
     "interpretation": "interprétation",
     "interpreter": "interpréter",
-    "majore": "majoré",
     "majoree": "majorée",
     "materiel": "matériel",
     "materielle": "matérielle",
-    "minore": "minoré",
     "minoree": "minorée",
     "operation": "opération",
     "operations": "opérations",
@@ -289,6 +283,12 @@ AMBIGUOUS = frozenset(
         "compte",
         "demande",
         "derive",
+        "demontre",
+        "determine",
+        "equilibre",
+        "majore",
+        "minore",
+        "modelise",
         "divise",
         "fixe",
         "forme",
@@ -417,6 +417,31 @@ def chapter_paths(chapter: str) -> list[Path]:
     raise SystemExit(f"chapitre inconnu: {chapter}")
 
 
+def fix_text(text: str) -> str:
+    """Corrige les formes non ambigues, hors META, math, code et macros.
+
+    Seules les formes dont UNE SEULE accentuation est correcte sont traitees.
+    Les verbes du premier groupe en sont exclus : `determine` recouvre le
+    present et le participe, et trancher reviendrait a corriger la grammaire
+    de l'auteur, pas son clavier.
+    """
+
+    for phrase, corrected in CONTEXTUAL.items():
+        text = _replace_in_prose(text, phrase, corrected)
+    for wrong_form, right_form in UNAMBIGUOUS.items():
+        if wrong_form == right_form:
+            continue
+        # minuscules, Capitalise, et CAPITALES : le manuel emploie les trois,
+        # par exemple "un MEME intervalle".
+        for candidate, replacement in (
+            (wrong_form, right_form),
+            (wrong_form.capitalize(), right_form.capitalize()),
+            (wrong_form.upper(), right_form.upper()),
+        ):
+            text = _replace_in_prose(text, candidate, replacement)
+    return text
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--chapter", action="append", help="limiter a un chapitre")
@@ -433,20 +458,7 @@ def main(argv: list[str] | None = None) -> int:
         changed = 0
         for path in paths:
             text = path.read_text(encoding="utf-8")
-            updated = text
-            for phrase, corrected in CONTEXTUAL.items():
-                updated = _replace_in_prose(updated, phrase, corrected)
-            for wrong_form, right_form in UNAMBIGUOUS.items():
-                if wrong_form == right_form:
-                    continue
-                # minuscules, Capitalise, et CAPITALES : le manuel emploie les
-                # trois, par exemple "un MEME intervalle".
-                for candidate, replacement in (
-                    (wrong_form, right_form),
-                    (wrong_form.capitalize(), right_form.capitalize()),
-                    (wrong_form.upper(), right_form.upper()),
-                ):
-                    updated = _replace_in_prose(updated, candidate, replacement)
+            updated = fix_text(text)
             if updated != text:
                 path.write_text(updated, encoding="utf-8")
                 changed += 1

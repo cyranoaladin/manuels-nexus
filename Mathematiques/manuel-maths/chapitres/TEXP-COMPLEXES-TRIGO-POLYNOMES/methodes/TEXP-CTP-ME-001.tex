@@ -6,33 +6,33 @@
 % assert arg(z) == 3*pi/4
 % assert expand_complex(sqrt(2)*exp(3*I*pi/4)) == z
 % END-VERIFY
-\begin{fichemethode}{M1}{Passer de la forme algebrique aux formes trigonometrique et exponentielle}
+\begin{fichemethode}{M1}{Passer de la forme algébrique aux formes trigonométrique et exponentielle}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande de convertir un complexe
-  entre ses trois ecritures : algebrique $a + ib$, trigonometrique
+  Utiliser cette méthode lorsque l'énoncé demande de convertir un complexe
+  entre ses trois ecritures : algébrique $a + ib$, trigonométrique
   $r(\cos\theta + i\sin\theta)$, exponentielle $r\,e^{i\theta}$.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Algebrique $\to$ trigonometrique : calculer $r = |z| =
+    \item Algébrique $\to$ trigonométrique : calculer $r = |z| =
       \sqrt{a^2 + b^2}$, puis chercher $\theta$ avec
       $\cos\theta = \frac{a}{r}$ ET $\sin\theta = \frac{b}{r}$.
     \item Reconnaitre un angle usuel a partir du COUPLE de valeurs (sinon,
       valeur approchee).
-    \item Ecrire $z = r(\cos\theta + i\sin\theta) = r\,e^{i\theta}$ — la forme
-      exponentielle n'est qu'une notation de la forme trigonometrique.
-    \item Exponentielle $\to$ algebrique : developper
+    \item Écrire $z = r(\cos\theta + i\sin\theta) = r\,e^{i\theta}$ — la forme
+      exponentielle n'est qu'une notation de la forme trigonométrique.
+    \item Exponentielle $\to$ algébrique : developper
       $r\,e^{i\theta} = r\cos\theta + i\,r\sin\theta$ avec les valeurs
       exactes.
-    \item Controler : $r > 0$ obligatoirement, et le point doit tomber dans le
+    \item Contrôler : $r > 0$ obligatoirement, et le point doit tomber dans le
       bon quadrant.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Mettre $z = -1 + i$ sous formes trigonometrique et exponentielle.
+  Mettre $z = -1 + i$ sous formes trigonométrique et exponentielle.
 
   \medskip
   \commentaireMarge{Module d'abord.}%
@@ -41,7 +41,7 @@
   \medskip
   \commentaireMarge{Deux conditions pour $\theta$ : cosinus ET sinus.}%
   On cherche $\theta$ tel que $\cos\theta = -\dfrac{1}{\sqrt{2}}$ et
-  $\sin\theta = \dfrac{1}{\sqrt{2}}$ : $\theta = \dfrac{3\pi}{4}$ (deuxieme
+  $\sin\theta = \dfrac{1}{\sqrt{2}}$ : $\theta = \dfrac{3\pi}{4}$ (deuxième
   quadrant).
 
   \medskip
@@ -51,20 +51,20 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Ecrire une « forme trigonometrique » avec $r < 0$
+    \item \textbf{Piège 1.} Écrire une « forme trigonométrique » avec $r < 0$
       ou avec un signe MOINS entre les deux termes : le format est
       $r(\cos\theta + i\sin\theta)$, $r > 0$.
-    \item \textbf{Piege 2.} Deduire $\theta$ du seul cosinus : $\frac{3\pi}{4}$
-      et $-\frac{3\pi}{4}$ ont le meme cosinus — le sinus tranche.
-    \item \textbf{Piege 3.} Confondre $e^{i\theta}$ (module 1) et
+    \item \textbf{Piège 2.} Déduire $\theta$ du seul cosinus : $\frac{3\pi}{4}$
+      et $-\frac{3\pi}{4}$ ont le même cosinus — le sinus tranche.
+    \item \textbf{Piège 3.} Confondre $e^{i\theta}$ (module 1) et
       $r\,e^{i\theta}$ : ne pas oublier le module en revenant a la forme
-      algebrique.
+      algébrique.
   \end{itemize}
 }
 
 \verifier{%
   Redevelopper la forme trouvee pour retrouver $a + ib$ exactement, et
-  controler le quadrant du point sur une figure rapide.
+  contrôler le quadrant du point sur une figure rapide.
 }
 
 \sEntrainer{\refExos{M1}}

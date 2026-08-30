@@ -7,21 +7,21 @@
 % assert f.subs(x, -1) == 3 and f.subs(x, 1) == -1
 % assert limit(f, x, -oo) == -oo and limit(f, x, oo) == oo
 % END-VERIFY
-\begin{fichemethode}{M1}{Etudier une fonction : derivee, limites, tableau de variation}
+\begin{fichemethode}{M1}{Étudier une fonction : dérivée, limites, tableau de variation}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande l'etude complete d'une
-  fonction : calcul de la derivee, signe de la derivee, limites aux bornes et
+  Utiliser cette méthode lorsque l'énoncé demande l'étude complete d'une
+  fonction : calcul de la dérivée, signe de la dérivée, limites aux bornes et
   tableau de variation.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Preciser l'ensemble de definition et les bornes de l'etude.
-    \item Calculer $f'(x)$ avec les formules de derivation (somme, produit,
+    \item Preciser l'ensemble de définition et les bornes de l'étude.
+    \item Calculer $f'(x)$ avec les formules de dérivation (somme, produit,
       quotient, composee) et FACTORISER $f'$ autant que possible.
-    \item Etudier le signe de $f'(x)$ (tableau de signes des facteurs).
-    \item Calculer les limites de $f$ aux bornes de l'ensemble d'etude et les
+    \item Étudier le signe de $f'(x)$ (tableau de signes des facteurs).
+    \item Calculer les limites de $f$ aux bornes de l'ensemble d'étude et les
       valeurs de $f$ aux points ou $f'$ s'annule (extremums locaux).
     \item Dresser le tableau de variation complet : signe de $f'$, fleches de
       variation, limites et extremums.
@@ -29,7 +29,7 @@
 }
 
 \exempleRedige{%
-  Etudier $f(x) = x^3 - 3x + 1$ sur $\mathbb{R}$.
+  Étudier $f(x) = x^3 - 3x + 1$ sur $\mathbb{R}$.
 
   \medskip
   \commentaireMarge{Factoriser $f'$ pour lire son signe.}%
@@ -43,24 +43,24 @@
   $\lim\limits_{x \to +\infty} f(x) = +\infty$.
 
   \medskip
-  Tableau : $f$ croit de $-\infty$ a 3 sur $]-\infty\,;\,-1]$, decroit de 3 a
+  Tableau : $f$ croit de $-\infty$ a 3 sur $]-\infty\,;\,-1]$, décroît de 3 a
   $-1$ sur $[-1\,;\,1]$, puis croit de $-1$ a $+\infty$ sur $[1\,;\,+\infty[$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Conclure sur les variations a partir du signe de $f$
+    \item \textbf{Piège 1.} Conclure sur les variations a partir du signe de $f$
       au lieu du signe de $f'$.
-    \item \textbf{Piege 2.} Ne pas factoriser $f'$ et se tromper dans le tableau
-      de signes d'un trinome.
-    \item \textbf{Piege 3.} Oublier les limites ou les valeurs des extremums
-      dans le tableau : il doit etre complet pour etre exploitable (fiche M2).
+    \item \textbf{Piège 2.} Ne pas factoriser $f'$ et se tromper dans le tableau
+      de signes d'un trinôme.
+    \item \textbf{Piège 3.} Oublier les limites ou les valeurs des extremums
+      dans le tableau : il doit être complet pour être exploitable (fiche M2).
   \end{itemize}
 }
 
 \verifier{%
-  Controler le signe de $f'$ par une valeur test dans chaque intervalle,
-  verifier les extremums en les recalculant, et confronter le tableau a
+  Contrôler le signe de $f'$ par une valeur test dans chaque intervalle,
+  vérifier les extremums en les recalculant, et confronter le tableau a
   l'allure de la courbe a la calculatrice.
 }
 

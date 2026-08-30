@@ -9,22 +9,22 @@
 % I = integrate(x**2, (x, 0, 1))
 % assert I == Rational(1, 3) and lo < I < hi
 % END-VERIFY
-\begin{fichemethode}{M2}{Encadrer une integrale ou une valeur moyenne par des rectangles}
+\begin{fichemethode}{M2}{Encadrer une intégrale ou une valeur moyenne par des rectangles}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande d'\textbf{estimer} ou
+  Utiliser cette méthode lorsque l'énoncé demande d'\textbf{estimer} ou
   d'\textbf{encadrer} $\int_a^b f(x)\,dx$ (ou la valeur moyenne de $f$) sans
-  calculer de primitive : lecture graphique, methode des rectangles.
+  calculer de primitive : lecture graphique, méthode des rectangles.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Decouper $[a\,;\,b]$ en $n$ intervalles de meme largeur $h = \dfrac{b-a}{n}$.
+    \item Decouper $[a\,;\,b]$ en $n$ intervalles de même largeur $h = \dfrac{b-a}{n}$.
     \item Si $f$ est \textbf{croissante} sur $[a\,;\,b]$ : sur chaque morceau, le
       rectangle bati sur la valeur a gauche est SOUS la courbe, celui bati sur la
       valeur a droite est AU-DESSUS.
     \item Sommer : $\displaystyle h\sum_{i=0}^{n-1} f(a+ih) \;\leq\; \int_a^b f(x)\,dx
-      \;\leq\; h\sum_{i=1}^{n} f(a+ih)$ (inegalites inversees si $f$ est decroissante).
+      \;\leq\; h\sum_{i=1}^{n} f(a+ih)$ (inégalités inversees si $f$ est décroissante).
     \item Pour la valeur moyenne $\mu = \dfrac{1}{b-a}\displaystyle\int_a^b f(x)\,dx$ :
       diviser l'encadrement obtenu par $b-a$.
     \item Resserrer l'encadrement en augmentant $n$ si la precision demandee l'exige.
@@ -51,16 +51,16 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier d'etudier le sens de variation : les roles des
-      rectangles gauche/droite s'echangent si $f$ est decroissante.
-    \item \textbf{Piege 2.} Se tromper dans les bornes des sommes ($i$ de $0$ a $n-1$
+    \item \textbf{Piège 1.} Oublier d'étudier le sens de variation : les roles des
+      rectangles gauche/droite s'echangent si $f$ est décroissante.
+    \item \textbf{Piège 2.} Se tromper dans les bornes des sommes ($i$ de $0$ a $n-1$
       pour la gauche, de $1$ a $n$ pour la droite).
-    \item \textbf{Piege 3.} Pour la valeur moyenne, oublier de diviser par $b-a$.
+    \item \textbf{Piège 3.} Pour la valeur moyenne, oublier de diviser par $b-a$.
   \end{itemize}
 }
 
 \verifier{%
-  Controler que la somme inferieure est bien $\leq$ la somme superieure, que leur
+  Contrôler que la somme inferieure est bien $\leq$ la somme superieure, que leur
   ecart vaut $h\,|f(b)-f(a)|$ (fonction monotone), et que toute valeur exacte connue
   tombe dans l'encadrement.
 }

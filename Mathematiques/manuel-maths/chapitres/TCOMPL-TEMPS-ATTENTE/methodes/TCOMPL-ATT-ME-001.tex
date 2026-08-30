@@ -6,25 +6,25 @@
 % assert summation(q**(k-1)*p, (k, 1, oo)) == 1
 % assert summation(k*q**(k-1)*p, (k, 1, oo)) == 6
 % END-VERIFY
-\begin{fichemethode}{M1}{Reconnaitre et definir une loi geometrique}
+\begin{fichemethode}{M1}{Reconnaitre et definir une loi géométrique}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsqu'une experience de Bernoulli (succes de
-  probabilite $p$) est REPETEE de facon independante et que la variable
-  etudiee est le RANG du premier succes : il s'agit de justifier que $X$ suit
-  la loi geometrique de parametre $p$ et d'en donner les proprietes.
+  Utiliser cette méthode lorsqu'une expérience de Bernoulli (succès de
+  probabilité $p$) est REPETEE de facon indépendante et que la variable
+  etudiee est le RANG du premier succès : il s'agit de justifier que $X$ suit
+  la loi géométrique de paramètre $p$ et d'en donner les propriétés.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Verifier les trois conditions du modele : epreuves de Bernoulli
-      identiques, independantes, et $X$ = rang du premier succes.
+    \item Vérifier les trois conditions du modèle : epreuves de Bernoulli
+      identiques, indépendantes, et $X$ = rang du premier succès.
     \item Enoncer la loi : pour tout entier $k \geq 1$,
-      $P(X = k) = (1-p)^{k-1}\,p$ ($k-1$ echecs puis un succes).
+      $P(X = k) = (1-p)^{k-1}\,p$ ($k-1$ echecs puis un succès).
     \item Retenir la queue de distribution : $P(X > n) = (1-p)^n$ (les $n$
       premieres epreuves sont toutes des echecs).
-    \item Donner l'esperance : $E(X) = \dfrac{1}{p}$ — le rang moyen du premier
-      succes.
+    \item Donner l'espérance : $E(X) = \dfrac{1}{p}$ — le rang moyen du premier
+      succès.
     \item Enoncer l'absence de memoire : pour tous entiers $m, n \geq 0$,
       $P_{(X > m)}(X > m+n) = P(X > n)$ — le passe ne change pas l'attente
       restante (exploitation : fiche M3).
@@ -37,9 +37,9 @@
 
   \medskip
   \commentaireMarge{Trois conditions a citer explicitement.}%
-  Chaque lancer est une epreuve de Bernoulli de parametre $p = \dfrac{1}{6}$
-  (succes : « obtenir 6 »), les lancers sont independants et identiques, et $X$
-  est le rang du premier succes : $X$ suit la loi geometrique de parametre
+  Chaque lancer est une epreuve de Bernoulli de paramètre $p = \dfrac{1}{6}$
+  (succès : « obtenir 6 »), les lancers sont indépendants et identiques, et $X$
+  est le rang du premier succès : $X$ suit la loi géométrique de paramètre
   $\dfrac{1}{6}$.
 
   \medskip
@@ -50,18 +50,18 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Confondre avec la loi binomiale : la binomiale
-      compte les succes en $n$ epreuves FIXEES, la geometrique attend le
-      PREMIER succes (nombre d'epreuves non borne).
-    \item \textbf{Piege 2.} Ecrire $P(X = k) = p^{k-1}(1-p)$ : l'exposant
+    \item \textbf{Piège 1.} Confondre avec la loi binomiale : la binomiale
+      compte les succès en $n$ epreuves FIXEES, la géométrique attend le
+      PREMIER succès (nombre d'epreuves non borne).
+    \item \textbf{Piège 2.} Écrire $P(X = k) = p^{k-1}(1-p)$ : l'exposant
       $k-1$ porte sur l'ECHEC $(1-p)$.
-    \item \textbf{Piege 3.} Oublier de justifier l'independance des epreuves
+    \item \textbf{Piège 3.} Oublier de justifier l'indépendance des epreuves
       avant de conclure sur la loi.
   \end{itemize}
 }
 
 \verifier{%
-  Controler que les $P(X = k)$ somment a 1 (serie geometrique), que
+  Contrôler que les $P(X = k)$ somment a 1 (serie géométrique), que
   $E(X) = \frac{1}{p}$ est coherent (plus $p$ est petit, plus l'attente est
   longue), et tester $P(X > 0) = 1$.
 }

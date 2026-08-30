@@ -6,27 +6,27 @@
 % assert 252*x + 198*y == 18
 % assert (x, y) == (4, -5)
 % END-VERIFY
-\begin{fichemethode}{M5}{Demontrer le theoreme de Bezout et construire un couple (x ; y)}
+\begin{fichemethode}{M5}{Démontrer le théorème de Bezout et construire un couple (x ; y)}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande de DEMONTRER que
+  Utiliser cette méthode lorsque l'énoncé demande de DEMONTRER que
   $\mathrm{PGCD}(a\,;\,b)$ s'ecrit $ax + by$ avec $x, y$ entiers, ou de CONSTRUIRE
   explicitement un tel couple en remontant l'algorithme d'Euclide.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Pour la demonstration : considerer l'ensemble
+    \item Pour la démonstration : considerer l'ensemble
       $E = \{ax + by > 0,\ x, y \in \mathbb{Z}\}$, non vide (il contient $|a|$
-      ou $|b|$), et noter $d$ son plus petit element (principe du bon ordre).
-    \item Montrer que $d$ divise $a$ : ecrire $a = dq + r$ avec
+      ou $|b|$), et noter $d$ son plus petit élément (principe du bon ordre).
+    \item Montrer que $d$ divise $a$ : écrire $a = dq + r$ avec
       $0 \leq r < d$ ; alors $r = a - dq$ est de la forme $ax' + by'$, et
       $r > 0$ contredirait la minimalite de $d$ — donc $r = 0$.
-    \item De meme $d$ divise $b$ ; et tout diviseur commun de $a$ et $b$ divise
+    \item De même $d$ divise $b$ ; et tout diviseur commun de $a$ et $b$ divise
       $d = ax + by$ : $d$ est bien le PGCD, ecrit sous la forme annoncee.
-    \item Pour la construction : ecrire les divisions d'Euclide, puis REMONTER
+    \item Pour la construction : écrire les divisions d'Euclide, puis REMONTER
       en exprimant chaque reste a partir des lignes precedentes.
-    \item Controler le couple obtenu en calculant $ax + by$.
+    \item Contrôler le couple obtenu en calculant $ax + by$.
   \end{enumerate}
 }
 
@@ -44,25 +44,25 @@
   $18 = 4(252 - 198) - 198 = 4 \times 252 - 5 \times 198$.
 
   \medskip
-  Le couple $(4\,;\,-5)$ convient. Controle : $1008 - 990 = 18$.
+  Le couple $(4\,;\,-5)$ convient. Contrôle : $1008 - 990 = 18$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Croire le couple $(x\,;\,y)$ unique : il en existe
+    \item \textbf{Piège 1.} Croire le couple $(x\,;\,y)$ unique : il en existe
       une infinite (on peut ajouter $(\frac{b}{d}\,;\,-\frac{a}{d})$).
-    \item \textbf{Piege 2.} Erreur de substitution dans la remontee : traiter
+    \item \textbf{Piège 2.} Erreur de substitution dans la remontee : traiter
       les lignes UNE par UNE en gardant les restes comme inconnues.
-    \item \textbf{Piege 3.} Utiliser la reciproque fausse : $ax + by = c$
+    \item \textbf{Piège 3.} Utiliser la réciproque fausse : $ax + by = c$
       possible n'implique pas $c = \mathrm{PGCD}(a\,;\,b)$ — c'est vrai seulement pour
-      $c$ multiple du PGCD, et l'egalite Bezout $= 1$ caracterise les nombres
+      $c$ multiple du PGCD, et l'égalité Bezout $= 1$ caractérise les nombres
       premiers entre eux.
   \end{itemize}
 }
 
 \verifier{%
-  Calculer effectivement $ax + by$ avec le couple trouve, et controler que le
-  resultat est bien le PGCD obtenu par l'algorithme descendant.
+  Calculer effectivement $ax + by$ avec le couple trouve, et contrôler que le
+  résultat est bien le PGCD obtenu par l'algorithme descendant.
 }
 
 \sEntrainer{\refExos{M5}}

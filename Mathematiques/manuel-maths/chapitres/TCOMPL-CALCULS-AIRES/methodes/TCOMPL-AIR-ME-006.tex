@@ -10,17 +10,17 @@
 % assert lo <= mid <= hi
 % assert lo == Rational(1,10) and mid == Rational(331,3000) and hi == Rational(121,1000)
 % END-VERIFY
-\begin{fichemethode}{M6}{Demontrer que la fonction integrale a pour derivee f}
+\begin{fichemethode}{M6}{Démontrer que la fonction intégrale a pour dérivée f}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande de DEMONTRER que
-  $F(x) = \displaystyle\int_a^x f(t)\,dt$ est derivable de derivee $f$,
+  Utiliser cette méthode lorsque l'énoncé demande de DEMONTRER que
+  $F(x) = \displaystyle\int_a^x f(t)\,dt$ est dérivable de dérivée $f$,
   lorsque $f$ est continue, positive et croissante.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Fixer $x$ et prendre $h > 0$ : interpreter
+    \item Fixer $x$ et prendre $h > 0$ : interpréter
       $F(x+h) - F(x) = \displaystyle\int_x^{x+h} f(t)\,dt$ comme l'aire sous
       la courbe entre $x$ et $x+h$ (relation de Chasles).
     \item Encadrer cette aire par deux rectangles de largeur $h$ : comme $f$
@@ -28,16 +28,16 @@
     \item Diviser par $h > 0$ :
       $f(x) \leq \dfrac{F(x+h) - F(x)}{h} \leq f(x+h)$.
     \item Faire tendre $h$ vers 0 : par CONTINUITE de $f$,
-      $f(x+h) \to f(x)$ ; le theoreme des gendarmes donne
+      $f(x+h) \to f(x)$ ; le théorème des gendarmes donne
       $\dfrac{F(x+h) - F(x)}{h} \to f(x)$.
-    \item Traiter de meme $h < 0$ (encadrement renverse sur $[x+h\,;\,x]$),
-      puis conclure : $F$ est derivable en $x$ et $F'(x) = f(x)$.
+    \item Traiter de même $h < 0$ (encadrement renverse sur $[x+h\,;\,x]$),
+      puis conclure : $F$ est dérivable en $x$ et $F'(x) = f(x)$.
   \end{enumerate}
 }
 
 \exempleRedige{%
   Rediger l'encadrement central pour $f$ continue, positive et croissante,
-  et le controler sur $f(t) = t^2$ en $x = 1$, $h = 0{,}1$.
+  et le contrôler sur $f(t) = t^2$ en $x = 1$, $h = 0{,}1$.
 
   \medskip
   \commentaireMarge{Aire entre deux rectangles de largeur $h$.}%
@@ -48,26 +48,26 @@
   $h\,f(x) \leq F(x+h) - F(x) \leq h\,f(x+h)$.
 
   \medskip
-  \commentaireMarge{Controle numerique de l'encadrement.}%
+  \commentaireMarge{Contrôle numérique de l'encadrement.}%
   Pour $f(t) = t^2$ ($F(x) = \frac{x^3}{3}$), $x = 1$, $h = 0{,}1$ :
   $0{,}1 \leq F(1{,}1) - F(1) = \dfrac{331}{3000} \approx 0{,}1103
-  \leq 0{,}121$ — l'encadrement est verifie, et le quotient
+  \leq 0{,}121$ — l'encadrement est vérifie, et le quotient
   $\approx 1{,}103$ se rapproche bien de $f(1) = 1$ quand $h$ diminue.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier l'hypothese de CROISSANCE : sans elle,
+    \item \textbf{Piège 1.} Oublier l'hypothèse de CROISSANCE : sans elle,
       l'encadrement par $f(x)$ et $f(x+h)$ est faux (il faudrait min/max).
-    \item \textbf{Piege 2.} Oublier la CONTINUITE au moment du passage a la
+    \item \textbf{Piège 2.} Oublier la CONTINUITE au moment du passage a la
       limite : c'est elle qui donne $f(x+h) \to f(x)$.
-    \item \textbf{Piege 3.} Ne traiter que $h > 0$ : la derivabilite exige
+    \item \textbf{Piège 3.} Ne traiter que $h > 0$ : la derivabilite exige
       aussi la limite a gauche.
   \end{itemize}
 }
 
 \verifier{%
-  Controler l'encadrement sur un exemple numerique (rectangles), et verifier
+  Contrôler l'encadrement sur un exemple numérique (rectangles), et vérifier
   la conclusion sur une fonction dont on connait une primitive
   ($F(x) = \frac{x^3}{3}$ pour $f(t) = t^2$ : $F' = f$).
 }

@@ -9,20 +9,20 @@
 % assert 7*u + b*v == 1
 % assert c == 7*u*c + v*(b*c)
 % END-VERIFY
-\begin{fichemethode}{M6}{Demontrer et appliquer le theoreme de Gauss}
+\begin{fichemethode}{M6}{Démontrer et appliquer le théorème de Gauss}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande de DEMONTRER le theoreme de
+  Utiliser cette méthode lorsque l'énoncé demande de DEMONTRER le théorème de
   Gauss (si $a \mid bc$ et $\mathrm{PGCD}(a\,;\,b) = 1$, alors $a \mid c$) ou de
   l'APPLIQUER pour simplifier une relation de divisibilite.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Poser les hypotheses : $a \mid bc$ et $\mathrm{PGCD}(a\,;\,b) = 1$.
+    \item Poser les hypothèses : $a \mid bc$ et $\mathrm{PGCD}(a\,;\,b) = 1$.
     \item Traduire la primalite relative par Bezout (fiche M5) : il existe
       $u, v \in \mathbb{Z}$ tels que $au + bv = 1$.
-    \item Multiplier cette egalite par $c$ : $auc + bvc = c$.
+    \item Multiplier cette égalité par $c$ : $auc + bvc = c$.
     \item Constater que $a$ divise chaque terme du membre de gauche : $a \mid
       auc$ (evident) et $a \mid bvc$ (car $a \mid bc$).
     \item Conclure : $a$ divise la somme, donc $a \mid c$. \quad En
@@ -32,7 +32,7 @@
 }
 
 \exempleRedige{%
-  Demontrer le theoreme de Gauss, puis l'appliquer : montrer que si
+  Démontrer le théorème de Gauss, puis l'appliquer : montrer que si
   $7 \mid 5c$, alors $7 \mid c$.
 
   \medskip
@@ -50,18 +50,18 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Oublier l'hypothese $\mathrm{PGCD}(a\,;\,b) = 1$ :
+    \item \textbf{Piège 1.} Oublier l'hypothèse $\mathrm{PGCD}(a\,;\,b) = 1$ :
       $6 \mid 4 \times 3$ mais $6 \nmid 4$ et $6 \nmid 3$.
-    \item \textbf{Piege 2.} Confondre avec le lemme d'Euclide ($p$ premier
+    \item \textbf{Piège 2.} Confondre avec le lemme d'Euclide ($p$ premier
       divise $bc$ $\Rightarrow$ $p \mid b$ ou $p \mid c$) : Gauss ne suppose
       pas $a$ premier.
-    \item \textbf{Piege 3.} Utiliser Gauss dans une demonstration... de Gauss
+    \item \textbf{Piège 3.} Utiliser Gauss dans une démonstration... de Gauss
       (circularite) : la preuve repose sur Bezout uniquement.
   \end{itemize}
 }
 
 \verifier{%
-  Tester l'enonce sur des valeurs concretes (y compris un contre-exemple quand
+  Tester l'énoncé sur des valeurs concretes (y compris un contre-exemple quand
   $\mathrm{PGCD}(a\,;\,b) \neq 1$), et relire la preuve en verifiant que chaque
   divisibilite invoquee est justifiee.
 }

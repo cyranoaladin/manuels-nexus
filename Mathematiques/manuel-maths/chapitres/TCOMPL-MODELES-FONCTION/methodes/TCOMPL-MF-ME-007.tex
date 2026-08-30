@@ -9,12 +9,12 @@
 % assert a == Rational(11, 10) and b == Rational(4, 5)
 % assert my == a*mx + b
 % END-VERIFY
-\begin{fichemethode}{M7}{Determiner une droite de regression (calcul ou logiciel)}
+\begin{fichemethode}{M7}{Déterminer une droite de regression (calcul ou logiciel)}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque le nuage est sensiblement rectiligne
-  (fiche M6) et que l'enonce demande la droite de regression de $y$ en $x$ par
-  la methode des moindres carres, a la main ou au logiciel.
+  Utiliser cette méthode lorsque le nuage est sensiblement rectiligne
+  (fiche M6) et que l'énoncé demande la droite de regression de $y$ en $x$ par
+  la méthode des moindres carres, a la main ou au logiciel.
 }
 
 \pasApas{%
@@ -24,19 +24,19 @@
       $a = \dfrac{\sum_i (x_i - \bar{x})(y_i - \bar{y})}
       {\sum_i (x_i - \bar{x})^2}$
       (organiser les calculs en tableau de colonnes).
-    \item Calculer l'ordonnee a l'origine $b = \bar{y} - a\,\bar{x}$ : la
+    \item Calculer l'ordonnée a l'origine $b = \bar{y} - a\,\bar{x}$ : la
       droite passe TOUJOURS par le point moyen $G$.
     \item Au logiciel/calculatrice : mode statistiques a deux variables,
-      regression lineaire $y = ax + b$ — relever $a$ et $b$ (et verifier la
-      coherence avec le nuage).
-    \item Ecrire l'equation $y = ax + b$ et l'exploiter (tendance,
+      regression linéaire $y = ax + b$ — relever $a$ et $b$ (et vérifier la
+      cohérence avec le nuage).
+    \item Écrire l'équation $y = ax + b$ et l'exploiter (tendance,
       interpolation), en restant prudent hors de la plage des donnees.
   \end{enumerate}
 }
 
 \exempleRedige{%
   Serie : $(0\,;\,1)$, $(1\,;\,2)$, $(2\,;\,2)$, $(3\,;\,5)$, $(4\,;\,5)$,
-  de point moyen $G(2\,;\,3)$. Determiner la droite de regression de $y$ en $x$.
+  de point moyen $G(2\,;\,3)$. Déterminer la droite de regression de $y$ en $x$.
 
   \medskip
   \commentaireMarge{Tableau des ecarts au point moyen.}%
@@ -50,23 +50,23 @@
   la droite de regression est $y = 1{,}1\,x + 0{,}8$.
 
   \medskip
-  Controle : $1{,}1 \times 2 + 0{,}8 = 3 = \bar{y}$ — la droite passe par $G$.
+  Contrôle : $1{,}1 \times 2 + 0{,}8 = 3 = \bar{y}$ — la droite passe par $G$.
 }
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Inverser les roles dans la pente : le denominateur
+    \item \textbf{Piège 1.} Inverser les roles dans la pente : le dénominateur
       est $\sum (x_i - \bar{x})^2$, jamais un terme en $y$.
-    \item \textbf{Piege 2.} Calculer $b$ avant $a$, ou l'estimer graphiquement :
+    \item \textbf{Piège 2.} Calculer $b$ avant $a$, ou l'estimer graphiquement :
       $b$ se DEDUIT de $a$ par $b = \bar{y} - a\bar{x}$.
-    \item \textbf{Piege 3.} Extrapoler sans precaution tres loin de la plage des
-      donnees : le modele affine n'y est plus valide a priori.
+    \item \textbf{Piège 3.} Extrapoler sans precaution très loin de la plage des
+      donnees : le modèle affine n'y est plus valide a priori.
   \end{itemize}
 }
 
 \verifier{%
-  Verifier que la droite passe par le point moyen $G$, comparer $a$ et $b$ avec
-  la sortie du logiciel, et controler visuellement que la droite traverse le
+  Vérifier que la droite passe par le point moyen $G$, comparer $a$ et $b$ avec
+  la sortie du logiciel, et contrôler visuellement que la droite traverse le
   nuage.
 }
 

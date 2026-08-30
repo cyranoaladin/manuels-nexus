@@ -7,34 +7,34 @@
 % assert P.subs(z, 1) == 0
 % assert expand((z - 1)*(z**2 - 2*z + 5) - P) == 0
 % END-VERIFY
-\begin{fichemethode}{M4}{Resoudre une equation de degre 2 ou 3 (racine connue) et factoriser}
+\begin{fichemethode}{M4}{Résoudre une équation de degré 2 ou 3 (racine connue) et factoriser}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande de resoudre dans $\mathbb{C}$
-  une equation du second degre a coefficients reels, ou une equation de degre 3
+  Utiliser cette méthode lorsque l'énoncé demande de résoudre dans $\mathbb{C}$
+  une équation du second degré a coefficients réels, ou une équation de degré 3
   dont une racine est connue (donnee ou evidente), avec factorisation.
 }
 
 \pasApas{%
   \begin{enumerate}
-    \item Degre 2 : calculer $\Delta = b^2 - 4ac$. Si $\Delta < 0$, les
+    \item Degré 2 : calculer $\Delta = b^2 - 4ac$. Si $\Delta < 0$, les
       racines sont complexes conjuguees :
       $z = \dfrac{-b \pm i\sqrt{-\Delta}}{2a}$.
-    \item Degre 3 avec racine connue $a$ : VERIFIER $P(a) = 0$ par le calcul.
+    \item Degré 3 avec racine connue $a$ : VERIFIER $P(a) = 0$ par le calcul.
     \item Factoriser $P(z) = (z - a)(\alpha z^2 + \beta z + \gamma)$ : trouver
       $\alpha, \beta, \gamma$ par identification des coefficients (developper
-      et egaler degre par degre).
-    \item Resoudre le facteur du second degre (etape 1).
+      et egaler degré par degré).
+    \item Résoudre le facteur du second degré (étape 1).
     \item Conclure : l'ensemble des solutions reunit la racine connue et
-      celles du trinome ; l'ecrire completement.
+      celles du trinôme ; l'écrire completement.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Resoudre $z^3 - 3z^2 + 7z - 5 = 0$ sachant que 1 est racine.
+  Résoudre $z^3 - 3z^2 + 7z - 5 = 0$ sachant que 1 est racine.
 
   \medskip
-  \commentaireMarge{Controle prealable de la racine donnee.}%
+  \commentaireMarge{Contrôle prealable de la racine donnee.}%
   $P(1) = 1 - 3 + 7 - 5 = 0$ : 1 est bien racine.
 
   \medskip
@@ -53,19 +53,19 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Ecrire $\sqrt{\Delta}$ pour $\Delta < 0$ : la bonne
+    \item \textbf{Piège 1.} Écrire $\sqrt{\Delta}$ pour $\Delta < 0$ : la bonne
       ecriture est $i\sqrt{-\Delta}$ ($\sqrt{16} = 4$, facteur $i$ a part).
-    \item \textbf{Piege 2.} Erreur d'identification : verifier TOUS les
-      coefficients, y compris celui qui sert de controle.
-    \item \textbf{Piege 3.} Oublier la racine connue dans l'ensemble final des
+    \item \textbf{Piège 2.} Erreur d'identification : vérifier TOUS les
+      coefficients, y compris celui qui sert de contrôle.
+    \item \textbf{Piège 3.} Oublier la racine connue dans l'ensemble final des
       solutions.
   \end{itemize}
 }
 
 \verifier{%
   Redevelopper la factorisation pour retrouver $P$, substituer chaque racine
-  dans l'equation initiale, et controler que les racines non reelles sont
-  conjuguees (coefficients reels).
+  dans l'équation initiale, et contrôler que les racines non réelles sont
+  conjuguees (coefficients réels).
 }
 
 \sEntrainer{\refExos{M4}}

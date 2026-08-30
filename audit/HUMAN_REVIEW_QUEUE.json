@@ -154,11 +154,45 @@
       ],
       "note": "ANSWER_KEY_VERDICT = PASS, REMEDIATION_COVERAGE = FAIL. A corriger lors de la verticale TSPE correspondante ; a ne pas confondre avec QCM_EVIDENCE_SCHEMA_COVERAGE_GAP, qui porte sur la preuve et non sur la source.",
       "release_blocking": true
+    },
+    {
+      "item_id": "METHOD_REQUALIFICATION_ACCENT_86",
+      "kind": "QUALIFICATION_INVALIDATED_REQUIRING_REREVIEW",
+      "count": 86,
+      "decision_ref": "arbitrage humain 2026-08-30 : appliquer les accents, périmer les qualifications",
+      "cause": "campagne diacritiques editoriales : la correction des formes non ambigues modifie le texte qualifie, donc le sha lie a la decision",
+      "change_classes": {
+        "ACCENT_ONLY": 86
+      },
+      "chapters": {
+        "1SPE-TRIGONOMETRIE": 3,
+        "TCOMPL-CALCULS-AIRES": 6,
+        "TCOMPL-CORRELATION-CAUSALITE": 5,
+        "TCOMPL-ECHANTILLONNAGE": 6,
+        "TCOMPL-INEGALITES": 5,
+        "TCOMPL-INFERENCE-BAYESIENNE": 5,
+        "TCOMPL-LOGARITHME-HISTORIQUE": 5,
+        "TCOMPL-MODELES-EVOLUTION": 5,
+        "TCOMPL-MODELES-FONCTION": 7,
+        "TCOMPL-TEMPS-ATTENTE": 6,
+        "TEXP-ARITHMETIQUE": 9,
+        "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE": 5,
+        "TEXP-COMPLEXES-TRIGO-POLYNOMES": 7,
+        "TEXP-GRAPHES": 5,
+        "TEXP-MATRICES-MARKOV": 7
+      },
+      "owners": [
+        "direction_scientifique_programme"
+      ],
+      "release_blocking": true,
+      "machine_cannot_requalify": true,
+      "ledger": "audit/METHOD_REQUALIFICATION_QUEUE.json"
     }
   ],
   "totals": {
-    "release_blocking_items": 5,
+    "release_blocking_items": 6,
     "new_objects_awaiting_review": 13,
-    "qcm_questions_awaiting_human_proof": 1
+    "qcm_questions_awaiting_human_proof": 1,
+    "method_qualifications_awaiting_requalification": 86
   }
 }

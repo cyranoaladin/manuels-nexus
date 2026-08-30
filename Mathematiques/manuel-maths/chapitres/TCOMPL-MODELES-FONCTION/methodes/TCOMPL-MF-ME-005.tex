@@ -7,36 +7,36 @@
 % g = exp(x) + x**2
 % assert simplify(diff(g, x, 2) - (exp(x) + 2)) == 0
 % END-VERIFY
-\begin{fichemethode}{M5}{Etudier la convexite d'une fonction deux fois derivable}
+\begin{fichemethode}{M5}{Étudier la convexité d'une fonction deux fois dérivable}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque $f$ est deux fois derivable et que l'enonce
-  demande de DETERMINER par le calcul les intervalles de convexite/concavite et
+  Utiliser cette méthode lorsque $f$ est deux fois dérivable et que l'énoncé
+  demande de DETERMINER par le calcul les intervalles de convexité/concavité et
   les points d'inflexion.
 }
 
 \pasApas{%
   \begin{enumerate}
     \item Calculer $f'(x)$, puis $f''(x)$, en simplifiant/factorisant $f''$.
-    \item Etudier le signe de $f''$ sur l'ensemble d'etude (tableau de signes).
+    \item Étudier le signe de $f''$ sur l'ensemble d'étude (tableau de signes).
     \item Conclure : $f'' \geq 0$ sur un intervalle $\to$ $f$ convexe ;
       $f'' \leq 0$ $\to$ $f$ concave.
     \item Point d'inflexion : abscisse ou $f''$ s'annule EN CHANGEANT de
-      signe ; calculer son ordonnee $f(x_0)$.
-    \item Presenter le resultat dans un tableau (signe de $f''$, convexite,
+      signe ; calculer son ordonnée $f(x_0)$.
+    \item Presenter le résultat dans un tableau (signe de $f''$, convexité,
       inflexions) coherent avec l'allure de la courbe.
   \end{enumerate}
 }
 
 \exempleRedige{%
-  Etudier la convexite de $f(x) = x^3 - 3x + 1$ sur $\mathbb{R}$.
+  Étudier la convexité de $f(x) = x^3 - 3x + 1$ sur $\mathbb{R}$.
 
   \medskip
   \commentaireMarge{Deux derivations successives.}%
   $f'(x) = 3x^2 - 3$, puis $f''(x) = 6x$.
 
   \medskip
-  \commentaireMarge{Le signe de $f''$ pilote la convexite.}%
+  \commentaireMarge{Le signe de $f''$ pilote la convexité.}%
   $f''(x) < 0$ pour $x < 0$ : $f$ est concave sur $]-\infty\,;\,0]$.
   $f''(x) > 0$ pour $x > 0$ : $f$ est convexe sur $[0\,;\,+\infty[$.
 
@@ -47,18 +47,18 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Conclure a une inflexion des que $f''(x_0) = 0$ :
+    \item \textbf{Piège 1.} Conclure a une inflexion des que $f''(x_0) = 0$ :
       il faut aussi le CHANGEMENT de signe (contre-exemple : $x^4$ en 0).
-    \item \textbf{Piege 2.} Confondre le role des derivees : $f'$ donne les
-      variations, $f''$ la convexite.
-    \item \textbf{Piege 3.} Erreur de calcul dans la seconde derivation
-      (surtout avec produits et composees) : simplifier $f'$ avant de deriver a
+    \item \textbf{Piège 2.} Confondre le role des dérivées : $f'$ donne les
+      variations, $f''$ la convexité.
+    \item \textbf{Piège 3.} Erreur de calcul dans la seconde dérivation
+      (surtout avec produits et composees) : simplifier $f'$ avant de dériver a
       nouveau.
   \end{itemize}
 }
 
 \verifier{%
-  Controler le signe de $f''$ par une valeur test dans chaque intervalle, et
+  Contrôler le signe de $f''$ par une valeur test dans chaque intervalle, et
   confronter les zones obtenues a la position de la courbe par rapport a ses
   tangentes.
 }

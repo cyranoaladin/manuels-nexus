@@ -7,10 +7,10 @@
 % assert all(N % p == 1 for p in (2, 3, 5, 7, 11, 13))
 % assert factorint(360) == {2: 3, 3: 2, 5: 1}
 % END-VERIFY
-\begin{fichemethode}{M7}{Demontrer l'infinitude des nombres premiers et decomposer en facteurs premiers}
+\begin{fichemethode}{M7}{Démontrer l'infinitude des nombres premiers et decomposer en facteurs premiers}
 
 \quandUtiliser{%
-  Utiliser cette methode lorsque l'enonce demande la demonstration d'Euclide
+  Utiliser cette méthode lorsque l'énoncé demande la démonstration d'Euclide
   (il existe une infinite de nombres premiers) ou l'utilisation de la
   decomposition en facteurs premiers (diviseurs, PGCD, simplifications).
 }
@@ -26,14 +26,14 @@
       $p$ diviserait $N$ et $p_1 \cdots p_r$, donc leur difference 1 —
       impossible. L'ensemble des premiers est donc infini.
     \item Decomposition : diviser successivement par les premiers croissants
-      (2, 3, 5...) jusqu'a atteindre 1, et ecrire
+      (2, 3, 5...) jusqu'a atteindre 1, et écrire
       $n = p_1^{\alpha_1} \cdots p_k^{\alpha_k}$ (existence et unicite admises
-      ou demontrees selon l'enonce).
+      ou demontrees selon l'énoncé).
   \end{enumerate}
 }
 
 \exempleRedige{%
-  1) Demontrer qu'il existe une infinite de nombres premiers.
+  1) Démontrer qu'il existe une infinite de nombres premiers.
   2) Decomposer 360.
 
   \medskip
@@ -44,7 +44,7 @@
   \hfill$\square$
 
   \medskip
-  \commentaireMarge{Attention : $N$ n'est pas forcement premier lui-meme
+  \commentaireMarge{Attention : $N$ n'est pas forcement premier lui-même
   ($2 \cdot 3 \cdot 5 \cdot 7 \cdot 11 \cdot 13 + 1 = 30031 = 59 \times 509$).}%
   2) $360 = 2 \times 180 = 2^2 \times 90 = 2^3 \times 45 = 2^3 \times 3^2
   \times 5$.
@@ -52,18 +52,18 @@
 
 \pieges{%
   \begin{itemize}
-    \item \textbf{Piege 1.} Affirmer que $N = p_1 \cdots p_r + 1$ est premier :
+    \item \textbf{Piège 1.} Affirmer que $N = p_1 \cdots p_r + 1$ est premier :
       la preuve dit seulement qu'il a un diviseur premier HORS de la liste.
-    \item \textbf{Piege 2.} Oublier de justifier que tout entier $\geq 2$ a un
+    \item \textbf{Piège 2.} Oublier de justifier que tout entier $\geq 2$ a un
       diviseur premier.
-    \item \textbf{Piege 3.} Dans la decomposition, s'arreter avant 1 ou sauter
+    \item \textbf{Piège 3.} Dans la decomposition, s'arreter avant 1 ou sauter
       un facteur repete ($2^3$ et non $2^2$ pour 360).
   \end{itemize}
 }
 
 \verifier{%
   Recomposer le produit de la decomposition pour retrouver l'entier initial, et
-  controler que chaque facteur ecrit est bien premier.
+  contrôler que chaque facteur ecrit est bien premier.
 }
 
 \sEntrainer{\refExos{M7}}
