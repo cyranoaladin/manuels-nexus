@@ -662,6 +662,10 @@ def test_materialization_plan_preserves_history_and_emits_all_required_fields(
         historical,
         observed_source_digest=inventory["source_digest"],
         observed_model_digest=inventory_module._model_digest(inventory),
+        suspended_fingerprints={
+            entry["fingerprint"]
+            for entry in inventory_module.invalid_qualifications(ROOT)
+        },
     )
 
     assert plan["approved_fingerprint_count"] == 13
@@ -1618,6 +1622,10 @@ def test_materialization_plan_corrects_policy_entry_drift_after_materialization(
         inventory_module._load_dispositions(ROOT),
         observed_source_digest=inventory["source_digest"],
         observed_model_digest=inventory_module._model_digest(inventory),
+        suspended_fingerprints={
+            entry["fingerprint"]
+            for entry in inventory_module.invalid_qualifications(ROOT)
+        },
     )
     materialized_records = deepcopy(records)
     for record in materialized_records:
@@ -1643,6 +1651,10 @@ def test_materialization_plan_corrects_policy_entry_drift_after_materialization(
         drifted,
         observed_source_digest=inventory["source_digest"],
         observed_model_digest=inventory_module._model_digest(inventory),
+        suspended_fingerprints={
+            entry["fingerprint"]
+            for entry in inventory_module.invalid_qualifications(ROOT)
+        },
     )
 
     assert repaired["dispositions_payload"]["dispositions"][fingerprint][
@@ -1664,6 +1676,10 @@ def test_materialization_refuses_approved_set_drift_without_partial_payload(
         historical_before_materialization,
         observed_source_digest=inventory["source_digest"],
         observed_model_digest=inventory_module._model_digest(inventory),
+        suspended_fingerprints={
+            entry["fingerprint"]
+            for entry in inventory_module.invalid_qualifications(ROOT)
+        },
     )
     historical = initial_plan["dispositions_payload"]["dispositions"]
     managed = {
