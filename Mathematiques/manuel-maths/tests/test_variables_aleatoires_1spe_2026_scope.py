@@ -187,36 +187,45 @@ def test_repetitions_obligatoires_sont_bornees_a_quatre_epreuves() -> None:
 def test_qcm_reclasses_ont_une_cle_unique_et_des_diagnostics_specifiques() -> None:
     data = json.loads((CHAPTER / "qcm/1SPE-VARALEA-QCM.json").read_text(encoding="utf-8"))
     questions = {question["id"]: question for question in data["questions"]}
-    # Les lettres ont ete permutees pour respecter le contrat de distribution
-    # des cles (ecart max-min <= 1). La valeur attendue reste calculee ici, sans
-    # lire le JSON : le test verifie toujours que la cle designe l'unique option
-    # egale a cette valeur.
+    # La valeur attendue est CALCULEE ici, jamais lue dans le JSON ; les
+    # options courantes sont parsees en valeurs exactes, et le test verifie
+    # que la cle designe l'unique option egale au calcul independant. La
+    # lettre n'apparait plus : la politique de distribution la rend mobile.
     expected = {
-        "Q7": ("C", Fraction(1, 2) ** 3),
-        "Q8": ("D", 2 * Fraction(1, 3) * Fraction(2, 3)),
-        "Q9": ("A", 2**3),
-        "Q10": ("B", 3 * 4 - 2),
-        "Q11": ("C", -2 * 5 + 7),
-        "Q12": ("D", -4 * (-3) + 1),
+        "Q7": Fraction(1, 2) ** 3,
+        "Q8": 2 * Fraction(1, 3) * Fraction(2, 3),
+        "Q9": 2**3,
+        "Q10": 3 * 4 - 2,
+        "Q11": -2 * 5 + 7,
+        "Q12": -4 * (-3) + 1,
     }
-    rendered_answers = {
-        "Q7": {"A": Fraction(1, 6), "B": Fraction(3, 8), "C": Fraction(1, 8), "D": Fraction(1, 2)},
-        "Q8": {"A": Fraction(2, 9), "B": Fraction(2, 3), "C": Fraction(1, 9), "D": Fraction(4, 9)},
-        "Q9": {"A": 8, "B": 3, "C": 6, "D": 9},
-        "Q10": {"A": 12, "B": 10, "C": 6, "D": 2},
-        "Q11": {"A": -10, "B": 17, "C": -3, "D": 12},
-        "Q12": {"A": -13, "B": -2, "C": -11, "D": 13},
-    }
+
+    def _valeur(texte: str) -> Fraction | None:
+        compact = texte.strip().strip("$").replace(" ", "")
+        fraction = re.fullmatch(r"(-?)\\frac\{(-?\d+)\}\{(-?\d+)\}", compact)
+        if fraction:
+            signe = -1 if fraction.group(1) == "-" else 1
+            return signe * Fraction(int(fraction.group(2)), int(fraction.group(3)))
+        entier = re.fullmatch(r"-?\d+", compact)
+        if entier:
+            return Fraction(int(compact))
+        return None
+
     generic = re.compile(r"arbitraire|erreur de calcul|confusion totale", re.IGNORECASE)
-    for question_id, (answer, value) in expected.items():
+    for question_id, value in expected.items():
         question = questions[question_id]
+        valeurs = {
+            lettre: _valeur(option) for lettre, option in question["options"].items()
+        }
+        assert None not in valeurs.values(), (question_id, question["options"])
         correct_options = [
-            option for option, option_value in rendered_answers[question_id].items()
-            if option_value == value
+            lettre for lettre, v in valeurs.items() if v == value
         ]
-        assert correct_options == [answer]
-        assert question["correcte"] == answer
-        assert set(question["diagnostics"]) == set(question["options"]) - {answer}
+        assert len(correct_options) == 1, (question_id, valeurs)
+        assert question["correcte"] == correct_options[0]
+        assert set(question["diagnostics"]) == set(question["options"]) - {
+            question["correcte"]
+        }
         assert all(
             not generic.search(diagnostic["erreur"])
             for diagnostic in question["diagnostics"].values()

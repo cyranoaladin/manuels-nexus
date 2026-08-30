@@ -171,17 +171,19 @@ def test_exponentielle_qcm_exclut_limites_et_derivation_generale() -> None:
         "C4",
         "C5",
     }
+    # L'identite scientifique de la cle est la VALEUR de l'option correcte,
+    # la lettre etant rendue mobile par la politique de distribution.
     assert {
-        question_id: by_id[question_id]["correcte"]
+        question_id: by_id[question_id]["options"][by_id[question_id]["correcte"]]
         for question_id in ("Q8", "Q10", "Q11", "Q12", "Q13", "Q14", "Q15")
     } == {
-        "Q8": "C",
-        "Q10": "C",
-        "Q11": "C",
-        "Q12": "C",
-        "Q13": "B",
-        "Q14": "B",
-        "Q15": "B",
+        "Q8": "$0<\\mathrm{e}^x<1$",
+        "Q10": "$3\\,\\mathrm{e}^{3t}$",
+        "Q11": "$-2\\,\\mathrm{e}^{-2t}$",
+        "Q12": "$0{,}5\\,\\mathrm{e}^{0{,}5t}$",
+        "Q13": "$500$",
+        "Q14": "$\\mathrm{e}^{-0{,}3}$",
+        "Q15": "Elle est décroissante et passe par $(0;1)$.",
     }
     assert all(
         set(question["diagnostics"])
@@ -319,8 +321,12 @@ def test_suites_limites_intuitives_couvrent_les_trois_comportements_sans_formali
     qcm = _json(chapter / "qcm/1SPE-SUITES-QCM.json")
     limit_question = next(question for question in qcm["questions"] if question["id"] == "Q3")
     assert limit_question["capacite"] == "C8"
-    assert limit_question["correcte"] == "C"
-    assert set(limit_question["diagnostics"]) == {"A", "B", "D"}
+    assert limit_question["options"][limit_question["correcte"]] == (
+        "Elle semble ne pas avoir de limite."
+    )
+    assert set(limit_question["diagnostics"]) == (
+        set(limit_question["options"]) - {limit_question["correcte"]}
+    )
 
 
 def test_remediation_c8_definit_les_suites_avant_de_conjecturer() -> None:

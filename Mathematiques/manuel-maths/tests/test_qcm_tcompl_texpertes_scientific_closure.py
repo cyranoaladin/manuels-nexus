@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+
+import _qcm_par_contenu as _par_contenu
 from pathlib import Path
 
 import yaml
@@ -77,10 +79,10 @@ def test_echantillonnage_reste_sur_les_objets_binomiaux_du_programme() -> None:
     ).lower()
 
     assert not any(term in corpus for term in ("intervalle de confiance", "approximation normale", "estimateur"))
-    assert _question("TCOMPL-ECHANTILLONNAGE", "Q3")["correcte"] == "B"
-    assert "3/8" in _question("TCOMPL-ECHANTILLONNAGE", "Q3")["options"]["B"]
-    assert _question("TCOMPL-ECHANTILLONNAGE", "Q4")["correcte"] == "D"
-    assert "7/8" in _question("TCOMPL-ECHANTILLONNAGE", "Q4")["options"]["D"]
+    q3 = _question("TCOMPL-ECHANTILLONNAGE", "Q3")
+    assert q3["correcte"] == _par_contenu.lettre_de_option(q3, "3/8")
+    q4 = _question("TCOMPL-ECHANTILLONNAGE", "Q4")
+    assert q4["correcte"] == _par_contenu.lettre_de_option(q4, "7/8")
 
 
 def test_inegalites_evalue_lorenz_et_gini_sans_theoremes_hors_programme() -> None:
@@ -90,8 +92,8 @@ def test_inegalites_evalue_lorenz_et_gini_sans_theoremes_hors_programme() -> Non
     assert not any(term in corpus for term in ("tcheby", "markov", "grands nombres"))
     assert "lorenz" in corpus
     assert "gini" in corpus
-    assert _question("TCOMPL-INEGALITES", "Q5")["correcte"] == "B"
-    assert _question("TCOMPL-INEGALITES", "Q5")["options"]["B"] == "$1/3$"
+    q5 = _question("TCOMPL-INEGALITES", "Q5")
+    assert q5["correcte"] == _par_contenu.lettre_de_option(q5, "$1/3$")
 
 
 def test_graphes_reste_sur_adjacence_et_puissances_de_matrice() -> None:
@@ -105,27 +107,42 @@ def test_graphes_reste_sur_adjacence_et_puissances_de_matrice() -> None:
 
 
 def test_les_questions_reconstruites_restent_univoques() -> None:
+    # L'identite scientifique de la reponse est sa VALEUR : la politique de
+    # distribution des cles rend la lettre mobile, la valeur reste.
     expected_answers = {
-        ("TCOMPL-ECHANTILLONNAGE", "Q1"): "B",
-        ("TCOMPL-ECHANTILLONNAGE", "Q2"): "C",
-        ("TCOMPL-ECHANTILLONNAGE", "Q3"): "B",
-        ("TCOMPL-ECHANTILLONNAGE", "Q4"): "D",
-        ("TCOMPL-ECHANTILLONNAGE", "Q5"): "A",
-        ("TCOMPL-INEGALITES", "Q1"): "B",
-        ("TCOMPL-INEGALITES", "Q2"): "C",
-        ("TCOMPL-INEGALITES", "Q3"): "A",
-        ("TCOMPL-INEGALITES", "Q4"): "C",
-        ("TCOMPL-INEGALITES", "Q5"): "B",
-        ("TCOMPL-MODELES-EVOLUTION", "Q2"): "B",
-        ("TCOMPL-MODELES-EVOLUTION", "Q5"): "C",
-        ("TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "Q5"): "D",
-        ("TEXP-COMPLEXES-TRIGO-POLYNOMES", "Q5"): "A",
-        ("TEXP-GRAPHES", "Q3"): "B",
-        ("TEXP-GRAPHES", "Q5"): "C",
-        ("TEXP-MATRICES-MARKOV", "Q4"): "B",
+        ("TCOMPL-ECHANTILLONNAGE", "Q1"): "la loi binomiale $\\mathcal B(n,p)$",
+        ("TCOMPL-ECHANTILLONNAGE", "Q2"): (
+            "$\\binom{n}{k}=\\binom{n-1}{k-1}+\\binom{n-1}{k}$"
+        ),
+        ("TCOMPL-ECHANTILLONNAGE", "Q3"): "$3/8$",
+        ("TCOMPL-ECHANTILLONNAGE", "Q4"): "$7/8$",
+        ("TCOMPL-ECHANTILLONNAGE", "Q5"): (
+            "sum(random() < p for _ in range(n)) / n"
+        ),
+        ("TCOMPL-INEGALITES", "Q1"): (
+            "la part cumulée de population $x$ et la part cumulée de richesse "
+            "$L(x)$"
+        ),
+        ("TCOMPL-INEGALITES", "Q2"): "convexe et au-dessous de la droite $y=x$",
+        ("TCOMPL-INEGALITES", "Q3"): "une répartition presque égalitaire",
+        ("TCOMPL-INEGALITES", "Q4"): "$L''(x)\\geq0$",
+        ("TCOMPL-INEGALITES", "Q5"): "$1/3$",
+        ("TCOMPL-MODELES-EVOLUTION", "Q2"): "$1/(1-q)$",
+        ("TCOMPL-MODELES-EVOLUTION", "Q5"): "$50$",
+        ("TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "Q5"): "$\\bar z\\,\\bar w$",
+        ("TEXP-COMPLEXES-TRIGO-POLYNOMES", "Q5"): "$z-a$ divise $P(z)$",
+        ("TEXP-GRAPHES", "Q3"): "symétrique avec diagonale nulle",
+        ("TEXP-GRAPHES", "Q5"): (
+            "car $\\sum_k(M^n)_{ik}M_{kj}$ classe les chemins selon "
+            "l'avant-dernier sommet $k$"
+        ),
+        ("TEXP-MATRICES-MARKOV", "Q4"): "$(I-A)U=C$",
     }
     for (chapter, question_id), answer in expected_answers.items():
-        assert _question(chapter, question_id)["correcte"] == answer
+        question = _question(chapter, question_id)
+        assert question["options"][question["correcte"]] == answer, (
+            f"{chapter}/{question_id}"
+        )
 
 
 def test_les_logarithmes_et_divisibilites_annoncent_leurs_domaines() -> None:

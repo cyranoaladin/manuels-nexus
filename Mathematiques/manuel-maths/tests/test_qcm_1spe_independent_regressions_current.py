@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 from fractions import Fraction
+
+import _qcm_par_contenu as _par_contenu
 from pathlib import Path
 
 
@@ -19,23 +21,22 @@ def question(chapter: str, filename: str, question_id: str) -> dict:
 def test_suites_q1_et_q19_correspondent_aux_recalculs_independants() -> None:
     q1 = question("1SPE-SUITES", "1SPE-SUITES-QCM.json", "Q1")
     assert 2 * 3**2 - 3 * 3 + 1 == 10
-    assert q1["correcte"] == "A"
-    assert q1["options"]["A"] == "$10$"
+    assert q1["correcte"] == _par_contenu.lettre_de_option(q1, "$10$")
 
     q19 = question("1SPE-SUITES", "1SPE-SUITES-QCM.json", "Q19")
     value = 2
     for _ in range(3):
         value = 3 * value + 1
     assert value == 67
-    assert q19["correcte"] == "C"
-    assert q19["options"]["C"] == "$67$"
+    assert q19["correcte"] == _par_contenu.lettre_de_option(q19, "$67$")
 
 
 def test_suites_q9_utilise_la_definition_sans_exclure_les_termes_nuls() -> None:
     q9 = question("1SPE-SUITES", "1SPE-SUITES-QCM.json", "Q9")
-    assert q9["correcte"] == "C"
-    assert "u_{n+1}=q" in q9["options"]["C"]
-    assert "ne peut" not in q9["options"]["B"].lower()
+    assert q9["correcte"] == _par_contenu.lettre_de_option(q9, "u_{n+1}=q")
+    assert not any(
+        "ne peut" in option.lower() for option in q9["options"].values()
+    )
     assert all(
         "ne peut pas avoir de terme nul" not in diagnostic["erreur"].lower()
         for diagnostic in q9["diagnostics"].values()
@@ -48,17 +49,16 @@ def test_produit_scalaire_q8_ne_contient_qu_une_propriete_vraie() -> None:
     )
     assert 2 * 3 + 3 * (-2) == 0
     assert 2**2 + 3**2 == 3**2 + (-2) ** 2
-    assert q8["correcte"] == "B"
-    assert "différentes" in q8["options"]["C"]
-    assert "colineaires" in q8["diagnostics"]["D"]["erreur"]
+    assert q8["correcte"] == _par_contenu.lettre_de_option(q8, "orthogonaux")
+    assert _par_contenu.lettre_de_option(q8, "différentes")
+    assert _par_contenu.diagnostic_unique_contenant(q8, "colineaires")
 
 
 def test_proba_conditionnelle_q8_a_une_seule_option_egale_a_un_tiers() -> None:
     q8 = question("1SPE-PROBA-COND", "1SPE-PROBCOND-QCM.json", "Q8")
     result = Fraction(1, 3) * Fraction(1, 2) + Fraction(2, 3) * Fraction(1, 4)
     assert result == Fraction(1, 3)
-    assert q8["correcte"] == "D"
-    assert q8["options"]["D"] == "$1/3$"
+    assert q8["correcte"] == _par_contenu.lettre_de_option(q8, "$1/3$")
     assert list(q8["options"].values()).count("$1/3$") == 1
 
 
@@ -110,10 +110,10 @@ def test_suites_q4_diagnostique_exactement_le_premier_terme() -> None:
 
 def test_exponentielle_q1_ne_propose_qu_une_caracterisation_valide() -> None:
     q1 = question("1SPE-EXPONENTIELLE", "1SPE-EXPONENTIELLE-QCM.json", "Q1")
-    assert q1["correcte"] == "B"
-    assert "f(0) = 1" in q1["options"]["B"]
-    assert "f(1) = 1" in q1["options"]["A"]
-    assert "\\mathrm{e}^{x-1}" in q1["diagnostics"]["A"]["erreur"]
+    bonne = _par_contenu.lettre_de_option(q1, "$f'(x) = f(x)$ pour tout $x$ et $f(0) = 1$")
+    assert q1["correcte"] == bonne
+    assert _par_contenu.lettre_de_option(q1, "$f(1) = 1$")
+    assert _par_contenu.diagnostic_unique_contenant(q1, "\\mathrm{e}^{x-1}")
 
 
 def test_geometrie_reperee_q5_n_admet_qu_un_vecteur_directeur() -> None:
