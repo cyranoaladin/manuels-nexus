@@ -64,7 +64,7 @@ def test_the_binding_reports_the_frozen_identity_and_passes_every_check(
     freeze_binding, binding_payload
 ) -> None:
     assert binding_payload["freeze_source_sha"] == (
-        "41b68da867a085a550dd733d6e3dfb64fa7bc6d7"
+        "1057951c1a7e8be8731982b5918effb60f2471cc"
     )
     assert binding_payload["freeze_object_count"] == 161
     assert binding_payload["current_object_count"] == 161

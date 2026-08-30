@@ -18,7 +18,7 @@ OUTPUT = ROOT / "audit" / "1SPE_SUITES_REVIEW_SOURCE_FREEZE.json"
 #: sous audit/reviews/human/1SPE-SUITES/superseded/ et marque
 #: HISTORICAL_SUPERSEDED. Cette reemission est explicite et autorisee ;
 #: le rebind automatique reste interdit.
-SOURCE_SHA = "41b68da867a085a550dd733d6e3dfb64fa7bc6d7"
+SOURCE_SHA = "1057951c1a7e8be8731982b5918effb60f2471cc"
 CHAPTER_ID = "1SPE-SUITES"
 CHAPTER_PREFIX = "Mathematiques/manuel-maths/chapitres/1SPE-SUITES"
 QCM_JSON = f"{CHAPTER_PREFIX}/qcm/1SPE-SUITES-QCM.json"

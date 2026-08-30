@@ -132,7 +132,7 @@ def test_every_historical_row_is_accounted_for_by_the_v2_evidence() -> None:
     )
 
     carried = {key for key in observed if states[key] == "CARRIED_FORWARD_IDENTICAL"}
-    assert len(carried) == 310
+    assert len(carried) == 315
     assert not any(chapter == "1SPE-VARIABLES-ALEATOIRES" for chapter, _q in carried)
 
 

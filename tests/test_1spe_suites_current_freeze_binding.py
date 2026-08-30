@@ -323,7 +323,7 @@ def test_the_historical_freeze_artifact_is_never_rewritten(clean_repo: Path) -> 
 
     assert freeze.read_bytes() == before
     payload = json.loads((clean_repo / BINDING).read_text(encoding="utf-8"))
-    assert payload["freeze_source_sha"] == "41b68da867a085a550dd733d6e3dfb64fa7bc6d7"
+    assert payload["freeze_source_sha"] == "1057951c1a7e8be8731982b5918effb60f2471cc"
     assert payload["freeze_object_count"] == 161
     assert payload["staleness_rules"]["automatic_rebind"] == "FORBIDDEN"
 

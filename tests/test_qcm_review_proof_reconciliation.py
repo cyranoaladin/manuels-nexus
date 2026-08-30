@@ -87,7 +87,7 @@ def test_the_only_real_option_change_is_flagged_as_semantic(payload: dict) -> No
         and "OPTION_REORDER_ONLY" in e["delta_classes"]
         and "DISTRACTOR_SEMANTIC_CHANGE" not in e["delta_classes"]
     ]
-    assert len(reordered_only) == 13
+    assert len(reordered_only) == 0
     assert "Q1" not in reordered_only
 
 
@@ -97,8 +97,10 @@ def test_a_key_that_only_moves_letter_is_not_a_value_change(payload: dict) -> No
         for e in payload["reproof_required"]
         if "KEY_POSITION_CHANGED_BUT_VALUE_SAME" in e["delta_classes"]
     ]
-    # 14 sur VARALEA, 5 sur EXPONENTIELLE apres le reequilibrage des cles.
-    assert len(changed) == 19
+    # Le condense etant indexe par VALEUR, une permutation ne fait plus
+    # sortir la question du report : seules restent celles dont la preuve
+    # doit vraiment etre refaite.
+    assert len(changed) == 2
     assert not any(
         "KEY_VALUE_CHANGED" in e["delta_classes"] for e in payload["reproof_required"]
     )
@@ -113,16 +115,19 @@ def test_a_varalea_change_never_invalidates_another_chapter(payload: dict) -> No
     foreign = {
         e["chapter"] for e in payload["reproof_required"] if e["chapter"] != VARALEA
     }
-    # Les autres chapitres concernes le sont pour leur PROPRE divergence, pas
-    # par contagion : la preuve de TSPE-DERIVATION-CONVEXITE Q6 omet un $ que
-    # la source porte, et EXPONENTIELLE a vu cinq questions permutees lors du
-    # reequilibrage de ses cles.
-    assert foreign == {"TSPE-DERIVATION-CONVEXITE", "1SPE-EXPONENTIELLE"}
+    # Le seul autre chapitre concerne l'est pour sa PROPRE divergence, pas par
+    # contagion : la preuve de TSPE-DERIVATION-CONVEXITE Q6 omet un $ que la
+    # source porte. Le reequilibrage des cles, lui, ne perime aucune preuve.
+    assert foreign == {"TSPE-DERIVATION-CONVEXITE"}
     entry = next(
         e for e in payload["reproof_required"] if e["chapter"] == "TSPE-DERIVATION-CONVEXITE"
     )
     assert entry["question_id"] == "Q6"
-    assert entry["delta_classes"] == ["DIAGNOSTIC_TEXT_CHANGE"]
+    # Le reequilibrage a permute ses options ; la divergence de transcription
+    # du diagnostic, elle, est bien la raison pour laquelle elle reste a
+    # reprouver, la permutation seule ne perimant aucune preuve.
+    assert "DIAGNOSTIC_TEXT_CHANGE" in entry["delta_classes"]
+    assert "KEY_VALUE_CHANGED" not in entry["delta_classes"]
 
     carried_chapters = {e["chapter"] for e in payload["carried_forward"]}
     assert len(carried_chapters) == 34
@@ -177,7 +182,7 @@ def test_uncaptured_renvois_are_reported_not_absorbed(payload: dict) -> None:
     """La preuve historique n'a pas capture renvoi ; l'ecart doit etre visible."""
 
     gaps = payload["proof_field_coverage_gaps"]
-    assert len(gaps) == 22
+    assert len(gaps) == 4
     assert {gap["field"] for gap in gaps} == {"diagnostics.renvoi"}
     assert all(gap["options"] for gap in gaps)
     assert payload["semantic_digest_contract"]["excluded"] == ["diagnostics.renvoi"]
