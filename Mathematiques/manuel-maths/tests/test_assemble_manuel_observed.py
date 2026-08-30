@@ -837,7 +837,11 @@ def test_real_professor_order_matches_declared_inventory() -> None:
     # 1435 : RE-C6 et RE-C7 (remediation absente pour C6 et C7), puis ME-008,
     # ME-009, EX-051 a EX-054 et leurs quatre corriges (ni methode, ni exercice,
     # ni corrige pour ces deux memes capacites).
-    assert len(professor_paths) == 1435
+    # 1436 : 1SPE-EXPO-ME-006, la capacite C1 d'EXPONENTIELLE n'ayant aucune
+    # methode. La fiche reste en dette de revue declaree
+    # (audit/EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1.json) : le compteur suit le
+    # contenu reellement ajoute, il n'absout rien.
+    assert len(professor_paths) == 1436
     assert all(
         path.startswith("Mathematiques/manuel-maths/") for path in professor_paths
     )
@@ -860,7 +864,9 @@ def test_real_student_order_keeps_evaluations_and_excludes_teacher_objects() -> 
     # l'objet X3 variance-affine cree apres le gel.
     # 933 : meme campagne que pour la variante professeur, moins les quatre
     # corriges, qui ne sont pas assembles cote eleve.
-    assert len(student_paths) == 933
+    # 934 : 1SPE-EXPO-ME-006, comme cote professeur. Une fiche methode est
+    # assemblee dans les deux variantes.
+    assert len(student_paths) == 934
     assert student_paths == assembly["included_objects"]
     # 20 = 10 chapitres x (EV-A + EV-B) — les evaluations TRIGO (lot BO 2026
     # scelle) ont rejoint l'assemblage depuis l'attestation du 2026-08-11.
