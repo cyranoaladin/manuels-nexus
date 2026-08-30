@@ -1,0 +1,28 @@
+{
+  "artifact_type": "assessment_mode_decision_request",
+  "schema_version": 1,
+  "chapter": "TNSI-PROJET",
+  "manual": "TNSI",
+  "approves_nothing": true,
+  "gap_is_not_suppressed": true,
+  "observed": {
+    "evaluation_subjects": 0,
+    "evaluation_corrections": 0,
+    "matrix_dimension": "assessments = GAP",
+    "existing_assessment_device": {
+      "object_id": "TNSI-PROJET-ANNUEL",
+      "type_objet": "projet",
+      "section": "Grille d'évaluation",
+      "description": "Grille communiquée dès J0, croisant une production collective et des contributions individuelles."
+    }
+  },
+  "why_no_written_evaluation_was_authored": [
+    "Le contrat du chapitre porte deux capacités de démarche de projet, non des contenus disciplinaires évaluables sur table.",
+    "Son champ regime_evaluation énonce que la démarche de projet organise une part obligatoire de l'enseignement sans modifier l'épreuve terminale.",
+    "Le dispositif d'évaluation existe déjà, dans l'objet projet, sous forme de grille.",
+    "Rédiger deux devoirs écrits pour ce seul chapitre rendrait la dimension verte sans répondre à un besoin pédagogique : ce serait forcer le gate, non combler une lacune."
+  ],
+  "decision_required_from_human": "Confirmer que TNSI-PROJET est évalué par son projet et sa grille, et non par une évaluation écrite A/B — ou demander la rédaction de deux sujets écrits.",
+  "release_blocking": true,
+  "machine_cannot_decide": true
+}

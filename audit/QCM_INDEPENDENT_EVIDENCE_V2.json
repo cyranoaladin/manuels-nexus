@@ -11,18 +11,7 @@
     "UNKNOWN": 0,
     "question_count": 479
   },
-  "diagnostic_coverage_findings": [
-    {
-      "chapter": "TSPE-DERIVATION-CONVEXITE",
-      "missing_error_model": [],
-      "missing_remediation_reference": [
-        "A",
-        "B",
-        "D"
-      ],
-      "question_id": "Q6"
-    }
-  ],
+  "diagnostic_coverage_findings": [],
   "diagnostic_coverage_is_release_blocking": true,
   "equation": "479 = 314 + 21 + 144",
   "evidence_schema_fields": [
@@ -8422,7 +8411,7 @@
         "KEY_POSITION_CHANGED_BUT_VALUE_SAME",
         "DIAGNOSTIC_TEXT_CHANGE"
       ],
-      "evidence_digest": "sha256:9a7ce746a10cb6af4ad785ff826c1708bd631da5f9359ec54beb9c433526c7f2",
+      "evidence_digest": "sha256:c1b0513cffd36ece2c8fb0e39a4d3f1a3f597c0b2a3fcc7dcaa718211f4cb154",
       "evidence_status": "MACHINE_RECALCULATED",
       "human_review_required": false,
       "independent_evidence": "f'(x) = 3*x**2 - 3 ; points critiques ['-1', '1'] ; le signe de f'' y donne maxima ['-1'] et minima ['1'].",
@@ -8438,11 +8427,11 @@
         "capacity": "C2",
         "capacity_declared": true,
         "computed_unique_answer": "C",
-        "coverage_verdict": "FAIL",
+        "coverage_verdict": "PASS",
         "declared_key": "C",
         "declared_key_matches_computation": true,
         "diagnostic_coverage": {
-          "complete": false,
+          "complete": true,
           "diagnostic_on_the_correct_option": [],
           "distractors": [
             "A",
@@ -8450,17 +8439,13 @@
             "D"
           ],
           "missing_error_model": [],
-          "missing_remediation_reference": [
-            "A",
-            "B",
-            "D"
-          ]
+          "missing_remediation_reference": []
         },
         "equivalent_option_groups": [],
         "no_equivalent_options": true,
         "true_option_count": 1,
         "unique_true_option": true,
-        "verdict": "FAIL"
+        "verdict": "PASS"
       }
     },
     {
@@ -9468,7 +9453,7 @@
     }
   ],
   "schema_version": 2,
-  "set_digest": "sha256:e70e3fd386a2e81c755ebbb46e7b65ac857b547e9395714d576d30f1c4e6ea81",
+  "set_digest": "sha256:4ddafccf31959b936dce229f69ca7f0c5a37b61073e33245cbd89b3042acfce5",
   "solver_families_used": [
     "ALGEBRAIC_GAIN",
     "BINARY_TREE_TERMINAL_PATHS",

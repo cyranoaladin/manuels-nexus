@@ -15,13 +15,16 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Une seule solution oublie la symetrie du cosinus : avec $\\cos(\\pi/3)=1/2$, on a aussi $\\cos(-\\pi/3)=1/2$."
+          "erreur": "Une seule solution oublie la symetrie du cosinus : avec $\\cos(\\pi/3)=1/2$, on a aussi $\\cos(-\\pi/3)=1/2$.",
+          "renvoi": "M1, symétrie des solutions sur $[-\\pi,\\pi]$"
         },
         "C": {
-          "erreur": "Ajouter $0$ comme troisième solution est faux, car $\\cos(0)=1$ ; seules $-\\pi/3$ et $\\pi/3$ conviennent sur l'intervalle."
+          "erreur": "Ajouter $0$ comme troisième solution est faux, car $\\cos(0)=1$ ; seules $-\\pi/3$ et $\\pi/3$ conviennent sur l'intervalle.",
+          "renvoi": "M1, lecture du cercle trigonométrique"
         },
         "D": {
-          "erreur": "Le cercle trigonométrique fournit explicitement $\\cos(\\pi/3)=1/2$ et, par parite, la seconde solution $-\\pi/3$."
+          "erreur": "Le cercle trigonométrique fournit explicitement $\\cos(\\pi/3)=1/2$ et, par parite, la seconde solution $-\\pi/3$.",
+          "renvoi": "M1, valeurs remarquables du cosinus"
         }
       }
     },
@@ -38,13 +41,16 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Le signe moins appartient a la formule $(\\cos x)'=-\\sin x$ ; la dérivée de $\\sin x$ est $\\cos x$ sans changement de signe."
+          "erreur": "Le signe moins appartient a la formule $(\\cos x)'=-\\sin x$ ; la dérivée de $\\sin x$ est $\\cos x$ sans changement de signe.",
+          "renvoi": "C2, dérivées de référence de sinus et cosinus"
         },
         "C": {
-          "erreur": "Le résultat $-\\sin x$ est la dérivée de $\\cos x$, pas celle de $\\sin x$ ; les deux formules de référence ont été interverties."
+          "erreur": "Le résultat $-\\sin x$ est la dérivée de $\\cos x$, pas celle de $\\sin x$ ; les deux formules de référence ont été interverties.",
+          "renvoi": "C2, dérivées de référence de sinus et cosinus"
         },
         "D": {
-          "erreur": "Conserver $\\sin x$ revient a ne pas dériver la fonction ; le taux de variation de $\\sin$ est donne par $\\cos x$."
+          "erreur": "Conserver $\\sin x$ revient a ne pas dériver la fonction ; le taux de variation de $\\sin$ est donne par $\\cos x$.",
+          "renvoi": "C2, dérivées de référence de sinus et cosinus"
         }
       }
     },
@@ -61,13 +67,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Le signe moins manque dans la formule de référence $(\\cos x)'=-\\sin x$ ; $\\sin x$ seul donne donc le signe oppose."
+          "erreur": "Le signe moins manque dans la formule de référence $(\\cos x)'=-\\sin x$ ; $\\sin x$ seul donne donc le signe oppose.",
+          "renvoi": "C2, dérivées de référence de sinus et cosinus"
         },
         "C": {
-          "erreur": "Conserver $\\cos x$ revient a ne pas dériver ; la dérivée fait intervenir l'autre fonction trigonométrique, $-\\sin x$."
+          "erreur": "Conserver $\\cos x$ revient a ne pas dériver ; la dérivée fait intervenir l'autre fonction trigonométrique, $-\\sin x$.",
+          "renvoi": "C2, dérivées de référence de sinus et cosinus"
         },
         "D": {
-          "erreur": "Le résultat $-\\cos x$ serait la dérivée de $-\\sin x$ ; pour $\\cos x$, il faut changer de fonction et obtenir $-\\sin x$."
+          "erreur": "Le résultat $-\\cos x$ serait la dérivée de $-\\sin x$ ; pour $\\cos x$, il faut changer de fonction et obtenir $-\\sin x$.",
+          "renvoi": "C2, dérivées de référence de sinus et cosinus"
         }
       }
     },
@@ -84,13 +93,16 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "La dérivée exterieure est correcte, mais la règle de chaine exige de multiplier par la dérivée de $3x$, qui vaut $3$."
+          "erreur": "La dérivée exterieure est correcte, mais la règle de chaine exige de multiplier par la dérivée de $3x$, qui vaut $3$.",
+          "renvoi": "C2, dérivée d'une fonction composée"
         },
         "B": {
-          "erreur": "Le facteur $3$ est present, mais l'argument de la fonction cosinus doit rester $3x$ après dérivation de la composee."
+          "erreur": "Le facteur $3$ est present, mais l'argument de la fonction cosinus doit rester $3x$ après dérivation de la composee.",
+          "renvoi": "C2, dérivée d'une fonction composée"
         },
         "D": {
-          "erreur": "Ce choix perd simultanement le facteur interieur $3$ et remplace a tort l'argument $3x$ par $x$."
+          "erreur": "Ce choix perd simultanement le facteur interieur $3$ et remplace a tort l'argument $3x$ par $x$.",
+          "renvoi": "C2, dérivée d'une fonction composée"
         }
       }
     },
@@ -107,13 +119,16 @@
       "correcte": "D",
       "diagnostics": {
         "A": {
-          "erreur": "Les zeros de $f$ donnent les intersections avec l'axe des abscisses, pas ses maxima : une valeur maximale peut être non nulle."
+          "erreur": "Les zeros de $f$ donnent les intersections avec l'axe des abscisses, pas ses maxima : une valeur maximale peut être non nulle.",
+          "renvoi": "M2, recherche d'un optimum sur un intervalle"
         },
         "B": {
-          "erreur": "Comparer seulement les bornes peut manquer un maximum interieur : il faut aussi examiner les points critiques de l'intervalle."
+          "erreur": "Comparer seulement les bornes peut manquer un maximum interieur : il faut aussi examiner les points critiques de l'intervalle.",
+          "renvoi": "M2, recherche d'un optimum sur un intervalle"
         },
         "C": {
-          "erreur": "Un maximum de $f'$ localise la croissance la plus rapide de $f$, et non une valeur maximale de $f$ sur l'intervalle."
+          "erreur": "Un maximum de $f'$ localise la croissance la plus rapide de $f$, et non une valeur maximale de $f$ sur l'intervalle.",
+          "renvoi": "M2, recherche d'un optimum sur un intervalle"
         }
       }
     }

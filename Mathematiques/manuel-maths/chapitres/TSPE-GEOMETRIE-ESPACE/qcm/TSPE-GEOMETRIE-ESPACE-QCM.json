@@ -15,13 +15,16 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Deux droites non paralleles peuvent être coplanaires et secantes ; elles ne sont donc pas toujours non coplanaires."
+          "erreur": "Deux droites non paralleles peuvent être coplanaires et secantes ; elles ne sont donc pas toujours non coplanaires.",
+          "renvoi": "C3, positions relatives de deux droites de l'espace"
         },
         "C": {
-          "erreur": "Dans l'espace, deux droites non paralleles peuvent être gauches : elles ne sont alors pas coplanaires et ne se coupent pas."
+          "erreur": "Dans l'espace, deux droites non paralleles peuvent être gauches : elles ne sont alors pas coplanaires et ne se coupent pas.",
+          "renvoi": "C3, positions relatives de deux droites de l'espace"
         },
         "D": {
-          "erreur": "Des droites confondues ont la même direction et sont donc paralleles ; cette possibilite est exclue par l'hypothèse."
+          "erreur": "Des droites confondues ont la même direction et sont donc paralleles ; cette possibilite est exclue par l'hypothèse.",
+          "renvoi": "C3, positions relatives de deux droites de l'espace"
         }
       }
     },
@@ -38,13 +41,16 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Un produit scalaire égal a $1$ n'impose pas un angle droit ; l'orthogonalite est caracterisee par un produit scalaire nul."
+          "erreur": "Un produit scalaire égal a $1$ n'impose pas un angle droit ; l'orthogonalite est caracterisee par un produit scalaire nul.",
+          "renvoi": "C7, produit scalaire et orthogonalité"
         },
         "C": {
-          "erreur": "Si $\\vec u=\\vec v$ et ce vecteur est non nul, alors $\\vec u\\cdot\\vec v=\\|\\vec u\\|^2>0$ : ils ne sont pas orthogonaux."
+          "erreur": "Si $\\vec u=\\vec v$ et ce vecteur est non nul, alors $\\vec u\\cdot\\vec v=\\|\\vec u\\|^2>0$ : ils ne sont pas orthogonaux.",
+          "renvoi": "C7, produit scalaire et orthogonalité"
         },
         "D": {
-          "erreur": "L'égalité des normes fixe seulement les longueurs ; deux vecteurs de même norme peuvent former n'importe quel angle."
+          "erreur": "L'égalité des normes fixe seulement les longueurs ; deux vecteurs de même norme peuvent former n'importe quel angle.",
+          "renvoi": "C7, produit scalaire et orthogonalité"
         }
       }
     },
@@ -61,13 +67,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Le coefficient de $y$ dans l'équation est $-3$ ; remplacer ce coefficient par $3$ ne donne pas un vecteur normal au plan."
+          "erreur": "Le coefficient de $y$ dans l'équation est $-3$ ; remplacer ce coefficient par $3$ ne donne pas un vecteur normal au plan.",
+          "renvoi": "M1, vecteur normal et équation cartésienne d'un plan"
         },
         "C": {
-          "erreur": "Les composantes d'un vecteur normal sont les coefficients de $x$, $y$ et $z$ dans cet ordre ; ici $2$, $-3$ et $1$."
+          "erreur": "Les composantes d'un vecteur normal sont les coefficients de $x$, $y$ et $z$ dans cet ordre ; ici $2$, $-3$ et $1$.",
+          "renvoi": "M1, vecteur normal et équation cartésienne d'un plan"
         },
         "D": {
-          "erreur": "Ce vecteur change les signes des deux premieres composantes seulement ; il n'est donc pas proportionnel a $(2,-3,1)$."
+          "erreur": "Ce vecteur change les signes des deux premieres composantes seulement ; il n'est donc pas proportionnel a $(2,-3,1)$.",
+          "renvoi": "M1, vecteur normal et équation cartésienne d'un plan"
         }
       }
     },
@@ -84,13 +93,16 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "Trois paramètres indépendants peuvent parcourir l'espace entier ; une droite s'ecrit avec un seul paramètre réel."
+          "erreur": "Trois paramètres indépendants peuvent parcourir l'espace entier ; une droite s'ecrit avec un seul paramètre réel.",
+          "renvoi": "C12, représentation paramétrique d'une droite"
         },
         "B": {
-          "erreur": "Deux paramètres indépendants engendrent en general une surface plane, alors qu'une droite ne possede qu'une direction libre."
+          "erreur": "Deux paramètres indépendants engendrent en general une surface plane, alors qu'une droite ne possede qu'une direction libre.",
+          "renvoi": "C12, représentation paramétrique d'une droite"
         },
         "D": {
-          "erreur": "Sans paramètre, on ne décrit pas le deplacement depuis un point selon un vecteur directeur ; la représentation ne serait pas parametrique."
+          "erreur": "Sans paramètre, on ne décrit pas le deplacement depuis un point selon un vecteur directeur ; la représentation ne serait pas parametrique.",
+          "renvoi": "C12, représentation paramétrique d'une droite"
         }
       }
     },
@@ -107,13 +119,16 @@
       "correcte": "D",
       "diagnostics": {
         "A": {
-          "erreur": "Un plan est non borne, donc il ne possede pas de point le plus eloigne de $M$ ; la projection realise au contraire la distance minimale."
+          "erreur": "Un plan est non borne, donc il ne possede pas de point le plus eloigne de $M$ ; la projection realise au contraire la distance minimale.",
+          "renvoi": "C11, projeté orthogonal et distance à un plan"
         },
         "B": {
-          "erreur": "On a $H=M$ seulement lorsque $M$ appartient deja au plan ; sinon le projete $H$ est un point distinct situe sur le plan."
+          "erreur": "On a $H=M$ seulement lorsque $M$ appartient deja au plan ; sinon le projete $H$ est un point distinct situe sur le plan.",
+          "renvoi": "C11, projeté orthogonal et distance à un plan"
         },
         "C": {
-          "erreur": "Le projete n'est pas quelconque : c'est le pied de la perpendiculaire issue de $M$, ce qui assure la distance minimale au plan."
+          "erreur": "Le projete n'est pas quelconque : c'est le pied de la perpendiculaire issue de $M$, ce qui assure la distance minimale au plan.",
+          "renvoi": "C11, projeté orthogonal et distance à un plan"
         }
       }
     }

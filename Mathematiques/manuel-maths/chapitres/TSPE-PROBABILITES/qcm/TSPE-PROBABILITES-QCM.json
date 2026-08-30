@@ -41,13 +41,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "La dépendance contredit la définition du schema : la probabilité d'un succès doit rester $p$ d'une epreuve a l'autre."
+          "erreur": "La dépendance contredit la définition du schema : la probabilité d'un succès doit rester $p$ d'une epreuve a l'autre.",
+          "renvoi": "M1, hypothèses du schéma de Bernoulli"
         },
         "C": {
-          "erreur": "Des epreuves différentes peuvent avoir des probabilités de succès distinctes ; un schema de Bernoulli repete la même epreuve."
+          "erreur": "Des epreuves différentes peuvent avoir des probabilités de succès distinctes ; un schema de Bernoulli repete la même epreuve.",
+          "renvoi": "M1, hypothèses du schéma de Bernoulli"
         },
         "D": {
-          "erreur": "La probabilité de succès est un réel $p$ quelconque de $[0,1]$ ; la valeur $1/2$ n'est imposee que pour une piece equilibree."
+          "erreur": "La probabilité de succès est un réel $p$ quelconque de $[0,1]$ ; la valeur $1/2$ n'est imposee que pour une piece equilibree.",
+          "renvoi": "M1, hypothèses du schéma de Bernoulli"
         }
       }
     },
@@ -64,13 +67,16 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "L'indépendance est requise pour additionner les variances, pas pour la linéarité de l'espérance de variables integrables."
+          "erreur": "L'indépendance est requise pour additionner les variances, pas pour la linéarité de l'espérance de variables integrables.",
+          "renvoi": "C7, linéarité de l'espérance"
         },
         "C": {
-          "erreur": "L'égalité $X=Y$ n'est pas nécessaire : la somme des esperances vaut l'espérance de la somme pour deux variables quelconques."
+          "erreur": "L'égalité $X=Y$ n'est pas nécessaire : la somme des esperances vaut l'espérance de la somme pour deux variables quelconques.",
+          "renvoi": "C7, linéarité de l'espérance"
         },
         "D": {
-          "erreur": "La propriété est toujours valable ; par exemple pour deux constantes $X=1$ et $Y=2$, les deux membres valent $3$."
+          "erreur": "La propriété est toujours valable ; par exemple pour deux constantes $X=1$ et $Y=2$, les deux membres valent $3$.",
+          "renvoi": "C7, linéarité de l'espérance"
         }
       }
     },
@@ -87,13 +93,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Si $X=Y$, alors $V(X+Y)=V(2X)=4V(X)$, tandis que $V(X)+V(Y)=2V(X)$ : l'égalité n'est donc pas garantie."
+          "erreur": "Si $X=Y$, alors $V(X+Y)=V(2X)=4V(X)$, tandis que $V(X)+V(Y)=2V(X)$ : l'égalité n'est donc pas garantie.",
+          "renvoi": "C8, variance d'une somme et indépendance"
         },
         "C": {
-          "erreur": "Sans hypothèse, la formule comporte le terme $2\\operatorname{Cov}(X,Y)$ : l'indépendance permet precisement d'annuler cette covariance."
+          "erreur": "Sans hypothèse, la formule comporte le terme $2\\operatorname{Cov}(X,Y)$ : l'indépendance permet precisement d'annuler cette covariance.",
+          "renvoi": "C8, variance d'une somme et indépendance"
         },
         "D": {
-          "erreur": "L'égalité des esperances ne renseigne pas sur la covariance de $X$ et $Y$ : elle ne suffit donc pas a rendre les variances additives."
+          "erreur": "L'égalité des esperances ne renseigne pas sur la covariance de $X$ et $Y$ : elle ne suffit donc pas a rendre les variances additives.",
+          "renvoi": "C8, variance d'une somme et indépendance"
         }
       }
     },
@@ -110,13 +119,16 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "Le produit $np$ est l'espérance de la loi binomiale ; la variance comporte aussi le facteur de dispersion $1-p$."
+          "erreur": "Le produit $np$ est l'espérance de la loi binomiale ; la variance comporte aussi le facteur de dispersion $1-p$.",
+          "renvoi": "C9, espérance et variance de la loi binomiale"
         },
         "B": {
-          "erreur": "L'expression $n(1-p)$ oublie le facteur $p$ associe aux succès ; chaque indicatrice de Bernoulli a pour variance $p(1-p)$."
+          "erreur": "L'expression $n(1-p)$ oublie le facteur $p$ associe aux succès ; chaque indicatrice de Bernoulli a pour variance $p(1-p)$.",
+          "renvoi": "C9, espérance et variance de la loi binomiale"
         },
         "D": {
-          "erreur": "Le produit $p(1-p)$ est la variance d'une seule epreuve de Bernoulli ; la somme de $n$ epreuves indépendantes apporte le facteur $n$."
+          "erreur": "Le produit $p(1-p)$ est la variance d'une seule epreuve de Bernoulli ; la somme de $n$ epreuves indépendantes apporte le facteur $n$.",
+          "renvoi": "C9, espérance et variance de la loi binomiale"
         }
       }
     },
@@ -133,13 +145,16 @@
       "correcte": "D",
       "diagnostics": {
         "A": {
-          "erreur": "Bienayme-Tchebychev concerne l'événement $|Y-\\mu|\\geq\\delta$, pas la probabilité ponctuelle que $Y$ soit exactement égal a $\\mu$."
+          "erreur": "Bienayme-Tchebychev concerne l'événement $|Y-\\mu|\\geq\\delta$, pas la probabilité ponctuelle que $Y$ soit exactement égal a $\\mu$.",
+          "renvoi": "C10, inégalité de Bienaymé-Tchebychev"
         },
         "B": {
-          "erreur": "L'espérance $E(Y)$ est le centre de l'événement de deviation ; l'inégalité ne cherche pas a majorer cette valeur."
+          "erreur": "L'espérance $E(Y)$ est le centre de l'événement de deviation ; l'inégalité ne cherche pas a majorer cette valeur.",
+          "renvoi": "C10, inégalité de Bienaymé-Tchebychev"
         },
         "C": {
-          "erreur": "La variance intervient dans le majorant $V(Y)/\\delta^2$, mais la quantité majorée est la probabilité d'un ecart a la moyenne."
+          "erreur": "La variance intervient dans le majorant $V(Y)/\\delta^2$, mais la quantité majorée est la probabilité d'un ecart a la moyenne.",
+          "renvoi": "C10, inégalité de Bienaymé-Tchebychev"
         }
       }
     }

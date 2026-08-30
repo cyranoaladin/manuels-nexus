@@ -102,33 +102,33 @@ Q6 & C10 & \textbf{D} \\
   \end{itemize}
   \item \textbf{Q2}
   \begin{itemize}
-    \item \textbf{A} — La dépendance contredit la définition du schema : la probabilité d'un succès doit rester $p$ d'une epreuve a l'autre.
-    \item \textbf{C} — Des epreuves différentes peuvent avoir des probabilités de succès distinctes ; un schema de Bernoulli repete la même epreuve.
-    \item \textbf{D} — La probabilité de succès est un réel $p$ quelconque de $[0,1]$ ; la valeur $1/2$ n'est imposee que pour une piece equilibree.
+    \item \textbf{A} — La dépendance contredit la définition du schema : la probabilité d'un succès doit rester $p$ d'une epreuve a l'autre. \emph{Renvoi : M1, hypothèses du schéma de Bernoulli.}
+    \item \textbf{C} — Des epreuves différentes peuvent avoir des probabilités de succès distinctes ; un schema de Bernoulli repete la même epreuve. \emph{Renvoi : M1, hypothèses du schéma de Bernoulli.}
+    \item \textbf{D} — La probabilité de succès est un réel $p$ quelconque de $[0,1]$ ; la valeur $1/2$ n'est imposee que pour une piece equilibree. \emph{Renvoi : M1, hypothèses du schéma de Bernoulli.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
-    \item \textbf{B} — L'indépendance est requise pour additionner les variances, pas pour la linéarité de l'espérance de variables integrables.
-    \item \textbf{C} — L'égalité $X=Y$ n'est pas nécessaire : la somme des esperances vaut l'espérance de la somme pour deux variables quelconques.
-    \item \textbf{D} — La propriété est toujours valable ; par exemple pour deux constantes $X=1$ et $Y=2$, les deux membres valent $3$.
+    \item \textbf{B} — L'indépendance est requise pour additionner les variances, pas pour la linéarité de l'espérance de variables integrables. \emph{Renvoi : C7, linéarité de l'espérance.}
+    \item \textbf{C} — L'égalité $X=Y$ n'est pas nécessaire : la somme des esperances vaut l'espérance de la somme pour deux variables quelconques. \emph{Renvoi : C7, linéarité de l'espérance.}
+    \item \textbf{D} — La propriété est toujours valable ; par exemple pour deux constantes $X=1$ et $Y=2$, les deux membres valent $3$. \emph{Renvoi : C7, linéarité de l'espérance.}
   \end{itemize}
   \item \textbf{Q4}
   \begin{itemize}
-    \item \textbf{A} — Si $X=Y$, alors $V(X+Y)=V(2X)=4V(X)$, tandis que $V(X)+V(Y)=2V(X)$ : l'égalité n'est donc pas garantie.
-    \item \textbf{C} — Sans hypothèse, la formule comporte le terme $2\operatorname{Cov}(X,Y)$ : l'indépendance permet precisement d'annuler cette covariance.
-    \item \textbf{D} — L'égalité des esperances ne renseigne pas sur la covariance de $X$ et $Y$ : elle ne suffit donc pas a rendre les variances additives.
+    \item \textbf{A} — Si $X=Y$, alors $V(X+Y)=V(2X)=4V(X)$, tandis que $V(X)+V(Y)=2V(X)$ : l'égalité n'est donc pas garantie. \emph{Renvoi : C8, variance d'une somme et indépendance.}
+    \item \textbf{C} — Sans hypothèse, la formule comporte le terme $2\operatorname{Cov}(X,Y)$ : l'indépendance permet precisement d'annuler cette covariance. \emph{Renvoi : C8, variance d'une somme et indépendance.}
+    \item \textbf{D} — L'égalité des esperances ne renseigne pas sur la covariance de $X$ et $Y$ : elle ne suffit donc pas a rendre les variances additives. \emph{Renvoi : C8, variance d'une somme et indépendance.}
   \end{itemize}
   \item \textbf{Q5}
   \begin{itemize}
-    \item \textbf{A} — Le produit $np$ est l'espérance de la loi binomiale ; la variance comporte aussi le facteur de dispersion $1-p$.
-    \item \textbf{B} — L'expression $n(1-p)$ oublie le facteur $p$ associe aux succès ; chaque indicatrice de Bernoulli a pour variance $p(1-p)$.
-    \item \textbf{D} — Le produit $p(1-p)$ est la variance d'une seule epreuve de Bernoulli ; la somme de $n$ epreuves indépendantes apporte le facteur $n$.
+    \item \textbf{A} — Le produit $np$ est l'espérance de la loi binomiale ; la variance comporte aussi le facteur de dispersion $1-p$. \emph{Renvoi : C9, espérance et variance de la loi binomiale.}
+    \item \textbf{B} — L'expression $n(1-p)$ oublie le facteur $p$ associe aux succès ; chaque indicatrice de Bernoulli a pour variance $p(1-p)$. \emph{Renvoi : C9, espérance et variance de la loi binomiale.}
+    \item \textbf{D} — Le produit $p(1-p)$ est la variance d'une seule epreuve de Bernoulli ; la somme de $n$ epreuves indépendantes apporte le facteur $n$. \emph{Renvoi : C9, espérance et variance de la loi binomiale.}
   \end{itemize}
   \item \textbf{Q6}
   \begin{itemize}
-    \item \textbf{A} — Bienayme-Tchebychev concerne l'événement $|Y-\mu|\geq\delta$, pas la probabilité ponctuelle que $Y$ soit exactement égal a $\mu$.
-    \item \textbf{B} — L'espérance $E(Y)$ est le centre de l'événement de deviation ; l'inégalité ne cherche pas a majorer cette valeur.
-    \item \textbf{C} — La variance intervient dans le majorant $V(Y)/\delta^2$, mais la quantité majorée est la probabilité d'un ecart a la moyenne.
+    \item \textbf{A} — Bienayme-Tchebychev concerne l'événement $|Y-\mu|\geq\delta$, pas la probabilité ponctuelle que $Y$ soit exactement égal a $\mu$. \emph{Renvoi : C10, inégalité de Bienaymé-Tchebychev.}
+    \item \textbf{B} — L'espérance $E(Y)$ est le centre de l'événement de deviation ; l'inégalité ne cherche pas a majorer cette valeur. \emph{Renvoi : C10, inégalité de Bienaymé-Tchebychev.}
+    \item \textbf{C} — La variance intervient dans le majorant $V(Y)/\delta^2$, mais la quantité majorée est la probabilité d'un ecart a la moyenne. \emph{Renvoi : C10, inégalité de Bienaymé-Tchebychev.}
   \end{itemize}
 \end{itemize}
 \fi

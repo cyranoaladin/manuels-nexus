@@ -15,13 +15,16 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "Le coefficient $2$ a été traite comme un exposant de $x$ ; la règle correcte pour le produit est $\\ln(2x)=\\ln 2+\\ln x$."
+          "erreur": "Le coefficient $2$ a été traite comme un exposant de $x$ ; la règle correcte pour le produit est $\\ln(2x)=\\ln 2+\\ln x$.",
+          "renvoi": "C1, logarithme d'un produit"
         },
         "C": {
-          "erreur": "Le logarithme d'un produit devient une somme de logarithmes, pas leur produit : $\\ln(ab)=\\ln a+\\ln b$."
+          "erreur": "Le logarithme d'un produit devient une somme de logarithmes, pas leur produit : $\\ln(ab)=\\ln a+\\ln b$.",
+          "renvoi": "C1, logarithme d'un produit"
         },
         "D": {
-          "erreur": "Le carre $(\\ln x)^2$ ne provient d'aucune propriété du produit $2x$ ; il confond le facteur $2$ avec une puissance de $\\ln x$."
+          "erreur": "Le carre $(\\ln x)^2$ ne provient d'aucune propriété du produit $2x$ ; il confond le facteur $2$ avec une puissance de $\\ln x$.",
+          "renvoi": "C1, logarithme d'un produit"
         }
       }
     },
@@ -38,13 +41,16 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "La formule $(\\ln u)'=u'/u$ exige le numérateur $u'=5$ ; choisir $1$ oublie la dérivée de la fonction affine interieure."
+          "erreur": "La formule $(\\ln u)'=u'/u$ exige le numérateur $u'=5$ ; choisir $1$ oublie la dérivée de la fonction affine interieure.",
+          "renvoi": "M2, dérivée de $\\ln(u)$"
         },
         "C": {
-          "erreur": "Le quotient a été inverse : pour $u=5x+1$, on doit calculer $u'/u=5/(5x+1)$, et non $u/u'$."
+          "erreur": "Le quotient a été inverse : pour $u=5x+1$, on doit calculer $u'/u=5/(5x+1)$, et non $u/u'$.",
+          "renvoi": "M2, dérivée de $\\ln(u)$"
         },
         "D": {
-          "erreur": "Multiplier le logarithme initial par $5$ ne le derive pas ; la règle de chaine donne le quotient $5/(5x+1)$."
+          "erreur": "Multiplier le logarithme initial par $5$ ne le derive pas ; la règle de chaine donne le quotient $5/(5x+1)$.",
+          "renvoi": "M2, dérivée de $\\ln(u)$"
         }
       }
     },
@@ -61,13 +67,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "La valeur $0$ est celle de $\\ln 1$, pas une limite a l'infini ; comme $\\ln$ est croissante et non majorée, elle tend vers $+\\infty$."
+          "erreur": "La valeur $0$ est celle de $\\ln 1$, pas une limite a l'infini ; comme $\\ln$ est croissante et non majorée, elle tend vers $+\\infty$.",
+          "renvoi": "C2, limites de $\\ln$ en $0^+$ et en $+\\infty$"
         },
         "C": {
-          "erreur": "La limite $-\\infty$ correspond a $x\\to0^+$ ; a l'infini, la croissance de $\\ln x$ conduit au contraire vers $+\\infty$."
+          "erreur": "La limite $-\\infty$ correspond a $x\\to0^+$ ; a l'infini, la croissance de $\\ln x$ conduit au contraire vers $+\\infty$.",
+          "renvoi": "C2, limites de $\\ln$ en $0^+$ et en $+\\infty$"
         },
         "D": {
-          "erreur": "La valeur $1$ est $\\ln(\\mathrm e)$, une valeur ponctuelle ; elle ne décrit pas le comportement non borne de $\\ln x$ quand $x\\to+\\infty$."
+          "erreur": "La valeur $1$ est $\\ln(\\mathrm e)$, une valeur ponctuelle ; elle ne décrit pas le comportement non borne de $\\ln x$ quand $x\\to+\\infty$.",
+          "renvoi": "C2, limites de $\\ln$ en $0^+$ et en $+\\infty$"
         }
       }
     },
@@ -84,13 +93,16 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "Cette reponse ne retient que $\\ln x\\to-\\infty$ et ignore le facteur $x\\to0$ ; la comparaison des croissances donne $x\\ln x\\to0$."
+          "erreur": "Cette reponse ne retient que $\\ln x\\to-\\infty$ et ignore le facteur $x\\to0$ ; la comparaison des croissances donne $x\\ln x\\to0$.",
+          "renvoi": "C4, croissances comparées"
         },
         "B": {
-          "erreur": "La valeur $1$ ne resulte pas du produit $x\\ln x$ ; en posant $x=\\mathrm e^{-t}$, on obtient $-t\\mathrm e^{-t}\\to0$."
+          "erreur": "La valeur $1$ ne resulte pas du produit $x\\ln x$ ; en posant $x=\\mathrm e^{-t}$, on obtient $-t\\mathrm e^{-t}\\to0$.",
+          "renvoi": "C4, croissances comparées"
         },
         "D": {
-          "erreur": "La forme $0\\times(-\\infty)$ est indeterminee mais pas sans limite ; une transformation ou un résultat de croissance comparee donne la limite $0$."
+          "erreur": "La forme $0\\times(-\\infty)$ est indeterminee mais pas sans limite ; une transformation ou un résultat de croissance comparee donne la limite $0$.",
+          "renvoi": "C4, croissances comparées"
         }
       }
     },
@@ -107,13 +119,16 @@
       "correcte": "D",
       "diagnostics": {
         "A": {
-          "erreur": "La fonction carre n'est pas la réciproque de l'exponentielle et transforme l'équation en $\\mathrm e^{4x}=49$ sans isoler $x$."
+          "erreur": "La fonction carre n'est pas la réciproque de l'exponentielle et transforme l'équation en $\\mathrm e^{4x}=49$ sans isoler $x$.",
+          "renvoi": "M1, résoudre une équation avec l'exponentielle"
         },
         "B": {
-          "erreur": "Prendre les inverses donne $\\mathrm e^{-2x}=1/7$, une équation équivalente mais qui n'isole pas $x$ ; il faut ensuite appliquer $\\ln$."
+          "erreur": "Prendre les inverses donne $\\mathrm e^{-2x}=1/7$, une équation équivalente mais qui n'isole pas $x$ ; il faut ensuite appliquer $\\ln$.",
+          "renvoi": "M1, résoudre une équation avec l'exponentielle"
         },
         "C": {
-          "erreur": "Appliquer encore l'exponentielle compose une seconde fois au lieu d'inverser la première ; seul $\\ln$ donne $2x=\\ln 7$."
+          "erreur": "Appliquer encore l'exponentielle compose une seconde fois au lieu d'inverser la première ; seul $\\ln$ donne $2x=\\ln 7$.",
+          "renvoi": "M1, résoudre une équation avec l'exponentielle"
         }
       }
     }

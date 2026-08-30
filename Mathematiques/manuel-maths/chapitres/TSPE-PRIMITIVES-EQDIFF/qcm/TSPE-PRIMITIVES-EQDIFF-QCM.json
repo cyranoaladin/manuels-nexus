@@ -15,13 +15,16 @@
       "correcte": "A",
       "diagnostics": {
         "B": {
-          "erreur": "La dérivée de $\\mathrm e^{3x}$ vaut $3\\mathrm e^{3x}$ ; il faut donc le facteur $1/3$ pour retrouver exactement $\\mathrm e^{3x}$."
+          "erreur": "La dérivée de $\\mathrm e^{3x}$ vaut $3\\mathrm e^{3x}$ ; il faut donc le facteur $1/3$ pour retrouver exactement $\\mathrm e^{3x}$.",
+          "renvoi": "M1, primitive de $\\mathrm{e}^{ax}$"
         },
         "C": {
-          "erreur": "La dérivée de $3\\mathrm e^{3x}$ vaut $9\\mathrm e^{3x}$ ; ce choix multiplie par $3$ au lieu de compenser la dérivée de $3x$."
+          "erreur": "La dérivée de $3\\mathrm e^{3x}$ vaut $9\\mathrm e^{3x}$ ; ce choix multiplie par $3$ au lieu de compenser la dérivée de $3x$.",
+          "renvoi": "M1, primitive de $\\mathrm{e}^{ax}$"
         },
         "D": {
-          "erreur": "Comme $\\mathrm e^{3x+1}=\\mathrm e\\,\\mathrm e^{3x}$, sa dérivée vaut $3\\mathrm e\\,\\mathrm e^{3x}$ et non $\\mathrm e^{3x}$."
+          "erreur": "Comme $\\mathrm e^{3x+1}=\\mathrm e\\,\\mathrm e^{3x}$, sa dérivée vaut $3\\mathrm e\\,\\mathrm e^{3x}$ et non $\\mathrm e^{3x}$.",
+          "renvoi": "M1, primitive de $\\mathrm{e}^{ax}$"
         }
       }
     },
@@ -64,13 +67,16 @@
       "correcte": "B",
       "diagnostics": {
         "A": {
-          "erreur": "Pour $y=5x+C$, on a $y'=5$ alors que $5y=25x+5C$ ; l'égalité différentielle n'est donc pas satisfaite en general."
+          "erreur": "Pour $y=5x+C$, on a $y'=5$ alors que $5y=25x+5C$ ; l'égalité différentielle n'est donc pas satisfaite en general.",
+          "renvoi": "C5, solutions de $y'=ay$"
         },
         "C": {
-          "erreur": "La dérivée de $C\\mathrm e^{-5x}$ vaut $-5y$ ; cette famille resout $y'=-5y$, et non l'équation $y'=5y$."
+          "erreur": "La dérivée de $C\\mathrm e^{-5x}$ vaut $-5y$ ; cette famille resout $y'=-5y$, et non l'équation $y'=5y$.",
+          "renvoi": "C5, solutions de $y'=ay$"
         },
         "D": {
-          "erreur": "Pour $y=5\\mathrm e^{Cx}$, on obtient $y'=Cy$ ; cette expression ne satisfait $y'=5y$ que pour $C=5$ et ne donne pas toute la famille."
+          "erreur": "Pour $y=5\\mathrm e^{Cx}$, on obtient $y'=Cy$ ; cette expression ne satisfait $y'=5y$ que pour $C=5$ et ne donne pas toute la famille.",
+          "renvoi": "C5, solutions de $y'=ay$"
         }
       }
     },
@@ -87,13 +93,16 @@
       "correcte": "C",
       "diagnostics": {
         "A": {
-          "erreur": "Pour $y_0=12$, on a $3y_0-12=24$ au lieu de $0$ ; cette constante n'est donc pas une solution particulière."
+          "erreur": "Pour $y_0=12$, on a $3y_0-12=24$ au lieu de $0$ ; cette constante n'est donc pas une solution particulière.",
+          "renvoi": "M2, solution particulière constante de $y'=ay+b$"
         },
         "B": {
-          "erreur": "Pour la constante $y_0=-4$, le membre de gauche vaut $0$ mais $3y_0-12=-24$ ; l'équation n'est pas verifiee."
+          "erreur": "Pour la constante $y_0=-4$, le membre de gauche vaut $0$ mais $3y_0-12=-24$ ; l'équation n'est pas verifiee.",
+          "renvoi": "M2, solution particulière constante de $y'=ay+b$"
         },
         "D": {
-          "erreur": "Pour $y_0=-36$, le second membre vaut $3(-36)-12=-120$, tandis que la dérivée de la constante vaut $0$."
+          "erreur": "Pour $y_0=-36$, le second membre vaut $3(-36)-12=-120$, tandis que la dérivée de la constante vaut $0$.",
+          "renvoi": "M2, solution particulière constante de $y'=ay+b$"
         }
       }
     },
@@ -110,13 +119,16 @@
       "correcte": "D",
       "diagnostics": {
         "A": {
-          "erreur": "La valeur $y_p(0)$ peut servir ensuite avec une condition initiale, mais elle ne prouve pas que $y_p'=ay_p+f$ sur l'intervalle."
+          "erreur": "La valeur $y_p(0)$ peut servir ensuite avec une condition initiale, mais elle ne prouve pas que $y_p'=ay_p+f$ sur l'intervalle.",
+          "renvoi": "M2, vérifier qu'une fonction est solution particulière"
         },
         "B": {
-          "erreur": "Les zeros de $y_p$ ne disent pas si la fonction satisfait l'équation différentielle ; il faut substituer $y_p$ et $y_p'$ dans celle-ci."
+          "erreur": "Les zeros de $y_p$ ne disent pas si la fonction satisfait l'équation différentielle ; il faut substituer $y_p$ et $y_p'$ dans celle-ci.",
+          "renvoi": "M2, vérifier qu'une fonction est solution particulière"
         },
         "C": {
-          "erreur": "Dériver $f$ n'est pas la vérification demandee ; il faut calculer $y_p'$ puis comparer cette dérivée a $ay_p+f$."
+          "erreur": "Dériver $f$ n'est pas la vérification demandee ; il faut calculer $y_p'$ puis comparer cette dérivée a $ay_p+f$.",
+          "renvoi": "M2, vérifier qu'une fonction est solution particulière"
         }
       }
     }

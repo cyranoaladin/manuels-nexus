@@ -189,10 +189,20 @@
       "release_blocking": true,
       "machine_cannot_requalify": true,
       "ledger": "audit/METHOD_REQUALIFICATION_QUEUE.json"
+    },
+    {
+      "item_id": "TNSI_PROJET_ASSESSMENT_MODE",
+      "kind": "EDITORIAL_DECISION_REQUIRED",
+      "chapter": "TNSI-PROJET",
+      "count": 1,
+      "question": "TNSI-PROJET est-il évalué par son projet et sa grille, ou faut-il rédiger deux sujets écrits ?",
+      "release_blocking": true,
+      "machine_cannot_decide": true,
+      "ledger": "audit/TNSI_PROJET_ASSESSMENT_MODE.json"
     }
   ],
   "totals": {
-    "release_blocking_items": 6,
+    "release_blocking_items": 7,
     "new_objects_awaiting_review": 13,
     "qcm_questions_awaiting_human_proof": 144,
     "method_qualifications_awaiting_requalification": 86

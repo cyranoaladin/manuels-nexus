@@ -183,12 +183,48 @@ Cet artefact n'approuve rien et ne rebinde rien.
 
 ## Lacunes de couverture de la preuve historique
 
-5 question(s) dont la source porte un renvoi que la preuve n'a jamais capture.
+41 question(s) dont la source porte un renvoi que la preuve n'a jamais capture.
 
 | chapitre | question | champ | options |
 |---|---|---|---|
 | 1SPE-PRODUIT-SCALAIRE | Q6 | diagnostics.renvoi | $35$ |
 | 1SPE-VARIABLES-ALEATOIRES | Q1 | diagnostics.renvoi | $\frac{1}{5}$ |
 | TSPE-DERIVATION-CONVEXITE | Q1 | diagnostics.renvoi | $2\,\mathrm{e}^{x^2}$, $\mathrm{e}^{x^2}$, $x\,\mathrm{e}^{x^2}$ |
+| TSPE-DERIVATION-CONVEXITE | Q10 | diagnostics.renvoi | concave (en forme de $\cap$), croissante, decroissante |
+| TSPE-DERIVATION-CONVEXITE | Q12 | diagnostics.renvoi | au-dessous de ses tangentes, au-dessus de ses cordes, au-dessus de ses tangentes et de ses cordes |
+| TSPE-DERIVATION-CONVEXITE | Q13 | diagnostics.renvoi | $f$ est decroissante, $f'(0) = 0$, $f(0) = 0$ |
+| TSPE-DERIVATION-CONVEXITE | Q14 | diagnostics.renvoi | $f(x) = f(a) + f'(a)(x - a)$, $f(x) \geq f(a)$, $f(x) \leq f(a) + f'(a)(x - a)$ |
+| TSPE-DERIVATION-CONVEXITE | Q15 | diagnostics.renvoi | exacte, impossible a determiner, par exces (la vraie valeur est plus petite) |
+| TSPE-DERIVATION-CONVEXITE | Q2 | diagnostics.renvoi | $\dfrac{1}{x^2 + 1}$, $\dfrac{2}{x^2 + 1}$, $\dfrac{x}{x^2 + 1}$ |
 | TSPE-DERIVATION-CONVEXITE | Q3 | diagnostics.renvoi | $12(3x-2)^4$, $3(3x-2)^4$, $4(3x-2)^3$ |
+| TSPE-DERIVATION-CONVEXITE | Q4 | diagnostics.renvoi | $-\mathrm{e}^{-x}$, $\mathrm{e}^{-x} + x\,\mathrm{e}^{-x}$, $x\,\mathrm{e}^{-x}$ |
+| TSPE-DERIVATION-CONVEXITE | Q5 | diagnostics.renvoi | $+\infty$, $-\infty$, $1$ |
+| TSPE-DERIVATION-CONVEXITE | Q6 | diagnostics.renvoi | aucun extremum local, un maximum local en $x = 0$, un maximum local en $x = 1$ et un minimum local en $x = -1$ |
+| TSPE-DERIVATION-CONVEXITE | Q7 | diagnostics.renvoi | concave sur $\mathbb{R}$, convexe sur $\mathbb{R}^+$ et concave sur $\mathbb{R}^-$, ni convexe ni concave |
+| TSPE-DERIVATION-CONVEXITE | Q8 | diagnostics.renvoi | pour tout $x \geq 0$, pour tout $x \leq 0$, seulement en $x = 0$ |
+| TSPE-DERIVATION-CONVEXITE | Q9 | diagnostics.renvoi | convexe puis concave, convexe sur $]0, +\infty[$, ni convexe ni concave |
+| TSPE-GEOMETRIE-ESPACE | Q1 | diagnostics.renvoi | toujours confondues., toujours non coplanaires., toujours secantes. |
+| TSPE-GEOMETRIE-ESPACE | Q2 | diagnostics.renvoi | $\vec{u}=\vec{v}$., $\vec{u}\cdot\vec{v}=1$., $\|\vec{u}\|=\|\vec{v}\|$. |
+| TSPE-GEOMETRIE-ESPACE | Q3 | diagnostics.renvoi | $(-2,3,1)$., $(1,-3,2)$., $(2,3,1)$. |
+| TSPE-GEOMETRIE-ESPACE | Q4 | diagnostics.renvoi | aucun parametre., deux parametres., trois parametres. |
+| TSPE-GEOMETRIE-ESPACE | Q5 | diagnostics.renvoi | $H$ est le point de $\mathcal{P}$ le plus eloigne de $M$., $H$ est un point quelconque de $\mathcal{P}$., $H=M$ toujours. |
+| TSPE-LOGARITHME | Q1 | diagnostics.renvoi | $(\ln x)^2$., $2\ln x$., $\ln 2 \times \ln x$. |
+| TSPE-LOGARITHME | Q2 | diagnostics.renvoi | $5\ln(5x+1)$., $\dfrac{1}{5x+1}$., $\dfrac{5x+1}{5}$. |
+| TSPE-LOGARITHME | Q3 | diagnostics.renvoi | $-\infty$., $0$., $1$. |
+| TSPE-LOGARITHME | Q4 | diagnostics.renvoi | $-\infty$., $1$., Cette limite n'existe pas. |
+| TSPE-LOGARITHME | Q5 | diagnostics.renvoi | l'inverse., la fonction carre., la fonction exponentielle a nouveau. |
+| TSPE-PRIMITIVES-EQDIFF | Q1 | diagnostics.renvoi | $3\mathrm{e}^{3x}$., $\mathrm{e}^{3x+1}$., $\mathrm{e}^{3x}$. |
+| TSPE-PRIMITIVES-EQDIFF | Q3 | diagnostics.renvoi | $y(x) = 5\mathrm{e}^{Cx}$., $y(x) = 5x + C$., $y(x) = C\mathrm{e}^{-5x}$. |
+| TSPE-PRIMITIVES-EQDIFF | Q4 | diagnostics.renvoi | $y_0 = -36$., $y_0 = -4$., $y_0 = 12$. |
+| TSPE-PRIMITIVES-EQDIFF | Q5 | diagnostics.renvoi | calculer $y_p(0)$., deriver $f$., resoudre $y_p=0$. |
 | TSPE-PROBABILITES | Q1 | diagnostics.renvoi | C(n,k) p^k, np^k, p^k (1-p)^(n-k) |
+| TSPE-PROBABILITES | Q2 | diagnostics.renvoi | dependantes et identiques, independantes et differentes, toutes de probabilite 1/2 |
+| TSPE-PROBABILITES | Q3 | diagnostics.renvoi | jamais, uniquement si X et Y sont independantes, uniquement si X=Y |
+| TSPE-PROBABILITES | Q4 | diagnostics.renvoi | que E(X)=E(Y), que X=Y, rien de particulier |
+| TSPE-PROBABILITES | Q5 | diagnostics.renvoi | n(1-p), np, p(1-p) |
+| TSPE-PROBABILITES | Q6 | diagnostics.renvoi | E(Y), P(Y=mu), V(Y) |
+| TSPE-TRIGONOMETRIE | Q1 | diagnostics.renvoi | aucune solution., trois solutions., une seule solution. |
+| TSPE-TRIGONOMETRIE | Q2 | diagnostics.renvoi | -cos x, -sin x, sin x |
+| TSPE-TRIGONOMETRIE | Q3 | diagnostics.renvoi | -cos x, cos x, sin x |
+| TSPE-TRIGONOMETRIE | Q4 | diagnostics.renvoi | 3cos(x), cos(3x), cos(x) |
+| TSPE-TRIGONOMETRIE | Q5 | diagnostics.renvoi | les bornes de l'intervalle uniquement., les points ou f s'annule., les points ou f' est maximale. |
