@@ -3793,7 +3793,7 @@ def test_repository_baseline_is_frozen_schema_valid_and_gate_green(
 DECLARED_DEBT_LEDGERS = (
     "audit/VARALEA_C6C7_REVIEW_DEBT_12.json",
     "audit/EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1.json",
-    "audit/NSI_TC_QCM_AND_EVAL_REVIEW_DEBT_4.json",
+    "audit/NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2.json",
     "audit/TNSI_PROJET_QCM_REVIEW_DEBT_1.json",
 )
 
@@ -3860,10 +3860,9 @@ def test_repository_fail_on_new_gate_accepts_exact_residual_extension(
     gate = inventory_module._fail_on_new_gate(ROOT)
     declared = _declared_open_debt_fingerprints()
     # 12 objets de la chaine C6/C7 de VARALEA, la fiche methode C1
-    # d'EXPONENTIELLE, les 4 de 1NSI-TYPES-CONSTRUITS (deux corriges
-    # d'evaluation, le QCM et sa fiche de diagnostics devenus generes) et le
-    # QCM de TNSI-PROJET : chacun dans le registre de son chapitre.
-    assert len(declared) == 18
+    # d'EXPONENTIELLE, les 2 corriges d'evaluation de 1NSI-TYPES-CONSTRUITS et
+    # le QCM de TNSI-PROJET : chacun dans le registre de son chapitre.
+    assert len(declared) == 16
 
     assert gate["success"] is False
     assert gate["exit_code"] == 5
@@ -3872,24 +3871,9 @@ def test_repository_fail_on_new_gate_accepts_exact_residual_extension(
     assert set(comparison["new"]) == declared
     assert comparison["modified"] == []
     assert comparison["expected_review_debt"] == []
-    # Les rendus QCM 1NSI derivent desormais du .json d'autorite : leur statut
-    # passe de needs_review a generated, ce qui resout onze empreintes et en
-    # fait reapparaitre neuf. La transition est declaree, exacte, et ne
-    # qualifie rien.
-    transition = json.loads(
-        (ROOT / "audit/NSI_QCM_RENDER_STATUS_TRANSITION.json").read_text(
-            encoding="utf-8"
-        )
-    )
-    resolved_by_transition = {
-        entry["fingerprint"] for entry in transition["resolved_previous"]
-    }
-    regressed_by_transition = {
-        entry["fingerprint"] for entry in transition["regressed"]
-    }
-    assert set(comparison["resolved"]) == resolved_by_transition
-    assert set(comparison["regressions"]) == regressed_by_transition
-    assert len(comparison["unchanged"]) == 2232 - len(resolved_by_transition)
+    assert comparison["resolved"] == []
+    assert comparison["regressions"] == []
+    assert len(comparison["unchanged"]) == 2232
 
 
 def test_build_manifest_provenance_is_not_self_attesting(
@@ -13062,27 +13046,16 @@ def test_repository_fail_on_new_preserves_all_qualified_active_debt(
     # empreintes qui se resolvent sont remplacees par celles du nouveau statut,
     # elles aussi bloquantes.
     declared = _declared_open_debt_fingerprints()
-    transition = json.loads(
-        (ROOT / "audit/NSI_QCM_RENDER_STATUS_TRANSITION.json").read_text(
-            encoding="utf-8"
-        )
-    )
-    assert transition["qualifies_nothing"] is True
-    assert transition["in_approved_baseline"] is False
-    resolved_by_transition = {
-        entry["fingerprint"] for entry in transition["resolved_previous"]
-    }
-    regressed_by_transition = {
-        entry["fingerprint"] for entry in transition["regressed"]
-    }
     assert gate["success"] is False
     assert gate["exit_code"] == 5
     comparison = gate["comparison"]
     assert set(comparison["new"]) == declared
     assert comparison["expected_review_debt"] == []
-    assert set(comparison["resolved"]) == resolved_by_transition
-    assert set(comparison["regressions"]) == regressed_by_transition
-    assert set(comparison["unchanged"]) == active_fingerprints - resolved_by_transition
+    # Le rendu genere heritant du statut declare, aucune empreinte ne se
+    # deplace : la dette qualifiee reste integralement inchangee.
+    assert comparison["resolved"] == []
+    assert comparison["regressions"] == []
+    assert set(comparison["unchanged"]) == active_fingerprints
     assert declared.isdisjoint(active_fingerprints)
     assert resolved_by_transition.isdisjoint(declared)
 
