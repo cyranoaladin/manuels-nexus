@@ -213,6 +213,10 @@ class SolverResult:
     computed_value: str | None = None
     independent_evidence: str = ""
     reason: str | None = None
+    #: Options que la famille a su LIRE. Une option illisible est comptee
+    #: fausse pour ne pas bloquer le calcul, mais si aucune option n'est vraie
+    #: et qu'au moins une etait illisible, la famille ne peut rien conclure.
+    readable_options: int | None = None
 
     @property
     def true_options(self) -> list[str]:
@@ -238,6 +242,7 @@ class SolverResult:
             "computed_value": self.computed_value,
             "independent_evidence": self.independent_evidence,
             "reason": self.reason,
+            "readable_options": self.readable_options,
         }
 
     def digest(self) -> str:
@@ -261,21 +266,26 @@ def _numeric_truths(
     values = option_values(options)
     if all(value is None for value in values.values()):
         return None
-    return {letter: value == expected for letter, value in values.items()}
+    return (
+        {letter: value == expected for letter, value in values.items()},
+        sum(1 for value in values.values() if value is not None),
+    )
 
 
 def _resolved(
     family: str, options: dict[str, str], expected: Fraction, evidence: str
 ) -> SolverResult | None:
-    truths = _numeric_truths(options, expected)
-    if truths is None:
+    outcome = _numeric_truths(options, expected)
+    if outcome is None:
         return None
+    truths, readable = outcome
     return SolverResult(
         status="MACHINE_RESOLVED",
         family=family,
         option_truths=truths,
         computed_value=str(expected),
         independent_evidence=evidence,
+        readable_options=readable,
     )
 
 
@@ -325,7 +335,11 @@ def latex_to_sympy(source: str, symbol: str = "x"):
     text = re.sub(r"\\sqrt\{([^{}]*)\}", r"sqrt(\1)", text)
     text = text.replace("\\pi", "pi")
     text = re.sub(r"(\d)\{,\}(\d)", r"\1.\2", text)
-    text = re.sub(r"\\[a-zA-Z]+", " ", text)
+    # Toute commande LaTeX encore presente est INCONNUE de ce lecteur. La
+    # supprimer produirait une expression fausse en silence : \cos(2x)
+    # deviendrait (2x). On refuse.
+    if re.search(r"\\[a-zA-Z]+", text):
+        return None
     # Les groupes restants sont des exposants ou des indices : en notation
     # Python ce sont des parentheses.
     text = text.replace("{", "(").replace("}", ")")
@@ -376,7 +390,7 @@ def _symbolic_truths(options: dict[str, str], expected, symbol: str = "x"):
             truths[letter] = bool(sympy.simplify(candidate - expected) == 0)
         except (TypeError, ValueError):
             return None
-    return truths if readable else None
+    return (truths, readable) if readable else None
 
 
 # ---------------------------------------------------------------------------
@@ -926,9 +940,25 @@ def _asked_expression(statement: str) -> tuple[str, str] | None:
     text = _plain(statement)
     math = re.findall(r"\$([^$]+)\$", statement)
 
+    # Un enonce qui DEFINIT une suite ou une fonction avant de demander un
+    # terme n'est pas une simplification : le fragment mathematique en tete
+    # est la definition, pas ce qu'il faut calculer. Ces familles ne modelisent
+    # pas les suites ; elles doivent s'abstenir.
+    defines_a_sequence = bool(
+        re.search(r"suite|_\{?n\s*\+\s*1\}?|definie par|definie pour tout", text)
+    )
+    if defines_a_sequence:
+        return None
+
     if text.startswith("simplifier") and math:
         return ("SIMPLIFY", math[0])
     if "valeur de" in text and math:
+        # "la valeur de" designe un nombre : le fragment doit se reduire a une
+        # constante. S'il porte encore une inconnue, l'enonce demande autre
+        # chose et la famille ne s'applique pas.
+        candidate = latex_to_sympy(math[0])
+        if candidate is None or getattr(candidate, "free_symbols", set()):
+            return None
         return ("SIMPLIFY", math[0])
     definition = re.search(
         r"\$\s*([a-zA-Z])\s*\(\s*([a-zA-Z])\s*\)\s*=\s*([^$]+)\$", statement
@@ -937,6 +967,10 @@ def _asked_expression(statement: str) -> tuple[str, str] | None:
         return None
     name, variable, body = definition.groups()
     if re.search(rf"{name}'\s*\(\s*{variable}\s*\)", statement):
+        # Un enonce qui pose f'(x) = 0 demande une RACINE, pas l'expression de
+        # la derivee. Resoudre une equation n'est pas deriver : hors domaine.
+        if re.search(r"=\s*0|s'annule|solution|racine", text):
+            return None
         return ("DERIVATIVE", f"{body}||{variable}")
     if "valeur initiale" in text:
         return ("INITIAL_VALUE", f"{body}||{variable}")
@@ -990,9 +1024,10 @@ def _symbolic_expression_question(inp: SolverInput) -> SolverResult | None:
     else:  # pragma: no cover - operations closes
         return None
 
-    truths = _symbolic_truths(inp.options, expected, symbol=variable)
-    if truths is None:
+    outcome = _symbolic_truths(inp.options, expected, symbol=variable)
+    if outcome is None:
         return None
+    truths, readable = outcome
     family = {
         "SIMPLIFY": "SYMBOLIC_SIMPLIFICATION",
         "DERIVATIVE": "SYMBOLIC_DERIVATIVE",
@@ -1005,6 +1040,7 @@ def _symbolic_expression_question(inp: SolverInput) -> SolverResult | None:
         option_truths=truths,
         computed_value=str(expected),
         independent_evidence=evidence,
+        readable_options=readable,
     )
 
 
@@ -1131,6 +1167,18 @@ def _universal_inequality_claim(inp: SolverInput) -> SolverResult | None:
         for raw in inp.options.values()
         for marker in natural_language
     ):
+        return None
+
+    # Cette famille decide des relations POINTWISE sur une fonction connue.
+    # Un enonce qui definit une suite, ou des options qui posent une formule
+    # explicite indexee, sont hors de son domaine : elle doit s'abstenir
+    # plutot que de conclure qu'aucune option n'est vraie.
+    text = _math_text(inp.statement)
+    if re.search(r"suite|formule explicite", text):
+        return None
+    if any(re.search(r"[a-zA-Z]_\{?n\}?", raw) for raw in inp.options.values()):
+        return None
+    if not re.search(r"\bpour tout\b|\bpour un\b(?!e)|\bquel que soit\b|\bon a\b\s*:?$", text):
         return None
 
     truths: dict[str, bool] = {}
@@ -1276,6 +1324,25 @@ def solve(inp: SolverInput) -> SolverResult:
         except (UnsupportedExpression, ValueError, ZeroDivisionError):
             result = None
         if result is not None:
+            if (
+                result.status == "MACHINE_RESOLVED"
+                and result.true_option_count == 0
+                and result.readable_options is not None
+                and result.readable_options < len(inp.options)
+            ):
+                # La famille n'a lu qu'une partie des options et n'en trouve
+                # aucune vraie : c'est un echec de lecture, pas un QCM sans
+                # bonne reponse. On s'abstient plutot que de fabriquer un
+                # defaut scientifique.
+                return SolverResult(
+                    status="NOT_MACHINE_RESOLVABLE",
+                    family=None,
+                    reason=(
+                        f"la famille {result.family} n'a lu que "
+                        f"{result.readable_options} option(s) sur "
+                        f"{len(inp.options)} et n'en trouve aucune vraie"
+                    ),
+                )
             return result
     return SolverResult(
         status="NOT_MACHINE_RESOLVABLE",
