@@ -1,6 +1,8 @@
 """Le gel 1SPE-SUITES est une identite de CONTENU.
 
-Decision humaine du 2026-08-28 : conserver le gel c667f12b / 161 objets. Ces
+Decision humaine du 2026-08-30 : le gel c667f12b / 161 objets est reemis
+apres la correction editoriale du chapitre ; il devient HISTORICAL_SUPERSEDED
+et n'est jamais reecrit. Ces
 tests fixent la semantique correspondante, dans les deux sens :
 
 * une derive non semantique -- HEAD qui avance, branche renommee, autre
@@ -154,7 +156,9 @@ def test_e_accent_only_change_of_the_generated_tex_keeps_the_freeze_current(
 
     before = _binding_state(clean_repo)
     json_before = (clean_repo / QCM_JSON).read_bytes()
-    _mutate(clean_repo, QCM_TEX, "numeriques", "num\u00e9riques")
+    # Le chapitre est desormais correctement accentue : la mutation
+    # accent-only va donc de la forme accentuee vers la forme ASCII.
+    _mutate(clean_repo, QCM_TEX, "num\u00e9riques", "numeriques")
     payload = _binding_state(clean_repo)
 
     assert (clean_repo / QCM_JSON).read_bytes() == json_before
@@ -171,7 +175,7 @@ def test_f_typography_only_template_change_keeps_the_freeze_current(
 ) -> None:
     """2. Le gabarit ne change que la typographie => gel CURRENT."""
 
-    _mutate(clean_repo, QCM_TEX, "definie", "d\u00e9finie")
+    _mutate(clean_repo, QCM_TEX, "d\u00e9finie", "definie")
     payload = _binding_state(clean_repo)
 
     assert payload["binding_state"] == CURRENT
@@ -319,7 +323,7 @@ def test_the_historical_freeze_artifact_is_never_rewritten(clean_repo: Path) -> 
 
     assert freeze.read_bytes() == before
     payload = json.loads((clean_repo / BINDING).read_text(encoding="utf-8"))
-    assert payload["freeze_source_sha"] == "c667f12b1792f31981b6b5894c8c604df1bce634"
+    assert payload["freeze_source_sha"] == "2b00c28fa0e4a96737d787db9c9110071af36968"
     assert payload["freeze_object_count"] == 161
     assert payload["staleness_rules"]["automatic_rebind"] == "FORBIDDEN"
 

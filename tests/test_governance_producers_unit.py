@@ -64,7 +64,7 @@ def test_the_binding_reports_the_frozen_identity_and_passes_every_check(
     freeze_binding, binding_payload
 ) -> None:
     assert binding_payload["freeze_source_sha"] == (
-        "c667f12b1792f31981b6b5894c8c604df1bce634"
+        "2b00c28fa0e4a96737d787db9c9110071af36968"
     )
     assert binding_payload["freeze_object_count"] == 161
     assert binding_payload["current_object_count"] == 161
@@ -76,21 +76,18 @@ def test_the_binding_reports_the_frozen_identity_and_passes_every_check(
         "variant_semantic_identity_pass",
     ):
         assert binding_payload[check] is True, check
-    # Le TeX genere du QCM est un artefact de RENDU, pas une source semantique :
-    # la campagne diacritiques a change ses octets sans toucher une seule
-    # question du JSON canonique. Sa derive est signalee a part et n'entre pas
-    # dans le verdict de fraicheur du gel.
+    # Le contrat d'autorite reste explicite meme quand rien ne derive : le
+    # JSON canonique est la source semantique, le TeX genere un rendu. Le gel
+    # ayant ete reemis sur le contenu corrige, les deux sont alignes.
     assert binding_payload["findings"] == {
         "missing_objects": [],
         "modified_objects": [],
         "supplementary_objects": [],
         "covered_source_drift": [],
-        "render_artifact_drift": [
-            "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.tex"
-        ],
+        "render_artifact_drift": [],
         "programme_authority_drift": [],
     }
-    assert binding_payload["render_evidence_state"] == "RENDER_CHANGED"
+    assert binding_payload["render_evidence_state"] == "RENDER_CURRENT"
     assert binding_payload["qcm_semantic_authority"].endswith("1SPE-SUITES-QCM.json")
     assert binding_payload["qcm_render_artifact"].endswith("1SPE-SUITES-QCM.tex")
 

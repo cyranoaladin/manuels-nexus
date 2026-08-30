@@ -1262,7 +1262,7 @@ def test_no_receipt_exists_for_the_canonical_freeze() -> None:
     state = json.loads(
         (
             ROOT
-            / "audit/reviews/human/1SPE-SUITES/freeze-161-c667f12b/REVIEW_STATE.json"
+            / "audit/reviews/human/1SPE-SUITES/superseded/freeze-161-c667f12b/REVIEW_STATE.json"
         ).read_text(encoding="utf-8")
     )
     assert state["review_a"]["state"] == "PENDING_UNASSIGNED"

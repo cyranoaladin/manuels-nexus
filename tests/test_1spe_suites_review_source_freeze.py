@@ -14,7 +14,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "build_1spe_suites_review_source_freeze.py"
 OUTPUT = ROOT / "audit" / "1SPE_SUITES_REVIEW_SOURCE_FREEZE.json"
-SOURCE_SHA = "c667f12b1792f31981b6b5894c8c604df1bce634"
+SOURCE_SHA = "2b00c28fa0e4a96737d787db9c9110071af36968"
 
 
 def _producer():
