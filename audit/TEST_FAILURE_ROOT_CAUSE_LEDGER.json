@@ -1,0 +1,200 @@
+{
+ "artifact_type": "TEST_FAILURE_ROOT_CAUSE_LEDGER",
+ "schema_version": 1,
+ "source_sha": "495dd36b33465c183a96dd0f25d5f435c7c8174a",
+ "command": "python3 -m pytest -q --no-header -p no:randomly",
+ "pytest_rc": 1,
+ "passed": 9193,
+ "failed": 92,
+ "errors": 0,
+ "log_sha256": "d13b54eb5127c83038149fb2ac7ef33ea927dc509ad2c0f45a5fa24168e939b6",
+ "sum_of_family_counts": 92,
+ "unknown": 0,
+ "families": [
+  {
+   "family": "F1_OPTION_LETTER_PINNED",
+   "root_cause": "La politique editoriale de distribution des cles permute les options en emportant leur diagnostic ; ces tests prennent la LETTRE pour identite scientifique de la reponse.",
+   "fix_strategy": "adresser option et diagnostic par leur CONTENU, dans le scope de la seule question ; la lettre redevient une propriete de rendu",
+   "files": [
+    "Mathematiques/manuel-maths/tests/test_qcm_tspe_scientific_closure.py",
+    "Mathematiques/manuel-maths/tests/test_qcm_1spe_independent_regressions_current.py",
+    "Mathematiques/manuel-maths/tests/test_qcm_tcompl_texpertes_scientific_closure.py",
+    "Mathematiques/manuel-maths/tests/test_programme_1spe_2026_scope.py",
+    "Mathematiques/manuel-maths/tests/test_variables_aleatoires_1spe_2026_scope.py",
+    "NSI/tests/test_1nsi_algorithmic_p0_regressions.py"
+   ],
+   "count": 23,
+   "tests": [
+    "Mathematiques/manuel-maths/tests/test_programme_1spe_2026_scope.py::test_exponentielle_qcm_exclut_limites_et_derivation_generale",
+    "Mathematiques/manuel-maths/tests/test_programme_1spe_2026_scope.py::test_suites_limites_intuitives_couvrent_les_trois_comportements_sans_formalisme",
+    "Mathematiques/manuel-maths/tests/test_qcm_1spe_independent_regressions_current.py::test_exponentielle_q1_ne_propose_qu_une_caracterisation_valide",
+    "Mathematiques/manuel-maths/tests/test_qcm_1spe_independent_regressions_current.py::test_proba_conditionnelle_q8_a_une_seule_option_egale_a_un_tiers",
+    "Mathematiques/manuel-maths/tests/test_qcm_1spe_independent_regressions_current.py::test_produit_scalaire_q8_ne_contient_qu_une_propriete_vraie",
+    "Mathematiques/manuel-maths/tests/test_qcm_1spe_independent_regressions_current.py::test_suites_q1_et_q19_correspondent_aux_recalculs_independants",
+    "Mathematiques/manuel-maths/tests/test_qcm_1spe_independent_regressions_current.py::test_suites_q9_utilise_la_definition_sans_exclure_les_termes_nuls",
+    "Mathematiques/manuel-maths/tests/test_qcm_tcompl_texpertes_scientific_closure.py::test_echantillonnage_reste_sur_les_objets_binomiaux_du_programme",
+    "Mathematiques/manuel-maths/tests/test_qcm_tcompl_texpertes_scientific_closure.py::test_inegalites_evalue_lorenz_et_gini_sans_theoremes_hors_programme",
+    "Mathematiques/manuel-maths/tests/test_qcm_tcompl_texpertes_scientific_closure.py::test_les_questions_reconstruites_restent_univoques",
+    "Mathematiques/manuel-maths/tests/test_qcm_tspe_scientific_closure.py::test_combinatoire_c1_et_c3_sont_evaluees_par_des_questions_dediees",
+    "Mathematiques/manuel-maths/tests/test_qcm_tspe_scientific_closure.py::test_continuite_q4_garantit_exactement_deux_solutions",
+    "Mathematiques/manuel-maths/tests/test_qcm_tspe_scientific_closure.py::test_derivation_q6_distingue_les_extrema_locaux_des_extrema_globaux",
+    "Mathematiques/manuel-maths/tests/test_qcm_tspe_scientific_closure.py::test_integrales_c1_et_c3_sont_evaluees_par_des_questions_dediees",
+    "Mathematiques/manuel-maths/tests/test_qcm_tspe_scientific_closure.py::test_les_47_diagnostics_tspe_courts_explicitent_le_calcul_causal",
+    "Mathematiques/manuel-maths/tests/test_qcm_tspe_scientific_closure.py::test_les_diagnostics_generiques_tspe_sont_remplaces_par_un_modele_derreur",
+    "Mathematiques/manuel-maths/tests/test_qcm_tspe_scientific_closure.py::test_les_qcm_tspe_historiques_ont_les_bonnes_cles_et_capacites",
+    "Mathematiques/manuel-maths/tests/test_qcm_tspe_scientific_closure.py::test_les_questions_tspe_historiques_nont_plus_de_reponse_dupliquee_ou_incomplete",
+    "Mathematiques/manuel-maths/tests/test_qcm_tspe_scientific_closure.py::test_les_six_diagnostics_causalement_faux_restants_sont_corriges",
+    "Mathematiques/manuel-maths/tests/test_qcm_tspe_scientific_closure.py::test_probabilites_q4_presente_lindependance_comme_une_condition_suffisante",
+    "Mathematiques/manuel-maths/tests/test_qcm_tspe_scientific_closure.py::test_suites_q6_definit_la_suite_auxiliaire_dont_on_demande_la_raison",
+    "Mathematiques/manuel-maths/tests/test_variables_aleatoires_1spe_2026_scope.py::test_qcm_reclasses_ont_une_cle_unique_et_des_diagnostics_specifiques",
+    "NSI/tests/test_1nsi_algorithmic_p0_regressions.py::test_maximum_qcm_uses_four_unambiguous_options_in_order"
+   ]
+  },
+  {
+   "family": "F2_DEBT_LEDGER_NOT_RECOMPUTED",
+   "root_cause": "Des lacunes ont ete refermees (108 renvois, QCM NSI) sans recalcul du registre qui les declarait ; le contrat exige l'egalite EXACTE entre ecart observe et ecart declare.",
+   "fix_strategy": "regenerer le producteur de chaque registre et verifier que la fermeture est reelle, non declaree",
+   "files": [
+    "tests/test_qcm_reference_debt_metrics.py",
+    "tests/test_governance_producers_unit.py",
+    "tests/test_qcm_scientific_answer_key_audit.py",
+    "tests/test_qcm_review_proof_reconciliation.py",
+    "tests/test_math_student_teacher_key_audit.py"
+   ],
+   "count": 8,
+   "tests": [
+    "tests/test_governance_producers_unit.py::test_the_gap_metrics_report_matches_the_committed_artifact",
+    "tests/test_governance_producers_unit.py::test_the_qcm_reference_debt_markdown_separates_the_two_metrics",
+    "tests/test_math_student_teacher_key_audit.py::test_math_student_teacher_key_audit_is_current",
+    "tests/test_qcm_reference_debt_metrics.py::test_the_committed_artifact_matches_the_producer",
+    "tests/test_qcm_reference_debt_metrics.py::test_the_two_metrics_are_distinct_objects",
+    "tests/test_qcm_review_proof_reconciliation.py::test_uncaptured_renvois_are_reported_not_absorbed",
+    "tests/test_qcm_scientific_answer_key_audit.py::test_the_v1_audit_is_historical_and_no_longer_covers_the_current_corpus",
+    "tests/test_qcm_scientific_answer_key_audit.py::test_the_v2_evidence_accounts_for_every_question_without_unknown"
+   ]
+  },
+  {
+   "family": "F3_SEALED_OBJECT_COUNT",
+   "root_cause": "Les deux corriges d'evaluation 1NSI portent le compte d'objets de 952 a 954 ; l'etat scelle de la revue de contenu epingle l'ancien.",
+   "fix_strategy": "recalculer l'etat observe et conserver le scelle historique ; les deux objets neufs sont deja declares en dette de revue",
+   "files": [
+    "NSI/tests/test_1nsi_content_reviews.py",
+    "NSI/tests/test_gates_corpus.py",
+    "NSI/tests/test_assemble_manuel.py",
+    "NSI/tests/test_1nsi_status_governance.py"
+   ],
+   "count": 17,
+   "tests": [
+    "NSI/tests/test_1nsi_content_reviews.py::test_algorithm_review_receipt_matches_current_sources_before_sealing",
+    "NSI/tests/test_1nsi_content_reviews.py::test_all_review_receipts_match_current_governance_before_sealing",
+    "NSI/tests/test_1nsi_content_reviews.py::test_build_manifest_governance_uses_current_clean_base",
+    "NSI/tests/test_1nsi_content_reviews.py::test_cli_exposes_required_modes",
+    "NSI/tests/test_1nsi_content_reviews.py::test_contract_findings_are_exactly_the_ten_sealed_contract_reviews",
+    "NSI/tests/test_1nsi_content_reviews.py::test_counter_review_policy_migration_invalidates_exactly_six_receipts",
+    "NSI/tests/test_1nsi_content_reviews.py::test_discover_sources_is_exact_and_1nsi_only",
+    "NSI/tests/test_1nsi_content_reviews.py::test_findings_only_differ_on_reattested_payload_or_provenance",
+    "NSI/tests/test_1nsi_content_reviews.py::test_object_findings_exhaustively_cover_all_339_sources",
+    "NSI/tests/test_1nsi_content_reviews.py::test_policy_migration_invalidates_only_review_envelopes",
+    "NSI/tests/test_1nsi_content_reviews.py::test_policy_pins_official_and_contractual_sources",
+    "NSI/tests/test_1nsi_content_reviews.py::test_protocol_mutation_invalidates_all_dependency_digests",
+    "NSI/tests/test_1nsi_content_reviews.py::test_scope_guard_pins_exact_sources_and_immutable_surfaces",
+    "NSI/tests/test_1nsi_content_reviews.py::test_verify_scope_rejects_changed_path_outside_allowlist",
+    "NSI/tests/test_1nsi_status_governance.py::test_1nsi_object_statuses_follow_execution_evidence",
+    "NSI/tests/test_assemble_manuel.py::test_runtime_selection_covers_all_professor_objects_and_is_student_safe",
+    "NSI/tests/test_gates_corpus.py::test_language_specification_capacities_are_traced_individually"
+   ]
+  },
+  {
+   "family": "F4_SUSPENDED_QUALIFICATIONS_VISIBLE",
+   "root_cause": "Les 86 qualifications suspendues font reapparaitre leurs anomalies comme dette ouverte ; les forensics residuels attendaient un ensemble actif entierement qualifie.",
+   "fix_strategy": "declarer l'ensemble suspendu comme composant nomme et disjoint du modele residuel, sans le qualifier",
+   "files": [
+    "tests/test_build_residual_true_new_forensics.py",
+    "tests/test_residual13_mutation_contract.py",
+    "tests/test_inventory_collection.py"
+   ],
+   "count": 8,
+   "tests": [
+    "tests/test_build_residual_true_new_forensics.py::test_builds_exact_residual_without_mutating_frozen_inputs",
+    "tests/test_build_residual_true_new_forensics.py::test_projects_a_fixed_initial_fingerprint",
+    "tests/test_build_residual_true_new_forensics.py::test_projects_a_review_closed_initial_fingerprint",
+    "tests/test_build_residual_true_new_forensics.py::test_rejects_a_qualified_residual_that_stops_blocking_release",
+    "tests/test_inventory_collection.py::test_materialization_revalidations_use_only_the_owned_lock_identity",
+    "tests/test_inventory_collection.py::test_materialize_baseline_qualifications_check_is_read_only",
+    "tests/test_residual13_mutation_contract.py::test_residual13_mutation_a_exact_13_fail_on_new_passes",
+    "tests/test_residual13_mutation_contract.py::test_residual13_mutation_b_fourteenth_fingerprint_fails"
+   ]
+  },
+  {
+   "family": "F5_POLICY_MODULE_MANIFEST_DIGEST",
+   "root_cause": "Le module d'inventaire charge sous alias par la politique de qualification refuse le manifeste de build dont le source_digest a change avec les sources.",
+   "fix_strategy": "verifier si le rafraichissement d'enveloppe suffit, sinon isoler la fixture de son manifeste",
+   "files": [
+    "tests/test_baseline_qualification.py"
+   ],
+   "count": 5,
+   "tests": [
+    "tests/test_baseline_qualification.py::test_materialization_plan_corrects_policy_entry_drift_after_materialization",
+    "tests/test_baseline_qualification.py::test_materialization_plan_preserves_history_and_emits_all_required_fields",
+    "tests/test_baseline_qualification.py::test_materialization_refuses_approved_set_drift_without_partial_payload",
+    "tests/test_baseline_qualification.py::test_repository_approved_set_has_exact_category_and_owner_counts",
+    "tests/test_baseline_qualification.py::test_repository_registry_excludes_prior_policy_from_current_policy"
+   ]
+  },
+  {
+   "family": "F6_RENDER_ET_PROVENANCE",
+   "root_cause": "Trois defauts distincts, dont un REEL de rendu : une option tronquee a l'impression (« Tres forte »).",
+   "fix_strategy": "traiter individuellement ; le rendu tronque est un defaut de contenu, pas un test a ajuster",
+   "files": [
+    "Mathematiques/manuel-maths/tests/test_qcm_render_semantic_preservation.py",
+    "Mathematiques/manuel-maths/tests/test_maquette_v5.py",
+    "tests/test_report_provenance_is_not_self_stale.py"
+   ],
+   "count": 3,
+   "tests": [
+    "Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_canonical_manifest_contract",
+    "Mathematiques/manuel-maths/tests/test_qcm_render_semantic_preservation.py::test_le_cas_reel_tcompl_inference_q5_conserve_ses_options",
+    "tests/test_report_provenance_is_not_self_stale.py::test_the_freshness_digest_is_computed_over_declared_inputs"
+   ]
+  },
+  {
+   "family": "F1_OPTION_LETTER_PINNED__source_unique",
+   "root_cause": "meme cause que F1, plus sept entrees relevant de F2 (registre de dette non recalcule) dans le meme fichier",
+   "fix_strategy": "registre regenere ; le reste converti au contenu",
+   "files": [
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py"
+   ],
+   "count": 28,
+   "tests": [
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi[TSPE-DERIVATION-CONVEXITE]",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi[TSPE-GEOMETRIE-ESPACE]",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi[TSPE-LOGARITHME]",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi[TSPE-PRIMITIVES-EQDIFF]",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi[TSPE-PROBABILITES]",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_chaque_distracteur_porte_un_diagnostic_et_un_renvoi[TSPE-TRIGONOMETRIE]",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_continuite_q12_exclut_explicitement_un_troisieme_point_fixe",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_convexite_q11_definit_inflexion_par_changement_de_convexite",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_correlation_causalite_q7_couvre_le_point_moyen_sans_ambiguite",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_diagnostic_1spe_explique_exactement_son_distracteur[1SPE-DERIVATION-GLOBAL-Q3-D-fragments0]",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_diagnostic_1spe_explique_exactement_son_distracteur[1SPE-DERIVATION-LOCAL-Q12-D-fragments10]",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_diagnostic_1spe_explique_exactement_son_distracteur[1SPE-DERIVATION-LOCAL-Q5-B-fragments5]",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_diagnostic_1spe_explique_exactement_son_distracteur[1SPE-DERIVATION-LOCAL-Q9-A-fragments7]",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_diagnostic_1spe_explique_exactement_son_distracteur[1SPE-DERIVATION-LOCAL-Q9-B-fragments8]",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_diagnostic_1spe_explique_exactement_son_distracteur[1SPE-PROBA-COND-Q3-D-fragments16]",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_diagnostic_1spe_explique_exactement_son_distracteur[1SPE-PRODUIT-SCALAIRE-Q6-C-fragments26]",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_diagnostic_1spe_explique_exactement_son_distracteur[1SPE-SUITES-Q10-A-fragments38]",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_diagnostic_1spe_explique_exactement_son_distracteur[1SPE-SUITES-Q20-C-fragments40]",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_geometrie_reperee_q15_ecarte_le_trapeze_inclusif",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_le_registre_de_dette_est_courant_et_reproductible",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_les_sauts_de_ligne_python_sont_des_newlines_json_reels",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_limites_fonctions_q13_q14_ont_un_critere_de_reponse_unique",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_limites_fonctions_q7_diagnostic_de_x_zero_est_exact",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_primitives_q2_a_une_unique_reponse_correcte",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_proba_conditionnelle_q18_decrit_les_donnees_qui_appellent_bayes",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_second_degre_q16_cle_correspond_au_calcul_independant",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_suites_q14_demande_un_critere_objectif",
+    "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_suites_q3_evalue_l_absence_de_limite_sans_formalisation"
+   ]
+  }
+ ]
+}
