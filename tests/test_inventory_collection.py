@@ -2211,6 +2211,12 @@ def test_materialization_revalidations_use_only_the_owned_lock_identity(
         "_load_observed_build_manifest",
         observed_manifest_loader,
     )
+    # Ce test isole l'IDENTITE DU VERROU. Le depot porte par ailleurs 86
+    # qualifications suspendues par la campagne diacritiques, et la
+    # materialisation refuse alors -- a juste titre -- de les recreer. Ce
+    # refus est le sujet de tests/test_stale_qualification_does_not_mask.py ;
+    # ici il empecherait seulement d'observer les trois passages du verrou.
+    monkeypatch.setattr(inventory_module, "invalid_qualifications", lambda _root: [])
     result = inventory_module._safe_materialize_baseline_qualifications(
         repository,
         check_only=False,
