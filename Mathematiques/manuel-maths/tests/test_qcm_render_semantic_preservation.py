@@ -138,7 +138,9 @@ def test_le_cas_reel_tcompl_inference_q5_conserve_ses_options(producteur, tmp_pa
     question = next(q for q in source["questions"] if q["id"] == "Q5")
     rendu = _rendre_et_extraire(producteur, _document(question["enonce"], question["options"]), tmp_path)
 
-    for fragment in ("car la maladie est rare", "Tres forte", "Egale a 50", "Exactement 90"):
+    # Fragments accentues a dessein : depuis la campagne diacritiques, le
+    # controle prouve aussi que les accents survivent au rendu.
+    for fragment in ("car la maladie est rare", "Très forte", "Égale a 50", "Exactement 90"):
         assert _normalise(fragment) in rendu, f"option tronquee : {fragment!r}"
 
 

@@ -109,7 +109,7 @@ def test_canonical_manifest_contract():
                 # Re-epingle apres accentuation des cinq chaines du gabarit de
                 # build_qcm_tex.py : le QCM de reference a change de 18 lignes,
                 # toutes orthographiques, aucune sur le contenu des questions.
-                "sha256": "be8c86581abd93d3385acdc3d67c2a96facb725e50c1a3d62eab8b6db75a7176",
+                "sha256": "9284ad6bc8baeab694690b35375ed3b37fe838611dd7fa31b6a57acdec9acc09",
         },
         "compact_corrections": [
             "1SPE-DERLOCAL-EX-001",
