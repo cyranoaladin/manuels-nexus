@@ -212,6 +212,36 @@ def _read_json(path: Path) -> dict[str, Any]:
     return value
 
 
+SUSPENDED_QUALIFICATIONS_LEDGER = Path("audit/METHOD_REQUALIFICATION_QUEUE.json")
+
+
+def _suspended_qualifications(root: Path) -> set[str]:
+    """Empreintes dont la qualification est SUSPENDUE, non effacee.
+
+    La campagne diacritiques a modifie des fiches methode apres leur
+    qualification humaine. La decision portait sur un texte precis : elle ne
+    s'applique plus, l'anomalie couverte redevient une dette ouverte, et
+    l'empreinte reapparait comme active non qualifiee. Ce n'est ni une
+    nouveaute ni une regression, mais une classe a part entiere -- nommee ici
+    pour etre comptee sans jamais etre fondue dans le residuel.
+
+    La qualification demeure sur le disque ; seule son application est
+    suspendue, et seule une re-qualification humaine la retablit.
+    """
+
+    chemin = root / SUSPENDED_QUALIFICATIONS_LEDGER
+    if not chemin.is_file():
+        return set()
+    registre = _read_json(chemin)
+    if registre.get("approves_nothing") is not True:
+        raise ValueError("le registre des qualifications suspendues approuve quelque chose")
+    return {
+        str(entry["fingerprint"])
+        for entry in registre.get("items", [])
+        if entry.get("state") == "STALE"
+    }
+
+
 def _declared_separate_debt(root: Path) -> dict[str, set[str]]:
     """Empreintes des dettes declarees separement, par registre.
 
@@ -468,7 +498,12 @@ def build_reports(
     active_open_debt = _active_open_debt(qualifications)
     declared_debt = _declared_separate_debt(root)
     separate_debt = set().union(*declared_debt.values()) if declared_debt else set()
-    extra = sorted(active_unqualified - initial_fingerprints - separate_debt)
+    suspended = _suspended_qualifications(root)
+    if suspended & separate_debt:
+        raise ValueError("qualifications suspendues et dettes declarees non disjointes")
+    extra = sorted(
+        active_unqualified - initial_fingerprints - separate_debt - suspended
+    )
     if extra:
         raise ValueError(
             "ensemble actif non qualifié inattendu: "

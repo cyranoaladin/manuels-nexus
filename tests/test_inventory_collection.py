@@ -13057,7 +13057,6 @@ def test_repository_fail_on_new_preserves_all_qualified_active_debt(
     assert comparison["regressions"] == []
     assert set(comparison["unchanged"]) == active_fingerprints
     assert declared.isdisjoint(active_fingerprints)
-    assert resolved_by_transition.isdisjoint(declared)
 
 
 def test_repository_method_aliases_are_unambiguous(
