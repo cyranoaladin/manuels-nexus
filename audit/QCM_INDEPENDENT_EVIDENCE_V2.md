@@ -5,12 +5,12 @@
 Une identite par question. La v1 reste l'enregistrement historique.
 Cet artefact n'approuve rien.
 
-- Questions du corpus : 337
+- Questions du corpus : 479
 - Report d'identite : 314
 - Recalcul independant : 21
-- Revue humaine requise : 2
+- Revue humaine requise : 144
 - UNKNOWN : 0
-- Equation : 337 = 314 + 21 + 2
+- Equation : 479 = 314 + 21 + 144
 - EVIDENCE_ROUTING_COMPLETE : True
 - ALL_QCM_HUMAN_REVIEW_COMPLETE : False
 
@@ -66,5 +66,147 @@ Comportement correct du solveur, pas un echec : aucune regle mathematique generi
 
 | chapitre | question | motif |
 |---|---|---|
+| 1NSI-ALGO-DICHO-GLOUTON-KNN | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ALGO-DICHO-GLOUTON-KNN | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ALGO-DICHO-GLOUTON-KNN | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ALGO-DICHO-GLOUTON-KNN | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ALGO-DICHO-GLOUTON-KNN | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ALGO-DICHO-GLOUTON-KNN | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ALGO-PARCOURS-TRIS | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ALGO-PARCOURS-TRIS | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ALGO-PARCOURS-TRIS | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ALGO-PARCOURS-TRIS | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ALGO-PARCOURS-TRIS | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ALGO-PARCOURS-TRIS | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ARCHITECTURE-OS | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ARCHITECTURE-OS | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ARCHITECTURE-OS | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ARCHITECTURE-OS | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ARCHITECTURE-OS | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-ARCHITECTURE-OS | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-LANGAGE | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-LANGAGE | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-LANGAGE | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-LANGAGE | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-LANGAGE | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-LANGAGE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-LANGAGE | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-LANGAGE | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-PROJET-METHODES | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-PROJET-METHODES | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-PROJET-METHODES | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-PROJET-METHODES | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-PROJET-METHODES | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-PROJET-METHODES | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-RESEAUX | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-RESEAUX | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-RESEAUX | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-RESEAUX | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-RESEAUX | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-RESEAUX | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TABLES | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TABLES | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TABLES | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TABLES | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TABLES | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TABLES | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-BASE | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-BASE | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-BASE | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-BASE | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-BASE | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-BASE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-CONSTRUITS | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-CONSTRUITS | Q10 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-CONSTRUITS | Q11 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-CONSTRUITS | Q12 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-CONSTRUITS | Q13 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-CONSTRUITS | Q14 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-CONSTRUITS | Q15 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-CONSTRUITS | Q16 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-CONSTRUITS | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-CONSTRUITS | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-CONSTRUITS | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-CONSTRUITS | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-CONSTRUITS | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-CONSTRUITS | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-CONSTRUITS | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-TYPES-CONSTRUITS | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-WEB-IHM | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-WEB-IHM | Q10 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-WEB-IHM | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-WEB-IHM | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-WEB-IHM | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-WEB-IHM | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-WEB-IHM | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-WEB-IHM | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-WEB-IHM | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| 1NSI-WEB-IHM | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | 1SPE-PRODUIT-SCALAIRE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | 1SPE-VARIABLES-ALEATOIRES | Q16 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ALGORITHMIQUE | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ALGORITHMIQUE | Q10 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ALGORITHMIQUE | Q11 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ALGORITHMIQUE | Q12 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ALGORITHMIQUE | Q13 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ALGORITHMIQUE | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ALGORITHMIQUE | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ALGORITHMIQUE | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ALGORITHMIQUE | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ALGORITHMIQUE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ALGORITHMIQUE | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ALGORITHMIQUE | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ALGORITHMIQUE | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ARCHITECTURES-MATERIELLES-SY | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ARCHITECTURES-MATERIELLES-SY | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ARCHITECTURES-MATERIELLES-SY | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ARCHITECTURES-MATERIELLES-SY | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ARCHITECTURES-MATERIELLES-SY | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ARCHITECTURES-MATERIELLES-SY | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-ARCHITECTURES-MATERIELLES-SY | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-BASES-DE-DONNEES | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-BASES-DE-DONNEES | Q10 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-BASES-DE-DONNEES | Q11 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-BASES-DE-DONNEES | Q12 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-BASES-DE-DONNEES | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-BASES-DE-DONNEES | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-BASES-DE-DONNEES | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-BASES-DE-DONNEES | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-BASES-DE-DONNEES | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-BASES-DE-DONNEES | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-BASES-DE-DONNEES | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-BASES-DE-DONNEES | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-HISTOIRE-INFORMATIQUE | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-HISTOIRE-INFORMATIQUE | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-HISTOIRE-INFORMATIQUE | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-HISTOIRE-INFORMATIQUE | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-LANGAGES-ET-PROGRAMMATION | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-LANGAGES-ET-PROGRAMMATION | Q10 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-LANGAGES-ET-PROGRAMMATION | Q11 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-LANGAGES-ET-PROGRAMMATION | Q12 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-LANGAGES-ET-PROGRAMMATION | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-LANGAGES-ET-PROGRAMMATION | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-LANGAGES-ET-PROGRAMMATION | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-LANGAGES-ET-PROGRAMMATION | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-LANGAGES-ET-PROGRAMMATION | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-LANGAGES-ET-PROGRAMMATION | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-LANGAGES-ET-PROGRAMMATION | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-LANGAGES-ET-PROGRAMMATION | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-PROJET | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-PROJET | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-PROJET | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-PROJET | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-STRUCTURES-DONNEES | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-STRUCTURES-DONNEES | Q10 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-STRUCTURES-DONNEES | Q11 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-STRUCTURES-DONNEES | Q12 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-STRUCTURES-DONNEES | Q13 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-STRUCTURES-DONNEES | Q14 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-STRUCTURES-DONNEES | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-STRUCTURES-DONNEES | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-STRUCTURES-DONNEES | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-STRUCTURES-DONNEES | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-STRUCTURES-DONNEES | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-STRUCTURES-DONNEES | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-STRUCTURES-DONNEES | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TNSI-STRUCTURES-DONNEES | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |

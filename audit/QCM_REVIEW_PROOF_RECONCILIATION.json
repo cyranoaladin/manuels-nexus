@@ -1,5 +1,5 @@
 {
-  "aggregate_current_set_digest": "sha256:2a9e93e04729ab40f3730fe1f9c95bb0f9c93f67b1676bbf7ea2261082d8ffcc",
+  "aggregate_current_set_digest": "sha256:6d40ec51c6694fe59496c34219f8f20e238ecd1bf9601ab7da0efcb00e062f53",
   "approves_nothing": true,
   "artifact_type": "qcm_review_proof_reconciliation",
   "carried_forward": [
@@ -2204,12 +2204,12 @@
   ],
   "counts": {
     "CARRIED_FORWARD_UNCHANGED": 314,
-    "CURRENT_QCM_QUESTION_COUNT": 337,
+    "CURRENT_QCM_QUESTION_COUNT": 479,
     "OLD_PROOF_QUESTION_COUNT": 331,
     "PROOF_ROWS_WITHOUT_CURRENT_QUESTION": 0,
-    "REPROOF_REQUIRED": 23
+    "REPROOF_REQUIRED": 165
   },
-  "equation": "337 = 314 + 23",
+  "equation": "479 = 314 + 165",
   "generated_by": "scripts/build_qcm_review_proof_reconciliation.py",
   "historical_proof_status": "HISTORICAL",
   "proof_field_coverage_gaps": [
@@ -2268,6 +2268,614 @@
   "proof_rows_without_current_question": [],
   "rebinds_nothing": true,
   "reproof_required": [
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "current_semantic_digest": "sha256:87ce7ece6f9244559263425a1f2f8eba030bfbe96d605abb6603958a0c0db7d9",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "current_semantic_digest": "sha256:198547bc2af9d77537801c61e1d60f5eecbcce9f2e9891710b21e16ee30e14d9",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "current_semantic_digest": "sha256:c101a9497fa39b71a323c9e78bc001b4361f0065da56724f270b7caadba40a10",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "current_semantic_digest": "sha256:a24b2faca5e78460eb9a74eb1b04e7fa25c7a7b01314c6f076c16eb0d3b685f3",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "current_semantic_digest": "sha256:4c038af30811b30a2795b25e9cd75d43a7fe335b90b5da8bdec9e4ae0b37f728",
+      "delta_classes": [],
+      "question_id": "Q5",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "current_semantic_digest": "sha256:5c2ae1fbb75fda58b40849c7291dba7a072fe69f1bb0a2c26a642e6745322096",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "current_semantic_digest": "sha256:8c51c2400d623ef1d72e92e3385c0b1bd9c8b2f233aee06719626790a1a6c1af",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "current_semantic_digest": "sha256:c27ca02435f915b7a1ff1078c2af847eb362e1741bddbc4d642c0b9c37f035b7",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "current_semantic_digest": "sha256:93c667d9522bc240ead15619027fcbc2f2267562e65ab3ec34846efe776cd6fb",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "current_semantic_digest": "sha256:35227d202c94230bcc18cec45284946aaa3ea19eef984d32d68186f186936c6d",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "current_semantic_digest": "sha256:3360a1c8f503f95207629919ad9efc155c99ec2ff8dd5e1ec8a9b5ee262fa753",
+      "delta_classes": [],
+      "question_id": "Q5",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "current_semantic_digest": "sha256:145d629b7d1656b74be5ac6445d454463428b22ec16e53ebef324eb72ab699ab",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "current_semantic_digest": "sha256:7b6d1a2e97271531cd657d5607b8b262c4214274238f7df405fb7e6906883595",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/qcm/1NSI-ARCHITECTURE-OS-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "current_semantic_digest": "sha256:4214b77c17d4564ae3c79271b45c25b70ae5fe250d0d0b68244d4461cb8d491a",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/qcm/1NSI-ARCHITECTURE-OS-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "current_semantic_digest": "sha256:51079a93d2193054dbd3ba61c495dc07e97cd81d30c66b4a0e34262a1b87c069",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/qcm/1NSI-ARCHITECTURE-OS-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "current_semantic_digest": "sha256:1ab69a6b5e2194f86b314032fc139362e431f3b293a4aae41b5a49f4ed6e094d",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/qcm/1NSI-ARCHITECTURE-OS-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "current_semantic_digest": "sha256:d8db212f48e04657005cad52bab23311b621f5231cc55595d8938d58c4464aab",
+      "delta_classes": [],
+      "question_id": "Q5",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/qcm/1NSI-ARCHITECTURE-OS-QCM.json"
+    },
+    {
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "current_semantic_digest": "sha256:c758579f1edfeb68b9e2084a3fe2838cc6b37bfdcedfe17ba14f01cef8f5c62b",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-ARCHITECTURE-OS/qcm/1NSI-ARCHITECTURE-OS-QCM.json"
+    },
+    {
+      "chapter": "1NSI-LANGAGE",
+      "current_semantic_digest": "sha256:45dfefb74ddbea0d6018f14ccaf49263b2fe8b9ad80a309960c5f4855fe9ac4e",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-LANGAGE/qcm/1NSI-LANGAGE-QCM.json"
+    },
+    {
+      "chapter": "1NSI-LANGAGE",
+      "current_semantic_digest": "sha256:2f4d8e14fa86ac136a2990881799527f7a547bd98a1a798fdcd57ef8f642b3ac",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-LANGAGE/qcm/1NSI-LANGAGE-QCM.json"
+    },
+    {
+      "chapter": "1NSI-LANGAGE",
+      "current_semantic_digest": "sha256:6a6aa7e7582170ae8211f5513fd4bf2b5ba5f4395adda20debe51d7e764e0096",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-LANGAGE/qcm/1NSI-LANGAGE-QCM.json"
+    },
+    {
+      "chapter": "1NSI-LANGAGE",
+      "current_semantic_digest": "sha256:b8cf455a03c6fe054ef2366066421fd5b406943b9dda96b1ee8999536a3a0db8",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-LANGAGE/qcm/1NSI-LANGAGE-QCM.json"
+    },
+    {
+      "chapter": "1NSI-LANGAGE",
+      "current_semantic_digest": "sha256:f235c2dad527daf7b8d7845541d47fefcdcfa4f731ae8812e135bcff66033e50",
+      "delta_classes": [],
+      "question_id": "Q5",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-LANGAGE/qcm/1NSI-LANGAGE-QCM.json"
+    },
+    {
+      "chapter": "1NSI-LANGAGE",
+      "current_semantic_digest": "sha256:3799f413bf2f6e9b19e82ff31009ac73b23aa3a351c860f1b644c26bcc405aa9",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-LANGAGE/qcm/1NSI-LANGAGE-QCM.json"
+    },
+    {
+      "chapter": "1NSI-LANGAGE",
+      "current_semantic_digest": "sha256:d81c01e722c7695f0fa3cbcd47acb074598a179f6cea8057123ba255a3911b02",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-LANGAGE/qcm/1NSI-LANGAGE-QCM.json"
+    },
+    {
+      "chapter": "1NSI-LANGAGE",
+      "current_semantic_digest": "sha256:e5b9d30cee0b46c85f73efb358c11916581057cb4ae9f1ffed40008b765afdd1",
+      "delta_classes": [],
+      "question_id": "Q8",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-LANGAGE/qcm/1NSI-LANGAGE-QCM.json"
+    },
+    {
+      "chapter": "1NSI-PROJET-METHODES",
+      "current_semantic_digest": "sha256:a97d8c6a8b4a1c0c97e26a775ebe8b07b1bea49a92240d52358380fa1fe20fdc",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-PROJET-METHODES/qcm/1NSI-PROJET-METHODES-QCM.json"
+    },
+    {
+      "chapter": "1NSI-PROJET-METHODES",
+      "current_semantic_digest": "sha256:2360d5b0cc9596750bc32122b6e6fde90a95beda75eec189b97f5b1a0de9e682",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-PROJET-METHODES/qcm/1NSI-PROJET-METHODES-QCM.json"
+    },
+    {
+      "chapter": "1NSI-PROJET-METHODES",
+      "current_semantic_digest": "sha256:c76efb1af5dbc474524b8b158876e33bccd265e44a313e07dc5894bd9f2217c8",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-PROJET-METHODES/qcm/1NSI-PROJET-METHODES-QCM.json"
+    },
+    {
+      "chapter": "1NSI-PROJET-METHODES",
+      "current_semantic_digest": "sha256:1b18b22ef1192689b1ba7b2a207246634a824a95c1f15954c32a1f3e0ee5c94b",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-PROJET-METHODES/qcm/1NSI-PROJET-METHODES-QCM.json"
+    },
+    {
+      "chapter": "1NSI-PROJET-METHODES",
+      "current_semantic_digest": "sha256:bd3de2c1388b62a6ff40737962e4601e8dafc2ce175b698f78435a4c1a870a92",
+      "delta_classes": [],
+      "question_id": "Q5",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-PROJET-METHODES/qcm/1NSI-PROJET-METHODES-QCM.json"
+    },
+    {
+      "chapter": "1NSI-PROJET-METHODES",
+      "current_semantic_digest": "sha256:40033dcff76c3ebd0970abd57466c0d83efd4f16511e8a092727c9ee47743b4f",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-PROJET-METHODES/qcm/1NSI-PROJET-METHODES-QCM.json"
+    },
+    {
+      "chapter": "1NSI-RESEAUX",
+      "current_semantic_digest": "sha256:52cf42ddc535a0a0385d63fc8cea397368daaeb889487371777bb94aff120176",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.json"
+    },
+    {
+      "chapter": "1NSI-RESEAUX",
+      "current_semantic_digest": "sha256:377ff9230fd260e8aeda62740c1ae48038eea84a33b19deab556543d69296c60",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.json"
+    },
+    {
+      "chapter": "1NSI-RESEAUX",
+      "current_semantic_digest": "sha256:b9a391706cedff2808c54b41c2e7663c41e2605acf80a1772200a0fe44cbe5fe",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.json"
+    },
+    {
+      "chapter": "1NSI-RESEAUX",
+      "current_semantic_digest": "sha256:f3e32d5ac9a25abe2541695158fd4f3565dfad4df69248f117abe7c409193fc3",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.json"
+    },
+    {
+      "chapter": "1NSI-RESEAUX",
+      "current_semantic_digest": "sha256:dfae81cbc8523c7ef04ccdfdebc27bae776e9ab915f5d1b8be544fbc5a9c8452",
+      "delta_classes": [],
+      "question_id": "Q5",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.json"
+    },
+    {
+      "chapter": "1NSI-RESEAUX",
+      "current_semantic_digest": "sha256:720299b279fa1e62e882b102d8ae7267ed1c1a1ded9a5453a2c126e3a0a14034",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TABLES",
+      "current_semantic_digest": "sha256:a143379ba7dce1fdf5f5d7dce266998cd8fb6ae65caed663c3abfd4b182d2064",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TABLES/qcm/1NSI-TABLES-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TABLES",
+      "current_semantic_digest": "sha256:be65f2824bc178136d34b17fe98716cd9c5744270e7c93410a3c8f5788ed4697",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TABLES/qcm/1NSI-TABLES-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TABLES",
+      "current_semantic_digest": "sha256:75adfcf89df7435b0161f8d6c523c0d020aa81e9ad3c220eefaee538574f1628",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TABLES/qcm/1NSI-TABLES-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TABLES",
+      "current_semantic_digest": "sha256:e759416e571f3a21e7fc4a753883e501630cfc4d3d732a9e63d18a9d12e4896f",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TABLES/qcm/1NSI-TABLES-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TABLES",
+      "current_semantic_digest": "sha256:3f3792aa835d89e4e2e0f210b9a2461943f9851635e13da9cebb721aaa34e33a",
+      "delta_classes": [],
+      "question_id": "Q5",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TABLES/qcm/1NSI-TABLES-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TABLES",
+      "current_semantic_digest": "sha256:51952e324f2a575067b3429831415cde91004327916e7a37890d73a1bf108a0b",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TABLES/qcm/1NSI-TABLES-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-BASE",
+      "current_semantic_digest": "sha256:499733604aa861b16726f41bf9e33a4b6b0497338ae32f59301e1268a7769005",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-BASE/qcm/1NSI-TYPES-BASE-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-BASE",
+      "current_semantic_digest": "sha256:cb8e435bebfe822b173c39f00f50c27e329d9a8b87cef3807ebc938b9b52be09",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-BASE/qcm/1NSI-TYPES-BASE-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-BASE",
+      "current_semantic_digest": "sha256:8de0cf5a812c124e27c731ca382c2d3231347ccd4b7851694245862995f420aa",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-BASE/qcm/1NSI-TYPES-BASE-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-BASE",
+      "current_semantic_digest": "sha256:ca886fbdca3f3407e86e9dadddb1bd49c58d5b44c2a7aa12e0ebcfdd27bb9019",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-BASE/qcm/1NSI-TYPES-BASE-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-BASE",
+      "current_semantic_digest": "sha256:13041e9c4db8009c4c6fbb37e34089c26919dcb1b20cfa1fac4e7639a16ec6c7",
+      "delta_classes": [],
+      "question_id": "Q5",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-BASE/qcm/1NSI-TYPES-BASE-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-BASE",
+      "current_semantic_digest": "sha256:8d08f505b041aa0daec00dc91d3c256689bfe12bf6cf3716635316e36061c8a6",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-BASE/qcm/1NSI-TYPES-BASE-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "current_semantic_digest": "sha256:3b74f8264794489cc27ce5fcc7e794e5ef3f7c6e71fbe8e2a1fc6ef88ef8c8c3",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "current_semantic_digest": "sha256:08b9c743a6fa2c9199803a08ab428cce2c15c2bc450360e4770832b1e2d2e376",
+      "delta_classes": [],
+      "question_id": "Q10",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "current_semantic_digest": "sha256:a4c02f86e63e22f37321d2906dc73c66b7807e4e967b0522121f84a7424662a7",
+      "delta_classes": [],
+      "question_id": "Q11",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "current_semantic_digest": "sha256:ba325449af17f96a2a1c21f464d341ce6639c829b1f594bbbd1672c2f2c82ac6",
+      "delta_classes": [],
+      "question_id": "Q12",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "current_semantic_digest": "sha256:327e5d9513848bc6852d58fde1576a887650c5ab110325a97e28a451496a88c7",
+      "delta_classes": [],
+      "question_id": "Q13",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "current_semantic_digest": "sha256:0bedb699b4cbaa843e7e39af1e8263e60004f311c165bf09978b76c879508cc7",
+      "delta_classes": [],
+      "question_id": "Q14",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "current_semantic_digest": "sha256:9b0fa6a3387bdc0f81f56a5929acd1ab34e2df64799ea5a50a9aff5b65b51b60",
+      "delta_classes": [],
+      "question_id": "Q15",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "current_semantic_digest": "sha256:63b7def9a7678c13b2f671adee3095b07c268b2bfafc3e51de15c85e7697a2bf",
+      "delta_classes": [],
+      "question_id": "Q16",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "current_semantic_digest": "sha256:f185fbf1b1a8330fc241b8a5128a913f4fc15e7b471594ab04338f3eed3bfae7",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "current_semantic_digest": "sha256:d4ce820c7004c7e78cdb70a583d9bd0ec449275bfa7f26a4a55423caa33e1b7b",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "current_semantic_digest": "sha256:37783d44222c04a54e2f288b89982d20f56340299033bccadb9be69b6924084b",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "current_semantic_digest": "sha256:787a46cfd7705a5c1566d5bab5356a8bba0a00935ed7fe7dcee0f280c552a09c",
+      "delta_classes": [],
+      "question_id": "Q5",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "current_semantic_digest": "sha256:71230fa103352b3bf6d8d8680a17efc5a5a6fc11f4d018d3880e1040a44cf477",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "current_semantic_digest": "sha256:07b2cd4fdeab2ff851dcac451d306690e6934c69893b61efc156080acb8c3735",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "current_semantic_digest": "sha256:10c18328a81f054c404c810db8a5ced6d730a9ad6d2066ba0fdc82dcd16b3608",
+      "delta_classes": [],
+      "question_id": "Q8",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json"
+    },
+    {
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "current_semantic_digest": "sha256:4f202c31a3e21f2761c40bf5057d0230a39a5191499cd802133f54b72697b99e",
+      "delta_classes": [],
+      "question_id": "Q9",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.json"
+    },
+    {
+      "chapter": "1NSI-WEB-IHM",
+      "current_semantic_digest": "sha256:909f0a91eeb4c6e728dce3e2a77e221d22200cda15e9bf72f402633719436b34",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.json"
+    },
+    {
+      "chapter": "1NSI-WEB-IHM",
+      "current_semantic_digest": "sha256:dd8c3abce37eb18e930861e30dd144e9dd9b971b6ec7bd6c5518769f6b2cca79",
+      "delta_classes": [],
+      "question_id": "Q10",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.json"
+    },
+    {
+      "chapter": "1NSI-WEB-IHM",
+      "current_semantic_digest": "sha256:2a59ccf32cd8fe1fa2b5aeaa073c0b6b870d1813d2c1c2b528093b10a97f98bb",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.json"
+    },
+    {
+      "chapter": "1NSI-WEB-IHM",
+      "current_semantic_digest": "sha256:dc60572bd1609086ecdd79f20aa81a71e814fc11a4c4012226aca772b94fd639",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.json"
+    },
+    {
+      "chapter": "1NSI-WEB-IHM",
+      "current_semantic_digest": "sha256:010e4bb768e053cb1daad3cbef64ebdac4a448fa3bffb146a62508c277dfc81b",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.json"
+    },
+    {
+      "chapter": "1NSI-WEB-IHM",
+      "current_semantic_digest": "sha256:a6e121a3ee871ae9c57a6882d41856ad5cf0643005f638e9caad45d56867f368",
+      "delta_classes": [],
+      "question_id": "Q5",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.json"
+    },
+    {
+      "chapter": "1NSI-WEB-IHM",
+      "current_semantic_digest": "sha256:2593f305dcaa27f4c16fea9df50a597debb1c10fa88ec520af339a49b8f7ee64",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.json"
+    },
+    {
+      "chapter": "1NSI-WEB-IHM",
+      "current_semantic_digest": "sha256:787f79d591862dda74e9ebf29e1b69a62b38dd115bc46409976cf847149d5459",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.json"
+    },
+    {
+      "chapter": "1NSI-WEB-IHM",
+      "current_semantic_digest": "sha256:a17a859cbf87d4361a6e698528281ebcf800acd501f4d761fea2c8e939e98b2d",
+      "delta_classes": [],
+      "question_id": "Q8",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.json"
+    },
+    {
+      "chapter": "1NSI-WEB-IHM",
+      "current_semantic_digest": "sha256:76628998a16d386b774184e9d1f750cf518f054322729eae79fc3bb2d938d90e",
+      "delta_classes": [],
+      "question_id": "Q9",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.json"
+    },
     {
       "chapter": "1SPE-PRODUIT-SCALAIRE",
       "current_semantic_digest": "sha256:85302e5f9a21a16b47bc34242e2e86b6c12ad42d79c61b6f7fd0a6ec38ae7f2b",
@@ -2468,6 +3076,534 @@
       "question_id": "Q9",
       "reason": "CHAPTER_SCOPE_CHANGED_FULL_REPROOF",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "current_semantic_digest": "sha256:bbab3b722ee2e536cfdf4851a5be0e4f849bd30001496c5e335218137c5a4a21",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ALGORITHMIQUE/qcm/TNSI-ALGORITHMIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "current_semantic_digest": "sha256:d1f9172f49935efcdc9e26ca9975ab054e71724fa8cf52b576a44c20ffe986ae",
+      "delta_classes": [],
+      "question_id": "Q10",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ALGORITHMIQUE/qcm/TNSI-ALGORITHMIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "current_semantic_digest": "sha256:8d87389130d82d48714c582eaf7f796d12ccfa05091f05e6917d329de5fb0d2e",
+      "delta_classes": [],
+      "question_id": "Q11",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ALGORITHMIQUE/qcm/TNSI-ALGORITHMIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "current_semantic_digest": "sha256:69901936212ff11b1411b70960baf2d301fa5a608af109c8f5e368cb584aa0d4",
+      "delta_classes": [],
+      "question_id": "Q12",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ALGORITHMIQUE/qcm/TNSI-ALGORITHMIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "current_semantic_digest": "sha256:9d23198f7b31e81078d1d9e121428135fb25a81a7f4c2b849abf294073d8cf19",
+      "delta_classes": [],
+      "question_id": "Q13",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ALGORITHMIQUE/qcm/TNSI-ALGORITHMIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "current_semantic_digest": "sha256:7193c5ba51d6abfd8941aca2e9ed71c42e17466dfdd4f23d3b94f45fc08c6986",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ALGORITHMIQUE/qcm/TNSI-ALGORITHMIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "current_semantic_digest": "sha256:5964f66d078bfe58bd57acec5e301de297e04e39c866ba0c94a72987ab86cd50",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ALGORITHMIQUE/qcm/TNSI-ALGORITHMIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "current_semantic_digest": "sha256:619893dfc5338cb024e95bf6edc46ae0bd47eaf914db050cfac88f92ca435619",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ALGORITHMIQUE/qcm/TNSI-ALGORITHMIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "current_semantic_digest": "sha256:98dc1c1e755afb9b973f31661e32a2a63dd27556c5847d99669a5f93233a6aed",
+      "delta_classes": [],
+      "question_id": "Q5",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ALGORITHMIQUE/qcm/TNSI-ALGORITHMIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "current_semantic_digest": "sha256:f48bbf2ab0f5ca75b324d29a5ffb051a9efd9f3860f1485ed0d6a728874505e0",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ALGORITHMIQUE/qcm/TNSI-ALGORITHMIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "current_semantic_digest": "sha256:01c081904732e43d1866252d2b1638688e8681191d5e5fc392e828aa4bd48f27",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ALGORITHMIQUE/qcm/TNSI-ALGORITHMIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "current_semantic_digest": "sha256:66d7bb4fd74db152487af7e482bb06ad353dece3e60090bfa5a7b11383d329c1",
+      "delta_classes": [],
+      "question_id": "Q8",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ALGORITHMIQUE/qcm/TNSI-ALGORITHMIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "current_semantic_digest": "sha256:72ac3234a0955ddb1627f361a3ff59259e234d380df61fdce0561b850c227f1f",
+      "delta_classes": [],
+      "question_id": "Q9",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ALGORITHMIQUE/qcm/TNSI-ALGORITHMIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "current_semantic_digest": "sha256:f3b50729ff392a3f01577388c6fde00bdf0fc59f48e62fcef4895744b8190874",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/qcm/TNSI-ARCHITECTURES-MATERIELLES-SY-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "current_semantic_digest": "sha256:31c7b0a60026f1c82c29be589cf853e6a4a3ed194e9a7b024310217f99d5f85d",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/qcm/TNSI-ARCHITECTURES-MATERIELLES-SY-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "current_semantic_digest": "sha256:d0dae1ab0498ba80df83209a8ac4146a1ad366785db4654e800b97b82e258af7",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/qcm/TNSI-ARCHITECTURES-MATERIELLES-SY-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "current_semantic_digest": "sha256:95bacc10ba59244f1845a554c923f9323b76b6e06f5bdf4e6b537dd38e9150cb",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/qcm/TNSI-ARCHITECTURES-MATERIELLES-SY-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "current_semantic_digest": "sha256:521efb53d8096549625d9c48ded36d87d470f3eb7dbb641196494011c7fac336",
+      "delta_classes": [],
+      "question_id": "Q5",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/qcm/TNSI-ARCHITECTURES-MATERIELLES-SY-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "current_semantic_digest": "sha256:5069f8b7114a2cfb62ae5a93e2e6bc33cc23a1c0c43e5534aa40b9b4848a75df",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/qcm/TNSI-ARCHITECTURES-MATERIELLES-SY-QCM.json"
+    },
+    {
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "current_semantic_digest": "sha256:1e263673c06e750f0c089092f8177533069c6cbc8aae28b10d897582d21390b0",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/qcm/TNSI-ARCHITECTURES-MATERIELLES-SY-QCM.json"
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "current_semantic_digest": "sha256:a48357afef30186e6634821ad2bbccb2997bee302593184b7abc2a4b1af02976",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/qcm/TNSI-BASES-DE-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "current_semantic_digest": "sha256:34e7aecdc19c9c902441cd060c80e4cf0614c208714da44daf10eb6312621d8c",
+      "delta_classes": [],
+      "question_id": "Q10",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/qcm/TNSI-BASES-DE-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "current_semantic_digest": "sha256:a163e50d984b95f4dfb66384299178feb68d4793df60ee6d4adf0c6138b26624",
+      "delta_classes": [],
+      "question_id": "Q11",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/qcm/TNSI-BASES-DE-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "current_semantic_digest": "sha256:3355f7613dfcd583b00375d0b709c4f14fa71a1fba45b3b935a8b86e9774368d",
+      "delta_classes": [],
+      "question_id": "Q12",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/qcm/TNSI-BASES-DE-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "current_semantic_digest": "sha256:11f8c5fa2a9e7f51cb879e3d75a5fa27f8f9db00f9fd0f6ea4c76cf656a1861a",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/qcm/TNSI-BASES-DE-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "current_semantic_digest": "sha256:e131b866666a0a314db95256bf331ac529d02faf32e28f52c9700c35da23ae43",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/qcm/TNSI-BASES-DE-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "current_semantic_digest": "sha256:7f5d85d77cd19d50cd60f113d13959a7b49933d8afb395b30970948a31616fd4",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/qcm/TNSI-BASES-DE-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "current_semantic_digest": "sha256:7592dab804e34f9e9f20acbd771bb5cfb921b838d31499a54e46ce01486cf808",
+      "delta_classes": [],
+      "question_id": "Q5",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/qcm/TNSI-BASES-DE-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "current_semantic_digest": "sha256:28d5e0b53092838042a61bd8951155d52a5a00ad6ffa80606d04d6f9265247c2",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/qcm/TNSI-BASES-DE-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "current_semantic_digest": "sha256:9e027a0c1c74227fc0b71df3b416f790c46eb0acf0f7f2fc4725899f1e7b6987",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/qcm/TNSI-BASES-DE-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "current_semantic_digest": "sha256:cb566e98fa28ae41eea7f4bba7fa43719841fb846183cebbb942b960513ad6fb",
+      "delta_classes": [],
+      "question_id": "Q8",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/qcm/TNSI-BASES-DE-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "current_semantic_digest": "sha256:8dc63f5b6559afe5be0fd6e44e9298de8b81b95df6c10dacfefd23f826a165e1",
+      "delta_classes": [],
+      "question_id": "Q9",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-BASES-DE-DONNEES/qcm/TNSI-BASES-DE-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "current_semantic_digest": "sha256:9f74f6a95e09c8074630df63a38e134fc96c66bec122345da3dfdfd335ad0034",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/qcm/TNSI-HISTOIRE-INFORMATIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "current_semantic_digest": "sha256:66dd42eb38eb7560bf8e18d1d1d900a9a59d4145127395e2452dc817f530e8b8",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/qcm/TNSI-HISTOIRE-INFORMATIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "current_semantic_digest": "sha256:a2adb139f5c10b1f9620b34d7290685c66c0da6781e7a10a9c6b9ec68d5599da",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/qcm/TNSI-HISTOIRE-INFORMATIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "current_semantic_digest": "sha256:15f64e57d9a8e9293246eb3daa9dd14285e9499764eb11e338e0873ef9d60d45",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/qcm/TNSI-HISTOIRE-INFORMATIQUE-QCM.json"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "current_semantic_digest": "sha256:6b1b59b2e85b603bf11ec7549537ffbc50bcb3ea2ad2c83020090989f170c620",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/qcm/TNSI-LANGAGES-ET-PROGRAMMATION-QCM.json"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "current_semantic_digest": "sha256:829ad36c60ed7d9baa0d555bab24a0944b85dfcacd651ebf5ca03ac0c58b9282",
+      "delta_classes": [],
+      "question_id": "Q10",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/qcm/TNSI-LANGAGES-ET-PROGRAMMATION-QCM.json"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "current_semantic_digest": "sha256:d8b0ead3d5033141d40a6051797c9ea8ce402dc7dd599c1a48d6cd0bcad7827a",
+      "delta_classes": [],
+      "question_id": "Q11",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/qcm/TNSI-LANGAGES-ET-PROGRAMMATION-QCM.json"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "current_semantic_digest": "sha256:9e123bf39a4e782444159c48fa38e5ff7425bb61b5efb85feeec701b48e48c16",
+      "delta_classes": [],
+      "question_id": "Q12",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/qcm/TNSI-LANGAGES-ET-PROGRAMMATION-QCM.json"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "current_semantic_digest": "sha256:3b6ad11eb3a422eabd743204911f0ba9295a4190da8f4e9a075434a73daebda8",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/qcm/TNSI-LANGAGES-ET-PROGRAMMATION-QCM.json"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "current_semantic_digest": "sha256:249885fe00a67f9955640c05d32e3ca0f0cc6cb8095efde57ee53cebfe558495",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/qcm/TNSI-LANGAGES-ET-PROGRAMMATION-QCM.json"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "current_semantic_digest": "sha256:57974eb9c01dfbcd1a961c68b1d015108ab6296f8c6fb4d4a172b6811d00b824",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/qcm/TNSI-LANGAGES-ET-PROGRAMMATION-QCM.json"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "current_semantic_digest": "sha256:77c70288a01544d92e90c123340b808251edb3a8058a6e8079f83aa4416783dd",
+      "delta_classes": [],
+      "question_id": "Q5",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/qcm/TNSI-LANGAGES-ET-PROGRAMMATION-QCM.json"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "current_semantic_digest": "sha256:69e94ff01f2af6501633981bda9440f729ede4adb492964ae7c7e3d5f80765f7",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/qcm/TNSI-LANGAGES-ET-PROGRAMMATION-QCM.json"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "current_semantic_digest": "sha256:9ee881a2b2b9c32439b3e3c1c1c6e29c6293e9b25d05baa1d3dd4c7344fc5091",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/qcm/TNSI-LANGAGES-ET-PROGRAMMATION-QCM.json"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "current_semantic_digest": "sha256:68dfe4ce3ab51856115627451d5582afe2cf518d0a3a675af551bfcf5c3b2381",
+      "delta_classes": [],
+      "question_id": "Q8",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/qcm/TNSI-LANGAGES-ET-PROGRAMMATION-QCM.json"
+    },
+    {
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "current_semantic_digest": "sha256:ee97613958eadb07e7cac04ae49f14b9d96c94f6b19384352ef11275f9e3e494",
+      "delta_classes": [],
+      "question_id": "Q9",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/qcm/TNSI-LANGAGES-ET-PROGRAMMATION-QCM.json"
+    },
+    {
+      "chapter": "TNSI-PROJET",
+      "current_semantic_digest": "sha256:e16f6a7990e9b585587f1f5f8ac8abd1571f21297d677b005b23b64f28353958",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-PROJET/qcm/TNSI-PROJET-QCM.json"
+    },
+    {
+      "chapter": "TNSI-PROJET",
+      "current_semantic_digest": "sha256:59139799c6f7f6b69ce4b04ac3ab875aa6e46259f7babc36d8b7e51a9be0628e",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-PROJET/qcm/TNSI-PROJET-QCM.json"
+    },
+    {
+      "chapter": "TNSI-PROJET",
+      "current_semantic_digest": "sha256:ad505130fb8db5d743bbd1afb767389c5870de5fca6a55b04f950c3883facb0f",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-PROJET/qcm/TNSI-PROJET-QCM.json"
+    },
+    {
+      "chapter": "TNSI-PROJET",
+      "current_semantic_digest": "sha256:59aa667852e0c1f40b0ecd875402ce83456c61ff89e5bc17b46316591329d65c",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-PROJET/qcm/TNSI-PROJET-QCM.json"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "current_semantic_digest": "sha256:4ee3a447ef4a4d57cea2e6201efc1207900da2920d0f1c98a21115404217b947",
+      "delta_classes": [],
+      "question_id": "Q1",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/qcm/TNSI-STRUCTURES-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "current_semantic_digest": "sha256:408c35c0ba0f85451c2e18a03e1a1abb59edc93766d49e4d846d05505bb701f5",
+      "delta_classes": [],
+      "question_id": "Q10",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/qcm/TNSI-STRUCTURES-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "current_semantic_digest": "sha256:05b77fa878a4f46541ca609fcd81b5d68095e98cc6a8075c5fa0d9769af814d9",
+      "delta_classes": [],
+      "question_id": "Q11",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/qcm/TNSI-STRUCTURES-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "current_semantic_digest": "sha256:96dad357dab417fc33ac40f96d5aa094369b922bd50220b56c9a84b69df9ff41",
+      "delta_classes": [],
+      "question_id": "Q12",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/qcm/TNSI-STRUCTURES-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "current_semantic_digest": "sha256:728875bf4817b2b4ef4bd83179d08f4d2681aed880967bc209c005dc027287c0",
+      "delta_classes": [],
+      "question_id": "Q13",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/qcm/TNSI-STRUCTURES-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "current_semantic_digest": "sha256:a9c9c6241e4aa1179b7e771216a18c3050cb12cd9551405ff3a160ccd42730f4",
+      "delta_classes": [],
+      "question_id": "Q14",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/qcm/TNSI-STRUCTURES-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "current_semantic_digest": "sha256:f8f108bc1a450c63d794f867bc7a3f1b4b8ff22b3c123d9ac1ded9d3f726bd5d",
+      "delta_classes": [],
+      "question_id": "Q2",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/qcm/TNSI-STRUCTURES-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "current_semantic_digest": "sha256:c2533a64ddd6ac4f66519e9a23c5cf0104d2a0ed1ac579f73bec43088fbf71a4",
+      "delta_classes": [],
+      "question_id": "Q3",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/qcm/TNSI-STRUCTURES-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "current_semantic_digest": "sha256:72a197878976f16058ff4943012779afd5976bd33bf3c2e0b78c7cdaf5c8a0fb",
+      "delta_classes": [],
+      "question_id": "Q4",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/qcm/TNSI-STRUCTURES-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "current_semantic_digest": "sha256:343018a8d755d2508704d1e113e2ddb57ec41e7485d272f89aa0f126e18c90fb",
+      "delta_classes": [],
+      "question_id": "Q5",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/qcm/TNSI-STRUCTURES-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "current_semantic_digest": "sha256:a6236aa850be99fcce8972d9d6abcbdac1f00d010e217e89b05f6ee44bfd211b",
+      "delta_classes": [],
+      "question_id": "Q6",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/qcm/TNSI-STRUCTURES-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "current_semantic_digest": "sha256:a22cc300fd21552b13e4f0a00cadaffc1321003b75a7e4b8b41e2451e4981132",
+      "delta_classes": [],
+      "question_id": "Q7",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/qcm/TNSI-STRUCTURES-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "current_semantic_digest": "sha256:0d0cc4a4e3f055731f6ce8e67272c9a9106b41214f63ff325169edb55ef30e59",
+      "delta_classes": [],
+      "question_id": "Q8",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/qcm/TNSI-STRUCTURES-DONNEES-QCM.json"
+    },
+    {
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "current_semantic_digest": "sha256:3aee7c25c49d14ac4e6617cc86ddadd26643fd5499ae31f2fa523fd7fdc5927d",
+      "delta_classes": [],
+      "question_id": "Q9",
+      "reason": "NEW_QUESTION_NEVER_PROVEN",
+      "source_path": "NSI/chapitres/TNSI-STRUCTURES-DONNEES/qcm/TNSI-STRUCTURES-DONNEES-QCM.json"
     },
     {
       "chapter": "TSPE-DERIVATION-CONVEXITE",

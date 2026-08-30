@@ -37,7 +37,10 @@ def payload() -> dict:
 def test_the_partition_covers_the_current_corpus_exactly(payload: dict) -> None:
     counts = payload["counts"]
     assert counts["OLD_PROOF_QUESTION_COUNT"] == 331
-    assert counts["CURRENT_QCM_QUESTION_COUNT"] == 337
+    # 337 questions de mathematiques et 142 de NSI. Le corpus NSI a rejoint le
+    # routage quand ses QCM ont recu une cle : ses questions n'ont jamais ete
+    # prouvees, elles entrent donc toutes en dette. Le total AUGMENTE.
+    assert counts["CURRENT_QCM_QUESTION_COUNT"] == 479
     assert (
         counts["CARRIED_FORWARD_UNCHANGED"] + counts["REPROOF_REQUIRED"]
         == counts["CURRENT_QCM_QUESTION_COUNT"]
@@ -47,7 +50,7 @@ def test_the_partition_covers_the_current_corpus_exactly(payload: dict) -> None:
     carried = {(e["chapter"], e["question_id"]) for e in payload["carried_forward"]}
     reproof = {(e["chapter"], e["question_id"]) for e in payload["reproof_required"]}
     assert carried & reproof == set()
-    assert len(carried) + len(reproof) == 337
+    assert len(carried) + len(reproof) == 479
 
 
 def test_every_varalea_question_needs_a_new_proof(payload: dict) -> None:
@@ -61,13 +64,29 @@ def test_every_varalea_question_needs_a_new_proof(payload: dict) -> None:
     assert not any(e["chapter"] == VARALEA for e in payload["carried_forward"])
 
 
-def test_the_six_new_questions_are_named_and_never_proven(payload: dict) -> None:
+def test_the_six_new_maths_questions_are_named_and_never_proven(payload: dict) -> None:
+    """Cote mathematiques, les seules questions inedites restent les six de VARALEA."""
+
     new = sorted(
         e["question_id"]
         for e in payload["reproof_required"]
         if e["reason"] == "NEW_QUESTION_NEVER_PROVEN"
+        and not e["chapter"].startswith(("1NSI", "TNSI"))
     )
     assert new == ["Q16", "Q17", "Q18", "Q19", "Q20", "Q21"]
+
+
+def test_every_nsi_question_enters_the_ledger_as_never_proven(payload: dict) -> None:
+    """Aucune question NSI ne doit entrer avec une preuve qu'elle n'a pas."""
+
+    nsi = [
+        e for e in payload["reproof_required"] if e["chapter"].startswith(("1NSI", "TNSI"))
+    ]
+    assert len(nsi) == 142
+    assert all(e["reason"] == "NEW_QUESTION_NEVER_PROVEN" for e in nsi)
+    assert not any(
+        e["chapter"].startswith(("1NSI", "TNSI")) for e in payload["carried_forward"]
+    )
 
 
 def test_the_only_real_option_change_is_flagged_as_semantic(payload: dict) -> None:
@@ -113,7 +132,9 @@ def test_a_varalea_change_never_invalidates_another_chapter(payload: dict) -> No
     """Le defaut corrige : le sha du fichier entier faisait tomber tout le lot."""
 
     foreign = {
-        e["chapter"] for e in payload["reproof_required"] if e["chapter"] != VARALEA
+        e["chapter"]
+        for e in payload["reproof_required"]
+        if e["chapter"] != VARALEA and not e["chapter"].startswith(("1NSI", "TNSI"))
     }
     # Le seul autre chapitre concerne l'est pour sa PROPRE divergence, pas par
     # contagion : la preuve de TSPE-DERIVATION-CONVEXITE Q6 omet un $ que la

@@ -52,6 +52,11 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = ROOT / "audit" / "qcm_review_evidence"
 QCM_ROOT = ROOT / "Mathematiques" / "manuel-maths" / "chapitres"
+#: Les QCM NSI existent depuis la campagne de redaction : les laisser hors du
+#: corpus ferait declarer NO_QCM a des chapitres qui en portent un, et leurs
+#: questions echapperaient au routage de preuve. Elles y entrent donc, comme
+#: toute question jamais prouvee -- ce qui augmente la dette, sans la reduire.
+QCM_ROOTS = (QCM_ROOT, ROOT / "NSI" / "chapitres")
 JSON_TARGET = ROOT / "audit" / "QCM_REVIEW_PROOF_RECONCILIATION.json"
 MD_TARGET = ROOT / "audit" / "QCM_REVIEW_PROOF_RECONCILIATION.md"
 
@@ -246,7 +251,10 @@ def _load_proof() -> dict[tuple[str, str], dict[str, Any]]:
 
 def _load_corpus() -> dict[tuple[str, str], tuple[dict[str, Any], str]]:
     corpus: dict[tuple[str, str], tuple[dict[str, Any], str]] = {}
-    for path in sorted(QCM_ROOT.glob("*/qcm/*-QCM.json")):
+    sources = [
+        path for racine in QCM_ROOTS for path in sorted(racine.glob("*/qcm/*-QCM.json"))
+    ]
+    for path in sources:
         document = json.loads(path.read_text(encoding="utf-8"))
         relative = path.relative_to(ROOT).as_posix()
         for question in document["questions"]:

@@ -94,10 +94,12 @@
       "questions": [
         "1SPE-VARIABLES-ALEATOIRES/Q16"
       ],
-      "count": 1,
+      "count": 144,
       "why": "aucune famille mathematique generique ne modelise ces enonces sans ecrire une derivation propre a la question ; le solveur s'abstient au lieu d'inventer",
       "release_blocking": true,
-      "evidence": "audit/QCM_INDEPENDENT_EVIDENCE_V2.json"
+      "evidence": "audit/QCM_INDEPENDENT_EVIDENCE_V2.json",
+      "nsi_questions_without_any_machine_family": 142,
+      "note": "Le solveur independant ne possede aucune famille NSI : les 142 questions NSI ne recoivent aucune preuve machine et attendent integralement la revue humaine."
     },
     {
       "item_id": "QCM_EVIDENCE_SCHEMA_COVERAGE_GAP",
@@ -192,7 +194,7 @@
   "totals": {
     "release_blocking_items": 6,
     "new_objects_awaiting_review": 13,
-    "qcm_questions_awaiting_human_proof": 1,
+    "qcm_questions_awaiting_human_proof": 144,
     "method_qualifications_awaiting_requalification": 86
   }
 }
