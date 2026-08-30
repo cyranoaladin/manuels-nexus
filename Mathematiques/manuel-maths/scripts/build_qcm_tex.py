@@ -26,21 +26,95 @@ import re
 import sys
 from pathlib import Path
 
+import yaml
+
 RACINE = Path(__file__).resolve().parents[1]
 LETTRES = ("A", "B", "C", "D")
 
 
-def _entete(chapitre: str, source: str) -> str:
-    meta = json.dumps(
-        {
-            "id": f"{chapitre}-QCM",
-            "chapitre": chapitre,
-            "type_objet": "qcm",
-            "genere_depuis": source,
-            "status": "generated",
-        },
-        ensure_ascii=False,
-    )
+def identifiant_existant(cible: Path) -> str | None:
+    """Identifiant deja declare par le rendu, s'il en existe un.
+
+    Regenerer un rendu ne doit pas RENOMMER l'objet qu'il porte. Le chapitre
+    pilote 1NSI livrait `1NSI-TC-QCM` ; derive du nom de chapitre, il serait
+    devenu `1NSI-TYPES-CONSTRUITS-QCM`, faisant disparaitre un identifiant que
+    plusieurs artefacts d'audit referencent. L'identite d'un objet existant
+    prime sur la convention de nommage.
+    """
+
+    if not cible.is_file():
+        return None
+    premiere = cible.read_text(encoding="utf-8").split("\n", 1)[0]
+    marqueur = "% META: "
+    if not premiere.startswith(marqueur):
+        return None
+    try:
+        return json.loads(premiere[len(marqueur):]).get("id")
+    except json.JSONDecodeError:
+        return None
+
+
+def meta_existante(cible: Path) -> dict:
+    """META deja declaree par le rendu, si elle est lisible."""
+
+    if not cible.is_file():
+        return {}
+    premiere = cible.read_text(encoding="utf-8").split("\n", 1)[0]
+    marqueur = "% META: "
+    if not premiere.startswith(marqueur):
+        return {}
+    try:
+        return json.loads(premiere[len(marqueur):])
+    except json.JSONDecodeError:
+        return {}
+
+
+def capacites_officielles(chapitre: str, questions: list) -> list[str]:
+    """References officielles des capacites evaluees, lues au contrat.
+
+    Le rendu ecrit a la main portait ces references ; les perdre en migrant
+    vers le generateur ferait disparaitre la tracabilite de l'objet vers le
+    programme. Elles sont DERIVEES du contrat et du jeu de questions courant,
+    non recopiees, pour qu'elles restent vraies.
+    """
+
+    dossier = resoudre_dossier_qcm(chapitre)
+    contrat = dossier.parent / "contrat.yaml" if dossier else None
+    if contrat is None or not contrat.is_file():
+        return []
+    references: dict[str, str] = {}
+    for entree in yaml.safe_load(contrat.read_text(encoding="utf-8")).get("capacites", []):
+        if isinstance(entree, dict) and entree.get("code") and entree.get("ref_capacite"):
+            references[str(entree["code"])] = str(entree["ref_capacite"])
+    couvertes = {str(q.get("capacite")) for q in questions}
+    return sorted({references[code] for code in couvertes if code in references})
+
+
+def _entete(
+    chapitre: str,
+    source: str,
+    identifiant: str | None = None,
+    capacites: list[str] | None = None,
+    statut: str | None = None,
+) -> str:
+    """En-tete du rendu.
+
+    Le statut est HERITE de ce que l'objet declarait. Le forcer a `generated`
+    ecraserait une decision de gouvernance : la politique scellee 1NSI
+    INTERDIT ce statut, et un rendu qui n'a pas ete revu doit rester
+    `needs_review`. C'est le cas par defaut d'un rendu neuf.
+    """
+
+    entetes = {
+        "id": identifiant or f"{chapitre}-QCM",
+        "chapitre": chapitre,
+        "type_objet": "qcm",
+    }
+    if capacites:
+        entetes["capacites"] = capacites
+    entetes["genere_depuis"] = source
+    entetes["status"] = statut or "needs_review"
+    meta = json.dumps(entetes, ensure_ascii=False)
     return f"% META: {meta}\n% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.\n"
 
 
@@ -102,7 +176,15 @@ def rendre(donnees: dict) -> str:
     chapitre = donnees["chapitre"]
     titre = donnees.get("titre", "Faire le point")
     questions = donnees.get("questions", [])
-    out = [_entete(chapitre, donnees["_source"]), f"\n\\section*{{\\textcolor{{chapcolor}}{{\\MakeUppercase{{{titre}}}}}}}\n"]
+    out = [
+        _entete(
+            chapitre,
+            donnees["_source"],
+            donnees.get("_identifiant"),
+            donnees.get("_capacites"),
+            donnees.get("_statut"),
+        ),
+        f"\n\\section*{{\\textcolor{{chapcolor}}{{\\MakeUppercase{{{titre}}}}}}}\n"]
     out.append(
         "\n\\begin{center}\n\\textit{Pour chaque question, une seule réponse est exacte.}\n"
         "\\end{center}\n\n\\begin{enumerate}\n"
@@ -198,7 +280,9 @@ def rendre_diagnostics(donnees: dict, identifiant: str) -> str:
             "chapitre": chapitre,
             "type_objet": "qcm_diagnostics",
             "genere_depuis": donnees["_source"],
-            "status": "generated",
+            # Herite comme le QCM : le statut est une decision de gouvernance,
+            # pas une propriete du mode de production.
+            "status": donnees.get("_statut_diagnostics") or "needs_review",
         },
         ensure_ascii=False,
     )
@@ -314,6 +398,16 @@ def main() -> int:
         return 2
 
     donnees["_source"] = str(source.relative_to(_racine_de(source)))
+    ancienne = meta_existante(cible)
+    donnees["_identifiant"] = ancienne.get("id")
+    # On n'ajoute pas ce champ la ou il n'a jamais existe : les QCM de
+    # mathematiques n'en portent pas, et le corpus n'a pas a bouger pour cela.
+    donnees["_statut"] = ancienne.get("status")
+    donnees["_capacites"] = (
+        capacites_officielles(args.chap, donnees["questions"])
+        if "capacites" in ancienne
+        else None
+    )
     rendu = rendre(donnees)
     if args.check:
         actuel = cible.read_text(encoding="utf-8") if cible.exists() else ""
@@ -330,6 +424,7 @@ def main() -> int:
     # partout ajouterait un objet non prevu ; ne pas la produire la laisserait
     # contredire la cle. On regenere donc celle qui existe deja.
     for compagnon in sorted(dossier.glob("*-QCM-DIAG.tex")):
+        donnees["_statut_diagnostics"] = meta_existante(compagnon).get("status")
         compagnon.write_text(
             rendre_diagnostics(donnees, compagnon.stem), encoding="utf-8"
         )

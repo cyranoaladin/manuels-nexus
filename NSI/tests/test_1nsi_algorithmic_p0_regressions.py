@@ -118,13 +118,17 @@ def test_selection_sort_termination_covers_empty_and_singleton_arrays() -> None:
 
 def test_maximum_qcm_uses_four_unambiguous_options_in_order() -> None:
     source = ALGORITHMS_QCM.read_text(encoding="utf-8")
-    q2 = re.search(r"\\item \\textbf\{\[Q2\]\}(.*?)\\bigskip", source, re.DOTALL)
+    # Le rendu derive desormais du .json et n'emet plus de \bigskip : la borne
+    # du bloc est la fin de la liste d'options.
+    q2 = re.search(
+        r"\\item \\textbf\{\[Q2\]\}(.*?)\\end\{enumerate\}", source, re.DOTALL
+    )
 
     assert q2 is not None
     options = re.findall(r"^\s*\\item\s+(.+)$", q2.group(1), flags=re.MULTILINE)
     assert options == [
         "la valeur $0$.",
         "le premier élément du tableau.",
-        "la plus grande valeur possible.",
+        "la plus grande valeur représentable.",
         "le nombre d'éléments du tableau.",
     ]

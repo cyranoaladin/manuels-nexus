@@ -302,11 +302,16 @@ def test_runtime_selection_covers_all_professor_objects_and_is_student_safe(asse
     # Re-atteste a la cloture A4 (2026-08-19) : 940 objets pre-campagne
     # + les 2 fiches methodes ADGK produites par la campagne (ME-002,
     # ME-003 ; ME-001 preexistait) = 942.
-    assert len(professor) == 942
+    # 944 depuis le 2026-08-30 : les deux corriges des evaluations de
+    # 1NSI-TYPES-CONSTRUITS, qui etaient livrees sans corrige. Les deux objets
+    # sont declares en dette de revue dans
+    # audit/NSI_TC_QCM_AND_EVAL_REVIEW_DEBT_4.json.
+    assert len(professor) == 944
     assert len(corrections) == 354
     assert set(corrections) == set(ROOT.glob("chapitres/1NSI-*/corriges/*.tex"))
     assert evaluation_types.count("evaluation") == 20
-    assert evaluation_types.count("corrige_evaluation") == 18
+    # 20 depuis le 2026-08-30 : les deux corriges de 1NSI-TYPES-CONSTRUITS.
+    assert evaluation_types.count("corrige_evaluation") == 20
     for variant in STUDENT_VARIANTS:
         assert selected[variant]
         assert not any(path.parent.name == "corriges" for path in selected[variant])

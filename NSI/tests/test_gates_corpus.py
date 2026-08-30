@@ -32,7 +32,10 @@ LANGUAGE_SPECIFICATION_OBJECT_REFS = {
     "evaluations/1NSI-LANG-EVAL-B-corrige.tex": {"P-LANG-03B"},
     "evaluations/1NSI-LANG-EVAL-B.tex": {"P-LANG-03B"},
     "exercices/1NSI-LANG-EX-003.tex": LANGUAGE_SPECIFICATION_REFS,
-    "qcm/1NSI-LANGAGE-QCM.tex": {"P-LANG-03B"},
+    # Le QCM n'evaluait que C6. Depuis qu'il porte une question par capacite,
+    # il trace les trois capacites de specification individuellement : C3
+    # (prototyper), C6 (preconditions) et C7 (postconditions).
+    "qcm/1NSI-LANGAGE-QCM.tex": {"P-LANG-03A", "P-LANG-03B", "P-LANG-03C"},
 }
 
 
