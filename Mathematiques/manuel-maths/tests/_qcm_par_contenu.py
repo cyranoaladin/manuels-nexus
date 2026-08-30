@@ -91,3 +91,21 @@ def diagnostic_unique_contenant(question: dict[str, Any], fragment: str) -> str:
             "diagnostics de distracteurs au lieu d'un seul"
         )
     return trouves[0]
+
+
+def diagnostic_unique_contenant_tous(
+    question: dict[str, Any], fragments: tuple[str, ...]
+) -> str:
+    """Diagnostic de distracteur contenant TOUS les fragments, et lui seul."""
+
+    trouves = [
+        erreur
+        for erreur in diagnostics_de_distracteurs(question).values()
+        if all(_sans_accent(f) in _sans_accent(erreur) for f in fragments)
+    ]
+    if len(trouves) != 1:
+        raise OptionIntrouvable(
+            f"{question['id']}: {fragments!r} designent {len(trouves)} "
+            "diagnostics de distracteurs au lieu d'un seul"
+        )
+    return trouves[0]

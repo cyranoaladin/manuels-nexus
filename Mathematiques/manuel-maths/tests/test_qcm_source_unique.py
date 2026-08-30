@@ -20,6 +20,8 @@ from pathlib import Path
 
 import pytest
 
+import _qcm_par_contenu as _par_contenu
+
 RACINE = Path(__file__).resolve().parents[1]
 GENERATEUR = RACINE / "scripts" / "build_qcm_tex.py"
 DEBT_BUILDER = RACINE.parents[1] / "scripts" / "build_qcm_capacity_coverage_debt.py"
@@ -108,24 +110,27 @@ def test_second_degre_q16_cle_correspond_au_calcul_independant() -> None:
 
     assert valeur_attendue == 1056
     assert question["enonce"].endswith("Quelle est la valeur de $V(4)$ ?")
-    assert options_correctes == ["D"]
+    assert len(options_correctes) == 1
     assert question["correcte"] == options_correctes[0]
-    assert set(question["diagnostics"]) == set(question["options"]) - {"D"}
-    assert "1664" in question["diagnostics"]["A"]["erreur"]
-    assert "2400" in question["diagnostics"]["B"]["erreur"]
-    assert "264" in question["diagnostics"]["C"]["erreur"]
+    assert set(question["diagnostics"]) == set(question["options"]) - {
+        question["correcte"]
+    }
+    for fragment in ("1664", "2400", "264"):
+        assert _par_contenu.diagnostic_unique_contenant(question, fragment)
 
 
 def test_primitives_q2_a_une_unique_reponse_correcte() -> None:
     """Deux primitives diffèrent d'une constante, pas d'une affine non constante."""
     question = _question("TSPE-PRIMITIVES-EQDIFF", "Q2")
 
-    assert question["correcte"] == "C"
-    assert "constante" in question["options"]["C"]
-    assert "pente non nulle" in question["options"]["B"]
-    assert set(question["diagnostics"]) == {"A", "B", "D"}
-    assert "differer d'une constante" in question["diagnostics"]["A"]["erreur"]
-    assert "$(F-G)'=f-f=0$" in question["diagnostics"]["B"]["erreur"]
+    bonne = _par_contenu.lettre_de_option(question, "$F-G$ est constante.")
+    assert question["correcte"] == bonne
+    assert _par_contenu.lettre_de_option(question, "pente non nulle")
+    assert set(question["diagnostics"]) == set(question["options"]) - {bonne}
+    assert _par_contenu.diagnostic_unique_contenant(
+        question, "differer d'une constante"
+    )
+    assert _par_contenu.diagnostic_unique_contenant(question, "$(F-G)'=f-f=0$")
 
 
 def test_suites_q11_distracteurs_correspondent_aux_erreurs_annoncees() -> None:
@@ -150,14 +155,17 @@ def test_continuite_q12_exclut_explicitement_un_troisieme_point_fixe() -> None:
     question = _question("TSPE-CONTINUITE", "Q12")
 
     assert "exactement deux points fixes" in question["enonce"]
-    assert question["correcte"] == "C"
+    assert question["correcte"] == _par_contenu.lettre_de_option(
+        question, "vaut $0$ ou $2$"
+    )
 
 
 def test_limites_fonctions_q7_diagnostic_de_x_zero_est_exact() -> None:
     question = _question("TSPE-LIMITES-FONCTIONS", "Q7")
-    diagnostic = question["diagnostics"]["D"]["erreur"]
+    diagnostic = _par_contenu.diagnostic_unique_contenant(
+        question, "n'annule pas le denominateur"
+    )
 
-    assert "n'annule pas le denominateur" in diagnostic
     assert "annule le numerateur" not in diagnostic
 
 
@@ -166,10 +174,14 @@ def test_limites_fonctions_q13_q14_ont_un_critere_de_reponse_unique() -> None:
     q14 = _question("TSPE-LIMITES-FONCTIONS", "Q14")
 
     assert "utilise directement la limite usuelle" in q13["enonce"]
-    assert q13["correcte"] == "B"
-    assert "egalement valide" in q13["diagnostics"]["C"]["erreur"]
-    assert "methode au programme" in q14["enonce"]
-    assert q14["correcte"] == "B"
+    assert q13["correcte"] == _par_contenu.lettre_de_option(
+        q13, "Factoriser par $\\mathrm{e}^x$"
+    )
+    assert _par_contenu.diagnostic_unique_contenant(q13, "egalement valide")
+    assert "méthode au programme" in q14["enonce"]
+    assert q14["correcte"] == _par_contenu.lettre_de_option(
+        q14, "$g(x) = \\mathrm{e}^x - 1 - x$"
+    )
 
 
 def test_suites_limites_q4_presente_une_seule_heredite_complete() -> None:
@@ -193,8 +205,9 @@ def test_suites_limites_q9_enonce_les_hypotheses_et_une_seule_conclusion() -> No
 def test_convexite_q11_definit_inflexion_par_changement_de_convexite() -> None:
     question = _question("TSPE-DERIVATION-CONVEXITE", "Q11")
 
-    assert question["correcte"] == "B"
-    assert "convexite change" in question["options"]["B"]
+    assert question["correcte"] == _par_contenu.lettre_de_option(
+        question, "convexité change"
+    )
     assert all(
         diagnostic["erreur"] != "Consulter le cours correspondant"
         for diagnostic in question["diagnostics"].values()
@@ -204,9 +217,11 @@ def test_convexite_q11_definit_inflexion_par_changement_de_convexite() -> None:
 def test_geometrie_reperee_q15_ecarte_le_trapeze_inclusif() -> None:
     question = _question("1SPE-GEOMETRIE-REPEREE", "Q15")
 
-    assert question["correcte"] == "B"
-    assert "non parallelogramme" in question["options"]["D"]
-    assert "definition inclusive" in question["diagnostics"]["D"]["erreur"]
+    assert question["correcte"] == _par_contenu.lettre_de_option(
+        question, "un rectangle"
+    )
+    trapeze = _par_contenu.lettre_de_option(question, "non parallelogramme")
+    assert "définition inclusive" in question["diagnostics"][trapeze]["erreur"]
 
 
 def test_proba_conditionnelle_q18_decrit_les_donnees_qui_appellent_bayes() -> None:
@@ -214,23 +229,28 @@ def test_proba_conditionnelle_q18_decrit_les_donnees_qui_appellent_bayes() -> No
 
     assert "parts de production" in question["enonce"]
     assert "sachant qu'une piece est defectueuse" in question["enonce"]
-    assert question["correcte"] == "B"
+    assert question["correcte"] == _par_contenu.lettre_de_option(
+        question, "formule de Bayes"
+    )
 
 
 def test_correlation_causalite_q7_couvre_le_point_moyen_sans_ambiguite() -> None:
     question = _question("TCOMPL-CORRELATION-CAUSALITE", "Q7")
 
     assert question["capacite"] == "C1"
-    assert "represente correctement le nuage" in question["enonce"]
-    assert question["correcte"] == "A"
+    assert "représente correctement le nuage" in question["enonce"]
+    # A place un nuage errone avec le meme point moyen : la bonne option est
+    # identifiee par la CONJONCTION nuage exact + point moyen exact.
+    bonne = _par_contenu.lettre_de_option(
+        question, "A(1 ; 2), B(3 ; 4), C(5 ; 0) ; le point moyen est $G(3 ; 2)$"
+    )
+    assert question["correcte"] == bonne
     assert all("le point moyen est" in option for option in question["options"].values())
     assert all("Le nuage contient" not in option for option in question["options"].values())
-    assert "A(1 ; 2), B(3 ; 4), C(5 ; 0)" in question["options"]["A"]
-    assert "$G(3 ; 2)$" in question["options"]["A"]
-    assert set(question["diagnostics"]) == {"B", "C", "D"}
-    assert "sommes" in question["diagnostics"]["B"]["erreur"]
-    assert "interverties" in question["diagnostics"]["C"]["erreur"]
-    assert "ne respecte pas les couples" in question["diagnostics"]["D"]["erreur"]
+    assert "A(1 ; 2), B(3 ; 4), C(5 ; 0)" in question["options"][bonne]
+    assert set(question["diagnostics"]) == set(question["options"]) - {bonne}
+    for fragment in ("sommes", "interverties", "ne respecte pas les couples"):
+        assert _par_contenu.diagnostic_unique_contenant(question, fragment)
     assert all(
         diagnostic["renvoi"] == "C1"
         for diagnostic in question["diagnostics"].values()
@@ -260,17 +280,20 @@ def test_suites_q3_evalue_l_absence_de_limite_sans_formalisation() -> None:
     question = _question("1SPE-SUITES", "Q3")
 
     assert question["capacite"] == "C8"
-    assert question["correcte"] == "C"
-    assert "ne pas avoir de limite" in question["options"]["C"]
-    assert "continue d'osciller" in question["diagnostics"]["D"]["erreur"]
+    assert question["correcte"] == _par_contenu.lettre_de_option(
+        question, "ne pas avoir de limite"
+    )
+    assert _par_contenu.diagnostic_unique_contenant(question, "continue d'osciller")
 
 
 def test_suites_q14_demande_un_critere_objectif() -> None:
     question = _question("1SPE-SUITES", "Q14")
 
     assert "utilise directement la raison" in question["enonce"]
-    assert question["correcte"] == "B"
-    assert "fonctionne aussi" in question["diagnostics"]["A"]["erreur"]
+    assert question["correcte"] == _par_contenu.lettre_de_option(
+        question, "comparer le quotient $u_{n+1}/u_n$ a $1$"
+    )
+    assert _par_contenu.diagnostic_unique_contenant(question, "fonctionne aussi")
 
 
 @pytest.mark.parametrize(
@@ -287,8 +310,8 @@ def test_suites_q14_demande_un_critere_objectif() -> None:
         ("1SPE-DERIVATION-LOCAL", "Q9", "B", ("abscisse du point", "coefficient directeur")),
         ("1SPE-DERIVATION-LOCAL", "Q12", "C", ("passe par l'origine",)),
         ("1SPE-DERIVATION-LOCAL", "Q12", "D", ("pente $f'(a)$", "ordonnee a l'origine")),
-        ("1SPE-GEOMETRIE-REPEREE", "Q1", "C", ("ajuste la constante", "point $A$", "point $B$")),
-        ("1SPE-GEOMETRIE-REPEREE", "Q1", "D", ("vecteur normal $(1;2)$", "point $B$")),
+        ("1SPE-GEOMETRIE-REPEREE", "Q1", "C", ("vecteur normal $(2;1)$", "$2x+y-5=0$")),
+        ("1SPE-GEOMETRIE-REPEREE", "Q1", "D", ("vecteur normal $(1;2)$", "$x+2y-7=0$")),
         ("1SPE-GEOMETRIE-REPEREE", "Q13", "D", ("multiplie par $2$", "$48$")),
         ("1SPE-PROBA-COND", "Q1", "D", ("complementaire", "$2/3$")),
         ("1SPE-PROBA-COND", "Q3", "A", ("facteur $2$", "$3/20$")),
@@ -322,13 +345,18 @@ def test_suites_q14_demande_un_critere_objectif() -> None:
 def test_diagnostic_1spe_explique_exactement_son_distracteur(
     chapitre: str, question_id: str, option: str, fragments: tuple[str, ...]
 ) -> None:
-    diagnostic = _question(chapitre, question_id)["diagnostics"][option]["erreur"]
+    """Les fragments doivent designer UN diagnostic de distracteur, et un seul.
 
-    for fragment in fragments:
-        assert fragment in diagnostic, (
-            f"{chapitre}/{question_id}/{option}: le diagnostic ne prouve pas "
-            f"le distracteur par le fragment attendu {fragment!r}"
-        )
+    La lettre de la table est historique : la politique de distribution des
+    cles permute les options en emportant leur diagnostic. L'invariant
+    scientifique est que la preuve attendue existe et n'est pas ambigue --
+    le garde d'unicite echoue si deux diagnostics la portent.
+    """
+
+    question = _question(chapitre, question_id)
+    assert _par_contenu.diagnostic_unique_contenant_tous(question, fragments), (
+        f"{chapitre}/{question_id} (jadis {option})"
+    )
 
 
 @pytest.mark.parametrize("chapitre", CHAPITRES)
@@ -509,7 +537,10 @@ def test_les_sauts_de_ligne_python_sont_des_newlines_json_reels() -> None:
     q21 = next(question for question in donnees["questions"] if question["id"] == "Q21")
 
     assert "\ndef terme(n):" in q19["enonce"]
-    assert "\nn = 0\nwhile" in q20["options"]["B"]
+    # La lettre est mobile : le contrat porte sur la PRESENCE de vrais sauts
+    # de ligne dans chaque option de code, pas sur la position du while.
+    assert all("\nn = 0\n" in option for option in q20["options"].values())
+    assert any("\nwhile" in option for option in q20["options"].values())
     assert "\nS = 0\nfor" in q21["enonce"]
 
     tex = SOURCES["1SPE-SUITES"].with_suffix(".tex").read_text(encoding="utf-8")
