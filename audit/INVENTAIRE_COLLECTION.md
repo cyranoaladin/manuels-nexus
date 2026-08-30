@@ -6,18 +6,18 @@
 
 | ID | Manuel | Matière | Niveau | Édition | Chapitres | Capacités | Exercices | Fichiers contenu | Objets | Variantes compilées |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 345 | 942 | 942 | manual |
+| 1NSI | NSI Première | NSI | Premiere | courante | 10 | 53 | 345 | 944 | 944 | manual |
 | 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 53 | 482 | 1441 | 1441 | manual |
 | TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 53 | 300 | 777 | 777 | manual |
 | TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 194 | 503 | 503 | manual |
-| TNSI | NSI Terminale | NSI | Terminale | courante | 7 | 61 | 266 | 720 | 720 | manual |
+| TNSI | NSI Terminale | NSI | Terminale | courante | 7 | 61 | 266 | 721 | 721 | manual |
 | TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 11 | 67 | 448 | 1201 | 1201 | manual |
 
 ## Anomalies détectées
 
 | Catégorie | Nombre |
 |---|---|
-| blocking_statuses | 2245 |
+| blocking_statuses | 2248 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
@@ -30,7 +30,7 @@
 
 - Assertions lues: 122
 - Ouvertes: 53
-- Contradictoires: 30
+- Contradictoires: 31
 
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 16 | report:Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | chapitres | 3 | None | ouvert
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 36 | report:Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | exercices_principaux | 30 | None | ouvert
