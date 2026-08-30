@@ -134,7 +134,7 @@ def ajouter(contacts, nom, numero):
 \end{python}
 Oui, la fonction modifie le dictionnaire reçu en argument. Un dictionnaire est mutable et n'est pas copié lors de l'appel : la fonction agit sur l'objet du programme appelant, ce qui explique qu'elle n'ait rien à renvoyer.
 
-\textbf{Q3.} \lstinline{carnet1} vaut \lstinline{{"Ali": "55123456", "Sara": "55234567"}}.
+\textbf{Q3.} \lstinline{carnet1} vaut \lstinline|{"Ali": "55123456", "Sara": "55234567"}|.
 
 L'affectation \lstinline{carnet2 = carnet1} ne crée aucune copie : elle donne un second nom au même dictionnaire. L'ajout effectué par \lstinline{carnet2} est donc visible par \lstinline{carnet1}. Pour obtenir deux carnets indépendants, il faudrait écrire \lstinline{carnet2 = dict(carnet1)}.
 \end{corrige}
