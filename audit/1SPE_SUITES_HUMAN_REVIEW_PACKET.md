@@ -3,7 +3,7 @@
 > Entrée de revue uniquement : ce document ne constitue ni une approbation de publication, ni une acceptation de release.
 
 - État chapitre : `PENDING_HUMAN`
-- SHA source revue : `2b00c28fa0e4a96737d787db9c9110071af36968`
+- SHA source revue : `41b68da867a085a550dd733d6e3dfb64fa7bc6d7`
 - SHA outillage de rendu : `5d935e720a82e207d7a8769f6bd2608ef1160322`
 - Contrat : `draft`
 - Approbation publication : `false`
@@ -13,7 +13,7 @@
 - Dimensions machine PASS : `1127`
 - Dimensions sans preuve machine suffisante : `0`
 - UNKNOWN : `0`
-- Digest manifeste : `sha256:6bbf3e8588cbb17da4ab4b9c81964d19070b0ec393fb5b87f418d36d7d5647e1`
+- Digest manifeste : `sha256:84e084a0460884f34bb740052edbdd78a7b7f68fa843ed38d54f59c0bf78fc79`
 
 ## Rôles humains requis
 
@@ -184,7 +184,7 @@
 | `1SPE-SUITES-ME-006` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-006.tex` | `methode` | `generated` | `36289370901d6e3a4506a13d4a4e793357006b7f4fb70e1f996d0dda2f1d95d5` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
 | `1SPE-SUITES-ME-007` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-007.tex` | `methode` | `generated` | `12364b7b08909589371fa1fe23c8a397c21400d90df1a1828bfbb6c125fca0f1` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
 | `1SPE-SUITES-ME-008` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-008.tex` | `methode` | `generated` | `aba73ded2ca34d66e5c06513aa9767ca3071a7a0f944fb4269b3629e4cf22ead` | YES | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
-| `1SPE-SUITES-QCM` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json` | `qcm` | `generated` | `8f714934872e2fb570651db442132a0351b7659dc91f199b41de16d5ea0f1f56` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
+| `1SPE-SUITES-QCM` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json` | `qcm` | `generated` | `cfe830c224adef752e64decc68474427443ea7dd78b8eceeb59be4b1c08784b9` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
 | `1SPE-SUITES-RE-C1` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-RE-C1.tex` | `remediation` | `generated` | `394dc064b246f56a8a3133697fff9c3bac4cb4eb735d5722ed9122132e6a8ba0` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
 | `1SPE-SUITES-RE-C2` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-RE-C2.tex` | `remediation` | `generated` | `ef6f90d4b2d65e2bfc52f9a4d351b1986022feaa3bfe6939402711185f42165e` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
 | `1SPE-SUITES-RE-C3` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-RE-C3.tex` | `remediation` | `generated` | `9a1d4ef625bc64bc57a904a9d38acd1bc3e5b1f60b225c94d0d0076d2d09344d` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
