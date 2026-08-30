@@ -4,8 +4,8 @@ Le gel canonique reste `c667f12b` / 161 objets (décision humaine du
 2026-08-28). Cet artefact ne le modifie pas : il déclare si l'état
 courant du dépôt lui est équivalent **en contenu**.
 
-- gel : `c667f12b1792f31981b6b5894c8c604df1bce634` · 161 objets
-- digest du gel : `sha256:67d8006298299b44029de8ba8f85b500d9b3619997a0c596e63c20e1cffeee2d`
+- gel : `2b00c28fa0e4a96737d787db9c9110071af36968` · 161 objets
+- digest du gel : `sha256:e10cfdd9d6f500d7693cbec9f714a34e51fb43b75defc6e205642c74a23c6b9d`
 - dépôt courant : constaté à la génération, **non contraignant**
 - branche observée : **INFORMATIONAL_ONLY**
 - objets courants : 161

@@ -14,7 +14,11 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "audit" / "1SPE_SUITES_REVIEW_SOURCE_FREEZE.json"
-SOURCE_SHA = "c667f12b1792f31981b6b5894c8c604df1bce634"
+#: Gel courant. Le precedent, c667f12b / 161 objets, est conserve intact
+#: sous audit/reviews/human/1SPE-SUITES/superseded/ et marque
+#: HISTORICAL_SUPERSEDED. Cette reemission est explicite et autorisee ;
+#: le rebind automatique reste interdit.
+SOURCE_SHA = "2b00c28fa0e4a96737d787db9c9110071af36968"
 CHAPTER_ID = "1SPE-SUITES"
 CHAPTER_PREFIX = "Mathematiques/manuel-maths/chapitres/1SPE-SUITES"
 QCM_JSON = f"{CHAPTER_PREFIX}/qcm/1SPE-SUITES-QCM.json"

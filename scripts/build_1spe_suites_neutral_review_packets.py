@@ -23,9 +23,11 @@ PROGRAMME_PATH = AUDIT / "official_program_coverage" / "1SPE.json"
 P0_PATH = AUDIT / "1SPE_SUITES_WRONG_YEAR_P0_FORENSICS.json"
 QCM_AUDIT_PATH = AUDIT / "QCM_SCIENTIFIC_ANSWER_KEY_AUDIT.json"
 
-SOURCE_SHA = "c667f12b1792f31981b6b5894c8c604df1bce634"
+#: Gel courant du chapitre. Le precedent, c667f12b, est conserve intact sous
+#: audit/reviews/human/1SPE-SUITES/superseded/ et marque HISTORICAL_SUPERSEDED.
+SOURCE_SHA = "2b00c28fa0e4a96737d787db9c9110071af36968"
 OBJECT_SET_DIGEST = (
-    "sha256:67d8006298299b44029de8ba8f85b500d9b3619997a0c596e63c20e1cffeee2d"
+    "sha256:e10cfdd9d6f500d7693cbec9f714a34e51fb43b75defc6e205642c74a23c6b9d"
 )
 ROLES = ("EXPERT_MATHEMATIQUE", "EXPERT_PROGRAMME_PEDAGOGIE")
 OUTPUTS = {
@@ -101,7 +103,7 @@ def _chapter_pdfs(machine: dict[str, Any]) -> list[dict[str, Any]]:
                 "object_to_page_exact_index": "NOT_ESTABLISHED",
                 "render_evidence_source_sha": machine["review_source_sha"],
                 "freeze_content_equivalence_basis": (
-                    "all 161 object path/source SHA-256 pairs match the c667 freeze"
+                    "all 161 object path/source SHA-256 pairs match the current freeze"
                 ),
             }
         )
@@ -377,7 +379,7 @@ def _build_common() -> dict[str, Any]:
     for row in freeze["objects"]:
         observed = machine_objects.get(row["object_id"])
         if not observed or observed["path"] != row["path"] or observed["source_sha256"] != row["source_sha256"]:
-            raise ValueError("render evidence object inventory differs from c667 freeze")
+            raise ValueError("render evidence object inventory differs from the current freeze")
     programme = _programme_rows()
     p0 = _p0_history(freeze)
     qcm = _qcm_material(contract)
@@ -493,7 +495,7 @@ def build_packets() -> dict[str, dict[str, Any]]:
     packets = {}
     for role in ROLES:
         packet = copy.deepcopy(common)
-        packet["packet_id"] = f"1SPE-SUITES-{role}-NEUTRAL-c667"
+        packet["packet_id"] = f"1SPE-SUITES-{role}-NEUTRAL-{SOURCE_SHA[:8]}"
         packet["review_role"] = role
         packet["role_checklist"] = _checklist(role)
         validate_packet(packet)
@@ -517,7 +519,7 @@ def validate_packet(packet: dict[str, Any]) -> None:
         raise ValueError("packet role is not exact")
     source = packet.get("source_freeze", {})
     if source.get("source_sha") != SOURCE_SHA or source.get("chapter_object_set_digest") != OBJECT_SET_DIGEST:
-        raise ValueError("packet is not bound to the c667/161 freeze")
+        raise ValueError("packet is not bound to the current 161-object freeze")
     objects = packet.get("current_content_to_review", {}).get("objects", [])
     if objects != freeze["objects"] or len(objects) != 161:
         raise ValueError("packet object inventory differs from exact freeze")

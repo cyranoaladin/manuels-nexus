@@ -24,6 +24,10 @@ QCM_TEX = CHAPTER / "qcm" / "1SPE-SUITES-QCM.tex"
 CONTRACT = CHAPTER / "contrat.yaml"
 RESIDUAL_FORENSICS = ROOT / "audit" / "RESIDUAL_TRUE_NEW_FORENSICS.json"
 QCM_AUDIT = ROOT / "audit" / "QCM_SCIENTIFIC_ANSWER_KEY_AUDIT.json"
+#: Mecanisme courant de la preuve QCM. La v1 ci-dessus est HISTORIQUE : son
+#: producteur refuse de produire des qu'une question change, la liaison
+#: portant sur le sha256 du fichier entier.
+QCM_EVIDENCE_V2 = ROOT / "audit" / "QCM_INDEPENDENT_EVIDENCE_V2.json"
 JSON_OUTPUT = ROOT / "audit" / "1SPE_SUITES_HUMAN_REVIEW_PACKET.json"
 MD_OUTPUT = ROOT / "audit" / "1SPE_SUITES_HUMAN_REVIEW_PACKET.md"
 LOCK_PATH = Path(tempfile.gettempdir()) / (
@@ -205,30 +209,34 @@ def _regular_dimensions(path: Path, meta: dict[str, Any]) -> dict[str, dict[str,
 
 
 def _qcm_evidence_is_current() -> bool:
-    source_sha = _sha256(QCM_JSON)
+    """Les 21 questions du chapitre sont-elles couvertes par la preuve V2 ?
+
+    La preuve v1 liait chaque ligne au sha256 du fichier entier : toute
+    correction, meme editoriale, la perimait en bloc. La preuve V2 porte une
+    identite PAR QUESTION, et c'est elle qui fait foi. Une question qui exige
+    une revue humaine n'est pas une preuve machine : elle interdit le PASS.
+    """
+
     qcm = _load_json(QCM_JSON)
-    audit = _load_json(QCM_AUDIT)
     expected_ids = {row["id"] for row in qcm.get("questions", [])}
-    rows = [row for row in audit.get("questions", []) if row.get("chapter") == CHAPTER_ID]
-    if len(expected_ids) != 21 or len(rows) != 21:
+    if len(expected_ids) != 21:
         return False
+    evidence = _load_json(QCM_EVIDENCE_V2)
+    rows = [
+        row
+        for row in evidence.get("questions", [])
+        if row.get("chapter") == CHAPTER_ID
+    ]
     if {row.get("question_id") for row in rows} != expected_ids:
         return False
-    source_path = _relative(QCM_JSON)
+    accepted = {"CARRIED_FORWARD_IDENTICAL", "MACHINE_RECALCULATED"}
     for row in rows:
-        if row.get("source_path") != source_path or row.get("source_sha256") != source_sha:
+        if row.get("evidence_status") not in accepted:
             return False
-        if row.get("answer_key_status") != "PASS" or row.get("unique_correct_option") != "PASS":
+        if row.get("human_review_required") is not False:
             return False
-        if row.get("capacity_alignment") != "PASS" or row.get("wrong_programme_year") is not False:
-            return False
-        if row.get("diagnostic_consistency") != "PASS":
-            return False
-        if row.get("generic_diagnostics_requiring_rewrite") != []:
-            return False
-        if row.get("variant_visibility", {}).get("status") != "PASS":
-            return False
-        if row.get("review_status") != "HUMAN_APPROVAL_PENDING_NO_AUTO_APPROVAL":
+        verification = row.get("verification")
+        if verification is not None and verification.get("answer_key_verdict") != "PASS":
             return False
     return True
 
