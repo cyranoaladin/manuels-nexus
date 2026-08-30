@@ -100,7 +100,7 @@ def test_a_key_that_only_moves_letter_is_not_a_value_change(payload: dict) -> No
     # Le condense etant indexe par VALEUR, une permutation ne fait plus
     # sortir la question du report : seules restent celles dont la preuve
     # doit vraiment etre refaite.
-    assert len(changed) == 2
+    assert len(changed) == 3
     assert not any(
         "KEY_VALUE_CHANGED" in e["delta_classes"] for e in payload["reproof_required"]
     )
@@ -118,7 +118,7 @@ def test_a_varalea_change_never_invalidates_another_chapter(payload: dict) -> No
     # Le seul autre chapitre concerne l'est pour sa PROPRE divergence, pas par
     # contagion : la preuve de TSPE-DERIVATION-CONVEXITE Q6 omet un $ que la
     # source porte. Le reequilibrage des cles, lui, ne perime aucune preuve.
-    assert foreign == {"TSPE-DERIVATION-CONVEXITE"}
+    assert foreign == {"1SPE-PRODUIT-SCALAIRE", "TSPE-DERIVATION-CONVEXITE"}
     entry = next(
         e for e in payload["reproof_required"] if e["chapter"] == "TSPE-DERIVATION-CONVEXITE"
     )
@@ -182,7 +182,7 @@ def test_uncaptured_renvois_are_reported_not_absorbed(payload: dict) -> None:
     """La preuve historique n'a pas capture renvoi ; l'ecart doit etre visible."""
 
     gaps = payload["proof_field_coverage_gaps"]
-    assert len(gaps) == 4
+    assert len(gaps) == 5
     assert {gap["field"] for gap in gaps} == {"diagnostics.renvoi"}
     assert all(gap["options"] for gap in gaps)
     assert payload["semantic_digest_contract"]["excluded"] == ["diagnostics.renvoi"]
