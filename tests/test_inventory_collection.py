@@ -2139,6 +2139,46 @@ def test_materialization_revalidations_use_only_the_owned_lock_identity(
         ],
         check=True,
     )
+    # La fiction de ce test -- aucune qualification suspendue -- appartient au
+    # MODELE : `anomaly_qualifications` en fait partie, donc son empreinte.
+    # Le manifeste clone atteste l'autre modele, celui des 86 suspensions ;
+    # la materialisation s'arreterait sur `model_digest incoherent` avant
+    # meme de prendre le verrou, et ce test n'observerait aucun de ses trois
+    # passages. On rend donc la fixture coherente avec sa propre fiction.
+    # Rien n'est relache : le manifeste reste integralement verifie, sur le
+    # modele que ce depot fictif porte reellement.
+    with monkeypatch.context() as bootstrap:
+        bootstrap.setattr(
+            inventory_module, "invalid_qualifications", lambda _root: []
+        )
+        bootstrap.setattr(
+            inventory_module, "_load_observed_build_manifest", lambda *a, **k: []
+        )
+        fiction_model_digest = inventory_module._model_digest(
+            inventory_module.build_inventory(repository)
+        )
+    manifest_path = repository / inventory_module.BUILD_MANIFEST_FILE
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    assert manifest["builds"] == [], (
+        "la fiction ne vaut que pour le manifeste vide canonique"
+    )
+    manifest["model_digest"] = fiction_model_digest
+    manifest_path.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repository),
+            "commit",
+            "-q",
+            "-am",
+            "fixture: manifest attests this test's own model",
+        ],
+        check=True,
+    )
     original_lock = inventory_module._lock_generation
     original_plan = inventory_module._baseline_materialization_plan
     original_manifest_loader = inventory_module._load_observed_build_manifest
