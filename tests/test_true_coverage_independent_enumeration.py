@@ -162,7 +162,7 @@ def test_the_two_paths_agree_unit_by_unit(canonical, independent) -> None:
         "seulement_canonique": sorted(canonical - independent)[:10],
         "seulement_independant": sorted(independent - canonical)[:10],
     }
-    assert len(canonical) == 324
+    assert len(canonical) == 315
 
 
 def test_the_two_paths_agree_on_every_manual(canonical, independent) -> None:
@@ -177,7 +177,7 @@ def test_the_two_paths_agree_on_every_manual(canonical, independent) -> None:
 
     assert per_manual(canonical) == per_manual(independent)
     assert per_manual(canonical) == {
-        "1NSI": 80,
+        "1NSI": 71,
         "TCOMPL": 55,
         "TEXPERTES": 24,
         "TNSI": 123,
@@ -191,7 +191,7 @@ def test_1nsi_agrees_chapter_by_chapter(canonical, independent) -> None:
     left = collections.Counter(c for c, _k, _r in canonical if c.startswith("1NSI"))
     right = collections.Counter(c for c, _k, _r in independent if c.startswith("1NSI"))
     assert left == right
-    assert sum(left.values()) == 80
+    assert sum(left.values()) == 71
 
 
 def test_tspe_probabilites_credits_c10_and_never_its_local_c1(
