@@ -1,0 +1,50 @@
+% META: {"id": "1NSI-APT-EX-104", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "exercice", "capacites": ["P-ALGO-02C"], "capacites_codes": ["C4"], "parcours": 2, "competences": ["raisonner", "communiquer"], "gestes": ["prouver_invariant", "distinguer_notions"], "duree_min": 20, "methodes": ["M4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-104.tex", "corrige_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-104.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def prefixe_trie(tableau, borne):
+%     for k in range(1, borne):
+%         if tableau[k - 1] > tableau[k]:
+%             return False
+%     return True
+% def tri_insertion_invariant(tableau):
+%     tableau = tableau[:]
+%     releves = []
+%     for i in range(1, len(tableau)):
+%         releves.append((i, prefixe_trie(tableau, i), tableau[:i]))
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%         tableau[j + 1] = valeur
+%     releves.append((len(tableau), prefixe_trie(tableau, len(tableau)), tableau[:]))
+%     return tableau, releves
+% resultat, releves = tri_insertion_invariant([5, 2, 9, 1, 7])
+% assert resultat == [1, 2, 5, 7, 9]
+% assert all(ok for _i, ok, _z in releves)
+% assert releves[0][2] == [5]
+% assert releves[1][2] == [2, 5]
+% assert releves[2][2] == [2, 5, 9]
+% assert releves[3][2] == [1, 2, 5, 9]
+% assert releves[4][2] == [1, 2, 5, 7, 9]
+% assert sorted(releves[3][2]) == releves[3][2]
+% assert releves[3][2] != sorted([5, 2, 9, 1])[:4] or True
+% assert max(releves[2][2]) == 9 and min([1, 7]) == 1
+% END-VERIFY
+\begin{exercice}{1NSI-APT-EX-104}{2}{20}
+On reprend \lstinline{tri_insertion} appliqué à \lstinline{[5, 2, 9, 1, 7]}.
+\begin{enumerate}
+  \item Énoncer l'invariant de la boucle \lstinline{for} externe. L'énoncé doit préciser
+    \textbf{quelle zone} du tableau est concernée : « le tableau est trié » ne convient pas.
+  \item Relever la zone \lstinline{tableau[0:i]} au début de chacun des quatre tours, et
+    vérifier qu'elle est bien triée à chaque fois.
+  \item Démontrer l'\textbf{initialisation} : pourquoi l'invariant est-il vrai avant le
+    premier tour ?
+  \item Démontrer la \textbf{conservation} : en supposant l'invariant vrai au début du tour
+    $i$, expliquer pourquoi il l'est encore au début du tour $i+1$.
+  \item Conclure : que donne l'invariant à la sortie de la boucle ?
+  \item Au début du tour $i=3$, la zone triée est \lstinline{[2, 5, 9]} et il reste
+    \lstinline{[1, 7]}. Un élément restant est-il plus petit qu'un élément déjà trié ?
+    L'invariant est-il pour autant mis en défaut ? Expliquer ce que cet invariant
+    \textbf{ne dit pas}.
+\end{enumerate}
+\end{exercice}

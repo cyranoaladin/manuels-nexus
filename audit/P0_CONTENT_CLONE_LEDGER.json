@@ -21,24 +21,24 @@
     ]
   },
   "canonical_selection_counts": {
-    "AMBIGUOUS": 253,
-    "LEGITIMATE_SHARED_CANONICAL": 37,
+    "AMBIGUOUS": 233,
+    "LEGITIMATE_SHARED_CANONICAL": 30,
     "SEMANTIC_CANONICAL": 25,
     "UNKNOWN": 0
   },
   "canonical_selection_rule": "le proprietaire semantique est etabli par preuve ; l'ordre des chemins n'intervient jamais",
   "dispositions": {
     "BOILERPLATE_ONLY": {
-      "excess_objects": 50,
-      "groups": 18
+      "excess_objects": 43,
+      "groups": 11
     },
     "CAPACITY_MISREPRESENTING_CLONE": {
-      "excess_objects": 1354,
-      "groups": 276
+      "excess_objects": 1335,
+      "groups": 257
     },
     "CROSS_MANUAL_CONTAMINATION": {
-      "excess_objects": 2,
-      "groups": 2
+      "excess_objects": 1,
+      "groups": 1
     },
     "REDUNDANT_SAME_CAPACITY": {
       "excess_objects": 37,
@@ -5066,60 +5066,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:2a032bf516e03da6312571e498412e05ec3ae737778fb2431d491f373a57aed4",
-      "canonical_selection": {
-        "canonical_paths": [
-          "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-012.tex",
-          "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-036.tex"
-        ],
-        "evidence_rule": "NO_CAPACITY_AT_STAKE",
-        "false_copy_paths": [],
-        "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
-        "status": "LEGITIMATE_SHARED_CANONICAL"
-      },
-      "clone_group_id": "CG-0045",
-      "disposition": "BOILERPLATE_ONLY",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C2"
-          ],
-          "exact_body_digest": "sha256:2a032bf516e03da6312571e498412e05ec3ae737778fb2431d491f373a57aed4",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:35416c5cf6de02679c8a9e668bfd0a55d1ef8367eac40406a162805f2baec65a",
-          "object_id": "1NSI-APT-EX-012",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-012.tex",
-          "payload_chars": 91,
-          "source_type": "exercices",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C6"
-          ],
-          "exact_body_digest": "sha256:2a032bf516e03da6312571e498412e05ec3ae737778fb2431d491f373a57aed4",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:35416c5cf6de02679c8a9e668bfd0a55d1ef8367eac40406a162805f2baec65a",
-          "object_id": "1NSI-APT-EX-036",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-036.tex",
-          "payload_chars": 91,
-          "source_type": "exercices",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:35416c5cf6de02679c8a9e668bfd0a55d1ef8367eac40406a162805f2baec65a",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:2a1fa56dc72c027958d51d9802fb51f1b5892368815cfbf8eab00e233ab03c2a",
       "canonical_selection": {
         "canonical_paths": [],
@@ -5128,7 +5074,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0046",
+      "clone_group_id": "CG-0045",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 11,
       "members": [
@@ -5331,7 +5277,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0047",
+      "clone_group_id": "CG-0046",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -5412,7 +5358,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0048",
+      "clone_group_id": "CG-0047",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -5523,7 +5469,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0049",
+      "clone_group_id": "CG-0048",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -5619,7 +5565,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0050",
+      "clone_group_id": "CG-0049",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -5700,7 +5646,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0051",
+      "clone_group_id": "CG-0050",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 11,
       "members": [
@@ -5903,7 +5849,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0052",
+      "clone_group_id": "CG-0051",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 11,
       "members": [
@@ -6105,7 +6051,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0053",
+      "clone_group_id": "CG-0052",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -6277,7 +6223,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0054",
+      "clone_group_id": "CG-0053",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -6388,7 +6334,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0055",
+      "clone_group_id": "CG-0054",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -6499,7 +6445,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0056",
+      "clone_group_id": "CG-0055",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -6565,7 +6511,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0057",
+      "clone_group_id": "CG-0056",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -6683,7 +6629,7 @@
         "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0058",
+      "clone_group_id": "CG-0057",
       "disposition": "BOILERPLATE_ONLY",
       "excess_object_count": 5,
       "members": [
@@ -6797,7 +6743,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0059",
+      "clone_group_id": "CG-0058",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -6851,7 +6797,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0060",
+      "clone_group_id": "CG-0059",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -6890,60 +6836,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:3936c6ce34f2bfe2763e99d609498c12c2b994cf4fb86d69f15aab38272bdd1b",
-      "canonical_selection": {
-        "canonical_paths": [
-          "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-003.tex",
-          "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-027.tex"
-        ],
-        "evidence_rule": "NO_CAPACITY_AT_STAKE",
-        "false_copy_paths": [],
-        "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
-        "status": "LEGITIMATE_SHARED_CANONICAL"
-      },
-      "clone_group_id": "CG-0061",
-      "disposition": "BOILERPLATE_ONLY",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C1"
-          ],
-          "exact_body_digest": "sha256:3936c6ce34f2bfe2763e99d609498c12c2b994cf4fb86d69f15aab38272bdd1b",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:6b65af2868017fe19e4c878a18ed1c85123924c8a80d093b690b5579476e88ea",
-          "object_id": "1NSI-APT-EX-003",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-003.tex",
-          "payload_chars": 60,
-          "source_type": "exercices",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C5"
-          ],
-          "exact_body_digest": "sha256:3936c6ce34f2bfe2763e99d609498c12c2b994cf4fb86d69f15aab38272bdd1b",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:6b65af2868017fe19e4c878a18ed1c85123924c8a80d093b690b5579476e88ea",
-          "object_id": "1NSI-APT-EX-027",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-027.tex",
-          "payload_chars": 60,
-          "source_type": "exercices",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:6b65af2868017fe19e4c878a18ed1c85123924c8a80d093b690b5579476e88ea",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:39dac7f658f834bf8022c13aa48723ba5eaea73ee9a2b78506e72aff406eadd0",
       "canonical_selection": {
         "canonical_paths": [],
@@ -6952,7 +6844,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0062",
+      "clone_group_id": "CG-0060",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -7123,7 +7015,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0063",
+      "clone_group_id": "CG-0061",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -7219,7 +7111,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0064",
+      "clone_group_id": "CG-0062",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -7330,7 +7222,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0065",
+      "clone_group_id": "CG-0063",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -7396,7 +7288,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0066",
+      "clone_group_id": "CG-0064",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -7492,7 +7384,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0067",
+      "clone_group_id": "CG-0065",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -7603,7 +7495,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0068",
+      "clone_group_id": "CG-0066",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -7684,7 +7576,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0069",
+      "clone_group_id": "CG-0067",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 12,
       "members": [
@@ -7901,7 +7793,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0070",
+      "clone_group_id": "CG-0068",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -8012,7 +7904,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0071",
+      "clone_group_id": "CG-0069",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -8070,57 +7962,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:40ed9a40e784fff5a3b20282445eb6e42cbcdd729d9340449d3118b2cd0d15eb",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0072",
-      "disposition": "CROSS_MANUAL_CONTAMINATION",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "TSPE-DERIVATION-CONVEXITE",
-          "declared_capacity": [
-            "C1"
-          ],
-          "exact_body_digest": "sha256:40ed9a40e784fff5a3b20282445eb6e42cbcdd729d9340449d3118b2cd0d15eb",
-          "manual": "TSPE",
-          "normalized_body_digest": "sha256:bf5fb0d10604e6d3f53831c6ced4594649c0079f280a2a44fa73ff58ce4c09db",
-          "object_id": "TSPE-DERCONV-ME-001",
-          "path": "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/methodes/TSPE-DERCONV-ME-001.tex",
-          "payload_chars": 1364,
-          "source_type": "methodes",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C1"
-          ],
-          "exact_body_digest": "sha256:40ed9a40e784fff5a3b20282445eb6e42cbcdd729d9340449d3118b2cd0d15eb",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:bf5fb0d10604e6d3f53831c6ced4594649c0079f280a2a44fa73ff58ce4c09db",
-          "object_id": "1NSI-ALGO-PARCOURS-TRIS-METH-01",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-ALGO-PARCOURS-TRIS-METH-01.tex",
-          "payload_chars": 1364,
-          "source_type": "methodes",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:bf5fb0d10604e6d3f53831c6ced4594649c0079f280a2a44fa73ff58ce4c09db",
-      "object_count": 2,
-      "same_capacity": true,
-      "same_chapter": false,
-      "same_manual": false
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:410581bfcc805d2b15a08220c02ddd6bbe74276d6501f5f7918c6fd7bd28849f",
       "canonical_selection": {
         "canonical_paths": [],
@@ -8129,7 +7970,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0073",
+      "clone_group_id": "CG-0070",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 1,
       "members": [
@@ -8180,7 +8021,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0074",
+      "clone_group_id": "CG-0071",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -8246,7 +8087,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0075",
+      "clone_group_id": "CG-0072",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -8369,7 +8210,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0076",
+      "clone_group_id": "CG-0073",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 7,
       "members": [
@@ -8526,7 +8367,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0077",
+      "clone_group_id": "CG-0074",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -8607,7 +8448,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0078",
+      "clone_group_id": "CG-0075",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 12,
       "members": [
@@ -8824,7 +8665,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0079",
+      "clone_group_id": "CG-0076",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -9009,7 +8850,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0080",
+      "clone_group_id": "CG-0077",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 8,
       "members": [
@@ -9183,7 +9024,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0081",
+      "clone_group_id": "CG-0078",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -9249,7 +9090,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0082",
+      "clone_group_id": "CG-0079",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -9315,7 +9156,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0083",
+      "clone_group_id": "CG-0080",
       "disposition": "CROSS_MANUAL_CONTAMINATION",
       "excess_object_count": 1,
       "members": [
@@ -9366,7 +9207,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0084",
+      "clone_group_id": "CG-0081",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -9537,7 +9378,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0085",
+      "clone_group_id": "CG-0082",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -9712,7 +9553,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0086",
+      "clone_group_id": "CG-0083",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -9755,57 +9596,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:4d381a5bd14d7299d22514088aa612ae031c8e3c4ef25d59e04cdade297d3e42",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0087",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C1"
-          ],
-          "exact_body_digest": "sha256:4d381a5bd14d7299d22514088aa612ae031c8e3c4ef25d59e04cdade297d3e42",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:797269729be08372f039dea9ba4e3dd63397376304f50c7fbeb132889edd83d7",
-          "object_id": "1NSI-APT-EX-005",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-005.tex",
-          "payload_chars": 184,
-          "source_type": "exercices",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C5"
-          ],
-          "exact_body_digest": "sha256:4d381a5bd14d7299d22514088aa612ae031c8e3c4ef25d59e04cdade297d3e42",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:797269729be08372f039dea9ba4e3dd63397376304f50c7fbeb132889edd83d7",
-          "object_id": "1NSI-APT-EX-029",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-029.tex",
-          "payload_chars": 184,
-          "source_type": "exercices",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:797269729be08372f039dea9ba4e3dd63397376304f50c7fbeb132889edd83d7",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:4e19d53fc4afb18be5ee7f91b145b805f5d743d10c6d38f364ee39172cba7556",
       "canonical_selection": {
         "canonical_paths": [],
@@ -9814,7 +9604,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0088",
+      "clone_group_id": "CG-0084",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -9911,7 +9701,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0089",
+      "clone_group_id": "CG-0085",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -9992,7 +9782,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0090",
+      "clone_group_id": "CG-0086",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -10073,7 +9863,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0091",
+      "clone_group_id": "CG-0087",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -10139,7 +9929,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0092",
+      "clone_group_id": "CG-0088",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -10235,7 +10025,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0093",
+      "clone_group_id": "CG-0089",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -10302,7 +10092,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0094",
+      "clone_group_id": "CG-0090",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -10369,7 +10159,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0095",
+      "clone_group_id": "CG-0091",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -10465,7 +10255,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0096",
+      "clone_group_id": "CG-0092",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -10531,7 +10321,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0097",
+      "clone_group_id": "CG-0093",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 1,
       "members": [
@@ -10597,7 +10387,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0098",
+      "clone_group_id": "CG-0094",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 7,
       "members": [
@@ -10754,7 +10544,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0099",
+      "clone_group_id": "CG-0095",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -10858,7 +10648,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0100",
+      "clone_group_id": "CG-0096",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -10937,7 +10727,7 @@
         "reason": "plusieurs porteurs sont attestes par le corps pour des capacites differentes : le corps ne designe pas un proprietaire",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0101",
+      "clone_group_id": "CG-0097",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -11091,7 +10881,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0102",
+      "clone_group_id": "CG-0098",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -11142,7 +10932,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0103",
+      "clone_group_id": "CG-0099",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -11224,7 +11014,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0104",
+      "clone_group_id": "CG-0100",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -11290,7 +11080,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0105",
+      "clone_group_id": "CG-0101",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -11371,7 +11161,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0106",
+      "clone_group_id": "CG-0102",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -11482,7 +11272,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0107",
+      "clone_group_id": "CG-0103",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -11653,7 +11443,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0108",
+      "clone_group_id": "CG-0104",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -11720,7 +11510,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0109",
+      "clone_group_id": "CG-0105",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -11786,7 +11576,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0110",
+      "clone_group_id": "CG-0106",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -11887,7 +11677,7 @@
         "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0111",
+      "clone_group_id": "CG-0107",
       "disposition": "BOILERPLATE_ONLY",
       "excess_object_count": 3,
       "members": [
@@ -11960,61 +11750,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:624507935a80af75d69825cfc5570476c39b08f86dbb0c593eaadf7e2eda4655",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0112",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [
-            "C1"
-          ],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C3"
-          ],
-          "exact_body_digest": "sha256:624507935a80af75d69825cfc5570476c39b08f86dbb0c593eaadf7e2eda4655",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:d7863b349bb3eb941529cb0eaa51ce58e3e7694c9fc427f14acc7164ab55839f",
-          "object_id": "1NSI-ALGO-PARCOURS-TRIS-REMED-03",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-03.tex",
-          "payload_chars": 994,
-          "source_type": "remediation",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [
-            "C1"
-          ],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C6"
-          ],
-          "exact_body_digest": "sha256:624507935a80af75d69825cfc5570476c39b08f86dbb0c593eaadf7e2eda4655",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:d7863b349bb3eb941529cb0eaa51ce58e3e7694c9fc427f14acc7164ab55839f",
-          "object_id": "1NSI-ALGO-PARCOURS-TRIS-REMED-06",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-06.tex",
-          "payload_chars": 994,
-          "source_type": "remediation",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:d7863b349bb3eb941529cb0eaa51ce58e3e7694c9fc427f14acc7164ab55839f",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:6248dbd35bdd15446c679497af5ce29b577a71aa4fa14718857ce6f4c96efdd0",
       "canonical_selection": {
         "canonical_paths": [
@@ -12026,7 +11761,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0113",
+      "clone_group_id": "CG-0108",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -12077,7 +11812,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0114",
+      "clone_group_id": "CG-0109",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -12177,7 +11912,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0115",
+      "clone_group_id": "CG-0110",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 12,
       "members": [
@@ -12423,7 +12158,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0116",
+      "clone_group_id": "CG-0111",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 2,
       "members": [
@@ -12489,7 +12224,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0117",
+      "clone_group_id": "CG-0112",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 1,
       "members": [
@@ -12542,7 +12277,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0118",
+      "clone_group_id": "CG-0113",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -12648,7 +12383,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0119",
+      "clone_group_id": "CG-0114",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -12754,7 +12489,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0120",
+      "clone_group_id": "CG-0115",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 6,
       "members": [
@@ -12883,7 +12618,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0121",
+      "clone_group_id": "CG-0116",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -12934,7 +12669,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0122",
+      "clone_group_id": "CG-0117",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 10,
       "members": [
@@ -13130,7 +12865,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0123",
+      "clone_group_id": "CG-0118",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -13244,7 +12979,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0124",
+      "clone_group_id": "CG-0119",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -13316,7 +13051,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0125",
+      "clone_group_id": "CG-0120",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -13427,7 +13162,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0126",
+      "clone_group_id": "CG-0121",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 11,
       "members": [
@@ -13632,7 +13367,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0127",
+      "clone_group_id": "CG-0122",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -13688,7 +13423,7 @@
         "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0128",
+      "clone_group_id": "CG-0123",
       "disposition": "BOILERPLATE_ONLY",
       "excess_object_count": 3,
       "members": [
@@ -13769,7 +13504,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0129",
+      "clone_group_id": "CG-0124",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -13850,7 +13585,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0130",
+      "clone_group_id": "CG-0125",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 12,
       "members": [
@@ -14077,7 +13812,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0131",
+      "clone_group_id": "CG-0126",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -14183,7 +13918,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0132",
+      "clone_group_id": "CG-0127",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -14258,7 +13993,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0133",
+      "clone_group_id": "CG-0128",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -14347,7 +14082,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0134",
+      "clone_group_id": "CG-0129",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 1,
       "members": [
@@ -14390,60 +14125,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:7519f84b9c4b1a4bd0ebc7da3c27c71aa30f43aeaa05e2229fd5f60e257062c9",
-      "canonical_selection": {
-        "canonical_paths": [
-          "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-004.tex",
-          "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-028.tex"
-        ],
-        "evidence_rule": "NO_CAPACITY_AT_STAKE",
-        "false_copy_paths": [],
-        "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
-        "status": "LEGITIMATE_SHARED_CANONICAL"
-      },
-      "clone_group_id": "CG-0135",
-      "disposition": "BOILERPLATE_ONLY",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C1"
-          ],
-          "exact_body_digest": "sha256:7519f84b9c4b1a4bd0ebc7da3c27c71aa30f43aeaa05e2229fd5f60e257062c9",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:cc7cf2afa9ce4f8ca037de0b8330505d1b18fad8d3d47d1946c438a4616f397a",
-          "object_id": "1NSI-APT-EX-004",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-004.tex",
-          "payload_chars": 64,
-          "source_type": "exercices",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C5"
-          ],
-          "exact_body_digest": "sha256:7519f84b9c4b1a4bd0ebc7da3c27c71aa30f43aeaa05e2229fd5f60e257062c9",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:cc7cf2afa9ce4f8ca037de0b8330505d1b18fad8d3d47d1946c438a4616f397a",
-          "object_id": "1NSI-APT-EX-028",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-028.tex",
-          "payload_chars": 64,
-          "source_type": "exercices",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:cc7cf2afa9ce4f8ca037de0b8330505d1b18fad8d3d47d1946c438a4616f397a",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:75343e3c7180c71ce1d100ad8ac4aca950a86320dd257bd681108ebaa4a0c79e",
       "canonical_selection": {
         "canonical_paths": [],
@@ -14452,7 +14133,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0136",
+      "clone_group_id": "CG-0130",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -14538,7 +14219,7 @@
         "reason": "plusieurs porteurs sont attestes par le corps pour des capacites differentes : le corps ne designe pas un proprietaire",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0137",
+      "clone_group_id": "CG-0131",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 1,
       "members": [
@@ -14608,7 +14289,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0138",
+      "clone_group_id": "CG-0132",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -14714,7 +14395,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0139",
+      "clone_group_id": "CG-0133",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 1,
       "members": [
@@ -14781,7 +14462,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0140",
+      "clone_group_id": "CG-0134",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -14972,7 +14653,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0141",
+      "clone_group_id": "CG-0135",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 12,
       "members": [
@@ -15200,7 +14881,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0142",
+      "clone_group_id": "CG-0136",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -15323,7 +15004,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0143",
+      "clone_group_id": "CG-0137",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -15404,7 +15085,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0144",
+      "clone_group_id": "CG-0138",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 8,
       "members": [
@@ -15579,7 +15260,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0145",
+      "clone_group_id": "CG-0139",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 14,
       "members": [
@@ -15855,7 +15536,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0146",
+      "clone_group_id": "CG-0140",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -15938,7 +15619,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0147",
+      "clone_group_id": "CG-0141",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -16049,7 +15730,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0148",
+      "clone_group_id": "CG-0142",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -16115,7 +15796,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0149",
+      "clone_group_id": "CG-0143",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -16226,7 +15907,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0150",
+      "clone_group_id": "CG-0144",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -16294,7 +15975,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0151",
+      "clone_group_id": "CG-0145",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -16405,7 +16086,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0152",
+      "clone_group_id": "CG-0146",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -16471,7 +16152,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0153",
+      "clone_group_id": "CG-0147",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -16567,7 +16248,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0154",
+      "clone_group_id": "CG-0148",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -16682,7 +16363,7 @@
         "reason": "plusieurs porteurs sont attestes par le corps pour des capacites differentes : le corps ne designe pas un proprietaire",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0155",
+      "clone_group_id": "CG-0149",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -16793,7 +16474,7 @@
         "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0156",
+      "clone_group_id": "CG-0150",
       "disposition": "BOILERPLATE_ONLY",
       "excess_object_count": 12,
       "members": [
@@ -16983,7 +16664,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0157",
+      "clone_group_id": "CG-0151",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -17155,7 +16836,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0158",
+      "clone_group_id": "CG-0152",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -17266,7 +16947,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0159",
+      "clone_group_id": "CG-0153",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -17438,7 +17119,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0160",
+      "clone_group_id": "CG-0154",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -17534,7 +17215,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0161",
+      "clone_group_id": "CG-0155",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -17607,108 +17288,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:8b7ef1e99c94b1cdca620dd3c6cf0c085efc400b38ec10a29e1b9ed2ad3ce057",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0162",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C1"
-          ],
-          "exact_body_digest": "sha256:8b7ef1e99c94b1cdca620dd3c6cf0c085efc400b38ec10a29e1b9ed2ad3ce057",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:d835f634baa26a5348100419a6ec66902f78145cef27892783582e12d851a59f",
-          "object_id": "1NSI-APT-CO-006",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-006.tex",
-          "payload_chars": 507,
-          "source_type": "corriges",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C6"
-          ],
-          "exact_body_digest": "sha256:8b7ef1e99c94b1cdca620dd3c6cf0c085efc400b38ec10a29e1b9ed2ad3ce057",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:d835f634baa26a5348100419a6ec66902f78145cef27892783582e12d851a59f",
-          "object_id": "1NSI-APT-CO-031",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-031.tex",
-          "payload_chars": 507,
-          "source_type": "corriges",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:d835f634baa26a5348100419a6ec66902f78145cef27892783582e12d851a59f",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:8ce2bc52bc46fd253fb66853d8275c9d069ae52d5d1fffcbfbf8331f67e8e0de",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0163",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C2"
-          ],
-          "exact_body_digest": "sha256:8ce2bc52bc46fd253fb66853d8275c9d069ae52d5d1fffcbfbf8331f67e8e0de",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:42c87ccda6136120ba23c599c8935390be10edad0b47571cca20734493291916",
-          "object_id": "1NSI-ALGO-PARCOURS-TRIS-REMED-02",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-02.tex",
-          "payload_chars": 339,
-          "source_type": "remediation",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C5"
-          ],
-          "exact_body_digest": "sha256:8ce2bc52bc46fd253fb66853d8275c9d069ae52d5d1fffcbfbf8331f67e8e0de",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:42c87ccda6136120ba23c599c8935390be10edad0b47571cca20734493291916",
-          "object_id": "1NSI-ALGO-PARCOURS-TRIS-REMED-05",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-05.tex",
-          "payload_chars": 339,
-          "source_type": "remediation",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:42c87ccda6136120ba23c599c8935390be10edad0b47571cca20734493291916",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:8ef097eae8a31afba423dc683e0ad7ec3de1e2a657094840b50e2f718aae5688",
       "canonical_selection": {
         "canonical_paths": [],
@@ -17717,7 +17296,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0164",
+      "clone_group_id": "CG-0156",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 10,
       "members": [
@@ -17895,57 +17474,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:90907314775c62e961a91277c1cd509199c92c6a22c3412caa7cba81281723f9",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0165",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C2"
-          ],
-          "exact_body_digest": "sha256:90907314775c62e961a91277c1cd509199c92c6a22c3412caa7cba81281723f9",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:f21ec2cfa25f43c8e5a03a1d3648a83a9aba05589df48fb37007be5dbfb828a8",
-          "object_id": "1NSI-APT-CO-007",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-007.tex",
-          "payload_chars": 560,
-          "source_type": "corriges",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C6"
-          ],
-          "exact_body_digest": "sha256:90907314775c62e961a91277c1cd509199c92c6a22c3412caa7cba81281723f9",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:f21ec2cfa25f43c8e5a03a1d3648a83a9aba05589df48fb37007be5dbfb828a8",
-          "object_id": "1NSI-APT-CO-032",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-032.tex",
-          "payload_chars": 560,
-          "source_type": "corriges",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:f21ec2cfa25f43c8e5a03a1d3648a83a9aba05589df48fb37007be5dbfb828a8",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:91034e1c102b42b1c04feda9156706413b64fcac0639ae0091b8345c1916160f",
       "canonical_selection": {
         "canonical_paths": [],
@@ -17954,7 +17482,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0166",
+      "clone_group_id": "CG-0157",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -18050,7 +17578,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0167",
+      "clone_group_id": "CG-0158",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 6,
       "members": [
@@ -18176,7 +17704,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0168",
+      "clone_group_id": "CG-0159",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -18242,7 +17770,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0169",
+      "clone_group_id": "CG-0160",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -18330,57 +17858,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:968574b52201894d510f2caaf9d8e29f54d7961ec86e3668e14c7f700942794f",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0170",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C1"
-          ],
-          "exact_body_digest": "sha256:968574b52201894d510f2caaf9d8e29f54d7961ec86e3668e14c7f700942794f",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:6631b79483282877e13fa7dfcce0ebefbfc4704e4946c0ab7d1cf868f058614a",
-          "object_id": "1NSI-APT-CO-003",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-003.tex",
-          "payload_chars": 294,
-          "source_type": "corriges",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C5"
-          ],
-          "exact_body_digest": "sha256:968574b52201894d510f2caaf9d8e29f54d7961ec86e3668e14c7f700942794f",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:6631b79483282877e13fa7dfcce0ebefbfc4704e4946c0ab7d1cf868f058614a",
-          "object_id": "1NSI-APT-CO-028",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-028.tex",
-          "payload_chars": 294,
-          "source_type": "corriges",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:6631b79483282877e13fa7dfcce0ebefbfc4704e4946c0ab7d1cf868f058614a",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:993756266c70fac0b6cf53dfe5553f569443799ac52eb08f4337147ae11523ee",
       "canonical_selection": {
         "canonical_paths": [],
@@ -18389,7 +17866,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0171",
+      "clone_group_id": "CG-0161",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 8,
       "members": [
@@ -18545,7 +18022,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0172",
+      "clone_group_id": "CG-0162",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -18716,7 +18193,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0173",
+      "clone_group_id": "CG-0163",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -18827,7 +18304,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0174",
+      "clone_group_id": "CG-0164",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -18910,7 +18387,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0175",
+      "clone_group_id": "CG-0165",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 7,
       "members": [
@@ -19052,7 +18529,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0176",
+      "clone_group_id": "CG-0166",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -19148,7 +18625,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0177",
+      "clone_group_id": "CG-0167",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -19244,7 +18721,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0178",
+      "clone_group_id": "CG-0168",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -19325,7 +18802,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0179",
+      "clone_group_id": "CG-0169",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -19421,7 +18898,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0180",
+      "clone_group_id": "CG-0170",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 11,
       "members": [
@@ -19622,7 +19099,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0181",
+      "clone_group_id": "CG-0171",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -19689,7 +19166,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0182",
+      "clone_group_id": "CG-0172",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 7,
       "members": [
@@ -19822,60 +19299,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:9fa8a4c695fdbf357f3a20fa158491d767d8ccee2b627c8999f6bba04be53438",
-      "canonical_selection": {
-        "canonical_paths": [
-          "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-010.tex",
-          "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-034.tex"
-        ],
-        "evidence_rule": "NO_CAPACITY_AT_STAKE",
-        "false_copy_paths": [],
-        "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
-        "status": "LEGITIMATE_SHARED_CANONICAL"
-      },
-      "clone_group_id": "CG-0183",
-      "disposition": "BOILERPLATE_ONLY",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C2"
-          ],
-          "exact_body_digest": "sha256:9fa8a4c695fdbf357f3a20fa158491d767d8ccee2b627c8999f6bba04be53438",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:b89e2dad524d0907801bd23ae685b317df99c2cbb14ec35a4ec920cf07c99d47",
-          "object_id": "1NSI-APT-EX-010",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-010.tex",
-          "payload_chars": 67,
-          "source_type": "exercices",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C6"
-          ],
-          "exact_body_digest": "sha256:9fa8a4c695fdbf357f3a20fa158491d767d8ccee2b627c8999f6bba04be53438",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:b89e2dad524d0907801bd23ae685b317df99c2cbb14ec35a4ec920cf07c99d47",
-          "object_id": "1NSI-APT-EX-034",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-034.tex",
-          "payload_chars": 67,
-          "source_type": "exercices",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:b89e2dad524d0907801bd23ae685b317df99c2cbb14ec35a4ec920cf07c99d47",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:a14587f0d8effc72736efb04e1b850bd6525d8e8023f45265aa0af869bc464eb",
       "canonical_selection": {
         "canonical_paths": [],
@@ -19884,7 +19307,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0184",
+      "clone_group_id": "CG-0173",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -19965,7 +19388,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0185",
+      "clone_group_id": "CG-0174",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -20031,7 +19454,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0186",
+      "clone_group_id": "CG-0175",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -20097,7 +19520,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0187",
+      "clone_group_id": "CG-0176",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -20208,7 +19631,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0188",
+      "clone_group_id": "CG-0177",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -20274,7 +19697,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0189",
+      "clone_group_id": "CG-0178",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -20377,57 +19800,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:a3b8d3fad1d2e1399090dc2ec4e3cca705ed0d280d3bdb1cd067f40c64930d5c",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0190",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C1"
-          ],
-          "exact_body_digest": "sha256:a3b8d3fad1d2e1399090dc2ec4e3cca705ed0d280d3bdb1cd067f40c64930d5c",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:2260306a60533636a26b43992d767fedc9c978ff9fbe4d07eac063bc79ebf4d1",
-          "object_id": "1NSI-APT-CO-005",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-005.tex",
-          "payload_chars": 481,
-          "source_type": "corriges",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C5"
-          ],
-          "exact_body_digest": "sha256:a3b8d3fad1d2e1399090dc2ec4e3cca705ed0d280d3bdb1cd067f40c64930d5c",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:2260306a60533636a26b43992d767fedc9c978ff9fbe4d07eac063bc79ebf4d1",
-          "object_id": "1NSI-APT-CO-030",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-030.tex",
-          "payload_chars": 481,
-          "source_type": "corriges",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:2260306a60533636a26b43992d767fedc9c978ff9fbe4d07eac063bc79ebf4d1",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:a555d294d676a0077fb2af38c8a56098b86a3a335c2a6110d641bde3ba5232b5",
       "canonical_selection": {
         "canonical_paths": [],
@@ -20436,7 +19808,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0191",
+      "clone_group_id": "CG-0179",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 10,
       "members": [
@@ -20622,7 +19994,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0192",
+      "clone_group_id": "CG-0180",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -20718,7 +20090,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0193",
+      "clone_group_id": "CG-0181",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 7,
       "members": [
@@ -20860,7 +20232,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0194",
+      "clone_group_id": "CG-0182",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -20926,7 +20298,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0195",
+      "clone_group_id": "CG-0183",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -21037,7 +20409,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0196",
+      "clone_group_id": "CG-0184",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -21140,60 +20512,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:a77ceacde80ced846a38df2ff16599b17eb2d228d650df98d9c838de9669af7d",
-      "canonical_selection": {
-        "canonical_paths": [
-          "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-008.tex",
-          "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-032.tex"
-        ],
-        "evidence_rule": "NO_CAPACITY_AT_STAKE",
-        "false_copy_paths": [],
-        "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
-        "status": "LEGITIMATE_SHARED_CANONICAL"
-      },
-      "clone_group_id": "CG-0197",
-      "disposition": "BOILERPLATE_ONLY",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C2"
-          ],
-          "exact_body_digest": "sha256:a77ceacde80ced846a38df2ff16599b17eb2d228d650df98d9c838de9669af7d",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:0dc7c589b85d8f2b06f4832ab68166c940a6d5d71ad3c4b2ce7f3c77220339d4",
-          "object_id": "1NSI-APT-EX-008",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-008.tex",
-          "payload_chars": 80,
-          "source_type": "exercices",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C6"
-          ],
-          "exact_body_digest": "sha256:a77ceacde80ced846a38df2ff16599b17eb2d228d650df98d9c838de9669af7d",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:0dc7c589b85d8f2b06f4832ab68166c940a6d5d71ad3c4b2ce7f3c77220339d4",
-          "object_id": "1NSI-APT-EX-032",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-032.tex",
-          "payload_chars": 80,
-          "source_type": "exercices",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:0dc7c589b85d8f2b06f4832ab68166c940a6d5d71ad3c4b2ce7f3c77220339d4",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:a96d6b86cea7b5ee9d6989e95329284f29100820203cc64fa4b88192caefeda0",
       "canonical_selection": {
         "canonical_paths": [],
@@ -21202,7 +20520,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0198",
+      "clone_group_id": "CG-0185",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 6,
       "members": [
@@ -21322,111 +20640,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:a99758c60e699ee793e4e749b4160e4ea1d9bc464df60c833fea096486d7b152",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0199",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C1"
-          ],
-          "exact_body_digest": "sha256:a99758c60e699ee793e4e749b4160e4ea1d9bc464df60c833fea096486d7b152",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:2b3de4571e311e72c335b34bd3ee77e93bb230eeb10eb0e23a6046e3067517ce",
-          "object_id": "1NSI-APT-CO-004",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-004.tex",
-          "payload_chars": 352,
-          "source_type": "corriges",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C5"
-          ],
-          "exact_body_digest": "sha256:a99758c60e699ee793e4e749b4160e4ea1d9bc464df60c833fea096486d7b152",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:2b3de4571e311e72c335b34bd3ee77e93bb230eeb10eb0e23a6046e3067517ce",
-          "object_id": "1NSI-APT-CO-029",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-029.tex",
-          "payload_chars": 352,
-          "source_type": "corriges",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:2b3de4571e311e72c335b34bd3ee77e93bb230eeb10eb0e23a6046e3067517ce",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:aa50dfe73b8c170bee99899131a9a82e5376c92b2b6f741d1a161bbd803faf5d",
-      "canonical_selection": {
-        "canonical_paths": [
-          "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-011.tex",
-          "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-035.tex"
-        ],
-        "evidence_rule": "NO_CAPACITY_AT_STAKE",
-        "false_copy_paths": [],
-        "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
-        "status": "LEGITIMATE_SHARED_CANONICAL"
-      },
-      "clone_group_id": "CG-0200",
-      "disposition": "BOILERPLATE_ONLY",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C2"
-          ],
-          "exact_body_digest": "sha256:aa50dfe73b8c170bee99899131a9a82e5376c92b2b6f741d1a161bbd803faf5d",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:3dd938d1332fff33152245532af0d97974eefc8a5df771c857955daa868ae0e3",
-          "object_id": "1NSI-APT-EX-011",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-011.tex",
-          "payload_chars": 110,
-          "source_type": "exercices",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C6"
-          ],
-          "exact_body_digest": "sha256:aa50dfe73b8c170bee99899131a9a82e5376c92b2b6f741d1a161bbd803faf5d",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:3dd938d1332fff33152245532af0d97974eefc8a5df771c857955daa868ae0e3",
-          "object_id": "1NSI-APT-EX-035",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-035.tex",
-          "payload_chars": 110,
-          "source_type": "exercices",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:3dd938d1332fff33152245532af0d97974eefc8a5df771c857955daa868ae0e3",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:aa511e9ebacfbf63e3c0336172b46d22a6d762c6c8f4d9fe9ea6002425d2368a",
       "canonical_selection": {
         "canonical_paths": [],
@@ -21435,7 +20648,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0201",
+      "clone_group_id": "CG-0186",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -21494,57 +20707,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:aa67dd683227cc683ffcd9b74ed98dfe45234537332adafd388e11caef7593c2",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0202",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C1"
-          ],
-          "exact_body_digest": "sha256:aa67dd683227cc683ffcd9b74ed98dfe45234537332adafd388e11caef7593c2",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:a85dfd9c2d8ed9ea0be441ef30e7d9077f7451cabfebc016b582b535f1e70cb5",
-          "object_id": "1NSI-ALGO-PARCOURS-TRIS-REMED-01",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-01.tex",
-          "payload_chars": 447,
-          "source_type": "remediation",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C4"
-          ],
-          "exact_body_digest": "sha256:aa67dd683227cc683ffcd9b74ed98dfe45234537332adafd388e11caef7593c2",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:a85dfd9c2d8ed9ea0be441ef30e7d9077f7451cabfebc016b582b535f1e70cb5",
-          "object_id": "1NSI-ALGO-PARCOURS-TRIS-REMED-04",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-04.tex",
-          "payload_chars": 447,
-          "source_type": "remediation",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:a85dfd9c2d8ed9ea0be441ef30e7d9077f7451cabfebc016b582b535f1e70cb5",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:abcc76b48bababfe0faf95e58d5955bfc5c30b92c782fc64841f3c578395457b",
       "canonical_selection": {
         "canonical_paths": [
@@ -21556,7 +20718,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0203",
+      "clone_group_id": "CG-0187",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -21607,7 +20769,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0204",
+      "clone_group_id": "CG-0188",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 7,
       "members": [
@@ -21748,7 +20910,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0205",
+      "clone_group_id": "CG-0189",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -21924,7 +21086,7 @@
         "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0206",
+      "clone_group_id": "CG-0190",
       "disposition": "BOILERPLATE_ONLY",
       "excess_object_count": 2,
       "members": [
@@ -21993,7 +21155,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0207",
+      "clone_group_id": "CG-0191",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -22044,7 +21206,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0208",
+      "clone_group_id": "CG-0192",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -22143,7 +21305,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0209",
+      "clone_group_id": "CG-0193",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 11,
       "members": [
@@ -22360,108 +21522,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:ad30e129066a6e95f89a6a53c75435797dba8a1a1beac213c874efb7b7b0edeb",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0210",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C1"
-          ],
-          "exact_body_digest": "sha256:ad30e129066a6e95f89a6a53c75435797dba8a1a1beac213c874efb7b7b0edeb",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:058cfb436785b952c17b960ee42a249eb063f2100795b07b5c1d2c1eaeb6d3f4",
-          "object_id": "1NSI-APT-EX-002",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-002.tex",
-          "payload_chars": 138,
-          "source_type": "exercices",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C5"
-          ],
-          "exact_body_digest": "sha256:ad30e129066a6e95f89a6a53c75435797dba8a1a1beac213c874efb7b7b0edeb",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:058cfb436785b952c17b960ee42a249eb063f2100795b07b5c1d2c1eaeb6d3f4",
-          "object_id": "1NSI-APT-EX-026",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-026.tex",
-          "payload_chars": 138,
-          "source_type": "exercices",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:058cfb436785b952c17b960ee42a249eb063f2100795b07b5c1d2c1eaeb6d3f4",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:adb4f474019e4724ff9865fa80d12d1e3bff68b37e1bdfefd18873d5c121df74",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0211",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C2"
-          ],
-          "exact_body_digest": "sha256:adb4f474019e4724ff9865fa80d12d1e3bff68b37e1bdfefd18873d5c121df74",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:4bd79e8adcb5530a938b7c3ec3c4aa35058ec342057e48c06d8a6b84976ef7a0",
-          "object_id": "1NSI-APT-CO-008",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-008.tex",
-          "payload_chars": 450,
-          "source_type": "corriges",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C6"
-          ],
-          "exact_body_digest": "sha256:adb4f474019e4724ff9865fa80d12d1e3bff68b37e1bdfefd18873d5c121df74",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:4bd79e8adcb5530a938b7c3ec3c4aa35058ec342057e48c06d8a6b84976ef7a0",
-          "object_id": "1NSI-APT-CO-033",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-033.tex",
-          "payload_chars": 450,
-          "source_type": "corriges",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:4bd79e8adcb5530a938b7c3ec3c4aa35058ec342057e48c06d8a6b84976ef7a0",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:af07df98a1ce253fbcb087ae901356dfc32615d90c9958b1bb04c7c44c314be6",
       "canonical_selection": {
         "canonical_paths": [],
@@ -22470,7 +21530,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0212",
+      "clone_group_id": "CG-0194",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -22553,7 +21613,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0213",
+      "clone_group_id": "CG-0195",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -22717,60 +21777,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:b21effd6b6ad13bc144c6fa4f0dc9be9fb29122aae809d5ccb813fe81a3ecb95",
-      "canonical_selection": {
-        "canonical_paths": [
-          "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-001.tex",
-          "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-025.tex"
-        ],
-        "evidence_rule": "NO_CAPACITY_AT_STAKE",
-        "false_copy_paths": [],
-        "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
-        "status": "LEGITIMATE_SHARED_CANONICAL"
-      },
-      "clone_group_id": "CG-0214",
-      "disposition": "BOILERPLATE_ONLY",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C1"
-          ],
-          "exact_body_digest": "sha256:b21effd6b6ad13bc144c6fa4f0dc9be9fb29122aae809d5ccb813fe81a3ecb95",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:7cfba6b87624e34bf024338c06ccbc9413bb60e546157861fb75b8f9f027df53",
-          "object_id": "1NSI-APT-EX-001",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-001.tex",
-          "payload_chars": 105,
-          "source_type": "exercices",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C5"
-          ],
-          "exact_body_digest": "sha256:b21effd6b6ad13bc144c6fa4f0dc9be9fb29122aae809d5ccb813fe81a3ecb95",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:7cfba6b87624e34bf024338c06ccbc9413bb60e546157861fb75b8f9f027df53",
-          "object_id": "1NSI-APT-EX-025",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-025.tex",
-          "payload_chars": 105,
-          "source_type": "exercices",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:7cfba6b87624e34bf024338c06ccbc9413bb60e546157861fb75b8f9f027df53",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:b37424ca19338fa91ffd7ea023fd34313f7bf33c4120e44950ce8bb68a5fd841",
       "canonical_selection": {
         "canonical_paths": [],
@@ -22779,7 +21785,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0215",
+      "clone_group_id": "CG-0196",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 11,
       "members": [
@@ -22980,7 +21986,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0216",
+      "clone_group_id": "CG-0197",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -23076,7 +22082,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0217",
+      "clone_group_id": "CG-0198",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -23197,7 +22203,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0218",
+      "clone_group_id": "CG-0199",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -23303,7 +22309,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0219",
+      "clone_group_id": "CG-0200",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -23369,7 +22375,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0220",
+      "clone_group_id": "CG-0201",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 12,
       "members": [
@@ -23586,7 +22592,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0221",
+      "clone_group_id": "CG-0202",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -23667,7 +22673,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0222",
+      "clone_group_id": "CG-0203",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -23733,7 +22739,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0223",
+      "clone_group_id": "CG-0204",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -23799,7 +22805,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0224",
+      "clone_group_id": "CG-0205",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -23865,7 +22871,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0225",
+      "clone_group_id": "CG-0206",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -23968,57 +22974,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:bc43f847d5b8f5701aae9058d5ebafee463e6135166932efaa48eaec9f68617c",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0226",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C2"
-          ],
-          "exact_body_digest": "sha256:bc43f847d5b8f5701aae9058d5ebafee463e6135166932efaa48eaec9f68617c",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:d246450b4bb182543be5a1e5379fb91374d86df3f5559a6d3aa4739f98a2311b",
-          "object_id": "1NSI-APT-EX-009",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-009.tex",
-          "payload_chars": 304,
-          "source_type": "exercices",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C6"
-          ],
-          "exact_body_digest": "sha256:bc43f847d5b8f5701aae9058d5ebafee463e6135166932efaa48eaec9f68617c",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:d246450b4bb182543be5a1e5379fb91374d86df3f5559a6d3aa4739f98a2311b",
-          "object_id": "1NSI-APT-EX-033",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-033.tex",
-          "payload_chars": 304,
-          "source_type": "exercices",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:d246450b4bb182543be5a1e5379fb91374d86df3f5559a6d3aa4739f98a2311b",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:bc61210f58e2929d3687f530f280ae7c465a28c1f85da0852a058314852525ba",
       "canonical_selection": {
         "canonical_paths": [],
@@ -24027,7 +22982,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0227",
+      "clone_group_id": "CG-0207",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 12,
       "members": [
@@ -24244,7 +23199,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0228",
+      "clone_group_id": "CG-0208",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -24355,7 +23310,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0229",
+      "clone_group_id": "CG-0209",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -24440,7 +23395,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0230",
+      "clone_group_id": "CG-0210",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -24491,7 +23446,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0231",
+      "clone_group_id": "CG-0211",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 1,
       "members": [
@@ -24543,7 +23498,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0232",
+      "clone_group_id": "CG-0212",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -24658,7 +23613,7 @@
         "reason": "plusieurs porteurs sont attestes par le corps pour des capacites differentes : le corps ne designe pas un proprietaire",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0233",
+      "clone_group_id": "CG-0213",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 10,
       "members": [
@@ -24877,7 +23832,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0234",
+      "clone_group_id": "CG-0214",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -24958,7 +23913,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0235",
+      "clone_group_id": "CG-0215",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -25024,7 +23979,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0236",
+      "clone_group_id": "CG-0216",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 11,
       "members": [
@@ -25227,7 +24182,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0237",
+      "clone_group_id": "CG-0217",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -25338,7 +24293,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0238",
+      "clone_group_id": "CG-0218",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -25434,7 +24389,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0239",
+      "clone_group_id": "CG-0219",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -25537,57 +24492,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:c57d4e339c01670493e76f78102188dd8d566683027b5899911d70a7b4620c63",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0240",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C1"
-          ],
-          "exact_body_digest": "sha256:c57d4e339c01670493e76f78102188dd8d566683027b5899911d70a7b4620c63",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:a5cc12c05a7f3296e8958d0a19c3f39a486f786debe1bc3847061929b3f5af73",
-          "object_id": "1NSI-APT-EX-006",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-006.tex",
-          "payload_chars": 186,
-          "source_type": "exercices",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C5"
-          ],
-          "exact_body_digest": "sha256:c57d4e339c01670493e76f78102188dd8d566683027b5899911d70a7b4620c63",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:a5cc12c05a7f3296e8958d0a19c3f39a486f786debe1bc3847061929b3f5af73",
-          "object_id": "1NSI-APT-EX-030",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-030.tex",
-          "payload_chars": 186,
-          "source_type": "exercices",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:a5cc12c05a7f3296e8958d0a19c3f39a486f786debe1bc3847061929b3f5af73",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:c694f32af8acea9e2a80ae3588ed7e35b5ad2c0bebc78581b1dc39ff805beaf6",
       "canonical_selection": {
         "canonical_paths": [],
@@ -25596,7 +24500,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0241",
+      "clone_group_id": "CG-0220",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -25668,7 +24572,7 @@
         "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0242",
+      "clone_group_id": "CG-0221",
       "disposition": "BOILERPLATE_ONLY",
       "excess_object_count": 2,
       "members": [
@@ -25743,7 +24647,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0243",
+      "clone_group_id": "CG-0222",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -25794,7 +24698,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0244",
+      "clone_group_id": "CG-0223",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -25860,7 +24764,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0245",
+      "clone_group_id": "CG-0224",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -25961,7 +24865,7 @@
         "reason": "plusieurs porteurs sont attestes par le corps pour des capacites differentes : le corps ne designe pas un proprietaire",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0246",
+      "clone_group_id": "CG-0225",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -26077,7 +24981,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0247",
+      "clone_group_id": "CG-0226",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -26207,7 +25111,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0248",
+      "clone_group_id": "CG-0227",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 17,
       "members": [
@@ -26462,7 +25366,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0249",
+      "clone_group_id": "CG-0228",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -26565,57 +25469,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:cb88abf0cd34672f7b368b679f3b924a0ac40c5bb9b160cb1d56b1fe51c8b39a",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0250",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C2"
-          ],
-          "exact_body_digest": "sha256:cb88abf0cd34672f7b368b679f3b924a0ac40c5bb9b160cb1d56b1fe51c8b39a",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:e3ab60c252d214f3621842f5f10c6d18df91d110b0927bf9ff32a82cfc03930d",
-          "object_id": "1NSI-APT-CO-011",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-011.tex",
-          "payload_chars": 457,
-          "source_type": "corriges",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C6"
-          ],
-          "exact_body_digest": "sha256:cb88abf0cd34672f7b368b679f3b924a0ac40c5bb9b160cb1d56b1fe51c8b39a",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:e3ab60c252d214f3621842f5f10c6d18df91d110b0927bf9ff32a82cfc03930d",
-          "object_id": "1NSI-APT-CO-036",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-036.tex",
-          "payload_chars": 457,
-          "source_type": "corriges",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:e3ab60c252d214f3621842f5f10c6d18df91d110b0927bf9ff32a82cfc03930d",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:cbdec34a3e1d3b01f9abadbd7ef0b1308f32c0a0fa54b38bf776cc3547ffbeee",
       "canonical_selection": {
         "canonical_paths": [],
@@ -26624,7 +25477,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0251",
+      "clone_group_id": "CG-0229",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 12,
       "members": [
@@ -26841,7 +25694,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0252",
+      "clone_group_id": "CG-0230",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -26922,7 +25775,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0253",
+      "clone_group_id": "CG-0231",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -26990,7 +25843,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0254",
+      "clone_group_id": "CG-0232",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -27101,7 +25954,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0255",
+      "clone_group_id": "CG-0233",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -27183,7 +26036,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0256",
+      "clone_group_id": "CG-0234",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 6,
       "members": [
@@ -27309,7 +26162,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0257",
+      "clone_group_id": "CG-0235",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 11,
       "members": [
@@ -27510,7 +26363,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0258",
+      "clone_group_id": "CG-0236",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 11,
       "members": [
@@ -27712,7 +26565,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0259",
+      "clone_group_id": "CG-0237",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 12,
       "members": [
@@ -27929,7 +26782,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0260",
+      "clone_group_id": "CG-0238",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 1,
       "members": [
@@ -27980,7 +26833,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0261",
+      "clone_group_id": "CG-0239",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -28152,7 +27005,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0262",
+      "clone_group_id": "CG-0240",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 11,
       "members": [
@@ -28354,7 +27207,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0263",
+      "clone_group_id": "CG-0241",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -28434,7 +27287,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0264",
+      "clone_group_id": "CG-0242",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -28557,7 +27410,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0265",
+      "clone_group_id": "CG-0243",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -28729,7 +27582,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0266",
+      "clone_group_id": "CG-0244",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -28810,7 +27663,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0267",
+      "clone_group_id": "CG-0245",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -28897,7 +27750,7 @@
         "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0268",
+      "clone_group_id": "CG-0246",
       "disposition": "BOILERPLATE_ONLY",
       "excess_object_count": 2,
       "members": [
@@ -28966,7 +27819,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0269",
+      "clone_group_id": "CG-0247",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -29017,7 +27870,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0270",
+      "clone_group_id": "CG-0248",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -29098,7 +27951,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0271",
+      "clone_group_id": "CG-0249",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -29194,7 +28047,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0272",
+      "clone_group_id": "CG-0250",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -29260,7 +28113,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0273",
+      "clone_group_id": "CG-0251",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 7,
       "members": [
@@ -29403,7 +28256,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0274",
+      "clone_group_id": "CG-0252",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 11,
       "members": [
@@ -29605,7 +28458,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0275",
+      "clone_group_id": "CG-0253",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -29701,7 +28554,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0276",
+      "clone_group_id": "CG-0254",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -29804,57 +28657,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:e1273bda14aaeea2144aee526e521551ae06bf8d4edcc7ebf710265396e024fc",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0277",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C2"
-          ],
-          "exact_body_digest": "sha256:e1273bda14aaeea2144aee526e521551ae06bf8d4edcc7ebf710265396e024fc",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:1c43e618fc55f0356057e7f926afdf119235d7a2878a8220919ea3c927a410e8",
-          "object_id": "1NSI-APT-CO-009",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-009.tex",
-          "payload_chars": 784,
-          "source_type": "corriges",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C6"
-          ],
-          "exact_body_digest": "sha256:e1273bda14aaeea2144aee526e521551ae06bf8d4edcc7ebf710265396e024fc",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:1c43e618fc55f0356057e7f926afdf119235d7a2878a8220919ea3c927a410e8",
-          "object_id": "1NSI-APT-CO-034",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-034.tex",
-          "payload_chars": 784,
-          "source_type": "corriges",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:1c43e618fc55f0356057e7f926afdf119235d7a2878a8220919ea3c927a410e8",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:e20610bc428767e6a81d2a2a91b7809bf6509a738ab441d690c18ed84e2d7850",
       "canonical_selection": {
         "canonical_paths": [],
@@ -29863,7 +28665,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0278",
+      "clone_group_id": "CG-0255",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 12,
       "members": [
@@ -30080,7 +28882,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0279",
+      "clone_group_id": "CG-0256",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -30194,7 +28996,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0280",
+      "clone_group_id": "CG-0257",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -30245,7 +29047,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0281",
+      "clone_group_id": "CG-0258",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -30417,7 +29219,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0282",
+      "clone_group_id": "CG-0259",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -30494,7 +29296,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0283",
+      "clone_group_id": "CG-0260",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -30617,7 +29419,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0284",
+      "clone_group_id": "CG-0261",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -30686,7 +29488,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0285",
+      "clone_group_id": "CG-0262",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -30795,7 +29597,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0286",
+      "clone_group_id": "CG-0263",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 7,
       "members": [
@@ -30952,7 +29754,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0287",
+      "clone_group_id": "CG-0264",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -31115,108 +29917,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:e765a2c557436c6c1baf5056ef3f247a0ab823c9a49ef9bbf61e127a7e58c2a5",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0288",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C2"
-          ],
-          "exact_body_digest": "sha256:e765a2c557436c6c1baf5056ef3f247a0ab823c9a49ef9bbf61e127a7e58c2a5",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:e9a138d97f1bc1fdaddc7e248357659fb1bb7061c258c5d4f9fbed330b33ef84",
-          "object_id": "1NSI-APT-EX-007",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-007.tex",
-          "payload_chars": 274,
-          "source_type": "exercices",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C6"
-          ],
-          "exact_body_digest": "sha256:e765a2c557436c6c1baf5056ef3f247a0ab823c9a49ef9bbf61e127a7e58c2a5",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:e9a138d97f1bc1fdaddc7e248357659fb1bb7061c258c5d4f9fbed330b33ef84",
-          "object_id": "1NSI-APT-EX-031",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-031.tex",
-          "payload_chars": 274,
-          "source_type": "exercices",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:e9a138d97f1bc1fdaddc7e248357659fb1bb7061c258c5d4f9fbed330b33ef84",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:e78237507206e82538c6e3ab114489e92a77f701c676315856ecaf58338f49ee",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0289",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C2"
-          ],
-          "exact_body_digest": "sha256:e78237507206e82538c6e3ab114489e92a77f701c676315856ecaf58338f49ee",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:574c2ca3d6f5314109853635245bb45a62bee41cdd90fe182ba382df012df434",
-          "object_id": "1NSI-APT-CO-010",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-010.tex",
-          "payload_chars": 370,
-          "source_type": "corriges",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C6"
-          ],
-          "exact_body_digest": "sha256:e78237507206e82538c6e3ab114489e92a77f701c676315856ecaf58338f49ee",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:574c2ca3d6f5314109853635245bb45a62bee41cdd90fe182ba382df012df434",
-          "object_id": "1NSI-APT-CO-035",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-035.tex",
-          "payload_chars": 370,
-          "source_type": "corriges",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:574c2ca3d6f5314109853635245bb45a62bee41cdd90fe182ba382df012df434",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:e7b46477dba52e1a4aedf1cb541262c275740a5cf8cc3361a374aa885f94bbe1",
       "canonical_selection": {
         "canonical_paths": [],
@@ -31225,7 +29925,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0290",
+      "clone_group_id": "CG-0265",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -31309,7 +30009,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0291",
+      "clone_group_id": "CG-0266",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -31352,57 +30052,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:ea4d1443383e2dc16d3199fe8b6b3ec307fcf14dd2b1a823a80291f44831f836",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0292",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C1"
-          ],
-          "exact_body_digest": "sha256:ea4d1443383e2dc16d3199fe8b6b3ec307fcf14dd2b1a823a80291f44831f836",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:968325a3eb16da84019c863f4645cf28b09ba15b47ff2e76d7bfce51b37e240d",
-          "object_id": "1NSI-APT-CO-001",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-001.tex",
-          "payload_chars": 318,
-          "source_type": "corriges",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C5"
-          ],
-          "exact_body_digest": "sha256:ea4d1443383e2dc16d3199fe8b6b3ec307fcf14dd2b1a823a80291f44831f836",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:968325a3eb16da84019c863f4645cf28b09ba15b47ff2e76d7bfce51b37e240d",
-          "object_id": "1NSI-APT-CO-026",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-026.tex",
-          "payload_chars": 318,
-          "source_type": "corriges",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:968325a3eb16da84019c863f4645cf28b09ba15b47ff2e76d7bfce51b37e240d",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:ed4811df8896a43c39a63b0dc480c734b8834fa8e609f9dd1b38be378175f211",
       "canonical_selection": {
         "canonical_paths": [
@@ -31415,7 +30064,7 @@
         "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0293",
+      "clone_group_id": "CG-0267",
       "disposition": "BOILERPLATE_ONLY",
       "excess_object_count": 2,
       "members": [
@@ -31481,7 +30130,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0294",
+      "clone_group_id": "CG-0268",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -31653,7 +30302,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0295",
+      "clone_group_id": "CG-0269",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -31749,7 +30398,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0296",
+      "clone_group_id": "CG-0270",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -31830,7 +30479,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0297",
+      "clone_group_id": "CG-0271",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -31921,7 +30570,7 @@
         "reason": "le corps nomme la capacite que ces porteurs declarent ; les autres la revendiquent sans la servir",
         "status": "SEMANTIC_CANONICAL"
       },
-      "clone_group_id": "CG-0298",
+      "clone_group_id": "CG-0272",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -32027,7 +30676,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0299",
+      "clone_group_id": "CG-0273",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 12,
       "members": [
@@ -32236,57 +30885,6 @@
     },
     {
       "body_aligned_member_paths": [],
-      "canonical_body_digest": "sha256:f6bdfdbc3da023a4569d1f030c2edded651bdc3044c5fbe81ffad10527603d6c",
-      "canonical_selection": {
-        "canonical_paths": [],
-        "evidence_rule": "NONE_CONCLUSIVE",
-        "false_copy_paths": [],
-        "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
-        "status": "AMBIGUOUS"
-      },
-      "clone_group_id": "CG-0300",
-      "disposition": "CAPACITY_MISREPRESENTING_CLONE",
-      "excess_object_count": 1,
-      "members": [
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C1"
-          ],
-          "exact_body_digest": "sha256:f6bdfdbc3da023a4569d1f030c2edded651bdc3044c5fbe81ffad10527603d6c",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:36c5a333f1b433bb14a364d0de483fef41c0a2d50a4f01cc02dbb91fd6cfdda4",
-          "object_id": "1NSI-APT-CO-002",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-002.tex",
-          "payload_chars": 390,
-          "source_type": "corriges",
-          "status": "approved"
-        },
-        {
-          "body_attested_capacity": [],
-          "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-          "declared_capacity": [
-            "C5"
-          ],
-          "exact_body_digest": "sha256:f6bdfdbc3da023a4569d1f030c2edded651bdc3044c5fbe81ffad10527603d6c",
-          "manual": "1NSI",
-          "normalized_body_digest": "sha256:36c5a333f1b433bb14a364d0de483fef41c0a2d50a4f01cc02dbb91fd6cfdda4",
-          "object_id": "1NSI-APT-CO-027",
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-027.tex",
-          "payload_chars": 390,
-          "source_type": "corriges",
-          "status": "approved"
-        }
-      ],
-      "normalized_body_digest": "sha256:36c5a333f1b433bb14a364d0de483fef41c0a2d50a4f01cc02dbb91fd6cfdda4",
-      "object_count": 2,
-      "same_capacity": false,
-      "same_chapter": true,
-      "same_manual": true
-    },
-    {
-      "body_aligned_member_paths": [],
       "canonical_body_digest": "sha256:f7601d7eca3cb148e3b61509669249c5c4d0edeb53a5c1442796e7f2ad4b646a",
       "canonical_selection": {
         "canonical_paths": [],
@@ -32295,7 +30893,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0301",
+      "clone_group_id": "CG-0274",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -32361,7 +30959,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0302",
+      "clone_group_id": "CG-0275",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -32460,7 +31058,7 @@
         "reason": "tous les porteurs creditent la meme capacite : la duplication est physique, le credit n'est pas usurpe",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0303",
+      "clone_group_id": "CG-0276",
       "disposition": "REDUNDANT_SAME_CAPACITY",
       "excess_object_count": 1,
       "members": [
@@ -32518,7 +31116,7 @@
         "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
         "status": "LEGITIMATE_SHARED_CANONICAL"
       },
-      "clone_group_id": "CG-0304",
+      "clone_group_id": "CG-0277",
       "disposition": "BOILERPLATE_ONLY",
       "excess_object_count": 5,
       "members": [
@@ -32629,7 +31227,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0305",
+      "clone_group_id": "CG-0278",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -32697,7 +31295,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0306",
+      "clone_group_id": "CG-0279",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 6,
       "members": [
@@ -32823,7 +31421,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0307",
+      "clone_group_id": "CG-0280",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 11,
       "members": [
@@ -33024,7 +31622,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0308",
+      "clone_group_id": "CG-0281",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -33105,7 +31703,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0309",
+      "clone_group_id": "CG-0282",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 9,
       "members": [
@@ -33276,7 +31874,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0310",
+      "clone_group_id": "CG-0283",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 5,
       "members": [
@@ -33387,7 +31985,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0311",
+      "clone_group_id": "CG-0284",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 2,
       "members": [
@@ -33453,7 +32051,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0312",
+      "clone_group_id": "CG-0285",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 12,
       "members": [
@@ -33670,7 +32268,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0313",
+      "clone_group_id": "CG-0286",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 3,
       "members": [
@@ -33751,7 +32349,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0314",
+      "clone_group_id": "CG-0287",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 4,
       "members": [
@@ -33848,7 +32446,7 @@
         "reason": "aucune preuve ne designe le proprietaire : le corps ne s'atteste pas, aucun chapitre ne se duplique, et les capacites declarees different. Choisir ici reviendrait a tirer au sort",
         "status": "AMBIGUOUS"
       },
-      "clone_group_id": "CG-0315",
+      "clone_group_id": "CG-0288",
       "disposition": "CAPACITY_MISREPRESENTING_CLONE",
       "excess_object_count": 11,
       "members": [
@@ -34043,13 +32641,13 @@
     }
   ],
   "inventory": {
-    "ambiguous_canonical_groups": 253,
-    "clone_groups": 315,
-    "distinct_bodies": 4072,
-    "excess_objects": 1443,
-    "objects_on_invalid_credit": 164,
-    "objects_scanned": 5515,
-    "objects_with_indeterminate_credit": 1445,
+    "ambiguous_canonical_groups": 233,
+    "clone_groups": 288,
+    "distinct_bodies": 4012,
+    "excess_objects": 1416,
+    "objects_on_invalid_credit": 162,
+    "objects_scanned": 5428,
+    "objects_with_indeterminate_credit": 1407,
     "unknown_canonical_groups": 0
   },
   "objects_on_invalid_credit": [
@@ -34094,8 +32692,6 @@
     "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/cours/07_td_contextualise.tex",
     "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/exercices/TSPE-SUITLIM-EX-016.tex",
     "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/exercices/TSPE-TRIGO-EX-019.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-03.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-06.tex",
     "NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-007.tex",
     "NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-013.tex",
     "NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-019.tex",
@@ -34356,7 +32952,6 @@
     "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/exercices/TSPE-COMBI-EX-023.tex",
     "Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/exercices/TSPE-COMBI-EX-024.tex",
     "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/cours/11_C2_etude_complete.tex",
-    "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/methodes/TSPE-DERCONV-ME-001.tex",
     "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/corriges/TSPE-LOG-CO-001.tex",
     "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/corriges/TSPE-LOG-CO-002.tex",
     "Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/corriges/TSPE-LOG-CO-003.tex",
@@ -34539,43 +33134,6 @@
     "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/remediation/TSPE-PROBABILITES-RE-C2.tex",
     "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/remediation/TSPE-PROBABILITES-REMED-02.tex",
     "Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/remediation/TSPE-PROBABILITES-REMED-04.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-001.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-002.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-003.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-004.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-005.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-006.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-007.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-008.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-009.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-010.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-011.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-026.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-027.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-028.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-029.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-030.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-031.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-032.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-033.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-034.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-035.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-036.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-002.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-005.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-006.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-007.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-009.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-026.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-029.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-030.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-031.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-033.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-ALGO-PARCOURS-TRIS-METH-01.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-01.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-02.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-04.tex",
-    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-05.tex",
     "NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-001.tex",
     "NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-002.tex",
     "NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-003.tex",
@@ -35666,12 +34224,6 @@
     "NSI/chapitres/TNSI-STRUCTURES-DONNEES/exercices/TNSI-STRUCT-EX-050.tex"
   ],
   "per_chapter": {
-    "1NSI-ALGO-PARCOURS-TRIS": {
-      "BOILERPLATE_ONLY": 7,
-      "CAPACITY_MISREPRESENTING_CLONE": 19,
-      "CROSS_MANUAL_CONTAMINATION": 1,
-      "TOTAL": 27
-    },
     "1NSI-ARCHITECTURE-OS": {
       "CAPACITY_MISREPRESENTING_CLONE": 60,
       "TOTAL": 60
@@ -35785,11 +34337,10 @@
   },
   "per_manual": {
     "1NSI": {
-      "BOILERPLATE_ONLY": 13,
-      "CAPACITY_MISREPRESENTING_CLONE": 482,
-      "CROSS_MANUAL_CONTAMINATION": 1,
+      "BOILERPLATE_ONLY": 6,
+      "CAPACITY_MISREPRESENTING_CLONE": 463,
       "REDUNDANT_SAME_CAPACITY": 15,
-      "TOTAL": 511
+      "TOTAL": 484
     },
     "1SPE": {
       "REDUNDANT_SAME_CAPACITY": 18,

@@ -1,0 +1,59 @@
+% META: {"id": "1NSI-ADGK-RE-C2-CORRIGE", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "corrige", "exercice_ref": "1NSI-ADGK-RE-C2", "capacites": ["P-ALGO-05"], "capacites_codes": ["C2"], "status": "generated"}
+% BEGIN-VERIFY
+% def rendu_monnaie(systeme, somme):
+%     pieces = []
+%     for piece in systeme:
+%         while somme >= piece:
+%             pieces.append(piece)
+%             somme = somme - piece
+%     return pieces
+% assert rendu_monnaie([10, 5, 2, 1], 18) == [10, 5, 2, 1]
+% assert sum(rendu_monnaie([10, 5, 2, 1], 18)) == 18
+% assert rendu_monnaie([6, 4, 1], 8) == [6, 1, 1]
+% assert sum(rendu_monnaie([6, 4, 1], 8)) == 8
+% assert len(rendu_monnaie([6, 4, 1], 8)) == 3
+% assert sum([4, 4]) == 8
+% assert len([4, 4]) == 2 < 3
+% assert [6, 4, 1] == sorted([6, 4, 1], reverse=True)
+% END-VERIFY
+
+\begin{corrige}{1NSI-ADGK-RE-C2-EX1}
+
+\textbf{1.} Avec \lstinline{[10, 5, 2, 1]} et $18$ : l'algorithme prend $10$ (reste $8$),
+puis $5$ (reste $3$), puis $2$ (reste $1$), puis $1$ (reste $0$). Il renvoie
+\lstinline{[10, 5, 2, 1]}, soit \textbf{4 pièces}. C'est bien le minimum possible dans ce
+système.
+
+\textbf{2.} Avec \lstinline{[6, 4, 1]} et $8$ : l'algorithme prend $6$ (reste $2$), ne peut
+pas prendre $4$, puis prend $1$ et $1$. Il renvoie \lstinline{[6, 1, 1]}, soit
+\textbf{3 pièces}.
+
+\textbf{3.} La solution \lstinline{[4, 4]} donne bien $8$ avec seulement \textbf{2 pièces}.
+L'algorithme glouton n'a donc pas trouvé la meilleure solution. On en conclut qu'un
+algorithme glouton ne garantit pas l'optimalité : son résultat dépend du système de pièces,
+et il existe des systèmes où il échoue à être optimal.
+
+Le glouton a été piégé par son premier choix : en prenant $6$, il s'interdit d'utiliser $4$,
+alors que c'est précisément la pièce qu'il fallait prendre deux fois. Un choix localement
+meilleur n'est pas toujours globalement meilleur — c'est la définition même d'un algorithme
+glouton, et sa limite.
+
+\textbf{4.} Non, l'algorithme n'est pas faux. Il fait exactement ce qu'il annonce : il
+construit \textbf{une} solution valide — la somme des pièces rendues fait bien $8$ — en
+faisant à chaque étape le choix qui semble le meilleur sur le moment. Ce qui serait faux,
+c'est d'\textbf{affirmer} qu'il donne toujours la solution minimale. Il faut distinguer :
+\begin{itemize}
+  \item \textbf{correction} : l'algorithme rend bien la somme demandée — c'est vrai ici ;
+  \item \textbf{optimalité} : il utilise le plus petit nombre de pièces possible — c'est
+    faux dans le système \lstinline{[6, 4, 1]}.
+\end{itemize}
+
+\textbf{5.} L'affirmation est \textbf{fausse}, et le contre-exemple est celui de la question
+$2$ : le système \lstinline{[6, 4, 1]} est déjà trié par ordre décroissant, et le glouton
+n'y est pourtant pas optimal. Le tri décroissant est nécessaire au bon fonctionnement de
+l'algorithme, mais il ne suffit pas à garantir l'optimalité : celle-ci dépend des
+\textbf{valeurs} du système, pas de leur ordre de présentation. Le système européen
+$1, 2, 5, 10, 20, 50$ a la propriété d'être optimal pour le glouton ; ce n'est pas une
+propriété générale.
+
+\end{corrige}

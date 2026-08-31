@@ -1,0 +1,76 @@
+% META: {"id": "1NSI-APT-RE-C4-CORRIGE", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige", "exercice_ref": "1NSI-APT-RE-C4", "capacites": ["P-ALGO-02C"], "capacites_codes": ["C4"], "status": "generated"}
+% BEGIN-VERIFY
+% def etats(tableau):
+%     tableau = tableau[:]
+%     vus = []
+%     for i in range(1, len(tableau)):
+%         vus.append((i, tableau[:], tableau[:i]))
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%         tableau[j + 1] = valeur
+%     return vus
+% vus = etats([5, 2, 9, 1, 7])
+% assert [e[1] for e in vus] == [[5, 2, 9, 1, 7], [2, 5, 9, 1, 7], [2, 5, 9, 1, 7], [1, 2, 5, 9, 7]]
+% assert [e[2] for e in vus] == [[5], [2, 5], [2, 5, 9], [1, 2, 5, 9]]
+% for _i, complet, zone in vus:
+%     assert zone == sorted(zone)
+% assert [2, 5, 9, 1, 7] != sorted([2, 5, 9, 1, 7])
+% END-VERIFY
+
+\begin{corrige}{1NSI-APT-RE-C4-EX1}
+
+\textbf{1.} Au début du tour $i=3$, le tableau complet vaut \lstinline{[2, 5, 9, 1, 7]}. Il
+n'est manifestement \textbf{pas} trié : $9$ précède $1$. L'énoncé proposé est donc faux.
+
+\textbf{2.} Non. Une preuve par invariant repose entièrement sur le fait que la propriété
+est vraie à chaque tour ; si elle est fausse dès le deuxième, l'étape de conservation ne
+peut pas être démontrée et la conclusion ne peut pas être tirée. Un invariant faux ne
+prouve rien — il donne seulement l'illusion d'une preuve. C'est plus dangereux qu'une
+absence de preuve, car on croit alors la correction établie.
+
+\textbf{3.} Il faut borner la zone : \emph{au début de chaque itération $i$, le
+sous-tableau \lstinline{tableau[0:i]} contient les $i$ premiers éléments d'origine, rangés
+en ordre croissant.} Vérification sur les quatre tours : \lstinline{[5]},
+\lstinline{[2, 5]}, \lstinline{[2, 5, 9]}, \lstinline{[1, 2, 5, 9]} — toutes ces zones sont
+triées. La propriété ne parle que du début du tableau, et c'est exactement ce dont la
+preuve a besoin.
+
+\textbf{4.} Les deux erreurs :
+\begin{itemize}
+  \item $i$ \textbf{croît} de $1$ à $n-1$ ; il ne décroît pas. Un variant doit décroître
+    strictement à chaque tour pour garantir l'arrêt.
+  \item Un \textbf{variant} sert à prouver la \textbf{terminaison}, alors que la question
+    posée portait sur la \textbf{correction}, qui relève de l'\textbf{invariant}. Même
+    corrigée, cette phrase répondrait à une autre question.
+\end{itemize}
+Pour la boucle \lstinline{for} externe, la terminaison est d'ailleurs immédiate : elle
+s'exécute un nombre de tours fixé à l'avance. C'est la boucle \lstinline{while} interne qui
+demande un variant, et l'on prend $V = j + 1$.
+
+\textbf{5.}
+\begin{python}
+def tri_insertion_verifie(tableau):
+    tableau = tableau[:]
+    for i in range(1, len(tableau)):
+        zone = tableau[:i]
+        assert zone == sorted(zone), "invariant rompu"
+        valeur = tableau[i]
+        j = i - 1
+        while j >= 0 and tableau[j] > valeur:
+            tableau[j + 1] = tableau[j]
+            j = j - 1
+        tableau[j + 1] = valeur
+    return tableau
+
+tri_insertion_verifie([5, 2, 9, 1, 7])   # renvoie [1, 2, 5, 7, 9]
+\end{python}
+Aucune assertion ne se déclenche. En remplaçant \lstinline{tableau[:i]} par
+\lstinline{tableau} — l'énoncé faux de départ — l'assertion se déclenche dès le deuxième
+tour : la machine détecte l'erreur immédiatement. Attention toutefois : ce contrôle ne
+constitue pas une preuve, il ne teste qu'un seul tableau. Il sert à éliminer un énoncé
+faux, pas à établir un énoncé vrai.
+
+\end{corrige}

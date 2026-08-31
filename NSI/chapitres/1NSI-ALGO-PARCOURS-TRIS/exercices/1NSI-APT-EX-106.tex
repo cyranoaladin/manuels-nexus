@@ -1,0 +1,66 @@
+% META: {"id": "1NSI-APT-EX-106", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "exercice", "capacites": ["P-ALGO-02D"], "capacites_codes": ["C6"], "parcours": 2, "competences": ["raisonner", "communiquer"], "gestes": ["prouver_invariant", "construire_contre_exemple"], "duree_min": 25, "methodes": ["M6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-106.tex", "corrige_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-106.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def selection_avec_clauses(tableau):
+%     tableau = tableau[:]
+%     n = len(tableau)
+%     for i in range(n - 1):
+%         zone = tableau[:i]
+%         assert zone == sorted(zone)
+%         if zone:
+%             assert max(zone) <= min(tableau[i:])
+%         indice_min = i
+%         for j in range(i + 1, n):
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%     return tableau
+% assert selection_avec_clauses([5, 2, 9, 1, 7]) == [1, 2, 5, 7, 9]
+% def insertion_avec_clauses(tableau):
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         zone = tableau[:i]
+%         assert zone == sorted(zone)
+%         if zone:
+%             assert max(zone) <= min(tableau[i:])
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%         tableau[j + 1] = valeur
+%     return tableau
+% rompue = False
+% try:
+%     insertion_avec_clauses([5, 2, 9, 1, 7])
+% except AssertionError:
+%     rompue = True
+% assert rompue
+% assert insertion_avec_clauses([1, 2, 5, 7, 9]) == [1, 2, 5, 7, 9]
+% END-VERIFY
+\begin{exercice}{1NSI-APT-EX-106}{2}{25}
+On veut prouver la correction du tri par sélection. On propose deux énoncés d'invariant
+pour la boucle externe, au début de l'itération $i$ :
+
+\medskip
+\textbf{Énoncé A} — \lstinline{tableau[0:i]} est trié.
+
+\textbf{Énoncé B} — \lstinline{tableau[0:i]} est trié, \textbf{et} chacun de ses éléments
+est inférieur ou égal à chacun des éléments de \lstinline{tableau[i:n]}.
+\medskip
+
+\begin{enumerate}
+  \item Vérifier que l'énoncé A est vrai pour le tri par sélection, en relevant
+    \lstinline{tableau[0:i]} au début de chaque tour sur \lstinline{[5, 2, 9, 1, 7]}.
+  \item L'énoncé A suffit-il à conclure que le tableau est trié à la sortie ? Justifier.
+  \item Vérifier que l'énoncé B est également vrai pour le tri par sélection sur le même
+    tableau.
+  \item Écrire une version instrumentée de \lstinline{tri_selection} qui vérifie les deux
+    clauses de l'énoncé B par des \lstinline{assert} au début de chaque tour, et la faire
+    tourner.
+  \item Reprendre exactement ces deux \lstinline{assert} et les placer dans
+    \lstinline{tri_insertion}. Que se passe-t-il sur \lstinline{[5, 2, 9, 1, 7]} ? Sur
+    \lstinline{[1, 2, 5, 7, 9]} ? Qu'en conclure sur la différence entre les deux preuves ?
+  \item Rédiger la preuve complète de correction du tri par sélection avec l'énoncé B :
+    initialisation, conservation, conclusion.
+\end{enumerate}
+\end{exercice}

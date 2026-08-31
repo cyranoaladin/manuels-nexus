@@ -1,0 +1,45 @@
+% META: {"id": "1NSI-APT-RE-C2", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "remediation", "capacites": ["P-ALGO-01B"], "capacites_codes": ["C2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : le return place dans la boucle interrompt l'accumulation
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-APT-RE-C2-EX1}{1}{10}
+Un élève écrit la moyenne ainsi :
+\begin{python}
+def moyenne_bugue(tableau):
+    somme = 0
+    for element in tableau:
+        somme = somme + element
+        return somme / len(tableau)
+\end{python}
+\begin{enumerate}
+  \item Tester sur \lstinline{[4, 5, 9]}. Quel résultat obtient-on, et quel était le
+    résultat attendu ?
+  \item Sur quel type de tableau cette fonction donne-t-elle malgré tout la bonne réponse ?
+  \item Quelle différence d'indentation sépare le code bogué du code correct ? Expliquer ce
+    que cette seule différence change à l'exécution.
+  \item Corriger la fonction, puis ajouter le traitement du tableau vide.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def moyenne_bugue(tableau):
+%     somme = 0
+%     for element in tableau:
+%         somme = somme + element
+%         return somme / len(tableau)
+% assert moyenne_bugue([4, 5, 9]) == 4 / 3
+% assert moyenne_bugue([7]) == 7.0
+% assert moyenne_bugue([]) is None
+% def moyenne(tableau):
+%     if len(tableau) == 0:
+%         return None
+%     somme = 0
+%     for element in tableau:
+%         somme = somme + element
+%     return somme / len(tableau)
+% assert moyenne([4, 5, 9]) == 6.0
+% assert moyenne([7]) == 7.0
+% assert moyenne([]) is None
+% END-VERIFY

@@ -1,0 +1,61 @@
+% META: {"id": "1NSI-APT-ME-002", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "methode", "capacites": ["P-ALGO-01B"], "capacites_codes": ["C2"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Chercher un extremum ou calculer une moyenne en un seul parcours}
+\textbf{Quand l'utiliser ?} Quand tu dois produire \textbf{une} valeur résumant tout le
+tableau : le plus grand élément, le plus petit, la somme, la moyenne. Le schéma est
+toujours le même — un accumulateur, un parcours, un résultat.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item Traite d'abord le \textbf{tableau vide} : il n'a ni maximum ni moyenne. Décide
+    explicitement quoi renvoyer (ici \lstinline{None}) et écris-le en première ligne.
+  \item Initialise l'accumulateur avec une valeur \textbf{issue du tableau} pour un
+    extremum (\lstinline{tableau[0]}), avec $0$ pour une somme.
+  \item Parcours les éléments restants et mets l'accumulateur à jour : remplacement si
+    l'élément est meilleur, addition pour une somme.
+  \item Renvoie l'accumulateur — pour la moyenne, divise la somme par
+    \lstinline{len(tableau)}.
+\end{enumerate}
+
+\textbf{Exemple :}
+\begin{python}
+def maximum(tableau):
+    if len(tableau) == 0:
+        return None
+    plus_grand = tableau[0]
+    for element in tableau:
+        if element > plus_grand:
+            plus_grand = element
+    return plus_grand
+
+def moyenne(tableau):
+    if len(tableau) == 0:
+        return None
+    somme = 0
+    for element in tableau:
+        somme = somme + element
+    return somme / len(tableau)
+
+maximum([7, -3, 9, 2])    # renvoie 9
+moyenne([4, 5, 9])        # renvoie 6.0
+\end{python}
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item Initialiser \lstinline{plus_grand = 0} : sur un tableau de valeurs toutes
+    négatives, la fonction renvoie $0$, qui n'est pas dans le tableau. L'initialisation
+    doit venir du tableau lui-même.
+  \item Oublier le tableau vide : \lstinline{tableau[0]} lève alors
+    \lstinline{IndexError}, et la division par \lstinline{len(tableau)} lève
+    \lstinline{ZeroDivisionError}.
+  \item Utiliser \lstinline{//} au lieu de \lstinline{/} pour la moyenne : la moyenne de
+    \lstinline{[4, 5]} vaut $4.5$, pas $4$.
+  \item Renvoyer à l'intérieur de la boucle : le résultat ne tiendrait alors compte que du
+    début du tableau.
+\end{itemize}
+
+\textbf{Vérifier :} teste sur un tableau vide, un singleton, un tableau de valeurs toutes
+négatives, un tableau où le maximum est en dernière case, et vérifie que la moyenne de
+\lstinline{[4, 5]} vaut bien $4.5$.
+
+\textbf{S'entraîner :} exercices C2 du chapitre.
+\end{fichemethode}

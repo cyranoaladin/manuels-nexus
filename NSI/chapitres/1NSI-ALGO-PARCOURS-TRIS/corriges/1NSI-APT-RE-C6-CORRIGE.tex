@@ -1,0 +1,73 @@
+% META: {"id": "1NSI-APT-RE-C6-CORRIGE", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige", "exercice_ref": "1NSI-APT-RE-C6", "capacites": ["P-ALGO-02D"], "capacites_codes": ["C6"], "status": "generated"}
+% BEGIN-VERIFY
+% def selection_zones(tableau):
+%     tableau = tableau[:]
+%     n = len(tableau)
+%     vus = []
+%     for i in range(n - 1):
+%         vus.append((tableau[:i], tableau[i:]))
+%         indice_min = i
+%         for j in range(i + 1, n):
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%     return vus
+% vus = selection_zones([5, 2, 9, 1, 7])
+% assert [z for z, _r in vus] == [[], [1], [1, 2], [1, 2, 5]]
+% for zone, reste in vus:
+%     assert zone == sorted(zone)
+%     if zone and reste:
+%         assert max(zone) <= min(reste)
+% def insertion_zones(tableau):
+%     tableau = tableau[:]
+%     vus = []
+%     for i in range(1, len(tableau)):
+%         vus.append((i, tableau[:i], tableau[i:]))
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%         tableau[j + 1] = valeur
+%     return vus
+% ins = insertion_zones([5, 2, 9, 1, 7])
+% assert [z for _i, z, _r in ins] == [[5], [2, 5], [2, 5, 9], [1, 2, 5, 9]]
+% assert max([2, 5, 9]) == 9 and min([1, 7]) == 1
+% assert 9 > 1
+% END-VERIFY
+
+\begin{corrige}{1NSI-APT-RE-C6-EX1}
+
+\textbf{1.} Les zones \lstinline{tableau[0:i]} au début de chaque tour du tri par sélection
+sont \lstinline{[]}, \lstinline{[1]}, \lstinline{[1, 2]}, \lstinline{[1, 2, 5]}. Toutes sont
+triées : l'énoncé est bien vrai.
+
+\textbf{2.} À l'étape de conservation, on sait que \lstinline{tableau[0:i]} est trié et que
+l'algorithme place en case $i$ la valeur $m$, minimum de \lstinline{tableau[i:n]}. Pour
+conclure que \lstinline{tableau[0:i+1]} est trié, il faut savoir que $m$ est
+\textbf{supérieur ou égal} à tous les éléments déjà rangés. Or la première clause ne dit
+rien de la comparaison entre la zone triée et le reste : avec elle seule, rien n'interdit
+que $m$ soit plus petit que le dernier élément placé, auquel cas l'ajouter à la fin
+romprait l'ordre. La preuve s'arrête là.
+
+\textbf{3.} Clause manquante : \emph{chacun des éléments de \lstinline{tableau[0:i]} est
+inférieur ou égal à chacun des éléments de \lstinline{tableau[i:n]}.} L'inégalité doit être
+large : avec une inégalité stricte, l'énoncé deviendrait faux dès qu'une valeur apparaît
+deux fois dans le tableau.
+
+\textbf{4.} Non, elle est fausse pour le tri par insertion. Au début du tour $i=3$ sur
+\lstinline{[5, 2, 9, 1, 7]}, la zone triée est \lstinline{[2, 5, 9]} et les éléments
+restants sont \lstinline{[1, 7]}. On a $\max = 9$ et $\min = 1$ : la clause exigerait
+$9 \leqslant 1$, ce qui est faux. Le $1$ devra d'ailleurs traverser toute la zone au tour
+suivant — c'est précisément ce que la clause interdit dans le tri par sélection.
+
+\textbf{5.} Les deux algorithmes trient tous les deux, mais leurs preuves ne sont
+\textbf{pas} interchangeables. Le tri par sélection place chaque élément à sa position
+\textbf{définitive} : ce qui est rangé ne bougera plus. Le tri par insertion garantit
+seulement que le début est ordonné entre ses éléments, et il peut avoir à décaler des
+éléments déjà rangés.
+
+Un même résultat n'implique donc pas une même preuve. Recopier l'invariant d'un algorithme
+sur un autre produit, au mieux un énoncé insuffisant, au pire un énoncé faux.
+
+\end{corrige}

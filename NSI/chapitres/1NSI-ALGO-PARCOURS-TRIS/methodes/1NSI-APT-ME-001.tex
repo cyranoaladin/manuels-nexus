@@ -1,0 +1,47 @@
+% META: {"id": "1NSI-APT-ME-001", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "methode", "capacites": ["P-ALGO-01A"], "capacites_codes": ["C1"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M1}{Rechercher une occurrence par parcours séquentiel}
+\textbf{Quand l'utiliser ?} Quand tu cherches si une valeur est présente dans un tableau
+\textbf{quelconque} — trié ou non — et, le cas échéant, à quel indice. C'est la seule
+recherche possible quand le tableau n'est pas trié.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item Parcours les indices dans l'ordre avec \lstinline{for i in range(len(tableau))}.
+  \item À chaque tour, compare \lstinline{tableau[i]} à la valeur cherchée.
+  \item Dès que l'égalité est vraie, \textbf{renvoie immédiatement} \lstinline{i} : inutile de
+    poursuivre, la première occurrence est trouvée.
+  \item Si la boucle se termine sans avoir rien renvoyé, aucune case ne convenait :
+    renvoie une valeur convenue pour l'absence, ici \lstinline{None}.
+\end{enumerate}
+
+\textbf{Exemple :}
+\begin{python}
+def recherche_occurrence(tableau, valeur):
+    for i in range(len(tableau)):
+        if tableau[i] == valeur:
+            return i
+    return None
+
+t = [7, 3, 9, 3, 1]
+recherche_occurrence(t, 3)    # renvoie 1 : la PREMIERE occurrence
+recherche_occurrence(t, 8)    # renvoie None
+\end{python}
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item Renvoyer \lstinline{0} pour signaler l'absence : $0$ est un indice valide, et
+    l'appelant ne peut plus distinguer « trouvé en case $0$ » de « absent ».
+  \item Écrire \lstinline{return} dans une branche \lstinline{else} à l'intérieur de la
+    boucle : la fonction sortirait dès la première case différente, sans examiner les
+    suivantes.
+  \item Croire que la fonction renvoie \textbf{toutes} les occurrences : elle s'arrête à la
+    première. Pour toutes les obtenir, il faut accumuler les indices dans une liste et ne
+    renvoyer qu'à la fin.
+\end{itemize}
+
+\textbf{Vérifier :} teste sur un tableau vide (doit renvoyer \lstinline{None}), sur la
+première case, sur la dernière case, sur une valeur absente, et sur un tableau où la valeur
+apparaît deux fois (doit renvoyer le plus petit indice).
+
+\textbf{S'entraîner :} exercices C1 du chapitre.
+\end{fichemethode}

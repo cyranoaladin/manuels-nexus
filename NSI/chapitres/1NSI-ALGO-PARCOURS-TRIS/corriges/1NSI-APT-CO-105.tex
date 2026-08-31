@@ -1,0 +1,94 @@
+% META: {"id": "1NSI-APT-CO-105", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige", "exercice_ref": "1NSI-APT-EX-105", "capacites": ["P-ALGO-02B"], "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def tri_selection(tableau):
+%     tableau = tableau[:]
+%     n = len(tableau)
+%     for i in range(n - 1):
+%         indice_min = i
+%         for j in range(i + 1, n):
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%     return tableau
+% assert tri_selection([5, 2, 9, 1, 7]) == [1, 2, 5, 7, 9]
+% assert tri_selection([]) == []
+% assert tri_selection([3]) == [3]
+% assert tri_selection([2, 2, 1]) == [1, 2, 2]
+% def comparaisons(tableau):
+%     n = len(tableau)
+%     total = 0
+%     tableau = tableau[:]
+%     for i in range(n - 1):
+%         indice_min = i
+%         for j in range(i + 1, n):
+%             total += 1
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%     return total
+% assert comparaisons([5, 2, 9, 1, 7]) == 10
+% def indices_min(tableau):
+%     tableau = tableau[:]
+%     n = len(tableau)
+%     vus = []
+%     for i in range(n - 1):
+%         indice_min = i
+%         for j in range(i + 1, n):
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         vus.append(indice_min)
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%     return vus
+% assert indices_min([5, 2, 9, 1, 7]) == [3, 1, 3, 4]
+% assert comparaisons([1, 2, 5, 7, 9]) == 10
+% assert comparaisons([9, 7, 5, 2, 1]) == 10
+% assert 10 == 4 + 3 + 2 + 1
+% END-VERIFY
+\begin{corrige}{1NSI-APT-EX-105}
+
+\textbf{1.} Tour par tour :
+\begin{itemize}
+  \item $i=0$ : \lstinline{indice_min} $=3$ (valeur $1$) ; après échange
+    \lstinline{[1, 2, 9, 5, 7]}.
+  \item $i=1$ : \lstinline{indice_min} $=1$ (valeur $2$) ; après échange
+    \lstinline{[1, 2, 9, 5, 7]}.
+  \item $i=2$ : \lstinline{indice_min} $=3$ (valeur $5$) ; après échange
+    \lstinline{[1, 2, 5, 9, 7]}.
+  \item $i=3$ : \lstinline{indice_min} $=4$ (valeur $7$) ; après échange
+    \lstinline{[1, 2, 5, 7, 9]}.
+\end{itemize}
+
+\textbf{2.} Le tour $i=1$ effectue un échange sans effet : \lstinline{indice_min} vaut $1$,
+c'est-à-dire $i$ lui-même. L'instruction échange la case $1$ avec elle-même. Cela se
+produit chaque fois que le premier élément de la zone non triée en est déjà le minimum.
+
+\textbf{3.}
+\begin{python}
+def tri_selection(tableau):
+    tableau = tableau[:]
+    n = len(tableau)
+    for i in range(n - 1):
+        indice_min = i
+        for j in range(i + 1, n):
+            if tableau[j] < tableau[indice_min]:
+                indice_min = j
+        tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+    return tableau
+\end{python}
+\lstinline{tri_selection([5, 2, 9, 1, 7])} renvoie \lstinline{[1, 2, 5, 7, 9]}.
+L'initialisation \lstinline{indice_min = i} doit rester \textbf{avant} la boucle sur $j$ :
+placée à l'intérieur, elle effacerait à chaque tour le meilleur candidat trouvé.
+
+\textbf{4.} Le total est de $4+3+2+1 = 10$ comparaisons. Sur \lstinline{[1, 2, 5, 7, 9]}
+déjà trié : $10$. Sur \lstinline{[9, 7, 5, 2, 1]} trié à l'envers : $10$ également.
+
+\textbf{5.} Le nombre de comparaisons du tri par sélection ne dépend \textbf{pas} des
+valeurs : les deux boucles \lstinline{for} parcourent des intervalles fixés par la seule
+taille du tableau. Il vaut toujours $\frac{n(n-1)}{2}$, soit $10$ pour $n=5$.
+
+Le tri par insertion, lui, va de $0$ à $10$ décalages selon les données. Il est donc
+nettement meilleur sur un tableau presque trié, alors que le tri par sélection ne tire
+aucun profit d'un tableau déjà en ordre. En revanche, le tri par sélection effectue au plus
+$n-1$ échanges, ce qui peut compter lorsque déplacer un élément coûte cher.
+
+\end{corrige}

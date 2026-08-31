@@ -1,0 +1,60 @@
+% META: {"id": "1NSI-APT-CO-101", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige", "exercice_ref": "1NSI-APT-EX-101", "capacites": ["P-ALGO-01A"], "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def recherche_occurrence(tableau, valeur):
+%     for i in range(len(tableau)):
+%         if tableau[i] == valeur:
+%             return i
+%     return None
+% def toutes_les_occurrences(tableau, valeur):
+%     indices = []
+%     for i in range(len(tableau)):
+%         if tableau[i] == valeur:
+%             indices.append(i)
+%     return indices
+% t = [12, 7, 30, 7, 4, 30]
+% assert recherche_occurrence(t, 7) == 1
+% assert recherche_occurrence(t, 5) is None
+% assert len(t) == 6
+% assert toutes_les_occurrences(t, 7) == [1, 3]
+% assert toutes_les_occurrences(t, 5) == []
+% assert recherche_occurrence([], 5) is None
+% END-VERIFY
+\begin{corrige}{1NSI-APT-EX-101}
+
+\textbf{1.} La fonction renvoie \lstinline{1}. Deux tours ont été exécutés : au tour
+$i=0$, \lstinline{tableau[0]} vaut $12$, différent de $7$ ; au tour $i=1$,
+\lstinline{tableau[1]} vaut $7$, et le \lstinline{return} interrompt immédiatement la
+boucle.
+
+\textbf{2.} La fonction renvoie \lstinline{None}. Six tours ont été exécutés, soit
+\lstinline{len(tableau)}. C'est le maximum possible : pour conclure qu'une valeur est
+\textbf{absente}, il faut avoir examiné \textbf{toutes} les cases — aucune case non lue ne
+permettrait d'exclure qu'elle contienne la valeur. La recherche infructueuse est donc
+toujours le cas le plus coûteux.
+
+\textbf{3.} Non, elle ne le signale pas. Le \lstinline{return i} s'exécute dès la
+\textbf{première} égalité rencontrée et sort de la fonction : les cases suivantes ne sont
+jamais examinées. La fonction répond à la question « où se trouve la première occurrence ? »
+et non « combien y en a-t-il ? ».
+
+\textbf{4.} Il faut renoncer au renvoi immédiat et accumuler les indices :
+\begin{python}
+def toutes_les_occurrences(tableau, valeur):
+    indices = []
+    for i in range(len(tableau)):
+        if tableau[i] == valeur:
+            indices.append(i)
+    return indices
+\end{python}
+\lstinline{toutes_les_occurrences(tableau, 7)} renvoie \lstinline{[1, 3]} et
+\lstinline{toutes_les_occurrences(tableau, 30)} renvoie \lstinline{[2, 5]}. Lorsque la
+valeur est absente, la fonction renvoie la \textbf{liste vide} \lstinline{[]} — et non
+\lstinline{None} : la réponse « aucune occurrence » est une liste sans élément, ce qui
+permet à l'appelant d'écrire \lstinline{len(resultat)} sans cas particulier.
+
+\textbf{5.} Elle renvoie \lstinline{None}. Avec un tableau vide, \lstinline{len(tableau)}
+vaut $0$, donc \lstinline{range(0)} est vide : le corps de la boucle ne s'exécute
+\textbf{aucune} fois, et l'exécution atteint directement le \lstinline{return None} final.
+Aucun accès \lstinline{tableau[i]} n'a lieu, il n'y a donc pas d'erreur d'indice.
+
+\end{corrige}

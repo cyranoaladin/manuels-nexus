@@ -1,0 +1,60 @@
+% META: {"id": "1NSI-APT-RE-C3", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "remediation", "capacites": ["P-ALGO-02A"], "capacites_codes": ["C3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : la valeur a inserer n'est pas mise de cote
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-APT-RE-C3-EX1}{1}{12}
+Un élève écrit le tri par insertion sans mettre la valeur de côté : il relit
+\lstinline{tableau[i]} à chaque fois qu'il en a besoin.
+\begin{python}
+def tri_insertion_bugue(tableau):
+    tableau = tableau[:]
+    for i in range(1, len(tableau)):
+        j = i - 1
+        while j >= 0 and tableau[j] > tableau[i]:
+            tableau[j + 1] = tableau[j]
+            j = j - 1
+        tableau[j + 1] = tableau[i]
+    return tableau
+\end{python}
+\begin{enumerate}
+  \item Tester sur \lstinline{[1, 0]}. Quel tableau obtient-on ? Comparer à
+    \lstinline{sorted([1, 0])}.
+  \item Le tableau renvoyé contient-il les mêmes valeurs que le tableau de départ ?
+    Qu'est-il arrivé au $0$ ?
+  \item Dérouler le tour $i=1$ instruction par instruction. Que contient
+    \lstinline{tableau[1]} au moment où la dernière ligne le relit ? Qui a écrit cette
+    valeur ?
+  \item Tester sur \lstinline{[0, 2, 1]}. Le résultat confirme-t-il le diagnostic ?
+  \item Corriger la fonction en une seule ligne, et expliquer pourquoi cette ligne est
+    indispensable.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def bugue(tableau):
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         j = i - 1
+%         while j >= 0 and tableau[j] > tableau[i]:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%         tableau[j + 1] = tableau[i]
+%     return tableau
+% assert bugue([1, 0]) == [1, 1]
+% assert bugue([0, 2, 1]) == [0, 2, 2]
+% assert bugue([1, 2, 3]) == [1, 2, 3]
+% def correct(tableau):
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%         tableau[j + 1] = valeur
+%     return tableau
+% assert correct([1, 0]) == [0, 1]
+% assert correct([0, 2, 1]) == [0, 1, 2]
+% END-VERIFY

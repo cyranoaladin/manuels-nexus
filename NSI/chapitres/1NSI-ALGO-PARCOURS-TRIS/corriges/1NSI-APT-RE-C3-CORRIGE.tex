@@ -1,0 +1,83 @@
+% META: {"id": "1NSI-APT-RE-C3-CORRIGE", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige", "exercice_ref": "1NSI-APT-RE-C3", "capacites": ["P-ALGO-02A"], "capacites_codes": ["C3"], "status": "generated"}
+% BEGIN-VERIFY
+% def bugue(tableau):
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         j = i - 1
+%         while j >= 0 and tableau[j] > tableau[i]:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%         tableau[j + 1] = tableau[i]
+%     return tableau
+% assert bugue([1, 0]) == [1, 1]
+% assert bugue([0, 2, 1]) == [0, 2, 2]
+% assert 0 not in bugue([1, 0])
+% assert sorted(bugue([1, 0])) != sorted([1, 0])
+% def correct(tableau):
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%         tableau[j + 1] = valeur
+%     return tableau
+% assert correct([1, 0]) == [0, 1]
+% assert correct([0, 2, 1]) == [0, 1, 2]
+% assert sorted(correct([1, 0])) == sorted([1, 0])
+% END-VERIFY
+
+\begin{corrige}{1NSI-APT-RE-C3-EX1}
+
+\textbf{1.} \lstinline{tri_insertion_bugue([1, 0])} renvoie \lstinline{[1, 1]}, alors que
+\lstinline{sorted([1, 0])} vaut \lstinline{[0, 1]}.
+
+\textbf{2.} Non : le tableau renvoyé ne contient plus les mêmes valeurs. Le $0$ a
+\textbf{disparu} et le $1$ apparaît deux fois. C'est un symptôme plus grave qu'un simple
+mauvais ordre : un tri doit se contenter de \textbf{permuter} les éléments, jamais d'en
+créer ni d'en perdre.
+
+\textbf{3.} Tour $i=1$ :
+\begin{itemize}
+  \item \lstinline{j = 0} ;
+  \item test : \lstinline{tableau[0] > tableau[1]}, soit $1 > 0$ — vrai ;
+  \item \lstinline{tableau[1] = tableau[0]} : la case $1$ reçoit $1$. \textbf{Le $0$ vient
+    d'être écrasé} — et c'était la seule copie de cette valeur ;
+  \item \lstinline{j = -1}, la boucle s'arrête ;
+  \item \lstinline{tableau[0] = tableau[1]} : la dernière ligne relit \lstinline{tableau[1]},
+    qui contient désormais $1$ et non plus $0$.
+\end{itemize}
+La valeur relue a été écrite par le décalage lui-même, deux instructions plus tôt. La
+fonction insère donc la valeur qu'elle vient de déplacer, au lieu de celle qu'elle voulait
+insérer.
+
+\textbf{4.} \lstinline{tri_insertion_bugue([0, 2, 1])} renvoie \lstinline{[0, 2, 2]} : le
+$1$ a disparu et le $2$ est dupliqué. Le diagnostic est confirmé — c'est bien la valeur à
+insérer qui est perdue, à chaque fois qu'un décalage a lieu. Sur
+\lstinline{[1, 2, 3]}, déjà trié, aucun décalage n'a lieu et la fonction renvoie le bon
+résultat : l'erreur reste invisible tant qu'on ne teste pas un tableau désordonné.
+
+\textbf{5.} Il faut mettre la valeur de côté \textbf{avant} tout décalage, et n'utiliser
+que cette copie :
+\begin{python}
+valeur = tableau[i]     # la ligne indispensable
+\end{python}
+\begin{python}
+def tri_insertion(tableau):
+    tableau = tableau[:]
+    for i in range(1, len(tableau)):
+        valeur = tableau[i]
+        j = i - 1
+        while j >= 0 and tableau[j] > valeur:
+            tableau[j + 1] = tableau[j]
+            j = j - 1
+        tableau[j + 1] = valeur
+    return tableau
+\end{python}
+La case $i$ est précisément celle que le premier décalage va écraser : elle sert de trou
+pour faire de la place. Sa valeur doit donc être sauvegardée ailleurs avant qu'on y touche.
+C'est la règle générale — quand on déplace des éléments dans un tableau, toute valeur dont
+on aura besoin plus tard doit être copiée avant le premier écrasement.
+
+\end{corrige}

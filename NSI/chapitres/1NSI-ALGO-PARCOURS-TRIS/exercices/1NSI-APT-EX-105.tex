@@ -1,0 +1,45 @@
+% META: {"id": "1NSI-APT-EX-105", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "exercice", "capacites": ["P-ALGO-02B"], "capacites_codes": ["C5"], "parcours": 1, "competences": ["analyser", "representer"], "gestes": ["tracer_execution", "comparer_algorithmes"], "duree_min": 20, "methodes": ["M5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-105.tex", "corrige_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-105.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def tri_selection_trace(tableau):
+%     tableau = tableau[:]
+%     n = len(tableau)
+%     etats = []
+%     comparaisons = 0
+%     for i in range(n - 1):
+%         indice_min = i
+%         for j in range(i + 1, n):
+%             comparaisons += 1
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%         etats.append((i, indice_min, tableau[:]))
+%     return tableau, etats, comparaisons
+% resultat, etats, comparaisons = tri_selection_trace([5, 2, 9, 1, 7])
+% assert resultat == [1, 2, 5, 7, 9]
+% assert [e[1] for e in etats] == [3, 1, 3, 4]
+% assert etats[0][2] == [1, 2, 9, 5, 7]
+% assert etats[1][2] == [1, 2, 9, 5, 7]
+% assert etats[2][2] == [1, 2, 5, 9, 7]
+% assert etats[3][2] == [1, 2, 5, 7, 9]
+% assert comparaisons == 10
+% _, _, c_trie = tri_selection_trace([1, 2, 5, 7, 9])
+% assert c_trie == 10
+% _, _, c_envers = tri_selection_trace([9, 7, 5, 2, 1])
+% assert c_envers == 10
+% END-VERIFY
+\begin{exercice}{1NSI-APT-EX-105}{1}{20}
+On applique \lstinline{tri_selection} du cours au tableau \lstinline{[5, 2, 9, 1, 7]}.
+\begin{enumerate}
+  \item Pour chaque tour $i$ de la boucle externe (de $0$ à $3$), donner la valeur finale
+    de \lstinline{indice_min} et l'état du tableau après l'échange.
+  \item Un tour effectue un échange sans effet : lequel ? Que vaut alors
+    \lstinline{indice_min} ?
+  \item Écrire \lstinline{tri_selection} sans regarder le cours et vérifier le résultat.
+  \item Compter le nombre de comparaisons \lstinline{tableau[j] < tableau[indice_min]}
+    effectuées au total. Refaire ce comptage sur \lstinline{[1, 2, 5, 7, 9]} puis sur
+    \lstinline{[9, 7, 5, 2, 1]}.
+  \item Comparer avec le tri par insertion de l'exercice \lstinline{1NSI-APT-EX-103}, dont
+    le nombre de décalages passait de $0$ à $10$ selon les données. Que peut-on dire du
+    coût du tri par sélection ?
+\end{enumerate}
+\end{exercice}

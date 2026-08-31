@@ -1,0 +1,69 @@
+% META: {"id": "1NSI-APT-ME-006", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "methode", "capacites": ["P-ALGO-02D"], "capacites_codes": ["C6"], "methodes": ["M6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M6}{Décrire l'invariant de boucle du tri par sélection}
+\textbf{Quand l'utiliser ?} Quand l'énoncé demande de \textbf{prouver la correction} du tri
+par sélection. L'invariant y est plus fort que celui du tri par insertion, et c'est
+précisément ce qui fait la différence entre les deux preuves.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item Énonce l'invariant \textbf{en deux clauses} : \emph{au début de chaque itération $i$
+    de la boucle externe, (a) \lstinline{tableau[0:i]} est trié, et (b) tous ses éléments
+    sont inférieurs ou égaux à chacun des éléments de \lstinline{tableau[i:n]}.}
+  \item \textbf{Initialisation} : pour $i=0$, \lstinline{tableau[0:0]} est vide. Les deux
+    clauses sont vraies, la seconde parce qu'elle ne porte sur aucun élément.
+  \item \textbf{Conservation} : le tour $i$ place en case $i$ le minimum de
+    \lstinline{tableau[i:n]}. Cet élément est supérieur ou égal à tous ceux de
+    \lstinline{tableau[0:i]} par la clause (b), donc (a) reste vraie pour
+    \lstinline{tableau[0:i+1]} ; et il est inférieur ou égal à ce qui reste, donc (b) reste
+    vraie pour la nouvelle zone.
+  \item \textbf{Conclusion} : à la sortie, $i = n-1$ et le dernier élément est
+    nécessairement le plus grand. Le tableau entier est trié.
+\end{enumerate}
+
+\textbf{La différence à retenir :} le tri par insertion garantit seulement que le début est
+trié — un élément de la zone triée peut être plus grand qu'un élément restant, et devra
+être décalé plus tard. Le tri par sélection garantit en plus que le début est
+\textbf{définitivement} placé. C'est la clause (b), et elle est indispensable à la preuve.
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item N'énoncer que la clause (a) : elle ne suffit pas à conclure, car rien n'interdirait
+    à un élément restant d'être plus petit que la zone déjà triée.
+  \item Écrire la clause (b) avec une inégalité stricte : elle serait fausse dès qu'une
+    valeur apparaît deux fois dans le tableau.
+  \item Oublier l'initialisation en jugeant le cas $i=0$ « évident » : c'est le seul cas où
+    la clause (b) est vraie faute d'élément, et il mérite d'être dit.
+  \item Réutiliser tel quel l'invariant du tri par insertion : la preuve devient fausse.
+\end{itemize}
+
+\textbf{Exemple : les deux clauses dans la trace.}
+\begin{python}
+def tri_selection_verifie(tableau):
+    tableau = tableau[:]
+    n = len(tableau)
+    for i in range(n - 1):
+        # (a) tableau[0:i] est trie
+        zone = tableau[:i]
+        assert zone == sorted(zone), "clause (a) rompue"
+        # (b) tout element place est <= a tout element restant
+        if zone:
+            assert max(zone) <= min(tableau[i:]), "clause (b) rompue"
+        indice_min = i
+        for j in range(i + 1, n):
+            if tableau[j] < tableau[indice_min]:
+                indice_min = j
+        tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+    return tableau
+
+tri_selection_verifie([5, 2, 9, 1, 7])   # renvoie [1, 2, 5, 7, 9]
+\end{python}
+La clause (b) est celle qui distingue les deux preuves : elle serait \textbf{fausse} pour
+le tri par insertion. Remplace \lstinline{tri_selection_verifie} par le tri par insertion
+en gardant les deux assertions, et la seconde se déclenche.
+
+\textbf{Vérifier :} après chaque tour, affiche \lstinline{tableau[0:i+1]} et
+\lstinline{max(tableau[0:i+1]) <= min(tableau[i+1:])} — les deux clauses doivent se lire
+dans la trace.
+
+\textbf{S'entraîner :} exercices C6 du chapitre.
+\end{fichemethode}

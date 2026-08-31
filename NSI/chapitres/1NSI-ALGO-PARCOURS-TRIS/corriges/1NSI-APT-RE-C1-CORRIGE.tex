@@ -1,0 +1,52 @@
+% META: {"id": "1NSI-APT-RE-C1-CORRIGE", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige", "exercice_ref": "1NSI-APT-RE-C1", "capacites": ["P-ALGO-01A"], "capacites_codes": ["C1"], "status": "generated"}
+% BEGIN-VERIFY
+% def bugue(tableau, valeur):
+%     for i in range(len(tableau)):
+%         if tableau[i] == valeur:
+%             return i
+%         else:
+%             return None
+% assert bugue([7, 3, 9], 3) is None
+% assert bugue([7, 3, 9], 7) == 0
+% assert bugue([7, 3, 9], 9) is None
+% def correct(tableau, valeur):
+%     for i in range(len(tableau)):
+%         if tableau[i] == valeur:
+%             return i
+%     return None
+% assert correct([7, 3, 9], 3) == 1
+% assert correct([7, 3, 9], 9) == 2
+% assert correct([7, 3, 9], 5) is None
+% END-VERIFY
+
+\begin{corrige}{1NSI-APT-RE-C1-EX1}
+
+\textbf{1.} \lstinline{recherche_occurrence_bugue([7, 3, 9], 3)} renvoie \lstinline{None},
+alors que $3$ se trouve bien en case $1$. Le résultat est \textbf{faux}.
+
+\textbf{2.} Avec la valeur $7$, la fonction renvoie $0$, ce qui est correct. Un élève qui
+ne testerait que ce cas conclurait que sa fonction marche. Elle ne donne le bon résultat que
+lorsque la valeur cherchée occupe la \textbf{première} case — le seul cas où l'erreur est
+invisible. Un test doit donc toujours viser aussi le milieu, la fin, et l'absence.
+
+\textbf{3.} Un seul tour s'exécute, quel que soit le tableau. Au tour $i=0$, l'une des deux
+branches est nécessairement empruntée : si \lstinline{tableau[0]} vaut la valeur cherchée,
+le \lstinline{return i} sort ; sinon le \lstinline{return None} du \lstinline{else} sort. Or
+un \lstinline{return} termine la fonction entière, pas seulement le tour. La boucle
+n'atteint jamais l'indice $1$.
+
+\textbf{4.} Le \lstinline{return None} doit être placé \textbf{après} la boucle, au niveau
+d'indentation de la boucle elle-même :
+\begin{python}
+def recherche_occurrence(tableau, valeur):
+    for i in range(len(tableau)):
+        if tableau[i] == valeur:
+            return i
+    return None
+\end{python}
+La logique est asymétrique, et c'est la clé : pour affirmer « trouvé », une seule case
+suffit — on peut donc sortir immédiatement. Pour affirmer « absent », il faut les avoir
+\textbf{toutes} examinées — la conclusion ne peut donc être tirée qu'une fois la boucle
+terminée.
+
+\end{corrige}

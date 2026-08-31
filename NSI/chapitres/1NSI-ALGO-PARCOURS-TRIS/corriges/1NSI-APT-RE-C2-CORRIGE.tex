@@ -1,0 +1,57 @@
+% META: {"id": "1NSI-APT-RE-C2-CORRIGE", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige", "exercice_ref": "1NSI-APT-RE-C2", "capacites": ["P-ALGO-01B"], "capacites_codes": ["C2"], "status": "generated"}
+% BEGIN-VERIFY
+% def bugue(tableau):
+%     somme = 0
+%     for element in tableau:
+%         somme = somme + element
+%         return somme / len(tableau)
+% assert bugue([4, 5, 9]) == 4 / 3
+% assert abs(bugue([4, 5, 9]) - 1.3333333333333333) < 1e-12
+% assert bugue([7]) == 7.0
+% assert bugue([]) is None
+% def correct(tableau):
+%     if len(tableau) == 0:
+%         return None
+%     somme = 0
+%     for element in tableau:
+%         somme = somme + element
+%     return somme / len(tableau)
+% assert correct([4, 5, 9]) == 6.0
+% assert correct([7]) == 7.0
+% assert correct([]) is None
+% END-VERIFY
+
+\begin{corrige}{1NSI-APT-RE-C2-EX1}
+
+\textbf{1.} La fonction renvoie $4/3 \approx 1{,}33$, alors que la moyenne de
+\lstinline{[4, 5, 9]} vaut $6{,}0$. Le \lstinline{return} s'exécute dès le premier tour :
+\lstinline{somme} ne contient encore que $4$, et cette valeur est divisée par $3$, la
+longueur du tableau entier. Le résultat ne correspond à rien.
+
+\textbf{2.} Elle donne la bonne réponse sur un tableau d'un \textbf{seul} élément :
+\lstinline{moyenne_bugue([7])} renvoie $7{,}0$, ce qui est correct. Sur un tableau vide,
+elle renvoie \lstinline{None} — non par un traitement explicite, mais parce que la boucle
+ne s'exécute pas et que la fonction se termine sans \lstinline{return}.
+
+\textbf{3.} La seule différence est le niveau d'indentation du \lstinline{return} : dans la
+version bogué il est \textbf{dans} le corps de la boucle, dans la version correcte il est
+\textbf{après} elle. En Python, l'indentation détermine l'appartenance à un bloc. Un
+\lstinline{return} placé dans la boucle interrompt la fonction dès le premier tour :
+l'accumulation commencée ne sert à rien, puisqu'elle n'a pas le temps de se poursuivre.
+
+\textbf{4.}
+\begin{python}
+def moyenne(tableau):
+    if len(tableau) == 0:
+        return None
+    somme = 0
+    for element in tableau:
+        somme = somme + element
+    return somme / len(tableau)
+\end{python}
+Le traitement du tableau vide devient explicite : sans lui, \lstinline{len(tableau)} vaudrait
+$0$ et la division lèverait \lstinline{ZeroDivisionError}. Le schéma général reste le même —
+\textbf{initialiser}, \textbf{accumuler pendant tout le parcours}, \textbf{renvoyer après} —
+et c'est ce troisième temps que l'erreur d'indentation supprimait.
+
+\end{corrige}

@@ -1,0 +1,54 @@
+% META: {"id": "1NSI-ADGK-RE-C3", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "remediation", "capacites": ["P-ALGO-03"], "capacites_codes": ["C3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : k-NN, on classe par le plus proche seul au lieu de la majorite
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-ADGK-RE-C3-EX1}{1}{15}
+Un élève écrit l'algorithme des $k$ plus proches voisins ainsi :
+\begin{python}
+def distance(a, b):
+    return ((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) ** 0.5
+
+def knn_bugue(exemples, point, k):
+    """exemples : liste de (coordonnees, classe)"""
+    plus_proches = sorted(exemples, key=lambda e: distance(e[0], point))
+    return plus_proches[0][1]      # la classe du plus proche
+\end{python}
+On dispose des exemples suivants, chacun donné par ses coordonnées et sa classe :
+\lstinline{[((0, 0), "A"), ((3, 0), "B"), ((4, 0), "B"), ((5, 0), "B")]}, et l'on veut
+classer le point \lstinline{(1, 0)} avec $k = 3$.
+\begin{enumerate}
+  \item Calculer la distance du point \lstinline{(1, 0)} à chacun des quatre exemples.
+  \item Quelle classe \lstinline{knn_bugue} renvoie-t-elle ? Quel rôle le paramètre
+    \lstinline{k} joue-t-il dans cette fonction ?
+  \item Quels sont les $3$ plus proches voisins ? Quelle est leur classe majoritaire ?
+  \item L'algorithme attendu renvoie-t-il la même réponse ? Expliquer d'où vient la
+    différence.
+  \item Corriger la fonction pour qu'elle tienne compte des $k$ voisins et renvoie la
+    classe majoritaire.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def distance(a, b):
+%     return ((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) ** 0.5
+% exemples = [((0, 0), "A"), ((3, 0), "B"), ((4, 0), "B"), ((5, 0), "B")]
+% point = (1, 0)
+% d = [distance(e[0], point) for e in exemples]
+% assert d == [1.0, 2.0, 3.0, 4.0]
+% def knn_bugue(exemples, point, k):
+%     plus_proches = sorted(exemples, key=lambda e: distance(e[0], point))
+%     return plus_proches[0][1]
+% assert knn_bugue(exemples, point, 3) == "A"
+% def knn(exemples, point, k):
+%     plus_proches = sorted(exemples, key=lambda e: distance(e[0], point))[:k]
+%     classes = [c for _coord, c in plus_proches]
+%     meilleure, meilleur_compte = None, -1
+%     for c in classes:
+%         if classes.count(c) > meilleur_compte:
+%             meilleure, meilleur_compte = c, classes.count(c)
+%     return meilleure
+% assert knn(exemples, point, 3) == "B"
+% assert knn(exemples, point, 1) == "A"
+% END-VERIFY

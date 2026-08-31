@@ -1,0 +1,1162 @@
+{
+  "artifact_type": "nsi_cross_discipline_content_ledger",
+  "schema_version": 1,
+  "generated_by": "scripts/build_nsi_cross_discipline_ledger.py",
+  "finding": "P0_CROSS_DISCIPLINE_CONTENT_CONTAMINATION",
+  "distinct_from": "P0_PEDAGOGICAL_CONTENT_CLONING : un objet peut etre unique et malgre tout etranger a sa discipline ; la detection de clonage ne le verrait jamais",
+  "discriminator": "le programme de Premiere NSI ne comporte aucune analyse : derivation, limite, integrale, etude de fonction. Un objet qui les mobilise n'appartient pas a ce niveau, quel que soit le vocabulaire informatique qui l'entoure",
+  "counts": {
+    "NSI_NATIVE": 65
+  },
+  "unknown": 0,
+  "objects_scanned": 65,
+  "condemned_count": 0,
+  "condemned_while_approved": [],
+  "per_chapter": {
+    "1NSI-ALGO-DICHO-GLOUTON-KNN": {
+      "NSI_NATIVE": 27
+    },
+    "1NSI-ALGO-PARCOURS-TRIS": {
+      "NSI_NATIVE": 38
+    }
+  },
+  "condemned_paths": [],
+  "condemned_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "objects": [
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "cours",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C1.tex",
+      "object_id": "1NSI-ADGK-COURS-C1",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-04"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "cours",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C2.tex",
+      "object_id": "1NSI-ADGK-COURS-C2",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-05"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "cours",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C3.tex",
+      "object_id": "1NSI-ADGK-COURS-C3",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-03"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "methodes",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-001.tex",
+      "object_id": "1NSI-ADGK-ME-001",
+      "declared_status": "needs_review",
+      "declared_capacities": [
+        "C1"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "methodes",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-002.tex",
+      "object_id": "1NSI-ADGK-ME-002",
+      "declared_status": "needs_review",
+      "declared_capacities": [
+        "C2"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "methodes",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-003.tex",
+      "object_id": "1NSI-ADGK-ME-003",
+      "declared_status": "needs_review",
+      "declared_capacities": [
+        "C3"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "exercices",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-001.tex",
+      "object_id": "1NSI-ADGK-EX-001",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-04"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "exercices",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-002.tex",
+      "object_id": "1NSI-ADGK-EX-002",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-04"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "exercices",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-003.tex",
+      "object_id": "1NSI-ADGK-EX-003",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-05"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "chapitre",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "exercices",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-004.tex",
+      "object_id": "1NSI-ADGK-EX-004",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-03"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "exercices",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-005.tex",
+      "object_id": "1NSI-ADGK-EX-005",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-05"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-001.tex",
+      "object_id": "1NSI-ADGK-CO-001",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-04"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-002.tex",
+      "object_id": "1NSI-ADGK-CO-002",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-04"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-003.tex",
+      "object_id": "1NSI-ADGK-CO-003",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-05"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "chapitre",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-004.tex",
+      "object_id": "1NSI-ADGK-CO-004",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-03"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-005.tex",
+      "object_id": "1NSI-ADGK-CO-005",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-05"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-RE-C1-CORRIGE.tex",
+      "object_id": "1NSI-ADGK-RE-C1-CORRIGE",
+      "declared_status": "needs_review",
+      "declared_capacities": [
+        "P-ALGO-04"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-RE-C2-CORRIGE.tex",
+      "object_id": "1NSI-ADGK-RE-C2-CORRIGE",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C2"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-RE-C3-CORRIGE.tex",
+      "object_id": "1NSI-ADGK-RE-C3-CORRIGE",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C3"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "remediation",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C1.tex",
+      "object_id": "1NSI-ADGK-RE-C1",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-04"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "remediation",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C2.tex",
+      "object_id": "1NSI-ADGK-RE-C2",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C2"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "remediation",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C3.tex",
+      "object_id": "1NSI-ADGK-RE-C3",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C3"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "evaluations",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-A-corrige.tex",
+      "object_id": "1NSI-ADGK-EVAL-A-corrige",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-04",
+        "P-ALGO-05",
+        "P-ALGO-03"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "evaluations",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-A.tex",
+      "object_id": "1NSI-ADGK-EVAL-A",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-04",
+        "P-ALGO-05",
+        "P-ALGO-03"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "evaluations",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B-corrige.tex",
+      "object_id": "1NSI-ADGK-EVAL-B-corrige",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-04",
+        "P-ALGO-05",
+        "P-ALGO-03"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "evaluations",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B.tex",
+      "object_id": "1NSI-ADGK-EVAL-B",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-04",
+        "P-ALGO-05",
+        "P-ALGO-03"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "role": "qcm",
+      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.tex",
+      "object_id": "1NSI-ALGO-DICHO-GLOUTON-KNN-QCM",
+      "declared_status": "needs_review",
+      "declared_capacities": [
+        "P-ALGO-03",
+        "P-ALGO-04",
+        "P-ALGO-05"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "cours",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-APT-COURS-C1.tex",
+      "object_id": "1NSI-AGT-COURS-C1",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-01A",
+        "P-ALGO-01B"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "cours",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-APT-COURS-C2.tex",
+      "object_id": "1NSI-AGT-COURS-C2",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-02A",
+        "P-ALGO-02C"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "cours",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-APT-COURS-C3.tex",
+      "object_id": "1NSI-AGT-COURS-C3",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-02B",
+        "P-ALGO-02D"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "methodes",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-001.tex",
+      "object_id": "1NSI-APT-ME-001",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C1"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "methodes",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-002.tex",
+      "object_id": "1NSI-APT-ME-002",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C2"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "methodes",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-003.tex",
+      "object_id": "1NSI-APT-ME-003",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C3"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "methodes",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-004.tex",
+      "object_id": "1NSI-APT-ME-004",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C4"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "methodes",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-005.tex",
+      "object_id": "1NSI-APT-ME-005",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C5"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "methodes",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-006.tex",
+      "object_id": "1NSI-APT-ME-006",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C6"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "exercices",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-101.tex",
+      "object_id": "1NSI-APT-EX-101",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C1"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "exercices",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-102.tex",
+      "object_id": "1NSI-APT-EX-102",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C2"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "exercices",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-103.tex",
+      "object_id": "1NSI-APT-EX-103",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C3"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "exercices",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-104.tex",
+      "object_id": "1NSI-APT-EX-104",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C4"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "exercices",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-105.tex",
+      "object_id": "1NSI-APT-EX-105",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C5"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "exercices",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-106.tex",
+      "object_id": "1NSI-APT-EX-106",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C6"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-101.tex",
+      "object_id": "1NSI-APT-CO-101",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C1"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-102.tex",
+      "object_id": "1NSI-APT-CO-102",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C2"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-103.tex",
+      "object_id": "1NSI-APT-CO-103",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C3"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-104.tex",
+      "object_id": "1NSI-APT-CO-104",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C4"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-105.tex",
+      "object_id": "1NSI-APT-CO-105",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C5"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-106.tex",
+      "object_id": "1NSI-APT-CO-106",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C6"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-RE-C1-CORRIGE.tex",
+      "object_id": "1NSI-APT-RE-C1-CORRIGE",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C1"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-RE-C2-CORRIGE.tex",
+      "object_id": "1NSI-APT-RE-C2-CORRIGE",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C2"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-RE-C3-CORRIGE.tex",
+      "object_id": "1NSI-APT-RE-C3-CORRIGE",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C3"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-RE-C4-CORRIGE.tex",
+      "object_id": "1NSI-APT-RE-C4-CORRIGE",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C4"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-RE-C5-CORRIGE.tex",
+      "object_id": "1NSI-APT-RE-C5-CORRIGE",
+      "declared_status": "needs_review",
+      "declared_capacities": [
+        "P-ALGO-02B"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "corriges",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-RE-C6-CORRIGE.tex",
+      "object_id": "1NSI-APT-RE-C6-CORRIGE",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C6"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "remediation",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C1.tex",
+      "object_id": "1NSI-APT-RE-C1",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C1"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "remediation",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C2.tex",
+      "object_id": "1NSI-APT-RE-C2",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C2"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "remediation",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C3.tex",
+      "object_id": "1NSI-APT-RE-C3",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C3"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "remediation",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C4.tex",
+      "object_id": "1NSI-APT-RE-C4",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C4"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "remediation",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C5.tex",
+      "object_id": "1NSI-APT-RE-C5",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-02B"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "remediation",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C6.tex",
+      "object_id": "1NSI-APT-RE-C6",
+      "declared_status": "generated",
+      "declared_capacities": [
+        "C6"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "evaluations",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-APT-EVAL-A-corrige.tex",
+      "object_id": "1NSI-AGT-EVAL-A-corrige",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-01A",
+        "P-ALGO-01B",
+        "P-ALGO-02A",
+        "P-ALGO-02C"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "evaluations",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-APT-EVAL-A.tex",
+      "object_id": "1NSI-AGT-EVAL-A",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-01A",
+        "P-ALGO-01B",
+        "P-ALGO-02A",
+        "P-ALGO-02C"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "evaluations",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-APT-EVAL-B-corrige.tex",
+      "object_id": "1NSI-AGT-EVAL-B-corrige",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-01A",
+        "P-ALGO-01B",
+        "P-ALGO-02B",
+        "P-ALGO-02D"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "evaluations",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-APT-EVAL-B.tex",
+      "object_id": "1NSI-AGT-EVAL-B",
+      "declared_status": "verified",
+      "declared_capacities": [
+        "P-ALGO-01A",
+        "P-ALGO-01B",
+        "P-ALGO-02B",
+        "P-ALGO-02D"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "python",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "role": "qcm",
+      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.tex",
+      "object_id": "1NSI-ALGO-PARCOURS-TRIS-QCM",
+      "declared_status": "needs_review",
+      "declared_capacities": [
+        "P-ALGO-01A",
+        "P-ALGO-01B",
+        "P-ALGO-02A",
+        "P-ALGO-02B",
+        "P-ALGO-02C",
+        "P-ALGO-02D"
+      ],
+      "calculus_evidence": [],
+      "computing_evidence": [
+        "algorithmique",
+        "chapitre",
+        "structures"
+      ],
+      "verdict": "NSI_NATIVE"
+    }
+  ]
+}

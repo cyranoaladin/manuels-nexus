@@ -1,0 +1,91 @@
+% META: {"id": "1NSI-APT-CO-102", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige", "exercice_ref": "1NSI-APT-EX-102", "capacites": ["P-ALGO-01B"], "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def maximum_bugue(tableau):
+%     plus_grand = 0
+%     for element in tableau:
+%         if element > plus_grand:
+%             plus_grand = element
+%     return plus_grand
+% assert maximum_bugue([4, 9, 2]) == 9
+% assert maximum_bugue([-7, -3, -12]) == 0
+% def maximum(tableau):
+%     if len(tableau) == 0:
+%         return None
+%     plus_grand = tableau[0]
+%     for element in tableau:
+%         if element > plus_grand:
+%             plus_grand = element
+%     return plus_grand
+% assert maximum([-7, -3, -12]) == -3
+% assert maximum([4, 9, 2]) == 9
+% assert maximum([]) is None
+% erreur = None
+% try:
+%     _ = [][0]
+% except IndexError as exc:
+%     erreur = type(exc).__name__
+% assert erreur == "IndexError"
+% def moyenne(tableau):
+%     if len(tableau) == 0:
+%         return None
+%     somme = 0
+%     for element in tableau:
+%         somme = somme + element
+%     return somme / len(tableau)
+% assert moyenne([4, 5]) == 4.5
+% assert (4 + 5) // 2 == 4
+% END-VERIFY
+\begin{corrige}{1NSI-APT-EX-102}
+
+\textbf{1.} \lstinline{maximum_bugue([4, 9, 2])} renvoie $9$. L'accumulateur passe de $0$ à
+$4$, puis à $9$ ; le $2$ ne le remplace pas. Le résultat est correct \textbf{ici}, et c'est
+précisément ce qui rend l'erreur difficile à voir.
+
+\textbf{2.} \lstinline{maximum_bugue([-7, -3, -12])} renvoie $0$. Aucun élément du tableau
+n'est strictement supérieur à $0$, donc \lstinline{plus_grand} n'est jamais modifié et
+conserve sa valeur d'initialisation. Le résultat est inacceptable parce que $0$
+\textbf{n'appartient pas au tableau} : la fonction annonce un maximum qui n'existe pas, sans
+lever la moindre erreur. Un test mené uniquement sur des valeurs positives ne l'aurait
+jamais révélé.
+
+\textbf{3.} L'initialisation doit provenir du tableau :
+\begin{python}
+plus_grand = tableau[0]
+\end{python}
+Le maximum d'un tableau est, par définition, l'un de ses éléments. Partir d'une constante
+extérieure — $0$, ou n'importe quelle autre — revient à ajouter au tableau un élément
+fictif qui peut l'emporter sur tous les vrais. En partant de \lstinline{tableau[0]}, la
+valeur renvoyée est toujours un élément effectivement présent.
+
+\textbf{4.} Sur un tableau vide, \lstinline{tableau[0]} lève \lstinline{IndexError} : il n'y
+a pas de case $0$. Un tableau vide n'a pas de maximum, et la fonction doit le dire :
+\begin{python}
+def maximum(tableau):
+    if len(tableau) == 0:
+        return None
+    plus_grand = tableau[0]
+    for element in tableau:
+        if element > plus_grand:
+            plus_grand = element
+    return plus_grand
+\end{python}
+\lstinline{maximum([-7, -3, -12])} renvoie bien $-3$, et \lstinline{maximum([])} renvoie
+\lstinline{None}.
+
+\textbf{5.}
+\begin{python}
+def moyenne(tableau):
+    if len(tableau) == 0:
+        return None
+    somme = 0
+    for element in tableau:
+        somme = somme + element
+    return somme / len(tableau)
+\end{python}
+\lstinline{moyenne([4, 5])} vaut $4.5$. Écrire \lstinline{somme // len(tableau)} donnerait
+$4$ : la division entière \lstinline{//} tronque vers le bas et perd la partie décimale.
+Une moyenne n'est pas un entier ; c'est la division \lstinline{/} qu'il faut employer. Ici
+encore le tableau vide est traité à part, car \lstinline{len(tableau)} vaudrait $0$ et la
+division lèverait \lstinline{ZeroDivisionError}.
+
+\end{corrige}

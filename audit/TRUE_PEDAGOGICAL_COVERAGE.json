@@ -2,87 +2,6 @@
   "artifact_type": "true_pedagogical_coverage",
   "authoring_backlog": [
     {
-      "capacity": "C2",
-      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "remediation",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C3",
-      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "remediation",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C2",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "methodes",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C3",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "methodes",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C3",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "remediation",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C4",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "methodes",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C5",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "methodes",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C6",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "methodes",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C6",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "remediation",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
       "capacity": "C1",
       "chapter": "1NSI-ARCHITECTURE-OS",
       "indeterminate_objects": 0,
@@ -2918,7 +2837,7 @@
       "valid_objects": 0
     }
   ],
-  "authoring_units_digest": "sha256:7067567aa8f1976f0f1c825b30803167d63376e7391c649f50bd2117410ea3ab",
+  "authoring_units_digest": "sha256:63e634b8c1b94c0a135f0d10db2164dbd95d9e4973f4b7bd769260a5bf405d23",
   "capacity_identity": "resolue par scripts/capacity_identity.py : egalites exactes dans la portee du chapitre, jamais par extraction de jeton",
   "cell_states": {
     "INDETERMINATE_CLONE_CREDIT": "le contenu existe mais appartient a un groupe de clones dont le proprietaire semantique n'est pas demontrable : ce n'est ni un credit ni une lacune, c'est une revue a faire",
@@ -2933,12 +2852,12 @@
   },
   "generated_by": "scripts/build_true_pedagogical_coverage.py",
   "inventory": {
-    "authoring_units_required": 324,
+    "authoring_units_required": 315,
     "capacities": 320,
     "cells": 1600,
-    "cells_with_indeterminate_credit": 319,
-    "cells_with_valid_content": 957,
-    "objects_without_resolvable_capacity": 472
+    "cells_with_indeterminate_credit": 313,
+    "cells_with_valid_content": 972,
+    "objects_without_resolvable_capacity": 470
   },
   "measured_roles": [
     "cours",
@@ -3405,8 +3324,6 @@
     "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/remediation/TSPE-SUITES-LIMITES-FR-R4.tex",
     "Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/remediation/TSPE-SUITES-LIMITES-FR-R5.tex",
     "Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/cours/10_derivees_variations_cos_sin.tex",
-    "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C01.tex",
-    "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C02.tex",
     "NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHITECTURE-OS-METH-01.tex",
     "NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANGAGE-METH-01.tex",
     "NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PROJET-METHODES-METH-01.tex",
@@ -3422,15 +3339,6 @@
     "NSI/chapitres/TNSI-STRUCTURES-DONNEES/methodes/TNSI-STRUCTURES-DONNEES-METH-01.tex"
   ],
   "per_chapter": {
-    "1NSI-ALGO-DICHO-GLOUTON-KNN": {
-      "TOTAL": 2,
-      "remediation": 2
-    },
-    "1NSI-ALGO-PARCOURS-TRIS": {
-      "TOTAL": 7,
-      "methodes": 5,
-      "remediation": 2
-    },
     "1NSI-ARCHITECTURE-OS": {
       "TOTAL": 9,
       "methodes": 5,
@@ -3606,9 +3514,9 @@
   },
   "per_manual": {
     "1NSI": {
-      "TOTAL": 80,
-      "methodes": 44,
-      "remediation": 36
+      "TOTAL": 71,
+      "methodes": 39,
+      "remediation": 32
     },
     "TCOMPL": {
       "TOTAL": 55,
@@ -10535,11 +10443,11 @@
     {
       "capacity": "C1",
       "chapter": "TSPE-DERIVATION-CONVEXITE",
-      "indeterminate_objects": 1,
+      "indeterminate_objects": 0,
       "manual": "TSPE",
       "role": "methodes",
       "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 1
+      "valid_objects": 2
     },
     {
       "capacity": "C1",
@@ -12933,7 +12841,7 @@
       "manual": "1NSI",
       "role": "exercices",
       "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 8
+      "valid_objects": 2
     },
     {
       "capacity": "C1",
@@ -12941,156 +12849,21 @@
       "indeterminate_objects": 0,
       "manual": "1NSI",
       "role": "corriges",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 9
-    },
-    {
-      "capacity": "C1",
-      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "remediation",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 1
-    },
-    {
-      "capacity": "C2",
-      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "cours",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 1
-    },
-    {
-      "capacity": "C2",
-      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "methodes",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 1
-    },
-    {
-      "capacity": "C2",
-      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "exercices",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 8
-    },
-    {
-      "capacity": "C2",
-      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "corriges",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 8
-    },
-    {
-      "capacity": "C2",
-      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "remediation",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C3",
-      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "cours",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 1
-    },
-    {
-      "capacity": "C3",
-      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "methodes",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 1
-    },
-    {
-      "capacity": "C3",
-      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "exercices",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 8
-    },
-    {
-      "capacity": "C3",
-      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "corriges",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 8
-    },
-    {
-      "capacity": "C3",
-      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "remediation",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C1",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "cours",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 1
-    },
-    {
-      "capacity": "C1",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 1,
-      "manual": "1NSI",
-      "role": "methodes",
-      "state": "INDETERMINATE_CLONE_CREDIT",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C1",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 3,
-      "manual": "1NSI",
-      "role": "exercices",
       "state": "VALID_ALIGNED_CONTENT",
       "valid_objects": 3
     },
     {
       "capacity": "C1",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 6,
-      "manual": "1NSI",
-      "role": "corriges",
-      "state": "INDETERMINATE_CLONE_CREDIT",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C1",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 1,
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "indeterminate_objects": 0,
       "manual": "1NSI",
       "role": "remediation",
-      "state": "INDETERMINATE_CLONE_CREDIT",
-      "valid_objects": 0
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
     },
     {
       "capacity": "C2",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
       "indeterminate_objects": 0,
       "manual": "1NSI",
       "role": "cours",
@@ -13099,161 +12872,296 @@
     },
     {
       "capacity": "C2",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
       "indeterminate_objects": 0,
       "manual": "1NSI",
       "role": "methodes",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C2",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 2,
-      "manual": "1NSI",
-      "role": "exercices",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 4
-    },
-    {
-      "capacity": "C2",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 5,
-      "manual": "1NSI",
-      "role": "corriges",
       "state": "VALID_ALIGNED_CONTENT",
       "valid_objects": 1
     },
     {
       "capacity": "C2",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 1,
-      "manual": "1NSI",
-      "role": "remediation",
-      "state": "INDETERMINATE_CLONE_CREDIT",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C3",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "cours",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 1
-    },
-    {
-      "capacity": "C3",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "methodes",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C3",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
       "indeterminate_objects": 0,
       "manual": "1NSI",
       "role": "exercices",
       "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 6
+      "valid_objects": 2
     },
     {
-      "capacity": "C3",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "capacity": "C2",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
       "indeterminate_objects": 0,
       "manual": "1NSI",
       "role": "corriges",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 6
-    },
-    {
-      "capacity": "C3",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "remediation",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C4",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "cours",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 1
-    },
-    {
-      "capacity": "C4",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "methodes",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C4",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "exercices",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 6
-    },
-    {
-      "capacity": "C4",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "corriges",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 6
-    },
-    {
-      "capacity": "C4",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 1,
-      "manual": "1NSI",
-      "role": "remediation",
-      "state": "INDETERMINATE_CLONE_CREDIT",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C5",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "cours",
-      "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 1
-    },
-    {
-      "capacity": "C5",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 0,
-      "manual": "1NSI",
-      "role": "methodes",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C5",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 3,
-      "manual": "1NSI",
-      "role": "exercices",
       "state": "VALID_ALIGNED_CONTENT",
       "valid_objects": 3
     },
     {
+      "capacity": "C2",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "remediation",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C3",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "cours",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C3",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "methodes",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C3",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "exercices",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C3",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "corriges",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 2
+    },
+    {
+      "capacity": "C3",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "remediation",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C1",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "cours",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C1",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "methodes",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C1",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "exercices",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C1",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "corriges",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 2
+    },
+    {
+      "capacity": "C1",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "remediation",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C2",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "cours",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C2",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "methodes",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C2",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "exercices",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C2",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "corriges",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 2
+    },
+    {
+      "capacity": "C2",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "remediation",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C3",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "cours",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C3",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "methodes",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C3",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "exercices",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C3",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "corriges",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 2
+    },
+    {
+      "capacity": "C3",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "remediation",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C4",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "cours",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C4",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "methodes",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C4",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "exercices",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C4",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "corriges",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 2
+    },
+    {
+      "capacity": "C4",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "remediation",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
       "capacity": "C5",
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 5,
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "cours",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C5",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "methodes",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C5",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
+      "manual": "1NSI",
+      "role": "exercices",
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
+    },
+    {
+      "capacity": "C5",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "indeterminate_objects": 0,
       "manual": "1NSI",
       "role": "corriges",
       "state": "VALID_ALIGNED_CONTENT",
@@ -13262,7 +13170,7 @@
     {
       "capacity": "C5",
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 1,
+      "indeterminate_objects": 0,
       "manual": "1NSI",
       "role": "remediation",
       "state": "VALID_ALIGNED_CONTENT",
@@ -13283,26 +13191,26 @@
       "indeterminate_objects": 0,
       "manual": "1NSI",
       "role": "methodes",
-      "state": "MISSING",
-      "valid_objects": 0
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
     },
     {
       "capacity": "C6",
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 2,
+      "indeterminate_objects": 0,
       "manual": "1NSI",
       "role": "exercices",
       "state": "VALID_ALIGNED_CONTENT",
-      "valid_objects": 4
+      "valid_objects": 1
     },
     {
       "capacity": "C6",
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "indeterminate_objects": 6,
+      "indeterminate_objects": 0,
       "manual": "1NSI",
       "role": "corriges",
-      "state": "INDETERMINATE_CLONE_CREDIT",
-      "valid_objects": 0
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 2
     },
     {
       "capacity": "C6",
@@ -13310,8 +13218,8 @@
       "indeterminate_objects": 0,
       "manual": "1NSI",
       "role": "remediation",
-      "state": "MISSING",
-      "valid_objects": 0
+      "state": "VALID_ALIGNED_CONTENT",
+      "valid_objects": 1
     },
     {
       "capacity": "C1",

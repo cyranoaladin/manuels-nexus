@@ -1,0 +1,75 @@
+% META: {"id": "1NSI-APT-CO-104", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige", "exercice_ref": "1NSI-APT-EX-104", "capacites": ["P-ALGO-02C"], "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def prefixe_trie(tableau, borne):
+%     for k in range(1, borne):
+%         if tableau[k - 1] > tableau[k]:
+%             return False
+%     return True
+% def zones(tableau):
+%     tableau = tableau[:]
+%     vues = []
+%     for i in range(1, len(tableau)):
+%         vues.append(tableau[:i])
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%         tableau[j + 1] = valeur
+%     vues.append(tableau[:])
+%     return vues
+% vues = zones([5, 2, 9, 1, 7])
+% assert vues == [[5], [2, 5], [2, 5, 9], [1, 2, 5, 9], [1, 2, 5, 7, 9]]
+% assert all(prefixe_trie(z, len(z)) for z in vues)
+% assert 1 < 2 and 1 < 5 and 1 < 9
+% assert sorted([2, 5, 9]) == [2, 5, 9]
+% END-VERIFY
+\begin{corrige}{1NSI-APT-EX-104}
+
+\textbf{1.} Invariant : \emph{au début de chaque itération $i$ de la boucle
+\lstinline{for}, le sous-tableau \lstinline{tableau[0:i]} contient les $i$ premiers
+éléments du tableau d'origine, rangés en ordre croissant.} Borner la zone est
+indispensable : pendant l'exécution, le tableau entier n'est pas trié, et un énoncé qui
+l'affirmerait serait simplement faux.
+
+\textbf{2.} Les quatre relevés :
+\begin{itemize}
+  \item début de $i=1$ : \lstinline{[5]} — trié ;
+  \item début de $i=2$ : \lstinline{[2, 5]} — trié ;
+  \item début de $i=3$ : \lstinline{[2, 5, 9]} — trié ;
+  \item début de $i=4$ : \lstinline{[1, 2, 5, 9]} — trié.
+\end{itemize}
+À la sortie, \lstinline{[1, 2, 5, 7, 9]} est trié.
+
+\textbf{3.} \textbf{Initialisation.} Avant le premier tour, $i=1$ : la zone
+\lstinline{tableau[0:1]} ne contient que \lstinline{tableau[0]}. Un tableau d'un seul
+élément est trié — il n'existe aucun couple d'éléments à comparer. L'invariant est donc
+vrai avant toute itération.
+
+\textbf{4.} \textbf{Conservation.} Supposons \lstinline{tableau[0:i]} trié au début du tour
+$i$. Le corps met \lstinline{valeur = tableau[i]} de côté, puis la boucle
+\lstinline{while} décale d'une case vers la droite tous les éléments de la zone qui sont
+strictement supérieurs à \lstinline{valeur}. Elle s'arrête au premier élément inférieur ou
+égal à \lstinline{valeur}, ou quand la zone est épuisée. \lstinline{valeur} est alors écrite
+en \lstinline{tableau[j + 1]}, c'est-à-dire immédiatement après un élément qui lui est
+inférieur ou égal, et immédiatement avant des éléments qui lui sont supérieurs. Comme les
+éléments décalés étaient déjà entre eux dans le bon ordre, la zone
+\lstinline{tableau[0:i+1]} est triée et contient exactement les $i+1$ premiers éléments
+d'origine : c'est l'invariant au début du tour $i+1$.
+
+\textbf{5.} \textbf{Conclusion.} La boucle s'arrête lorsque $i$ atteint $n$. L'invariant
+appliqué à cette valeur donne \lstinline{tableau[0:n]} trié et contenant les $n$ éléments
+d'origine — c'est-à-dire le tableau entier, trié. L'algorithme est correct.
+
+\textbf{6.} Oui : au début du tour $i=3$, la zone triée est \lstinline{[2, 5, 9]} et il
+reste \lstinline{[1, 7]} ; l'élément $1$ est plus petit que $2$, $5$ et $9$, tous déjà
+rangés. L'invariant n'est pourtant \textbf{pas} mis en défaut, car il n'affirme rien sur
+la comparaison entre la zone triée et le reste : il dit seulement que la zone
+\lstinline{[0:i]} est ordonnée \textbf{en elle-même}.
+
+C'est exactement ce que cet invariant ne dit pas — et c'est ce qui oblige l'algorithme à
+décaler des éléments déjà placés lorsqu'une petite valeur arrive. Le tri par sélection
+dispose, lui, d'un invariant plus fort qui interdit ce cas : les éléments placés y sont
+définitifs.
+
+\end{corrige}

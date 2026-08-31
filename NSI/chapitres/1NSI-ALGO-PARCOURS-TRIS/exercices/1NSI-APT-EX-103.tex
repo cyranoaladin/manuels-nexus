@@ -1,0 +1,46 @@
+% META: {"id": "1NSI-APT-EX-103", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "exercice", "capacites": ["P-ALGO-02A"], "capacites_codes": ["C3"], "parcours": 1, "competences": ["analyser", "representer"], "gestes": ["tracer_execution", "ecrire_algorithme"], "duree_min": 20, "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-103.tex", "corrige_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-103.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def tri_insertion_trace(tableau):
+%     tableau = tableau[:]
+%     etats = []
+%     for i in range(1, len(tableau)):
+%         valeur = tableau[i]
+%         j = i - 1
+%         decalages = 0
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%             decalages += 1
+%         tableau[j + 1] = valeur
+%         etats.append((i, valeur, decalages, tableau[:]))
+%     return tableau, etats
+% resultat, etats = tri_insertion_trace([5, 2, 9, 1, 7])
+% assert resultat == [1, 2, 5, 7, 9]
+% assert [e[0] for e in etats] == [1, 2, 3, 4]
+% assert [e[1] for e in etats] == [2, 9, 1, 7]
+% assert [e[2] for e in etats] == [1, 0, 3, 1]
+% assert etats[0][3] == [2, 5, 9, 1, 7]
+% assert etats[1][3] == [2, 5, 9, 1, 7]
+% assert etats[2][3] == [1, 2, 5, 9, 7]
+% assert etats[3][3] == [1, 2, 5, 7, 9]
+% assert sum(e[2] for e in etats) == 5
+% trie, etats_trie = tri_insertion_trace([1, 2, 5, 7, 9])
+% assert sum(e[2] for e in etats_trie) == 0
+% envers, etats_envers = tri_insertion_trace([9, 7, 5, 2, 1])
+% assert sum(e[2] for e in etats_envers) == 10
+% END-VERIFY
+\begin{exercice}{1NSI-APT-EX-103}{1}{20}
+On applique \lstinline{tri_insertion} du cours au tableau \lstinline{[5, 2, 9, 1, 7]}.
+\begin{enumerate}
+  \item Pour chaque tour $i$ de la boucle \lstinline{for} (de $1$ à $4$), donner la valeur
+    mise de côté, le nombre de décalages effectués par la boucle \lstinline{while}, et
+    l'état complet du tableau à la fin du tour.
+  \item Quel est le nombre total de décalages ? Un tour n'en effectue aucun : lequel, et
+    pourquoi ?
+  \item Écrire \lstinline{tri_insertion} sans regarder le cours, puis vérifier le résultat
+    sur ce tableau.
+  \item Combien de décalages l'algorithme effectue-t-il sur \lstinline{[1, 2, 5, 7, 9]},
+    déjà trié ? Et sur \lstinline{[9, 7, 5, 2, 1]}, trié à l'envers ? Que peut-on en
+    conclure sur le coût du tri par insertion selon les données ?
+\end{enumerate}
+\end{exercice}

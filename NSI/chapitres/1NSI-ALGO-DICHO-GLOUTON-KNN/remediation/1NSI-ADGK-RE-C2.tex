@@ -1,0 +1,50 @@
+% META: {"id": "1NSI-ADGK-RE-C2", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "remediation", "capacites": ["P-ALGO-05"], "capacites_codes": ["C2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : croire qu'un algorithme glouton donne toujours l'optimum
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-ADGK-RE-C2-EX1}{1}{12}
+Pour rendre la monnaie, un élève écrit l'algorithme glouton suivant : prendre à chaque
+étape la plus grande pièce qui ne dépasse pas la somme restante.
+\begin{python}
+def rendu_monnaie(systeme, somme):
+    """systeme est trie du plus grand au plus petit"""
+    pieces = []
+    for piece in systeme:
+        while somme >= piece:
+            pieces.append(piece)
+            somme = somme - piece
+    return pieces
+\end{python}
+\begin{enumerate}
+  \item Faire tourner l'algorithme avec le système \lstinline{[10, 5, 2, 1]} et la somme
+    $18$. Combien de pièces obtient-on ?
+  \item Faire tourner l'algorithme avec le système \lstinline{[6, 4, 1]} et la somme $8$.
+    Combien de pièces obtient-on ?
+  \item Trouver, pour ce second cas, une solution utilisant \textbf{moins} de pièces. Que
+    peut-on en conclure ?
+  \item L'algorithme est-il faux pour autant ? Distinguer soigneusement « donner une
+    solution » et « donner la meilleure solution ».
+  \item L'élève affirme : « il suffit de trier le système par ordre décroissant pour que le
+    glouton soit optimal ». Le système \lstinline{[6, 4, 1]} est déjà trié ainsi.
+    Que vaut cette affirmation ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def rendu_monnaie(systeme, somme):
+%     pieces = []
+%     for piece in systeme:
+%         while somme >= piece:
+%             pieces.append(piece)
+%             somme = somme - piece
+%     return pieces
+% assert rendu_monnaie([10, 5, 2, 1], 18) == [10, 5, 2, 1]
+% assert len(rendu_monnaie([10, 5, 2, 1], 18)) == 4
+% assert rendu_monnaie([6, 4, 1], 8) == [6, 1, 1]
+% assert len(rendu_monnaie([6, 4, 1], 8)) == 3
+% assert sum([4, 4]) == 8 and len([4, 4]) == 2
+% assert 2 < 3
+% assert [6, 4, 1] == sorted([6, 4, 1], reverse=True)
+% END-VERIFY

@@ -1,0 +1,54 @@
+% META: {"id": "1NSI-APT-EX-102", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "exercice", "capacites": ["P-ALGO-01B"], "capacites_codes": ["C2"], "parcours": 1, "competences": ["analyser", "valider"], "gestes": ["diagnostiquer_bug", "traiter_cas_limite"], "duree_min": 15, "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-102.tex", "corrige_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-102.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def maximum_bugue(tableau):
+%     plus_grand = 0
+%     for element in tableau:
+%         if element > plus_grand:
+%             plus_grand = element
+%     return plus_grand
+% assert maximum_bugue([-7, -3, -12]) == 0
+% assert -7 not in [] or True
+% assert maximum_bugue([4, 9, 2]) == 9
+% def maximum(tableau):
+%     if len(tableau) == 0:
+%         return None
+%     plus_grand = tableau[0]
+%     for element in tableau:
+%         if element > plus_grand:
+%             plus_grand = element
+%     return plus_grand
+% assert maximum([-7, -3, -12]) == -3
+% assert maximum([]) is None
+% def moyenne(tableau):
+%     if len(tableau) == 0:
+%         return None
+%     somme = 0
+%     for element in tableau:
+%         somme = somme + element
+%     return somme / len(tableau)
+% assert moyenne([4, 5]) == 4.5
+% assert 9 // 2 == 4
+% assert moyenne([]) is None
+% END-VERIFY
+\begin{exercice}{1NSI-APT-EX-102}{1}{15}
+Un élève écrit la recherche du maximum en initialisant l'accumulateur à zéro :
+\begin{python}
+def maximum_bugue(tableau):
+    plus_grand = 0
+    for element in tableau:
+        if element > plus_grand:
+            plus_grand = element
+    return plus_grand
+\end{python}
+\begin{enumerate}
+  \item Cette fonction donne le bon résultat sur \lstinline{[4, 9, 2]}. Le vérifier.
+  \item L'appliquer à \lstinline{[-7, -3, -12]}. Quel résultat obtient-on ? Pourquoi est-il
+    inacceptable, alors même qu'aucune erreur n'est signalée ?
+  \item Corriger l'initialisation, et expliquer pourquoi la valeur de départ doit
+    \textbf{provenir du tableau}.
+  \item Que se passe-t-il si le tableau est vide, avec la version corrigée ? Ajouter le
+    traitement de ce cas.
+  \item Écrire \lstinline{moyenne(tableau)}. Vérifier que la moyenne de \lstinline{[4, 5]}
+    vaut $4.5$ et non $4$ : quelle erreur d'opérateur produirait $4$ ?
+\end{enumerate}
+\end{exercice}

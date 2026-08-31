@@ -1,0 +1,113 @@
+% META: {"id": "1NSI-APT-CO-106", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige", "exercice_ref": "1NSI-APT-EX-106", "capacites": ["P-ALGO-02D"], "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def zones_selection(tableau):
+%     tableau = tableau[:]
+%     n = len(tableau)
+%     vues = []
+%     for i in range(n - 1):
+%         vues.append((tableau[:i], tableau[i:]))
+%         indice_min = i
+%         for j in range(i + 1, n):
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%     vues.append((tableau[:], []))
+%     return vues
+% vues = zones_selection([5, 2, 9, 1, 7])
+% assert [z for z, _r in vues] == [[], [1], [1, 2], [1, 2, 5], [1, 2, 5, 7, 9]]
+% for zone, reste in vues:
+%     assert zone == sorted(zone)
+%     if zone and reste:
+%         assert max(zone) <= min(reste)
+% def insertion_avec_clauses(tableau):
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         zone = tableau[:i]
+%         assert zone == sorted(zone)
+%         if zone:
+%             assert max(zone) <= min(tableau[i:])
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%         tableau[j + 1] = valeur
+%     return tableau
+% rompue = False
+% try:
+%     insertion_avec_clauses([5, 2, 9, 1, 7])
+% except AssertionError:
+%     rompue = True
+% assert rompue
+% assert insertion_avec_clauses([1, 2, 5, 7, 9]) == [1, 2, 5, 7, 9]
+% END-VERIFY
+\begin{corrige}{1NSI-APT-EX-106}
+
+\textbf{1.} Relevés de \lstinline{tableau[0:i]} au début de chaque tour sur
+\lstinline{[5, 2, 9, 1, 7]} : \lstinline{[]}, puis \lstinline{[1]}, \lstinline{[1, 2]},
+\lstinline{[1, 2, 5]}. Chacune de ces zones est bien triée : l'énoncé A est vrai.
+
+\textbf{2.} Oui, mais seulement parce qu'à la sortie $i$ vaut $n-1$ et que la zone couvre
+alors tout le tableau sauf sa dernière case, laquelle ne peut être qu'à sa place. En
+revanche l'énoncé A ne permet pas de démontrer la \textbf{conservation} : sachant seulement
+que \lstinline{tableau[0:i]} est trié, rien n'interdit qu'un élément restant soit plus petit
+que ceux déjà placés, auquel cas placer le minimum en case $i$ romprait l'ordre. Il manque
+l'information qui garantit que les éléments déjà placés sont définitifs.
+
+\textbf{3.} L'énoncé B est vrai lui aussi : pour chaque tour, le maximum de la zone triée
+est inférieur ou égal au minimum du reste — $\max([1]) = 1 \leqslant \min([2, 9, 5, 7]) = 2$,
+puis $\max([1, 2]) = 2 \leqslant \min([9, 5, 7]) = 5$, puis
+$\max([1, 2, 5]) = 5 \leqslant \min([9, 7]) = 7$.
+
+\textbf{4.}
+\begin{python}
+def tri_selection_verifie(tableau):
+    tableau = tableau[:]
+    n = len(tableau)
+    for i in range(n - 1):
+        zone = tableau[:i]
+        assert zone == sorted(zone)              # clause (a)
+        if zone:
+            assert max(zone) <= min(tableau[i:]) # clause (b)
+        indice_min = i
+        for j in range(i + 1, n):
+            if tableau[j] < tableau[indice_min]:
+                indice_min = j
+        tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+    return tableau
+\end{python}
+Aucune assertion ne se déclenche, et la fonction renvoie \lstinline{[1, 2, 5, 7, 9]}.
+
+\textbf{5.} Placées dans \lstinline{tri_insertion}, les mêmes assertions se comportent
+différemment. Sur \lstinline{[5, 2, 9, 1, 7]}, la clause (b) se \textbf{déclenche} : au
+début du tour $i=3$ la zone triée est \lstinline{[2, 5, 9]} et il reste \lstinline{[1, 7]} ;
+$\max = 9$ n'est pas inférieur ou égal à $\min = 1$. Sur \lstinline{[1, 2, 5, 7, 9]} déjà
+trié, aucune assertion ne se déclenche.
+
+On en conclut que la clause (b) n'est \textbf{pas} un invariant du tri par insertion, alors
+qu'elle en est un pour le tri par sélection. Les deux algorithmes trient tous les deux,
+mais ils ne le prouvent pas de la même manière : le tri par sélection place chaque élément
+\textbf{définitivement}, le tri par insertion peut avoir à déplacer un élément déjà rangé.
+Le second exemple montre aussi qu'un test réussi ne prouve rien : sur un tableau déjà trié,
+un invariant faux passe inaperçu.
+
+\textbf{6.} \textbf{Preuve de correction du tri par sélection, énoncé B.}
+
+\emph{Initialisation.} Au premier tour, $i=0$ et \lstinline{tableau[0:0]} est vide. La
+clause (a) est vraie — un tableau vide est trié — et la clause (b) l'est aussi, faute
+d'élément sur lequel elle porterait.
+
+\emph{Conservation.} Supposons les deux clauses vraies au début du tour $i$. La boucle
+interne parcourt \lstinline{tableau[i:n]} et y détermine l'indice d'un élément minimal, que
+l'échange amène en case $i$. Notons $m$ cette valeur. Par la clause (b), tout élément de
+\lstinline{tableau[0:i]} est inférieur ou égal à tout élément de \lstinline{tableau[i:n]},
+donc en particulier à $m$ : la zone \lstinline{tableau[0:i+1]} reste triée, ce qui donne (a)
+au rang $i+1$. Par ailleurs $m$ est minimal dans \lstinline{tableau[i:n]}, donc inférieur
+ou égal à tous les éléments restants, qui sont exactement ceux de
+\lstinline{tableau[i+1:n]} : la clause (b) est vraie au rang $i+1$.
+
+\emph{Conclusion.} La boucle s'arrête pour $i = n-1$. La clause (a) donne
+\lstinline{tableau[0:n-1]} trié, et la clause (b) donne que son maximum est inférieur ou
+égal au seul élément restant, \lstinline{tableau[n-1]}. Le tableau entier est donc trié.
+
+\end{corrige}

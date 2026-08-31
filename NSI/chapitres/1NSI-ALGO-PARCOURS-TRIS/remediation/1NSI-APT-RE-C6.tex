@@ -1,0 +1,67 @@
+% META: {"id": "1NSI-APT-RE-C6", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "remediation", "capacites": ["P-ALGO-02D"], "capacites_codes": ["C6"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C6 : l'invariant du tri par selection reduit a sa premiere clause
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-APT-RE-C6-EX1}{2}{15}
+Un élève réutilise pour le tri par sélection l'invariant du tri par insertion :
+
+\medskip
+\emph{« Au début de chaque itération $i$, \lstinline{tableau[0:i]} est trié. »}
+\medskip
+
+\begin{enumerate}
+  \item Vérifier que cet énoncé est bien \textbf{vrai} pour le tri par sélection sur
+    \lstinline{[5, 2, 9, 1, 7]}.
+  \item Il est donc vrai — mais insuffisant. Pour le comprendre, reprendre l'étape de
+    conservation : au tour $i$, l'algorithme place en case $i$ le minimum de
+    \lstinline{tableau[i:n]}. Que faudrait-il savoir de ce minimum, par rapport aux
+    éléments déjà rangés, pour conclure que \lstinline{tableau[0:i+1]} est trié ?
+  \item Énoncer la clause manquante.
+  \item Cette clause supplémentaire est-elle vraie pour le tri par \textbf{insertion} ?
+    Le vérifier sur \lstinline{[5, 2, 9, 1, 7]} en relevant, au début du tour $i=3$, la
+    zone triée et les éléments restants.
+  \item Que conclure : les deux algorithmes produisent le même résultat, mais leurs
+    preuves sont-elles interchangeables ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def selection_zones(tableau):
+%     tableau = tableau[:]
+%     n = len(tableau)
+%     vus = []
+%     for i in range(n - 1):
+%         vus.append((tableau[:i], tableau[i:]))
+%         indice_min = i
+%         for j in range(i + 1, n):
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%     return vus
+% vus = selection_zones([5, 2, 9, 1, 7])
+% for zone, reste in vus:
+%     assert zone == sorted(zone)
+%     if zone and reste:
+%         assert max(zone) <= min(reste)
+% def insertion_zones(tableau):
+%     tableau = tableau[:]
+%     vus = []
+%     for i in range(1, len(tableau)):
+%         vus.append((i, tableau[:i], tableau[i:]))
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%         tableau[j + 1] = valeur
+%     return vus
+% ins = insertion_zones([5, 2, 9, 1, 7])
+% zone3 = [z for i, z, _r in ins if i == 3][0]
+% reste3 = [r for i, _z, r in ins if i == 3][0]
+% assert zone3 == [2, 5, 9]
+% assert reste3 == [1, 7]
+% assert max(zone3) > min(reste3)
+% assert all(z == sorted(z) for _i, z, _r in ins)
+% END-VERIFY

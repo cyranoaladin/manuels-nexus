@@ -1,0 +1,58 @@
+% META: {"id": "1NSI-APT-RE-C4", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "remediation", "capacites": ["P-ALGO-02C"], "capacites_codes": ["C4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C4 : un invariant enonce sans borner sa zone
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-APT-RE-C4-EX1}{2}{12}
+Un élève propose comme invariant de la boucle externe du tri par insertion :
+
+\medskip
+\emph{« Au début de chaque itération, le tableau est trié. »}
+\medskip
+
+\begin{enumerate}
+  \item Sur \lstinline{[5, 2, 9, 1, 7]}, relever l'état complet du tableau au début du tour
+    $i=3$. Cet énoncé est-il vrai ?
+  \item Un invariant faux permet-il de démontrer quoi que ce soit ? Expliquer.
+  \item Corriger l'énoncé en bornant la zone concernée, puis vérifier la version corrigée
+    sur les quatre tours.
+  \item Un deuxième élève propose : \emph{« le variant $V = i$ décroît »}. Deux erreurs se
+    cachent dans cette phrase : les nommer.
+  \item Écrire une fonction qui vérifie l'invariant corrigé par une assertion au début de
+    chaque tour, et la faire tourner sur \lstinline{[5, 2, 9, 1, 7]}.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def etats(tableau):
+%     tableau = tableau[:]
+%     vus = []
+%     for i in range(1, len(tableau)):
+%         vus.append((i, tableau[:], tableau[:i]))
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%         tableau[j + 1] = valeur
+%     return vus
+% vus = etats([5, 2, 9, 1, 7])
+% complet_i3 = [e for e in vus if e[0] == 3][0][1]
+% assert complet_i3 == [2, 5, 9, 1, 7]
+% assert complet_i3 != sorted(complet_i3)
+% assert all(zone == sorted(zone) for _i, _t, zone in vus)
+% def tri_insertion_verifie(tableau):
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         zone = tableau[:i]
+%         assert zone == sorted(zone)
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%         tableau[j + 1] = valeur
+%     return tableau
+% assert tri_insertion_verifie([5, 2, 9, 1, 7]) == [1, 2, 5, 7, 9]
+% END-VERIFY

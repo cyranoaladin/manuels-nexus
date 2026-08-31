@@ -1,0 +1,69 @@
+% META: {"id": "1NSI-APT-ME-004", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "methode", "capacites": ["P-ALGO-02C"], "capacites_codes": ["C4"], "methodes": ["M4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M4}{Décrire l'invariant de boucle du tri par insertion}
+\textbf{Quand l'utiliser ?} Quand l'énoncé demande de \textbf{prouver la correction} du tri
+par insertion — c'est-à-dire de justifier qu'il renvoie bien un tableau trié, et pas
+seulement qu'il s'arrête.
+
+\textbf{Ne pas confondre :} le \textbf{variant} est un entier qui décroît et prouve la
+\textbf{terminaison} ; l'\textbf{invariant} est une propriété qui reste vraie et prouve la
+\textbf{correction}. Ce sont deux questions différentes.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item Énonce l'invariant en nommant précisément la zone concernée : \emph{au début de
+    chaque itération $i$ de la boucle \lstinline{for}, le sous-tableau
+    \lstinline{tableau[0:i]} contient les $i$ premiers éléments d'origine, triés.}
+  \item \textbf{Initialisation} : avant le premier tour, $i=1$ et \lstinline{tableau[0:1]}
+    ne contient qu'un élément — un tableau d'un seul élément est trié. L'invariant est vrai.
+  \item \textbf{Conservation} : si l'invariant est vrai au début du tour $i$, le corps
+    décale vers la droite tous les éléments de \lstinline{tableau[0:i]} strictement
+    supérieurs à \lstinline{valeur}, puis insère \lstinline{valeur} juste après le dernier
+    élément qui lui est inférieur ou égal. \lstinline{tableau[0:i+1]} est donc trié : c'est
+    l'invariant au début du tour $i+1$.
+  \item \textbf{Terminaison de la preuve} : à la sortie, $i = n$. L'invariant donne alors
+    \lstinline{tableau[0:n]} trié, c'est-à-dire le tableau entier.
+\end{enumerate}
+
+\textbf{Les trois temps à ne jamais omettre :} initialisation, conservation, conclusion.
+Une preuve qui saute l'un des trois ne prouve rien.
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item Dire « le tableau est trié » sans borner la zone : c'est faux pendant l'exécution,
+    et l'invariant devient inutilisable.
+  \item Oublier « \emph{les $i$ premiers éléments d'origine} » : sans cette clause, un
+    algorithme qui effacerait des valeurs satisferait quand même l'énoncé.
+  \item Confondre la boucle \lstinline{for} externe et la boucle \lstinline{while} interne :
+    l'invariant de correction porte sur la boucle externe.
+  \item Prouver la terminaison en croyant prouver la correction : un algorithme peut
+    s'arrêter en renvoyant un résultat faux.
+\end{itemize}
+
+\textbf{Exemple : lire l'invariant dans la trace.}
+\begin{python}
+def tri_insertion_verifie(tableau):
+    tableau = tableau[:]
+    for i in range(1, len(tableau)):
+        # invariant au DEBUT du tour i : tableau[0:i] est trie
+        zone = tableau[:i]
+        assert zone == sorted(zone), "invariant rompu"
+        valeur = tableau[i]
+        j = i - 1
+        while j >= 0 and tableau[j] > valeur:
+            tableau[j + 1] = tableau[j]
+            j = j - 1
+        tableau[j + 1] = valeur
+    return tableau
+
+tri_insertion_verifie([5, 2, 9, 1, 7])   # renvoie [1, 2, 5, 7, 9]
+\end{python}
+L'assertion ne se déclenche jamais : c'est l'invariant, vérifié à chaque tour. Elle
+n'en constitue pas une preuve — un test ne couvre qu'un tableau — mais elle permet de
+détecter immédiatement un énoncé d'invariant faux.
+
+\textbf{Vérifier :} après chaque tour de la boucle externe, affiche
+\lstinline{tableau[0:i+1]} et contrôle qu'il est trié — l'invariant doit se lire dans la
+trace.
+
+\textbf{S'entraîner :} exercices C4 du chapitre.
+\end{fichemethode}

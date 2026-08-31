@@ -1,0 +1,44 @@
+% META: {"id": "1NSI-APT-RE-C1", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "remediation", "capacites": ["P-ALGO-01A"], "capacites_codes": ["C1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : le return place dans un else sort trop tot
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-APT-RE-C1-EX1}{1}{10}
+Un élève écrit la recherche d'occurrence en ajoutant un \lstinline{else} :
+\begin{python}
+def recherche_occurrence_bugue(tableau, valeur):
+    for i in range(len(tableau)):
+        if tableau[i] == valeur:
+            return i
+        else:
+            return None
+\end{python}
+\begin{enumerate}
+  \item Tester cette fonction sur \lstinline{[7, 3, 9]} avec la valeur $3$. Le résultat
+    est-il correct ?
+  \item La tester avec la valeur $7$. Le résultat est-il correct cette fois ? Pourquoi ce
+    test seul ne permet-il pas de détecter l'erreur ?
+  \item Expliquer précisément combien de tours de boucle s'exécutent, et pourquoi.
+  \item Corriger la fonction. Où doit se trouver le \lstinline{return None} ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def recherche_occurrence_bugue(tableau, valeur):
+%     for i in range(len(tableau)):
+%         if tableau[i] == valeur:
+%             return i
+%         else:
+%             return None
+% assert recherche_occurrence_bugue([7, 3, 9], 3) is None
+% assert recherche_occurrence_bugue([7, 3, 9], 7) == 0
+% def recherche_occurrence(tableau, valeur):
+%     for i in range(len(tableau)):
+%         if tableau[i] == valeur:
+%             return i
+%     return None
+% assert recherche_occurrence([7, 3, 9], 3) == 1
+% assert recherche_occurrence([7, 3, 9], 7) == 0
+% assert recherche_occurrence([7, 3, 9], 5) is None
+% END-VERIFY

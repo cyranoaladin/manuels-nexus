@@ -1,0 +1,85 @@
+% META: {"id": "1NSI-APT-CO-103", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige", "exercice_ref": "1NSI-APT-EX-103", "capacites": ["P-ALGO-02A"], "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def tri_insertion(tableau):
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%         tableau[j + 1] = valeur
+%     return tableau
+% assert tri_insertion([5, 2, 9, 1, 7]) == [1, 2, 5, 7, 9]
+% assert tri_insertion([]) == []
+% assert tri_insertion([3]) == [3]
+% assert tri_insertion([2, 2, 1]) == [1, 2, 2]
+% def decalages(tableau):
+%     tableau = tableau[:]
+%     total = 0
+%     for i in range(1, len(tableau)):
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%             total += 1
+%         tableau[j + 1] = valeur
+%     return total
+% assert decalages([5, 2, 9, 1, 7]) == 5
+% assert decalages([1, 2, 5, 7, 9]) == 0
+% assert decalages([9, 7, 5, 2, 1]) == 10
+% assert 10 == 4 * 5 // 2
+% END-VERIFY
+\begin{corrige}{1NSI-APT-EX-103}
+
+\textbf{1.} Tour par tour :
+
+\begin{itemize}
+  \item $i=1$ : valeur $2$ ; $1$ décalage ($5$ passe à droite) ; tableau
+    \lstinline{[2, 5, 9, 1, 7]}.
+  \item $i=2$ : valeur $9$ ; $0$ décalage ; tableau \lstinline{[2, 5, 9, 1, 7]}.
+  \item $i=3$ : valeur $1$ ; $3$ décalages ($9$, $5$ et $2$ passent à droite) ; tableau
+    \lstinline{[1, 2, 5, 9, 7]}.
+  \item $i=4$ : valeur $7$ ; $1$ décalage ($9$ passe à droite) ; tableau
+    \lstinline{[1, 2, 5, 7, 9]}.
+\end{itemize}
+
+\textbf{2.} Le total est de $1+0+3+1 = 5$ décalages. Le tour $i=2$ n'en effectue aucun :
+la valeur mise de côté est $9$, et l'élément immédiatement à sa gauche vaut $5$. La
+condition \lstinline{tableau[j] > valeur} est fausse dès le premier test, la boucle
+\lstinline{while} ne s'exécute pas, et $9$ est réécrit à sa propre place. Un élément déjà
+plus grand que toute la zone triée reste où il est.
+
+\textbf{3.}
+\begin{python}
+def tri_insertion(tableau):
+    tableau = tableau[:]
+    for i in range(1, len(tableau)):
+        valeur = tableau[i]
+        j = i - 1
+        while j >= 0 and tableau[j] > valeur:
+            tableau[j + 1] = tableau[j]
+            j = j - 1
+        tableau[j + 1] = valeur
+    return tableau
+\end{python}
+\lstinline{tri_insertion([5, 2, 9, 1, 7])} renvoie \lstinline{[1, 2, 5, 7, 9]}. Le test
+\lstinline{j >= 0} doit précéder \lstinline{tableau[j] > valeur} : Python évalue de gauche
+à droite et s'arrête dès que la première condition est fausse, ce qui évite de lire
+\lstinline{tableau[-1]}.
+
+\textbf{4.} Sur \lstinline{[1, 2, 5, 7, 9]} déjà trié : $0$ décalage. Chaque valeur est
+supérieure ou égale à celle qui la précède, donc la boucle \lstinline{while} s'arrête
+immédiatement à chaque tour.
+
+Sur \lstinline{[9, 7, 5, 2, 1]} trié à l'envers : $10$ décalages. Chaque nouvelle valeur
+est plus petite que toutes les précédentes et doit traverser toute la zone triée, soit
+$1+2+3+4 = 10$ décalages.
+
+Le coût du tri par insertion dépend donc \textbf{des données}, et pas seulement de leur
+nombre : il est très rapide sur un tableau presque trié, et le plus lent sur un tableau
+trié à l'envers. C'est ce qui le distingue du tri par sélection, dont le nombre de
+comparaisons est le même quelles que soient les valeurs.
+
+\end{corrige}

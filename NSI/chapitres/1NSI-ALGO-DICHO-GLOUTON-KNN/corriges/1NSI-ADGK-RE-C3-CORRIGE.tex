@@ -1,0 +1,73 @@
+% META: {"id": "1NSI-ADGK-RE-C3-CORRIGE", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "corrige", "exercice_ref": "1NSI-ADGK-RE-C3", "capacites": ["P-ALGO-03"], "capacites_codes": ["C3"], "status": "generated"}
+% BEGIN-VERIFY
+% def distance(a, b):
+%     return ((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) ** 0.5
+% exemples = [((0, 0), "A"), ((3, 0), "B"), ((4, 0), "B"), ((5, 0), "B")]
+% point = (1, 0)
+% assert [distance(e[0], point) for e in exemples] == [1.0, 2.0, 3.0, 4.0]
+% def knn_bugue(exemples, point, k):
+%     plus_proches = sorted(exemples, key=lambda e: distance(e[0], point))
+%     return plus_proches[0][1]
+% assert knn_bugue(exemples, point, 3) == "A"
+% assert knn_bugue(exemples, point, 1) == "A"
+% def knn(exemples, point, k):
+%     plus_proches = sorted(exemples, key=lambda e: distance(e[0], point))[:k]
+%     classes = [c for _coord, c in plus_proches]
+%     meilleure, meilleur_compte = None, -1
+%     for c in classes:
+%         if classes.count(c) > meilleur_compte:
+%             meilleure, meilleur_compte = c, classes.count(c)
+%     return meilleure
+% assert knn(exemples, point, 3) == "B"
+% assert knn(exemples, point, 1) == "A"
+% voisins = sorted(exemples, key=lambda e: distance(e[0], point))[:3]
+% assert [c for _co, c in voisins] == ["A", "B", "B"]
+% END-VERIFY
+
+\begin{corrige}{1NSI-ADGK-RE-C3-EX1}
+
+\textbf{1.} Tous les points sont sur l'axe des abscisses, la distance se réduit donc à
+l'écart des abscisses :
+\begin{itemize}
+  \item de \lstinline{(1, 0)} à \lstinline{(0, 0)} : $1{,}0$ — classe \lstinline{"A"} ;
+  \item à \lstinline{(3, 0)} : $2{,}0$ — classe \lstinline{"B"} ;
+  \item à \lstinline{(4, 0)} : $3{,}0$ — classe \lstinline{"B"} ;
+  \item à \lstinline{(5, 0)} : $4{,}0$ — classe \lstinline{"B"}.
+\end{itemize}
+
+\textbf{2.} \lstinline{knn_bugue} renvoie \lstinline{"A"}, la classe du point le plus proche.
+Le paramètre \lstinline{k} ne joue \textbf{aucun rôle} : il figure dans la signature mais
+n'apparaît nulle part dans le corps de la fonction. Un paramètre inutilisé est en soi un
+signal d'alerte — il indique presque toujours qu'une partie de l'algorithme a été oubliée.
+
+\textbf{3.} Les $3$ plus proches voisins sont \lstinline{(0, 0)} de classe \lstinline{"A"},
+\lstinline{(3, 0)} et \lstinline{(4, 0)} toutes deux de classe \lstinline{"B"}. Leurs
+classes sont donc \lstinline{["A", "B", "B"]} : la classe majoritaire est \lstinline{"B"},
+avec $2$ voix contre $1$.
+
+\textbf{4.} Non : l'algorithme attendu renvoie \lstinline{"B"}, alors que la version bogué
+renvoie \lstinline{"A"}. La différence vient de ce que l'algorithme des $k$ plus proches
+voisins ne consulte pas le voisin le plus proche, mais fait \textbf{voter} les $k$ plus
+proches. Ici le voisin immédiat est isolé dans sa classe : c'est exactement la situation
+que le vote majoritaire est censé corriger, en évitant qu'un point isolé — ou une mesure
+aberrante — décide seul de la classification. Avec $k = 1$, les deux fonctions coïncident,
+et l'erreur reste invisible.
+
+\textbf{5.}
+\begin{python}
+def knn(exemples, point, k):
+    plus_proches = sorted(exemples, key=lambda e: distance(e[0], point))[:k]
+    classes = [c for _coord, c in plus_proches]
+    meilleure, meilleur_compte = None, -1
+    for c in classes:
+        if classes.count(c) > meilleur_compte:
+            meilleure, meilleur_compte = c, classes.count(c)
+    return meilleure
+\end{python}
+Deux changements suffisent : la troncature \lstinline{[:k]}, qui fait enfin servir le
+paramètre, et le comptage des classes, qui remplace la lecture du premier élément.
+\lstinline{knn(exemples, (1, 0), 3)} renvoie bien \lstinline{"B"}, et
+\lstinline{knn(exemples, (1, 0), 1)} renvoie \lstinline{"A"} — avec un seul voisin, le vote
+se réduit effectivement à ce voisin.
+
+\end{corrige}

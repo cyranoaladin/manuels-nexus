@@ -8,26 +8,26 @@ C7 : produit scalaire ». Un élève en échec sur `C1` recevait la fiche `C7`.
 
 ## Mesure
 
-- objets analysés : `5515`
-- groupes de corps identiques : `315`
-- objets excédentaires : `1443`
-- objets à crédit invalide : `164`
+- objets analysés : `5428`
+- groupes de corps identiques : `288`
+- objets excédentaires : `1416`
+- objets à crédit invalide : `162`
 - UNKNOWN : `0`
 
 ## Dispositions
 
 | Disposition | Groupes | Objets excédentaires |
 |---|---:|---:|
-| `BOILERPLATE_ONLY` | 18 | 50 |
-| `CAPACITY_MISREPRESENTING_CLONE` | 276 | 1354 |
-| `CROSS_MANUAL_CONTAMINATION` | 2 | 2 |
+| `BOILERPLATE_ONLY` | 11 | 43 |
+| `CAPACITY_MISREPRESENTING_CLONE` | 257 | 1335 |
+| `CROSS_MANUAL_CONTAMINATION` | 1 | 1 |
 | `REDUNDANT_SAME_CAPACITY` | 19 | 37 |
 
 ## Par manuel
 
 | Manuel | Objets excédentaires |
 |---|---:|
-| `1NSI` | 511 |
+| `1NSI` | 484 |
 | `1SPE` | 18 |
 | `TNSI` | 610 |
 | `TSPE` | 304 |

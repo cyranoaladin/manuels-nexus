@@ -1,0 +1,52 @@
+% META: {"id": "1NSI-APT-ME-003", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "methode", "capacites": ["P-ALGO-02A"], "capacites_codes": ["C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M3}{Écrire le tri par insertion}
+\textbf{Quand l'utiliser ?} Quand tu dois trier un tableau en construisant progressivement
+une zone triée à gauche. C'est le tri « du joueur de cartes » : chaque nouvelle carte est
+insérée à sa place parmi celles déjà en main.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item Considère que la case $0$ forme déjà, à elle seule, une zone triée.
+  \item Pour chaque indice $i$ de $1$ à $n-1$, mets de côté \lstinline{valeur = tableau[i]} :
+    c'est la carte à insérer, et sa case devient libre.
+  \item Fais reculer un indice $j$ depuis $i-1$ : \textbf{tant que} $j \geqslant 0$
+    \textbf{et} \lstinline{tableau[j] > valeur}, décale \lstinline{tableau[j]} d'une case
+    vers la droite et décrémente $j$.
+  \item Quand la boucle s'arrête, la place est libre en $j+1$ : écris-y \lstinline{valeur}.
+\end{enumerate}
+
+\textbf{Exemple :}
+\begin{python}
+def tri_insertion(tableau):
+    tableau = tableau[:]          # on ne modifie pas l'original
+    for i in range(1, len(tableau)):
+        valeur = tableau[i]
+        j = i - 1
+        while j >= 0 and tableau[j] > valeur:
+            tableau[j + 1] = tableau[j]
+            j = j - 1
+        tableau[j + 1] = valeur
+    return tableau
+
+tri_insertion([9, 1, 5, 3])   # renvoie [1, 3, 5, 9]
+\end{python}
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item Écrire la condition dans l'ordre \lstinline{tableau[j] > valeur and j >= 0} : Python
+    évalue de gauche à droite, donc \lstinline{tableau[-1]} serait lu avant le test de
+    borne. Le test \lstinline{j >= 0} doit venir en \textbf{premier}.
+  \item Faire commencer la boucle externe à $0$ : la première carte est déjà « en main »,
+    il n'y a rien à insérer.
+  \item Écrire \lstinline{tableau[j] = valeur} au lieu de \lstinline{tableau[j + 1]} : après
+    la boucle, $j$ désigne la case \textbf{avant} le trou.
+  \item Oublier la copie \lstinline{tableau[:]} quand l'énoncé demande de ne pas modifier
+    le tableau d'origine.
+\end{itemize}
+
+\textbf{Vérifier :} teste sur un tableau vide, un singleton, un tableau déjà trié, un
+tableau trié à l'envers, et un tableau contenant des doublons. Compare le résultat à
+\lstinline{sorted(tableau)}.
+
+\textbf{S'entraîner :} exercices C3 du chapitre.
+\end{fichemethode}

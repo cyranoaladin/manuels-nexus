@@ -4,26 +4,26 @@
   "generated_by": "scripts/build_false_missing_gap_delta.py",
   "before_sha": "289daa61dadfd977fec668d8405c98c4d9f10d34",
   "before_authoring_units": 460,
-  "after_authoring_units": 324,
-  "false_missing_gaps_removed": 136,
+  "after_authoring_units": 315,
+  "false_missing_gaps_removed": 145,
   "gaps_added": 0,
   "added": [],
   "unexplained_removals": 0,
   "per_removal_class": {
-    "RECLASSIFIED_INDETERMINATE": 124,
-    "RECOVERED_VALID_CREDIT": 12
+    "RECLASSIFIED_INDETERMINATE": 121,
+    "RECOVERED_VALID_CREDIT": 24
   },
   "per_manual": {
-    "1NSI": 96,
+    "1NSI": 105,
     "TNSI": 38,
     "TSPE": 2
   },
   "per_resolution_rule": {
-    "LOCAL_IN_SCOPE": 120,
-    "REF_EXACT": 95,
-    "SCOPED_QUALIFIED": 118
+    "LOCAL_IN_SCOPE": 128,
+    "REF_EXACT": 107,
+    "SCOPED_QUALIFIED": 115
   },
-  "removed_units_digest": "sha256:2289ecd9f815a06589aa0ce95f6ea169dbc25e49e413ded6dcedaaec105dfff3",
+  "removed_units_digest": "sha256:2b0e69a70e2ed68ba7b389b60c3fc676ef7109b54e6b781558eb60e1975ca2cb",
   "removed_units": [
     {
       "removal_class": "RECOVERED_VALID_CREDIT",
@@ -105,6 +105,40 @@
       "current_state": "VALID_ALIGNED_CONTENT",
       "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
       "manual": "1NSI",
+      "capacity": "C2",
+      "role": "remediation",
+      "canonical_uid": "1NSI::1NSI-ALGO-DICHO-GLOUTON-KNN::C2",
+      "why_it_was_falsely_missing": "l'objet declarait la capacite sous une forme pleinement qualifiee que la mesure precedente reduisait a un jeton local, donc ne rapprochait pas du code du contrat",
+      "resolution_rules_that_recover_it": [
+        "LOCAL_IN_SCOPE",
+        "REF_EXACT"
+      ],
+      "satisfied_by": [
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C2.tex",
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C2.tex"
+      ],
+      "evidence": [
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C2.tex",
+          "declared_as": "C2",
+          "resolution_rule": "LOCAL_IN_SCOPE",
+          "canonical_uid": "1NSI::1NSI-ALGO-DICHO-GLOUTON-KNN::C2",
+          "official_ref": "P-ALGO-05"
+        },
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C2.tex",
+          "declared_as": "P-ALGO-05",
+          "resolution_rule": "REF_EXACT",
+          "canonical_uid": "1NSI::1NSI-ALGO-DICHO-GLOUTON-KNN::C2",
+          "official_ref": "P-ALGO-05"
+        }
+      ]
+    },
+    {
+      "removal_class": "RECOVERED_VALID_CREDIT",
+      "current_state": "VALID_ALIGNED_CONTENT",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "manual": "1NSI",
       "capacity": "C3",
       "role": "cours",
       "canonical_uid": "1NSI::1NSI-ALGO-DICHO-GLOUTON-KNN::C3",
@@ -118,6 +152,40 @@
       "evidence": [
         {
           "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C3.tex",
+          "declared_as": "P-ALGO-03",
+          "resolution_rule": "REF_EXACT",
+          "canonical_uid": "1NSI::1NSI-ALGO-DICHO-GLOUTON-KNN::C3",
+          "official_ref": "P-ALGO-03"
+        }
+      ]
+    },
+    {
+      "removal_class": "RECOVERED_VALID_CREDIT",
+      "current_state": "VALID_ALIGNED_CONTENT",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "manual": "1NSI",
+      "capacity": "C3",
+      "role": "remediation",
+      "canonical_uid": "1NSI::1NSI-ALGO-DICHO-GLOUTON-KNN::C3",
+      "why_it_was_falsely_missing": "l'objet declarait la capacite sous une forme pleinement qualifiee que la mesure precedente reduisait a un jeton local, donc ne rapprochait pas du code du contrat",
+      "resolution_rules_that_recover_it": [
+        "LOCAL_IN_SCOPE",
+        "REF_EXACT"
+      ],
+      "satisfied_by": [
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C3.tex",
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C3.tex"
+      ],
+      "evidence": [
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C3.tex",
+          "declared_as": "C3",
+          "resolution_rule": "LOCAL_IN_SCOPE",
+          "canonical_uid": "1NSI::1NSI-ALGO-DICHO-GLOUTON-KNN::C3",
+          "official_ref": "P-ALGO-03"
+        },
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C3.tex",
           "declared_as": "P-ALGO-03",
           "resolution_rule": "REF_EXACT",
           "canonical_uid": "1NSI::1NSI-ALGO-DICHO-GLOUTON-KNN::C3",
@@ -151,8 +219,8 @@
       ]
     },
     {
-      "removal_class": "RECLASSIFIED_INDETERMINATE",
-      "current_state": "INDETERMINATE_CLONE_CREDIT",
+      "removal_class": "RECOVERED_VALID_CREDIT",
+      "current_state": "VALID_ALIGNED_CONTENT",
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
       "manual": "1NSI",
       "capacity": "C1",
@@ -160,16 +228,25 @@
       "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C1",
       "why_it_was_falsely_missing": "l'objet declarait la capacite sous une forme pleinement qualifiee que la mesure precedente reduisait a un jeton local, donc ne rapprochait pas du code du contrat",
       "resolution_rules_that_recover_it": [
-        "LOCAL_IN_SCOPE"
+        "LOCAL_IN_SCOPE",
+        "REF_EXACT"
       ],
       "satisfied_by": [
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-ALGO-PARCOURS-TRIS-METH-01.tex"
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-001.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-001.tex"
       ],
       "evidence": [
         {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-ALGO-PARCOURS-TRIS-METH-01.tex",
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-001.tex",
           "declared_as": "C1",
           "resolution_rule": "LOCAL_IN_SCOPE",
+          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C1",
+          "official_ref": "P-ALGO-01A"
+        },
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-001.tex",
+          "declared_as": "P-ALGO-01A",
+          "resolution_rule": "REF_EXACT",
           "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C1",
           "official_ref": "P-ALGO-01A"
         }
@@ -193,6 +270,40 @@
       "evidence": [
         {
           "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-APT-COURS-C1.tex",
+          "declared_as": "P-ALGO-01B",
+          "resolution_rule": "REF_EXACT",
+          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C2",
+          "official_ref": "P-ALGO-01B"
+        }
+      ]
+    },
+    {
+      "removal_class": "RECOVERED_VALID_CREDIT",
+      "current_state": "VALID_ALIGNED_CONTENT",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "manual": "1NSI",
+      "capacity": "C2",
+      "role": "methodes",
+      "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C2",
+      "why_it_was_falsely_missing": "l'objet declarait la capacite sous une forme pleinement qualifiee que la mesure precedente reduisait a un jeton local, donc ne rapprochait pas du code du contrat",
+      "resolution_rules_that_recover_it": [
+        "LOCAL_IN_SCOPE",
+        "REF_EXACT"
+      ],
+      "satisfied_by": [
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-002.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-002.tex"
+      ],
+      "evidence": [
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-002.tex",
+          "declared_as": "C2",
+          "resolution_rule": "LOCAL_IN_SCOPE",
+          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C2",
+          "official_ref": "P-ALGO-01B"
+        },
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-002.tex",
           "declared_as": "P-ALGO-01B",
           "resolution_rule": "REF_EXACT",
           "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C2",
@@ -230,6 +341,74 @@
       "current_state": "VALID_ALIGNED_CONTENT",
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
       "manual": "1NSI",
+      "capacity": "C3",
+      "role": "methodes",
+      "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C3",
+      "why_it_was_falsely_missing": "l'objet declarait la capacite sous une forme pleinement qualifiee que la mesure precedente reduisait a un jeton local, donc ne rapprochait pas du code du contrat",
+      "resolution_rules_that_recover_it": [
+        "LOCAL_IN_SCOPE",
+        "REF_EXACT"
+      ],
+      "satisfied_by": [
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-003.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-003.tex"
+      ],
+      "evidence": [
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-003.tex",
+          "declared_as": "C3",
+          "resolution_rule": "LOCAL_IN_SCOPE",
+          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C3",
+          "official_ref": "P-ALGO-02A"
+        },
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-003.tex",
+          "declared_as": "P-ALGO-02A",
+          "resolution_rule": "REF_EXACT",
+          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C3",
+          "official_ref": "P-ALGO-02A"
+        }
+      ]
+    },
+    {
+      "removal_class": "RECOVERED_VALID_CREDIT",
+      "current_state": "VALID_ALIGNED_CONTENT",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "manual": "1NSI",
+      "capacity": "C3",
+      "role": "remediation",
+      "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C3",
+      "why_it_was_falsely_missing": "l'objet declarait la capacite sous une forme pleinement qualifiee que la mesure precedente reduisait a un jeton local, donc ne rapprochait pas du code du contrat",
+      "resolution_rules_that_recover_it": [
+        "LOCAL_IN_SCOPE",
+        "REF_EXACT"
+      ],
+      "satisfied_by": [
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C3.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C3.tex"
+      ],
+      "evidence": [
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C3.tex",
+          "declared_as": "C3",
+          "resolution_rule": "LOCAL_IN_SCOPE",
+          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C3",
+          "official_ref": "P-ALGO-02A"
+        },
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C3.tex",
+          "declared_as": "P-ALGO-02A",
+          "resolution_rule": "REF_EXACT",
+          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C3",
+          "official_ref": "P-ALGO-02A"
+        }
+      ]
+    },
+    {
+      "removal_class": "RECOVERED_VALID_CREDIT",
+      "current_state": "VALID_ALIGNED_CONTENT",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "manual": "1NSI",
       "capacity": "C4",
       "role": "cours",
       "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C4",
@@ -251,8 +430,42 @@
       ]
     },
     {
-      "removal_class": "RECLASSIFIED_INDETERMINATE",
-      "current_state": "INDETERMINATE_CLONE_CREDIT",
+      "removal_class": "RECOVERED_VALID_CREDIT",
+      "current_state": "VALID_ALIGNED_CONTENT",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "manual": "1NSI",
+      "capacity": "C4",
+      "role": "methodes",
+      "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C4",
+      "why_it_was_falsely_missing": "l'objet declarait la capacite sous une forme pleinement qualifiee que la mesure precedente reduisait a un jeton local, donc ne rapprochait pas du code du contrat",
+      "resolution_rules_that_recover_it": [
+        "LOCAL_IN_SCOPE",
+        "REF_EXACT"
+      ],
+      "satisfied_by": [
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-004.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-004.tex"
+      ],
+      "evidence": [
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-004.tex",
+          "declared_as": "C4",
+          "resolution_rule": "LOCAL_IN_SCOPE",
+          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C4",
+          "official_ref": "P-ALGO-02C"
+        },
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-004.tex",
+          "declared_as": "P-ALGO-02C",
+          "resolution_rule": "REF_EXACT",
+          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C4",
+          "official_ref": "P-ALGO-02C"
+        }
+      ]
+    },
+    {
+      "removal_class": "RECOVERED_VALID_CREDIT",
+      "current_state": "VALID_ALIGNED_CONTENT",
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
       "manual": "1NSI",
       "capacity": "C4",
@@ -261,24 +474,24 @@
       "why_it_was_falsely_missing": "l'objet declarait la capacite sous une forme pleinement qualifiee que la mesure precedente reduisait a un jeton local, donc ne rapprochait pas du code du contrat",
       "resolution_rules_that_recover_it": [
         "LOCAL_IN_SCOPE",
-        "SCOPED_QUALIFIED"
+        "REF_EXACT"
       ],
       "satisfied_by": [
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-04.tex",
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-04.tex"
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C4.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C4.tex"
       ],
       "evidence": [
         {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-04.tex",
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C4.tex",
           "declared_as": "C4",
           "resolution_rule": "LOCAL_IN_SCOPE",
           "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C4",
           "official_ref": "P-ALGO-02C"
         },
         {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-04.tex",
-          "declared_as": "1NSI-ALGO-PARCOURS-TRIS-C4",
-          "resolution_rule": "SCOPED_QUALIFIED",
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C4.tex",
+          "declared_as": "P-ALGO-02C",
+          "resolution_rule": "REF_EXACT",
           "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C4",
           "official_ref": "P-ALGO-02C"
         }
@@ -315,34 +528,50 @@
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
       "manual": "1NSI",
       "capacity": "C5",
-      "role": "remediation",
+      "role": "methodes",
       "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C5",
       "why_it_was_falsely_missing": "l'objet declarait la capacite sous une forme pleinement qualifiee que la mesure precedente reduisait a un jeton local, donc ne rapprochait pas du code du contrat",
       "resolution_rules_that_recover_it": [
         "LOCAL_IN_SCOPE",
-        "REF_EXACT",
-        "SCOPED_QUALIFIED"
+        "REF_EXACT"
       ],
       "satisfied_by": [
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-05.tex",
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-05.tex",
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C5.tex"
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-005.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-005.tex"
       ],
       "evidence": [
         {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-05.tex",
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-005.tex",
           "declared_as": "C5",
           "resolution_rule": "LOCAL_IN_SCOPE",
           "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C5",
           "official_ref": "P-ALGO-02B"
         },
         {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-05.tex",
-          "declared_as": "1NSI-ALGO-PARCOURS-TRIS-C5",
-          "resolution_rule": "SCOPED_QUALIFIED",
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-005.tex",
+          "declared_as": "P-ALGO-02B",
+          "resolution_rule": "REF_EXACT",
           "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C5",
           "official_ref": "P-ALGO-02B"
-        },
+        }
+      ]
+    },
+    {
+      "removal_class": "RECOVERED_VALID_CREDIT",
+      "current_state": "VALID_ALIGNED_CONTENT",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "manual": "1NSI",
+      "capacity": "C5",
+      "role": "remediation",
+      "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C5",
+      "why_it_was_falsely_missing": "l'objet declarait la capacite sous une forme pleinement qualifiee que la mesure precedente reduisait a un jeton local, donc ne rapprochait pas du code du contrat",
+      "resolution_rules_that_recover_it": [
+        "REF_EXACT"
+      ],
+      "satisfied_by": [
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C5.tex"
+      ],
+      "evidence": [
         {
           "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C5.tex",
           "declared_as": "P-ALGO-02B",
@@ -353,8 +582,8 @@
       ]
     },
     {
-      "removal_class": "RECLASSIFIED_INDETERMINATE",
-      "current_state": "INDETERMINATE_CLONE_CREDIT",
+      "removal_class": "RECOVERED_VALID_CREDIT",
+      "current_state": "VALID_ALIGNED_CONTENT",
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
       "manual": "1NSI",
       "capacity": "C6",
@@ -363,104 +592,40 @@
       "why_it_was_falsely_missing": "l'objet declarait la capacite sous une forme pleinement qualifiee que la mesure precedente reduisait a un jeton local, donc ne rapprochait pas du code du contrat",
       "resolution_rules_that_recover_it": [
         "LOCAL_IN_SCOPE",
-        "SCOPED_QUALIFIED"
+        "REF_EXACT"
       ],
       "satisfied_by": [
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-031.tex",
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-031.tex",
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-032.tex",
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-032.tex",
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-033.tex",
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-033.tex",
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-034.tex",
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-034.tex",
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-035.tex",
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-035.tex",
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-036.tex",
-        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-036.tex"
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-106.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-106.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-RE-C6-CORRIGE.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-RE-C6-CORRIGE.tex"
       ],
       "evidence": [
         {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-031.tex",
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-106.tex",
           "declared_as": "C6",
           "resolution_rule": "LOCAL_IN_SCOPE",
           "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
           "official_ref": "P-ALGO-02D"
         },
         {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-031.tex",
-          "declared_as": "1NSI-ALGO-PARCOURS-TRIS-C6",
-          "resolution_rule": "SCOPED_QUALIFIED",
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-106.tex",
+          "declared_as": "P-ALGO-02D",
+          "resolution_rule": "REF_EXACT",
           "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
           "official_ref": "P-ALGO-02D"
         },
         {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-032.tex",
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-RE-C6-CORRIGE.tex",
           "declared_as": "C6",
           "resolution_rule": "LOCAL_IN_SCOPE",
           "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
           "official_ref": "P-ALGO-02D"
         },
         {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-032.tex",
-          "declared_as": "1NSI-ALGO-PARCOURS-TRIS-C6",
-          "resolution_rule": "SCOPED_QUALIFIED",
-          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
-          "official_ref": "P-ALGO-02D"
-        },
-        {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-033.tex",
-          "declared_as": "C6",
-          "resolution_rule": "LOCAL_IN_SCOPE",
-          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
-          "official_ref": "P-ALGO-02D"
-        },
-        {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-033.tex",
-          "declared_as": "1NSI-ALGO-PARCOURS-TRIS-C6",
-          "resolution_rule": "SCOPED_QUALIFIED",
-          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
-          "official_ref": "P-ALGO-02D"
-        },
-        {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-034.tex",
-          "declared_as": "C6",
-          "resolution_rule": "LOCAL_IN_SCOPE",
-          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
-          "official_ref": "P-ALGO-02D"
-        },
-        {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-034.tex",
-          "declared_as": "1NSI-ALGO-PARCOURS-TRIS-C6",
-          "resolution_rule": "SCOPED_QUALIFIED",
-          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
-          "official_ref": "P-ALGO-02D"
-        },
-        {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-035.tex",
-          "declared_as": "C6",
-          "resolution_rule": "LOCAL_IN_SCOPE",
-          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
-          "official_ref": "P-ALGO-02D"
-        },
-        {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-035.tex",
-          "declared_as": "1NSI-ALGO-PARCOURS-TRIS-C6",
-          "resolution_rule": "SCOPED_QUALIFIED",
-          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
-          "official_ref": "P-ALGO-02D"
-        },
-        {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-036.tex",
-          "declared_as": "C6",
-          "resolution_rule": "LOCAL_IN_SCOPE",
-          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
-          "official_ref": "P-ALGO-02D"
-        },
-        {
-          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-036.tex",
-          "declared_as": "1NSI-ALGO-PARCOURS-TRIS-C6",
-          "resolution_rule": "SCOPED_QUALIFIED",
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-RE-C6-CORRIGE.tex",
+          "declared_as": "P-ALGO-02D",
+          "resolution_rule": "REF_EXACT",
           "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
           "official_ref": "P-ALGO-02D"
         }
@@ -484,6 +649,74 @@
       "evidence": [
         {
           "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-APT-COURS-C3.tex",
+          "declared_as": "P-ALGO-02D",
+          "resolution_rule": "REF_EXACT",
+          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
+          "official_ref": "P-ALGO-02D"
+        }
+      ]
+    },
+    {
+      "removal_class": "RECOVERED_VALID_CREDIT",
+      "current_state": "VALID_ALIGNED_CONTENT",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "manual": "1NSI",
+      "capacity": "C6",
+      "role": "methodes",
+      "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
+      "why_it_was_falsely_missing": "l'objet declarait la capacite sous une forme pleinement qualifiee que la mesure precedente reduisait a un jeton local, donc ne rapprochait pas du code du contrat",
+      "resolution_rules_that_recover_it": [
+        "LOCAL_IN_SCOPE",
+        "REF_EXACT"
+      ],
+      "satisfied_by": [
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-006.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-006.tex"
+      ],
+      "evidence": [
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-006.tex",
+          "declared_as": "C6",
+          "resolution_rule": "LOCAL_IN_SCOPE",
+          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
+          "official_ref": "P-ALGO-02D"
+        },
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/1NSI-APT-ME-006.tex",
+          "declared_as": "P-ALGO-02D",
+          "resolution_rule": "REF_EXACT",
+          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
+          "official_ref": "P-ALGO-02D"
+        }
+      ]
+    },
+    {
+      "removal_class": "RECOVERED_VALID_CREDIT",
+      "current_state": "VALID_ALIGNED_CONTENT",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "manual": "1NSI",
+      "capacity": "C6",
+      "role": "remediation",
+      "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
+      "why_it_was_falsely_missing": "l'objet declarait la capacite sous une forme pleinement qualifiee que la mesure precedente reduisait a un jeton local, donc ne rapprochait pas du code du contrat",
+      "resolution_rules_that_recover_it": [
+        "LOCAL_IN_SCOPE",
+        "REF_EXACT"
+      ],
+      "satisfied_by": [
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C6.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C6.tex"
+      ],
+      "evidence": [
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C6.tex",
+          "declared_as": "C6",
+          "resolution_rule": "LOCAL_IN_SCOPE",
+          "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
+          "official_ref": "P-ALGO-02D"
+        },
+        {
+          "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-APT-RE-C6.tex",
           "declared_as": "P-ALGO-02D",
           "resolution_rule": "REF_EXACT",
           "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
