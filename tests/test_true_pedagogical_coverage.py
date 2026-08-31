@@ -122,17 +122,20 @@ def test_the_credit_rule_refuses_meta_only_claims(payload: dict, producer) -> No
     ledger = json.loads(
         (ROOT / "audit/P0_CONTENT_CLONE_LEDGER.json").read_text(encoding="utf-8")
     )
-    assert ledger["objects_on_invalid_credit"], "le P0 est encore ouvert"
+    invalid = set(ledger["objects_on_invalid_credit"])
+    assert invalid, "le P0 reste ouvert ailleurs dans la collection"
     assert "META" in payload["credit_rule"]
 
-    # Les seize fiches clonees de TSPE-GEOMETRIE-ESPACE ne creditent plus
-    # seize capacites : au plus une garde son credit.
-    invalid = set(ledger["objects_on_invalid_credit"])
-    cloned = [
-        path
-        for path in invalid
-        if "TSPE-GEOMETRIE-ESPACE/remediation" in path
+    # La regle vaut partout ou des clones subsistent : aucune copie ne
+    # conserve le credit d'une capacite qu'elle n'enseigne pas. Ce test
+    # n'exige plus la presence du defaut dans un chapitre precis -- il
+    # deviendrait faux le jour ou ce chapitre serait repare.
+    misrepresenting = [
+        group
+        for group in ledger["groups"]
+        if group["disposition"] == "CAPACITY_MISREPRESENTING_CLONE"
     ]
-    assert len(cloned) >= 15, (
-        "les fiches de remediation clonees doivent perdre leur credit"
-    )
+    assert misrepresenting
+    for group in misrepresenting:
+        kept = {row["path"] for row in group["members"]} - invalid
+        assert len(kept) <= 1

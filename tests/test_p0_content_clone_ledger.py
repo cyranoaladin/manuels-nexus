@@ -3,14 +3,15 @@
 P0_PEDAGOGICAL_CONTENT_CLONING_AND_CAPACITY_MISREPRESENTATION.
 
 Des centaines d'objets partagent un corps rigoureusement identique tout en
-declarant des capacites differentes. Dix-sept fiches de remediation de
-TSPE-GEOMETRIE-ESPACE declarees C1 a C16 portent le meme corps, dont l'en-tete
-annonce « FICHE DE REMEDIATION -- C7 : produit scalaire » : un eleve en echec
-sur C1 recevait la fiche C7.
+declarant des capacites differentes. Le cas fondateur : dix-sept fiches de
+remediation de TSPE-GEOMETRIE-ESPACE declarees C1 a C16 portaient le meme
+corps, celui de C7 -- un eleve en echec sur C1 recevait la fiche C7. Ce
+chapitre est desormais repare ; la collection ne l'est pas.
 
-Ces tests ne pretendent pas que le defaut est repare -- il ne l'est pas. Ils
-fixent sa mesure exacte, la rendent reproductible depuis les sources, et
-interdisent qu'elle augmente pendant la campagne de reecriture.
+Ces tests fixent la mesure du defaut, la rendent reproductible depuis les
+sources, interdisent qu'elle augmente pendant la reecriture, et gardent le
+terrain deja assaini. Un test qui affirme la PRESENCE d'un defaut devient faux
+le jour ou on le repare : ceux-ci affirment donc des invariants.
 """
 
 from __future__ import annotations
@@ -83,10 +84,18 @@ def test_the_body_definition_keeps_the_pedagogical_content(ledger: dict) -> None
         assert retained in definition["retained"]
 
 
-def test_the_seventeen_remediations_declared_c1_to_c16_are_one_body(
-    producer,
-) -> None:
-    """La preuve la plus nette du defaut, verifiee sur les sources."""
+def test_the_remediation_sheets_of_geoespace_are_all_distinct(producer) -> None:
+    """Le cas fondateur du P0, devenu garde de non-retour.
+
+    Ce chapitre declarait dix-sept fiches de remediation et n'en possedait
+    qu'une : celle de C7, produit scalaire, recopiee seize fois sous les
+    etiquettes C1 a C16. Un eleve en echec sur C1 recevait la fiche C7.
+
+    Ce test affirmait la presence du defaut tant qu'il n'etait pas repare. Les
+    seize copies ayant ete retirees, il affirme desormais l'invariant : dans ce
+    repertoire, deux fiches ne partagent jamais un corps. L'historique du
+    defaut reste au registre et dans l'historique Git.
+    """
 
     directory = (
         ROOT
@@ -95,23 +104,21 @@ def test_the_seventeen_remediations_declared_c1_to_c16_are_one_body(
     bodies = collections.defaultdict(list)
     for path in sorted(directory.glob("*.tex")):
         text = path.read_text(encoding="utf-8")
-        bodies[producer.digest(producer.pedagogical_body(text))].append(path)
+        bodies[producer.digest(producer.pedagogical_body(text))].append(path.name)
 
-    shared = max(bodies.values(), key=len)
-    assert len(shared) >= 17, "le groupe clone de remediation doit rester mesure"
+    shared = {digest: names for digest, names in bodies.items() if len(names) > 1}
+    assert not shared, f"des fiches partagent un corps : {shared}"
 
-    declared = set()
-    for path in shared:
-        meta = producer.read_meta(path.read_text(encoding="utf-8"))
-        declared |= set(producer.declared_capacities(meta))
-    assert len(declared) >= 16, "ces fiches declarent bien des capacites distinctes"
-
-    body = producer.pedagogical_body(shared[0].read_text(encoding="utf-8"))
-    attested = producer.body_attested_capacities(body)
-    assert attested == ("C7",), (
-        "le corps partage s'annonce lui-meme comme la fiche C7 : les autres "
-        "capacites sont revendiquees sans etre servies"
-    )
+    # Et chaque fiche sert bien la capacite qu'elle declare.
+    for path in sorted(directory.glob("*.tex")):
+        text = path.read_text(encoding="utf-8")
+        declared = set(producer.declared_capacities(producer.read_meta(text)))
+        attested = set(producer.body_attested_capacities(producer.pedagogical_body(text)))
+        if attested:
+            assert declared & attested, (
+                f"{path.name} declare {sorted(declared)} mais son corps "
+                f"annonce {sorted(attested)}"
+            )
 
 
 def test_the_clone_population_never_grows(ledger: dict, producer) -> None:
