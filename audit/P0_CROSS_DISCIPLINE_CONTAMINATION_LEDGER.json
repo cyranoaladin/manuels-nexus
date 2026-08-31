@@ -1,0 +1,798 @@
+{
+ "artifact_type": "p0_cross_discipline_contamination_ledger",
+ "schema_version": 1,
+ "finding": "P0_CROSS_DISCIPLINE_CONTENT_CONTAMINATION",
+ "severity": "P0",
+ "release_blocking": true,
+ "definition": "Objet publiable d'un manuel NSI dont le corps pedagogique est de l'analyse mathematique -- derivees, variations, convexite, logarithme -- sans aucun marqueur informatique, tout en declarant une capacite NSI.",
+ "escalation_rule": "Le contrat n'ouvre un P0 distinct que si des objets NON clones, hors registre P0 clone, sont eux aussi disciplinairement faux. C'est le cas.",
+ "detector": {
+  "analysis_markers_min": 2,
+  "computing_markers_required": 0,
+  "note": "Le detecteur exige l'ABSENCE totale de marqueur informatique. Un objet NSI qui parlerait de derivees ET de boucles ne serait pas retenu : seuls les objets sans aucun contenu informatique sont signales."
+ },
+ "counts": {
+  "total": 43,
+  "in_clone_ledger": 18,
+  "outside_clone_ledger": 25,
+  "by_chapter": {
+   "1NSI-ALGO-DICHO-GLOUTON-KNN": 16,
+   "1NSI-ALGO-PARCOURS-TRIS": 27
+  },
+  "by_source_type": {
+   "corriges": 33,
+   "exercices": 7,
+   "remediation": 3
+  }
+ },
+ "worst_examples": [
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-006.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "1NSI-ADGK-CO-006",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C3"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme qui prédit la classe d'un élément à partir de la classe major"
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 3,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-020.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-020",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C4"
+   ],
+   "declared_capacity_means": [
+    "Je sais décrire un invariant de boucle qui prouve la correction du tri par insertion."
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  }
+ ],
+ "set_digest": "sha256:a5f6ec52faa56ee82f24bc407865150238be63dd013fc690b8ef8db39f1dd2ad",
+ "objects": [
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-006.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "1NSI-ADGK-CO-006",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C3"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme qui prédit la classe d'un élément à partir de la classe major"
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 3,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-008.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "1NSI-ADGK-CO-008",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C2"
+   ],
+   "declared_capacity_means": [
+    "Je sais résoudre un problème grâce à un algorithme glouton."
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-009.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "1NSI-ADGK-CO-009",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C3"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme qui prédit la classe d'un élément à partir de la classe major"
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-010.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "1NSI-ADGK-CO-010",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C1"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire une recherche dichotomique dans un tableau trié et prouver sa terminaison à"
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-011.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "1NSI-ADGK-CO-011",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C2"
+   ],
+   "declared_capacity_means": [
+    "Je sais résoudre un problème grâce à un algorithme glouton."
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 6,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-012.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "1NSI-ADGK-CO-012",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C3"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme qui prédit la classe d'un élément à partir de la classe major"
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 4,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-013.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "1NSI-ADGK-CO-013",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C1"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire une recherche dichotomique dans un tableau trié et prouver sa terminaison à"
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-014.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "1NSI-ADGK-CO-014",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C2"
+   ],
+   "declared_capacity_means": [
+    "Je sais résoudre un problème grâce à un algorithme glouton."
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 4,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-015.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "1NSI-ADGK-CO-015",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C3"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme qui prédit la classe d'un élément à partir de la classe major"
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 4,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-016.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "1NSI-ADGK-CO-016",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C1"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire une recherche dichotomique dans un tableau trié et prouver sa terminaison à"
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 5,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-017.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "1NSI-ADGK-CO-017",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C2"
+   ],
+   "declared_capacity_means": [
+    "Je sais résoudre un problème grâce à un algorithme glouton."
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 3,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-020.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "1NSI-ADGK-CO-020",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C2"
+   ],
+   "declared_capacity_means": [
+    "Je sais résoudre un problème grâce à un algorithme glouton."
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-024.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "1NSI-ADGK-CO-024",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C3"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme qui prédit la classe d'un élément à partir de la classe major"
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-009.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "1NSI-ADGK-EX-009",
+   "source_type": "exercices",
+   "declared_capacity": [
+    "C3"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme qui prédit la classe d'un élément à partir de la classe major"
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-014.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "1NSI-ADGK-EX-014",
+   "source_type": "exercices",
+   "declared_capacity": [
+    "C2"
+   ],
+   "declared_capacity_means": [
+    "Je sais résoudre un problème grâce à un algorithme glouton."
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C02.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "object_id": "NSI/1NSI-ALGO-DICHO-GLOUTON-KNN-FR-R2",
+   "source_type": "remediation",
+   "declared_capacity": [
+    "R2"
+   ],
+   "declared_capacity_means": [
+    "?"
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 5,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-005.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-005",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C1"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme de recherche d'une occurrence dans un tableau."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-006.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-006",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C1"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme de recherche d'une occurrence dans un tableau."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 3,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-008.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-008",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C2"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme de recherche d'un extremum ou de calcul d'une moyenne."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-009.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-009",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C2"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme de recherche d'un extremum ou de calcul d'une moyenne."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-010.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-010",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C2"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme de recherche d'un extremum ou de calcul d'une moyenne."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-011.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-011",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C2"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme de recherche d'un extremum ou de calcul d'une moyenne."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 6,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-012.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-012",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C2"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme de recherche d'un extremum ou de calcul d'une moyenne."
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 4,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-013.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-013",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C3"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire l'algorithme du tri par insertion."
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-014.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-014",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C3"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire l'algorithme du tri par insertion."
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 4,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-015.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-015",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C3"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire l'algorithme du tri par insertion."
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 4,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-016.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-016",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C3"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire l'algorithme du tri par insertion."
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 5,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-017.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-017",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C3"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire l'algorithme du tri par insertion."
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 3,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-020.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-020",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C4"
+   ],
+   "declared_capacity_means": [
+    "Je sais décrire un invariant de boucle qui prouve la correction du tri par insertion."
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-024.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-024",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C4"
+   ],
+   "declared_capacity_means": [
+    "Je sais décrire un invariant de boucle qui prouve la correction du tri par insertion."
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-030.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-030",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C5"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire l'algorithme du tri par sélection."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-031.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-031",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C6"
+   ],
+   "declared_capacity_means": [
+    "Je sais décrire un invariant de boucle qui prouve la correction du tri par sélection."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 3,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-033.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-033",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C6"
+   ],
+   "declared_capacity_means": [
+    "Je sais décrire un invariant de boucle qui prouve la correction du tri par sélection."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-034.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-034",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C6"
+   ],
+   "declared_capacity_means": [
+    "Je sais décrire un invariant de boucle qui prouve la correction du tri par sélection."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-035.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-035",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C6"
+   ],
+   "declared_capacity_means": [
+    "Je sais décrire un invariant de boucle qui prouve la correction du tri par sélection."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-036.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-CO-036",
+   "source_type": "corriges",
+   "declared_capacity": [
+    "C6"
+   ],
+   "declared_capacity_means": [
+    "Je sais décrire un invariant de boucle qui prouve la correction du tri par sélection."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 6,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-005.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-EX-005",
+   "source_type": "exercices",
+   "declared_capacity": [
+    "C1"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme de recherche d'une occurrence dans un tableau."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 3,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-009.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-EX-009",
+   "source_type": "exercices",
+   "declared_capacity": [
+    "C2"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme de recherche d'un extremum ou de calcul d'une moyenne."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-014.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-EX-014",
+   "source_type": "exercices",
+   "declared_capacity": [
+    "C3"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire l'algorithme du tri par insertion."
+   ],
+   "status": "approved",
+   "in_clone_ledger": false,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-029.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-EX-029",
+   "source_type": "exercices",
+   "declared_capacity": [
+    "C5"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire l'algorithme du tri par sélection."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 3,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-APT-EX-033.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-APT-EX-033",
+   "source_type": "exercices",
+   "declared_capacity": [
+    "C6"
+   ],
+   "declared_capacity_means": [
+    "Je sais décrire un invariant de boucle qui prouve la correction du tri par sélection."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 2,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-02.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-ALGO-PARCOURS-TRIS-REMED-02",
+   "source_type": "remediation",
+   "declared_capacity": [
+    "C2"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire un algorithme de recherche d'un extremum ou de calcul d'une moyenne."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 5,
+   "computing_markers": 0
+  },
+  {
+   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-ALGO-PARCOURS-TRIS-REMED-05.tex",
+   "manual": "1NSI",
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "object_id": "1NSI-ALGO-PARCOURS-TRIS-REMED-05",
+   "source_type": "remediation",
+   "declared_capacity": [
+    "C5"
+   ],
+   "declared_capacity_means": [
+    "Je sais écrire l'algorithme du tri par sélection."
+   ],
+   "status": "approved",
+   "in_clone_ledger": true,
+   "analysis_markers": 5,
+   "computing_markers": 0
+  }
+ ]
+}
