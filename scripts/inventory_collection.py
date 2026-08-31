@@ -1894,6 +1894,46 @@ def invalid_qualifications(root: Path) -> list[dict[str, Any]]:
     return sorted(collected, key=lambda entry: entry["fingerprint"])
 
 
+def _declared_review_debt_paths(root: Path) -> set[str]:
+    """Chemins declares comme dette de revue BLOQUANTE et hors baseline.
+
+    Sert d'unique porte de sortie a une migration dont l'objet a ete reecrit :
+    on ne peut abandonner une migration que si l'objet correspondant est, au
+    meme moment, declare comme dette ouverte et bloquante. Sans cette
+    condition, la supersession deviendrait un moyen de faire disparaitre une
+    anomalie sans que personne ne la reprenne.
+    """
+
+    declared: set[str] = set()
+    audit = root / "audit"
+    if not audit.is_dir():
+        return declared
+    for candidate in sorted(audit.glob("*.json")):
+        try:
+            payload = json.loads(candidate.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError):
+            continue
+        if not isinstance(payload, Mapping):
+            continue
+        if payload.get("artifact_type") != "BLOCKING_REVIEW_DEBT_LEDGER":
+            continue
+        if payload.get("release_blocking") is not True:
+            continue
+        if payload.get("in_approved_baseline") is not False:
+            continue
+        for entry in payload.get("entries") or []:
+            if not isinstance(entry, Mapping):
+                continue
+            if (
+                entry.get("release_blocking") is True
+                and entry.get("in_approved_baseline") is False
+                and entry.get("policy_disposition") == "open_debt"
+            ):
+                declared.add(str(entry.get("path", "")))
+    declared.discard("")
+    return declared
+
+
 def _load_anomaly_identity_migrations(
     root: Path,
 ) -> dict[str, dict[str, Any]]:
@@ -2181,6 +2221,32 @@ def _project_identity_migration_qualifications(
                     "disposition historique divergente pour migration "
                     f"fp={previous_fingerprint}:{field}"
                 )
+        if migration.get("superseded_by_rewrite") is True:
+            # L'objet a ete REECRIT. Une migration ne transporte une
+            # qualification qu'a travers une transformation qui preserve
+            # l'identite -- un renommage, une substitution exacte de jeton.
+            # Une reecriture n'en est pas une : le contenu que la
+            # qualification couvrait n'existe plus, et la projeter sur le
+            # nouveau contenu reviendrait a fabriquer une approbation.
+            #
+            # La migration est donc abandonnee SANS rien projeter, et cette
+            # sortie n'est ouverte que si l'objet reecrit est simultanement
+            # declare comme dette de revue ouverte et bloquante. Sinon la
+            # supersession ferait disparaitre une anomalie sans que personne
+            # ne la reprenne.
+            if current_anomalies.get(current_fingerprint):
+                raise InventoryError(
+                    "migration declaree superseded mais son identite existe "
+                    f"toujours fp={current_fingerprint}"
+                )
+            superseded_path = str(migration.get("current_source", ""))
+            if superseded_path not in _declared_review_debt_paths(root):
+                raise InventoryError(
+                    "migration superseded sans dette de revue declaree pour "
+                    f"{superseded_path or current_fingerprint}"
+                )
+            continue
+
         occurrences = current_anomalies.get(current_fingerprint, [])
         if len(occurrences) != 1:
             raise InventoryError(

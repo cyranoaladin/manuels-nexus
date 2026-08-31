@@ -8,15 +8,14 @@
     "1NSI-ALGO-PARCOURS-TRIS"
   ],
   "baseline_sha": "52c061428f472f9926829d5c5a4e1c74c7392e58",
-  "count": 38,
+  "count": 36,
   "counts_by_origin": {
     "CREATED": 32,
-    "REWRITTEN": 2,
     "REWRITTEN_STALE_APPROVAL": 4
   },
   "counts_by_chapter": {
-    "1NSI-ALGO-DICHO-GLOUTON-KNN": 5,
-    "1NSI-ALGO-PARCOURS-TRIS": 33
+    "1NSI-ALGO-DICHO-GLOUTON-KNN": 4,
+    "1NSI-ALGO-PARCOURS-TRIS": 32
   },
   "human_review_required": true,
   "release_blocking": true,
@@ -44,25 +43,8 @@
     "fail-on-new": "rouge sur ces objets",
     "release-strict": "rouge"
   },
-  "paths_digest": "sha256:611cfd9f8fc3f0b25df49ac792a0f682235bc71d54984cd87a14433bcd035f5e",
+  "paths_digest": "sha256:d470d0f49ddd290333e7fb216a4032c2ebef1b7a7c24c1bb04e7c8e492d4fcf7",
   "entries": [
-    {
-      "object_id": "1NSI-ADGK-RE-C1-CORRIGE",
-      "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-RE-C1-CORRIGE.tex",
-      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "role": "corriges",
-      "status": "needs_review",
-      "origin": "REWRITTEN",
-      "status_before_rewrite": "needs_review",
-      "human_approval_invalidated_by_rewrite": false,
-      "machine_verified_by_execution": true,
-      "policy_disposition": "open_debt",
-      "in_approved_baseline": false,
-      "human_review_required": true,
-      "release_blocking": true,
-      "release_acceptance": false,
-      "logical_owner": "direction_scientifique_programme"
-    },
     {
       "object_id": "1NSI-ADGK-RE-C2-CORRIGE",
       "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-RE-C2-CORRIGE.tex",
@@ -302,23 +284,6 @@
       "logical_owner": "direction_scientifique_programme"
     },
     {
-      "object_id": "1NSI-APT-RE-C5-CORRIGE",
-      "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-RE-C5-CORRIGE.tex",
-      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
-      "role": "corriges",
-      "status": "needs_review",
-      "origin": "REWRITTEN",
-      "status_before_rewrite": "needs_review",
-      "human_approval_invalidated_by_rewrite": false,
-      "machine_verified_by_execution": true,
-      "policy_disposition": "open_debt",
-      "in_approved_baseline": false,
-      "human_review_required": true,
-      "release_blocking": true,
-      "release_acceptance": false,
-      "logical_owner": "direction_scientifique_programme"
-    },
-    {
       "object_id": "1NSI-APT-RE-C6-CORRIGE",
       "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-RE-C6-CORRIGE.tex",
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
@@ -340,7 +305,7 @@
       "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-APT-EVAL-A-corrige.tex",
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
       "role": "evaluations",
-      "status": "verified",
+      "status": "generated",
       "origin": "REWRITTEN_STALE_APPROVAL",
       "status_before_rewrite": "verified",
       "human_approval_invalidated_by_rewrite": true,
@@ -374,7 +339,7 @@
       "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-APT-EVAL-B-corrige.tex",
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
       "role": "evaluations",
-      "status": "verified",
+      "status": "generated",
       "origin": "REWRITTEN_STALE_APPROVAL",
       "status_before_rewrite": "verified",
       "human_approval_invalidated_by_rewrite": true,

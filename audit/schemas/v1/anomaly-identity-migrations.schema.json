@@ -123,7 +123,9 @@
             {
               "type": "object",
               "additionalProperties": false,
-              "required": ["kind"],
+              "required": [
+                "kind"
+              ],
               "properties": {
                 "kind": {
                   "const": "BYTE_IDENTICAL_AFTER_PATH_RENAME"
@@ -156,8 +158,41 @@
               }
             }
           ]
+        },
+        "superseded_by_rewrite": {
+          "type": "boolean",
+          "description": "l'objet a ete reecrit : la transformation ne preserve plus l'identite, la qualification historique n'est PAS projetee"
+        },
+        "superseded_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "superseded_declared_in": {
+          "type": "string",
+          "minLength": 1,
+          "description": "registre de dette de revue bloquante ou l'objet reecrit est declare ; sans lui la supersession est refusee"
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "superseded_by_rewrite": {
+                "const": true
+              }
+            },
+            "required": [
+              "superseded_by_rewrite"
+            ]
+          },
+          "then": {
+            "required": [
+              "superseded_reason",
+              "superseded_declared_in"
+            ]
+          }
+        }
+      ]
     }
   }
 }
