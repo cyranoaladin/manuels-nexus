@@ -47,6 +47,17 @@ BASELINE_SHA = "52c061428f472f9926829d5c5a4e1c74c7392e58"
 VALIDATED_STATUSES = frozenset({"approved", "verified", "valide"})
 
 
+def _inventory_module():
+    spec = importlib.util.spec_from_file_location(
+        "inventory_collection", ROOT / "scripts/inventory_collection.py"
+    )
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
 def _clone_module():
     spec = importlib.util.spec_from_file_location(
         "p0_clone_ledger", ROOT / "scripts/build_p0_content_clone_ledger.py"
@@ -76,6 +87,20 @@ def _baseline_text(relative: str) -> str | None:
 
 def build_ledger() -> dict[str, Any]:
     clone = _clone_module()
+    inventory_module = _inventory_module()
+    inventory = json.loads(
+        (ROOT / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8")
+    )
+    # Les empreintes sont RECALCULEES par la fonction de l'inventaire, jamais
+    # recopiees : une empreinte ecrite en dur finit par ne plus designer
+    # l'objet qu'elle nomme.
+    fingerprint_by_path: dict[str, str] = {}
+    for anomaly in inventory["anomalies"]["blocking_statuses"]:
+        fingerprint_by_path[str(anomaly.get("path"))] = (
+            inventory_module._anomaly_fingerprint(
+                anomaly, category="blocking_statuses", repository_root=ROOT
+            )
+        )
     entries: list[dict[str, Any]] = []
     for chapter in CHAPTERS:
         base = ROOT / "NSI/chapitres" / chapter
@@ -100,8 +125,13 @@ def build_ledger() -> dict[str, Any]:
                     else "REWRITTEN"
                 )
 
+            fingerprint = fingerprint_by_path.get(relative)
+            if fingerprint is None:
+                # Objet sans anomalie bloquante : rien a declarer ici.
+                continue
             entries.append(
                 {
+                    "fingerprint": fingerprint,
                     "object_id": meta.get("id") or path.stem,
                     "path": relative,
                     "chapter": chapter,
@@ -125,6 +155,9 @@ def build_ledger() -> dict[str, Any]:
     by_origin = collections.Counter(row["origin"] for row in entries)
     by_chapter = collections.Counter(row["chapter"] for row in entries)
     paths = sorted(row["path"] for row in entries)
+    fingerprints = sorted(row["fingerprint"] for row in entries)
+    if len(set(fingerprints)) != len(entries):
+        raise ValueError("empreintes non univoques")
     return {
         "artifact_type": "BLOCKING_REVIEW_DEBT_LEDGER",
         "ledger_id": "NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT",
@@ -175,6 +208,10 @@ def build_ledger() -> dict[str, Any]:
             "fail-on-new": "rouge sur ces objets",
             "release-strict": "rouge",
         },
+        "fingerprint_set_digest": "sha256:"
+        + hashlib.sha256(
+            json.dumps(fingerprints, separators=(",", ":")).encode("utf-8")
+        ).hexdigest(),
         "paths_digest": "sha256:"
         + hashlib.sha256(
             json.dumps(paths, separators=(",", ":")).encode("utf-8")
