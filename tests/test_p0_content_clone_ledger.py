@@ -135,3 +135,68 @@ def test_the_clone_population_never_grows(ledger: dict, producer) -> None:
         observed["objects_on_invalid_credit"]
         <= declared["objects_on_invalid_credit"]
     )
+
+
+def test_a_clone_group_always_keeps_exactly_one_credited_member(
+    ledger: dict, producer
+) -> None:
+    """Invalider l'original avec ses copies fabriquerait des lacunes.
+
+    Un corps clone credite UNE capacite, pas n : les copies perdent leur
+    credit. Mais si AUCUN membre ne se nomme lui-meme -- un enonce
+    d'exercice ne cite pas toujours sa capacite -- une regle qui exige une
+    auto-mention pour garder le credit n'en garde aucun, et invalide le
+    groupe entier.
+
+    Le chapitre paraitrait alors depourvu d'un contenu qu'il possede : les
+    cinquante exercices de TSPE-GEOMETRIE-ESPACE etaient comptes tous
+    invalides, sept originaux compris, ce qui gonflait le backlog de plus de
+    deux cents unites d'ecriture inexistantes.
+    """
+
+    invalid = set(ledger["objects_on_invalid_credit"])
+    for group in ledger["groups"]:
+        if group["disposition"] in {"BOILERPLATE_ONLY", "REDUNDANT_SAME_CAPACITY"}:
+            continue
+        kept = {row["path"] for row in group["members"]} - invalid
+        assert len(kept) <= 1, (
+            f"{group['clone_group_id']} conserve {len(kept)} credits pour un "
+            "seul corps"
+        )
+        if not kept:
+            # Le groupe ne perd la totalite de ses credits que si CHAQUE
+            # membre est, independamment, dementi par son propre corps.
+            contradicted = [
+                row
+                for row in group["members"]
+                if row["body_attested_capacity"]
+                and not set(row["declared_capacity"])
+                & set(row["body_attested_capacity"])
+            ]
+            assert len(contradicted) == group["object_count"], (
+                f"{group['clone_group_id']} perd tous ses credits sans que "
+                "chaque membre soit dementi par son corps"
+            )
+        elif group["body_aligned_member_paths"]:
+            assert kept == {group["body_aligned_member_paths"][0]}
+
+
+def test_the_seven_original_exercises_of_geoespace_keep_their_credit(
+    ledger: dict,
+) -> None:
+    """Le cas reel qui a revele la regle fautive."""
+
+    invalid = set(ledger["objects_on_invalid_credit"])
+    directory = (
+        "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/exercices"
+    )
+    everything = {
+        row["path"]
+        for group in ledger["groups"]
+        for row in group["members"]
+        if row["path"].startswith(directory)
+    }
+    assert everything, "le chapitre doit bien porter des exercices clones"
+    assert everything - invalid, (
+        "au moins un exercice original doit garder son credit"
+    )

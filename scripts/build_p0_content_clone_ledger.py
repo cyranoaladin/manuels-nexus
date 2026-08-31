@@ -211,7 +211,14 @@ def build_ledger() -> dict[str, Any]:
     for group in groups:
         if group["disposition"] in {"BOILERPLATE_ONLY", "REDUNDANT_SAME_CAPACITY"}:
             continue
-        keep = set(group["body_aligned_member_paths"][:1])
+        # Un corps clone credite UNE capacite, pas n. Le membre dont le corps
+        # atteste sa propre capacite garde le credit ; a defaut d'auto-mention
+        # -- un enonce ne se nomme pas toujours -- le premier par chemin fait
+        # foi. Ne rien garder invaliderait l'original avec ses copies et
+        # fabriquerait des lacunes : le chapitre paraitrait depourvu d'un
+        # contenu qu'il possede reellement.
+        aligned = group["body_aligned_member_paths"]
+        keep = {aligned[0] if aligned else group["members"][0]["path"]}
         for row in group["members"]:
             if row["path"] not in keep:
                 invalid_credit.add(row["path"])
