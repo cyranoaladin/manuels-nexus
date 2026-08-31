@@ -471,6 +471,10 @@
 
 % Usage : \ouverturechapitre[motif]{Titre}{capacites}{accroche}{temps}
 \newcommand{\ouverturechapitre}[5][motifGenerique]{%
+  % La page d'ouverture porte sa propre rubrique. Sans cette ligne elle
+  % heritait de la derniere rubrique du chapitre PRECEDENT : huit ouvertures
+  % sur onze affichaient l'onglet « Remediation ».
+  \rubrique{Ouverture}%
   \stepcounter{nxChapNum}%
   \refstepcounter{chapter}%
   \chaptermark{#2}%
@@ -543,7 +547,11 @@
   % Espace sous le bandeau
   \vspace*{\dimexpr\nxBandHeight-\topskip-1.4cm\relax}%
   % Objectifs / capacités sous le bandeau
-  \begin{tcolorbox}[enhanced, frame hidden, boxrule=0pt, arc=3pt,
+  % `breakable` est indispensable : un chapitre de seize capacités remplit
+  % plus d'une page. Sans lui, tcolorbox tronque silencieusement la liste --
+  % TSPE-GEOMETRIE-ESPACE perdait ses objectifs C15 et C16, avec un simple
+  % « Overfull \vbox » au journal et un PDF d'apparence correcte.
+  \begin{tcolorbox}[enhanced, breakable, frame hidden, boxrule=0pt, arc=3pt,
     colback=chapcolor!7,
     borderline west={3pt}{0pt}{chapcolor},
     left=12pt, right=12pt, top=10pt, bottom=10pt,
