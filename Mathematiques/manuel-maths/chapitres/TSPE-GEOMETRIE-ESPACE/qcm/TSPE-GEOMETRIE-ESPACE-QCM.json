@@ -1,136 +1,422 @@
 {
-  "chapitre": "TSPE-GEOMETRIE-ESPACE",
-  "titre": "QCM d'auto-évaluation — Géométrie dans l'espace",
-  "questions": [
-    {
-      "id": "Q1",
-      "capacite": "C3",
-      "enonce": "Deux droites de l'espace non paralleles sont :",
-      "options": {
-        "A": "secantes ou non coplanaires.",
-        "B": "toujours non coplanaires.",
-        "C": "toujours secantes.",
-        "D": "toujours confondues."
-      },
-      "correcte": "A",
-      "diagnostics": {
-        "B": {
-          "erreur": "Deux droites non paralleles peuvent être coplanaires et secantes ; elles ne sont donc pas toujours non coplanaires.",
-          "renvoi": "C3, positions relatives de deux droites de l'espace"
-        },
-        "C": {
-          "erreur": "Dans l'espace, deux droites non paralleles peuvent être gauches : elles ne sont alors pas coplanaires et ne se coupent pas.",
-          "renvoi": "C3, positions relatives de deux droites de l'espace"
-        },
-        "D": {
-          "erreur": "Des droites confondues ont la même direction et sont donc paralleles ; cette possibilite est exclue par l'hypothèse.",
-          "renvoi": "C3, positions relatives de deux droites de l'espace"
-        }
-      }
+ "chapitre": "TSPE-GEOMETRIE-ESPACE",
+ "titre": "QCM d'auto-évaluation — Géométrie dans l'espace",
+ "questions": [
+  {
+   "id": "Q1",
+   "capacite": "C3",
+   "enonce": "Deux droites de l'espace non paralleles sont :",
+   "options": {
+    "A": "secantes ou non coplanaires.",
+    "B": "toujours non coplanaires.",
+    "C": "toujours secantes.",
+    "D": "toujours confondues."
+   },
+   "correcte": "A",
+   "diagnostics": {
+    "B": {
+     "erreur": "Deux droites non paralleles peuvent être coplanaires et secantes ; elles ne sont donc pas toujours non coplanaires.",
+     "renvoi": "C3, positions relatives de deux droites de l'espace"
     },
-    {
-      "id": "Q2",
-      "capacite": "C7",
-      "enonce": "Deux vecteurs $\\vec{u}$ et $\\vec{v}$ sont orthogonaux si et seulement si :",
-      "options": {
-        "A": "$\\vec{u}\\cdot\\vec{v}=0$.",
-        "B": "$\\vec{u}\\cdot\\vec{v}=1$.",
-        "C": "$\\vec{u}=\\vec{v}$.",
-        "D": "$\\|\\vec{u}\\|=\\|\\vec{v}\\|$."
-      },
-      "correcte": "A",
-      "diagnostics": {
-        "B": {
-          "erreur": "Un produit scalaire égal a $1$ n'impose pas un angle droit ; l'orthogonalite est caracterisee par un produit scalaire nul.",
-          "renvoi": "C7, produit scalaire et orthogonalité"
-        },
-        "C": {
-          "erreur": "Si $\\vec u=\\vec v$ et ce vecteur est non nul, alors $\\vec u\\cdot\\vec v=\\|\\vec u\\|^2>0$ : ils ne sont pas orthogonaux.",
-          "renvoi": "C7, produit scalaire et orthogonalité"
-        },
-        "D": {
-          "erreur": "L'égalité des normes fixe seulement les longueurs ; deux vecteurs de même norme peuvent former n'importe quel angle.",
-          "renvoi": "C7, produit scalaire et orthogonalité"
-        }
-      }
+    "C": {
+     "erreur": "Dans l'espace, deux droites non paralleles peuvent être gauches : elles ne sont alors pas coplanaires et ne se coupent pas.",
+     "renvoi": "C3, positions relatives de deux droites de l'espace"
     },
-    {
-      "id": "Q3",
-      "capacite": "C13",
-      "enonce": "Le vecteur normal au plan d'équation $2x-3y+z+1=0$ est :",
-      "options": {
-        "A": "$(2,3,1)$.",
-        "B": "$(2,-3,1)$.",
-        "C": "$(1,-3,2)$.",
-        "D": "$(-2,3,1)$."
-      },
-      "correcte": "B",
-      "diagnostics": {
-        "A": {
-          "erreur": "Le coefficient de $y$ dans l'équation est $-3$ ; remplacer ce coefficient par $3$ ne donne pas un vecteur normal au plan.",
-          "renvoi": "M1, vecteur normal et équation cartésienne d'un plan"
-        },
-        "C": {
-          "erreur": "Les composantes d'un vecteur normal sont les coefficients de $x$, $y$ et $z$ dans cet ordre ; ici $2$, $-3$ et $1$.",
-          "renvoi": "M1, vecteur normal et équation cartésienne d'un plan"
-        },
-        "D": {
-          "erreur": "Ce vecteur change les signes des deux premieres composantes seulement ; il n'est donc pas proportionnel a $(2,-3,1)$.",
-          "renvoi": "M1, vecteur normal et équation cartésienne d'un plan"
-        }
-      }
-    },
-    {
-      "id": "Q4",
-      "capacite": "C12",
-      "enonce": "Une représentation parametrique de droite comporte :",
-      "options": {
-        "A": "trois paramètres.",
-        "B": "deux paramètres.",
-        "C": "un seul paramètre.",
-        "D": "aucun paramètre."
-      },
-      "correcte": "C",
-      "diagnostics": {
-        "A": {
-          "erreur": "Trois paramètres indépendants peuvent parcourir l'espace entier ; une droite s'ecrit avec un seul paramètre réel.",
-          "renvoi": "C12, représentation paramétrique d'une droite"
-        },
-        "B": {
-          "erreur": "Deux paramètres indépendants engendrent en general une surface plane, alors qu'une droite ne possede qu'une direction libre.",
-          "renvoi": "C12, représentation paramétrique d'une droite"
-        },
-        "D": {
-          "erreur": "Sans paramètre, on ne décrit pas le deplacement depuis un point selon un vecteur directeur ; la représentation ne serait pas parametrique.",
-          "renvoi": "C12, représentation paramétrique d'une droite"
-        }
-      }
-    },
-    {
-      "id": "Q5",
-      "capacite": "C11",
-      "enonce": "Le projete orthogonal $H$ d'un point $M$ sur un plan $\\mathcal{P}$ vérifie :",
-      "options": {
-        "A": "$H$ est le point de $\\mathcal{P}$ le plus eloigne de $M$.",
-        "B": "$H=M$ toujours.",
-        "C": "$H$ est un point quelconque de $\\mathcal{P}$.",
-        "D": "$H$ est le point de $\\mathcal{P}$ le plus proche de $M$."
-      },
-      "correcte": "D",
-      "diagnostics": {
-        "A": {
-          "erreur": "Un plan est non borne, donc il ne possede pas de point le plus eloigne de $M$ ; la projection realise au contraire la distance minimale.",
-          "renvoi": "C11, projeté orthogonal et distance à un plan"
-        },
-        "B": {
-          "erreur": "On a $H=M$ seulement lorsque $M$ appartient deja au plan ; sinon le projete $H$ est un point distinct situe sur le plan.",
-          "renvoi": "C11, projeté orthogonal et distance à un plan"
-        },
-        "C": {
-          "erreur": "Le projete n'est pas quelconque : c'est le pied de la perpendiculaire issue de $M$, ce qui assure la distance minimale au plan.",
-          "renvoi": "C11, projeté orthogonal et distance à un plan"
-        }
-      }
+    "D": {
+     "erreur": "Des droites confondues ont la même direction et sont donc paralleles ; cette possibilite est exclue par l'hypothèse.",
+     "renvoi": "C3, positions relatives de deux droites de l'espace"
     }
-  ]
+   }
+  },
+  {
+   "id": "Q2",
+   "capacite": "C7",
+   "enonce": "Deux vecteurs $\\vec{u}$ et $\\vec{v}$ sont orthogonaux si et seulement si :",
+   "options": {
+    "A": "$\\vec{u}\\cdot\\vec{v}=0$.",
+    "B": "$\\vec{u}\\cdot\\vec{v}=1$.",
+    "C": "$\\vec{u}=\\vec{v}$.",
+    "D": "$\\|\\vec{u}\\|=\\|\\vec{v}\\|$."
+   },
+   "correcte": "A",
+   "diagnostics": {
+    "B": {
+     "erreur": "Un produit scalaire égal a $1$ n'impose pas un angle droit ; l'orthogonalite est caracterisee par un produit scalaire nul.",
+     "renvoi": "C7, produit scalaire et orthogonalité"
+    },
+    "C": {
+     "erreur": "Si $\\vec u=\\vec v$ et ce vecteur est non nul, alors $\\vec u\\cdot\\vec v=\\|\\vec u\\|^2>0$ : ils ne sont pas orthogonaux.",
+     "renvoi": "C7, produit scalaire et orthogonalité"
+    },
+    "D": {
+     "erreur": "L'égalité des normes fixe seulement les longueurs ; deux vecteurs de même norme peuvent former n'importe quel angle.",
+     "renvoi": "C7, produit scalaire et orthogonalité"
+    }
+   }
+  },
+  {
+   "id": "Q3",
+   "capacite": "C13",
+   "enonce": "Le vecteur normal au plan d'équation $2x-3y+z+1=0$ est :",
+   "options": {
+    "A": "$(2,3,1)$.",
+    "B": "$(2,-3,1)$.",
+    "C": "$(1,-3,2)$.",
+    "D": "$(-2,3,1)$."
+   },
+   "correcte": "B",
+   "diagnostics": {
+    "A": {
+     "erreur": "Le coefficient de $y$ dans l'équation est $-3$ ; remplacer ce coefficient par $3$ ne donne pas un vecteur normal au plan.",
+     "renvoi": "M1, vecteur normal et équation cartésienne d'un plan"
+    },
+    "C": {
+     "erreur": "Les composantes d'un vecteur normal sont les coefficients de $x$, $y$ et $z$ dans cet ordre ; ici $2$, $-3$ et $1$.",
+     "renvoi": "M1, vecteur normal et équation cartésienne d'un plan"
+    },
+    "D": {
+     "erreur": "Ce vecteur change les signes des deux premieres composantes seulement ; il n'est donc pas proportionnel a $(2,-3,1)$.",
+     "renvoi": "M1, vecteur normal et équation cartésienne d'un plan"
+    }
+   }
+  },
+  {
+   "id": "Q4",
+   "capacite": "C12",
+   "enonce": "Une représentation parametrique de droite comporte :",
+   "options": {
+    "A": "trois paramètres.",
+    "B": "deux paramètres.",
+    "C": "un seul paramètre.",
+    "D": "aucun paramètre."
+   },
+   "correcte": "C",
+   "diagnostics": {
+    "A": {
+     "erreur": "Trois paramètres indépendants peuvent parcourir l'espace entier ; une droite s'ecrit avec un seul paramètre réel.",
+     "renvoi": "C12, représentation paramétrique d'une droite"
+    },
+    "B": {
+     "erreur": "Deux paramètres indépendants engendrent en general une surface plane, alors qu'une droite ne possede qu'une direction libre.",
+     "renvoi": "C12, représentation paramétrique d'une droite"
+    },
+    "D": {
+     "erreur": "Sans paramètre, on ne décrit pas le deplacement depuis un point selon un vecteur directeur ; la représentation ne serait pas parametrique.",
+     "renvoi": "C12, représentation paramétrique d'une droite"
+    }
+   }
+  },
+  {
+   "id": "Q5",
+   "capacite": "C11",
+   "enonce": "Le projete orthogonal $H$ d'un point $M$ sur un plan $\\mathcal{P}$ vérifie :",
+   "options": {
+    "A": "$H$ est le point de $\\mathcal{P}$ le plus eloigne de $M$.",
+    "B": "$H=M$ toujours.",
+    "C": "$H$ est un point quelconque de $\\mathcal{P}$.",
+    "D": "$H$ est le point de $\\mathcal{P}$ le plus proche de $M$."
+   },
+   "correcte": "D",
+   "diagnostics": {
+    "A": {
+     "erreur": "Un plan est non borne, donc il ne possede pas de point le plus eloigne de $M$ ; la projection realise au contraire la distance minimale.",
+     "renvoi": "C11, projeté orthogonal et distance à un plan"
+    },
+    "B": {
+     "erreur": "On a $H=M$ seulement lorsque $M$ appartient deja au plan ; sinon le projete $H$ est un point distinct situe sur le plan.",
+     "renvoi": "C11, projeté orthogonal et distance à un plan"
+    },
+    "C": {
+     "erreur": "Le projete n'est pas quelconque : c'est le pied de la perpendiculaire issue de $M$, ce qui assure la distance minimale au plan.",
+     "renvoi": "C11, projeté orthogonal et distance à un plan"
+    }
+   }
+  },
+  {
+   "id": "Q6",
+   "capacite": "C1",
+   "enonce": "Dans l'espace, les combinaisons linéaires $a\\vec{u}+b\\vec{v}$ de deux vecteurs non colinéaires décrivent :",
+   "options": {
+    "A": "tout l'espace.",
+    "B": "un plan.",
+    "C": "une droite.",
+    "D": "un seul point."
+   },
+   "correcte": "B",
+   "diagnostics": {
+    "A": {
+     "erreur": "Deux vecteurs n'engendrent qu'un plan : il reste une direction hors de leur portée, et il faut un troisième vecteur non coplanaire pour atteindre tout l'espace.",
+     "renvoi": "C1, combinaisons linéaires de vecteurs de l'espace"
+    },
+    "C": {
+     "erreur": "Une droite serait engendrée par un seul vecteur ; avec deux vecteurs non colinéaires on obtient une famille à deux paramètres.",
+     "renvoi": "M2, passer d'une figure aux coordonnées"
+    },
+    "D": {
+     "erreur": "Seule la combinaison nulle donnerait un point ; ici $a$ et $b$ parcourent tous les réels.",
+     "renvoi": "C1, combinaisons linéaires de vecteurs de l'espace"
+    }
+   }
+  },
+  {
+   "id": "Q7",
+   "capacite": "C2",
+   "enonce": "$ABCDEFGH$ est un cube. Dans la base $(\\vec{AB},\\vec{AD},\\vec{AE})$, le vecteur $\\vec{EC}$ se décompose en :",
+   "options": {
+    "A": "$\\vec{AB}+\\vec{AD}+\\vec{AE}$",
+    "B": "$\\vec{AB}-\\vec{AD}+\\vec{AE}$",
+    "C": "$\\vec{AB}+\\vec{AD}-\\vec{AE}$",
+    "D": "$-\\vec{AB}+\\vec{AD}+\\vec{AE}$"
+   },
+   "correcte": "C",
+   "diagnostics": {
+    "A": {
+     "erreur": "C'est la décomposition de $\\vec{AG}$ : elle monte l'arête verticale au lieu de la descendre. Le chemin $E\\to A$ parcourt $\\vec{AE}$ à rebours, d'où le signe moins.",
+     "renvoi": "M2, passer d'une figure aux coordonnées"
+    },
+    "B": {
+     "erreur": "Le signe négatif a été placé sur $\\vec{AD}$ ; or le chemin $E\\to A\\to C$ parcourt $\\vec{AD}$ dans son sens et $\\vec{AE}$ à rebours.",
+     "renvoi": "C2, décomposer un vecteur sur une figure"
+    },
+    "D": {
+     "erreur": "Le signe négatif a été placé sur $\\vec{AB}$ ; le trajet horizontal $A\\to C$ suit pourtant $\\vec{AB}$ puis $\\vec{AD}$ dans leur sens.",
+     "renvoi": "C2, décomposer un vecteur sur une figure"
+    }
+   }
+  },
+  {
+   "id": "Q8",
+   "capacite": "C4",
+   "enonce": "Trois vecteurs de l'espace deux à deux non colinéaires :",
+   "options": {
+    "A": "forment toujours une base.",
+    "B": "sont toujours coplanaires.",
+    "C": "sont toujours orthogonaux.",
+    "D": "peuvent être coplanaires."
+   },
+   "correcte": "D",
+   "diagnostics": {
+    "A": {
+     "erreur": "La condition d'être une base porte sur les trois vecteurs ensemble : $\\vec{u}$, $\\vec{v}$ et $\\vec{u}+\\vec{v}$ sont deux à deux non colinéaires et pourtant coplanaires.",
+     "renvoi": "C4, reconnaître une base de l'espace"
+    },
+    "B": {
+     "erreur": "Ils peuvent l'être sans l'être toujours : $\\vec{i}$, $\\vec{j}$, $\\vec{k}$ sont deux à deux non colinéaires et non coplanaires.",
+     "renvoi": "M3, colinéarité, alignement, coplanarité"
+    },
+    "C": {
+     "erreur": "La colinéarité et l'orthogonalité sont deux propriétés indépendantes ; ne pas être colinéaires n'impose aucun angle droit.",
+     "renvoi": "C7, produit scalaire et orthogonalité"
+    }
+   }
+  },
+  {
+   "id": "Q9",
+   "capacite": "C5",
+   "enonce": "Dans une base \\emph{non} orthonormée, connaître les coordonnées $(1;1;1)$ d'un vecteur permet :",
+   "options": {
+    "A": "de le décomposer sur la base, mais pas de calculer sa norme.",
+    "B": "de calculer sa norme, égale à $\\sqrt{3}$.",
+    "C": "d'affirmer qu'il est unitaire.",
+    "D": "d'affirmer qu'il est orthogonal aux vecteurs de base."
+   },
+   "correcte": "A",
+   "diagnostics": {
+    "B": {
+     "erreur": "La formule $\\sqrt{x^2+y^2+z^2}$ suppose la base orthonormée. Dans un parallélépipède étiré, les mêmes coordonnées donnent une autre longueur.",
+     "renvoi": "C5, lire des coordonnées dans une base"
+    },
+    "C": {
+     "erreur": "Rien n'indique que le vecteur soit de norme $1$ ; les coordonnées ne mesurent pas de longueur ici.",
+     "renvoi": "C5, lire des coordonnées dans une base"
+    },
+    "D": {
+     "erreur": "Les coordonnées ne renseignent pas sur les angles tant que la base n'est pas orthonormée.",
+     "renvoi": "M2, passer d'une figure aux coordonnées"
+    }
+   }
+  },
+  {
+   "id": "Q10",
+   "capacite": "C6",
+   "enonce": "Pour démontrer que quatre points $A$, $B$, $C$, $D$ sont coplanaires, il suffit de vérifier que :",
+   "options": {
+    "A": "$A$, $B$ et $C$ sont coplanaires.",
+    "B": "$\\vec{AD}$ est une combinaison linéaire de $\\vec{AB}$ et $\\vec{AC}$.",
+    "C": "$\\vec{AB}$ et $\\vec{AC}$ sont colinéaires.",
+    "D": "les quatre points sont deux à deux distincts."
+   },
+   "correcte": "B",
+   "diagnostics": {
+    "A": {
+     "erreur": "Trois points sont toujours coplanaires : le vérifier ne prouve rien, c'est le quatrième qui décide.",
+     "renvoi": "C6, configurations dans l'espace"
+    },
+    "C": {
+     "erreur": "Cela prouverait que $A$, $B$, $C$ sont alignés, ce qui est une autre propriété et ne dit rien de $D$.",
+     "renvoi": "M3, colinéarité, alignement, coplanarité"
+    },
+    "D": {
+     "erreur": "Quatre points distincts peuvent parfaitement ne pas être coplanaires, comme les sommets d'un tétraèdre.",
+     "renvoi": "C6, configurations dans l'espace"
+    }
+   }
+  },
+  {
+   "id": "Q11",
+   "capacite": "C8",
+   "enonce": "Repère orthonormé. La distance du point $M(1;2;3)$ au plan d'équation $x+2y+2z-6=0$ vaut :",
+   "options": {
+    "A": "$5$",
+    "B": "$\\dfrac{5}{9}$",
+    "C": "$\\dfrac{5}{3}$",
+    "D": "$\\sqrt{38}$"
+   },
+   "correcte": "C",
+   "diagnostics": {
+    "A": {
+     "erreur": "C'est le numérateur seul : il manque la division par $\\lVert\\vec{n}\\rVert=\\sqrt{1+4+4}=3$.",
+     "renvoi": "M6, projeter orthogonalement"
+    },
+    "B": {
+     "erreur": "La division a été faite par $a^2+b^2+c^2=9$ au lieu de sa racine carrée $3$.",
+     "renvoi": "C8, distance d'un point à un plan"
+    },
+    "D": {
+     "erreur": "C'est la distance de $M$ au point $(6;0;0)$ du plan : un point quelconque du plan surestime la distance, que seul le projeté orthogonal réalise.",
+     "renvoi": "C8, distance d'un point à un plan"
+    }
+   }
+  },
+  {
+   "id": "Q12",
+   "capacite": "C9",
+   "enonce": "Repère orthonormé, $A(0;0;0)$, $B(1;0;0)$ et $C(1;1;0)$. La mesure de l'angle $\\widehat{BAC}$ est :",
+   "options": {
+    "A": "$0$",
+    "B": "$\\dfrac{\\pi}{2}$",
+    "C": "$\\dfrac{\\pi}{3}$",
+    "D": "$\\dfrac{\\pi}{4}$"
+   },
+   "correcte": "D",
+   "diagnostics": {
+    "A": {
+     "erreur": "Le produit scalaire $\\vec{AB}\\cdot\\vec{AC}=1$ a été pris pour le cosinus. Il faut diviser par $\\lVert\\vec{AB}\\rVert\\lVert\\vec{AC}\\rVert=\\sqrt{2}$.",
+     "renvoi": "M5, longueurs, angles et aires"
+    },
+    "B": {
+     "erreur": "Un angle droit exigerait un produit scalaire nul ; ici il vaut $1$.",
+     "renvoi": "C7, produit scalaire et orthogonalité"
+    },
+    "C": {
+     "erreur": "$\\cos\\theta=\\dfrac{1}{\\sqrt2}$ et non $\\dfrac12$ : la confusion porte sur la valeur remarquable.",
+     "renvoi": "M5, longueurs, angles et aires"
+    }
+   }
+  },
+  {
+   "id": "Q13",
+   "capacite": "C10",
+   "enonce": "Une droite est orthogonale à un plan lorsque son vecteur directeur est orthogonal :",
+   "options": {
+    "A": "à deux vecteurs non colinéaires du plan.",
+    "B": "à une seule droite du plan.",
+    "C": "au vecteur normal du plan.",
+    "D": "à toutes les droites de l'espace."
+   },
+   "correcte": "A",
+   "diagnostics": {
+    "B": {
+     "erreur": "Le plan possède une infinité de directions : $\\vec{u}(0;1;1)$ est orthogonal à l'axe des abscisses sans l'être au plan $z=0$.",
+     "renvoi": "C10, orthogonalité d'une droite et d'un plan"
+    },
+    "C": {
+     "erreur": "Un vecteur orthogonal au vecteur normal dirige le plan, il ne lui est pas orthogonal.",
+     "renvoi": "M7, orthogonalité droite-plan"
+    },
+    "D": {
+     "erreur": "Seul le vecteur nul est orthogonal à toutes les directions de l'espace ; un vecteur directeur est non nul.",
+     "renvoi": "C10, orthogonalité d'une droite et d'un plan"
+    }
+   }
+  },
+  {
+   "id": "Q14",
+   "capacite": "C14",
+   "enonce": "Repère orthonormé. Le projeté orthogonal de $M(3;3;3)$ sur le plan $x+y+z-3=0$ est :",
+   "options": {
+    "A": "$(3;3;0)$",
+    "B": "$(1;1;1)$",
+    "C": "$(0;0;0)$",
+    "D": "$(3;3;3)$"
+   },
+   "correcte": "B",
+   "diagnostics": {
+    "A": {
+     "erreur": "Annuler la cote ne projette que sur le plan $z=0$ : le point $(3;3;0)$ ne vérifie même pas l'équation du plan.",
+     "renvoi": "M6, projeter orthogonalement"
+    },
+    "C": {
+     "erreur": "L'origine appartient-elle au plan ? $0+0+0-3=-3\\neq0$ : non, ce n'est donc pas un projeté possible.",
+     "renvoi": "C14, coordonnées du projeté orthogonal"
+    },
+    "D": {
+     "erreur": "C'est le point $M$ lui-même, qui n'appartient pas au plan puisque $9-3=6\\neq0$.",
+     "renvoi": "C14, coordonnées du projeté orthogonal"
+    }
+   }
+  },
+  {
+   "id": "Q15",
+   "capacite": "C15",
+   "enonce": "En étudiant l'intersection d'une droite et d'un plan, on aboutit à l'équation $0=5$. On conclut que :",
+   "options": {
+    "A": "il y a une erreur de calcul.",
+    "B": "la droite est incluse dans le plan.",
+    "C": "la droite est strictement parallèle au plan.",
+    "D": "la droite coupe le plan en un point."
+   },
+   "correcte": "C",
+   "diagnostics": {
+    "A": {
+     "erreur": "Une équation impossible est un résultat, pas un échec : elle traduit exactement l'absence de point commun.",
+     "renvoi": "M9, traduire une intersection en système"
+    },
+    "B": {
+     "erreur": "L'inclusion se traduirait par une identité du type $0=0$, vraie pour tout paramètre.",
+     "renvoi": "C15, traduire et interpréter un système"
+    },
+    "D": {
+     "erreur": "Une intersection en un point donnerait une unique valeur du paramètre, pas une impossibilité.",
+     "renvoi": "C15, traduire et interpréter un système"
+    }
+   }
+  },
+  {
+   "id": "Q16",
+   "capacite": "C16",
+   "enonce": "Une équation cartésienne du plan passant par $A(2;-1;3)$ et de vecteur normal $\\vec{n}(1;4;-2)$ est :",
+   "options": {
+    "A": "$x+4y-2z=0$",
+    "B": "$x+4y-2z-8=0$",
+    "C": "$2x-y+3z+8=0$",
+    "D": "$x+4y-2z+8=0$"
+   },
+   "correcte": "D",
+   "diagnostics": {
+    "A": {
+     "erreur": "C'est l'équation du plan parallèle passant par l'origine : le terme constant a été oublié. Or $A$ ne vérifie pas cette équation, puisque $2-4-6=-8\\neq0$.",
+     "renvoi": "M1, équation cartésienne d'un plan"
+    },
+    "B": {
+     "erreur": "Le signe du terme constant est inversé : $d=-(a x_A+b y_A+c z_A)=-(-8)=8$.",
+     "renvoi": "C16, démontrer l'équation cartésienne d'un plan"
+    },
+    "C": {
+     "erreur": "Les coordonnées de $A$ ont été prises pour le vecteur normal et inversement : $(a;b;c)$ doit être $\\vec{n}$.",
+     "renvoi": "C13, vecteur normal et équation cartésienne"
+    }
+   }
+  }
+ ]
 }
