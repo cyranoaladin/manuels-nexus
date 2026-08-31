@@ -493,7 +493,7 @@ manuals:
   TSPE_2026_2027:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '50'
+      detail: '56'
       source: anomalies.blocking_statuses
     - code: livrable_non_compile
       detail: absent
@@ -505,7 +505,7 @@ manuals:
       detail: partial
       source: deliverable_matrix.TSPE_2026_2027.variants.livret_remediation
     - code: statuts_non_approuves
-      detail: objets=50; contrats=0
+      detail: objets=56; contrats=0
       source: manuals.TSPE_2026_2027.statuses
     current:
       artifacts:
@@ -525,15 +525,15 @@ manuals:
       - TSPE-SUITES-LIMITES
       - TSPE-TRIGONOMETRIE
       statuses:
-        approved: 1087
-        generated: 50
+        approved: 1083
+        generated: 56
       totals:
         capacites: 67
-        corriges: 434
+        corriges: 435
         coups_de_pouce: 67
         diagnostics: 0
         evaluations: 22
-        exercices_principaux: 412
+        exercices_principaux: 413
         methodes: 38
         projets: 0
         qcm: 11
@@ -589,12 +589,12 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:9057a48d070e3cb4d5acd7970fd2cc4023b1878ab50394f34a0d95ed88aca688
+model_digest: sha256:5c92dbee302ffdfff98fc3808eb9df134fc5558f2679d0499648f0008d538d02
 provenance:
   branch: null
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-31T07:37:26Z'
+  generated_at_utc: '2026-08-31T08:32:04Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:79b255deeddfa4b483a9a5a9f568bdc143defd7b2a69e8b8a704f4afdd35d6bf
     scripts/build_manifest.py: sha256:25c59c35918e651671c14b0e251a940311c998e5e32a82cb26a3727044dc4a77
@@ -606,7 +606,7 @@ provenance:
   generator_sha256: sha256:195e5049c33639e3f10ed0d0c9885b980a392f974509e15815c96f081da34eae
   generator_version: 1
   git_available: true
-  head_sha: b47633ffd17bf17302ec7954f5fdad1a048780ad
+  head_sha: 745aa74cd3c6abe9918279973b980a29763ea278
   modified_tracked: []
   pdf_artifact_registry_digest: sha256:8137f3b5aa16d0ff1efd3b9045f3c418d84b9de32c97fdd605ebb11fe937d39c
   tool_versions:
@@ -618,4 +618,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:d254414dcf7a40b16f877fda92262983bb3f85d7029d6fdec27d35752f06005d
+source_digest: sha256:e8e9b08f22929f15e068d51107cd6a0ef6169350a77767ffc64fb98723444270
