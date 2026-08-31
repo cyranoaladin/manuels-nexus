@@ -2,8 +2,8 @@
   "artifact_type": "qcm_gap_metrics",
   "schema_version": 1,
   "generated_by": "scripts/build_qcm_gap_metrics.py",
-  "observed_source_sha": "f145d7271c34c2cb7b155b780343562d2513b5c5",
-  "source_digest": "sha256:fd96ba6859076a1199f51f88d02473a1feb921f0b2cba5bf2492ec780cebbac5",
+  "observed_source_sha": "dc2c8b654081f2a7c7acd5b7ea4b8172c6f653c5",
+  "source_digest": "sha256:ba910e19dd44a8acd00e1b422500f721e8182b8912c82f0b428684be23eb6375",
   "source_inputs": [
     {
       "path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/qcm/1SPE-DERIVATION-GLOBAL-QCM.json",
@@ -119,7 +119,7 @@
     },
     {
       "path": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/qcm/TSPE-GEOMETRIE-ESPACE-QCM.json",
-      "sha256": "sha256:53bbc13dd70035aa9af809f71542432096d9074b61ab0f29517cb77d4ecaaa53"
+      "sha256": "sha256:c163de026dd6e2e81828d99063e070ed24b8345d4df93bdff60ff24f8c2681cd"
     },
     {
       "path": "Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/qcm/TSPE-LIMITES-FONCTIONS-QCM.json",
@@ -294,12 +294,12 @@
   "freshness_note": "observed_source_sha est un constat ; il n'est jamais une condition de fraicheur. Un artefact de rapport epingle a un SHA serait perime par le commit qui le publie.",
   "inventory": {
     "chapters": 35,
-    "questions": 337,
+    "questions": 348,
     "contract_capacity_pairs": 206,
-    "distractors": 1011
+    "distractors": 1044
   },
   "UNIQUE_CAPACITY_IDS_WITHOUT_ANY_QCM": {
-    "count": 48,
+    "count": 37,
     "ids": [
       "TCOMPL-ATT-C4",
       "TCOMPL-ATT-C5",
@@ -329,17 +329,6 @@
       "TEXP-GRA-C2",
       "TEXP-MAT-C2",
       "TEXP-MAT-C6",
-      "TSPE-GEOESPACE-C1",
-      "TSPE-GEOESPACE-C10",
-      "TSPE-GEOESPACE-C14",
-      "TSPE-GEOESPACE-C15",
-      "TSPE-GEOESPACE-C16",
-      "TSPE-GEOESPACE-C2",
-      "TSPE-GEOESPACE-C4",
-      "TSPE-GEOESPACE-C5",
-      "TSPE-GEOESPACE-C6",
-      "TSPE-GEOESPACE-C8",
-      "TSPE-GEOESPACE-C9",
       "TSPE-INTEG-C4",
       "TSPE-INTEG-C5",
       "TSPE-INTEG-C6",
@@ -352,7 +341,7 @@
     ]
   },
   "CHAPTER_CAPACITY_PAIRS_WITHOUT_ANY_QCM": {
-    "count": 48,
+    "count": 37,
     "by_chapter": {
       "TCOMPL-ECHANTILLONNAGE": [
         "C6",
@@ -411,19 +400,6 @@
         "C7",
         "C8"
       ],
-      "TSPE-GEOMETRIE-ESPACE": [
-        "C1",
-        "C10",
-        "C14",
-        "C15",
-        "C16",
-        "C2",
-        "C4",
-        "C5",
-        "C6",
-        "C8",
-        "C9"
-      ],
       "TSPE-PROBABILITES": [
         "C1",
         "C3",
@@ -433,7 +409,7 @@
     }
   },
   "MANDATORY_ASSESSED_CAPACITY_PAIRS_WITHOUT_QCM": {
-    "count": 43,
+    "count": 32,
     "pairs": [
       {
         "chapter": "TCOMPL-ECHANTILLONNAGE",
@@ -604,72 +580,6 @@
         "mandatory": true
       },
       {
-        "chapter": "TSPE-GEOMETRIE-ESPACE",
-        "capacity_code": "C1",
-        "capacity_id": "TSPE-GEOESPACE-C1",
-        "mandatory": true
-      },
-      {
-        "chapter": "TSPE-GEOMETRIE-ESPACE",
-        "capacity_code": "C2",
-        "capacity_id": "TSPE-GEOESPACE-C2",
-        "mandatory": true
-      },
-      {
-        "chapter": "TSPE-GEOMETRIE-ESPACE",
-        "capacity_code": "C4",
-        "capacity_id": "TSPE-GEOESPACE-C4",
-        "mandatory": true
-      },
-      {
-        "chapter": "TSPE-GEOMETRIE-ESPACE",
-        "capacity_code": "C5",
-        "capacity_id": "TSPE-GEOESPACE-C5",
-        "mandatory": true
-      },
-      {
-        "chapter": "TSPE-GEOMETRIE-ESPACE",
-        "capacity_code": "C6",
-        "capacity_id": "TSPE-GEOESPACE-C6",
-        "mandatory": true
-      },
-      {
-        "chapter": "TSPE-GEOMETRIE-ESPACE",
-        "capacity_code": "C8",
-        "capacity_id": "TSPE-GEOESPACE-C8",
-        "mandatory": true
-      },
-      {
-        "chapter": "TSPE-GEOMETRIE-ESPACE",
-        "capacity_code": "C9",
-        "capacity_id": "TSPE-GEOESPACE-C9",
-        "mandatory": true
-      },
-      {
-        "chapter": "TSPE-GEOMETRIE-ESPACE",
-        "capacity_code": "C10",
-        "capacity_id": "TSPE-GEOESPACE-C10",
-        "mandatory": true
-      },
-      {
-        "chapter": "TSPE-GEOMETRIE-ESPACE",
-        "capacity_code": "C14",
-        "capacity_id": "TSPE-GEOESPACE-C14",
-        "mandatory": true
-      },
-      {
-        "chapter": "TSPE-GEOMETRIE-ESPACE",
-        "capacity_code": "C15",
-        "capacity_id": "TSPE-GEOESPACE-C15",
-        "mandatory": true
-      },
-      {
-        "chapter": "TSPE-GEOMETRIE-ESPACE",
-        "capacity_code": "C16",
-        "capacity_id": "TSPE-GEOESPACE-C16",
-        "mandatory": true
-      },
-      {
         "chapter": "TSPE-PROBABILITES",
         "capacity_code": "C1",
         "capacity_id": "TSPE-PROBA-C1",
@@ -697,7 +607,7 @@
     "authority": "audit/OFFICIAL_PROGRAM_COVERAGE_2026_2027.json, colonne mandatory"
   },
   "PEDAGOGICALLY_REQUIRED_QCM_GAPS": {
-    "count": 43,
+    "count": 32,
     "definition": "couple (chapitre, capacite) sans aucune question alors que la capacite porte un atome officiel obligatoire ; seule metrique dont l'objectif contractuel est zero",
     "objective": 0
   },

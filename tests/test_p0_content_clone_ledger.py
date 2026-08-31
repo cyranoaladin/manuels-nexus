@@ -188,22 +188,39 @@ def test_a_clone_group_always_keeps_exactly_one_credited_member(
             assert kept == {group["body_aligned_member_paths"][0]}
 
 
-def test_the_seven_original_exercises_of_geoespace_keep_their_credit(
-    ledger: dict,
-) -> None:
-    """Le cas reel qui a revele la regle fautive."""
+def test_geoespace_exercises_are_all_distinct_and_paired(producer) -> None:
+    """Le chapitre fondateur, une fois reconstruit : plus un seul clone.
 
-    invalid = set(ledger["objects_on_invalid_credit"])
-    directory = (
-        "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/exercices"
-    )
-    everything = {
-        row["path"]
-        for group in ledger["groups"]
-        for row in group["members"]
-        if row["path"].startswith(directory)
+    Ce test affirmait qu'au moins un exercice original gardait son credit
+    parmi les clones -- il prouvait que la regle de credit ne condamnait pas
+    l'original avec ses copies. Les quarante-trois paires clonees ayant ete
+    retirees, sa premisse a disparu avec elles.
+
+    Il affirme desormais l'etat atteint : dans ce chapitre, deux exercices ne
+    partagent jamais un corps, deux corriges non plus, et chaque corrige
+    designe un exercice qui existe.
+    """
+
+    chapter = ROOT / "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE"
+    for role in ("exercices", "corriges"):
+        bodies = collections.defaultdict(list)
+        for path in sorted((chapter / role).glob("*.tex")):
+            text = path.read_text(encoding="utf-8")
+            bodies[producer.digest(producer.pedagogical_body(text))].append(path.name)
+        shared = {d: names for d, names in bodies.items() if len(names) > 1}
+        assert not shared, f"{role} : des objets partagent un corps : {shared}"
+
+    exercises = {
+        producer.read_meta(p.read_text(encoding="utf-8"))["id"]
+        for p in (chapter / "exercices").glob("*.tex")
     }
-    assert everything, "le chapitre doit bien porter des exercices clones"
-    assert everything - invalid, (
-        "au moins un exercice original doit garder son credit"
-    )
+    corrections = [
+        producer.read_meta(p.read_text(encoding="utf-8"))
+        for p in (chapter / "corriges").glob("*.tex")
+    ]
+    assert exercises, "le chapitre doit porter des exercices"
+    assert len(corrections) == len(exercises)
+    for meta in corrections:
+        assert meta["exercice_ref"] in exercises, (
+            f"{meta['id']} designe un exercice inexistant"
+        )
