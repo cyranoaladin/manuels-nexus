@@ -3870,6 +3870,38 @@ def _stale_extension_object_ids() -> set[str]:
     }
 
 
+def _superseded_migration_fingerprints() -> set[str]:
+    """Empreintes qu'une reecriture a fait disparaitre, et leur preuve.
+
+    Une migration d'identite ne transporte une qualification qu'a travers une
+    transformation qui preserve l'identite. Declarer une migration
+    `superseded_by_rewrite` la fait abandonner sans rien projeter -- et cette
+    sortie n'est ouverte que si l'objet reecrit est declare, au meme moment,
+    comme dette de revue ouverte et bloquante.
+    """
+
+    import yaml
+
+    payload = yaml.safe_load(
+        (ROOT / "audit/ANOMALY_IDENTITY_MIGRATIONS.yaml").read_text(
+            encoding="utf-8"
+        )
+    )
+    superseded: set[str] = set()
+    declared_paths = set()
+    for relative in DECLARED_DEBT_LEDGERS:
+        ledger = json.loads((ROOT / relative).read_text(encoding="utf-8"))
+        declared_paths |= {str(e["path"]) for e in ledger["entries"]}
+    for fingerprint, migration in payload["migrations"].items():
+        if migration.get("superseded_by_rewrite") is not True:
+            continue
+        # La supersession doit toujours etre adossee a une dette declaree.
+        assert str(migration["current_source"]) in declared_paths, fingerprint
+        assert migration.get("superseded_reason")
+        superseded.add(str(fingerprint))
+    return superseded
+
+
 def _declared_open_debt_fingerprints() -> set[str]:
     """Les empreintes telles que leurs registres autoritaires les declarent."""
 
@@ -13095,11 +13127,17 @@ def test_repository_fail_on_new_preserves_all_qualified_active_debt(
     comparison = gate["comparison"]
     assert set(comparison["new"]) == declared
     assert comparison["expected_review_debt"] == []
-    # Le rendu genere heritant du statut declare, aucune empreinte ne se
-    # deplace : la dette qualifiee reste integralement inchangee.
-    assert comparison["resolved"] == []
+    # Quatre empreintes se resolvent : les evaluations de PARCOURS-TRIS ont
+    # ete reecrites, leur statut est retombe de verified a generated, et leur
+    # ancienne identite a donc disparu. Elles ne sont PAS perdues pour autant :
+    # les objets reecrits figurent au registre de dette 1NSI, ouverts et
+    # bloquants. Une reecriture remplace une dette par une autre, elle n'en
+    # supprime aucune.
+    superseded = _superseded_migration_fingerprints()
+    assert len(superseded) == 4
+    assert set(comparison["resolved"]) == superseded
     assert comparison["regressions"] == []
-    assert set(comparison["unchanged"]) == active_fingerprints
+    assert set(comparison["unchanged"]) == active_fingerprints - superseded
     assert declared.isdisjoint(active_fingerprints)
 
 
