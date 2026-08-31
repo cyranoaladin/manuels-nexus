@@ -7,14 +7,14 @@ seize capacités alors qu'une seule, `C7`, était traitée.
 
 - capacités contractuelles : `320`
 - cellules (capacité × rôle) : `1600`
-- cellules pourvues : `1102`
-- **unités d'écriture requises** : `498`
+- cellules pourvues : `1112`
+- **unités d'écriture requises** : `488`
 
 | Manuel | cours | methodes | exercices | corriges | remediation | Total |
 |---|---:|---:|---:|---:|---:|---:|
 | `1NSI` | 21 | 45 | 38 | 33 | 39 | **176** |
 | `TNSI` | 2 | 61 | 22 | 22 | 54 | **161** |
-| `TSPE` | 1 | 32 | 7 | 7 | 35 | **82** |
+| `TSPE` | 1 | 32 | 7 | 7 | 25 | **72** |
 | `TCOMPL` | 3 | 3 | 3 | 3 | 43 | **55** |
 | `TEXPERTES` | 0 | 1 | 0 | 0 | 23 | **24** |
 

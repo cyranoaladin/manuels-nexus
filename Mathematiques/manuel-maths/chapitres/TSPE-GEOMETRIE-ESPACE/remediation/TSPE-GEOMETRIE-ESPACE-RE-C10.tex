@@ -1,0 +1,79 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-RE-C10", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "remediation", "capacites_codes": ["C10"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C10 : orthogonalite d'une droite et d'un plan
+% Obstacle : une seule droite du plan suffirait
+%---------------------------------------------------------------
+
+\subsection*{Erreur fréquente}
+
+\erreurFrequente{
+Une droite orthogonale à une droite d'un plan est orthogonale à ce plan.
+}
+
+\textbf{Pourquoi c'est faux.} Être orthogonal à une seule direction du plan ne
+dit rien des autres. Le plan possède une infinité de directions~; il faut être
+orthogonal à \emph{deux droites sécantes} du plan pour l'être au plan tout
+entier.
+
+\contreexemple{
+Soit $\mathcal{P}$ le plan d'équation $z=0$ et $d$ la droite dirigée par
+$\vec{u}(0;1;1)$. On a $\vec{u}\cdot(1;0;0)=0$~: $d$ est orthogonale à l'axe
+des abscisses, qui est une droite de $\mathcal{P}$. Pourtant
+$\vec{u}\cdot(0;1;0)=1\neq0$~: $d$ n'est pas orthogonale à $\mathcal{P}$.
+}
+
+\subsection*{À retenir}
+
+$d\perp\mathcal{P}$ si et seulement si un vecteur directeur de $d$ est
+orthogonal à \emph{deux vecteurs non colinéaires} du plan --- autrement dit,
+si ce vecteur directeur est un vecteur normal du plan.
+
+\subsection*{Méthode corrective}
+
+\begin{enumerate}
+  \item Choisir deux vecteurs non colinéaires du plan.
+  \item Calculer les deux produits scalaires avec le vecteur directeur de $d$.
+  \item Conclure seulement si les \emph{deux} sont nuls.
+  \item Si le plan est donné par une équation, comparer directement le vecteur
+        directeur au vecteur normal~: ils doivent être colinéaires.
+\end{enumerate}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-GEOESPACE-RE-C10-EX1}{2}{14}
+Repère orthonormé. Soit $\mathcal{P}$ le plan $z=0$, dirigé par
+$\vec{i}(1;0;0)$ et $\vec{j}(0;1;0)$.
+\begin{enumerate}
+  \item Soit $\vec{u}(0;1;1)$. Calculer $\vec{u}\cdot\vec{i}$ et
+        $\vec{u}\cdot\vec{j}$. La droite dirigée par $\vec{u}$ est-elle
+        orthogonale à $\mathcal{P}$ ?
+  \item Même question pour $\vec{v}(0;0;5)$.
+  \item Quelle condition exacte doit vérifier un vecteur pour diriger une
+        droite orthogonale à $\mathcal{P}$ ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Matrix
+% i = Matrix([1,0,0]); j = Matrix([0,1,0])
+% u = Matrix([0,1,1]); v = Matrix([0,0,5])
+% assert u.dot(i) == 0 and u.dot(j) == 1      # orthogonal a i seulement
+% assert v.dot(i) == 0 and v.dot(j) == 0      # orthogonal aux deux
+% # v est colineaire au vecteur normal (0,0,1) du plan z = 0
+% assert Matrix.hstack(v, Matrix([0,0,1])).rank() == 1
+% END-VERIFY
+
+\begin{corrige}{TSPE-GEOESPACE-RE-C10-EX1}
+\begin{enumerate}
+  \item $\vec{u}\cdot\vec{i}=0$ mais $\vec{u}\cdot\vec{j}=1\neq0$. La droite
+        est orthogonale à une droite de $\mathcal{P}$, pas au plan~: la
+        condition n'est vérifiée que pour une direction sur deux.
+  \item $\vec{v}\cdot\vec{i}=0$ et $\vec{v}\cdot\vec{j}=0$. Les deux produits
+        scalaires sont nuls avec deux vecteurs non colinéaires du plan~: la
+        droite dirigée par $\vec{v}$ est orthogonale à $\mathcal{P}$.
+  \item Le vecteur doit être orthogonal à deux vecteurs non colinéaires de
+        $\mathcal{P}$, c'est-à-dire être colinéaire au vecteur normal
+        $\vec{n}(0;0;1)$. C'est bien le cas de $\vec{v}=5\vec{n}$.
+\end{enumerate}
+\end{corrige}

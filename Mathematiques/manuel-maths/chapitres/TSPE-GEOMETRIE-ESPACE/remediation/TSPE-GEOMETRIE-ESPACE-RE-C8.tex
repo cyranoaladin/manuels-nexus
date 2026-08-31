@@ -1,0 +1,78 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-RE-C8", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "remediation", "capacites_codes": ["C8"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C8 : distance d'un point a un plan
+% Obstacle : mesurer vers un point quelconque du plan
+%---------------------------------------------------------------
+
+\subsection*{Erreur fréquente}
+
+\erreurFrequente{
+Calculer la distance de $M$ au plan $\mathcal{P}$ en prenant la longueur $MN$
+pour un point $N$ quelconque de $\mathcal{P}$.
+}
+
+\textbf{Pourquoi c'est faux.} La distance d'un point à un plan est la
+\emph{plus petite} des longueurs $MN$, atteinte au seul projeté orthogonal
+$H$. Tout autre point de $\mathcal{P}$ donne une longueur strictement plus
+grande.
+
+\subsection*{À retenir}
+
+Si $\mathcal{P}$ a pour équation $ax+by+cz+d=0$, alors
+\[
+  d(M,\mathcal{P})=\frac{\lvert a x_M + b y_M + c z_M + d\rvert}
+                        {\sqrt{a^2+b^2+c^2}}.
+\]
+Deux oublis coûtent cher~: la valeur absolue au numérateur, et surtout la
+norme du vecteur normal au dénominateur --- elle ne vaut $1$ que si le vecteur
+normal est unitaire.
+
+\subsection*{Méthode corrective}
+
+\begin{enumerate}
+  \item Écrire l'équation du plan sous la forme $ax+by+cz+d=0$.
+  \item Lire le vecteur normal $\vec{n}(a;b;c)$ et calculer sa norme.
+  \item Reporter les coordonnées de $M$ au numérateur, en valeur absolue.
+  \item Diviser par $\lVert\vec{n}\rVert$, jamais par autre chose.
+\end{enumerate}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-GEOESPACE-RE-C8-EX1}{2}{12}
+L'espace est muni d'un repère orthonormé. Soit $\mathcal{P}$ le plan
+d'équation $x+2y+2z-6=0$ et $M(1;2;3)$.
+\begin{enumerate}
+  \item Donner un vecteur normal à $\mathcal{P}$ et calculer sa norme.
+  \item Calculer $d(M,\mathcal{P})$.
+  \item Vérifier que $N(6;0;0)$ appartient à $\mathcal{P}$ et calculer $MN$.
+  \item Comparer $MN$ et $d(M,\mathcal{P})$. Commenter.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, sqrt, simplify
+% M = Matrix([1,2,3]); n = Matrix([1,2,2]); d = -6
+% assert n.norm() == 3
+% dist = abs((n.dot(M) + d)) / n.norm()
+% assert simplify(dist - Rational(5,3)) == 0
+% N = Matrix([6,0,0])
+% assert n.dot(N) + d == 0            # N appartient bien au plan
+% MN = (N - M).norm()
+% assert simplify(MN - sqrt(38)) == 0
+% assert MN > dist                    # un point quelconque donne plus long
+% END-VERIFY
+
+\begin{corrige}{TSPE-GEOESPACE-RE-C8-EX1}
+\begin{enumerate}
+  \item $\vec{n}(1;2;2)$ est normal à $\mathcal{P}$, et
+        $\lVert\vec{n}\rVert=\sqrt{1+4+4}=3$.
+  \item $d(M,\mathcal{P})=\dfrac{\lvert 1+2\times2+2\times3-6\rvert}{3}
+        =\dfrac{\lvert 5\rvert}{3}=\dfrac{5}{3}$.
+  \item $6+0+0-6=0$ donc $N\in\mathcal{P}$, et
+        $MN=\sqrt{5^2+(-2)^2+(-3)^2}=\sqrt{38}\approx 6{,}16$.
+  \item $MN=\sqrt{38}$ est bien supérieur à $\dfrac{5}{3}\approx1{,}67$.
+        Prendre un point quelconque du plan surestime largement la distance~:
+        seule la projection orthogonale la réalise.
+\end{enumerate}
+\end{corrige}

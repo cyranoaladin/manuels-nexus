@@ -1,0 +1,86 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-RE-C9", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "remediation", "capacites_codes": ["C9"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C9 : longueurs, angles, aires, volumes
+% Obstacle : confondre produit scalaire et cosinus de l'angle
+%---------------------------------------------------------------
+
+\subsection*{Erreur fréquente}
+
+\erreurFrequente{
+Lire directement le produit scalaire comme le cosinus de l'angle~:
+$\cos\theta = \vec{u}\cdot\vec{v}$.
+}
+
+\textbf{Pourquoi c'est faux.} La relation exacte est
+$\vec{u}\cdot\vec{v}=\lVert\vec{u}\rVert\,\lVert\vec{v}\rVert\cos\theta$. Le
+produit scalaire ne donne le cosinus que si les deux vecteurs sont unitaires.
+Sans division par les normes, on obtient un nombre qui peut dépasser $1$ et ne
+correspond à aucun angle.
+
+\contreexemple{
+Pour $\vec{u}(3;0;0)$ et $\vec{v}(3;0;0)$, on a $\vec{u}\cdot\vec{v}=9$. Si
+c'était un cosinus, il vaudrait $9>1$~: impossible. En divisant par
+$\lVert\vec{u}\rVert\,\lVert\vec{v}\rVert=9$, on retrouve $\cos\theta=1$,
+soit $\theta=0$, ce qui est correct pour deux vecteurs égaux.
+}
+
+\subsection*{À retenir}
+
+\[
+  \cos\theta=\frac{\vec{u}\cdot\vec{v}}
+                  {\lVert\vec{u}\rVert\,\lVert\vec{v}\rVert}
+  \qquad\text{avec}\qquad
+  \lVert\vec{u}\rVert=\sqrt{x^2+y^2+z^2}
+\]
+valable dans un repère \emph{orthonormé} seulement.
+
+\subsection*{Méthode corrective}
+
+\begin{enumerate}
+  \item Vérifier que le repère est orthonormé~; sinon, la formule ne s'applique pas.
+  \item Calculer $\vec{u}\cdot\vec{v}$, puis les deux normes.
+  \item Diviser, et contrôler que le résultat est bien dans $[-1;1]$.
+  \item Conclure sur l'angle, en degrés si l'énoncé le demande.
+\end{enumerate}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-GEOESPACE-RE-C9-EX1}{2}{14}
+Repère orthonormé. On donne $A(0;0;0)$, $B(1;0;0)$ et $C(1;1;0)$.
+\begin{enumerate}
+  \item Calculer $\vec{AB}\cdot\vec{AC}$, puis $\lVert\vec{AB}\rVert$ et
+        $\lVert\vec{AC}\rVert$.
+  \item En déduire $\cos\widehat{BAC}$, puis la mesure de l'angle.
+  \item Pourquoi la valeur $\vec{AB}\cdot\vec{AC}=1$ ne peut-elle pas être
+        directement le cosinus cherché ? Justifier sans calcul supplémentaire.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, sqrt, acos, pi, simplify, Rational
+% A = Matrix([0,0,0]); B = Matrix([1,0,0]); C = Matrix([1,1,0])
+% AB = B - A; AC = C - A
+% assert AB.dot(AC) == 1
+% assert AB.norm() == 1
+% assert simplify(AC.norm() - sqrt(2)) == 0
+% cos = AB.dot(AC) / (AB.norm() * AC.norm())
+% assert simplify(cos - 1/sqrt(2)) == 0
+% assert simplify(acos(cos) - pi/4) == 0
+% # le produit scalaire seul vaut 1 : ce serait un angle nul, or l'angle est pi/4
+% assert acos(cos) != 0
+% END-VERIFY
+
+\begin{corrige}{TSPE-GEOESPACE-RE-C9-EX1}
+\begin{enumerate}
+  \item $\vec{AB}(1;0;0)$ et $\vec{AC}(1;1;0)$, donc
+        $\vec{AB}\cdot\vec{AC}=1\times1+0\times1+0\times0=1$,
+        $\lVert\vec{AB}\rVert=1$ et $\lVert\vec{AC}\rVert=\sqrt{2}$.
+  \item $\cos\widehat{BAC}=\dfrac{1}{1\times\sqrt{2}}=\dfrac{\sqrt{2}}{2}$,
+        d'où $\widehat{BAC}=\dfrac{\pi}{4}$, soit $45^\circ$.
+  \item Prendre $1$ pour cosinus conduirait à un angle nul, donc à
+        $\vec{AB}$ et $\vec{AC}$ colinéaires de même sens. Or ils ne le sont
+        pas~: $\vec{AC}$ a une deuxième coordonnée non nulle. La valeur $1$
+        est un produit scalaire, pas un cosinus.
+\end{enumerate}
+\end{corrige}

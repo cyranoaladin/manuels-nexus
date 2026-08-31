@@ -3514,26 +3514,10 @@
       "valid_objects": 0
     },
     {
-      "capacity": "C10",
-      "chapter": "TSPE-GEOMETRIE-ESPACE",
-      "manual": "TSPE",
-      "role": "remediation",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
       "capacity": "C11",
       "chapter": "TSPE-GEOMETRIE-ESPACE",
       "manual": "TSPE",
       "role": "methodes",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C11",
-      "chapter": "TSPE-GEOMETRIE-ESPACE",
-      "manual": "TSPE",
-      "role": "remediation",
       "state": "MISSING",
       "valid_objects": 0
     },
@@ -3546,39 +3530,7 @@
       "valid_objects": 0
     },
     {
-      "capacity": "C12",
-      "chapter": "TSPE-GEOMETRIE-ESPACE",
-      "manual": "TSPE",
-      "role": "remediation",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C13",
-      "chapter": "TSPE-GEOMETRIE-ESPACE",
-      "manual": "TSPE",
-      "role": "remediation",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
       "capacity": "C14",
-      "chapter": "TSPE-GEOMETRIE-ESPACE",
-      "manual": "TSPE",
-      "role": "methodes",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C14",
-      "chapter": "TSPE-GEOMETRIE-ESPACE",
-      "manual": "TSPE",
-      "role": "remediation",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C15",
       "chapter": "TSPE-GEOMETRIE-ESPACE",
       "manual": "TSPE",
       "role": "methodes",
@@ -3589,15 +3541,7 @@
       "capacity": "C15",
       "chapter": "TSPE-GEOMETRIE-ESPACE",
       "manual": "TSPE",
-      "role": "remediation",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C16",
-      "chapter": "TSPE-GEOMETRIE-ESPACE",
-      "manual": "TSPE",
-      "role": "remediation",
+      "role": "methodes",
       "state": "MISSING",
       "valid_objects": 0
     },
@@ -3702,14 +3646,6 @@
       "chapter": "TSPE-GEOMETRIE-ESPACE",
       "manual": "TSPE",
       "role": "methodes",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C6",
-      "chapter": "TSPE-GEOMETRIE-ESPACE",
-      "manual": "TSPE",
-      "role": "remediation",
       "state": "MISSING",
       "valid_objects": 0
     },
@@ -3730,14 +3666,6 @@
       "valid_objects": 0
     },
     {
-      "capacity": "C8",
-      "chapter": "TSPE-GEOMETRIE-ESPACE",
-      "manual": "TSPE",
-      "role": "remediation",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
       "capacity": "C9",
       "chapter": "TSPE-GEOMETRIE-ESPACE",
       "manual": "TSPE",
@@ -3758,14 +3686,6 @@
       "chapter": "TSPE-GEOMETRIE-ESPACE",
       "manual": "TSPE",
       "role": "methodes",
-      "state": "MISSING",
-      "valid_objects": 0
-    },
-    {
-      "capacity": "C9",
-      "chapter": "TSPE-GEOMETRIE-ESPACE",
-      "manual": "TSPE",
-      "role": "remediation",
       "state": "MISSING",
       "valid_objects": 0
     },
@@ -3986,7 +3906,7 @@
       "valid_objects": 0
     }
   ],
-  "authoring_units_digest": "sha256:63755d7ba89cd2269954c58020dab194c1d14f2725755b1695aefa188cf6e38e",
+  "authoring_units_digest": "sha256:e683809ba3a4fe24ca17142dd9cfee6564936088c74421728abd5b9464533e0b",
   "correction_capacity_inheritance": "un corrige sans capacite declaree herite de celle de son exercice via META.exercice_id",
   "credit_rule": "un objet ne credite une capacite que si son corps la sert ; le seul META ne donne aucun credit",
   "excluded_roles": {
@@ -3995,10 +3915,10 @@
   },
   "generated_by": "scripts/build_true_pedagogical_coverage.py",
   "inventory": {
-    "authoring_units_required": 498,
+    "authoring_units_required": 488,
     "capacities": 320,
     "cells": 1600,
-    "cells_with_valid_content": 1102,
+    "cells_with_valid_content": 1112,
     "objects_without_resolvable_capacity": 346
   },
   "measured_roles": [
@@ -4549,11 +4469,10 @@
       "remediation": 3
     },
     "TSPE-GEOMETRIE-ESPACE": {
-      "TOTAL": 38,
+      "TOTAL": 28,
       "corriges": 7,
       "exercices": 7,
-      "methodes": 14,
-      "remediation": 10
+      "methodes": 14
     },
     "TSPE-LOGARITHME": {
       "TOTAL": 3,
@@ -4607,12 +4526,12 @@
       "remediation": 54
     },
     "TSPE": {
-      "TOTAL": 82,
+      "TOTAL": 72,
       "corriges": 7,
       "cours": 1,
       "exercices": 7,
       "methodes": 32,
-      "remediation": 35
+      "remediation": 25
     }
   },
   "schema_version": 1

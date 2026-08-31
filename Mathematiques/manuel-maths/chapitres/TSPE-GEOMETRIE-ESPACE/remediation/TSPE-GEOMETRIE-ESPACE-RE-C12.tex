@@ -1,0 +1,85 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-RE-C12", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "remediation", "capacites_codes": ["C12"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C12 : representation parametrique d'une droite
+% Obstacle : tester l'appartenance coordonnee par coordonnee
+%---------------------------------------------------------------
+
+\subsection*{Erreur fréquente}
+
+\erreurFrequente{
+Pour vérifier qu'un point appartient à une droite, trouver $t$ avec la
+première équation et s'arrêter là.
+}
+
+\textbf{Pourquoi c'est faux.} Les trois équations partagent le \emph{même}
+paramètre. Un $t$ qui convient pour l'abscisse doit convenir aussi pour
+l'ordonnée et la cote. S'il change d'une ligne à l'autre, le point n'est pas
+sur la droite.
+
+\contreexemple{
+Soit $d:\ x=1+2t,\ y=t,\ z=3-t$. Pour $M(5;2;0)$~: la première équation donne
+$t=2$, la deuxième aussi. Mais la troisième donnerait $0=3-2=1$~: faux. $M$
+n'appartient pas à $d$, alors que deux équations sur trois étaient satisfaites.
+}
+
+\subsection*{À retenir}
+
+Une droite admet une infinité de représentations paramétriques --- changer de
+point de base ou multiplier le vecteur directeur en donne d'autres. Deux
+représentations décrivent la même droite si les vecteurs directeurs sont
+colinéaires et si un point de l'une appartient à l'autre.
+
+\subsection*{Méthode corrective}
+
+\begin{enumerate}
+  \item Résoudre la première équation en $t$.
+  \item Reporter cette valeur dans les \emph{deux} autres.
+  \item Conclure seulement si les trois sont vérifiées simultanément.
+\end{enumerate}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-GEOESPACE-RE-C12-EX1}{2}{12}
+Soit $d$ la droite de représentation paramétrique
+$x=1+2t$, $y=t$, $z=3-t$, avec $t\in\mathbb{R}$.
+\begin{enumerate}
+  \item Donner un point de $d$ et un vecteur directeur.
+  \item Le point $M(5;2;0)$ appartient-il à $d$ ?
+  \item Le point $N(5;2;1)$ appartient-il à $d$ ?
+  \item La droite $d'$ définie par $x=3+4s$, $y=1+2s$, $z=2-2s$ est-elle
+        confondue avec $d$ ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, symbols, solve, Eq
+% t, s = symbols('t s')
+% A = Matrix([1,0,3]); u = Matrix([2,1,-1])
+% # 2. M(5,2,0) : t=2 satisfait x et y, pas z
+% M = Matrix([5,2,0])
+% assert solve([Eq((A + t*u)[i], M[i]) for i in range(3)], [t]) == []
+% assert (A + 2*u)[0] == M[0] and (A + 2*u)[1] == M[1] and (A + 2*u)[2] != M[2]
+% # 3. N(5,2,1) : t=2 convient partout
+% N = Matrix([5,2,1])
+% assert A + 2*u == N
+% # 4. d' : point (3,1,2), directeur (4,2,-2) = 2u -> colineaire, et (3,1,2) est sur d (t=1)
+% Ap = Matrix([3,1,2]); up = Matrix([4,2,-2])
+% assert Matrix.hstack(u, up).rank() == 1
+% assert A + 1*u == Ap
+% END-VERIFY
+
+\begin{corrige}{TSPE-GEOESPACE-RE-C12-EX1}
+\begin{enumerate}
+  \item En prenant $t=0$ on obtient le point $A(1;0;3)$, et les coefficients
+        de $t$ donnent le vecteur directeur $\vec{u}(2;1;-1)$.
+  \item Non. $5=1+2t$ donne $t=2$, et $2=t$ donne aussi $t=2$~; mais la
+        troisième équation exigerait $0=3-2=1$, ce qui est faux. Deux
+        équations sur trois ne suffisent pas.
+  \item Oui. Pour $t=2$~: $x=5$, $y=2$ et $z=3-2=1$. Les trois équations sont
+        vérifiées avec la même valeur du paramètre.
+  \item Oui. $\vec{u'}(4;2;-2)=2\vec{u}$ donc les directions sont colinéaires,
+        et le point $(3;1;2)$ de $d'$ s'obtient sur $d$ pour $t=1$. Les deux
+        représentations décrivent la même droite.
+\end{enumerate}
+\end{corrige}

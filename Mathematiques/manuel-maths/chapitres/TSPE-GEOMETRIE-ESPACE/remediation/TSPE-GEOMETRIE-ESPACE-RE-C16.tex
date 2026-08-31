@@ -1,0 +1,91 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-RE-C16", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "remediation", "capacites_codes": ["C16"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C16 : demontrer l'equation cartesienne d'un plan
+% Obstacle : oublier le terme constant, ou se tromper de signe
+%---------------------------------------------------------------
+
+\subsection*{Erreur fréquente}
+
+\erreurFrequente{
+Écrire l'équation du plan de vecteur normal $\vec{n}(a;b;c)$ sous la forme
+$ax+by+cz=0$, en oubliant le terme constant.
+}
+
+\textbf{Pourquoi c'est faux.} $ax+by+cz=0$ est l'équation du plan passant par
+l'\emph{origine}. Un plan normal à $\vec{n}$ mais passant par un autre point
+lui est parallèle, et son équation diffère justement par ce terme constant.
+
+\subsection*{La démonstration à connaître}
+
+$M(x;y;z)$ appartient au plan passant par $A$ et normal à $\vec{n}$ si et
+seulement si $\vec{AM}\cdot\vec{n}=0$, c'est-à-dire
+\[
+  a(x-x_A)+b(y-y_A)+c(z-z_A)=0,
+\]
+soit $ax+by+cz+d=0$ avec
+\[
+  d=-(a x_A + b y_A + c z_A).
+\]
+Le signe de $d$ vient de la distribution du signe moins~: c'est là que les
+erreurs se logent.
+
+\subsection*{Méthode corrective}
+
+\begin{enumerate}
+  \item Écrire $\vec{AM}\cdot\vec{n}=0$ avant de développer.
+  \item Développer sans sauter d'étape.
+  \item Isoler la constante et vérifier son signe.
+  \item Contrôler en substituant les coordonnées de $A$~: l'équation doit
+        donner $0$.
+\end{enumerate}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-GEOESPACE-RE-C16-EX1}{2}{12}
+Repère orthonormé. Soit $A(2;-1;3)$ et $\vec{n}(1;4;-2)$.
+\begin{enumerate}
+  \item Écrire la condition $\vec{AM}\cdot\vec{n}=0$ pour $M(x;y;z)$.
+  \item En déduire une équation cartésienne du plan $\mathcal{P}$ passant par
+        $A$ et normal à $\vec{n}$.
+  \item Vérifier que $A$ appartient à $\mathcal{P}$.
+  \item Le plan d'équation $x+4y-2z=0$ est-il égal à $\mathcal{P}$ ? Quelle
+        est sa position relative par rapport à $\mathcal{P}$ ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, Matrix, simplify
+% x, y, z = symbols('x y z')
+% A = Matrix([2,-1,3]); n = Matrix([1,4,-2])
+% M = Matrix([x,y,z])
+% eq = expand((M - A).dot(n))
+% # d = -(a xA + b yA + c zA)
+% d = -(n.dot(A))
+% assert d == 8
+% assert simplify(eq - (x + 4*y - 2*z + d)) == 0
+% # A verifie l'equation
+% assert n.dot(A) + d == 0
+% # le plan par l'origine est parallele mais distinct : meme normale, d different
+% assert n.dot(Matrix([0,0,0])) + 0 == 0 and d != 0
+% END-VERIFY
+
+\begin{corrige}{TSPE-GEOESPACE-RE-C16-EX1}
+\begin{enumerate}
+  \item $\vec{AM}(x-2;\,y+1;\,z-3)$, donc la condition s'écrit
+        $1(x-2)+4(y+1)-2(z-3)=0$.
+  \item En développant~: $x-2+4y+4-2z+6=0$, soit
+        \[
+          x+4y-2z+8=0 .
+        \]
+        Le terme constant vaut $d=-(1\times2+4\times(-1)+(-2)\times3)
+        =-(2-4-6)=-(-8)=8$.
+  \item $2+4\times(-1)-2\times3+8=2-4-6+8=0$~: $A$ appartient bien à
+        $\mathcal{P}$.
+  \item Non. $x+4y-2z=0$ a le même vecteur normal mais un terme constant nul~:
+        il passe par l'origine, que $\mathcal{P}$ ne contient pas puisque
+        $0+0-0+8=8\neq0$. Les deux plans sont \emph{strictement parallèles}~;
+        oublier le terme constant revient exactement à confondre l'un avec
+        l'autre.
+\end{enumerate}
+\end{corrige}

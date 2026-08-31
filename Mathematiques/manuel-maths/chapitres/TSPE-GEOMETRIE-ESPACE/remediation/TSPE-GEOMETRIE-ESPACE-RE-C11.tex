@@ -1,0 +1,86 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-RE-C11", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "remediation", "capacites_codes": ["C11"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C11 : le projete orthogonal est le plus proche
+% Obstacle : admettre le resultat au lieu de le demontrer
+%---------------------------------------------------------------
+
+\subsection*{Erreur fréquente}
+
+\erreurFrequente{
+Affirmer que le projeté orthogonal est le point le plus proche parce que
+« c'est le plus court chemin », sans démonstration.
+}
+
+\textbf{Pourquoi ce n'est pas suffisant.} L'énoncé demande une
+\emph{démonstration}. L'évidence visuelle ne remplace pas l'argument, et
+l'argument existe~: il tient en une application du théorème de Pythagore.
+
+\subsection*{La démonstration à connaître}
+
+Soit $H$ le projeté orthogonal de $M$ sur $\mathcal{P}$ et $N$ un point de
+$\mathcal{P}$ distinct de $H$. Le vecteur $\vec{HN}$ appartient au plan, donc
+$\vec{MH}\cdot\vec{HN}=0$~: le triangle $MHN$ est rectangle en $H$. Par
+Pythagore,
+\[
+  MN^{2}=MH^{2}+HN^{2}.
+\]
+Comme $N\neq H$, on a $HN^{2}>0$, donc $MN^{2}>MH^{2}$ puis $MN>MH$. Le point
+$H$ est donc \emph{strictement} le plus proche.
+
+\subsection*{À retenir}
+
+L'inégalité est stricte dès que $N\neq H$~: le minimum est atteint en un seul
+point. C'est ce qui autorise à parler de \emph{la} distance de $M$ à
+$\mathcal{P}$.
+
+\subsection*{Méthode corrective}
+
+\begin{enumerate}
+  \item Nommer $H$ le projeté orthogonal et $N$ un point quelconque du plan.
+  \item Justifier que $\vec{HN}$ est un vecteur du plan.
+  \item En déduire $\vec{MH}\cdot\vec{HN}=0$, donc le triangle rectangle en $H$.
+  \item Appliquer Pythagore et conclure par la stricte positivité de $HN^2$.
+\end{enumerate}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-GEOESPACE-RE-C11-EX1}{2}{12}
+Repère orthonormé. Soit $\mathcal{P}$ le plan d'équation $z=0$ et $M(1;2;4)$.
+\begin{enumerate}
+  \item Déterminer le projeté orthogonal $H$ de $M$ sur $\mathcal{P}$, puis
+        $MH$.
+  \item Soit $N(4;6;0)$. Vérifier que $N\in\mathcal{P}$ et calculer $MN$.
+  \item Vérifier sur cet exemple l'égalité $MN^{2}=MH^{2}+HN^{2}$.
+  \item Que vaudrait $MN$ si $N$ était confondu avec $H$ ? L'inégalité
+        $MN>MH$ reste-t-elle vraie ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, sqrt, simplify
+% M = Matrix([1,2,4]); H = Matrix([1,2,0]); N = Matrix([4,6,0])
+% assert H[2] == 0 and N[2] == 0              # H et N sont dans le plan z = 0
+% MH = (H - M).norm(); MN = (N - M).norm(); HN = (N - H).norm()
+% assert MH == 4
+% assert simplify(MN - sqrt(41)) == 0
+% assert HN == 5
+% assert simplify(MN**2 - (MH**2 + HN**2)) == 0
+% assert (M - H).dot(N - H) == 0              # triangle rectangle en H
+% assert MN > MH
+% END-VERIFY
+
+\begin{corrige}{TSPE-GEOESPACE-RE-C11-EX1}
+\begin{enumerate}
+  \item Le plan est $z=0$ et $\vec{n}(0;0;1)$ lui est normal. Le projeté
+        s'obtient en annulant la cote~: $H(1;2;0)$, et $MH=4$.
+  \item $N$ a une cote nulle donc $N\in\mathcal{P}$, et
+        $MN=\sqrt{3^{2}+4^{2}+(-4)^{2}}=\sqrt{41}$.
+  \item $HN=\sqrt{3^{2}+4^{2}}=5$, et $MH^{2}+HN^{2}=16+25=41=MN^{2}$~:
+        l'égalité de Pythagore est vérifiée, ce qui confirme que le triangle
+        $MHN$ est rectangle en $H$.
+  \item Si $N=H$ alors $MN=MH=4$~: l'inégalité stricte tombe en égalité. C'est
+        précisément pourquoi l'énoncé exclut ce cas~: $H$ est l'unique point
+        du plan réalisant le minimum.
+\end{enumerate}
+\end{corrige}

@@ -1,0 +1,100 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-RE-C15", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "remediation", "capacites_codes": ["C15"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C15 : traduire et interpreter un systeme
+% Obstacle : prendre un systeme sans solution pour une erreur de calcul
+%---------------------------------------------------------------
+
+\subsection*{Erreur fréquente}
+
+\erreurFrequente{
+Un système sans solution signifie qu'on s'est trompé dans les calculs~; il
+faut donc recommencer jusqu'à trouver un point.
+}
+
+\textbf{Pourquoi c'est faux.} L'absence de solution est un \emph{résultat},
+pas un échec. Elle traduit exactement le fait que les objets géométriques ne
+se rencontrent pas. Refuser cette conclusion revient à forcer une intersection
+qui n'existe pas.
+
+\subsection*{À retenir}
+
+Pour l'intersection d'une droite et d'un plan~:
+\begin{itemize}
+  \item une solution unique~: la droite \emph{perce} le plan en un point~;
+  \item aucune solution~: la droite est \emph{strictement parallèle} au plan~;
+  \item une infinité de solutions~: la droite est \emph{contenue} dans le plan.
+\end{itemize}
+Chaque cas algébrique a une lecture géométrique~; aucun n'est une erreur.
+
+\subsection*{Méthode corrective}
+
+\begin{enumerate}
+  \item Traduire la situation en système, en gardant le même paramètre.
+  \item Résoudre sans a priori sur le nombre de solutions.
+  \item Traduire le résultat algébrique en position relative.
+  \item Contrôler la cohérence avec les vecteurs~: si le directeur est
+        orthogonal à la normale, la droite est parallèle au plan.
+\end{enumerate}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-GEOESPACE-RE-C15-EX1}{2}{14}
+Repère orthonormé. Soit $\mathcal{P}:\ x+y+z-3=0$ et les trois droites
+\[
+  d:\ \begin{cases} x=t\\ y=-t\\ z=1+t\end{cases}
+  \qquad
+  d':\ \begin{cases} x=t\\ y=-t\\ z=0\end{cases}
+  \qquad
+  d'':\ \begin{cases} x=3+t\\ y=-t\\ z=0\end{cases}
+\]
+\begin{enumerate}
+  \item Étudier l'intersection de $d$ et $\mathcal{P}$.
+  \item Étudier l'intersection de $d'$ et $\mathcal{P}$. Que conclure ?
+  \item Étudier l'intersection de $d''$ et $\mathcal{P}$. Que conclure ?
+  \item Les trois systèmes ont trois natures différentes. Associer à chacun sa
+        position relative, sans jamais parler d'erreur de calcul.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, symbols, solve, Eq
+% t = symbols('t')
+% n = Matrix([1,1,1]); c = -3
+% # d : perce le plan en un point unique
+% P1 = Matrix([0,0,1]); u1 = Matrix([1,-1,1])
+% assert n.dot(u1) != 0
+% assert solve(Eq(n.dot(P1 + t*u1) + c, 0), t) == [2]
+% # d' : directeur orthogonal a n, point hors du plan -> aucune solution
+% P2 = Matrix([0,0,0]); u2 = Matrix([1,-1,0])
+% assert n.dot(u2) == 0
+% assert n.dot(P2) + c != 0
+% assert solve(Eq(n.dot(P2 + t*u2) + c, 0), t) == []
+% # d'' : directeur orthogonal a n, point DANS le plan -> une infinite
+% P3 = Matrix([3,0,0]); u3 = Matrix([1,-1,0])
+% assert n.dot(u3) == 0
+% assert n.dot(P3) + c == 0
+% eq = Eq(n.dot(P3 + t*u3) + c, 0)
+% assert eq == True or solve(eq, t) == []   # identite : vraie pour tout t
+% assert all(n.dot(P3 + k*u3) + c == 0 for k in (-3, 0, 1, 7))
+% END-VERIFY
+
+\begin{corrige}{TSPE-GEOESPACE-RE-C15-EX1}
+\begin{enumerate}
+  \item En reportant $d$~: $t+(-t)+(1+t)-3=0$, soit $t-2=0$ et $t=2$. Solution
+        unique~: $d$ perce $\mathcal{P}$ au point $(2;-2;3)$.
+  \item Pour $d'$~: $t+(-t)+0-3=0$ donne $-3=0$. Le système n'a
+        \emph{aucune} solution. Ce n'est pas une erreur de calcul~: $d'$ est
+        strictement parallèle à $\mathcal{P}$. On le confirme avec les
+        vecteurs~: $\vec{n}\cdot\vec{u}=1-1+0=0$, et le point $(0;0;0)$ ne
+        vérifie pas l'équation du plan.
+  \item Pour $d''$~: $(3+t)+(-t)+0-3=0$ donne $0=0$, vrai pour \emph{tout}
+        $t$. Le système a une infinité de solutions~: $d''$ est contenue dans
+        $\mathcal{P}$. Son vecteur directeur est encore orthogonal à
+        $\vec{n}$, mais cette fois le point $(3;0;0)$ appartient au plan.
+  \item Solution unique $\rightarrow$ droite sécante~; aucune solution
+        $\rightarrow$ droite strictement parallèle~; infinité de solutions
+        $\rightarrow$ droite incluse. Les trois cas sont des réponses
+        géométriques complètes.
+\end{enumerate}
+\end{corrige}

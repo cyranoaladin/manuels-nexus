@@ -1,0 +1,81 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-RE-C6", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "remediation", "capacites_codes": ["C6"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C6 : configurations dans l'espace
+% Obstacle : croire que trois points suffisent a prouver la coplanarite
+%---------------------------------------------------------------
+
+\subsection*{Erreur fréquente}
+
+\erreurFrequente{
+Pour montrer que quatre points sont coplanaires, il suffit de vérifier que
+trois d'entre eux le sont.
+}
+
+\textbf{Pourquoi c'est faux.} Trois points sont \emph{toujours} coplanaires~:
+ils déterminent un plan dès qu'ils ne sont pas alignés. Le vérifier ne prouve
+donc rien. Toute la question porte sur le \emph{quatrième} point.
+
+\contreexemple{
+$A(0;0;0)$, $B(1;0;0)$, $C(0;1;0)$ sont coplanaires --- comme tout triplet ---
+et pourtant $D(0;0;1)$ n'appartient pas à leur plan $(z=0)$. Les quatre points
+ne sont pas coplanaires.
+}
+
+\subsection*{À retenir}
+
+$A$, $B$, $C$, $D$ sont coplanaires si et seulement si $\vec{AD}$ est une
+combinaison linéaire de $\vec{AB}$ et $\vec{AC}$. Trois points sont alignés si
+et seulement si $\vec{AB}$ et $\vec{AC}$ sont colinéaires.
+
+\subsection*{Méthode corrective}
+
+\begin{enumerate}
+  \item Choisir un point de référence, par exemple $A$.
+  \item Former les vecteurs $\vec{AB}$, $\vec{AC}$, $\vec{AD}$.
+  \item Chercher $a$ et $b$ tels que $\vec{AD}=a\,\vec{AB}+b\,\vec{AC}$.
+  \item Le système a une solution~: les points sont coplanaires. Il n'en a
+        pas~: ils ne le sont pas.
+\end{enumerate}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-GEOESPACE-RE-C6-EX1}{2}{12}
+On donne $A(1;0;2)$, $B(3;1;2)$, $C(0;2;2)$ et $D(2;3;2)$, puis $E(1;1;5)$.
+\begin{enumerate}
+  \item Montrer que $A$, $B$, $C$ ne sont pas alignés.
+  \item Les points $A$, $B$, $C$, $D$ sont-ils coplanaires ?
+  \item Les points $A$, $B$, $C$, $E$ sont-ils coplanaires ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, symbols, solve, Eq
+% a, b = symbols('a b')
+% A = Matrix([1,0,2]); B = Matrix([3,1,2]); C = Matrix([0,2,2])
+% D = Matrix([2,3,2]); E = Matrix([1,1,5])
+% AB = B - A; AC = C - A; AD = D - A; AE = E - A
+% # 1. non alignes : AB et AC ne sont pas colineaires
+% assert Matrix.hstack(AB, AC).rank() == 2
+% # 2. AD combinaison de AB et AC -> coplanaires
+% sol = solve([Eq((a*AB + b*AC)[i], AD[i]) for i in range(3)], [a, b], dict=True)
+% assert sol, "A, B, C, D doivent etre coplanaires"
+% # 3. AE hors du plan -> non coplanaires
+% assert solve([Eq((a*AB + b*AC)[i], AE[i]) for i in range(3)], [a, b], dict=True) == []
+% END-VERIFY
+
+\begin{corrige}{TSPE-GEOESPACE-RE-C6-EX1}
+\begin{enumerate}
+  \item $\vec{AB}(2;1;0)$ et $\vec{AC}(-1;2;0)$. S'ils étaient colinéaires, on
+        aurait $-1=2k$ et $2=k$, donc $k=2$ et $-1=4$~: impossible. Les points
+        ne sont pas alignés.
+  \item $\vec{AD}(1;3;0)$. On cherche $a$ et $b$ tels que
+        $\vec{AD}=a\vec{AB}+b\vec{AC}$, soit $2a-b=1$ et $a+2b=3$. On obtient
+        $a=1$ et $b=1$, et la troisième équation $0=0$ est vérifiée. Les
+        quatre points sont coplanaires --- ils sont d'ailleurs tous dans le
+        plan $z=2$.
+  \item $\vec{AE}(0;1;3)$. La troisième coordonnée impose $0a+0b=3$, ce qui
+        est impossible. $E$ n'est pas dans le plan $(ABC)$~: les points ne
+        sont pas coplanaires.
+\end{enumerate}
+\end{corrige}
