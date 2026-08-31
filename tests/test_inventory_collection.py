@@ -19491,7 +19491,7 @@ def test_pre_a6_identity_migration_registry_is_exact_schema_control(
     assert forbidden.isdisjoint(all_keys(payload))
 
 
-def test_pre_a6_repository_projects_only_the_exact_nine_qualifications(
+def test_pre_a6_repository_projects_only_active_identity_qualifications(
     inventory_module,
 ) -> None:
     inventory = inventory_module._build_inventory(
@@ -19503,15 +19503,20 @@ def test_pre_a6_repository_projects_only_the_exact_nine_qualifications(
     qualifications = inventory["anomaly_qualifications"]
     dispositions = inventory_module._load_dispositions(ROOT)
 
-    assert set(PRE_A6_IDENTITY_MIGRATIONS) <= set(qualifications)
+    active_migrations = set(PRE_A6_IDENTITY_MIGRATIONS) - (
+        _superseded_migration_fingerprints()
+    )
+    assert active_migrations <= set(qualifications)
+    assert _superseded_migration_fingerprints().isdisjoint(qualifications)
     assert all(
         qualifications[fingerprint]["qualified"] is True
-        for fingerprint in PRE_A6_IDENTITY_MIGRATIONS
+        for fingerprint in active_migrations
     )
     assert all(
         qualifications[current]["qualification_digest"]
         == dispositions[previous]["qualification_digest"]
         for current, previous in PRE_A6_IDENTITY_MIGRATIONS.items()
+        if current in active_migrations
     )
     assert (
         hashlib.sha256(
@@ -19571,11 +19576,15 @@ def test_pre_a6_projection_keeps_historical_decision_after_policy_rotation(
         rotated,
     )
 
-    assert set(PRE_A6_IDENTITY_MIGRATIONS) <= set(projected)
+    active_migrations = set(PRE_A6_IDENTITY_MIGRATIONS) - (
+        _superseded_migration_fingerprints()
+    )
+    assert active_migrations <= set(projected)
+    assert _superseded_migration_fingerprints().isdisjoint(projected)
     assert all(
         projected[current]["qualification_policy_digest"]
         == historical["qualification_policy_digest"]
-        for current in PRE_A6_IDENTITY_MIGRATIONS
+        for current in active_migrations
     )
 
 

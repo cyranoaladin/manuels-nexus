@@ -271,7 +271,8 @@ def test_canonical_selection_is_invariant_under_path_permutation(producer) -> No
             )
             assert permuted == reference, group["clone_group_id"]
         checked += 1
-    assert checked > 300, "le corpus doit etre reellement parcouru"
+    assert checked == len(ledger["groups"])
+    assert checked > 0, "le corpus doit etre reellement parcouru"
 
 
 def test_the_true_owner_wins_even_when_the_copy_sorts_first(producer) -> None:

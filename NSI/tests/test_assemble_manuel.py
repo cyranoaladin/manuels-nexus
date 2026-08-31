@@ -299,19 +299,37 @@ def test_runtime_selection_covers_all_professor_objects_and_is_student_safe(asse
         for path in selected["evaluations"]
     ]
 
-    # Re-atteste a la cloture A4 (2026-08-19) : 940 objets pre-campagne
-    # + les 2 fiches methodes ADGK produites par la campagne (ME-002,
-    # ME-003 ; ME-001 preexistait) = 942.
-    # 944 depuis le 2026-08-30 : les deux corriges des evaluations de
-    # 1NSI-TYPES-CONSTRUITS, qui etaient livrees sans corrige. Les deux objets
-    # sont declares en dette de revue dans
-    # audit/NSI_TC_QCM_AND_EVAL_REVIEW_DEBT_4.json.
-    assert len(professor) == 944
-    assert len(corrections) == 354
+    # Inventaire independant : le variant professeur doit contenir chaque
+    # objet de production META courant, sans restaurer une cardinalite
+    # historique apres une suppression ou une supersession prouvee.
+    expected_professor = {
+        path
+        for path in ROOT.glob("chapitres/1NSI-*/**/*.tex")
+        if path.read_text(encoding="utf-8").splitlines()[0].startswith("% META:")
+    }
+    assert set(professor) == expected_professor
     assert set(corrections) == set(ROOT.glob("chapitres/1NSI-*/corriges/*.tex"))
-    assert evaluation_types.count("evaluation") == 20
-    # 20 depuis le 2026-08-30 : les deux corriges de 1NSI-TYPES-CONSTRUITS.
-    assert evaluation_types.count("corrige_evaluation") == 20
+    evaluations_by_chapter = {
+        chapter: [
+            path
+            for path in selected["evaluations"]
+            if chapter in path.parts
+        ]
+        for chapter in CHAPTERS
+    }
+    for chapter, paths in evaluations_by_chapter.items():
+        typed = [
+            json.loads(path.read_text(encoding="utf-8").splitlines()[0][7:].strip())[
+                "type_objet"
+            ]
+            for path in paths
+        ]
+        assert typed.count("evaluation") == 2, chapter
+        assert typed.count("corrige_evaluation") == 2, chapter
+        assert {
+            re.search(r"-EVAL-([AB])(?:-corrige)?\.tex$", path.name).group(1)
+            for path in paths
+        } == {"A", "B"}
     for variant in STUDENT_VARIANTS:
         assert selected[variant]
         assert not any(path.parent.name == "corriges" for path in selected[variant])

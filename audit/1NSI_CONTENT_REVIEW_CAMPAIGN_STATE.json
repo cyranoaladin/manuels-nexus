@@ -2,7 +2,7 @@
  "artifact_name": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE",
  "created": "2026-08-19",
  "status": "PENDING_REVIEW_RERUN",
- "reason": "Campagne de revue de contenu 1NSI scellée (commit 5d8bedd9, 349 sources, reviewers/receipts épinglés) ; depuis, des lots scellés ont légitimement déplacé le corpus (complétion des META A4.1 rendant visibles ~603 objets, renommage AGT→APT, arbitrage ADGK, prérequis R-codes au contrat ADGK, fiches méthodes de campagne). La re-exécution de la revue (nouveau run, nouveaux receipts, confirmation humaine) est un LOT à part entière, NON démarré (clôture A4 §17). Le présent artefact fige l'état de dérive EXACT : tout écart supplémentaire doit refaire échouer les tests. Derive supplementaire du 2026-08-30, mesuree exactement : deux objets s'ajoutent, 1NSI-TC-EVAL-A-corrige et 1NSI-TC-EVAL-B-corrige, les deux evaluations du chapitre etant livrees sans corrige. Aucun identifiant ne disparait ; l'identite 1NSI-TC-QCM est preservee malgre la migration du rendu vers le generateur. Les deux objets sont declares en dette de revue dans audit/NSI_TC_QCM_AND_EVAL_REVIEW_DEBT_4.json. Le bloc scelle reste intact.",
+ "reason": "Campagne de revue de contenu 1NSI scellée (commit 5d8bedd9, 349 sources, reviewers/receipts épinglés) ; depuis, des lots scellés ont légitimement déplacé le corpus (complétion des META A4.1 rendant visibles ~603 objets, renommage AGT→APT, arbitrage ADGK, prérequis R-codes au contrat ADGK, fiches méthodes de campagne). La re-exécution de la revue (nouveau run, nouveaux receipts, confirmation humaine) est un LOT à part entière, NON démarré (clôture A4 §17). Le présent artefact fige l'état de dérive EXACT : tout écart supplémentaire doit refaire échouer les tests. Derive supplementaire du 2026-08-30, mesuree exactement : deux objets s'ajoutent, 1NSI-TC-EVAL-A-corrige et 1NSI-TC-EVAL-B-corrige, les deux evaluations du chapitre etant livrees sans corrige. Derive du 2026-08-31 : la reconstruction couplee des deux chapitres d'algorithmique supprime ou supersede 93 objets ; 861 sources, dont 851 objets, restent observables. Les contenus nouveaux ou reecrits demeurent en dette humaine ouverte et aucune finding historique n'est promue. Le bloc scelle reste intact.",
  "no_go_carrier": "release-strict / publication_approval du registre de revue (human_confirmation_required)",
  "sealed": {
   "sealing_commit": "5d8bedd9b20d042fcc25eac7d601dcc6ff44cb99",
@@ -13,11 +13,11 @@
  },
  "observed": {
   "protocol_digest_current": "sha256:5ebd94ab830266dd68ade18a9afcf5327b5835bc1ee69b46dafb63807ba70de2",
-  "sources_count": 954,
-  "sources_ids_digest": "sha256:f3fdfc19495991946e70a7f940a0a050e518c6f39d84fabbf1d5a532774f7337",
-  "object_sources_count": 944,
-  "algorithm_scope_count": 158,
-  "algorithm_scope_ids_digest": "sha256:2076b161de6b17b9c8d876b5fa2b30f9114e78710a598cefed916405b7a3d5c7",
+  "sources_count": 861,
+  "sources_ids_digest": "sha256:e56cbfa0acf3685f457f100aec5fae950cad23908f6212498f47a43e80a3eab2",
+  "object_sources_count": 851,
+  "algorithm_scope_count": 65,
+  "algorithm_scope_ids_digest": "sha256:f11e0434c4e6f1bc5dabbf60096b3a2101f62358c7b87f6a6267d970c95cc298",
   "policy_sha256": "sha256:0f92fe4a8acc3e04a7c383205d04a8e24f44baedd40ce86f28195b062a87d9bf",
   "findings_sha256": "sha256:9687cb06fc791494a147138b5d23d484c4b827d92ee48d43318cb59ebba612c1",
   "registry_sha256": "sha256:7bb8569aea320f2fe57b19d975cc34b1fffa46e0c5a137839b3cf49b8342c580",
@@ -36,7 +36,7 @@
    "1NSI-AGT-RE-C5",
    "1NSI-AGT-RE-C5-CORRIGE"
   ],
-  "ids_only_in_sources_count": 617,
-  "ids_only_in_sources_digest": "sha256:d0315555fc65b4f3c81ab5164386d31d365467a7132d2bca8f91d53e79212766"
+  "ids_only_in_sources_count": 524,
+  "ids_only_in_sources_digest": "sha256:cf026898b2e15c3ddf43a0071f4e7cc532077d539f3d72db28e8f8262c29ee8d"
  }
 }

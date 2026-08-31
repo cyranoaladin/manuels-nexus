@@ -243,7 +243,16 @@ def test_the_whole_collection_resolves_without_unknown(module):
 
     resolver = module.CapacityIdentityResolver.from_corpora()
     unresolved: list[tuple[str, str]] = []
-    seen = 0
+    declarations: list[tuple[str, str]] = []
+    visited_sources: set[Path] = set()
+    expected_sources = {
+        path
+        for corpus in module.CORPORA
+        if corpus.is_dir()
+        for path in corpus.rglob("*.tex")
+        if not any(part in module.UNPUBLISHED for part in path.parts)
+        and path.parts[path.parts.index("chapitres") + 1] in resolver.chapters
+    }
     for corpus in module.CORPORA:
         if not corpus.is_dir():
             continue
@@ -253,6 +262,7 @@ def test_the_whole_collection_resolves_without_unknown(module):
             chapter = path.parts[path.parts.index("chapitres") + 1]
             if chapter not in resolver.chapters:
                 continue
+            visited_sources.add(path)
             meta = ledger.read_meta(path.read_text(encoding="utf-8", errors="replace"))
             raws = {
                 module.normalise(value)
@@ -260,13 +270,16 @@ def test_the_whole_collection_resolves_without_unknown(module):
                 for value in (meta.get(key) or [])
             }
             for raw in raws:
-                seen += 1
-                try:
-                    resolver.resolve(chapter, raw)
-                except module.CapacityIdentityError:
-                    unresolved.append((chapter, raw))
+                declarations.append((chapter, raw))
 
-    assert seen > 9000, "le corpus doit etre reellement parcouru"
+    for chapter, raw in declarations:
+        try:
+            resolver.resolve(chapter, raw)
+        except module.CapacityIdentityError:
+            unresolved.append((chapter, raw))
+
+    assert visited_sources == expected_sources
+    assert declarations, "le corpus doit etre reellement parcouru"
     assert unresolved == [], f"declarations non resolues: {unresolved[:10]}"
 
 
