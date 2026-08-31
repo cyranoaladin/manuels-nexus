@@ -3906,7 +3906,7 @@ def test_repository_fail_on_new_gate_accepts_exact_residual_extension(
     # le QCM de TNSI-PROJET : chacun dans le registre de son chapitre.
     # Puis les 45 de TSPE-GEOMETRIE-ESPACE : 40 objets crees par la
     # reconstruction et 5 dont la reecriture a perime l'approbation humaine.
-    assert len(declared) == 16 + 45
+    assert len(declared) == 16 + 45 + 36
 
     assert gate["success"] is False
     assert gate["exit_code"] == 5

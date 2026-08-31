@@ -117,22 +117,30 @@ def test_builds_exact_residual_without_mutating_frozen_inputs(tmp_path: Path) ->
     # 2293 depuis la reconstruction de TSPE-GEOMETRIE-ESPACE : 45 objets que
     # la machine a verifies et qu'aucun humain n'a relus, portes par leur
     # propre registre plutot que fondus dans un terme existant.
+    # 2325 depuis la reconstruction couplee 1NSI : 36 objets neufs portes par
+    # leur registre. APPROVED_TRANSITION_NEW passe de 9 a 5 : quatre
+    # empreintes ont ete SUPERSEDEES par la reecriture des evaluations, et une
+    # empreinte que la reecriture a fait disparaitre ne peut plus figurer dans
+    # la partition courante.
     assert full["cardinality_equation"] == (
-        "2293 = 2121 + 9 + 89 + 13 + 12 + 1 + 2 + 1 + 45"
+        "2325 = 2121 + 5 + 89 + 13 + 12 + 1 + 2 + 1 + 45 + 36"
     )
-    assert full["cardinalities"]["CURRENT_ACTIVE"] == 2293
+    assert full["cardinalities"]["CURRENT_ACTIVE"] == 2325
+    assert full["cardinalities"]["APPROVED_TRANSITION_NEW"] == 5
     assert full["cardinalities"]["TRUE_NEW"] == 13
     assert full["cardinalities"]["VARALEA_C6C7_REVIEW_DEBT_12"] == 12
     assert full["cardinalities"]["EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1"] == 1
     assert full["cardinalities"]["NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2"] == 2
     assert full["cardinalities"]["TNSI_PROJET_QCM_REVIEW_DEBT_1"] == 1
     assert full["cardinalities"]["TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_45"] == 45
+    assert full["cardinalities"]["NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT"] == 36
     declared = (
         "VARALEA_C6C7_REVIEW_DEBT_12",
         "EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1",
         "NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2",
         "TNSI_PROJET_QCM_REVIEW_DEBT_1",
         "TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_45",
+        "NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT",
     )
     # La dette de revue se partitionne : aucune intersection deux a deux, y
     # compris avec le residuel gele. Le test n'echantillonnait que deux
