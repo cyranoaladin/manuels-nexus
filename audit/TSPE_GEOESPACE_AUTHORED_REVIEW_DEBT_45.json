@@ -1,11 +1,23 @@
 {
   "artifact_type": "BLOCKING_REVIEW_DEBT_LEDGER",
-  "ledger_id": "TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_40",
+  "ledger_id": "TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_45",
   "schema_version": 1,
   "generated_by": "scripts/build_geoespace_authored_review_debt.py",
   "chapter": "TSPE-GEOMETRIE-ESPACE",
-  "count": 40,
-  "fingerprint_set_digest": "sha256:12d6c03fc9708b3c1ac937494e521697c88f08a0e19e1f49ddf6b216c39e3f83",
+  "count": 45,
+  "counts_by_origin": {
+    "CREATED": 40,
+    "REWRITTEN": 5
+  },
+  "approval_freeze_sha": "447915e8fee6b59e1c248c805e28d0fcdd234f0d",
+  "human_approvals_invalidated": [
+    "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/evaluations/TSPE-GEOESPACE-EV-A-corrige.tex",
+    "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/evaluations/TSPE-GEOESPACE-EV-A.tex",
+    "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/evaluations/TSPE-GEOESPACE-EV-B-corrige.tex",
+    "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/evaluations/TSPE-GEOESPACE-EV-B.tex",
+    "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/methodes/TSPE-GEOESPACE-ME-001.tex"
+  ],
+  "fingerprint_set_digest": "sha256:6100c15a6a6bc36c7ad88f7ab70659b30cd942a102ff8146b1e5cdc26623fb76",
   "human_review_required": true,
   "release_blocking": true,
   "release_acceptance": false,
@@ -13,7 +25,7 @@
   "is_baseline_qualification": false,
   "is_gate_exception": false,
   "semantics": "Registre d'observation. Il n'inscrit rien dans la baseline approuvee, ne materialise aucune qualification, et ne doit rendre vert ni validate-model ni fail-on-new. La fermeture doit venir du cycle de statut apres revue humaine.",
-  "why_created": "La reconstruction du chapitre a produit quarante objets verifies par machine -- oracles SymPy verts, zero clone, build RC 0 -- que personne n'a relus. Ce qui est verifie par une machine n'est pas ce qui est valide par un professeur : ces objets restent bloquants jusqu'a la revue humaine.",
+  "why_created": "La reconstruction du chapitre a produit quarante-cinq objets verifies par machine -- oracles SymPy verts, zero clone, build RC 0 -- que personne n'a relus. Ce qui est verifie par une machine n'est pas ce qui est valide par un professeur : ces objets restent bloquants jusqu'a la revue humaine. Cinq d'entre eux portaient deja `status: approved` au gel 447915e8 ; les reecrire a invalide cette approbation, qui avait ete donnee pour un contenu qui n'existe plus. Cette perte est declaree, pas absorbee.",
   "machine_verification_performed": {
     "sympy_oracles": "56/56 verts",
     "content_clones": 0,
@@ -44,7 +56,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-CO-052",
@@ -58,7 +73,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-CO-053",
@@ -72,7 +90,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-CO-054",
@@ -86,7 +107,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-CO-055",
@@ -100,7 +124,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-CO-056",
@@ -114,7 +141,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-CO-057",
@@ -128,7 +158,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-CO-058",
@@ -142,7 +175,78 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
+    },
+    {
+      "object_id": "TSPE-GEOESPACE-EV-A-corrige",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/evaluations/TSPE-GEOESPACE-EV-A-corrige.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "812252e6d4b0aa51",
+      "logical_owner": "direction_scientifique_programme",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false,
+      "origin": "REWRITTEN",
+      "status_before_rewrite": "approved",
+      "human_approval_invalidated_by_rewrite": true
+    },
+    {
+      "object_id": "TSPE-GEOESPACE-EV-A",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/evaluations/TSPE-GEOESPACE-EV-A.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "17ecb38fe950f27c",
+      "logical_owner": "direction_scientifique_programme",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false,
+      "origin": "REWRITTEN",
+      "status_before_rewrite": "approved",
+      "human_approval_invalidated_by_rewrite": true
+    },
+    {
+      "object_id": "TSPE-GEOESPACE-EV-B-corrige",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/evaluations/TSPE-GEOESPACE-EV-B-corrige.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "f6a71c8db9245378",
+      "logical_owner": "direction_scientifique_programme",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false,
+      "origin": "REWRITTEN",
+      "status_before_rewrite": "approved",
+      "human_approval_invalidated_by_rewrite": true
+    },
+    {
+      "object_id": "TSPE-GEOESPACE-EV-B",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/evaluations/TSPE-GEOESPACE-EV-B.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "eb8bebf6c6fd447e",
+      "logical_owner": "direction_scientifique_programme",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false,
+      "origin": "REWRITTEN",
+      "status_before_rewrite": "approved",
+      "human_approval_invalidated_by_rewrite": true
     },
     {
       "object_id": "TSPE-GEOESPACE-EX-051",
@@ -156,7 +260,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-EX-052",
@@ -170,7 +277,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-EX-053",
@@ -184,7 +294,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-EX-054",
@@ -198,7 +311,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-EX-055",
@@ -212,7 +328,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-EX-056",
@@ -226,7 +345,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-EX-057",
@@ -240,7 +362,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-EX-058",
@@ -254,7 +379,27 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
+    },
+    {
+      "object_id": "TSPE-GEOESPACE-ME-001",
+      "path": "Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/methodes/TSPE-GEOESPACE-ME-001.tex",
+      "category": "blocking_statuses",
+      "status": "generated",
+      "scope": "object",
+      "fingerprint": "fc4701b8be0bc4b4",
+      "logical_owner": "direction_scientifique_programme",
+      "policy_disposition": "open_debt",
+      "in_approved_baseline": false,
+      "human_review_required": true,
+      "release_blocking": true,
+      "release_acceptance": false,
+      "origin": "REWRITTEN",
+      "status_before_rewrite": "approved",
+      "human_approval_invalidated_by_rewrite": true
     },
     {
       "object_id": "TSPE-GEOESPACE-ME-002",
@@ -268,7 +413,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-ME-003",
@@ -282,7 +430,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-ME-004",
@@ -296,7 +447,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-ME-005",
@@ -310,7 +464,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-ME-006",
@@ -324,7 +481,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-ME-007",
@@ -338,7 +498,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-ME-008",
@@ -352,7 +515,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-ME-009",
@@ -366,7 +532,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOESPACE-ME-010",
@@ -380,7 +549,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOMETRIE-ESPACE-RE-C1",
@@ -394,7 +566,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOMETRIE-ESPACE-RE-C10",
@@ -408,7 +583,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOMETRIE-ESPACE-RE-C11",
@@ -422,7 +600,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOMETRIE-ESPACE-RE-C12",
@@ -436,7 +617,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOMETRIE-ESPACE-RE-C13",
@@ -450,7 +634,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOMETRIE-ESPACE-RE-C14",
@@ -464,7 +651,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOMETRIE-ESPACE-RE-C15",
@@ -478,7 +668,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOMETRIE-ESPACE-RE-C16",
@@ -492,7 +685,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOMETRIE-ESPACE-RE-C2",
@@ -506,7 +702,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOMETRIE-ESPACE-RE-C3",
@@ -520,7 +719,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOMETRIE-ESPACE-RE-C4",
@@ -534,7 +736,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOMETRIE-ESPACE-RE-C5",
@@ -548,7 +753,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOMETRIE-ESPACE-RE-C6",
@@ -562,7 +770,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOMETRIE-ESPACE-RE-C8",
@@ -576,7 +787,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     },
     {
       "object_id": "TSPE-GEOMETRIE-ESPACE-RE-C9",
@@ -590,7 +804,10 @@
       "in_approved_baseline": false,
       "human_review_required": true,
       "release_blocking": true,
-      "release_acceptance": false
+      "release_acceptance": false,
+      "origin": "CREATED",
+      "status_before_rewrite": null,
+      "human_approval_invalidated_by_rewrite": false
     }
   ]
 }

@@ -31,19 +31,40 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 INVENTORY = ROOT / "audit/INVENTAIRE_COLLECTION.json"
-OUTPUT = ROOT / "audit/TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_40.json"
+OUTPUT = ROOT / "audit/TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_45.json"
 CHAPTER = "TSPE-GEOMETRIE-ESPACE"
 
-#: Les objets ecrits pendant la reconstruction. `RE-C7` et `ME-001`
-#: preexistaient : ils ne figurent pas ici, et leur dette eventuelle reste ou
-#: elle etait. La liste est explicite pour qu'un objet ecrit demain n'entre pas
-#: dans cette dette sans decision.
-AUTHORED_STEMS = frozenset(
+#: Objets CREES par la reconstruction. Ils n'ont jamais eu d'approbation.
+#: `RE-C7` n'y figure pas : c'est la fiche originale, celle dont les seize
+#: autres etaient la copie.
+CREATED_STEMS = frozenset(
     [f"{CHAPTER}-RE-C{n}" for n in range(1, 17) if n != 7]
     + [f"TSPE-GEOESPACE-ME-{n:03d}" for n in range(2, 11)]
     + [f"TSPE-GEOESPACE-EX-{n:03d}" for n in range(51, 59)]
     + [f"TSPE-GEOESPACE-CO-{n:03d}" for n in range(51, 59)]
 )
+
+#: Objets REECRITS qui portaient `status: approved` au gel 447915e8. Les
+#: reecrire a invalide cette approbation : elle avait ete donnee pour un
+#: contenu qui n'existe plus. Leur statut est retombe a `generated`, et c'est
+#: la seule issue correcte -- une approbation ne suit pas le chemin d'un
+#: fichier, elle suit son contenu.
+#:
+#: Ils sont distingues des precedents parce que la perte d'une approbation
+#: humaine acquise n'est pas la meme dette que l'absence d'approbation : elle
+#: doit etre visible comme une regression assumee, pas fondue dans le lot.
+REWRITTEN_PREVIOUSLY_APPROVED_STEMS = frozenset(
+    {
+        "TSPE-GEOESPACE-EV-A",
+        "TSPE-GEOESPACE-EV-A-corrige",
+        "TSPE-GEOESPACE-EV-B",
+        "TSPE-GEOESPACE-EV-B-corrige",
+        "TSPE-GEOESPACE-ME-001",
+    }
+)
+
+APPROVAL_FREEZE_SHA = "447915e8fee6b59e1c248c805e28d0fcdd234f0d"
+AUTHORED_STEMS = CREATED_STEMS | REWRITTEN_PREVIOUSLY_APPROVED_STEMS
 
 
 def _inventory_module():
@@ -70,9 +91,11 @@ def build_ledger() -> dict[str, Any]:
         fingerprint = inventory_module._anomaly_fingerprint(
             anomaly, category="blocking_statuses", repository_root=ROOT
         )
+        stem = Path(path).stem
+        rewritten = stem in REWRITTEN_PREVIOUSLY_APPROVED_STEMS
         entries.append(
             {
-                "object_id": anomaly.get("id") or Path(path).stem,
+                "object_id": anomaly.get("id") or stem,
                 "path": path,
                 "category": "blocking_statuses",
                 "status": anomaly.get("status"),
@@ -84,6 +107,9 @@ def build_ledger() -> dict[str, Any]:
                 "human_review_required": True,
                 "release_blocking": True,
                 "release_acceptance": False,
+                "origin": "REWRITTEN" if rewritten else "CREATED",
+                "status_before_rewrite": "approved" if rewritten else None,
+                "human_approval_invalidated_by_rewrite": rewritten,
             }
         )
 
@@ -96,13 +122,24 @@ def build_ledger() -> dict[str, Any]:
     if len(set(fingerprints)) != len(entries):
         raise ValueError("empreintes non univoques")
 
+    if len(entries) != len(AUTHORED_STEMS):
+        raise ValueError(f"attendu {len(AUTHORED_STEMS)} lignes, obtenu {len(entries)}")
+
     return {
         "artifact_type": "BLOCKING_REVIEW_DEBT_LEDGER",
-        "ledger_id": "TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_40",
+        "ledger_id": "TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_45",
         "schema_version": 1,
         "generated_by": "scripts/build_geoespace_authored_review_debt.py",
         "chapter": CHAPTER,
         "count": len(entries),
+        "counts_by_origin": {
+            "CREATED": sum(1 for row in entries if row["origin"] == "CREATED"),
+            "REWRITTEN": sum(1 for row in entries if row["origin"] == "REWRITTEN"),
+        },
+        "approval_freeze_sha": APPROVAL_FREEZE_SHA,
+        "human_approvals_invalidated": sorted(
+            row["path"] for row in entries if row["human_approval_invalidated_by_rewrite"]
+        ),
         "fingerprint_set_digest": "sha256:"
         + hashlib.sha256(
             json.dumps(fingerprints, separators=(",", ":")).encode("utf-8")
@@ -120,11 +157,14 @@ def build_ledger() -> dict[str, Any]:
             "cycle de statut apres revue humaine."
         ),
         "why_created": (
-            "La reconstruction du chapitre a produit quarante objets verifies "
+            "La reconstruction du chapitre a produit quarante-cinq objets verifies "
             "par machine -- oracles SymPy verts, zero clone, build RC 0 -- que "
             "personne n'a relus. Ce qui est verifie par une machine n'est pas "
             "ce qui est valide par un professeur : ces objets restent "
-            "bloquants jusqu'a la revue humaine."
+            "bloquants jusqu'a la revue humaine. Cinq d'entre eux portaient "
+            "deja `status: approved` au gel 447915e8 ; les reecrire a invalide "
+            "cette approbation, qui avait ete donnee pour un contenu qui "
+            "n'existe plus. Cette perte est declaree, pas absorbee."
         ),
         "machine_verification_performed": {
             "sympy_oracles": "56/56 verts",
