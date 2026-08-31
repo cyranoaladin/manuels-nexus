@@ -1,0 +1,88 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-RE-C3", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "remediation", "capacites_codes": ["C3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : position relative de droites et de plans
+% Obstacle : deux droites sans point commun seraient paralleles
+%---------------------------------------------------------------
+
+\subsection*{Erreur frequente}
+
+\erreurFrequente{
+Deux droites qui ne se coupent pas sont paralleles.
+}
+
+\textbf{Pourquoi c'est faux.} Cette equivalence est vraie \emph{dans un plan},
+ou elle sert de définition usuelle. Dans l'espace, deux droites peuvent
+n'avoir aucun point commun sans avoir la même direction~: elles ne sont alors
+pas coplanaires. On les dit \emph{non coplanaires}.
+
+\contreexemple{
+Dans le cube $ABCDEFGH$, les droites $(AB)$ et $(CG)$ n'ont aucun point commun
+et ne sont pas paralleles~: $\vec{AB}$ est horizontal, $\vec{CG}$ vertical.
+Aucun plan ne les contient toutes les deux.
+}
+
+\subsection*{A retenir}
+
+Pour deux droites de l'espace, trois cas seulement, et il faut les
+\emph{distinguer dans cet ordre}~:
+
+\begin{enumerate}
+  \item vecteurs directeurs colineaires~? alors les droites sont paralleles
+        (confondues si elles partagent un point, strictement paralleles sinon)~;
+  \item sinon, existe-t-il un point commun~? alors elles sont secantes~;
+  \item sinon, elles sont non coplanaires.
+\end{enumerate}
+
+\subsection*{Méthode corrective}
+
+Ne jamais conclure « paralleles » a partir de l'absence de point commun. On
+teste d'abord la colinearite des vecteurs directeurs, ensuite seulement
+l'existence d'un point commun en resolvant le système.
+
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-GEOESPACE-RE-C3-EX1}{1}{12}
+Dans un repere orthonorme, on donne
+$A(0;0;0)$, $B(1;0;0)$, $C(1;1;0)$, $G(1;1;1)$ et $E(0;0;1)$.
+\begin{enumerate}
+  \item Déterminer un vecteur directeur de $(AB)$ et un de $(CG)$.
+  \item Ces droites sont-elles paralleles ?
+  \item Montrer qu'elles n'ont aucun point commun.
+  \item Conclure sur leur position relative.
+  \item Même question pour $(AB)$ et $(EF)$ ou $F(1;0;1)$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, symbols, solve, Eq
+% t, s = symbols('t s')
+% A = Matrix([0,0,0]); B = Matrix([1,0,0]); C = Matrix([1,1,0]); G = Matrix([1,1,1])
+% E = Matrix([0,0,1]); F = Matrix([1,0,1])
+% dAB = B - A; dCG = G - C; dEF = F - E
+% # 1-2. AB et CG : directions non colineaires (rang 2)
+% assert Matrix.hstack(dAB, dCG).rank() == 2
+% # 3. aucun point commun : le systeme A + t dAB = C + s dCG est incompatible
+% assert solve([Eq((A + t*dAB)[i], (C + s*dCG)[i]) for i in range(3)], [t, s]) == []
+% # 4. donc non coplanaires
+% # 5. AB et EF : directions colineaires (rang 1) donc paralleles
+% assert Matrix.hstack(dAB, dEF).rank() == 1
+% # strictement paralleles : E n'est pas sur (AB)
+% assert solve([Eq((A + t*dAB)[i], E[i]) for i in range(3)], [t]) == []
+% END-VERIFY
+
+\begin{corrige}{TSPE-GEOESPACE-RE-C3-EX1}
+\begin{enumerate}
+  \item $\vec{AB}(1;0;0)$ dirige $(AB)$ et $\vec{CG}(0;0;1)$ dirige $(CG)$.
+  \item Non~: aucun réel $k$ ne vérifie $(0;0;1)=k(1;0;0)$, car la première
+        coordonnée imposerait $k=0$ et la troisième $0=1$.
+  \item Un point de $(AB)$ s'ecrit $(t;0;0)$, un point de $(CG)$ s'ecrit
+        $(1;1;s)$. L'égalité des deuxiemes coordonnées donne $0=1$, ce qui est
+        impossible~: il n'y a aucun point commun.
+  \item Les droites ne sont ni paralleles ni secantes~: elles sont
+        \emph{non coplanaires}.
+  \item $\vec{EF}(1;0;0)=\vec{AB}$~: les droites sont paralleles. Comme
+        $E(0;0;1)$ n'appartient pas a $(AB)$ (sa troisième coordonnée vaut
+        $1$), elles sont strictement paralleles.
+\end{enumerate}
+\end{corrige}

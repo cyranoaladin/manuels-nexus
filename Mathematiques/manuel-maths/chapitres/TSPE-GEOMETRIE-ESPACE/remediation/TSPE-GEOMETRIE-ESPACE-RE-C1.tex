@@ -1,0 +1,78 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-RE-C1", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : representer une combinaison lineaire
+% Obstacle : transferer a l'espace l'intuition du plan
+%---------------------------------------------------------------
+
+\subsection*{Erreur frequente}
+
+\erreurFrequente{
+Deux vecteurs non colineaires suffisent a atteindre tous les vecteurs de
+l'espace, comme dans le plan.
+}
+
+\textbf{Pourquoi c'est faux.} Dans le plan, deux vecteurs non colineaires
+engendrent effectivement tout le plan. Dans l'espace, ils n'engendrent qu'un
+plan~: celui qu'ils dirigent. Il reste toute une direction hors de portee.
+
+\contreexemple{
+Avec $\vec{u}\begin{pmatrix}1\\0\\0\end{pmatrix}$ et
+$\vec{v}\begin{pmatrix}0\\1\\0\end{pmatrix}$, toute combinaison
+$a\vec{u}+b\vec{v}$ a une troisième coordonnée nulle. Le vecteur
+$\vec{w}\begin{pmatrix}0\\0\\1\end{pmatrix}$ n'est donc jamais atteint,
+quels que soient $a$ et $b$.
+}
+
+\subsection*{A retenir}
+
+Pour atteindre tout l'espace il faut \emph{trois} vecteurs non coplanaires.
+Une combinaison linéaire $a\vec{u}+b\vec{v}+c\vec{w}$ se construit alors comme
+un parallelepipede~: on porte $a\vec{u}$, puis $b\vec{v}$ a partir de son
+extrémité, puis $c\vec{w}$ a partir de la nouvelle extrémité.
+
+\subsection*{Méthode corrective}
+
+\begin{enumerate}
+  \item Placer les trois vecteurs a partir d'une même origine.
+  \item Tracer separement $a\vec{u}$, $b\vec{v}$, $c\vec{w}$ en respectant le
+        signe~: un coefficient négatif retourne la fleche.
+  \item Chainer les trois vecteurs bout a bout, dans n'importe quel ordre.
+  \item Vérifier~: le résultat est la diagonale du parallelepipede construit.
+\end{enumerate}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-GEOESPACE-RE-C1-EX1}{1}{10}
+On munit l'espace d'un repere $(O;\vec{i},\vec{j},\vec{k})$.
+\begin{enumerate}
+  \item Le vecteur $\vec{w}\begin{pmatrix}0\\0\\1\end{pmatrix}$ peut-il
+        s'écrire $a\vec{i}+b\vec{j}$ ? Justifier.
+  \item Calculer les coordonnées de $2\vec{i}-3\vec{j}+\vec{k}$.
+  \item Le vecteur $\vec{t}\begin{pmatrix}4\\-6\\2\end{pmatrix}$ est-il
+        colineaire au précédent ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, symbols, solve, Eq
+% a, b = symbols('a b')
+% # 1. (0,0,1) n'est pas combinaison de i et j : la 3e coordonnee reste nulle
+% assert solve([Eq(a, 0), Eq(b, 0), Eq(0, 1)], [a, b]) == []
+% # 2. coordonnees de 2i - 3j + k
+% v = 2*Matrix([1,0,0]) - 3*Matrix([0,1,0]) + Matrix([0,0,1])
+% assert list(v) == [2, -3, 1]
+% # 3. colinearite : t = 2 v
+% t = Matrix([4,-6,2])
+% assert t == 2*v
+% END-VERIFY
+
+\begin{corrige}{TSPE-GEOESPACE-RE-C1-EX1}
+\begin{enumerate}
+  \item Non. Toute combinaison $a\vec{i}+b\vec{j}$ a pour coordonnées
+        $(a;b;0)$, de troisième coordonnée nulle, alors que celle de $\vec{w}$
+        vaut $1$. Aucun couple $(a;b)$ ne convient.
+  \item $2\vec{i}-3\vec{j}+\vec{k}$ a pour coordonnées $(2;-3;1)$.
+  \item Oui~: $\vec{t}=(4;-6;2)=2\times(2;-3;1)$, donc $\vec{t}=2(2\vec{i}-3\vec{j}+\vec{k})$.
+\end{enumerate}
+\end{corrige}

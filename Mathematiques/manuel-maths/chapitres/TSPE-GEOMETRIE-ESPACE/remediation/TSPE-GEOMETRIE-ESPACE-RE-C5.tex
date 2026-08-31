@@ -1,0 +1,81 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-RE-C5", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "remediation", "capacites_codes": ["C5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C5 : lire des coordonnees dans une base
+% Obstacle : croire que les coordonnees mesurent des longueurs
+%---------------------------------------------------------------
+
+\subsection*{Erreur frequente}
+
+\erreurFrequente{
+Lire les coordonnées d'un vecteur en mesurant des longueurs sur la figure,
+comme si la base etait orthonormee.
+}
+
+\textbf{Pourquoi c'est faux.} Les coordonnées expriment le vecteur \emph{en
+fonction des vecteurs de base}, pas en centimetres. Tant que la base n'est pas
+declaree orthonormee, on ne peut y lire ni longueur ni angle.
+
+\subsection*{Micro-exemple}
+
+Dans un parallelepipede $ABCDEFGH$ rapporte a la base
+$(\vec{AB},\vec{AD},\vec{AE})$, le vecteur $\vec{AG}$ a pour coordonnées
+$(1;1;1)$ --- que le solide soit un cube ou très aplati. Les coordonnées ne
+changent pas avec la forme~; seules les longueurs changent.
+
+\subsection*{A retenir}
+
+Distinguer deux lectures~:
+\begin{itemize}
+  \item coordonnées d'un \emph{point} $M$~: celles de $\vec{OM}$ depuis
+        l'origine du repere~;
+  \item coordonnées d'un \emph{vecteur} $\vec{AB}$~: la difference
+        $B-A$ coordonnée par coordonnée.
+\end{itemize}
+
+\subsection*{Méthode corrective}
+
+\begin{enumerate}
+  \item Reperer l'origine et les trois vecteurs de base sur la figure.
+  \item Suivre un chemin d'arêtes et compter combien de fois chaque vecteur de
+        base est parcouru, avec son signe.
+  \item Ne convertir en longueur que si l'énoncé précise « repere orthonorme ».
+\end{enumerate}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-GEOESPACE-RE-C5-EX1}{1}{10}
+$ABCDEFGH$ est un parallelepipede, rapporte a la base
+$(\vec{AB},\vec{AD},\vec{AE})$ d'origine $A$.
+\begin{enumerate}
+  \item Donner les coordonnées du point $G$.
+  \item Donner les coordonnées du vecteur $\vec{BH}$.
+  \item Peut-on affirmer que $AG=\sqrt{3}$ ? Justifier.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, sqrt
+% A = Matrix([0,0,0]); B = Matrix([1,0,0]); D = Matrix([0,1,0]); E = Matrix([0,0,1])
+% C = B + D - A; G = C + E - A; H = D + E - A
+% assert list(G) == [1, 1, 1]
+% assert list(H - B) == [-1, 1, 1]
+% # La norme n'est calculable que si la base est orthonormee. Contre-exemple :
+% # une base ou AE est trois fois plus long donne une autre longueur pour AG.
+% Ap = Matrix([0,0,0]); Bp = Matrix([1,0,0]); Dp = Matrix([0,1,0]); Ep = Matrix([0,0,3])
+% Gp = Bp + Dp + Ep
+% assert (Gp - Ap).norm() != sqrt(3)
+% END-VERIFY
+
+\begin{corrige}{TSPE-GEOESPACE-RE-C5-EX1}
+\begin{enumerate}
+  \item $\vec{AG}=\vec{AB}+\vec{AD}+\vec{AE}$, donc $G$ a pour coordonnées
+        $(1;1;1)$ dans le repere $(A;\vec{AB},\vec{AD},\vec{AE})$.
+  \item $\vec{BH}=\vec{BA}+\vec{AD}+\vec{AE}=-\vec{AB}+\vec{AD}+\vec{AE}$,
+        soit $(-1;1;1)$.
+  \item Non. La base n'est pas declaree orthonormee~: les coordonnées
+        $(1;1;1)$ ne donnent pas la longueur. Si le parallelepipede est
+        etire, avec $AE=3\,AB$ et des arêtes orthogonales, on obtient
+        $AG=\sqrt{1+1+9}=\sqrt{11}$, et non $\sqrt{3}$.
+\end{enumerate}
+\end{corrige}

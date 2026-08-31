@@ -1,0 +1,84 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-RE-C4", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "remediation", "capacites_codes": ["C4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C4 : reconnaitre une base de l'espace
+% Obstacle : confondre « deux a deux non colineaires » et « non coplanaires »
+%---------------------------------------------------------------
+
+\subsection*{Erreur frequente}
+
+\erreurFrequente{
+Trois vecteurs deux a deux non colineaires forment une base de l'espace.
+}
+
+\textbf{Pourquoi c'est faux.} La condition porte sur les \emph{trois} vecteurs
+ensemble, pas sur les paires. Trois vecteurs peuvent être deux a deux non
+colineaires tout en etant coplanaires~: ils n'engendrent alors qu'un plan.
+
+\contreexemple{
+$\vec{u}\begin{pmatrix}1\\0\\0\end{pmatrix}$,
+$\vec{v}\begin{pmatrix}0\\1\\0\end{pmatrix}$,
+$\vec{w}\begin{pmatrix}1\\1\\0\end{pmatrix}$ sont deux a deux non colineaires.
+Pourtant $\vec{w}=\vec{u}+\vec{v}$~: les trois sont coplanaires et ne forment
+pas une base.
+}
+
+\subsection*{A retenir}
+
+$(\vec{u},\vec{v},\vec{w})$ est une base de l'espace si et seulement si les
+trois vecteurs sont \emph{non coplanaires}, c'est-a-dire si aucun n'est
+combinaison linéaire des deux autres. Sur une figure, on vérifie qu'ils ne
+sont pas contenus dans un même plan.
+
+\subsection*{Méthode corrective}
+
+\begin{enumerate}
+  \item Chercher d'abord si l'un des trois s'ecrit comme combinaison des deux
+        autres~: si oui, ce n'est pas une base.
+  \item En coordonnées, résoudre $a\vec{u}+b\vec{v}+c\vec{w}=\vec{0}$.
+  \item Si la seule solution est $a=b=c=0$, la famille est une base.
+  \item Sur une figure, se demander si les trois fleches, placees a la même
+        origine, sortent d'un même plan.
+\end{enumerate}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-GEOESPACE-RE-C4-EX1}{2}{12}
+On donne $\vec{u}(1;0;0)$, $\vec{v}(0;1;0)$, $\vec{w}(1;1;0)$ et
+$\vec{n}(0;0;2)$.
+\begin{enumerate}
+  \item Vérifier que $\vec{u}$, $\vec{v}$, $\vec{w}$ sont deux a deux non
+        colineaires.
+  \item Exprimer $\vec{w}$ en fonction de $\vec{u}$ et $\vec{v}$. Conclure.
+  \item La famille $(\vec{u},\vec{v},\vec{n})$ est-elle une base ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, symbols, solve, Eq
+% u = Matrix([1,0,0]); v = Matrix([0,1,0]); w = Matrix([1,1,0]); n = Matrix([0,0,2])
+% # 1. deux a deux non colineaires : chaque paire est de rang 2
+% for x, y in ((u,v), (u,w), (v,w)):
+%     assert Matrix.hstack(x, y).rank() == 2
+% # 2. w = u + v, donc la famille (u,v,w) est coplanaire : rang 2, pas une base
+% assert w == u + v
+% assert Matrix.hstack(u, v, w).rank() == 2
+% # 3. (u,v,n) : rang 3 et determinant non nul, c'est une base
+% assert Matrix.hstack(u, v, n).rank() == 3
+% assert Matrix.hstack(u, v, n).det() != 0
+% END-VERIFY
+
+\begin{corrige}{TSPE-GEOESPACE-RE-C4-EX1}
+\begin{enumerate}
+  \item Aucun des trois n'est multiple d'un autre~: $\vec{u}$ et $\vec{v}$ ont
+        des coordonnées nulles a des places différentes, et $\vec{w}$ a ses
+        deux premieres coordonnées non nulles, ce qu'aucun multiple de
+        $\vec{u}$ ou de $\vec{v}$ ne realise.
+  \item $\vec{w}=\vec{u}+\vec{v}$. Les trois vecteurs sont donc coplanaires~:
+        $(\vec{u},\vec{v},\vec{w})$ n'est pas une base, bien que les vecteurs
+        soient deux a deux non colineaires.
+  \item Oui. Si $a\vec{u}+b\vec{v}+c\vec{n}=\vec{0}$, les coordonnées donnent
+        $a=0$, $b=0$ et $2c=0$, donc $a=b=c=0$~: la famille est libre, c'est
+        une base de l'espace.
+\end{enumerate}
+\end{corrige}

@@ -1,0 +1,76 @@
+% META: {"id": "TSPE-GEOMETRIE-ESPACE-RE-C2", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "remediation", "capacites_codes": ["C2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : decomposer un vecteur sur une figure
+% Obstacle : le signe des coefficients lus sur la figure
+%---------------------------------------------------------------
+
+\subsection*{Erreur frequente}
+
+\erreurFrequente{
+Lire une decomposition en ne retenant que les arêtes parcourues, sans regarder
+le \emph{sens} dans lequel on les parcourt.
+}
+
+\textbf{Pourquoi c'est faux.} Un coefficient traduit a la fois une longueur et
+un sens. Parcourir une arête a rebours d'un vecteur de base donne un
+coefficient négatif~; l'oublier revient a decrire un tout autre vecteur.
+
+\subsection*{Micro-exemple}
+
+Dans le cube $ABCDEFGH$ rapporte a la base
+$(\vec{AB},\vec{AD},\vec{AE})$, decomposons $\vec{EC}$.
+Par la relation de Chasles, $\vec{EC}=\vec{EA}+\vec{AC}$, avec
+$\vec{EA}=-\vec{AE}$ et $\vec{AC}=\vec{AB}+\vec{AD}$. Donc
+\[
+  \vec{EC}=\vec{AB}+\vec{AD}-\vec{AE}.
+\]
+Le troisième coefficient est $-1$~: on redescend l'arête verticale.
+
+\subsection*{Méthode corrective}
+
+\begin{enumerate}
+  \item Choisir un chemin d'arêtes reliant l'origine a l'extrémité du vecteur.
+  \item Écrire ce chemin avec la relation de Chasles.
+  \item Pour chaque étape, comparer au vecteur de base correspondant~: même
+        sens donne $+$, sens contraire donne $-$.
+  \item Vérifier en coordonnées dans la base choisie.
+\end{enumerate}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-GEOESPACE-RE-C2-EX1}{1}{10}
+$ABCDEFGH$ est un cube. On travaille dans la base
+$(\vec{AB},\vec{AD},\vec{AE})$.
+\begin{enumerate}
+  \item Decomposer $\vec{AG}$ dans cette base.
+  \item Decomposer $\vec{HB}$ dans cette base.
+  \item Les vecteurs $\vec{AG}$ et $\vec{HB}$ sont-ils colineaires ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Matrix
+% # base : AB = e1, AD = e2, AE = e3 ; A origine
+% A = Matrix([0,0,0]); B = Matrix([1,0,0]); D = Matrix([0,1,0]); E = Matrix([0,0,1])
+% C = B + D - A          # ABCD parallelogramme
+% G = C + E - A          # G au-dessus de C
+% H = D + E - A          # H au-dessus de D
+% assert list(G - A) == [1, 1, 1]
+% assert list(B - H) == [1, -1, -1]
+% # non colineaires : le rang de la famille vaut 2
+% assert Matrix.hstack(G - A, B - H).rank() == 2
+% END-VERIFY
+
+\begin{corrige}{TSPE-GEOESPACE-RE-C2-EX1}
+\begin{enumerate}
+  \item $\vec{AG}=\vec{AB}+\vec{AD}+\vec{AE}$~: les trois arêtes sont
+        parcourues dans le sens des vecteurs de base, d'ou $(1;1;1)$.
+  \item $\vec{HB}=\vec{HD}+\vec{DA}+\vec{AB}$. Or $\vec{HD}=-\vec{AE}$ et
+        $\vec{DA}=-\vec{AD}$, donc
+        $\vec{HB}=\vec{AB}-\vec{AD}-\vec{AE}$, soit $(1;-1;-1)$.
+  \item Non. Si $\vec{HB}=k\,\vec{AG}$, la première coordonnée impose $k=1$,
+        mais la deuxième donnerait $-1=1$. Les deux vecteurs ne sont pas
+        colineaires.
+\end{enumerate}
+\end{corrige}
