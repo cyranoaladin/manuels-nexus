@@ -11,13 +11,13 @@
 | TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 53 | 300 | 776 | 776 | manual |
 | TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 194 | 500 | 500 | manual |
 | TNSI | NSI Terminale | NSI | Terminale | courante | 7 | 61 | 266 | 721 | 721 | manual |
-| TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 11 | 67 | 448 | 1209 | 1209 | manual |
+| TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 11 | 67 | 412 | 1137 | 1137 | manual |
 
 ## Anomalies détectées
 
 | Catégorie | Nombre |
 |---|---|
-| blocking_statuses | 2273 |
+| blocking_statuses | 2287 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
@@ -47,9 +47,9 @@
 - Mathematiques/manuel-maths/ETAT_COLLECTION.md | 36 | manual:1SPE | chapitres | 13 | 10 | contredit
 - Mathematiques/manuel-maths/ETAT_COLLECTION.md | 73 | unresolved:portee_chapitres_ambigue | chapitres | 3 | None | ouvert
 - Mathematiques/manuel-maths/ETAT_COLLECTION.md | 96 | manual:TSPE_2026_2027 | coups_de_pouce | 21 | 67 | contredit
-- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 96 | manual:TSPE_2026_2027 | exercices_principaux | 50 | 448 | contredit
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 96 | manual:TSPE_2026_2027 | exercices_principaux | 50 | 412 | contredit
 - Mathematiques/manuel-maths/ETAT_COLLECTION.md | 97 | manual:TSPE_2026_2027 | coups_de_pouce | 20 | 67 | contredit
-- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 97 | manual:TSPE_2026_2027 | exercices_principaux | 50 | 448 | contredit
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 97 | manual:TSPE_2026_2027 | exercices_principaux | 50 | 412 | contredit
 - Mathematiques/manuel-maths/ETAT_COLLECTION.md | 106 | manual:TSPE_2026_2027 | chapitres | 4 | 11 | contredit
 - Mathematiques/manuel-maths/MISSION_LOG.md | 7 | chapter:1SPE-SUITES | corriges | 49 | 53 | contredit
 - Mathematiques/manuel-maths/MISSION_LOG.md | 7 | chapter:1SPE-SUITES | exercices_principaux | 49 | 51 | contredit
