@@ -5,12 +5,12 @@
 Une identite par question. La v1 reste l'enregistrement historique.
 Cet artefact n'approuve rien.
 
-- Questions du corpus : 479
+- Questions du corpus : 490
 - Report d'identite : 301
 - Recalcul independant : 21
-- Revue humaine requise : 157
+- Revue humaine requise : 168
 - UNKNOWN : 0
-- Equation : 479 = 301 + 21 + 157
+- Equation : 490 = 301 + 21 + 168
 - EVIDENCE_ROUTING_COMPLETE : True
 - ALL_QCM_HUMAN_REVIEW_COMPLETE : False
 
@@ -214,6 +214,17 @@ Comportement correct du solveur, pas un echec : aucune regle mathematique generi
 | TSPE-CONTINUITE | Q14 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TSPE-CONTINUITE | Q5 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TSPE-CONTINUITE | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-GEOMETRIE-ESPACE | Q10 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-GEOMETRIE-ESPACE | Q11 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-GEOMETRIE-ESPACE | Q12 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-GEOMETRIE-ESPACE | Q13 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-GEOMETRIE-ESPACE | Q14 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-GEOMETRIE-ESPACE | Q15 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-GEOMETRIE-ESPACE | Q16 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-GEOMETRIE-ESPACE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-GEOMETRIE-ESPACE | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-GEOMETRIE-ESPACE | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
+| TSPE-GEOMETRIE-ESPACE | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TSPE-LIMITES-FONCTIONS | Q2 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TSPE-LIMITES-FONCTIONS | Q3 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TSPE-LIMITES-FONCTIONS | Q4 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
