@@ -1,0 +1,58 @@
+{
+  "artifact_type": "chapter_audit",
+  "schema_version": 1,
+  "chapter": "TSPE-GEOMETRIE-ESPACE",
+  "science": {
+    "oracles_executed": 56,
+    "oracles_passed": 56,
+    "SCIENCE_UNRESOLVED": 0,
+    "objects_without_own_oracle": {
+      "corriges": 9,
+      "cours": 1,
+      "evaluations_corrige": 2,
+      "qcm_tex": 1
+    },
+    "coverage_argument": "Chaque corrige sans oracle propre est couvert par l'oracle de son exercice, qui verifie les memes valeurs ; chaque corrige d'evaluation est couvert par l'oracle de son evaluation. Le .tex du QCM est genere depuis son JSON. Le cours 11 n'enonce aucune affirmation calculable : il decrit des positions relatives. Aucun objet ne reste donc non verifie.",
+    "UNKNOWN": 0
+  },
+  "narrative": {
+    "PREMATURE_USE": 0,
+    "premature_use_argument": "L'ordre d'assemblage place TOUT le cours avant TOUTE methode et TOUT exercice (ORDER dans assemble_manuel.py). Aucun objet ne peut donc mobiliser une notion avant son enseignement.",
+    "BROKEN_METHOD_REFERENCES": 0,
+    "BROKEN_QCM_REMEDIATION_REFERENCES": 0,
+    "MISSING_TRANSITION": 0,
+    "REDUNDANT_SEQUENCE": 0,
+    "findings": [
+      {
+        "id": "NARR-001",
+        "class": "EXERCISE_SEQUENCE_NOT_MIRRORING_COURSE_PROGRESSION",
+        "severity": "MINOR",
+        "measure": "3 inversions entre l'ordre des exercices et la progression du cours",
+        "detail": "Les exercices sont assembles par ordre de nom de fichier. Les sept exercices d'origine occupent 001-007 et les huit nouveaux 051-058, si bien que les exercices des capacites les plus elementaires (C1, C2, C5, C4) suivent ceux du produit scalaire et de la projection.",
+        "disposition": "ACCEPTED_WITH_JUSTIFICATION",
+        "justification": "Aucun usage premature n'en resulte, puisque tout le cours precede tous les exercices. La correction naturelle serait de renumeroter, mais chaque identifiant d'exercice est reference seize fois hors du chapitre, dont dans GLOBAL_TEST_BASELINE_MAIN.json et gate-summary.json : renumeroter churnerait des baselines pour un defaut de sequence, ce que la campagne interdit.",
+        "carried_to": "DETTE_TRANSVERSALE",
+        "carried_note": "Une regle d'ordre au niveau de l'assembleur -- tri par progression de capacite plutot que par nom de fichier -- reglerait le cas pour les 52 chapitres d'un coup. Elle touche un runtime partage et releve donc de la passe transversale, pas de ce chapitre."
+      }
+    ],
+    "UNRESOLVED": 0
+  },
+  "editorial": {
+    "DIACRITIC_DEBT": 0,
+    "ambiguous_forms_in_arbitration_register": 130,
+    "ambiguous_note": "Formes grammaticalement ambigues -- des/des, donne/donne, teste/teste -- que le correcteur refuse deliberement de trancher. Elles sont employees correctement ici : articles et verbes au present.",
+    "EDITORIAL_UNRESOLVED": 0,
+    "UNKNOWN": 0
+  },
+  "clone": {
+    "EXACT_CLONES_IN_CHAPTER": 0,
+    "CAPACITY_MISREPRESENTING_CLONES": 0,
+    "CROSS_CHAPTER_CONTAMINATION": 0,
+    "NEAR_CLONE_CANDIDATES_REVIEWED": 1,
+    "NEAR_CLONE_LEGITIMATE": 0,
+    "NEAR_CLONE_REWRITTEN": 1,
+    "NEAR_CLONE_REMOVED": 0,
+    "CRITICAL_NEAR_CLONES_UNRESOLVED": 0,
+    "near_clone_note": "Le seuil de similarite ne sert qu'a engendrer des candidats. L'unique candidat, EX-004 contre EX-007 a 0,553, a ete instruit et traite a la cause : EX-007 declarait C15 -- traduire, resoudre et INTERPRETER -- mais s'arretait au point d'intersection. Deux questions ajoutent le cas sans solution et le recapitulatif des trois positions relatives."
+  }
+}

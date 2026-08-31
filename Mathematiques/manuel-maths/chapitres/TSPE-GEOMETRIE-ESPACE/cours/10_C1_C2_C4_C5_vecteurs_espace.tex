@@ -1,4 +1,13 @@
 % META: {"id": "TSPE-GEOESPACE-CR-010", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "cours", "capacites_codes": ["C1", "C2", "C4", "C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "approved"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% A=Matrix([0,0,0]); B=Matrix([1,0,0]); D=Matrix([0,1,0]); E=Matrix([0,0,1])
+% C=B+D-A; G=C+E-A
+% assert G-A == (B-A)+(D-A)+(E-A)      # AG = AB + AD + AE
+% assert C-B == D-A                    # BC = AD
+% assert G-C == E-A                    # CG = AE
+% assert list(G-A) == [1,1,1]          # coordonnees de AG dans la base
+% END-VERIFY
 
 \section{Vecteurs de l'espace, bases}
 

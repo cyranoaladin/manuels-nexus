@@ -1,4 +1,12 @@
 % META: {"id": "TSPE-GEOESPACE-ME-003", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C4", "C6"], "methodes": ["M3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, symbols, solve, Eq
+% a,b = symbols('a b')
+% A=Matrix([1,0,2]); B=Matrix([3,1,2]); C=Matrix([0,2,2]); D=Matrix([2,3,2])
+% AB=B-A; AC=C-A; AD=D-A
+% sol = solve([Eq((a*AB + b*AC)[i], AD[i]) for i in range(3)], [a,b], dict=True)
+% assert sol and sol[0][a] == 1 and sol[0][b] == 1
+% END-VERIFY
 \begin{fichemethode}{M3}{Prouver une colinéarité, un alignement, une coplanarité}
 
 \quandUtiliser{%

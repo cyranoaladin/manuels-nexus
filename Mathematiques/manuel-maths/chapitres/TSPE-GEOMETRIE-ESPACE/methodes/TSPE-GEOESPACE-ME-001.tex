@@ -1,4 +1,12 @@
 % META: {"id": "TSPE-GEOESPACE-ME-001", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C13", "C16"], "methodes": ["M1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% A=Matrix([2,-1,3]); n=Matrix([1,4,-2])
+% d = -(n.dot(A))
+% assert d == 8
+% assert n.dot(A) + d == 0          # A appartient au plan x+4y-2z+8=0
+% assert n.dot(Matrix([0,0,0])) + d != 0   # l'origine n'y est pas
+% END-VERIFY
 \begin{fichemethode}{M1}{Déterminer l'équation cartésienne d'un plan}
 
 \quandUtiliser{%

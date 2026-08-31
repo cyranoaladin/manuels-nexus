@@ -1,4 +1,10 @@
 % META: {"id": "TSPE-GEOESPACE-ME-002", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C1", "C2", "C5"], "methodes": ["M2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% A=Matrix([0,0,0]); B=Matrix([1,0,0]); D=Matrix([0,1,0]); E=Matrix([0,0,1])
+% C=B+D-A
+% assert list(C-E) == [1,1,-1]      # EC = AB + AD - AE
+% END-VERIFY
 \begin{fichemethode}{M2}{Passer d'une figure aux coordonnées dans une base}
 
 \quandUtiliser{%

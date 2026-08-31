@@ -1,4 +1,11 @@
 % META: {"id": "TSPE-GEOESPACE-ME-007", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C10"], "methodes": ["M7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% i=Matrix([1,0,0]); j=Matrix([0,1,0]); v=Matrix([0,0,5]); u=Matrix([0,1,1])
+% assert v.dot(i) == 0 and v.dot(j) == 0        # v orthogonal au plan z=0
+% assert Matrix.hstack(v, Matrix([0,0,1])).rank() == 1
+% assert u.dot(i) == 0 and u.dot(j) != 0        # le piege : une seule droite
+% END-VERIFY
 \begin{fichemethode}{M7}{Démontrer l'orthogonalité d'une droite et d'un plan}
 
 \quandUtiliser{%

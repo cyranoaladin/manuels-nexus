@@ -1,4 +1,10 @@
 % META: {"id": "TSPE-GEOESPACE-ME-008", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C12"], "methodes": ["M8"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% A=Matrix([1,0,3]); u=Matrix([2,1,-1])
+% assert A + 2*u == Matrix([5,2,1])             # N appartient a d
+% assert A + 2*u != Matrix([5,2,0])             # M n'y est pas
+% END-VERIFY
 \begin{fichemethode}{M8}{Déterminer et exploiter une représentation paramétrique}
 
 \quandUtiliser{%

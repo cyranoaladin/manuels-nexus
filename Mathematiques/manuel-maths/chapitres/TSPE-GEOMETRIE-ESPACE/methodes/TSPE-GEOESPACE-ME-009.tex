@@ -1,4 +1,12 @@
 % META: {"id": "TSPE-GEOESPACE-ME-009", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C15"], "methodes": ["M9"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, symbols, solve, Eq
+% t = symbols('t')
+% n=Matrix([1,1,1]); u=Matrix([1,-1,0]); P=Matrix([0,0,0])
+% assert n.dot(u) == 0                          # direction parallele au plan
+% assert n.dot(P) - 3 != 0                      # point hors du plan
+% assert solve(Eq(n.dot(P + t*u) - 3, 0), t) == []
+% END-VERIFY
 \begin{fichemethode}{M9}{Traduire une intersection en système et l'interpréter}
 
 \quandUtiliser{%

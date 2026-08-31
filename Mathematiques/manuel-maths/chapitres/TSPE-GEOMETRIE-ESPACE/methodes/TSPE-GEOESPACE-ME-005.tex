@@ -1,4 +1,13 @@
 % META: {"id": "TSPE-GEOESPACE-ME-005", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C9"], "methodes": ["M5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, sqrt, acos, pi, sin, simplify, Rational
+% AB=Matrix([1,0,0]); AC=Matrix([1,1,0])
+% c = AB.dot(AC)/(AB.norm()*AC.norm())
+% assert simplify(c - 1/sqrt(2)) == 0
+% assert simplify(acos(c) - pi/4) == 0
+% aire = Rational(1,2)*AB.norm()*AC.norm()*sin(acos(c))
+% assert simplify(aire - Rational(1,2)) == 0
+% END-VERIFY
 \begin{fichemethode}{M5}{Calculer une longueur, un angle, une aire dans l'espace}
 
 \quandUtiliser{%

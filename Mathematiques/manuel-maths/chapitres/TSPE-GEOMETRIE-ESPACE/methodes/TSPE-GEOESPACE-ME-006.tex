@@ -1,4 +1,14 @@
 % META: {"id": "TSPE-GEOESPACE-ME-006", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C8", "C11", "C14"], "methodes": ["M6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, symbols, solve, Eq, sqrt, simplify
+% t = symbols('t')
+% n=Matrix([1,1,1]); d=-3; M=Matrix([3,3,3])
+% H = M + solve(Eq(n.dot(M + t*n) + d, 0), t)[0]*n
+% assert list(H) == [1,1,1]
+% assert n.dot(H) + d == 0
+% assert simplify((H-M).norm() - 2*sqrt(3)) == 0
+% assert simplify((H-M).norm() - abs(n.dot(M)+d)/n.norm()) == 0
+% END-VERIFY
 \begin{fichemethode}{M6}{Projeter orthogonalement : coordonnées du projeté et distance}
 
 \quandUtiliser{%

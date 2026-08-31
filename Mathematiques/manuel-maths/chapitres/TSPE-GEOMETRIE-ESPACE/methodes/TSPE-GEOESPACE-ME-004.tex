@@ -1,4 +1,10 @@
 % META: {"id": "TSPE-GEOESPACE-ME-004", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C7"], "methodes": ["M4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% A=Matrix([1,0,0]); B=Matrix([0,1,0]); C=Matrix([0,0,1]); O=Matrix([0,0,0])
+% assert (B-A).dot(C-A) == 1        # AB et AC non orthogonaux
+% assert (A-O).dot(C-B) == 0        # OA et BC orthogonaux
+% END-VERIFY
 \begin{fichemethode}{M4}{Utiliser le produit scalaire pour une orthogonalité}
 
 \quandUtiliser{%

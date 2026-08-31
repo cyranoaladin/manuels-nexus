@@ -1,4 +1,11 @@
 % META: {"id": "TSPE-GEOESPACE-ME-010", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M10"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, symbols, solve, Eq
+% t, s = symbols('t s')
+% A=Matrix([0,0,0]); dAB=Matrix([1,0,0]); C=Matrix([1,1,0]); dCG=Matrix([0,0,1])
+% assert Matrix.hstack(dAB, dCG).rank() == 2
+% assert solve([Eq((A + t*dAB)[i], (C + s*dCG)[i]) for i in range(3)], [t,s]) == []
+% END-VERIFY
 \begin{fichemethode}{M10}{Déterminer la position relative de droites et de plans}
 
 \quandUtiliser{%
