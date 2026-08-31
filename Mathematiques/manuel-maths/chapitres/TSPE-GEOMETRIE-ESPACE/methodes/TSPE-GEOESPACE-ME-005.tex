@@ -1,0 +1,49 @@
+% META: {"id": "TSPE-GEOESPACE-ME-005", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C9"], "methodes": ["M5"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M5}{Calculer une longueur, un angle, une aire dans l'espace}
+
+\quandUtiliser{%
+  Pour toute question de grandeur~: distance entre deux points, mesure d'un
+  angle de triangle, aire d'un triangle de l'espace. À distinguer de la simple
+  orthogonalité, qui ne demande qu'un produit scalaire nul.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Longueur}~:
+          $AB=\lVert\vec{AB}\rVert=\sqrt{x^2+y^2+z^2}$ en repère orthonormé.
+    \item \textbf{Angle}~: calculer $\vec{u}\cdot\vec{v}$, puis les deux
+          normes, puis
+          $\cos\theta=\dfrac{\vec{u}\cdot\vec{v}}
+                             {\lVert\vec{u}\rVert\,\lVert\vec{v}\rVert}$.
+    \item \textbf{Aire d'un triangle} $ABC$~: une fois l'angle en $A$ obtenu,
+          $\mathcal{A}=\tfrac{1}{2}\,AB\cdot AC\cdot\sin\widehat{BAC}$.
+    \item \textbf{Conclure} en respectant l'unité et la précision demandées.
+  \end{enumerate}
+}
+
+\verifier{%
+  Contrôler que le cosinus obtenu appartient bien à $[-1;1]$~: une valeur hors
+  de cet intervalle signale un oubli de division par les normes. Vérifier
+  qu'une longueur et une aire sont positives, et qu'un angle de triangle est
+  strictement compris entre $0$ et $\pi$.
+}
+
+\pieges{%
+  Ne jamais lire le produit scalaire comme un cosinus. Ne pas appliquer ces
+  formules dans une base non orthonormée. Enfin, $\sin\widehat{BAC}$ se déduit
+  de $\cos\widehat{BAC}$ par $\sin^2+\cos^2=1$, en gardant la racine positive
+  puisque l'angle d'un triangle est dans $]0;\pi[$.
+}
+
+\exempleRedige{%
+  Repère orthonormé, $A(0;0;0)$, $B(1;0;0)$, $C(1;1;0)$.
+  $\vec{AB}(1;0;0)$ et $\vec{AC}(1;1;0)$ donnent
+  $\vec{AB}\cdot\vec{AC}=1$, $AB=1$ et $AC=\sqrt{2}$, d'où
+  \[
+    \cos\widehat{BAC}=\frac{1}{\sqrt{2}},\qquad
+    \widehat{BAC}=\frac{\pi}{4},\qquad
+    \mathcal{A}=\tfrac12\times1\times\sqrt2\times\frac{\sqrt2}{2}=\frac12 .
+  \]
+}
+
+\end{fichemethode}

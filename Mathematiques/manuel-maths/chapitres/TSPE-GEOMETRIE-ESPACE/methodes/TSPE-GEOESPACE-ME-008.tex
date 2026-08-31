@@ -1,0 +1,50 @@
+% META: {"id": "TSPE-GEOESPACE-ME-008", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C12"], "methodes": ["M8"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M8}{Déterminer et exploiter une représentation paramétrique}
+
+\quandUtiliser{%
+  Pour écrire la représentation paramétrique d'une droite définie par deux
+  points ou par un point et une direction, pour tester l'appartenance d'un
+  point, et pour reconnaître que deux représentations décrivent la même droite.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Identifier} un point $A(x_A;y_A;z_A)$ et un vecteur
+          directeur $\vec{u}(\alpha;\beta;\gamma)$, obtenu par différence si
+          deux points sont donnés.
+    \item \textbf{Écrire} $x=x_A+\alpha t$, $y=y_A+\beta t$,
+          $z=z_A+\gamma t$, avec $t\in\mathbb{R}$.
+    \item \textbf{Pour tester si $M$ appartient à la droite}~: résoudre la
+          première équation en $t$, puis reporter cette valeur dans les
+          \emph{deux} autres.
+    \item \textbf{Pour comparer deux droites}~: vérifier que les vecteurs
+          directeurs sont colinéaires, puis qu'un point de l'une appartient à
+          l'autre.
+  \end{enumerate}
+}
+
+\verifier{%
+  Reprendre la représentation obtenue avec deux valeurs de $t$ et contrôler
+  que les points trouvés sont bien sur la droite de départ~: pour $t=0$ on
+  doit retrouver $A$.
+}
+
+\pieges{%
+  Une droite admet une infinité de représentations paramétriques~: changer de
+  point ou multiplier le vecteur directeur en donne d'autres, tout aussi
+  correctes. Et pour l'appartenance, les trois équations partagent le
+  \emph{même} paramètre~: un $t$ qui convient pour deux coordonnées sur trois
+  ne prouve rien.
+}
+
+\exempleRedige{%
+  Droite $d$ passant par $A(1;0;3)$ et dirigée par $\vec{u}(2;1;-1)$~:
+  \[
+    x=1+2t,\qquad y=t,\qquad z=3-t .
+  \]
+  Le point $N(5;2;1)$ appartient-il à $d$~? De $5=1+2t$ on tire $t=2$~; alors
+  $y=2$ et $z=3-2=1$~: les trois équations sont vérifiées avec la même valeur,
+  donc $N\in d$. En revanche $M(5;2;0)$ n'y est pas~: il faudrait $z=1$.
+}
+
+\end{fichemethode}

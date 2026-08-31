@@ -1,0 +1,49 @@
+% META: {"id": "TSPE-GEOESPACE-ME-010", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M10"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M10}{Déterminer la position relative de droites et de plans}
+
+\quandUtiliser{%
+  Chaque fois qu'un énoncé demande de décrire la position relative de deux
+  droites, d'une droite et d'un plan, ou de deux plans. L'ordre des tests
+  importe~: il évite la conclusion hâtive « elles ne se coupent pas, donc elles
+  sont parallèles ».
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Deux droites --- test 1}~: les vecteurs directeurs sont-ils
+          colinéaires~? Si oui, les droites sont parallèles~; elles sont
+          confondues si un point de l'une appartient à l'autre, strictement
+          parallèles sinon. On s'arrête là.
+    \item \textbf{Deux droites --- test 2}~: sinon, chercher un point commun
+          en résolvant le système. S'il en existe un, elles sont sécantes.
+    \item \textbf{Deux droites --- test 3}~: sinon, elles ne sont pas
+          coplanaires.
+    \item \textbf{Droite et plan}~: comparer $\vec{u}$ et $\vec{n}$. Si
+          $\vec{n}\cdot\vec{u}\neq0$, la droite perce le plan~; sinon elle est
+          parallèle, et incluse si l'un de ses points appartient au plan.
+    \item \textbf{Deux plans}~: comparer les vecteurs normaux. Colinéaires,
+          les plans sont parallèles~; sinon ils se coupent selon une droite.
+  \end{enumerate}
+}
+
+\verifier{%
+  Contrôler la cohérence des deux tests~: deux droites déclarées sécantes
+  doivent avoir des directions non colinéaires \emph{et} un point commun
+  effectivement vérifié dans les deux représentations.
+}
+
+\pieges{%
+  Dans l'espace, deux droites sans point commun ne sont pas nécessairement
+  parallèles~: elles peuvent n'être contenues dans aucun plan commun. C'est le
+  cas propre à l'espace, celui que l'intuition du plan fait manquer.
+}
+
+\exempleRedige{%
+  Dans le cube $ABCDEFGH$, avec $A(0;0;0)$, $B(1;0;0)$, $C(1;1;0)$ et
+  $G(1;1;1)$~: $\vec{AB}(1;0;0)$ et $\vec{CG}(0;0;1)$ ne sont pas colinéaires.
+  Un point de $(AB)$ s'écrit $(t;0;0)$, un point de $(CG)$ s'écrit $(1;1;s)$~;
+  l'égalité des deuxièmes coordonnées donnerait $0=1$. Il n'y a donc pas de
+  point commun~: les droites ne sont pas coplanaires.
+}
+
+\end{fichemethode}

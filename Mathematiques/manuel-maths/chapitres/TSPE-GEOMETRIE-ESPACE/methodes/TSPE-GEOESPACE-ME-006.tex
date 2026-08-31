@@ -1,0 +1,51 @@
+% META: {"id": "TSPE-GEOESPACE-ME-006", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C8", "C11", "C14"], "methodes": ["M6"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M6}{Projeter orthogonalement : coordonnées du projeté et distance}
+
+\quandUtiliser{%
+  Pour déterminer les coordonnées du projeté orthogonal d'un point sur un plan,
+  pour en déduire la distance de ce point au plan, et pour justifier que ce
+  projeté est le point du plan le plus proche. Les trois questions suivent la
+  même procédure.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Lire} le vecteur normal $\vec{n}(a;b;c)$ dans l'équation
+          $ax+by+cz+d=0$ du plan.
+    \item \textbf{Paramétrer} la droite passant par $M$ et dirigée par
+          $\vec{n}$~: $X=M+t\,\vec{n}$.
+    \item \textbf{Reporter} ces coordonnées dans l'équation du plan et
+          résoudre en $t$~: la solution est unique.
+    \item \textbf{Calculer} $H$ en reportant cette valeur de $t$.
+    \item \textbf{En déduire} la distance $MH=\lVert\vec{MH}\rVert$, qui vaut
+          aussi
+          $\dfrac{\lvert a x_M+b y_M+c z_M+d\rvert}{\sqrt{a^2+b^2+c^2}}$.
+    \item \textbf{Pour justifier} que $H$ est le plus proche~: pour tout $N$
+          du plan distinct de $H$, $\vec{MH}\cdot\vec{HN}=0$, donc
+          $MN^2=MH^2+HN^2>MH^2$ par Pythagore.
+  \end{enumerate}
+}
+
+\verifier{%
+  Contrôler que $H$ vérifie bien l'équation du plan. Contrôler ensuite que les
+  deux calculs de la distance --- par la longueur $MH$ et par la formule ---
+  donnent le même résultat~: ils se contrôlent mutuellement.
+}
+
+\pieges{%
+  Annuler une coordonnée ne projette que sur un plan de coordonnées~; pour un
+  plan quelconque il faut suivre la normale. Dans la formule de la distance,
+  ne pas oublier la valeur absolue au numérateur ni la norme au dénominateur.
+  Enfin, l'inégalité $MN>MH$ est \emph{stricte} et suppose $N\neq H$.
+}
+
+\exempleRedige{%
+  $\mathcal{P}:\ x+y+z-3=0$ et $M(3;3;3)$. Ici $\vec{n}(1;1;1)$, d'où
+  $X=(3+t;3+t;3+t)$. En reportant~: $3(3+t)-3=0$, soit $3t+6=0$ et $t=-2$.
+  Donc $H(1;1;1)$, qui vérifie $1+1+1-3=0$. Enfin
+  $MH=\sqrt{(-2)^2\times3}=2\sqrt3$, et la formule donne
+  $\dfrac{\lvert 9-3\rvert}{\sqrt3}=\dfrac{6}{\sqrt3}=2\sqrt3$~: les deux
+  concordent.
+}
+
+\end{fichemethode}

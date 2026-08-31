@@ -8,7 +8,7 @@ C7 : produit scalaire ». Un élève en échec sur `C1` recevait la fiche `C7`.
 
 ## Mesure
 
-- objets analysés : `5582`
+- objets analysés : `5591`
 - groupes de corps identiques : `332`
 - objets excédentaires : `1535`
 - objets à crédit invalide : `1498`

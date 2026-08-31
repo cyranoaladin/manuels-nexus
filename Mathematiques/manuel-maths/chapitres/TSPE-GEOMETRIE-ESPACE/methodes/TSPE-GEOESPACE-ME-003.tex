@@ -1,0 +1,53 @@
+% META: {"id": "TSPE-GEOESPACE-ME-003", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C4", "C6"], "methodes": ["M3"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M3}{Prouver une colinéarité, un alignement, une coplanarité}
+
+\quandUtiliser{%
+  Pour établir que trois points sont alignés, que quatre points sont
+  coplanaires, ou qu'une famille de trois vecteurs forme une base de l'espace.
+  Ces trois questions se ramènent à une seule~: un vecteur est-il combinaison
+  linéaire des autres~?
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Choisir} un point de référence, par exemple $A$, et former
+          les vecteurs $\vec{AB}$, $\vec{AC}$, éventuellement $\vec{AD}$.
+    \item \textbf{Alignement de $A$, $B$, $C$}~: chercher $k$ tel que
+          $\vec{AC}=k\,\vec{AB}$. Un tel $k$ existe si et seulement si les
+          points sont alignés.
+    \item \textbf{Coplanarité de $A$, $B$, $C$, $D$}~: chercher $a$ et $b$
+          tels que $\vec{AD}=a\,\vec{AB}+b\,\vec{AC}$. Le système a une
+          solution si et seulement si les quatre points sont coplanaires.
+    \item \textbf{Base de l'espace}~: résoudre
+          $a\vec{u}+b\vec{v}+c\vec{w}=\vec{0}$. Si la seule solution est
+          $a=b=c=0$, la famille est une base.
+    \item \textbf{Conclure} en revenant à la formulation géométrique de
+          l'énoncé.
+  \end{enumerate}
+}
+
+\verifier{%
+  Reporter la solution trouvée dans les \emph{trois} équations de coordonnées~:
+  un système de deux inconnues pour trois équations peut être satisfait sur
+  deux lignes et échouer sur la troisième. C'est la ligne oubliée qui décide.
+}
+
+\pieges{%
+  Trois points sont \emph{toujours} coplanaires~: le vérifier ne prouve rien,
+  c'est le quatrième qui décide. Et « deux à deux non colinéaires » n'implique
+  pas « non coplanaires »~: $\vec{u}$, $\vec{v}$ et $\vec{u}+\vec{v}$ en sont
+  le contre-exemple.
+}
+
+\exempleRedige{%
+  Soit $A(1;0;2)$, $B(3;1;2)$, $C(0;2;2)$ et $D(2;3;2)$. On a
+  $\vec{AB}(2;1;0)$, $\vec{AC}(-1;2;0)$ et $\vec{AD}(1;3;0)$.
+  On cherche $a$ et $b$ tels que $\vec{AD}=a\vec{AB}+b\vec{AC}$~:
+  \[
+    \begin{cases} 2a-b=1\\ a+2b=3\\ 0=0\end{cases}
+    \quad\Longrightarrow\quad a=1,\ b=1 .
+  \]
+  Les trois équations sont satisfaites~: les quatre points sont coplanaires.
+}
+
+\end{fichemethode}

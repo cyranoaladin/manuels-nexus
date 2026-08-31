@@ -1,0 +1,55 @@
+% META: {"id": "TSPE-GEOESPACE-ME-002", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C1", "C2", "C5"], "methodes": ["M2"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Passer d'une figure aux coordonnées dans une base}
+
+\quandUtiliser{%
+  Dès qu'une figure de l'espace est rapportée à une base $(\vec{u},\vec{v},\vec{w})$
+  et qu'il faut soit \emph{lire} les coordonnées d'un vecteur tracé, soit
+  \emph{construire} le vecteur correspondant à des coordonnées données. Les deux
+  sens reposent sur la même technique.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Repérer} l'origine de la base et les trois vecteurs
+          $\vec{u}$, $\vec{v}$, $\vec{w}$ sur la figure.
+    \item \textbf{Choisir} un chemin d'arêtes reliant l'origine du vecteur à
+          son extrémité, en n'empruntant que des arêtes parallèles aux vecteurs
+          de base.
+    \item \textbf{Écrire} ce chemin avec la relation de Chasles.
+    \item \textbf{Affecter un signe} à chaque étape~: $+$ si l'on parcourt
+          l'arête dans le sens du vecteur de base, $-$ dans le sens contraire.
+    \item \textbf{Regrouper} les termes pour obtenir
+          $a\vec{u}+b\vec{v}+c\vec{w}$~: le triplet $(a;b;c)$ est le jeu de
+          coordonnées cherché.
+    \item \textbf{Dans l'autre sens}, pour construire $a\vec{u}+b\vec{v}+c\vec{w}$~:
+          porter $a\vec{u}$, puis $b\vec{v}$ depuis son extrémité, puis
+          $c\vec{w}$. Le résultat est la diagonale du parallélépipède obtenu.
+  \end{enumerate}
+}
+
+\verifier{%
+  Reconstruire le vecteur à partir des coordonnées trouvées et vérifier qu'on
+  retombe sur le point d'arrivée de la figure. Un chemin différent doit donner
+  le même triplet~: les coordonnées dans une base sont uniques.
+}
+
+\pieges{%
+  Ne pas confondre les coordonnées d'un \emph{point} (celles de $\vec{OM}$
+  depuis l'origine) et celles d'un \emph{vecteur} $\vec{AB}$ (la différence
+  $B-A$). Ne pas lire les coordonnées comme des longueurs~: tant que la base
+  n'est pas déclarée orthonormée, elles ne mesurent rien.
+}
+
+\exempleRedige{%
+  Dans le cube $ABCDEFGH$ de base $(\vec{AB},\vec{AD},\vec{AE})$, décomposons
+  $\vec{EC}$. Le chemin $E\to A\to C$ donne
+  $\vec{EC}=\vec{EA}+\vec{AC}$. Or $\vec{EA}=-\vec{AE}$ et
+  $\vec{AC}=\vec{AB}+\vec{AD}$, donc
+  \[
+    \vec{EC}=\vec{AB}+\vec{AD}-\vec{AE},
+    \qquad\text{soit}\qquad (1;1;-1).
+  \]
+  Le signe moins vient de la descente de l'arête verticale.
+}
+
+\end{fichemethode}

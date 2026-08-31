@@ -1,0 +1,47 @@
+% META: {"id": "TSPE-GEOESPACE-ME-007", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C10"], "methodes": ["M7"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M7}{Démontrer l'orthogonalité d'une droite et d'un plan}
+
+\quandUtiliser{%
+  Pour établir qu'une droite est orthogonale à un plan, ou pour exploiter cette
+  orthogonalité dans un problème de configuration ou de lieu géométrique.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Déterminer} un vecteur directeur $\vec{u}$ de la droite.
+    \item \textbf{Choisir deux vecteurs non colinéaires} du plan, ou lire
+          directement son vecteur normal si le plan est donné par une équation.
+    \item \textbf{Calculer les deux produits scalaires} de $\vec{u}$ avec ces
+          deux vecteurs.
+    \item \textbf{Conclure} seulement si les \emph{deux} sont nuls~: la droite
+          est alors orthogonale au plan, et $\vec{u}$ en est un vecteur normal.
+    \item \textbf{Variante} si le plan est donné par $ax+by+cz+d=0$~: il suffit
+          de vérifier que $\vec{u}$ est colinéaire à $\vec{n}(a;b;c)$.
+  \end{enumerate}
+}
+
+\verifier{%
+  Contrôler que les deux vecteurs du plan choisis sont bien non colinéaires~:
+  deux vecteurs colinéaires ne donnent qu'une seule direction et la conclusion
+  serait fausse. La variante par le vecteur normal fournit un second contrôle
+  indépendant.
+}
+
+\pieges{%
+  Être orthogonal à \emph{une} droite du plan ne suffit pas. Le plan possède
+  une infinité de directions~: $\vec{u}(0;1;1)$ est orthogonal à l'axe des
+  abscisses sans l'être au plan $z=0$, puisque $\vec{u}\cdot(0;1;0)=1$.
+}
+
+\exempleRedige{%
+  Soit $\mathcal{P}$ le plan $z=0$, dirigé par $\vec{i}(1;0;0)$ et
+  $\vec{j}(0;1;0)$, et $\vec{v}(0;0;5)$.
+  \[
+    \vec{v}\cdot\vec{i}=0,\qquad \vec{v}\cdot\vec{j}=0 .
+  \]
+  Les deux produits sont nuls et $\vec{i}$, $\vec{j}$ ne sont pas colinéaires~:
+  la droite dirigée par $\vec{v}$ est orthogonale à $\mathcal{P}$. On le
+  retrouve par la variante~: $\vec{v}=5\,\vec{n}$ avec $\vec{n}(0;0;1)$.
+}
+
+\end{fichemethode}

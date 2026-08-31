@@ -1,0 +1,50 @@
+% META: {"id": "TSPE-GEOESPACE-ME-004", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C7"], "methodes": ["M4"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M4}{Utiliser le produit scalaire pour une orthogonalité}
+
+\quandUtiliser{%
+  Pour démontrer que deux vecteurs, deux droites ou deux segments sont
+  orthogonaux, et plus généralement chaque fois qu'une perpendicularité doit
+  être \emph{prouvée} plutôt que lue sur une figure.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Vérifier} que le repère est orthonormé~: sans cette
+          hypothèse, l'expression en coordonnées ne s'applique pas.
+    \item \textbf{Déterminer} les coordonnées des deux vecteurs, au besoin par
+          différence des coordonnées de leurs extrémités.
+    \item \textbf{Calculer} $\vec{u}\cdot\vec{v}=xx'+yy'+zz'$.
+    \item \textbf{Conclure}~: les vecteurs sont orthogonaux si et seulement si
+          ce produit est \emph{nul}.
+  \end{enumerate}
+}
+
+\verifier{%
+  Contrôler le calcul en changeant l'ordre des facteurs~: le produit scalaire
+  est symétrique, $\vec{u}\cdot\vec{v}=\vec{v}\cdot\vec{u}$. Si l'énoncé
+  fournit une figure, vérifier que la conclusion y est plausible.
+}
+
+\pieges{%
+  Un produit scalaire nul signifie \emph{orthogonaux}, jamais « parallèles ».
+  Attention aussi au vecteur nul~: il est orthogonal à tout vecteur, ce qui
+  rend la conclusion géométrique vide. Enfin, $\vec{u}\cdot\vec{v}$ n'est pas
+  le cosinus de l'angle~: il faut diviser par les normes.
+}
+
+\exempleRedige{%
+  Repère orthonormé, $A(1;0;0)$, $B(0;1;0)$, $C(0;0;1)$. Montrons que
+  $\vec{AB}$ et $\vec{AC}$ ne sont pas orthogonaux, puis que
+  $\vec{OA}$ et $\vec{BC}$ le sont, avec $O$ l'origine.
+  \[
+    \vec{AB}(-1;1;0),\quad \vec{AC}(-1;0;1),\quad
+    \vec{AB}\cdot\vec{AC}=1+0+0=1\neq0 .
+  \]
+  \[
+    \vec{OA}(1;0;0),\quad \vec{BC}(0;-1;1),\quad
+    \vec{OA}\cdot\vec{BC}=0+0+0=0 .
+  \]
+  Donc $(OA)$ et $(BC)$ sont orthogonales.
+}
+
+\end{fichemethode}

@@ -1,0 +1,48 @@
+% META: {"id": "TSPE-GEOESPACE-ME-009", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "methode", "capacites_codes": ["C15"], "methodes": ["M9"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M9}{Traduire une intersection en système et l'interpréter}
+
+\quandUtiliser{%
+  Pour déterminer l'intersection d'une droite et d'un plan, ou de deux plans,
+  et surtout pour \emph{interpréter} le résultat algébrique en position
+  relative. La conclusion attendue est géométrique, pas seulement numérique.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Écrire} la représentation paramétrique de la droite et
+          l'équation cartésienne du plan.
+    \item \textbf{Substituer} les expressions de $x$, $y$, $z$ dans l'équation
+          du plan~: on obtient une équation d'inconnue $t$.
+    \item \textbf{Résoudre} sans préjuger du nombre de solutions.
+    \item \textbf{Interpréter}~:
+          une solution unique, la droite \emph{perce} le plan~;
+          aucune solution, elle lui est \emph{strictement parallèle}~;
+          une infinité, elle est \emph{contenue} dans le plan.
+    \item \textbf{Confirmer} avec les vecteurs~: si
+          $\vec{n}\cdot\vec{u}=0$, la droite est parallèle au plan, et c'est
+          l'appartenance d'un point qui départage les deux derniers cas.
+  \end{enumerate}
+}
+
+\verifier{%
+  Dans le cas d'une solution unique, reporter le point trouvé dans l'équation
+  du plan \emph{et} dans la représentation de la droite~: il doit satisfaire
+  les deux. Dans les autres cas, le test $\vec{n}\cdot\vec{u}=0$ fournit une
+  confirmation indépendante.
+}
+
+\pieges{%
+  Un système sans solution n'est pas une erreur de calcul~: c'est la réponse,
+  et elle signifie que les objets ne se rencontrent pas. De même, l'équation
+  $0=0$ n'est pas une impasse~: elle traduit une infinité de points communs.
+}
+
+\exempleRedige{%
+  $\mathcal{P}:\ x+y+z-3=0$ et $d:\ x=t,\ y=-t,\ z=0$.
+  En substituant~: $t-t+0-3=0$, soit $-3=0$. Le système n'a aucune solution.
+  On confirme avec les vecteurs~: $\vec{u}(1;-1;0)$ vérifie
+  $\vec{n}\cdot\vec{u}=1-1+0=0$, et le point $(0;0;0)$ de $d$ ne vérifie pas
+  l'équation du plan. Donc $d$ est strictement parallèle à $\mathcal{P}$.
+}
+
+\end{fichemethode}
