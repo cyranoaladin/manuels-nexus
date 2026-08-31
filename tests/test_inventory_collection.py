@@ -3947,9 +3947,13 @@ def test_repository_fail_on_new_gate_accepts_exact_residual_extension(
     assert set(comparison["new"]) == declared
     assert comparison["modified"] == []
     assert comparison["expected_review_debt"] == []
-    assert comparison["resolved"] == []
+    # Quatre empreintes se resolvent : la reecriture des evaluations de
+    # PARCOURS-TRIS a fait retomber leur statut, donc disparaitre leur
+    # identite. Les objets reecrits sont declares au registre de dette 1NSI :
+    # une reecriture remplace une dette par une autre, elle n'en supprime pas.
+    assert set(comparison["resolved"]) == _superseded_migration_fingerprints()
     assert comparison["regressions"] == []
-    assert len(comparison["unchanged"]) == 2232
+    assert len(comparison["unchanged"]) == 2228
 
 
 def test_build_manifest_provenance_is_not_self_attesting(
