@@ -20,7 +20,6 @@ import argparse
 import collections
 import hashlib
 import json
-import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -59,16 +58,18 @@ def build_checkpoint() -> dict[str, Any]:
     identifiers = sorted(
         f"{row['chapter']}/{row['capacity']}/{row['role']}" for row in backlog
     )
-    head = subprocess.run(
-        ["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=True
-    ).stdout.strip()
-
     return {
         "artifact_type": "true_authoring_backlog_established",
         "schema_version": 1,
         "generated_by": "scripts/build_true_authoring_backlog_checkpoint.py",
         "checkpoint": "TRUE_AUTHORING_BACKLOG_ESTABLISHED",
-        "observed_source_sha": head,
+        "freshness_authority": "backlog_set_digest",
+        "why_no_head_sha": (
+            "un checkpoint qui epingle le HEAD courant devient perime des le "
+            "commit qui le publie, sans qu'aucune valeur ait bouge. "
+            "L'ancrage est donc le SHA du run complet qui le valide, plus le "
+            "digest de l'ensemble des unites."
+        ),
         "validating_full_run": VALIDATING_RUN,
         "definition": (
             "une unite d'ecriture est un couple (capacite, role) qu'aucun "

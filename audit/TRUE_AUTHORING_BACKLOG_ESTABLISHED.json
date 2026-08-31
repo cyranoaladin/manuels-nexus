@@ -3,7 +3,8 @@
   "schema_version": 1,
   "generated_by": "scripts/build_true_authoring_backlog_checkpoint.py",
   "checkpoint": "TRUE_AUTHORING_BACKLOG_ESTABLISHED",
-  "observed_source_sha": "f8c5e1c84d57dbb49ca675c0f54685116cb3ec13",
+  "freshness_authority": "backlog_set_digest",
+  "why_no_head_sha": "un checkpoint qui epingle le HEAD courant devient perime des le commit qui le publie, sans qu'aucune valeur ait bouge. L'ancrage est donc le SHA du run complet qui le valide, plus le digest de l'ensemble des unites.",
   "validating_full_run": {
     "source_sha": "52c061428f472f9926829d5c5a4e1c74c7392e58",
     "collected": 9277,
