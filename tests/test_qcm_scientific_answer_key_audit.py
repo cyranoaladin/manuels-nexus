@@ -58,7 +58,7 @@ def test_the_v1_audit_is_historical_and_no_longer_covers_the_current_corpus() ->
     etait devenue fausse, et la rendre verte en rafraichissant un condense
     aurait masque six questions jamais prouvees. La v1 est desormais tenue
     pour ce qu'elle est : un enregistrement HISTORIQUE dont le perimetre est
-    borne, et c'est la v2 qui doit rendre compte des 337.
+    borne, et c'est la v2 qui doit rendre compte des 348.
     """
 
     payload = json.loads(AUDIT.read_text(encoding="utf-8"))
@@ -67,23 +67,24 @@ def test_the_v1_audit_is_historical_and_no_longer_covers_the_current_corpus() ->
     current = _source_keys()
 
     assert len(historical) == 331
-    # 479 depuis l'entree des 142 questions NSI dans le corpus route.
-    assert len(current) == 479
+    # 479 depuis l'entree des 142 questions NSI dans le corpus route, puis 490
+    # quand le QCM de TSPE-GEOMETRIE-ESPACE est passe de cinq a seize items.
+    assert len(current) == 490
     assert historical < current, "la v1 est un sous-ensemble strict du corpus"
     delta = current - historical
     nsi = {key for key in delta if key[0].startswith(("1NSI", "TNSI"))}
     assert len(nsi) == 142
-    assert sorted(question for _chapter, question in delta - nsi) == [
-        "Q16",
-        "Q17",
-        "Q18",
-        "Q19",
-        "Q20",
-        "Q21",
-    ]
+    # Le couple (chapitre, question) et non l'identifiant nu : deux chapitres
+    # portent chacun un Q16, et les comparer sans leur chapitre confondrait
+    # une question neuve avec une question deja couverte par la v1.
+    assert (delta - nsi) == (
+        {("1SPE-VARIABLES-ALEATOIRES", f"Q{i}") for i in range(16, 22)}
+        | {("TSPE-GEOMETRIE-ESPACE", f"Q{i}") for i in range(6, 17)}
+    )
     hors_v1 = {chapter for chapter, _question in current - historical}
     assert {c for c in hors_v1 if not c.startswith(("1NSI", "TNSI"))} == {
-        "1SPE-VARIABLES-ALEATOIRES"
+        "1SPE-VARIABLES-ALEATOIRES",
+        "TSPE-GEOMETRIE-ESPACE",
     }
     assert len({c for c in hors_v1 if c.startswith(("1NSI", "TNSI"))}) == 17
 
@@ -191,7 +192,7 @@ def test_the_v1_builder_refuses_to_produce_on_a_changed_corpus() -> None:
 def test_the_v2_evidence_accounts_for_every_question_without_unknown() -> None:
     v2 = V2.build_evidence()
     counts = v2["counts"]
-    assert counts["question_count"] == 479
+    assert counts["question_count"] == 490
     assert (
         counts["CARRIED_FORWARD_IDENTICAL"]
         + counts["MACHINE_RECALCULATED"]

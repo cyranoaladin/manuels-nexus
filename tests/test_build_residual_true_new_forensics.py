@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import importlib.util
 import json
+from itertools import combinations
 from pathlib import Path
 import subprocess
 
@@ -113,22 +114,36 @@ def test_builds_exact_residual_without_mutating_frozen_inputs(tmp_path: Path) ->
     # 2248 depuis le 2026-08-30 : deux corriges d'evaluation a
     # 1NSI-TYPES-CONSTRUITS et le QCM de TNSI-PROJET, chacun porte par son
     # registre. Chaque terme de l'equation a une autorite contractuelle.
-    assert full["cardinality_equation"] == "2248 = 2121 + 9 + 89 + 13 + 12 + 1 + 2 + 1"
-    assert full["cardinalities"]["CURRENT_ACTIVE"] == 2248
+    # 2293 depuis la reconstruction de TSPE-GEOMETRIE-ESPACE : 45 objets que
+    # la machine a verifies et qu'aucun humain n'a relus, portes par leur
+    # propre registre plutot que fondus dans un terme existant.
+    assert full["cardinality_equation"] == (
+        "2293 = 2121 + 9 + 89 + 13 + 12 + 1 + 2 + 1 + 45"
+    )
+    assert full["cardinalities"]["CURRENT_ACTIVE"] == 2293
     assert full["cardinalities"]["TRUE_NEW"] == 13
     assert full["cardinalities"]["VARALEA_C6C7_REVIEW_DEBT_12"] == 12
     assert full["cardinalities"]["EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1"] == 1
     assert full["cardinalities"]["NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2"] == 2
     assert full["cardinalities"]["TNSI_PROJET_QCM_REVIEW_DEBT_1"] == 1
+    assert full["cardinalities"]["TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_45"] == 45
     declared = (
         "VARALEA_C6C7_REVIEW_DEBT_12",
         "EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1",
         "NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2",
         "TNSI_PROJET_QCM_REVIEW_DEBT_1",
+        "TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_45",
     )
-    for name in declared:
-        assert set(full["sets"][name]).isdisjoint(full["sets"]["TRUE_NEW"])
-    assert set(full["sets"][declared[0]]).isdisjoint(set(full["sets"][declared[1]]))
+    # La dette de revue se partitionne : aucune intersection deux a deux, y
+    # compris avec le residuel gele. Le test n'echantillonnait que deux
+    # paires ; une dette comptee deux fois passait donc inapercue.
+    partition = {name: set(full["sets"][name]) for name in declared}
+    partition["TRUE_NEW"] = set(full["sets"]["TRUE_NEW"])
+    for left, right in combinations(sorted(partition), 2):
+        assert partition[left].isdisjoint(partition[right]), (left, right)
+    assert sum(len(members) for members in partition.values()) == len(
+        set().union(*partition.values())
+    )
     assert full["equalities"]["current_partition"] is True
     assert full["equalities"]["current_partition_pairwise_disjoint"] is True
     assert full["unknown_count"] == 0

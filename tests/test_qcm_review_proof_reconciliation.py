@@ -37,10 +37,12 @@ def payload() -> dict:
 def test_the_partition_covers_the_current_corpus_exactly(payload: dict) -> None:
     counts = payload["counts"]
     assert counts["OLD_PROOF_QUESTION_COUNT"] == 331
-    # 337 questions de mathematiques et 142 de NSI. Le corpus NSI a rejoint le
+    # 348 questions de mathematiques et 142 de NSI. Le corpus NSI a rejoint le
     # routage quand ses QCM ont recu une cle : ses questions n'ont jamais ete
     # prouvees, elles entrent donc toutes en dette. Le total AUGMENTE.
-    assert counts["CURRENT_QCM_QUESTION_COUNT"] == 479
+    # 490 depuis que le QCM de TSPE-GEOMETRIE-ESPACE est passe de cinq a seize
+    # questions : un QCM de cinq items ne couvrait pas seize capacites.
+    assert counts["CURRENT_QCM_QUESTION_COUNT"] == 490
     assert (
         counts["CARRIED_FORWARD_UNCHANGED"] + counts["REPROOF_REQUIRED"]
         == counts["CURRENT_QCM_QUESTION_COUNT"]
@@ -50,7 +52,7 @@ def test_the_partition_covers_the_current_corpus_exactly(payload: dict) -> None:
     carried = {(e["chapter"], e["question_id"]) for e in payload["carried_forward"]}
     reproof = {(e["chapter"], e["question_id"]) for e in payload["reproof_required"]}
     assert carried & reproof == set()
-    assert len(carried) + len(reproof) == 479
+    assert len(carried) + len(reproof) == 490
 
 
 def test_every_varalea_question_needs_a_new_proof(payload: dict) -> None:
@@ -64,16 +66,27 @@ def test_every_varalea_question_needs_a_new_proof(payload: dict) -> None:
     assert not any(e["chapter"] == VARALEA for e in payload["carried_forward"])
 
 
-def test_the_six_new_maths_questions_are_named_and_never_proven(payload: dict) -> None:
-    """Cote mathematiques, les seules questions inedites restent les six de VARALEA."""
+def test_the_new_maths_questions_are_named_and_never_proven(payload: dict) -> None:
+    """Cote mathematiques, chaque question inedite est nommee avec son chapitre.
 
-    new = sorted(
-        e["question_id"]
+    Le test comparait une liste d'identifiants nus. Deux chapitres peuvent
+    porter tous les deux un Q16 : cette forme ne distinguait pas leur origine,
+    et une question neuve apparue ailleurs pouvait passer pour une ancienne
+    connue. La comparaison porte donc sur le couple (chapitre, question).
+    """
+
+    new = {
+        (e["chapter"], e["question_id"])
         for e in payload["reproof_required"]
         if e["reason"] == "NEW_QUESTION_NEVER_PROVEN"
         and not e["chapter"].startswith(("1NSI", "TNSI"))
-    )
-    assert new == ["Q16", "Q17", "Q18", "Q19", "Q20", "Q21"]
+    }
+    varalea = {(VARALEA, f"Q{index}") for index in range(16, 22)}
+    # Les onze questions ajoutees a TSPE-GEOMETRIE-ESPACE quand son QCM est
+    # passe de cinq a seize items. Elles sont neuves, donc jamais prouvees.
+    geoespace = {("TSPE-GEOMETRIE-ESPACE", f"Q{index}") for index in range(6, 17)}
+    assert new == varalea | geoespace
+    assert len(new) == 17
 
 
 def test_every_nsi_question_enters_the_ledger_as_never_proven(payload: dict) -> None:
@@ -146,8 +159,11 @@ def test_a_varalea_change_never_invalidates_another_chapter(payload: dict) -> No
     # d'erreur modifie doit etre re-prouve.
     # TSPE-CONTINUITE et TSPE-SUITES-LIMITES s'ajoutent pour la meme cause
     # PROPRE : leurs diagnostics courts ont ete completes causalement.
+    # TSPE-GEOMETRIE-ESPACE s'ajoute pour SA propre cause : onze questions
+    # neuves, jamais prouvees. Ce n'est pas de la contagion depuis VARALEA.
     assert foreign == {
         "1SPE-PRODUIT-SCALAIRE",
+        "TSPE-GEOMETRIE-ESPACE",
         "TSPE-CONTINUITE",
         "TSPE-DERIVATION-CONVEXITE",
         "TSPE-LIMITES-FONCTIONS",

@@ -3835,6 +3835,7 @@ DECLARED_DEBT_LEDGERS = (
     "audit/EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1.json",
     "audit/NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2.json",
     "audit/TNSI_PROJET_QCM_REVIEW_DEBT_1.json",
+    "audit/TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_45.json",
 )
 
 
@@ -3902,7 +3903,9 @@ def test_repository_fail_on_new_gate_accepts_exact_residual_extension(
     # 12 objets de la chaine C6/C7 de VARALEA, la fiche methode C1
     # d'EXPONENTIELLE, les 2 corriges d'evaluation de 1NSI-TYPES-CONSTRUITS et
     # le QCM de TNSI-PROJET : chacun dans le registre de son chapitre.
-    assert len(declared) == 16
+    # Puis les 45 de TSPE-GEOMETRIE-ESPACE : 40 objets crees par la
+    # reconstruction et 5 dont la reecriture a perime l'approbation humaine.
+    assert len(declared) == 16 + 45
 
     assert gate["success"] is False
     assert gate["exit_code"] == 5
