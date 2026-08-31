@@ -1,0 +1,96 @@
+{
+  "artifact_type": "worktree_reconciliation",
+  "schema_version": 1,
+  "date": "2026-08-31",
+  "campaign_worktree": ".worktrees/t3-publish-readiness",
+  "campaign_branch": "codex/t3-publish-readiness-current",
+  "method": "Chaque delta a ete dispositionne par PREUVE, pas par presomption : les tests candidats ont ete rejoues contre la campagne pour distinguer une couverture reellement manquante d'une architecture superseded.",
+  "invariants": {
+    "LOST_VALID_DELTA": 0,
+    "SILENT_DROP": 0,
+    "UNKNOWN": 0,
+    "BRANCHES_BEFORE": 27,
+    "BRANCHES_AFTER": 27
+  },
+  "forensic_archive": {
+    "location": "hors depot (scratchpad de session)",
+    "content": "tracked.patch, staged.patch, untracked.tgz, HEAD, branch, status pour les quatre worktrees, avec sha256",
+    "note": "Les branches et commits restent dans Git ; seuls les checkouts physiques ont ete retires."
+  },
+  "worktrees": [
+    {
+      "path": ".worktrees/green-openrouter-only",
+      "branch": "green/openrouter-only",
+      "head": "cb4880c09336c271bc920d3deb3338deffe27d8a",
+      "deltas": [
+        {
+          "items": ["scripts/assemble.py", "scripts/coverage_report.py", "scripts/verify_python.py", "scripts/verify_sympy.py"],
+          "disposition": "OBSOLETE",
+          "evidence": "Shims sans corps, declares pour taire un controle de decouverte d'anciennes CI. Les seuls appelants reels -- Mathematiques/manuel-maths/.github/workflows/ci.yml et NSI/.github/workflows/ci.yml -- resolvent vers les scripts de leur propre sous-projet, jamais vers la racine. Zero consommateur."
+        },
+        {
+          "items": ["tests/test_external_provider_policy.py (+988 lignes)"],
+          "disposition": "FORENSIC_ONLY",
+          "evidence": "Politique de fournisseur externe OpenRouter, jamais fusionnee en 789 commits. Les documents de decision vivent sur docs/openrouter-only et le materiel correspondant est classe dans audit/chutes/. Aucune autorite courante -- AGENTS.md, DIRECTIVES_COLLECTION.md, SOURCE_DE_VERITE.md -- ne gouverne de fournisseur externe."
+        }
+      ]
+    },
+    {
+      "path": ".worktrees/green-p0-programme-tspe",
+      "branch": "green/p0-programme-tspe",
+      "head": "13f8ca315c82a004df3ee42f57d4d4a82dc30bb8",
+      "deltas": [
+        {
+          "items": ["TSPE-PROBABILITES/cours/16_CONCLGN_bienayme_tchebychev.tex", "TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-009.tex", "scripts/inventory_collection.py target_chapters"],
+          "disposition": "ALREADY_IN_CURRENT",
+          "evidence": "Valeur par valeur : capacites_codes vaut deja TSPE-CONCLGN-C1 dans le cours, capacites vaut deja TSPE-CONCLGN-C1 dans l'exercice -- conforme au contrat du chapitre qui declare ref_capacite TSPE-CONCLGN-C1 -- et target_chapters porte des nombres explicites au lieu de None."
+        },
+        {
+          "items": ["ETAT_COLLECTION.md", "audit/*.yaml", "audit/INVENTAIRE_COLLECTION.json", "MANUEL_TSPE professeur.pdf"],
+          "disposition": "GENERATED_DERIVATIVE",
+          "evidence": "Sorties de producteurs, regenerees a chaque campagne."
+        }
+      ]
+    },
+    {
+      "path": ".worktrees/green-p0-student-separation",
+      "branch": "green/p0-student-separation",
+      "head": "a21a1787229844c1d9c3616c0c3213c7095fa9dc",
+      "deltas": [
+        {
+          "items": ["tests/test_student_text_policy.py", "tests/test_wave0_separation_evidence.py"],
+          "disposition": "OBSOLETE",
+          "evidence": "Rejoues contre la campagne : 25 echecs, tous parce que leur sujet n'existe pas -- scripts/student_text_policy.py et scripts/build_wave0_separation_evidence.py sont absents. Architecture Wave 0 superseded ; la separation eleve/professeur est aujourd'hui couverte par six tests de test_assemble_manuel_observed.py et deux de NSI/tests/test_book_preflight.py."
+        },
+        {
+          "items": ["Mathematiques/manuel-maths/tests/test_training_links.py"],
+          "disposition": "OBSOLETE",
+          "evidence": "Contrat bijectif de 63 renvois bati sur la macro nxTrainingTrace et sur parse_aux_training_trace / resolve_training_targets / parse_training_calls. Aucun de ces cinq elements n'existe plus dans la campagne."
+        },
+        {
+          "items": ["Mathematiques/manuel-maths/tests/test_qcm_math_p0.py"],
+          "disposition": "ALREADY_IN_CURRENT",
+          "evidence": "Sa seule exigence de fond est deja tenue : pour 1SPE-PRODUIT-SCALAIRE Q8, u(2,3) et v(3,-2) donnent u.v = 0, la bonne reponse est bien « orthogonaux », et le diagnostic du distracteur « de normes differentes » enonce deja que les deux normes valent sqrt(13). Le test echoue uniquement parce qu'il epingle la LETTRE -- il exige B -- convention que la politique de distribution des cles rend deliberement mobile."
+        },
+        {
+          "items": ["4 fichiers de tests suivis, +303 lignes"],
+          "disposition": "OBSOLETE",
+          "evidence": "Rejoues contre la campagne : 18 echecs, tous exigeant un fichier chapitres/<CH>/diagnostics/<CH>-QCM-DIAGNOSTICS.tex. Le depot ne contient plus aucun repertoire diagnostics/ ; les diagnostics vivent desormais dans le JSON du QCM, attaches question par question a leur option."
+        }
+      ]
+    },
+    {
+      "path": ".worktrees/pre-a6-a6-context-mismatches",
+      "branch": "audit/adversarial-reconciliation-2026",
+      "head": "10cb5f07772842d6630d2a2f78531f6900371023",
+      "deltas": [
+        {
+          "items": ["5 suppressions de cours mises en scene"],
+          "disposition": "VALID_DELTA_MISSING",
+          "evidence": "Ce worktree avait raison, et c'est lui qui a mis le P0 de clonage sur la piste. Quatre des cinq suppressions sont portees sur la campagne au commit d421e709 ; la cinquieme, TCOMPL-MODELES-FONCTION, est explicitement differee au backlog de reconstruction parce que sa capacite C2 touche a l'etude de fonction sans s'y confondre.",
+          "carried_at": "d421e709"
+        }
+      ]
+    }
+  ]
+}
