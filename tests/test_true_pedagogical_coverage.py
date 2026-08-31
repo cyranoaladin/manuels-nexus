@@ -47,8 +47,15 @@ def test_the_backlog_is_exact_and_counted_in_authoring_units(payload: dict) -> N
     backlog = payload["authoring_backlog"]
 
     assert len(backlog) == inventory["authoring_units_required"]
+    # Trois etats, pas deux : une cellule servie uniquement par des clones
+    # dont le proprietaire n'est pas demontrable n'est ni pourvue ni vide.
+    # La compter comme vide enverrait reecrire un contenu qui existe ; la
+    # compter comme pourvue crediterait une capacite au hasard.
     assert (
-        inventory["cells_with_valid_content"] + len(backlog) == inventory["cells"]
+        inventory["cells_with_valid_content"]
+        + inventory["cells_with_indeterminate_credit"]
+        + len(backlog)
+        == inventory["cells"]
     )
     assert all(row["valid_objects"] == 0 for row in backlog)
     assert all(row["state"] == "MISSING" for row in backlog)
@@ -130,6 +137,7 @@ def test_the_credit_rule_refuses_meta_only_claims(payload: dict, producer) -> No
     # conserve le credit d'une capacite qu'elle n'enseigne pas. Ce test
     # n'exige plus la presence du defaut dans un chapitre precis -- il
     # deviendrait faux le jour ou ce chapitre serait repare.
+    indeterminate = set(ledger["objects_with_indeterminate_credit"])
     misrepresenting = [
         group
         for group in ledger["groups"]
@@ -137,5 +145,16 @@ def test_the_credit_rule_refuses_meta_only_claims(payload: dict, producer) -> No
     ]
     assert misrepresenting
     for group in misrepresenting:
-        kept = {row["path"] for row in group["members"]} - invalid
-        assert len(kept) <= 1
+        # Un corps ne credite jamais plus d'une capacite. Les membres d'un
+        # groupe sans proprietaire demontrable ne creditent rien du tout :
+        # ils ne sont ni credites ni declares manquants.
+        credited = {row["path"] for row in group["members"]} - invalid - indeterminate
+        capacities = {
+            tuple(row["declared_capacity"])
+            for row in group["members"]
+            if row["path"] in credited
+        }
+        # L'invariant porte sur les CAPACITES creditees, pas sur le nombre de
+        # fichiers : deux objets attestes par leur corps pour la meme capacite
+        # la creditent une fois, pas deux.
+        assert len(capacities) <= 1

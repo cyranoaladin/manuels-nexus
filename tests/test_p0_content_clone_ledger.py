@@ -19,6 +19,7 @@ from __future__ import annotations
 import collections
 import importlib.util
 import json
+import random
 from pathlib import Path
 
 import pytest
@@ -144,48 +145,52 @@ def test_the_clone_population_never_grows(ledger: dict, producer) -> None:
     )
 
 
-def test_a_clone_group_always_keeps_exactly_one_credited_member(
+def test_a_clone_group_never_yields_more_than_one_credit(
     ledger: dict, producer
 ) -> None:
-    """Invalider l'original avec ses copies fabriquerait des lacunes.
+    """Un corps credite au plus UNE capacite, et jamais par tirage au sort.
 
-    Un corps clone credite UNE capacite, pas n : les copies perdent leur
-    credit. Mais si AUCUN membre ne se nomme lui-meme -- un enonce
-    d'exercice ne cite pas toujours sa capacite -- une regle qui exige une
-    auto-mention pour garder le credit n'en garde aucun, et invalide le
-    groupe entier.
+    Ce test exigeait autrefois qu'exactement un membre garde le credit. Il
+    supposait donc qu'un canonique puisse toujours etre designe -- ce qui
+    n'est vrai que si l'on accepte de le choisir par ordre alphabetique.
 
-    Le chapitre paraitrait alors depourvu d'un contenu qu'il possede : les
-    cinquante exercices de TSPE-GEOMETRIE-ESPACE etaient comptes tous
-    invalides, sept originaux compris, ce qui gonflait le backlog de plus de
-    deux cents unites d'ecriture inexistantes.
+    Depuis que la selection se fait par preuve, un groupe sans preuve n'a
+    pas de canonique : ses membres ne creditent rien et partent en revue.
+    L'invariant qui reste est le bon : le nombre de CREDITS accordes a un
+    corps clone ne depasse jamais un.
     """
 
     invalid = set(ledger["objects_on_invalid_credit"])
+    indeterminate = set(ledger["objects_with_indeterminate_credit"])
+    assert invalid.isdisjoint(indeterminate)
+
     for group in ledger["groups"]:
-        if group["disposition"] in {"BOILERPLATE_ONLY", "REDUNDANT_SAME_CAPACITY"}:
-            continue
-        kept = {row["path"] for row in group["members"]} - invalid
-        assert len(kept) <= 1, (
-            f"{group['clone_group_id']} conserve {len(kept)} credits pour un "
-            "seul corps"
-        )
-        if not kept:
-            # Le groupe ne perd la totalite de ses credits que si CHAQUE
-            # membre est, independamment, dementi par son propre corps.
-            contradicted = [
-                row
-                for row in group["members"]
-                if row["body_attested_capacity"]
-                and not set(row["declared_capacity"])
-                & set(row["body_attested_capacity"])
-            ]
-            assert len(contradicted) == group["object_count"], (
-                f"{group['clone_group_id']} perd tous ses credits sans que "
-                "chaque membre soit dementi par son corps"
+        selection = group["canonical_selection"]
+        members = {row["path"] for row in group["members"]}
+        credited = members - invalid - indeterminate
+
+        if selection["status"] == "AMBIGUOUS":
+            assert credited == set(), (
+                f"{group['clone_group_id']} credite sans preuve de proprietaire"
             )
-        elif group["body_aligned_member_paths"]:
-            assert kept == {group["body_aligned_member_paths"][0]}
+            continue
+        if selection["status"] == "LEGITIMATE_SHARED_CANONICAL":
+            # Tous creditent la meme capacite : le total des credits reste un.
+            declared = {tuple(r["declared_capacity"]) for r in group["members"]}
+            assert len(declared) == 1 or group["disposition"] == "BOILERPLATE_ONLY"
+            continue
+
+        assert selection["status"] == "SEMANTIC_CANONICAL"
+        assert credited == set(selection["canonical_paths"])
+        capacities = {
+            tuple(row["declared_capacity"])
+            for row in group["members"]
+            if row["path"] in credited
+        }
+        assert len(capacities) == 1, (
+            f"{group['clone_group_id']} credite {len(capacities)} capacites "
+            "distinctes pour un seul corps"
+        )
 
 
 def test_geoespace_exercises_are_all_distinct_and_paired(producer) -> None:
@@ -224,3 +229,136 @@ def test_geoespace_exercises_are_all_distinct_and_paired(producer) -> None:
         assert meta["exercice_ref"] in exercises, (
             f"{meta['id']} designe un exercice inexistant"
         )
+
+
+# -- Le canonique ne peut pas dependre de l'ordre des chemins ----------------
+
+
+def _member(path, chapter, declared, attested=(), manual="1NSI", chars=4000):
+    return {
+        "path": path,
+        "chapter": chapter,
+        "manual": manual,
+        "declared_capacity": list(declared),
+        "body_attested_capacity": list(attested),
+        "payload_chars": chars,
+    }
+
+
+def _group(members, disposition):
+    return {"members": list(members), "disposition": disposition}
+
+
+def test_canonical_selection_is_invariant_under_path_permutation(producer) -> None:
+    """La preuve decide, pas l'ordre du systeme de fichiers.
+
+    L'ancienne regle retenait `members[0]`, le premier chemin par ordre
+    alphabetique. Dans le groupe des cours 1NSI elle tombait juste par
+    chance : le fichier authentique s'appelait `1NSI-ADGK-...` et triait
+    avant ses copies `1NSI-ALGO-PARCOURS-TRIS-...`. Un simple renommage
+    aurait deplace l'authenticite d'un chapitre a l'autre.
+    """
+
+    ledger = producer.build_ledger()
+    checked = 0
+    for group in ledger["groups"]:
+        reference = group["canonical_selection"]
+        for seed in (1, 2, 3):
+            shuffled = list(group["members"])
+            random.Random(seed).shuffle(shuffled)
+            permuted = producer.select_canonical(
+                {"members": shuffled, "disposition": group["disposition"]}
+            )
+            assert permuted == reference, group["clone_group_id"]
+        checked += 1
+    assert checked > 300, "le corpus doit etre reellement parcouru"
+
+
+def test_the_true_owner_wins_even_when_the_copy_sorts_first(producer) -> None:
+    """La fixture qui aurait pris l'ancienne regle en defaut.
+
+    Le faux fichier est nomme pour trier AVANT le vrai. Seul le vrai est
+    atteste par son corps. L'ancienne regle, en l'absence d'attestation,
+    aurait retenu le premier chemin ; ici l'attestation tranche, et elle
+    doit gagner quel que soit le nom.
+    """
+
+    fake = _member("NSI/chapitres/CH/cours/AAA-copie.tex", "CH", ["C9"])
+    true = _member("NSI/chapitres/CH/cours/ZZZ-original.tex", "CH", ["C4"], ["C4"])
+
+    for order in ([fake, true], [true, fake]):
+        selection = producer.select_canonical(
+            _group(order, "CAPACITY_MISREPRESENTING_CLONE")
+        )
+        assert selection["status"] == "SEMANTIC_CANONICAL"
+        assert selection["evidence_rule"] == "BODY_SELF_ATTESTATION"
+        assert selection["canonical_paths"] == [
+            "NSI/chapitres/CH/cours/ZZZ-original.tex"
+        ]
+        assert selection["false_copy_paths"] == [
+            "NSI/chapitres/CH/cours/AAA-copie.tex"
+        ]
+
+
+def test_a_chapter_that_duplicates_a_body_loses_it_to_the_one_that_does_not(
+    producer,
+) -> None:
+    """Le cas 1NSI reel, reduit et avec les noms inverses.
+
+    Un chapitre qui detient le meme corps sous DEUX capacites distinctes le
+    represente faussement : un seul corps ne sert pas deux capacites. Le
+    chapitre qui le detient une seule fois en est le proprietaire -- meme
+    quand ses chemins trient en dernier.
+    """
+
+    duplicating = [
+        _member("NSI/chapitres/AAA-FAUX/cours/c1.tex", "AAA-FAUX", ["C1"]),
+        _member("NSI/chapitres/AAA-FAUX/cours/c4.tex", "AAA-FAUX", ["C4"]),
+    ]
+    owner = [_member("NSI/chapitres/ZZZ-VRAI/cours/c1.tex", "ZZZ-VRAI", ["C1"])]
+
+    selection = producer.select_canonical(
+        _group(duplicating + owner, "CROSS_CHAPTER_CONTAMINATION")
+    )
+    assert selection["status"] == "SEMANTIC_CANONICAL"
+    assert selection["evidence_rule"] == "CHAPTER_SELF_DUPLICATION"
+    assert selection["canonical_paths"] == ["NSI/chapitres/ZZZ-VRAI/cours/c1.tex"]
+    assert len(selection["false_copy_paths"]) == 2
+
+
+def test_without_evidence_the_selection_refuses_to_choose(producer) -> None:
+    """Pas de tirage au sort deguise en resultat."""
+
+    members = [
+        _member("NSI/chapitres/CH/exercices/a.tex", "CH", ["C1"]),
+        _member("NSI/chapitres/CH/exercices/b.tex", "CH", ["C2"]),
+    ]
+    selection = producer.select_canonical(
+        _group(members, "CAPACITY_MISREPRESENTING_CLONE")
+    )
+    assert selection["status"] == "AMBIGUOUS"
+    assert selection["canonical_paths"] == []
+    assert selection["false_copy_paths"] == []
+
+
+def test_no_group_is_ever_left_unknown(ledger: dict) -> None:
+    """UNKNOWN = 0 : tout groupe recoit un statut explicite."""
+
+    counts = ledger["canonical_selection_counts"]
+    assert counts["UNKNOWN"] == 0
+    assert sum(counts.values()) == ledger["inventory"]["clone_groups"]
+    for group in ledger["groups"]:
+        selection = group["canonical_selection"]
+        assert selection["status"] in set(producer_statuses())
+        assert selection["reason"]
+        if selection["status"] == "AMBIGUOUS":
+            assert not selection["canonical_paths"]
+
+
+def producer_statuses():
+    return (
+        "SEMANTIC_CANONICAL",
+        "LEGITIMATE_SHARED_CANONICAL",
+        "AMBIGUOUS",
+        "UNKNOWN",
+    )

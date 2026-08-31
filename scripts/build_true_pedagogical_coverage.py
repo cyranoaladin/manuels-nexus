@@ -10,7 +10,15 @@ Ce producteur retire logiquement les credits invalides recenses par
 `build_p0_content_clone_ledger.py`, puis mesure ce qui reste, capacite par
 capacite et role par role. Il n'enleve aucun fichier.
 
-DEUX PIEGES EVITES.
+TROIS PIEGES EVITES.
+
+Identite des capacites. Un objet ne declare pas toujours le code local du
+contrat : il declare parfois la reference officielle du programme
+(`P-ALGO-01A`) ou la forme qualifiee (`1NSI-ALGO-PARCOURS-TRIS-C1`). Les
+rapprocher par extraction de jeton lisait `TSPE-CONCLGN-C1` comme `C1` et
+donnait a une capacite le credit de sa voisine. La resolution passe donc par
+`capacity_identity.py`, qui n'admet que des egalites exactes dans la portee du
+chapitre.
 
 Heritage des corriges. Un corrige ne declare pas toujours de capacite : il la
 tient de l'exercice qu'il corrige, via `META.exercice_id`. Les compter sans
@@ -35,6 +43,7 @@ import collections
 import hashlib
 import importlib.util
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -54,6 +63,17 @@ UNPUBLISHED = ("_harvest",)
 #: Les cinq roles dont `META.capacites_codes` est reellement le mecanisme de
 #: declaration. `qcm` et `evaluations` en sont exclus a dessein.
 MEASURED_ROLES = ("cours", "methodes", "exercices", "corriges", "remediation")
+
+
+def _resolver_module():
+    spec = importlib.util.spec_from_file_location(
+        "capacity_identity", ROOT / "scripts/capacity_identity.py"
+    )
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
 
 
 def _clone_module():
@@ -80,11 +100,26 @@ def _sources() -> list[Path]:
 
 def build_coverage() -> dict[str, Any]:
     clone = _clone_module()
-    invalid_credit = set(
-        json.loads(CLONE_LEDGER.read_text(encoding="utf-8"))[
-            "objects_on_invalid_credit"
-        ]
-    )
+    identity = _resolver_module()
+    resolver = identity.CapacityIdentityResolver.from_corpora()
+
+    def raw_declarations(meta: dict[str, Any]) -> list[str]:
+        values: list[str] = []
+        for key in ("capacites_codes", "capacites"):
+            for value in meta.get(key) or []:
+                text = identity.normalise(value)
+                if text and text not in values:
+                    values.append(text)
+        return values
+
+    ledger = json.loads(CLONE_LEDGER.read_text(encoding="utf-8"))
+    invalid_credit = set(ledger["objects_on_invalid_credit"])
+    # Un clone dont le proprietaire semantique n'est pas demontrable ne prouve
+    # rien : il ne credite pas, mais son absence de credit n'est pas une
+    # lacune non plus -- le contenu est la, c'est sa capacite qui est
+    # indeterminee. Le confondre avec du vide enverrait reecrire un objet qui
+    # existe ; le compter comme valide crediterait une capacite au hasard.
+    indeterminate_credit = set(ledger["objects_with_indeterminate_credit"])
     paths = _sources()
 
     # Premiere passe : capacites par identifiant d'objet, pour l'heritage.
@@ -93,12 +128,18 @@ def build_coverage() -> dict[str, Any]:
     for path in paths:
         meta = clone.read_meta(path.read_text(encoding="utf-8", errors="replace"))
         metas[path] = meta
-        if meta.get("id"):
-            capacities_by_object[str(meta["id"])] = clone.declared_capacities(meta)
+        chapter = path.parts[path.parts.index("chapitres") + 1]
+        if meta.get("id") and chapter in resolver.chapters:
+            capacities_by_object[str(meta["id"])] = resolver.resolve_codes(
+                chapter, raw_declarations(meta)
+            )
 
     def resolved_capacities(path: Path, role: str) -> tuple[str, ...]:
         meta = metas[path]
-        declared = clone.declared_capacities(meta)
+        chapter = path.parts[path.parts.index("chapitres") + 1]
+        if chapter not in resolver.chapters:
+            return ()
+        declared = resolver.resolve_codes(chapter, raw_declarations(meta))
         if declared:
             return declared
         if role == "corriges" and meta.get("exercice_id"):
@@ -107,6 +148,9 @@ def build_coverage() -> dict[str, Any]:
 
     unresolved: list[str] = []
     valid: dict[str, dict[str, collections.Counter]] = collections.defaultdict(
+        lambda: collections.defaultdict(collections.Counter)
+    )
+    indeterminate: dict[str, dict[str, collections.Counter]] = collections.defaultdict(
         lambda: collections.defaultdict(collections.Counter)
     )
     for path in paths:
@@ -120,6 +164,10 @@ def build_coverage() -> dict[str, Any]:
             unresolved.append(relative)
             continue
         if relative in invalid_credit:
+            continue
+        if relative in indeterminate_credit:
+            for capacity in capacities:
+                indeterminate[chapter][capacity][role] += 1
             continue
         for capacity in capacities:
             valid[chapter][capacity][role] += 1
@@ -142,6 +190,13 @@ def build_coverage() -> dict[str, Any]:
             for capacity in capacities:
                 for role in MEASURED_ROLES:
                     count = valid[chapter][capacity][role]
+                    pending = indeterminate[chapter][capacity][role]
+                    if count:
+                        state = "VALID_ALIGNED_CONTENT"
+                    elif pending:
+                        state = "INDETERMINATE_CLONE_CREDIT"
+                    else:
+                        state = "MISSING"
                     rows.append(
                         {
                             "manual": clone.manual_of(chapter),
@@ -149,9 +204,8 @@ def build_coverage() -> dict[str, Any]:
                             "capacity": capacity,
                             "role": role,
                             "valid_objects": count,
-                            "state": "VALID_ALIGNED_CONTENT"
-                            if count
-                            else "MISSING",
+                            "indeterminate_objects": pending,
+                            "state": state,
                         }
                     )
 
@@ -175,10 +229,23 @@ def build_coverage() -> dict[str, Any]:
         "artifact_type": "true_pedagogical_coverage",
         "schema_version": 1,
         "generated_by": "scripts/build_true_pedagogical_coverage.py",
+        "capacity_identity": (
+            "resolue par scripts/capacity_identity.py : egalites exactes dans "
+            "la portee du chapitre, jamais par extraction de jeton"
+        ),
         "credit_rule": (
             "un objet ne credite une capacite que si son corps la sert ; le "
             "seul META ne donne aucun credit"
         ),
+        "cell_states": {
+            "VALID_ALIGNED_CONTENT": "au moins un objet credite cette capacite",
+            "INDETERMINATE_CLONE_CREDIT": (
+                "le contenu existe mais appartient a un groupe de clones dont "
+                "le proprietaire semantique n'est pas demontrable : ce n'est "
+                "ni un credit ni une lacune, c'est une revue a faire"
+            ),
+            "MISSING": "aucun contenu, valide ou indetermine",
+        },
         "measured_roles": list(MEASURED_ROLES),
         "excluded_roles": {
             "qcm": "capacites portees par le JSON du QCM ; dette mesuree par build_qcm_gap_metrics.py",
@@ -191,7 +258,12 @@ def build_coverage() -> dict[str, Any]:
         "inventory": {
             "capacities": len({(r["chapter"], r["capacity"]) for r in rows}),
             "cells": len(rows),
-            "cells_with_valid_content": len(rows) - len(backlog),
+            "cells_with_valid_content": sum(
+                1 for r in rows if r["state"] == "VALID_ALIGNED_CONTENT"
+            ),
+            "cells_with_indeterminate_credit": sum(
+                1 for r in rows if r["state"] == "INDETERMINATE_CLONE_CREDIT"
+            ),
             "authoring_units_required": len(backlog),
             "objects_without_resolvable_capacity": len(unresolved),
         },
@@ -206,6 +278,7 @@ def build_coverage() -> dict[str, Any]:
                 per_chapter.items(), key=lambda kv: (-kv[1]["TOTAL"], kv[0])
             )
         },
+        "rows": rows,
         "authoring_backlog": sorted(
             backlog, key=lambda r: (r["manual"], r["chapter"], r["capacity"], r["role"])
         ),

@@ -1,0 +1,2578 @@
+{
+  "artifact_type": "capacity_alias_map",
+  "schema_version": 1,
+  "generated_by": "scripts/capacity_identity.py",
+  "identity_rule": "une capacite est identifiee par (manuel, chapitre, code local) ; aucune relation d'identite ne repose sur un suffixe, une inclusion ou une extraction de jeton",
+  "resolution_rules": [
+    "REF_EXACT",
+    "LOCAL_IN_SCOPE",
+    "SCOPED_QUALIFIED",
+    "PREREQUISITE_NOT_CAPACITY"
+  ],
+  "normalisation": "espaces de bord uniquement ; le qualifiant n'est jamais retire",
+  "count": 320,
+  "chapters": 52,
+  "alias_digest": "sha256:360d659d17f30d2cd9dc2264f36480ffbf106e1a4e06426586100d4c2949506d",
+  "entries": [
+    {
+      "canonical_uid": "1NSI::1NSI-ALGO-DICHO-GLOUTON-KNN::C1",
+      "manual": "1NSI",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "local_scoped_key": "1NSI-ALGO-DICHO-GLOUTON-KNN-C1",
+      "local_code": "C1",
+      "official_ref": "P-ALGO-04"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-ALGO-DICHO-GLOUTON-KNN::C2",
+      "manual": "1NSI",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "local_scoped_key": "1NSI-ALGO-DICHO-GLOUTON-KNN-C2",
+      "local_code": "C2",
+      "official_ref": "P-ALGO-05"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-ALGO-DICHO-GLOUTON-KNN::C3",
+      "manual": "1NSI",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "local_scoped_key": "1NSI-ALGO-DICHO-GLOUTON-KNN-C3",
+      "local_code": "C3",
+      "official_ref": "P-ALGO-03"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C1",
+      "manual": "1NSI",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "local_scoped_key": "1NSI-ALGO-PARCOURS-TRIS-C1",
+      "local_code": "C1",
+      "official_ref": "P-ALGO-01A"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C2",
+      "manual": "1NSI",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "local_scoped_key": "1NSI-ALGO-PARCOURS-TRIS-C2",
+      "local_code": "C2",
+      "official_ref": "P-ALGO-01B"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C3",
+      "manual": "1NSI",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "local_scoped_key": "1NSI-ALGO-PARCOURS-TRIS-C3",
+      "local_code": "C3",
+      "official_ref": "P-ALGO-02A"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C4",
+      "manual": "1NSI",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "local_scoped_key": "1NSI-ALGO-PARCOURS-TRIS-C4",
+      "local_code": "C4",
+      "official_ref": "P-ALGO-02C"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C5",
+      "manual": "1NSI",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "local_scoped_key": "1NSI-ALGO-PARCOURS-TRIS-C5",
+      "local_code": "C5",
+      "official_ref": "P-ALGO-02B"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-ALGO-PARCOURS-TRIS::C6",
+      "manual": "1NSI",
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "local_scoped_key": "1NSI-ALGO-PARCOURS-TRIS-C6",
+      "local_code": "C6",
+      "official_ref": "P-ALGO-02D"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-ARCHITECTURE-OS::C1",
+      "manual": "1NSI",
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "local_scoped_key": "1NSI-ARCHITECTURE-OS-C1",
+      "local_code": "C1",
+      "official_ref": "P-ARCH-01A"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-ARCHITECTURE-OS::C2",
+      "manual": "1NSI",
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "local_scoped_key": "1NSI-ARCHITECTURE-OS-C2",
+      "local_code": "C2",
+      "official_ref": "P-ARCH-01B"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-ARCHITECTURE-OS::C3",
+      "manual": "1NSI",
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "local_scoped_key": "1NSI-ARCHITECTURE-OS-C3",
+      "local_code": "C3",
+      "official_ref": "P-ARCH-03A"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-ARCHITECTURE-OS::C4",
+      "manual": "1NSI",
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "local_scoped_key": "1NSI-ARCHITECTURE-OS-C4",
+      "local_code": "C4",
+      "official_ref": "P-ARCH-03B"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-ARCHITECTURE-OS::C5",
+      "manual": "1NSI",
+      "chapter": "1NSI-ARCHITECTURE-OS",
+      "local_scoped_key": "1NSI-ARCHITECTURE-OS-C5",
+      "local_code": "C5",
+      "official_ref": "P-ARCH-03C"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-LANGAGE::C1",
+      "manual": "1NSI",
+      "chapter": "1NSI-LANGAGE",
+      "local_scoped_key": "1NSI-LANGAGE-C1",
+      "local_code": "C1",
+      "official_ref": "P-LANG-01"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-LANGAGE::C2",
+      "manual": "1NSI",
+      "chapter": "1NSI-LANGAGE",
+      "local_scoped_key": "1NSI-LANGAGE-C2",
+      "local_code": "C2",
+      "official_ref": "P-LANG-02"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-LANGAGE::C3",
+      "manual": "1NSI",
+      "chapter": "1NSI-LANGAGE",
+      "local_scoped_key": "1NSI-LANGAGE-C3",
+      "local_code": "C3",
+      "official_ref": "P-LANG-03A"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-LANGAGE::C4",
+      "manual": "1NSI",
+      "chapter": "1NSI-LANGAGE",
+      "local_scoped_key": "1NSI-LANGAGE-C4",
+      "local_code": "C4",
+      "official_ref": "P-LANG-04"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-LANGAGE::C5",
+      "manual": "1NSI",
+      "chapter": "1NSI-LANGAGE",
+      "local_scoped_key": "1NSI-LANGAGE-C5",
+      "local_code": "C5",
+      "official_ref": "P-LANG-05"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-LANGAGE::C6",
+      "manual": "1NSI",
+      "chapter": "1NSI-LANGAGE",
+      "local_scoped_key": "1NSI-LANGAGE-C6",
+      "local_code": "C6",
+      "official_ref": "P-LANG-03B"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-LANGAGE::C7",
+      "manual": "1NSI",
+      "chapter": "1NSI-LANGAGE",
+      "local_scoped_key": "1NSI-LANGAGE-C7",
+      "local_code": "C7",
+      "official_ref": "P-LANG-03C"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-PROJET-METHODES::C1",
+      "manual": "1NSI",
+      "chapter": "1NSI-PROJET-METHODES",
+      "local_scoped_key": "1NSI-PROJET-METHODES-C1",
+      "local_code": "C1",
+      "official_ref": "P-HIST-01"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-PROJET-METHODES::C2",
+      "manual": "1NSI",
+      "chapter": "1NSI-PROJET-METHODES",
+      "local_scoped_key": "1NSI-PROJET-METHODES-C2",
+      "local_code": "C2",
+      "official_ref": "BO-PREAMBULE-DEMARCHE-DE-PROJET"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-PROJET-METHODES::C3",
+      "manual": "1NSI",
+      "chapter": "1NSI-PROJET-METHODES",
+      "local_scoped_key": "1NSI-PROJET-METHODES-C3",
+      "local_code": "C3",
+      "official_ref": "BO-PREAMBULE-COMPETENCES-METHODE"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-PROJET-METHODES::C4",
+      "manual": "1NSI",
+      "chapter": "1NSI-PROJET-METHODES",
+      "local_scoped_key": "1NSI-PROJET-METHODES-C4",
+      "local_code": "C4",
+      "official_ref": "BO-PREAMBULE-COMPETENCES-ORALES"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-RESEAUX::C1",
+      "manual": "1NSI",
+      "chapter": "1NSI-RESEAUX",
+      "local_scoped_key": "1NSI-RESEAUX-C1",
+      "local_code": "C1",
+      "official_ref": "P-ARCH-02A"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-RESEAUX::C2",
+      "manual": "1NSI",
+      "chapter": "1NSI-RESEAUX",
+      "local_scoped_key": "1NSI-RESEAUX-C2",
+      "local_code": "C2",
+      "official_ref": "P-ARCH-02B"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-RESEAUX::C3",
+      "manual": "1NSI",
+      "chapter": "1NSI-RESEAUX",
+      "local_scoped_key": "1NSI-RESEAUX-C3",
+      "local_code": "C3",
+      "official_ref": "P-ARCH-02C"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-RESEAUX::C4",
+      "manual": "1NSI",
+      "chapter": "1NSI-RESEAUX",
+      "local_scoped_key": "1NSI-RESEAUX-C4",
+      "local_code": "C4",
+      "official_ref": "P-ARCH-04A"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-RESEAUX::C5",
+      "manual": "1NSI",
+      "chapter": "1NSI-RESEAUX",
+      "local_scoped_key": "1NSI-RESEAUX-C5",
+      "local_code": "C5",
+      "official_ref": "P-ARCH-04B"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-TABLES::C1",
+      "manual": "1NSI",
+      "chapter": "1NSI-TABLES",
+      "local_scoped_key": "1NSI-TABLES-C1",
+      "local_code": "C1",
+      "official_ref": "P-TABLE-01"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-TABLES::C2",
+      "manual": "1NSI",
+      "chapter": "1NSI-TABLES",
+      "local_scoped_key": "1NSI-TABLES-C2",
+      "local_code": "C2",
+      "official_ref": "P-TABLE-02"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-TABLES::C3",
+      "manual": "1NSI",
+      "chapter": "1NSI-TABLES",
+      "local_scoped_key": "1NSI-TABLES-C3",
+      "local_code": "C3",
+      "official_ref": "P-TABLE-03"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-TABLES::C4",
+      "manual": "1NSI",
+      "chapter": "1NSI-TABLES",
+      "local_scoped_key": "1NSI-TABLES-C4",
+      "local_code": "C4",
+      "official_ref": "P-TABLE-04"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-TYPES-BASE::C1",
+      "manual": "1NSI",
+      "chapter": "1NSI-TYPES-BASE",
+      "local_scoped_key": "1NSI-TYPES-BASE-C1",
+      "local_code": "C1",
+      "official_ref": "P-BASE-01"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-TYPES-BASE::C2",
+      "manual": "1NSI",
+      "chapter": "1NSI-TYPES-BASE",
+      "local_scoped_key": "1NSI-TYPES-BASE-C2",
+      "local_code": "C2",
+      "official_ref": "P-BASE-02"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-TYPES-BASE::C3",
+      "manual": "1NSI",
+      "chapter": "1NSI-TYPES-BASE",
+      "local_scoped_key": "1NSI-TYPES-BASE-C3",
+      "local_code": "C3",
+      "official_ref": "P-BASE-03"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-TYPES-BASE::C4",
+      "manual": "1NSI",
+      "chapter": "1NSI-TYPES-BASE",
+      "local_scoped_key": "1NSI-TYPES-BASE-C4",
+      "local_code": "C4",
+      "official_ref": "P-BASE-04"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-TYPES-BASE::C5",
+      "manual": "1NSI",
+      "chapter": "1NSI-TYPES-BASE",
+      "local_scoped_key": "1NSI-TYPES-BASE-C5",
+      "local_code": "C5",
+      "official_ref": "P-BASE-05"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-TYPES-CONSTRUITS::C1",
+      "manual": "1NSI",
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "local_scoped_key": "1NSI-TYPES-CONSTRUITS-C1",
+      "local_code": "C1",
+      "official_ref": "1NSI-TYPES-CONSTRUITS-C1"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-TYPES-CONSTRUITS::C2",
+      "manual": "1NSI",
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "local_scoped_key": "1NSI-TYPES-CONSTRUITS-C2",
+      "local_code": "C2",
+      "official_ref": "1NSI-TYPES-CONSTRUITS-C2"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-TYPES-CONSTRUITS::C3",
+      "manual": "1NSI",
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "local_scoped_key": "1NSI-TYPES-CONSTRUITS-C3",
+      "local_code": "C3",
+      "official_ref": "1NSI-TYPES-CONSTRUITS-C3"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-TYPES-CONSTRUITS::C4",
+      "manual": "1NSI",
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "local_scoped_key": "1NSI-TYPES-CONSTRUITS-C4",
+      "local_code": "C4",
+      "official_ref": "1NSI-TYPES-CONSTRUITS-C4"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-TYPES-CONSTRUITS::C5",
+      "manual": "1NSI",
+      "chapter": "1NSI-TYPES-CONSTRUITS",
+      "local_scoped_key": "1NSI-TYPES-CONSTRUITS-C5",
+      "local_code": "C5",
+      "official_ref": "1NSI-TYPES-CONSTRUITS-C5"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-WEB-IHM::C1",
+      "manual": "1NSI",
+      "chapter": "1NSI-WEB-IHM",
+      "local_scoped_key": "1NSI-WEB-IHM-C1",
+      "local_code": "C1",
+      "official_ref": "P-IHM-01A"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-WEB-IHM::C2",
+      "manual": "1NSI",
+      "chapter": "1NSI-WEB-IHM",
+      "local_scoped_key": "1NSI-WEB-IHM-C2",
+      "local_code": "C2",
+      "official_ref": "P-IHM-01B"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-WEB-IHM::C3",
+      "manual": "1NSI",
+      "chapter": "1NSI-WEB-IHM",
+      "local_scoped_key": "1NSI-WEB-IHM-C3",
+      "local_code": "C3",
+      "official_ref": "P-IHM-02"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-WEB-IHM::C4",
+      "manual": "1NSI",
+      "chapter": "1NSI-WEB-IHM",
+      "local_scoped_key": "1NSI-WEB-IHM-C4",
+      "local_code": "C4",
+      "official_ref": "P-IHM-03A"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-WEB-IHM::C5",
+      "manual": "1NSI",
+      "chapter": "1NSI-WEB-IHM",
+      "local_scoped_key": "1NSI-WEB-IHM-C5",
+      "local_code": "C5",
+      "official_ref": "P-IHM-03B"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-WEB-IHM::C6",
+      "manual": "1NSI",
+      "chapter": "1NSI-WEB-IHM",
+      "local_scoped_key": "1NSI-WEB-IHM-C6",
+      "local_code": "C6",
+      "official_ref": "P-IHM-03C"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-WEB-IHM::C7",
+      "manual": "1NSI",
+      "chapter": "1NSI-WEB-IHM",
+      "local_scoped_key": "1NSI-WEB-IHM-C7",
+      "local_code": "C7",
+      "official_ref": "P-IHM-04A"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-WEB-IHM::C8",
+      "manual": "1NSI",
+      "chapter": "1NSI-WEB-IHM",
+      "local_scoped_key": "1NSI-WEB-IHM-C8",
+      "local_code": "C8",
+      "official_ref": "P-IHM-04B"
+    },
+    {
+      "canonical_uid": "1NSI::1NSI-WEB-IHM::C9",
+      "manual": "1NSI",
+      "chapter": "1NSI-WEB-IHM",
+      "local_scoped_key": "1NSI-WEB-IHM-C9",
+      "local_code": "C9",
+      "official_ref": "P-IHM-04C"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-DERIVATION-GLOBAL::C1",
+      "manual": "1SPE",
+      "chapter": "1SPE-DERIVATION-GLOBAL",
+      "local_scoped_key": "1SPE-DERIVATION-GLOBAL-C1",
+      "local_code": "C1",
+      "official_ref": "1SPE-DERIVATION-GLOBAL-C1"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-DERIVATION-GLOBAL::C2",
+      "manual": "1SPE",
+      "chapter": "1SPE-DERIVATION-GLOBAL",
+      "local_scoped_key": "1SPE-DERIVATION-GLOBAL-C2",
+      "local_code": "C2",
+      "official_ref": "1SPE-DERIVATION-GLOBAL-C2"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-DERIVATION-GLOBAL::C3",
+      "manual": "1SPE",
+      "chapter": "1SPE-DERIVATION-GLOBAL",
+      "local_scoped_key": "1SPE-DERIVATION-GLOBAL-C3",
+      "local_code": "C3",
+      "official_ref": "1SPE-DERIVATION-GLOBAL-C3"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-DERIVATION-GLOBAL::C4",
+      "manual": "1SPE",
+      "chapter": "1SPE-DERIVATION-GLOBAL",
+      "local_scoped_key": "1SPE-DERIVATION-GLOBAL-C4",
+      "local_code": "C4",
+      "official_ref": "1SPE-DERIVATION-GLOBAL-C4"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-DERIVATION-GLOBAL::C5",
+      "manual": "1SPE",
+      "chapter": "1SPE-DERIVATION-GLOBAL",
+      "local_scoped_key": "1SPE-DERIVATION-GLOBAL-C5",
+      "local_code": "C5",
+      "official_ref": "1SPE-DERIVATION-GLOBAL-C5"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-DERIVATION-LOCAL::C1",
+      "manual": "1SPE",
+      "chapter": "1SPE-DERIVATION-LOCAL",
+      "local_scoped_key": "1SPE-DERIVATION-LOCAL-C1",
+      "local_code": "C1",
+      "official_ref": "1SPE-DERIVATION-LOCAL-C1"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-DERIVATION-LOCAL::C2",
+      "manual": "1SPE",
+      "chapter": "1SPE-DERIVATION-LOCAL",
+      "local_scoped_key": "1SPE-DERIVATION-LOCAL-C2",
+      "local_code": "C2",
+      "official_ref": "1SPE-DERIVATION-LOCAL-C2"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-DERIVATION-LOCAL::C3",
+      "manual": "1SPE",
+      "chapter": "1SPE-DERIVATION-LOCAL",
+      "local_scoped_key": "1SPE-DERIVATION-LOCAL-C3",
+      "local_code": "C3",
+      "official_ref": "1SPE-DERIVATION-LOCAL-C3"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-DERIVATION-LOCAL::C4",
+      "manual": "1SPE",
+      "chapter": "1SPE-DERIVATION-LOCAL",
+      "local_scoped_key": "1SPE-DERIVATION-LOCAL-C4",
+      "local_code": "C4",
+      "official_ref": "1SPE-DERIVATION-LOCAL-C4"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-DERIVATION-LOCAL::C5",
+      "manual": "1SPE",
+      "chapter": "1SPE-DERIVATION-LOCAL",
+      "local_scoped_key": "1SPE-DERIVATION-LOCAL-C5",
+      "local_code": "C5",
+      "official_ref": "1SPE-DERIVATION-LOCAL-C5"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-EXPONENTIELLE::C1",
+      "manual": "1SPE",
+      "chapter": "1SPE-EXPONENTIELLE",
+      "local_scoped_key": "1SPE-EXPONENTIELLE-C1",
+      "local_code": "C1",
+      "official_ref": "1SPE-EXPONENTIELLE-C1"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-EXPONENTIELLE::C2",
+      "manual": "1SPE",
+      "chapter": "1SPE-EXPONENTIELLE",
+      "local_scoped_key": "1SPE-EXPONENTIELLE-C2",
+      "local_code": "C2",
+      "official_ref": "1SPE-EXPONENTIELLE-C2"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-EXPONENTIELLE::C3",
+      "manual": "1SPE",
+      "chapter": "1SPE-EXPONENTIELLE",
+      "local_scoped_key": "1SPE-EXPONENTIELLE-C3",
+      "local_code": "C3",
+      "official_ref": "1SPE-EXPONENTIELLE-C3"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-EXPONENTIELLE::C4",
+      "manual": "1SPE",
+      "chapter": "1SPE-EXPONENTIELLE",
+      "local_scoped_key": "1SPE-EXPONENTIELLE-C4",
+      "local_code": "C4",
+      "official_ref": "1SPE-EXPONENTIELLE-C4"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-EXPONENTIELLE::C5",
+      "manual": "1SPE",
+      "chapter": "1SPE-EXPONENTIELLE",
+      "local_scoped_key": "1SPE-EXPONENTIELLE-C5",
+      "local_code": "C5",
+      "official_ref": "1SPE-EXPONENTIELLE-C5"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-GEOMETRIE-REPEREE::C1",
+      "manual": "1SPE",
+      "chapter": "1SPE-GEOMETRIE-REPEREE",
+      "local_scoped_key": "1SPE-GEOMETRIE-REPEREE-C1",
+      "local_code": "C1",
+      "official_ref": "1SPE-GEOMETRIE-REPEREE-C1"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-GEOMETRIE-REPEREE::C2",
+      "manual": "1SPE",
+      "chapter": "1SPE-GEOMETRIE-REPEREE",
+      "local_scoped_key": "1SPE-GEOMETRIE-REPEREE-C2",
+      "local_code": "C2",
+      "official_ref": "1SPE-GEOMETRIE-REPEREE-C2"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-GEOMETRIE-REPEREE::C3",
+      "manual": "1SPE",
+      "chapter": "1SPE-GEOMETRIE-REPEREE",
+      "local_scoped_key": "1SPE-GEOMETRIE-REPEREE-C3",
+      "local_code": "C3",
+      "official_ref": "1SPE-GEOMETRIE-REPEREE-C3"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-GEOMETRIE-REPEREE::C4",
+      "manual": "1SPE",
+      "chapter": "1SPE-GEOMETRIE-REPEREE",
+      "local_scoped_key": "1SPE-GEOMETRIE-REPEREE-C4",
+      "local_code": "C4",
+      "official_ref": "1SPE-GEOMETRIE-REPEREE-C4"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-GEOMETRIE-REPEREE::C5",
+      "manual": "1SPE",
+      "chapter": "1SPE-GEOMETRIE-REPEREE",
+      "local_scoped_key": "1SPE-GEOMETRIE-REPEREE-C5",
+      "local_code": "C5",
+      "official_ref": "1SPE-GEOMETRIE-REPEREE-C5"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-PROBA-COND::C1",
+      "manual": "1SPE",
+      "chapter": "1SPE-PROBA-COND",
+      "local_scoped_key": "1SPE-PROBA-COND-C1",
+      "local_code": "C1",
+      "official_ref": "1SPE-PROBA-COND-C1"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-PROBA-COND::C2",
+      "manual": "1SPE",
+      "chapter": "1SPE-PROBA-COND",
+      "local_scoped_key": "1SPE-PROBA-COND-C2",
+      "local_code": "C2",
+      "official_ref": "1SPE-PROBA-COND-C2"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-PROBA-COND::C3",
+      "manual": "1SPE",
+      "chapter": "1SPE-PROBA-COND",
+      "local_scoped_key": "1SPE-PROBA-COND-C3",
+      "local_code": "C3",
+      "official_ref": "1SPE-PROBA-COND-C3"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-PROBA-COND::C4",
+      "manual": "1SPE",
+      "chapter": "1SPE-PROBA-COND",
+      "local_scoped_key": "1SPE-PROBA-COND-C4",
+      "local_code": "C4",
+      "official_ref": "1SPE-PROBA-COND-C4"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-PROBA-COND::C5",
+      "manual": "1SPE",
+      "chapter": "1SPE-PROBA-COND",
+      "local_scoped_key": "1SPE-PROBA-COND-C5",
+      "local_code": "C5",
+      "official_ref": "1SPE-PROBA-COND-C5"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::C1",
+      "manual": "1SPE",
+      "chapter": "1SPE-PRODUIT-SCALAIRE",
+      "local_scoped_key": "1SPE-PRODUIT-SCALAIRE-C1",
+      "local_code": "C1",
+      "official_ref": "1SPE-PRODUIT-SCALAIRE-C1"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::C2",
+      "manual": "1SPE",
+      "chapter": "1SPE-PRODUIT-SCALAIRE",
+      "local_scoped_key": "1SPE-PRODUIT-SCALAIRE-C2",
+      "local_code": "C2",
+      "official_ref": "1SPE-PRODUIT-SCALAIRE-C2"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::C3",
+      "manual": "1SPE",
+      "chapter": "1SPE-PRODUIT-SCALAIRE",
+      "local_scoped_key": "1SPE-PRODUIT-SCALAIRE-C3",
+      "local_code": "C3",
+      "official_ref": "1SPE-PRODUIT-SCALAIRE-C3"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::C4",
+      "manual": "1SPE",
+      "chapter": "1SPE-PRODUIT-SCALAIRE",
+      "local_scoped_key": "1SPE-PRODUIT-SCALAIRE-C4",
+      "local_code": "C4",
+      "official_ref": "1SPE-PRODUIT-SCALAIRE-C4"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-PRODUIT-SCALAIRE::C5",
+      "manual": "1SPE",
+      "chapter": "1SPE-PRODUIT-SCALAIRE",
+      "local_scoped_key": "1SPE-PRODUIT-SCALAIRE-C5",
+      "local_code": "C5",
+      "official_ref": "1SPE-PRODUIT-SCALAIRE-C5"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-SECOND-DEGRE::C1",
+      "manual": "1SPE",
+      "chapter": "1SPE-SECOND-DEGRE",
+      "local_scoped_key": "1SPE-SECOND-DEGRE-C1",
+      "local_code": "C1",
+      "official_ref": "1SPE-SECOND-DEGRE-C1"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-SECOND-DEGRE::C2",
+      "manual": "1SPE",
+      "chapter": "1SPE-SECOND-DEGRE",
+      "local_scoped_key": "1SPE-SECOND-DEGRE-C2",
+      "local_code": "C2",
+      "official_ref": "1SPE-SECOND-DEGRE-C2"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-SECOND-DEGRE::C3",
+      "manual": "1SPE",
+      "chapter": "1SPE-SECOND-DEGRE",
+      "local_scoped_key": "1SPE-SECOND-DEGRE-C3",
+      "local_code": "C3",
+      "official_ref": "1SPE-SECOND-DEGRE-C3"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-SECOND-DEGRE::C4",
+      "manual": "1SPE",
+      "chapter": "1SPE-SECOND-DEGRE",
+      "local_scoped_key": "1SPE-SECOND-DEGRE-C4",
+      "local_code": "C4",
+      "official_ref": "1SPE-SECOND-DEGRE-C4"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-SECOND-DEGRE::C5",
+      "manual": "1SPE",
+      "chapter": "1SPE-SECOND-DEGRE",
+      "local_scoped_key": "1SPE-SECOND-DEGRE-C5",
+      "local_code": "C5",
+      "official_ref": "1SPE-SECOND-DEGRE-C5"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-SECOND-DEGRE::C6",
+      "manual": "1SPE",
+      "chapter": "1SPE-SECOND-DEGRE",
+      "local_scoped_key": "1SPE-SECOND-DEGRE-C6",
+      "local_code": "C6",
+      "official_ref": "1SPE-SECOND-DEGRE-C6"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-SUITES::C1",
+      "manual": "1SPE",
+      "chapter": "1SPE-SUITES",
+      "local_scoped_key": "1SPE-SUITES-C1",
+      "local_code": "C1",
+      "official_ref": "1SPE-SUITES-C1"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-SUITES::C2",
+      "manual": "1SPE",
+      "chapter": "1SPE-SUITES",
+      "local_scoped_key": "1SPE-SUITES-C2",
+      "local_code": "C2",
+      "official_ref": "1SPE-SUITES-C2"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-SUITES::C3",
+      "manual": "1SPE",
+      "chapter": "1SPE-SUITES",
+      "local_scoped_key": "1SPE-SUITES-C3",
+      "local_code": "C3",
+      "official_ref": "1SPE-SUITES-C3"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-SUITES::C4",
+      "manual": "1SPE",
+      "chapter": "1SPE-SUITES",
+      "local_scoped_key": "1SPE-SUITES-C4",
+      "local_code": "C4",
+      "official_ref": "1SPE-SUITES-C4"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-SUITES::C5",
+      "manual": "1SPE",
+      "chapter": "1SPE-SUITES",
+      "local_scoped_key": "1SPE-SUITES-C5",
+      "local_code": "C5",
+      "official_ref": "1SPE-SUITES-C5"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-SUITES::C6",
+      "manual": "1SPE",
+      "chapter": "1SPE-SUITES",
+      "local_scoped_key": "1SPE-SUITES-C6",
+      "local_code": "C6",
+      "official_ref": "1SPE-SUITES-C6"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-SUITES::C7",
+      "manual": "1SPE",
+      "chapter": "1SPE-SUITES",
+      "local_scoped_key": "1SPE-SUITES-C7",
+      "local_code": "C7",
+      "official_ref": "1SPE-SUITES-C7"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-SUITES::C8",
+      "manual": "1SPE",
+      "chapter": "1SPE-SUITES",
+      "local_scoped_key": "1SPE-SUITES-C8",
+      "local_code": "C8",
+      "official_ref": "1SPE-SUITES-C8"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-TRIGONOMETRIE::C1",
+      "manual": "1SPE",
+      "chapter": "1SPE-TRIGONOMETRIE",
+      "local_scoped_key": "1SPE-TRIGONOMETRIE-C1",
+      "local_code": "C1",
+      "official_ref": "1SPE-TRIGONOMETRIE-C1"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-TRIGONOMETRIE::C2",
+      "manual": "1SPE",
+      "chapter": "1SPE-TRIGONOMETRIE",
+      "local_scoped_key": "1SPE-TRIGONOMETRIE-C2",
+      "local_code": "C2",
+      "official_ref": "1SPE-TRIGONOMETRIE-C2"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-VARIABLES-ALEATOIRES::C1",
+      "manual": "1SPE",
+      "chapter": "1SPE-VARIABLES-ALEATOIRES",
+      "local_scoped_key": "1SPE-VARIABLES-ALEATOIRES-C1",
+      "local_code": "C1",
+      "official_ref": "1SPE-VARIABLES-ALEATOIRES-C1"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-VARIABLES-ALEATOIRES::C2",
+      "manual": "1SPE",
+      "chapter": "1SPE-VARIABLES-ALEATOIRES",
+      "local_scoped_key": "1SPE-VARIABLES-ALEATOIRES-C2",
+      "local_code": "C2",
+      "official_ref": "1SPE-VARIABLES-ALEATOIRES-C2"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-VARIABLES-ALEATOIRES::C3",
+      "manual": "1SPE",
+      "chapter": "1SPE-VARIABLES-ALEATOIRES",
+      "local_scoped_key": "1SPE-VARIABLES-ALEATOIRES-C3",
+      "local_code": "C3",
+      "official_ref": "1SPE-VARIABLES-ALEATOIRES-C3"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-VARIABLES-ALEATOIRES::C4",
+      "manual": "1SPE",
+      "chapter": "1SPE-VARIABLES-ALEATOIRES",
+      "local_scoped_key": "1SPE-VARIABLES-ALEATOIRES-C4",
+      "local_code": "C4",
+      "official_ref": "1SPE-VARIABLES-ALEATOIRES-C4"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-VARIABLES-ALEATOIRES::C5",
+      "manual": "1SPE",
+      "chapter": "1SPE-VARIABLES-ALEATOIRES",
+      "local_scoped_key": "1SPE-VARIABLES-ALEATOIRES-C5",
+      "local_code": "C5",
+      "official_ref": "1SPE-VARIABLES-ALEATOIRES-C5"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-VARIABLES-ALEATOIRES::C6",
+      "manual": "1SPE",
+      "chapter": "1SPE-VARIABLES-ALEATOIRES",
+      "local_scoped_key": "1SPE-VARIABLES-ALEATOIRES-C6",
+      "local_code": "C6",
+      "official_ref": "1SPE-VARIABLES-ALEATOIRES-C6"
+    },
+    {
+      "canonical_uid": "1SPE::1SPE-VARIABLES-ALEATOIRES::C7",
+      "manual": "1SPE",
+      "chapter": "1SPE-VARIABLES-ALEATOIRES",
+      "local_scoped_key": "1SPE-VARIABLES-ALEATOIRES-C7",
+      "local_code": "C7",
+      "official_ref": "1SPE-VARIABLES-ALEATOIRES-C7"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-CALCULS-AIRES::C1",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CALCULS-AIRES",
+      "local_scoped_key": "TCOMPL-CALCULS-AIRES-C1",
+      "local_code": "C1",
+      "official_ref": "TCOMPL-AIR-C1"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-CALCULS-AIRES::C2",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CALCULS-AIRES",
+      "local_scoped_key": "TCOMPL-CALCULS-AIRES-C2",
+      "local_code": "C2",
+      "official_ref": "TCOMPL-AIR-C2"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-CALCULS-AIRES::C3",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CALCULS-AIRES",
+      "local_scoped_key": "TCOMPL-CALCULS-AIRES-C3",
+      "local_code": "C3",
+      "official_ref": "TCOMPL-AIR-C3"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-CALCULS-AIRES::C4",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CALCULS-AIRES",
+      "local_scoped_key": "TCOMPL-CALCULS-AIRES-C4",
+      "local_code": "C4",
+      "official_ref": "TCOMPL-AIR-C4"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-CALCULS-AIRES::C5",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CALCULS-AIRES",
+      "local_scoped_key": "TCOMPL-CALCULS-AIRES-C5",
+      "local_code": "C5",
+      "official_ref": "TCOMPL-AIR-C5"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-CALCULS-AIRES::C6",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CALCULS-AIRES",
+      "local_scoped_key": "TCOMPL-CALCULS-AIRES-C6",
+      "local_code": "C6",
+      "official_ref": "TCOMPL-AIR-C6"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C1",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CORRELATION-CAUSALITE",
+      "local_scoped_key": "TCOMPL-CORRELATION-CAUSALITE-C1",
+      "local_code": "C1",
+      "official_ref": "TCOMPL-CORR-C1"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C2",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CORRELATION-CAUSALITE",
+      "local_scoped_key": "TCOMPL-CORRELATION-CAUSALITE-C2",
+      "local_code": "C2",
+      "official_ref": "TCOMPL-CORR-C2"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C3",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CORRELATION-CAUSALITE",
+      "local_scoped_key": "TCOMPL-CORRELATION-CAUSALITE-C3",
+      "local_code": "C3",
+      "official_ref": "TCOMPL-CORR-C3"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C4",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CORRELATION-CAUSALITE",
+      "local_scoped_key": "TCOMPL-CORRELATION-CAUSALITE-C4",
+      "local_code": "C4",
+      "official_ref": "TCOMPL-CORR-C4"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C5",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-CORRELATION-CAUSALITE",
+      "local_scoped_key": "TCOMPL-CORRELATION-CAUSALITE-C5",
+      "local_code": "C5",
+      "official_ref": "TCOMPL-CORR-C5"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-ECHANTILLONNAGE::C1",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "local_scoped_key": "TCOMPL-ECHANTILLONNAGE-C1",
+      "local_code": "C1",
+      "official_ref": "TCOMPL-ECH-C1"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-ECHANTILLONNAGE::C2",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "local_scoped_key": "TCOMPL-ECHANTILLONNAGE-C2",
+      "local_code": "C2",
+      "official_ref": "TCOMPL-ECH-C2"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-ECHANTILLONNAGE::C3",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "local_scoped_key": "TCOMPL-ECHANTILLONNAGE-C3",
+      "local_code": "C3",
+      "official_ref": "TCOMPL-ECH-C3"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-ECHANTILLONNAGE::C4",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "local_scoped_key": "TCOMPL-ECHANTILLONNAGE-C4",
+      "local_code": "C4",
+      "official_ref": "TCOMPL-ECH-C4"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-ECHANTILLONNAGE::C5",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "local_scoped_key": "TCOMPL-ECHANTILLONNAGE-C5",
+      "local_code": "C5",
+      "official_ref": "TCOMPL-ECH-C5"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-ECHANTILLONNAGE::C6",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "local_scoped_key": "TCOMPL-ECHANTILLONNAGE-C6",
+      "local_code": "C6",
+      "official_ref": "TCOMPL-ECH-C6"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-ECHANTILLONNAGE",
+      "local_scoped_key": "TCOMPL-ECHANTILLONNAGE-C7",
+      "local_code": "C7",
+      "official_ref": "TCOMPL-ECH-C7"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-INEGALITES::C1",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INEGALITES",
+      "local_scoped_key": "TCOMPL-INEGALITES-C1",
+      "local_code": "C1",
+      "official_ref": "TCOMPL-INEG-C1"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-INEGALITES::C2",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INEGALITES",
+      "local_scoped_key": "TCOMPL-INEGALITES-C2",
+      "local_code": "C2",
+      "official_ref": "TCOMPL-INEG-C2"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-INEGALITES::C3",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INEGALITES",
+      "local_scoped_key": "TCOMPL-INEGALITES-C3",
+      "local_code": "C3",
+      "official_ref": "TCOMPL-INEG-C3"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-INEGALITES::C4",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INEGALITES",
+      "local_scoped_key": "TCOMPL-INEGALITES-C4",
+      "local_code": "C4",
+      "official_ref": "TCOMPL-INEG-C4"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-INEGALITES::C5",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INEGALITES",
+      "local_scoped_key": "TCOMPL-INEGALITES-C5",
+      "local_code": "C5",
+      "official_ref": "TCOMPL-INEG-C5"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C1",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+      "local_scoped_key": "TCOMPL-INFERENCE-BAYESIENNE-C1",
+      "local_code": "C1",
+      "official_ref": "TCOMPL-BAYES-C1"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C2",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+      "local_scoped_key": "TCOMPL-INFERENCE-BAYESIENNE-C2",
+      "local_code": "C2",
+      "official_ref": "TCOMPL-BAYES-C2"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C3",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+      "local_scoped_key": "TCOMPL-INFERENCE-BAYESIENNE-C3",
+      "local_code": "C3",
+      "official_ref": "TCOMPL-BAYES-C3"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C4",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+      "local_scoped_key": "TCOMPL-INFERENCE-BAYESIENNE-C4",
+      "local_code": "C4",
+      "official_ref": "TCOMPL-BAYES-C4"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C5",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-INFERENCE-BAYESIENNE",
+      "local_scoped_key": "TCOMPL-INFERENCE-BAYESIENNE-C5",
+      "local_code": "C5",
+      "official_ref": "TCOMPL-BAYES-C5"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C1",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "local_scoped_key": "TCOMPL-LOGARITHME-HISTORIQUE-C1",
+      "local_code": "C1",
+      "official_ref": "TCOMPL-LOG-C1"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C2",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "local_scoped_key": "TCOMPL-LOGARITHME-HISTORIQUE-C2",
+      "local_code": "C2",
+      "official_ref": "TCOMPL-LOG-C2"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C3",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "local_scoped_key": "TCOMPL-LOGARITHME-HISTORIQUE-C3",
+      "local_code": "C3",
+      "official_ref": "TCOMPL-LOG-C3"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C4",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "local_scoped_key": "TCOMPL-LOGARITHME-HISTORIQUE-C4",
+      "local_code": "C4",
+      "official_ref": "TCOMPL-LOG-C4"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C5",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-LOGARITHME-HISTORIQUE",
+      "local_scoped_key": "TCOMPL-LOGARITHME-HISTORIQUE-C5",
+      "local_code": "C5",
+      "official_ref": "TCOMPL-LOG-C5"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C1",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "local_scoped_key": "TCOMPL-MODELES-EVOLUTION-C1",
+      "local_code": "C1",
+      "official_ref": "TCOMPL-ME-C1"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C2",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "local_scoped_key": "TCOMPL-MODELES-EVOLUTION-C2",
+      "local_code": "C2",
+      "official_ref": "TCOMPL-ME-C2"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C3",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "local_scoped_key": "TCOMPL-MODELES-EVOLUTION-C3",
+      "local_code": "C3",
+      "official_ref": "TCOMPL-ME-C3"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C4",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "local_scoped_key": "TCOMPL-MODELES-EVOLUTION-C4",
+      "local_code": "C4",
+      "official_ref": "TCOMPL-ME-C4"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C5",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "local_scoped_key": "TCOMPL-MODELES-EVOLUTION-C5",
+      "local_code": "C5",
+      "official_ref": "TCOMPL-ME-C5"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-EVOLUTION",
+      "local_scoped_key": "TCOMPL-MODELES-EVOLUTION-C6",
+      "local_code": "C6",
+      "official_ref": "TCOMPL-ME-C6"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-MODELES-FONCTION::C1",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "local_scoped_key": "TCOMPL-MODELES-FONCTION-C1",
+      "local_code": "C1",
+      "official_ref": "TCOMPL-MF-C1"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-MODELES-FONCTION::C2",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "local_scoped_key": "TCOMPL-MODELES-FONCTION-C2",
+      "local_code": "C2",
+      "official_ref": "TCOMPL-MF-C2"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-MODELES-FONCTION::C3",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "local_scoped_key": "TCOMPL-MODELES-FONCTION-C3",
+      "local_code": "C3",
+      "official_ref": "TCOMPL-MF-C3"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-MODELES-FONCTION::C4",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "local_scoped_key": "TCOMPL-MODELES-FONCTION-C4",
+      "local_code": "C4",
+      "official_ref": "TCOMPL-MF-C4"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-MODELES-FONCTION::C5",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "local_scoped_key": "TCOMPL-MODELES-FONCTION-C5",
+      "local_code": "C5",
+      "official_ref": "TCOMPL-MF-C5"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-MODELES-FONCTION::C6",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "local_scoped_key": "TCOMPL-MODELES-FONCTION-C6",
+      "local_code": "C6",
+      "official_ref": "TCOMPL-MF-C6"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-MODELES-FONCTION::C7",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-MODELES-FONCTION",
+      "local_scoped_key": "TCOMPL-MODELES-FONCTION-C7",
+      "local_code": "C7",
+      "official_ref": "TCOMPL-MF-C7"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C1",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "local_scoped_key": "TCOMPL-TEMPS-ATTENTE-C1",
+      "local_code": "C1",
+      "official_ref": "TCOMPL-ATT-C1"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C2",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "local_scoped_key": "TCOMPL-TEMPS-ATTENTE-C2",
+      "local_code": "C2",
+      "official_ref": "TCOMPL-ATT-C2"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C3",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "local_scoped_key": "TCOMPL-TEMPS-ATTENTE-C3",
+      "local_code": "C3",
+      "official_ref": "TCOMPL-ATT-C3"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C4",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "local_scoped_key": "TCOMPL-TEMPS-ATTENTE-C4",
+      "local_code": "C4",
+      "official_ref": "TCOMPL-ATT-C4"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C5",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "local_scoped_key": "TCOMPL-TEMPS-ATTENTE-C5",
+      "local_code": "C5",
+      "official_ref": "TCOMPL-ATT-C5"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C6",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "local_scoped_key": "TCOMPL-TEMPS-ATTENTE-C6",
+      "local_code": "C6",
+      "official_ref": "TCOMPL-ATT-C6"
+    },
+    {
+      "canonical_uid": "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7",
+      "manual": "TCOMPL",
+      "chapter": "TCOMPL-TEMPS-ATTENTE",
+      "local_scoped_key": "TCOMPL-TEMPS-ATTENTE-C7",
+      "local_code": "C7",
+      "official_ref": "TCOMPL-ATT-C7"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-ARITHMETIQUE::C1",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-ARITHMETIQUE",
+      "local_scoped_key": "TEXP-ARITHMETIQUE-C1",
+      "local_code": "C1",
+      "official_ref": "TEXP-ARI-C1"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-ARITHMETIQUE::C2",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-ARITHMETIQUE",
+      "local_scoped_key": "TEXP-ARITHMETIQUE-C2",
+      "local_code": "C2",
+      "official_ref": "TEXP-ARI-C2"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-ARITHMETIQUE::C3",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-ARITHMETIQUE",
+      "local_scoped_key": "TEXP-ARITHMETIQUE-C3",
+      "local_code": "C3",
+      "official_ref": "TEXP-ARI-C3"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-ARITHMETIQUE::C4",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-ARITHMETIQUE",
+      "local_scoped_key": "TEXP-ARITHMETIQUE-C4",
+      "local_code": "C4",
+      "official_ref": "TEXP-ARI-C4"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-ARITHMETIQUE::C5",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-ARITHMETIQUE",
+      "local_scoped_key": "TEXP-ARITHMETIQUE-C5",
+      "local_code": "C5",
+      "official_ref": "TEXP-ARI-C5"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-ARITHMETIQUE::C6",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-ARITHMETIQUE",
+      "local_scoped_key": "TEXP-ARITHMETIQUE-C6",
+      "local_code": "C6",
+      "official_ref": "TEXP-ARI-C6"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-ARITHMETIQUE::C7",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-ARITHMETIQUE",
+      "local_scoped_key": "TEXP-ARITHMETIQUE-C7",
+      "local_code": "C7",
+      "official_ref": "TEXP-ARI-C7"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-ARITHMETIQUE::C8",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-ARITHMETIQUE",
+      "local_scoped_key": "TEXP-ARITHMETIQUE-C8",
+      "local_code": "C8",
+      "official_ref": "TEXP-ARI-C8"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-ARITHMETIQUE::C9",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-ARITHMETIQUE",
+      "local_scoped_key": "TEXP-ARITHMETIQUE-C9",
+      "local_code": "C9",
+      "official_ref": "TEXP-ARI-C9"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C1",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "local_scoped_key": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-C1",
+      "local_code": "C1",
+      "official_ref": "TEXP-CAG-C1"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C2",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "local_scoped_key": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-C2",
+      "local_code": "C2",
+      "official_ref": "TEXP-CAG-C2"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C3",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "local_scoped_key": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-C3",
+      "local_code": "C3",
+      "official_ref": "TEXP-CAG-C3"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C4",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "local_scoped_key": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-C4",
+      "local_code": "C4",
+      "official_ref": "TEXP-CAG-C4"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C5",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+      "local_scoped_key": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-C5",
+      "local_code": "C5",
+      "official_ref": "TEXP-CAG-C5"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "local_scoped_key": "TEXP-COMPLEXES-TRIGO-POLYNOMES-C1",
+      "local_code": "C1",
+      "official_ref": "TEXP-CTP-C1"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C2",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "local_scoped_key": "TEXP-COMPLEXES-TRIGO-POLYNOMES-C2",
+      "local_code": "C2",
+      "official_ref": "TEXP-CTP-C2"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "local_scoped_key": "TEXP-COMPLEXES-TRIGO-POLYNOMES-C3",
+      "local_code": "C3",
+      "official_ref": "TEXP-CTP-C3"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C4",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "local_scoped_key": "TEXP-COMPLEXES-TRIGO-POLYNOMES-C4",
+      "local_code": "C4",
+      "official_ref": "TEXP-CTP-C4"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "local_scoped_key": "TEXP-COMPLEXES-TRIGO-POLYNOMES-C5",
+      "local_code": "C5",
+      "official_ref": "TEXP-CTP-C5"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C6",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "local_scoped_key": "TEXP-COMPLEXES-TRIGO-POLYNOMES-C6",
+      "local_code": "C6",
+      "official_ref": "TEXP-CTP-C6"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C7",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+      "local_scoped_key": "TEXP-COMPLEXES-TRIGO-POLYNOMES-C7",
+      "local_code": "C7",
+      "official_ref": "TEXP-CTP-C7"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-GRAPHES::C1",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-GRAPHES",
+      "local_scoped_key": "TEXP-GRAPHES-C1",
+      "local_code": "C1",
+      "official_ref": "TEXP-GRA-C1"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-GRAPHES::C2",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-GRAPHES",
+      "local_scoped_key": "TEXP-GRAPHES-C2",
+      "local_code": "C2",
+      "official_ref": "TEXP-GRA-C2"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-GRAPHES::C3",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-GRAPHES",
+      "local_scoped_key": "TEXP-GRAPHES-C3",
+      "local_code": "C3",
+      "official_ref": "TEXP-GRA-C3"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-GRAPHES::C4",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-GRAPHES",
+      "local_scoped_key": "TEXP-GRAPHES-C4",
+      "local_code": "C4",
+      "official_ref": "TEXP-GRA-C4"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-GRAPHES::C5",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-GRAPHES",
+      "local_scoped_key": "TEXP-GRAPHES-C5",
+      "local_code": "C5",
+      "official_ref": "TEXP-GRA-C5"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-MATRICES-MARKOV::C1",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "local_scoped_key": "TEXP-MATRICES-MARKOV-C1",
+      "local_code": "C1",
+      "official_ref": "TEXP-MAT-C1"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-MATRICES-MARKOV::C2",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "local_scoped_key": "TEXP-MATRICES-MARKOV-C2",
+      "local_code": "C2",
+      "official_ref": "TEXP-MAT-C2"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-MATRICES-MARKOV::C3",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "local_scoped_key": "TEXP-MATRICES-MARKOV-C3",
+      "local_code": "C3",
+      "official_ref": "TEXP-MAT-C3"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-MATRICES-MARKOV::C4",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "local_scoped_key": "TEXP-MATRICES-MARKOV-C4",
+      "local_code": "C4",
+      "official_ref": "TEXP-MAT-C4"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-MATRICES-MARKOV::C5",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "local_scoped_key": "TEXP-MATRICES-MARKOV-C5",
+      "local_code": "C5",
+      "official_ref": "TEXP-MAT-C5"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-MATRICES-MARKOV::C6",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "local_scoped_key": "TEXP-MATRICES-MARKOV-C6",
+      "local_code": "C6",
+      "official_ref": "TEXP-MAT-C6"
+    },
+    {
+      "canonical_uid": "TEXPERTES::TEXP-MATRICES-MARKOV::C7",
+      "manual": "TEXPERTES",
+      "chapter": "TEXP-MATRICES-MARKOV",
+      "local_scoped_key": "TEXP-MATRICES-MARKOV-C7",
+      "local_code": "C7",
+      "official_ref": "TEXP-MAT-C7"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ALGORITHMIQUE::C1",
+      "manual": "TNSI",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "local_scoped_key": "TNSI-ALGORITHMIQUE-C1",
+      "local_code": "C1",
+      "official_ref": "T-ALGO-01A"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ALGORITHMIQUE::C2",
+      "manual": "TNSI",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "local_scoped_key": "TNSI-ALGORITHMIQUE-C2",
+      "local_code": "C2",
+      "official_ref": "T-ALGO-01B"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ALGORITHMIQUE::C3",
+      "manual": "TNSI",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "local_scoped_key": "TNSI-ALGORITHMIQUE-C3",
+      "local_code": "C3",
+      "official_ref": "T-ALGO-01C"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ALGORITHMIQUE::C4",
+      "manual": "TNSI",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "local_scoped_key": "TNSI-ALGORITHMIQUE-C4",
+      "local_code": "C4",
+      "official_ref": "T-ALGO-01D"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ALGORITHMIQUE::C5",
+      "manual": "TNSI",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "local_scoped_key": "TNSI-ALGORITHMIQUE-C5",
+      "local_code": "C5",
+      "official_ref": "T-ALGO-01E"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ALGORITHMIQUE::C6",
+      "manual": "TNSI",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "local_scoped_key": "TNSI-ALGORITHMIQUE-C6",
+      "local_code": "C6",
+      "official_ref": "T-ALGO-01F"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ALGORITHMIQUE::C7",
+      "manual": "TNSI",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "local_scoped_key": "TNSI-ALGORITHMIQUE-C7",
+      "local_code": "C7",
+      "official_ref": "T-ALGO-02A"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ALGORITHMIQUE::C8",
+      "manual": "TNSI",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "local_scoped_key": "TNSI-ALGORITHMIQUE-C8",
+      "local_code": "C8",
+      "official_ref": "T-ALGO-02B"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ALGORITHMIQUE::C9",
+      "manual": "TNSI",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "local_scoped_key": "TNSI-ALGORITHMIQUE-C9",
+      "local_code": "C9",
+      "official_ref": "T-ALGO-02C"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ALGORITHMIQUE::C10",
+      "manual": "TNSI",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "local_scoped_key": "TNSI-ALGORITHMIQUE-C10",
+      "local_code": "C10",
+      "official_ref": "T-ALGO-02D"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ALGORITHMIQUE::C11",
+      "manual": "TNSI",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "local_scoped_key": "TNSI-ALGORITHMIQUE-C11",
+      "local_code": "C11",
+      "official_ref": "T-ALGO-03"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ALGORITHMIQUE::C12",
+      "manual": "TNSI",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "local_scoped_key": "TNSI-ALGORITHMIQUE-C12",
+      "local_code": "C12",
+      "official_ref": "T-ALGO-04"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ALGORITHMIQUE::C13",
+      "manual": "TNSI",
+      "chapter": "TNSI-ALGORITHMIQUE",
+      "local_scoped_key": "TNSI-ALGORITHMIQUE-C13",
+      "local_code": "C13",
+      "official_ref": "T-ALGO-05"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C1",
+      "manual": "TNSI",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "local_scoped_key": "TNSI-ARCHITECTURES-MATERIELLES-SY-C1",
+      "local_code": "C1",
+      "official_ref": "T-ARCH-01"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C2",
+      "manual": "TNSI",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "local_scoped_key": "TNSI-ARCHITECTURES-MATERIELLES-SY-C2",
+      "local_code": "C2",
+      "official_ref": "T-ARCH-02A"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C3",
+      "manual": "TNSI",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "local_scoped_key": "TNSI-ARCHITECTURES-MATERIELLES-SY-C3",
+      "local_code": "C3",
+      "official_ref": "T-ARCH-02B"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C4",
+      "manual": "TNSI",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "local_scoped_key": "TNSI-ARCHITECTURES-MATERIELLES-SY-C4",
+      "local_code": "C4",
+      "official_ref": "T-ARCH-02C"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C5",
+      "manual": "TNSI",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "local_scoped_key": "TNSI-ARCHITECTURES-MATERIELLES-SY-C5",
+      "local_code": "C5",
+      "official_ref": "T-ARCH-03"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C6",
+      "manual": "TNSI",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "local_scoped_key": "TNSI-ARCHITECTURES-MATERIELLES-SY-C6",
+      "local_code": "C6",
+      "official_ref": "T-ARCH-04A"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C7",
+      "manual": "TNSI",
+      "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
+      "local_scoped_key": "TNSI-ARCHITECTURES-MATERIELLES-SY-C7",
+      "local_code": "C7",
+      "official_ref": "T-ARCH-04B"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-BASES-DE-DONNEES::C1",
+      "manual": "TNSI",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "local_scoped_key": "TNSI-BASES-DE-DONNEES-C1",
+      "local_code": "C1",
+      "official_ref": "T-BDD-01A"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-BASES-DE-DONNEES::C2",
+      "manual": "TNSI",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "local_scoped_key": "TNSI-BASES-DE-DONNEES-C2",
+      "local_code": "C2",
+      "official_ref": "T-BDD-01B"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-BASES-DE-DONNEES::C3",
+      "manual": "TNSI",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "local_scoped_key": "TNSI-BASES-DE-DONNEES-C3",
+      "local_code": "C3",
+      "official_ref": "T-BDD-01C"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-BASES-DE-DONNEES::C4",
+      "manual": "TNSI",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "local_scoped_key": "TNSI-BASES-DE-DONNEES-C4",
+      "local_code": "C4",
+      "official_ref": "T-BDD-02"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-BASES-DE-DONNEES::C5",
+      "manual": "TNSI",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "local_scoped_key": "TNSI-BASES-DE-DONNEES-C5",
+      "local_code": "C5",
+      "official_ref": "T-BDD-03A"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-BASES-DE-DONNEES::C6",
+      "manual": "TNSI",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "local_scoped_key": "TNSI-BASES-DE-DONNEES-C6",
+      "local_code": "C6",
+      "official_ref": "T-BDD-03B"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-BASES-DE-DONNEES::C7",
+      "manual": "TNSI",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "local_scoped_key": "TNSI-BASES-DE-DONNEES-C7",
+      "local_code": "C7",
+      "official_ref": "T-BDD-03C"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-BASES-DE-DONNEES::C8",
+      "manual": "TNSI",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "local_scoped_key": "TNSI-BASES-DE-DONNEES-C8",
+      "local_code": "C8",
+      "official_ref": "T-BDD-03D"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-BASES-DE-DONNEES::C9",
+      "manual": "TNSI",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "local_scoped_key": "TNSI-BASES-DE-DONNEES-C9",
+      "local_code": "C9",
+      "official_ref": "T-BDD-03E"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-BASES-DE-DONNEES::C10",
+      "manual": "TNSI",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "local_scoped_key": "TNSI-BASES-DE-DONNEES-C10",
+      "local_code": "C10",
+      "official_ref": "T-BDD-03F"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-BASES-DE-DONNEES::C11",
+      "manual": "TNSI",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "local_scoped_key": "TNSI-BASES-DE-DONNEES-C11",
+      "local_code": "C11",
+      "official_ref": "T-BDD-03G"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-BASES-DE-DONNEES::C12",
+      "manual": "TNSI",
+      "chapter": "TNSI-BASES-DE-DONNEES",
+      "local_scoped_key": "TNSI-BASES-DE-DONNEES-C12",
+      "local_code": "C12",
+      "official_ref": "T-BDD-03H"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-HISTOIRE-INFORMATIQUE::C1",
+      "manual": "TNSI",
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "local_scoped_key": "TNSI-HISTOIRE-INFORMATIQUE-C1",
+      "local_code": "C1",
+      "official_ref": "T-HIST-01A"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-HISTOIRE-INFORMATIQUE::C2",
+      "manual": "TNSI",
+      "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
+      "local_scoped_key": "TNSI-HISTOIRE-INFORMATIQUE-C2",
+      "local_code": "C2",
+      "official_ref": "T-HIST-01B"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C1",
+      "manual": "TNSI",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "local_scoped_key": "TNSI-LANGAGES-ET-PROGRAMMATION-C1",
+      "local_code": "C1",
+      "official_ref": "T-LANG-01A"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2",
+      "manual": "TNSI",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "local_scoped_key": "TNSI-LANGAGES-ET-PROGRAMMATION-C2",
+      "local_code": "C2",
+      "official_ref": "T-LANG-01B"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C3",
+      "manual": "TNSI",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "local_scoped_key": "TNSI-LANGAGES-ET-PROGRAMMATION-C3",
+      "local_code": "C3",
+      "official_ref": "T-LANG-01C"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C4",
+      "manual": "TNSI",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "local_scoped_key": "TNSI-LANGAGES-ET-PROGRAMMATION-C4",
+      "local_code": "C4",
+      "official_ref": "T-LANG-02A"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C5",
+      "manual": "TNSI",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "local_scoped_key": "TNSI-LANGAGES-ET-PROGRAMMATION-C5",
+      "local_code": "C5",
+      "official_ref": "T-LANG-02B"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6",
+      "manual": "TNSI",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "local_scoped_key": "TNSI-LANGAGES-ET-PROGRAMMATION-C6",
+      "local_code": "C6",
+      "official_ref": "T-LANG-03A"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7",
+      "manual": "TNSI",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "local_scoped_key": "TNSI-LANGAGES-ET-PROGRAMMATION-C7",
+      "local_code": "C7",
+      "official_ref": "T-LANG-03B"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C8",
+      "manual": "TNSI",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "local_scoped_key": "TNSI-LANGAGES-ET-PROGRAMMATION-C8",
+      "local_code": "C8",
+      "official_ref": "T-LANG-03C"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C9",
+      "manual": "TNSI",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "local_scoped_key": "TNSI-LANGAGES-ET-PROGRAMMATION-C9",
+      "local_code": "C9",
+      "official_ref": "T-LANG-04A"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10",
+      "manual": "TNSI",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "local_scoped_key": "TNSI-LANGAGES-ET-PROGRAMMATION-C10",
+      "local_code": "C10",
+      "official_ref": "T-LANG-04B"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C11",
+      "manual": "TNSI",
+      "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
+      "local_scoped_key": "TNSI-LANGAGES-ET-PROGRAMMATION-C11",
+      "local_code": "C11",
+      "official_ref": "T-LANG-05"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-PROJET::C1",
+      "manual": "TNSI",
+      "chapter": "TNSI-PROJET",
+      "local_scoped_key": "TNSI-PROJET-C1",
+      "local_code": "C1",
+      "official_ref": "TNSI-PROJET-BO-01"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-PROJET::C2",
+      "manual": "TNSI",
+      "chapter": "TNSI-PROJET",
+      "local_scoped_key": "TNSI-PROJET-C2",
+      "local_code": "C2",
+      "official_ref": "TNSI-PROJET-BO-02"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C1",
+      "manual": "TNSI",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "local_scoped_key": "TNSI-STRUCTURES-DONNEES-C1",
+      "local_code": "C1",
+      "official_ref": "T-STRUCT-01A"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C2",
+      "manual": "TNSI",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "local_scoped_key": "TNSI-STRUCTURES-DONNEES-C2",
+      "local_code": "C2",
+      "official_ref": "T-STRUCT-01B"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C3",
+      "manual": "TNSI",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "local_scoped_key": "TNSI-STRUCTURES-DONNEES-C3",
+      "local_code": "C3",
+      "official_ref": "T-STRUCT-01C"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C4",
+      "manual": "TNSI",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "local_scoped_key": "TNSI-STRUCTURES-DONNEES-C4",
+      "local_code": "C4",
+      "official_ref": "T-STRUCT-02A"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C5",
+      "manual": "TNSI",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "local_scoped_key": "TNSI-STRUCTURES-DONNEES-C5",
+      "local_code": "C5",
+      "official_ref": "T-STRUCT-02B"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C6",
+      "manual": "TNSI",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "local_scoped_key": "TNSI-STRUCTURES-DONNEES-C6",
+      "local_code": "C6",
+      "official_ref": "T-STRUCT-03A"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C7",
+      "manual": "TNSI",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "local_scoped_key": "TNSI-STRUCTURES-DONNEES-C7",
+      "local_code": "C7",
+      "official_ref": "T-STRUCT-03B"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C8",
+      "manual": "TNSI",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "local_scoped_key": "TNSI-STRUCTURES-DONNEES-C8",
+      "local_code": "C8",
+      "official_ref": "T-STRUCT-03C"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C9",
+      "manual": "TNSI",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "local_scoped_key": "TNSI-STRUCTURES-DONNEES-C9",
+      "local_code": "C9",
+      "official_ref": "T-STRUCT-04A"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C10",
+      "manual": "TNSI",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "local_scoped_key": "TNSI-STRUCTURES-DONNEES-C10",
+      "local_code": "C10",
+      "official_ref": "T-STRUCT-04B"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C11",
+      "manual": "TNSI",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "local_scoped_key": "TNSI-STRUCTURES-DONNEES-C11",
+      "local_code": "C11",
+      "official_ref": "T-STRUCT-05A"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C12",
+      "manual": "TNSI",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "local_scoped_key": "TNSI-STRUCTURES-DONNEES-C12",
+      "local_code": "C12",
+      "official_ref": "T-STRUCT-05B"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C13",
+      "manual": "TNSI",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "local_scoped_key": "TNSI-STRUCTURES-DONNEES-C13",
+      "local_code": "C13",
+      "official_ref": "T-STRUCT-05C"
+    },
+    {
+      "canonical_uid": "TNSI::TNSI-STRUCTURES-DONNEES::C14",
+      "manual": "TNSI",
+      "chapter": "TNSI-STRUCTURES-DONNEES",
+      "local_scoped_key": "TNSI-STRUCTURES-DONNEES-C14",
+      "local_code": "C14",
+      "official_ref": "T-STRUCT-05D"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-CALCUL-INTEGRAL::C1",
+      "manual": "TSPE",
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "local_scoped_key": "TSPE-CALCUL-INTEGRAL-C1",
+      "local_code": "C1",
+      "official_ref": "TSPE-INTEG-C1"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-CALCUL-INTEGRAL::C2",
+      "manual": "TSPE",
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "local_scoped_key": "TSPE-CALCUL-INTEGRAL-C2",
+      "local_code": "C2",
+      "official_ref": "TSPE-INTEG-C2"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-CALCUL-INTEGRAL::C3",
+      "manual": "TSPE",
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "local_scoped_key": "TSPE-CALCUL-INTEGRAL-C3",
+      "local_code": "C3",
+      "official_ref": "TSPE-INTEG-C3"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-CALCUL-INTEGRAL::C4",
+      "manual": "TSPE",
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "local_scoped_key": "TSPE-CALCUL-INTEGRAL-C4",
+      "local_code": "C4",
+      "official_ref": "TSPE-INTEG-C4"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-CALCUL-INTEGRAL::C5",
+      "manual": "TSPE",
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "local_scoped_key": "TSPE-CALCUL-INTEGRAL-C5",
+      "local_code": "C5",
+      "official_ref": "TSPE-INTEG-C5"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-CALCUL-INTEGRAL::C6",
+      "manual": "TSPE",
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "local_scoped_key": "TSPE-CALCUL-INTEGRAL-C6",
+      "local_code": "C6",
+      "official_ref": "TSPE-INTEG-C6"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-CALCUL-INTEGRAL::C7",
+      "manual": "TSPE",
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "local_scoped_key": "TSPE-CALCUL-INTEGRAL-C7",
+      "local_code": "C7",
+      "official_ref": "TSPE-INTEG-C7"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-CALCUL-INTEGRAL::C8",
+      "manual": "TSPE",
+      "chapter": "TSPE-CALCUL-INTEGRAL",
+      "local_scoped_key": "TSPE-CALCUL-INTEGRAL-C8",
+      "local_code": "C8",
+      "official_ref": "TSPE-INTEG-C8"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-COMBINATOIRE::C1",
+      "manual": "TSPE",
+      "chapter": "TSPE-COMBINATOIRE",
+      "local_scoped_key": "TSPE-COMBINATOIRE-C1",
+      "local_code": "C1",
+      "official_ref": "TSPE-COMBINATOIRE-C1"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-COMBINATOIRE::C2",
+      "manual": "TSPE",
+      "chapter": "TSPE-COMBINATOIRE",
+      "local_scoped_key": "TSPE-COMBINATOIRE-C2",
+      "local_code": "C2",
+      "official_ref": "TSPE-COMBINATOIRE-C2"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-COMBINATOIRE::C3",
+      "manual": "TSPE",
+      "chapter": "TSPE-COMBINATOIRE",
+      "local_scoped_key": "TSPE-COMBINATOIRE-C3",
+      "local_code": "C3",
+      "official_ref": "TSPE-COMBINATOIRE-C3"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-COMBINATOIRE::C4",
+      "manual": "TSPE",
+      "chapter": "TSPE-COMBINATOIRE",
+      "local_scoped_key": "TSPE-COMBINATOIRE-C4",
+      "local_code": "C4",
+      "official_ref": "TSPE-COMBINATOIRE-C4"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-CONTINUITE::C1",
+      "manual": "TSPE",
+      "chapter": "TSPE-CONTINUITE",
+      "local_scoped_key": "TSPE-CONTINUITE-C1",
+      "local_code": "C1",
+      "official_ref": "TSPE-CONTIN-C1"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-CONTINUITE::C2",
+      "manual": "TSPE",
+      "chapter": "TSPE-CONTINUITE",
+      "local_scoped_key": "TSPE-CONTINUITE-C2",
+      "local_code": "C2",
+      "official_ref": "TSPE-CONTIN-C2"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-DERIVATION-CONVEXITE::C1",
+      "manual": "TSPE",
+      "chapter": "TSPE-DERIVATION-CONVEXITE",
+      "local_scoped_key": "TSPE-DERIVATION-CONVEXITE-C1",
+      "local_code": "C1",
+      "official_ref": "TSPE-DERCONV-C1"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-DERIVATION-CONVEXITE::C2",
+      "manual": "TSPE",
+      "chapter": "TSPE-DERIVATION-CONVEXITE",
+      "local_scoped_key": "TSPE-DERIVATION-CONVEXITE-C2",
+      "local_code": "C2",
+      "official_ref": "TSPE-DERCONV-C2"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-DERIVATION-CONVEXITE::C3",
+      "manual": "TSPE",
+      "chapter": "TSPE-DERIVATION-CONVEXITE",
+      "local_scoped_key": "TSPE-DERIVATION-CONVEXITE-C3",
+      "local_code": "C3",
+      "official_ref": "TSPE-DERCONV-C3"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-DERIVATION-CONVEXITE::C4",
+      "manual": "TSPE",
+      "chapter": "TSPE-DERIVATION-CONVEXITE",
+      "local_scoped_key": "TSPE-DERIVATION-CONVEXITE-C4",
+      "local_code": "C4",
+      "official_ref": "TSPE-DERCONV-C4"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-DERIVATION-CONVEXITE::C5",
+      "manual": "TSPE",
+      "chapter": "TSPE-DERIVATION-CONVEXITE",
+      "local_scoped_key": "TSPE-DERIVATION-CONVEXITE-C5",
+      "local_code": "C5",
+      "official_ref": "TSPE-DERCONV-C5"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-DERIVATION-CONVEXITE::C6",
+      "manual": "TSPE",
+      "chapter": "TSPE-DERIVATION-CONVEXITE",
+      "local_scoped_key": "TSPE-DERIVATION-CONVEXITE-C6",
+      "local_code": "C6",
+      "official_ref": "TSPE-DERCONV-C6"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-GEOMETRIE-ESPACE::C1",
+      "manual": "TSPE",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "local_scoped_key": "TSPE-GEOMETRIE-ESPACE-C1",
+      "local_code": "C1",
+      "official_ref": "TSPE-GEOESPACE-C1"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-GEOMETRIE-ESPACE::C2",
+      "manual": "TSPE",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "local_scoped_key": "TSPE-GEOMETRIE-ESPACE-C2",
+      "local_code": "C2",
+      "official_ref": "TSPE-GEOESPACE-C2"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-GEOMETRIE-ESPACE::C3",
+      "manual": "TSPE",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "local_scoped_key": "TSPE-GEOMETRIE-ESPACE-C3",
+      "local_code": "C3",
+      "official_ref": "TSPE-GEOESPACE-C3"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-GEOMETRIE-ESPACE::C4",
+      "manual": "TSPE",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "local_scoped_key": "TSPE-GEOMETRIE-ESPACE-C4",
+      "local_code": "C4",
+      "official_ref": "TSPE-GEOESPACE-C4"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-GEOMETRIE-ESPACE::C5",
+      "manual": "TSPE",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "local_scoped_key": "TSPE-GEOMETRIE-ESPACE-C5",
+      "local_code": "C5",
+      "official_ref": "TSPE-GEOESPACE-C5"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-GEOMETRIE-ESPACE::C6",
+      "manual": "TSPE",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "local_scoped_key": "TSPE-GEOMETRIE-ESPACE-C6",
+      "local_code": "C6",
+      "official_ref": "TSPE-GEOESPACE-C6"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-GEOMETRIE-ESPACE::C7",
+      "manual": "TSPE",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "local_scoped_key": "TSPE-GEOMETRIE-ESPACE-C7",
+      "local_code": "C7",
+      "official_ref": "TSPE-GEOESPACE-C7"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-GEOMETRIE-ESPACE::C8",
+      "manual": "TSPE",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "local_scoped_key": "TSPE-GEOMETRIE-ESPACE-C8",
+      "local_code": "C8",
+      "official_ref": "TSPE-GEOESPACE-C8"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-GEOMETRIE-ESPACE::C9",
+      "manual": "TSPE",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "local_scoped_key": "TSPE-GEOMETRIE-ESPACE-C9",
+      "local_code": "C9",
+      "official_ref": "TSPE-GEOESPACE-C9"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-GEOMETRIE-ESPACE::C10",
+      "manual": "TSPE",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "local_scoped_key": "TSPE-GEOMETRIE-ESPACE-C10",
+      "local_code": "C10",
+      "official_ref": "TSPE-GEOESPACE-C10"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-GEOMETRIE-ESPACE::C11",
+      "manual": "TSPE",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "local_scoped_key": "TSPE-GEOMETRIE-ESPACE-C11",
+      "local_code": "C11",
+      "official_ref": "TSPE-GEOESPACE-C11"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-GEOMETRIE-ESPACE::C12",
+      "manual": "TSPE",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "local_scoped_key": "TSPE-GEOMETRIE-ESPACE-C12",
+      "local_code": "C12",
+      "official_ref": "TSPE-GEOESPACE-C12"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-GEOMETRIE-ESPACE::C13",
+      "manual": "TSPE",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "local_scoped_key": "TSPE-GEOMETRIE-ESPACE-C13",
+      "local_code": "C13",
+      "official_ref": "TSPE-GEOESPACE-C13"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-GEOMETRIE-ESPACE::C14",
+      "manual": "TSPE",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "local_scoped_key": "TSPE-GEOMETRIE-ESPACE-C14",
+      "local_code": "C14",
+      "official_ref": "TSPE-GEOESPACE-C14"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-GEOMETRIE-ESPACE::C15",
+      "manual": "TSPE",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "local_scoped_key": "TSPE-GEOMETRIE-ESPACE-C15",
+      "local_code": "C15",
+      "official_ref": "TSPE-GEOESPACE-C15"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-GEOMETRIE-ESPACE::C16",
+      "manual": "TSPE",
+      "chapter": "TSPE-GEOMETRIE-ESPACE",
+      "local_scoped_key": "TSPE-GEOMETRIE-ESPACE-C16",
+      "local_code": "C16",
+      "official_ref": "TSPE-GEOESPACE-C16"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-LIMITES-FONCTIONS::C1",
+      "manual": "TSPE",
+      "chapter": "TSPE-LIMITES-FONCTIONS",
+      "local_scoped_key": "TSPE-LIMITES-FONCTIONS-C1",
+      "local_code": "C1",
+      "official_ref": "TSPE-LIMFCT-C1"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-LIMITES-FONCTIONS::C2",
+      "manual": "TSPE",
+      "chapter": "TSPE-LIMITES-FONCTIONS",
+      "local_scoped_key": "TSPE-LIMITES-FONCTIONS-C2",
+      "local_code": "C2",
+      "official_ref": "TSPE-LIMFCT-C2"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-LIMITES-FONCTIONS::C3",
+      "manual": "TSPE",
+      "chapter": "TSPE-LIMITES-FONCTIONS",
+      "local_scoped_key": "TSPE-LIMITES-FONCTIONS-C3",
+      "local_code": "C3",
+      "official_ref": "TSPE-LIMFCT-C3"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-LOGARITHME::C1",
+      "manual": "TSPE",
+      "chapter": "TSPE-LOGARITHME",
+      "local_scoped_key": "TSPE-LOGARITHME-C1",
+      "local_code": "C1",
+      "official_ref": "TSPE-LOG-C1"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-LOGARITHME::C2",
+      "manual": "TSPE",
+      "chapter": "TSPE-LOGARITHME",
+      "local_scoped_key": "TSPE-LOGARITHME-C2",
+      "local_code": "C2",
+      "official_ref": "TSPE-LOG-C2"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-LOGARITHME::C3",
+      "manual": "TSPE",
+      "chapter": "TSPE-LOGARITHME",
+      "local_scoped_key": "TSPE-LOGARITHME-C3",
+      "local_code": "C3",
+      "official_ref": "TSPE-LOG-C3"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-LOGARITHME::C4",
+      "manual": "TSPE",
+      "chapter": "TSPE-LOGARITHME",
+      "local_scoped_key": "TSPE-LOGARITHME-C4",
+      "local_code": "C4",
+      "official_ref": "TSPE-LOG-C4"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-PRIMITIVES-EQDIFF::C1",
+      "manual": "TSPE",
+      "chapter": "TSPE-PRIMITIVES-EQDIFF",
+      "local_scoped_key": "TSPE-PRIMITIVES-EQDIFF-C1",
+      "local_code": "C1",
+      "official_ref": "TSPE-PRIMEQ-C1"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-PRIMITIVES-EQDIFF::C2",
+      "manual": "TSPE",
+      "chapter": "TSPE-PRIMITIVES-EQDIFF",
+      "local_scoped_key": "TSPE-PRIMITIVES-EQDIFF-C2",
+      "local_code": "C2",
+      "official_ref": "TSPE-PRIMEQ-C2"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-PRIMITIVES-EQDIFF::C3",
+      "manual": "TSPE",
+      "chapter": "TSPE-PRIMITIVES-EQDIFF",
+      "local_scoped_key": "TSPE-PRIMITIVES-EQDIFF-C3",
+      "local_code": "C3",
+      "official_ref": "TSPE-PRIMEQ-C3"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-PRIMITIVES-EQDIFF::C4",
+      "manual": "TSPE",
+      "chapter": "TSPE-PRIMITIVES-EQDIFF",
+      "local_scoped_key": "TSPE-PRIMITIVES-EQDIFF-C4",
+      "local_code": "C4",
+      "official_ref": "TSPE-PRIMEQ-C4"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-PRIMITIVES-EQDIFF::C5",
+      "manual": "TSPE",
+      "chapter": "TSPE-PRIMITIVES-EQDIFF",
+      "local_scoped_key": "TSPE-PRIMITIVES-EQDIFF-C5",
+      "local_code": "C5",
+      "official_ref": "TSPE-PRIMEQ-C5"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-PROBABILITES::C1",
+      "manual": "TSPE",
+      "chapter": "TSPE-PROBABILITES",
+      "local_scoped_key": "TSPE-PROBABILITES-C1",
+      "local_code": "C1",
+      "official_ref": "TSPE-PROBA-C1"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-PROBABILITES::C2",
+      "manual": "TSPE",
+      "chapter": "TSPE-PROBABILITES",
+      "local_scoped_key": "TSPE-PROBABILITES-C2",
+      "local_code": "C2",
+      "official_ref": "TSPE-PROBA-C2"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-PROBABILITES::C3",
+      "manual": "TSPE",
+      "chapter": "TSPE-PROBABILITES",
+      "local_scoped_key": "TSPE-PROBABILITES-C3",
+      "local_code": "C3",
+      "official_ref": "TSPE-PROBA-C3"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-PROBABILITES::C4",
+      "manual": "TSPE",
+      "chapter": "TSPE-PROBABILITES",
+      "local_scoped_key": "TSPE-PROBABILITES-C4",
+      "local_code": "C4",
+      "official_ref": "TSPE-PROBA-C4"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-PROBABILITES::C5",
+      "manual": "TSPE",
+      "chapter": "TSPE-PROBABILITES",
+      "local_scoped_key": "TSPE-PROBABILITES-C5",
+      "local_code": "C5",
+      "official_ref": "TSPE-PROBA-C5"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-PROBABILITES::C6",
+      "manual": "TSPE",
+      "chapter": "TSPE-PROBABILITES",
+      "local_scoped_key": "TSPE-PROBABILITES-C6",
+      "local_code": "C6",
+      "official_ref": "TSPE-PROBA-C6"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-PROBABILITES::C7",
+      "manual": "TSPE",
+      "chapter": "TSPE-PROBABILITES",
+      "local_scoped_key": "TSPE-PROBABILITES-C7",
+      "local_code": "C7",
+      "official_ref": "TSPE-PROBA-C7"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-PROBABILITES::C8",
+      "manual": "TSPE",
+      "chapter": "TSPE-PROBABILITES",
+      "local_scoped_key": "TSPE-PROBABILITES-C8",
+      "local_code": "C8",
+      "official_ref": "TSPE-PROBA-C8"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-PROBABILITES::C9",
+      "manual": "TSPE",
+      "chapter": "TSPE-PROBABILITES",
+      "local_scoped_key": "TSPE-PROBABILITES-C9",
+      "local_code": "C9",
+      "official_ref": "TSPE-PROBA-C9"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-PROBABILITES::C10",
+      "manual": "TSPE",
+      "chapter": "TSPE-PROBABILITES",
+      "local_scoped_key": "TSPE-PROBABILITES-C10",
+      "local_code": "C10",
+      "official_ref": "TSPE-CONCLGN-C1"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-SUITES-LIMITES::C1",
+      "manual": "TSPE",
+      "chapter": "TSPE-SUITES-LIMITES",
+      "local_scoped_key": "TSPE-SUITES-LIMITES-C1",
+      "local_code": "C1",
+      "official_ref": "TSPE-SUITLIM-C1"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-SUITES-LIMITES::C2",
+      "manual": "TSPE",
+      "chapter": "TSPE-SUITES-LIMITES",
+      "local_scoped_key": "TSPE-SUITES-LIMITES-C2",
+      "local_code": "C2",
+      "official_ref": "TSPE-SUITLIM-C2"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-SUITES-LIMITES::C3",
+      "manual": "TSPE",
+      "chapter": "TSPE-SUITES-LIMITES",
+      "local_scoped_key": "TSPE-SUITES-LIMITES-C3",
+      "local_code": "C3",
+      "official_ref": "TSPE-SUITLIM-C3"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-SUITES-LIMITES::C4",
+      "manual": "TSPE",
+      "chapter": "TSPE-SUITES-LIMITES",
+      "local_scoped_key": "TSPE-SUITES-LIMITES-C4",
+      "local_code": "C4",
+      "official_ref": "TSPE-SUITLIM-C4"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-SUITES-LIMITES::C5",
+      "manual": "TSPE",
+      "chapter": "TSPE-SUITES-LIMITES",
+      "local_scoped_key": "TSPE-SUITES-LIMITES-C5",
+      "local_code": "C5",
+      "official_ref": "TSPE-SUITLIM-C5"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-SUITES-LIMITES::C6",
+      "manual": "TSPE",
+      "chapter": "TSPE-SUITES-LIMITES",
+      "local_scoped_key": "TSPE-SUITES-LIMITES-C6",
+      "local_code": "C6",
+      "official_ref": "TSPE-SUITLIM-C6"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-SUITES-LIMITES::C7",
+      "manual": "TSPE",
+      "chapter": "TSPE-SUITES-LIMITES",
+      "local_scoped_key": "TSPE-SUITES-LIMITES-C7",
+      "local_code": "C7",
+      "official_ref": "TSPE-SUITLIM-C7"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-TRIGONOMETRIE::C1",
+      "manual": "TSPE",
+      "chapter": "TSPE-TRIGONOMETRIE",
+      "local_scoped_key": "TSPE-TRIGONOMETRIE-C1",
+      "local_code": "C1",
+      "official_ref": "TSPE-TRIGO-C1"
+    },
+    {
+      "canonical_uid": "TSPE::TSPE-TRIGONOMETRIE::C2",
+      "manual": "TSPE",
+      "chapter": "TSPE-TRIGONOMETRIE",
+      "local_scoped_key": "TSPE-TRIGONOMETRIE-C2",
+      "local_code": "C2",
+      "official_ref": "TSPE-TRIGO-C2"
+    }
+  ]
+}

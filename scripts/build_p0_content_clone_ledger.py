@@ -26,8 +26,10 @@ from __future__ import annotations
 import argparse
 import collections
 import hashlib
+import importlib.util
 import json
 import re
+import sys
 import unicodedata
 from pathlib import Path
 from typing import Any
@@ -110,13 +112,44 @@ def read_meta(text: str) -> dict[str, Any]:
         return {}
 
 
+_RESOLVER = None
+
+
+def _resolver():
+    """Table d'identite des capacites, chargee une fois."""
+
+    global _RESOLVER
+    if _RESOLVER is None:
+        spec = importlib.util.spec_from_file_location(
+            "capacity_identity", ROOT / "scripts/capacity_identity.py"
+        )
+        assert spec and spec.loader
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = module
+        spec.loader.exec_module(module)
+        _RESOLVER = (module, module.CapacityIdentityResolver.from_corpora())
+    return _RESOLVER
+
+
 def declared_capacities(meta: dict[str, Any]) -> tuple[str, ...]:
+    """Codes locaux credites, resolus dans la portee du chapitre.
+
+    Cette fonction coupait autrefois la chaine a son dernier tiret :
+    `TSPE-CONCLGN-C1` devenait `C1`, et le credit d'une capacite passait a sa
+    voisine. La resolution est desormais une egalite exacte, portee par le
+    contrat du chapitre.
+    """
+
     values = meta.get("capacites_codes") or meta.get("capacites") or []
-    codes = set()
-    for value in values:
-        code = str(value).strip()
-        codes.add(code.rsplit("-", 1)[-1] if "-" in code else code)
-    return tuple(sorted(codes))
+    identity, resolver = _resolver()
+    chapter = str(meta.get("chapitre") or "").strip()
+    raws = [identity.normalise(value) for value in values]
+    raws = [value for value in raws if value]
+    if chapter in resolver.chapters:
+        return tuple(sorted(set(resolver.resolve_codes(chapter, raws))))
+    # Hors contrat connu, la chaine est conservee TELLE QUELLE : la reduire a
+    # un jeton reintroduirait exactement le defaut repare ici.
+    return tuple(sorted(set(raws)))
 
 
 def body_attested_capacities(body: str) -> tuple[str, ...]:
@@ -168,6 +201,144 @@ def disposition_of(members: list[dict[str, Any]]) -> str:
     return "REDUNDANT_SAME_CAPACITY"
 
 
+CANONICAL_STATUSES = (
+    "SEMANTIC_CANONICAL",
+    "LEGITIMATE_SHARED_CANONICAL",
+    "AMBIGUOUS",
+    "UNKNOWN",
+)
+
+
+def select_canonical(group: dict[str, Any]) -> dict[str, Any]:
+    """Le proprietaire semantique d'un corps, etabli par PREUVE.
+
+    Cette selection retenait autrefois `members[0]` -- le premier chemin par
+    ordre alphabetique -- quand aucun corps ne s'attestait lui-meme. Le
+    resultat etait alors juste par chance : dans le groupe des cours 1NSI, le
+    fichier authentique se trouvait s'appeler `1NSI-ADGK-...`, donc trier
+    avant ses copies `1NSI-ALGO-PARCOURS-TRIS-...`. Renommer un fichier
+    aurait deplace l'authenticite. L'identite canonique ne peut pas dependre
+    de l'ordre du systeme de fichiers.
+
+    Les preuves sont examinees dans cet ordre, et chacune ne conclut que si
+    elle designe un proprietaire UNIQUE :
+
+    `BODY_SELF_ATTESTATION`
+        Le corps nomme lui-meme la capacite qu'un seul de ses porteurs
+        declare. C'est la preuve la plus forte : le contenu temoigne.
+
+    `CHAPTER_SELF_DUPLICATION`
+        Un chapitre qui detient le meme corps sous plusieurs capacites
+        distinctes le represente faussement, quelle que soit son anciennete.
+        Si un seul autre chapitre le detient sous une capacite unique, c'est
+        lui le proprietaire.
+
+    `IDENTICAL_CAPACITY_CREDIT`
+        Tous les porteurs creditent la meme capacite. Le choix d'un canonique
+        n'a alors aucun effet sur le credit : la duplication est physique, pas
+        semantique.
+
+    `NO_CAPACITY_AT_STAKE`
+        Le corps est du gabarit sans contenu pedagogique.
+
+    Sans preuve concluante, le statut est `AMBIGUOUS` et le groupe part en
+    revue humaine. On ne tranche pas.
+    """
+
+    members = group["members"]
+    paths = sorted(row["path"] for row in members)
+
+    if group["disposition"] == "BOILERPLATE_ONLY":
+        return {
+            "status": "LEGITIMATE_SHARED_CANONICAL",
+            "evidence_rule": "NO_CAPACITY_AT_STAKE",
+            "canonical_paths": paths,
+            "false_copy_paths": [],
+            "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
+        }
+
+    # 1. Le corps temoigne pour lui-meme.
+    aligned = sorted(
+        row["path"]
+        for row in members
+        if row["body_attested_capacity"]
+        and set(row["declared_capacity"]) & set(row["body_attested_capacity"])
+    )
+    if aligned:
+        attested = {
+            tuple(sorted(set(row["declared_capacity"]) & set(row["body_attested_capacity"])))
+            for row in members
+            if row["path"] in set(aligned)
+        }
+        if len(attested) == 1:
+            return {
+                "status": "SEMANTIC_CANONICAL",
+                "evidence_rule": "BODY_SELF_ATTESTATION",
+                "canonical_paths": aligned,
+                "false_copy_paths": [p for p in paths if p not in set(aligned)],
+                "reason": (
+                    "le corps nomme la capacite que ces porteurs declarent ; "
+                    "les autres la revendiquent sans la servir"
+                ),
+            }
+        return {
+            "status": "AMBIGUOUS",
+            "evidence_rule": "BODY_SELF_ATTESTATION",
+            "canonical_paths": [],
+            "false_copy_paths": [],
+            "reason": (
+                "plusieurs porteurs sont attestes par le corps pour des "
+                "capacites differentes : le corps ne designe pas un proprietaire"
+            ),
+        }
+
+    # 2. Un chapitre qui se duplique lui-meme represente faussement.
+    by_chapter: dict[str, set[str]] = collections.defaultdict(set)
+    for row in members:
+        by_chapter[row["chapter"]].update(row["declared_capacity"])
+    duplicating = {c for c, caps in by_chapter.items() if len(caps) > 1}
+    single = sorted(set(by_chapter) - duplicating)
+    if duplicating and len(single) == 1:
+        owner = single[0]
+        canonical = sorted(row["path"] for row in members if row["chapter"] == owner)
+        return {
+            "status": "SEMANTIC_CANONICAL",
+            "evidence_rule": "CHAPTER_SELF_DUPLICATION",
+            "canonical_paths": canonical,
+            "false_copy_paths": [p for p in paths if p not in set(canonical)],
+            "reason": (
+                f"{sorted(duplicating)} detiennent ce corps sous plusieurs "
+                f"capacites distinctes et le representent faussement ; "
+                f"{owner} le detient sous une capacite unique"
+            ),
+        }
+
+    # 3. Tous creditent la meme capacite : le canonique est sans effet.
+    if len({tuple(row["declared_capacity"]) for row in members}) == 1:
+        return {
+            "status": "LEGITIMATE_SHARED_CANONICAL",
+            "evidence_rule": "IDENTICAL_CAPACITY_CREDIT",
+            "canonical_paths": paths,
+            "false_copy_paths": [],
+            "reason": (
+                "tous les porteurs creditent la meme capacite : la duplication "
+                "est physique, le credit n'est pas usurpe"
+            ),
+        }
+
+    return {
+        "status": "AMBIGUOUS",
+        "evidence_rule": "NONE_CONCLUSIVE",
+        "canonical_paths": [],
+        "false_copy_paths": [],
+        "reason": (
+            "aucune preuve ne designe le proprietaire : le corps ne s'atteste "
+            "pas, aucun chapitre ne se duplique, et les capacites declarees "
+            "different. Choisir ici reviendrait a tirer au sort"
+        ),
+    }
+
+
 def build_ledger() -> dict[str, Any]:
     records = scan()
     by_body: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
@@ -207,18 +378,22 @@ def build_ledger() -> dict[str, Any]:
             }
         )
 
-    invalid_credit = set()
+    invalid_credit: set[str] = set()
+    indeterminate_credit: set[str] = set()
     for group in groups:
-        if group["disposition"] in {"BOILERPLATE_ONLY", "REDUNDANT_SAME_CAPACITY"}:
+        selection = select_canonical(group)
+        group["canonical_selection"] = selection
+        if selection["status"] == "LEGITIMATE_SHARED_CANONICAL":
             continue
-        # Un corps clone credite UNE capacite, pas n. Le membre dont le corps
-        # atteste sa propre capacite garde le credit ; a defaut d'auto-mention
-        # -- un enonce ne se nomme pas toujours -- le premier par chemin fait
-        # foi. Ne rien garder invaliderait l'original avec ses copies et
-        # fabriquerait des lacunes : le chapitre paraitrait depourvu d'un
-        # contenu qu'il possede reellement.
-        aligned = group["body_aligned_member_paths"]
-        keep = {aligned[0] if aligned else group["members"][0]["path"]}
+        if selection["status"] == "AMBIGUOUS":
+            # Aucune source authentique n'est demontrable. Choisir malgre tout
+            # rendrait le resultat dependant de l'ordre des chemins ; tout
+            # invalider fabriquerait des lacunes pour un contenu present.
+            # Le credit est donc INDETERMINE, ce qui n'est ni un credit ni une
+            # lacune, et le groupe part en revue.
+            indeterminate_credit.update(row["path"] for row in group["members"])
+            continue
+        keep = set(selection["canonical_paths"])
         for row in group["members"]:
             if row["path"] not in keep:
                 invalid_credit.add(row["path"])
@@ -228,6 +403,11 @@ def build_ledger() -> dict[str, Any]:
         )
         if declared and attested and not (declared & attested):
             invalid_credit.add(row["path"])
+    # Un objet dementi par son PROPRE corps est invalide, pas indetermine :
+    # la contradiction est une preuve, et elle est plus forte que l'absence
+    # de proprietaire demontrable dans son groupe. Les deux ensembles doivent
+    # rester disjoints, sinon le meme objet serait compte deux fois.
+    indeterminate_credit -= invalid_credit
 
     per_manual: dict[str, collections.Counter] = collections.defaultdict(
         collections.Counter
@@ -274,6 +454,13 @@ def build_ledger() -> dict[str, Any]:
             "clone_groups": len(groups),
             "excess_objects": sum(g["excess_object_count"] for g in groups),
             "objects_on_invalid_credit": len(invalid_credit),
+            "objects_with_indeterminate_credit": len(indeterminate_credit),
+            "ambiguous_canonical_groups": sum(
+                1 for g in groups if g["canonical_selection"]["status"] == "AMBIGUOUS"
+            ),
+            "unknown_canonical_groups": sum(
+                1 for g in groups if g["canonical_selection"]["status"] == "UNKNOWN"
+            ),
         },
         "dispositions": {
             name: {"groups": dispositions[name], "excess_objects": excess[name]}
@@ -287,7 +474,18 @@ def build_ledger() -> dict[str, Any]:
                 per_chapter.items(), key=lambda kv: (-kv[1]["TOTAL"], kv[0])
             )
         },
+        "canonical_selection_rule": (
+            "le proprietaire semantique est etabli par preuve ; l'ordre des "
+            "chemins n'intervient jamais"
+        ),
+        "canonical_selection_counts": {
+            status: sum(
+                1 for g in groups if g["canonical_selection"]["status"] == status
+            )
+            for status in CANONICAL_STATUSES
+        },
         "objects_on_invalid_credit": sorted(invalid_credit),
+        "objects_with_indeterminate_credit": sorted(indeterminate_credit),
         "groups": groups,
     }
 
