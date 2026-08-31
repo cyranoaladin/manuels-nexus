@@ -15,6 +15,8 @@ from itertools import combinations
 import json
 import os
 from pathlib import Path
+
+import yaml
 import subprocess
 import tempfile
 from typing import Any, Mapping
@@ -282,6 +284,41 @@ def _declared_separate_debt(root: Path) -> dict[str, set[str]]:
                 )
         declared[name] = fingerprints
     return declared
+
+
+def _superseded_by_rewrite(root: Path) -> set[str]:
+    """Empreintes qu'une REECRITURE a fait disparaitre, et rien d'autre.
+
+    Une migration d'identite ne transporte une qualification qu'a travers une
+    transformation qui preserve l'identite. Quand l'objet est reecrit, la
+    migration est declaree `superseded_by_rewrite` : son empreinte quitte
+    l'ensemble actif, et l'inventaire n'accepte cette sortie que si l'objet
+    est simultanement declare comme dette de revue ouverte et bloquante.
+
+    Ces empreintes ne sont donc ni resolues ni qualifiees : elles ont ete
+    remplacees par une dette, et c'est cette dette qui figure dans les
+    registres declares.
+    """
+
+    path = root / "audit/ANOMALY_IDENTITY_MIGRATIONS.yaml"
+    if not path.is_file():
+        return set()
+    payload = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    migrations = payload.get("migrations")
+    if not isinstance(migrations, Mapping):
+        return set()
+    superseded: set[str] = set()
+    for fingerprint, migration in migrations.items():
+        if not isinstance(migration, Mapping):
+            continue
+        if migration.get("superseded_by_rewrite") is not True:
+            continue
+        if not str(migration.get("superseded_declared_in", "")).strip():
+            raise ValueError(
+                f"supersession sans registre declare: {fingerprint}"
+            )
+        superseded.add(str(fingerprint))
+    return superseded
 
 
 def _validate_frozen_inputs(root: Path) -> tuple[Path, Path]:
@@ -633,6 +670,12 @@ def build_reports(
     except (KeyError, TypeError) as exc:
         raise ValueError("algèbre initiale incomplète") from exc
     current_active = set(str(value) for value in qualifications)
+    # Une empreinte que la reecriture a fait disparaitre ne peut plus figurer
+    # dans la partition courante : son objet existe toujours, mais sous une
+    # identite neuve et non qualifiee, portee par un registre de dette.
+    superseded = _superseded_by_rewrite(root)
+    orphaned = superseded - current_active
+    transition_new = transition_new - orphaned
     current_partition = (
         unchanged
         | transition_new
