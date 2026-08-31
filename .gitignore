@@ -3,3 +3,9 @@ __pycache__/
 .claude/settings.local.json
 .antigravity.config.json
 
+# Secrets locaux. Une cle d'API deposee a la racine ne doit jamais pouvoir
+# etre mise en scene par un `git add -A`. L'exemple, lui, reste suivi : il
+# documente les variables attendues sans jamais porter de valeur.
+.env
+.env.*
+!.env.example
