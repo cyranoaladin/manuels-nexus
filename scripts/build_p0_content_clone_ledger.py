@@ -314,7 +314,18 @@ def select_canonical(group: dict[str, Any]) -> dict[str, Any]:
         }
 
     # 3. Tous creditent la meme capacite : le canonique est sans effet.
-    if len({tuple(row["declared_capacity"]) for row in members}) == 1:
+    #
+    # La comparaison porte sur l'identite PLEINEMENT QUALIFIEE, pas sur le
+    # code local. `C1` de TSPE-DERIVATION-CONVEXITE et `C1` de
+    # 1NSI-ALGO-PARCOURS-TRIS ne sont pas la meme capacite -- c'est le
+    # principe meme du resolveur, et le comparer sur le code nu le violait :
+    # une methode de mathematiques logee dans un chapitre de NSI etait
+    # blanchie comme « duplication physique sans usurpation ».
+    identities = {
+        (row["manual"], row["chapter"], tuple(row["declared_capacity"]))
+        for row in members
+    }
+    if len(identities) == 1:
         return {
             "status": "LEGITIMATE_SHARED_CANONICAL",
             "evidence_rule": "IDENTICAL_CAPACITY_CREDIT",

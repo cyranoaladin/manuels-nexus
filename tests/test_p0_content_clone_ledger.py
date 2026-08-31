@@ -362,3 +362,60 @@ def producer_statuses():
         "AMBIGUOUS",
         "UNKNOWN",
     )
+
+
+def test_identical_capacity_never_clears_a_cross_chapter_group(producer) -> None:
+    """`C1` d'un chapitre n'est pas `C1` d'un autre.
+
+    La regle « tous creditent la meme capacite, donc la duplication est
+    physique » comparait les codes LOCAUX. Elle blanchissait ainsi une fiche
+    methode de mathematiques de Terminale logee dans un chapitre de NSI de
+    Premiere, au motif que les deux portaient un `C1` -- alors que ces deux
+    `C1` designent des capacites sans aucun rapport.
+
+    C'etait la meme erreur d'identite que le resolveur repare, commise dans
+    le code qui devait s'en garder.
+    """
+
+    maths = _member(
+        "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/methodes/m.tex",
+        "TSPE-DERIVATION-CONVEXITE",
+        ["C1"],
+        manual="TSPE",
+    )
+    nsi = _member(
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/methodes/m.tex",
+        "1NSI-ALGO-PARCOURS-TRIS",
+        ["C1"],
+        manual="1NSI",
+    )
+
+    selection = producer.select_canonical(
+        _group([maths, nsi], "CROSS_MANUAL_CONTAMINATION")
+    )
+    assert selection["status"] == "AMBIGUOUS", (
+        "deux capacites homonymes de manuels differents ne sont pas la meme "
+        "capacite : le groupe ne peut pas etre blanchi"
+    )
+    assert selection["evidence_rule"] != "IDENTICAL_CAPACITY_CREDIT"
+
+    # A l'interieur d'un meme chapitre, la regle reste valide.
+    same = [
+        _member("NSI/chapitres/CH/exercices/a.tex", "CH", ["C1"]),
+        _member("NSI/chapitres/CH/exercices/b.tex", "CH", ["C1"]),
+    ]
+    within = producer.select_canonical(_group(same, "REDUNDANT_SAME_CAPACITY"))
+    assert within["status"] == "LEGITIMATE_SHARED_CANONICAL"
+    assert within["evidence_rule"] == "IDENTICAL_CAPACITY_CREDIT"
+
+
+def test_no_cross_chapter_group_is_cleared_as_identical_capacity(ledger: dict) -> None:
+    """Le controle sur le corpus reel."""
+
+    for group in ledger["groups"]:
+        if group["canonical_selection"]["evidence_rule"] != "IDENTICAL_CAPACITY_CREDIT":
+            continue
+        chapters = {row["chapter"] for row in group["members"]}
+        assert len(chapters) == 1, (
+            f"{group['clone_group_id']} blanchi alors qu'il traverse {chapters}"
+        )

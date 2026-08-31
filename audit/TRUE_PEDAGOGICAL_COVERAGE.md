@@ -7,7 +7,7 @@ seize capacités alors qu'une seule, `C7`, était traitée.
 
 - capacités contractuelles : `320`
 - cellules (capacité × rôle) : `1600`
-- cellules pourvues : `958`
+- cellules pourvues : `957`
 - **unités d'écriture requises** : `324`
 
 | Manuel | cours | methodes | exercices | corriges | remediation | Total |
