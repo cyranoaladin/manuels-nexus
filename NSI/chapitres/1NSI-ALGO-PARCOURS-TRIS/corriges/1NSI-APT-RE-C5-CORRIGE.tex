@@ -1,5 +1,33 @@
 % META: {"id": "1NSI-APT-RE-C5-CORRIGE", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige", "exercice_ref": "1NSI-APT-RE-C5", "capacites": ["P-ALGO-02B"], "status": "needs_review"}
 
+% BEGIN-VERIFY
+% def tri_selection_bugue(tableau):
+%     tableau = tableau[:]
+%     n = len(tableau)
+%     for i in range(n - 1):
+%         for j in range(i + 1, n):
+%             indice_min = i
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%     return tableau
+% assert tri_selection_bugue([9, 1, 5, 3, 7]) == [7, 1, 5, 3, 9]
+% assert tri_selection_bugue([9, 1, 5, 3, 7]) != sorted([9, 1, 5, 3, 7])
+% def tri_selection(tableau):
+%     tableau = tableau[:]
+%     n = len(tableau)
+%     for i in range(n - 1):
+%         indice_min = i
+%         for j in range(i + 1, n):
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%     return tableau
+% assert tri_selection([9, 1, 5, 3, 7]) == [1, 3, 5, 7, 9]
+% END-VERIFY
+
+
+
 \begin{corrige}{1NSI-APT-RE-C5-EX1}
 \textbf{1.} \lstinline{tri_selection_bugue([9, 1, 5, 3, 7])} renvoie
 \lstinline{[7, 1, 5, 3, 9]} : le tableau n'est \textbf{pas} correctement trié (la version

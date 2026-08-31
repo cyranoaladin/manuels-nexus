@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-AGT-EVAL-B-corrige", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-AGT-EVAL-B", "capacites": ["P-ALGO-01A", "P-ALGO-01B", "P-ALGO-02B", "P-ALGO-02D"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% META: {"id": "1NSI-AGT-EVAL-B-corrige", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-AGT-EVAL-B", "capacites": ["P-ALGO-01A", "P-ALGO-01B", "P-ALGO-02A", "P-ALGO-02B", "P-ALGO-02C", "P-ALGO-02D"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % def recherche_occurrence(tableau, valeur):
 %     for i in range(len(tableau)):
@@ -32,7 +32,10 @@
 \begin{corrige}{1NSI-AGT-EVAL-B-EX1}
 \textbf{1.} La valeur $6$ se trouve à l'indice $2$.
 
-\textbf{2.} Le maximum est $40$.
+\textbf{2.} Le maximum est $40$. L'accumulateur ne peut pas être initialisé à $0$ : sur
+un tableau dont toutes les valeurs seraient négatives, aucune ne dépasserait $0$, et la
+fonction renverrait $0$ — une valeur qui n'appartient pas au tableau. L'initialisation doit
+donc venir du tableau lui-même, avec \lstinline{plus_grand = tableau[0]}.
 
 \textbf{3.} $\dfrac{17+40+6+25+12}{5}=\dfrac{100}{5}=20$.
 \end{corrige}
@@ -45,10 +48,50 @@
   \item $i=2$ : minimum de \lstinline{[7,9]} à l'indice $2$ (valeur $7$, déjà en place). Après échange (avec elle-même) : \lstinline{[1, 4, 7, 9]}.
 \end{itemize}
 
-\textbf{2.} Après $i=0$ : \lstinline{[1]} trié, $1\leqslant4$ (min du reste). Après $i=1$ :
+\textbf{2.} Les deux clauses : \emph{(a) \lstinline{tableau[0:i]} est trié} et
+\emph{(b) chacun de ses éléments est inférieur ou égal à chacun des éléments restants.}
+Vérification — après $i=0$ : \lstinline{[1]} trié, $1\leqslant4$ (min du reste). Après $i=1$ :
 \lstinline{[1,4]} trié, $4\leqslant7$. Après $i=2$ : \lstinline{[1,4,7]} trié,
 $7\leqslant9$. L'invariant est vérifié à chaque étape.
 
 \textbf{3.} Le coût dans le pire cas est \textbf{quadratique}, $O(n^2)$ (et c'est aussi
 le cas dans le \textbf{meilleur} cas pour ce tri, contrairement au tri par insertion).
+\end{corrige}
+
+\begin{corrige}{1NSI-AGT-EVAL-B-EX3}
+
+\textbf{1.} Les deux lignes manquantes :
+\begin{python}
+def tri_insertion(tableau):
+    tableau = tableau[:]
+    for i in range(1, len(tableau)):
+        valeur = tableau[i]               # (a)
+        j = i - 1
+        while j >= 0 and tableau[j] > valeur:
+            tableau[j + 1] = tableau[j]
+            j = j - 1
+        tableau[j + 1] = valeur           # (b)
+    return tableau
+\end{python}
+La ligne (a) est indispensable : la case $i$ est précisément celle que le premier décalage
+va écraser. Sans sauvegarde, la ligne (b) relirait une valeur déjà remplacée, ce qui
+dupliquerait un élément et en perdrait un autre. En (b), c'est bien $j+1$ et non $j$ :
+après la boucle, $j$ désigne la case située \textbf{avant} le trou.
+
+\textbf{2.} Invariant : \emph{au début de chaque itération $i$, le sous-tableau
+\lstinline{tableau[0:i]} contient les $i$ premiers éléments d'origine, rangés en ordre
+croissant.} La zone doit être bornée : pendant l'exécution, le tableau entier n'est pas
+trié.
+
+\textbf{3.} Il lui manque la clause \emph{« tout élément placé est inférieur ou égal à
+tout élément restant »}. Sur le tableau de l'exercice 2, \lstinline{[7, 1, 4, 9]}, le tri
+par insertion a au début du tour $i=1$ la zone \lstinline{[7]} et le reste
+\lstinline{[1, 4, 9]} : le $1$ restant est plus petit que le $7$ déjà placé.
+
+Conséquence : un élément déjà rangé peut devoir être \textbf{déplacé} plus tard, ce que le
+tri par sélection ne fait jamais. C'est pourquoi le coût du tri par insertion dépend des
+données — de $0$ décalage sur un tableau déjà trié à un maximum sur un tableau inversé —
+alors que le tri par sélection effectue le même nombre de comparaisons quelles que soient
+les valeurs.
+
 \end{corrige}

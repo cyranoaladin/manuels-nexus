@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-AGT-EVAL-A-corrige", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-AGT-EVAL-A", "capacites": ["P-ALGO-01A", "P-ALGO-01B", "P-ALGO-02A", "P-ALGO-02C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% META: {"id": "1NSI-AGT-EVAL-A-corrige", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-AGT-EVAL-A", "capacites": ["P-ALGO-01A", "P-ALGO-01B", "P-ALGO-02A", "P-ALGO-02B", "P-ALGO-02C", "P-ALGO-02D"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % def recherche_occurrence(tableau, valeur):
 %     for i in range(len(tableau)):
@@ -32,7 +32,10 @@
 \begin{corrige}{1NSI-AGT-EVAL-A-EX1}
 \textbf{1.} La valeur $30$ se trouve à l'indice $3$.
 
-\textbf{2.} Le maximum est $30$.
+\textbf{2.} Le maximum est $30$. L'accumulateur ne peut pas être initialisé à $0$ : sur
+un tableau dont toutes les valeurs seraient négatives, aucune ne dépasserait $0$, et la
+fonction renverrait $0$ — une valeur qui n'appartient pas au tableau. L'initialisation doit
+donc venir du tableau lui-même, avec \lstinline{plus_grand = tableau[0]}.
 
 \textbf{3.} $\dfrac{22+15+8+30+11}{5}=\dfrac{86}{5}=17{,}2$.
 \end{corrige}
@@ -45,8 +48,45 @@
   \item Après $i=3$ (insertion de $4$) : \lstinline{[2, 4, 6, 9]}
 \end{itemize}
 
-\textbf{2.} Après $i=1$ : \lstinline{[2, 9]} trié. Après $i=2$ : \lstinline{[2, 6, 9]}
-trié. Après $i=3$ : \lstinline{[2, 4, 6, 9]} trié. L'invariant est vérifié à chaque étape.
+\textbf{2.} Invariant : \emph{au début de chaque itération $i$, le sous-tableau
+\lstinline{tableau[0:i]} contient les $i$ premiers éléments d'origine, rangés en ordre
+croissant.} Borner la zone est indispensable : pendant l'exécution le tableau entier n'est
+pas trié. Vérification — après $i=1$ : \lstinline{[2, 9]} trié ; après $i=2$ :
+\lstinline{[2, 6, 9]} trié ; après $i=3$ : \lstinline{[2, 4, 6, 9]} trié.
 
 \textbf{3.} Le coût dans le pire cas est \textbf{quadratique}, $O(n^2)$.
+\end{corrige}
+
+\begin{corrige}{1NSI-AGT-EVAL-A-EX3}
+
+\textbf{1.} Les deux lignes manquantes :
+\begin{python}
+def tri_selection(tableau):
+    tableau = tableau[:]
+    n = len(tableau)
+    for i in range(n - 1):
+        indice_min = i                    # (a)
+        for j in range(i + 1, n):
+            if tableau[j] < tableau[indice_min]:
+                indice_min = j            # (b)
+        tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+    return tableau
+\end{python}
+La ligne (a) doit rester \textbf{avant} la boucle sur $j$ : placée à l'intérieur, elle
+réinitialiserait le candidat à chaque tour et l'algorithme ne retiendrait plus le minimum
+global de la zone.
+
+\textbf{2.} L'invariant du tri par sélection, au début de l'itération $i$ :
+\begin{itemize}
+  \item (a) \lstinline{tableau[0:i]} est trié ;
+  \item (b) chacun de ses éléments est inférieur ou égal à chacun des éléments de
+    \lstinline{tableau[i:n]}.
+\end{itemize}
+
+\textbf{3.} C'est la clause \textbf{(b)} qui est fausse pour le tri par insertion. Sur le
+tableau de l'exercice 2, au début du tour $i=3$, la zone triée est \lstinline{[2, 6, 9]} et
+il reste \lstinline{[4]} : on aurait besoin de $9 \leqslant 4$, ce qui est faux. Le $4$ devra
+d'ailleurs traverser une partie de la zone déjà triée — exactement ce que la clause (b)
+interdit dans le tri par sélection, où un élément placé est définitif.
+
 \end{corrige}

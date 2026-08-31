@@ -1,19 +1,56 @@
-% META: {"id": "1NSI-AGT-EVAL-B", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "evaluation", "capacites": ["P-ALGO-01A", "P-ALGO-01B", "P-ALGO-02B", "P-ALGO-02D"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
+% META: {"id": "1NSI-AGT-EVAL-B", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "evaluation", "capacites": ["P-ALGO-01A", "P-ALGO-01B", "P-ALGO-02A", "P-ALGO-02B", "P-ALGO-02C", "P-ALGO-02D"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "bareme_total": 20, "status": "generated"}
 \section*{Évaluation B --- Parcours et tris}
 \textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
 
-\baremeIndicatif{Ex. 1 : 10 pts (recherche, extremum, moyenne) ; Ex. 2 : 10 pts (tri par sélection, invariant)}
+\baremeIndicatif{Ex. 1 : 6 pts (recherche, extremum, moyenne) ; Ex. 2 : 7 pts (tri par sélection, invariant) ; Ex. 3 : 7 pts (tri par insertion, invariant)}
 
 \bigskip
 
-\textbf{Exercice 1} --- \textit{Parcours séquentiel} \hfill (10 points)
+\textbf{Exercice 1} --- \textit{Parcours séquentiel} \hfill (6 points)
 
 On donne le tableau \lstinline{[17, 40, 6, 25, 12]}.
 
 \begin{enumerate}
-  \item (3 pts) À quel indice se trouve la valeur $6$ ? Utiliser \lstinline{recherche_occurrence} du cours.
-  \item (3 pts) Calculer le maximum de ce tableau avec \lstinline{maximum}.
-  \item (4 pts) Calculer la moyenne de ce tableau avec \lstinline{moyenne}. Détailler le calcul à la main.
+  \item (2 pts) À quel indice se trouve la valeur $6$ ? Utiliser \lstinline{recherche_occurrence} du cours.
+  \item (2 pts) Calculer le maximum de ce tableau avec \lstinline{maximum}. Expliquer pourquoi l'accumulateur ne peut pas être initialisé à $0$ si le tableau peut contenir des valeurs négatives.
+  \item (2 pts) Calculer la moyenne de ce tableau avec \lstinline{moyenne}. Détailler le calcul à la main.
+\end{enumerate}
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Tri par sélection} \hfill (7 points)
+
+On applique le tri par sélection au tableau \lstinline{[7, 1, 4, 9]}.
+
+\begin{enumerate}
+  \item (4 pts) Dérouler l'algorithme : pour chaque itération de la boucle externe, donner l'indice du minimum retenu et le contenu du tableau après l'échange.
+  \item (2 pts) Énoncer les \textbf{deux} clauses de l'invariant de la boucle externe, et les vérifier à chaque étape.
+  \item (1 pt) Quel est le coût de cet algorithme dans le pire cas, en fonction de la taille $n$ du tableau ?
+\end{enumerate}
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{Tri par insertion} \hfill (7 points)
+
+Le code suivant est incomplet : les deux lignes marquées \lstinline{...} sont à écrire.
+
+\begin{python}
+def tri_insertion(tableau):
+    tableau = tableau[:]
+    for i in range(1, len(tableau)):
+        ...                     # (a) mettre la valeur a inserer de cote
+        j = i - 1
+        while j >= 0 and tableau[j] > valeur:
+            tableau[j + 1] = tableau[j]
+            j = j - 1
+        ...                     # (b) ecrire la valeur a sa place
+    return tableau
+\end{python}
+
+\begin{enumerate}
+  \item (3 pts) Écrire les deux lignes manquantes.
+  \item (2 pts) Énoncer l'invariant de la boucle externe du tri par insertion, en bornant la zone concernée.
+  \item (2 pts) Cet invariant est plus faible que celui du tri par sélection : quelle clause lui manque-t-il, et quelle conséquence cela a-t-il sur le nombre de déplacements ? Illustrer avec le tableau de l'exercice 2.
 \end{enumerate}
 
 % BEGIN-VERIFY
@@ -21,43 +58,48 @@ On donne le tableau \lstinline{[17, 40, 6, 25, 12]}.
 %     for i in range(len(tableau)):
 %         if tableau[i] == valeur:
 %             return i
-%     return -1
+%     return None
 % def maximum(tableau):
-%     maxi = tableau[0]
-%     for x in tableau[1:]:
-%         if x > maxi:
-%             maxi = x
-%     return maxi
+%     if len(tableau) == 0:
+%         return None
+%     plus_grand = tableau[0]
+%     for element in tableau:
+%         if element > plus_grand:
+%             plus_grand = element
+%     return plus_grand
 % def moyenne(tableau):
-%     return sum(tableau) / len(tableau)
+%     if len(tableau) == 0:
+%         return None
+%     somme = 0
+%     for element in tableau:
+%         somme = somme + element
+%     return somme / len(tableau)
 % t = [17, 40, 6, 25, 12]
 % assert recherche_occurrence(t, 6) == 2
 % assert maximum(t) == 40
-% assert moyenne(t) == 20.0
-% END-VERIFY
-
-\bigskip
-
-\textbf{Exercice 2} --- \textit{Tri par sélection} \hfill (10 points)
-
-On applique le tri par sélection au tableau \lstinline{[7, 1, 4, 9]}.
-
-\begin{enumerate}
-  \item (5 pts) Dérouler l'algorithme : pour chaque itération de la boucle externe, donner l'indice du minimum trouvé et le contenu du tableau après l'échange.
-  \item (3 pts) Vérifier, à chaque étape, l'invariant de boucle du cours (préfixe trié et inférieur ou égal au reste).
-  \item (2 pts) Quel est le coût de cet algorithme dans le pire cas, en fonction de la taille $n$ du tableau ?
-\end{enumerate}
-
-% BEGIN-VERIFY
-% def tri_selection(tableau):
+% assert moyenne(t) == 100 / 5 == 20.0
+% def tri_insertion(tableau):
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j = j - 1
+%         tableau[j + 1] = valeur
+%     return tableau
+% assert tri_insertion([7, 1, 4, 9]) == [1, 4, 7, 9]
+% def etapes_selection(tableau):
 %     tableau = tableau[:]
 %     n = len(tableau)
+%     vus = []
 %     for i in range(n - 1):
 %         indice_min = i
 %         for j in range(i + 1, n):
 %             if tableau[j] < tableau[indice_min]:
 %                 indice_min = j
 %         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
-%     return tableau
-% assert tri_selection([7, 1, 4, 9]) == [1, 4, 7, 9]
+%         vus.append((indice_min, tableau[:]))
+%     return vus
+% assert etapes_selection([7, 1, 4, 9]) == [(1, [1, 7, 4, 9]), (2, [1, 4, 7, 9]), (2, [1, 4, 7, 9])]
 % END-VERIFY

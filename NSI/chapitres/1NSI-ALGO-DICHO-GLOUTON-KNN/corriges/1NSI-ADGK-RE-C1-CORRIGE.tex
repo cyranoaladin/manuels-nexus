@@ -1,5 +1,40 @@
 % META: {"id": "1NSI-ADGK-RE-C1-CORRIGE", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "corrige", "exercice_ref": "1NSI-ADGK-RE-C1", "capacites": ["P-ALGO-04"], "status": "needs_review"}
 
+% BEGIN-VERIFY
+% def recherche_dichotomique_bugue(tableau_trie, valeur, limite=20):
+%     borne_inf, borne_sup = 0, len(tableau_trie) - 1
+%     tours = 0
+%     while borne_inf <= borne_sup and tours < limite:
+%         tours += 1
+%         milieu = (borne_inf + borne_sup) // 2
+%         if tableau_trie[milieu] == valeur:
+%             return milieu, tours
+%         elif tableau_trie[milieu] < valeur:
+%             borne_inf = milieu
+%         else:
+%             borne_sup = milieu - 1
+%     return -1, tours
+% t = [2, 5, 8, 12, 16, 23, 38, 45]
+% resultat, tours = recherche_dichotomique_bugue(t, 45)
+% assert tours == 20
+% assert resultat == -1
+% def recherche_dichotomique(tableau_trie, valeur):
+%     borne_inf, borne_sup = 0, len(tableau_trie) - 1
+%     while borne_inf <= borne_sup:
+%         milieu = (borne_inf + borne_sup) // 2
+%         if tableau_trie[milieu] == valeur:
+%             return milieu
+%         elif tableau_trie[milieu] < valeur:
+%             borne_inf = milieu + 1
+%         else:
+%             borne_sup = milieu - 1
+%     return -1
+% assert recherche_dichotomique(t, 45) == 7
+% assert recherche_dichotomique(t, 3) == -1
+% END-VERIFY
+
+
+
 \begin{corrige}{1NSI-ADGK-RE-C1-EX1}
 \textbf{1.} La fonction ne termine \textbf{jamais} : elle entre dans une boucle infinie
 (après $20$ itérations, aucune réponse n'est obtenue).
