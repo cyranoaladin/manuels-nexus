@@ -8,10 +8,10 @@ C7 : produit scalaire ». Un élève en échec sur `C1` recevait la fiche `C7`.
 
 ## Mesure
 
-- objets analysés : `5591`
-- groupes de corps identiques : `332`
-- objets excédentaires : `1535`
-- objets à crédit invalide : `1498`
+- objets analysés : `5519`
+- groupes de corps identiques : `318`
+- objets excédentaires : `1449`
+- objets à crédit invalide : `1412`
 - UNKNOWN : `0`
 
 ## Dispositions
@@ -19,7 +19,7 @@ C7 : produit scalaire ». Un élève en échec sur `C1` recevait la fiche `C7`.
 | Disposition | Groupes | Objets excédentaires |
 |---|---:|---:|
 | `BOILERPLATE_ONLY` | 18 | 50 |
-| `CAPACITY_MISREPRESENTING_CLONE` | 305 | 1455 |
+| `CAPACITY_MISREPRESENTING_CLONE` | 291 | 1369 |
 | `CROSS_CHAPTER_CONTAMINATION` | 3 | 6 |
 | `CROSS_MANUAL_CONTAMINATION` | 2 | 2 |
 | `REDUNDANT_SAME_CAPACITY` | 4 | 22 |
@@ -31,7 +31,7 @@ C7 : produit scalaire ». Un élève en échec sur `C1` recevait la fiche `C7`.
 | `1NSI` | 517 |
 | `1SPE` | 18 |
 | `TNSI` | 610 |
-| `TSPE` | 390 |
+| `TSPE` | 304 |
 
 Le corps pédagogique est le fichier moins sa seule ligne d'identité
 `% META:`. Énoncé, mathématiques, code, méthode, solution, diagnostic,

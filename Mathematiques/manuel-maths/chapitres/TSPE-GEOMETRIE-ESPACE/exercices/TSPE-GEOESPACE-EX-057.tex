@@ -1,0 +1,33 @@
+% META: {"id": "TSPE-GEOESPACE-EX-057", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "exercice", "capacites": ["TSPE-GEOESPACE-C9"], "capacites_codes": ["C9"], "methodes": ["M5"], "parcours": 3, "competences": ["calculer", "modeliser", "communiquer"], "duree_min": 22, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-057.tex", "corrige_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-057.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, sqrt, simplify, acos, cos, sin, Rational, nsimplify, pi, N
+% A=Matrix([0,0,0]); B=Matrix([2,0,0]); C=Matrix([0,2,0]); S=Matrix([0,0,2])
+% assert simplify((B-C).norm() - 2*sqrt(2)) == 0
+% assert simplify((S-B).norm() - 2*sqrt(2)) == 0
+% assert simplify((S-C).norm() - 2*sqrt(2)) == 0
+% # SBC equilateral de cote 2sqrt2 -> angle pi/3
+% u = B - S; v = C - S
+% c = u.dot(v)/(u.norm()*v.norm())
+% assert simplify(c - Rational(1,2)) == 0
+% assert simplify(acos(c) - pi/3) == 0
+% # aire = (1/2) SB.SC.sin(60) = (1/2)(2sqrt2)(2sqrt2)(sqrt3/2) = 2sqrt3
+% aire = Rational(1,2)*u.norm()*v.norm()*sin(acos(c))
+% assert simplify(aire - 2*sqrt(3)) == 0
+% # volume du tetraedre = (1/3) * aire(ABC) * SA = (1/3)*2*2 = 4/3
+% assert simplify(Rational(1,3)*(Rational(1,2)*2*2)*2 - Rational(4,3)) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-GEOESPACE-EX-057}{3}{22}
+Repère orthonormé. On reprend la pyramide $SABC$ avec
+$A(0;0;0)$, $B(2;0;0)$, $C(0;2;0)$ et $S(0;0;2)$.
+\begin{enumerate}
+  \item Calculer les longueurs $SB$, $SC$ et $BC$. Quelle est la nature du
+        triangle $SBC$ ?
+  \item Calculer $\vec{SB}\cdot\vec{SC}$, puis en déduire la mesure exacte de
+        l'angle $\widehat{BSC}$.
+  \item En déduire l'aire exacte du triangle $SBC$.
+  \item Calculer le volume de la pyramide $SABC$ en prenant $ABC$ pour base.
+  \item En déduire la distance du point $A$ au plan $(SBC)$, sans calculer
+        d'équation de ce plan. On rappelle que le volume vaut aussi
+        $\tfrac13\times\mathcal{A}_{SBC}\times d\bigl(A,(SBC)\bigr)$.
+\end{enumerate}
+\end{exercice}

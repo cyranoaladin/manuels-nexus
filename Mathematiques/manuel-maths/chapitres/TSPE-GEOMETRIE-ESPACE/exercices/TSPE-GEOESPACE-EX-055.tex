@@ -1,0 +1,41 @@
+% META: {"id": "TSPE-GEOESPACE-EX-055", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "exercice", "capacites": ["TSPE-GEOESPACE-C3"], "capacites_codes": ["C3"], "methodes": ["M10"], "parcours": 2, "competences": ["raisonner", "communiquer"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-055.tex", "corrige_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-055.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, symbols, solve, Eq
+% t, s = symbols('t s')
+% # d1 : (0,0,0) + t(1,1,0) ; d2 : (2,0,1) + s(1,1,0) ; d3 : (0,2,0) + s(1,-1,0) ; d4 : (0,0,1) + s(0,1,1)
+% P1=Matrix([0,0,0]); u1=Matrix([1,1,0])
+% P2=Matrix([2,0,1]); u2=Matrix([1,1,0])
+% P3=Matrix([0,2,0]); u3=Matrix([1,-1,0])
+% P4=Matrix([0,0,1]); u4=Matrix([0,1,1])
+% # d1 // d2 strictement : directions colineaires, P2 hors de d1
+% assert Matrix.hstack(u1,u2).rank() == 1
+% assert solve([Eq((P1+t*u1)[i], P2[i]) for i in range(3)], [t]) == []
+% # d1 et d3 : secantes en (1,1,0)
+% assert Matrix.hstack(u1,u3).rank() == 2
+% sol = solve([Eq((P1+t*u1)[i], (P3+s*u3)[i]) for i in range(3)], [t, s], dict=True)
+% assert sol and (P1 + sol[0][t]*u1) == Matrix([1,1,0])
+% # d1 et d4 : non coplanaires
+% assert Matrix.hstack(u1,u4).rank() == 2
+% assert solve([Eq((P1+t*u1)[i], (P4+s*u4)[i]) for i in range(3)], [t, s]) == []
+% END-VERIFY
+\begin{exercice}{TSPE-GEOESPACE-EX-055}{2}{18}
+Repère orthonormé. On considère les quatre droites
+\[
+  d_1:\begin{cases}x=t\\y=t\\z=0\end{cases}
+  \quad
+  d_2:\begin{cases}x=2+s\\y=s\\z=1\end{cases}
+  \quad
+  d_3:\begin{cases}x=s\\y=2-s\\z=0\end{cases}
+  \quad
+  d_4:\begin{cases}x=0\\y=s\\z=1+s\end{cases}
+\]
+\begin{enumerate}
+  \item Déterminer la position relative de $d_1$ et $d_2$.
+  \item Déterminer la position relative de $d_1$ et $d_3$~; préciser leur
+        éventuel point commun.
+  \item Déterminer la position relative de $d_1$ et $d_4$.
+  \item Rédiger en trois lignes la démarche générale que vous avez suivie, en
+        précisant dans quel ordre les tests doivent être menés et pourquoi cet
+        ordre importe.
+\end{enumerate}
+\end{exercice}

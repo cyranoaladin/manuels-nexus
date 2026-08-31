@@ -1,0 +1,27 @@
+% META: {"id": "TSPE-GEOESPACE-EX-052", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "exercice", "capacites": ["TSPE-GEOESPACE-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 1, "competences": ["representer", "raisonner"], "duree_min": 14, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-052.tex", "corrige_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-052.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% A=Matrix([0,0,0]); B=Matrix([1,0,0]); D=Matrix([0,1,0]); E=Matrix([0,0,1])
+% C=B+D-A; F=B+E-A; G=C+E-A; H=D+E-A
+% assert list(G-A) == [1,1,1]
+% assert list(C-E) == [1,1,-1]
+% assert list(H-B) == [-1,1,1]
+% assert list(F-D) == [1,-1,1]
+% # le milieu I de [GH] : AI = AB/2 + AD + AE
+% I = (G+H)/2
+% from sympy import Rational
+% assert list(I-A) == [Rational(1,2), 1, 1]
+% END-VERIFY
+\begin{exercice}{TSPE-GEOESPACE-EX-052}{1}{14}
+$ABCDEFGH$ est un cube. On travaille dans la base
+$(\vec{AB},\vec{AD},\vec{AE})$.
+\begin{enumerate}
+  \item Décomposer $\vec{AG}$ dans cette base.
+  \item Décomposer $\vec{EC}$, puis $\vec{HB}$, en détaillant le chemin
+        d'arêtes utilisé.
+  \item Décomposer $\vec{DF}$.
+  \item Soit $I$ le milieu de $[GH]$. Décomposer $\vec{AI}$.
+  \item Parmi les quatre vecteurs décomposés aux questions 1 à 3, deux
+        sont-ils colinéaires ? Justifier.
+\end{enumerate}
+\end{exercice}

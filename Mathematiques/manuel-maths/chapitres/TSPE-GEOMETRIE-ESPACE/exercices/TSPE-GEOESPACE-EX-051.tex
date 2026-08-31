@@ -1,0 +1,25 @@
+% META: {"id": "TSPE-GEOESPACE-EX-051", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "exercice", "capacites": ["TSPE-GEOESPACE-C1"], "capacites_codes": ["C1"], "methodes": ["M2"], "parcours": 1, "competences": ["representer", "calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-051.tex", "corrige_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-051.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, symbols, solve, Eq
+% a, b = symbols('a b')
+% u = Matrix([1,0,0]); v = Matrix([0,1,0]); w = Matrix([0,0,1])
+% assert list(2*u - v) == [2,-1,0]
+% assert list(2*u - v + 3*w) == [2,-1,3]
+% # (0,0,1) n'est pas combinaison de u et v
+% assert solve([Eq((a*u + b*v)[i], w[i]) for i in range(3)], [a, b]) == []
+% END-VERIFY
+\begin{exercice}{TSPE-GEOESPACE-EX-051}{1}{12}
+L'espace est rapporté au repère $(O;\vec{i},\vec{j},\vec{k})$. On considère
+le pavé droit $OABCDEFG$ tel que $\vec{OA}=\vec{i}$, $\vec{OC}=\vec{j}$ et
+$\vec{OD}=\vec{k}$.
+\begin{enumerate}
+  \item Construire sur une figure le vecteur $\vec{p}=2\vec{i}-\vec{j}$, puis
+        donner ses coordonnées.
+  \item Construire ensuite $\vec{q}=2\vec{i}-\vec{j}+3\vec{k}$ à partir de
+        $\vec{p}$, et donner ses coordonnées.
+  \item Toutes les combinaisons $a\vec{i}+b\vec{j}$ décrivent un ensemble de
+        vecteurs. Lequel ? Justifier.
+  \item En déduire qu'il est impossible d'écrire $\vec{k}$ sous la forme
+        $a\vec{i}+b\vec{j}$.
+\end{enumerate}
+\end{exercice}

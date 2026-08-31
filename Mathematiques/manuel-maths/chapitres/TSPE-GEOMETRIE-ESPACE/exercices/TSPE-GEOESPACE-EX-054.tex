@@ -1,0 +1,32 @@
+% META: {"id": "TSPE-GEOESPACE-EX-054", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "exercice", "capacites": ["TSPE-GEOESPACE-C4"], "capacites_codes": ["C4"], "methodes": ["M3"], "parcours": 2, "competences": ["raisonner", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-054.tex", "corrige_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-054.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% u=Matrix([1,2,-1]); v=Matrix([2,-1,3]); w=Matrix([3,1,2]); s=Matrix([0,5,-5])
+% assert w == u + v                       # famille 1 : coplanaire
+% assert Matrix.hstack(u,v,w).rank() == 2
+% for a,b in ((u,v),(u,w),(v,w)):
+%     assert Matrix.hstack(a,b).rank() == 2   # deux a deux non colineaires
+% assert Matrix.hstack(u,v,Matrix([0,0,1])).rank() == 3   # famille 2 : base
+% assert Matrix.hstack(u,v,Matrix([0,0,1])).det() != 0
+% assert s == 2*u - v + (u - u)           # s = 2u - v ? verification
+% assert s == 2*u - v
+% assert Matrix.hstack(u,v,s).rank() == 2 # famille 3 : coplanaire
+% END-VERIFY
+\begin{exercice}{TSPE-GEOESPACE-EX-054}{2}{15}
+L'espace est rapporté à une base $(\vec{i},\vec{j},\vec{k})$. On pose
+\[
+  \vec{u}(1;2;-1),\quad \vec{v}(2;-1;3),\quad \vec{w}(3;1;2),\quad
+  \vec{s}(0;5;-5).
+\]
+\begin{enumerate}
+  \item Montrer que $\vec{u}$, $\vec{v}$ et $\vec{w}$ sont deux à deux non
+        colinéaires.
+  \item La famille $(\vec{u},\vec{v},\vec{w})$ est-elle une base de l'espace ?
+        Justifier soigneusement.
+  \item Même question pour $(\vec{u},\vec{v},\vec{k})$.
+  \item Exprimer $\vec{s}$ en fonction de $\vec{u}$ et $\vec{v}$. Qu'en
+        déduit-on pour la famille $(\vec{u},\vec{v},\vec{s})$ ?
+  \item Que penser de l'argument~: « ces trois vecteurs sont deux à deux non
+        colinéaires, donc ils forment une base » ?
+\end{enumerate}
+\end{exercice}

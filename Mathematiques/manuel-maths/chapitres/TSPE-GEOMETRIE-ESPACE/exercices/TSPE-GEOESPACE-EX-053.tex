@@ -1,0 +1,28 @@
+% META: {"id": "TSPE-GEOESPACE-EX-053", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "exercice", "capacites": ["TSPE-GEOESPACE-C5"], "capacites_codes": ["C5"], "methodes": ["M2"], "parcours": 2, "competences": ["representer", "communiquer"], "duree_min": 14, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-053.tex", "corrige_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-053.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, sqrt, simplify
+% A=Matrix([0,0,0]); B=Matrix([1,0,0]); D=Matrix([0,1,0]); E=Matrix([0,0,1])
+% C=B+D-A; G=C+E-A; F=B+E-A
+% assert list(G) == [1,1,1]          # coordonnees du POINT G
+% assert list(G-B) == [0,1,1]        # coordonnees du VECTEUR BG
+% assert list(F-D) == [1,-1,1]
+% # base orthonormee : AG = sqrt(3) ; base etiree : AG different
+% assert simplify((G-A).norm() - sqrt(3)) == 0
+% Ep = Matrix([0,0,4]); Gp = B + D + Ep
+% assert simplify((Gp-A).norm() - sqrt(18)) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-GEOESPACE-EX-053}{2}{14}
+$ABCDEFGH$ est un parallélépipède, rapporté au repère
+$(A;\vec{AB},\vec{AD},\vec{AE})$.
+\begin{enumerate}
+  \item Donner les coordonnées du \emph{point} $G$.
+  \item Donner les coordonnées du \emph{vecteur} $\vec{BG}$. Pourquoi
+        diffèrent-elles de celles du point $G$ ?
+  \item Donner les coordonnées du vecteur $\vec{DF}$.
+  \item On suppose maintenant le solide \emph{orthonormé} d'arête $1$.
+        Calculer $AG$.
+  \item On suppose enfin que les arêtes restent orthogonales mais que
+        $AE=4\,AB$. Les coordonnées de $G$ changent-elles ? Et la longueur
+        $AG$ ? Conclure sur ce que mesurent, ou non, des coordonnées.
+\end{enumerate}
+\end{exercice}

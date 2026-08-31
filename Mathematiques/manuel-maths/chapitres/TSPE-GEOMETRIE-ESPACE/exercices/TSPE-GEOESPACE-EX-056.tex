@@ -1,0 +1,34 @@
+% META: {"id": "TSPE-GEOESPACE-EX-056", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "exercice", "capacites": ["TSPE-GEOESPACE-C10"], "capacites_codes": ["C10"], "methodes": ["M7"], "parcours": 3, "competences": ["raisonner", "modeliser"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-056.tex", "corrige_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-056.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, symbols, Eq, simplify, expand, solve
+% x, y, z = symbols('x y z')
+% A=Matrix([0,0,0]); B=Matrix([2,0,0]); C=Matrix([0,2,0]); S=Matrix([0,0,2])
+% # SA n'est pas orthogonale a AB seulement : verifions les deux
+% SA = A - S
+% assert SA.dot(B-A) == 0 and SA.dot(C-A) == 0     # SA orthogonale au plan (ABC)
+% # lieu des M equidistants de B et C : plan mediateur
+% M = Matrix([x,y,z])
+% eq = expand((M-B).dot(M-B) - (M-C).dot(M-C))
+% assert simplify(eq - (-4*x + 4*y)) == 0          # se reduit a y = x
+% # verifions qu'un point du lieu est bien equidistant
+% P = Matrix([1,1,5])
+% assert simplify((P-B).norm() - (P-C).norm()) == 0
+% # et qu'un point hors du lieu ne l'est pas
+% Q = Matrix([2,0,1])
+% assert simplify((Q-B).norm() - (Q-C).norm()) != 0
+% END-VERIFY
+\begin{exercice}{TSPE-GEOESPACE-EX-056}{3}{20}
+Repère orthonormé. On considère la pyramide $SABC$ avec
+$A(0;0;0)$, $B(2;0;0)$, $C(0;2;0)$ et $S(0;0;2)$.
+\begin{enumerate}
+  \item Montrer que la droite $(SA)$ est orthogonale au plan $(ABC)$. On
+        précisera pourquoi il ne suffirait pas de la montrer orthogonale à la
+        seule droite $(AB)$.
+  \item En déduire que $(SA)$ est orthogonale à $(BC)$.
+  \item Déterminer l'ensemble $\mathcal{E}$ des points $M(x;y;z)$ de l'espace
+        équidistants de $B$ et de $C$.
+  \item Reconnaître la nature de $\mathcal{E}$ et vérifier que $S$ lui
+        appartient.
+  \item Le point $D(2;0;1)$ appartient-il à $\mathcal{E}$ ? Justifier.
+\end{enumerate}
+\end{exercice}
