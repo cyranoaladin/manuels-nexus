@@ -1,31 +1,51 @@
-% META: {"id": "TSPE-GEOESPACE-EV-A-corrige", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-GEOESPACE-EV-A", "version": "A", "capacites_codes": ["C7", "C13", "C8"], "sources_inspiration": [], "status": "approved"}
-% BEGIN-VERIFY
-% from sympy import sqrt
-% A=(1,2,0);B=(3,1,2);C=(0,4,1)
-% AB=tuple(B[i]-A[i] for i in range(3))
-% AC=tuple(C[i]-A[i] for i in range(3))
-% dot=sum(a*b for a,b in zip(AB,AC))
-% assert dot == -2
-% END-VERIFY
-\begin{corrige}{TSPE-GEOESPACE-EV-A-EX1}
-\textbf{Q1.} $\vec{AB}\begin{pmatrix}2\\-1\\2\end{pmatrix}$, $\vec{AC}\begin{pmatrix}-1\\2\\1\end{pmatrix}$.
-\[
-  \vec{AB}\cdot\vec{AC} = 2\times(-1)+(-1)\times2+2\times1 = -2-2+2 = -2.
-\]
+% META: {"id": "TSPE-GEOESPACE-EV-A-corrige", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-GEOESPACE-EV-A", "version": "A", "capacites_codes": ["C7", "C8", "C11", "C12", "C13", "C15"], "sources_inspiration": [], "status": "generated"}
 
-\textbf{Q2.} Comme $\vec{AB}\cdot\vec{AC} = -2
-\neq 0$, les vecteurs $\vec{AB}$ et $\vec{AC}$ ne sont pas orthogonaux : le triangle $ABC$ n'est pas rectangle en $A$.
-\end{corrige}
+\begin{corrige}{TSPE-GEOESPACE-EV-A}
 
-\begin{corrige}{TSPE-GEOESPACE-EV-A-EX2}
-Pour $M(x,y,z) \in \mathcal{P}$, $\vec{n}\cdot\vec{AM}=0$ :
-\[
-  1(x-2)+2(y-0)-2(z-1)=0 \iff x-2+2y-2z+2=0 \iff x+2y-2z=0.
-\]
-\end{corrige}
+\textbf{Exercice 1 — C12.}
 
-\begin{corrige}{TSPE-GEOESPACE-EV-A-EX3}
-\[
-  d(O,\mathcal{P}) = \frac{|1\times0+2\times0-2\times0-6|}{\sqrt{1^2+2^2+(-2)^2}} = \frac{|-6|}{\sqrt{9}} = \frac{6}{3} = \boxed{2}.
-\]
+\textbf{1.} $x=1+2t$, $y=t$, $z=3-t$, avec $t\in\mathbb{R}$. \hfill\textit{(2 pts)}
+
+\textbf{2.} Pour $M(5;2;1)$~: $5=1+2t$ donne $t=2$~; on vérifie $y=2$ et
+$z=3-2=1$. Les trois équations sont satisfaites par la même valeur, donc
+$M\in\mathcal{D}$.
+Pour $N(5;2;0)$~: $t=2$ conviendrait pour $x$ et $y$, mais la troisième
+équation donnerait $0=1$. Donc $N\notin\mathcal{D}$~; deux équations sur trois
+ne suffisent pas. \hfill\textit{(3 pts)}
+
+\medskip
+\textbf{Exercice 2 — C13.}
+
+\textbf{1.} $\vec{AM}\cdot\vec{n}=0$ s'écrit $1(x-2)+4(y+1)-2(z-3)=0$, soit
+$x-2+4y+4-2z+6=0$ et enfin $x+4y-2z+8=0$. Contrôle~:
+$2+4\times(-1)-2\times3+8=0$. \hfill\textit{(3 pts)}
+
+\textbf{2.} $\vec{n}\cdot\vec{v}=1\times2+4\times0+(-2)\times1=0$~: oui,
+$\vec{v}$ dirige $\mathcal{P}$. \hfill\textit{(2 pts)}
+
+\medskip
+\textbf{Exercice 3 — C7 et C8.}
+
+\textbf{1.} $\vec{AB}(2;-1;2)$ et $\vec{AC}(-1;2;1)$, donc
+$\vec{AB}\cdot\vec{AC}=-2-2+2=-2\neq0$. Le triangle n'est pas rectangle en
+$A$. \hfill\textit{(3 pts)}
+
+\textbf{2.} $\vec{n}(1;2;-2)$ et $\lVert\vec{n}\rVert=\sqrt{1+4+4}=3$, donc
+$d(O,\mathcal{Q})=\dfrac{\lvert 0+0-0-6\rvert}{3}=\dfrac{6}{3}=2$.
+\hfill\textit{(3 pts)}
+
+\medskip
+\textbf{Exercice 4 — C15 et C11.}
+
+\textbf{1.} En reportant~: $t+(-t)+0-3=0$, soit $-3=0$. Le système n'a aucune
+solution. Ce n'est pas une erreur~: $\Delta$ est \emph{strictement parallèle}
+à $\mathcal{R}$. On le confirme par $\vec{n}\cdot\vec{u}=1-1+0=0$ et par le
+fait que $(0;0;0)$ ne vérifie pas l'équation du plan. \hfill\textit{(2 pts)}
+
+\textbf{2.} $H$ et $N$ appartiennent à $\mathcal{S}$, donc $\vec{HN}$ est un
+vecteur de $\mathcal{S}$. Comme $(MH)$ est orthogonale à $\mathcal{S}$, on a
+$\vec{MH}\cdot\vec{HN}=0$~: le triangle $MHN$ est rectangle en $H$. Par
+Pythagore, $MN^2=MH^2+HN^2$. Or $N\neq H$ donc $HN^2>0$, d'où $MN^2>MH^2$ et,
+les longueurs étant positives, $MN>MH$. \hfill\textit{(2 pts)}
+
 \end{corrige}

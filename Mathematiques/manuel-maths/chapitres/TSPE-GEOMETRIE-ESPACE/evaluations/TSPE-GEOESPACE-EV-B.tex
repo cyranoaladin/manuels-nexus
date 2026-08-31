@@ -1,15 +1,19 @@
-% META: {"id": "TSPE-GEOESPACE-EV-B", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C12", "C15", "C11"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% META: {"id": "TSPE-GEOESPACE-EV-B", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C7", "C8", "C11", "C12", "C13", "C15"], "competences": ["calculer", "raisonner", "communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
-% A1=(1,1,1); u1=(2,-1,1)
-% t=2
-% pt = tuple(A1[i]+t*u1[i] for i in range(3))
-% assert pt == (5,-1,3)
-% A2=(1,0,0); u2=(1,1,1)
-% a,b,c,d=1,1,-1,-2
-% t2 = 1
-% pt2 = tuple(A2[i]+t2*u2[i] for i in range(3))
-% assert pt2 == (2,1,1)
-% assert a*pt2[0]+b*pt2[1]+c*pt2[2]+d == 0
+% from sympy import Matrix, symbols, solve, Eq, sqrt, simplify
+% t = symbols('t')
+% A=Matrix([2,1,0]); u=Matrix([1,-2,3])
+% assert A+2*u == Matrix([4,-3,6])
+% assert A+2*u != Matrix([4,-3,5])
+% P=Matrix([1,2,-1]); n=Matrix([3,-1,2])
+% assert -(n.dot(P)) == 1 and n.dot(P)+1 == 0
+% a=Matrix([0,1,1]); b=Matrix([2,0,3]); c=Matrix([1,3,0])
+% assert (b-a).dot(c-a) == -2
+% n2=Matrix([2,-1,2]); O=Matrix([0,0,0])
+% assert simplify(abs(n2.dot(O)-9)/n2.norm() - 3) == 0
+% n3=Matrix([1,1,1]); u3=Matrix([1,-1,0]); Q=Matrix([0,0,1])
+% assert n3.dot(u3) == 0 and n3.dot(Q)-3 != 0
+% assert solve(Eq(n3.dot(Q+t*u3)-3, 0), t) == []
 % END-VERIFY
 
 %---------------------------------------------------------------
@@ -18,33 +22,61 @@
 
 \begin{evaluation}{TSPE-GEOESPACE-EV-B}{55}
 
-\begin{exercice}{TSPE-GEOESPACE-EV-B-EX1}{2}{15}
-\textbf{Exercice 1} (6 points) — \textit{Capacité C12}
+\begin{exercice}{TSPE-GEOESPACE-EV-B-EX1}{2}{12}
+\textbf{Exercice 1} (5 points) — \textit{Capacité C12}
 
 \medskip
 
-Soit $\mathcal{D}$ la droite passant par $A(1,1,1)$ de vecteur directeur $\vec{u}\begin{pmatrix}2\\-1\\1\end{pmatrix}$.
+Soit $\mathcal{D}$ la droite passant par $A(2;1;0)$ et de vecteur directeur
+$\vec{u}\begin{pmatrix}1\\-2\\3\end{pmatrix}$.
 \begin{enumerate}
-  \item (2 pts) Écrire une représentation parametrique de $\mathcal{D}$.
-  \item (4 pts) Le point $B(5,-1,3)$ appartient-il a $\mathcal{D}$ ?
+  \item (2 pts) Écrire une représentation paramétrique de $\mathcal{D}$.
+  \item (3 pts) Le point $M(4;-3;6)$ appartient-il à $\mathcal{D}$ ? Et le
+        point $N(4;-3;5)$ ? Justifier dans les deux cas.
 \end{enumerate}
 \end{exercice}
 
-\begin{exercice}{TSPE-GEOESPACE-EV-B-EX2}{2}{20}
-\textbf{Exercice 2} (7 points) — \textit{Capacité C15}
+\begin{exercice}{TSPE-GEOESPACE-EV-B-EX2}{2}{12}
+\textbf{Exercice 2} (5 points) — \textit{Capacité C13}
 
 \medskip
 
-Soit $\mathcal{D}'$ la droite passant par $A(1,0,0)$ de vecteur directeur $\vec{u}\begin{pmatrix}1\\1\\1\end{pmatrix}$, et $\mathcal{P}: x+y-z-2=0$. Déterminer les coordonnées du point d'intersection de $\mathcal{D}'$ et $\mathcal{P}$.
+\begin{enumerate}
+  \item (3 pts) Déterminer une équation cartésienne du plan $\mathcal{P}$
+        passant par $A(1;2;-1)$ et de vecteur normal
+        $\vec{n}\begin{pmatrix}3\\-1\\2\end{pmatrix}$, en détaillant le calcul.
+  \item (2 pts) Le vecteur $\vec{v}(1;1;-1)$ dirige-t-il $\mathcal{P}$ ?
+        Justifier.
+\end{enumerate}
 \end{exercice}
 
-\begin{exercice}{TSPE-GEOESPACE-EV-B-EX3}{2}{15}
-\textbf{Exercice 3} (7 points) — \textit{Capacité C11}
+\begin{exercice}{TSPE-GEOESPACE-EV-B-EX3}{2}{16}
+\textbf{Exercice 3} (6 points) — \textit{Capacités C7 et C8}
 
 \medskip
 
-Rediger la démonstration du cours : soit $H$ le projete orthogonal d'un point $M$ sur un plan $\mathcal{P}$, et $N \in \mathcal{P}$, $N
-\neq H$. Démontrer que $MN>MH$.
+Dans un repère orthonormé, $A(0;1;1)$, $B(2;0;3)$ et $C(1;3;0)$.
+\begin{enumerate}
+  \item (3 pts) Calculer $\vec{AB}\cdot\vec{AC}$. Le triangle $ABC$ est-il
+        rectangle en $A$ ? Justifier.
+  \item (3 pts) Calculer la distance du point $O(0;0;0)$ au plan
+        $\mathcal{Q}:\ 2x-y+2z-9=0$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TSPE-GEOESPACE-EV-B-EX4}{3}{15}
+\textbf{Exercice 4} (4 points) — \textit{Capacités C15 et C11}
+
+\medskip
+
+\begin{enumerate}
+  \item (2 pts) Étudier l'intersection du plan $\mathcal{R}:\ x+y+z-3=0$ et de
+        la droite $\Delta$ définie par $x=t$, $y=-t$, $z=1$. Interpréter
+        géométriquement le résultat obtenu.
+  \item (2 pts) Soit $H$ le projeté orthogonal d'un point $M$ sur un plan
+        $\mathcal{S}$, et $N$ un point de $\mathcal{S}$ distinct de $H$.
+        Démontrer que $MN>MH$.
+\end{enumerate}
 \end{exercice}
 
 \end{evaluation}

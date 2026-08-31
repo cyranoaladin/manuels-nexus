@@ -1,0 +1,36 @@
+% META: {"id": "TSPE-GEOESPACE-EX-058", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "exercice", "capacites": ["TSPE-GEOESPACE-C6", "TSPE-GEOESPACE-C8", "TSPE-GEOESPACE-C9", "TSPE-GEOESPACE-C10"], "capacites_codes": ["C6", "C8", "C9", "C10"], "capacites_par_question": {"1": ["C6"], "2": ["C10"], "3": ["C9"], "4": ["C8", "C10"]}, "methodes": ["M3", "M7", "M5", "M6"], "parcours": 3, "competences": ["raisonner", "representer", "calculer"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-058.tex", "corrige_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-058.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, sqrt, simplify, symbols, solve, Eq, Rational
+% A=Matrix([0,0,0]);B=Matrix([1,0,0]);C=Matrix([1,1,0]);D=Matrix([0,1,0])
+% E=Matrix([0,0,1]);G=Matrix([1,1,1])
+% assert (G-A) == (C-A)+(E-A)
+% BD=D-B; AC=C-A; AE=E-A
+% assert BD.dot(AC)==0 and BD.dot(AE)==0
+% assert Matrix.hstack(AC,AE).rank()==2
+% assert AC.dot(AE)==0
+% assert simplify(Rational(1,2)*AC.norm()*AE.norm() - sqrt(2)/2)==0
+% t=symbols('t'); n=Matrix([1,-1,0])
+% K=B+solve(Eq(n.dot(B+t*BD),0),t)[0]*BD
+% assert list(K)==[Rational(1,2),Rational(1,2),0]
+% assert K==(A+C)/2
+% assert simplify((K-B).norm()-sqrt(2)/2)==0
+% assert simplify((K-B).norm()-abs(n.dot(B))/n.norm())==0
+% END-VERIFY
+\begin{exercice}{TSPE-GEOESPACE-EX-058}{3}{25}
+$ABCDEFGH$ est un cube d'arête $1$. On note $\mathcal{P}$ le plan $(ACE)$.
+
+\emph{Les questions 1 et 2 se traitent sans coordonnées.}
+\begin{enumerate}
+  \item À l'aide de la relation de Chasles uniquement, montrer que
+        $\vec{AG}=\vec{AC}+\vec{AE}$. En déduire que les points $A$, $C$, $G$
+        et $E$ sont coplanaires.
+  \item On munit désormais l'espace du repère orthonormé
+        $(A;\vec{AB},\vec{AD},\vec{AE})$. Montrer que la droite $(BD)$ est
+        orthogonale au plan $\mathcal{P}$.
+  \item Déterminer la nature du triangle $ACE$, puis calculer son aire.
+  \item Déduire de la question 2 la position du projeté orthogonal $K$ de $B$
+        sur $\mathcal{P}$, puis la distance de $B$ à $\mathcal{P}$. On
+        vérifiera le résultat par la formule de la distance d'un point à un
+        plan.
+\end{enumerate}
+\end{exercice}

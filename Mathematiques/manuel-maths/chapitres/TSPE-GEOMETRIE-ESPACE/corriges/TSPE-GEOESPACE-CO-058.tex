@@ -1,0 +1,48 @@
+% META: {"id": "TSPE-GEOESPACE-CO-058", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "corrige", "exercice_ref": "TSPE-GEOESPACE-EX-058", "capacites_codes": ["C6", "C8", "C9", "C10"], "sources_inspiration": [], "status": "generated"}
+\begin{corrige}{TSPE-GEOESPACE-EX-058}
+
+\textbf{Q1 (C6).} Par la relation de Chasles,
+$\vec{AG}=\vec{AB}+\vec{BC}+\vec{CG}=\vec{AB}+\vec{AD}+\vec{AE}$. Or
+$\vec{AC}=\vec{AB}+\vec{AD}$, donc
+\[
+  \vec{AG}=\vec{AC}+\vec{AE}.
+\]
+Le vecteur $\vec{AG}$ est ainsi combinaison linéaire de $\vec{AC}$ et
+$\vec{AE}$~: les points $A$, $C$, $G$ et $E$ sont coplanaires. Aucun calcul de
+coordonnées n'a été nécessaire.
+
+\textbf{Q2 (C10).} Dans le repère indiqué, $B(1;0;0)$, $D(0;1;0)$, $C(1;1;0)$
+et $E(0;0;1)$. Donc $\vec{BD}(-1;1;0)$, $\vec{AC}(1;1;0)$ et
+$\vec{AE}(0;0;1)$. On calcule
+\[
+  \vec{BD}\cdot\vec{AC}=-1+1+0=0,
+  \qquad
+  \vec{BD}\cdot\vec{AE}=0+0+0=0 .
+\]
+Les vecteurs $\vec{AC}$ et $\vec{AE}$ ne sont pas colinéaires et dirigent
+$\mathcal{P}$~: la droite $(BD)$ est donc orthogonale au plan $\mathcal{P}$.
+Il ne suffisait pas d'un seul produit scalaire nul.
+
+\textbf{Q3 (C9).} $\vec{AC}\cdot\vec{AE}=0$~: le triangle $ACE$ est rectangle
+en $A$. Ses côtés de l'angle droit mesurent $AC=\sqrt{2}$ et $AE=1$, d'où
+\[
+  \mathcal{A}_{ACE}=\frac12\times\sqrt2\times1=\frac{\sqrt2}{2}.
+\]
+
+\textbf{Q4 (C8, C10).} D'après la question~2, $\vec{BD}$ est un vecteur normal
+à $\mathcal{P}$~: le projeté orthogonal de $B$ s'obtient donc en suivant
+$(BD)$. Un point de cette droite s'écrit $(1-t;\,t;\,0)$. Le plan
+$\mathcal{P}$ a pour équation $x-y=0$, car $\vec{n}(1;-1;0)$ est orthogonal à
+$\vec{AC}$ et à $\vec{AE}$ et $A$ appartient au plan. En reportant~:
+$(1-t)-t=0$, soit $t=\dfrac12$. Donc
+\[
+  K\left(\frac12;\frac12;0\right),
+\]
+qui est le centre du carré $ABCD$. Enfin
+$BK=\sqrt{\left(-\frac12\right)^2+\left(\frac12\right)^2}=\dfrac{\sqrt2}{2}$.
+
+\emph{Contrôle par la formule}~:
+$d(B,\mathcal{P})=\dfrac{\lvert 1-0\rvert}{\sqrt{1^2+(-1)^2}}
+=\dfrac{1}{\sqrt2}=\dfrac{\sqrt2}{2}$. Les deux voies concordent.
+
+\end{corrige}

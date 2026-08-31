@@ -1,17 +1,19 @@
-% META: {"id": "TSPE-GEOESPACE-EV-A", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C7", "C13", "C8"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "approved"}
+% META: {"id": "TSPE-GEOESPACE-EV-A", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C7", "C8", "C11", "C12", "C13", "C15"], "competences": ["calculer", "raisonner", "communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
-% from sympy import sqrt
-% A=(1,2,0);B=(3,1,2);C=(0,4,1)
-% AB=tuple(B[i]-A[i] for i in range(3))
-% AC=tuple(C[i]-A[i] for i in range(3))
-% dot=sum(a*b for a,b in zip(AB,AC))
-% assert dot == -2
-% M=(0,0,0)
-% a,b,c,d=1,2,-2,-6
-% num=abs(a*M[0]+b*M[1]+c*M[2]+d)
-% den=sqrt(a**2+b**2+c**2)
-% assert num == 6 and den == 3
-% assert num/den == 2
+% from sympy import Matrix, symbols, solve, Eq, sqrt, simplify
+% t = symbols('t')
+% A=Matrix([1,0,3]); u=Matrix([2,1,-1])
+% assert A+2*u == Matrix([5,2,1])
+% assert A+2*u != Matrix([5,2,0])
+% P=Matrix([2,-1,3]); n=Matrix([1,4,-2])
+% assert -(n.dot(P)) == 8 and n.dot(P)+8 == 0
+% a=Matrix([1,2,0]); b=Matrix([3,1,2]); c=Matrix([0,4,1])
+% assert (b-a).dot(c-a) == -2
+% n2=Matrix([1,2,-2]); O=Matrix([0,0,0])
+% assert simplify(abs(n2.dot(O)-6)/n2.norm() - 2) == 0
+% n3=Matrix([1,1,1]); u3=Matrix([1,-1,0]); Q=Matrix([0,0,0])
+% assert n3.dot(u3) == 0 and n3.dot(Q)-3 != 0
+% assert solve(Eq(n3.dot(Q+t*u3)-3, 0), t) == []
 % END-VERIFY
 
 %---------------------------------------------------------------
@@ -20,32 +22,61 @@
 
 \begin{evaluation}{TSPE-GEOESPACE-EV-A}{55}
 
-\begin{exercice}{TSPE-GEOESPACE-EV-A-EX1}{2}{15}
-\textbf{Exercice 1} (6 points) — \textit{Capacité C7}
+\begin{exercice}{TSPE-GEOESPACE-EV-A-EX1}{2}{12}
+\textbf{Exercice 1} (5 points) — \textit{Capacité C12}
 
 \medskip
 
-Dans un repere orthonorme, $A(1,2,0)$, $B(3,1,2)$, $C(0,4,1)$.
+Soit $\mathcal{D}$ la droite passant par $A(1;0;3)$ et de vecteur directeur
+$\vec{u}\begin{pmatrix}2\\1\\-1\end{pmatrix}$.
 \begin{enumerate}
-  \item (3 pts) Calculer $\vec{AB}\cdot\vec{AC}$.
-  \item (3 pts) Le triangle $ABC$ est-il rectangle en $A$ ? Justifier.
+  \item (2 pts) Écrire une représentation paramétrique de $\mathcal{D}$.
+  \item (3 pts) Le point $M(5;2;1)$ appartient-il à $\mathcal{D}$ ? Et le
+        point $N(5;2;0)$ ? Justifier dans les deux cas.
 \end{enumerate}
 \end{exercice}
 
-\begin{exercice}{TSPE-GEOESPACE-EV-A-EX2}{2}{15}
-\textbf{Exercice 2} (7 points) — \textit{Capacité C13}
+\begin{exercice}{TSPE-GEOESPACE-EV-A-EX2}{2}{12}
+\textbf{Exercice 2} (5 points) — \textit{Capacité C13}
 
 \medskip
 
-Déterminer une équation cartesienne du plan $\mathcal{P}$ passant par $A(2,0,1)$ de vecteur normal $\vec{n}\begin{pmatrix}1\\2\\-2\end{pmatrix}$, en detaillant le calcul.
+\begin{enumerate}
+  \item (3 pts) Déterminer une équation cartésienne du plan $\mathcal{P}$
+        passant par $A(2;-1;3)$ et de vecteur normal
+        $\vec{n}\begin{pmatrix}1\\4\\-2\end{pmatrix}$, en détaillant le calcul.
+  \item (2 pts) Le vecteur $\vec{v}(2;0;1)$ dirige-t-il $\mathcal{P}$ ?
+        Justifier.
+\end{enumerate}
 \end{exercice}
 
-\begin{exercice}{TSPE-GEOESPACE-EV-A-EX3}{2}{20}
-\textbf{Exercice 3} (7 points) — \textit{Capacité C8}
+\begin{exercice}{TSPE-GEOESPACE-EV-A-EX3}{2}{16}
+\textbf{Exercice 3} (6 points) — \textit{Capacités C7 et C8}
 
 \medskip
 
-Calculer la distance du point $O(0,0,0)$ au plan $\mathcal{P}: x+2y-2z-6=0$, en utilisant la formule du cours.
+Dans un repère orthonormé, $A(1;2;0)$, $B(3;1;2)$ et $C(0;4;1)$.
+\begin{enumerate}
+  \item (3 pts) Calculer $\vec{AB}\cdot\vec{AC}$. Le triangle $ABC$ est-il
+        rectangle en $A$ ? Justifier.
+  \item (3 pts) Calculer la distance du point $O(0;0;0)$ au plan
+        $\mathcal{Q}:\ x+2y-2z-6=0$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TSPE-GEOESPACE-EV-A-EX4}{3}{15}
+\textbf{Exercice 4} (4 points) — \textit{Capacités C15 et C11}
+
+\medskip
+
+\begin{enumerate}
+  \item (2 pts) Étudier l'intersection du plan $\mathcal{R}:\ x+y+z-3=0$ et de
+        la droite $\Delta$ définie par $x=t$, $y=-t$, $z=0$. Interpréter
+        géométriquement le résultat obtenu.
+  \item (2 pts) Soit $H$ le projeté orthogonal d'un point $M$ sur un plan
+        $\mathcal{S}$, et $N$ un point de $\mathcal{S}$ distinct de $H$.
+        Démontrer que $MN>MH$.
+\end{enumerate}
 \end{exercice}
 
 \end{evaluation}
