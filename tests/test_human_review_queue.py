@@ -48,10 +48,19 @@ def test_queue_is_exact_disjoint_and_current() -> None:
         for item in payload["items"]
         if item["item_id"].startswith("NSI_COUPLED_")
     }
-    assert nsi["NSI_COUPLED_NEW_32"]["count"] == 32
-    assert nsi[
-        "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4"
-    ]["count"] == 4
+    # Les suffixes numeriques sont le LABEL de la decision d'origine ; les
+    # comptes suivent le registre du lot couple. Ce qui est verrouille, c'est
+    # que la file couvre EXACTEMENT le registre, sans doublon ni oubli.
+    coupled = json.loads(
+        (ROOT / "audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert sum(item["count"] for item in nsi.values()) == coupled["count"]
+    assert nsi["NSI_COUPLED_NEW_32"]["count"] == coupled["counts_by_origin"]["CREATED"]
+    assert nsi["NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4"]["count"] == (
+        coupled["counts_by_origin"]["REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED"]
+    )
     assert all(
         item["required_reviewers"] == [
             "EXPERT_NSI",

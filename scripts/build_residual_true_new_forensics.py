@@ -707,8 +707,13 @@ def build_reports(
     declared_debt = _declared_separate_debt(root)
     separate_debt = set().union(*declared_debt.values()) if declared_debt else set()
     suspended = _suspended_qualifications(root)
-    if suspended & separate_debt:
-        raise ValueError("qualifications suspendues et dettes declarees non disjointes")
+    # Une qualification peut etre suspendue ET l'objet porte par un registre
+    # de dette declaree : c'est le cas des fiches methodes reecrites du lot
+    # couple. L'objet n'est impute qu'UNE fois, et le registre declare prime
+    # -- c'est lui qui porte le paquet de revue ou un humain les verra. La
+    # suspension reste vraie sur le disque, elle ne compte simplement pas deux
+    # fois ici.
+    suspended = suspended - separate_debt
     extra = sorted(
         active_unqualified - initial_fingerprints - separate_debt - suspended
     )

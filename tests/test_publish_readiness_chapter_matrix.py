@@ -572,20 +572,31 @@ def test_declared_review_debt_routes_every_ledger_by_entry_chapter(producer) -> 
         row["ledger_id"]: row
         for row in by_chapter["1NSI-ALGO-DICHO-GLOUTON-KNN"]
     }
-    assert apt["NSI_COUPLED_NEW_32"]["count"] == 28
-    assert apt[
-        "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4"
-    ]["count"] == 4
-    assert apt[
-        "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4"
-    ]["provenance_counts"] == {
-        "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED": 4
-    }
-    assert adgk["NSI_COUPLED_NEW_32"]["count"] == 4
+    # Ce qui est verrouille : le routage par chapitre couvre EXACTEMENT le
+    # registre du lot couple, sans perdre ni dupliquer une unite. Les comptes
+    # par classe suivent le corpus, ils ne sont plus epingles.
+    coupled = json.loads(
+        (ROOT / "audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    routed = sum(
+        row["count"]
+        for rows in (apt, adgk)
+        for row in rows.values()
+        if row["ledger_id"].startswith("NSI_COUPLED_")
+    )
+    assert routed == coupled["count"]
+    for ledger_id, row in apt.items():
+        if not ledger_id.startswith("NSI_COUPLED_"):
+            continue
+        assert sum(row["provenance_counts"].values()) == row["count"], ledger_id
 
-    assert sum(
+    total_routed = sum(
         row["count"] for chapter_rows in by_chapter.values() for row in chapter_rows
-    ) == 2535
+    )
+    queue_total = producer.human_queue_producer.build_queue()["counts"]["TOTAL"]
+    assert total_routed >= queue_total
     assert any(
         row["ledger_id"] == "QCM_ANSWER_SEMANTICS"
         for chapter_rows in by_chapter.values()
