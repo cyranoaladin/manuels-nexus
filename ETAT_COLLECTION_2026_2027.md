@@ -1,30 +1,35 @@
 # ÉTAT DE LA COLLECTION — édition 2026-2027
 
-Généré le 2026-08-11 par `scripts/collection_dashboard.py`.
+> **NON AUTORITAIRE — DIAGNOSTIC HISTORIQUE.** Le verdict de release
+> appartient exclusivement à `audit/PUBLISH_READINESS_CHAPTER_MATRIX.json`.
+
+Généré de façon déterministe par `scripts/collection_dashboard.py`.
 Aucun chiffre de ce document n'est saisi à la main : tout est recalculé
 depuis l'arbre par `scripts/chapter_readiness.py`.
 
 ## Vue d'ensemble
 
-- Chapitres : **51**, dont **0** prêts pour release
-- Manuels prêts pour release : **0 / 6**
-- Capacités rattachées : **312 / 312** (0 non rattachées)
-- Objets encore au statut `generated` : **2472 / 2782**
+- Chapitres : **52**, dont **0** satisfont l'ancienne checklist
+- Manuels satisfaisant l'ancienne checklist : **0 / 6**
+- Capacités rattachées : **320 / 320** (0 non rattachées)
+- Objets encore au statut `generated` : **1816 / 5401**
 
 ## Par manuel
 
 | Manuel | Programme | Chapitres | READY | EN COURS | SQUELETTE | BLOQUÉ | Capacités | Exercices | `generated` | Prêt |
 |---|---|---:|---:|---:|---:|---:|---|---:|---:|---:|
-| Mathématiques Première spécialité | 2026 | 10 | 0 | 10 | 0 | 0 | 50/50 | 473/312 | 1383/1391 | 92.0% |
-| NSI Première spécialité | 2019 | 10 | 0 | 1 | 9 | 0 | 53/53 | 100/320 | 0/302 | 51.3% |
-| Mathématiques Terminale spécialité | 2019 | 11 | 0 | 4 | 7 | 0 | 67/67 | 255/376 | 757/757 | 72.1% |
-| NSI Terminale spécialité | 2019 | 6 | 0 | 0 | 6 | 0 | 59/59 | 23/266 | 103/103 | 41.1% |
-| Mathématiques complémentaires Terminale | 2019 | 9 | 0 | 0 | 9 | 0 | 50/50 | 36/300 | 141/141 | 46.7% |
-| Mathématiques expertes Terminale | 2019 | 5 | 0 | 0 | 5 | 0 | 33/33 | 24/194 | 88/88 | 46.7% |
+| Mathématiques Première spécialité | 2026 | 10 | 0 | 10 | 0 | 0 | 53/53 | 482/330 | 1408/1441 | 79.3% |
+| NSI Première spécialité | 2019 | 10 | 0 | 8 | 2 | 0 | 53/53 | 296/320 | 0/825 | 77.3% |
+| Mathématiques Terminale spécialité | 2019 | 11 | 0 | 10 | 1 | 0 | 67/67 | 413/376 | 56/1139 | 69.7% |
+| NSI Terminale spécialité | 2019 | 7 | 0 | 6 | 1 | 0 | 61/61 | 266/290 | 109/720 | 64.8% |
+| Mathématiques complémentaires Terminale | 2019 | 9 | 0 | 9 | 0 | 0 | 53/53 | 300/318 | 150/776 | 60.0% |
+| Mathématiques expertes Terminale | 2019 | 5 | 0 | 5 | 0 | 0 | 33/33 | 194/194 | 93/500 | 66.7% |
 
 ## Lecture
 
-Un chapitre n'est `READY` que si les quinze critères de
+Le libellé `READY` ci-dessus appartient uniquement à l'ancienne
+checklist. Il ne constitue jamais un verdict de publication. Les
+quinze critères historiques de
 `chapter_readiness.py` sont réunis, dont l'absence totale d'objet au
 statut `generated`. Un objet `generated` n'a franchi aucune revue :
 le pipeline de statuts interdit qu'il paraisse dans une release.

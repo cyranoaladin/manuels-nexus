@@ -18,8 +18,9 @@ Usage :
 
 from __future__ import annotations
 
+import argparse
+import hashlib
 import json
-from datetime import date
 from pathlib import Path
 
 import yaml
@@ -55,6 +56,16 @@ def classer(ch) -> str:
 
 def construire() -> dict:
     chapitres = collecter()
+    chapter_ids = sorted(chapter.chapter_id for chapter in chapitres)
+    matrix_path = RACINE / "audit/PUBLISH_READINESS_CHAPTER_MATRIX.json"
+    matrix = json.loads(matrix_path.read_text(encoding="utf-8"))
+    authoritative_ids = sorted(
+        str(row["chapter"]) for row in matrix.get("chapters") or []
+    )
+    if not authoritative_ids or chapter_ids != authoritative_ids:
+        raise ValueError(
+            "le périmètre du dashboard legacy diverge de la matrice autoritaire"
+        )
     registre_path = RACINE / "docs/programmes/PROGRAMMES_2026_2027.yaml"
     registre = yaml.safe_load(registre_path.read_text(encoding="utf-8")) if registre_path.exists() else {}
     programmes = {m["manual_id"]: m for m in (registre.get("manuels") or [])}
@@ -84,7 +95,11 @@ def construire() -> dict:
             "readiness_moyenne": round(
                 sum(c.readiness_percent for c in siens) / len(siens), 1
             ) if siens else 0.0,
-            "release_status": "RELEASE_CANDIDATE" if siens and all(c.release_ready for c in siens) else "EN_PRODUCTION",
+            "legacy_diagnostic_status": (
+                "LEGACY_CHECKLIST_SATISFIED"
+                if siens and all(c.release_ready for c in siens)
+                else "LEGACY_CHECKLIST_INCOMPLETE"
+            ),
         }
 
     total_cap = sum(m["capacites_total"] for m in manuels.values())
@@ -92,19 +107,30 @@ def construire() -> dict:
     return {
         "schema_version": 1,
         "generated_by": "scripts/collection_dashboard.py",
-        "generated_on": date.today().isoformat(),
+        "authority": "NON_AUTHORITATIVE_LEGACY_DIAGNOSTIC",
+        "authoritative_successor": "audit/PUBLISH_READINESS_CHAPTER_MATRIX.json",
+        "authoritative_release_verdict": "NOT_PROVIDED",
+        "chapter_ids": chapter_ids,
+        "chapter_ids_digest": "sha256:"
+        + hashlib.sha256(
+            json.dumps(chapter_ids, separators=(",", ":")).encode("utf-8")
+        ).hexdigest(),
         "edition": "2026-2027",
         "manuels": manuels,
         "collection": {
             "chapitres_total": len(chapitres),
-            "chapitres_ready": sum(1 for c in chapitres if c.release_ready),
+            "legacy_checklist_satisfied_chapters": sum(
+                1 for c in chapitres if c.release_ready
+            ),
             "capacites_total": total_cap,
             "capacites_rattachees": total_map,
             "capacites_non_rattachees": total_cap - total_map,
             "objets_total": sum(c.objects_total for c in chapitres),
             "objets_generated": sum(c.objects_generated for c in chapitres),
-            "manuels_release_ready": sum(
-                1 for m in manuels.values() if m["release_status"] == "RELEASE_CANDIDATE"
+            "legacy_checklist_satisfied_manuals": sum(
+                1
+                for m in manuels.values()
+                if m["legacy_diagnostic_status"] == "LEGACY_CHECKLIST_SATISFIED"
             ),
         },
     }
@@ -115,14 +141,19 @@ def rendre_markdown(d: dict) -> str:
     lignes = [
         "# ÉTAT DE LA COLLECTION — édition 2026-2027",
         "",
-        f"Généré le {d['generated_on']} par `scripts/collection_dashboard.py`.",
+        "> **NON AUTORITAIRE — DIAGNOSTIC HISTORIQUE.** Le verdict de release",
+        "> appartient exclusivement à `audit/PUBLISH_READINESS_CHAPTER_MATRIX.json`.",
+        "",
+        "Généré de façon déterministe par `scripts/collection_dashboard.py`.",
         "Aucun chiffre de ce document n'est saisi à la main : tout est recalculé",
         "depuis l'arbre par `scripts/chapter_readiness.py`.",
         "",
         "## Vue d'ensemble",
         "",
-        f"- Chapitres : **{c['chapitres_total']}**, dont **{c['chapitres_ready']}** prêts pour release",
-        f"- Manuels prêts pour release : **{c['manuels_release_ready']} / 6**",
+        f"- Chapitres : **{c['chapitres_total']}**, dont "
+        f"**{c['legacy_checklist_satisfied_chapters']}** satisfont l'ancienne checklist",
+        f"- Manuels satisfaisant l'ancienne checklist : "
+        f"**{c['legacy_checklist_satisfied_manuals']} / 6**",
         f"- Capacités rattachées : **{c['capacites_rattachees']} / {c['capacites_total']}**"
         f" ({c['capacites_non_rattachees']} non rattachées)",
         f"- Objets encore au statut `generated` : **{c['objets_generated']} / {c['objets_total']}**",
@@ -147,7 +178,9 @@ def rendre_markdown(d: dict) -> str:
         "",
         "## Lecture",
         "",
-        "Un chapitre n'est `READY` que si les quinze critères de",
+        "Le libellé `READY` ci-dessus appartient uniquement à l'ancienne",
+        "checklist. Il ne constitue jamais un verdict de publication. Les",
+        "quinze critères historiques de",
         "`chapter_readiness.py` sont réunis, dont l'absence totale d'objet au",
         "statut `generated`. Un objet `generated` n'a franchi aucune revue :",
         "le pipeline de statuts interdit qu'il paraisse dans une release.",
@@ -165,16 +198,33 @@ def rendre_markdown(d: dict) -> str:
     return "\n".join(lignes)
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--check", action="store_true")
+    arguments = parser.parse_args(argv)
     d = construire()
-    (RACINE / "ETAT_COLLECTION_2026_2027.json").write_text(
-        json.dumps(d, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-    )
-    (RACINE / "ETAT_COLLECTION_2026_2027.md").write_text(rendre_markdown(d), encoding="utf-8")
+    json_path = RACINE / "ETAT_COLLECTION_2026_2027.json"
+    markdown_path = RACINE / "ETAT_COLLECTION_2026_2027.md"
+    rendered_json = json.dumps(d, ensure_ascii=False, indent=2) + "\n"
+    rendered_markdown = rendre_markdown(d)
+    if arguments.check:
+        if (
+            not json_path.is_file()
+            or json_path.read_text(encoding="utf-8") != rendered_json
+            or not markdown_path.is_file()
+            or markdown_path.read_text(encoding="utf-8") != rendered_markdown
+        ):
+            print("dashboard legacy périmé")
+            return 1
+        print("dashboard legacy current")
+        return 0
+    json_path.write_text(rendered_json, encoding="utf-8")
+    markdown_path.write_text(rendered_markdown, encoding="utf-8")
     c = d["collection"]
     print(
         f"tableau de bord ecrit | {c['chapitres_total']} chapitres, "
-        f"{c['chapitres_ready']} ready, {c['manuels_release_ready']}/6 manuels"
+        f"{c['legacy_checklist_satisfied_chapters']} legacy-ready, "
+        f"{c['legacy_checklist_satisfied_manuals']}/6 manuels legacy-ready"
     )
     return 0
 

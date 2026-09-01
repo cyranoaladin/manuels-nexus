@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Calcule l'état de préparation de chaque chapitre de la collection.
+"""Dashboard historique de préparation, non autoritaire pour la release.
 
-La complétude d'un chapitre n'est jamais déclarée à la main : elle est
-recalculée ici depuis l'arbre réel — contrats, référentiels, objets produits,
-reçus de vérification, PDF construits.
+Le verdict autoritaire est désormais
+`audit/PUBLISH_READINESS_CHAPTER_MATRIX.json`. Cette vue conserve ses anciens
+indicateurs éditoriaux, mais ne consomme pas toutes les preuves clone,
+cross-discipline et sémantiques : elle ne peut donc jamais émettre READY.
 
 Seuil d'exercices (décision éditoriale du 2026-08-11, remplace le seuil
 uniforme de 50) :
@@ -33,6 +34,19 @@ from dataclasses import dataclass, field, asdict
 from pathlib import Path
 
 import yaml
+
+try:
+    from scripts.capacity_identity import (
+        CapacityIdentityResolver,
+        PREREQUISITE,
+        UnresolvedCapacityIdentity,
+    )
+except ModuleNotFoundError:  # exécution directe depuis scripts/
+    from capacity_identity import (  # type: ignore[no-redef]
+        CapacityIdentityResolver,
+        PREREQUISITE,
+        UnresolvedCapacityIdentity,
+    )
 
 RACINE = Path(__file__).resolve().parents[1]
 
@@ -91,6 +105,7 @@ def cible_exercices(nb_capacites: int) -> int:
 class Chapitre:
     chapter_id: str
     manual_id: str | None
+    authority: str = "NON_AUTHORITATIVE_LEGACY_DASHBOARD"
     programme_version: str | None = None
     capabilities_total: int = 0
     capabilities_mapped: int = 0
@@ -108,6 +123,8 @@ class Chapitre:
     hints_count: int = 0
     methods_count: int = 0
     qcm_status: str = "absent"
+    qcm_capacities_assessed: list = field(default_factory=list)
+    qcm_capacities_missing: list = field(default_factory=list)
     remediation_status: str = "absent"
     evaluation_A: bool = False
     evaluation_B: bool = False
@@ -179,8 +196,11 @@ def analyser(
     dossier: Path,
     versions: dict,
     builds_observes: Mapping[str, set[str]],
+    *,
+    resolver: CapacityIdentityResolver | None = None,
 ) -> Chapitre:
     nom = dossier.name
+    resolver = resolver or CapacityIdentityResolver.from_corpora((dossier.parent,))
     ch = Chapitre(chapter_id=nom, manual_id=manuel_de(nom))
     ch.programme_version = versions.get(ch.manual_id or "")
 
@@ -191,11 +211,9 @@ def analyser(
         contrat = yaml.safe_load(contrat_path.read_text(encoding="utf-8")) or {}
         brut = str(contrat.get("statut", "absent")).split("#")[0].strip()
         ch.contract_status = brut or "absent"
-        capacites = [c["code"] for c in (contrat.get("capacites") or []) if c.get("code")]
-        mappees = [
-            c for c in (contrat.get("capacites") or [])
-            if c.get("ref_capacite")
-        ]
+        identities = resolver.capacities_of(nom)
+        capacites = [identity.local_code for identity in identities]
+        mappees = [identity for identity in identities if identity.official_ref]
         ch.capabilities_total = len(capacites)
         ch.capabilities_mapped = len(mappees)
     ch.target_exercises = cible_exercices(ch.capabilities_total)
@@ -214,7 +232,7 @@ def analyser(
             meta = _meta(fichier)
             parcours = str(meta.get("parcours", "?"))
             compte_parcours[parcours] = compte_parcours.get(parcours, 0) + 1
-            for code in meta.get("capacites_codes") or []:
+            for code in resolver.resolve_meta_codes(nom, meta):
                 par_capacite[code] = par_capacite.get(code, 0) + 1
                 parcours_par_capacite.setdefault(code, set()).add(parcours)
 
@@ -241,18 +259,41 @@ def analyser(
 
     qcm = dossier / "qcm"
     if qcm.exists():
-        json_qcm = list(qcm.glob("*-QCM.json"))
+        json_qcm = sorted(qcm.glob("*-QCM.json"))
         tex_qcm = list(qcm.glob("*-QCM.tex"))
-        if json_qcm:
+        if len(json_qcm) > 1:
+            ch.qcm_status = "multiple_sources"
+            ch.qcm_capacities_missing = sorted(capacites)
+        elif json_qcm:
             donnees = json.loads(json_qcm[0].read_text(encoding="utf-8"))
+            if donnees.get("chapitre") != nom:
+                raise ValueError(f"{nom}: chapitre QCM incoherent")
             questions = donnees.get("questions", [])
+            assessed: set[str] = set()
+            for question in questions:
+                resolution = resolver.resolve(nom, question.get("capacite"))
+                if resolution.rule == PREREQUISITE:
+                    raise UnresolvedCapacityIdentity(
+                        f"{nom}/{question.get('id')}: prerequis utilise "
+                        "comme capacite QCM"
+                    )
+                assessed.add(resolution.identity.local_code)
+            ch.qcm_capacities_assessed = sorted(assessed)
+            ch.qcm_capacities_missing = sorted(set(capacites) - assessed)
             manquants = sum(
                 1
                 for q in questions
                 for lettre in (q.get("options") or {})
                 if lettre != q.get("correcte") and lettre not in (q.get("diagnostics") or {})
             )
-            ch.qcm_status = "source_unique" if manquants == 0 else f"diagnostics_incomplets:{manquants}"
+            if manquants:
+                ch.qcm_status = f"diagnostics_incomplets:{manquants}"
+            elif ch.qcm_capacities_missing:
+                ch.qcm_status = (
+                    "capacites_manquantes:" + ",".join(ch.qcm_capacities_missing)
+                )
+            else:
+                ch.qcm_status = "source_unique"
         elif tex_qcm:
             ch.qcm_status = "tex_seul"
 
@@ -263,9 +304,22 @@ def analyser(
 
     evals = dossier / "evaluations"
     if evals.exists():
-        noms = [f.name for f in evals.glob("*.tex")]
-        ch.evaluation_A = any("EV-A" in n and "corrige" not in n for n in noms)
-        ch.evaluation_B = any("EV-B" in n and "corrige" not in n for n in noms)
+        variants: set[str] = set()
+        for source in sorted(evals.glob("*.tex")):
+            meta = _meta(source)
+            if meta.get("type_objet") != "evaluation":
+                continue
+            resolver.resolve_meta_codes(nom, meta)
+            version = str(meta.get("version") or "").strip().upper()
+            object_id = str(meta.get("id") or "").strip().upper()
+            if version in {"A", "B"}:
+                variants.add(version)
+            elif re.search(r"-(?:EV|EVAL)-A$", object_id):
+                variants.add("A")
+            elif re.search(r"-(?:EV|EVAL)-B$", object_id):
+                variants.add("B")
+        ch.evaluation_A = "A" in variants
+        ch.evaluation_B = "B" in variants
 
     # --- statuts des objets ---------------------------------------------------
     # Un objet `generated` n'a franchi aucune revue : le pipeline de statuts
@@ -371,20 +425,30 @@ def analyser(
         ch.teacher_build,
     ]
     ch.readiness_percent = round(100 * sum(criteres) / len(criteres), 1)
-    ch.release_ready = all(criteres) and not b
+    # Ce dashboard ne porte plus l'autorité de release. Même si ses critères
+    # historiques sont satisfaits, la matrice verticale reste le seul gate.
+    ch.release_ready = False
     return ch
 
 
 def collecter() -> list[Chapitre]:
     versions = _versions_programme()
     builds_observes = _builds_observes()
+    resolver = CapacityIdentityResolver.from_corpora(RACINES_CHAPITRES)
     chapitres = []
     for base in RACINES_CHAPITRES:
         if not base.exists():
             continue
         for dossier in sorted(base.iterdir()):
             if dossier.is_dir() and (dossier / "contrat.yaml").exists():
-                chapitres.append(analyser(dossier, versions, builds_observes))
+                chapitres.append(
+                    analyser(
+                        dossier,
+                        versions,
+                        builds_observes,
+                        resolver=resolver,
+                    )
+                )
     return chapitres
 
 
@@ -419,6 +483,8 @@ def main() -> int:
                 {
                     "schema_version": 1,
                     "generated_by": "scripts/chapter_readiness.py",
+                    "authority": "NON_AUTHORITATIVE_LEGACY_DASHBOARD",
+                    "authoritative_successor": "audit/PUBLISH_READINESS_CHAPTER_MATRIX.json",
                     "chapters": [asdict(c) for c in chapitres],
                 },
                 ensure_ascii=False,
