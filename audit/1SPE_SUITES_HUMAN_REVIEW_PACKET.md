@@ -3,7 +3,7 @@
 > Entrée de revue uniquement : ce document ne constitue ni une approbation de publication, ni une acceptation de release.
 
 - État chapitre : `PENDING_HUMAN`
-- SHA source revue : `1057951c1a7e8be8731982b5918effb60f2471cc`
+- SHA source revue : `fe408b33918f04c07b65b08ec46c5b6eb3015f9b`
 - SHA outillage de rendu : `5d935e720a82e207d7a8769f6bd2608ef1160322`
 - Contrat : `draft`
 - Approbation publication : `false`
@@ -13,7 +13,7 @@
 - Dimensions machine PASS : `1127`
 - Dimensions sans preuve machine suffisante : `0`
 - UNKNOWN : `0`
-- Digest manifeste : `sha256:bf7eccfc8aa82dbfbb9e19519c1b076217a2d5f00cb149bab65fcea78ece8c40`
+- Digest manifeste : `sha256:b74c9a67c18ae51d34c38452ccf54ced011298103afd9e73f22283779a752fba`
 
 ## Rôles humains requis
 
@@ -171,11 +171,11 @@
 | `1SPE-SUITES-EX-049` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-049.tex` | `exercice` | `generated` | `8941f7e57a08c60e59cc7c2199c5b1158cc46bf7b15340ed68dda2df3a71fdf6` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
 | `1SPE-SUITES-EX-050` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-050.tex` | `exercice` | `generated` | `286f3e24bb5b3fc78fb5f56064f60c8fd2c916c61827645a7d30855b9d1013de` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
 | `1SPE-SUITES-EX-051` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-051.tex` | `exercice` | `generated` | `f42b79390e0ade5320eb4e0a81fe5f3530d409e7539f995c38a6ccb1e328e4d9` | YES | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
-| `1SPE-SUITES-FR-R1` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-FR-R1.tex` | `remediation` | `generated` | `cbc618b289be1aa49527b839d8c4c584f998fc753fb1b917524978a5c8aedd9c` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
-| `1SPE-SUITES-FR-R2` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-FR-R2.tex` | `remediation` | `generated` | `89361095f8bb2cf4f2a6bae72a4994f2b9b488d2bb78410bd35937ca1a8f47ed` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
-| `1SPE-SUITES-FR-R3` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-FR-R3.tex` | `remediation` | `generated` | `ba641b56204fb82d441f1ab4b5676759255438404d4f0d3b5fcca815a7e8fc91` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
-| `1SPE-SUITES-FR-R4` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-FR-R4.tex` | `remediation` | `generated` | `7ce8abf5b5b917d33c5d6cbe7203484631e1980add6ca7ec3b7b00cad9af5237` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
-| `1SPE-SUITES-FR-R5` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-FR-R5.tex` | `remediation` | `generated` | `32fbd1d7b46edfb5dac2fd0e6a3af51b97ac5d7a6c428b97c0ef705ff87b9fa5` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
+| `1SPE-SUITES-FR-R1` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-FR-R1.tex` | `remediation` | `generated` | `0d6cd983d7eb975cfd030c8160f37e8ed8847f71ef58df237207ac5d30d8cd96` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
+| `1SPE-SUITES-FR-R2` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-FR-R2.tex` | `remediation` | `generated` | `6e158dc0b5e024b31cc0c3a9f3278b0b7380c6139f772bab2d107e4201c4ed41` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
+| `1SPE-SUITES-FR-R3` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-FR-R3.tex` | `remediation` | `generated` | `917e4673c37221a7a84771fbc8ed99a0b5d28038449b40570758290cd4614ac4` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
+| `1SPE-SUITES-FR-R4` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-FR-R4.tex` | `remediation` | `generated` | `6c254f6b9f8d127837a76e45eca34a2ae9e0b4f6955ab9a49780384081e15c26` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
+| `1SPE-SUITES-FR-R5` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-FR-R5.tex` | `remediation` | `generated` | `92915cb0e8ebd6542ca1bf722e5d2596ea793af157fa0cac862c7c12adc60975` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
 | `1SPE-SUITES-ME-001` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-001.tex` | `methode` | `generated` | `615d5ba454d09bb3d8a3a39e7d47493bca7ed3421d227b14853cb0849aef48aa` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
 | `1SPE-SUITES-ME-002` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-002.tex` | `methode` | `generated` | `e1fbdbf555e7404b95d99e56fa7e22ea3a779b691bd04e0a1caf85ef087843d6` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |
 | `1SPE-SUITES-ME-003` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-003.tex` | `methode` | `generated` | `23db01f2fb70b1f69c8e414a831fc802ef8eff0e3775826f7ea794540d63db7d` | NO | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | MACHINE_PASS | PENDING_HUMAN |

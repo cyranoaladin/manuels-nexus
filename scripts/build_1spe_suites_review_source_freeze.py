@@ -18,7 +18,12 @@ OUTPUT = ROOT / "audit" / "1SPE_SUITES_REVIEW_SOURCE_FREEZE.json"
 #: sous audit/reviews/human/1SPE-SUITES/superseded/ et marque
 #: HISTORICAL_SUPERSEDED. Cette reemission est explicite et autorisee ;
 #: le rebind automatique reste interdit.
-SOURCE_SHA = "1057951c1a7e8be8731982b5918effb60f2471cc"
+#: Gel canonique. Re-lie le 2026-09-01 sur decision humaine explicite,
+#: apres la correction du namespace de metadonnees des cinq FR-R* : le
+#: corps pedagogique est byte-identique, seule leur META declarait un
+#: prerequis dans le champ des capacites. Voir
+#: audit/1SPE_SUITES_REVIEW_FREEZE_REBIND_DECISION.json.
+SOURCE_SHA = "817ee970a599ba33139ad78eb0e74ff4c73d6f44"
 CHAPTER_ID = "1SPE-SUITES"
 CHAPTER_PREFIX = "Mathematiques/manuel-maths/chapitres/1SPE-SUITES"
 QCM_JSON = f"{CHAPTER_PREFIX}/qcm/1SPE-SUITES-QCM.json"

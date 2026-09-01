@@ -3,12 +3,12 @@
   "attestation_template": "I reviewed the frozen chapter {chapter_id}, object set {object_set_digest}, packet {packet_digest}, as {review_role}. Verdict: {verdict}.",
   "canonical_source_freeze": {
     "artifact": "1SPE_SUITES_REVIEW_SOURCE_FREEZE.json",
-    "chapter_object_set_digest": "sha256:2cddd2b2ca0c6ed6b85898bcda6ec405b33ed4288f4c4770d272b5c608b5dab8",
+    "chapter_object_set_digest": "sha256:8a36c46283dde9b3776a566e8964b99951d589eac57b0da7250f70b20b84f648",
     "chapter_objects": 161,
     "generator": "scripts/build_1spe_suites_review_source_freeze.py",
     "relation_to_object_set_digest": "digest distinct : autre generateur, autres champs couverts ; les deux doivent porter le meme nombre d'objets",
     "schema_version": "1SPE_SUITES_REVIEW_SOURCE_FREEZE.v1",
-    "source_sha": "1057951c1a7e8be8731982b5918effb60f2471cc"
+    "source_sha": "817ee970a599ba33139ad78eb0e74ff4c73d6f44"
   },
   "capabilities": [
     "C1",
@@ -18,12 +18,7 @@
     "C5",
     "C6",
     "C7",
-    "C8",
-    "R1",
-    "R2",
-    "R3",
-    "R4",
-    "R5"
+    "C8"
   ],
   "chapter_id": "1SPE-SUITES",
   "discipline": "MATH",
@@ -1020,7 +1015,7 @@
       "section": "remediation"
     }
   ],
-  "packet_digest": "sha256:0b8dda49d9709a4453d0c2267ca212e18151d81f1d95adab17960a2988fa97ba",
+  "packet_digest": "sha256:4ad31fcac457e28063b7ea6fe97478fcdf1de35e2ccc05635887475c8d0c39b7",
   "packet_letter": "A",
   "permitted_verdicts": [
     "APPROVED",
@@ -1088,12 +1083,12 @@
   ],
   "render_evidence": "ABSENT",
   "render_paths": [],
-  "repository_source_sha": "1057951c1a7e8be8731982b5918effb60f2471cc",
+  "repository_source_sha": "4ca99a70bee0920883d0bf87d4bb104e44a31db7",
   "review_render_digest": "sha256:1d4b86fdbc20db24d60facf950f8292748681eb348ce195adb7b260c78483ef6",
   "review_role": "EXPERT_MATHEMATIQUE",
   "reviewer_assignment": "PENDING_UNASSIGNED",
   "reviewer_must_examine_current_content_not_only_diffs": true,
-  "semantic_review_digest": "sha256:beee4bdac92a261b0b30a18bd97a692aacdf5274e40dad1fde6f154a9d4cc421",
+  "semantic_review_digest": "sha256:8f016cb6be9e04f44976994b3f9c3f16df162c4c067233686dd2eeabbf8f92e5",
   "unassembled_object_ids": [],
   "verdict": null,
   "verdict_state": "PENDING_UNASSIGNED"

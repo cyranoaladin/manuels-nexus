@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Lie le gel historique 1SPE-SUITES a l'etat courant du depot.
 
-Decision humaine du 2026-08-28 : le gel canonique reste c667f12b / 161 objets
+Decision humaine du 2026-09-01 : le gel canonique est re-lie sur le contenu
+dont la META des cinq FR-R* est corrigee (supersede la decision du 2026-08-28).
 et n'est PAS reemis parce que HEAD a avance. Le gel est une identite de
 CONTENU, pas l'exigence que le depot reste a son commit d'origine.
 
@@ -225,7 +226,7 @@ def build_binding() -> dict[str, Any]:
     return {
         "artifact_type": "suites_current_freeze_binding",
         "schema_version": 1,
-        "decision_ref": "decision humaine 2026-08-28 : conserver le gel c667f12b / 161",
+        "decision_ref": "decision humaine 2026-09-01 : re-geler sur le contenu a namespace corrige (supersede 2026-08-28)",
         "freeze_source_sha": freeze["source_sha"],
         "freeze_object_count": freeze["counts"]["chapter_objects"],
         "freeze_object_set_digest": freeze["chapter_object_set_digest"],
