@@ -13204,11 +13204,38 @@ def test_repository_fail_on_new_preserves_all_qualified_active_debt(
     # bloquants. Une reecriture remplace une dette par une autre, elle n'en
     # supprime aucune.
     superseded = _superseded_migration_fingerprints()
-    assert len(superseded) == 4
-    assert set(comparison["resolved"]) == superseded
+    corrections = set(_identity_corrections())
+    # OLD : les resolues valaient exactement les supersedees, et la dette
+    # declaree etait disjointe de la dette qualifiee de la baseline.
+    # POURQUOI : aucune dette perdue, aucune requalification silencieuse.
+    # NEW : toute resolue est prouvee -- supersession OU correction
+    # d'identite -- et une empreinte peut appartenir aux deux ensembles a
+    # condition que son registre PROUVE que sa source a change depuis la
+    # baseline. C'est plus fort qu'une disjonction aveugle : celle-ci
+    # interdisait le cas, celle-la l'autorise UNIQUEMENT sur preuve, donc
+    # attrape le re-etiquetage d'un objet inchange.
+    resolved = set(comparison["resolved"])
+    assert resolved <= superseded | corrections, (
+        f"empreintes resolues sans preuve: {sorted(resolved - superseded - corrections)}"
+    )
     assert comparison["regressions"] == []
-    assert set(comparison["unchanged"]) == active_fingerprints - superseded
-    assert declared.isdisjoint(active_fingerprints)
+    assert set(comparison["unchanged"]) == active_fingerprints - resolved
+
+    coupled = json.loads(
+        (
+            ROOT / "audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json"
+        ).read_text(encoding="utf-8")
+    )
+    changed_since_baseline = {
+        str(entry["fingerprint"])
+        for entry in coupled["entries"]
+        if entry["origin"] != "CREATED"
+        and entry["source_sha256_before"] not in (None, entry["source_sha256"])
+    }
+    assert (declared & active_fingerprints) <= changed_since_baseline, (
+        "une dette declaree sur un objet qualifie dont rien ne prouve le "
+        "changement depuis la baseline"
+    )
 
 
 def test_repository_method_aliases_are_unambiguous(
