@@ -154,3 +154,78 @@ def test_a_nested_enumerate_holds_subquestions_not_questions(coverage) -> None:
         r"\end{enumerate}",
     ])
     assert coverage.top_level_items(exercise) == 2
+
+
+# ---------------------------------------------------------------------------
+# Le registre semantique branche sur le graphe EX/CO
+# ---------------------------------------------------------------------------
+
+
+def test_coverage_established_is_never_read_as_scientific_correctness(coverage) -> None:
+    """Un corrige COMPLET mais FAUX reste « couvert ».
+
+    C'est la frontiere du registre, et elle doit rester visible : la couverture
+    dit que chaque question recoit une reponse, jamais que la reponse est
+    juste. L'exactitude est prouvee par l'oracle, ailleurs. Si ce test devenait
+    faux, c'est que quelqu'un aurait fait dire au registre plus qu'il ne prouve.
+    """
+    exercise = r"""\begin{enumerate}
+  \item Calculer $2+2$.
+  \item Calculer $3\times 3$.
+\end{enumerate}"""
+    faux = r"""\textbf{1.} $2+2=5$.
+\textbf{2.} $3\times 3=10$."""
+    verdict, _evidence = coverage.classify(exercise, faux)
+    assert verdict == coverage.ESTABLISHED
+
+
+def test_a_correction_that_skips_a_question_is_not_established(coverage) -> None:
+    exercise = r"""\begin{enumerate}
+  \item Premiere question.
+  \item Deuxieme question.
+  \item Troisieme question.
+\end{enumerate}"""
+    lacunaire = r"""\textbf{1.} Reponse.
+\textbf{2.} Reponse."""
+    verdict, evidence = coverage.classify(exercise, lacunaire)
+    assert verdict == coverage.MISSING
+    assert evidence["missing"] == [3]
+
+
+def test_the_committed_ledger_matches_the_producer() -> None:
+    import importlib.util
+    import json
+    import sys
+
+    root = Path(__file__).resolve().parents[1]
+    spec = importlib.util.spec_from_file_location(
+        "build_ex_co_answer_coverage_ledger_under_test",
+        root / "scripts" / "build_ex_co_answer_coverage_ledger.py",
+    )
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    committed = json.loads(
+        (root / "audit" / "EX_CO_ANSWER_COVERAGE_LEDGER.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert module.build_ledger() == committed
+
+
+def test_every_missing_answer_stays_release_blocking(coverage) -> None:
+    """Les lacunes reelles ne sont pas absorbees par le nouveau statut."""
+    import json
+
+    root = Path(__file__).resolve().parents[1]
+    ledger = json.loads(
+        (root / "audit" / "EX_CO_ANSWER_COVERAGE_LEDGER.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    manquantes = [
+        row for row in ledger["relations"] if row["verdict"] == coverage.MISSING
+    ]
+    assert ledger["totals"].get(coverage.MISSING, 0) == len(manquantes)
+    # Aucune n'est en Premiere : le perimetre de la vague 1 est net.
+    assert [r for r in manquantes if r["chapter"].startswith(("1SPE-", "1NSI-"))] == []

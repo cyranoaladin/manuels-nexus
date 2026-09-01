@@ -71,6 +71,15 @@ def _extension_codes(row: dict) -> tuple[str, ...]:
     )
 
 
+def _answer_coverage(coverage, correction, exercise):
+    """Verdict de couverture pour une paire structurellement saine."""
+
+    return coverage.classify(
+        coverage.pedagogical_body(ROOT / exercise["path"]),
+        coverage.pedagogical_body(ROOT / correction["path"]),
+    )
+
+
 def build_graph(
     *,
     corpora: tuple[Path, ...] = CORPORA,
@@ -83,6 +92,9 @@ def build_graph(
         "ex_co_clone_reader", ROOT / "scripts/build_p0_content_clone_ledger.py"
     )
     identity = _module("ex_co_capacity_identity", ROOT / "scripts/capacity_identity.py")
+    coverage = _module(
+        "ex_co_answer_coverage_reader", ROOT / "scripts/ex_co_answer_coverage.py"
+    )
     resolver = resolver or identity.CapacityIdentityResolver.from_corpora(corpora)
     ledger = dict(clone_ledger) if clone_ledger is not None else json.loads(
         CLONE_LEDGER.read_text(encoding="utf-8")
@@ -205,16 +217,34 @@ def build_graph(
         structural_status = "FAIL" if classes else "MATCH"
         if not classes:
             # Identity, cardinality and scope do not prove that the correction
-            # actually answers the exercise body.  Until a separate semantic
-            # ledger establishes that relation, fail closed as UNKNOWN.
-            classes = ["UNKNOWN"]
+            # actually answers the exercise body.  The semantic authority is
+            # the answer-coverage ledger -- and it establishes a COVERAGE, not
+            # a correctness: le corrige repond a chaque question, sans que cela
+            # dise que la reponse soit juste. L'exactitude reste prouvee
+            # ailleurs (oracle SymPy, blocs d'execution, revue humaine).
+            verdict, _evidence = _answer_coverage(coverage, correction, exercise)
+            if verdict in {
+                coverage.ESTABLISHED,
+                coverage.SINGLE_QUESTION,
+            }:
+                classes = ["ANSWER_COVERAGE_ESTABLISHED"]
+            elif verdict == coverage.MISSING:
+                classes = ["ANSWERS_MISSING"]
+            else:
+                # Convention de mise en page non reconnue : cela ne vaut pas
+                # une lacune, mais cela ne vaut pas non plus une preuve.
+                classes = ["UNKNOWN"]
         order = {
             "ORPHAN_CO": 0,
             "CROSS_DISCIPLINE": 1,
             "MISMATCHED_CONTENT": 2,
             "MISMATCHED_CAPACITY": 3,
-            "CLONE": 4,
-            "UNKNOWN": 5,
+            "ANSWERS_MISSING": 4,
+            "CLONE": 5,
+            "UNKNOWN": 6,
+            # Etabli en dernier : c'est le seul statut qui n'est pas un defaut,
+            # et il ne vaut que couverture, jamais exactitude.
+            "ANSWER_COVERAGE_ESTABLISHED": 7,
         }
         classes = sorted(set(classes), key=order.__getitem__)
         relations.append(

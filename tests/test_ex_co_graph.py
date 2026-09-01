@@ -97,13 +97,95 @@ def test_graph_classifies_match_mismatch_and_orphan_without_unknown(
         },
     )
     by_id = {row["correction_id"]: row for row in graph["relations"]}
-    assert by_id["CO1"]["classifications"] == ["UNKNOWN"]
+    # OLD_ASSERTION_PURPOSE : une paire structurellement saine ne devait pas
+    #   etre declaree prouvee ; faute d'autorite semantique, elle echouait
+    #   fermee sur UNKNOWN.
+    # NEW_ASSERTION : la paire est desormais routee vers l'autorite semantique
+    #   (registre de couverture des reponses). Le corps « Corps. » ne porte
+    #   aucune question enumeree : la couverture est etablie.
+    # WHY_NEW_IS_STRONGER_OR_EQUIVALENT : l'echec ferme est CONSERVE pour toute
+    #   mise en page non reconnue (voir
+    #   test_the_semantic_authority_routes_the_three_outcomes, qui epingle en
+    #   plus les deux autres sorties : lacune reelle et mise en page inconnue).
+    #   L'ancienne assertion n'en epinglait qu'une.
+    assert by_id["CO1"]["classifications"] == ["ANSWER_COVERAGE_ESTABLISHED"]
     assert by_id["CO1"]["structural_status"] == "MATCH"
     assert by_id["CO2"]["classifications"] == ["MISMATCHED_CAPACITY"]
     exercise = {row["exercise_id"]: row for row in graph["exercise_cardinality"]}
     assert exercise["EX1"]["classification"] == "MATCH"
     assert exercise["EX2"]["classification"] == "ORPHAN_EX"
-    assert graph["unknown_count"] == 1
+    assert graph["unknown_count"] == 0
+
+
+def test_the_semantic_authority_routes_the_three_outcomes(tmp_path: Path) -> None:
+    """Couverture etablie, lacune reelle, mise en page inconnue.
+
+    L'autorite semantique n'est consultee qu'apres la structure. Elle doit
+    distinguer trois sorties, et surtout ne jamais transformer une mise en page
+    non reconnue en preuve : celle-la reste UNKNOWN, echec ferme.
+    """
+    module = _module()
+    corpus, chapter = _corpus(tmp_path)
+
+    def _pair(index: int, capacite: str, questions: int, corps: str):
+        enonce = "\n".join(
+            [r"\begin{enumerate}"]
+            + [rf"  \item Question {n}." for n in range(1, questions + 1)]
+            + [r"\end{enumerate}"]
+        )
+        ex = chapter / f"exercices/ex{index}.tex"
+        ex.parent.mkdir(parents=True, exist_ok=True)
+        ex.write_text(
+            "% META: "
+            + json.dumps(
+                {
+                    "id": f"EX{index}",
+                    "chapitre": chapter.name,
+                    "type_objet": "exercice",
+                    "capacites_codes": [capacite],
+                }
+            )
+            + "\n"
+            + enonce
+            + "\n",
+            encoding="utf-8",
+        )
+        co = chapter / f"corriges/co{index}.tex"
+        co.parent.mkdir(parents=True, exist_ok=True)
+        co.write_text(
+            "% META: "
+            + json.dumps(
+                {
+                    "id": f"CO{index}",
+                    "chapitre": chapter.name,
+                    "type_objet": "corrige",
+                    "capacites_codes": [capacite],
+                    "exercice_ref": f"EX{index}",
+                }
+            )
+            + "\n"
+            + corps
+            + "\n",
+            encoding="utf-8",
+        )
+        return ex, co
+
+    complet = _pair(1, "C1", 2, "\\textbf{1.} Oui.\n\\textbf{2.} Non.")
+    lacunaire = _pair(2, "C2", 3, "\\textbf{1.} Oui.\n\\textbf{2.} Non.")
+    prose = _pair(3, "C1", 2, "Une reponse redigee sans aucun repere numerote.")
+
+    graph = module.build_graph(
+        corpora=(corpus,),
+        source_paths=[p for pair in (complet, lacunaire, prose) for p in pair],
+        clone_ledger={
+            "objects_on_invalid_credit": [],
+            "objects_with_indeterminate_credit": [],
+        },
+    )
+    by_id = {row["correction_id"]: row for row in graph["relations"]}
+    assert by_id["CO1"]["classifications"] == ["ANSWER_COVERAGE_ESTABLISHED"]
+    assert by_id["CO2"]["classifications"] == ["ANSWERS_MISSING"]
+    assert by_id["CO3"]["classifications"] == ["UNKNOWN"]
 
 
 def test_clone_is_visible_even_when_identity_relation_matches(tmp_path: Path) -> None:
@@ -359,3 +441,53 @@ def test_the_four_trigonometry_corrections_declare_their_exercise() -> None:
         assert co_meta.get("exercice_ref") == ex_meta["id"], correction.name
         # La preuve de l'appariement vient de l'exercice lui-meme.
         assert ex_meta["corrige_tex"].endswith(f"1SPE-TRIGO-CO-{number}.tex")
+
+
+def test_answer_coverage_never_rescues_a_structurally_broken_pair(
+    tmp_path: Path,
+) -> None:
+    """Un corrige qui repond a TOUT mais dont la capacite ne concorde pas.
+
+    L'autorite semantique n'est consultee qu'apres la structure. Si la
+    couverture pouvait rattraper un desaccord de capacite, elle transformerait
+    un defaut en preuve -- exactement ce qu'un registre semantique ne doit
+    jamais faire.
+    """
+    module = _module()
+    corpus, chapter = _corpus(tmp_path)
+    enonce = "\n".join([
+        r"\begin{enumerate}",
+        r"  \item Question 1.",
+        r"  \item Question 2.",
+        r"\end{enumerate}",
+    ])
+    ex = chapter / "exercices/ex1.tex"
+    ex.parent.mkdir(parents=True, exist_ok=True)
+    ex.write_text(
+        "% META: " + json.dumps({
+            "id": "EX1", "chapitre": chapter.name,
+            "type_objet": "exercice", "capacites_codes": ["C1"],
+        }) + "\n" + enonce + "\n",
+        encoding="utf-8",
+    )
+    co = chapter / "corriges/co1.tex"
+    co.parent.mkdir(parents=True, exist_ok=True)
+    co.write_text(
+        "% META: " + json.dumps({
+            "id": "CO1", "chapitre": chapter.name,
+            "type_objet": "corrige", "capacites_codes": ["C2"],
+            "exercice_ref": "EX1",
+        }) + "\n\\textbf{1.} Oui.\n\\textbf{2.} Non.\n",
+        encoding="utf-8",
+    )
+    graph = module.build_graph(
+        corpora=(corpus,),
+        source_paths=[ex, co],
+        clone_ledger={
+            "objects_on_invalid_credit": [],
+            "objects_with_indeterminate_credit": [],
+        },
+    )
+    row = graph["relations"][0]
+    assert row["classifications"] == ["MISMATCHED_CAPACITY"]
+    assert "ANSWER_COVERAGE_ESTABLISHED" not in row["classifications"]

@@ -321,10 +321,15 @@ def _ex_co_truth(chapter: str, graph: dict[str, Any]) -> dict[str, Any]:
         for classification in row.get("classifications", [])
     )
     cardinality = Counter(row.get("classification") for row in exercises)
+    # `ANSWER_COVERAGE_ESTABLISHED` est le seul verdict semantique qui ne
+    # denonce pas un defaut : le corrige repond a chaque question de son
+    # exercice. Il ne vaut que COUVERTURE -- l'exactitude scientifique est
+    # prouvee par l'oracle, pas ici -- mais il n'est pas un echec structurel.
+    NOT_A_FAILURE = {"UNKNOWN", "ANSWER_COVERAGE_ESTABLISHED"}
     structural_failures = sum(
         count
         for classification, count in classifications.items()
-        if classification not in {"UNKNOWN"}
+        if classification not in NOT_A_FAILURE
     )
     cardinality_failures = sum(
         count
