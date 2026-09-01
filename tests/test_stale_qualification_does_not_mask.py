@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import shutil
 import sys
+import json
 from pathlib import Path
 
 import pytest
@@ -143,27 +144,39 @@ def test_unreadable_control_still_raises(tmp_path: Path) -> None:
         I._load_dispositions(root)
 
 
-# -- Sur le depot reel : 86 perimees ET les autres blockers ------------------
+# -- Sur le depot reel : toutes les perimees ET les autres blockers ----------
 
 
 def test_the_repository_reports_every_stale_qualification(tmp_path: Path) -> None:
     invalides = I.invalid_qualifications(ROOT)
 
-    assert len(invalides) == 86
+    # Le compte suit le corpus : il monte des qu'une fiche qualifiee de plus
+    # est modifiee. Ce qui est verrouille, c'est qu'AUCUNE peremption ne soit
+    # tue -- toutes portent le motif, et chaque empreinte n'apparait qu'une
+    # fois.
+    assert invalides, "le depot en porte, et le gate doit les voir"
     assert all(
         any("STALE" in violation for violation in entry["violations"])
         for entry in invalides
     ), "toutes portent le motif de peremption, aucune n'est un autre defaut"
-    assert len({entry["fingerprint"] for entry in invalides}) == 86
+    assert len({entry["fingerprint"] for entry in invalides}) == len(invalides)
+
+    queue = json.loads(
+        (ROOT / "audit/METHOD_REQUALIFICATION_QUEUE.json").read_text(encoding="utf-8")
+    )
+    assert (
+        len(invalides)
+        == queue["totals"]["stale_requiring_human_requalification"]
+    )
 
 
 def test_the_check_gate_shows_stale_and_other_blockers_together() -> None:
-    """Le test de non-masquage : 86 perimees ET au moins un autre motif."""
+    """Le test de non-masquage : toutes les perimees restent visibles."""
 
     reasons = I._invalid_qualification_reasons(ROOT)
     stale = [reason for reason in reasons if reason.startswith("qualification_invalide:")]
 
-    assert len(stale) == 86
+    assert len(stale) == len(I.invalid_qualifications(ROOT))
     assert len(stale) == len(reasons), "aucun motif etranger dans ce lot"
 
 

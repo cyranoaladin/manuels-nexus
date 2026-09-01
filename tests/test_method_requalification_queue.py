@@ -93,7 +93,16 @@ def test_the_comparison_never_uses_a_moving_reference(payload: dict) -> None:
 
     assert payload["compared_against"] == "method_source_sha de chaque qualification"
     stale = [item for item in payload["items"] if item["state"] == "STALE"]
-    assert payload["change_classes"] == {"ACCENT_ONLY": len(stale)}
+    # Les classes PARTITIONNENT les perimees. `ACCENT_ONLY` n'est plus la
+    # seule : reecrire une fiche qualifiee produit un `SUBSTANTIVE_CHANGE`,
+    # et les confondre ferait passer une reecriture pour une correction
+    # d'accent.
+    assert sum(payload["change_classes"].values()) == len(stale)
+    assert set(payload["change_classes"]) <= {"ACCENT_ONLY", "SUBSTANTIVE_CHANGE"}
+    assert payload["change_classes"] == {
+        klass: sum(1 for item in stale if item["change_class"] == klass)
+        for klass in payload["change_classes"]
+    }
 
 
 def test_the_totals_close(payload: dict) -> None:

@@ -4,8 +4,8 @@ Artefact généré. Il **n'approuve rien** et ne peut pas re-qualifier :
 seule une décision humaine rétablit une qualification périmée.
 
 - qualifications liées à une fiche méthode : 89
-- encore à jour : 3
-- **périmées, à re-qualifier par un humain : 86**
+- encore à jour : 0
+- **périmées, à re-qualifier par un humain : 89**
 
 ## Nature du changement
 
@@ -15,9 +15,11 @@ chiffre, aucun mot n'a bougé. C'est une information pour le relecteur,
 pas une autorisation.
 
 - `ACCENT_ONLY` : 86
+- `SUBSTANTIVE_CHANGE` : 3
 
 ## Par chapitre
 
+- 1NSI-ALGO-DICHO-GLOUTON-KNN : 3
 - 1SPE-TRIGONOMETRIE : 3
 - TCOMPL-CALCULS-AIRES : 6
 - TCOMPL-CORRELATION-CAUSALITE : 5

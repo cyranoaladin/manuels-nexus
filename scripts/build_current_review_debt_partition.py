@@ -192,12 +192,31 @@ def _ledger_sets(root: Path) -> tuple[dict[str, set[str]], dict[str, Any]]:
                 and row.get("human_approval_invalidated_by_rewrite") is False
                 and row.get("human_approval_evidence") is False
             }
-            if created | rewritten != {str(row["fingerprint"]) for row in entries}:
+            # Une reecriture d'un objet qui ne portait NI approbation humaine NI
+            # verification machine : elle ne perime rien, elle cree de la dette.
+            plain_rewrite = {
+                str(row["fingerprint"])
+                for row in entries
+                if row.get("origin") == "REWRITTEN"
+                and row.get("human_approval_invalidated_by_rewrite") is False
+            }
+            # Source modifiee, corps pedagogique identique au digest pres : la
+            # declaration se relit, le contenu n'a pas bouge.
+            declaration = {
+                str(row["fingerprint"])
+                for row in entries
+                if row.get("origin") == "DECLARATION_CHANGED_SEMANTICS_IDENTICAL"
+                and row.get("human_approval_invalidated_by_rewrite") is False
+            }
+            observed = {str(row["fingerprint"]) for row in entries}
+            if created | rewritten | plain_rewrite | declaration != observed:
                 raise ValueError("provenance NSI couplée incomplète")
             sets["NSI_COUPLED_NEW_32"] = created
             sets[
                 "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4"
             ] = rewritten
+            sets["NSI_COUPLED_REWRITTEN"] = plain_rewrite
+            sets["NSI_COUPLED_DECLARATION_CHANGED"] = declaration
         else:
             sets[ledger_id] = {str(row["fingerprint"]) for row in entries}
     return sets, evidence
@@ -213,12 +232,19 @@ def build_partition(root: Path = ROOT) -> dict[str, Any]:
         raise ValueError("inventaire et algèbre courante divergent")
 
     previously_qualified = set(historical["PREVIOUSLY_QUALIFIED_ACTIVE_DEBT"])
+    ledger_sets, ledger_evidence = _ledger_sets(root)
+    declared_debt_fingerprints = (
+        set().union(*ledger_sets.values()) if ledger_sets else set()
+    )
     requalification = _read_json(root / METHOD_REQUALIFICATION)
     stale_methods = {
         str(row["fingerprint"])
         for row in requalification.get("items", [])
         if row.get("state") == "STALE"
-    }
+    # Un objet deja porte par un registre de dette DECLAREE y est impute une
+    # seule fois. Le laisser aussi dans la file de requalification le
+    # compterait deux fois et casserait la disjonction.
+    } - declared_debt_fingerprints
     if not stale_methods <= previously_qualified:
         raise ValueError("requalifications périmées hors dette historique 89")
     stale_items = {
@@ -243,8 +269,13 @@ def build_partition(root: Path = ROOT) -> dict[str, Any]:
         for fingerprint in current_a4
     ):
         raise ValueError("complément courant du 89 non conforme à la décision A4")
-    if len(stale_a4) != 83 or len(current_a4) != 3 or len(stale_trigo) != 3:
-        raise ValueError("sous-partition décisionnelle du 89 inattendue")
+    # Les cardinalites ne sont plus epinglees : elles suivent le corpus des que
+    # une fiche de plus est reecrite ou passe en dette declaree. Ce qui est
+    # verrouille, c'est que la sous-partition soit EXACTE et DISJOINTE.
+    if stale_a4 & stale_trigo or (stale_a4 | stale_trigo) & current_a4:
+        raise ValueError("sous-partition décisionnelle du 89 non disjointe")
+    if stale_a4 | stale_trigo | current_a4 != previously_qualified:
+        raise ValueError("sous-partition décisionnelle du 89 inexacte")
 
     residual_forensics = _read_json(root / RESIDUAL_FORENSICS)
     residual_entries = residual_forensics.get("entries")
@@ -265,7 +296,6 @@ def build_partition(root: Path = ROOT) -> dict[str, Any]:
         "TRIGO_OPTIONAL_EXTENSION_REQUALIFICATION_STALE_3": stale_trigo,
         "RESIDUAL_TRUE_NEW_13": residual_fingerprints,
     }
-    ledger_sets, ledger_evidence = _ledger_sets(root)
     named_sets.update(ledger_sets)
 
     provenance = {
@@ -317,9 +347,12 @@ def build_partition(root: Path = ROOT) -> dict[str, Any]:
         "TSPE_GEO_REWRITTEN_STALE_APPROVAL_5"
     ]
     residual = named_sets["RESIDUAL_TRUE_NEW_13"]
-    nsi = named_sets["NSI_COUPLED_NEW_32"] | named_sets[
-        "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4"
-    ]
+    nsi = (
+        named_sets["NSI_COUPLED_NEW_32"]
+        | named_sets["NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4"]
+        | named_sets["NSI_COUPLED_REWRITTEN"]
+        | named_sets["NSI_COUPLED_DECLARATION_CHANGED"]
+    )
     other = current - tspe - residual
     aliases = {
         "PENDING_HUMAN_REVIEW_13": {
@@ -360,15 +393,26 @@ def build_partition(root: Path = ROOT) -> dict[str, Any]:
             "contributes_to_union": False,
         },
         "NSI_COUPLED_REVIEW_PACKET_36": {
+            # Le suffixe numerique est le LABEL de la decision d'origine, pas
+            # un compte vivant : le paquet suit le lot couple, qui grandit a
+            # chaque objet reellement touche.
             "aggregate_of": [
                 "NSI_COUPLED_NEW_32",
                 "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4",
+                "NSI_COUPLED_REWRITTEN",
+                "NSI_COUPLED_DECLARATION_CHANGED",
             ],
             "count": len(nsi),
             "fingerprints_digest": _digest(nsi),
             "provenance_counts": {
-                "NEW": 32,
-                "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED": 4,
+                "NEW": len(named_sets["NSI_COUPLED_NEW_32"]),
+                "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED": len(
+                    named_sets["NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4"]
+                ),
+                "REWRITTEN": len(named_sets["NSI_COUPLED_REWRITTEN"]),
+                "DECLARATION_CHANGED_SEMANTICS_IDENTICAL": len(
+                    named_sets["NSI_COUPLED_DECLARATION_CHANGED"]
+                ),
             },
             "contributes_to_union": False,
         },

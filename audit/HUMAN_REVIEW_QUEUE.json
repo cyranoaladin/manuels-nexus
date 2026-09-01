@@ -5,7 +5,7 @@
   "approves_nothing": true,
   "status": "HUMAN_REVIEW_ACTION_REQUIRED",
   "source_inputs": {
-    "audit/CURRENT_REVIEW_DEBT_PARTITION.json": "sha256:7e6c90295573f3b94ec38ed1bdaeff93a83ad3f885566986d0771b25bb375e1a",
+    "audit/CURRENT_REVIEW_DEBT_PARTITION.json": "sha256:36871b5e6f03b29f31b2436b016b24f90f954209ad2f2be41c22866796f7c8f0",
     "audit/QCM_INDEPENDENT_EVIDENCE_V2.json": "sha256:40b2564b52b722f14d9fa0566fdc3f8566208ac363172f30b1957ec8dbbd9560",
     "audit/QCM_REVIEW_PROOF_RECONCILIATION.json": "sha256:b2a6a242cab0b0e0f758ddd18a6d4a9a6c397fadff78266f3f8a805beb1fec8e",
     "audit/TNSI_PROJET_ASSESSMENT_MODE.json": "sha256:15ee9492ab6ef5590de54db73afd49d469b16db594e1e181e06c0e6620edfc83"
@@ -17,45 +17,20 @@
     "EDITORIAL_DECISION": 1,
     "TOTAL": 2535
   },
-  "queue_digest": "sha256:4d9d453b02094195879bd23c0e93c7e523e2f148986fd1e9e3e3b7ee5935660e",
+  "queue_digest": "sha256:4074a55bd5e0b8a8733577c1ed19aba4608802751ba5d6063e544f0c1d20b244",
   "pairwise_intersections": [],
   "unknown_count": 0,
   "items": [
     {
       "item_id": "A4_METHOD_QUALIFIED_CURRENT_3",
       "category": "OBJECT_REVIEW",
-      "count": 3,
-      "unit_ids": [
-        "OBJECT_REVIEW::74aacd756bac15f4",
-        "OBJECT_REVIEW::b0b81c9742c416e1",
-        "OBJECT_REVIEW::ed9e59a472a9e4a5"
-      ],
-      "set_digest": "sha256:609541e94fa396ac8858622ff6d73117397b08ffeb5506f0f14650f952b6c416",
-      "chapters": {
-        "1NSI-ALGO-DICHO-GLOUTON-KNN": 3
-      },
-      "units_by_chapter": {
-        "1NSI-ALGO-DICHO-GLOUTON-KNN": {
-          "count": 3,
-          "unit_ids": [
-            "OBJECT_REVIEW::74aacd756bac15f4",
-            "OBJECT_REVIEW::b0b81c9742c416e1",
-            "OBJECT_REVIEW::ed9e59a472a9e4a5"
-          ],
-          "set_digest": "sha256:609541e94fa396ac8858622ff6d73117397b08ffeb5506f0f14650f952b6c416"
-        }
-      },
+      "count": 0,
+      "unit_ids": [],
+      "set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "chapters": {},
+      "units_by_chapter": {},
       "provenance": "current qualified A4 method review debt in 1NSI algorithmics",
-      "required_reviewers_by_chapter": {
-        "1NSI-ALGO-DICHO-GLOUTON-KNN": [
-          "EXPERT_NSI",
-          "EXPERT_PROGRAMME_PEDAGOGIE"
-        ]
-      },
-      "required_reviewers": [
-        "EXPERT_NSI",
-        "EXPERT_PROGRAMME_PEDAGOGIE"
-      ],
+      "required_reviewers_by_chapter": {},
       "distinct_humans_required": true,
       "release_blocking": true
     },
@@ -403,29 +378,23 @@
     {
       "item_id": "APPROVED_TRANSITION_NEW",
       "category": "OBJECT_REVIEW",
-      "count": 5,
+      "count": 2,
       "unit_ids": [
-        "OBJECT_REVIEW::3a8ff3c7649eebf4",
-        "OBJECT_REVIEW::4efbac4c9cd5b38e",
-        "OBJECT_REVIEW::5dd488a33d09ff85",
         "OBJECT_REVIEW::6dbdcc7ea0c5b104",
         "OBJECT_REVIEW::9bc05524d4ef9a01"
       ],
-      "set_digest": "sha256:40c1abb0b5be0467db585ee70fd3877dd25105121119d96d416eefade6bf026b",
+      "set_digest": "sha256:49f273da86146232edc7acadc918656f0213e10b9c992a1a1adf558f5c823828",
       "chapters": {
-        "1NSI-ALGO-PARCOURS-TRIS": 5
+        "1NSI-ALGO-PARCOURS-TRIS": 2
       },
       "units_by_chapter": {
         "1NSI-ALGO-PARCOURS-TRIS": {
-          "count": 5,
+          "count": 2,
           "unit_ids": [
-            "OBJECT_REVIEW::3a8ff3c7649eebf4",
-            "OBJECT_REVIEW::4efbac4c9cd5b38e",
-            "OBJECT_REVIEW::5dd488a33d09ff85",
             "OBJECT_REVIEW::6dbdcc7ea0c5b104",
             "OBJECT_REVIEW::9bc05524d4ef9a01"
           ],
-          "set_digest": "sha256:40c1abb0b5be0467db585ee70fd3877dd25105121119d96d416eefade6bf026b"
+          "set_digest": "sha256:49f273da86146232edc7acadc918656f0213e10b9c992a1a1adf558f5c823828"
         }
       },
       "provenance": "approved-baseline identity transition still current",
@@ -471,6 +440,61 @@
       },
       "required_reviewers": [
         "EXPERT_MATHEMATIQUE",
+        "EXPERT_PROGRAMME_PEDAGOGIE"
+      ],
+      "distinct_humans_required": true,
+      "release_blocking": true
+    },
+    {
+      "item_id": "NSI_COUPLED_DECLARATION_CHANGED",
+      "category": "OBJECT_REVIEW",
+      "count": 6,
+      "unit_ids": [
+        "OBJECT_REVIEW::11ae381f7b000064",
+        "OBJECT_REVIEW::431ad64d2681d804",
+        "OBJECT_REVIEW::c194bf1ceb001589",
+        "OBJECT_REVIEW::d2fe7538e2b83f20",
+        "OBJECT_REVIEW::f6443ecadae2fb5a",
+        "OBJECT_REVIEW::fe9e625871f51790"
+      ],
+      "set_digest": "sha256:946182ae0ee0938c1de6943c95f2a1d5ee2b87febf587e94650265c31f51d500",
+      "chapters": {
+        "1NSI-ALGO-DICHO-GLOUTON-KNN": 4,
+        "1NSI-ALGO-PARCOURS-TRIS": 2
+      },
+      "units_by_chapter": {
+        "1NSI-ALGO-DICHO-GLOUTON-KNN": {
+          "count": 4,
+          "unit_ids": [
+            "OBJECT_REVIEW::11ae381f7b000064",
+            "OBJECT_REVIEW::d2fe7538e2b83f20",
+            "OBJECT_REVIEW::f6443ecadae2fb5a",
+            "OBJECT_REVIEW::fe9e625871f51790"
+          ],
+          "set_digest": "sha256:7101a45d49ba5a46e262803cd9e7a94fd0d24fb7c2f464c523bcbadab09940b5"
+        },
+        "1NSI-ALGO-PARCOURS-TRIS": {
+          "count": 2,
+          "unit_ids": [
+            "OBJECT_REVIEW::431ad64d2681d804",
+            "OBJECT_REVIEW::c194bf1ceb001589"
+          ],
+          "set_digest": "sha256:b11db8ac3e3cb2a4594e5d794bda8e6051133cfeade70220f6a674a140fe7b47"
+        }
+      },
+      "provenance": "separately declared current review debt",
+      "required_reviewers_by_chapter": {
+        "1NSI-ALGO-DICHO-GLOUTON-KNN": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "1NSI-ALGO-PARCOURS-TRIS": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ]
+      },
+      "required_reviewers": [
+        "EXPERT_NSI",
         "EXPERT_PROGRAMME_PEDAGOGIE"
       ],
       "distinct_humans_required": true,
@@ -584,33 +608,109 @@
       "release_blocking": true
     },
     {
-      "item_id": "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4",
+      "item_id": "NSI_COUPLED_REWRITTEN",
       "category": "OBJECT_REVIEW",
-      "count": 4,
+      "count": 5,
       "unit_ids": [
-        "OBJECT_REVIEW::40727ba25883503f",
-        "OBJECT_REVIEW::531a15a7f0eec4a4",
-        "OBJECT_REVIEW::7a2fb51266b4c2ec",
-        "OBJECT_REVIEW::89b9746a661fac81"
+        "OBJECT_REVIEW::63c728f63b2c0015",
+        "OBJECT_REVIEW::74aacd756bac15f4",
+        "OBJECT_REVIEW::ad544a6079ef7773",
+        "OBJECT_REVIEW::b0b81c9742c416e1",
+        "OBJECT_REVIEW::ed9e59a472a9e4a5"
       ],
-      "set_digest": "sha256:cd1b77eec74722daffa10085db376d429668b41850471e04ccb619fc001ada2d",
+      "set_digest": "sha256:fd8540ba42665aa65e9b9af9ccd26dbbd16a7ac91619a81dfe4df2d484218e03",
       "chapters": {
-        "1NSI-ALGO-PARCOURS-TRIS": 4
+        "1NSI-ALGO-DICHO-GLOUTON-KNN": 4,
+        "1NSI-ALGO-PARCOURS-TRIS": 1
       },
       "units_by_chapter": {
-        "1NSI-ALGO-PARCOURS-TRIS": {
+        "1NSI-ALGO-DICHO-GLOUTON-KNN": {
           "count": 4,
           "unit_ids": [
-            "OBJECT_REVIEW::40727ba25883503f",
-            "OBJECT_REVIEW::531a15a7f0eec4a4",
-            "OBJECT_REVIEW::7a2fb51266b4c2ec",
-            "OBJECT_REVIEW::89b9746a661fac81"
+            "OBJECT_REVIEW::74aacd756bac15f4",
+            "OBJECT_REVIEW::ad544a6079ef7773",
+            "OBJECT_REVIEW::b0b81c9742c416e1",
+            "OBJECT_REVIEW::ed9e59a472a9e4a5"
           ],
-          "set_digest": "sha256:cd1b77eec74722daffa10085db376d429668b41850471e04ccb619fc001ada2d"
+          "set_digest": "sha256:32eb82b04bfda15b20dfdf81614d553a92bce852ebe89457fb5246d180b00efe"
+        },
+        "1NSI-ALGO-PARCOURS-TRIS": {
+          "count": 1,
+          "unit_ids": [
+            "OBJECT_REVIEW::63c728f63b2c0015"
+          ],
+          "set_digest": "sha256:dd968479b6218a191ed9c60030f353e18c7a6e40b6887014f7ae0ff0b72db710"
+        }
+      },
+      "provenance": "separately declared current review debt",
+      "required_reviewers_by_chapter": {
+        "1NSI-ALGO-DICHO-GLOUTON-KNN": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
+        "1NSI-ALGO-PARCOURS-TRIS": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ]
+      },
+      "required_reviewers": [
+        "EXPERT_NSI",
+        "EXPERT_PROGRAMME_PEDAGOGIE"
+      ],
+      "distinct_humans_required": true,
+      "release_blocking": true
+    },
+    {
+      "item_id": "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4",
+      "category": "OBJECT_REVIEW",
+      "count": 10,
+      "unit_ids": [
+        "OBJECT_REVIEW::014d2ff9b1a09587",
+        "OBJECT_REVIEW::0ee757161c71ce58",
+        "OBJECT_REVIEW::0f6d9b397d5b7903",
+        "OBJECT_REVIEW::32ec417b3d62bd60",
+        "OBJECT_REVIEW::450af770996611e2",
+        "OBJECT_REVIEW::6ef7e4396d2d78fa",
+        "OBJECT_REVIEW::7fd36f948da1bf67",
+        "OBJECT_REVIEW::8a8269df53d08f43",
+        "OBJECT_REVIEW::bab065fd44c3dc58",
+        "OBJECT_REVIEW::e34002b4d4e25ea6"
+      ],
+      "set_digest": "sha256:ae799d32286b147b585df7a3359d726520125a7368c03ae20ae8cf38f3fe476a",
+      "chapters": {
+        "1NSI-ALGO-DICHO-GLOUTON-KNN": 5,
+        "1NSI-ALGO-PARCOURS-TRIS": 5
+      },
+      "units_by_chapter": {
+        "1NSI-ALGO-DICHO-GLOUTON-KNN": {
+          "count": 5,
+          "unit_ids": [
+            "OBJECT_REVIEW::014d2ff9b1a09587",
+            "OBJECT_REVIEW::0ee757161c71ce58",
+            "OBJECT_REVIEW::0f6d9b397d5b7903",
+            "OBJECT_REVIEW::32ec417b3d62bd60",
+            "OBJECT_REVIEW::7fd36f948da1bf67"
+          ],
+          "set_digest": "sha256:a836c28c312be2480a779e85826904bed71def2f530c7bc3f0ae3e30e9cd4844"
+        },
+        "1NSI-ALGO-PARCOURS-TRIS": {
+          "count": 5,
+          "unit_ids": [
+            "OBJECT_REVIEW::450af770996611e2",
+            "OBJECT_REVIEW::6ef7e4396d2d78fa",
+            "OBJECT_REVIEW::8a8269df53d08f43",
+            "OBJECT_REVIEW::bab065fd44c3dc58",
+            "OBJECT_REVIEW::e34002b4d4e25ea6"
+          ],
+          "set_digest": "sha256:dca874a029568511f5da641555c20a631191693ea92d89b0b96f92062438ad09"
         }
       },
       "provenance": "rewritten content whose prior machine verification was not a human approval",
       "required_reviewers_by_chapter": {
+        "1NSI-ALGO-DICHO-GLOUTON-KNN": [
+          "EXPERT_NSI",
+          "EXPERT_PROGRAMME_PEDAGOGIE"
+        ],
         "1NSI-ALGO-PARCOURS-TRIS": [
           "EXPERT_NSI",
           "EXPERT_PROGRAMME_PEDAGOGIE"
@@ -975,7 +1075,7 @@
     {
       "item_id": "UNCHANGED",
       "category": "OBJECT_REVIEW",
-      "count": 2121,
+      "count": 2110,
       "unit_ids": [
         "OBJECT_REVIEW::0039a2dd21589133",
         "OBJECT_REVIEW::004bbf93370edfde",
@@ -985,7 +1085,6 @@
         "OBJECT_REVIEW::00ed819a3bd18a13",
         "OBJECT_REVIEW::0139457ce6bf9da0",
         "OBJECT_REVIEW::01448441017077f0",
-        "OBJECT_REVIEW::014d2ff9b1a09587",
         "OBJECT_REVIEW::0170e46b03c6700c",
         "OBJECT_REVIEW::01a4feadb1d790a5",
         "OBJECT_REVIEW::01bd748fcfbcf761",
@@ -1103,10 +1202,8 @@
         "OBJECT_REVIEW::0eb47184b94810b8",
         "OBJECT_REVIEW::0ec193d59a7ee709",
         "OBJECT_REVIEW::0eced18a77cf4608",
-        "OBJECT_REVIEW::0ee757161c71ce58",
         "OBJECT_REVIEW::0ee9b54a1255d2ed",
         "OBJECT_REVIEW::0ef703e9a524ae8a",
-        "OBJECT_REVIEW::0f6d9b397d5b7903",
         "OBJECT_REVIEW::0f710e5048ed9df0",
         "OBJECT_REVIEW::0f981d832c8da6fc",
         "OBJECT_REVIEW::0fd34654a3e3aafc",
@@ -1128,7 +1225,6 @@
         "OBJECT_REVIEW::1171b31e6f3298fd",
         "OBJECT_REVIEW::11737d059919c880",
         "OBJECT_REVIEW::117ec45f37511b58",
-        "OBJECT_REVIEW::11ae381f7b000064",
         "OBJECT_REVIEW::11cb430618acdf4f",
         "OBJECT_REVIEW::11d6681bf63937e7",
         "OBJECT_REVIEW::11e8328a7a3e76e4",
@@ -1412,7 +1508,6 @@
         "OBJECT_REVIEW::32a5905e7844cdf3",
         "OBJECT_REVIEW::32c4a6946be84e55",
         "OBJECT_REVIEW::32dde452eed6a5df",
-        "OBJECT_REVIEW::32ec417b3d62bd60",
         "OBJECT_REVIEW::33289e544639dcf7",
         "OBJECT_REVIEW::3359828ade008763",
         "OBJECT_REVIEW::33aae64be259caa1",
@@ -1833,7 +1928,6 @@
         "OBJECT_REVIEW::636aab6a35e90ff3",
         "OBJECT_REVIEW::638dd9b4711927f8",
         "OBJECT_REVIEW::63c352c027ade6c7",
-        "OBJECT_REVIEW::63c728f63b2c0015",
         "OBJECT_REVIEW::63e2f06e505a9a07",
         "OBJECT_REVIEW::63f866f14f7c9d07",
         "OBJECT_REVIEW::64577a4f68c8a25d",
@@ -2067,7 +2161,6 @@
         "OBJECT_REVIEW::7fa9f4f3f27bb0d8",
         "OBJECT_REVIEW::7fac373325a9ddfd",
         "OBJECT_REVIEW::7fc8ad5f7aa3f150",
-        "OBJECT_REVIEW::7fd36f948da1bf67",
         "OBJECT_REVIEW::7fd975461999dc50",
         "OBJECT_REVIEW::7ff708990c1c9c57",
         "OBJECT_REVIEW::80321c5b50f5020a",
@@ -2444,7 +2537,6 @@
         "OBJECT_REVIEW::ad1569155db0fb9d",
         "OBJECT_REVIEW::ad2728ec51cdc1e8",
         "OBJECT_REVIEW::ad327b5524bd66ea",
-        "OBJECT_REVIEW::ad544a6079ef7773",
         "OBJECT_REVIEW::ada1e69e42327527",
         "OBJECT_REVIEW::ada261be8868be06",
         "OBJECT_REVIEW::adcb839e97850e4e",
@@ -2760,7 +2852,6 @@
         "OBJECT_REVIEW::d2c96ef4857d9c02",
         "OBJECT_REVIEW::d2dc895fbeaa6f2e",
         "OBJECT_REVIEW::d2fbf1e1c6cabc71",
-        "OBJECT_REVIEW::d2fe7538e2b83f20",
         "OBJECT_REVIEW::d3148742fc1af66a",
         "OBJECT_REVIEW::d31550e1ff936917",
         "OBJECT_REVIEW::d330569c13fe5e75",
@@ -3001,7 +3092,6 @@
         "OBJECT_REVIEW::f5f017ecda6b6d0b",
         "OBJECT_REVIEW::f6121a44c76b1006",
         "OBJECT_REVIEW::f632ebd90b982b82",
-        "OBJECT_REVIEW::f6443ecadae2fb5a",
         "OBJECT_REVIEW::f6694dd1a9d47c4c",
         "OBJECT_REVIEW::f6a5f3207260e402",
         "OBJECT_REVIEW::f6ebfa1f663a0de7",
@@ -3084,7 +3174,6 @@
         "OBJECT_REVIEW::fe5f083c08c2705c",
         "OBJECT_REVIEW::fe6d06271905897d",
         "OBJECT_REVIEW::fe7ad14ca6b76e99",
-        "OBJECT_REVIEW::fe9e625871f51790",
         "OBJECT_REVIEW::ff28291175fa7d68",
         "OBJECT_REVIEW::ff4371984785e199",
         "OBJECT_REVIEW::ff4ac4d4c97b3a96",
@@ -3099,10 +3188,10 @@
         "OBJECT_REVIEW::ffc16f2950f758a0",
         "OBJECT_REVIEW::ffce4c4163d5c9c0"
       ],
-      "set_digest": "sha256:fc45687d1ef4df7751e8138b077f791525100649f7c562fc1afc10ec4c727550",
+      "set_digest": "sha256:e905b6f0f4d53a71d995772fefcdcadbd18cc21d354893eff1f062a77249bc15",
       "chapters": {
-        "1NSI-ALGO-DICHO-GLOUTON-KNN": 21,
-        "1NSI-ALGO-PARCOURS-TRIS": 2,
+        "1NSI-ALGO-DICHO-GLOUTON-KNN": 11,
+        "1NSI-ALGO-PARCOURS-TRIS": 1,
         "1NSI-ARCHITECTURE-OS": 21,
         "1NSI-LANGAGE": 23,
         "1NSI-PROJET-METHODES": 22,
@@ -3155,39 +3244,28 @@
       },
       "units_by_chapter": {
         "1NSI-ALGO-DICHO-GLOUTON-KNN": {
-          "count": 21,
+          "count": 11,
           "unit_ids": [
-            "OBJECT_REVIEW::014d2ff9b1a09587",
             "OBJECT_REVIEW::07ebb851118cee15",
             "OBJECT_REVIEW::08032f055ed86946",
-            "OBJECT_REVIEW::0ee757161c71ce58",
-            "OBJECT_REVIEW::0f6d9b397d5b7903",
-            "OBJECT_REVIEW::11ae381f7b000064",
             "OBJECT_REVIEW::2e8a939e5d97ef97",
-            "OBJECT_REVIEW::32ec417b3d62bd60",
             "OBJECT_REVIEW::39c8c115731b4ea6",
             "OBJECT_REVIEW::3a4144869aa335c4",
             "OBJECT_REVIEW::5f038baa434acbf3",
             "OBJECT_REVIEW::7eaf948ed2bd548a",
-            "OBJECT_REVIEW::7fd36f948da1bf67",
             "OBJECT_REVIEW::86d932ac93509d80",
-            "OBJECT_REVIEW::ad544a6079ef7773",
             "OBJECT_REVIEW::bfcd7e83e4eaf799",
-            "OBJECT_REVIEW::d2fe7538e2b83f20",
             "OBJECT_REVIEW::eb78f3b442b4bd4a",
-            "OBJECT_REVIEW::f6443ecadae2fb5a",
-            "OBJECT_REVIEW::fc05af58b9ac2eb0",
-            "OBJECT_REVIEW::fe9e625871f51790"
+            "OBJECT_REVIEW::fc05af58b9ac2eb0"
           ],
-          "set_digest": "sha256:4e4112d15c5c8d5065cbdae82b9c4408850f327e70bb73e12b1a0f8aa255ebb4"
+          "set_digest": "sha256:6a465b439b900e97f7393573beb6f89b5e05dd63271ac6da920d2840923e67b9"
         },
         "1NSI-ALGO-PARCOURS-TRIS": {
-          "count": 2,
+          "count": 1,
           "unit_ids": [
-            "OBJECT_REVIEW::63c728f63b2c0015",
             "OBJECT_REVIEW::af0dcb27f53cfefc"
           ],
-          "set_digest": "sha256:f1a5e1a0a402f31f4b56c43de9211389f108bc7fa15507ff08fa85a43f96f5c3"
+          "set_digest": "sha256:f6e3edc4e7d98dd33227f02cb8c7b80a5fcc670b44a8cb2e09c488d1cb5c4285"
         },
         "1NSI-ARCHITECTURE-OS": {
           "count": 21,

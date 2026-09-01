@@ -70,13 +70,13 @@
       "declared_review_debt": [
         {
           "category": "OBJECT_REVIEW",
-          "count": 3,
-          "ledger_id": "A4_METHOD_QUALIFIED_CURRENT_3",
+          "count": 4,
+          "ledger_id": "NSI_COUPLED_DECLARATION_CHANGED",
           "provenance_counts": {
-            "OBJECT_REVIEW": 3
+            "OBJECT_REVIEW": 4
           },
           "release_blocking": true,
-          "unit_ids_digest": "sha256:609541e94fa396ac8858622ff6d73117397b08ffeb5506f0f14650f952b6c416"
+          "unit_ids_digest": "sha256:7101a45d49ba5a46e262803cd9e7a94fd0d24fb7c2f464c523bcbadab09940b5"
         },
         {
           "category": "OBJECT_REVIEW",
@@ -90,13 +90,33 @@
         },
         {
           "category": "OBJECT_REVIEW",
-          "count": 21,
-          "ledger_id": "UNCHANGED",
+          "count": 4,
+          "ledger_id": "NSI_COUPLED_REWRITTEN",
           "provenance_counts": {
-            "OBJECT_REVIEW": 21
+            "OBJECT_REVIEW": 4
           },
           "release_blocking": true,
-          "unit_ids_digest": "sha256:4e4112d15c5c8d5065cbdae82b9c4408850f327e70bb73e12b1a0f8aa255ebb4"
+          "unit_ids_digest": "sha256:32eb82b04bfda15b20dfdf81614d553a92bce852ebe89457fb5246d180b00efe"
+        },
+        {
+          "category": "OBJECT_REVIEW",
+          "count": 5,
+          "ledger_id": "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4",
+          "provenance_counts": {
+            "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED": 5
+          },
+          "release_blocking": true,
+          "unit_ids_digest": "sha256:a836c28c312be2480a779e85826904bed71def2f530c7bc3f0ae3e30e9cd4844"
+        },
+        {
+          "category": "OBJECT_REVIEW",
+          "count": 11,
+          "ledger_id": "UNCHANGED",
+          "provenance_counts": {
+            "OBJECT_REVIEW": 11
+          },
+          "release_blocking": true,
+          "unit_ids_digest": "sha256:6a465b439b900e97f7393573beb6f89b5e05dd63271ac6da920d2840923e67b9"
         },
         {
           "category": "QCM_ANSWER_SEMANTICS",
@@ -348,13 +368,23 @@
       "declared_review_debt": [
         {
           "category": "OBJECT_REVIEW",
-          "count": 5,
+          "count": 2,
           "ledger_id": "APPROVED_TRANSITION_NEW",
           "provenance_counts": {
-            "OBJECT_REVIEW": 5
+            "OBJECT_REVIEW": 2
           },
           "release_blocking": true,
-          "unit_ids_digest": "sha256:40c1abb0b5be0467db585ee70fd3877dd25105121119d96d416eefade6bf026b"
+          "unit_ids_digest": "sha256:49f273da86146232edc7acadc918656f0213e10b9c992a1a1adf558f5c823828"
+        },
+        {
+          "category": "OBJECT_REVIEW",
+          "count": 2,
+          "ledger_id": "NSI_COUPLED_DECLARATION_CHANGED",
+          "provenance_counts": {
+            "OBJECT_REVIEW": 2
+          },
+          "release_blocking": true,
+          "unit_ids_digest": "sha256:b11db8ac3e3cb2a4594e5d794bda8e6051133cfeade70220f6a674a140fe7b47"
         },
         {
           "category": "OBJECT_REVIEW",
@@ -368,23 +398,33 @@
         },
         {
           "category": "OBJECT_REVIEW",
-          "count": 4,
-          "ledger_id": "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4",
+          "count": 1,
+          "ledger_id": "NSI_COUPLED_REWRITTEN",
           "provenance_counts": {
-            "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED": 4
+            "OBJECT_REVIEW": 1
           },
           "release_blocking": true,
-          "unit_ids_digest": "sha256:cd1b77eec74722daffa10085db376d429668b41850471e04ccb619fc001ada2d"
+          "unit_ids_digest": "sha256:dd968479b6218a191ed9c60030f353e18c7a6e40b6887014f7ae0ff0b72db710"
         },
         {
           "category": "OBJECT_REVIEW",
-          "count": 2,
-          "ledger_id": "UNCHANGED",
+          "count": 5,
+          "ledger_id": "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4",
           "provenance_counts": {
-            "OBJECT_REVIEW": 2
+            "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED": 5
           },
           "release_blocking": true,
-          "unit_ids_digest": "sha256:f1a5e1a0a402f31f4b56c43de9211389f108bc7fa15507ff08fa85a43f96f5c3"
+          "unit_ids_digest": "sha256:dca874a029568511f5da641555c20a631191693ea92d89b0b96f92062438ad09"
+        },
+        {
+          "category": "OBJECT_REVIEW",
+          "count": 1,
+          "ledger_id": "UNCHANGED",
+          "provenance_counts": {
+            "OBJECT_REVIEW": 1
+          },
+          "release_blocking": true,
+          "unit_ids_digest": "sha256:f6e3edc4e7d98dd33227f02cb8c7b80a5fcc670b44a8cb2e09c488d1cb5c4285"
         },
         {
           "category": "QCM_ANSWER_SEMANTICS",
@@ -16787,7 +16827,7 @@
     "course_body_ownership_map": "sha256:8111583c23e5355283fbf1a5c289fa81bb28d958a32264bf09e7ce45c512e53e",
     "cross_discipline_ledger": "sha256:e9fba6f80baf65d7dae76372ba25ada90de64ad6876f24ab0fb3362ac36e29d2",
     "ex_co_graph": "sha256:86bb7cbd5353574ec79942bf81d6c949823254fb26124be760bd5f35e7dd8a6f",
-    "human_review_queue": "sha256:f2f0d9855d3da6bbccad177eddbc88aae9797fb894dd39e85056057b9127443b",
+    "human_review_queue": "sha256:d1b4f9fd806a9a2305af0eea20dff1c6a8e42bc8f7bf212d3c919c7a910076ab",
     "official_programme_sources": "sha256:bfd5c26214ed8e5667265a0ccf56cb5b57d870bb384d7ff82fb34a62f8f1df1d",
     "true_coverage": "sha256:522fbc5769ac315846d4b5ea8dac188db8864119e6d4cd296ed47bd3394a5a49"
   },
