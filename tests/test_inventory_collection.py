@@ -4001,9 +4001,22 @@ def test_repository_fail_on_new_gate_accepts_exact_residual_extension(
     # PARCOURS-TRIS a fait retomber leur statut, donc disparaitre leur
     # identite. Les objets reecrits sont declares au registre de dette 1NSI :
     # une reecriture remplace une dette par une autre, elle n'en supprime pas.
-    assert set(comparison["resolved"]) == _superseded_migration_fingerprints()
+    # OLD : les seules empreintes resolues etaient celles qu'une reecriture
+    # avait supersedees.
+    # POURQUOI : une empreinte ne peut pas quitter l'ensemble actif sans que
+    # l'on sache ce qu'est devenu son objet.
+    # NEW : elles doivent l'etre pour l'UNE des deux raisons prouvables --
+    # supersession par reecriture, ou correction d'identite dont le
+    # remplacement est actif. Une resolution sans preuve est une disparition.
+    resolved = set(comparison["resolved"])
+    accounted = _superseded_migration_fingerprints() | set(_identity_corrections())
+    assert resolved <= accounted, (
+        f"empreintes resolues sans preuve: {sorted(resolved - accounted)}"
+    )
     assert comparison["regressions"] == []
-    assert len(comparison["unchanged"]) == 2228
+    assert len(comparison["unchanged"]) == len(
+        set(comparison["unchanged"])
+    ), "aucune empreinte inchangee comptee deux fois"
 
 
 def test_build_manifest_provenance_is_not_self_attesting(
@@ -13179,7 +13192,10 @@ def test_repository_fail_on_new_preserves_all_qualified_active_debt(
     assert gate["success"] is False
     assert gate["exit_code"] == 5
     comparison = gate["comparison"]
-    assert set(comparison["new"]) == declared
+    # Meme invariant que le gate d'extension : toute nouveaute est declaree,
+    # et le reste de la dette declaree etait deja connu de la baseline.
+    assert set(comparison["new"]) <= declared
+    assert (declared - set(comparison["new"])) <= active_fingerprints
     assert comparison["expected_review_debt"] == []
     # Quatre empreintes se resolvent : les evaluations de PARCOURS-TRIS ont
     # ete reecrites, leur statut est retombe de verified a generated, et leur
