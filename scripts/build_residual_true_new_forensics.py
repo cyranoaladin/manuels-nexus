@@ -298,6 +298,111 @@ _REWRITTEN_ORIGINS = frozenset(
 )
 
 
+def _inventory_module():
+    """L'empreinte est RECALCULEE par la fonction de l'inventaire.
+
+    La recopier ici ferait diverger deux definitions de la meme identite.
+    """
+
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "inventory_collection_for_residual", ROOT / "scripts/inventory_collection.py"
+    )
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _anomaly_paths_by_fingerprint(inventory: Mapping[str, Any]) -> dict[str, str]:
+    """Chemin de chaque anomalie courante, indexe par son empreinte."""
+
+    module = _inventory_module()
+    mapping: dict[str, str] = {}
+    anomalies = inventory.get("anomalies")
+    if not isinstance(anomalies, Mapping):
+        return mapping
+    for category, values in sorted(anomalies.items()):
+        for anomaly in values or []:
+            if not isinstance(anomaly, Mapping):
+                continue
+            fingerprint = module._anomaly_fingerprint(
+                anomaly, category=str(category)
+            )
+            path = anomaly.get("path") or anomaly.get("source")
+            if path is not None:
+                mapping[fingerprint] = str(path)
+    return mapping
+
+
+def _identity_corrections(
+    root: Path,
+    *,
+    current_active: set[str],
+    paths_by_fingerprint: Mapping[str, str],
+) -> set[str]:
+    """Empreintes qu'une CORRECTION D'IDENTITE a rendues caduques.
+
+    L'algebre initiale est gelee : elle a fige un etat ou certains objets
+    portaient encore une identite erronee. Corriger cette identite fait
+    disparaitre l'empreinte figee, sans que l'objet ait bouge d'un octet et
+    sans qu'aucune ancre puisse l'apprendre.
+
+    Le controle nomme la paire ; RIEN n'est cru sur parole. Le producteur
+    exige, contre l'inventaire COURANT :
+
+    * que l'empreinte perimee ait bien quitte l'ensemble actif -- sinon rien
+      n'a ete corrige ;
+    * que son remplacement y soit, lui, present -- sinon l'objet a DISPARU,
+      et absorber ce cas masquerait une suppression ;
+    * que le remplacement designe EXACTEMENT le meme chemin -- l'appariement
+      est un-pour-un sur le fichier, jamais sur une ressemblance ;
+    * qu'aucune empreinte ne serve deux fois, dans un sens ou dans l'autre.
+
+    Aucun objet ne quitte le blocage de release : il y reste sous son
+    identite corrigee.
+    """
+
+    path = root / "audit/ANOMALY_IDENTITY_CORRECTIONS.yaml"
+    if not path.is_file():
+        return set()
+    payload = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    corrections = payload.get("corrections")
+    if not isinstance(corrections, Mapping):
+        return set()
+
+    stale_fingerprints: set[str] = set()
+    replacements: set[str] = set()
+    for stale, correction in sorted(corrections.items()):
+        if not isinstance(correction, Mapping):
+            raise ValueError(f"correction d'identite invalide: {stale}")
+        stale = str(stale)
+        replacement = str(correction.get("corrected_fingerprint", ""))
+        declared_path = str(correction.get("path", ""))
+        if not replacement or not declared_path:
+            raise ValueError(f"correction d'identite incomplete: {stale}")
+        if stale in current_active:
+            raise ValueError(
+                f"empreinte declaree corrigee encore active: {stale}"
+            )
+        if replacement not in current_active:
+            raise ValueError(
+                f"correction d'identite sans remplacement actif: {stale}"
+            )
+        if paths_by_fingerprint.get(replacement) != declared_path:
+            raise ValueError(
+                f"remplacement sur un autre chemin que celui declare: {stale}"
+            )
+        if stale in stale_fingerprints or replacement in replacements:
+            raise ValueError(
+                f"appariement de correction d'identite non un-pour-un: {stale}"
+            )
+        stale_fingerprints.add(stale)
+        replacements.add(replacement)
+    return stale_fingerprints
+
+
 def _superseded_by_rewrite(
     root: Path, *, current_active: set[str]
 ) -> set[str]:
@@ -739,7 +844,24 @@ def build_reports(
     # identite neuve et non qualifiee, portee par un registre de dette.
     superseded = _superseded_by_rewrite(root, current_active=current_active)
     orphaned = superseded - current_active
-    transition_new = transition_new - orphaned
+    # Une identite corrigee apres le gel fait disparaitre l'empreinte figee
+    # sans que l'objet bouge : elle est retiree contre la preuve de son
+    # remplacement actif, jamais parce qu'elle gene.
+    paths_by_fingerprint = _anomaly_paths_by_fingerprint(inventory)
+    corrected = _identity_corrections(
+        root,
+        current_active=current_active,
+        paths_by_fingerprint=paths_by_fingerprint,
+    )
+    transition_new = transition_new - orphaned - corrected
+    unchanged = unchanged - corrected
+    expected_review_debt = expected_review_debt - corrected
+    # Un objet entre dans un registre de dette DECLAREE des qu'il change. Les
+    # ensembles geles, eux, le decrivent tel qu'il etait : sans cette
+    # soustraction il appartiendrait a deux classes a la fois. Il reste
+    # bloquant des deux cotes, seule sa classe d'imputation bouge.
+    unchanged = unchanged - separate_debt
+    expected_review_debt = expected_review_debt - separate_debt
     current_partition = (
         unchanged
         | transition_new

@@ -1,0 +1,34 @@
+artifact_type: anomaly_identity_corrections
+authority: l'inventaire historique du commit nomme ci-dessous est la SEULE preuve
+  qu'une empreinte perimee designait ce chemin ; tout le reste est reverifie par le
+  producteur contre l'inventaire COURANT
+control_digest: sha256:7bcce69b65fb91211d66ef62e7ca1eb8d864a71c12eb8d4e0cdadfa717f26857
+corrected_by_commit: a08f7ed0e4a2ec22ef7588c6f2a50de598802356
+corrections:
+  3a8ff3c7649eebf4:
+    category: blocking_statuses
+    corrected_fingerprint: c194bf1ceb001589
+    corrected_object_id: 1NSI-APT-COURS-C2
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-APT-COURS-C2.tex
+    stale_object_id: 1NSI-AGT-COURS-C2
+  4efbac4c9cd5b38e:
+    category: blocking_statuses
+    corrected_fingerprint: 6ef7e4396d2d78fa
+    corrected_object_id: 1NSI-APT-COURS-C1
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-APT-COURS-C1.tex
+    stale_object_id: 1NSI-AGT-COURS-C1
+  5dd488a33d09ff85:
+    category: blocking_statuses
+    corrected_fingerprint: 431ad64d2681d804
+    corrected_object_id: 1NSI-APT-COURS-C3
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-APT-COURS-C3.tex
+    stale_object_id: 1NSI-AGT-COURS-C3
+evidence_inventory_commit: 5efbe95789cf509ea014941252c52a40046aa98b
+schema_version: 1
+why: 'L''algebre initiale GELEE a ete calculee alors que l''inventaire committe portait
+  un etat d''identite INTERMEDIAIRE : le fichier avait deja ete deplace vers son chemin
+  APT, mais sa META declarait encore l''identite AGT. Le commit a08f7ed0 a corrige
+  la META ; l''empreinte intermediaire a donc disparu de l''ensemble actif sans que
+  l''ancre gelee, immuable par construction, puisse le savoir. Ce controle nomme ces
+  empreintes et prouve leur remplacement. Il ne qualifie rien et ne retire aucun objet
+  du blocage de release : l''objet reste actif sous son identite corrigee.'

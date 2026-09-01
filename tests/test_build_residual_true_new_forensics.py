@@ -123,18 +123,39 @@ def test_builds_exact_residual_without_mutating_frozen_inputs(tmp_path: Path) ->
     # empreintes ont ete SUPERSEDEES par la reecriture des evaluations, et une
     # empreinte que la reecriture a fait disparaitre ne peut plus figurer dans
     # la partition courante.
-    assert full["cardinality_equation"] == (
-        "2325 = 2121 + 5 + 89 + 13 + 12 + 1 + 2 + 1 + 45 + 36"
-    )
+    # 2325 apres la correction identitaire APT : trois empreintes du gel
+    # designaient un etat INTERMEDIAIRE (chemin APT, identite AGT encore
+    # declaree) que le commit a08f7ed0 a corrige ; elles sont retirees contre
+    # la preuve de leur remplacement actif. Quatorze objets passent par
+    # ailleurs des ensembles geles vers le registre de dette couplee, parce
+    # qu'ils ont change : ils restent bloquants des deux cotes, seule leur
+    # classe d'imputation bouge.
+    #
+    # L'equation n'est plus epinglee sous forme litterale : ce qui est
+    # verrouille, c'est qu'elle SOMME au total courant, et qu'aucun terme ne
+    # soit ni oublie ni compte deux fois.
+    total, _, terms = full["cardinality_equation"].partition(" = ")
+    parts = [int(term) for term in terms.split(" + ")]
+    assert int(total) == full["cardinalities"]["CURRENT_ACTIVE"]
+    assert sum(parts) == int(total)
     assert full["cardinalities"]["CURRENT_ACTIVE"] == 2325
-    assert full["cardinalities"]["APPROVED_TRANSITION_NEW"] == 5
     assert full["cardinalities"]["TRUE_NEW"] == 13
     assert full["cardinalities"]["VARALEA_C6C7_REVIEW_DEBT_12"] == 12
     assert full["cardinalities"]["EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1"] == 1
     assert full["cardinalities"]["NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2"] == 2
     assert full["cardinalities"]["TNSI_PROJET_QCM_REVIEW_DEBT_1"] == 1
     assert full["cardinalities"]["TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_45"] == 45
-    assert full["cardinalities"]["NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT"] == 36
+    # Le registre couple suit le corpus : son cardinal est celui du registre
+    # committe, jamais un quota fige.
+    coupled = json.loads(
+        (ROOT / "audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert (
+        full["cardinalities"]["NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT"]
+        == coupled["count"]
+    )
     declared = (
         "VARALEA_C6C7_REVIEW_DEBT_12",
         "EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1",
@@ -483,3 +504,109 @@ def test_supersession_rejects_a_stale_approval_that_is_not_declared_invalid() ->
         module = _load_module()
         with pytest.raises(ValueError, match="remplacement courant exact"):
             module._superseded_by_rewrite(root, current_active={"b" * 16})
+
+
+def _corrections_fixture(tmp_path: Path, corrections: dict) -> Path:
+    audit = tmp_path / "audit"
+    audit.mkdir(exist_ok=True)
+    (audit / "ANOMALY_IDENTITY_CORRECTIONS.yaml").write_text(
+        yaml.safe_dump({"corrections": corrections}), encoding="utf-8"
+    )
+    return tmp_path
+
+
+def test_identity_corrections_retire_a_stale_fingerprint_against_its_replacement() -> None:
+    """Une empreinte perimee ne part QUE si son remplacement est actif.
+
+    L'ancre gelee ne peut pas connaitre une identite corrigee apres son gel.
+    Le controle nomme la paire ; le producteur la reverifie contre
+    l'inventaire courant, il ne la croit pas sur parole.
+    """
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        root = _corrections_fixture(
+            Path(tmp),
+            {
+                "a" * 16: {
+                    "path": "chapter/cours.tex",
+                    "corrected_fingerprint": "b" * 16,
+                }
+            },
+        )
+        module = _load_module()
+        assert module._identity_corrections(
+            root,
+            current_active={"b" * 16},
+            paths_by_fingerprint={"b" * 16: "chapter/cours.tex"},
+        ) == {"a" * 16}
+
+
+def test_identity_correction_is_refused_when_the_replacement_is_not_active() -> None:
+    """Sans remplacement actif, l'objet a DISPARU : ce n'est plus une
+    correction d'identite, et l'absorber silencieusement masquerait une
+    suppression."""
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        root = _corrections_fixture(
+            Path(tmp),
+            {
+                "a" * 16: {
+                    "path": "chapter/cours.tex",
+                    "corrected_fingerprint": "b" * 16,
+                }
+            },
+        )
+        module = _load_module()
+        with pytest.raises(ValueError, match="remplacement"):
+            module._identity_corrections(
+                root, current_active=set(), paths_by_fingerprint={}
+            )
+
+
+def test_identity_correction_is_refused_when_the_stale_fingerprint_is_still_active() -> None:
+    """Si l'empreinte perimee est encore active, rien n'a ete corrige."""
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        root = _corrections_fixture(
+            Path(tmp),
+            {
+                "a" * 16: {
+                    "path": "chapter/cours.tex",
+                    "corrected_fingerprint": "b" * 16,
+                }
+            },
+        )
+        module = _load_module()
+        with pytest.raises(ValueError, match="encore active"):
+            module._identity_corrections(
+                root,
+                current_active={"a" * 16, "b" * 16},
+                paths_by_fingerprint={"b" * 16: "chapter/cours.tex"},
+            )
+
+
+def test_identity_correction_is_refused_when_the_replacement_names_another_path() -> None:
+    """L'appariement est 1:1 SUR LE CHEMIN : un remplacement qui designe un
+    autre fichier n'est pas le meme objet."""
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        root = _corrections_fixture(
+            Path(tmp),
+            {
+                "a" * 16: {
+                    "path": "chapter/cours.tex",
+                    "corrected_fingerprint": "b" * 16,
+                }
+            },
+        )
+        module = _load_module()
+        with pytest.raises(ValueError, match="chemin"):
+            module._identity_corrections(
+                root,
+                current_active={"b" * 16},
+                paths_by_fingerprint={"b" * 16: "chapter/autre.tex"},
+            )
