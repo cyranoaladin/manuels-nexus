@@ -6,27 +6,22 @@
   "distinct_from": "P0_PEDAGOGICAL_CONTENT_CLONING : un objet peut etre unique et malgre tout etranger a sa discipline ; la detection de clonage ne le verrait jamais",
   "discriminator": "le programme de Premiere NSI ne comporte aucune analyse : derivation, limite, integrale, etude de fonction. Un objet qui les mobilise n'appartient pas a ce niveau, quel que soit le vocabulaire informatique qui l'entoure",
   "counts": {
-    "CROSS_DISCIPLINE_TERMINALE_MATHS": 1,
-    "NSI_NATIVE": 70
+    "NSI_NATIVE": 71
   },
   "unknown": 0,
   "objects_scanned": 71,
-  "condemned_count": 1,
+  "condemned_count": 0,
   "condemned_while_approved": [],
   "per_chapter": {
     "1NSI-ALGO-DICHO-GLOUTON-KNN": {
-      "CROSS_DISCIPLINE_TERMINALE_MATHS": 1,
-      "NSI_NATIVE": 30,
-      "role:contract": 1
+      "NSI_NATIVE": 31
     },
     "1NSI-ALGO-PARCOURS-TRIS": {
       "NSI_NATIVE": 40
     }
   },
-  "condemned_paths": [
-    "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/contrat.yaml"
-  ],
-  "condemned_set_digest": "sha256:6468034ebcb309bbbb053abfb9659ca3bccc86034c5f9e986e9b89c144ce9bff",
+  "condemned_paths": [],
+  "condemned_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "objects": [
     {
       "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
@@ -665,20 +660,18 @@
       "pointers": [
         "$"
       ],
-      "sha256": "sha256:ae4500318bc1f11658dbf35153e79ac6f50b3e0008ef2e9a69e713267c607a5b",
+      "sha256": "sha256:b66809a4f8fd0dc319bfc991c37e607a2578c643fbf8702f3520ca87ea1ac5ec",
       "object_id": null,
       "declared_status": null,
       "declared_capacities": [],
-      "calculus_evidence": [
-        "derivation"
-      ],
+      "calculus_evidence": [],
       "computing_evidence": [
         "algorithmique",
         "chapitre",
         "python",
         "structures"
       ],
-      "verdict": "CROSS_DISCIPLINE_TERMINALE_MATHS"
+      "verdict": "NSI_NATIVE"
     },
     {
       "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",

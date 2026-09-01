@@ -63,6 +63,14 @@ def test_the_current_cross_discipline_debt_is_exhaustively_recorded(
     assert payload["counts"].get("REQUIRES_EXPLICIT_ADJUDICATION", 0) == 0
 
 
+def test_the_coupled_1nsi_reconstruction_contains_no_cross_discipline_surface(
+    payload: dict,
+) -> None:
+    assert payload["condemned_count"] == 0
+    assert payload["condemned_paths"] == []
+    assert payload["counts"].get("CROSS_DISCIPLINE_TERMINALE_MATHS", 0) == 0
+
+
 def test_every_object_receives_an_explicit_verdict(payload: dict) -> None:
     """UNKNOWN = 0 : rien n'est classe par defaut."""
 
