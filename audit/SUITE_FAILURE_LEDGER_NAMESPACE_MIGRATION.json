@@ -1,0 +1,58 @@
+{
+ "artifact_type": "suite_failure_ledger",
+ "schema_version": 1,
+ "run_source_sha": "b0d1e0e0",
+ "run_command": "python3 -m pytest -q --no-header -p no:randomly",
+ "observed": {
+  "passed": 9383,
+  "failed": 19,
+  "errors": 0,
+  "rc": 0,
+  "duration_seconds": 2906.21
+ },
+ "families": [
+  {
+   "family": "STALE_DERIVED_LEDGERS",
+   "count": 5,
+   "root_cause": "artefacts derives calcules avant la migration de namespace : FALSE_MISSING_GAP_DELTA, les deux registres residual-13 et le checkpoint de backlog.",
+   "tests": [
+    "tests/test_false_missing_gap_delta.py::test_committed_artifact_matches_the_producer",
+    "tests/test_residual_13_qualification.py::test_residual_13_exact_diff_matches_all_canonical_sources",
+    "tests/test_residual_13_qualification.py::test_residual_13_sunset_ledger_is_pending_and_release_blocking",
+    "tests/test_residual_13_qualification.py::test_the_two_ledgers_are_derived_not_hand_maintained",
+    "tests/test_true_authoring_backlog_checkpoint.py::test_the_committed_checkpoint_matches_the_producer"
+   ],
+   "resolution": "REGENERATED_FROM_PRODUCER",
+   "state": "RESOLVED"
+  },
+  {
+   "family": "STALE_PACKETS_OF_UNFROZEN_CHAPTERS",
+   "count": 2,
+   "root_cause": "packets de 1SPE-EXPONENTIELLE et 1SPE-VARIABLES-ALEATOIRES : ces chapitres ne sont pas sous gel, leurs digests se rederivent du contenu courant.",
+   "tests": [
+    "tests/test_human_review_governance.py::test_emitted_packets_match_the_current_scope",
+    "tests/test_governance_producers_unit.py::test_the_check_cli_agrees_with_the_committed_artifact"
+   ],
+   "resolution": "REGENERATED_FROM_PRODUCER",
+   "state": "RESOLVED"
+  },
+  {
+   "family": "SUITES_REVIEW_FREEZE_STALE_BY_ITS_OWN_RULE",
+   "count": 12,
+   "root_cause": "cinq objets FR-R* de 1SPE-SUITES appartiennent au gel de revue 161 @ c667f12b. Leur correction de namespace fait echouer object_blob_identity_pass ET semantic_identity_pass : le digest semantique du gel inclut la META. La regle du gel lui-meme classe `chapter_programme_mapping_changed` en STALE_CONTENT_CHANGED.",
+   "tests": [
+    "tests/test_1spe_suites_current_freeze_binding.py (8 tests)",
+    "tests/test_1spe_suites_review_source_freeze.py (2 tests)",
+    "tests/test_1spe_suites_human_review_packet.py (1 test)",
+    "tests/test_governance_producers_unit.py (1 test)"
+   ],
+   "resolution": "BLOCKED_REAL_HUMAN_DECISION_REQUIRED",
+   "why_the_machine_stops": "`automatic_rebind: FORBIDDEN` dans le contrat du gel, et le gel courant repose sur une decision humaine datee du 2026-08-28. La machine peut constater la peremption, jamais la resoudre.",
+   "what_is_at_stake": "aucun recu humain n'existe, review_a et review_b sont PENDING_UNASSIGNED, publication_approval est false : la revue n'a pas commence et aucun travail humain n'est perdu.",
+   "state": "OPEN"
+  }
+ ],
+ "sum_of_family_counts": 19,
+ "total_failures": 19,
+ "unknown": 0
+}
