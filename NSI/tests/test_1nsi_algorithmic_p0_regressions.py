@@ -1,4 +1,5 @@
 import ast
+import json
 import re
 from pathlib import Path
 
@@ -29,10 +30,41 @@ ALGORITHMS_QCM = (
     / "qcm"
     / "1NSI-ALGO-PARCOURS-TRIS-QCM.tex"
 )
+COUPLED_CHAPTERS = (
+    CHAPTERS / "1NSI-ALGO-DICHO-GLOUTON-KNN",
+    CHAPTERS / "1NSI-ALGO-PARCOURS-TRIS",
+)
+
+
+def _meta(path: Path) -> dict:
+    first = path.read_text(encoding="utf-8").splitlines()[0]
+    assert "META:" in first, path
+    return json.loads(first.split("META:", 1)[1].strip())
 
 
 def _normalized(text: str) -> str:
     return " ".join(text.split())
+
+
+def test_coupled_object_ids_match_their_current_source_stems() -> None:
+    for chapter in COUPLED_CHAPTERS:
+        for path in sorted(chapter.rglob("*.tex")):
+            assert _meta(path)["id"] == path.stem, path
+
+
+def test_coupled_evaluations_declare_exact_a_b_variants_and_targets() -> None:
+    evaluations = COUPLED_CHAPTERS[1] / "evaluations"
+    for version in ("A", "B"):
+        subject = evaluations / f"1NSI-APT-EVAL-{version}.tex"
+        correction = evaluations / f"1NSI-APT-EVAL-{version}-corrige.tex"
+        assert _meta(subject)["version"] == version
+        assert _meta(correction)["evaluation_ref"] == subject.stem
+
+
+def test_coupled_current_tex_sources_contain_no_legacy_agt_identity() -> None:
+    for chapter in COUPLED_CHAPTERS:
+        for path in sorted(chapter.rglob("*.tex")):
+            assert "1NSI-AGT" not in path.read_text(encoding="utf-8"), path
 
 
 def test_greedy_change_does_not_promise_an_optimal_solution() -> None:
