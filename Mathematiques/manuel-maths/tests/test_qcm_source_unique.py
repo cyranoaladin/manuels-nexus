@@ -26,6 +26,10 @@ RACINE = Path(__file__).resolve().parents[1]
 GENERATEUR = RACINE / "scripts" / "build_qcm_tex.py"
 DEBT_BUILDER = RACINE.parents[1] / "scripts" / "build_qcm_capacity_coverage_debt.py"
 DEBT_LEDGER = RACINE.parents[1] / "audit" / "QCM_CAPACITY_COVERAGE_DEBT.json"
+COLLECTION_CHAPTER_ROOTS = (
+    RACINE / "chapitres",
+    RACINE.parents[1] / "NSI" / "chapitres",
+)
 
 
 def _sources_qcm() -> dict[str, Path]:
@@ -55,6 +59,28 @@ def _question(chapitre: str, question_id: str) -> dict:
 
 def _debt_ledger() -> dict:
     return json.loads(DEBT_LEDGER.read_text(encoding="utf-8"))
+
+
+def _independent_collection_inventory() -> dict[str, int]:
+    qcm_sources = sorted(
+        path
+        for root in COLLECTION_CHAPTER_ROOTS
+        for path in root.glob("*/qcm/*-QCM.json")
+    )
+    contracts = sorted(
+        path
+        for root in COLLECTION_CHAPTER_ROOTS
+        for path in root.glob("*/contrat.yaml")
+    )
+    questions = sum(
+        len(json.loads(path.read_text(encoding="utf-8"))["questions"])
+        for path in qcm_sources
+    )
+    return {
+        "qcm_files": len(qcm_sources),
+        "chapters": len(contracts),
+        "questions": questions,
+    }
 
 
 def _assert_debt_status_is_derived(ledger: dict) -> None:
@@ -504,16 +530,9 @@ def test_le_registre_de_dette_est_courant_et_reproductible() -> None:
     )
     assert result.returncode == 0, result.stdout + result.stderr
     ledger = _debt_ledger()
-    # 337 depuis l'ajout des six questions C6/C7 de 1SPE-VARIABLES-ALEATOIRES :
-    # les capacites « Experimentations » n'etaient pas evaluees.
-    # 348 depuis l'extension du QCM de TSPE-GEOMETRIE-ESPACE : ce chapitre
-    # n'evaluait que cinq de ses seize capacites, onze questions les couvrent.
-    assert ledger["inventory"] == {
-        "qcm_files": 35,
-        "chapters": 35,
-        "questions": 348,
-    }
-    assert len(ledger["source_inputs"]) == 35
+    expected_inventory = _independent_collection_inventory()
+    assert ledger["inventory"] == expected_inventory
+    assert len(ledger["source_inputs"]) == expected_inventory["chapters"]
     _assert_debt_status_is_derived(ledger)
 
 
