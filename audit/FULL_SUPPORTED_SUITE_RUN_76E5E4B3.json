@@ -1,0 +1,49 @@
+{
+  "artifact_type": "full_supported_suite_observed_run",
+  "schema_version": 1,
+  "status": "FAILED_CLASSIFIED",
+  "source_sha": "76e5e4b3045b74f572329c903c25275167a38f38",
+  "command": "python3 -m pytest -q --no-header -p no:randomly",
+  "collected": 9358,
+  "passed": 9354,
+  "failed": 4,
+  "errors": 0,
+  "warnings": 4,
+  "rc": 1,
+  "duration_seconds": 2805.89,
+  "log": "/tmp/nexus-supported-suite-Hntr3Y/supported-suite.log",
+  "log_sha256": "sha256:c8a3059704b278cc177eff27f9bd82d12f1cec277ee37eda86bdcc8935db7495",
+  "tree_status_before": "## codex/t3-publish-readiness-current",
+  "tree_status_after": "## codex/t3-publish-readiness-current",
+  "tree_clean_before": true,
+  "tree_clean_after": true,
+  "failed_tests": [
+    {
+      "nodeid": "Mathematiques/manuel-maths/tests/test_qcm_source_unique.py::test_le_registre_de_dette_est_courant_et_reproductible",
+      "classification": "STALE_TEST_CONSUMER_SCOPE_CONSTANTS",
+      "evidence": "Le producteur collection-wide passe --check et observe 52 QCM, 52 chapitres et 490 questions; le test attend encore les constantes historiques Math-only 35, 35 et 348."
+    },
+    {
+      "nodeid": "tests/test_residual_13_qualification.py::test_residual_13_exact_diff_matches_all_canonical_sources",
+      "classification": "STALE_DERIVED_ARTIFACT_SOURCE_DIGEST",
+      "evidence": "Le registre conserve sha256:0872ac80... pour RESIDUAL_TRUE_NEW_FORENSICS.json alors que le producteur courant calcule sha256:9941fb71...."
+    },
+    {
+      "nodeid": "tests/test_residual_13_qualification.py::test_residual_13_sunset_ledger_is_pending_and_release_blocking",
+      "classification": "STALE_DERIVED_ARTIFACT_SOURCE_DIGEST",
+      "evidence": "Le sunset ledger conserve le même ancien digest de la source forensics."
+    },
+    {
+      "nodeid": "tests/test_residual_13_qualification.py::test_the_two_ledgers_are_derived_not_hand_maintained",
+      "classification": "STALE_DERIVED_ARTIFACT_RENDER",
+      "evidence": "Le rendu déterministe du producteur diffère des deux fichiers suivis uniquement par le digest current de RESIDUAL_TRUE_NEW_FORENSICS.json."
+    }
+  ],
+  "failure_classes": {
+    "STALE_TEST_CONSUMER_SCOPE_CONSTANTS": 1,
+    "STALE_DERIVED_ARTIFACT_SOURCE_DIGEST": 2,
+    "STALE_DERIVED_ARTIFACT_RENDER": 1
+  },
+  "mutation_during_run": false,
+  "release_interpretation": "RUN_RED_DO_NOT_USE_AS_BACKLOG_VALIDATION"
+}
