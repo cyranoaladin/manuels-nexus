@@ -11,10 +11,14 @@ import os
 import subprocess
 import tempfile
 from pathlib import Path
+import sys
 from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT / "scripts") not in sys.path:
+    sys.path.insert(0, str(ROOT / "scripts"))
+import review_reference_namespace as reference_namespace  # noqa: E402
 AUDIT = ROOT / "audit"
 FREEZE_PATH = AUDIT / "1SPE_SUITES_REVIEW_SOURCE_FREEZE.json"
 CONTRACT_PATH = AUDIT / "HUMAN_REVIEW_GATE_CONTRACT_1SPE_SUITES.json"
@@ -257,10 +261,32 @@ def _other_corrections() -> list[dict[str, Any]]:
     ]
 
 
+def _resolve_reference_namespaces(rows: list[dict[str, Any]]) -> None:
+    """Nommer l'espace de noms de chaque renvoi avant de le montrer a un expert.
+
+    Les renvois melangent deux espaces distincts -- `M7` designe une methode du
+    chapitre, `R5` un PREREQUIS du contrat. Sous le seul intitule
+    « remediation_reference », la lettre R se lit comme un objet de remediation,
+    et rien ne dit au relecteur que R5 n'est pas C5. Un dossier qui aplatit deux
+    espaces de noms fait signer une chose pour une autre.
+    """
+
+    chapter_dir = ROOT / "Mathematiques" / "manuel-maths" / "chapitres" / "1SPE-SUITES"
+    for row in rows:
+        for diagnostic in row.get("diagnostics") or []:
+            renvoi = diagnostic.get("remediation_reference")
+            if not isinstance(renvoi, str):
+                continue
+            diagnostic["resolved_references"] = reference_namespace.resolve(
+                renvoi, chapter_dir
+            )
+
+
 def _qcm_material(contract: dict[str, Any]) -> dict[str, Any]:
     audit = _load(QCM_AUDIT_PATH)
     rows = [row for row in audit["questions"] if row.get("chapter") == "1SPE-SUITES"]
     rows.sort(key=lambda row: int(row["question_id"].removeprefix("Q")))
+    _resolve_reference_namespaces(rows)
     gate = contract["qcm_human_gate"]
     return {
         "audit_path": str(QCM_AUDIT_PATH.relative_to(ROOT)),

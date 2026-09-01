@@ -4298,6 +4298,14 @@
             "error_model": "L'eleve oublie le terme $-3n$ et calcule seulement $2 \\times 3^2+1=19$.",
             "option": "B",
             "remediation_reference": "M1, etape 2",
+            "resolved_references": [
+              {
+                "code": "M1",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-001"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4305,6 +4313,14 @@
             "error_model": "L'eleve remplace $n^2$ par $n$ et calcule $2 \\times 3-3 \\times 3+1=-2$.",
             "option": "C",
             "remediation_reference": "M1, etape 2",
+            "resolved_references": [
+              {
+                "code": "M1",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-001"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4312,6 +4328,14 @@
             "error_model": "L'eleve remplace le terme constant $+1$ par $-1$ et obtient $18-9-1=8$.",
             "option": "D",
             "remediation_reference": "M1, etape 2",
+            "resolved_references": [
+              {
+                "code": "M1",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-001"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -4359,6 +4383,14 @@
             "error_model": "L'eleve a calcule $v_1$ uniquement : $v_1 = 3 \\times 4 - 2 = 10$, et a confondu $v_1$ avec $v_2$. Arret premature d'une iteration.",
             "option": "A",
             "remediation_reference": "M1, etape 3",
+            "resolved_references": [
+              {
+                "code": "M1",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-001"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4366,6 +4398,14 @@
             "error_model": "L'eleve a oublie le $-2$ au premier passage et calcule $v_1=3\\times4=12$, puis applique la recurrence au terme suivant : $v_2=3\\times12-2=34$.",
             "option": "C",
             "remediation_reference": "M1, etape 3",
+            "resolved_references": [
+              {
+                "code": "M1",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-001"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4373,6 +4413,14 @@
             "error_model": "L'eleve a soustrait $v_0=4$ au lieu de la constante $2$ au premier passage, d'ou $v_1=3\\times4-4=8$, puis $v_2=3\\times8-2=22$.",
             "option": "D",
             "remediation_reference": "M1, etape 3",
+            "resolved_references": [
+              {
+                "code": "M1",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-001"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -4420,6 +4468,14 @@
             "error_model": "Prendre la moyenne $0$ des deux valeurs alternees ne decrit pas les termes : ils restent a distance $1$ de $0$ et ne s'en rapprochent pas.",
             "option": "A",
             "remediation_reference": "M8, etape 3",
+            "resolved_references": [
+              {
+                "code": "M8",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-008"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4427,6 +4483,14 @@
             "error_model": "Les termes restent egaux a $1$ ou $-1$ ; ils ne deviennent pas arbitrairement grands.",
             "option": "B",
             "remediation_reference": "M8, etape 3",
+            "resolved_references": [
+              {
+                "code": "M8",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-008"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4434,6 +4498,14 @@
             "error_model": "Un terme sur deux vaut $-1$ : la suite ne se rapproche pas de $1$, elle continue d'osciller.",
             "option": "D",
             "remediation_reference": "M8, etape 3",
+            "resolved_references": [
+              {
+                "code": "M8",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-008"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -4481,6 +4553,14 @@
             "error_model": "L'eleve a identifie le terme constant $-7$ de la formule comme la raison, alors que $-7 = u_0$ est le premier terme.",
             "option": "A",
             "remediation_reference": "M2, etape 4",
+            "resolved_references": [
+              {
+                "code": "M2",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-002"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4488,6 +4568,14 @@
             "error_model": "L'eleve a donne une expression dependant de $n$ comme raison. La raison d'une suite arithmetique est un reel constant, pas une expression variable.",
             "option": "B",
             "remediation_reference": "M2, etape 3",
+            "resolved_references": [
+              {
+                "code": "M2",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-002"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4495,6 +4583,14 @@
             "error_model": "L'eleve calcule $u_1=4 \\times 1-7=-3$ et confond ce terme avec la raison. Or $u_0=-7$ et $u_1-u_0=-3-(-7)=4$.",
             "option": "D",
             "remediation_reference": "M2, etape 3",
+            "resolved_references": [
+              {
+                "code": "M2",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-002"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -4542,6 +4638,14 @@
             "error_model": "L'eleve a compte seulement quatre accroissements entre $u_1$ et $u_6$ et calcule $8+4\\times(-3)=-4$ ; il y en a cinq, donc $u_6=8+5\\times(-3)=-7$.",
             "option": "B",
             "remediation_reference": "M2, etape 4",
+            "resolved_references": [
+              {
+                "code": "M2",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-002"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4549,6 +4653,14 @@
             "error_model": "L'eleve a utilise $u_n = u_0 + nr$ avec $u_0 = 8$ en oubliant que le premier terme donne est $u_1$ et non $u_0$ : calcul $8 + 6 \\times (-3) = -10$ au lieu de $8 + 5 \\times (-3) = -7$.",
             "option": "C",
             "remediation_reference": "M2, etape 4",
+            "resolved_references": [
+              {
+                "code": "M2",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-002"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4556,6 +4668,14 @@
             "error_model": "Meme erreur que C : formule $u_n = u_1 + n \\times r$ au lieu de $u_n = u_1 + (n-1) \\times r$. L'option D presente le calcul errone de facon explicite.",
             "option": "D",
             "remediation_reference": "M2, etape 4",
+            "resolved_references": [
+              {
+                "code": "M2",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-002"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -4603,6 +4723,20 @@
             "error_model": "La suite $u_n = 3^n$ est geometrique (raison $q = 3$), pas arithmetique. L'eleve confond suite geometrique et suite arithmetique.",
             "option": "A",
             "remediation_reference": "M2, etape 1 ; M3",
+            "resolved_references": [
+              {
+                "code": "M2",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-002"
+              },
+              {
+                "code": "M3",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-003"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4610,6 +4744,14 @@
             "error_model": "La suite $u_n = n^2 + 2$ n'est pas arithmetique : $u_{n+1} - u_n = (n+1)^2 - n^2 = 2n+1$, qui depend de $n$. L'eleve n'a pas verifie la constance de la difference.",
             "option": "B",
             "remediation_reference": "M2, etapes 1-3",
+            "resolved_references": [
+              {
+                "code": "M2",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-002"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4617,6 +4759,14 @@
             "error_model": "La suite $u_n = 1/(n+1)$ n'est pas arithmetique : $u_1 - u_0 = 1/2 - 1 = -1/2$ mais $u_2 - u_1 = 1/3 - 1/2 = -1/6$. L'eleve n'a pas verifie la constance de la difference.",
             "option": "D",
             "remediation_reference": "M2, etapes 1-3",
+            "resolved_references": [
+              {
+                "code": "M2",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-002"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -4664,6 +4814,14 @@
             "error_model": "L'eleve a applique la formule arithmetique $u_n = u_0 + nr$ au lieu de la formule geometrique $u_n = u_0 \\times q^n$. Confusion suite arithmetique / geometrique.",
             "option": "A",
             "remediation_reference": "M3, etape 5",
+            "resolved_references": [
+              {
+                "code": "M3",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-003"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4671,6 +4829,14 @@
             "error_model": "L'eleve a utilise $u_n = u_1 \\times q^{n-1}$ au lieu de $u_n = u_0 \\times q^n$. Decalage d'indice : confusion entre premier terme $u_0$ et premier terme $u_1$.",
             "option": "B",
             "remediation_reference": "M3, etape 5",
+            "resolved_references": [
+              {
+                "code": "M3",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-003"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4678,6 +4844,14 @@
             "error_model": "L'eleve a inverse les roles du premier terme et de la raison : il a ecrit $u_0 = 2$ et $q = 3$ au lieu de $u_0 = 3$ et $q = 2$.",
             "option": "C",
             "remediation_reference": "M3, etape 5",
+            "resolved_references": [
+              {
+                "code": "M3",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-003"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -4725,6 +4899,14 @@
             "error_model": "L'eleve a lu le denominateur $3$ comme la raison, en oubliant que la division par $3$ correspond a une multiplication par $1/3$. Confusion division / multiplication.",
             "option": "A",
             "remediation_reference": "M3, etape 2",
+            "resolved_references": [
+              {
+                "code": "M3",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-003"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4732,6 +4914,14 @@
             "error_model": "L'eleve a pris l'oppose $-3$ au lieu de l'inverse $1/3$. Probable confusion entre signe et valeur de la raison.",
             "option": "B",
             "remediation_reference": "M3, etape 2",
+            "resolved_references": [
+              {
+                "code": "M3",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-003"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4739,6 +4929,14 @@
             "error_model": "L'eleve a calcule $v_1 = 6/3 = 2$ et a confondu la valeur du premier terme calculee avec la raison.",
             "option": "D",
             "remediation_reference": "M3, etape 4",
+            "resolved_references": [
+              {
+                "code": "M3",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-003"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -4786,6 +4984,14 @@
             "error_model": "Preuve insuffisante : verifier deux egalites de quotients consecutifs ne prouve pas la constance pour tout $n$. Il faut un raisonnement general valable pour tout $n \\in \\mathbb{N}$.",
             "option": "A",
             "remediation_reference": "M3, etape 4",
+            "resolved_references": [
+              {
+                "code": "M3",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-003"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4793,6 +4999,14 @@
             "error_model": "Pour une suite geometrique de raison $q$, la relation $u_{n+1}=q u_n$ utilise le meme reel $q$ pour tout $n$ ; il ne depend pas de l'indice.",
             "option": "B",
             "remediation_reference": "M3, etape 1",
+            "resolved_references": [
+              {
+                "code": "M3",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-003"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4800,6 +5014,14 @@
             "error_model": "La raison peut etre n'importe quel reel, notamment negative, fractionnaire ou nulle ; elle n'est pas necessairement un entier positif.",
             "option": "D",
             "remediation_reference": "M3",
+            "resolved_references": [
+              {
+                "code": "M3",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-003"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -4847,6 +5069,14 @@
             "error_model": "L'eleve a utilise a tort $n^2/2$ et calcule $20^2/2=200$ ; la formule correcte est $n(n+1)/2=20\\times21/2=210$.",
             "option": "A",
             "remediation_reference": "M4, cas 1",
+            "resolved_references": [
+              {
+                "code": "M4",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-004"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4854,6 +5084,14 @@
             "error_model": "L'eleve a utilise la formule avec $n = 19$ au lieu de $n = 20$ : $19 \\times 20/2 = 190$. Erreur sur le nombre de termes (confusion entre $n$ et $n+1$ termes).",
             "option": "C",
             "remediation_reference": "M4, etape 1",
+            "resolved_references": [
+              {
+                "code": "M4",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-004"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4861,6 +5099,14 @@
             "error_model": "L'eleve a calcule $20 \\times 21 = 420$ en oubliant de diviser par $2$ dans la formule $n(n+1)/2$.",
             "option": "D",
             "remediation_reference": "M4, cas 1",
+            "resolved_references": [
+              {
+                "code": "M4",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-004"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -4908,6 +5154,14 @@
             "error_model": "L'eleve a calcule $1 + 3 + 9 + 27 = 40$ en sommant seulement 4 termes ($u_0$ a $u_3$) au lieu de 5 termes ($u_0$ a $u_4$). Erreur sur le nombre de termes.",
             "option": "A",
             "remediation_reference": "M4, etape 1",
+            "resolved_references": [
+              {
+                "code": "M4",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-004"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4915,6 +5169,14 @@
             "error_model": "L'option $242$ est le double de la somme correcte : l'eleve a calcule $3^5-1=242$ mais a oublie de diviser par $3-1=2$.",
             "option": "C",
             "remediation_reference": "M4, etape 3",
+            "resolved_references": [
+              {
+                "code": "M4",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-004"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4922,6 +5184,14 @@
             "error_model": "L'eleve a additionne les indices au lieu des termes : $0 + 1 + 2 + 3 + 4 = 10$, ou a utilise $u_k = k$ au lieu de $u_k = 3^k$.",
             "option": "D",
             "remediation_reference": "M4, cas 2",
+            "resolved_references": [
+              {
+                "code": "M4",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-004"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -4969,6 +5239,14 @@
             "error_model": "L'eleve a compte $14$ termes en confondant le nombre de termes avec l'indice maximal. De $u_0$ a $u_{14}$, les indices sont $0, 1, 2, \\ldots, 14$ : il y a bien $14 - 0 + 1 = 15$ termes.",
             "option": "A",
             "remediation_reference": "M4, etape 1",
+            "resolved_references": [
+              {
+                "code": "M4",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-004"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4976,6 +5254,14 @@
             "error_model": "L'eleve a soustrait $1$ au lieu d'ajouter $1$ : $14 - 1 = 13$. Confusion sur la formule 'nombre de termes = $n_{\\max} - n_{\\min} + 1$'.",
             "option": "B",
             "remediation_reference": "M4, etape 1",
+            "resolved_references": [
+              {
+                "code": "M4",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-004"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -4983,6 +5269,14 @@
             "error_model": "L'eleve ajoute $2$ au lieu de $1$ dans le comptage inclusif et obtient l'option $16$ par $14+2$ ; de $0$ a $14$, il y a $14-0+1=15$ termes.",
             "option": "D",
             "remediation_reference": "M4, etape 1",
+            "resolved_references": [
+              {
+                "code": "M4",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-004"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -5030,6 +5324,14 @@
             "error_model": "L'eleve a confondu le signe de la raison : une raison negative $r = -4$ implique $u_{n+1} - u_n = -4 < 0$, donc la suite est decroissante.",
             "option": "A",
             "remediation_reference": "M5, Methode A",
+            "resolved_references": [
+              {
+                "code": "M5",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-005"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5037,6 +5339,14 @@
             "error_model": "L'eleve n'a pas utilise la raison pour determiner la monotonie. Une suite arithmetique est constante seulement si $r = 0$.",
             "option": "B",
             "remediation_reference": "M5, Methode A",
+            "resolved_references": [
+              {
+                "code": "M5",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-005"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5044,6 +5354,14 @@
             "error_model": "L'eleve applique un raisonnement valable pour une suite quadratique mais pas pour une suite arithmetique. Une suite arithmetique de raison non nulle est strictement monotone sur $\\mathbb{N}$ tout entier.",
             "option": "D",
             "remediation_reference": "M5, Methode A",
+            "resolved_references": [
+              {
+                "code": "M5",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-005"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -5091,6 +5409,14 @@
             "error_model": "La methode A fonctionne aussi : $u_{n+1}-u_n=5(0{,}8)^n(0{,}8-1)<0$. Elle n'utilise toutefois pas directement la raison par comparaison du quotient a 1, contrairement a la methode demandee.",
             "option": "A",
             "remediation_reference": "M5, arbre de decision",
+            "resolved_references": [
+              {
+                "code": "M5",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-005"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5098,6 +5424,14 @@
             "error_model": "La derivation de $x\\mapsto(0{,}8)^x$ n'est pas un outil attendu ici. La methode B exploite directement la raison de la suite geometrique positive.",
             "option": "C",
             "remediation_reference": "M5, arbre de decision",
+            "resolved_references": [
+              {
+                "code": "M5",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-005"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5105,6 +5439,14 @@
             "error_model": "Observer quelques valeurs ne constitue pas une preuve. Il faut un raisonnement valide pour tout $n \\in \\mathbb{N}$, pas seulement pour $n = 0, 1, 2, 3, 4$.",
             "option": "D",
             "remediation_reference": "M5, Piege 1",
+            "resolved_references": [
+              {
+                "code": "M5",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-005"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -5152,6 +5494,14 @@
             "error_model": "L'eleve n'a pas etudie le signe de $u_{n+1} - u_n$ pour tout $n$ : $u_{n+1} - u_n = 2n - 5$, qui est negatif pour $n \\leq 2$. La suite n'est pas monotone sur $\\mathbb{N}$ tout entier.",
             "option": "A",
             "remediation_reference": "M5, Methode A",
+            "resolved_references": [
+              {
+                "code": "M5",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-005"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5159,6 +5509,14 @@
             "error_model": "L'eleve a pose $2n - 5 > 0 \\Rightarrow n > 2{,}5$ et a conclu $n \\geq 2$. Mais pour $n = 2$ : $u_3 - u_2 = 2 \\times 2 - 5 = -1 < 0$. Il faut $n \\geq 3$ (car $2 \\times 3 - 5 = 1 > 0$).",
             "option": "C",
             "remediation_reference": "M5, Methode A",
+            "resolved_references": [
+              {
+                "code": "M5",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-005"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5166,6 +5524,21 @@
             "error_model": "L'eleve a confondu la valeur annulant $u_n = 0$ (les racines $n = 1$ et $n = 5$) avec le rang de changement de monotonie. La monotonie depend du signe de $u_{n+1} - u_n = 2n - 5$, pas du signe de $u_n$.",
             "option": "D",
             "remediation_reference": "M5, Methode A ; R3",
+            "resolved_references": [
+              {
+                "code": "M5",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-005"
+              },
+              {
+                "code": "R3",
+                "label": "Fonctions : image, antécédent, sens de variation",
+                "namespace": "PREREQUIS",
+                "note": "prerequis du contrat, pas une capacite : R3 n'est pas C3",
+                "object_id": "1SPE-SUITES-FR-R3"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -5213,6 +5586,14 @@
             "error_model": "L'eleve a confondu le taux $t = 0{,}04$ avec le coefficient multiplicateur $q = 1 + t = 1{,}04$. Le coefficient $0{,}04$ donnerait une quasi-suppression du capital, pas une augmentation de $4\\,\\%$.",
             "option": "A",
             "remediation_reference": "M6, etape 4",
+            "resolved_references": [
+              {
+                "code": "M6",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-006"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5220,6 +5601,21 @@
             "error_model": "L'eleve a calcule $1 + 40\\,\\% = 1{,}4$, en lisant $4$ comme $40\\,\\%$. Erreur de conversion du pourcentage en valeur decimale.",
             "option": "B",
             "remediation_reference": "M6, etape 4 ; R2",
+            "resolved_references": [
+              {
+                "code": "M6",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-006"
+              },
+              {
+                "code": "R2",
+                "label": "Pourcentages : coefficient multiplicateur, évolutions successives",
+                "namespace": "PREREQUIS",
+                "note": "prerequis du contrat, pas une capacite : R2 n'est pas C2",
+                "object_id": "1SPE-SUITES-FR-R2"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5227,6 +5623,21 @@
             "error_model": "L'eleve a utilise le taux en pourcentage ($4$) directement comme coefficient multiplicateur. Un coefficient $q = 4$ signifierait quadrupler le capital chaque annee.",
             "option": "D",
             "remediation_reference": "M6, etape 4 ; R2",
+            "resolved_references": [
+              {
+                "code": "M6",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-006"
+              },
+              {
+                "code": "R2",
+                "label": "Pourcentages : coefficient multiplicateur, évolutions successives",
+                "namespace": "PREREQUIS",
+                "note": "prerequis du contrat, pas une capacite : R2 n'est pas C2",
+                "object_id": "1SPE-SUITES-FR-R2"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -5274,6 +5685,14 @@
             "error_model": "Confusion entre le sens de variation (diminution) et le type de modele. Une suite geometrique modelise une variation RELATIVE constante (pourcentage fixe), pas une variation absolue constante.",
             "option": "A",
             "remediation_reference": "M6, etape 3",
+            "resolved_references": [
+              {
+                "code": "M6",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-006"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5281,6 +5700,14 @@
             "error_model": "On multiplie par un coefficient constant uniquement si la variation est relative (pourcentage). Ici, $-300$ habitants par an est une variation absolue constante $\\Rightarrow$ modele arithmetique.",
             "option": "C",
             "remediation_reference": "M6, etape 3",
+            "resolved_references": [
+              {
+                "code": "M6",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-006"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5288,6 +5715,14 @@
             "error_model": "La situation correspond bien a un modele arithmetique (variation absolue constante de $-300$). L'eleve n'a pas applique le critere de distinction variation absolue / relative.",
             "option": "D",
             "remediation_reference": "M6, etape 3",
+            "resolved_references": [
+              {
+                "code": "M6",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-006"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -5335,6 +5770,14 @@
             "error_model": "L'eleve a utilise un modele arithmetique (soustraction de $500 = 5\\,\\% \\times 10\\,000$ chaque annee) alors que la variation est relative (pourcentage). Le modele arithmetique ne tient pas compte de l'effet compose.",
             "option": "A",
             "remediation_reference": "M6, etape 3",
+            "resolved_references": [
+              {
+                "code": "M6",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-006"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5342,6 +5785,14 @@
             "error_model": "L'eleve a utilise le coefficient $1{,}05$ (correspondant a une AUGMENTATION de $5\\,\\%$) au lieu de $0{,}95$ (diminution de $5\\,\\%$). Erreur sur le coefficient multiplicateur lors d'une diminution.",
             "option": "B",
             "remediation_reference": "M6, etape 4",
+            "resolved_references": [
+              {
+                "code": "M6",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-006"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5349,6 +5800,21 @@
             "error_model": "L'eleve a utilise $0{,}05$ (le taux lui-meme) au lieu du coefficient multiplicateur $1 - 0{,}05 = 0{,}95$. Confusion entre taux et coefficient multiplicateur.",
             "option": "D",
             "remediation_reference": "M6, etape 4 ; R2",
+            "resolved_references": [
+              {
+                "code": "M6",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-006"
+              },
+              {
+                "code": "R2",
+                "label": "Pourcentages : coefficient multiplicateur, évolutions successives",
+                "namespace": "PREREQUIS",
+                "note": "prerequis du contrat, pas une capacite : R2 n'est pas C2",
+                "object_id": "1SPE-SUITES-FR-R2"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -5396,6 +5862,14 @@
             "error_model": "L'eleve a execute une seule iteration au lieu de trois : apres $k = 0$, $u = 3 \\times 2 + 1 = 7$. Il a confondu range(3) avec une seule iteration.",
             "option": "A",
             "remediation_reference": "M7, Modele A",
+            "resolved_references": [
+              {
+                "code": "M7",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-007"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5403,6 +5877,14 @@
             "error_model": "L'eleve a execute deux iterations : $u_1 = 7$, $u_2 = 3 \\times 7 + 1 = 22$... mais a renvoye 21 par une erreur de calcul ($3 \\times 7 = 21$ en oubliant $+1$). Erreur arithmetique lors de la simulation.",
             "option": "B",
             "remediation_reference": "M7, Modele A",
+            "resolved_references": [
+              {
+                "code": "M7",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-007"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5410,6 +5892,14 @@
             "error_model": "L'eleve a execute deux iterations correctement ($u_1 = 7$, $u_2 = 22$) mais a arrete apres deux tours. Il a confondu range(3) = $\\{0, 1, 2\\}$ (3 iterations) avec 2 iterations.",
             "option": "D",
             "remediation_reference": "M7, Piege 3",
+            "resolved_references": [
+              {
+                "code": "M7",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-007"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -5457,6 +5947,14 @@
             "error_model": "La condition `while u > 100` est la negation inverse : la boucle s'execute tant que $u > 100$, donc elle ne tourne jamais car $u = 1 \\leq 100$ initialement. L'eleve a oublie de prendre la NEGATION du seuil cherche.",
             "option": "A",
             "remediation_reference": "M7, Modele C, etape 2",
+            "resolved_references": [
+              {
+                "code": "M7",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-007"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5464,6 +5962,14 @@
             "error_model": "Ce code ne contient aucun test de seuil ni instruction `break` : il effectue toujours 100 iterations et renvoie $n=100$, au lieu du premier rang ou $u_n>100$.",
             "option": "C",
             "remediation_reference": "M7, Modele C",
+            "resolved_references": [
+              {
+                "code": "M7",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-007"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5471,6 +5977,14 @@
             "error_model": "L'initialisation `u = 0` est erronnee : $2 \\times 0 = 0$ pour toutes les iterations, la boucle est infinie. Il faut initialiser $u$ a la valeur du PREMIER TERME $u_0 = 1$.",
             "option": "D",
             "remediation_reference": "M7, Piege 1",
+            "resolved_references": [
+              {
+                "code": "M7",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-007"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
@@ -5518,6 +6032,14 @@
             "error_model": "Initialiser $S = 0$ est correct pour un accumulateur de somme (on ajoute le premier terme des la premiere iteration $k = 0$). L'initialisation a $1$ donnerait $S = 1 + u_0 + \\cdots$, ce qui est faux.",
             "option": "A",
             "remediation_reference": "M7, Modele B, etape 1",
+            "resolved_references": [
+              {
+                "code": "M7",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-007"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5525,6 +6047,15 @@
             "error_model": "En Python, `2**k` est la syntaxe correcte pour calculer $2^k$. L'operateur `^` est le OU exclusif bit a bit, pas la puissance. Cette assertion est fausse.",
             "option": "C",
             "remediation_reference": "R5",
+            "resolved_references": [
+              {
+                "code": "R5",
+                "label": "Python : variables, boucle for, boucle while (SNT)",
+                "namespace": "PREREQUIS",
+                "note": "prerequis du contrat, pas une capacite : R5 n'est pas C5",
+                "object_id": "1SPE-SUITES-FR-R5"
+              }
+            ],
             "specificity": "PASS"
           },
           {
@@ -5532,6 +6063,14 @@
             "error_model": "Une boucle `for` est parfaitement adaptee au calcul d'une somme avec un nombre connu d'iterations. La boucle `while` est reservee a la recherche de seuil (nombre d'iterations inconnu). Cette assertion est fausse.",
             "option": "D",
             "remediation_reference": "M7, Modele B",
+            "resolved_references": [
+              {
+                "code": "M7",
+                "label": "methode du chapitre",
+                "namespace": "METHODE",
+                "object_id": "1SPE-SUITES-ME-007"
+              }
+            ],
             "specificity": "PASS"
           }
         ],
