@@ -14,7 +14,12 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "build_1spe_suites_review_source_freeze.py"
 OUTPUT = ROOT / "audit" / "1SPE_SUITES_REVIEW_SOURCE_FREEZE.json"
-SOURCE_SHA = "1057951c1a7e8be8731982b5918effb60f2471cc"
+#: Lu dans l'artefact de gel : un re-gel autorise ne doit pas obliger a
+#: re-editer un litteral dans chaque test.
+SOURCE_SHA = json.loads(
+    (Path(__file__).resolve().parents[1] / "audit/1SPE_SUITES_REVIEW_SOURCE_FREEZE.json")
+    .read_text(encoding="utf-8")
+)["source_sha"]
 
 
 def _producer():

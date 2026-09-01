@@ -63,9 +63,14 @@ def binding_payload(freeze_binding):
 def test_the_binding_reports_the_frozen_identity_and_passes_every_check(
     freeze_binding, binding_payload
 ) -> None:
-    assert binding_payload["freeze_source_sha"] == (
-        "1057951c1a7e8be8731982b5918effb60f2471cc"
-    )
+    # OLD : le SHA du gel etait ecrit en dur ici.
+    # POURQUOI : le rapport de liaison doit nommer LE gel, pas un autre.
+    # NEW : il est lu dans l'artefact de gel lui-meme. L'invariant est
+    # conserve -- le rapport doit designer le gel courant -- et il resiste
+    # a un re-gel autorise, qui sinon obligerait a re-editer chaque
+    # litteral a la main (c'est ce qui vient d'arriver sur quatre fichiers).
+    frozen = json.loads((ROOT / "audit/1SPE_SUITES_REVIEW_SOURCE_FREEZE.json").read_text(encoding="utf-8"))
+    assert binding_payload["freeze_source_sha"] == frozen["source_sha"]
     assert binding_payload["freeze_object_count"] == 161
     assert binding_payload["current_object_count"] == 161
     assert binding_payload["binding_state"] == freeze_binding.BINDING_CURRENT

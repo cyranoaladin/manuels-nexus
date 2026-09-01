@@ -323,7 +323,16 @@ def test_the_historical_freeze_artifact_is_never_rewritten(clean_repo: Path) -> 
 
     assert freeze.read_bytes() == before
     payload = json.loads((clean_repo / BINDING).read_text(encoding="utf-8"))
-    assert payload["freeze_source_sha"] == "1057951c1a7e8be8731982b5918effb60f2471cc"
+    # OLD : le SHA du gel etait ecrit en dur ici.
+    # POURQUOI : le rapport de liaison doit nommer LE gel, pas un autre.
+    # NEW : il est lu dans l'artefact de gel lui-meme. L'invariant est
+    # conserve -- le rapport doit designer le gel courant -- et il resiste
+    # a un re-gel autorise, qui sinon obligerait a re-editer chaque
+    # litteral a la main (c'est ce qui vient d'arriver sur quatre fichiers).
+    frozen = json.loads(
+        (clean_repo / "audit/1SPE_SUITES_REVIEW_SOURCE_FREEZE.json").read_text(encoding="utf-8")
+    )
+    assert payload["freeze_source_sha"] == frozen["source_sha"]
     assert payload["freeze_object_count"] == 161
     assert payload["staleness_rules"]["automatic_rebind"] == "FORBIDDEN"
 
