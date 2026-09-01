@@ -286,6 +286,18 @@ def _declared_separate_debt(root: Path) -> dict[str, set[str]]:
     return declared
 
 
+#: Classes de reecriture admises comme remplacement d'une supersession. La
+#: distinction entre approbation humaine perimee et simple verification
+#: machine est portee par les champs, jamais par le nom de la classe.
+_REWRITTEN_ORIGINS = frozenset(
+    {
+        "REWRITTEN",
+        "REWRITTEN_STALE_APPROVAL",
+        "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED",
+    }
+)
+
+
 def _superseded_by_rewrite(
     root: Path, *, current_active: set[str]
 ) -> set[str]:
@@ -329,14 +341,22 @@ def _superseded_by_rewrite(
         entries = ledger.get("entries")
         if not isinstance(entries, list):
             raise ValueError(f"registre de supersession sans entries: {fingerprint}")
+        # La jointure se fait sur le CHEMIN, jamais sur l'identifiant declare :
+        # une reecriture a precisement le droit de corriger la META, et c'est
+        # le cas AGT -> APT. Exiger l'egalite des identifiants rendait la
+        # supersession introuvable des que la reecriture faisait son travail.
         candidates = [
             entry
             for entry in entries
             if entry.get("path") == migration.get("current_source")
-            and entry.get("object_id") == migration.get("current_object_id")
             and entry.get("chapter") == migration.get("chapter")
-            and entry.get("origin") in {"REWRITTEN", "REWRITTEN_STALE_APPROVAL"}
-            and entry.get("human_approval_invalidated_by_rewrite") is True
+            and entry.get("origin") in _REWRITTEN_ORIGINS
+            # Une approbation humaine reelle DOIT etre declaree perimee ; une
+            # verification machine n'a jamais ete une approbation et ne peut
+            # donc pas en perimer une. Le registre ne doit inventer ni l'une
+            # ni l'autre.
+            and entry.get("human_approval_invalidated_by_rewrite")
+            is (entry.get("human_approval_evidence") is True)
             and str(entry.get("fingerprint")) in current_active
         ]
         if len(candidates) != 1:

@@ -376,3 +376,110 @@ def test_projects_a_fixed_initial_fingerprint(tmp_path: Path) -> None:
     assert counts["FIXED"] == 1
     assert counts["CONTENT_FINDINGS_FIXED"] == 5
     assert counts["RESIDUAL_TRUE_NEW"] == 12
+
+
+def _supersession_fixture(tmp_path: Path, *, entry: dict) -> Path:
+    """Une supersession minimale et VALIDE, sauf pour ce que le test change."""
+    audit = tmp_path / "audit"
+    audit.mkdir(exist_ok=True)
+    source = tmp_path / "chapter" / "eval.tex"
+    source.parent.mkdir(parents=True, exist_ok=True)
+    source.write_text("contenu reecrit\n", encoding="utf-8")
+    (audit / "ANOMALY_IDENTITY_MIGRATIONS.yaml").write_text(
+        yaml.safe_dump(
+            {
+                "migrations": {
+                    "a" * 16: {
+                        "superseded_by_rewrite": True,
+                        "superseded_declared_in": "audit/REWRITE.json",
+                        "current_source": "chapter/eval.tex",
+                        # Identite telle qu'elle etait AVANT la reecriture.
+                        "current_object_id": "1NSI-AGT-EVAL-B",
+                        "chapter": "1NSI-X",
+                        "current_source_sha256": "sha256:" + "0" * 64,
+                    }
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+    (audit / "REWRITE.json").write_text(
+        json.dumps({"entries": [entry]}), encoding="utf-8"
+    )
+    return tmp_path
+
+
+def test_supersession_joins_on_the_path_when_the_rewrite_renamed_the_object() -> None:
+    """Une reecriture PEUT changer l'identifiant declare de l'objet.
+
+    C'est precisement le cas AGT -> APT : joindre le remplacement sur
+    `object_id` rendait la supersession introuvable des que la reecriture
+    corrigeait la META. Le chemin, lui, ne bouge pas.
+    """
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        root = _supersession_fixture(
+            Path(tmp),
+            entry={
+                "fingerprint": "b" * 16,
+                "path": "chapter/eval.tex",
+                "object_id": "1NSI-APT-EVAL-B",
+                "chapter": "1NSI-X",
+                "origin": "REWRITTEN_STALE_APPROVAL",
+                "human_approval_evidence": True,
+                "human_approval_invalidated_by_rewrite": True,
+            },
+        )
+        module = _load_module()
+        assert module._superseded_by_rewrite(
+            root, current_active={"b" * 16}
+        ) == {"a" * 16}
+
+
+def test_supersession_accepts_a_rewrite_that_never_carried_human_approval() -> None:
+    """`verified` est une preuve MACHINE : la reecrire n'invalide aucune
+    approbation humaine, et exiger le drapeau contraire obligerait le registre
+    a declarer une approbation qui n'a jamais existe."""
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        root = _supersession_fixture(
+            Path(tmp),
+            entry={
+                "fingerprint": "b" * 16,
+                "path": "chapter/eval.tex",
+                "object_id": "1NSI-APT-EVAL-B",
+                "chapter": "1NSI-X",
+                "origin": "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED",
+                "human_approval_evidence": False,
+                "human_approval_invalidated_by_rewrite": False,
+            },
+        )
+        module = _load_module()
+        assert module._superseded_by_rewrite(
+            root, current_active={"b" * 16}
+        ) == {"a" * 16}
+
+
+def test_supersession_rejects_a_stale_approval_that_is_not_declared_invalid() -> None:
+    """La garantie inverse tient : une approbation humaine reelle qui aurait
+    survecu a la reecriture reste refusee."""
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        root = _supersession_fixture(
+            Path(tmp),
+            entry={
+                "fingerprint": "b" * 16,
+                "path": "chapter/eval.tex",
+                "object_id": "1NSI-APT-EVAL-B",
+                "chapter": "1NSI-X",
+                "origin": "REWRITTEN_STALE_APPROVAL",
+                "human_approval_evidence": True,
+                "human_approval_invalidated_by_rewrite": False,
+            },
+        )
+        module = _load_module()
+        with pytest.raises(ValueError, match="remplacement courant exact"):
+            module._superseded_by_rewrite(root, current_active={"b" * 16})
