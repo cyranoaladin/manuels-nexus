@@ -751,10 +751,21 @@ def test_hint_inside_exercises_never_credits_the_exercise_role(
 
 
 def test_invalid_and_indeterminate_credit_sets_are_disjoint(payload: dict) -> None:
+    """OLD : `unresolved: 124`, le nombre d'objets qui declaraient un prerequis
+    dans le champ des capacites.
+    POURQUOI : ce compte devait rester VISIBLE, pour qu'aucune identite
+    irresolue ne se fonde dans le decor.
+    NEW : le contrat du resolveur est fail-closed -- une identite est resolue
+    exactement, ou elle bloque. Les 124 ont ete rendues a leur namespace, donc
+    l'exigence n'est plus « exactement 124 » mais ZERO, et chaque blocker
+    restant doit etre nomme un par un.
+    POURQUOI PLUS FORT : l'ancien pin tolerait 124 irresolues et cassait si
+    elles disparaissaient ; celui-ci n'en tolere aucune."""
+
     assert payload["invariants"]["invalid_and_indeterminate_disjoint"] is True
     assert payload["capacity_identity_resolution"] == {
         "ambiguous": 0,
-        "unresolved": 124,
+        "unresolved": 0,
         "unknown": 0,
     }
-    assert len(payload["capacity_identity_blockers"]) == 124
+    assert payload["capacity_identity_blockers"] == []
