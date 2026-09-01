@@ -1,4 +1,4 @@
-% META: {"id": "1SPE-SUITES-EV-B-corrige", "chapitre": "1SPE-SUITES", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-SUITES-EV-B", "version": "B", "capacites_codes": ["C1", "C2", "C3", "C4", "C5", "C6", "C7"], "sources_inspiration": [], "parametres_sympy": {"u0_arith": 5, "r_arith": 3, "u0_geo": 4, "q_geo": 2, "capital": 1000, "taux_annuel": 4, "seuil": 1500, "p0_theatre": 18, "r_theatre": 4, "nombre_rangees": 12}, "fichier_tex": "chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-B-corrige.tex", "status": "generated"}
+% META: {"id": "1SPE-SUITES-EV-B-corrige", "chapitre": "1SPE-SUITES", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-SUITES-EV-B", "version": "B", "capacites_codes": ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"], "sources_inspiration": [], "parametres_sympy": {"u0_arith": 5, "r_arith": 3, "u0_geo": 4, "q_geo": 2, "capital": 1000, "taux_annuel": 4, "seuil": 1500, "p0_theatre": 18, "r_theatre": 4, "nombre_rangees": 12}, "fichier_tex": "chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-B-corrige.tex", "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational, symbols, simplify, log as symlog
 % import math
@@ -20,6 +20,13 @@
 % assert u_arith.subs(n, 0) == u0_arith
 % # Q4 : r=3>0 => croissante
 % assert r_arith > 0
+%
+% # Q5 : reconnaissance intuitive -- ecart constant vs ecart decroissant
+% w = 4 - 1/(n+1)
+% assert w.subs(n, 0) == 4 - 1
+% assert simplify(w.subs(n, n+1) - w) > 0   # (w_n) est croissante
+% assert all(w.subs(n, k) < 4 for k in range(0, 200))  # majoree par 4
+% assert simplify(u_arith.subs(n, n+1) - u_arith) == 3  # ecart constant
 %
 % # ---- Exercice 2 ----
 % u0_geo = 4
@@ -82,10 +89,10 @@
 \begin{corrige}{1SPE-SUITES-EV-B}
 
 %===============================================================
-\section*{Exercice 1 \hfill (6 points) — C1, C2, C5}
+\section*{Exercice 1 \hfill (6 points) — C1, C2, C5, C8}
 %===============================================================
 
-\baremeIndicatif{Q1 : 1 pt (calculer) ; Q2 : 2 pts (raisonner, communiquer) ; Q3 : 1 pt (calculer) ; Q4 : 2 pts (raisonner, communiquer)}
+\baremeIndicatif{Q1 : 1 pt (calculer) ; Q2 : 2 pts (raisonner, communiquer) ; Q3 : 1 pt (calculer) ; Q4 : 1 pt (raisonner, communiquer) ; Q5 : 1 pt (chercher, communiquer)}
 
 \bigskip
 \textbf{Question 1 — Calcul des premiers termes.}
@@ -136,6 +143,21 @@ La différence est strictement positive pour tout $n \in \mathbb{N}$.
 \textbf{Conclusion :} La suite $(u_n)$ est \textbf{strictement croissante}.
 
 \textit{Remarque : on peut aussi argumenter que la raison $r = 3 > 0$, ce qui suffit pour conclure qu'une suite arithmétique est strictement croissante.}
+
+%===============================================================
+
+\medskip
+\textbf{Question 5 — Reconnaissance intuitive du comportement.}
+
+$w_0 = 4 - 1 = 3$, $w_1 = 4 - \dfrac{1}{2} = \dfrac{7}{2} = 3{,}5$, $w_2 = 4 - \dfrac{1}{3} = \dfrac{11}{3} \approx 3{,}67$ et $w_{10} = 4 - \dfrac{1}{11} = \dfrac{43}{11} \approx 3{,}91$.
+
+Pour $(u_n)$ : les termes valent $u_0 = 5$, $u_3 = 14$, $u_{10} = 35$. Chaque terme dépasse le précédent de $3$, et cet écart ne diminue jamais : en allant assez loin, on dépasse n'importe quelle valeur fixée à l'avance. La suite \textbf{croît sans borne}.
+
+Pour $(w_n)$ : les termes se rapprochent de $4$ sans jamais l'atteindre, car $w_n$ est toujours égal à $4$ diminué de $\dfrac{1}{n+1}$, quantité positive qui devient aussi petite que l'on veut. La suite \textbf{se rapproche de la valeur finie } $4$.
+
+\commentaireMarge{Les deux suites sont croissantes : la croissance seule ne permet donc pas de conclure. C'est l'écart entre deux termes consécutifs qui distingue les deux cas — constant pour $(u_n)$, de plus en plus petit pour $(w_n)$.}
+
+\textit{Aucune définition formelle de limite n'est attendue ici : la reconnaissance se fait sur les termes calculés.}
 
 %===============================================================
 \section*{Exercice 2 \hfill (5 points) — C3, C4}
