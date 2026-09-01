@@ -6,14 +6,27 @@
   "checkpoint_status": "CANDIDATE_UNVALIDATED",
   "freshness_authority": "backlog_set_digest",
   "why_no_head_sha": "un checkpoint qui epingle le HEAD courant devient perime des le commit qui le publie, sans qu'aucune valeur ait bouge. L'ancrage est donc le SHA du run complet qui le valide, plus le digest de l'ensemble des unites.",
-  "validating_full_run": null,
+  "validating_full_run": {
+    "source_sha": "6724cbf366df923e228b494e05157676780f2578",
+    "command": "python3 -m pytest -q --no-header -p no:randomly",
+    "collected": 9358,
+    "passed": 9358,
+    "failed": 0,
+    "errors": 0,
+    "warnings": 4,
+    "rc": 0,
+    "duration_seconds": 2940.37,
+    "log_sha256": "a54a2d5e7eca94daf33b7029e6fc163f2fbd8eeb6d6f669c6cf625e1a66c770d",
+    "tree_clean_before": true,
+    "tree_clean_after": true,
+    "run_record": "audit/FULL_SUPPORTED_SUITE_RUN_6724CBF3.json"
+  },
   "semantic_alignment": {
     "authoring_backlog_authority": "CANDIDATE_LOWER_BOUND",
     "false_positive_credits": "UNKNOWN",
     "status": "NOT_ESTABLISHED_COLLECTION_WIDE"
   },
   "establishment_blockers": [
-    "FULL_SUPPORTED_SUITE_NOT_GREEN",
     "SEMANTIC_ALIGNMENT_NOT_ESTABLISHED_COLLECTION_WIDE"
   ],
   "definition": "une unite d'ecriture est un couple (capacite, role) qu'aucun contenu ne sert ; jamais un fichier a produire",

@@ -28,11 +28,24 @@ DELTA = ROOT / "audit/FALSE_MISSING_GAP_DELTA.json"
 CLONE = ROOT / "audit/P0_CONTENT_CLONE_LEDGER.json"
 OUTPUT = ROOT / "audit/TRUE_AUTHORING_BACKLOG_ESTABLISHED.json"
 
-#: Run complet vert qui autorise le gel. Sans lui le chiffre n'a pas d'autorite.
-# Tant que le full supported run courant n'a pas été observé sur un arbre
-# propre, le producteur ne fabrique aucune autorité à partir d'un ancien run.
-# Ce champ est remplacé par le ledger exact du run seulement après RC=0.
-VALIDATING_RUN: dict[str, Any] | None = None
+#: Run complet vert observé sur un arbre propre après correction du resolver et
+#: de tous ses consumers connus. Il lève le blocker technique sans valoir
+#: approbation sémantique des contenus.
+VALIDATING_RUN: dict[str, Any] | None = {
+    "source_sha": "6724cbf366df923e228b494e05157676780f2578",
+    "command": "python3 -m pytest -q --no-header -p no:randomly",
+    "collected": 9358,
+    "passed": 9358,
+    "failed": 0,
+    "errors": 0,
+    "warnings": 4,
+    "rc": 0,
+    "duration_seconds": 2940.37,
+    "log_sha256": "a54a2d5e7eca94daf33b7029e6fc163f2fbd8eeb6d6f669c6cf625e1a66c770d",
+    "tree_clean_before": True,
+    "tree_clean_after": True,
+    "run_record": "audit/FULL_SUPPORTED_SUITE_RUN_6724CBF3.json",
+}
 
 
 def _set_digest(values: set[str]) -> str:

@@ -44,20 +44,32 @@ def test_the_committed_checkpoint_matches_the_producer(producer) -> None:
 def test_only_an_established_checkpoint_is_backed_by_a_green_full_run(
     payload: dict,
 ) -> None:
-    """Le candidat reste explicitement non autoritaire avant le full run."""
+    """Toute preuve de full run attachée au checkpoint doit être verte."""
 
     run = payload["validating_full_run"]
-    if payload["checkpoint_status"] == "ESTABLISHED":
+    if run is not None:
         assert run["failed"] == 0
         assert run["errors"] == 0
         assert run["rc"] == 0
         assert run["passed"] == run["collected"]
         assert len(run["source_sha"]) == 40
         assert len(run["log_sha256"]) == 64
-    else:
+    if payload["checkpoint_status"] != "ESTABLISHED":
         assert payload["checkpoint_status"] == "CANDIDATE_UNVALIDATED"
         assert payload["checkpoint"] == "TRUE_AUTHORING_BACKLOG_CANDIDATE"
-        assert run is None
+
+
+def test_green_full_run_removes_only_the_technical_backlog_blocker(
+    payload: dict,
+) -> None:
+    run = payload["validating_full_run"]
+    assert run is not None
+    assert run["source_sha"] == "6724cbf366df923e228b494e05157676780f2578"
+    assert run["passed"] == run["collected"] == 9358
+    assert "FULL_SUPPORTED_SUITE_NOT_GREEN" not in payload["establishment_blockers"]
+    assert payload["establishment_blockers"] == [
+        "SEMANTIC_ALIGNMENT_NOT_ESTABLISHED_COLLECTION_WIDE"
+    ]
 
 
 def test_the_totals_close_exactly(payload: dict) -> None:
