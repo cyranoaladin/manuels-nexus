@@ -19422,6 +19422,139 @@ def test_release_and_debt_gates_have_independent_documented_failures(
     assert any("provisoire" in reason for reason in provisional_payload["reasons"])
 
 
+def test_release_content_freshness_never_erases_current_qcm_debt(
+    tmp_path: Path, inventory_module
+) -> None:
+    _write(
+        tmp_path / "audit/QCM_REFERENCE_DEBT_METRICS.json",
+        json.dumps(
+            {
+                "metrics": [
+                    {"metric": "GLOBAL_BROKEN_REMEDIATION_REFERENCES", "count": 1},
+                    {"metric": "REQUIRED_DISTRACTOR_DIAGNOSTIC_MISSING", "count": 0},
+                    {"metric": "REQUIRED_REMEDIATION_REFERENCE_MISSING", "count": 0},
+                ],
+                "unparsed_references": [],
+            }
+        ),
+    )
+    _write(
+        tmp_path / "audit/QCM_GAP_METRICS.json",
+        json.dumps(
+            {
+                "PEDAGOGICALLY_REQUIRED_QCM_GAPS": {"count": 2},
+                "REQUIRED_DISTRACTOR_WITHOUT_DIAGNOSTIC": {"count": 0},
+            }
+        ),
+    )
+    assert inventory_module._release_content_objective_reasons(tmp_path) == [
+        "CONTENT_OBJECTIVE:GLOBAL_BROKEN_REMEDIATION_REFERENCES:1",
+        "CONTENT_OBJECTIVE:PEDAGOGICALLY_REQUIRED_QCM_GAPS:2",
+    ]
+
+
+def test_release_content_producers_include_collection_richness(
+    inventory_module,
+) -> None:
+    assert (
+        "scripts/build_chapter_richness_matrix.py"
+        in inventory_module.RELEASE_CONTENT_PRODUCERS
+    )
+
+
+def test_release_content_producers_include_human_queue_chain(
+    inventory_module,
+) -> None:
+    expected = {
+        "scripts/build_current_review_debt_partition.py",
+        "scripts/build_qcm_review_proof_reconciliation.py",
+        "scripts/build_qcm_independent_evidence_v2.py",
+        "scripts/build_human_review_queue.py",
+        "scripts/collection_dashboard.py",
+    }
+    assert expected <= set(inventory_module.RELEASE_CONTENT_PRODUCERS)
+
+
+def test_release_content_integrity_rejects_unassembled_vertical_incomplete_row(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    (tmp_path / "audit").mkdir()
+    _write(
+        tmp_path / "audit/PUBLISH_READINESS_CHAPTER_MATRIX.json",
+        json.dumps(
+            {
+                "ALL_MACHINE_CONTENT_COMPLETE": False,
+                "chapters": [
+                    {
+                        "chapter": "1NSI-X",
+                        "machine_dimensions": {"programme": "COMPLETE"},
+                        "vertical_machine_status": "INCOMPLETE",
+                        "unassembled_object_ids": ["EX-X"],
+                    }
+                ],
+            }
+        ),
+    )
+    monkeypatch.setattr(inventory_module, "RELEASE_CONTENT_PRODUCERS", ())
+    monkeypatch.setattr(
+        inventory_module, "_release_content_objective_reasons", lambda _root: []
+    )
+
+    result = inventory_module._release_content_integrity_for_root(tmp_path)
+
+    assert result["success"] is False
+    assert "CONTENT_MATRIX:ALL_MACHINE_CONTENT_COMPLETE:false" in result["reasons"]
+    assert "CONTENT:1NSI-X:vertical_machine_status:INCOMPLETE" in result["reasons"]
+    assert "CONTENT:1NSI-X:unassembled_objects:1" in result["reasons"]
+
+
+def test_release_content_integrity_rejects_pending_human_closure(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    (tmp_path / "audit").mkdir()
+    _write(
+        tmp_path / "audit/PUBLISH_READINESS_CHAPTER_MATRIX.json",
+        json.dumps(
+            {
+                "ALL_MACHINE_CONTENT_COMPLETE": True,
+                "chapters": [
+                    {
+                        "chapter": "1NSI-X",
+                        "machine_dimensions": {"programme": "COMPLETE"},
+                        "vertical_machine_status": "MACHINE_REVIEW_COMPLETE",
+                        "unassembled_object_ids": [],
+                        "human_closure_status": "PENDING",
+                    }
+                ],
+            }
+        ),
+    )
+    _write(
+        tmp_path / "audit/HUMAN_REVIEW_QUEUE.json",
+        json.dumps(
+            {
+                "status": "HUMAN_REVIEW_ACTION_REQUIRED",
+                "unknown_count": 0,
+                "counts": {"TOTAL": 1},
+            }
+        ),
+    )
+    monkeypatch.setattr(inventory_module, "RELEASE_CONTENT_PRODUCERS", ())
+    monkeypatch.setattr(
+        inventory_module, "_release_content_objective_reasons", lambda _root: []
+    )
+
+    result = inventory_module._release_content_integrity_for_root(tmp_path)
+
+    assert result["success"] is False
+    assert "HUMAN_REVIEW_PENDING:1NSI-X" in result["reasons"]
+    assert "HUMAN_REVIEW_QUEUE_OPEN:1" in result["reasons"]
+
+
 PRE_A6_IDENTITY_MIGRATIONS = {
     "3352c285c8971a9a": "4686bd1f406b8183",
     "3a8ff3c7649eebf4": "a4d85ea8ddf56111",

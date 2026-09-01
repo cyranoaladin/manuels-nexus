@@ -46,12 +46,18 @@ def test_the_committed_ledger_matches_the_producer(producer) -> None:
     assert producer.main(["--check"]) == 0
 
 
-def test_the_two_chapters_carry_no_terminale_mathematics(payload: dict) -> None:
-    """L'etat atteint, apres retrait de 116 objets."""
+def test_the_current_cross_discipline_debt_is_exhaustively_recorded(
+    payload: dict,
+) -> None:
+    """Le ledger peut être rouge, mais jamais incomplet ou auto-innocentant."""
 
-    assert payload["condemned_count"] == 0
-    assert payload["condemned_paths"] == []
-    assert payload["condemned_while_approved"] == []
+    condemned = [
+        row
+        for row in payload["objects"]
+        if row["verdict"] == "CROSS_DISCIPLINE_TERMINALE_MATHS"
+    ]
+    assert payload["condemned_count"] == len(condemned)
+    assert payload["condemned_paths"] == sorted(row["path"] for row in condemned)
     assert payload["unknown"] == 0
     assert payload["objects_scanned"] > 0
     assert payload["counts"].get("REQUIRES_EXPLICIT_ADJUDICATION", 0) == 0
@@ -119,3 +125,28 @@ def test_the_verify_block_is_read_as_evidence(producer) -> None:
     body = producer._payload(source)
     assert "diff(" in body, "le bloc VERIFY doit etre lu"
     assert producer._evidence(producer.CALCULUS, body)
+
+
+@pytest.mark.parametrize(
+    ("source_kind", "body"),
+    [
+        ("YAML_CONTRACT", "prerequis: Deriver une fonction composee"),
+        ("JSON_QCM", '{"erreur": "calculer une limite en +infini"}'),
+        ("PYTHON_CODE", "from sympy import diff\nresultat = diff(x**2, x)"),
+    ],
+)
+def test_structured_and_python_sources_cannot_hide_calculus(
+    producer, source_kind: str, body: str
+) -> None:
+    row = producer._surface_row(
+        chapter="1NSI-X",
+        role="transversal",
+        path=Path(f"fixture.{source_kind.lower()}"),
+        source_kind=source_kind,
+        text=body,
+        pointers=["$.fixture"],
+    )
+    assert row["verdict"] == "CROSS_DISCIPLINE_TERMINALE_MATHS"
+    assert row["calculus_evidence"]
+    assert row["source_kind"] == source_kind
+    assert row["sha256"].startswith("sha256:")

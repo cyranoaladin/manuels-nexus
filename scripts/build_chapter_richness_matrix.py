@@ -29,6 +29,7 @@ import hashlib
 import importlib.util
 import json
 import re
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -36,6 +37,9 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 CHAPTERS = ROOT / "Mathematiques" / "manuel-maths" / "chapitres"
+CHAPTER_ROOTS = (CHAPTERS, ROOT / "NSI" / "chapitres")
+CLONE_LEDGER = ROOT / "audit" / "P0_CONTENT_CLONE_LEDGER.json"
+COLLECTION_TARGET = ROOT / "audit" / "CHAPTER_RICHNESS_MATRIX.json"
 
 #: Nature d'une capacite, deduite de son libelle contractuel. Elle commande
 #: l'exigence appliquee : on ne demande pas la meme chose a « lire des
@@ -65,6 +69,17 @@ def _clone_module():
     return module
 
 
+def _identity_module():
+    spec = importlib.util.spec_from_file_location(
+        "capacity_identity_richness", ROOT / "scripts/capacity_identity.py"
+    )
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
 def capacity_type(libelle: str) -> str:
     lowered = libelle.lower()
     if any(marker in lowered for marker in COMPOSITE_MARKERS):
@@ -76,24 +91,134 @@ def capacity_type(libelle: str) -> str:
     return "PROCEDURAL"
 
 
-def build_matrix(chapter: str) -> dict[str, Any]:
+def _path_key(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
+def _richness_digest(
+    capacities: dict[str, Any],
+    capacity_identity_blockers: list[dict[str, Any]],
+    excluded_credit_objects: list[dict[str, str]],
+) -> str:
+    payload = {
+        "capacities": capacities,
+        "capacity_identity_blockers": capacity_identity_blockers,
+        "excluded_credit_objects": excluded_credit_objects,
+    }
+    return "sha256:" + hashlib.sha256(
+        json.dumps(
+            payload,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
+
+
+def _is_capacity_identity_error(error: Exception) -> bool:
+    return type(error).__name__ in {
+        "CapacityIdentityError",
+        "AmbiguousCapacityIdentity",
+        "UnresolvedCapacityIdentity",
+    }
+
+
+def build_matrix(
+    chapter: str,
+    *,
+    chapter_root: Path | None = None,
+    resolver=None,
+    clone_ledger: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     clone = _clone_module()
-    base = CHAPTERS / chapter
+    identity = _identity_module()
+    roots = (chapter_root,) if chapter_root is not None else CHAPTER_ROOTS
+    base = next((root / chapter for root in roots if (root / chapter).is_dir()), None)
+    if base is None:
+        raise FileNotFoundError(f"chapitre absent: {chapter}")
+    resolver = resolver or identity.CapacityIdentityResolver.from_corpora(roots)
+    clone_ledger = clone_ledger or json.loads(CLONE_LEDGER.read_text(encoding="utf-8"))
+    invalid_credit = set(clone_ledger["objects_on_invalid_credit"])
+    indeterminate_credit = set(clone_ledger["objects_with_indeterminate_credit"])
+    if invalid_credit & indeterminate_credit:
+        raise ValueError("clone credits invalides et indetermines non disjoints")
     contract = yaml.safe_load((base / "contrat.yaml").read_text(encoding="utf-8"))
-    capacities = {c["code"]: c["libelle_eleve"] for c in contract["capacites"]}
+    labels = {str(c["code"]): str(c["libelle_eleve"]) for c in contract["capacites"]}
+    capacities = {
+        capacity.local_code: labels[capacity.local_code]
+        for capacity in resolver.capacities_of(chapter)
+    }
 
     def meta(path: Path) -> dict[str, Any]:
         return clone.read_meta(path.read_text(encoding="utf-8"))
 
+    capacity_identity_blockers: list[dict[str, Any]] = []
+    excluded_credit_objects: list[dict[str, str]] = []
+    excluded_paths: set[str] = set()
+
+    def credit_allowed(path: Path) -> bool:
+        key = _path_key(path)
+        state = (
+            "INVALID"
+            if key in invalid_credit
+            else "INDETERMINATE"
+            if key in indeterminate_credit
+            else None
+        )
+        if state and key not in excluded_paths:
+            excluded_paths.add(key)
+            excluded_credit_objects.append({"path": key, "state": state})
+        return state is None
+
+    def resolve_meta(path: Path, entry: dict[str, Any]) -> tuple[str, ...]:
+        try:
+            return resolver.resolve_meta_codes(chapter, entry)
+        except Exception as exc:  # une instance peut venir d'un module charge separement
+            if not _is_capacity_identity_error(exc):
+                raise
+            capacity_identity_blockers.append(
+                {
+                    "path": _path_key(path),
+                    "object_id": str(entry.get("id") or ""),
+                    "reason": str(exc),
+                }
+            )
+            return ()
+
     practice: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
     gestures: dict[str, set[str]] = collections.defaultdict(set)
+    dominant = collections.Counter()
     for path in sorted((base / "exercices").glob("*.tex")):
         entry = meta(path)
-        declared = clone.declared_capacities(entry)
+        declared = resolve_meta(path, entry)
+        if not declared or not credit_allowed(path):
+            continue
         per_question = entry.get("capacites_par_question") or {}
         per_question_gestures = entry.get("gestes_par_question") or {}
+        served_by_code: dict[str, list[str] | None] = {}
+        try:
+            for code in declared:
+                served_by_code[code] = [
+                    question
+                    for question, raw_codes in per_question.items()
+                    if code in resolver.resolve_codes(chapter, raw_codes)
+                ] or None
+        except Exception as exc:
+            if not _is_capacity_identity_error(exc):
+                raise
+            capacity_identity_blockers.append(
+                {
+                    "path": _path_key(path),
+                    "object_id": str(entry.get("id") or ""),
+                    "reason": str(exc),
+                }
+            )
+            continue
         for code in declared:
-            served = [q for q, cs in per_question.items() if code in cs] or None
+            served = served_by_code[code]
             practice[code].append(
                 {
                     "id": entry["id"],
@@ -111,28 +236,64 @@ def build_matrix(chapter: str) -> dict[str, Any]:
                     gestures[code] |= set(per_question_gestures.get(question, []))
             else:
                 gestures[code] |= set(entry.get("gestes") or [])
+        for gesture in entry.get("gestes") or []:
+            dominant[gesture] += 1
 
     assessed: dict[str, list[str]] = collections.defaultdict(list)
     for path in sorted((base / "evaluations").glob("*.tex")):
         entry = meta(path)
         if entry.get("type_objet") != "evaluation":
             continue
-        for code in clone.declared_capacities(entry):
+        declared = resolve_meta(path, entry)
+        if not declared or not credit_allowed(path):
+            continue
+        for code in declared:
             assessed[code].append(entry["id"])
 
-    qcm_file = next((base / "qcm").glob("*-QCM.json"), None)
+    qcm_sources = sorted((base / "qcm").glob("*-QCM.json"))
+    if len(qcm_sources) > 1:
+        raise ValueError(f"{chapter}: MULTIPLE_QCM_SOURCES")
+    qcm_file = qcm_sources[0] if qcm_sources else None
     qcm = collections.Counter()
     if qcm_file:
-        for question in json.loads(qcm_file.read_text(encoding="utf-8"))["questions"]:
-            qcm[str(question["capacite"])] += 1
+        document = json.loads(qcm_file.read_text(encoding="utf-8"))
+        if document.get("chapitre") != chapter:
+            raise ValueError(f"{chapter}: chapitre QCM incoherent")
+        for question in document["questions"]:
+            try:
+                resolution = resolver.resolve(chapter, question.get("capacite"))
+                if resolution.rule == identity.PREREQUISITE:
+                    raise identity.UnresolvedCapacityIdentity(
+                        f"{chapter}/{question.get('id')}: prerequis utilise comme QCM"
+                    )
+            except Exception as exc:
+                if not _is_capacity_identity_error(exc):
+                    raise
+                capacity_identity_blockers.append(
+                    {
+                        "path": f"{_path_key(qcm_file)}#{question.get('id')}",
+                        "object_id": str(question.get("id") or ""),
+                        "reason": str(exc),
+                    }
+                )
+                continue
+            qcm[resolution.identity.local_code] += 1
 
     remediation = collections.Counter()
     for path in (base / "remediation").glob("*.tex"):
-        for code in clone.declared_capacities(meta(path)):
+        entry = meta(path)
+        declared = resolve_meta(path, entry)
+        if not declared or not credit_allowed(path):
+            continue
+        for code in declared:
             remediation[code] += 1
     methods = collections.Counter()
     for path in (base / "methodes").glob("*.tex"):
-        for code in clone.declared_capacities(meta(path)):
+        entry = meta(path)
+        declared = resolve_meta(path, entry)
+        if not declared or not credit_allowed(path):
+            continue
+        for code in declared:
             methods[code] += 1
 
     rows: dict[str, Any] = {}
@@ -157,7 +318,12 @@ def build_matrix(chapter: str) -> dict[str, Any]:
             missing.append("NO_QCM")
         if kind in MULTI_GESTURE_TYPES and len(paths) < 2:
             missing.append("SINGLE_REASONING_PATH_FOR_COMPOSITE_CAPACITY")
-        status = "SUFFICIENT" if not missing else "INSUFFICIENT"
+        declarative_status = "SUFFICIENT" if not missing else "INSUFFICIENT"
+        status = (
+            "CANDIDATE_NON_SEMANTIC"
+            if declarative_status == "SUFFICIENT"
+            else "INSUFFICIENT"
+        )
         rows[code] = {
             "libelle_eleve": libelle,
             "capacity_type": kind,
@@ -167,14 +333,25 @@ def build_matrix(chapter: str) -> dict[str, Any]:
             "practice": practice[code],
             "assessed_by": assessed[code],
             "missing_function": missing,
+            "declarative_status": declarative_status,
+            "semantic_validation_status": "UNKNOWN",
             "status": status,
         }
 
     all_paths = sorted({g for gs in gestures.values() for g in gs})
-    dominant = collections.Counter()
-    for path in sorted((base / "exercices").glob("*.tex")):
-        for gesture in meta(path).get("gestes") or []:
-            dominant[gesture] += 1
+    declarative_diversity_status = (
+        "SUFFICIENT"
+        if len(all_paths) >= 4
+        and max(dominant.values(), default=0) <= 0.5 * sum(dominant.values())
+        else "INSUFFICIENT"
+    )
+    capacity_identity_blockers = sorted(
+        capacity_identity_blockers,
+        key=lambda row: (row["path"], row["object_id"], row["reason"]),
+    )
+    excluded_credit_objects = sorted(
+        excluded_credit_objects, key=lambda row: (row["path"], row["state"])
+    )
     statuses = collections.Counter(row["status"] for row in rows.values())
     return {
         "artifact_type": "chapter_richness_matrix",
@@ -188,19 +365,68 @@ def build_matrix(chapter: str) -> dict[str, Any]:
         "capacities": rows,
         "diversity_profile": dict(sorted(dominant.items(), key=lambda kv: -kv[1])),
         "distinct_reasoning_paths": all_paths,
+        "declarative_diversity_status": declarative_diversity_status,
         "diversity_status": (
-            "SUFFICIENT"
-            if len(all_paths) >= 4
-            and max(dominant.values(), default=0) <= 0.5 * sum(dominant.values())
+            "CANDIDATE_NON_SEMANTIC"
+            if declarative_diversity_status == "SUFFICIENT"
             else "INSUFFICIENT"
         ),
+        "semantic_validation_status": "UNKNOWN",
+        "machine_status": "GAP",
+        "capacity_identity_blockers": capacity_identity_blockers,
+        "excluded_credit_objects": excluded_credit_objects,
         "counts": dict(statuses),
-        "insufficient": sorted(c for c, r in rows.items() if r["status"] != "SUFFICIENT"),
-        "unknown": 0,
-        "capacities_digest": "sha256:"
+        "insufficient": sorted(
+            c for c, r in rows.items() if r["declarative_status"] != "SUFFICIENT"
+        ),
+        "unknown": len(rows),
+        "capacities_digest": _richness_digest(
+            rows, capacity_identity_blockers, excluded_credit_objects
+        ),
+    }
+
+
+def build_collection(*, resolver=None, clone_ledger: dict[str, Any] | None = None) -> dict[str, Any]:
+    identity = _identity_module()
+    resolver = resolver or identity.CapacityIdentityResolver.from_corpora(CHAPTER_ROOTS)
+    clone_ledger = clone_ledger or json.loads(CLONE_LEDGER.read_text(encoding="utf-8"))
+    chapters = {
+        chapter: build_matrix(
+            chapter,
+            resolver=resolver,
+            clone_ledger=clone_ledger,
+        )
+        for chapter in resolver.chapters
+    }
+    unknown = sum(int(row["unknown"]) for row in chapters.values())
+    incomplete = sorted(
+        chapter
+        for chapter, row in chapters.items()
+        if row.get("machine_status") != "COMPLETE"
+    )
+    return {
+        "artifact_type": "collection_chapter_richness_matrix",
+        "schema_version": 1,
+        "generated_by": "scripts/build_chapter_richness_matrix.py",
+        "semantic_claim": (
+            "les declarations fournissent une mesure candidate; aucune richesse "
+            "semantique n'est complete sans preuve separee"
+        ),
+        "chapter_count": len(chapters),
+        "capacity_count": sum(len(row["capacities"]) for row in chapters.values()),
+        "unknown": unknown,
+        "incomplete_chapters": incomplete,
+        "machine_status": "COMPLETE" if not incomplete else "GAP",
+        "chapters_digest": "sha256:"
         + hashlib.sha256(
-            json.dumps(sorted(rows), separators=(",", ":")).encode("utf-8")
+            json.dumps(
+                chapters,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
         ).hexdigest(),
+        "chapters": chapters,
     }
 
 
@@ -210,12 +436,16 @@ def render(payload: dict[str, Any]) -> str:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--chapter", default="TSPE-GEOMETRIE-ESPACE")
+    parser.add_argument("--chapter")
     parser.add_argument("--check", action="store_true")
     arguments = parser.parse_args(argv)
 
-    payload = build_matrix(arguments.chapter)
-    target = ROOT / f"audit/CHAPTER_RICHNESS_{arguments.chapter}.json"
+    payload = build_matrix(arguments.chapter) if arguments.chapter else build_collection()
+    target = (
+        ROOT / f"audit/CHAPTER_RICHNESS_{arguments.chapter}.json"
+        if arguments.chapter
+        else COLLECTION_TARGET
+    )
     rendered = render(payload)
     if arguments.check:
         current = target.read_text(encoding="utf-8") if target.is_file() else ""

@@ -10705,7 +10705,14 @@ def _render_etat_collection(
     marker: str = AUTOGEN_MARKER,
     root: Path | None = None,
 ) -> str:
-    release_gate = _release_strict_gate(inventory)
+    content_integrity = None
+    if root is not None and (
+        root / "scripts/build_publish_readiness_chapter_matrix.py"
+    ).is_file():
+        content_integrity = _release_content_integrity_for_root(root)
+    release_gate = _release_strict_gate(
+        inventory, content_integrity=content_integrity
+    )
 
     lines = [
         "# ETAT COLLECTION — Nexus Réussite",
@@ -12660,7 +12667,11 @@ def _safe_materialize_baseline_qualifications(
         )
 
 
-def _release_strict_gate(inventory: Mapping[str, Any]) -> dict[str, Any]:
+def _release_strict_gate(
+    inventory: Mapping[str, Any],
+    *,
+    content_integrity: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
     reasons: list[str] = []
     matrix = inventory["deliverable_matrix"]["manuals"]
     collection_blockers = _collection_blockers(inventory)
@@ -12672,6 +12683,8 @@ def _release_strict_gate(inventory: Mapping[str, Any]) -> dict[str, Any]:
     )
     if not integration_ready:
         reasons.append("build_receipt_producteurs_non_intégrés")
+    if content_integrity is not None:
+        reasons.extend(str(reason) for reason in content_integrity.get("reasons", []))
     for blocker in collection_blockers:
         reasons.append(
             f"COLLECTION:{blocker['code']}:"
@@ -12725,6 +12738,10 @@ def _release_strict_gate(inventory: Mapping[str, Any]) -> dict[str, Any]:
         and integration_ready
         else "failed"
     )
+    if content_integrity is not None:
+        dimensions["pedagogy"] = (
+            "passed" if content_integrity.get("success") is True else "failed"
+        )
     for dimension, status in dimensions.items():
         if status == "not_covered":
             reasons.append(f"dimension_non_couverte:{dimension}")
@@ -12738,6 +12755,178 @@ def _release_strict_gate(inventory: Mapping[str, Any]) -> dict[str, Any]:
         dimensions=dimensions,
         reasons=reasons,
     )
+
+
+RELEASE_CONTENT_PRODUCERS = (
+    "scripts/build_official_program_coverage.py",
+    "scripts/capacity_identity.py",
+    "scripts/build_p0_content_clone_ledger.py",
+    "scripts/build_true_pedagogical_coverage.py",
+    "scripts/build_qcm_capacity_coverage_debt.py",
+    "scripts/build_qcm_gap_metrics.py",
+    "scripts/build_qcm_reference_debt_metrics.py",
+    "scripts/build_qcm_review_proof_reconciliation.py",
+    "scripts/build_qcm_independent_evidence_v2.py",
+    "scripts/build_current_review_debt_partition.py",
+    "scripts/build_human_review_queue.py",
+    "scripts/build_course_assembly_truth.py",
+    "scripts/build_nsi_cross_discipline_ledger.py",
+    "scripts/build_ex_co_graph.py",
+    "scripts/build_chapter_richness_matrix.py",
+    "scripts/build_publish_readiness_chapter_matrix.py",
+    "scripts/collection_dashboard.py",
+)
+
+
+def _release_content_objective_reasons(root: Path) -> list[str]:
+    """A current red ledger remains red; freshness is not a success verdict."""
+
+    reasons: list[str] = []
+    qcm_reference = root / "audit/QCM_REFERENCE_DEBT_METRICS.json"
+    try:
+        payload = json.loads(qcm_reference.read_text(encoding="utf-8"))
+        metrics = {
+            str(row.get("metric")): int(row.get("count", 0))
+            for row in payload.get("metrics", [])
+            if isinstance(row, Mapping)
+        }
+        for metric in (
+            "GLOBAL_BROKEN_REMEDIATION_REFERENCES",
+            "REQUIRED_DISTRACTOR_DIAGNOSTIC_MISSING",
+            "REQUIRED_REMEDIATION_REFERENCE_MISSING",
+        ):
+            if metrics.get(metric, 0):
+                reasons.append(f"CONTENT_OBJECTIVE:{metric}:{metrics[metric]}")
+        unparsed = payload.get("unparsed_references") or []
+        if unparsed:
+            reasons.append(f"CONTENT_OBJECTIVE:UNPARSED_QCM_REFERENCES:{len(unparsed)}")
+    except (OSError, json.JSONDecodeError, TypeError, ValueError) as exc:
+        reasons.append(
+            "CONTENT_OBJECTIVE_ILLISIBLE:audit/QCM_REFERENCE_DEBT_METRICS.json:"
+            + _stable_gate_reason(exc, root)
+        )
+
+    qcm_gaps = root / "audit/QCM_GAP_METRICS.json"
+    try:
+        payload = json.loads(qcm_gaps.read_text(encoding="utf-8"))
+        for metric in (
+            "PEDAGOGICALLY_REQUIRED_QCM_GAPS",
+            "REQUIRED_DISTRACTOR_WITHOUT_DIAGNOSTIC",
+        ):
+            count = int((payload.get(metric) or {}).get("count", 0))
+            if count:
+                reasons.append(f"CONTENT_OBJECTIVE:{metric}:{count}")
+    except (OSError, json.JSONDecodeError, TypeError, ValueError) as exc:
+        reasons.append(
+            "CONTENT_OBJECTIVE_ILLISIBLE:audit/QCM_GAP_METRICS.json:"
+            + _stable_gate_reason(exc, root)
+        )
+    return sorted(set(reasons))
+
+
+def _release_content_integrity_for_root(root: Path) -> dict[str, Any]:
+    """Recalcule les porteurs de vérité avant de les laisser bloquer la release."""
+
+    reasons: list[str] = []
+    checks: list[dict[str, Any]] = []
+    for relative in RELEASE_CONTENT_PRODUCERS:
+        producer = root / relative
+        if not producer.is_file():
+            reasons.append(f"CONTENT_PRODUCER_ABSENT:{relative}")
+            checks.append({"producer": relative, "rc": None})
+            continue
+        try:
+            process = subprocess.run(
+                [sys.executable, str(producer), "--check"],
+                cwd=root,
+                capture_output=True,
+                text=True,
+                timeout=180,
+                check=False,
+            )
+        except (OSError, subprocess.SubprocessError) as exc:
+            reasons.append(
+                f"CONTENT_PRODUCER_ERROR:{relative}:"
+                f"{_stable_gate_reason(exc, root)}"
+            )
+            checks.append({"producer": relative, "rc": None})
+            continue
+        checks.append({"producer": relative, "rc": process.returncode})
+        if process.returncode != 0:
+            reasons.append(
+                f"CONTENT_PRODUCER_STALE_OR_RED:{relative}:rc={process.returncode}"
+            )
+
+    reasons.extend(_release_content_objective_reasons(root))
+
+    matrix_path = root / "audit/PUBLISH_READINESS_CHAPTER_MATRIX.json"
+    try:
+        matrix = json.loads(matrix_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        reasons.append(
+            "CONTENT_MATRIX_ILLISIBLE:"
+            + _stable_gate_reason(exc, root)
+        )
+        matrix = {}
+    rows = matrix.get("chapters") if isinstance(matrix, Mapping) else None
+    if not isinstance(rows, list) or not rows:
+        reasons.append("CONTENT_MATRIX_VIDE")
+    else:
+        if matrix.get("ALL_MACHINE_CONTENT_COMPLETE") is not True:
+            reasons.append("CONTENT_MATRIX:ALL_MACHINE_CONTENT_COMPLETE:false")
+        for row in rows:
+            if not isinstance(row, Mapping):
+                reasons.append("CONTENT_MATRIX_ROW_INVALIDE")
+                continue
+            chapter = str(row.get("chapter") or "?")
+            dimensions = row.get("machine_dimensions")
+            if not isinstance(dimensions, Mapping):
+                reasons.append(f"CONTENT:{chapter}:dimensions_absentes")
+                continue
+            for dimension, status in sorted(dimensions.items()):
+                if status not in {"COMPLETE", "NO_QCM", "NOT_APPLICABLE"}:
+                    reasons.append(f"CONTENT:{chapter}:{dimension}:{status}")
+            vertical = row.get("vertical_machine_status")
+            if vertical != "MACHINE_REVIEW_COMPLETE":
+                reasons.append(
+                    f"CONTENT:{chapter}:vertical_machine_status:{vertical or 'ABSENT'}"
+                )
+            if row.get("human_closure_status") != "CLOSED":
+                reasons.append(f"HUMAN_REVIEW_PENDING:{chapter}")
+            unassembled = row.get("unassembled_object_ids")
+            if not isinstance(unassembled, list):
+                reasons.append(f"CONTENT:{chapter}:unassembled_objects:UNKNOWN")
+            elif unassembled:
+                reasons.append(
+                    f"CONTENT:{chapter}:unassembled_objects:{len(unassembled)}"
+                )
+
+    queue_path = root / "audit/HUMAN_REVIEW_QUEUE.json"
+    try:
+        queue = json.loads(queue_path.read_text(encoding="utf-8"))
+        total = int((queue.get("counts") or {}).get("TOTAL", -1))
+        if queue.get("unknown_count") != 0:
+            reasons.append(
+                f"HUMAN_REVIEW_QUEUE_UNKNOWN:{queue.get('unknown_count')}"
+            )
+        if queue.get("status") != "CLOSED" or total != 0:
+            reasons.append(f"HUMAN_REVIEW_QUEUE_OPEN:{total}")
+    except (OSError, json.JSONDecodeError, TypeError, ValueError) as exc:
+        reasons.append(
+            "HUMAN_REVIEW_QUEUE_ILLISIBLE:" + _stable_gate_reason(exc, root)
+        )
+
+    unique = sorted(set(reasons))
+    return {
+        "success": not unique,
+        "reasons": unique,
+        "producer_checks": checks,
+        "matrix_digest": (
+            "sha256:" + hashlib.sha256(matrix_path.read_bytes()).hexdigest()
+            if matrix_path.is_file()
+            else None
+        ),
+    }
 
 
 def _release_strict_gate_for_root(
@@ -12759,7 +12948,11 @@ def _release_strict_gate_for_root(
             dimensions={"structure": "failed", "execution": "failed"},
             reasons=[f"inventaire_indisponible:{_stable_gate_reason(exc, root)}"],
         )
-    result = _release_strict_gate(inventory)
+    content_integrity = _release_content_integrity_for_root(root)
+    result = _release_strict_gate(
+        inventory, content_integrity=content_integrity
+    )
+    result["content_integrity"] = content_integrity
     invalides = _invalid_qualification_reasons(root)
     if invalides:
         result["reasons"] = invalides + list(result.get("reasons", []))

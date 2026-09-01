@@ -65,6 +65,7 @@ COMPUTING = {
     "algorithmique": r"\balgorithme|\binvariant de boucle|\bterminaison|\bvariant\b",
     "structures": r"\btableau\b|\bliste\b|\bindice\b|\bparcours\b",
     "chapitre": r"\btri (?:par )?(?:insertion|selection|s[ée]lection)|\bdichotom|\bglouton|plus proches voisins|\bk-?NN\b",
+    "code_python": r"\bfrom \w+(?:\.\w+)* import\b|\bimport \w+|\breturn\b|\bfor \w+ in\b|\bwhile\b",
 }
 
 
@@ -101,6 +102,61 @@ def _evidence(patterns: dict[str, str], body: str) -> list[str]:
     )
 
 
+def _display_path(path: Path) -> str:
+    """Return a stable repository path without assuming fixture location."""
+
+    try:
+        return str(path.resolve().relative_to(ROOT.resolve()))
+    except ValueError:
+        return str(path)
+
+
+def _surface_row(
+    *,
+    chapter: str,
+    role: str,
+    path: Path,
+    source_kind: str,
+    text: str,
+    pointers: list[str],
+    meta: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Classify one complete source surface and retain auditable evidence.
+
+    The row is deliberately file-scoped: a calculus marker anywhere in a
+    contract, QCM source or executable Python file condemns the surface.  The
+    supplied pointers identify the structured locations inspected; no source
+    is silently reduced to a LaTeX body.
+    """
+
+    metadata = meta or {}
+    body = _payload(text) if source_kind == "LATEX_OBJECT" else text
+    calculus = _evidence(CALCULUS, body)
+    computing = _evidence(COMPUTING, body)
+    if calculus:
+        verdict = "CROSS_DISCIPLINE_TERMINALE_MATHS"
+    elif computing:
+        verdict = "NSI_NATIVE"
+    else:
+        verdict = "REQUIRES_EXPLICIT_ADJUDICATION"
+    return {
+        "chapter": chapter,
+        "role": role,
+        "source_kind": source_kind,
+        "path": _display_path(path),
+        "pointers": list(pointers),
+        "sha256": "sha256:" + hashlib.sha256(text.encode("utf-8")).hexdigest(),
+        "object_id": metadata.get("id"),
+        "declared_status": metadata.get("status"),
+        "declared_capacities": list(
+            metadata.get("capacites_codes") or metadata.get("capacites") or []
+        ),
+        "calculus_evidence": calculus,
+        "computing_evidence": computing,
+        "verdict": verdict,
+    }
+
+
 def build_ledger() -> dict[str, Any]:
     clone = _clone_module()
     rows: list[dict[str, Any]] = []
@@ -112,31 +168,61 @@ def build_ledger() -> dict[str, Any]:
                 continue
             for path in sorted(directory.glob("*.tex")):
                 text = path.read_text(encoding="utf-8", errors="replace")
-                body = _payload(text)
                 meta = clone.read_meta(text)
-                calculus = _evidence(CALCULUS, body)
-                computing = _evidence(COMPUTING, body)
-                if calculus:
-                    verdict = "CROSS_DISCIPLINE_TERMINALE_MATHS"
-                elif computing:
-                    verdict = "NSI_NATIVE"
-                else:
-                    verdict = "REQUIRES_EXPLICIT_ADJUDICATION"
                 rows.append(
-                    {
-                        "chapter": chapter,
-                        "role": role,
-                        "path": str(path.relative_to(ROOT)),
-                        "object_id": meta.get("id"),
-                        "declared_status": meta.get("status"),
-                        "declared_capacities": list(
-                            meta.get("capacites_codes") or meta.get("capacites") or []
-                        ),
-                        "calculus_evidence": calculus,
-                        "computing_evidence": computing,
-                        "verdict": verdict,
-                    }
+                    _surface_row(
+                        chapter=chapter,
+                        role=role,
+                        path=path,
+                        source_kind="LATEX_OBJECT",
+                        text=text,
+                        pointers=["$"],
+                        meta=meta,
+                    )
                 )
+
+        contract = base / "contrat.yaml"
+        if contract.is_file():
+            rows.append(
+                _surface_row(
+                    chapter=chapter,
+                    role="contract",
+                    path=contract,
+                    source_kind="YAML_CONTRACT",
+                    text=contract.read_text(encoding="utf-8", errors="replace"),
+                    pointers=["$"],
+                )
+            )
+
+        qcm_sources = sorted((base / "qcm").glob("*-QCM.json"))
+        if len(qcm_sources) > 1:
+            raise ValueError(
+                f"{chapter}: multiple authoritative QCM JSON sources: "
+                + ", ".join(_display_path(path) for path in qcm_sources)
+            )
+        for path in qcm_sources:
+            rows.append(
+                _surface_row(
+                    chapter=chapter,
+                    role="qcm_source",
+                    path=path,
+                    source_kind="JSON_QCM",
+                    text=path.read_text(encoding="utf-8", errors="replace"),
+                    pointers=["$"],
+                )
+            )
+
+        for path in sorted((base / "code").glob("*.py")):
+            rows.append(
+                _surface_row(
+                    chapter=chapter,
+                    role="code",
+                    path=path,
+                    source_kind="PYTHON_CODE",
+                    text=path.read_text(encoding="utf-8", errors="replace"),
+                    pointers=["$"],
+                )
+            )
 
     verdicts = collections.Counter(row["verdict"] for row in rows)
     condemned = sorted(
@@ -160,7 +246,7 @@ def build_ledger() -> dict[str, Any]:
     )
     return {
         "artifact_type": "nsi_cross_discipline_content_ledger",
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_by": "scripts/build_nsi_cross_discipline_ledger.py",
         "finding": "P0_CROSS_DISCIPLINE_CONTENT_CONTAMINATION",
         "distinct_from": (

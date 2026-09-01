@@ -12,19 +12,28 @@ declare par la gouvernance, jamais un verdict deduit.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
 import unicodedata
 from collections import Counter
 from pathlib import Path
-from typing import Any
+from typing import Any, Mapping
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import audit_editorial_diacritics as diacritics  # noqa: E402
+import build_p0_content_clone_ledger as clone_producer  # noqa: E402
+import build_course_assembly_truth as course_truth_producer  # noqa: E402
+import build_ex_co_graph as ex_co_producer  # noqa: E402
+import build_chapter_richness_matrix as richness_producer  # noqa: E402
+import build_human_review_queue as human_queue_producer  # noqa: E402
+import build_nsi_cross_discipline_ledger as cross_discipline_producer  # noqa: E402
 import build_qcm_independent_evidence_v2 as evidence_v2  # noqa: E402
+import build_true_pedagogical_coverage as coverage_producer  # noqa: E402
+import capacity_identity  # noqa: E402
 import human_review_governance as governance  # noqa: E402
 import qcm_independent_solver as solver  # noqa: E402
 
@@ -34,17 +43,320 @@ INVENTORY = ROOT / "audit" / "INVENTAIRE_COLLECTION.json"
 COVERAGE_DIR = ROOT / "audit" / "official_program_coverage"
 MATH_CHAPTERS = ROOT / "Mathematiques" / "manuel-maths" / "chapitres"
 NSI_CHAPTERS = ROOT / "NSI" / "chapitres"
-
-#: Registres de dette declaree, un par chapitre qui cree des objets.
-DECLARED_DEBT_LEDGERS = (
-    ROOT / "audit" / "VARALEA_C6C7_REVIEW_DEBT_12.json",
-    ROOT / "audit" / "EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1.json",
-)
+RICHNESS_MATRIX = ROOT / "audit" / "CHAPTER_RICHNESS_MATRIX.json"
 
 #: Contrat editorial Nexus de distribution des cles. Ce n'est pas une exigence
 #: du B.O. : c'est une regle de qualite du manuel.
 KEY_SPREAD_MAX = 1
 KEY_RUN_MAX = 2
+
+
+class ReadinessError(RuntimeError):
+    """Une entrée transversale est contradictoire ou périmée."""
+
+
+def _set_digest(values: list[str] | set[str]) -> str:
+    return "sha256:" + hashlib.sha256(
+        json.dumps(sorted(values), ensure_ascii=False, separators=(",", ":")).encode(
+            "utf-8"
+        )
+    ).hexdigest()
+
+
+def _payload_digest(payload: dict[str, Any]) -> str:
+    return "sha256:" + hashlib.sha256(
+        json.dumps(
+            payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+        ).encode("utf-8")
+    ).hexdigest()
+
+
+def _capacity_truth(
+    chapter: str,
+    coverage: dict[str, Any],
+    clone_ledger: dict[str, Any],
+) -> dict[str, Any]:
+    """Vérité capacité d'un chapitre, dérivée de deux producteurs cohérents."""
+
+    invalid = sorted(set(clone_ledger["objects_on_invalid_credit"]))
+    indeterminate_paths = sorted(
+        set(clone_ledger["objects_with_indeterminate_credit"])
+    )
+    if coverage.get("invalid_credit_paths_digest") != _set_digest(invalid):
+        raise ReadinessError("invalid_credit: coverage et clone ledger divergent")
+    if coverage.get("indeterminate_credit_paths_digest") != _set_digest(
+        indeterminate_paths
+    ):
+        raise ReadinessError(
+            "indeterminate_credit: coverage et clone ledger divergent"
+        )
+
+    rows = [row for row in coverage["rows"] if row["chapter"] == chapter]
+    cell_ids = sorted(
+        f"{row['canonical_capacity_uid']}::{row['role']}::{row['state']}"
+        for row in rows
+    )
+    if "capacity_identity_blockers" in coverage:
+        marker = f"/chapitres/{chapter}/"
+        chapter_identity_blockers = [
+            blocker
+            for blocker in coverage.get("capacity_identity_blockers", [])
+            if marker in f"/{blocker.get('path', '')}"
+        ]
+        identity_counts = {
+            "ambiguous": sum(
+                blocker.get("classification") == "AMBIGUOUS_CAPACITY_IDENTITY"
+                for blocker in chapter_identity_blockers
+            ),
+            "unresolved": sum(
+                blocker.get("classification") == "UNRESOLVED_CAPACITY_IDENTITY"
+                for blocker in chapter_identity_blockers
+            ),
+            "unknown": sum(
+                blocker.get("classification")
+                not in {
+                    "AMBIGUOUS_CAPACITY_IDENTITY",
+                    "UNRESOLVED_CAPACITY_IDENTITY",
+                }
+                for blocker in chapter_identity_blockers
+            ),
+        }
+    else:
+        chapter_identity_blockers = []
+        identity_counts = dict(coverage["capacity_identity_resolution"])
+    identity_complete = (
+        bool(rows)
+        and all(identity_counts.get(key, 0) == 0 for key in ("ambiguous", "unresolved", "unknown"))
+        and all(row.get("canonical_capacity_uid") for row in rows)
+    )
+
+    missing_ids = sorted(
+        f"{row['canonical_capacity_uid']}::{row['role']}"
+        for row in rows
+        if row["state"] == "MISSING"
+    )
+    indeterminate_ids = sorted(
+        f"{row['canonical_capacity_uid']}::{row['role']}"
+        for row in rows
+        if row["state"] == "INDETERMINATE_CLONE_CREDIT"
+    )
+    semantically_unvalidated_ids = sorted(
+        f"{row['canonical_capacity_uid']}::{row['role']}"
+        for row in rows
+        if row["state"]
+        == "DECLARED_EXACT_IDENTITY_NOT_SEMANTICALLY_VALIDATED"
+    )
+
+    marker = f"/chapitres/{chapter}/"
+    invalid_paths = sorted(path for path in invalid if marker in f"/{path}")
+    ambiguous_groups: list[str] = []
+    unknown_groups: list[str] = []
+    for group in clone_ledger["groups"]:
+        if chapter not in {member["chapter"] for member in group["members"]}:
+            continue
+        status = group["canonical_selection"]["status"]
+        if status == "AMBIGUOUS":
+            ambiguous_groups.append(group["clone_group_id"])
+        elif status == "UNKNOWN":
+            unknown_groups.append(group["clone_group_id"])
+
+    clone_complete = not invalid_paths and not ambiguous_groups and not unknown_groups
+    return {
+        "capacity_identity": {
+            **identity_counts,
+            "blockers": chapter_identity_blockers,
+            "blockers_digest": _set_digest(
+                {
+                    f"{row.get('classification')}::{row.get('path')}::{row.get('reason')}"
+                    for row in chapter_identity_blockers
+                }
+            ),
+            "cells": len(rows),
+            "cell_state_set_digest": _set_digest(cell_ids),
+            "status": "COMPLETE" if identity_complete else "GAP",
+        },
+        "pedagogical_role_coverage": {
+            "missing": len(missing_ids),
+            "missing_ids": missing_ids,
+            "missing_set_digest": _set_digest(missing_ids),
+            "indeterminate": len(indeterminate_ids),
+            "indeterminate_ids": indeterminate_ids,
+            "indeterminate_set_digest": _set_digest(indeterminate_ids),
+            "semantically_unvalidated": len(semantically_unvalidated_ids),
+            "semantically_unvalidated_ids": semantically_unvalidated_ids,
+            "semantically_unvalidated_set_digest": _set_digest(
+                semantically_unvalidated_ids
+            ),
+            "status": (
+                "COMPLETE"
+                if rows
+                and not missing_ids
+                and not indeterminate_ids
+                and not semantically_unvalidated_ids
+                else "GAP"
+            ),
+        },
+        "clone_capacity_integrity": {
+            "false_copy_count": len(invalid_paths),
+            "false_copy_paths": invalid_paths,
+            "false_copy_paths_digest": _set_digest(invalid_paths),
+            "ambiguous_groups": len(ambiguous_groups),
+            "ambiguous_group_ids": sorted(ambiguous_groups),
+            "ambiguous_group_ids_digest": _set_digest(ambiguous_groups),
+            "unknown_groups": len(unknown_groups),
+            "unknown_group_ids": sorted(unknown_groups),
+            "unknown_group_ids_digest": _set_digest(unknown_groups),
+            "status": "COMPLETE" if clone_complete else "GAP",
+        },
+    }
+
+
+def _cross_discipline_truth(
+    chapter: str, ledger: dict[str, Any]
+) -> dict[str, Any]:
+    counts = dict(ledger.get("per_chapter", {}).get(chapter, {}))
+    cross = int(counts.get("CROSS_DISCIPLINE_TERMINALE_MATHS", 0))
+    unknown = int(counts.get("REQUIRES_EXPLICIT_ADJUDICATION", 0))
+    if counts:
+        status = "COMPLETE" if not cross and not unknown else "GAP"
+    elif chapter.startswith(("1NSI-", "TNSI-")):
+        status = "NOT_AUDITED"
+    else:
+        status = "NOT_APPLICABLE"
+    return {
+        "cross_discipline_count": cross,
+        "unknown": unknown,
+        "status": status,
+    }
+
+
+def _course_assembly_truth(
+    chapter: str, ownership_map: dict[str, Any]
+) -> dict[str, Any]:
+    row = ownership_map.get("chapters", {}).get(chapter)
+    if not isinstance(row, dict):
+        return {
+            "foreign": None,
+            "duplicated": None,
+            "missing": None,
+            "ambiguous": None,
+            "unknown": None,
+            "status": "NOT_AUDITED",
+        }
+    if row.get("assembly_authority") != "CANONICAL_NSI_ASSEMBLER":
+        return {
+            "foreign": None,
+            "duplicated": None,
+            "missing": None,
+            "ambiguous": None,
+            "unknown": None,
+            "status": "NOT_AUDITED",
+        }
+    bodies = row.get("assembled_bodies") or []
+    ambiguous = sum(
+        1 for body in bodies if body.get("ownership_status") == "AMBIGUOUS"
+    )
+    unknown = sum(1 for body in bodies if body.get("ownership_status") == "UNKNOWN")
+    foreign = len(row.get("foreign_course_bodies") or [])
+    duplicated = int(row.get("duplicated_course_body_count") or 0)
+    missing = len(row.get("missing_expected_course_capacities") or [])
+    complete = not any((foreign, duplicated, missing, ambiguous, unknown))
+    return {
+        "foreign": foreign,
+        "duplicated": duplicated,
+        "missing": missing,
+        "ambiguous": ambiguous,
+        "unknown": unknown,
+        "status": "COMPLETE" if complete else "GAP",
+    }
+
+
+def _richness_truth(chapter: str, matrix: dict[str, Any]) -> dict[str, Any]:
+    row = matrix.get("chapters", {}).get(chapter)
+    if not isinstance(row, dict):
+        return {
+            "unknown": None,
+            "insufficient": None,
+            "capacity_identity_blockers": None,
+            "excluded_credit_objects": None,
+            "capacities_digest": None,
+            "status": "NOT_AUDITED",
+        }
+    unknown = int(row.get("unknown") or 0)
+    insufficient = len(row.get("insufficient") or [])
+    blockers = len(row.get("capacity_identity_blockers") or [])
+    excluded = len(row.get("excluded_credit_objects") or [])
+    complete = bool(
+        row.get("machine_status") == "COMPLETE"
+        and row.get("semantic_validation_status") == "COMPLETE"
+        and not unknown
+        and not insufficient
+        and not blockers
+        and not excluded
+    )
+    return {
+        "unknown": unknown,
+        "insufficient": insufficient,
+        "capacity_identity_blockers": blockers,
+        "excluded_credit_objects": excluded,
+        "capacities_digest": row.get("capacities_digest"),
+        "status": "COMPLETE" if complete else "GAP",
+    }
+
+
+def _ex_co_truth(chapter: str, graph: dict[str, Any]) -> dict[str, Any]:
+    relations = [
+        row
+        for row in graph.get("relations", [])
+        if row.get("correction_chapter") == chapter
+    ]
+    exercises = [
+        row
+        for row in graph.get("exercise_cardinality", [])
+        if row.get("exercise_chapter") == chapter
+    ]
+    classifications = Counter(
+        classification
+        for row in relations
+        for classification in row.get("classifications", [])
+    )
+    cardinality = Counter(row.get("classification") for row in exercises)
+    structural_failures = sum(
+        count
+        for classification, count in classifications.items()
+        if classification not in {"UNKNOWN"}
+    )
+    cardinality_failures = sum(
+        count
+        for classification, count in cardinality.items()
+        if classification != "MATCH"
+    )
+    unknown = classifications.get("UNKNOWN", 0)
+    if relations or exercises:
+        status = (
+            "COMPLETE"
+            if not structural_failures and not cardinality_failures and not unknown
+            else "GAP"
+        )
+    else:
+        status = "NOT_AUDITED"
+    relation_ids = sorted(
+        f"{row.get('correction_id')}->{row.get('exercise_id')}"
+        for row in relations
+    )
+    exercise_ids = sorted(str(row.get("exercise_id")) for row in exercises)
+    return {
+        "relations": len(relations),
+        "exercises": len(exercises),
+        "classifications": dict(sorted(classifications.items())),
+        "exercise_cardinality": dict(sorted(cardinality.items())),
+        "structural_failures": structural_failures,
+        "cardinality_failures": cardinality_failures,
+        "unknown": unknown,
+        "relation_ids_digest": _set_digest(relation_ids),
+        "exercise_ids_digest": _set_digest(exercise_ids),
+        "status": status,
+    }
 
 
 def _chapter_dir(chapter: str) -> Path | None:
@@ -60,8 +372,44 @@ def _chapter_dir(chapter: str) -> Path | None:
 COVERAGE_FILE_BY_MANUAL = {"TSPE_2026_2027": "TSPE"}
 
 
-def _programme(chapter: str, manual: str) -> dict[str, Any]:
-    path = COVERAGE_DIR / f"{COVERAGE_FILE_BY_MANUAL.get(manual, manual)}.json"
+def _programme_capacity_tokens(raw: str) -> list[str]:
+    """Format autoritaire observé : `/` ou ` + ` séparent des refs exactes."""
+
+    return [token.strip() for token in re.split(r"\s*(?:/|\+)\s*", raw) if token.strip()]
+
+
+def _programme_chapters(raw: Any) -> set[str]:
+    """Exact chapter scopes declared by an official coverage row."""
+
+    return {
+        token.strip()
+        for token in str(raw or "").split(" + ")
+        if token.strip()
+    }
+
+
+def _resolve_programme_token(
+    resolver: capacity_identity.CapacityIdentityResolver,
+    chapter: str,
+    token: str,
+) -> str:
+    """Resolve an exact alias and require ownership by the requested chapter."""
+
+    resolution = resolver.resolve_collection_alias(token)
+    if resolution.identity.chapter != chapter:
+        raise capacity_identity.UnresolvedCapacityIdentity(
+            f"{chapter}: {token} appartient a {resolution.identity.chapter}"
+        )
+    return resolution.identity.uid
+
+
+def _programme(
+    chapter: str,
+    manual: str,
+    resolver: capacity_identity.CapacityIdentityResolver,
+    coverage_dir: Path = COVERAGE_DIR,
+) -> dict[str, Any]:
+    path = coverage_dir / f"{COVERAGE_FILE_BY_MANUAL.get(manual, manual)}.json"
     if not path.is_file():
         return {
             "official_atoms": None,
@@ -73,27 +421,88 @@ def _programme(chapter: str, manual: str) -> dict[str, Any]:
     rows = [
         row
         for row in json.loads(path.read_text(encoding="utf-8"))["rows"]
-        if row.get("chapter") == chapter
+        if chapter in _programme_chapters(row.get("chapter"))
     ]
     mandatory = [row for row in rows if row.get("mandatory") == "YES"]
-    mapped = [row for row in mandatory if row.get("contract_capacity")]
+    mapped: list[dict[str, Any]] = []
+    unresolved_mappings: list[str] = []
+    resolved_mapping_uids: set[str] = set()
+    for row in mandatory:
+        raw = str(row.get("contract_capacity") or "").strip()
+        tokens = _programme_capacity_tokens(raw)
+        row_uids: list[str] = []
+        declared_chapters = _programme_chapters(row.get("chapter"))
+        try:
+            for token in tokens:
+                resolution = resolver.resolve_collection_alias(token)
+                if resolution.identity.chapter not in declared_chapters:
+                    raise capacity_identity.UnresolvedCapacityIdentity(
+                        f"{token}: proprietaire {resolution.identity.chapter} "
+                        f"hors portee {sorted(declared_chapters)}"
+                    )
+                if resolution.identity.chapter == chapter:
+                    row_uids.append(resolution.identity.uid)
+        except capacity_identity.CapacityIdentityError:
+            row_uids = []
+        if tokens and row_uids:
+            mapped.append(row)
+            resolved_mapping_uids.update(row_uids)
+        else:
+            unresolved_mappings.append(
+                f"{row.get('atom_id') or row.get('official_atom_id') or '?'}:{raw or 'EMPTY'}"
+            )
     wrong_year = [row for row in rows if row.get("wrong_programme_year") is True]
     return {
         "official_atoms": len(rows),
         "mandatory_atoms": len(mandatory),
         "mapped": len(mapped),
         "missing": len(mandatory) - len(mapped),
+        "unresolved_mappings": sorted(unresolved_mappings),
+        "resolved_mapping_uids": sorted(resolved_mapping_uids),
+        "resolved_mapping_uids_digest": _set_digest(resolved_mapping_uids),
+        "mapping_format": (
+            "une reference exacte, ou plusieurs references exactes separees "
+            "par '/' ou ' + ' comme declare dans la matrice officielle"
+        ),
         "wrong_year": len(wrong_year),
-        "status": "COMPLETE" if len(mapped) == len(mandatory) and not wrong_year else "GAP",
+        "status": (
+            "NO_OFFICIAL_ATOMS"
+            if not rows
+            else "COMPLETE"
+            if len(mapped) == len(mandatory) and not wrong_year
+            else "GAP"
+        ),
     }
 
 
-def _qcm(chapter: str, directory: Path) -> dict[str, Any]:
+def _qcm(
+    chapter: str,
+    directory: Path,
+    resolver: capacity_identity.CapacityIdentityResolver,
+) -> dict[str, Any]:
     candidates = sorted((directory / "qcm").glob("*-QCM.json")) if directory else []
     if not candidates:
         return {"present": False, "status": "NO_QCM"}
+    if len(candidates) != 1:
+        raise ReadinessError(
+            f"{chapter}: MULTIPLE_QCM_SOURCES: "
+            + ", ".join(path.name for path in candidates)
+        )
     document = json.loads(candidates[0].read_text(encoding="utf-8"))
+    if document.get("chapitre") != chapter:
+        raise ReadinessError(
+            f"QCM {candidates[0].relative_to(ROOT)}: chapitre incoherent"
+        )
     questions = document.get("questions", [])
+    resolved_capacities: list[str] = []
+    for question in questions:
+        resolution = resolver.resolve(chapter, question.get("capacite"))
+        if resolution.rule == capacity_identity.PREREQUISITE:
+            raise capacity_identity.UnresolvedCapacityIdentity(
+                f"{chapter}/{question.get('id')}: un prerequis ne peut pas "
+                "etre credite comme capacite QCM"
+            )
+        resolved_capacities.append(resolution.identity.local_code)
     keys = Counter(q["correcte"] for q in questions)
     for letter in "ABCD":
         keys.setdefault(letter, 0)
@@ -111,9 +520,20 @@ def _qcm(chapter: str, directory: Path) -> dict[str, Any]:
     equivalent = [
         q["id"] for q in questions if evidence_v2._equivalent_option_groups(q)
     ]
+    expected_capacities = sorted(
+        identity.local_code for identity in resolver.capacities_of(chapter)
+    )
+    assessed_capacities = sorted(set(resolved_capacities))
+    missing_capacities = sorted(set(expected_capacities) - set(assessed_capacities))
+    question_identities = sorted(
+        f"{question['id']}::{evidence_v2.reconciliation.semantic_question_digest(evidence_v2.reconciliation._semantic_fields_from_source(question))}"
+        for question in questions
+    )
     return {
         "present": True,
         "questions": len(questions),
+        "question_identities": question_identities,
+        "question_identities_digest": _set_digest(question_identities),
         "key_distribution": dict(sorted(keys.items())),
         "key_spread": spread,
         "longest_identical_run": longest if questions else 0,
@@ -125,7 +545,10 @@ def _qcm(chapter: str, directory: Path) -> dict[str, Any]:
         ),
         "equivalent_option_questions": equivalent,
         "diagnostic_or_remediation_gaps": coverage_gaps,
-        "capacities_assessed": sorted({q.get("capacite") for q in questions if q.get("capacite")}),
+        "capacities_expected": expected_capacities,
+        "capacities_assessed": assessed_capacities,
+        "missing_capacities": missing_capacities,
+        "missing_capacities_digest": _set_digest(missing_capacities),
         "status": (
             "COMPLETE"
             if questions
@@ -134,6 +557,7 @@ def _qcm(chapter: str, directory: Path) -> dict[str, Any]:
             and all(keys[letter] for letter in "ABCD")
             and not equivalent
             and not coverage_gaps
+            and not missing_capacities
             else "GAP"
         ),
     }
@@ -161,58 +585,289 @@ def _oracle(directory: Path) -> dict[str, Any]:
             verdicts[json.loads(receipt.read_text(encoding="utf-8"))["verdict"]] += 1
         except (json.JSONDecodeError, KeyError, OSError):
             verdicts["unreadable"] += 1
+    receipts = sum(verdicts.values())
+    if not receipts:
+        status = "NO_RECEIPTS"
+    elif verdicts.get("fail") or verdicts.get("unreadable") or verdicts.get(
+        "manual_review"
+    ):
+        status = "GAP"
+    else:
+        status = "COMPLETE"
     return {
         "pass": verdicts.get("pass", 0),
         "manual_review": verdicts.get("manual_review", 0),
         "fail": verdicts.get("fail", 0) + verdicts.get("unreadable", 0),
-        "receipts": sum(verdicts.values()),
-        "status": "COMPLETE" if not verdicts.get("fail") and not verdicts.get("unreadable") else "GAP",
+        "receipts": receipts,
+        "status": status,
     }
 
 
-def _assessments(directory: Path) -> dict[str, Any]:
+def _assessments(
+    chapter: str,
+    directory: Path,
+    resolver: capacity_identity.CapacityIdentityResolver,
+) -> dict[str, Any]:
     if directory is None:
         return {"variants": [], "status": "NO_SOURCE"}
-    found = sorted(p.stem for p in (directory / "evaluations").glob("*.tex")) if (directory / "evaluations").is_dir() else []
-    subjects = [name for name in found if not name.endswith("-corrige")]
-    corrections = [name for name in found if name.endswith("-corrige")]
+    evaluation_dir = directory / "evaluations"
+    paths = sorted(evaluation_dir.glob("*.tex")) if evaluation_dir.is_dir() else []
+    subjects: dict[str, dict[str, Any]] = {}
+    corrections: dict[str, dict[str, Any]] = {}
+    invalid_status: list[str] = []
+    duplicate_ids: list[str] = []
+    seen_ids: set[str] = set()
+    allowed_statuses = {"verified", "ready", "approved"}
+    for path in paths:
+        meta = clone_producer.read_meta(path.read_text(encoding="utf-8"))
+        object_id = str(meta.get("id") or "").strip()
+        object_type = str(meta.get("type_objet") or "").strip()
+        if not object_id:
+            raise ReadinessError(f"evaluation sans id: {path.relative_to(ROOT)}")
+        if meta.get("chapitre") != chapter:
+            raise ReadinessError(
+                f"evaluation {path.relative_to(ROOT)}: chapitre incoherent"
+            )
+        capacities = resolver.resolve_meta_codes(chapter, meta)
+        if not capacities:
+            raise capacity_identity.UnresolvedCapacityIdentity(
+                f"{chapter}/{object_id}: aucune capacite d'evaluation"
+            )
+        if object_id in seen_ids:
+            duplicate_ids.append(object_id)
+        seen_ids.add(object_id)
+        status = str(meta.get("status") or "").strip().lower()
+        if status not in allowed_statuses:
+            invalid_status.append(object_id)
+        if object_type == "evaluation":
+            if object_id in subjects:
+                duplicate_ids.append(object_id)
+            version = str(meta.get("version") or "").strip().upper()
+            subjects[object_id] = {"capacities": capacities, "version": version}
+        elif object_type in {"corrige_evaluation", "evaluation_corrige"}:
+            if object_id in corrections:
+                duplicate_ids.append(object_id)
+            corrections[object_id] = {
+                "evaluation_ref": str(meta.get("evaluation_ref") or "").strip(),
+                "capacities": capacities,
+            }
+        else:
+            raise ReadinessError(
+                f"{chapter}/{object_id}: type evaluation inconnu {object_type!r}"
+            )
+
+    orphan_corrections = sorted(
+        correction_id
+        for correction_id, correction in corrections.items()
+        if correction["evaluation_ref"] not in subjects
+    )
+    corrected_subjects = {
+        correction["evaluation_ref"]
+        for correction in corrections.values()
+        if correction["evaluation_ref"] in subjects
+    }
+    subjects_without_correction = sorted(set(subjects) - corrected_subjects)
+    target_counts = Counter(
+        correction["evaluation_ref"]
+        for correction in corrections.values()
+        if correction["evaluation_ref"]
+    )
+    duplicate_correction_targets = sorted(
+        target for target, count in target_counts.items() if count > 1
+    )
+    mismatched_capacity = sorted(
+        correction_id
+        for correction_id, correction in corrections.items()
+        if correction["evaluation_ref"] in subjects
+        and tuple(correction["capacities"])
+        != tuple(subjects[correction["evaluation_ref"]]["capacities"])
+    )
+    expected_capacities = {
+        identity.local_code for identity in resolver.capacities_of(chapter)
+    }
+    assessed_capacities = {
+        capacity
+        for subject in subjects.values()
+        for capacity in subject["capacities"]
+    }
+    missing_capacities = sorted(expected_capacities - assessed_capacities)
+    invalid_variants = sorted(
+        object_id
+        for object_id, subject in subjects.items()
+        if subject["version"] not in {"A", "B"}
+    )
+    variant_counts = Counter(
+        subject["version"]
+        for subject in subjects.values()
+        if subject["version"] in {"A", "B"}
+    )
+    duplicate_variants = sorted(
+        version for version, count in variant_counts.items() if count > 1
+    )
+    missing_variants = sorted({"A", "B"} - set(variant_counts))
+    complete = bool(
+        len(subjects) == 2
+        and not orphan_corrections
+        and not subjects_without_correction
+        and not mismatched_capacity
+        and not missing_capacities
+        and not invalid_status
+        and not duplicate_ids
+        and not duplicate_correction_targets
+        and not invalid_variants
+        and not duplicate_variants
+        and not missing_variants
+    )
     return {
-        "subjects": subjects,
-        "corrections": corrections,
-        "status": "COMPLETE"
-        if len(subjects) >= 2 and len(corrections) >= len(subjects)
-        else "GAP",
+        "subjects": sorted(subjects),
+        "corrections": sorted(corrections),
+        "orphan_corrections": orphan_corrections,
+        "subjects_without_correction": subjects_without_correction,
+        "mismatched_capacity": mismatched_capacity,
+        "missing_capacities": missing_capacities,
+        "invalid_status": sorted(invalid_status),
+        "duplicate_ids": sorted(duplicate_ids),
+        "duplicate_correction_targets": duplicate_correction_targets,
+        "invalid_variants": invalid_variants,
+        "duplicate_variants": duplicate_variants,
+        "missing_variants": missing_variants,
+        "status": "COMPLETE" if complete else "GAP",
     }
 
 
-def _evidence_routing(chapter: str, routed: dict[str, Counter]) -> dict[str, Any]:
-    counts = routed.get(chapter, Counter())
-    total = sum(counts.values())
+def _machine_dimensions_complete(dimensions: dict[str, str]) -> bool:
+    """Only unaudited/gap dimensions block; non-applicable is a valid terminal state."""
+
+    return bool(dimensions) and all(
+        value in {"COMPLETE", "NO_QCM", "NOT_APPLICABLE"}
+        for value in dimensions.values()
+    )
+
+
+def _evidence_routing(
+    chapter: str,
+    routed: dict[str, list[dict[str, Any]]],
+    *,
+    expected_question_identities: list[str],
+) -> dict[str, Any]:
+    entries = routed.get(chapter, [])
+    counts = Counter(entry.get("evidence_status") for entry in entries)
+    total = len(entries)
+    known = {
+        "CARRIED_FORWARD_IDENTICAL",
+        "MACHINE_RECALCULATED",
+        "HUMAN_REVIEW_REQUIRED",
+    }
+    unknown = sum(value for key, value in counts.items() if key not in known)
+    human_review_required = counts.get("HUMAN_REVIEW_REQUIRED", 0)
+    observed_identities = sorted(
+        f"{entry.get('question_id')}::{entry.get('semantic_question_digest')}"
+        for entry in entries
+    )
+    identity_matches = observed_identities == sorted(expected_question_identities)
+    count_matches = total == len(expected_question_identities)
+    if not expected_question_identities and not total:
+        status = "NO_QCM"
+    elif identity_matches and not human_review_required and not unknown:
+        status = "COMPLETE"
+    else:
+        status = "GAP"
     return {
         "questions_routed": total,
+        "questions_expected": len(expected_question_identities),
+        "count_matches_qcm": count_matches,
+        "identity_set_matches_qcm": identity_matches,
+        "evidence_question_identities": observed_identities,
+        "evidence_question_identities_digest": _set_digest(observed_identities),
         "carried_forward": counts.get("CARRIED_FORWARD_IDENTICAL", 0),
         "machine_recalculated": counts.get("MACHINE_RECALCULATED", 0),
-        "human_review_required": counts.get("HUMAN_REVIEW_REQUIRED", 0),
-        "unknown": 0,
-        "status": "COMPLETE" if total else "NO_QCM",
+        "human_review_required": human_review_required,
+        "unknown": unknown,
+        "status": status,
     }
 
 
-def _declared_debt() -> dict[str, list[dict[str, Any]]]:
+def _declared_debt(
+    queue: dict[str, Any] | None = None,
+) -> dict[str, list[dict[str, Any]]]:
+    queue = queue or human_queue_producer.build_queue()
+    if queue.get("unknown_count") != 0:
+        raise ReadinessError("file humaine avec inconnues")
+    if queue.get("status") not in {"HUMAN_REVIEW_ACTION_REQUIRED", "CLOSED"}:
+        raise ReadinessError("statut de file humaine inconnu")
     by_chapter: dict[str, list[dict[str, Any]]] = {}
-    for path in DECLARED_DEBT_LEDGERS:
-        if not path.is_file():
-            continue
-        ledger = json.loads(path.read_text(encoding="utf-8"))
-        by_chapter.setdefault(ledger["chapter"], []).append(
-            {
-                "ledger_id": ledger["ledger_id"],
-                "count": ledger["count"],
-                "object_ids": sorted(e["object_id"] for e in ledger["entries"]),
-                "release_blocking": ledger["release_blocking"],
-            }
-        )
+    seen: set[str] = set()
+    for item in queue.get("items") or []:
+        if item.get("release_blocking") is not True:
+            raise ReadinessError(f"dette humaine non bloquante: {item.get('item_id')}")
+        unit_ids = item.get("unit_ids") or []
+        if item.get("count") != len(unit_ids) or item.get("set_digest") != _set_digest(unit_ids):
+            raise ReadinessError(f"file humaine incohérente: {item.get('item_id')}")
+        overlap = seen & set(unit_ids)
+        if overlap:
+            raise ReadinessError(f"dette humaine double-comptée: {sorted(overlap)[:3]}")
+        seen.update(unit_ids)
+        routed: set[str] = set()
+        for chapter, bucket in sorted((item.get("units_by_chapter") or {}).items()):
+            chapter_units = bucket.get("unit_ids") or []
+            if (
+                bucket.get("count") != len(chapter_units)
+                or bucket.get("set_digest") != _set_digest(chapter_units)
+                or not set(chapter_units) <= set(unit_ids)
+            ):
+                raise ReadinessError(
+                    f"routage humain incohérent: {item.get('item_id')}:{chapter}"
+                )
+            if routed & set(chapter_units):
+                raise ReadinessError(
+                    f"dette humaine double-routée: {item.get('item_id')}:{chapter}"
+                )
+            routed.update(chapter_units)
+            provenance_counts: dict[str, int]
+            if item.get("item_id") in {"TSPE_GEO_NEW_40", "NSI_COUPLED_NEW_32"}:
+                provenance_counts = {"NEW_AUTHORED_UNREVIEWED": len(chapter_units)}
+            elif item.get("item_id") in {
+                "TSPE_GEO_REWRITTEN_STALE_APPROVAL_5",
+                "NSI_COUPLED_REWRITTEN_STALE_APPROVAL_4",
+            }:
+                provenance_counts = {
+                    "REWRITTEN_PREVIOUSLY_APPROVED_STALE": len(chapter_units)
+                }
+            else:
+                provenance_counts = {str(item.get("category")): len(chapter_units)}
+            by_chapter.setdefault(chapter, []).append(
+                {
+                    "ledger_id": item["item_id"],
+                    "category": item.get("category"),
+                    "count": len(chapter_units),
+                    "unit_ids_digest": _set_digest(chapter_units),
+                    "provenance_counts": dict(sorted(provenance_counts.items())),
+                    "release_blocking": True,
+                }
+            )
+        if routed != set(unit_ids):
+            raise ReadinessError(f"file humaine non entièrement routée: {item.get('item_id')}")
+    expected_total = int((queue.get("counts") or {}).get("TOTAL", -1))
+    if len(seen) != expected_total:
+        raise ReadinessError("total file humaine incohérent")
     return by_chapter
+
+
+def _human_closure_status(
+    human: Mapping[str, Any], declared_review_debt: list[dict[str, Any]]
+) -> str:
+    return (
+        "CLOSED"
+        if human.get("review_a") == "APPROVED"
+        and human.get("review_b") == "APPROVED"
+        and human.get("qcm_human_approval") in {"APPROVED", "SATISFIED", "NOT_APPLICABLE"}
+        and human.get("publication_approval") is True
+        and not any(
+            debt.get("release_blocking") is True and int(debt.get("count", 0)) > 0
+            for debt in declared_review_debt
+        )
+        else "PENDING"
+    )
 
 
 def _risk_score(row: dict[str, Any]) -> int:
@@ -220,7 +875,7 @@ def _risk_score(row: dict[str, Any]) -> int:
 
     score = 0
     programme = row["programme"]
-    if programme.get("status") == "GAP":
+    if programme.get("status") != "COMPLETE":
         score += 40 * max(1, programme.get("missing") or 0)
     score += 60 * (programme.get("wrong_year") or 0)
     qcm = row["qcm"]
@@ -231,13 +886,48 @@ def _risk_score(row: dict[str, Any]) -> int:
                 score += 15
         score += 12 * len(qcm["diagnostic_or_remediation_gaps"])
         score += 25 * len(qcm["equivalent_option_questions"])
+        score += 35 * len(qcm.get("missing_capacities") or [])
     else:
         score += 30
     score += 2 * (row["diacritics"].get("unambiguous") or 0)
     oracle = row["oracle"]
     score += 50 * (oracle.get("fail") or 0)
+    score += 30 * (oracle.get("manual_review") or 0)
+    if oracle.get("status") == "NO_RECEIPTS":
+        score += 50
     if row["assessments"].get("status") == "GAP":
         score += 20
+    evidence = row.get("evidence_routing", {})
+    score += 45 * (evidence.get("human_review_required") or 0)
+    if evidence.get("identity_set_matches_qcm") is False:
+        score += 80
+    cross = row.get("cross_discipline_content", {})
+    score += 100 * (cross.get("cross_discipline_count") or 0)
+    score += 70 * (cross.get("unknown") or 0)
+    assembly = row.get("course_assembly_truth", {})
+    score += 90 * (assembly.get("foreign") or 0)
+    score += 50 * (assembly.get("duplicated") or 0)
+    score += 70 * (assembly.get("ambiguous") or 0)
+    score += 80 * (assembly.get("unknown") or 0)
+    ex_co = row.get("ex_co_graph", {})
+    score += 80 * (ex_co.get("structural_failures") or 0)
+    score += 70 * (ex_co.get("cardinality_failures") or 0)
+    score += 50 * (ex_co.get("unknown") or 0)
+    richness = row.get("pedagogical_richness", {})
+    score += 70 * (richness.get("insufficient") or 0)
+    score += 60 * (richness.get("unknown") or 0)
+    score += 50 * (richness.get("capacity_identity_blockers") or 0)
+    score += 40 * (richness.get("excluded_credit_objects") or 0)
+    role_coverage = row.get("pedagogical_role_coverage", {})
+    score += 80 * (role_coverage.get("missing") or 0)
+    score += 45 * (role_coverage.get("indeterminate") or 0)
+    score += 45 * (role_coverage.get("semantically_unvalidated") or 0)
+    clone_integrity = row.get("clone_capacity_integrity", {})
+    score += 60 * (clone_integrity.get("false_copy_count") or 0)
+    score += 50 * (
+        (clone_integrity.get("ambiguous_groups") or 0)
+        + (clone_integrity.get("unknown_groups") or 0)
+    )
     if row["human"]["review_a"] != "PENDING_UNASSIGNED" or row["human"]["review_b"] != "PENDING_UNASSIGNED":
         score += 0
     return score
@@ -252,15 +942,80 @@ def _policy() -> dict[str, Any]:
     return _POLICY_CACHE
 
 
-def build_matrix() -> dict[str, Any]:
-    inventory = json.loads(INVENTORY.read_text(encoding="utf-8"))
-    evidence = json.loads(
-        (ROOT / "audit" / "QCM_INDEPENDENT_EVIDENCE_V2.json").read_text(encoding="utf-8")
+def build_matrix(
+    *,
+    clone_ledger: dict[str, Any] | None = None,
+    coverage: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    # Les deux producteurs sont recalculés dans le même appel. Joindre deux
+    # JSON historiques permettrait à un ancien resolver d'alimenter un gate
+    # courant ; `_capacity_truth` vérifie en plus l'égalité de leurs sets de
+    # crédit invalides et indéterminés.
+    capacity_resolver = capacity_identity.CapacityIdentityResolver.from_corpora()
+    clone_ledger = clone_ledger or clone_producer.build_ledger()
+    coverage = coverage or coverage_producer.build_coverage(
+        resolver=capacity_resolver,
+        clone_ledger=clone_ledger,
     )
-    routed: dict[str, Counter] = {}
+    alias_map = capacity_identity.build_alias_map(capacity_resolver)
+    cross_discipline = cross_discipline_producer.build_ledger()
+    course_ownership = course_truth_producer.build_map()
+    ex_co_graph = ex_co_producer.build_graph(
+        resolver=capacity_resolver,
+        clone_ledger=clone_ledger,
+        cross_discipline_ledger=cross_discipline,
+    )
+    richness = richness_producer.build_collection(
+        resolver=capacity_resolver,
+        clone_ledger=clone_ledger,
+    )
+    human_queue = human_queue_producer.build_queue()
+    cross_path = ROOT / "audit/NSI_CROSS_DISCIPLINE_CONTENT_LEDGER.json"
+    course_path = ROOT / "audit/COURSE_BODY_OWNERSHIP_MAP.json"
+    ex_co_path = ROOT / "audit/EX_CO_GRAPH.json"
+    for name, current, path in (
+        ("NSI_CROSS_DISCIPLINE_CONTENT_LEDGER", cross_discipline, cross_path),
+        ("COURSE_BODY_OWNERSHIP_MAP", course_ownership, course_path),
+        ("EX_CO_GRAPH", ex_co_graph, ex_co_path),
+        ("CHAPTER_RICHNESS_MATRIX", richness, RICHNESS_MATRIX),
+        (
+            "HUMAN_REVIEW_QUEUE",
+            human_queue,
+            ROOT / "audit/HUMAN_REVIEW_QUEUE.json",
+        ),
+    ):
+        committed = json.loads(path.read_text(encoding="utf-8"))
+        if _payload_digest(current) != _payload_digest(committed):
+            raise ReadinessError(f"{name} stale")
+    input_digests = {
+        "capacity_alias_map": alias_map["alias_digest"],
+        "clone_ledger": _payload_digest(clone_ledger),
+        "true_coverage": _payload_digest(coverage),
+        "cross_discipline_ledger": _payload_digest(cross_discipline),
+        "course_body_ownership_map": _payload_digest(course_ownership),
+        "ex_co_graph": _payload_digest(ex_co_graph),
+        "chapter_richness": _payload_digest(richness),
+        "human_review_queue": _payload_digest(human_queue),
+        "official_programme_sources": _set_digest(
+            {
+                f"{path.relative_to(ROOT)}::{hashlib.sha256(path.read_bytes()).hexdigest()}"
+                for path in (
+                    ROOT / "audit/OFFICIAL_PROGRAM_ATOMS_2026_2027.json",
+                    *(COVERAGE_DIR / f"{manual}.json" for manual in ("1SPE", "TSPE", "TCOMPL", "TEXPERTES", "1NSI", "TNSI")),
+                )
+            }
+        ),
+    }
+    inventory = json.loads(INVENTORY.read_text(encoding="utf-8"))
+    evidence = evidence_v2.build_evidence()
+    evidence_path = ROOT / "audit" / "QCM_INDEPENDENT_EVIDENCE_V2.json"
+    committed_evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
+    if _payload_digest(evidence) != _payload_digest(committed_evidence):
+        raise ReadinessError("QCM_INDEPENDENT_EVIDENCE_V2 stale")
+    routed: dict[str, list[dict[str, Any]]] = {}
     for entry in evidence["questions"]:
-        routed.setdefault(entry["chapter"], Counter())[entry["evidence_status"]] += 1
-    declared_debt = _declared_debt()
+        routed.setdefault(entry["chapter"], []).append(entry)
+    declared_debt = _declared_debt(human_queue)
 
     rows: list[dict[str, Any]] = []
     for manual_id, manual in sorted(inventory["manuals"].items()):
@@ -280,18 +1035,29 @@ def build_matrix() -> dict[str, Any]:
                 state = governance.evaluate_state(chapter, _policy(), ROOT)
             except Exception:  # noqa: BLE001 - un chapitre non gouverne se voit
                 state = {}
+            qcm_summary = _qcm(chapter, directory, capacity_resolver)
             row = {
                 "manual": manual_id,
                 "chapter": chapter,
                 "object_count": object_count,
                 "object_set_digest": object_digest,
                 "unassembled_object_ids": unassembled,
-                "programme": _programme(chapter, manual_id),
+                "programme": _programme(
+                    chapter, manual_id, capacity_resolver
+                ),
                 "oracle": _oracle(directory),
-                "qcm": _qcm(chapter, directory),
-                "evidence_routing": _evidence_routing(chapter, routed),
+                "qcm": qcm_summary,
+                "evidence_routing": _evidence_routing(
+                    chapter,
+                    routed,
+                    expected_question_identities=list(
+                        qcm_summary.get("question_identities") or []
+                    ),
+                ),
                 "diacritics": _diacritics(directory),
-                "assessments": _assessments(directory),
+                "assessments": _assessments(
+                    chapter, directory, capacity_resolver
+                ),
                 "declared_review_debt": declared_debt.get(chapter, []),
                 "human": {
                     "review_a": (state.get("review_a") or {}).get("state", "UNKNOWN"),
@@ -300,6 +1066,16 @@ def build_matrix() -> dict[str, Any]:
                     "publication_approval": state.get("publication_approval", False),
                 },
             }
+            capacity_truth = _capacity_truth(chapter, coverage, clone_ledger)
+            row.update(capacity_truth)
+            row["cross_discipline_content"] = _cross_discipline_truth(
+                chapter, cross_discipline
+            )
+            row["course_assembly_truth"] = _course_assembly_truth(
+                chapter, course_ownership
+            )
+            row["ex_co_graph"] = _ex_co_truth(chapter, ex_co_graph)
+            row["pedagogical_richness"] = _richness_truth(chapter, richness)
             row["machine_dimensions"] = {
                 "programme": row["programme"]["status"],
                 "oracle": row["oracle"]["status"],
@@ -307,21 +1083,28 @@ def build_matrix() -> dict[str, Any]:
                 "diacritics": row["diacritics"]["status"],
                 "assessments": row["assessments"]["status"],
                 "evidence_routing": row["evidence_routing"]["status"],
+                "capacity_identity": row["capacity_identity"]["status"],
+                "pedagogical_role_coverage": row[
+                    "pedagogical_role_coverage"
+                ]["status"],
+                "clone_capacity_integrity": row["clone_capacity_integrity"][
+                    "status"
+                ],
+                "cross_discipline_content": row["cross_discipline_content"][
+                    "status"
+                ],
+                "course_assembly_truth": row["course_assembly_truth"]["status"],
+                "ex_co_graph": row["ex_co_graph"]["status"],
+                "pedagogical_richness": row["pedagogical_richness"]["status"],
             }
             row["vertical_machine_status"] = (
                 "MACHINE_REVIEW_COMPLETE"
-                if all(
-                    value in {"COMPLETE", "NO_QCM"}
-                    for value in row["machine_dimensions"].values()
-                )
+                if _machine_dimensions_complete(row["machine_dimensions"])
                 and not unassembled
                 else "INCOMPLETE"
             )
-            row["human_closure_status"] = (
-                "CLOSED"
-                if row["human"]["review_a"] == "APPROVED"
-                and row["human"]["review_b"] == "APPROVED"
-                else "PENDING"
+            row["human_closure_status"] = _human_closure_status(
+                row["human"], row["declared_review_debt"]
             )
             row["risk_score"] = _risk_score(row)
             rows.append(row)
@@ -332,6 +1115,7 @@ def build_matrix() -> dict[str, Any]:
         "schema_version": 1,
         "generated_by": "scripts/build_publish_readiness_chapter_matrix.py",
         "approves_nothing": True,
+        "input_digests": input_digests,
         "manuals": sorted(inventory["manuals"]),
         "counts": {
             "manuals": len(inventory["manuals"]),
@@ -369,14 +1153,17 @@ def render_md(payload: dict[str, Any]) -> str:
         f"- Machine review incomplete : {counts['machine_review_incomplete']}",
         f"- ALL_MACHINE_CONTENT_COMPLETE : {payload['ALL_MACHINE_CONTENT_COMPLETE']}",
         "",
-        "| manuel | chapitre | objets | programme | oracle | QCM | diacritiques | evals | statut machine | risque |",
-        "|---|---|---|---|---|---|---|---|---|---|",
+        "| manuel | chapitre | objets | programme | couverture rôles | clones | EX/CO | cross-discipline | assemblage cours | oracle | QCM | diacritiques | evals | statut machine | risque |",
+        "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|",
     ]
     for row in payload["chapters"]:
         dims = row["machine_dimensions"]
         lines.append(
             f"| {row['manual']} | {row['chapter']} | {row['object_count']} "
-            f"| {dims['programme']} | {dims['oracle']} | {dims['qcm']} "
+            f"| {dims['programme']} | {dims['pedagogical_role_coverage']} "
+            f"| {dims['clone_capacity_integrity']} | {dims['ex_co_graph']} "
+            f"| {dims['cross_discipline_content']} | {dims['course_assembly_truth']} "
+            f"| {dims['oracle']} | {dims['qcm']} "
             f"| {dims['diacritics']} | {dims['assessments']} "
             f"| {row['vertical_machine_status']} | {row['risk_score']} |"
         )
