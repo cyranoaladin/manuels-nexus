@@ -9,7 +9,7 @@ Cet artefact n'approuve rien et ne rebinde rien.
 - Preuve reportable a l'identique : 301
 - Preuve a refaire : 189
 - Equation : 490 = 301 + 189
-- Condense d'ensemble courant : `sha256:c840ed2c1005b45ee312a674999b93ee57e881ecc590aee32eb0a87fe69dee85`
+- Condense d'ensemble courant : `sha256:8c663f58ff12cabbe522bdf7dc2867d67c42fdaad79fc20dc2b230c638c3a126`
 
 ## Questions dont la preuve doit etre refaite
 

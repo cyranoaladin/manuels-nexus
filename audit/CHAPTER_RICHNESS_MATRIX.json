@@ -37,7 +37,11 @@
               "questions_for_this_capacity": null
             }
           ],
-          "reasoning_paths": [],
+          "reasoning_paths": [
+            "diagnostiquer_bug",
+            "prouver_terminaison",
+            "tracer_execution"
+          ],
           "semantic_validation_status": "UNKNOWN",
           "status": "CANDIDATE_NON_SEMANTIC"
         },
@@ -72,7 +76,11 @@
               "questions_for_this_capacity": null
             }
           ],
-          "reasoning_paths": [],
+          "reasoning_paths": [
+            "construire_contre_exemple",
+            "distinguer_notions",
+            "tracer_execution"
+          ],
           "semantic_validation_status": "UNKNOWN",
           "status": "CANDIDATE_NON_SEMANTIC"
         },
@@ -101,21 +109,38 @@
               "questions_for_this_capacity": null
             }
           ],
-          "reasoning_paths": [],
+          "reasoning_paths": [
+            "tracer_execution",
+            "traiter_cas_limite"
+          ],
           "semantic_validation_status": "UNKNOWN",
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:0c3b378483d934822a7dbad0c26b22e54b47974b9a3f9f4070993e68fefbe699",
+      "capacities_digest": "sha256:07cea44200ce8fd40798ed9b0ade44ddc405a686fcb8fc4742f02f56f89bc165",
       "capacity_identity_blockers": [],
       "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
       "counts": {
         "CANDIDATE_NON_SEMANTIC": 3
       },
-      "declarative_diversity_status": "INSUFFICIENT",
-      "distinct_reasoning_paths": [],
-      "diversity_profile": {},
-      "diversity_status": "INSUFFICIENT",
+      "declarative_diversity_status": "SUFFICIENT",
+      "distinct_reasoning_paths": [
+        "construire_contre_exemple",
+        "diagnostiquer_bug",
+        "distinguer_notions",
+        "prouver_terminaison",
+        "tracer_execution",
+        "traiter_cas_limite"
+      ],
+      "diversity_profile": {
+        "construire_contre_exemple": 1,
+        "diagnostiquer_bug": 1,
+        "distinguer_notions": 1,
+        "prouver_terminaison": 1,
+        "tracer_execution": 5,
+        "traiter_cas_limite": 1
+      },
+      "diversity_status": "CANDIDATE_NON_SEMANTIC",
       "excluded_credit_objects": [],
       "generated_by": "scripts/build_chapter_richness_matrix.py",
       "insufficient": [],
@@ -130,8 +155,8 @@
       "capacities": {
         "C1": {
           "assessed_by": [
-            "1NSI-AGT-EVAL-A",
-            "1NSI-AGT-EVAL-B"
+            "1NSI-APT-EVAL-A",
+            "1NSI-APT-EVAL-B"
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "SUFFICIENT",
@@ -162,8 +187,8 @@
         },
         "C2": {
           "assessed_by": [
-            "1NSI-AGT-EVAL-A",
-            "1NSI-AGT-EVAL-B"
+            "1NSI-APT-EVAL-A",
+            "1NSI-APT-EVAL-B"
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "SUFFICIENT",
@@ -194,8 +219,8 @@
         },
         "C3": {
           "assessed_by": [
-            "1NSI-AGT-EVAL-A",
-            "1NSI-AGT-EVAL-B"
+            "1NSI-APT-EVAL-A",
+            "1NSI-APT-EVAL-B"
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "SUFFICIENT",
@@ -226,8 +251,8 @@
         },
         "C4": {
           "assessed_by": [
-            "1NSI-AGT-EVAL-A",
-            "1NSI-AGT-EVAL-B"
+            "1NSI-APT-EVAL-A",
+            "1NSI-APT-EVAL-B"
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "SUFFICIENT",
@@ -258,8 +283,8 @@
         },
         "C5": {
           "assessed_by": [
-            "1NSI-AGT-EVAL-A",
-            "1NSI-AGT-EVAL-B"
+            "1NSI-APT-EVAL-A",
+            "1NSI-APT-EVAL-B"
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "SUFFICIENT",
@@ -290,8 +315,8 @@
         },
         "C6": {
           "assessed_by": [
-            "1NSI-AGT-EVAL-A",
-            "1NSI-AGT-EVAL-B"
+            "1NSI-APT-EVAL-A",
+            "1NSI-APT-EVAL-B"
           ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "SUFFICIENT",
@@ -321,7 +346,7 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:8e1745ceb979abf46dce8f8a0878676361fe57564509b0cc33086f071dff72c8",
+      "capacities_digest": "sha256:e09e69e6bbcf71ec15171a2d59b033805773f30b199ca6b79a5ed7e4efb365db",
       "capacity_identity_blockers": [],
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
       "counts": {
@@ -21533,7 +21558,7 @@
       "unknown": 2
     }
   },
-  "chapters_digest": "sha256:e001ef0d940dbba11829e456a9a0e9bd8e365c09a949a4646100c58fafce2624",
+  "chapters_digest": "sha256:abf63deb717e842207ca3466d7ba4fc52822abe7f399f3598a65325d118dcda7",
   "generated_by": "scripts/build_chapter_richness_matrix.py",
   "incomplete_chapters": [
     "1NSI-ALGO-DICHO-GLOUTON-KNN",
