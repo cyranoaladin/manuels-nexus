@@ -286,7 +286,9 @@ def _declared_separate_debt(root: Path) -> dict[str, set[str]]:
     return declared
 
 
-def _superseded_by_rewrite(root: Path) -> set[str]:
+def _superseded_by_rewrite(
+    root: Path, *, current_active: set[str]
+) -> set[str]:
     """Empreintes qu'une REECRITURE a fait disparaitre, et rien d'autre.
 
     Une migration d'identite ne transporte une qualification qu'a travers une
@@ -316,6 +318,48 @@ def _superseded_by_rewrite(root: Path) -> set[str]:
         if not str(migration.get("superseded_declared_in", "")).strip():
             raise ValueError(
                 f"supersession sans registre declare: {fingerprint}"
+            )
+        ledger_relative = Path(str(migration["superseded_declared_in"]))
+        ledger_path = (root / ledger_relative).resolve()
+        if not ledger_path.is_relative_to(root.resolve()) or not ledger_path.is_file():
+            raise ValueError(
+                f"registre de supersession absent ou hors dépôt: {fingerprint}"
+            )
+        ledger = _read_json(ledger_path)
+        entries = ledger.get("entries")
+        if not isinstance(entries, list):
+            raise ValueError(f"registre de supersession sans entries: {fingerprint}")
+        candidates = [
+            entry
+            for entry in entries
+            if entry.get("path") == migration.get("current_source")
+            and entry.get("object_id") == migration.get("current_object_id")
+            and entry.get("chapter") == migration.get("chapter")
+            and entry.get("origin") in {"REWRITTEN", "REWRITTEN_STALE_APPROVAL"}
+            and entry.get("human_approval_invalidated_by_rewrite") is True
+            and str(entry.get("fingerprint")) in current_active
+        ]
+        if len(candidates) != 1:
+            raise ValueError(
+                f"supersession sans remplacement courant exact: {fingerprint}"
+            )
+        if str(fingerprint) in current_active:
+            raise ValueError(
+                f"ancienne empreinte supersédée encore active: {fingerprint}"
+            )
+        replacement = candidates[0]
+        if str(replacement["fingerprint"]) == str(fingerprint):
+            raise ValueError(
+                f"remplacement de supersession sans nouvelle empreinte: {fingerprint}"
+            )
+        source_path = root / str(replacement["path"])
+        if not source_path.is_file():
+            raise ValueError(f"source de remplacement absente: {fingerprint}")
+        frozen_sha = str(migration.get("current_source_sha256") or "")
+        observed_sha = _source_sha(source_path)
+        if frozen_sha and observed_sha == frozen_sha:
+            raise ValueError(
+                f"supersession déclarée sans réécriture observée: {fingerprint}"
             )
         superseded.add(str(fingerprint))
     return superseded
@@ -673,7 +717,7 @@ def build_reports(
     # Une empreinte que la reecriture a fait disparaitre ne peut plus figurer
     # dans la partition courante : son objet existe toujours, mais sous une
     # identite neuve et non qualifiee, portee par un registre de dette.
-    superseded = _superseded_by_rewrite(root)
+    superseded = _superseded_by_rewrite(root, current_active=current_active)
     orphaned = superseded - current_active
     transition_new = transition_new - orphaned
     current_partition = (

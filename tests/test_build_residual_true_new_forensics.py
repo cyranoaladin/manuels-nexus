@@ -8,6 +8,7 @@ from pathlib import Path
 import subprocess
 
 import pytest
+import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -186,6 +187,47 @@ def test_builds_exact_residual_without_mutating_frozen_inputs(tmp_path: Path) ->
         all(value in {"PASS", "NO"} for value in entry["class_b_eligibility"].values())
         for entry in residual["entries"]
     )
+
+
+def test_supersession_requires_exact_current_replacement_in_declared_ledger(
+    tmp_path: Path,
+) -> None:
+    module = _load_module()
+    audit = tmp_path / "audit"
+    audit.mkdir()
+    migration = {
+        "migrations": {
+            "a" * 16: {
+                "superseded_by_rewrite": True,
+                "superseded_declared_in": "audit/REWRITE.json",
+                "current_source": "chapter/eval.tex",
+                "current_object_id": "EV-A",
+                "chapter": "1NSI-X",
+            }
+        }
+    }
+    (audit / "ANOMALY_IDENTITY_MIGRATIONS.yaml").write_text(
+        yaml.safe_dump(migration), encoding="utf-8"
+    )
+    (audit / "REWRITE.json").write_text(
+        json.dumps(
+            {
+                "entries": [
+                    {
+                        "fingerprint": "b" * 16,
+                        "path": "chapter/other.tex",
+                        "object_id": "EV-A",
+                        "chapter": "1NSI-X",
+                        "origin": "REWRITTEN_STALE_APPROVAL",
+                        "human_approval_invalidated_by_rewrite": True,
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="remplacement courant exact"):
+        module._superseded_by_rewrite(tmp_path, current_active={"b" * 16})
 
 
 def test_check_reuses_frozen_source_sha_only_for_report_only_commits(

@@ -74,20 +74,40 @@ def test_the_lost_human_approvals_stay_visible(ledger: dict) -> None:
     couvrait n'existe plus.
     """
 
-    rewritten = [e for e in ledger["entries"] if e["origin"] == "REWRITTEN"]
-    created = [e for e in ledger["entries"] if e["origin"] == "CREATED"]
+    rewritten = [
+        e
+        for e in ledger["entries"]
+        if e["origin"] == "REWRITTEN_PREVIOUSLY_APPROVED"
+    ]
+    created = [
+        e for e in ledger["entries"] if e["origin"] == "NEW_AUTHORED_UNREVIEWED"
+    ]
 
     assert len(rewritten) == 5
     assert len(created) == 40
     assert len(rewritten) + len(created) == ledger["count"] == 45
-    assert ledger["counts_by_origin"] == {"CREATED": 40, "REWRITTEN": 5}
+    assert ledger["counts_by_origin"] == {
+        "NEW_AUTHORED_UNREVIEWED": 40,
+        "REWRITTEN_PREVIOUSLY_APPROVED": 5,
+    }
+    assert ledger["new_fingerprint_set_digest"].startswith("sha256:")
+    assert ledger["rewritten_stale_fingerprint_set_digest"].startswith("sha256:")
+    assert ledger["rewritten_approval_evidence_chain_complete"] is True
 
     for entry in rewritten:
         assert entry["status_before_rewrite"] == "approved"
         assert entry["human_approval_invalidated_by_rewrite"] is True
+        assert entry["approval_state"] == "STALE"
+        assert entry["previous_semantic_digest"].startswith("sha256:")
+        assert entry["current_semantic_digest"].startswith("sha256:")
+        assert entry["previous_semantic_digest"] != entry["current_semantic_digest"]
+        assert entry["semantic_digest_changed"] is True
+        assert entry["evidence_chain_complete"] is True
     for entry in created:
         assert entry["status_before_rewrite"] is None
         assert entry["human_approval_invalidated_by_rewrite"] is False
+        assert entry["approval_state"] == "NEVER_EXISTED"
+        assert entry["historical_source_absent_at_approval_freeze"] is True
 
     assert sorted(ledger["human_approvals_invalidated"]) == sorted(
         entry["path"] for entry in rewritten

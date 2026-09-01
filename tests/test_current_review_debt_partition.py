@@ -1,0 +1,123 @@
+from __future__ import annotations
+
+import importlib.util
+import json
+from itertools import combinations
+from pathlib import Path
+
+import pytest
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SCRIPT = ROOT / "scripts" / "build_current_review_debt_partition.py"
+ARTIFACT = ROOT / "audit" / "CURRENT_REVIEW_DEBT_PARTITION.json"
+
+
+def _module():
+    spec = importlib.util.spec_from_file_location(
+        "build_current_review_debt_partition", SCRIPT
+    )
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_partition_is_exact_disjoint_and_keeps_review_provenance() -> None:
+    payload = _module().build_partition(ROOT)
+
+    assert payload["current_review_debt_count"] == 2325
+    assert payload["unknown_count"] == 0
+    assert payload["pairwise_intersections"] == []
+    assert payload["union_equals_current_review_debt"] is True
+
+    components = payload["components"]
+    assert components["TSPE_GEO_NEW_40"]["count"] == 40
+    assert components["TSPE_GEO_REWRITTEN_STALE_APPROVAL_5"]["count"] == 5
+    assert components["RESIDUAL_TRUE_NEW_13"]["count"] == 13
+    assert components["A4_METHOD_REQUALIFICATION_STALE_83"]["count"] == 83
+    assert components["A4_METHOD_QUALIFIED_CURRENT_3"]["count"] == 3
+    assert components["TRIGO_OPTIONAL_EXTENSION_REQUALIFICATION_STALE_3"][
+        "count"
+    ] == 3
+    assert components["NSI_COUPLED_NEW_32"]["count"] == 32
+    assert components["NSI_COUPLED_REWRITTEN_STALE_APPROVAL_4"]["count"] == 4
+
+    for name, component in components.items():
+        assert component["count"] == len(component["fingerprints"]), name
+        assert component["count"] == len(component["objects"]), name
+        assert component["fingerprints_digest"].startswith("sha256:")
+        assert component["object_keys_digest"].startswith("sha256:")
+        assert component["object_ids_digest"].startswith("sha256:")
+
+    sets = {
+        name: set(component["fingerprints"])
+        for name, component in components.items()
+    }
+    for left, right in combinations(sorted(sets), 2):
+        assert sets[left].isdisjoint(sets[right]), (left, right)
+
+    aliases = payload["non_counting_aliases_and_aggregates"]
+    assert aliases["PENDING_HUMAN_REVIEW_13"]["alias_of"] == [
+        "RESIDUAL_TRUE_NEW_13"
+    ]
+    assert aliases["PENDING_HUMAN_REVIEW_13"]["contributes_to_union"] is False
+    historical = aliases["HISTORICAL_PENDING_UNQUALIFIED_13_LABEL"]
+    assert historical["refers_to"] == ["RESIDUAL_TRUE_NEW_13"]
+    assert historical["semantic_alias_valid"] is False
+    assert historical["current_qualification_state"] == (
+        "PENDING_QUALIFIED_OPEN_DEBT"
+    )
+    assert aliases["PREVIOUSLY_QUALIFIED_ACTIVE_DEBT_89"]["count"] == 89
+    assert aliases["PREVIOUSLY_QUALIFIED_ACTIVE_DEBT_89"]["aggregate_of"] == [
+        "A4_METHOD_REQUALIFICATION_STALE_83",
+        "A4_METHOD_QUALIFIED_CURRENT_3",
+        "TRIGO_OPTIONAL_EXTENSION_REQUALIFICATION_STALE_3",
+    ]
+    assert aliases["TSPE_GEO_REVIEW_PACKET_45"]["count"] == 45
+    assert aliases["TSPE_GEO_REVIEW_PACKET_45"]["aggregate_of"] == [
+        "TSPE_GEO_NEW_40",
+        "TSPE_GEO_REWRITTEN_STALE_APPROVAL_5",
+    ]
+    assert aliases["TSPE_GEO_REVIEW_PACKET_45"]["provenance_counts"] == {
+        "NEW": 40,
+        "REWRITTEN_STALE_APPROVAL": 5,
+    }
+    assert aliases["OTHER_CURRENT_REVIEW_DEBT"]["count"] == 2267
+
+
+def test_committed_partition_is_reproducible() -> None:
+    expected = _module().build_partition(ROOT)
+    assert json.loads(ARTIFACT.read_text(encoding="utf-8")) == expected
+
+
+def _write_ledger_manifest(root: Path, module, *, omit: Path | None = None) -> None:
+    for relative in module.LEDGERS:
+        if relative == omit:
+            continue
+        target = root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(
+            json.dumps({"artifact_type": "BLOCKING_REVIEW_DEBT_LEDGER"}),
+            encoding="utf-8",
+        )
+
+
+def test_blocking_review_debt_ledger_manifest_fails_closed(tmp_path: Path) -> None:
+    module = _module()
+    _write_ledger_manifest(tmp_path, module)
+    assert module._validated_ledger_manifest(tmp_path) == module.LEDGERS
+
+    unexpected = tmp_path / "audit/UNKNOWN_REVIEW_DEBT_1.json"
+    unexpected.write_text(
+        json.dumps({"artifact_type": "BLOCKING_REVIEW_DEBT_LEDGER"}),
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="registre.*inattendu"):
+        module._validated_ledger_manifest(tmp_path)
+
+    unexpected.unlink()
+    missing = module.LEDGERS[0]
+    (tmp_path / missing).unlink()
+    with pytest.raises(ValueError, match="registre.*absent"):
+        module._validated_ledger_manifest(tmp_path)

@@ -27,6 +27,8 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
+import re
+import subprocess
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,6 +67,33 @@ REWRITTEN_PREVIOUSLY_APPROVED_STEMS = frozenset(
 
 APPROVAL_FREEZE_SHA = "447915e8fee6b59e1c248c805e28d0fcdd234f0d"
 AUTHORED_STEMS = CREATED_STEMS | REWRITTEN_PREVIOUSLY_APPROVED_STEMS
+META_LINE = re.compile(r"^\s*%\s*META:")
+
+
+def _semantic_digest(text: str) -> str:
+    body = "\n".join(
+        line.rstrip() for line in text.splitlines() if not META_LINE.match(line)
+    ).strip()
+    return "sha256:" + hashlib.sha256(body.encode("utf-8")).hexdigest()
+
+
+def _historical_source(path: str) -> str | None:
+    process = subprocess.run(
+        ["git", "show", f"{APPROVAL_FREEZE_SHA}:{path}"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if process.returncode != 0:
+        return None
+    return process.stdout
+
+
+def _meta(text: str) -> dict[str, Any]:
+    if "META:" not in text:
+        return {}
+    return json.loads(text.split("META:", 1)[1].splitlines()[0].strip())
 
 
 def _inventory_module():
@@ -93,6 +122,20 @@ def build_ledger() -> dict[str, Any]:
         )
         stem = Path(path).stem
         rewritten = stem in REWRITTEN_PREVIOUSLY_APPROVED_STEMS
+        current_text = (ROOT / path).read_text(encoding="utf-8")
+        previous_text = _historical_source(path)
+        if rewritten:
+            if previous_text is None or _meta(previous_text).get("status") != "approved":
+                raise ValueError(f"ancienne approval introuvable: {path}")
+            previous_semantic_digest = _semantic_digest(previous_text)
+            current_semantic_digest = _semantic_digest(current_text)
+            if previous_semantic_digest == current_semantic_digest:
+                raise ValueError(f"objet déclaré réécrit mais corps inchangé: {path}")
+        else:
+            if previous_text is not None:
+                raise ValueError(f"objet déclaré NEW déjà présent au gel: {path}")
+            previous_semantic_digest = None
+            current_semantic_digest = _semantic_digest(current_text)
         entries.append(
             {
                 "object_id": anomaly.get("id") or stem,
@@ -107,9 +150,24 @@ def build_ledger() -> dict[str, Any]:
                 "human_review_required": True,
                 "release_blocking": True,
                 "release_acceptance": False,
-                "origin": "REWRITTEN" if rewritten else "CREATED",
+                "origin": (
+                    "REWRITTEN_PREVIOUSLY_APPROVED"
+                    if rewritten
+                    else "NEW_AUTHORED_UNREVIEWED"
+                ),
                 "status_before_rewrite": "approved" if rewritten else None,
                 "human_approval_invalidated_by_rewrite": rewritten,
+                "approval_state": "STALE" if rewritten else "NEVER_EXISTED",
+                "approval_freeze_sha": APPROVAL_FREEZE_SHA,
+                "previous_semantic_digest": previous_semantic_digest,
+                "current_semantic_digest": current_semantic_digest,
+                "semantic_digest_changed": (
+                    previous_semantic_digest != current_semantic_digest
+                    if rewritten
+                    else None
+                ),
+                "historical_source_absent_at_approval_freeze": not rewritten,
+                "evidence_chain_complete": True,
             }
         )
 
@@ -133,8 +191,14 @@ def build_ledger() -> dict[str, Any]:
         "chapter": CHAPTER,
         "count": len(entries),
         "counts_by_origin": {
-            "CREATED": sum(1 for row in entries if row["origin"] == "CREATED"),
-            "REWRITTEN": sum(1 for row in entries if row["origin"] == "REWRITTEN"),
+            "NEW_AUTHORED_UNREVIEWED": sum(
+                1 for row in entries if row["origin"] == "NEW_AUTHORED_UNREVIEWED"
+            ),
+            "REWRITTEN_PREVIOUSLY_APPROVED": sum(
+                1
+                for row in entries
+                if row["origin"] == "REWRITTEN_PREVIOUSLY_APPROVED"
+            ),
         },
         "approval_freeze_sha": APPROVAL_FREEZE_SHA,
         "human_approvals_invalidated": sorted(
@@ -144,6 +208,33 @@ def build_ledger() -> dict[str, Any]:
         + hashlib.sha256(
             json.dumps(fingerprints, separators=(",", ":")).encode("utf-8")
         ).hexdigest(),
+        "new_fingerprint_set_digest": "sha256:"
+        + hashlib.sha256(
+            json.dumps(
+                sorted(
+                    row["fingerprint"]
+                    for row in entries
+                    if row["origin"] == "NEW_AUTHORED_UNREVIEWED"
+                ),
+                separators=(",", ":"),
+            ).encode("utf-8")
+        ).hexdigest(),
+        "rewritten_stale_fingerprint_set_digest": "sha256:"
+        + hashlib.sha256(
+            json.dumps(
+                sorted(
+                    row["fingerprint"]
+                    for row in entries
+                    if row["origin"] == "REWRITTEN_PREVIOUSLY_APPROVED"
+                ),
+                separators=(",", ":"),
+            ).encode("utf-8")
+        ).hexdigest(),
+        "rewritten_approval_evidence_chain_complete": all(
+            row["evidence_chain_complete"]
+            for row in entries
+            if row["origin"] == "REWRITTEN_PREVIOUSLY_APPROVED"
+        ),
         "human_review_required": True,
         "release_blocking": True,
         "release_acceptance": False,
