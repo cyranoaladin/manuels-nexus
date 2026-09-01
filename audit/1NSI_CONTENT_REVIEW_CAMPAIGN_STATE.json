@@ -2,7 +2,7 @@
  "artifact_name": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE",
  "created": "2026-08-19",
  "status": "PENDING_REVIEW_RERUN",
- "reason": "Campagne de revue de contenu 1NSI scellée (commit 5d8bedd9, 349 sources, reviewers/receipts épinglés) ; depuis, des lots scellés ont légitimement déplacé le corpus (complétion des META A4.1 rendant visibles ~603 objets, renommage AGT→APT, arbitrage ADGK, prérequis R-codes au contrat ADGK, fiches méthodes de campagne). La re-exécution de la revue (nouveau run, nouveaux receipts, confirmation humaine) est un LOT à part entière, NON démarré (clôture A4 §17). Le présent artefact fige l'état de dérive EXACT : tout écart supplémentaire doit refaire échouer les tests. Derive supplementaire du 2026-08-30, mesuree exactement : deux objets s'ajoutent, 1NSI-TC-EVAL-A-corrige et 1NSI-TC-EVAL-B-corrige, les deux evaluations du chapitre etant livrees sans corrige. Derive du 2026-08-31 : la reconstruction couplee des deux chapitres d'algorithmique supprime ou supersede 93 objets ; 861 sources, dont 851 objets, restent observables. Les contenus nouveaux ou reecrits demeurent en dette humaine ouverte et aucune finding historique n'est promue. Le bloc scelle reste intact.",
+ "reason": "Campagne de revue de contenu 1NSI scellée (commit 5d8bedd9, 349 sources, reviewers/receipts épinglés) ; depuis, des lots scellés ont légitimement déplacé le corpus (complétion des META A4.1 rendant visibles ~603 objets, renommage AGT→APT, arbitrage ADGK, prérequis R-codes au contrat ADGK, fiches méthodes de campagne). La re-exécution de la revue (nouveau run, nouveaux receipts, confirmation humaine) est un LOT à part entière, NON démarré (clôture A4 §17). Le présent artefact fige l'état de dérive EXACT : tout écart supplémentaire doit refaire échouer les tests. Derive supplementaire du 2026-08-30, mesuree exactement : deux objets s'ajoutent, 1NSI-TC-EVAL-A-corrige et 1NSI-TC-EVAL-B-corrige, les deux evaluations du chapitre etant livrees sans corrige. Derive du 2026-08-31 : la reconstruction couplee des deux chapitres d'algorithmique supprime ou supersede 93 objets ; 861 sources, dont 851 objets, restent observables. Les contenus nouveaux ou reecrits demeurent en dette humaine ouverte et aucune finding historique n'est promue. Le bloc scelle reste intact. Derive du 2026-09-01, mesuree exactement et de deux causes distinctes, toutes deux deja commitees sans rafraichissement de cet instantane. CAUSE 1 (21521067) : le contrat ADGK portait un prerequis d'analyse mathematique, « Derivation locale : nombre derive et tangente », absent du programme de Premiere NSI ; son retrait deplace adgk_contract_sha256. CAUSE 2 (a08f7ed0) : sept objets de PARCOURS-TRIS portaient encore l'identite AGT alors que leurs fichiers et leurs recus d'execution etaient deja APT ; l'alignement est un renommage un-pour-un, sans objet gagne ni perdu — sources_count reste 861 et algorithm_scope_count reste 65, seuls les digests d'ensemble bougent. Consequence a garder VISIBLE : les findings scellees de ces sept objets designent desormais une identite qui n'existe plus. ids_only_in_findings passe de 12 a 19 et ids_only_in_sources de 524 a 531 : la revue humaine de ces sept objets est a refaire dans le lot de re-execution, elle n'est pas transferee par le renommage.",
  "no_go_carrier": "release-strict / publication_approval du registre de revue (human_confirmation_required)",
  "sealed": {
   "sealing_commit": "5d8bedd9b20d042fcc25eac7d601dcc6ff44cb99",
@@ -14,20 +14,27 @@
  "observed": {
   "protocol_digest_current": "sha256:5ebd94ab830266dd68ade18a9afcf5327b5835bc1ee69b46dafb63807ba70de2",
   "sources_count": 861,
-  "sources_ids_digest": "sha256:e56cbfa0acf3685f457f100aec5fae950cad23908f6212498f47a43e80a3eab2",
+  "sources_ids_digest": "sha256:565758d105188eac1527efc149e3436a4682ffdd00356def8e76e836fc96cb6a",
   "object_sources_count": 851,
   "algorithm_scope_count": 65,
-  "algorithm_scope_ids_digest": "sha256:f11e0434c4e6f1bc5dabbf60096b3a2101f62358c7b87f6a6267d970c95cc298",
+  "algorithm_scope_ids_digest": "sha256:120ad8ad85215675267576d9006a100834ce6c0d80e59956f00ba13822297f9e",
   "policy_sha256": "sha256:0f92fe4a8acc3e04a7c383205d04a8e24f44baedd40ce86f28195b062a87d9bf",
   "findings_sha256": "sha256:9687cb06fc791494a147138b5d23d484c4b827d92ee48d43318cb59ebba612c1",
   "registry_sha256": "sha256:7bb8569aea320f2fe57b19d975cc34b1fffa46e0c5a137839b3cf49b8342c580",
-  "adgk_contract_sha256": "sha256:ae4500318bc1f11658dbf35153e79ac6f50b3e0008ef2e9a69e713267c607a5b",
+  "adgk_contract_sha256": "sha256:b66809a4f8fd0dc319bfc991c37e607a2578c643fbf8702f3520ca87ea1ac5ec",
   "ids_only_in_findings": [
    "1NSI-AGT-CO-001",
    "1NSI-AGT-CO-002",
    "1NSI-AGT-CO-003",
    "1NSI-AGT-CO-004",
    "1NSI-AGT-CO-005",
+   "1NSI-AGT-COURS-C1",
+   "1NSI-AGT-COURS-C2",
+   "1NSI-AGT-COURS-C3",
+   "1NSI-AGT-EVAL-A",
+   "1NSI-AGT-EVAL-A-corrige",
+   "1NSI-AGT-EVAL-B",
+   "1NSI-AGT-EVAL-B-corrige",
    "1NSI-AGT-EX-001",
    "1NSI-AGT-EX-002",
    "1NSI-AGT-EX-003",
@@ -36,7 +43,7 @@
    "1NSI-AGT-RE-C5",
    "1NSI-AGT-RE-C5-CORRIGE"
   ],
-  "ids_only_in_sources_count": 524,
-  "ids_only_in_sources_digest": "sha256:cf026898b2e15c3ddf43a0071f4e7cc532077d539f3d72db28e8f8262c29ee8d"
+  "ids_only_in_sources_count": 531,
+  "ids_only_in_sources_digest": "sha256:0c42e6f989bafb7088267e6dab6cd66033883f68e16c1b2bc7a0dacc2420b525"
  }
 }

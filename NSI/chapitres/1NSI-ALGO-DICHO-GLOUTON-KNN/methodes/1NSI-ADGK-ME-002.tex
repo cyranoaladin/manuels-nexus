@@ -17,10 +17,12 @@
 \begin{python}
 def rendu_monnaie(montant, pieces=(200, 100, 50, 20, 10, 5, 2, 1)):
     rendu = []
-    for p in pieces:            # pieces triees par valeur decroissante
+    for p in sorted(pieces, reverse=True):   # le critere glouton d'abord
         while montant >= p:     # meilleur choix immediat : la plus grande piece
             montant -= p
             rendu.append(p)
+    if montant != 0:            # un rendu partiel serait une reponse fausse
+        raise ValueError("l'algorithme glouton n'a pas trouve de rendu exact")
     return rendu
 
 rendu_monnaie(263)   # [200, 50, 10, 2, 1] : 5 pieces, total 263

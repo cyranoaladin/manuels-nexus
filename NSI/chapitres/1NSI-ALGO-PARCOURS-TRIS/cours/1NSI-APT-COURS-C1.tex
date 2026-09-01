@@ -10,20 +10,21 @@
 \propriete[Recherche d'une occurrence]{
   Rechercher une occurrence d'une valeur dans un tableau consiste à parcourir le tableau et
   à s'arrêter (en renvoyant l'indice trouvé) dès que la valeur est rencontrée. Si elle
-  n'apparaît nulle part, on renvoie une valeur conventionnelle (par exemple $-1$).
+  n'apparaît nulle part, on renvoie une valeur conventionnelle qui ne peut pas être
+  confondue avec un indice : ici \lstinline{None}.
 }
 
 \begin{codereference}{Recherche d'une occurrence (coût linéaire)}
 \begin{python}
 def recherche_occurrence(tableau, valeur):
-    """Renvoie l'indice de la premiere occurrence de `valeur`, ou -1 si absente."""
+    """Renvoie l'indice de la premiere occurrence de `valeur`, ou None si elle est absente."""
     for i in range(len(tableau)):
         if tableau[i] == valeur:
             return i
-    return -1
+    return None
 
 print(recherche_occurrence([5, 3, 8, 1], 8))   # 2
-print(recherche_occurrence([5, 3, 8, 1], 99))  # -1
+print(recherche_occurrence([5, 3, 8, 1], 99))  # None
 \end{python}
 \end{codereference}
 
@@ -32,10 +33,10 @@ print(recherche_occurrence([5, 3, 8, 1], 99))  # -1
 %     for i in range(len(tableau)):
 %         if tableau[i] == valeur:
 %             return i
-%     return -1
+%     return None
 % assert recherche_occurrence([5, 3, 8, 1], 8) == 2
-% assert recherche_occurrence([5, 3, 8, 1], 99) == -1
-% assert recherche_occurrence([], 1) == -1
+% assert recherche_occurrence([5, 3, 8, 1], 99) is None
+% assert recherche_occurrence([], 1) is None
 % END-VERIFY
 
 \propriete[Coût de la recherche]{

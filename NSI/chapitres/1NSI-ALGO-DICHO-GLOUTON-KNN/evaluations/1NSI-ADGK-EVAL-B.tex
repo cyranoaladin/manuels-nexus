@@ -67,7 +67,11 @@ fleurs = [
 %                  for (x, y, classe) in points_classes]
 %     distances.sort(key=lambda d: d[0])
 %     classes = [c for (_, c) in distances[:k]]
-%     return max(set(classes), key=classes.count)
+%     classe_majoritaire = classes[0]
+%     for classe in classes:
+%         if classes.count(classe) > classes.count(classe_majoritaire):
+%             classe_majoritaire = classe
+%     return classe_majoritaire
 % fleurs = [
 %     (5, 1.5, "Iris"), (5.2, 1.6, "Iris"), (4.8, 1.4, "Iris"),
 %     (6.5, 2.2, "Rose"), (6.8, 2.3, "Rose"), (6.3, 2.1, "Rose"),

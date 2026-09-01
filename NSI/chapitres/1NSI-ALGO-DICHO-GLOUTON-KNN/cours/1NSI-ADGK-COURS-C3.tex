@@ -11,6 +11,9 @@ nouveaux éléments à partir d'exemples déjà classés.}
   distance, par exemple la distance euclidienne), et en lui attribuant la classe
   \textbf{majoritaire} parmi ces $k$ voisins. Le paramètre $k$ doit être entier et vérifier
   $1\leqslant k\leqslant n$, où $n$ est le nombre d'éléments déjà classés.
+  En cas d'\textbf{égalité} entre plusieurs classes, c'est celle du \textbf{voisin le plus
+  proche} parmi les classes à égalité qui l'emporte : la méthode tranche avec son propre
+  critère, la distance, et le résultat est donc toujours reproductible.
 }
 
 \propriete[Distance euclidienne entre deux points]{
@@ -43,7 +46,11 @@ def k_plus_proches_voisins(points_classes, nouveau_point, k):
     distances.sort(key=lambda d: d[0])
     k_plus_proches = distances[:k]
     classes = [c for (_, c) in k_plus_proches]
-    return max(set(classes), key=classes.count)
+    classe_majoritaire = classes[0]
+    for classe in classes:
+        if classes.count(classe) > classes.count(classe_majoritaire):
+            classe_majoritaire = classe
+    return classe_majoritaire
 
 
 points = [
@@ -68,7 +75,11 @@ print(k_plus_proches_voisins(points, (8.5, 8.5), 3))
 %     distances.sort(key=lambda d: d[0])
 %     k_plus_proches = distances[:k]
 %     classes = [c for (_, c) in k_plus_proches]
-%     return max(set(classes), key=classes.count)
+%     classe_majoritaire = classes[0]
+%     for classe in classes:
+%         if classes.count(classe) > classes.count(classe_majoritaire):
+%             classe_majoritaire = classe
+%     return classe_majoritaire
 % points = [
 %     (1, 1, "A"), (2, 1, "A"), (1, 2, "A"),
 %     (8, 8, "B"), (9, 8, "B"), (8, 9, "B"),

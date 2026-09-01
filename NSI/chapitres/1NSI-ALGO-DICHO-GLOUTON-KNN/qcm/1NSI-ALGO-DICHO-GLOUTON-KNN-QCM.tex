@@ -98,7 +98,7 @@ Q6 & C3 & \textbf{B} \\
   \begin{itemize}
     \item \textbf{A} — Le tri est une PRÉCONDITION, supposée vraie avant l'appel. Le variant, lui, est un outil de preuve de terminaison. \emph{Renvoi : C1, variant de boucle.}
     \item \textbf{C} — L'élève confond terminaison et correction. Le variant garantit que l'algorithme s'arrête ; il ne dit rien de la justesse du résultat, et la valeur peut d'ailleurs être absente. \emph{Renvoi : C1, terminaison et correction.}
-    \item \textbf{D} — Le variant est divisé par deux à chaque tour, ce qui donne un coût logarithmique, et non linéaire. \emph{Renvoi : C1, coût de la dichotomie.}
+    \item \textbf{D} — À chaque tour, la taille de la zone de recherche diminue approximativement de moitié : cela explique le coût logarithmique, sans être le rôle logique du variant. \emph{Renvoi : C1, coût de la dichotomie.}
   \end{itemize}
   \item \textbf{Q3}
   \begin{itemize}
@@ -121,8 +121,8 @@ Q6 & C3 & \textbf{B} \\
   \item \textbf{Q6}
   \begin{itemize}
     \item \textbf{A} — L'algorithme fonctionne pour tout $k$ compris entre $1$ et l'effectif total ; ce paramètre est un réglage, pas une contrainte. \emph{Renvoi : C3, choix du paramètre k.}
-    \item \textbf{C} — Avec un tel $k$, tous les points votent pour chaque prédiction : la réponse devient la classe majoritaire globale, identique pour n'importe quel élément. \emph{Renvoi : C3, choix du paramètre k.}
-    \item \textbf{D} — Le calcul est au contraire plus lourd, puisqu'il faut trier et considérer l'ensemble des distances. \emph{Renvoi : C3, choix du paramètre k.}
+    \item \textbf{C} — Avec un tel $k$, tous les points votent pour chaque prédiction : la réponse devient la classe majoritaire globale, sans plus rien devoir à la proximité — et faute de majorité globale, c'est le seul voisin le plus proche qui décide. \emph{Renvoi : C3, choix du paramètre k.}
+    \item \textbf{D} — Les distances à tous les points sont calculées quel que soit $k$ : un petit $k$ n'en dispense pas. Augmenter $k$ n'allège donc rien, et alourdit même légèrement la sélection des voisins et le vote. \emph{Renvoi : C3, choix du paramètre k.}
   \end{itemize}
 \end{itemize}
 \fi

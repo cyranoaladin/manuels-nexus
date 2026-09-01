@@ -47,9 +47,13 @@
 \lstinline{[5, 2, 9, 1, 7]} : \lstinline{[]}, puis \lstinline{[1]}, \lstinline{[1, 2]},
 \lstinline{[1, 2, 5]}. Chacune de ces zones est bien triée : l'énoncé A est vrai.
 
-\textbf{2.} Oui, mais seulement parce qu'à la sortie $i$ vaut $n-1$ et que la zone couvre
-alors tout le tableau sauf sa dernière case, laquelle ne peut être qu'à sa place. En
-revanche l'énoncé A ne permet pas de démontrer la \textbf{conservation} : sachant seulement
+\textbf{2.} \textbf{Non.} À la sortie, l'énoncé A donne seulement que
+\lstinline{tableau[0:n-1]} est trié ; il ne dit rien de \lstinline{tableau[n-1]}, dont
+rien ne garantit qu'il soit supérieur ou égal aux précédents. Un état tel que
+\lstinline{[1, 2, 5, 0]} satisfait A sans être trié. Affirmer que la dernière case « ne
+peut être qu'à sa place » revient à réutiliser ce que l'on sait de l'algorithme, pas à le
+déduire de A. L'énoncé A ne permet pas non plus de démontrer la \textbf{conservation} :
+sachant seulement
 que \lstinline{tableau[0:i]} est trié, rien n'interdit qu'un élément restant soit plus petit
 que ceux déjà placés, auquel cas placer le minimum en case $i$ romprait l'ordre. Il manque
 l'information qui garantit que les éléments déjà placés sont définitifs.

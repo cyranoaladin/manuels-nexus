@@ -61,12 +61,12 @@
 
 \item[] \textbf{Capacité C6}
 
-\item \textbf{[Q6]} Sur un tableau de taille $n$, le tri par sélection effectue :
+\item \textbf{[Q6]} Au début de l'itération $i$ du tri par sélection, quel énoncé donne les deux clauses de l'invariant utile à la preuve ?
   \begin{enumerate}[label=\Alph*.]
-    \item un nombre de comparaisons qui varie selon l'ordre initial.
-    \item zéro comparaison si le tableau est déjà trié.
-    \item toujours le même nombre de comparaisons, quel que soit l'ordre initial.
-    \item un nombre de comparaisons linéaire, $O(n)$.
+    \item \code{tableau[0:i]} est trié, et chacun de ses éléments est inférieur ou égal à tous ceux de \code{tableau[i:n]}.
+    \item \code{tableau[0:i]} est trié, sans aucune relation exigée avec \code{tableau[i:n]}.
+    \item \code{tableau[i:n]} est trié, et chacun de ses éléments est inférieur ou égal à tous ceux de \code{tableau[0:i]}.
+    \item le tableau entier est trié, et les deux zones contiennent le même nombre d'éléments.
   \end{enumerate}
 
 \end{enumerate}
@@ -86,7 +86,7 @@ Q2 & C2 & \textbf{B} \\
 Q3 & C3 & \textbf{C} \\
 Q4 & C4 & \textbf{B} \\
 Q5 & C5 & \textbf{D} \\
-Q6 & C6 & \textbf{C} \\
+Q6 & C6 & \textbf{A} \\
 \hline
 \end{tabular}
 \end{center}
@@ -126,9 +126,9 @@ Q6 & C6 & \textbf{C} \\
   \end{itemize}
   \item \textbf{Q6}
   \begin{itemize}
-    \item \textbf{A} — L'élève transpose le comportement du tri par insertion, qui s'arrête tôt sur une entrée presque triée. La sélection parcourt intégralement la partie restante à chaque étape, sans condition d'arrêt anticipé. \emph{Renvoi : C6, coût du tri par sélection.}
-    \item \textbf{B} — L'algorithme ne teste jamais si le tableau est déjà trié : il cherche le minimum de la partie restante dans tous les cas. \emph{Renvoi : C6, coût du tri par sélection.}
-    \item \textbf{D} — Chacune des $n$ étapes parcourt la partie restante : le total est de l'ordre de $n^2/2$ comparaisons, donc quadratique. \emph{Renvoi : C6, coût du tri par sélection.}
+    \item \textbf{B} — Cette propriété ne donne que la première clause. Pour que les positions du préfixe soient définitives, ses éléments doivent aussi être inférieurs ou égaux à tous ceux de la zone restante. \emph{Renvoi : C6, invariant du tri par sélection.}
+    \item \textbf{C} — Les deux zones sont inversées : le préfixe est déjà trié, tandis que le suffixe reste à traiter. \emph{Renvoi : C6, invariant du tri par sélection.}
+    \item \textbf{D} — Le tableau entier n'est trié qu'à la sortie. Pendant la boucle, les deux zones n'ont en général ni la même taille ni le même rôle. \emph{Renvoi : C6, invariant du tri par sélection.}
   \end{itemize}
 \end{itemize}
 \fi

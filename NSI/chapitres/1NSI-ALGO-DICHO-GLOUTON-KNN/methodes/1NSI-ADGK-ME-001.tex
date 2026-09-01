@@ -10,7 +10,7 @@
   \item Compare \lstinline{t[m]} à la valeur cherchée \lstinline{v} :
     si \lstinline{t[m] == v}, c'est trouvé ; si \lstinline{t[m] < v}, la valeur est à droite : \lstinline{g = m + 1} ;
     sinon elle est à gauche : \lstinline{d = m - 1}.
-  \item Si la boucle se termine sans trouver, renvoie \lstinline{None}.
+  \item Si la boucle se termine sans trouver, renvoie \lstinline{-1}.
   \item \textbf{Terminaison} : pose le variant $V = d - g$. C'est un entier, il est
     positif ou nul tant que la boucle tourne, et chaque tour le fait
     \textbf{strictement décroître} (le milieu est exclu de la nouvelle zone).
@@ -29,14 +29,14 @@ def recherche_dichotomique(t, v):
             g = m + 1        # le milieu m est exclu
         else:
             d = m - 1        # le milieu m est exclu
-    return None
+    return -1
 
 t = [2, 5, 7, 11, 13, 17, 19, 23]
 recherche_dichotomique(t, 13)   # renvoie 4
-recherche_dichotomique(t, 4)    # renvoie None
+recherche_dichotomique(t, 4)    # renvoie -1
 \end{python}
 Sur \lstinline{t} (8 valeurs), chercher 13 fait décroître le variant $d-g$ :
-$7 \to 3 \to 1$ — trois tours suffisent, contre jusqu'à 8 pour un parcours séquentiel.
+$7 \to 3 \to 0$ — trois tours suffisent, contre jusqu'à 8 pour un parcours séquentiel.
 
 \textbf{Pièges :}
 \begin{itemize}

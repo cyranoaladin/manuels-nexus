@@ -2,7 +2,7 @@
  "artifact_name": "1NSI_STATUS_GOVERNANCE_PENDING",
  "created": "2026-08-19",
  "status": "PENDING_HUMAN_REVIEW",
- "reason": "La transition de statuts 1NSI a été figée (339 objets, a2013a12) AVANT la complétion des META (A4.1) qui a rendu visibles ~603 objets hérités portant le statut de génération 'approved' — statut INTERDIT par la politique scellée, qu'aucune promotion machine ne peut ni bénir ni rétrograder en masse (décision humaine requise). La reconstruction couplee du 2026-08-31 supprime ou supersede 93 objets et laisse 851 objets. Ses 36 objets nouveaux ou reecrits sont declares needs_review, jamais approuves ; ils portent la dette humaine de audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json. Trois cours APT verified attendent encore une liaison de recu d'execution current. Ce registre fige l'etat EXACT ; toute derive supplementaire echoue.",
+ "reason": "La transition de statuts 1NSI a été figée (339 objets, a2013a12) AVANT la complétion des META (A4.1) qui a rendu visibles ~603 objets hérités portant le statut de génération 'approved' — statut INTERDIT par la politique scellée, qu'aucune promotion machine ne peut ni bénir ni rétrograder en masse (décision humaine requise). La reconstruction couplee du 2026-08-31 supprime ou supersede 93 objets et laisse 851 objets. Ses 36 objets nouveaux ou reecrits sont declares needs_review, jamais approuves ; ils portent la dette humaine de audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json. Les trois cours APT verified n'ont plus de lacune de preuve : leurs recus d'execution portaient deja l'identite APT, seule la META des .tex etait restee sur l'ancienne identite AGT et rompait la liaison (a08f7ed0). La liaison est retablie sans qu'aucun statut soit promu, et scripts/verify_python.py --check rejoue les deux chapitres au vert. Ce registre fige l'etat EXACT ; toute derive supplementaire echoue.",
  "no_go_carrier": "release-strict — les blocking_statuses de l'inventaire portent déjà ces objets",
  "observed_counts": {
   "verified": 149,
@@ -13,21 +13,5 @@
  "objects_total": 851,
  "prohibited_status_objects_count": 485,
  "prohibited_status_objects_digest": "sha256:360dc2646153cf9b8482eedd73af4d55e2da9050843d2a961eb892a83bbf9687",
- "evidence_gaps": [
-  {
-   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-APT-COURS-C1.tex",
-   "status": "verified",
-   "verdict": null
-  },
-  {
-   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-APT-COURS-C2.tex",
-   "status": "verified",
-   "verdict": null
-  },
-  {
-   "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-APT-COURS-C3.tex",
-   "status": "verified",
-   "verdict": null
-  }
- ]
+ "evidence_gaps": []
 }

@@ -20,7 +20,11 @@ def k_plus_proches_voisins(points_classes, nouveau_point, k):
     distances.sort(key=lambda d: d[0])
     k_plus_proches = distances[:k]
     classes = [c for (_, c) in k_plus_proches]
-    return max(set(classes), key=classes.count)
+    classe_majoritaire = classes[0]
+    for classe in classes:
+        if classes.count(classe) > classes.count(classe_majoritaire):
+            classe_majoritaire = classe
+    return classe_majoritaire
 
 
 points = [

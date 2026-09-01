@@ -1,0 +1,106 @@
+{
+ "artifact_type": "red_head_classification",
+ "schema_version": 1,
+ "scope": "TARGETED_NOT_FULL_SUITE",
+ "why_targeted": "La suite supportee complete n'etait PAS en cours au demarrage de cette session : aucun processus pytest, arbre suivi propre a un detail pres. La classification porte donc sur les sous-ensembles reellement executes, nommes ci-dessous, et jamais sur des compteurs devines.",
+ "source_sha": "6fc1264192b03f27a5b8c83ba06da712069c88d9",
+ "branch": "codex/t3-publish-readiness-current",
+ "worktree": ".worktrees/t3-publish-readiness",
+ "tree_status_before": {
+  "clean": false,
+  "modified": [
+   "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.json",
+   "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.json",
+   "NSI/tests/test_1nsi_algorithmic_p0_regressions.py"
+  ],
+  "note": "travail non commite laisse par la session precedente, interrompu en plein milieu : le .json de PARCOURS-TRIS n'etait meme pas du JSON valide (« Invalid \\escape » ligne 69 : `\\code` au lieu de `\\\\code`), et son .tex publiable n'avait pas ete regenere."
+ },
+ "observed_runs": [
+  {
+   "target": "NSI/tests",
+   "tree": "HEAD propre, worktree detache dedie",
+   "command": "python3 -m pytest NSI/tests -q --no-header -p no:randomly",
+   "collected": 2117,
+   "passed": 2102,
+   "failed": 15,
+   "errors": 0,
+   "rc": 1
+  },
+  {
+   "target": "tests -k 'qcm or richness or coupled or 1nsi or nsi'",
+   "tree": "arbre de travail, apres correction des QCM",
+   "command": "python3 -m pytest tests -q --no-header -p no:randomly -k 'qcm or richness or coupled or 1nsi or nsi'",
+   "collected": 409,
+   "passed": 399,
+   "failed": 10,
+   "deselected": 1938,
+   "errors": 0,
+   "rc": 1,
+   "duration_seconds": 302.14
+  }
+ ],
+ "causes": [
+  {
+   "cause_id": "CAUSE_1_CAMPAIGN_STATE_NOT_REFRESHED",
+   "failing_tests": 14,
+   "failing_files": [
+    "NSI/tests/test_1nsi_content_reviews.py"
+   ],
+   "single_root_cause": true,
+   "stale_artifact": "audit/1NSI_CONTENT_REVIEW_CAMPAIGN_STATE.json",
+   "explanation": "Deux commits deja poses ont deplace le corpus sans rafraichir l'instantane de derive. 21521067 a retire du contrat ADGK un prerequis d'analyse mathematique (« Derivation locale : nombre derive et tangente »), absent du programme de Premiere NSI : adgk_contract_sha256 a bouge. a08f7ed0 a aligne sept objets de PARCOURS-TRIS de l'identite AGT vers APT : les digests d'ensemble ont bouge, pas les cardinalites.",
+   "proof_of_one_to_one_rename": {
+    "removed": [
+     "1NSI-AGT-COURS-C1",
+     "1NSI-AGT-COURS-C2",
+     "1NSI-AGT-COURS-C3",
+     "1NSI-AGT-EVAL-A",
+     "1NSI-AGT-EVAL-A-corrige",
+     "1NSI-AGT-EVAL-B",
+     "1NSI-AGT-EVAL-B-corrige"
+    ],
+    "added": [
+     "1NSI-APT-COURS-C1",
+     "1NSI-APT-COURS-C2",
+     "1NSI-APT-COURS-C3",
+     "1NSI-APT-EVAL-A",
+     "1NSI-APT-EVAL-A-corrige",
+     "1NSI-APT-EVAL-B",
+     "1NSI-APT-EVAL-B-corrige"
+    ],
+    "sources_count_before": 861,
+    "sources_count_after": 861,
+    "algorithm_scope_count_before": 65,
+    "algorithm_scope_count_after": 65
+   },
+   "review_debt_consequence": "Les findings scellees de ces sept objets designent maintenant une identite qui n'existe plus : ids_only_in_findings passe de 12 a 19. Le renommage NE TRANSFERE PAS la revue humaine ; elle est a refaire dans le lot de re-execution.",
+   "classification": "STALE_DERIVED_ARTIFACT_NOT_A_CONTENT_DEFECT"
+  },
+  {
+   "cause_id": "CAUSE_2_STATUS_REGISTRY_DECLARES_CLOSED_GAPS",
+   "failing_tests": 1,
+   "failing_files": [
+    "NSI/tests/test_1nsi_status_governance.py"
+   ],
+   "stale_artifact": "audit/1NSI_STATUS_GOVERNANCE_PENDING.json",
+   "explanation": "Le registre declarait trois lacunes de preuve d'execution sur 1NSI-APT-COURS-C1/C2/C3. Elles n'existent plus : les recus portaient DEJA l'identite APT, seule la META des .tex etait restee sur AGT et rompait la liaison. a08f7ed0 l'a retablie. Aucun statut n'est promu ; verify_python.py --check rejoue les deux chapitres au vert (rc=0).",
+   "classification": "STALE_DERIVED_ARTIFACT_NOT_A_CONTENT_DEFECT"
+  },
+  {
+   "cause_id": "CAUSE_3_CONSUMERS_OF_CHANGED_QCM_CONTENT",
+   "failing_tests": 10,
+   "failing_files": [
+    "tests/test_build_residual_true_new_forensics.py",
+    "tests/test_inventory_collection.py",
+    "tests/test_nsi_coupled_review_debt.py",
+    "tests/test_nsi_cross_discipline_ledger.py",
+    "tests/test_publish_readiness_chapter_matrix.py",
+    "tests/test_qcm_review_proof_reconciliation.py",
+    "tests/test_qcm_scientific_answer_key_audit.py"
+   ],
+   "explanation": "Cascade attendue : des artefacts derives du corpus ont ete calcules avant les corrections de contenu de cette session. Ils doivent etre REGENERES, jamais edites a la main.",
+   "classification": "STALE_DERIVED_ARTIFACT_TO_REGENERATE"
+  }
+ ],
+ "no_cause_is_masked_by_a_later_fix": true
+}

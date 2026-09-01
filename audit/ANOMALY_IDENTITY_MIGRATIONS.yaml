@@ -1,5 +1,5 @@
 artifact_type: anomaly_identity_migrations
-control_digest: sha256:2faff6133089843895194390c46568794f9203ab049185ce444a8bd034448fa6
+control_digest: sha256:d6f3368acb87a47e09a30504ea99328ea953ee7c620605193e5f82504c082ce1
 fingerprint_schema_version: 1
 migrations:
   3352c285c8971a9a:
@@ -103,25 +103,6 @@ migrations:
       new_token: 1NSI-APT-
       old_token: 1NSI-AGT-
       replacement_count: 3
-  6ef7e4396d2d78fa:
-    category: blocking_statuses
-    chapter: 1NSI-ALGO-PARCOURS-TRIS
-    current_fingerprint: 6ef7e4396d2d78fa
-    current_object_id: 1NSI-APT-COURS-C1
-    current_source: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-APT-COURS-C1.tex
-    current_source_sha256: sha256:0366416d46ff0e96e6b7622685e5a4a59599d8551842c1a0df172cd67b7f44bd
-    manual: 1NSI
-    object_type: cours
-    previous_fingerprint: b1b11f28b3c73674
-    previous_object_id: 1NSI-AGT-COURS-C1
-    previous_source: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C1.tex
-    previous_source_sha256: sha256:f0735348410aab8f6243d724873a313abe6b001eab6fd497ebaec0359002f44c
-    status: verified
-    transform:
-      kind: EXACT_IDENTIFIER_TOKEN_SUBSTITUTION
-      new_token: 1NSI-APT-
-      old_token: 1NSI-AGT-
-      replacement_count: 1
   8c73d69a6c3f46c4:
     category: blocking_statuses
     chapter: 1NSI-ALGO-PARCOURS-TRIS

@@ -66,7 +66,11 @@ animaux = [
 %                  for (x, y, classe) in points_classes]
 %     distances.sort(key=lambda d: d[0])
 %     classes = [c for (_, c) in distances[:k]]
-%     return max(set(classes), key=classes.count)
+%     classe_majoritaire = classes[0]
+%     for classe in classes:
+%         if classes.count(classe) > classes.count(classe_majoritaire):
+%             classe_majoritaire = classe
+%     return classe_majoritaire
 % animaux = [
 %     (5, 30, "Chat"), (6, 32, "Chat"), (4, 28, "Chat"),
 %     (30, 80, "Chien"), (32, 85, "Chien"), (28, 78, "Chien"),

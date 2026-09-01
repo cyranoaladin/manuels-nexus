@@ -9,7 +9,7 @@
     $d^2 = (x_1-x_2)^2 + (y_1-y_2)^2$ suffit (inutile de calculer la racine carrée).
   \item Calcule la distance de la cible à \textbf{chaque} donnée du jeu.
   \item Trie les données par distance croissante et garde les $k$ premières : ce sont les $k$ plus proches voisins.
-  \item Compte les classes parmi ces $k$ voisins et renvoie la \textbf{classe majoritaire}.
+  \item Compte les classes parmi ces $k$ voisins et renvoie la \textbf{classe majoritaire}. En cas d'égalité, garde celle du \textbf{voisin le plus proche} : la liste étant déjà triée par distance, il suffit de ne remplacer la classe retenue que sur un compte \textbf{strictement} supérieur.
   \item Choisis $k$ \textbf{impair} (pour deux classes) afin d'éviter les égalités, et teste plusieurs valeurs de $k$.
 \end{enumerate}
 
@@ -21,7 +21,11 @@ def knn_classe(donnees, cible, k):
                  key=lambda p: (p[0]-cible[0])**2 + (p[1]-cible[1])**2)
     voisins = tri[:k]
     classes = [c for _, _, c in voisins]
-    return max(set(classes), key=classes.count)
+    classe_majoritaire = classes[0]
+    for classe in classes:
+        if classes.count(classe) > classes.count(classe_majoritaire):
+            classe_majoritaire = classe
+    return classe_majoritaire
 
 pts = [(1, 1, 'A'), (2, 1, 'A'), (1, 2, 'A'),
        (6, 6, 'B'), (7, 6, 'B'), (6, 7, 'B')]
@@ -31,9 +35,11 @@ knn_classe(pts, (6, 5), 3)   # 'B'
 
 \textbf{Pièges :}
 \begin{itemize}
-  \item Prendre $k$ pair avec deux classes : une égalité $k/2$--$k/2$ rend la prédiction arbitraire.
+  \item Prendre $k$ pair avec deux classes : une égalité $k/2$--$k/2$ se joue alors sur le seul voisin le plus proche, alors qu'un $k$ impair donne une majorité franche.
   \item Prendre $k = 1$ : très sensible au bruit (un seul point aberrant décide) ;
-    prendre $k = n$ : on renvoie toujours la classe majoritaire globale, sans tenir compte de la cible.
+    prendre $k = n$ : on renvoie la classe majoritaire globale, sans tenir compte de la
+    cible — et s'il n'y a pas de majorité globale, c'est le seul voisin le plus proche qui
+    décide, les autres votes ne servant plus à rien.
   \item Comparer des attributs d'échelles très différentes (ex. des mètres et des
     kilogrammes) sans les normaliser : l'attribut de grande amplitude écrase l'autre.
   \item Recalculer \lstinline{sqrt} pour chaque distance : inutile pour un tri, le carré préserve l'ordre.
