@@ -243,7 +243,7 @@ def _course_assembly_truth(
             "unknown": None,
             "status": "NOT_AUDITED",
         }
-    if row.get("assembly_authority") != "CANONICAL_NSI_ASSEMBLER":
+    if row.get("assembly_authority") not in {"CANONICAL_NSI_ASSEMBLER", "CANONICAL_MATHS_ASSEMBLER"}:
         return {
             "foreign": None,
             "duplicated": None,

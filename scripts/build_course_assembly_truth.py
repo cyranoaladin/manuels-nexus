@@ -90,12 +90,46 @@ def _nsi_variant_assembly() -> dict[str, dict[str, list[tuple[int, Path]]]]:
     return observed
 
 
+def _maths_assembler():
+    """L'assembleur Mathematiques, charge sous un nom distinct de celui de NSI.
+
+    Les deux manuels ont un module `assemble_manuel` : les charger sous le meme
+    nom ferait silencieusement mesurer un corpus avec l'assembleur de l'autre.
+    """
+
+    scripts = ROOT / "Mathematiques" / "manuel-maths" / "scripts"
+    if str(scripts) not in sys.path:
+        sys.path.insert(0, str(scripts))
+    return _load("maths_assemble_manuel",
+                 "Mathematiques/manuel-maths/scripts/assemble_manuel.py")
+
+
+def _maths_variant_assembly(assembler, directory: Path):
+    """Cours reellement assembles par le manuel Maths, dans son ordre canonique.
+
+    `collect_chapter` est la fonction que le PDF utilise : la position rendue
+    est celle que le lecteur recoit, pas l'ordre alphabetique du repertoire.
+    """
+
+    rows: dict[str, list[tuple[int, Path]]] = {}
+    for variant in ("eleve", "professeur"):
+        ordered: list[tuple[int, Path]] = []
+        for position, path in enumerate(
+            assembler.collect_chapter(directory, variant), start=1
+        ):
+            if path.parent.name == "cours":
+                ordered.append((position, path))
+        rows[variant] = ordered
+    return rows
+
+
 def build_map() -> dict[str, Any]:
     clone = _load("p0_clone_ledger", "scripts/build_p0_content_clone_ledger.py")
     identity = _load("capacity_identity", "scripts/capacity_identity.py")
     resolver = identity.CapacityIdentityResolver.from_corpora()
     ledger = clone.build_ledger()
     nsi_assembly = _nsi_variant_assembly()
+    maths_assembler = _maths_assembler()
 
     # Proprietaire semantique par chemin, tel que le registre l'a ETABLI.
     owner_of: dict[str, str] = {}
@@ -146,6 +180,10 @@ def build_map() -> dict[str, Any]:
                 }
                 source_rows = variant_rows["professeur"]
                 assembly_authority = "CANONICAL_NSI_ASSEMBLER"
+            elif corpus.parts[-3:] == ("Mathematiques", "manuel-maths", "chapitres"):
+                variant_rows = _maths_variant_assembly(maths_assembler, directory)
+                source_rows = variant_rows["professeur"]
+                assembly_authority = "CANONICAL_MATHS_ASSEMBLER"
             else:
                 source_rows = list(enumerate(sorted(course.glob("*.tex")), start=1))
                 assembly_authority = "SOURCE_DIRECTORY_ONLY_NOT_ASSEMBLY_TRUTH"
