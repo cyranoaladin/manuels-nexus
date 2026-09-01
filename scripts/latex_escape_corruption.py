@@ -26,7 +26,7 @@ from pathlib import Path
 
 # Queues de macros LaTeX privees de leur initiale par une sequence Python.
 TAILS: dict[str, str] = {
-    "n": "earrow ewline eq abla onumber oindent olimits ot u e",
+    "n": "earrow ewline ode eq abla onumber oindent olimits ot u e",
     "t": "imes extbf extit extrm ext an heta frac ag riangle op o",
     "r": "ightarrow ight ho ef angle m",
     "f": "orall rac box ootnotesize rown",
@@ -42,6 +42,11 @@ FRAGMENT = re.compile(
 )
 CONTROL = re.compile(rb"[\x00-\x08\x0b\x0c\x0e-\x1f]")
 
+# TikZ compose `\node` : ampute, le fragment « ode {...}; » n'est plus une
+# commande et TikZ le pose comme du texte litteral, sans fonte selectionnee --
+# le lecteur voit un cadre vide. Ces environnements sont donc, eux aussi, des
+# contextes ou un fragment en debut de ligne denonce une macro detruite.
+GRAPHICS_ENVIRONMENTS = {"tikzpicture", "axis", "scope"}
 MATH_ENVIRONMENTS = {
     "align", "align*", "array", "aligned", "equation", "equation*",
     "gather", "gather*", "cases", "matrix", "bmatrix", "pmatrix", "vmatrix",
@@ -66,7 +71,7 @@ def scan(text: str) -> list[tuple[int, str, str]]:
 
     for number, line in enumerate(text.split("\n"), start=1):
         in_math = inline_open or display_depth > 0 or any(
-            e in MATH_ENVIRONMENTS for e in environments
+            e in MATH_ENVIRONMENTS or e in GRAPHICS_ENVIRONMENTS for e in environments
         )
         if in_math:
             match = FRAGMENT.match(line)

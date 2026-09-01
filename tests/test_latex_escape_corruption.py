@@ -29,6 +29,9 @@ _spec.loader.exec_module(detector)
 CORRUPTED_INLINE = "$g(x)$ & $-\\infty$ & $\nearrow$ & $4$ \\\\"
 CORRUPTED_ARRAY = "\\[\\begin{array}{c}\nf & \nearrow & 3 \\\\\n\\end{array}\\]"
 CORRUPTED_DISPLAY = "\\[\nP(A) \neq 0.\n\\]"
+# `\node` de TikZ : la meme sequence \n a produit A LA FOIS le saut de ligne
+# parasite et l'amputation de la macro.
+CORRUPTED_TIKZ = "\\begin{tikzpicture}\n\node {$f'(x)$};\n\\end{tikzpicture}"
 
 
 @pytest.mark.parametrize(
@@ -37,6 +40,7 @@ CORRUPTED_DISPLAY = "\\[\nP(A) \neq 0.\n\\]"
         (CORRUPTED_INLINE, "\\nearrow"),
         (CORRUPTED_ARRAY, "\\nearrow"),
         (CORRUPTED_DISPLAY, "\\neq"),
+        (CORRUPTED_TIKZ, "\\node"),
     ],
 )
 def test_the_detector_sees_the_corruption_in_every_math_context(sample, expected) -> None:
@@ -78,3 +82,22 @@ def test_no_tex_source_carries_a_raw_control_character() -> None:
         if "/build/" not in str(p) and detector.CONTROL.search(p.read_bytes())
     ]
     assert guilty == []
+
+
+def test_a_tikz_picture_is_a_command_context_too() -> None:
+    """Un `\\node` ampute ne rend pas une erreur : TikZ pose un cadre vide.
+
+    Le defaut etait deja recense (audit/P0_TRUNCATED_LATEX_COMMAND_LEDGER.json)
+    mais le detecteur d'echappement ne le voyait pas : « ode » ne figurait pas
+    parmi les queues connues et `tikzpicture` n'etait pas un contexte de
+    commande. Un detecteur aveugle a une variante de sa propre classe ne
+    protege pas cette classe.
+    """
+    findings = detector.scan(CORRUPTED_TIKZ)
+    assert [macro for _, _, macro in findings] == ["\\node"]
+
+
+def test_a_wellformed_tikz_node_is_not_flagged() -> None:
+    assert detector.scan(
+        "\\begin{tikzpicture}\n\\node {$f'(x)$};\n\\end{tikzpicture}"
+    ) == []

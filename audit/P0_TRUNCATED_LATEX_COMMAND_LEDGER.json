@@ -1,40 +1,40 @@
 {
- "artifact_type": "p0_truncated_latex_command_ledger",
- "schema_version": 1,
- "finding": "P0_TRUNCATED_LATEX_COMMAND_RENDERING_INVISIBLE_TEXT",
- "description": "Un \\node de TikZ ampute de sa barre oblique. Le fragment 'ode {...};' n'est plus une commande : TikZ le compose comme du texte litteral, sans fonte selectionnee. Le lecteur voit un cadre vide la ou un tableau de signes est annonce, et le PDF porte des caracteres invisibles.",
- "evidence": "Le journal LaTeX du manuel TSPE professeur signalait 17 'Missing character ... in font nullfont' epelant exactement ode:sur,sur,sur.;",
- "severity": "VISIBLE_RENDER_DEFECT",
- "occurrences": 17,
- "per_manual": {
-  "1NSI": 3,
-  "TCOMPL": 9,
-  "TEXPERTES": 5
- },
- "cross_discipline_note": "Trois occurrences sont dans 1NSI : un tableau de signes de derivee dans un corrige de NSI n'a aucun objet. Elles relevent aussi de la contamination inter-manuels.",
- "fixed": [
-  "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-010.tex"
- ],
- "remaining": 17,
- "remaining_disposition": "A TRAITER PAR LA RECONSTRUCTION DE CHAQUE CHAPITRE : ces fichiers sont tous des clones du meme corps, deja comptes au registre P0 de clonage. Leur retrait ou reecriture supprimera le defaut ; aucune correction cosmetique separee n'est faite ici.",
- "set_digest": "sha256:82500daf90e706afcab2eb5abc26ac2bab175152df064155a0236e66d456e416",
- "paths": [
-  "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-010.tex",
-  "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-010.tex",
-  "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-010.tex",
-  "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/corriges/TCOMPL-INEG-CO-010.tex",
-  "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/corriges/TCOMPL-BAYES-CO-010.tex",
-  "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/corriges/TCOMPL-LOG-CO-010.tex",
-  "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/corriges/TCOMPL-ME-CO-010.tex",
-  "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-010.tex",
-  "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-010.tex",
-  "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-010.tex",
-  "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/corriges/TEXP-CAG-CO-010.tex",
-  "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-010.tex",
-  "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-010.tex",
-  "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/corriges/TEXP-MAT-CO-010.tex",
-  "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-010.tex",
-  "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-010.tex",
-  "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-035.tex"
- ]
+  "artifact_type": "p0_truncated_latex_command_ledger",
+  "schema_version": 1,
+  "finding": "P0_TRUNCATED_LATEX_COMMAND_RENDERING_INVISIBLE_TEXT",
+  "description": "Un \\node de TikZ ampute de sa barre oblique. Le fragment 'ode {...};' n'est plus une commande : TikZ le compose comme du texte litteral, sans fonte selectionnee. Le lecteur voit un cadre vide la ou un tableau de signes est annonce, et le PDF porte des caracteres invisibles.",
+  "evidence": "Le journal LaTeX du manuel TSPE professeur signalait 17 'Missing character ... in font nullfont' epelant exactement ode:sur,sur,sur.;",
+  "severity": "VISIBLE_RENDER_DEFECT",
+  "occurrences": 0,
+  "per_manual": {},
+  "cross_discipline_note": "Trois occurrences sont dans 1NSI : un tableau de signes de derivee dans un corrige de NSI n'a aucun objet. Elles relevent aussi de la contamination inter-manuels.",
+  "fixed": [
+    "Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-010.tex",
+    "Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-010.tex",
+    "Mathematiques/manuel-maths/chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-010.tex",
+    "Mathematiques/manuel-maths/chapitres/TCOMPL-INEGALITES/corriges/TCOMPL-INEG-CO-010.tex",
+    "Mathematiques/manuel-maths/chapitres/TCOMPL-INFERENCE-BAYESIENNE/corriges/TCOMPL-BAYES-CO-010.tex",
+    "Mathematiques/manuel-maths/chapitres/TCOMPL-LOGARITHME-HISTORIQUE/corriges/TCOMPL-LOG-CO-010.tex",
+    "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-EVOLUTION/corriges/TCOMPL-ME-CO-010.tex",
+    "Mathematiques/manuel-maths/chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-010.tex",
+    "Mathematiques/manuel-maths/chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-010.tex",
+    "Mathematiques/manuel-maths/chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-010.tex",
+    "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/corriges/TEXP-CAG-CO-010.tex",
+    "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-010.tex",
+    "Mathematiques/manuel-maths/chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-010.tex",
+    "Mathematiques/manuel-maths/chapitres/TEXP-MATRICES-MARKOV/corriges/TEXP-MAT-CO-010.tex",
+    "Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-010.tex",
+    "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-010.tex",
+    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-010.tex",
+    "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-APT-CO-035.tex"
+  ],
+  "remaining": 0,
+  "remaining_disposition": "CLOS. Les 14 occurrences restantes (TCOMPL 9, TEXPERTES 5) ont ete reparees mecaniquement : la sequence \\n avait produit a la fois le saut de ligne parasite et l'amputation de la macro, les deux sont annules. Les 3 occurrences que ce registre imputait a 1NSI n'existaient plus : elles ont disparu avec le retrait des objets de cours surnumeraires. Le registre les comptait encore -- une preuve qui survivait a son objet.",
+  "set_digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "paths": [],
+  "closed_by": {
+    "detector": "scripts/latex_escape_corruption.py",
+    "class": "SILENT_ESCAPE_CORRUPTION_IN_LATEX_SOURCE",
+    "note": "Meme cause racine que \\nearrow et \\neq : une macro ecrite dans une chaine Python non-brute. Le registre ne couvrait que la variante \\node."
+  }
 }
