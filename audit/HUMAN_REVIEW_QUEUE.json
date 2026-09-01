@@ -5,7 +5,7 @@
   "approves_nothing": true,
   "status": "HUMAN_REVIEW_ACTION_REQUIRED",
   "source_inputs": {
-    "audit/CURRENT_REVIEW_DEBT_PARTITION.json": "sha256:e8dd360faa68e42e29a6f2cfd69a73b16a54e0d7f1f5d19515955fb5bc3837de",
+    "audit/CURRENT_REVIEW_DEBT_PARTITION.json": "sha256:7e6c90295573f3b94ec38ed1bdaeff93a83ad3f885566986d0771b25bb375e1a",
     "audit/QCM_INDEPENDENT_EVIDENCE_V2.json": "sha256:17b40da179881a3aadeb66220e0154bceb0e275e5fae81056b6dd213e7a31c9f",
     "audit/QCM_REVIEW_PROOF_RECONCILIATION.json": "sha256:f2ad3300c4e7aabd9df34040990019d6ecb7eca19063877db7457ec90e81a1d8",
     "audit/TNSI_PROJET_ASSESSMENT_MODE.json": "sha256:15ee9492ab6ef5590de54db73afd49d469b16db594e1e181e06c0e6620edfc83"
@@ -584,7 +584,7 @@
       "release_blocking": true
     },
     {
-      "item_id": "NSI_COUPLED_REWRITTEN_STALE_APPROVAL_4",
+      "item_id": "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4",
       "category": "OBJECT_REVIEW",
       "count": 4,
       "unit_ids": [
@@ -609,7 +609,7 @@
           "set_digest": "sha256:cd1b77eec74722daffa10085db376d429668b41850471e04ccb619fc001ada2d"
         }
       },
-      "provenance": "previous approval invalidated by rewritten content",
+      "provenance": "rewritten content whose prior machine verification was not a human approval",
       "required_reviewers_by_chapter": {
         "1NSI-ALGO-PARCOURS-TRIS": [
           "EXPERT_NSI",

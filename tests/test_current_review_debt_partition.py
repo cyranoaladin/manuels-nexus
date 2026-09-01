@@ -41,7 +41,9 @@ def test_partition_is_exact_disjoint_and_keeps_review_provenance() -> None:
         "count"
     ] == 3
     assert components["NSI_COUPLED_NEW_32"]["count"] == 32
-    assert components["NSI_COUPLED_REWRITTEN_STALE_APPROVAL_4"]["count"] == 4
+    assert components[
+        "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4"
+    ]["count"] == 4
 
     for name, component in components.items():
         assert component["count"] == len(component["fingerprints"]), name
@@ -82,6 +84,10 @@ def test_partition_is_exact_disjoint_and_keeps_review_provenance() -> None:
     assert aliases["TSPE_GEO_REVIEW_PACKET_45"]["provenance_counts"] == {
         "NEW": 40,
         "REWRITTEN_STALE_APPROVAL": 5,
+    }
+    assert aliases["NSI_COUPLED_REVIEW_PACKET_36"]["provenance_counts"] == {
+        "NEW": 32,
+        "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED": 4,
     }
     assert aliases["OTHER_CURRENT_REVIEW_DEBT"]["count"] == 2267
 

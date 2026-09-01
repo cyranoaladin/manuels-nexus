@@ -828,10 +828,16 @@ def _declared_debt(
                 provenance_counts = {"NEW_AUTHORED_UNREVIEWED": len(chapter_units)}
             elif item.get("item_id") in {
                 "TSPE_GEO_REWRITTEN_STALE_APPROVAL_5",
-                "NSI_COUPLED_REWRITTEN_STALE_APPROVAL_4",
             }:
                 provenance_counts = {
                     "REWRITTEN_PREVIOUSLY_APPROVED_STALE": len(chapter_units)
+                }
+            elif (
+                item.get("item_id")
+                == "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4"
+            ):
+                provenance_counts = {
+                    "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED": len(chapter_units)
                 }
             else:
                 provenance_counts = {str(item.get("category")): len(chapter_units)}

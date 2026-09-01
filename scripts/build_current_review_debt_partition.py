@@ -187,13 +187,17 @@ def _ledger_sets(root: Path) -> tuple[dict[str, set[str]], dict[str, Any]]:
             rewritten = {
                 str(row["fingerprint"])
                 for row in entries
-                if row.get("origin") == "REWRITTEN_STALE_APPROVAL"
-                and row.get("human_approval_invalidated_by_rewrite") is True
+                if row.get("origin")
+                == "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED"
+                and row.get("human_approval_invalidated_by_rewrite") is False
+                and row.get("human_approval_evidence") is False
             }
             if created | rewritten != {str(row["fingerprint"]) for row in entries}:
                 raise ValueError("provenance NSI couplée incomplète")
             sets["NSI_COUPLED_NEW_32"] = created
-            sets["NSI_COUPLED_REWRITTEN_STALE_APPROVAL_4"] = rewritten
+            sets[
+                "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4"
+            ] = rewritten
         else:
             sets[ledger_id] = {str(row["fingerprint"]) for row in entries}
     return sets, evidence
@@ -282,8 +286,8 @@ def build_partition(root: Path = ROOT) -> dict[str, Any]:
             "previous approval invalidated by rewritten content"
         ),
         "NSI_COUPLED_NEW_32": "no human approval ever existed",
-        "NSI_COUPLED_REWRITTEN_STALE_APPROVAL_4": (
-            "previous approval invalidated by rewritten content"
+        "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4": (
+            "rewritten content whose prior machine verification was not a human approval"
         ),
     }
     for name in named_sets:
@@ -314,7 +318,7 @@ def build_partition(root: Path = ROOT) -> dict[str, Any]:
     ]
     residual = named_sets["RESIDUAL_TRUE_NEW_13"]
     nsi = named_sets["NSI_COUPLED_NEW_32"] | named_sets[
-        "NSI_COUPLED_REWRITTEN_STALE_APPROVAL_4"
+        "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4"
     ]
     other = current - tspe - residual
     aliases = {
@@ -358,11 +362,14 @@ def build_partition(root: Path = ROOT) -> dict[str, Any]:
         "NSI_COUPLED_REVIEW_PACKET_36": {
             "aggregate_of": [
                 "NSI_COUPLED_NEW_32",
-                "NSI_COUPLED_REWRITTEN_STALE_APPROVAL_4",
+                "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4",
             ],
             "count": len(nsi),
             "fingerprints_digest": _digest(nsi),
-            "provenance_counts": {"NEW": 32, "REWRITTEN_STALE_APPROVAL": 4},
+            "provenance_counts": {
+                "NEW": 32,
+                "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED": 4,
+            },
             "contributes_to_union": False,
         },
         "OTHER_CURRENT_REVIEW_DEBT": {

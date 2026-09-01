@@ -63,25 +63,38 @@ def test_the_ledger_approves_nothing(payload: dict) -> None:
     }
 
 
-def test_a_lost_validation_is_never_folded_into_the_new_objects(
+def test_machine_verification_is_never_relabelled_as_lost_human_approval(
     payload: dict,
 ) -> None:
-    """Perdre une validation acquise n'est pas ne jamais en avoir eu."""
+    """`verified` est une preuve machine, jamais une approbation humaine."""
 
-    stale = [
-        e for e in payload["entries"] if e["origin"] == "REWRITTEN_STALE_APPROVAL"
+    rewritten_machine = [
+        e
+        for e in payload["entries"]
+        if e["origin"] == "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED"
     ]
     created = [e for e in payload["entries"] if e["origin"] == "CREATED"]
-    assert len(stale) == 4
+    assert len(rewritten_machine) == 4
     assert len(created) == 32
-    assert len(stale) + len(created) == payload["count"] == 36
+    assert len(rewritten_machine) + len(created) == payload["count"] == 36
 
-    for entry in stale:
-        assert entry["status_before_rewrite"] in {"approved", "verified", "valide"}
-        assert entry["human_approval_invalidated_by_rewrite"] is True
+    for entry in rewritten_machine:
+        assert entry["status_before_rewrite"] == "verified"
+        assert entry["human_approval_invalidated_by_rewrite"] is False
+        assert entry["human_approval_evidence"] is False
+        assert entry["semantic_digest_before"].startswith("sha256:")
+        assert entry["semantic_digest_current"].startswith("sha256:")
+        assert entry["semantic_digest_before"] != entry["semantic_digest_current"]
+        assert entry["source_sha256"].startswith("sha256:")
     for entry in created:
         assert entry["status_before_rewrite"] is None
         assert entry["human_approval_invalidated_by_rewrite"] is False
+        assert entry["semantic_digest_before"] is None
+
+
+def test_only_explicit_approved_status_counts_as_human_approval(producer) -> None:
+    assert producer.HUMAN_APPROVED_STATUSES == frozenset({"approved"})
+    assert "verified" not in producer.HUMAN_APPROVED_STATUSES
 
 
 def test_machine_verification_is_not_presented_as_human_review(
@@ -90,10 +103,23 @@ def test_machine_verification_is_not_presented_as_human_review(
     """La distinction que le P0 de clonage a rendue couteuse."""
 
     verification = payload["machine_verification_performed"]
-    assert verification["content_clones_in_chapters"] == 0
-    assert verification["cross_discipline_condemned"] == 0
+    assert verification["clone_capacity_integrity"] == {
+        "invalid_credit_objects": 0,
+        "indeterminate_credit_objects": 0,
+        "status": "COMPLETE",
+    }
+    assert verification["cross_discipline"] == {
+        "condemned": 0,
+        "unknown": 0,
+        "status": "COMPLETE",
+    }
+    assert verification["role_coverage"]["cells"] == 63
+    assert verification["role_coverage"]["semantic_unknown"] == 63
+    assert verification["role_coverage"]["status"] == "UNVALIDATED"
+    assert verification["execution_evidence"]["status"] == "UNBOUND_RECEIPTS"
+    assert verification["execution_evidence"]["source_bound_current"] == 0
     assert "ne remplace" in verification["note"]
-    assert all(entry["machine_verified_by_execution"] for entry in payload["entries"])
+    assert not any(entry["machine_verified_by_execution"] for entry in payload["entries"])
     assert all(entry["human_review_required"] for entry in payload["entries"])
 
 

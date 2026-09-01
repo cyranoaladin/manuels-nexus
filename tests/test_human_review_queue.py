@@ -49,7 +49,9 @@ def test_queue_is_exact_disjoint_and_current() -> None:
         if item["item_id"].startswith("NSI_COUPLED_")
     }
     assert nsi["NSI_COUPLED_NEW_32"]["count"] == 32
-    assert nsi["NSI_COUPLED_REWRITTEN_STALE_APPROVAL_4"]["count"] == 4
+    assert nsi[
+        "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4"
+    ]["count"] == 4
     assert all(
         item["required_reviewers"] == [
             "EXPERT_NSI",

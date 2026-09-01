@@ -8,15 +8,19 @@ tourne, chaque assertion passe -- mais personne ne l'a relu.
 
 Ce registre le declare. Il ne l'approuve pas.
 
-Deux classes sont distinguees, et ne doivent jamais etre fondues :
+Trois classes sont distinguees, et ne doivent jamais etre fondues :
 
 `CREATED`
     objets neufs, qui n'ont jamais porte d'approbation ;
 
+`REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED`
+    objets qui avaient passe une verification machine avant leur reecriture.
+    Cette preuve ne vaut pas approbation humaine et ne peut donc pas etre
+    presentee comme une approbation devenue perimee ;
+
 `REWRITTEN_STALE_APPROVAL`
-    objets qui portaient un statut de validation AVANT d'etre reecrits. Ce
-    statut couvrait un contenu qui n'existe plus : il est perime, et cette
-    perte doit rester visible plutot que d'etre absorbee dans le lot.
+    reserve aux objets pour lesquels une ancienne approbation humaine est
+    reellement prouvee. Cette classe est vide dans le lot courant.
 
 Les deux classes sont derivees de Git, par comparaison avec le SHA de
 reference, jamais d'une liste ecrite a la main : une liste finit par mentir.
@@ -42,9 +46,10 @@ CHAPTERS = ("1NSI-ALGO-DICHO-GLOUTON-KNN", "1NSI-ALGO-PARCOURS-TRIS")
 #: intervention sur ces deux chapitres.
 BASELINE_SHA = "52c061428f472f9926829d5c5a4e1c74c7392e58"
 
-#: Statuts qui valent validation. Les perdre par reecriture est une
-#: regression, pas une simple mise a jour.
-VALIDATED_STATUSES = frozenset({"approved", "verified", "valide"})
+#: Seul le statut explicitement humain vaut approbation. `verified` designe une
+#: verification machine dans ce depot et ne doit jamais etre promu par inference.
+HUMAN_APPROVED_STATUSES = frozenset({"approved"})
+MACHINE_VERIFIED_STATUSES = frozenset({"verified"})
 
 
 def _inventory_module():
@@ -85,6 +90,128 @@ def _baseline_text(relative: str) -> str | None:
     return result.stdout if result.returncode == 0 else None
 
 
+def _sha256_text(text: str) -> str:
+    return "sha256:" + hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _semantic_digest(clone: Any, text: str) -> str:
+    body = clone.pedagogical_body(text)
+    return clone.digest(clone.normalized_body(body))
+
+
+def _execution_evidence(base: Path, path: Path, source_sha256: str) -> dict[str, Any]:
+    receipt_path = base / "validations" / f"{path.stem}.execution.json"
+    if not receipt_path.is_file():
+        return {
+            "receipt_path": None,
+            "receipt_sha256": None,
+            "declared_source_path": None,
+            "declared_source_sha256": None,
+            "verdict": None,
+            "binding_state": "MISSING_RECEIPT",
+            "source_bound_current": False,
+        }
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    relative = str(path.relative_to(ROOT))
+    declared_path = receipt.get("source_path")
+    declared_sha = receipt.get("source_sha256")
+    verdict = receipt.get("verdict")
+    source_bound = (
+        declared_path == relative
+        and declared_sha == source_sha256
+        and verdict == "pass"
+    )
+    return {
+        "receipt_path": str(receipt_path.relative_to(ROOT)),
+        "receipt_sha256": "sha256:"
+        + hashlib.sha256(receipt_path.read_bytes()).hexdigest(),
+        "declared_source_path": declared_path,
+        "declared_source_sha256": declared_sha,
+        "verdict": verdict,
+        "binding_state": (
+            "CURRENT_SOURCE_BOUND" if source_bound else "UNBOUND_RECEIPT"
+        ),
+        "source_bound_current": source_bound,
+    }
+
+
+def _machine_verification(entries: list[dict[str, Any]]) -> dict[str, Any]:
+    coverage = json.loads(
+        (ROOT / "audit/TRUE_PEDAGOGICAL_COVERAGE.json").read_text(encoding="utf-8")
+    )
+    clone = json.loads(
+        (ROOT / "audit/P0_CONTENT_CLONE_LEDGER.json").read_text(encoding="utf-8")
+    )
+    cross = json.loads(
+        (ROOT / "audit/NSI_CROSS_DISCIPLINE_CONTENT_LEDGER.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    prefixes = tuple(f"NSI/chapitres/{chapter}/" for chapter in CHAPTERS)
+    invalid = [
+        path
+        for path in clone["objects_on_invalid_credit"]
+        if str(path).startswith(prefixes)
+    ]
+    indeterminate = [
+        path
+        for path in clone["objects_with_indeterminate_credit"]
+        if str(path).startswith(prefixes)
+    ]
+    coverage_rows = [
+        row for row in coverage["rows"] if row.get("chapter") in CHAPTERS
+    ]
+    semantic_unknown = sum(
+        row.get("state") == "DECLARED_EXACT_IDENTITY_NOT_SEMANTICALLY_VALIDATED"
+        for row in coverage_rows
+    )
+    found_receipts = sum(
+        entry["execution_evidence"]["receipt_path"] is not None for entry in entries
+    )
+    source_bound = sum(
+        entry["execution_evidence"]["source_bound_current"] for entry in entries
+    )
+    missing_receipts = len(entries) - found_receipts
+    return {
+        "execution_evidence": {
+            "objects": len(entries),
+            "receipts_found": found_receipts,
+            "missing_receipts": missing_receipts,
+            "source_bound_current": source_bound,
+            "status": (
+                "COMPLETE"
+                if source_bound == len(entries)
+                else "UNBOUND_RECEIPTS"
+                if missing_receipts == 0
+                else "INCOMPLETE_RECEIPTS"
+            ),
+        },
+        "clone_capacity_integrity": {
+            "invalid_credit_objects": len(invalid),
+            "indeterminate_credit_objects": len(indeterminate),
+            "status": "COMPLETE" if not invalid and not indeterminate else "GAP",
+        },
+        "cross_discipline": {
+            "condemned": int(cross["condemned_count"]),
+            "unknown": int(cross["unknown"]),
+            "status": (
+                "COMPLETE"
+                if cross["condemned_count"] == 0 and cross["unknown"] == 0
+                else "GAP"
+            ),
+        },
+        "role_coverage": {
+            "cells": len(coverage_rows),
+            "semantic_unknown": semantic_unknown,
+            "status": "COMPLETE" if semantic_unknown == 0 else "UNVALIDATED",
+        },
+        "note": (
+            "aucune de ces verifications ne remplace la lecture par un "
+            "professeur de la discipline"
+        ),
+    }
+
+
 def build_ledger() -> dict[str, Any]:
     clone = _clone_module()
     inventory_module = _inventory_module()
@@ -119,16 +246,19 @@ def build_ledger() -> dict[str, Any]:
                 previous_status = str(
                     clone.read_meta(previous).get("status") or ""
                 )
-                origin = (
-                    "REWRITTEN_STALE_APPROVAL"
-                    if previous_status in VALIDATED_STATUSES
-                    else "REWRITTEN"
-                )
+                if previous_status in HUMAN_APPROVED_STATUSES:
+                    origin = "REWRITTEN_STALE_APPROVAL"
+                elif previous_status in MACHINE_VERIFIED_STATUSES:
+                    origin = "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED"
+                else:
+                    origin = "REWRITTEN"
 
             fingerprint = fingerprint_by_path.get(relative)
             if fingerprint is None:
                 # Objet sans anomalie bloquante : rien a declarer ici.
                 continue
+            source_sha256 = _sha256_text(current)
+            execution_evidence = _execution_evidence(base, path, source_sha256)
             entries.append(
                 {
                     "fingerprint": fingerprint,
@@ -139,9 +269,24 @@ def build_ledger() -> dict[str, Any]:
                     "status": status,
                     "origin": origin,
                     "status_before_rewrite": previous_status,
+                    "source_sha256": source_sha256,
+                    "source_sha256_before": (
+                        _sha256_text(previous) if previous is not None else None
+                    ),
+                    "semantic_digest_current": _semantic_digest(clone, current),
+                    "semantic_digest_before": (
+                        _semantic_digest(clone, previous)
+                        if previous is not None
+                        else None
+                    ),
+                    "human_approval_evidence": previous_status
+                    in HUMAN_APPROVED_STATUSES,
                     "human_approval_invalidated_by_rewrite": origin
                     == "REWRITTEN_STALE_APPROVAL",
-                    "machine_verified_by_execution": True,
+                    "execution_evidence": execution_evidence,
+                    "machine_verified_by_execution": execution_evidence[
+                        "source_bound_current"
+                    ],
                     "policy_disposition": "open_debt",
                     "in_approved_baseline": False,
                     "human_review_required": True,
@@ -183,20 +328,12 @@ def build_ledger() -> dict[str, Any]:
         "why_created": (
             "Les deux chapitres d'algorithmique de Premiere NSI portaient 116 "
             "objets de mathematiques de Terminale, tous status approved. Le "
-            "contenu ecrit a leur place est verifie par execution, mais "
-            "personne ne l'a relu : ce qui est verifie par une machine n'est "
-            "pas ce qui est valide par un professeur."
+            "contenu ecrit a leur place n'a pas ete relu. Les recus historiques "
+            "sans chemin ni digest source restent non lies : une execution non "
+            "rattachee au source courant n'est pas une preuve machine current, "
+            "et aucune preuve machine ne vaut validation par un professeur."
         ),
-        "machine_verification_performed": {
-            "python_blocks_executed": "63/63 objets verts",
-            "content_clones_in_chapters": 0,
-            "cross_discipline_condemned": 0,
-            "role_coverage": "45 cellules sur 45",
-            "note": (
-                "aucune de ces verifications ne remplace la lecture par un "
-                "professeur de la discipline"
-            ),
-        },
+        "machine_verification_performed": _machine_verification(entries),
         "human_review_packets": {
             "EXPERT_NSI": "PENDING_UNASSIGNED",
             "EXPERT_PROGRAMME_PEDAGOGIE": "PENDING_UNASSIGNED",

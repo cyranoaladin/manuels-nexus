@@ -30308,9 +30308,9 @@
         }
       ]
     },
-    "NSI_COUPLED_REWRITTEN_STALE_APPROVAL_4": {
+    "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4": {
       "count": 4,
-      "provenance": "previous approval invalidated by rewritten content",
+      "provenance": "rewritten content whose prior machine verification was not a human approval",
       "fingerprints": [
         "40727ba25883503f",
         "531a15a7f0eec4a4",
@@ -30419,13 +30419,13 @@
     "NSI_COUPLED_REVIEW_PACKET_36": {
       "aggregate_of": [
         "NSI_COUPLED_NEW_32",
-        "NSI_COUPLED_REWRITTEN_STALE_APPROVAL_4"
+        "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4"
       ],
       "count": 36,
       "fingerprints_digest": "sha256:1f80143184b7550889016b83fbc7a0bc7bd7c1e4034307d874db88aecd5403ca",
       "provenance_counts": {
         "NEW": 32,
-        "REWRITTEN_STALE_APPROVAL": 4
+        "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED": 4
       },
       "contributes_to_union": false
     },
@@ -30449,6 +30449,6 @@
     "audit/NSI_TC_EVAL_CORRIGES_REVIEW_DEBT_2.json": "sha256:49ede6fc069187c9be3a501f57adb69b208940cd9739279b619e332ed6afdcb4",
     "audit/TNSI_PROJET_QCM_REVIEW_DEBT_1.json": "sha256:e8e2c7346db8c938d718df2227cf8d4d83d7091b2669f319d999e9cf4c13122b",
     "audit/TSPE_GEOESPACE_AUTHORED_REVIEW_DEBT_45.json": "sha256:bc71ff0041bfbc4b4e822b344d2ebdb0859c11bcff293d23b05b23d97ca8f514",
-    "audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json": "sha256:243c93fb1e76cf60af6c723fd3cb70dce8ea9ae6f0584d7f442b985e69dc7acb"
+    "audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json": "sha256:76070afb5fa65e921ff576d01b71ae4b9ef6f58a324b913e2968e3a6886ce0d5"
   }
 }

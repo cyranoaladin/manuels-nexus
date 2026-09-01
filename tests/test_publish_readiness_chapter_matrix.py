@@ -573,7 +573,14 @@ def test_declared_review_debt_routes_every_ledger_by_entry_chapter(producer) -> 
         for row in by_chapter["1NSI-ALGO-DICHO-GLOUTON-KNN"]
     }
     assert apt["NSI_COUPLED_NEW_32"]["count"] == 28
-    assert apt["NSI_COUPLED_REWRITTEN_STALE_APPROVAL_4"]["count"] == 4
+    assert apt[
+        "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4"
+    ]["count"] == 4
+    assert apt[
+        "NSI_COUPLED_REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED_4"
+    ]["provenance_counts"] == {
+        "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED": 4
+    }
     assert adgk["NSI_COUPLED_NEW_32"]["count"] == 4
 
     assert sum(
