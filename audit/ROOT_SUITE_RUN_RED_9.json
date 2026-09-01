@@ -1,0 +1,38 @@
+{
+ "artifact_type": "observed_test_run",
+ "schema_version": 1,
+ "scope": "tests/ (racine) — PAS la suite supportee complete",
+ "status": "RED",
+ "source_sha": "13926363209b1f6a5b69af17b4401dcb6ba6e59e",
+ "source_sha_note": "SHA du HEAD au lancement, relu ci-dessous par le champ verifie",
+ "command": "python3 -m pytest tests -q --no-header -p no:randomly",
+ "collected": 2356,
+ "passed": 2347,
+ "failed": 9,
+ "errors": 0,
+ "rc": 1,
+ "duration_seconds": 2282.6,
+ "end_utc": "2026-09-01T11:18:39Z",
+ "log": "/tmp/root_suite2.log",
+ "log_sha256": "sha256:3d3047daf1dc02afe82b3e5b5b561e20c92859d3ffd1b163f847142a883b68b2",
+ "tree_status_before": "clean",
+ "tree_status_after": "clean",
+ "mutation_during_run": false,
+ "failed_tests": [
+  "tests/test_inventory_collection.py::test_repository_fail_on_new_gate_accepts_exact_residual_extension",
+  "tests/test_inventory_collection.py::test_repository_fail_on_new_preserves_all_qualified_active_debt",
+  "tests/test_inventory_collection.py::test_pre_a6_identity_migration_registry_is_exact_schema_control",
+  "tests/test_inventory_collection.py::test_pre_a6_repository_projects_only_active_identity_qualifications",
+  "tests/test_inventory_collection.py::test_pre_a6_projection_keeps_historical_decision_after_policy_rotation",
+  "tests/test_inventory_collection.py::test_pre_a6_registry_is_loaded_from_each_target_repository",
+  "tests/test_residual_13_qualification.py::test_residual_13_exact_diff_matches_all_canonical_sources",
+  "tests/test_residual_13_qualification.py::test_residual_13_sunset_ledger_is_pending_and_release_blocking",
+  "tests/test_residual_13_qualification.py::test_the_two_ledgers_are_derived_not_hand_maintained"
+ ],
+ "does_not_cover": "Ce recu ne couvre PAS les modifications posterieures a son lancement : la regeneration des deux registres residual-13 et toute correction de tests qui suit. Un nouveau run complet est requis sur le HEAD final.",
+ "previous_run_for_delta": {
+  "failed": 18,
+  "passed": 2334,
+  "note": "meme commande, avant la reconciliation des identites"
+ }
+}
