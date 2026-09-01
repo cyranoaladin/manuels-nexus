@@ -14,6 +14,7 @@ Les lignes (sans le préfixe '% ') sont exécutées en sandbox. Verdict :
 """
 import argparse
 import datetime
+import hashlib
 import re
 import subprocess
 import sys
@@ -72,11 +73,19 @@ def verify_chapter(chap: str) -> int:
             verdict, details = "manual_review", "aucun bloc VERIFY : revue humaine requise"
         else:
             verdict, details = run_sandbox(script)
+        # Un recu qui ne nomme pas la source qu'il atteste ne peut pas
+        # PERIMER : un « pass » d'il y a trois mois continue de certifier un
+        # contenu modifie depuis. C'est la meme cecite que le P0
+        # SELF_CONFIRMING_AGGREGATE_CHECK -- une preuve insensible a la faute
+        # qu'elle devrait voir. Le recu porte donc le chemin et le digest du
+        # contenu exact qu'il a verifie.
         record = {
             "objet_id": tex.stem, "gate": "sympy",
             "verdict": "pass" if verdict == "pass" else verdict,
             "details": {"output": details},
             "reviewer": "verify_sympy.py",
+            "source_path": str(tex.relative_to(ROOT)),
+            "source_sha256": "sha256:" + hashlib.sha256(tex.read_bytes()).hexdigest(),
             "created_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         }
         write_json(chap_dir / "validations" / f"{tex.stem}.sympy.json", record)
