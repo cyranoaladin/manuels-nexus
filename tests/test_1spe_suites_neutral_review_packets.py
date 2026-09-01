@@ -27,10 +27,18 @@ OUTPUTS = {
         / "1SPE_SUITES_EXPERT_PROGRAMME_PEDAGOGIE_NEUTRAL_REVIEW_PACKET.md",
     ),
 }
-EXPECTED_SOURCE_SHA = "1057951c1a7e8be8731982b5918effb60f2471cc"
-EXPECTED_OBJECT_SET_DIGEST = (
-    "sha256:2cddd2b2ca0c6ed6b85898bcda6ec405b33ed4288f4c4770d272b5c608b5dab8"
+# OLD : le SHA du gel et son digest d'ensemble etaient des litteraux.
+# POURQUOI : les deux packets neutres doivent etre lies au gel EXACT, jamais
+# a un autre ni a une version approchante.
+# NEW : les deux valeurs sont lues dans l'artefact de gel. L'invariant tient
+# a l'identique -- les packets doivent designer le gel courant -- et il
+# survit a un re-gel autorise sans qu'on re-edite un litteral dans chaque
+# fichier, ce qui vient de nous couter cinq corrections manuelles.
+_FREEZE = json.loads(
+    (ROOT / "audit/1SPE_SUITES_REVIEW_SOURCE_FREEZE.json").read_text(encoding="utf-8")
 )
+EXPECTED_SOURCE_SHA = _FREEZE["source_sha"]
+EXPECTED_OBJECT_SET_DIGEST = _FREEZE["chapter_object_set_digest"]
 EXPECTED_ATOMS = {f"1SPE-OFFICIAL-{number:03d}" for number in range(48, 63)}
 EXPECTED_CORRECTION_CLASSES = {
     "Q_ZERO_IS_ALLOWED",
