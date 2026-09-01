@@ -603,6 +603,34 @@ def _oracle(directory: Path) -> dict[str, Any]:
     }
 
 
+def _machine_science_current(source: Path, chapter_dir: Path) -> bool:
+    """La preuve scientifique CURRENT de cet objet, ou son absence.
+
+    Trois conditions, toutes necessaires. Le recu doit exister ; il doit
+    nommer la source qu'il atteste ET correspondre a son contenu actuel --
+    sinon un « pass » d'il y a trois mois certifierait un texte reecrit
+    depuis ; et son verdict doit etre `pass`.
+
+    Un objet dont le recu est absent, delie, perime ou orphelin n'est pas
+    prouve, quel que soit le `status` inscrit dans sa META.
+    """
+
+    receipt_path = chapter_dir / "validations" / f"{source.stem}.sympy.json"
+    if not receipt_path.is_file():
+        return False
+    try:
+        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return False
+    if receipt.get("verdict") != "pass":
+        return False
+    declared = receipt.get("source_sha256")
+    if not declared:
+        return False
+    digest = "sha256:" + hashlib.sha256(source.read_bytes()).hexdigest()
+    return digest == declared
+
+
 def _assessments(
     chapter: str,
     directory: Path,
@@ -617,6 +645,11 @@ def _assessments(
     invalid_status: list[str] = []
     duplicate_ids: list[str] = []
     seen_ids: set[str] = set()
+    # Un STATUT n'est pas une PREUVE. `approved` herite d'une campagne
+    # ancienne ne vaut pas mieux qu'un objet `generated` dont l'oracle passe
+    # aujourd'hui sur la source courante -- et il vaut moins, puisque rien ne
+    # le rattache au contenu actuel. Ce gate lit donc la preuve d'execution
+    # CURRENT : recu present, lie a la source courante, verdict pass.
     allowed_statuses = {"verified", "ready", "approved"}
     for path in paths:
         meta = clone_producer.read_meta(path.read_text(encoding="utf-8"))
@@ -637,7 +670,7 @@ def _assessments(
             duplicate_ids.append(object_id)
         seen_ids.add(object_id)
         status = str(meta.get("status") or "").strip().lower()
-        if status not in allowed_statuses:
+        if not _machine_science_current(path, directory):
             invalid_status.append(object_id)
         if object_type == "evaluation":
             if object_id in subjects:

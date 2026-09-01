@@ -1,4 +1,4 @@
-% META: {"id":"1SPE-EXPO-EV-A-corrige","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige_evaluation","capacites_codes":["C1","C2","C3","C4","C5"],"status":"generated"}
+% META: {"id": "1SPE-EXPO-EV-A-corrige", "chapitre": "1SPE-EXPONENTIELLE", "type_objet": "corrige_evaluation", "capacites_codes": ["C1", "C2", "C3", "C4", "C5"], "status": "generated", "evaluation_ref": "1SPE-EXPO-EV-A"}
 \section*{Corrigé — Évaluation A — Fonction exponentielle}
 \textbf{Exercice 1.} La fonction exponentielle est l'unique fonction dérivable vérifiant $y'=y$ et $y(0)=1$. Les simplifications donnent $\mathrm{e}^{x}$ et $\mathrm{e}^{2x}$.
 
@@ -7,3 +7,28 @@
 \textbf{Exercice 3.} $u_n=120(\mathrm{e}^{0{,}1})^n=120\mathrm{e}^{0{,}1n}$ et $u_5=120\mathrm{e}^{0{,}5}\approx197{,}85$. Les points de la suite sont ceux de la courbe d'abscisses entières.
 
 \textbf{Exercice 4.} $P(0)=2500$ et $P(12)=2500\mathrm{e}^{0{,}72}\approx5136$. De plus $P(t+4)=2500\mathrm{e}^{0{,}06t+0{,}24}=\mathrm{e}^{0{,}24}P(t)$. Le coefficient de $t$ est positif : le modèle est croissant.
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, simplify, exp, Rational
+% x, t, n = symbols('x t n')
+% # ---- Exercice 1 : proprietes algebriques ----
+% assert simplify(exp(2*x - 1)*exp(1 - x) - exp(x)) == 0
+% assert simplify(exp(3*x)/exp(x) - exp(2*x)) == 0
+% # ---- Exercice 2 : f(x) = e^{-0,4x} ----
+% f = exp(-Rational(4, 10)*x)
+% assert simplify(diff(f, x) + Rational(4, 10)*f) == 0
+% assert diff(f, x).subs(x, 0) < 0
+% assert f.subs(x, 0) == 1
+% assert round(float(f.subs(x, 5)), 2) == 0.14
+% # ---- Exercice 3 : u_0 = 120, u_{n+1} = e^{0,1} u_n ----
+% u = 120*exp(Rational(1, 10)*n)
+% assert u.subs(n, 0) == 120
+% assert simplify(u.subs(n, n + 1) - exp(Rational(1, 10))*u) == 0
+% assert round(float(u.subs(n, 5)), 2) == 197.85
+% # ---- Exercice 4 : P(t) = 2500 e^{0,06t} ----
+% P = 2500*exp(Rational(6, 100)*t)
+% assert P.subs(t, 0) == 2500
+% assert round(float(P.subs(t, 12))) == 5136
+% assert simplify(P.subs(t, t + 4) - exp(Rational(24, 100))*P) == 0
+% assert Rational(6, 100) > 0
+% END-VERIFY

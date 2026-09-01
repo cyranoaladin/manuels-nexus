@@ -1,4 +1,4 @@
-% META: {"id":"1SPE-DERLOCAL-EV-A-corrige","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige_evaluation","capacites_codes":["C1","C2","C3","C4","C5"],"status":"generated"}
+% META: {"id": "1SPE-DERLOCAL-EV-A-corrige", "chapitre": "1SPE-DERIVATION-LOCAL", "type_objet": "corrige_evaluation", "capacites_codes": ["C1", "C2", "C3", "C4", "C5"], "status": "generated", "evaluation_ref": "1SPE-DERLOCAL-EV-A"}
 
 \section*{Corrigé — Évaluation A — Dérivation locale}
 
@@ -84,3 +84,39 @@ h(2{,}05) \approx h(2) + h'(2) \times 0{,}05 = \frac{1}{2} + \left(-\frac{1}{4}\
 Valeur exacte : $\dfrac{1}{2{,}05} = \dfrac{100}{205} = \dfrac{20}{41} \approx 0{,}48780\ldots$
 
 Approximation : $0{,}4875$. L'erreur est de l'ordre de $0{,}0003$, soit environ $0{,}06\,\%$.
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, simplify, solve, Rational, limit
+% x, h = symbols('x h')
+% # ---- Exercice 1 : f(x) = x^2 - 4x + 5 ----
+% f = x**2 - 4*x + 5
+% assert f.subs(x, 1) == 2 and f.subs(x, 4) == 5
+% assert Rational(f.subs(x, 4) - f.subs(x, 1), 4 - 1) == 1
+% assert f.subs(x, 3) == 2
+% assert simplify(f.subs(x, 3 + h) - (h**2 + 2*h + 2)) == 0
+% taux = simplify((f.subs(x, 3 + h) - f.subs(x, 3))/h)
+% assert simplify(taux - (h + 2)) == 0
+% assert limit(taux, h, 0) == 2
+% assert diff(f, x).subs(x, 3) == 2
+% # ---- Exercice 2 : g(x) = x^3 ----
+% g = x**3
+% gp = diff(g, x)
+% assert gp.subs(x, 1) == 3 and g.subs(x, 1) == 1
+% T1 = gp.subs(x, 1)*(x - 1) + g.subs(x, 1)
+% assert simplify(T1 - (3*x - 2)) == 0
+% assert T1.subs(x, 0) == -2
+% assert solve(gp, x) == [0]
+% # ---- Exercice 3 : lecture graphique f(2)=7, f'(2)=-3 ----
+% f2, fp2 = 7, -3
+% T = fp2*(x - 2) + f2
+% assert simplify(T - (-3*x + 13)) == 0
+% assert f2 + fp2*Rational(4, 100) == Rational(688, 100)
+% # ---- Exercice 4 : h(x) = 1/x ----
+% hh = 1/x
+% assert hh.subs(x, 2) == Rational(1, 2) and hh.subs(x, 3) == Rational(1, 3)
+% assert simplify((hh.subs(x, 3) - hh.subs(x, 2))/(3 - 2) + Rational(1, 6)) == 0
+% hp = diff(hh, x)
+% assert hp.subs(x, 2) == Rational(-1, 4)
+% assert Rational(1, 2) + Rational(-1, 4)*Rational(5, 100) == Rational(4875, 10000)
+% assert simplify(hh.subs(x, Rational(205, 100)) - Rational(20, 41)) == 0
+% END-VERIFY

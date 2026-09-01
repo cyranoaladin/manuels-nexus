@@ -1,4 +1,4 @@
-% META: {"id":"1SPE-PRODSCAL-EV-A-corrige","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige_evaluation","capacites_codes":["C1","C2","C3","C4","C5"],"status":"generated"}
+% META: {"id": "1SPE-PRODSCAL-EV-A-corrige", "chapitre": "1SPE-PRODUIT-SCALAIRE", "type_objet": "corrige_evaluation", "capacites_codes": ["C1", "C2", "C3", "C4", "C5"], "status": "generated", "evaluation_ref": "1SPE-PRODSCAL-EV-A"}
 
 \section*{Corrige — Évaluation A — Produit scalaire}
 
@@ -82,3 +82,44 @@ $\cos\widehat{ABC} = \dfrac{BC^2 + AB^2 - AC^2}{2 \cdot BC \cdot AB} = \dfrac{49
 
 \textbf{Question 3.}
 $\mathcal{A} = \dfrac{1}{2} \times AB \times AC \times \sin\widehat{BAC} = \dfrac{1}{2} \times 8 \times 5 \times \dfrac{\sqrt{3}}{2} = 10\sqrt{3} \approx 17{,}3$.
+
+% BEGIN-VERIFY
+% from sympy import Matrix, sqrt, Rational, simplify, cos, sin, pi, symbols, solve
+% # ---- Exercice 1 : u(3;-1), v(2;5) ----
+% u = Matrix([3, -1]); v = Matrix([2, 5])
+% assert u.dot(v) == 1
+% assert simplify(u.norm() - sqrt(10)) == 0
+% assert simplify(v.norm() - sqrt(29)) == 0
+% assert (u + v).dot(u + v) == 41
+% assert (u + v).dot(u - v) == -19
+% assert (u + v).dot(u - v) == u.dot(u) - v.dot(v)
+% # ---- Exercice 2 : A(1;2), B(4;0), C(3;5) ----
+% A = Matrix([1, 2]); B = Matrix([4, 0]); C = Matrix([3, 5])
+% AB = B - A; AC = C - A
+% assert AB == Matrix([3, -2]) and AC == Matrix([2, 3])
+% assert AB.dot(AC) == 0
+% BA = A - B; BC = C - B
+% assert BA.dot(BC) == 13
+% assert simplify(BA.dot(BC)/(BA.norm()*BC.norm()) - sqrt(2)/2) == 0
+% # la somme des angles ferme le triangle rectangle isocele
+% assert simplify(pi - pi/2 - pi/4 - pi/4) == 0
+% # ---- Exercice 3 : A(0;0), B(6;0), C(2;4) ----
+% A = Matrix([0, 0]); B = Matrix([6, 0]); C = Matrix([2, 4])
+% I = (A + B)/2
+% assert I == Matrix([3, 0])
+% t = symbols('t')
+% H = B + t*(C - B)
+% racine = solve((H - A).dot(C - B), t)
+% assert racine == [Rational(3, 4)]
+% H = H.subs(t, Rational(3, 4))
+% assert H == Matrix([3, 3])
+% aire = abs((B - A)[0]*(C - A)[1] - (C - A)[0]*(B - A)[1])/2
+% assert aire == 12
+% # ---- Exercice 4 : AB=8, AC=5, angle A = pi/3 ----
+% AB_, AC_ = 8, 5
+% BC2 = AB_**2 + AC_**2 - 2*AB_*AC_*cos(pi/3)
+% assert simplify(BC2 - 49) == 0
+% BC_ = 7
+% assert simplify(Rational(BC_**2 + AB_**2 - AC_**2, 2*BC_*AB_) - Rational(11, 14)) == 0
+% assert simplify(Rational(1, 2)*AB_*AC_*sin(pi/3) - 10*sqrt(3)) == 0
+% END-VERIFY

@@ -1,4 +1,4 @@
-% META: {"id":"1SPE-DERGLOBAL-EV-B-corrige","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige_evaluation","capacites_codes":["C1","C2","C3","C4","C5"],"status":"generated"}
+% META: {"id": "1SPE-DERGLOBAL-EV-B-corrige", "chapitre": "1SPE-DERIVATION-GLOBAL", "type_objet": "corrige_evaluation", "capacites_codes": ["C1", "C2", "C3", "C4", "C5"], "status": "generated", "evaluation_ref": "1SPE-DERGLOBAL-EV-B"}
 
 \section*{Corrigé — Évaluation B — Dérivation : applications aux variations}
 
@@ -58,9 +58,7 @@ $g(1) = 2 - 9 + 12 = 5$ et $g(2) = 16 - 36 + 24 = 4.$
 \hline
 $x$ & $-\infty$ & & $1$ & & $2$ & & $+\infty$ \\
 \hline
-$g(x)$ & $-\infty$ & $
-earrow$ & $5$ & $\searrow$ & $4$ & $
-earrow$ & $+\infty$ \\
+$g(x)$ & $-\infty$ & $\nearrow$ & $5$ & $\searrow$ & $4$ & $\nearrow$ & $+\infty$ \\
 \hline
 \end{tabular}
 \end{center}
@@ -97,8 +95,7 @@ $x$ & $-\infty$ & & $-2$ \\
 \hline
 $h'(x)$ & $+$ & $+$ & $/\!/$ \\
 \hline
-$h(x)$ & $-\infty$ & $
-earrow$ & $-4$ \\
+$h(x)$ & $-\infty$ & $\nearrow$ & $-4$ \\
 \hline
 \end{tabular}
 \end{center}
@@ -126,8 +123,7 @@ Tableau de variations de $R$ sur $[0\,;\,15]$ :
 \hline
 $x$ & $0$ & & $7{,}5$ & & $15$ \\
 \hline
-$R(x)$ & $0$ & $
-earrow$ & $112{,}5$ & $\searrow$ & $0$ \\
+$R(x)$ & $0$ & $\nearrow$ & $112{,}5$ & $\searrow$ & $0$ \\
 \hline
 \end{tabular}
 \end{center}
@@ -136,3 +132,40 @@ earrow$ & $112{,}5$ & $\searrow$ & $0$ \\
 $R\!\left(\dfrac{15}{2}\right) = 30 \times \dfrac{15}{2} - 2 \times \left(\dfrac{15}{2}\right)^2 = 225 - 2 \times \dfrac{225}{4} = 225 - \dfrac{225}{2} = \dfrac{225}{2} = 112{,}5$ euros.
 
 Le producteur maximise son chiffre d'affaires en vendant $7{,}5$ litres au prix de $30 - 2 \times 7{,}5 = 15$ euros/L, pour un chiffre d'affaires de $\mathbf{112{,}5}$ euros.
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, simplify, solve, Rational, limit, factor
+% x = symbols('x')
+% # ---- Exercice 1 : f(x) = 2x^2 + 3x - 4 ----
+% f = 2*x**2 + 3*x - 4
+% fp = diff(f, x)
+% assert simplify(fp - (4*x + 3)) == 0
+% assert fp.subs(x, 1) == 7
+% assert f.subs(x, 1) == 1
+% T = fp.subs(x, 1)*(x - 1) + f.subs(x, 1)
+% assert simplify(T - (7*x - 6)) == 0
+% assert T.subs(x, 1) == f.subs(x, 1)
+% assert solve(fp, x) == [Rational(-3, 4)]
+% # ---- Exercice 2 : g(x) = 2x^3 - 9x^2 + 12x ----
+% g = 2*x**3 - 9*x**2 + 12*x
+% gp = diff(g, x)
+% assert simplify(gp - 6*(x - 1)*(x - 2)) == 0
+% assert sorted(solve(gp, x)) == [1, 2]
+% assert g.subs(x, 1) == 5
+% assert g.subs(x, 2) == 4
+% assert gp.subs(x, 0) > 0 and gp.subs(x, Rational(3, 2)) < 0 and gp.subs(x, 3) > 0
+% # ---- Exercice 3 : h(x) = (x^2-4)/(x+2) ----
+% h = (x**2 - 4)/(x + 2)
+% assert simplify(h - (x - 2)) == 0
+% hp = diff(x - 2, x)
+% assert hp == 1
+% assert solve(hp, x) == []
+% assert limit(x - 2, x, -2) == -4
+% # ---- Exercice 4 : R(x) = x(30-2x) ----
+% R = x*(30 - 2*x)
+% Rp = diff(R, x)
+% assert simplify(Rp - (30 - 4*x)) == 0
+% assert solve(Rp, x) == [Rational(15, 2)]
+% assert R.subs(x, Rational(15, 2)) == Rational(225, 2)
+% assert (30 - 2*Rational(15, 2)) == 15
+% END-VERIFY

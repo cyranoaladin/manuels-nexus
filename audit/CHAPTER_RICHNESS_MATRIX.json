@@ -7332,14 +7332,17 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C8": {
-          "assessed_by": [],
+          "assessed_by": [
+            "1SPE-SUITES-EV-A",
+            "1SPE-SUITES-EV-B"
+          ],
           "capacity_type": "PROCEDURAL",
           "declarative_status": "SUFFICIENT",
-          "distinct_opportunities": 4,
+          "distinct_opportunities": 5,
           "libelle_eleve": "Je sais reconnaître intuitivement une limite finie, une limite infinie ou une absence de limite, sans formalisation.",
           "missing_function": [],
           "opportunities": {
-            "assessment": 0,
+            "assessment": 2,
             "method": 1,
             "qcm": 1,
             "remediation": 1,
@@ -7412,7 +7415,7 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:85d4ffc615edcb6a7d73c161d04a6acea2f9772fb86bf5edd060dba4649ae569",
+      "capacities_digest": "sha256:a4214749640acf821fbbf9b3c61885b9e93e9ca003c0f96edddaa600a20f2c8e",
       "capacity_identity_blockers": [],
       "chapter": "1SPE-SUITES",
       "counts": {
@@ -20911,7 +20914,7 @@
       "unknown": 2
     }
   },
-  "chapters_digest": "sha256:3fad9d681950cec93793337f2eaf3556ddb9344ce50424ec0cdc5d1e25fa512f",
+  "chapters_digest": "sha256:adbee334084e3e32ed2e54a912d0982d6fb6775e4cc7236aacae6d0278c590c5",
   "generated_by": "scripts/build_chapter_richness_matrix.py",
   "incomplete_chapters": [
     "1NSI-ALGO-DICHO-GLOUTON-KNN",
