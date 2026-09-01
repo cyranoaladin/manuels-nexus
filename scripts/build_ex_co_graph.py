@@ -55,6 +55,22 @@ def _sources(corpora: tuple[Path, ...]) -> list[Path]:
     )
 
 
+def _is_optional_extension(row: dict) -> bool:
+    """L'objet se declare-t-il extension facultative du programme ?"""
+
+    return str((row.get("meta") or {}).get("programme_alignment") or "") == (
+        "OPTIONAL_EXTENSION"
+    )
+
+
+def _extension_codes(row: dict) -> tuple[str, ...]:
+    """Codes d'extension declares, normalises pour la comparaison."""
+
+    return tuple(
+        sorted(str(code) for code in ((row.get("meta") or {}).get("extension_codes") or []))
+    )
+
+
 def build_graph(
     *,
     corpora: tuple[Path, ...] = CORPORA,
@@ -159,10 +175,23 @@ def build_graph(
                 classes.append("CROSS_DISCIPLINE")
             elif correction["chapter"] != exercise["chapter"]:
                 classes.append("MISMATCHED_CONTENT")
+            # Une EXTENSION facultative ne sert aucune capacite : elle declare
+            # son identite dans `extension_codes`. Lire « aucune capacite des
+            # deux cotes » comme un desaccord fabriquerait un bloqueur la ou le
+            # contrat est respecte. La tolerance ne vaut QUE si les deux cotes
+            # sont d'accord -- meme alignement, memes codes d'extension, et
+            # aucune capacite declaree de part et d'autre.
+            aligned_extension_pair = (
+                _is_optional_extension(correction)
+                and _is_optional_extension(exercise)
+                and _extension_codes(correction) == _extension_codes(exercise)
+                and not correction["capacities"]
+                and not exercise["capacities"]
+            )
             if (
                 correction["capacity_error"]
                 or exercise["capacity_error"]
-                or not exercise["capacities"]
+                or (not exercise["capacities"] and not aligned_extension_pair)
             ):
                 classes.append("MISMATCHED_CAPACITY")
             elif correction["capacities"] and set(correction["capacities"]) != set(
