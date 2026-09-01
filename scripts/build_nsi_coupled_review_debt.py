@@ -120,17 +120,36 @@ EXECUTABLE_SUBDIRS = frozenset(
 def _execution_evidence(base: Path, path: Path, source_sha256: str) -> dict[str, Any]:
     executable_scope = path.parent.name in EXECUTABLE_SUBDIRS
     receipt_path = base / "validations" / f"{path.stem}.execution.json"
-    if not executable_scope or not receipt_path.is_file():
+    if not executable_scope:
+        # EXECUTION_NOT_APPLICABLE : l'objet ne porte aucun code. Ce n'est PAS
+        # une lacune de preuve, et le confondre avec une ferait passer une
+        # absence normale pour une dette.
         return {
-            "executable_scope": executable_scope,
+            "executable_scope": False,
+            "execution_applicability": "EXECUTION_NOT_APPLICABLE",
+            "execution_state": "EXECUTION_NOT_APPLICABLE",
+            "evidence_gap": False,
             "receipt_path": None,
             "receipt_sha256": None,
             "declared_source_path": None,
             "declared_source_sha256": None,
             "verdict": None,
-            "binding_state": (
-                "MISSING_RECEIPT" if executable_scope else "NO_EXECUTABLE_CONTENT"
-            ),
+            "binding_state": "NO_EXECUTABLE_CONTENT",
+            "source_bound_current": False,
+        }
+    if not receipt_path.is_file():
+        # EXECUTION_REQUIRED et recu absent : la seule vraie lacune.
+        return {
+            "executable_scope": True,
+            "execution_applicability": "EXECUTION_REQUIRED",
+            "execution_state": "EXECUTION_MISSING",
+            "evidence_gap": True,
+            "receipt_path": None,
+            "receipt_sha256": None,
+            "declared_source_path": None,
+            "declared_source_sha256": None,
+            "verdict": None,
+            "binding_state": "MISSING_RECEIPT",
             "source_bound_current": False,
         }
     receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
@@ -145,6 +164,12 @@ def _execution_evidence(base: Path, path: Path, source_sha256: str) -> dict[str,
     )
     return {
         "executable_scope": True,
+        "execution_applicability": "EXECUTION_REQUIRED",
+        "execution_state": "EXECUTION_PRESENT",
+        # Le recu existe et conclut : la lacune de PREUVE est fermee. Qu'il
+        # soit lie ou non a la source courante est une autre question, portee
+        # par `binding_state`, et il ne faut pas confondre les deux.
+        "evidence_gap": False,
         "receipt_path": str(receipt_path.relative_to(ROOT)),
         "receipt_sha256": "sha256:"
         + hashlib.sha256(receipt_path.read_bytes()).hexdigest(),
@@ -189,17 +214,26 @@ def _machine_verification(entries: list[dict[str, Any]]) -> dict[str, Any]:
         for row in coverage_rows
     )
     in_scope = [
-        entry for entry in entries if entry["execution_evidence"]["executable_scope"]
+        entry
+        for entry in entries
+        if entry["execution_evidence"]["execution_applicability"]
+        == "EXECUTION_REQUIRED"
     ]
     found_receipts = sum(
-        entry["execution_evidence"]["receipt_path"] is not None for entry in in_scope
+        entry["execution_evidence"]["execution_state"] == "EXECUTION_PRESENT"
+        for entry in in_scope
     )
     source_bound = sum(
         entry["execution_evidence"]["source_bound_current"] for entry in entries
     )
     # Un objet hors portee executable n'a pas de recu a manquer : le compter
     # ferait passer une absence normale pour une lacune de preuve.
-    missing_receipts = len(in_scope) - found_receipts
+    # Une lacune de preuve n'existe que si l'execution est REQUISE et le recu
+    # absent. Tout le reste est une absence normale.
+    missing_receipts = sum(
+        entry["execution_evidence"]["evidence_gap"] for entry in entries
+    )
+    assert missing_receipts == len(in_scope) - found_receipts
     return {
         "execution_evidence": {
             "objects": len(entries),

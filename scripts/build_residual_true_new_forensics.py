@@ -219,6 +219,21 @@ def _read_json(path: Path) -> dict[str, Any]:
 SUSPENDED_QUALIFICATIONS_LEDGER = Path("audit/METHOD_REQUALIFICATION_QUEUE.json")
 
 
+def _assignment_module():
+    """Le resolveur d'imputation, charge une fois."""
+
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "review_debt_assignment_for_residual",
+        ROOT / "scripts/review_debt_assignment.py",
+    )
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def _suspended_qualifications(root: Path) -> set[str]:
     """Empreintes dont la qualification est SUSPENDUE, non effacee.
 
@@ -706,14 +721,12 @@ def build_reports(
     active_open_debt = _active_open_debt(qualifications)
     declared_debt = _declared_separate_debt(root)
     separate_debt = set().union(*declared_debt.values()) if declared_debt else set()
-    suspended = _suspended_qualifications(root)
-    # Une qualification peut etre suspendue ET l'objet porte par un registre
-    # de dette declaree : c'est le cas des fiches methodes reecrites du lot
-    # couple. L'objet n'est impute qu'UNE fois, et le registre declare prime
-    # -- c'est lui qui porte le paquet de revue ou un humain les verra. La
-    # suspension reste vraie sur le disque, elle ne compte simplement pas deux
-    # fois ici.
-    suspended = suspended - separate_debt
+    # L'imputation unique est decidee par UNE fonction, partagee par tous les
+    # consommateurs : la corriger ici seulement laisserait le meme defaut
+    # vivant ailleurs.
+    suspended = _suspended_qualifications(root) - _assignment_module().demoted_by_precedence(
+        declared_debt, {"SUSPENDED_QUALIFICATIONS": _suspended_qualifications(root)}
+    )
     extra = sorted(
         active_unqualified - initial_fingerprints - separate_debt - suspended
     )

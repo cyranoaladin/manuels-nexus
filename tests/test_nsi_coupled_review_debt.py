@@ -199,10 +199,32 @@ def test_an_object_without_executable_content_is_not_a_missing_receipt(
     recus manquants ferait passer une absence NORMALE pour une lacune de
     preuve.
     """
+    states = {
+        "EXECUTION_NOT_APPLICABLE",
+        "EXECUTION_MISSING",
+        "EXECUTION_PRESENT",
+    }
     for entry in payload["entries"]:
         evidence = entry["execution_evidence"]
+        assert evidence["execution_state"] in states
         if entry["role"] == "qcm":
-            assert evidence["executable_scope"] is False
+            assert evidence["execution_applicability"] == "EXECUTION_NOT_APPLICABLE"
+            assert evidence["execution_state"] == "EXECUTION_NOT_APPLICABLE"
             assert evidence["receipt_path"] is None
         else:
-            assert evidence["executable_scope"] is True
+            assert evidence["execution_applicability"] == "EXECUTION_REQUIRED"
+
+    # Une lacune de preuve n'existe QUE si l'execution est requise et le recu
+    # absent. Un objet sans code n'a rien a manquer.
+    for entry in payload["entries"]:
+        evidence = entry["execution_evidence"]
+        assert evidence["evidence_gap"] is (
+            evidence["execution_applicability"] == "EXECUTION_REQUIRED"
+            and evidence["execution_state"] == "EXECUTION_MISSING"
+        )
+    assert not any(
+        entry["execution_evidence"]["evidence_gap"]
+        and entry["execution_evidence"]["execution_applicability"]
+        == "EXECUTION_NOT_APPLICABLE"
+        for entry in payload["entries"]
+    )

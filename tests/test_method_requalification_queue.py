@@ -121,3 +121,48 @@ def test_the_committed_artifact_is_current() -> None:
     assert json.loads(stored.read_text(encoding="utf-8")) == json.loads(
         Q.render_json(Q.build_queue())
     )
+
+
+def test_accent_only_refuses_anything_beyond_the_accents() -> None:
+    """ACCENT_ONLY n'est vrai que si TOUT le reste est identique.
+
+    Cette classe decide si une qualification humaine peut etre presumee
+    encore pertinente. Une classification trop large ferait passer une
+    reecriture pour une correction de diacritiques, et laisserait une
+    approbation couvrir un texte qu'elle n'a jamais lu.
+    """
+    classify = Q.classify_change
+
+    assert classify("La suite est croissante.", "La suite est croissante.") == (
+        "UNCHANGED"
+    )
+    assert classify(
+        "La suite est definie par recurrence.",
+        "La suite est définie par récurrence.",
+    ) == "ACCENT_ONLY"
+
+    # Accent CORRIGE, mais un mot change en meme temps.
+    assert classify(
+        "La suite est definie par recurrence.",
+        "La suite est définie par récurrence stricte.",
+    ) == "SUBSTANTIVE_CHANGE"
+
+    # Accent corrige, mais une formule change.
+    assert classify(
+        "On pose u_{n+1} = 2u_n, definie ainsi.",
+        "On pose u_{n+1} = 3u_n, définie ainsi.",
+    ) == "SUBSTANTIVE_CHANGE"
+
+    # Accent corrige, mais la capacite declaree change.
+    assert classify(
+        '% META: {"capacites_codes": ["C1"]}\nMethode definie.',
+        '% META: {"capacites_codes": ["C2"]}\nMéthode définie.',
+    ) == "SUBSTANTIVE_CHANGE"
+
+    # Un mot retire sans aucun accent en jeu.
+    assert classify("un deux trois", "un trois") == "SUBSTANTIVE_CHANGE"
+
+    # La ponctuation n'est pas un accent.
+    assert classify("Soit n un entier", "Soit n, un entier") == (
+        "SUBSTANTIVE_CHANGE"
+    )

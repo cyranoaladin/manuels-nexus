@@ -222,6 +222,21 @@ def _ledger_sets(root: Path) -> tuple[dict[str, set[str]], dict[str, Any]]:
     return sets, evidence
 
 
+def _assignment_module():
+    """Le resolveur d'imputation, charge une fois."""
+
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "review_debt_assignment_for_partition",
+        ROOT / "scripts/review_debt_assignment.py",
+    )
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def build_partition(root: Path = ROOT) -> dict[str, Any]:
     inventory = _read_json(root / INVENTORY)
     algebra = _read_json(root / ALGEBRA)["full_current_algebra"]
@@ -237,14 +252,17 @@ def build_partition(root: Path = ROOT) -> dict[str, Any]:
         set().union(*ledger_sets.values()) if ledger_sets else set()
     )
     requalification = _read_json(root / METHOD_REQUALIFICATION)
-    stale_methods = {
+    declared_stale = {
         str(row["fingerprint"])
         for row in requalification.get("items", [])
         if row.get("state") == "STALE"
+    }
     # Un objet deja porte par un registre de dette DECLAREE y est impute une
-    # seule fois. Le laisser aussi dans la file de requalification le
-    # compterait deux fois et casserait la disjonction.
-    } - declared_debt_fingerprints
+    # seule fois. La regle vient du resolveur commun, jamais d'une
+    # soustraction locale : c'est en la dupliquant qu'elle avait diverge.
+    stale_methods = declared_stale - _assignment_module().demoted_by_precedence(
+        ledger_sets, {"METHOD_REQUALIFICATION": declared_stale}
+    )
     if not stale_methods <= previously_qualified:
         raise ValueError("requalifications périmées hors dette historique 89")
     stale_items = {
