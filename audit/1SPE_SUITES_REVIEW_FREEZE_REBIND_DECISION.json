@@ -1,0 +1,39 @@
+{
+ "artifact_type": "suites_review_freeze_rebind_decision",
+ "schema_version": 1,
+ "supersedes": "decision humaine 2026-08-28 : conserver le gel c667f12b / 161",
+ "human_decision_received": {
+  "date": "2026-09-01",
+  "authorised_by": "Alaeddine Ben Rhouma (direction du projet)",
+  "channel": "instruction directe en session, question de pilotage explicite",
+  "decision": "REBIND_FREEZE_ON_CORRECTED_CONTENT",
+  "scope_declared_unchanged": "meme perimetre, 161 objets",
+  "rationale_given": "la correction de namespace ne touche que la META de cinq objets FR-R*, le corps pedagogique est byte-identique, aucune revue humaine n'avait commence"
+ },
+ "machine_evidence": {
+  "pedagogical_body_lines_changed": 0,
+  "objects_with_meta_changed": [
+   "1SPE-SUITES-FR-R1",
+   "1SPE-SUITES-FR-R2",
+   "1SPE-SUITES-FR-R3",
+   "1SPE-SUITES-FR-R4",
+   "1SPE-SUITES-FR-R5"
+  ],
+  "change_class": "DECLARATION_ONLY_NAMESPACE_CORRECTION",
+  "capacity_credits_before": 1438,
+  "capacity_credits_after": 1438,
+  "authoring_units_digest_unchanged": true,
+  "human_receipts_at_decision": 0,
+  "review_a_at_decision": "PENDING_UNASSIGNED",
+  "review_b_at_decision": "PENDING_UNASSIGNED",
+  "publication_approval_at_decision": false
+ },
+ "what_this_decision_does_not_do": [
+  "elle n'approuve aucun contenu",
+  "elle n'assigne aucun relecteur",
+  "elle ne cree aucun recu",
+  "elle ne promeut aucun statut"
+ ],
+ "review_scope_note": "les `minimum_controls` du packet B incluent « prerequis » : la declaration corrigee entre donc dans le perimetre du relecteur programme/pedagogie, qui la verra dans le packet regenere.",
+ "rebind_target_sha": "817ee970a599ba33139ad78eb0e74ff4c73d6f44"
+}
