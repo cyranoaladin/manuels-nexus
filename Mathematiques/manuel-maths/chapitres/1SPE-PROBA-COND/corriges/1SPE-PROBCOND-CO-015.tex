@@ -6,7 +6,19 @@
 % END-VERIFY
 \begin{corrige}{1SPE-PROBCOND-EX-015}
 
-\textbf{1-2.} $P(S \cap R) = \frac{3}{5} \times \frac{9}{10} = \frac{27}{50}$. $P(S \cap \overline{R}) = \frac{3}{5} \times \frac{1}{10} = \frac{3}{50}$. $P(\overline{S} \cap R) = \frac{2}{5} \times \frac{7}{10} = \frac{14}{50}$. $P(\overline{S} \cap \overline{R}) = \frac{2}{5} \times \frac{3}{10} = \frac{6}{50}$.
+\textbf{1.} Arbre pondéré. On note $R$ « l'élève a révisé » et $S$ « il réussit l'examen ».
+
+\begin{itemize}
+  \item Premier niveau : $R$ de probabilité $\dfrac{3}{5}$, et $\overline{R}$ de probabilité $\dfrac{2}{5}$.
+  \item Sous $R$ : $S$ de probabilité $\dfrac{9}{10}$, et $\overline{S}$ de probabilité $\dfrac{1}{10}$.
+  \item Sous $\overline{R}$ : $S$ de probabilité $\dfrac{7}{10}$, et $\overline{S}$ de probabilité $\dfrac{3}{10}$.
+\end{itemize}
+
+Les branches issues d'un même nœud somment bien à $1$.
+
+\medskip
+
+\textbf{2.} Chaque chemin se lit en multipliant les probabilités de ses branches. $P(S \cap R) = \frac{3}{5} \times \frac{9}{10} = \frac{27}{50}$. $P(S \cap \overline{R}) = \frac{2}{5} \times \frac{7}{10} = \frac{14}{50}$. $P(\overline{S} \cap R) = \frac{3}{5} \times \frac{1}{10} = \frac{3}{50}$. $P(\overline{S} \cap \overline{R}) = \frac{2}{5} \times \frac{3}{10} = \frac{6}{50}$.
 
 \medskip
 \textbf{3.} $\dfrac{27}{50} + \dfrac{3}{50} + \dfrac{14}{50} + \dfrac{6}{50} = \dfrac{50}{50} = 1$ \checkmark.

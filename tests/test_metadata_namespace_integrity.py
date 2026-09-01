@@ -163,3 +163,45 @@ def test_the_collection_declares_every_identity_in_its_own_namespace(guard) -> N
     assert violations == [], (
         f"violations de namespace dans le corpus publiable : {summary}"
     )
+
+
+def test_no_review_packet_mixes_capacities_and_prerequisites(guard) -> None:
+    """Aucun humain ne doit signer un packet melangeant deux namespaces.
+
+    Les packets listaient `capabilities: [C1..C5, R1..R5]`. La cause etait en
+    amont -- des objets declaraient un prerequis dans le champ des capacites --
+    et elle est corrigee a la source. Ce garde empeche la regression : un
+    packet ne peut plus presenter un prerequis comme une capacite du chapitre.
+    """
+    import yaml
+
+    packets = sorted((ROOT / "audit/reviews/human").glob("*/packet-*.json"))
+    assert packets, "aucun packet a verifier"
+
+    offenders: dict[str, list[str]] = {}
+    for packet_path in packets:
+        if "superseded" in packet_path.parts:
+            continue
+        payload = json.loads(packet_path.read_text(encoding="utf-8"))
+        chapter = str(payload.get("chapter_id") or "")
+        contract_path = next(
+            (
+                corpus / chapter / "contrat.yaml"
+                for corpus in CORPORA
+                if (corpus / chapter / "contrat.yaml").is_file()
+            ),
+            None,
+        )
+        if contract_path is None:
+            continue
+        contract = yaml.safe_load(contract_path.read_text(encoding="utf-8")) or {}
+        scope = guard.namespaces(contract, chapter)
+        intruders = [
+            code
+            for code in payload.get("capabilities") or []
+            if str(code) in scope["prerequisite"] and str(code) not in scope["capacity"]
+        ]
+        if intruders:
+            offenders[str(packet_path.relative_to(ROOT))] = sorted(intruders)
+
+    assert offenders == {}, f"packets melangeant les namespaces : {offenders}"
