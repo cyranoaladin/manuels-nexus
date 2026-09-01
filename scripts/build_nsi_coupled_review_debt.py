@@ -99,16 +99,38 @@ def _semantic_digest(clone: Any, text: str) -> str:
     return clone.digest(clone.normalized_body(body))
 
 
+#: Sous-dossiers que `NSI/scripts/verify_python.py` visite reellement. Un
+#: objet situe hors de cette portee -- un QCM rendu en .tex, par exemple --
+#: ne porte aucun bloc executable : son absence de recu est NORMALE et ne doit
+#: pas etre comptee comme une lacune de preuve.
+EXECUTABLE_SUBDIRS = frozenset(
+    {
+        "exercices",
+        "corriges",
+        "evaluations",
+        "ece",
+        "projet",
+        "cours",
+        "methodes",
+        "remediation",
+    }
+)
+
+
 def _execution_evidence(base: Path, path: Path, source_sha256: str) -> dict[str, Any]:
+    executable_scope = path.parent.name in EXECUTABLE_SUBDIRS
     receipt_path = base / "validations" / f"{path.stem}.execution.json"
-    if not receipt_path.is_file():
+    if not executable_scope or not receipt_path.is_file():
         return {
+            "executable_scope": executable_scope,
             "receipt_path": None,
             "receipt_sha256": None,
             "declared_source_path": None,
             "declared_source_sha256": None,
             "verdict": None,
-            "binding_state": "MISSING_RECEIPT",
+            "binding_state": (
+                "MISSING_RECEIPT" if executable_scope else "NO_EXECUTABLE_CONTENT"
+            ),
             "source_bound_current": False,
         }
     receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
@@ -122,6 +144,7 @@ def _execution_evidence(base: Path, path: Path, source_sha256: str) -> dict[str,
         and verdict == "pass"
     )
     return {
+        "executable_scope": True,
         "receipt_path": str(receipt_path.relative_to(ROOT)),
         "receipt_sha256": "sha256:"
         + hashlib.sha256(receipt_path.read_bytes()).hexdigest(),
@@ -165,22 +188,28 @@ def _machine_verification(entries: list[dict[str, Any]]) -> dict[str, Any]:
         row.get("state") == "DECLARED_EXACT_IDENTITY_NOT_SEMANTICALLY_VALIDATED"
         for row in coverage_rows
     )
+    in_scope = [
+        entry for entry in entries if entry["execution_evidence"]["executable_scope"]
+    ]
     found_receipts = sum(
-        entry["execution_evidence"]["receipt_path"] is not None for entry in entries
+        entry["execution_evidence"]["receipt_path"] is not None for entry in in_scope
     )
     source_bound = sum(
         entry["execution_evidence"]["source_bound_current"] for entry in entries
     )
-    missing_receipts = len(entries) - found_receipts
+    # Un objet hors portee executable n'a pas de recu a manquer : le compter
+    # ferait passer une absence normale pour une lacune de preuve.
+    missing_receipts = len(in_scope) - found_receipts
     return {
         "execution_evidence": {
             "objects": len(entries),
+            "objects_in_executable_scope": len(in_scope),
             "receipts_found": found_receipts,
             "missing_receipts": missing_receipts,
             "source_bound_current": source_bound,
             "status": (
                 "COMPLETE"
-                if source_bound == len(entries)
+                if source_bound == len(in_scope)
                 else "UNBOUND_RECEIPTS"
                 if missing_receipts == 0
                 else "INCOMPLETE_RECEIPTS"
@@ -246,7 +275,15 @@ def build_ledger() -> dict[str, Any]:
                 previous_status = str(
                     clone.read_meta(previous).get("status") or ""
                 )
-                if previous_status in HUMAN_APPROVED_STATUSES:
+                if _semantic_digest(clone, previous) == _semantic_digest(
+                    clone, current
+                ):
+                    # La source a bouge, le corps pedagogique non : correction
+                    # d'identite ou declaration ajoutee. Le presenter comme
+                    # une reecriture ferait relire un contenu inchange et
+                    # noierait la dette reelle.
+                    origin = "DECLARATION_CHANGED_SEMANTICS_IDENTICAL"
+                elif previous_status in HUMAN_APPROVED_STATUSES:
                     origin = "REWRITTEN_STALE_APPROVAL"
                 elif previous_status in MACHINE_VERIFIED_STATUSES:
                     origin = "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED"

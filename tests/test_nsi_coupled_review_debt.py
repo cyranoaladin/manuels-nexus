@@ -74,9 +74,29 @@ def test_machine_verification_is_never_relabelled_as_lost_human_approval(
         if e["origin"] == "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED"
     ]
     created = [e for e in payload["entries"] if e["origin"] == "CREATED"]
-    assert len(rewritten_machine) == 4
-    assert len(created) == 32
-    assert len(rewritten_machine) + len(created) == payload["count"] == 36
+    rewritten = [e for e in payload["entries"] if e["origin"] == "REWRITTEN"]
+    declaration = [
+        e
+        for e in payload["entries"]
+        if e["origin"] == "DECLARATION_CHANGED_SEMANTICS_IDENTICAL"
+    ]
+
+    # Les cardinalites ne sont plus epinglees : elles suivent le corpus, et un
+    # quota fige finit par mentir des qu'un objet de plus est reecrit. Ce qui
+    # est verrouille, c'est que la partition soit EXHAUSTIVE -- aucune autre
+    # classe d'origine ne peut apparaitre sans que ce test la voie -- et que
+    # les cardinalites declarees egalent les ensembles observes.
+    assert (
+        len(rewritten_machine) + len(created) + len(rewritten) + len(declaration)
+        == payload["count"]
+    )
+    assert len(payload["entries"]) == payload["count"]
+    assert payload["counts_by_origin"] == {
+        "CREATED": len(created),
+        "DECLARATION_CHANGED_SEMANTICS_IDENTICAL": len(declaration),
+        "REWRITTEN": len(rewritten),
+        "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED": len(rewritten_machine),
+    }
 
     for entry in rewritten_machine:
         assert entry["status_before_rewrite"] == "verified"
@@ -137,3 +157,52 @@ def test_the_debt_is_disjoint_from_the_other_ledgers(payload: dict) -> None:
             for e in json.loads((ROOT / other).read_text(encoding="utf-8"))["entries"]
         }
         assert mine.isdisjoint(theirs), other
+
+
+def test_a_declaration_only_change_is_not_reported_as_a_rewrite(payload: dict) -> None:
+    """Corriger une META ne reecrit pas le contenu enseigne.
+
+    Deux cas reels le montrent : les quatre exercices ADGK qui ne gagnent
+    qu'un champ `gestes`, et les cours APT-C2/C3 dont seule l'identite passe
+    de AGT a APT. Leur corps pedagogique est identique au digest pres. Les
+    classer comme reecriture ferait relire a un humain un contenu qui n'a pas
+    bouge, et diluerait la dette reelle dans du bruit.
+    """
+    declaration_only = [
+        entry
+        for entry in payload["entries"]
+        if entry["semantic_digest_before"] is not None
+        and entry["semantic_digest_before"] == entry["semantic_digest_current"]
+    ]
+    assert declaration_only, "le corpus courant doit en contenir"
+    for entry in declaration_only:
+        assert entry["origin"] == "DECLARATION_CHANGED_SEMANTICS_IDENTICAL"
+        assert entry["source_sha256"] != entry["source_sha256_before"]
+        assert entry["human_approval_invalidated_by_rewrite"] is False
+        # La dette subsiste : une declaration est une affirmation sur l'objet,
+        # et elle se relit. Elle ne se presente simplement pas comme une
+        # reecriture du cours.
+        assert entry["human_review_required"] is True
+        assert entry["release_blocking"] is True
+
+    for entry in payload["entries"]:
+        if entry["origin"].startswith("REWRITTEN"):
+            assert entry["semantic_digest_before"] != entry["semantic_digest_current"]
+
+
+def test_an_object_without_executable_content_is_not_a_missing_receipt(
+    payload: dict,
+) -> None:
+    """Un QCM .tex ne porte aucun Python : il n'a pas de recu a manquer.
+
+    `verify_python.py` ne visite pas `qcm/`. Compter ces objets comme des
+    recus manquants ferait passer une absence NORMALE pour une lacune de
+    preuve.
+    """
+    for entry in payload["entries"]:
+        evidence = entry["execution_evidence"]
+        if entry["role"] == "qcm":
+            assert evidence["executable_scope"] is False
+            assert evidence["receipt_path"] is None
+        else:
+            assert evidence["executable_scope"] is True

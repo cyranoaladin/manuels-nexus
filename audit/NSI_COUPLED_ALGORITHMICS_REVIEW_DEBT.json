@@ -11,8 +11,9 @@
   "count": 53,
   "counts_by_origin": {
     "CREATED": 32,
+    "DECLARATION_CHANGED_SEMANTICS_IDENTICAL": 6,
     "REWRITTEN": 5,
-    "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED": 16
+    "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED": 10
   },
   "counts_by_chapter": {
     "1NSI-ALGO-DICHO-GLOUTON-KNN": 17,
@@ -29,10 +30,11 @@
   "machine_verification_performed": {
     "execution_evidence": {
       "objects": 53,
+      "objects_in_executable_scope": 51,
       "receipts_found": 51,
-      "missing_receipts": 2,
+      "missing_receipts": 0,
       "source_bound_current": 0,
-      "status": "INCOMPLETE_RECEIPTS"
+      "status": "UNBOUND_RECEIPTS"
     },
     "clone_capacity_integrity": {
       "invalid_credit_objects": 0,
@@ -81,6 +83,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/validations/1NSI-ADGK-CO-004.execution.json",
         "receipt_sha256": "sha256:3f20de42bbcf5d7fa22375167443d7d7290c7ed52ef8961f7cf5174a94de0fe9",
         "declared_source_path": null,
@@ -113,6 +116,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/validations/1NSI-ADGK-RE-C2-CORRIGE.execution.json",
         "receipt_sha256": "sha256:99ad3e1b41afd08240943ce6e4a55a0e169411f275ef132d10ef662d759d6812",
         "declared_source_path": null,
@@ -145,6 +149,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/validations/1NSI-ADGK-RE-C3-CORRIGE.execution.json",
         "receipt_sha256": "sha256:e60da96f3418cedce8a730ce26b2f5a8fed0e63c69cade5c980d6326de4f8709",
         "declared_source_path": null,
@@ -177,6 +182,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/validations/1NSI-ADGK-COURS-C3.execution.json",
         "receipt_sha256": "sha256:087c6ab091a18eafb4c97f7e8182e3f4fa44f47705ca21c5ea4c5f4303b93095",
         "declared_source_path": null,
@@ -209,6 +215,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/validations/1NSI-ADGK-EVAL-A.execution.json",
         "receipt_sha256": "sha256:de91f8f3dd27aed243b01cb194678e89efb5931fc96b498e64b374dc13e65d0d",
         "declared_source_path": null,
@@ -241,6 +248,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/validations/1NSI-ADGK-EVAL-B.execution.json",
         "receipt_sha256": "sha256:b1353d6b11b7b89106595304a4aa242917ed7f881ed1a0892d0d467b937aa1ea",
         "declared_source_path": null,
@@ -264,7 +272,7 @@
       "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
       "role": "exercices",
       "status": "verified",
-      "origin": "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED",
+      "origin": "DECLARATION_CHANGED_SEMANTICS_IDENTICAL",
       "status_before_rewrite": "verified",
       "source_sha256": "sha256:25bfc3a99bfd27a8523f2d0fa20dbf3a532f77886f16499a732219b8fa3cd51e",
       "source_sha256_before": "sha256:1e8ebecd8087b65313bfb9a46eb87f4f398a56b55087f7b0b63fb0f1a3af98c3",
@@ -273,6 +281,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/validations/1NSI-ADGK-EX-001.execution.json",
         "receipt_sha256": "sha256:1b8e715e83ac1f2b8684991ac487fae1411ea1b60945cf287ca909c152299621",
         "declared_source_path": null,
@@ -296,7 +305,7 @@
       "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
       "role": "exercices",
       "status": "verified",
-      "origin": "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED",
+      "origin": "DECLARATION_CHANGED_SEMANTICS_IDENTICAL",
       "status_before_rewrite": "verified",
       "source_sha256": "sha256:6f7c033bbc4f902ab8e4f0d593e53086333e5e2b3b4b1e9cd5cf7beb1763561c",
       "source_sha256_before": "sha256:23912eb93dcdbc265f5336f351f17bfed26eb7c5f13e6bb53a40ca0faab97bcc",
@@ -305,6 +314,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/validations/1NSI-ADGK-EX-002.execution.json",
         "receipt_sha256": "sha256:ea8cfbb968a95a88cc7c726f3bda7e6b4c06ae93a5e016cbab0876cf87d660e0",
         "declared_source_path": null,
@@ -328,7 +338,7 @@
       "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
       "role": "exercices",
       "status": "verified",
-      "origin": "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED",
+      "origin": "DECLARATION_CHANGED_SEMANTICS_IDENTICAL",
       "status_before_rewrite": "verified",
       "source_sha256": "sha256:1421a3f9bc69b6122cb12759f4c1c658f27638787986d0c3d528d7772f49e25a",
       "source_sha256_before": "sha256:2ede02396895a5f9b2c2e4eb142f8f84d32f271abdf69dafa53281a8aecc9bd8",
@@ -337,6 +347,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/validations/1NSI-ADGK-EX-003.execution.json",
         "receipt_sha256": "sha256:a4cd51a493f5d0b1fd4e21745f5725a847c76ee4288c0b589f5e8aeb814d1315",
         "declared_source_path": null,
@@ -369,6 +380,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/validations/1NSI-ADGK-EX-004.execution.json",
         "receipt_sha256": "sha256:c9f2e1a0f6612f28082c320e4ef264e8b892526265e18ab7757d2d625ee4bc4c",
         "declared_source_path": null,
@@ -392,7 +404,7 @@
       "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
       "role": "exercices",
       "status": "verified",
-      "origin": "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED",
+      "origin": "DECLARATION_CHANGED_SEMANTICS_IDENTICAL",
       "status_before_rewrite": "verified",
       "source_sha256": "sha256:f284cf20fb8f30d58fa4e40729ae8ddcc1123a4a461ed6b8acf81ded8b310280",
       "source_sha256_before": "sha256:e08f2cf3af285a5e33027170c447a141b427bc0bbf76788d61528bc5a3a20530",
@@ -401,6 +413,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/validations/1NSI-ADGK-EX-005.execution.json",
         "receipt_sha256": "sha256:fd8bc6107a1c92da7604f63684e314f6138c51233888b7dfc703cb1ec81962d0",
         "declared_source_path": null,
@@ -433,6 +446,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/validations/1NSI-ADGK-ME-001.execution.json",
         "receipt_sha256": "sha256:20d97e29d874485cd730fd00bb443a699d9e2ec7618bf7cf7affbc14bc1f5d58",
         "declared_source_path": null,
@@ -465,6 +479,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/validations/1NSI-ADGK-ME-002.execution.json",
         "receipt_sha256": "sha256:bfe6f20fad5a518322340a0534bce6d4d0018682a96c1d1edaa61fd328c74a82",
         "declared_source_path": null,
@@ -497,6 +512,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/validations/1NSI-ADGK-ME-003.execution.json",
         "receipt_sha256": "sha256:b4b6252e503fcfc032f85f4639f527b287bc3fb9f366e6cf98afa00247de137a",
         "declared_source_path": null,
@@ -529,12 +545,13 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": false,
         "receipt_path": null,
         "receipt_sha256": null,
         "declared_source_path": null,
         "declared_source_sha256": null,
         "verdict": null,
-        "binding_state": "MISSING_RECEIPT",
+        "binding_state": "NO_EXECUTABLE_CONTENT",
         "source_bound_current": false
       },
       "machine_verified_by_execution": false,
@@ -561,6 +578,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/validations/1NSI-ADGK-RE-C2.execution.json",
         "receipt_sha256": "sha256:fbe0b6d1c644ce41ace2c30c6afbf18c63e55ac5910ddc47d304b0df528def43",
         "declared_source_path": null,
@@ -593,6 +611,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/validations/1NSI-ADGK-RE-C3.execution.json",
         "receipt_sha256": "sha256:b827268b20464f0a197a745554bc1ad25361f58f80684d3867f772e4de02be44",
         "declared_source_path": null,
@@ -625,6 +644,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-CO-101.execution.json",
         "receipt_sha256": "sha256:b88ed5b9bcc71c2c4e146498544343548dfd838f01d58b184e1ae00c7bf08121",
         "declared_source_path": null,
@@ -657,6 +677,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-CO-102.execution.json",
         "receipt_sha256": "sha256:70fa4c3ca805a6ef98a88a88567074be84724ecf4a62d870d30a4cf49e92a289",
         "declared_source_path": null,
@@ -689,6 +710,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-CO-103.execution.json",
         "receipt_sha256": "sha256:8c0694c2de875940490597c5a8b7bfe2b7e75762f2d12ad70a836365d2590845",
         "declared_source_path": null,
@@ -721,6 +743,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-CO-104.execution.json",
         "receipt_sha256": "sha256:ffdf95bedeff9a59c9bb7b418254f06f941187e33703719a2e935b8cfe53a07c",
         "declared_source_path": null,
@@ -753,6 +776,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-CO-105.execution.json",
         "receipt_sha256": "sha256:ce846a569bea022176af00b250d781c594fcae86a3fe10c8f2bb48ae62a541e6",
         "declared_source_path": null,
@@ -785,6 +809,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-CO-106.execution.json",
         "receipt_sha256": "sha256:8df3be91768a13ed0173dd294c7cda69b89a5b01c0eb8d66df57a02e67ebf0e3",
         "declared_source_path": null,
@@ -817,6 +842,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-RE-C1-CORRIGE.execution.json",
         "receipt_sha256": "sha256:17e3cc3c573d6c48246afb54a954315579f7877c68d65ddb181b31ec098881aa",
         "declared_source_path": null,
@@ -849,6 +875,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-RE-C2-CORRIGE.execution.json",
         "receipt_sha256": "sha256:a5a8cdbc7cc03e2bf0b2a5584a96297d099b24ee309d24a91ba0cf50abaed595",
         "declared_source_path": null,
@@ -881,6 +908,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-RE-C3-CORRIGE.execution.json",
         "receipt_sha256": "sha256:1ebcf4cbb67beb13d194f922f1325924efc97bd5c44e545e5c8c5eeb24b82be0",
         "declared_source_path": null,
@@ -913,6 +941,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-RE-C4-CORRIGE.execution.json",
         "receipt_sha256": "sha256:b3d34def4e598e6ce3b240afd5e3d11607b7c62ab4f61d60a44dedece8380b4c",
         "declared_source_path": null,
@@ -945,6 +974,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-RE-C6-CORRIGE.execution.json",
         "receipt_sha256": "sha256:89997135ceba2e34e1506f7353af8d0a5d2db69ba5e6749412f86c9463cf7ae3",
         "declared_source_path": null,
@@ -977,6 +1007,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-COURS-C1.execution.json",
         "receipt_sha256": "sha256:b314f93f73c5a6ae62b1176a661e85d448e23f262c8c98be6975eab51398dd3c",
         "declared_source_path": null,
@@ -1000,7 +1031,7 @@
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
       "role": "cours",
       "status": "verified",
-      "origin": "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED",
+      "origin": "DECLARATION_CHANGED_SEMANTICS_IDENTICAL",
       "status_before_rewrite": "verified",
       "source_sha256": "sha256:a8339acec27dc262530f7bef1efa57621b7de677a2df79ff7ffe123d9b201ae2",
       "source_sha256_before": "sha256:0d16b34f49524a4a111da74764033e471f7ecbbdec86ed5d9026c710468f4d7d",
@@ -1009,6 +1040,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-COURS-C2.execution.json",
         "receipt_sha256": "sha256:de02729b13bc4b6d6ab84177b69d3ebca7bef2c5f86025214202b98cf67dffee",
         "declared_source_path": null,
@@ -1032,7 +1064,7 @@
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
       "role": "cours",
       "status": "verified",
-      "origin": "REWRITTEN_PREVIOUSLY_MACHINE_VERIFIED",
+      "origin": "DECLARATION_CHANGED_SEMANTICS_IDENTICAL",
       "status_before_rewrite": "verified",
       "source_sha256": "sha256:6b8d8144cc10ec22365134cb0217ff810c9e119f103c21ea5a0f399cefead83a",
       "source_sha256_before": "sha256:c9c390760e1ab5fbdf83b3957a2ba8a620ed878a6543944c3d090f55562eb257",
@@ -1041,6 +1073,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-COURS-C3.execution.json",
         "receipt_sha256": "sha256:5de1dac3e5fbc886d14881776241776e72298fd0f9a31f1fde9da734fa56c352",
         "declared_source_path": null,
@@ -1073,6 +1106,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-EVAL-A-corrige.execution.json",
         "receipt_sha256": "sha256:61d0a760be13c99ba53faa6097b1f9ac6d587c16ec9b05a4cd80c05e2ebc6fde",
         "declared_source_path": null,
@@ -1105,6 +1139,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-EVAL-A.execution.json",
         "receipt_sha256": "sha256:93d67f611bd95e796e1d9dfd050d52361c20f28d4ff34d3d867e0ab30e36515d",
         "declared_source_path": null,
@@ -1137,6 +1172,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-EVAL-B-corrige.execution.json",
         "receipt_sha256": "sha256:a149aa8b20bb676f9b577e32549361927dd2b8277d3bab277f6101ac522e63dd",
         "declared_source_path": null,
@@ -1169,6 +1205,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-EVAL-B.execution.json",
         "receipt_sha256": "sha256:75e2a16116b70bafb9ff047f3874cfc4db3d61c8385391e06c21a1dfeda64a07",
         "declared_source_path": null,
@@ -1201,6 +1238,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-EX-101.execution.json",
         "receipt_sha256": "sha256:6c35389d60c945cec63e3e5152ee97ee105c17e91202e11f4b09f59058b3edeb",
         "declared_source_path": null,
@@ -1233,6 +1271,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-EX-102.execution.json",
         "receipt_sha256": "sha256:eeffd3a3f3a4020fab901e2502e21bfaee4424b3900809ccce56e161afafa435",
         "declared_source_path": null,
@@ -1265,6 +1304,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-EX-103.execution.json",
         "receipt_sha256": "sha256:fff5a71868cf5d64a3375e382b0b4aa45ed823906e12f99ee5bcdffb7675a74e",
         "declared_source_path": null,
@@ -1297,6 +1337,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-EX-104.execution.json",
         "receipt_sha256": "sha256:66ca974ea8a036bfdea685cb972bc05763bcc91e8b4a7f7a7fcea468dc21203a",
         "declared_source_path": null,
@@ -1329,6 +1370,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-EX-105.execution.json",
         "receipt_sha256": "sha256:9ebc3ea778d98c7a01de1bb3661b4ec844b1b24265f1a1f983d18b1108abc9cd",
         "declared_source_path": null,
@@ -1361,6 +1403,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-EX-106.execution.json",
         "receipt_sha256": "sha256:c7b93bc4343b0bf908d3032e8a12afd7f03cae3c3da3017fbb0d945bc9b932bf",
         "declared_source_path": null,
@@ -1393,6 +1436,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-ME-001.execution.json",
         "receipt_sha256": "sha256:8acd9fd4c03591c15016c1ae9ac2b61faf00ff76a5f5db506cc2b2ae84752c16",
         "declared_source_path": null,
@@ -1425,6 +1469,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-ME-002.execution.json",
         "receipt_sha256": "sha256:7233d0902ce83d5139827c709696664224deb91518de99d1aa85d51bd204fc45",
         "declared_source_path": null,
@@ -1457,6 +1502,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-ME-003.execution.json",
         "receipt_sha256": "sha256:a60925f5e0374f4f0fe8d1d2abc38d4e6a73e077d71c63ae10a6594b1e59eb22",
         "declared_source_path": null,
@@ -1489,6 +1535,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-ME-004.execution.json",
         "receipt_sha256": "sha256:86e61aeab65f4157565799417cb69e4aae718bec91177f70bff0d56950201c38",
         "declared_source_path": null,
@@ -1521,6 +1568,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-ME-005.execution.json",
         "receipt_sha256": "sha256:903e043be02cd6cb87f3111f32cbd7595c721fc064ad296412365f31e4abcdb3",
         "declared_source_path": null,
@@ -1553,6 +1601,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-ME-006.execution.json",
         "receipt_sha256": "sha256:3846cd9b3bdb8f7ca451632dd587f753d895a010a7e1e72a6470a81754a3811b",
         "declared_source_path": null,
@@ -1585,12 +1634,13 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": false,
         "receipt_path": null,
         "receipt_sha256": null,
         "declared_source_path": null,
         "declared_source_sha256": null,
         "verdict": null,
-        "binding_state": "MISSING_RECEIPT",
+        "binding_state": "NO_EXECUTABLE_CONTENT",
         "source_bound_current": false
       },
       "machine_verified_by_execution": false,
@@ -1617,6 +1667,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-RE-C1.execution.json",
         "receipt_sha256": "sha256:ea3f1219e7627d317652b8b1e14a42c7f6d4fc16c700d01fbeca1e9324115759",
         "declared_source_path": null,
@@ -1649,6 +1700,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-RE-C2.execution.json",
         "receipt_sha256": "sha256:8ac699977c063330263f45f98a693001a75f406ca080fc7008af69ffa09bd158",
         "declared_source_path": null,
@@ -1681,6 +1733,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-RE-C3.execution.json",
         "receipt_sha256": "sha256:2ff1079ad81f37cf9baeba52cb7d04ba90d8f9556a374726120585554bbb245b",
         "declared_source_path": null,
@@ -1713,6 +1766,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-RE-C4.execution.json",
         "receipt_sha256": "sha256:d41c83caf1e4d58a76d50255dcbecaf7609a6c3ae79faa20a4b0d8248ba61a49",
         "declared_source_path": null,
@@ -1745,6 +1799,7 @@
       "human_approval_evidence": false,
       "human_approval_invalidated_by_rewrite": false,
       "execution_evidence": {
+        "executable_scope": true,
         "receipt_path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/validations/1NSI-APT-RE-C6.execution.json",
         "receipt_sha256": "sha256:c8afd46871eb3cf6f4a323843b4eeebcc78eb1417bdda3a728df94de88fb9722",
         "declared_source_path": null,
