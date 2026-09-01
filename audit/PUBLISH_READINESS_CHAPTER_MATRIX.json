@@ -674,7 +674,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:8232d6cffe0257d6f888218b849724cc68adcafc2f03404851134ae248d89e3b",
+        "cell_state_set_digest": "sha256:3676b76f6398a74659d7bf96f2c67364b1eb6fcb9e091fb4c8f96411e9acb3fb",
         "cells": 35,
         "status": "COMPLETE",
         "unknown": 0,
@@ -683,25 +683,22 @@
       "chapter": "1NSI-ARCHITECTURE-OS",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0023",
-          "CG-0027",
-          "CG-0031",
-          "CG-0048",
-          "CG-0065",
-          "CG-0068",
-          "CG-0092",
-          "CG-0112",
-          "CG-0150",
-          "CG-0167",
-          "CG-0183",
-          "CG-0205",
-          "CG-0218",
-          "CG-0224",
-          "CG-0228",
-          "CG-0242"
+          "CG-0020",
+          "CG-0024",
+          "CG-0028",
+          "CG-0045",
+          "CG-0061",
+          "CG-0064",
+          "CG-0132",
+          "CG-0148",
+          "CG-0163",
+          "CG-0192",
+          "CG-0197",
+          "CG-0201",
+          "CG-0214"
         ],
-        "ambiguous_group_ids_digest": "sha256:7a5666d3832ede414a2a8076e1763d0146a94b59ba70ef60d3d2293970e106b4",
-        "ambiguous_groups": 16,
+        "ambiguous_group_ids_digest": "sha256:007489a96f1ccd538d0de185763aaea66196123eff4254a7a3ca9530fb7264ce",
+        "ambiguous_groups": 13,
         "false_copy_count": 0,
         "false_copy_paths": [],
         "false_copy_paths_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
@@ -711,11 +708,11 @@
         "unknown_groups": 0
       },
       "course_assembly_truth": {
-        "ambiguous": 8,
-        "duplicated": 5,
+        "ambiguous": 0,
+        "duplicated": 0,
         "foreign": 0,
-        "missing": 5,
-        "status": "GAP",
+        "missing": 0,
+        "status": "COMPLETE",
         "unknown": 0
       },
       "cross_discipline_content": {
@@ -746,7 +743,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 119,
+        "ambiguous": 94,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -799,7 +796,7 @@
         "assessments": "GAP",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "GAP",
-        "course_assembly_truth": "GAP",
+        "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
         "diacritics": "COMPLETE",
         "evidence_routing": "GAP",
@@ -811,8 +808,8 @@
         "qcm": "COMPLETE"
       },
       "manual": "1NSI",
-      "object_count": 81,
-      "object_set_digest": "sha256:86b936852980e8c3b41f39e2155c7fef613aaef085831272215be3f11d2d1ad7",
+      "object_count": 76,
+      "object_set_digest": "sha256:5a565a85e0830fb717b2d42695f8b7b1ecd22982badbdda9668cd436cf772633",
       "oracle": {
         "fail": 0,
         "manual_review": 0,
@@ -829,30 +826,25 @@
         "unknown": 5
       },
       "pedagogical_role_coverage": {
-        "indeterminate": 20,
+        "indeterminate": 15,
         "indeterminate_ids": [
           "1NSI::1NSI-ARCHITECTURE-OS::C1::corriges",
-          "1NSI::1NSI-ARCHITECTURE-OS::C1::cours",
           "1NSI::1NSI-ARCHITECTURE-OS::C1::exercices",
           "1NSI::1NSI-ARCHITECTURE-OS::C1::remediation",
           "1NSI::1NSI-ARCHITECTURE-OS::C2::corriges",
-          "1NSI::1NSI-ARCHITECTURE-OS::C2::cours",
           "1NSI::1NSI-ARCHITECTURE-OS::C2::exercices",
           "1NSI::1NSI-ARCHITECTURE-OS::C2::remediation",
           "1NSI::1NSI-ARCHITECTURE-OS::C3::corriges",
-          "1NSI::1NSI-ARCHITECTURE-OS::C3::cours",
           "1NSI::1NSI-ARCHITECTURE-OS::C3::exercices",
           "1NSI::1NSI-ARCHITECTURE-OS::C3::remediation",
           "1NSI::1NSI-ARCHITECTURE-OS::C4::corriges",
-          "1NSI::1NSI-ARCHITECTURE-OS::C4::cours",
           "1NSI::1NSI-ARCHITECTURE-OS::C4::exercices",
           "1NSI::1NSI-ARCHITECTURE-OS::C4::remediation",
           "1NSI::1NSI-ARCHITECTURE-OS::C5::corriges",
-          "1NSI::1NSI-ARCHITECTURE-OS::C5::cours",
           "1NSI::1NSI-ARCHITECTURE-OS::C5::exercices",
           "1NSI::1NSI-ARCHITECTURE-OS::C5::remediation"
         ],
-        "indeterminate_set_digest": "sha256:b8eeabf2754577ca3075b353ad04678f4d4dcc9e272f4e921add8d980bb12c51",
+        "indeterminate_set_digest": "sha256:7f2f4f426bcc73a75b25f297a756ff71d0570ba619c960976efa9c4b89245734",
         "missing": 6,
         "missing_ids": [
           "1NSI::1NSI-ARCHITECTURE-OS::C1::methodes",
@@ -863,19 +855,24 @@
           "1NSI::1NSI-ARCHITECTURE-OS::C5::methodes"
         ],
         "missing_set_digest": "sha256:2f09f84d978ab4d35e43aee1562829a9dc1def619cf9cbf8569d1cc2228d07c1",
-        "semantically_unvalidated": 9,
+        "semantically_unvalidated": 14,
         "semantically_unvalidated_ids": [
+          "1NSI::1NSI-ARCHITECTURE-OS::C1::cours",
           "1NSI::1NSI-ARCHITECTURE-OS::C1::evaluations",
           "1NSI::1NSI-ARCHITECTURE-OS::C1::qcm",
+          "1NSI::1NSI-ARCHITECTURE-OS::C2::cours",
           "1NSI::1NSI-ARCHITECTURE-OS::C2::evaluations",
           "1NSI::1NSI-ARCHITECTURE-OS::C2::qcm",
+          "1NSI::1NSI-ARCHITECTURE-OS::C3::cours",
           "1NSI::1NSI-ARCHITECTURE-OS::C3::evaluations",
           "1NSI::1NSI-ARCHITECTURE-OS::C3::qcm",
+          "1NSI::1NSI-ARCHITECTURE-OS::C4::cours",
           "1NSI::1NSI-ARCHITECTURE-OS::C4::qcm",
+          "1NSI::1NSI-ARCHITECTURE-OS::C5::cours",
           "1NSI::1NSI-ARCHITECTURE-OS::C5::evaluations",
           "1NSI::1NSI-ARCHITECTURE-OS::C5::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:5eef878db0a8b5bcbd0eab58f3cce78023dd41f094265a60ab7a4cf2010d4785",
+        "semantically_unvalidated_set_digest": "sha256:c2d97077519af2d3e3f93061976a1b29df1fead32daef059cd13a4ff5259a023",
         "status": "GAP"
       },
       "programme": {
@@ -937,7 +934,7 @@
         "questions": 6,
         "status": "COMPLETE"
       },
-      "risk_score": 11765,
+      "risk_score": 10805,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -977,7 +974,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:7204a607ebbe08db6466f9448e131de92df867faea0338a7a10f71f7b53f845f",
+        "cell_state_set_digest": "sha256:2e6285aba9c409a15f4979b9a9f79ae05ce4facbadc688e1d67f96fce0897b16",
         "cells": 49,
         "status": "COMPLETE",
         "unknown": 0,
@@ -986,27 +983,22 @@
       "chapter": "1NSI-LANGAGE",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0093",
-          "CG-0094",
-          "CG-0115",
-          "CG-0127",
-          "CG-0138",
-          "CG-0150",
-          "CG-0158",
-          "CG-0161",
-          "CG-0172",
-          "CG-0174",
-          "CG-0185",
-          "CG-0188",
+          "CG-0086",
+          "CG-0102",
+          "CG-0121",
+          "CG-0132",
+          "CG-0140",
+          "CG-0143",
+          "CG-0153",
+          "CG-0165",
+          "CG-0167",
+          "CG-0207",
           "CG-0222",
-          "CG-0234",
-          "CG-0251",
-          "CG-0257",
-          "CG-0263",
-          "CG-0279"
+          "CG-0233",
+          "CG-0247"
         ],
-        "ambiguous_group_ids_digest": "sha256:c248aecc3830fb273578e1298b46fd462dffc8d296dd90526fe34e6d426aef9d",
-        "ambiguous_groups": 18,
+        "ambiguous_group_ids_digest": "sha256:59194f0d9bf4cb173a9cc7291e565c7026b03ebe03294868f1371b143464db6a",
+        "ambiguous_groups": 13,
         "false_copy_count": 0,
         "false_copy_paths": [],
         "false_copy_paths_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
@@ -1016,11 +1008,11 @@
         "unknown_groups": 0
       },
       "course_assembly_truth": {
-        "ambiguous": 12,
-        "duplicated": 7,
+        "ambiguous": 0,
+        "duplicated": 0,
         "foreign": 0,
-        "missing": 7,
-        "status": "GAP",
+        "missing": 0,
+        "status": "COMPLETE",
         "unknown": 0
       },
       "cross_discipline_content": {
@@ -1051,7 +1043,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 178,
+        "ambiguous": 152,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -1106,7 +1098,7 @@
         "assessments": "GAP",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "GAP",
-        "course_assembly_truth": "GAP",
+        "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
         "diacritics": "COMPLETE",
         "evidence_routing": "GAP",
@@ -1118,8 +1110,8 @@
         "qcm": "COMPLETE"
       },
       "manual": "1NSI",
-      "object_count": 111,
-      "object_set_digest": "sha256:a1f8e6e081d64ef26aa8945b2ed1b5fffd82e6ebfad595eedcd18de38e57961b",
+      "object_count": 104,
+      "object_set_digest": "sha256:8bee384f8980b74926e6bc11890c385655fd57240928c71ed2043b34f586bc6e",
       "oracle": {
         "fail": 0,
         "manual_review": 0,
@@ -1136,38 +1128,31 @@
         "unknown": 7
       },
       "pedagogical_role_coverage": {
-        "indeterminate": 28,
+        "indeterminate": 21,
         "indeterminate_ids": [
           "1NSI::1NSI-LANGAGE::C1::corriges",
-          "1NSI::1NSI-LANGAGE::C1::cours",
           "1NSI::1NSI-LANGAGE::C1::exercices",
           "1NSI::1NSI-LANGAGE::C1::remediation",
           "1NSI::1NSI-LANGAGE::C2::corriges",
-          "1NSI::1NSI-LANGAGE::C2::cours",
           "1NSI::1NSI-LANGAGE::C2::exercices",
           "1NSI::1NSI-LANGAGE::C2::remediation",
           "1NSI::1NSI-LANGAGE::C3::corriges",
-          "1NSI::1NSI-LANGAGE::C3::cours",
           "1NSI::1NSI-LANGAGE::C3::exercices",
           "1NSI::1NSI-LANGAGE::C3::remediation",
           "1NSI::1NSI-LANGAGE::C4::corriges",
-          "1NSI::1NSI-LANGAGE::C4::cours",
           "1NSI::1NSI-LANGAGE::C4::exercices",
           "1NSI::1NSI-LANGAGE::C4::remediation",
           "1NSI::1NSI-LANGAGE::C5::corriges",
-          "1NSI::1NSI-LANGAGE::C5::cours",
           "1NSI::1NSI-LANGAGE::C5::exercices",
           "1NSI::1NSI-LANGAGE::C5::remediation",
           "1NSI::1NSI-LANGAGE::C6::corriges",
-          "1NSI::1NSI-LANGAGE::C6::cours",
           "1NSI::1NSI-LANGAGE::C6::exercices",
           "1NSI::1NSI-LANGAGE::C6::remediation",
           "1NSI::1NSI-LANGAGE::C7::corriges",
-          "1NSI::1NSI-LANGAGE::C7::cours",
           "1NSI::1NSI-LANGAGE::C7::exercices",
           "1NSI::1NSI-LANGAGE::C7::remediation"
         ],
-        "indeterminate_set_digest": "sha256:6b7c148a60ea11e1ef24aab3c25b05ea5e1197c49dff12fb816b6347529bcacd",
+        "indeterminate_set_digest": "sha256:59d90c4c996128ed1e0d2b531a4cc1b141b4e50a908f283cdd5a67380ff9527f",
         "missing": 10,
         "missing_ids": [
           "1NSI::1NSI-LANGAGE::C1::methodes",
@@ -1182,21 +1167,28 @@
           "1NSI::1NSI-LANGAGE::C7::methodes"
         ],
         "missing_set_digest": "sha256:f7f1e05d940fe1706ebdfd5d144132289f51e64291c007fc5e192d4ed277fd51",
-        "semantically_unvalidated": 11,
+        "semantically_unvalidated": 18,
         "semantically_unvalidated_ids": [
+          "1NSI::1NSI-LANGAGE::C1::cours",
           "1NSI::1NSI-LANGAGE::C1::evaluations",
           "1NSI::1NSI-LANGAGE::C1::qcm",
+          "1NSI::1NSI-LANGAGE::C2::cours",
           "1NSI::1NSI-LANGAGE::C2::qcm",
+          "1NSI::1NSI-LANGAGE::C3::cours",
           "1NSI::1NSI-LANGAGE::C3::qcm",
+          "1NSI::1NSI-LANGAGE::C4::cours",
           "1NSI::1NSI-LANGAGE::C4::evaluations",
           "1NSI::1NSI-LANGAGE::C4::qcm",
+          "1NSI::1NSI-LANGAGE::C5::cours",
           "1NSI::1NSI-LANGAGE::C5::evaluations",
           "1NSI::1NSI-LANGAGE::C5::qcm",
+          "1NSI::1NSI-LANGAGE::C6::cours",
           "1NSI::1NSI-LANGAGE::C6::evaluations",
           "1NSI::1NSI-LANGAGE::C6::qcm",
+          "1NSI::1NSI-LANGAGE::C7::cours",
           "1NSI::1NSI-LANGAGE::C7::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:b1be5e5681d085752a8b9b42af078ceda5291cf78a1ef0073e19a014c95a70f5",
+        "semantically_unvalidated_set_digest": "sha256:9136e190ba7fafdd47026fa0085cebd48a757318ee25758478f5dc78a1cdfc84",
         "status": "GAP"
       },
       "programme": {
@@ -1266,7 +1258,7 @@
         "questions": 8,
         "status": "COMPLETE"
       },
-      "risk_score": 16525,
+      "risk_score": 15085,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -1304,7 +1296,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:c99c08a10e1fbbb5e4d8c125bb511c3ad04d25d120e2f486f1ba1da53a423a69",
+        "cell_state_set_digest": "sha256:707a1ab3df76ca42507eb602394fb62f9ffe45ded73f59d7c90198059c04f86e",
         "cells": 28,
         "status": "COMPLETE",
         "unknown": 0,
@@ -1313,26 +1305,22 @@
       "chapter": "1NSI-PROJET-METHODES",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0009",
-          "CG-0058",
-          "CG-0098",
-          "CG-0114",
-          "CG-0126",
-          "CG-0150",
-          "CG-0157",
-          "CG-0197",
-          "CG-0202",
-          "CG-0209",
-          "CG-0233",
-          "CG-0244",
-          "CG-0247",
-          "CG-0248",
-          "CG-0253",
-          "CG-0269",
-          "CG-0286"
+          "CG-0101",
+          "CG-0111",
+          "CG-0132",
+          "CG-0139",
+          "CG-0174",
+          "CG-0179",
+          "CG-0185",
+          "CG-0206",
+          "CG-0216",
+          "CG-0219",
+          "CG-0224",
+          "CG-0238",
+          "CG-0254"
         ],
-        "ambiguous_group_ids_digest": "sha256:26a58f584ac84f017077c077ccfe0f3f2a237272ade5d24277559359deda5e73",
-        "ambiguous_groups": 17,
+        "ambiguous_group_ids_digest": "sha256:70fa9f191f453dc8b68185baa216e4395f86a01c18a12fec5dedd382126923d1",
+        "ambiguous_groups": 13,
         "false_copy_count": 0,
         "false_copy_paths": [],
         "false_copy_paths_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
@@ -1342,11 +1330,11 @@
         "unknown_groups": 0
       },
       "course_assembly_truth": {
-        "ambiguous": 8,
-        "duplicated": 4,
+        "ambiguous": 0,
+        "duplicated": 0,
         "foreign": 0,
-        "missing": 4,
-        "status": "GAP",
+        "missing": 0,
+        "status": "COMPLETE",
         "unknown": 0
       },
       "cross_discipline_content": {
@@ -1377,7 +1365,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 88,
+        "ambiguous": 68,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -1430,7 +1418,7 @@
         "assessments": "GAP",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "GAP",
-        "course_assembly_truth": "GAP",
+        "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
         "diacritics": "COMPLETE",
         "evidence_routing": "GAP",
@@ -1442,8 +1430,8 @@
         "qcm": "COMPLETE"
       },
       "manual": "1NSI",
-      "object_count": 68,
-      "object_set_digest": "sha256:e1db4fb37ce0994fd2119ac6aaafbdf8f6c0d2d54b615c2219dc30ac244d0cac",
+      "object_count": 64,
+      "object_set_digest": "sha256:619c4a555117205f6c0624e332480f53ceca0f588979278f82ccd030aa562826",
       "oracle": {
         "fail": 0,
         "manual_review": 0,
@@ -1460,26 +1448,22 @@
         "unknown": 4
       },
       "pedagogical_role_coverage": {
-        "indeterminate": 16,
+        "indeterminate": 12,
         "indeterminate_ids": [
           "1NSI::1NSI-PROJET-METHODES::C1::corriges",
-          "1NSI::1NSI-PROJET-METHODES::C1::cours",
           "1NSI::1NSI-PROJET-METHODES::C1::exercices",
           "1NSI::1NSI-PROJET-METHODES::C1::remediation",
           "1NSI::1NSI-PROJET-METHODES::C2::corriges",
-          "1NSI::1NSI-PROJET-METHODES::C2::cours",
           "1NSI::1NSI-PROJET-METHODES::C2::exercices",
           "1NSI::1NSI-PROJET-METHODES::C2::remediation",
           "1NSI::1NSI-PROJET-METHODES::C3::corriges",
-          "1NSI::1NSI-PROJET-METHODES::C3::cours",
           "1NSI::1NSI-PROJET-METHODES::C3::exercices",
           "1NSI::1NSI-PROJET-METHODES::C3::remediation",
           "1NSI::1NSI-PROJET-METHODES::C4::corriges",
-          "1NSI::1NSI-PROJET-METHODES::C4::cours",
           "1NSI::1NSI-PROJET-METHODES::C4::exercices",
           "1NSI::1NSI-PROJET-METHODES::C4::remediation"
         ],
-        "indeterminate_set_digest": "sha256:76c2ca27eaec07640ab86fd326e274347a8e0b46a489fff16a45ec0cc6d0ccf5",
+        "indeterminate_set_digest": "sha256:38536875a8cb93cb42c0088c2559cc2b2ce44bbb1ebe18852f0bcd7f58516e3a",
         "missing": 5,
         "missing_ids": [
           "1NSI::1NSI-PROJET-METHODES::C1::methodes",
@@ -1489,17 +1473,21 @@
           "1NSI::1NSI-PROJET-METHODES::C4::methodes"
         ],
         "missing_set_digest": "sha256:04e66b21c888459f511a2165c32cf1097baa913ca745d5fb725bbb321f61c637",
-        "semantically_unvalidated": 7,
+        "semantically_unvalidated": 11,
         "semantically_unvalidated_ids": [
+          "1NSI::1NSI-PROJET-METHODES::C1::cours",
           "1NSI::1NSI-PROJET-METHODES::C1::evaluations",
           "1NSI::1NSI-PROJET-METHODES::C1::qcm",
+          "1NSI::1NSI-PROJET-METHODES::C2::cours",
           "1NSI::1NSI-PROJET-METHODES::C2::evaluations",
           "1NSI::1NSI-PROJET-METHODES::C2::qcm",
+          "1NSI::1NSI-PROJET-METHODES::C3::cours",
           "1NSI::1NSI-PROJET-METHODES::C3::evaluations",
           "1NSI::1NSI-PROJET-METHODES::C3::qcm",
+          "1NSI::1NSI-PROJET-METHODES::C4::cours",
           "1NSI::1NSI-PROJET-METHODES::C4::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:f5cac9b02952975bb58a51be8b04b6769609c6f4669468eabab1b7a7a2ca251c",
+        "semantically_unvalidated_set_digest": "sha256:7367cf6c2b0f8a189e666915d150cad8a6876ebec7a64bf69e9d59c533964e4b",
         "status": "GAP"
       },
       "programme": {
@@ -1556,7 +1544,7 @@
         "questions": 6,
         "status": "COMPLETE"
       },
-      "risk_score": 9705,
+      "risk_score": 8745,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -1594,7 +1582,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:d18ee3712161350b73a20fcf6a80905fa9e1eaee28b9c220682e50151f1b0f10",
+        "cell_state_set_digest": "sha256:796361db3e3806de73becb5fd8ea5400fdba678566ecb1a6568255944bd978a9",
         "cells": 35,
         "status": "COMPLETE",
         "unknown": 0,
@@ -1603,25 +1591,22 @@
       "chapter": "1NSI-RESEAUX",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0026",
-          "CG-0030",
-          "CG-0064",
-          "CG-0088",
-          "CG-0100",
-          "CG-0104",
+          "CG-0023",
+          "CG-0027",
+          "CG-0060",
+          "CG-0082",
+          "CG-0132",
+          "CG-0147",
           "CG-0150",
-          "CG-0166",
-          "CG-0169",
+          "CG-0164",
+          "CG-0175",
+          "CG-0182",
           "CG-0184",
-          "CG-0198",
-          "CG-0206",
-          "CG-0208",
-          "CG-0211",
-          "CG-0212",
-          "CG-0260"
+          "CG-0186",
+          "CG-0230"
         ],
-        "ambiguous_group_ids_digest": "sha256:5cbc45fe62cb410a6b20da6fcf33202c85f160090219b5f7235505d30fec8b9c",
-        "ambiguous_groups": 16,
+        "ambiguous_group_ids_digest": "sha256:c22d98bb31fe5ecc7bac39173e1c444667e29a6f1b655c9dc9c96212d4a31f6a",
+        "ambiguous_groups": 13,
         "false_copy_count": 0,
         "false_copy_paths": [],
         "false_copy_paths_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
@@ -1631,11 +1616,11 @@
         "unknown_groups": 0
       },
       "course_assembly_truth": {
-        "ambiguous": 8,
-        "duplicated": 5,
+        "ambiguous": 0,
+        "duplicated": 0,
         "foreign": 0,
-        "missing": 5,
-        "status": "GAP",
+        "missing": 0,
+        "status": "COMPLETE",
         "unknown": 0
       },
       "cross_discipline_content": {
@@ -1666,7 +1651,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 141,
+        "ambiguous": 114,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -1719,7 +1704,7 @@
         "assessments": "GAP",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "GAP",
-        "course_assembly_truth": "GAP",
+        "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
         "diacritics": "COMPLETE",
         "evidence_routing": "GAP",
@@ -1731,8 +1716,8 @@
         "qcm": "COMPLETE"
       },
       "manual": "1NSI",
-      "object_count": 81,
-      "object_set_digest": "sha256:7dd1dfef946f97bfd567e918faea13e4dfb19be46b6b3051fc6d2ca38d80fc84",
+      "object_count": 76,
+      "object_set_digest": "sha256:d8f5b601b5c7d2c6aeccd10903bab861afa2c9fdfa3dd728d55c61581e0deb2c",
       "oracle": {
         "fail": 0,
         "manual_review": 0,
@@ -1749,30 +1734,25 @@
         "unknown": 5
       },
       "pedagogical_role_coverage": {
-        "indeterminate": 20,
+        "indeterminate": 15,
         "indeterminate_ids": [
           "1NSI::1NSI-RESEAUX::C1::corriges",
-          "1NSI::1NSI-RESEAUX::C1::cours",
           "1NSI::1NSI-RESEAUX::C1::exercices",
           "1NSI::1NSI-RESEAUX::C1::remediation",
           "1NSI::1NSI-RESEAUX::C2::corriges",
-          "1NSI::1NSI-RESEAUX::C2::cours",
           "1NSI::1NSI-RESEAUX::C2::exercices",
           "1NSI::1NSI-RESEAUX::C2::remediation",
           "1NSI::1NSI-RESEAUX::C3::corriges",
-          "1NSI::1NSI-RESEAUX::C3::cours",
           "1NSI::1NSI-RESEAUX::C3::exercices",
           "1NSI::1NSI-RESEAUX::C3::remediation",
           "1NSI::1NSI-RESEAUX::C4::corriges",
-          "1NSI::1NSI-RESEAUX::C4::cours",
           "1NSI::1NSI-RESEAUX::C4::exercices",
           "1NSI::1NSI-RESEAUX::C4::remediation",
           "1NSI::1NSI-RESEAUX::C5::corriges",
-          "1NSI::1NSI-RESEAUX::C5::cours",
           "1NSI::1NSI-RESEAUX::C5::exercices",
           "1NSI::1NSI-RESEAUX::C5::remediation"
         ],
-        "indeterminate_set_digest": "sha256:a5725291808da753a1a60814a41f2ea9ded5af9e428aa915f7baada94f3350a4",
+        "indeterminate_set_digest": "sha256:ffdedb2c23ab4f627fca6cf2a28ba83c7469ade01ec8b4d4330008ed8e60a242",
         "missing": 6,
         "missing_ids": [
           "1NSI::1NSI-RESEAUX::C1::methodes",
@@ -1783,19 +1763,24 @@
           "1NSI::1NSI-RESEAUX::C5::methodes"
         ],
         "missing_set_digest": "sha256:135b9ea6bfd17899a7b476896d826a9baec74e02628f6fc8cfc7c45c4a5eda62",
-        "semantically_unvalidated": 9,
+        "semantically_unvalidated": 14,
         "semantically_unvalidated_ids": [
+          "1NSI::1NSI-RESEAUX::C1::cours",
           "1NSI::1NSI-RESEAUX::C1::evaluations",
           "1NSI::1NSI-RESEAUX::C1::qcm",
+          "1NSI::1NSI-RESEAUX::C2::cours",
           "1NSI::1NSI-RESEAUX::C2::evaluations",
           "1NSI::1NSI-RESEAUX::C2::qcm",
+          "1NSI::1NSI-RESEAUX::C3::cours",
           "1NSI::1NSI-RESEAUX::C3::evaluations",
           "1NSI::1NSI-RESEAUX::C3::qcm",
+          "1NSI::1NSI-RESEAUX::C4::cours",
           "1NSI::1NSI-RESEAUX::C4::evaluations",
           "1NSI::1NSI-RESEAUX::C4::qcm",
+          "1NSI::1NSI-RESEAUX::C5::cours",
           "1NSI::1NSI-RESEAUX::C5::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:81aaf175da9a33b7dc0fa16e1f102eba61debd455eb50cefef18500f3e2b45d2",
+        "semantically_unvalidated_set_digest": "sha256:4be03b1e99275e8c07d066a1ff71f3e274b62c6eb658d2c3059ecac5838be9f3",
         "status": "GAP"
       },
       "programme": {
@@ -1857,7 +1842,7 @@
         "questions": 6,
         "status": "COMPLETE"
       },
-      "risk_score": 11685,
+      "risk_score": 10725,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -1893,7 +1878,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:c2fee7d5c33f1c8c44499d721ff4ffed9098dac769840c0342878014a25a353e",
+        "cell_state_set_digest": "sha256:6d7ca7c79ed7fd4e3a45bb58b7b09afcc76e28e8b3a4b044033e42c7d2c0e683",
         "cells": 28,
         "status": "COMPLETE",
         "unknown": 0,
@@ -1902,26 +1887,22 @@
       "chapter": "1NSI-TABLES",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0024",
-          "CG-0074",
-          "CG-0083",
-          "CG-0101",
-          "CG-0122",
-          "CG-0147",
-          "CG-0149",
-          "CG-0150",
-          "CG-0160",
-          "CG-0173",
-          "CG-0187",
-          "CG-0191",
-          "CG-0199",
-          "CG-0225",
-          "CG-0230",
-          "CG-0272",
-          "CG-0281"
+          "CG-0021",
+          "CG-0069",
+          "CG-0091",
+          "CG-0129",
+          "CG-0131",
+          "CG-0132",
+          "CG-0142",
+          "CG-0154",
+          "CG-0176",
+          "CG-0198",
+          "CG-0203",
+          "CG-0241",
+          "CG-0249"
         ],
-        "ambiguous_group_ids_digest": "sha256:f5451597e265c672e5998d2896c1d77732db5be0221a3a6800da4db70e2e6853",
-        "ambiguous_groups": 17,
+        "ambiguous_group_ids_digest": "sha256:31e31ebb9688a551ae5faaffb89973bfcd355ed3ed5fded17ca90baa1abad9ff",
+        "ambiguous_groups": 13,
         "false_copy_count": 0,
         "false_copy_paths": [],
         "false_copy_paths_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
@@ -1931,11 +1912,11 @@
         "unknown_groups": 0
       },
       "course_assembly_truth": {
-        "ambiguous": 8,
-        "duplicated": 4,
+        "ambiguous": 0,
+        "duplicated": 0,
         "foreign": 0,
-        "missing": 4,
-        "status": "GAP",
+        "missing": 0,
+        "status": "COMPLETE",
         "unknown": 0
       },
       "cross_discipline_content": {
@@ -1966,7 +1947,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 105,
+        "ambiguous": 89,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -2019,7 +2000,7 @@
         "assessments": "GAP",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "GAP",
-        "course_assembly_truth": "GAP",
+        "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
         "diacritics": "COMPLETE",
         "evidence_routing": "GAP",
@@ -2031,8 +2012,8 @@
         "qcm": "COMPLETE"
       },
       "manual": "1NSI",
-      "object_count": 68,
-      "object_set_digest": "sha256:b575da4ea22fa8e30330a5c607564a78433367ba987a67dcc2665ce7f1e661e8",
+      "object_count": 64,
+      "object_set_digest": "sha256:d36248d6741e7bc64cb39fc61b19efbf65c73a0156131b32dd75e7e8bafee41c",
       "oracle": {
         "fail": 0,
         "manual_review": 0,
@@ -2049,26 +2030,22 @@
         "unknown": 4
       },
       "pedagogical_role_coverage": {
-        "indeterminate": 16,
+        "indeterminate": 12,
         "indeterminate_ids": [
           "1NSI::1NSI-TABLES::C1::corriges",
-          "1NSI::1NSI-TABLES::C1::cours",
           "1NSI::1NSI-TABLES::C1::exercices",
           "1NSI::1NSI-TABLES::C1::remediation",
           "1NSI::1NSI-TABLES::C2::corriges",
-          "1NSI::1NSI-TABLES::C2::cours",
           "1NSI::1NSI-TABLES::C2::exercices",
           "1NSI::1NSI-TABLES::C2::remediation",
           "1NSI::1NSI-TABLES::C3::corriges",
-          "1NSI::1NSI-TABLES::C3::cours",
           "1NSI::1NSI-TABLES::C3::exercices",
           "1NSI::1NSI-TABLES::C3::remediation",
           "1NSI::1NSI-TABLES::C4::corriges",
-          "1NSI::1NSI-TABLES::C4::cours",
           "1NSI::1NSI-TABLES::C4::exercices",
           "1NSI::1NSI-TABLES::C4::remediation"
         ],
-        "indeterminate_set_digest": "sha256:53925a66d2e1cca337f30734e9f461e912eceda8a5c47d760c8eea3477b6ea2e",
+        "indeterminate_set_digest": "sha256:d93f17ee29f7d334226c7721e52d23476aefa2df63d24ac54dd026d41225074b",
         "missing": 4,
         "missing_ids": [
           "1NSI::1NSI-TABLES::C1::methodes",
@@ -2077,18 +2054,22 @@
           "1NSI::1NSI-TABLES::C4::methodes"
         ],
         "missing_set_digest": "sha256:125eb0d0d295ac1666a0f61118c8eed98c054c43babd77b68845c6f248a3db8f",
-        "semantically_unvalidated": 8,
+        "semantically_unvalidated": 12,
         "semantically_unvalidated_ids": [
+          "1NSI::1NSI-TABLES::C1::cours",
           "1NSI::1NSI-TABLES::C1::evaluations",
           "1NSI::1NSI-TABLES::C1::qcm",
+          "1NSI::1NSI-TABLES::C2::cours",
           "1NSI::1NSI-TABLES::C2::evaluations",
           "1NSI::1NSI-TABLES::C2::qcm",
+          "1NSI::1NSI-TABLES::C3::cours",
           "1NSI::1NSI-TABLES::C3::evaluations",
           "1NSI::1NSI-TABLES::C3::qcm",
+          "1NSI::1NSI-TABLES::C4::cours",
           "1NSI::1NSI-TABLES::C4::evaluations",
           "1NSI::1NSI-TABLES::C4::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:823c8ccea7b17acb179cd1d750c92977d521be2548449b79bd0b9afc8f3eab81",
+        "semantically_unvalidated_set_digest": "sha256:4d176404b96b1184a59aec0b6c8b017b3ee69f6d284e752ca3bcf0387639d56f",
         "status": "GAP"
       },
       "programme": {
@@ -2147,7 +2128,7 @@
         "questions": 6,
         "status": "COMPLETE"
       },
-      "risk_score": 9590,
+      "risk_score": 8630,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -2183,7 +2164,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:adbd5bc9ae4ec8a8fc3fce9b4403ba70d9794ca9c2fdadc61e6b30de18d65bb6",
+        "cell_state_set_digest": "sha256:2c69e4b4be85d85b5e201e9bb3132c13e61d80240a6cf0a0553d33783cd53f47",
         "cells": 35,
         "status": "COMPLETE",
         "unknown": 0,
@@ -2192,27 +2173,22 @@
       "chapter": "1NSI-TYPES-BASE",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0006",
-          "CG-0012",
-          "CG-0037",
-          "CG-0039",
-          "CG-0054",
-          "CG-0106",
-          "CG-0108",
-          "CG-0113",
-          "CG-0116",
-          "CG-0136",
-          "CG-0141",
-          "CG-0143",
-          "CG-0150",
-          "CG-0210",
-          "CG-0249",
-          "CG-0266",
-          "CG-0275",
-          "CG-0276"
+          "CG-0005",
+          "CG-0009",
+          "CG-0034",
+          "CG-0036",
+          "CG-0051",
+          "CG-0095",
+          "CG-0100",
+          "CG-0119",
+          "CG-0123",
+          "CG-0125",
+          "CG-0132",
+          "CG-0220",
+          "CG-0244"
         ],
-        "ambiguous_group_ids_digest": "sha256:e30ffb82ebbe794b9fea4d4901bd30be93812cebd2be6cbcb96c646d29ba93e0",
-        "ambiguous_groups": 18,
+        "ambiguous_group_ids_digest": "sha256:5c004b5a23719777a0d3e3768b55af6dd55236eab2128055b05a29ecaf77ee5a",
+        "ambiguous_groups": 13,
         "false_copy_count": 0,
         "false_copy_paths": [],
         "false_copy_paths_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
@@ -2222,11 +2198,11 @@
         "unknown_groups": 0
       },
       "course_assembly_truth": {
-        "ambiguous": 10,
-        "duplicated": 5,
+        "ambiguous": 0,
+        "duplicated": 0,
         "foreign": 0,
-        "missing": 5,
-        "status": "GAP",
+        "missing": 0,
+        "status": "COMPLETE",
         "unknown": 0
       },
       "cross_discipline_content": {
@@ -2257,7 +2233,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 159,
+        "ambiguous": 118,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -2310,7 +2286,7 @@
         "assessments": "GAP",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "GAP",
-        "course_assembly_truth": "GAP",
+        "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
         "diacritics": "COMPLETE",
         "evidence_routing": "GAP",
@@ -2322,8 +2298,8 @@
         "qcm": "COMPLETE"
       },
       "manual": "1NSI",
-      "object_count": 83,
-      "object_set_digest": "sha256:37f5089fcd2ff431fd7cdd1f859a16dba551852084c7ecaa3458beb37789fbe4",
+      "object_count": 78,
+      "object_set_digest": "sha256:aaad4a4271261ac0e06d69f89e51e2e73f5cf3f45f21015efcc09c3ab848bf44",
       "oracle": {
         "fail": 0,
         "manual_review": 0,
@@ -2340,30 +2316,25 @@
         "unknown": 5
       },
       "pedagogical_role_coverage": {
-        "indeterminate": 20,
+        "indeterminate": 15,
         "indeterminate_ids": [
           "1NSI::1NSI-TYPES-BASE::C1::corriges",
-          "1NSI::1NSI-TYPES-BASE::C1::cours",
           "1NSI::1NSI-TYPES-BASE::C1::exercices",
           "1NSI::1NSI-TYPES-BASE::C1::remediation",
           "1NSI::1NSI-TYPES-BASE::C2::corriges",
-          "1NSI::1NSI-TYPES-BASE::C2::cours",
           "1NSI::1NSI-TYPES-BASE::C2::exercices",
           "1NSI::1NSI-TYPES-BASE::C2::remediation",
           "1NSI::1NSI-TYPES-BASE::C3::corriges",
-          "1NSI::1NSI-TYPES-BASE::C3::cours",
           "1NSI::1NSI-TYPES-BASE::C3::exercices",
           "1NSI::1NSI-TYPES-BASE::C3::remediation",
           "1NSI::1NSI-TYPES-BASE::C4::corriges",
-          "1NSI::1NSI-TYPES-BASE::C4::cours",
           "1NSI::1NSI-TYPES-BASE::C4::exercices",
           "1NSI::1NSI-TYPES-BASE::C4::remediation",
           "1NSI::1NSI-TYPES-BASE::C5::corriges",
-          "1NSI::1NSI-TYPES-BASE::C5::cours",
           "1NSI::1NSI-TYPES-BASE::C5::exercices",
           "1NSI::1NSI-TYPES-BASE::C5::remediation"
         ],
-        "indeterminate_set_digest": "sha256:fa5103e3d356f922fbb60ab073190a1b8c56575981bae183196e6040cbe3d81c",
+        "indeterminate_set_digest": "sha256:1beabbc471e207d22f7e50880da5de5186c7ecdc01bb8937d843630d177f6567",
         "missing": 5,
         "missing_ids": [
           "1NSI::1NSI-TYPES-BASE::C1::methodes",
@@ -2373,20 +2344,25 @@
           "1NSI::1NSI-TYPES-BASE::C5::methodes"
         ],
         "missing_set_digest": "sha256:e9a7998a296595c9899bae6be65c3421b9e67475677515018df8a5a96a1a23ca",
-        "semantically_unvalidated": 10,
+        "semantically_unvalidated": 15,
         "semantically_unvalidated_ids": [
+          "1NSI::1NSI-TYPES-BASE::C1::cours",
           "1NSI::1NSI-TYPES-BASE::C1::evaluations",
           "1NSI::1NSI-TYPES-BASE::C1::qcm",
+          "1NSI::1NSI-TYPES-BASE::C2::cours",
           "1NSI::1NSI-TYPES-BASE::C2::evaluations",
           "1NSI::1NSI-TYPES-BASE::C2::qcm",
+          "1NSI::1NSI-TYPES-BASE::C3::cours",
           "1NSI::1NSI-TYPES-BASE::C3::evaluations",
           "1NSI::1NSI-TYPES-BASE::C3::qcm",
+          "1NSI::1NSI-TYPES-BASE::C4::cours",
           "1NSI::1NSI-TYPES-BASE::C4::evaluations",
           "1NSI::1NSI-TYPES-BASE::C4::qcm",
+          "1NSI::1NSI-TYPES-BASE::C5::cours",
           "1NSI::1NSI-TYPES-BASE::C5::evaluations",
           "1NSI::1NSI-TYPES-BASE::C5::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:f1d1a7c0fdfcf00960a651ec6a81291bd2fe854ace39f462bfeba526bbe54ff3",
+        "semantically_unvalidated_set_digest": "sha256:0cb41985cd2e2466ebb005c15f2f3ef653fb65e729d426be4f9d771618df860b",
         "status": "GAP"
       },
       "programme": {
@@ -2448,7 +2424,7 @@
         "questions": 6,
         "status": "COMPLETE"
       },
-      "risk_score": 11890,
+      "risk_score": 10690,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -2489,7 +2465,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:63de88436b43c6310e436dafa9f70aa818a8b0f560b2e0cce2be7346affff80f",
+        "cell_state_set_digest": "sha256:8a9f0ff0b8d27374b132f7d7c298dfa84cbd8b6081a49832fd9542d53fa952c2",
         "cells": 35,
         "status": "COMPLETE",
         "unknown": 0,
@@ -2498,15 +2474,10 @@
       "chapter": "1NSI-TYPES-CONSTRUITS",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0003",
-          "CG-0007",
-          "CG-0070",
-          "CG-0097",
-          "CG-0131",
-          "CG-0238"
+          "CG-0089"
         ],
-        "ambiguous_group_ids_digest": "sha256:44d18d11f27b7cab694aea37d031064f0c9fac110c9a2ddb2133218c5cca3779",
-        "ambiguous_groups": 6,
+        "ambiguous_group_ids_digest": "sha256:24d1f6fcafcc9ed98157b83582df8ce48cb4202fbae0cb3d6e35ec5067372cad",
+        "ambiguous_groups": 1,
         "false_copy_count": 0,
         "false_copy_paths": [],
         "false_copy_paths_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
@@ -2516,11 +2487,11 @@
         "unknown_groups": 0
       },
       "course_assembly_truth": {
-        "ambiguous": 10,
-        "duplicated": 5,
+        "ambiguous": 0,
+        "duplicated": 0,
         "foreign": 0,
-        "missing": 3,
-        "status": "GAP",
+        "missing": 0,
+        "status": "COMPLETE",
         "unknown": 0
       },
       "cross_discipline_content": {
@@ -2561,7 +2532,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 333,
+        "ambiguous": 312,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -2624,7 +2595,7 @@
         "assessments": "GAP",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "GAP",
-        "course_assembly_truth": "GAP",
+        "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
         "diacritics": "COMPLETE",
         "evidence_routing": "GAP",
@@ -2636,8 +2607,8 @@
         "qcm": "COMPLETE"
       },
       "manual": "1NSI",
-      "object_count": 165,
-      "object_set_digest": "sha256:cbfa9e9512f1741df72563cc9495bb203685e85e9cd55ba7ad11a91fc79294ec",
+      "object_count": 160,
+      "object_set_digest": "sha256:186eb140b19568e9251ad81f6354c915ff28beba04e4dd03e542ce968d5add0b",
       "oracle": {
         "fail": 0,
         "manual_review": 0,
@@ -2654,34 +2625,34 @@
         "unknown": 5
       },
       "pedagogical_role_coverage": {
-        "indeterminate": 8,
+        "indeterminate": 5,
         "indeterminate_ids": [
-          "1NSI::1NSI-TYPES-CONSTRUITS::C1::cours",
           "1NSI::1NSI-TYPES-CONSTRUITS::C1::remediation",
-          "1NSI::1NSI-TYPES-CONSTRUITS::C2::cours",
           "1NSI::1NSI-TYPES-CONSTRUITS::C2::remediation",
-          "1NSI::1NSI-TYPES-CONSTRUITS::C3::cours",
           "1NSI::1NSI-TYPES-CONSTRUITS::C3::remediation",
           "1NSI::1NSI-TYPES-CONSTRUITS::C4::remediation",
           "1NSI::1NSI-TYPES-CONSTRUITS::C5::remediation"
         ],
-        "indeterminate_set_digest": "sha256:aa1066230bbb511ca66a57053ade8182cf319440811e12e34df2df5b5f0e16a9",
+        "indeterminate_set_digest": "sha256:476368056b5cbd956d555ba1755a2233582561914d20d1b11c82e5241d305116",
         "missing": 0,
         "missing_ids": [],
         "missing_set_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "semantically_unvalidated": 27,
+        "semantically_unvalidated": 30,
         "semantically_unvalidated_ids": [
           "1NSI::1NSI-TYPES-CONSTRUITS::C1::corriges",
+          "1NSI::1NSI-TYPES-CONSTRUITS::C1::cours",
           "1NSI::1NSI-TYPES-CONSTRUITS::C1::evaluations",
           "1NSI::1NSI-TYPES-CONSTRUITS::C1::exercices",
           "1NSI::1NSI-TYPES-CONSTRUITS::C1::methodes",
           "1NSI::1NSI-TYPES-CONSTRUITS::C1::qcm",
           "1NSI::1NSI-TYPES-CONSTRUITS::C2::corriges",
+          "1NSI::1NSI-TYPES-CONSTRUITS::C2::cours",
           "1NSI::1NSI-TYPES-CONSTRUITS::C2::evaluations",
           "1NSI::1NSI-TYPES-CONSTRUITS::C2::exercices",
           "1NSI::1NSI-TYPES-CONSTRUITS::C2::methodes",
           "1NSI::1NSI-TYPES-CONSTRUITS::C2::qcm",
           "1NSI::1NSI-TYPES-CONSTRUITS::C3::corriges",
+          "1NSI::1NSI-TYPES-CONSTRUITS::C3::cours",
           "1NSI::1NSI-TYPES-CONSTRUITS::C3::evaluations",
           "1NSI::1NSI-TYPES-CONSTRUITS::C3::exercices",
           "1NSI::1NSI-TYPES-CONSTRUITS::C3::methodes",
@@ -2699,7 +2670,7 @@
           "1NSI::1NSI-TYPES-CONSTRUITS::C5::methodes",
           "1NSI::1NSI-TYPES-CONSTRUITS::C5::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:60d5d7fc7bf237396ae2038d84361340368413df162fc530ee3e3a2ec7856fa9",
+        "semantically_unvalidated_set_digest": "sha256:29a289fa7c4fd2e0b689e089d5f0ee518037570bb6604e9b350e7594cf09ae19",
         "status": "GAP"
       },
       "programme": {
@@ -2770,7 +2741,7 @@
         "questions": 16,
         "status": "COMPLETE"
       },
-      "risk_score": 12655,
+      "risk_score": 11455,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -2812,7 +2783,7 @@
         "ambiguous": 0,
         "blockers": [],
         "blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "cell_state_set_digest": "sha256:14ca2311c1533123e05e8bc6382f7e22f20018f3206cde8657a7c5d48fe5114b",
+        "cell_state_set_digest": "sha256:d7797371d858ba45fd4f3c13bf2765714cbaa3e67cd792c323d849f46c565918",
         "cells": 63,
         "status": "COMPLETE",
         "unknown": 0,
@@ -2823,23 +2794,20 @@
         "ambiguous_group_ids": [
           "CG-0001",
           "CG-0002",
-          "CG-0014",
-          "CG-0018",
-          "CG-0052",
-          "CG-0077",
-          "CG-0134",
-          "CG-0140",
-          "CG-0150",
-          "CG-0151",
-          "CG-0164",
-          "CG-0165",
-          "CG-0181",
-          "CG-0192",
-          "CG-0195",
-          "CG-0258"
+          "CG-0011",
+          "CG-0015",
+          "CG-0049",
+          "CG-0072",
+          "CG-0117",
+          "CG-0132",
+          "CG-0133",
+          "CG-0146",
+          "CG-0161",
+          "CG-0172",
+          "CG-0228"
         ],
-        "ambiguous_group_ids_digest": "sha256:ffa7f18a1ec8546f078a830e681883f3500fc2dee5f0389d75c6353ef49dfc2f",
-        "ambiguous_groups": 16,
+        "ambiguous_group_ids_digest": "sha256:033cad22017ae31438277b1dfc7959a3b32a668598b7f7f58217045488224dc2",
+        "ambiguous_groups": 13,
         "false_copy_count": 0,
         "false_copy_paths": [],
         "false_copy_paths_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
@@ -2849,11 +2817,11 @@
         "unknown_groups": 0
       },
       "course_assembly_truth": {
-        "ambiguous": 12,
-        "duplicated": 9,
+        "ambiguous": 0,
+        "duplicated": 0,
         "foreign": 0,
-        "missing": 9,
-        "status": "GAP",
+        "missing": 0,
+        "status": "COMPLETE",
         "unknown": 0
       },
       "cross_discipline_content": {
@@ -2884,7 +2852,7 @@
         }
       ],
       "diacritics": {
-        "ambiguous": 295,
+        "ambiguous": 229,
         "status": "COMPLETE",
         "unambiguous": 0
       },
@@ -2941,7 +2909,7 @@
         "assessments": "GAP",
         "capacity_identity": "COMPLETE",
         "clone_capacity_integrity": "GAP",
-        "course_assembly_truth": "GAP",
+        "course_assembly_truth": "COMPLETE",
         "cross_discipline_content": "NOT_AUDITED",
         "diacritics": "COMPLETE",
         "evidence_routing": "GAP",
@@ -2953,8 +2921,8 @@
         "qcm": "COMPLETE"
       },
       "manual": "1NSI",
-      "object_count": 129,
-      "object_set_digest": "sha256:4c3bef5dc38e406bc6d08a562f1bea95f033c631f3cbc918f179df271020841c",
+      "object_count": 120,
+      "object_set_digest": "sha256:7586e7880501b6876d9c5d865654af3d92db781477195550c9f7de4e7642d3c7",
       "oracle": {
         "fail": 0,
         "manual_review": 0,
@@ -2971,46 +2939,37 @@
         "unknown": 9
       },
       "pedagogical_role_coverage": {
-        "indeterminate": 36,
+        "indeterminate": 27,
         "indeterminate_ids": [
           "1NSI::1NSI-WEB-IHM::C1::corriges",
-          "1NSI::1NSI-WEB-IHM::C1::cours",
           "1NSI::1NSI-WEB-IHM::C1::exercices",
           "1NSI::1NSI-WEB-IHM::C1::remediation",
           "1NSI::1NSI-WEB-IHM::C2::corriges",
-          "1NSI::1NSI-WEB-IHM::C2::cours",
           "1NSI::1NSI-WEB-IHM::C2::exercices",
           "1NSI::1NSI-WEB-IHM::C2::remediation",
           "1NSI::1NSI-WEB-IHM::C3::corriges",
-          "1NSI::1NSI-WEB-IHM::C3::cours",
           "1NSI::1NSI-WEB-IHM::C3::exercices",
           "1NSI::1NSI-WEB-IHM::C3::remediation",
           "1NSI::1NSI-WEB-IHM::C4::corriges",
-          "1NSI::1NSI-WEB-IHM::C4::cours",
           "1NSI::1NSI-WEB-IHM::C4::exercices",
           "1NSI::1NSI-WEB-IHM::C4::remediation",
           "1NSI::1NSI-WEB-IHM::C5::corriges",
-          "1NSI::1NSI-WEB-IHM::C5::cours",
           "1NSI::1NSI-WEB-IHM::C5::exercices",
           "1NSI::1NSI-WEB-IHM::C5::remediation",
           "1NSI::1NSI-WEB-IHM::C6::corriges",
-          "1NSI::1NSI-WEB-IHM::C6::cours",
           "1NSI::1NSI-WEB-IHM::C6::exercices",
           "1NSI::1NSI-WEB-IHM::C6::remediation",
           "1NSI::1NSI-WEB-IHM::C7::corriges",
-          "1NSI::1NSI-WEB-IHM::C7::cours",
           "1NSI::1NSI-WEB-IHM::C7::exercices",
           "1NSI::1NSI-WEB-IHM::C7::remediation",
           "1NSI::1NSI-WEB-IHM::C8::corriges",
-          "1NSI::1NSI-WEB-IHM::C8::cours",
           "1NSI::1NSI-WEB-IHM::C8::exercices",
           "1NSI::1NSI-WEB-IHM::C8::remediation",
           "1NSI::1NSI-WEB-IHM::C9::corriges",
-          "1NSI::1NSI-WEB-IHM::C9::cours",
           "1NSI::1NSI-WEB-IHM::C9::exercices",
           "1NSI::1NSI-WEB-IHM::C9::remediation"
         ],
-        "indeterminate_set_digest": "sha256:3b2b301a83d393d416878c558261162b87dffad9f61daff1e2dbe106b3b277f6",
+        "indeterminate_set_digest": "sha256:602f2fbf42d180a5174c44b95bba7183a34f6be215868f7642aa3cefb3bfd01e",
         "missing": 14,
         "missing_ids": [
           "1NSI::1NSI-WEB-IHM::C1::methodes",
@@ -3029,23 +2988,32 @@
           "1NSI::1NSI-WEB-IHM::C9::methodes"
         ],
         "missing_set_digest": "sha256:8fcdffd2623fc75d27614d325d280ab7295c2b69af5bbc7883580c62e29d9a97",
-        "semantically_unvalidated": 13,
+        "semantically_unvalidated": 22,
         "semantically_unvalidated_ids": [
+          "1NSI::1NSI-WEB-IHM::C1::cours",
           "1NSI::1NSI-WEB-IHM::C1::evaluations",
           "1NSI::1NSI-WEB-IHM::C1::qcm",
+          "1NSI::1NSI-WEB-IHM::C2::cours",
           "1NSI::1NSI-WEB-IHM::C2::qcm",
+          "1NSI::1NSI-WEB-IHM::C3::cours",
           "1NSI::1NSI-WEB-IHM::C3::evaluations",
           "1NSI::1NSI-WEB-IHM::C3::qcm",
+          "1NSI::1NSI-WEB-IHM::C4::cours",
           "1NSI::1NSI-WEB-IHM::C4::qcm",
+          "1NSI::1NSI-WEB-IHM::C5::cours",
           "1NSI::1NSI-WEB-IHM::C5::qcm",
+          "1NSI::1NSI-WEB-IHM::C6::cours",
           "1NSI::1NSI-WEB-IHM::C6::qcm",
+          "1NSI::1NSI-WEB-IHM::C7::cours",
           "1NSI::1NSI-WEB-IHM::C7::qcm",
+          "1NSI::1NSI-WEB-IHM::C8::cours",
           "1NSI::1NSI-WEB-IHM::C8::evaluations",
           "1NSI::1NSI-WEB-IHM::C8::qcm",
+          "1NSI::1NSI-WEB-IHM::C9::cours",
           "1NSI::1NSI-WEB-IHM::C9::evaluations",
           "1NSI::1NSI-WEB-IHM::C9::qcm"
         ],
-        "semantically_unvalidated_set_digest": "sha256:9d7669a08a4e85d4e7a2955bc3bf5a2181e4f21ed4a23c92bc37deaa3ed1d545",
+        "semantically_unvalidated_set_digest": "sha256:339b51d406006dfec413f62b749ed48e30becfa37a6baf6fb4641766944d0d9a",
         "status": "GAP"
       },
       "programme": {
@@ -3122,7 +3090,7 @@
         "questions": 10,
         "status": "COMPLETE"
       },
-      "risk_score": 19965,
+      "risk_score": 18525,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -3178,9 +3146,9 @@
       "chapter": "1SPE-DERIVATION-GLOBAL",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0227"
+          "CG-0200"
         ],
-        "ambiguous_group_ids_digest": "sha256:6d33ea215695cf5df2746a07a2aaaa2a876e9d8534a30fd5a165bf183f73a483",
+        "ambiguous_group_ids_digest": "sha256:37bcf77e8de5d254a5e6677f769be3b45d46ceb43fcfe24f0d1f1ef5ec0135dc",
         "ambiguous_groups": 1,
         "false_copy_count": 0,
         "false_copy_paths": [],
@@ -3864,22 +3832,20 @@
         "unknown": 0
       },
       "ex_co_graph": {
-        "cardinality_failures": 13,
+        "cardinality_failures": 0,
         "classifications": {
-          "MISMATCHED_CAPACITY": 13,
-          "UNKNOWN": 37
+          "UNKNOWN": 50
         },
         "exercise_cardinality": {
-          "MATCH": 37,
-          "ORPHAN_EX": 13
+          "MATCH": 50
         },
         "exercise_ids_digest": "sha256:bc5373fcf3845baf5935a7ed97217268db6a13b411609225079a7ae62bd7563e",
         "exercises": 50,
         "relation_ids_digest": "sha256:f09ca19ed360c59a5fd2c9d6b62ec0e8ce35db352ce0a7d9a4d90cbc5bc20498",
         "relations": 50,
         "status": "GAP",
-        "structural_failures": 13,
-        "unknown": 37
+        "structural_failures": 0,
+        "unknown": 50
       },
       "human": {
         "publication_approval": false,
@@ -4037,7 +4003,7 @@
         "questions": 15,
         "status": "COMPLETE"
       },
-      "risk_score": 6325,
+      "risk_score": 5025,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -4763,22 +4729,20 @@
         "unknown": 0
       },
       "ex_co_graph": {
-        "cardinality_failures": 3,
+        "cardinality_failures": 0,
         "classifications": {
-          "MISMATCHED_CAPACITY": 3,
-          "UNKNOWN": 47
+          "UNKNOWN": 50
         },
         "exercise_cardinality": {
-          "MATCH": 47,
-          "ORPHAN_EX": 3
+          "MATCH": 50
         },
         "exercise_ids_digest": "sha256:c88f502b149316cc73594715384eeebc26459e54910dff04e9aaec7dd32f45e1",
         "exercises": 50,
         "relation_ids_digest": "sha256:71d5687ef8084e2c8adb49053449ca3cd4998481290f8f5f52a6fe59fd17257d",
         "relations": 50,
         "status": "GAP",
-        "structural_failures": 3,
-        "unknown": 47
+        "structural_failures": 0,
+        "unknown": 50
       },
       "human": {
         "publication_approval": false,
@@ -4936,7 +4900,7 @@
         "questions": 15,
         "status": "COMPLETE"
       },
-      "risk_score": 5370,
+      "risk_score": 5070,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -4980,9 +4944,9 @@
       "chapter": "1SPE-SECOND-DEGRE",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0059"
+          "CG-0055"
         ],
-        "ambiguous_group_ids_digest": "sha256:3ec5cec8b39981964cf5fba429304d8f662f0ade95b76ae6575084740add7117",
+        "ambiguous_group_ids_digest": "sha256:1da380399d975909a89a63767f716c2c73a18da2cf9527da9b7c6e877da6731f",
         "ambiguous_groups": 1,
         "false_copy_count": 0,
         "false_copy_paths": [],
@@ -5694,23 +5658,20 @@
         "unknown": 0
       },
       "ex_co_graph": {
-        "cardinality_failures": 5,
+        "cardinality_failures": 0,
         "classifications": {
-          "MISMATCHED_CAPACITY": 1,
-          "ORPHAN_CO": 4,
-          "UNKNOWN": 19
+          "UNKNOWN": 24
         },
         "exercise_cardinality": {
-          "MATCH": 19,
-          "ORPHAN_EX": 5
+          "MATCH": 24
         },
         "exercise_ids_digest": "sha256:62d55e8600c862b101a225387924aeb62f878d7a20049b134784181eb6b33bf8",
         "exercises": 24,
-        "relation_ids_digest": "sha256:5b519d1f0ed9dfe1600fb6f10c3900aca265fc7e851301ce3461fd6cc5415914",
+        "relation_ids_digest": "sha256:400747abbd55ec0ef7a76c521d77b4efd3d41a00554e01bc67d7cf4db6f6ba09",
         "relations": 24,
         "status": "GAP",
-        "structural_failures": 5,
-        "unknown": 19
+        "structural_failures": 0,
+        "unknown": 24
       },
       "human": {
         "publication_approval": false,
@@ -5838,7 +5799,7 @@
         "questions": 15,
         "status": "COMPLETE"
       },
-      "risk_score": 3410,
+      "risk_score": 2910,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -5998,22 +5959,20 @@
         "unknown": 0
       },
       "ex_co_graph": {
-        "cardinality_failures": 19,
+        "cardinality_failures": 0,
         "classifications": {
-          "MISMATCHED_CAPACITY": 19,
-          "UNKNOWN": 35
+          "UNKNOWN": 54
         },
         "exercise_cardinality": {
-          "MATCH": 35,
-          "ORPHAN_EX": 19
+          "MATCH": 54
         },
         "exercise_ids_digest": "sha256:1705fc60343149de891538e711f3c1f2741219432c11a8e1479375cbc1fe8bcc",
         "exercises": 54,
         "relation_ids_digest": "sha256:45c643e5648dcff603ae367bbc4f1b8f0c94c0f87208d28b99ecc3bbdcbfc706",
         "relations": 54,
         "status": "GAP",
-        "structural_failures": 19,
-        "unknown": 35
+        "structural_failures": 0,
+        "unknown": 54
       },
       "human": {
         "publication_approval": false,
@@ -6197,7 +6156,7 @@
         "questions": 21,
         "status": "COMPLETE"
       },
-      "risk_score": 8200,
+      "risk_score": 6300,
       "unassembled_object_ids": [],
       "vertical_machine_status": "INCOMPLETE"
     },
@@ -8229,9 +8188,9 @@
       "chapter": "TCOMPL-MODELES-FONCTION",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0080"
+          "CG-0075"
         ],
-        "ambiguous_group_ids_digest": "sha256:32e88367b933cc54e2e32f59f272c166841d1f307e50dcb27d44abacdb4295aa",
+        "ambiguous_group_ids_digest": "sha256:b224aca488c5c98183a7ea302b50419661895df34d3e1a41f65689c4e8ff2496",
         "ambiguous_groups": 1,
         "false_copy_count": 0,
         "false_copy_paths": [],
@@ -10318,27 +10277,27 @@
       "chapter": "TNSI-ALGORITHMIQUE",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0004",
-          "CG-0032",
-          "CG-0034",
-          "CG-0060",
-          "CG-0081",
-          "CG-0082",
-          "CG-0129",
-          "CG-0146",
-          "CG-0150",
-          "CG-0153",
-          "CG-0171",
-          "CG-0186",
-          "CG-0189",
-          "CG-0223",
-          "CG-0239",
-          "CG-0243",
-          "CG-0261",
-          "CG-0268",
-          "CG-0282"
+          "CG-0003",
+          "CG-0029",
+          "CG-0031",
+          "CG-0056",
+          "CG-0076",
+          "CG-0077",
+          "CG-0113",
+          "CG-0128",
+          "CG-0132",
+          "CG-0135",
+          "CG-0152",
+          "CG-0166",
+          "CG-0168",
+          "CG-0196",
+          "CG-0211",
+          "CG-0215",
+          "CG-0231",
+          "CG-0237",
+          "CG-0250"
         ],
-        "ambiguous_group_ids_digest": "sha256:f8ca64ad37badde0ba714d58330a10782de90734c9c6b572855589d6bbd2a5ff",
+        "ambiguous_group_ids_digest": "sha256:ec794d2f3f444481df9fb11c4d3dff9d5c9624ae27e2c71c8bf129ea5988f31d",
         "ambiguous_groups": 19,
         "false_copy_count": 0,
         "false_copy_paths": [],
@@ -10718,22 +10677,22 @@
       "chapter": "TNSI-ARCHITECTURES-MATERIELLES-SY",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0029",
-          "CG-0055",
-          "CG-0073",
-          "CG-0076",
+          "CG-0026",
+          "CG-0052",
+          "CG-0068",
+          "CG-0071",
+          "CG-0093",
           "CG-0103",
-          "CG-0117",
-          "CG-0133",
-          "CG-0150",
-          "CG-0156",
-          "CG-0162",
-          "CG-0179",
-          "CG-0264",
-          "CG-0274",
-          "CG-0278"
+          "CG-0116",
+          "CG-0132",
+          "CG-0138",
+          "CG-0144",
+          "CG-0159",
+          "CG-0234",
+          "CG-0243",
+          "CG-0246"
         ],
-        "ambiguous_group_ids_digest": "sha256:1c5cc85cda6fc37b07b0bdba086afb17bb9dfd8e6833e26aa70cd7037b12434e",
+        "ambiguous_group_ids_digest": "sha256:ac84975496e278d7539bdc484b00fb00cedcbca591463ff41bcb5897d1fb14c2",
         "ambiguous_groups": 14,
         "false_copy_count": 0,
         "false_copy_paths": [],
@@ -11045,23 +11004,23 @@
       "chapter": "TNSI-BASES-DE-DONNEES",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0010",
-          "CG-0021",
-          "CG-0038",
-          "CG-0045",
-          "CG-0066",
-          "CG-0109",
-          "CG-0110",
-          "CG-0150",
-          "CG-0201",
-          "CG-0207",
-          "CG-0231",
-          "CG-0237",
-          "CG-0240",
-          "CG-0255",
-          "CG-0288"
+          "CG-0007",
+          "CG-0018",
+          "CG-0035",
+          "CG-0042",
+          "CG-0062",
+          "CG-0097",
+          "CG-0098",
+          "CG-0132",
+          "CG-0178",
+          "CG-0183",
+          "CG-0204",
+          "CG-0210",
+          "CG-0212",
+          "CG-0226",
+          "CG-0256"
         ],
-        "ambiguous_group_ids_digest": "sha256:aa138baa49f4f66b9327561ec4396efca4372e94969fa3d11b65c56febbb4182",
+        "ambiguous_group_ids_digest": "sha256:bd69912614ee42cc3ac5c9888ad6bff3d4f664017f7028233b43eef4dd97fd13",
         "ambiguous_groups": 15,
         "false_copy_count": 0,
         "false_copy_paths": [],
@@ -11428,15 +11387,15 @@
       "chapter": "TNSI-HISTOIRE-INFORMATIQUE",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
+          "CG-0030",
           "CG-0033",
-          "CG-0036",
-          "CG-0043",
-          "CG-0111",
-          "CG-0150",
-          "CG-0235",
-          "CG-0280"
+          "CG-0040",
+          "CG-0099",
+          "CG-0132",
+          "CG-0208",
+          "CG-0248"
         ],
-        "ambiguous_group_ids_digest": "sha256:f37ae8d67860abd8b291694906c7793275bb2b1f42dff6f73da9a6fc4ebb5565",
+        "ambiguous_group_ids_digest": "sha256:7c76339dd5e89023311d21f4bc412ff486ff313915f5a72b253341ce7eaa21fd",
         "ambiguous_groups": 7,
         "false_copy_count": 0,
         "false_copy_paths": [],
@@ -11693,23 +11652,23 @@
       "chapter": "TNSI-LANGAGES-ET-PROGRAMMATION",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0075",
-          "CG-0089",
-          "CG-0090",
-          "CG-0121",
-          "CG-0125",
-          "CG-0135",
-          "CG-0144",
-          "CG-0150",
+          "CG-0070",
+          "CG-0083",
+          "CG-0084",
+          "CG-0107",
+          "CG-0110",
+          "CG-0118",
+          "CG-0126",
+          "CG-0132",
+          "CG-0151",
           "CG-0170",
-          "CG-0193",
-          "CG-0196",
-          "CG-0220",
-          "CG-0245",
-          "CG-0252",
-          "CG-0273"
+          "CG-0173",
+          "CG-0194",
+          "CG-0217",
+          "CG-0223",
+          "CG-0242"
         ],
-        "ambiguous_group_ids_digest": "sha256:cfee75a5e7dd08699b004611690deb37a8fbd8b5dbf05a3a85dd2f299ff84e1b",
+        "ambiguous_group_ids_digest": "sha256:a323674cefa94740954737d2cdbd8af9ae9672ba4709622083bf2f594a90ef65",
         "ambiguous_groups": 15,
         "false_copy_count": 0,
         "false_copy_paths": [],
@@ -12331,23 +12290,23 @@
       "chapter": "TNSI-STRUCTURES-DONNEES",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0022",
-          "CG-0044",
-          "CG-0050",
-          "CG-0051",
-          "CG-0067",
-          "CG-0099",
-          "CG-0130",
-          "CG-0139",
-          "CG-0150",
-          "CG-0194",
-          "CG-0216",
-          "CG-0229",
-          "CG-0236",
-          "CG-0241",
-          "CG-0285"
+          "CG-0019",
+          "CG-0041",
+          "CG-0047",
+          "CG-0048",
+          "CG-0063",
+          "CG-0090",
+          "CG-0114",
+          "CG-0122",
+          "CG-0132",
+          "CG-0171",
+          "CG-0190",
+          "CG-0202",
+          "CG-0209",
+          "CG-0213",
+          "CG-0253"
         ],
-        "ambiguous_group_ids_digest": "sha256:08fbe4d4c9da871adf36e84b5b50255724cca70ab22b01a8373ed520213d1e89",
+        "ambiguous_group_ids_digest": "sha256:aa92eee51138bf182b720619a77769c994b97875af7e4736668f9a00223f7fdf",
         "ambiguous_groups": 15,
         "false_copy_count": 0,
         "false_copy_paths": [],
@@ -12732,26 +12691,26 @@
       "chapter": "TSPE-CALCUL-INTEGRAL",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0019",
-          "CG-0028",
-          "CG-0047",
+          "CG-0016",
+          "CG-0025",
+          "CG-0044",
+          "CG-0050",
           "CG-0053",
-          "CG-0056",
-          "CG-0062",
-          "CG-0072",
-          "CG-0102",
-          "CG-0120",
-          "CG-0132",
-          "CG-0148",
-          "CG-0163",
-          "CG-0178",
-          "CG-0232",
-          "CG-0254",
-          "CG-0256",
-          "CG-0277",
-          "CG-0283"
+          "CG-0058",
+          "CG-0067",
+          "CG-0092",
+          "CG-0106",
+          "CG-0115",
+          "CG-0130",
+          "CG-0145",
+          "CG-0158",
+          "CG-0205",
+          "CG-0225",
+          "CG-0227",
+          "CG-0245",
+          "CG-0251"
         ],
-        "ambiguous_group_ids_digest": "sha256:bda2af97d4feca95e2633e4b0e4b2266059b53495bc2ec282f26dac162f2719e",
+        "ambiguous_group_ids_digest": "sha256:3d5d0c31da20222ae42a004e19e1bc92a6ab1ebda1ac566469d2ee6c11ae4e54",
         "ambiguous_groups": 18,
         "false_copy_count": 0,
         "false_copy_paths": [],
@@ -13047,23 +13006,23 @@
       "chapter": "TSPE-COMBINATOIRE",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0005",
-          "CG-0041",
-          "CG-0042",
-          "CG-0078",
-          "CG-0087",
-          "CG-0118",
+          "CG-0004",
+          "CG-0038",
+          "CG-0039",
+          "CG-0073",
+          "CG-0081",
+          "CG-0104",
+          "CG-0120",
+          "CG-0124",
           "CG-0137",
-          "CG-0142",
-          "CG-0155",
-          "CG-0159",
-          "CG-0168",
-          "CG-0214",
-          "CG-0215",
-          "CG-0267",
-          "CG-0271"
+          "CG-0141",
+          "CG-0149",
+          "CG-0188",
+          "CG-0189",
+          "CG-0236",
+          "CG-0240"
         ],
-        "ambiguous_group_ids_digest": "sha256:9a33d54129f087a4fdf3ea886b858f116dedca16c10ea7e448c16515c8ee47e4",
+        "ambiguous_group_ids_digest": "sha256:b05a0977549e077cb794112c4f10f3022e612cfe84288596b2aede5f2bcae227",
         "ambiguous_groups": 15,
         "false_copy_count": 0,
         "false_copy_paths": [],
@@ -13576,9 +13535,9 @@
       "chapter": "TSPE-DERIVATION-CONVEXITE",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0080"
+          "CG-0075"
         ],
-        "ambiguous_group_ids_digest": "sha256:32e88367b933cc54e2e32f59f272c166841d1f307e50dcb27d44abacdb4295aa",
+        "ambiguous_group_ids_digest": "sha256:b224aca488c5c98183a7ea302b50419661895df34d3e1a41f65689c4e8ff2496",
         "ambiguous_groups": 1,
         "false_copy_count": 0,
         "false_copy_paths": [],
@@ -14599,26 +14558,26 @@
       "chapter": "TSPE-LOGARITHME",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0013",
-          "CG-0025",
-          "CG-0063",
-          "CG-0069",
-          "CG-0071",
-          "CG-0079",
+          "CG-0010",
+          "CG-0022",
+          "CG-0059",
+          "CG-0065",
+          "CG-0066",
+          "CG-0074",
+          "CG-0094",
           "CG-0105",
-          "CG-0119",
-          "CG-0175",
+          "CG-0155",
+          "CG-0157",
           "CG-0177",
-          "CG-0200",
-          "CG-0203",
-          "CG-0204",
+          "CG-0180",
+          "CG-0181",
+          "CG-0195",
+          "CG-0218",
           "CG-0221",
-          "CG-0246",
-          "CG-0250",
-          "CG-0259",
-          "CG-0284"
+          "CG-0229",
+          "CG-0252"
         ],
-        "ambiguous_group_ids_digest": "sha256:1aa3940d0384c52082221045b05c7cc41e21a44dea75c045ed3a6cf07bab513e",
+        "ambiguous_group_ids_digest": "sha256:be6a9c44656f70cc0664a4ebb050050e69bc091cc6a6242bb56b0acaab5a364b",
         "ambiguous_groups": 18,
         "false_copy_count": 0,
         "false_copy_paths": [],
@@ -14881,26 +14840,26 @@
       "chapter": "TSPE-PRIMITIVES-EQDIFF",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0008",
-          "CG-0015",
+          "CG-0006",
+          "CG-0012",
+          "CG-0014",
           "CG-0017",
-          "CG-0020",
-          "CG-0035",
+          "CG-0032",
+          "CG-0043",
           "CG-0046",
-          "CG-0049",
-          "CG-0085",
-          "CG-0086",
+          "CG-0079",
+          "CG-0080",
+          "CG-0088",
           "CG-0096",
-          "CG-0107",
-          "CG-0123",
-          "CG-0124",
-          "CG-0128",
-          "CG-0182",
-          "CG-0190",
-          "CG-0265",
-          "CG-0270"
+          "CG-0108",
+          "CG-0109",
+          "CG-0112",
+          "CG-0162",
+          "CG-0169",
+          "CG-0235",
+          "CG-0239"
         ],
-        "ambiguous_group_ids_digest": "sha256:7a30e6a58f9e5eef30e46dca38774ca987d21f6392a96f0e7695f3ecece2b3d8",
+        "ambiguous_group_ids_digest": "sha256:87e7f4d14a134b84bde01fc88478a20d8124620c6003141e2a20bcc3b100425a",
         "ambiguous_groups": 18,
         "false_copy_count": 0,
         "false_copy_paths": [],
@@ -15178,27 +15137,27 @@
       "chapter": "TSPE-PROBABILITES",
       "clone_capacity_integrity": {
         "ambiguous_group_ids": [
-          "CG-0011",
-          "CG-0016",
-          "CG-0040",
+          "CG-0008",
+          "CG-0013",
+          "CG-0037",
+          "CG-0054",
           "CG-0057",
-          "CG-0061",
-          "CG-0084",
-          "CG-0091",
-          "CG-0095",
-          "CG-0145",
-          "CG-0152",
-          "CG-0154",
-          "CG-0176",
-          "CG-0180",
-          "CG-0213",
-          "CG-0217",
-          "CG-0219",
-          "CG-0226",
-          "CG-0262",
-          "CG-0287"
+          "CG-0078",
+          "CG-0085",
+          "CG-0087",
+          "CG-0127",
+          "CG-0134",
+          "CG-0136",
+          "CG-0156",
+          "CG-0160",
+          "CG-0187",
+          "CG-0191",
+          "CG-0193",
+          "CG-0199",
+          "CG-0232",
+          "CG-0255"
         ],
-        "ambiguous_group_ids_digest": "sha256:00cbc149980134deb6702e005526942fd8b6613aa8aef6913697bef5536d191a",
+        "ambiguous_group_ids_digest": "sha256:ce970c1c532abd22c137774970bfc86f982fe4a76251532061cf3d76984871e3",
         "ambiguous_groups": 19,
         "false_copy_count": 0,
         "false_copy_paths": [],
@@ -16052,13 +16011,13 @@
   "input_digests": {
     "capacity_alias_map": "sha256:ab359532485a1b817a993afa19c56a360338f8835ce14f18233eeb093c5829eb",
     "chapter_richness": "sha256:184fe8587f156d6d783ec23cc77545a2a66d1d663d63e943f2e61b9e4a0d58d8",
-    "clone_ledger": "sha256:226db56b92e8d12fd8a2e339308977e1f24a392cbdcaad6e481f0618cb8a3627",
-    "course_body_ownership_map": "sha256:8111583c23e5355283fbf1a5c289fa81bb28d958a32264bf09e7ce45c512e53e",
+    "clone_ledger": "sha256:431a39930787054474cb67b00101adb9fae4a67117dc1492b228ce7b06ac2d0d",
+    "course_body_ownership_map": "sha256:69d441ffd1296efdf9609da8532e025eb21cc5cf014da8cbbf026b52e40f8b87",
     "cross_discipline_ledger": "sha256:e9fba6f80baf65d7dae76372ba25ada90de64ad6876f24ab0fb3362ac36e29d2",
-    "ex_co_graph": "sha256:86bb7cbd5353574ec79942bf81d6c949823254fb26124be760bd5f35e7dd8a6f",
+    "ex_co_graph": "sha256:ba5bba9105e04395ba8874d95fc9166a43ea4a0e27fea5d447dcacb2ae2d7946",
     "human_review_queue": "sha256:1862d58f92749030e9e757cc74bed767aee36a23dbe0d809bc6e3cea8554983c",
     "official_programme_sources": "sha256:bfd5c26214ed8e5667265a0ccf56cb5b57d870bb384d7ff82fb34a62f8f1df1d",
-    "true_coverage": "sha256:ea31f2071ae3bfed85182cd85d1d063253759d64f44194a86a5676b0a40cf028"
+    "true_coverage": "sha256:86c6ece86dcfc62c1e3ac4e71ecc59fdb66f46ee308cf4b516b0c7bbad123648"
   },
   "manuals": [
     "1NSI",
@@ -16090,14 +16049,14 @@
       "risk_score": 22170
     },
     {
-      "chapter": "1NSI-WEB-IHM",
-      "manual": "1NSI",
-      "risk_score": 19965
-    },
-    {
       "chapter": "TSPE-PROBABILITES",
       "manual": "TSPE_2026_2027",
       "risk_score": 19095
+    },
+    {
+      "chapter": "1NSI-WEB-IHM",
+      "manual": "1NSI",
+      "risk_score": 18525
     },
     {
       "chapter": "TSPE-CALCUL-INTEGRAL",
@@ -16112,27 +16071,27 @@
     {
       "chapter": "1NSI-LANGAGE",
       "manual": "1NSI",
-      "risk_score": 16525
+      "risk_score": 15085
     },
     {
       "chapter": "1NSI-TYPES-CONSTRUITS",
       "manual": "1NSI",
-      "risk_score": 12655
-    },
-    {
-      "chapter": "1NSI-TYPES-BASE",
-      "manual": "1NSI",
-      "risk_score": 11890
+      "risk_score": 11455
     },
     {
       "chapter": "1NSI-ARCHITECTURE-OS",
       "manual": "1NSI",
-      "risk_score": 11765
+      "risk_score": 10805
     },
     {
       "chapter": "1NSI-RESEAUX",
       "manual": "1NSI",
-      "risk_score": 11685
+      "risk_score": 10725
+    },
+    {
+      "chapter": "1NSI-TYPES-BASE",
+      "manual": "1NSI",
+      "risk_score": 10690
     },
     {
       "chapter": "TSPE-PRIMITIVES-EQDIFF",
@@ -16142,12 +16101,12 @@
     {
       "chapter": "1NSI-PROJET-METHODES",
       "manual": "1NSI",
-      "risk_score": 9705
+      "risk_score": 8745
     },
     {
       "chapter": "1NSI-TABLES",
       "manual": "1NSI",
-      "risk_score": 9590
+      "risk_score": 8630
     },
     {
       "chapter": "TSPE-COMBINATOIRE",
@@ -16158,11 +16117,6 @@
       "chapter": "TSPE-LOGARITHME",
       "manual": "TSPE_2026_2027",
       "risk_score": 8395
-    },
-    {
-      "chapter": "1SPE-VARIABLES-ALEATOIRES",
-      "manual": "1SPE",
-      "risk_score": 8200
     },
     {
       "chapter": "TSPE-GEOMETRIE-ESPACE",
@@ -16190,9 +16144,9 @@
       "risk_score": 6340
     },
     {
-      "chapter": "1SPE-EXPONENTIELLE",
+      "chapter": "1SPE-VARIABLES-ALEATOIRES",
       "manual": "1SPE",
-      "risk_score": 6325
+      "risk_score": 6300
     },
     {
       "chapter": "1SPE-SECOND-DEGRE",
@@ -16230,11 +16184,6 @@
       "risk_score": 5420
     },
     {
-      "chapter": "1SPE-PRODUIT-SCALAIRE",
-      "manual": "1SPE",
-      "risk_score": 5370
-    },
-    {
       "chapter": "1SPE-DERIVATION-GLOBAL",
       "manual": "1SPE",
       "risk_score": 5315
@@ -16253,6 +16202,16 @@
       "chapter": "1SPE-PROBA-COND",
       "manual": "1SPE",
       "risk_score": 5175
+    },
+    {
+      "chapter": "1SPE-PRODUIT-SCALAIRE",
+      "manual": "1SPE",
+      "risk_score": 5070
+    },
+    {
+      "chapter": "1SPE-EXPONENTIELLE",
+      "manual": "1SPE",
+      "risk_score": 5025
     },
     {
       "chapter": "TCOMPL-CALCULS-AIRES",
@@ -16305,14 +16264,14 @@
       "risk_score": 3845
     },
     {
-      "chapter": "1SPE-TRIGONOMETRIE",
-      "manual": "1SPE",
-      "risk_score": 3410
-    },
-    {
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
       "manual": "1NSI",
       "risk_score": 3370
+    },
+    {
+      "chapter": "1SPE-TRIGONOMETRIE",
+      "manual": "1SPE",
+      "risk_score": 2910
     },
     {
       "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",

@@ -7,7 +7,7 @@ seize capacités alors qu'une seule, `C7`, était traitée.
 
 - capacités contractuelles : `320`
 - cellules (capacité × rôle) : `2240`
-- cellules avec déclaration exacte (alignement sémantique à établir) : `1438`
+- cellules avec déclaration exacte (alignement sémantique à établir) : `1480`
 - **unités d'écriture requises** : `330`
 
 | Manuel | cours | methodes | exercices | corriges | remediation | qcm | evaluations | Total |
