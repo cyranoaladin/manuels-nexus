@@ -19557,14 +19557,14 @@ def test_release_content_integrity_rejects_pending_human_closure(
 
 PRE_A6_IDENTITY_MIGRATIONS = {
     "3352c285c8971a9a": "4686bd1f406b8183",
-    "3a8ff3c7649eebf4": "a4d85ea8ddf56111",
-    "4efbac4c9cd5b38e": "b1b11f28b3c73674",
-    "5dd488a33d09ff85": "e3f94eee205675b2",
+    "431ad64d2681d804": "e3f94eee205675b2",
     "64d302027bb8d49d": "760dd470d22f772c",
     "685b5345a7a14d3a": "0af04017fed4737f",
     "6dbdcc7ea0c5b104": "2e10a1fa5e61ca58",
+    "6ef7e4396d2d78fa": "b1b11f28b3c73674",
     "8c73d69a6c3f46c4": "e0ba62172b638934",
     "9bc05524d4ef9a01": "ac9ea077ad841eeb",
+    "c194bf1ceb001589": "a4d85ea8ddf56111",
 }
 
 
@@ -19592,6 +19592,28 @@ def test_pre_a6_identity_migration_registry_is_exact_schema_control(
         current: migration["previous_fingerprint"]
         for current, migration in payload["migrations"].items()
     } == PRE_A6_IDENTITY_MIGRATIONS
+    course_migrations = [
+        migration
+        for migration in payload["migrations"].values()
+        if migration["current_source"].startswith(
+            "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/"
+        )
+    ]
+    assert {migration["current_object_id"] for migration in course_migrations} == {
+        "1NSI-APT-COURS-C1",
+        "1NSI-APT-COURS-C2",
+        "1NSI-APT-COURS-C3",
+    }
+    assert all(
+        migration["transform"]
+        == {
+            "kind": "EXACT_IDENTIFIER_TOKEN_SUBSTITUTION",
+            "new_token": "1NSI-APT-",
+            "old_token": "1NSI-AGT-",
+            "replacement_count": 1,
+        }
+        for migration in course_migrations
+    )
     forbidden = {
         "approved_by",
         "baseline_sha",
