@@ -32,6 +32,7 @@ import argparse
 import collections
 import hashlib
 import importlib.util
+import importlib
 import json
 import re
 import sys
@@ -39,6 +40,8 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 OUTPUT = ROOT / "audit/COURSE_BODY_OWNERSHIP_MAP.json"
 CLONE_LEDGER = ROOT / "audit/P0_CONTENT_CLONE_LEDGER.json"
 CORPORA = (
@@ -57,19 +60,61 @@ def _load(name: str, relative: str):
     return module
 
 
+def _resolve_course_capacities(resolver, chapter: str, meta: dict[str, Any]):
+    """Résout les deux champs META ensemble et refuse leur contradiction."""
+
+    return resolver.resolve_meta_codes(chapter, meta)
+
+
+def _nsi_variant_assembly() -> dict[str, dict[str, list[tuple[int, Path]]]]:
+    """Observed course objects in the exact canonical assembler order."""
+
+    assembler = importlib.import_module("NSI.scripts.assemble_manuel")
+    observed: dict[str, dict[str, list[tuple[int, Path]]]] = {}
+    try:
+        for book in ("1NSI", "TNSI"):
+            assembler.select_book(book)
+            for variant in ("eleve", "professeur"):
+                key = f"{book}:{variant}"
+                by_chapter: dict[str, list[tuple[int, Path]]] = collections.defaultdict(list)
+                for position, path in enumerate(
+                    assembler.collect_variant_objects(variant), start=1
+                ):
+                    if path.parent.name != "cours":
+                        continue
+                    chapter = path.parent.parent.name
+                    by_chapter[chapter].append((position, path))
+                observed[key] = dict(by_chapter)
+    finally:
+        assembler.select_book("1NSI")
+    return observed
+
+
 def build_map() -> dict[str, Any]:
     clone = _load("p0_clone_ledger", "scripts/build_p0_content_clone_ledger.py")
     identity = _load("capacity_identity", "scripts/capacity_identity.py")
     resolver = identity.CapacityIdentityResolver.from_corpora()
-    ledger = json.loads(CLONE_LEDGER.read_text(encoding="utf-8"))
+    ledger = clone.build_ledger()
+    nsi_assembly = _nsi_variant_assembly()
 
     # Proprietaire semantique par chemin, tel que le registre l'a ETABLI.
     owner_of: dict[str, str] = {}
     ambiguous_paths: set[str] = set()
+    unknown_paths: set[str] = set()
+    legitimate_shared_paths: set[str] = set()
+    grouped_paths: set[str] = set()
     for group in ledger["groups"]:
         selection = group["canonical_selection"]
+        paths = {row["path"] for row in group["members"]}
+        grouped_paths.update(paths)
         if selection["status"] == "AMBIGUOUS":
-            ambiguous_paths.update(row["path"] for row in group["members"])
+            ambiguous_paths.update(paths)
+            continue
+        if selection["status"] == "UNKNOWN":
+            unknown_paths.update(paths)
+            continue
+        if selection["status"] == "LEGITIMATE_SHARED_CANONICAL":
+            legitimate_shared_paths.update(paths)
             continue
         canonical = set(selection["canonical_paths"])
         owners = sorted(
@@ -92,20 +137,42 @@ def build_map() -> dict[str, Any]:
             if chapter not in resolver.chapters:
                 continue
             course = directory / "cours"
+            manual = "1NSI" if chapter.startswith("1NSI-") else "TNSI" if chapter.startswith("TNSI-") else None
+            variant_rows: dict[str, list[tuple[int, Path]]] = {}
+            if manual is not None:
+                variant_rows = {
+                    variant: nsi_assembly[f"{manual}:{variant}"].get(chapter, [])
+                    for variant in ("eleve", "professeur")
+                }
+                source_rows = variant_rows["professeur"]
+                assembly_authority = "CANONICAL_NSI_ASSEMBLER"
+            else:
+                source_rows = list(enumerate(sorted(course.glob("*.tex")), start=1))
+                assembly_authority = "SOURCE_DIRECTORY_ONLY_NOT_ASSEMBLY_TRUTH"
             assembled: list[dict[str, Any]] = []
             served: set[str] = set()
-            for position, path in enumerate(sorted(course.glob("*.tex")), start=1):
+            for position, path in source_rows:
                 text = path.read_text(encoding="utf-8", errors="replace")
                 meta = clone.read_meta(text)
                 digest = clone.digest(clone.pedagogical_body(text))
                 relative = str(path.relative_to(ROOT))
-                raws = [
-                    identity.normalise(value)
-                    for key in ("capacites_codes", "capacites")
-                    for value in (meta.get(key) or [])
-                ]
-                codes = resolver.resolve_codes(chapter, [r for r in raws if r])
-                owner = owner_of.get(relative, chapter)
+                codes = _resolve_course_capacities(resolver, chapter, meta)
+                if relative in ambiguous_paths:
+                    owner = None
+                    ownership_status = "AMBIGUOUS"
+                elif relative in unknown_paths:
+                    owner = None
+                    ownership_status = "UNKNOWN"
+                elif relative in legitimate_shared_paths:
+                    owner = chapter
+                    ownership_status = "LEGITIMATE_SHARED_CANONICAL"
+                else:
+                    owner = owner_of.get(relative, chapter)
+                    ownership_status = (
+                        "SEMANTIC_CANONICAL"
+                        if relative in grouped_paths
+                        else "SOURCE_SCOPED_UNIQUE_BODY"
+                    )
                 titles = SECTION.findall(text)
                 assembled.append(
                     {
@@ -114,8 +181,9 @@ def build_map() -> dict[str, Any]:
                         "body_digest": digest,
                         "declared_capacities": list(codes),
                         "semantic_owner_chapter": owner,
-                        "is_foreign": owner != chapter,
-                        "ownership_proven": relative not in ambiguous_paths,
+                        "is_foreign": None if owner is None else owner != chapter,
+                        "ownership_proven": owner is not None,
+                        "ownership_status": ownership_status,
                         "toc_titles": titles,
                     }
                 )
@@ -140,6 +208,21 @@ def build_map() -> dict[str, Any]:
             expected = [item.local_code for item in resolver.capacities_of(chapter)]
             missing = [code for code in expected if code not in served]
             chapters[chapter] = {
+                "assembly_authority": assembly_authority,
+                "variant_assembly": {
+                    variant: {
+                        "paths": [str(path.relative_to(ROOT)) for _position, path in entries],
+                        "positions": [position for position, _path in entries],
+                        "path_set_digest": "sha256:"
+                        + hashlib.sha256(
+                            json.dumps(
+                                [str(path.relative_to(ROOT)) for _position, path in entries],
+                                separators=(",", ":"),
+                            ).encode("utf-8")
+                        ).hexdigest(),
+                    }
+                    for variant, entries in sorted(variant_rows.items())
+                },
                 "expected_capacities": expected,
                 "assembled_bodies": assembled,
                 "foreign_course_bodies": foreign,
@@ -159,7 +242,8 @@ def build_map() -> dict[str, Any]:
         entry["false_copies"] = sorted(
             carrier["path"]
             for carrier in entry["carriers"]
-            if carrier["chapter"] != entry["authentic_chapter"]
+            if entry["authentic_chapter"] is not None
+            and carrier["chapter"] != entry["authentic_chapter"]
         )
 
     totals = {
@@ -172,14 +256,30 @@ def build_map() -> dict[str, Any]:
         "MISSING_EXPECTED_COURSE_BODY": sum(
             len(row["missing_expected_course_capacities"]) for row in chapters.values()
         ),
+        "AMBIGUOUS_COURSE_BODY": sum(
+            1
+            for row in chapters.values()
+            for body in row["assembled_bodies"]
+            if body["ownership_status"] == "AMBIGUOUS"
+        ),
+        "UNKNOWN_COURSE_BODY": sum(
+            1
+            for row in chapters.values()
+            for body in row["assembled_bodies"]
+            if body["ownership_status"] == "UNKNOWN"
+        ),
     }
     return {
         "artifact_type": "course_body_ownership_map",
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_by": "scripts/build_course_assembly_truth.py",
         "ownership_rule": (
             "le proprietaire vient de la selection canonique par preuve du "
             "registre P0 ; jamais de l'ordre des fichiers"
+        ),
+        "assembly_rule": (
+            "1NSI/TNSI: select_book + collect_variant_objects pour eleve et "
+            "professeur, ordre observe conserve; Math: non audite ici"
         ),
         "totals": totals,
         "chapters_with_foreign_bodies": sorted(

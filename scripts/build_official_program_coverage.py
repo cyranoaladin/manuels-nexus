@@ -21,6 +21,29 @@ MANUAL_ORDER = ("1SPE", "TSPE", "TCOMPL", "TEXPERTES", "1NSI", "TNSI")
 MATRIX_PATHS = tuple(MATRIX_ROOT / f"{manual}.json" for manual in MANUAL_ORDER)
 
 
+def _validate_mandatory_bijection(
+    atoms: list[dict[str, Any]], rows: list[dict[str, Any]]
+) -> None:
+    """Every mandatory official atom has exactly one coverage row."""
+
+    mandatory = {
+        str(atom.get("atom_id"))
+        for atom in atoms
+        if atom.get("mandatory") == "YES"
+    }
+    row_ids = [str(row.get("atom_id")) for row in rows]
+    missing = sorted(mandatory - set(row_ids))
+    unexpected = sorted(set(row_ids) - mandatory)
+    duplicates = sorted(
+        atom_id for atom_id, count in Counter(row_ids).items() if count > 1
+    )
+    if missing or unexpected or duplicates or len(row_ids) != len(mandatory):
+        raise ValueError(
+            "MANDATORY_ATOM_BIJECTION: "
+            f"missing={missing}, unexpected={unexpected}, duplicates={duplicates}"
+        )
+
+
 def _digest(paths: tuple[Path, ...]) -> str:
     digest = hashlib.sha256()
     for path in paths:
@@ -32,11 +55,13 @@ def _digest(paths: tuple[Path, ...]) -> str:
 
 
 def build_payload() -> dict[str, Any]:
+    atoms = json.loads(ATOMS_PATH.read_text(encoding="utf-8"))["atoms"]
     rows = [
         row
         for path in MATRIX_PATHS
         for row in json.loads(path.read_text(encoding="utf-8"))["rows"]
     ]
+    _validate_mandatory_bijection(atoms, rows)
     by_manual: dict[str, dict[str, int]] = {}
     for manual in MANUAL_ORDER:
         subset = [row for row in rows if row["manual"] == manual]

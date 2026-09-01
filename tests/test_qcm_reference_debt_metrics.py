@@ -13,6 +13,9 @@ import json
 from pathlib import Path
 
 import pytest
+import yaml
+
+from scripts.capacity_identity import CapacityIdentityResolver
 
 ROOT = Path(__file__).resolve().parents[1]
 ARTIFACT = ROOT / "audit" / "QCM_REFERENCE_DEBT_METRICS.json"
@@ -106,3 +109,37 @@ def test_every_present_reference_resolves(payload) -> None:
     assert payload["unparsed_references"] == []
     assert metrics["GLOBAL_BROKEN_REMEDIATION_REFERENCES"]["count"] == 0
     assert payload["inventory"]["references_analysed"] > 0
+
+
+def test_hyphenated_local_capacity_code_is_never_reduced_to_suffix(
+    producer, tmp_path: Path, monkeypatch
+) -> None:
+    chapter = "TSPE-X"
+    directory = tmp_path / chapter
+    directory.mkdir()
+    (directory / "contrat.yaml").write_text(
+        yaml.safe_dump(
+            {
+                "capacites": [
+                    {"code": "P-ALGO-01A", "ref_capacite": "OFFICIAL-01A"}
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(producer, "CHAPTERS", tmp_path)
+    resolver = CapacityIdentityResolver.from_corpora((tmp_path,))
+
+    targets = producer._chapter_targets(chapter, resolver=resolver)
+
+    assert targets["C"] == {"P-ALGO-01A"}
+
+
+def test_collection_scope_includes_nsi_qcm(payload) -> None:
+    expected = len(
+        list((ROOT / "Mathematiques/manuel-maths/chapitres").glob("*/qcm/*-QCM.json"))
+    ) + len(list((ROOT / "NSI/chapitres").glob("*/qcm/*-QCM.json")))
+    assert payload["inventory"]["qcm_files"] == expected
+    assert payload["inventory"]["qcm_files"] > len(
+        list((ROOT / "Mathematiques/manuel-maths/chapitres").glob("*/qcm/*-QCM.json"))
+    )

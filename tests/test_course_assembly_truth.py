@@ -17,6 +17,7 @@ import sys
 from pathlib import Path
 
 import pytest
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 MAP = ROOT / "audit/COURSE_BODY_OWNERSHIP_MAP.json"
@@ -58,13 +59,21 @@ def test_no_chapter_assembles_a_body_it_does_not_own(payload: dict) -> None:
     for chapter, row in payload["chapters"].items():
         assert row["foreign_course_bodies"] == [], chapter
         for body in row["assembled_bodies"]:
-            assert body["semantic_owner_chapter"] == chapter, body["path"]
+            if body["ownership_proven"]:
+                assert body["semantic_owner_chapter"] == chapter, body["path"]
+            else:
+                assert body["semantic_owner_chapter"] is None
+                assert body["is_foreign"] is None
 
 
 def test_parcours_tris_opens_on_its_own_content(payload: dict) -> None:
     """Le chapitre reparé, verifie par ses titres de section."""
 
     chapter = payload["chapters"]["1NSI-ALGO-PARCOURS-TRIS"]
+    assert chapter["assembly_authority"] == "CANONICAL_NSI_ASSEMBLER"
+    assert chapter["variant_assembly"]["eleve"]["paths"] == chapter[
+        "variant_assembly"
+    ]["professeur"]["paths"]
     titles = [
         title for body in chapter["assembled_bodies"] for title in body["toc_titles"]
     ]
@@ -100,9 +109,15 @@ def test_ownership_is_never_inferred_from_file_order(payload: dict) -> None:
     """La regle affichee doit rester celle qui a ete appliquee."""
 
     assert "jamais de l'ordre des fichiers" in payload["ownership_rule"]
+    ambiguous = 0
     for chapter, row in payload["chapters"].items():
         for body in row["assembled_bodies"]:
-            assert body["ownership_proven"] is True or body["is_foreign"] is False
+            if not body["ownership_proven"]:
+                assert body["semantic_owner_chapter"] is None
+                assert body["is_foreign"] is None
+                assert body["ownership_status"] == "AMBIGUOUS"
+                ambiguous += 1
+    assert ambiguous == payload["totals"]["AMBIGUOUS_COURSE_BODY"]
 
 
 def test_the_remaining_duplication_is_measured_not_ignored(payload: dict) -> None:
@@ -117,3 +132,31 @@ def test_the_remaining_duplication_is_measured_not_ignored(payload: dict) -> Non
     )
     assert total == payload["totals"]["DUPLICATED_COURSE_BODY"]
     assert total <= 103, "un cours duplique a ete introduit"
+
+
+def test_conflicting_meta_capacity_fields_fail_closed(
+    producer, tmp_path: Path
+) -> None:
+    corpus = tmp_path / "chapitres"
+    chapter = corpus / "1NSI-X"
+    chapter.mkdir(parents=True)
+    (chapter / "contrat.yaml").write_text(
+        yaml.safe_dump(
+            {
+                "chapitre": "1NSI-X",
+                "capacites": [
+                    {"code": "C1", "ref_capacite": "REF-C1"},
+                    {"code": "C2", "ref_capacite": "REF-C2"},
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    identity = producer._load("course_truth_identity_test", "scripts/capacity_identity.py")
+    resolver = identity.CapacityIdentityResolver.from_corpora((corpus,))
+    with pytest.raises(identity.AmbiguousCapacityIdentity):
+        producer._resolve_course_capacities(
+            resolver,
+            "1NSI-X",
+            {"capacites_codes": ["C1"], "capacites": ["REF-C2"]},
+        )

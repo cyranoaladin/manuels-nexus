@@ -2529,6 +2529,44 @@ def test_release_keeps_unintegrated_build_receipt_as_explicit_debt(
     assert "build_receipt_producteurs_non_intégrés" in gate["reasons"]
 
 
+def test_release_strict_consumes_capacity_and_content_integrity_debt(
+    inventory_module,
+) -> None:
+    inventory = {
+        "anomalies": {},
+        "anomaly_qualifications": {},
+        "deliverable_matrix": {
+            "manuals": {
+                "1NSI": {
+                    "blockers": [],
+                    "phase0_structural_eligible": True,
+                    "publication_eligible": True,
+                    "variants": {},
+                }
+            }
+        },
+        "observed_build_coverage": {
+            "1NSI": {"observed_build_ready": True, "variants": {}}
+        },
+        "observed_build_integration": {"status": "integrated"},
+    }
+    content = {
+        "success": False,
+        "reasons": [
+            "CONTENT:1NSI-X:pedagogical_role_coverage:GAP",
+            "CONTENT:1NSI-X:cross_discipline_content:GAP",
+        ],
+    }
+
+    gate = inventory_module._release_strict_gate(
+        inventory, content_integrity=content
+    )
+
+    assert gate["success"] is False
+    assert gate["dimensions"]["pedagogy"] == "failed"
+    assert set(content["reasons"]) <= set(gate["reasons"])
+
+
 @pytest.mark.parametrize(
     ("mutation", "expected"),
     [

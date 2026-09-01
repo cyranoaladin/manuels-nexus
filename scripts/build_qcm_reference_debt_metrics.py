@@ -27,8 +27,14 @@ from typing import Any, Iterable
 
 import yaml
 
+try:
+    from scripts.capacity_identity import CapacityIdentityResolver
+except ModuleNotFoundError:  # exécution directe depuis scripts/
+    from capacity_identity import CapacityIdentityResolver  # type: ignore[no-redef]
+
 ROOT = Path(__file__).resolve().parents[1]
 CHAPTERS = ROOT / "Mathematiques" / "manuel-maths" / "chapitres"
+NSI_CHAPTERS = ROOT / "NSI" / "chapitres"
 OUTPUT_JSON = ROOT / "audit" / "QCM_REFERENCE_DEBT_METRICS.json"
 OUTPUT_MD = ROOT / "audit" / "QCM_REFERENCE_DEBT_METRICS.md"
 
@@ -43,8 +49,16 @@ def set_digest(values: Iterable[str]) -> str:
     return "sha256:" + hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
-def _chapter_targets(chapter: str) -> dict[str, set[str]]:
-    root = CHAPTERS / chapter
+def _chapter_targets(
+    chapter: str,
+    *,
+    resolver: CapacityIdentityResolver | None = None,
+) -> dict[str, set[str]]:
+    candidates = (CHAPTERS / chapter, NSI_CHAPTERS / chapter)
+    root = next((candidate for candidate in candidates if candidate.is_dir()), candidates[0])
+    resolver = resolver or CapacityIdentityResolver.from_corpora(
+        (CHAPTERS, NSI_CHAPTERS)
+    )
     methods: set[str] = set()
     directory = root / "methodes"
     if directory.is_dir():
@@ -56,13 +70,9 @@ def _chapter_targets(chapter: str) -> dict[str, set[str]]:
                     path.read_text(encoding="utf-8"),
                 )
             }
-    capacities: set[str] = set()
-    contract = root / "contrat.yaml"
-    if contract.is_file():
-        document = yaml.safe_load(contract.read_text(encoding="utf-8")) or {}
-        for capacity in document.get("capacites") or []:
-            code = str(capacity.get("code", ""))
-            capacities.add(code.rsplit("-", 1)[-1] if "-" in code else code)
+    capacities = {
+        identity.local_code for identity in resolver.capacities_of(chapter)
+    }
     remediation: set[str] = set()
     directory = root / "remediation"
     if directory.is_dir():
@@ -89,10 +99,19 @@ def build_metrics() -> dict[str, Any]:
     analysed_references = 0
     distractors = 0
     chapters_with_options = 0
+    chapter_roots = (CHAPTERS, NSI_CHAPTERS)
+    resolver = CapacityIdentityResolver.from_corpora(chapter_roots)
+    qcm_paths = sorted(
+        path for root in chapter_roots for path in root.glob("*/qcm/*-QCM.json")
+    )
+    counts = Counter(path.parent.parent.name for path in qcm_paths)
+    duplicates = sorted(chapter for chapter, count in counts.items() if count > 1)
+    if duplicates:
+        raise ValueError("MULTIPLE_QCM_SOURCES: " + ", ".join(duplicates))
 
-    for path in sorted(CHAPTERS.glob("*/qcm/*-QCM.json")):
+    for path in qcm_paths:
         chapter = path.parents[1].name
-        targets = _chapter_targets(chapter)
+        targets = _chapter_targets(chapter, resolver=resolver)
         document = json.loads(path.read_text(encoding="utf-8"))
         has_options = False
         for question in document.get("questions", []):
@@ -173,7 +192,7 @@ def build_metrics() -> dict[str, Any]:
         "generated_by": "scripts/build_qcm_reference_debt_metrics.py",
         "modifies_nothing": True,
         "inventory": {
-            "qcm_files": len(list(CHAPTERS.glob("*/qcm/*-QCM.json"))),
+            "qcm_files": len(qcm_paths),
             "chapters_with_options": chapters_with_options,
             "distractors": distractors,
             "references_analysed": analysed_references,

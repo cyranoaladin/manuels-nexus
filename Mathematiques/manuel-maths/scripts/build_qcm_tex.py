@@ -29,6 +29,16 @@ from pathlib import Path
 import yaml
 
 RACINE = Path(__file__).resolve().parents[1]
+DEPOT = RACINE.parents[1]
+if str(DEPOT / "scripts") not in sys.path:
+    sys.path.insert(0, str(DEPOT / "scripts"))
+from capacity_identity import (  # noqa: E402
+    CapacityIdentityError,
+    CapacityIdentityResolver,
+    PREREQUISITE,
+    UnresolvedCapacityIdentity,
+)
+
 LETTRES = ("A", "B", "C", "D")
 
 
@@ -69,25 +79,41 @@ def meta_existante(cible: Path) -> dict:
         return {}
 
 
-def capacites_officielles(chapitre: str, questions: list) -> list[str]:
-    """References officielles des capacites evaluees, lues au contrat.
+def resoudre_capacites_questions(
+    chapitre: str, questions: list[dict]
+) -> tuple[list[dict], list[str]]:
+    """Resolve every question exactly and return one canonical rendering.
 
-    Le rendu ecrit a la main portait ces references ; les perdre en migrant
-    vers le generateur ferait disparaitre la tracabilite de l'objet vers le
-    programme. Elles sont DERIVEES du contrat et du jeu de questions courant,
-    non recopiees, pour qu'elles restent vraies.
+    The printed label is the chapter-scoped local code; the META keeps the
+    official reference when the contract has one.  Consequently a local code
+    and its official alias produce byte-identical semantic output, while an
+    unknown or prerequisite identity blocks generation.
     """
 
     dossier = resoudre_dossier_qcm(chapitre)
-    contrat = dossier.parent / "contrat.yaml" if dossier else None
-    if contrat is None or not contrat.is_file():
-        return []
-    references: dict[str, str] = {}
-    for entree in yaml.safe_load(contrat.read_text(encoding="utf-8")).get("capacites", []):
-        if isinstance(entree, dict) and entree.get("code") and entree.get("ref_capacite"):
-            references[str(entree["code"])] = str(entree["ref_capacite"])
-    couvertes = {str(q.get("capacite")) for q in questions}
-    return sorted({references[code] for code in couvertes if code in references})
+    if dossier is None:
+        raise UnresolvedCapacityIdentity(f"chapitre QCM inconnu: {chapitre}")
+    resolver = CapacityIdentityResolver.from_corpora((dossier.parent.parent,))
+    rendered_questions: list[dict] = []
+    official_refs: set[str] = set()
+    for question in questions:
+        resolution = resolver.resolve(chapitre, question.get("capacite"))
+        if resolution.rule == PREREQUISITE:
+            raise UnresolvedCapacityIdentity(
+                f"{chapitre}/{question.get('id')}: prerequis utilise comme capacite"
+            )
+        rendered = dict(question)
+        rendered["capacite"] = resolution.identity.local_code
+        rendered_questions.append(rendered)
+        if resolution.identity.official_ref:
+            official_refs.add(resolution.identity.official_ref)
+    return rendered_questions, sorted(official_refs)
+
+
+def capacites_officielles(chapitre: str, questions: list[dict]) -> list[str]:
+    """Compatibility entry point backed by the canonical resolver."""
+
+    return resoudre_capacites_questions(chapitre, questions)[1]
 
 
 def _entete(
@@ -397,6 +423,15 @@ def main() -> int:
             print(f"[QCM] {erreur}", file=sys.stderr)
         return 2
 
+    try:
+        canonical_questions, official_refs = resoudre_capacites_questions(
+            args.chap, donnees["questions"]
+        )
+    except CapacityIdentityError as exc:
+        print(f"[QCM] {exc}", file=sys.stderr)
+        return 2
+    donnees["questions"] = canonical_questions
+
     donnees["_source"] = str(source.relative_to(_racine_de(source)))
     ancienne = meta_existante(cible)
     donnees["_identifiant"] = ancienne.get("id")
@@ -404,7 +439,7 @@ def main() -> int:
     # mathematiques n'en portent pas, et le corpus n'a pas a bouger pour cela.
     donnees["_statut"] = ancienne.get("status")
     donnees["_capacites"] = (
-        capacites_officielles(args.chap, donnees["questions"])
+        official_refs
         if "capacites" in ancienne
         else None
     )

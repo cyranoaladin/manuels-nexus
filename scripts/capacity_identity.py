@@ -96,7 +96,13 @@ def normalise(raw: Any) -> str:
     l'information d'identite, et l'oter est precisement le defaut repare ici.
     """
 
-    return str(raw).strip()
+    if raw is None:
+        return ""
+    if not isinstance(raw, str):
+        raise CapacityIdentityError(
+            f"identifiant de capacite non textuel: {type(raw).__name__}"
+        )
+    return raw.strip()
 
 
 @dataclass(frozen=True)
@@ -131,6 +137,28 @@ class CapacityIdentityResolver:
 
     def __init__(self, contracts: dict[str, dict[str, Any]]) -> None:
         self._chapters = contracts
+        refs: dict[str, CapacityIdentity] = {}
+        qualified_aliases: dict[str, CapacityIdentity] = {}
+        for chapter in sorted(contracts):
+            for code, identity in contracts[chapter]["local"].items():
+                qualified_aliases[f"{chapter}-{code}"] = identity
+            for reference, identity in contracts[chapter]["ref"].items():
+                previous = refs.get(reference)
+                if previous is not None and previous.uid != identity.uid:
+                    raise AmbiguousCapacityIdentity(
+                        f"collection: reference officielle {reference} partagee par "
+                        f"{previous.uid} et {identity.uid}"
+                    )
+                refs[reference] = identity
+        for reference, identity in refs.items():
+            previous = qualified_aliases.get(reference)
+            if previous is not None and previous.uid != identity.uid:
+                raise AmbiguousCapacityIdentity(
+                    f"collection: reference officielle {reference} en collision "
+                    f"avec la cle qualifiee de {previous.uid}"
+                )
+        self._official_refs = refs
+        self._qualified_aliases = qualified_aliases
 
     # -- construction ----------------------------------------------------
 
@@ -139,23 +167,33 @@ class CapacityIdentityResolver:
         contracts: dict[str, dict[str, Any]] = {}
         for corpus in corpora:
             if not corpus.is_dir():
-                continue
+                raise CapacityIdentityError(f"corpus absent: {corpus}")
             for directory in sorted(corpus.iterdir()):
                 contract = directory / "contrat.yaml"
                 if not contract.is_file():
                     continue
+                if directory.name in contracts:
+                    raise AmbiguousCapacityIdentity(
+                        f"{directory.name}: chapitre declare dans deux corpus"
+                    )
                 contracts[directory.name] = cls._read_contract(
                     directory.name, contract
                 )
+        if not contracts:
+            raise CapacityIdentityError("aucun contrat de capacite trouve")
         return cls(contracts)
 
     @staticmethod
     def _read_contract(chapter: str, path: Path) -> dict[str, Any]:
         document = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
         manual = manual_of(chapter)
+        if manual == "UNKNOWN":
+            raise CapacityIdentityError(f"{chapter}: manuel inconnu")
         by_local: dict[str, CapacityIdentity] = {}
         by_ref: dict[str, CapacityIdentity] = {}
         for entry in document.get("capacites") or []:
+            if not isinstance(entry, dict):
+                raise CapacityIdentityError(f"{chapter}: capacite invalide")
             code = normalise(entry.get("code"))
             if not code:
                 raise CapacityIdentityError(f"{chapter}: capacite sans code")
@@ -163,8 +201,13 @@ class CapacityIdentityResolver:
                 raise AmbiguousCapacityIdentity(
                     f"{chapter}: code local {code} declare deux fois"
                 )
-            reference = entry.get("ref_capacite")
-            reference = normalise(reference) if reference else None
+            reference = None
+            if "ref_capacite" in entry:
+                reference = normalise(entry.get("ref_capacite"))
+                if not reference:
+                    raise CapacityIdentityError(
+                        f"{chapter}/{code}: reference officielle vide"
+                    )
             identity = CapacityIdentity(manual, chapter, code, reference)
             by_local[code] = identity
             if reference is not None:
@@ -203,7 +246,7 @@ class CapacityIdentityResolver:
     def capacities_of(self, chapter: str) -> tuple[CapacityIdentity, ...]:
         contract = self._chapters.get(chapter)
         if contract is None:
-            return ()
+            raise UnresolvedCapacityIdentity(f"chapitre sans contrat: {chapter}")
         return tuple(contract["local"][code] for code in contract["local"])
 
     def resolve(self, chapter: str, raw: Any) -> Resolution:
@@ -246,23 +289,109 @@ class CapacityIdentityResolver:
             return Resolution(placeholder, PREREQUISITE)
         raise UnresolvedCapacityIdentity(f"{chapter}: {value} ne designe aucune capacite")
 
+    def resolve_collection_alias(self, raw: Any) -> Resolution:
+        """Resolve an exact collection-wide authoritative alias.
+
+        This entry point is reserved for sources such as the official coverage
+        matrix that contain fully-qualified references but no single chapter
+        scope.  A bare local code is never accepted collection-wide.
+        """
+
+        value = normalise(raw)
+        if not value:
+            raise UnresolvedCapacityIdentity("collection: declaration vide")
+        candidates: list[Resolution] = []
+        identity = self._official_refs.get(value)
+        if identity is not None:
+            candidates.append(Resolution(identity, REF_EXACT))
+        identity = self._qualified_aliases.get(value)
+        if identity is not None:
+            candidates.append(Resolution(identity, SCOPED_QUALIFIED))
+        distinct = {resolution.identity for resolution in candidates}
+        if len(distinct) > 1:
+            raise AmbiguousCapacityIdentity(
+                f"collection: alias {value} designe "
+                f"{sorted(identity.uid for identity in distinct)}"
+            )
+        if candidates:
+            return candidates[0]
+        raise UnresolvedCapacityIdentity(
+            f"collection: {value} n'est aucun alias pleinement qualifie"
+        )
+
     def resolve_codes(self, chapter: str, raws: list[Any]) -> tuple[str, ...]:
-        """Codes locaux credites. Les prerequis ne creditent rien."""
+        """Codes locaux crédités; un prérequis dans ce champ est un blocker."""
 
         codes: list[str] = []
         for raw in raws:
             resolution = self.resolve(chapter, raw)
             if resolution.rule == PREREQUISITE:
-                continue
+                raise UnresolvedCapacityIdentity(
+                    f"{chapter}: le prerequis {normalise(raw)} n'est pas une capacite"
+                )
             if resolution.identity.local_code not in codes:
                 codes.append(resolution.identity.local_code)
         return tuple(codes)
 
+    def resolve_meta_codes(
+        self,
+        chapter: str,
+        meta: dict[str, Any],
+    ) -> tuple[str, ...]:
+        """Résout les champs capacité d'un META et exige leur cohérence.
 
-def build_alias_map() -> dict[str, Any]:
+        Le chapitre du chemin est la portée autoritaire. Un éventuel chapitre
+        déclaré dans le META doit lui être strictement égal. Lorsque les deux
+        représentations (`capacites_codes` locales et `capacites` officielles)
+        coexistent, elles doivent désigner exactement les mêmes UIDs.
+        """
+
+        if not isinstance(meta, dict):
+            raise CapacityIdentityError(f"{chapter}: META invalide")
+        declared_chapter = normalise(meta.get("chapitre"))
+        if declared_chapter and declared_chapter != chapter:
+            raise CapacityIdentityError(
+                f"{chapter}: chapitre META contradictoire {declared_chapter}"
+            )
+
+        resolved_fields: list[tuple[str, tuple[CapacityIdentity, ...]]] = []
+        for key in ("capacites_codes", "capacites"):
+            if key not in meta or meta.get(key) is None:
+                continue
+            values = meta[key]
+            if not isinstance(values, list):
+                raise CapacityIdentityError(f"{chapter}: champ {key} non liste")
+            identities: list[CapacityIdentity] = []
+            for raw in values:
+                resolution = self.resolve(chapter, raw)
+                if resolution.rule == PREREQUISITE:
+                    raise UnresolvedCapacityIdentity(
+                        f"{chapter}: le prerequis {normalise(raw)} est declare "
+                        f"dans le champ de capacite {key}"
+                    )
+                if resolution.identity not in identities:
+                    identities.append(resolution.identity)
+            resolved_fields.append((key, tuple(identities)))
+
+        if not resolved_fields:
+            return ()
+        expected = {identity.uid for identity in resolved_fields[0][1]}
+        for key, identities in resolved_fields[1:]:
+            observed = {identity.uid for identity in identities}
+            if observed != expected:
+                raise AmbiguousCapacityIdentity(
+                    f"{chapter}: champs META capacites_codes/capacites "
+                    f"contradictoires ({resolved_fields[0][0]} != {key})"
+                )
+        return tuple(identity.local_code for identity in resolved_fields[0][1])
+
+
+def build_alias_map(
+    resolver: CapacityIdentityResolver | None = None,
+) -> dict[str, Any]:
     """Table d'alias autoritaire, derivee des contrats et un-vers-un."""
 
-    resolver = CapacityIdentityResolver.from_corpora()
+    resolver = resolver or CapacityIdentityResolver.from_corpora()
     rows: list[dict[str, Any]] = []
     for chapter in resolver.chapters:
         for identity in resolver.capacities_of(chapter):
@@ -294,7 +423,12 @@ def build_alias_map() -> dict[str, Any]:
         "chapters": len(resolver.chapters),
         "alias_digest": "sha256:"
         + hashlib.sha256(
-            json.dumps(sorted(uids), separators=(",", ":")).encode("utf-8")
+            json.dumps(
+                rows,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
         ).hexdigest(),
         "entries": rows,
     }

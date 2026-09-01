@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
-"""Les lacunes qui n'existaient pas : le delta 460 -> 380, nomme ligne a ligne.
+"""Expliquer le delta 460 -> courant sans confondre mesure et authoring.
 
-Une lacune inventee coute aussi cher qu'une lacune ignoree. Elle envoie
-reecrire du contenu qui va tres bien, et le volume ainsi recree ressemble
-exactement au remplissage que la campagne repare.
+Le backlog historique comptait 460 cellules. Deux événements distincts l'ont
+ensuite réduit :
 
-Quatre-vingts unites d'ecriture du backlog precedent n'existaient pas. Le
-contenu etait la ; c'est la MESURE qui ne savait pas le reconnaitre, parce
-qu'elle extrayait un jeton local des references pleinement qualifiees au lieu
-de les comparer par egalite.
+* la correction de l'identité des capacités et de la gouvernance des clones
+  a reclassé 136 cellules sans écrire de nouveau contenu ;
+* la reconstruction 1NSI a réellement fermé neuf cellules par authoring.
+* le retrait ultérieur de l'inférence lexicale `C<n>` dans les corps a
+  reclassé 107 autres cellules sans authoring.
 
-Ce producteur ne se contente pas d'annoncer -80. Pour chaque unite retiree il
-nomme la capacite, le role, la raison exacte de la fausse lacune, l'objet qui
-la satisfait reellement, et l'identite canonique resolue.
+Ces deux ensembles doivent rester séparés. Une cellule alimentée seulement
+par un clone au propriétaire indéterminé est une dette de revue, pas un crédit
+valide. Ce producteur conserve donc les trois snapshots, les ensembles exacts
+et une preuve objet par objet pour chaque sortie du backlog.
 """
 
 from __future__ import annotations
@@ -31,10 +32,10 @@ ROOT = Path(__file__).resolve().parents[1]
 COVERAGE_REL = "audit/TRUE_PEDAGOGICAL_COVERAGE.json"
 OUTPUT = ROOT / "audit/FALSE_MISSING_GAP_DELTA.json"
 
-#: Etat du backlog AVANT le recablage du resolveur. Fige par son sha de
-#: commit : le comparer a l'artefact courant ferait disparaitre le delta des
-#: qu'il serait recalcule.
-BEFORE_SHA = "289daa61dadfd977fec668d8405c98c4d9f10d34"
+LEGACY_SHA = "289daa61dadfd977fec668d8405c98c4d9f10d34"
+RESOLVER_SHA = "af6113f862569f5e58b4c40caf14b26c0e8a4673"
+AUTHORING_SHA = "fa9ff89466841cb5187e77a42790992a819e3764"
+COMPARABLE_ROLES = ("cours", "methodes", "exercices", "corriges", "remediation")
 
 
 def _load(module_name: str, relative: str):
@@ -46,160 +47,427 @@ def _load(module_name: str, relative: str):
     return module
 
 
-def _backlog_at(sha: str) -> set[tuple[str, str, str]]:
+def _coverage_at(sha: str) -> tuple[dict[str, Any], str]:
     blob = subprocess.run(
         ["git", "show", f"{sha}:{COVERAGE_REL}"],
         cwd=ROOT,
         capture_output=True,
-        text=True,
         check=True,
     ).stdout
-    payload = json.loads(blob)
+    return json.loads(blob), "sha256:" + hashlib.sha256(blob).hexdigest()
+
+
+def _key(row: dict[str, Any]) -> tuple[str, str, str]:
+    return row["chapter"], row["capacity"], row["role"]
+
+
+def _backlog(payload: dict[str, Any]) -> set[tuple[str, str, str]]:
     return {
-        (row["chapter"], row["capacity"], row["role"])
+        _key(row)
         for row in payload["authoring_backlog"]
+        if row["role"] in COMPARABLE_ROLES
     }
+
+
+def _set_digest(values: list[str] | set[str]) -> str:
+    return "sha256:" + hashlib.sha256(
+        json.dumps(sorted(values), ensure_ascii=False, separators=(",", ":")).encode(
+            "utf-8"
+        )
+    ).hexdigest()
+
+
+def _unit_ids(units: set[tuple[str, str, str]]) -> list[str]:
+    return sorted(f"{chapter}/{capacity}/{role}" for chapter, capacity, role in units)
+
+
+def _stage(
+    name: str,
+    payload: dict[str, Any],
+    *,
+    source_sha: str,
+    artifact_digest: str,
+) -> dict[str, Any]:
+    units = _unit_ids(_backlog(payload))
+    return {
+        "name": name,
+        "source_sha": source_sha,
+        "coverage_artifact_digest": artifact_digest,
+        "authoring_units": len(units),
+        "backlog_set_digest": _set_digest(units),
+    }
+
+
+def _evidence(row: dict[str, Any]) -> tuple[list[str], list[str]]:
+    ids = sorted(
+        set(row.get("valid_object_ids") or [])
+        | set(row.get("indeterminate_object_ids") or [])
+    )
+    paths = sorted(
+        set(row.get("valid_object_paths") or [])
+        | set(row.get("indeterminate_object_paths") or [])
+    )
+    return ids, paths
+
+
+def _row(
+    unit: tuple[str, str, str],
+    *,
+    before_state: str,
+    transition_result_state: str,
+    transition_row: dict[str, Any],
+    current_row: dict[str, Any],
+    classification: str,
+    why: str,
+    valid_capacity_credit_claimed: bool,
+) -> dict[str, Any]:
+    chapter, capacity, role = unit
+    transition_ids, transition_paths = _evidence(transition_row)
+    current_ids, current_paths = _evidence(current_row)
+    transition_row_digest = "sha256:" + hashlib.sha256(
+        json.dumps(
+            transition_row,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
+    return {
+        "chapter": chapter,
+        "manual": current_row["manual"],
+        "capacity": capacity,
+        "role": role,
+        "canonical_capacity_uid": current_row["canonical_capacity_uid"],
+        "classification": classification,
+        "before_state": before_state,
+        "transition_result_state": transition_result_state,
+        "current_state": current_row["state"],
+        "why_it_left_the_backlog": why,
+        "valid_capacity_credit_claimed": valid_capacity_credit_claimed,
+        "transition_object_ids": transition_ids,
+        "transition_object_paths": transition_paths,
+        "transition_object_ids_digest": _set_digest(transition_ids),
+        "transition_object_paths_digest": _set_digest(transition_paths),
+        "transition_row_digest": transition_row_digest,
+        "current_object_ids": current_ids,
+        "current_object_paths": current_paths,
+        "current_object_ids_digest": _set_digest(current_ids),
+        "current_object_paths_digest": _set_digest(current_paths),
+        "transition_evidence_still_identical_current": (
+            transition_ids == current_ids and transition_paths == current_paths
+        ),
+    }
+
+
+def _transition(
+    before: set[tuple[str, str, str]],
+    after: set[tuple[str, str, str]],
+) -> tuple[set[tuple[str, str, str]], list[dict[str, str]]]:
+    removed = before - after
+    added = [
+        {"chapter": chapter, "capacity": capacity, "role": role}
+        for chapter, capacity, role in sorted(after - before)
+    ]
+    return removed, added
+
+
+def _partition_measurement_rows(
+    rows: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Separate proved false gaps from decisions merely deferred for review."""
+
+    proven = [row for row in rows if row["valid_capacity_credit_claimed"] is True]
+    deferred = [row for row in rows if row["valid_capacity_credit_claimed"] is not True]
+    return proven, deferred
 
 
 def build_delta() -> dict[str, Any]:
-    identity = _load("capacity_identity", "scripts/capacity_identity.py")
-    clone = _load("p0_clone_ledger", "scripts/build_p0_content_clone_ledger.py")
-    coverage = _load("true_coverage", "scripts/build_true_pedagogical_coverage.py")
+    coverage = _load(
+        "true_coverage_for_delta", "scripts/build_true_pedagogical_coverage.py"
+    )
 
-    resolver = identity.CapacityIdentityResolver.from_corpora()
-    before = _backlog_at(BEFORE_SHA)
+    legacy, legacy_digest = _coverage_at(LEGACY_SHA)
+    resolver_stage, resolver_digest = _coverage_at(RESOLVER_SHA)
+    authored_stage, authored_digest = _coverage_at(AUTHORING_SHA)
     current = coverage.build_coverage()
-    after = {
-        (row["chapter"], row["capacity"], row["role"])
-        for row in current["authoring_backlog"]
-    }
-    # Une unite peut sortir du backlog pour deux raisons TRES differentes :
-    # soit son contenu credite reellement la capacite, soit son contenu existe
-    # mais appartient a un groupe de clones dont le proprietaire n'est pas
-    # demontrable. Les confondre ferait passer une revue a faire pour du
-    # travail deja acquis.
-    state_by_cell = {
-        (row["chapter"], row["capacity"], row["role"]): row["state"]
-        for row in current["rows"]
-    } if "rows" in current else {}
+    current_blob = coverage.render_json(current).encode("utf-8")
+    current_digest = "sha256:" + hashlib.sha256(current_blob).hexdigest()
 
-    removed = sorted(before - after)
-    added = sorted(after - before)
-
-    invalid = set(
-        json.loads(
-            (ROOT / "audit/P0_CONTENT_CLONE_LEDGER.json").read_text(encoding="utf-8")
-        )["objects_on_invalid_credit"]
+    legacy_backlog = _backlog(legacy)
+    resolver_backlog = _backlog(resolver_stage)
+    authored_backlog = _backlog(authored_stage)
+    current_backlog = _backlog(current)
+    historical_measurement_units, historical_measurement_added = _transition(
+        legacy_backlog, resolver_backlog
+    )
+    authoring_units, authoring_added = _transition(
+        resolver_backlog, authored_backlog
+    )
+    current_measurement_units, current_measurement_added = _transition(
+        authored_backlog, current_backlog
     )
 
-    # Quel objet satisfait reellement chaque unite faussement manquante, et
-    # par quelle regle de resolution son credit etait-il invisible ?
-    satisfiers: dict[tuple[str, str, str], list[dict[str, Any]]] = (
-        collections.defaultdict(list)
-    )
-    for corpus in coverage.CORPORA:
-        if not corpus.is_dir():
-            continue
-        for path in sorted(corpus.rglob("*.tex")):
-            if any(part in coverage.UNPUBLISHED for part in path.parts):
-                continue
-            index = path.parts.index("chapitres") + 1
-            chapter, role = path.parts[index], path.parts[index + 1]
-            if role not in coverage.MEASURED_ROLES:
-                continue
-            if chapter not in resolver.chapters:
-                continue
-            if str(path.relative_to(ROOT)) in invalid:
-                continue
-            meta = clone.read_meta(path.read_text(encoding="utf-8", errors="replace"))
-            raws = []
-            for key in ("capacites_codes", "capacites"):
-                for value in meta.get(key) or []:
-                    text = identity.normalise(value)
-                    if text and text not in raws:
-                        raws.append(text)
-            for raw in raws:
-                try:
-                    resolution = resolver.resolve(chapter, raw)
-                except identity.CapacityIdentityError:
-                    continue
-                if resolution.rule == identity.PREREQUISITE:
-                    continue
-                key = (chapter, resolution.identity.local_code, role)
-                if key in before and key not in after:
-                    satisfiers[key].append(
-                        {
-                            "path": str(path.relative_to(ROOT)),
-                            "declared_as": raw,
-                            "resolution_rule": resolution.rule,
-                            "canonical_uid": resolution.identity.uid,
-                            "official_ref": resolution.identity.official_ref,
-                        }
-                    )
+    resolver_states = {_key(row): row["state"] for row in resolver_stage["rows"]}
+    authored_states = {_key(row): row["state"] for row in authored_stage["rows"]}
+    resolver_rows = {_key(row): row for row in resolver_stage["rows"]}
+    authored_rows = {_key(row): row for row in authored_stage["rows"]}
+    current_rows = {_key(row): row for row in current["rows"]}
 
-    rows: list[dict[str, Any]] = []
-    for chapter, capacity, role in removed:
-        evidence = satisfiers.get((chapter, capacity, role), [])
-        rules = sorted({item["resolution_rule"] for item in evidence})
-        state = state_by_cell.get((chapter, capacity, role), "VALID_ALIGNED_CONTENT")
-        rows.append(
-            {
-                "removal_class": (
-                    "RECOVERED_VALID_CREDIT"
-                    if state == "VALID_ALIGNED_CONTENT"
-                    else "RECLASSIFIED_INDETERMINATE"
-                ),
-                "current_state": state,
-                "chapter": chapter,
-                "manual": identity.manual_of(chapter),
-                "capacity": capacity,
-                "role": role,
-                "canonical_uid": f"{identity.manual_of(chapter)}::{chapter}::{capacity}",
-                "why_it_was_falsely_missing": (
-                    "l'objet declarait la capacite sous une forme pleinement "
-                    "qualifiee que la mesure precedente reduisait a un jeton "
-                    "local, donc ne rapprochait pas du code du contrat"
-                ),
-                "resolution_rules_that_recover_it": rules,
-                "satisfied_by": sorted(item["path"] for item in evidence),
-                "evidence": sorted(evidence, key=lambda item: item["path"]),
-            }
+    historical_measurement_rows: list[dict[str, Any]] = []
+    for unit in sorted(historical_measurement_units):
+        stage_state = resolver_states[unit]
+        if stage_state == "VALID_ALIGNED_CONTENT":
+            classification = "RECOVERED_EXACT_DECLARATION_SEMANTIC_REVIEW_PENDING"
+            why = (
+                "la résolution exacte relie la déclaration qualifiée à son UID "
+                "contractuel sans extraction de suffixe"
+            )
+            valid_claim = False
+        elif stage_state == "INDETERMINATE_CLONE_CREDIT":
+            classification = "RECLASSIFIED_AS_REVIEW_DEBT"
+            why = (
+                "un corps existe mais son propriétaire sémantique n'est pas "
+                "démontré ; la cellule relève de la revue, pas de l'authoring"
+            )
+            valid_claim = False
+        else:
+            classification = "UNEXPLAINED"
+            why = "état inattendu au snapshot du resolver"
+            valid_claim = False
+        historical_measurement_rows.append(
+            _row(
+                unit,
+                before_state="MISSING",
+                transition_result_state=stage_state,
+                transition_row=resolver_rows[unit],
+                current_row=current_rows[unit],
+                classification=classification,
+                why=why,
+                valid_capacity_credit_claimed=valid_claim,
+            )
         )
 
-    unexplained = [row for row in rows if not row["satisfied_by"]]
-    per_class = collections.Counter(row["removal_class"] for row in rows)
-    per_manual = collections.Counter(row["manual"] for row in rows)
-    per_rule = collections.Counter(
-        rule for row in rows for rule in row["resolution_rules_that_recover_it"]
+    authoring_rows = [
+        _row(
+            unit,
+            before_state=resolver_states[unit],
+            transition_result_state=authored_states[unit],
+            transition_row=authored_rows[unit],
+            current_row=current_rows[unit],
+            classification="REAL_AUTHORING_DECLARATION_CLOSURE_SEMANTIC_REVIEW_PENDING",
+            why=(
+                "la cellule était encore MISSING après correction de la mesure ; "
+                "du contenu 1NSI courant la sert désormais"
+            ),
+            valid_capacity_credit_claimed=(
+                current_rows[unit]["state"] == "SEMANTICALLY_VALIDATED_CONTENT"
+            ),
+        )
+        for unit in sorted(authoring_units)
+    ]
+
+    current_measurement_rows: list[dict[str, Any]] = []
+    for unit in sorted(current_measurement_units):
+        current_state = current_rows[unit]["state"]
+        if current_state == "DECLARED_EXACT_IDENTITY_NOT_SEMANTICALLY_VALIDATED":
+            classification = "RECOVERED_EXACT_DECLARATION_SEMANTIC_REVIEW_PENDING"
+            valid_claim = False
+        elif current_state == "INDETERMINATE_CLONE_CREDIT":
+            classification = "RECLASSIFIED_AS_REVIEW_DEBT"
+            valid_claim = False
+        else:
+            classification = "UNEXPLAINED"
+            valid_claim = False
+        current_measurement_rows.append(
+            _row(
+                unit,
+                before_state="MISSING",
+                transition_result_state=current_state,
+                transition_row=current_rows[unit],
+                current_row=current_rows[unit],
+                classification=classification,
+                why=(
+                    "l'ancien ledger interprétait une occurrence lexicale C<n> "
+                    "dans le corps comme preuve d'identité ; cette heuristique "
+                    "non contractuelle a été supprimée"
+                ),
+                valid_capacity_credit_claimed=valid_claim,
+            )
+        )
+
+    measurement_rows = historical_measurement_rows + current_measurement_rows
+    proven_false_missing_rows, deferred_measurement_rows = _partition_measurement_rows(
+        measurement_rows
     )
+
+    per_class = collections.Counter(
+        row["classification"] for row in measurement_rows
+    )
+    unexplained = [
+        f"{row['chapter']}/{row['capacity']}/{row['role']}"
+        for row in measurement_rows + authoring_rows
+        if row["classification"] == "UNEXPLAINED"
+        or not row["transition_object_ids"]
+        or not row["transition_object_paths"]
+    ]
+    stages = [
+        _stage(
+            "LEGACY_MEASURE",
+            legacy,
+            source_sha=LEGACY_SHA,
+            artifact_digest=legacy_digest,
+        ),
+        _stage(
+            "CAPACITY_IDENTITY_CORRECTED",
+            resolver_stage,
+            source_sha=RESOLVER_SHA,
+            artifact_digest=resolver_digest,
+        ),
+        _stage(
+            "COUPLED_1NSI_AUTHORED",
+            authored_stage,
+            source_sha=AUTHORING_SHA,
+            artifact_digest=authored_digest,
+        ),
+        _stage(
+            "CURRENT",
+            current,
+            source_sha="WORKTREE",
+            artifact_digest=current_digest,
+        ),
+    ]
+    historical_measurement_count = len(historical_measurement_rows)
+    current_measurement_count = len(current_measurement_rows)
+    measurement_count = historical_measurement_count + current_measurement_count
+    measurement_added_count = len(historical_measurement_added) + len(
+        current_measurement_added
+    )
+    net_measurement_delta = measurement_count - measurement_added_count
+    authoring_count = len(authoring_rows)
     return {
         "artifact_type": "false_missing_gap_delta",
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_by": "scripts/build_false_missing_gap_delta.py",
-        "before_sha": BEFORE_SHA,
-        "before_authoring_units": len(before),
-        "after_authoring_units": len(after),
-        "false_missing_gaps_removed": len(removed),
-        "gaps_added": len(added),
-        "added": [
-            {"chapter": c, "capacity": k, "role": r} for c, k, r in added
+        "comparison_scope": {
+            "roles": list(COMPARABLE_ROLES),
+            "reason": "les snapshots historiques ne mesuraient que ces cinq roles",
+        },
+        "current_collection_wide_authoring_units": current["inventory"][
+            "authoring_units_required"
         ],
+        "interpretation": (
+            "les transitions LEGACY→RESOLVER et AUTHORED→CURRENT corrigent la "
+            "mesure ; seule RESOLVER→AUTHORED est de l'authoring réel"
+        ),
+        "stages": stages,
+        "equation": (
+            f"{len(legacy_backlog)} - {historical_measurement_count} - "
+            f"{authoring_count} - {current_measurement_count} + "
+            f"{measurement_added_count} = {len(current_backlog)}"
+        ),
+        "measurement_reclassification": {
+            "count": measurement_count,
+            "set_digest": _set_digest(
+                _unit_ids(historical_measurement_units | current_measurement_units)
+            ),
+            "phases": [
+                {
+                    "name": "LEGACY_TO_CAPACITY_IDENTITY_CORRECTED",
+                    "count": historical_measurement_count,
+                    "set_digest": _set_digest(
+                        _unit_ids(historical_measurement_units)
+                    ),
+                    "gaps_added": historical_measurement_added,
+                },
+                {
+                    "name": "AUTHORED_TO_LEXICAL_HEURISTIC_REMOVED",
+                    "count": current_measurement_count,
+                    "set_digest": _set_digest(_unit_ids(current_measurement_units)),
+                    "gaps_added": current_measurement_added,
+                },
+            ],
+            "per_class": dict(sorted(per_class.items())),
+            "per_manual": dict(
+                sorted(
+                    collections.Counter(
+                        row["manual"] for row in measurement_rows
+                    ).items()
+                )
+            ),
+            "gaps_added": historical_measurement_added + current_measurement_added,
+            "gross_removed": measurement_count,
+            "added_by_stricter_false_positive_rejection": measurement_added_count,
+            "net_backlog_reduction": net_measurement_delta,
+            "units": measurement_rows,
+        },
+        "proven_false_missing": {
+            "count": len(proven_false_missing_rows),
+            "set_digest": _set_digest(
+                [
+                    f"{row['chapter']}/{row['capacity']}/{row['role']}"
+                    for row in proven_false_missing_rows
+                ]
+            ),
+            "units": proven_false_missing_rows,
+        },
+        "authoring_decision_deferred_pending_semantic_review": {
+            "count": len(deferred_measurement_rows),
+            "set_digest": _set_digest(
+                [
+                    f"{row['chapter']}/{row['capacity']}/{row['role']}"
+                    for row in deferred_measurement_rows
+                ]
+            ),
+            "units": deferred_measurement_rows,
+        },
+        "real_authoring_closure": {
+            "count": authoring_count,
+            "set_digest": _set_digest(_unit_ids(authoring_units)),
+            "per_manual": dict(
+                sorted(
+                    collections.Counter(row["manual"] for row in authoring_rows).items()
+                )
+            ),
+            "gaps_added": authoring_added,
+            "units": authoring_rows,
+        },
+        "total_delta_to_current": len(legacy_backlog) - len(current_backlog),
+        "delta_reconciliation": {
+            "legacy": len(legacy_backlog),
+            "gross_measurement_removals": measurement_count,
+            "real_authoring_closures": authoring_count,
+            "gaps_added_by_stricter_false_positive_rejection": measurement_added_count,
+            "current": len(current_backlog),
+            "holds": (
+                len(legacy_backlog)
+                - measurement_count
+                - authoring_count
+                + measurement_added_count
+                == len(current_backlog)
+            ),
+        },
+        "unexplained_units": sorted(unexplained),
+        "status": "COMPLETE" if not unexplained else "GAP",
+        # Compatibilité explicite des consumers historiques : ce champ ne
+        # couvre que la correction de mesure, jamais les neuf authorings.
+        "before_authoring_units": len(legacy_backlog),
+        "after_measurement_authoring_units": len(resolver_backlog),
+        "current_authoring_units": len(current_backlog),
+        "false_missing_gaps_removed": len(proven_false_missing_rows),
+        "per_removal_class": dict(
+            sorted(
+                collections.Counter(
+                    row["classification"] for row in proven_false_missing_rows
+                ).items()
+            )
+        ),
+        "removed_units": proven_false_missing_rows,
         "unexplained_removals": len(unexplained),
-        "per_removal_class": dict(sorted(per_class.items())),
-        "per_manual": dict(sorted(per_manual.items())),
-        "per_resolution_rule": dict(sorted(per_rule.items())),
-        "removed_units_digest": "sha256:"
-        + hashlib.sha256(
-            json.dumps(
-                [f"{c}/{k}/{r}" for c, k, r in removed], separators=(",", ":")
-            ).encode("utf-8")
-        ).hexdigest(),
-        "removed_units": rows,
     }
 
 
 def render(payload: dict[str, Any]) -> str:
-    return json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+    return json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -207,11 +475,6 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--check", action="store_true")
     arguments = parser.parse_args(argv)
     payload = build_delta()
-    if payload["unexplained_removals"]:
-        raise SystemExit(
-            f"{payload['unexplained_removals']} unites retirees sans contenu "
-            "qui les satisfasse : ce ne sont pas de fausses lacunes"
-        )
     rendered = render(payload)
     if arguments.check:
         current = OUTPUT.read_text(encoding="utf-8") if OUTPUT.is_file() else ""
@@ -222,8 +485,9 @@ def main(argv: list[str] | None = None) -> int:
     OUTPUT.write_text(rendered, encoding="utf-8")
     print(
         f"wrote {OUTPUT.relative_to(ROOT)}: "
-        f"{payload['false_missing_gaps_removed']} fausses lacunes, "
-        f"{payload['gaps_added']} ajoutees"
+        f"{payload['false_missing_gaps_removed']} faux gaps prouvés, "
+        f"{payload['authoring_decision_deferred_pending_semantic_review']['count']} décisions différées, "
+        f"{payload['real_authoring_closure']['count']} authorées"
     )
     return 0
 

@@ -2,203 +2,210 @@
   "artifact_type": "true_authoring_backlog_established",
   "schema_version": 1,
   "generated_by": "scripts/build_true_authoring_backlog_checkpoint.py",
-  "checkpoint": "TRUE_AUTHORING_BACKLOG_ESTABLISHED",
+  "checkpoint": "TRUE_AUTHORING_BACKLOG_CANDIDATE",
+  "checkpoint_status": "CANDIDATE_UNVALIDATED",
   "freshness_authority": "backlog_set_digest",
   "why_no_head_sha": "un checkpoint qui epingle le HEAD courant devient perime des le commit qui le publie, sans qu'aucune valeur ait bouge. L'ancrage est donc le SHA du run complet qui le valide, plus le digest de l'ensemble des unites.",
-  "validating_full_run": {
-    "source_sha": "52c061428f472f9926829d5c5a4e1c74c7392e58",
-    "collected": 9277,
-    "passed": 9277,
-    "failed": 0,
-    "errors": 0,
-    "rc": 0,
-    "log_sha256": "be8bdc6d3dba6162385f9da5b11f6240ce47dbfeaa8eef0a109cb3c3437adeff"
+  "validating_full_run": null,
+  "semantic_alignment": {
+    "authoring_backlog_authority": "CANDIDATE_LOWER_BOUND",
+    "false_positive_credits": "UNKNOWN",
+    "status": "NOT_ESTABLISHED_COLLECTION_WIDE"
   },
+  "establishment_blockers": [
+    "FULL_SUPPORTED_SUITE_NOT_GREEN",
+    "SEMANTIC_ALIGNMENT_NOT_ESTABLISHED_COLLECTION_WIDE"
+  ],
   "definition": "une unite d'ecriture est un couple (capacite, role) qu'aucun contenu ne sert ; jamais un fichier a produire",
   "what_is_excluded": {
     "INDETERMINATE_CLONE_CREDIT": "cellules servies par des clones dont le proprietaire semantique n'est pas demontrable : elles relevent de la revue humaine, pas de l'ecriture"
   },
   "totals": {
-    "cells": 1600,
-    "cells_with_valid_content": 972,
-    "cells_with_indeterminate_credit": 313,
-    "AUTHORING_UNITS_REQUIRED_CURRENT": 315
+    "cells": 2240,
+    "cells_with_declared_exact_identity": 1438,
+    "cells_with_indeterminate_credit": 472,
+    "AUTHORING_UNITS_REQUIRED_CURRENT": 330
   },
   "previous_measure": {
+    "scope": "projection historique des cinq roles META comparables",
     "authoring_units_required": 460,
-    "removed_as_false": 145,
-    "removal_classes": {
-      "RECLASSIFIED_INDETERMINATE": 121,
-      "RECOVERED_VALID_CREDIT": 24
-    },
+    "removed_as_false": 0,
+    "removal_classes": {},
+    "after_measurement_authoring_units": 324,
+    "ledger": "audit/FALSE_MISSING_GAP_DELTA.json"
+  },
+  "real_authoring_closure": {
+    "count": 9,
+    "set_digest": "sha256:d6e8409e2f5de054386463fe79745bccc4d417353a02434a91b8a108a7ef6100",
     "ledger": "audit/FALSE_MISSING_GAP_DELTA.json"
   },
   "per_manual": {
-    "1NSI": 71,
-    "TCOMPL": 55,
-    "TEXPERTES": 24,
-    "TNSI": 123,
-    "TSPE": 42
+    "1NSI": 50,
+    "1SPE": 1,
+    "TCOMPL": 73,
+    "TEXPERTES": 46,
+    "TNSI": 113,
+    "TSPE": 47
   },
   "per_role": {
-    "corriges": 6,
+    "corriges": 25,
     "cours": 5,
+    "evaluations": 66,
     "exercices": 6,
-    "methodes": 122,
-    "remediation": 176
+    "methodes": 121,
+    "qcm": 37,
+    "remediation": 70
   },
   "per_chapter": {
-    "TNSI-STRUCTURES-DONNEES": 29,
-    "TNSI-ALGORITHMIQUE": 25,
-    "TNSI-BASES-DE-DONNEES": 23,
-    "TNSI-LANGAGES-ET-PROGRAMMATION": 21,
-    "1NSI-WEB-IHM": 17,
+    "TNSI-STRUCTURES-DONNEES": 28,
+    "TNSI-ALGORITHMIQUE": 24,
+    "TNSI-LANGAGES-ET-PROGRAMMATION": 19,
+    "TNSI-BASES-DE-DONNEES": 18,
+    "TCOMPL-TEMPS-ATTENTE": 15,
     "TSPE-PROBABILITES": 15,
-    "1NSI-LANGAGE": 13,
-    "TNSI-ARCHITECTURES-MATERIELLES-SY": 13,
-    "TSPE-CALCUL-INTEGRAL": 12,
-    "TCOMPL-ECHANTILLONNAGE": 10,
-    "TCOMPL-TEMPS-ATTENTE": 10,
-    "TNSI-PROJET": 10,
-    "1NSI-ARCHITECTURE-OS": 9,
-    "1NSI-RESEAUX": 9,
-    "1NSI-TYPES-BASE": 9,
-    "TCOMPL-MODELES-EVOLUTION": 9,
-    "1NSI-PROJET-METHODES": 7,
-    "1NSI-TABLES": 7,
-    "TEXP-COMPLEXES-TRIGO-POLYNOMES": 6,
-    "TCOMPL-CALCULS-AIRES": 5,
-    "TCOMPL-MODELES-FONCTION": 5,
-    "TEXP-ARITHMETIQUE": 5,
-    "TEXP-MATRICES-MARKOV": 5,
-    "TSPE-COMBINATOIRE": 5,
-    "TSPE-PRIMITIVES-EQDIFF": 5,
+    "1NSI-WEB-IHM": 14,
+    "TEXP-ARITHMETIQUE": 14,
+    "TSPE-CALCUL-INTEGRAL": 14,
+    "TCOMPL-ECHANTILLONNAGE": 13,
+    "TCOMPL-MODELES-EVOLUTION": 12,
+    "TNSI-PROJET": 12,
+    "TEXP-COMPLEXES-TRIGO-POLYNOMES": 11,
+    "1NSI-LANGAGE": 10,
+    "TNSI-ARCHITECTURES-MATERIELLES-SY": 10,
+    "TSPE-GEOMETRIE-ESPACE": 10,
+    "TCOMPL-MODELES-FONCTION": 9,
+    "TEXP-MATRICES-MARKOV": 9,
+    "1NSI-ARCHITECTURE-OS": 6,
+    "1NSI-RESEAUX": 6,
+    "TCOMPL-CALCULS-AIRES": 6,
+    "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE": 6,
+    "TEXP-GRAPHES": 6,
+    "1NSI-PROJET-METHODES": 5,
+    "1NSI-TYPES-BASE": 5,
+    "TCOMPL-INFERENCE-BAYESIENNE": 5,
+    "TCOMPL-LOGARITHME-HISTORIQUE": 5,
+    "1NSI-TABLES": 4,
     "TCOMPL-CORRELATION-CAUSALITE": 4,
     "TCOMPL-INEGALITES": 4,
-    "TCOMPL-INFERENCE-BAYESIENNE": 4,
-    "TCOMPL-LOGARITHME-HISTORIQUE": 4,
-    "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE": 4,
-    "TEXP-GRAPHES": 4,
-    "TSPE-LOGARITHME": 3,
+    "TSPE-COMBINATOIRE": 3,
     "TNSI-HISTOIRE-INFORMATIQUE": 2,
-    "TSPE-SUITES-LIMITES": 2
+    "TSPE-PRIMITIVES-EQDIFF": 2,
+    "TSPE-SUITES-LIMITES": 2,
+    "1SPE-SUITES": 1,
+    "TSPE-LOGARITHME": 1
   },
   "per_capacity": {
-    "TCOMPL-ECHANTILLONNAGE::C7": 5,
-    "TCOMPL-MODELES-EVOLUTION::C6": 5,
-    "TCOMPL-TEMPS-ATTENTE::C7": 5,
-    "TNSI-PROJET::C1": 5,
-    "TNSI-PROJET::C2": 5,
+    "TCOMPL-ECHANTILLONNAGE::C7": 7,
+    "TCOMPL-MODELES-EVOLUTION::C6": 7,
+    "TCOMPL-TEMPS-ATTENTE::C7": 7,
+    "TNSI-PROJET::C1": 6,
+    "TNSI-PROJET::C2": 6,
     "TNSI-STRUCTURES-DONNEES::C1": 4,
-    "1NSI-ARCHITECTURE-OS::C1": 2,
-    "1NSI-ARCHITECTURE-OS::C2": 2,
-    "1NSI-ARCHITECTURE-OS::C3": 2,
+    "TEXP-ARITHMETIQUE::C9": 3,
+    "TEXP-COMPLEXES-TRIGO-POLYNOMES::C3": 3,
+    "TEXP-GRAPHES::C2": 3,
+    "TEXP-MATRICES-MARKOV::C2": 3,
+    "TNSI-ALGORITHMIQUE::C13": 3,
+    "TNSI-ALGORITHMIQUE::C4": 3,
+    "TNSI-ALGORITHMIQUE::C8": 3,
+    "TNSI-BASES-DE-DONNEES::C2": 3,
+    "TNSI-BASES-DE-DONNEES::C5": 3,
+    "TNSI-LANGAGES-ET-PROGRAMMATION::C2": 3,
+    "TNSI-STRUCTURES-DONNEES::C2": 3,
+    "TNSI-STRUCTURES-DONNEES::C3": 3,
+    "TNSI-STRUCTURES-DONNEES::C8": 3,
+    "TSPE-CALCUL-INTEGRAL::C6": 3,
+    "TSPE-CALCUL-INTEGRAL::C7": 3,
+    "TSPE-PROBABILITES::C6": 3,
     "1NSI-ARCHITECTURE-OS::C4": 2,
-    "1NSI-LANGAGE::C1": 2,
     "1NSI-LANGAGE::C2": 2,
     "1NSI-LANGAGE::C3": 2,
-    "1NSI-LANGAGE::C5": 2,
-    "1NSI-LANGAGE::C6": 2,
     "1NSI-LANGAGE::C7": 2,
-    "1NSI-PROJET-METHODES::C1": 2,
-    "1NSI-PROJET-METHODES::C2": 2,
     "1NSI-PROJET-METHODES::C4": 2,
-    "1NSI-RESEAUX::C2": 2,
-    "1NSI-RESEAUX::C3": 2,
-    "1NSI-RESEAUX::C4": 2,
     "1NSI-RESEAUX::C5": 2,
-    "1NSI-TABLES::C1": 2,
-    "1NSI-TABLES::C3": 2,
-    "1NSI-TABLES::C4": 2,
-    "1NSI-TYPES-BASE::C1": 2,
-    "1NSI-TYPES-BASE::C2": 2,
-    "1NSI-TYPES-BASE::C4": 2,
-    "1NSI-TYPES-BASE::C5": 2,
-    "1NSI-WEB-IHM::C1": 2,
     "1NSI-WEB-IHM::C2": 2,
-    "1NSI-WEB-IHM::C3": 2,
     "1NSI-WEB-IHM::C4": 2,
     "1NSI-WEB-IHM::C5": 2,
     "1NSI-WEB-IHM::C6": 2,
     "1NSI-WEB-IHM::C7": 2,
-    "1NSI-WEB-IHM::C8": 2,
+    "TCOMPL-CALCULS-AIRES::C1": 2,
+    "TCOMPL-ECHANTILLONNAGE::C6": 2,
+    "TCOMPL-INFERENCE-BAYESIENNE::C5": 2,
+    "TCOMPL-LOGARITHME-HISTORIQUE::C4": 2,
+    "TCOMPL-MODELES-EVOLUTION::C3": 2,
+    "TCOMPL-MODELES-FONCTION::C2": 2,
+    "TCOMPL-MODELES-FONCTION::C3": 2,
+    "TCOMPL-MODELES-FONCTION::C6": 2,
+    "TCOMPL-MODELES-FONCTION::C7": 2,
+    "TCOMPL-TEMPS-ATTENTE::C4": 2,
+    "TCOMPL-TEMPS-ATTENTE::C6": 2,
+    "TEXP-ARITHMETIQUE::C3": 2,
+    "TEXP-ARITHMETIQUE::C6": 2,
+    "TEXP-ARITHMETIQUE::C7": 2,
+    "TEXP-ARITHMETIQUE::C8": 2,
+    "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C2": 2,
+    "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C5": 2,
+    "TEXP-COMPLEXES-TRIGO-POLYNOMES::C4": 2,
+    "TEXP-COMPLEXES-TRIGO-POLYNOMES::C5": 2,
     "TEXP-COMPLEXES-TRIGO-POLYNOMES::C6": 2,
-    "TNSI-ALGORITHMIQUE::C1": 2,
+    "TEXP-MATRICES-MARKOV::C3": 2,
+    "TEXP-MATRICES-MARKOV::C6": 2,
     "TNSI-ALGORITHMIQUE::C10": 2,
-    "TNSI-ALGORITHMIQUE::C11": 2,
     "TNSI-ALGORITHMIQUE::C12": 2,
-    "TNSI-ALGORITHMIQUE::C13": 2,
     "TNSI-ALGORITHMIQUE::C2": 2,
     "TNSI-ALGORITHMIQUE::C3": 2,
-    "TNSI-ALGORITHMIQUE::C5": 2,
-    "TNSI-ALGORITHMIQUE::C6": 2,
-    "TNSI-ALGORITHMIQUE::C7": 2,
-    "TNSI-ALGORITHMIQUE::C8": 2,
     "TNSI-ALGORITHMIQUE::C9": 2,
     "TNSI-ARCHITECTURES-MATERIELLES-SY::C1": 2,
-    "TNSI-ARCHITECTURES-MATERIELLES-SY::C3": 2,
-    "TNSI-ARCHITECTURES-MATERIELLES-SY::C4": 2,
-    "TNSI-ARCHITECTURES-MATERIELLES-SY::C5": 2,
-    "TNSI-ARCHITECTURES-MATERIELLES-SY::C6": 2,
+    "TNSI-ARCHITECTURES-MATERIELLES-SY::C2": 2,
     "TNSI-ARCHITECTURES-MATERIELLES-SY::C7": 2,
-    "TNSI-BASES-DE-DONNEES::C1": 2,
-    "TNSI-BASES-DE-DONNEES::C10": 2,
-    "TNSI-BASES-DE-DONNEES::C11": 2,
-    "TNSI-BASES-DE-DONNEES::C12": 2,
-    "TNSI-BASES-DE-DONNEES::C2": 2,
+    "TNSI-BASES-DE-DONNEES::C3": 2,
     "TNSI-BASES-DE-DONNEES::C4": 2,
-    "TNSI-BASES-DE-DONNEES::C5": 2,
-    "TNSI-BASES-DE-DONNEES::C6": 2,
-    "TNSI-BASES-DE-DONNEES::C7": 2,
-    "TNSI-BASES-DE-DONNEES::C8": 2,
-    "TNSI-BASES-DE-DONNEES::C9": 2,
     "TNSI-LANGAGES-ET-PROGRAMMATION::C1": 2,
     "TNSI-LANGAGES-ET-PROGRAMMATION::C10": 2,
-    "TNSI-LANGAGES-ET-PROGRAMMATION::C11": 2,
-    "TNSI-LANGAGES-ET-PROGRAMMATION::C2": 2,
     "TNSI-LANGAGES-ET-PROGRAMMATION::C3": 2,
-    "TNSI-LANGAGES-ET-PROGRAMMATION::C4": 2,
     "TNSI-LANGAGES-ET-PROGRAMMATION::C6": 2,
     "TNSI-LANGAGES-ET-PROGRAMMATION::C7": 2,
     "TNSI-LANGAGES-ET-PROGRAMMATION::C8": 2,
-    "TNSI-LANGAGES-ET-PROGRAMMATION::C9": 2,
     "TNSI-STRUCTURES-DONNEES::C10": 2,
     "TNSI-STRUCTURES-DONNEES::C11": 2,
-    "TNSI-STRUCTURES-DONNEES::C12": 2,
     "TNSI-STRUCTURES-DONNEES::C13": 2,
-    "TNSI-STRUCTURES-DONNEES::C14": 2,
-    "TNSI-STRUCTURES-DONNEES::C2": 2,
-    "TNSI-STRUCTURES-DONNEES::C4": 2,
-    "TNSI-STRUCTURES-DONNEES::C5": 2,
-    "TNSI-STRUCTURES-DONNEES::C6": 2,
     "TNSI-STRUCTURES-DONNEES::C7": 2,
-    "TNSI-STRUCTURES-DONNEES::C8": 2,
     "TNSI-STRUCTURES-DONNEES::C9": 2,
-    "TSPE-CALCUL-INTEGRAL::C1": 2,
     "TSPE-CALCUL-INTEGRAL::C3": 2,
     "TSPE-CALCUL-INTEGRAL::C5": 2,
-    "TSPE-CALCUL-INTEGRAL::C6": 2,
-    "TSPE-CALCUL-INTEGRAL::C7": 2,
-    "TSPE-COMBINATOIRE::C3": 2,
-    "TSPE-COMBINATOIRE::C4": 2,
-    "TSPE-LOGARITHME::C2": 2,
-    "TSPE-PRIMITIVES-EQDIFF::C4": 2,
-    "TSPE-PRIMITIVES-EQDIFF::C5": 2,
+    "TSPE-CALCUL-INTEGRAL::C8": 2,
     "TSPE-PROBABILITES::C1": 2,
-    "TSPE-PROBABILITES::C10": 2,
-    "TSPE-PROBABILITES::C5": 2,
-    "TSPE-PROBABILITES::C6": 2,
+    "TSPE-PROBABILITES::C4": 2,
     "TSPE-PROBABILITES::C7": 2,
-    "TSPE-PROBABILITES::C8": 2,
-    "TSPE-PROBABILITES::C9": 2,
+    "1NSI-ARCHITECTURE-OS::C1": 1,
+    "1NSI-ARCHITECTURE-OS::C2": 1,
+    "1NSI-ARCHITECTURE-OS::C3": 1,
     "1NSI-ARCHITECTURE-OS::C5": 1,
+    "1NSI-LANGAGE::C1": 1,
     "1NSI-LANGAGE::C4": 1,
+    "1NSI-LANGAGE::C5": 1,
+    "1NSI-LANGAGE::C6": 1,
+    "1NSI-PROJET-METHODES::C1": 1,
+    "1NSI-PROJET-METHODES::C2": 1,
     "1NSI-PROJET-METHODES::C3": 1,
     "1NSI-RESEAUX::C1": 1,
+    "1NSI-RESEAUX::C2": 1,
+    "1NSI-RESEAUX::C3": 1,
+    "1NSI-RESEAUX::C4": 1,
+    "1NSI-TABLES::C1": 1,
     "1NSI-TABLES::C2": 1,
+    "1NSI-TABLES::C3": 1,
+    "1NSI-TABLES::C4": 1,
+    "1NSI-TYPES-BASE::C1": 1,
+    "1NSI-TYPES-BASE::C2": 1,
     "1NSI-TYPES-BASE::C3": 1,
+    "1NSI-TYPES-BASE::C4": 1,
+    "1NSI-TYPES-BASE::C5": 1,
+    "1NSI-WEB-IHM::C1": 1,
+    "1NSI-WEB-IHM::C3": 1,
+    "1NSI-WEB-IHM::C8": 1,
     "1NSI-WEB-IHM::C9": 1,
-    "TCOMPL-CALCULS-AIRES::C1": 1,
+    "1SPE-SUITES::C8": 1,
     "TCOMPL-CALCULS-AIRES::C2": 1,
     "TCOMPL-CALCULS-AIRES::C3": 1,
     "TCOMPL-CALCULS-AIRES::C5": 1,
@@ -211,7 +218,6 @@
     "TCOMPL-ECHANTILLONNAGE::C2": 1,
     "TCOMPL-ECHANTILLONNAGE::C4": 1,
     "TCOMPL-ECHANTILLONNAGE::C5": 1,
-    "TCOMPL-ECHANTILLONNAGE::C6": 1,
     "TCOMPL-INEGALITES::C1": 1,
     "TCOMPL-INEGALITES::C2": 1,
     "TCOMPL-INEGALITES::C4": 1,
@@ -219,141 +225,3009 @@
     "TCOMPL-INFERENCE-BAYESIENNE::C1": 1,
     "TCOMPL-INFERENCE-BAYESIENNE::C3": 1,
     "TCOMPL-INFERENCE-BAYESIENNE::C4": 1,
-    "TCOMPL-INFERENCE-BAYESIENNE::C5": 1,
     "TCOMPL-LOGARITHME-HISTORIQUE::C1": 1,
     "TCOMPL-LOGARITHME-HISTORIQUE::C2": 1,
-    "TCOMPL-LOGARITHME-HISTORIQUE::C4": 1,
     "TCOMPL-LOGARITHME-HISTORIQUE::C5": 1,
     "TCOMPL-MODELES-EVOLUTION::C1": 1,
     "TCOMPL-MODELES-EVOLUTION::C2": 1,
-    "TCOMPL-MODELES-EVOLUTION::C3": 1,
     "TCOMPL-MODELES-EVOLUTION::C4": 1,
-    "TCOMPL-MODELES-FONCTION::C2": 1,
-    "TCOMPL-MODELES-FONCTION::C3": 1,
     "TCOMPL-MODELES-FONCTION::C4": 1,
-    "TCOMPL-MODELES-FONCTION::C6": 1,
-    "TCOMPL-MODELES-FONCTION::C7": 1,
     "TCOMPL-TEMPS-ATTENTE::C1": 1,
     "TCOMPL-TEMPS-ATTENTE::C2": 1,
     "TCOMPL-TEMPS-ATTENTE::C3": 1,
-    "TCOMPL-TEMPS-ATTENTE::C4": 1,
-    "TCOMPL-TEMPS-ATTENTE::C6": 1,
+    "TCOMPL-TEMPS-ATTENTE::C5": 1,
+    "TEXP-ARITHMETIQUE::C2": 1,
+    "TEXP-ARITHMETIQUE::C4": 1,
     "TEXP-ARITHMETIQUE::C5": 1,
-    "TEXP-ARITHMETIQUE::C6": 1,
-    "TEXP-ARITHMETIQUE::C7": 1,
-    "TEXP-ARITHMETIQUE::C8": 1,
-    "TEXP-ARITHMETIQUE::C9": 1,
-    "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C2": 1,
     "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C3": 1,
     "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C4": 1,
-    "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C5": 1,
+    "TEXP-COMPLEXES-TRIGO-POLYNOMES::C1": 1,
     "TEXP-COMPLEXES-TRIGO-POLYNOMES::C2": 1,
-    "TEXP-COMPLEXES-TRIGO-POLYNOMES::C3": 1,
-    "TEXP-COMPLEXES-TRIGO-POLYNOMES::C4": 1,
-    "TEXP-COMPLEXES-TRIGO-POLYNOMES::C5": 1,
     "TEXP-GRAPHES::C1": 1,
-    "TEXP-GRAPHES::C2": 1,
     "TEXP-GRAPHES::C3": 1,
     "TEXP-GRAPHES::C5": 1,
-    "TEXP-MATRICES-MARKOV::C2": 1,
-    "TEXP-MATRICES-MARKOV::C3": 1,
     "TEXP-MATRICES-MARKOV::C4": 1,
-    "TEXP-MATRICES-MARKOV::C6": 1,
     "TEXP-MATRICES-MARKOV::C7": 1,
-    "TNSI-ALGORITHMIQUE::C4": 1,
-    "TNSI-ARCHITECTURES-MATERIELLES-SY::C2": 1,
-    "TNSI-BASES-DE-DONNEES::C3": 1,
+    "TNSI-ALGORITHMIQUE::C1": 1,
+    "TNSI-ALGORITHMIQUE::C11": 1,
+    "TNSI-ALGORITHMIQUE::C5": 1,
+    "TNSI-ALGORITHMIQUE::C6": 1,
+    "TNSI-ALGORITHMIQUE::C7": 1,
+    "TNSI-ARCHITECTURES-MATERIELLES-SY::C3": 1,
+    "TNSI-ARCHITECTURES-MATERIELLES-SY::C4": 1,
+    "TNSI-ARCHITECTURES-MATERIELLES-SY::C5": 1,
+    "TNSI-ARCHITECTURES-MATERIELLES-SY::C6": 1,
+    "TNSI-BASES-DE-DONNEES::C1": 1,
+    "TNSI-BASES-DE-DONNEES::C10": 1,
+    "TNSI-BASES-DE-DONNEES::C11": 1,
+    "TNSI-BASES-DE-DONNEES::C12": 1,
+    "TNSI-BASES-DE-DONNEES::C6": 1,
+    "TNSI-BASES-DE-DONNEES::C7": 1,
+    "TNSI-BASES-DE-DONNEES::C8": 1,
+    "TNSI-BASES-DE-DONNEES::C9": 1,
     "TNSI-HISTOIRE-INFORMATIQUE::C1": 1,
     "TNSI-HISTOIRE-INFORMATIQUE::C2": 1,
+    "TNSI-LANGAGES-ET-PROGRAMMATION::C11": 1,
+    "TNSI-LANGAGES-ET-PROGRAMMATION::C4": 1,
     "TNSI-LANGAGES-ET-PROGRAMMATION::C5": 1,
-    "TNSI-STRUCTURES-DONNEES::C3": 1,
+    "TNSI-LANGAGES-ET-PROGRAMMATION::C9": 1,
+    "TNSI-STRUCTURES-DONNEES::C12": 1,
+    "TNSI-STRUCTURES-DONNEES::C14": 1,
+    "TNSI-STRUCTURES-DONNEES::C4": 1,
+    "TNSI-STRUCTURES-DONNEES::C5": 1,
+    "TNSI-STRUCTURES-DONNEES::C6": 1,
+    "TSPE-CALCUL-INTEGRAL::C1": 1,
     "TSPE-CALCUL-INTEGRAL::C4": 1,
-    "TSPE-CALCUL-INTEGRAL::C8": 1,
     "TSPE-COMBINATOIRE::C1": 1,
-    "TSPE-LOGARITHME::C4": 1,
-    "TSPE-PRIMITIVES-EQDIFF::C3": 1,
+    "TSPE-COMBINATOIRE::C3": 1,
+    "TSPE-COMBINATOIRE::C4": 1,
+    "TSPE-GEOMETRIE-ESPACE::C1": 1,
+    "TSPE-GEOMETRIE-ESPACE::C10": 1,
+    "TSPE-GEOMETRIE-ESPACE::C14": 1,
+    "TSPE-GEOMETRIE-ESPACE::C16": 1,
+    "TSPE-GEOMETRIE-ESPACE::C2": 1,
+    "TSPE-GEOMETRIE-ESPACE::C3": 1,
+    "TSPE-GEOMETRIE-ESPACE::C4": 1,
+    "TSPE-GEOMETRIE-ESPACE::C5": 1,
+    "TSPE-GEOMETRIE-ESPACE::C6": 1,
+    "TSPE-GEOMETRIE-ESPACE::C9": 1,
+    "TSPE-LOGARITHME::C2": 1,
+    "TSPE-PRIMITIVES-EQDIFF::C4": 1,
+    "TSPE-PRIMITIVES-EQDIFF::C5": 1,
+    "TSPE-PROBABILITES::C10": 1,
+    "TSPE-PROBABILITES::C2": 1,
     "TSPE-PROBABILITES::C3": 1,
+    "TSPE-PROBABILITES::C5": 1,
+    "TSPE-PROBABILITES::C8": 1,
+    "TSPE-PROBABILITES::C9": 1,
     "TSPE-SUITES-LIMITES::C6": 1,
     "TSPE-SUITES-LIMITES::C7": 1
   },
-  "open_clone_debt": {
-    "objects_on_invalid_credit": 162,
-    "objects_with_indeterminate_credit": 1407,
-    "ambiguous_canonical_groups": 233
+  "authoring_unit_projections": {
+    "per_manual": {
+      "1NSI": {
+        "count": 50,
+        "unit_ids": [
+          "1NSI-ARCHITECTURE-OS/C1/methodes",
+          "1NSI-ARCHITECTURE-OS/C2/methodes",
+          "1NSI-ARCHITECTURE-OS/C3/methodes",
+          "1NSI-ARCHITECTURE-OS/C4/evaluations",
+          "1NSI-ARCHITECTURE-OS/C4/methodes",
+          "1NSI-ARCHITECTURE-OS/C5/methodes",
+          "1NSI-LANGAGE/C1/methodes",
+          "1NSI-LANGAGE/C2/evaluations",
+          "1NSI-LANGAGE/C2/methodes",
+          "1NSI-LANGAGE/C3/evaluations",
+          "1NSI-LANGAGE/C3/methodes",
+          "1NSI-LANGAGE/C4/methodes",
+          "1NSI-LANGAGE/C5/methodes",
+          "1NSI-LANGAGE/C6/methodes",
+          "1NSI-LANGAGE/C7/evaluations",
+          "1NSI-LANGAGE/C7/methodes",
+          "1NSI-PROJET-METHODES/C1/methodes",
+          "1NSI-PROJET-METHODES/C2/methodes",
+          "1NSI-PROJET-METHODES/C3/methodes",
+          "1NSI-PROJET-METHODES/C4/evaluations",
+          "1NSI-PROJET-METHODES/C4/methodes",
+          "1NSI-RESEAUX/C1/methodes",
+          "1NSI-RESEAUX/C2/methodes",
+          "1NSI-RESEAUX/C3/methodes",
+          "1NSI-RESEAUX/C4/methodes",
+          "1NSI-RESEAUX/C5/evaluations",
+          "1NSI-RESEAUX/C5/methodes",
+          "1NSI-TABLES/C1/methodes",
+          "1NSI-TABLES/C2/methodes",
+          "1NSI-TABLES/C3/methodes",
+          "1NSI-TABLES/C4/methodes",
+          "1NSI-TYPES-BASE/C1/methodes",
+          "1NSI-TYPES-BASE/C2/methodes",
+          "1NSI-TYPES-BASE/C3/methodes",
+          "1NSI-TYPES-BASE/C4/methodes",
+          "1NSI-TYPES-BASE/C5/methodes",
+          "1NSI-WEB-IHM/C1/methodes",
+          "1NSI-WEB-IHM/C2/evaluations",
+          "1NSI-WEB-IHM/C2/methodes",
+          "1NSI-WEB-IHM/C3/methodes",
+          "1NSI-WEB-IHM/C4/evaluations",
+          "1NSI-WEB-IHM/C4/methodes",
+          "1NSI-WEB-IHM/C5/evaluations",
+          "1NSI-WEB-IHM/C5/methodes",
+          "1NSI-WEB-IHM/C6/evaluations",
+          "1NSI-WEB-IHM/C6/methodes",
+          "1NSI-WEB-IHM/C7/evaluations",
+          "1NSI-WEB-IHM/C7/methodes",
+          "1NSI-WEB-IHM/C8/methodes",
+          "1NSI-WEB-IHM/C9/methodes"
+        ],
+        "set_digest": "sha256:8654c08631cd0f6592d1412fbf544bba97a7b6795d96388fc730261490af4177"
+      },
+      "1SPE": {
+        "count": 1,
+        "unit_ids": [
+          "1SPE-SUITES/C8/evaluations"
+        ],
+        "set_digest": "sha256:9afaef60666d72c63144ea88266120800553b24b87b3e2960fa774d4a63d0bd0"
+      },
+      "TCOMPL": {
+        "count": 73,
+        "unit_ids": [
+          "TCOMPL-CALCULS-AIRES/C1/evaluations",
+          "TCOMPL-CALCULS-AIRES/C1/remediation",
+          "TCOMPL-CALCULS-AIRES/C2/remediation",
+          "TCOMPL-CALCULS-AIRES/C3/remediation",
+          "TCOMPL-CALCULS-AIRES/C5/remediation",
+          "TCOMPL-CALCULS-AIRES/C6/remediation",
+          "TCOMPL-CORRELATION-CAUSALITE/C1/remediation",
+          "TCOMPL-CORRELATION-CAUSALITE/C2/remediation",
+          "TCOMPL-CORRELATION-CAUSALITE/C3/remediation",
+          "TCOMPL-CORRELATION-CAUSALITE/C4/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C1/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C2/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C4/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C5/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C6/qcm",
+          "TCOMPL-ECHANTILLONNAGE/C6/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C7/corriges",
+          "TCOMPL-ECHANTILLONNAGE/C7/cours",
+          "TCOMPL-ECHANTILLONNAGE/C7/evaluations",
+          "TCOMPL-ECHANTILLONNAGE/C7/exercices",
+          "TCOMPL-ECHANTILLONNAGE/C7/methodes",
+          "TCOMPL-ECHANTILLONNAGE/C7/qcm",
+          "TCOMPL-ECHANTILLONNAGE/C7/remediation",
+          "TCOMPL-INEGALITES/C1/remediation",
+          "TCOMPL-INEGALITES/C2/remediation",
+          "TCOMPL-INEGALITES/C4/remediation",
+          "TCOMPL-INEGALITES/C5/remediation",
+          "TCOMPL-INFERENCE-BAYESIENNE/C1/remediation",
+          "TCOMPL-INFERENCE-BAYESIENNE/C3/remediation",
+          "TCOMPL-INFERENCE-BAYESIENNE/C4/remediation",
+          "TCOMPL-INFERENCE-BAYESIENNE/C5/qcm",
+          "TCOMPL-INFERENCE-BAYESIENNE/C5/remediation",
+          "TCOMPL-LOGARITHME-HISTORIQUE/C1/remediation",
+          "TCOMPL-LOGARITHME-HISTORIQUE/C2/remediation",
+          "TCOMPL-LOGARITHME-HISTORIQUE/C4/qcm",
+          "TCOMPL-LOGARITHME-HISTORIQUE/C4/remediation",
+          "TCOMPL-LOGARITHME-HISTORIQUE/C5/remediation",
+          "TCOMPL-MODELES-EVOLUTION/C1/remediation",
+          "TCOMPL-MODELES-EVOLUTION/C2/remediation",
+          "TCOMPL-MODELES-EVOLUTION/C3/qcm",
+          "TCOMPL-MODELES-EVOLUTION/C3/remediation",
+          "TCOMPL-MODELES-EVOLUTION/C4/remediation",
+          "TCOMPL-MODELES-EVOLUTION/C6/corriges",
+          "TCOMPL-MODELES-EVOLUTION/C6/cours",
+          "TCOMPL-MODELES-EVOLUTION/C6/evaluations",
+          "TCOMPL-MODELES-EVOLUTION/C6/exercices",
+          "TCOMPL-MODELES-EVOLUTION/C6/methodes",
+          "TCOMPL-MODELES-EVOLUTION/C6/qcm",
+          "TCOMPL-MODELES-EVOLUTION/C6/remediation",
+          "TCOMPL-MODELES-FONCTION/C2/qcm",
+          "TCOMPL-MODELES-FONCTION/C2/remediation",
+          "TCOMPL-MODELES-FONCTION/C3/qcm",
+          "TCOMPL-MODELES-FONCTION/C3/remediation",
+          "TCOMPL-MODELES-FONCTION/C4/remediation",
+          "TCOMPL-MODELES-FONCTION/C6/qcm",
+          "TCOMPL-MODELES-FONCTION/C6/remediation",
+          "TCOMPL-MODELES-FONCTION/C7/qcm",
+          "TCOMPL-MODELES-FONCTION/C7/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C1/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C2/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C3/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C4/qcm",
+          "TCOMPL-TEMPS-ATTENTE/C4/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C5/qcm",
+          "TCOMPL-TEMPS-ATTENTE/C6/qcm",
+          "TCOMPL-TEMPS-ATTENTE/C6/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C7/corriges",
+          "TCOMPL-TEMPS-ATTENTE/C7/cours",
+          "TCOMPL-TEMPS-ATTENTE/C7/evaluations",
+          "TCOMPL-TEMPS-ATTENTE/C7/exercices",
+          "TCOMPL-TEMPS-ATTENTE/C7/methodes",
+          "TCOMPL-TEMPS-ATTENTE/C7/qcm",
+          "TCOMPL-TEMPS-ATTENTE/C7/remediation"
+        ],
+        "set_digest": "sha256:9e98e4ef26c9e09481d882b3b11cb40be0ada6813c22d6d78706897830e36b45"
+      },
+      "TEXPERTES": {
+        "count": 46,
+        "unit_ids": [
+          "TEXP-ARITHMETIQUE/C2/evaluations",
+          "TEXP-ARITHMETIQUE/C3/evaluations",
+          "TEXP-ARITHMETIQUE/C3/qcm",
+          "TEXP-ARITHMETIQUE/C4/qcm",
+          "TEXP-ARITHMETIQUE/C5/remediation",
+          "TEXP-ARITHMETIQUE/C6/qcm",
+          "TEXP-ARITHMETIQUE/C6/remediation",
+          "TEXP-ARITHMETIQUE/C7/qcm",
+          "TEXP-ARITHMETIQUE/C7/remediation",
+          "TEXP-ARITHMETIQUE/C8/qcm",
+          "TEXP-ARITHMETIQUE/C8/remediation",
+          "TEXP-ARITHMETIQUE/C9/evaluations",
+          "TEXP-ARITHMETIQUE/C9/qcm",
+          "TEXP-ARITHMETIQUE/C9/remediation",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C2/qcm",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C2/remediation",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C3/remediation",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C4/remediation",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C5/qcm",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C5/remediation",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C1/evaluations",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C2/remediation",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C3/evaluations",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C3/qcm",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C3/remediation",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C4/qcm",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C4/remediation",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C5/evaluations",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C5/remediation",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C6/qcm",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C6/remediation",
+          "TEXP-GRAPHES/C1/remediation",
+          "TEXP-GRAPHES/C2/evaluations",
+          "TEXP-GRAPHES/C2/qcm",
+          "TEXP-GRAPHES/C2/remediation",
+          "TEXP-GRAPHES/C3/remediation",
+          "TEXP-GRAPHES/C5/remediation",
+          "TEXP-MATRICES-MARKOV/C2/evaluations",
+          "TEXP-MATRICES-MARKOV/C2/qcm",
+          "TEXP-MATRICES-MARKOV/C2/remediation",
+          "TEXP-MATRICES-MARKOV/C3/evaluations",
+          "TEXP-MATRICES-MARKOV/C3/remediation",
+          "TEXP-MATRICES-MARKOV/C4/remediation",
+          "TEXP-MATRICES-MARKOV/C6/qcm",
+          "TEXP-MATRICES-MARKOV/C6/remediation",
+          "TEXP-MATRICES-MARKOV/C7/remediation"
+        ],
+        "set_digest": "sha256:31ba59fff7b0beb739d7a3126b70a8ef4beda298a59a52e7e1eb7f798055a359"
+      },
+      "TNSI": {
+        "count": 113,
+        "unit_ids": [
+          "TNSI-ALGORITHMIQUE/C1/methodes",
+          "TNSI-ALGORITHMIQUE/C10/evaluations",
+          "TNSI-ALGORITHMIQUE/C10/methodes",
+          "TNSI-ALGORITHMIQUE/C11/methodes",
+          "TNSI-ALGORITHMIQUE/C12/evaluations",
+          "TNSI-ALGORITHMIQUE/C12/methodes",
+          "TNSI-ALGORITHMIQUE/C13/corriges",
+          "TNSI-ALGORITHMIQUE/C13/evaluations",
+          "TNSI-ALGORITHMIQUE/C13/methodes",
+          "TNSI-ALGORITHMIQUE/C2/corriges",
+          "TNSI-ALGORITHMIQUE/C2/methodes",
+          "TNSI-ALGORITHMIQUE/C3/evaluations",
+          "TNSI-ALGORITHMIQUE/C3/methodes",
+          "TNSI-ALGORITHMIQUE/C4/corriges",
+          "TNSI-ALGORITHMIQUE/C4/evaluations",
+          "TNSI-ALGORITHMIQUE/C4/methodes",
+          "TNSI-ALGORITHMIQUE/C5/methodes",
+          "TNSI-ALGORITHMIQUE/C6/methodes",
+          "TNSI-ALGORITHMIQUE/C7/methodes",
+          "TNSI-ALGORITHMIQUE/C8/corriges",
+          "TNSI-ALGORITHMIQUE/C8/evaluations",
+          "TNSI-ALGORITHMIQUE/C8/methodes",
+          "TNSI-ALGORITHMIQUE/C9/corriges",
+          "TNSI-ALGORITHMIQUE/C9/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C1/corriges",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C1/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C2/corriges",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C2/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C3/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C4/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C5/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C6/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C7/corriges",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C7/methodes",
+          "TNSI-BASES-DE-DONNEES/C1/methodes",
+          "TNSI-BASES-DE-DONNEES/C10/methodes",
+          "TNSI-BASES-DE-DONNEES/C11/methodes",
+          "TNSI-BASES-DE-DONNEES/C12/methodes",
+          "TNSI-BASES-DE-DONNEES/C2/corriges",
+          "TNSI-BASES-DE-DONNEES/C2/evaluations",
+          "TNSI-BASES-DE-DONNEES/C2/methodes",
+          "TNSI-BASES-DE-DONNEES/C3/evaluations",
+          "TNSI-BASES-DE-DONNEES/C3/methodes",
+          "TNSI-BASES-DE-DONNEES/C4/corriges",
+          "TNSI-BASES-DE-DONNEES/C4/methodes",
+          "TNSI-BASES-DE-DONNEES/C5/corriges",
+          "TNSI-BASES-DE-DONNEES/C5/evaluations",
+          "TNSI-BASES-DE-DONNEES/C5/methodes",
+          "TNSI-BASES-DE-DONNEES/C6/methodes",
+          "TNSI-BASES-DE-DONNEES/C7/methodes",
+          "TNSI-BASES-DE-DONNEES/C8/methodes",
+          "TNSI-BASES-DE-DONNEES/C9/methodes",
+          "TNSI-HISTOIRE-INFORMATIQUE/C1/methodes",
+          "TNSI-HISTOIRE-INFORMATIQUE/C2/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C1/corriges",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C1/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C10/evaluations",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C10/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C11/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C2/corriges",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C2/evaluations",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C2/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C3/corriges",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C3/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C4/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C5/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C6/evaluations",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C6/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C7/evaluations",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C7/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C8/corriges",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C8/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C9/methodes",
+          "TNSI-PROJET/C1/corriges",
+          "TNSI-PROJET/C1/cours",
+          "TNSI-PROJET/C1/evaluations",
+          "TNSI-PROJET/C1/exercices",
+          "TNSI-PROJET/C1/methodes",
+          "TNSI-PROJET/C1/remediation",
+          "TNSI-PROJET/C2/corriges",
+          "TNSI-PROJET/C2/cours",
+          "TNSI-PROJET/C2/evaluations",
+          "TNSI-PROJET/C2/exercices",
+          "TNSI-PROJET/C2/methodes",
+          "TNSI-PROJET/C2/remediation",
+          "TNSI-STRUCTURES-DONNEES/C1/corriges",
+          "TNSI-STRUCTURES-DONNEES/C1/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C1/exercices",
+          "TNSI-STRUCTURES-DONNEES/C1/methodes",
+          "TNSI-STRUCTURES-DONNEES/C10/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C10/methodes",
+          "TNSI-STRUCTURES-DONNEES/C11/corriges",
+          "TNSI-STRUCTURES-DONNEES/C11/methodes",
+          "TNSI-STRUCTURES-DONNEES/C12/methodes",
+          "TNSI-STRUCTURES-DONNEES/C13/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C13/methodes",
+          "TNSI-STRUCTURES-DONNEES/C14/methodes",
+          "TNSI-STRUCTURES-DONNEES/C2/corriges",
+          "TNSI-STRUCTURES-DONNEES/C2/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C2/methodes",
+          "TNSI-STRUCTURES-DONNEES/C3/corriges",
+          "TNSI-STRUCTURES-DONNEES/C3/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C3/methodes",
+          "TNSI-STRUCTURES-DONNEES/C4/methodes",
+          "TNSI-STRUCTURES-DONNEES/C5/methodes",
+          "TNSI-STRUCTURES-DONNEES/C6/methodes",
+          "TNSI-STRUCTURES-DONNEES/C7/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C7/methodes",
+          "TNSI-STRUCTURES-DONNEES/C8/corriges",
+          "TNSI-STRUCTURES-DONNEES/C8/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C8/methodes",
+          "TNSI-STRUCTURES-DONNEES/C9/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C9/methodes"
+        ],
+        "set_digest": "sha256:e367767791023e19a5c5cd22d21970962c38e4a0eb056d91bac28eefe41814e9"
+      },
+      "TSPE": {
+        "count": 47,
+        "unit_ids": [
+          "TSPE-CALCUL-INTEGRAL/C1/methodes",
+          "TSPE-CALCUL-INTEGRAL/C3/evaluations",
+          "TSPE-CALCUL-INTEGRAL/C3/methodes",
+          "TSPE-CALCUL-INTEGRAL/C4/qcm",
+          "TSPE-CALCUL-INTEGRAL/C5/methodes",
+          "TSPE-CALCUL-INTEGRAL/C5/qcm",
+          "TSPE-CALCUL-INTEGRAL/C6/evaluations",
+          "TSPE-CALCUL-INTEGRAL/C6/methodes",
+          "TSPE-CALCUL-INTEGRAL/C6/qcm",
+          "TSPE-CALCUL-INTEGRAL/C7/evaluations",
+          "TSPE-CALCUL-INTEGRAL/C7/methodes",
+          "TSPE-CALCUL-INTEGRAL/C7/qcm",
+          "TSPE-CALCUL-INTEGRAL/C8/methodes",
+          "TSPE-CALCUL-INTEGRAL/C8/qcm",
+          "TSPE-COMBINATOIRE/C1/evaluations",
+          "TSPE-COMBINATOIRE/C3/methodes",
+          "TSPE-COMBINATOIRE/C4/methodes",
+          "TSPE-GEOMETRIE-ESPACE/C1/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C10/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C14/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C16/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C2/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C3/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C4/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C5/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C6/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C9/evaluations",
+          "TSPE-LOGARITHME/C2/methodes",
+          "TSPE-PRIMITIVES-EQDIFF/C4/methodes",
+          "TSPE-PRIMITIVES-EQDIFF/C5/methodes",
+          "TSPE-PROBABILITES/C1/methodes",
+          "TSPE-PROBABILITES/C1/qcm",
+          "TSPE-PROBABILITES/C10/methodes",
+          "TSPE-PROBABILITES/C2/evaluations",
+          "TSPE-PROBABILITES/C3/qcm",
+          "TSPE-PROBABILITES/C4/evaluations",
+          "TSPE-PROBABILITES/C4/qcm",
+          "TSPE-PROBABILITES/C5/methodes",
+          "TSPE-PROBABILITES/C6/evaluations",
+          "TSPE-PROBABILITES/C6/methodes",
+          "TSPE-PROBABILITES/C6/qcm",
+          "TSPE-PROBABILITES/C7/evaluations",
+          "TSPE-PROBABILITES/C7/methodes",
+          "TSPE-PROBABILITES/C8/methodes",
+          "TSPE-PROBABILITES/C9/methodes",
+          "TSPE-SUITES-LIMITES/C6/remediation",
+          "TSPE-SUITES-LIMITES/C7/remediation"
+        ],
+        "set_digest": "sha256:865e84cfaf877b71bb4753b78f6fb52c0793a83f972e373ff801ede8f9ad64f5"
+      }
+    },
+    "per_chapter": {
+      "1NSI-ARCHITECTURE-OS": {
+        "count": 6,
+        "unit_ids": [
+          "1NSI-ARCHITECTURE-OS/C1/methodes",
+          "1NSI-ARCHITECTURE-OS/C2/methodes",
+          "1NSI-ARCHITECTURE-OS/C3/methodes",
+          "1NSI-ARCHITECTURE-OS/C4/evaluations",
+          "1NSI-ARCHITECTURE-OS/C4/methodes",
+          "1NSI-ARCHITECTURE-OS/C5/methodes"
+        ],
+        "set_digest": "sha256:5a6fcf4225fa8c3840473282506972a99fb7ee496a0aa088ff2ecf41d481c8ab"
+      },
+      "1NSI-LANGAGE": {
+        "count": 10,
+        "unit_ids": [
+          "1NSI-LANGAGE/C1/methodes",
+          "1NSI-LANGAGE/C2/evaluations",
+          "1NSI-LANGAGE/C2/methodes",
+          "1NSI-LANGAGE/C3/evaluations",
+          "1NSI-LANGAGE/C3/methodes",
+          "1NSI-LANGAGE/C4/methodes",
+          "1NSI-LANGAGE/C5/methodes",
+          "1NSI-LANGAGE/C6/methodes",
+          "1NSI-LANGAGE/C7/evaluations",
+          "1NSI-LANGAGE/C7/methodes"
+        ],
+        "set_digest": "sha256:7f4aaebff4a1a68dd68414fc6db3605d5ae9a2fac4b773e14b97ed799fe379cd"
+      },
+      "1NSI-PROJET-METHODES": {
+        "count": 5,
+        "unit_ids": [
+          "1NSI-PROJET-METHODES/C1/methodes",
+          "1NSI-PROJET-METHODES/C2/methodes",
+          "1NSI-PROJET-METHODES/C3/methodes",
+          "1NSI-PROJET-METHODES/C4/evaluations",
+          "1NSI-PROJET-METHODES/C4/methodes"
+        ],
+        "set_digest": "sha256:913bd989cdf9c478438cacb56418b27957b5794ba8b3d9af9263c99a7a8902ff"
+      },
+      "1NSI-RESEAUX": {
+        "count": 6,
+        "unit_ids": [
+          "1NSI-RESEAUX/C1/methodes",
+          "1NSI-RESEAUX/C2/methodes",
+          "1NSI-RESEAUX/C3/methodes",
+          "1NSI-RESEAUX/C4/methodes",
+          "1NSI-RESEAUX/C5/evaluations",
+          "1NSI-RESEAUX/C5/methodes"
+        ],
+        "set_digest": "sha256:8349ab36c910d8850d48869002b26354ba75194e172538fe5a21ef71a89d312e"
+      },
+      "1NSI-TABLES": {
+        "count": 4,
+        "unit_ids": [
+          "1NSI-TABLES/C1/methodes",
+          "1NSI-TABLES/C2/methodes",
+          "1NSI-TABLES/C3/methodes",
+          "1NSI-TABLES/C4/methodes"
+        ],
+        "set_digest": "sha256:a42e092721fb941c2949c05267011534275dc04ca534354f081827057db319dc"
+      },
+      "1NSI-TYPES-BASE": {
+        "count": 5,
+        "unit_ids": [
+          "1NSI-TYPES-BASE/C1/methodes",
+          "1NSI-TYPES-BASE/C2/methodes",
+          "1NSI-TYPES-BASE/C3/methodes",
+          "1NSI-TYPES-BASE/C4/methodes",
+          "1NSI-TYPES-BASE/C5/methodes"
+        ],
+        "set_digest": "sha256:fecc74b83ed0ef6bbfa687e1a923d6ebcb5bdbb425ac4d24118a5e6752c33004"
+      },
+      "1NSI-WEB-IHM": {
+        "count": 14,
+        "unit_ids": [
+          "1NSI-WEB-IHM/C1/methodes",
+          "1NSI-WEB-IHM/C2/evaluations",
+          "1NSI-WEB-IHM/C2/methodes",
+          "1NSI-WEB-IHM/C3/methodes",
+          "1NSI-WEB-IHM/C4/evaluations",
+          "1NSI-WEB-IHM/C4/methodes",
+          "1NSI-WEB-IHM/C5/evaluations",
+          "1NSI-WEB-IHM/C5/methodes",
+          "1NSI-WEB-IHM/C6/evaluations",
+          "1NSI-WEB-IHM/C6/methodes",
+          "1NSI-WEB-IHM/C7/evaluations",
+          "1NSI-WEB-IHM/C7/methodes",
+          "1NSI-WEB-IHM/C8/methodes",
+          "1NSI-WEB-IHM/C9/methodes"
+        ],
+        "set_digest": "sha256:4d068e3f1ba865e00bf1817b6806893578317a4f46c58a603f7b8e134b0beb26"
+      },
+      "1SPE-SUITES": {
+        "count": 1,
+        "unit_ids": [
+          "1SPE-SUITES/C8/evaluations"
+        ],
+        "set_digest": "sha256:9afaef60666d72c63144ea88266120800553b24b87b3e2960fa774d4a63d0bd0"
+      },
+      "TCOMPL-CALCULS-AIRES": {
+        "count": 6,
+        "unit_ids": [
+          "TCOMPL-CALCULS-AIRES/C1/evaluations",
+          "TCOMPL-CALCULS-AIRES/C1/remediation",
+          "TCOMPL-CALCULS-AIRES/C2/remediation",
+          "TCOMPL-CALCULS-AIRES/C3/remediation",
+          "TCOMPL-CALCULS-AIRES/C5/remediation",
+          "TCOMPL-CALCULS-AIRES/C6/remediation"
+        ],
+        "set_digest": "sha256:ccd576766dcd0fda6604ae281105197615e809bdb67c8dee5707f6b738bfb6a1"
+      },
+      "TCOMPL-CORRELATION-CAUSALITE": {
+        "count": 4,
+        "unit_ids": [
+          "TCOMPL-CORRELATION-CAUSALITE/C1/remediation",
+          "TCOMPL-CORRELATION-CAUSALITE/C2/remediation",
+          "TCOMPL-CORRELATION-CAUSALITE/C3/remediation",
+          "TCOMPL-CORRELATION-CAUSALITE/C4/remediation"
+        ],
+        "set_digest": "sha256:d0368c38535358682bc86aead3505cb20a08dbb9b8515e387090b02c16ccda4c"
+      },
+      "TCOMPL-ECHANTILLONNAGE": {
+        "count": 13,
+        "unit_ids": [
+          "TCOMPL-ECHANTILLONNAGE/C1/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C2/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C4/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C5/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C6/qcm",
+          "TCOMPL-ECHANTILLONNAGE/C6/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C7/corriges",
+          "TCOMPL-ECHANTILLONNAGE/C7/cours",
+          "TCOMPL-ECHANTILLONNAGE/C7/evaluations",
+          "TCOMPL-ECHANTILLONNAGE/C7/exercices",
+          "TCOMPL-ECHANTILLONNAGE/C7/methodes",
+          "TCOMPL-ECHANTILLONNAGE/C7/qcm",
+          "TCOMPL-ECHANTILLONNAGE/C7/remediation"
+        ],
+        "set_digest": "sha256:afb45fda3760a06a7da1e945944fadec1f4e53ac96ea10e7ea001ba5e9319630"
+      },
+      "TCOMPL-INEGALITES": {
+        "count": 4,
+        "unit_ids": [
+          "TCOMPL-INEGALITES/C1/remediation",
+          "TCOMPL-INEGALITES/C2/remediation",
+          "TCOMPL-INEGALITES/C4/remediation",
+          "TCOMPL-INEGALITES/C5/remediation"
+        ],
+        "set_digest": "sha256:f725b6ada1fe8e5b759ca34a6a05227a046bca003b25273b8da0f7eac1071e09"
+      },
+      "TCOMPL-INFERENCE-BAYESIENNE": {
+        "count": 5,
+        "unit_ids": [
+          "TCOMPL-INFERENCE-BAYESIENNE/C1/remediation",
+          "TCOMPL-INFERENCE-BAYESIENNE/C3/remediation",
+          "TCOMPL-INFERENCE-BAYESIENNE/C4/remediation",
+          "TCOMPL-INFERENCE-BAYESIENNE/C5/qcm",
+          "TCOMPL-INFERENCE-BAYESIENNE/C5/remediation"
+        ],
+        "set_digest": "sha256:e968327888bc6c70d7ca117cb0611cc1dcc1ad46d3d6744454420b11d6d0a56d"
+      },
+      "TCOMPL-LOGARITHME-HISTORIQUE": {
+        "count": 5,
+        "unit_ids": [
+          "TCOMPL-LOGARITHME-HISTORIQUE/C1/remediation",
+          "TCOMPL-LOGARITHME-HISTORIQUE/C2/remediation",
+          "TCOMPL-LOGARITHME-HISTORIQUE/C4/qcm",
+          "TCOMPL-LOGARITHME-HISTORIQUE/C4/remediation",
+          "TCOMPL-LOGARITHME-HISTORIQUE/C5/remediation"
+        ],
+        "set_digest": "sha256:66a430b51ca05dcc4a9ac79c7c0a47763999aa470e40c2e3f13b09fd0829dc16"
+      },
+      "TCOMPL-MODELES-EVOLUTION": {
+        "count": 12,
+        "unit_ids": [
+          "TCOMPL-MODELES-EVOLUTION/C1/remediation",
+          "TCOMPL-MODELES-EVOLUTION/C2/remediation",
+          "TCOMPL-MODELES-EVOLUTION/C3/qcm",
+          "TCOMPL-MODELES-EVOLUTION/C3/remediation",
+          "TCOMPL-MODELES-EVOLUTION/C4/remediation",
+          "TCOMPL-MODELES-EVOLUTION/C6/corriges",
+          "TCOMPL-MODELES-EVOLUTION/C6/cours",
+          "TCOMPL-MODELES-EVOLUTION/C6/evaluations",
+          "TCOMPL-MODELES-EVOLUTION/C6/exercices",
+          "TCOMPL-MODELES-EVOLUTION/C6/methodes",
+          "TCOMPL-MODELES-EVOLUTION/C6/qcm",
+          "TCOMPL-MODELES-EVOLUTION/C6/remediation"
+        ],
+        "set_digest": "sha256:a182b1ce30eb575cd2edb189cecdbddf8d2b3465efe2ee1f02ee4976824b24ac"
+      },
+      "TCOMPL-MODELES-FONCTION": {
+        "count": 9,
+        "unit_ids": [
+          "TCOMPL-MODELES-FONCTION/C2/qcm",
+          "TCOMPL-MODELES-FONCTION/C2/remediation",
+          "TCOMPL-MODELES-FONCTION/C3/qcm",
+          "TCOMPL-MODELES-FONCTION/C3/remediation",
+          "TCOMPL-MODELES-FONCTION/C4/remediation",
+          "TCOMPL-MODELES-FONCTION/C6/qcm",
+          "TCOMPL-MODELES-FONCTION/C6/remediation",
+          "TCOMPL-MODELES-FONCTION/C7/qcm",
+          "TCOMPL-MODELES-FONCTION/C7/remediation"
+        ],
+        "set_digest": "sha256:1edc841b4a769a2a2f1d46974abb7d384af4451249b62a38a1e09efacc0a2f8f"
+      },
+      "TCOMPL-TEMPS-ATTENTE": {
+        "count": 15,
+        "unit_ids": [
+          "TCOMPL-TEMPS-ATTENTE/C1/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C2/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C3/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C4/qcm",
+          "TCOMPL-TEMPS-ATTENTE/C4/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C5/qcm",
+          "TCOMPL-TEMPS-ATTENTE/C6/qcm",
+          "TCOMPL-TEMPS-ATTENTE/C6/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C7/corriges",
+          "TCOMPL-TEMPS-ATTENTE/C7/cours",
+          "TCOMPL-TEMPS-ATTENTE/C7/evaluations",
+          "TCOMPL-TEMPS-ATTENTE/C7/exercices",
+          "TCOMPL-TEMPS-ATTENTE/C7/methodes",
+          "TCOMPL-TEMPS-ATTENTE/C7/qcm",
+          "TCOMPL-TEMPS-ATTENTE/C7/remediation"
+        ],
+        "set_digest": "sha256:dfc8126c72eff5e0219013ef8cd0eb3a12d1ea0d25a6d14704b8178487e4d955"
+      },
+      "TEXP-ARITHMETIQUE": {
+        "count": 14,
+        "unit_ids": [
+          "TEXP-ARITHMETIQUE/C2/evaluations",
+          "TEXP-ARITHMETIQUE/C3/evaluations",
+          "TEXP-ARITHMETIQUE/C3/qcm",
+          "TEXP-ARITHMETIQUE/C4/qcm",
+          "TEXP-ARITHMETIQUE/C5/remediation",
+          "TEXP-ARITHMETIQUE/C6/qcm",
+          "TEXP-ARITHMETIQUE/C6/remediation",
+          "TEXP-ARITHMETIQUE/C7/qcm",
+          "TEXP-ARITHMETIQUE/C7/remediation",
+          "TEXP-ARITHMETIQUE/C8/qcm",
+          "TEXP-ARITHMETIQUE/C8/remediation",
+          "TEXP-ARITHMETIQUE/C9/evaluations",
+          "TEXP-ARITHMETIQUE/C9/qcm",
+          "TEXP-ARITHMETIQUE/C9/remediation"
+        ],
+        "set_digest": "sha256:6170414aab8388b3d058c724f41ac00387797908dff1aaf7063b263834e3bbba"
+      },
+      "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE": {
+        "count": 6,
+        "unit_ids": [
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C2/qcm",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C2/remediation",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C3/remediation",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C4/remediation",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C5/qcm",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C5/remediation"
+        ],
+        "set_digest": "sha256:0e38492250943eb4aa850aa464fc0df7170354f1330bc766d09add60c3bf83c4"
+      },
+      "TEXP-COMPLEXES-TRIGO-POLYNOMES": {
+        "count": 11,
+        "unit_ids": [
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C1/evaluations",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C2/remediation",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C3/evaluations",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C3/qcm",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C3/remediation",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C4/qcm",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C4/remediation",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C5/evaluations",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C5/remediation",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C6/qcm",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C6/remediation"
+        ],
+        "set_digest": "sha256:9410d62536485c50e36624c753387e825976b844206b136522a935fd5195b9fb"
+      },
+      "TEXP-GRAPHES": {
+        "count": 6,
+        "unit_ids": [
+          "TEXP-GRAPHES/C1/remediation",
+          "TEXP-GRAPHES/C2/evaluations",
+          "TEXP-GRAPHES/C2/qcm",
+          "TEXP-GRAPHES/C2/remediation",
+          "TEXP-GRAPHES/C3/remediation",
+          "TEXP-GRAPHES/C5/remediation"
+        ],
+        "set_digest": "sha256:611043f4b549051afe271f9005948e378a3f2010f39b1d89106ef5e3e2c69863"
+      },
+      "TEXP-MATRICES-MARKOV": {
+        "count": 9,
+        "unit_ids": [
+          "TEXP-MATRICES-MARKOV/C2/evaluations",
+          "TEXP-MATRICES-MARKOV/C2/qcm",
+          "TEXP-MATRICES-MARKOV/C2/remediation",
+          "TEXP-MATRICES-MARKOV/C3/evaluations",
+          "TEXP-MATRICES-MARKOV/C3/remediation",
+          "TEXP-MATRICES-MARKOV/C4/remediation",
+          "TEXP-MATRICES-MARKOV/C6/qcm",
+          "TEXP-MATRICES-MARKOV/C6/remediation",
+          "TEXP-MATRICES-MARKOV/C7/remediation"
+        ],
+        "set_digest": "sha256:47e4b6b21693e349b478a3db1d9ee8f77fcd8c615f17c30c2a315b26d5a399aa"
+      },
+      "TNSI-ALGORITHMIQUE": {
+        "count": 24,
+        "unit_ids": [
+          "TNSI-ALGORITHMIQUE/C1/methodes",
+          "TNSI-ALGORITHMIQUE/C10/evaluations",
+          "TNSI-ALGORITHMIQUE/C10/methodes",
+          "TNSI-ALGORITHMIQUE/C11/methodes",
+          "TNSI-ALGORITHMIQUE/C12/evaluations",
+          "TNSI-ALGORITHMIQUE/C12/methodes",
+          "TNSI-ALGORITHMIQUE/C13/corriges",
+          "TNSI-ALGORITHMIQUE/C13/evaluations",
+          "TNSI-ALGORITHMIQUE/C13/methodes",
+          "TNSI-ALGORITHMIQUE/C2/corriges",
+          "TNSI-ALGORITHMIQUE/C2/methodes",
+          "TNSI-ALGORITHMIQUE/C3/evaluations",
+          "TNSI-ALGORITHMIQUE/C3/methodes",
+          "TNSI-ALGORITHMIQUE/C4/corriges",
+          "TNSI-ALGORITHMIQUE/C4/evaluations",
+          "TNSI-ALGORITHMIQUE/C4/methodes",
+          "TNSI-ALGORITHMIQUE/C5/methodes",
+          "TNSI-ALGORITHMIQUE/C6/methodes",
+          "TNSI-ALGORITHMIQUE/C7/methodes",
+          "TNSI-ALGORITHMIQUE/C8/corriges",
+          "TNSI-ALGORITHMIQUE/C8/evaluations",
+          "TNSI-ALGORITHMIQUE/C8/methodes",
+          "TNSI-ALGORITHMIQUE/C9/corriges",
+          "TNSI-ALGORITHMIQUE/C9/methodes"
+        ],
+        "set_digest": "sha256:46ea7653578d210e3829526b3ece470acaa0ac487b255b1951812917b56b0f60"
+      },
+      "TNSI-ARCHITECTURES-MATERIELLES-SY": {
+        "count": 10,
+        "unit_ids": [
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C1/corriges",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C1/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C2/corriges",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C2/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C3/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C4/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C5/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C6/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C7/corriges",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C7/methodes"
+        ],
+        "set_digest": "sha256:8ab2c64bd0250eaecc0b9269d99d24320a0d8226201ee1a57f96937df45c2116"
+      },
+      "TNSI-BASES-DE-DONNEES": {
+        "count": 18,
+        "unit_ids": [
+          "TNSI-BASES-DE-DONNEES/C1/methodes",
+          "TNSI-BASES-DE-DONNEES/C10/methodes",
+          "TNSI-BASES-DE-DONNEES/C11/methodes",
+          "TNSI-BASES-DE-DONNEES/C12/methodes",
+          "TNSI-BASES-DE-DONNEES/C2/corriges",
+          "TNSI-BASES-DE-DONNEES/C2/evaluations",
+          "TNSI-BASES-DE-DONNEES/C2/methodes",
+          "TNSI-BASES-DE-DONNEES/C3/evaluations",
+          "TNSI-BASES-DE-DONNEES/C3/methodes",
+          "TNSI-BASES-DE-DONNEES/C4/corriges",
+          "TNSI-BASES-DE-DONNEES/C4/methodes",
+          "TNSI-BASES-DE-DONNEES/C5/corriges",
+          "TNSI-BASES-DE-DONNEES/C5/evaluations",
+          "TNSI-BASES-DE-DONNEES/C5/methodes",
+          "TNSI-BASES-DE-DONNEES/C6/methodes",
+          "TNSI-BASES-DE-DONNEES/C7/methodes",
+          "TNSI-BASES-DE-DONNEES/C8/methodes",
+          "TNSI-BASES-DE-DONNEES/C9/methodes"
+        ],
+        "set_digest": "sha256:0905bdee87bcde8aab12bf5484a35aad782e7509f5d5c29298b2304415dd1a45"
+      },
+      "TNSI-HISTOIRE-INFORMATIQUE": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-HISTOIRE-INFORMATIQUE/C1/methodes",
+          "TNSI-HISTOIRE-INFORMATIQUE/C2/methodes"
+        ],
+        "set_digest": "sha256:959fa9f576319a630b0d2f7e423cc7daff652063ac04074491d722a6969c5e5c"
+      },
+      "TNSI-LANGAGES-ET-PROGRAMMATION": {
+        "count": 19,
+        "unit_ids": [
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C1/corriges",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C1/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C10/evaluations",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C10/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C11/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C2/corriges",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C2/evaluations",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C2/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C3/corriges",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C3/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C4/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C5/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C6/evaluations",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C6/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C7/evaluations",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C7/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C8/corriges",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C8/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C9/methodes"
+        ],
+        "set_digest": "sha256:68e19e36a4af0eaa5675e844e97f2f7ba351b39adb8c9fa17dcbee8033d9c847"
+      },
+      "TNSI-PROJET": {
+        "count": 12,
+        "unit_ids": [
+          "TNSI-PROJET/C1/corriges",
+          "TNSI-PROJET/C1/cours",
+          "TNSI-PROJET/C1/evaluations",
+          "TNSI-PROJET/C1/exercices",
+          "TNSI-PROJET/C1/methodes",
+          "TNSI-PROJET/C1/remediation",
+          "TNSI-PROJET/C2/corriges",
+          "TNSI-PROJET/C2/cours",
+          "TNSI-PROJET/C2/evaluations",
+          "TNSI-PROJET/C2/exercices",
+          "TNSI-PROJET/C2/methodes",
+          "TNSI-PROJET/C2/remediation"
+        ],
+        "set_digest": "sha256:0120e5104885018494bdd0d6cf5f72e1d1439db94e41bf8ad5bc5e223119994c"
+      },
+      "TNSI-STRUCTURES-DONNEES": {
+        "count": 28,
+        "unit_ids": [
+          "TNSI-STRUCTURES-DONNEES/C1/corriges",
+          "TNSI-STRUCTURES-DONNEES/C1/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C1/exercices",
+          "TNSI-STRUCTURES-DONNEES/C1/methodes",
+          "TNSI-STRUCTURES-DONNEES/C10/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C10/methodes",
+          "TNSI-STRUCTURES-DONNEES/C11/corriges",
+          "TNSI-STRUCTURES-DONNEES/C11/methodes",
+          "TNSI-STRUCTURES-DONNEES/C12/methodes",
+          "TNSI-STRUCTURES-DONNEES/C13/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C13/methodes",
+          "TNSI-STRUCTURES-DONNEES/C14/methodes",
+          "TNSI-STRUCTURES-DONNEES/C2/corriges",
+          "TNSI-STRUCTURES-DONNEES/C2/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C2/methodes",
+          "TNSI-STRUCTURES-DONNEES/C3/corriges",
+          "TNSI-STRUCTURES-DONNEES/C3/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C3/methodes",
+          "TNSI-STRUCTURES-DONNEES/C4/methodes",
+          "TNSI-STRUCTURES-DONNEES/C5/methodes",
+          "TNSI-STRUCTURES-DONNEES/C6/methodes",
+          "TNSI-STRUCTURES-DONNEES/C7/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C7/methodes",
+          "TNSI-STRUCTURES-DONNEES/C8/corriges",
+          "TNSI-STRUCTURES-DONNEES/C8/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C8/methodes",
+          "TNSI-STRUCTURES-DONNEES/C9/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C9/methodes"
+        ],
+        "set_digest": "sha256:5c8321389cad16a91996170db70221a3c7e0d660c69f8ede4f5b25b31978510c"
+      },
+      "TSPE-CALCUL-INTEGRAL": {
+        "count": 14,
+        "unit_ids": [
+          "TSPE-CALCUL-INTEGRAL/C1/methodes",
+          "TSPE-CALCUL-INTEGRAL/C3/evaluations",
+          "TSPE-CALCUL-INTEGRAL/C3/methodes",
+          "TSPE-CALCUL-INTEGRAL/C4/qcm",
+          "TSPE-CALCUL-INTEGRAL/C5/methodes",
+          "TSPE-CALCUL-INTEGRAL/C5/qcm",
+          "TSPE-CALCUL-INTEGRAL/C6/evaluations",
+          "TSPE-CALCUL-INTEGRAL/C6/methodes",
+          "TSPE-CALCUL-INTEGRAL/C6/qcm",
+          "TSPE-CALCUL-INTEGRAL/C7/evaluations",
+          "TSPE-CALCUL-INTEGRAL/C7/methodes",
+          "TSPE-CALCUL-INTEGRAL/C7/qcm",
+          "TSPE-CALCUL-INTEGRAL/C8/methodes",
+          "TSPE-CALCUL-INTEGRAL/C8/qcm"
+        ],
+        "set_digest": "sha256:fa2952e8bc7f2243d93bc3aaa5b7cd016b26823601d13a306c13c62905021ff1"
+      },
+      "TSPE-COMBINATOIRE": {
+        "count": 3,
+        "unit_ids": [
+          "TSPE-COMBINATOIRE/C1/evaluations",
+          "TSPE-COMBINATOIRE/C3/methodes",
+          "TSPE-COMBINATOIRE/C4/methodes"
+        ],
+        "set_digest": "sha256:7a58f8edf40623e3f797ebc39ea647382f38a12039a25c8b54359e147f9e26c3"
+      },
+      "TSPE-GEOMETRIE-ESPACE": {
+        "count": 10,
+        "unit_ids": [
+          "TSPE-GEOMETRIE-ESPACE/C1/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C10/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C14/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C16/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C2/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C3/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C4/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C5/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C6/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C9/evaluations"
+        ],
+        "set_digest": "sha256:e78460d40189815b22e0af658eb3ac1cc6ace115154056d7693113de39c17045"
+      },
+      "TSPE-LOGARITHME": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-LOGARITHME/C2/methodes"
+        ],
+        "set_digest": "sha256:4f97f2b8ebfd08ec6977508fee0ff3356f0540bed78c333ae272efff72b3a02b"
+      },
+      "TSPE-PRIMITIVES-EQDIFF": {
+        "count": 2,
+        "unit_ids": [
+          "TSPE-PRIMITIVES-EQDIFF/C4/methodes",
+          "TSPE-PRIMITIVES-EQDIFF/C5/methodes"
+        ],
+        "set_digest": "sha256:befc83349c9444e08d26f4339afc9d6223b63c6a1d112cc0388027fe96bceac8"
+      },
+      "TSPE-PROBABILITES": {
+        "count": 15,
+        "unit_ids": [
+          "TSPE-PROBABILITES/C1/methodes",
+          "TSPE-PROBABILITES/C1/qcm",
+          "TSPE-PROBABILITES/C10/methodes",
+          "TSPE-PROBABILITES/C2/evaluations",
+          "TSPE-PROBABILITES/C3/qcm",
+          "TSPE-PROBABILITES/C4/evaluations",
+          "TSPE-PROBABILITES/C4/qcm",
+          "TSPE-PROBABILITES/C5/methodes",
+          "TSPE-PROBABILITES/C6/evaluations",
+          "TSPE-PROBABILITES/C6/methodes",
+          "TSPE-PROBABILITES/C6/qcm",
+          "TSPE-PROBABILITES/C7/evaluations",
+          "TSPE-PROBABILITES/C7/methodes",
+          "TSPE-PROBABILITES/C8/methodes",
+          "TSPE-PROBABILITES/C9/methodes"
+        ],
+        "set_digest": "sha256:cd1a3791561653908c9417a632dc7120b73530d88b61c439b729490646cc16ef"
+      },
+      "TSPE-SUITES-LIMITES": {
+        "count": 2,
+        "unit_ids": [
+          "TSPE-SUITES-LIMITES/C6/remediation",
+          "TSPE-SUITES-LIMITES/C7/remediation"
+        ],
+        "set_digest": "sha256:a47a3bcf43172d03b6b197e4242b908d07ad96977590ce1d76058a06b3782348"
+      }
+    },
+    "per_capacity": {
+      "1NSI::1NSI-ARCHITECTURE-OS::C1": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-ARCHITECTURE-OS/C1/methodes"
+        ],
+        "set_digest": "sha256:77d56d0ea6487f7ad6641494a80b3b1402e18dc375e3bd9f20e7fed0dd7bd8de"
+      },
+      "1NSI::1NSI-ARCHITECTURE-OS::C2": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-ARCHITECTURE-OS/C2/methodes"
+        ],
+        "set_digest": "sha256:6dfb6e3e41f021ffb22e44e86d08b1c48c9f87fee3d73c724738e89d7209eab5"
+      },
+      "1NSI::1NSI-ARCHITECTURE-OS::C3": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-ARCHITECTURE-OS/C3/methodes"
+        ],
+        "set_digest": "sha256:96e8b557745f24925128da573202134d724951dd66ce6da93d557ef34843d319"
+      },
+      "1NSI::1NSI-ARCHITECTURE-OS::C4": {
+        "count": 2,
+        "unit_ids": [
+          "1NSI-ARCHITECTURE-OS/C4/evaluations",
+          "1NSI-ARCHITECTURE-OS/C4/methodes"
+        ],
+        "set_digest": "sha256:cd152ccda24c8720ac03b9be8efa26553facc3d4c32717f9f5adc34de0b56a07"
+      },
+      "1NSI::1NSI-ARCHITECTURE-OS::C5": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-ARCHITECTURE-OS/C5/methodes"
+        ],
+        "set_digest": "sha256:f8019150f74d8874db4382da7d82df0738438315212db17a38479b5c62eaeebe"
+      },
+      "1NSI::1NSI-LANGAGE::C1": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-LANGAGE/C1/methodes"
+        ],
+        "set_digest": "sha256:621f479f84bbb646020cabd67c5300a4a1124143eb5fc49c118987d9ac679320"
+      },
+      "1NSI::1NSI-LANGAGE::C2": {
+        "count": 2,
+        "unit_ids": [
+          "1NSI-LANGAGE/C2/evaluations",
+          "1NSI-LANGAGE/C2/methodes"
+        ],
+        "set_digest": "sha256:184059a38a4ae30f17c10e29623d58e66c097772f95cfa541721f56df7b02f9c"
+      },
+      "1NSI::1NSI-LANGAGE::C3": {
+        "count": 2,
+        "unit_ids": [
+          "1NSI-LANGAGE/C3/evaluations",
+          "1NSI-LANGAGE/C3/methodes"
+        ],
+        "set_digest": "sha256:96b1a34b0241e93f56d492284f481c4a1fe4dba1901b88abad811ff5442d1be8"
+      },
+      "1NSI::1NSI-LANGAGE::C4": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-LANGAGE/C4/methodes"
+        ],
+        "set_digest": "sha256:7750b337256a687f5cce952022d43b7b4c7a9c7bc7f75de6d80ab999c914083b"
+      },
+      "1NSI::1NSI-LANGAGE::C5": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-LANGAGE/C5/methodes"
+        ],
+        "set_digest": "sha256:4bec880b032bd5f1f2a3a559b2d064d2ec4f650e52dd7723c6be9159019d39da"
+      },
+      "1NSI::1NSI-LANGAGE::C6": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-LANGAGE/C6/methodes"
+        ],
+        "set_digest": "sha256:eb594ce85a97575fe54a345cbe1350af1cdb19cf97b26ad33b29f0f60fc43212"
+      },
+      "1NSI::1NSI-LANGAGE::C7": {
+        "count": 2,
+        "unit_ids": [
+          "1NSI-LANGAGE/C7/evaluations",
+          "1NSI-LANGAGE/C7/methodes"
+        ],
+        "set_digest": "sha256:c4754d5c73acd303cbf78b28ac007c12137db29fbb5bcd99681f484e2f3ed670"
+      },
+      "1NSI::1NSI-PROJET-METHODES::C1": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-PROJET-METHODES/C1/methodes"
+        ],
+        "set_digest": "sha256:d4b177425cad0a5f47a1ef6ce205f1ebcfbf4654e1e63ac9f30b4e60bb7684db"
+      },
+      "1NSI::1NSI-PROJET-METHODES::C2": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-PROJET-METHODES/C2/methodes"
+        ],
+        "set_digest": "sha256:5206a6953af4b70be8b1f93c6d4275be700086aac3ede3fcf5f98236a0550933"
+      },
+      "1NSI::1NSI-PROJET-METHODES::C3": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-PROJET-METHODES/C3/methodes"
+        ],
+        "set_digest": "sha256:ab4012d7b749ad4c752fbe31068e850ceac033812724714274113aec3dbbc4d4"
+      },
+      "1NSI::1NSI-PROJET-METHODES::C4": {
+        "count": 2,
+        "unit_ids": [
+          "1NSI-PROJET-METHODES/C4/evaluations",
+          "1NSI-PROJET-METHODES/C4/methodes"
+        ],
+        "set_digest": "sha256:0be69baf703c8ffc8eaa38d8e52c2c84997bb0502692909ccf6bf6350fa80d01"
+      },
+      "1NSI::1NSI-RESEAUX::C1": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-RESEAUX/C1/methodes"
+        ],
+        "set_digest": "sha256:517905480128703f2778e0c38d4e16cd49883bc3e1c7a6cb825a0581f491770c"
+      },
+      "1NSI::1NSI-RESEAUX::C2": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-RESEAUX/C2/methodes"
+        ],
+        "set_digest": "sha256:b927ce2c438fb1d82d0f1f597cc51babeb2c262397963d76bd1bf2158d612ec4"
+      },
+      "1NSI::1NSI-RESEAUX::C3": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-RESEAUX/C3/methodes"
+        ],
+        "set_digest": "sha256:1d839faae3bb3129d753892b03fd079d7f8a64a18358f3d74719fa683b676702"
+      },
+      "1NSI::1NSI-RESEAUX::C4": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-RESEAUX/C4/methodes"
+        ],
+        "set_digest": "sha256:1100fcffd5721fcede43cefd06bab9180f63ee47ce367b90ea9eb45141836c63"
+      },
+      "1NSI::1NSI-RESEAUX::C5": {
+        "count": 2,
+        "unit_ids": [
+          "1NSI-RESEAUX/C5/evaluations",
+          "1NSI-RESEAUX/C5/methodes"
+        ],
+        "set_digest": "sha256:6cc97a0127fd5dc47dade8ed4d00811bb2750dd4981a641205287c538c7f9511"
+      },
+      "1NSI::1NSI-TABLES::C1": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-TABLES/C1/methodes"
+        ],
+        "set_digest": "sha256:999597b85e9edfad8c22710526c845eb60d4c1ff82dff653f7b459ba8fd65e5b"
+      },
+      "1NSI::1NSI-TABLES::C2": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-TABLES/C2/methodes"
+        ],
+        "set_digest": "sha256:4e0d9d326b81cb318b4dc5e74227b056bab555dc370d7a76f63c5329817984af"
+      },
+      "1NSI::1NSI-TABLES::C3": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-TABLES/C3/methodes"
+        ],
+        "set_digest": "sha256:ab19c27ac22959815b6ad4c1b64c45466f34401a5dd71618bea258a7eb056a04"
+      },
+      "1NSI::1NSI-TABLES::C4": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-TABLES/C4/methodes"
+        ],
+        "set_digest": "sha256:d2790e30c9a037bfa4d152a838867455c733c3a56404fa31e6cc7b28bb028c16"
+      },
+      "1NSI::1NSI-TYPES-BASE::C1": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-TYPES-BASE/C1/methodes"
+        ],
+        "set_digest": "sha256:8e10ca0af9f7c13b9cd15854c67a5cac1e3de40ca47c3684c6dfcb19069af361"
+      },
+      "1NSI::1NSI-TYPES-BASE::C2": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-TYPES-BASE/C2/methodes"
+        ],
+        "set_digest": "sha256:521401c275851c0064db56e4aa2c9c7c928664743f242df89ed95f059484cc90"
+      },
+      "1NSI::1NSI-TYPES-BASE::C3": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-TYPES-BASE/C3/methodes"
+        ],
+        "set_digest": "sha256:71a8926b0d2ed4fdca4bb13bb26a51bc32de749f16b6c6a00eab35e3f7fcb9b0"
+      },
+      "1NSI::1NSI-TYPES-BASE::C4": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-TYPES-BASE/C4/methodes"
+        ],
+        "set_digest": "sha256:4cb863b42c700a18ff5a44604eedcd19e8648b09ceadad435f36c99ea38d747d"
+      },
+      "1NSI::1NSI-TYPES-BASE::C5": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-TYPES-BASE/C5/methodes"
+        ],
+        "set_digest": "sha256:75887e10ca978c5771e7d472e01915c878627d33a0c72958ac4f6f16d1e62f17"
+      },
+      "1NSI::1NSI-WEB-IHM::C1": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-WEB-IHM/C1/methodes"
+        ],
+        "set_digest": "sha256:e4a4e0f609da9decca90e1a6855758e61429e3d2f23c4d97ad47e40312d3d0e2"
+      },
+      "1NSI::1NSI-WEB-IHM::C2": {
+        "count": 2,
+        "unit_ids": [
+          "1NSI-WEB-IHM/C2/evaluations",
+          "1NSI-WEB-IHM/C2/methodes"
+        ],
+        "set_digest": "sha256:5c0afdb3d2b7a85cc98ee373ef1e7b8f89094307c3759b0dc995b504e7b959d0"
+      },
+      "1NSI::1NSI-WEB-IHM::C3": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-WEB-IHM/C3/methodes"
+        ],
+        "set_digest": "sha256:f3a5074b4c346b964aa8a019bab5188a9ea336fff8229fa76788a3d74fab2c7f"
+      },
+      "1NSI::1NSI-WEB-IHM::C4": {
+        "count": 2,
+        "unit_ids": [
+          "1NSI-WEB-IHM/C4/evaluations",
+          "1NSI-WEB-IHM/C4/methodes"
+        ],
+        "set_digest": "sha256:d3429bd0f7e706b655972c1c42d605f539044c8dbb745e6e06e50bd8ab191213"
+      },
+      "1NSI::1NSI-WEB-IHM::C5": {
+        "count": 2,
+        "unit_ids": [
+          "1NSI-WEB-IHM/C5/evaluations",
+          "1NSI-WEB-IHM/C5/methodes"
+        ],
+        "set_digest": "sha256:a0039472ea986de3fdb24b65787651889b9b35bc3d45ad65b543fb16b7cc7f44"
+      },
+      "1NSI::1NSI-WEB-IHM::C6": {
+        "count": 2,
+        "unit_ids": [
+          "1NSI-WEB-IHM/C6/evaluations",
+          "1NSI-WEB-IHM/C6/methodes"
+        ],
+        "set_digest": "sha256:037bd143a3285d9c13e8ae031ac563079efd3193089a497c51bd5b6ce75c7419"
+      },
+      "1NSI::1NSI-WEB-IHM::C7": {
+        "count": 2,
+        "unit_ids": [
+          "1NSI-WEB-IHM/C7/evaluations",
+          "1NSI-WEB-IHM/C7/methodes"
+        ],
+        "set_digest": "sha256:c2d10be08971aef4b456b6833b62da79880f895f1eb989429876e7d47b5c53fb"
+      },
+      "1NSI::1NSI-WEB-IHM::C8": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-WEB-IHM/C8/methodes"
+        ],
+        "set_digest": "sha256:447d81cdf499df8e792199a78c78ec4e09b050c1afb68b346acb20a7d0a81669"
+      },
+      "1NSI::1NSI-WEB-IHM::C9": {
+        "count": 1,
+        "unit_ids": [
+          "1NSI-WEB-IHM/C9/methodes"
+        ],
+        "set_digest": "sha256:281a6dccf35e499b9ad6dd1066681275109f43a423091c0af2f35dd8d924002e"
+      },
+      "1SPE::1SPE-SUITES::C8": {
+        "count": 1,
+        "unit_ids": [
+          "1SPE-SUITES/C8/evaluations"
+        ],
+        "set_digest": "sha256:9afaef60666d72c63144ea88266120800553b24b87b3e2960fa774d4a63d0bd0"
+      },
+      "TCOMPL::TCOMPL-CALCULS-AIRES::C1": {
+        "count": 2,
+        "unit_ids": [
+          "TCOMPL-CALCULS-AIRES/C1/evaluations",
+          "TCOMPL-CALCULS-AIRES/C1/remediation"
+        ],
+        "set_digest": "sha256:a0ed19f46d9a4918ff97426703e12cdeaef47288ad94cd1bb961bdb92dac3810"
+      },
+      "TCOMPL::TCOMPL-CALCULS-AIRES::C2": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-CALCULS-AIRES/C2/remediation"
+        ],
+        "set_digest": "sha256:a61b14ba76ec04b73fcf747e6553cbeb35ba77f5ec5f0f3f2a93b5f02833065a"
+      },
+      "TCOMPL::TCOMPL-CALCULS-AIRES::C3": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-CALCULS-AIRES/C3/remediation"
+        ],
+        "set_digest": "sha256:ddf7168df260e335124e791027b9bc4d41c75ffebdd5ddae04377ecef29862c2"
+      },
+      "TCOMPL::TCOMPL-CALCULS-AIRES::C5": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-CALCULS-AIRES/C5/remediation"
+        ],
+        "set_digest": "sha256:16467556eaaf22786a8aa9e80513e03fbeafdbe39ffa2eeb72c29a111a0859a9"
+      },
+      "TCOMPL::TCOMPL-CALCULS-AIRES::C6": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-CALCULS-AIRES/C6/remediation"
+        ],
+        "set_digest": "sha256:d6d7b971e60dcf2ff27fa49b4aef4924d0b4248885ce78a8523dcc4b002e8e23"
+      },
+      "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C1": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-CORRELATION-CAUSALITE/C1/remediation"
+        ],
+        "set_digest": "sha256:05102778dfa9b42801672700dd4e433133b99d800ace77dc030af04024fc6db2"
+      },
+      "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C2": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-CORRELATION-CAUSALITE/C2/remediation"
+        ],
+        "set_digest": "sha256:c78446174f8ac8c48700b40bb21fa39fa70e2d1c4076dc2600a8d09e194e92fc"
+      },
+      "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C3": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-CORRELATION-CAUSALITE/C3/remediation"
+        ],
+        "set_digest": "sha256:2ebe0c7ce2048a43f1425cfd17677777d13e3c0cfa502783102ae893189d95b7"
+      },
+      "TCOMPL::TCOMPL-CORRELATION-CAUSALITE::C4": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-CORRELATION-CAUSALITE/C4/remediation"
+        ],
+        "set_digest": "sha256:eac72cd40857dcb9a7254f7679c3e3f1c3bf5aebaf5632bfe34b3464685ac159"
+      },
+      "TCOMPL::TCOMPL-ECHANTILLONNAGE::C1": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-ECHANTILLONNAGE/C1/remediation"
+        ],
+        "set_digest": "sha256:269be22e33f0b5aa0d20d5b565913a01811b1d81d40505d6b1822f9cb4b71041"
+      },
+      "TCOMPL::TCOMPL-ECHANTILLONNAGE::C2": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-ECHANTILLONNAGE/C2/remediation"
+        ],
+        "set_digest": "sha256:a2b07d25406099b9a4dfffe698d3a488180c4d727921ca7ee68ad6885d1078c3"
+      },
+      "TCOMPL::TCOMPL-ECHANTILLONNAGE::C4": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-ECHANTILLONNAGE/C4/remediation"
+        ],
+        "set_digest": "sha256:08306393acd523d5ea02e3021e966cb2f810228d0a9f4d30ea1c885aacdd3ade"
+      },
+      "TCOMPL::TCOMPL-ECHANTILLONNAGE::C5": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-ECHANTILLONNAGE/C5/remediation"
+        ],
+        "set_digest": "sha256:deeebe48e24d619a3061d7829cb732407dc8094a7cc2304d15c01717531056dd"
+      },
+      "TCOMPL::TCOMPL-ECHANTILLONNAGE::C6": {
+        "count": 2,
+        "unit_ids": [
+          "TCOMPL-ECHANTILLONNAGE/C6/qcm",
+          "TCOMPL-ECHANTILLONNAGE/C6/remediation"
+        ],
+        "set_digest": "sha256:9b799c4c13b1e4f7d79f49d61c4f3e532d1fcb90afa2c13e410d506c27e9a52d"
+      },
+      "TCOMPL::TCOMPL-ECHANTILLONNAGE::C7": {
+        "count": 7,
+        "unit_ids": [
+          "TCOMPL-ECHANTILLONNAGE/C7/corriges",
+          "TCOMPL-ECHANTILLONNAGE/C7/cours",
+          "TCOMPL-ECHANTILLONNAGE/C7/evaluations",
+          "TCOMPL-ECHANTILLONNAGE/C7/exercices",
+          "TCOMPL-ECHANTILLONNAGE/C7/methodes",
+          "TCOMPL-ECHANTILLONNAGE/C7/qcm",
+          "TCOMPL-ECHANTILLONNAGE/C7/remediation"
+        ],
+        "set_digest": "sha256:6e255ab8f591a8ca0fad9f4556bed586468c4efcabad78f4ed587c7e4670eaf3"
+      },
+      "TCOMPL::TCOMPL-INEGALITES::C1": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-INEGALITES/C1/remediation"
+        ],
+        "set_digest": "sha256:356cc15caa763794292172281d7405abf6b8edee1a7ed7ff0763717f9d38bcaa"
+      },
+      "TCOMPL::TCOMPL-INEGALITES::C2": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-INEGALITES/C2/remediation"
+        ],
+        "set_digest": "sha256:4465e3843600d1787862c1bd806b1c22cb5c194b0ad736198a778ce996aa1e51"
+      },
+      "TCOMPL::TCOMPL-INEGALITES::C4": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-INEGALITES/C4/remediation"
+        ],
+        "set_digest": "sha256:06590f71ca26834037dd4e64d4edf609c65ca77ad47be03aa541489a5483e434"
+      },
+      "TCOMPL::TCOMPL-INEGALITES::C5": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-INEGALITES/C5/remediation"
+        ],
+        "set_digest": "sha256:62c652db72941a603100232d72aec9662e914928ece377d51428db90a0bbe66b"
+      },
+      "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C1": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-INFERENCE-BAYESIENNE/C1/remediation"
+        ],
+        "set_digest": "sha256:6ea743f19e4682ad4fa0e51f17422f2694afe2efe0d9308e4f694e76bd413e5f"
+      },
+      "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C3": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-INFERENCE-BAYESIENNE/C3/remediation"
+        ],
+        "set_digest": "sha256:d53bdfcbcc20db7d140fd81f36b4198b84b15245e8c7833b4c45f8c420323dce"
+      },
+      "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C4": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-INFERENCE-BAYESIENNE/C4/remediation"
+        ],
+        "set_digest": "sha256:45d04e06b9ed02e420df84d813903498da5fc642e139bcf25526d1a10620bc2d"
+      },
+      "TCOMPL::TCOMPL-INFERENCE-BAYESIENNE::C5": {
+        "count": 2,
+        "unit_ids": [
+          "TCOMPL-INFERENCE-BAYESIENNE/C5/qcm",
+          "TCOMPL-INFERENCE-BAYESIENNE/C5/remediation"
+        ],
+        "set_digest": "sha256:4d357d1835ea2a0c76244eb09bdb291b60c9ef14c964c8d946cf5e4e69642ffa"
+      },
+      "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C1": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-LOGARITHME-HISTORIQUE/C1/remediation"
+        ],
+        "set_digest": "sha256:e737cb24cce36771bccf94fad701e9c7ececc14b33816a0627c8f398abd4a2ca"
+      },
+      "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C2": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-LOGARITHME-HISTORIQUE/C2/remediation"
+        ],
+        "set_digest": "sha256:ebd5a0ba334d5420b9e64d9a21c9284d461760636ba41b05227defc7a23e219d"
+      },
+      "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C4": {
+        "count": 2,
+        "unit_ids": [
+          "TCOMPL-LOGARITHME-HISTORIQUE/C4/qcm",
+          "TCOMPL-LOGARITHME-HISTORIQUE/C4/remediation"
+        ],
+        "set_digest": "sha256:8e428b942d80c9d42904a47366d23d8502ec5f9aedda9c4d753b59fd2ed8cb5b"
+      },
+      "TCOMPL::TCOMPL-LOGARITHME-HISTORIQUE::C5": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-LOGARITHME-HISTORIQUE/C5/remediation"
+        ],
+        "set_digest": "sha256:ee4e7f87176e131c62775492463bc1f9ae170a93495dc90a8ee82f08814a42ee"
+      },
+      "TCOMPL::TCOMPL-MODELES-EVOLUTION::C1": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-MODELES-EVOLUTION/C1/remediation"
+        ],
+        "set_digest": "sha256:df21e7e6a92e67de8e07715f4760819656bc7b41e1213f32b465bed831fd96a0"
+      },
+      "TCOMPL::TCOMPL-MODELES-EVOLUTION::C2": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-MODELES-EVOLUTION/C2/remediation"
+        ],
+        "set_digest": "sha256:036380d31c551ff56b0c3b882c5ebc201818c850fcc77f08e5b96ee0524cc601"
+      },
+      "TCOMPL::TCOMPL-MODELES-EVOLUTION::C3": {
+        "count": 2,
+        "unit_ids": [
+          "TCOMPL-MODELES-EVOLUTION/C3/qcm",
+          "TCOMPL-MODELES-EVOLUTION/C3/remediation"
+        ],
+        "set_digest": "sha256:5e4dff61acab4b845374c1bfca18b9886ee0d1e30cb359ae04ab99d885d337d1"
+      },
+      "TCOMPL::TCOMPL-MODELES-EVOLUTION::C4": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-MODELES-EVOLUTION/C4/remediation"
+        ],
+        "set_digest": "sha256:0d2b1b2e73cb53cc3aa3f7ceea7e71a3f1aa30b0935ee2ead991fea3d0f685c6"
+      },
+      "TCOMPL::TCOMPL-MODELES-EVOLUTION::C6": {
+        "count": 7,
+        "unit_ids": [
+          "TCOMPL-MODELES-EVOLUTION/C6/corriges",
+          "TCOMPL-MODELES-EVOLUTION/C6/cours",
+          "TCOMPL-MODELES-EVOLUTION/C6/evaluations",
+          "TCOMPL-MODELES-EVOLUTION/C6/exercices",
+          "TCOMPL-MODELES-EVOLUTION/C6/methodes",
+          "TCOMPL-MODELES-EVOLUTION/C6/qcm",
+          "TCOMPL-MODELES-EVOLUTION/C6/remediation"
+        ],
+        "set_digest": "sha256:92acfee0caf51cc7e9bb50f2506af886043890765cdcdc7cae11f9b940d60533"
+      },
+      "TCOMPL::TCOMPL-MODELES-FONCTION::C2": {
+        "count": 2,
+        "unit_ids": [
+          "TCOMPL-MODELES-FONCTION/C2/qcm",
+          "TCOMPL-MODELES-FONCTION/C2/remediation"
+        ],
+        "set_digest": "sha256:0a936061d79096d7d097fd5fc2df83108b628bfdd2857398dda2428cd29980ec"
+      },
+      "TCOMPL::TCOMPL-MODELES-FONCTION::C3": {
+        "count": 2,
+        "unit_ids": [
+          "TCOMPL-MODELES-FONCTION/C3/qcm",
+          "TCOMPL-MODELES-FONCTION/C3/remediation"
+        ],
+        "set_digest": "sha256:d602c92dda7ab11bc00bb1581c2d57ef868934f6fe4b82d5c2f396ea8a48e790"
+      },
+      "TCOMPL::TCOMPL-MODELES-FONCTION::C4": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-MODELES-FONCTION/C4/remediation"
+        ],
+        "set_digest": "sha256:583e52ae28fe2d4d1a5ead76375b0a3b3cbbe67ae593174b4cab4a77510c6eb7"
+      },
+      "TCOMPL::TCOMPL-MODELES-FONCTION::C6": {
+        "count": 2,
+        "unit_ids": [
+          "TCOMPL-MODELES-FONCTION/C6/qcm",
+          "TCOMPL-MODELES-FONCTION/C6/remediation"
+        ],
+        "set_digest": "sha256:8ff19da633b51f0cb03a4eaa227339494901679ca0432a7f4a70dbbcce67d559"
+      },
+      "TCOMPL::TCOMPL-MODELES-FONCTION::C7": {
+        "count": 2,
+        "unit_ids": [
+          "TCOMPL-MODELES-FONCTION/C7/qcm",
+          "TCOMPL-MODELES-FONCTION/C7/remediation"
+        ],
+        "set_digest": "sha256:6ee536122badc045e4841e9d3b3e8b7ccdd029ade783a6f1088e56d7a88c4798"
+      },
+      "TCOMPL::TCOMPL-TEMPS-ATTENTE::C1": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-TEMPS-ATTENTE/C1/remediation"
+        ],
+        "set_digest": "sha256:f54badd86626395e6c62574b7d8ea975602c0ac82eeb2cfd9d327a49eac4b471"
+      },
+      "TCOMPL::TCOMPL-TEMPS-ATTENTE::C2": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-TEMPS-ATTENTE/C2/remediation"
+        ],
+        "set_digest": "sha256:dcdb12a8542246b6bd70dbcf6de16a35cef943532abab3f2f37e22fe9d961236"
+      },
+      "TCOMPL::TCOMPL-TEMPS-ATTENTE::C3": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-TEMPS-ATTENTE/C3/remediation"
+        ],
+        "set_digest": "sha256:4dcbadfd0d183c9efe0d0b63efce52cd23f4a5931e38b76538ee4c4c491d9407"
+      },
+      "TCOMPL::TCOMPL-TEMPS-ATTENTE::C4": {
+        "count": 2,
+        "unit_ids": [
+          "TCOMPL-TEMPS-ATTENTE/C4/qcm",
+          "TCOMPL-TEMPS-ATTENTE/C4/remediation"
+        ],
+        "set_digest": "sha256:1b26095c07834fece41a92f3077270316e037794e38032866a2d5ef6562b0fd8"
+      },
+      "TCOMPL::TCOMPL-TEMPS-ATTENTE::C5": {
+        "count": 1,
+        "unit_ids": [
+          "TCOMPL-TEMPS-ATTENTE/C5/qcm"
+        ],
+        "set_digest": "sha256:4ae644e55c971bdd259b60b4dff76f1d86fec1df5e1940f91411b96d5fc150b6"
+      },
+      "TCOMPL::TCOMPL-TEMPS-ATTENTE::C6": {
+        "count": 2,
+        "unit_ids": [
+          "TCOMPL-TEMPS-ATTENTE/C6/qcm",
+          "TCOMPL-TEMPS-ATTENTE/C6/remediation"
+        ],
+        "set_digest": "sha256:fc8dec9567e2bcd5e49d7eb50847b10cdabd3628dabf48fe5d969e322b38a24d"
+      },
+      "TCOMPL::TCOMPL-TEMPS-ATTENTE::C7": {
+        "count": 7,
+        "unit_ids": [
+          "TCOMPL-TEMPS-ATTENTE/C7/corriges",
+          "TCOMPL-TEMPS-ATTENTE/C7/cours",
+          "TCOMPL-TEMPS-ATTENTE/C7/evaluations",
+          "TCOMPL-TEMPS-ATTENTE/C7/exercices",
+          "TCOMPL-TEMPS-ATTENTE/C7/methodes",
+          "TCOMPL-TEMPS-ATTENTE/C7/qcm",
+          "TCOMPL-TEMPS-ATTENTE/C7/remediation"
+        ],
+        "set_digest": "sha256:7ab45831edf6e497e17c07687c545880b5014802beed1c80efc8dacccb8c5824"
+      },
+      "TEXPERTES::TEXP-ARITHMETIQUE::C2": {
+        "count": 1,
+        "unit_ids": [
+          "TEXP-ARITHMETIQUE/C2/evaluations"
+        ],
+        "set_digest": "sha256:3f03828d2562038f5765568dd0d7ea9aef39200f1656933250866b4b04d9c722"
+      },
+      "TEXPERTES::TEXP-ARITHMETIQUE::C3": {
+        "count": 2,
+        "unit_ids": [
+          "TEXP-ARITHMETIQUE/C3/evaluations",
+          "TEXP-ARITHMETIQUE/C3/qcm"
+        ],
+        "set_digest": "sha256:716e9ac2642848980076661cbd4f2e42b99e2c10e094cbcc865f0c160af07c92"
+      },
+      "TEXPERTES::TEXP-ARITHMETIQUE::C4": {
+        "count": 1,
+        "unit_ids": [
+          "TEXP-ARITHMETIQUE/C4/qcm"
+        ],
+        "set_digest": "sha256:f6df2d6c3f13b32596b94beb575631764804a6ac82e5b7fdf23a6efa7c560ae0"
+      },
+      "TEXPERTES::TEXP-ARITHMETIQUE::C5": {
+        "count": 1,
+        "unit_ids": [
+          "TEXP-ARITHMETIQUE/C5/remediation"
+        ],
+        "set_digest": "sha256:a5cd893086adf06c3aaae315d2bff0cf8d395f89b9ef672bfbe4222f7768beee"
+      },
+      "TEXPERTES::TEXP-ARITHMETIQUE::C6": {
+        "count": 2,
+        "unit_ids": [
+          "TEXP-ARITHMETIQUE/C6/qcm",
+          "TEXP-ARITHMETIQUE/C6/remediation"
+        ],
+        "set_digest": "sha256:1ba9846cbdb6ef963021dae5177a26ed3c1bd82408a0c13cbeb56dd8093b7700"
+      },
+      "TEXPERTES::TEXP-ARITHMETIQUE::C7": {
+        "count": 2,
+        "unit_ids": [
+          "TEXP-ARITHMETIQUE/C7/qcm",
+          "TEXP-ARITHMETIQUE/C7/remediation"
+        ],
+        "set_digest": "sha256:a1ce00c9914c4274c24cce2c4adca15ede2e731413a5ffd7290eff3cec1b81df"
+      },
+      "TEXPERTES::TEXP-ARITHMETIQUE::C8": {
+        "count": 2,
+        "unit_ids": [
+          "TEXP-ARITHMETIQUE/C8/qcm",
+          "TEXP-ARITHMETIQUE/C8/remediation"
+        ],
+        "set_digest": "sha256:a3762a804a015dc0453ded900f88714cc0ce4d2546336bf1f0905011efd23756"
+      },
+      "TEXPERTES::TEXP-ARITHMETIQUE::C9": {
+        "count": 3,
+        "unit_ids": [
+          "TEXP-ARITHMETIQUE/C9/evaluations",
+          "TEXP-ARITHMETIQUE/C9/qcm",
+          "TEXP-ARITHMETIQUE/C9/remediation"
+        ],
+        "set_digest": "sha256:478045b15722124d0a7867e35714c2f8e9f178e61ca3559f7f0aa6d9ccfdd756"
+      },
+      "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C2": {
+        "count": 2,
+        "unit_ids": [
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C2/qcm",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C2/remediation"
+        ],
+        "set_digest": "sha256:fad58d903cd5ff5b7b64ef06cb7278da89ddbe737a9b6ebb659fc7f13959f32e"
+      },
+      "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C3": {
+        "count": 1,
+        "unit_ids": [
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C3/remediation"
+        ],
+        "set_digest": "sha256:f88904f91088619d0c454fe5d9478720fe48513a1d4ea6668df846ddc489a642"
+      },
+      "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C4": {
+        "count": 1,
+        "unit_ids": [
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C4/remediation"
+        ],
+        "set_digest": "sha256:fdf4feb54b4acaafe4d76ad083af88d4d1066cb7c44f0269faa9c0d06bdf210e"
+      },
+      "TEXPERTES::TEXP-COMPLEXES-ALGEBRE-GEOMETRIE::C5": {
+        "count": 2,
+        "unit_ids": [
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C5/qcm",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C5/remediation"
+        ],
+        "set_digest": "sha256:d18b2d74a22e7591bd84c93464c201d09dd5499e0d4ec1e2b3ee9380caa7b05c"
+      },
+      "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C1": {
+        "count": 1,
+        "unit_ids": [
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C1/evaluations"
+        ],
+        "set_digest": "sha256:ad550c116cdff6750de01f59d02fea46da574eb6b55594d2b9d9148514cdbab6"
+      },
+      "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C2": {
+        "count": 1,
+        "unit_ids": [
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C2/remediation"
+        ],
+        "set_digest": "sha256:b60c20214e3af4e01581f5ecc087b5877f4f16e55c043ca839b6e9a990c1e0a9"
+      },
+      "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C3": {
+        "count": 3,
+        "unit_ids": [
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C3/evaluations",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C3/qcm",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C3/remediation"
+        ],
+        "set_digest": "sha256:3012cb05876c9e9f4c0ed16c70113ecb2335fce205076045d3329f2b92a7cec0"
+      },
+      "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C4": {
+        "count": 2,
+        "unit_ids": [
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C4/qcm",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C4/remediation"
+        ],
+        "set_digest": "sha256:cd0dfc782b74a6cdf3542e6d31663fe2af36556c578630a97886498defd4978c"
+      },
+      "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C5": {
+        "count": 2,
+        "unit_ids": [
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C5/evaluations",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C5/remediation"
+        ],
+        "set_digest": "sha256:826c530d27b9c7f4c82257b2910af3d76c691c3d88dc3125ba0937c26b44cc27"
+      },
+      "TEXPERTES::TEXP-COMPLEXES-TRIGO-POLYNOMES::C6": {
+        "count": 2,
+        "unit_ids": [
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C6/qcm",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C6/remediation"
+        ],
+        "set_digest": "sha256:dc09f04acc823e07227ac40a73c1b60d215193ffef54977b2169117b7a3c7637"
+      },
+      "TEXPERTES::TEXP-GRAPHES::C1": {
+        "count": 1,
+        "unit_ids": [
+          "TEXP-GRAPHES/C1/remediation"
+        ],
+        "set_digest": "sha256:db04b9c08c459ebcbde94398c3bb21a796b74d54d471f2ea337c1c766f45e196"
+      },
+      "TEXPERTES::TEXP-GRAPHES::C2": {
+        "count": 3,
+        "unit_ids": [
+          "TEXP-GRAPHES/C2/evaluations",
+          "TEXP-GRAPHES/C2/qcm",
+          "TEXP-GRAPHES/C2/remediation"
+        ],
+        "set_digest": "sha256:995833868a1c3ee76c1105e3f6a88631687660655dea9bb0ee9e739d546f96a2"
+      },
+      "TEXPERTES::TEXP-GRAPHES::C3": {
+        "count": 1,
+        "unit_ids": [
+          "TEXP-GRAPHES/C3/remediation"
+        ],
+        "set_digest": "sha256:840729a7ce3c7a383b6b444ed3727f9cc36f890dfbd8271ada9287335d7be90d"
+      },
+      "TEXPERTES::TEXP-GRAPHES::C5": {
+        "count": 1,
+        "unit_ids": [
+          "TEXP-GRAPHES/C5/remediation"
+        ],
+        "set_digest": "sha256:41fb66bb545ae6de39a2caf971ca390a4f09ef04abfe83d5b464c87c04d6706e"
+      },
+      "TEXPERTES::TEXP-MATRICES-MARKOV::C2": {
+        "count": 3,
+        "unit_ids": [
+          "TEXP-MATRICES-MARKOV/C2/evaluations",
+          "TEXP-MATRICES-MARKOV/C2/qcm",
+          "TEXP-MATRICES-MARKOV/C2/remediation"
+        ],
+        "set_digest": "sha256:36e7b6cea13335dd0d861d42d3bac8bef339faa9d61b930a1748f0056c311ca3"
+      },
+      "TEXPERTES::TEXP-MATRICES-MARKOV::C3": {
+        "count": 2,
+        "unit_ids": [
+          "TEXP-MATRICES-MARKOV/C3/evaluations",
+          "TEXP-MATRICES-MARKOV/C3/remediation"
+        ],
+        "set_digest": "sha256:834919382a076619cd12b9bb90a8f09ea3f9e1cafd3fb92d9c3dbed01e62a1d5"
+      },
+      "TEXPERTES::TEXP-MATRICES-MARKOV::C4": {
+        "count": 1,
+        "unit_ids": [
+          "TEXP-MATRICES-MARKOV/C4/remediation"
+        ],
+        "set_digest": "sha256:ec45489cfbe131b1bfd641449479720ef92d2293cae314f254c909551da0f3d9"
+      },
+      "TEXPERTES::TEXP-MATRICES-MARKOV::C6": {
+        "count": 2,
+        "unit_ids": [
+          "TEXP-MATRICES-MARKOV/C6/qcm",
+          "TEXP-MATRICES-MARKOV/C6/remediation"
+        ],
+        "set_digest": "sha256:3e500df2007d0778651c0966d1dee0bbe186a3dd228e8ffe5b55bbd4bb8b2362"
+      },
+      "TEXPERTES::TEXP-MATRICES-MARKOV::C7": {
+        "count": 1,
+        "unit_ids": [
+          "TEXP-MATRICES-MARKOV/C7/remediation"
+        ],
+        "set_digest": "sha256:6ac2337a1663fe2167cf5c02aa9e3269d1f4e62787b959e2c81c0ff6bec97230"
+      },
+      "TNSI::TNSI-ALGORITHMIQUE::C1": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-ALGORITHMIQUE/C1/methodes"
+        ],
+        "set_digest": "sha256:1a727402e321aa3d90eae2b248d8a1c60b61c0bc0625a341fe68fabb9e34efa5"
+      },
+      "TNSI::TNSI-ALGORITHMIQUE::C10": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-ALGORITHMIQUE/C10/evaluations",
+          "TNSI-ALGORITHMIQUE/C10/methodes"
+        ],
+        "set_digest": "sha256:bef60dd07fff4cbd7cc812c9c3c20e13a4eb55c5140c8077e712231e6f7a00ee"
+      },
+      "TNSI::TNSI-ALGORITHMIQUE::C11": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-ALGORITHMIQUE/C11/methodes"
+        ],
+        "set_digest": "sha256:5b328b2e9eec5d823628d08ff540232b0676089615d60d915a87d11b7c79d249"
+      },
+      "TNSI::TNSI-ALGORITHMIQUE::C12": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-ALGORITHMIQUE/C12/evaluations",
+          "TNSI-ALGORITHMIQUE/C12/methodes"
+        ],
+        "set_digest": "sha256:6e4d0eb9d6066653ae4337618991820e3f7078ed48238f8ea8eead4ecb18f723"
+      },
+      "TNSI::TNSI-ALGORITHMIQUE::C13": {
+        "count": 3,
+        "unit_ids": [
+          "TNSI-ALGORITHMIQUE/C13/corriges",
+          "TNSI-ALGORITHMIQUE/C13/evaluations",
+          "TNSI-ALGORITHMIQUE/C13/methodes"
+        ],
+        "set_digest": "sha256:c4bef374dca1ae6ec27c31e25fffea6aecdf6ce1932a7a702d97fd5ba2187516"
+      },
+      "TNSI::TNSI-ALGORITHMIQUE::C2": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-ALGORITHMIQUE/C2/corriges",
+          "TNSI-ALGORITHMIQUE/C2/methodes"
+        ],
+        "set_digest": "sha256:fc80ff8c9e1cbba527c1a147581f7939a827e2be1379942c7ca9bf398db6cdc2"
+      },
+      "TNSI::TNSI-ALGORITHMIQUE::C3": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-ALGORITHMIQUE/C3/evaluations",
+          "TNSI-ALGORITHMIQUE/C3/methodes"
+        ],
+        "set_digest": "sha256:55a74e5dbb568151bcd8975fee1fd68b716e8adbb18bbad67a9fbefc07851f37"
+      },
+      "TNSI::TNSI-ALGORITHMIQUE::C4": {
+        "count": 3,
+        "unit_ids": [
+          "TNSI-ALGORITHMIQUE/C4/corriges",
+          "TNSI-ALGORITHMIQUE/C4/evaluations",
+          "TNSI-ALGORITHMIQUE/C4/methodes"
+        ],
+        "set_digest": "sha256:a88caf552ed403112050eee89c1cb1b3d08f1b8e1788626c49f27dc48ec79fb7"
+      },
+      "TNSI::TNSI-ALGORITHMIQUE::C5": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-ALGORITHMIQUE/C5/methodes"
+        ],
+        "set_digest": "sha256:fd6d94da4bb0bdf0128a0e396ba78332a567e0a49e1d780ea55ead9fce9ed9b2"
+      },
+      "TNSI::TNSI-ALGORITHMIQUE::C6": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-ALGORITHMIQUE/C6/methodes"
+        ],
+        "set_digest": "sha256:96db4ae523063d8b4ee948a5548c691ec063243083d9f08e20c4d0bc77c1209e"
+      },
+      "TNSI::TNSI-ALGORITHMIQUE::C7": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-ALGORITHMIQUE/C7/methodes"
+        ],
+        "set_digest": "sha256:7d1856626e7e34c43e648fd543f430358a218ea54a895e9a10afbc6c135629b1"
+      },
+      "TNSI::TNSI-ALGORITHMIQUE::C8": {
+        "count": 3,
+        "unit_ids": [
+          "TNSI-ALGORITHMIQUE/C8/corriges",
+          "TNSI-ALGORITHMIQUE/C8/evaluations",
+          "TNSI-ALGORITHMIQUE/C8/methodes"
+        ],
+        "set_digest": "sha256:982b672d38621b79255f667da800937bf3fa70bda87be8df844e94b9fc38b4f2"
+      },
+      "TNSI::TNSI-ALGORITHMIQUE::C9": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-ALGORITHMIQUE/C9/corriges",
+          "TNSI-ALGORITHMIQUE/C9/methodes"
+        ],
+        "set_digest": "sha256:dc9c66cef8742c9649660f4ebab8e3bacb3b3ed217cb6e7fe202b34216104ae4"
+      },
+      "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C1": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C1/corriges",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C1/methodes"
+        ],
+        "set_digest": "sha256:7a0a9b84856a4b58320a1eb90ecabde95cb4092743f69c3a35863a970c0038d5"
+      },
+      "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C2": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C2/corriges",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C2/methodes"
+        ],
+        "set_digest": "sha256:122bde15a76a2173bfc2be57c10586bbadf00b3008547f44367f73145b71929d"
+      },
+      "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C3": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C3/methodes"
+        ],
+        "set_digest": "sha256:1a9e7cd52b88f9ae1a7a56f74419e4174d8fdbfd93c6c94b09dc77bd692582ea"
+      },
+      "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C4": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C4/methodes"
+        ],
+        "set_digest": "sha256:466ca1d5af7a0c205cbc2c14330e17b1dcfec2454430c684076859214e1d3e36"
+      },
+      "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C5": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C5/methodes"
+        ],
+        "set_digest": "sha256:8cb328ac4b294c3176e4b9898a4e22c09ffc6d284896af4ccb7d49595201b270"
+      },
+      "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C6": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C6/methodes"
+        ],
+        "set_digest": "sha256:4787f9e7100f29558d28f7bbde8cfa8ed0349a21fac4b90a4ff04479b1535579"
+      },
+      "TNSI::TNSI-ARCHITECTURES-MATERIELLES-SY::C7": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C7/corriges",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C7/methodes"
+        ],
+        "set_digest": "sha256:0c008f0d6e1cd986dd5069efaee928070642a7a2fadc0855a87e88f36d859111"
+      },
+      "TNSI::TNSI-BASES-DE-DONNEES::C1": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-BASES-DE-DONNEES/C1/methodes"
+        ],
+        "set_digest": "sha256:b48ca75d7e2e27e28d42459e7ea6aeeb883ebde1712426640e9142b3f999e090"
+      },
+      "TNSI::TNSI-BASES-DE-DONNEES::C10": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-BASES-DE-DONNEES/C10/methodes"
+        ],
+        "set_digest": "sha256:f22f2aac4219033949cb07665f4eb92c3147140318fdf87e456aefcf4d8327ee"
+      },
+      "TNSI::TNSI-BASES-DE-DONNEES::C11": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-BASES-DE-DONNEES/C11/methodes"
+        ],
+        "set_digest": "sha256:4d8cb9b4b314390ee91812839e3717cc4463386b27b546b0948e4aad570c22f3"
+      },
+      "TNSI::TNSI-BASES-DE-DONNEES::C12": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-BASES-DE-DONNEES/C12/methodes"
+        ],
+        "set_digest": "sha256:1e27d47633012e7c519b86a812aaf563331902528149f5569a53c00210dd7f4b"
+      },
+      "TNSI::TNSI-BASES-DE-DONNEES::C2": {
+        "count": 3,
+        "unit_ids": [
+          "TNSI-BASES-DE-DONNEES/C2/corriges",
+          "TNSI-BASES-DE-DONNEES/C2/evaluations",
+          "TNSI-BASES-DE-DONNEES/C2/methodes"
+        ],
+        "set_digest": "sha256:a2dc5067978d1a237477b9c923aab7f53ca4ac10ac6d1745d509a8cf360bcdaf"
+      },
+      "TNSI::TNSI-BASES-DE-DONNEES::C3": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-BASES-DE-DONNEES/C3/evaluations",
+          "TNSI-BASES-DE-DONNEES/C3/methodes"
+        ],
+        "set_digest": "sha256:fe834033252d0e477e418dd43a5e0aa3fd0427f30543ab085d67194f12cb8f5b"
+      },
+      "TNSI::TNSI-BASES-DE-DONNEES::C4": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-BASES-DE-DONNEES/C4/corriges",
+          "TNSI-BASES-DE-DONNEES/C4/methodes"
+        ],
+        "set_digest": "sha256:a1e1a283f889de2350b5190152420409e53eb084a2113f67d798274cd1c5eec9"
+      },
+      "TNSI::TNSI-BASES-DE-DONNEES::C5": {
+        "count": 3,
+        "unit_ids": [
+          "TNSI-BASES-DE-DONNEES/C5/corriges",
+          "TNSI-BASES-DE-DONNEES/C5/evaluations",
+          "TNSI-BASES-DE-DONNEES/C5/methodes"
+        ],
+        "set_digest": "sha256:e96f3e543508ba1f1a8f0d0fbe584414ff47c30fcf49f720690c4277fa54ec5a"
+      },
+      "TNSI::TNSI-BASES-DE-DONNEES::C6": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-BASES-DE-DONNEES/C6/methodes"
+        ],
+        "set_digest": "sha256:6e35be53f775f0d202f6a156c300957dc4610676526976aec93fa82c6981522c"
+      },
+      "TNSI::TNSI-BASES-DE-DONNEES::C7": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-BASES-DE-DONNEES/C7/methodes"
+        ],
+        "set_digest": "sha256:110d4cb93e2ce215bc8d09ceeeb3f4ec90a8771dff2831e23bb21631957bd297"
+      },
+      "TNSI::TNSI-BASES-DE-DONNEES::C8": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-BASES-DE-DONNEES/C8/methodes"
+        ],
+        "set_digest": "sha256:71d4b59019bae68280f29ef66947c66ce8e471a145d5411d1c60b798bf6bd2a4"
+      },
+      "TNSI::TNSI-BASES-DE-DONNEES::C9": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-BASES-DE-DONNEES/C9/methodes"
+        ],
+        "set_digest": "sha256:82a58210f0d3f4f22d0a2c8c70d3cf7c2682b4146d0f374fd5b92c34cdae64bd"
+      },
+      "TNSI::TNSI-HISTOIRE-INFORMATIQUE::C1": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-HISTOIRE-INFORMATIQUE/C1/methodes"
+        ],
+        "set_digest": "sha256:f16430973994ff0da1e57982624ba2514cce067b8273290c58dbe00dfac112bd"
+      },
+      "TNSI::TNSI-HISTOIRE-INFORMATIQUE::C2": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-HISTOIRE-INFORMATIQUE/C2/methodes"
+        ],
+        "set_digest": "sha256:3576843cb241cfd00ab9115359a14f175c6e823178bcfe171db6099b16965081"
+      },
+      "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C1": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C1/corriges",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C1/methodes"
+        ],
+        "set_digest": "sha256:9da0ec9706cd7120bd095dcf81c51f40d8d3d0aeb56cfe0e78bc4edbc14476ab"
+      },
+      "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C10": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C10/evaluations",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C10/methodes"
+        ],
+        "set_digest": "sha256:d7d5072fe6361024d5b3ee0f33655293d24e6c485ba570e16f49557da7100ce9"
+      },
+      "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C11": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C11/methodes"
+        ],
+        "set_digest": "sha256:0bf5d4c49acd3550c7d7ded3fffeac17a9db4a9921866fd07478fd82581b5ffc"
+      },
+      "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C2": {
+        "count": 3,
+        "unit_ids": [
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C2/corriges",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C2/evaluations",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C2/methodes"
+        ],
+        "set_digest": "sha256:dacbefaeb3ea0def63e7de1042160dbb91286d90d0bcb410c532eb8d7c0aa802"
+      },
+      "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C3": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C3/corriges",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C3/methodes"
+        ],
+        "set_digest": "sha256:df0f288ece489fe330f145ed0b713b7c87d2da11c3b6d88ea3626e71a82a79b5"
+      },
+      "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C4": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C4/methodes"
+        ],
+        "set_digest": "sha256:44130cfea6ff606edffed5082245be60f7aa87c15595ebaf0d58c32f9396d35d"
+      },
+      "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C5": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C5/methodes"
+        ],
+        "set_digest": "sha256:5f0d69478ff2fd63c15e112c3a5c36de5a9d6bdf94d0e207938d0d1a1bc0c5ff"
+      },
+      "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C6": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C6/evaluations",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C6/methodes"
+        ],
+        "set_digest": "sha256:cde85a86f7595df3670f378e399f959487d234e3f5dd204fe5be138a5dd33a9c"
+      },
+      "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C7": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C7/evaluations",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C7/methodes"
+        ],
+        "set_digest": "sha256:84f42cdc4ccddcbdbcc1416a62d1e0e891c1deb91d857b12d8082fada5cb5ec5"
+      },
+      "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C8": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C8/corriges",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C8/methodes"
+        ],
+        "set_digest": "sha256:c464e07c4e3fc4530bfba62631530769f648512d1921b711061e43222eec05b0"
+      },
+      "TNSI::TNSI-LANGAGES-ET-PROGRAMMATION::C9": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C9/methodes"
+        ],
+        "set_digest": "sha256:8e1350192afba7880f201f0b0eb8d613fb2749ed5fb34aab8c0be7b8d2068951"
+      },
+      "TNSI::TNSI-PROJET::C1": {
+        "count": 6,
+        "unit_ids": [
+          "TNSI-PROJET/C1/corriges",
+          "TNSI-PROJET/C1/cours",
+          "TNSI-PROJET/C1/evaluations",
+          "TNSI-PROJET/C1/exercices",
+          "TNSI-PROJET/C1/methodes",
+          "TNSI-PROJET/C1/remediation"
+        ],
+        "set_digest": "sha256:b18677961808ae13408c7f3942fb46012e51676c282bae23f6e0273c9e676a57"
+      },
+      "TNSI::TNSI-PROJET::C2": {
+        "count": 6,
+        "unit_ids": [
+          "TNSI-PROJET/C2/corriges",
+          "TNSI-PROJET/C2/cours",
+          "TNSI-PROJET/C2/evaluations",
+          "TNSI-PROJET/C2/exercices",
+          "TNSI-PROJET/C2/methodes",
+          "TNSI-PROJET/C2/remediation"
+        ],
+        "set_digest": "sha256:83c093d310973f20651b0315153deefb40ae4d589a8d6e2f35ec51217ec119f8"
+      },
+      "TNSI::TNSI-STRUCTURES-DONNEES::C1": {
+        "count": 4,
+        "unit_ids": [
+          "TNSI-STRUCTURES-DONNEES/C1/corriges",
+          "TNSI-STRUCTURES-DONNEES/C1/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C1/exercices",
+          "TNSI-STRUCTURES-DONNEES/C1/methodes"
+        ],
+        "set_digest": "sha256:8f380a23fcbbe37deca8487ef3a57e43239b2afbffe8b0ca0ced7fceb09f9929"
+      },
+      "TNSI::TNSI-STRUCTURES-DONNEES::C10": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-STRUCTURES-DONNEES/C10/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C10/methodes"
+        ],
+        "set_digest": "sha256:01a444a4cebb2a59c7e26fcee5d6e487649aa1f220e3ee3d9d75515ac721c092"
+      },
+      "TNSI::TNSI-STRUCTURES-DONNEES::C11": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-STRUCTURES-DONNEES/C11/corriges",
+          "TNSI-STRUCTURES-DONNEES/C11/methodes"
+        ],
+        "set_digest": "sha256:b188cf05c182781639ad670c70f1bce4fe2354256bf7c8f6cdc2cc92779e0a09"
+      },
+      "TNSI::TNSI-STRUCTURES-DONNEES::C12": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-STRUCTURES-DONNEES/C12/methodes"
+        ],
+        "set_digest": "sha256:5a0e4a005242ddf7e24d3d13ed3fa353abead5d3ade939a9d28f8b88d54958fa"
+      },
+      "TNSI::TNSI-STRUCTURES-DONNEES::C13": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-STRUCTURES-DONNEES/C13/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C13/methodes"
+        ],
+        "set_digest": "sha256:0332647653605f0b6465000dd20248390e3a13c1c72612277350974ef8b37bb9"
+      },
+      "TNSI::TNSI-STRUCTURES-DONNEES::C14": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-STRUCTURES-DONNEES/C14/methodes"
+        ],
+        "set_digest": "sha256:ab0467af640c3b27b7390547339aed5ce13574aa2efb124ac4af20ae9e598ced"
+      },
+      "TNSI::TNSI-STRUCTURES-DONNEES::C2": {
+        "count": 3,
+        "unit_ids": [
+          "TNSI-STRUCTURES-DONNEES/C2/corriges",
+          "TNSI-STRUCTURES-DONNEES/C2/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C2/methodes"
+        ],
+        "set_digest": "sha256:8179e1716ffc9bb2d1821052dfc5ca07f5a0bd981d85e3f8194e9ffe6f786a09"
+      },
+      "TNSI::TNSI-STRUCTURES-DONNEES::C3": {
+        "count": 3,
+        "unit_ids": [
+          "TNSI-STRUCTURES-DONNEES/C3/corriges",
+          "TNSI-STRUCTURES-DONNEES/C3/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C3/methodes"
+        ],
+        "set_digest": "sha256:b6b7fed80179767b91580a8470c711830352dc5ddd5c5df74d4f58edc63ce791"
+      },
+      "TNSI::TNSI-STRUCTURES-DONNEES::C4": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-STRUCTURES-DONNEES/C4/methodes"
+        ],
+        "set_digest": "sha256:1c4aa6ab09f443390c6574d6a64c160da4f023c9b1fcf5bc4b462c652de44723"
+      },
+      "TNSI::TNSI-STRUCTURES-DONNEES::C5": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-STRUCTURES-DONNEES/C5/methodes"
+        ],
+        "set_digest": "sha256:db7897822d4e491999a5c7ac61fb064e1b633ffc12646c30514b013ce7e44776"
+      },
+      "TNSI::TNSI-STRUCTURES-DONNEES::C6": {
+        "count": 1,
+        "unit_ids": [
+          "TNSI-STRUCTURES-DONNEES/C6/methodes"
+        ],
+        "set_digest": "sha256:3b38046e2130d565e72bd47450d87a4d9d376f05fca47fe6d9b8c859ca0b5830"
+      },
+      "TNSI::TNSI-STRUCTURES-DONNEES::C7": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-STRUCTURES-DONNEES/C7/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C7/methodes"
+        ],
+        "set_digest": "sha256:d188e0c91c722c75d4f846606c508e2d8376437ccebe87fc503e7aeca88d99dd"
+      },
+      "TNSI::TNSI-STRUCTURES-DONNEES::C8": {
+        "count": 3,
+        "unit_ids": [
+          "TNSI-STRUCTURES-DONNEES/C8/corriges",
+          "TNSI-STRUCTURES-DONNEES/C8/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C8/methodes"
+        ],
+        "set_digest": "sha256:eea36e863be958127e2c4eb3dd63db65abfc81808efda3fc1f4982a88f929292"
+      },
+      "TNSI::TNSI-STRUCTURES-DONNEES::C9": {
+        "count": 2,
+        "unit_ids": [
+          "TNSI-STRUCTURES-DONNEES/C9/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C9/methodes"
+        ],
+        "set_digest": "sha256:76c961fb5c25d2d490b2fa15dc2aa115d4ae27bca7ff694676498a508221fa7a"
+      },
+      "TSPE::TSPE-CALCUL-INTEGRAL::C1": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-CALCUL-INTEGRAL/C1/methodes"
+        ],
+        "set_digest": "sha256:ea4dbb4f3211c4b8eb7211e92298b37bd8ec143b7e7fddf5d9adf527570e21e9"
+      },
+      "TSPE::TSPE-CALCUL-INTEGRAL::C3": {
+        "count": 2,
+        "unit_ids": [
+          "TSPE-CALCUL-INTEGRAL/C3/evaluations",
+          "TSPE-CALCUL-INTEGRAL/C3/methodes"
+        ],
+        "set_digest": "sha256:baf1146bfedefb4e05e449acdc8973329cb2ea0ee1dcd375c642c23ec61c17f0"
+      },
+      "TSPE::TSPE-CALCUL-INTEGRAL::C4": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-CALCUL-INTEGRAL/C4/qcm"
+        ],
+        "set_digest": "sha256:8df1938d57b8f124dd3d5a97caf062b9038e3fc6980192eb7ce2f920a286fb16"
+      },
+      "TSPE::TSPE-CALCUL-INTEGRAL::C5": {
+        "count": 2,
+        "unit_ids": [
+          "TSPE-CALCUL-INTEGRAL/C5/methodes",
+          "TSPE-CALCUL-INTEGRAL/C5/qcm"
+        ],
+        "set_digest": "sha256:6ad3d96cc6e87770aa655c7ea8d91819aaba330878fbe5fd32b7db39ae4e1120"
+      },
+      "TSPE::TSPE-CALCUL-INTEGRAL::C6": {
+        "count": 3,
+        "unit_ids": [
+          "TSPE-CALCUL-INTEGRAL/C6/evaluations",
+          "TSPE-CALCUL-INTEGRAL/C6/methodes",
+          "TSPE-CALCUL-INTEGRAL/C6/qcm"
+        ],
+        "set_digest": "sha256:081b5d11f030ea608ff5b830bf25d0140c5618f30fff16616ad7e818544346ba"
+      },
+      "TSPE::TSPE-CALCUL-INTEGRAL::C7": {
+        "count": 3,
+        "unit_ids": [
+          "TSPE-CALCUL-INTEGRAL/C7/evaluations",
+          "TSPE-CALCUL-INTEGRAL/C7/methodes",
+          "TSPE-CALCUL-INTEGRAL/C7/qcm"
+        ],
+        "set_digest": "sha256:ba2e497290b09be78687ef593df1f802e9d8556c56eef726ad3a50fb0715035a"
+      },
+      "TSPE::TSPE-CALCUL-INTEGRAL::C8": {
+        "count": 2,
+        "unit_ids": [
+          "TSPE-CALCUL-INTEGRAL/C8/methodes",
+          "TSPE-CALCUL-INTEGRAL/C8/qcm"
+        ],
+        "set_digest": "sha256:e210707ebf1da3b3ebc9424bb80a2e19c4a87653eeccac3eb11322e41c17ef1c"
+      },
+      "TSPE::TSPE-COMBINATOIRE::C1": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-COMBINATOIRE/C1/evaluations"
+        ],
+        "set_digest": "sha256:96d8c6c57e8ca60473c2c92c96c427d08c726313f0702ca07915815342bab360"
+      },
+      "TSPE::TSPE-COMBINATOIRE::C3": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-COMBINATOIRE/C3/methodes"
+        ],
+        "set_digest": "sha256:1226bb16f0958c46b5b7717a715ae46bebf89c6fd8e1eec222a974730c9da9b8"
+      },
+      "TSPE::TSPE-COMBINATOIRE::C4": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-COMBINATOIRE/C4/methodes"
+        ],
+        "set_digest": "sha256:ac90af502a6afdf28f8408a49cb1a051e78145a92e785ad14b8392032c19b986"
+      },
+      "TSPE::TSPE-GEOMETRIE-ESPACE::C1": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-GEOMETRIE-ESPACE/C1/evaluations"
+        ],
+        "set_digest": "sha256:8452c083844c473449de401bba35c8ca5aa4c8a9f99be7727dd5ab19ddd7d5ee"
+      },
+      "TSPE::TSPE-GEOMETRIE-ESPACE::C10": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-GEOMETRIE-ESPACE/C10/evaluations"
+        ],
+        "set_digest": "sha256:36dc970c0813641de9c10f87b7bdb1abe1703cf9a5927d0e65cc1465e717e17e"
+      },
+      "TSPE::TSPE-GEOMETRIE-ESPACE::C14": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-GEOMETRIE-ESPACE/C14/evaluations"
+        ],
+        "set_digest": "sha256:ee4e5c05c4a42efff3055c2d50d1094400890b802360793b90bfd84536ff92bd"
+      },
+      "TSPE::TSPE-GEOMETRIE-ESPACE::C16": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-GEOMETRIE-ESPACE/C16/evaluations"
+        ],
+        "set_digest": "sha256:a564173a4432d18f9ec168af40df13ec72c3b5cb028afc9a633c4e8ffc241727"
+      },
+      "TSPE::TSPE-GEOMETRIE-ESPACE::C2": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-GEOMETRIE-ESPACE/C2/evaluations"
+        ],
+        "set_digest": "sha256:510a7f5b6565055886534488adabce11511e1ec1a1aa323044d01085655ac31c"
+      },
+      "TSPE::TSPE-GEOMETRIE-ESPACE::C3": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-GEOMETRIE-ESPACE/C3/evaluations"
+        ],
+        "set_digest": "sha256:e99e820704f58c284247351c6c40e27152fa0708db41272d2bbe848d3ecb0dc0"
+      },
+      "TSPE::TSPE-GEOMETRIE-ESPACE::C4": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-GEOMETRIE-ESPACE/C4/evaluations"
+        ],
+        "set_digest": "sha256:4bb5db18f59af5d5bf8f99a3a7d525d07d9d6eb0453849ac70d3a1e9380a8b0a"
+      },
+      "TSPE::TSPE-GEOMETRIE-ESPACE::C5": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-GEOMETRIE-ESPACE/C5/evaluations"
+        ],
+        "set_digest": "sha256:e180aac02ebd450f69070d2b598a8f3d01c94fdcbf4ea84213c25c072b2bcb56"
+      },
+      "TSPE::TSPE-GEOMETRIE-ESPACE::C6": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-GEOMETRIE-ESPACE/C6/evaluations"
+        ],
+        "set_digest": "sha256:57aa55252c57680adde50fadefaf1b34b2e090c8d2de08f8ce0c75df77effc0e"
+      },
+      "TSPE::TSPE-GEOMETRIE-ESPACE::C9": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-GEOMETRIE-ESPACE/C9/evaluations"
+        ],
+        "set_digest": "sha256:210fc0977f71795e3cc5a598319faee68fa1e013de381baab39cb248b5abbf6c"
+      },
+      "TSPE::TSPE-LOGARITHME::C2": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-LOGARITHME/C2/methodes"
+        ],
+        "set_digest": "sha256:4f97f2b8ebfd08ec6977508fee0ff3356f0540bed78c333ae272efff72b3a02b"
+      },
+      "TSPE::TSPE-PRIMITIVES-EQDIFF::C4": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-PRIMITIVES-EQDIFF/C4/methodes"
+        ],
+        "set_digest": "sha256:92a519193dbd86c9377b5c3fca9d9f520624cd3865c832363fe02269b990eeb4"
+      },
+      "TSPE::TSPE-PRIMITIVES-EQDIFF::C5": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-PRIMITIVES-EQDIFF/C5/methodes"
+        ],
+        "set_digest": "sha256:527a689986a211569e97f5b6669e891e764e3ecbe14ddcd83922ba89b5936be9"
+      },
+      "TSPE::TSPE-PROBABILITES::C1": {
+        "count": 2,
+        "unit_ids": [
+          "TSPE-PROBABILITES/C1/methodes",
+          "TSPE-PROBABILITES/C1/qcm"
+        ],
+        "set_digest": "sha256:47732b4c27aef8ca0c92b92ea3f41b5512453f04dbc2e8d9644c9b0b06da5cdc"
+      },
+      "TSPE::TSPE-PROBABILITES::C10": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-PROBABILITES/C10/methodes"
+        ],
+        "set_digest": "sha256:cce717e31d6a216f67937ce3c0199ffd1963f5e75eaeeaf2f1273fa492b25bd4"
+      },
+      "TSPE::TSPE-PROBABILITES::C2": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-PROBABILITES/C2/evaluations"
+        ],
+        "set_digest": "sha256:ab2953c3702575cfeae2f6f5d74fb56df8a719085f12cd3057cade1a2a5e3e42"
+      },
+      "TSPE::TSPE-PROBABILITES::C3": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-PROBABILITES/C3/qcm"
+        ],
+        "set_digest": "sha256:d137689f1eb7874e0136b0b2bf607890576f586e8db61602177321f52ec19293"
+      },
+      "TSPE::TSPE-PROBABILITES::C4": {
+        "count": 2,
+        "unit_ids": [
+          "TSPE-PROBABILITES/C4/evaluations",
+          "TSPE-PROBABILITES/C4/qcm"
+        ],
+        "set_digest": "sha256:e3a4d56d0a9b2c2384136087e7a7764630106744e5ce20493cb0cf4144914ffd"
+      },
+      "TSPE::TSPE-PROBABILITES::C5": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-PROBABILITES/C5/methodes"
+        ],
+        "set_digest": "sha256:0d4e755a00b26fc5286daf167ee5c8a9e43c82319423edd14a713e62484d6ace"
+      },
+      "TSPE::TSPE-PROBABILITES::C6": {
+        "count": 3,
+        "unit_ids": [
+          "TSPE-PROBABILITES/C6/evaluations",
+          "TSPE-PROBABILITES/C6/methodes",
+          "TSPE-PROBABILITES/C6/qcm"
+        ],
+        "set_digest": "sha256:e5f2660ffc7a73d37450c91f6794c59ec793f62816c1a70cede16830dd46ba0c"
+      },
+      "TSPE::TSPE-PROBABILITES::C7": {
+        "count": 2,
+        "unit_ids": [
+          "TSPE-PROBABILITES/C7/evaluations",
+          "TSPE-PROBABILITES/C7/methodes"
+        ],
+        "set_digest": "sha256:09f8f6688fcb83112787b15bd253845e4e9f1c658891e1b112035bf433339eae"
+      },
+      "TSPE::TSPE-PROBABILITES::C8": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-PROBABILITES/C8/methodes"
+        ],
+        "set_digest": "sha256:51d0454ec3b4db1af177d879526e7ec0affeec045d15ca9260416575074b2638"
+      },
+      "TSPE::TSPE-PROBABILITES::C9": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-PROBABILITES/C9/methodes"
+        ],
+        "set_digest": "sha256:30a180dabf6cf3f6dbde5a4475502563a9480cc446a252e908b1a89069572569"
+      },
+      "TSPE::TSPE-SUITES-LIMITES::C6": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-SUITES-LIMITES/C6/remediation"
+        ],
+        "set_digest": "sha256:fffe98d05e292aa073641979600688b6fa73bb0972d05d44c9b631d68ebe193a"
+      },
+      "TSPE::TSPE-SUITES-LIMITES::C7": {
+        "count": 1,
+        "unit_ids": [
+          "TSPE-SUITES-LIMITES/C7/remediation"
+        ],
+        "set_digest": "sha256:dce516d82a205417d07c8a7a29ba5d89cca7cd05c28e29bf9ebee0e2c07ed7db"
+      }
+    },
+    "per_role": {
+      "corriges": {
+        "count": 25,
+        "unit_ids": [
+          "TCOMPL-ECHANTILLONNAGE/C7/corriges",
+          "TCOMPL-MODELES-EVOLUTION/C6/corriges",
+          "TCOMPL-TEMPS-ATTENTE/C7/corriges",
+          "TNSI-ALGORITHMIQUE/C13/corriges",
+          "TNSI-ALGORITHMIQUE/C2/corriges",
+          "TNSI-ALGORITHMIQUE/C4/corriges",
+          "TNSI-ALGORITHMIQUE/C8/corriges",
+          "TNSI-ALGORITHMIQUE/C9/corriges",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C1/corriges",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C2/corriges",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C7/corriges",
+          "TNSI-BASES-DE-DONNEES/C2/corriges",
+          "TNSI-BASES-DE-DONNEES/C4/corriges",
+          "TNSI-BASES-DE-DONNEES/C5/corriges",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C1/corriges",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C2/corriges",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C3/corriges",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C8/corriges",
+          "TNSI-PROJET/C1/corriges",
+          "TNSI-PROJET/C2/corriges",
+          "TNSI-STRUCTURES-DONNEES/C1/corriges",
+          "TNSI-STRUCTURES-DONNEES/C11/corriges",
+          "TNSI-STRUCTURES-DONNEES/C2/corriges",
+          "TNSI-STRUCTURES-DONNEES/C3/corriges",
+          "TNSI-STRUCTURES-DONNEES/C8/corriges"
+        ],
+        "set_digest": "sha256:19f37e0cf86cc5883cbb4773a9e75f503a4da4114fc4f1afeae7f2d205baed7c"
+      },
+      "cours": {
+        "count": 5,
+        "unit_ids": [
+          "TCOMPL-ECHANTILLONNAGE/C7/cours",
+          "TCOMPL-MODELES-EVOLUTION/C6/cours",
+          "TCOMPL-TEMPS-ATTENTE/C7/cours",
+          "TNSI-PROJET/C1/cours",
+          "TNSI-PROJET/C2/cours"
+        ],
+        "set_digest": "sha256:a9b43554848540e9a307fda41514bf64d77c95ee7e698c4c34105498fdc1628f"
+      },
+      "evaluations": {
+        "count": 66,
+        "unit_ids": [
+          "1NSI-ARCHITECTURE-OS/C4/evaluations",
+          "1NSI-LANGAGE/C2/evaluations",
+          "1NSI-LANGAGE/C3/evaluations",
+          "1NSI-LANGAGE/C7/evaluations",
+          "1NSI-PROJET-METHODES/C4/evaluations",
+          "1NSI-RESEAUX/C5/evaluations",
+          "1NSI-WEB-IHM/C2/evaluations",
+          "1NSI-WEB-IHM/C4/evaluations",
+          "1NSI-WEB-IHM/C5/evaluations",
+          "1NSI-WEB-IHM/C6/evaluations",
+          "1NSI-WEB-IHM/C7/evaluations",
+          "1SPE-SUITES/C8/evaluations",
+          "TCOMPL-CALCULS-AIRES/C1/evaluations",
+          "TCOMPL-ECHANTILLONNAGE/C7/evaluations",
+          "TCOMPL-MODELES-EVOLUTION/C6/evaluations",
+          "TCOMPL-TEMPS-ATTENTE/C7/evaluations",
+          "TEXP-ARITHMETIQUE/C2/evaluations",
+          "TEXP-ARITHMETIQUE/C3/evaluations",
+          "TEXP-ARITHMETIQUE/C9/evaluations",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C1/evaluations",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C3/evaluations",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C5/evaluations",
+          "TEXP-GRAPHES/C2/evaluations",
+          "TEXP-MATRICES-MARKOV/C2/evaluations",
+          "TEXP-MATRICES-MARKOV/C3/evaluations",
+          "TNSI-ALGORITHMIQUE/C10/evaluations",
+          "TNSI-ALGORITHMIQUE/C12/evaluations",
+          "TNSI-ALGORITHMIQUE/C13/evaluations",
+          "TNSI-ALGORITHMIQUE/C3/evaluations",
+          "TNSI-ALGORITHMIQUE/C4/evaluations",
+          "TNSI-ALGORITHMIQUE/C8/evaluations",
+          "TNSI-BASES-DE-DONNEES/C2/evaluations",
+          "TNSI-BASES-DE-DONNEES/C3/evaluations",
+          "TNSI-BASES-DE-DONNEES/C5/evaluations",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C10/evaluations",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C2/evaluations",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C6/evaluations",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C7/evaluations",
+          "TNSI-PROJET/C1/evaluations",
+          "TNSI-PROJET/C2/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C1/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C10/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C13/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C2/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C3/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C7/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C8/evaluations",
+          "TNSI-STRUCTURES-DONNEES/C9/evaluations",
+          "TSPE-CALCUL-INTEGRAL/C3/evaluations",
+          "TSPE-CALCUL-INTEGRAL/C6/evaluations",
+          "TSPE-CALCUL-INTEGRAL/C7/evaluations",
+          "TSPE-COMBINATOIRE/C1/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C1/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C10/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C14/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C16/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C2/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C3/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C4/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C5/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C6/evaluations",
+          "TSPE-GEOMETRIE-ESPACE/C9/evaluations",
+          "TSPE-PROBABILITES/C2/evaluations",
+          "TSPE-PROBABILITES/C4/evaluations",
+          "TSPE-PROBABILITES/C6/evaluations",
+          "TSPE-PROBABILITES/C7/evaluations"
+        ],
+        "set_digest": "sha256:4a63e07ba2ca937d4740e81fc93f100554fa946ddc365b008594d1d92fb67c2e"
+      },
+      "exercices": {
+        "count": 6,
+        "unit_ids": [
+          "TCOMPL-ECHANTILLONNAGE/C7/exercices",
+          "TCOMPL-MODELES-EVOLUTION/C6/exercices",
+          "TCOMPL-TEMPS-ATTENTE/C7/exercices",
+          "TNSI-PROJET/C1/exercices",
+          "TNSI-PROJET/C2/exercices",
+          "TNSI-STRUCTURES-DONNEES/C1/exercices"
+        ],
+        "set_digest": "sha256:d20ad94336ffd3bd54539f3fb44c33fe5c4e26e5f697860dbf130ffd3d931e03"
+      },
+      "methodes": {
+        "count": 121,
+        "unit_ids": [
+          "1NSI-ARCHITECTURE-OS/C1/methodes",
+          "1NSI-ARCHITECTURE-OS/C2/methodes",
+          "1NSI-ARCHITECTURE-OS/C3/methodes",
+          "1NSI-ARCHITECTURE-OS/C4/methodes",
+          "1NSI-ARCHITECTURE-OS/C5/methodes",
+          "1NSI-LANGAGE/C1/methodes",
+          "1NSI-LANGAGE/C2/methodes",
+          "1NSI-LANGAGE/C3/methodes",
+          "1NSI-LANGAGE/C4/methodes",
+          "1NSI-LANGAGE/C5/methodes",
+          "1NSI-LANGAGE/C6/methodes",
+          "1NSI-LANGAGE/C7/methodes",
+          "1NSI-PROJET-METHODES/C1/methodes",
+          "1NSI-PROJET-METHODES/C2/methodes",
+          "1NSI-PROJET-METHODES/C3/methodes",
+          "1NSI-PROJET-METHODES/C4/methodes",
+          "1NSI-RESEAUX/C1/methodes",
+          "1NSI-RESEAUX/C2/methodes",
+          "1NSI-RESEAUX/C3/methodes",
+          "1NSI-RESEAUX/C4/methodes",
+          "1NSI-RESEAUX/C5/methodes",
+          "1NSI-TABLES/C1/methodes",
+          "1NSI-TABLES/C2/methodes",
+          "1NSI-TABLES/C3/methodes",
+          "1NSI-TABLES/C4/methodes",
+          "1NSI-TYPES-BASE/C1/methodes",
+          "1NSI-TYPES-BASE/C2/methodes",
+          "1NSI-TYPES-BASE/C3/methodes",
+          "1NSI-TYPES-BASE/C4/methodes",
+          "1NSI-TYPES-BASE/C5/methodes",
+          "1NSI-WEB-IHM/C1/methodes",
+          "1NSI-WEB-IHM/C2/methodes",
+          "1NSI-WEB-IHM/C3/methodes",
+          "1NSI-WEB-IHM/C4/methodes",
+          "1NSI-WEB-IHM/C5/methodes",
+          "1NSI-WEB-IHM/C6/methodes",
+          "1NSI-WEB-IHM/C7/methodes",
+          "1NSI-WEB-IHM/C8/methodes",
+          "1NSI-WEB-IHM/C9/methodes",
+          "TCOMPL-ECHANTILLONNAGE/C7/methodes",
+          "TCOMPL-MODELES-EVOLUTION/C6/methodes",
+          "TCOMPL-TEMPS-ATTENTE/C7/methodes",
+          "TNSI-ALGORITHMIQUE/C1/methodes",
+          "TNSI-ALGORITHMIQUE/C10/methodes",
+          "TNSI-ALGORITHMIQUE/C11/methodes",
+          "TNSI-ALGORITHMIQUE/C12/methodes",
+          "TNSI-ALGORITHMIQUE/C13/methodes",
+          "TNSI-ALGORITHMIQUE/C2/methodes",
+          "TNSI-ALGORITHMIQUE/C3/methodes",
+          "TNSI-ALGORITHMIQUE/C4/methodes",
+          "TNSI-ALGORITHMIQUE/C5/methodes",
+          "TNSI-ALGORITHMIQUE/C6/methodes",
+          "TNSI-ALGORITHMIQUE/C7/methodes",
+          "TNSI-ALGORITHMIQUE/C8/methodes",
+          "TNSI-ALGORITHMIQUE/C9/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C1/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C2/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C3/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C4/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C5/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C6/methodes",
+          "TNSI-ARCHITECTURES-MATERIELLES-SY/C7/methodes",
+          "TNSI-BASES-DE-DONNEES/C1/methodes",
+          "TNSI-BASES-DE-DONNEES/C10/methodes",
+          "TNSI-BASES-DE-DONNEES/C11/methodes",
+          "TNSI-BASES-DE-DONNEES/C12/methodes",
+          "TNSI-BASES-DE-DONNEES/C2/methodes",
+          "TNSI-BASES-DE-DONNEES/C3/methodes",
+          "TNSI-BASES-DE-DONNEES/C4/methodes",
+          "TNSI-BASES-DE-DONNEES/C5/methodes",
+          "TNSI-BASES-DE-DONNEES/C6/methodes",
+          "TNSI-BASES-DE-DONNEES/C7/methodes",
+          "TNSI-BASES-DE-DONNEES/C8/methodes",
+          "TNSI-BASES-DE-DONNEES/C9/methodes",
+          "TNSI-HISTOIRE-INFORMATIQUE/C1/methodes",
+          "TNSI-HISTOIRE-INFORMATIQUE/C2/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C1/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C10/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C11/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C2/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C3/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C4/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C5/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C6/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C7/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C8/methodes",
+          "TNSI-LANGAGES-ET-PROGRAMMATION/C9/methodes",
+          "TNSI-PROJET/C1/methodes",
+          "TNSI-PROJET/C2/methodes",
+          "TNSI-STRUCTURES-DONNEES/C1/methodes",
+          "TNSI-STRUCTURES-DONNEES/C10/methodes",
+          "TNSI-STRUCTURES-DONNEES/C11/methodes",
+          "TNSI-STRUCTURES-DONNEES/C12/methodes",
+          "TNSI-STRUCTURES-DONNEES/C13/methodes",
+          "TNSI-STRUCTURES-DONNEES/C14/methodes",
+          "TNSI-STRUCTURES-DONNEES/C2/methodes",
+          "TNSI-STRUCTURES-DONNEES/C3/methodes",
+          "TNSI-STRUCTURES-DONNEES/C4/methodes",
+          "TNSI-STRUCTURES-DONNEES/C5/methodes",
+          "TNSI-STRUCTURES-DONNEES/C6/methodes",
+          "TNSI-STRUCTURES-DONNEES/C7/methodes",
+          "TNSI-STRUCTURES-DONNEES/C8/methodes",
+          "TNSI-STRUCTURES-DONNEES/C9/methodes",
+          "TSPE-CALCUL-INTEGRAL/C1/methodes",
+          "TSPE-CALCUL-INTEGRAL/C3/methodes",
+          "TSPE-CALCUL-INTEGRAL/C5/methodes",
+          "TSPE-CALCUL-INTEGRAL/C6/methodes",
+          "TSPE-CALCUL-INTEGRAL/C7/methodes",
+          "TSPE-CALCUL-INTEGRAL/C8/methodes",
+          "TSPE-COMBINATOIRE/C3/methodes",
+          "TSPE-COMBINATOIRE/C4/methodes",
+          "TSPE-LOGARITHME/C2/methodes",
+          "TSPE-PRIMITIVES-EQDIFF/C4/methodes",
+          "TSPE-PRIMITIVES-EQDIFF/C5/methodes",
+          "TSPE-PROBABILITES/C1/methodes",
+          "TSPE-PROBABILITES/C10/methodes",
+          "TSPE-PROBABILITES/C5/methodes",
+          "TSPE-PROBABILITES/C6/methodes",
+          "TSPE-PROBABILITES/C7/methodes",
+          "TSPE-PROBABILITES/C8/methodes",
+          "TSPE-PROBABILITES/C9/methodes"
+        ],
+        "set_digest": "sha256:7db38df1fd0a635bfeec83bf43a4d74c586b4d594c0357b3e991e9ed408bd397"
+      },
+      "qcm": {
+        "count": 37,
+        "unit_ids": [
+          "TCOMPL-ECHANTILLONNAGE/C6/qcm",
+          "TCOMPL-ECHANTILLONNAGE/C7/qcm",
+          "TCOMPL-INFERENCE-BAYESIENNE/C5/qcm",
+          "TCOMPL-LOGARITHME-HISTORIQUE/C4/qcm",
+          "TCOMPL-MODELES-EVOLUTION/C3/qcm",
+          "TCOMPL-MODELES-EVOLUTION/C6/qcm",
+          "TCOMPL-MODELES-FONCTION/C2/qcm",
+          "TCOMPL-MODELES-FONCTION/C3/qcm",
+          "TCOMPL-MODELES-FONCTION/C6/qcm",
+          "TCOMPL-MODELES-FONCTION/C7/qcm",
+          "TCOMPL-TEMPS-ATTENTE/C4/qcm",
+          "TCOMPL-TEMPS-ATTENTE/C5/qcm",
+          "TCOMPL-TEMPS-ATTENTE/C6/qcm",
+          "TCOMPL-TEMPS-ATTENTE/C7/qcm",
+          "TEXP-ARITHMETIQUE/C3/qcm",
+          "TEXP-ARITHMETIQUE/C4/qcm",
+          "TEXP-ARITHMETIQUE/C6/qcm",
+          "TEXP-ARITHMETIQUE/C7/qcm",
+          "TEXP-ARITHMETIQUE/C8/qcm",
+          "TEXP-ARITHMETIQUE/C9/qcm",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C2/qcm",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C5/qcm",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C3/qcm",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C4/qcm",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C6/qcm",
+          "TEXP-GRAPHES/C2/qcm",
+          "TEXP-MATRICES-MARKOV/C2/qcm",
+          "TEXP-MATRICES-MARKOV/C6/qcm",
+          "TSPE-CALCUL-INTEGRAL/C4/qcm",
+          "TSPE-CALCUL-INTEGRAL/C5/qcm",
+          "TSPE-CALCUL-INTEGRAL/C6/qcm",
+          "TSPE-CALCUL-INTEGRAL/C7/qcm",
+          "TSPE-CALCUL-INTEGRAL/C8/qcm",
+          "TSPE-PROBABILITES/C1/qcm",
+          "TSPE-PROBABILITES/C3/qcm",
+          "TSPE-PROBABILITES/C4/qcm",
+          "TSPE-PROBABILITES/C6/qcm"
+        ],
+        "set_digest": "sha256:6b5e841d26e297f79632d5f38d560e9fca66240b73de63807a787b50930ffee3"
+      },
+      "remediation": {
+        "count": 70,
+        "unit_ids": [
+          "TCOMPL-CALCULS-AIRES/C1/remediation",
+          "TCOMPL-CALCULS-AIRES/C2/remediation",
+          "TCOMPL-CALCULS-AIRES/C3/remediation",
+          "TCOMPL-CALCULS-AIRES/C5/remediation",
+          "TCOMPL-CALCULS-AIRES/C6/remediation",
+          "TCOMPL-CORRELATION-CAUSALITE/C1/remediation",
+          "TCOMPL-CORRELATION-CAUSALITE/C2/remediation",
+          "TCOMPL-CORRELATION-CAUSALITE/C3/remediation",
+          "TCOMPL-CORRELATION-CAUSALITE/C4/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C1/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C2/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C4/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C5/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C6/remediation",
+          "TCOMPL-ECHANTILLONNAGE/C7/remediation",
+          "TCOMPL-INEGALITES/C1/remediation",
+          "TCOMPL-INEGALITES/C2/remediation",
+          "TCOMPL-INEGALITES/C4/remediation",
+          "TCOMPL-INEGALITES/C5/remediation",
+          "TCOMPL-INFERENCE-BAYESIENNE/C1/remediation",
+          "TCOMPL-INFERENCE-BAYESIENNE/C3/remediation",
+          "TCOMPL-INFERENCE-BAYESIENNE/C4/remediation",
+          "TCOMPL-INFERENCE-BAYESIENNE/C5/remediation",
+          "TCOMPL-LOGARITHME-HISTORIQUE/C1/remediation",
+          "TCOMPL-LOGARITHME-HISTORIQUE/C2/remediation",
+          "TCOMPL-LOGARITHME-HISTORIQUE/C4/remediation",
+          "TCOMPL-LOGARITHME-HISTORIQUE/C5/remediation",
+          "TCOMPL-MODELES-EVOLUTION/C1/remediation",
+          "TCOMPL-MODELES-EVOLUTION/C2/remediation",
+          "TCOMPL-MODELES-EVOLUTION/C3/remediation",
+          "TCOMPL-MODELES-EVOLUTION/C4/remediation",
+          "TCOMPL-MODELES-EVOLUTION/C6/remediation",
+          "TCOMPL-MODELES-FONCTION/C2/remediation",
+          "TCOMPL-MODELES-FONCTION/C3/remediation",
+          "TCOMPL-MODELES-FONCTION/C4/remediation",
+          "TCOMPL-MODELES-FONCTION/C6/remediation",
+          "TCOMPL-MODELES-FONCTION/C7/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C1/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C2/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C3/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C4/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C6/remediation",
+          "TCOMPL-TEMPS-ATTENTE/C7/remediation",
+          "TEXP-ARITHMETIQUE/C5/remediation",
+          "TEXP-ARITHMETIQUE/C6/remediation",
+          "TEXP-ARITHMETIQUE/C7/remediation",
+          "TEXP-ARITHMETIQUE/C8/remediation",
+          "TEXP-ARITHMETIQUE/C9/remediation",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C2/remediation",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C3/remediation",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C4/remediation",
+          "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C5/remediation",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C2/remediation",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C3/remediation",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C4/remediation",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C5/remediation",
+          "TEXP-COMPLEXES-TRIGO-POLYNOMES/C6/remediation",
+          "TEXP-GRAPHES/C1/remediation",
+          "TEXP-GRAPHES/C2/remediation",
+          "TEXP-GRAPHES/C3/remediation",
+          "TEXP-GRAPHES/C5/remediation",
+          "TEXP-MATRICES-MARKOV/C2/remediation",
+          "TEXP-MATRICES-MARKOV/C3/remediation",
+          "TEXP-MATRICES-MARKOV/C4/remediation",
+          "TEXP-MATRICES-MARKOV/C6/remediation",
+          "TEXP-MATRICES-MARKOV/C7/remediation",
+          "TNSI-PROJET/C1/remediation",
+          "TNSI-PROJET/C2/remediation",
+          "TSPE-SUITES-LIMITES/C6/remediation",
+          "TSPE-SUITES-LIMITES/C7/remediation"
+        ],
+        "set_digest": "sha256:2016e8a119e2be6ed8a1b8c5e1388b0ddf8cac573e74925a1866a52e7b612f74"
+      }
+    }
   },
-  "backlog_set_digest": "sha256:63e634b8c1b94c0a135f0d10db2164dbd95d9e4973f4b7bd769260a5bf405d23",
+  "open_clone_debt": {
+    "objects_on_invalid_credit": 0,
+    "objects_with_indeterminate_credit": 1828,
+    "ambiguous_canonical_groups": 288
+  },
+  "backlog_set_digest": "sha256:148abc8330f1078291432ee1259bede2705be763aa94642df335f0257fffd097",
   "authoring_units": [
     "1NSI-ARCHITECTURE-OS/C1/methodes",
-    "1NSI-ARCHITECTURE-OS/C1/remediation",
     "1NSI-ARCHITECTURE-OS/C2/methodes",
-    "1NSI-ARCHITECTURE-OS/C2/remediation",
     "1NSI-ARCHITECTURE-OS/C3/methodes",
-    "1NSI-ARCHITECTURE-OS/C3/remediation",
+    "1NSI-ARCHITECTURE-OS/C4/evaluations",
     "1NSI-ARCHITECTURE-OS/C4/methodes",
-    "1NSI-ARCHITECTURE-OS/C4/remediation",
     "1NSI-ARCHITECTURE-OS/C5/methodes",
     "1NSI-LANGAGE/C1/methodes",
-    "1NSI-LANGAGE/C1/remediation",
+    "1NSI-LANGAGE/C2/evaluations",
     "1NSI-LANGAGE/C2/methodes",
-    "1NSI-LANGAGE/C2/remediation",
+    "1NSI-LANGAGE/C3/evaluations",
     "1NSI-LANGAGE/C3/methodes",
-    "1NSI-LANGAGE/C3/remediation",
     "1NSI-LANGAGE/C4/methodes",
     "1NSI-LANGAGE/C5/methodes",
-    "1NSI-LANGAGE/C5/remediation",
     "1NSI-LANGAGE/C6/methodes",
-    "1NSI-LANGAGE/C6/remediation",
+    "1NSI-LANGAGE/C7/evaluations",
     "1NSI-LANGAGE/C7/methodes",
-    "1NSI-LANGAGE/C7/remediation",
     "1NSI-PROJET-METHODES/C1/methodes",
-    "1NSI-PROJET-METHODES/C1/remediation",
     "1NSI-PROJET-METHODES/C2/methodes",
-    "1NSI-PROJET-METHODES/C2/remediation",
     "1NSI-PROJET-METHODES/C3/methodes",
+    "1NSI-PROJET-METHODES/C4/evaluations",
     "1NSI-PROJET-METHODES/C4/methodes",
-    "1NSI-PROJET-METHODES/C4/remediation",
     "1NSI-RESEAUX/C1/methodes",
     "1NSI-RESEAUX/C2/methodes",
-    "1NSI-RESEAUX/C2/remediation",
     "1NSI-RESEAUX/C3/methodes",
-    "1NSI-RESEAUX/C3/remediation",
     "1NSI-RESEAUX/C4/methodes",
-    "1NSI-RESEAUX/C4/remediation",
+    "1NSI-RESEAUX/C5/evaluations",
     "1NSI-RESEAUX/C5/methodes",
-    "1NSI-RESEAUX/C5/remediation",
     "1NSI-TABLES/C1/methodes",
-    "1NSI-TABLES/C1/remediation",
     "1NSI-TABLES/C2/methodes",
     "1NSI-TABLES/C3/methodes",
-    "1NSI-TABLES/C3/remediation",
     "1NSI-TABLES/C4/methodes",
-    "1NSI-TABLES/C4/remediation",
     "1NSI-TYPES-BASE/C1/methodes",
-    "1NSI-TYPES-BASE/C1/remediation",
     "1NSI-TYPES-BASE/C2/methodes",
-    "1NSI-TYPES-BASE/C2/remediation",
     "1NSI-TYPES-BASE/C3/methodes",
     "1NSI-TYPES-BASE/C4/methodes",
-    "1NSI-TYPES-BASE/C4/remediation",
     "1NSI-TYPES-BASE/C5/methodes",
-    "1NSI-TYPES-BASE/C5/remediation",
     "1NSI-WEB-IHM/C1/methodes",
-    "1NSI-WEB-IHM/C1/remediation",
+    "1NSI-WEB-IHM/C2/evaluations",
     "1NSI-WEB-IHM/C2/methodes",
-    "1NSI-WEB-IHM/C2/remediation",
     "1NSI-WEB-IHM/C3/methodes",
-    "1NSI-WEB-IHM/C3/remediation",
+    "1NSI-WEB-IHM/C4/evaluations",
     "1NSI-WEB-IHM/C4/methodes",
-    "1NSI-WEB-IHM/C4/remediation",
+    "1NSI-WEB-IHM/C5/evaluations",
     "1NSI-WEB-IHM/C5/methodes",
-    "1NSI-WEB-IHM/C5/remediation",
+    "1NSI-WEB-IHM/C6/evaluations",
     "1NSI-WEB-IHM/C6/methodes",
-    "1NSI-WEB-IHM/C6/remediation",
+    "1NSI-WEB-IHM/C7/evaluations",
     "1NSI-WEB-IHM/C7/methodes",
-    "1NSI-WEB-IHM/C7/remediation",
     "1NSI-WEB-IHM/C8/methodes",
-    "1NSI-WEB-IHM/C8/remediation",
     "1NSI-WEB-IHM/C9/methodes",
+    "1SPE-SUITES/C8/evaluations",
+    "TCOMPL-CALCULS-AIRES/C1/evaluations",
     "TCOMPL-CALCULS-AIRES/C1/remediation",
     "TCOMPL-CALCULS-AIRES/C2/remediation",
     "TCOMPL-CALCULS-AIRES/C3/remediation",
@@ -367,11 +3241,14 @@
     "TCOMPL-ECHANTILLONNAGE/C2/remediation",
     "TCOMPL-ECHANTILLONNAGE/C4/remediation",
     "TCOMPL-ECHANTILLONNAGE/C5/remediation",
+    "TCOMPL-ECHANTILLONNAGE/C6/qcm",
     "TCOMPL-ECHANTILLONNAGE/C6/remediation",
     "TCOMPL-ECHANTILLONNAGE/C7/corriges",
     "TCOMPL-ECHANTILLONNAGE/C7/cours",
+    "TCOMPL-ECHANTILLONNAGE/C7/evaluations",
     "TCOMPL-ECHANTILLONNAGE/C7/exercices",
     "TCOMPL-ECHANTILLONNAGE/C7/methodes",
+    "TCOMPL-ECHANTILLONNAGE/C7/qcm",
     "TCOMPL-ECHANTILLONNAGE/C7/remediation",
     "TCOMPL-INEGALITES/C1/remediation",
     "TCOMPL-INEGALITES/C2/remediation",
@@ -380,222 +3257,253 @@
     "TCOMPL-INFERENCE-BAYESIENNE/C1/remediation",
     "TCOMPL-INFERENCE-BAYESIENNE/C3/remediation",
     "TCOMPL-INFERENCE-BAYESIENNE/C4/remediation",
+    "TCOMPL-INFERENCE-BAYESIENNE/C5/qcm",
     "TCOMPL-INFERENCE-BAYESIENNE/C5/remediation",
     "TCOMPL-LOGARITHME-HISTORIQUE/C1/remediation",
     "TCOMPL-LOGARITHME-HISTORIQUE/C2/remediation",
+    "TCOMPL-LOGARITHME-HISTORIQUE/C4/qcm",
     "TCOMPL-LOGARITHME-HISTORIQUE/C4/remediation",
     "TCOMPL-LOGARITHME-HISTORIQUE/C5/remediation",
     "TCOMPL-MODELES-EVOLUTION/C1/remediation",
     "TCOMPL-MODELES-EVOLUTION/C2/remediation",
+    "TCOMPL-MODELES-EVOLUTION/C3/qcm",
     "TCOMPL-MODELES-EVOLUTION/C3/remediation",
     "TCOMPL-MODELES-EVOLUTION/C4/remediation",
     "TCOMPL-MODELES-EVOLUTION/C6/corriges",
     "TCOMPL-MODELES-EVOLUTION/C6/cours",
+    "TCOMPL-MODELES-EVOLUTION/C6/evaluations",
     "TCOMPL-MODELES-EVOLUTION/C6/exercices",
     "TCOMPL-MODELES-EVOLUTION/C6/methodes",
+    "TCOMPL-MODELES-EVOLUTION/C6/qcm",
     "TCOMPL-MODELES-EVOLUTION/C6/remediation",
+    "TCOMPL-MODELES-FONCTION/C2/qcm",
     "TCOMPL-MODELES-FONCTION/C2/remediation",
+    "TCOMPL-MODELES-FONCTION/C3/qcm",
     "TCOMPL-MODELES-FONCTION/C3/remediation",
     "TCOMPL-MODELES-FONCTION/C4/remediation",
+    "TCOMPL-MODELES-FONCTION/C6/qcm",
     "TCOMPL-MODELES-FONCTION/C6/remediation",
+    "TCOMPL-MODELES-FONCTION/C7/qcm",
     "TCOMPL-MODELES-FONCTION/C7/remediation",
     "TCOMPL-TEMPS-ATTENTE/C1/remediation",
     "TCOMPL-TEMPS-ATTENTE/C2/remediation",
     "TCOMPL-TEMPS-ATTENTE/C3/remediation",
+    "TCOMPL-TEMPS-ATTENTE/C4/qcm",
     "TCOMPL-TEMPS-ATTENTE/C4/remediation",
+    "TCOMPL-TEMPS-ATTENTE/C5/qcm",
+    "TCOMPL-TEMPS-ATTENTE/C6/qcm",
     "TCOMPL-TEMPS-ATTENTE/C6/remediation",
     "TCOMPL-TEMPS-ATTENTE/C7/corriges",
     "TCOMPL-TEMPS-ATTENTE/C7/cours",
+    "TCOMPL-TEMPS-ATTENTE/C7/evaluations",
     "TCOMPL-TEMPS-ATTENTE/C7/exercices",
     "TCOMPL-TEMPS-ATTENTE/C7/methodes",
+    "TCOMPL-TEMPS-ATTENTE/C7/qcm",
     "TCOMPL-TEMPS-ATTENTE/C7/remediation",
+    "TEXP-ARITHMETIQUE/C2/evaluations",
+    "TEXP-ARITHMETIQUE/C3/evaluations",
+    "TEXP-ARITHMETIQUE/C3/qcm",
+    "TEXP-ARITHMETIQUE/C4/qcm",
     "TEXP-ARITHMETIQUE/C5/remediation",
+    "TEXP-ARITHMETIQUE/C6/qcm",
     "TEXP-ARITHMETIQUE/C6/remediation",
+    "TEXP-ARITHMETIQUE/C7/qcm",
     "TEXP-ARITHMETIQUE/C7/remediation",
+    "TEXP-ARITHMETIQUE/C8/qcm",
     "TEXP-ARITHMETIQUE/C8/remediation",
+    "TEXP-ARITHMETIQUE/C9/evaluations",
+    "TEXP-ARITHMETIQUE/C9/qcm",
     "TEXP-ARITHMETIQUE/C9/remediation",
+    "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C2/qcm",
     "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C2/remediation",
     "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C3/remediation",
     "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C4/remediation",
+    "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C5/qcm",
     "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/C5/remediation",
+    "TEXP-COMPLEXES-TRIGO-POLYNOMES/C1/evaluations",
     "TEXP-COMPLEXES-TRIGO-POLYNOMES/C2/remediation",
+    "TEXP-COMPLEXES-TRIGO-POLYNOMES/C3/evaluations",
+    "TEXP-COMPLEXES-TRIGO-POLYNOMES/C3/qcm",
     "TEXP-COMPLEXES-TRIGO-POLYNOMES/C3/remediation",
+    "TEXP-COMPLEXES-TRIGO-POLYNOMES/C4/qcm",
     "TEXP-COMPLEXES-TRIGO-POLYNOMES/C4/remediation",
+    "TEXP-COMPLEXES-TRIGO-POLYNOMES/C5/evaluations",
     "TEXP-COMPLEXES-TRIGO-POLYNOMES/C5/remediation",
-    "TEXP-COMPLEXES-TRIGO-POLYNOMES/C6/methodes",
+    "TEXP-COMPLEXES-TRIGO-POLYNOMES/C6/qcm",
     "TEXP-COMPLEXES-TRIGO-POLYNOMES/C6/remediation",
     "TEXP-GRAPHES/C1/remediation",
+    "TEXP-GRAPHES/C2/evaluations",
+    "TEXP-GRAPHES/C2/qcm",
     "TEXP-GRAPHES/C2/remediation",
     "TEXP-GRAPHES/C3/remediation",
     "TEXP-GRAPHES/C5/remediation",
+    "TEXP-MATRICES-MARKOV/C2/evaluations",
+    "TEXP-MATRICES-MARKOV/C2/qcm",
     "TEXP-MATRICES-MARKOV/C2/remediation",
+    "TEXP-MATRICES-MARKOV/C3/evaluations",
     "TEXP-MATRICES-MARKOV/C3/remediation",
     "TEXP-MATRICES-MARKOV/C4/remediation",
+    "TEXP-MATRICES-MARKOV/C6/qcm",
     "TEXP-MATRICES-MARKOV/C6/remediation",
     "TEXP-MATRICES-MARKOV/C7/remediation",
     "TNSI-ALGORITHMIQUE/C1/methodes",
-    "TNSI-ALGORITHMIQUE/C1/remediation",
+    "TNSI-ALGORITHMIQUE/C10/evaluations",
     "TNSI-ALGORITHMIQUE/C10/methodes",
-    "TNSI-ALGORITHMIQUE/C10/remediation",
     "TNSI-ALGORITHMIQUE/C11/methodes",
-    "TNSI-ALGORITHMIQUE/C11/remediation",
+    "TNSI-ALGORITHMIQUE/C12/evaluations",
     "TNSI-ALGORITHMIQUE/C12/methodes",
-    "TNSI-ALGORITHMIQUE/C12/remediation",
+    "TNSI-ALGORITHMIQUE/C13/corriges",
+    "TNSI-ALGORITHMIQUE/C13/evaluations",
     "TNSI-ALGORITHMIQUE/C13/methodes",
-    "TNSI-ALGORITHMIQUE/C13/remediation",
+    "TNSI-ALGORITHMIQUE/C2/corriges",
     "TNSI-ALGORITHMIQUE/C2/methodes",
-    "TNSI-ALGORITHMIQUE/C2/remediation",
+    "TNSI-ALGORITHMIQUE/C3/evaluations",
     "TNSI-ALGORITHMIQUE/C3/methodes",
-    "TNSI-ALGORITHMIQUE/C3/remediation",
+    "TNSI-ALGORITHMIQUE/C4/corriges",
+    "TNSI-ALGORITHMIQUE/C4/evaluations",
     "TNSI-ALGORITHMIQUE/C4/methodes",
     "TNSI-ALGORITHMIQUE/C5/methodes",
-    "TNSI-ALGORITHMIQUE/C5/remediation",
     "TNSI-ALGORITHMIQUE/C6/methodes",
-    "TNSI-ALGORITHMIQUE/C6/remediation",
     "TNSI-ALGORITHMIQUE/C7/methodes",
-    "TNSI-ALGORITHMIQUE/C7/remediation",
+    "TNSI-ALGORITHMIQUE/C8/corriges",
+    "TNSI-ALGORITHMIQUE/C8/evaluations",
     "TNSI-ALGORITHMIQUE/C8/methodes",
-    "TNSI-ALGORITHMIQUE/C8/remediation",
+    "TNSI-ALGORITHMIQUE/C9/corriges",
     "TNSI-ALGORITHMIQUE/C9/methodes",
-    "TNSI-ALGORITHMIQUE/C9/remediation",
+    "TNSI-ARCHITECTURES-MATERIELLES-SY/C1/corriges",
     "TNSI-ARCHITECTURES-MATERIELLES-SY/C1/methodes",
-    "TNSI-ARCHITECTURES-MATERIELLES-SY/C1/remediation",
+    "TNSI-ARCHITECTURES-MATERIELLES-SY/C2/corriges",
     "TNSI-ARCHITECTURES-MATERIELLES-SY/C2/methodes",
     "TNSI-ARCHITECTURES-MATERIELLES-SY/C3/methodes",
-    "TNSI-ARCHITECTURES-MATERIELLES-SY/C3/remediation",
     "TNSI-ARCHITECTURES-MATERIELLES-SY/C4/methodes",
-    "TNSI-ARCHITECTURES-MATERIELLES-SY/C4/remediation",
     "TNSI-ARCHITECTURES-MATERIELLES-SY/C5/methodes",
-    "TNSI-ARCHITECTURES-MATERIELLES-SY/C5/remediation",
     "TNSI-ARCHITECTURES-MATERIELLES-SY/C6/methodes",
-    "TNSI-ARCHITECTURES-MATERIELLES-SY/C6/remediation",
+    "TNSI-ARCHITECTURES-MATERIELLES-SY/C7/corriges",
     "TNSI-ARCHITECTURES-MATERIELLES-SY/C7/methodes",
-    "TNSI-ARCHITECTURES-MATERIELLES-SY/C7/remediation",
     "TNSI-BASES-DE-DONNEES/C1/methodes",
-    "TNSI-BASES-DE-DONNEES/C1/remediation",
     "TNSI-BASES-DE-DONNEES/C10/methodes",
-    "TNSI-BASES-DE-DONNEES/C10/remediation",
     "TNSI-BASES-DE-DONNEES/C11/methodes",
-    "TNSI-BASES-DE-DONNEES/C11/remediation",
     "TNSI-BASES-DE-DONNEES/C12/methodes",
-    "TNSI-BASES-DE-DONNEES/C12/remediation",
+    "TNSI-BASES-DE-DONNEES/C2/corriges",
+    "TNSI-BASES-DE-DONNEES/C2/evaluations",
     "TNSI-BASES-DE-DONNEES/C2/methodes",
-    "TNSI-BASES-DE-DONNEES/C2/remediation",
+    "TNSI-BASES-DE-DONNEES/C3/evaluations",
     "TNSI-BASES-DE-DONNEES/C3/methodes",
+    "TNSI-BASES-DE-DONNEES/C4/corriges",
     "TNSI-BASES-DE-DONNEES/C4/methodes",
-    "TNSI-BASES-DE-DONNEES/C4/remediation",
+    "TNSI-BASES-DE-DONNEES/C5/corriges",
+    "TNSI-BASES-DE-DONNEES/C5/evaluations",
     "TNSI-BASES-DE-DONNEES/C5/methodes",
-    "TNSI-BASES-DE-DONNEES/C5/remediation",
     "TNSI-BASES-DE-DONNEES/C6/methodes",
-    "TNSI-BASES-DE-DONNEES/C6/remediation",
     "TNSI-BASES-DE-DONNEES/C7/methodes",
-    "TNSI-BASES-DE-DONNEES/C7/remediation",
     "TNSI-BASES-DE-DONNEES/C8/methodes",
-    "TNSI-BASES-DE-DONNEES/C8/remediation",
     "TNSI-BASES-DE-DONNEES/C9/methodes",
-    "TNSI-BASES-DE-DONNEES/C9/remediation",
     "TNSI-HISTOIRE-INFORMATIQUE/C1/methodes",
     "TNSI-HISTOIRE-INFORMATIQUE/C2/methodes",
+    "TNSI-LANGAGES-ET-PROGRAMMATION/C1/corriges",
     "TNSI-LANGAGES-ET-PROGRAMMATION/C1/methodes",
-    "TNSI-LANGAGES-ET-PROGRAMMATION/C1/remediation",
+    "TNSI-LANGAGES-ET-PROGRAMMATION/C10/evaluations",
     "TNSI-LANGAGES-ET-PROGRAMMATION/C10/methodes",
-    "TNSI-LANGAGES-ET-PROGRAMMATION/C10/remediation",
     "TNSI-LANGAGES-ET-PROGRAMMATION/C11/methodes",
-    "TNSI-LANGAGES-ET-PROGRAMMATION/C11/remediation",
+    "TNSI-LANGAGES-ET-PROGRAMMATION/C2/corriges",
+    "TNSI-LANGAGES-ET-PROGRAMMATION/C2/evaluations",
     "TNSI-LANGAGES-ET-PROGRAMMATION/C2/methodes",
-    "TNSI-LANGAGES-ET-PROGRAMMATION/C2/remediation",
+    "TNSI-LANGAGES-ET-PROGRAMMATION/C3/corriges",
     "TNSI-LANGAGES-ET-PROGRAMMATION/C3/methodes",
-    "TNSI-LANGAGES-ET-PROGRAMMATION/C3/remediation",
     "TNSI-LANGAGES-ET-PROGRAMMATION/C4/methodes",
-    "TNSI-LANGAGES-ET-PROGRAMMATION/C4/remediation",
     "TNSI-LANGAGES-ET-PROGRAMMATION/C5/methodes",
+    "TNSI-LANGAGES-ET-PROGRAMMATION/C6/evaluations",
     "TNSI-LANGAGES-ET-PROGRAMMATION/C6/methodes",
-    "TNSI-LANGAGES-ET-PROGRAMMATION/C6/remediation",
+    "TNSI-LANGAGES-ET-PROGRAMMATION/C7/evaluations",
     "TNSI-LANGAGES-ET-PROGRAMMATION/C7/methodes",
-    "TNSI-LANGAGES-ET-PROGRAMMATION/C7/remediation",
+    "TNSI-LANGAGES-ET-PROGRAMMATION/C8/corriges",
     "TNSI-LANGAGES-ET-PROGRAMMATION/C8/methodes",
-    "TNSI-LANGAGES-ET-PROGRAMMATION/C8/remediation",
     "TNSI-LANGAGES-ET-PROGRAMMATION/C9/methodes",
-    "TNSI-LANGAGES-ET-PROGRAMMATION/C9/remediation",
     "TNSI-PROJET/C1/corriges",
     "TNSI-PROJET/C1/cours",
+    "TNSI-PROJET/C1/evaluations",
     "TNSI-PROJET/C1/exercices",
     "TNSI-PROJET/C1/methodes",
     "TNSI-PROJET/C1/remediation",
     "TNSI-PROJET/C2/corriges",
     "TNSI-PROJET/C2/cours",
+    "TNSI-PROJET/C2/evaluations",
     "TNSI-PROJET/C2/exercices",
     "TNSI-PROJET/C2/methodes",
     "TNSI-PROJET/C2/remediation",
     "TNSI-STRUCTURES-DONNEES/C1/corriges",
+    "TNSI-STRUCTURES-DONNEES/C1/evaluations",
     "TNSI-STRUCTURES-DONNEES/C1/exercices",
     "TNSI-STRUCTURES-DONNEES/C1/methodes",
-    "TNSI-STRUCTURES-DONNEES/C1/remediation",
+    "TNSI-STRUCTURES-DONNEES/C10/evaluations",
     "TNSI-STRUCTURES-DONNEES/C10/methodes",
-    "TNSI-STRUCTURES-DONNEES/C10/remediation",
+    "TNSI-STRUCTURES-DONNEES/C11/corriges",
     "TNSI-STRUCTURES-DONNEES/C11/methodes",
-    "TNSI-STRUCTURES-DONNEES/C11/remediation",
     "TNSI-STRUCTURES-DONNEES/C12/methodes",
-    "TNSI-STRUCTURES-DONNEES/C12/remediation",
+    "TNSI-STRUCTURES-DONNEES/C13/evaluations",
     "TNSI-STRUCTURES-DONNEES/C13/methodes",
-    "TNSI-STRUCTURES-DONNEES/C13/remediation",
     "TNSI-STRUCTURES-DONNEES/C14/methodes",
-    "TNSI-STRUCTURES-DONNEES/C14/remediation",
+    "TNSI-STRUCTURES-DONNEES/C2/corriges",
+    "TNSI-STRUCTURES-DONNEES/C2/evaluations",
     "TNSI-STRUCTURES-DONNEES/C2/methodes",
-    "TNSI-STRUCTURES-DONNEES/C2/remediation",
+    "TNSI-STRUCTURES-DONNEES/C3/corriges",
+    "TNSI-STRUCTURES-DONNEES/C3/evaluations",
     "TNSI-STRUCTURES-DONNEES/C3/methodes",
     "TNSI-STRUCTURES-DONNEES/C4/methodes",
-    "TNSI-STRUCTURES-DONNEES/C4/remediation",
     "TNSI-STRUCTURES-DONNEES/C5/methodes",
-    "TNSI-STRUCTURES-DONNEES/C5/remediation",
     "TNSI-STRUCTURES-DONNEES/C6/methodes",
-    "TNSI-STRUCTURES-DONNEES/C6/remediation",
+    "TNSI-STRUCTURES-DONNEES/C7/evaluations",
     "TNSI-STRUCTURES-DONNEES/C7/methodes",
-    "TNSI-STRUCTURES-DONNEES/C7/remediation",
+    "TNSI-STRUCTURES-DONNEES/C8/corriges",
+    "TNSI-STRUCTURES-DONNEES/C8/evaluations",
     "TNSI-STRUCTURES-DONNEES/C8/methodes",
-    "TNSI-STRUCTURES-DONNEES/C8/remediation",
+    "TNSI-STRUCTURES-DONNEES/C9/evaluations",
     "TNSI-STRUCTURES-DONNEES/C9/methodes",
-    "TNSI-STRUCTURES-DONNEES/C9/remediation",
     "TSPE-CALCUL-INTEGRAL/C1/methodes",
-    "TSPE-CALCUL-INTEGRAL/C1/remediation",
+    "TSPE-CALCUL-INTEGRAL/C3/evaluations",
     "TSPE-CALCUL-INTEGRAL/C3/methodes",
-    "TSPE-CALCUL-INTEGRAL/C3/remediation",
-    "TSPE-CALCUL-INTEGRAL/C4/remediation",
+    "TSPE-CALCUL-INTEGRAL/C4/qcm",
     "TSPE-CALCUL-INTEGRAL/C5/methodes",
-    "TSPE-CALCUL-INTEGRAL/C5/remediation",
+    "TSPE-CALCUL-INTEGRAL/C5/qcm",
+    "TSPE-CALCUL-INTEGRAL/C6/evaluations",
     "TSPE-CALCUL-INTEGRAL/C6/methodes",
-    "TSPE-CALCUL-INTEGRAL/C6/remediation",
+    "TSPE-CALCUL-INTEGRAL/C6/qcm",
+    "TSPE-CALCUL-INTEGRAL/C7/evaluations",
     "TSPE-CALCUL-INTEGRAL/C7/methodes",
-    "TSPE-CALCUL-INTEGRAL/C7/remediation",
+    "TSPE-CALCUL-INTEGRAL/C7/qcm",
     "TSPE-CALCUL-INTEGRAL/C8/methodes",
-    "TSPE-COMBINATOIRE/C1/remediation",
+    "TSPE-CALCUL-INTEGRAL/C8/qcm",
+    "TSPE-COMBINATOIRE/C1/evaluations",
     "TSPE-COMBINATOIRE/C3/methodes",
-    "TSPE-COMBINATOIRE/C3/remediation",
     "TSPE-COMBINATOIRE/C4/methodes",
-    "TSPE-COMBINATOIRE/C4/remediation",
+    "TSPE-GEOMETRIE-ESPACE/C1/evaluations",
+    "TSPE-GEOMETRIE-ESPACE/C10/evaluations",
+    "TSPE-GEOMETRIE-ESPACE/C14/evaluations",
+    "TSPE-GEOMETRIE-ESPACE/C16/evaluations",
+    "TSPE-GEOMETRIE-ESPACE/C2/evaluations",
+    "TSPE-GEOMETRIE-ESPACE/C3/evaluations",
+    "TSPE-GEOMETRIE-ESPACE/C4/evaluations",
+    "TSPE-GEOMETRIE-ESPACE/C5/evaluations",
+    "TSPE-GEOMETRIE-ESPACE/C6/evaluations",
+    "TSPE-GEOMETRIE-ESPACE/C9/evaluations",
     "TSPE-LOGARITHME/C2/methodes",
-    "TSPE-LOGARITHME/C2/remediation",
-    "TSPE-LOGARITHME/C4/remediation",
-    "TSPE-PRIMITIVES-EQDIFF/C3/remediation",
     "TSPE-PRIMITIVES-EQDIFF/C4/methodes",
-    "TSPE-PRIMITIVES-EQDIFF/C4/remediation",
     "TSPE-PRIMITIVES-EQDIFF/C5/methodes",
-    "TSPE-PRIMITIVES-EQDIFF/C5/remediation",
     "TSPE-PROBABILITES/C1/methodes",
-    "TSPE-PROBABILITES/C1/remediation",
+    "TSPE-PROBABILITES/C1/qcm",
     "TSPE-PROBABILITES/C10/methodes",
-    "TSPE-PROBABILITES/C10/remediation",
-    "TSPE-PROBABILITES/C3/remediation",
+    "TSPE-PROBABILITES/C2/evaluations",
+    "TSPE-PROBABILITES/C3/qcm",
+    "TSPE-PROBABILITES/C4/evaluations",
+    "TSPE-PROBABILITES/C4/qcm",
     "TSPE-PROBABILITES/C5/methodes",
-    "TSPE-PROBABILITES/C5/remediation",
+    "TSPE-PROBABILITES/C6/evaluations",
     "TSPE-PROBABILITES/C6/methodes",
-    "TSPE-PROBABILITES/C6/remediation",
+    "TSPE-PROBABILITES/C6/qcm",
+    "TSPE-PROBABILITES/C7/evaluations",
     "TSPE-PROBABILITES/C7/methodes",
-    "TSPE-PROBABILITES/C7/remediation",
     "TSPE-PROBABILITES/C8/methodes",
-    "TSPE-PROBABILITES/C8/remediation",
     "TSPE-PROBABILITES/C9/methodes",
-    "TSPE-PROBABILITES/C9/remediation",
     "TSPE-SUITES-LIMITES/C6/remediation",
     "TSPE-SUITES-LIMITES/C7/remediation"
   ]

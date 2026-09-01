@@ -23,6 +23,7 @@ import random
 from pathlib import Path
 
 import pytest
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "audit/P0_CONTENT_CLONE_LEDGER.json"
@@ -48,6 +49,38 @@ def test_the_committed_ledger_matches_the_producer(producer) -> None:
     """Un registre ecrit a la main derive ; celui-ci se recalcule."""
 
     assert producer.main(["--check"]) == 0
+
+
+def test_prerequisite_in_capacity_field_is_recorded_without_crashing_ledger(
+    producer, tmp_path: Path, monkeypatch
+) -> None:
+    corpus = tmp_path / "chapitres"
+    chapter = corpus / "TSPE-X"
+    (chapter / "remediation").mkdir(parents=True)
+    (chapter / "contrat.yaml").write_text(
+        yaml.safe_dump(
+            {
+                "capacites": [{"code": "C1", "ref_capacite": "REF-C1"}],
+                "prerequis": [{"code": "R1"}],
+            }
+        ),
+        encoding="utf-8",
+    )
+    source = chapter / "remediation/r1.tex"
+    source.write_text(
+        '% META: {"id":"R1-RE","chapitre":"TSPE-X","type_objet":"remediation","capacites_codes":["R1"]}\nCorps.\n',
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(producer, "CORPORA", (corpus,))
+    monkeypatch.setattr(producer, "_RESOLVER", None)
+
+    ledger = producer.build_ledger()
+
+    assert ledger["inventory"]["capacity_identity_blockers"] == 1
+    assert ledger["capacity_identity_blockers"][0]["classification"] == (
+        "UNRESOLVED_CAPACITY_IDENTITY"
+    )
+    assert str(source) in ledger["objects_with_indeterminate_credit"]
 
 
 def test_the_measure_is_exact_and_has_no_unknown(ledger: dict) -> None:
@@ -110,16 +143,12 @@ def test_the_remediation_sheets_of_geoespace_are_all_distinct(producer) -> None:
     shared = {digest: names for digest, names in bodies.items() if len(names) > 1}
     assert not shared, f"des fiches partagent un corps : {shared}"
 
-    # Et chaque fiche sert bien la capacite qu'elle declare.
+    # Et chaque fiche porte une déclaration résoluble. Le corps ne s'auto-
+    # atteste jamais par une occurrence lexicale `C<n>`.
     for path in sorted(directory.glob("*.tex")):
         text = path.read_text(encoding="utf-8")
         declared = set(producer.declared_capacities(producer.read_meta(text)))
-        attested = set(producer.body_attested_capacities(producer.pedagogical_body(text)))
-        if attested:
-            assert declared & attested, (
-                f"{path.name} declare {sorted(declared)} mais son corps "
-                f"annonce {sorted(attested)}"
-            )
+        assert declared
 
 
 def test_the_clone_population_never_grows(ledger: dict, producer) -> None:
@@ -234,7 +263,16 @@ def test_geoespace_exercises_are_all_distinct_and_paired(producer) -> None:
 # -- Le canonique ne peut pas dependre de l'ordre des chemins ----------------
 
 
-def _member(path, chapter, declared, attested=(), manual="1NSI", chars=4000):
+def _member(
+    path,
+    chapter,
+    declared,
+    attested=(),
+    manual="1NSI",
+    chars=4000,
+    source_type="exercices",
+    payload_empty=False,
+):
     return {
         "path": path,
         "chapter": chapter,
@@ -242,6 +280,8 @@ def _member(path, chapter, declared, attested=(), manual="1NSI", chars=4000):
         "declared_capacity": list(declared),
         "body_attested_capacity": list(attested),
         "payload_chars": chars,
+        "source_type": source_type,
+        "payload_empty": payload_empty,
     }
 
 
@@ -275,14 +315,8 @@ def test_canonical_selection_is_invariant_under_path_permutation(producer) -> No
     assert checked > 0, "le corpus doit etre reellement parcouru"
 
 
-def test_the_true_owner_wins_even_when_the_copy_sorts_first(producer) -> None:
-    """La fixture qui aurait pris l'ancienne regle en defaut.
-
-    Le faux fichier est nomme pour trier AVANT le vrai. Seul le vrai est
-    atteste par son corps. L'ancienne regle, en l'absence d'attestation,
-    aurait retenu le premier chemin ; ici l'attestation tranche, et elle
-    doit gagner quel que soit le nom.
-    """
+def test_a_local_c_token_never_proves_the_true_owner(producer) -> None:
+    """Même un C4 explicite reste lexical et ne vaut pas provenance."""
 
     fake = _member("NSI/chapitres/CH/cours/AAA-copie.tex", "CH", ["C9"])
     true = _member("NSI/chapitres/CH/cours/ZZZ-original.tex", "CH", ["C4"], ["C4"])
@@ -291,26 +325,44 @@ def test_the_true_owner_wins_even_when_the_copy_sorts_first(producer) -> None:
         selection = producer.select_canonical(
             _group(order, "CAPACITY_MISREPRESENTING_CLONE")
         )
+        assert selection["status"] == "AMBIGUOUS"
+        assert selection["evidence_rule"] == "NONE_CONCLUSIVE"
+        assert selection["canonical_paths"] == []
+        assert selection["false_copy_paths"] == []
+
+
+def test_authoritative_owner_wins_when_false_path_sorts_first(producer) -> None:
+    false = _member(
+        "NSI/chapitres/AAA-FAUX/cours/a.tex", "AAA-FAUX", ["C1"]
+    )
+    true = _member(
+        "NSI/chapitres/ZZZ-VRAI/cours/z.tex", "ZZZ-VRAI", ["C4"]
+    )
+    evidence = {
+        "canonical_paths": [true["path"]],
+        "authority": {
+            "chapter_ownership": "programme map",
+            "capacity_alignment": "contract C4",
+            "official_programme_alignment": "official atom P-ALGO-04",
+            "canonical_assembly": "assembler position 1",
+            "source_provenance": "authored source",
+            "contract_role": "cours C4",
+        },
+    }
+    for order in ([false, true], [true, false]):
+        group = _group(order, "CROSS_CHAPTER_CONTAMINATION")
+        group["ownership_evidence"] = evidence
+        selection = producer.select_canonical(group)
         assert selection["status"] == "SEMANTIC_CANONICAL"
-        assert selection["evidence_rule"] == "BODY_SELF_ATTESTATION"
-        assert selection["canonical_paths"] == [
-            "NSI/chapitres/CH/cours/ZZZ-original.tex"
-        ]
-        assert selection["false_copy_paths"] == [
-            "NSI/chapitres/CH/cours/AAA-copie.tex"
-        ]
+        assert selection["evidence_rule"] == "AUTHORITATIVE_OWNERSHIP_MAP"
+        assert selection["canonical_paths"] == [true["path"]]
+        assert selection["false_copy_paths"] == [false["path"]]
 
 
-def test_a_chapter_that_duplicates_a_body_loses_it_to_the_one_that_does_not(
+def test_chapter_duplication_alone_does_not_prove_the_owner(
     producer,
 ) -> None:
-    """Le cas 1NSI reel, reduit et avec les noms inverses.
-
-    Un chapitre qui detient le meme corps sous DEUX capacites distinctes le
-    represente faussement : un seul corps ne sert pas deux capacites. Le
-    chapitre qui le detient une seule fois en est le proprietaire -- meme
-    quand ses chemins trient en dernier.
-    """
+    """La multiplicité prouve le faux crédit, pas le propriétaire authentique."""
 
     duplicating = [
         _member("NSI/chapitres/AAA-FAUX/cours/c1.tex", "AAA-FAUX", ["C1"]),
@@ -321,10 +373,32 @@ def test_a_chapter_that_duplicates_a_body_loses_it_to_the_one_that_does_not(
     selection = producer.select_canonical(
         _group(duplicating + owner, "CROSS_CHAPTER_CONTAMINATION")
     )
-    assert selection["status"] == "SEMANTIC_CANONICAL"
-    assert selection["evidence_rule"] == "CHAPTER_SELF_DUPLICATION"
-    assert selection["canonical_paths"] == ["NSI/chapitres/ZZZ-VRAI/cours/c1.tex"]
-    assert len(selection["false_copy_paths"]) == 2
+    assert selection["status"] == "AMBIGUOUS"
+    assert selection["evidence_rule"] == "NONE_CONCLUSIVE"
+    assert selection["canonical_paths"] == []
+    assert selection["false_copy_paths"] == []
+
+
+def test_body_attestation_uses_qualified_identity_across_chapters(producer) -> None:
+    """Deux corps disant C1 dans deux chapitres n'attestent pas le même UID."""
+
+    first = _member(
+        "NSI/chapitres/1NSI-A/cours/a.tex",
+        "1NSI-A",
+        ["C1"],
+        ["C1"],
+    )
+    second = _member(
+        "NSI/chapitres/1NSI-B/cours/b.tex",
+        "1NSI-B",
+        ["C1"],
+        ["C1"],
+    )
+    selection = producer.select_canonical(
+        _group([first, second], "CROSS_CHAPTER_CONTAMINATION")
+    )
+    assert selection["status"] == "AMBIGUOUS"
+    assert selection["canonical_paths"] == []
 
 
 def test_without_evidence_the_selection_refuses_to_choose(producer) -> None:
@@ -342,6 +416,31 @@ def test_without_evidence_the_selection_refuses_to_choose(producer) -> None:
     assert selection["false_copy_paths"] == []
 
 
+def test_short_pedagogical_body_is_never_cleared_as_boilerplate(producer) -> None:
+    members = [
+        _member("CH/exercices/a.tex", "CH", ["C1"], chars=20),
+        _member("CH/exercices/b.tex", "CH", ["C2"], chars=20),
+    ]
+    assert producer.disposition_of(members) == "CAPACITY_MISREPRESENTING_CLONE"
+    selection = producer.select_canonical(
+        _group(members, producer.disposition_of(members))
+    )
+    assert selection["status"] == "AMBIGUOUS"
+
+
+def test_boilerplate_requires_empty_payload_and_no_capacity(producer) -> None:
+    empty = [
+        _member("A/a.tex", "A", [], chars=0, payload_empty=True),
+        _member("B/b.tex", "B", [], chars=0, payload_empty=True),
+    ]
+    nonempty = [
+        _member("A/a.tex", "A", [], chars=1, payload_empty=False),
+        _member("B/b.tex", "B", [], chars=1, payload_empty=False),
+    ]
+    assert producer.disposition_of(empty) == "BOILERPLATE_ONLY"
+    assert producer.disposition_of(nonempty) == "CROSS_CHAPTER_CONTAMINATION"
+
+
 def test_no_group_is_ever_left_unknown(ledger: dict) -> None:
     """UNKNOWN = 0 : tout groupe recoit un statut explicite."""
 
@@ -354,6 +453,54 @@ def test_no_group_is_ever_left_unknown(ledger: dict) -> None:
         assert selection["reason"]
         if selection["status"] == "AMBIGUOUS":
             assert not selection["canonical_paths"]
+
+
+def test_every_member_has_an_explicit_canonical_status(ledger: dict) -> None:
+    allowed = {
+        "SEMANTIC_CANONICAL",
+        "FALSE_COPY",
+        "LEGITIMATE_SHARED_CANONICAL",
+        "AMBIGUOUS",
+        "UNKNOWN",
+    }
+    for group in ledger["groups"]:
+        statuses = [member["canonical_object_status"] for member in group["members"]]
+        assert len(statuses) == group["object_count"]
+        assert set(statuses) <= allowed
+        selection = group["canonical_selection"]
+        if selection["status"] == "SEMANTIC_CANONICAL":
+            assert statuses.count("FALSE_COPY") == len(selection["false_copy_paths"])
+        elif selection["status"] == "AMBIGUOUS":
+            assert set(statuses) == {"AMBIGUOUS"}
+
+
+def test_unknown_and_unattributed_excess_are_derived(ledger: dict) -> None:
+    assert ledger["unknown"] == ledger["inventory"]["unknown_canonical_groups"]
+    ambiguous_excess = sum(
+        group["excess_object_count"]
+        for group in ledger["groups"]
+        if group["canonical_selection"]["status"] == "AMBIGUOUS"
+    )
+    assert ledger["unattributed_excess_objects"] == ambiguous_excess
+
+
+def test_same_capacity_is_a_fully_qualified_identity(ledger: dict) -> None:
+    for group in ledger["groups"]:
+        if group["same_capacity"]:
+            assert len(
+                {
+                    uid
+                    for member in group["members"]
+                    for uid in member["declared_capacity_uids"]
+                }
+            ) <= 1
+
+
+def test_unknown_chapter_capacity_declaration_fails_closed(producer) -> None:
+    with pytest.raises(Exception, match="chapitre"):
+        producer.declared_capacities(
+            {"chapitre": "ALIEN-X", "capacites_codes": ["C1"]}
+        )
 
 
 def producer_statuses():
@@ -400,14 +547,15 @@ def test_identical_capacity_never_clears_a_cross_chapter_group(producer) -> None
     )
     assert selection["evidence_rule"] != "IDENTICAL_CAPACITY_CREDIT"
 
-    # A l'interieur d'un meme chapitre, la regle reste valide.
+    # Même dans un chapitre, un UID commun ne prouve ni le rôle contractuel
+    # ni la provenance : sans preuve supplémentaire, on ne blanchit rien.
     same = [
         _member("NSI/chapitres/CH/exercices/a.tex", "CH", ["C1"]),
         _member("NSI/chapitres/CH/exercices/b.tex", "CH", ["C1"]),
     ]
     within = producer.select_canonical(_group(same, "REDUNDANT_SAME_CAPACITY"))
-    assert within["status"] == "LEGITIMATE_SHARED_CANONICAL"
-    assert within["evidence_rule"] == "IDENTICAL_CAPACITY_CREDIT"
+    assert within["status"] == "AMBIGUOUS"
+    assert within["evidence_rule"] == "NONE_CONCLUSIVE"
 
 
 def test_no_cross_chapter_group_is_cleared_as_identical_capacity(ledger: dict) -> None:
@@ -420,3 +568,46 @@ def test_no_cross_chapter_group_is_cleared_as_identical_capacity(ledger: dict) -
         assert len(chapters) == 1, (
             f"{group['clone_group_id']} blanchi alors qu'il traverse {chapters}"
         )
+
+
+def test_same_uid_across_contract_roles_is_not_legitimate_sharing(producer) -> None:
+    course = _member(
+        "NSI/chapitres/1NSI-X/cours/c.tex",
+        "1NSI-X",
+        ["C1"],
+        ["C1"],
+        source_type="cours",
+    )
+    remediation = _member(
+        "NSI/chapitres/1NSI-X/remediation/r.tex",
+        "1NSI-X",
+        ["C1"],
+        ["C1"],
+        source_type="remediation",
+    )
+    selection = producer.select_canonical(
+        _group([course, remediation], "REDUNDANT_SAME_CAPACITY")
+    )
+    assert selection["status"] == "AMBIGUOUS"
+    assert selection["canonical_paths"] == []
+
+
+def test_body_tokens_never_create_invalid_capacity_credit(producer) -> None:
+    """Une variable C2 ou un renvoi C3 ne dément jamais le META à elle seule."""
+
+    false_positive = {
+        "Mathematiques/manuel-maths/chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/methodes/TEXP-CTP-ME-006.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/cours/10_C1_formes_trinome.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/12_C3_suites_geometriques.tex",
+    }
+    ledger = producer.build_ledger()
+    assert false_positive.isdisjoint(ledger["objects_on_invalid_credit"])
+    assert all(
+        "body_attested_capacity" not in member
+        for group in ledger["groups"]
+        for member in group["members"]
+    )
+    assert all(
+        group["canonical_selection"]["evidence_rule"] != "BODY_SELF_ATTESTATION"
+        for group in ledger["groups"]
+    )

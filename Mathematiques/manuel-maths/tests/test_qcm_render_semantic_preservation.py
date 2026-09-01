@@ -23,6 +23,7 @@ import re
 import shutil
 import subprocess
 import unicodedata
+import yaml
 from pathlib import Path
 
 import pytest
@@ -106,6 +107,59 @@ def _document(enonce: str, options: dict[str, str]) -> dict:
             },
         }],
     }
+
+
+def test_capacity_aliases_render_the_same_scoped_identity(
+    producteur, tmp_path: Path, monkeypatch
+) -> None:
+    corpus = tmp_path / "chapitres"
+    chapter = corpus / "TSPE-X"
+    (chapter / "qcm").mkdir(parents=True)
+    (chapter / "contrat.yaml").write_text(
+        yaml.safe_dump(
+            {
+                "chapitre": "TSPE-X",
+                "capacites": [
+                    {"code": "C1", "ref_capacite": "REF-C1"},
+                    {"code": "C10", "ref_capacite": "TSPE-CONCLGN-C1"},
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(producteur, "RACINES_CHAPITRES", (corpus,))
+
+    by_local, refs_local = producteur.resoudre_capacites_questions(
+        "TSPE-X", [{"id": "Q1", "capacite": "C10"}]
+    )
+    by_ref, refs_ref = producteur.resoudre_capacites_questions(
+        "TSPE-X", [{"id": "Q1", "capacite": "TSPE-CONCLGN-C1"}]
+    )
+
+    assert by_local == by_ref == [{"id": "Q1", "capacite": "C10"}]
+    assert refs_local == refs_ref == ["TSPE-CONCLGN-C1"]
+
+
+def test_unknown_qcm_capacity_fails_closed_in_renderer(
+    producteur, tmp_path: Path, monkeypatch
+) -> None:
+    corpus = tmp_path / "chapitres"
+    chapter = corpus / "TSPE-X"
+    (chapter / "qcm").mkdir(parents=True)
+    (chapter / "contrat.yaml").write_text(
+        yaml.safe_dump(
+            {
+                "chapitre": "TSPE-X",
+                "capacites": [{"code": "C1", "ref_capacite": "REF-C1"}],
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(producteur, "RACINES_CHAPITRES", (corpus,))
+    with pytest.raises(producteur.CapacityIdentityError):
+        producteur.resoudre_capacites_questions(
+            "TSPE-X", [{"id": "Q1", "capacite": "FAUSSE-C999"}]
+        )
 
 
 # ------------------------------------------------- cas reels de regression ---

@@ -17,6 +17,7 @@ import json
 from pathlib import Path
 
 import pytest
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 COVERAGE = ROOT / "audit/TRUE_PEDAGOGICAL_COVERAGE.json"
@@ -52,7 +53,7 @@ def test_the_backlog_is_exact_and_counted_in_authoring_units(payload: dict) -> N
     # La compter comme vide enverrait reecrire un contenu qui existe ; la
     # compter comme pourvue crediterait une capacite au hasard.
     assert (
-        inventory["cells_with_valid_content"]
+        inventory["cells_with_declared_exact_identity"]
         + inventory["cells_with_indeterminate_credit"]
         + len(backlog)
         == inventory["cells"]
@@ -103,24 +104,39 @@ def test_a_correction_inherits_the_capacity_of_its_exercise(producer) -> None:
     )
 
 
-def test_1spe_has_no_gap_once_inheritance_is_applied(payload: dict) -> None:
-    """Le controle de non-regression de la mesure elle-meme."""
+def test_1spe_has_no_core_gap_once_inheritance_is_applied(payload: dict) -> None:
+    """L'ajout des évaluations ne doit pas réintroduire les vingt faux gaps."""
 
-    assert "1SPE" not in payload["per_manual"], (
-        "1SPE ne doit porter aucune lacune : ses corriges heritent de leurs "
-        "exercices, et l'oublier fabriquerait vingt fausses lacunes"
+    gaps = [row for row in payload["authoring_backlog"] if row["manual"] == "1SPE"]
+    assert all(row["role"] not in producer_core_roles() for row in gaps), (
+        "les corriges 1SPE doivent heriter de leurs exercices ; une lacune "
+        "sur un des cinq roles historiques signalerait le retour du bug"
     )
 
 
-def test_qcm_and_assessments_are_measured_by_their_own_producer(
+def producer_core_roles() -> set[str]:
+    return {"cours", "methodes", "exercices", "corriges", "remediation"}
+
+
+def test_qcm_and_assessments_are_part_of_the_collection_wide_matrix(
     payload: dict,
 ) -> None:
-    """Les mesurer ici produirait un chiffre faux, pas une lacune."""
+    """Le backlog autoritaire couvre tous les rôles exigés par le contrat."""
 
-    assert "qcm" not in payload["measured_roles"]
-    assert "evaluations" not in payload["measured_roles"]
-    assert set(payload["excluded_roles"]) == {"qcm", "evaluations"}
-    assert (ROOT / "audit/QCM_GAP_METRICS.json").is_file()
+    assert payload["measured_roles"] == [
+        "cours",
+        "methodes",
+        "exercices",
+        "corriges",
+        "remediation",
+        "qcm",
+        "evaluations",
+    ]
+    assert "excluded_roles" not in payload
+    assert payload["role_sources"]["qcm"] == "question JSON resolue exactement"
+    assert payload["role_sources"]["evaluations"] == (
+        "META de l'evaluation soumis au ledger de clones"
+    )
 
 
 def test_the_credit_rule_refuses_meta_only_claims(payload: dict, producer) -> None:
@@ -130,14 +146,14 @@ def test_the_credit_rule_refuses_meta_only_claims(payload: dict, producer) -> No
         (ROOT / "audit/P0_CONTENT_CLONE_LEDGER.json").read_text(encoding="utf-8")
     )
     invalid = set(ledger["objects_on_invalid_credit"])
-    assert invalid, "le P0 reste ouvert ailleurs dans la collection"
+    indeterminate = set(ledger["objects_with_indeterminate_credit"])
+    assert invalid or indeterminate, "le P0 reste ouvert ailleurs dans la collection"
     assert "META" in payload["credit_rule"]
 
     # La regle vaut partout ou des clones subsistent : aucune copie ne
     # conserve le credit d'une capacite qu'elle n'enseigne pas. Ce test
     # n'exige plus la presence du defaut dans un chapitre precis -- il
     # deviendrait faux le jour ou ce chapitre serait repare.
-    indeterminate = set(ledger["objects_with_indeterminate_credit"])
     misrepresenting = [
         group
         for group in ledger["groups"]
@@ -158,3 +174,587 @@ def test_the_credit_rule_refuses_meta_only_claims(payload: dict, producer) -> No
         # fichiers : deux objets attestes par leur corps pour la meme capacite
         # la creditent une fois, pas deux.
         assert len(capacities) <= 1
+
+
+def _synthetic_corpus(tmp_path: Path) -> tuple[Path, Path]:
+    corpus = tmp_path / "chapitres"
+    chapter = corpus / "TSPE-X"
+    chapter.mkdir(parents=True)
+    (chapter / "contrat.yaml").write_text(
+        yaml.safe_dump(
+            {"capacites": [{"code": "C1", "ref_capacite": "TSPE-X-C1"}]}
+        ),
+        encoding="utf-8",
+    )
+    return corpus, chapter
+
+
+def _add_capacity(chapter: Path, code: str) -> None:
+    contract_path = chapter / "contrat.yaml"
+    contract = yaml.safe_load(contract_path.read_text(encoding="utf-8"))
+    contract["capacites"].append(
+        {"code": code, "ref_capacite": f"{chapter.name}-{code}"}
+    )
+    contract_path.write_text(yaml.safe_dump(contract), encoding="utf-8")
+
+
+def _source(path: Path, meta: dict) -> Path:
+    defaults = {
+        "cours": "cours",
+        "methodes": "methode",
+        "exercices": "exercice",
+        "corriges": "corrige",
+        "remediation": "remediation",
+        "evaluations": "evaluation",
+    }
+    meta = {"type_objet": defaults.get(path.parent.name), **meta}
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("% META: " + json.dumps(meta) + "\nContenu.\n", encoding="utf-8")
+    return path
+
+
+def _empty_clone_ledger(**updates) -> dict:
+    payload = {
+        "objects_on_invalid_credit": [],
+        "objects_with_indeterminate_credit": [],
+    }
+    payload.update(updates)
+    return payload
+
+
+def test_duplicate_object_id_fails_closed(producer, tmp_path: Path) -> None:
+    corpus, chapter = _synthetic_corpus(tmp_path)
+    first = _source(
+        chapter / "cours/a.tex",
+        {"id": "DUP", "chapitre": "TSPE-X", "capacites_codes": ["C1"]},
+    )
+    second = _source(
+        chapter / "exercices/b.tex",
+        {"id": "DUP", "chapitre": "TSPE-X", "capacites_codes": ["C1"]},
+    )
+    identity = producer._resolver_module()
+    resolver = identity.CapacityIdentityResolver.from_corpora((corpus,))
+
+    with pytest.raises(producer.CoverageError, match="identifiant objet duplique"):
+        producer.build_coverage(
+            resolver=resolver,
+            clone_ledger=_empty_clone_ledger(),
+            corpora=(corpus,),
+            source_paths=[first, second],
+        )
+
+
+def test_contradictory_capacity_fields_are_ambiguous_not_unresolved(
+    producer, tmp_path: Path
+) -> None:
+    corpus, chapter = _synthetic_corpus(tmp_path)
+    _add_capacity(chapter, "C2")
+    source = _source(
+        chapter / "cours/a.tex",
+        {
+            "id": "A",
+            "chapitre": chapter.name,
+            "capacites_codes": ["C1"],
+            "capacites": [f"{chapter.name}-C2"],
+        },
+    )
+    identity = producer._resolver_module()
+    resolver = identity.CapacityIdentityResolver.from_corpora((corpus,))
+    payload = producer.build_coverage(
+        resolver=resolver,
+        clone_ledger=_empty_clone_ledger(),
+        corpora=(corpus,),
+        source_paths=[source],
+        qcm_paths=[],
+    )
+    assert payload["capacity_identity_resolution"] == {
+        "ambiguous": 1,
+        "unresolved": 0,
+        "unknown": 0,
+    }
+    assert payload["capacity_identity_blockers"][0]["classification"] == (
+        "AMBIGUOUS_CAPACITY_IDENTITY"
+    )
+
+
+def test_correction_never_inherits_valid_credit_from_invalid_exercise(
+    producer, tmp_path: Path
+) -> None:
+    corpus, chapter = _synthetic_corpus(tmp_path)
+    exercise = _source(
+        chapter / "exercices/ex.tex",
+        {"id": "EX", "chapitre": "TSPE-X", "capacites_codes": ["C1"]},
+    )
+    correction = _source(
+        chapter / "corriges/co.tex",
+        {"id": "CO", "chapitre": "TSPE-X", "exercice_id": "EX"},
+    )
+    identity = producer._resolver_module()
+    resolver = identity.CapacityIdentityResolver.from_corpora((corpus,))
+    ledger = _empty_clone_ledger(
+        objects_on_invalid_credit=[str(exercise)],
+    )
+
+    payload = producer.build_coverage(
+        resolver=resolver,
+        clone_ledger=ledger,
+        corpora=(corpus,),
+        source_paths=[exercise, correction],
+    )
+    cell = next(
+        row
+        for row in payload["rows"]
+        if row["capacity"] == "C1" and row["role"] == "corriges"
+    )
+    assert cell["state"] == "MISSING"
+    assert cell["valid_object_ids"] == []
+
+
+def test_correction_with_invalid_declared_capacity_never_inherits_credit(
+    producer, tmp_path: Path
+) -> None:
+    corpus, chapter = _synthetic_corpus(tmp_path)
+    exercise = _source(
+        chapter / "exercices/ex.tex",
+        {"id": "EX", "chapitre": chapter.name, "capacites_codes": ["C1"]},
+    )
+    correction = _source(
+        chapter / "corriges/co.tex",
+        {
+            "id": "CO",
+            "chapitre": chapter.name,
+            "capacites_codes": ["BOGUS"],
+            "exercice_id": "EX",
+        },
+    )
+    identity = producer._resolver_module()
+    resolver = identity.CapacityIdentityResolver.from_corpora((corpus,))
+
+    payload = producer.build_coverage(
+        resolver=resolver,
+        clone_ledger=_empty_clone_ledger(),
+        corpora=(corpus,),
+        source_paths=[exercise, correction],
+        qcm_paths=[],
+    )
+
+    cell = next(
+        row
+        for row in payload["rows"]
+        if row["capacity"] == "C1" and row["role"] == "corriges"
+    )
+    assert cell["state"] == "MISSING"
+    assert cell["valid_object_ids"] == []
+    assert payload["capacity_identity_resolution"]["unresolved"] == 1
+    assert payload["capacity_identity_blockers"][0]["object_id"] == "CO"
+
+
+def test_correction_inherits_through_authoritative_exercice_ref(
+    producer, tmp_path: Path
+) -> None:
+    corpus, chapter = _synthetic_corpus(tmp_path)
+    exercise = _source(
+        chapter / "exercices/ex.tex",
+        {"id": "EX", "chapitre": "TSPE-X", "capacites_codes": ["C1"]},
+    )
+    correction = _source(
+        chapter / "corriges/co.tex",
+        {"id": "CO", "chapitre": "TSPE-X", "exercice_ref": "EX"},
+    )
+    identity = producer._resolver_module()
+    resolver = identity.CapacityIdentityResolver.from_corpora((corpus,))
+    payload = producer.build_coverage(
+        resolver=resolver,
+        clone_ledger=_empty_clone_ledger(),
+        corpora=(corpus,),
+        source_paths=[exercise, correction],
+        qcm_paths=[],
+    )
+    cell = next(
+        row
+        for row in payload["rows"]
+        if row["capacity"] == "C1" and row["role"] == "corriges"
+    )
+    assert cell["state"] == "DECLARED_EXACT_IDENTITY_NOT_SEMANTICALLY_VALIDATED"
+    assert cell["valid_object_ids"] == ["CO"]
+
+
+def test_declared_correction_capacity_must_equal_referenced_exercise(
+    producer, tmp_path: Path
+) -> None:
+    corpus, chapter = _synthetic_corpus(tmp_path)
+    _add_capacity(chapter, "C2")
+    exercise = _source(
+        chapter / "exercices/ex.tex",
+        {"id": "EX", "chapitre": chapter.name, "capacites_codes": ["C1"]},
+    )
+    correction = _source(
+        chapter / "corriges/co.tex",
+        {
+            "id": "CO",
+            "chapitre": chapter.name,
+            "capacites_codes": ["C2"],
+            "exercice_id": "EX",
+        },
+    )
+    identity = producer._resolver_module()
+    resolver = identity.CapacityIdentityResolver.from_corpora((corpus,))
+
+    payload = producer.build_coverage(
+        resolver=resolver,
+        clone_ledger=_empty_clone_ledger(),
+        corpora=(corpus,),
+        source_paths=[exercise, correction],
+        qcm_paths=[],
+    )
+
+    c2 = next(
+        row
+        for row in payload["rows"]
+        if row["capacity"] == "C2" and row["role"] == "corriges"
+    )
+    assert c2["state"] == "MISSING"
+    assert payload["ex_co_relationship_blockers"] == [
+        {
+            "classification": "MISMATCHED_CAPACITY",
+            "correction_id": "CO",
+            "correction_path": str(correction),
+            "correction_capacities": ["C2"],
+            "exercise_id": "EX",
+            "exercise_path": str(exercise),
+            "exercise_capacities": ["C1"],
+        }
+    ]
+
+
+def test_declared_correction_capacity_equal_to_exercise_is_accepted(
+    producer, tmp_path: Path
+) -> None:
+    corpus, chapter = _synthetic_corpus(tmp_path)
+    exercise = _source(
+        chapter / "exercices/ex.tex",
+        {"id": "EX", "chapitre": chapter.name, "capacites_codes": ["C1"]},
+    )
+    correction = _source(
+        chapter / "corriges/co.tex",
+        {
+            "id": "CO",
+            "chapitre": chapter.name,
+            "capacites_codes": ["C1"],
+            "exercice_ref": "EX",
+        },
+    )
+    identity = producer._resolver_module()
+    resolver = identity.CapacityIdentityResolver.from_corpora((corpus,))
+    payload = producer.build_coverage(
+        resolver=resolver,
+        clone_ledger=_empty_clone_ledger(),
+        corpora=(corpus,),
+        source_paths=[exercise, correction],
+        qcm_paths=[],
+    )
+    cell = next(
+        row
+        for row in payload["rows"]
+        if row["capacity"] == "C1" and row["role"] == "corriges"
+    )
+    assert cell["state"] == "DECLARED_EXACT_IDENTITY_NOT_SEMANTICALLY_VALIDATED"
+    assert payload["ex_co_relationship_blockers"] == []
+
+
+def test_correction_reference_target_must_be_an_exercise(
+    producer, tmp_path: Path
+) -> None:
+    corpus, chapter = _synthetic_corpus(tmp_path)
+    method = _source(
+        chapter / "methodes/me.tex",
+        {"id": "NOT-EX", "chapitre": chapter.name, "capacites_codes": ["C1"]},
+    )
+    correction = _source(
+        chapter / "corriges/co.tex",
+        {"id": "CO", "chapitre": chapter.name, "exercice_id": "NOT-EX"},
+    )
+    identity = producer._resolver_module()
+    resolver = identity.CapacityIdentityResolver.from_corpora((corpus,))
+    payload = producer.build_coverage(
+        resolver=resolver,
+        clone_ledger=_empty_clone_ledger(),
+        corpora=(corpus,),
+        source_paths=[method, correction],
+        qcm_paths=[],
+    )
+    cell = next(
+        row
+        for row in payload["rows"]
+        if row["capacity"] == "C1" and row["role"] == "corriges"
+    )
+    assert cell["state"] == "MISSING"
+    assert payload["ex_co_relationship_blockers"][0]["classification"] == (
+        "MISMATCHED_CONTENT"
+    )
+
+
+def test_contradictory_exercise_inheritance_fields_fail_closed(
+    producer, tmp_path: Path
+) -> None:
+    corpus, chapter = _synthetic_corpus(tmp_path)
+    exercise = _source(
+        chapter / "exercices/ex.tex",
+        {"id": "EX", "chapitre": "TSPE-X", "capacites_codes": ["C1"]},
+    )
+    correction = _source(
+        chapter / "corriges/co.tex",
+        {
+            "id": "CO",
+            "chapitre": "TSPE-X",
+            "exercice_id": "EX",
+            "exercice_ref": "AUTRE",
+        },
+    )
+    identity = producer._resolver_module()
+    resolver = identity.CapacityIdentityResolver.from_corpora((corpus,))
+    with pytest.raises(producer.CoverageError, match="heritage contradictoire"):
+        producer.build_coverage(
+            resolver=resolver,
+            clone_ledger=_empty_clone_ledger(),
+            corpora=(corpus,),
+            source_paths=[exercise, correction],
+            qcm_paths=[],
+        )
+
+
+def test_correction_cannot_inherit_from_another_chapter(
+    producer, tmp_path: Path
+) -> None:
+    corpus, chapter_a = _synthetic_corpus(tmp_path)
+    chapter_b = corpus / "TSPE-Y"
+    chapter_b.mkdir()
+    (chapter_b / "contrat.yaml").write_text(
+        yaml.safe_dump(
+            {"capacites": [{"code": "C1", "ref_capacite": "TSPE-Y-C1"}]}
+        ),
+        encoding="utf-8",
+    )
+    exercise = _source(
+        chapter_b / "exercices/ex.tex",
+        {"id": "EX-B", "chapitre": "TSPE-Y", "capacites_codes": ["C1"]},
+    )
+    correction = _source(
+        chapter_a / "corriges/co.tex",
+        {"id": "CO-A", "chapitre": "TSPE-X", "exercice_id": "EX-B"},
+    )
+    identity = producer._resolver_module()
+    resolver = identity.CapacityIdentityResolver.from_corpora((corpus,))
+
+    with pytest.raises(producer.CoverageError, match="autre chapitre"):
+        producer.build_coverage(
+            resolver=resolver,
+            clone_ledger=_empty_clone_ledger(),
+            corpora=(corpus,),
+            source_paths=[exercise, correction],
+        )
+
+
+def test_every_coverage_cell_carries_exact_ids_and_digests(payload: dict) -> None:
+    for row in payload["rows"]:
+        assert len(row["valid_object_ids"]) == row["valid_objects"]
+        assert len(row["indeterminate_object_ids"]) == row["indeterminate_objects"]
+        assert row["valid_object_ids_digest"].startswith("sha256:")
+        assert row["indeterminate_object_ids_digest"].startswith("sha256:")
+
+
+def test_every_backlog_projection_carries_the_exact_set_and_digest(
+    payload: dict, producer
+) -> None:
+    units = {
+        f"{row['chapter']}/{row['capacity']}/{row['role']}"
+        for row in payload["authoring_backlog"]
+    }
+    dimensions = {
+        "per_manual": lambda row: row["manual"],
+        "per_chapter": lambda row: row["chapter"],
+        "per_capacity": lambda row: row["canonical_capacity_uid"],
+        "per_role": lambda row: row["role"],
+    }
+    for dimension, key_of in dimensions.items():
+        projection = payload["authoring_backlog_projections"][dimension]
+        projected_union: set[str] = set()
+        buckets: list[set[str]] = []
+        for key, bucket in projection.items():
+            expected = {
+                f"{row['chapter']}/{row['capacity']}/{row['role']}"
+                for row in payload["authoring_backlog"]
+                if key_of(row) == key
+            }
+            assert bucket["count"] == len(expected)
+            assert set(bucket["unit_ids"]) == expected
+            assert bucket["set_digest"] == producer._set_digest(expected)
+            buckets.append(expected)
+            projected_union |= expected
+        assert projected_union == units
+        assert all(
+            left.isdisjoint(right)
+            for index, left in enumerate(buckets)
+            for right in buckets[index + 1 :]
+        )
+        assert payload["projection_invariants"][dimension] == {
+            "pairwise_intersections": 0,
+            "union_matches_authoring_backlog": True,
+        }
+
+
+def test_qcm_question_capacity_is_resolved_exactly(producer, tmp_path: Path) -> None:
+    corpus, chapter = _synthetic_corpus(tmp_path)
+    qcm = chapter / "qcm/TSPE-X-QCM.json"
+    qcm.parent.mkdir(parents=True)
+    qcm.write_text(
+        json.dumps(
+            {
+                "chapitre": "TSPE-X",
+                "questions": [
+                    {"id": "Q1", "capacite": "TSPE-X-C1", "options": {}}
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    identity = producer._resolver_module()
+    resolver = identity.CapacityIdentityResolver.from_corpora((corpus,))
+
+    measured = producer.build_coverage(
+        resolver=resolver,
+        clone_ledger=_empty_clone_ledger(),
+        corpora=(corpus,),
+        source_paths=[],
+        qcm_paths=[qcm],
+    )
+    cell = next(row for row in measured["rows"] if row["role"] == "qcm")
+    assert cell["state"] == "DECLARED_EXACT_IDENTITY_NOT_SEMANTICALLY_VALIDATED"
+    assert cell["valid_object_ids"] == ["TSPE-X/TSPE-X-QCM.json#Q1"]
+
+
+def test_multiple_qcm_sources_never_union_their_capacity_credits(
+    producer, tmp_path: Path
+) -> None:
+    corpus, chapter = _synthetic_corpus(tmp_path)
+    paths = []
+    for name in ("A-QCM.json", "B-QCM.json"):
+        qcm = chapter / "qcm" / name
+        qcm.parent.mkdir(parents=True, exist_ok=True)
+        qcm.write_text(
+            json.dumps(
+                {
+                    "chapitre": "TSPE-X",
+                    "questions": [{"id": "Q1", "capacite": "C1"}],
+                }
+            ),
+            encoding="utf-8",
+        )
+        paths.append(qcm)
+    identity = producer._resolver_module()
+    resolver = identity.CapacityIdentityResolver.from_corpora((corpus,))
+    with pytest.raises(producer.CoverageError, match="MULTIPLE_QCM_SOURCES"):
+        producer.build_coverage(
+            resolver=resolver,
+            clone_ledger=_empty_clone_ledger(),
+            corpora=(corpus,),
+            source_paths=[],
+            qcm_paths=paths,
+        )
+
+
+def test_evaluation_credit_is_subject_to_clone_indeterminacy(
+    producer, tmp_path: Path
+) -> None:
+    corpus, chapter = _synthetic_corpus(tmp_path)
+    evaluation = _source(
+        chapter / "evaluations/ev.tex",
+        {
+            "id": "EV",
+            "chapitre": "TSPE-X",
+            "type_objet": "evaluation",
+            "capacites": ["TSPE-X-C1"],
+        },
+    )
+    identity = producer._resolver_module()
+    resolver = identity.CapacityIdentityResolver.from_corpora((corpus,))
+    measured = producer.build_coverage(
+        resolver=resolver,
+        clone_ledger=_empty_clone_ledger(
+            objects_with_indeterminate_credit=[str(evaluation)]
+        ),
+        corpora=(corpus,),
+        source_paths=[evaluation],
+        qcm_paths=[],
+    )
+    cell = next(row for row in measured["rows"] if row["role"] == "evaluations")
+    assert cell["state"] == "INDETERMINATE_CLONE_CREDIT"
+
+
+def test_an_assessment_correction_alone_never_credits_the_assessment_role(
+    producer, tmp_path: Path
+) -> None:
+    corpus, chapter = _synthetic_corpus(tmp_path)
+    correction = _source(
+        chapter / "evaluations/ev-corrige.tex",
+        {
+            "id": "EV-CORRIGE",
+            "chapitre": "TSPE-X",
+            "type_objet": "corrige_evaluation",
+            "capacites": ["TSPE-X-C1"],
+        },
+    )
+    identity = producer._resolver_module()
+    resolver = identity.CapacityIdentityResolver.from_corpora((corpus,))
+    measured = producer.build_coverage(
+        resolver=resolver,
+        clone_ledger=_empty_clone_ledger(),
+        corpora=(corpus,),
+        source_paths=[correction],
+        qcm_paths=[],
+    )
+    cell = next(row for row in measured["rows"] if row["role"] == "evaluations")
+    assert cell["state"] == "MISSING"
+
+
+def test_hint_inside_exercises_never_credits_the_exercise_role(
+    producer, tmp_path: Path
+) -> None:
+    corpus, chapter = _synthetic_corpus(tmp_path)
+    hint = _source(
+        chapter / "exercices/hint.tex",
+        {
+            "id": "HINT",
+            "chapitre": "TSPE-X",
+            "type_objet": "coup_de_pouce",
+            "capacites_codes": ["C1"],
+        },
+    )
+    identity = producer._resolver_module()
+    resolver = identity.CapacityIdentityResolver.from_corpora((corpus,))
+    measured = producer.build_coverage(
+        resolver=resolver,
+        clone_ledger=_empty_clone_ledger(),
+        corpora=(corpus,),
+        source_paths=[hint],
+        qcm_paths=[],
+    )
+    cell = next(row for row in measured["rows"] if row["role"] == "exercices")
+    assert cell["state"] == "MISSING"
+    assert measured["role_type_mismatches"] == [
+        {
+            "path": str(hint),
+            "role": "exercices",
+            "type_objet": "coup_de_pouce",
+        }
+    ]
+
+
+def test_invalid_and_indeterminate_credit_sets_are_disjoint(payload: dict) -> None:
+    assert payload["invariants"]["invalid_and_indeterminate_disjoint"] is True
+    assert payload["capacity_identity_resolution"] == {
+        "ambiguous": 0,
+        "unresolved": 124,
+        "unknown": 0,
+    }
+    assert len(payload["capacity_identity_blockers"]) == 124

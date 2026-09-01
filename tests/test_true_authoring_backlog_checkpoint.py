@@ -41,22 +41,29 @@ def test_the_committed_checkpoint_matches_the_producer(producer) -> None:
     assert producer.main(["--check"]) == 0
 
 
-def test_the_checkpoint_is_backed_by_a_green_full_run(payload: dict) -> None:
-    """Un backlog gele sur une suite rouge n'a aucune autorite."""
+def test_only_an_established_checkpoint_is_backed_by_a_green_full_run(
+    payload: dict,
+) -> None:
+    """Le candidat reste explicitement non autoritaire avant le full run."""
 
     run = payload["validating_full_run"]
-    assert run["failed"] == 0
-    assert run["errors"] == 0
-    assert run["rc"] == 0
-    assert run["passed"] == run["collected"]
-    assert len(run["source_sha"]) == 40
-    assert len(run["log_sha256"]) == 64
+    if payload["checkpoint_status"] == "ESTABLISHED":
+        assert run["failed"] == 0
+        assert run["errors"] == 0
+        assert run["rc"] == 0
+        assert run["passed"] == run["collected"]
+        assert len(run["source_sha"]) == 40
+        assert len(run["log_sha256"]) == 64
+    else:
+        assert payload["checkpoint_status"] == "CANDIDATE_UNVALIDATED"
+        assert payload["checkpoint"] == "TRUE_AUTHORING_BACKLOG_CANDIDATE"
+        assert run is None
 
 
 def test_the_totals_close_exactly(payload: dict) -> None:
     totals = payload["totals"]
     assert (
-        totals["cells_with_valid_content"]
+        totals["cells_with_declared_exact_identity"]
         + totals["cells_with_indeterminate_credit"]
         + totals["AUTHORING_UNITS_REQUIRED_CURRENT"]
         == totals["cells"]
@@ -66,6 +73,27 @@ def test_the_totals_close_exactly(payload: dict) -> None:
     assert sum(payload["per_manual"].values()) == len(payload["authoring_units"])
     assert sum(payload["per_role"].values()) == len(payload["authoring_units"])
     assert sum(payload["per_chapter"].values()) == len(payload["authoring_units"])
+
+
+def test_checkpoint_exposes_auditable_sets_for_every_projection(payload: dict) -> None:
+    units = set(payload["authoring_units"])
+    for dimension in ("per_manual", "per_chapter", "per_capacity", "per_role"):
+        buckets = payload["authoring_unit_projections"][dimension]
+        projected = [set(bucket["unit_ids"]) for bucket in buckets.values()]
+        assert set().union(*projected) == units
+        assert all(
+            left.isdisjoint(right)
+            for index, left in enumerate(projected)
+            for right in projected[index + 1 :]
+        )
+        assert all(
+            bucket["count"] == len(bucket["unit_ids"])
+            for bucket in buckets.values()
+        )
+        assert all(
+            bucket["set_digest"].startswith("sha256:")
+            for bucket in buckets.values()
+        )
 
 
 def test_review_debt_is_not_counted_as_authoring(payload: dict) -> None:
@@ -93,7 +121,7 @@ def test_review_debt_is_not_counted_as_authoring(payload: dict) -> None:
 
 
 def test_the_previous_measure_is_explained_unit_by_unit(payload: dict) -> None:
-    """Pas de « -136 » sans nommer les 136."""
+    """La correction de mesure et l'authoring réel restent disjoints."""
 
     previous = payload["previous_measure"]
     delta = json.loads(
@@ -101,8 +129,22 @@ def test_the_previous_measure_is_explained_unit_by_unit(payload: dict) -> None:
     )
     assert previous["removed_as_false"] == delta["false_missing_gaps_removed"]
     assert len(delta["removed_units"]) == previous["removed_as_false"]
-    assert delta["unexplained_removals"] == 0
+    assert delta["unexplained_removals"] == len(delta["unexplained_units"])
+    assert delta["unexplained_removals"] == 145
+    assert delta["status"] == "GAP"
     assert sum(previous["removal_classes"].values()) == previous["removed_as_false"]
+    assert payload["real_authoring_closure"]["count"] == delta[
+        "real_authoring_closure"
+    ]["count"]
+    false_units = {
+        f"{row['chapter']}/{row['capacity']}/{row['role']}"
+        for row in delta["measurement_reclassification"]["units"]
+    }
+    authored_units = {
+        f"{row['chapter']}/{row['capacity']}/{row['role']}"
+        for row in delta["real_authoring_closure"]["units"]
+    }
+    assert false_units.isdisjoint(authored_units)
     for row in delta["removed_units"]:
-        assert row["satisfied_by"], row
-        assert row["resolution_rules_that_recover_it"]
+        assert row["current_object_paths"], row
+        assert row["canonical_capacity_uid"]

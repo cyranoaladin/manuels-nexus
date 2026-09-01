@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Le point de depart honnete de l'ecriture : ce qui manque REELLEMENT.
+"""Candidat au point de depart honnete de l'ecriture réelle.
 
-Le backlog annonce 460 unites d'ecriture. Il en comptait 136 qui n'existaient
-pas : du contenu present que la mesure ne savait pas reconnaitre, faute de
-resoudre l'identite des capacites, et des clones dont le proprietaire n'etant
-pas demontrable ne relevent pas de l'ecriture mais de la revue.
+Le backlog historique annonçait 460 unités. La correction de mesure en a
+reclassé 136 ; neuf autres ont ensuite été réellement fermées par authoring.
+Ces deux transitions sont disjointes et nommées ligne à ligne.
 
 Ecrire contre un backlog gonfle de 30 pour cent, c'est recreer exactement le
 remplissage que cette campagne repare. Ce checkpoint fige donc l'etat mesure
@@ -30,17 +29,35 @@ CLONE = ROOT / "audit/P0_CONTENT_CLONE_LEDGER.json"
 OUTPUT = ROOT / "audit/TRUE_AUTHORING_BACKLOG_ESTABLISHED.json"
 
 #: Run complet vert qui autorise le gel. Sans lui le chiffre n'a pas d'autorite.
-VALIDATING_RUN = {
-    "source_sha": "52c061428f472f9926829d5c5a4e1c74c7392e58",
-    "collected": 9277,
-    "passed": 9277,
-    "failed": 0,
-    "errors": 0,
-    "rc": 0,
-    "log_sha256": (
-        "be8bdc6d3dba6162385f9da5b11f6240ce47dbfeaa8eef0a109cb3c3437adeff"
-    ),
-}
+# Tant que le full supported run courant n'a pas été observé sur un arbre
+# propre, le producteur ne fabrique aucune autorité à partir d'un ancien run.
+# Ce champ est remplacé par le ledger exact du run seulement après RC=0.
+VALIDATING_RUN: dict[str, Any] | None = None
+
+
+def _set_digest(values: set[str]) -> str:
+    return "sha256:" + hashlib.sha256(
+        json.dumps(sorted(values), ensure_ascii=False, separators=(",", ":")).encode(
+            "utf-8"
+        )
+    ).hexdigest()
+
+
+def _projection(
+    backlog: list[dict[str, Any]], key_name: str
+) -> dict[str, dict[str, Any]]:
+    buckets: dict[str, set[str]] = collections.defaultdict(set)
+    for row in backlog:
+        unit = f"{row['chapter']}/{row['capacity']}/{row['role']}"
+        buckets[str(row[key_name])].add(unit)
+    return {
+        key: {
+            "count": len(units),
+            "unit_ids": sorted(units),
+            "set_digest": _set_digest(units),
+        }
+        for key, units in sorted(buckets.items())
+    }
 
 
 def build_checkpoint() -> dict[str, Any]:
@@ -58,11 +75,30 @@ def build_checkpoint() -> dict[str, Any]:
     identifiers = sorted(
         f"{row['chapter']}/{row['capacity']}/{row['role']}" for row in backlog
     )
+    projections = {
+        "per_manual": _projection(backlog, "manual"),
+        "per_chapter": _projection(backlog, "chapter"),
+        "per_capacity": _projection(backlog, "canonical_capacity_uid"),
+        "per_role": _projection(backlog, "role"),
+    }
+    semantic = coverage.get("semantic_alignment") or {}
+    semantic_established = (
+        semantic.get("status") == "ESTABLISHED_COLLECTION_WIDE"
+        and semantic.get("false_positive_credits") == 0
+    )
+    established = VALIDATING_RUN is not None and semantic_established
     return {
         "artifact_type": "true_authoring_backlog_established",
         "schema_version": 1,
         "generated_by": "scripts/build_true_authoring_backlog_checkpoint.py",
-        "checkpoint": "TRUE_AUTHORING_BACKLOG_ESTABLISHED",
+        "checkpoint": (
+            "TRUE_AUTHORING_BACKLOG_ESTABLISHED"
+            if established
+            else "TRUE_AUTHORING_BACKLOG_CANDIDATE"
+        ),
+        "checkpoint_status": (
+            "ESTABLISHED" if established else "CANDIDATE_UNVALIDATED"
+        ),
         "freshness_authority": "backlog_set_digest",
         "why_no_head_sha": (
             "un checkpoint qui epingle le HEAD courant devient perime des le "
@@ -71,6 +107,22 @@ def build_checkpoint() -> dict[str, Any]:
             "digest de l'ensemble des unites."
         ),
         "validating_full_run": VALIDATING_RUN,
+        "semantic_alignment": semantic,
+        "establishment_blockers": (
+            []
+            if established
+            else [
+                reason
+                for reason, blocked in (
+                    ("FULL_SUPPORTED_SUITE_NOT_GREEN", VALIDATING_RUN is None),
+                    (
+                        "SEMANTIC_ALIGNMENT_NOT_ESTABLISHED_COLLECTION_WIDE",
+                        not semantic_established,
+                    ),
+                )
+                if blocked
+            ]
+        ),
         "definition": (
             "une unite d'ecriture est un couple (capacite, role) qu'aucun "
             "contenu ne sert ; jamais un fichier a produire"
@@ -84,8 +136,8 @@ def build_checkpoint() -> dict[str, Any]:
         },
         "totals": {
             "cells": coverage["inventory"]["cells"],
-            "cells_with_valid_content": coverage["inventory"][
-                "cells_with_valid_content"
+            "cells_with_declared_exact_identity": coverage["inventory"][
+                "cells_with_declared_exact_identity"
             ],
             "cells_with_indeterminate_credit": coverage["inventory"][
                 "cells_with_indeterminate_credit"
@@ -93,9 +145,18 @@ def build_checkpoint() -> dict[str, Any]:
             "AUTHORING_UNITS_REQUIRED_CURRENT": len(backlog),
         },
         "previous_measure": {
+            "scope": "projection historique des cinq roles META comparables",
             "authoring_units_required": delta["before_authoring_units"],
             "removed_as_false": delta["false_missing_gaps_removed"],
             "removal_classes": delta["per_removal_class"],
+            "after_measurement_authoring_units": delta[
+                "after_measurement_authoring_units"
+            ],
+            "ledger": "audit/FALSE_MISSING_GAP_DELTA.json",
+        },
+        "real_authoring_closure": {
+            "count": delta["real_authoring_closure"]["count"],
+            "set_digest": delta["real_authoring_closure"]["set_digest"],
             "ledger": "audit/FALSE_MISSING_GAP_DELTA.json",
         },
         "per_manual": dict(sorted(per_manual.items())),
@@ -106,6 +167,7 @@ def build_checkpoint() -> dict[str, Any]:
         "per_capacity": dict(
             sorted(per_capacity.items(), key=lambda kv: (-kv[1], kv[0]))
         ),
+        "authoring_unit_projections": projections,
         "open_clone_debt": {
             "objects_on_invalid_credit": clone["inventory"][
                 "objects_on_invalid_credit"

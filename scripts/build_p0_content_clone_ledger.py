@@ -60,14 +60,6 @@ STRUCTURAL = re.compile(
     r"^\s*(?:%|\\(?:begin|end|section|subsection|input|include|clearpage"
     r"|newpage|vspace|hspace|noindent|par)\b|\s*$)"
 )
-BOILERPLATE_PAYLOAD_LIMIT = 120
-
-#: Le corps s'auto-designe : en-tete « FICHE DE REMEDIATION -- C7 »,
-#: identifiants internes « ...-RE-C7-EX1 ». Quand le corps nomme une capacite,
-#: c'est une preuve directe de ce qu'il traite, independante du META.
-BODY_CAPACITY = re.compile(r"\b(?:RE-)?C0*(\d{1,2})[A-Z]?\b")
-
-
 def manual_of(chapter: str) -> str:
     for prefix, manual in MANUAL_PREFIXES:
         if chapter.startswith(prefix):
@@ -102,6 +94,12 @@ def digest(value: str) -> str:
     return "sha256:" + hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
+def _set_digest(values: set[str] | list[str]) -> str:
+    return digest(
+        json.dumps(sorted(values), ensure_ascii=False, separators=(",", ":"))
+    )
+
+
 def read_meta(text: str) -> dict[str, Any]:
     if "META:" not in text:
         return {}
@@ -115,11 +113,13 @@ def read_meta(text: str) -> dict[str, Any]:
 _RESOLVER = None
 
 
-def _resolver():
+def _resolver(corpora: tuple[Path, ...] | None = None):
     """Table d'identite des capacites, chargee une fois."""
 
     global _RESOLVER
-    if _RESOLVER is None:
+    selected_corpora = tuple(corpora or CORPORA)
+    signature = tuple(str(path.resolve()) for path in selected_corpora)
+    if _RESOLVER is None or _RESOLVER[0] != signature:
         spec = importlib.util.spec_from_file_location(
             "capacity_identity", ROOT / "scripts/capacity_identity.py"
         )
@@ -127,11 +127,19 @@ def _resolver():
         module = importlib.util.module_from_spec(spec)
         sys.modules[spec.name] = module
         spec.loader.exec_module(module)
-        _RESOLVER = (module, module.CapacityIdentityResolver.from_corpora())
-    return _RESOLVER
+        _RESOLVER = (
+            signature,
+            module,
+            module.CapacityIdentityResolver.from_corpora(selected_corpora),
+        )
+    return _RESOLVER[1], _RESOLVER[2]
 
 
-def declared_capacities(meta: dict[str, Any]) -> tuple[str, ...]:
+def declared_capacities(
+    meta: dict[str, Any],
+    *,
+    chapter: str | None = None,
+) -> tuple[str, ...]:
     """Codes locaux credites, resolus dans la portee du chapitre.
 
     Cette fonction coupait autrefois la chaine a son dernier tiret :
@@ -140,24 +148,26 @@ def declared_capacities(meta: dict[str, Any]) -> tuple[str, ...]:
     contrat du chapitre.
     """
 
-    values = meta.get("capacites_codes") or meta.get("capacites") or []
     identity, resolver = _resolver()
-    chapter = str(meta.get("chapitre") or "").strip()
-    raws = [identity.normalise(value) for value in values]
-    raws = [value for value in raws if value]
-    if chapter in resolver.chapters:
-        return tuple(sorted(set(resolver.resolve_codes(chapter, raws))))
-    # Hors contrat connu, la chaine est conservee TELLE QUELLE : la reduire a
-    # un jeton reintroduirait exactement le defaut repare ici.
-    return tuple(sorted(set(raws)))
+    scope = chapter or identity.normalise(meta.get("chapitre"))
+    if scope not in resolver.chapters:
+        raise identity.UnresolvedCapacityIdentity(
+            f"chapitre sans contrat pour declaration de capacite: {scope or '<vide>'}"
+        )
+    return tuple(sorted(resolver.resolve_meta_codes(scope, meta)))
 
 
-def body_attested_capacities(body: str) -> tuple[str, ...]:
-    return tuple(sorted({f"C{int(m)}" for m in BODY_CAPACITY.findall(body)}))
+def _path_key(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
 
 
-def scan() -> list[dict[str, Any]]:
+def scan() -> tuple[list[dict[str, Any]], list[dict[str, str]]]:
     records: list[dict[str, Any]] = []
+    blockers: list[dict[str, str]] = []
+    identity, resolver = _resolver(CORPORA)
     for corpus in CORPORA:
         if not corpus.is_dir():
             continue
@@ -169,28 +179,54 @@ def scan() -> list[dict[str, Any]]:
             meta = read_meta(text)
             index = path.parts.index("chapitres") + 1
             chapter = path.parts[index]
+            try:
+                declared = tuple(sorted(resolver.resolve_meta_codes(chapter, meta)))
+            except identity.CapacityIdentityError as exc:
+                declared = ()
+                blockers.append(
+                    {
+                        "classification": (
+                            "AMBIGUOUS_CAPACITY_IDENTITY"
+                            if isinstance(exc, identity.AmbiguousCapacityIdentity)
+                            else "UNRESOLVED_CAPACITY_IDENTITY"
+                        ),
+                        "path": _path_key(path),
+                        "object_id": str(meta.get("id") or ""),
+                        "reason": str(exc),
+                    }
+                )
+            manual = manual_of(chapter)
             records.append(
                 {
-                    "path": str(path.relative_to(ROOT)),
+                    "path": _path_key(path),
                     "object_id": meta.get("id"),
                     "chapter": chapter,
-                    "manual": manual_of(chapter),
+                    "manual": manual,
                     "source_type": path.parts[index + 1],
                     "status": meta.get("status"),
-                    "declared_capacity": list(declared_capacities(meta)),
-                    "body_attested_capacity": list(body_attested_capacities(body)),
+                    "declared_capacity": list(declared),
+                    "declared_capacity_uids": [
+                        f"{manual}::{chapter}::{code}" for code in declared
+                    ],
                     "exact_body_digest": digest(body),
                     "normalized_body_digest": digest(normalized_body(body)),
                     "payload_chars": len(payload_only(body)),
+                    "payload_empty": not bool(payload_only(body)),
                 }
             )
-    return records
+    return records, sorted(
+        blockers, key=lambda row: (row["path"], row["object_id"], row["reason"])
+    )
 
 
 def disposition_of(members: list[dict[str, Any]]) -> str:
     """Chaque groupe recoit exactement une disposition."""
 
-    if max(row["payload_chars"] for row in members) < BOILERPLATE_PAYLOAD_LIMIT:
+    capacity_at_stake = any(
+        row.get("declared_capacity_uids") or row.get("declared_capacity")
+        for row in members
+    )
+    if all(row.get("payload_empty") is True for row in members) and not capacity_at_stake:
         return "BOILERPLATE_ONLY"
     if len({row["manual"] for row in members}) > 1:
         return "CROSS_MANUAL_CONTAMINATION"
@@ -207,6 +243,18 @@ CANONICAL_STATUSES = (
     "AMBIGUOUS",
     "UNKNOWN",
 )
+OWNERSHIP_EVIDENCE_FIELDS = {
+    "chapter_ownership",
+    "capacity_alignment",
+    "official_programme_alignment",
+    "canonical_assembly",
+    "source_provenance",
+    "contract_role",
+}
+
+
+class CloneEvidenceError(RuntimeError):
+    """Une preuve de propriété est incomplète ou contradictoire."""
 
 
 def select_canonical(group: dict[str, Any]) -> dict[str, Any]:
@@ -223,26 +271,13 @@ def select_canonical(group: dict[str, Any]) -> dict[str, Any]:
     Les preuves sont examinees dans cet ordre, et chacune ne conclut que si
     elle designe un proprietaire UNIQUE :
 
-    `BODY_SELF_ATTESTATION`
-        Le corps nomme lui-meme la capacite qu'un seul de ses porteurs
-        declare. C'est la preuve la plus forte : le contenu temoigne.
-
-    `CHAPTER_SELF_DUPLICATION`
-        Un chapitre qui detient le meme corps sous plusieurs capacites
-        distinctes le represente faussement, quelle que soit son anciennete.
-        Si un seul autre chapitre le detient sous une capacite unique, c'est
-        lui le proprietaire.
-
-    `IDENTICAL_CAPACITY_CREDIT`
-        Tous les porteurs creditent la meme capacite. Le choix d'un canonique
-        n'a alors aucun effet sur le credit : la duplication est physique, pas
-        semantique.
-
     `NO_CAPACITY_AT_STAKE`
         Le corps est du gabarit sans contenu pedagogique.
 
-    Sans preuve concluante, le statut est `AMBIGUOUS` et le groupe part en
-    revue humaine. On ne tranche pas.
+    Une occurrence textuelle `C<n>` n'est jamais une preuve : elle peut être
+    une variable Python, un renvoi ou un identifiant interne. En l'absence
+    d'une ownership map autoritaire fondée sur programme, contrat, assemblage
+    et provenance, le statut est `AMBIGUOUS` et le groupe part en revue.
     """
 
     members = group["members"]
@@ -257,83 +292,32 @@ def select_canonical(group: dict[str, Any]) -> dict[str, Any]:
             "reason": "gabarit sans contenu pedagogique : aucun credit en jeu",
         }
 
-    # 1. Le corps temoigne pour lui-meme.
-    aligned = sorted(
-        row["path"]
-        for row in members
-        if row["body_attested_capacity"]
-        and set(row["declared_capacity"]) & set(row["body_attested_capacity"])
-    )
-    if aligned:
-        attested = {
-            tuple(sorted(set(row["declared_capacity"]) & set(row["body_attested_capacity"])))
-            for row in members
-            if row["path"] in set(aligned)
-        }
-        if len(attested) == 1:
-            return {
-                "status": "SEMANTIC_CANONICAL",
-                "evidence_rule": "BODY_SELF_ATTESTATION",
-                "canonical_paths": aligned,
-                "false_copy_paths": [p for p in paths if p not in set(aligned)],
-                "reason": (
-                    "le corps nomme la capacite que ces porteurs declarent ; "
-                    "les autres la revendiquent sans la servir"
-                ),
-            }
-        return {
-            "status": "AMBIGUOUS",
-            "evidence_rule": "BODY_SELF_ATTESTATION",
-            "canonical_paths": [],
-            "false_copy_paths": [],
-            "reason": (
-                "plusieurs porteurs sont attestes par le corps pour des "
-                "capacites differentes : le corps ne designe pas un proprietaire"
-            ),
-        }
-
-    # 2. Un chapitre qui se duplique lui-meme represente faussement.
-    by_chapter: dict[str, set[str]] = collections.defaultdict(set)
-    for row in members:
-        by_chapter[row["chapter"]].update(row["declared_capacity"])
-    duplicating = {c for c, caps in by_chapter.items() if len(caps) > 1}
-    single = sorted(set(by_chapter) - duplicating)
-    if duplicating and len(single) == 1:
-        owner = single[0]
-        canonical = sorted(row["path"] for row in members if row["chapter"] == owner)
+    ownership = group.get("ownership_evidence")
+    if ownership is not None:
+        canonical = sorted(set(ownership.get("canonical_paths") or []))
+        authority = ownership.get("authority") or {}
+        if len(canonical) != 1 or not set(canonical) <= set(paths):
+            raise CloneEvidenceError(
+                "ownership_evidence: un chemin canonique unique du groupe est requis"
+            )
+        missing = sorted(
+            field
+            for field in OWNERSHIP_EVIDENCE_FIELDS
+            if not authority.get(field)
+        )
+        if missing:
+            raise CloneEvidenceError(
+                "ownership_evidence incomplet: " + ", ".join(missing)
+            )
         return {
             "status": "SEMANTIC_CANONICAL",
-            "evidence_rule": "CHAPTER_SELF_DUPLICATION",
+            "evidence_rule": "AUTHORITATIVE_OWNERSHIP_MAP",
             "canonical_paths": canonical,
-            "false_copy_paths": [p for p in paths if p not in set(canonical)],
+            "false_copy_paths": [path for path in paths if path not in set(canonical)],
+            "authority": {key: authority[key] for key in sorted(authority)},
             "reason": (
-                f"{sorted(duplicating)} detiennent ce corps sous plusieurs "
-                f"capacites distinctes et le representent faussement ; "
-                f"{owner} le detient sous une capacite unique"
-            ),
-        }
-
-    # 3. Tous creditent la meme capacite : le canonique est sans effet.
-    #
-    # La comparaison porte sur l'identite PLEINEMENT QUALIFIEE, pas sur le
-    # code local. `C1` de TSPE-DERIVATION-CONVEXITE et `C1` de
-    # 1NSI-ALGO-PARCOURS-TRIS ne sont pas la meme capacite -- c'est le
-    # principe meme du resolveur, et le comparer sur le code nu le violait :
-    # une methode de mathematiques logee dans un chapitre de NSI etait
-    # blanchie comme « duplication physique sans usurpation ».
-    identities = {
-        (row["manual"], row["chapter"], tuple(row["declared_capacity"]))
-        for row in members
-    }
-    if len(identities) == 1:
-        return {
-            "status": "LEGITIMATE_SHARED_CANONICAL",
-            "evidence_rule": "IDENTICAL_CAPACITY_CREDIT",
-            "canonical_paths": paths,
-            "false_copy_paths": [],
-            "reason": (
-                "tous les porteurs creditent la meme capacite : la duplication "
-                "est physique, le credit n'est pas usurpe"
+                "le propriétaire est démontré par ownership, capacité, programme, "
+                "assemblage, provenance et rôle contractuel"
             ),
         }
 
@@ -351,7 +335,7 @@ def select_canonical(group: dict[str, Any]) -> dict[str, Any]:
 
 
 def build_ledger() -> dict[str, Any]:
-    records = scan()
+    records, capacity_identity_blockers = scan()
     by_body: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
     for row in records:
         by_body[row["exact_body_digest"]].append(row)
@@ -362,14 +346,6 @@ def build_ledger() -> dict[str, Any]:
     ):
         members = sorted(members, key=lambda row: row["path"])
         disposition = disposition_of(members)
-        # Le membre dont le CORPS atteste sa propre capacite garde le credit ;
-        # les autres le revendiquent sans le servir.
-        aligned = [
-            row
-            for row in members
-            if row["body_attested_capacity"]
-            and set(row["declared_capacity"]) & set(row["body_attested_capacity"])
-        ]
         groups.append(
             {
                 "clone_group_id": f"CG-{index + 1:04d}",
@@ -379,12 +355,11 @@ def build_ledger() -> dict[str, Any]:
                 "excess_object_count": len(members) - 1,
                 "disposition": disposition,
                 "same_capacity": len(
-                    {tuple(r["declared_capacity"]) for r in members}
+                    {tuple(r["declared_capacity_uids"]) for r in members}
                 )
                 == 1,
                 "same_chapter": len({r["chapter"] for r in members}) == 1,
                 "same_manual": len({r["manual"] for r in members}) == 1,
-                "body_aligned_member_paths": [row["path"] for row in aligned],
                 "members": members,
             }
         )
@@ -394,6 +369,21 @@ def build_ledger() -> dict[str, Any]:
     for group in groups:
         selection = select_canonical(group)
         group["canonical_selection"] = selection
+        canonical = set(selection["canonical_paths"])
+        false_copies = set(selection["false_copy_paths"])
+        for row in group["members"]:
+            if selection["status"] == "LEGITIMATE_SHARED_CANONICAL":
+                row["canonical_object_status"] = "LEGITIMATE_SHARED_CANONICAL"
+            elif selection["status"] == "AMBIGUOUS":
+                row["canonical_object_status"] = "AMBIGUOUS"
+            elif selection["status"] == "UNKNOWN":
+                row["canonical_object_status"] = "UNKNOWN"
+            elif row["path"] in canonical:
+                row["canonical_object_status"] = "SEMANTIC_CANONICAL"
+            elif row["path"] in false_copies:
+                row["canonical_object_status"] = "FALSE_COPY"
+            else:
+                row["canonical_object_status"] = "UNKNOWN"
         if selection["status"] == "LEGITIMATE_SHARED_CANONICAL":
             continue
         if selection["status"] == "AMBIGUOUS":
@@ -408,16 +398,15 @@ def build_ledger() -> dict[str, Any]:
         for row in group["members"]:
             if row["path"] not in keep:
                 invalid_credit.add(row["path"])
-    for row in records:
-        declared, attested = set(row["declared_capacity"]), set(
-            row["body_attested_capacity"]
-        )
-        if declared and attested and not (declared & attested):
-            invalid_credit.add(row["path"])
-    # Un objet dementi par son PROPRE corps est invalide, pas indetermine :
-    # la contradiction est une preuve, et elle est plus forte que l'absence
-    # de proprietaire demontrable dans son groupe. Les deux ensembles doivent
-    # rester disjoints, sinon le meme objet serait compte deux fois.
+    # Les deux ensembles doivent rester disjoints. Une simple occurrence
+    # lexicale dans le corps ne peut jamais rendre un crédit invalide.
+    indeterminate_credit -= invalid_credit
+    # Une déclaration de capacité non résolue ne peut jamais conserver un
+    # crédit. Le ledger continue à mesurer les clones, mais rend ce blocker
+    # explicite et place l'objet en revue indéterminée.
+    indeterminate_credit.update(
+        row["path"] for row in capacity_identity_blockers
+    )
     indeterminate_credit -= invalid_credit
 
     per_manual: dict[str, collections.Counter] = collections.defaultdict(
@@ -426,8 +415,14 @@ def build_ledger() -> dict[str, Any]:
     per_chapter: dict[str, collections.Counter] = collections.defaultdict(
         collections.Counter
     )
+    unattributed_excess = 0
     for group in groups:
-        for row in group["members"][1:]:
+        selection = group["canonical_selection"]
+        if selection["status"] in {"AMBIGUOUS", "UNKNOWN"}:
+            unattributed_excess += group["excess_object_count"]
+        for row in group["members"]:
+            if row["canonical_object_status"] != "FALSE_COPY":
+                continue
             per_manual[row["manual"]][group["disposition"]] += 1
             per_manual[row["manual"]]["TOTAL"] += 1
             per_chapter[row["chapter"]][group["disposition"]] += 1
@@ -458,6 +453,10 @@ def build_ledger() -> dict[str, Any]:
                 "verify block",
             ],
             "unpublished_directories_excluded": list(UNPUBLISHED),
+            "boilerplate_rule": (
+                "payload structurel strictement vide ET aucune capacite declaree; "
+                "la longueur courte ne prouve jamais l'absence de contenu"
+            ),
         },
         "inventory": {
             "objects_scanned": len(records),
@@ -472,12 +471,18 @@ def build_ledger() -> dict[str, Any]:
             "unknown_canonical_groups": sum(
                 1 for g in groups if g["canonical_selection"]["status"] == "UNKNOWN"
             ),
+            "capacity_identity_blockers": len(capacity_identity_blockers),
         },
         "dispositions": {
             name: {"groups": dispositions[name], "excess_objects": excess[name]}
             for name in sorted(dispositions)
         },
-        "unknown": 0,
+        "unknown": sum(
+            1
+            for group in groups
+            if group["canonical_selection"]["status"] == "UNKNOWN"
+        ),
+        "unattributed_excess_objects": unattributed_excess,
         "per_manual": {k: dict(v) for k, v in sorted(per_manual.items())},
         "per_chapter": {
             k: dict(v)
@@ -486,8 +491,9 @@ def build_ledger() -> dict[str, Any]:
             )
         },
         "canonical_selection_rule": (
-            "le proprietaire semantique est etabli par preuve ; l'ordre des "
-            "chemins n'intervient jamais"
+            "le proprietaire semantique est etabli par une ownership map "
+            "autoritaire couvrant programme, contrat, assemblage et provenance ; "
+            "l'ordre des chemins n'intervient jamais"
         ),
         "canonical_selection_counts": {
             status: sum(
@@ -497,6 +503,13 @@ def build_ledger() -> dict[str, Any]:
         },
         "objects_on_invalid_credit": sorted(invalid_credit),
         "objects_with_indeterminate_credit": sorted(indeterminate_credit),
+        "capacity_identity_blockers": capacity_identity_blockers,
+        "capacity_identity_blockers_digest": _set_digest(
+            {
+                f"{row['classification']}::{row['path']}::{row['object_id']}::{row['reason']}"
+                for row in capacity_identity_blockers
+            }
+        ),
         "groups": groups,
     }
 

@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -13,8 +14,17 @@ import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT / "scripts") not in sys.path:
+    sys.path.insert(0, str(ROOT / "scripts"))
+from capacity_identity import (  # noqa: E402
+    CapacityIdentityResolver,
+    PREREQUISITE,
+    UnresolvedCapacityIdentity,
+)
+
 MATH_ROOT = ROOT / "Mathematiques" / "manuel-maths"
 CHAPTER_ROOT = MATH_ROOT / "chapitres"
+CHAPTER_ROOTS = (CHAPTER_ROOT, ROOT / "NSI" / "chapitres")
 TARGET = ROOT / "audit" / "QCM_CAPACITY_COVERAGE_DEBT.json"
 
 
@@ -22,14 +32,34 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def _qcm_sources() -> list[Path]:
-    return sorted(CHAPTER_ROOT.glob("*/qcm/*-QCM.json"))
+def _display_path(path: Path) -> str:
+    return str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path)
+
+
+def _qcm_sources(chapter_root: Path | None = None) -> list[Path]:
+    roots = (chapter_root,) if chapter_root is not None else CHAPTER_ROOTS
+    paths = sorted(
+        path for root in roots for path in root.glob("*/qcm/*-QCM.json")
+    )
+    counts: dict[str, int] = {}
+    for path in paths:
+        chapter = path.parent.parent.name
+        counts[chapter] = counts.get(chapter, 0) + 1
+    duplicates = sorted(chapter for chapter, count in counts.items() if count > 1)
+    if duplicates:
+        raise ValueError("MULTIPLE_QCM_SOURCES: " + ", ".join(duplicates))
+    return paths
+
+
+def _contract_sources(chapter_root: Path | None = None) -> list[Path]:
+    roots = (chapter_root,) if chapter_root is not None else CHAPTER_ROOTS
+    return sorted(path for root in roots for path in root.glob("*/contrat.yaml"))
 
 
 def _source_digest(paths: list[Path]) -> str:
     digest = hashlib.sha256()
     for path in paths:
-        digest.update(str(path.relative_to(ROOT)).encode("utf-8"))
+        digest.update(_display_path(path).encode("utf-8"))
         digest.update(b"\0")
         digest.update(path.read_bytes())
         digest.update(b"\0")
@@ -64,28 +94,57 @@ def _distractor_gaps(question: dict[str, Any]) -> list[str]:
     return sorted(gaps)
 
 
-def build_debt() -> dict[str, Any]:
+def build_debt(
+    *,
+    resolver: CapacityIdentityResolver | None = None,
+    chapter_root: Path | None = None,
+) -> dict[str, Any]:
+    resolver = resolver or CapacityIdentityResolver.from_corpora()
     missing_by_chapter: dict[str, list[str]] = {}
     distractor_gaps_by_chapter: dict[str, dict[str, list[str]]] = {}
     source_inputs: list[dict[str, Any]] = []
     source_paths: list[Path] = []
     total_questions = 0
 
-    for qcm_path in _qcm_sources():
-        chapter = qcm_path.parent.parent.name
-        contract_path = qcm_path.parent.parent / "contrat.yaml"
-        if not contract_path.is_file():
-            raise FileNotFoundError(f"contrat absent pour {chapter}: {contract_path}")
+    qcm_paths = _qcm_sources(chapter_root)
+    qcm_by_chapter = {path.parent.parent.name: path for path in qcm_paths}
+    contract_paths = _contract_sources(chapter_root)
+    contract_chapters = {path.parent.name for path in contract_paths}
+    orphan_qcm = sorted(set(qcm_by_chapter) - contract_chapters)
+    if orphan_qcm:
+        raise FileNotFoundError(
+            "QCM_WITHOUT_CONTRACT: " + ", ".join(orphan_qcm)
+        )
 
-        qcm = json.loads(qcm_path.read_text(encoding="utf-8"))
+    for contract_path in contract_paths:
+        chapter = contract_path.parent.name
+        qcm_path = qcm_by_chapter.get(chapter)
         contract = yaml.safe_load(contract_path.read_text(encoding="utf-8"))
-        if qcm["chapitre"] != chapter or contract["chapitre"] != chapter:
+        if contract["chapitre"] != chapter:
+            raise ValueError(f"identité de chapitre incohérente: {chapter}")
+
+        qcm = (
+            json.loads(qcm_path.read_text(encoding="utf-8"))
+            if qcm_path is not None
+            else {"chapitre": chapter, "questions": []}
+        )
+        if qcm["chapitre"] != chapter:
             raise ValueError(f"identité de chapitre incohérente: {chapter}")
 
         questions = qcm["questions"]
         total_questions += len(questions)
-        expected = {item["code"] for item in (contract.get("capacites") or [])}
-        questioned = {item["capacite"] for item in questions}
+        expected = {
+            identity.local_code for identity in resolver.capacities_of(chapter)
+        }
+        questioned: set[str] = set()
+        for question in questions:
+            resolution = resolver.resolve(chapter, question.get("capacite"))
+            if resolution.rule == PREREQUISITE:
+                raise UnresolvedCapacityIdentity(
+                    f"{chapter}/{question.get('id')}: prerequis utilise "
+                    "comme capacite QCM"
+                )
+            questioned.add(resolution.identity.local_code)
         missing = sorted(expected - questioned)
         if missing:
             missing_by_chapter[chapter] = missing
@@ -98,13 +157,15 @@ def build_debt() -> dict[str, Any]:
         if chapter_gaps:
             distractor_gaps_by_chapter[chapter] = chapter_gaps
 
-        source_paths.extend((qcm_path, contract_path))
+        source_paths.append(contract_path)
+        if qcm_path is not None:
+            source_paths.append(qcm_path)
         source_inputs.append(
             {
                 "chapter": chapter,
-                "qcm_path": str(qcm_path.relative_to(ROOT)),
-                "qcm_sha256": f"sha256:{_sha256(qcm_path)}",
-                "contract_path": str(contract_path.relative_to(ROOT)),
+                "qcm_path": _display_path(qcm_path) if qcm_path else None,
+                "qcm_sha256": f"sha256:{_sha256(qcm_path)}" if qcm_path else None,
+                "contract_path": _display_path(contract_path),
                 "contract_sha256": f"sha256:{_sha256(contract_path)}",
                 "question_count": len(questions),
                 "contract_capacity_count": len(expected),
@@ -140,7 +201,7 @@ def build_debt() -> dict[str, Any]:
         "source_digest": _source_digest(sorted(source_paths)),
         "source_inputs": source_inputs,
         "inventory": {
-            "qcm_files": len(source_inputs),
+            "qcm_files": len(qcm_paths),
             "chapters": len(source_inputs),
             "questions": total_questions,
         },

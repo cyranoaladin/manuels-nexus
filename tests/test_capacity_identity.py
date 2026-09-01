@@ -210,6 +210,26 @@ def test_a_reference_that_is_also_a_local_code_fails_closed(module, tmp_path):
         module.CapacityIdentityResolver.from_corpora(corpora)
 
 
+def test_official_reference_cannot_collide_with_a_scoped_local_key(
+    module, tmp_path
+):
+    """Chaque chaîne d'alias doit désigner un seul UID dès la construction."""
+
+    corpora = _corpus(
+        tmp_path,
+        {
+            "TSPE-X": {
+                "capacites": [
+                    {"code": "C1", "ref_capacite": "REF-1"},
+                    {"code": "C2", "ref_capacite": "TSPE-X-C1"},
+                ]
+            }
+        },
+    )
+    with pytest.raises(module.AmbiguousCapacityIdentity, match="cle qualifiee"):
+        module.CapacityIdentityResolver.from_corpora(corpora)
+
+
 def test_an_unknown_string_never_resolves_to_a_best_effort(module, tmp_path):
     corpora = _corpus(
         tmp_path, {"TSPE-X": {"capacites": [{"code": "C1", "ref_capacite": "X-C1"}]}}
@@ -218,6 +238,171 @@ def test_an_unknown_string_never_resolves_to_a_best_effort(module, tmp_path):
     for unknown in ("C2", "X-C2", "P-ALGO-01A", "", "  "):
         with pytest.raises(module.CapacityIdentityError):
             resolver.resolve("TSPE-X", unknown)
+
+
+def test_none_and_non_text_capacity_identifiers_fail_closed(module):
+    assert module.normalise(None) == ""
+    with pytest.raises(module.CapacityIdentityError):
+        module.normalise(1)
+
+
+def test_blank_explicit_official_reference_fails_closed(module, tmp_path):
+    corpora = _corpus(
+        tmp_path,
+        {"TSPE-X": {"capacites": [{"code": "C1", "ref_capacite": "   "}]}},
+    )
+    with pytest.raises(module.CapacityIdentityError, match="reference officielle vide"):
+        module.CapacityIdentityResolver.from_corpora(corpora)
+
+
+def test_duplicate_chapter_directory_across_corpora_fails_closed(module, tmp_path):
+    first = _corpus(
+        tmp_path / "first",
+        {"TSPE-X": {"capacites": [{"code": "C1", "ref_capacite": "X-C1"}]}},
+    )[0]
+    second = _corpus(
+        tmp_path / "second",
+        {"TSPE-X": {"capacites": [{"code": "C2", "ref_capacite": "X-C2"}]}},
+    )[0]
+    with pytest.raises(module.AmbiguousCapacityIdentity, match="deux corpus"):
+        module.CapacityIdentityResolver.from_corpora((first, second))
+
+
+def test_missing_corpus_and_unknown_chapter_fail_closed(module, tmp_path):
+    with pytest.raises(module.CapacityIdentityError, match="corpus absent"):
+        module.CapacityIdentityResolver.from_corpora((tmp_path / "absent",))
+
+    resolver = module.CapacityIdentityResolver.from_corpora(
+        _corpus(
+            tmp_path / "present",
+            {"TSPE-X": {"capacites": [{"code": "C1", "ref_capacite": "X-C1"}]}},
+        )
+    )
+    with pytest.raises(module.UnresolvedCapacityIdentity, match="chapitre sans contrat"):
+        resolver.capacities_of("TSPE-ABSENT")
+
+
+def test_official_reference_is_globally_one_to_one(module, tmp_path):
+    corpora = _corpus(
+        tmp_path,
+        {
+            "TSPE-X": {"capacites": [{"code": "C1", "ref_capacite": "REF"}]},
+            "TSPE-Y": {"capacites": [{"code": "C2", "ref_capacite": "REF"}]},
+        },
+    )
+    with pytest.raises(module.AmbiguousCapacityIdentity, match="collection"):
+        module.CapacityIdentityResolver.from_corpora(corpora)
+
+
+def test_unknown_manual_prefix_cannot_form_a_canonical_uid(module, tmp_path):
+    corpora = _corpus(
+        tmp_path,
+        {"ALIEN-X": {"capacites": [{"code": "C1", "ref_capacite": "REF"}]}},
+    )
+    with pytest.raises(module.CapacityIdentityError, match="manuel inconnu"):
+        module.CapacityIdentityResolver.from_corpora(corpora)
+
+
+def test_meta_fields_must_resolve_to_the_same_identity_set(module, tmp_path):
+    corpora = _corpus(
+        tmp_path,
+        {
+            "TSPE-X": {
+                "capacites": [
+                    {"code": "C1", "ref_capacite": "REF-C1"},
+                    {"code": "C2", "ref_capacite": "REF-C2"},
+                ]
+            }
+        },
+    )
+    resolver = module.CapacityIdentityResolver.from_corpora(corpora)
+    with pytest.raises(module.AmbiguousCapacityIdentity, match="contradictoires"):
+        resolver.resolve_meta_codes(
+            "TSPE-X",
+            {
+                "chapitre": "TSPE-X",
+                "capacites_codes": ["C1"],
+                "capacites": ["REF-C2"],
+            },
+        )
+
+
+@pytest.mark.parametrize(
+    "values",
+    (["R1"], ["C1", "R1"]),
+)
+def test_prerequisite_in_capacity_field_fails_closed(module, tmp_path, values):
+    corpora = _corpus(
+        tmp_path,
+        {
+            "TSPE-X": {
+                "capacites": [{"code": "C1", "ref_capacite": "REF-C1"}],
+                "prerequis": [{"code": "R1"}],
+            }
+        },
+    )
+    resolver = module.CapacityIdentityResolver.from_corpora(corpora)
+    with pytest.raises(module.UnresolvedCapacityIdentity, match="prerequis.*capacite"):
+        resolver.resolve_meta_codes(
+            "TSPE-X",
+            {"chapitre": "TSPE-X", "capacites_codes": values},
+        )
+
+
+def test_meta_chapter_must_match_explicit_scope(module, tmp_path):
+    corpora = _corpus(
+        tmp_path,
+        {
+            "TSPE-X": {"capacites": [{"code": "C1", "ref_capacite": "X-C1"}]},
+            "TSPE-Y": {"capacites": [{"code": "C1", "ref_capacite": "Y-C1"}]},
+        },
+    )
+    resolver = module.CapacityIdentityResolver.from_corpora(corpora)
+    with pytest.raises(module.CapacityIdentityError, match="chapitre META"):
+        resolver.resolve_meta_codes(
+            "TSPE-X", {"chapitre": "TSPE-Y", "capacites_codes": ["C1"]}
+        )
+
+
+def test_meta_reference_and_local_alias_for_same_uid_are_accepted(module, tmp_path):
+    corpora = _corpus(
+        tmp_path,
+        {
+            "TSPE-PROBABILITES": {
+                "capacites": [
+                    {"code": "C1", "ref_capacite": "TSPE-PROBA-C1"},
+                    {"code": "C10", "ref_capacite": "TSPE-CONCLGN-C1"},
+                ]
+            }
+        },
+    )
+    resolver = module.CapacityIdentityResolver.from_corpora(corpora)
+    assert resolver.resolve_meta_codes(
+        "TSPE-PROBABILITES",
+        {
+            "chapitre": "TSPE-PROBABILITES",
+            "capacites_codes": ["C10"],
+            "capacites": ["TSPE-CONCLGN-C1"],
+        },
+    ) == ("C10",)
+
+
+def test_alias_digest_covers_the_complete_alias_rows(module, tmp_path):
+    left = module.CapacityIdentityResolver.from_corpora(
+        _corpus(
+            tmp_path / "left",
+            {"TSPE-X": {"capacites": [{"code": "C1", "ref_capacite": "REF-A"}]}},
+        )
+    )
+    right = module.CapacityIdentityResolver.from_corpora(
+        _corpus(
+            tmp_path / "right",
+            {"TSPE-X": {"capacites": [{"code": "C1", "ref_capacite": "REF-B"}]}},
+        )
+    )
+    assert module.build_alias_map(left)["alias_digest"] != module.build_alias_map(
+        right
+    )["alias_digest"]
 
 
 # -- normalisation : le qualifiant n'est jamais retire -----------------------

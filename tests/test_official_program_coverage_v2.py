@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import importlib.util
 import re
 import subprocess
 import sys
@@ -31,6 +32,14 @@ SOURCE_FIELDS = (
     "assessment_sources",
     "remediation_sources",
 )
+
+
+def _producer():
+    spec = importlib.util.spec_from_file_location("official_coverage", SCRIPT)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def _rows() -> list[dict]:
@@ -67,6 +76,23 @@ def test_every_mandatory_atom_has_exactly_one_coverage_row() -> None:
     assert len(rows) == len(mandatory_ids)
     assert {row["atom_id"] for row in rows} == mandatory_ids
     assert len({row["atom_id"] for row in rows}) == len(rows)
+
+
+def test_producer_itself_rejects_missing_or_duplicate_mandatory_atoms() -> None:
+    producer = _producer()
+    atoms = [
+        {"atom_id": "A", "mandatory": "YES"},
+        {"atom_id": "B", "mandatory": "YES"},
+        {"atom_id": "N", "mandatory": "NO"},
+    ]
+    producer._validate_mandatory_bijection(atoms, [{"atom_id": "A"}, {"atom_id": "B"}])
+    for rows in ([{"atom_id": "A"}], [{"atom_id": "A"}, {"atom_id": "A"}, {"atom_id": "B"}]):
+        try:
+            producer._validate_mandatory_bijection(atoms, rows)
+        except ValueError as exc:
+            assert "MANDATORY_ATOM_BIJECTION" in str(exc)
+        else:  # pragma: no cover - assertion message is more useful than pytest magic here
+            raise AssertionError("a missing or duplicate mandatory atom must fail closed")
 
 
 def test_coverage_rows_are_traceable_and_do_not_fake_full() -> None:
