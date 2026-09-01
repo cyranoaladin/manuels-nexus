@@ -27,6 +27,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import audit_editorial_diacritics as diacritics  # noqa: E402
 import build_p0_content_clone_ledger as clone_producer  # noqa: E402
 import build_course_assembly_truth as course_truth_producer  # noqa: E402
+import build_manual_review_disposition_ledger as disposition_producer  # noqa: E402
 import build_ex_co_graph as ex_co_producer  # noqa: E402
 import build_chapter_richness_matrix as richness_producer  # noqa: E402
 import build_human_review_queue as human_queue_producer  # noqa: E402
@@ -579,8 +580,21 @@ def _diacritics(directory: Path) -> dict[str, Any]:
     }
 
 
-def _oracle(directory: Path) -> dict[str, Any]:
-    """Verdicts de l'oracle SymPy, lus dans les recus du chapitre."""
+def _oracle(directory: Path, dispositions: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Verdicts de l'oracle SymPy, lus dans les recus du chapitre.
+
+    `manual_review` n'est pas un echec : c'est le motif unique que rend
+    l'oracle quand un objet ne porte pas de bloc VERIFY, et il recouvre des
+    situations sans rapport -- un coup de pouce sans calcul, un QCM engendre
+    depuis un JSON autoritaire, un cours qui enonce une formule que rien ne
+    verifie. Le registre de disposition les route. L'axe est donc satisfait
+    quand la machine n'a plus rien a classer (MACHINE_UNCLASSIFIED = 0) et
+    qu'aucun objet n'echoue -- jamais quand MANUAL_REVIEW vaut zero, ce qui
+    reviendrait a exiger qu'aucune science humaine ne soit requise.
+
+    Ce qui reste a un humain n'est pas efface : il sort dans
+    `human_science_required`, et le dossier de relecture le porte.
+    """
 
     if directory is None:
         return {"pass": None, "manual_review": None, "fail": None, "status": "NO_SOURCE"}
@@ -591,17 +605,26 @@ def _oracle(directory: Path) -> dict[str, Any]:
         except (json.JSONDecodeError, KeyError, OSError):
             verdicts["unreadable"] += 1
     receipts = sum(verdicts.values())
+    routed = [
+        row
+        for row in (dispositions or {}).get("objects", [])
+        if row.get("chapter") == directory.name
+    ]
+    unclassified = verdicts.get("manual_review", 0) - len(routed)
+    human = sum(1 for row in routed if row["disposition"] != "AUCUNE_AFFIRMATION_CALCULABLE")
     if not receipts:
         status = "NO_RECEIPTS"
-    elif verdicts.get("fail") or verdicts.get("unreadable") or verdicts.get(
-        "manual_review"
-    ):
+    elif verdicts.get("fail") or verdicts.get("unreadable"):
+        status = "GAP"
+    elif unclassified:
         status = "GAP"
     else:
         status = "COMPLETE"
     return {
         "pass": verdicts.get("pass", 0),
         "manual_review": verdicts.get("manual_review", 0),
+        "machine_unclassified": unclassified,
+        "human_science_required": human,
         "fail": verdicts.get("fail", 0) + verdicts.get("unreadable", 0),
         "receipts": receipts,
         "status": status,
@@ -1014,6 +1037,7 @@ def build_matrix(
         clone_ledger=clone_ledger,
     )
     human_queue = human_queue_producer.build_queue()
+    dispositions = disposition_producer.build_ledger()
     cross_path = ROOT / "audit/NSI_CROSS_DISCIPLINE_CONTENT_LEDGER.json"
     course_path = ROOT / "audit/COURSE_BODY_OWNERSHIP_MAP.json"
     ex_co_path = ROOT / "audit/EX_CO_GRAPH.json"
@@ -1089,7 +1113,7 @@ def build_matrix(
                 "programme": _programme(
                     chapter, manual_id, capacity_resolver
                 ),
-                "oracle": _oracle(directory),
+                "oracle": _oracle(directory, dispositions),
                 "qcm": qcm_summary,
                 "evidence_routing": _evidence_routing(
                     chapter,
