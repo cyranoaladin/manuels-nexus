@@ -40,7 +40,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from latex_arith import UnsupportedExpression, evaluate  # noqa: E402
 
-SOLVER_VERSION = "1.0.0"
+SOLVER_VERSION = "1.1.0"
 
 #: Tout champ qui trahirait la reponse. Leur presence rend l'entree invalide.
 FORBIDDEN_INPUT_FIELDS = frozenset(
@@ -301,24 +301,14 @@ def _sympy():
     return sympy
 
 
-def latex_to_sympy(source: str, symbol: str = "x"):
-    """Traduit un fragment LaTeX elementaire en expression SymPy, ou None.
+def _expand_latex_fractions(text: str) -> str | None:
+    """Remplace tout `\\frac{a}{b}` par `((a)/(b))`, ou None si mal forme."""
 
-    Volontairement etroit : ce qui n'est pas reconnu n'est pas devine.
-    """
-
-    sympy = _sympy()
-    text = str(source).strip()
-    text = text.replace("$", " ")
-    text = re.sub(r"\\left|\\right", "", text)
-    text = re.sub(r"\\[,;!]", " ", text)
-    text = text.replace("\\times", "*").replace("\\cdot", "*")
     text = re.sub(r"\\dfrac|\\tfrac", r"\\frac", text)
-    # \frac{a}{b} -> ((a)/(b))
     while True:
         match = re.search(r"\\frac\{", text)
         if match is None:
-            break
+            return text
         start = match.end() - 1
         numerator = _balanced_group(text, start)
         if numerator is None:
@@ -331,6 +321,23 @@ def latex_to_sympy(source: str, symbol: str = "x"):
             return None
         end = after + len(denominator) + 2
         text = text[: match.start()] + f"(({numerator})/({denominator}))" + text[end:]
+
+
+def latex_to_sympy(source: str, symbol: str = "x"):
+    """Traduit un fragment LaTeX elementaire en expression SymPy, ou None.
+
+    Volontairement etroit : ce qui n'est pas reconnu n'est pas devine.
+    """
+
+    sympy = _sympy()
+    text = str(source).strip()
+    text = text.replace("$", " ")
+    text = re.sub(r"\\left|\\right", "", text)
+    text = re.sub(r"\\[,;!]", " ", text)
+    text = text.replace("\\times", "*").replace("\\cdot", "*")
+    text = _expand_latex_fractions(text)
+    if text is None:
+        return None
     text = re.sub(r"\\mathrm\{e\}|\\mathrm\{ e \}|\\text\{e\}", "E", text)
     text = re.sub(r"\\sqrt\{([^{}]*)\}", r"sqrt(\1)", text)
     text = text.replace("\\pi", "pi")
@@ -1288,6 +1295,551 @@ def _range_claim(inp: SolverInput) -> SolverResult | None:
     )
 
 
+# ---------------------------------------------------------------------------
+# Forme de Gram euclidienne
+# ---------------------------------------------------------------------------
+#
+# Classe decidee : les familles FINIES de vecteurs d'un espace prehilbertien
+# reel, specifiees par leurs donnees de Gram. Tout ce qui est calculable a
+# partir de la seule matrice de Gram G (G_ij = u_i . u_j) l'est ici, et rien
+# d'autre :
+#
+#     ||sum_i c_i u_i||^2 = c^T G c        (forme quadratique)
+#     (sum_i c_i u_i) . (sum_j d_j u_j) = c^T G d
+#     cos(u_i, u_j) = G_ij / sqrt(G_ii G_jj)
+#
+# Les donnees de Gram se lisent sous quatre formes generiques : une norme
+# ||X|| = a, un produit scalaire X . Y = a, des coordonnees X(a, b, ...) en
+# base orthonormee, un angle (X, Y) = theta. Les noms de vecteurs sont
+# quelconques.
+#
+# Deux gardes ferment la famille. La premiere est la BONNE DEFINITION : si G
+# n'est pas entierement determinee, ou si elle n'est pas semi-definie positive,
+# aucune configuration de vecteurs ne realise les donnees et la famille se tait
+# plutot que de repondre sur un objet qui n'existe pas. La seconde est la
+# LISIBILITE : la famille exige d'avoir lu TOUTES les options et d'en trouver
+# exactement une egale a la valeur calculee ; sinon elle s'abstient.
+
+#: Sentinelle interne pour les delimiteurs de norme, tous ramenes a un seul
+#: caractere : \Vert, \lVert, \rVert, \|.
+_NORM_MARK = "\u2016"
+
+#: Un vecteur nomme, apres normalisation : \vec{u}, \vec{AB}, \overrightarrow{AB}.
+_VEC = r"\\vec\{([A-Za-z][A-Za-z0-9]*)\}"
+
+#: Un scalaire ferme : entier, decimal francais, fraction, racine, pi.
+_SCALAR = (
+    r"(?:-\s*)?(?:\\[dt]?frac\s*\{[^{}]*\}\s*\{[^{}]*\}"
+    r"|\\sqrt\s*\{[^{}]*\}"
+    r"|\d+(?:\{,\}\d+)?"
+    r"|\\pi)"
+)
+
+#: Un vecteur nomme ou un uplet de coordonnees anonyme.
+_VEC_OR_TUPLE = r"(?:" + _VEC + r"|\(([^()]*)\))"
+
+
+def _gram_normalise(text: str) -> str:
+    """Ecriture canonique d'un fragment geometrique."""
+
+    out = str(text).replace("$", " ")
+    out = re.sub(r"\\left|\\right", " ", out)
+    out = re.sub(r"\\[,;!]", " ", out)
+    out = out.replace("\\overrightarrow", "\\vec")
+    out = out.replace("\\lVert", "\\Vert").replace("\\rVert", "\\Vert")
+    out = re.sub(r"\\vec\s*([A-Za-z])(?![A-Za-z{])", r"\\vec{\1}", out)
+    out = re.sub(r"\\Vert|\\\|", _NORM_MARK, out)
+    return out
+
+
+def _gram_scalar(raw: str):
+    """Valeur exacte d'un scalaire de l'enonce, ou None."""
+
+    return latex_to_sympy(str(raw).replace(_NORM_MARK, " "))
+
+
+def _gram_coordinates(body: str) -> list | None:
+    """Coordonnees d'un uplet, ou None si le lecteur ne les reconnait pas."""
+
+    if ";" in body:
+        pieces = body.split(";")
+    else:
+        # La virgule francaise des decimaux s'ecrit {,} : elle ne separe pas.
+        pieces = re.split(r"(?<!\{),(?!\})", body)
+    if len(pieces) < 2:
+        return None
+    values = [_gram_scalar(piece) for piece in pieces]
+    if any(value is None or getattr(value, "free_symbols", set()) for value in values):
+        return None
+    return values
+
+
+class _GramReadingError(Exception):
+    """Un fragment geometrique que le lecteur ne sait pas interpreter."""
+
+
+@dataclass
+class _GramSystem:
+    """Les vecteurs nommes de l'enonce et leur matrice de Gram."""
+
+    names: list[str]
+    matrix: Any
+
+    def index(self, name: str) -> int:
+        return self.names.index(name)
+
+
+def _gram_declarations(text: str) -> tuple[dict, dict, dict, dict, list[str]]:
+    """Lit les donnees de Gram d'un enonce normalise."""
+
+    coordinates: dict[str, list] = {}
+    norms: dict[str, Any] = {}
+    dots: dict[tuple[str, str], Any] = {}
+    angles: dict[tuple[str, str], Any] = {}
+    order: list[str] = []
+
+    def see(name: str) -> None:
+        if name not in order:
+            order.append(name)
+
+    for match in re.finditer(_VEC + r"\s*\(([^()]*)\)", text):
+        name, body = match.group(1), match.group(2)
+        values = _gram_coordinates(body)
+        if values is None:
+            raise _GramReadingError(f"coordonnees illisibles pour {name}")
+        if name in coordinates and coordinates[name] != values:
+            raise _GramReadingError(f"coordonnees contradictoires pour {name}")
+        coordinates[name] = values
+        see(name)
+
+    for match in re.finditer(
+        _NORM_MARK + r"\s*" + _VEC + r"\s*" + _NORM_MARK + r"\s*=\s*(" + _SCALAR + r")",
+        text,
+    ):
+        name = match.group(1)
+        value = _gram_scalar(match.group(2))
+        if value is None:
+            raise _GramReadingError(f"norme illisible pour {name}")
+        if value < 0:
+            raise _GramReadingError(f"norme negative pour {name}")
+        if name in norms and norms[name] != value:
+            raise _GramReadingError(f"normes contradictoires pour {name}")
+        norms[name] = value
+        see(name)
+
+    for match in re.finditer(
+        _VEC + r"\s*\\cdot\s*" + _VEC + r"\s*=\s*(" + _SCALAR + r")", text
+    ):
+        left, right = match.group(1), match.group(2)
+        value = _gram_scalar(match.group(3))
+        if value is None:
+            raise _GramReadingError("produit scalaire illisible")
+        see(left)
+        see(right)
+        key = tuple(sorted((left, right)))
+        if key in dots and dots[key] != value:
+            raise _GramReadingError(f"produits scalaires contradictoires pour {key}")
+        dots[key] = value
+
+    for match in re.finditer(
+        r"\(\s*" + _VEC + r"\s*[,;]\s*" + _VEC + r"\s*\)\s*=\s*(" + _SCALAR + r")",
+        text,
+    ):
+        left, right = match.group(1), match.group(2)
+        value = _gram_scalar(match.group(3))
+        if value is None:
+            raise _GramReadingError("angle illisible")
+        see(left)
+        see(right)
+        key = tuple(sorted((left, right)))
+        if key in angles and angles[key] != value:
+            raise _GramReadingError(f"angles contradictoires pour {key}")
+        angles[key] = value
+
+    return coordinates, norms, dots, angles, order
+
+
+def _gram_matrix(
+    names: list[str],
+    coordinates: dict[str, list],
+    norms: dict[str, Any],
+    dots: dict[tuple[str, str], Any],
+    angles: dict[tuple[str, str], Any],
+):
+    """Matrice de Gram complete des vecteurs nommes, ou None si indeterminee."""
+
+    sympy = _sympy()
+
+    def agree(first, second) -> bool:
+        return sympy.simplify(first - second) == 0
+
+    squares: dict[str, Any] = {}
+    for name in names:
+        candidates = []
+        if name in coordinates:
+            candidates.append(
+                sum(value * value for value in coordinates[name])
+            )
+        if name in norms:
+            candidates.append(norms[name] ** 2)
+        if not candidates:
+            return None
+        if any(not agree(candidates[0], other) for other in candidates[1:]):
+            return None
+        squares[name] = sympy.simplify(candidates[0])
+
+    size = len(names)
+    entries = [[None] * size for _ in range(size)]
+    for i, first in enumerate(names):
+        entries[i][i] = squares[first]
+        for j in range(i + 1, size):
+            second = names[j]
+            key = tuple(sorted((first, second)))
+            candidates = []
+            if first in coordinates and second in coordinates:
+                if len(coordinates[first]) != len(coordinates[second]):
+                    return None
+                candidates.append(
+                    sum(
+                        a * b
+                        for a, b in zip(coordinates[first], coordinates[second])
+                    )
+                )
+            if key in dots:
+                candidates.append(dots[key])
+            if key in angles:
+                candidates.append(
+                    sympy.sqrt(squares[first])
+                    * sympy.sqrt(squares[second])
+                    * sympy.cos(angles[key])
+                )
+            if not candidates:
+                return None
+            if any(not agree(candidates[0], other) for other in candidates[1:]):
+                return None
+            value = sympy.simplify(candidates[0])
+            entries[i][j] = value
+            entries[j][i] = value
+    return sympy.Matrix(entries)
+
+
+def _gram_is_positive_semidefinite(matrix) -> bool:
+    """Une matrice de Gram existe si et seulement si elle est symetrique PSD."""
+
+    sympy = _sympy()
+    if sympy.simplify(matrix - matrix.T) != sympy.zeros(*matrix.shape):
+        return False
+    try:
+        eigenvalues = matrix.eigenvals()
+    except (NotImplementedError, TypeError, ValueError):  # pragma: no cover
+        return False
+    for eigenvalue in eigenvalues:
+        value = sympy.simplify(eigenvalue)
+        if value.is_real is not True or value.is_nonnegative is not True:
+            return False
+    return True
+
+
+def _gram_combination(fragment: str, names: list[str]) -> list | None:
+    """Coefficients de la combinaison lineaire sum_i c_i u_i, ou None."""
+
+    sympy = _sympy()
+    text = fragment
+    tokens: list[str] = []
+    for position, name in enumerate(names):
+        token = f"GRAMVEC{position}"
+        tokens.append(token)
+        text = text.replace("\\vec{" + name + "}", f" {token} ")
+    text = _expand_latex_fractions(text)
+    if text is None:
+        return None
+    if re.search(r"\\[a-zA-Z]+", text):
+        return None
+    text = text.replace("{", "(").replace("}", ")")
+    if not re.fullmatch(r"[0-9A-Za-z_+\-*/^(). ]*", text) or not text.strip():
+        return None
+    text = text.replace("^", "**")
+
+    symbols = {token: sympy.Symbol(token, real=True) for token in tokens}
+    from sympy.parsing.sympy_parser import (  # noqa: PLC0415
+        implicit_multiplication,
+        parse_expr,
+        standard_transformations,
+    )
+
+    try:
+        expression = parse_expr(
+            text,
+            local_dict=dict(symbols),
+            transformations=standard_transformations + (implicit_multiplication,),
+        )
+    except Exception:  # noqa: BLE001 - toute lecture ratee est un refus
+        return None
+    if not getattr(expression, "free_symbols", set()) <= set(symbols.values()):
+        return None
+
+    coefficients = []
+    remainder = expression
+    for token in tokens:
+        symbol = symbols[token]
+        coefficient = sympy.simplify(expression.coeff(symbol))
+        if coefficient.free_symbols:
+            return None
+        coefficients.append(coefficient)
+        remainder = remainder - coefficient * symbol
+    if sympy.simplify(remainder) != 0:
+        return None
+    if all(coefficient == 0 for coefficient in coefficients):
+        return None
+    return coefficients
+
+
+def _gram_quadratic(system: _GramSystem, left: list, right: list | None = None):
+    """c^T G d : produit scalaire de deux combinaisons lineaires."""
+
+    sympy = _sympy()
+    other = left if right is None else right
+    total = sympy.Integer(0)
+    for i, first in enumerate(left):
+        for j, second in enumerate(other):
+            total += first * second * system.matrix[i, j]
+    return sympy.simplify(total)
+
+
+def _gram_angle_pair(text: str):
+    """Le couple de vecteurs dont l'enonce demande l'angle ou le cosinus."""
+
+    plain = _plain(text)
+    if "angle" not in plain and "cosinus" not in plain:
+        return None
+    if "vecteur" not in plain:
+        return None
+    match = re.search(
+        r"entre\s+(?:les\s+)?(?:vecteurs?\s+)?"
+        + _VEC_OR_TUPLE
+        + r"\s+et\s+"
+        + _VEC_OR_TUPLE,
+        text,
+    )
+    if match is None:
+        return None
+    return (
+        (match.group(1), match.group(2)),
+        (match.group(3), match.group(4)),
+    )
+
+
+def _gram_asked(fragment: str, system: _GramSystem):
+    """Quantite interrogee : norme, carre de norme, produit scalaire, cosinus."""
+
+    sympy = _sympy()
+    text = fragment.strip()
+
+    square = re.fullmatch(
+        _NORM_MARK + r"(.+)" + _NORM_MARK + r"\s*\^\s*\{?\s*2\s*\}?", text
+    )
+    if square is not None:
+        coefficients = _gram_combination(square.group(1), system.names)
+        if coefficients is None:
+            return None
+        value = _gram_quadratic(system, coefficients)
+        return (value, "carre de la norme d'une combinaison lineaire : c^T G c")
+
+    norm = re.fullmatch(_NORM_MARK + r"(.+)" + _NORM_MARK, text)
+    if norm is not None:
+        coefficients = _gram_combination(norm.group(1), system.names)
+        if coefficients is None:
+            return None
+        value = sympy.sqrt(_gram_quadratic(system, coefficients))
+        return (
+            sympy.simplify(value),
+            "norme d'une combinaison lineaire : sqrt(c^T G c)",
+        )
+
+    cosine = re.fullmatch(
+        r"\\cos\s*\(\s*" + _VEC + r"\s*[,;]\s*" + _VEC + r"\s*\)", text
+    )
+    pair = re.fullmatch(r"\(\s*" + _VEC + r"\s*[,;]\s*" + _VEC + r"\s*\)", text)
+    if cosine is not None or pair is not None:
+        match = cosine if cosine is not None else pair
+        first, second = match.group(1), match.group(2)
+        if first not in system.names or second not in system.names:
+            return None
+        return _gram_pair_value(
+            system, first, second, want_angle=pair is not None
+        )
+
+    parts = text.split("\\cdot")
+    if len(parts) == 2:
+        left = _gram_combination(parts[0], system.names)
+        right = _gram_combination(parts[1], system.names)
+        if left is None or right is None:
+            return None
+        value = _gram_quadratic(system, left, right)
+        return (value, "produit scalaire de deux combinaisons lineaires : c^T G d")
+    return None
+
+
+def _gram_pair_value(
+    system: _GramSystem, first: str, second: str, *, want_angle: bool
+):
+    """cos(u, v) = G_uv / sqrt(G_uu G_vv), et l'angle geometrique associe."""
+
+    sympy = _sympy()
+    i, j = system.index(first), system.index(second)
+    if system.matrix[i, i] == 0 or system.matrix[j, j] == 0:
+        return None
+    cosine = sympy.simplify(
+        system.matrix[i, j]
+        / (sympy.sqrt(system.matrix[i, i]) * sympy.sqrt(system.matrix[j, j]))
+    )
+    if want_angle:
+        return (
+            sympy.simplify(sympy.acos(cosine)),
+            "angle geometrique : arccos(G_uv / sqrt(G_uu G_vv))",
+        )
+    return (cosine, "cosinus : G_uv / sqrt(G_uu G_vv)")
+
+
+def _euclidean_gram_form(inp: SolverInput) -> SolverResult | None:
+    """Famille finie de vecteurs specifiee par ses donnees de Gram."""
+
+    statement = inp.statement
+    normalised = _gram_normalise(statement)
+    angle_pair = _gram_angle_pair(normalised)
+    if (
+        "\\vec{" not in normalised
+        and _NORM_MARK not in normalised
+        and angle_pair is None
+    ):
+        return None
+
+    # Les coordonnees ne donnent le produit scalaire qu'en base ORTHONORMEE.
+    if re.search(r"\bnon\b[^.]{0,24}orthonorm", _math_text(statement)):
+        return None
+
+    try:
+        coordinates, norms, dots, angles, order = _gram_declarations(normalised)
+    except _GramReadingError:
+        return None
+
+    fragments = re.findall(r"\$([^$]+)\$", statement)
+    normalised_fragments = [_gram_normalise(fragment) for fragment in fragments]
+
+    if angle_pair is not None:
+        resolved: list[str] = []
+        for position, (name, tuple_body) in enumerate(angle_pair):
+            if name:
+                resolved.append(name)
+                continue
+            values = _gram_coordinates(tuple_body)
+            if values is None:
+                return None
+            # Un uplet anonyme recoit un nom que l'enonce ne peut pas porter :
+            # aucune collision possible avec un \vec{...} du texte.
+            label = f"#{position + 1}"
+            coordinates[label] = values
+            if label not in order:
+                order.append(label)
+            resolved.append(label)
+        angle_names = tuple(resolved)
+    else:
+        angle_names = ()
+
+    if not order:
+        return None
+
+    matrix = _gram_matrix(order, coordinates, norms, dots, angles)
+    if matrix is None:
+        return None
+    if not _gram_is_positive_semidefinite(matrix):
+        return None
+    system = _GramSystem(names=order, matrix=matrix)
+
+    def is_declaration(fragment: str) -> bool:
+        try:
+            _, fragment_norms, fragment_dots, fragment_angles, _ = _gram_declarations(
+                fragment
+            )
+        except _GramReadingError:
+            return True
+        if fragment_norms or fragment_dots or fragment_angles:
+            return True
+        return bool(re.search(_VEC + r"\s*\([^()]*\)", fragment))
+
+    candidates = []
+    for fragment in normalised_fragments:
+        if is_declaration(fragment):
+            continue
+        asked = _gram_asked(fragment, system)
+        if asked is not None:
+            candidates.append(asked)
+
+    if len(candidates) > 1:
+        # Deux quantites interrogeables : l'enonce n'est pas lu sans ambiguite.
+        return None
+    if candidates:
+        expected, derivation = candidates[0]
+    elif angle_names:
+        outcome = _gram_pair_value(
+            system, angle_names[0], angle_names[1], want_angle=True
+        )
+        if outcome is None:
+            return None
+        expected, derivation = outcome
+    else:
+        return None
+
+    if getattr(expected, "free_symbols", set()):
+        return None
+
+    # Contrat strict : la famille ne conclut que si elle a lu TOUTES les
+    # options comme des NOMBRES et en trouve exactement une egale a la valeur
+    # calculee. La lecture est symbolique et non rationnelle : la quantite
+    # cherchee vaut souvent sqrt(35) ou pi/4, qu'une valeur flottante ou
+    # rationnelle approcherait au lieu de la decider.
+    sympy = _sympy()
+    readings: dict[str, Any] = {}
+    for letter, raw in inp.options.items():
+        candidate = latex_to_sympy(raw)
+        if candidate is None or getattr(candidate, "free_symbols", set()):
+            return None
+        readings[letter] = candidate
+    truths = {
+        letter: bool(sympy.simplify(value - expected) == 0)
+        for letter, value in readings.items()
+    }
+    readable = len(readings)
+    if sum(1 for truth in truths.values() if truth) != 1:
+        return None
+
+    display = [
+        f"G[{name}] = "
+        + ", ".join(str(matrix[index, column]) for column in range(len(order)))
+        for index, name in enumerate(order)
+    ]
+    return SolverResult(
+        status="MACHINE_RESOLVED",
+        family="EUCLIDEAN_GRAM_FORM",
+        option_truths=truths,
+        computed_value=str(expected),
+        independent_evidence=(
+            "Donnees de Gram des vecteurs "
+            + ", ".join(order)
+            + " : "
+            + " ; ".join(display)
+            + ". Matrice symetrique semi-definie positive, donc realisable par "
+            "une famille de vecteurs d'un espace prehilbertien reel. Quantite "
+            "interrogee evaluee exactement par la forme de Gram ("
+            + derivation
+            + ") : "
+            + str(expected)
+            + "."
+        ),
+        readable_options=readable,
+    )
+
+
 #: Familles generiques, dans l'ordre d'essai. Aucune n'est liee a une question.
 FAMILIES: tuple[Callable[[SolverInput], SolverResult | None], ...] = (
     _distribution_total_mass,
@@ -1312,6 +1864,10 @@ FAMILIES: tuple[Callable[[SolverInput], SolverResult | None], ...] = (
     _monotonicity_of_a_function,
     _range_claim,
     _universal_inequality_claim,
+    # Ajoutee EN DERNIER : l'aiguillage retient la premiere famille qui rend un
+    # resultat, donc une famille ajoutee en queue ne peut modifier aucun verdict
+    # deja atteint par une famille anterieure. Un test le prouve sur le corpus.
+    _euclidean_gram_form,
 )
 
 
