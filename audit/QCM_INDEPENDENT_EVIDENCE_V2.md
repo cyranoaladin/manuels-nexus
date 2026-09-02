@@ -7,10 +7,10 @@ Cet artefact n'approuve rien.
 
 - Questions du corpus : 490
 - Report d'identite : 301
-- Recalcul independant : 21
-- Revue humaine requise : 168
+- Recalcul independant : 22
+- Revue humaine requise : 167
 - UNKNOWN : 0
-- Equation : 490 = 301 + 21 + 168
+- Equation : 490 = 301 + 22 + 167
 - EVIDENCE_ROUTING_COMPLETE : True
 - ALL_QCM_HUMAN_REVIEW_COMPLETE : False
 
@@ -18,6 +18,7 @@ Cet artefact n'approuve rien.
 
 - `ALGEBRAIC_GAIN`
 - `BINARY_TREE_TERMINAL_PATHS`
+- `EUCLIDEAN_GRAM_FORM`
 - `EXPECTATION_SIGN_INTERPRETATION`
 - `EXPECTED_PROFIT_OF_A_CONTRACT`
 - `INDEPENDENT_BERNOULLI_REPETITION`
@@ -38,6 +39,7 @@ Cet artefact n'approuve rien.
 
 | chapitre | question | famille | verite calculee | cle declaree | verdict |
 |---|---|---|---|---|---|
+| 1SPE-PRODUIT-SCALAIRE | Q6 | EUCLIDEAN_GRAM_FORM | C | C | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q1 | UNIFORM_DISCRETE_PROBABILITY | A | A | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q10 | LINEAR_EXPECTATION | A | A | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q11 | LINEAR_EXPECTATION | B | B | PASS |
@@ -142,7 +144,6 @@ Comportement correct du solveur, pas un echec : aucune regle mathematique generi
 | 1NSI-WEB-IHM | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | 1NSI-WEB-IHM | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | 1NSI-WEB-IHM | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
-| 1SPE-PRODUIT-SCALAIRE | Q6 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | 1SPE-VARIABLES-ALEATOIRES | Q16 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TNSI-ALGORITHMIQUE | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TNSI-ALGORITHMIQUE | Q10 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |

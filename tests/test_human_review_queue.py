@@ -28,10 +28,10 @@ def test_queue_is_exact_disjoint_and_current() -> None:
     assert payload["approves_nothing"] is True
     assert payload["counts"] == {
         "OBJECT_REVIEW": 2325,
-        "QCM_ANSWER_SEMANTICS": 168,
+        "QCM_ANSWER_SEMANTICS": 167,
         "QCM_DIAGNOSTIC_RENVOI_SEMANTICS": 41,
         "EDITORIAL_DECISION": 1,
-        "TOTAL": 2535,
+        "TOTAL": 2534,
     }
     assert payload["pairwise_intersections"] == []
     assert payload["unknown_count"] == 0
