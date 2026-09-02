@@ -4924,12 +4924,10 @@
             "1SPE-GEOREP-EV-B"
           ],
           "capacity_type": "COMPOSITE_REASONING",
-          "declarative_status": "INSUFFICIENT",
+          "declarative_status": "SUFFICIENT",
           "distinct_opportunities": 5,
           "libelle_eleve": "Je sais résoudre des problèmes géométriques dans un repère orthonormé.",
-          "missing_function": [
-            "SINGLE_REASONING_PATH_FOR_COMPOSITE_CAPACITY"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 2,
             "method": 1,
@@ -4999,27 +4997,45 @@
               "questions_for_this_capacity": null
             }
           ],
-          "reasoning_paths": [],
+          "reasoning_paths": [
+            "calcul",
+            "interpretation_geometrique",
+            "modelisation",
+            "raisonnement_par_coordonnees",
+            "raisonnement_vectoriel",
+            "synthese"
+          ],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:82fdb4a5799d84deae0a6f6a0d00268191a92bec57dd2b54027f2265844fd0f3",
+      "capacities_digest": "sha256:c0907729d922cce73f5790c735b3da8595059358eade9aa58e8339108f671d22",
       "capacity_identity_blockers": [],
       "chapter": "1SPE-GEOMETRIE-REPEREE",
       "counts": {
-        "CANDIDATE_NON_SEMANTIC": 4,
-        "INSUFFICIENT": 1
+        "CANDIDATE_NON_SEMANTIC": 5
       },
-      "declarative_diversity_status": "INSUFFICIENT",
-      "distinct_reasoning_paths": [],
-      "diversity_profile": {},
-      "diversity_status": "INSUFFICIENT",
+      "declarative_diversity_status": "SUFFICIENT",
+      "distinct_reasoning_paths": [
+        "calcul",
+        "interpretation_geometrique",
+        "modelisation",
+        "raisonnement_par_coordonnees",
+        "raisonnement_vectoriel",
+        "synthese"
+      ],
+      "diversity_profile": {
+        "calcul": 1,
+        "interpretation_geometrique": 2,
+        "modelisation": 1,
+        "raisonnement_par_coordonnees": 6,
+        "raisonnement_vectoriel": 2,
+        "synthese": 1
+      },
+      "diversity_status": "CANDIDATE_NON_SEMANTIC",
       "excluded_credit_objects": [],
       "generated_by": "scripts/build_chapter_richness_matrix.py",
-      "insufficient": [
-        "C5"
-      ],
+      "insufficient": [],
       "machine_status": "GAP",
       "rule": "la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers",
       "schema_version": 1,
@@ -7994,12 +8010,10 @@
             "1SPE-VARALEA-EV-B"
           ],
           "capacity_type": "COMPOSITE_REASONING",
-          "declarative_status": "INSUFFICIENT",
+          "declarative_status": "SUFFICIENT",
           "distinct_opportunities": 5,
           "libelle_eleve": "Je sais resoudre des problemes contextualises (jeux, decisions, assurances) a l'aide de variables aleatoires.",
-          "missing_function": [
-            "SINGLE_REASONING_PATH_FOR_COMPOSITE_CAPACITY"
-          ],
+          "missing_function": [],
           "opportunities": {
             "assessment": 2,
             "method": 1,
@@ -8057,9 +8071,14 @@
               "questions_for_this_capacity": null
             }
           ],
-          "reasoning_paths": [],
+          "reasoning_paths": [
+            "calcul",
+            "interpretation",
+            "modelisation",
+            "synthese"
+          ],
           "semantic_validation_status": "UNKNOWN",
-          "status": "INSUFFICIENT"
+          "status": "CANDIDATE_NON_SEMANTIC"
         },
         "C6": {
           "assessed_by": [
@@ -8132,22 +8151,29 @@
           "status": "CANDIDATE_NON_SEMANTIC"
         }
       },
-      "capacities_digest": "sha256:c27f9d7a4e5be872e03e7244d5dfa0c1ea6fa638ac0ea657698a672db337dd74",
+      "capacities_digest": "sha256:fd5c2e0bb80fb9198dddc43b920440763563a4530f768a277e241f012554182c",
       "capacity_identity_blockers": [],
       "chapter": "1SPE-VARIABLES-ALEATOIRES",
       "counts": {
-        "CANDIDATE_NON_SEMANTIC": 6,
-        "INSUFFICIENT": 1
+        "CANDIDATE_NON_SEMANTIC": 7
       },
-      "declarative_diversity_status": "INSUFFICIENT",
-      "distinct_reasoning_paths": [],
-      "diversity_profile": {},
-      "diversity_status": "INSUFFICIENT",
+      "declarative_diversity_status": "SUFFICIENT",
+      "distinct_reasoning_paths": [
+        "calcul",
+        "interpretation",
+        "modelisation",
+        "synthese"
+      ],
+      "diversity_profile": {
+        "calcul": 2,
+        "interpretation": 5,
+        "modelisation": 7,
+        "synthese": 1
+      },
+      "diversity_status": "CANDIDATE_NON_SEMANTIC",
       "excluded_credit_objects": [],
       "generated_by": "scripts/build_chapter_richness_matrix.py",
-      "insufficient": [
-        "C5"
-      ],
+      "insufficient": [],
       "machine_status": "GAP",
       "rule": "la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers",
       "schema_version": 1,
@@ -20914,7 +20940,7 @@
       "unknown": 2
     }
   },
-  "chapters_digest": "sha256:adbee334084e3e32ed2e54a912d0982d6fb6775e4cc7236aacae6d0278c590c5",
+  "chapters_digest": "sha256:d8284282fcf9c54c6d8afd2b3ced5d2c017681f2d286c37ec6010778b1b084d9",
   "generated_by": "scripts/build_chapter_richness_matrix.py",
   "incomplete_chapters": [
     "1NSI-ALGO-DICHO-GLOUTON-KNN",
