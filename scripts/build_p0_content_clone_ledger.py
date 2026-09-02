@@ -157,6 +157,24 @@ def declared_capacities(
     return tuple(sorted(resolver.resolve_meta_codes(scope, meta)))
 
 
+#: Champs de lien deja normalises dans le depot : un objet satellite designe
+#: par eux l'objet hote qu'il assiste. Les deux noms coexistent dans le corpus
+#: et sont lus comme une seule reference.
+HOST_LINK_FIELDS = ("exercice_id", "exercice_ref")
+
+
+def host_references(meta: dict[str, Any]) -> list[str]:
+    """References d'hote portees par le META, dedupliquees et triees."""
+
+    return sorted(
+        {
+            str(meta[field]).strip()
+            for field in HOST_LINK_FIELDS
+            if isinstance(meta.get(field), str) and str(meta[field]).strip()
+        }
+    )
+
+
 def _path_key(path: Path) -> str:
     try:
         return str(path.relative_to(ROOT))
@@ -212,8 +230,23 @@ def scan() -> tuple[list[dict[str, Any]], list[dict[str, str]]]:
                     "normalized_body_digest": digest(normalized_body(body)),
                     "payload_chars": len(payload_only(body)),
                     "payload_empty": not bool(payload_only(body)),
+                    "host_refs": host_references(meta),
                 }
             )
+    # Le lien vers l'hote est RESOLU ici, pendant le scan, et materialise dans
+    # le record : la selection canonique ne relit jamais le disque.
+    object_ids_by_chapter: dict[str, set[str]] = collections.defaultdict(set)
+    for row in records:
+        if row["object_id"]:
+            object_ids_by_chapter[row["chapter"]].add(str(row["object_id"]))
+    for row in records:
+        refs = row["host_refs"]
+        host = refs[0] if len(refs) == 1 else None
+        row["resolved_host_uid"] = (
+            f"{row['manual']}::{row['chapter']}::{host}"
+            if host is not None and host in object_ids_by_chapter[row["chapter"]]
+            else None
+        )
     return records, sorted(
         blockers, key=lambda row: (row["path"], row["object_id"], row["reason"])
     )
@@ -257,6 +290,42 @@ class CloneEvidenceError(RuntimeError):
     """Une preuve de propriété est incomplète ou contradictoire."""
 
 
+def _all_satellites_of_distinct_hosts(members: list[dict[str, Any]]) -> bool:
+    """Tous les membres assistent un hôte propre, résolu et sans crédit.
+
+    Les trois conditions sont exigées de CHAQUE membre, et la troisième du
+    groupe entier :
+
+    1. aucune capacité résolue n'est déclarée — aucun crédit n'est en jeu, donc
+       aucun ne peut être ni usurpé ni perdu ;
+    2. exactement une référence d'hôte est portée par les champs de lien
+       normalisés — zéro ou deux ne désignent pas un hôte ;
+    3. l'hôte est résolu, c'est-à-dire qu'il existe réellement et appartient au
+       chapitre du satellite, et deux membres n'en partagent jamais un.
+
+    Le champ `resolved_host_uid` est posé par `scan()` : cette fonction ne lit
+    jamais le disque et ne dépend d'aucun identifiant particulier.
+    """
+
+    hosts = []
+    for row in members:
+        if row.get("declared_capacity"):
+            return False
+        if len(row.get("host_refs") or []) != 1:
+            return False
+        host = row.get("resolved_host_uid")
+        if not host:
+            return False
+        # L'hote resolu doit etre celui du satellite lui-meme : meme manuel,
+        # meme chapitre, et l'identifiant qu'il designe. Un hote d'un autre
+        # chapitre ne blanchit rien.
+        own_scope = f"{row.get('manual')}::{row.get('chapter')}::{row['host_refs'][0]}"
+        if host != own_scope:
+            return False
+        hosts.append(host)
+    return bool(hosts) and len(set(hosts)) == len(hosts)
+
+
 def select_canonical(group: dict[str, Any]) -> dict[str, Any]:
     """Le proprietaire semantique d'un corps, etabli par PREUVE.
 
@@ -273,6 +342,14 @@ def select_canonical(group: dict[str, Any]) -> dict[str, Any]:
 
     `NO_CAPACITY_AT_STAKE`
         Le corps est du gabarit sans contenu pedagogique.
+
+    `SATELLITE_WITH_DISTINCT_HOST`
+        Chaque membre est un satellite : il ne credite aucune capacite et
+        assiste EXACTEMENT UN objet hote, existant et loge dans son propre
+        chapitre ; et deux membres n'assistent jamais le meme hote. Aucun
+        credit n'est alors en jeu -- donc aucun ne peut etre usurpe -- et
+        retirer un membre priverait un hote reel de son assistance. Le partage
+        du corps est legitime, tous les membres sont canoniques.
 
     Une occurrence textuelle `C<n>` n'est jamais une preuve : elle peut être
     une variable Python, un renvoi ou un identifiant interne. En l'absence
@@ -318,6 +395,20 @@ def select_canonical(group: dict[str, Any]) -> dict[str, Any]:
             "reason": (
                 "le propriétaire est démontré par ownership, capacité, programme, "
                 "assemblage, provenance et rôle contractuel"
+            ),
+        }
+
+    if _all_satellites_of_distinct_hosts(members):
+        return {
+            "status": "LEGITIMATE_SHARED_CANONICAL",
+            "evidence_rule": "SATELLITE_WITH_DISTINCT_HOST",
+            "canonical_paths": paths,
+            "false_copy_paths": [],
+            "reason": (
+                "chaque membre est un satellite sans capacité déclarée, "
+                "rattaché à un hôte unique, existant, de son propre chapitre, "
+                "et deux membres n'assistent jamais le même hôte : aucun "
+                "crédit n'est en jeu et aucun hôte ne serait privé"
             ),
         }
 
@@ -493,6 +584,9 @@ def build_ledger() -> dict[str, Any]:
         "canonical_selection_rule": (
             "le proprietaire semantique est etabli par une ownership map "
             "autoritaire couvrant programme, contrat, assemblage et provenance ; "
+            "un groupe dont tous les membres sont des satellites sans capacite "
+            "declaree, rattaches chacun a un hote unique, existant et du meme "
+            "chapitre, et deux a deux distincts, est un partage legitime ; "
             "l'ordre des chemins n'intervient jamais"
         ),
         "canonical_selection_counts": {

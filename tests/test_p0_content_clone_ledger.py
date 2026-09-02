@@ -272,6 +272,8 @@ def _member(
     chars=4000,
     source_type="exercices",
     payload_empty=False,
+    host_refs=(),
+    resolved_host_uid=None,
 ):
     return {
         "path": path,
@@ -282,7 +284,23 @@ def _member(
         "payload_chars": chars,
         "source_type": source_type,
         "payload_empty": payload_empty,
+        "host_refs": list(host_refs),
+        "resolved_host_uid": resolved_host_uid,
     }
+
+
+def _satellite(name, host, chapter="1SPE-X", manual="1SPE", declared=()):
+    """Un satellite sans capacité, rattaché à un hôte de son propre chapitre."""
+
+    return _member(
+        f"Mathematiques/manuel-maths/chapitres/{chapter}/exercices/{name}.tex",
+        chapter,
+        declared,
+        manual=manual,
+        source_type="exercices",
+        host_refs=[host],
+        resolved_host_uid=f"{manual}::{chapter}::{host}",
+    )
 
 
 def _group(members, disposition):
@@ -610,4 +628,178 @@ def test_body_tokens_never_create_invalid_capacity_credit(producer) -> None:
     assert all(
         group["canonical_selection"]["evidence_rule"] != "BODY_SELF_ATTESTATION"
         for group in ledger["groups"]
+    )
+
+
+# -- Satellites a hotes distincts --------------------------------------------
+#
+# Un `coup de pouce` ne declare aucune capacite et ne vaut que par l'exercice
+# qu'il assiste. Quand plusieurs d'entre eux partagent un corps mais assistent
+# chacun un exercice DIFFERENT et REEL de leur propre chapitre, aucun ne peut
+# usurper le credit d'un autre -- il n'y a aucun credit en jeu -- et en retirer
+# un priverait un exercice reel de son assistance. C'est un partage legitime,
+# pas une fausse copie. La regle ne nomme aucun objet : elle constate ces trois
+# proprietes sur TOUS les membres, et rien d'autre ne la declenche.
+
+
+def test_satellites_with_distinct_hosts_are_legitimately_shared(producer) -> None:
+    members = [
+        _satellite("EX-001-CDP", "EX-001"),
+        _satellite("EX-002-CDP", "EX-002"),
+        _satellite("EX-003-CDP", "EX-003"),
+    ]
+    for order in (members, list(reversed(members))):
+        selection = producer.select_canonical(
+            _group(order, "REDUNDANT_SAME_CAPACITY")
+        )
+        assert selection["status"] == "LEGITIMATE_SHARED_CANONICAL"
+        assert selection["evidence_rule"] == "SATELLITE_WITH_DISTINCT_HOST"
+        assert selection["canonical_paths"] == sorted(r["path"] for r in members)
+        assert selection["false_copy_paths"] == []
+
+
+def test_two_satellites_on_the_same_host_are_not_cleared(producer) -> None:
+    """MUTATION 1 -- deux assistances pour un seul hote : vraie duplication."""
+
+    members = [
+        _satellite("EX-001-CDP", "EX-001"),
+        _satellite("EX-001-CDP-bis", "EX-001"),
+    ]
+    selection = producer.select_canonical(_group(members, "REDUNDANT_SAME_CAPACITY"))
+    assert selection["status"] == "AMBIGUOUS"
+    assert selection["evidence_rule"] == "NONE_CONCLUSIVE"
+    assert selection["canonical_paths"] == []
+
+
+def test_a_satellite_that_declares_a_capacity_is_not_cleared(producer) -> None:
+    """MUTATION 2 -- des qu'une capacite est creditee, un credit est en jeu."""
+
+    members = [
+        _satellite("EX-001-CDP", "EX-001"),
+        _satellite("EX-002-CDP", "EX-002", declared=["C1"]),
+    ]
+    selection = producer.select_canonical(_group(members, "REDUNDANT_SAME_CAPACITY"))
+    assert selection["status"] == "AMBIGUOUS"
+    assert selection["evidence_rule"] == "NONE_CONCLUSIVE"
+    assert selection["canonical_paths"] == []
+
+
+def test_a_satellite_whose_host_is_absent_or_foreign_is_not_cleared(
+    producer,
+) -> None:
+    """MUTATION 3 -- un hote inexistant, ou d'un autre chapitre, ne prouve rien."""
+
+    absent = _satellite("EX-002-CDP", "EX-002")
+    absent["resolved_host_uid"] = None
+    missing_host = [_satellite("EX-001-CDP", "EX-001"), absent]
+    selection = producer.select_canonical(
+        _group(missing_host, "REDUNDANT_SAME_CAPACITY")
+    )
+    assert selection["status"] == "AMBIGUOUS"
+    assert selection["canonical_paths"] == []
+
+    foreign = _satellite("EX-002-CDP", "EX-002")
+    foreign["resolved_host_uid"] = "1SPE::1SPE-AUTRE-CHAPITRE::EX-002"
+    other_chapter = [_satellite("EX-001-CDP", "EX-001"), foreign]
+    selection = producer.select_canonical(
+        _group(other_chapter, "REDUNDANT_SAME_CAPACITY")
+    )
+    assert selection["status"] == "AMBIGUOUS"
+    assert selection["canonical_paths"] == []
+
+
+def test_a_satellite_without_any_host_reference_is_not_cleared(producer) -> None:
+    """MUTATION 4 -- zero reference, ou deux, ne designent pas un hote unique."""
+
+    orphan = _satellite("EX-002-CDP", "EX-002")
+    orphan["host_refs"] = []
+    orphan["resolved_host_uid"] = None
+    selection = producer.select_canonical(
+        _group([_satellite("EX-001-CDP", "EX-001"), orphan], "REDUNDANT_SAME_CAPACITY")
+    )
+    assert selection["status"] == "AMBIGUOUS"
+    assert selection["canonical_paths"] == []
+
+    ambivalent = _satellite("EX-002-CDP", "EX-002")
+    ambivalent["host_refs"] = ["EX-002", "EX-003"]
+    selection = producer.select_canonical(
+        _group(
+            [_satellite("EX-001-CDP", "EX-001"), ambivalent],
+            "REDUNDANT_SAME_CAPACITY",
+        )
+    )
+    assert selection["status"] == "AMBIGUOUS"
+    assert selection["canonical_paths"] == []
+
+
+def test_every_member_carries_its_host_link_from_the_scan(producer) -> None:
+    """Le lien d'hote est materialise par `scan()`, jamais relu dans la regle."""
+
+    records, _ = producer.scan()
+    assert records
+    for row in records:
+        assert isinstance(row["host_refs"], list)
+        assert all(isinstance(ref, str) and ref for ref in row["host_refs"])
+        uid = row["resolved_host_uid"]
+        assert uid is None or isinstance(uid, str)
+        if uid is not None:
+            assert len(row["host_refs"]) == 1
+            assert uid == f"{row['manual']}::{row['chapter']}::{row['host_refs'][0]}"
+
+
+def test_the_satellite_rule_clears_exactly_what_it_claims_on_the_corpus(
+    ledger: dict,
+) -> None:
+    """Portee reelle : la regle blanchit tous les groupes qui la remplissent,
+    et uniquement ceux-la. Les premisses sont ici recalculees membre a membre
+    depuis le registre, sans jamais nommer un groupe ni un chapitre.
+    """
+
+    cleared = set()
+    expected = set()
+    for group in ledger["groups"]:
+        selection = group["canonical_selection"]
+        if selection["evidence_rule"] == "SATELLITE_WITH_DISTINCT_HOST":
+            cleared.add(group["clone_group_id"])
+            assert selection["status"] == "LEGITIMATE_SHARED_CANONICAL"
+            assert selection["false_copy_paths"] == []
+            assert selection["canonical_paths"] == sorted(
+                row["path"] for row in group["members"]
+            )
+        if group["disposition"] == "BOILERPLATE_ONLY":
+            continue
+        hosts = [row["resolved_host_uid"] for row in group["members"]]
+        holds = (
+            not any(row["declared_capacity"] for row in group["members"])
+            and all(len(row["host_refs"]) == 1 for row in group["members"])
+            and all(host is not None for host in hosts)
+            and len(set(hosts)) == len(hosts)
+        )
+        if holds:
+            expected.add(group["clone_group_id"])
+
+    assert cleared == expected
+    assert cleared, "la regle doit etre observable sur le corpus"
+
+
+def test_the_founding_case_and_hostless_sheets_stay_untouched(ledger: dict) -> None:
+    """La regle reste inerte la ou aucun hote n'est designe.
+
+    Deux temoins : les fiches `methode` recopiees d'un chapitre NSI a l'autre,
+    qui ne referencent aucun exercice, et le cas fondateur du P0 -- les fiches
+    de remediation de `TSPE-GEOMETRIE-ESPACE`, qui declarent des capacites.
+    """
+
+    seen_hostless_multichapter = False
+    for group in ledger["groups"]:
+        rule = group["canonical_selection"]["evidence_rule"]
+        members = group["members"]
+        if any(row["declared_capacity"] for row in members):
+            assert rule != "SATELLITE_WITH_DISTINCT_HOST", group["clone_group_id"]
+        if all(not row["host_refs"] for row in members):
+            assert rule != "SATELLITE_WITH_DISTINCT_HOST", group["clone_group_id"]
+            if len({row["chapter"] for row in members}) > 1:
+                seen_hostless_multichapter = True
+    assert seen_hostless_multichapter, (
+        "le corpus doit encore porter un groupe sans hote traversant des chapitres"
     )
