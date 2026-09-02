@@ -47,7 +47,10 @@ LIBELLES = {
 def classer(ch) -> str:
     if ch.release_ready:
         return "READY"
-    if ch.scientific_review.get("fail") or ch.capabilities_total == 0:
+    echecs_non_lies = any(
+        seau.get("fail") for seau in getattr(ch, "unbound_receipts", {}).values()
+    )
+    if ch.scientific_review.get("fail") or echecs_non_lies or ch.capabilities_total == 0:
         return "BLOCKED"
     if ch.exercise_count < ch.target_exercises / 2:
         return "SKELETON"

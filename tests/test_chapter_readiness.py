@@ -210,3 +210,114 @@ def test_official_reference_credits_only_its_resolved_local_capacity(
     assert result.capability_min_exercises["C1"] == 0
     assert result.capability_min_exercises["C10"] == 1
     assert "TSPE-CONCLGN-C1" not in result.capability_min_exercises
+
+
+def _chapitre_minimal(racine: Path, nom: str) -> Path:
+    """Un chapitre reduit au strict necessaire pour etre analyse."""
+
+    chapitre = racine / nom
+    chapitre.mkdir(parents=True)
+    (chapitre / "contrat.yaml").write_text(
+        yaml.safe_dump(
+            {
+                "chapitre": nom,
+                "statut": "draft",
+                "capacites": [{"code": "C1", "ref_capacite": "REF-C1"}],
+            }
+        ),
+        encoding="utf-8",
+    )
+    return chapitre
+
+
+def _recu(dossier: Path, nom: str, charge: dict) -> None:
+    dossier.mkdir(parents=True, exist_ok=True)
+    (dossier / nom).write_text(json.dumps(charge) + "\n", encoding="utf-8")
+
+
+def test_scientific_review_ne_compte_que_les_recus_qui_lient_leur_source(
+    tmp_path: Path,
+) -> None:
+    """Un `pass` non lie n'est pas une preuve scientifique.
+
+    Le recu SymPy nomme la source qu'il atteste et porte son condensat : il
+    meurt avec elle. Les recus de similarite et les rapports adversariaux ne
+    nomment rien -- ils survivraient a une reecriture complete du contenu.
+    Les additionner dans un meme `pass` publie un total qui ressemble a une
+    preuve sans en etre une.
+    """
+
+    chapitre = _chapitre_minimal(tmp_path, "1SPE-TEST-RECUS")
+    validations = chapitre / "validations"
+    _recu(
+        validations,
+        "objet.sympy.json",
+        {
+            "objet_id": "objet",
+            "gate": "sympy",
+            "verdict": "pass",
+            "source_path": "chapitres/1SPE-TEST-RECUS/cours/objet.tex",
+            "source_sha256": "sha256:" + "0" * 64,
+        },
+    )
+    _recu(
+        validations,
+        "objet.similarity.json",
+        {"objet_id": "objet", "gate": "similarity", "verdict": "pass"},
+    )
+    _recu(
+        validations,
+        "objet.adversarial.json",
+        {"objet_id": "objet", "verdict": "pass", "mode": "auto-validation autonome"},
+    )
+
+    resultat = chapter_readiness.analyser(chapitre, {}, {})
+
+    assert resultat.scientific_review == {"pass": 1}, (
+        "seul le recu SymPy, qui lie sa source, vaut preuve scientifique"
+    )
+    assert resultat.unbound_receipts == {
+        "adversarial": {"pass": 1},
+        "similarity": {"pass": 1},
+    }, "les recus non lies doivent etre nommes, jamais fondus dans le total"
+
+
+def test_un_echec_non_lie_reste_visible_et_ne_disparait_pas(
+    tmp_path: Path,
+) -> None:
+    """Ecarter un recu de la preuve ne doit pas le rendre muet.
+
+    Si l'on cessait simplement de lire les recus non lies, un `fail` de
+    similarite disparaitrait du tableau de bord : on aurait echange un total
+    trompeur contre un silence, ce qui est pire.
+    """
+
+    chapitre = _chapitre_minimal(tmp_path, "1SPE-TEST-ECHEC")
+    _recu(
+        chapitre / "validations",
+        "objet.similarity.json",
+        {"objet_id": "objet", "gate": "similarity", "verdict": "fail"},
+    )
+
+    resultat = chapter_readiness.analyser(chapitre, {}, {})
+
+    assert resultat.scientific_review == {}
+    assert resultat.unbound_receipts == {"similarity": {"fail": 1}}
+    assert resultat.blocking_findings, "un echec, meme non lie, reste bloquant"
+
+
+def test_le_total_publie_de_1spe_suites_est_celui_de_ses_recus_lies() -> None:
+    """Le chapitre reel : 262 `pass` annonces pour 122 preuves liees."""
+
+    resultat = chapter_readiness.analyser(
+        SUITES, chapter_readiness._versions_programme(), chapter_readiness._builds_observes()
+    )
+    lies = sum(resultat.scientific_review.values())
+    non_lies = sum(
+        sum(verdicts.values()) for verdicts in resultat.unbound_receipts.values()
+    )
+
+    assert resultat.scientific_review.get("pass") == 122
+    assert resultat.scientific_review.get("manual_review") == 31
+    assert lies == 153
+    assert non_lies > 0, "le chapitre porte bien des recus non lies"

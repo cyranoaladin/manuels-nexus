@@ -129,6 +129,7 @@ class Chapitre:
     evaluation_A: bool = False
     evaluation_B: bool = False
     scientific_review: dict = field(default_factory=dict)
+    unbound_receipts: dict = field(default_factory=dict)
     programme_review: str = "non_verifie"
     contract_status: str = "absent"
     student_build: bool = False
@@ -347,17 +348,41 @@ def analyser(
                 ch.objects_reviewed += 1
 
     # --- revue scientifique ---------------------------------------------------
+    # Un recu ne vaut preuve que s'il NOMME la source qu'il atteste et porte
+    # son condensat : il meurt alors avec elle. Le recu SymPy le fait ; les
+    # recus de similarite et les rapports adversariaux ne nomment rien et
+    # survivraient a une reecriture complete du contenu. Les additionner dans
+    # un meme `pass` publiait un total qui ressemblait a une preuve sans en
+    # etre une -- 262 annonces pour 122 preuves reelles sur 1SPE-SUITES.
+    #
+    # Ils ne sont pas effaces pour autant : les taire echangerait un total
+    # trompeur contre un silence. Ils sortent nommes, par gate, et un echec
+    # y reste bloquant.
     validations = dossier / "validations"
     verdicts: dict[str, int] = {}
+    non_lies: dict[str, dict[str, int]] = {}
     if validations.exists():
-        for recu in validations.glob("*.json"):
+        for recu in sorted(validations.glob("*.json")):
             try:
                 donnees = json.loads(recu.read_text(encoding="utf-8"))
             except json.JSONDecodeError:
                 continue
             verdict = str(donnees.get("verdict", "inconnu"))
-            verdicts[verdict] = verdicts.get(verdict, 0) + 1
+            if donnees.get("source_sha256"):
+                verdicts[verdict] = verdicts.get(verdict, 0) + 1
+                continue
+            gate = str(donnees.get("gate") or "").strip()
+            if not gate:
+                # Un recu sans gate declare est nomme par son suffixe de
+                # fichier : `<objet>.adversarial.json` -> `adversarial`.
+                suffixes = recu.name.split(".")
+                gate = suffixes[-2] if len(suffixes) > 2 else "inconnu"
+            seau = non_lies.setdefault(gate, {})
+            seau[verdict] = seau.get(verdict, 0) + 1
     ch.scientific_review = dict(sorted(verdicts.items()))
+    ch.unbound_receipts = {
+        gate: dict(sorted(seau.items())) for gate, seau in sorted(non_lies.items())
+    }
 
     if ch.capabilities_total and ch.capabilities_mapped == ch.capabilities_total:
         ch.programme_review = "capacites_toutes_rattachees"
@@ -399,6 +424,14 @@ def analyser(
         b.append("evaluation A/B incomplete")
     if verdicts.get("fail"):
         b.append(f"{verdicts['fail']} verdict(s) scientifique(s) en echec")
+    echecs_non_lies = sum(
+        seau.get("fail", 0) for seau in ch.unbound_receipts.values()
+    )
+    if echecs_non_lies:
+        # Ce recu ne prouve rien, mais son echec reste un signal : il ne doit
+        # pas devenir muet du seul fait qu'on a cesse de le compter comme
+        # preuve.
+        b.append(f"{echecs_non_lies} verdict(s) en echec sur des recus non lies")
     if ch.objects_generated:
         b.append(f"{ch.objects_generated}/{ch.objects_total} objets encore au statut generated")
     if ch.contract_status in ("draft", "absent"):
