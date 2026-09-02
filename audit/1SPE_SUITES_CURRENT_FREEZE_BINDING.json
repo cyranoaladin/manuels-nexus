@@ -5,7 +5,7 @@
     "render_artifact": "TeX genere par build_qcm_tex.py",
     "semantic_source": "JSON canonique du QCM"
   },
-  "binding_state": "STALE_CONTENT_CHANGED",
+  "binding_state": "CURRENT_EQUIVALENT_TO_FROZEN_CONTENT",
   "current_branch": {
     "binding": "INFORMATIONAL_ONLY",
     "note": "le nom de branche n'entre dans aucun verdict",
@@ -13,8 +13,8 @@
   },
   "current_object_count": 161,
   "current_object_set_digest": "sha256:12855bf66b6a3418958835344881a9f5aea3b4570698b267a316baf9ee8fb310",
-  "current_repository_sha": "82f47def1fb643a0cb73338e81c95c508cb6ee29",
-  "decision_ref": "decision humaine 2026-09-01 : re-geler sur le contenu a namespace corrige (supersede 2026-08-28)",
+  "current_repository_sha": "0b5a5f31bcfc02a7e35ffd53df6fabbca1cb349e",
+  "decision_ref": "decision humaine 2026-09-02 : re-geler sur le contenu courant, changement de corps inclus (supersede 2026-09-01)",
   "digest_semantics": {
     "comparable_pair": "freeze_content_projection vs current_object_set_digest",
     "excluded_from_comparison": [
@@ -30,22 +30,16 @@
   "findings": {
     "covered_source_drift": [],
     "missing_objects": [],
-    "modified_objects": [
-      "1SPE-SUITES-CO-051",
-      "1SPE-SUITES-EV-A",
-      "1SPE-SUITES-EV-A-corrige",
-      "1SPE-SUITES-EV-B",
-      "1SPE-SUITES-EV-B-corrige"
-    ],
+    "modified_objects": [],
     "programme_authority_drift": [],
     "render_artifact_drift": [],
     "supplementary_objects": []
   },
-  "freeze_content_projection": "sha256:110a693cd49cad41748257a55a647277d01fba71c5146e0e5db2750a4af885d0",
+  "freeze_content_projection": "sha256:12855bf66b6a3418958835344881a9f5aea3b4570698b267a316baf9ee8fb310",
   "freeze_object_count": 161,
-  "freeze_object_set_digest": "sha256:8a36c46283dde9b3776a566e8964b99951d589eac57b0da7250f70b20b84f648",
-  "freeze_source_sha": "817ee970a599ba33139ad78eb0e74ff4c73d6f44",
-  "object_blob_identity_pass": false,
+  "freeze_object_set_digest": "sha256:cc81380ab91a6c5a6754f1c44aecba6035a2f02d455f3f019510fa5b81fcc048",
+  "freeze_source_sha": "0b5a5f31bcfc02a7e35ffd53df6fabbca1cb349e",
+  "object_blob_identity_pass": true,
   "programme_authority_identity_pass": true,
   "qcm_render_artifact": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.tex",
   "qcm_semantic_authority": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json",
@@ -58,7 +52,7 @@
     "review_b": "PENDING_UNASSIGNED"
   },
   "schema_version": 1,
-  "semantic_identity_pass": false,
+  "semantic_identity_pass": true,
   "staleness_rules": {
     "authority_line_of_another_chapter": "NOT_STALE",
     "automatic_rebind": "FORBIDDEN",

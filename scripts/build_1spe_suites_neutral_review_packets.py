@@ -29,9 +29,9 @@ QCM_AUDIT_PATH = AUDIT / "QCM_SCIENTIFIC_ANSWER_KEY_AUDIT.json"
 
 #: Gel courant du chapitre. Le precedent, c667f12b, est conserve intact sous
 #: audit/reviews/human/1SPE-SUITES/superseded/ et marque HISTORICAL_SUPERSEDED.
-SOURCE_SHA = "817ee970a599ba33139ad78eb0e74ff4c73d6f44"
+SOURCE_SHA = "0b5a5f31bcfc02a7e35ffd53df6fabbca1cb349e"
 OBJECT_SET_DIGEST = (
-    "sha256:8a36c46283dde9b3776a566e8964b99951d589eac57b0da7250f70b20b84f648"
+    "sha256:cc81380ab91a6c5a6754f1c44aecba6035a2f02d455f3f019510fa5b81fcc048"
 )
 ROLES = ("EXPERT_MATHEMATIQUE", "EXPERT_PROGRAMME_PEDAGOGIE")
 OUTPUTS = {

@@ -1,39 +1,50 @@
 {
- "artifact_type": "suites_review_freeze_rebind_decision",
- "schema_version": 1,
- "supersedes": "decision humaine 2026-08-28 : conserver le gel c667f12b / 161",
- "human_decision_received": {
-  "date": "2026-09-01",
-  "authorised_by": "Alaeddine Ben Rhouma (direction du projet)",
-  "channel": "instruction directe en session, question de pilotage explicite",
-  "decision": "REBIND_FREEZE_ON_CORRECTED_CONTENT",
-  "scope_declared_unchanged": "meme perimetre, 161 objets",
-  "rationale_given": "la correction de namespace ne touche que la META de cinq objets FR-R*, le corps pedagogique est byte-identique, aucune revue humaine n'avait commence"
- },
- "machine_evidence": {
-  "pedagogical_body_lines_changed": 0,
-  "objects_with_meta_changed": [
-   "1SPE-SUITES-FR-R1",
-   "1SPE-SUITES-FR-R2",
-   "1SPE-SUITES-FR-R3",
-   "1SPE-SUITES-FR-R4",
-   "1SPE-SUITES-FR-R5"
+  "artifact_type": "suites_review_freeze_rebind_decision",
+  "schema_version": 1,
+  "supersedes": "decision humaine 2026-09-01 : REBIND_FREEZE_ON_CORRECTED_CONTENT, bornee a change_class = DECLARATION_ONLY_NAMESPACE_CORRECTION (pedagogical_body_lines_changed = 0)",
+  "human_decision_received": {
+    "date": "2026-09-02",
+    "authorised_by": "Alaeddine Ben Rhouma (direction du projet)",
+    "channel": "instruction directe en session, question de pilotage explicite",
+    "decision": "REBIND_FREEZE_ON_CURRENT_CONTENT",
+    "scope_declared": "CHANGEMENT_DE_CORPS_INCLUS",
+    "question_posee": "Le gel ne couvre plus 5 objets sur 161 (inventaire inchange). La decision du 2026-09-01 est bornee aux changements de declaration avec 0 ligne de corps modifiee ; il s'agit ici de corps. automatic_rebind etant FORBIDDEN, la decision est humaine.",
+    "reponse_retenue": "Re-geler sur le contenu courant"
+  },
+  "machine_evidence": {
+    "freeze_object_count": 161,
+    "current_object_count": 161,
+    "missing_objects": [],
+    "supplementary_objects": [],
+    "modified_objects": [
+      "1SPE-SUITES-CO-051",
+      "1SPE-SUITES-EV-A",
+      "1SPE-SUITES-EV-A-corrige",
+      "1SPE-SUITES-EV-B",
+      "1SPE-SUITES-EV-B-corrige"
+    ],
+    "change_class": "PEDAGOGICAL_BODY_CHANGE",
+    "origine_des_changements": {
+      "1SPE-SUITES-EV-A, EV-A-corrige, EV-B, EV-B-corrige": "question C8 demandee explicitement en session ; total 20 points et duree 55 min inchanges, comparabilite A/B tenue",
+      "1SPE-SUITES-CO-051": "les quatre reponses, deja completes, recoivent leur repere de question ; c'etait la derniere paire EX/CO de 1SPE dont la mise en page n'etait pas reconnue"
+    },
+    "binding_state_avant_decision": "STALE_CONTENT_CHANGED"
+  },
+  "what_this_decision_does_not_do": [
+    "elle n'approuve aucun contenu",
+    "elle n'assigne aucun relecteur",
+    "elle ne cree aucun recu",
+    "elle ne promeut aucun statut",
+    "elle ne vaut pas signature humaine du chapitre"
   ],
-  "change_class": "DECLARATION_ONLY_NAMESPACE_CORRECTION",
-  "capacity_credits_before": 1438,
-  "capacity_credits_after": 1438,
-  "authoring_units_digest_unchanged": true,
-  "human_receipts_at_decision": 0,
-  "review_a_at_decision": "PENDING_UNASSIGNED",
-  "review_b_at_decision": "PENDING_UNASSIGNED",
-  "publication_approval_at_decision": false
- },
- "what_this_decision_does_not_do": [
-  "elle n'approuve aucun contenu",
-  "elle n'assigne aucun relecteur",
-  "elle ne cree aucun recu",
-  "elle ne promeut aucun statut"
- ],
- "review_scope_note": "les `minimum_controls` du packet B incluent « prerequis » : la declaration corrigee entre donc dans le perimetre du relecteur programme/pedagogie, qui la verra dans le packet regenere.",
- "rebind_target_sha": "817ee970a599ba33139ad78eb0e74ff4c73d6f44"
+  "review_scope_note": "Le relecteur recevra desormais le contenu qui sera imprime, C8 et CO-051 compris. Re-geler ne dispense d'aucun controle : cela remet seulement le perimetre de relecture en face du tirage.",
+  "rebind_target_sha": "0b5a5f31bcfc02a7e35ffd53df6fabbca1cb349e",
+  "previous_decision_retained_for_history": {
+    "date": "2026-09-01",
+    "authorised_by": "Alaeddine Ben Rhouma (direction du projet)",
+    "channel": "instruction directe en session, question de pilotage explicite",
+    "decision": "REBIND_FREEZE_ON_CORRECTED_CONTENT",
+    "scope_declared_unchanged": "meme perimetre, 161 objets",
+    "rationale_given": "la correction de namespace ne touche que la META de cinq objets FR-R*, le corps pedagogique est byte-identique, aucune revue humaine n'avait commence"
+  }
 }

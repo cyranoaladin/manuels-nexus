@@ -23,7 +23,7 @@ OUTPUT = ROOT / "audit" / "1SPE_SUITES_REVIEW_SOURCE_FREEZE.json"
 #: corps pedagogique est byte-identique, seule leur META declarait un
 #: prerequis dans le champ des capacites. Voir
 #: audit/1SPE_SUITES_REVIEW_FREEZE_REBIND_DECISION.json.
-SOURCE_SHA = "817ee970a599ba33139ad78eb0e74ff4c73d6f44"
+SOURCE_SHA = "0b5a5f31bcfc02a7e35ffd53df6fabbca1cb349e"
 CHAPTER_ID = "1SPE-SUITES"
 CHAPTER_PREFIX = "Mathematiques/manuel-maths/chapitres/1SPE-SUITES"
 QCM_JSON = f"{CHAPTER_PREFIX}/qcm/1SPE-SUITES-QCM.json"

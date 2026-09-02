@@ -4,8 +4,8 @@ Le gel canonique reste `c667f12b` / 161 objets (décision humaine du
 2026-08-28). Cet artefact ne le modifie pas : il déclare si l'état
 courant du dépôt lui est équivalent **en contenu**.
 
-- gel : `817ee970a599ba33139ad78eb0e74ff4c73d6f44` · 161 objets
-- digest du gel : `sha256:8a36c46283dde9b3776a566e8964b99951d589eac57b0da7250f70b20b84f648`
+- gel : `0b5a5f31bcfc02a7e35ffd53df6fabbca1cb349e` · 161 objets
+- digest du gel : `sha256:cc81380ab91a6c5a6754f1c44aecba6035a2f02d455f3f019510fa5b81fcc048`
 - dépôt courant : constaté à la génération, **non contraignant**
 - branche observée : **INFORMATIONAL_ONLY**
 - objets courants : 161
@@ -14,12 +14,12 @@ courant du dépôt lui est équivalent **en contenu**.
 
 | Contrôle | Résultat |
 |---|---|
-| Identité binaire des 161 sources | **FAIL** |
-| Identité sémantique des sources couvertes | **FAIL** |
+| Identité binaire des 161 sources | **PASS** |
+| Identité sémantique des sources couvertes | **PASS** |
 | Identité de l'autorité programme (projection chapitre) | **PASS** |
 | Identité des règles de variante | **PASS** |
 
-## État : `STALE_CONTENT_CHANGED`
+## État : `CURRENT_EQUIVALENT_TO_FROZEN_CONTENT`
 
 Ni l'avancée de HEAD, ni un changement de nom de branche, ni un autre
 worktree, ni le rafraîchissement d'une enveloppe dérivée, ni l'édition

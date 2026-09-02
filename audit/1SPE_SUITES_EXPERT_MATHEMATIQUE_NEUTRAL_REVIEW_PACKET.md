@@ -6,8 +6,8 @@
 
 ## Liaison et gouvernance
 
-- SHA gelé : `817ee970a599ba33139ad78eb0e74ff4c73d6f44`
-- Ensemble : `sha256:8a36c46283dde9b3776a566e8964b99951d589eac57b0da7250f70b20b84f648` — 161 objets
+- SHA gelé : `0b5a5f31bcfc02a7e35ffd53df6fabbca1cb349e`
+- Ensemble : `sha256:cc81380ab91a6c5a6754f1c44aecba6035a2f02d455f3f019510fa5b81fcc048` — 161 objets
 - Contrat : `GOVERNANCE_CONTRACT_INCOMPLETE`
 - Capture de décision : `DISABLED`
 - État humain : `PENDING_UNASSIGNED`
@@ -91,7 +91,7 @@ reste l'autorité de revue.
 | `1SPE-SUITES-CO-048` | `corrige` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-048.tex` | `sha256:2ae7f6e58722011b2589575a74f19a0753a2dd9c089c0888c0c91a83d2488fb9` | `3d007d6f6f6adf1410232f1c818ada08f020a74a` |
 | `1SPE-SUITES-CO-049` | `corrige` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-049.tex` | `sha256:f4dfe0b27d6ec82a39c26ba27f0bf6451aa83cdb3709052ee357b05f16be9389` | `2cf498039798396e9f076a638f1a031742b9b8e2` |
 | `1SPE-SUITES-CO-050` | `corrige` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-050.tex` | `sha256:0ada87ed958cd3ff39b53c5084372958df35fe684308f6179fef6b779a1b046f` | `ae8e5e77291a8c88219aa009020a1b8c3e9d31c3` |
-| `1SPE-SUITES-CO-051` | `corrige` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-051.tex` | `sha256:7890a1506da6a4dd53e94648093e920cf59dde7377b3e5aaf943c81b6900ee5b` | `0e3f1d2118a8e2ff9ca7903329375f6b78caf39b` |
+| `1SPE-SUITES-CO-051` | `corrige` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-051.tex` | `sha256:bccef4960ca2873fc3fae55865b1072c34c49a6e5664f7a0528e72c626a2ae66` | `b042de36004bbb50f33472fb108ba158b799ef1d` |
 | `1SPE-SUITES-COURS-00` | `cours` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/00_ouverture.tex` | `sha256:e2114125a0fb10a4949abb6fac8c0bf150e783816159794882f1cb7bcd7a41f2` | `a27d33ec5a5dbef48e513a4982204c4f28a7f4bd` |
 | `1SPE-SUITES-COURS-01` | `cours` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/01_diagnostic.tex` | `sha256:4475e859764e176841371843e0df7e251b221096d1c783160b869395d67ca38d` | `b1b3528f03cd296f5e63c5cd5fe5ba76f17126a0` |
 | `1SPE-SUITES-COURS-07-FR` | `cours` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/07_td_fil_rouge.tex` | `sha256:c80bc15d27804301b50d8672c68f92ef88d4480a69d3384d62fd1ab705b52fc3` | `7c106123b587dcc81cf17a2a3aaf57c35d9479a3` |
@@ -104,10 +104,10 @@ reste l'autorité de revue.
 | `1SPE-SUITES-CR-015` | `cours` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/15_C6_modelisation.tex` | `sha256:efae9e421044bb94cd5c0cd8374d5e757fa57695f849a7b85791e38ba02f1228` | `5222d3f27ce61eb7edddee80876e92bcc7b7a1d9` |
 | `1SPE-SUITES-CR-016` | `cours` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/16_C7_algorithmique.tex` | `sha256:d450fedbab163f57ac92f7e15394622c1d09402fcd71b09a8158c03109da54bc` | `fb8d1bc269604f51a862077a30340014ca066557` |
 | `1SPE-SUITES-CR-017` | `cours` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/17_C8_limites_intuitives.tex` | `sha256:5a4e097eb3acae6a4cf9d62c940404ea64f096e8a39e54ddee4513ba18463a92` | `cf32bf41b02e4d1186e75a780ebeefc0b05514e3` |
-| `1SPE-SUITES-EV-A` | `evaluation` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-A.tex` | `sha256:be703824597a9d17913a4162c3a64385c31bc96cac9bfd34bcee57cb9e644b83` | `607f8c5e8dad0b70fe014adfd0ec327a0346408a` |
-| `1SPE-SUITES-EV-A-corrige` | `corrige_evaluation` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-A-corrige.tex` | `sha256:dabd3c147baa1fa30163ee50a71b1fc17f3af1cd73020f4cabb4f2e038d47666` | `023a6a9e95914e8b24b69e21fd6ad09bf078cd1e` |
-| `1SPE-SUITES-EV-B` | `evaluation` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-B.tex` | `sha256:234b9356a2c304e6b16d3ef6121aa33b227b18295fc01cc3524afb6c88ea3869` | `a8e61b6a567ba9a770b6c7d07b0381edb6fc7540` |
-| `1SPE-SUITES-EV-B-corrige` | `corrige_evaluation` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-B-corrige.tex` | `sha256:4573d368d15495bdf2a6ac6760d8cba8f638748ed5ff0cf589433919bc1c49c2` | `8e6b5243308be135786c413f6d424e9982b50106` |
+| `1SPE-SUITES-EV-A` | `evaluation` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-A.tex` | `sha256:731fefa19a424dfccf67f261dfecee0cec54f8e1bc4bfca5ad68bfe8db0e0652` | `a1263438b7e38336ba3cb5fa13ea114c3313f455` |
+| `1SPE-SUITES-EV-A-corrige` | `corrige_evaluation` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-A-corrige.tex` | `sha256:858be22e30c159e53619f29205f6d0d2cb65a8fae264f3b09f48d28ca4b7abda` | `817078712376a9b48ad0ee2b47b47d999f1079f4` |
+| `1SPE-SUITES-EV-B` | `evaluation` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-B.tex` | `sha256:82b74441cf80a3edcc72b289a49289b993dc82e889639fbf7925c255e4283306` | `4f3e2940f64d15942634756af0b6dc141ec514b1` |
+| `1SPE-SUITES-EV-B-corrige` | `corrige_evaluation` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-B-corrige.tex` | `sha256:f65bd2f2aa168101b23205d13c74c5bb45454cd9e103382ce6fd71e8e9b54d51` | `db055571a07d3be2a02584ee004ddae8a8409999` |
 | `1SPE-SUITES-EX-001` | `exercice` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-001.tex` | `sha256:e72432aa60a0b4b5ff9ef028e41346f8a1291c34b98eb3229905fb165e15e755` | `b7fa3153a2d68701ddbf491343210328d568f851` |
 | `1SPE-SUITES-EX-001-CDP` | `coup_de_pouce` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-001-CDP.tex` | `sha256:f450ff5749f33037c15d671c96465d98fd4dcdcfe95b35b24d84e259b77b8006` | `6c553dda0043709f4f5277babbade99d9494b9cc` |
 | `1SPE-SUITES-EX-002` | `exercice` | `generated` | `Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-002.tex` | `sha256:7b9012d9ee61ea6bf8497ac10aaa1aa5c3ce6eb5b6a6e83aa54d0c9852cf8d52` | `9290e216939fb7909779989bcfd0bb610c99de80` |

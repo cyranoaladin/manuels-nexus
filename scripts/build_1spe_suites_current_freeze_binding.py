@@ -226,7 +226,7 @@ def build_binding() -> dict[str, Any]:
     return {
         "artifact_type": "suites_current_freeze_binding",
         "schema_version": 1,
-        "decision_ref": "decision humaine 2026-09-01 : re-geler sur le contenu a namespace corrige (supersede 2026-08-28)",
+        "decision_ref": "decision humaine 2026-09-02 : re-geler sur le contenu courant, changement de corps inclus (supersede 2026-09-01)",
         "freeze_source_sha": freeze["source_sha"],
         "freeze_object_count": freeze["counts"]["chapter_objects"],
         "freeze_object_set_digest": freeze["chapter_object_set_digest"],
