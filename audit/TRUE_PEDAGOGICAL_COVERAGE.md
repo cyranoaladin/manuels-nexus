@@ -7,8 +7,8 @@ seize capacités alors qu'une seule, `C7`, était traitée.
 
 - capacités contractuelles : `320`
 - cellules (capacité × rôle) : `2240`
-- cellules avec déclaration exacte (alignement sémantique à établir) : `1480`
-- **unités d'écriture requises** : `330`
+- cellules avec déclaration exacte (alignement sémantique à établir) : `1481`
+- **unités d'écriture requises** : `329`
 
 | Manuel | cours | methodes | exercices | corriges | remediation | qcm | evaluations | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -17,7 +17,6 @@ seize capacités alors qu'une seule, `C7`, était traitée.
 | `1NSI` | 0 | 39 | 0 | 0 | 0 | 0 | 11 | **50** |
 | `TSPE` | 0 | 18 | 0 | 0 | 2 | 9 | 18 | **47** |
 | `TEXPERTES` | 0 | 0 | 0 | 0 | 23 | 14 | 9 | **46** |
-| `1SPE` | 0 | 0 | 0 | 0 | 0 | 0 | 1 | **1** |
 
 Ce backlog se compte en unités d'écriture — un couple (capacité, rôle)
 sans contenu valide — jamais en fichiers à remplacer. Le volume cloné

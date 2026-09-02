@@ -12,14 +12,14 @@ depuis l'arbre par `scripts/chapter_readiness.py`.
 - Chapitres : **52**, dont **0** satisfont l'ancienne checklist
 - Manuels satisfaisant l'ancienne checklist : **0 / 6**
 - Capacités rattachées : **320 / 320** (0 non rattachées)
-- Objets encore au statut `generated` : **1816 / 5401**
+- Objets encore au statut `generated` : **1816 / 5357**
 
 ## Par manuel
 
 | Manuel | Programme | Chapitres | READY | EN COURS | SQUELETTE | BLOQUÉ | Capacités | Exercices | `generated` | Prêt |
 |---|---|---:|---:|---:|---:|---:|---|---:|---:|---:|
 | Mathématiques Première spécialité | 2026 | 10 | 0 | 10 | 0 | 0 | 53/53 | 482/330 | 1408/1441 | 79.3% |
-| NSI Première spécialité | 2019 | 10 | 0 | 8 | 2 | 0 | 53/53 | 296/320 | 0/825 | 77.3% |
+| NSI Première spécialité | 2019 | 10 | 0 | 8 | 2 | 0 | 53/53 | 296/320 | 0/781 | 74.7% |
 | Mathématiques Terminale spécialité | 2019 | 11 | 0 | 10 | 1 | 0 | 67/67 | 413/376 | 56/1139 | 69.7% |
 | NSI Terminale spécialité | 2019 | 7 | 0 | 6 | 1 | 0 | 61/61 | 266/290 | 109/720 | 64.8% |
 | Mathématiques complémentaires Terminale | 2019 | 9 | 0 | 9 | 0 | 0 | 53/53 | 300/318 | 150/776 | 60.0% |

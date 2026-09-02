@@ -902,24 +902,6 @@
       "valid_objects": 0
     },
     {
-      "canonical_capacity_uid": "1SPE::1SPE-SUITES::C8",
-      "capacity": "C8",
-      "chapter": "1SPE-SUITES",
-      "indeterminate_object_ids": [],
-      "indeterminate_object_ids_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "indeterminate_object_paths": [],
-      "indeterminate_object_paths_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "indeterminate_objects": 0,
-      "manual": "1SPE",
-      "role": "evaluations",
-      "state": "MISSING",
-      "valid_object_ids": [],
-      "valid_object_ids_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "valid_object_paths": [],
-      "valid_object_paths_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "valid_objects": 0
-    },
-    {
       "canonical_capacity_uid": "TCOMPL::TCOMPL-CALCULS-AIRES::C1",
       "capacity": "C1",
       "chapter": "TCOMPL-CALCULS-AIRES",
@@ -6228,13 +6210,6 @@
           "1NSI-WEB-IHM/C9/methodes"
         ]
       },
-      "1SPE::1SPE-SUITES::C8": {
-        "count": 1,
-        "set_digest": "sha256:9afaef60666d72c63144ea88266120800553b24b87b3e2960fa774d4a63d0bd0",
-        "unit_ids": [
-          "1SPE-SUITES/C8/evaluations"
-        ]
-      },
       "TCOMPL::TCOMPL-CALCULS-AIRES::C1": {
         "count": 2,
         "set_digest": "sha256:a0ed19f46d9a4918ff97426703e12cdeaef47288ad94cd1bb961bdb92dac3810",
@@ -7610,13 +7585,6 @@
           "1NSI-WEB-IHM/C9/methodes"
         ]
       },
-      "1SPE-SUITES": {
-        "count": 1,
-        "set_digest": "sha256:9afaef60666d72c63144ea88266120800553b24b87b3e2960fa774d4a63d0bd0",
-        "unit_ids": [
-          "1SPE-SUITES/C8/evaluations"
-        ]
-      },
       "TCOMPL-CALCULS-AIRES": {
         "count": 6,
         "set_digest": "sha256:ccd576766dcd0fda6604ae281105197615e809bdb67c8dee5707f6b738bfb6a1",
@@ -8122,13 +8090,6 @@
           "1NSI-WEB-IHM/C9/methodes"
         ]
       },
-      "1SPE": {
-        "count": 1,
-        "set_digest": "sha256:9afaef60666d72c63144ea88266120800553b24b87b3e2960fa774d4a63d0bd0",
-        "unit_ids": [
-          "1SPE-SUITES/C8/evaluations"
-        ]
-      },
       "TCOMPL": {
         "count": 73,
         "set_digest": "sha256:9e98e4ef26c9e09481d882b3b11cb40be0ada6813c22d6d78706897830e36b45",
@@ -8477,8 +8438,8 @@
         ]
       },
       "evaluations": {
-        "count": 66,
-        "set_digest": "sha256:4a63e07ba2ca937d4740e81fc93f100554fa946ddc365b008594d1d92fb67c2e",
+        "count": 65,
+        "set_digest": "sha256:f75aad70331b8ee73506fcfeac7698266918381affc755764b1d01717624a4f0",
         "unit_ids": [
           "1NSI-ARCHITECTURE-OS/C4/evaluations",
           "1NSI-LANGAGE/C2/evaluations",
@@ -8491,7 +8452,6 @@
           "1NSI-WEB-IHM/C5/evaluations",
           "1NSI-WEB-IHM/C6/evaluations",
           "1NSI-WEB-IHM/C7/evaluations",
-          "1SPE-SUITES/C8/evaluations",
           "TCOMPL-CALCULS-AIRES/C1/evaluations",
           "TCOMPL-ECHANTILLONNAGE/C7/evaluations",
           "TCOMPL-MODELES-EVOLUTION/C6/evaluations",
@@ -8808,7 +8768,7 @@
       }
     }
   },
-  "authoring_units_digest": "sha256:148abc8330f1078291432ee1259bede2705be763aa94642df335f0257fffd097",
+  "authoring_units_digest": "sha256:7b2cff296263b98d314c8a82a3b761515d311997816f19e8c1904b6e464e2fdc",
   "capacity_identity": "resolue par scripts/capacity_identity.py : egalites exactes dans la portee du chapitre, jamais par extraction de jeton",
   "capacity_identity_blockers": [],
   "capacity_identity_blockers_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
@@ -15898,10 +15858,10 @@
     "invalid_and_indeterminate_disjoint": true
   },
   "inventory": {
-    "authoring_units_required": 330,
+    "authoring_units_required": 329,
     "capacities": 320,
     "cells": 2240,
-    "cells_with_declared_exact_identity": 1480,
+    "cells_with_declared_exact_identity": 1481,
     "cells_with_indeterminate_credit": 430,
     "objects_without_capacity_declaration": 752
   },
@@ -16703,10 +16663,6 @@
       "evaluations": 5,
       "methodes": 9
     },
-    "1SPE-SUITES": {
-      "TOTAL": 1,
-      "evaluations": 1
-    },
     "TCOMPL-CALCULS-AIRES": {
       "TOTAL": 6,
       "evaluations": 1,
@@ -16876,10 +16832,6 @@
       "TOTAL": 50,
       "evaluations": 11,
       "methodes": 39
-    },
-    "1SPE": {
-      "TOTAL": 1,
-      "evaluations": 1
     },
     "TCOMPL": {
       "TOTAL": 73,
@@ -17380,12 +17332,12 @@
     {
       "path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/evaluations/1SPE-PROBCOND-EV-A-corrige.tex",
       "role": "evaluations",
-      "type_objet": "evaluation_corrige"
+      "type_objet": "corrige_evaluation"
     },
     {
       "path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/evaluations/1SPE-PROBCOND-EV-B-corrige.tex",
       "role": "evaluations",
-      "type_objet": "evaluation_corrige"
+      "type_objet": "corrige_evaluation"
     },
     {
       "path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-001-CDP.tex",
@@ -18803,7 +18755,7 @@
       "type_objet": "corrige_evaluation"
     }
   ],
-  "role_type_mismatches_digest": "sha256:071b2eb369212cc6e86667e0f1d3f33827fc26df2e3e6eead363585e5738646d",
+  "role_type_mismatches_digest": "sha256:efb402516dbba11074fa56adf52388717977316f0383b01a7cd3ee8daa9cd527",
   "rows": [
     {
       "canonical_capacity_uid": "1NSI::1NSI-ALGO-DICHO-GLOUTON-KNN::C1",
@@ -36544,12 +36496,18 @@
       "indeterminate_objects": 0,
       "manual": "1SPE",
       "role": "evaluations",
-      "state": "MISSING",
-      "valid_object_ids": [],
-      "valid_object_ids_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "valid_object_paths": [],
-      "valid_object_paths_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "valid_objects": 0
+      "state": "DECLARED_EXACT_IDENTITY_NOT_SEMANTICALLY_VALIDATED",
+      "valid_object_ids": [
+        "1SPE-SUITES-EV-A",
+        "1SPE-SUITES-EV-B"
+      ],
+      "valid_object_ids_digest": "sha256:f0ea58b43200c99f6dd1627a2d42d9f872587ff7a5e62f55a90dd6a7fcbdc0e3",
+      "valid_object_paths": [
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-A.tex",
+        "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-B.tex"
+      ],
+      "valid_object_paths_digest": "sha256:b2388efc6b7bf425475869cb4fe50aede3a740a15a6cfd853575ef6c0be924ed",
+      "valid_objects": 2
     },
     {
       "canonical_capacity_uid": "1SPE::1SPE-TRIGONOMETRIE::C1",

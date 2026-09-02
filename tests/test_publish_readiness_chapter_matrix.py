@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -355,36 +356,114 @@ def test_assessment_orphan_correction_is_a_gap(producer, tmp_path: Path) -> None
     assert result["status"] == "GAP"
 
 
-@pytest.mark.parametrize("status", ["needs_review", "foobar"])
-def test_assessment_pending_or_unknown_status_is_a_gap(
+def _bind_passing_receipt(chapter: Path, stem: str) -> None:
+    """Un recu SymPy `pass` reellement lie au contenu actuel de la source."""
+    source = chapter / "evaluations" / f"{stem}.tex"
+    digest = "sha256:" + hashlib.sha256(source.read_bytes()).hexdigest()
+    receipts = chapter / "validations"
+    receipts.mkdir(parents=True, exist_ok=True)
+    (receipts / f"{stem}.sympy.json").write_text(
+        json.dumps(
+            {
+                "objet_id": stem,
+                "gate": "sympy",
+                "verdict": "pass",
+                "source_path": str(source),
+                "source_sha256": digest,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+
+def _assessment_pair(chapter: Path, suffix: str, subject_status: str,
+                     correction_status: str) -> None:
+    subject_id = f"EV-{suffix}"
+    _assessment_source(
+        chapter / f"evaluations/{subject_id}.tex",
+        {
+            "id": subject_id,
+            "chapitre": "1NSI-X",
+            "type_objet": "evaluation",
+            "capacites": ["C1"],
+            "version": suffix,
+            "status": subject_status,
+        },
+    )
+    _assessment_source(
+        chapter / f"evaluations/{subject_id}-corrige.tex",
+        {
+            "id": f"{subject_id}-corrige",
+            "chapitre": "1NSI-X",
+            "type_objet": "corrige_evaluation",
+            "evaluation_ref": subject_id,
+            "capacites": ["C1"],
+            "status": correction_status,
+        },
+    )
+
+
+@pytest.mark.parametrize("status", ["needs_review", "foobar", "approved", "verified"])
+def test_no_declared_status_replaces_current_machine_evidence(
     producer, tmp_path: Path, status: str
 ) -> None:
+    """Aucun statut declare ne vaut preuve, `approved` compris.
+
+    OLD_ASSERTION_PURPOSE
+        un devoir dont le statut etait `needs_review` ou inconnu comptait comme
+        lacune, tandis qu'un corrige `approved` passait -- le statut declare
+        suffisait a etablir la conformite.
+    NEW_ASSERTION
+        la conformite se lit sur la preuve machine COURANTE. Sans recu lie au
+        contenu actuel, tout objet d'evaluation est en lacune, quel que soit le
+        statut declare, et les corriges ne sont plus exemptes.
+    WHY_NEW_IS_STRONGER_OR_EQUIVALENT
+        l'ensemble signale est un sur-ensemble strict de l'ancien (4 objets au
+        lieu de 2) : l'exemption dont beneficiait un `approved` legacy sans
+        aucune preuve disparait, et le cas `verified` -- qui passait aussi par
+        le seul statut -- est desormais couvert par le meme mecanisme.
+    """
     chapter, resolver = _assessment_corpus(tmp_path, producer)
     for suffix in ("A", "B"):
-        subject_id = f"EV-{suffix}"
-        _assessment_source(
-            chapter / f"evaluations/{subject_id}.tex",
-            {
-                "id": subject_id,
-                "chapitre": "1NSI-X",
-                "type_objet": "evaluation",
-                "capacites": ["C1"],
-                "status": status,
-            },
-        )
-        _assessment_source(
-            chapter / f"evaluations/{subject_id}-corrige.tex",
-            {
-                "id": f"{subject_id}-CORRIGE",
-                "chapitre": "1NSI-X",
-                "type_objet": "corrige_evaluation",
-                "evaluation_ref": subject_id,
-                "capacites": ["C1"],
-                "status": "approved",
-            },
-        )
+        _assessment_pair(chapter, suffix, status, "approved")
     result = producer._assessments("1NSI-X", chapter, resolver)
-    assert result["invalid_status"] == ["EV-A", "EV-B"]
+    assert result["invalid_status"] == [
+        "EV-A", "EV-A-corrige", "EV-B", "EV-B-corrige",
+    ]
+    assert result["status"] == "GAP"
+
+
+def test_current_bound_evidence_admits_an_object_whatever_its_status(
+    producer, tmp_path: Path
+) -> None:
+    """Le pendant : `generated` + preuve courante liee suffit.
+
+    Sans ce test, l'axe pourrait etre satisfait en refusant tout le monde.
+    """
+    chapter, resolver = _assessment_corpus(tmp_path, producer)
+    for suffix in ("A", "B"):
+        _assessment_pair(chapter, suffix, "generated", "generated")
+        _bind_passing_receipt(chapter, f"EV-{suffix}")
+        _bind_passing_receipt(chapter, f"EV-{suffix}-corrige")
+    result = producer._assessments("1NSI-X", chapter, resolver)
+    assert result["invalid_status"] == []
+    assert result["status"] == "COMPLETE"
+
+
+def test_a_receipt_that_no_longer_matches_its_source_is_not_evidence(
+    producer, tmp_path: Path
+) -> None:
+    """Un `pass` d'hier ne certifie pas un texte reecrit depuis."""
+    chapter, resolver = _assessment_corpus(tmp_path, producer)
+    for suffix in ("A", "B"):
+        _assessment_pair(chapter, suffix, "generated", "generated")
+        _bind_passing_receipt(chapter, f"EV-{suffix}")
+        _bind_passing_receipt(chapter, f"EV-{suffix}-corrige")
+    # La source change apres coup : le recu devient perime.
+    victim = chapter / "evaluations/EV-A.tex"
+    victim.write_text(victim.read_text(encoding="utf-8") + "\nAjout.\n", encoding="utf-8")
+    result = producer._assessments("1NSI-X", chapter, resolver)
+    assert "EV-A" in result["invalid_status"]
     assert result["status"] == "GAP"
 
 
