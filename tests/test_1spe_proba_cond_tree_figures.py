@@ -420,6 +420,30 @@ def test_aucun_corrige_ne_dessine_son_propre_arbre() -> None:
 
 
 @pytest.mark.parametrize("number", TREE_EXERCISES)
+def test_le_chargement_de_secours_reste_en_mode_vertical(number: str) -> None:
+    """Le shim R6 ne doit rien pouvoir imprimer.
+
+    `\\input` d'un .sty au milieu d'un paragraphe ferait passer ses fins de
+    ligne pour des espaces et ses lignes vides pour des `\\par` : le corrigé
+    gagnerait un blanc fantôme que personne ne relierait à sa cause. En mode
+    vertical, TeX jette les espaces et ignore les `\\par` — la ligne blanche qui
+    précède le shim est donc une condition de correction, pas une mise en page.
+    """
+    text = correction_text(number)
+    assert "\\makeatletter\\@ifundefined{nxarbreproba}" in text, (
+        f"CO-{number} : chargement de secours R6 absent"
+    )
+    # Les lignes de commentaire qui l'annoncent ne changent pas le mode : c'est
+    # la ligne vide qui les précède qui referme le paragraphe.
+    marker = "% Enveloppe R6"
+    assert marker in text
+    before = text[: text.index(marker)]
+    assert before.rstrip(" \t").endswith("\n\n"), (
+        f"CO-{number} : le shim doit être précédé d'une ligne vide"
+    )
+
+
+@pytest.mark.parametrize("number", TREE_EXERCISES)
 def test_chaque_corrige_dessine_bien_un_arbre(number: str) -> None:
     tree = tree_of(number)
     assert tree.root is not None
