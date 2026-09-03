@@ -477,6 +477,9 @@
   \rubrique{Ouverture}%
   \stepcounter{nxChapNum}%
   \refstepcounter{chapter}%
+  % \refstepcounter pose l'ancre « chapter.N » : l'entrée de sommaire qui suit
+  % a donc déjà sa destination, il ne faut pas lui en poser une seconde.
+  \global\nxAncreChapitreFraichetrue
   \chaptermark{#2}%
   \ifdefined\nxVBaseCompatibility
     \addcontentsline{toc}{chapter}{#2}%
@@ -1284,3 +1287,89 @@
 \newcommand{\nxTitrePdf}{%
   \nexus@matiere\space\nexus@niveau\space—\space
   \nxLibelleVariante\space—\space\nexus@millesime}
+
+% ===========================================================================
+%  NAVIGATION ET MÉTADONNÉES DU PDF (hyperref + bookmark)
+% ===========================================================================
+% Sans hyperref le PDF sortait avec zéro signet, zéro lien et un dictionnaire
+% Info vide : trois exigences de publication non tenues (AGENTS.md, « le PDF
+% final doit avoir signets, liens, métadonnées et polices incorporées »).
+%
+% hyperref est chargé ici, à la toute fin de la classe : après KOMA,
+% scrlayer-scrpage, babel, amsmath, tikz, tcolorbox et listings, donc à la
+% place que sa documentation exige, et avant la charte, qui n'enveloppe
+% ensuite que \addcontentsline — donc la version d'hyperref, ce qui préserve
+% les destinations.
+%
+% Les signets ne sont PAS une seconde table des matières : ils recopient
+% exactement les entrées écrites dans le .toc (chapitres, puis grandes
+% sections pédagogiques). Aucun objet fin (exercice, définition, figure) ne
+% produit d'entrée de sommaire, donc aucun ne produit de signet.
+% psdextra n'est pas un confort : sans lui, un symbole unicode-math dans un
+% titre de section (« Dérivée de $t\mapsto\mathrm{e}^{at}$ ») arrive tel quel
+% dans \HyPsd@Char, qui suppose un caractère, et la compilation du manuel
+% entier s'arrête sur « Improper alphabetic constant ». psdextra traduit ces
+% symboles en Unicode : le signet lit « Dérivée de t↦eat ».
+\RequirePackage[
+  unicode,
+  psdextra,
+  bookmarks=true,
+  bookmarksnumbered=false,% \numberline{0} des pages liminaires ne doit pas
+                          % remonter dans le titre du signet
+  bookmarksopen=true,
+  bookmarksopenlevel=0,
+  hidelinks,              % manuel destiné à l'impression : aucun cadre
+  pdfpagelabels=true,
+  pdfdisplaydoctitle=true,
+]{hyperref}
+\RequirePackage{bookmark}
+
+% Les entrées de sommaire écrites à la main (pages liminaires et annexes :
+% « Avant-propos », « Formulaire »…) suivent un \chapter* qui ne pose aucune
+% ancre. hyperref les rattacherait alors à la dernière ancre vue, c'est-à-dire
+% à l'ouverture du chapitre précédent : signet correct de libellé, mais
+% pointant sur la mauvaise page. On pose donc une ancre fraîche pour toute
+% entrée de sommaire de niveau chapitre qui n'en a pas déjà reçu une du
+% \refstepcounter{chapter} de \ouverturechapitre.
+\newif\ifnxAncreChapitreFraiche
+\nxAncreChapitreFraichefalse
+\let\nxOrigAddcontentsline\addcontentsline
+\renewcommand{\addcontentsline}[3]{%
+  \ifstrequal{#2}{chapter}{%
+    \ifnxAncreChapitreFraiche\else\phantomsection\fi
+  }{}%
+  \nxOrigAddcontentsline{#1}{#2}{#3}%
+  \global\nxAncreChapitreFraichefalse
+}
+
+% Filet de sécurité derrière psdextra : un symbole qu'il ne couvrirait pas
+% resterait un token \Umathchardef, et `#1 dans \HyPsd@Char redonnerait
+% l'erreur fatale. Un titre de section ne doit jamais pouvoir arrêter la
+% fabrication du manuel : les tokens qui ne sont pas des caractères sont
+% simplement absents du signet, comme le fait déjà hyperref pour les macros
+% qu'il ne sait pas traduire.
+\AtBeginDocument{%
+  \let\nxHyPsdCharOriginal\HyPsd@Char
+  \def\HyPsd@Char#1{%
+    \ifcat\noexpand#1\relax\else\nxHyPsdCharOriginal{#1}\fi}%
+}
+
+\AtBeginDocument{%
+  \hypersetup{
+    pdftitle={\nxTitrePdf},
+    pdfauthor={\nxMarqueEditeur},
+    pdfsubject={Manuel scolaire — \nexus@matiere\space\nexus@niveau},
+    pdfkeywords={\nexus@matiere, \nexus@niveau, manuel scolaire,
+      \nxMarqueEditeur, \nexus@millesime},
+    pdflang={fr-FR},
+  }%
+  % /Publisher n'appartient pas au vocabulaire d'hyperref : on l'ajoute au
+  % dictionnaire Info, en UTF-16BE explicite pour ne dépendre d'aucun
+  % encodage de repli. La chaîne est « Nexus Réussite ».
+  \pdfextension info{%
+    /Publisher <FEFF004E00650078007500730020005200E9007500730073006900740065>}%
+  % LuaTeX ajoute par défaut /PTEX.FullBanner, qui publie la distribution et
+  % la machine de compilation dans le PDF diffusé. Le bit 1 la supprime ; les
+  % autres champs (dont /ID, indispensable à la reproductibilité) restent.
+  \pdfvariable suppressoptionalinfo=1\relax
+}
