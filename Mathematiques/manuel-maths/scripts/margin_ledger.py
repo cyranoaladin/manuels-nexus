@@ -429,6 +429,23 @@ def _expected_link_records(
     return expected
 
 
+def _typeset_origin(page: Any) -> tuple[float, float]:
+    """Coin inferieur gauche de la page COMPOSEE, dans l'espace du PDF.
+
+    C'est le TrimBox quand il existe -- la page finie apres rognage -- et le
+    MediaBox sinon. Rien n'est suppose : un document sans fond perdu rend
+    (0, 0) et la comparaison reste ce qu'elle etait.
+    """
+
+    box = page.obj.get("/TrimBox") or page.obj.get("/MediaBox")
+    if box is None:
+        return (0.0, 0.0)
+    values = [float(value) for value in box]
+    if len(values) != 4:
+        _reject("page box must have four numbers")
+    return (min(values[0], values[2]), min(values[1], values[3]))
+
+
 def _check_expected_links(
     pdf: pikepdf.Pdf,
     inventory: Mapping[str, Any],
@@ -440,13 +457,29 @@ def _check_expected_links(
         annotations = page.obj.get("/Annots", [])
         if not isinstance(annotations, (list, pikepdf.Array)):
             _reject(f"page {page_index} /Annots must be an array")
+        # Une annotation vit dans l'espace utilisateur du PDF ; l'attendu est
+        # calcule dans le repere de la page COMPOSEE. Les deux coincidaient
+        # tant que le MediaBox valait la page composee. Depuis que le document
+        # porte un fond perdu, le MediaBox deborde et la page composee commence
+        # a l'origine du TrimBox : comparer les deux sans la ramener revenait a
+        # declarer perdu un lien qui avait simplement suivi sa page.
+        #
+        # L'origine est LUE dans le document, jamais supposee : un fond perdu
+        # different, ou son absence, doit se voir ici.
+        origin_x, origin_y = _typeset_origin(page)
         for annotation in annotations:
             if str(annotation.get("/Subtype", "")) != "/Link":
                 continue
+            left, bottom, right, top = _annotation_rect(annotation)
             actual.append(
                 {
                     "page": page_index,
-                    "rect": _annotation_rect(annotation),
+                    "rect": (
+                        left - origin_x,
+                        bottom - origin_y,
+                        right - origin_x,
+                        top - origin_y,
+                    ),
                     "action": _annotation_action(annotation),
                 }
             )
