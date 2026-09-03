@@ -1,0 +1,252 @@
+{
+  "carries_commentary_already": false,
+  "chapter": "1SPE-SUITES",
+  "contract": "Mathematiques/manuel-maths/docs/01_conception_manuel.md",
+  "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-A-corrige.tex",
+  "declared_total": "20",
+  "duration_min": 55,
+  "exercises": [
+    {
+      "capacities": "C1, C2, C5, C8",
+      "declared_total": "6",
+      "exercise": 1,
+      "questions": [
+        {
+          "competence": "calculer",
+          "correction_answer": "On applique la relation de récurrence $u_{n+1} = u_n + 4$ : \\[ u_1 = u_0 + 4 = 3 + 4 = 7, \\qquad u_2 = u_1 + 4 = 7 + 4 = 11, \\qquad u_3 = u_2 + 4 = 11 + 4 = 15. \\] \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q1",
+          "statement": "Calculer $u_1$, $u_2$ et $u_3$.",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "raisonner, communiquer",
+          "correction_answer": "Pour tout entier naturel $n$, on calcule la différence entre deux termes consécutifs : \\[ u_{n+1} - u_n = (u_n + 4) - u_n = 4. \\] La différence $u_{n+1} - u_n$ est constante, égale à $4$, pour tout $n \\in \\mathbb{N}$. \\textbf{Conclusion :} La suite $(u_n)$ est une suite arithmétique de raison $r = 4$ et de premier terme $u_0 = 3$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q2",
+          "statement": "Démontrer que la suite $(u_n)$ est arithmétique. Préciser sa raison $r$ et son premier terme $u_0$.",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "Par la formule du terme général d'une suite arithmétique : \\[ \\boxed{u_n = 3 + 4n} \\quad \\text{pour tout } n \\in \\mathbb{N}. \\] \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q3",
+          "statement": "Exprimer $u_n$ en fonction de $n$ pour tout entier naturel $n$.",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "raisonner, communiquer",
+          "correction_answer": "Pour tout $n \\in \\mathbb{N}$ : \\[ u_{n+1} - u_n = 4 > 0. \\] La différence est strictement positive pour tout $n \\in \\mathbb{N}$. \\textbf{Conclusion :} La suite $(u_n)$ est \\textbf{strictement croissante}. \\textit{Remarque : on peut aussi argumenter que la raison $r = 4 > 0$, ce qui suffit pour conclure qu'une suite arithmétique est strictement croissante.} %========================================",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q4",
+          "statement": "Étudier les variations de la suite $(u_n)$. Justifier rigoureusement.",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "chercher, communiquer",
+          "correction_answer": "$w_0 = 5 - 1 = 4$, $w_1 = 5 - \\dfrac{1}{2} = \\dfrac{9}{2} = 4{,}5$, $w_2 = 5 - \\dfrac{1}{3} = \\dfrac{14}{3} \\approx 4{,}67$ et $w_{10} = 5 - \\dfrac{1}{11} = \\dfrac{54}{11} \\approx 4{,}91$. Pour $(u_n)$ : les termes valent $u_0 = 3$, $u_3 = 15$, $u_{10} = 43$. Chaque terme dépasse le précédent de $4$, et cet écart ne diminue jamais : en allant assez loin, on dépasse n'importe quelle valeur fixée à ",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q5",
+          "statement": "On considère de plus la suite $(w_n)$ définie pour tout entier naturel $n$ par $w_n = 5 - \\dfrac{1}{n+1}$. Calculer $w_0$, $w_1$, $w_2$ et $w_{10}$ (valeurs arrondies au centième si besoin). Les suites $(u_n)$ et $(w_n)$ sont toutes les deux croissantes. Pour chacune, dire si elle semble se rapprocher d'une valeur finie, croître sans borne, ou n'avoir aucun comportement de ce type. Justifier à par",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C3, C4",
+      "declared_total": "5",
+      "exercise": 2,
+      "questions": [
+        {
+          "competence": "calculer",
+          "correction_answer": "\\[ u_0 = 2 \\times 3^0 = 2 \\times 1 = 2, \\qquad u_1 = 2 \\times 3^1 = 6, \\qquad u_2 = 2 \\times 3^2 = 2 \\times 9 = 18. \\] \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q1",
+          "statement": "Calculer $u_0$, $u_1$ et $u_2$.",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "raisonner, communiquer",
+          "correction_answer": "Pour tout entier naturel $n$, $u_n = 2 \\times 3^n > 0$, donc le quotient est bien défini. On calcule : \\[ \\frac{u_{n+1}}{u_n} = \\frac{2 \\times 3^{n+1}}{2 \\times 3^n} = 3^{n+1-n} = 3. \\] Le quotient est constant, égal à $3$, et non nul. \\textbf{Conclusion :} La suite $(u_n)$ est une suite géométrique de raison $q = 3$ et de premier terme $u_0 = 2$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q2",
+          "statement": "Démontrer que la suite $(u_n)$ est géométrique. Préciser sa raison $q$ et son premier terme $u_0$.",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "On somme les termes de rang $k = 0$ à $k = 4$, soit $5$ termes. En appliquant la formule avec $u_0 = 2$, $q = 3$ et $n = 4$ : \\[ S = u_0 \\times \\frac{q^5 - 1}{q - 1} = 2 \\times \\frac{3^5 - 1}{3 - 1} = 2 \\times \\frac{243 - 1}{2} = 243 - 1 = 242. \\] \\[ \\boxed{S = 242.} \\] \\textit{Vérification :} $u_0 + u_1 + u_2 + u_3 + u_4 = 2 + 6 + 18 + 54 + 162 = 242$. \\checkmark %================================",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q3",
+          "statement": "Calculer la somme $S = u_0 + u_1 + u_2 + u_3 + u_4$. On rappelle que, pour une suite géométrique de raison $q \\neq 1$, on a : \\[ \\sum_{k=0}^{n} u_k = u_0 \\times \\frac{q^{n+1} - 1}{q - 1}. \\]",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C6, C7",
+      "declared_total": "5",
+      "exercise": 3,
+      "questions": [
+        {
+          "competence": "modéliser",
+          "correction_answer": "Au bout de $n$ années, le capital vaut $u_n$. Durant l'année suivante, il produit des intérêts à hauteur de $5\\,\\% \\times u_n = 0{,}05\\,u_n$. Le capital au bout de $(n+1)$ années est donc : \\[ u_{n+1} = u_n + 0{,}05\\,u_n = (1 + 0{,}05)\\,u_n = 1{,}05\\,u_n. \\] \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q1",
+          "statement": "Justifier que, pour tout entier naturel $n$ : \\[ u_{n+1} = 1{,}05 \\times u_n. \\]",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "La relation $u_{n+1} = 1{,}05\\,u_n$ montre que $(u_n)$ est une suite géométrique de raison $q = 1{,}05$ et de premier terme $u_0 = 800$. Par la formule du terme général d'une suite géométrique : \\[ \\boxed{u_n = 800 \\times 1{,}05^n} \\quad \\text{pour tout } n \\in \\mathbb{N}. \\] \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q2",
+          "statement": "En déduire que $(u_n)$ est une suite géométrique. Exprimer $u_n$ en fonction de $n$.",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "\\[ u_1 = 800 \\times 1{,}05 = 840 \\text{ €}, \\qquad u_2 = 800 \\times 1{,}05^2 = 800 \\times 1{,}1025 = 882 \\text{ €}. \\] \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q3",
+          "statement": "Calculer $u_1$ et $u_2$ (valeurs exactes, ou arrondies à l'euro si nécessaire).",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "communiquer",
+          "correction_answer": "\\textbf{4a. Explication de la boucle.} \\begin{itemize} \\item \\texttt{u = 800} et \\texttt{n = 0} initialisent le capital et le compteur d'années. \\item La condition \\texttt{while u < 1200} : tant que le capital n'a pas atteint $1\\,200$\\,€, on continue. \\item \\texttt{u = 1.05 * u} : on applique la relation de récurrence (le capital est multiplié par $1{,}05$). \\item \\texttt{n = n + 1} : on incrément",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q4a",
+          "statement": "Expliquer, ligne par ligne, le rôle de la boucle \\texttt{while}.",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "chercher",
+          "correction_answer": "\\textbf{4a. Explication de la boucle.} \\begin{itemize} \\item \\texttt{u = 800} et \\texttt{n = 0} initialisent le capital et le compteur d'années. \\item La condition \\texttt{while u < 1200} : tant que le capital n'a pas atteint $1\\,200$\\,€, on continue. \\item \\texttt{u = 1.05 * u} : on applique la relation de récurrence (le capital est multiplié par $1{,}05$). \\item \\texttt{n = n + 1} : on incrément",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q4b",
+          "statement": "Indiquer la valeur affichée par \\texttt{print(n)} et vérifier par le calcul que cette valeur est cohérente.",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C2, C4",
+      "declared_total": "4",
+      "exercise": 4,
+      "questions": [
+        {
+          "competence": "raisonner",
+          "correction_answer": "Pour tout entier naturel $n$, on calcule : \\[ v_{n+1} - v_n = \\bigl[2(n+1)+5\\bigr] - (2n+5) = 2n + 2 + 5 - 2n - 5 = 2. \\] La différence $v_{n+1} - v_n = 2$ est constante pour tout $n \\in \\mathbb{N}$. \\textbf{Conclusion :} $(v_n)$ est une suite arithmétique de raison $r = 2$ et de premier terme $v_0 = 2 \\times 0 + 5 = 5$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q1",
+          "statement": "Montrer que $(v_n)$ est une suite arithmétique de raison $2$ et de premier terme $v_0 = 5$.",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer, raisonner",
+          "correction_answer": "$S_n$ est la somme des $(n+1)$ termes $v_0, v_1, \\ldots, v_n$ de la suite arithmétique $(v_n)$. Le premier terme est $v_0 = 5$ et le dernier terme est $v_n = 2n + 5$. En appliquant la formule : \\[ S_n = \\frac{(n+1)(v_0 + v_n)}{2} = \\frac{(n+1)(5 + 2n + 5)}{2} = \\frac{(n+1)(2n+10)}{2} = \\frac{(n+1) \\times 2(n+5)}{2}. \\] \\[ \\boxed{S_n = (n+1)(n+5)} \\quad \\text{pour tout } n \\in \\mathbb{N}. \\] \\texti",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q2",
+          "statement": "Établir que $S_n = (n+1)(n+5)$ pour tout entier naturel $n$. \\textit{On rappelle que la somme de $(n+1)$ termes d'une suite arithmétique de premier terme $a$ et de dernier terme $b$ vaut $\\dfrac{(n+1)(a+b)}{2}$.}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "chercher",
+          "correction_answer": "On cherche le plus petit entier naturel $n$ vérifiant $(n+1)(n+5) > 200$. La fonction $(n+1)(n+5) = n^2 + 6n + 5$ est croissante pour $n \\geq 0$. On cherche par encadrement : \\[ n = 11 \\;:\\; S_{11} = 12 \\times 16 = 192 \\leq 200. \\] \\[ n = 12 \\;:\\; S_{12} = 13 \\times 17 = 221 > 200. \\] \\textbf{Conclusion :} Le plus petit entier naturel $n$ tel que $S_n > 200$ est $\\boxed{n = 12}$. \\end{corrige}",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q3",
+          "statement": "Déterminer le plus petit entier naturel $n$ tel que $S_n > 200$.",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    }
+  ],
+  "nothing_here_is_written_for_the_teacher": true,
+  "object_id": "1SPE-SUITES-EV-A",
+  "question_count": 16,
+  "subject_path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-A.tex",
+  "version": "A",
+  "what_the_contract_asks": "pour chaque question, ce qui rapporte les points, les erreurs pénalisées, les points de rédaction"
+}

@@ -1,0 +1,226 @@
+{
+  "carries_commentary_already": false,
+  "chapter": "1SPE-PROBA-COND",
+  "contract": "Mathematiques/manuel-maths/docs/01_conception_manuel.md",
+  "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/evaluations/1SPE-PROBCOND-EV-A-corrige.tex",
+  "declared_total": "20",
+  "duration_min": 55,
+  "exercises": [
+    {
+      "capacities": "C1, C2",
+      "declared_total": "5",
+      "exercise": 1,
+      "questions": [
+        {
+          "competence": "représenter",
+          "correction_answer": "Arbre : $P(R) = \\frac{3}{5}$, $P(V) = \\frac{2}{5}$. Sachant $R$ : $P_R(G) = \\frac{1}{2}$, $P_R(\\overline{G}) = \\frac{1}{2}$. Sachant $V$ : $P_V(G) = \\frac{1}{4}$, $P_V(\\overline{G}) = \\frac{3}{4}$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q1",
+          "statement": "Construire l'arbre pondere de cette expérience. \\hfill\\textit{(1,5 pt --- représenter)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$P(R \\cap G) = P(R) \\times P_R(G) = \\dfrac{3}{5} \\times \\dfrac{1}{2} = \\dfrac{3}{10}$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q2",
+          "statement": "Calculer $P(R \\cap G)$ ou $G$ designe << gagner >>. \\hfill\\textit{(1 pt --- calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$P(G) = P(R \\cap G) + P(V \\cap G) = \\dfrac{3}{10} + \\dfrac{2}{5} \\times \\dfrac{1}{4} = \\dfrac{3}{10} + \\dfrac{1}{10} = \\dfrac{2}{5}$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q3",
+          "statement": "Calculer la probabilité de gagner. \\hfill\\textit{(1,5 pt --- calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "raisonner",
+          "correction_answer": "$P_G(R) = \\dfrac{P(R \\cap G)}{P(G)} = \\dfrac{3/10}{2/5} = \\dfrac{3}{10} \\times \\dfrac{5}{2} = \\dfrac{3}{4}$. %===============================================================",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q4",
+          "statement": "Sachant qu'on a gagne, quelle est la probabilité d'avoir tire un jeton rouge ? \\hfill\\textit{(1 pt --- raisonner)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C3, C5",
+      "declared_total": "6",
+      "exercise": 2,
+      "questions": [
+        {
+          "competence": "modeliser",
+          "correction_answer": "$P(M) = \\dfrac{3}{100}$, $P_M(T) = \\dfrac{9}{10}$, $P_{\\overline{M}}(T) = 1 - \\dfrac{96}{100} = \\dfrac{1}{25}$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q1",
+          "statement": "Donner les valeurs de $P(M)$, $P_M(T)$ et $P_{\\overline{M}}(T)$. \\hfill\\textit{(1,5 pt --- modeliser)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$P(T) = P(M)\\,P_M(T) + P(\\overline{M})\\,P_{\\overline{M}}(T) = \\dfrac{3}{100} \\times \\dfrac{9}{10} + \\dfrac{97}{100} \\times \\dfrac{1}{25}$. $= \\dfrac{27}{1000} + \\dfrac{97}{2500} = \\dfrac{270}{10000} + \\dfrac{388}{10000} = \\dfrac{658}{10000} = \\dfrac{329}{5000}$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q2",
+          "statement": "Calculer $P(T)$ par la formule des probabilités totales. \\hfill\\textit{(2 pts --- calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$P_T(M) = \\dfrac{P(M \\cap T)}{P(T)} = \\dfrac{27/1000}{329/5000} = \\dfrac{27}{1000} \\times \\dfrac{5000}{329} = \\dfrac{135}{329} \\approx 41{,}0\\,\\%$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q3",
+          "statement": "Calculer la valeur predictive positive $P_T(M)$. \\hfill\\textit{(1,5 pt --- calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "communiquer",
+          "correction_answer": "La VPP est d'environ $41\\,\\%$ : un test positif ne signifie la maladie que dans moins d'un cas sur deux. Le test est utile pour orienter le diagnostic mais necessite une confirmation. La prevalence de $3\\,\\%$ est encore trop faible pour que le test soit determinant a lui seul. %===============================================================",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q4",
+          "statement": "Le test est-il fiable pour un diagnostic individuel ? Argumenter. \\hfill\\textit{(1 pt --- communiquer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C4",
+      "declared_total": "4",
+      "exercise": 3,
+      "questions": [
+        {
+          "competence": "raisonner",
+          "correction_answer": "$P(A) \\times P(B) = \\dfrac{1}{2} \\times \\dfrac{1}{5} = \\dfrac{1}{10} = P(A \\cap B)$. Donc $A$ et $B$ sont indépendants. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q1",
+          "statement": "Les événements $A$ et $B$ sont-ils indépendants ? Justifier. \\hfill\\textit{(2 pts --- raisonner)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$P(A \\cup B) = P(A) + P(B) - P(A \\cap B) = \\dfrac{1}{2} + \\dfrac{1}{5} - \\dfrac{1}{10} = \\dfrac{5+2-1}{10} = \\dfrac{3}{5}$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q2",
+          "statement": "Calculer $P(A \\cup B)$. \\hfill\\textit{(1 pt --- calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "raisonner",
+          "correction_answer": "$P(\\overline{A} \\cap B) = P(B) - P(A \\cap B) = \\dfrac{1}{5} - \\dfrac{1}{10} = \\dfrac{1}{10}$. $P(\\overline{A}) \\times P(B) = \\dfrac{1}{2} \\times \\dfrac{1}{5} = \\dfrac{1}{10} = P(\\overline{A} \\cap B)$. Donc $\\overline{A}$ et $B$ sont indépendants. %===============================================================",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q3",
+          "statement": "Montrer que $\\overline{A}$ et $B$ sont aussi indépendants. \\hfill\\textit{(1 pt --- raisonner)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C3, C5",
+      "declared_total": "5",
+      "exercise": 4,
+      "questions": [
+        {
+          "competence": "représenter",
+          "correction_answer": "Arbre : $P(J) = \\frac{1}{5}$, $P(S) = \\frac{4}{5}$. Sachant $J$ : $P_J(A) = \\frac{1}{10}$. Sachant $S$ : $P_S(A) = \\frac{1}{40}$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q1",
+          "statement": "Construire un arbre pondere. \\hfill\\textit{(1 pt --- représenter)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$P(A) = P(J)\\,P_J(A) + P(S)\\,P_S(A) = \\dfrac{1}{5} \\times \\dfrac{1}{10} + \\dfrac{4}{5} \\times \\dfrac{1}{40} = \\dfrac{1}{50} + \\dfrac{1}{50} = \\dfrac{2}{50} = \\dfrac{1}{25}$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q2",
+          "statement": "Calculer la probabilité qu'un conducteur ait un accident. \\hfill\\textit{(2 pts --- calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "raisonner",
+          "correction_answer": "$P_A(J) = \\dfrac{P(J \\cap A)}{P(A)} = \\dfrac{1/50}{1/25} = \\dfrac{1}{50} \\times 25 = \\dfrac{1}{2}$. Un conducteur accidente a une chance sur deux d'être jeune, alors que les jeunes ne representent que $20\\,\\%$ des assures. \\end{evaluation}",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q3",
+          "statement": "Un conducteur a eu un accident. Calculer la probabilité qu'il soit jeune. \\hfill\\textit{(2 pts --- raisonner)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    }
+  ],
+  "nothing_here_is_written_for_the_teacher": true,
+  "object_id": "1SPE-PROBCOND-EV-A",
+  "question_count": 14,
+  "subject_path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/evaluations/1SPE-PROBCOND-EV-A.tex",
+  "version": "A",
+  "what_the_contract_asks": "pour chaque question, ce qui rapporte les points, les erreurs pénalisées, les points de rédaction"
+}

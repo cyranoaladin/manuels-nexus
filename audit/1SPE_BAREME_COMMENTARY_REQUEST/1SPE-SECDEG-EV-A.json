@@ -1,0 +1,239 @@
+{
+  "carries_commentary_already": false,
+  "chapter": "1SPE-SECOND-DEGRE",
+  "contract": "Mathematiques/manuel-maths/docs/01_conception_manuel.md",
+  "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-A-corrige.tex",
+  "declared_total": "20",
+  "duration_min": 55,
+  "exercises": [
+    {
+      "capacities": "C1, C3, C4",
+      "declared_total": "7",
+      "exercise": 1,
+      "questions": [
+        {
+          "competence": "calculer",
+          "correction_answer": "Pour $f(x) = 2x^2 - 8x + 6$ : $a = 2$, $b = -8$, $c = 6$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q1",
+          "statement": "Identifier les coefficients $a$, $b$ et $c$. \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer, communiquer",
+          "correction_answer": "On calcule : \\[ \\alpha = \\frac{-(-8)}{2 \\times 2} = \\frac{8}{4} = 2, \\qquad \\beta = f(2) = 2 \\times 4 - 8 \\times 2 + 6 = 8 - 16 + 6 = -2. \\] \\[ \\boxed{f(x) = 2(x-2)^2 - 2.} \\] \\medskip",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q2",
+          "statement": "Calculer l'abscisse $\\alpha$ et l'ordonnée $\\beta$ du sommet de la parabole representant $f$. Écrire la forme canonique de $f$. \\hfill\\textit{(2 pts — calculer, communiquer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "\\[ \\Delta = 64 - 48 = 16 > 0. \\quad \\sqrt{\\Delta} = 4. \\] Deux racines réelles distinctes : \\[ x_1 = \\frac{8 - 4}{4} = 1, \\qquad x_2 = \\frac{8 + 4}{4} = 3. \\] \\medskip",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q3",
+          "statement": "Calculer le discriminant $\\Delta$ de $f$. En déduire les racines $x_1$ et $x_2$ de $f$ (avec $x_1 < x_2$). \\hfill\\textit{(2 pts — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer, communiquer",
+          "correction_answer": "\\[ \\boxed{f(x) = 2(x-1)(x-3).} \\] Vérification : $2(x-1)(x-3) = 2(x^2 - 4x + 3) = 2x^2 - 8x + 6 = f(x)$. \\checkmark %===============================================================",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q4",
+          "statement": "Écrire la forme factorisee de $f(x)$. Vérifier en developpant. \\hfill\\textit{(2 pts — calculer, communiquer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C2",
+      "declared_total": "5",
+      "exercise": 2,
+      "questions": [
+        {
+          "competence": "calculer, communiquer",
+          "correction_answer": "On developpe $-(x-2)^2 + 1$ : \\[ -(x-2)^2 + 1 = -(x^2 - 4x + 4) + 1 = -x^2 + 4x - 4 + 1 = -x^2 + 4x - 3 = g(x). \\quad \\checkmark \\] Donc $g(x) = -(x-2)^2 + 1$ est bien la forme canonique de $g$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q1",
+          "statement": "Montrer que la forme canonique de $g$ est $g(x) = -(x-2)^2 + 1$. \\hfill\\textit{(2 pts — calculer, communiquer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "raisonner",
+          "correction_answer": "Le sommet est $S(2\\,;\\,1)$. Comme $a = -1 < 0$, la parabole est tournee vers le bas : $g$ admet un \\textbf{maximum} de valeur $g(2) = 1$, atteint en $x = 2$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q2",
+          "statement": "En déduire les coordonnées du sommet $S$ de la parabole. Preciser si $g$ admet un maximum ou un minimum, et donner sa valeur. \\hfill\\textit{(1 pt — raisonner)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "représenter",
+          "correction_answer": "\\begin{center} \\begin{tabular}{|c|ccccc|} \\hline $x$ & $-\\infty$ & & $2$ & & $+\\infty$ \\\\ \\hline $g(x)$ & $-\\infty$ & $\\nearrow$ & $1$ & $\\searrow$ & $-\\infty$ \\\\ \\hline \\end{tabular} \\end{center} \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q3",
+          "statement": "Dresser le tableau de variations de $g$ sur $\\mathbb{R}$. \\hfill\\textit{(1 pt — représenter)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "L'axe de symetrie de la parabole a pour équation $x = \\alpha = 2$. %===============================================================",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q4",
+          "statement": "Écrire l'équation de l'axe de symetrie de la parabole. \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C4, C5",
+      "declared_total": "4",
+      "exercise": 3,
+      "questions": [
+        {
+          "competence": "calculer, représenter",
+          "correction_answer": "$f(x) = 2(x-1)(x-3)$. \\begin{center} \\begin{tabular}{|c|ccccccc|} \\hline $x$ & $-\\infty$ & & $1$ & & $3$ & & $+\\infty$ \\\\ \\hline $x - 1$ & & $-$ & $0$ & $+$ & $+$ & $+$ & \\\\ $x - 3$ & & $-$ & $-$ & $-$ & $0$ & $+$ & \\\\ $2$ & & $+$ & $+$ & $+$ & $+$ & $+$ & \\\\ \\hline $f(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\\\ \\hline \\end{tabular} \\end{center} \\medskip",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q1",
+          "statement": "Dresser le tableau de signes de $f(x)$ sur $\\mathbb{R}$. \\hfill\\textit{(2 pts — calculer, représenter)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "D'après le tableau de signes, $f(x) \\leq 0$ sur $[1\\,;\\,3]$. \\[ \\boxed{\\mathcal{S} = [1\\,;\\,3].} \\] \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q2",
+          "statement": "Résoudre $f(x) \\leq 0$. \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$f(x) > 0$ sur $]-\\infty\\,;\\,1[ \\cup \\,]3\\,;\\,+\\infty[$. \\[ \\boxed{\\mathcal{S} = \\,]-\\infty\\,;\\,1[ \\cup \\,]3\\,;\\,+\\infty[.} \\] %===============================================================",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q3",
+          "statement": "Résoudre $2x^2 - 8x + 6 > 0$. \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C6",
+      "declared_total": "4",
+      "exercise": 4,
+      "questions": [
+        {
+          "competence": "modeliser",
+          "correction_answer": "Après decoupe et pliage : \\begin{itemize} \\item Hauteur : $x$~cm. \\item Longueur : $30 - 2x$~cm. \\item Largeur : $20 - 2x$~cm. \\end{itemize} \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q1",
+          "statement": "Exprimer, en fonction de $x$, la longueur, la largeur et la hauteur de la boîte. \\hfill\\textit{(1 pt — modeliser)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "modeliser",
+          "correction_answer": "\\[ V(x) = x \\times (30-2x) \\times (20-2x). \\] Domaine : $x > 0$, $30 - 2x > 0$ et $20 - 2x > 0$, soit $x \\in \\,]0\\,;\\,10[$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q2",
+          "statement": "Montrer que le volume de la boîte est $V(x) = x(30-2x)(20-2x)$. Donner le domaine de validite de $x$. \\hfill\\textit{(1 pt — modeliser)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "\\[ V(3) = 3 \\times (30-6) \\times (20-6) = 3 \\times 24 \\times 14 = 1\\,008 \\text{ cm}^3. \\] \\[ V(5) = 5 \\times (30-10) \\times (20-10) = 5 \\times 20 \\times 10 = 1\\,000 \\text{ cm}^3. \\] \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q3",
+          "statement": "Calculer $V(3)$ et $V(5)$. \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "chercher",
+          "correction_answer": "$V(3) = 1\\,008 > 1\\,000 = V(5)$ : pour $x = 3$, le volume est plus grand. Cependant, on ne peut pas conclure que $x = 3$ est le maximum global : ces deux points ne suffisent pas a prouver qu'il n'existe pas une valeur $x^* \\in \\,]0\\,;\\,10[$ donnant un volume encore plus grand. Une étude complete de $V$ (dérivée ou tableau de variations) est nécessaire pour trouver le maximum absolu. \\end{corrige}",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q4",
+          "statement": "En observant les valeurs calculees, quelle valeur de $x$ (parmi $3$ et $5$) donne le plus grand volume ? Justifier par le calcul pourquoi on ne peut pas conclure definitivement sans étude complete. \\hfill\\textit{(1 pt — chercher)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    }
+  ],
+  "nothing_here_is_written_for_the_teacher": true,
+  "object_id": "1SPE-SECDEG-EV-A",
+  "question_count": 15,
+  "subject_path": "Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-A.tex",
+  "version": "A",
+  "what_the_contract_asks": "pour chaque question, ce qui rapporte les points, les erreurs pénalisées, les points de rédaction"
+}

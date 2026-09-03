@@ -1,0 +1,252 @@
+{
+  "carries_commentary_already": false,
+  "chapter": "1SPE-VARIABLES-ALEATOIRES",
+  "contract": "Mathematiques/manuel-maths/docs/01_conception_manuel.md",
+  "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/1SPE-VARALEA-EV-B-corrige.tex",
+  "declared_total": "20",
+  "duration_min": 55,
+  "exercises": [
+    {
+      "capacities": "C1, C2, C4",
+      "declared_total": "6",
+      "exercise": 1,
+      "questions": [
+        {
+          "competence": "calculer",
+          "correction_answer": "\\[ \\begin{array}{|c|c|c|c|} \\hline x_i & 2 & 5 & 8 \\\\ \\hline P(X=x_i) & \\frac{5}{10} = \\frac{1}{2} & \\frac{3}{10} & \\frac{2}{10} = \\frac{1}{5} \\\\ \\hline \\end{array} \\] \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q1",
+          "statement": "Dresser le tableau de loi de $X$. \\hfill\\textit{(1{,}5 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer, communiquer",
+          "correction_answer": "$E(X) = 2 \\times \\frac{1}{2} + 5 \\times \\frac{3}{10} + 8 \\times \\frac{1}{5} = 1 + \\frac{3}{2} + \\frac{8}{5} = \\frac{10+15+16}{10} = \\frac{41}{10} = 4{,}1$. En moyenne, on obtient $4{,}1$ points par tirage. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q2",
+          "statement": "Calculer $E(X)$. Interpréter. \\hfill\\textit{(1{,}5 pt — calculer, communiquer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$E(X^2) = 4 \\times \\frac{1}{2} + 25 \\times \\frac{3}{10} + 64 \\times \\frac{1}{5} = 2 + \\frac{15}{2} + \\frac{64}{5} = \\frac{20+75+128}{10} = \\frac{223}{10}$. $V(X) = \\frac{223}{10} - \\left(\\frac{41}{10}\\right)^2 = \\frac{2230-1681}{100} = \\frac{549}{100} = 5{,}49$. $\\sigma(X) = \\sqrt{5{,}49} \\approx 2{,}34$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q3",
+          "statement": "Calculer $V(X)$ et $\\sigma(X)$. \\hfill\\textit{(2 pts — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$E(Y) = 2E(X) - 3 = 2 \\times 4{,}1 - 3 = 5{,}2$. %===============================================================",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q4",
+          "statement": "On pose $Y = 2X - 3$. Calculer $E(Y)$ par linéarité de l'espérance. \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C2, C3",
+      "declared_total": "5",
+      "exercise": 2,
+      "questions": [
+        {
+          "competence": "raisonner",
+          "correction_answer": "L'arbre comporte quatre niveaux. À chaque nœud, la branche « réussi » porte $\\frac14$ et la branche « manqué » $\\frac34$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q1",
+          "statement": "Construire l'arbre pondéré des quatre lancers. \\hfill\\textit{(1 pt — raisonner)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$P(X=0)=\\left(\\frac34\\right)^4=\\frac{81}{256}$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q2",
+          "statement": "Calculer $P(X = 0)$. \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "Chacun des quatre chemins comportant exactement une réussite a pour probabilité $\\frac14\\left(\\frac34\\right)^3=\\frac{27}{256}$. Donc $P(X=1)=4\\times\\frac{27}{256}=\\frac{27}{64}$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q3",
+          "statement": "Calculer $P(X = 1)$ en repérant les quatre chemins favorables. \\hfill\\textit{(1{,}5 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "\\[ \\begin{array}{|c|c|c|c|c|c|}\\hline x&0&1&2&3&4\\\\ \\hline P(X=x)&\\frac{81}{256}&\\frac{108}{256}&\\frac{54}{256}&\\frac{12}{256}&\\frac1{256}\\\\ \\hline \\end{array} \\] On obtient $E(X)=1$, $E(X^2)=\\frac74$, donc $V(X)=\\frac34$. L'écart type a déjà été calculé à l'exercice 1 ; il n'est pas redemandé ici. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q4",
+          "statement": "Dresser la loi de $X$, puis calculer $E(X)$ et $V(X)$ à partir de cette loi. \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$P(X\\geq1)=1-P(X=0)=1-\\frac{81}{256}=\\frac{175}{256}$. %===============================================================",
+          "correction_answer_scope": "question",
+          "points": "0,5 pt",
+          "question": "Q5",
+          "statement": "Calculer $P(X \\geq 1)$. \\hfill\\textit{(0{,}5 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C5",
+      "declared_total": "4",
+      "exercise": 3,
+      "questions": [
+        {
+          "competence": "modéliser",
+          "correction_answer": "Pas de sinistre : $B = 80$. Sinistre : $B = 80 - 2000 = -1920$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q1",
+          "statement": "Soit $B$ le bénéfice de l'assureur par contrat. Quelles sont les valeurs de $B$ ? \\hfill\\textit{(1 pt — modéliser)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "\\[ \\begin{array}{|c|c|c|} \\hline b_i & -1920 & 80 \\\\ \\hline P(B=b_i) & \\frac{1}{50} & \\frac{49}{50} \\\\ \\hline \\end{array} \\] \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q2",
+          "statement": "Dresser le tableau de loi de $B$. \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer, communiquer",
+          "correction_answer": "$E(B) = 80 - 2000 \\times \\frac{1}{50} = 80 - 40 = 40$~euros. $E(B) > 0$ : le contrat est rentable pour l'assureur. %===============================================================",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q3",
+          "statement": "Calculer $E(B)$. Le contrat est-il rentable ? \\hfill\\textit{(2 pts — calculer, communiquer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C6, C7",
+      "declared_total": "5",
+      "exercise": 4,
+      "questions": [
+        {
+          "competence": "calculer",
+          "correction_answer": "\\begin{python} return somme / n \\end{python} \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q1",
+          "statement": "Une fonction Python a stocké dans la variable \\code{somme} la somme des valeurs d'un échantillon de taille \\code{n}. Écrire la ligne qui renvoie la moyenne de cet échantillon. \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$\\sqrt{81} = 9$, donc \\[ \\frac{2\\sigma}{\\sqrt{n}} = \\frac{2 \\times 1{,}8}{9} = \\frac{3{,}6}{9} = 0{,}4. \\] \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q2",
+          "statement": "Calculer $\\dfrac{2\\sigma}{\\sqrt{n}}$ pour $n = 81$. \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "raisonner",
+          "correction_answer": "$|m - \\mu| = |2{,}9 - 2{,}5| = 0{,}4$. L'écart vaut exactement $0{,}4$, c'est-à-dire le seuil lui-même. L'inégalité demandée étant large, la condition $|m - \\mu| \\leq \\dfrac{2\\sigma}{\\sqrt{n}}$ est \\textbf{vérifiée}. Cet échantillon est donc compté parmi ceux de l'intervalle. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q3",
+          "statement": "Un échantillon de taille $81$ a pour moyenne $m = 2{,}9$. Cet échantillon vérifie-t-il $|m - \\mu| \\leq \\dfrac{2\\sigma}{\\sqrt{n}}$ ? Justifier avec soin. \\hfill\\textit{(1{,}5 pt — raisonner)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer, communiquer",
+          "correction_answer": "La proportion vaut \\[ \\frac{381}{400} = 0{,}9525 = 95{,}25\\,\\%. \\] Elle est cohérente avec l'ordre de grandeur attendu, environ $95\\,\\%$. \\end{corrige}",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q4",
+          "statement": "On simule $N = 400$ échantillons de taille $81$ : $381$ d'entre eux vérifient cette condition. Calculer la proportion correspondante et dire si elle est cohérente avec l'ordre de grandeur attendu. \\hfill\\textit{(1{,}5 pt — calculer, communiquer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    }
+  ],
+  "nothing_here_is_written_for_the_teacher": true,
+  "object_id": "1SPE-VARALEA-EV-B",
+  "question_count": 16,
+  "subject_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/1SPE-VARALEA-EV-B.tex",
+  "version": "B",
+  "what_the_contract_asks": "pour chaque question, ce qui rapporte les points, les erreurs pénalisées, les points de rédaction"
+}

@@ -1,0 +1,252 @@
+{
+  "carries_commentary_already": false,
+  "chapter": "1SPE-VARIABLES-ALEATOIRES",
+  "contract": "Mathematiques/manuel-maths/docs/01_conception_manuel.md",
+  "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/1SPE-VARALEA-EV-A-corrige.tex",
+  "declared_total": "20",
+  "duration_min": 55,
+  "exercises": [
+    {
+      "capacities": "C1, C2, C4",
+      "declared_total": "6",
+      "exercise": 1,
+      "questions": [
+        {
+          "competence": "calculer",
+          "correction_answer": "\\[ \\begin{array}{|c|c|c|c|} \\hline x_i & 1 & 3 & 10 \\\\ \\hline P(X=x_i) & \\frac{4}{8} = \\frac{1}{2} & \\frac{3}{8} & \\frac{1}{8} \\\\ \\hline \\end{array} \\] Vérification : $\\frac{1}{2} + \\frac{3}{8} + \\frac{1}{8} = 1$. \\checkmark \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q1",
+          "statement": "Dresser le tableau de loi de $X$. \\hfill\\textit{(1{,}5 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer, communiquer",
+          "correction_answer": "$E(X) = 1 \\times \\frac{1}{2} + 3 \\times \\frac{3}{8} + 10 \\times \\frac{1}{8} = \\frac{4+9+10}{8} = \\frac{23}{8} = 2{,}875$. En moyenne, le gain par tirage est de $2{,}875$~euros. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q2",
+          "statement": "Calculer $E(X)$. Interpréter. \\hfill\\textit{(1{,}5 pt — calculer, communiquer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$E(X^2) = 1 \\times \\frac{1}{2} + 9 \\times \\frac{3}{8} + 100 \\times \\frac{1}{8} = \\frac{4+27+100}{8} = \\frac{131}{8}$. $V(X) = \\frac{131}{8} - \\left(\\frac{23}{8}\\right)^2 = \\frac{131}{8} - \\frac{529}{64} = \\frac{1048-529}{64} = \\frac{519}{64} \\approx 8{,}11$. $\\sigma(X) = \\sqrt{\\frac{519}{64}} \\approx 2{,}85$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q3",
+          "statement": "Calculer $V(X)$ et $\\sigma(X)$. \\hfill\\textit{(2 pts — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$E(Y) = E(2X + 1) = 2E(X) + 1 = 2 \\times \\frac{23}{8} + 1 = \\frac{23}{4} + 1 = \\frac{27}{4} = 6{,}75$. La loi de $Y$ n'a pas à être dressée : la linéarité de l'espérance suffit. %===============================================================",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q4",
+          "statement": "On pose $Y = 2X + 1$. Calculer $E(Y)$ par linéarité de l'espérance. \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C2, C3",
+      "declared_total": "5",
+      "exercise": 2,
+      "questions": [
+        {
+          "competence": "raisonner",
+          "correction_answer": "L'arbre comporte trois niveaux. À chaque nœud, la branche « atteint » porte $\\frac13$ et la branche « manque » $\\frac23$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q1",
+          "statement": "Construire l'arbre pondéré des trois tirs. \\hfill\\textit{(1 pt — raisonner)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$P(X=0)=\\left(\\frac23\\right)^3=\\frac8{27}$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q2",
+          "statement": "Calculer $P(X = 0)$ (aucune cible atteinte). \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "Les trois chemins « atteint, atteint, manque » et ses deux permutations ont chacun pour probabilité $\\frac13\\times\\frac13\\times\\frac23=\\frac2{27}$. Donc $P(X=2)=3\\times\\frac2{27}=\\frac29$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q3",
+          "statement": "Calculer $P(X = 2)$ en repérant les chemins favorables. \\hfill\\textit{(1{,}5 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "\\[ \\begin{array}{|c|c|c|c|c|}\\hline x&0&1&2&3\\\\ \\hline P(X=x)&\\frac8{27}&\\frac{12}{27}&\\frac6{27}&\\frac1{27}\\\\ \\hline \\end{array} \\] Ainsi $E(X)=1$ et $E(X^2)=\\frac53$, donc $V(X)=\\frac53-1=\\frac23$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q4",
+          "statement": "Dresser la loi de $X$, puis calculer $E(X)$ et $V(X)$ à partir de cette loi. \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$P(X\\geq1)=1-P(X=0)=1-\\frac8{27}=\\frac{19}{27}$. %===============================================================",
+          "correction_answer_scope": "question",
+          "points": "0,5 pt",
+          "question": "Q5",
+          "statement": "En déduire $P(X \\geq 1)$. \\hfill\\textit{(0{,}5 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C5",
+      "declared_total": "4",
+      "exercise": 3,
+      "questions": [
+        {
+          "competence": "calculer",
+          "correction_answer": "Doubles : $(1,1),(2,2),\\ldots,(6,6)$, soit $6$ sur $36$ : $P = \\frac{1}{6}$. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q1",
+          "statement": "Calculer la probabilité d'obtenir un double. \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "modéliser",
+          "correction_answer": "$G = 15 - 3 = 12$ si double ($\\frac{1}{6}$), $G = -3$ sinon ($\\frac{5}{6}$). \\[ \\begin{array}{|c|c|c|} \\hline g_i & -3 & 12 \\\\ \\hline P(G=g_i) & \\frac{5}{6} & \\frac{1}{6} \\\\ \\hline \\end{array} \\] \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q2",
+          "statement": "Définir la variable aléatoire $G$ (gain algébrique) et dresser son tableau de loi. \\hfill\\textit{(1{,}5 pt — modéliser)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer, communiquer",
+          "correction_answer": "$E(G) = 12 \\times \\frac{1}{6} + (-3) \\times \\frac{5}{6} = 2 - \\frac{5}{2} = -\\frac{1}{2}$. $E(G) = -0{,}5 < 0$ : le jeu est défavorable au joueur. %===============================================================",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q3",
+          "statement": "Calculer $E(G)$. Le jeu est-il équitable ? Favorable ? Défavorable ? \\hfill\\textit{(1{,}5 pt — calculer, communiquer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C6, C7",
+      "declared_total": "5",
+      "exercise": 4,
+      "questions": [
+        {
+          "competence": "calculer",
+          "correction_answer": "\\begin{python} return somme / n \\end{python} \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q1",
+          "statement": "Une fonction Python a stocké dans la variable \\code{somme} la somme des valeurs d'un échantillon de taille \\code{n}. Écrire la ligne qui renvoie la moyenne de cet échantillon. \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer",
+          "correction_answer": "$\\sqrt{64} = 8$, donc \\[ \\frac{2\\sigma}{\\sqrt{n}} = \\frac{2 \\times 2{,}4}{8} = \\frac{4{,}8}{8} = 0{,}6. \\] \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q2",
+          "statement": "Calculer $\\dfrac{2\\sigma}{\\sqrt{n}}$ pour $n = 64$. \\hfill\\textit{(1 pt — calculer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "raisonner",
+          "correction_answer": "$|m - \\mu| = |2{,}3 - 1{,}5| = 0{,}8$. Or $0{,}8 > 0{,}6$ : l'écart \\textbf{dépasse} le seuil. Cet échantillon est atypique. Il n'est pas pour autant impossible : environ un échantillon sur vingt sort de cet intervalle. \\medskip",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q3",
+          "statement": "Un échantillon de taille $64$ a pour moyenne $m = 2{,}3$. L'écart $|m - \\mu|$ dépasse-t-il la valeur précédente ? Justifier. \\hfill\\textit{(1{,}5 pt — raisonner)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": "calculer, communiquer",
+          "correction_answer": "La proportion vaut \\[ \\frac{472}{500} = 0{,}944 = 94{,}4\\,\\%. \\] Elle est cohérente avec l'ordre de grandeur attendu, environ $95\\,\\%$ : l'écart de $0{,}6$ point relève de la fluctuation de la simulation. \\end{corrige}",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q4",
+          "statement": "On simule $N = 500$ échantillons de taille $64$ : $472$ d'entre eux vérifient $|m - \\mu| \\leq \\dfrac{2\\sigma}{\\sqrt{n}}$. Calculer la proportion correspondante et dire si elle est cohérente avec l'ordre de grandeur attendu. \\hfill\\textit{(1{,}5 pt — calculer, communiquer)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    }
+  ],
+  "nothing_here_is_written_for_the_teacher": true,
+  "object_id": "1SPE-VARALEA-EV-A",
+  "question_count": 16,
+  "subject_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/1SPE-VARALEA-EV-A.tex",
+  "version": "A",
+  "what_the_contract_asks": "pour chaque question, ce qui rapporte les points, les erreurs pénalisées, les points de rédaction"
+}

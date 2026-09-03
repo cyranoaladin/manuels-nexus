@@ -1,0 +1,226 @@
+{
+  "carries_commentary_already": false,
+  "chapter": "1SPE-DERIVATION-GLOBAL",
+  "contract": "Mathematiques/manuel-maths/docs/01_conception_manuel.md",
+  "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A-corrige.tex",
+  "declared_total": "20",
+  "duration_min": 55,
+  "exercises": [
+    {
+      "capacities": "C1, C2",
+      "declared_total": "5",
+      "exercise": 1,
+      "questions": [
+        {
+          "competence": null,
+          "correction_answer": "$f(x) = 3x^2 - 2x + 1$, donc $f'(x) = 6x - 2.$",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q1",
+          "statement": "Calculer $f'(x)$. \\hfill \\textit{(1 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$f'(2) = 6 \\times 2 - 2 = 12 - 2 = 10.$ Interprétation géométrique : la tangente à la courbe de $f$ au point d'abscisse $2$ a pour coefficient directeur $10$. La courbe « monte » localement avec une pente de $10$ en ce point.",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q2",
+          "statement": "Calculer $f'(2)$ et interpréter géométriquement ce résultat. \\hfill \\textit{(1,5 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$f(2) = 3 \\times 4 - 2 \\times 2 + 1 = 12 - 4 + 1 = 9.$ Équation de la tangente : \\[ T : y = f'(2)(x - 2) + f(2) = 10(x-2) + 9 = 10x - 20 + 9 = 10x - 11. \\]",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q3",
+          "statement": "Écrire l'équation de la tangente à la courbe de $f$ au point d'abscisse $2$. \\hfill \\textit{(1,5 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "Tangente horizontale $\\Leftrightarrow f'(x) = 0 \\Leftrightarrow 6x - 2 = 0 \\Leftrightarrow x = \\dfrac{1}{3}.$ %---------------------------------------------------------------",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q4",
+          "statement": "Déterminer pour quelle valeur de $x$ la tangente à la courbe de $f$ est horizontale. \\hfill \\textit{(1 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C3, C4",
+      "declared_total": "6",
+      "exercise": 2,
+      "questions": [
+        {
+          "competence": null,
+          "correction_answer": "$g(x) = x^3 - 6x$, donc $g'(x) = 3x^2 - 6 = 3(x^2 - 2) = 3(x - \\sqrt{2})(x + \\sqrt{2}).$",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q1",
+          "statement": "Calculer $g'(x)$ et factoriser. \\hfill \\textit{(1,5 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$g'(x) = 0 \\Leftrightarrow x = -\\sqrt{2}$ ou $x = \\sqrt{2}$ \\quad ($\\sqrt{2} \\approx 1{,}41$). \\begin{center} \\begin{tabular}{|c|ccccccc|} \\hline $x$ & $-\\infty$ & & $-\\sqrt{2}$ & & $\\sqrt{2}$ & & $+\\infty$ \\\\ \\hline $g'(x)$ & $+$ & $+$ & $0$ & $-$ & $0$ & $+$ & $+$ \\\\ \\hline \\end{tabular} \\end{center}",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q2",
+          "statement": "Résoudre $g'(x) = 0$ et dresser le tableau de signes de $g'$. \\hfill \\textit{(1,5 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$g(-\\sqrt{2}) = -(\\sqrt{2})^3 + 6\\sqrt{2} = -2\\sqrt{2} + 6\\sqrt{2} = 4\\sqrt{2}.$ $g(\\sqrt{2}) = (\\sqrt{2})^3 - 6\\sqrt{2} = 2\\sqrt{2} - 6\\sqrt{2} = -4\\sqrt{2}.$ \\begin{center} \\begin{tabular}{|c|ccccccc|} \\hline $x$ & $-\\infty$ & & $-\\sqrt{2}$ & & $\\sqrt{2}$ & & $+\\infty$ \\\\ \\hline $g(x)$ & $-\\infty$ & $\\nearrow$ & $4\\sqrt{2}$ & $\\searrow$ & $-4\\sqrt{2}$ & $\\nearrow$ & $+\\infty$ \\\\ \\hline \\end{tabu",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q3",
+          "statement": "Dresser le tableau de variations complet de $g$ sur $\\mathbb{R}$. Préciser les valeurs de $g$ aux points remarquables. \\hfill \\textit{(2 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$g$ admet un \\textbf{maximum local} de $4\\sqrt{2} \\approx 5{,}66$ en $x = -\\sqrt{2}$. $g$ admet un \\textbf{minimum local} de $-4\\sqrt{2} \\approx -5{,}66$ en $x = \\sqrt{2}$. %---------------------------------------------------------------",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q4",
+          "statement": "Donner les valeurs des extremums locaux de $g$ et préciser leur nature (maximum ou minimum). \\hfill \\textit{(1 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C2, C3, C4",
+      "declared_total": "5",
+      "exercise": 3,
+      "questions": [
+        {
+          "competence": null,
+          "correction_answer": "$u = x^2 + 2$, $v = x-1$, $u' = 2x$, $v' = 1$. \\[ h'(x) = \\frac{u'v - uv'}{v^2} = \\frac{2x(x-1) - (x^2+2)}{(x-1)^2} = \\frac{2x^2 - 2x - x^2 - 2}{(x-1)^2} = \\frac{x^2 - 2x - 2}{(x-1)^2}. \\]",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q1",
+          "statement": "Calculer $h'(x)$ à l'aide de la règle du quotient. \\hfill \\textit{(2 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$\\Delta = (-2)^2 - 4(1)(-2) = 4 + 8 = 12.$ $x = \\dfrac{2 \\pm \\sqrt{12}}{2} = 1 \\pm \\sqrt{3}.$ Sur $]1\\,;\\,+\\infty[$, seule la racine $x^* = 1 + \\sqrt{3} \\approx 2{,}73$ appartient au domaine.",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q2",
+          "statement": "Factoriser le numérateur de $h'(x)$ et résoudre $h'(x) = 0$. \\hfill \\textit{(1,5 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "Sur $]1\\,;\\,+\\infty[$ : $(x-1)^2 > 0$ toujours. Le signe de $h'$ est celui du numérateur $x^2-2x-2$ : $h'(x) < 0$ pour $1 < x < 1+\\sqrt{3}$ et $h'(x) > 0$ pour $x > 1+\\sqrt{3}$. $h(1+\\sqrt{3}) = \\dfrac{(1+\\sqrt{3})^2 + 2}{(1+\\sqrt{3})-1} = \\dfrac{1 + 2\\sqrt{3} + 3 + 2}{\\sqrt{3}} = \\dfrac{6 + 2\\sqrt{3}}{\\sqrt{3}} = \\dfrac{6}{\\sqrt{3}} + 2 = 2\\sqrt{3} + 2.$ \\begin{center} \\begin{tabular}{|c|ccccc|} ",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q3",
+          "statement": "Dresser le tableau de variations de $h$ sur $]1\\,;\\,+\\infty[$. \\hfill \\textit{(1,5 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C5",
+      "declared_total": "4",
+      "exercise": 4,
+      "questions": [
+        {
+          "competence": null,
+          "correction_answer": "$R(x) = x \\times (20 - x) = 20x - x^2.$",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q1",
+          "statement": "Exprimer le chiffre d'affaires $R(x) = x \\cdot p(x)$. \\hfill \\textit{(1 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$R'(x) = 20 - 2x.$ $R'(x) = 0 \\Leftrightarrow x = 10.$ $R'(x) > 0$ pour $x < 10$ et $R'(x) < 0$ pour $x > 10$ : $R$ est maximale en $x = 10$. Tableau de variations de $R$ sur $[0\\,;\\,20]$ : \\begin{center} \\begin{tabular}{|c|ccccc|} \\hline $x$ & $0$ & & $10$ & & $20$ \\\\ \\hline $R(x)$ & $0$ & $\\nearrow$ & $100$ & $\\searrow$ & $0$ \\\\ \\hline \\end{tabular} \\end{center}",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q2",
+          "statement": "Calculer $R'(x)$ et trouver la valeur de $x$ qui maximise $R(x)$. \\hfill \\textit{(2 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$R(10) = 10 \\times (20 - 10) = 10 \\times 10 = 100$ euros. Le maraîcher maximise son chiffre d'affaires en vendant $10$ kg de tomates au prix de $10$ euros/kg, pour un chiffre d'affaires de $\\mathbf{100}$ euros. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, solve, sqrt, Rational % x = symbols('x') % # ---- Exercice 1 : f(x) = 3x^2 - 2x + 1 ---- % f = 3*x**2 - 2*x + 1 % fp = diff(f, x)",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q3",
+          "statement": "Calculer le chiffre d'affaires maximal. \\hfill \\textit{(1 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    }
+  ],
+  "nothing_here_is_written_for_the_teacher": true,
+  "object_id": "1SPE-DERGLOBAL-EV-A",
+  "question_count": 14,
+  "subject_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex",
+  "version": "A",
+  "what_the_contract_asks": "pour chaque question, ce qui rapporte les points, les erreurs pénalisées, les points de rédaction"
+}

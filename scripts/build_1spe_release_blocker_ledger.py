@@ -281,12 +281,25 @@ def _check_bareme_commentary_absent() -> dict[str, Any]:
         for path in corrections
         if marker.search(path.read_text(encoding="utf-8"))
     ]
+    # La couche reste absente tant qu'un enseignant ne l'a pas ecrite : elle ne
+    # se derive de rien. Ce qui PEUT etre fait l'est, et se lit ici : la demande
+    # est preparee, question par question, enonce et reponse en face.
+    request = load_json(ROOT / "audit/1SPE_BAREME_COMMENTARY_REQUEST.json")
+    prepared = request["summary"] if request else {}
     return {
         "verifiable": True,
         "still_true": not carrying,
         "evidence": {
             "assessment_corrections": len(corrections),
             "carrying_commentary": len(carrying),
+            "request_prepared_for": prepared.get("ASSESSMENTS_AWAITING_COMMENTARY"),
+            "questions_awaiting_a_teacher": prepared.get(
+                "QUESTIONS_AWAITING_COMMENTARY"
+            ),
+            "questions_without_a_prepared_request": prepared.get(
+                "QUESTIONS_WITHOUT_A_PREPARED_REQUEST"
+            ),
+            "where": "audit/1SPE_BAREME_COMMENTARY_REQUEST/",
         },
     }
 

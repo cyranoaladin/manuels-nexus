@@ -1,0 +1,213 @@
+{
+  "carries_commentary_already": false,
+  "chapter": "1SPE-PRODUIT-SCALAIRE",
+  "contract": "Mathematiques/manuel-maths/docs/01_conception_manuel.md",
+  "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/evaluations/1SPE-PRODSCAL-EV-A-corrige.tex",
+  "declared_total": "20",
+  "duration_min": 55,
+  "exercises": [
+    {
+      "capacities": "C1, C2",
+      "declared_total": "5",
+      "exercise": 1,
+      "questions": [
+        {
+          "competence": null,
+          "correction_answer": "$\\vec{u} \\cdot \\vec{v} = 3 \\times 2 + (-1) \\times 5 = 6 - 5 = 1$.",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q1",
+          "statement": "Calculer $\\vec{u} \\cdot \\vec{v}$. \\hfill \\textit{(1 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$\\|\\vec{u}\\| = \\sqrt{9 + 1} = \\sqrt{10}$ et $\\|\\vec{v}\\| = \\sqrt{4 + 25} = \\sqrt{29}$.",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q2",
+          "statement": "Calculer $\\|\\vec{u}\\|$ et $\\|\\vec{v}\\|$. \\hfill \\textit{(1 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$\\|\\vec{u} + \\vec{v}\\|^2 = \\|\\vec{u}\\|^2 + 2\\,\\vec{u} \\cdot \\vec{v} + \\|\\vec{v}\\|^2 = 10 + 2 + 29 = 41$. Donc $\\|\\vec{u} + \\vec{v}\\| = \\sqrt{41}$. Vérification directe : $\\vec{u} + \\vec{v} = \\begin{pmatrix} 5 \\\\ 4 \\end{pmatrix}$, $\\|\\vec{u} + \\vec{v}\\|^2 = 25 + 16 = 41$. \\checkmark",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q3",
+          "statement": "Calculer $\\|\\vec{u} + \\vec{v}\\|^2$ par l'identite remarquable. \\hfill \\textit{(1,5 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$(\\vec{u} + \\vec{v}) \\cdot (\\vec{u} - \\vec{v}) = \\|\\vec{u}\\|^2 - \\|\\vec{v}\\|^2 = 10 - 29 = -19$. Vérification : $\\vec{u} + \\vec{v} = \\begin{pmatrix} 5 \\\\ 4 \\end{pmatrix}$, $\\vec{u} - \\vec{v} = \\begin{pmatrix} 1 \\\\ -6 \\end{pmatrix}$. $(5)(1) + (4)(-6) = 5 - 24 = -19$. \\checkmark %---------------------------------------------------------------",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q4",
+          "statement": "Calculer $(\\vec{u} + \\vec{v}) \\cdot (\\vec{u} - \\vec{v})$ et vérifier que le résultat est $\\|\\vec{u}\\|^2 - \\|\\vec{v}\\|^2$. \\hfill \\textit{(1,5 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C3",
+      "declared_total": "5",
+      "exercise": 2,
+      "questions": [
+        {
+          "competence": null,
+          "correction_answer": "$\\overrightarrow{AB}\\begin{pmatrix} 3 \\\\ -2 \\end{pmatrix}$ et $\\overrightarrow{AC}\\begin{pmatrix} 2 \\\\ 3 \\end{pmatrix}$. $\\overrightarrow{AB} \\cdot \\overrightarrow{AC} = 3 \\times 2 + (-2) \\times 3 = 6 - 6 = 0$. Le triangle $ABC$ est \\textbf{rectangle en $A$}.",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q1",
+          "statement": "Montrer que le triangle $ABC$ est rectangle. Preciser en quel sommet. \\hfill \\textit{(2 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$\\overrightarrow{BA}\\begin{pmatrix} -3 \\\\ 2 \\end{pmatrix}$, $\\overrightarrow{BC}\\begin{pmatrix} -1 \\\\ 5 \\end{pmatrix}$. $\\overrightarrow{BA} \\cdot \\overrightarrow{BC} = 3 + 10 = 13$, $\\|\\overrightarrow{BA}\\| = \\sqrt{13}$, $\\|\\overrightarrow{BC}\\| = \\sqrt{26}$. $\\cos\\widehat{ABC} = \\dfrac{13}{\\sqrt{13}\\sqrt{26}} = \\dfrac{13}{\\sqrt{338}} = \\dfrac{13}{13\\sqrt{2}} = \\dfrac{1}{\\sqrt{2}} = \\dfrac{\\sqrt{",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q2",
+          "statement": "Calculer l'angle $\\widehat{ABC}$. \\hfill \\textit{(2 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$\\widehat{ACB} = \\pi - \\dfrac{\\pi}{2} - \\dfrac{\\pi}{4} = \\dfrac{\\pi}{4}$. Le triangle est rectangle isocele en $A$. %---------------------------------------------------------------",
+          "correction_answer_scope": "question",
+          "points": "1 pt",
+          "question": "Q3",
+          "statement": "En déduire l'angle $\\widehat{ACB}$. \\hfill \\textit{(1 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C4",
+      "declared_total": "5",
+      "exercise": 3,
+      "questions": [
+        {
+          "competence": null,
+          "correction_answer": "$I = (3; 0)$ milieu de $[AB]$ et $\\overrightarrow{AB}\\begin{pmatrix} 6 \\\\ 0 \\end{pmatrix}$. $\\overrightarrow{IM} \\cdot \\overrightarrow{AB} = 0$ : $6(x - 3) + 0 = 0$, soit $x = 3$.",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q1",
+          "statement": "Déterminer l'équation de la mediatrice de $[AB]$. \\hfill \\textit{(1,5 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$\\overrightarrow{BC}\\begin{pmatrix} -4 \\\\ 4 \\end{pmatrix}$. On parametrise : $H = B + t\\,\\overrightarrow{BC} = (6 - 4t; 4t)$. $\\overrightarrow{AH} \\cdot \\overrightarrow{BC} = 0$ : $(6-4t)(-4) + (4t)(4) = 0$, soit $-24 + 32t = 0$, d'ou $t = \\dfrac{3}{4}$. $H = (3; 3)$.",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q2",
+          "statement": "Déterminer les coordonnées du pied $H$ de la hauteur issue de $A$. \\hfill \\textit{(2 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$\\mathcal{A} = \\dfrac{1}{2} |x_B \\cdot y_C - x_C \\cdot y_B| = \\dfrac{1}{2} |6 \\times 4 - 2 \\times 0| = \\dfrac{24}{2} = 12$. %---------------------------------------------------------------",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q3",
+          "statement": "Calculer l'aire du triangle $ABC$. \\hfill \\textit{(1,5 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    },
+    {
+      "capacities": "C5",
+      "declared_total": "5",
+      "exercise": 4,
+      "questions": [
+        {
+          "competence": null,
+          "correction_answer": "$BC^2 = AB^2 + AC^2 - 2 \\cdot AB \\cdot AC \\cdot \\cos\\widehat{BAC} = 64 + 25 - 80 \\times \\dfrac{1}{2} = 89 - 40 = 49$. $BC = 7$.",
+          "correction_answer_scope": "question",
+          "points": "2 pts",
+          "question": "Q1",
+          "statement": "Calculer $BC$ a l'aide de la formule d'Al-Kashi. \\hfill \\textit{(2 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$\\cos\\widehat{ABC} = \\dfrac{BC^2 + AB^2 - AC^2}{2 \\cdot BC \\cdot AB} = \\dfrac{49 + 64 - 25}{112} = \\dfrac{88}{112} = \\dfrac{11}{14}$.",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q2",
+          "statement": "Calculer $\\cos\\widehat{ABC}$. \\hfill \\textit{(1,5 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        },
+        {
+          "competence": null,
+          "correction_answer": "$\\mathcal{A} = \\dfrac{1}{2} \\times AB \\times AC \\times \\sin\\widehat{BAC} = \\dfrac{1}{2} \\times 8 \\times 5 \\times \\dfrac{\\sqrt{3}}{2} = 10\\sqrt{3} \\approx 17{,}3$. % BEGIN-VERIFY % from sympy import Matrix, sqrt, Rational, simplify, cos, sin, pi, symbols, solve % # ---- Exercice 1 : u(3;-1), v(2;5) ---- % u = Matrix([3, -1]); v = Matrix([2, 5]) % assert u.dot(v) == 1 % assert simplify(u.norm() - sq",
+          "correction_answer_scope": "question",
+          "points": "1,5 pt",
+          "question": "Q3",
+          "statement": "Calculer l'aire du triangle $ABC$. \\hfill \\textit{(1,5 pt)}",
+          "to_be_written_by_a_teacher": {
+            "ce_qui_rapporte_les_points": "",
+            "erreurs_penalisees": "",
+            "points_de_redaction": ""
+          }
+        }
+      ]
+    }
+  ],
+  "nothing_here_is_written_for_the_teacher": true,
+  "object_id": "1SPE-PRODSCAL-EV-A",
+  "question_count": 13,
+  "subject_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/evaluations/1SPE-PRODSCAL-EV-A.tex",
+  "version": "A",
+  "what_the_contract_asks": "pour chaque question, ce qui rapporte les points, les erreurs pénalisées, les points de rédaction"
+}
