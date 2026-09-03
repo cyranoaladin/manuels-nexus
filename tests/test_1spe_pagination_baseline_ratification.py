@@ -119,6 +119,49 @@ def test_the_page_counts_are_reported_but_never_pinned(
     assert docket["page_counts_are_pinned_reason"]
 
 
+def test_the_proof_is_pinned_to_its_commit_and_the_build_measured_apart(
+    payload: dict[str, Any],
+) -> None:
+    """La ratification porte sur UN changement ; le build courant vit sa vie.
+
+    Les deux etats compares sont relus dans l'historique, donc la preuve reste
+    vraie quels que soient les changements autorises qui suivent. Ce qu'on
+    demande au build courant, c'est de tenir encore les proprietes ratifiees —
+    pas d'etre le meme fichier.
+    """
+
+    summary = payload["summary"]
+    assert summary["CURRENT_BUILD_LOST_THE_RATIFIED_PAGE_COUNT"] == 0
+    assert summary["CURRENT_BUILD_FALSE_CHAPTER_FOLIO"] == 0
+    for row in payload["variants"]:
+        current = row["current_build"]
+        assert row["ratified_after_commit"] == payload["change_commit"]
+        assert current["still_carries_the_ratified_page_count"] is True
+        assert current["still_carries_no_false_chapter_folio"] is True
+        assert current["pdf_sha256"]
+
+
+def test_the_teacher_only_content_never_reached_the_student_edition(
+    payload: dict[str, Any],
+) -> None:
+    """Preuve independante de l'isolation des variantes.
+
+    Les baremes transcrits sont du contenu professeur. Le flux depouille de la
+    variante eleve doit donc etre RESTE identique au build ratifie, tandis que
+    celui du professeur a grossi. Si le contraire arrivait, un bareme aurait
+    fui vers l'eleve.
+    """
+
+    by_variant = {row["variant"]: row for row in payload["variants"]}
+    student = by_variant["eleve"]["current_build"]
+    teacher = by_variant["professeur"]["current_build"]
+
+    assert student["content_stream_identical_to_ratified_build"] is True
+    assert teacher["content_stream_length"] > by_variant["professeur"]["after"][
+        "content_stream_length"
+    ]
+
+
 def test_the_folio_oracle_does_not_read_the_summary_twice(
     payload: dict[str, Any],
 ) -> None:

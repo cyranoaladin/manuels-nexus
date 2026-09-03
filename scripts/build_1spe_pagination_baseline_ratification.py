@@ -357,13 +357,13 @@ def load_docket() -> dict[str, Any]:
     return payload
 
 
-def previous_pdf(commit: str, tracked_path: str, destination: Path) -> None:
-    """Le PDF d'AVANT, relu dans l'historique au parent du commit."""
+def pdf_at(revision: str, tracked_path: str, destination: Path) -> None:
+    """Un PDF relu dans l'historique, a la revision demandee."""
 
-    result = _git("show", f"{commit}^:{tracked_path}")
+    result = _git("show", f"{revision}:{tracked_path}")
     if result.returncode != 0:
         _reject(
-            f"impossible de relire {tracked_path} au parent de {commit[:8]} : "
+            f"impossible de relire {tracked_path} a {revision} : "
             + result.stderr.decode("utf-8", "replace").strip()
         )
     destination.write_bytes(result.stdout)
@@ -518,11 +518,44 @@ def build(temporary: Path) -> dict[str, Any]:
         current = ROOT / tracked
         if not current.is_file():
             _reject(f"PDF courant absent : {tracked}")
+        # La ratification porte sur UN changement, celui du commit declare. Ses
+        # deux etats sont donc relus dans l'historique, et la preuve reste vraie
+        # quels que soient les changements autorises qui suivront. Le build
+        # COURANT est mesure a part, et on lui demande de tenir encore les
+        # proprietes ratifiees -- pas d'etre le meme fichier.
         earlier = temporary / f"before-{variant}.pdf"
-        previous_pdf(commit, tracked, earlier)
-        row = compare(variant, measure(earlier), measure(current), docket)
+        later = temporary / f"after-{variant}.pdf"
+        pdf_at(f"{commit}^", tracked, earlier)
+        pdf_at(commit, tracked, later)
+        row = compare(variant, measure(earlier), measure(later), docket)
         row["pdf_path"] = tracked
-        row["pdf_sha256"] = sha256_file(current)
+        row["ratified_after_commit"] = commit
+        current_measure = measure(current)
+        row["current_build"] = {
+            "pdf_sha256": sha256_file(current),
+            "page_count": current_measure["page_count"],
+            "chapter_opening_false_folio": current_measure[
+                "chapter_opening_false_folio"
+            ],
+            "chapter_opening_false_bookmark": current_measure[
+                "chapter_opening_false_bookmark"
+            ],
+            "blank_pages": current_measure["blank_pages"],
+            "nearly_empty_pages": current_measure["nearly_empty_pages"],
+            "opener_overflow": current_measure["opener_overflow"],
+            "content_stream_length": current_measure["content_stream_length"],
+            "content_stream_sha256": current_measure["content_stream_sha256"],
+            "still_carries_the_ratified_page_count": (
+                current_measure["page_count"] == row["after"]["page_count"]
+            ),
+            "still_carries_no_false_chapter_folio": (
+                current_measure["chapter_opening_false_folio"] == 0
+            ),
+            "content_stream_identical_to_ratified_build": (
+                current_measure["content_stream_sha256"]
+                == row["after"]["content_stream_sha256"]
+            ),
+        }
         variants.append(row)
 
     summary = {
@@ -540,6 +573,19 @@ def build(temporary: Path) -> dict[str, Any]:
         ),
         "UNINTENTIONAL_BLANK_PAGE": sum(
             row["UNINTENTIONAL_BLANK_PAGE"] for row in variants
+        ),
+        "CURRENT_BUILD_LOST_THE_RATIFIED_PAGE_COUNT": sum(
+            0 if row["current_build"]["still_carries_the_ratified_page_count"] else 1
+            for row in variants
+        ),
+        "CURRENT_BUILD_FALSE_CHAPTER_FOLIO": sum(
+            row["current_build"]["chapter_opening_false_folio"] for row in variants
+        ),
+        "CURRENT_BUILD_DIFFERS_FROM_THE_RATIFIED_ONE": sum(
+            0
+            if row["current_build"]["content_stream_identical_to_ratified_build"]
+            else 1
+            for row in variants
         ),
         "STALE_BLANK_PAGE_REASONS": sum(
             row["STALE_BLANK_PAGE_REASONS"] for row in variants
@@ -621,9 +667,13 @@ def render_markdown(payload: dict[str, Any]) -> str:
             f"## Variante `{row['variant']}`",
             "",
             f"- PDF : `{row['pdf_path']}`",
-            f"- `sha256` : `{row['pdf_sha256']}`",
             f"- pages : {row['before']['page_count']} → "
-            f"{row['after']['page_count']}",
+            f"{row['after']['page_count']} au commit ratifié",
+            f"- build courant : {row['current_build']['page_count']} pages, "
+            f"`sha256:{row['current_build']['pdf_sha256'][:16]}…`, "
+            f"{row['current_build']['chapter_opening_false_folio']} folio faux, "
+            f"identique au build ratifié : "
+            f"{str(row['current_build']['content_stream_identical_to_ratified_build']).lower()}",
             f"- folios de chapitre faux : "
             f"{row['CHAPTER_OPENING_FALSE_FOLIO_BEFORE']} → "
             f"{row['CHAPTER_OPENING_FALSE_FOLIO_AFTER']}",
@@ -695,6 +745,8 @@ def main(argv: list[str] | None = None) -> int:
             "UNEXPECTED_REORDERING",
             "UNINTENTIONAL_BLANK_PAGE",
             "STALE_BLANK_PAGE_REASONS",
+            "CURRENT_BUILD_LOST_THE_RATIFIED_PAGE_COUNT",
+            "CURRENT_BUILD_FALSE_CHAPTER_FOLIO",
         )
     }
     if not payload["summary"]["CHAPTER_TITLES_CARRY_NO_OWN_HYPHEN"]:
