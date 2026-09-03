@@ -222,6 +222,7 @@ def build_payload() -> dict[str, Any]:
         "artifact_name": (
             "STUDENT_TEACHER_KEY_SOURCE_GUARD_AND_TRACKED_PDF_DIAGNOSTIC"
         ),
+        "generated_by": "scripts/build_math_student_teacher_key_audit.py",
         "integration_base_sha": INTEGRATION_BASE_SHA,
         "scope": (
             "current QCM source guards plus non-release diagnostics from "
