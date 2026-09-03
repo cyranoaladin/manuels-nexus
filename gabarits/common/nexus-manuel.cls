@@ -1443,6 +1443,13 @@
   hidelinks,              % manuel destiné à l'impression : aucun cadre
   pdfpagelabels=true,
   pdfdisplaydoctitle=true,
+  % La langue du document se declare au CHARGEMENT. hyperref ne consomme
+  % `pdflang` qu'a ce moment : passe plus tard par \hypersetup, il avertit
+  % « Option `pdflang' has already been used, setting the option has no effect »
+  % et le catalogue sort sans /Lang. Le PDF perdait alors sa langue selon
+  % l'ordre des crochets \AtBeginDocument, c'est-a-dire selon ce que d'autres
+  % paquets chargent avant. Ici, l'ordre n'entre plus en jeu.
+  pdflang=fr-FR,
 ]{hyperref}
 \RequirePackage{bookmark}
 
@@ -1483,7 +1490,7 @@
     pdfsubject={Manuel scolaire — \nexus@matiere\space\nexus@niveau},
     pdfkeywords={\nexus@matiere, \nexus@niveau, manuel scolaire,
       \nxMarqueEditeur, \nexus@millesime},
-    pdflang={fr-FR},
+    % pdflang n'est PAS ici : hyperref l'a deja consomme au chargement.
   }%
   % /Publisher n'appartient pas au vocabulaire d'hyperref : on l'ajoute au
   % dictionnaire Info, en UTF-16BE explicite pour ne dépendre d'aucun
