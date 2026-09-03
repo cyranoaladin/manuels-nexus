@@ -13,6 +13,7 @@ grandes sections), et les métadonnées sont dérivées des mêmes données
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 import pytest
@@ -111,31 +112,75 @@ def test_the_outline_mirrors_the_manual_structure(variant: str) -> None:
 
     assert outline, "aucun signet"
     levels = {level for level, _, _ in outline}
-    assert levels <= {1, 2}, f"profondeur de signet inattendue : {levels}"
+    # Le sommaire du manuel descend jusqu'aux sous-sections de cours ; les
+    # signets le recopient, sans jamais aller plus bas.
+    assert levels <= {1, 2, 3}, f"profondeur de signet inattendue : {levels}"
     assert sum(1 for level, _, _ in outline if level == 1) >= 10
+    # Pas un signet par micro-objet : aucun exercice, aucune définition,
+    # aucune figure n'écrit d'entrée de sommaire, donc aucun n'est signet.
+    assert len(outline) < page_count // 3, "signets trop nombreux pour un sommaire"
+    micro = [
+        title
+        for _, title, _ in outline
+        if re.match(r"(Exercice|Corrigé|Figure|Définition|Théorème)\s+\d", title)
+    ]
+    assert micro == [], micro
 
     for level, title, page in outline:
         assert title.strip(), "signet sans libellé"
         assert 1 <= page <= page_count, f"destination cassée : {title!r} -> {page}"
 
-    assert len(set(outline)) == len(outline), "signets en doublon"
+    entries = [tuple(entry) for entry in outline]
+    assert len(set(entries)) == len(entries), "signets en doublon"
+
+
+def _normalise(text: str) -> str:
+    return " ".join(text.replace("’", "'").replace(" ", " ").split())
 
 
 @pytest.mark.parametrize("variant", sorted(TITLES))
-def test_every_chapter_bookmark_lands_on_its_own_page(variant: str) -> None:
-    """Une destination fausse est un signet dont la page ignore son titre."""
+def test_the_outline_repeats_the_printed_summary(variant: str) -> None:
+    """Contrat : le signet renvoie à la page que le sommaire imprime.
+
+    On lit le sommaire composé dans le PDF lui-même et on confronte, entrée
+    par entrée et dans l'ordre du document, son folio à la page de destination
+    du signet. Une destination fausse est un signet qui ne mène pas où le
+    sommaire annonce.
+
+    Les entrées dont le titre porte des mathématiques ne sont pas comparables
+    par le texte (le sommaire compose « 𝑡↦e^{𝑎𝑡} » en glyphes de fonte
+    mathématique, le signet porte la traduction Unicode « t↦eat ») : elles
+    sont comptées à part, et restent une minorité.
+    """
 
     with _document(variant) as document:
-        offenders = []
-        for level, title, page in document.get_toc():
-            if level != 1:
-                continue
-            text = " ".join(document[page - 1].get_text().split())
-            needle = " ".join(title.split())
-            if needle not in text:
-                offenders.append((title, page))
+        outline = document.get_toc()
+        first = next(
+            index
+            for index in range(document.page_count)
+            if document[index].get_text().lstrip().startswith("Sommaire")
+        )
+        after = min(page for _, _, page in outline if page > first + 1)
+        summary = _normalise(
+            "\n".join(document[i].get_text() for i in range(first, after - 1))
+        )
 
-    assert offenders == [], f"destinations douteuses : {offenders}"
+    cursor = 0
+    mismatched = []
+    unlocated = []
+    for _level, title, page in outline:
+        needle = _normalise(title)
+        position = summary.find(needle, cursor)
+        if position < 0:
+            unlocated.append(title)
+            continue
+        cursor = position + len(needle)
+        folio = re.search(r"(\d+)", summary[cursor : cursor + 220])
+        if folio is None or int(folio.group(1)) != page:
+            mismatched.append((title, page, folio and folio.group(1)))
+
+    assert mismatched == [], f"signets en desaccord avec le sommaire : {mismatched}"
+    assert len(unlocated) <= len(outline) // 10, unlocated
 
 
 @pytest.mark.parametrize("variant", sorted(TITLES))
