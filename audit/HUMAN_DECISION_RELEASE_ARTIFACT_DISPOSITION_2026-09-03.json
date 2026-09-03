@@ -1,0 +1,42 @@
+{
+  "artifact_type": "human_decision_release_artifact_disposition",
+  "schema_version": 1,
+  "decision_id": "decision-release-artifact-disposition-2026-09-03",
+  "decision_date": "2026-09-03",
+  "operator_authorization": "HUMAN_OPERATOR_EXPLICIT_GOVERNANCE_AUTHORIZATION",
+  "scope": "trois artefacts de audit/ dont la provenance etait incomplete",
+  "never_deleted_from_git_history": true,
+  "no_artifact_is_edited_by_hand": true,
+  "artifacts": [
+    {
+      "path": "audit/PUBLISH_STATUS_DEBT_CLASSIFICATION.json",
+      "disposition": "HISTORICAL_OBSOLETE",
+      "reason": "cartographie de dette de statut emise sans producteur reproductible et sans aucun consommateur ; elle ne peut plus etre reemise ni verifiee, elle sort de la surface de release courante",
+      "required_evidence": {
+        "PRODUCERS": 0,
+        "CURRENT_RELEASE_CONSUMERS": 0
+      }
+    },
+    {
+      "path": "audit/WIP_UPSTREAM_RECONCILIATION.json",
+      "disposition": "HISTORICAL_SUPERSEDED",
+      "reason": "instantane d'une reconciliation trois voies parametree par deux SHA ; ces deux SHA sont desormais des ancetres de HEAD, donc l'etat decrit est integre et supersede",
+      "snapshot_sha_fields": [
+        "upstream_sha",
+        "wip_base_sha"
+      ],
+      "required_evidence": {
+        "SNAPSHOT_SHAS_ARE_ANCESTORS_OF_HEAD": true,
+        "CURRENT_RELEASE_CONSUMERS": 0
+      }
+    },
+    {
+      "path": "audit/STUDENT_PDF_PUBLISH_PREFLIGHT_CURRENT_HEAD.json",
+      "disposition": "ACTIVE_RELEASE_ARTIFACT",
+      "reason": "le producteur existe et declare cette cible ; le champ generated_by manquait, il a ete ajoute via le producteur et l'artefact a ete reemis",
+      "required_evidence": {
+        "PROVENANCE": "PASS"
+      }
+    }
+  ]
+}

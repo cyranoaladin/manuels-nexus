@@ -1,0 +1,183 @@
+{
+  "ancestry_evaluated_against": "HEAD",
+  "artifact_name": "RELEASE_ARTIFACT_PROVENANCE_DISPOSITION",
+  "artifacts": [
+    {
+      "decided_by": "audit/HUMAN_DECISION_RELEASE_ARTIFACT_DISPOSITION_2026-09-03.json",
+      "disposition": "HISTORICAL_OBSOLETE",
+      "evidence": {
+        "CURRENT_RELEASE_CONSUMERS": 0,
+        "exists": true,
+        "history": {
+          "commits_touching_the_artifact": 1,
+          "preserved_in_git_history": true,
+          "tracked_at_head": true
+        },
+        "path": "audit/PUBLISH_STATUS_DEBT_CLASSIFICATION.json",
+        "producer": {
+          "generated_by": null,
+          "generated_by_resolves": false,
+          "has_producer": false,
+          "producer_path": null,
+          "scripts_declaring_the_target": []
+        },
+        "reference_counts": {
+          "MARKDOWN_COMPANION": 1
+        },
+        "references": [
+          {
+            "path": "audit/PUBLISH_STATUS_DEBT_CLASSIFICATION.md",
+            "role": "MARKDOWN_COMPANION"
+          }
+        ],
+        "sha256": "bdce8dab57c2a6fc8247b7075a635182d8798f594076bf73438715f982bb57b1"
+      },
+      "failures": [],
+      "path": "audit/PUBLISH_STATUS_DEBT_CLASSIFICATION.json",
+      "reason": "cartographie de dette de statut emise sans producteur reproductible et sans aucun consommateur ; elle ne peut plus etre reemise ni verifiee, elle sort de la surface de release courante",
+      "required_evidence": {
+        "CURRENT_RELEASE_CONSUMERS": 0,
+        "PRODUCERS": 0
+      },
+      "verdict": "CONFIRMED"
+    },
+    {
+      "decided_by": "audit/HUMAN_DECISION_RELEASE_ARTIFACT_DISPOSITION_2026-09-03.json",
+      "disposition": "ACTIVE_RELEASE_ARTIFACT",
+      "evidence": {
+        "CURRENT_RELEASE_CONSUMERS": 0,
+        "exists": true,
+        "history": {
+          "commits_touching_the_artifact": 15,
+          "preserved_in_git_history": true,
+          "tracked_at_head": true
+        },
+        "path": "audit/STUDENT_PDF_PUBLISH_PREFLIGHT_CURRENT_HEAD.json",
+        "producer": {
+          "generated_by": "scripts/build_math_student_teacher_key_audit.py",
+          "generated_by_resolves": true,
+          "has_producer": true,
+          "producer_path": "scripts/build_math_student_teacher_key_audit.py",
+          "scripts_declaring_the_target": [
+            "scripts/build_math_student_teacher_key_audit.py"
+          ]
+        },
+        "reference_counts": {
+          "ARCHIVED_LOG": 1,
+          "HISTORICAL_TEST_CONSUMER": 1,
+          "PRODUCER": 1
+        },
+        "references": [
+          {
+            "path": "audit/test_matrix_logs/root_audit_tests.before-fixes.log",
+            "role": "ARCHIVED_LOG"
+          },
+          {
+            "path": "scripts/build_math_student_teacher_key_audit.py",
+            "role": "PRODUCER"
+          },
+          {
+            "path": "tests/test_math_student_teacher_key_audit.py",
+            "role": "HISTORICAL_TEST_CONSUMER"
+          }
+        ],
+        "sha256": "bd999e55fe5fe15c8465f26affe349226893b6f2423f526e268418224c6a95f8"
+      },
+      "failures": [],
+      "path": "audit/STUDENT_PDF_PUBLISH_PREFLIGHT_CURRENT_HEAD.json",
+      "reason": "le producteur existe et declare cette cible ; le champ generated_by manquait, il a ete ajoute via le producteur et l'artefact a ete reemis",
+      "required_evidence": {
+        "PROVENANCE": "PASS"
+      },
+      "verdict": "CONFIRMED"
+    },
+    {
+      "decided_by": "audit/HUMAN_DECISION_RELEASE_ARTIFACT_DISPOSITION_2026-09-03.json",
+      "disposition": "HISTORICAL_SUPERSEDED",
+      "evidence": {
+        "CURRENT_RELEASE_CONSUMERS": 0,
+        "exists": true,
+        "history": {
+          "commits_touching_the_artifact": 2,
+          "preserved_in_git_history": true,
+          "tracked_at_head": true
+        },
+        "path": "audit/WIP_UPSTREAM_RECONCILIATION.json",
+        "producer": {
+          "generated_by": "scripts/reconcile_wip_upstream.py",
+          "generated_by_resolves": true,
+          "has_producer": true,
+          "producer_path": "scripts/reconcile_wip_upstream.py",
+          "scripts_declaring_the_target": []
+        },
+        "reference_counts": {
+          "HISTORICAL_TEST_CONSUMER": 1,
+          "MARKDOWN_COMPANION": 1,
+          "PROVENANCE_MENTION_IN_ANOTHER_ARTIFACT": 1
+        },
+        "references": [
+          {
+            "path": "audit/WIP_DROPPED_DELTA_LEDGER.json",
+            "role": "PROVENANCE_MENTION_IN_ANOTHER_ARTIFACT"
+          },
+          {
+            "path": "audit/WIP_UPSTREAM_RECONCILIATION.md",
+            "role": "MARKDOWN_COMPANION"
+          },
+          {
+            "path": "tests/test_wip_upstream_reconciliation.py",
+            "role": "HISTORICAL_TEST_CONSUMER"
+          }
+        ],
+        "sha256": "f79a442ae1a877e27cfe0e9491091409c5340eb4faf1b0e1760a8e80904e3229",
+        "snapshot": {
+          "all_ancestors_of_head": true,
+          "snapshot_shas": [
+            {
+              "field": "upstream_sha",
+              "is_ancestor_of_head": true,
+              "sha": "28d2cac7a3ccc44c49543f35086db08b8771715e"
+            },
+            {
+              "field": "wip_base_sha",
+              "is_ancestor_of_head": true,
+              "sha": "761508d923d74fd3d93fc055b3f3b1857fb251e1"
+            }
+          ]
+        }
+      },
+      "failures": [],
+      "path": "audit/WIP_UPSTREAM_RECONCILIATION.json",
+      "reason": "instantane d'une reconciliation trois voies parametree par deux SHA ; ces deux SHA sont desormais des ancetres de HEAD, donc l'etat decrit est integre et supersede",
+      "required_evidence": {
+        "CURRENT_RELEASE_CONSUMERS": 0,
+        "SNAPSHOT_SHAS_ARE_ANCESTORS_OF_HEAD": true
+      },
+      "verdict": "CONFIRMED"
+    }
+  ],
+  "docket_sources": [
+    "audit/HUMAN_DECISION_RELEASE_ARTIFACT_DISPOSITION_2026-09-03.json"
+  ],
+  "generated_by": "scripts/build_release_artifact_provenance_disposition.py",
+  "schema_version": 1,
+  "scope": "les artefacts inscrits au docket de disposition par une decision humaine ; ce ledger verifie chaque disposition declaree, il n'en decide aucune",
+  "summary": {
+    "ACTIVE_RELEASE_ARTIFACTS_WITHOUT_PRODUCER": 0,
+    "CURRENT_PREFLIGHT_PROVENANCE": "PASS",
+    "CURRENT_RELEASE_CONSUMERS": {
+      "audit/PUBLISH_STATUS_DEBT_CLASSIFICATION.json": 0,
+      "audit/STUDENT_PDF_PUBLISH_PREFLIGHT_CURRENT_HEAD.json": 0,
+      "audit/WIP_UPSTREAM_RECONCILIATION.json": 0
+    },
+    "DISPOSITIONS": {
+      "audit/PUBLISH_STATUS_DEBT_CLASSIFICATION.json": "HISTORICAL_OBSOLETE",
+      "audit/STUDENT_PDF_PUBLISH_PREFLIGHT_CURRENT_HEAD.json": "ACTIVE_RELEASE_ARTIFACT",
+      "audit/WIP_UPSTREAM_RECONCILIATION.json": "HISTORICAL_SUPERSEDED"
+    },
+    "DOCKETED_ARTIFACTS": 3,
+    "GATE": "PASS",
+    "REFUTED_DISPOSITIONS": 0,
+    "UNKNOWN_DISPOSITIONS": 0
+  }
+}
