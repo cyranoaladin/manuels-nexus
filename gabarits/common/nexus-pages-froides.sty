@@ -136,6 +136,42 @@
 ]{tocline}{section}
 \newcommand{\nxTocSecEntry}[1]{{\sffamily\fontsize{8.8}{12}\selectfont\color{encre!78}#1}}
 \newcommand{\nxTocSecPage}[1]{{\sffamily\fontsize{8.8}{12}\selectfont\color{encre!55}#1}}
+
+% ---------------------------------------------------------------------------
+%  RÉSERVE DE FOLIO DU SOMMAIRE
+% ---------------------------------------------------------------------------
+% Le folio de chaque ligne de sommaire est composé par tocbasic dans une boîte
+% de largeur \@pnumwidth, dont KOMA fixe la valeur par défaut à 1,55 em. Cette
+% réserve a été calculée pour un folio en fonte de corps ; la charte compose
+% les folios de chapitre en \nxTocChapPage (titre gras 10 pt), sensiblement
+% plus large. Un folio à trois chiffres y mesure 15,68 pt contre 14,73 pt
+% réservés : chaque entrée de chapitre au-delà de la page 99 débordait donc de
+% 0,95 pt exactement (21 « Overfull \hbox (0.95421pt too wide) » sur les deux
+% variantes du manuel 1SPE, mesure du 2026-09-03).
+%
+% On ne rétrécit pas la fonte et on ne rattrape pas ligne à ligne : on mesure
+% la place réellement nécessaire à QUATRE chiffres dans la plus large des
+% fontes de folio du sommaire, et on la réserve dans le style canonique. La
+% mesure étant faite à l'exécution, la réserve suit toute évolution ultérieure
+% de la fonte de folio, et la variante professeur peut grossir jusqu'à 9999
+% pages sans nouveau débordement.
+%
+% \@tocrmarg (marge droite du texte d'entrée, donc fin des points de conduite)
+% reste solidaire de \@pnumwidth, avec le même écart d'1 em que la valeur KOMA
+% par défaut (2,55 em = 1,55 em + 1 em) : les points de conduite s'arrêtent
+% toujours à un cadratin du folio et l'alignement à droite est inchangé.
+\newlength{\nxTocFolioWidth}
+\newlength{\nxTocFolioMarge}
+% Gabarit de mesure : quatre chiffres, le « 8 » étant, en chiffres
+% proportionnels comme tabulaires, de largeur maximale.
+\newcommand*{\nxTocFolioGabarit}{8888}
+\AtBeginDocument{%
+  \settowidth{\nxTocFolioWidth}{\nxTocChapPage{\nxTocFolioGabarit}}%
+  \addtolength{\nxTocFolioWidth}{0.2em}% respiration entre conduite et folio
+  \setlength{\nxTocFolioMarge}{\dimexpr\nxTocFolioWidth+1em\relax}%
+  \renewcommand*{\@pnumwidth}{\nxTocFolioWidth}%
+  \renewcommand*{\@tocrmarg}{\nxTocFolioMarge}%
+}
 % Page de sommaire avec en-tête composé
 \newcommand{\sommaireNexus}{%
   \clearpage\thispagestyle{empty}%
