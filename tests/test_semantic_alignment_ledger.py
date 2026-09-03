@@ -152,7 +152,8 @@ def test_the_ledger_approves_nothing_and_closes_no_gate(payload: dict) -> None:
     structurelle : aucune branche ne certifie POSITIVEMENT un alignement."""
 
     assert payload["approves_nothing"] is True
-    assert payload["closes_no_gate"] is True
+    assert payload["closes_no_gate"] is False
+    assert "human_closure_status reste" in payload["gate_effect"]
     assert set(payload["dispositions"]) == {
         "DEFAUT_ETABLI",
         "JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS",
@@ -160,20 +161,45 @@ def test_the_ledger_approves_nothing_and_closes_no_gate(payload: dict) -> None:
     assert "ALIGNE" not in json.dumps(payload["dispositions"], ensure_ascii=False)
 
 
-def test_the_ledger_never_touches_the_publish_readiness_gate(committed: dict) -> None:
+def test_le_registre_ferme_l_axe_machine_sans_rien_approuver(
+    committed: dict,
+) -> None:
+    """La decision humaine du 2026-09-02 est prise : le routage ferme l'axe.
+
+    Ce qui doit rester vrai, et que ce test verrouille : fermer l'axe MACHINE
+    n'approuve aucun contenu. La cloture humaine reste PENDING, et la dette
+    humaine reste comptee a decouvert -- un axe vert qui aurait efface ses 371
+    jugements en attente serait le controle auto-confirmant que la campagne
+    combat.
+    """
+
     matrix = json.loads(
         (ROOT / "audit/PUBLISH_READINESS_CHAPTER_MATRIX.json").read_text(
             encoding="utf-8"
         )
     )
-    statuses = {
-        chapter["pedagogical_role_coverage"]["status"]
+    rows = [
+        chapter
         for chapter in matrix["chapters"]
         if chapter["manual"] == committed["scope"]
+    ]
+    assert rows
+
+    assert {row["pedagogical_role_coverage"]["status"] for row in rows} == {
+        "COMPLETE"
     }
-    assert statuses == {"GAP"}, (
-        "la decision de fermer ce gate est humaine ; ce registre ne la prend pas"
-    )
+    assert sum(
+        row["pedagogical_role_coverage"]["machine_unclassified"] for row in rows
+    ) == 0
+    assert sum(row["pedagogical_role_coverage"]["defects"] for row in rows) == 0
+
+    # La dette humaine reste visible et exacte.
+    assert sum(
+        row["pedagogical_role_coverage"]["routed_to_human"] for row in rows
+    ) == committed["counts"]["JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS"]
+
+    # Et rien n'est approuve.
+    assert {row["human_closure_status"] for row in rows} == {"PENDING"}
 
 
 def test_two_runs_produce_the_same_artifact(producer) -> None:

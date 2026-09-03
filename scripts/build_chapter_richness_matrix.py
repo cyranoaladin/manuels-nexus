@@ -126,6 +126,42 @@ def _is_capacity_identity_error(error: Exception) -> bool:
     }
 
 
+def machine_status_of(matrix: dict[str, Any]) -> str:
+    """La dimension est-elle complete du point de vue de la MACHINE ?
+
+    Meme regle que l'oracle SymPy : la dimension est satisfaite quand la
+    machine n'a plus rien a classer et qu'aucun defaut ne subsiste -- jamais
+    quand plus aucune science humaine n'est requise, ce qui reviendrait a
+    exiger qu'un manuel se relise tout seul.
+
+    Quatre constats la rougissent, et aucun n'est absorbe par le routage :
+
+    `insufficient`
+        une capacite n'offre pas les occasions pedagogiques requises. C'est un
+        defaut declaratif, mesure, et il reste bloquant.
+
+    `capacity_identity_blockers`
+        la capacite servie n'est pas resolue. On ne route pas vers un humain
+        une cellule dont la machine ignore ce qu'elle sert.
+
+    `excluded_credit_objects`
+        un objet a ete ecarte du credit ; sa richesse n'est pas mesuree.
+
+    `unknown`
+        il reste des capacites sans disposition terminale.
+    """
+
+    if matrix.get("insufficient"):
+        return "GAP"
+    if matrix.get("capacity_identity_blockers"):
+        return "GAP"
+    if matrix.get("excluded_credit_objects"):
+        return "GAP"
+    if int(matrix.get("unknown") or 0):
+        return "GAP"
+    return "COMPLETE"
+
+
 def build_matrix(
     chapter: str,
     *,
@@ -353,7 +389,7 @@ def build_matrix(
         excluded_credit_objects, key=lambda row: (row["path"], row["state"])
     )
     statuses = collections.Counter(row["status"] for row in rows.values())
-    return {
+    payload = {
         "artifact_type": "chapter_richness_matrix",
         "schema_version": 1,
         "generated_by": "scripts/build_chapter_richness_matrix.py",
@@ -371,19 +407,28 @@ def build_matrix(
             if declarative_diversity_status == "SUFFICIENT"
             else "INSUFFICIENT"
         ),
-        "semantic_validation_status": "UNKNOWN",
-        "machine_status": "GAP",
+        "semantic_validation_status": "ROUTED_TO_HUMAN",
+        "machine_status": None,  # renseigne ci-dessous par machine_status_of
         "capacity_identity_blockers": capacity_identity_blockers,
         "excluded_credit_objects": excluded_credit_objects,
         "counts": dict(statuses),
         "insufficient": sorted(
             c for c, r in rows.items() if r["declarative_status"] != "SUFFICIENT"
         ),
-        "unknown": len(rows),
+        # Ce que la machine ne sait pas classer -- et non ce qu'elle ne sait pas
+        # PROUVER. La distinction est celle de l'oracle : `unknown` compte les
+        # capacites sans disposition terminale, `routed_to_human` celles dont la
+        # mesure declarative est faite et dont il ne reste qu'un jugement
+        # pedagogique. Une capacite non resolue n'est pas routable : elle reste
+        # inconnue, et elle rougit.
+        "unknown": len(capacity_identity_blockers),
+        "routed_to_human": len(rows),
         "capacities_digest": _richness_digest(
             rows, capacity_identity_blockers, excluded_credit_objects
         ),
     }
+    payload["machine_status"] = machine_status_of(payload)
+    return payload
 
 
 def build_collection(*, resolver=None, clone_ledger: dict[str, Any] | None = None) -> dict[str, Any]:

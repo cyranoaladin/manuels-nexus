@@ -467,7 +467,18 @@ def test_a_receipt_that_no_longer_matches_its_source_is_not_evidence(
     assert result["status"] == "GAP"
 
 
-def test_evidence_requiring_human_review_is_not_machine_complete(producer) -> None:
+def test_evidence_requiring_human_review_is_counted_and_never_hidden(
+    producer,
+) -> None:
+    """Une question reservee a l'humain doit rester VISIBLE et comptee.
+
+    Sur decision humaine du 2026-09-02, elle ne rougit plus l'axe machine --
+    c'est un constat, pas une lacune, et l'axe `oracle` applique cette regle
+    depuis toujours. Mais l'invariant qui compte demeure : elle ne doit jamais
+    disparaitre du rapport. Un axe vert qui aurait efface sa dette humaine
+    serait exactement le controle auto-confirmant que la campagne combat.
+    """
+
     routed = {
         "1NSI-X": [
             {
@@ -481,7 +492,8 @@ def test_evidence_requiring_human_review_is_not_machine_complete(producer) -> No
         "1NSI-X", routed, expected_question_identities=["Q1::sha256:one"]
     )
     assert result["human_review_required"] == 1
-    assert result["status"] == "GAP"
+    assert result["unknown"] == 0
+    assert result["status"] == "COMPLETE"
 
 
 def test_evidence_count_must_equal_current_qcm_question_count(producer) -> None:
@@ -933,3 +945,174 @@ def test_programme_explicit_plus_mapping_resolves_each_exact_reference(
     assert result["mapped"] == 1
     assert result["unresolved_mappings"] == []
     assert result["status"] == "COMPLETE"
+
+
+def _alignment(producer, cell_id: str, disposition: str = "JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS"):
+    """Un registre d'alignement minimal, portant une seule cellule."""
+
+    uid, _, role = cell_id.rpartition("::")
+    return {
+        "artifact_type": "semantic_alignment_ledger",
+        "counts": {"cells_examined": 1, "DEFAUT_ETABLI": 0, "UNKNOWN": 0},
+        "records": [
+            {
+                "chapter": "1NSI-X",
+                "cell_id": cell_id,
+                "official_capacity": {"canonical_uid": uid},
+                "pedagogical_role": role,
+                "semantic_alignment": {"disposition": disposition},
+            }
+        ],
+    }
+
+
+def test_une_cellule_routee_vers_l_humain_ne_bloque_plus_la_machine(producer) -> None:
+    """Regle de l'oracle, appliquee a la couverture des roles.
+
+    Decision humaine du 2026-09-02 : un axe est machine-complet quand la
+    machine n'a plus rien a classer, jamais quand plus aucun jugement humain
+    n'est requis. L'axe `oracle` applique cette regle depuis toujours avec 148
+    `human_science_required` ; la couverture des roles l'applique desormais
+    aussi. Rien n'est approuve pour autant : `human_closure_status` reste
+    PENDING.
+    """
+
+    coverage, clone = _fixtures(producer)
+    coverage["rows"][0]["state"] = "DECLARED_EXACT_IDENTITY_NOT_SEMANTICALLY_VALIDATED"
+    alignment = _alignment(producer, "1NSI::1NSI-X::C1::cours")
+
+    truth = producer._capacity_truth("1NSI-X", coverage, clone, alignment=alignment)
+    role = truth["pedagogical_role_coverage"]
+
+    assert role["semantically_unvalidated"] == 1
+    assert role["routed_to_human"] == 1
+    assert role["machine_unclassified"] == 0
+    assert role["defects"] == 0
+    assert role["status"] == "COMPLETE"
+
+
+def test_une_cellule_non_routee_reste_inclassable_et_rougit(producer) -> None:
+    """Mutation : le registre ne doit verdir que ce qu'il couvre REELLEMENT.
+
+    Si le rapprochement se faisait au comptage plutot qu'a l'identite, un
+    registre qui route une cellule etrangere verdirait la cellule reelle. La
+    porte doit rester rouge.
+    """
+
+    coverage, clone = _fixtures(producer)
+    coverage["rows"][0]["state"] = "DECLARED_EXACT_IDENTITY_NOT_SEMANTICALLY_VALIDATED"
+    alignment = _alignment(producer, "1NSI::1NSI-X::C99::cours")
+
+    truth = producer._capacity_truth("1NSI-X", coverage, clone, alignment=alignment)
+    role = truth["pedagogical_role_coverage"]
+
+    assert role["machine_unclassified"] == 1
+    assert role["status"] == "GAP"
+
+
+def test_un_defaut_etabli_rougit_la_couverture_des_roles(producer) -> None:
+    """Mutation : router n'est pas absoudre.
+
+    Une cellule dont le registre etablit un DEFAUT doit rougir l'axe, sans
+    quoi le registre serait un blanchisseur et non une mesure.
+    """
+
+    coverage, clone = _fixtures(producer)
+    coverage["rows"][0]["state"] = "DECLARED_EXACT_IDENTITY_NOT_SEMANTICALLY_VALIDATED"
+    alignment = _alignment(
+        producer, "1NSI::1NSI-X::C1::cours", disposition="DEFAUT_ETABLI"
+    )
+
+    truth = producer._capacity_truth("1NSI-X", coverage, clone, alignment=alignment)
+    role = truth["pedagogical_role_coverage"]
+
+    assert role["defects"] == 1
+    assert role["status"] == "GAP"
+
+
+def test_une_lacune_reelle_rougit_toujours_malgre_le_registre(producer) -> None:
+    """Mutation : MISSING et INDETERMINATE ne sont pas routables.
+
+    Une cellule sans contenu, ou dont le proprietaire semantique est
+    indecidable, n'est pas un jugement humain en attente : c'est une lacune ou
+    une revue de clone. Le registre ne doit jamais les couvrir.
+    """
+
+    for state, champ in (
+        ("MISSING", "missing"),
+        ("INDETERMINATE_CLONE_CREDIT", "indeterminate"),
+    ):
+        coverage, clone = _fixtures(producer)
+        coverage["rows"][0]["state"] = state
+        alignment = _alignment(producer, "1NSI::1NSI-X::C1::cours")
+        truth = producer._capacity_truth(
+            "1NSI-X", coverage, clone, alignment=alignment
+        )
+        role = truth["pedagogical_role_coverage"]
+        assert role[champ] == 1
+        assert role["status"] == "GAP", f"{state} doit rester bloquant"
+
+
+def test_une_question_qcm_reservee_a_l_humain_ne_bloque_plus_la_machine(
+    producer,
+) -> None:
+    """Meme regle pour le routage de preuve QCM.
+
+    `1SPE-VARIABLES-ALEATOIRES/Q16` porte sur le role d'un parametre dans un
+    listing Python : aucune famille mathematique ne la decide, et c'est un
+    constat, pas une lacune. Ce qui doit rougir est l'INCONNU, jamais l'humain.
+    """
+
+    routed = {
+        "1NSI-X": [
+            {
+                "question_id": "Q1",
+                "semantic_question_digest": "sha256:d1",
+                "evidence_status": "HUMAN_REVIEW_REQUIRED",
+            }
+        ]
+    }
+    truth = producer._evidence_routing(
+        "1NSI-X", routed, expected_question_identities=["Q1::sha256:d1"]
+    )
+    assert truth["human_review_required"] == 1
+    assert truth["unknown"] == 0
+    assert truth["status"] == "COMPLETE"
+
+
+def test_un_statut_de_preuve_inconnu_rougit_toujours(producer) -> None:
+    """Mutation : un statut hors nomenclature reste inclassable."""
+
+    routed = {
+        "1NSI-X": [
+            {
+                "question_id": "Q1",
+                "semantic_question_digest": "sha256:d1",
+                "evidence_status": "STATUT_IMPREVU",
+            }
+        ]
+    }
+    truth = producer._evidence_routing(
+        "1NSI-X", routed, expected_question_identities=["Q1::sha256:d1"]
+    )
+    assert truth["unknown"] == 1
+    assert truth["status"] == "GAP"
+
+
+def test_un_jeu_de_questions_qui_ne_correspond_pas_rougit_toujours(producer) -> None:
+    """Mutation : la preuve doit porter sur les questions reellement presentes."""
+
+    routed = {
+        "1NSI-X": [
+            {
+                "question_id": "Q1",
+                "semantic_question_digest": "sha256:AUTRE",
+                "evidence_status": "MACHINE_RECALCULATED",
+            }
+        ]
+    }
+    truth = producer._evidence_routing(
+        "1NSI-X", routed, expected_question_identities=["Q1::sha256:d1"]
+    )
+    assert truth["identity_set_matches_qcm"] is False
+    assert truth["status"] == "GAP"

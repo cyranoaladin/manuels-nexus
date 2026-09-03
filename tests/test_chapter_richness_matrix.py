@@ -114,10 +114,27 @@ def test_a_multi_capacity_exercise_does_not_grant_all_its_gestures(
 
 
 def test_declarations_alone_never_establish_semantic_richness(matrix: dict) -> None:
+    """Une declaration ne vaut toujours pas preuve semantique.
+
+    L'invariant de fond est inchange : aucune capacite n'est declaree
+    semantiquement validee sur la seule foi de ses declarations -- le statut
+    reste `CANDIDATE_NON_SEMANTIC` et la validation semantique n'est jamais
+    `COMPLETE`.
+
+    Ce qui change, sur decision humaine du 2026-09-02, est la lecture de ce
+    reste : il n'est plus compte comme `UNKNOWN` -- ce qui fermait la porte par
+    construction, aucune entree ne pouvant produire autre chose -- mais route
+    explicitement vers le jugement humain, comme l'oracle SymPy route depuis
+    toujours sa science humaine requise. La machine est complete quand il ne
+    lui reste rien a classer, jamais quand plus aucun humain n'est requis.
+    """
+
     assert matrix["insufficient"] == []
-    assert matrix["semantic_validation_status"] == "UNKNOWN"
-    assert matrix["machine_status"] == "GAP"
-    assert matrix["unknown"] == len(matrix["capacities"])
+    assert matrix["semantic_validation_status"] == "ROUTED_TO_HUMAN"
+    assert matrix["semantic_validation_status"] != "COMPLETE"
+    assert matrix["machine_status"] == "COMPLETE"
+    assert matrix["unknown"] == 0
+    assert matrix["routed_to_human"] == len(matrix["capacities"])
     assert set(matrix["counts"]) == {"CANDIDATE_NON_SEMANTIC"}
     assert all(
         row["status"] == "CANDIDATE_NON_SEMANTIC"
@@ -238,3 +255,62 @@ def test_nsi_qcm_official_reference_is_resolved_without_suffix_collision(
     )["capacities"]
     assert built["C10"]["opportunities"]["qcm"] == 1
     assert built["C1"]["opportunities"]["qcm"] == 0
+
+
+
+def test_une_capacite_declarativement_suffisante_est_routee_pas_inconnue(
+    producer,
+) -> None:
+    """La mesure declarative faite, ce qui reste est un jugement humain.
+
+    Le producteur ecrivait `semantic_validation_status: UNKNOWN` et
+    `machine_status: GAP` en dur, quelle que soit la mesure. Aucune entree ne
+    pouvait donc rendre la dimension complete : la porte etait fermee par
+    construction, pas par un constat.
+
+    La regle du depot est celle de l'oracle : ce qui compte est qu'il ne reste
+    rien a classer a la machine, jamais qu'aucune science humaine ne soit
+    requise.
+    """
+
+    matrix = producer.build_matrix("1SPE-TRIGONOMETRIE")
+
+    assert matrix["insufficient"] == []
+    assert matrix["unknown"] == 0, "plus rien n'est inclassable par la machine"
+    assert matrix["routed_to_human"] == len(matrix["capacities"])
+    assert matrix["semantic_validation_status"] == "ROUTED_TO_HUMAN"
+    assert matrix["machine_status"] == "COMPLETE"
+
+
+def test_une_capacite_declarativement_insuffisante_rougit_toujours(producer) -> None:
+    """Mutation : le routage ne doit jamais avaler un defaut declaratif."""
+
+    matrix = producer.build_matrix("1SPE-GEOMETRIE-REPEREE")
+    assert matrix["machine_status"] == "COMPLETE"
+
+    mutant = dict(matrix)
+    mutant["insufficient"] = ["C5"]
+    assert producer.machine_status_of(mutant) == "GAP", (
+        "une capacite insuffisante doit rougir la dimension malgre le routage"
+    )
+
+
+def test_un_blocage_d_identite_rougit_toujours(producer) -> None:
+    """Mutation : une capacite non resolue n'est pas routable.
+
+    On ne peut pas router vers un humain une cellule dont on ne sait meme pas
+    quelle capacite elle sert.
+    """
+
+    matrix = producer.build_matrix("1SPE-SUITES")
+    assert matrix["machine_status"] == "COMPLETE"
+
+    mutant = dict(matrix)
+    mutant["capacity_identity_blockers"] = [
+        {"path": "x", "object_id": "y", "reason": "z"}
+    ]
+    assert producer.machine_status_of(mutant) == "GAP"
+
+    mutant = dict(matrix)
+    mutant["excluded_credit_objects"] = [{"path": "x", "state": "y"}]
+    assert producer.machine_status_of(mutant) == "GAP"

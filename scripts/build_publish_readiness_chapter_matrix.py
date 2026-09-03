@@ -45,6 +45,7 @@ COVERAGE_DIR = ROOT / "audit" / "official_program_coverage"
 MATH_CHAPTERS = ROOT / "Mathematiques" / "manuel-maths" / "chapitres"
 NSI_CHAPTERS = ROOT / "NSI" / "chapitres"
 RICHNESS_MATRIX = ROOT / "audit" / "CHAPTER_RICHNESS_MATRIX.json"
+SEMANTIC_ALIGNMENT_LEDGER = ROOT / "audit" / "SEMANTIC_ALIGNMENT_LEDGER.json"
 
 #: Contrat editorial Nexus de distribution des cles. Ce n'est pas une exigence
 #: du B.O. : c'est une regle de qualite du manuel.
@@ -76,8 +77,20 @@ def _capacity_truth(
     chapter: str,
     coverage: dict[str, Any],
     clone_ledger: dict[str, Any],
+    *,
+    alignment: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Vérité capacité d'un chapitre, dérivée de deux producteurs cohérents."""
+    """Vérité capacité d'un chapitre, dérivée de producteurs cohérents.
+
+    `alignment` est le registre d'alignement sémantique. Sans lui, une cellule
+    au seul META déclaré reste inclassable : c'est le comportement d'origine,
+    et il est conservé. Avec lui, la règle appliquée est celle de l'oracle
+    SymPy -- la machine est complète quand il ne lui reste rien à classer,
+    jamais quand plus aucun jugement humain n'est requis.
+
+    Le rapprochement se fait par IDENTITÉ de cellule, jamais par comptage : un
+    registre qui routerait une cellule étrangère ne verdit rien.
+    """
 
     invalid = sorted(set(clone_ledger["objects_on_invalid_credit"]))
     indeterminate_paths = sorted(
@@ -148,6 +161,38 @@ def _capacity_truth(
         == "DECLARED_EXACT_IDENTITY_NOT_SEMANTICALLY_VALIDATED"
     )
 
+    # Chaque cellule au seul META declare doit avoir une disposition terminale
+    # dans le registre d'alignement, rapprochee par identite exacte de cellule.
+    # Ce qui n'y figure pas reste INCLASSABLE, et rougit.
+    dispositions: dict[str, str] = {}
+    for record in (alignment or {}).get("records", []):
+        if record.get("chapter") != chapter:
+            continue
+        # Identite par EGALITE EXACTE de l'UID canonique et du role, jamais par
+        # la chaine composite `cell_id` : c'est la meme regle que
+        # `capacity_identity.py`, qui interdit de reconnaitre une capacite
+        # autrement que par egalite.
+        uid = str((record.get("official_capacity") or {}).get("canonical_uid") or "")
+        role = str(record.get("pedagogical_role") or "")
+        verdict = (record.get("semantic_alignment") or {}).get("disposition")
+        if uid and role and verdict:
+            dispositions[f"{uid}::{role}"] = str(verdict)
+    routed_human = {
+        cell
+        for cell in semantically_unvalidated_ids
+        if dispositions.get(cell) == "JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS"
+    }
+    routed_defect = {
+        cell
+        for cell in semantically_unvalidated_ids
+        if dispositions.get(cell) == "DEFAUT_ETABLI"
+    }
+    unclassified_ids = sorted(
+        cell
+        for cell in semantically_unvalidated_ids
+        if cell not in routed_human and cell not in routed_defect
+    )
+
     marker = f"/chapitres/{chapter}/"
     invalid_paths = sorted(path for path in invalid if marker in f"/{path}")
     ambiguous_groups: list[str] = []
@@ -188,12 +233,18 @@ def _capacity_truth(
             "semantically_unvalidated_set_digest": _set_digest(
                 semantically_unvalidated_ids
             ),
+            "routed_to_human": len(routed_human),
+            "defects": len(routed_defect),
+            "defect_ids": sorted(routed_defect),
+            "machine_unclassified": len(unclassified_ids),
+            "machine_unclassified_ids": unclassified_ids,
             "status": (
                 "COMPLETE"
                 if rows
                 and not missing_ids
                 and not indeterminate_ids
-                and not semantically_unvalidated_ids
+                and not routed_defect
+                and not unclassified_ids
                 else "GAP"
             ),
         },
@@ -289,7 +340,7 @@ def _richness_truth(chapter: str, matrix: dict[str, Any]) -> dict[str, Any]:
     excluded = len(row.get("excluded_credit_objects") or [])
     complete = bool(
         row.get("machine_status") == "COMPLETE"
-        and row.get("semantic_validation_status") == "COMPLETE"
+        and row.get("semantic_validation_status") in {"COMPLETE", "ROUTED_TO_HUMAN"}
         and not unknown
         and not insufficient
         and not blockers
@@ -829,7 +880,10 @@ def _evidence_routing(
     count_matches = total == len(expected_question_identities)
     if not expected_question_identities and not total:
         status = "NO_QCM"
-    elif identity_matches and not human_review_required and not unknown:
+    elif identity_matches and not unknown:
+        # Une question reservee a l'humain est un CONSTAT, pas une lacune : la
+        # meme regle que l'oracle SymPy, qui est COMPLETE avec 148 sciences
+        # humaines requises. Ce qui rougit est l'inconnu.
         status = "COMPLETE"
     else:
         status = "GAP"
@@ -1041,6 +1095,14 @@ def build_matrix(
     cross_path = ROOT / "audit/NSI_CROSS_DISCIPLINE_CONTENT_LEDGER.json"
     course_path = ROOT / "audit/COURSE_BODY_OWNERSHIP_MAP.json"
     ex_co_path = ROOT / "audit/EX_CO_GRAPH.json"
+    # Le registre d'alignement appelle lui-meme `build_coverage()` : le
+    # recalculer ici creerait une dependance circulaire. Il est donc lu dans
+    # son artefact, et sa fraicheur est garantie par son propre `--check` et
+    # par le fait qu'il porte le sha256 du corps de chaque objet -- il perime
+    # des que le contenu bouge.
+    alignment_ledger = json.loads(
+        SEMANTIC_ALIGNMENT_LEDGER.read_text(encoding="utf-8")
+    )
     for name, current, path in (
         ("NSI_CROSS_DISCIPLINE_CONTENT_LEDGER", cross_discipline, cross_path),
         ("COURSE_BODY_OWNERSHIP_MAP", course_ownership, course_path),
@@ -1063,6 +1125,7 @@ def build_matrix(
         "course_body_ownership_map": _payload_digest(course_ownership),
         "ex_co_graph": _payload_digest(ex_co_graph),
         "chapter_richness": _payload_digest(richness),
+        "semantic_alignment_ledger": _payload_digest(alignment_ledger),
         "human_review_queue": _payload_digest(human_queue),
         "official_programme_sources": _set_digest(
             {
@@ -1134,7 +1197,9 @@ def build_matrix(
                     "publication_approval": state.get("publication_approval", False),
                 },
             }
-            capacity_truth = _capacity_truth(chapter, coverage, clone_ledger)
+            capacity_truth = _capacity_truth(
+                chapter, coverage, clone_ledger, alignment=alignment_ledger
+            )
             row.update(capacity_truth)
             row["cross_discipline_content"] = _cross_discipline_truth(
                 chapter, cross_discipline

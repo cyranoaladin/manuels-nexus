@@ -637,7 +637,18 @@ def build_ledger(
         "generated_by": "scripts/build_semantic_alignment_ledger.py",
         "scope": scope,
         "approves_nothing": True,
-        "closes_no_gate": True,
+        "closes_no_gate": False,
+        "gate_effect": (
+            "sur decision humaine du 2026-09-02, la matrice de campagne lit "
+            "ces dispositions : une cellule routee vers l'humain ne bloque "
+            "plus l'axe machine, tandis qu'un DEFAUT_ETABLI ou une cellule "
+            "non routee le bloque toujours. C'est la regle de l'oracle SymPy "
+            "-- la machine est complete quand il ne lui reste rien a classer, "
+            "jamais quand plus aucune science humaine n'est requise. Aucun "
+            "contenu n'est approuve pour autant : human_closure_status reste "
+            "PENDING, publication_approval reste false, release-strict reste "
+            "rouge."
+        ),
         "routed_cell_state": ROUTED_CELL_STATE,
         "doctrine": {
             "no_positive_semantic_certification": (
