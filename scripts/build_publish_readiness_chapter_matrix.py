@@ -351,6 +351,11 @@ def _richness_truth(chapter: str, matrix: dict[str, Any]) -> dict[str, Any]:
         "insufficient": insufficient,
         "capacity_identity_blockers": blockers,
         "excluded_credit_objects": excluded,
+        # La dette humaine ne doit jamais devenir invisible du seul fait que
+        # l'axe est vert : un axe complet qui aurait efface ce compte serait le
+        # controle auto-confirmant que la campagne combat.
+        "routed_to_human": int(row.get("routed_to_human") or 0),
+        "semantic_validation_status": row.get("semantic_validation_status"),
         "capacities_digest": row.get("capacities_digest"),
         "status": "COMPLETE" if complete else "GAP",
     }

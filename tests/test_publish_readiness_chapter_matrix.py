@@ -1116,3 +1116,30 @@ def test_un_jeu_de_questions_qui_ne_correspond_pas_rougit_toujours(producer) -> 
     )
     assert truth["identity_set_matches_qcm"] is False
     assert truth["status"] == "GAP"
+
+
+def test_la_dette_humaine_de_richesse_reste_visible_sur_un_axe_vert(
+    producer,
+) -> None:
+    """Un axe vert ne doit jamais effacer ce qu'il a route vers l'humain."""
+
+    truth = producer._richness_truth(
+        "1NSI-X",
+        {
+            "chapters": {
+                "1NSI-X": {
+                    "machine_status": "COMPLETE",
+                    "semantic_validation_status": "ROUTED_TO_HUMAN",
+                    "unknown": 0,
+                    "routed_to_human": 7,
+                    "insufficient": [],
+                    "capacity_identity_blockers": [],
+                    "excluded_credit_objects": [],
+                    "capacities_digest": "sha256:test",
+                }
+            }
+        },
+    )
+    assert truth["status"] == "COMPLETE"
+    assert truth["routed_to_human"] == 7
+    assert truth["semantic_validation_status"] == "ROUTED_TO_HUMAN"
