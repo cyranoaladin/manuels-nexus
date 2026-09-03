@@ -1,0 +1,128 @@
+{
+  "approves_nothing": true,
+  "artifact_type": "1spe_print_candidate_build_receipt",
+  "build_command": "python3 Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual 1SPE --variant <variant>",
+  "manual": "1SPE",
+  "not_final": "Ces PDF ne sont PAS finals : aucun 1SPE_FINAL_CONTENT_SHA n'est fige, les deux revues humaines et D7 restent PENDING.",
+  "open_findings": [
+    {
+      "detail": "0 signet PDF sur les deux variantes ; AGENTS.md exige signets, liens, metadonnees et polices incorporees",
+      "id": "BOOKMARKS_ABSENTS",
+      "severity": "RELEASE_BLOCKER"
+    },
+    {
+      "detail": "metadata title et author vides sur les deux variantes",
+      "id": "METADATA_VIDES",
+      "severity": "RELEASE_BLOCKER"
+    },
+    {
+      "detail": "les couvertures eleve et professeur sont textuellement identiques ; gabarits/common/nexus-couverture.sty ne prescrit aucune mention de variante. Rien n'est viole, mais rien ne distingue les deux livres pour l'imprimeur.",
+      "id": "COUVERTURES_INDISCERNABLES",
+      "severity": "REAL_HUMAN_DECISION_REQUIRED"
+    },
+    {
+      "detail": "seul le MediaBox est defini (A4). Les onglets debordent de 1 mm : un TrimBox/BleedBox est probablement attendu par l'imprimeur, mais aucune contrainte imprimeur n'est documentee dans le depot.",
+      "id": "BOITES_TRIM_BLEED_ABSENTES",
+      "severity": "REAL_HUMAN_DECISION_REQUIRED"
+    }
+  ],
+  "rc": {
+    "eleve": 0,
+    "professeur": 0
+  },
+  "record_observed": false,
+  "schema_version": 1,
+  "semantic_qa": {
+    "annee_erronee": 0,
+    "fragment_latex_brut": 0,
+    "isbn_fictif": 0,
+    "isbn_mention": "ISBN — à attribuer (4e de couverture)",
+    "terminale_non_etiquete": 0,
+    "terminale_note": "58/58 (eleve) et 96/96 (professeur) des occurrences sont dans un bloc d'approfondissement explicitement etiquete ou une phrase qui exclut le contenu du chapitre",
+    "tilde_visible": 0,
+    "todo": 0
+  },
+  "source_sha": "12c67fb6fadc7e11a88464d19f2a9171a59504e4",
+  "status": "PRINT_CANDIDATE",
+  "student_teacher_isolation": {
+    "eleve": {
+      "bareme": 0,
+      "cle_de_correction": 0,
+      "corrige": 0,
+      "identifiant_interne_visible": 0,
+      "note_professeur": 0,
+      "placeholder": 0,
+      "status": "PASS"
+    },
+    "professeur": {
+      "bareme": 77,
+      "cle_de_correction": 10,
+      "corrige": 738,
+      "status": "PASS"
+    }
+  },
+  "tree_after": "les deux PDF candidats uniquement",
+  "tree_clean_before": true,
+  "variants": {
+    "eleve": {
+      "bookmarks": 0,
+      "bytes": 1897642,
+      "fonts_not_embedded": 0,
+      "fonts_total": 18,
+      "geometry": {
+        "ink_beyond_media_1mm_tab_bleed": 331,
+        "ink_beyond_media_other": 1,
+        "ink_beyond_media_other_note": "couverture : boites englobantes de traces decoratifs pleine page, encre reelle clipee au MediaBox",
+        "page_sizes": {
+          "595.28x841.89": 357
+        },
+        "tab_parity": "impair=DROITE, pair=GAUCHE, 0 exception sur 106 pages echantillonnees"
+      },
+      "latex_log_qa": {
+        "LATEX_ERROR": 0,
+        "MISSING_GLYPH": 0,
+        "NULLFONT": 0,
+        "OVERFULL_HBOX": 10,
+        "OVERFULL_HBOX_CLASS": "BENIGN_WITH_PROOF",
+        "OVERFULL_HBOX_PROOF": "100% des debordements valent 0.95421pt et portent un numero de page a 3 chiffres d'une entree de chapitre du sommaire ; le rendu du sommaire montre l'alignement a droite conserve et le debord absorbe par la marge",
+        "UNDEFINED_CONTROL_SEQUENCE": 0,
+        "UNKNOWN_WARNING_SIGNATURE": 0
+      },
+      "log_sha256": "sha256:8a031dc10741c087f570438ec7667f693730e58bae0553f82d390569b8dbed6f",
+      "metadata_title": "",
+      "page_count": 357,
+      "pdf_path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
+      "pdf_sha256": "sha256:ff0c263bf01480a49e0037dd81b3765534853b236b1dd04311dc1555ddf36953"
+    },
+    "professeur": {
+      "bookmarks": 0,
+      "bytes": 3216141,
+      "fonts_not_embedded": 0,
+      "fonts_total": 18,
+      "geometry": {
+        "ink_beyond_media_1mm_tab_bleed": 603,
+        "ink_beyond_media_other": 1,
+        "ink_beyond_media_other_note": "couverture : boites englobantes de traces decoratifs pleine page, encre reelle clipee au MediaBox",
+        "page_sizes": {
+          "595.28x841.89": 629
+        },
+        "tab_parity": "impair=DROITE, pair=GAUCHE, 0 exception sur 106 pages echantillonnees"
+      },
+      "latex_log_qa": {
+        "LATEX_ERROR": 0,
+        "MISSING_GLYPH": 0,
+        "NULLFONT": 0,
+        "OVERFULL_HBOX": 11,
+        "OVERFULL_HBOX_CLASS": "BENIGN_WITH_PROOF",
+        "OVERFULL_HBOX_PROOF": "100% des debordements valent 0.95421pt et portent un numero de page a 3 chiffres d'une entree de chapitre du sommaire ; le rendu du sommaire montre l'alignement a droite conserve et le debord absorbe par la marge",
+        "UNDEFINED_CONTROL_SEQUENCE": 0,
+        "UNKNOWN_WARNING_SIGNATURE": 0
+      },
+      "log_sha256": "sha256:75ba50cc4150821b8b97b75bf8b80c6d9b98960dc50af2245b5faf2ab961b7a8",
+      "metadata_title": "",
+      "page_count": 629,
+      "pdf_path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf",
+      "pdf_sha256": "sha256:35b502fa925c7d4003fe7f7f2d8257d335b82e164b27757a0ebe0e86f3456662"
+    }
+  }
+}
