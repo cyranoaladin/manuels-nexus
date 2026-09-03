@@ -24,7 +24,7 @@ Chapitre `1SPE-SECOND-DEGRE` · manuel `1SPE` (Première, Spécialité mathémat
 | Empreinte de l'ensemble d'objets | `sha256:e4a5653a775bdf85a7ed42d96f50810dd2d955883f36f7823c205a775f79d8a8` |
 | Empreinte semantique liee a l'approbation | `sha256:080a729e99ba25e3ac48b7ef480a1ff1b6b37be65945b34aed30ee74c86bb7e9` |
 | Empreinte du packet | `sha256:c48e1e5d7497d4e246c5fb1cce899fcd7cca605e87d0ce02a34507555bbedca6` |
-| Revision du depot gelee dans le packet | `836d1ff0d491c68bbe53d845f77a9b84577eb516` |
+| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel

@@ -46,6 +46,9 @@ class FakeProductionRunner:
         fls_has_master: bool = True,
         hardlink_pdf: bool = False,
         lualatex_unavailable: bool = False,
+        margin_states: tuple[str, ...] = ("stable",),
+        margin_inventory: bool = True,
+        margin_link_inventory: bool = True,
     ) -> None:
         self.calls: list[tuple[list[str], dict[str, Any]]] = []
         self.events: list[str] = []
@@ -60,6 +63,14 @@ class FakeProductionRunner:
         self.fls_has_master = fls_has_master
         self.hardlink_pdf = hardlink_pdf
         self.lualatex_unavailable = lualatex_unavailable
+        # Le compositeur de marges ecrit son inventaire a chaque passe, et
+        # l'assembleur ne livre que lorsqu'il se declare « stable ». Le modeler
+        # ici est ce qui rend la boucle de convergence eprouvable : sans cela,
+        # le faux compilateur ne ressemblait plus au vrai, et l'assembleur
+        # refusait -- a juste titre -- de livrer.
+        self.margin_states = margin_states
+        self.margin_inventory = margin_inventory
+        self.margin_link_inventory = margin_link_inventory
         self.receipt_existed_at_recorder = False
         self.compile_output_modes: list[int] = []
 
@@ -196,6 +207,33 @@ class FakeProductionRunner:
             hardlink = pdf_path.with_suffix(".hardlink.pdf")
             hardlink.unlink(missing_ok=True)
             os.link(pdf_path, hardlink)
+        self._publish_margin_inventories(kwargs)
+
+    def _publish_margin_inventories(self, kwargs: dict[str, Any]) -> None:
+        """Ce que le compositeur depose a chaque passe, et rien de plus."""
+
+        environment = kwargs.get("env", {})
+        pass_number = int(environment.get("NEXUS_MARGIN_PASS_NUMBER", "0"))
+        state = self.margin_states[
+            min(pass_number - 1, len(self.margin_states) - 1)
+        ]
+        if self.margin_inventory:
+            Path(environment["NEXUS_MARGIN_LAYOUT_NEXT"]).write_text(
+                json.dumps(
+                    {
+                        "state": state,
+                        "pass_number": pass_number,
+                        "variant": environment.get("NEXUS_MARGIN_VARIANT"),
+                        "notes": [],
+                        "pages": [],
+                    }
+                ),
+                encoding="utf-8",
+            )
+        if self.margin_link_inventory:
+            Path(environment["NEXUS_MARGIN_LINK_INVENTORY_NEXT"]).write_text(
+                json.dumps({"links": []}), encoding="utf-8"
+            )
 
 
 def _write_control(
@@ -894,6 +932,109 @@ def test_student_selection_fails_closed_without_valid_object_metadata(
         assemble_manuel.collect_chapter(chapter, "eleve")
 
 
+def test_a_build_whose_margins_never_settle_is_refused(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    """Des placements qui bougent encore ne decrivent pas la page livree.
+
+    Le compositeur pose ses notes d'apres l'inventaire de la passe precedente ;
+    tant qu'il change d'avis, le PDF ne correspond a aucun inventaire. Livrer
+    dans cet etat rendrait toute verification de marge vide de sens -- elle
+    comparerait la page a un plan que la page ne suit pas.
+    """
+
+    _manual_root, runner, _verify_calls, _paths = _install_orchestration_fixture(
+        tmp_path,
+        monkeypatch,
+        runner=FakeProductionRunner(margin_states=("changed",)),
+    )
+
+    assert assemble_manuel.main("professeur", runner=runner) == 1
+
+    message = capsys.readouterr().out
+    assert "placements de marge non stabilis" in message
+    # La construction s'arrete apres le nombre maximal de passes, pas avant.
+    lualatex_passes = sum(
+        1
+        for command, _kwargs in runner.calls
+        if command[0] == "lualatex" and "--version" not in command
+    )
+    assert lualatex_passes == assemble_manuel.MARGIN_MAX_PASSES
+
+
+def test_a_pass_that_writes_no_inventory_stops_the_build(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    """Un compositeur muet n'a rien dessine : le silence n'est pas un succes.
+
+    C'est le defaut qu'une campagne entiere n'a pas vu : la construction ne
+    fournissait aucun inventaire, le compositeur sortait sans rien peindre, et
+    le PDF partait quand meme.
+    """
+
+    _manual_root, runner, _verify_calls, _paths = _install_orchestration_fixture(
+        tmp_path,
+        monkeypatch,
+        runner=FakeProductionRunner(margin_inventory=False),
+    )
+
+    assert assemble_manuel.main("professeur", runner=runner) == 1
+    assert "inventaire de marges absent" in capsys.readouterr().out
+
+
+def test_a_pass_that_writes_no_link_inventory_stops_the_build(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    """Sans lui, la verification semantique ne peut pas tourner sur le livre."""
+
+    _manual_root, runner, _verify_calls, _paths = _install_orchestration_fixture(
+        tmp_path,
+        monkeypatch,
+        runner=FakeProductionRunner(margin_link_inventory=False),
+    )
+
+    assert assemble_manuel.main("professeur", runner=runner) == 1
+    assert "inventaire de liens de marge absent" in capsys.readouterr().out
+
+
+def test_the_two_margin_inventories_are_published_beside_the_pdf(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Le pipeline teste doit etre le pipeline produit.
+
+    Tant que seul un harnais fournissait ces inventaires, la verification
+    tournait sur des maquettes de deux pages et la production livrait sans
+    preuve. Ils accompagnent desormais le PDF.
+    """
+
+    _manual_root, runner, _verify_calls, paths = _install_orchestration_fixture(
+        tmp_path,
+        monkeypatch,
+    )
+
+    assert assemble_manuel.main("professeur", runner=runner) == 0
+
+    build = paths["pdf"].parent
+    stem = paths["pdf"].stem
+    for suffix in (".margin-layout.json", ".margin-links.json"):
+        published = build / f"{stem}{suffix}"
+        assert published.is_file(), published
+    # L'inventaire publie est celui de la DERNIERE passe, celle qui decrit le
+    # PDF a cote duquel il est pose.
+    layout = json.loads(
+        (build / f"{stem}.margin-layout.json").read_text(encoding="utf-8")
+    )
+    assert layout["state"] == "stable"
+    assert layout["pass_number"] == assemble_manuel.MARGIN_MINIMUM_PASSES
+
+
 def test_observed_build_runs_three_strict_passes_then_publishes_closed_proofs(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -975,11 +1116,34 @@ def test_observed_build_runs_three_strict_passes_then_publishes_closed_proofs(
         subprocess_environments
     )
     allowed_environment = {"PATH", "HOME", *controlled}
+    # Le compositeur de marges recoit ce dont il a besoin, et rien d'autre :
+    # sa variante, le numero de passe, le nonce de la course, et les deux
+    # chemins ou deposer ses inventaires. La liste reste CLOSE -- une variable
+    # non declaree ferait toujours echouer ce controle.
+    margin_environment = {
+        "NEXUS_MARGIN_VARIANT",
+        "NEXUS_MARGIN_PASS_NUMBER",
+        "NEXUS_MARGIN_RUN_NONCE",
+        "NEXUS_MARGIN_LAYOUT_PREVIOUS",
+        "NEXUS_MARGIN_LAYOUT_NEXT",
+        "NEXUS_MARGIN_LINK_INVENTORY_NEXT",
+    }
     compile_environments = [kwargs["env"] for _command, kwargs in lualatex_calls]
     assert all(
-        set(environment) <= allowed_environment | {"NEXUS_BUILD_RUN"}
+        set(environment)
+        <= allowed_environment | {"NEXUS_BUILD_RUN"} | margin_environment
         for environment in compile_environments
     )
+    # Le nonce ne depend que du manuel et de la variante : deux constructions
+    # des memes sources restent comparables.
+    assert len(
+        {environment["NEXUS_MARGIN_RUN_NONCE"] for environment in compile_environments}
+    ) == 1
+    # Et le numero de passe avance, sinon la convergence ne voudrait rien dire.
+    assert [
+        environment["NEXUS_MARGIN_PASS_NUMBER"]
+        for environment in compile_environments
+    ] == [str(number) for number in range(1, len(compile_environments) + 1)]
     assert len(
         {environment["NEXUS_BUILD_RUN"] for environment in compile_environments}
     ) == 1

@@ -68,12 +68,21 @@ def test_math_student_teacher_key_audit_closes_exactly_35_leaks() -> None:
         "STUDENT_TEACHER_KEY_SOURCE_GUARD_AND_TRACKED_PDF_DIAGNOSTIC"
     )
     assert payload["source_evidence"]["qcm_guards_attest_current_sources"] is True
-    assert payload["pdf_evidence_provenance"] == {
-        "attests_current_head": False,
-        "canonical_observed_build_count": 0,
-        "release_evidence": False,
-        "status": "UNATTESTED_TRACKED_PDF_DIAGNOSTIC",
-    }
+    provenance = payload["pdf_evidence_provenance"]
+    # Ce qui compte est le VERDICT : les PDF suivis ne valent pas preuve de
+    # release et n'attestent pas le HEAD courant. Le nombre de constructions
+    # canoniques, lui, appartient au manifeste : le figer à zéro faisait
+    # échouer ce contrôle dès qu'une construction y était portée — ce qui est
+    # précisément le cours normal des choses.
+    assert provenance["attests_current_head"] is False
+    assert provenance["release_evidence"] is False
+    assert provenance["status"] == "UNATTESTED_TRACKED_PDF_DIAGNOSTIC"
+    manifest = json.loads(
+        (ROOT / "audit/BUILD_MANIFEST.json").read_text(encoding="utf-8")
+    )
+    assert provenance["canonical_observed_build_count"] == len(
+        manifest.get("builds", [])
+    )
     assert len(payload["keys"]) == 35
     assert payload["summary"]["tracked_pdf_student_teacher_only_leaks"] == 0
     assert payload["summary"]["tracked_pdf_teacher_required_keys_present"] is True

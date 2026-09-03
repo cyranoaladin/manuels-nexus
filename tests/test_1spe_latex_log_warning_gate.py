@@ -200,47 +200,27 @@ def test_the_page_geometry_is_written_and_not_inferred() -> None:
         assert "calc" not in options
 
 
-_GEOMETRY_LENGTHS = (
-    "textwidth",
-    "textheight",
-    "oddsidemargin",
-    "evensidemargin",
-    "topmargin",
-    "headheight",
-    "headsep",
-    "footskip",
-    "marginparwidth",
-    "marginparsep",
-    "paperwidth",
-    "paperheight",
-)
+@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
+def test_the_written_div_is_the_one_the_calculation_gives(tmp_path: Path) -> None:
+    """Écrire `DIV=6` ne devait rien changer : il faut le prouver, pas le dire.
 
+    typearea ne tabule aucun DIV pour un corps de 9,5 pt : il le CALCULAIT, et
+    le signalait. La classe écrit désormais le résultat de ce calcul. Ce
+    contrôle demande donc à typearea, seul et sans la classe, ce qu'il calcule
+    pour ce papier et ce corps — et compare au nombre écrit.
 
-def _measure_page_geometry(tmp_path: Path, preamble: str) -> dict[str, str]:
-    """Les longueurs de page telles que le document les voit réellement."""
+    La mise en page finale du manuel n'est pas mesurée ici : `geometry` la
+    fixe après typearea, et la relire ne dirait rien de la valeur écrite. La
+    tentative précédente comparait justement ces longueurs-là, et un
+    `\\KOMAoptions{DIV=calc}` tardif y écrasait `geometry` — le test échouait
+    pour une raison qui n'était pas celle qu'il visait.
+    """
 
-    probe = "\n".join(
-        f"\\typeout{{SONDE {name}=\\the\\{name}}}" for name in _GEOMETRY_LENGTHS
-    )
-    document = tmp_path / "geometrie.tex"
+    document = tmp_path / "typearea.tex"
     document.write_text(
-        "\\documentclass{gabarits/nexus-manuel-v5}\n"
-        "\\usepackage{gabarits/nexus-charte-v6}\n"
-        "\\nxVSuppressTabtrue\\nxVersionProfesseurfalse\n"
-        "\\matiere{M}\\niveau{N}\n"
-        f"{preamble}"
-        "\\begin{document}\\nxActiverDecor\n"
-        f"{probe}\n"
-        "Texte.\n\\end{document}\n",
+        "\\documentclass[a4paper,fontsize=9.5pt,DIV=calc,twoside]{scrbook}\n"
+        "\\begin{document}Texte.\\end{document}\n",
         encoding="utf-8",
-    )
-    environment = os.environ.copy()
-    environment.update(
-        {
-            "NEXUS_MARGIN_RUN_NONCE": "0" * 32,
-            "NEXUS_MARGIN_VARIANT": "eleve",
-            "NEXUS_MARGIN_PASS_NUMBER": "1",
-        }
     )
     subprocess.run(
         [
@@ -249,39 +229,26 @@ def _measure_page_geometry(tmp_path: Path, preamble: str) -> dict[str, str]:
             f"-output-directory={tmp_path}",
             str(document),
         ],
-        cwd=ROOT / "Mathematiques/manuel-maths",
-        env=environment,
+        cwd=tmp_path,
         capture_output=True,
         text=True,
         check=False,
     )
-    log = (tmp_path / "geometrie.log").read_text(encoding="utf-8", errors="replace")
-    measured = dict(re.findall(r"SONDE (\w+)=([\d.]+pt)", log))
-    assert set(measured) == set(_GEOMETRY_LENGTHS), measured
-    return measured
+    log = (tmp_path / "typearea.log").read_text(encoding="utf-8", errors="replace")
 
+    calculated = re.findall(r"DIV\s+=\s+(\d+)", log)
+    assert calculated, "typearea n'a annoncé aucun DIV"
+    # Aucun avertissement : `DIV=calc` est demandé, donc aucune table n'est
+    # cherchée puis manquée.
+    assert "typearea Warning" not in log
 
-@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
-def test_the_written_div_gives_exactly_what_the_calculation_gave(
-    tmp_path: Path,
-) -> None:
-    """Écrire `DIV=6` ne devait rien changer : il faut le prouver, pas le dire.
-
-    Le document sonde est composé deux fois : tel que la classe le règle, puis
-    en redemandant explicitement `DIV=calc` -- la valeur que typearea calculait
-    de lui-même avant, en signalant qu'aucune table ne couvrait 9,5 pt. Les
-    douze longueurs de page doivent coïncider au sp près.
-    """
-
-    written = _measure_page_geometry(tmp_path / "ecrit", "")
-    calculated = _measure_page_geometry(
-        tmp_path / "calcule", "\\KOMAoptions{DIV=calc}\n"
+    cls = (ROOT / "gabarits/common/nexus-manuel.cls").read_text(encoding="utf-8")
+    written = re.search(r"DIV=(\d+)", cls)
+    assert written is not None
+    assert written.group(1) == calculated[-1], (
+        f"la classe écrit DIV={written.group(1)} là où le calcul donne "
+        f"DIV={calculated[-1]}"
     )
-
-    assert written == calculated
-    # Une sonde qui ne mesurerait rien passerait aussi : elle doit voir une page.
-    assert written["paperwidth"].startswith("597.")
-    assert written["textwidth"] != written["paperwidth"]
 
 
 def test_every_charter_file_declares_the_name_it_is_loaded_by() -> None:

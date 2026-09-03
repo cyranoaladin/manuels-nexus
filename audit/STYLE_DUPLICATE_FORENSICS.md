@@ -19,6 +19,14 @@ Primaire : `gabarits/common/fonts/LibertinusSerif-Bold.otf`
 - `Mathematiques/manuel-maths/gabarits/fonts/LibertinusSerif-Bold.otf` — DORMANT_FONT_SOURCE — runtime=NO — safe_to_delete=NO
 - `NSI/gabarits/fonts/LibertinusSerif-Bold.otf` — DORMANT_FONT_SOURCE — runtime=NO — safe_to_delete=NO
 
+### `04cb45a5f8796d9ce0a25bd2c0f23b190b515056e2f69f5b7eac64b5f0c88f14`
+
+Primaire : `gabarits/common/nexus-margin-rail.tex`
+
+- `gabarits/common/nexus-margin-rail.tex` — CANONICAL_SOURCE — runtime=NO — safe_to_delete=NO
+- `Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
+- `NSI/gabarits/nexus-margin-rail.tex` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
+
 ### `14a443d8c1161e34e1a70ad2b1bf5b1094237980123fb1b39b2ac67580f0aa9c`
 
 Primaire : `gabarits/common/fonts/Montserrat-SemiBoldItalic.otf`
@@ -42,27 +50,6 @@ Primaire : `gabarits/common/nexus-code.tex`
 - `gabarits/common/nexus-code.tex` — CANONICAL_SOURCE — runtime=NO — safe_to_delete=NO
 - `Mathematiques/manuel-maths/gabarits/nexus-code.tex` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
 
-### `1b23d537120ebd2437c9f6c59d5b99c24c4ecd1286028b4cc2441eabf0c758d4`
-
-Primaire : `Mathematiques/manuel-maths/gabarits/nexus-decor.sty`
-
-- `Mathematiques/manuel-maths/gabarits/nexus-decor.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
-- `NSI/gabarits/nexus-decor.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
-
-### `2185848e26ea5152a1570828c1b5c29d5158dcf38b32702be680c617e9f90d36`
-
-Primaire : `Mathematiques/manuel-maths/gabarits/nexus-boites-v6.sty`
-
-- `Mathematiques/manuel-maths/gabarits/nexus-boites-v6.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
-- `NSI/gabarits/nexus-boites-v6.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
-
-### `25b72f131634021353e07500252a5cf69110faa106c670659240b796cd59edda`
-
-Primaire : `Mathematiques/manuel-maths/gabarits/nexus-exercices-v6.sty`
-
-- `Mathematiques/manuel-maths/gabarits/nexus-exercices-v6.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
-- `NSI/gabarits/nexus-exercices-v6.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
-
 ### `2c2bd1b3b98d1b0c4625c7e4241130e93abf2a228b56c00ece98e093ca6e317f`
 
 Primaire : `gabarits/common/nexus-margin-shipout.lua`
@@ -70,6 +57,13 @@ Primaire : `gabarits/common/nexus-margin-shipout.lua`
 - `gabarits/common/nexus-margin-shipout.lua` — CANONICAL_SOURCE — runtime=NO — safe_to_delete=NO
 - `Mathematiques/manuel-maths/gabarits/nexus-margin-shipout.lua` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
 - `NSI/gabarits/nexus-margin-shipout.lua` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
+
+### `2c6aacc7fe27fd43e9b0f7a902543b3e005370d913ee7bf1f626abb1d10bd7e3`
+
+Primaire : `Mathematiques/manuel-maths/gabarits/nexus-exercices-v6.sty`
+
+- `Mathematiques/manuel-maths/gabarits/nexus-exercices-v6.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
+- `NSI/gabarits/nexus-exercices-v6.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
 
 ### `2c7b764764e3db723f752e68e7af5d375171a0f9774f39f749b2598b8a1e931f`
 
@@ -94,6 +88,13 @@ Primaire : `gabarits/common/fonts/JetBrainsMono-Bold.otf`
 - `Mathematiques/manuel-maths/gabarits/fonts/JetBrainsMono-Bold.otf` — FONT_PROVISION_SOURCE — runtime=NO — safe_to_delete=NO
 - `NSI/gabarits/fonts/JetBrainsMono-Bold.otf` — FONT_PROVISION_SOURCE — runtime=NO — safe_to_delete=NO
 
+### `2ecc021fe98ca3d20e76699252f4864d07996ec50d92af8a46bf2d3cd6670eda`
+
+Primaire : `Mathematiques/manuel-maths/gabarits/nexus-decor.sty`
+
+- `Mathematiques/manuel-maths/gabarits/nexus-decor.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
+- `NSI/gabarits/nexus-decor.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
+
 ### `42af1195dda223dc642255754ff7a94f1d5add6720e7062883de4c429132cc8b`
 
 Primaire : `gabarits/common/nexus-icons.tex`
@@ -101,6 +102,13 @@ Primaire : `gabarits/common/nexus-icons.tex`
 - `gabarits/common/nexus-icons.tex` — CANONICAL_SOURCE — runtime=NO — safe_to_delete=NO
 - `Mathematiques/manuel-maths/gabarits/nexus-icons.tex` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
 - `NSI/gabarits/nexus-icons.tex` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
+
+### `42deffecf8e0650159de0af4529b032f27b4d904e9b056ec9fc42fbfba101f19`
+
+Primaire : `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls`
+
+- `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls` — ACTIVE_COMPATIBILITY_WRAPPER — runtime=YES — safe_to_delete=NO
+- `NSI/gabarits/nexus-manuel.cls` — ACTIVE_COMPATIBILITY_WRAPPER — runtime=YES — safe_to_delete=NO
 
 ### `47a665259f09f554f5d133d7718cdad43ff462c6a6b2328f38023465e62d57ce`
 
@@ -110,26 +118,19 @@ Primaire : `gabarits/common/fonts/LibertinusSerif-BoldItalic.otf`
 - `Mathematiques/manuel-maths/gabarits/fonts/LibertinusSerif-BoldItalic.otf` — DORMANT_FONT_SOURCE — runtime=NO — safe_to_delete=NO
 - `NSI/gabarits/fonts/LibertinusSerif-BoldItalic.otf` — DORMANT_FONT_SOURCE — runtime=NO — safe_to_delete=NO
 
-### `4ecc02468ab1ab2859d7fe1f1930538ec35a9058dbfab79a1e86269802234751`
-
-Primaire : `Mathematiques/manuel-maths/gabarits/nexus-pages-froides.sty`
-
-- `Mathematiques/manuel-maths/gabarits/nexus-pages-froides.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
-- `NSI/gabarits/nexus-pages-froides.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
-
-### `57327021b50fb44434874fb4fe00583ddb2160908ca8379d4d07d670f257685e`
-
-Primaire : `Mathematiques/manuel-maths/gabarits/nexus-couverture.sty`
-
-- `Mathematiques/manuel-maths/gabarits/nexus-couverture.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
-- `NSI/gabarits/nexus-couverture.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
-
-### `5e1d7fdb258865321ee93a34a41a2de806edd93ad36b256829ed1bce4043a7dc`
+### `5481ac50897d8e5017f49b82c01279d1948e6c83f1d1dee2d4ea01e56c3cc714`
 
 Primaire : `Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls`
 
 - `Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls` — ACTIVE_COMPATIBILITY_WRAPPER — runtime=YES — safe_to_delete=NO
 - `NSI/gabarits/nexus-manuel-v5.cls` — ACTIVE_COMPATIBILITY_WRAPPER — runtime=YES — safe_to_delete=NO
+
+### `5d478c0ec3701c54d8de961ad9c1c95909d2b2317ca1658a88cb10dd14d3b1a8`
+
+Primaire : `Mathematiques/manuel-maths/gabarits/nexus-pages-froides.sty`
+
+- `Mathematiques/manuel-maths/gabarits/nexus-pages-froides.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
+- `NSI/gabarits/nexus-pages-froides.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
 
 ### `64aeb4a3bed43098e7f2cc599a64f0ce81be06d7ebb05081e6d0c1fdd60b68b8`
 
@@ -155,13 +156,6 @@ Primaire : `gabarits/common/fonts/Montserrat-SemiBold.otf`
 - `Mathematiques/manuel-maths/gabarits/fonts/Montserrat-SemiBold.otf` — DORMANT_FONT_SOURCE — runtime=NO — safe_to_delete=NO
 - `NSI/gabarits/fonts/Montserrat-SemiBold.otf` — DORMANT_FONT_SOURCE — runtime=NO — safe_to_delete=NO
 
-### `7345dbceca061abe156240c389ccde57508ec4009f4ccf90a06db8c20b6ea65b`
-
-Primaire : `Mathematiques/manuel-maths/gabarits/nexus-pont-v6.sty`
-
-- `Mathematiques/manuel-maths/gabarits/nexus-pont-v6.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
-- `NSI/gabarits/nexus-pont-v6.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
-
 ### `7481d1ab491292cd12cd812153b34951d46be2a6990d55fcb7f9388f3042f784`
 
 Primaire : `gabarits/common/fonts/Montserrat-Regular.otf`
@@ -169,6 +163,13 @@ Primaire : `gabarits/common/fonts/Montserrat-Regular.otf`
 - `gabarits/common/fonts/Montserrat-Regular.otf` — CANONICAL_SOURCE — runtime=NO — safe_to_delete=NO
 - `Mathematiques/manuel-maths/gabarits/fonts/Montserrat-Regular.otf` — DORMANT_FONT_SOURCE — runtime=NO — safe_to_delete=NO
 - `NSI/gabarits/fonts/Montserrat-Regular.otf` — DORMANT_FONT_SOURCE — runtime=NO — safe_to_delete=NO
+
+### `7debbf9f9b82d7af661898b62b208791b840ce071e79fd340b347c94425d0430`
+
+Primaire : `Mathematiques/manuel-maths/gabarits/nexus-couverture.sty`
+
+- `Mathematiques/manuel-maths/gabarits/nexus-couverture.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
+- `NSI/gabarits/nexus-couverture.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
 
 ### `81855d6817f93537262e08c2e8037d1ccc8eac14b0b611ba4686f9c28ba34315`
 
@@ -201,27 +202,12 @@ Primaire : `gabarits/common/fonts/Montserrat-Bold.otf`
 - `Mathematiques/manuel-maths/gabarits/fonts/Montserrat-Bold.otf` — DORMANT_FONT_SOURCE — runtime=NO — safe_to_delete=NO
 - `NSI/gabarits/fonts/Montserrat-Bold.otf` — DORMANT_FONT_SOURCE — runtime=NO — safe_to_delete=NO
 
-### `90391485645cb6fa03ae6ffc3b315d612e714b69dcc3c0efd547a7d8fca38137`
+### `964afdd31c793fbcbd1883b1b75b662f62bbe38458ddaf75b6d7bf61c5598c6e`
 
-Primaire : `Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty`
+Primaire : `Mathematiques/manuel-maths/gabarits/nexus-pont-v6.sty`
 
-- `Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty` — ACTIVE_COMPATIBILITY_WRAPPER — runtime=YES — safe_to_delete=NO
-- `NSI/gabarits/nexus-charte-v6.sty` — ACTIVE_COMPATIBILITY_WRAPPER — runtime=YES — safe_to_delete=NO
-
-### `90ea5ae521bcf028fbc5fc240639636c24eb2e1cfc934e0af9a2c94ae7269e07`
-
-Primaire : `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls`
-
-- `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls` — ACTIVE_COMPATIBILITY_WRAPPER — runtime=YES — safe_to_delete=NO
-- `NSI/gabarits/nexus-manuel.cls` — ACTIVE_COMPATIBILITY_WRAPPER — runtime=YES — safe_to_delete=NO
-
-### `98952586570a7a93957c4fbd329efd91005917fb7baccd30fd601aceca3c95ee`
-
-Primaire : `gabarits/common/nexus-margin-rail.tex`
-
-- `gabarits/common/nexus-margin-rail.tex` — CANONICAL_SOURCE — runtime=NO — safe_to_delete=NO
-- `Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
-- `NSI/gabarits/nexus-margin-rail.tex` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
+- `Mathematiques/manuel-maths/gabarits/nexus-pont-v6.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
+- `NSI/gabarits/nexus-pont-v6.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
 
 ### `9a393d63d6e05f620d3dc0190dfd35a8ede58c0808cf0fc9de7fcb9c723e4c24`
 
@@ -230,6 +216,13 @@ Primaire : `gabarits/common/fonts/LibertinusSerif-Italic.otf`
 - `gabarits/common/fonts/LibertinusSerif-Italic.otf` — CANONICAL_SOURCE — runtime=NO — safe_to_delete=NO
 - `Mathematiques/manuel-maths/gabarits/fonts/LibertinusSerif-Italic.otf` — DORMANT_FONT_SOURCE — runtime=NO — safe_to_delete=NO
 - `NSI/gabarits/fonts/LibertinusSerif-Italic.otf` — DORMANT_FONT_SOURCE — runtime=NO — safe_to_delete=NO
+
+### `aca44416f30e77ec385d97286028f1894ef5079601f4ff2474349eea4a21efe2`
+
+Primaire : `Mathematiques/manuel-maths/gabarits/nexus-figures-bib.sty`
+
+- `Mathematiques/manuel-maths/gabarits/nexus-figures-bib.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
+- `NSI/gabarits/nexus-figures-bib.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
 
 ### `b145020dd183e53207f1a809ea8203f06937212462d4f1711ee37c2f5cf1f6df`
 
@@ -262,12 +255,19 @@ Primaire : `Mathematiques/manuel-maths/gabarits/objet_standalone.tex`
 - `Mathematiques/manuel-maths/gabarits/objet_standalone.tex` — ACTIVE_TOOL_TEMPLATE — runtime=NO — safe_to_delete=NO
 - `NSI/gabarits/objet_standalone.tex` — ACTIVE_TOOL_TEMPLATE — runtime=NO — safe_to_delete=NO
 
-### `d441187e66d487806714abf7bba768aa61b20c6d18638b39f030e6c6ec190bfa`
+### `cd59d965d61546cb6fd2afe41183ac091ebb08202630bc8c56771ed3595c4ca9`
 
-Primaire : `Mathematiques/manuel-maths/gabarits/nexus-figures-bib.sty`
+Primaire : `Mathematiques/manuel-maths/gabarits/nexus-boites-v6.sty`
 
-- `Mathematiques/manuel-maths/gabarits/nexus-figures-bib.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
-- `NSI/gabarits/nexus-figures-bib.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
+- `Mathematiques/manuel-maths/gabarits/nexus-boites-v6.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
+- `NSI/gabarits/nexus-boites-v6.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
+
+### `d42b1df562e726f06d78636f4c9c607f57c0ddcd557450f0270af55c8b1d61f8`
+
+Primaire : `Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty`
+
+- `Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty` — ACTIVE_COMPATIBILITY_WRAPPER — runtime=YES — safe_to_delete=NO
+- `NSI/gabarits/nexus-charte-v6.sty` — ACTIVE_COMPATIBILITY_WRAPPER — runtime=YES — safe_to_delete=NO
 
 ### `de13399037827ab8300953a7f5a46bd9e34d5a634b9d17fe8a128066007a831a`
 

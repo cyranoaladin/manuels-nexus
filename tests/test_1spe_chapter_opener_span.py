@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -83,7 +84,19 @@ def test_no_page_number_is_written_into_the_producer(
     )
     start = source.index("BANNER = re.compile")
     end = source.index("class SpanError")
-    assert "page" not in source[start:end].lower().replace("pages", "")
+    detection = source[start:end]
+    # Ce qui est interdit, c'est un FOLIO écrit en dur -- pas le mot « page »,
+    # que les commentaires emploient forcément pour expliquer ce qu'ils font.
+    # Bannir le mot faisait échouer ce contrôle sur une prose parfaitement
+    # saine, et ne disait rien du défaut qu'il vise.
+    for line in detection.splitlines():
+        code = line.split("#", 1)[0]
+        if not code.strip() or code.lstrip().startswith(('"', "'")):
+            continue
+        assert not re.search(r"\b\d{2,4}\b", code), (
+            f"un numéro de page semble écrit en dur : {line.strip()}"
+        )
+    assert "EXPECTED_OPENERS" not in detection
 
 
 # ---------------------------------------------------------------------------

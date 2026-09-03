@@ -38,21 +38,21 @@ La présence d'une cible canonique unique n'implique pas encore un runtime sans 
 | Chemin | Rôle | Canonique | SHA-256 | Duplicata de | Références directes | `.fls` | Déprécié | Historique |
 |---|---|:---:|---|---|---:|---:|:---:|:---:|
 | `Mathematiques/manuel-maths/gabarits/chapitre_master.tex` | CHAPTER_RUNTIME_TEMPLATE | NO | `82c0ae2dfd98858c817f30193c7cee6f1f08327fb98f1090c6127902575028c3` | `gabarits/common/chapitre_master.tex` | 1 | 0 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-boites-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `2185848e26ea5152a1570828c1b5c29d5158dcf38b32702be680c617e9f90d36` | — | 0 | 0 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `90391485645cb6fa03ae6ffc3b315d612e714b69dcc3c0efd547a7d8fca38137` | — | 6 | 0 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-boites-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `cd59d965d61546cb6fd2afe41183ac091ebb08202630bc8c56771ed3595c4ca9` | — | 0 | 0 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `d42b1df562e726f06d78636f4c9c607f57c0ddcd557450f0270af55c8b1d61f8` | — | 6 | 0 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-code.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `16e74594ae5108e3326b36f92f75ccdb5b30472dc15134ffe5ff943a2a6b6d91` | `gabarits/common/nexus-code.tex` | 0 | 1 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-couverture.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `57327021b50fb44434874fb4fe00583ddb2160908ca8379d4d07d670f257685e` | — | 0 | 0 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-decor.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `1b23d537120ebd2437c9f6c59d5b99c24c4ecd1286028b4cc2441eabf0c758d4` | — | 0 | 0 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-exercices-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `25b72f131634021353e07500252a5cf69110faa106c670659240b796cd59edda` | — | 0 | 0 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-figures-bib.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `d441187e66d487806714abf7bba768aa61b20c6d18638b39f030e6c6ec190bfa` | — | 0 | 0 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-couverture.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `7debbf9f9b82d7af661898b62b208791b840ce071e79fd340b347c94425d0430` | — | 0 | 0 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-decor.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `2ecc021fe98ca3d20e76699252f4864d07996ec50d92af8a46bf2d3cd6670eda` | — | 0 | 0 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-exercices-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `2c6aacc7fe27fd43e9b0f7a902543b3e005370d913ee7bf1f626abb1d10bd7e3` | — | 0 | 0 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-figures-bib.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `aca44416f30e77ec385d97286028f1894ef5079601f4ff2474349eea4a21efe2` | — | 0 | 0 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `2c7b764764e3db723f752e68e7af5d375171a0f9774f39f749b2598b8a1e931f` | — | 0 | 1 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-figures.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `de13399037827ab8300953a7f5a46bd9e34d5a634b9d17fe8a128066007a831a` | — | 0 | 1 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-icons.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `42af1195dda223dc642255754ff7a94f1d5add6720e7062883de4c429132cc8b` | `gabarits/common/nexus-icons.tex` | 0 | 1 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls` | COMPATIBILITY_CLASS_WRAPPER | NO | `5e1d7fdb258865321ee93a34a41a2de806edd93ad36b256829ed1bce4043a7dc` | — | 3 | 1 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls` | COMPATIBILITY_CLASS_WRAPPER | NO | `90ea5ae521bcf028fbc5fc240639636c24eb2e1cfc934e0af9a2c94ae7269e07` | — | 6 | 1 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `98952586570a7a93957c4fbd329efd91005917fb7baccd30fd601aceca3c95ee` | `gabarits/common/nexus-margin-rail.tex` | 0 | 1 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-pages-froides.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `4ecc02468ab1ab2859d7fe1f1930538ec35a9058dbfab79a1e86269802234751` | — | 0 | 0 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-pont-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `7345dbceca061abe156240c389ccde57508ec4009f4ccf90a06db8c20b6ea65b` | — | 0 | 0 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls` | COMPATIBILITY_CLASS_WRAPPER | NO | `5481ac50897d8e5017f49b82c01279d1948e6c83f1d1dee2d4ea01e56c3cc714` | — | 3 | 1 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls` | COMPATIBILITY_CLASS_WRAPPER | NO | `42deffecf8e0650159de0af4529b032f27b4d904e9b056ec9fc42fbfba101f19` | — | 6 | 1 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `04cb45a5f8796d9ce0a25bd2c0f23b190b515056e2f69f5b7eac64b5f0c88f14` | `gabarits/common/nexus-margin-rail.tex` | 0 | 1 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-pages-froides.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `5d478c0ec3701c54d8de961ad9c1c95909d2b2317ca1658a88cb10dd14d3b1a8` | — | 0 | 0 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-pont-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `964afdd31c793fbcbd1883b1b75b662f62bbe38458ddaf75b6d7bf61c5598c6e` | — | 0 | 0 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-signatures.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `bbf81c1368d7be1b067597803e1429dd94e19c0585dbf0981d408f8f5ea3cc74` | `gabarits/common/nexus-signatures.tex` | 0 | 1 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/objet_standalone.tex` | OBJECT_RUNTIME_TEMPLATE | NO | `c9c4c06915ff0cc38ea7393621547a39856705a8d0f19527bb89f3ecd300c769` | — | 0 | 0 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/reference-v4/manuel-kit/chapitres/chap-nsi.tex` | HISTORICAL_REFERENCE | NO | `f753b91d4d14372e83a0a827a5f897788520cf310d541f12af6b26aefe602209` | — | 0 | 0 | YES | YES |
@@ -66,59 +66,59 @@ La présence d'une cible canonique unique n'implique pas encore un runtime sans 
 | `NSI/corpus_nsi/02_modeles_documents/nsi-preamble.sty` | REFERENCE_MODEL_STYLE | NO | `9360a17474193420c6533a267420a536cabcbce24faade497b3b44bb304c6aef` | — | 18 | 0 | NO | NO |
 | `NSI/gabarits/book_master.tex` | BOOK_RUNTIME_TEMPLATE | NO | `a16442c965c32c4696680ee150cb14d2071e30b8a1083c3b98e68e8387b0a4bd` | — | 2 | 0 | NO | NO |
 | `NSI/gabarits/chapitre_master.tex` | CHAPTER_RUNTIME_TEMPLATE | NO | `b64379616544fb90df50692f5eeaa34c3a2b2c96793ef58608063c45b88d11b8` | — | 1 | 0 | NO | NO |
-| `NSI/gabarits/nexus-boites-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `2185848e26ea5152a1570828c1b5c29d5158dcf38b32702be680c617e9f90d36` | `Mathematiques/manuel-maths/gabarits/nexus-boites-v6.sty` | 0 | 0 | NO | NO |
-| `NSI/gabarits/nexus-charte-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `90391485645cb6fa03ae6ffc3b315d612e714b69dcc3c0efd547a7d8fca38137` | `Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty` | 3 | 0 | NO | NO |
+| `NSI/gabarits/nexus-boites-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `cd59d965d61546cb6fd2afe41183ac091ebb08202630bc8c56771ed3595c4ca9` | `Mathematiques/manuel-maths/gabarits/nexus-boites-v6.sty` | 0 | 0 | NO | NO |
+| `NSI/gabarits/nexus-charte-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `d42b1df562e726f06d78636f4c9c607f57c0ddcd557450f0270af55c8b1d61f8` | `Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty` | 3 | 0 | NO | NO |
 | `NSI/gabarits/nexus-code.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `27a6bb961ea9fb00bb2046f987ab1f76aba832dd7f5def189bbf6d32bd07fcf5` | — | 0 | 0 | NO | NO |
-| `NSI/gabarits/nexus-couverture.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `57327021b50fb44434874fb4fe00583ddb2160908ca8379d4d07d670f257685e` | `Mathematiques/manuel-maths/gabarits/nexus-couverture.sty` | 0 | 0 | NO | NO |
-| `NSI/gabarits/nexus-decor.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `1b23d537120ebd2437c9f6c59d5b99c24c4ecd1286028b4cc2441eabf0c758d4` | `Mathematiques/manuel-maths/gabarits/nexus-decor.sty` | 0 | 0 | NO | NO |
-| `NSI/gabarits/nexus-exercices-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `25b72f131634021353e07500252a5cf69110faa106c670659240b796cd59edda` | `Mathematiques/manuel-maths/gabarits/nexus-exercices-v6.sty` | 0 | 0 | NO | NO |
-| `NSI/gabarits/nexus-figures-bib.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `d441187e66d487806714abf7bba768aa61b20c6d18638b39f030e6c6ec190bfa` | `Mathematiques/manuel-maths/gabarits/nexus-figures-bib.sty` | 0 | 0 | NO | NO |
+| `NSI/gabarits/nexus-couverture.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `7debbf9f9b82d7af661898b62b208791b840ce071e79fd340b347c94425d0430` | `Mathematiques/manuel-maths/gabarits/nexus-couverture.sty` | 0 | 0 | NO | NO |
+| `NSI/gabarits/nexus-decor.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `2ecc021fe98ca3d20e76699252f4864d07996ec50d92af8a46bf2d3cd6670eda` | `Mathematiques/manuel-maths/gabarits/nexus-decor.sty` | 0 | 0 | NO | NO |
+| `NSI/gabarits/nexus-exercices-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `2c6aacc7fe27fd43e9b0f7a902543b3e005370d913ee7bf1f626abb1d10bd7e3` | `Mathematiques/manuel-maths/gabarits/nexus-exercices-v6.sty` | 0 | 0 | NO | NO |
+| `NSI/gabarits/nexus-figures-bib.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `aca44416f30e77ec385d97286028f1894ef5079601f4ff2474349eea4a21efe2` | `Mathematiques/manuel-maths/gabarits/nexus-figures-bib.sty` | 0 | 0 | NO | NO |
 | `NSI/gabarits/nexus-figures-nsi.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `2c7b764764e3db723f752e68e7af5d375171a0f9774f39f749b2598b8a1e931f` | `Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex` | 0 | 0 | NO | NO |
 | `NSI/gabarits/nexus-figures.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `de13399037827ab8300953a7f5a46bd9e34d5a634b9d17fe8a128066007a831a` | `Mathematiques/manuel-maths/gabarits/nexus-figures.tex` | 0 | 0 | NO | NO |
 | `NSI/gabarits/nexus-icons.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `42af1195dda223dc642255754ff7a94f1d5add6720e7062883de4c429132cc8b` | `gabarits/common/nexus-icons.tex` | 0 | 0 | NO | NO |
-| `NSI/gabarits/nexus-manuel-v5.cls` | COMPATIBILITY_CLASS_WRAPPER | NO | `5e1d7fdb258865321ee93a34a41a2de806edd93ad36b256829ed1bce4043a7dc` | `Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls` | 2 | 0 | NO | NO |
-| `NSI/gabarits/nexus-manuel.cls` | COMPATIBILITY_CLASS_WRAPPER | NO | `90ea5ae521bcf028fbc5fc240639636c24eb2e1cfc934e0af9a2c94ae7269e07` | `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls` | 5 | 0 | NO | NO |
-| `NSI/gabarits/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `98952586570a7a93957c4fbd329efd91005917fb7baccd30fd601aceca3c95ee` | `gabarits/common/nexus-margin-rail.tex` | 0 | 0 | NO | NO |
-| `NSI/gabarits/nexus-pages-froides.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `4ecc02468ab1ab2859d7fe1f1930538ec35a9058dbfab79a1e86269802234751` | `Mathematiques/manuel-maths/gabarits/nexus-pages-froides.sty` | 0 | 0 | NO | NO |
-| `NSI/gabarits/nexus-pont-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `7345dbceca061abe156240c389ccde57508ec4009f4ccf90a06db8c20b6ea65b` | `Mathematiques/manuel-maths/gabarits/nexus-pont-v6.sty` | 0 | 0 | NO | NO |
+| `NSI/gabarits/nexus-manuel-v5.cls` | COMPATIBILITY_CLASS_WRAPPER | NO | `5481ac50897d8e5017f49b82c01279d1948e6c83f1d1dee2d4ea01e56c3cc714` | `Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls` | 2 | 0 | NO | NO |
+| `NSI/gabarits/nexus-manuel.cls` | COMPATIBILITY_CLASS_WRAPPER | NO | `42deffecf8e0650159de0af4529b032f27b4d904e9b056ec9fc42fbfba101f19` | `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls` | 5 | 0 | NO | NO |
+| `NSI/gabarits/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `04cb45a5f8796d9ce0a25bd2c0f23b190b515056e2f69f5b7eac64b5f0c88f14` | `gabarits/common/nexus-margin-rail.tex` | 0 | 0 | NO | NO |
+| `NSI/gabarits/nexus-pages-froides.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `5d478c0ec3701c54d8de961ad9c1c95909d2b2317ca1658a88cb10dd14d3b1a8` | `Mathematiques/manuel-maths/gabarits/nexus-pages-froides.sty` | 0 | 0 | NO | NO |
+| `NSI/gabarits/nexus-pont-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `964afdd31c793fbcbd1883b1b75b662f62bbe38458ddaf75b6d7bf61c5598c6e` | `Mathematiques/manuel-maths/gabarits/nexus-pont-v6.sty` | 0 | 0 | NO | NO |
 | `NSI/gabarits/nexus-signatures.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `bbf81c1368d7be1b067597803e1429dd94e19c0585dbf0981d408f8f5ea3cc74` | `gabarits/common/nexus-signatures.tex` | 0 | 0 | NO | NO |
 | `NSI/gabarits/objet_standalone.tex` | OBJECT_RUNTIME_TEMPLATE | NO | `c9c4c06915ff0cc38ea7393621547a39856705a8d0f19527bb89f3ecd300c769` | `Mathematiques/manuel-maths/gabarits/objet_standalone.tex` | 0 | 0 | NO | NO |
 | `NSI/gabarits/specimen.tex` | VISUAL_SPECIMEN_TEMPLATE | NO | `a3dccdf4ceb7d315f02242303135b9e229701d4718ff29a5baab6365f23a2397` | — | 0 | 0 | NO | NO |
 | `gabarits/common/chapitre_master.tex` | CHAPTER_RUNTIME_TEMPLATE | YES | `82c0ae2dfd98858c817f30193c7cee6f1f08327fb98f1090c6127902575028c3` | — | 0 | 0 | NO | NO |
-| `gabarits/common/nexus-arbres.sty` | CANONICAL_SUPPORT_STYLE | YES | `7f4b667e2efe29fe1ceaaf0eee84ef824963a7a5ed428984154df734026e0ccc` | — | 0 | 0 | NO | NO |
-| `gabarits/common/nexus-boites.sty` | CANONICAL_SUPPORT_STYLE | YES | `9cdecfd826561817a540d95e4eab38bacfc253a8a932956f58e533d83510d2ec` | — | 13 | 0 | NO | NO |
-| `gabarits/common/nexus-charte.sty` | CANONICAL_STYLE_IMPLEMENTATION | YES | `f4621a63a8f6584c8fbaf16e75c2b647333a24dcdc9be37bcde9b19413d67c23` | — | 23 | 0 | NO | NO |
+| `gabarits/common/nexus-arbres.sty` | CANONICAL_SUPPORT_STYLE | YES | `5569ec0838d22af6e7a7b38a177471d7ba64b6c3f88fa758e4df20e3dedd40f9` | — | 0 | 0 | NO | NO |
+| `gabarits/common/nexus-boites.sty` | CANONICAL_SUPPORT_STYLE | YES | `e2cdfd96d2ac384a7d3f14a3cc0ae67dce585a97a53c2c65c3e62ac544d6fabf` | — | 13 | 0 | NO | NO |
+| `gabarits/common/nexus-charte.sty` | CANONICAL_STYLE_IMPLEMENTATION | YES | `a27c7a003bcd7c89e3341fd5ef90a9c073b05d558230d084fa0b3bad74902113` | — | 23 | 0 | NO | NO |
 | `gabarits/common/nexus-code.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `16e74594ae5108e3326b36f92f75ccdb5b30472dc15134ffe5ff943a2a6b6d91` | — | 1 | 0 | NO | NO |
-| `gabarits/common/nexus-couverture.sty` | CANONICAL_SUPPORT_STYLE | YES | `09ce13686804755341140c45625024d868a45f8a46d73b2f8da3da3b5e4ea3ee` | — | 13 | 0 | NO | NO |
-| `gabarits/common/nexus-decor.sty` | CANONICAL_SUPPORT_STYLE | YES | `bde5267321f2c8b034d06b3913d6589ccb0b96e78091466028b42a6b1a289942` | — | 13 | 0 | NO | NO |
-| `gabarits/common/nexus-exercices.sty` | CANONICAL_SUPPORT_STYLE | YES | `abae58775dc52a29b98a28add1cf6c55404222fc2990b119547f8863358571b7` | — | 13 | 0 | NO | NO |
-| `gabarits/common/nexus-figures-bib.sty` | CANONICAL_SUPPORT_STYLE | YES | `e8fede638c9bd372213cd7ede0d76279106f7a0cc1c9f5f180a01afb197ac4ff` | — | 13 | 0 | NO | NO |
+| `gabarits/common/nexus-couverture.sty` | CANONICAL_SUPPORT_STYLE | YES | `54b30338b4ceeddf23367bf1467616b0603244905b33fa7e8c806175913e8f1b` | — | 13 | 0 | NO | NO |
+| `gabarits/common/nexus-decor.sty` | CANONICAL_SUPPORT_STYLE | YES | `56180b5f03ed4ebccf58059a62c6064e97254316c2ee629b94f0161f025b7b31` | — | 13 | 0 | NO | NO |
+| `gabarits/common/nexus-exercices.sty` | CANONICAL_SUPPORT_STYLE | YES | `530c1f35d41a80e6fb4363396a60b71dba00b3dd8689cd1623ab4a4be93a7942` | — | 13 | 0 | NO | NO |
+| `gabarits/common/nexus-figures-bib.sty` | CANONICAL_SUPPORT_STYLE | YES | `174dc7dd86fafa7d74f32a2cee77cc880cdc25403a4f090259afbbc5e5fc54cb` | — | 13 | 0 | NO | NO |
 | `gabarits/common/nexus-icons.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `42af1195dda223dc642255754ff7a94f1d5add6720e7062883de4c429132cc8b` | — | 1 | 0 | NO | NO |
-| `gabarits/common/nexus-manuel.cls` | CANONICAL_CLASS_IMPLEMENTATION | YES | `e2c68b03c572b6d290b676ca7c90ca5bb6c1f1d796f0351967aaf427cf899ade` | — | 21 | 1 | NO | NO |
-| `gabarits/common/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `98952586570a7a93957c4fbd329efd91005917fb7baccd30fd601aceca3c95ee` | — | 0 | 0 | NO | NO |
-| `gabarits/common/nexus-pages-froides.sty` | CANONICAL_SUPPORT_STYLE | YES | `3acd395c2cf583009be8fd332bc9ab6b657ec1b47c7e09e515be3714c97c6a70` | — | 14 | 0 | NO | NO |
-| `gabarits/common/nexus-pont.sty` | CANONICAL_SUPPORT_STYLE | YES | `2703ad66ef9733c7c45f2176a7c13918a34920f6d4112e70f300d33e8f09d088` | — | 14 | 0 | NO | NO |
+| `gabarits/common/nexus-manuel.cls` | CANONICAL_CLASS_IMPLEMENTATION | YES | `f0dc5a356692e1ea1b587ab9738d1b2b78b594a27a8ed8d0c46ea6767dfd4dc6` | — | 23 | 1 | NO | NO |
+| `gabarits/common/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `04cb45a5f8796d9ce0a25bd2c0f23b190b515056e2f69f5b7eac64b5f0c88f14` | — | 0 | 0 | NO | NO |
+| `gabarits/common/nexus-pages-froides.sty` | CANONICAL_SUPPORT_STYLE | YES | `2b27ed9c641e0c0f0a4855a176197bc01099ada96e7af02f7e39862eeb16b652` | — | 14 | 0 | NO | NO |
+| `gabarits/common/nexus-pont.sty` | CANONICAL_SUPPORT_STYLE | YES | `2d4c8839add6d3e83e9ba6044995bd7e673e2e03a88d7390281d1458281bfe50` | — | 14 | 0 | NO | NO |
 | `gabarits/common/nexus-signatures.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `bbf81c1368d7be1b067597803e1429dd94e19c0585dbf0981d408f8f5ea3cc74` | — | 1 | 0 | NO | NO |
-| `gabarits/maths/nexus-maths.sty` | CANONICAL_DISCIPLINE_ADAPTER | YES | `c51c5b6a6fc330ccf47c0980716719f37073317b91f7233d8cc01f5fe1bed994` | — | 2 | 0 | NO | NO |
-| `gabarits/nsi/nexus-nsi.sty` | CANONICAL_DISCIPLINE_ADAPTER | YES | `ddb6942951050b49582fbebb4668330fb7994e5cc08569e2451b4e39785ebd08` | — | 2 | 0 | NO | NO |
+| `gabarits/maths/nexus-maths.sty` | CANONICAL_DISCIPLINE_ADAPTER | YES | `537ef320e5658026e08f2b7302561d8b53f2958581f4d40b7080f0a41b025883` | — | 2 | 0 | NO | NO |
+| `gabarits/nsi/nexus-nsi.sty` | CANONICAL_DISCIPLINE_ADAPTER | YES | `76c3e49a2be44a39b96d729683a01703c5a2c90560d78c2dca5f81a8ef66982a` | — | 2 | 0 | NO | NO |
 
 ## Duplicatas exacts
 
+- `04cb45a5f8796d9ce0a25bd2c0f23b190b515056e2f69f5b7eac64b5f0c88f14` : `gabarits/common/nexus-margin-rail.tex`, `Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex`, `NSI/gabarits/nexus-margin-rail.tex`
 - `16e74594ae5108e3326b36f92f75ccdb5b30472dc15134ffe5ff943a2a6b6d91` : `gabarits/common/nexus-code.tex`, `Mathematiques/manuel-maths/gabarits/nexus-code.tex`
-- `1b23d537120ebd2437c9f6c59d5b99c24c4ecd1286028b4cc2441eabf0c758d4` : `Mathematiques/manuel-maths/gabarits/nexus-decor.sty`, `NSI/gabarits/nexus-decor.sty`
-- `2185848e26ea5152a1570828c1b5c29d5158dcf38b32702be680c617e9f90d36` : `Mathematiques/manuel-maths/gabarits/nexus-boites-v6.sty`, `NSI/gabarits/nexus-boites-v6.sty`
-- `25b72f131634021353e07500252a5cf69110faa106c670659240b796cd59edda` : `Mathematiques/manuel-maths/gabarits/nexus-exercices-v6.sty`, `NSI/gabarits/nexus-exercices-v6.sty`
+- `2c6aacc7fe27fd43e9b0f7a902543b3e005370d913ee7bf1f626abb1d10bd7e3` : `Mathematiques/manuel-maths/gabarits/nexus-exercices-v6.sty`, `NSI/gabarits/nexus-exercices-v6.sty`
 - `2c7b764764e3db723f752e68e7af5d375171a0f9774f39f749b2598b8a1e931f` : `Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex`, `NSI/gabarits/nexus-figures-nsi.tex`
+- `2ecc021fe98ca3d20e76699252f4864d07996ec50d92af8a46bf2d3cd6670eda` : `Mathematiques/manuel-maths/gabarits/nexus-decor.sty`, `NSI/gabarits/nexus-decor.sty`
 - `42af1195dda223dc642255754ff7a94f1d5add6720e7062883de4c429132cc8b` : `gabarits/common/nexus-icons.tex`, `Mathematiques/manuel-maths/gabarits/nexus-icons.tex`, `NSI/gabarits/nexus-icons.tex`
-- `4ecc02468ab1ab2859d7fe1f1930538ec35a9058dbfab79a1e86269802234751` : `Mathematiques/manuel-maths/gabarits/nexus-pages-froides.sty`, `NSI/gabarits/nexus-pages-froides.sty`
-- `57327021b50fb44434874fb4fe00583ddb2160908ca8379d4d07d670f257685e` : `Mathematiques/manuel-maths/gabarits/nexus-couverture.sty`, `NSI/gabarits/nexus-couverture.sty`
-- `5e1d7fdb258865321ee93a34a41a2de806edd93ad36b256829ed1bce4043a7dc` : `Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls`, `NSI/gabarits/nexus-manuel-v5.cls`
-- `7345dbceca061abe156240c389ccde57508ec4009f4ccf90a06db8c20b6ea65b` : `Mathematiques/manuel-maths/gabarits/nexus-pont-v6.sty`, `NSI/gabarits/nexus-pont-v6.sty`
+- `42deffecf8e0650159de0af4529b032f27b4d904e9b056ec9fc42fbfba101f19` : `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls`, `NSI/gabarits/nexus-manuel.cls`
+- `5481ac50897d8e5017f49b82c01279d1948e6c83f1d1dee2d4ea01e56c3cc714` : `Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls`, `NSI/gabarits/nexus-manuel-v5.cls`
+- `5d478c0ec3701c54d8de961ad9c1c95909d2b2317ca1658a88cb10dd14d3b1a8` : `Mathematiques/manuel-maths/gabarits/nexus-pages-froides.sty`, `NSI/gabarits/nexus-pages-froides.sty`
+- `7debbf9f9b82d7af661898b62b208791b840ce071e79fd340b347c94425d0430` : `Mathematiques/manuel-maths/gabarits/nexus-couverture.sty`, `NSI/gabarits/nexus-couverture.sty`
 - `82c0ae2dfd98858c817f30193c7cee6f1f08327fb98f1090c6127902575028c3` : `gabarits/common/chapitre_master.tex`, `Mathematiques/manuel-maths/gabarits/chapitre_master.tex`
-- `90391485645cb6fa03ae6ffc3b315d612e714b69dcc3c0efd547a7d8fca38137` : `Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty`, `NSI/gabarits/nexus-charte-v6.sty`
-- `90ea5ae521bcf028fbc5fc240639636c24eb2e1cfc934e0af9a2c94ae7269e07` : `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls`, `NSI/gabarits/nexus-manuel.cls`
-- `98952586570a7a93957c4fbd329efd91005917fb7baccd30fd601aceca3c95ee` : `gabarits/common/nexus-margin-rail.tex`, `Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex`, `NSI/gabarits/nexus-margin-rail.tex`
+- `964afdd31c793fbcbd1883b1b75b662f62bbe38458ddaf75b6d7bf61c5598c6e` : `Mathematiques/manuel-maths/gabarits/nexus-pont-v6.sty`, `NSI/gabarits/nexus-pont-v6.sty`
+- `aca44416f30e77ec385d97286028f1894ef5079601f4ff2474349eea4a21efe2` : `Mathematiques/manuel-maths/gabarits/nexus-figures-bib.sty`, `NSI/gabarits/nexus-figures-bib.sty`
 - `bbf81c1368d7be1b067597803e1429dd94e19c0585dbf0981d408f8f5ea3cc74` : `gabarits/common/nexus-signatures.tex`, `Mathematiques/manuel-maths/gabarits/nexus-signatures.tex`, `NSI/gabarits/nexus-signatures.tex`
 - `c9c4c06915ff0cc38ea7393621547a39856705a8d0f19527bb89f3ecd300c769` : `Mathematiques/manuel-maths/gabarits/objet_standalone.tex`, `NSI/gabarits/objet_standalone.tex`
-- `d441187e66d487806714abf7bba768aa61b20c6d18638b39f030e6c6ec190bfa` : `Mathematiques/manuel-maths/gabarits/nexus-figures-bib.sty`, `NSI/gabarits/nexus-figures-bib.sty`
+- `cd59d965d61546cb6fd2afe41183ac091ebb08202630bc8c56771ed3595c4ca9` : `Mathematiques/manuel-maths/gabarits/nexus-boites-v6.sty`, `NSI/gabarits/nexus-boites-v6.sty`
+- `d42b1df562e726f06d78636f4c9c607f57c0ddcd557450f0270af55c8b1d61f8` : `Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty`, `NSI/gabarits/nexus-charte-v6.sty`
 - `de13399037827ab8300953a7f5a46bd9e34d5a634b9d17fe8a128066007a831a` : `Mathematiques/manuel-maths/gabarits/nexus-figures.tex`, `NSI/gabarits/nexus-figures.tex`

@@ -19,10 +19,9 @@
 % ===========================================================================
 % `DIV=6` est écrit, et non plus déduit : typearea ne tabule aucune valeur de
 % DIV pour un corps de 9,5 pt, cherchait donc la sienne en vain, le signalait,
-% puis retombait sur `DIV=calc`. Six est exactement ce que ce calcul donne --
-% \textwidth, \headheight et \footskip sont inchangés au sp près, ce que
-% recompose et vérifie, en composant deux fois le même document,
-% test_the_written_div_gives_exactly_what_the_calculation_gave. L'écrire fixe
+% puis retombait sur `DIV=calc`. Six est exactement ce que ce calcul donne,
+% ce que vérifie, en interrogeant typearea seul,
+% test_the_written_div_is_the_one_the_calculation_gives. L'écrire fixe
 % aussi la mise en page si une version ultérieure de KOMA calculait autrement.
 \ifdefined\nxVBaseCompatibility
   \LoadClass[a4paper,fontsize=9.5pt,DIV=6,twoside,open=right,headings=normal,

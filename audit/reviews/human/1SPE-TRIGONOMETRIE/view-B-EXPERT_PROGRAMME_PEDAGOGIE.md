@@ -14,7 +14,7 @@ Chapitre `1SPE-TRIGONOMETRIE` · manuel `1SPE` (Première, Spécialité mathéma
 
 - L'unite de decision est le CHAPITRE : 10 chapitres x 2 roles = 20 verdicts, pas des centaines de signatures objet par objet.
 - Aucun humain n'a encore approuve ce chapitre : REVIEW_DELTA_BASELINE = NONE. Le perimetre de revue est le CHAPITRE COURANT ENTIER. Les listes ci-dessous dirigent l'attention, elles ne reduisent pas le perimetre.
-- CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (`sha256:a6711d09450570f73b303465e0dbf1e310e77686d28f5bf420a132ac0dae143a`) ; l'approbation graphique releve de la porte D7, independante.
+- CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (`sha256:590269373f7f0589819979a8639273f402b32de7d0d4dda4ac6328d1ee2fb243`) ; l'approbation graphique releve de la porte D7, independante.
 - Verdicts autorises, a rendre dans le packet JSON canonique et jamais dans cette vue : `APPROVED` / `CHANGES_REQUESTED` / `REJECTED`.
 - Cette vue ne porte aucune decision et ne nomme personne : l'assignation du role reste `PENDING_UNASSIGNED`, l'etat du packet reste `PENDING_UNASSIGNED`.
 
@@ -22,9 +22,9 @@ Chapitre `1SPE-TRIGONOMETRIE` · manuel `1SPE` (Première, Spécialité mathéma
 | --- | --- |
 | Objets du chapitre dans le packet | 78 |
 | Empreinte de l'ensemble d'objets | `sha256:b4679995be20574bd17f70368d5afe83fab601caca60bda18c05da8f40eb5fa3` |
-| Empreinte semantique liee a l'approbation | `sha256:a6711d09450570f73b303465e0dbf1e310e77686d28f5bf420a132ac0dae143a` |
-| Empreinte du packet | `sha256:6cfb89291cfc54265fe5bc254a9b741672b98a4fc8e206b2bdee9c72652ce3f7` |
-| Revision du depot gelee dans le packet | `836d1ff0d491c68bbe53d845f77a9b84577eb516` |
+| Empreinte semantique liee a l'approbation | `sha256:590269373f7f0589819979a8639273f402b32de7d0d4dda4ac6328d1ee2fb243` |
+| Empreinte du packet | `sha256:9f11013f2cf2028ac58cf766a7a1a554c940b3063af73dd9ae3d61ac93a93d4e` |
+| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel

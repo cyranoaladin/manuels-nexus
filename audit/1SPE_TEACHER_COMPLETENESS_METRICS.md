@@ -39,5 +39,5 @@ Role de preuve : `SECONDARY_NON_AUTHORITATIVE` (statut `READ`).
 
 | PDF | sha256 | pages | occurrences « bareme » | titres reserves professeur |
 | --- | --- | --- | --- | --- |
-| `Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf` | `2011f4573c64859fbf995325300a78ce5076287024131a5169119e90304ab099` | 363 | 0 | 0 |
-| `Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf` | `1282119a263e71e366eb6ca23736350c22fcd8bd1af9b7b8d19d0e021a8cb7ae` | 635 | 77 | 10 |
+| `Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf` | `39c6a8541f4b35d8da9f4cc18810f79bc364d00dab08c0c50261c387d0d42259` | 355 | 0 | 0 |
+| `Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf` | `dc5f2575f5f7cd0bd9e5654ac20291e6c3b03410caa150959e28ab6cdd3d059c` | 627 | 122 | 10 |

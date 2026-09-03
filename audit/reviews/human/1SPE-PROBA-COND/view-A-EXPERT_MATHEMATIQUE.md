@@ -14,7 +14,7 @@ Chapitre `1SPE-PROBA-COND` · manuel `1SPE` (Première, Spécialité mathématiq
 
 - L'unite de decision est le CHAPITRE : 10 chapitres x 2 roles = 20 verdicts, pas des centaines de signatures objet par objet.
 - Aucun humain n'a encore approuve ce chapitre : REVIEW_DELTA_BASELINE = NONE. Le perimetre de revue est le CHAPITRE COURANT ENTIER. Les listes ci-dessous dirigent l'attention, elles ne reduisent pas le perimetre.
-- CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (`sha256:f92f4ce599c27d295f5108e529d2cb2bbe2071d60756f2bcfd5ddd22c5f4e31e`) ; l'approbation graphique releve de la porte D7, independante.
+- CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (`sha256:158783b246ae18c6b799fef38e07ea3e2aadb4b4fc7226fe8cd81adf30d47d9b`) ; l'approbation graphique releve de la porte D7, independante.
 - Verdicts autorises, a rendre dans le packet JSON canonique et jamais dans cette vue : `APPROVED` / `CHANGES_REQUESTED` / `REJECTED`.
 - Cette vue ne porte aucune decision et ne nomme personne : l'assignation du role reste `PENDING_UNASSIGNED`, l'etat du packet reste `PENDING_UNASSIGNED`.
 
@@ -22,9 +22,9 @@ Chapitre `1SPE-PROBA-COND` · manuel `1SPE` (Première, Spécialité mathématiq
 | --- | --- |
 | Objets du chapitre dans le packet | 148 |
 | Empreinte de l'ensemble d'objets | `sha256:129c6e2442c6787ee3f96e1cfe6568bd879542ad9e7b78b876b662c6a7055982` |
-| Empreinte semantique liee a l'approbation | `sha256:f92f4ce599c27d295f5108e529d2cb2bbe2071d60756f2bcfd5ddd22c5f4e31e` |
-| Empreinte du packet | `sha256:935e32889376c962b197c0e3dba70b26d68daf768c5ea861c2240a61e9af91ba` |
-| Revision du depot gelee dans le packet | `836d1ff0d491c68bbe53d845f77a9b84577eb516` |
+| Empreinte semantique liee a l'approbation | `sha256:158783b246ae18c6b799fef38e07ea3e2aadb4b4fc7226fe8cd81adf30d47d9b` |
+| Empreinte du packet | `sha256:35b04f69f493ae60412bd28faee1073b831ada86ff52c47ffe06614ffbdb56ae` |
+| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel
@@ -167,11 +167,11 @@ Ces mesures viennent de `audit/PUBLISH_READINESS_CHAPTER_MATRIX.json`. Elles ne 
 
 | Mesure | Valeur |
 | --- | --- |
-| Etat machine vertical | `MACHINE_REVIEW_COMPLETE` |
+| Etat machine vertical | `INCOMPLETE` |
 | Cloture humaine | `PENDING` |
 | Objets passes par l'oracle | 117 reussites, 0 echecs, 7 en science humaine requise, 26 en revue manuelle |
 | Attendus officiels obligatoires | 8 rattaches sur 8, 0 manquants, 0 hors annee |
-| Sujets d'evaluation | 2 sujets, 2 corriges, statut `COMPLETE` |
+| Sujets d'evaluation | 2 sujets, 2 corriges, statut `GAP` |
 | QCM | 18 questions, capacites evaluees C1, C2, C3, C4, C5 |
 | Relation exercice/corrige | ANSWER_COVERAGE_ESTABLISHED : 50 ; 0 echecs de cardinalite |
 
