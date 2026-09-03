@@ -1,0 +1,327 @@
+% nexus-arbres.sty — Arbres pondérés Nexus Réussite (composant canonique)
+%
+% POURQUOI CE MODULE
+% Sept corrigés de 1SPE-PROBA-COND répondaient à « Construire l'arbre pondéré »
+% par une description textuelle. Un manuel premium doit MONTRER l'arbre. La
+% tentation était alors de dessiner sept figures artisanales : sept géométries,
+% sept jeux de styles, sept occasions de faire diverger la charte et de laisser
+% passer une étiquette mal appariée. Ce module fournit au contraire UN SEUL
+% composant paramétré : l'auteur déclare les nœuds et leurs valeurs, le module
+% calcule la mise en page et applique la charte.
+%
+% CE QU'IL GARANTIT
+%   * la disposition verticale est CALCULÉE (les feuilles occupent des rangs
+%     consécutifs, un nœud interne se place à la moyenne de ses enfants) : elle
+%     ne peut donc pas être réglée à la main figure par figure, ni dériver ;
+%   * les colonnes « événement » et « probabilité du chemin » sont alignées sur
+%     la largeur réelle mesurée du contenu : deux étiquettes ne peuvent pas se
+%     chevaucher, quelle que soit leur longueur ;
+%   * la figure est composée dans une boîte mesurée puis centrée sur exactement
+%     \linewidth, et réduite si elle dépasse : aucun tracé ne peut sortir de la
+%     zone de texte ;
+%   * arbres partiels (une seule branche développée) et arbres profonds sont
+%     gérés par la même mécanique que les arbres binaires complets.
+%
+% API
+%   \begin{nxarbreproba}[<options>]
+%     \nxarbreracine{<id>}
+%     \nxarbrenoeud{<id>}{<id parent>}{<étiquette>}{<probabilité>}
+%     \nxarbrefeuille{<id>}{<id parent>}{<étiquette>}{<probabilité>}%
+%                    {<événement du chemin>}{<probabilité du chemin>}
+%   \end{nxarbreproba}
+%
+%   Les identifiants sont libres (alphanumériques, sans espace) ; un nœud doit
+%   être déclaré APRÈS son parent. L'ordre de déclaration fixe l'ordre des
+%   feuilles de haut en bas. Les deux derniers arguments de \nxarbrefeuille
+%   peuvent rester vides (branche laissée non développée par l'énoncé).
+%
+%   Options (clefs=valeurs) :
+%     niveau=<nombre en mm>   écart horizontal entre deux niveaux   (24)
+%     feuille=<nombre en mm>  écart vertical entre deux feuilles    (13)
+%     ecart=<longueur>        blanc entre les colonnes de droite    (3mm)
+%     police=<commande>       corps des étiquettes d'événement      (\small)
+%     police probabilite=<commande>  corps des probabilités  (\footnotesize)
+%     tikz={<options tikz>}   options passées au tikzpicture        (vide)
+%
+% CHARTE
+%   Aucune couleur nouvelle : encre (structure), chapcolor (probabilités,
+%   couleur d'identité de la discipline). Traits et corps repris de
+%   nexus-figures-bib.sty (\figArbreProba, \figCercleTrigo) pour que les arbres
+%   appartiennent visiblement à la même famille de figures.
+%
+% DEUX VOIES DE CHARGEMENT
+%   1. \RequirePackage depuis nexus-charte.sty — la voie nominale, celle de
+%      l'assemblage des manuels ;
+%   2. \input depuis le corps d'un document — la voie de l'enveloppe de
+%      contrôle R6 (scripts/check_latex.py, \documentclass{gabarits/nexus-manuel}),
+%      qui compile un objet isolé SANS charger la charte. Un objet qui n'y
+%      compile plus est un objet que le gate ne peut plus attester ; le module
+%      accepte donc d'être chargé après \begin{document}, où les commandes
+%      réservées au préambule sont interdites. Ses trois dépendances
+%      (etoolbox, graphicx, tikz) sont alors déjà chargées par la classe.
+% Idempotence : un second chargement ne doit pas redéclarer l'environnement.
+\ifcsname nxarbreproba\endcsname\expandafter\endinput\fi
+% \NeedsTeXFormat, \ProvidesPackage et \RequirePackage sont réservés au
+% préambule : on ne les appelle que lorsqu'on y est effectivement.
+\ifx\NeedsTeXFormat\@notprerr\else
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{nexus-arbres}[2026/09/03 v1.0 Arbres ponderes Nexus - Canonique]
+\RequirePackage{etoolbox}
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\fi
+\@ifundefined{csuse}{\PackageError{nexus-arbres}%
+  {etoolbox, graphicx et tikz doivent etre charges avant nexus-arbres}%
+  {Charger la charte, ou la classe nexus-manuel, avant cet \string\input.}}{}
+\usetikzlibrary{calc,positioning}
+
+% ===========================================================================
+%  1. RÉGLAGES
+% ===========================================================================
+\newlength{\nxArbreEcart}
+\newlength{\nx@arb@lw}      % largeur max d'une étiquette de feuille
+\newlength{\nx@arb@ew}      % largeur max d'une étiquette d'événement
+\newlength{\nx@arb@tw}      % mesure courante
+\newlength{\nx@arb@colE}    % décalage de la colonne « événement »
+\newlength{\nx@arb@colV}    % décalage de la colonne « probabilité du chemin »
+\newcount\nx@arb@maxdep
+\newsavebox{\nx@arb@box}
+\newsavebox{\nx@arb@scratch}
+
+\pgfkeys{%
+  /nexus/arbre/.cd,
+  niveau/.store in=\nxArbreDx,
+  feuille/.store in=\nxArbreDy,
+  ecart/.code={\setlength{\nxArbreEcart}{#1}},
+  police/.store in=\nxArbrePolice,
+  police probabilite/.store in=\nxArbrePoliceProba,
+  tikz/.store in=\nxArbreTikz,
+}
+\newcommand{\nx@arb@defauts}{%
+  \pgfkeys{/nexus/arbre/.cd,
+    niveau=24, feuille=13, ecart=4mm,
+    police=\small, police probabilite=\footnotesize, tikz={}}%
+}
+
+% ===========================================================================
+%  2. COLLECTE DES DÉCLARATIONS
+% ===========================================================================
+% Deux listes : l'ordre de déclaration (dessin) et son inverse (mise en page
+% ascendante, où un parent n'est traité qu'une fois tous ses enfants placés).
+\newcommand{\nx@arb@ids}{}
+\newcommand{\nx@arb@rev}{}
+
+\newcommand{\nx@arb@push}[1]{%
+  \ifdefempty{\nx@arb@ids}{\gdef\nx@arb@ids{#1}}%
+    {\xdef\nx@arb@ids{\nx@arb@ids,#1}}%
+  \ifdefempty{\nx@arb@rev}{\gdef\nx@arb@rev{#1}}%
+    {\xdef\nx@arb@rev{#1,\nx@arb@rev}}%
+}
+
+% Efface l'état de l'arbre précédent : sans cela, un identifiant réutilisé
+% hériterait de ses enfants d'hier et la mise en page serait fausse en silence.
+% L'effacement doit être GLOBAL, comme les définitions qu'il annule : un
+% \csundef local à l'itération de \foreach serait annulé en sortant du groupe
+% et laisserait exactement l'état fantôme qu'il prétend supprimer.
+\newcommand{\nx@arb@undef}[1]{%
+  \global\expandafter\let\csname #1\endcsname\undefined}
+\newcommand{\nx@arb@purge}{%
+  \ifdefempty{\nx@arb@ids}{}{%
+    \foreach \nxid in \nx@arb@ids {%
+      \nx@arb@undef{nx@arb@par@\nxid}\nx@arb@undef{nx@arb@lab@\nxid}%
+      \nx@arb@undef{nx@arb@pro@\nxid}\nx@arb@undef{nx@arb@evt@\nxid}%
+      \nx@arb@undef{nx@arb@val@\nxid}\nx@arb@undef{nx@arb@dep@\nxid}%
+      \nx@arb@undef{nx@arb@y@\nxid}\nx@arb@undef{nx@arb@kid@\nxid}%
+      \nx@arb@undef{nx@arb@sum@\nxid}\nx@arb@undef{nx@arb@cnt@\nxid}%
+    }%
+  }%
+  \gdef\nx@arb@ids{}\gdef\nx@arb@rev{}%
+}
+
+\newcommand{\nxarbreracine}[1]{%
+  \nx@arb@push{#1}%
+  \csgdef{nx@arb@par@#1}{}\csgdef{nx@arb@lab@#1}{}%
+  \csgdef{nx@arb@pro@#1}{}\csgdef{nx@arb@evt@#1}{}%
+  \csgdef{nx@arb@val@#1}{}\csgdef{nx@arb@dep@#1}{0}%
+}
+
+\newcommand{\nx@arb@noeud}[6]{%
+  \nx@arb@push{#1}%
+  \csgdef{nx@arb@par@#1}{#2}\csgdef{nx@arb@lab@#1}{#3}%
+  \csgdef{nx@arb@pro@#1}{#4}\csgdef{nx@arb@evt@#1}{#5}%
+  \csgdef{nx@arb@val@#1}{#6}%
+  \csgdef{nx@arb@kid@#2}{1}%
+  \csxdef{nx@arb@dep@#1}{\the\numexpr\csuse{nx@arb@dep@#2}+1\relax}%
+  \ifnum\csuse{nx@arb@dep@#1}>\nx@arb@maxdep\relax
+    \global\nx@arb@maxdep=\csuse{nx@arb@dep@#1}\relax
+  \fi
+}
+\newcommand{\nxarbrenoeud}[4]{\nx@arb@noeud{#1}{#2}{#3}{#4}{}{}}
+\newcommand{\nxarbrefeuille}[6]{\nx@arb@noeud{#1}{#2}{#3}{#4}{#5}{#6}}
+
+% ===========================================================================
+%  3. MISE EN PAGE — rangs des feuilles, moyenne des enfants
+% ===========================================================================
+\newcommand{\nx@arb@place}{%
+  \gdef\nx@arb@slot{0}%
+  \foreach \nxid in \nx@arb@rev {%
+    \ifcsname nx@arb@kid@\nxid\endcsname
+      \edef\nx@arb@a{\csuse{nx@arb@sum@\nxid}}%
+      \edef\nx@arb@b{\csuse{nx@arb@cnt@\nxid}}%
+      \pgfmathsetmacro{\nx@arb@ytmp}{\nx@arb@a/\nx@arb@b}%
+    \else
+      \pgfmathsetmacro{\nx@arb@ytmp}{\nx@arb@slot}%
+      \xdef\nx@arb@slot{\the\numexpr\nx@arb@slot+1\relax}%
+    \fi
+    \csxdef{nx@arb@y@\nxid}{\nx@arb@ytmp}%
+    \edef\nx@arb@p{\csuse{nx@arb@par@\nxid}}%
+    \ifdefempty{\nx@arb@p}{}{%
+      \ifcsname nx@arb@sum@\nx@arb@p\endcsname\else
+        \csgdef{nx@arb@sum@\nx@arb@p}{0}\csgdef{nx@arb@cnt@\nx@arb@p}{0}%
+      \fi
+      \edef\nx@arb@a{\csuse{nx@arb@sum@\nx@arb@p}}%
+      \pgfmathsetmacro{\nx@arb@stmp}{\nx@arb@a+\nx@arb@ytmp}%
+      \csxdef{nx@arb@sum@\nx@arb@p}{\nx@arb@stmp}%
+      \csxdef{nx@arb@cnt@\nx@arb@p}{%
+        \the\numexpr\csuse{nx@arb@cnt@\nx@arb@p}+1\relax}%
+    }%
+  }%
+}
+
+% Largeurs réelles : les colonnes de droite sont calées sur le contenu le plus
+% large, jamais sur une valeur devinée. C'est ce qui rend le chevauchement
+% structurellement impossible plutôt que simplement improbable.
+\newcommand{\nx@arb@mesure}{%
+  \global\nx@arb@lw=0pt \global\nx@arb@ew=0pt
+  \foreach \nxid in \nx@arb@ids {%
+    \ifcsname nx@arb@kid@\nxid\endcsname\else
+      \settowidth{\nx@arb@tw}{\nxArbrePolice\csuse{nx@arb@lab@\nxid}}%
+      \ifdim\nx@arb@tw>\nx@arb@lw \global\nx@arb@lw=\nx@arb@tw \fi
+      \settowidth{\nx@arb@tw}{\nxArbrePoliceProba\csuse{nx@arb@evt@\nxid}}%
+      \ifdim\nx@arb@tw>\nx@arb@ew \global\nx@arb@ew=\nx@arb@tw \fi
+    \fi
+  }%
+  \global\nx@arb@colE=\dimexpr0.5\nx@arb@lw+\nxArbreEcart\relax
+  \global\nx@arb@colV=\dimexpr\nx@arb@colE+\nx@arb@ew+\nxArbreEcart\relax
+}
+
+% ===========================================================================
+%  4. TRACÉ
+% ===========================================================================
+\newcommand{\nx@arb@coord}[1]{%
+  ({\csuse{nx@arb@dep@#1}*\nxArbreDx},{\csuse{nx@arb@y@#1}*\nxArbreDy})}
+
+\newcommand{\nx@arb@trace}{%
+  \global\setbox\nx@arb@box=\hbox{%
+    \begin{tikzpicture}[x=1mm, y=1mm, line cap=round,
+      nxaNoeud/.style={font=\nxArbrePolice, color=encre,
+        inner sep=1.2pt, minimum size=3.2mm},
+      nxaRacine/.style={circle, fill=encre!55, inner sep=0pt,
+        minimum size=2.4pt},
+      nxaBranche/.style={draw=encre!60, line width=0.7pt},
+      nxaProbaHaut/.style={midway, above, inner sep=1.6pt,
+        font=\nxArbrePoliceProba, color=chapcolor},
+      nxaProbaBas/.style={midway, below, inner sep=1.6pt,
+        font=\nxArbrePoliceProba, color=chapcolor},
+      nxaEvenement/.style={anchor=west, inner sep=0pt,
+        font=\nxArbrePoliceProba, color=encre},
+      nxaValeur/.style={anchor=west, inner sep=0pt,
+        font=\nxArbrePoliceProba, color=chapcolor},
+      \nxArbreTikz]
+      % 4.1 nœuds
+      \foreach \nxid in \nx@arb@ids {%
+        \edef\nx@arb@p{\csuse{nx@arb@par@\nxid}}%
+        \ifdefempty{\nx@arb@p}%
+          {\node[nxaRacine] (nxa-\nxid) at \nx@arb@coord{\nxid} {};}%
+          {\node[nxaNoeud] (nxa-\nxid) at \nx@arb@coord{\nxid}
+             {\csuse{nx@arb@lab@\nxid}};}%
+      }%
+      % 4.2 branches et probabilités conditionnelles
+      % L'étiquette reste horizontale (usage des manuels français) et se pose
+      % du côté extérieur de la branche : au-dessus si la branche monte, en
+      % dessous si elle descend. Deux branches sœurs écartent donc leurs
+      % étiquettes au lieu de les rapprocher.
+      \foreach \nxid in \nx@arb@ids {%
+        \edef\nx@arb@p{\csuse{nx@arb@par@\nxid}}%
+        \ifdefempty{\nx@arb@p}{}{%
+          \edef\nx@arb@ya{\csuse{nx@arb@y@\nxid}}%
+          \edef\nx@arb@yb{\csuse{nx@arb@y@\nx@arb@p}}%
+          \ifdim\nx@arb@ya pt<\nx@arb@yb pt
+            \draw[nxaBranche] (nxa-\nx@arb@p) -- (nxa-\nxid)
+              node[nxaProbaBas] {\csuse{nx@arb@pro@\nxid}};%
+          \else
+            \draw[nxaBranche] (nxa-\nx@arb@p) -- (nxa-\nxid)
+              node[nxaProbaHaut] {\csuse{nx@arb@pro@\nxid}};%
+          \fi
+        }%
+      }%
+      % 4.3 événements-feuilles et probabilités de chemin
+      \foreach \nxid in \nx@arb@ids {%
+        \ifcsname nx@arb@kid@\nxid\endcsname\else
+          \ifcsempty{nx@arb@evt@\nxid}{}{%
+            \node[nxaEvenement, xshift=\nx@arb@colE]
+              at ({\the\nx@arb@maxdep*\nxArbreDx},
+                  {\csuse{nx@arb@y@\nxid}*\nxArbreDy})
+              {\csuse{nx@arb@evt@\nxid}};%
+          }%
+          \ifcsempty{nx@arb@val@\nxid}{}{%
+            \node[nxaValeur, xshift=\nx@arb@colV]
+              at ({\the\nx@arb@maxdep*\nxArbreDx},
+                  {\csuse{nx@arb@y@\nxid}*\nxArbreDy})
+              {\csuse{nx@arb@val@\nxid}};%
+          }%
+        \fi
+      }%
+    \end{tikzpicture}%
+  }%
+}
+
+% La figure occupe exactement \linewidth et rien de plus : si la boîte mesurée
+% déborde (étiquettes longues, arbre profond, colonne étroite), elle est
+% réduite au lieu de mordre sur la marge.
+%
+% Une réduction silencieuse serait cependant un piège : sous un certain
+% facteur, les fractions tombent sous le seuil de lisibilité à l'impression et
+% l'arbre reste « bien mis en page » tout en étant illisible. La réduction est
+% donc bornée par un avertissement de compilation, qui nomme la cause et la
+% correction attendue.
+\def\nxArbreSeuilLisibilite{0.85}
+\newcommand{\nx@arb@sortie}{%
+  \par\addvspace{\medskipamount}\noindent
+  \ifdim\wd\nx@arb@box>\linewidth
+    \setlength{\nx@arb@tw}{\wd\nx@arb@box}%
+    \pgfmathsetmacro{\nx@arb@ratio}{\linewidth/\nx@arb@tw}%
+    \ifdim\nx@arb@ratio pt<\nxArbreSeuilLisibilite pt
+      \PackageWarning{nexus-arbres}{%
+        Arbre reduit au facteur \nx@arb@ratio\space pour tenir dans
+        \the\linewidth. Sous \nxArbreSeuilLisibilite, les etiquettes
+        deviennent illisibles a l'impression : elargir la colonne, ou
+        reduire l'option << niveau >>%
+      }%
+    \fi
+    \makebox[\linewidth]{\resizebox{\linewidth}{!}{\usebox{\nx@arb@box}}}%
+  \else
+    \makebox[\linewidth]{\usebox{\nx@arb@box}}%
+  \fi
+  \par\addvspace{\medskipamount}%
+}
+
+% ===========================================================================
+%  5. ENVIRONNEMENT
+% ===========================================================================
+% Le corps n'est que déclaratif : il est exécuté dans une boîte jetée, si bien
+% qu'aucune espace de mise en forme ne peut se glisser dans le flux du texte.
+\NewDocumentEnvironment{nxarbreproba}{O{} +b}{%
+  \nx@arb@purge
+  \global\nx@arb@maxdep=0
+  \nx@arb@defauts
+  \pgfkeys{/nexus/arbre/.cd,#1}%
+  \begingroup\setbox\nx@arb@scratch=\vbox{#2}\endgroup
+  \nx@arb@place
+  \nx@arb@mesure
+  \nx@arb@trace
+  \nx@arb@sortie
+  \nx@arb@purge
+}{}
+
+\endinput
