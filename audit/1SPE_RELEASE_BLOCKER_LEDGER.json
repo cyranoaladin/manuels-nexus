@@ -146,12 +146,19 @@
       "closes_with": "MACHINE",
       "discovered": "2026-09-03",
       "evidence": {
-        "head": "7a0803b4f78f74aed239172ef9248f583d5dadb8",
+        "closes_with": "REAL_HUMAN_DECISION_REQUIRED",
+        "head": "b36836d4e814871d99a42df1de3fc53c56afc043",
         "receipt_page_counts": {
           "eleve": 357,
           "professeur": 629
         },
-        "receipt_source_sha": "12c67fb6fadc7e11a88464d19f2a9171a59504e4"
+        "receipt_source_sha": "12c67fb6fadc7e11a88464d19f2a9171a59504e4",
+        "still_attested_builds": [
+          "1SPE/eleve : 363 pages",
+          "1SPE/professeur : 635 pages"
+        ],
+        "the_gesture_that_unblocks_it": "python3 scripts/build_manifest.py --invalidate-stale --reason '<pourquoi>' --approved-by '<nom>' puis python3 Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual 1SPE --variant <variante> --record-observed",
+        "why_the_machine_cannot_close_it": "Le manifeste de build atteste encore des constructions que la décision humaine du 2026-09-03 déclare superseded, et son source_digest ne décrit plus les sources courantes. `build_manifest.py --invalidate-stale` exige une justification et un approbateur humains, refuse en CI et exige un dépôt propre : c'est une décision, pas un calcul."
       },
       "meaning": "audit/1SPE_PRINT_CANDIDATE_BUILD_RECEIPT.json decrit un autre SHA que HEAD et annonce des compteurs de pages et un nombre de signets que les builds courants contredisent. Un recu perime qui se presente comme courant est pire qu'un recu absent.",
       "scope": "1SPE_RELEASE_BLOCKER",
@@ -236,7 +243,7 @@
   "generated_by": "scripts/build_1spe_release_blocker_ledger.py",
   "schema_version": 1,
   "scope_rule": "n'entre au registre que ce qui peut affecter le contenu semantique, la preuve machine, la revue humaine, la fabrication, le rendu ou l'artefact d'impression du 1SPE ; le critere est l'usage, jamais le repertoire",
-  "source_sha": "7a0803b4f78f74aed239172ef9248f583d5dadb8",
+  "source_sha": "b36836d4e814871d99a42df1de3fc53c56afc043",
   "summary": {
     "CLOSED": 5,
     "HUMAN_DECISION_PENDING": 3,

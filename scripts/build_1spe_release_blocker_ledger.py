@@ -249,6 +249,24 @@ def _check_receipt_is_stale() -> dict[str, Any]:
         for row in variants:
             if isinstance(row, dict):
                 counts[row.get("variant")] = row.get("page_count")
+    # Le recu ne PEUT pas etre rafraichi par la machine seule, et il faut dire
+    # pourquoi plutot que de laisser croire a un oubli. `--record-observed`
+    # derive son recu du manifeste de build ; celui-ci atteste encore les deux
+    # constructions de 363 et 635 pages, que la decision humaine du 3 septembre
+    # declare superseded. Ecarter une attestation deja portee au manifeste
+    # demande, par construction de `build_manifest.py`, une justification et un
+    # approbateur HUMAINS -- et le nom d'un approbateur ne s'invente pas.
+    manifest = load_json(ROOT / "audit/BUILD_MANIFEST.json") or {}
+    recorded = manifest.get("builds")
+    attested = (
+        [
+            f"{row.get('manual')}/{row.get('variant')} : {row.get('page_count')} pages"
+            for row in recorded
+            if isinstance(row, dict)
+        ]
+        if isinstance(recorded, list)
+        else []
+    )
     return {
         "verifiable": True,
         "still_true": declared != current,
@@ -256,6 +274,23 @@ def _check_receipt_is_stale() -> dict[str, Any]:
             "receipt_source_sha": declared,
             "head": current,
             "receipt_page_counts": counts,
+            "why_the_machine_cannot_close_it": (
+                "Le manifeste de build atteste encore des constructions que la "
+                "décision humaine du 2026-09-03 déclare superseded, et son "
+                "source_digest ne décrit plus les sources courantes. "
+                "`build_manifest.py --invalidate-stale` exige une justification "
+                "et un approbateur humains, refuse en CI et exige un dépôt "
+                "propre : c'est une décision, pas un calcul."
+            ),
+            "still_attested_builds": attested,
+            "the_gesture_that_unblocks_it": (
+                "python3 scripts/build_manifest.py --invalidate-stale "
+                "--reason '<pourquoi>' --approved-by '<nom>' "
+                "puis python3 Mathematiques/manuel-maths/scripts/"
+                "assemble_manuel.py --manual 1SPE --variant <variante> "
+                "--record-observed"
+            ),
+            "closes_with": "REAL_HUMAN_DECISION_REQUIRED",
         },
     }
 
