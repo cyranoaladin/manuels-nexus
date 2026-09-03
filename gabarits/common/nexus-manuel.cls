@@ -534,6 +534,16 @@
 
 % Usage : \ouverturechapitre[motif]{Titre}{capacites}{accroche}{temps}
 \newcommand{\ouverturechapitre}[5][motifGenerique]{%
+  % La coupure vient AVANT toute autre chose, et notamment avant
+  % \addcontentsline. Sans elle, TeX composait encore la derniere page du
+  % chapitre precedent au moment ou l'entree de sommaire etait ecrite : le
+  % sommaire et les signets annonçaient donc une page qui n'etait pas
+  % l'ouverture. Trois chapitres sur cinq mesurables cote eleve et six sur
+  % sept cote professeur portaient un folio faux d'exactement une page.
+  % L'ouverture occupait deja une page a elle seule -- la coupure survenait
+  % simplement trop tard : la pagination est donc inchangee, seul le folio
+  % enregistre devient exact.
+  \clearpage
   % La page d'ouverture porte sa propre rubrique. Sans cette ligne elle
   % heritait de la derniere rubrique du chapitre PRECEDENT : huit ouvertures
   % sur onze affichaient l'onglet « Remediation ».
