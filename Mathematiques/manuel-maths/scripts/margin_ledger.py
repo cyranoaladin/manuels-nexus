@@ -56,14 +56,21 @@ FORM_BBOX_ROUNDING_TOLERANCE_SP = 32
 # Les boites de page en font partie depuis que la conversion pt -> bp de la
 # classe est une division d'entiers (\nxDimEnBp), exacte au demi-sp.
 MARGIN_GEOMETRY_TOLERANCE_SP = 1
-# Comparaison d'une POSITION RENDUE a une coordonnee exacte. Elle traverse
-# deux nombres arrondis independamment -- le coin du /BBox du Form et la
-# translation du « cm » qui le place -- plus le coin de la page composee,
-# exact au demi-sp. La borne est donc 2 x 32,89 + 0,5, arrondie a l'entier
-# superieur : elle n'est pas choisie, elle est derivee, et elle vaut 1 mm /
+# Comparaison d'une POSITION RENDUE a une coordonnee exacte, LORSQUE le PDF a
+# ete ecrit par le moteur. Elle traverse alors deux nombres arrondis
+# independamment -- le coin du /BBox du Form et la translation du « cm » qui le
+# place -- plus le coin de la page composee, exact au demi-sp. La borne vaut
+# donc 2 x 32,89 + 0,5, arrondie a l'entier superieur : elle n'est pas choisie,
+# elle est derivee de la precision d'ecriture du moteur, et elle vaut 1 mm /
 # 15 000. Toute derive reelle du compositeur est de l'ordre du millimetre et
 # reste donc detectee.
-RENDERED_POSITION_TOLERANCE_SP = 67
+#
+# Ce n'est PAS la valeur par defaut. Un PDF ecrit avec plus de decimales -- une
+# fixture, un post-traitement -- se compare au sp pres, et c'est ce que
+# `verify_margin_layout` exige tant qu'on ne lui dit pas le contraire. La
+# tolerance est un argument, pas une constante globale : celui qui la relache
+# doit dire pourquoi, a l'appel.
+ENGINE_WRITTEN_POSITION_TOLERANCE_SP = 67
 MARGIN_GAP_SP = 6 * 65536
 LINK_RECT_TOLERANCE_BP = 0.002
 COMMAND_TIMEOUT_SECONDS = 20
@@ -1336,6 +1343,7 @@ def verify_margin_layout(
     *,
     runner: Any = None,
     environment: Mapping[str, str] | None = None,
+    rendered_position_tolerance_sp: int = MARGIN_GEOMETRY_TOLERANCE_SP,
 ) -> MarginVerificationResult:
     """Verify contract, identity and physical geometry of every marginal note.
 
@@ -1345,6 +1353,12 @@ def verify_margin_layout(
     coordinates are converted through the page's positive /UserUnit. Nonzero
     /Rotate is intentionally rejected by this first closed coordinate
     convention.
+
+    Rendered positions are compared to the scaled point by default. A PDF
+    written by the TeX engine cannot hold that bound -- it emits numbers with
+    three decimal digits, so one ulp is already 65,78 sp. Such a caller passes
+    `rendered_position_tolerance_sp=ENGINE_WRITTEN_POSITION_TOLERANCE_SP`, and
+    says so at the call site rather than loosening the check for everyone.
     """
 
     pdf_file = Path(pdf)
@@ -1595,10 +1609,10 @@ def verify_margin_layout(
                 for note_id in page_note_ids:
                     box = actual_bboxes[note_id]
                     if (
-                        box[0] < safe_box[0] - RENDERED_POSITION_TOLERANCE_SP
-                        or box[1] < safe_box[1] - RENDERED_POSITION_TOLERANCE_SP
-                        or box[2] > safe_box[2] + RENDERED_POSITION_TOLERANCE_SP
-                        or box[3] > safe_box[3] + RENDERED_POSITION_TOLERANCE_SP
+                        box[0] < safe_box[0] - rendered_position_tolerance_sp
+                        or box[1] < safe_box[1] - rendered_position_tolerance_sp
+                        or box[2] > safe_box[2] + rendered_position_tolerance_sp
+                        or box[3] > safe_box[3] + rendered_position_tolerance_sp
                     ):
                         _reject(f"rendered note {note_id} escapes the effective outer rail")
                     for obstacle in stable_page["obstacles"]:
@@ -1616,13 +1630,13 @@ def verify_margin_layout(
                     expected_box = ledger_by_id[note_id]["bbox_sp"]
                     if any(
                         abs(actual - Fraction(expected))
-                        > RENDERED_POSITION_TOLERANCE_SP
+                        > rendered_position_tolerance_sp
                         for actual, expected in zip(box, expected_box, strict=True)
                     ):
                         _reject(
-                            f"rendered note {note_id} differs from ledger "
-                            "coordinates by more than the engine's own writing "
-                            f"precision ({RENDERED_POSITION_TOLERANCE_SP}sp)"
+                            f"rendered note {note_id} differs by more than "
+                            f"{rendered_position_tolerance_sp}sp "
+                            "from ledger coordinates"
                         )
     except pikepdf.PdfError as exc:
         raise MarginLedgerError(f"cannot inspect PDF: {exc}") from exc

@@ -471,8 +471,17 @@ def test_odd_and_even_pages_measure_rail_obstacle_and_links_in_one_frame(
     ledger = ledger_module.reconstruct_margin_ledger(
         build["pdf"], capture, stable, build["links"]
     )
+    # Le PDF vient du moteur : il ecrit ses nombres a trois decimales, et la
+    # borne au sp pres lui est physiquement inaccessible. On le DIT ici, a
+    # l'appel, plutot que de relacher le controle pour tout le monde.
     result = ledger_module.verify_margin_layout(
-        build["pdf"], capture, stable, ledger
+        build["pdf"],
+        capture,
+        stable,
+        ledger,
+        rendered_position_tolerance_sp=(
+            ledger_module.ENGINE_WRITTEN_POSITION_TOLERANCE_SP
+        ),
     )
 
     assert result.passed is True
@@ -526,14 +535,18 @@ def test_the_rendered_position_tolerance_is_the_engines_writing_precision(
     # Un seul nombre arrondi : le coin du /BBox du Form.
     assert ledger_module.FORM_BBOX_ROUNDING_TOLERANCE_SP == int(half_ulp_sp)
     # Deux nombres arrondis plus le demi-sp de la conversion pt -> bp.
-    assert ledger_module.RENDERED_POSITION_TOLERANCE_SP == math.ceil(
+    assert ledger_module.ENGINE_WRITTEN_POSITION_TOLERANCE_SP == math.ceil(
         2 * half_ulp_sp + Fraction(1, 2)
     )
     # Elle reste très inférieure au dixième de millimètre : une dérive de
     # repère, qui vaut des millimètres, ne peut pas s'y cacher.
-    assert ledger_module.RENDERED_POSITION_TOLERANCE_SP < ONE_MM_SP / 100
-    # Et les comparaisons entre quantités exactes n'ont, elles, pas de marge.
+    assert ledger_module.ENGINE_WRITTEN_POSITION_TOLERANCE_SP < ONE_MM_SP / 100
+    # Et le DÉFAUT reste le sp : la borne du moteur ne se prend qu'à l'appel.
     assert ledger_module.MARGIN_GEOMETRY_TOLERANCE_SP == 1
+    import inspect
+
+    signature = inspect.signature(ledger_module.verify_margin_layout)
+    assert signature.parameters["rendered_position_tolerance_sp"].default == 1
 
     # Le moteur écrit bien à trois décimales : on le lit dans un PDF réel.
     build = _compile_until_stable(tmp_path / "digits", "3mm", _TRIM_RAIL)
