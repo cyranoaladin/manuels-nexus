@@ -147,7 +147,8 @@
       "discovered": "2026-09-03",
       "evidence": {
         "closes_with": "REAL_HUMAN_DECISION_REQUIRED",
-        "head": "b36836d4e814871d99a42df1de3fc53c56afc043",
+        "head": "4ca0e6d95e456510545343d4e0006eddc3849f87",
+        "it_also_blocks_the_whole_derived_chain": "Ce n'est pas seulement le reçu. `inventory_collection.py` refuse de s'exécuter sur un manifeste dont le source_digest ne décrit plus les sources, et toute la chaîne qui en dépend refuse avec lui : l'inventaire de collection, la qualification de base, la liaison de contenu du manifeste. Vingt contrôles de la suite échouent aujourd'hui pour cette seule raison, tous sur le même message.",
         "receipt_page_counts": {
           "eleve": 357,
           "professeur": 629
@@ -243,7 +244,7 @@
   "generated_by": "scripts/build_1spe_release_blocker_ledger.py",
   "schema_version": 1,
   "scope_rule": "n'entre au registre que ce qui peut affecter le contenu semantique, la preuve machine, la revue humaine, la fabrication, le rendu ou l'artefact d'impression du 1SPE ; le critere est l'usage, jamais le repertoire",
-  "source_sha": "b36836d4e814871d99a42df1de3fc53c56afc043",
+  "source_sha": "4ca0e6d95e456510545343d4e0006eddc3849f87",
   "summary": {
     "CLOSED": 5,
     "HUMAN_DECISION_PENDING": 3,

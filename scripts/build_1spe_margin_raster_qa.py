@@ -55,8 +55,12 @@ BUILD = ROOT / "Mathematiques/manuel-maths/build/MANUEL_1SPE"
 VARIANTS = ("eleve", "professeur")
 
 RASTER_DPI = 300
-# Le même plancher que pour les ouvertures : très en dessous du fragment le
-# moins encré du corpus, très au-dessus de zéro. Le minimum observé est publié.
+# Le plancher sépare « de l'encre » de « pas d'encre » -- pas « beaucoup » de
+# « peu ». Une note invisible marque exactement 0 ; la note la moins encrée du
+# corpus, un identifiant professeur court dans un rail large, en marque environ
+# 2,8 %. Un pour cent tient donc entre les deux, et le minimum réellement
+# observé est publié par classe à chaque construction pour que cet écart reste
+# vérifiable plutôt que supposé.
 MINIMUM_INK_COVERAGE = 0.01
 SP_PER_BP = 65536 * 7227 / 7200
 
@@ -177,7 +181,13 @@ def measure(variant: str) -> dict[str, Any]:
             )
             role = note["role"]
             summary = by_role.setdefault(
-                role, {"role": role, "inspected": 0, "without_trace": 0}
+                role,
+                {
+                    "role": role,
+                    "inspected": 0,
+                    "without_trace": 0,
+                    "weakest_ink_coverage": 1.0,
+                },
             )
             if not box.intersects(page.rect):
                 outside.append({"id": note["id"], "page": index})
@@ -186,6 +196,9 @@ def measure(variant: str) -> dict[str, Any]:
             inspected += 1
             summary["inspected"] += 1
             weakest = min(weakest, coverage)
+            summary["weakest_ink_coverage"] = round(
+                min(summary["weakest_ink_coverage"], coverage), 5
+            )
             if coverage < MINIMUM_INK_COVERAGE:
                 traceless.append(
                     {
@@ -293,13 +306,13 @@ def render_markdown(payload: dict[str, Any]) -> str:
             "",
             f"## Variante `{row['variant']}` — {row['MARGIN_NOTES_INSPECTED']} notes",
             "",
-            "| Classe | Inspectées | Sans trace |",
-            "|---|---:|---:|",
+            "| Classe | Inspectées | Sans trace | Trace la plus faible |",
+            "|---|---:|---:|---:|",
         ]
         for entry in row["roles"]:
             lines.append(
                 f"| `{entry['role']}` | {entry['inspected']} | "
-                f"{entry['without_trace']} |"
+                f"{entry['without_trace']} | {entry['weakest_ink_coverage']} |"
             )
         if row["traceless"]:
             lines += ["", "### Sans trace", ""]

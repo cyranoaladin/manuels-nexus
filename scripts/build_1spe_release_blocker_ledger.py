@@ -283,6 +283,15 @@ def _check_receipt_is_stale() -> dict[str, Any]:
                 "propre : c'est une décision, pas un calcul."
             ),
             "still_attested_builds": attested,
+            "it_also_blocks_the_whole_derived_chain": (
+                "Ce n'est pas seulement le reçu. `inventory_collection.py` "
+                "refuse de s'exécuter sur un manifeste dont le source_digest ne "
+                "décrit plus les sources, et toute la chaîne qui en dépend "
+                "refuse avec lui : l'inventaire de collection, la qualification "
+                "de base, la liaison de contenu du manifeste. Vingt contrôles "
+                "de la suite échouent aujourd'hui pour cette seule raison, tous "
+                "sur le même message."
+            ),
             "the_gesture_that_unblocks_it": (
                 "python3 scripts/build_manifest.py --invalidate-stale "
                 "--reason '<pourquoi>' --approved-by '<nom>' "
