@@ -10,12 +10,32 @@
 \usetikzlibrary{calc}
 
 % ===========================================================================
+%  FOND PERDU DE COUVERTURE
+% ===========================================================================
+% « current page » désigne le format fini (TrimBox) : tout aplat destiné à
+% toucher le bord après coupe doit donc déborder jusqu'à la BleedBox. Ces
+% quatre coins sont les seuls points d'ancrage autorisés pour un aplat de
+% couverture ; le texte, le logo et la mention d'édition restent, eux, dans la
+% zone sûre que la charte définit déjà par sa grille (16 mm des bords).
+% \nxFondPerduDim est fourni par la classe canonique ; le repli garde le
+% module compilable isolément (spécimens de charte).
+\providecommand*{\nxFondPerduDim}{3mm}
+\newcommand{\nxFondPerduNO}{%
+  ([shift={(-\nxFondPerduDim,\nxFondPerduDim)}]current page.north west)}
+\newcommand{\nxFondPerduNE}{%
+  ([shift={(\nxFondPerduDim,\nxFondPerduDim)}]current page.north east)}
+\newcommand{\nxFondPerduSO}{%
+  ([shift={(-\nxFondPerduDim,-\nxFondPerduDim)}]current page.south west)}
+\newcommand{\nxFondPerduSE}{%
+  ([shift={(\nxFondPerduDim,-\nxFondPerduDim)}]current page.south east)}
+
+% ===========================================================================
 %  MOTIFS GÉNÉRATIFS (blanc translucide sur aplat chapcolor)
 % ===========================================================================
 % Maths : faisceau de courbes + grille de points + cercle d'horizon
 \newcommand{\nxCouvMotifMaths}{%
   \begin{scope}
-    \clip (current page.north west) rectangle (current page.south east);
+    \clip \nxFondPerduNO rectangle \nxFondPerduSE;
     % grille de points discrète
     \foreach \gx in {0,1,...,20}{
       \foreach \gy in {0,1,...,29}{
@@ -43,7 +63,7 @@
 % NSI : graphe de sommets reliés + train binaire
 \newcommand{\nxCouvMotifNSI}{%
   \begin{scope}
-    \clip (current page.north west) rectangle (current page.south east);
+    \clip \nxFondPerduNO rectangle \nxFondPerduSE;
     \foreach \p/\q [count=\i] in {
         30/40, 74/22, 118/48, 162/26, 186/70, 150/95, 100/85, 55/95,
         20/130, 80/140, 140/135, 185/155, 45/180, 110/185, 165/205,
@@ -91,10 +111,10 @@
 \newcommand{\couvertureManuel}[5][]{%
   \thispagestyle{empty}%
   \begin{tikzpicture}[remember picture, overlay]
-    % Aplat pleine page
-    \fill[chapcolor] (current page.north west) rectangle (current page.south east);
-    \fill[chapcolor!82!black] ([yshift=42mm]current page.south west)
-      rectangle (current page.south east);
+    % Aplat pleine page, débordé jusqu'à la BleedBox
+    \fill[chapcolor] \nxFondPerduNO rectangle \nxFondPerduSE;
+    \fill[chapcolor!82!black] ([shift={(-\nxFondPerduDim,42mm)}]current page.south west)
+      rectangle \nxFondPerduSE;
     % Motif génératif
     \ifstrempty{#1}{\nxCouvChoixMotif}{\csname #1\endcsname}%
     % --- Carte logo (fond blanc arrondi : le logo n'est plus jamais coupé) ---
@@ -200,9 +220,10 @@
   \clearpage
   \thispagestyle{empty}%
   \begin{tikzpicture}[remember picture, overlay]
-    \fill[encre] (current page.north west) rectangle (current page.south east);
+    \fill[encre] \nxFondPerduNO rectangle \nxFondPerduSE;
     \draw[chapcolor, line width=3pt]
-      (current page.north west) -- (current page.north east);
+      ([xshift=-\nxFondPerduDim]current page.north west) --
+      ([xshift=\nxFondPerduDim]current page.north east);
     \node[anchor=north west, text=white, inner sep=0pt]
       at ([shift={(20mm,-24mm)}]current page.north west)
       {\begin{minipage}{170mm}

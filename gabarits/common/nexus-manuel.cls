@@ -135,6 +135,69 @@
 \fi
 
 % ===========================================================================
+%  BOÎTES DE PAGE ET FOND PERDU
+% ===========================================================================
+% Décision produit (2026-09-03) : format fini A4, fond perdu de 3 mm sur les
+% quatre côtés.
+%   TrimBox  = 210 × 297 mm  (le format fini, après coupe)
+%   BleedBox = TrimBox + 3 mm de chaque côté = 216 × 303 mm
+%   MediaBox = BleedBox
+%
+% Mise en œuvre côté moteur, sans post-traitement PDF : le support (\pagewidth,
+% \pageheight) est agrandi de 2 × 3 mm et le contenu est décalé de 3 mm vers
+% l'intérieur (\hoffset, \voffset). \paperwidth et \paperheight, eux, restent
+% le format FINI : le nœud « current page » de TikZ, que toute la charte
+% utilise pour se caler sur les bords, continue donc de désigner exactement la
+% TrimBox. C'est la propriété qui protège la géométrie contractuelle de
+% l'onglet latéral : ses 12 mm visibles restent 12 mm à l'intérieur du format
+% fini et son millimètre d'encre débordante reste UN millimètre hors TrimBox.
+% Les 2 mm restants entre l'onglet et la BleedBox sont la marge technique de
+% coupe : offrir 3 mm de fond perdu ne fait pas passer l'onglet à 3 mm.
+%
+% \newgeometry et \restoregeometry restaurent \hoffset et \voffset dans l'état
+% sauvegardé par geometry au début du document, c'est-à-dire sans décalage :
+% le manuel les appelle à chaque bloc de cours et à chaque grille d'exercices,
+% et le fond perdu disparaîtrait sur ces centaines de pages. Les deux commandes
+% réappliquent donc le décalage.
+\newcommand*{\nxFondPerduDim}{3mm}
+\newlength{\nxFondPerdu}
+\setlength{\nxFondPerdu}{\nxFondPerduDim}
+
+\newcommand{\nxAppliquerFondPerdu}{%
+  \hoffset=\nxFondPerdu
+  \voffset=\nxFondPerdu
+  \pagewidth=\dimexpr\paperwidth+2\nxFondPerdu\relax
+  \pageheight=\dimexpr\paperheight+2\nxFondPerdu\relax
+}
+% Conversion d'une longueur TeX en points PostScript (l'unité des boîtes PDF) :
+% 1 bp = 1.00375 pt, donc 1 pt = 0.996264 bp.
+\newcommand{\nxDimEnBp}[1]{\strip@pt\dimexpr 0.996264\dimexpr#1\relax\relax}
+\newcommand{\nxDeclarerBoitesDePage}{%
+  \edef\nx@boitesDePage{%
+    /TrimBox [\nxDimEnBp{\nxFondPerdu}\space\nxDimEnBp{\nxFondPerdu}\space
+      \nxDimEnBp{\dimexpr\nxFondPerdu+\paperwidth\relax}\space
+      \nxDimEnBp{\dimexpr\nxFondPerdu+\paperheight\relax}]
+    /BleedBox [0 0 \nxDimEnBp{\dimexpr2\nxFondPerdu+\paperwidth\relax}\space
+      \nxDimEnBp{\dimexpr2\nxFondPerdu+\paperheight\relax}]%
+  }%
+  \pdfvariable pageattr\expandafter{\nx@boitesDePage}%
+}
+\apptocmd{\newgeometry}{\nxAppliquerFondPerdu}{}{%
+  \ClassError{nexus-manuel}{fond perdu non rebranche sur \string\newgeometry}{}}
+\apptocmd{\restoregeometry}{\nxAppliquerFondPerdu}{}{%
+  \ClassError{nexus-manuel}{fond perdu non rebranche sur
+    \string\restoregeometry}{}}
+% geometry réaffirme \pagewidth/\pageheight dans son propre \AtBeginDocument,
+% et le fait APRÈS le nôtre (mesure du 2026-09-03 : \hoffset gardait bien
+% 3 mm, \pagewidth retombait à 210 mm et la MediaBox restait A4). On agrandit
+% donc le support dans « begindocument/end », qui s'exécute une fois tout
+% \AtBeginDocument terminé.
+\AddToHook{begindocument/end}{%
+  \nxAppliquerFondPerdu
+  \nxDeclarerBoitesDePage
+}
+
+% ===========================================================================
 %  MARGE PÉDAGOGIQUE (colonne de design)
 % ===========================================================================
 \RequirePackage{marginnote}
@@ -497,9 +560,12 @@
     \addtolength{\nxTitreChapHeight}{\dp\nxTitreChapBox}%
   \fi
   \noindent\begin{tikzpicture}[remember picture, overlay]
-    % Bandeau plein accent (haut de page)
-    \fill[chapcolor] (current page.north west)
-      rectangle ([yshift=-\nxBandHeight]current page.north east);
+    % Bandeau plein accent (haut de page), débordé jusqu'à la BleedBox sur les
+    % trois bords qu'il touche après coupe
+    \fill[chapcolor]
+      ([shift={(-\nxFondPerduDim,\nxFondPerduDim)}]current page.north west)
+      rectangle
+      ([shift={(\nxFondPerduDim,-\nxBandHeight)}]current page.north east);
     % Décor TikZ du chapitre (dans le bandeau, moitié droite)
     \csname #1\endcsname
     % Étiquette matière · niveau

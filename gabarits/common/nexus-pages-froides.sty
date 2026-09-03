@@ -7,6 +7,10 @@
 \RequirePackage{tikz}
 \RequirePackage{tcolorbox}
 
+% Fond perdu : fourni par la classe canonique ; repli pour compiler le module
+% isolément (spécimens de charte).
+\providecommand*{\nxFondPerduDim}{3mm}
+
 % ===========================================================================
 %  COULEURS DE RUBRIQUE (fournies par nexus-charte-v6 ; filet de sécurité)
 % ===========================================================================
@@ -29,8 +33,12 @@
 \newenvironment{avantproposNexus}[1]{%
   \clearpage\thispagestyle{empty}%
   \begin{tikzpicture}[remember picture, overlay]
-    \fill[chapcolor] ([xshift=0mm]current page.north west)
-      rectangle ([shift={(7mm,-297mm)}]current page.north west);
+    % Bande d'identité : elle touche trois bords finis, elle va donc jusqu'à
+    % la BleedBox de ce côté (\nxFondPerduDim est fourni par la classe).
+    \fill[chapcolor]
+      ([shift={(-\nxFondPerduDim,\nxFondPerduDim)}]current page.north west)
+      rectangle
+      ([shift={(7mm,-\nxFondPerduDim)}]current page.south west);
     \node[anchor=north west, text=chapcolor, inner sep=0pt]
       at ([shift={(20mm,-30mm)}]current page.north west)
       {\titrefont\fontsize{24}{28}\selectfont Avant-propos};
