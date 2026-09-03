@@ -79,6 +79,31 @@ def test_the_expected_count_is_read_from_the_repository(
     assert "1SPE-SUITES" not in source
 
 
+def test_the_governance_unit_is_twenty_chapter_verdicts(
+    payload: dict[str, Any],
+) -> None:
+    """Vingt décisions, pas des milliers de signatures.
+
+    Les files de relecture comptent 2 325 objets, 167 questions de QCM et
+    d'autres lots encore. Les présenter comme une charge humaine annoncerait
+    des centaines de décisions là où le contrat en demande vingt : ce sont des
+    points d'attention à l'intérieur d'un chapitre, et la revue porte sur le
+    chapitre entier.
+    """
+
+    summary = payload["summary"]
+    assert summary["CHAPTER_VERDICTS_EXPECTED"] == 20
+    assert (
+        summary["CHAPTER_VERDICTS_RENDERED"] + summary["CHAPTER_VERDICTS_PENDING"]
+        == 20
+    )
+    roles = {row["role"] for row in payload["chapter_verdicts"]}
+    assert roles == {"EXPERT_MATHEMATIQUE", "EXPERT_PROGRAMME_PEDAGOGIE"}
+    chapters = {row["chapter"] for row in payload["chapter_verdicts"]}
+    assert len(chapters) == 10
+    assert "vingt" in payload["the_unit_of_governance_is_the_chapter_verdict"]
+
+
 def test_the_absence_of_rendered_evidence_is_reported_not_buried(
     payload: dict[str, Any],
 ) -> None:

@@ -4,6 +4,8 @@
 
 > Un JSON de quarante kilo-octets n'est pas une relecture : chaque paquet doit porter la vue lisible qui va avec.
 
+> Dix chapitres, deux rôles : vingt verdicts, et rien de plus. Les milliers d'items que portent les files de relecture sont des points d'attention À L'INTÉRIEUR d'un chapitre ; les compter comme des signatures annoncerait des centaines de décisions là où le contrat en demande vingt.
+
 L'attendu est lu, jamais écrit : chapitres sur `l'assembleur canonique`, rôles sur `audit/reviews/human/ASSIGNMENT_TEMPLATE_AND_REVIEW_INSTRUCTIONS.md`.
 
 ## Métriques
@@ -19,6 +21,9 @@ L'attendu est lu, jamais écrit : chapitres sur `l'assembleur canonique`, rôles
 | `PACKETS_WITHOUT_REQUIRED_FIELDS` | 0 |
 | `OBJECTS_OFFERED_FOR_REVIEW` | 2882 |
 | `PACKETS_WITHOUT_RENDERED_EVIDENCE` | 20 |
+| `CHAPTER_VERDICTS_EXPECTED` | 20 |
+| `CHAPTER_VERDICTS_RENDERED` | 0 |
+| `CHAPTER_VERDICTS_PENDING` | 20 |
 
 ## Paquets
 
