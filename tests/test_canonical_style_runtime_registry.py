@@ -263,16 +263,18 @@ def test_extended_asset_inventory_and_duplicate_counts_are_exact() -> None:
 
     assert registry["summary"] == {
         **registry["summary"],
-        "physical_files": 63,
-        "unique_contents": 42,
+        # Inventaire, jamais un seuil : ces nombres suivent l'arbre suivi par
+        # git. Le composant canonique d'arbres ponderes en ajoute un.
+        "physical_files": 64,
+        "unique_contents": 43,
         "exact_duplicate_files": 21,
         "exact_duplicate_groups": 18,
     }
-    assert graph["summary"]["physical_assets"] == 126
-    assert graph["summary"]["unique_asset_contents"] == 63
+    assert graph["summary"]["physical_assets"] == 127
+    assert graph["summary"]["unique_asset_contents"] == 64
     assert forensics["summary"]["extended_duplicate_files"] == 63
     assert forensics["summary"]["extended_duplicate_groups"] == 39
-    assert len(graph["assets"]) == 126
+    assert len(graph["assets"]) == 127
     assert {entry["path"] for entry in graph["assets"]} == {
         path.relative_to(ROOT).as_posix() for path in builder.asset_files(ROOT)
     }
