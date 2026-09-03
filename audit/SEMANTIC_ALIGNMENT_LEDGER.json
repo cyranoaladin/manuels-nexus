@@ -1,7 +1,7 @@
 {
   "approves_nothing": true,
   "artifact_type": "semantic_alignment_ledger",
-  "closes_no_gate": true,
+  "closes_no_gate": false,
   "counts": {
     "DEFAUT_ETABLI": 0,
     "JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS": 371,
@@ -28,6 +28,7 @@
     "SIBLING_CAPACITIES_SHARE_ONE_BODY": "deux objets DISTINCTS de corps identique (meme sha256) credites a deux capacites soeurs du meme chapitre : la signature du P0 fondateur. Un objet unique declarant plusieurs capacites n'est pas ce defaut"
   },
   "evidence_counts_by_channel": {},
+  "gate_effect": "sur decision humaine du 2026-09-02, la matrice de campagne lit ces dispositions : une cellule routee vers l'humain ne bloque plus l'axe machine, tandis qu'un DEFAUT_ETABLI ou une cellule non routee le bloque toujours. C'est la regle de l'oracle SymPy -- la machine est complete quand il ne lui reste rien a classer, jamais quand plus aucune science humaine n'est requise. Aucun contenu n'est approuve pour autant : human_closure_status reste PENDING, publication_approval reste false, release-strict reste rouge.",
   "generated_by": "scripts/build_semantic_alignment_ledger.py",
   "official_atom_attachment": {
     "capacities_with_atoms": 329,
