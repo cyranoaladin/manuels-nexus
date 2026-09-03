@@ -125,6 +125,23 @@ def line_of(text: str, offset: int) -> int:
     return text.count("\n", 0, offset) + 1
 
 
+def path_digest(paths: Iterable[Path]) -> str:
+    """Digest of the SET of paths, ignoring their content.
+
+    Utile quand la metrique elle-meme porte deja la verite du contenu : lier
+    en plus chaque octet rendrait l'artefact perime des qu'un autre chantier
+    touche une source qui ne change aucun compte.
+    """
+
+    import hashlib
+
+    digest = hashlib.sha256()
+    for path in sorted(paths):
+        digest.update(relative(path).encode("utf-8"))
+        digest.update(b"\0")
+    return f"sha256:{digest.hexdigest()}"
+
+
 def sha256_of(paths: Iterable[Path]) -> str:
     import hashlib
 

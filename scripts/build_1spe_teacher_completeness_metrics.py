@@ -41,6 +41,7 @@ from manual_source_surface import (  # noqa: E402
     ROOT,
     object_meta,
     published_sources,
+    path_digest,
     relative,
     sha256_of,
 )
@@ -555,7 +556,19 @@ def build_payload() -> dict[str, Any]:
         metric["STATUS"] = "PASS" if metric["GAP"] == 0 else "FAIL"
     missing = sum(max(metric["GAP"], 0) for metric in teacher_metrics)
     leaks = sum(metric["OBSERVED"] for metric in leak_metrics)
-    evidence = sorted(set(surface.teacher) | set(surface.student))
+    graded = graded_objects(surface)
+    index = surface.corrections()
+    cited: set[Path] = set()
+    for path in graded:
+        cited.add(path)
+        correction = index.get(path)
+        if correction is not None:
+            cited.add(correction)
+    for path in surface.teacher:
+        canonical = sorted(path.parent.glob(f"{path.stem}.json"))
+        if canonical:
+            cited.add(path)
+            cited.update(canonical)
     return {
         "schema_version": 1,
         "artifact_name": "1SPE_TEACHER_COMPLETENESS_METRICS",
@@ -569,7 +582,10 @@ def build_payload() -> dict[str, Any]:
             "teacher": len(surface.teacher),
             "student": len(surface.student),
         },
-        "published_source_digest": sha256_of(evidence),
+        "published_surface_path_digest": path_digest(
+            set(surface.teacher) | set(surface.student)
+        ),
+        "metric_evidence_digest": sha256_of(cited),
         "summary": {
             "TEACHER_MISSING_REQUIRED_CONTENT": missing,
             "STUDENT_TEACHER_ONLY_LEAKS": leaks,
