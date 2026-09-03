@@ -44,8 +44,26 @@ NOTE_PROPERTY_KEYS = {
 BP_TO_SP = 72.27 * 65536 / 72
 SP_TO_BP_EXACT = Fraction(7200, 7227 * 65536)
 BP_TO_SP_EXACT = 1 / SP_TO_BP_EXACT
+# Precision d'ecriture du moteur. LuaTeX emet les nombres du PDF avec
+# \pdfvariable decimaldigits chiffres decimaux, trois par defaut -- on le lit
+# dans le document lui-meme : /MediaBox [0 0 595.276 841.89]. Un ulp vaut donc
+# 10^-3 bp, soit 65,78 sp, et tout nombre emis est juste au demi-ulp pres :
+# 32,89 sp. C'est de la que vient FORM_BBOX_ROUNDING_TOLERANCE_SP, qui compare
+# UN nombre arrondi (un coin du /BBox du Form) a une valeur exacte en sp.
+PDF_DECIMAL_DIGITS = 3
 FORM_BBOX_ROUNDING_TOLERANCE_SP = 32
+# Comparaison de deux quantites EXACTES en sp : aucune tolerance n'est due.
+# Les boites de page en font partie depuis que la conversion pt -> bp de la
+# classe est une division d'entiers (\nxDimEnBp), exacte au demi-sp.
 MARGIN_GEOMETRY_TOLERANCE_SP = 1
+# Comparaison d'une POSITION RENDUE a une coordonnee exacte. Elle traverse
+# deux nombres arrondis independamment -- le coin du /BBox du Form et la
+# translation du « cm » qui le place -- plus le coin de la page composee,
+# exact au demi-sp. La borne est donc 2 x 32,89 + 0,5, arrondie a l'entier
+# superieur : elle n'est pas choisie, elle est derivee, et elle vaut 1 mm /
+# 15 000. Toute derive reelle du compositeur est de l'ordre du millimetre et
+# reste donc detectee.
+RENDERED_POSITION_TOLERANCE_SP = 67
 MARGIN_GAP_SP = 6 * 65536
 LINK_RECT_TOLERANCE_BP = 0.002
 COMMAND_TIMEOUT_SECONDS = 20
@@ -429,21 +447,44 @@ def _expected_link_records(
     return expected
 
 
-def _typeset_origin(page: Any) -> tuple[float, float]:
-    """Coin inferieur gauche de la page COMPOSEE, dans l'espace du PDF.
+def _composed_page_box(page: Any) -> tuple[float, float, float, float] | None:
+    """Boite de la page COMPOSEE dans l'espace utilisateur du PDF.
 
-    C'est le TrimBox quand il existe -- la page finie apres rognage -- et le
-    MediaBox sinon. Rien n'est suppose : un document sans fond perdu rend
-    (0, 0) et la comparaison reste ce qu'elle etait.
+    C'est le TrimBox quand il existe -- la page finie apres rognage, qui est le
+    repere logique du contenu imprime -- et le CropBox, sinon le MediaBox,
+    quand le document ne declare pas de fond perdu. Rien n'est suppose : un
+    document sans fond perdu rend une origine (0, 0) et les comparaisons
+    restent ce qu'elles etaient.
+
+    UNIQUE definition du repere cote Python. Le compositeur Lua applique
+    exactement le meme transport a `pdf.getpos()`.
     """
 
-    box = page.obj.get("/TrimBox") or page.obj.get("/MediaBox")
+    box = (
+        page.obj.get("/TrimBox")
+        or page.obj.get("/CropBox")
+        or page.obj.get("/MediaBox")
+    )
     if box is None:
-        return (0.0, 0.0)
+        return None
     values = [float(value) for value in box]
     if len(values) != 4:
         _reject("page box must have four numbers")
-    return (min(values[0], values[2]), min(values[1], values[3]))
+    return (
+        min(values[0], values[2]),
+        min(values[1], values[3]),
+        max(values[0], values[2]),
+        max(values[1], values[3]),
+    )
+
+
+def _typeset_origin(page: Any) -> tuple[float, float]:
+    """Coin inferieur gauche de la page composee."""
+
+    box = _composed_page_box(page)
+    if box is None:
+        return (0.0, 0.0)
+    return (box[0], box[1])
 
 
 def _check_expected_links(
@@ -1057,7 +1098,29 @@ def _pdf_box(value: Any, label: str) -> tuple[Fraction, Fraction, Fraction, Frac
 
 def _page_frame(
     page: Any, page_index: int
-) -> tuple[tuple[Fraction, Fraction, Fraction, Fraction], Fraction]:
+) -> tuple[
+    tuple[Fraction, Fraction, Fraction, Fraction],
+    tuple[Fraction, Fraction, Fraction, Fraction],
+    Fraction,
+]:
+    r"""Les DEUX reperes de la page, nommes et separes.
+
+    `composed` est la page composee -- le TrimBox quand le document porte un
+    fond perdu. C'est le repere du compositeur : le rail, les obstacles et les
+    notes rendues s'y mesurent, et c'est lui qui doit valoir \paperwidth par
+    \paperheight. `crop` est ce que rogne un lecteur (CropBox, MediaBox a
+    defaut) : il sert au recoupement Poppler, qui ne connait que ce rognage.
+
+    Les confondre revenait a comparer la MediaBox, elargie du fond perdu, aux
+    dimensions du format fini.
+    """
+
+    composed_value = (
+        page.obj.get("/TrimBox")
+        or page.obj.get("/CropBox")
+        or page.obj.get("/MediaBox")
+    )
+    composed = _pdf_box(composed_value, f"page {page_index} composed page box")
     crop_value = page.obj.get("/CropBox") or page.obj.get("/MediaBox")
     crop = _pdf_box(crop_value, f"page {page_index} /CropBox")
     user_unit = _pdf_fraction(page.obj.get("/UserUnit", 1), f"page {page_index} /UserUnit")
@@ -1066,7 +1129,7 @@ def _page_frame(
     rotate = _pdf_fraction(page.obj.get("/Rotate", 0), f"page {page_index} /Rotate")
     if rotate != 0:
         _reject(f"page {page_index} /Rotate must be 0")
-    return crop, user_unit
+    return composed, crop, user_unit
 
 
 def _compose_affine(
@@ -1167,7 +1230,7 @@ def _rendered_margin_occurrences(pdf: pikepdf.Pdf) -> list[dict[str, Any]]:
 
 def _canonical_rendered_bbox_sp(
     occurrence: Mapping[str, Any],
-    crop: tuple[Fraction, Fraction, Fraction, Fraction],
+    composed: tuple[Fraction, Fraction, Fraction, Fraction],
     user_unit: Fraction,
 ) -> tuple[Fraction, Fraction, Fraction, Fraction]:
     note_id = occurrence["note_id"]
@@ -1180,7 +1243,7 @@ def _canonical_rendered_bbox_sp(
     pdf_bottom = form_bbox[1] + f
     pdf_right = form_bbox[2] + e
     pdf_top = form_bbox[3] + f
-    llx, _lly, _urx, ury = crop
+    llx, _lly, _urx, ury = composed
     return (
         (pdf_left - llx) * user_unit * BP_TO_SP_EXACT,
         (ury - pdf_top) * user_unit * BP_TO_SP_EXACT,
@@ -1200,7 +1263,11 @@ def _rectangles_intersect(
 def _check_poppler_cropboxes(
     pdf_path: Path,
     frames: Sequence[
-        tuple[tuple[Fraction, Fraction, Fraction, Fraction], Fraction]
+        tuple[
+            tuple[Fraction, Fraction, Fraction, Fraction],
+            tuple[Fraction, Fraction, Fraction, Fraction],
+            Fraction,
+        ]
     ],
     *,
     runner: Any = None,
@@ -1226,7 +1293,9 @@ def _check_poppler_cropboxes(
     for page_index, (element, frame) in enumerate(
         zip(page_elements, frames, strict=True), start=1
     ):
-        crop, user_unit = frame
+        # Poppler ne connait que le rognage : on le confronte au CropBox, pas
+        # a la page composee.
+        _composed, crop, user_unit = frame
         try:
             poppler_width = Fraction(element.attrib["width"])
             poppler_height = Fraction(element.attrib["height"])
@@ -1270,10 +1339,12 @@ def verify_margin_layout(
 ) -> MarginVerificationResult:
     """Verify contract, identity and physical geometry of every marginal note.
 
-    Canonical boxes are TeX scaled points relative to the CropBox upper-left;
-    x increases right and y increases down. PDF user coordinates are converted
-    through the page's positive /UserUnit. Nonzero /Rotate is intentionally
-    rejected by this first closed coordinate convention.
+    Canonical boxes are TeX scaled points relative to the upper-left corner of
+    the COMPOSED page -- the TrimBox when the document carries a bleed, the
+    CropBox otherwise; x increases right and y increases down. PDF user
+    coordinates are converted through the page's positive /UserUnit. Nonzero
+    /Rotate is intentionally rejected by this first closed coordinate
+    convention.
     """
 
     pdf_file = Path(pdf)
@@ -1357,10 +1428,10 @@ def verify_margin_layout(
             for page_index, (frame, stable_page) in enumerate(
                 zip(frames, stable["pages"], strict=True), start=1
             ):
-                crop, user_unit = frame
+                composed, _crop, user_unit = frame
                 dimensions_sp = (
-                    (crop[2] - crop[0]) * user_unit * BP_TO_SP_EXACT,
-                    (crop[3] - crop[1]) * user_unit * BP_TO_SP_EXACT,
+                    (composed[2] - composed[0]) * user_unit * BP_TO_SP_EXACT,
+                    (composed[3] - composed[1]) * user_unit * BP_TO_SP_EXACT,
                 )
                 expected_dimensions = (
                     stable_page["page_width_sp"],
@@ -1471,9 +1542,11 @@ def verify_margin_layout(
                 rendered_projection.append(
                     {"note_id": note_id, "rendered_stream_digest": stream_digest}
                 )
-                frame = frames[rendered_occurrence["page_index"] - 1]
+                composed, _crop, user_unit = frames[
+                    rendered_occurrence["page_index"] - 1
+                ]
                 actual_bboxes[note_id] = _canonical_rendered_bbox_sp(
-                    rendered_occurrence, *frame
+                    rendered_occurrence, composed, user_unit
                 )
             if contract.canonical_digest(rendered_projection) != ledger[
                 "rendered_stream_digest"
@@ -1522,10 +1595,10 @@ def verify_margin_layout(
                 for note_id in page_note_ids:
                     box = actual_bboxes[note_id]
                     if (
-                        box[0] < safe_box[0] - MARGIN_GEOMETRY_TOLERANCE_SP
-                        or box[1] < safe_box[1] - MARGIN_GEOMETRY_TOLERANCE_SP
-                        or box[2] > safe_box[2] + MARGIN_GEOMETRY_TOLERANCE_SP
-                        or box[3] > safe_box[3] + MARGIN_GEOMETRY_TOLERANCE_SP
+                        box[0] < safe_box[0] - RENDERED_POSITION_TOLERANCE_SP
+                        or box[1] < safe_box[1] - RENDERED_POSITION_TOLERANCE_SP
+                        or box[2] > safe_box[2] + RENDERED_POSITION_TOLERANCE_SP
+                        or box[3] > safe_box[3] + RENDERED_POSITION_TOLERANCE_SP
                     ):
                         _reject(f"rendered note {note_id} escapes the effective outer rail")
                     for obstacle in stable_page["obstacles"]:
@@ -1543,12 +1616,13 @@ def verify_margin_layout(
                     expected_box = ledger_by_id[note_id]["bbox_sp"]
                     if any(
                         abs(actual - Fraction(expected))
-                        > MARGIN_GEOMETRY_TOLERANCE_SP
+                        > RENDERED_POSITION_TOLERANCE_SP
                         for actual, expected in zip(box, expected_box, strict=True)
                     ):
                         _reject(
-                            f"rendered note {note_id} differs by more than 1sp "
-                            "from ledger coordinates"
+                            f"rendered note {note_id} differs from ledger "
+                            "coordinates by more than the engine's own writing "
+                            f"precision ({RENDERED_POSITION_TOLERANCE_SP}sp)"
                         )
     except pikepdf.PdfError as exc:
         raise MarginLedgerError(f"cannot inspect PDF: {exc}") from exc

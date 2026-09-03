@@ -1,3 +1,30 @@
+-- Compositeur de marges Nexus.
+--
+-- REPERE UNIQUE : la PAGE COMPOSEE, c'est-a-dire le format fini, dont le coin
+-- est l'origine du TrimBox. Toute coordonnee qui entre ici ou qui en sort est
+-- dans ce repere :
+--
+--   page_width_sp / page_height_sp   \paperwidth / \paperheight, le format fini
+--   safe_rect                        rail, derive des quatre longueurs canoniques
+--   obstacle                         declare par \nxMarginReserveRect
+--   sortie \put dans shipout/foreground   origine au coin du TrimBox (mesure)
+--   rectangle de lien                compare apres retour au coin du TrimBox
+--                                    (margin_ledger.py, _typeset_origin)
+--
+-- Le fond perdu est une extension technique du SUPPORT (MediaBox/BleedBox) et
+-- non l'origine logique du contenu imprime : le compositeur ne le connait donc
+-- pas comme un decalage a appliquer, mais comme un repere a VERIFIER. La
+-- classe declare l'origine de la page composee dans le support
+-- (trim_origin_*_sp) et transmet les registres de decalage reellement en
+-- vigueur (support_offset_*_sp) ; si les deux divergent, les coordonnees
+-- recues ne sont pas dans le repere annonce et la configuration echoue.
+--
+-- Defaut d'origine (2026-09-03) : la configuration etait prise dans
+-- \AtBeginDocument, alors que la classe pose \hoffset/\voffset dans
+-- « begindocument/end ». Le rail etait donc calcule avec \hoffset = 0 pt et
+-- les obstacles declares dans le corps avec \hoffset = 3 mm : 559 403 sp
+-- d'ecart, exactement le fond perdu.
+
 local M = {}
 
 local source = debug.getinfo(1, "S").source:gsub("^@", "")
@@ -782,6 +809,10 @@ function M.configure(values)
   for _, field in ipairs({
     "page_width_sp",
     "page_height_sp",
+    "trim_origin_x_sp",
+    "trim_origin_y_sp",
+    "support_offset_x_sp",
+    "support_offset_y_sp",
     "rail_width_sp",
     "odd_rail_left_sp",
     "even_rail_left_sp",
@@ -794,6 +825,26 @@ function M.configure(values)
     if type(value) ~= "number" or math.type(value) ~= "integer" or value < 0 then
       fail(field .. " must be a non-negative integer")
     end
+  end
+  -- Le repere avant les coordonnees : le decalage en vigueur dans TeX doit
+  -- etre exactement l'origine de la page composee que la classe declare.
+  -- Egalite stricte, en sp : aucune tolerance n'est due ici, les deux valeurs
+  -- sont le meme registre de dimension lu par le meme moteur.
+  if values.support_offset_x_sp ~= values.trim_origin_x_sp then
+    fail(string.format(
+      "coordinate frame mismatch in x: declared trim origin %d sp, "
+        .. "typesetting offset %d sp",
+      values.trim_origin_x_sp,
+      values.support_offset_x_sp
+    ))
+  end
+  if values.support_offset_y_sp ~= values.trim_origin_y_sp then
+    fail(string.format(
+      "coordinate frame mismatch in y: declared trim origin %d sp, "
+        .. "typesetting offset %d sp",
+      values.trim_origin_y_sp,
+      values.support_offset_y_sp
+    ))
   end
   if values.page_width_sp < 1 or values.page_height_sp < 1
       or values.rail_width_sp < 1 or values.report_decoration_height_sp < 1 then
@@ -821,6 +872,8 @@ function M.configure(values)
     previous_path = os.getenv("NEXUS_MARGIN_LAYOUT_PREVIOUS"),
     page_width_sp = values.page_width_sp,
     page_height_sp = values.page_height_sp,
+    trim_origin_x_sp = values.trim_origin_x_sp,
+    trim_origin_y_sp = values.trim_origin_y_sp,
     rail_width_sp = values.rail_width_sp,
     odd_rail_left_sp = values.odd_rail_left_sp,
     even_rail_left_sp = values.even_rail_left_sp,
@@ -1181,6 +1234,11 @@ function M.render_foreground()
   end
 end
 
+-- Un obstacle est declare dans le REPERE DE LA PAGE COMPOSEE, comme le rail et
+-- comme la sortie : ses bornes sont donc validees contre le format fini
+-- (page_width_sp / page_height_sp), et non contre le support. Un appelant qui
+-- y ajouterait \hoffset/\voffset decalerait l'obstacle du fond perdu par
+-- rapport au rail.
 function M.write_obstacle_whatsit(identifier, left_sp, top_sp, right_sp, bottom_sp)
   require_ascii_fragment(identifier, "obstacle id")
   for _, value in ipairs({ left_sp, top_sp, right_sp, bottom_sp }) do
@@ -1320,6 +1378,27 @@ local function pre_shipout(head)
   return head
 end
 
+-- L'UNIQUE conversion du compositeur : de l'espace utilisateur du PDF vers la
+-- page composee. Une coordonnee rendue par `pdf.getpos()` est mesuree depuis
+-- le coin de la MediaBox ; la page composee commence a l'origine declaree du
+-- TrimBox. C'est exactement le transport que `margin_ledger.py` applique aux
+-- rectangles d'annotation (`_typeset_origin`) : meme cause, meme formule, et
+-- une seule ecriture de chaque cote.
+--
+-- Sans fond perdu, l'origine vaut zero et la conversion est l'identite : la
+-- geometrie logique ne bouge donc pas quand le fond perdu change.
+local function composed_page_x_sp(pdf_x_sp)
+  return math.floor(pdf_x_sp + 0.5) - configuration.trim_origin_x_sp
+end
+
+-- Le PDF compte les ordonnees vers le HAUT depuis le bas de la MediaBox ; le
+-- compositeur les compte vers le BAS depuis le haut de la page composee.
+local function composed_page_y_from_top_sp(pdf_y_sp, page)
+  local from_trim_bottom_sp =
+    math.floor(pdf_y_sp + 0.5) - configuration.trim_origin_y_sp
+  return page.page_height_sp - from_trim_bottom_sp
+end
+
 function M.resolve_anchor(identifier)
   local anchor = anchors[identifier]
   if not anchor then
@@ -1330,11 +1409,13 @@ function M.resolve_anchor(identifier)
     fail("shipout did not resolve coordinates for " .. identifier)
   end
   anchor.resolve_count = anchor.resolve_count + 1
-  anchor.x_sp = math.floor(x_sp + 0.5)
+  anchor.x_sp = composed_page_x_sp(x_sp)
   local page = pages[anchor.shipout_index]
   anchor.y_sp = math.max(
     0,
-    math.min(page.page_height_sp, page.page_height_sp - math.floor(y_sp + 0.5))
+    math.min(
+      page.page_height_sp, composed_page_y_from_top_sp(y_sp, page)
+    )
   )
   texio.write_nl("term and log", "NEXUS-MARGIN-ANCHOR:" .. identifier)
 end

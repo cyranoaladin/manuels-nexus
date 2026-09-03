@@ -161,22 +161,58 @@
 % réappliquent donc le décalage.
 \newcommand*{\nxFondPerduDim}{3mm}
 \newlength{\nxFondPerdu}
-\setlength{\nxFondPerdu}{\nxFondPerduDim}
+
+% ORIGINE DE LA PAGE COMPOSÉE DANS LE SUPPORT — source de vérité unique du
+% référentiel. La page composée est le format fini : son coin est l'origine du
+% TrimBox. Le support (MediaBox) l'entoure du fond perdu. Trois consommateurs
+% en descendent, et un seul de ces deux registres est écrit à la main :
+%
+%   \hoffset, \voffset          décalage du contenu dans le support ;
+%   /TrimBox                    coin de la page composée dans le PDF ;
+%   compositeur de marges       repère logique des obstacles et du rail.
+%
+% Le compositeur reçoit cette origine et VÉRIFIE qu'elle vaut bien \hoffset et
+% \voffset au moment où les coordonnées sont produites. Un fond perdu qui
+% changerait, ou qui serait appliqué à un autre moment de l'initialisation, ne
+% peut donc plus translater silencieusement le contenu logique de 3 mm : il
+% échoue. C'est le défaut mesuré le 2026-09-03 (559 403 sp, soit exactement le
+% fond perdu) entre le rail et l'obstacle déclaré.
+\newlength{\nxOrigineTrimX}
+\newlength{\nxOrigineTrimY}
+% Le fond perdu est POSÉ en un seul endroit, et l'origine de la page composée
+% en découle. C'est ce qui rend la géométrie invariante au fond perdu :
+% la changer ici déplace le support et la boîte PDF, jamais la position
+% logique du contenu imprimé.
+\newcommand{\nxFixerFondPerdu}[1]{%
+  \setlength{\nxFondPerdu}{#1}%
+  \setlength{\nxOrigineTrimX}{\nxFondPerdu}%
+  \setlength{\nxOrigineTrimY}{\nxFondPerdu}%
+}
+\nxFixerFondPerdu{\nxFondPerduDim}
 
 \newcommand{\nxAppliquerFondPerdu}{%
-  \hoffset=\nxFondPerdu
-  \voffset=\nxFondPerdu
+  \hoffset=\nxOrigineTrimX
+  \voffset=\nxOrigineTrimY
   \pagewidth=\dimexpr\paperwidth+2\nxFondPerdu\relax
   \pageheight=\dimexpr\paperheight+2\nxFondPerdu\relax
 }
 % Conversion d'une longueur TeX en points PostScript (l'unité des boîtes PDF) :
-% 1 bp = 1.00375 pt, donc 1 pt = 0.996264 bp.
-\newcommand{\nxDimEnBp}[1]{\strip@pt\dimexpr 0.996264\dimexpr#1\relax\relax}
+% 1 in = 72 bp = 72,27 pt, donc 1 pt = 7200/7227 bp exactement.
+%
+% Le rapport est écrit comme une division d'entiers, et non comme le décimal
+% 0.996264 : \dimexpr lit un coefficient décimal en le quantifiant au 1/65536,
+% ce qui introduisait 1,4 · 10⁻³ bp sur une largeur A4 — environ 95 sp, donc
+% au-delà du sp près que les gates de marge exigent. La forme « *7200/7227 »
+% multiplie sur 64 bits avant de diviser : l'erreur retombe au demi-sp de
+% l'arrondi final, et les boîtes de page deviennent comparables exactement.
+\newcommand{\nxDimEnBp}[1]{\strip@pt\dimexpr\dimexpr#1\relax*7200/7227\relax}
+% Le TrimBox est posé à l'origine déclarée, pas à une constante répétée : la
+% boîte PDF et le décalage du contenu ne peuvent pas diverger.
 \newcommand{\nxDeclarerBoitesDePage}{%
   \edef\nx@boitesDePage{%
-    /TrimBox [\nxDimEnBp{\nxFondPerdu}\space\nxDimEnBp{\nxFondPerdu}\space
-      \nxDimEnBp{\dimexpr\nxFondPerdu+\paperwidth\relax}\space
-      \nxDimEnBp{\dimexpr\nxFondPerdu+\paperheight\relax}]
+    /TrimBox [\nxDimEnBp{\nxOrigineTrimX}\space\nxDimEnBp{\nxOrigineTrimY}\space
+      \nxDimEnBp{\dimexpr\nxOrigineTrimX+\paperwidth\relax}\space
+      \nxDimEnBp{\dimexpr\nxOrigineTrimY+\paperheight\relax}]
     /BleedBox [0 0 \nxDimEnBp{\dimexpr2\nxFondPerdu+\paperwidth\relax}\space
       \nxDimEnBp{\dimexpr2\nxFondPerdu+\paperheight\relax}]%
   }%
@@ -538,11 +574,21 @@
   % \addcontentsline. Sans elle, TeX composait encore la derniere page du
   % chapitre precedent au moment ou l'entree de sommaire etait ecrite : le
   % sommaire et les signets annonçaient donc une page qui n'etait pas
-  % l'ouverture. Trois chapitres sur cinq mesurables cote eleve et six sur
-  % sept cote professeur portaient un folio faux d'exactement une page.
-  % L'ouverture occupait deja une page a elle seule -- la coupure survenait
-  % simplement trop tard : la pagination est donc inchangee, seul le folio
-  % enregistre devient exact.
+  % l'ouverture. Trois chapitres sur dix cote eleve et six sur dix cote
+  % professeur portaient un folio faux d'exactement une page ; il n'en reste
+  % aucun.
+  %
+  % La pagination, elle, CHANGE : mesure du 2026-09-03 sur les deux variantes,
+  % 359 -> 363 pages cote eleve et 633 -> 635 cote professeur. L'ouverture
+  % disputait bel et bien sa page a la fin du chapitre precedent, et
+  % `\thispagestyle{empty}` s'appliquait alors a cette page-la plutot qu'a
+  % l'ouverture. Ce changement de baseline visuelle est ratifie :
+  % audit/HUMAN_DECISION_1SPE_VISUAL_BASELINE_PAGINATION_2026-09-03.json, et
+  % il est prouve page par page par
+  % scripts/build_1spe_pagination_baseline_ratification.py.
+  %
+  % `\cleardoublepage` est explicitement REFUSE ici : aucun contrat n'exige
+  % qu'un chapitre demarre sur une page impaire.
   \clearpage
   % La page d'ouverture porte sa propre rubrique. Sans cette ligne elle
   % heritait de la derniere rubrique du chapitre PRECEDENT : huit ouvertures

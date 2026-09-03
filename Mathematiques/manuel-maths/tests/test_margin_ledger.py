@@ -850,8 +850,8 @@ def test_marked_content_anchor_only_for_displaced_and_reported_notes(
 \begin{document}
 \noindent Note stable\nxMarginRailNote{appui}{Note sans repère.}
 \nxMarginReserveRect{strong-shift}{%
-  \dimexpr1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep\relax}{9cm}{%
-  \dimexpr1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep+\marginparwidth\relax}{14cm}
+  \nxMargeRailGaucheImpaire}{9cm}{%
+  \dimexpr\nxMargeRailGaucheImpaire+\marginparwidth\relax}{14cm}
 \vspace*{6cm}
 Note déplacée\nxMarginRailNote{commentaire}{Note fortement déplacée.}
 \vspace*{8cm}
@@ -985,8 +985,8 @@ def test_pdf_adversaries_bbox_anchor_note_link_and_student_id_fail(
 \begin{document}
 \hypertarget{nx-adversarial-target}{Destination interne}
 \nxMarginReserveRect{strong-shift}{%
-  \dimexpr1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep\relax}{3cm}{%
-  \dimexpr1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep+\marginparwidth\relax}{12cm}
+  \nxMargeRailGaucheImpaire}{3cm}{%
+  \dimexpr\nxMargeRailGaucheImpaire+\marginparwidth\relax}{12cm}
 \vspace*{5cm}
 Liens\nxMarginRailNote{appui}{%
   \href{https://example.invalid/nexus-adversarial}{%

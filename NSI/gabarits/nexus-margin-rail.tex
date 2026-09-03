@@ -18,6 +18,32 @@
 \newcommand{\nxMarginStableId}[2]{%
   nxm:\nxMarginVariant:#1:\nxMarginEightDigits{#2}}
 
+% ======================================================================
+%  REPÈRE DU COMPOSITEUR DE MARGES
+% ======================================================================
+% Le compositeur travaille dans UN seul repère : la PAGE COMPOSÉE, c'est-à-dire
+% le format fini, dont le coin est l'origine du TrimBox. C'est déjà le repère
+% de \paperwidth/\paperheight, celui du nœud « current page » de TikZ, celui de
+% \put dans « shipout/foreground » — donc celui où le compositeur dessine — et,
+% depuis la correction des liens de marge, celui où le ledger compare les
+% annotations. Le fond perdu est une extension technique du support : il
+% n'est PAS l'origine logique du contenu imprimé.
+%
+% Conséquence pratique : les quatre longueurs ci-dessous sont l'unique
+% expression de la géométrie du rail, et elles sont dans ce repère. Aucun
+% \hoffset, aucun \voffset : les ajouter produirait un contenu logique
+% translaté du fond perdu (559 403 sp mesurés le 2026-09-03).
+%
+% \nxMarginReserveRect attend ce même repère.
+\newcommand{\nxMargeRailGaucheImpaire}{%
+  \dimexpr1in+\oddsidemargin+\textwidth+\marginparsep\relax}
+\newcommand{\nxMargeRailGauchePaire}{%
+  \dimexpr1in+\evensidemargin-\marginparsep-\marginparwidth\relax}
+\newcommand{\nxMargeRailHaut}{%
+  \dimexpr1in+\topmargin+\headheight+\headsep\relax}
+\newcommand{\nxMargeRailBas}{%
+  \dimexpr1in+\topmargin+\headheight+\headsep+\textheight\relax}
+
 \directlua{%
   local path = kpse.find_file("nexus-margin-shipout.lua", "lua")
     or "gabarits/nexus-margin-shipout.lua"
@@ -28,7 +54,15 @@
   nexus_margin = chunk()
 }
 
-\AtBeginDocument{%
+% La configuration est prise dans « begindocument/end », et non dans
+% \AtBeginDocument. La classe agrandit le support et pose \hoffset/\voffset
+% dans « begindocument/end » PRÉCISÉMENT parce que geometry réaffirme
+% \pagewidth au sein de \AtBeginDocument. Lire la géométrie de page trop tôt
+% donnait un rail calculé avec \hoffset = 0 pt, donc dans le repère du format
+% fini, tandis que tout obstacle déclaré dans le corps du document arrivait
+% avec \hoffset = 3 mm, donc dans le repère du support : 559 403 sp d'écart,
+% exactement le fond perdu. Le repère est désormais déclaré et vérifié.
+\AddToHook{begindocument/end}{%
   \ifnxVersionProfesseur
     \gdef\nxMarginVariant{professeur}%
   \else
@@ -44,19 +78,29 @@
     \par\vskip3pt}%
   \typeout{NEXUS-MARGIN-REPORT-DECORATION-SP:%
     \number\dimexpr\ht\nxMarginReportDecorationBox+\dp\nxMarginReportDecorationBox\relax}%
+  % Tout ce qui suit est dans le repère de la page composée : page_width_sp et
+  % page_height_sp sont le format fini, et le rail vient des quatre longueurs
+  % canoniques déclarées plus haut.
+  %
+  % trim_origin_* et support_offset_* ne sont PAS des coordonnées : ils
+  % transportent le repère lui-même. trim_origin_* est le coin de la page
+  % composée dans le support, tel que la classe le DÉCLARE ; support_offset_*
+  % est le décalage réellement en vigueur dans les registres de TeX. Le
+  % compositeur refuse de démarrer s'ils ne coïncident pas — c'est-à-dire si
+  % les coordonnées qu'il reçoit ne sont pas dans le repère qu'il croit.
   \directlua{nexus_margin.configure({
     variant = "\luaescapestring{\nxMarginVariant}",
     page_width_sp = \number\paperwidth,
     page_height_sp = \number\paperheight,
+    trim_origin_x_sp = \number\nxOrigineTrimX,
+    trim_origin_y_sp = \number\nxOrigineTrimY,
+    support_offset_x_sp = \number\hoffset,
+    support_offset_y_sp = \number\voffset,
     rail_width_sp = \number\marginparwidth,
-    odd_rail_left_sp = \number\dimexpr
-      1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep\relax,
-    even_rail_left_sp = \number\dimexpr
-      1in+\hoffset+\evensidemargin-\marginparsep-\marginparwidth\relax,
-    rail_top_sp = \number\dimexpr
-      1in+\voffset+\topmargin+\headheight+\headsep\relax,
-    rail_bottom_sp = \number\dimexpr
-      1in+\voffset+\topmargin+\headheight+\headsep+\textheight\relax,
+    odd_rail_left_sp = \number\nxMargeRailGaucheImpaire,
+    even_rail_left_sp = \number\nxMargeRailGauchePaire,
+    rail_top_sp = \number\nxMargeRailHaut,
+    rail_bottom_sp = \number\nxMargeRailBas,
     report_box_number = \number\nxMarginReportDecorationBox,
     report_decoration_height_sp = \number\dimexpr
       \ht\nxMarginReportDecorationBox+\dp\nxMarginReportDecorationBox\relax

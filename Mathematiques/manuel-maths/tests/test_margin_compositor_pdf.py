@@ -436,8 +436,8 @@ def test_declared_middle_reserve_rectangle_moves_note_below_obstacle(
 \providecommand{\nxMarginReserveRect}[5]{}
 \begin{document}
 \nxMarginReserveRect{fixture-middle}{%
-  \dimexpr1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep\relax}{5cm}{%
-  \dimexpr1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep+\marginparwidth\relax}{15cm}
+  \nxMargeRailGaucheImpaire}{5cm}{%
+  \dimexpr\nxMargeRailGaucheImpaire+\marginparwidth\relax}{15cm}
 \vspace*{7cm}
 Obstacle médian\margeAppui{Cette note doit contourner le rectangle réservé.}
 \newpage
@@ -552,13 +552,13 @@ def test_repeated_obstacle_base_id_is_qualified_by_absolute_shipout(
 \nxVersionProfesseurfalse
 \begin{document}
 \nxMarginReserveRect{header}{%
-  \dimexpr1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep\relax}{0pt}{%
-  \dimexpr1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep+\marginparwidth\relax}{1cm}
+  \nxMargeRailGaucheImpaire}{0pt}{%
+  \dimexpr\nxMargeRailGaucheImpaire+\marginparwidth\relax}{1cm}
 Recto\margeAppui{Note recto.}
 \newpage
 \nxMarginReserveRect{header}{%
-  \dimexpr1in+\hoffset+\evensidemargin-\marginparsep-\marginparwidth\relax}{0pt}{%
-  \dimexpr1in+\hoffset+\evensidemargin-\marginparsep\relax}{1cm}
+  \nxMargeRailGauchePaire}{0pt}{%
+  \dimexpr\nxMargeRailGauchePaire+\marginparwidth\relax}{1cm}
 Verso\margeAppui{Note verso.}
 \end{document}
 """,
@@ -668,10 +668,10 @@ def test_unplaceable_note_fails_with_exact_placement_error(tmp_path: Path) -> No
 \nxVersionProfesseurfalse
 \begin{document}
 \nxMarginReserveRect{fixture-full-rail}{%
-  \dimexpr1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep\relax}{%
-  \dimexpr1in+\voffset+\topmargin+\headheight+\headsep\relax}{%
-  \dimexpr1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep+\marginparwidth\relax}{%
-  \dimexpr1in+\voffset+\topmargin+\headheight+\headsep+\textheight\relax}
+  \nxMargeRailGaucheImpaire}{%
+  \nxMargeRailHaut}{%
+  \dimexpr\nxMargeRailGaucheImpaire+\marginparwidth\relax}{%
+  \nxMargeRailBas}
 Texte\nxMarginRailNote{appui}{Note sans placement possible.}.
 \end{document}
 """,
