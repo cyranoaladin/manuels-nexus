@@ -20,13 +20,6 @@
 
 \textbf{2.} La sensibilité est $P_M(T) = 0{,}95$ et la spécificité $P_{\overline{M}}(\overline{T}) = 0{,}97$. D'où l'arbre pondéré suivant.
 
-% Enveloppe R6 : le gate de compilation isolee (scripts/check_latex.py) monte
-% l'objet sans la charte. Le corrige rend donc son composant disponible
-% lui-meme ; sans effet des que la charte l'a deja charge (manuel assemble).
-\makeatletter\@ifundefined{nxarbreproba}{%
-  \IfFileExists{gabarits/common/nexus-arbres.sty}%
-    {\input{gabarits/common/nexus-arbres.sty}}%
-    {\input{../../gabarits/common/nexus-arbres.sty}}}{}\makeatother
 \begin{nxarbreproba}
   \nxarbreracine{o}
   \nxarbrenoeud{m}{o}{$M$}{$0{,}01$}

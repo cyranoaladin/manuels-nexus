@@ -13,13 +13,6 @@
 
 \textbf{1.} Chaque parent $Aa$ transmet $A$ ou $a$ avec la probabilité $\dfrac{1}{2}$, indépendamment de l'autre parent. Le premier niveau donne l'allèle du père, le second celui de la mère.
 
-% Enveloppe R6 : le gate de compilation isolee (scripts/check_latex.py) monte
-% l'objet sans la charte. Le corrige rend donc son composant disponible
-% lui-meme ; sans effet des que la charte l'a deja charge (manuel assemble).
-\makeatletter\@ifundefined{nxarbreproba}{%
-  \IfFileExists{gabarits/common/nexus-arbres.sty}%
-    {\input{gabarits/common/nexus-arbres.sty}}%
-    {\input{../../gabarits/common/nexus-arbres.sty}}}{}\makeatother
 \begin{nxarbreproba}
   \nxarbreracine{o}
   \nxarbrenoeud{pa}{o}{$A$}{$\dfrac{1}{2}$}

@@ -17,7 +17,13 @@ def _wrapper(source: Path, project_root: Path) -> str:
     relative_source = source.resolve().relative_to(project_root.resolve()).as_posix()
     return "\n".join(
         (
+            # R6 verifie l'objet sous le runtime que le manuel utilise
+            # REELLEMENT. Sans la charte, aucun objet du corpus ne pouvait
+            # employer un composant de la charte : le gate declarait rouge un
+            # contenu que le manuel assemble compose tres bien, et le defaut
+            # se payait en plomberie dans les objets eux-memes.
             r"\documentclass{gabarits/nexus-manuel}",
+            r"\usepackage{gabarits/nexus-charte-v6}",
             r"\begin{document}",
             rf"\input{{{relative_source}}}",
             r"\end{document}",
