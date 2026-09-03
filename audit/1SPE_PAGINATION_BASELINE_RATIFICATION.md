@@ -26,9 +26,10 @@ Mécanisme ratifié : `clearpage` — refusé : `cleardoublepage`
 | `DUPLICATED_CONTENT` | 0 |
 | `UNEXPECTED_REORDERING` | 0 |
 | `UNINTENTIONAL_BLANK_PAGE` | 0 |
-| `CURRENT_BUILD_LOST_THE_RATIFIED_PAGE_COUNT` | 0 |
+| `CURRENT_BUILD_PAGE_COUNT_CHANGED` | 2 |
+| `CURRENT_BUILD_PAGE_COUNTS` | {'eleve': 355, 'professeur': 627} |
 | `CURRENT_BUILD_FALSE_CHAPTER_FOLIO` | 0 |
-| `CURRENT_BUILD_DIFFERS_FROM_THE_RATIFIED_ONE` | 1 |
+| `CURRENT_BUILD_DIFFERS_FROM_THE_RATIFIED_ONE` | 2 |
 | `STALE_BLANK_PAGE_REASONS` | 0 |
 | `DOCUMENTED_BLANK_PAGE` | 8 |
 | `CHAPTER_TITLES_CARRY_NO_OWN_HYPHEN` | True |
@@ -42,7 +43,7 @@ Mécanisme ratifié : `clearpage` — refusé : `cleardoublepage`
 
 - PDF : `Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf`
 - pages : 359 → 363 au commit ratifié
-- build courant : 363 pages, `sha256:11c74f79f1cea70b…`, 0 folio faux, identique au build ratifié : true
+- build courant : 355 pages, `sha256:39c6a8541f4b35d8…`, 0 folio faux, identique au build ratifié : false
 - folios de chapitre faux : 3 → 0
 - flux de contenu dépouillé conservé : true (582029 caractères)
 - pages blanches : [2, 4, 6, 12]
@@ -76,7 +77,7 @@ Mécanisme ratifié : `clearpage` — refusé : `cleardoublepage`
 
 - PDF : `Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf`
 - pages : 633 → 635 au commit ratifié
-- build courant : 635 pages, `sha256:cb166e3a51baac4e…`, 0 folio faux, identique au build ratifié : false
+- build courant : 627 pages, `sha256:dc5f2575f5f7cd0b…`, 0 folio faux, identique au build ratifié : false
 - folios de chapitre faux : 6 → 0
 - flux de contenu dépouillé conservé : true (1007663 caractères)
 - pages blanches : [2, 4, 6, 12]

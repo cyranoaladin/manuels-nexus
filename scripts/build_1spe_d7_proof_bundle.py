@@ -273,12 +273,23 @@ def tab_measurements(page: Any) -> dict[str, Any]:
     ) / BP_PER_MM
     length_mm = (found.y1 - found.y0) / BP_PER_MM
 
-    # Le libelle vit dans l'onglet : on mesure sa boite pour verifier le
-    # remplissage de 6 mm et la marge interne de 3 mm.
+    # Le libelle vit DANS l'onglet, c'est-a-dire dans ses quatre bords.
+    # N'exiger que le recouvrement horizontal laissait entrer n'importe quel
+    # mot de la page tombant dans la bande etroite de l'onglet : la boite du
+    # libelle prenait alors la hauteur de la colonne de texte, et l'on
+    # mesurait des libelles de 232 mm sur une page large de 210. Le defaut
+    # etait latent -- il n'apparaissait que sur les pages ou un mot du corps
+    # partageait cette bande, et le choix des pages a change avec la
+    # recomposition.
     label = None
     for word in page.get_text("words"):
         rectangle = _fitz().Rect(word[0], word[1], word[2], word[3])
-        if rectangle.x0 >= found.x0 - 1 and rectangle.x1 <= found.x1 + 1:
+        if (
+            rectangle.x0 >= found.x0 - 1
+            and rectangle.x1 <= found.x1 + 1
+            and rectangle.y0 >= found.y0 - 1
+            and rectangle.y1 <= found.y1 + 1
+        ):
             label = rectangle if label is None else label | rectangle
     label_length_mm = (label.y1 - label.y0) / BP_PER_MM if label else None
     inner_padding_mm = (

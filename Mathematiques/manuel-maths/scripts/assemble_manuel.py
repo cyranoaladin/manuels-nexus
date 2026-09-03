@@ -237,6 +237,55 @@ def _compile_environment(
     return compile_environment
 
 
+# Le compositeur de marges converge en plusieurs passes privees : il CAPTURE
+# les notes a la passe n, et ne peut les DESSINER qu'a la passe n+1, quand il
+# relit l'inventaire de placement de la passe precedente. Sans cet inventaire,
+# `render_foreground` sort immediatement et aucune note n'est tracee -- les
+# notes existent dans la capture et jamais sur la page.
+MARGIN_MAX_PASSES = 6
+MARGIN_MINIMUM_PASSES = 3
+
+
+def _margin_run_nonce(manual: str, variant: str) -> str:
+    """Nonce deterministe : la reproductibilite passe avant l'unicite.
+
+    Le compositeur refuse de reutiliser un inventaire dont le nonce differe.
+    Un nonce aleatoire par execution rendrait deux constructions des memes
+    sources non comparables ; l'inventaire vit de toute facon dans un
+    repertoire de passe prive, cree et detruit avec elle, donc aucun inventaire
+    etranger ne peut etre relu.
+    """
+
+    return hashlib.sha256(f"{manual}:{variant}".encode("utf-8")).hexdigest()[:32]
+
+
+def _margin_pass_environment(
+    compile_environment: Mapping[str, str],
+    *,
+    manual: str,
+    variant: str,
+    pass_number: int,
+    previous: Path,
+    following: Path,
+    links: Path,
+) -> dict[str, str]:
+    environment = dict(compile_environment)
+    environment.update(
+        {
+            "NEXUS_MARGIN_VARIANT": variant,
+            "NEXUS_MARGIN_PASS_NUMBER": str(pass_number),
+            "NEXUS_MARGIN_RUN_NONCE": _margin_run_nonce(manual, variant),
+            "NEXUS_MARGIN_LAYOUT_PREVIOUS": str(previous),
+            "NEXUS_MARGIN_LAYOUT_NEXT": str(following),
+            # L'inventaire des liens ne change rien au PDF : il decrit ce que
+            # le compositeur vient d'y ecrire. Sans lui, la verification
+            # semantique des notes ne peut pas tourner sur l'artefact livre.
+            "NEXUS_MARGIN_LINK_INVENTORY_NEXT": str(links),
+        }
+    )
+    return environment
+
+
 def _load_reproducibility_control(
     git_root: Path,
     *,
@@ -1345,6 +1394,12 @@ def _main_locked(
     pdf_path = build / f"{tex_name}.pdf"
     log_path = build / f"{tex_name}.log"
     fls_path = build / f"{tex_name}.fls"
+    # L'inventaire de placement des marges est publie A COTE du PDF : sans lui,
+    # la verification semantique des notes ne peut plus tourner sur l'artefact
+    # livre, seulement sur des documents reconstruits pour l'occasion. Le
+    # pipeline teste doit etre le pipeline produit.
+    margin_layout_path = build / f"{tex_name}.margin-layout.json"
+    margin_links_path = build / f"{tex_name}.margin-links.json"
     report_path = build / f"{tex_name}.preflight.json"
     receipt_path = build / f"{tex_name}.receipt.json"
 
@@ -1386,11 +1441,24 @@ def _main_locked(
                 f"-output-directory={run_directory}",
                 str(tex_path),
             ]
-            for pass_number in range(1, 4):
+            margin_previous = run_directory / "margin-layout.previous.json"
+            margin_next = run_directory / "margin-layout.next.json"
+            margin_links = run_directory / "margin-links.json"
+            margin_state = None
+            for pass_number in range(1, MARGIN_MAX_PASSES + 1):
+                margin_next.unlink(missing_ok=True)
                 try:
                     proc = _run_with_environment(
                         active_runner,
-                        compile_environment,
+                        _margin_pass_environment(
+                            compile_environment,
+                            manual=manual,
+                            variant=variant,
+                            pass_number=pass_number,
+                            previous=margin_previous,
+                            following=margin_next,
+                            links=margin_links,
+                        ),
                         command,
                         capture_output=True,
                         text=True,
@@ -1407,6 +1475,28 @@ def _main_locked(
                     if detail:
                         message += f" : {detail}"
                     raise AssemblyError(message)
+                if not margin_next.is_file():
+                    raise AssemblyError(
+                        f"inventaire de marges absent à la passe {pass_number}"
+                    )
+                if not margin_links.is_file():
+                    raise AssemblyError(
+                        f"inventaire de liens de marge absent à la passe {pass_number}"
+                    )
+                try:
+                    margin_state = json.loads(
+                        margin_next.read_text(encoding="utf-8")
+                    ).get("state")
+                except (OSError, UnicodeError, json.JSONDecodeError) as error:
+                    raise AssemblyError("inventaire de marges illisible") from error
+                os.replace(margin_next, margin_previous)
+                if pass_number >= MARGIN_MINIMUM_PASSES and margin_state == "stable":
+                    break
+            if margin_state != "stable":
+                raise AssemblyError(
+                    "placements de marge non stabilisés après "
+                    f"{MARGIN_MAX_PASSES} passes (état : {margin_state})"
+                )
 
             candidate_fingerprints = _compiled_output_fingerprints(
                 root=ROOT,
@@ -1450,6 +1540,8 @@ def _main_locked(
             for source, destination in (
                 (run_log_path, log_path),
                 (run_fls_path, fls_path),
+                (margin_previous, margin_layout_path),
+                (margin_links, margin_links_path),
                 (run_pdf_path, pdf_path),
             ):
                 _revalidate_fingerprints(candidate_fingerprints)
@@ -1469,6 +1561,8 @@ def _main_locked(
 
     if not record_observed:
         print(f"PDF : {pdf_path}")
+        print(f"Inventaire de marges : {margin_layout_path}")
+        print(f"Inventaire de liens de marge : {margin_links_path}")
         return 0
 
     try:

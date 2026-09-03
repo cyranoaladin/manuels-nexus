@@ -1,0 +1,240 @@
+{
+  "artifact_type": "1spe_chapter_opener_raster_qa",
+  "generated_by": "scripts/build_1spe_chapter_opener_raster_qa.py",
+  "measures_tried_and_rejected": [
+    {
+      "measure": "chevauchement des rectangles de lignes",
+      "why_rejected": "Le grand chiffre du chapitre passe délibérément derrière le titre : leurs boîtes se recouvrent sur une page parfaitement lisible. Cinquante-deux fausses alertes."
+    },
+    {
+      "measure": "rapport de contraste WCAG par fragment",
+      "why_rejected": "Il juge une intention graphique -- du blanc sur une pastille orange -- et non un défaut de composition, et se lit mal sur la boîte serrée d'un seul glyphe. Trente-trois fausses alertes."
+    }
+  ],
+  "minimum_ink_coverage": 0.01,
+  "raster_dpi": 300,
+  "schema_version": 1,
+  "summary": {
+    "OPENERS_INSPECTED": 20,
+    "OPENER_CLIPPING": 0,
+    "OPENER_EMPTY_ZONE": 0,
+    "OPENER_MISSING_CONTENT": 0,
+    "OPENER_ORPHAN_PAGE": 0,
+    "OPENER_TEXT_WITHOUT_TRACE": 0,
+    "OPENER_UNKNOWN": 0,
+    "WEAKEST_INK_COVERAGE": 0.05765
+  },
+  "the_trim_edge_is_read_from_the_page": "Le bord de rognage est la TrimBox de chaque page, jamais une valeur écrite ici.",
+  "variants": [
+    {
+      "OPENERS_INSPECTED": 10,
+      "OPENER_CLIPPING": 0,
+      "OPENER_EMPTY_ZONE": 0,
+      "OPENER_TEXT_WITHOUT_TRACE": 0,
+      "WEAKEST_INK_COVERAGE": 0.06143,
+      "openers": [
+        {
+          "chapter_number": 1,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 14,
+          "title": "Suites numériques",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 2,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 75,
+          "title": "Fonctions polynômes du second degré",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 3,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 120,
+          "title": "Dérivation : point de vue local",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 4,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 149,
+          "title": "Dérivation : applications aux variations",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 5,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 185,
+          "title": "Fonction exponentielle",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 6,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 215,
+          "title": "Trigonométrie",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 7,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 233,
+          "title": "Produit scalaire",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 8,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 258,
+          "title": "Géométrie repérée",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 9,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 283,
+          "title": "Probabilités conditionnelles et indépendance",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 10,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 310,
+          "title": "Variables aléatoires",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        }
+      ],
+      "pdf_path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
+      "variant": "eleve"
+    },
+    {
+      "OPENERS_INSPECTED": 10,
+      "OPENER_CLIPPING": 0,
+      "OPENER_EMPTY_ZONE": 0,
+      "OPENER_TEXT_WITHOUT_TRACE": 0,
+      "WEAKEST_INK_COVERAGE": 0.05765,
+      "openers": [
+        {
+          "chapter_number": 1,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 14,
+          "title": "Suites numériques",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 2,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 139,
+          "title": "Fonctions polynômes du second degré",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 3,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 240,
+          "title": "Dérivation : point de vue local",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 4,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 294,
+          "title": "Dérivation : applications aux variations",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 5,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 363,
+          "title": "Fonction exponentielle",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 6,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 417,
+          "title": "Trigonométrie",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 7,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 445,
+          "title": "Produit scalaire",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 8,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 483,
+          "title": "Géométrie repérée",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        },
+        {
+          "chapter_number": 9,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 522,
+          "title": "Probabilités conditionnelles et indépendance",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.05765
+        },
+        {
+          "chapter_number": 10,
+          "clipped": [],
+          "empty_zones": [],
+          "page": 565,
+          "title": "Variables aléatoires",
+          "traceless_text": [],
+          "weakest_ink_coverage": 0.06143
+        }
+      ],
+      "pdf_path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf",
+      "variant": "professeur"
+    }
+  ],
+  "what_is_measured_elsewhere_is_not_measured_twice": {
+    "artifact": "audit/1SPE_CHAPTER_OPENER_SPAN.json",
+    "metrics": [
+      "MULTI_PAGE_OPENERS",
+      "OPENER_MISSING_CONTENT"
+    ],
+    "why": "L'étendue et le contenu manquant se lisent sur le texte, pas sur les pixels. Deux mesures indépendantes valent mieux qu'une mesure dupliquée."
+  }
+}

@@ -521,6 +521,38 @@ def test_an_obstacle_offset_by_the_bleed_breaks_the_rail_containment_invariant(
 # --------------------------------------------------------------------------
 
 
+def test_the_form_bbox_bound_is_the_worst_case_of_the_mechanism() -> None:
+    """La borne du /BBox est-elle atteinte, et jamais depassee ?
+
+    Une borne trop large laisse passer un vrai defaut ; une borne trop etroite
+    rejette un PDF conforme, ce qui est arrive sur le manuel livre. Elle doit
+    donc etre EXACTEMENT le pire ecart que le mecanisme puisse produire. Ce
+    controle le verifie en parcourant un intervalle entier de valeurs : aucune
+    ne doit depasser la borne, et au moins une doit l'atteindre.
+    """
+
+    ledger_module = _load(
+        "margin_ledger_bbox_bound", MANUAL_ROOT / "scripts/margin_ledger.py"
+    )
+    bound = ledger_module.FORM_BBOX_ROUNDING_TOLERANCE_SP
+    digits = ledger_module.PDF_DECIMAL_DIGITS
+    step = Fraction(1, 10**digits)
+
+    worst = 0
+    for exact_sp in range(400_000, 460_000):
+        # Le moteur ecrit la valeur en bp, arrondie a `digits` decimales.
+        in_bp = Fraction(exact_sp) / BP_TO_SP_EXACT
+        written = round(in_bp / step) * step
+        # Le controle la relit, et l'arrondit au sp.
+        read_back = round(written * BP_TO_SP_EXACT)
+        worst = max(worst, abs(read_back - exact_sp))
+
+    assert worst == bound, (
+        "la borne du /BBox ne colle plus au mecanisme : "
+        f"pire ecart {worst} sp, borne {bound} sp"
+    )
+
+
 @pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
 def test_the_rendered_position_tolerance_is_the_engines_writing_precision(
     tmp_path: Path,
@@ -532,8 +564,17 @@ def test_the_rendered_position_tolerance_is_the_engines_writing_precision(
     )
 
     half_ulp_sp = BP_TO_SP_EXACT / (2 * 10**ledger_module.PDF_DECIMAL_DIGITS)
-    # Un seul nombre arrondi : le coin du /BBox du Form.
-    assert ledger_module.FORM_BBOX_ROUNDING_TOLERANCE_SP == int(half_ulp_sp)
+    # Un seul nombre arrondi -- le coin du /BBox du Form -- PLUS le demi-sp de
+    # l'arrondi final : la valeur relue est ramenee au sp avant d'etre comparee
+    # a une valeur exacte. La borne valait `int(half_ulp)`, soit 32, et
+    # oubliait ce demi-sp. Comme les deux quantites comparees sont des ENTIERS,
+    # leur ecart ne peut pas valoir 33,39 : la borne juste est le PLANCHER de
+    # 32,890880 + 0,5, c'est-a-dire 33. Le manuel l'a montre -- une note de
+    # 438 929 sp s'ecrit 6.673 bp et se relit 438 962 sp -- sur un PDF
+    # parfaitement conforme.
+    assert ledger_module.FORM_BBOX_ROUNDING_TOLERANCE_SP == math.floor(
+        half_ulp_sp + Fraction(1, 2)
+    )
     # Deux nombres arrondis plus le demi-sp de la conversion pt -> bp.
     assert ledger_module.ENGINE_WRITTEN_POSITION_TOLERANCE_SP == math.ceil(
         2 * half_ulp_sp + Fraction(1, 2)

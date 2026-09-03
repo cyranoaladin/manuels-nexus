@@ -1,0 +1,52 @@
+{
+  "a_template_change_is_not_a_content_change": "Une charte modifiée change la mise en page de la NSI, pas son propos. Les deux comptes sont publiés séparément.",
+  "a_wrapper_is_not_a_copy": "Un adaptateur de discipline redirige vers gabarits/common ; il doit être identique entre mathématiques et NSI, pas au module commun. Règle portée par tests/test_canonical_resolution_chain.py.",
+  "artifact_type": "1nsi_content_untouched",
+  "baseline": {
+    "date": "2026-09-01",
+    "deleted_tex_files": 44,
+    "sha": "2d522877b67a2417602a40e33b7f3bd1f0c620ab",
+    "subject": "[1NSI] retirer 44 cours qui dupliquaient ou usurpaient un autre objet"
+  },
+  "baseline_is_read_not_chosen": "audit/1NSI_PENDING_STATE_REOBSERVATION.json",
+  "changed": {
+    "CONTENT": [],
+    "SHARED_TEMPLATE": [
+      "NSI/gabarits/nexus-boites-v6.sty",
+      "NSI/gabarits/nexus-charte-v6.sty",
+      "NSI/gabarits/nexus-couverture.sty",
+      "NSI/gabarits/nexus-decor.sty",
+      "NSI/gabarits/nexus-exercices-v6.sty",
+      "NSI/gabarits/nexus-figures-bib.sty",
+      "NSI/gabarits/nexus-manuel-v5.cls",
+      "NSI/gabarits/nexus-manuel.cls",
+      "NSI/gabarits/nexus-margin-rail.tex",
+      "NSI/gabarits/nexus-margin-shipout.lua",
+      "NSI/gabarits/nexus-pages-froides.sty",
+      "NSI/gabarits/nexus-pont-v6.sty"
+    ],
+    "TOOLING_OR_AUDIT": []
+  },
+  "content_prefixes": [
+    "NSI/chapitres/",
+    "NSI/corpus/",
+    "NSI/corpus_nsi/",
+    "NSI/referentiel/",
+    "NSI/db/",
+    "NSI/sources/"
+  ],
+  "generated_by": "scripts/build_1nsi_content_untouched.py",
+  "schema_version": 1,
+  "shared_template_copies_diverging": [],
+  "shared_template_prefixes": [
+    "NSI/gabarits/"
+  ],
+  "summary": {
+    "1NSI_CONTENT_CHANGED": "NO",
+    "CONTENT_FILES_CHANGED": 0,
+    "SHARED_TEMPLATE_COPIES_DIVERGING": 0,
+    "SHARED_TEMPLATE_FILES_CHANGED": 12,
+    "TOOLING_OR_AUDIT_FILES_CHANGED": 0
+  },
+  "what_content_means": "Ce que l'assembleur 1NSI publie et les données pédagogiques dont il le tire. Pas les gabarits typographiques, partagés avec les mathématiques ; pas les tests ; pas les artefacts d'audit."
+}

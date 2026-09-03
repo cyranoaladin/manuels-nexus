@@ -1,0 +1,164 @@
+{
+  "artifact_type": "1spe_margin_content_contract",
+  "class_is_read_from_the_producer_not_the_name": true,
+  "contract": [
+    {
+      "applies_to": [
+        "eleve",
+        "professeur"
+      ],
+      "assembly_consumer": "corps de chapitre (cours, méthodes, exercices)",
+      "authority": "AGENTS.md — « Les notes marginales doivent avoir un fallback dans le flux principal » : une note de marge est du contenu affiché, sinon la question du repli ne se poserait pas",
+      "classification": "EXPECTED_VISIBLE_MARGIN_CONTENT",
+      "expected_visibility": "VISIBLE",
+      "pedagogical_role": "note d'appui : un rappel court qui accompagne le texte courant sans l'interrompre",
+      "producer": "gabarits/common/nexus-manuel.cls:245 — \\margeAppui",
+      "role": "appui"
+    },
+    {
+      "applies_to": [
+        "eleve",
+        "professeur"
+      ],
+      "assembly_consumer": "corps de chapitre",
+      "authority": "même autorité que la note d'appui",
+      "classification": "EXPECTED_VISIBLE_MARGIN_CONTENT",
+      "expected_visibility": "VISIBLE",
+      "pedagogical_role": "commentaire de marge : une remarque de l'auteur sur le passage en regard",
+      "producer": "gabarits/common/nexus-manuel.cls:249 — \\commentaireMarge",
+      "role": "commentaire"
+    },
+    {
+      "applies_to": [
+        "eleve",
+        "professeur"
+      ],
+      "assembly_consumer": "corps de chapitre",
+      "authority": "même autorité que la note d'appui",
+      "classification": "EXPECTED_VISIBLE_MARGIN_CONTENT",
+      "expected_visibility": "VISIBLE",
+      "pedagogical_role": "définition de vocabulaire en marge",
+      "producer": "gabarits/common/nexus-manuel.cls:255 — \\margeVocab",
+      "role": "vocab"
+    },
+    {
+      "applies_to": [
+        "eleve",
+        "professeur"
+      ],
+      "assembly_consumer": "environnement exercice",
+      "authority": "docs/01_conception_manuel.md — les parcours annoncent un temps ; la durée par exercice est ce qui rend ce temps opérationnel",
+      "classification": "EXPECTED_VISIBLE_MARGIN_CONTENT",
+      "expected_visibility": "VISIBLE",
+      "pedagogical_role": "durée estimée de l'exercice, en regard de son énoncé : l'élève s'en sert pour organiser son travail",
+      "producer": "gabarits/common/nexus-manuel.cls:433 — environnement exercice, durée estimée",
+      "role": "chrono"
+    },
+    {
+      "applies_to": [
+        "professeur"
+      ],
+      "assembly_consumer": "environnements exercice et corrigé",
+      "authority": "AGENTS.md — « La version élève ne doit contenir aucun identifiant interne 1SPE-* visible » : l'interdiction ne vise que l'élève, et la garde \\ifnxVersionProfesseur la respecte",
+      "classification": "EXPECTED_VISIBLE_MARGIN_CONTENT",
+      "expected_visibility": "VISIBLE",
+      "pedagogical_role": "identifiant interne de l'objet, en marge du manuel professeur : il relie la page imprimée à la source et sert la correction",
+      "producer": "gabarits/common/nexus-manuel.cls:436 et :448 — exercice et corrigé, sous \\ifnxVersionProfesseur",
+      "role": "professor-id"
+    }
+  ],
+  "generated_by": "scripts/build_1spe_margin_content_contract.py",
+  "partition_is_closed": [
+    "EXPECTED_VISIBLE_MARGIN_CONTENT",
+    "NON_RENDERING_INTERNAL_ANCHOR",
+    "OBSOLETE",
+    "UNKNOWN"
+  ],
+  "schema_version": 1,
+  "summary": {
+    "DECLARED_ROLES": 5,
+    "EXPECTED_VISIBLE_MARGIN_ITEMS": 3990,
+    "RENDERED_VISIBLE_MARGIN_ITEMS": 3990,
+    "SILENTLY_DROPPED_MARGIN_ITEMS": 0,
+    "UNKNOWN_ROLES": 0,
+    "unknown_roles": []
+  },
+  "variants": [
+    {
+      "CAPTURED": 952,
+      "EXPECTED_VISIBLE_MARGIN_ITEMS": 952,
+      "RENDERED": 952,
+      "RENDERED_VISIBLE_MARGIN_ITEMS": 952,
+      "SILENTLY_DROPPED_MARGIN_ITEMS": 0,
+      "roles": [
+        {
+          "captured": 67,
+          "classification": "EXPECTED_VISIBLE_MARGIN_CONTENT",
+          "expected_visible_here": true,
+          "rendered": 67,
+          "role": "appui",
+          "silently_dropped": 0
+        },
+        {
+          "captured": 734,
+          "classification": "EXPECTED_VISIBLE_MARGIN_CONTENT",
+          "expected_visible_here": true,
+          "rendered": 734,
+          "role": "chrono",
+          "silently_dropped": 0
+        },
+        {
+          "captured": 151,
+          "classification": "EXPECTED_VISIBLE_MARGIN_CONTENT",
+          "expected_visible_here": true,
+          "rendered": 151,
+          "role": "commentaire",
+          "silently_dropped": 0
+        }
+      ],
+      "variant": "eleve"
+    },
+    {
+      "CAPTURED": 3038,
+      "EXPECTED_VISIBLE_MARGIN_ITEMS": 3038,
+      "RENDERED": 3038,
+      "RENDERED_VISIBLE_MARGIN_ITEMS": 3038,
+      "SILENTLY_DROPPED_MARGIN_ITEMS": 0,
+      "roles": [
+        {
+          "captured": 67,
+          "classification": "EXPECTED_VISIBLE_MARGIN_CONTENT",
+          "expected_visible_here": true,
+          "rendered": 67,
+          "role": "appui",
+          "silently_dropped": 0
+        },
+        {
+          "captured": 734,
+          "classification": "EXPECTED_VISIBLE_MARGIN_CONTENT",
+          "expected_visible_here": true,
+          "rendered": 734,
+          "role": "chrono",
+          "silently_dropped": 0
+        },
+        {
+          "captured": 771,
+          "classification": "EXPECTED_VISIBLE_MARGIN_CONTENT",
+          "expected_visible_here": true,
+          "rendered": 771,
+          "role": "commentaire",
+          "silently_dropped": 0
+        },
+        {
+          "captured": 1466,
+          "classification": "EXPECTED_VISIBLE_MARGIN_CONTENT",
+          "expected_visible_here": true,
+          "rendered": 1466,
+          "role": "professor-id",
+          "silently_dropped": 0
+        }
+      ],
+      "variant": "professeur"
+    }
+  ]
+}

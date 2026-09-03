@@ -11,22 +11,23 @@ Marge de sécurité au trait de coupe : 3.0 mm.
 
 | Métrique | Valeur |
 |---|---:|
-| `PAGES_INSPECTED` | 998 |
+| `PAGES_INSPECTED` | 982 |
 | `INK_BEYOND_SUPPORT` | 56 |
 | `UNDECLARED_INK_IN_BLEED_BAND` | 0 |
-| `DECLARED_INK_IN_BLEED_BAND` | 1123 |
+| `DECLARED_INK_IN_BLEED_BAND` | 1107 |
 | `TEXT_INSIDE_SAFETY_MARGIN` | 0 |
 | `PAGES_WITHOUT_TEXT` | 11 |
+| `TEXT_LAYER_CONTROL_CHARACTERS` | 0 |
 
 ## Variante `eleve`
 
 - PDF : `Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf`
-- pages inspectées : 363 / 363
+- pages inspectées : 355 / 355
 - encre hors support, jamais imprimée : 28
-- débord de fond perdu contractuel : 425
+- débord de fond perdu contractuel : 417
 - débord de fond perdu non décidé : 0
 - texte dans la marge de sécurité : 0
-- pages sans texte : [2, 4, 6, 12, 356, 360]
+- pages sans texte : [2, 4, 6, 12, 348, 352]
 
 | Page | Hors support | Fond perdu non décidé | Texte en marge |
 |---:|---:|---:|---:|
@@ -35,12 +36,12 @@ Marge de sécurité au trait de coupe : 3.0 mm.
 ## Variante `professeur`
 
 - PDF : `Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf`
-- pages inspectées : 635 / 635
+- pages inspectées : 627 / 627
 - encre hors support, jamais imprimée : 28
-- débord de fond perdu contractuel : 698
+- débord de fond perdu contractuel : 690
 - débord de fond perdu non décidé : 0
 - texte dans la marge de sécurité : 0
-- pages sans texte : [2, 4, 6, 12, 632]
+- pages sans texte : [2, 4, 6, 12, 624]
 
 | Page | Hors support | Fond perdu non décidé | Texte en marge |
 |---:|---:|---:|---:|

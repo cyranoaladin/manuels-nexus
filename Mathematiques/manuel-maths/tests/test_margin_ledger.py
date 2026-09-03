@@ -390,19 +390,30 @@ def _sha256(data: bytes) -> str:
     return "sha256:" + hashlib.sha256(data).hexdigest()
 
 
-def _geometry_evidence(*, same_page: bool = False) -> tuple[dict[str, Any], ...]:
+def _geometry_evidence(
+    *, same_page: bool = False, planned_gap_sp: int | None = None
+) -> tuple[dict[str, Any], ...]:
     capture = json.loads((FIXTURE_ROOT / "margin-layout.valid.json").read_text())
     stable = json.loads(
         (FIXTURE_ROOT / "margin-stable-layout.valid.json").read_text()
     )
     ledger = json.loads((FIXTURE_ROOT / "margin-ledger.valid.json").read_text())
     if same_page:
+        # Par defaut les deux notes sont largement separees ; `planned_gap_sp`
+        # permet de poser l'ecart PLANIFIE au sp pres, pour eprouver le
+        # minimum typographique la ou il est decide.
+        second_top = 800000
+        if planned_gap_sp is not None:
+            first = stable["notes"][0]
+            second_top = (
+                first["target_y_sp"] + first["effective_height_sp"] + planned_gap_sp
+            )
         for layout in (capture, stable):
             note = layout["notes"][1]
             note.update(
                 {
                     "target_shipout_index": 1,
-                    "target_y_sp": 800000,
+                    "target_y_sp": second_top,
                     "effective_height_sp": note["base_height_sp"],
                     "report_depth": 0,
                     "requires_marker": False,
@@ -419,7 +430,12 @@ def _geometry_evidence(*, same_page: bool = False) -> tuple[dict[str, Any], ...]
             {
                 "target_shipout_index": 1,
                 "target_folio": "1",
-                "bbox_sp": [900000, 800000, 1100000, 900000],
+                "bbox_sp": [
+                    900000,
+                    second_top,
+                    1100000,
+                    second_top + 100000,
+                ],
                 "anchor_count": 0,
                 "report_depth": 0,
                 "requires_marker": False,
@@ -625,16 +641,19 @@ def test_margin_gate_propagates_runner_environment_and_timeout_to_qpdf_poppler(
             "nxm:eleve:vocab:00000002 intersect",
         ),
         (
+            # L'ecart RENDU se compare a la precision declaree par l'appelant --
+            # ici le defaut, un sp. Deux sp de moins que les 6 pt contractuels
+            # sont donc un vrai desaccord entre le plan et la page.
             "spacing",
             {
                 "nxm:eleve:vocab:00000002": [
                     900000,
-                    300000 + 6 * SP_PER_PT - 1,
+                    300000 + 6 * SP_PER_PT - 2,
                     1100000,
-                    400000 + 6 * SP_PER_PT - 1,
+                    400000 + 6 * SP_PER_PT - 2,
                 ]
             },
-            "have less than 6pt vertical gap",
+            "rendered notes",
         ),
         (
             "rail",
@@ -661,6 +680,41 @@ def test_margin_geometry_rejects_collisions_spacing_rail_and_obstacles(
 
     with pytest.raises(ledger_module.MarginLedgerError, match=re.escape(reason)):
         ledger_module.verify_margin_layout(pdf, capture, stable, ledger)
+
+
+def test_the_six_point_gap_is_exact_on_the_plan_and_tolerant_on_the_page(
+    tmp_path: Path,
+) -> None:
+    """Deux precisions pour un seul contrat, et chacune a sa place.
+
+    Sur le PLAN, l'ecart est un entier de sp : `margin_contract.py` le refuse a
+    un sp pres, sans aucune tolerance. Sur la PAGE RENDUE, le meme ecart
+    traverse deux nombres que le moteur a arrondis a trois decimales : une
+    paire posee a exactement 6 pt s'y relit quelques sp en dessous, sur un PDF
+    parfaitement conforme. Le verifier la avec la meme rigueur rejetait le
+    manuel livre.
+    """
+
+    ledger_module = _load_ledger()
+
+    exact = _geometry_evidence(same_page=True, planned_gap_sp=6 * SP_PER_PT)
+    legal = tmp_path / "exactement-six-points.pdf"
+    _write_geometry_pdf(legal, exact[1], exact[2])
+    assert ledger_module.verify_margin_layout(legal, *exact).passed
+
+    # Le plan qui viole le contrat d'UN sp est refuse par le contrat lui-meme,
+    # avant meme que la page soit regardee. Le module est recharge a chaque
+    # appel, si bien que sa classe d'exception n'est jamais la meme objet :
+    # c'est donc son NOM qui est verifie, avec le message.
+    with pytest.raises(
+        Exception, match="placed notes .* have less than 6pt vertical gap"
+    ) as refusal:
+        _geometry_evidence(same_page=True, planned_gap_sp=6 * SP_PER_PT - 1)
+    assert type(refusal.value).__name__ == "MarginContractError"
+
+    # Et la page qui s'ecarte du plan au-dela de la precision declaree est
+    # refusee par le ledger -- c'est le cas « spacing » ci-dessus.
+    assert ledger_module.MARGIN_GAP_SP == 6 * SP_PER_PT
 
 
 def test_margin_geometry_allows_one_sp_but_rejects_two_sp_coordinate_error(

@@ -28,86 +28,64 @@ Rastérisation critique : 300 dpi ; planche de contact : 100 dpi.
 | `CHAPTER_OPENER` | une ouverture de chapitre, banniere et capacites | eleve | 14 | even | absent |
 | `TOC_AND_FOLIO` | le sommaire et ses folios a un, deux et trois chiffres | eleve | 9 | odd | absent |
 | `TOC_AND_FOLIO` | le sommaire et ses folios a un, deux et trois chiffres | eleve | 10 | even | absent |
-| `COURSE` | une page de cours | eleve | 18 | even | left, 11.9995 mm dedans / 1.0006 mm dehors, 16.0002 mm |
-| `METHOD` | une fiche methode | eleve | 30 | even | left, 11.9995 mm dedans / 1.0006 mm dehors, 17.2336 mm |
-| `FORMULARY` | le formulaire | eleve | 357 | odd | absent |
-| `EXERCISE` | une page d'exercices | eleve | 39 | odd | right, 11.9995 mm dedans / 1.0007 mm dehors, 17.4357 mm |
-| `PROBABILITY_TREE` | un arbre de probabilite dessine | eleve | 310 | even | left, 11.9995 mm dedans / 1.0006 mm dehors, 24.556 mm |
-| `ASSESSMENT` | un sujet d'evaluation | eleve | 112 | even | left, 11.9995 mm dedans / 1.0006 mm dehors, 18.409 mm |
-| `REMEDIATION` | une page de remediation | eleve | 61 | odd | right, 11.9994 mm dedans / 1.0007 mm dehors, 19.6975 mm |
-| `TEACHER_CORRECTION` | un corrige reserve au professeur | professeur | 66 | even | left, 11.9995 mm dedans / 1.0006 mm dehors, 18.409 mm |
+| `COURSE` | une page de cours | eleve | 17 | odd | right, 11.9994 mm dedans / 1.0008 mm dehors, 16.0002 mm |
+| `METHOD` | une fiche methode | eleve | 29 | odd | right, 11.9996 mm dedans / 1.0006 mm dehors, 17.2336 mm |
+| `FORMULARY` | le formulaire | eleve | 349 | odd | absent |
+| `EXERCISE` | une page d'exercices | eleve | 38 | even | left, 11.9995 mm dedans / 1.0006 mm dehors, 17.4357 mm |
+| `PROBABILITY_TREE` | un arbre de probabilite dessine | eleve | 303 | odd | right, 11.9993 mm dedans / 1.0009 mm dehors, 24.556 mm |
+| `ASSESSMENT` | un sujet d'evaluation | eleve | 110 | even | left, 11.9995 mm dedans / 1.0006 mm dehors, 18.409 mm |
+| `REMEDIATION` | une page de remediation | eleve | 60 | even | left, 11.9995 mm dedans / 1.0006 mm dehors, 19.6975 mm |
+| `TEACHER_CORRECTION` | un corrige reserve au professeur | professeur | 65 | odd | right, 11.9994 mm dedans / 1.0008 mm dehors, 18.409 mm |
 | `TAB_ODD_AND_EVEN` | l'alternance de l'onglet, page impaire puis page paire | eleve | 19 | odd | right, 11.9994 mm dedans / 1.0008 mm dehors, 16.0002 mm |
-| `TAB_ODD_AND_EVEN` | l'alternance de l'onglet, page impaire puis page paire | eleve | 20 | even | left, 11.9995 mm dedans / 1.0006 mm dehors, 16.0002 mm |
+| `TAB_ODD_AND_EVEN` | l'alternance de l'onglet, page impaire puis page paire | eleve | 18 | even | left, 11.9995 mm dedans / 1.0006 mm dehors, 16.0002 mm |
 
 ## Mesures de l'onglet
 
-### `COURSE` — eleve page 18
-
-| Règle | Verdict | Mesuré |
-|---|---|---|
-| `TAB_INSIDE_12MM` | PASS | `11.9995` |
-| `TAB_OUTSIDE_1MM` | PASS | `1.0006` |
-| `TAB_MIN_LENGTH_16MM` | PASS | `16.0002` |
-| `TAB_SIDE_FOLLOWS_PARITY` | PASS | `"left"` |
-| `TAB_LENGTH_IS_LABEL_PLUS_6MM` | PASS | `{"tab": 16.0002, "label": 7.138, "expected_min": 16.0}` |
-| `TAB_INNER_PADDING_3MM` | PASS | `4.4959` |
-
-### `METHOD` — eleve page 30
-
-| Règle | Verdict | Mesuré |
-|---|---|---|
-| `TAB_INSIDE_12MM` | PASS | `11.9995` |
-| `TAB_OUTSIDE_1MM` | PASS | `1.0006` |
-| `TAB_MIN_LENGTH_16MM` | PASS | `17.2336` |
-| `TAB_SIDE_FOLLOWS_PARITY` | PASS | `"left"` |
-| `TAB_LENGTH_IS_LABEL_PLUS_6MM` | PASS | `{"tab": 17.2336, "label": 11.2333, "expected_min": 17.2333}` |
-| `TAB_INNER_PADDING_3MM` | PASS | `4.6744` |
-
-### `EXERCISE` — eleve page 39
-
-| Règle | Verdict | Mesuré |
-|---|---|---|
-| `TAB_INSIDE_12MM` | PASS | `11.9995` |
-| `TAB_OUTSIDE_1MM` | PASS | `1.0007` |
-| `TAB_MIN_LENGTH_16MM` | PASS | `17.4357` |
-| `TAB_SIDE_FOLLOWS_PARITY` | PASS | `"right"` |
-| `TAB_LENGTH_IS_LABEL_PLUS_6MM` | PASS | `{"tab": 17.4357, "label": 11.4355, "expected_min": 17.4355}` |
-| `TAB_INNER_PADDING_3MM` | PASS | `4.496` |
-
-### `PROBABILITY_TREE` — eleve page 310
-
-| Règle | Verdict | Mesuré |
-|---|---|---|
-| `TAB_INSIDE_12MM` | PASS | `11.9995` |
-| `TAB_OUTSIDE_1MM` | PASS | `1.0006` |
-| `TAB_MIN_LENGTH_16MM` | PASS | `24.556` |
-| `TAB_SIDE_FOLLOWS_PARITY` | PASS | `"left"` |
-| `TAB_LENGTH_IS_LABEL_PLUS_6MM` | PASS | `{"tab": 24.556, "label": 18.5557, "expected_min": 24.5557}` |
-| `TAB_INNER_PADDING_3MM` | PASS | `4.6744` |
-
-### `ASSESSMENT` — eleve page 112
-
-| Règle | Verdict | Mesuré |
-|---|---|---|
-| `TAB_INSIDE_12MM` | PASS | `11.9995` |
-| `TAB_OUTSIDE_1MM` | PASS | `1.0006` |
-| `TAB_MIN_LENGTH_16MM` | PASS | `18.409` |
-| `TAB_SIDE_FOLLOWS_PARITY` | PASS | `"left"` |
-| `TAB_LENGTH_IS_LABEL_PLUS_6MM` | PASS | `{"tab": 18.409, "label": 12.4088, "expected_min": 18.4088}` |
-| `TAB_INNER_PADDING_3MM` | PASS | `4.6744` |
-
-### `REMEDIATION` — eleve page 61
+### `COURSE` — eleve page 17
 
 | Règle | Verdict | Mesuré |
 |---|---|---|
 | `TAB_INSIDE_12MM` | PASS | `11.9994` |
-| `TAB_OUTSIDE_1MM` | PASS | `1.0007` |
-| `TAB_MIN_LENGTH_16MM` | PASS | `19.6975` |
+| `TAB_OUTSIDE_1MM` | PASS | `1.0008` |
+| `TAB_MIN_LENGTH_16MM` | PASS | `16.0002` |
 | `TAB_SIDE_FOLLOWS_PARITY` | PASS | `"right"` |
-| `TAB_LENGTH_IS_LABEL_PLUS_6MM` | PASS | `{"tab": 19.6975, "label": 13.6993, "expected_min": 19.6993}` |
-| `TAB_INNER_PADDING_3MM` | PASS | `4.6741` |
+| `TAB_LENGTH_IS_LABEL_PLUS_6MM` | PASS | `{"tab": 16.0002, "label": 7.138, "expected_min": 16.0}` |
+| `TAB_INNER_PADDING_3MM` | PASS | `4.4959` |
 
-### `TEACHER_CORRECTION` — professeur page 66
+### `METHOD` — eleve page 29
+
+| Règle | Verdict | Mesuré |
+|---|---|---|
+| `TAB_INSIDE_12MM` | PASS | `11.9996` |
+| `TAB_OUTSIDE_1MM` | PASS | `1.0006` |
+| `TAB_MIN_LENGTH_16MM` | PASS | `17.2336` |
+| `TAB_SIDE_FOLLOWS_PARITY` | PASS | `"right"` |
+| `TAB_LENGTH_IS_LABEL_PLUS_6MM` | PASS | `{"tab": 17.2336, "label": 11.2333, "expected_min": 17.2333}` |
+| `TAB_INNER_PADDING_3MM` | PASS | `4.6743` |
+
+### `EXERCISE` — eleve page 38
+
+| Règle | Verdict | Mesuré |
+|---|---|---|
+| `TAB_INSIDE_12MM` | PASS | `11.9995` |
+| `TAB_OUTSIDE_1MM` | PASS | `1.0006` |
+| `TAB_MIN_LENGTH_16MM` | PASS | `17.4357` |
+| `TAB_SIDE_FOLLOWS_PARITY` | PASS | `"left"` |
+| `TAB_LENGTH_IS_LABEL_PLUS_6MM` | PASS | `{"tab": 17.4357, "label": 11.4355, "expected_min": 17.4355}` |
+| `TAB_INNER_PADDING_3MM` | PASS | `4.4959` |
+
+### `PROBABILITY_TREE` — eleve page 303
+
+| Règle | Verdict | Mesuré |
+|---|---|---|
+| `TAB_INSIDE_12MM` | PASS | `11.9993` |
+| `TAB_OUTSIDE_1MM` | PASS | `1.0009` |
+| `TAB_MIN_LENGTH_16MM` | PASS | `24.556` |
+| `TAB_SIDE_FOLLOWS_PARITY` | PASS | `"right"` |
+| `TAB_LENGTH_IS_LABEL_PLUS_6MM` | PASS | `{"tab": 24.556, "label": 18.5577, "expected_min": 24.5577}` |
+| `TAB_INNER_PADDING_3MM` | PASS | `4.674` |
+
+### `ASSESSMENT` — eleve page 110
 
 | Règle | Verdict | Mesuré |
 |---|---|---|
@@ -117,6 +95,28 @@ Rastérisation critique : 300 dpi ; planche de contact : 100 dpi.
 | `TAB_SIDE_FOLLOWS_PARITY` | PASS | `"left"` |
 | `TAB_LENGTH_IS_LABEL_PLUS_6MM` | PASS | `{"tab": 18.409, "label": 12.4088, "expected_min": 18.4088}` |
 | `TAB_INNER_PADDING_3MM` | PASS | `4.6744` |
+
+### `REMEDIATION` — eleve page 60
+
+| Règle | Verdict | Mesuré |
+|---|---|---|
+| `TAB_INSIDE_12MM` | PASS | `11.9995` |
+| `TAB_OUTSIDE_1MM` | PASS | `1.0006` |
+| `TAB_MIN_LENGTH_16MM` | PASS | `19.6975` |
+| `TAB_SIDE_FOLLOWS_PARITY` | PASS | `"left"` |
+| `TAB_LENGTH_IS_LABEL_PLUS_6MM` | PASS | `{"tab": 19.6975, "label": 13.6973, "expected_min": 19.6973}` |
+| `TAB_INNER_PADDING_3MM` | PASS | `4.6744` |
+
+### `TEACHER_CORRECTION` — professeur page 65
+
+| Règle | Verdict | Mesuré |
+|---|---|---|
+| `TAB_INSIDE_12MM` | PASS | `11.9994` |
+| `TAB_OUTSIDE_1MM` | PASS | `1.0008` |
+| `TAB_MIN_LENGTH_16MM` | PASS | `18.409` |
+| `TAB_SIDE_FOLLOWS_PARITY` | PASS | `"right"` |
+| `TAB_LENGTH_IS_LABEL_PLUS_6MM` | PASS | `{"tab": 18.409, "label": 12.4108, "expected_min": 18.4108}` |
+| `TAB_INNER_PADDING_3MM` | PASS | `4.6741` |
 
 ### `TAB_ODD_AND_EVEN` — eleve page 19
 
@@ -129,7 +129,7 @@ Rastérisation critique : 300 dpi ; planche de contact : 100 dpi.
 | `TAB_LENGTH_IS_LABEL_PLUS_6MM` | PASS | `{"tab": 16.0002, "label": 7.138, "expected_min": 16.0}` |
 | `TAB_INNER_PADDING_3MM` | PASS | `4.4959` |
 
-### `TAB_ODD_AND_EVEN` — eleve page 20
+### `TAB_ODD_AND_EVEN` — eleve page 18
 
 | Règle | Verdict | Mesuré |
 |---|---|---|

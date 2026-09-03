@@ -3,16 +3,32 @@
 % Polices : TeX Gyre Pagella (corps + maths) + TeX Gyre Heros (titres) + JetBrains Mono (code).
 % Charte graphique : kit v2 « Éditorial premium » transposé.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nexus-manuel}[2026/07/20 v6.0 Manuel Nexus Reussite - Canonique]
+% Ces gabarits sont chargés par leur chemin -- `../../gabarits/common/nexus-charte`
+% depuis les mathématiques, autrement depuis la NSI. LaTeX comparait ce chemin au
+% nom déclaré ici et signalait l'écart, une fois par fichier. `\@currname` EST le
+% nom demandé : le fichier déclare donc qu'il est bien celui qu'on a appelé, et
+% garde son identité lisible dans la description. Le noyau compare le nom déclaré
+% à `\@currpath\@currname` : c'est donc cette paire, et non le seul `\@currname`,
+% qui rend la déclaration exacte. Aucun `\@ifpackageloaded` du
+% dépôt n'interroge ces noms ; l'identité des trois copies est prouvée par les
+% tests d'égalité octet à octet, pas par cette ligne.
+\ProvidesClass{\@currpath\@currname}[2026/07/20 v6.0 nexus-manuel -- Manuel Nexus Reussite - Canonique]
 
 % ===========================================================================
 %  BASE KOMA-SCRIPT
 % ===========================================================================
+% `DIV=6` est écrit, et non plus déduit : typearea ne tabule aucune valeur de
+% DIV pour un corps de 9,5 pt, cherchait donc la sienne en vain, le signalait,
+% puis retombait sur `DIV=calc`. Six est exactement ce que ce calcul donne --
+% \textwidth, \headheight et \footskip sont inchangés au sp près, ce que
+% recompose et vérifie, en composant deux fois le même document,
+% test_the_written_div_gives_exactly_what_the_calculation_gave. L'écrire fixe
+% aussi la mise en page si une version ultérieure de KOMA calculait autrement.
 \ifdefined\nxVBaseCompatibility
-  \LoadClass[a4paper,fontsize=9.5pt,twoside,open=right,headings=normal,
+  \LoadClass[a4paper,fontsize=9.5pt,DIV=6,twoside,open=right,headings=normal,
     chapterprefix=false,numbers=noenddot]{scrbook}
 \else
-  \LoadClass[a4paper,fontsize=9.5pt,twoside,open=any,headings=normal,
+  \LoadClass[a4paper,fontsize=9.5pt,DIV=6,twoside,open=any,headings=normal,
     chapterprefix=false,numbers=noenddot]{scrbook}
 \fi
 
@@ -26,6 +42,31 @@
 \RequirePackage{amsmath}
 \RequirePackage{amsthm}
 \RequirePackage{amssymb}
+% Les deux carrés de fin de démonstration -- creux et plein -- venaient de
+% MSAM10, une fonte AMS héritée dont le PDF ne porte aucune table ToUnicode.
+% Le glyphe s'extrayait donc comme le caractère de contrôle U+0003 (creux) ou
+% U+0004 (plein) : une couche de texte que l'on ne peut ni copier ni analyser,
+% et qui rendait invalide le XML de `pdftotext -bbox` -- ce qui a fait échouer
+% la vérification des marges sur le manuel livré, à la ligne 11 642.
+%
+% Ils sont donc dessinés, avec des filets : mêmes métriques au centième de
+% point près (7,3889 pt de large, 6,41249 pt de haut, aucune profondeur,
+% mesurées sur MSAM10 puis reproduites en em pour suivre le corps), et plus
+% aucun caractère dans la couche de texte -- un ornement de fin de preuve n'en
+% est pas un.
+\newcommand{\nxCarreCote}{0.678em}
+\newcommand{\nxCarreFlanc}{0.0516em}
+\renewcommand{\square}{%
+  \mathord{\raisebox{\depth}{%
+    \fboxsep=0pt\fboxrule=0.4pt
+    \kern\nxCarreFlanc
+    \fbox{\rule{0pt}{\dimexpr\nxCarreCote-0.8pt\relax}%
+          \rule{\dimexpr\nxCarreCote-0.8pt\relax}{0pt}}%
+    \kern\nxCarreFlanc}}}
+\renewcommand{\blacksquare}{%
+  \mathord{\kern\nxCarreFlanc
+    \rule[0pt]{\nxCarreCote}{\nxCarreCote}%
+    \kern\nxCarreFlanc}}
 
 % ===========================================================================
 %  MATIÈRE ET NIVEAU (paramétrage du sous-titre de couverture)
@@ -291,8 +332,26 @@
 \clearpairofpagestyles
 \ohead{\ifodd\value{page}\nxOnglet\fi\nxMiniMotif\kern0.7em\sffamily\fontsize{7.5}{10}\selectfont\color{encre}\headmark}
 % Pied : numéro dans pastille chapcolor coin extérieur, Nexus Réussite côté intérieur
-\ofoot{\tikz\node[fill=chapcolor, text=white, circle,
-  inner sep=3.6pt, font=\titrefont\small]{\thepage};}
+\newcommand{\nxFolioPastille}[1]{%
+  \tikz\node[fill=chapcolor, text=white, circle,
+    inner sep=3.6pt, font=\titrefont\small]{#1};}
+\ofoot{\nxFolioPastille{\thepage}}
+% La pastille est un cercle : son diamètre suit la largeur du folio, donc le
+% nombre de chiffres. Mesuré sur la page 1, `\footheight` devenait trop court
+% à la page 10, puis à la page 100 -- scrlayer l'allongeait alors lui-même, en
+% le disant trois fois. La hauteur est ici mesurée une fois pour toutes sur la
+% pastille la plus haute que le manuel puisse porter, celle de trois chiffres.
+% Un manuel qui dépasserait 999 pages ferait légitimement reparaître l'alerte.
+\newsavebox{\nxFolioPastilleLaPlusHaute}
+\AddToHook{begindocument}{%
+  % Le pied est composé sur une ligne : scrlayer y ajoute le support de la
+  % ligne courante, dont la profondeur compte dans la hauteur exigée. La
+  % mesure reprend donc exactement la même boîte.
+  \sbox{\nxFolioPastilleLaPlusHaute}{\strut\nxFolioPastille{000}}%
+  \setlength{\footheight}{%
+    \dimexpr\ht\nxFolioPastilleLaPlusHaute
+      +\dp\nxFolioPastilleLaPlusHaute\relax}%
+}
 \ifoot{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\addfontfeatures{LetterSpace=6}\MakeUppercase{Nexus Réussite}}
 
 % ===========================================================================

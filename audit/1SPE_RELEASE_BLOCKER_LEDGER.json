@@ -1,0 +1,251 @@
+{
+  "approves_nothing": true,
+  "artifact_type": "1spe_release_blocker_ledger",
+  "blockers": [
+    {
+      "artifact": "audit/1SPE_CHAPTER_OPENER_SPAN.json",
+      "blocker_id": "CHAPTER_OPENER_ORPHAN_PAGE",
+      "closes_with": "MACHINE",
+      "evidence_path": "audit/1SPE_CHAPTER_OPENER_SPAN.json",
+      "meaning": "une ouverture de chapitre deborde sur une page qui ne porte que « Temps estimes » ; \\vfill avale le debordement, le journal LaTeX reste muet, le defaut ne se voit que sur la page rendue",
+      "metric": "MULTI_PAGE_OPENERS",
+      "observed": 0,
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "state": "CLOSED",
+      "surface": "1SPE_PRINT_ARTIFACT"
+    },
+    {
+      "artifact": "audit/1SPE_PAGINATION_BASELINE_RATIFICATION.json",
+      "blocker_id": "UNINTENTIONAL_BLANK_PAGE",
+      "closes_with": "MACHINE",
+      "evidence_path": "audit/1SPE_PAGINATION_BASELINE_RATIFICATION.json",
+      "meaning": "une page blanche sans raison documentee",
+      "metric": "UNINTENTIONAL_BLANK_PAGE",
+      "observed": 0,
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "state": "CLOSED",
+      "surface": "1SPE_PRINT_ARTIFACT"
+    },
+    {
+      "artifact": "audit/1SPE_PAGINATION_BASELINE_RATIFICATION.json",
+      "blocker_id": "CHAPTER_OPENING_FALSE_FOLIO",
+      "closes_with": "MACHINE",
+      "evidence_path": "audit/1SPE_PAGINATION_BASELINE_RATIFICATION.json",
+      "meaning": "le sommaire annonce une page qui n'est pas l'ouverture",
+      "metric": "CHAPTER_OPENING_FALSE_FOLIO_AFTER",
+      "observed": 0,
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "state": "CLOSED",
+      "surface": "1SPE_PRINT_ARTIFACT"
+    },
+    {
+      "artifact": "audit/1SPE_ASSESSMENT_BAREME_TRANSCRIPTION.json",
+      "blocker_id": "ASSESSMENT_BAREME_HUMAN_DECISION",
+      "closes_with": "EXPERT_PROGRAMME_PEDAGOGIE",
+      "evidence_path": "audit/1SPE_ASSESSMENT_BAREME_TRANSCRIPTION.json",
+      "meaning": "un sujet ne value pas ses questions : repartir son total est un jugement pedagogique, et le dossier est prepare, pas tranche",
+      "metric": "ATTENTION_REQUIRED",
+      "observed": 2,
+      "scope": "HUMAN_DECISION_PENDING",
+      "state": "OPEN",
+      "surface": "1SPE_HUMAN_REVIEW"
+    },
+    {
+      "artifact": "audit/1SPE_ASSESSMENT_BAREME_TRANSCRIPTION.json",
+      "blocker_id": "BAREME_CONTRADICTS_ITS_SUBJECT",
+      "closes_with": "MACHINE",
+      "evidence_path": "audit/1SPE_ASSESSMENT_BAREME_TRANSCRIPTION.json",
+      "meaning": "un bareme professeur note une tache autrement que son sujet",
+      "metric": "CARRIER_CONTRADICTS_SUBJECT",
+      "observed": 0,
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "state": "CLOSED",
+      "surface": "1SPE_SEMANTIC_CONTENT"
+    },
+    {
+      "artifact": "audit/1SPE_TEACHER_COMPLETENESS_METRICS.json",
+      "blocker_id": "TEACHER_MISSING_REQUIRED_CONTENT",
+      "closes_with": "EXPERT_PROGRAMME_PEDAGOGIE",
+      "evidence_path": "audit/1SPE_TEACHER_COMPLETENESS_METRICS.json",
+      "meaning": "un objet note du manuel professeur n'a pas son bareme",
+      "metric": "TEACHER_MISSING_REQUIRED_CONTENT",
+      "observed": 2,
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "state": "OPEN",
+      "surface": "1SPE_SEMANTIC_CONTENT"
+    },
+    {
+      "artifact": "audit/1SPE_TEACHER_COMPLETENESS_METRICS.json",
+      "blocker_id": "STUDENT_TEACHER_ONLY_LEAK",
+      "closes_with": "MACHINE",
+      "evidence_path": "audit/1SPE_TEACHER_COMPLETENESS_METRICS.json",
+      "meaning": "un corrige, un bareme ou une cle a fuite vers la variante eleve",
+      "metric": "STUDENT_TEACHER_ONLY_LEAKS",
+      "observed": 0,
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "state": "CLOSED",
+      "surface": "1SPE_SEMANTIC_CONTENT"
+    },
+    {
+      "artifact": "audit/1SPE_RELEASE_TEST_GATE.json",
+      "blocker_id": "RELEASE_TEST_GATE_RED",
+      "closes_with": "MACHINE",
+      "meaning": "un test du perimetre de release 1SPE echoue",
+      "metric": "FAILURES_TOUCHING_1SPE",
+      "observed": null,
+      "reason": "artefact producteur absent ou illisible",
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "state": "UNVERIFIABLE",
+      "surface": "1SPE_MACHINE_PROOF"
+    },
+    {
+      "blocker_id": "MARGIN_COMPOSITOR_RENDERS_NOTHING",
+      "closes_with": "MACHINE",
+      "discovered": "2026-09-03",
+      "evidence": {
+        "eleve": {
+          "captured": 952,
+          "rendered": 952
+        },
+        "professeur": {
+          "captured": 3038,
+          "rendered": 3038
+        }
+      },
+      "meaning": "le compositeur de marges capture les notes de marge du manuel et n'en dessine aucune : la construction ne lui passe pas d'inventaire de disposition, previous_for_render reste nul, et render_foreground sort immediatement. Les libelles de duree des exercices, et les identifiants d'objet cote professeur, existent dans la capture et jamais sur la page.",
+      "scope": "1SPE_SHARED_RELEASE_BLOCKER",
+      "shared_because": "gabarits/common/nexus-margin-shipout.lua et gabarits/common/nexus-margin-rail.tex sont lus par la construction 1SPE, ce que declare son propre .fls",
+      "state": "RESOLVED",
+      "surface": "1SPE_STYLE_RENDER"
+    },
+    {
+      "blocker_id": "D7_BUNDLE_TARGETS_THE_SPECIMEN_NOT_THE_MANUAL",
+      "closes_with": "MACHINE",
+      "discovered": "2026-09-03",
+      "evidence": {
+        "manual_bundle_exists": true,
+        "manual_bundle_summary": {
+          "CATEGORIES_FOUND": 12,
+          "CATEGORIES_REQUIRED": 12,
+          "MISSING_CATEGORIES": 0,
+          "PAGES_REQUIRED": 15,
+          "PAGES_SELECTED": 15,
+          "PAGES_WITH_A_TAB_FAILURE": 0,
+          "TAB_CONTRACT_VIOLATIONS": 0,
+          "TAB_PRESENT": 9
+        },
+        "specimen_bundle_targets_the_maquette": true
+      },
+      "meaning": "scripts/build_d7_proof_bundle.py construit et rasterise la maquette v5, pas MANUEL_1SPE. Le dossier D7 attendu — quinze pages du manuel, mention d'edition par variante, ouverture de chapitre, sommaire et folios, cours, methode, formulaire, exercice, arbre de probabilite, evaluation, remediation, corrige professeur, onglet pair et impair — n'avait aucun producteur. Le constat se ferme quand un dossier D7 du MANUEL existe, complet : quinze pages, douze categories, aucune manquante.",
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "state": "RESOLVED",
+      "surface": "1SPE_HUMAN_REVIEW"
+    },
+    {
+      "blocker_id": "PRINT_CANDIDATE_RECEIPT_STALE",
+      "closes_with": "MACHINE",
+      "discovered": "2026-09-03",
+      "evidence": {
+        "head": "66e0fe70b4535fca349d1fd565c3d1c99a0f78f2",
+        "receipt_page_counts": {
+          "eleve": 357,
+          "professeur": 629
+        },
+        "receipt_source_sha": "12c67fb6fadc7e11a88464d19f2a9171a59504e4"
+      },
+      "meaning": "audit/1SPE_PRINT_CANDIDATE_BUILD_RECEIPT.json decrit un autre SHA que HEAD et annonce des compteurs de pages et un nombre de signets que les builds courants contredisent. Un recu perime qui se presente comme courant est pire qu'un recu absent.",
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "state": "OPEN",
+      "surface": "1SPE_MACHINE_PROOF"
+    },
+    {
+      "blocker_id": "ASSESSMENT_BAREME_COMMENTARY_ABSENT",
+      "closes_with": "EXPERT_PROGRAMME_PEDAGOGIE",
+      "discovered": "2026-09-03",
+      "evidence": {
+        "assessment_corrections": 20,
+        "carrying_commentary": 0
+      },
+      "meaning": "docs/01_conception_manuel.md exige un corrige-bareme COMMENTE : pour chaque question, ce qui rapporte les points, les erreurs penalisees, les points de redaction. Aucun des vingt corriges d'evaluation ne porte cette couche, et elle ne se derive d'aucune source : elle s'ecrit.",
+      "scope": "HUMAN_DECISION_PENDING",
+      "state": "OPEN",
+      "surface": "1SPE_SEMANTIC_CONTENT"
+    },
+    {
+      "blocker_id": "REFRESH_AUDIT_REPORTS_CORRUPTS_TWO_ARTIFACTS",
+      "closes_with": "MACHINE",
+      "discovered": "2026-09-03",
+      "evidence": {
+        "artifacts_declare_integer_schema_version": {
+          "audit/BUILD_MANIFEST.json": true,
+          "audit/CHAPTER_READINESS.json": true
+        },
+        "script_assigns_string_schema_version": false,
+        "script_has_argument_parser": true
+      },
+      "meaning": "scripts/refresh_audit_reports.py ecrit schema_version = \"2.0.0\", une CHAINE, dans audit/BUILD_MANIFEST.json et audit/CHAPTER_READINESS.json, dont le schema declare un ENTIER. scripts/inventory_collection.py refuse alors de s'executer : « schema_version invalide dans audit/BUILD_MANIFEST.json ». Le script s'attribue en outre le champ generator d'artefacts qu'il n'a pas produits. Il n'a pas d'analyse d'arguments : l'invoquer avec --help l'EXECUTE. Constate en le lancant par erreur le 2026-09-03 ; les deux artefacts ont ete restaures depuis HEAD.",
+      "scope": "1SPE_SHARED_RELEASE_BLOCKER",
+      "shared_because": "audit/BUILD_MANIFEST.json est lu par scripts/inventory_collection.py, scripts/chapter_readiness.py et les gates de freeze 1SPE",
+      "state": "RESOLVED",
+      "surface": "1SPE_MACHINE_PROOF"
+    },
+    {
+      "blocker_id": "CHAPTER_REVIEW_PACKETS_INCOMPLETE",
+      "closes_with": "MACHINE_THEN_EXPERT_MATHEMATIQUE_AND_EXPERT_PROGRAMME_PEDAGOGIE",
+      "discovered": "2026-09-03",
+      "evidence": {
+        "expected": 20,
+        "packets_missing": 0,
+        "packets_present": 20,
+        "packets_without_required_fields": 0,
+        "reading_views_missing": 0,
+        "the_human_verdicts_themselves_remain_pending": true
+      },
+      "meaning": "le contrat exige deux revues de role par chapitre — EXPERT_MATHEMATIQUE et EXPERT_PROGRAMME_PEDAGOGIE — soit vingt verdicts humains pour dix chapitres. Les dossiers de revue neutres n'existent que pour deux chapitres, 1SPE-SUITES et 1SPE-VARALEA, et aucun verdict n'est rendu. Les reviewers ne peuvent pas commencer sur les huit autres chapitres : il leur manque le dossier, pas seulement la decision.",
+      "scope": "HUMAN_DECISION_PENDING",
+      "state": "RESOLVED",
+      "surface": "1SPE_HUMAN_REVIEW"
+    },
+    {
+      "blocker_id": "LATEX_WARNING_CLASSES_UNCLOSED",
+      "closes_with": "REAL_HUMAN_DECISION_REQUIRED",
+      "discovered": "2026-09-03",
+      "evidence": {
+        "declared_families": 6,
+        "per_family": {
+          "OVERFULL_HBOX": 0,
+          "PDF_BACKEND_POP_EMPTY_COLOR_PAGE_STACK": 0,
+          "REQUESTED_NAME_DIFFERS_FROM_PROVIDED_NAME": 0,
+          "SCRLAYER_FOOTHEIGHT_TOO_LOW": 0,
+          "TYPEAREA_DIV_NOT_DEFINED_FOR_FONTSIZE": 0,
+          "UNDERFULL_HBOX": 0
+        },
+        "unclassified": 0,
+        "warnings": 0
+      },
+      "meaning": "§37 exige qu'aucune classe d'avertissement ne reste inconnue. Les cinq zeros contractuels sont atteints — Overfull, nullfont, glyphe manquant, sequence de controle indefinie — et deux classes hyperref ont ete fermees ce jour. Restent deux classes nommees mais NON fermees : le chargement des gabarits par chemin (douze occurrences par variante) et le DIV de KOMA (une). Elles ont une cause identifiee et une correction connue, et cette correction est une refonte, pas un correctif de release.",
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "state": "RESOLVED",
+      "surface": "1SPE_STYLE_RENDER"
+    }
+  ],
+  "generated_by": "scripts/build_1spe_release_blocker_ledger.py",
+  "schema_version": 1,
+  "scope_rule": "n'entre au registre que ce qui peut affecter le contenu semantique, la preuve machine, la revue humaine, la fabrication, le rendu ou l'artefact d'impression du 1SPE ; le critere est l'usage, jamais le repertoire",
+  "source_sha": "66e0fe70b4535fca349d1fd565c3d1c99a0f78f2",
+  "summary": {
+    "CLOSED": 5,
+    "HUMAN_DECISION_PENDING": 3,
+    "OPEN_BLOCKERS": 4,
+    "OPEN_BLOCKER_IDS": [
+      "ASSESSMENT_BAREME_COMMENTARY_ABSENT",
+      "ASSESSMENT_BAREME_HUMAN_DECISION",
+      "PRINT_CANDIDATE_RECEIPT_STALE",
+      "TEACHER_MISSING_REQUIRED_CONTENT"
+    ],
+    "OTHER_MANUAL_SCOPE_DEBT": 0,
+    "RESOLVED": 5,
+    "TRACKED": 15,
+    "UNVERIFIABLE": 1
+  }
+}

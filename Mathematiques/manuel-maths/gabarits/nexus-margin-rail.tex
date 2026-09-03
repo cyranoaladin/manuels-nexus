@@ -1,6 +1,19 @@
 % NEXUS-MARGIN-COMPOSITOR-SCHEMA:1
 % Unique TeX adapter for managed marginal annotations.
 \RequirePackage{luatexbase}
+
+% Un changement de couleur ecrit une paire push/pop sur la pile de couleur du
+% moteur. `\color` pousse la sienne sur-le-champ et confie la depile a
+% `\aftergroup` : la depile part donc APRES le groupe. Composee dans une boite
+% capturee, la poussee suit la note dans son Form XObject tandis que la depile
+% reste sur la page -- « pop empty color page stack », une fois par note. Le
+% noyau LaTeX fournit deja le groupe qui referme la couleur AVANT la fin de la
+% boite ; il est ici nomme pour rester lisible sous n'importe quel catcode.
+\begingroup\makeatletter
+  \global\let\nxMargeCouleurDebut\color@begingroup
+  \global\let\nxMargeCouleurFin\color@endgroup
+\endgroup
+
 \newcounter{nxMarginGlobalOrder}
 \newbox\nxMarginCaptureBox
 \newbox\nxMarginReportDecorationBox
@@ -71,11 +84,13 @@
   \setbox\nxMarginReportDecorationBox=\vbox{%
     \hsize=\marginparwidth
     \parindent=0pt
+    \nxMargeCouleurDebut
     \sffamily\fontsize{6.5}{8}\selectfont
     \color{encre!65}%
     \noindent\fboxsep=2pt\fboxrule=.4pt
     \fcolorbox{encre!25}{white}{suite de la page 0000}%
-    \par\vskip3pt}%
+    \par\vskip3pt
+    \nxMargeCouleurFin}%
   \typeout{NEXUS-MARGIN-REPORT-DECORATION-SP:%
     \number\dimexpr\ht\nxMarginReportDecorationBox+\dp\nxMarginReportDecorationBox\relax}%
   % Tout ce qui suit est dans le repère de la page composée : page_width_sp et
@@ -163,7 +178,11 @@
     % produit un debordement horizontal, que le gate anti-collision rejette.
     \raggedright
     \emergencystretch=\hsize
-    #2}%
+    % La couleur se referme DANS la boite : sans cela sa depile resterait sur
+    % la page pendant que sa poussee partirait dans le Form XObject.
+    \nxMargeCouleurDebut
+    #2%
+    \nxMargeCouleurFin}%
   \directlua{nexus_margin.capture_box(
     "\luaescapestring{\nxMarginCurrentId}",
     "\luaescapestring{#1}",

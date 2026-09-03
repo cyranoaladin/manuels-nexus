@@ -191,3 +191,86 @@ def test_one_capacity_more_than_the_corpus_maximum_is_visibly_multi_page(
     pages = _compile_pages(tmp_path, _opener_document(capacities + [longest] * 3, hook))
 
     assert pages > 1
+
+
+# ---------------------------------------------------------------------------
+#  La règle d'étendue, éprouvée sur des pages synthétiques
+# ---------------------------------------------------------------------------
+
+
+class _FakeDocument:
+    """Un document réduit à ses textes de page."""
+
+    def __init__(self, pages: list[str]) -> None:
+        self._pages = pages
+        self.page_count = len(pages)
+
+    def __getitem__(self, index: int) -> Any:
+        text = self._pages[index]
+        return type("Page", (), {"get_text": lambda self, *a, **k: text})()
+
+
+BANNER_PAGE = (
+    "MATHÉMATIQUES ⋅Première spécialité 1 CHAPITRE 1 Suites numériques "
+    "Objectifs — Capacités attendues ▶C1 — Je sais compter. "
+    "À RETENIR Une situation d'accroche. Temps estimés : 12 h 10 h 8 h"
+)
+CHAPTER_OUVERTURE_SECTION = (
+    "OUVERTURE Ouverture Contrat du chapitre Ce que tu vas savoir faire "
+    "À la fin de ce chapitre, tu seras capable de : C1 Calculer les termes"
+)
+
+
+def test_the_chapter_ouverture_section_is_not_an_overflow() -> None:
+    """La section d'ouverture porte la même rubrique : elle n'est pas un débord.
+
+    C'est le piège qui faisait compter quatre débordements sur une mise en
+    page saine.
+    """
+
+    rows = gate.opener_spans(
+        _FakeDocument([BANNER_PAGE, CHAPTER_OUVERTURE_SECTION, "COURS Cours ..."])
+    )
+
+    assert len(rows) == 1
+    assert rows[0]["page_span"] == 1
+    assert rows[0]["single_page"] is True
+    assert rows[0]["missing_on_the_opening_page"] == []
+
+
+def test_a_time_line_pushed_to_the_next_page_is_an_overflow() -> None:
+    """Le défaut réel : vingt-neuf caractères seuls sur une page entière."""
+
+    banner_without_time = BANNER_PAGE.replace("Temps estimés : 12 h 10 h 8 h", "")
+    rows = gate.opener_spans(
+        _FakeDocument(
+            [
+                banner_without_time,
+                "OUVERTURE Ouverture Temps estimés : 12 h 10 h 8 h",
+                "COURS Cours ...",
+            ]
+        )
+    )
+
+    assert rows[0]["page_span"] == 2
+    assert rows[0]["single_page"] is False
+    assert rows[0]["missing_on_the_opening_page"] == ["estimated_time"]
+    assert rows[0]["pushed_to_the_overflow_page"] == ["estimated_time"]
+
+
+def test_a_hook_pushed_to_the_next_page_is_an_overflow() -> None:
+    banner_without_hook = BANNER_PAGE.replace(
+        "À RETENIR Une situation d'accroche. ", ""
+    )
+    rows = gate.opener_spans(
+        _FakeDocument(
+            [
+                banner_without_hook,
+                "OUVERTURE Ouverture À RETENIR Une situation d'accroche.",
+                "COURS Cours ...",
+            ]
+        )
+    )
+
+    assert rows[0]["page_span"] == 2
+    assert rows[0]["missing_on_the_opening_page"] == ["hook"]

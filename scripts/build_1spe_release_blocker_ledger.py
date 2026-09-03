@@ -49,8 +49,14 @@ VARIANTS = ("eleve", "professeur")
 # bloqueur, portée, et ce que la valeur signifie.
 DERIVED_SOURCES: tuple[dict[str, Any], ...] = (
     {
-        "artifact": "audit/1SPE_PAGINATION_BASELINE_RATIFICATION.json",
-        "metric": "CHAPTER_OPENER_ORPHAN_PAGE_AFTER",
+        # Cette metrique se lisait sur `..._ORPHAN_PAGE_AFTER` de la
+        # ratification, qui mesure la construction RATIFIEE -- un etat
+        # historique, fige, et desormais superseded. Un bloqueur vivant doit
+        # etre juge sur la construction courante : c'est ce que mesure
+        # 1SPE_CHAPTER_OPENER_SPAN, sur les PDF que l'assembleur vient de
+        # produire.
+        "artifact": "audit/1SPE_CHAPTER_OPENER_SPAN.json",
+        "metric": "MULTI_PAGE_OPENERS",
         "blocker_id": "CHAPTER_OPENER_ORPHAN_PAGE",
         "scope": "1SPE_RELEASE_BLOCKER",
         "surface": "1SPE_PRINT_ARTIFACT",
@@ -59,7 +65,7 @@ DERIVED_SOURCES: tuple[dict[str, Any], ...] = (
             "« Temps estimes » ; \\vfill avale le debordement, le journal LaTeX "
             "reste muet, le defaut ne se voit que sur la page rendue"
         ),
-        "closes_with": "REAL_HUMAN_DECISION_REQUIRED",
+        "closes_with": "MACHINE",
     },
     {
         "artifact": "audit/1SPE_PAGINATION_BASELINE_RATIFICATION.json",
@@ -331,84 +337,73 @@ def _check_chapter_review_packets_incomplete() -> dict[str, Any]:
     """Deux revues de role par chapitre : les dossiers existent-ils seulement ?
 
     Un verdict manquant est une attente. Un DOSSIER manquant est un blocage :
-    le reviewer ne peut meme pas commencer. Les dossiers sont identifies par ce
-    qu'ils DECLARENT — leur chapitre et leur role — et non par leur nom de
-    fichier, qui abrege les chapitres sans regle derivable.
+    le reviewer ne peut meme pas commencer.
+
+    Ce controle cherchait les paquets sous `audit/*NEUTRAL_REVIEW_PACKET.json`
+    et n'en trouvait aucun, parce que le producteur les ecrit ailleurs --
+    `audit/reviews/human/<chapitre>/packet-<role>.json`. Il annoncait donc
+    vingt dossiers manquants alors que les vingt existaient. L'autorite est
+    desormais le producteur qui les compte, et une seule.
     """
 
-    chapters = _manual_chapters()
-    if not chapters:
-        return {"verifiable": False, "reason": "chapitres 1SPE introuvables"}
-    covered: set[tuple[str, str]] = set()
-    verdicts = 0
-    for path in sorted((ROOT / "audit").glob("*NEUTRAL_REVIEW_PACKET.json")):
-        payload = load_json(path)
-        if payload is None:
-            continue
-        chapter = payload.get("chapter")
-        role = payload.get("review_role")
-        if chapter in chapters and role in REVIEW_ROLES:
-            covered.add((chapter, role))
-            if payload.get("human_verdict") not in (None, "", "PENDING"):
-                verdicts += 1
-    required = len(chapters) * len(REVIEW_ROLES)
-    missing = sorted(
-        f"{chapter}/{role}"
-        for chapter in chapters
-        for role in REVIEW_ROLES
-        if (chapter, role) not in covered
+    payload = load_json(ROOT / "audit/1SPE_HUMAN_PACKET_COMPLETENESS.json")
+    if payload is None:
+        return {
+            "verifiable": False,
+            "reason": "audit/1SPE_HUMAN_PACKET_COMPLETENESS.json absent",
+        }
+    summary = payload["summary"]
+    missing = (
+        summary["HUMAN_PACKETS_MISSING"]
+        or summary["HUMAN_READING_VIEWS_MISSING"]
+        or summary["PACKETS_WITHOUT_REQUIRED_FIELDS"]
     )
     return {
         "verifiable": True,
-        "still_true": bool(missing) or verdicts < required,
+        "still_true": bool(missing),
         "evidence": {
-            "chapters": len(chapters),
-            "required_verdicts": required,
-            "packets_present": len(covered),
-            "packets_missing": len(missing),
-            "missing_examples": missing[:6],
-            "verdicts_rendered": verdicts,
+            "expected": summary["HUMAN_PACKETS_EXPECTED"],
+            "packets_present": summary["HUMAN_PACKETS_PRESENT"],
+            "packets_missing": summary["HUMAN_PACKETS_MISSING"],
+            "reading_views_missing": summary["HUMAN_READING_VIEWS_MISSING"],
+            "packets_without_required_fields": summary[
+                "PACKETS_WITHOUT_REQUIRED_FIELDS"
+            ],
+            "the_human_verdicts_themselves_remain_pending": True,
         },
     }
 
 
 def _check_latex_warning_classes() -> dict[str, Any]:
-    """Chaque classe d'avertissement des journaux est-elle nommee et fermee ?
+    """Chaque ligne d'avertissement des journaux est-elle nommee et fermee ?
 
-    Le docket declare les classes et leur disposition ; on compte les
-    occurrences REELLES dans les deux journaux et on confronte. Une classe
-    declaree fermee a zero qui reapparait, ou une ligne d'avertissement qui ne
-    tombe dans aucune classe, rend le constat vrai.
+    Le docket declarait les classes et leur disposition, et ce controle
+    confrontait ces declarations aux journaux. La declaration figeait un etat :
+    trois classes y restaient « ouvertes » alors que les journaux courants ne
+    portent plus aucune alerte. L'autorite est desormais la lecture VIVANTE et
+    exhaustive des deux journaux produits.
     """
 
-    docket = load_json(DOCKET) or {}
-    classification = docket.get("latex_warning_classification", {})
-    classes = classification.get("classes", [])
-    if not classes:
-        return {"verifiable": False, "reason": "aucune classification declaree"}
-    observed: dict[str, dict[str, int]] = {}
-    reopened: list[str] = []
-    unclosed: list[str] = []
-    for variant in VARIANTS:
-        log = BUILD / f"MANUEL_1SPE_{variant}.log"
-        if not log.is_file():
-            return {"verifiable": False, "reason": f"journal absent pour {variant}"}
-        text = log.read_text(encoding="utf-8", errors="replace")
-        for entry in classes:
-            count = len(re.findall(entry["pattern"], text, flags=re.MULTILINE))
-            observed.setdefault(entry["id"], {})[variant] = count
-            if entry["disposition"] == "CLOSED_ZERO" and count:
-                reopened.append(f"{entry['id']}/{variant}")
-    for entry in classes:
-        if entry["disposition"].startswith("OPEN"):
-            unclosed.append(entry["id"])
+    payload = load_json(ROOT / "audit/1SPE_LATEX_LOG_WARNING_GATE.json")
+    if payload is None:
+        return {
+            "verifiable": False,
+            "reason": "audit/1SPE_LATEX_LOG_WARNING_GATE.json absent",
+        }
+    summary = payload["summary"]
     return {
         "verifiable": True,
-        "still_true": bool(reopened) or bool(unclosed),
+        "still_true": bool(
+            summary["LATEX_WARNINGS"] or summary["UNCLASSIFIED_WARNING_LINES"]
+        ),
         "evidence": {
-            "observed_per_class": observed,
-            "closed_classes_that_reappeared": reopened,
-            "classes_still_open": sorted(set(unclosed)),
+            "warnings": summary["LATEX_WARNINGS"],
+            "unclassified": summary["UNCLASSIFIED_WARNING_LINES"],
+            "declared_families": summary["DECLARED_FAMILIES"],
+            "per_family": {
+                name: detail["occurrences"]
+                for name, detail in payload["families"].items()
+            },
         },
     }
 

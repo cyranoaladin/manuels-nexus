@@ -14,9 +14,11 @@ Comment l'étendue est mesurée, sans jamais écrire un numéro de page :
 
 * la page d'OUVERTURE est celle qui porte la bannière — « CHAPITRE n » et le
   bloc « Objectifs — Capacités attendues » ;
-* la page suivante appartient encore à l'ouverture si elle porte la rubrique
-  « Ouverture » et rien du chapitre proprement dit. C'est exactement ce que
-  produit un débordement : la rubrique reste active, le contenu manque.
+* la page suivante n'appartient à l'ouverture que si elle porte un bloc que la
+  bannière a PERDU. La rubrique « Ouverture » ne suffit pas : la section
+  d'ouverture du chapitre — le contrat, « ce que tu vas savoir faire » — la
+  porte elle aussi, et c'est du contenu à part entière. Les confondre ferait
+  crier au débordement sur une mise en page saine.
 
 Chaque ouverture doit en outre porter, sur SA page, tout ce que le contrat lui
 demande : le titre, les capacités, l'accroche et les temps estimés.
@@ -92,27 +94,35 @@ def opener_spans(document: Any) -> list[dict[str, Any]]:
         if banner is None or OBJECTIVES not in text:
             continue
         start = index + 1
-        end = start
-        # Une page qui suit et qui porte encore la rubrique « Ouverture » sans
-        # la banniere appartient au debordement de cette ouverture.
-        cursor = index + 1
-        while cursor < len(pages):
-            following = pages[cursor]
-            if following.startswith(OPENER_RUBRIC) and OBJECTIVES not in following:
-                end = cursor + 1
-                cursor += 1
-                continue
-            break
         title = dehyphenate(text[banner.end() :].split("Objectifs")[0].strip())
-        span_text = " ".join(pages[start - 1 : end])
+        # Ce que la page de banniere ne porte pas, elle l'a rejete.
         missing = [
             name for name, holds in REQUIRED_CONTENT.items() if not holds(text)
         ]
-        moved = [
-            name
-            for name, holds in REQUIRED_CONTENT.items()
-            if name in missing and holds(span_text)
-        ]
+        # Une page qui suit n'appartient au debordement que si elle porte un
+        # bloc que la banniere a perdu. La rubrique « Ouverture » ne suffit
+        # PAS : la section d'ouverture du chapitre -- le contrat, « ce que tu
+        # vas savoir faire » -- la porte aussi, et c'est du contenu a part
+        # entiere. Les confondre ferait crier au debordement sur une mise en
+        # page saine.
+        end = start
+        moved: list[str] = []
+        cursor = index + 1
+        while cursor < len(pages) and missing:
+            following = pages[cursor]
+            if not following.startswith(OPENER_RUBRIC) or OBJECTIVES in following:
+                break
+            carried = [
+                name
+                for name in missing
+                if REQUIRED_CONTENT[name](following)
+            ]
+            if not carried:
+                break
+            moved.extend(carried)
+            missing = [name for name in missing if name not in carried]
+            end = cursor + 1
+            cursor += 1
         rows.append(
             {
                 "chapter_number": int(banner.group(1)),
@@ -121,7 +131,7 @@ def opener_spans(document: Any) -> list[dict[str, Any]]:
                 "opening_end_page": end,
                 "page_span": end - start + 1,
                 "single_page": start == end,
-                "missing_on_the_opening_page": missing,
+                "missing_on_the_opening_page": sorted(set(missing) | set(moved)),
                 "pushed_to_the_overflow_page": moved,
             }
         )

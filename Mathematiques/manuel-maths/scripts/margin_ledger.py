@@ -50,8 +50,17 @@ BP_TO_SP_EXACT = 1 / SP_TO_BP_EXACT
 # 10^-3 bp, soit 65,78 sp, et tout nombre emis est juste au demi-ulp pres :
 # 32,89 sp. C'est de la que vient FORM_BBOX_ROUNDING_TOLERANCE_SP, qui compare
 # UN nombre arrondi (un coin du /BBox du Form) a une valeur exacte en sp.
+#
+# La borne valait 32 : le demi-ulp, tronque. Mais la comparaison ne porte pas
+# sur le demi-ulp, elle porte sur deux ENTIERS -- le coin relu est arrondi au
+# sp avant d'etre compare. Cet arrondi coute un demi-sp de plus, et la borne
+# juste est donc ceil(32,890880 + 0,5) = 33. Le manuel l'a montre : une note de
+# 438 929 sp s'ecrit 6.673 bp et se relit 438 962 sp, soit 33 sp d'ecart, sur
+# un PDF parfaitement conforme. Le pire ecart possible vaut exactement 33, ce
+# que verifie test_the_form_bbox_bound_is_the_worst_case_of_the_mechanism en
+# parcourant un intervalle entier de valeurs.
 PDF_DECIMAL_DIGITS = 3
-FORM_BBOX_ROUNDING_TOLERANCE_SP = 32
+FORM_BBOX_ROUNDING_TOLERANCE_SP = 33
 # Comparaison de deux quantites EXACTES en sp : aucune tolerance n'est due.
 # Les boites de page en font partie depuis que la conversion pt -> bp de la
 # classe est une division d'entiers (\nxDimEnBp), exacte au demi-sp.
@@ -664,6 +673,32 @@ def _check_pdf_text_operators(pdf: pikepdf.Pdf, variant: str) -> None:
                 _reject("a margin control ID is present in a PDF text operator")
             if variant == "eleve" and STUDENT_INTERNAL_ID_PATTERN.search(text):
                 _reject("an internal 1SPE ID is present in a student PDF text operator")
+
+
+def _describe_forbidden_xml_characters(document: str) -> str:
+    """Name the characters XML refuses, and where they are, instead of a column."""
+
+    offenders: dict[str, list[int]] = {}
+    page = 0
+    for line in document.splitlines():
+        if "<page " in line:
+            page += 1
+        for character in line:
+            code = ord(character)
+            if code < 32 and character not in "\t\n\r":
+                offenders.setdefault(f"U+{code:04X}", [])
+                if page not in offenders[f"U+{code:04X}"]:
+                    offenders[f"U+{code:04X}"].append(page)
+    if not offenders:
+        return "No forbidden character found; the XML is malformed for another reason."
+    described = "; ".join(
+        f"{name} on page(s) {', '.join(str(number) for number in pages[:6])}"
+        for name, pages in sorted(offenders.items())
+    )
+    return (
+        "The PDF text layer carries control characters XML forbids, which means "
+        "a font ships glyphs without a ToUnicode mapping: " + described + "."
+    )
 
 
 def _check_pdf_page_sequence(pdf: pikepdf.Pdf, stable: Mapping[str, Any]) -> None:
@@ -1293,7 +1328,15 @@ def _check_poppler_cropboxes(
     try:
         root = ET.fromstring(result.stdout)
     except ET.ParseError as exc:
-        raise MarginLedgerError(f"Poppler returned malformed bbox XML: {exc}") from exc
+        # « invalid token, line 11642, column 88 » ne dit rien de ce qui cloche.
+        # Ce que cela veut dire en pratique : la couche de texte du PDF porte un
+        # caractere que XML interdit -- un caractere de controle, faute de table
+        # ToUnicode dans une fonte. Le message le NOMME, avec sa page et son
+        # contexte, plutot que de laisser chercher.
+        raise MarginLedgerError(
+            "Poppler returned malformed bbox XML: "
+            f"{exc}. {_describe_forbidden_xml_characters(result.stdout)}"
+        ) from exc
     page_elements = [element for element in root.iter() if element.tag.endswith("page")]
     if len(page_elements) != len(frames):
         _reject("Poppler page inventory differs from the PDF CropBox inventory")
@@ -1589,11 +1632,24 @@ def verify_margin_layout(
                         note_id.encode("utf-8"),
                     ),
                 )
+                # L'ecart de 6 pt est un MINIMUM TYPOGRAPHIQUE decide par le
+                # solveur, en sp exacts. Sur le PLAN, `margin_contract.py` le
+                # verifie deja sans aucune tolerance -- c'est la son autorite,
+                # et elle n'est pas dupliquee ici. Ce qui se verifie ICI est
+                # autre chose : que la page RENDUE respecte ce plan. L'ecart y
+                # traverse deux nombres que le moteur a arrondis, et il ne peut
+                # donc s'y mesurer qu'a la precision que l'appelant a declaree.
+                #
+                # Sans cette distinction, une paire posee a EXACTEMENT 6 pt --
+                # ce que le solveur fait des que la colonne est chargee -- etait
+                # rejetee des que le moteur ecrivait ses trois decimales. Le
+                # manuel en porte : c'est ce qui a fait echouer la premiere
+                # verification sur l'artefact livre.
                 for first_id, second_id in zip(
                     vertically_sorted, vertically_sorted[1:]
                 ):
                     gap = actual_bboxes[second_id][1] - actual_bboxes[first_id][3]
-                    if gap < MARGIN_GAP_SP:
+                    if gap < MARGIN_GAP_SP - rendered_position_tolerance_sp:
                         _reject(
                             f"rendered notes {first_id} and {second_id} "
                             "have less than 6pt vertical gap"

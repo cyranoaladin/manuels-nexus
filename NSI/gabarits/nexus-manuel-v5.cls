@@ -1,6 +1,15 @@
 % Redirection canonique vers gabarits/common/nexus-manuel.cls
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nexus-manuel-v5}[2026/07/20 v6.0 Wrapper Compatibilite nexus-manuel-v5 - Canonique]
+% Ces gabarits sont chargés par leur chemin -- `../../gabarits/common/nexus-charte`
+% depuis les mathématiques, autrement depuis la NSI. LaTeX comparait ce chemin au
+% nom déclaré ici et signalait l'écart, une fois par fichier. `\@currname` EST le
+% nom demandé : le fichier déclare donc qu'il est bien celui qu'on a appelé, et
+% garde son identité lisible dans la description. Le noyau compare le nom déclaré
+% à `\@currpath\@currname` : c'est donc cette paire, et non le seul `\@currname`,
+% qui rend la déclaration exacte. Aucun `\@ifpackageloaded` du
+% dépôt n'interroge ces noms ; l'identité des trois copies est prouvée par les
+% tests d'égalité octet à octet, pas par cette ligne.
+\ProvidesClass{\@currpath\@currname}[2026/07/20 v6.0 nexus-manuel-v5 -- Wrapper Compatibilite nexus-manuel-v5 - Canonique]
 \def\nxVBaseCompatibility{1}
 \IfFileExists{../../gabarits/common/nexus-manuel.cls}{%
   \input{../../gabarits/common/nexus-manuel.cls}

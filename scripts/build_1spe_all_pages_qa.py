@@ -36,6 +36,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -43,6 +44,15 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from manual_source_surface import ROOT, relative  # noqa: E402
+
+
+def _label(path: Path) -> str:
+    """Chemin lisible, y compris pour un PDF fabriqué hors du dépôt."""
+
+    try:
+        return relative(path)
+    except ValueError:
+        return str(path)
 
 JSON_TARGET = ROOT / "audit/1SPE_ALL_PAGES_QA.json"
 MD_TARGET = ROOT / "audit/1SPE_ALL_PAGES_QA.md"
@@ -214,6 +224,44 @@ def classify_outside_trim(report: dict[str, Any]) -> tuple[list[Any], list[Any]]
     return declared, undeclared
 
 
+def control_characters_in_text_layer(pdf: Path) -> list[dict[str, Any]]:
+    """Les caractères de contrôle de la couche de texte, vus par Poppler.
+
+    Le lecteur PDF lit la couche de texte par la table ToUnicode du document.
+    MSAM10 -- la fonte AMS héritée d'où venaient les deux carrés de fin de
+    démonstration -- n'en porte aucune : ses glyphes s'extrayaient donc comme
+    U+0003 et U+0004. Un manuel dont on ne peut pas copier le texte est un
+    défaut de fabrication, et le XML de `pdftotext -bbox` en devenait invalide,
+    ce qui faisait échouer la vérification des marges sur l'artefact livré.
+
+    La mesure passe par Poppler et non par PyMuPDF : PyMuPDF résout ces glyphes
+    par ses propres tables et ne voyait donc rien. C'est bien la vue du lecteur
+    qui compte, pas celle de l'outil de contrôle.
+    """
+
+    try:
+        result = subprocess.run(
+            ["pdftotext", str(pdf), "-"],
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=180,
+        )
+    except (OSError, subprocess.SubprocessError) as error:
+        _reject(f"pdftotext indisponible : {error}")
+    if result.returncode != 0:
+        _reject(f"pdftotext a refusé {_label(pdf)} : {result.stderr.strip()}")
+    counts: dict[str, int] = {}
+    for character in result.stdout:
+        code = ord(character)
+        if code < 32 and character not in "\t\n\r\f":
+            counts[f"U+{code:04X}"] = counts.get(f"U+{code:04X}", 0) + 1
+    return [
+        {"codepoint": name, "occurrences": count}
+        for name, count in sorted(counts.items())
+    ]
+
+
 def measure(variant: str) -> dict[str, Any]:
     pdf = BUILD / f"MANUEL_1SPE_{variant}.pdf"
     if not pdf.is_file():
@@ -247,6 +295,10 @@ def measure(variant: str) -> dict[str, Any]:
         "PAGES_WITHOUT_TEXT": [
             page["page"] for page in pages if not page["has_text"]
         ],
+        "control_characters": control_characters_in_text_layer(pdf),
+        "TEXT_LAYER_CONTROL_CHARACTERS": sum(
+            row["occurrences"] for row in control_characters_in_text_layer(pdf)
+        ),
     }
 
 
@@ -275,6 +327,9 @@ def build() -> dict[str, Any]:
             ),
             "PAGES_WITHOUT_TEXT": sum(
                 len(row["PAGES_WITHOUT_TEXT"]) for row in variants
+            ),
+            "TEXT_LAYER_CONTROL_CHARACTERS": sum(
+                row["TEXT_LAYER_CONTROL_CHARACTERS"] for row in variants
             ),
         },
     }
@@ -359,7 +414,11 @@ def main(argv: list[str] | None = None) -> int:
         print(f"{name}={value}")
     # `INK_BEYOND_SUPPORT` n'est pas bloquante : ce qui sort du support n'est
     # ni rendu ni imprime. Elle reste rapportee, et nommee.
-    blocking = ("UNDECLARED_INK_IN_BLEED_BAND", "TEXT_INSIDE_SAFETY_MARGIN")
+    blocking = (
+        "UNDECLARED_INK_IN_BLEED_BAND",
+        "TEXT_INSIDE_SAFETY_MARGIN",
+        "TEXT_LAYER_CONTROL_CHARACTERS",
+    )
     return 1 if any(payload["summary"][name] for name in blocking) else 0
 
 

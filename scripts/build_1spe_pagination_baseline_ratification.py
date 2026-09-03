@@ -574,10 +574,17 @@ def build(temporary: Path) -> dict[str, Any]:
         "UNINTENTIONAL_BLANK_PAGE": sum(
             row["UNINTENTIONAL_BLANK_PAGE"] for row in variants
         ),
-        "CURRENT_BUILD_LOST_THE_RATIFIED_PAGE_COUNT": sum(
+        # Le compteur de pages n'a JAMAIS ete ratifie -- le docket le dit
+        # depuis le premier jour -- et la refonte des ouvertures le supersede
+        # explicitement. Son evolution est donc une information, pas un echec.
+        # Ce qui reste invariant, et bloquant, c'est le folio.
+        "CURRENT_BUILD_PAGE_COUNT_CHANGED": sum(
             0 if row["current_build"]["still_carries_the_ratified_page_count"] else 1
             for row in variants
         ),
+        "CURRENT_BUILD_PAGE_COUNTS": {
+            row["variant"]: row["current_build"]["page_count"] for row in variants
+        },
         "CURRENT_BUILD_FALSE_CHAPTER_FOLIO": sum(
             row["current_build"]["chapter_opening_false_folio"] for row in variants
         ),
@@ -745,7 +752,6 @@ def main(argv: list[str] | None = None) -> int:
             "UNEXPECTED_REORDERING",
             "UNINTENTIONAL_BLANK_PAGE",
             "STALE_BLANK_PAGE_REASONS",
-            "CURRENT_BUILD_LOST_THE_RATIFIED_PAGE_COUNT",
             "CURRENT_BUILD_FALSE_CHAPTER_FOLIO",
         )
     }
