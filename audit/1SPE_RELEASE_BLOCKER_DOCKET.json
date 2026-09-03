@@ -1,0 +1,134 @@
+{
+  "artifact_type": "1spe_release_blocker_docket",
+  "schema_version": 1,
+  "docket_date": "2026-09-03",
+  "purpose": "constats qui ne sont la metrique d'aucun producteur, chacun assorti d'une verification executable dans scripts/build_1spe_release_blocker_ledger.py",
+  "observed_findings": [
+    {
+      "blocker_id": "MARGIN_COMPOSITOR_RENDERS_NOTHING",
+      "scope": "1SPE_SHARED_RELEASE_BLOCKER",
+      "surface": "1SPE_STYLE_RENDER",
+      "closes_with": "MACHINE",
+      "meaning": "le compositeur de marges capture les notes de marge du manuel et n'en dessine aucune : la construction ne lui passe pas d'inventaire de disposition, previous_for_render reste nul, et render_foreground sort immediatement. Les libelles de duree des exercices, et les identifiants d'objet cote professeur, existent dans la capture et jamais sur la page.",
+      "shared_because": "gabarits/common/nexus-margin-shipout.lua et gabarits/common/nexus-margin-rail.tex sont lus par la construction 1SPE, ce que declare son propre .fls",
+      "discovered": "2026-09-03"
+    },
+    {
+      "blocker_id": "D7_BUNDLE_TARGETS_THE_SPECIMEN_NOT_THE_MANUAL",
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "surface": "1SPE_HUMAN_REVIEW",
+      "closes_with": "MACHINE",
+      "meaning": "scripts/build_d7_proof_bundle.py construit et rasterise la maquette v5, pas MANUEL_1SPE. Le dossier D7 attendu — quinze pages du manuel, mention d'edition par variante, ouverture de chapitre, sommaire et folios, cours, methode, formulaire, exercice, arbre de probabilite, evaluation, remediation, corrige professeur, onglet pair et impair — n'avait aucun producteur. Le constat se ferme quand un dossier D7 du MANUEL existe, complet : quinze pages, douze categories, aucune manquante.",
+      "discovered": "2026-09-03"
+    },
+    {
+      "blocker_id": "PRINT_CANDIDATE_RECEIPT_STALE",
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "surface": "1SPE_MACHINE_PROOF",
+      "closes_with": "MACHINE",
+      "meaning": "audit/1SPE_PRINT_CANDIDATE_BUILD_RECEIPT.json decrit un autre SHA que HEAD et annonce des compteurs de pages et un nombre de signets que les builds courants contredisent. Un recu perime qui se presente comme courant est pire qu'un recu absent.",
+      "discovered": "2026-09-03"
+    },
+    {
+      "blocker_id": "ASSESSMENT_BAREME_COMMENTARY_ABSENT",
+      "scope": "HUMAN_DECISION_PENDING",
+      "surface": "1SPE_SEMANTIC_CONTENT",
+      "closes_with": "EXPERT_PROGRAMME_PEDAGOGIE",
+      "meaning": "docs/01_conception_manuel.md exige un corrige-bareme COMMENTE : pour chaque question, ce qui rapporte les points, les erreurs penalisees, les points de redaction. Aucun des vingt corriges d'evaluation ne porte cette couche, et elle ne se derive d'aucune source : elle s'ecrit.",
+      "discovered": "2026-09-03"
+    },
+    {
+      "blocker_id": "REFRESH_AUDIT_REPORTS_CORRUPTS_TWO_ARTIFACTS",
+      "scope": "1SPE_SHARED_RELEASE_BLOCKER",
+      "surface": "1SPE_MACHINE_PROOF",
+      "closes_with": "MACHINE",
+      "meaning": "scripts/refresh_audit_reports.py ecrit schema_version = \"2.0.0\", une CHAINE, dans audit/BUILD_MANIFEST.json et audit/CHAPTER_READINESS.json, dont le schema declare un ENTIER. scripts/inventory_collection.py refuse alors de s'executer : « schema_version invalide dans audit/BUILD_MANIFEST.json ». Le script s'attribue en outre le champ generator d'artefacts qu'il n'a pas produits. Il n'a pas d'analyse d'arguments : l'invoquer avec --help l'EXECUTE. Constate en le lancant par erreur le 2026-09-03 ; les deux artefacts ont ete restaures depuis HEAD.",
+      "shared_because": "audit/BUILD_MANIFEST.json est lu par scripts/inventory_collection.py, scripts/chapter_readiness.py et les gates de freeze 1SPE",
+      "discovered": "2026-09-03"
+    },
+    {
+      "blocker_id": "CHAPTER_REVIEW_PACKETS_INCOMPLETE",
+      "scope": "HUMAN_DECISION_PENDING",
+      "surface": "1SPE_HUMAN_REVIEW",
+      "closes_with": "MACHINE_THEN_EXPERT_MATHEMATIQUE_AND_EXPERT_PROGRAMME_PEDAGOGIE",
+      "meaning": "le contrat exige deux revues de role par chapitre — EXPERT_MATHEMATIQUE et EXPERT_PROGRAMME_PEDAGOGIE — soit vingt verdicts humains pour dix chapitres. Les dossiers de revue neutres n'existent que pour deux chapitres, 1SPE-SUITES et 1SPE-VARALEA, et aucun verdict n'est rendu. Les reviewers ne peuvent pas commencer sur les huit autres chapitres : il leur manque le dossier, pas seulement la decision.",
+      "discovered": "2026-09-03"
+    },
+    {
+      "blocker_id": "LATEX_WARNING_CLASSES_UNCLOSED",
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "surface": "1SPE_STYLE_RENDER",
+      "closes_with": "REAL_HUMAN_DECISION_REQUIRED",
+      "meaning": "§37 exige qu'aucune classe d'avertissement ne reste inconnue. Les cinq zeros contractuels sont atteints — Overfull, nullfont, glyphe manquant, sequence de controle indefinie — et deux classes hyperref ont ete fermees ce jour. Restent deux classes nommees mais NON fermees : le chargement des gabarits par chemin (douze occurrences par variante) et le DIV de KOMA (une). Elles ont une cause identifiee et une correction connue, et cette correction est une refonte, pas un correctif de release.",
+      "discovered": "2026-09-03"
+    }
+  ],
+  "latex_warning_classification": {
+    "purpose": "§37 exige UNKNOWN_WARNING = 0 : chaque classe d'avertissement des journaux de build est ici nommee, avec sa disposition. Une classe qui apparaitrait sans figurer ici rend le constat OPEN.",
+    "classes": [
+      {
+        "id": "OVERFULL_HBOX",
+        "pattern": "^Overfull \\\\hbox",
+        "disposition": "CLOSED_ZERO",
+        "reason": "aucune occurrence : les debordements identifies ont ete supprimes et ne doivent pas revenir"
+      },
+      {
+        "id": "OVERFULL_VBOX",
+        "pattern": "^Overfull \\\\vbox",
+        "disposition": "CLOSED_ZERO",
+        "reason": "aucune occurrence"
+      },
+      {
+        "id": "NULLFONT",
+        "pattern": "nullfont",
+        "disposition": "CLOSED_ZERO",
+        "reason": "aucune occurrence"
+      },
+      {
+        "id": "MISSING_CHARACTER",
+        "pattern": "Missing character",
+        "disposition": "CLOSED_ZERO",
+        "reason": "aucune occurrence"
+      },
+      {
+        "id": "UNDEFINED_CONTROL_SEQUENCE",
+        "pattern": "Undefined control sequence",
+        "disposition": "CLOSED_ZERO",
+        "reason": "aucune occurrence"
+      },
+      {
+        "id": "HYPERREF_PDF_STRING",
+        "pattern": "Token not allowed in a PDF string",
+        "disposition": "CLOSED_ZERO",
+        "reason": "les deux titres portant des mathematiques ont recu un \\\\texorpdfstring ; le signet lit desormais ce que le titre dit"
+      },
+      {
+        "id": "HYPERREF_PDFLANG",
+        "pattern": "Option `pdflang' has already been used",
+        "disposition": "CLOSED_ZERO",
+        "reason": "pdflang est passe dans les options de chargement d'hyperref ; l'ordre des crochets AtBeginDocument n'entre plus en jeu"
+      },
+      {
+        "id": "UNDERFULL_HBOX",
+        "pattern": "^Underfull \\\\hbox",
+        "disposition": "OPEN_TYPOGRAPHIC",
+        "reason": "une ligne lache, badness 5217, dans un paragraphe de geometrie repereee. Ce n'est pas un debordement : rien ne sort de la colonne. La corriger demande de retoucher le texte ou sa cesure, donc une decision editoriale, et elle n'est pas prise ici.",
+        "expected_count_per_variant": 1
+      },
+      {
+        "id": "WRAPPER_NAME_MISMATCH",
+        "pattern": "You have requested",
+        "disposition": "OPEN_KNOWN_CAUSE",
+        "reason": "la classe et neuf paquets du tronc commun sont charges par CHEMIN — \\\\RequirePackage{../../gabarits/common/nexus-pont} — alors qu'ils se declarent par leur nom nu. LaTeX signale l'ecart. La suppression demande de charger par nom via TEXINPUTS, donc de changer l'invocation de build et ses trois copies de gabarits : c'est un lot de refonte du chargement, pas une correction de release.",
+        "expected_count_per_variant": 12
+      },
+      {
+        "id": "TYPEAREA_DIV",
+        "pattern": "DIV for 9.5pt and used papersize",
+        "disposition": "OPEN_KNOWN_CAUSE",
+        "reason": "KOMA signale que la surface de texte n'a pas ete recalculee pour le corps de 9,5 pt. La recalculer changerait la mise en page de tout le manuel : c'est une decision de baseline visuelle, pas une correction d'avertissement.",
+        "expected_count_per_variant": 1
+      }
+    ]
+  }
+}

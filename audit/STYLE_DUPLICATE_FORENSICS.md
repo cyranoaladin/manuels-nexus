@@ -63,6 +63,14 @@ Primaire : `Mathematiques/manuel-maths/gabarits/nexus-exercices-v6.sty`
 - `Mathematiques/manuel-maths/gabarits/nexus-exercices-v6.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
 - `NSI/gabarits/nexus-exercices-v6.sty` — DORMANT_COMPATIBILITY_WRAPPER — runtime=NO — safe_to_delete=NO
 
+### `2c2bd1b3b98d1b0c4625c7e4241130e93abf2a228b56c00ece98e093ca6e317f`
+
+Primaire : `gabarits/common/nexus-margin-shipout.lua`
+
+- `gabarits/common/nexus-margin-shipout.lua` — CANONICAL_SOURCE — runtime=NO — safe_to_delete=NO
+- `Mathematiques/manuel-maths/gabarits/nexus-margin-shipout.lua` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
+- `NSI/gabarits/nexus-margin-shipout.lua` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
+
 ### `2c7b764764e3db723f752e68e7af5d375171a0f9774f39f749b2598b8a1e931f`
 
 Primaire : `Mathematiques/manuel-maths/gabarits/nexus-figures-nsi.tex`
@@ -131,14 +139,6 @@ Primaire : `gabarits/common/fonts/JetBrainsMono-Regular.otf`
 - `Mathematiques/manuel-maths/gabarits/fonts/JetBrainsMono-Regular.otf` — FONT_PROVISION_SOURCE — runtime=NO — safe_to_delete=NO
 - `NSI/gabarits/fonts/JetBrainsMono-Regular.otf` — FONT_PROVISION_SOURCE — runtime=NO — safe_to_delete=NO
 
-### `694123b346ee0e89dd4be6ad7a4903975b83f0de538db0daebef0ab6ca2def6b`
-
-Primaire : `gabarits/common/nexus-margin-shipout.lua`
-
-- `gabarits/common/nexus-margin-shipout.lua` — CANONICAL_SOURCE — runtime=NO — safe_to_delete=NO
-- `Mathematiques/manuel-maths/gabarits/nexus-margin-shipout.lua` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
-- `NSI/gabarits/nexus-margin-shipout.lua` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
-
 ### `6f6711bf7c77197b12ac037725fe9ef7b6eb7bd7a5e875756c314d0c5e1cfb5e`
 
 Primaire : `gabarits/common/fonts/Montserrat-MediumItalic.otf`
@@ -154,14 +154,6 @@ Primaire : `gabarits/common/fonts/Montserrat-SemiBold.otf`
 - `gabarits/common/fonts/Montserrat-SemiBold.otf` — CANONICAL_SOURCE — runtime=NO — safe_to_delete=NO
 - `Mathematiques/manuel-maths/gabarits/fonts/Montserrat-SemiBold.otf` — DORMANT_FONT_SOURCE — runtime=NO — safe_to_delete=NO
 - `NSI/gabarits/fonts/Montserrat-SemiBold.otf` — DORMANT_FONT_SOURCE — runtime=NO — safe_to_delete=NO
-
-### `6ffc96378d2dece2dd7479647b7b7046025fe3c12a1bdd0fcf41d8787e277823`
-
-Primaire : `gabarits/common/nexus-margin-rail.tex`
-
-- `gabarits/common/nexus-margin-rail.tex` — CANONICAL_SOURCE — runtime=NO — safe_to_delete=NO
-- `Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
-- `NSI/gabarits/nexus-margin-rail.tex` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
 
 ### `7345dbceca061abe156240c389ccde57508ec4009f4ccf90a06db8c20b6ea65b`
 
@@ -222,6 +214,14 @@ Primaire : `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls`
 
 - `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls` — ACTIVE_COMPATIBILITY_WRAPPER — runtime=YES — safe_to_delete=NO
 - `NSI/gabarits/nexus-manuel.cls` — ACTIVE_COMPATIBILITY_WRAPPER — runtime=YES — safe_to_delete=NO
+
+### `98952586570a7a93957c4fbd329efd91005917fb7baccd30fd601aceca3c95ee`
+
+Primaire : `gabarits/common/nexus-margin-rail.tex`
+
+- `gabarits/common/nexus-margin-rail.tex` — CANONICAL_SOURCE — runtime=NO — safe_to_delete=NO
+- `Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
+- `NSI/gabarits/nexus-margin-rail.tex` — ACTIVE_LOCAL_RUNTIME — runtime=YES — safe_to_delete=NO
 
 ### `9a393d63d6e05f620d3dc0190dfd35a8ede58c0808cf0fc9de7fcb9c723e4c24`
 

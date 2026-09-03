@@ -50,7 +50,7 @@ La présence d'une cible canonique unique n'implique pas encore un runtime sans 
 | `Mathematiques/manuel-maths/gabarits/nexus-icons.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `42af1195dda223dc642255754ff7a94f1d5add6720e7062883de4c429132cc8b` | `gabarits/common/nexus-icons.tex` | 0 | 1 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls` | COMPATIBILITY_CLASS_WRAPPER | NO | `5e1d7fdb258865321ee93a34a41a2de806edd93ad36b256829ed1bce4043a7dc` | — | 3 | 1 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls` | COMPATIBILITY_CLASS_WRAPPER | NO | `90ea5ae521bcf028fbc5fc240639636c24eb2e1cfc934e0af9a2c94ae7269e07` | — | 6 | 1 | NO | NO |
-| `Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `6ffc96378d2dece2dd7479647b7b7046025fe3c12a1bdd0fcf41d8787e277823` | `gabarits/common/nexus-margin-rail.tex` | 0 | 1 | NO | NO |
+| `Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `98952586570a7a93957c4fbd329efd91005917fb7baccd30fd601aceca3c95ee` | `gabarits/common/nexus-margin-rail.tex` | 0 | 1 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-pages-froides.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `4ecc02468ab1ab2859d7fe1f1930538ec35a9058dbfab79a1e86269802234751` | — | 0 | 0 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-pont-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `7345dbceca061abe156240c389ccde57508ec4009f4ccf90a06db8c20b6ea65b` | — | 0 | 0 | NO | NO |
 | `Mathematiques/manuel-maths/gabarits/nexus-signatures.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `bbf81c1368d7be1b067597803e1429dd94e19c0585dbf0981d408f8f5ea3cc74` | `gabarits/common/nexus-signatures.tex` | 0 | 1 | NO | NO |
@@ -78,7 +78,7 @@ La présence d'une cible canonique unique n'implique pas encore un runtime sans 
 | `NSI/gabarits/nexus-icons.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `42af1195dda223dc642255754ff7a94f1d5add6720e7062883de4c429132cc8b` | `gabarits/common/nexus-icons.tex` | 0 | 0 | NO | NO |
 | `NSI/gabarits/nexus-manuel-v5.cls` | COMPATIBILITY_CLASS_WRAPPER | NO | `5e1d7fdb258865321ee93a34a41a2de806edd93ad36b256829ed1bce4043a7dc` | `Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls` | 2 | 0 | NO | NO |
 | `NSI/gabarits/nexus-manuel.cls` | COMPATIBILITY_CLASS_WRAPPER | NO | `90ea5ae521bcf028fbc5fc240639636c24eb2e1cfc934e0af9a2c94ae7269e07` | `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls` | 5 | 0 | NO | NO |
-| `NSI/gabarits/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `6ffc96378d2dece2dd7479647b7b7046025fe3c12a1bdd0fcf41d8787e277823` | `gabarits/common/nexus-margin-rail.tex` | 0 | 0 | NO | NO |
+| `NSI/gabarits/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `98952586570a7a93957c4fbd329efd91005917fb7baccd30fd601aceca3c95ee` | `gabarits/common/nexus-margin-rail.tex` | 0 | 0 | NO | NO |
 | `NSI/gabarits/nexus-pages-froides.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `4ecc02468ab1ab2859d7fe1f1930538ec35a9058dbfab79a1e86269802234751` | `Mathematiques/manuel-maths/gabarits/nexus-pages-froides.sty` | 0 | 0 | NO | NO |
 | `NSI/gabarits/nexus-pont-v6.sty` | COMPATIBILITY_STYLE_WRAPPER | NO | `7345dbceca061abe156240c389ccde57508ec4009f4ccf90a06db8c20b6ea65b` | `Mathematiques/manuel-maths/gabarits/nexus-pont-v6.sty` | 0 | 0 | NO | NO |
 | `NSI/gabarits/nexus-signatures.tex` | RUNTIME_SUPPORT_TEMPLATE | NO | `bbf81c1368d7be1b067597803e1429dd94e19c0585dbf0981d408f8f5ea3cc74` | `gabarits/common/nexus-signatures.tex` | 0 | 0 | NO | NO |
@@ -94,8 +94,8 @@ La présence d'une cible canonique unique n'implique pas encore un runtime sans 
 | `gabarits/common/nexus-exercices.sty` | CANONICAL_SUPPORT_STYLE | YES | `abae58775dc52a29b98a28add1cf6c55404222fc2990b119547f8863358571b7` | — | 13 | 0 | NO | NO |
 | `gabarits/common/nexus-figures-bib.sty` | CANONICAL_SUPPORT_STYLE | YES | `e8fede638c9bd372213cd7ede0d76279106f7a0cc1c9f5f180a01afb197ac4ff` | — | 13 | 0 | NO | NO |
 | `gabarits/common/nexus-icons.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `42af1195dda223dc642255754ff7a94f1d5add6720e7062883de4c429132cc8b` | — | 1 | 0 | NO | NO |
-| `gabarits/common/nexus-manuel.cls` | CANONICAL_CLASS_IMPLEMENTATION | YES | `8c66f383c6b8266092fba2251a69fc66ad09fd94180ae3a168b5b523a1aae959` | — | 21 | 1 | NO | NO |
-| `gabarits/common/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `6ffc96378d2dece2dd7479647b7b7046025fe3c12a1bdd0fcf41d8787e277823` | — | 0 | 0 | NO | NO |
+| `gabarits/common/nexus-manuel.cls` | CANONICAL_CLASS_IMPLEMENTATION | YES | `e2c68b03c572b6d290b676ca7c90ca5bb6c1f1d796f0351967aaf427cf899ade` | — | 21 | 1 | NO | NO |
+| `gabarits/common/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `98952586570a7a93957c4fbd329efd91005917fb7baccd30fd601aceca3c95ee` | — | 0 | 0 | NO | NO |
 | `gabarits/common/nexus-pages-froides.sty` | CANONICAL_SUPPORT_STYLE | YES | `3acd395c2cf583009be8fd332bc9ab6b657ec1b47c7e09e515be3714c97c6a70` | — | 14 | 0 | NO | NO |
 | `gabarits/common/nexus-pont.sty` | CANONICAL_SUPPORT_STYLE | YES | `2703ad66ef9733c7c45f2176a7c13918a34920f6d4112e70f300d33e8f09d088` | — | 14 | 0 | NO | NO |
 | `gabarits/common/nexus-signatures.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `bbf81c1368d7be1b067597803e1429dd94e19c0585dbf0981d408f8f5ea3cc74` | — | 1 | 0 | NO | NO |
@@ -113,11 +113,11 @@ La présence d'une cible canonique unique n'implique pas encore un runtime sans 
 - `4ecc02468ab1ab2859d7fe1f1930538ec35a9058dbfab79a1e86269802234751` : `Mathematiques/manuel-maths/gabarits/nexus-pages-froides.sty`, `NSI/gabarits/nexus-pages-froides.sty`
 - `57327021b50fb44434874fb4fe00583ddb2160908ca8379d4d07d670f257685e` : `Mathematiques/manuel-maths/gabarits/nexus-couverture.sty`, `NSI/gabarits/nexus-couverture.sty`
 - `5e1d7fdb258865321ee93a34a41a2de806edd93ad36b256829ed1bce4043a7dc` : `Mathematiques/manuel-maths/gabarits/nexus-manuel-v5.cls`, `NSI/gabarits/nexus-manuel-v5.cls`
-- `6ffc96378d2dece2dd7479647b7b7046025fe3c12a1bdd0fcf41d8787e277823` : `gabarits/common/nexus-margin-rail.tex`, `Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex`, `NSI/gabarits/nexus-margin-rail.tex`
 - `7345dbceca061abe156240c389ccde57508ec4009f4ccf90a06db8c20b6ea65b` : `Mathematiques/manuel-maths/gabarits/nexus-pont-v6.sty`, `NSI/gabarits/nexus-pont-v6.sty`
 - `82c0ae2dfd98858c817f30193c7cee6f1f08327fb98f1090c6127902575028c3` : `gabarits/common/chapitre_master.tex`, `Mathematiques/manuel-maths/gabarits/chapitre_master.tex`
 - `90391485645cb6fa03ae6ffc3b315d612e714b69dcc3c0efd547a7d8fca38137` : `Mathematiques/manuel-maths/gabarits/nexus-charte-v6.sty`, `NSI/gabarits/nexus-charte-v6.sty`
 - `90ea5ae521bcf028fbc5fc240639636c24eb2e1cfc934e0af9a2c94ae7269e07` : `Mathematiques/manuel-maths/gabarits/nexus-manuel.cls`, `NSI/gabarits/nexus-manuel.cls`
+- `98952586570a7a93957c4fbd329efd91005917fb7baccd30fd601aceca3c95ee` : `gabarits/common/nexus-margin-rail.tex`, `Mathematiques/manuel-maths/gabarits/nexus-margin-rail.tex`, `NSI/gabarits/nexus-margin-rail.tex`
 - `bbf81c1368d7be1b067597803e1429dd94e19c0585dbf0981d408f8f5ea3cc74` : `gabarits/common/nexus-signatures.tex`, `Mathematiques/manuel-maths/gabarits/nexus-signatures.tex`, `NSI/gabarits/nexus-signatures.tex`
 - `c9c4c06915ff0cc38ea7393621547a39856705a8d0f19527bb89f3ecd300c769` : `Mathematiques/manuel-maths/gabarits/objet_standalone.tex`, `NSI/gabarits/objet_standalone.tex`
 - `d441187e66d487806714abf7bba768aa61b20c6d18638b39f030e6c6ec190bfa` : `Mathematiques/manuel-maths/gabarits/nexus-figures-bib.sty`, `NSI/gabarits/nexus-figures-bib.sty`
