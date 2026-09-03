@@ -1,13 +1,36 @@
 % META: {"id": "1SPE-PROBCOND-CO-044", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-044", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational
+% demi = Rational(1, 2)
+% # Chaque feuille sous SON genotype.
+% assert demi * demi == Rational(1, 4)
+% assert Rational(1,4)+Rational(1,4)+Rational(1,4)+Rational(1,4) == 1
 % assert Rational(1,4)+Rational(1,2)+Rational(1,4) == 1
 % P_porteur_nonmalade = Rational(1,2)/(Rational(1,4)+Rational(1,2))
 % assert P_porteur_nonmalade == Rational(2, 3)
 % END-VERIFY
 \begin{corrige}{1SPE-PROBCOND-EX-044}
 
-\textbf{1.} Arbre des possibilités pour un enfant. Chaque parent $Aa$ transmet $A$ ou $a$ avec la probabilité $\dfrac{1}{2}$, indépendamment de l'autre parent.
+\textbf{1.} Chaque parent $Aa$ transmet $A$ ou $a$ avec la probabilité $\dfrac{1}{2}$, indépendamment de l'autre parent. Le premier niveau donne l'allèle du père, le second celui de la mère.
+
+% Enveloppe R6 : le gate de compilation isolee (scripts/check_latex.py) monte
+% l'objet sans la charte. Le corrige rend donc son composant disponible
+% lui-meme ; sans effet des que la charte l'a deja charge (manuel assemble).
+\makeatletter\@ifundefined{nxarbreproba}{%
+  \IfFileExists{gabarits/common/nexus-arbres.sty}%
+    {\input{gabarits/common/nexus-arbres.sty}}%
+    {\input{../../gabarits/common/nexus-arbres.sty}}}{}\makeatother
+\begin{nxarbreproba}
+  \nxarbreracine{o}
+  \nxarbrenoeud{pa}{o}{$A$}{$\dfrac{1}{2}$}
+  \nxarbrefeuille{paa}{pa}{$A$}{$\dfrac{1}{2}$}{$AA$}{$\dfrac{1}{4}$}
+  \nxarbrefeuille{pab}{pa}{$a$}{$\dfrac{1}{2}$}{$Aa$}{$\dfrac{1}{4}$}
+  \nxarbrenoeud{pb}{o}{$a$}{$\dfrac{1}{2}$}
+  \nxarbrefeuille{pba}{pb}{$A$}{$\dfrac{1}{2}$}{$aA$}{$\dfrac{1}{4}$}
+  \nxarbrefeuille{pbb}{pb}{$a$}{$\dfrac{1}{2}$}{$aa$}{$\dfrac{1}{4}$}
+\end{nxarbreproba}
+
+Lecture de l'arbre :
 
 \begin{itemize}
   \item Premier niveau (allèle du père) : $A$ de probabilité $\dfrac{1}{2}$, et $a$ de probabilité $\dfrac{1}{2}$.

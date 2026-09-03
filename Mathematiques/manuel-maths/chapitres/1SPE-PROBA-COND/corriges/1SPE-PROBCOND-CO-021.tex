@@ -1,11 +1,39 @@
 % META: {"id": "1SPE-PROBCOND-CO-021", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-021", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational
+% P_B = Rational(2, 5)
+% P_A_B = Rational(3, 4)
+% P_A_Bbar = Rational(1, 3)
+% # Chaque feuille sous SON evenement.
+% assert P_B * P_A_B == Rational(3, 10)
+% assert P_B * (1 - P_A_B) == Rational(1, 10)
+% assert (1 - P_B) * P_A_Bbar == Rational(1, 5)
+% assert (1 - P_B) * (1 - P_A_Bbar) == Rational(2, 5)
+% assert Rational(3,10)+Rational(1,10)+Rational(1,5)+Rational(2,5) == 1
 % assert Rational(1, 2) == Rational(2,5)*Rational(3,4)+Rational(3,5)*Rational(1,3)
 % END-VERIFY
 \begin{corrige}{1SPE-PROBCOND-EX-021}
 
-\textbf{1.} Arbre pondéré.
+\textbf{1.} L'arbre pondéré de la situation est le suivant.
+
+% Enveloppe R6 : le gate de compilation isolee (scripts/check_latex.py) monte
+% l'objet sans la charte. Le corrige rend donc son composant disponible
+% lui-meme ; sans effet des que la charte l'a deja charge (manuel assemble).
+\makeatletter\@ifundefined{nxarbreproba}{%
+  \IfFileExists{gabarits/common/nexus-arbres.sty}%
+    {\input{gabarits/common/nexus-arbres.sty}}%
+    {\input{../../gabarits/common/nexus-arbres.sty}}}{}\makeatother
+\begin{nxarbreproba}
+  \nxarbreracine{o}
+  \nxarbrenoeud{b}{o}{$B$}{$\dfrac{2}{5}$}
+  \nxarbrefeuille{ba}{b}{$A$}{$\dfrac{3}{4}$}{$A \cap B$}{$\dfrac{3}{10}$}
+  \nxarbrefeuille{bn}{b}{$\overline{A}$}{$\dfrac{1}{4}$}{$\overline{A} \cap B$}{$\dfrac{1}{10}$}
+  \nxarbrenoeud{c}{o}{$\overline{B}$}{$\dfrac{3}{5}$}
+  \nxarbrefeuille{ca}{c}{$A$}{$\dfrac{1}{3}$}{$A \cap \overline{B}$}{$\dfrac{1}{5}$}
+  \nxarbrefeuille{cn}{c}{$\overline{A}$}{$\dfrac{2}{3}$}{$\overline{A} \cap \overline{B}$}{$\dfrac{2}{5}$}
+\end{nxarbreproba}
+
+Lecture de l'arbre :
 
 \begin{itemize}
   \item Premier niveau : $B$ de probabilité $\dfrac{2}{5}$, et $\overline{B}$ de probabilité $\dfrac{3}{5}$.

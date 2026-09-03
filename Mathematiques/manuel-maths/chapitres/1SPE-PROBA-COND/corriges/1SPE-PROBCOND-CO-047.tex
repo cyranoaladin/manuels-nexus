@@ -1,12 +1,41 @@
 % META: {"id": "1SPE-PROBCOND-CO-047", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-047", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational
+% P_D = Rational(5, 100)
+% P_T_D = Rational(99, 100)
+% P_T_Dbar = Rational(5, 100)
+% # Chaque feuille sous SON evenement, dans l'ecriture decimale de l'arbre.
+% assert P_D * P_T_D == Rational(495, 10000)
+% assert P_D * (1 - P_T_D) == Rational(5, 10000)
+% assert (1 - P_D) * P_T_Dbar == Rational(475, 10000)
+% assert (1 - P_D) * (1 - P_T_Dbar) == Rational(9025, 10000)
+% s = Rational(495,10000)+Rational(5,10000)+Rational(475,10000)+Rational(9025,10000)
+% assert s == 1
 % assert Rational(97, 1000) == Rational(5,100)*Rational(99,100)+Rational(95,100)*Rational(5,100)
 % assert Rational(99, 194) == Rational(495,10000)/Rational(97,1000)
 % END-VERIFY
 \begin{corrige}{1SPE-PROBCOND-EX-047}
 
-\textbf{1.} Arbre pondéré. On note $D$ « le sportif est dopé » et $T$ « le test est positif ». La sensibilité est $P_D(T) = 0{,}99$ et la spécificité $P_{\overline{D}}(\overline{T}) = 0{,}95$.
+\textbf{1.} On note $D$ « le sportif est dopé » et $T$ « le test est positif ». La sensibilité est $P_D(T) = 0{,}99$ et la spécificité $P_{\overline{D}}(\overline{T}) = 0{,}95$. D'où l'arbre pondéré suivant.
+
+% Enveloppe R6 : le gate de compilation isolee (scripts/check_latex.py) monte
+% l'objet sans la charte. Le corrige rend donc son composant disponible
+% lui-meme ; sans effet des que la charte l'a deja charge (manuel assemble).
+\makeatletter\@ifundefined{nxarbreproba}{%
+  \IfFileExists{gabarits/common/nexus-arbres.sty}%
+    {\input{gabarits/common/nexus-arbres.sty}}%
+    {\input{../../gabarits/common/nexus-arbres.sty}}}{}\makeatother
+\begin{nxarbreproba}
+  \nxarbreracine{o}
+  \nxarbrenoeud{d}{o}{$D$}{$0{,}05$}
+  \nxarbrefeuille{dt}{d}{$T$}{$0{,}99$}{$T \cap D$}{$0{,}0495$}
+  \nxarbrefeuille{dn}{d}{$\overline{T}$}{$0{,}01$}{$\overline{T} \cap D$}{$0{,}0005$}
+  \nxarbrenoeud{s}{o}{$\overline{D}$}{$0{,}95$}
+  \nxarbrefeuille{st}{s}{$T$}{$0{,}05$}{$T \cap \overline{D}$}{$0{,}0475$}
+  \nxarbrefeuille{sn}{s}{$\overline{T}$}{$0{,}95$}{$\overline{T} \cap \overline{D}$}{$0{,}9025$}
+\end{nxarbreproba}
+
+Lecture de l'arbre :
 
 \begin{itemize}
   \item Premier niveau : $D$ de probabilité $0{,}05$, et $\overline{D}$ de probabilité $0{,}95$.

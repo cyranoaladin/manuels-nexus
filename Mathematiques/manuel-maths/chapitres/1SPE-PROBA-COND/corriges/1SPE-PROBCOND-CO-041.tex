@@ -1,6 +1,16 @@
 % META: {"id": "1SPE-PROBCOND-CO-041", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-041", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
 % BEGIN-VERIFY
 % from sympy import Rational
+% P_M = Rational(1, 100)
+% P_T_M = Rational(19, 20)
+% P_T_Mbar = Rational(3, 100)
+% # Chaque feuille sous SON evenement, dans l'ecriture decimale de l'arbre.
+% assert P_M * P_T_M == Rational(95, 10000)
+% assert P_M * (1 - P_T_M) == Rational(5, 10000)
+% assert (1 - P_M) * P_T_Mbar == Rational(297, 10000)
+% assert (1 - P_M) * (1 - P_T_Mbar) == Rational(9603, 10000)
+% s = Rational(95,10000)+Rational(5,10000)+Rational(297,10000)+Rational(9603,10000)
+% assert s == 1
 % assert Rational(49, 1250) == Rational(1,100)*Rational(19,20)+(1-Rational(1,100))*Rational(3,100)
 % assert Rational(95, 392) == Rational(19,2000)/Rational(49,1250)
 % END-VERIFY
@@ -8,7 +18,26 @@
 
 \textbf{1.} $M$ : malade, $T$ : test positif. $P(M)=\frac{1}{100}$, $P_M(T)=\frac{19}{20}$, $P_{\overline{M}}(T)=\frac{3}{100}$.
 
-\textbf{2.} Arbre pondéré. La sensibilité est $P_M(T) = 0{,}95$ et la spécificité $P_{\overline{M}}(\overline{T}) = 0{,}97$.
+\textbf{2.} La sensibilité est $P_M(T) = 0{,}95$ et la spécificité $P_{\overline{M}}(\overline{T}) = 0{,}97$. D'où l'arbre pondéré suivant.
+
+% Enveloppe R6 : le gate de compilation isolee (scripts/check_latex.py) monte
+% l'objet sans la charte. Le corrige rend donc son composant disponible
+% lui-meme ; sans effet des que la charte l'a deja charge (manuel assemble).
+\makeatletter\@ifundefined{nxarbreproba}{%
+  \IfFileExists{gabarits/common/nexus-arbres.sty}%
+    {\input{gabarits/common/nexus-arbres.sty}}%
+    {\input{../../gabarits/common/nexus-arbres.sty}}}{}\makeatother
+\begin{nxarbreproba}
+  \nxarbreracine{o}
+  \nxarbrenoeud{m}{o}{$M$}{$0{,}01$}
+  \nxarbrefeuille{mt}{m}{$T$}{$0{,}95$}{$T \cap M$}{$0{,}0095$}
+  \nxarbrefeuille{mn}{m}{$\overline{T}$}{$0{,}05$}{$\overline{T} \cap M$}{$0{,}0005$}
+  \nxarbrenoeud{s}{o}{$\overline{M}$}{$0{,}99$}
+  \nxarbrefeuille{st}{s}{$T$}{$0{,}03$}{$T \cap \overline{M}$}{$0{,}0297$}
+  \nxarbrefeuille{sn}{s}{$\overline{T}$}{$0{,}97$}{$\overline{T} \cap \overline{M}$}{$0{,}9603$}
+\end{nxarbreproba}
+
+Lecture de l'arbre :
 
 \begin{itemize}
   \item Premier niveau : $M$ de probabilité $0{,}01$, et $\overline{M}$ de probabilité $0{,}99$.
