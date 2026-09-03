@@ -420,26 +420,27 @@ def test_aucun_corrige_ne_dessine_son_propre_arbre() -> None:
 
 
 @pytest.mark.parametrize("number", TREE_EXERCISES)
-def test_le_chargement_de_secours_reste_en_mode_vertical(number: str) -> None:
-    """Le shim R6 ne doit rien pouvoir imprimer.
+def test_aucun_corrige_ne_charge_lui_meme_son_composant(number: str) -> None:
+    """Le corrige ne doit PAS rendre son propre composant disponible.
 
-    `\\input` d'un .sty au milieu d'un paragraphe ferait passer ses fins de
-    ligne pour des espaces et ses lignes vides pour des `\\par` : le corrigé
-    gagnerait un blanc fantôme que personne ne relierait à sa cause. En mode
-    vertical, TeX jette les espaces et ignore les `\\par` — la ligne blanche qui
-    précède le shim est donc une condition de correction, pas une mise en page.
+    Il l'a fait un temps : l'enveloppe R6 montait l'objet sans la charte, et
+    les sept corriges compensaient par un `\\@ifundefined` et un `\\input` a
+    deux chemins. C'etait une bequille, pas une preuve -- un objet qui charge
+    lui-meme un `.sty` de la charte compilerait encore si la charte cessait de
+    le fournir, et le gate ne verrait plus rien.
+
+    L'enveloppe charge desormais la charte, comme le document assemble.
     """
+
     text = correction_text(number)
-    assert "\\makeatletter\\@ifundefined{nxarbreproba}" in text, (
-        f"CO-{number} : chargement de secours R6 absent"
+    assert "nexus-arbres.sty" not in text, (
+        f"CO-{number} : le corrige recharge un composant de la charte"
     )
-    # Les lignes de commentaire qui l'annoncent ne changent pas le mode : c'est
-    # la ligne vide qui les précède qui referme le paragraphe.
-    marker = "% Enveloppe R6"
-    assert marker in text
-    before = text[: text.index(marker)]
-    assert before.rstrip(" \t").endswith("\n\n"), (
-        f"CO-{number} : le shim doit être précédé d'une ligne vide"
+    assert "@ifundefined{nxarbreproba}" not in text, (
+        f"CO-{number} : reste de chargement de secours"
+    )
+    assert "\\begin{nxarbreproba}" in text, (
+        f"CO-{number} : l'arbre doit toujours etre present"
     )
 
 
@@ -875,35 +876,27 @@ def test_rendu_aucune_etiquette_illisible(rendering_report) -> None:
 
 
 @pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
-def test_chaque_corrige_compile_isole_dans_l_enveloppe_du_gate_r6(tmp_path) -> None:
-    """R6 : l'objet doit compiler seul, sous `\\documentclass{gabarits/nexus-manuel}`.
+def test_chaque_corrige_compile_isole_dans_l_enveloppe_du_gate_r6() -> None:
+    """R6 : l'objet doit compiler seul, sous l'enveloppe REELLE du gate.
 
-    Cette enveloppe (scripts/check_latex.py) ne charge PAS la charte. Une figure
-    qui n'existerait que sous la charte rendrait les sept corrigés inattestables
-    par le gate. Ils chargent donc le composant eux-mêmes, et ce test interdit
-    que cette voie se casse en silence.
+    Ce test appelait autrefois une copie de l'enveloppe ecrite en dur ici. Il
+    ne pouvait donc pas voir que l'enveloppe reelle avait un defaut -- elle ne
+    chargeait pas la charte -- ni que sa correction rendait la plomberie des
+    corriges inutile. Il passe desormais par `check_latex` lui-meme : la
+    verification suit l'enveloppe, elle ne la reinvente pas.
     """
-    pytest.importorskip("fitz")
-    for number in TREE_EXERCISES:
-        relative = (
-            f"chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-{number}.tex"
-        )
-        source = "\n".join(
-            (
-                r"\documentclass{gabarits/nexus-manuel}",
-                r"\begin{document}",
-                rf"\input{{{relative}}}",
-                r"\end{document}",
-                "",
-            )
-        )
-        pdf = _compile(tmp_path, source, f"r6-{number}")
-        # Compiler ne suffit pas : l'arbre doit vraiment être là.
-        import fitz  # noqa: PLC0415 - importorskip garantit la présence
 
-        with fitz.open(pdf) as document:
-            drawings = sum(len(page.get_drawings()) for page in document)
-        assert drawings > 10, f"CO-{number} compile mais ne dessine pas d'arbre"
+    import sys
+
+    manuel = ROOT / "Mathematiques" / "manuel-maths"
+    sys.path.insert(0, str(manuel / "scripts"))
+    from check_latex import compile_tex_files  # noqa: E402
+
+    sources = [
+        manuel / f"chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-{n}.tex"
+        for n in TREE_EXERCISES
+    ]
+    assert compile_tex_files(sources, manuel) == 0
 
 
 @pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
