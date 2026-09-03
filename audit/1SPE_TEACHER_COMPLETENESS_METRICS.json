@@ -2,7 +2,7 @@
   "artifact_name": "1SPE_TEACHER_COMPLETENESS_METRICS",
   "generated_by": "scripts/build_1spe_teacher_completeness_metrics.py",
   "manual": "1SPE",
-  "metric_evidence_digest": "sha256:b5754132c3c1e48125de157a58d92e2480385c4896b0ef75c86b9f1257a9d0db",
+  "metric_evidence_digest": "sha256:594cb7604861b38b2e97c3fcf6ae1a1457c0ca7a91dfe197fc0eb115ac069bed",
   "metrics": [
     {
       "EXPECTED": 502,
@@ -25,70 +25,14 @@
     {
       "EXPECTED": 20,
       "EXPECTED_DERIVATION": "objets publies dont la META declare un total de points numerique",
-      "GAP": 12,
+      "GAP": 2,
       "METRIC_NAME": "TEACHER_BAREME_PER_GRADED_OBJECT",
-      "OBSERVED": 8,
+      "OBSERVED": 18,
       "OBSERVED_CARRIER": [
         "\\baremeIndicatif"
       ],
       "STATUS": "FAIL",
       "gaps": [
-        {
-          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/evaluations/1SPE-DERLOCAL-EV-A-corrige.tex",
-          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
-          "object_id": "1SPE-DERLOCAL-EV-A",
-          "prose_mark_allocation": true,
-          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/evaluations/1SPE-DERLOCAL-EV-A.tex"
-        },
-        {
-          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/evaluations/1SPE-DERLOCAL-EV-B-corrige.tex",
-          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
-          "object_id": "1SPE-DERLOCAL-EV-B",
-          "prose_mark_allocation": true,
-          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/evaluations/1SPE-DERLOCAL-EV-B.tex"
-        },
-        {
-          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A-corrige.tex",
-          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
-          "object_id": "1SPE-DERGLOBAL-EV-A",
-          "prose_mark_allocation": true,
-          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
-        },
-        {
-          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-B-corrige.tex",
-          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
-          "object_id": "1SPE-DERGLOBAL-EV-B",
-          "prose_mark_allocation": true,
-          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-B.tex"
-        },
-        {
-          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/evaluations/1SPE-EXPO-EV-A-corrige.tex",
-          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
-          "object_id": "1SPE-EXPO-EV-A",
-          "prose_mark_allocation": false,
-          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/evaluations/1SPE-EXPO-EV-A.tex"
-        },
-        {
-          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/evaluations/1SPE-EXPO-EV-B-corrige.tex",
-          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
-          "object_id": "1SPE-EXPO-EV-B",
-          "prose_mark_allocation": false,
-          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/evaluations/1SPE-EXPO-EV-B.tex"
-        },
-        {
-          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/evaluations/1SPE-PRODSCAL-EV-A-corrige.tex",
-          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
-          "object_id": "1SPE-PRODSCAL-EV-A",
-          "prose_mark_allocation": true,
-          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/evaluations/1SPE-PRODSCAL-EV-A.tex"
-        },
-        {
-          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/evaluations/1SPE-PRODSCAL-EV-B-corrige.tex",
-          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
-          "object_id": "1SPE-PRODSCAL-EV-B",
-          "prose_mark_allocation": true,
-          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/evaluations/1SPE-PRODSCAL-EV-B.tex"
-        },
         {
           "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-A-corrige.tex",
           "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
@@ -102,20 +46,6 @@
           "object_id": "1SPE-GEOREP-EV-B",
           "prose_mark_allocation": true,
           "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-B.tex"
-        },
-        {
-          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/evaluations/1SPE-PROBCOND-EV-A-corrige.tex",
-          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
-          "object_id": "1SPE-PROBCOND-EV-A",
-          "prose_mark_allocation": false,
-          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/evaluations/1SPE-PROBCOND-EV-A.tex"
-        },
-        {
-          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/evaluations/1SPE-PROBCOND-EV-B-corrige.tex",
-          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
-          "object_id": "1SPE-PROBCOND-EV-B",
-          "prose_mark_allocation": false,
-          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/evaluations/1SPE-PROBCOND-EV-B.tex"
         }
       ]
     },
@@ -182,6 +112,6 @@
   "summary": {
     "GATE": "FAIL",
     "STUDENT_TEACHER_ONLY_LEAKS": 0,
-    "TEACHER_MISSING_REQUIRED_CONTENT": 12
+    "TEACHER_MISSING_REQUIRED_CONTENT": 2
   }
 }
