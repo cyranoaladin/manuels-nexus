@@ -1,0 +1,44 @@
+{
+  "artifact_type": "human_decision_build_manifest_invalidation",
+  "content_approval": false,
+  "d7_approval": false,
+  "decision": "INVALIDATE_STALE_BUILD_BINDING",
+  "decision_date": "2026-09-03",
+  "decision_id": "decision-1spe-build-manifest-invalidation-2026-09-03",
+  "decision_ref": "audit/HUMAN_DECISION_1SPE_BUILD_MANIFEST_INVALIDATION_2026-09-03.md#decision-1spe-build-manifest-invalidation-2026-09-03",
+  "grants_nothing_else": "Cette décision ne vaut ni approbation de contenu, ni revue humaine, ni D7, ni publication, ni bon à tirer.",
+  "history_is_preserved_by_git_not_by_rewriting": "Le manifeste antérieur n'est ni réécrit ni supprimé : il reste atteignable au commit qui précède l'invalidation, et ce commit est nommé ici. Aucun champ n'est édité à la main.",
+  "human_review_approval": false,
+  "isbn_authorized": false,
+  "no_rebind": "Le source_digest de l'ancien reçu n'est pas modifié pour coller au HEAD courant, et l'ancien PDF n'est pas requalifié comme courant. L'ancienne construction est invalidée ; une nouvelle est observée sur les sources courantes.",
+  "operator_authorization": "HUMAN_OPERATOR_EXPLICIT_GOVERNANCE_AUTHORIZATION",
+  "page_counts_are_pinned": false,
+  "print_approval": false,
+  "publication_approval": false,
+  "reason": "The observed 1SPE build receipts for the 363-page student candidate and 635-page teacher candidate are superseded and no longer describe the current source tree after ratified publication-critical layout/runtime corrections. Invalidate only the stale build binding so that new observed builds can be recorded against the current sources. This decision grants no content, human-review, D7, publication, or print approval.",
+  "schema_version": 1,
+  "scope": "PROVENANCE_AND_BUILD_BINDING_ONLY",
+  "superseded_observed_builds": [
+    {
+      "disposition": "SUPERSEDED_HISTORICAL",
+      "git_sha": "60e7f5a8d1859f96d153e6c9fb01ef3ebdd08800",
+      "manual": "1SPE",
+      "page_count": 363,
+      "pdf_path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
+      "pdf_sha256": "sha256:11c74f79f1cea70baea3baa70f05ebb9b1aa3dc13942522103a196b442607619",
+      "source_digest": "sha256:b63e0b2650928dee0897d9339884cf624ec504fbdfc6375f6686caf15b75a0e4",
+      "variant": "eleve"
+    },
+    {
+      "disposition": "SUPERSEDED_HISTORICAL",
+      "git_sha": "54ec678e0e64a808f09b3a697c3ae5988286aea1",
+      "manual": "1SPE",
+      "page_count": 635,
+      "pdf_path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf",
+      "pdf_sha256": "sha256:cb166e3a51baac4ef5895be8492fc097b97c035d572d3a2696807fdb40c5f405",
+      "source_digest": "sha256:b63e0b2650928dee0897d9339884cf624ec504fbdfc6375f6686caf15b75a0e4",
+      "variant": "professeur"
+    }
+  ],
+  "why_the_machine_could_not_decide": "`build_manifest.py --invalidate-stale` exige une justification et un approbateur humains, refuse en CI et n'accepte qu'un dépôt propre : écarter une attestation déjà portée au manifeste est une décision, pas un calcul."
+}
