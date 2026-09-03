@@ -560,11 +560,7 @@
 \usetikzlibrary{backgrounds}
 
 \newlength{\nxBandHeight}
-\ifdefined\nxVBaseCompatibility
-  \setlength{\nxBandHeight}{0.56\paperheight}
-\else
-  \setlength{\nxBandHeight}{0.48\paperheight}
-\fi
+\setlength{\nxBandHeight}{0.48\paperheight}
 \newsavebox{\nxTitreChapBox}
 \newlength{\nxTitreChapHeight}
 
@@ -669,8 +665,9 @@
         {#2\par};
     \fi
   \end{tikzpicture}\par
-  % Espace sous le bandeau
-  \vspace*{\dimexpr\nxBandHeight-\topskip-1.4cm\relax}%
+  % Espace sous le bandeau. La réserve suit le bandeau : le contenu commence
+  % 2,6 mm sous son bord inférieur, la même respiration qu'avant la refonte.
+  \vspace*{\dimexpr\nxBandHeight-\topskip-1.8cm\relax}%
   % Objectifs / capacités sous le bandeau
   % `breakable` est indispensable : un chapitre de seize capacités remplit
   % plus d'une page. Sans lui, tcolorbox tronque silencieusement la liste --
@@ -679,17 +676,26 @@
   \begin{tcolorbox}[enhanced, breakable, frame hidden, boxrule=0pt, arc=3pt,
     colback=chapcolor!7,
     borderline west={3pt}{0pt}{chapcolor},
-    left=12pt, right=12pt, top=10pt, bottom=10pt,
+    left=12pt, right=12pt, top=7pt, bottom=7pt,
     before upper={\textcolor{chapcolor}{\titrefont\large
-      Objectifs --- Capacités attendues}\par\vspace{5pt}}]
+      Objectifs --- Capacités attendues}\par\vspace{3pt}}]
+    % Réglage de liste compact de la charte, celui-là même que la grille
+    % d'exercices emploie. Les capacités sont la seule partie de l'ouverture
+    % qui grandit avec le chapitre : c'est là que l'espacement doit être
+    % canonique et serré, pas ailleurs.
+    \setlist{itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt,leftmargin=1.35em}%
     #3%
   \end{tcolorbox}%
-  \vspace{0.4cm}%
+  \vspace{0.25cm}%
   \begin{nxcard}%
     #4%
+    % Les temps estimés restent sur l'ouverture, dans le bloc d'information
+    % qu'ils qualifient. Isolés sous la carte, ils formaient un paragraphe de
+    % vingt-neuf caractères que la coupure de page emportait seul : cinq
+    % ouvertures sur dix ne rejetaient QUE cette ligne sur une seconde page.
+    \par\vspace{4pt}%
+    \noindent\textcolor{chapcolor}{\titrefont Temps estimés :} #5%
   \end{nxcard}%
-  \vspace{0.3cm}%
-  \noindent\textcolor{chapcolor}{\titrefont Temps estimés :} #5%
   \par\vfill
   \clearpage
 }

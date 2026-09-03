@@ -62,7 +62,17 @@ def test_a_hand_written_chapter_entry_gets_a_fresh_anchor(class_source: str) -> 
 def test_the_metadata_are_derived_not_hard_coded(class_source: str) -> None:
     assert r"pdftitle={\nxTitrePdf}" in class_source
     assert r"pdfauthor={\nxMarqueEditeur}" in class_source
-    assert "pdflang={fr-FR}" in class_source
+    # La langue se declare au CHARGEMENT d'hyperref, pas apres : passee par
+    # \hypersetup, l'option est refusee (« has already been used ») et le
+    # catalogue sort sans /Lang selon l'ordre des crochets \AtBeginDocument.
+    # Mesure du 2026-09-03 : memes sources, deux arbres, fr-FR ici et rien la.
+    assert "pdflang=fr-FR," in class_source
+    hypersetup = class_source[class_source.index("\\hypersetup{") :]
+    hypersetup = hypersetup[: hypersetup.index("}%")]
+    code = "\n".join(
+        line for line in hypersetup.splitlines() if not line.lstrip().startswith("%")
+    )
+    assert "pdflang" not in code
     assert PUBLISHER_UTF16 in class_source
     # /PTEX.FullBanner publierait la distribution et la machine de build.
     assert r"\pdfvariable suppressoptionalinfo=1" in class_source

@@ -130,26 +130,52 @@ def test_real_1spe_suites_keeps_all_objects_generated_and_release_blocking(
     assert result.release_ready is False
 
 
-def test_present_pdfs_without_observed_manifest_builds_are_not_ready() -> None:
-    manifest = json.loads(BUILD_MANIFEST.read_text(encoding="utf-8"))
-    assert manifest["builds"] == []
-    assert (
-        ROOT
-        / "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf"
-    ).is_file()
-    assert (
-        ROOT
-        / "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf"
-    ).is_file()
+def test_readiness_follows_the_observed_manifest_and_not_a_present_pdf() -> None:
+    """Un PDF present ne rend pas un chapitre pret : c'est le manifeste qui le dit.
 
-    result = next(
-        chapter
-        for chapter in chapter_readiness.collecter()
-        if chapter.chapter_id == "1SPE-SUITES"
+    Ce controle tenait auparavant sur un manifeste VIDE : deux PDF etaient
+    posés dans `build/` sans qu'aucune construction ne soit observee, et les
+    deux drapeaux restaient faux. Les deux variantes 1SPE ont depuis ete
+    enregistrees, gates passes, au SHA de leur source. La direction du controle
+    ne change pas -- c'est le manifeste qui commande -- mais sa preuve courante
+    est desormais l'accord entre ce manifeste et les PDF presents, et non plus
+    l'absence d'enregistrement.
+
+    Le cas « PDF present, manifeste vide » reste couvert, sur entree
+    synthetique, par test_canonical_observed_build_variants_enable_only_exact_variant.
+    """
+
+    manifest = json.loads(BUILD_MANIFEST.read_text(encoding="utf-8"))
+    observed = {
+        (build["manual"], build["variant"])
+        for build in manifest["builds"]
+        if build["gates"]["compile"]["passed"]
+    }
+    assert ("1SPE", "eleve") in observed
+    assert ("1SPE", "professeur") in observed
+    for variant in ("eleve", "professeur"):
+        assert (
+            ROOT
+            / f"Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_{variant}.pdf"
+        ).is_file()
+
+    # `collecter()` ne compte une construction observee que si le depot est
+    # PROPRE : elle passe par l'inventaire avec require_git_provenance, et un
+    # arbre modifie invalide la provenance. C'est voulu, et c'est pourquoi le
+    # controle porte ici sur la fonction pure, alimentee par ce que le
+    # manifeste declare vraiment.
+    result = chapter_readiness.analyser(
+        SUITES,
+        {"1SPE": "2026"},
+        {"1SPE": {variant for _manual, variant in observed}},
     )
 
-    assert result.student_build is False
-    assert result.teacher_build is False
+    assert result.student_build is True
+    assert result.teacher_build is True
+    # Et une construction observee ne vaut toujours pas publication : le
+    # tableau reste non autoritaire et le chapitre non pret.
+    assert result.authority == "NON_AUTHORITATIVE_LEGACY_DASHBOARD"
+    assert result.release_ready is False
 
 
 def test_canonical_observed_build_variants_enable_only_exact_variant() -> None:
