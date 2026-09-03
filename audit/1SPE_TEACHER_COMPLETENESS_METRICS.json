@@ -1,0 +1,186 @@
+{
+  "artifact_name": "1SPE_TEACHER_COMPLETENESS_METRICS",
+  "generated_by": "scripts/build_1spe_teacher_completeness_metrics.py",
+  "manual": "1SPE",
+  "metrics": [
+    {
+      "EXPECTED": 502,
+      "EXPECTED_DERIVATION": "objets publies dont le type est declare corrigeable par le corpus (evaluation, exercice)",
+      "GAP": 0,
+      "METRIC_NAME": "TEACHER_CORRECTION_PER_CORRECTABLE_OBJECT",
+      "OBSERVED": 502,
+      "STATUS": "PASS",
+      "gaps": []
+    },
+    {
+      "EXPECTED": 168,
+      "EXPECTED_DERIVATION": "questions declarant leur reponse dans le JSON canonique du QCM publie",
+      "GAP": 0,
+      "METRIC_NAME": "TEACHER_QCM_ANSWER_KEY_PER_DECLARED_QUESTION",
+      "OBSERVED": 168,
+      "STATUS": "PASS",
+      "gaps": []
+    },
+    {
+      "EXPECTED": 20,
+      "EXPECTED_DERIVATION": "objets publies dont la META declare un total de points numerique",
+      "GAP": 12,
+      "METRIC_NAME": "TEACHER_BAREME_PER_GRADED_OBJECT",
+      "OBSERVED": 8,
+      "OBSERVED_CARRIER": [
+        "\\baremeIndicatif"
+      ],
+      "STATUS": "FAIL",
+      "gaps": [
+        {
+          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/evaluations/1SPE-DERLOCAL-EV-A-corrige.tex",
+          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
+          "object_id": "1SPE-DERLOCAL-EV-A",
+          "prose_mark_allocation": true,
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/evaluations/1SPE-DERLOCAL-EV-A.tex"
+        },
+        {
+          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/evaluations/1SPE-DERLOCAL-EV-B-corrige.tex",
+          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
+          "object_id": "1SPE-DERLOCAL-EV-B",
+          "prose_mark_allocation": true,
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/evaluations/1SPE-DERLOCAL-EV-B.tex"
+        },
+        {
+          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A-corrige.tex",
+          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
+          "object_id": "1SPE-DERGLOBAL-EV-A",
+          "prose_mark_allocation": true,
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-A.tex"
+        },
+        {
+          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-B-corrige.tex",
+          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
+          "object_id": "1SPE-DERGLOBAL-EV-B",
+          "prose_mark_allocation": true,
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/evaluations/1SPE-DERGLOBAL-EV-B.tex"
+        },
+        {
+          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/evaluations/1SPE-EXPO-EV-A-corrige.tex",
+          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
+          "object_id": "1SPE-EXPO-EV-A",
+          "prose_mark_allocation": false,
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/evaluations/1SPE-EXPO-EV-A.tex"
+        },
+        {
+          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/evaluations/1SPE-EXPO-EV-B-corrige.tex",
+          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
+          "object_id": "1SPE-EXPO-EV-B",
+          "prose_mark_allocation": false,
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/evaluations/1SPE-EXPO-EV-B.tex"
+        },
+        {
+          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/evaluations/1SPE-PRODSCAL-EV-A-corrige.tex",
+          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
+          "object_id": "1SPE-PRODSCAL-EV-A",
+          "prose_mark_allocation": true,
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/evaluations/1SPE-PRODSCAL-EV-A.tex"
+        },
+        {
+          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/evaluations/1SPE-PRODSCAL-EV-B-corrige.tex",
+          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
+          "object_id": "1SPE-PRODSCAL-EV-B",
+          "prose_mark_allocation": true,
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PRODUIT-SCALAIRE/evaluations/1SPE-PRODSCAL-EV-B.tex"
+        },
+        {
+          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-A-corrige.tex",
+          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
+          "object_id": "1SPE-GEOREP-EV-A",
+          "prose_mark_allocation": true,
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-A.tex"
+        },
+        {
+          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-B-corrige.tex",
+          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
+          "object_id": "1SPE-GEOREP-EV-B",
+          "prose_mark_allocation": true,
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-B.tex"
+        },
+        {
+          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/evaluations/1SPE-PROBCOND-EV-A-corrige.tex",
+          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
+          "object_id": "1SPE-PROBCOND-EV-A",
+          "prose_mark_allocation": false,
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/evaluations/1SPE-PROBCOND-EV-A.tex"
+        },
+        {
+          "correction_path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/evaluations/1SPE-PROBCOND-EV-B-corrige.tex",
+          "gap": "NO_CHARTER_BAREME_CARRIER_IN_CORRECTION",
+          "object_id": "1SPE-PROBCOND-EV-B",
+          "prose_mark_allocation": false,
+          "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/evaluations/1SPE-PROBCOND-EV-B.tex"
+        }
+      ]
+    },
+    {
+      "EXPECTED": 0,
+      "EXPECTED_DERIVATION": "la variante eleve ne publie aucun objet de correction",
+      "GAP": 0,
+      "METRIC_NAME": "STUDENT_VARIANT_CORRECTION_OBJECTS",
+      "OBSERVED": 0,
+      "STATUS": "PASS",
+      "gaps": []
+    },
+    {
+      "EXPECTED": 0,
+      "EXPECTED_DERIVATION": "aucun porteur de bareme de la charte hors zone gardee professeur dans la variante eleve",
+      "GAP": 0,
+      "METRIC_NAME": "STUDENT_VARIANT_BAREME_CARRIERS",
+      "OBSERVED": 0,
+      "STATUS": "PASS",
+      "gaps": []
+    },
+    {
+      "EXPECTED": 0,
+      "EXPECTED_DERIVATION": "aucune ligne de cle de correction hors zone gardee professeur dans la variante eleve",
+      "GAP": 0,
+      "METRIC_NAME": "STUDENT_VARIANT_QCM_ANSWER_KEYS",
+      "OBSERVED": 0,
+      "STATUS": "PASS",
+      "gaps": []
+    }
+  ],
+  "pdf_secondary_evidence": {
+    "bareme_word_regex": "bar[eè]me",
+    "documents": [
+      {
+        "bareme_word_occurrences": 0,
+        "pages": 357,
+        "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
+        "sha256": "ff0c263bf01480a49e0037dd81b3765534853b236b1dd04311dc1555ddf36953",
+        "teacher_only_heading_occurrences": 0
+      },
+      {
+        "bareme_word_occurrences": 77,
+        "pages": 629,
+        "path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf",
+        "sha256": "35b502fa925c7d4003fe7f7f2d8257d335b82e164b27757a0ebe0e86f3456662",
+        "teacher_only_heading_occurrences": 10
+      }
+    ],
+    "evidence_role": "SECONDARY_NON_AUTHORITATIVE",
+    "note": "les PDF candidats sont reconstruits par un autre chantier ; ils sont lus ici a titre de verification secondaire et lies par sha256, jamais comme preuve de release",
+    "status": "READ",
+    "teacher_only_headings_searched": [
+      "Clé de correction — réservée au professeur"
+    ]
+  },
+  "published_object_counts": {
+    "student": 934,
+    "teacher": 1436
+  },
+  "published_source_digest": "sha256:2eb89b07770eec9fcef66bb039b173d6617f890ba88ed4fd26b56f5f303d5e9a",
+  "schema_version": 1,
+  "scope": "completude de la variante professeur et etancheite de la variante eleve, etablies sur les sources publiees par l'assembleur",
+  "summary": {
+    "GATE": "FAIL",
+    "STUDENT_TEACHER_ONLY_LEAKS": 0,
+    "TEACHER_MISSING_REQUIRED_CONTENT": 12
+  }
+}
