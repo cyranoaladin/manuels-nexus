@@ -114,10 +114,14 @@ def references_to(artifact: str, producer: str | None, docket: list[str]) -> lis
             raise RuntimeError(f"git grep a echoue pour {needle}")
         found.update(line for line in result.stdout.split("\n") if line)
     found.discard(artifact)
-    return [
+    rows = [
         {"path": path, "role": _classify_reference(path, producer, docket)}
         for path in sorted(found)
     ]
+    # Le docket et ce ledger citent forcement chaque artefact dispose : les
+    # compter en ferait un point fixe instable, et surtout ils ne consomment
+    # rien. Ils sont donc retires de la liste des references.
+    return [row for row in rows if row["role"] != ROLE_DISPOSITION]
 
 
 def declared_producer(artifact: str) -> dict[str, Any]:

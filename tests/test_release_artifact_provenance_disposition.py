@@ -224,3 +224,20 @@ def test_mutation_a_requirement_the_ledger_cannot_verify_is_refuted() -> None:
     rows = gate.evaluate([entry], {"audit/FIXTURE.json": _evidence()})
     assert rows[0]["verdict"] == "REFUTED"
     assert "UNVERIFIABLE_REQUIREMENT:SOMEONE_LOOKED_AT_IT" in rows[0]["failures"]
+
+
+def test_the_ledger_is_a_fixed_point_of_its_own_publication() -> None:
+    """Publier le ledger ne doit pas changer ce que le ledger observe.
+
+    Le docket et le ledger citent chaque artefact dispose ; s'ils comptaient
+    comme references, chaque publication changerait le contenu suivant.
+    """
+
+    for row in gate.build_payload()["artifacts"]:
+        for reference in row["evidence"]["references"]:
+            assert reference["role"] != gate.ROLE_DISPOSITION
+            assert reference["path"] not in {
+                gate.relative(gate.JSON_TARGET),
+                gate.relative(gate.MD_TARGET),
+            }
+    assert gate.main(["--check"]) == 0
