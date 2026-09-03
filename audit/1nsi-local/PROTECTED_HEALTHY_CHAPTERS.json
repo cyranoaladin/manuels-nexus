@@ -1,0 +1,61 @@
+{
+  "artifact_type": "protected_healthy_chapters",
+  "schema_version": 1,
+  "generated_by": "instance B (codex/urgent-1nsi-content)",
+  "base_sha": "ec12c2b5bdac1ce6a7b77a42c5438c6564f4e3d9",
+  "approves_nothing": true,
+  "note": "Marquage local. Toute reouverture exige un NEW CURRENT FINDING, pas un artefact historique.",
+  "chapters": [
+    {
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "status": "PROTECTED_HEALTHY_CURRENT_AT_BASE_SHA",
+      "checks": {
+        "FOREIGN_CONTENT": 0,
+        "CROSS_DISCIPLINE": 0,
+        "CAPACITY_MISREPRESENTING_CLONES": 0,
+        "UNJUSTIFIED_REDUNDANT_CLONES": 0,
+        "CROSS_CHAPTER_CONTAMINATION": 0,
+        "FALSE_CAPACITY_CREDITS": 0,
+        "UNKNOWN": 0
+      },
+      "historical_objects_checked": [
+        {"id": "1NSI-ADGK-EX-010", "current_exists": false,
+         "retirement_evidence": "fa9ff894 — [1NSI] reconstruire les deux chapitres d'algorithmique, contamination disciplinaire retiree (2026-08-31)"},
+        {"id": "1NSI-ADGK-CO-006", "current_exists": false,
+         "retirement_evidence": "fa9ff894"}
+      ],
+      "open_shared_infra": ["INT-001 : 3 faux ORPHAN_CO sur les corriges de remediation"]
+    },
+    {
+      "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+      "status": "PROTECTED_HEALTHY_CURRENT_AT_BASE_SHA",
+      "checks": {
+        "FOREIGN_DICHO_BODY_IN_PARCOURS_TRIS": 0,
+        "FOREIGN_GLOUTON_BODY_IN_PARCOURS_TRIS": 0,
+        "FOREIGN_KNN_BODY_IN_PARCOURS_TRIS": 0,
+        "CAPACITY_MISREPRESENTING_CLONES": 0,
+        "UNJUSTIFIED_REDUNDANT_CLONES": 0,
+        "CROSS_CHAPTER_CONTAMINATION": 0,
+        "FALSE_CAPACITY_CREDITS": 0,
+        "UNKNOWN": 0
+      },
+      "body_digest_evidence": {
+        "method": "digest du corps pedagogique, hors ligne META, avant fa9ff894 vs HEAD",
+        "objects_before": 89,
+        "objects_after": 38,
+        "historical_bodies_surviving_identically": 4,
+        "historical_bodies_carrying_dicho_glouton_knn": 3,
+        "of_which_still_present": 0
+      },
+      "historical_objects_checked": [
+        {"id": "1NSI-APT-EX-010", "current_exists": false, "retirement_evidence": "fa9ff894"},
+        {"id": "1NSI-APT-CO-020", "current_exists": false, "retirement_evidence": "fa9ff894"}
+      ],
+      "open_shared_infra": ["INT-001 : 6 faux ORPHAN_CO sur les corriges de remediation"]
+    }
+  ],
+  "historical_priority_disposition": {
+    "id": "HISTORICAL_PRIORITY_INVALIDATED_BY_CURRENT_SOURCE_EVIDENCE",
+    "reason": "L'ancien ordonnanceur designait ces deux chapitres sur la foi d'artefacts anterieurs a fa9ff894, qui a retire la contamination disciplinaire. Couvert par la dette de fraicheur connue ; aucune classe de P0 nouvelle n'est ouverte."
+  }
+}
