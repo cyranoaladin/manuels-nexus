@@ -154,8 +154,13 @@ def measure(variant: str) -> dict[str, Any]:
 
     fitz = _fitz()
     boxes = rendered_boxes(variant, pdf, inventory)
+    pages = {page["shipout_index"]: page for page in layout["pages"]}
     traceless: list[dict[str, Any]] = []
     outside: list[dict[str, Any]] = []
+    missing: list[str] = []
+    wrong_page: list[dict[str, Any]] = []
+    wrong_side: list[dict[str, Any]] = []
+    seen: dict[str, int] = {}
     weakest = 1.0
     inspected = 0
     by_role: dict[str, dict[str, Any]] = {}
@@ -165,9 +170,11 @@ def measure(variant: str) -> dict[str, Any]:
             index = note.get("target_shipout_index")
             if index is None:
                 continue
+            seen[note["id"]] = seen.get(note["id"], 0) + 1
             entry = boxes.get(note["id"])
             if entry is None:
-                _reject(f"le ledger ne connaît pas la note {note['id']}")
+                missing.append(note["id"])
+                continue
             if index > document.page_count:
                 _reject(f"la note {note['id']} vise une page hors du document")
             page = document[index - 1]
@@ -179,6 +186,30 @@ def measure(variant: str) -> dict[str, Any]:
                 trim.x0 + right / SP_PER_BP,
                 trim.y0 + bottom / SP_PER_BP,
             )
+            # La chaîne complète, maillon par maillon : l'identifiant de la
+            # source doit se retrouver sur LA page qu'il vise, du côté que le
+            # rail de cette page déclare, dans le rectangle que le PDF montre,
+            # et ce rectangle doit porter de l'encre.
+            if entry.get("target_shipout_index") != index:
+                wrong_page.append(
+                    {
+                        "id": note["id"],
+                        "expected": index,
+                        "rendered": entry.get("target_shipout_index"),
+                    }
+                )
+            placement = pages.get(index)
+            if placement is not None:
+                middle = placement["page_width_sp"] / 2
+                side = "right" if left >= middle else "left"
+                if side != placement["rail_side"]:
+                    wrong_side.append(
+                        {
+                            "id": note["id"],
+                            "expected": placement["rail_side"],
+                            "rendered": side,
+                        }
+                    )
             role = note["role"]
             summary = by_role.setdefault(
                 role,
@@ -221,8 +252,19 @@ def measure(variant: str) -> dict[str, Any]:
         "roles": sorted(by_role.values(), key=lambda row: row["role"]),
         "traceless": traceless[:40],
         "outside_their_page": outside[:40],
+        "wrong_page": wrong_page[:20],
+        "wrong_side": wrong_side[:20],
+        "missing": missing[:20],
         "MARGIN_NOTES_INSPECTED": inspected,
         "MARGIN_NOTES_WITHOUT_TRACE": len(traceless),
+        # Les noms demandés par la direction de production, sur 100 % des
+        # items attendus visibles.
+        "MISSING": len(missing),
+        "DUPLICATE": sum(count - 1 for count in seen.values() if count > 1),
+        "WRONG_PAGE": len(wrong_page),
+        "WRONG_SIDE": len(wrong_side),
+        "EMPTY_RENDER": len(traceless),
+        "UNKNOWN": declared - inspected - len(outside) - len(missing),
         "MARGIN_NOTES_OUTSIDE_THEIR_PAGE": len(outside),
         "MARGIN_NOTES_NOT_INSPECTED": declared - inspected - len(outside),
         "WEAKEST_INK_COVERAGE": round(weakest, 5) if inspected else 0.0,
@@ -252,6 +294,11 @@ def build() -> dict[str, Any]:
             "on": "le PDF livré, par test_margin_production_path.py",
         },
         "the_inventory_is_the_one_the_build_publishes": True,
+        "the_chain_that_is_proved": (
+            "MARGIN_SOURCE_ID -> visibilité attendue -> page -> côté du rail -> "
+            "objet rendu -> rectangle -> encre présente, sur 100 % des items "
+            "attendus visibles."
+        ),
         "the_boxes_are_read_from_the_ledger_not_recomputed": (
             "Le rectangle de chaque note est celui que le ledger reconstruit "
             "depuis les objets du PDF livré. Le recalculer ici donnerait une "
@@ -275,6 +322,17 @@ def build() -> dict[str, Any]:
             "WEAKEST_INK_COVERAGE": min(
                 (row["WEAKEST_INK_COVERAGE"] for row in variants), default=0.0
             ),
+            **{
+                name: sum(row[name] for row in variants)
+                for name in (
+                    "MISSING",
+                    "DUPLICATE",
+                    "WRONG_PAGE",
+                    "WRONG_SIDE",
+                    "EMPTY_RENDER",
+                    "UNKNOWN",
+                )
+            },
         },
     }
 
@@ -349,6 +407,12 @@ def main(argv: list[str] | None = None) -> int:
         "MARGIN_NOTES_WITHOUT_TRACE",
         "MARGIN_NOTES_OUTSIDE_THEIR_PAGE",
         "MARGIN_NOTES_NOT_INSPECTED",
+        "MISSING",
+        "DUPLICATE",
+        "WRONG_PAGE",
+        "WRONG_SIDE",
+        "EMPTY_RENDER",
+        "UNKNOWN",
     )
     return 1 if any(summary[name] for name in blocking) else 0
 

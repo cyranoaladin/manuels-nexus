@@ -39,6 +39,33 @@ def payload() -> dict[str, Any]:
 # ---------------------------------------------------------------------------
 
 
+def test_the_whole_chain_closes_on_every_expected_item(
+    payload: dict[str, Any],
+) -> None:
+    """Identifiant source -> page -> côté -> rectangle -> encre, sur 100 %."""
+
+    summary = payload["summary"]
+    for name in (
+        "MISSING",
+        "DUPLICATE",
+        "WRONG_PAGE",
+        "WRONG_SIDE",
+        "EMPTY_RENDER",
+        "UNKNOWN",
+    ):
+        assert summary[name] == 0, name
+    assert "MARGIN_SOURCE_ID" in payload["the_chain_that_is_proved"]
+    # Le total inspecté doit égaler ce que le contrat déclare attendu visible.
+    contract = json.loads(
+        (ROOT / "audit/1SPE_MARGIN_CONTENT_CONTRACT.json").read_text(encoding="utf-8")
+    )
+    assert (
+        summary["MARGIN_NOTES_INSPECTED"]
+        == contract["summary"]["EXPECTED_VISIBLE_MARGIN_ITEMS"]
+        == contract["summary"]["RENDERED_VISIBLE_MARGIN_ITEMS"]
+    )
+
+
 def test_every_placed_margin_note_leaves_ink(payload: dict[str, Any]) -> None:
     summary = payload["summary"]
     assert summary["MARGIN_NOTES_WITHOUT_TRACE"] == 0
@@ -144,10 +171,63 @@ def test_an_invisible_note_leaves_no_trace(tmp_path: Path) -> None:
     assert invisible == 0.0
 
 
+def test_a_note_on_the_wrong_page_or_the_wrong_side_is_counted(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Sans ces deux mutations, WRONG_PAGE et WRONG_SIDE seraient décoratifs."""
+
+    build = tmp_path / "MANUEL_1SPE"
+    build.mkdir()
+    _one_page_pdf(build / "MANUEL_1SPE_eleve.pdf")
+    (build / "MANUEL_1SPE_eleve.margin-layout.json").write_text(
+        json.dumps(
+            {
+                "state": "stable",
+                "notes": [
+                    {
+                        "id": "nxm:eleve:appui:00000001",
+                        "role": "appui",
+                        "target_shipout_index": 1,
+                    }
+                ],
+                # Le rail de la page 1 est à DROITE.
+                "pages": [
+                    {
+                        "shipout_index": 1,
+                        "rail_side": "right",
+                        "page_width_sp": 38967463,
+                        "page_height_sp": 55137945,
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(gate, "BUILD", build)
+    # Le ledger place la note sur une AUTRE page, et à GAUCHE.
+    monkeypatch.setattr(
+        gate,
+        "rendered_boxes",
+        lambda *a, **k: {
+            "nxm:eleve:appui:00000001": {
+                "target_shipout_index": 7,
+                "bbox_sp": [100000, 200000, 900000, 400000],
+            }
+        },
+    )
+
+    result = gate.measure("eleve")
+
+    assert result["WRONG_PAGE"] == 1
+    assert result["WRONG_SIDE"] == 1
+    assert result["wrong_page"][0]["expected"] == 1
+    assert result["wrong_side"][0]["expected"] == "right"
+
+
 def test_a_note_the_ledger_does_not_know_is_refused(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """Une note sans rectangle ne peut pas être regardée : on le dit."""
+    """Une note que le PDF ne porte pas est COMPTÉE, pas passée sous silence."""
 
     build = tmp_path / "MANUEL_1SPE"
     build.mkdir()
@@ -171,8 +251,11 @@ def test_a_note_the_ledger_does_not_know_is_refused(
     monkeypatch.setattr(gate, "BUILD", build)
     monkeypatch.setattr(gate, "rendered_boxes", lambda *a, **k: {})
 
-    with pytest.raises(gate.MarginRasterError, match="ne connaît pas la note"):
-        gate.measure("eleve")
+    result = gate.measure("eleve")
+
+    assert result["MISSING"] == 1
+    assert result["missing"] == ["nxm:eleve:appui:00000001"]
+    assert result["MARGIN_NOTES_INSPECTED"] == 0
 
 
 def test_an_unstable_inventory_is_refused_rather_than_measured(

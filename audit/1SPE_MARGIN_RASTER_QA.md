@@ -17,6 +17,12 @@ La géométrie est vérifiée ailleurs, par `Mathematiques/manuel-maths/scripts/
 | `MARGIN_NOTES_OUTSIDE_THEIR_PAGE` | 0 |
 | `MARGIN_NOTES_NOT_INSPECTED` | 0 |
 | `WEAKEST_INK_COVERAGE` | 0.02848 |
+| `MISSING` | 0 |
+| `DUPLICATE` | 0 |
+| `WRONG_PAGE` | 0 |
+| `WRONG_SIDE` | 0 |
+| `EMPTY_RENDER` | 0 |
+| `UNKNOWN` | 0 |
 
 ## Variante `eleve` — 952 notes
 
