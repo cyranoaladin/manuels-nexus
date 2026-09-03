@@ -1,0 +1,84 @@
+{
+  "artifact_type": "human_decision_visual_baseline_pagination",
+  "schema_version": 1,
+  "decision_id": "decision-1spe-visual-baseline-pagination-2026-09-03",
+  "decision_ref": "audit/HUMAN_DECISION_1SPE_VISUAL_BASELINE_PAGINATION_2026-09-03.md#decision-1spe-visual-baseline-pagination-2026-09-03",
+  "decision_date": "2026-09-03",
+  "decision": "RATIFY_VISUAL_BASELINE_CHANGE",
+  "operator_authorization": "HUMAN_OPERATOR_EXPLICIT_GOVERNANCE_AUTHORIZATION",
+  "reason": "chapter openings must start on a clean page; the previous pagination produced false TOC folios",
+  "change_commit": "ab8d84e9c3047d6ed1e02fe78b6b9e3f3ea51fee",
+  "ratified_mechanism": "clearpage",
+  "refused_mechanism": "cleardoublepage",
+  "refused_mechanism_reason": "aucun contrat n'exige un depart systematique en page impaire ; ne pas inventer cette obligation",
+  "content_approval": false,
+  "d7_approval": false,
+  "publication_approval": false,
+  "human_chapter_review": false,
+  "final_content_sha": false,
+  "print_ready": false,
+  "isbn_authorized": false,
+  "page_counts_are_pinned": false,
+  "page_counts_are_pinned_reason": "363 et 635 sont les compteurs de la candidate courante, pas une norme ; le compte definitif sera capture sur les PDF finals",
+  "superseded_baseline": {
+    "state": "SUPERSEDED_BY_EDITORIAL_PAGINATION_FIX",
+    "student_page_count": 359,
+    "teacher_page_count": 633,
+    "student_wrong_chapter_folios": 3,
+    "teacher_wrong_chapter_folios": 6
+  },
+  "ratified_candidate": {
+    "student_page_count": 363,
+    "teacher_page_count": 635,
+    "student_wrong_chapter_folios": 0,
+    "teacher_wrong_chapter_folios": 0
+  },
+  "authorized_change_class": "EXPECTED_PAGE_BOUNDARY_CHANGE",
+  "authorized_side_effects": [
+    "FOLIO_PROPAGATION",
+    "CHAPTER_RUBRIC_TAB_MOVES_WITH_ITS_PAGE",
+    "TOC_FOLIO_UPDATE"
+  ],
+  "forbidden_change_class": [
+    "MISSING_CONTENT",
+    "DUPLICATED_CONTENT",
+    "UNEXPECTED_REORDERING"
+  ],
+  "variants": [
+    {
+      "variant": "eleve",
+      "pdf_path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf"
+    },
+    {
+      "variant": "professeur",
+      "pdf_path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf"
+    }
+  ],
+  "documented_blank_pages": [
+    {
+      "page": 2,
+      "reason": "VERSO_DE_PREMIERE_DE_COUVERTURE",
+      "mechanism": "gabarits/common/nexus-couverture.sty:180 — \\cleardoublepage de \\nxPageTitreInterieure ramene la page de titre sur un recto",
+      "predates_the_pagination_fix": true
+    },
+    {
+      "page": 4,
+      "reason": "VERSO_AVANT_UN_CHAPITRE_ETOILE_DE_LIMINAIRE",
+      "mechanism": "gabarits/common/nexus-manuel.cls:12 — scrbook charge en open=right via le wrapper nexus-manuel-v5 ; \\chapter*{Avant-propos} demarre donc sur un recto",
+      "predates_the_pagination_fix": true
+    },
+    {
+      "page": 6,
+      "reason": "VERSO_AVANT_UN_CHAPITRE_ETOILE_DE_LIMINAIRE",
+      "mechanism": "gabarits/common/nexus-manuel.cls:12 — open=right ; \\chapter*{Mode d'emploi} demarre sur un recto",
+      "predates_the_pagination_fix": true
+    },
+    {
+      "page": 12,
+      "reason": "VERSO_AVANT_UN_CHAPITRE_ETOILE_DE_LIMINAIRE",
+      "mechanism": "gabarits/common/nexus-manuel.cls:12 — open=right ; \\chapter*{Plan du manuel et navigation} demarre sur un recto",
+      "predates_the_pagination_fix": true
+    }
+  ],
+  "documented_blank_pages_scope": "identiques dans les deux variantes et identiques avant et apres la correction : le liminaire ouvre ses sections sur un recto, ce qui est la convention deux-pages de la classe et n'est pas un effet du clearpage ratifie"
+}
