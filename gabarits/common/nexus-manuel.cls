@@ -1263,3 +1263,24 @@
   ](n){\titrefont\small Corrigé};%
   \par\nopagebreak\smallskip
 }{\par\smallskip}
+
+% ===========================================================================
+%  IDENTITÉ ÉDITORIALE — millésime, variante, marque
+% ===========================================================================
+% Ces trois données sont les seules dont dépendent la couverture, la page de
+% titre intérieure et les métadonnées du PDF. Elles sont dérivées du booléen
+% de variante déjà porté par la classe : aucun appel de la collection n'a à
+% répéter « élève » ou « professeur ».
+\newcommand{\nexus@millesime}{2026-2027}
+\newcommand{\millesime}[1]{\renewcommand{\nexus@millesime}{#1}}
+\newcommand{\nxMarqueEditeur}{Nexus Réussite}
+% Libellé de variante en casse éditoriale (métadonnées, page de titre).
+\newcommand{\nxLibelleVariante}{%
+  \ifnxVersionProfesseur Édition Professeur\else Édition Élève\fi}
+% Mention de variante en capitales (première de couverture, page de titre).
+% Sans interlettrage : le texte doit rester extractible tel quel du PDF.
+\newcommand{\nxMentionVariante}{%
+  \ifnxVersionProfesseur ÉDITION PROFESSEUR\else ÉDITION ÉLÈVE\fi}
+\newcommand{\nxTitrePdf}{%
+  \nexus@matiere\space\nexus@niveau\space—\space
+  \nxLibelleVariante\space—\space\nexus@millesime}

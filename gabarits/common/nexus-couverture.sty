@@ -119,11 +119,19 @@
     % Filet de respiration sous le bloc titre
     \draw[white, opacity=0.55, line width=1.6pt]
       ([shift={(16mm,110mm)}]current page.south west) -- ++(34mm,0);
+    % --- Mention de variante ---
+    % Donnée du producteur canonique : \nxMentionVariante est dérivée du
+    % booléen \ifnxVersionProfesseur, aucun appel n'a à la répéter. Sans
+    % interlettrage, contrairement à l'étiquette de collection : la mention
+    % doit rester extractible telle quelle du texte du PDF.
+    \node[anchor=south west, text=white, opacity=0.92, inner sep=0pt,
+      font=\titrefont\fontsize{9.5}{12}\selectfont]
+      at ([shift={(16mm,99mm)}]current page.south west)
+      {\nxMentionVariante};
     % --- Bandeau bas : marque + édition ---
     \node[anchor=west, text=white, font=\titrefont\fontsize{11}{14}\selectfont]
       at ([shift={(16mm,21mm)}]current page.south west)
-      {NEXUS\,\raisebox{0.18ex}{\tikz\fill[white] (0,0) -- (0.28em,0.4em)
-        -- (0.56em,0) -- (0.28em,-0.4em) -- cycle;}\,RÉUSSITE};
+      {\nxLogotypeNexus{white}};
     \node[anchor=west, text=white, opacity=0.75,
       font=\sffamily\fontsize{8}{11}\selectfont]
       at ([shift={(16mm,14mm)}]current page.south west)
@@ -136,7 +144,51 @@
       {#5};
   \end{tikzpicture}%
   \null\clearpage
+  \nxPageTitreInterieure{#2}{#3}{#5}%
 }
+
+% ===========================================================================
+%  PAGE DE TITRE INTÉRIEURE
+% ===========================================================================
+% Page de titre sobre, sur la grille intérieure de la charte (20 mm du bord,
+% comme le sommaire et l'avant-propos), dans les fontes et les couleurs de la
+% collection. Elle porte la même mention de variante que la première de
+% couverture, dérivée du même booléen : la variante reste une donnée unique.
+% Aucun slogan supplémentaire, aucune mention d'ISBN.
+% \nxPageTitreInterieure{discipline}{niveau}{millésime}
+\newcommand{\nxPageTitreInterieure}[3]{%
+  \cleardoublepage
+  \thispagestyle{empty}%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north west, text=chapcolor, inner sep=0pt]
+      at ([shift={(20mm,-46mm)}]current page.north west)
+      {\titrefont\fontsize{11}{14}\selectfont\MakeUppercase{#1}};
+    \draw[chapcolor, line width=1.6pt]
+      ([shift={(20mm,-54mm)}]current page.north west) -- ++(26mm,0);
+    \node[anchor=north west, text=encre, inner sep=0pt, text width=150mm]
+      at ([shift={(20mm,-64mm)}]current page.north west)
+      {\titrefont\fontsize{30}{34}\selectfont #2};
+    \node[anchor=north west, text=chapcolor, inner sep=0pt]
+      at ([shift={(20mm,-104mm)}]current page.north west)
+      {\titrefont\fontsize{10}{13}\selectfont\nxMentionVariante};
+    \node[anchor=north west, text=encre!65, inner sep=0pt]
+      at ([shift={(20mm,-112mm)}]current page.north west)
+      {\sffamily\fontsize{9}{12}\selectfont #3};
+    \node[anchor=south west, inner sep=0pt]
+      at ([shift={(20mm,32mm)}]current page.south west)
+      {\includegraphics[width=30mm]{gabarits/logo_nexus.png}};
+    \node[anchor=south west, text=encre, inner sep=0pt,
+      font=\titrefont\fontsize{9.5}{12}\selectfont]
+      at ([shift={(20mm,22mm)}]current page.south west)
+      {\nxLogotypeNexus{encre}};
+  \end{tikzpicture}%
+  \null\clearpage
+}
+
+% Logotype textuel de la collection (le losange remplace le point médian).
+\newcommand{\nxLogotypeNexus}[1]{%
+  NEXUS\,\raisebox{0.18ex}{\tikz\fill[#1] (0,0) -- (0.28em,0.4em)
+    -- (0.56em,0) -- (0.28em,-0.4em) -- cycle;}\,RÉUSSITE}
 
 % ===========================================================================
 %  QUATRIÈME DE COUVERTURE
@@ -167,11 +219,15 @@
       anchor=south west]
       at ([shift={(20mm,16mm)}]current page.south west)
       {\includegraphics[width=27mm]{gabarits/logo_nexus.png}};
+    % Décision produit FIRST_PRINT_EDITION_NO_ISBN (2026-09-03) : ce premier
+    % tirage ne porte aucun ISBN. Le cartouche ne mentionne donc RIEN à cet
+    % emplacement — ni numéro, ni « sans ISBN », ni « à attribuer » : il ne
+    % reste que la marque de collection, que la charte y place.
     \node[anchor=south east, draw=white!55!encre, line width=0.6pt,
       inner sep=6pt, text=white!75!encre,
       font=\ttfamily\fontsize{7.5}{9}\selectfont, align=center]
       at ([shift={(-20mm,16mm)}]current page.south east)
-      {ISBN --- à attribuer\\nexus-reussite};
+      {nexus-reussite};
   \end{tikzpicture}%
   \null\clearpage
 }
