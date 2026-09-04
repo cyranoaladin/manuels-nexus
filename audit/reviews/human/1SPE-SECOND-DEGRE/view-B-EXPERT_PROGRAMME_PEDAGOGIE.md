@@ -341,7 +341,73 @@ Aucune question de ce chapitre n'est routee vers une revue humaine par `audit/QC
 
 La regle du depot : « la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers ».
 
-## 7. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
+## 7. Barème commenté — propositions à juger
+
+La politique est fixée : pour chaque question évaluée, des POINTS, un ATTENDU ESSENTIEL, et un CRÉDIT PARTIEL seulement lorsqu'une décomposition objective le justifie. Le corrigé scientifique reste séparé et complet ; le barème ne le remplace pas.
+
+Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le contenu candidat que votre verdict de chapitre couvre.
+
+### 1SPE-SECDEG-EV-A
+
+**Exercice 1** — 7 points (C1, C3, C4)
+
+- **Q1** — 1 pt — Attendu : calculer — Pour $f(x) = 2x^2 - 8x + 6$ : $a = 2$, $b = -8$, $c = 6$.
+- **Q2** — 2 pts — Attendu : calculer — \] \[ \boxed{f(x) = 2(x-2)^2 - 2.} \] \medskip.
+- **Q3** — 2 pts — Attendu : en déduire — \] Deux racines réelles distinctes : \[ x_1 = \frac{8 - 4}{4} = 1, \qquad x_2 = \frac{8 + 4}{4} = 3.
+- **Q4** — 2 pts — Attendu : vérifier — \[ \boxed{f(x) = 2(x-1)(x-3).} \] Vérification : $2(x-1)(x-3) = 2(x^2 - 4x + 3) = 2x^2 - 8x + 6 = f(x)$.
+
+**Exercice 2** — 5 points (C2) · 1 question(s) en attente de jugement
+
+- **Q1** — 2 pts — Attendu : calculer — \quad \checkmark \] Donc $g(x) = -(x-2)^2 + 1$ est bien la forme canonique de $g$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
+- **Q2** — 1 pt — Attendu : en déduire — Comme $a = -1 < 0$, la parabole est tournee vers le bas : $g$ admet un \textbf{maximum} de valeur $g(2) = 1$, atteint en $x = 2$.
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
+- **Q4** — 1 pt — Attendu : calculer — L'axe de symetrie de la parabole a pour équation $x = \alpha = 2$.
+
+**Exercice 3** — 4 points (C4, C5)
+
+- **Q1** — 2 pts — Attendu : calculer — $f(x) = 2(x-1)(x-3)$.
+- **Q2** — 1 pt — Attendu : résoudre — \[ \boxed{\mathcal{S} = [1\,;\,3].} \] \medskip.
+- **Q3** — 1 pt — Attendu : résoudre — \[ \boxed{\mathcal{S} = \,]-\infty\,;\,1[ \cup \,]3\,;\,+\infty[.} \].
+
+**Exercice 4** — 4 points (C6)
+
+- **Q1** — 1 pt — Attendu : exprimer — \item Largeur : $20 - 2x$~cm.
+- **Q2** — 1 pt — Attendu : montrer — \] Domaine : $x > 0$, $30 - 2x > 0$ et $20 - 2x > 0$, soit $x \in \,]0\,;\,10[$.
+- **Q3** — 1 pt — Attendu : calculer — \] \[ V(5) = 5 \times (30-10) \times (20-10) = 5 \times 20 \times 10 = 1\,000 \text{ cm}^3.
+- **Q4** — 1 pt — Attendu : justifier — Une étude complete de $V$ (dérivée ou tableau de variations) est nécessaire pour trouver le maximum absolu.
+
+### 1SPE-SECDEG-EV-B
+
+**Exercice 1** — 7 points (C1, C3, C4)
+
+- **Q1** — 1 pt — Attendu : calculer — Pour $f(x) = 3x^2 - 12x + 9$ : $a = 3$, $b = -12$, $c = 9$.
+- **Q2** — 2 pts — Attendu : calculer — \] \[ \boxed{f(x) = 3(x-2)^2 - 3.} \] \medskip.
+- **Q3** — 2 pts — Attendu : en déduire — \] \[ x_1 = \frac{12 - 6}{6} = 1, \qquad x_2 = \frac{12 + 6}{6} = 3.
+- **Q4** — 2 pts — Attendu : vérifier — \[ \boxed{f(x) = 3(x-1)(x-3).} \] Vérification : $3(x-1)(x-3) = 3(x^2 - 4x + 3) = 3x^2 - 12x + 9 = f(x)$.
+
+**Exercice 2** — 5 points (C2) · 1 question(s) en attente de jugement
+
+- **Q1** — 2 pts — Attendu : calculer — \quad \checkmark \] Donc $g(x) = -2(x-2)^2 + 2$ est bien la forme canonique de $g$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
+- **Q2** — 1 pt — Attendu : en déduire — Comme $a = -2 < 0$, la parabole est tournee vers le bas : $g$ admet un \textbf{maximum} de valeur $g(2) = 2$, atteint en $x = 2$.
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
+- **Q4** — 1 pt — Attendu : calculer — L'axe de symetrie de la parabole a pour équation $x = \alpha = 2$.
+
+**Exercice 3** — 4 points (C4, C5)
+
+- **Q1** — 2 pts — Attendu : calculer — $f(x) = 3(x-1)(x-3)$.
+- **Q2** — 1 pt — Attendu : résoudre — D'après le tableau de signes : $\boxed{\mathcal{S} = [1\,;\,3]}$.
+- **Q3** — 1 pt — Attendu : résoudre — $\boxed{\mathcal{S} = \,]-\infty\,;\,1[ \cup \,]3\,;\,+\infty[}$.
+
+**Exercice 4** — 4 points (C6)
+
+- **Q1** — 1 pt — Attendu : exprimer — Après decoupe et pliage : hauteur $x$~cm, longueur $30-2x$~cm, largeur $20-2x$~cm.
+- **Q2** — 1 pt — Attendu : montrer — Domaine : $x > 0$, $30-2x > 0$ et $20-2x > 0$, d'ou $x \in \,]0\,;\,10[$.
+- **Q3** — 1 pt — Attendu : calculer — \] \[ V(6) = 6 \times (30-12) \times (20-12) = 6 \times 18 \times 8 = 864 \text{ cm}^3.
+- **Q4** — 1 pt — Attendu : justifier — Une étude complete de $V$ est nécessaire.
+
+Ce chapitre porte 30 question(s) évaluée(s), dont 2 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
+
+## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 
 1. completude du programme officiel
 2. alignement des capacites
@@ -359,7 +425,7 @@ La regle du depot : « la richesse se mesure en occasions distinctes et en geste
 
 Cette checklist est celle du role. Elle s'applique au CHAPITRE COURANT ENTIER, y compris aux objets qu'aucune section de cette vue ne cite.
 
-## 8. Reference de lecture : le PDF candidat
+## 9. Reference de lecture : le PDF candidat
 
 Le PDF sert a lire le chapitre dans l'ordre ou l'eleve le recevra. Il n'est pas une preuve : le packet ne porte aucune preuve de rendu (`render_evidence = ABSENT`), et aucun index page-objet n'est etabli.
 

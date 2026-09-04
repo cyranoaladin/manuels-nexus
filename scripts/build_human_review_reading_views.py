@@ -962,6 +962,123 @@ def view_expert_mathematique(facts: dict[str, Any], sources: dict[str, Any]) -> 
 # --------------------------------------------------------------------------
 
 
+def _bareme_block(facts: dict[str, Any], index: int) -> list[str]:
+    """Le barème commenté que ce chapitre soumet au jugement.
+
+    Les propositions machine et les items qui demandent un jugement sont
+    GROUPÉS par évaluation puis par question, et les deux barèmes GEOREP --
+    décision humaine obligatoire -- passent en tête. Les rassembler ailleurs
+    reviendrait à demander une signature sur un contenu que le relecteur
+    n'aurait pas vu.
+
+    Les formules restent le LaTeX canonique : aucune seconde version textuelle
+    n'est fabriquée, et un lecteur Markdown qui rend les mathématiques les
+    affiche telles que le manuel les imprime.
+    """
+
+    proposal = _load_json(ROOT / "audit/1SPE_BAREME_COMMENTARY_PROPOSAL.json")
+    mandatory = _load_json(
+        ROOT / "audit/1SPE_ASSESSMENT_BAREME_TRANSCRIPTION.json"
+    )
+    if proposal is None:
+        return []
+    chapter = facts["chapter"]
+    assessments = [
+        row for row in proposal["assessments"] if row["chapter"] == chapter
+    ]
+    if not assessments:
+        return []
+
+    human_ids = {
+        row["object_id"]
+        for row in (mandatory or {}).get("human_decision_packet", [])
+    }
+    lines = [
+        f"## {index}. Barème commenté — propositions à juger",
+        "",
+        "La politique est fixée : pour chaque question évaluée, des POINTS, un "
+        "ATTENDU ESSENTIEL, et un CRÉDIT PARTIEL seulement lorsqu'une "
+        "décomposition objective le justifie. Le corrigé scientifique reste "
+        "séparé et complet ; le barème ne le remplace pas.",
+        "",
+        "Ces propositions sont **machine** et ne valent aucune approbation. "
+        "Elles sont le contenu candidat que votre verdict de chapitre couvre.",
+        "",
+    ]
+    # Les décisions obligatoires d'abord.
+    ordered = sorted(
+        assessments, key=lambda row: (row["object_id"] not in human_ids,)
+    )
+    for assessment in ordered:
+        obligatory = assessment["object_id"] in human_ids
+        lines += [
+            f"### {assessment['object_id']}"
+            + (" — **DÉCISION HUMAINE OBLIGATOIRE**" if obligatory else ""),
+            "",
+        ]
+        if obligatory:
+            lines += [
+                "Le sujet ne value aucune question individuellement : "
+                "répartir son total est un jugement pédagogique, et il vous "
+                "revient. Le dossier complet — contraintes du sujet, geste de "
+                "raisonnement, indicateurs observables, proposition et sa "
+                "justification — est dans "
+                "`audit/1SPE_ASSESSMENT_BAREME_TRANSCRIPTION.json`.",
+                "",
+            ]
+        for exercise in assessment["exercises"]:
+            waiting = [
+                row
+                for row in exercise["questions"]
+                if row["verdict"] != "PROPOSED"
+            ]
+            lines += [
+                f"**Exercice {exercise['exercise']}** — "
+                f"{exercise['declared_total']} points "
+                f"({exercise['capacities'] or '—'})"
+                + (
+                    f" · {len(waiting)} question(s) en attente de jugement"
+                    if waiting
+                    else ""
+                ),
+                "",
+            ]
+            for question in exercise["questions"]:
+                if question["verdict"] != "PROPOSED":
+                    lines.append(
+                        f"- **{question['question']}** — "
+                        f"`JUGEMENT PÉDAGOGIQUE REQUIS` : {question['why']}"
+                    )
+                    continue
+                entry = (
+                    f"- **{question['question']}** — {question['points']} — "
+                    f"Attendu : {question['expected']}."
+                )
+                if question["partial_credit"]:
+                    entry += f" *Crédit partiel : {question['partial_credit']}.*"
+                lines.append(entry)
+            lines.append("")
+    total = sum(
+        len(exercise["questions"])
+        for assessment in assessments
+        for exercise in assessment["exercises"]
+    )
+    waiting = sum(
+        1
+        for assessment in assessments
+        for exercise in assessment["exercises"]
+        for question in exercise["questions"]
+        if question["verdict"] != "PROPOSED"
+    )
+    lines += [
+        f"Ce chapitre porte {total} question(s) évaluée(s), dont {waiting} "
+        "attendent votre jugement. Ce ne sont pas autant de signatures : votre "
+        "verdict porte sur le chapitre.",
+        "",
+    ]
+    return lines
+
+
 def _capacity_block(facts: dict[str, Any], index: int) -> list[str]:
     cells = facts["cells"]
     capacities = facts["richness"].get("capacities", {})
@@ -1211,8 +1328,9 @@ def view_expert_programme(facts: dict[str, Any], sources: dict[str, Any]) -> str
     lines += _capacity_block(facts, 4)
     lines += _qcm_human_block(facts, 5)
     lines += _manual_coherence_block(facts, 6)
-    lines += _checklist_block(ROLE_B, 7)
-    lines += _pdf_block(facts, sources, 8)
+    lines += _bareme_block(facts, 7)
+    lines += _checklist_block(ROLE_B, 8)
+    lines += _pdf_block(facts, sources, 9)
     lines += _closing(facts, ROLE_B)
     return "\n".join(lines).rstrip("\n") + "\n"
 

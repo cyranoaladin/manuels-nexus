@@ -417,7 +417,75 @@ Libelle BO : aucun libelle BO : le referentiel du depot ne declare pas cette cap
 
 La regle du depot : « la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers ».
 
-## 7. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
+## 7. Barème commenté — propositions à juger
+
+La politique est fixée : pour chaque question évaluée, des POINTS, un ATTENDU ESSENTIEL, et un CRÉDIT PARTIEL seulement lorsqu'une décomposition objective le justifie. Le corrigé scientifique reste séparé et complet ; le barème ne le remplace pas.
+
+Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le contenu candidat que votre verdict de chapitre couvre.
+
+### 1SPE-VARALEA-EV-A
+
+**Exercice 1** — 6 points (C1, C2, C4) · 1 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
+- **Q2** — 1,5 pt — Attendu : calculer — En moyenne, le gain par tirage est de $2{,}875$~euros.
+- **Q3** — 2 pts — Attendu : calculer — $\sigma(X) = \sqrt{\frac{519}{64}} \approx 2{,}85$.
+- **Q4** — 1 pt — Attendu : calculer — La loi de $Y$ n'a pas à être dressée : la linéarité de l'espérance suffit.
+
+**Exercice 2** — 5 points (C2, C3) · 1 question(s) en attente de jugement
+
+- **Q1** — 1 pt — Attendu : construire — À chaque nœud, la branche « atteint » porte $\frac13$ et la branche « manque » $\frac23$.
+- **Q2** — 1 pt — Attendu : calculer — $P(X=0)=\left(\frac23\right)^3=\frac8{27}$.
+- **Q3** — 1,5 pt — Attendu : calculer — Donc $P(X=2)=3\times\frac2{27}=\frac29$.
+- **Q4** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
+- **Q5** — 0,5 pt — Attendu : en déduire — $P(X\geq1)=1-P(X=0)=1-\frac8{27}=\frac{19}{27}$.
+
+**Exercice 3** — 4 points (C5)
+
+- **Q1** — 1 pt — Attendu : calculer — Doubles : $(1,1),(2,2),\ldots,(6,6)$, soit $6$ sur $36$ : $P = \frac{1}{6}$.
+- **Q2** — 1,5 pt — Attendu : construire — \[ \begin{array}{|c|c|c|} \hline g_i & -3 & 12 \\ \hline P(G=g_i) & \frac{5}{6} & \frac{1}{6} \\ \hline \end{array} \] \medskip.
+- **Q3** — 1,5 pt — Attendu : calculer — $E(G) = -0{,}5 < 0$ : le jeu est défavorable au joueur.
+
+**Exercice 4** — 5 points (C6, C7) · 1 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
+- **Q2** — 1 pt — Attendu : calculer — $\sqrt{64} = 8$, donc \[ \frac{2\sigma}{\sqrt{n}} = \frac{2 \times 2{,}4}{8} = \frac{4{,}8}{8} = 0{,}6.
+- **Q3** — 1,5 pt — Attendu : justifier — Or $0{,}8 > 0{,}6$ : l'écart \textbf{dépasse} le seuil.
+- **Q4** — 1,5 pt — Attendu : calculer — \] Elle est cohérente avec l'ordre de grandeur attendu, environ $95\,\%$ : l'écart de $0{,}6$ point relève de la fluctuation de la simulation.
+
+### 1SPE-VARALEA-EV-B
+
+**Exercice 1** — 6 points (C1, C2, C4)
+
+- **Q1** — 1,5 pt — Attendu : calculer — \[ \begin{array}{|c|c|c|c|} \hline x_i & 2 & 5 & 8 \\ \hline P(X=x_i) & \frac{5}{10} = \frac{1}{2} & \frac{3}{10} & \frac{2}{10} = \frac{1}{5} \\ \hline \end{array} \] \medskip.
+- **Q2** — 1,5 pt — Attendu : calculer — En moyenne, on obtient $4{,}1$ points par tirage.
+- **Q3** — 2 pts — Attendu : calculer — $\sigma(X) = \sqrt{5{,}49} \approx 2{,}34$.
+- **Q4** — 1 pt — Attendu : calculer — $E(Y) = 2E(X) - 3 = 2 \times 4{,}1 - 3 = 5{,}2$.
+
+**Exercice 2** — 5 points (C2, C3)
+
+- **Q1** — 1 pt — Attendu : construire — À chaque nœud, la branche « réussi » porte $\frac14$ et la branche « manqué » $\frac34$.
+- **Q2** — 1 pt — Attendu : calculer — $P(X=0)=\left(\frac34\right)^4=\frac{81}{256}$.
+- **Q3** — 1,5 pt — Attendu : calculer — Donc $P(X=1)=4\times\frac{27}{256}=\frac{27}{64}$.
+- **Q4** — 1 pt — Attendu : calculer — L'écart type a déjà été calculé à l'exercice 1 .
+- **Q5** — 0,5 pt — Attendu : calculer — $P(X\geq1)=1-P(X=0)=1-\frac{81}{256}=\frac{175}{256}$.
+
+**Exercice 3** — 4 points (C5) · 1 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le geste évalué ne se lit pas dans l'énoncé
+- **Q2** — 1 pt — Attendu : calculer — \[ \begin{array}{|c|c|c|} \hline b_i & -1920 & 80 \\ \hline P(B=b_i) & \frac{1}{50} & \frac{49}{50} \\ \hline \end{array} \] \medskip.
+- **Q3** — 2 pts — Attendu : calculer — $E(B) > 0$ : le contrat est rentable pour l'assureur.
+
+**Exercice 4** — 5 points (C6, C7) · 1 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
+- **Q2** — 1 pt — Attendu : calculer — $\sqrt{81} = 9$, donc \[ \frac{2\sigma}{\sqrt{n}} = \frac{2 \times 1{,}8}{9} = \frac{3{,}6}{9} = 0{,}4.
+- **Q3** — 1,5 pt — Attendu : justifier — L'inégalité demandée étant large, la condition $|m - \mu| \leq \dfrac{2\sigma}{\sqrt{n}}$ est \textbf{vérifiée}.
+- **Q4** — 1,5 pt — Attendu : calculer — \] Elle est cohérente avec l'ordre de grandeur attendu, environ $95\,\%$.
+
+Ce chapitre porte 32 question(s) évaluée(s), dont 5 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
+
+## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 
 1. completude du programme officiel
 2. alignement des capacites
@@ -435,7 +503,7 @@ La regle du depot : « la richesse se mesure en occasions distinctes et en geste
 
 Cette checklist est celle du role. Elle s'applique au CHAPITRE COURANT ENTIER, y compris aux objets qu'aucune section de cette vue ne cite.
 
-## 8. Reference de lecture : le PDF candidat
+## 9. Reference de lecture : le PDF candidat
 
 Le PDF sert a lire le chapitre dans l'ordre ou l'eleve le recevra. Il n'est pas une preuve : le packet ne porte aucune preuve de rendu (`render_evidence = ABSENT`), et aucun index page-objet n'est etabli.
 

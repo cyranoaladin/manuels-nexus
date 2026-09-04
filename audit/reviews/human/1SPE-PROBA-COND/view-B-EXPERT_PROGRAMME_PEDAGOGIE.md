@@ -301,7 +301,71 @@ Aucune question de ce chapitre n'est routee vers une revue humaine par `audit/QC
 
 La regle du depot : « la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers ».
 
-## 7. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
+## 7. Barème commenté — propositions à juger
+
+La politique est fixée : pour chaque question évaluée, des POINTS, un ATTENDU ESSENTIEL, et un CRÉDIT PARTIEL seulement lorsqu'une décomposition objective le justifie. Le corrigé scientifique reste séparé et complet ; le barème ne le remplace pas.
+
+Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le contenu candidat que votre verdict de chapitre couvre.
+
+### 1SPE-PROBCOND-EV-A
+
+**Exercice 1** — 5 points (C1, C2) · 1 question(s) en attente de jugement
+
+- **Q1** — 1,5 pt — Attendu : construire — Sachant $V$ : $P_V(G) = \frac{1}{4}$, $P_V(\overline{G}) = \frac{3}{4}$.
+- **Q2** — 1 pt — Attendu : calculer — $P(R \cap G) = P(R) \times P_R(G) = \dfrac{3}{5} \times \dfrac{1}{2} = \dfrac{3}{10}$.
+- **Q3** — 1,5 pt — Attendu : calculer — $P(G) = P(R \cap G) + P(V \cap G) = \dfrac{3}{10} + \dfrac{2}{5} \times \dfrac{1}{4} = \dfrac{3}{10} + \dfrac{1}{10} = \dfrac{2}{5}$.
+- **Q4** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le geste évalué ne se lit pas dans l'énoncé
+
+**Exercice 2** — 6 points (C3, C5) · 1 question(s) en attente de jugement
+
+- **Q1** — 1,5 pt — Attendu : donner — $P(M) = \dfrac{3}{100}$, $P_M(T) = \dfrac{9}{10}$, $P_{\overline{M}}(T) = 1 - \dfrac{96}{100} = \dfrac{1}{25}$.
+- **Q2** — 2 pts — Attendu : calculer — $= \dfrac{27}{1000} + \dfrac{97}{2500} = \dfrac{270}{10000} + \dfrac{388}{10000} = \dfrac{658}{10000} = \dfrac{329}{5000}$.
+- **Q3** — 1,5 pt — Attendu : calculer — $P_T(M) = \dfrac{P(M \cap T)}{P(T)} = \dfrac{27/1000}{329/5000} = \dfrac{27}{1000} \times \dfrac{5000}{329} = \dfrac{135}{329} \approx 41{,}0\,\%$.
+- **Q4** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le geste évalué ne se lit pas dans l'énoncé
+
+**Exercice 3** — 4 points (C4)
+
+- **Q1** — 2 pts — Attendu : justifier — Donc $A$ et $B$ sont indépendants. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
+- **Q2** — 1 pt — Attendu : calculer — $P(A \cup B) = P(A) + P(B) - P(A \cap B) = \dfrac{1}{2} + \dfrac{1}{5} - \dfrac{1}{10} = \dfrac{5+2-1}{10} = \dfrac{3}{5}$.
+- **Q3** — 1 pt — Attendu : montrer — Donc $\overline{A}$ et $B$ sont indépendants.
+
+**Exercice 4** — 5 points (C3, C5)
+
+- **Q1** — 1 pt — Attendu : construire — Sachant $S$ : $P_S(A) = \frac{1}{40}$.
+- **Q2** — 2 pts — Attendu : calculer — $P(A) = P(J)\,P_J(A) + P(S)\,P_S(A) = \dfrac{1}{5} \times \dfrac{1}{10} + \dfrac{4}{5} \times \dfrac{1}{40} = \dfrac{1}{50} + \dfrac{1}{50} = \dfrac{2}{50} = \dfrac{1}{25}$.
+- **Q3** — 2 pts — Attendu : calculer — Un conducteur accidente a une chance sur deux d'être jeune, alors que les jeunes ne representent que $20\,\%$ des assures.
+
+### 1SPE-PROBCOND-EV-B
+
+**Exercice 1** — 5 points (C1, C2) · 1 question(s) en attente de jugement
+
+- **Q1** — 1,5 pt — Attendu : construire — Sachant $N$ : $P_N(G) = \frac{1}{3}$, $P_N(\overline{G}) = \frac{2}{3}$.
+- **Q2** — 1 pt — Attendu : calculer — $P(B \cap G) = \dfrac{2}{5} \times \dfrac{3}{4} = \dfrac{3}{10}$.
+- **Q3** — 1,5 pt — Attendu : calculer — $P(G) = P(B \cap G) + P(N \cap G) = \dfrac{3}{10} + \dfrac{3}{5} \times \dfrac{1}{3} = \dfrac{3}{10} + \dfrac{1}{5} = \dfrac{3}{10} + \dfrac{2}{10} = \dfrac{1}{2}$.
+- **Q4** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le geste évalué ne se lit pas dans l'énoncé
+
+**Exercice 2** — 6 points (C3, C5)
+
+- **Q1** — 1,5 pt — Attendu : donner — $P(M) = \dfrac{1}{50}$, $P_M(T) = \dfrac{19}{20}$, $P_{\overline{M}}(T) = 1 - \dfrac{95}{100} = \dfrac{1}{20}$.
+- **Q2** — 2 pts — Attendu : calculer — $P(T) = \dfrac{1}{50} \times \dfrac{19}{20} + \dfrac{49}{50} \times \dfrac{1}{20} = \dfrac{19}{1000} + \dfrac{49}{1000} = \dfrac{68}{1000} = \dfrac{17}{250}$.
+- **Q3** — 1,5 pt — Attendu : calculer — $P_T(M) = \dfrac{19/1000}{17/250} = \dfrac{19}{1000} \times \dfrac{250}{17} = \dfrac{19}{68} \approx 27{,}9\,\%$.
+- **Q4** — 1 pt — Attendu : commenter — Cela s'explique par la faible prevalence ($2\,\%$) qui genere beaucoup de faux positifs.
+
+**Exercice 3** — 4 points (C4)
+
+- **Q1** — 2 pts — Attendu : justifier — Donc $A$ et $B$ sont indépendants. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
+- **Q2** — 1 pt — Attendu : calculer — $P(A \cup B) = P(A) + P(B) - P(A \cap B) = \dfrac{1}{3} + \dfrac{3}{8} - \dfrac{1}{8} = \dfrac{8+9-3}{24} = \dfrac{14}{24} = \dfrac{7}{12}$.
+- **Q3** — 1 pt — Attendu : calculer — L'égalité $P_A(B) = P(B)$ confirme l'indépendance.
+
+**Exercice 4** — 5 points (C3, C5)
+
+- **Q1** — 1 pt — Attendu : construire — Sachant $F_2$ : $P_{F_2}(D) = \frac{3}{50}$.
+- **Q2** — 2 pts — Attendu : calculer — $P(D) = \dfrac{7}{10} \times \dfrac{1}{50} + \dfrac{3}{10} \times \dfrac{3}{50} = \dfrac{7}{500} + \dfrac{9}{500} = \dfrac{16}{500} = \dfrac{4}{125} = 3{,}2\,\%$.
+- **Q3** — 2 pts — Attendu : calculer — Plus de la moitie des pieces defectueuses viennent de $F_2$, alors que $F_2$ ne fournit que $30\,\%$ des pieces.
+
+Ce chapitre porte 28 question(s) évaluée(s), dont 3 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
+
+## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 
 1. completude du programme officiel
 2. alignement des capacites
@@ -319,7 +383,7 @@ La regle du depot : « la richesse se mesure en occasions distinctes et en geste
 
 Cette checklist est celle du role. Elle s'applique au CHAPITRE COURANT ENTIER, y compris aux objets qu'aucune section de cette vue ne cite.
 
-## 8. Reference de lecture : le PDF candidat
+## 9. Reference de lecture : le PDF candidat
 
 Le PDF sert a lire le chapitre dans l'ordre ou l'eleve le recevra. Il n'est pas une preuve : le packet ne porte aucune preuve de rendu (`render_evidence = ABSENT`), et aucun index page-objet n'est etabli.
 

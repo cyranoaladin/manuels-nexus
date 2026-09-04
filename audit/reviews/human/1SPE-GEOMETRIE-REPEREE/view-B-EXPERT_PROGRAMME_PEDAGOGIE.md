@@ -303,7 +303,87 @@ Aucune question de ce chapitre n'est routee vers une revue humaine par `audit/QC
 
 La regle du depot : « la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers ».
 
-## 7. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
+## 7. Barème commenté — propositions à juger
+
+La politique est fixée : pour chaque question évaluée, des POINTS, un ATTENDU ESSENTIEL, et un CRÉDIT PARTIEL seulement lorsqu'une décomposition objective le justifie. Le corrigé scientifique reste séparé et complet ; le barème ne le remplace pas.
+
+Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le contenu candidat que votre verdict de chapitre couvre.
+
+### 1SPE-GEOREP-EV-A — **DÉCISION HUMAINE OBLIGATOIRE**
+
+Le sujet ne value aucune question individuellement : répartir son total est un jugement pédagogique, et il vous revient. Le dossier complet — contraintes du sujet, geste de raisonnement, indicateurs observables, proposition et sa justification — est dans `audit/1SPE_ASSESSMENT_BAREME_TRANSCRIPTION.json`.
+
+**Exercice 1** — 4 points (C1) · 4 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q4** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+
+**Exercice 2** — 4 points (C2) · 3 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+
+**Exercice 3** — 4 points (C3) · 4 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q4** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+
+**Exercice 4** — 4 points (C4) · 3 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+
+**Exercice 5** — 4 points (C5) · 3 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+
+### 1SPE-GEOREP-EV-B — **DÉCISION HUMAINE OBLIGATOIRE**
+
+Le sujet ne value aucune question individuellement : répartir son total est un jugement pédagogique, et il vous revient. Le dossier complet — contraintes du sujet, geste de raisonnement, indicateurs observables, proposition et sa justification — est dans `audit/1SPE_ASSESSMENT_BAREME_TRANSCRIPTION.json`.
+
+**Exercice 1** — 4 points (C1) · 4 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q4** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+
+**Exercice 2** — 4 points (C2) · 3 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+
+**Exercice 3** — 4 points (C3) · 4 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q4** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+
+**Exercice 4** — 4 points (C4) · 3 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+
+**Exercice 5** — 4 points (C5) · 3 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le sujet ne value pas cette question
+
+Ce chapitre porte 34 question(s) évaluée(s), dont 34 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
+
+## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 
 1. completude du programme officiel
 2. alignement des capacites
@@ -321,7 +401,7 @@ La regle du depot : « la richesse se mesure en occasions distinctes et en geste
 
 Cette checklist est celle du role. Elle s'applique au CHAPITRE COURANT ENTIER, y compris aux objets qu'aucune section de cette vue ne cite.
 
-## 8. Reference de lecture : le PDF candidat
+## 9. Reference de lecture : le PDF candidat
 
 Le PDF sert a lire le chapitre dans l'ordre ou l'eleve le recevra. Il n'est pas une preuve : le packet ne porte aucune preuve de rendu (`render_evidence = ABSENT`), et aucun index page-objet n'est etabli.
 

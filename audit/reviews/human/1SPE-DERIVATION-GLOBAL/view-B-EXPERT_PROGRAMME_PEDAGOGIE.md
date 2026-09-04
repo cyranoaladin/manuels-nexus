@@ -308,7 +308,71 @@ Aucune question de ce chapitre n'est routee vers une revue humaine par `audit/QC
 
 La regle du depot : « la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers ».
 
-## 7. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
+## 7. Barème commenté — propositions à juger
+
+La politique est fixée : pour chaque question évaluée, des POINTS, un ATTENDU ESSENTIEL, et un CRÉDIT PARTIEL seulement lorsqu'une décomposition objective le justifie. Le corrigé scientifique reste séparé et complet ; le barème ne le remplace pas.
+
+Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le contenu candidat que votre verdict de chapitre couvre.
+
+### 1SPE-DERGLOBAL-EV-A
+
+**Exercice 1** — 5 points (C1, C2)
+
+- **Q1** — 1 pt — Attendu : calculer — $f(x) = 3x^2 - 2x + 1$, donc $f'(x) = 6x - 2.$.
+- **Q2** — 1,5 pt — Attendu : calculer — La courbe « monte » localement avec une pente de $10$ en ce point.
+- **Q3** — 1,5 pt — Attendu : donner — $f(2) = 3 \times 4 - 2 \times 2 + 1 = 12 - 4 + 1 = 9.$ Équation de la tangente : \[ T : y = f'(2)(x - 2) + f(2) = 10(x-2) + 9 = 10x - 20 + 9 = 10x - 11.
+- **Q4** — 1 pt — Attendu : déterminer — Tangente horizontale $\Leftrightarrow f'(x) = 0 \Leftrightarrow 6x - 2 = 0 \Leftrightarrow x = \dfrac{1}{3}.$.
+
+**Exercice 2** — 6 points (C3, C4) · 1 question(s) en attente de jugement
+
+- **Q1** — 1,5 pt — Attendu : calculer — $g(x) = x^3 - 6x$, donc $g'(x) = 3x^2 - 6 = 3(x^2 - 2) = 3(x - \sqrt{2})(x + \sqrt{2}).$.
+- **Q2** — 1,5 pt — Attendu : résoudre — $g'(x) = 0 \Leftrightarrow x = -\sqrt{2}$ ou $x = \sqrt{2}$ \quad ($\sqrt{2} \approx 1{,}41$).
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
+- **Q4** — 1 pt — Attendu : donner — $g$ admet un \textbf{minimum local} de $-4\sqrt{2} \approx -5{,}66$ en $x = \sqrt{2}$.
+
+**Exercice 3** — 5 points (C2, C3, C4) · 1 question(s) en attente de jugement
+
+- **Q1** — 2 pts — Attendu : calculer — \[ h'(x) = \frac{u'v - uv'}{v^2} = \frac{2x(x-1) - (x^2+2)}{(x-1)^2} = \frac{2x^2 - 2x - x^2 - 2}{(x-1)^2} = \frac{x^2 - 2x - 2}{(x-1)^2}.
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
+- **Q3** — 1,5 pt — Attendu : construire — Le signe de $h'$ est celui du numérateur $x^2-2x-2$ : $h'(x) < 0$ pour $1 < x < 1+\sqrt{3}$ et $h'(x) > 0$ pour $x > 1+\sqrt{3}$.
+
+**Exercice 4** — 4 points (C5)
+
+- **Q1** — 1 pt — Attendu : exprimer — $R(x) = x \times (20 - x) = 20x - x^2.$.
+- **Q2** — 2 pts — Attendu : calculer — $R'(x) = 20 - 2x.$ $R'(x) = 0 \Leftrightarrow x = 10.$ $R'(x) > 0$ pour $x < 10$ et $R'(x) < 0$ pour $x > 10$ : $R$ est maximale en $x = 10$.
+- **Q3** — 1 pt — Attendu : calculer — Le maraîcher maximise son chiffre d'affaires en vendant $10$ kg de tomates au prix de $10$ euros/kg, pour un chiffre d'affaires de $\mathbf{100}$ euros.
+
+### 1SPE-DERGLOBAL-EV-B
+
+**Exercice 1** — 5 points (C1, C2)
+
+- **Q1** — 1 pt — Attendu : calculer — $f(x) = 2x^2 + 3x - 4$, donc $f'(x) = 4x + 3.$.
+- **Q2** — 1,5 pt — Attendu : calculer — La courbe monte localement avec une pente de $7$ en ce point.
+- **Q3** — 1,5 pt — Attendu : donner — \] Vérification : $T(1) = 7 - 6 = 1 = f(1)$.
+- **Q4** — 1 pt — Attendu : déterminer — Tangente horizontale $\Leftrightarrow f'(x) = 0 \Leftrightarrow 4x + 3 = 0 \Leftrightarrow x = -\dfrac{3}{4}.$.
+
+**Exercice 2** — 6 points (C3, C4) · 2 question(s) en attente de jugement
+
+- **Q1** — 1,5 pt — Attendu : calculer — $g(x) = 2x^3 - 9x^2 + 12x$, donc $g'(x) = 6x^2 - 18x + 12 = 6(x^2 - 3x + 2) = 6(x-1)(x-2).$.
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
+- **Q4** — 1 pt — Attendu : donner — $g$ admet un \textbf{minimum local} de $4$ en $x = 2$.
+
+**Exercice 3** — 5 points (C2, C3, C4)
+
+- **Q1** — 1 pt — Attendu : simplifier — $x^2 - 4 = (x-2)(x+2)$, donc pour $x \neq -2$ : \[ h(x) = \frac{(x-2)(x+2)}{x+2} = x - 2.
+- **Q2** — 1,5 pt — Attendu : en déduire — $h(x) = x - 2$ (pour $x \neq -2$), donc $h'(x) = 1$.
+- **Q3** — 2,5 pts — Attendu : résoudre — $h$ est strictement croissante sur $]-\infty\,;\,-2[$.
+
+**Exercice 4** — 4 points (C5) · 1 question(s) en attente de jugement
+
+- **Q1** — 1 pt — Attendu : exprimer — $R(x) = x \times (30 - 2x) = 30x - 2x^2.$.
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
+- **Q3** — 1 pt — Attendu : calculer — Le producteur maximise son chiffre d'affaires en vendant $7{,}5$ litres au prix de $30 - 2 \times 7{,}5 = 15$ euros/L, pour un chiffre d'affaires de $\mathbf{112{,}5}$ euros.
+
+Ce chapitre porte 28 question(s) évaluée(s), dont 5 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
+
+## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 
 1. completude du programme officiel
 2. alignement des capacites
@@ -326,7 +390,7 @@ La regle du depot : « la richesse se mesure en occasions distinctes et en geste
 
 Cette checklist est celle du role. Elle s'applique au CHAPITRE COURANT ENTIER, y compris aux objets qu'aucune section de cette vue ne cite.
 
-## 8. Reference de lecture : le PDF candidat
+## 9. Reference de lecture : le PDF candidat
 
 Le PDF sert a lire le chapitre dans l'ordre ou l'eleve le recevra. Il n'est pas une preuve : le packet ne porte aucune preuve de rendu (`render_evidence = ABSENT`), et aucun index page-objet n'est etabli.
 

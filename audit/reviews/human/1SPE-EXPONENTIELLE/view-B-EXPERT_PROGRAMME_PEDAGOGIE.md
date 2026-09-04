@@ -299,7 +299,61 @@ Aucune question de ce chapitre n'est routee vers une revue humaine par `audit/QC
 
 La regle du depot : « la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers ».
 
-## 7. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
+## 7. Barème commenté — propositions à juger
+
+La politique est fixée : pour chaque question évaluée, des POINTS, un ATTENDU ESSENTIEL, et un CRÉDIT PARTIEL seulement lorsqu'une décomposition objective le justifie. Le corrigé scientifique reste séparé et complet ; le barème ne le remplace pas.
+
+Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le contenu candidat que votre verdict de chapitre couvre.
+
+### 1SPE-EXPO-EV-A
+
+**Exercice 1** — 5 points (C1, C2)
+
+- **Q1** — 2 pts — Attendu : rappeler — Les simplifications donnent $\mathrm{e}^{x}$ et $\mathrm{e}^{2x}$.
+- **Q2** — 3 pts — Attendu : simplifier — Les simplifications donnent $\mathrm{e}^{x}$ et $\mathrm{e}^{2x}$.
+
+**Exercice 2** — 5 points (C3, C4)
+
+- **Q1** — 3 pts — Attendu : justifier — $f(0)=1$ et $f(5)=\mathrm{e}^{-2}\approx0{,}14$.
+- **Q2** — 2 pts — Attendu : calculer — $f(0)=1$ et $f(5)=\mathrm{e}^{-2}\approx0{,}14$.
+
+**Exercice 3** — 5 points (C2, C3)
+
+- **Q1** — 2 pts — Attendu : exprimer — .} $u_n=120(\mathrm{e}^{0{,}1})^n=120\mathrm{e}^{0{,}1n}$ et $u_5=120\mathrm{e}^{0{,}5}\approx197{,}85$.
+- **Q2** — 3 pts — Attendu : calculer — .} $u_n=120(\mathrm{e}^{0{,}1})^n=120\mathrm{e}^{0{,}1n}$ et $u_5=120\mathrm{e}^{0{,}5}\approx197{,}85$.
+
+**Exercice 4** — 5 points (C5)
+
+- **Q1** — 2 pts — Attendu : calculer — Le coefficient de $t$ est positif : le modèle est croissant.
+- **Q2** — 2 pts — Attendu : interpréter — Le coefficient de $t$ est positif : le modèle est croissant.
+- **Q3** — 1 pt — Attendu : justifier — Le coefficient de $t$ est positif : le modèle est croissant.
+
+### 1SPE-EXPO-EV-B
+
+**Exercice 1** — 5 points (C1, C2) · 1 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le geste évalué ne se lit pas dans l'énoncé
+- **Q2** — 3 pts — Attendu : simplifier — Les simplifications donnent $\mathrm{e}^{2x}$ et $\mathrm{e}^{-3x}$.
+
+**Exercice 2** — 5 points (C3, C4)
+
+- **Q1** — 3 pts — Attendu : justifier — $g(0)=1$ et $g(4)=\mathrm{e}^{1{,}2}\approx3{,}32$.
+- **Q2** — 2 pts — Attendu : calculer — $g(0)=1$ et $g(4)=\mathrm{e}^{1{,}2}\approx3{,}32$.
+
+**Exercice 3** — 5 points (C2, C3)
+
+- **Q1** — 2 pts — Attendu : exprimer — .} $v_n=300(\mathrm{e}^{-0{,}2})^n=300\mathrm{e}^{-0{,}2n}$ et $v_3=300\mathrm{e}^{-0{,}6}\approx164{,}64$.
+- **Q2** — 3 pts — Attendu : calculer — .} $v_n=300(\mathrm{e}^{-0{,}2})^n=300\mathrm{e}^{-0{,}2n}$ et $v_3=300\mathrm{e}^{-0{,}6}\approx164{,}64$.
+
+**Exercice 4** — 5 points (C5)
+
+- **Q1** — 2 pts — Attendu : calculer — Le coefficient de $t$ est négatif : le modèle est décroissant.
+- **Q2** — 2 pts — Attendu : interpréter — Le coefficient de $t$ est négatif : le modèle est décroissant.
+- **Q3** — 1 pt — Attendu : justifier — Le coefficient de $t$ est négatif : le modèle est décroissant.
+
+Ce chapitre porte 18 question(s) évaluée(s), dont 1 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
+
+## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 
 1. completude du programme officiel
 2. alignement des capacites
@@ -317,7 +371,7 @@ La regle du depot : « la richesse se mesure en occasions distinctes et en geste
 
 Cette checklist est celle du role. Elle s'applique au CHAPITRE COURANT ENTIER, y compris aux objets qu'aucune section de cette vue ne cite.
 
-## 8. Reference de lecture : le PDF candidat
+## 9. Reference de lecture : le PDF candidat
 
 Le PDF sert a lire le chapitre dans l'ordre ou l'eleve le recevra. Il n'est pas une preuve : le packet ne porte aucune preuve de rendu (`render_evidence = ABSENT`), et aucun index page-objet n'est etabli.
 

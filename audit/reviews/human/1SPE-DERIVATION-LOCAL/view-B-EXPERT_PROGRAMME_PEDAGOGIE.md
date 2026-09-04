@@ -302,7 +302,73 @@ Aucune question de ce chapitre n'est routee vers une revue humaine par `audit/QC
 
 La regle du depot : « la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers ».
 
-## 7. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
+## 7. Barème commenté — propositions à juger
+
+La politique est fixée : pour chaque question évaluée, des POINTS, un ATTENDU ESSENTIEL, et un CRÉDIT PARTIEL seulement lorsqu'une décomposition objective le justifie. Le corrigé scientifique reste séparé et complet ; le barème ne le remplace pas.
+
+Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le contenu candidat que votre verdict de chapitre couvre.
+
+### 1SPE-DERLOCAL-EV-A
+
+**Exercice 1** — 6 points (C1, C2)
+
+- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{f(4)-f(1)}{4-1} = \frac{5-2}{3} = 1.
+- **Q2** — 2 pts — Attendu : calculer — \end{align*} \[ \frac{f(3+h)-f(3)}{h} = \frac{h^2+2h+2-2}{h} = \frac{h^2+2h}{h} = h+2.
+- **Q3** — 1 pt — Attendu : en déduire — $f'(3) = \lim_{h \to 0}(h+2) = 2.$.
+- **Q4** — 1,5 pt — Attendu : interpréter — $f'(3) = 2$ signifie que la tangente à la courbe de $f$ au point d'abscisse $3$ a pour pente $2$ : la courbe monte localement avec un coefficient directeur de $2$.
+
+**Exercice 2** — 5 points (C2, C4)
+
+- **Q1** — 1 pt — Attendu : calculer — $g'(1) = 3 \times 1^2 = 3.$.
+- **Q2** — 2 pts — Attendu : donner — La tangente $T_1$ en $x=1$ : \[ T_1 : y = g'(1)(x-1) + g(1) = 3(x-1) + 1 = 3x - 2.
+- **Q3** — 1 pt — Attendu : vérifier — Le point $(0;-2)$ est bien sur $T_1$.
+- **Q4** — 1 pt — Attendu : déterminer — La tangente est horizontale au point d'abscisse $0$.
+
+**Exercice 3** — 5 points (C3, C4, C5)
+
+- **Q1** — 1 pt — Attendu : donner — $f(2) = 7$ (ordonnée du point $A$) et $f'(2) = -3$ (pente de la tangente en $A$).
+- **Q2** — 1,5 pt — Attendu : donner — $T : y = f'(2)(x-2)+f(2) = -3(x-2)+7 = -3x + 13.$.
+- **Q3** — 1,5 pt — Attendu : approcher — $f(2{,}04) \approx f(2) + f'(2) \times 0{,}04 = 7 + (-3) \times 0{,}04 = 7 - 0{,}12 = 6{,}88.$.
+- **Q4** — 1 pt — Attendu : justifier — l'écart avec la valeur exacte est d'autant plus petit que $|h|$ est petit.
+
+**Exercice 4** — 4 points (C1, C5)
+
+- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{h(3)-h(2)}{3-2} = \frac{\frac{1}{3}-\frac{1}{2}}{1} = \frac{-\frac{1}{6}}{1} = -\frac{1}{6} \approx -0{,}167.
+- **Q2** — 1,5 pt — Attendu : approcher — \[ h(2{,}05) \approx h(2) + h'(2) \times 0{,}05 = \frac{1}{2} + \left(-\frac{1}{4}\right) \times 0{,}05 = 0{,}5 - 0{,}0125 = 0{,}4875.
+- **Q3** — 1 pt — Attendu : comparer — L'erreur est de l'ordre de $0{,}0003$, soit environ $0{,}06\,\%$.
+
+### 1SPE-DERLOCAL-EV-B
+
+**Exercice 1** — 6 points (C1, C2)
+
+- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{f(5)-f(2)}{5-2} = \frac{5-2}{3} = 1.
+- **Q2** — 2 pts — Attendu : calculer — \end{align*} \[ \frac{f(5+h)-f(5)}{h} = \frac{h^2+4h}{h} = h+4.
+- **Q3** — 1 pt — Attendu : en déduire — $f'(5) = \lim_{h \to 0}(h+4) = 4.$.
+- **Q4** — 1,5 pt — Attendu : interpréter — $f'(5) = 4$ signifie que la tangente à la courbe de $f$ au point d'abscisse $5$ a pour pente $4$ : la courbe monte localement avec un coefficient directeur de $4$.
+
+**Exercice 2** — 5 points (C2, C4)
+
+- **Q1** — 1 pt — Attendu : calculer — $g'(2) = 3 \times 2^2 = 12.$.
+- **Q2** — 2 pts — Attendu : donner — La tangente $T_2$ en $x=2$ : \[ T_2 : y = 12(x-2) + 8 = 12x - 16.
+- **Q3** — 1 pt — Attendu : vérifier — Le point $(0;-16)$ est bien sur $T_2$.
+- **Q4** — 1 pt — Attendu : déterminer — Tangente horizontale $\Leftrightarrow g'(a) = 0 \Leftrightarrow 3a^2 = 0 \Leftrightarrow a = 0$.
+
+**Exercice 3** — 5 points (C3, C4, C5)
+
+- **Q1** — 1 pt — Attendu : donner — $f(3) = 4$ et $f'(3) = 2$.
+- **Q2** — 1,5 pt — Attendu : donner — $T : y = 2(x-3)+4 = 2x - 2.$.
+- **Q3** — 1,5 pt — Attendu : approcher — $f(3{,}02) \approx f(3) + f'(3) \times 0{,}02 = 4 + 2 \times 0{,}02 = 4{,}04.$.
+- **Q4** — 1 pt — Attendu : justifier — C'est une valeur approchée ($\approx$).
+
+**Exercice 4** — 4 points (C1, C5)
+
+- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{h(5)-h(4)}{5-4} = \frac{\frac{1}{5}-\frac{1}{4}}{1} = \frac{-\frac{1}{20}}{1} = -\frac{1}{20} = -0{,}05.
+- **Q2** — 1,5 pt — Attendu : approcher — \[ h(5{,}02) \approx h(5) + h'(5) \times 0{,}02 = \frac{1}{5} + \left(-\frac{1}{25}\right) \times 0{,}02 = 0{,}2 - 0{,}0008 = 0{,}1992.
+- **Q3** — 1 pt — Attendu : comparer — Valeur exacte : $\dfrac{1}{5{,}02} = \dfrac{50}{251} \approx 0{,}19920\ldots$ Approximation : $0{,}1992$.
+
+Ce chapitre porte 30 question(s) évaluée(s), dont 0 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
+
+## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 
 1. completude du programme officiel
 2. alignement des capacites
@@ -320,7 +386,7 @@ La regle du depot : « la richesse se mesure en occasions distinctes et en geste
 
 Cette checklist est celle du role. Elle s'applique au CHAPITRE COURANT ENTIER, y compris aux objets qu'aucune section de cette vue ne cite.
 
-## 8. Reference de lecture : le PDF candidat
+## 9. Reference de lecture : le PDF candidat
 
 Le PDF sert a lire le chapitre dans l'ordre ou l'eleve le recevra. Il n'est pas une preuve : le packet ne porte aucune preuve de rendu (`render_evidence = ABSENT`), et aucun index page-objet n'est etabli.
 

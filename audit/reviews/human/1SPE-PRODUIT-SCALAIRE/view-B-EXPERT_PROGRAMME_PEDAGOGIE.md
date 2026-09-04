@@ -301,7 +301,69 @@ Aucune question de ce chapitre n'est routee vers une revue humaine par `audit/QC
 
 La regle du depot : « la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers ».
 
-## 7. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
+## 7. Barème commenté — propositions à juger
+
+La politique est fixée : pour chaque question évaluée, des POINTS, un ATTENDU ESSENTIEL, et un CRÉDIT PARTIEL seulement lorsqu'une décomposition objective le justifie. Le corrigé scientifique reste séparé et complet ; le barème ne le remplace pas.
+
+Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le contenu candidat que votre verdict de chapitre couvre.
+
+### 1SPE-PRODSCAL-EV-A
+
+**Exercice 1** — 5 points (C1, C2)
+
+- **Q1** — 1 pt — Attendu : calculer — $\vec{u} \cdot \vec{v} = 3 \times 2 + (-1) \times 5 = 6 - 5 = 1$.
+- **Q2** — 1 pt — Attendu : calculer — $\|\vec{u}\| = \sqrt{9 + 1} = \sqrt{10}$ et $\|\vec{v}\| = \sqrt{4 + 25} = \sqrt{29}$.
+- **Q3** — 1,5 pt — Attendu : calculer — Vérification directe : $\vec{u} + \vec{v} = \begin{pmatrix} 5 \\ 4 \end{pmatrix}$, $\|\vec{u} + \vec{v}\|^2 = 25 + 16 = 41$.
+- **Q4** — 1,5 pt — Attendu : vérifier — $(5)(1) + (4)(-6) = 5 - 24 = -19$.
+
+**Exercice 2** — 5 points (C3)
+
+- **Q1** — 2 pts — Attendu : montrer — Le triangle $ABC$ est \textbf{rectangle en $A$}.
+- **Q2** — 2 pts — Attendu : calculer — $\overrightarrow{BA} \cdot \overrightarrow{BC} = 3 + 10 = 13$, $\|\overrightarrow{BA}\| = \sqrt{13}$, $\|\overrightarrow{BC}\| = \sqrt{26}$.
+- **Q3** — 1 pt — Attendu : en déduire — Le triangle est rectangle isocele en $A$.
+
+**Exercice 3** — 5 points (C4)
+
+- **Q1** — 1,5 pt — Attendu : déterminer — $\overrightarrow{IM} \cdot \overrightarrow{AB} = 0$ : $6(x - 3) + 0 = 0$, soit $x = 3$.
+- **Q2** — 2 pts — Attendu : déterminer — $\overrightarrow{AH} \cdot \overrightarrow{BC} = 0$ : $(6-4t)(-4) + (4t)(4) = 0$, soit $-24 + 32t = 0$, d'ou $t = \dfrac{3}{4}$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
+- **Q3** — 1,5 pt — Attendu : calculer — $\mathcal{A} = \dfrac{1}{2} |x_B \cdot y_C - x_C \cdot y_B| = \dfrac{1}{2} |6 \times 4 - 2 \times 0| = \dfrac{24}{2} = 12$.
+
+**Exercice 4** — 5 points (C5)
+
+- **Q1** — 2 pts — Attendu : calculer — $BC = 7$.
+- **Q2** — 1,5 pt — Attendu : calculer — $\cos\widehat{ABC} = \dfrac{BC^2 + AB^2 - AC^2}{2 \cdot BC \cdot AB} = \dfrac{49 + 64 - 25}{112} = \dfrac{88}{112} = \dfrac{11}{14}$.
+- **Q3** — 1,5 pt — Attendu : calculer — $\mathcal{A} = \dfrac{1}{2} \times AB \times AC \times \sin\widehat{BAC} = \dfrac{1}{2} \times 8 \times 5 \times \dfrac{\sqrt{3}}{2} = 10\sqrt{3} \approx 17{,}3$.
+
+### 1SPE-PRODSCAL-EV-B
+
+**Exercice 1** — 5 points (C1, C2)
+
+- **Q1** — 1 pt — Attendu : calculer — $\vec{u} \cdot \vec{v} = 4 \times (-1) + 2 \times 3 = -4 + 6 = 2$.
+- **Q2** — 1 pt — Attendu : calculer — $\|\vec{u}\| = \sqrt{16 + 4} = \sqrt{20} = 2\sqrt{5}$ et $\|\vec{v}\| = \sqrt{1 + 9} = \sqrt{10}$.
+- **Q3** — 1,5 pt — Attendu : calculer — Vérification : $\vec{u} - \vec{v} = \begin{pmatrix} 5 \\ -1 \end{pmatrix}$, $\|\vec{u} - \vec{v}\|^2 = 25 + 1 = 26$.
+- **Q4** — 1,5 pt — Attendu : vérifier — $15 - 5 = 10$.
+
+**Exercice 2** — 5 points (C3)
+
+- **Q1** — 2 pts — Attendu : montrer — Le triangle est \textbf{rectangle en $A$}.
+- **Q2** — 2 pts — Attendu : calculer — $\cos\widehat{ABC} = \dfrac{13}{\sqrt{13} \times \sqrt{26}} = \dfrac{13}{13\sqrt{2}} = \dfrac{\sqrt{2}}{2}$.
+- **Q3** — 1 pt — Attendu : en déduire — Triangle rectangle isocele en $A$.
+
+**Exercice 3** — 5 points (C4)
+
+- **Q1** — 1,5 pt — Attendu : déterminer — Mediatrice : $8(x - 4) = 0$, soit $x = 4$.
+- **Q2** — 2 pts — Attendu : déterminer — $\overrightarrow{AH} \cdot \overrightarrow{BC} = 0$ : $(8-5t)(-5) + (6t)(6) = 0$, soit $-40 + 25t + 36t = 0$, $61t = 40$, $t = \dfrac{40}{61}$.
+- **Q3** — 1,5 pt — Attendu : calculer — $\mathcal{A} = \dfrac{1}{2} |x_B \cdot y_C - x_C \cdot y_B| = \dfrac{1}{2} |48 - 0| = 24$.
+
+**Exercice 4** — 5 points (C5)
+
+- **Q1** — 2 pts — Attendu : calculer — $BC = \sqrt{136 - 60\sqrt{2}} \approx 7{,}15$.
+- **Q2** — 1,5 pt — Attendu : calculer — $\widehat{ABC} \approx 98{,}6°$.
+- **Q3** — 1,5 pt — Attendu : calculer — $\mathcal{A} = \dfrac{1}{2} \times 6 \times 10 \times \sin\!\left(\dfrac{\pi}{4}\right) = 30 \times \dfrac{\sqrt{2}}{2} = 15\sqrt{2} \approx 21{,}2$.
+
+Ce chapitre porte 26 question(s) évaluée(s), dont 0 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
+
+## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 
 1. completude du programme officiel
 2. alignement des capacites
@@ -319,7 +381,7 @@ La regle du depot : « la richesse se mesure en occasions distinctes et en geste
 
 Cette checklist est celle du role. Elle s'applique au CHAPITRE COURANT ENTIER, y compris aux objets qu'aucune section de cette vue ne cite.
 
-## 8. Reference de lecture : le PDF candidat
+## 9. Reference de lecture : le PDF candidat
 
 Le PDF sert a lire le chapitre dans l'ordre ou l'eleve le recevra. Il n'est pas une preuve : le packet ne porte aucune preuve de rendu (`render_evidence = ABSENT`), et aucun index page-objet n'est etabli.
 

@@ -184,7 +184,83 @@ Aucune question de ce chapitre n'est routee vers une revue humaine par `audit/QC
 
 La regle du depot : « la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers ».
 
-## 7. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
+## 7. Barème commenté — propositions à juger
+
+La politique est fixée : pour chaque question évaluée, des POINTS, un ATTENDU ESSENTIEL, et un CRÉDIT PARTIEL seulement lorsqu'une décomposition objective le justifie. Le corrigé scientifique reste séparé et complet ; le barème ne le remplace pas.
+
+Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le contenu candidat que votre verdict de chapitre couvre.
+
+### 1SPE-TRIGO-EV-A
+
+**Exercice 1** — 4 points (C1)
+
+- **Q1** — 1 pt — Attendu : convertir — $225° = 225 \times \dfrac{\pi}{180} = \dfrac{5\pi}{4}$.
+- **Q2** — 1 pt — Attendu : convertir — $\dfrac{7\pi}{6} = \dfrac{7\pi}{6} \times \dfrac{180}{\pi} = 210°$.
+- **Q3** — 1 pt — Attendu : déterminer — Mesure principale : $\dfrac{3\pi}{4}$.
+- **Q4** — 1 pt — Attendu : donner — Coordonnées : $\left(-\dfrac{1}{2}\,;\,-\dfrac{\sqrt{3}}{2}\right)$.
+
+**Exercice 2** — 4 points (C2)
+
+- **Q1** — 1,5 pt — Attendu : donner — $\dfrac{5\pi}{6} = \pi - \dfrac{\pi}{6}$ : $\cos\dfrac{5\pi}{6} = -\cos\dfrac{\pi}{6} = -\dfrac{\sqrt{3}}{2}$, \quad $\sin\dfrac{5\pi}{6} = \sin\dfrac{\pi}{6} = \dfrac{1}{2}$.
+- **Q2** — 1 pt — Attendu : donner — $\dfrac{7\pi}{4} = 2\pi - \dfrac{\pi}{4} = -\dfrac{\pi}{4} + 2\pi$ : $\sin\dfrac{7\pi}{4} = -\sin\dfrac{\pi}{4} = -\dfrac{\sqrt{2}}{2}$.
+- **Q3** — 1,5 pt — Attendu : calculer — Comme $x \in \left]\dfrac{\pi}{2};\pi\right[$, $\sin x > 0$, donc $\sin x = \dfrac{4}{5}$.
+
+**Exercice 3** — 4 points (C1) · 1 question(s) en attente de jugement
+
+- **Q1** — 2 pts — Attendu : calculer — Avec $s=r\theta$, $s=12\times\dfrac{5\pi}{6}=\boxed{10\pi\ \text{cm}}$.
+- **Q2** — 1 pt — Attendu : donner — $\theta=\dfrac{s}{r}=\dfrac{9}{6}=\boxed{\dfrac32\ \text{rad}}$.
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le geste évalué ne se lit pas dans l'énoncé
+
+**Exercice 4** — 4 points (C2)
+
+- **Q1** — 1,5 pt — Attendu : donner — Le point image de $-\dfrac{\pi}{3}$ a pour coordonnées $\boxed{\left(\dfrac12;-\dfrac{\sqrt3}{2}\right)}$.
+- **Q2** — 1,5 pt — Attendu : donner — Le point image de $\dfrac{3\pi}{4}$ a pour coordonnées $\boxed{\left(-\dfrac{\sqrt2}{2};\dfrac{\sqrt2}{2}\right)}$.
+- **Q3** — 1 pt — Attendu : justifier — Oui : les coordonnées lues sur le cercle a l'angle $3\pi/4$ sont exactement celles de $M$.
+
+**Exercice 5** — 4 points (C1, C2) · 1 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le geste évalué ne se lit pas dans l'énoncé
+- **Q2** — 1 pt — Attendu : donner — Le point associe a $\pi/3$ a pour coordonnées $\boxed{\left(\dfrac12;\dfrac{\sqrt3}{2}\right)}$.
+- **Q3** — 1,5 pt — Attendu : en déduire — La hauteur est l'altitude du centre augmentee de l'ordonnée sur la roue : $\boxed{27+\dfrac{25\sqrt3}{2}\ \text{m}}$.
+- **Q4** — 0,5 pt — Attendu : donner — $27+\dfrac{25\sqrt3}{2}\approx\boxed{48{,}7\ \text{m}}$.
+
+### 1SPE-TRIGO-EV-B
+
+**Exercice 1** — 4 points (C1)
+
+- **Q1** — 1 pt — Attendu : convertir — $315° = 315 \times \dfrac{\pi}{180} = \dfrac{7\pi}{4}$.
+- **Q2** — 1 pt — Attendu : convertir — $\dfrac{5\pi}{3} = \dfrac{5\pi}{3} \times \dfrac{180}{\pi} = 300°$.
+- **Q3** — 1 pt — Attendu : déterminer — Mesure principale : $-\dfrac{\pi}{6}$.
+- **Q4** — 1 pt — Attendu : donner — Coordonnées : $\left(-\dfrac{\sqrt{2}}{2}\,;\,\dfrac{\sqrt{2}}{2}\right)$.
+
+**Exercice 2** — 4 points (C2)
+
+- **Q1** — 1,5 pt — Attendu : donner — $\dfrac{4\pi}{3} = \pi + \dfrac{\pi}{3}$ : $\cos\dfrac{4\pi}{3} = -\cos\dfrac{\pi}{3} = -\dfrac{1}{2}$, \quad $\sin\dfrac{4\pi}{3} = -\sin\dfrac{\pi}{3} = -\dfrac{\sqrt{3}}{2}$.
+- **Q2** — 1 pt — Attendu : donner — $\dfrac{11\pi}{6} = 2\pi - \dfrac{\pi}{6}$ : $\cos\dfrac{11\pi}{6} = \cos\dfrac{\pi}{6} = \dfrac{\sqrt{3}}{2}$.
+- **Q3** — 1,5 pt — Attendu : calculer — Comme $x \in \left]0;\dfrac{\pi}{2}\right[$, $\cos x > 0$, donc $\cos x = \dfrac{12}{13}$.
+
+**Exercice 3** — 4 points (C1) · 1 question(s) en attente de jugement
+
+- **Q1** — 2 pts — Attendu : calculer — Avec $s=r\theta$, $s=8\times\dfrac{3\pi}{4}=\boxed{6\pi\ \text{cm}}$.
+- **Q2** — 1 pt — Attendu : donner — $\theta=\dfrac{s}{r}=\dfrac74=\boxed{\dfrac74\ \text{rad}}$.
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le geste évalué ne se lit pas dans l'énoncé
+
+**Exercice 4** — 4 points (C2)
+
+- **Q1** — 1,5 pt — Attendu : donner — Le point image de $\dfrac{4\pi}{3}$ a pour coordonnées $\boxed{\left(-\dfrac12;-\dfrac{\sqrt3}{2}\right)}$.
+- **Q2** — 1,5 pt — Attendu : donner — Le point image de $\dfrac{7\pi}{4}$ a pour coordonnées $\boxed{\left(\dfrac{\sqrt2}{2};-\dfrac{\sqrt2}{2}\right)}$.
+- **Q3** — 1 pt — Attendu : justifier — Oui : la lecture du cercle a l'angle $5\pi/6$ donne exactement les coordonnées de $N$.
+
+**Exercice 5** — 4 points (C1, C2) · 1 question(s) en attente de jugement
+
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le geste évalué ne se lit pas dans l'énoncé
+- **Q2** — 1 pt — Attendu : donner — Le point associe a $3\pi/4$ a pour coordonnées $\boxed{\left(-\dfrac{\sqrt2}{2};\dfrac{\sqrt2}{2}\right)}$.
+- **Q3** — 1,5 pt — Attendu : en déduire — La hauteur est $\boxed{20+18\times\dfrac{\sqrt2}{2}=20+9\sqrt2\ \text{m}}$.
+- **Q4** — 0,5 pt — Attendu : donner — $20+9\sqrt2\approx\boxed{32{,}7\ \text{m}}$.
+
+Ce chapitre porte 34 question(s) évaluée(s), dont 4 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
+
+## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 
 1. completude du programme officiel
 2. alignement des capacites
@@ -202,7 +278,7 @@ La regle du depot : « la richesse se mesure en occasions distinctes et en geste
 
 Cette checklist est celle du role. Elle s'applique au CHAPITRE COURANT ENTIER, y compris aux objets qu'aucune section de cette vue ne cite.
 
-## 8. Reference de lecture : le PDF candidat
+## 9. Reference de lecture : le PDF candidat
 
 Le PDF sert a lire le chapitre dans l'ordre ou l'eleve le recevra. Il n'est pas une preuve : le packet ne porte aucune preuve de rendu (`render_evidence = ABSENT`), et aucun index page-objet n'est etabli.
 

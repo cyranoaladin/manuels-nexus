@@ -420,7 +420,75 @@ Aucune question de ce chapitre n'est routee vers une revue humaine par `audit/QC
 
 La regle du depot : « la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers ».
 
-## 7. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
+## 7. Barème commenté — propositions à juger
+
+La politique est fixée : pour chaque question évaluée, des POINTS, un ATTENDU ESSENTIEL, et un CRÉDIT PARTIEL seulement lorsqu'une décomposition objective le justifie. Le corrigé scientifique reste séparé et complet ; le barème ne le remplace pas.
+
+Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le contenu candidat que votre verdict de chapitre couvre.
+
+### 1SPE-SUITES-EV-A
+
+**Exercice 1** — 6 points (C1, C2, C5, C8)
+
+- **Q1** — 1 pt — Attendu : calculer — On applique la relation de récurrence $u_{n+1} = u_n + 4$ : \[ u_1 = u_0 + 4 = 3 + 4 = 7, \qquad u_2 = u_1 + 4 = 7 + 4 = 11, \qquad u_3 = u_2 + 4 = 11 + 4 = 15.
+- **Q2** — 2 pts — Attendu : démontrer — \textbf{Conclusion :} La suite $(u_n)$ est une suite arithmétique de raison $r = 4$ et de premier terme $u_0 = 3$.
+- **Q3** — 1 pt — Attendu : exprimer — Par la formule du terme général d'une suite arithmétique : \[ \boxed{u_n = 3 + 4n} \quad \text{pour tout } n \in \mathbb{N}.
+- **Q4** — 1 pt — Attendu : justifier — \textit{Remarque : on peut aussi argumenter que la raison $r = 4 > 0$, ce qui suffit pour conclure qu'une suite arithmétique est strictement croissante.}.
+- **Q5** — 1 pt — Attendu : justifier — Chaque terme dépasse le précédent de $4$, et cet écart ne diminue jamais : en allant assez loin, on dépasse n'importe quelle valeur fixée à.
+
+**Exercice 2** — 5 points (C3, C4)
+
+- **Q1** — 1 pt — Attendu : calculer — \[ u_0 = 2 \times 3^0 = 2 \times 1 = 2, \qquad u_1 = 2 \times 3^1 = 6, \qquad u_2 = 2 \times 3^2 = 2 \times 9 = 18.
+- **Q2** — 2 pts — Attendu : démontrer — \textbf{Conclusion :} La suite $(u_n)$ est une suite géométrique de raison $q = 3$ et de premier terme $u_0 = 2$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
+- **Q3** — 2 pts — Attendu : calculer — \] \[ \boxed{S = 242.} \] \textit{Vérification :} $u_0 + u_1 + u_2 + u_3 + u_4 = 2 + 6 + 18 + 54 + 162 = 242$.
+
+**Exercice 3** — 5 points (C6, C7)
+
+- **Q1** — 1 pt — Attendu : justifier — Le capital au bout de $(n+1)$ années est donc : \[ u_{n+1} = u_n + 0{,}05\,u_n = (1 + 0{,}05)\,u_n = 1{,}05\,u_n.
+- **Q2** — 1 pt — Attendu : en déduire — Par la formule du terme général d'une suite géométrique : \[ \boxed{u_n = 800 \times 1{,}05^n} \quad \text{pour tout } n \in \mathbb{N}.
+- **Q3** — 1 pt — Attendu : calculer — \[ u_1 = 800 \times 1{,}05 = 840 \text{ €}, \qquad u_2 = 800 \times 1{,}05^2 = 800 \times 1{,}1025 = 882 \text{ €}.
+- **Q4a** — 1 pt — Attendu : interpréter — \item \texttt{n = n + 1} : on incrément.
+- **Q4b** — 1 pt — Attendu : vérifier — \item \texttt{n = n + 1} : on incrément.
+
+**Exercice 4** — 4 points (C2, C4)
+
+- **Q1** — 1 pt — Attendu : montrer — \textbf{Conclusion :} $(v_n)$ est une suite arithmétique de raison $r = 2$ et de premier terme $v_0 = 2 \times 0 + 5 = 5$.
+- **Q2** — 2 pts — Attendu : établir — \] \[ \boxed{S_n = (n+1)(n+5)} \quad \text{pour tout } n \in \mathbb{N}.
+- **Q3** — 1 pt — Attendu : déterminer — \] \textbf{Conclusion :} Le plus petit entier naturel $n$ tel que $S_n > 200$ est $\boxed{n = 12}$.
+
+### 1SPE-SUITES-EV-B
+
+**Exercice 1** — 6 points (C1, C2, C5, C8)
+
+- **Q1** — 1 pt — Attendu : calculer — On applique la relation de récurrence $u_{n+1} = u_n + 3$ : \[ u_1 = u_0 + 3 = 5 + 3 = 8, \qquad u_2 = u_1 + 3 = 8 + 3 = 11, \qquad u_3 = u_2 + 3 = 11 + 3 = 14.
+- **Q2** — 2 pts — Attendu : démontrer — \textbf{Conclusion :} La suite $(u_n)$ est une suite arithmétique de raison $r = 3$ et de premier terme $u_0 = 5$.
+- **Q3** — 1 pt — Attendu : exprimer — Par la formule du terme général d'une suite arithmétique : \[ \boxed{u_n = 5 + 3n} \quad \text{pour tout } n \in \mathbb{N}.
+- **Q4** — 1 pt — Attendu : justifier — \textit{Remarque : on peut aussi argumenter que la raison $r = 3 > 0$, ce qui suffit pour conclure qu'une suite arithmétique est strictement croissante.}.
+- **Q5** — 1 pt — Attendu : justifier — Chaque terme dépasse le précédent de $3$, et cet écart ne diminue jamais : en allant assez loin, on dépasse n'importe quelle valeur fixée à.
+
+**Exercice 2** — 5 points (C3, C4)
+
+- **Q1** — 1 pt — Attendu : calculer — \[ u_0 = 4 \times 2^0 = 4 \times 1 = 4, \qquad u_1 = 4 \times 2^1 = 8, \qquad u_2 = 4 \times 2^2 = 4 \times 4 = 16.
+- **Q2** — 2 pts — Attendu : démontrer — \textbf{Conclusion :} La suite $(u_n)$ est une suite géométrique de raison $q = 2$ et de premier terme $u_0 = 4$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
+- **Q3** — 2 pts — Attendu : calculer — \] \[ \boxed{S = 124.} \] \textit{Vérification :} $u_0 + u_1 + u_2 + u_3 + u_4 = 4 + 8 + 16 + 32 + 64 = 124$.
+
+**Exercice 3** — 5 points (C6, C7)
+
+- **Q1** — 1 pt — Attendu : justifier — Le capital au bout de $(n+1)$ années est donc : \[ u_{n+1} = u_n + 0{,}04\,u_n = (1 + 0{,}04)\,u_n = 1{,}04\,u_n.
+- **Q2** — 1 pt — Attendu : en déduire — Par la formule du terme général d'une suite géométrique : \[ \boxed{u_n = 1\,000 \times 1{,}04^n} \quad \text{pour tout } n \in \mathbb{N}.
+- **Q3** — 1 pt — Attendu : calculer — \[ u_1 = 1\,000 \times 1{,}04 = 1\,040 \text{ €}, \qquad u_2 = 1\,000 \times 1{,}04^2 = 1\,000 \times 1{,}0816 \approx 1\,082 \text{ €}.
+- **Q4a** — 1 pt — Attendu : interpréter — \item \texttt{n = n + 1} : on incrémen.
+- **Q4b** — 1 pt — Attendu : vérifier — \item \texttt{n = n + 1} : on incrémen.
+
+**Exercice 4** — 4 points (C2, C4)
+
+- **Q1** — 1 pt — Attendu : justifier — Son terme général est \[ \boxed{p_n=18+4n}.
+- **Q2** — 2 pts — Attendu : établir — \] \[ \boxed{T_n=(n+1)(18+2n)}. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
+- **Q3** — 1 pt — Attendu : calculer — \] Le théâtre compte donc $\boxed{480\text{ places}}$ dans ses douze premières rangées.
+
+Ce chapitre porte 32 question(s) évaluée(s), dont 0 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
+
+## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 
 1. completude du programme officiel
 2. alignement des capacites
@@ -438,7 +506,7 @@ La regle du depot : « la richesse se mesure en occasions distinctes et en geste
 
 Cette checklist est celle du role. Elle s'applique au CHAPITRE COURANT ENTIER, y compris aux objets qu'aucune section de cette vue ne cite.
 
-## 8. Reference de lecture : le PDF candidat
+## 9. Reference de lecture : le PDF candidat
 
 Le PDF sert a lire le chapitre dans l'ordre ou l'eleve le recevra. Il n'est pas une preuve : le packet ne porte aucune preuve de rendu (`render_evidence = ABSENT`), et aucun index page-objet n'est etabli.
 
