@@ -169,3 +169,48 @@ par `1NSI-TC-QCM`.
 
 **Portée.** Un seul objet aujourd'hui ; le devient pour chaque chapitre dès que
 d'autres diagnostics seront générés.
+
+
+---
+
+## INT-006 — La ré-observation ne modélise que les suppressions
+
+**Problème.** `scripts/build_1nsi_pending_state_reobservation.py` n'accepte un écart
+entre registre déclaré et arbre observé que s'il **égale le nombre de fichiers supprimés**
+par le commit de cause :
+
+```python
+row["declared"] - row["observed"] != cause["deleted_tex_files"]   # sinon UNEXPLAINED
+```
+
+Le commit de cause est lui-même cherché en `--diff-filter=D`. Un lot qui **ajoute** du
+contenu authentique — ce qui est précisément l'objet de la campagne — est donc
+inattribuable : `UNEXPLAINED_DELTA` reste non nul et quinze tests de gouvernance 1NSI
+échouent, alors qu'aucun défaut de contenu n'existe.
+
+**Observé.** Après le lot WEB-IHM : 99 copies retirées puis 19 objets authentiques écrits
+(4 méthodes, 8 remédiations, 8 corrigés de remédiation, moins le stub retiré).
+`UNEXPLAINED_DELTA = 4`, `DELETED_TEX_FILES_IN_CAUSE_COMMIT = 1`.
+
+**Sémantique attendue.** L'écart doit être explicable par le **bilan net** des commits
+depuis la dernière observation — suppressions *et* ajouts — et non par les seules
+suppressions du dernier commit destructeur. Le commit de cause devrait être cherché en
+`--diff-filter=ADM`, et l'écart comparé au net.
+
+**Fixtures.**
+
+```
+lot purement destructif   (−99, +0)   → UNEXPLAINED_DELTA = 0   (déjà le cas)
+lot purement additif      (−0, +19)   → UNEXPLAINED_DELTA = 0   (échoue aujourd'hui)
+lot mixte                 (−1, +19)   → UNEXPLAINED_DELTA = 0   (échoue aujourd'hui)
+écart sans commit de cause            → UNEXPLAINED_DELTA > 0   (doit rester bloquant)
+```
+
+**Pourquoi ce n'est pas corrigé ici.** Le producteur est partagé. Le corriger depuis la
+branche satellite reviendrait à modifier le moteur de gouvernance pour verdir ma propre
+branche.
+
+**Conséquence assumée.** Les deux registres 1NSI restent périmés sur cette branche après
+tout lot de rédaction, et quinze tests de gouvernance échouent pour cette seule raison.
+Aucun de ces échecs ne signale un défaut de contenu ; ils disparaîtront à l'intégration,
+une fois la ré-observation relancée par le coordinateur.
