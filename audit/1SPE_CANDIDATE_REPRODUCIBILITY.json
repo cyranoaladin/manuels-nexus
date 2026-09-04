@@ -2,10 +2,39 @@
   "approves_nothing": true,
   "artifact_type": "1spe_candidate_reproducibility",
   "generated_by": "scripts/build_1spe_candidate_reproducibility.py",
+  "input_sets_coincide": true,
+  "inputs_a": {
+    "build_configuration": {
+      "Mathematiques/manuel-maths/config/reproducible-build.json": "646b054d057201ce7f58b61d75bfcc6fd9227ab0",
+      "Mathematiques/manuel-maths/scripts/assemble_manuel.py": "d2e997646af3a8b946387f4c22b172a5555493cb"
+    },
+    "build_configuration_digest": "sha256:a3390646916ac5429e10e07befbe33718227638d6b85f236bff87b71202f2bfb",
+    "manual_input_set_digest": "sha256:668b1419389ce6846ce7bbf160c5bcffa3ff96428530ca4c9b1ec3853986575b",
+    "manual_input_trees": {
+      "Mathematiques/manuel-maths/chapitres": "a53d62ee4f41434543a964e5e07d39bd53e2831f",
+      "Mathematiques/manuel-maths/gabarits": "413a4708033b7954f7d22bba9f2e17292e17c5d6",
+      "gabarits/common": "6e470fd974083b32361c82ff5e808cf2a2c690a5"
+    }
+  },
+  "inputs_b": {
+    "build_configuration": {
+      "Mathematiques/manuel-maths/config/reproducible-build.json": "646b054d057201ce7f58b61d75bfcc6fd9227ab0",
+      "Mathematiques/manuel-maths/scripts/assemble_manuel.py": "d2e997646af3a8b946387f4c22b172a5555493cb"
+    },
+    "build_configuration_digest": "sha256:a3390646916ac5429e10e07befbe33718227638d6b85f236bff87b71202f2bfb",
+    "manual_input_set_digest": "sha256:668b1419389ce6846ce7bbf160c5bcffa3ff96428530ca4c9b1ec3853986575b",
+    "manual_input_trees": {
+      "Mathematiques/manuel-maths/chapitres": "a53d62ee4f41434543a964e5e07d39bd53e2831f",
+      "Mathematiques/manuel-maths/gabarits": "413a4708033b7954f7d22bba9f2e17292e17c5d6",
+      "gabarits/common": "6e470fd974083b32361c82ff5e808cf2a2c690a5"
+    }
+  },
   "schema_version": 1,
-  "status": "CANDIDATE_REPRODUCIBLE",
+  "status": "PIPELINE_DETERMINISM_CANDIDATE_EVIDENCE",
   "summary": {
+    "BUILD_CONFIGURATIONS_COINCIDE": true,
     "IDENTICAL": 2,
+    "INPUT_SETS_COINCIDE": true,
     "PAGE_COUNTS": {
       "eleve": 355,
       "professeur": 627
@@ -13,7 +42,7 @@
     "VARIANTS_COMPARED": 2,
     "VARIANTS_DIFFERING": 0
   },
-  "the_two_runs_were_not_at_the_same_commit": "Entre les deux constructions, seuls des artefacts d'audit ont été livrés. Aucune source du manuel n'a bougé, et l'identité de trailer -- qui suit ces sources -- est restée la même. Les octets aussi : c'est un constat plus fort qu'une reproduction au même commit.",
+  "this_is_weaker_than_a_final_clean_room_pair": "Deux constructions à des commits différents dont les entrées manuel coïncident prouvent le DÉTERMINISME DU PIPELINE. Ce n'est pas plus fort qu'un double clean-room au même 1SPE_FINAL_CONTENT_SHA -- c'est plus faible, et cela ne remplace pas la preuve de release, qui reste due.",
   "variants": [
     {
       "identical": true,
@@ -36,5 +65,5 @@
       "variant": "professeur"
     }
   ],
-  "why_this_is_not_release_evidence": "Le statut reste CANDIDATE_REPRODUCIBLE tant que les verdicts humains ne sont pas clos et que le contenu n'est pas figé. Si les sources finales produisent ces mêmes empreintes, cette preuve se réutilise par égalité d'empreinte ; sinon un A/B final est dû."
+  "why_this_is_not_release_evidence": "Les candidats courants sont PRINT_CANDIDATE_REPRODUCIBLE et ne vont pas dans TO_PRINTER : la couche de barème commenté n'est pas intégrée, 54 items attendent un jugement pédagogique, les revues de chapitre ne sont pas closes et le D7 n'est pas approuvé."
 }

@@ -7,16 +7,22 @@ six mois. La reproductibilité se prouve donc en construisant DEUX fois et en
 comparant les octets, pas en faisant confiance au pipeline.
 
 Ce que ce module constate, et rien de plus : deux constructions successives des
-mêmes sources de manuel donnent des PDF byte-identiques. Le statut reste
-`CANDIDATE_REPRODUCIBLE` -- il ne devient une preuve de RELEASE qu'une fois les
-verdicts humains clos et le contenu figé, et si les sources finales produisent
-alors ces mêmes empreintes, la preuve se réutilise par égalité d'empreinte.
+mêmes entrées de manuel donnent des PDF byte-identiques. Le statut est donc
+`PIPELINE_DETERMINISM_CANDIDATE_EVIDENCE` : une preuve que le pipeline est
+déterministe, et rien de plus. Elle ne devient pas une preuve de RELEASE ; si
+les sources finales produisent ces mêmes empreintes, elle se réutilisera par
+égalité d'empreinte, sinon un A/B final au SHA figé est dû.
 
-Une subtilité qui rend le constat plus fort qu'il n'en a l'air : les deux
-constructions n'ont pas été lancées au même commit. Entre elles, des artefacts
-d'audit ont été livrés -- des propositions de barème, des dossiers de revue.
-Aucune SOURCE du manuel n'a bougé, et l'identité de trailer, qui suit ces
-sources, est restée la même. Les octets aussi.
+Les deux constructions n'ont pas été lancées au même commit : entre elles, des
+artefacts d'audit ont été livrés. Ce n'est PAS une preuve plus forte qu'un
+double clean-room au même SHA -- c'est une preuve d'une autre chose, plus
+faible pour la release : que le pipeline est déterministe à jeu d'entrées
+manuel constant. La preuve de release, elle, se fera depuis
+`1SPE_FINAL_CONTENT_SHA`, dans deux clean rooms indépendantes.
+
+Le fait que les entrées soient identiques n'est pas raconté, il est mesuré :
+les empreintes d'arbre Git des répertoires sources du manuel et l'empreinte de
+la configuration de construction sont enregistrées pour A et pour B.
 
 Métriques bloquantes : `VARIANTS_COMPARED`, `VARIANTS_DIFFERING`.
 """
@@ -41,11 +47,60 @@ GENERATED_BY = "scripts/build_1spe_candidate_reproducibility.py"
 
 BUILD = ROOT / "Mathematiques/manuel-maths/build/MANUEL_1SPE"
 VARIANTS = ("eleve", "professeur")
-STATUS = "CANDIDATE_REPRODUCIBLE"
+STATUS = "PIPELINE_DETERMINISM_CANDIDATE_EVIDENCE"
+
+# Les répertoires qui portent les entrées du manuel. Leur empreinte d'arbre Git
+# EST le condensat de leur contenu : deux commits qui les partagent ont
+# exactement les mêmes entrées, et cela se vérifie plutôt que se raconte.
+MANUAL_INPUT_TREES = (
+    "Mathematiques/manuel-maths/chapitres",
+    "Mathematiques/manuel-maths/gabarits",
+    "gabarits/common",
+)
+BUILD_CONFIGURATION_FILES = (
+    "Mathematiques/manuel-maths/config/reproducible-build.json",
+    "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+)
 
 
 class ReproducibilityError(RuntimeError):
     """Une preuve manque : la comparaison ne peut pas être faite."""
+
+
+def _git_object(commit: str, path: str) -> str | None:
+    result = subprocess.run(
+        ["git", "rev-parse", f"{commit}:{path}"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    return result.stdout.strip() if result.returncode == 0 else None
+
+
+def input_set_digest(commit: str) -> dict[str, Any]:
+    """Le condensat des ENTRÉES du manuel à ce commit, mesuré et non déclaré."""
+
+    trees = {path: _git_object(commit, path) for path in MANUAL_INPUT_TREES}
+    configuration = {
+        path: _git_object(commit, path) for path in BUILD_CONFIGURATION_FILES
+    }
+    if any(value is None for value in {**trees, **configuration}.values()):
+        raise ReproducibilityError(f"entrées introuvables au commit {commit}")
+    return {
+        "manual_input_trees": trees,
+        "manual_input_set_digest": "sha256:"
+        + hashlib.sha256(
+            "".join(f"{k}={trees[k]};" for k in sorted(trees)).encode("utf-8")
+        ).hexdigest(),
+        "build_configuration": configuration,
+        "build_configuration_digest": "sha256:"
+        + hashlib.sha256(
+            "".join(
+                f"{k}={configuration[k]};" for k in sorted(configuration)
+            ).encode("utf-8")
+        ).hexdigest(),
+    }
 
 
 def _digest(path: Path) -> str:
@@ -86,6 +141,10 @@ def build_evidence(runs: dict[str, dict[str, str]]) -> dict[str, Any]:
             }
         )
     differing = [row for row in variants if not row["identical"]]
+    commit_a = variants[0]["source_sha_a"]
+    commit_b = variants[0]["source_sha_b"]
+    inputs_a = input_set_digest(commit_a)
+    inputs_b = input_set_digest(commit_b)
     return {
         "artifact_type": "1spe_candidate_reproducibility",
         "schema_version": 1,
@@ -93,17 +152,25 @@ def build_evidence(runs: dict[str, dict[str, str]]) -> dict[str, Any]:
         "status": STATUS,
         "approves_nothing": True,
         "why_this_is_not_release_evidence": (
-            "Le statut reste CANDIDATE_REPRODUCIBLE tant que les verdicts "
-            "humains ne sont pas clos et que le contenu n'est pas figé. Si les "
-            "sources finales produisent ces mêmes empreintes, cette preuve se "
-            "réutilise par égalité d'empreinte ; sinon un A/B final est dû."
+            "Les candidats courants sont PRINT_CANDIDATE_REPRODUCIBLE et ne "
+            "vont pas dans TO_PRINTER : la couche de barème commenté n'est pas "
+            "intégrée, 54 items attendent un jugement pédagogique, les revues "
+            "de chapitre ne sont pas closes et le D7 n'est pas approuvé."
         ),
-        "the_two_runs_were_not_at_the_same_commit": (
-            "Entre les deux constructions, seuls des artefacts d'audit ont été "
-            "livrés. Aucune source du manuel n'a bougé, et l'identité de "
-            "trailer -- qui suit ces sources -- est restée la même. Les octets "
-            "aussi : c'est un constat plus fort qu'une reproduction au même "
-            "commit."
+        "this_is_weaker_than_a_final_clean_room_pair": (
+            "Deux constructions à des commits différents dont les entrées "
+            "manuel coïncident prouvent le DÉTERMINISME DU PIPELINE. Ce n'est "
+            "pas plus fort qu'un double clean-room au même "
+            "1SPE_FINAL_CONTENT_SHA -- c'est plus faible, et cela ne remplace "
+            "pas la preuve de release, qui reste due."
+        ),
+        "inputs_a": inputs_a,
+        "inputs_b": inputs_b,
+        "input_sets_coincide": (
+            inputs_a["manual_input_set_digest"]
+            == inputs_b["manual_input_set_digest"]
+            and inputs_a["build_configuration_digest"]
+            == inputs_b["build_configuration_digest"]
         ),
         "variants": variants,
         "summary": {
@@ -111,6 +178,14 @@ def build_evidence(runs: dict[str, dict[str, str]]) -> dict[str, Any]:
             "VARIANTS_DIFFERING": len(differing),
             "IDENTICAL": len(variants) - len(differing),
             "PAGE_COUNTS": {row["variant"]: row["page_count"] for row in variants},
+            "INPUT_SETS_COINCIDE": (
+                inputs_a["manual_input_set_digest"]
+                == inputs_b["manual_input_set_digest"]
+            ),
+            "BUILD_CONFIGURATIONS_COINCIDE": (
+                inputs_a["build_configuration_digest"]
+                == inputs_b["build_configuration_digest"]
+            ),
         },
     }
 
@@ -125,7 +200,10 @@ def render_markdown(payload: dict[str, Any]) -> str:
         "",
         f"> {payload['why_this_is_not_release_evidence']}",
         "",
-        f"> {payload['the_two_runs_were_not_at_the_same_commit']}",
+        f"> {payload['this_is_weaker_than_a_final_clean_room_pair']}",
+        "",
+        f"Condensat des entrées A : `{payload['inputs_a']['manual_input_set_digest']}`",
+        f"Condensat des entrées B : `{payload['inputs_b']['manual_input_set_digest']}`",
         "",
         "## Métriques",
         "",
