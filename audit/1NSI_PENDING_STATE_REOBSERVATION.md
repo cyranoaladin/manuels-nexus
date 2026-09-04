@@ -6,10 +6,10 @@
 
 ## Cause
 
-- commit : `0ca6f92b563314fc4b4c30fab8f0e09146cdb053`
-- sujet : [TYPES-CONSTRUITS] remove five semantically redundant remediation copies
+- commit : `16388110bb1bf1d0b3ec5dba29c5be081cb993e2`
+- sujet : [WEB-IHM] remove 99 synthetic filler copies and restore the true coverage
 - date : 2026-09-04
-- objets `.tex` supprimés sous `NSI/chapitres` : 5
+- objets `.tex` supprimés sous `NSI/chapitres` : 99
 
 ## Métriques
 
@@ -19,18 +19,18 @@
 | `FIELDS_REOBSERVED` | 9 |
 | `SEALED_FIELDS_MUTATED` | 0 |
 | `UNEXPLAINED_DELTA` | 0 |
-| `DELETED_TEX_FILES_IN_CAUSE_COMMIT` | 5 |
+| `DELETED_TEX_FILES_IN_CAUSE_COMMIT` | 99 |
 
 ## Champs ré-observés
 
 | Registre | Champ | Déclaré | Observé |
 |---|---|---|---|
-| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.sources_count` | `817` | `812` |
-| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.sources_ids_digest` | `sha256:45d1ffcf341024851a821d018f84f83b195bece989ec3ff20c55046d22b540c1` | `sha256:54ae22ca8b41bf69913f6e71a902eaabb89dc59871c340d65f3fd49c976559d5` |
-| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.object_sources_count` | `807` | `802` |
-| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.ids_only_in_sources_count` | `487` | `482` |
-| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.ids_only_in_sources_digest` | `sha256:12739bc9b6556e234dc33c4cffe55d4327fff30a095227fe91647d849bdad765` | `sha256:2a5535511729431a1c26f2be83c32d5f4f573fb46d2c5bdc91e8ee97d5e3fae6` |
+| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.sources_count` | `812` | `713` |
+| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.sources_ids_digest` | `sha256:54ae22ca8b41bf69913f6e71a902eaabb89dc59871c340d65f3fd49c976559d5` | `sha256:d9d796a784218d294220acaeec5dc79cc88ea1f94e45f5a32b75383c97638278` |
+| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.object_sources_count` | `802` | `703` |
+| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.ids_only_in_sources_count` | `482` | `383` |
+| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.ids_only_in_sources_digest` | `sha256:2a5535511729431a1c26f2be83c32d5f4f573fb46d2c5bdc91e8ee97d5e3fae6` | `sha256:de7bcd718ba2fc81c9b553f64dbaaca87db1fbdab4dfda515ca84aef873ecee1` |
 | `1NSI_STATUS_GOVERNANCE_PENDING` | `observed_counts` | `dict[4]` | `dict[4]` |
-| `1NSI_STATUS_GOVERNANCE_PENDING` | `objects_total` | `807` | `802` |
-| `1NSI_STATUS_GOVERNANCE_PENDING` | `prohibited_status_objects_count` | `441` | `436` |
-| `1NSI_STATUS_GOVERNANCE_PENDING` | `prohibited_status_objects_digest` | `sha256:e54846025a605977292e8f613f36fe5bf73c836e7a11e46daea1323cc50a0eed` | `sha256:beb221c231d553b3499309e3ce9094b89f909d3123d1e34924332a080a620b68` |
+| `1NSI_STATUS_GOVERNANCE_PENDING` | `objects_total` | `802` | `703` |
+| `1NSI_STATUS_GOVERNANCE_PENDING` | `prohibited_status_objects_count` | `436` | `337` |
+| `1NSI_STATUS_GOVERNANCE_PENDING` | `prohibited_status_objects_digest` | `sha256:beb221c231d553b3499309e3ce9094b89f909d3123d1e34924332a080a620b68` | `sha256:145b1cffa70522f6bb801b0b38f6de7eaee15ac976e26da24fd3714c12a26dba` |

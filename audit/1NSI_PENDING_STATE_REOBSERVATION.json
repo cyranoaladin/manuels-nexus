@@ -3,51 +3,51 @@
   "artifact_type": "1nsi_pending_state_reobservation",
   "cause": {
     "date": "2026-09-04",
-    "deleted_tex_files": 5,
-    "sha": "0ca6f92b563314fc4b4c30fab8f0e09146cdb053",
-    "subject": "[TYPES-CONSTRUITS] remove five semantically redundant remediation copies"
+    "deleted_tex_files": 99,
+    "sha": "16388110bb1bf1d0b3ec5dba29c5be081cb993e2",
+    "subject": "[WEB-IHM] remove 99 synthetic filler copies and restore the true coverage"
   },
   "delta": [
     {
-      "declared": 817,
+      "declared": 812,
       "field": "observed.sources_count",
-      "observed": 812,
+      "observed": 713,
       "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE"
     },
     {
-      "declared": "sha256:45d1ffcf341024851a821d018f84f83b195bece989ec3ff20c55046d22b540c1",
+      "declared": "sha256:54ae22ca8b41bf69913f6e71a902eaabb89dc59871c340d65f3fd49c976559d5",
       "field": "observed.sources_ids_digest",
-      "observed": "sha256:54ae22ca8b41bf69913f6e71a902eaabb89dc59871c340d65f3fd49c976559d5",
+      "observed": "sha256:d9d796a784218d294220acaeec5dc79cc88ea1f94e45f5a32b75383c97638278",
       "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE"
     },
     {
-      "declared": 807,
+      "declared": 802,
       "field": "observed.object_sources_count",
-      "observed": 802,
+      "observed": 703,
       "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE"
     },
     {
-      "declared": 487,
+      "declared": 482,
       "field": "observed.ids_only_in_sources_count",
-      "observed": 482,
+      "observed": 383,
       "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE"
     },
     {
-      "declared": "sha256:12739bc9b6556e234dc33c4cffe55d4327fff30a095227fe91647d849bdad765",
+      "declared": "sha256:2a5535511729431a1c26f2be83c32d5f4f573fb46d2c5bdc91e8ee97d5e3fae6",
       "field": "observed.ids_only_in_sources_digest",
-      "observed": "sha256:2a5535511729431a1c26f2be83c32d5f4f573fb46d2c5bdc91e8ee97d5e3fae6",
+      "observed": "sha256:de7bcd718ba2fc81c9b553f64dbaaca87db1fbdab4dfda515ca84aef873ecee1",
       "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE"
     },
     {
       "declared": {
-        "approved": 441,
+        "approved": 436,
         "manual_review": 7,
         "needs_review": 210,
         "verified": 149
       },
       "field": "observed_counts",
       "observed": {
-        "approved": 436,
+        "approved": 337,
         "manual_review": 7,
         "needs_review": 210,
         "verified": 149
@@ -55,21 +55,21 @@
       "register": "1NSI_STATUS_GOVERNANCE_PENDING"
     },
     {
-      "declared": 807,
+      "declared": 802,
       "field": "objects_total",
-      "observed": 802,
+      "observed": 703,
       "register": "1NSI_STATUS_GOVERNANCE_PENDING"
     },
     {
-      "declared": 441,
+      "declared": 436,
       "field": "prohibited_status_objects_count",
-      "observed": 436,
+      "observed": 337,
       "register": "1NSI_STATUS_GOVERNANCE_PENDING"
     },
     {
-      "declared": "sha256:e54846025a605977292e8f613f36fe5bf73c836e7a11e46daea1323cc50a0eed",
+      "declared": "sha256:beb221c231d553b3499309e3ce9094b89f909d3123d1e34924332a080a620b68",
       "field": "prohibited_status_objects_digest",
-      "observed": "sha256:beb221c231d553b3499309e3ce9094b89f909d3123d1e34924332a080a620b68",
+      "observed": "sha256:145b1cffa70522f6bb801b0b38f6de7eaee15ac976e26da24fd3714c12a26dba",
       "register": "1NSI_STATUS_GOVERNANCE_PENDING"
     }
   ],
@@ -87,7 +87,7 @@
   ],
   "schema_version": 1,
   "summary": {
-    "DELETED_TEX_FILES_IN_CAUSE_COMMIT": 5,
+    "DELETED_TEX_FILES_IN_CAUSE_COMMIT": 99,
     "FIELDS_REOBSERVED": 9,
     "REGISTERS": 2,
     "SEALED_FIELDS_MUTATED": 0,
