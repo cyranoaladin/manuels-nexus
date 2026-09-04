@@ -1,4 +1,18 @@
 {
+  "applications": [
+    {
+      "at_head": "3b9387b9dccf6d0da3fd3547d96b845c05495b91",
+      "discarded": "les deux constructions observées 363/635, superseded",
+      "order": 1
+    },
+    {
+      "at_head": "b53a1dec",
+      "discarded": "un enregistrement PARTIEL de la seule variante élève, fait quelques minutes plus tôt pendant l'exécution de cette même décision",
+      "order": 2,
+      "why_a_second_application_was_needed": "Le manifeste se lie à l'état de l'arbre au moment où il enregistre. Enregistrer la première variante l'a donc lié à ce commit-là ; livrer ensuite le PDF de la seconde variante a changé les sources et rendu ce liage périmé. Les deux constructions observées doivent être enregistrées À LA SUITE, sans aucun commit de source entre elles -- seul le manifeste, qui est exclu du condensat, peut bouger.",
+      "within_the_granted_authorisation": "La décision autorise l'invalidation du liage périmé afin que de nouvelles constructions puissent être observées sur les sources courantes. C'est exactement cet objet, et ce qui est écarté n'est aucune preuve historique : c'est un enregistrement partiel produit en exécutant cette décision."
+    }
+  ],
   "artifact_type": "human_decision_build_manifest_invalidation",
   "content_approval": false,
   "d7_approval": false,
