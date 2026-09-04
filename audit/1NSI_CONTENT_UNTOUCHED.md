@@ -6,7 +6,7 @@
 
 > Une charte modifiée change la mise en page de la NSI, pas son propos. Les deux comptes sont publiés séparément.
 
-Point de comparaison : `2d522877b67a` — [1NSI] retirer 44 cours qui dupliquaient ou usurpaient un autre objet (2026-09-01), lu dans `audit/1NSI_PENDING_STATE_REOBSERVATION.json`.
+Point de comparaison : `50fe291d9620` — [1NSI] regenerate QCM diagnostics capacity metadata after INT-005 (2026-09-04), lu dans `audit/1NSI_PENDING_STATE_REOBSERVATION.json`.
 
 ## Métriques
 
@@ -14,7 +14,7 @@ Point de comparaison : `2d522877b67a` — [1NSI] retirer 44 cours qui dupliquaie
 |---|---:|
 | `1NSI_CONTENT_CHANGED` | NO |
 | `CONTENT_FILES_CHANGED` | 0 |
-| `SHARED_TEMPLATE_FILES_CHANGED` | 12 |
+| `SHARED_TEMPLATE_FILES_CHANGED` | 0 |
 | `SHARED_TEMPLATE_COPIES_DIVERGING` | 0 |
 | `TOOLING_OR_AUDIT_FILES_CHANGED` | 0 |
 
@@ -22,20 +22,9 @@ Point de comparaison : `2d522877b67a` — [1NSI] retirer 44 cours qui dupliquaie
 
 _aucun_
 
-## `SHARED_TEMPLATE` — 12 fichier(s)
+## `SHARED_TEMPLATE` — 0 fichier(s)
 
-- `NSI/gabarits/nexus-boites-v6.sty`
-- `NSI/gabarits/nexus-charte-v6.sty`
-- `NSI/gabarits/nexus-couverture.sty`
-- `NSI/gabarits/nexus-decor.sty`
-- `NSI/gabarits/nexus-exercices-v6.sty`
-- `NSI/gabarits/nexus-figures-bib.sty`
-- `NSI/gabarits/nexus-manuel-v5.cls`
-- `NSI/gabarits/nexus-manuel.cls`
-- `NSI/gabarits/nexus-margin-rail.tex`
-- `NSI/gabarits/nexus-margin-shipout.lua`
-- `NSI/gabarits/nexus-pages-froides.sty`
-- `NSI/gabarits/nexus-pont-v6.sty`
+_aucun_
 
 ## `TOOLING_OR_AUDIT` — 0 fichier(s)
 
