@@ -35,7 +35,7 @@ Genere par `scripts/build_release_artifact_provenance_disposition.py`. Ancestral
 - disposition : **ACTIVE_RELEASE_ARTIFACT** (decidee dans `audit/HUMAN_DECISION_RELEASE_ARTIFACT_DISPOSITION_2026-09-03.json`)
 - motif : le producteur existe et declare cette cible ; le champ generated_by manquait, il a ete ajoute via le producteur et l'artefact a ete reemis
 - sha256 : `50192fbdee5a48783f0f55a72cddac55624f83bdb4d25f345d31dbd79f342a8d`
-- conserve dans l'histoire Git : 17 commits, toujours suivi
+- conserve dans l'histoire Git : 18 commits, toujours suivi
 
 | REFERENCE | ROLE |
 | --- | --- |

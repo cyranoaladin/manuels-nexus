@@ -176,11 +176,11 @@ Ces mesures viennent de `audit/PUBLISH_READINESS_CHAPTER_MATRIX.json`. Elles ne 
 
 | Mesure | Valeur |
 | --- | --- |
-| Etat machine vertical | `INCOMPLETE` |
+| Etat machine vertical | `MACHINE_REVIEW_COMPLETE` |
 | Cloture humaine | `PENDING` |
 | Objets passes par l'oracle | 122 reussites, 0 echecs, 11 en science humaine requise, 19 en revue manuelle |
 | Attendus officiels obligatoires | 7 rattaches sur 7, 0 manquants, 0 hors annee |
-| Sujets d'evaluation | 2 sujets, 2 corriges, statut `GAP` |
+| Sujets d'evaluation | 2 sujets, 2 corriges, statut `COMPLETE` |
 | QCM | 15 questions, capacites evaluees C1, C2, C3, C4, C5 |
 | Relation exercice/corrige | ANSWER_COVERAGE_ESTABLISHED : 50 ; 0 echecs de cardinalite |
 
