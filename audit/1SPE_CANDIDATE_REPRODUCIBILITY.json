@@ -1,0 +1,40 @@
+{
+  "approves_nothing": true,
+  "artifact_type": "1spe_candidate_reproducibility",
+  "generated_by": "scripts/build_1spe_candidate_reproducibility.py",
+  "schema_version": 1,
+  "status": "CANDIDATE_REPRODUCIBLE",
+  "summary": {
+    "IDENTICAL": 2,
+    "PAGE_COUNTS": {
+      "eleve": 355,
+      "professeur": 627
+    },
+    "VARIANTS_COMPARED": 2,
+    "VARIANTS_DIFFERING": 0
+  },
+  "the_two_runs_were_not_at_the_same_commit": "Entre les deux constructions, seuls des artefacts d'audit ont été livrés. Aucune source du manuel n'a bougé, et l'identité de trailer -- qui suit ces sources -- est restée la même. Les octets aussi : c'est un constat plus fort qu'une reproduction au même commit.",
+  "variants": [
+    {
+      "identical": true,
+      "page_count": 355,
+      "pdf_path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf",
+      "pdf_sha256_a": "sha256:33215c1bfe45bbfdaf41f88b7b43560d78b61d75e99334c9954582a8906154f5",
+      "pdf_sha256_b": "sha256:33215c1bfe45bbfdaf41f88b7b43560d78b61d75e99334c9954582a8906154f5",
+      "source_sha_a": "b493dcf7a1b970a1f93ee357fc6202cd543b63bf",
+      "source_sha_b": "5bd1ca80cc3be91da8911476649598b4eb7e9e44",
+      "variant": "eleve"
+    },
+    {
+      "identical": true,
+      "page_count": 627,
+      "pdf_path": "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf",
+      "pdf_sha256_a": "sha256:ae48d4bd2ab4f7ac6da709e82ff18ce64a6506f7281de9fdbd8763cb9c1339ff",
+      "pdf_sha256_b": "sha256:ae48d4bd2ab4f7ac6da709e82ff18ce64a6506f7281de9fdbd8763cb9c1339ff",
+      "source_sha_a": "b493dcf7a1b970a1f93ee357fc6202cd543b63bf",
+      "source_sha_b": "5bd1ca80cc3be91da8911476649598b4eb7e9e44",
+      "variant": "professeur"
+    }
+  ],
+  "why_this_is_not_release_evidence": "Le statut reste CANDIDATE_REPRODUCIBLE tant que les verdicts humains ne sont pas clos et que le contenu n'est pas figé. Si les sources finales produisent ces mêmes empreintes, cette preuve se réutilise par égalité d'empreinte ; sinon un A/B final est dû."
+}
