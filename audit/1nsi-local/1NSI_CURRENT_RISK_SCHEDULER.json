@@ -1,0 +1,224 @@
+{
+ "artifact_type": "1nsi_current_risk_scheduler",
+ "schema_version": 1,
+ "generated_by": "instance B (codex/urgent-1nsi-content)",
+ "computed_from": "sources courantes de la branche uniquement — ni ETAT_COLLECTION, ni readiness matrix, ni audit historique",
+ "base_sha": "ec12c2b5bdac1ce6a7b77a42c5438c6564f4e3d9",
+ "approves_nothing": true,
+ "priority_order": "P0 discipline > FAUX CREDIT DE CAPACITE > contenu manquant > EX/CO casse > risque code > lacune de role > richesse > metadonnee",
+ "finding": "Les trois chapitres traites ou proteges sont a 0 % de clonage. Les sept autres sont a 84-92 %.",
+ "totals": {
+  "unprotected_chapters": 7,
+  "objects": 582,
+  "cloned": 513,
+  "clone_ratio": 0.88,
+  "exercises": 230,
+  "distinct_exercise_bodies": 35,
+  "corrections": 237,
+  "distinct_correction_bodies": 42
+ },
+ "next_target": "1NSI-WEB-IHM",
+ "next_target_reason": "plus grand volume (120 objets), plus fort taux de clonage (92 %), 9 capacites declarees pour 20 corps distincts",
+ "chapters": [
+  {
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "protected": true,
+   "objects": 27,
+   "distinct_bodies": 27,
+   "cloned_objects": 0,
+   "clone_ratio": 0.0,
+   "capacity_misrepresenting_clone_groups": 0,
+   "declared_capacities": 6,
+   "distinct_bodies_per_role": {
+    "cours": 3,
+    "methodes": 3,
+    "exercices": 5,
+    "corriges": 8,
+    "remediation": 3,
+    "qcm": 1,
+    "evaluations": 4
+   },
+   "authoring_units_missing": 0
+  },
+  {
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "protected": true,
+   "objects": 38,
+   "distinct_bodies": 38,
+   "cloned_objects": 0,
+   "clone_ratio": 0.0,
+   "capacity_misrepresenting_clone_groups": 0,
+   "declared_capacities": 6,
+   "distinct_bodies_per_role": {
+    "cours": 3,
+    "methodes": 6,
+    "exercices": 6,
+    "corriges": 12,
+    "remediation": 6,
+    "qcm": 1,
+    "evaluations": 4
+   },
+   "authoring_units_missing": 0
+  },
+  {
+   "chapter": "1NSI-ARCHITECTURE-OS",
+   "protected": false,
+   "objects": 76,
+   "distinct_bodies": 20,
+   "cloned_objects": 67,
+   "clone_ratio": 0.882,
+   "capacity_misrepresenting_clone_groups": 12,
+   "declared_capacities": 10,
+   "distinct_bodies_per_role": {
+    "cours": 3,
+    "methodes": 1,
+    "exercices": 5,
+    "corriges": 6,
+    "remediation": 1,
+    "qcm": 1,
+    "evaluations": 4
+   },
+   "authoring_units_missing": 56
+  },
+  {
+   "chapter": "1NSI-LANGAGE",
+   "protected": false,
+   "objects": 104,
+   "distinct_bodies": 22,
+   "cloned_objects": 93,
+   "clone_ratio": 0.894,
+   "capacity_misrepresenting_clone_groups": 12,
+   "declared_capacities": 14,
+   "distinct_bodies_per_role": {
+    "cours": 5,
+    "methodes": 1,
+    "exercices": 5,
+    "corriges": 6,
+    "remediation": 1,
+    "qcm": 1,
+    "evaluations": 4
+   },
+   "authoring_units_missing": 82
+  },
+  {
+   "chapter": "1NSI-PROJET-METHODES",
+   "protected": false,
+   "objects": 64,
+   "distinct_bodies": 21,
+   "cloned_objects": 54,
+   "clone_ratio": 0.844,
+   "capacity_misrepresenting_clone_groups": 12,
+   "declared_capacities": 8,
+   "distinct_bodies_per_role": {
+    "cours": 4,
+    "methodes": 1,
+    "exercices": 5,
+    "corriges": 6,
+    "remediation": 1,
+    "qcm": 1,
+    "evaluations": 4
+   },
+   "authoring_units_missing": 43
+  },
+  {
+   "chapter": "1NSI-RESEAUX",
+   "protected": false,
+   "objects": 76,
+   "distinct_bodies": 20,
+   "cloned_objects": 67,
+   "clone_ratio": 0.882,
+   "capacity_misrepresenting_clone_groups": 12,
+   "declared_capacities": 10,
+   "distinct_bodies_per_role": {
+    "cours": 3,
+    "methodes": 1,
+    "exercices": 5,
+    "corriges": 6,
+    "remediation": 1,
+    "qcm": 1,
+    "evaluations": 4
+   },
+   "authoring_units_missing": 56
+  },
+  {
+   "chapter": "1NSI-TABLES",
+   "protected": false,
+   "objects": 64,
+   "distinct_bodies": 21,
+   "cloned_objects": 54,
+   "clone_ratio": 0.844,
+   "capacity_misrepresenting_clone_groups": 12,
+   "declared_capacities": 8,
+   "distinct_bodies_per_role": {
+    "cours": 4,
+    "methodes": 1,
+    "exercices": 5,
+    "corriges": 6,
+    "remediation": 1,
+    "qcm": 1,
+    "evaluations": 4
+   },
+   "authoring_units_missing": 43
+  },
+  {
+   "chapter": "1NSI-TYPES-BASE",
+   "protected": false,
+   "objects": 78,
+   "distinct_bodies": 22,
+   "cloned_objects": 67,
+   "clone_ratio": 0.859,
+   "capacity_misrepresenting_clone_groups": 12,
+   "declared_capacities": 10,
+   "distinct_bodies_per_role": {
+    "cours": 5,
+    "methodes": 1,
+    "exercices": 5,
+    "corriges": 6,
+    "remediation": 1,
+    "qcm": 1,
+    "evaluations": 4
+   },
+   "authoring_units_missing": 56
+  },
+  {
+   "chapter": "1NSI-TYPES-CONSTRUITS",
+   "protected": true,
+   "objects": 129,
+   "distinct_bodies": 129,
+   "cloned_objects": 0,
+   "clone_ratio": 0.0,
+   "capacity_misrepresenting_clone_groups": 0,
+   "declared_capacities": 5,
+   "distinct_bodies_per_role": {
+    "cours": 7,
+    "methodes": 5,
+    "exercices": 55,
+    "corriges": 55,
+    "remediation": 1,
+    "qcm": 2,
+    "evaluations": 4
+   },
+   "authoring_units_missing": 0
+  },
+  {
+   "chapter": "1NSI-WEB-IHM",
+   "protected": false,
+   "objects": 120,
+   "distinct_bodies": 20,
+   "cloned_objects": 111,
+   "clone_ratio": 0.925,
+   "capacity_misrepresenting_clone_groups": 12,
+   "declared_capacities": 18,
+   "distinct_bodies_per_role": {
+    "cours": 3,
+    "methodes": 1,
+    "exercices": 5,
+    "corriges": 6,
+    "remediation": 1,
+    "qcm": 1,
+    "evaluations": 4
+   },
+   "authoring_units_missing": 100
+  }
+ ]
+}
