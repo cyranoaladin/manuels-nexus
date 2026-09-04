@@ -241,6 +241,33 @@ CANDIDATE_PROPOSALS: dict[str, dict[int, list[tuple[str, str]]]] = {
 }
 
 
+# Le geste que le sujet demande, lu sur son propre verbe -- même liste que le
+# producteur de propositions de barème commenté, et pour la même raison : c'est
+# le sujet qui dit ce qu'il évalue.
+_PROOF = re.compile(r"\bd[ée]montrer\b|\bprouver\b|\bjustifier\b|\bmontrer\b", re.I)
+_DEDUCTION = re.compile(r"\ben d[ée]duire\b|\bd'o[uù]\b", re.I)
+_GESTURES = (
+    (r"\bd[ée]montrer\b|\bprouver\b", "démontrer"),
+    (r"\bjustifier\b", "justifier"),
+    (r"\ben d[ée]duire\b", "en déduire"),
+    (r"\bd[ée]terminer\b", "déterminer"),
+    (r"\br[ée]soudre\b", "résoudre"),
+    (r"\bv[ée]rifier\b", "vérifier"),
+    (r"\bcalculer\b", "calculer"),
+    (r"\bexprimer\b", "exprimer"),
+    (r"\bmontrer\b", "montrer"),
+    (r"\bdonner\b|\bindiquer\b|\b[ée]crire\b", "donner"),
+)
+
+
+def _gesture_of(statement: str) -> str | None:
+    lowered = statement.lower()
+    for pattern, name in _GESTURES:
+        if re.search(pattern, lowered):
+            return name
+    return None
+
+
 def proposal_for(object_id: str) -> dict[int, list[tuple[str, str]]] | None:
     for prefix, proposal in CANDIDATE_PROPOSALS.items():
         if object_id.startswith(prefix):
@@ -800,6 +827,16 @@ def build(apply_changes: bool) -> dict[str, Any]:
 
     packet = []
     for row in human:
+        constraints = {
+            "required_total": row["declared_total"],
+            "duration_min": row["duration_min"],
+            "capacities": row["capacities"],
+            "exercise_totals": {
+                exercise["number"]: exercise["declared_total"]
+                for exercise in row["exercises"]
+            },
+            "the_subject_values_no_question_individually": True,
+        }
         proposal = proposal_for(row["object_id"])
         exercises = []
         for exercise in row["exercises"]:
@@ -823,6 +860,26 @@ def build(apply_changes: bool) -> dict[str, Any]:
                         {
                             "question": index,
                             "statement": statement,
+                            # Le geste que le sujet demande, lu sur son verbe.
+                            "reasoning_gesture": _gesture_of(statement),
+                            # Ce qu'on peut OBSERVER, et qui aide à juger sans
+                            # rien décider : la difficulté, l'autonomie exigée
+                            # de l'élève et la complexité scientifique sont des
+                            # jugements humains, et restent vides.
+                            "observable_indicators": {
+                                "statement_characters": len(statement),
+                                "asks_for_a_proof": bool(
+                                    _PROOF.search(statement)
+                                ),
+                                "chains_a_deduction": bool(
+                                    _DEDUCTION.search(statement)
+                                ),
+                            },
+                            "to_be_judged_by_a_human": {
+                                "difficulty": "",
+                                "student_autonomy": "",
+                                "scientific_complexity": "",
+                            },
                         }
                         for index, statement in enumerate(
                             exercise.get("statements", []), start=1
@@ -841,6 +898,16 @@ def build(apply_changes: bool) -> dict[str, Any]:
                 "object_id": row["object_id"],
                 "chapter": row["chapter"],
                 "version": row["version"],
+                "existing_subject_constraints": constraints,
+                "what_each_reviewer_owns": {
+                    "EXPERT_PROGRAMME_PEDAGOGIE": (
+                        "le verdict final de répartition des points"
+                    ),
+                    "EXPERT_MATHEMATIQUE": (
+                        "la difficulté scientifique, la charge de travail "
+                        "mathématique et la cohérence des poids relatifs"
+                    ),
+                },
                 "duration_min": row["duration_min"],
                 "declared_total": row["declared_total"],
                 "capacities": row["capacities"],
