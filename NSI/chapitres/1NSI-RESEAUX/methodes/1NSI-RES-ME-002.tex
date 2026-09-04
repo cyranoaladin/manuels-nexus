@@ -1,0 +1,67 @@
+% META: {"id": "1NSI-RES-ME-002", "chapitre": "1NSI-RESEAUX", "type_objet": "methode", "capacites": ["P-ARCH-02B"], "capacites_codes": ["C2"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def protocole_bit_alterne(messages, tentatives_perdues):
+%     resultat = []
+%     journal = []
+%     bit = 0
+%     compteur = 0
+%     for message in messages:
+%         recu = False
+%         while not recu:
+%             compteur += 1
+%             if compteur in tentatives_perdues:
+%                 journal.append((compteur, message, bit, "perdu"))
+%                 continue
+%             journal.append((compteur, message, bit, "recu"))
+%             resultat.append((bit, message))
+%             recu = True
+%         bit = 1 - bit
+%     return resultat, journal
+% recus, journal = protocole_bit_alterne(["A", "B", "C", "D"], {2, 3})
+% assert journal == [
+%     (1, "A", 0, "recu"),
+%     (2, "B", 1, "perdu"),
+%     (3, "B", 1, "perdu"),
+%     (4, "B", 1, "recu"),
+%     (5, "C", 0, "recu"),
+%     (6, "D", 1, "recu"),
+% ]
+% assert recus == [(0, "A"), (1, "B"), (0, "C"), (1, "D")]
+% assert len(journal) == len(["A", "B", "C", "D"]) + len({2, 3})
+% END-VERIFY
+\begin{fichemethode}{M2}{Dérouler le bit alterné dans un tableau à quatre colonnes}
+
+\textbf{Quand l'utiliser ?} Quand l'énoncé donne une liste de messages et des numéros de
+tentatives perdues, et demande ce que reçoit le destinataire, avec quels bits, ou combien
+de tentatives ont été nécessaires.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Dresse un tableau} à quatre colonnes : numéro de tentative, message envoyé,
+        bit, résultat (reçu ou perdu). Une ligne par tentative, en commençant à $1$ avec le
+        bit $0$.
+  \item \textbf{Regarde d'abord la colonne « perdu »} : le numéro de la tentative est dans
+        l'ensemble des pertes ? Alors la ligne est perdue et \textbf{la ligne suivante répète
+        le même message avec le même bit}. Le bit ne bouge pas tant que le message n'est pas
+        passé.
+  \item \textbf{Alterne le bit seulement après une ligne « reçu »} : $0$ devient $1$, $1$
+        devient $0$, et l'on passe au message suivant.
+  \item \textbf{Conclus} en lisant les lignes « reçu » de haut en bas : ce sont, dans
+        l'ordre, les couples (bit, message) reçus. Le nombre de lignes du tableau est le
+        nombre de tentatives ; il vaut le nombre de messages plus le nombre de pertes.
+\end{enumerate}
+
+\textbf{Exemple rédigé.} Messages \lstinline{["A", "B", "C", "D"]}, tentatives perdues
+$\{2, 3\}$. Tentative $1$ : \lstinline{"A"}, bit $0$, reçu. Tentative $2$ : \lstinline{"B"},
+bit $1$, perdu. Tentative $3$ : encore \lstinline{"B"}, encore bit $1$, perdu. Tentative $4$ :
+encore \lstinline{"B"}, bit $1$, reçu. Tentative $5$ : \lstinline{"C"}, bit $0$, reçu.
+Tentative $6$ : \lstinline{"D"}, bit $1$, reçu. Le destinataire obtient
+\lstinline{[(0, "A"), (1, "B"), (0, "C"), (1, "D")]} en $6$ tentatives : $4$ messages plus
+$2$ pertes.
+
+\textbf{Erreur fréquente.} Changer le bit à chaque tentative, y compris après une perte.
+Le récepteur croirait alors recevoir un \emph{nouveau} message et ne réclamerait jamais celui
+qui manque. Autre erreur : passer au message suivant après une perte, comme si le protocole
+abandonnait ; il retransmet toujours.
+
+\end{fichemethode}
