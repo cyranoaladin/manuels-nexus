@@ -480,6 +480,16 @@ def build(global_capture: Path | None, gate_capture: Path | None) -> dict[str, A
 
     if gate_capture is not None:
         observed = parse_capture(gate_capture)
+        # Un verdict sans son reçu n'est pas rejouable : la commande, l'horaire,
+        # l'état de l'arbre avant et après, et l'empreinte du journal disent
+        # SUR QUOI ce PASS a été prononcé.
+        metadata_path = gate_capture.with_name("run-meta.txt")
+        if metadata_path.is_file():
+            payload["gate_run_receipt"] = dict(
+                line.split("=", 1)
+                for line in metadata_path.read_text(encoding="utf-8").splitlines()
+                if "=" in line
+            )
         failures = observed["failed_node_ids"] + observed["error_node_ids"]
         payload["gate_run"] = {
             **observed,
