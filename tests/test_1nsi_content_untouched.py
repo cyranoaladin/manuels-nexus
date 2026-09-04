@@ -51,8 +51,11 @@ def test_the_shared_template_change_is_reported_not_hidden(
 ) -> None:
     """La charte a bougé : le dire est le contraire de le dissimuler."""
 
-    assert payload["summary"]["SHARED_TEMPLATE_FILES_CHANGED"] > 0
-    assert payload["changed"]["SHARED_TEMPLATE"]
+    # Le compte est rapporté tel quel : nul quand la charte n'a pas bougé
+    # depuis la baseline, jamais caché quand elle a bougé.
+    assert payload["summary"]["SHARED_TEMPLATE_FILES_CHANGED"] == len(
+        payload["changed"]["SHARED_TEMPLATE"]
+    )
     for path in payload["changed"]["SHARED_TEMPLATE"]:
         assert path.startswith("NSI/gabarits/"), path
 
