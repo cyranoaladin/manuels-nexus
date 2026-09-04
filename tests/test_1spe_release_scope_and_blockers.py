@@ -163,6 +163,10 @@ def test_the_ledger_only_holds_what_can_reach_the_1spe_release(
         "1SPE_BUILD",
         "1SPE_STYLE_RENDER",
         "1SPE_PRINT_ARTIFACT",
+        # Le rattachement d'une capacite du contrat a ses attendus officiels
+        # n'est ni du contenu, ni du rendu : c'est l'autorite de programme, que
+        # la gouvernance de revue nomme deja ainsi (`programme_authority_digest`).
+        "1SPE_PROGRAMME_AUTHORITY",
     }
     for row in blockers["blockers"]:
         assert row["scope"] in allowed, row["blocker_id"]
