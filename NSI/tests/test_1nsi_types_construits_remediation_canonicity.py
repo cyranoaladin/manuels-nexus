@@ -17,18 +17,10 @@ import json
 import re
 from pathlib import Path
 
-import pytest
-
-# Le defaut est constate et non corrige : le retirer suppose de retirer cinq
-# sources d'une campagne de relecture humaine SCELLEE (339 objets, digests
-# sha256, cf. test_1nsi_content_reviews.py). Rescelller cette campagne n'est pas
-# du ressort de cette branche satellite : la demande est portee par
-# audit/1nsi-local/SHARED_INFRA_INTEGRATION_REQUESTS.md (INT-004).
-# `strict=True` : ces tests redeviennent bloquants des que le defaut est corrige.
-DEFAUT_OUVERT = pytest.mark.xfail(
-    strict=True,
-    reason="INT-004 : cinq copies de remediation figurent dans une campagne de relecture scellee",
-)
+# INT-004 est ferme : les cinq copies ont ete retirees (0ca6f92b) et les deux
+# registres d'attente 1NSI re-observes par le mecanisme canonique. Ces tests
+# sont desormais des invariants permanents, sans dette temporaire.
+COPIES_RETIREES = [f"1NSI-TC-REMED-0{n}" for n in range(1, 6)]
 
 CHAPITRE = "1NSI-TYPES-CONSTRUITS"
 RACINE = Path(__file__).resolve().parents[1] / "chapitres" / CHAPITRE
@@ -63,7 +55,6 @@ def _objets() -> list[tuple[str, Path, frozenset[str], str]]:
     return sortie
 
 
-@DEFAUT_OUVERT
 def test_aucun_clone_revendiquant_des_capacites_differentes():
     """Un corps partage entre deux capacites differentes est un faux credit."""
     par_corps: dict[str, list[tuple[str, frozenset[str]]]] = {}
@@ -78,7 +69,6 @@ def test_aucun_clone_revendiquant_des_capacites_differentes():
     assert fautifs == {}, f"clones revendiquant des capacites differentes : {fautifs}"
 
 
-@DEFAUT_OUVERT
 def test_une_seule_remediation_par_corps():
     """Deux fichiers de remediation ne doivent pas porter le meme corps."""
     digests: dict[str, list[str]] = {}
@@ -109,3 +99,10 @@ def test_chaque_capacite_garde_une_remediation():
         if path.parent.name == "remediation":
             couvertes |= capacites
     assert CAPACITES <= couvertes, f"capacites sans remediation : {sorted(CAPACITES - couvertes)}"
+
+
+def test_les_cinq_copies_redondantes_sont_absentes():
+    """INT-004 : les cinq copies ne doivent jamais revenir."""
+    presents = {objet_id for objet_id, _, _, _ in _objets()}
+    revenus = sorted(set(COPIES_RETIREES) & presents)
+    assert revenus == [], f"copies redondantes reapparues : {revenus}"
