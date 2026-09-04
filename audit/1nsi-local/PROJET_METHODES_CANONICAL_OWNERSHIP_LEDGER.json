@@ -1,0 +1,82 @@
+{
+  "artifact_type": "projet_methodes_canonical_ownership_ledger",
+  "schema_version": 1,
+  "chapter": "1NSI-PROJET-METHODES",
+  "generated_by": "instance B2 (codex/urgent-1nsi-content)",
+  "observed_at_head": "30de9677 (avant toute mutation du chapitre)",
+  "approves_nothing": true,
+  "why_this_chapter_is_atypical": "Trois des quatre capacites du contrat (C2, C3, C4) ne portent aucun atome P-XXX du referentiel : elles sont sourcees du preambule du B.O. (demarche de projet, competences methodologiques, competences orales) et identifiees par des references contractuelles BO-PREAMBULE-*. La regle « le seul membre portant la reference officielle du referentiel est le canonique » ne peut donc pas s'appliquer mecaniquement. La selection ci-dessous est semantique et contractuelle : pour chaque groupe, le canonique est le membre dont le corps enseigne effectivement la capacite que declare sa META, verifie par relecture du corps et par execution de son bloc VERIFY.",
+  "capacity_identity": {
+    "authority_chain": "contrat.yaml (code local -> ref contractuelle) -> audit/CAPACITY_ALIAS_MAP.json (canonical_uid 1NSI::1NSI-PROJET-METHODES::Cn -> official_ref) -> audit/MANDATORY_UNMAPPED_ATOMS_CLOSURE.json (atomes officiels 1NSI-OFFICIAL-*, NOR MENE1901633A)",
+    "resolution": {
+      "C1": {"local_scoped_key": "1NSI-PROJET-METHODES-C1", "contract_ref": "P-HIST-01", "referentiel": "capacites_1NSI_HISTOIRE-DE-L-INFORMATIQUE.json", "status": "OFFICIAL_ATOM"},
+      "C2": {"local_scoped_key": "1NSI-PROJET-METHODES-C2", "contract_ref": "BO-PREAMBULE-DEMARCHE-DE-PROJET", "referentiel": "aucun tableau Contenus/Capacites ; preambule du B.O., section Demarche de projet (au moins un quart de l'horaire)", "status": "CONTRACTUAL_PREAMBLE_REF_KNOWN_TO_SHARED_ALIAS_MAP"},
+      "C3": {"local_scoped_key": "1NSI-PROJET-METHODES-C3", "contract_ref": "BO-PREAMBULE-COMPETENCES-METHODE", "referentiel": "preambule du B.O., competences methodologiques (deboguer, lire un message d'erreur)", "status": "CONTRACTUAL_PREAMBLE_REF_KNOWN_TO_SHARED_ALIAS_MAP"},
+      "C4": {"local_scoped_key": "1NSI-PROJET-METHODES-C4", "contract_ref": "BO-PREAMBULE-COMPETENCES-ORALES", "referentiel": "preambule du B.O., competences orales et documentation", "status": "CONTRACTUAL_PREAMBLE_REF_KNOWN_TO_SHARED_ALIAS_MAP"}
+    },
+    "collisions": 0,
+    "unknown": 0,
+    "terminale_capacities_present": 0,
+    "foreign_discipline_content": 0
+  },
+  "provenance": {
+    "canonical_objects_authored_in": "22b9dc9b [1NSI-PROJET-METHODES][LOT-0..7] chapitre complet",
+    "synthetic_copies_added_in": "533d1919 [LATEX] update mode_emploi.tex to v6 charte and 11-step Nexus loop",
+    "assembly_ownership": "chapitre assemble par scripts/assemble.py depuis chapitres/1NSI-PROJET-METHODES ; aucun objet n'est partage avec un autre chapitre ; aucun mecanisme d'usage multiple d'un meme corps n'existe dans l'architecture (un objet = un fichier, R5)",
+    "references_to_copies_outside_themselves": 0
+  },
+  "clone_groups": [
+    {"group": "G01", "body_digest": "08ac4647f944", "members": ["1NSI-PM-EX-001", "1NSI-PM-EX-006", "1NSI-PM-EX-011", "1NSI-PM-EX-016", "1NSI-PM-EX-021"],
+     "actual_topic": "chronologie : sorted, evenements_entre entre 1900 et 1980, Pascaline vs machine universelle",
+     "declared_capacities": {"1NSI-PM-EX-001": ["P-HIST-01"], "copies": ["C1", "C2", "C3", "C4"]},
+     "pedagogical_fit": "le corps n'enseigne que C1 (situer des evenements et leurs protagonistes)",
+     "canonical": "1NSI-PM-EX-001", "reason": "seul membre dont la declaration correspond au sujet ; les copies declarant C2, C3, C4 sont de faux credits de capacite", "disposition": "KEEP_CANONICAL_DELETE_COPIES"},
+    {"group": "G02", "body_digest": "25bd1c8cffba", "members": ["1NSI-PM-EX-002", "1NSI-PM-EX-007", "1NSI-PM-EX-012", "1NSI-PM-EX-017", "1NSI-PM-EX-022"],
+     "actual_topic": "jalons d'un jeu video : avancement, prochain_jalon, limite du pourcentage",
+     "declared_capacities": {"1NSI-PM-EX-002": ["BO-PREAMBULE-DEMARCHE-DE-PROJET"], "copies": ["C2", "C2", "C3", "C4"]},
+     "pedagogical_fit": "le corps n'enseigne que C2 (demarche de projet)",
+     "canonical": "1NSI-PM-EX-002", "reason": "correspondance sujet/capacite ; EX-007 declare aussi C2 mais est une copie identique sans usage distinct : un contenu, un fichier", "disposition": "KEEP_CANONICAL_DELETE_COPIES"},
+    {"group": "G03", "body_digest": "11a12ffd6b40", "members": ["1NSI-PM-EX-003", "1NSI-PM-EX-008", "1NSI-PM-EX-013", "1NSI-PM-EX-018", "1NSI-PM-EX-023"],
+     "actual_topic": "KeyError sur un dictionnaire de notes, demarche methodique, correction",
+     "declared_capacities": {"1NSI-PM-EX-003": ["BO-PREAMBULE-COMPETENCES-METHODE"], "copies": ["C2", "C3", "C3", "C4"]},
+     "pedagogical_fit": "le corps n'enseigne que C3 (deboguer)",
+     "canonical": "1NSI-PM-EX-003", "reason": "correspondance sujet/capacite", "disposition": "KEEP_CANONICAL_DELETE_COPIES"},
+    {"group": "G04", "body_digest": "0217dd4f8de4", "members": ["1NSI-PM-EX-004", "1NSI-PM-EX-009", "1NSI-PM-EX-014", "1NSI-PM-EX-019", "1NSI-PM-EX-024"],
+     "actual_topic": "docstring d'un tri par insertion, a_une_docstring, trois points pour un oral",
+     "declared_capacities": {"1NSI-PM-EX-004": ["BO-PREAMBULE-COMPETENCES-ORALES"], "copies": ["C2", "C3", "C4", "C4"]},
+     "pedagogical_fit": "le corps n'enseigne que C4 (documenter, presenter)",
+     "canonical": "1NSI-PM-EX-004", "reason": "correspondance sujet/capacite", "disposition": "KEEP_CANONICAL_DELETE_COPIES"},
+    {"group": "G05", "body_digest": "7f740edc305c", "members": ["1NSI-PM-EX-005", "1NSI-PM-EX-010", "1NSI-PM-EX-015", "1NSI-PM-EX-020"],
+     "actual_topic": "off-by-one dans rechercher_participant la veille d'une presentation ; decision d'equipe",
+     "declared_capacities": {"1NSI-PM-EX-005": ["BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE"], "copies": ["C2", "C3", "C4"]},
+     "pedagogical_fit": "exercice multi-capacites authentique : questions 1 et 2 = C3 (lire la boucle, corriger), question 3 = C2 (decision de projet, ambition raisonnable)",
+     "question_level_mapping": {"1": "BO-PREAMBULE-COMPETENCES-METHODE", "2": "BO-PREAMBULE-COMPETENCES-METHODE", "3": "BO-PREAMBULE-DEMARCHE-DE-PROJET"},
+     "canonical": "1NSI-PM-EX-005", "reason": "la META globale a deux capacites est legitime parce que le mapping question -> capacite est reel et explicite ; il est desormais inscrit dans le fichier (ligne CAPACITY-MAP)", "disposition": "KEEP_CANONICAL_DELETE_COPIES"},
+    {"group": "G06", "body_digest": "1d363f0a0571", "members": ["1NSI-PM-CO-001", "1NSI-PM-CO-007", "1NSI-PM-CO-013", "1NSI-PM-CO-019"], "canonical": "1NSI-PM-CO-001", "reason": "corrige de EX-001, meme capacite P-HIST-01 ; les copies referencent EX-001 en declarant C2/C3/C4", "disposition": "KEEP_CANONICAL_DELETE_COPIES"},
+    {"group": "G07", "body_digest": "d8997e18626b", "members": ["1NSI-PM-CO-002", "1NSI-PM-CO-008", "1NSI-PM-CO-014", "1NSI-PM-CO-020"], "canonical": "1NSI-PM-CO-002", "reason": "corrige de EX-002, C2", "disposition": "KEEP_CANONICAL_DELETE_COPIES"},
+    {"group": "G08", "body_digest": "3cab36c55894", "members": ["1NSI-PM-CO-003", "1NSI-PM-CO-009", "1NSI-PM-CO-015", "1NSI-PM-CO-021"], "canonical": "1NSI-PM-CO-003", "reason": "corrige de EX-003, C3", "disposition": "KEEP_CANONICAL_DELETE_COPIES"},
+    {"group": "G09", "body_digest": "891a9667145b", "members": ["1NSI-PM-CO-004", "1NSI-PM-CO-010", "1NSI-PM-CO-016", "1NSI-PM-CO-022"], "canonical": "1NSI-PM-CO-004", "reason": "corrige de EX-004, C4", "disposition": "KEEP_CANONICAL_DELETE_COPIES"},
+    {"group": "G10", "body_digest": "0c975fe8dcbf", "members": ["1NSI-PM-CO-005", "1NSI-PM-CO-011", "1NSI-PM-CO-017", "1NSI-PM-CO-023"], "canonical": "1NSI-PM-CO-005", "reason": "corrige de EX-005, meme mapping question -> capacite que l'exercice", "disposition": "KEEP_CANONICAL_DELETE_COPIES"},
+    {"group": "G11", "body_digest": "1880b9b03a18", "members": ["1NSI-PM-RE-C3", "1NSI-PM-REMED-01", "1NSI-PM-REMED-02", "1NSI-PM-REMED-03", "1NSI-PM-REMED-04"],
+     "actual_topic": "TypeError str + int dans un message de bienvenue",
+     "declared_capacities": {"1NSI-PM-RE-C3": ["BO-PREAMBULE-COMPETENCES-METHODE"], "copies": ["C1", "C2", "C3", "C4"]},
+     "pedagogical_fit": "la fiche ne remedie qu'a une misconception de C3",
+     "canonical": "1NSI-PM-RE-C3", "reason": "correspondance sujet/capacite ; objet epingle par NSI/tests/test_remediation_separation.py, conserve a l'identique", "disposition": "KEEP_CANONICAL_DELETE_COPIES"},
+    {"group": "G12", "body_digest": "66ae51c72012", "members": ["1NSI-PM-RE-C3-CORRIGE", "1NSI-PM-CO-006", "1NSI-PM-CO-012", "1NSI-PM-CO-018", "1NSI-PM-CO-024"], "canonical": "1NSI-PM-RE-C3-CORRIGE", "reason": "corrige de RE-C3 ; les copies referencent RE-C3 en declarant C1..C4", "disposition": "KEEP_CANONICAL_DELETE_COPIES"}
+  ],
+  "no_valid_canonical_groups": 0,
+  "legitimate_shared_content_cases": 0,
+  "false_capacity_credits_removed": 42,
+  "deleted_synthetic_object_set": {
+    "exercices": "1NSI-PM-EX-006 .. 1NSI-PM-EX-024 (19)",
+    "corriges": "1NSI-PM-CO-006 .. 1NSI-PM-CO-024 (19)",
+    "remediation": "1NSI-PM-REMED-01 .. 1NSI-PM-REMED-04 (4)",
+    "methodes": "1NSI-PROJET-METHODES-METH-01 (stub de 95 caracteres sans capacite)"
+  },
+  "true_coverage_after_disposition": {
+    "cells": 28,
+    "cours": "4/4", "exercices": "4/4 (EX-005 compte pour C2 et C3 au niveau question)", "corriges": "4/4", "qcm": "4/4 (Q1 C1, Q2-Q3 C2, Q4 C3, Q5-Q6 C4)",
+    "methodes": "0/4", "remediation": "1/4 (C3 seulement)", "evaluations": "3/4 (C4 n'est evaluee ni en A ni en B)",
+    "missing_cells": 8
+  }
+}
