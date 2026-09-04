@@ -1,0 +1,60 @@
+{
+  "artifact_type": "chapter_local_machine_seal",
+  "schema_version": 1,
+  "chapter": "1NSI-TYPES-CONSTRUITS",
+  "generated_by": "instance B (codex/urgent-1nsi-content)",
+  "base_sha": "ec12c2b5bdac1ce6a7b77a42c5438c6564f4e3d9",
+  "scope": "LOCAL_SATELLITE_ONLY",
+  "approves_nothing": true,
+  "grants_no_publication_approval": true,
+  "human_reviews": "toutes futures — aucun reçu, aucun verdict, aucun relecteur assigné",
+  "status": "PROTECTED_LOCAL_MACHINE_COMPLETE",
+
+  "two_kinds_of_evidence_never_merged": {
+    "SCIENTIFIC_EXECUTION_EVIDENCE": {
+      "question": "le code fait-il ce qui est écrit ?",
+      "method": "exécution réelle, jamais lecture",
+      "results": {
+        "verify_python_check": "121 OK / 0 FAIL / 7 sans bloc exécutable",
+        "remediation_reinvestment_tasks": "17/17",
+        "qcm_answers_and_key_distractors": "21/21",
+        "ex_co_traces_for_the_7_non_executable": "6/6 corrigés citant la sortie réelle"
+      },
+      "REMEDIATION_SCIENCE_UNRESOLVED": 0
+    },
+    "PEDAGOGICAL_SEMANTIC_ALIGNMENT_EVIDENCE": {
+      "question": "l'objet enseigne-t-il bien la capacité qu'il revendique ?",
+      "method": "cartographie misconception → capacité, établie par inspection du contenu",
+      "remediation_map": {
+        "R1": {"misconception": "confondre tuple et liste", "capacity": "C1", "corrective": "() non mutable / [] mutable", "reinvestment": "1NSI-TC-REM-R1"},
+        "R2": {"misconception": "ne pas savoir parcourir un tableau", "capacity": "C2", "corrective": "for element / for i in range(len)", "reinvestment": "1NSI-TC-REM-R2"},
+        "R3": {"misconception": "confondre lignes et colonnes", "capacity": "C3", "corrective": "grille[i][j], i ligne, j colonne", "reinvestment": "1NSI-TC-REM-R3"},
+        "R4": {"misconception": "KeyError sur un dictionnaire", "capacity": "C4", "corrective": "`in` ou .get(cle, defaut)", "reinvestment": "1NSI-TC-REM-R4"},
+        "R5": {"misconception": "l'original modifié par un alias", "capacity": "C5", "corrective": "b = a contre b = list(a)", "reinvestment": "1NSI-TC-REM-R5"}
+      },
+      "REMEDIATION_ALIGNMENT_UNRESOLVED": 0
+    }
+  },
+
+  "local_gates": {
+    "PROGRAMME": "PASS",
+    "EX_CO_STRUCTURE": "PASS",
+    "EX_CO_SEMANTIC": "PASS",
+    "CODE": "PASS",
+    "ROLE_COVERAGE": "PASS",
+    "RICHNESS": "PASS",
+    "QCM": "PASS",
+    "ASSESSMENT": "PASS",
+    "REMEDIATION": "PASS",
+    "CLONES": "PASS",
+    "NEAR_CLONES": "PASS",
+    "CROSS_DISCIPLINE": "PASS",
+    "NARRATIVE": "PASS",
+    "TARGETED_RENDER": "PASS",
+    "UNKNOWN": 0
+  },
+
+  "capacity_role_matrix": "audit/1nsi-local/TYPES_CONSTRUITS_CAPACITY_ROLE_MATRIX.json — 35/35 cellules PASS, REQUIRED_ROLE_GAPS 0, FALSE_ROLE_CREDITS 0",
+  "targeted_render": "NSI/build/1NSI-TYPES-CONSTRUITS complet — 44 pages, 0 glyphe manquant, 0 overfull, 0 underfull, 0 erreur",
+  "reopening_rule": "Ne pas rouvrir pour refactor, style, ou renforcement de preuve. Un constat courant est exigé."
+}
