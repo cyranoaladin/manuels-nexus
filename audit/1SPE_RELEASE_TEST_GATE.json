@@ -119,6 +119,7 @@
     "tests/test_1nsi_content_untouched.py",
     "tests/test_1spe_assessment_bareme_transcription.py",
     "tests/test_1spe_assessment_variant_declarations.py",
+    "tests/test_1spe_bareme_commentary_proposal.py",
     "tests/test_1spe_bareme_commentary_request.py",
     "tests/test_1spe_chapter_opener_raster_qa.py",
     "tests/test_1spe_chapter_opener_span.py",
@@ -249,16 +250,16 @@
     "error_node_ids": [],
     "failed": 0,
     "failed_node_ids": [],
-    "passed": 9786
+    "passed": 9808
   },
   "gate_run_receipt": {
-    "COMMAND": "python -m pytest $(cat gate-modules.txt) -p no:cacheprovider -p no:randomly -q --no-header -rf",
-    "END": "2026-09-04T06:12:39+01:00",
-    "GATE_LOG_SHA256": "sha256:c854719c585e476117a3a334eee2105952cda5a2b78d6bb33b15e5cf0420854a",
+    "COMMAND": "python -m pytest $(cat gate-modules.txt) -p no:cacheprovider -p no:randomly -q --no-header -rfsE",
+    "END": "2026-09-04T11:10:06+01:00",
+    "GATE_LOG_SHA256": "sha256:7a4396db30b257d482e86e40883367a6acf4786bd92c785b7fe0001d37ed0d30",
     "GATE_RC": "0",
-    "MODULES": "172",
-    "SOURCE_SHA": "3eddce26b7d21837573f7ca484ae6ac1019ad49e",
-    "START": "2026-09-04T05:13:50+01:00",
+    "MODULES": "173",
+    "SOURCE_SHA": "d3a4d4a52ba6783a235d54ca71555d897e2eb172",
+    "START": "2026-09-04T10:03:06+01:00",
     "TREE_AFTER": "0",
     "TREE_BEFORE": "0"
   },
@@ -3393,6 +3394,16 @@
     {
       "designated_1spe_paths": [],
       "designated_nsi_paths": [],
+      "designated_path_count": 3,
+      "designated_shared_paths": [],
+      "mentions_1spe_in_source": true,
+      "module": "tests/test_1spe_bareme_commentary_proposal.py",
+      "reason": "names the 1SPE manual or its tree in its own source",
+      "scope": "IN_1SPE_RELEASE_SCOPE"
+    },
+    {
+      "designated_1spe_paths": [],
+      "designated_nsi_paths": [],
       "designated_path_count": 2,
       "designated_shared_paths": [],
       "mentions_1spe_in_source": false,
@@ -5000,14 +5011,14 @@
       "scripts/manual_source_surface.py"
     ]
   },
-  "source_sha": "c47de7f9a707960ab0c599e9f9b17d12b0788934",
+  "source_sha": "d3a4d4a52ba6783a235d54ca71555d897e2eb172",
   "summary": {
     "1SPE_RELEASE_TEST_GATE": "PASS",
     "GATE_FAILURES": 0,
-    "GATE_MODULES": 172,
+    "GATE_MODULES": 173,
     "MANUAL_1NSI_EXCLUSIVE_MODULES": 8,
     "SHARED_RUNTIME_USED_BY_1SPE_SIZE": 67,
-    "TEST_MODULES": 180,
+    "TEST_MODULES": 181,
     "UNKNOWN_SCOPE": 0
   },
   "this_is_not_a_pytest_exception": "aucun test n'est desactive, skippe ou xfail par cet artefact ; il nomme le perimetre qu'une release scopee 1SPE doit voir vert"

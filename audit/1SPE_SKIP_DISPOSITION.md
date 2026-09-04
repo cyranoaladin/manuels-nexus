@@ -4,26 +4,20 @@
 
 > Interdit pour atteindre zéro : Ajouter un skipif opportunément, poser un xfail, exclure un marqueur, rétrécir le chemin des tests. Un test tourne, ou il est réellement non applicable et le prouve.
 
-Capture lue : `sha256:a1d28edf2ff303009bc…`
+Capture lue : `sha256:7a4396db30b257d482e…`
 
 ## Métriques
 
 | Métrique | Valeur |
 |---|---:|
-| `SKIPPED_OBSERVED` | 1 |
-| `DISPOSED` | 1 |
+| `SKIPPED_OBSERVED` | 0 |
+| `DISPOSED` | 0 |
 | `UNKNOWN_SKIPPED` | 0 |
-| `RELEASE_RELEVANT_SKIPPED` | 1 |
-| `MUST_RUN_STILL_SKIPPING` | 1 |
+| `RELEASE_RELEVANT_SKIPPED` | 0 |
+| `MUST_RUN_STILL_SKIPPING` | 0 |
 | `EXPECTED_NOT_APPLICABLE_WITH_PROOF` | 0 |
 
 ## Skips observés et leur disposition
 
 | Test | Raison | Portée | Pertinence | Disposition |
 |---|---|---|---|---|
-| `tests/test_1spe_proba_cond_tree_figures.py::test_les_feuilles_somment_a_un_quand_l_arbre_est_complet[019]` | arbre volontairement partiel (EX-019) | `1SPE_RELEASE_SCOPE` | `RELEASE_RELEVANT` | `MUST_RUN` |
-
-### `tests/test_1spe_proba_cond_tree_figures.py:466`
-
-L'arbre d'EX-019 ne développe que la branche rouge : ses feuilles ne somment pas à un, et le contrôle passait son tour. Le comportement est pourtant déterministe -- la masse des feuilles tracées se calcule sur l'énoncé. Le skip est remplacé par une assertion : masse attendue, arbre bien tronqué, feuilles exactement celles que l'énoncé déclare, aucune branche ajoutée.
-

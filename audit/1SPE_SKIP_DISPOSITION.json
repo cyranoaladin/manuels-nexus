@@ -1,30 +1,16 @@
 {
   "artifact_type": "1spe_skip_disposition",
   "capture": "/tmp/claude-1000/-home-alaeddine-Documents-Manuels-Nexus--worktrees-t3-publish-readiness/883b1e8e-1ecc-4b5f-b596-67968ae64ca7/scratchpad/suite/gate.txt",
-  "capture_sha256": "sha256:a1d28edf2ff303009bce8260777c285ae8ecdbc658741fd8fcfa9f1d8d2f634a",
+  "capture_sha256": "sha256:7a4396db30b257d482e86e40883367a6acf4786bd92c785b7fe0001d37ed0d30",
   "generated_by": "scripts/build_1spe_skip_disposition.py",
   "schema_version": 1,
-  "skips": [
-    {
-      "closed_by": "tests/test_1spe_proba_cond_tree_figures.py",
-      "count": 1,
-      "disposition": "MUST_RUN",
-      "key": "tests/test_1spe_proba_cond_tree_figures.py:466",
-      "line": 466,
-      "reason": "arbre volontairement partiel (EX-019)",
-      "release_relevance": "RELEASE_RELEVANT",
-      "resolution": "L'arbre d'EX-019 ne développe que la branche rouge : ses feuilles ne somment pas à un, et le contrôle passait son tour. Le comportement est pourtant déterministe -- la masse des feuilles tracées se calcule sur l'énoncé. Le skip est remplacé par une assertion : masse attendue, arbre bien tronqué, feuilles exactement celles que l'énoncé déclare, aucune branche ajoutée.",
-      "scope": "1SPE_RELEASE_SCOPE",
-      "source": "tests/test_1spe_proba_cond_tree_figures.py",
-      "test_id": "tests/test_1spe_proba_cond_tree_figures.py::test_les_feuilles_somment_a_un_quand_l_arbre_est_complet[019]"
-    }
-  ],
+  "skips": [],
   "summary": {
-    "DISPOSED": 1,
+    "DISPOSED": 0,
     "EXPECTED_NOT_APPLICABLE_WITH_PROOF": 0,
-    "MUST_RUN_STILL_SKIPPING": 1,
-    "RELEASE_RELEVANT_SKIPPED": 1,
-    "SKIPPED_OBSERVED": 1,
+    "MUST_RUN_STILL_SKIPPING": 0,
+    "RELEASE_RELEVANT_SKIPPED": 0,
+    "SKIPPED_OBSERVED": 0,
     "UNKNOWN_SKIPPED": 0
   },
   "undisposed": [],
