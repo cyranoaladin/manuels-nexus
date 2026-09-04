@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><title>1SPE-EXPONENTIELLE — A-EXPERT_MATHEMATIQUE</title><style>
+body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+max-width:52rem;margin:2rem auto;padding:0 1.2rem;color:#1a1a1a}
+h1{font-size:1.6rem}h2{font-size:1.25rem;margin-top:2.2rem;
+border-bottom:1px solid #ddd;padding-bottom:.3rem}
+h3{font-size:1.05rem;margin-top:1.6rem}
+code{background:#f4f4f6;padding:.1em .3em;border-radius:3px;font-size:.9em}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.92rem}
+th,td{border:1px solid #ddd;padding:.4rem .6rem;text-align:left}
+th{background:#f7f7f9}
+blockquote{border-left:3px solid #c8102e;margin:1rem 0;padding:.4rem 1rem;
+background:#fbf5f6}
+.mandatory{background:#fff4e5;border-left:3px solid #d97706;padding:.6rem 1rem}
+.form{background:#f7f7f9;border:1px solid #ddd;padding:1rem;border-radius:4px}
+</style><script>window.MathJax={tex:{inlineMath:[["$","$"]],displayMath:[["\\[","\\]"]],processEscapes:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre"]}};</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body>
+<h1>Vue de lecture — Fonction exponentielle — EXPERT_MATHEMATIQUE</h1>
+<p>Chapitre <code>1SPE-EXPONENTIELLE</code> · manuel <code>1SPE</code> (Première, Spécialité mathématiques) · packet A · role <code>EXPERT_MATHEMATIQUE</code>.</p>
+<blockquote><strong>Cette vue est derivee et sans autorite. L&#x27;autorite machine reste le packet JSON canonique.</strong></blockquote>
+<blockquote></blockquote>
+<blockquote>Packet canonique : <code>audit/reviews/human/1SPE-EXPONENTIELLE/packet-A-EXPERT_MATHEMATIQUE.json</code></blockquote>
+<blockquote>Etat de revue : <code>audit/reviews/human/1SPE-EXPONENTIELLE/REVIEW_STATE.json</code></blockquote>
+<blockquote>Producteur de cette vue : <code>scripts/build_human_review_reading_views.py</code></blockquote>
+<blockquote></blockquote>
+<blockquote>Toute divergence entre cette vue et le packet se tranche en faveur du packet. Cette vue ne cree, ne ferme et ne reduit aucune obligation.</blockquote>
+<h2>1. Ce que vous decidez</h2>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• L&#x27;unite de decision est le CHAPITRE : 10 chapitres x 2 roles = 20 verdicts, pas des centaines de signatures objet par objet.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Aucun humain n&#x27;a encore approuve ce chapitre : REVIEW_DELTA_BASELINE = NONE. Le perimetre de revue est le CHAPITRE COURANT ENTIER. Les listes ci-dessous dirigent l&#x27;attention, elles ne reduisent pas le perimetre.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (<code>sha256:315df40027aaedb26f1ac573d1a20e0011615f9fe894db94db02ac3623e64bc1</code>) ; l&#x27;approbation graphique releve de la porte D7, independante.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Verdicts autorises, a rendre dans le packet JSON canonique et jamais dans cette vue : <code>APPROVED</code> / <code>CHANGES_REQUESTED</code> / <code>REJECTED</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Cette vue ne porte aucune decision et ne nomme personne : l&#x27;assignation du role reste <code>PENDING_UNASSIGNED</code>, l&#x27;etat du packet reste <code>PENDING_UNASSIGNED</code>.</p>
+<table>
+<tr><th>Perimetre</th><th>Valeur</th></tr>
+<tr><td>Objets du chapitre dans le packet</td><td>147</td></tr>
+<tr><td>Empreinte de l&#x27;ensemble d&#x27;objets</td><td><code>sha256:c67e1bd9a552906b11f0df7f15bf1d59e04ef5f832dee6befb8d0568e87dd703</code></td></tr>
+<tr><td>Empreinte semantique liee a l&#x27;approbation</td><td><code>sha256:315df40027aaedb26f1ac573d1a20e0011615f9fe894db94db02ac3623e64bc1</code></td></tr>
+<tr><td>Empreinte du packet</td><td><code>sha256:c149ea15242d4aac3a83c4ab9d6409904bb15b4a7b88d4714f754c406315383c</code></td></tr>
+<tr><td>Revision du depot gelee dans le packet</td><td><code>5bc44275a0afe33f10b7ce2ec7700778f8de6308</code></td></tr>
+<tr><td>Preuve de rendu portee par le packet</td><td><code>ABSENT</code></td></tr>
+</table>
+<h2>2. Le chapitre et ses capacites du programme officiel</h2>
+<p><strong>Fonction exponentielle</strong> — programme applicable 2026-2027, MENE2602917A, BO n° 14 du 2026-04-02.</p>
+<p>Source officielle : https://www.education.gouv.fr/bo/2026/Hebdo14/MENE2602917A</p>
+<p>Situation d&#x27;accroche declaree : La population d&#x27;une culture bactérienne double toutes les 20 minutes. Combien de bactéries y aura-t-il après 3 heures si l&#x27;on part de 1000 ? Comment modéliser cette croissance exponentielle ?</p>
+<p>Temps estime declare : parcours 1 : 12 h · parcours 2 : 10 h · parcours 3 : 8 h.</p>
+<table>
+<tr><th>Code</th><th>Libelle eleve</th><th>Libelle BO</th><th>Demonstration exigible</th></tr>
+<tr><td><code>C1</code></td><td>Je sais que la fonction exponentielle est l&#x27;unique fonction égale à sa dérivée valant 1 en 0.</td><td>Connaître la définition de la fonction exponentielle comme unique fonction dérivable sur ℝ vérifiant f&#x27;=f et f(0)=1.</td><td>non</td></tr>
+<tr><td><code>C2</code></td><td>Je sais utiliser les propriétés algébriques de l&#x27;exponentielle (somme, produit, puissance).</td><td>Connaître et utiliser les propriétés algébriques de la fonction exponentielle : exp(a+b)=exp(a)exp(b), exp(-a)=1/exp(a), exp(na)=(exp(a))^n.</td><td>non</td></tr>
+<tr><td><code>C3</code></td><td>Je sais exploiter le signe, la croissance et la courbe de l&#x27;exponentielle, en lien avec les suites géométriques.</td><td>Connaître le signe, le sens de variation et la courbe représentative de la fonction exponentielle ; faire le lien avec les suites géométriques.</td><td>non</td></tr>
+<tr><td><code>C4</code></td><td>Je sais dériver la fonction t → $e^{at}$ pour un réel a.</td><td>Pour a réel, déterminer la dérivée de la fonction t → $e^{at}$.</td><td>non</td></tr>
+<tr><td><code>C5</code></td><td>Je sais représenter et utiliser un modèle de croissance ou de décroissance exponentielle.</td><td>Pour k strictement positif, représenter t → e^{-kt} et t → e^{kt} ; modéliser une croissance ou une décroissance exponentielle.</td><td>non</td></tr>
+</table>
+<p><strong>Attendus officiels rattaches, capacite par capacite</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C1</code> — 1 attendu :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-108</code> (MANDATORY_KNOWLEDGE, Fonction exponentielle) : Définition de la fonction exponentielle comme unique fonction dérivable sur ℝ vérifiant ƒ ‘ = ƒ et ƒ (0) = 1. L’existence et l’unicité sont admises. Notation exp(𝑥).</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C2</code> — 2 attendus :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-109</code> (MANDATORY_KNOWLEDGE, Fonction exponentielle) : Pour tous réels 𝑥 et 𝑦, exp(𝑥 + 𝑦) = exp(𝑥) exp(𝑦) et exp(𝑥) exp(–𝑥) = 1. Nombre e. Notation e 𝑥.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-111</code> (MANDATORY_CAPACITY, Fonction exponentielle) : Transformer une expression en utilisant les propriétés algébriques de la fonction exponentielle.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C3</code> — 1 attendu :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-110</code> (MANDATORY_KNOWLEDGE, Fonction exponentielle) : Signe, sens de variation et courbe représentative de la fonction exponentielle. Lien avec les suites géométriques.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C4</code> — 1 attendu :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-112</code> (MANDATORY_CAPACITY, Fonction exponentielle) : Pour a réel, dérivée de la fonction t ↦ eat.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C5</code> — 2 attendus :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-113</code> (MANDATORY_CAPACITY, Fonction exponentielle) : Pour une valeur numérique strictement positive de k, représenter graphiquement les fonctions t ↦ e–kt et t ↦ ekt.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-114</code> (MANDATORY_CAPACITY, Fonction exponentielle) : Modéliser une situation par une croissance, une décroissance exponentielle (par exemple évolution d’un capital à taux fixe, décroissance radioactive).</p>
+<p><strong>Prerequis declares par le contrat du chapitre</strong></p>
+<table>
+<tr><th>Code</th><th>Libelle</th><th>Chapitre d&#x27;origine</th></tr>
+<tr><td><code>R1</code></td><td>Dérivée d&#x27;une somme, d&#x27;un produit, d&#x27;un quotient</td><td>1SPE-DERIVATION-GLOBAL</td></tr>
+<tr><td><code>R2</code></td><td>Signe de la dérivée et sens de variation</td><td>1SPE-DERIVATION-GLOBAL</td></tr>
+<tr><td><code>R3</code></td><td>Résolution d&#x27;équations et d&#x27;inéquations du second degré</td><td>1SPE-SECOND-DEGRE</td></tr>
+<tr><td><code>R4</code></td><td>Puissances entières et règles de calcul</td><td>2GT</td></tr>
+<tr><td><code>R5</code></td><td>Suites géométriques et coefficient multiplicateur</td><td>1SPE-SUITES</td></tr>
+</table>
+<h2>3. Structure reelle et ordre d&#x27;assemblage courant</h2>
+<p>L&#x27;ordre ci-dessous n&#x27;est pas l&#x27;ordre alphabetique des repertoires : il est lu chez l&#x27;assembleur du manuel (<code>Mathematiques/manuel-maths/scripts/assemble_manuel.py</code>, <code>collect_chapter</code>). C&#x27;est la sequence que le lecteur du PDF recoit.</p>
+<table>
+<tr><th>Rang</th><th>Rubrique imprimee</th><th>Objets (professeur)</th></tr>
+<tr><td>1</td><td>Cours</td><td>6</td></tr>
+<tr><td>2</td><td>Méthodes</td><td>6</td></tr>
+<tr><td>3</td><td>Exercices</td><td>68</td></tr>
+<tr><td>4</td><td>TD</td><td>2</td></tr>
+<tr><td>5</td><td>Auto-évaluation</td><td>1</td></tr>
+<tr><td>6</td><td>Évaluation</td><td>4</td></tr>
+<tr><td>7</td><td>Remédiation</td><td>10</td></tr>
+<tr><td>8</td><td>Corrigés</td><td>50</td></tr>
+</table>
+<p>Total assemble : 147 objets en variante professeur, 95 en variante eleve (la variante eleve exclut les corriges et les corriges d&#x27;evaluation).</p>
+<p>La page d&#x27;ouverture du chapitre est composee par l&#x27;assembleur a partir de <code>contrat.yaml</code> (titre, capacites, situation d&#x27;accroche, temps estime) : elle n&#x27;apparait donc pas comme un objet de la sequence.</p>
+<p><strong>Placement des temps pedagogiques dans la progression</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rubrique « Diagnostic » : aucun objet assemble dans ce chapitre.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 1 — le cours precede les methodes.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 2 — les methodes sont regroupees avant les exercices.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 3 — les exercices suivent les methodes en un seul bloc.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 4 — le TD est place apres les exercices.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 5 — le QCM d&#x27;auto-evaluation suit le TD.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 6 — les evaluations viennent apres le QCM.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 7 — la remediation est placee apres les evaluations.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 8 — les corriges ferment la variante professeur.</p>
+<p>Cet ordre est un fait d&#x27;assemblage, pas un jugement : sa pertinence pedagogique fait partie de ce que vous evaluez.</p>
+<h2>4. Points d&#x27;attention scientifiques, par famille</h2>
+<p>Le registre <code>audit/1SPE_MANUAL_REVIEW_DISPOSITION_LEDGER.json</code> classe chaque objet du manuel. Ceux qui portent la disposition <code>SCIENCE_HUMAINE_REQUISE</code> contiennent des affirmations calculables qu&#x27;aucune preuve machine n&#x27;etablit : ce sont eux que la lecture scientifique doit atteindre en priorite.</p>
+<p>10 objets pour ce chapitre, regroupes par famille scientifique — la capacite du referentiel du depot, avec son libelle BO — puis par type d&#x27;objet.</p>
+<h3>Famille <code>C1</code> — Connaître la définition de la fonction exponentielle comme unique fonction dérivable sur ℝ vérifiant f&#x27;=f et f(0)=1.</h3>
+<p>Capacite eleve : « Je sais que la fonction exponentielle est l&#x27;unique fonction égale à sa dérivée valant 1 en 0. »</p>
+<p>3 objets · 8 affirmations calculables sans preuve machine.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>coup_de_pouce</code>** — 3 objets, 8 affirmations a verifier :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-EXPO-EX-002-CDP</code> (2 affirmations) — <code>Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-002-CDP.tex</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-EXPO-EX-003-CDP</code> (2 affirmations) — <code>Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-003-CDP.tex</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-EXPO-EX-004-CDP</code> (4 affirmations) — <code>Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-004-CDP.tex</code></p>
+<h3>Famille <code>C2</code> — Connaître et utiliser les propriétés algébriques de la fonction exponentielle : exp(a+b)=exp(a)exp(b), exp(-a)=1/exp(a), exp(na)=(exp(a))^n.</h3>
+<p>Capacite eleve : « Je sais utiliser les propriétés algébriques de l&#x27;exponentielle (somme, produit, puissance). »</p>
+<p>1 objet · 2 affirmations calculables sans preuve machine.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>coup_de_pouce</code>** — 1 objet, 2 affirmations a verifier :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-EXPO-EX-014-CDP</code> (2 affirmations) — <code>Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-014-CDP.tex</code></p>
+<h3>Famille <code>C3</code> — Connaître le signe, le sens de variation et la courbe représentative de la fonction exponentielle ; faire le lien avec les suites géométriques.</h3>
+<p>Capacite eleve : « Je sais exploiter le signe, la croissance et la courbe de l&#x27;exponentielle, en lien avec les suites géométriques. »</p>
+<p>2 objets · 3 affirmations calculables sans preuve machine.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>coup_de_pouce</code>** — 2 objets, 3 affirmations a verifier :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-EXPO-EX-022-CDP</code> (2 affirmations) — <code>Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-022-CDP.tex</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-EXPO-EX-024-CDP</code> (1 affirmation) — <code>Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-024-CDP.tex</code></p>
+<h3>Famille <code>C4</code> — Pour a réel, déterminer la dérivée de la fonction t → $e^{at}$.</h3>
+<p>Capacite eleve : « Je sais dériver la fonction t → $e^{at}$ pour un réel a. »</p>
+<p>1 objet · 1 affirmation calculable sans preuve machine.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>coup_de_pouce</code>** — 1 objet, 1 affirmation a verifier :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-EXPO-EX-032-CDP</code> (1 affirmation) — <code>Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-032-CDP.tex</code></p>
+<h3>Famille <code>C5</code> — Pour k strictement positif, représenter t → e^{-kt} et t → e^{kt} ; modéliser une croissance ou une décroissance exponentielle.</h3>
+<p>Capacite eleve : « Je sais représenter et utiliser un modèle de croissance ou de décroissance exponentielle. »</p>
+<p>2 objets · 2 affirmations calculables sans preuve machine.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>coup_de_pouce</code>** — 2 objets, 2 affirmations a verifier :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-EXPO-EX-041-CDP</code> (1 affirmation) — <code>Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-041-CDP.tex</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-EXPO-EX-042-CDP</code> (1 affirmation) — <code>Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-042-CDP.tex</code></p>
+<h3>Famille <code>CAPACITE_NON_DECLAREE_PAR_L_OBJET</code></h3>
+<p>Objets dont ni le META ni l&#x27;exercice servi ne declare de capacite du chapitre. Rien n&#x27;est devine ici : la famille reste a etablir par lecture.</p>
+<p>1 objet · 3 affirmations calculables sans preuve machine.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>coup_de_pouce</code>** — 1 objet, 3 affirmations a verifier :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-EXPO-EX-034-CDP</code> (3 affirmations) — <code>Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-034-CDP.tex</code></p>
+<h2>5. Question de QCM routee vers l&#x27;humain</h2>
+<p>Aucune question de ce chapitre n&#x27;est routee vers une revue humaine par <code>audit/QCM_INDEPENDENT_EVIDENCE_V2.json</code>.</p>
+<h2>6. Ce que la machine a deja etabli, et ce qu&#x27;elle n&#x27;etablit pas</h2>
+<p>Ces mesures viennent de <code>audit/PUBLISH_READINESS_CHAPTER_MATRIX.json</code>. Elles ne reduisent pas le perimetre de votre lecture : une dimension <code>COMPLETE</code> signifie que la machine a fini de mesurer, pas que le contenu est juste.</p>
+<table>
+<tr><th>Mesure</th><th>Valeur</th></tr>
+<tr><td>Etat machine vertical</td><td><code>MACHINE_REVIEW_COMPLETE</code></td></tr>
+<tr><td>Cloture humaine</td><td><code>PENDING</code></td></tr>
+<tr><td>Objets passes par l&#x27;oracle</td><td>122 reussites, 0 echecs, 11 en science humaine requise, 19 en revue manuelle</td></tr>
+<tr><td>Attendus officiels obligatoires</td><td>7 rattaches sur 7, 0 manquants, 0 hors annee</td></tr>
+<tr><td>Sujets d&#x27;evaluation</td><td>2 sujets, 2 corriges, statut <code>COMPLETE</code></td></tr>
+<tr><td>QCM</td><td>15 questions, capacites evaluees C1, C2, C3, C4, C5</td></tr>
+<tr><td>Relation exercice/corrige</td><td>ANSWER_COVERAGE_ESTABLISHED : 50 ; 0 echecs de cardinalite</td></tr>
+</table>
+<p>La relation exercice/corrige n&#x27;est etablie que structurellement : une COUVERTURE de reponses n&#x27;atteste pas qu&#x27;un corrige corrige bien son exercice. Cette fidelite est un point de votre checklist.</p>
+<p>Dettes de revue declarees pour ce chapitre :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>EXPONENTIELLE_C1_METHOD_REVIEW_DEBT_1</code> — 1 unite, categorie <code>OBJECT_REVIEW</code>, bloquant : oui.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>RESIDUAL_TRUE_NEW_13</code> — 2 unites, categorie <code>OBJECT_REVIEW</code>, bloquant : oui.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>UNCHANGED</code> — 145 unites, categorie <code>OBJECT_REVIEW</code>, bloquant : oui.</p>
+<h2>7. Checklist du role <code>EXPERT_MATHEMATIQUE</code></h2>
+<p>1. exactitude scientifique</p>
+<p>2. hypotheses</p>
+<p>3. definitions</p>
+<p>4. notations</p>
+<p>5. demonstrations et raisonnements</p>
+<p>6. calculs</p>
+<p>7. fidelite exercice/corrige</p>
+<p>8. verite des QCM</p>
+<p>9. verite des evaluations</p>
+<p>10. items de science humaine requise</p>
+<p>11. concepts d&#x27;une autre annee</p>
+<p>Cette checklist est celle du role. Elle s&#x27;applique au CHAPITRE COURANT ENTIER, y compris aux objets qu&#x27;aucune section de cette vue ne cite.</p>
+<h2>8. Reference de lecture : le PDF candidat</h2>
+<p>Le PDF sert a lire le chapitre dans l&#x27;ordre ou l&#x27;eleve le recevra. Il n&#x27;est pas une preuve : le packet ne porte aucune preuve de rendu (<code>render_evidence = ABSENT</code>), et aucun index page-objet n&#x27;est etabli.</p>
+<table>
+<tr><th>Fichier</th><th>Variante</th><th>Pages</th><th>Role declare</th><th>Etat declare</th></tr>
+<tr><td><code>MANUELS_PDF_PUBLICATION/01_Maths_1re_Spe_Eleve.pdf</code></td><td>eleve</td><td>371</td><td>HISTORICAL_PUBLICATION_SNAPSHOT</td><td>STALE_UNDECIDED</td></tr>
+<tr><td><code>MANUELS_PDF_PUBLICATION/02_Maths_1re_Spe_Professeur.pdf</code></td><td>professeur</td><td>617</td><td>HISTORICAL_PUBLICATION_SNAPSHOT</td><td>STALE_UNDECIDED</td></tr>
+</table>
+<p>Ces instantanes sont declares <code>STALE_UNDECIDED</code> dans <code>audit/PDF_ARTIFACT_REGISTRY.yaml</code> : ils ne sont pas garantis identiques au contenu courant. Le candidat d&#x27;impression courant se reconstruit par <code>python3 Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual 1SPE --variant &lt;variant&gt; --record-observed</code> (recu : <code>audit/1SPE_PRINT_CANDIDATE_BUILD_RECEIPT.json</code>, statut <code>PRINT_CANDIDATE</code>).</p>
+<p>Rappel du recu : Ces PDF ne sont pas finals : aucun 1SPE_FINAL_CONTENT_SHA n&#x27;est figé, les deux revues humaines par chapitre et le dossier D7 restent en attente.</p>
+<p>En cas d&#x27;ecart entre le PDF et les fichiers sources, ce sont les sources du chapitre qui font foi : <code>Mathematiques/manuel-maths/chapitres/1SPE-EXPONENTIELLE/</code>.</p>
+<p>---</p>
+<p>Cette vue est derivee et sans autorite. L&#x27;autorite machine reste le packet JSON canonique. Le packet de ce role est <code>audit/reviews/human/1SPE-EXPONENTIELLE/packet-A-EXPERT_MATHEMATIQUE.json</code>. L&#x27;unite de decision est le CHAPITRE : 10 chapitres x 2 roles = 20 verdicts, pas des centaines de signatures objet par objet.</p>
+<p>Marche a suivre commune aux deux roles : <code>audit/reviews/human/ASSIGNMENT_TEMPLATE_AND_REVIEW_INSTRUCTIONS.md</code>.</p>
+<h2>Votre verdict</h2>
+<div class="form">
+<p>Le verdict ne se saisit pas dans cette page : elle est dérivée et sans
+autorité. Trois commandes, dans cet ordre.</p>
+<p><strong>1. Obtenir le brouillon</strong> — tous les condensats sont
+pré-remplis ; ne restent que les champs qui vous appartiennent.</p>
+<p><code>python3 scripts/human_review_governance.py draft 1SPE-EXPONENTIELLE \
+--packet audit/reviews/human/1SPE-EXPONENTIELLE/packet-A-EXPERT_MATHEMATIQUE.json \
+--out audit/reviews/human/1SPE-EXPONENTIELLE/receipt-A-EXPERT_MATHEMATIQUE.json</code></p>
+<p><strong>2. Renseigner, et rien d'autre</strong> :
+<code>reviewer_name</code>, <code>reviewer_identity_reference</code>,
+<code>review_timestamp</code> (RFC 3339),
+<code>verdict</code> parmi
+<code>APPROVED</code>, <code>CHANGES_REQUESTED</code>, <code>REJECTED</code>,
+<code>comments</code>. Un <code>CHANGES_REQUESTED</code> exige au moins un
+constat dans <code>blocking_findings</code> ; un <code>APPROVED</code> n'en
+admet aucun.</p>
+<p><strong>3. Valider</strong> — le contrôle refuse un verdict sans identité,
+sans rôle, sans condensat, ou sur un paquet périmé.</p>
+<p><code>python3 scripts/human_review_governance.py validate 1SPE-EXPONENTIELLE \
+--packet audit/reviews/human/1SPE-EXPONENTIELLE/packet-A-EXPERT_MATHEMATIQUE.json \
+--receipt audit/reviews/human/1SPE-EXPONENTIELLE/receipt-A-EXPERT_MATHEMATIQUE.json</code></p>
+<p>Le chapitre reçoit <strong>deux</strong> verdicts, par
+<strong>deux personnes distinctes</strong> : le contrôle refuse deux rôles
+signés par la même identité. Une même personne peut en revanche prendre
+plusieurs chapitres.</p>
+<p>Condensat sémantique que votre approbation lie :
+<code>sha256:315df40027aaedb26f1ac573d1a20e0011615f9fe894db94db02ac3623e64bc1</code></p>
+</div>
+
+</body></html>

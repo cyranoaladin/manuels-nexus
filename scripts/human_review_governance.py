@@ -1164,6 +1164,78 @@ def command_validate(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_draft(args: argparse.Namespace) -> int:
+    """Écrit un brouillon de reçu : tout le machinal rempli, l'humain vide.
+
+    Sans cela, rendre un verdict voulait dire composer à la main un JSON de
+    vingt champs dont sept condensats -- une opération fragile, et fragile au
+    mauvais endroit : une empreinte recopiée de travers fait échouer la
+    validation longtemps après la lecture, ou pire, la fait réussir sur le
+    mauvais paquet.
+
+    Ce brouillon ne rend aucun verdict et ne nomme personne. Il laisse vides,
+    et seulement vides, les champs qui appartiennent à l'humain.
+    """
+
+    packet_path = Path(args.packet)
+    packet = json.loads(packet_path.read_text(encoding="utf-8"))
+    policy = load_policy(ROOT)
+
+    draft = {
+        "human_review_receipt_schema_version": packet[
+            "human_review_receipt_schema_version"
+        ],
+        "review_id": (
+            f"{packet['chapter_id']}-{packet['review_role']}-A_COMPLETER"
+        ),
+        "chapter_id": packet["chapter_id"],
+        "manual_id": packet["manual_id"],
+        "review_role": packet["review_role"],
+        # --- ce qui appartient à l'humain, et à lui seul -------------------
+        "reviewer_name": "",
+        "reviewer_identity_reference": "",
+        "reviewer_is_human": True,
+        "review_timestamp": "",
+        "verdict": "",
+        "comments": "",
+        "blocking_findings": [],
+        # --- ce que la machine sait, et qu'elle ne fait pas recopier -------
+        "repository_source_sha": packet["repository_source_sha"],
+        "semantic_review_digest": packet["semantic_review_digest"],
+        "review_render_digest": packet["review_render_digest"],
+        "object_set_digest": packet["object_set_digest"],
+        "object_count": packet["object_count"],
+        "programme_authority_digest": packet["programme_authority_digest"],
+        "packet_digest": packet["packet_digest"],
+        "attestation_text": packet["attestation_template"]
+        .replace("{chapter_id}", packet["chapter_id"])
+        .replace("{object_set_digest}", packet["object_set_digest"])
+        .replace("{packet_digest}", packet["packet_digest"]),
+    }
+    target = Path(args.out)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(
+        json.dumps(draft, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    print(f"brouillon ecrit : {target}")
+    print("a completer, et rien d'autre :")
+    for field in (
+        "reviewer_name",
+        "reviewer_identity_reference",
+        "review_timestamp",
+        "verdict",
+        "comments",
+    ):
+        print(f"  {field}")
+    print(f"verdicts permis : {', '.join(policy['verdicts'])}")
+    print(
+        "puis : python3 scripts/human_review_governance.py validate "
+        f"{packet['chapter_id']} --packet {packet_path} --receipt {target}"
+    )
+    return 0
+
+
 def build_argument_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -1187,6 +1259,14 @@ def build_argument_parser() -> argparse.ArgumentParser:
     validate.add_argument("--packet", required=True)
     validate.add_argument("--receipt", required=True)
     validate.set_defaults(func=command_validate)
+
+    draft = sub.add_parser(
+        "draft", help="brouillon de recu : machinal rempli, humain vide"
+    )
+    draft.add_argument("chapter")
+    draft.add_argument("--packet", required=True)
+    draft.add_argument("--out", required=True)
+    draft.set_defaults(func=command_draft)
 
     return parser
 

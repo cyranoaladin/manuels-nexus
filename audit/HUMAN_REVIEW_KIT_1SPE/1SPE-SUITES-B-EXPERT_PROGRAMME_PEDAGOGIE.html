@@ -1,0 +1,443 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><title>1SPE-SUITES — B-EXPERT_PROGRAMME_PEDAGOGIE</title><style>
+body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+max-width:52rem;margin:2rem auto;padding:0 1.2rem;color:#1a1a1a}
+h1{font-size:1.6rem}h2{font-size:1.25rem;margin-top:2.2rem;
+border-bottom:1px solid #ddd;padding-bottom:.3rem}
+h3{font-size:1.05rem;margin-top:1.6rem}
+code{background:#f4f4f6;padding:.1em .3em;border-radius:3px;font-size:.9em}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.92rem}
+th,td{border:1px solid #ddd;padding:.4rem .6rem;text-align:left}
+th{background:#f7f7f9}
+blockquote{border-left:3px solid #c8102e;margin:1rem 0;padding:.4rem 1rem;
+background:#fbf5f6}
+.mandatory{background:#fff4e5;border-left:3px solid #d97706;padding:.6rem 1rem}
+.form{background:#f7f7f9;border:1px solid #ddd;padding:1rem;border-radius:4px}
+</style><script>window.MathJax={tex:{inlineMath:[["$","$"]],displayMath:[["\\[","\\]"]],processEscapes:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre"]}};</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body>
+<h1>Vue de lecture — Suites numériques — EXPERT_PROGRAMME_PEDAGOGIE</h1>
+<p>Chapitre <code>1SPE-SUITES</code> · manuel <code>1SPE</code> (Première, Spécialité mathématiques) · packet B · role <code>EXPERT_PROGRAMME_PEDAGOGIE</code>.</p>
+<blockquote><strong>Cette vue est derivee et sans autorite. L&#x27;autorite machine reste le packet JSON canonique.</strong></blockquote>
+<blockquote></blockquote>
+<blockquote>Packet canonique : <code>audit/reviews/human/1SPE-SUITES/packet-B-EXPERT_PROGRAMME_PEDAGOGIE.json</code></blockquote>
+<blockquote>Etat de revue : <code>audit/reviews/human/1SPE-SUITES/REVIEW_STATE.json</code></blockquote>
+<blockquote>Producteur de cette vue : <code>scripts/build_human_review_reading_views.py</code></blockquote>
+<blockquote></blockquote>
+<blockquote>Toute divergence entre cette vue et le packet se tranche en faveur du packet. Cette vue ne cree, ne ferme et ne reduit aucune obligation.</blockquote>
+<h2>1. Ce que vous decidez</h2>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• L&#x27;unite de decision est le CHAPITRE : 10 chapitres x 2 roles = 20 verdicts, pas des centaines de signatures objet par objet.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Aucun humain n&#x27;a encore approuve ce chapitre : REVIEW_DELTA_BASELINE = NONE. Le perimetre de revue est le CHAPITRE COURANT ENTIER. Les listes ci-dessous dirigent l&#x27;attention, elles ne reduisent pas le perimetre.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (<code>sha256:5ef8abbb56f0cdb286ae93b021d435dc81775fa1c0d2287a80f1e302cda93785</code>) ; l&#x27;approbation graphique releve de la porte D7, independante.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Verdicts autorises, a rendre dans le packet JSON canonique et jamais dans cette vue : <code>APPROVED</code> / <code>CHANGES_REQUESTED</code> / <code>REJECTED</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Cette vue ne porte aucune decision et ne nomme personne : l&#x27;assignation du role reste <code>PENDING_UNASSIGNED</code>, l&#x27;etat du packet reste <code>PENDING_UNASSIGNED</code>.</p>
+<table>
+<tr><th>Perimetre</th><th>Valeur</th></tr>
+<tr><td>Objets du chapitre dans le packet</td><td>161</td></tr>
+<tr><td>Empreinte de l&#x27;ensemble d&#x27;objets</td><td><code>sha256:fac8d9dc89cd3699c20ae65783a82b7cfb068007a357721549edfa055858b135</code></td></tr>
+<tr><td>Empreinte semantique liee a l&#x27;approbation</td><td><code>sha256:5ef8abbb56f0cdb286ae93b021d435dc81775fa1c0d2287a80f1e302cda93785</code></td></tr>
+<tr><td>Empreinte du packet</td><td><code>sha256:a06075630ddd55f28cefd799671298d32b996465282455d2fcee5defe2adc854</code></td></tr>
+<tr><td>Revision du depot gelee dans le packet</td><td><code>5bc44275a0afe33f10b7ce2ec7700778f8de6308</code></td></tr>
+<tr><td>Preuve de rendu portee par le packet</td><td><code>ABSENT</code></td></tr>
+</table>
+<h2>2. Le chapitre et ses capacites du programme officiel</h2>
+<p><strong>Suites numériques</strong> — programme applicable 2026-2027, MENE2602917A, BO n° 14 du 2026-04-02.</p>
+<p>Source officielle : https://www.education.gouv.fr/bo/2026/Hebdo14/MENE2602917A</p>
+<p>Situation d&#x27;accroche declaree : Deux offres d&#x27;épargne : versement fixe mensuel (modèle linéaire) contre intérêts composés (modèle exponentiel). À partir de quand la seconde dépasse-t-elle la première ? Résolue au TD fil rouge avec les outils du chapitre (C2, C3, C6, C7).</p>
+<p>Temps estime declare : parcours 1 : 14 h · parcours 2 : 11 h · parcours 3 : 10 h.</p>
+<table>
+<tr><th>Code</th><th>Libelle eleve</th><th>Libelle BO</th><th>Demonstration exigible</th></tr>
+<tr><td><code>C1</code></td><td>Je sais calculer les termes d&#x27;une suite (explicite/récurrence), à la main et en Python.</td><td>Dans le cadre de l&#x27;étude d&#x27;une suite, utiliser le registre de la langue naturelle, le registre algébrique, le registre fonctionnel. Générer une suite définie de façon explicite ou par récurrence.</td><td>non</td></tr>
+<tr><td><code>C2</code></td><td>Je sais montrer qu&#x27;une suite est arithmétique et exprimer son terme général.</td><td>Reconnaître si une suite est arithmétique. Exploiter la relation entre termes, la formule explicite.</td><td>non</td></tr>
+<tr><td><code>C3</code></td><td>Je sais montrer qu&#x27;une suite est géométrique et exprimer son terme général.</td><td>Reconnaître si une suite est géométrique. Exploiter la relation entre termes, la formule explicite.</td><td>non</td></tr>
+<tr><td><code>C4</code></td><td>Je sais calculer la somme des premiers entiers et d&#x27;une suite géométrique.</td><td>Calculer la somme des n premiers entiers, la somme des premiers termes d&#x27;une suite géométrique.</td><td>oui — Calcul de 1+2+...+n et de 1+q+...+q^n.</td></tr>
+<tr><td><code>C5</code></td><td>Je sais étudier le sens de variation d&#x27;une suite par la méthode adaptée.</td><td>Étudier le sens de variation d&#x27;une suite : étude du signe de u(n+1)−u(n), ou du quotient si les termes sont strictement positifs, ou utilisation de la fonction associée.</td><td>non</td></tr>
+<tr><td><code>C6</code></td><td>Je sais modéliser une situation concrète par une suite.</td><td>Modéliser un phénomène discret par une suite (évolutions successives, suites arithmétiques et géométriques comme modèles linéaire et exponentiel discrets).</td><td>non</td></tr>
+<tr><td><code>C7</code></td><td>Je sais écrire et lire un programme Python (terme, somme, seuil).</td><td>Écrire et interpréter un programme calculant un terme, une somme de termes, un seuil.</td><td>non</td></tr>
+<tr><td><code>C8</code></td><td>Je sais reconnaître intuitivement une limite finie, une limite infinie ou une absence de limite, sans formalisation.</td><td>Sensibilisation intuitive à la notion de limite d&#x27;une suite : limite finie, limite infinie et absence de limite ; toute formalisation est exclue.</td><td>non</td></tr>
+</table>
+<p><strong>Attendus officiels rattaches, capacite par capacite</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C1</code> — 4 attendus :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-048</code> (MANDATORY_KNOWLEDGE, Suites numériques, modèles discrets) : Exemples de modes de génération d’une suite : explicite 𝑢𝑛 = ƒ (𝑛), par une relation de récurrence 𝑢𝑛 + 1 = ƒ (𝑢𝑛), par un algorithme, par des motifs géométriques.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-049</code> (MANDATORY_KNOWLEDGE, Suites numériques, modèles discrets) : Notations : 𝑢(𝑛), 𝑢𝑛, (𝑢(𝑛)), (𝑢𝑛).</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-054</code> (MANDATORY_CAPACITY, Suites numériques, modèles discrets) : Dans le cadre de l’étude d’une suite, utiliser le registre de la langue naturelle, le registre algébrique, le registre graphique, et passer de l’un à l’autre.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-056</code> (MANDATORY_CAPACITY, Suites numériques, modèles discrets) : Calculer des termes d’une suite définie explicitement, par récurrence ou par un algorithme.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C2</code> — 3 attendus :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-050</code> (MANDATORY_KNOWLEDGE, Suites numériques, modèles discrets) : Suites arithmétiques : exemples, définition, calcul du terme général. Lien avec l’étude d’évolutions successives à accroissements constants. Lien avec les fonctions affines. Calcul de 1 + 2 + … + 𝑛.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-057</code> (MANDATORY_CAPACITY, Suites numériques, modèles discrets) : Pour une suite arithmétique ou géométrique, calculer le terme général, la somme de termes consécutifs, déterminer le sens de variation.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-060</code> (MANDATORY_SKILL, Suites numériques, modèles discrets) : Calcul du terme général d’une suite arithmétique, d’une suite géométrique.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C3</code> — 1 attendu :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-051</code> (MANDATORY_KNOWLEDGE, Suites numériques, modèles discrets) : Suites géométriques : exemples, définition, calcul du terme général. Lien avec l’étude d’évolutions successives à taux constant. Lien avec la fonction exponentielle. Calcul de 1 + 𝑞 + … + 𝑞𝑛.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C4</code> — 2 attendus :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-061</code> (MANDATORY_SKILL, Suites numériques, modèles discrets) : Calcul de 1 + 2 + … + 𝑛.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-062</code> (MANDATORY_SKILL, Suites numériques, modèles discrets) : Calcul de 1 + 𝑞 + … + 𝑞𝑛.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C5</code> — 1 attendu :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-052</code> (MANDATORY_KNOWLEDGE, Suites numériques, modèles discrets) : Sens de variation d’une suite.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C6</code> — 2 attendus :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-055</code> (MANDATORY_CAPACITY, Suites numériques, modèles discrets) : Proposer, modéliser une situation permettant de générer une suite de nombres. Déterminer une relation explicite ou une relation de récurrence pour une suite définie par un motif géométrique, par une question de dénombrement.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-058</code> (MANDATORY_CAPACITY, Suites numériques, modèles discrets) : Modéliser un phénomène discret à croissance linéaire par une suite arithmétique, un phénomène discret à croissance exponentielle par une suite géométrique.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C7</code> : aucun attendu officiel rattache dans <code>audit/SEMANTIC_ALIGNMENT_LEDGER.json</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C8</code> — 2 attendus :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-053</code> (MANDATORY_KNOWLEDGE, Suites numériques, modèles discrets) : Sur des exemples, introduction intuitive de la notion de limite, finie ou infinie, ou l’absence de limite d’une suite.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-059</code> (MANDATORY_CAPACITY, Suites numériques, modèles discrets) : Conjecturer, dans des cas simples, la limite éventuelle d’une suite.</p>
+<p><strong>Prerequis declares par le contrat du chapitre</strong></p>
+<table>
+<tr><th>Code</th><th>Libelle</th><th>Chapitre d&#x27;origine</th></tr>
+<tr><td><code>R1</code></td><td>Calcul littéral : développer, factoriser, réduire</td><td>2GT</td></tr>
+<tr><td><code>R2</code></td><td>Pourcentages : coefficient multiplicateur, évolutions successives</td><td>2GT</td></tr>
+<tr><td><code>R3</code></td><td>Fonctions : image, antécédent, sens de variation</td><td>2GT</td></tr>
+<tr><td><code>R4</code></td><td>Inégalités et signe d&#x27;une expression</td><td>2GT</td></tr>
+<tr><td><code>R5</code></td><td>Python : variables, boucle for, boucle while (SNT)</td><td>SNT</td></tr>
+</table>
+<h2>3. Structure reelle et ordre d&#x27;assemblage courant</h2>
+<p>L&#x27;ordre ci-dessous n&#x27;est pas l&#x27;ordre alphabetique des repertoires : il est lu chez l&#x27;assembleur du manuel (<code>Mathematiques/manuel-maths/scripts/assemble_manuel.py</code>, <code>collect_chapter</code>). C&#x27;est la sequence que le lecteur du PDF recoit.</p>
+<table>
+<tr><th>Rang</th><th>Rubrique imprimee</th><th>Objets (professeur)</th></tr>
+<tr><td>1</td><td>Ouverture</td><td>1</td></tr>
+<tr><td>2</td><td>Diagnostic</td><td>1</td></tr>
+<tr><td>3</td><td>Cours</td><td>8</td></tr>
+<tr><td>4</td><td>Méthodes</td><td>8</td></tr>
+<tr><td>5</td><td>Exercices</td><td>72</td></tr>
+<tr><td>6</td><td>TD</td><td>2</td></tr>
+<tr><td>7</td><td>Auto-évaluation</td><td>1</td></tr>
+<tr><td>8</td><td>Évaluation</td><td>4</td></tr>
+<tr><td>9</td><td>Remédiation</td><td>13</td></tr>
+<tr><td>10</td><td>Corrigés</td><td>51</td></tr>
+</table>
+<p>Total assemble : 161 objets en variante professeur, 108 en variante eleve (la variante eleve exclut les corriges et les corriges d&#x27;evaluation).</p>
+<p>La page d&#x27;ouverture du chapitre est composee par l&#x27;assembleur a partir de <code>contrat.yaml</code> (titre, capacites, situation d&#x27;accroche, temps estime) : elle n&#x27;apparait donc pas comme un objet de la sequence.</p>
+<p><strong>Placement des temps pedagogiques dans la progression</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 2 — le diagnostic ouvre le chapitre.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 3 — le cours precede les methodes.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 4 — les methodes sont regroupees avant les exercices.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 5 — les exercices suivent les methodes en un seul bloc.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 6 — le TD est place apres les exercices.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 7 — le QCM d&#x27;auto-evaluation suit le TD.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 8 — les evaluations viennent apres le QCM.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 9 — la remediation est placee apres les evaluations.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 10 — les corriges ferment la variante professeur.</p>
+<p>Cet ordre est un fait d&#x27;assemblage, pas un jugement : sa pertinence pedagogique fait partie de ce que vous evaluez.</p>
+<h2>4. Capacite par capacite : cellules, contributeurs, richesse</h2>
+<p><code>audit/SEMANTIC_ALIGNMENT_LEDGER.json</code> decoupe le manuel en cellules capacite x role pedagogique. Ce chapitre en porte 56. Elles sont regroupees ici par capacite : une checklist cellule par cellule ne se lit pas.</p>
+<p><strong>Pourquoi ces cellules arrivent chez vous.</strong> Seul le META rattache les corps a une capacite ; l&#x27;identite declaree est resolue par egalite exacte, et la couverture de reponses n&#x27;etablit qu&#x27;une COUVERTURE. Etablir qu&#x27;un corps SERT la capacite est un jugement pedagogique, pas un calcul : c&#x27;est un resultat terminal, pas une lacune de mesure. C&#x27;est pourquoi chaque cellule de ce chapitre est routee vers vous.</p>
+<p>Chaque capacite rappelle ensuite ce qui lui est propre : le nombre de cellules, leur disposition, les preuves eventuellement attachees et l&#x27;etat de sa richesse.</p>
+<h3>Capacite <code>C1</code> — « Je sais calculer les termes d&#x27;une suite (explicite/récurrence), à la main et en Python. »</h3>
+<p>Libelle BO : Dans le cadre de l&#x27;étude d&#x27;une suite, utiliser le registre de la langue naturelle, le registre algébrique, le registre fonctionnel. Générer une suite définie de façon explicite ou par récurrence.</p>
+<p><strong>Roles pedagogiques concernes et objets contributeurs</strong></p>
+<table>
+<tr><th>Role pedagogique</th><th>Corps rattaches</th><th>Objets contributeurs</th></tr>
+<tr><td>corriges</td><td>11</td><td><code>1SPE-SUITES-CO-002..005</code>, <code>1SPE-SUITES-CO-022..023</code>, <code>1SPE-SUITES-CO-036..037</code>, <code>1SPE-SUITES-CO-040</code>, <code>1SPE-SUITES-CO-045</code>, <code>1SPE-SUITES-CO-048</code></td></tr>
+<tr><td>cours</td><td>2</td><td><code>1SPE-SUITES-COURS-00</code>, <code>1SPE-SUITES-CR-010</code></td></tr>
+<tr><td>evaluations</td><td>2</td><td><code>1SPE-SUITES-EV-A</code>, <code>1SPE-SUITES-EV-B</code></td></tr>
+<tr><td>exercices</td><td>11</td><td><code>1SPE-SUITES-EX-002..005</code>, <code>1SPE-SUITES-EX-022..023</code>, <code>1SPE-SUITES-EX-036..037</code>, <code>1SPE-SUITES-EX-040</code>, <code>1SPE-SUITES-EX-045</code>, <code>1SPE-SUITES-EX-048</code></td></tr>
+<tr><td>methodes</td><td>1</td><td><code>1SPE-SUITES-ME-001</code></td></tr>
+<tr><td>QCM</td><td>2</td><td><code>Q1..2</code></td></tr>
+<tr><td>remediation</td><td>1</td><td><code>1SPE-SUITES-RE-C1</code></td></tr>
+</table>
+<p><strong>Richesse declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• type de capacite : <code>PROCEDURAL</code> ; occasions distinctes : 5 ; statut declaratif : <code>SUFFICIENT</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• occasions existantes : assessment : 2 · method : 1 · qcm : 2 · remediation : 1 · targeted_practice : 11.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• evaluee par : <code>1SPE-SUITES-EV-A</code>, <code>1SPE-SUITES-EV-B</code>.</p>
+<p><strong>Progression de difficulte declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 1 : 4 exercices (10–10 min) — <code>1SPE-SUITES-EX-002..005</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 2 : 4 exercices (20–22 min) — <code>1SPE-SUITES-EX-022..023</code>, <code>1SPE-SUITES-EX-036..037</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 3 : 3 exercices (30–35 min) — <code>1SPE-SUITES-EX-040</code>, <code>1SPE-SUITES-EX-045</code>, <code>1SPE-SUITES-EX-048</code></p>
+<p><strong>Routage de cette capacite vers l&#x27;humain</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• les 7 cellules portent <code>JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
+<h3>Capacite <code>C2</code> — « Je sais montrer qu&#x27;une suite est arithmétique et exprimer son terme général. »</h3>
+<p>Libelle BO : Reconnaître si une suite est arithmétique. Exploiter la relation entre termes, la formule explicite.</p>
+<p><strong>Roles pedagogiques concernes et objets contributeurs</strong></p>
+<table>
+<tr><th>Role pedagogique</th><th>Corps rattaches</th><th>Objets contributeurs</th></tr>
+<tr><td>corriges</td><td>15</td><td><code>1SPE-SUITES-CO-006..008</code>, <code>1SPE-SUITES-CO-017</code>, <code>1SPE-SUITES-CO-022..025</code>, <code>1SPE-SUITES-CO-028..029</code>, <code>1SPE-SUITES-CO-033</code>, <code>1SPE-SUITES-CO-035</code>, <code>1SPE-SUITES-CO-039</code>, <code>1SPE-SUITES-CO-041</code>, <code>1SPE-SUITES-CO-047</code></td></tr>
+<tr><td>cours</td><td>3</td><td><code>1SPE-SUITES-COURS-00</code>, <code>1SPE-SUITES-COURS-07-FR</code>, <code>1SPE-SUITES-CR-011</code></td></tr>
+<tr><td>evaluations</td><td>2</td><td><code>1SPE-SUITES-EV-A</code>, <code>1SPE-SUITES-EV-B</code></td></tr>
+<tr><td>exercices</td><td>15</td><td><code>1SPE-SUITES-EX-006..008</code>, <code>1SPE-SUITES-EX-017</code>, <code>1SPE-SUITES-EX-022..025</code>, <code>1SPE-SUITES-EX-028..029</code>, <code>1SPE-SUITES-EX-033</code>, <code>1SPE-SUITES-EX-035</code>, <code>1SPE-SUITES-EX-039</code>, <code>1SPE-SUITES-EX-041</code>, <code>1SPE-SUITES-EX-047</code></td></tr>
+<tr><td>methodes</td><td>1</td><td><code>1SPE-SUITES-ME-002</code></td></tr>
+<tr><td>QCM</td><td>3</td><td><code>Q4..6</code></td></tr>
+<tr><td>remediation</td><td>1</td><td><code>1SPE-SUITES-RE-C2</code></td></tr>
+</table>
+<p><strong>Richesse declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• type de capacite : <code>PROCEDURAL</code> ; occasions distinctes : 5 ; statut declaratif : <code>SUFFICIENT</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 15.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• evaluee par : <code>1SPE-SUITES-EV-A</code>, <code>1SPE-SUITES-EV-B</code>.</p>
+<p><strong>Progression de difficulte declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 1 : 4 exercices (10–10 min) — <code>1SPE-SUITES-EX-006..008</code>, <code>1SPE-SUITES-EX-017</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 2 : 9 exercices (20–25 min) — <code>1SPE-SUITES-EX-022..025</code>, <code>1SPE-SUITES-EX-028..029</code>, <code>1SPE-SUITES-EX-033</code>, <code>1SPE-SUITES-EX-035</code>, <code>1SPE-SUITES-EX-039</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 3 : 2 exercices (35–35 min) — <code>1SPE-SUITES-EX-041</code>, <code>1SPE-SUITES-EX-047</code></p>
+<p><strong>Routage de cette capacite vers l&#x27;humain</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• les 7 cellules portent <code>JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
+<h3>Capacite <code>C3</code> — « Je sais montrer qu&#x27;une suite est géométrique et exprimer son terme général. »</h3>
+<p>Libelle BO : Reconnaître si une suite est géométrique. Exploiter la relation entre termes, la formule explicite.</p>
+<p><strong>Roles pedagogiques concernes et objets contributeurs</strong></p>
+<table>
+<tr><th>Role pedagogique</th><th>Corps rattaches</th><th>Objets contributeurs</th></tr>
+<tr><td>corriges</td><td>23</td><td><code>1SPE-SUITES-CO-001</code>, <code>1SPE-SUITES-CO-009..010</code>, <code>1SPE-SUITES-CO-012</code>, <code>1SPE-SUITES-CO-015</code>, <code>1SPE-SUITES-CO-018..019</code>, <code>1SPE-SUITES-CO-026..027</code>, <code>1SPE-SUITES-CO-030..032</code>, <code>1SPE-SUITES-CO-034</code>, <code>1SPE-SUITES-CO-038..039</code>, <code>1SPE-SUITES-CO-041</code>, <code>1SPE-SUITES-CO-043..046</code>, <code>1SPE-SUITES-CO-048..050</code></td></tr>
+<tr><td>cours</td><td>4</td><td><code>1SPE-SUITES-COURS-00</code>, <code>1SPE-SUITES-COURS-07-FR</code>, <code>1SPE-SUITES-COURS-07-TC</code>, <code>1SPE-SUITES-CR-012</code></td></tr>
+<tr><td>evaluations</td><td>2</td><td><code>1SPE-SUITES-EV-A</code>, <code>1SPE-SUITES-EV-B</code></td></tr>
+<tr><td>exercices</td><td>23</td><td><code>1SPE-SUITES-EX-001</code>, <code>1SPE-SUITES-EX-009..010</code>, <code>1SPE-SUITES-EX-012</code>, <code>1SPE-SUITES-EX-015</code>, <code>1SPE-SUITES-EX-018..019</code>, <code>1SPE-SUITES-EX-026..027</code>, <code>1SPE-SUITES-EX-030..032</code>, <code>1SPE-SUITES-EX-034</code>, <code>1SPE-SUITES-EX-038..039</code>, <code>1SPE-SUITES-EX-041</code>, <code>1SPE-SUITES-EX-043..046</code>, <code>1SPE-SUITES-EX-048..050</code></td></tr>
+<tr><td>methodes</td><td>1</td><td><code>1SPE-SUITES-ME-003</code></td></tr>
+<tr><td>QCM</td><td>3</td><td><code>Q7..9</code></td></tr>
+<tr><td>remediation</td><td>1</td><td><code>1SPE-SUITES-RE-C3</code></td></tr>
+</table>
+<p><strong>Richesse declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• type de capacite : <code>PROCEDURAL</code> ; occasions distinctes : 5 ; statut declaratif : <code>SUFFICIENT</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 23.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• evaluee par : <code>1SPE-SUITES-EV-A</code>, <code>1SPE-SUITES-EV-B</code>.</p>
+<p><strong>Progression de difficulte declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 1 : 7 exercices (10–10 min) — <code>1SPE-SUITES-EX-001</code>, <code>1SPE-SUITES-EX-009..010</code>, <code>1SPE-SUITES-EX-012</code>, <code>1SPE-SUITES-EX-015</code>, <code>1SPE-SUITES-EX-018..019</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 2 : 9 exercices (15–25 min) — <code>1SPE-SUITES-EX-026..027</code>, <code>1SPE-SUITES-EX-030..032</code>, <code>1SPE-SUITES-EX-034</code>, <code>1SPE-SUITES-EX-038..039</code>, <code>1SPE-SUITES-EX-050</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 3 : 7 exercices (35–40 min) — <code>1SPE-SUITES-EX-041</code>, <code>1SPE-SUITES-EX-043..046</code>, <code>1SPE-SUITES-EX-048..049</code></p>
+<p><strong>Routage de cette capacite vers l&#x27;humain</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• les 7 cellules portent <code>JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
+<h3>Capacite <code>C4</code> — « Je sais calculer la somme des premiers entiers et d&#x27;une suite géométrique. »</h3>
+<p>Libelle BO : Calculer la somme des n premiers entiers, la somme des premiers termes d&#x27;une suite géométrique.</p>
+<p><strong>Roles pedagogiques concernes et objets contributeurs</strong></p>
+<table>
+<tr><th>Role pedagogique</th><th>Corps rattaches</th><th>Objets contributeurs</th></tr>
+<tr><td>corriges</td><td>12</td><td><code>1SPE-SUITES-CO-011..013</code>, <code>1SPE-SUITES-CO-021</code>, <code>1SPE-SUITES-CO-024..027</code>, <code>1SPE-SUITES-CO-041..042</code>, <code>1SPE-SUITES-CO-046</code>, <code>1SPE-SUITES-CO-049</code></td></tr>
+<tr><td>cours</td><td>2</td><td><code>1SPE-SUITES-COURS-00</code>, <code>1SPE-SUITES-CR-013</code></td></tr>
+<tr><td>evaluations</td><td>2</td><td><code>1SPE-SUITES-EV-A</code>, <code>1SPE-SUITES-EV-B</code></td></tr>
+<tr><td>exercices</td><td>12</td><td><code>1SPE-SUITES-EX-011..013</code>, <code>1SPE-SUITES-EX-021</code>, <code>1SPE-SUITES-EX-024..027</code>, <code>1SPE-SUITES-EX-041..042</code>, <code>1SPE-SUITES-EX-046</code>, <code>1SPE-SUITES-EX-049</code></td></tr>
+<tr><td>methodes</td><td>1</td><td><code>1SPE-SUITES-ME-004</code></td></tr>
+<tr><td>QCM</td><td>3</td><td><code>Q10..12</code></td></tr>
+<tr><td>remediation</td><td>1</td><td><code>1SPE-SUITES-RE-C4</code></td></tr>
+</table>
+<p><strong>Richesse declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• type de capacite : <code>PROCEDURAL</code> ; occasions distinctes : 5 ; statut declaratif : <code>SUFFICIENT</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 12.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• evaluee par : <code>1SPE-SUITES-EV-A</code>, <code>1SPE-SUITES-EV-B</code>.</p>
+<p><strong>Progression de difficulte declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 1 : 4 exercices (10–10 min) — <code>1SPE-SUITES-EX-011..013</code>, <code>1SPE-SUITES-EX-021</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 2 : 4 exercices (20–22 min) — <code>1SPE-SUITES-EX-024..027</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 3 : 4 exercices (35–40 min) — <code>1SPE-SUITES-EX-041..042</code>, <code>1SPE-SUITES-EX-046</code>, <code>1SPE-SUITES-EX-049</code></p>
+<p><strong>Routage de cette capacite vers l&#x27;humain</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• les 7 cellules portent <code>JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
+<h3>Capacite <code>C5</code> — « Je sais étudier le sens de variation d&#x27;une suite par la méthode adaptée. »</h3>
+<p>Libelle BO : Étudier le sens de variation d&#x27;une suite : étude du signe de u(n+1)−u(n), ou du quotient si les termes sont strictement positifs, ou utilisation de la fonction associée.</p>
+<p><strong>Roles pedagogiques concernes et objets contributeurs</strong></p>
+<table>
+<tr><th>Role pedagogique</th><th>Corps rattaches</th><th>Objets contributeurs</th></tr>
+<tr><td>corriges</td><td>21</td><td><code>1SPE-SUITES-CO-007</code>, <code>1SPE-SUITES-CO-010</code>, <code>1SPE-SUITES-CO-014..016</code>, <code>1SPE-SUITES-CO-023</code>, <code>1SPE-SUITES-CO-028..033</code>, <code>1SPE-SUITES-CO-036..037</code>, <code>1SPE-SUITES-CO-040</code>, <code>1SPE-SUITES-CO-042..043</code>, <code>1SPE-SUITES-CO-045</code>, <code>1SPE-SUITES-CO-047..049</code></td></tr>
+<tr><td>cours</td><td>3</td><td><code>1SPE-SUITES-COURS-00</code>, <code>1SPE-SUITES-COURS-07-TC</code>, <code>1SPE-SUITES-CR-014</code></td></tr>
+<tr><td>evaluations</td><td>2</td><td><code>1SPE-SUITES-EV-A</code>, <code>1SPE-SUITES-EV-B</code></td></tr>
+<tr><td>exercices</td><td>21</td><td><code>1SPE-SUITES-EX-007</code>, <code>1SPE-SUITES-EX-010</code>, <code>1SPE-SUITES-EX-014..016</code>, <code>1SPE-SUITES-EX-023</code>, <code>1SPE-SUITES-EX-028..033</code>, <code>1SPE-SUITES-EX-036..037</code>, <code>1SPE-SUITES-EX-040</code>, <code>1SPE-SUITES-EX-042..043</code>, <code>1SPE-SUITES-EX-045</code>, <code>1SPE-SUITES-EX-047..049</code></td></tr>
+<tr><td>methodes</td><td>1</td><td><code>1SPE-SUITES-ME-005</code></td></tr>
+<tr><td>QCM</td><td>3</td><td><code>Q13..15</code></td></tr>
+<tr><td>remediation</td><td>1</td><td><code>1SPE-SUITES-RE-C5</code></td></tr>
+</table>
+<p><strong>Richesse declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• type de capacite : <code>PROCEDURAL</code> ; occasions distinctes : 5 ; statut declaratif : <code>SUFFICIENT</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 21.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• evaluee par : <code>1SPE-SUITES-EV-A</code>, <code>1SPE-SUITES-EV-B</code>.</p>
+<p><strong>Progression de difficulte declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 1 : 5 exercices (10–10 min) — <code>1SPE-SUITES-EX-007</code>, <code>1SPE-SUITES-EX-010</code>, <code>1SPE-SUITES-EX-014..016</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 2 : 9 exercices (20–22 min) — <code>1SPE-SUITES-EX-023</code>, <code>1SPE-SUITES-EX-028..033</code>, <code>1SPE-SUITES-EX-036..037</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 3 : 7 exercices (30–40 min) — <code>1SPE-SUITES-EX-040</code>, <code>1SPE-SUITES-EX-042..043</code>, <code>1SPE-SUITES-EX-045</code>, <code>1SPE-SUITES-EX-047..049</code></p>
+<p><strong>Routage de cette capacite vers l&#x27;humain</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• les 7 cellules portent <code>JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
+<h3>Capacite <code>C6</code> — « Je sais modéliser une situation concrète par une suite. »</h3>
+<p>Libelle BO : Modéliser un phénomène discret par une suite (évolutions successives, suites arithmétiques et géométriques comme modèles linéaire et exponentiel discrets).</p>
+<p><strong>Roles pedagogiques concernes et objets contributeurs</strong></p>
+<table>
+<tr><th>Role pedagogique</th><th>Corps rattaches</th><th>Objets contributeurs</th></tr>
+<tr><td>corriges</td><td>15</td><td><code>1SPE-SUITES-CO-017..019</code>, <code>1SPE-SUITES-CO-024</code>, <code>1SPE-SUITES-CO-032..035</code>, <code>1SPE-SUITES-CO-038..039</code>, <code>1SPE-SUITES-CO-043..044</code>, <code>1SPE-SUITES-CO-046</code>, <code>1SPE-SUITES-CO-049..050</code></td></tr>
+<tr><td>cours</td><td>4</td><td><code>1SPE-SUITES-COURS-00</code>, <code>1SPE-SUITES-COURS-07-FR</code>, <code>1SPE-SUITES-COURS-07-TC</code>, <code>1SPE-SUITES-CR-015</code></td></tr>
+<tr><td>evaluations</td><td>2</td><td><code>1SPE-SUITES-EV-A</code>, <code>1SPE-SUITES-EV-B</code></td></tr>
+<tr><td>exercices</td><td>15</td><td><code>1SPE-SUITES-EX-017..019</code>, <code>1SPE-SUITES-EX-024</code>, <code>1SPE-SUITES-EX-032..035</code>, <code>1SPE-SUITES-EX-038..039</code>, <code>1SPE-SUITES-EX-043..044</code>, <code>1SPE-SUITES-EX-046</code>, <code>1SPE-SUITES-EX-049..050</code></td></tr>
+<tr><td>methodes</td><td>1</td><td><code>1SPE-SUITES-ME-006</code></td></tr>
+<tr><td>QCM</td><td>3</td><td><code>Q16..18</code></td></tr>
+<tr><td>remediation</td><td>1</td><td><code>1SPE-SUITES-RE-C6</code></td></tr>
+</table>
+<p><strong>Richesse declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• type de capacite : <code>PROCEDURAL</code> ; occasions distinctes : 5 ; statut declaratif : <code>SUFFICIENT</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 15.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• evaluee par : <code>1SPE-SUITES-EV-A</code>, <code>1SPE-SUITES-EV-B</code>.</p>
+<p><strong>Progression de difficulte declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 1 : 3 exercices (10–10 min) — <code>1SPE-SUITES-EX-017..019</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 2 : 8 exercices (15–25 min) — <code>1SPE-SUITES-EX-024</code>, <code>1SPE-SUITES-EX-032..035</code>, <code>1SPE-SUITES-EX-038..039</code>, <code>1SPE-SUITES-EX-050</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 3 : 4 exercices (35–40 min) — <code>1SPE-SUITES-EX-043..044</code>, <code>1SPE-SUITES-EX-046</code>, <code>1SPE-SUITES-EX-049</code></p>
+<p><strong>Routage de cette capacite vers l&#x27;humain</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• les 7 cellules portent <code>JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
+<h3>Capacite <code>C7</code> — « Je sais écrire et lire un programme Python (terme, somme, seuil). »</h3>
+<p>Libelle BO : Écrire et interpréter un programme calculant un terme, une somme de termes, un seuil.</p>
+<p><strong>Roles pedagogiques concernes et objets contributeurs</strong></p>
+<table>
+<tr><th>Role pedagogique</th><th>Corps rattaches</th><th>Objets contributeurs</th></tr>
+<tr><td>corriges</td><td>8</td><td><code>1SPE-SUITES-CO-020..021</code>, <code>1SPE-SUITES-CO-034..035</code>, <code>1SPE-SUITES-CO-044</code>, <code>1SPE-SUITES-CO-047</code>, <code>1SPE-SUITES-CO-049..050</code></td></tr>
+<tr><td>cours</td><td>4</td><td><code>1SPE-SUITES-COURS-00</code>, <code>1SPE-SUITES-COURS-07-FR</code>, <code>1SPE-SUITES-COURS-07-TC</code>, <code>1SPE-SUITES-CR-016</code></td></tr>
+<tr><td>evaluations</td><td>2</td><td><code>1SPE-SUITES-EV-A</code>, <code>1SPE-SUITES-EV-B</code></td></tr>
+<tr><td>exercices</td><td>8</td><td><code>1SPE-SUITES-EX-020..021</code>, <code>1SPE-SUITES-EX-034..035</code>, <code>1SPE-SUITES-EX-044</code>, <code>1SPE-SUITES-EX-047</code>, <code>1SPE-SUITES-EX-049..050</code></td></tr>
+<tr><td>methodes</td><td>1</td><td><code>1SPE-SUITES-ME-007</code></td></tr>
+<tr><td>QCM</td><td>3</td><td><code>Q19..21</code></td></tr>
+<tr><td>remediation</td><td>1</td><td><code>1SPE-SUITES-RE-C7</code></td></tr>
+</table>
+<p><strong>Richesse declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• type de capacite : <code>ATOMIC_SUPPORT</code> ; occasions distinctes : 5 ; statut declaratif : <code>SUFFICIENT</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 8.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• evaluee par : <code>1SPE-SUITES-EV-A</code>, <code>1SPE-SUITES-EV-B</code>.</p>
+<p><strong>Progression de difficulte declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 1 : 2 exercices (10–10 min) — <code>1SPE-SUITES-EX-020..021</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 2 : 3 exercices (15–25 min) — <code>1SPE-SUITES-EX-034..035</code>, <code>1SPE-SUITES-EX-050</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 3 : 3 exercices (35–40 min) — <code>1SPE-SUITES-EX-044</code>, <code>1SPE-SUITES-EX-047</code>, <code>1SPE-SUITES-EX-049</code></p>
+<p><strong>Routage de cette capacite vers l&#x27;humain</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• les 7 cellules portent <code>JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
+<h3>Capacite <code>C8</code> — « Je sais reconnaître intuitivement une limite finie, une limite infinie ou une absence de limite, sans formalisation. »</h3>
+<p>Libelle BO : Sensibilisation intuitive à la notion de limite d&#x27;une suite : limite finie, limite infinie et absence de limite ; toute formalisation est exclue.</p>
+<p><strong>Roles pedagogiques concernes et objets contributeurs</strong></p>
+<table>
+<tr><th>Role pedagogique</th><th>Corps rattaches</th><th>Objets contributeurs</th></tr>
+<tr><td>corriges</td><td>10</td><td><code>1SPE-SUITES-CO-027</code>, <code>1SPE-SUITES-CO-037</code>, <code>1SPE-SUITES-CO-040</code>, <code>1SPE-SUITES-CO-042..043</code>, <code>1SPE-SUITES-CO-045..046</code>, <code>1SPE-SUITES-CO-048..049</code>, <code>1SPE-SUITES-CO-051</code></td></tr>
+<tr><td>cours</td><td>2</td><td><code>1SPE-SUITES-COURS-00</code>, <code>1SPE-SUITES-CR-017</code></td></tr>
+<tr><td>evaluations</td><td>2</td><td><code>1SPE-SUITES-EV-A</code>, <code>1SPE-SUITES-EV-B</code></td></tr>
+<tr><td>exercices</td><td>10</td><td><code>1SPE-SUITES-EX-027</code>, <code>1SPE-SUITES-EX-037</code>, <code>1SPE-SUITES-EX-040</code>, <code>1SPE-SUITES-EX-042..043</code>, <code>1SPE-SUITES-EX-045..046</code>, <code>1SPE-SUITES-EX-048..049</code>, <code>1SPE-SUITES-EX-051</code></td></tr>
+<tr><td>methodes</td><td>1</td><td><code>1SPE-SUITES-ME-008</code></td></tr>
+<tr><td>QCM</td><td>1</td><td><code>Q3</code></td></tr>
+<tr><td>remediation</td><td>1</td><td><code>1SPE-SUITES-RE-C8</code></td></tr>
+</table>
+<p><strong>Richesse declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• type de capacite : <code>PROCEDURAL</code> ; occasions distinctes : 5 ; statut declaratif : <code>SUFFICIENT</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• occasions existantes : assessment : 2 · method : 1 · qcm : 1 · remediation : 1 · targeted_practice : 10.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• evaluee par : <code>1SPE-SUITES-EV-A</code>, <code>1SPE-SUITES-EV-B</code>.</p>
+<p><strong>Progression de difficulte declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 2 : 3 exercices (15–20 min) — <code>1SPE-SUITES-EX-027</code>, <code>1SPE-SUITES-EX-037</code>, <code>1SPE-SUITES-EX-051</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 3 : 7 exercices (30–40 min) — <code>1SPE-SUITES-EX-040</code>, <code>1SPE-SUITES-EX-042..043</code>, <code>1SPE-SUITES-EX-045..046</code>, <code>1SPE-SUITES-EX-048..049</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• palier sans exercice cible : parcours 1.</p>
+<p><strong>Routage de cette capacite vers l&#x27;humain</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• les 7 cellules portent <code>JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
+<h2>5. Question de QCM routee vers l&#x27;humain</h2>
+<p>Aucune question de ce chapitre n&#x27;est routee vers une revue humaine par <code>audit/QCM_INDEPENDENT_EVIDENCE_V2.json</code>.</p>
+<h2>6. Coherence du chapitre et coherence au niveau du manuel</h2>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• diversite des gestes de raisonnement au niveau du chapitre : <code>INSUFFICIENT</code> (declaratif : <code>INSUFFICIENT</code>).</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• aucun profil de diversite declare pour ce chapitre : les gestes de raisonnement ne sont pas mesures, ils restent a juger.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• capacites routees vers l&#x27;humain : 8 sur 8.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• attendus officiels obligatoires rattaches : 15 sur 15 ; manquants : 0 ; hors annee : 0.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• chapitres dont ce chapitre depend par ses prerequis : <code>2GT</code>, <code>SNT</code>. La coherence au niveau du manuel se juge avec eux.</p>
+<p>La regle du depot : « la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers ».</p>
+<h2>7. Barème commenté — propositions à juger</h2>
+<p>La politique est fixée : pour chaque question évaluée, des POINTS, un ATTENDU ESSENTIEL, et un CRÉDIT PARTIEL seulement lorsqu&#x27;une décomposition objective le justifie. Le corrigé scientifique reste séparé et complet ; le barème ne le remplace pas.</p>
+<p>Ces propositions sont <strong>machine</strong> et ne valent aucune approbation. Elles sont le contenu candidat que votre verdict de chapitre couvre.</p>
+<h3>1SPE-SUITES-EV-A</h3>
+<p><strong>Exercice 1</strong> — 6 points (C1, C2, C5, C8)</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 1 pt — Attendu : calculer — On applique la relation de récurrence $u_{n+1} = u_n + 4$ : \[ u_1 = u_0 + 4 = 3 + 4 = 7, \qquad u_2 = u_1 + 4 = 7 + 4 = 11, \qquad u_3 = u_2 + 4 = 11 + 4 = 15.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 2 pts — Attendu : démontrer — \textbf{Conclusion :} La suite $(u_n)$ est une suite arithmétique de raison $r = 4$ et de premier terme $u_0 = 3$.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 1 pt — Attendu : exprimer — Par la formule du terme général d&#x27;une suite arithmétique : \[ \boxed{u_n = 3 + 4n} \quad \text{pour tout } n \in \mathbb{N}.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4** — 1 pt — Attendu : justifier — \textit{Remarque : on peut aussi argumenter que la raison $r = 4 > 0$, ce qui suffit pour conclure qu&#x27;une suite arithmétique est strictement croissante.}.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q5** — 1 pt — Attendu : justifier — Chaque terme dépasse le précédent de $4$, et cet écart ne diminue jamais : en allant assez loin, on dépasse n&#x27;importe quelle valeur fixée à.</p>
+<p><strong>Exercice 2</strong> — 5 points (C3, C4)</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 1 pt — Attendu : calculer — \[ u_0 = 2 \times 3^0 = 2 \times 1 = 2, \qquad u_1 = 2 \times 3^1 = 6, \qquad u_2 = 2 \times 3^2 = 2 \times 9 = 18.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 2 pts — Attendu : démontrer — \textbf{Conclusion :} La suite $(u_n)$ est une suite géométrique de raison $q = 3$ et de premier terme $u_0 = 2$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 2 pts — Attendu : calculer — \] \[ \boxed{S = 242.} \] \textit{Vérification :} $u_0 + u_1 + u_2 + u_3 + u_4 = 2 + 6 + 18 + 54 + 162 = 242$.</p>
+<p><strong>Exercice 3</strong> — 5 points (C6, C7)</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 1 pt — Attendu : justifier — Le capital au bout de $(n+1)$ années est donc : \[ u_{n+1} = u_n + 0{,}05\,u_n = (1 + 0{,}05)\,u_n = 1{,}05\,u_n.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 1 pt — Attendu : en déduire — Par la formule du terme général d&#x27;une suite géométrique : \[ \boxed{u_n = 800 \times 1{,}05^n} \quad \text{pour tout } n \in \mathbb{N}.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 1 pt — Attendu : calculer — \[ u_1 = 800 \times 1{,}05 = 840 \text{ €}, \qquad u_2 = 800 \times 1{,}05^2 = 800 \times 1{,}1025 = 882 \text{ €}.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4a** — 1 pt — Attendu : interpréter — \item \texttt{n = n + 1} : on incrément.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4b** — 1 pt — Attendu : vérifier — \item \texttt{n = n + 1} : on incrément.</p>
+<p><strong>Exercice 4</strong> — 4 points (C2, C4)</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 1 pt — Attendu : montrer — \textbf{Conclusion :} $(v_n)$ est une suite arithmétique de raison $r = 2$ et de premier terme $v_0 = 2 \times 0 + 5 = 5$.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 2 pts — Attendu : établir — \] \[ \boxed{S_n = (n+1)(n+5)} \quad \text{pour tout } n \in \mathbb{N}.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 1 pt — Attendu : déterminer — \] \textbf{Conclusion :} Le plus petit entier naturel $n$ tel que $S_n > 200$ est $\boxed{n = 12}$.</p>
+<h3>1SPE-SUITES-EV-B</h3>
+<p><strong>Exercice 1</strong> — 6 points (C1, C2, C5, C8)</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 1 pt — Attendu : calculer — On applique la relation de récurrence $u_{n+1} = u_n + 3$ : \[ u_1 = u_0 + 3 = 5 + 3 = 8, \qquad u_2 = u_1 + 3 = 8 + 3 = 11, \qquad u_3 = u_2 + 3 = 11 + 3 = 14.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 2 pts — Attendu : démontrer — \textbf{Conclusion :} La suite $(u_n)$ est une suite arithmétique de raison $r = 3$ et de premier terme $u_0 = 5$.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 1 pt — Attendu : exprimer — Par la formule du terme général d&#x27;une suite arithmétique : \[ \boxed{u_n = 5 + 3n} \quad \text{pour tout } n \in \mathbb{N}.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4** — 1 pt — Attendu : justifier — \textit{Remarque : on peut aussi argumenter que la raison $r = 3 > 0$, ce qui suffit pour conclure qu&#x27;une suite arithmétique est strictement croissante.}.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q5** — 1 pt — Attendu : justifier — Chaque terme dépasse le précédent de $3$, et cet écart ne diminue jamais : en allant assez loin, on dépasse n&#x27;importe quelle valeur fixée à.</p>
+<p><strong>Exercice 2</strong> — 5 points (C3, C4)</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 1 pt — Attendu : calculer — \[ u_0 = 4 \times 2^0 = 4 \times 1 = 4, \qquad u_1 = 4 \times 2^1 = 8, \qquad u_2 = 4 \times 2^2 = 4 \times 4 = 16.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 2 pts — Attendu : démontrer — \textbf{Conclusion :} La suite $(u_n)$ est une suite géométrique de raison $q = 2$ et de premier terme $u_0 = 4$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 2 pts — Attendu : calculer — \] \[ \boxed{S = 124.} \] \textit{Vérification :} $u_0 + u_1 + u_2 + u_3 + u_4 = 4 + 8 + 16 + 32 + 64 = 124$.</p>
+<p><strong>Exercice 3</strong> — 5 points (C6, C7)</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 1 pt — Attendu : justifier — Le capital au bout de $(n+1)$ années est donc : \[ u_{n+1} = u_n + 0{,}04\,u_n = (1 + 0{,}04)\,u_n = 1{,}04\,u_n.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 1 pt — Attendu : en déduire — Par la formule du terme général d&#x27;une suite géométrique : \[ \boxed{u_n = 1\,000 \times 1{,}04^n} \quad \text{pour tout } n \in \mathbb{N}.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 1 pt — Attendu : calculer — \[ u_1 = 1\,000 \times 1{,}04 = 1\,040 \text{ €}, \qquad u_2 = 1\,000 \times 1{,}04^2 = 1\,000 \times 1{,}0816 \approx 1\,082 \text{ €}.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4a** — 1 pt — Attendu : interpréter — \item \texttt{n = n + 1} : on incrémen.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4b** — 1 pt — Attendu : vérifier — \item \texttt{n = n + 1} : on incrémen.</p>
+<p><strong>Exercice 4</strong> — 4 points (C2, C4)</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 1 pt — Attendu : justifier — Son terme général est \[ \boxed{p_n=18+4n}.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 2 pts — Attendu : établir — \] \[ \boxed{T_n=(n+1)(18+2n)}. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 1 pt — Attendu : calculer — \] Le théâtre compte donc $\boxed{480\text{ places}}$ dans ses douze premières rangées.</p>
+<p>Ce chapitre porte 32 question(s) évaluée(s), dont 0 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.</p>
+<h2>8. Checklist du role <code>EXPERT_PROGRAMME_PEDAGOGIE</code></h2>
+<p>1. completude du programme officiel</p>
+<p>2. alignement des capacites</p>
+<p>3. progression</p>
+<p>4. prerequis</p>
+<p>5. methodes</p>
+<p>6. diversite des exercices</p>
+<p>7. difficulte</p>
+<p>8. richesse</p>
+<p>9. remediation</p>
+<p>10. conception des evaluations</p>
+<p>11. pertinence pedagogique des QCM</p>
+<p>12. coherence du chapitre</p>
+<p>13. coherence au niveau du manuel</p>
+<p>Cette checklist est celle du role. Elle s&#x27;applique au CHAPITRE COURANT ENTIER, y compris aux objets qu&#x27;aucune section de cette vue ne cite.</p>
+<h2>9. Reference de lecture : le PDF candidat</h2>
+<p>Le PDF sert a lire le chapitre dans l&#x27;ordre ou l&#x27;eleve le recevra. Il n&#x27;est pas une preuve : le packet ne porte aucune preuve de rendu (<code>render_evidence = ABSENT</code>), et aucun index page-objet n&#x27;est etabli.</p>
+<table>
+<tr><th>Fichier</th><th>Variante</th><th>Pages</th><th>Role declare</th><th>Etat declare</th></tr>
+<tr><td><code>MANUELS_PDF_PUBLICATION/01_Maths_1re_Spe_Eleve.pdf</code></td><td>eleve</td><td>371</td><td>HISTORICAL_PUBLICATION_SNAPSHOT</td><td>STALE_UNDECIDED</td></tr>
+<tr><td><code>MANUELS_PDF_PUBLICATION/02_Maths_1re_Spe_Professeur.pdf</code></td><td>professeur</td><td>617</td><td>HISTORICAL_PUBLICATION_SNAPSHOT</td><td>STALE_UNDECIDED</td></tr>
+</table>
+<p>Ces instantanes sont declares <code>STALE_UNDECIDED</code> dans <code>audit/PDF_ARTIFACT_REGISTRY.yaml</code> : ils ne sont pas garantis identiques au contenu courant. Le candidat d&#x27;impression courant se reconstruit par <code>python3 Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual 1SPE --variant &lt;variant&gt; --record-observed</code> (recu : <code>audit/1SPE_PRINT_CANDIDATE_BUILD_RECEIPT.json</code>, statut <code>PRINT_CANDIDATE</code>).</p>
+<p>Rappel du recu : Ces PDF ne sont pas finals : aucun 1SPE_FINAL_CONTENT_SHA n&#x27;est figé, les deux revues humaines par chapitre et le dossier D7 restent en attente.</p>
+<p>En cas d&#x27;ecart entre le PDF et les fichiers sources, ce sont les sources du chapitre qui font foi : <code>Mathematiques/manuel-maths/chapitres/1SPE-SUITES/</code>.</p>
+<p>---</p>
+<p>Cette vue est derivee et sans autorite. L&#x27;autorite machine reste le packet JSON canonique. Le packet de ce role est <code>audit/reviews/human/1SPE-SUITES/packet-B-EXPERT_PROGRAMME_PEDAGOGIE.json</code>. L&#x27;unite de decision est le CHAPITRE : 10 chapitres x 2 roles = 20 verdicts, pas des centaines de signatures objet par objet.</p>
+<p>Marche a suivre commune aux deux roles : <code>audit/reviews/human/ASSIGNMENT_TEMPLATE_AND_REVIEW_INSTRUCTIONS.md</code>.</p>
+<h2>Votre verdict</h2>
+<div class="form">
+<p>Le verdict ne se saisit pas dans cette page : elle est dérivée et sans
+autorité. Trois commandes, dans cet ordre.</p>
+<p><strong>1. Obtenir le brouillon</strong> — tous les condensats sont
+pré-remplis ; ne restent que les champs qui vous appartiennent.</p>
+<p><code>python3 scripts/human_review_governance.py draft 1SPE-SUITES \
+--packet audit/reviews/human/1SPE-SUITES/packet-B-EXPERT_PROGRAMME_PEDAGOGIE.json \
+--out audit/reviews/human/1SPE-SUITES/receipt-B-EXPERT_PROGRAMME_PEDAGOGIE.json</code></p>
+<p><strong>2. Renseigner, et rien d'autre</strong> :
+<code>reviewer_name</code>, <code>reviewer_identity_reference</code>,
+<code>review_timestamp</code> (RFC 3339),
+<code>verdict</code> parmi
+<code>APPROVED</code>, <code>CHANGES_REQUESTED</code>, <code>REJECTED</code>,
+<code>comments</code>. Un <code>CHANGES_REQUESTED</code> exige au moins un
+constat dans <code>blocking_findings</code> ; un <code>APPROVED</code> n'en
+admet aucun.</p>
+<p><strong>3. Valider</strong> — le contrôle refuse un verdict sans identité,
+sans rôle, sans condensat, ou sur un paquet périmé.</p>
+<p><code>python3 scripts/human_review_governance.py validate 1SPE-SUITES \
+--packet audit/reviews/human/1SPE-SUITES/packet-B-EXPERT_PROGRAMME_PEDAGOGIE.json \
+--receipt audit/reviews/human/1SPE-SUITES/receipt-B-EXPERT_PROGRAMME_PEDAGOGIE.json</code></p>
+<p>Le chapitre reçoit <strong>deux</strong> verdicts, par
+<strong>deux personnes distinctes</strong> : le contrôle refuse deux rôles
+signés par la même identité. Une même personne peut en revanche prendre
+plusieurs chapitres.</p>
+<p>Condensat sémantique que votre approbation lie :
+<code>sha256:5ef8abbb56f0cdb286ae93b021d435dc81775fa1c0d2287a80f1e302cda93785</code></p>
+</div>
+
+</body></html>

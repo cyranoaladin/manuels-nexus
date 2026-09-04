@@ -1,0 +1,380 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><title>1SPE-SECOND-DEGRE — B-EXPERT_PROGRAMME_PEDAGOGIE</title><style>
+body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+max-width:52rem;margin:2rem auto;padding:0 1.2rem;color:#1a1a1a}
+h1{font-size:1.6rem}h2{font-size:1.25rem;margin-top:2.2rem;
+border-bottom:1px solid #ddd;padding-bottom:.3rem}
+h3{font-size:1.05rem;margin-top:1.6rem}
+code{background:#f4f4f6;padding:.1em .3em;border-radius:3px;font-size:.9em}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.92rem}
+th,td{border:1px solid #ddd;padding:.4rem .6rem;text-align:left}
+th{background:#f7f7f9}
+blockquote{border-left:3px solid #c8102e;margin:1rem 0;padding:.4rem 1rem;
+background:#fbf5f6}
+.mandatory{background:#fff4e5;border-left:3px solid #d97706;padding:.6rem 1rem}
+.form{background:#f7f7f9;border:1px solid #ddd;padding:1rem;border-radius:4px}
+</style><script>window.MathJax={tex:{inlineMath:[["$","$"]],displayMath:[["\\[","\\]"]],processEscapes:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre"]}};</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body>
+<h1>Vue de lecture — Fonctions polynômes du second degré — EXPERT_PROGRAMME_PEDAGOGIE</h1>
+<p>Chapitre <code>1SPE-SECOND-DEGRE</code> · manuel <code>1SPE</code> (Première, Spécialité mathématiques) · packet B · role <code>EXPERT_PROGRAMME_PEDAGOGIE</code>.</p>
+<blockquote><strong>Cette vue est derivee et sans autorite. L&#x27;autorite machine reste le packet JSON canonique.</strong></blockquote>
+<blockquote></blockquote>
+<blockquote>Packet canonique : <code>audit/reviews/human/1SPE-SECOND-DEGRE/packet-B-EXPERT_PROGRAMME_PEDAGOGIE.json</code></blockquote>
+<blockquote>Etat de revue : <code>audit/reviews/human/1SPE-SECOND-DEGRE/REVIEW_STATE.json</code></blockquote>
+<blockquote>Producteur de cette vue : <code>scripts/build_human_review_reading_views.py</code></blockquote>
+<blockquote></blockquote>
+<blockquote>Toute divergence entre cette vue et le packet se tranche en faveur du packet. Cette vue ne cree, ne ferme et ne reduit aucune obligation.</blockquote>
+<h2>1. Ce que vous decidez</h2>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• L&#x27;unite de decision est le CHAPITRE : 10 chapitres x 2 roles = 20 verdicts, pas des centaines de signatures objet par objet.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Aucun humain n&#x27;a encore approuve ce chapitre : REVIEW_DELTA_BASELINE = NONE. Le perimetre de revue est le CHAPITRE COURANT ENTIER. Les listes ci-dessous dirigent l&#x27;attention, elles ne reduisent pas le perimetre.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (<code>sha256:080a729e99ba25e3ac48b7ef480a1ff1b6b37be65945b34aed30ee74c86bb7e9</code>) ; l&#x27;approbation graphique releve de la porte D7, independante.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Verdicts autorises, a rendre dans le packet JSON canonique et jamais dans cette vue : <code>APPROVED</code> / <code>CHANGES_REQUESTED</code> / <code>REJECTED</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Cette vue ne porte aucune decision et ne nomme personne : l&#x27;assignation du role reste <code>PENDING_UNASSIGNED</code>, l&#x27;etat du packet reste <code>PENDING_UNASSIGNED</code>.</p>
+<table>
+<tr><th>Perimetre</th><th>Valeur</th></tr>
+<tr><td>Objets du chapitre dans le packet</td><td>152</td></tr>
+<tr><td>Empreinte de l&#x27;ensemble d&#x27;objets</td><td><code>sha256:e4a5653a775bdf85a7ed42d96f50810dd2d955883f36f7823c205a775f79d8a8</code></td></tr>
+<tr><td>Empreinte semantique liee a l&#x27;approbation</td><td><code>sha256:080a729e99ba25e3ac48b7ef480a1ff1b6b37be65945b34aed30ee74c86bb7e9</code></td></tr>
+<tr><td>Empreinte du packet</td><td><code>sha256:c48e1e5d7497d4e246c5fb1cce899fcd7cca605e87d0ce02a34507555bbedca6</code></td></tr>
+<tr><td>Revision du depot gelee dans le packet</td><td><code>5bc44275a0afe33f10b7ce2ec7700778f8de6308</code></td></tr>
+<tr><td>Preuve de rendu portee par le packet</td><td><code>ABSENT</code></td></tr>
+</table>
+<h2>2. Le chapitre et ses capacites du programme officiel</h2>
+<p><strong>Fonctions polynômes du second degré</strong> — programme applicable 2026-2027, MENE2602917A, BO n° 14 du 2026-04-02.</p>
+<p>Source officielle : https://www.education.gouv.fr/bo/2026/Hebdo14/MENE2602917A</p>
+<p>Situation d&#x27;accroche declaree : Un artisan fabrique des boites en carton en decoupant des carres aux coins d&#x27;une feuille rectangulaire. Quel cote de carre maximise le volume de la boite ? Un probleme d&#x27;optimisation qui se ramene a l&#x27;etude d&#x27;un polynome du second degre.</p>
+<p>Temps estime declare : parcours 1 : 12 h · parcours 2 : 10 h · parcours 3 : 8 h.</p>
+<table>
+<tr><th>Code</th><th>Libelle eleve</th><th>Libelle BO</th><th>Demonstration exigible</th></tr>
+<tr><td><code>C1</code></td><td>Je sais reconnaitre un polynome du second degre et passer d&#x27;une forme a une autre.</td><td>Determiner les fonctions polynomes du second degre definies sur R. Reconnaitre la forme developpee, factorisee et canonique.</td><td>non</td></tr>
+<tr><td><code>C2</code></td><td>Je sais determiner le sommet, l&#x27;axe de symetrie et dresser le tableau de variations.</td><td>Determiner l&#x27;axe de symetrie et le sommet de la parabole. Dresser le tableau de variations de la fonction polynome du second degre.</td><td>non</td></tr>
+<tr><td><code>C3</code></td><td>Je sais calculer le discriminant et resoudre une equation du second degre.</td><td>Calculer le discriminant d&#x27;une equation du second degre. Determiner les solutions reelles selon le signe du discriminant.</td><td>oui — Etablissement des formules donnant les solutions d&#x27;une equation du second degre.</td></tr>
+<tr><td><code>C4</code></td><td>Je sais factoriser un trinome et etudier son signe.</td><td>Factoriser, si possible, un polynome du second degre. Determiner le signe d&#x27;un polynome du second degre a partir de ses racines ou du discriminant.</td><td>non</td></tr>
+<tr><td><code>C5</code></td><td>Je sais resoudre une inequation du second degre.</td><td>Resoudre une inequation du second degre. Resoudre une equation ou inequation se ramenant au second degre.</td><td>non</td></tr>
+<tr><td><code>C6</code></td><td>Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum.</td><td>Modeliser un probleme a l&#x27;aide d&#x27;une fonction polynome du second degre. Problemes d&#x27;optimisation.</td><td>non</td></tr>
+</table>
+<p><strong>Attendus officiels rattaches, capacite par capacite</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C1</code> — 1 attendu :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-074</code> (MANDATORY_CAPACITY, Équations, fonctions polynômes du second degré) : Choisir une forme adaptée (développée réduite, canonique, factorisée) d’une fonction polynôme du second degré dans le cadre de la résolution d’un problème (équation, inéquation, optimisation, variations).</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C2</code> : aucun attendu officiel rattache dans <code>audit/SEMANTIC_ALIGNMENT_LEDGER.json</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C3</code> — 2 attendus :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-070</code> (MANDATORY_KNOWLEDGE, Équations, fonctions polynômes du second degré) : Forme canonique d’une fonction polynôme du second degré. Discriminant. Factorisation éventuelle. Résolution d’une équation du second degré. Signe.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-075</code> (MANDATORY_SKILL, Équations, fonctions polynômes du second degré) : Résolution de l’équation du second degré.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C4</code> — 7 attendus :</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-031</code> (MANDATORY_SKILL, Automatismes — calcul numérique et algébrique) : Déterminer les solutions d’une équation produit nul.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-032</code> (MANDATORY_SKILL, Automatismes — calcul numérique et algébrique) : Déterminer le signe d’une expression du premier degré, d’une expression factorisée du second degré.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-033</code> (MANDATORY_SKILL, Automatismes — calcul numérique et algébrique) : Développer, factoriser, réduire une expression algébrique simple.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-069</code> (MANDATORY_KNOWLEDGE, Équations, fonctions polynômes du second degré) : Fonction polynôme du second degré donnée sous forme factorisée. Racines, signe, expression de la somme et du produit des racines.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-071</code> (MANDATORY_CAPACITY, Équations, fonctions polynômes du second degré) : Étudier le signe d’une fonction polynôme du second degré donnée sous forme factorisée.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-072</code> (MANDATORY_CAPACITY, Équations, fonctions polynômes du second degré) : Déterminer les fonctions polynômes du second degré s’annulant en deux nombres réels distincts.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-OFFICIAL-073</code> (MANDATORY_CAPACITY, Équations, fonctions polynômes du second degré) : Factoriser une fonction polynôme du second degré, en diversifiant les stratégies : racine évidente, détection des racines par leur somme et leur produit, identité remarquable, application des formules générales.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C5</code> : aucun attendu officiel rattache dans <code>audit/SEMANTIC_ALIGNMENT_LEDGER.json</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C6</code> : aucun attendu officiel rattache dans <code>audit/SEMANTIC_ALIGNMENT_LEDGER.json</code>.</p>
+<p><strong>Prerequis declares par le contrat du chapitre</strong></p>
+<table>
+<tr><th>Code</th><th>Libelle</th><th>Chapitre d&#x27;origine</th></tr>
+<tr><td><code>R1</code></td><td>Calcul litteral : developper, factoriser, identites remarquables</td><td>2GT</td></tr>
+<tr><td><code>R2</code></td><td>Equations du premier degre et produit nul</td><td>2GT</td></tr>
+<tr><td><code>R3</code></td><td>Fonctions : image, antecedent, courbe representative</td><td>2GT</td></tr>
+<tr><td><code>R4</code></td><td>Fonctions de reference : carre, inverse</td><td>2GT</td></tr>
+<tr><td><code>R5</code></td><td>Inegalites : regles de calcul, tableau de signes</td><td>2GT</td></tr>
+</table>
+<h2>3. Structure reelle et ordre d&#x27;assemblage courant</h2>
+<p>L&#x27;ordre ci-dessous n&#x27;est pas l&#x27;ordre alphabetique des repertoires : il est lu chez l&#x27;assembleur du manuel (<code>Mathematiques/manuel-maths/scripts/assemble_manuel.py</code>, <code>collect_chapter</code>). C&#x27;est la sequence que le lecteur du PDF recoit.</p>
+<table>
+<tr><th>Rang</th><th>Rubrique imprimee</th><th>Objets (professeur)</th></tr>
+<tr><td>1</td><td>Ouverture</td><td>1</td></tr>
+<tr><td>2</td><td>Diagnostic</td><td>1</td></tr>
+<tr><td>3</td><td>Cours</td><td>6</td></tr>
+<tr><td>4</td><td>Méthodes</td><td>6</td></tr>
+<tr><td>5</td><td>Exercices</td><td>70</td></tr>
+<tr><td>6</td><td>TD</td><td>2</td></tr>
+<tr><td>7</td><td>Auto-évaluation</td><td>1</td></tr>
+<tr><td>8</td><td>Évaluation</td><td>4</td></tr>
+<tr><td>9</td><td>Remédiation</td><td>11</td></tr>
+<tr><td>10</td><td>Corrigés</td><td>50</td></tr>
+</table>
+<p>Total assemble : 152 objets en variante professeur, 100 en variante eleve (la variante eleve exclut les corriges et les corriges d&#x27;evaluation).</p>
+<p>La page d&#x27;ouverture du chapitre est composee par l&#x27;assembleur a partir de <code>contrat.yaml</code> (titre, capacites, situation d&#x27;accroche, temps estime) : elle n&#x27;apparait donc pas comme un objet de la sequence.</p>
+<p><strong>Placement des temps pedagogiques dans la progression</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 2 — le diagnostic ouvre le chapitre.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 3 — le cours precede les methodes.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 4 — les methodes sont regroupees avant les exercices.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 5 — les exercices suivent les methodes en un seul bloc.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 6 — le TD est place apres les exercices.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 7 — le QCM d&#x27;auto-evaluation suit le TD.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 8 — les evaluations viennent apres le QCM.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 9 — la remediation est placee apres les evaluations.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• rang 10 — les corriges ferment la variante professeur.</p>
+<p>Cet ordre est un fait d&#x27;assemblage, pas un jugement : sa pertinence pedagogique fait partie de ce que vous evaluez.</p>
+<h2>4. Capacite par capacite : cellules, contributeurs, richesse</h2>
+<p><code>audit/SEMANTIC_ALIGNMENT_LEDGER.json</code> decoupe le manuel en cellules capacite x role pedagogique. Ce chapitre en porte 42. Elles sont regroupees ici par capacite : une checklist cellule par cellule ne se lit pas.</p>
+<p><strong>Pourquoi ces cellules arrivent chez vous.</strong> Seul le META rattache les corps a une capacite ; l&#x27;identite declaree est resolue par egalite exacte, et la couverture de reponses n&#x27;etablit qu&#x27;une COUVERTURE. Etablir qu&#x27;un corps SERT la capacite est un jugement pedagogique, pas un calcul : c&#x27;est un resultat terminal, pas une lacune de mesure. C&#x27;est pourquoi chaque cellule de ce chapitre est routee vers vous.</p>
+<p>Chaque capacite rappelle ensuite ce qui lui est propre : le nombre de cellules, leur disposition, les preuves eventuellement attachees et l&#x27;etat de sa richesse.</p>
+<h3>Capacite <code>C1</code> — « Je sais reconnaitre un polynome du second degre et passer d&#x27;une forme a une autre. »</h3>
+<p>Libelle BO : Determiner les fonctions polynomes du second degre definies sur R. Reconnaitre la forme developpee, factorisee et canonique.</p>
+<p><strong>Roles pedagogiques concernes et objets contributeurs</strong></p>
+<table>
+<tr><th>Role pedagogique</th><th>Corps rattaches</th><th>Objets contributeurs</th></tr>
+<tr><td>corriges</td><td>13</td><td><code>1SPE-SECDEG-CO-001..003</code>, <code>1SPE-SECDEG-CO-019..022</code>, <code>1SPE-SECDEG-CO-031..032</code>, <code>1SPE-SECDEG-CO-035</code>, <code>1SPE-SECDEG-CO-038</code>, <code>1SPE-SECDEG-CO-040</code>, <code>1SPE-SECDEG-CO-043</code></td></tr>
+<tr><td>cours</td><td>2</td><td><code>1SPE-SECDEG-CR-000</code>, <code>1SPE-SECDEG-CR-010</code></td></tr>
+<tr><td>evaluations</td><td>2</td><td><code>1SPE-SECDEG-EV-A</code>, <code>1SPE-SECDEG-EV-B</code></td></tr>
+<tr><td>exercices</td><td>13</td><td><code>1SPE-SECDEG-EX-001..003</code>, <code>1SPE-SECDEG-EX-019..022</code>, <code>1SPE-SECDEG-EX-031..032</code>, <code>1SPE-SECDEG-EX-035</code>, <code>1SPE-SECDEG-EX-038</code>, <code>1SPE-SECDEG-EX-040</code>, <code>1SPE-SECDEG-EX-043</code></td></tr>
+<tr><td>methodes</td><td>1</td><td><code>1SPE-SECDEG-ME-001</code></td></tr>
+<tr><td>QCM</td><td>3</td><td><code>Q1..3</code></td></tr>
+<tr><td>remediation</td><td>1</td><td><code>1SPE-SECDEG-RE-C1</code></td></tr>
+</table>
+<p><strong>Richesse declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• type de capacite : <code>PROCEDURAL</code> ; occasions distinctes : 5 ; statut declaratif : <code>SUFFICIENT</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 13.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• evaluee par : <code>1SPE-SECDEG-EV-A</code>, <code>1SPE-SECDEG-EV-B</code>.</p>
+<p><strong>Progression de difficulte declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 1 : 4 exercices (10–10 min) — <code>1SPE-SECDEG-EX-001..003</code>, <code>1SPE-SECDEG-EX-043</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 2 : 6 exercices (20–20 min) — <code>1SPE-SECDEG-EX-019..022</code>, <code>1SPE-SECDEG-EX-031..032</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 3 : 3 exercices (35–40 min) — <code>1SPE-SECDEG-EX-035</code>, <code>1SPE-SECDEG-EX-038</code>, <code>1SPE-SECDEG-EX-040</code></p>
+<p><strong>Routage de cette capacite vers l&#x27;humain</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• les 7 cellules portent <code>JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
+<h3>Capacite <code>C2</code> — « Je sais determiner le sommet, l&#x27;axe de symetrie et dresser le tableau de variations. »</h3>
+<p>Libelle BO : Determiner l&#x27;axe de symetrie et le sommet de la parabole. Dresser le tableau de variations de la fonction polynome du second degre.</p>
+<p><strong>Roles pedagogiques concernes et objets contributeurs</strong></p>
+<table>
+<tr><th>Role pedagogique</th><th>Corps rattaches</th><th>Objets contributeurs</th></tr>
+<tr><td>corriges</td><td>13</td><td><code>1SPE-SECDEG-CO-004..006</code>, <code>1SPE-SECDEG-CO-019..020</code>, <code>1SPE-SECDEG-CO-027..028</code>, <code>1SPE-SECDEG-CO-035</code>, <code>1SPE-SECDEG-CO-037</code>, <code>1SPE-SECDEG-CO-040</code>, <code>1SPE-SECDEG-CO-042</code>, <code>1SPE-SECDEG-CO-045</code>, <code>1SPE-SECDEG-CO-049</code></td></tr>
+<tr><td>cours</td><td>2</td><td><code>1SPE-SECDEG-CR-000</code>, <code>1SPE-SECDEG-CR-011</code></td></tr>
+<tr><td>evaluations</td><td>2</td><td><code>1SPE-SECDEG-EV-A</code>, <code>1SPE-SECDEG-EV-B</code></td></tr>
+<tr><td>exercices</td><td>13</td><td><code>1SPE-SECDEG-EX-004..006</code>, <code>1SPE-SECDEG-EX-019..020</code>, <code>1SPE-SECDEG-EX-027..028</code>, <code>1SPE-SECDEG-EX-035</code>, <code>1SPE-SECDEG-EX-037</code>, <code>1SPE-SECDEG-EX-040</code>, <code>1SPE-SECDEG-EX-042</code>, <code>1SPE-SECDEG-EX-045</code>, <code>1SPE-SECDEG-EX-049</code></td></tr>
+<tr><td>methodes</td><td>1</td><td><code>1SPE-SECDEG-ME-002</code></td></tr>
+<tr><td>QCM</td><td>3</td><td><code>Q4..6</code></td></tr>
+<tr><td>remediation</td><td>1</td><td><code>1SPE-SECDEG-RE-C2</code></td></tr>
+</table>
+<p><strong>Richesse declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• type de capacite : <code>PROCEDURAL</code> ; occasions distinctes : 5 ; statut declaratif : <code>SUFFICIENT</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 13.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• evaluee par : <code>1SPE-SECDEG-EV-A</code>, <code>1SPE-SECDEG-EV-B</code>.</p>
+<p><strong>Progression de difficulte declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 1 : 3 exercices (10–12 min) — <code>1SPE-SECDEG-EX-004..006</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 2 : 5 exercices (15–20 min) — <code>1SPE-SECDEG-EX-019..020</code>, <code>1SPE-SECDEG-EX-027..028</code>, <code>1SPE-SECDEG-EX-045</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 3 : 5 exercices (15–40 min) — <code>1SPE-SECDEG-EX-035</code>, <code>1SPE-SECDEG-EX-037</code>, <code>1SPE-SECDEG-EX-040</code>, <code>1SPE-SECDEG-EX-042</code>, <code>1SPE-SECDEG-EX-049</code></p>
+<p><strong>Routage de cette capacite vers l&#x27;humain</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• les 7 cellules portent <code>JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
+<h3>Capacite <code>C3</code> — « Je sais calculer le discriminant et resoudre une equation du second degre. »</h3>
+<p>Libelle BO : Calculer le discriminant d&#x27;une equation du second degre. Determiner les solutions reelles selon le signe du discriminant.</p>
+<p><strong>Roles pedagogiques concernes et objets contributeurs</strong></p>
+<table>
+<tr><th>Role pedagogique</th><th>Corps rattaches</th><th>Objets contributeurs</th></tr>
+<tr><td>corriges</td><td>16</td><td><code>1SPE-SECDEG-CO-007..009</code>, <code>1SPE-SECDEG-CO-021..024</code>, <code>1SPE-SECDEG-CO-029..030</code>, <code>1SPE-SECDEG-CO-035..036</code>, <code>1SPE-SECDEG-CO-038..039</code>, <code>1SPE-SECDEG-CO-041..042</code>, <code>1SPE-SECDEG-CO-046</code></td></tr>
+<tr><td>cours</td><td>2</td><td><code>1SPE-SECDEG-CR-000</code>, <code>1SPE-SECDEG-CR-012</code></td></tr>
+<tr><td>evaluations</td><td>2</td><td><code>1SPE-SECDEG-EV-A</code>, <code>1SPE-SECDEG-EV-B</code></td></tr>
+<tr><td>exercices</td><td>16</td><td><code>1SPE-SECDEG-EX-007..009</code>, <code>1SPE-SECDEG-EX-021..024</code>, <code>1SPE-SECDEG-EX-029..030</code>, <code>1SPE-SECDEG-EX-035..036</code>, <code>1SPE-SECDEG-EX-038..039</code>, <code>1SPE-SECDEG-EX-041..042</code>, <code>1SPE-SECDEG-EX-046</code></td></tr>
+<tr><td>methodes</td><td>1</td><td><code>1SPE-SECDEG-ME-003</code></td></tr>
+<tr><td>QCM</td><td>3</td><td><code>Q7..9</code></td></tr>
+<tr><td>remediation</td><td>1</td><td><code>1SPE-SECDEG-RE-C3</code></td></tr>
+</table>
+<p><strong>Richesse declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• type de capacite : <code>PROCEDURAL</code> ; occasions distinctes : 5 ; statut declaratif : <code>SUFFICIENT</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 16.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• evaluee par : <code>1SPE-SECDEG-EV-A</code>, <code>1SPE-SECDEG-EV-B</code>.</p>
+<p><strong>Progression de difficulte declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 1 : 3 exercices (10–12 min) — <code>1SPE-SECDEG-EX-007..009</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 2 : 7 exercices (15–20 min) — <code>1SPE-SECDEG-EX-021..024</code>, <code>1SPE-SECDEG-EX-029..030</code>, <code>1SPE-SECDEG-EX-046</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 3 : 6 exercices (35–40 min) — <code>1SPE-SECDEG-EX-035..036</code>, <code>1SPE-SECDEG-EX-038..039</code>, <code>1SPE-SECDEG-EX-041..042</code></p>
+<p><strong>Routage de cette capacite vers l&#x27;humain</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• les 7 cellules portent <code>JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
+<h3>Capacite <code>C4</code> — « Je sais factoriser un trinome et etudier son signe. »</h3>
+<p>Libelle BO : Factoriser, si possible, un polynome du second degre. Determiner le signe d&#x27;un polynome du second degre a partir de ses racines ou du discriminant.</p>
+<p><strong>Roles pedagogiques concernes et objets contributeurs</strong></p>
+<table>
+<tr><th>Role pedagogique</th><th>Corps rattaches</th><th>Objets contributeurs</th></tr>
+<tr><td>corriges</td><td>13</td><td><code>1SPE-SECDEG-CO-010..012</code>, <code>1SPE-SECDEG-CO-023..026</code>, <code>1SPE-SECDEG-CO-031..032</code>, <code>1SPE-SECDEG-CO-036</code>, <code>1SPE-SECDEG-CO-038</code>, <code>1SPE-SECDEG-CO-041</code>, <code>1SPE-SECDEG-CO-044</code></td></tr>
+<tr><td>cours</td><td>2</td><td><code>1SPE-SECDEG-CR-000</code>, <code>1SPE-SECDEG-CR-013</code></td></tr>
+<tr><td>evaluations</td><td>2</td><td><code>1SPE-SECDEG-EV-A</code>, <code>1SPE-SECDEG-EV-B</code></td></tr>
+<tr><td>exercices</td><td>13</td><td><code>1SPE-SECDEG-EX-010..012</code>, <code>1SPE-SECDEG-EX-023..026</code>, <code>1SPE-SECDEG-EX-031..032</code>, <code>1SPE-SECDEG-EX-036</code>, <code>1SPE-SECDEG-EX-038</code>, <code>1SPE-SECDEG-EX-041</code>, <code>1SPE-SECDEG-EX-044</code></td></tr>
+<tr><td>methodes</td><td>1</td><td><code>1SPE-SECDEG-ME-004</code></td></tr>
+<tr><td>QCM</td><td>3</td><td><code>Q10..12</code></td></tr>
+<tr><td>remediation</td><td>1</td><td><code>1SPE-SECDEG-RE-C4</code></td></tr>
+</table>
+<p><strong>Richesse declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• type de capacite : <code>PROCEDURAL</code> ; occasions distinctes : 5 ; statut declaratif : <code>SUFFICIENT</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 13.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• evaluee par : <code>1SPE-SECDEG-EV-A</code>, <code>1SPE-SECDEG-EV-B</code>.</p>
+<p><strong>Progression de difficulte declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 1 : 4 exercices (10–12 min) — <code>1SPE-SECDEG-EX-010..012</code>, <code>1SPE-SECDEG-EX-044</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 2 : 6 exercices (20–20 min) — <code>1SPE-SECDEG-EX-023..026</code>, <code>1SPE-SECDEG-EX-031..032</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 3 : 3 exercices (35–40 min) — <code>1SPE-SECDEG-EX-036</code>, <code>1SPE-SECDEG-EX-038</code>, <code>1SPE-SECDEG-EX-041</code></p>
+<p><strong>Routage de cette capacite vers l&#x27;humain</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• les 7 cellules portent <code>JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
+<h3>Capacite <code>C5</code> — « Je sais resoudre une inequation du second degre. »</h3>
+<p>Libelle BO : Resoudre une inequation du second degre. Resoudre une equation ou inequation se ramenant au second degre.</p>
+<p><strong>Roles pedagogiques concernes et objets contributeurs</strong></p>
+<table>
+<tr><th>Role pedagogique</th><th>Corps rattaches</th><th>Objets contributeurs</th></tr>
+<tr><td>corriges</td><td>15</td><td><code>1SPE-SECDEG-CO-013..015</code>, <code>1SPE-SECDEG-CO-025..026</code>, <code>1SPE-SECDEG-CO-029..030</code>, <code>1SPE-SECDEG-CO-033..034</code>, <code>1SPE-SECDEG-CO-036..037</code>, <code>1SPE-SECDEG-CO-039</code>, <code>1SPE-SECDEG-CO-041</code>, <code>1SPE-SECDEG-CO-047</code>, <code>1SPE-SECDEG-CO-050</code></td></tr>
+<tr><td>cours</td><td>2</td><td><code>1SPE-SECDEG-CR-000</code>, <code>1SPE-SECDEG-CR-014</code></td></tr>
+<tr><td>evaluations</td><td>2</td><td><code>1SPE-SECDEG-EV-A</code>, <code>1SPE-SECDEG-EV-B</code></td></tr>
+<tr><td>exercices</td><td>15</td><td><code>1SPE-SECDEG-EX-013..015</code>, <code>1SPE-SECDEG-EX-025..026</code>, <code>1SPE-SECDEG-EX-029..030</code>, <code>1SPE-SECDEG-EX-033..034</code>, <code>1SPE-SECDEG-EX-036..037</code>, <code>1SPE-SECDEG-EX-039</code>, <code>1SPE-SECDEG-EX-041</code>, <code>1SPE-SECDEG-EX-047</code>, <code>1SPE-SECDEG-EX-050</code></td></tr>
+<tr><td>methodes</td><td>1</td><td><code>1SPE-SECDEG-ME-005</code></td></tr>
+<tr><td>QCM</td><td>3</td><td><code>Q13..15</code></td></tr>
+<tr><td>remediation</td><td>1</td><td><code>1SPE-SECDEG-RE-C5</code></td></tr>
+</table>
+<p><strong>Richesse declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• type de capacite : <code>PROCEDURAL</code> ; occasions distinctes : 5 ; statut declaratif : <code>SUFFICIENT</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 15.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• evaluee par : <code>1SPE-SECDEG-EV-A</code>, <code>1SPE-SECDEG-EV-B</code>.</p>
+<p><strong>Progression de difficulte declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 1 : 3 exercices (10–12 min) — <code>1SPE-SECDEG-EX-013..015</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 2 : 7 exercices (15–25 min) — <code>1SPE-SECDEG-EX-025..026</code>, <code>1SPE-SECDEG-EX-029..030</code>, <code>1SPE-SECDEG-EX-033..034</code>, <code>1SPE-SECDEG-EX-047</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 3 : 5 exercices (15–40 min) — <code>1SPE-SECDEG-EX-036..037</code>, <code>1SPE-SECDEG-EX-039</code>, <code>1SPE-SECDEG-EX-041</code>, <code>1SPE-SECDEG-EX-050</code></p>
+<p><strong>Routage de cette capacite vers l&#x27;humain</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• les 7 cellules portent <code>JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
+<h3>Capacite <code>C6</code> — « Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum. »</h3>
+<p>Libelle BO : Modeliser un probleme a l&#x27;aide d&#x27;une fonction polynome du second degre. Problemes d&#x27;optimisation.</p>
+<p><strong>Roles pedagogiques concernes et objets contributeurs</strong></p>
+<table>
+<tr><th>Role pedagogique</th><th>Corps rattaches</th><th>Objets contributeurs</th></tr>
+<tr><td>corriges</td><td>12</td><td><code>1SPE-SECDEG-CO-016..018</code>, <code>1SPE-SECDEG-CO-027..028</code>, <code>1SPE-SECDEG-CO-033..034</code>, <code>1SPE-SECDEG-CO-037</code>, <code>1SPE-SECDEG-CO-039..040</code>, <code>1SPE-SECDEG-CO-042</code>, <code>1SPE-SECDEG-CO-048</code></td></tr>
+<tr><td>cours</td><td>2</td><td><code>1SPE-SECDEG-CR-000</code>, <code>1SPE-SECDEG-CR-015</code></td></tr>
+<tr><td>evaluations</td><td>2</td><td><code>1SPE-SECDEG-EV-A</code>, <code>1SPE-SECDEG-EV-B</code></td></tr>
+<tr><td>exercices</td><td>12</td><td><code>1SPE-SECDEG-EX-016..018</code>, <code>1SPE-SECDEG-EX-027..028</code>, <code>1SPE-SECDEG-EX-033..034</code>, <code>1SPE-SECDEG-EX-037</code>, <code>1SPE-SECDEG-EX-039..040</code>, <code>1SPE-SECDEG-EX-042</code>, <code>1SPE-SECDEG-EX-048</code></td></tr>
+<tr><td>methodes</td><td>1</td><td><code>1SPE-SECDEG-ME-006</code></td></tr>
+<tr><td>QCM</td><td>3</td><td><code>Q16..18</code></td></tr>
+<tr><td>remediation</td><td>1</td><td><code>1SPE-SECDEG-RE-C6</code></td></tr>
+</table>
+<p><strong>Richesse declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• type de capacite : <code>PROCEDURAL</code> ; occasions distinctes : 5 ; statut declaratif : <code>SUFFICIENT</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• occasions existantes : assessment : 2 · method : 1 · qcm : 3 · remediation : 1 · targeted_practice : 12.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• gestes de raisonnement declares : aucun geste distinct declare ; la diversite du raisonnement est a juger a la lecture.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• evaluee par : <code>1SPE-SECDEG-EV-A</code>, <code>1SPE-SECDEG-EV-B</code>.</p>
+<p><strong>Progression de difficulte declaree</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 1 : 3 exercices (12–15 min) — <code>1SPE-SECDEG-EX-016..018</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 2 : 5 exercices (15–25 min) — <code>1SPE-SECDEG-EX-027..028</code>, <code>1SPE-SECDEG-EX-033..034</code>, <code>1SPE-SECDEG-EX-048</code></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• parcours 3 : 4 exercices (35–40 min) — <code>1SPE-SECDEG-EX-037</code>, <code>1SPE-SECDEG-EX-039..040</code>, <code>1SPE-SECDEG-EX-042</code></p>
+<p><strong>Routage de cette capacite vers l&#x27;humain</strong></p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• les 7 cellules portent <code>JUGEMENT_SEMANTIQUE_HUMAIN_REQUIS</code>.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
+<h2>5. Question de QCM routee vers l&#x27;humain</h2>
+<p>Aucune question de ce chapitre n&#x27;est routee vers une revue humaine par <code>audit/QCM_INDEPENDENT_EVIDENCE_V2.json</code>.</p>
+<h2>6. Coherence du chapitre et coherence au niveau du manuel</h2>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• diversite des gestes de raisonnement au niveau du chapitre : <code>INSUFFICIENT</code> (declaratif : <code>INSUFFICIENT</code>).</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• aucun profil de diversite declare pour ce chapitre : les gestes de raisonnement ne sont pas mesures, ils restent a juger.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• capacites routees vers l&#x27;humain : 6 sur 6.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• attendus officiels obligatoires rattaches : 10 sur 10 ; manquants : 0 ; hors annee : 0.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• chapitres dont ce chapitre depend par ses prerequis : <code>2GT</code>. La coherence au niveau du manuel se juge avec eux.</p>
+<p>La regle du depot : « la richesse se mesure en occasions distinctes et en gestes de raisonnement declares ; jamais en nombre de fichiers ».</p>
+<h2>7. Barème commenté — propositions à juger</h2>
+<p>La politique est fixée : pour chaque question évaluée, des POINTS, un ATTENDU ESSENTIEL, et un CRÉDIT PARTIEL seulement lorsqu&#x27;une décomposition objective le justifie. Le corrigé scientifique reste séparé et complet ; le barème ne le remplace pas.</p>
+<p>Ces propositions sont <strong>machine</strong> et ne valent aucune approbation. Elles sont le contenu candidat que votre verdict de chapitre couvre.</p>
+<h3>1SPE-SECDEG-EV-A</h3>
+<p><strong>Exercice 1</strong> — 7 points (C1, C3, C4)</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 1 pt — Attendu : calculer — Pour $f(x) = 2x^2 - 8x + 6$ : $a = 2$, $b = -8$, $c = 6$.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 2 pts — Attendu : calculer — \] \[ \boxed{f(x) = 2(x-2)^2 - 2.} \] \medskip.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 2 pts — Attendu : en déduire — \] Deux racines réelles distinctes : \[ x_1 = \frac{8 - 4}{4} = 1, \qquad x_2 = \frac{8 + 4}{4} = 3.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4** — 2 pts — Attendu : vérifier — \[ \boxed{f(x) = 2(x-1)(x-3).} \] Vérification : $2(x-1)(x-3) = 2(x^2 - 4x + 3) = 2x^2 - 8x + 6 = f(x)$.</p>
+<p><strong>Exercice 2</strong> — 5 points (C2) · 1 question(s) en attente de jugement</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 2 pts — Attendu : calculer — \quad \checkmark \] Donc $g(x) = -(x-2)^2 + 1$ est bien la forme canonique de $g$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 1 pt — Attendu : en déduire — Comme $a = -1 < 0$, la parabole est tournee vers le bas : $g$ admet un \textbf{maximum} de valeur $g(2) = 1$, atteint en $x = 2$.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — <code>JUGEMENT PÉDAGOGIQUE REQUIS</code> : le corrigé n&#x27;établit aucun résultat repérable</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4** — 1 pt — Attendu : calculer — L&#x27;axe de symetrie de la parabole a pour équation $x = \alpha = 2$.</p>
+<p><strong>Exercice 3</strong> — 4 points (C4, C5)</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 2 pts — Attendu : calculer — $f(x) = 2(x-1)(x-3)$.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 1 pt — Attendu : résoudre — \[ \boxed{\mathcal{S} = [1\,;\,3].} \] \medskip.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 1 pt — Attendu : résoudre — \[ \boxed{\mathcal{S} = \,]-\infty\,;\,1[ \cup \,]3\,;\,+\infty[.} \].</p>
+<p><strong>Exercice 4</strong> — 4 points (C6)</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 1 pt — Attendu : exprimer — \item Largeur : $20 - 2x$~cm.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 1 pt — Attendu : montrer — \] Domaine : $x > 0$, $30 - 2x > 0$ et $20 - 2x > 0$, soit $x \in \,]0\,;\,10[$.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 1 pt — Attendu : calculer — \] \[ V(5) = 5 \times (30-10) \times (20-10) = 5 \times 20 \times 10 = 1\,000 \text{ cm}^3.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4** — 1 pt — Attendu : justifier — Une étude complete de $V$ (dérivée ou tableau de variations) est nécessaire pour trouver le maximum absolu.</p>
+<h3>1SPE-SECDEG-EV-B</h3>
+<p><strong>Exercice 1</strong> — 7 points (C1, C3, C4)</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 1 pt — Attendu : calculer — Pour $f(x) = 3x^2 - 12x + 9$ : $a = 3$, $b = -12$, $c = 9$.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 2 pts — Attendu : calculer — \] \[ \boxed{f(x) = 3(x-2)^2 - 3.} \] \medskip.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 2 pts — Attendu : en déduire — \] \[ x_1 = \frac{12 - 6}{6} = 1, \qquad x_2 = \frac{12 + 6}{6} = 3.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4** — 2 pts — Attendu : vérifier — \[ \boxed{f(x) = 3(x-1)(x-3).} \] Vérification : $3(x-1)(x-3) = 3(x^2 - 4x + 3) = 3x^2 - 12x + 9 = f(x)$.</p>
+<p><strong>Exercice 2</strong> — 5 points (C2) · 1 question(s) en attente de jugement</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 2 pts — Attendu : calculer — \quad \checkmark \] Donc $g(x) = -2(x-2)^2 + 2$ est bien la forme canonique de $g$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 1 pt — Attendu : en déduire — Comme $a = -2 < 0$, la parabole est tournee vers le bas : $g$ admet un \textbf{maximum} de valeur $g(2) = 2$, atteint en $x = 2$.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — <code>JUGEMENT PÉDAGOGIQUE REQUIS</code> : le corrigé n&#x27;établit aucun résultat repérable</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4** — 1 pt — Attendu : calculer — L&#x27;axe de symetrie de la parabole a pour équation $x = \alpha = 2$.</p>
+<p><strong>Exercice 3</strong> — 4 points (C4, C5)</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 2 pts — Attendu : calculer — $f(x) = 3(x-1)(x-3)$.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 1 pt — Attendu : résoudre — D&#x27;après le tableau de signes : $\boxed{\mathcal{S} = [1\,;\,3]}$.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 1 pt — Attendu : résoudre — $\boxed{\mathcal{S} = \,]-\infty\,;\,1[ \cup \,]3\,;\,+\infty[}$.</p>
+<p><strong>Exercice 4</strong> — 4 points (C6)</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 1 pt — Attendu : exprimer — Après decoupe et pliage : hauteur $x$~cm, longueur $30-2x$~cm, largeur $20-2x$~cm.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 1 pt — Attendu : montrer — Domaine : $x > 0$, $30-2x > 0$ et $20-2x > 0$, d&#x27;ou $x \in \,]0\,;\,10[$.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 1 pt — Attendu : calculer — \] \[ V(6) = 6 \times (30-12) \times (20-12) = 6 \times 18 \times 8 = 864 \text{ cm}^3.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4** — 1 pt — Attendu : justifier — Une étude complete de $V$ est nécessaire.</p>
+<p>Ce chapitre porte 30 question(s) évaluée(s), dont 2 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.</p>
+<h2>8. Checklist du role <code>EXPERT_PROGRAMME_PEDAGOGIE</code></h2>
+<p>1. completude du programme officiel</p>
+<p>2. alignement des capacites</p>
+<p>3. progression</p>
+<p>4. prerequis</p>
+<p>5. methodes</p>
+<p>6. diversite des exercices</p>
+<p>7. difficulte</p>
+<p>8. richesse</p>
+<p>9. remediation</p>
+<p>10. conception des evaluations</p>
+<p>11. pertinence pedagogique des QCM</p>
+<p>12. coherence du chapitre</p>
+<p>13. coherence au niveau du manuel</p>
+<p>Cette checklist est celle du role. Elle s&#x27;applique au CHAPITRE COURANT ENTIER, y compris aux objets qu&#x27;aucune section de cette vue ne cite.</p>
+<h2>9. Reference de lecture : le PDF candidat</h2>
+<p>Le PDF sert a lire le chapitre dans l&#x27;ordre ou l&#x27;eleve le recevra. Il n&#x27;est pas une preuve : le packet ne porte aucune preuve de rendu (<code>render_evidence = ABSENT</code>), et aucun index page-objet n&#x27;est etabli.</p>
+<table>
+<tr><th>Fichier</th><th>Variante</th><th>Pages</th><th>Role declare</th><th>Etat declare</th></tr>
+<tr><td><code>MANUELS_PDF_PUBLICATION/01_Maths_1re_Spe_Eleve.pdf</code></td><td>eleve</td><td>371</td><td>HISTORICAL_PUBLICATION_SNAPSHOT</td><td>STALE_UNDECIDED</td></tr>
+<tr><td><code>MANUELS_PDF_PUBLICATION/02_Maths_1re_Spe_Professeur.pdf</code></td><td>professeur</td><td>617</td><td>HISTORICAL_PUBLICATION_SNAPSHOT</td><td>STALE_UNDECIDED</td></tr>
+</table>
+<p>Ces instantanes sont declares <code>STALE_UNDECIDED</code> dans <code>audit/PDF_ARTIFACT_REGISTRY.yaml</code> : ils ne sont pas garantis identiques au contenu courant. Le candidat d&#x27;impression courant se reconstruit par <code>python3 Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual 1SPE --variant &lt;variant&gt; --record-observed</code> (recu : <code>audit/1SPE_PRINT_CANDIDATE_BUILD_RECEIPT.json</code>, statut <code>PRINT_CANDIDATE</code>).</p>
+<p>Rappel du recu : Ces PDF ne sont pas finals : aucun 1SPE_FINAL_CONTENT_SHA n&#x27;est figé, les deux revues humaines par chapitre et le dossier D7 restent en attente.</p>
+<p>En cas d&#x27;ecart entre le PDF et les fichiers sources, ce sont les sources du chapitre qui font foi : <code>Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/</code>.</p>
+<p>---</p>
+<p>Cette vue est derivee et sans autorite. L&#x27;autorite machine reste le packet JSON canonique. Le packet de ce role est <code>audit/reviews/human/1SPE-SECOND-DEGRE/packet-B-EXPERT_PROGRAMME_PEDAGOGIE.json</code>. L&#x27;unite de decision est le CHAPITRE : 10 chapitres x 2 roles = 20 verdicts, pas des centaines de signatures objet par objet.</p>
+<p>Marche a suivre commune aux deux roles : <code>audit/reviews/human/ASSIGNMENT_TEMPLATE_AND_REVIEW_INSTRUCTIONS.md</code>.</p>
+<h2>Votre verdict</h2>
+<div class="form">
+<p>Le verdict ne se saisit pas dans cette page : elle est dérivée et sans
+autorité. Trois commandes, dans cet ordre.</p>
+<p><strong>1. Obtenir le brouillon</strong> — tous les condensats sont
+pré-remplis ; ne restent que les champs qui vous appartiennent.</p>
+<p><code>python3 scripts/human_review_governance.py draft 1SPE-SECOND-DEGRE \
+--packet audit/reviews/human/1SPE-SECOND-DEGRE/packet-B-EXPERT_PROGRAMME_PEDAGOGIE.json \
+--out audit/reviews/human/1SPE-SECOND-DEGRE/receipt-B-EXPERT_PROGRAMME_PEDAGOGIE.json</code></p>
+<p><strong>2. Renseigner, et rien d'autre</strong> :
+<code>reviewer_name</code>, <code>reviewer_identity_reference</code>,
+<code>review_timestamp</code> (RFC 3339),
+<code>verdict</code> parmi
+<code>APPROVED</code>, <code>CHANGES_REQUESTED</code>, <code>REJECTED</code>,
+<code>comments</code>. Un <code>CHANGES_REQUESTED</code> exige au moins un
+constat dans <code>blocking_findings</code> ; un <code>APPROVED</code> n'en
+admet aucun.</p>
+<p><strong>3. Valider</strong> — le contrôle refuse un verdict sans identité,
+sans rôle, sans condensat, ou sur un paquet périmé.</p>
+<p><code>python3 scripts/human_review_governance.py validate 1SPE-SECOND-DEGRE \
+--packet audit/reviews/human/1SPE-SECOND-DEGRE/packet-B-EXPERT_PROGRAMME_PEDAGOGIE.json \
+--receipt audit/reviews/human/1SPE-SECOND-DEGRE/receipt-B-EXPERT_PROGRAMME_PEDAGOGIE.json</code></p>
+<p>Le chapitre reçoit <strong>deux</strong> verdicts, par
+<strong>deux personnes distinctes</strong> : le contrôle refuse deux rôles
+signés par la même identité. Une même personne peut en revanche prendre
+plusieurs chapitres.</p>
+<p>Condensat sémantique que votre approbation lie :
+<code>sha256:080a729e99ba25e3ac48b7ef480a1ff1b6b37be65945b34aed30ee74c86bb7e9</code></p>
+</div>
+
+</body></html>
