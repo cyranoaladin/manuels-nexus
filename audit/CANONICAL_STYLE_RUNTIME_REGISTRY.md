@@ -90,11 +90,11 @@ La présence d'une cible canonique unique n'implique pas encore un runtime sans 
 | `gabarits/common/nexus-charte.sty` | CANONICAL_STYLE_IMPLEMENTATION | YES | `a27c7a003bcd7c89e3341fd5ef90a9c073b05d558230d084fa0b3bad74902113` | — | 23 | 0 | NO | NO |
 | `gabarits/common/nexus-code.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `16e74594ae5108e3326b36f92f75ccdb5b30472dc15134ffe5ff943a2a6b6d91` | — | 1 | 0 | NO | NO |
 | `gabarits/common/nexus-couverture.sty` | CANONICAL_SUPPORT_STYLE | YES | `54b30338b4ceeddf23367bf1467616b0603244905b33fa7e8c806175913e8f1b` | — | 13 | 0 | NO | NO |
-| `gabarits/common/nexus-decor.sty` | CANONICAL_SUPPORT_STYLE | YES | `56180b5f03ed4ebccf58059a62c6064e97254316c2ee629b94f0161f025b7b31` | — | 13 | 0 | NO | NO |
+| `gabarits/common/nexus-decor.sty` | CANONICAL_SUPPORT_STYLE | YES | `56180b5f03ed4ebccf58059a62c6064e97254316c2ee629b94f0161f025b7b31` | — | 14 | 0 | NO | NO |
 | `gabarits/common/nexus-exercices.sty` | CANONICAL_SUPPORT_STYLE | YES | `530c1f35d41a80e6fb4363396a60b71dba00b3dd8689cd1623ab4a4be93a7942` | — | 13 | 0 | NO | NO |
 | `gabarits/common/nexus-figures-bib.sty` | CANONICAL_SUPPORT_STYLE | YES | `174dc7dd86fafa7d74f32a2cee77cc880cdc25403a4f090259afbbc5e5fc54cb` | — | 13 | 0 | NO | NO |
 | `gabarits/common/nexus-icons.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `42af1195dda223dc642255754ff7a94f1d5add6720e7062883de4c429132cc8b` | — | 1 | 0 | NO | NO |
-| `gabarits/common/nexus-manuel.cls` | CANONICAL_CLASS_IMPLEMENTATION | YES | `f0dc5a356692e1ea1b587ab9738d1b2b78b594a27a8ed8d0c46ea6767dfd4dc6` | — | 23 | 1 | NO | NO |
+| `gabarits/common/nexus-manuel.cls` | CANONICAL_CLASS_IMPLEMENTATION | YES | `a40d657638f9dc6cc56802f3d60890ed2aa7f4f01544f6fee7b1201b13fd8a63` | — | 24 | 1 | NO | NO |
 | `gabarits/common/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `04cb45a5f8796d9ce0a25bd2c0f23b190b515056e2f69f5b7eac64b5f0c88f14` | — | 0 | 0 | NO | NO |
 | `gabarits/common/nexus-pages-froides.sty` | CANONICAL_SUPPORT_STYLE | YES | `2b27ed9c641e0c0f0a4855a176197bc01099ada96e7af02f7e39862eeb16b652` | — | 14 | 0 | NO | NO |
 | `gabarits/common/nexus-pont.sty` | CANONICAL_SUPPORT_STYLE | YES | `2d4c8839add6d3e83e9ba6044995bd7e673e2e03a88d7390281d1458281bfe50` | — | 14 | 0 | NO | NO |
