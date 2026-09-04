@@ -123,7 +123,7 @@ Réponse du corrigé : $h(x) = x - 2$ (pour $x \neq -2$), donc $h'(x) = 1$.
 
 > Résoudre $h'(x) = 0$ et dresser le tableau de variations de $h$ sur $]-\infty\,;\,-2[$. \hfill \textit{(2,5 pt)}
 
-Réponse du corrigé : $h'(x) = 1 > 0$ pour tout $x \neq -2$ : il n'y a pas de solution à $h'(x) = 0$. $h$ est strictement croissante sur $]-\infty\,;\,-2[$. \begin{center} \begin{tabular}{|c|ccc|} \hline $x$ & $-\infty$ & & $-2$ \\ \hline $h'(x)$ & $+$ & $+$ & $/\!/$ \\ \hline $h(x)$ & $-\infty$ & $\nearrow$ & $-4$ \\ \hline \end{tabular} \end{center} ($h(-2)$ n'est pas défini, mais la limite à gauche est $-2 - 2 = -4$
+Réponse du corrigé : $h'(x) = 1 > 0$ pour tout $x \neq -2$ : il n'y a pas de solution à $h'(x) = 0$. $h$ est strictement croissante sur $]-\infty\,;\,-2[$. \begin{center} \begin{tabular}{|c|ccc|} \hline $x$ & $-\infty$ & & $-2$ \\ \hline $h'(x)$ & $+$ & $+$ & $/\!/$ \\ \hline $h(x)$ & $-\infty$ & $\nearrow$ & $-4$ \\ \hline \end{tabular} \end{center} ($h(-2)$ n'est pas défini, mais la limite à gauche est
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -146,7 +146,7 @@ Réponse du corrigé : $R(x) = x \times (30 - 2x) = 30x - 2x^2.$
 
 > Calculer $R'(x)$ et trouver la valeur de $x$ qui maximise $R(x)$. \hfill \textit{(2 pt)}
 
-Réponse du corrigé : $R'(x) = 30 - 4x.$ $R'(x) = 0 \Leftrightarrow x = \dfrac{30}{4} = \dfrac{15}{2} = 7{,}5.$ $R'(x) > 0$ pour $x < 7{,}5$ et $R'(x) < 0$ pour $x > 7{,}5$ : $R$ est maximale en $x = 7{,}5$. Tableau de variations de $R$ sur $[0\,;\,15]$ : \begin{center} \begin{tabular}{|c|ccccc|} \hline $x$ & $0$ & & $7{,}5$ & & $15$ \\ \hline $R(x)$ & $0$ & $\nearrow$ & $112{,}5$ & $\searrow$ & $0$ \\ \hline \end{tabu
+Réponse du corrigé : $R'(x) = 30 - 4x.$ $R'(x) = 0 \Leftrightarrow x = \dfrac{30}{4} = \dfrac{15}{2} = 7{,}5.$ $R'(x) > 0$ pour $x < 7{,}5$ et $R'(x) < 0$ pour $x > 7{,}5$ : $R$ est maximale en $x = 7{,}5$. Tableau de variations de $R$ sur $[0\,;\,15]$ :
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -156,7 +156,7 @@ Réponse du corrigé : $R'(x) = 30 - 4x.$ $R'(x) = 0 \Leftrightarrow x = \dfrac{
 
 > Calculer le chiffre d'affaires maximal. \hfill \textit{(1 pt)}
 
-Réponse du corrigé : $R\!\left(\dfrac{15}{2}\right) = 30 \times \dfrac{15}{2} - 2 \times \left(\dfrac{15}{2}\right)^2 = 225 - 2 \times \dfrac{225}{4} = 225 - \dfrac{225}{2} = \dfrac{225}{2} = 112{,}5$ euros. Le producteur maximise son chiffre d'affaires en vendant $7{,}5$ litres au prix de $30 - 2 \times 7{,}5 = 15$ euros/L, pour un chiffre d'affaires de $\mathbf{112{,}5}$ euros. % BEGIN-VERIFY % from sympy import sym
+Réponse du corrigé : $R\!\left(\dfrac{15}{2}\right) = 30 \times \dfrac{15}{2} - 2 \times \left(\dfrac{15}{2}\right)^2 = 225 - 2 \times \dfrac{225}{4} = 225 - \dfrac{225}{2} = \dfrac{225}{2} = 112{,}5$ euros. Le producteur maximise son chiffre d'affaires en vendant $7{,}5$ litres au prix de $30 - 2 \times 7{,}5 = 15$ euros/L, pour un chiffre d'affaires de $\mathbf{112{,}5}$ euros. % BEGIN-VERIFY % from sympy import
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|

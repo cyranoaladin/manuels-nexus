@@ -24,7 +24,7 @@ Chapitre `1SPE-PROBA-COND` · manuel `1SPE` (Première, Spécialité mathématiq
 | Empreinte de l'ensemble d'objets | `sha256:129c6e2442c6787ee3f96e1cfe6568bd879542ad9e7b78b876b662c6a7055982` |
 | Empreinte semantique liee a l'approbation | `sha256:158783b246ae18c6b799fef38e07ea3e2aadb4b4fc7226fe8cd81adf30d47d9b` |
 | Empreinte du packet | `sha256:923d032ec14ca8d3d353e43f37400951149a526da78d8d6929721da7179bf382` |
-| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
+| Revision du depot gelee dans le packet | `dfc99058e7a7c16ae4af46b99245edbe14b4f8e5` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel

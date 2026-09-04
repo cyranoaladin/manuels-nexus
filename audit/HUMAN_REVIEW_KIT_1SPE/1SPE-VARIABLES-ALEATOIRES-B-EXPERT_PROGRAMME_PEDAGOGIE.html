@@ -26,16 +26,16 @@ background:#fbf5f6}
 <h2>1. Ce que vous decidez</h2>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• L&#x27;unite de decision est le CHAPITRE : 10 chapitres x 2 roles = 20 verdicts, pas des centaines de signatures objet par objet.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Aucun humain n&#x27;a encore approuve ce chapitre : REVIEW_DELTA_BASELINE = NONE. Le perimetre de revue est le CHAPITRE COURANT ENTIER. Les listes ci-dessous dirigent l&#x27;attention, elles ne reduisent pas le perimetre.</p>
-<p style='margin:.2rem 0 .2rem 1.2rem'>• CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (<code>sha256:6769b01062b6f2b8deab01472485cc9344797abe0b3b770af2d85e4e487e8e92</code>) ; l&#x27;approbation graphique releve de la porte D7, independante.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (<code>sha256:85735e287edf87b501bb6d95ada33b0974c38322d15d45d933b499d7b1629022</code>) ; l&#x27;approbation graphique releve de la porte D7, independante.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Verdicts autorises, a rendre dans le packet JSON canonique et jamais dans cette vue : <code>APPROVED</code> / <code>CHANGES_REQUESTED</code> / <code>REJECTED</code>.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Cette vue ne porte aucune decision et ne nomme personne : l&#x27;assignation du role reste <code>PENDING_UNASSIGNED</code>, l&#x27;etat du packet reste <code>PENDING_UNASSIGNED</code>.</p>
 <table>
 <tr><th>Perimetre</th><th>Valeur</th></tr>
 <tr><td>Objets du chapitre dans le packet</td><td>167</td></tr>
 <tr><td>Empreinte de l&#x27;ensemble d&#x27;objets</td><td><code>sha256:32b2dd9bff3bc3c7c82007986ef3a2009ee89d1aecb9fcad87cf1670af00490e</code></td></tr>
-<tr><td>Empreinte semantique liee a l&#x27;approbation</td><td><code>sha256:6769b01062b6f2b8deab01472485cc9344797abe0b3b770af2d85e4e487e8e92</code></td></tr>
-<tr><td>Empreinte du packet</td><td><code>sha256:a68a21e0301154b1b516a187be1c3dd4bb6a642ebb2e07012c8a0691fe84180f</code></td></tr>
-<tr><td>Revision du depot gelee dans le packet</td><td><code>5bc44275a0afe33f10b7ce2ec7700778f8de6308</code></td></tr>
+<tr><td>Empreinte semantique liee a l&#x27;approbation</td><td><code>sha256:85735e287edf87b501bb6d95ada33b0974c38322d15d45d933b499d7b1629022</code></td></tr>
+<tr><td>Empreinte du packet</td><td><code>sha256:f2a699f52f1b6312310510758d9af5ce6c5f8a6628fa5672f0ec82efe3ed147e</code></td></tr>
+<tr><td>Revision du depot gelee dans le packet</td><td><code>dfc99058e7a7c16ae4af46b99245edbe14b4f8e5</code></td></tr>
 <tr><td>Preuve de rendu portee par le packet</td><td><code>ABSENT</code></td></tr>
 </table>
 <h2>2. Le chapitre et ses capacites du programme officiel</h2>
@@ -50,8 +50,8 @@ background:#fbf5f6}
 <tr><td><code>C3</code></td><td>Je sais representer par un arbre la repetition de n &lt;= 4 epreuves de Bernoulli independantes et identiques, puis etudier le nombre de succes.</td><td>Pour n ≤ 4, représenter par un arbre la répétition d&#x27;épreuves de Bernoulli indépendantes et identiques afin de calculer les probabilités liées au nombre de succès.</td><td>non</td></tr>
 <tr><td><code>C4</code></td><td>Je sais utiliser la linearite de l&#x27;esperance pour calculer E(aX+b).</td><td>Utiliser la linéarité de l&#x27;espérance.</td><td>non</td></tr>
 <tr><td><code>C5</code></td><td>Je sais resoudre des problemes contextualises (jeux, decisions, assurances) a l&#x27;aide de variables aleatoires.</td><td>Résoudre des problèmes contextualisés faisant intervenir des variables aléatoires.</td><td>non</td></tr>
-<tr><td><code>C6</code></td><td>Je sais simuler une variable aleatoire et des echantillons, et lire, comprendre et ecrire une fonction Python renvoyant la moyenne d&#x27;un echantillon de taille n.</td><td>aucun libelle BO : le referentiel du depot ne declare pas cette capacite</td><td>non</td></tr>
-<tr><td><code>C7</code></td><td>Je sais etudier experimentalement la fluctuation des moyennes d&#x27;echantillons autour de l&#x27;esperance, simuler N echantillons et interpreter l&#x27;ecart entre moyenne empirique et esperance, notamment au regard de 2 sigma / racine(n).</td><td>aucun libelle BO : le referentiel du depot ne declare pas cette capacite</td><td>non</td></tr>
+<tr><td><code>C6</code></td><td>Je sais simuler une variable aleatoire et des echantillons, et lire, comprendre et ecrire une fonction Python renvoyant la moyenne d&#x27;un echantillon de taille n.</td><td>Le travail expérimental de simulation d’échantillons prolonge celui entrepris en seconde. L’objectif est de faire percevoir le principe de l’estimation de l’espérance d’une variable aléatoire, ou de la moyenne d’une variable statistique dans une population, par une moyenne observée sur un échantillon. Simuler une variable aléatoire avec Python ou un tableur. Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire.</td><td>non</td></tr>
+<tr><td><code>C7</code></td><td>Je sais etudier experimentalement la fluctuation des moyennes d&#x27;echantillons autour de l&#x27;esperance, simuler N echantillons et interpreter l&#x27;ecart entre moyenne empirique et esperance, notamment au regard de 2 sigma / racine(n).</td><td>Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n</td><td>non</td></tr>
 </table>
 <p><strong>Attendus officiels rattaches, capacite par capacite</strong></p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C1</code> — 4 attendus :</p>
@@ -259,7 +259,7 @@ background:#fbf5f6}
 <p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
 <h3>Capacite <code>C6</code> — « Je sais simuler une variable aleatoire et des echantillons, et lire, comprendre et ecrire une fonction Python renvoyant la moyenne d&#x27;un echantillon de taille n. »</h3>
-<p>Libelle BO : aucun libelle BO : le referentiel du depot ne declare pas cette capacite (<code>Mathematiques/manuel-maths/referentiel/capacites_1SPE_VARIABLES_ALEATOIRES.json</code>). Le contrat du chapitre la declare, le referentiel ne lui donne aucun attendu officiel : la rattacher au programme fait partie de votre jugement.</p>
+<p>Libelle BO : Le travail expérimental de simulation d’échantillons prolonge celui entrepris en seconde. L’objectif est de faire percevoir le principe de l’estimation de l’espérance d’une variable aléatoire, ou de la moyenne d’une variable statistique dans une population, par une moyenne observée sur un échantillon. Simuler une variable aléatoire avec Python ou un tableur. Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire.</p>
 <p><strong>Roles pedagogiques concernes et objets contributeurs</strong></p>
 <table>
 <tr><th>Role pedagogique</th><th>Corps rattaches</th><th>Objets contributeurs</th></tr>
@@ -285,7 +285,7 @@ background:#fbf5f6}
 <p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
 <h3>Capacite <code>C7</code> — « Je sais etudier experimentalement la fluctuation des moyennes d&#x27;echantillons autour de l&#x27;esperance, simuler N echantillons et interpreter l&#x27;ecart entre moyenne empirique et esperance, notamment au regard de 2 sigma / racine(n). »</h3>
-<p>Libelle BO : aucun libelle BO : le referentiel du depot ne declare pas cette capacite (<code>Mathematiques/manuel-maths/referentiel/capacites_1SPE_VARIABLES_ALEATOIRES.json</code>). Le contrat du chapitre la declare, le referentiel ne lui donne aucun attendu officiel : la rattacher au programme fait partie de votre jugement.</p>
+<p>Libelle BO : Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n</p>
 <p><strong>Roles pedagogiques concernes et objets contributeurs</strong></p>
 <table>
 <tr><th>Role pedagogique</th><th>Corps rattaches</th><th>Objets contributeurs</th></tr>
@@ -311,20 +311,7 @@ background:#fbf5f6}
 <p style='margin:.2rem 0 .2rem 1.2rem'>• aucun artefact de preuve ne contredit ces cellules, et aucun n&#x27;atteste non plus qu&#x27;elles soient servies.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• richesse : statut <code>CANDIDATE_NON_SEMANTIC</code>, validation semantique <code>UNKNOWN</code>.</p>
 <h2>5. Question de QCM routee vers l&#x27;humain</h2>
-<p>1 question sur 21 n&#x27;a pas pu recevoir de preuve independante de la machine. Elle est reproduite ici en entier pour qu&#x27;elle ne se perde pas dans la masse.</p>
-<h3><code>1SPE-VARIABLES-ALEATOIRES</code> / <code>Q16</code> (capacite <code>C6</code>)</h3>
-<p><strong>Enonce</strong>, reproduit tel quel depuis la source canonique, notations LaTeX comprises :</p>
-<blockquote>Dans la fonction \code{simuler_variable(n, graine)} du chapitre, que designe $n$ ?</blockquote>
-<p><strong>Options proposees</strong></p>
-<p style='margin:.2rem 0 .2rem 1.2rem'>• A.** Le nombre de valeurs prises par $X$</p>
-<p style='margin:.2rem 0 .2rem 1.2rem'>• B.** La graine du generateur</p>
-<p style='margin:.2rem 0 .2rem 1.2rem'>• C.** La taille de l&#x27;échantillon simule</p>
-<p style='margin:.2rem 0 .2rem 1.2rem'>• D.** Le nombre d&#x27;échantillons simulés</p>
-<p><strong>Pourquoi la machine a route vers l&#x27;humain</strong> — aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question</p>
-<p style='margin:.2rem 0 .2rem 1.2rem'>• bloquant pour la publication : oui ;</p>
-<p style='margin:.2rem 0 .2rem 1.2rem'>• source canonique : <code>Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json</code> ;</p>
-<p style='margin:.2rem 0 .2rem 1.2rem'>• empreinte semantique de la question : <code>sha256:0fa5fcd1a4b8358652374ce5b70c07f8cb4ca21cd96dff23cc93182a9cb049b3</code> ;</p>
-<p style='margin:.2rem 0 .2rem 1.2rem'>• la cle declaree n&#x27;est pas reproduite dans cette vue : elle figure dans la source canonique, et le contrat d&#x27;independance du depot interdit de faire circuler la cle avec l&#x27;enonce. Etablissez la reponse par vous-meme, puis comparez.</p>
+<p>Aucune question de ce chapitre n&#x27;est routee vers une revue humaine par <code>audit/QCM_INDEPENDENT_EVIDENCE_V2.json</code>.</p>
 <h2>6. Coherence du chapitre et coherence au niveau du manuel</h2>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• diversite des gestes de raisonnement au niveau du chapitre : <code>CANDIDATE_NON_SEMANTIC</code> (declaratif : <code>SUFFICIENT</code>).</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• profil de diversite declare : calcul : 2 · interpretation : 5 · modelisation : 7 · synthese : 1.</p>
@@ -351,11 +338,11 @@ background:#fbf5f6}
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 1 pt — Attendu : calculer — Doubles : $(1,1),(2,2),\ldots,(6,6)$, soit $6$ sur $36$ : $P = \frac{1}{6}$.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 1,5 pt — Attendu : construire — \[ \begin{array}{|c|c|c|} \hline g_i &amp; -3 &amp; 12 \\ \hline P(G=g_i) &amp; \frac{5}{6} &amp; \frac{1}{6} \\ \hline \end{array} \] \medskip.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 1,5 pt — Attendu : calculer — $E(G) = -0{,}5 < 0$ : le jeu est défavorable au joueur.</p>
-<p><strong>Exercice 4</strong> — 5 points (C6, C7) · 1 question(s) en attente de jugement</p>
+<p><strong>Exercice 4</strong> — 5 points (C6, C7) · 2 question(s) en attente de jugement</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — <code>JUGEMENT PÉDAGOGIQUE REQUIS</code> : le corrigé n&#x27;établit aucun résultat repérable</p>
-<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 1 pt — Attendu : calculer — $\sqrt{64} = 8$, donc \[ \frac{2\sigma}{\sqrt{n}} = \frac{2 \times 2{,}4}{8} = \frac{4{,}8}{8} = 0{,}6.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 1 pt — Attendu : calculer — $\sqrt{64} = 8$, donc \[ \frac{2\sigma}{\sqrt{n}} = \frac{2 \times 2{,}4}{8} = \frac{4{,}8}{8} = 0{,}6. \] \medskip.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 1,5 pt — Attendu : justifier — Or $0{,}8 > 0{,}6$ : l&#x27;écart \textbf{dépasse} le seuil.</p>
-<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4** — 1,5 pt — Attendu : calculer — \] Elle est cohérente avec l&#x27;ordre de grandeur attendu, environ $95\,\%$ : l&#x27;écart de $0{,}6$ point relève de la fluctuation de la simulation.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4** — <code>JUGEMENT PÉDAGOGIQUE REQUIS</code> : le corrigé n&#x27;établit aucun résultat repérable</p>
 <h3>1SPE-VARALEA-EV-B</h3>
 <p><strong>Exercice 1</strong> — 6 points (C1, C2, C4)</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 1,5 pt — Attendu : calculer — \[ \begin{array}{|c|c|c|c|} \hline x_i &amp; 2 &amp; 5 &amp; 8 \\ \hline P(X=x_i) &amp; \frac{5}{10} = \frac{1}{2} &amp; \frac{3}{10} &amp; \frac{2}{10} = \frac{1}{5} \\ \hline \end{array} \] \medskip.</p>
@@ -366,7 +353,7 @@ background:#fbf5f6}
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — 1 pt — Attendu : construire — À chaque nœud, la branche « réussi » porte $\frac14$ et la branche « manqué » $\frac34$.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 1 pt — Attendu : calculer — $P(X=0)=\left(\frac34\right)^4=\frac{81}{256}$.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 1,5 pt — Attendu : calculer — Donc $P(X=1)=4\times\frac{27}{256}=\frac{27}{64}$.</p>
-<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4** — 1 pt — Attendu : calculer — L&#x27;écart type a déjà été calculé à l&#x27;exercice 1 .</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4** — 1 pt — Attendu : calculer — L&#x27;écart type a déjà été calculé à l&#x27;exercice 1.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Q5** — 0,5 pt — Attendu : calculer — $P(X\geq1)=1-P(X=0)=1-\frac{81}{256}=\frac{175}{256}$.</p>
 <p><strong>Exercice 3</strong> — 4 points (C5) · 1 question(s) en attente de jugement</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — <code>JUGEMENT PÉDAGOGIQUE REQUIS</code> : le geste évalué ne se lit pas dans l&#x27;énoncé</p>
@@ -374,10 +361,10 @@ background:#fbf5f6}
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 2 pts — Attendu : calculer — $E(B) > 0$ : le contrat est rentable pour l&#x27;assureur.</p>
 <p><strong>Exercice 4</strong> — 5 points (C6, C7) · 1 question(s) en attente de jugement</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Q1** — <code>JUGEMENT PÉDAGOGIQUE REQUIS</code> : le corrigé n&#x27;établit aucun résultat repérable</p>
-<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 1 pt — Attendu : calculer — $\sqrt{81} = 9$, donc \[ \frac{2\sigma}{\sqrt{n}} = \frac{2 \times 1{,}8}{9} = \frac{3{,}6}{9} = 0{,}4.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q2** — 1 pt — Attendu : calculer — $\sqrt{81} = 9$, donc \[ \frac{2\sigma}{\sqrt{n}} = \frac{2 \times 1{,}8}{9} = \frac{3{,}6}{9} = 0{,}4. \] \medskip.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Q3** — 1,5 pt — Attendu : justifier — L&#x27;inégalité demandée étant large, la condition $|m - \mu| \leq \dfrac{2\sigma}{\sqrt{n}}$ est \textbf{vérifiée}.</p>
-<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4** — 1,5 pt — Attendu : calculer — \] Elle est cohérente avec l&#x27;ordre de grandeur attendu, environ $95\,\%$.</p>
-<p>Ce chapitre porte 32 question(s) évaluée(s), dont 5 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• Q4** — 1,5 pt — Attendu : calculer — La proportion vaut \[ \frac{381}{400} = 0{,}9525 = 95{,}25\,\%. \] Elle est cohérente avec l&#x27;ordre de grandeur attendu, environ $95\,\%$.</p>
+<p>Ce chapitre porte 32 question(s) évaluée(s), dont 6 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.</p>
 <h2>8. Checklist du role <code>EXPERT_PROGRAMME_PEDAGOGIE</code></h2>
 <p>1. completude du programme officiel</p>
 <p>2. alignement des capacites</p>
@@ -433,7 +420,7 @@ sans rôle, sans condensat, ou sur un paquet périmé.</p>
 signés par la même identité. Une même personne peut en revanche prendre
 plusieurs chapitres.</p>
 <p>Condensat sémantique que votre approbation lie :
-<code>sha256:6769b01062b6f2b8deab01472485cc9344797abe0b3b770af2d85e4e487e8e92</code></p>
+<code>sha256:85735e287edf87b501bb6d95ada33b0974c38322d15d45d933b499d7b1629022</code></p>
 </div>
 
 </body></html>

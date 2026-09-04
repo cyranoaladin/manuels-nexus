@@ -24,7 +24,7 @@ Chapitre `1SPE-TRIGONOMETRIE` · manuel `1SPE` (Première, Spécialité mathéma
 | Empreinte de l'ensemble d'objets | `sha256:b4679995be20574bd17f70368d5afe83fab601caca60bda18c05da8f40eb5fa3` |
 | Empreinte semantique liee a l'approbation | `sha256:590269373f7f0589819979a8639273f402b32de7d0d4dda4ac6328d1ee2fb243` |
 | Empreinte du packet | `sha256:9f11013f2cf2028ac58cf766a7a1a554c940b3063af73dd9ae3d61ac93a93d4e` |
-| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
+| Revision du depot gelee dans le packet | `dfc99058e7a7c16ae4af46b99245edbe14b4f8e5` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel

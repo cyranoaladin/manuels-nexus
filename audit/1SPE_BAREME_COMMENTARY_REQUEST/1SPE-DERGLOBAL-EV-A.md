@@ -80,7 +80,7 @@ Réponse du corrigé : $g'(x) = 0 \Leftrightarrow x = -\sqrt{2}$ ou $x = \sqrt{2
 
 > Dresser le tableau de variations complet de $g$ sur $\mathbb{R}$. Préciser les valeurs de $g$ aux points remarquables. \hfill \textit{(2 pt)}
 
-Réponse du corrigé : $g(-\sqrt{2}) = -(\sqrt{2})^3 + 6\sqrt{2} = -2\sqrt{2} + 6\sqrt{2} = 4\sqrt{2}.$ $g(\sqrt{2}) = (\sqrt{2})^3 - 6\sqrt{2} = 2\sqrt{2} - 6\sqrt{2} = -4\sqrt{2}.$ \begin{center} \begin{tabular}{|c|ccccccc|} \hline $x$ & $-\infty$ & & $-\sqrt{2}$ & & $\sqrt{2}$ & & $+\infty$ \\ \hline $g(x)$ & $-\infty$ & $\nearrow$ & $4\sqrt{2}$ & $\searrow$ & $-4\sqrt{2}$ & $\nearrow$ & $+\infty$ \\ \hline \end{tabu
+Réponse du corrigé : $g(-\sqrt{2}) = -(\sqrt{2})^3 + 6\sqrt{2} = -2\sqrt{2} + 6\sqrt{2} = 4\sqrt{2}.$ $g(\sqrt{2}) = (\sqrt{2})^3 - 6\sqrt{2} = 2\sqrt{2} - 6\sqrt{2} = -4\sqrt{2}.$
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -123,7 +123,7 @@ Réponse du corrigé : $\Delta = (-2)^2 - 4(1)(-2) = 4 + 8 = 12.$ $x = \dfrac{2 
 
 > Dresser le tableau de variations de $h$ sur $]1\,;\,+\infty[$. \hfill \textit{(1,5 pt)}
 
-Réponse du corrigé : Sur $]1\,;\,+\infty[$ : $(x-1)^2 > 0$ toujours. Le signe de $h'$ est celui du numérateur $x^2-2x-2$ : $h'(x) < 0$ pour $1 < x < 1+\sqrt{3}$ et $h'(x) > 0$ pour $x > 1+\sqrt{3}$. $h(1+\sqrt{3}) = \dfrac{(1+\sqrt{3})^2 + 2}{(1+\sqrt{3})-1} = \dfrac{1 + 2\sqrt{3} + 3 + 2}{\sqrt{3}} = \dfrac{6 + 2\sqrt{3}}{\sqrt{3}} = \dfrac{6}{\sqrt{3}} + 2 = 2\sqrt{3} + 2.$ \begin{center} \begin{tabular}{|c|ccccc|} 
+Réponse du corrigé : Sur $]1\,;\,+\infty[$ : $(x-1)^2 > 0$ toujours. Le signe de $h'$ est celui du numérateur $x^2-2x-2$ : $h'(x) < 0$ pour $1 < x < 1+\sqrt{3}$ et $h'(x) > 0$ pour $x > 1+\sqrt{3}$. $h(1+\sqrt{3}) = \dfrac{(1+\sqrt{3})^2 + 2}{(1+\sqrt{3})-1} = \dfrac{1 + 2\sqrt{3} + 3 + 2}{\sqrt{3}} = \dfrac{6 + 2\sqrt{3}}{\sqrt{3}} = \dfrac{6}{\sqrt{3}} + 2 = 2\sqrt{3} + 2.$
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|

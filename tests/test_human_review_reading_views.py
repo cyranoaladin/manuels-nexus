@@ -291,18 +291,30 @@ def test_capacity_without_official_wording_is_named_as_such(
             assert PRODUCER.NO_BO_WORDING in content, chapter
         else:
             assert PRODUCER.NO_BO_WORDING not in content, chapter
-    varalea = rendered[
-        PRODUCER.REVIEWS
-        / "1SPE-VARIABLES-ALEATOIRES"
-        / f"view-B-{PRODUCER.ROLE_B}.md"
-    ]
-    assert varalea.count(PRODUCER.NO_BO_WORDING) == 4
+    # Variables aleatoires portait quatre fois ce marqueur : deux capacites
+    # sans entree referentielle, vues deux fois chacune. La revue externe a
+    # montre que ce n'etait pas du hors-programme mais une omission du
+    # referentiel local ; les atomes officiels 175 a 179 leur sont desormais
+    # rattaches, et plus aucun chapitre n'affiche le marqueur.
+    for chapter in PRODUCER.chapter_ids():
+        content = rendered[
+            PRODUCER.REVIEWS / chapter / f"view-B-{PRODUCER.ROLE_B}.md"
+        ]
+        assert PRODUCER.NO_BO_WORDING not in content, chapter
 
 
-def test_human_routed_qcm_question_is_visible_in_its_chapter(
+def test_no_1spe_qcm_question_is_left_to_a_human_any_more(
     rendered: dict[Path, str],
 ) -> None:
-    """La seule question 1SPE routee vers l'humain ne se perd pas dans la masse."""
+    """Q16 etait la derniere : elle se tranche desormais en executant le code.
+
+    La question demandait ce que designe `n` dans `simuler_variable(n, graine)`.
+    Aucune famille mathematique generique ne modelisait cet enonce, et la
+    machine s'en remettait a l'humain. Le chapitre imprime pourtant le
+    programme : l'executer suffit -- pour n valant 3, 5 puis 11, il rend un
+    echantillon de longueur exactement n. Chaque vue doit donc dire qu'elle
+    n'a plus rien a router.
+    """
 
     evidence = json.loads(PRODUCER.QCM_EVIDENCE.read_text(encoding="utf-8"))
     routed = [
@@ -310,31 +322,12 @@ def test_human_routed_qcm_question_is_visible_in_its_chapter(
         for question in evidence["questions"]
         if question["chapter"].startswith("1SPE-") and question["human_review_required"]
     ]
-    assert [(q["chapter"], q["question_id"]) for q in routed] == [
-        ("1SPE-VARIABLES-ALEATOIRES", "Q16")
-    ]
-    source = json.loads(
-        (PRODUCER.ROOT / routed[0]["source_path"]).read_text(encoding="utf-8")
-    )
-    question = next(item for item in source["questions"] if item["id"] == "Q16")
-    for role, letter in PRODUCER.ROLES.items():
-        content = rendered[
-            PRODUCER.REVIEWS
-            / "1SPE-VARIABLES-ALEATOIRES"
-            / f"view-{letter}-{role}.md"
-        ]
-        assert "`Q16`" in content
-        assert question["enonce"] in content
-        for option in question["options"].values():
-            assert option in content
-        assert routed[0]["reason"] in content
+    assert routed == []
     for chapter in PRODUCER.chapter_ids():
-        if chapter == "1SPE-VARIABLES-ALEATOIRES":
-            continue
         content = rendered[
             PRODUCER.REVIEWS / chapter / f"view-A-{PRODUCER.ROLE_A}.md"
         ]
-        assert "Aucune question de ce chapitre n'est routee" in content
+        assert "Aucune question de ce chapitre n'est routee" in content, chapter
 
 
 def test_declared_answer_keys_never_leak_into_a_view(

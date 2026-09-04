@@ -14,7 +14,7 @@ Chapitre `1SPE-VARIABLES-ALEATOIRES` · manuel `1SPE` (Première, Spécialité m
 
 - L'unite de decision est le CHAPITRE : 10 chapitres x 2 roles = 20 verdicts, pas des centaines de signatures objet par objet.
 - Aucun humain n'a encore approuve ce chapitre : REVIEW_DELTA_BASELINE = NONE. Le perimetre de revue est le CHAPITRE COURANT ENTIER. Les listes ci-dessous dirigent l'attention, elles ne reduisent pas le perimetre.
-- CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (`sha256:6769b01062b6f2b8deab01472485cc9344797abe0b3b770af2d85e4e487e8e92`) ; l'approbation graphique releve de la porte D7, independante.
+- CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (`sha256:85735e287edf87b501bb6d95ada33b0974c38322d15d45d933b499d7b1629022`) ; l'approbation graphique releve de la porte D7, independante.
 - Verdicts autorises, a rendre dans le packet JSON canonique et jamais dans cette vue : `APPROVED` / `CHANGES_REQUESTED` / `REJECTED`.
 - Cette vue ne porte aucune decision et ne nomme personne : l'assignation du role reste `PENDING_UNASSIGNED`, l'etat du packet reste `PENDING_UNASSIGNED`.
 
@@ -22,9 +22,9 @@ Chapitre `1SPE-VARIABLES-ALEATOIRES` · manuel `1SPE` (Première, Spécialité m
 | --- | --- |
 | Objets du chapitre dans le packet | 167 |
 | Empreinte de l'ensemble d'objets | `sha256:32b2dd9bff3bc3c7c82007986ef3a2009ee89d1aecb9fcad87cf1670af00490e` |
-| Empreinte semantique liee a l'approbation | `sha256:6769b01062b6f2b8deab01472485cc9344797abe0b3b770af2d85e4e487e8e92` |
-| Empreinte du packet | `sha256:a68a21e0301154b1b516a187be1c3dd4bb6a642ebb2e07012c8a0691fe84180f` |
-| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
+| Empreinte semantique liee a l'approbation | `sha256:85735e287edf87b501bb6d95ada33b0974c38322d15d45d933b499d7b1629022` |
+| Empreinte du packet | `sha256:f2a699f52f1b6312310510758d9af5ce6c5f8a6628fa5672f0ec82efe3ed147e` |
+| Revision du depot gelee dans le packet | `dfc99058e7a7c16ae4af46b99245edbe14b4f8e5` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel
@@ -43,8 +43,8 @@ Temps estime declare : parcours 1 : 14 h · parcours 2 : 11 h · parcours 3 : 9 
 | `C3` | Je sais representer par un arbre la repetition de n <= 4 epreuves de Bernoulli independantes et identiques, puis etudier le nombre de succes. | Pour n ≤ 4, représenter par un arbre la répétition d'épreuves de Bernoulli indépendantes et identiques afin de calculer les probabilités liées au nombre de succès. | non |
 | `C4` | Je sais utiliser la linearite de l'esperance pour calculer E(aX+b). | Utiliser la linéarité de l'espérance. | non |
 | `C5` | Je sais resoudre des problemes contextualises (jeux, decisions, assurances) a l'aide de variables aleatoires. | Résoudre des problèmes contextualisés faisant intervenir des variables aléatoires. | non |
-| `C6` | Je sais simuler une variable aleatoire et des echantillons, et lire, comprendre et ecrire une fonction Python renvoyant la moyenne d'un echantillon de taille n. | aucun libelle BO : le referentiel du depot ne declare pas cette capacite | non |
-| `C7` | Je sais etudier experimentalement la fluctuation des moyennes d'echantillons autour de l'esperance, simuler N echantillons et interpreter l'ecart entre moyenne empirique et esperance, notamment au regard de 2 sigma / racine(n). | aucun libelle BO : le referentiel du depot ne declare pas cette capacite | non |
+| `C6` | Je sais simuler une variable aleatoire et des echantillons, et lire, comprendre et ecrire une fonction Python renvoyant la moyenne d'un echantillon de taille n. | Le travail expérimental de simulation d’échantillons prolonge celui entrepris en seconde. L’objectif est de faire percevoir le principe de l’estimation de l’espérance d’une variable aléatoire, ou de la moyenne d’une variable statistique dans une population, par une moyenne observée sur un échantillon. Simuler une variable aléatoire avec Python ou un tableur. Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire. | non |
+| `C7` | Je sais etudier experimentalement la fluctuation des moyennes d'echantillons autour de l'esperance, simuler N echantillons et interpreter l'ecart entre moyenne empirique et esperance, notamment au regard de 2 sigma / racine(n). | Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n | non |
 
 **Attendus officiels rattaches, capacite par capacite**
 
@@ -315,7 +315,7 @@ Libelle BO : Résoudre des problèmes contextualisés faisant intervenir des var
 
 ### Capacite `C6` — « Je sais simuler une variable aleatoire et des echantillons, et lire, comprendre et ecrire une fonction Python renvoyant la moyenne d'un echantillon de taille n. »
 
-Libelle BO : aucun libelle BO : le referentiel du depot ne declare pas cette capacite (`Mathematiques/manuel-maths/referentiel/capacites_1SPE_VARIABLES_ALEATOIRES.json`). Le contrat du chapitre la declare, le referentiel ne lui donne aucun attendu officiel : la rattacher au programme fait partie de votre jugement.
+Libelle BO : Le travail expérimental de simulation d’échantillons prolonge celui entrepris en seconde. L’objectif est de faire percevoir le principe de l’estimation de l’espérance d’une variable aléatoire, ou de la moyenne d’une variable statistique dans une population, par une moyenne observée sur un échantillon. Simuler une variable aléatoire avec Python ou un tableur. Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire.
 
 **Roles pedagogiques concernes et objets contributeurs**
 
@@ -350,7 +350,7 @@ Libelle BO : aucun libelle BO : le referentiel du depot ne declare pas cette cap
 
 ### Capacite `C7` — « Je sais etudier experimentalement la fluctuation des moyennes d'echantillons autour de l'esperance, simuler N echantillons et interpreter l'ecart entre moyenne empirique et esperance, notamment au regard de 2 sigma / racine(n). »
 
-Libelle BO : aucun libelle BO : le referentiel du depot ne declare pas cette capacite (`Mathematiques/manuel-maths/referentiel/capacites_1SPE_VARIABLES_ALEATOIRES.json`). Le contrat du chapitre la declare, le referentiel ne lui donne aucun attendu officiel : la rattacher au programme fait partie de votre jugement.
+Libelle BO : Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n
 
 **Roles pedagogiques concernes et objets contributeurs**
 
@@ -385,27 +385,7 @@ Libelle BO : aucun libelle BO : le referentiel du depot ne declare pas cette cap
 
 ## 5. Question de QCM routee vers l'humain
 
-1 question sur 21 n'a pas pu recevoir de preuve independante de la machine. Elle est reproduite ici en entier pour qu'elle ne se perde pas dans la masse.
-
-### `1SPE-VARIABLES-ALEATOIRES` / `Q16` (capacite `C6`)
-
-**Enonce**, reproduit tel quel depuis la source canonique, notations LaTeX comprises :
-
-> Dans la fonction \code{simuler_variable(n, graine)} du chapitre, que designe $n$ ?
-
-**Options proposees**
-
-- **A.** Le nombre de valeurs prises par $X$
-- **B.** La graine du generateur
-- **C.** La taille de l'échantillon simule
-- **D.** Le nombre d'échantillons simulés
-
-**Pourquoi la machine a route vers l'humain** — aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question
-
-- bloquant pour la publication : oui ;
-- source canonique : `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json` ;
-- empreinte semantique de la question : `sha256:0fa5fcd1a4b8358652374ce5b70c07f8cb4ca21cd96dff23cc93182a9cb049b3` ;
-- la cle declaree n'est pas reproduite dans cette vue : elle figure dans la source canonique, et le contrat d'independance du depot interdit de faire circuler la cle avec l'enonce. Etablissez la reponse par vous-meme, puis comparez.
+Aucune question de ce chapitre n'est routee vers une revue humaine par `audit/QCM_INDEPENDENT_EVIDENCE_V2.json`.
 
 ## 6. Coherence du chapitre et coherence au niveau du manuel
 
@@ -446,12 +426,12 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 - **Q2** — 1,5 pt — Attendu : construire — \[ \begin{array}{|c|c|c|} \hline g_i & -3 & 12 \\ \hline P(G=g_i) & \frac{5}{6} & \frac{1}{6} \\ \hline \end{array} \] \medskip.
 - **Q3** — 1,5 pt — Attendu : calculer — $E(G) = -0{,}5 < 0$ : le jeu est défavorable au joueur.
 
-**Exercice 4** — 5 points (C6, C7) · 1 question(s) en attente de jugement
+**Exercice 4** — 5 points (C6, C7) · 2 question(s) en attente de jugement
 
 - **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
-- **Q2** — 1 pt — Attendu : calculer — $\sqrt{64} = 8$, donc \[ \frac{2\sigma}{\sqrt{n}} = \frac{2 \times 2{,}4}{8} = \frac{4{,}8}{8} = 0{,}6.
+- **Q2** — 1 pt — Attendu : calculer — $\sqrt{64} = 8$, donc \[ \frac{2\sigma}{\sqrt{n}} = \frac{2 \times 2{,}4}{8} = \frac{4{,}8}{8} = 0{,}6. \] \medskip.
 - **Q3** — 1,5 pt — Attendu : justifier — Or $0{,}8 > 0{,}6$ : l'écart \textbf{dépasse} le seuil.
-- **Q4** — 1,5 pt — Attendu : calculer — \] Elle est cohérente avec l'ordre de grandeur attendu, environ $95\,\%$ : l'écart de $0{,}6$ point relève de la fluctuation de la simulation.
+- **Q4** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
 
 ### 1SPE-VARALEA-EV-B
 
@@ -467,7 +447,7 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 - **Q1** — 1 pt — Attendu : construire — À chaque nœud, la branche « réussi » porte $\frac14$ et la branche « manqué » $\frac34$.
 - **Q2** — 1 pt — Attendu : calculer — $P(X=0)=\left(\frac34\right)^4=\frac{81}{256}$.
 - **Q3** — 1,5 pt — Attendu : calculer — Donc $P(X=1)=4\times\frac{27}{256}=\frac{27}{64}$.
-- **Q4** — 1 pt — Attendu : calculer — L'écart type a déjà été calculé à l'exercice 1 .
+- **Q4** — 1 pt — Attendu : calculer — L'écart type a déjà été calculé à l'exercice 1.
 - **Q5** — 0,5 pt — Attendu : calculer — $P(X\geq1)=1-P(X=0)=1-\frac{81}{256}=\frac{175}{256}$.
 
 **Exercice 3** — 4 points (C5) · 1 question(s) en attente de jugement
@@ -479,11 +459,11 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 **Exercice 4** — 5 points (C6, C7) · 1 question(s) en attente de jugement
 
 - **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
-- **Q2** — 1 pt — Attendu : calculer — $\sqrt{81} = 9$, donc \[ \frac{2\sigma}{\sqrt{n}} = \frac{2 \times 1{,}8}{9} = \frac{3{,}6}{9} = 0{,}4.
+- **Q2** — 1 pt — Attendu : calculer — $\sqrt{81} = 9$, donc \[ \frac{2\sigma}{\sqrt{n}} = \frac{2 \times 1{,}8}{9} = \frac{3{,}6}{9} = 0{,}4. \] \medskip.
 - **Q3** — 1,5 pt — Attendu : justifier — L'inégalité demandée étant large, la condition $|m - \mu| \leq \dfrac{2\sigma}{\sqrt{n}}$ est \textbf{vérifiée}.
-- **Q4** — 1,5 pt — Attendu : calculer — \] Elle est cohérente avec l'ordre de grandeur attendu, environ $95\,\%$.
+- **Q4** — 1,5 pt — Attendu : calculer — La proportion vaut \[ \frac{381}{400} = 0{,}9525 = 95{,}25\,\%. \] Elle est cohérente avec l'ordre de grandeur attendu, environ $95\,\%$.
 
-Ce chapitre porte 32 question(s) évaluée(s), dont 5 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
+Ce chapitre porte 32 question(s) évaluée(s), dont 6 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
 
 ## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 

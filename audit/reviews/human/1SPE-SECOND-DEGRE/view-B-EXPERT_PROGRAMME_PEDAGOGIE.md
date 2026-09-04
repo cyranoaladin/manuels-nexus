@@ -24,7 +24,7 @@ Chapitre `1SPE-SECOND-DEGRE` · manuel `1SPE` (Première, Spécialité mathémat
 | Empreinte de l'ensemble d'objets | `sha256:e4a5653a775bdf85a7ed42d96f50810dd2d955883f36f7823c205a775f79d8a8` |
 | Empreinte semantique liee a l'approbation | `sha256:080a729e99ba25e3ac48b7ef480a1ff1b6b37be65945b34aed30ee74c86bb7e9` |
 | Empreinte du packet | `sha256:c48e1e5d7497d4e246c5fb1cce899fcd7cca605e87d0ce02a34507555bbedca6` |
-| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
+| Revision du depot gelee dans le packet | `dfc99058e7a7c16ae4af46b99245edbe14b4f8e5` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel
@@ -349,16 +349,16 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 
 ### 1SPE-SECDEG-EV-A
 
-**Exercice 1** — 7 points (C1, C3, C4)
+**Exercice 1** — 7 points (C1, C3, C4) · 1 question(s) en attente de jugement
 
 - **Q1** — 1 pt — Attendu : calculer — Pour $f(x) = 2x^2 - 8x + 6$ : $a = 2$, $b = -8$, $c = 6$.
-- **Q2** — 2 pts — Attendu : calculer — \] \[ \boxed{f(x) = 2(x-2)^2 - 2.} \] \medskip.
-- **Q3** — 2 pts — Attendu : en déduire — \] Deux racines réelles distinctes : \[ x_1 = \frac{8 - 4}{4} = 1, \qquad x_2 = \frac{8 + 4}{4} = 3.
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
+- **Q3** — 2 pts — Attendu : en déduire — \[ \Delta = 64 - 48 = 16 > 0. \quad \sqrt{\Delta} = 4. \] Deux racines réelles distinctes : \[ x_1 = \frac{8 - 4}{4} = 1, \qquad x_2 = \frac{8 + 4}{4} = 3. \] \medskip.
 - **Q4** — 2 pts — Attendu : vérifier — \[ \boxed{f(x) = 2(x-1)(x-3).} \] Vérification : $2(x-1)(x-3) = 2(x^2 - 4x + 3) = 2x^2 - 8x + 6 = f(x)$.
 
-**Exercice 2** — 5 points (C2) · 1 question(s) en attente de jugement
+**Exercice 2** — 5 points (C2) · 2 question(s) en attente de jugement
 
-- **Q1** — 2 pts — Attendu : calculer — \quad \checkmark \] Donc $g(x) = -(x-2)^2 + 1$ est bien la forme canonique de $g$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
 - **Q2** — 1 pt — Attendu : en déduire — Comme $a = -1 < 0$, la parabole est tournee vers le bas : $g$ admet un \textbf{maximum} de valeur $g(2) = 1$, atteint en $x = 2$.
 - **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
 - **Q4** — 1 pt — Attendu : calculer — L'axe de symetrie de la parabole a pour équation $x = \alpha = 2$.
@@ -369,11 +369,11 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 - **Q2** — 1 pt — Attendu : résoudre — \[ \boxed{\mathcal{S} = [1\,;\,3].} \] \medskip.
 - **Q3** — 1 pt — Attendu : résoudre — \[ \boxed{\mathcal{S} = \,]-\infty\,;\,1[ \cup \,]3\,;\,+\infty[.} \].
 
-**Exercice 4** — 4 points (C6)
+**Exercice 4** — 4 points (C6) · 1 question(s) en attente de jugement
 
-- **Q1** — 1 pt — Attendu : exprimer — \item Largeur : $20 - 2x$~cm.
-- **Q2** — 1 pt — Attendu : montrer — \] Domaine : $x > 0$, $30 - 2x > 0$ et $20 - 2x > 0$, soit $x \in \,]0\,;\,10[$.
-- **Q3** — 1 pt — Attendu : calculer — \] \[ V(5) = 5 \times (30-10) \times (20-10) = 5 \times 20 \times 10 = 1\,000 \text{ cm}^3.
+- **Q1** — 1 pt — Attendu : exprimer — Après decoupe et pliage : \begin{itemize} \item Hauteur : $x$~cm. \item Longueur : $30 - 2x$~cm. \item Largeur : $20 - 2x$~cm. \end{itemize} \medskip.
+- **Q2** — 1 pt — Attendu : montrer — \[ V(x) = x \times (30-2x) \times (20-2x). \] Domaine : $x > 0$, $30 - 2x > 0$ et $20 - 2x > 0$, soit $x \in \,]0\,;\,10[$.
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
 - **Q4** — 1 pt — Attendu : justifier — Une étude complete de $V$ (dérivée ou tableau de variations) est nécessaire pour trouver le maximum absolu.
 
 ### 1SPE-SECDEG-EV-B
@@ -381,13 +381,13 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 **Exercice 1** — 7 points (C1, C3, C4)
 
 - **Q1** — 1 pt — Attendu : calculer — Pour $f(x) = 3x^2 - 12x + 9$ : $a = 3$, $b = -12$, $c = 9$.
-- **Q2** — 2 pts — Attendu : calculer — \] \[ \boxed{f(x) = 3(x-2)^2 - 3.} \] \medskip.
-- **Q3** — 2 pts — Attendu : en déduire — \] \[ x_1 = \frac{12 - 6}{6} = 1, \qquad x_2 = \frac{12 + 6}{6} = 3.
+- **Q2** — 2 pts — Attendu : calculer — \[ \alpha = \frac{-(-12)}{2 \times 3} = \frac{12}{6} = 2, \qquad \beta = f(2) = 3 \times 4 - 12 \times 2 + 9 = 12 - 24 + 9 = -3. \] \[ \boxed{f(x) = 3(x-2)^2 - 3.} \] \medskip.
+- **Q3** — 2 pts — Attendu : en déduire — \[ \Delta = 144 - 108 = 36 > 0. \quad \sqrt{\Delta} = 6. \] \[ x_1 = \frac{12 - 6}{6} = 1, \qquad x_2 = \frac{12 + 6}{6} = 3. \] \medskip.
 - **Q4** — 2 pts — Attendu : vérifier — \[ \boxed{f(x) = 3(x-1)(x-3).} \] Vérification : $3(x-1)(x-3) = 3(x^2 - 4x + 3) = 3x^2 - 12x + 9 = f(x)$.
 
-**Exercice 2** — 5 points (C2) · 1 question(s) en attente de jugement
+**Exercice 2** — 5 points (C2) · 2 question(s) en attente de jugement
 
-- **Q1** — 2 pts — Attendu : calculer — \quad \checkmark \] Donc $g(x) = -2(x-2)^2 + 2$ est bien la forme canonique de $g$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
 - **Q2** — 1 pt — Attendu : en déduire — Comme $a = -2 < 0$, la parabole est tournee vers le bas : $g$ admet un \textbf{maximum} de valeur $g(2) = 2$, atteint en $x = 2$.
 - **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
 - **Q4** — 1 pt — Attendu : calculer — L'axe de symetrie de la parabole a pour équation $x = \alpha = 2$.
@@ -398,14 +398,14 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 - **Q2** — 1 pt — Attendu : résoudre — D'après le tableau de signes : $\boxed{\mathcal{S} = [1\,;\,3]}$.
 - **Q3** — 1 pt — Attendu : résoudre — $\boxed{\mathcal{S} = \,]-\infty\,;\,1[ \cup \,]3\,;\,+\infty[}$.
 
-**Exercice 4** — 4 points (C6)
+**Exercice 4** — 4 points (C6) · 1 question(s) en attente de jugement
 
 - **Q1** — 1 pt — Attendu : exprimer — Après decoupe et pliage : hauteur $x$~cm, longueur $30-2x$~cm, largeur $20-2x$~cm.
 - **Q2** — 1 pt — Attendu : montrer — Domaine : $x > 0$, $30-2x > 0$ et $20-2x > 0$, d'ou $x \in \,]0\,;\,10[$.
-- **Q3** — 1 pt — Attendu : calculer — \] \[ V(6) = 6 \times (30-12) \times (20-12) = 6 \times 18 \times 8 = 864 \text{ cm}^3.
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
 - **Q4** — 1 pt — Attendu : justifier — Une étude complete de $V$ est nécessaire.
 
-Ce chapitre porte 30 question(s) évaluée(s), dont 2 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
+Ce chapitre porte 30 question(s) évaluée(s), dont 7 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
 
 ## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 

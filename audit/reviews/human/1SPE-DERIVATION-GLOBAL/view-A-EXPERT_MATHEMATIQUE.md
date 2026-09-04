@@ -24,7 +24,7 @@ Chapitre `1SPE-DERIVATION-GLOBAL` · manuel `1SPE` (Première, Spécialité math
 | Empreinte de l'ensemble d'objets | `sha256:8356fd05cbe695f0bffd4fda5ed5fd8b0cc3566675daaa189e44bdf2710f6d6c` |
 | Empreinte semantique liee a l'approbation | `sha256:532209e1d6fb906707a0631eef12a5a438d0a8dbaf477b923be219a35d83ff36` |
 | Empreinte du packet | `sha256:c4d8fde8c6ca8bc5a7b3ddb3abb84600d7f950453827344e3c8bb0630069a4c5` |
-| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
+| Revision du depot gelee dans le packet | `dfc99058e7a7c16ae4af46b99245edbe14b4f8e5` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel

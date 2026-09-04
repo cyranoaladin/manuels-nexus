@@ -216,7 +216,7 @@
         },
         {
           "competence": null,
-          "correction_answer": "Valeur exacte : $\\dfrac{1}{2{,}05} = \\dfrac{100}{205} = \\dfrac{20}{41} \\approx 0{,}48780\\ldots$ Approximation : $0{,}4875$. L'erreur est de l'ordre de $0{,}0003$, soit environ $0{,}06\\,\\%$. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, solve, Rational, limit % x, h = symbols('x h') % # ---- Exercice 1 : f(x) = x^2 - 4x + 5 ---- % f = x**2 - 4*x + 5 % assert f.subs(x, 1) == 2 and f.su",
+          "correction_answer": "Valeur exacte : $\\dfrac{1}{2{,}05} = \\dfrac{100}{205} = \\dfrac{20}{41} \\approx 0{,}48780\\ldots$ Approximation : $0{,}4875$. L'erreur est de l'ordre de $0{,}0003$, soit environ $0{,}06\\,\\%$. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, solve, Rational, limit % x, h = symbols('x h') % # ---- Exercice 1 : f(x) = x^2 - 4x + 5 ---- % f = x**2 - 4*x + 5 % assert f.subs(x, 1) == 2 and",
           "correction_answer_scope": "question",
           "points": "1 pt",
           "question": "Q3",

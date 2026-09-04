@@ -70,7 +70,7 @@ Réponse du corrigé : $\overrightarrow{AB}\begin{pmatrix} 3 \\ -2 \end{pmatrix}
 
 > Calculer l'angle $\widehat{ABC}$. \hfill \textit{(2 pt)}
 
-Réponse du corrigé : $\overrightarrow{BA}\begin{pmatrix} -3 \\ 2 \end{pmatrix}$, $\overrightarrow{BC}\begin{pmatrix} -1 \\ 5 \end{pmatrix}$. $\overrightarrow{BA} \cdot \overrightarrow{BC} = 3 + 10 = 13$, $\|\overrightarrow{BA}\| = \sqrt{13}$, $\|\overrightarrow{BC}\| = \sqrt{26}$. $\cos\widehat{ABC} = \dfrac{13}{\sqrt{13}\sqrt{26}} = \dfrac{13}{\sqrt{338}} = \dfrac{13}{13\sqrt{2}} = \dfrac{1}{\sqrt{2}} = \dfrac{\sqrt{
+Réponse du corrigé : $\overrightarrow{BA}\begin{pmatrix} -3 \\ 2 \end{pmatrix}$, $\overrightarrow{BC}\begin{pmatrix} -1 \\ 5 \end{pmatrix}$. $\overrightarrow{BA} \cdot \overrightarrow{BC} = 3 + 10 = 13$, $\|\overrightarrow{BA}\| = \sqrt{13}$, $\|\overrightarrow{BC}\| = \sqrt{26}$.
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -146,7 +146,7 @@ Réponse du corrigé : $\cos\widehat{ABC} = \dfrac{BC^2 + AB^2 - AC^2}{2 \cdot B
 
 > Calculer l'aire du triangle $ABC$. \hfill \textit{(1,5 pt)}
 
-Réponse du corrigé : $\mathcal{A} = \dfrac{1}{2} \times AB \times AC \times \sin\widehat{BAC} = \dfrac{1}{2} \times 8 \times 5 \times \dfrac{\sqrt{3}}{2} = 10\sqrt{3} \approx 17{,}3$. % BEGIN-VERIFY % from sympy import Matrix, sqrt, Rational, simplify, cos, sin, pi, symbols, solve % # ---- Exercice 1 : u(3;-1), v(2;5) ---- % u = Matrix([3, -1]); v = Matrix([2, 5]) % assert u.dot(v) == 1 % assert simplify(u.norm() - sq
+Réponse du corrigé : $\mathcal{A} = \dfrac{1}{2} \times AB \times AC \times \sin\widehat{BAC} = \dfrac{1}{2} \times 8 \times 5 \times \dfrac{\sqrt{3}}{2} = 10\sqrt{3} \approx 17{,}3$. % BEGIN-VERIFY % from sympy import Matrix, sqrt, Rational, simplify, cos, sin, pi, symbols, solve % # ---- Exercice 1 : u(3;-1), v(2;5) ---- % u = Matrix([3, -1]); v = Matrix([2, 5]) % assert u.dot(v) == 1 % assert simplify(u.norm() -
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|

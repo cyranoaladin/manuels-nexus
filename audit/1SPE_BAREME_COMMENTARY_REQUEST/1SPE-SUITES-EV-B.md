@@ -47,7 +47,7 @@ Réponse du corrigé : Par la formule du terme général d'une suite arithmétiq
 
 > Étudier les variations de la suite $(u_n)$. Justifier rigoureusement.
 
-Réponse du corrigé : Pour tout $n \in \mathbb{N}$ : \[ u_{n+1} - u_n = 3 > 0. \] La différence est strictement positive pour tout $n \in \mathbb{N}$. \textbf{Conclusion :} La suite $(u_n)$ est \textbf{strictement croissante}. \textit{Remarque : on peut aussi argumenter que la raison $r = 3 > 0$, ce qui suffit pour conclure qu'une suite arithmétique est strictement croissante.} %========================================
+Réponse du corrigé : Pour tout $n \in \mathbb{N}$ : \[ u_{n+1} - u_n = 3 > 0. \] La différence est strictement positive pour tout $n \in \mathbb{N}$. \textbf{Conclusion :} La suite $(u_n)$ est \textbf{strictement croissante}. \textit{Remarque : on peut aussi argumenter que la raison $r = 3 > 0$, ce qui suffit pour conclure qu'une suite arithmétique est strictement croissante.}
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -55,9 +55,9 @@ Réponse du corrigé : Pour tout $n \in \mathbb{N}$ : \[ u_{n+1} - u_n = 3 > 0. 
 
 ### Question Q5 — 1 pt
 
-> On considère de plus la suite $(w_n)$ définie pour tout entier naturel $n$ par $w_n = 4 - \dfrac{1}{n+1}$. Calculer $w_0$, $w_1$, $w_2$ et $w_{10}$ (valeurs arrondies au centième si besoin). Les suites $(u_n)$ et $(w_n)$ sont toutes les deux croissantes. Pour chacune, dire si elle semble se rapprocher d'une valeur finie, croître sans borne, ou n'avoir aucun comportement de ce type. Justifier à par
+> On considère de plus la suite $(w_n)$ définie pour tout entier naturel $n$ par $w_n = 4 - \dfrac{1}{n+1}$. Calculer $w_0$, $w_1$, $w_2$ et $w_{10}$ (valeurs arrondies au centième si besoin). Les suites $(u_n)$ et $(w_n)$ sont toutes les deux croissantes. Pour chacune, dire si elle semble se rapprocher d'une valeur finie, croître sans borne, ou n'avoir aucun comportement de ce type. Justifier à
 
-Réponse du corrigé : $w_0 = 4 - 1 = 3$, $w_1 = 4 - \dfrac{1}{2} = \dfrac{7}{2} = 3{,}5$, $w_2 = 4 - \dfrac{1}{3} = \dfrac{11}{3} \approx 3{,}67$ et $w_{10} = 4 - \dfrac{1}{11} = \dfrac{43}{11} \approx 3{,}91$. Pour $(u_n)$ : les termes valent $u_0 = 5$, $u_3 = 14$, $u_{10} = 35$. Chaque terme dépasse le précédent de $3$, et cet écart ne diminue jamais : en allant assez loin, on dépasse n'importe quelle valeur fixée à 
+Réponse du corrigé : $w_0 = 4 - 1 = 3$, $w_1 = 4 - \dfrac{1}{2} = \dfrac{7}{2} = 3{,}5$, $w_2 = 4 - \dfrac{1}{3} = \dfrac{11}{3} \approx 3{,}67$ et $w_{10} = 4 - \dfrac{1}{11} = \dfrac{43}{11} \approx 3{,}91$. Pour $(u_n)$ : les termes valent $u_0 = 5$, $u_3 = 14$, $u_{10} = 35$. Chaque terme dépasse le précédent de $3$, et cet écart ne diminue jamais : en allant assez loin, on dépasse n'importe quelle valeur fixée à
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -90,7 +90,7 @@ Réponse du corrigé : Pour tout entier naturel $n$, $u_n = 4 \times 2^n > 0$, d
 
 > Calculer la somme $S = u_0 + u_1 + u_2 + u_3 + u_4$. On rappelle que, pour une suite géométrique de raison $q \neq 1$, on a : \[ \sum_{k=0}^{n} u_k = u_0 \times \frac{q^{n+1} - 1}{q - 1}. \]
 
-Réponse du corrigé : On somme les termes de rang $k = 0$ à $k = 4$, soit $5$ termes. En appliquant la formule avec $u_0 = 4$, $q = 2$ et $n = 4$ : \[ S = u_0 \times \frac{q^5 - 1}{q - 1} = 4 \times \frac{2^5 - 1}{2 - 1} = 4 \times \frac{32 - 1}{1} = 4 \times 31 = 124. \] \[ \boxed{S = 124.} \] \textit{Vérification :} $u_0 + u_1 + u_2 + u_3 + u_4 = 4 + 8 + 16 + 32 + 64 = 124$. \checkmark %==============================
+Réponse du corrigé : On somme les termes de rang $k = 0$ à $k = 4$, soit $5$ termes. En appliquant la formule avec $u_0 = 4$, $q = 2$ et $n = 4$ : \[ S = u_0 \times \frac{q^5 - 1}{q - 1} = 4 \times \frac{2^5 - 1}{2 - 1} = 4 \times \frac{32 - 1}{1} = 4 \times 31 = 124. \] \[ \boxed{S = 124.} \] \textit{Vérification :} $u_0 + u_1 + u_2 + u_3 + u_4 = 4 + 8 + 16 + 32 + 64 = 124$. \checkmark
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -133,7 +133,7 @@ Réponse du corrigé : \[ u_1 = 1\,000 \times 1{,}04 = 1\,040 \text{ €}, \qqua
 
 > Expliquer, ligne par ligne, le rôle de la boucle \texttt{while}.
 
-Réponse du corrigé : \textbf{4a. Explication de la boucle.} \begin{itemize} \item \texttt{u = 1000} et \texttt{n = 0} initialisent le capital et le compteur d'années. \item La condition \texttt{while u < 1500} : tant que le capital n'a pas atteint $1\,500$\,€, on continue. \item \texttt{u = 1.04 * u} : on applique la relation de récurrence (le capital est multiplié par $1{,}04$). \item \texttt{n = n + 1} : on incrémen
+Réponse du corrigé (rédigée pour l'exercice entier) : \hfill (5 points) — C6, C7} %=============================================================== \bigskip \textbf{Question 1 — Modélisation.} Au bout de $n$ années, le capital vaut $u_n$. Durant l'année suivante, il produit des intérêts à hauteur de $4\,\% \times u_n = 0{,}04\,u_n$. Le capital au bout de $(n+1)$ années est donc : \[ u_{n+1} = u_n + 0{,}04\,u_n = (1 + 0{,}04)\,u_n = 1{,}04\,u_n. \]
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -143,7 +143,7 @@ Réponse du corrigé : \textbf{4a. Explication de la boucle.} \begin{itemize} \i
 
 > Indiquer la valeur affichée par \texttt{print(n)} et vérifier par le calcul que cette valeur est cohérente.
 
-Réponse du corrigé : \textbf{4a. Explication de la boucle.} \begin{itemize} \item \texttt{u = 1000} et \texttt{n = 0} initialisent le capital et le compteur d'années. \item La condition \texttt{while u < 1500} : tant que le capital n'a pas atteint $1\,500$\,€, on continue. \item \texttt{u = 1.04 * u} : on applique la relation de récurrence (le capital est multiplié par $1{,}04$). \item \texttt{n = n + 1} : on incrémen
+Réponse du corrigé : Le programme affiche $\mathbf{n = 11}$. \textit{Vérification algébrique :} On résout $1\,000 \times 1{,}04^n \geq 1\,500$, soit $1{,}04^n \geq \dfrac{1\,500}{1\,000} = 1{,}5$. \begin{center} \begin{tabular}{c|c|c} $n$ & $1\,000 \times 1{,}04^n$ (arrondi à l'euro) & $\geq 1\,500$\,? \\ \hline 9 & $1\,423$ & non \\ 10 & $1\,480$ & non \\ 11 & $1\,539$ & \textbf{oui} \\ \end{tabular} \end{center} Le
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|

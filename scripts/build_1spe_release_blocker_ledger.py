@@ -124,6 +124,61 @@ DERIVED_SOURCES: tuple[dict[str, Any], ...] = (
         "meaning": "un corrige, un bareme ou une cle a fuite vers la variante eleve",
         "closes_with": "MACHINE",
     },
+    # Quatre bloqueurs ouverts par la revue externe du kit exporte. Chacun
+    # pointe la metrique de son propre producteur : le ledger n'evalue rien,
+    # il lit ce que le producteur a mesure.
+    {
+        "artifact": "audit/1SPE_BAREME_COMMENTARY_PROPOSAL.json",
+        "metric": "BAREME_EXPECTED_TEX_UNBALANCED",
+        "blocker_id": "BAREME_EXPECTED_TEX_BOUNDARY_LOSS",
+        "scope": "1SPE_RELEASE_BLOCKER",
+        "surface": "1SPE_HUMAN_REVIEW",
+        "meaning": (
+            "un attendu de bareme porte des delimiteurs TeX qui ne se referment "
+            "pas : la formule qu'il evalue est coupee en deux et ne se compose "
+            "pas"
+        ),
+        "closes_with": "MACHINE",
+    },
+    {
+        "artifact": "audit/1SPE_BAREME_COMMENTARY_PROPOSAL.json",
+        "metric": "BAREME_QUESTION_SCOPE_AMBIGUOUS",
+        "blocker_id": "BAREME_QUESTION_SCOPE_COLLAPSE",
+        "scope": "1SPE_RELEASE_BLOCKER",
+        "surface": "1SPE_HUMAN_REVIEW",
+        "meaning": (
+            "deux questions d'un meme exercice recoivent le meme attendu : un "
+            "corrige ecrit a l'echelle de l'exercice a ete servi comme s'il "
+            "repondait a chacune"
+        ),
+        "closes_with": "MACHINE",
+    },
+    {
+        "artifact": "audit/1SPE_REFERENTIAL_CAPACITY_CLOSURE.json",
+        "metric": "VARALEA_OFFICIAL_MAPPING_UNKNOWN",
+        "blocker_id": "REFERENTIAL_CAPACITY_OMISSION",
+        "scope": "1SPE_RELEASE_BLOCKER",
+        "surface": "1SPE_PROGRAMME_AUTHORITY",
+        "meaning": (
+            "une capacite du contrat n'a aucune entree dans le referentiel "
+            "local alors que la matrice officielle lui rattache des attendus "
+            "obligatoires"
+        ),
+        "closes_with": "MACHINE",
+    },
+    {
+        "artifact": "audit/1SPE_CORNER_MARK_DISPOSITION.json",
+        "metric": "UNREQUESTED_CROP_MARKS",
+        "blocker_id": "UNREQUESTED_CROP_MARKS",
+        "scope": "1SPE_RELEASE_BLOCKER",
+        "surface": "1SPE_PRINT_ARTIFACT",
+        "meaning": (
+            "un repere technique de coupe est pose sans que l'imprimeur l'ait "
+            "demande : hors TrimBox, achromatique, filet, tourne vers "
+            "l'exterieur"
+        ),
+        "closes_with": "MACHINE",
+    },
     {
         # `FAILURES_TOUCHING_1SPE` n'existe qu'avec une capture GLOBALE ; le
         # verdict du périmètre, lui, est produit par la capture du périmètre.

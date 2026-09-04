@@ -47,7 +47,7 @@ Réponse du corrigé : Par la formule du terme général d'une suite arithmétiq
 
 > Étudier les variations de la suite $(u_n)$. Justifier rigoureusement.
 
-Réponse du corrigé : Pour tout $n \in \mathbb{N}$ : \[ u_{n+1} - u_n = 4 > 0. \] La différence est strictement positive pour tout $n \in \mathbb{N}$. \textbf{Conclusion :} La suite $(u_n)$ est \textbf{strictement croissante}. \textit{Remarque : on peut aussi argumenter que la raison $r = 4 > 0$, ce qui suffit pour conclure qu'une suite arithmétique est strictement croissante.} %========================================
+Réponse du corrigé : Pour tout $n \in \mathbb{N}$ : \[ u_{n+1} - u_n = 4 > 0. \] La différence est strictement positive pour tout $n \in \mathbb{N}$. \textbf{Conclusion :} La suite $(u_n)$ est \textbf{strictement croissante}. \textit{Remarque : on peut aussi argumenter que la raison $r = 4 > 0$, ce qui suffit pour conclure qu'une suite arithmétique est strictement croissante.}
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -55,9 +55,9 @@ Réponse du corrigé : Pour tout $n \in \mathbb{N}$ : \[ u_{n+1} - u_n = 4 > 0. 
 
 ### Question Q5 — 1 pt
 
-> On considère de plus la suite $(w_n)$ définie pour tout entier naturel $n$ par $w_n = 5 - \dfrac{1}{n+1}$. Calculer $w_0$, $w_1$, $w_2$ et $w_{10}$ (valeurs arrondies au centième si besoin). Les suites $(u_n)$ et $(w_n)$ sont toutes les deux croissantes. Pour chacune, dire si elle semble se rapprocher d'une valeur finie, croître sans borne, ou n'avoir aucun comportement de ce type. Justifier à par
+> On considère de plus la suite $(w_n)$ définie pour tout entier naturel $n$ par $w_n = 5 - \dfrac{1}{n+1}$. Calculer $w_0$, $w_1$, $w_2$ et $w_{10}$ (valeurs arrondies au centième si besoin). Les suites $(u_n)$ et $(w_n)$ sont toutes les deux croissantes. Pour chacune, dire si elle semble se rapprocher d'une valeur finie, croître sans borne, ou n'avoir aucun comportement de ce type. Justifier à
 
-Réponse du corrigé : $w_0 = 5 - 1 = 4$, $w_1 = 5 - \dfrac{1}{2} = \dfrac{9}{2} = 4{,}5$, $w_2 = 5 - \dfrac{1}{3} = \dfrac{14}{3} \approx 4{,}67$ et $w_{10} = 5 - \dfrac{1}{11} = \dfrac{54}{11} \approx 4{,}91$. Pour $(u_n)$ : les termes valent $u_0 = 3$, $u_3 = 15$, $u_{10} = 43$. Chaque terme dépasse le précédent de $4$, et cet écart ne diminue jamais : en allant assez loin, on dépasse n'importe quelle valeur fixée à 
+Réponse du corrigé : $w_0 = 5 - 1 = 4$, $w_1 = 5 - \dfrac{1}{2} = \dfrac{9}{2} = 4{,}5$, $w_2 = 5 - \dfrac{1}{3} = \dfrac{14}{3} \approx 4{,}67$ et $w_{10} = 5 - \dfrac{1}{11} = \dfrac{54}{11} \approx 4{,}91$. Pour $(u_n)$ : les termes valent $u_0 = 3$, $u_3 = 15$, $u_{10} = 43$. Chaque terme dépasse le précédent de $4$, et cet écart ne diminue jamais : en allant assez loin, on dépasse n'importe quelle valeur fixée à
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -90,7 +90,7 @@ Réponse du corrigé : Pour tout entier naturel $n$, $u_n = 2 \times 3^n > 0$, d
 
 > Calculer la somme $S = u_0 + u_1 + u_2 + u_3 + u_4$. On rappelle que, pour une suite géométrique de raison $q \neq 1$, on a : \[ \sum_{k=0}^{n} u_k = u_0 \times \frac{q^{n+1} - 1}{q - 1}. \]
 
-Réponse du corrigé : On somme les termes de rang $k = 0$ à $k = 4$, soit $5$ termes. En appliquant la formule avec $u_0 = 2$, $q = 3$ et $n = 4$ : \[ S = u_0 \times \frac{q^5 - 1}{q - 1} = 2 \times \frac{3^5 - 1}{3 - 1} = 2 \times \frac{243 - 1}{2} = 243 - 1 = 242. \] \[ \boxed{S = 242.} \] \textit{Vérification :} $u_0 + u_1 + u_2 + u_3 + u_4 = 2 + 6 + 18 + 54 + 162 = 242$. \checkmark %================================
+Réponse du corrigé : On somme les termes de rang $k = 0$ à $k = 4$, soit $5$ termes. En appliquant la formule avec $u_0 = 2$, $q = 3$ et $n = 4$ : \[ S = u_0 \times \frac{q^5 - 1}{q - 1} = 2 \times \frac{3^5 - 1}{3 - 1} = 2 \times \frac{243 - 1}{2} = 243 - 1 = 242. \] \[ \boxed{S = 242.} \] \textit{Vérification :} $u_0 + u_1 + u_2 + u_3 + u_4 = 2 + 6 + 18 + 54 + 162 = 242$. \checkmark
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -133,7 +133,7 @@ Réponse du corrigé : \[ u_1 = 800 \times 1{,}05 = 840 \text{ €}, \qquad u_2 
 
 > Expliquer, ligne par ligne, le rôle de la boucle \texttt{while}.
 
-Réponse du corrigé : \textbf{4a. Explication de la boucle.} \begin{itemize} \item \texttt{u = 800} et \texttt{n = 0} initialisent le capital et le compteur d'années. \item La condition \texttt{while u < 1200} : tant que le capital n'a pas atteint $1\,200$\,€, on continue. \item \texttt{u = 1.05 * u} : on applique la relation de récurrence (le capital est multiplié par $1{,}05$). \item \texttt{n = n + 1} : on incrément
+Réponse du corrigé (rédigée pour l'exercice entier) : \hfill (5 points) — C6, C7} %=============================================================== \bigskip \textbf{Question 1 — Modélisation.} Au bout de $n$ années, le capital vaut $u_n$. Durant l'année suivante, il produit des intérêts à hauteur de $5\,\% \times u_n = 0{,}05\,u_n$. Le capital au bout de $(n+1)$ années est donc : \[ u_{n+1} = u_n + 0{,}05\,u_n = (1 + 0{,}05)\,u_n = 1{,}05\,u_n. \]
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -143,7 +143,7 @@ Réponse du corrigé : \textbf{4a. Explication de la boucle.} \begin{itemize} \i
 
 > Indiquer la valeur affichée par \texttt{print(n)} et vérifier par le calcul que cette valeur est cohérente.
 
-Réponse du corrigé : \textbf{4a. Explication de la boucle.} \begin{itemize} \item \texttt{u = 800} et \texttt{n = 0} initialisent le capital et le compteur d'années. \item La condition \texttt{while u < 1200} : tant que le capital n'a pas atteint $1\,200$\,€, on continue. \item \texttt{u = 1.05 * u} : on applique la relation de récurrence (le capital est multiplié par $1{,}05$). \item \texttt{n = n + 1} : on incrément
+Réponse du corrigé : Le programme affiche $\mathbf{n = 9}$. \textit{Vérification algébrique :} On résout $800 \times 1{,}05^n \geq 1\,200$, soit $1{,}05^n \geq \dfrac{1\,200}{800} = 1{,}5$. \begin{center} \begin{tabular}{c|c|c} $n$ & $800 \times 1{,}05^n$ (arrondi à l'euro) & $\geq 1\,200$\,? \\ \hline 7 & $1\,126$ & non \\ 8 & $1\,182$ & non \\ 9 & $1\,241$ & \textbf{oui} \\ \end{tabular} \end{center} Le capital
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -166,7 +166,7 @@ Réponse du corrigé : Pour tout entier naturel $n$, on calcule : \[ v_{n+1} - v
 
 > Établir que $S_n = (n+1)(n+5)$ pour tout entier naturel $n$. \textit{On rappelle que la somme de $(n+1)$ termes d'une suite arithmétique de premier terme $a$ et de dernier terme $b$ vaut $\dfrac{(n+1)(a+b)}{2}$.}
 
-Réponse du corrigé : $S_n$ est la somme des $(n+1)$ termes $v_0, v_1, \ldots, v_n$ de la suite arithmétique $(v_n)$. Le premier terme est $v_0 = 5$ et le dernier terme est $v_n = 2n + 5$. En appliquant la formule : \[ S_n = \frac{(n+1)(v_0 + v_n)}{2} = \frac{(n+1)(5 + 2n + 5)}{2} = \frac{(n+1)(2n+10)}{2} = \frac{(n+1) \times 2(n+5)}{2}. \] \[ \boxed{S_n = (n+1)(n+5)} \quad \text{pour tout } n \in \mathbb{N}. \] \texti
+Réponse du corrigé : $S_n$ est la somme des $(n+1)$ termes $v_0, v_1, \ldots, v_n$ de la suite arithmétique $(v_n)$. Le premier terme est $v_0 = 5$ et le dernier terme est $v_n = 2n + 5$. En appliquant la formule : \[ S_n = \frac{(n+1)(v_0 + v_n)}{2} = \frac{(n+1)(5 + 2n + 5)}{2} = \frac{(n+1)(2n+10)}{2} = \frac{(n+1) \times 2(n+5)}{2}. \] \[ \boxed{S_n = (n+1)(n+5)} \quad \text{pour tout } n \in \mathbb{N}. \]
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|

@@ -24,7 +24,7 @@ Chapitre `1SPE-EXPONENTIELLE` · manuel `1SPE` (Première, Spécialité mathéma
 | Empreinte de l'ensemble d'objets | `sha256:c67e1bd9a552906b11f0df7f15bf1d59e04ef5f832dee6befb8d0568e87dd703` |
 | Empreinte semantique liee a l'approbation | `sha256:315df40027aaedb26f1ac573d1a20e0011615f9fe894db94db02ac3623e64bc1` |
 | Empreinte du packet | `sha256:b8211f57aea4b87ece70fe9faa8457637f087eaccae6a9b10d4718ba6484d5be` |
-| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
+| Revision du depot gelee dans le packet | `dfc99058e7a7c16ae4af46b99245edbe14b4f8e5` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel
@@ -307,51 +307,51 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 
 ### 1SPE-EXPO-EV-A
 
-**Exercice 1** — 5 points (C1, C2)
+**Exercice 1** — 5 points (C1, C2) · 2 question(s) en attente de jugement
 
-- **Q1** — 2 pts — Attendu : rappeler — Les simplifications donnent $\mathrm{e}^{x}$ et $\mathrm{e}^{2x}$.
-- **Q2** — 3 pts — Attendu : simplifier — Les simplifications donnent $\mathrm{e}^{x}$ et $\mathrm{e}^{2x}$.
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
 
-**Exercice 2** — 5 points (C3, C4)
+**Exercice 2** — 5 points (C3, C4) · 2 question(s) en attente de jugement
 
-- **Q1** — 3 pts — Attendu : justifier — $f(0)=1$ et $f(5)=\mathrm{e}^{-2}\approx0{,}14$.
-- **Q2** — 2 pts — Attendu : calculer — $f(0)=1$ et $f(5)=\mathrm{e}^{-2}\approx0{,}14$.
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
 
-**Exercice 3** — 5 points (C2, C3)
+**Exercice 3** — 5 points (C2, C3) · 2 question(s) en attente de jugement
 
-- **Q1** — 2 pts — Attendu : exprimer — .} $u_n=120(\mathrm{e}^{0{,}1})^n=120\mathrm{e}^{0{,}1n}$ et $u_5=120\mathrm{e}^{0{,}5}\approx197{,}85$.
-- **Q2** — 3 pts — Attendu : calculer — .} $u_n=120(\mathrm{e}^{0{,}1})^n=120\mathrm{e}^{0{,}1n}$ et $u_5=120\mathrm{e}^{0{,}5}\approx197{,}85$.
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
 
-**Exercice 4** — 5 points (C5)
+**Exercice 4** — 5 points (C5) · 3 question(s) en attente de jugement
 
-- **Q1** — 2 pts — Attendu : calculer — Le coefficient de $t$ est positif : le modèle est croissant.
-- **Q2** — 2 pts — Attendu : interpréter — Le coefficient de $t$ est positif : le modèle est croissant.
-- **Q3** — 1 pt — Attendu : justifier — Le coefficient de $t$ est positif : le modèle est croissant.
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
 
 ### 1SPE-EXPO-EV-B
 
-**Exercice 1** — 5 points (C1, C2) · 1 question(s) en attente de jugement
+**Exercice 1** — 5 points (C1, C2) · 2 question(s) en attente de jugement
 
 - **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le geste évalué ne se lit pas dans l'énoncé
-- **Q2** — 3 pts — Attendu : simplifier — Les simplifications donnent $\mathrm{e}^{2x}$ et $\mathrm{e}^{-3x}$.
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
 
-**Exercice 2** — 5 points (C3, C4)
+**Exercice 2** — 5 points (C3, C4) · 2 question(s) en attente de jugement
 
-- **Q1** — 3 pts — Attendu : justifier — $g(0)=1$ et $g(4)=\mathrm{e}^{1{,}2}\approx3{,}32$.
-- **Q2** — 2 pts — Attendu : calculer — $g(0)=1$ et $g(4)=\mathrm{e}^{1{,}2}\approx3{,}32$.
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
 
-**Exercice 3** — 5 points (C2, C3)
+**Exercice 3** — 5 points (C2, C3) · 2 question(s) en attente de jugement
 
-- **Q1** — 2 pts — Attendu : exprimer — .} $v_n=300(\mathrm{e}^{-0{,}2})^n=300\mathrm{e}^{-0{,}2n}$ et $v_3=300\mathrm{e}^{-0{,}6}\approx164{,}64$.
-- **Q2** — 3 pts — Attendu : calculer — .} $v_n=300(\mathrm{e}^{-0{,}2})^n=300\mathrm{e}^{-0{,}2n}$ et $v_3=300\mathrm{e}^{-0{,}6}\approx164{,}64$.
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
 
-**Exercice 4** — 5 points (C5)
+**Exercice 4** — 5 points (C5) · 3 question(s) en attente de jugement
 
-- **Q1** — 2 pts — Attendu : calculer — Le coefficient de $t$ est négatif : le modèle est décroissant.
-- **Q2** — 2 pts — Attendu : interpréter — Le coefficient de $t$ est négatif : le modèle est décroissant.
-- **Q3** — 1 pt — Attendu : justifier — Le coefficient de $t$ est négatif : le modèle est décroissant.
+- **Q1** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
 
-Ce chapitre porte 18 question(s) évaluée(s), dont 1 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
+Ce chapitre porte 18 question(s) évaluée(s), dont 18 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
 
 ## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 

@@ -6,18 +6,18 @@
   "status": "HUMAN_REVIEW_ACTION_REQUIRED",
   "source_inputs": {
     "audit/CURRENT_REVIEW_DEBT_PARTITION.json": "sha256:483b40790e918dd755fe5a1590eae0326731153616a49d5e35cc5edddcd951e2",
-    "audit/QCM_INDEPENDENT_EVIDENCE_V2.json": "sha256:059826559c4a52921c8ac839cfd47fac3ada62cd5fd28a04e86f0061be1be2bf",
+    "audit/QCM_INDEPENDENT_EVIDENCE_V2.json": "sha256:12405d55c205fd0e6111656110f95a0aac39dc42c7b0363081f97bafaad42315",
     "audit/QCM_REVIEW_PROOF_RECONCILIATION.json": "sha256:b2a6a242cab0b0e0f758ddd18a6d4a9a6c397fadff78266f3f8a805beb1fec8e",
     "audit/TNSI_PROJET_ASSESSMENT_MODE.json": "sha256:15ee9492ab6ef5590de54db73afd49d469b16db594e1e181e06c0e6620edfc83"
   },
   "counts": {
     "OBJECT_REVIEW": 2325,
-    "QCM_ANSWER_SEMANTICS": 167,
+    "QCM_ANSWER_SEMANTICS": 166,
     "QCM_DIAGNOSTIC_RENVOI_SEMANTICS": 41,
     "EDITORIAL_DECISION": 1,
-    "TOTAL": 2534
+    "TOTAL": 2533
   },
-  "queue_digest": "sha256:98261bb464921c5aadf39ee380c0ff73e0cf125e23e267428bb5288a33062572",
+  "queue_digest": "sha256:736fa2f6031f14618aa3e67e4b860fbee96d748b9cc9d3a81f5d19bfc25c3a06",
   "pairwise_intersections": [],
   "unknown_count": 0,
   "items": [
@@ -5929,7 +5929,7 @@
     {
       "item_id": "QCM_ANSWER_SEMANTICS",
       "category": "QCM_ANSWER_SEMANTICS",
-      "count": 167,
+      "count": 166,
       "unit_ids": [
         "QCM_ANSWER_SEMANTICS::1NSI-ALGO-DICHO-GLOUTON-KNN/Q1",
         "QCM_ANSWER_SEMANTICS::1NSI-ALGO-DICHO-GLOUTON-KNN/Q2",
@@ -6007,7 +6007,6 @@
         "QCM_ANSWER_SEMANTICS::1NSI-WEB-IHM/Q7",
         "QCM_ANSWER_SEMANTICS::1NSI-WEB-IHM/Q8",
         "QCM_ANSWER_SEMANTICS::1NSI-WEB-IHM/Q9",
-        "QCM_ANSWER_SEMANTICS::1SPE-VARIABLES-ALEATOIRES/Q16",
         "QCM_ANSWER_SEMANTICS::TNSI-ALGORITHMIQUE/Q1",
         "QCM_ANSWER_SEMANTICS::TNSI-ALGORITHMIQUE/Q10",
         "QCM_ANSWER_SEMANTICS::TNSI-ALGORITHMIQUE/Q11",
@@ -6099,7 +6098,7 @@
         "QCM_ANSWER_SEMANTICS::TSPE-SUITES-LIMITES/Q6",
         "QCM_ANSWER_SEMANTICS::TSPE-SUITES-LIMITES/Q7"
       ],
-      "set_digest": "sha256:8b7bcf668bd33594e545fb682d225131bd42973945013c9e305a0881f635df94",
+      "set_digest": "sha256:3d5ec722694dfe8aec1fcb87547edd71decf5e1252598b533a350de895540017",
       "chapters": {
         "1NSI-ALGO-DICHO-GLOUTON-KNN": 6,
         "1NSI-ALGO-PARCOURS-TRIS": 6,
@@ -6111,7 +6110,6 @@
         "1NSI-TYPES-BASE": 6,
         "1NSI-TYPES-CONSTRUITS": 16,
         "1NSI-WEB-IHM": 10,
-        "1SPE-VARIABLES-ALEATOIRES": 1,
         "TNSI-ALGORITHMIQUE": 13,
         "TNSI-ARCHITECTURES-MATERIELLES-SY": 7,
         "TNSI-BASES-DE-DONNEES": 12,
@@ -6260,13 +6258,6 @@
             "QCM_ANSWER_SEMANTICS::1NSI-WEB-IHM/Q9"
           ],
           "set_digest": "sha256:2e725d045bde9b72a74d8f29610fe072e8b01693123b0189ca8ef6ce3fe8cbd0"
-        },
-        "1SPE-VARIABLES-ALEATOIRES": {
-          "count": 1,
-          "unit_ids": [
-            "QCM_ANSWER_SEMANTICS::1SPE-VARIABLES-ALEATOIRES/Q16"
-          ],
-          "set_digest": "sha256:132900df2722477aa254a7de743c36014af7957478eae4a981618e3f0bb5ebed"
         },
         "TNSI-ALGORITHMIQUE": {
           "count": 13,
@@ -6464,10 +6455,6 @@
         ],
         "1NSI-WEB-IHM": [
           "EXPERT_NSI",
-          "EXPERT_PROGRAMME_PEDAGOGIE"
-        ],
-        "1SPE-VARIABLES-ALEATOIRES": [
-          "EXPERT_MATHEMATIQUE",
           "EXPERT_PROGRAMME_PEDAGOGIE"
         ],
         "TNSI-ALGORITHMIQUE": [

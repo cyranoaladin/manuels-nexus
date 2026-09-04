@@ -24,7 +24,7 @@ Chapitre `1SPE-PRODUIT-SCALAIRE` · manuel `1SPE` (Première, Spécialité math�
 | Empreinte de l'ensemble d'objets | `sha256:6cac1a2c49baa43a9ad95684214f2f0944b700450f83a64a4a24e63ab9c320cd` |
 | Empreinte semantique liee a l'approbation | `sha256:c7c704558c02255341ae17e45afd38bef72087c89add29a5c911446a6f83ac45` |
 | Empreinte du packet | `sha256:fb0ad02aacb782a086f6f98af8744866caf958fb25d2d5be7885789abef76f14` |
-| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
+| Revision du depot gelee dans le packet | `dfc99058e7a7c16ae4af46b99245edbe14b4f8e5` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel

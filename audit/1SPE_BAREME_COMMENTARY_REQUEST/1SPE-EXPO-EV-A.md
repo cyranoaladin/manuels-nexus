@@ -86,7 +86,7 @@ Réponse du corrigé (rédigée pour l'exercice entier) : .} $u_n=120(\mathrm{e}
 
 > Calculer et interpréter $P(0)$ et $P(12)$. \hfill(2 pts)
 
-Réponse du corrigé (rédigée pour l'exercice entier) : .} $P(0)=2500$ et $P(12)=2500\mathrm{e}^{0{,}72}\approx5136$. De plus $P(t+4)=2500\mathrm{e}^{0{,}06t+0{,}24}=\mathrm{e}^{0{,}24}P(t)$. Le coefficient de $t$ est positif : le modèle est croissant. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, exp, Rational % x, t, n = symbols('x t n') % # ---- Exercice 1 : proprietes algebriques ---- % assert simplify(exp(2*x - 1)*exp(1 - x) - exp(x)
+Réponse du corrigé (rédigée pour l'exercice entier) : .} $P(0)=2500$ et $P(12)=2500\mathrm{e}^{0{,}72}\approx5136$. De plus $P(t+4)=2500\mathrm{e}^{0{,}06t+0{,}24}=\mathrm{e}^{0{,}24}P(t)$. Le coefficient de $t$ est positif : le modèle est croissant. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, exp, Rational % x, t, n = symbols('x t n') % # ---- Exercice 1 : proprietes algebriques ---- % assert simplify(exp(2*x - 1)*exp(1 - x) -
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -96,7 +96,7 @@ Réponse du corrigé (rédigée pour l'exercice entier) : .} $P(0)=2500$ et $P(1
 
 > Montrer que $P(t+4)=\mathrm{e}^{0{,}24}P(t)$ et interpréter. \hfill(2 pts)
 
-Réponse du corrigé (rédigée pour l'exercice entier) : .} $P(0)=2500$ et $P(12)=2500\mathrm{e}^{0{,}72}\approx5136$. De plus $P(t+4)=2500\mathrm{e}^{0{,}06t+0{,}24}=\mathrm{e}^{0{,}24}P(t)$. Le coefficient de $t$ est positif : le modèle est croissant. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, exp, Rational % x, t, n = symbols('x t n') % # ---- Exercice 1 : proprietes algebriques ---- % assert simplify(exp(2*x - 1)*exp(1 - x) - exp(x)
+Réponse du corrigé (rédigée pour l'exercice entier) : .} $P(0)=2500$ et $P(12)=2500\mathrm{e}^{0{,}72}\approx5136$. De plus $P(t+4)=2500\mathrm{e}^{0{,}06t+0{,}24}=\mathrm{e}^{0{,}24}P(t)$. Le coefficient de $t$ est positif : le modèle est croissant. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, exp, Rational % x, t, n = symbols('x t n') % # ---- Exercice 1 : proprietes algebriques ---- % assert simplify(exp(2*x - 1)*exp(1 - x) -
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -106,7 +106,7 @@ Réponse du corrigé (rédigée pour l'exercice entier) : .} $P(0)=2500$ et $P(1
 
 > Dire si le modèle décrit une croissance ou une décroissance et justifier. \hfill(1 pt)
 
-Réponse du corrigé (rédigée pour l'exercice entier) : .} $P(0)=2500$ et $P(12)=2500\mathrm{e}^{0{,}72}\approx5136$. De plus $P(t+4)=2500\mathrm{e}^{0{,}06t+0{,}24}=\mathrm{e}^{0{,}24}P(t)$. Le coefficient de $t$ est positif : le modèle est croissant. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, exp, Rational % x, t, n = symbols('x t n') % # ---- Exercice 1 : proprietes algebriques ---- % assert simplify(exp(2*x - 1)*exp(1 - x) - exp(x)
+Réponse du corrigé (rédigée pour l'exercice entier) : .} $P(0)=2500$ et $P(12)=2500\mathrm{e}^{0{,}72}\approx5136$. De plus $P(t+4)=2500\mathrm{e}^{0{,}06t+0{,}24}=\mathrm{e}^{0{,}24}P(t)$. Le coefficient de $t$ est positif : le modèle est croissant. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, exp, Rational % x, t, n = symbols('x t n') % # ---- Exercice 1 : proprietes algebriques ---- % assert simplify(exp(2*x - 1)*exp(1 - x) -
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|

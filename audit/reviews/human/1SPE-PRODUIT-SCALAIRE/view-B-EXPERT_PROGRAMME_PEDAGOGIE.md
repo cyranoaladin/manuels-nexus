@@ -24,7 +24,7 @@ Chapitre `1SPE-PRODUIT-SCALAIRE` · manuel `1SPE` (Première, Spécialité math�
 | Empreinte de l'ensemble d'objets | `sha256:6cac1a2c49baa43a9ad95684214f2f0944b700450f83a64a4a24e63ab9c320cd` |
 | Empreinte semantique liee a l'approbation | `sha256:c7c704558c02255341ae17e45afd38bef72087c89add29a5c911446a6f83ac45` |
 | Empreinte du packet | `sha256:408b6ef3a881625d2417072c91fa8133fff797809b3cc77156d0ef4480a9cff9` |
-| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
+| Revision du depot gelee dans le packet | `dfc99058e7a7c16ae4af46b99245edbe14b4f8e5` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel
@@ -325,7 +325,7 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 **Exercice 3** — 5 points (C4)
 
 - **Q1** — 1,5 pt — Attendu : déterminer — $\overrightarrow{IM} \cdot \overrightarrow{AB} = 0$ : $6(x - 3) + 0 = 0$, soit $x = 3$.
-- **Q2** — 2 pts — Attendu : déterminer — $\overrightarrow{AH} \cdot \overrightarrow{BC} = 0$ : $(6-4t)(-4) + (4t)(4) = 0$, soit $-24 + 32t = 0$, d'ou $t = \dfrac{3}{4}$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
+- **Q2** — 2 pts — Attendu : déterminer — $H = (3; 3)$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
 - **Q3** — 1,5 pt — Attendu : calculer — $\mathcal{A} = \dfrac{1}{2} |x_B \cdot y_C - x_C \cdot y_B| = \dfrac{1}{2} |6 \times 4 - 2 \times 0| = \dfrac{24}{2} = 12$.
 
 **Exercice 4** — 5 points (C5)
@@ -352,7 +352,7 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 **Exercice 3** — 5 points (C4)
 
 - **Q1** — 1,5 pt — Attendu : déterminer — Mediatrice : $8(x - 4) = 0$, soit $x = 4$.
-- **Q2** — 2 pts — Attendu : déterminer — $\overrightarrow{AH} \cdot \overrightarrow{BC} = 0$ : $(8-5t)(-5) + (6t)(6) = 0$, soit $-40 + 25t + 36t = 0$, $61t = 40$, $t = \dfrac{40}{61}$.
+- **Q2** — 2 pts — Attendu : déterminer — $H = \left(\dfrac{288}{61}; \dfrac{240}{61}\right)$.
 - **Q3** — 1,5 pt — Attendu : calculer — $\mathcal{A} = \dfrac{1}{2} |x_B \cdot y_C - x_C \cdot y_B| = \dfrac{1}{2} |48 - 0| = 24$.
 
 **Exercice 4** — 5 points (C5)

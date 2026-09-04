@@ -26,12 +26,16 @@ def test_queue_is_exact_disjoint_and_current() -> None:
 
     assert payload["status"] == "HUMAN_REVIEW_ACTION_REQUIRED"
     assert payload["approves_nothing"] is True
+    # 166 et non 167 : la question `Q16` de Variables aleatoires attendait un
+    # humain faute de famille generique, et se tranche desormais en executant
+    # la fonction que le chapitre imprime. Une unite quitte la file parce
+    # qu'elle est resolue, pas parce qu'on l'a retiree.
     assert payload["counts"] == {
         "OBJECT_REVIEW": 2325,
-        "QCM_ANSWER_SEMANTICS": 167,
+        "QCM_ANSWER_SEMANTICS": 166,
         "QCM_DIAGNOSTIC_RENVOI_SEMANTICS": 41,
         "EDITORIAL_DECISION": 1,
-        "TOTAL": 2534,
+        "TOTAL": 2533,
     }
     assert payload["pairwise_intersections"] == []
     assert payload["unknown_count"] == 0

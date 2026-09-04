@@ -85,7 +85,7 @@
         },
         {
           "competence": null,
-          "correction_answer": "$\\overrightarrow{BA}\\begin{pmatrix} -3 \\\\ 2 \\end{pmatrix}$, $\\overrightarrow{BC}\\begin{pmatrix} -1 \\\\ 5 \\end{pmatrix}$. $\\overrightarrow{BA} \\cdot \\overrightarrow{BC} = 3 + 10 = 13$, $\\|\\overrightarrow{BA}\\| = \\sqrt{13}$, $\\|\\overrightarrow{BC}\\| = \\sqrt{26}$. $\\cos\\widehat{ABC} = \\dfrac{13}{\\sqrt{13}\\sqrt{26}} = \\dfrac{13}{\\sqrt{338}} = \\dfrac{13}{13\\sqrt{2}} = \\dfrac{1}{\\sqrt{2}} = \\dfrac{\\sqrt{",
+          "correction_answer": "$\\overrightarrow{BA}\\begin{pmatrix} -3 \\\\ 2 \\end{pmatrix}$, $\\overrightarrow{BC}\\begin{pmatrix} -1 \\\\ 5 \\end{pmatrix}$. $\\overrightarrow{BA} \\cdot \\overrightarrow{BC} = 3 + 10 = 13$, $\\|\\overrightarrow{BA}\\| = \\sqrt{13}$, $\\|\\overrightarrow{BC}\\| = \\sqrt{26}$.",
           "correction_answer_scope": "question",
           "points": "2 pts",
           "question": "Q2",
@@ -190,7 +190,7 @@
         },
         {
           "competence": null,
-          "correction_answer": "$\\mathcal{A} = \\dfrac{1}{2} \\times AB \\times AC \\times \\sin\\widehat{BAC} = \\dfrac{1}{2} \\times 8 \\times 5 \\times \\dfrac{\\sqrt{3}}{2} = 10\\sqrt{3} \\approx 17{,}3$. % BEGIN-VERIFY % from sympy import Matrix, sqrt, Rational, simplify, cos, sin, pi, symbols, solve % # ---- Exercice 1 : u(3;-1), v(2;5) ---- % u = Matrix([3, -1]); v = Matrix([2, 5]) % assert u.dot(v) == 1 % assert simplify(u.norm() - sq",
+          "correction_answer": "$\\mathcal{A} = \\dfrac{1}{2} \\times AB \\times AC \\times \\sin\\widehat{BAC} = \\dfrac{1}{2} \\times 8 \\times 5 \\times \\dfrac{\\sqrt{3}}{2} = 10\\sqrt{3} \\approx 17{,}3$. % BEGIN-VERIFY % from sympy import Matrix, sqrt, Rational, simplify, cos, sin, pi, symbols, solve % # ---- Exercice 1 : u(3;-1), v(2;5) ---- % u = Matrix([3, -1]); v = Matrix([2, 5]) % assert u.dot(v) == 1 % assert simplify(u.norm() -",
           "correction_answer_scope": "question",
           "points": "1,5 pt",
           "question": "Q3",

@@ -24,7 +24,7 @@ Chapitre `1SPE-EXPONENTIELLE` · manuel `1SPE` (Première, Spécialité mathéma
 | Empreinte de l'ensemble d'objets | `sha256:c67e1bd9a552906b11f0df7f15bf1d59e04ef5f832dee6befb8d0568e87dd703` |
 | Empreinte semantique liee a l'approbation | `sha256:315df40027aaedb26f1ac573d1a20e0011615f9fe894db94db02ac3623e64bc1` |
 | Empreinte du packet | `sha256:c149ea15242d4aac3a83c4ab9d6409904bb15b4a7b88d4714f754c406315383c` |
-| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
+| Revision du depot gelee dans le packet | `dfc99058e7a7c16ae4af46b99245edbe14b4f8e5` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel

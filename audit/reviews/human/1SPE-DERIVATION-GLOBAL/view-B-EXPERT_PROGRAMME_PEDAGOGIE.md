@@ -24,7 +24,7 @@ Chapitre `1SPE-DERIVATION-GLOBAL` · manuel `1SPE` (Première, Spécialité math
 | Empreinte de l'ensemble d'objets | `sha256:8356fd05cbe695f0bffd4fda5ed5fd8b0cc3566675daaa189e44bdf2710f6d6c` |
 | Empreinte semantique liee a l'approbation | `sha256:532209e1d6fb906707a0631eef12a5a438d0a8dbaf477b923be219a35d83ff36` |
 | Empreinte du packet | `sha256:6266b04b6828ca689666a4695bfdbf8c3b53877f66aed355494330f3d3773548` |
-| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
+| Revision du depot gelee dans le packet | `dfc99058e7a7c16ae4af46b99245edbe14b4f8e5` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel
@@ -320,21 +320,21 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 
 - **Q1** — 1 pt — Attendu : calculer — $f(x) = 3x^2 - 2x + 1$, donc $f'(x) = 6x - 2.$.
 - **Q2** — 1,5 pt — Attendu : calculer — La courbe « monte » localement avec une pente de $10$ en ce point.
-- **Q3** — 1,5 pt — Attendu : donner — $f(2) = 3 \times 4 - 2 \times 2 + 1 = 12 - 4 + 1 = 9.$ Équation de la tangente : \[ T : y = f'(2)(x - 2) + f(2) = 10(x-2) + 9 = 10x - 20 + 9 = 10x - 11.
+- **Q3** — 1,5 pt — Attendu : donner — $f(2) = 3 \times 4 - 2 \times 2 + 1 = 12 - 4 + 1 = 9.$ Équation de la tangente : \[ T : y = f'(2)(x - 2) + f(2) = 10(x-2) + 9 = 10x - 20 + 9 = 10x - 11. \].
 - **Q4** — 1 pt — Attendu : déterminer — Tangente horizontale $\Leftrightarrow f'(x) = 0 \Leftrightarrow 6x - 2 = 0 \Leftrightarrow x = \dfrac{1}{3}.$.
 
-**Exercice 2** — 6 points (C3, C4) · 1 question(s) en attente de jugement
+**Exercice 2** — 6 points (C3, C4)
 
 - **Q1** — 1,5 pt — Attendu : calculer — $g(x) = x^3 - 6x$, donc $g'(x) = 3x^2 - 6 = 3(x^2 - 2) = 3(x - \sqrt{2})(x + \sqrt{2}).$.
 - **Q2** — 1,5 pt — Attendu : résoudre — $g'(x) = 0 \Leftrightarrow x = -\sqrt{2}$ ou $x = \sqrt{2}$ \quad ($\sqrt{2} \approx 1{,}41$).
-- **Q3** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
+- **Q3** — 2 pts — Attendu : construire — $g(-\sqrt{2}) = -(\sqrt{2})^3 + 6\sqrt{2} = -2\sqrt{2} + 6\sqrt{2} = 4\sqrt{2}.$ $g(\sqrt{2}) = (\sqrt{2})^3 - 6\sqrt{2} = 2\sqrt{2} - 6\sqrt{2} = -4\sqrt{2}.$.
 - **Q4** — 1 pt — Attendu : donner — $g$ admet un \textbf{minimum local} de $-4\sqrt{2} \approx -5{,}66$ en $x = \sqrt{2}$.
 
 **Exercice 3** — 5 points (C2, C3, C4) · 1 question(s) en attente de jugement
 
-- **Q1** — 2 pts — Attendu : calculer — \[ h'(x) = \frac{u'v - uv'}{v^2} = \frac{2x(x-1) - (x^2+2)}{(x-1)^2} = \frac{2x^2 - 2x - x^2 - 2}{(x-1)^2} = \frac{x^2 - 2x - 2}{(x-1)^2}.
+- **Q1** — 2 pts — Attendu : calculer — \[ h'(x) = \frac{u'v - uv'}{v^2} = \frac{2x(x-1) - (x^2+2)}{(x-1)^2} = \frac{2x^2 - 2x - x^2 - 2}{(x-1)^2} = \frac{x^2 - 2x - 2}{(x-1)^2}. \].
 - **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
-- **Q3** — 1,5 pt — Attendu : construire — Le signe de $h'$ est celui du numérateur $x^2-2x-2$ : $h'(x) < 0$ pour $1 < x < 1+\sqrt{3}$ et $h'(x) > 0$ pour $x > 1+\sqrt{3}$.
+- **Q3** — 1,5 pt — Attendu : construire — $h(1+\sqrt{3}) = \dfrac{(1+\sqrt{3})^2 + 2}{(1+\sqrt{3})-1} = \dfrac{1 + 2\sqrt{3} + 3 + 2}{\sqrt{3}} = \dfrac{6 + 2\sqrt{3}}{\sqrt{3}} = \dfrac{6}{\sqrt{3}} + 2 = 2\sqrt{3} + 2.$.
 
 **Exercice 4** — 4 points (C5)
 
@@ -348,7 +348,7 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 
 - **Q1** — 1 pt — Attendu : calculer — $f(x) = 2x^2 + 3x - 4$, donc $f'(x) = 4x + 3.$.
 - **Q2** — 1,5 pt — Attendu : calculer — La courbe monte localement avec une pente de $7$ en ce point.
-- **Q3** — 1,5 pt — Attendu : donner — \] Vérification : $T(1) = 7 - 6 = 1 = f(1)$.
+- **Q3** — 1,5 pt — Attendu : donner — $f(1) = 2 + 3 - 4 = 1.$ Équation de la tangente : \[ T : y = f'(1)(x - 1) + f(1) = 7(x-1) + 1 = 7x - 7 + 1 = 7x - 6. \] Vérification : $T(1) = 7 - 6 = 1 = f(1)$.
 - **Q4** — 1 pt — Attendu : déterminer — Tangente horizontale $\Leftrightarrow f'(x) = 0 \Leftrightarrow 4x + 3 = 0 \Leftrightarrow x = -\dfrac{3}{4}.$.
 
 **Exercice 2** — 6 points (C3, C4) · 2 question(s) en attente de jugement
@@ -360,17 +360,17 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 
 **Exercice 3** — 5 points (C2, C3, C4)
 
-- **Q1** — 1 pt — Attendu : simplifier — $x^2 - 4 = (x-2)(x+2)$, donc pour $x \neq -2$ : \[ h(x) = \frac{(x-2)(x+2)}{x+2} = x - 2.
+- **Q1** — 1 pt — Attendu : simplifier — $x^2 - 4 = (x-2)(x+2)$, donc pour $x \neq -2$ : \[ h(x) = \frac{(x-2)(x+2)}{x+2} = x - 2. \].
 - **Q2** — 1,5 pt — Attendu : en déduire — $h(x) = x - 2$ (pour $x \neq -2$), donc $h'(x) = 1$.
 - **Q3** — 2,5 pts — Attendu : résoudre — $h$ est strictement croissante sur $]-\infty\,;\,-2[$.
 
-**Exercice 4** — 4 points (C5) · 1 question(s) en attente de jugement
+**Exercice 4** — 4 points (C5)
 
 - **Q1** — 1 pt — Attendu : exprimer — $R(x) = x \times (30 - 2x) = 30x - 2x^2.$.
-- **Q2** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé n'établit aucun résultat repérable
+- **Q2** — 2 pts — Attendu : calculer — Tableau de variations de $R$ sur $[0\,;\,15]$ :.
 - **Q3** — 1 pt — Attendu : calculer — Le producteur maximise son chiffre d'affaires en vendant $7{,}5$ litres au prix de $30 - 2 \times 7{,}5 = 15$ euros/L, pour un chiffre d'affaires de $\mathbf{112{,}5}$ euros.
 
-Ce chapitre porte 28 question(s) évaluée(s), dont 5 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
+Ce chapitre porte 28 question(s) évaluée(s), dont 3 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
 
 ## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 

@@ -156,7 +156,7 @@ Réponse du corrigé : $\dfrac{6\sqrt{5}}{5} \approx 2{,}68 < 4 = r$ : la droite
 
 > Déterminer les coordonnées exactes des points d'intersection.
 
-Réponse du corrigé : On substitue $x = 7 - 2y$ dans $(x-3)^2 + (y+1)^2 = 16$ : $(4 - 2y)^2 + (y+1)^2 = 16$, soit $16 - 16y + 4y^2 + y^2 + 2y + 1 = 16$, d'où $5y^2 - 14y + 1 = 0$. $\Delta = 196 - 20 = 176 = 16 \times 11$. $y = \dfrac{14 \pm 4\sqrt{11}}{10} = \dfrac{7 \pm 2\sqrt{11}}{5}$. $x = 7 - 2y = \dfrac{21 \mp 4\sqrt{11}}{5}$. Points : $\left(\dfrac{21 - 4\sqrt{11}}{5} ; \dfrac{7 + 2\sqrt{11}}{5}\right)$ et $\left
+Réponse du corrigé : On substitue $x = 7 - 2y$ dans $(x-3)^2 + (y+1)^2 = 16$ : $(4 - 2y)^2 + (y+1)^2 = 16$, soit $16 - 16y + 4y^2 + y^2 + 2y + 1 = 16$, d'où $5y^2 - 14y + 1 = 0$. $\Delta = 196 - 20 = 176 = 16 \times 11$. $y = \dfrac{14 \pm 4\sqrt{11}}{10} = \dfrac{7 \pm 2\sqrt{11}}{5}$. $x = 7 - 2y = \dfrac{21 \mp 4\sqrt{11}}{5}$. Points : $\left(\dfrac{21 - 4\sqrt{11}}{5} ; \dfrac{7 + 2\sqrt{11}}{5}\right)$ et
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|

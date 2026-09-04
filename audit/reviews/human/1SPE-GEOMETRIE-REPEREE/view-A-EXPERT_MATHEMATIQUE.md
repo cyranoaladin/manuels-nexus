@@ -24,7 +24,7 @@ Chapitre `1SPE-GEOMETRIE-REPEREE` · manuel `1SPE` (Première, Spécialité math
 | Empreinte de l'ensemble d'objets | `sha256:8804a15ed1bc1652fa9527db622db88806ec02981d1cc29ccdb1a2d1876d76f1` |
 | Empreinte semantique liee a l'approbation | `sha256:1c272be34cef94c7ce8923f5d8cb72728c8b8023417d08f4430e4ee4ddce8a9f` |
 | Empreinte du packet | `sha256:64a0d0be0b35f5c4eed8eb2e648f3b96e84a340e0def79095053527208f94cf8` |
-| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
+| Revision du depot gelee dans le packet | `dfc99058e7a7c16ae4af46b99245edbe14b4f8e5` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel

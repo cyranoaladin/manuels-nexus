@@ -87,6 +87,54 @@
       "surface": "1SPE_SEMANTIC_CONTENT"
     },
     {
+      "artifact": "audit/1SPE_BAREME_COMMENTARY_PROPOSAL.json",
+      "blocker_id": "BAREME_EXPECTED_TEX_BOUNDARY_LOSS",
+      "closes_with": "MACHINE",
+      "evidence_path": "audit/1SPE_BAREME_COMMENTARY_PROPOSAL.json",
+      "meaning": "un attendu de bareme porte des delimiteurs TeX qui ne se referment pas : la formule qu'il evalue est coupee en deux et ne se compose pas",
+      "metric": "BAREME_EXPECTED_TEX_UNBALANCED",
+      "observed": 0,
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "state": "CLOSED",
+      "surface": "1SPE_HUMAN_REVIEW"
+    },
+    {
+      "artifact": "audit/1SPE_BAREME_COMMENTARY_PROPOSAL.json",
+      "blocker_id": "BAREME_QUESTION_SCOPE_COLLAPSE",
+      "closes_with": "MACHINE",
+      "evidence_path": "audit/1SPE_BAREME_COMMENTARY_PROPOSAL.json",
+      "meaning": "deux questions d'un meme exercice recoivent le meme attendu : un corrige ecrit a l'echelle de l'exercice a ete servi comme s'il repondait a chacune",
+      "metric": "BAREME_QUESTION_SCOPE_AMBIGUOUS",
+      "observed": 0,
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "state": "CLOSED",
+      "surface": "1SPE_HUMAN_REVIEW"
+    },
+    {
+      "artifact": "audit/1SPE_REFERENTIAL_CAPACITY_CLOSURE.json",
+      "blocker_id": "REFERENTIAL_CAPACITY_OMISSION",
+      "closes_with": "MACHINE",
+      "evidence_path": "audit/1SPE_REFERENTIAL_CAPACITY_CLOSURE.json",
+      "meaning": "une capacite du contrat n'a aucune entree dans le referentiel local alors que la matrice officielle lui rattache des attendus obligatoires",
+      "metric": "VARALEA_OFFICIAL_MAPPING_UNKNOWN",
+      "observed": 0,
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "state": "CLOSED",
+      "surface": "1SPE_PROGRAMME_AUTHORITY"
+    },
+    {
+      "artifact": "audit/1SPE_CORNER_MARK_DISPOSITION.json",
+      "blocker_id": "UNREQUESTED_CROP_MARKS",
+      "closes_with": "MACHINE",
+      "evidence_path": "audit/1SPE_CORNER_MARK_DISPOSITION.json",
+      "meaning": "un repere technique de coupe est pose sans que l'imprimeur l'ait demande : hors TrimBox, achromatique, filet, tourne vers l'exterieur",
+      "metric": "UNREQUESTED_CROP_MARKS",
+      "observed": 0,
+      "scope": "1SPE_RELEASE_BLOCKER",
+      "state": "CLOSED",
+      "surface": "1SPE_PRINT_ARTIFACT"
+    },
+    {
       "artifact": "audit/1SPE_RELEASE_TEST_GATE.json",
       "blocker_id": "RELEASE_TEST_GATE_RED",
       "closes_with": "MACHINE",
@@ -240,9 +288,9 @@
   "generated_by": "scripts/build_1spe_release_blocker_ledger.py",
   "schema_version": 1,
   "scope_rule": "n'entre au registre que ce qui peut affecter le contenu semantique, la preuve machine, la revue humaine, la fabrication, le rendu ou l'artefact d'impression du 1SPE ; le critere est l'usage, jamais le repertoire",
-  "source_sha": "d3a4d4a52ba6783a235d54ca71555d897e2eb172",
+  "source_sha": "dfc99058e7a7c16ae4af46b99245edbe14b4f8e5",
   "summary": {
-    "CLOSED": 6,
+    "CLOSED": 10,
     "HUMAN_DECISION_PENDING": 3,
     "OPEN_BLOCKERS": 3,
     "OPEN_BLOCKER_IDS": [
@@ -252,7 +300,7 @@
     ],
     "OTHER_MANUAL_SCOPE_DEBT": 0,
     "RESOLVED": 6,
-    "TRACKED": 15,
+    "TRACKED": 19,
     "UNVERIFIABLE": 0
   }
 }

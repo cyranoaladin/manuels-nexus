@@ -166,7 +166,7 @@ Réponse du corrigé : $h'(2) = -\dfrac{1}{4}$. \[ h(2{,}05) \approx h(2) + h'(2
 
 > Comparer avec la valeur exacte $\dfrac{1}{2{,}05}$ (arrondir au millième). \hfill \textit{(1 pt)}
 
-Réponse du corrigé : Valeur exacte : $\dfrac{1}{2{,}05} = \dfrac{100}{205} = \dfrac{20}{41} \approx 0{,}48780\ldots$ Approximation : $0{,}4875$. L'erreur est de l'ordre de $0{,}0003$, soit environ $0{,}06\,\%$. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, solve, Rational, limit % x, h = symbols('x h') % # ---- Exercice 1 : f(x) = x^2 - 4x + 5 ---- % f = x**2 - 4*x + 5 % assert f.subs(x, 1) == 2 and f.su
+Réponse du corrigé : Valeur exacte : $\dfrac{1}{2{,}05} = \dfrac{100}{205} = \dfrac{20}{41} \approx 0{,}48780\ldots$ Approximation : $0{,}4875$. L'erreur est de l'ordre de $0{,}0003$, soit environ $0{,}06\,\%$. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, solve, Rational, limit % x, h = symbols('x h') % # ---- Exercice 1 : f(x) = x^2 - 4x + 5 ---- % f = x**2 - 4*x + 5 % assert f.subs(x, 1) == 2 and
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|

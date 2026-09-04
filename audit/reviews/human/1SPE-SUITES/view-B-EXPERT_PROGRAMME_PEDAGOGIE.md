@@ -24,7 +24,7 @@ Chapitre `1SPE-SUITES` · manuel `1SPE` (Première, Spécialité mathématiques)
 | Empreinte de l'ensemble d'objets | `sha256:fac8d9dc89cd3699c20ae65783a82b7cfb068007a357721549edfa055858b135` |
 | Empreinte semantique liee a l'approbation | `sha256:5ef8abbb56f0cdb286ae93b021d435dc81775fa1c0d2287a80f1e302cda93785` |
 | Empreinte du packet | `sha256:a06075630ddd55f28cefd799671298d32b996465282455d2fcee5defe2adc854` |
-| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
+| Revision du depot gelee dans le packet | `dfc99058e7a7c16ae4af46b99245edbe14b4f8e5` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel
@@ -430,63 +430,63 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 
 **Exercice 1** — 6 points (C1, C2, C5, C8)
 
-- **Q1** — 1 pt — Attendu : calculer — On applique la relation de récurrence $u_{n+1} = u_n + 4$ : \[ u_1 = u_0 + 4 = 3 + 4 = 7, \qquad u_2 = u_1 + 4 = 7 + 4 = 11, \qquad u_3 = u_2 + 4 = 11 + 4 = 15.
+- **Q1** — 1 pt — Attendu : calculer — On applique la relation de récurrence $u_{n+1} = u_n + 4$ : \[ u_1 = u_0 + 4 = 3 + 4 = 7, \qquad u_2 = u_1 + 4 = 7 + 4 = 11, \qquad u_3 = u_2 + 4 = 11 + 4 = 15. \] \medskip.
 - **Q2** — 2 pts — Attendu : démontrer — \textbf{Conclusion :} La suite $(u_n)$ est une suite arithmétique de raison $r = 4$ et de premier terme $u_0 = 3$.
-- **Q3** — 1 pt — Attendu : exprimer — Par la formule du terme général d'une suite arithmétique : \[ \boxed{u_n = 3 + 4n} \quad \text{pour tout } n \in \mathbb{N}.
+- **Q3** — 1 pt — Attendu : exprimer — Par la formule du terme général d'une suite arithmétique : \[ \boxed{u_n = 3 + 4n} \quad \text{pour tout } n \in \mathbb{N}. \] \medskip.
 - **Q4** — 1 pt — Attendu : justifier — \textit{Remarque : on peut aussi argumenter que la raison $r = 4 > 0$, ce qui suffit pour conclure qu'une suite arithmétique est strictement croissante.}.
 - **Q5** — 1 pt — Attendu : justifier — Chaque terme dépasse le précédent de $4$, et cet écart ne diminue jamais : en allant assez loin, on dépasse n'importe quelle valeur fixée à.
 
 **Exercice 2** — 5 points (C3, C4)
 
-- **Q1** — 1 pt — Attendu : calculer — \[ u_0 = 2 \times 3^0 = 2 \times 1 = 2, \qquad u_1 = 2 \times 3^1 = 6, \qquad u_2 = 2 \times 3^2 = 2 \times 9 = 18.
+- **Q1** — 1 pt — Attendu : calculer — \[ u_0 = 2 \times 3^0 = 2 \times 1 = 2, \qquad u_1 = 2 \times 3^1 = 6, \qquad u_2 = 2 \times 3^2 = 2 \times 9 = 18. \] \medskip.
 - **Q2** — 2 pts — Attendu : démontrer — \textbf{Conclusion :} La suite $(u_n)$ est une suite géométrique de raison $q = 3$ et de premier terme $u_0 = 2$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
-- **Q3** — 2 pts — Attendu : calculer — \] \[ \boxed{S = 242.} \] \textit{Vérification :} $u_0 + u_1 + u_2 + u_3 + u_4 = 2 + 6 + 18 + 54 + 162 = 242$.
+- **Q3** — 2 pts — Attendu : calculer — On somme les termes de rang $k = 0$ à $k = 4$, soit $5$ termes.
 
-**Exercice 3** — 5 points (C6, C7)
+**Exercice 3** — 5 points (C6, C7) · 1 question(s) en attente de jugement
 
-- **Q1** — 1 pt — Attendu : justifier — Le capital au bout de $(n+1)$ années est donc : \[ u_{n+1} = u_n + 0{,}05\,u_n = (1 + 0{,}05)\,u_n = 1{,}05\,u_n.
-- **Q2** — 1 pt — Attendu : en déduire — Par la formule du terme général d'une suite géométrique : \[ \boxed{u_n = 800 \times 1{,}05^n} \quad \text{pour tout } n \in \mathbb{N}.
-- **Q3** — 1 pt — Attendu : calculer — \[ u_1 = 800 \times 1{,}05 = 840 \text{ €}, \qquad u_2 = 800 \times 1{,}05^2 = 800 \times 1{,}1025 = 882 \text{ €}.
-- **Q4a** — 1 pt — Attendu : interpréter — \item \texttt{n = n + 1} : on incrément.
-- **Q4b** — 1 pt — Attendu : vérifier — \item \texttt{n = n + 1} : on incrément.
+- **Q1** — 1 pt — Attendu : justifier — Le capital au bout de $(n+1)$ années est donc : \[ u_{n+1} = u_n + 0{,}05\,u_n = (1 + 0{,}05)\,u_n = 1{,}05\,u_n. \] \medskip.
+- **Q2** — 1 pt — Attendu : en déduire — Par la formule du terme général d'une suite géométrique : \[ \boxed{u_n = 800 \times 1{,}05^n} \quad \text{pour tout } n \in \mathbb{N}. \] \medskip.
+- **Q3** — 1 pt — Attendu : calculer — \[ u_1 = 800 \times 1{,}05 = 840 \text{ €}, \qquad u_2 = 800 \times 1{,}05^2 = 800 \times 1{,}1025 = 882 \text{ €}. \] \medskip.
+- **Q4a** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q4b** — 1 pt — Attendu : vérifier — \textit{Vérification algébrique :} On résout $800 \times 1{,}05^n \geq 1\,200$, soit $1{,}05^n \geq \dfrac{1\,200}{800} = 1{,}5$.
 
 **Exercice 4** — 4 points (C2, C4)
 
 - **Q1** — 1 pt — Attendu : montrer — \textbf{Conclusion :} $(v_n)$ est une suite arithmétique de raison $r = 2$ et de premier terme $v_0 = 2 \times 0 + 5 = 5$.
-- **Q2** — 2 pts — Attendu : établir — \] \[ \boxed{S_n = (n+1)(n+5)} \quad \text{pour tout } n \in \mathbb{N}.
-- **Q3** — 1 pt — Attendu : déterminer — \] \textbf{Conclusion :} Le plus petit entier naturel $n$ tel que $S_n > 200$ est $\boxed{n = 12}$.
+- **Q2** — 2 pts — Attendu : établir — Le premier terme est $v_0 = 5$ et le dernier terme est $v_n = 2n + 5$.
+- **Q3** — 1 pt — Attendu : déterminer — La fonction $(n+1)(n+5) = n^2 + 6n + 5$ est croissante pour $n \geq 0$.
 
 ### 1SPE-SUITES-EV-B
 
 **Exercice 1** — 6 points (C1, C2, C5, C8)
 
-- **Q1** — 1 pt — Attendu : calculer — On applique la relation de récurrence $u_{n+1} = u_n + 3$ : \[ u_1 = u_0 + 3 = 5 + 3 = 8, \qquad u_2 = u_1 + 3 = 8 + 3 = 11, \qquad u_3 = u_2 + 3 = 11 + 3 = 14.
+- **Q1** — 1 pt — Attendu : calculer — On applique la relation de récurrence $u_{n+1} = u_n + 3$ : \[ u_1 = u_0 + 3 = 5 + 3 = 8, \qquad u_2 = u_1 + 3 = 8 + 3 = 11, \qquad u_3 = u_2 + 3 = 11 + 3 = 14. \] \medskip.
 - **Q2** — 2 pts — Attendu : démontrer — \textbf{Conclusion :} La suite $(u_n)$ est une suite arithmétique de raison $r = 3$ et de premier terme $u_0 = 5$.
-- **Q3** — 1 pt — Attendu : exprimer — Par la formule du terme général d'une suite arithmétique : \[ \boxed{u_n = 5 + 3n} \quad \text{pour tout } n \in \mathbb{N}.
+- **Q3** — 1 pt — Attendu : exprimer — Par la formule du terme général d'une suite arithmétique : \[ \boxed{u_n = 5 + 3n} \quad \text{pour tout } n \in \mathbb{N}. \] \medskip.
 - **Q4** — 1 pt — Attendu : justifier — \textit{Remarque : on peut aussi argumenter que la raison $r = 3 > 0$, ce qui suffit pour conclure qu'une suite arithmétique est strictement croissante.}.
 - **Q5** — 1 pt — Attendu : justifier — Chaque terme dépasse le précédent de $3$, et cet écart ne diminue jamais : en allant assez loin, on dépasse n'importe quelle valeur fixée à.
 
 **Exercice 2** — 5 points (C3, C4)
 
-- **Q1** — 1 pt — Attendu : calculer — \[ u_0 = 4 \times 2^0 = 4 \times 1 = 4, \qquad u_1 = 4 \times 2^1 = 8, \qquad u_2 = 4 \times 2^2 = 4 \times 4 = 16.
+- **Q1** — 1 pt — Attendu : calculer — \[ u_0 = 4 \times 2^0 = 4 \times 1 = 4, \qquad u_1 = 4 \times 2^1 = 8, \qquad u_2 = 4 \times 2^2 = 4 \times 4 = 16. \] \medskip.
 - **Q2** — 2 pts — Attendu : démontrer — \textbf{Conclusion :} La suite $(u_n)$ est une suite géométrique de raison $q = 2$ et de premier terme $u_0 = 4$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
-- **Q3** — 2 pts — Attendu : calculer — \] \[ \boxed{S = 124.} \] \textit{Vérification :} $u_0 + u_1 + u_2 + u_3 + u_4 = 4 + 8 + 16 + 32 + 64 = 124$.
+- **Q3** — 2 pts — Attendu : calculer — On somme les termes de rang $k = 0$ à $k = 4$, soit $5$ termes.
 
-**Exercice 3** — 5 points (C6, C7)
+**Exercice 3** — 5 points (C6, C7) · 1 question(s) en attente de jugement
 
-- **Q1** — 1 pt — Attendu : justifier — Le capital au bout de $(n+1)$ années est donc : \[ u_{n+1} = u_n + 0{,}04\,u_n = (1 + 0{,}04)\,u_n = 1{,}04\,u_n.
-- **Q2** — 1 pt — Attendu : en déduire — Par la formule du terme général d'une suite géométrique : \[ \boxed{u_n = 1\,000 \times 1{,}04^n} \quad \text{pour tout } n \in \mathbb{N}.
-- **Q3** — 1 pt — Attendu : calculer — \[ u_1 = 1\,000 \times 1{,}04 = 1\,040 \text{ €}, \qquad u_2 = 1\,000 \times 1{,}04^2 = 1\,000 \times 1{,}0816 \approx 1\,082 \text{ €}.
-- **Q4a** — 1 pt — Attendu : interpréter — \item \texttt{n = n + 1} : on incrémen.
-- **Q4b** — 1 pt — Attendu : vérifier — \item \texttt{n = n + 1} : on incrémen.
+- **Q1** — 1 pt — Attendu : justifier — Le capital au bout de $(n+1)$ années est donc : \[ u_{n+1} = u_n + 0{,}04\,u_n = (1 + 0{,}04)\,u_n = 1{,}04\,u_n. \] \medskip.
+- **Q2** — 1 pt — Attendu : en déduire — Par la formule du terme général d'une suite géométrique : \[ \boxed{u_n = 1\,000 \times 1{,}04^n} \quad \text{pour tout } n \in \mathbb{N}. \] \medskip.
+- **Q3** — 1 pt — Attendu : calculer — \[ u_1 = 1\,000 \times 1{,}04 = 1\,040 \text{ €}, \qquad u_2 = 1\,000 \times 1{,}04^2 = 1\,000 \times 1{,}0816 \approx 1\,082 \text{ €}. \] \medskip.
+- **Q4a** — `JUGEMENT PÉDAGOGIQUE REQUIS` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q4b** — 1 pt — Attendu : vérifier — \textit{Vérification algébrique :} On résout $1\,000 \times 1{,}04^n \geq 1\,500$, soit $1{,}04^n \geq \dfrac{1\,500}{1\,000} = 1{,}5$.
 
 **Exercice 4** — 4 points (C2, C4)
 
-- **Q1** — 1 pt — Attendu : justifier — Son terme général est \[ \boxed{p_n=18+4n}.
-- **Q2** — 2 pts — Attendu : établir — \] \[ \boxed{T_n=(n+1)(18+2n)}. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
-- **Q3** — 1 pt — Attendu : calculer — \] Le théâtre compte donc $\boxed{480\text{ places}}$ dans ses douze premières rangées.
+- **Q1** — 1 pt — Attendu : justifier — Son terme général est \[ \boxed{p_n=18+4n}. \] \medskip.
+- **Q2** — 2 pts — Attendu : établir — Comme $p_0=18$ et $p_n=18+4n$, on obtient \[ T_n=\frac{(n+1)(p_0+p_n)}{2} =\frac{(n+1)(18+18+4n)}{2}. \] \[ \boxed{T_n=(n+1)(18+2n)}. \] \medskip. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
+- **Q3** — 1 pt — Attendu : calculer — Ainsi, \[ T_{11}=(11+1)(18+2\times11)=12\times40=480. \] Le théâtre compte donc $\boxed{480\text{ places}}$ dans ses douze premières rangées.
 
-Ce chapitre porte 32 question(s) évaluée(s), dont 0 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
+Ce chapitre porte 32 question(s) évaluée(s), dont 2 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
 
 ## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 

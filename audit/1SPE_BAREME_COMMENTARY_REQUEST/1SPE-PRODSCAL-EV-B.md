@@ -70,7 +70,7 @@ Réponse du corrigé : $\overrightarrow{AB}\begin{pmatrix} 3 \\ -2 \end{pmatrix}
 
 > Calculer l'angle $\widehat{ABC}$. \hfill \textit{(2 pt)}
 
-Réponse du corrigé : $\overrightarrow{BA}\begin{pmatrix} -3 \\ 2 \end{pmatrix}$, $\overrightarrow{BC}\begin{pmatrix} -1 \\ 5 \end{pmatrix}$. $\overrightarrow{BA} \cdot \overrightarrow{BC} = 3 + 10 = 13$, $\|\overrightarrow{BA}\| = \sqrt{13}$, $\|\overrightarrow{BC}\| = \sqrt{26}$. $\cos\widehat{ABC} = \dfrac{13}{\sqrt{13} \times \sqrt{26}} = \dfrac{13}{13\sqrt{2}} = \dfrac{\sqrt{2}}{2}$. $\widehat{ABC} = \dfrac{\pi}{4
+Réponse du corrigé : $\overrightarrow{BA}\begin{pmatrix} -3 \\ 2 \end{pmatrix}$, $\overrightarrow{BC}\begin{pmatrix} -1 \\ 5 \end{pmatrix}$. $\overrightarrow{BA} \cdot \overrightarrow{BC} = 3 + 10 = 13$, $\|\overrightarrow{BA}\| = \sqrt{13}$, $\|\overrightarrow{BC}\| = \sqrt{26}$. $\cos\widehat{ABC} = \dfrac{13}{\sqrt{13} \times \sqrt{26}} = \dfrac{13}{13\sqrt{2}} = \dfrac{\sqrt{2}}{2}$.
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -146,7 +146,7 @@ Réponse du corrigé : $\cos\widehat{ABC} = \dfrac{BC^2 + AB^2 - AC^2}{2 \cdot B
 
 > Calculer l'aire du triangle $ABC$. \hfill \textit{(1,5 pt)}
 
-Réponse du corrigé : $\mathcal{A} = \dfrac{1}{2} \times 6 \times 10 \times \sin\!\left(\dfrac{\pi}{4}\right) = 30 \times \dfrac{\sqrt{2}}{2} = 15\sqrt{2} \approx 21{,}2$. % BEGIN-VERIFY % from sympy import Matrix, sqrt, Rational, simplify, cos, sin, pi, symbols, solve, nsimplify % # ---- Exercice 1 : u(4;2), v(-1;3) ---- % u = Matrix([4, 2]); v = Matrix([-1, 3]) % assert u.dot(v) == 2 % assert simplify(u.norm() - 2*sq
+Réponse du corrigé : $\mathcal{A} = \dfrac{1}{2} \times 6 \times 10 \times \sin\!\left(\dfrac{\pi}{4}\right) = 30 \times \dfrac{\sqrt{2}}{2} = 15\sqrt{2} \approx 21{,}2$. % BEGIN-VERIFY % from sympy import Matrix, sqrt, Rational, simplify, cos, sin, pi, symbols, solve, nsimplify % # ---- Exercice 1 : u(4;2), v(-1;3) ---- % u = Matrix([4, 2]); v = Matrix([-1, 3]) % assert u.dot(v) == 2 % assert simplify(u.norm() -
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|

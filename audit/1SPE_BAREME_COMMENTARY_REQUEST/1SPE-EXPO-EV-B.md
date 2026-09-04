@@ -86,7 +86,7 @@ Réponse du corrigé (rédigée pour l'exercice entier) : .} $v_n=300(\mathrm{e}
 
 > Calculer et interpréter $C(0)$ et $C(8)$. \hfill(2 pts)
 
-Réponse du corrigé (rédigée pour l'exercice entier) : .} $C(0)=80$ et $C(8)=80\mathrm{e}^{-1{,}2}\approx24{,}10$. De plus $C(t+2)=80\mathrm{e}^{-0{,}15t-0{,}3}=\mathrm{e}^{-0{,}3}C(t)$. Le coefficient de $t$ est négatif : le modèle est décroissant. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, exp, Rational % x, t, n = symbols('x t n') % # ---- Exercice 1 : h(x) = 2e^x verifie h'=h mais pas h(0)=1 ---- % h = 2*exp(x) % assert simplify(d
+Réponse du corrigé (rédigée pour l'exercice entier) : .} $C(0)=80$ et $C(8)=80\mathrm{e}^{-1{,}2}\approx24{,}10$. De plus $C(t+2)=80\mathrm{e}^{-0{,}15t-0{,}3}=\mathrm{e}^{-0{,}3}C(t)$. Le coefficient de $t$ est négatif : le modèle est décroissant. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, exp, Rational % x, t, n = symbols('x t n') % # ---- Exercice 1 : h(x) = 2e^x verifie h'=h mais pas h(0)=1 ---- % h = 2*exp(x) % assert
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -96,7 +96,7 @@ Réponse du corrigé (rédigée pour l'exercice entier) : .} $C(0)=80$ et $C(8)=
 
 > Montrer que $C(t+2)=\mathrm{e}^{-0{,}3}C(t)$ et interpréter. \hfill(2 pts)
 
-Réponse du corrigé (rédigée pour l'exercice entier) : .} $C(0)=80$ et $C(8)=80\mathrm{e}^{-1{,}2}\approx24{,}10$. De plus $C(t+2)=80\mathrm{e}^{-0{,}15t-0{,}3}=\mathrm{e}^{-0{,}3}C(t)$. Le coefficient de $t$ est négatif : le modèle est décroissant. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, exp, Rational % x, t, n = symbols('x t n') % # ---- Exercice 1 : h(x) = 2e^x verifie h'=h mais pas h(0)=1 ---- % h = 2*exp(x) % assert simplify(d
+Réponse du corrigé (rédigée pour l'exercice entier) : .} $C(0)=80$ et $C(8)=80\mathrm{e}^{-1{,}2}\approx24{,}10$. De plus $C(t+2)=80\mathrm{e}^{-0{,}15t-0{,}3}=\mathrm{e}^{-0{,}3}C(t)$. Le coefficient de $t$ est négatif : le modèle est décroissant. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, exp, Rational % x, t, n = symbols('x t n') % # ---- Exercice 1 : h(x) = 2e^x verifie h'=h mais pas h(0)=1 ---- % h = 2*exp(x) % assert
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|
@@ -106,7 +106,7 @@ Réponse du corrigé (rédigée pour l'exercice entier) : .} $C(0)=80$ et $C(8)=
 
 > Dire si le modèle décrit une croissance ou une décroissance et justifier. \hfill(1 pt)
 
-Réponse du corrigé (rédigée pour l'exercice entier) : .} $C(0)=80$ et $C(8)=80\mathrm{e}^{-1{,}2}\approx24{,}10$. De plus $C(t+2)=80\mathrm{e}^{-0{,}15t-0{,}3}=\mathrm{e}^{-0{,}3}C(t)$. Le coefficient de $t$ est négatif : le modèle est décroissant. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, exp, Rational % x, t, n = symbols('x t n') % # ---- Exercice 1 : h(x) = 2e^x verifie h'=h mais pas h(0)=1 ---- % h = 2*exp(x) % assert simplify(d
+Réponse du corrigé (rédigée pour l'exercice entier) : .} $C(0)=80$ et $C(8)=80\mathrm{e}^{-1{,}2}\approx24{,}10$. De plus $C(t+2)=80\mathrm{e}^{-0{,}15t-0{,}3}=\mathrm{e}^{-0{,}3}C(t)$. Le coefficient de $t$ est négatif : le modèle est décroissant. % BEGIN-VERIFY % from sympy import symbols, diff, simplify, exp, Rational % x, t, n = symbols('x t n') % # ---- Exercice 1 : h(x) = 2e^x verifie h'=h mais pas h(0)=1 ---- % h = 2*exp(x) % assert
 
 | Ce qui rapporte les points | Erreurs pénalisées | Points de rédaction |
 |---|---|---|

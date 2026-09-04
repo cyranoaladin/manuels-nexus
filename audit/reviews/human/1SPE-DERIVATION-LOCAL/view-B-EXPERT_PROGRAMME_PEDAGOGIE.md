@@ -24,7 +24,7 @@ Chapitre `1SPE-DERIVATION-LOCAL` · manuel `1SPE` (Première, Spécialité math�
 | Empreinte de l'ensemble d'objets | `sha256:66ee703b23338630536567639b52f69a2e9be842f10d4ec633f8e9903747680d` |
 | Empreinte semantique liee a l'approbation | `sha256:854b4e1dda5f894278dbd584ffd99da653a9217105a6dc35ca4ced1e0fb0c681` |
 | Empreinte du packet | `sha256:87343ff9f64e47f1030e8072d611a9ccc908a0927d8ccf71eb5daa7c85b4026f` |
-| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
+| Revision du depot gelee dans le packet | `dfc99058e7a7c16ae4af46b99245edbe14b4f8e5` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel
@@ -312,15 +312,15 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 
 **Exercice 1** — 6 points (C1, C2)
 
-- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{f(4)-f(1)}{4-1} = \frac{5-2}{3} = 1.
-- **Q2** — 2 pts — Attendu : calculer — \end{align*} \[ \frac{f(3+h)-f(3)}{h} = \frac{h^2+2h+2-2}{h} = \frac{h^2+2h}{h} = h+2.
+- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{f(4)-f(1)}{4-1} = \frac{5-2}{3} = 1. \].
+- **Q2** — 2 pts — Attendu : calculer — $f(3) = 9 - 12 + 5 = 2$.
 - **Q3** — 1 pt — Attendu : en déduire — $f'(3) = \lim_{h \to 0}(h+2) = 2.$.
 - **Q4** — 1,5 pt — Attendu : interpréter — $f'(3) = 2$ signifie que la tangente à la courbe de $f$ au point d'abscisse $3$ a pour pente $2$ : la courbe monte localement avec un coefficient directeur de $2$.
 
 **Exercice 2** — 5 points (C2, C4)
 
 - **Q1** — 1 pt — Attendu : calculer — $g'(1) = 3 \times 1^2 = 3.$.
-- **Q2** — 2 pts — Attendu : donner — La tangente $T_1$ en $x=1$ : \[ T_1 : y = g'(1)(x-1) + g(1) = 3(x-1) + 1 = 3x - 2.
+- **Q2** — 2 pts — Attendu : donner — La tangente $T_1$ en $x=1$ : \[ T_1 : y = g'(1)(x-1) + g(1) = 3(x-1) + 1 = 3x - 2. \].
 - **Q3** — 1 pt — Attendu : vérifier — Le point $(0;-2)$ est bien sur $T_1$.
 - **Q4** — 1 pt — Attendu : déterminer — La tangente est horizontale au point d'abscisse $0$.
 
@@ -333,23 +333,23 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 
 **Exercice 4** — 4 points (C1, C5)
 
-- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{h(3)-h(2)}{3-2} = \frac{\frac{1}{3}-\frac{1}{2}}{1} = \frac{-\frac{1}{6}}{1} = -\frac{1}{6} \approx -0{,}167.
-- **Q2** — 1,5 pt — Attendu : approcher — \[ h(2{,}05) \approx h(2) + h'(2) \times 0{,}05 = \frac{1}{2} + \left(-\frac{1}{4}\right) \times 0{,}05 = 0{,}5 - 0{,}0125 = 0{,}4875.
+- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{h(3)-h(2)}{3-2} = \frac{\frac{1}{3}-\frac{1}{2}}{1} = \frac{-\frac{1}{6}}{1} = -\frac{1}{6} \approx -0{,}167. \].
+- **Q2** — 1,5 pt — Attendu : approcher — \[ h(2{,}05) \approx h(2) + h'(2) \times 0{,}05 = \frac{1}{2} + \left(-\frac{1}{4}\right) \times 0{,}05 = 0{,}5 - 0{,}0125 = 0{,}4875. \].
 - **Q3** — 1 pt — Attendu : comparer — L'erreur est de l'ordre de $0{,}0003$, soit environ $0{,}06\,\%$.
 
 ### 1SPE-DERLOCAL-EV-B
 
 **Exercice 1** — 6 points (C1, C2)
 
-- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{f(5)-f(2)}{5-2} = \frac{5-2}{3} = 1.
-- **Q2** — 2 pts — Attendu : calculer — \end{align*} \[ \frac{f(5+h)-f(5)}{h} = \frac{h^2+4h}{h} = h+4.
+- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{f(5)-f(2)}{5-2} = \frac{5-2}{3} = 1. \].
+- **Q2** — 2 pts — Attendu : calculer — \begin{align*} f(5+h) &= (5+h)^2 - 6(5+h) + 10 \\ &= 25 + 10h + h^2 - 30 - 6h + 10 = h^2 + 4h + 5. \end{align*} \[ \frac{f(5+h)-f(5)}{h} = \frac{h^2+4h}{h} = h+4. \].
 - **Q3** — 1 pt — Attendu : en déduire — $f'(5) = \lim_{h \to 0}(h+4) = 4.$.
 - **Q4** — 1,5 pt — Attendu : interpréter — $f'(5) = 4$ signifie que la tangente à la courbe de $f$ au point d'abscisse $5$ a pour pente $4$ : la courbe monte localement avec un coefficient directeur de $4$.
 
 **Exercice 2** — 5 points (C2, C4)
 
 - **Q1** — 1 pt — Attendu : calculer — $g'(2) = 3 \times 2^2 = 12.$.
-- **Q2** — 2 pts — Attendu : donner — La tangente $T_2$ en $x=2$ : \[ T_2 : y = 12(x-2) + 8 = 12x - 16.
+- **Q2** — 2 pts — Attendu : donner — La tangente $T_2$ en $x=2$ : \[ T_2 : y = 12(x-2) + 8 = 12x - 16. \].
 - **Q3** — 1 pt — Attendu : vérifier — Le point $(0;-16)$ est bien sur $T_2$.
 - **Q4** — 1 pt — Attendu : déterminer — Tangente horizontale $\Leftrightarrow g'(a) = 0 \Leftrightarrow 3a^2 = 0 \Leftrightarrow a = 0$.
 
@@ -362,8 +362,8 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 
 **Exercice 4** — 4 points (C1, C5)
 
-- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{h(5)-h(4)}{5-4} = \frac{\frac{1}{5}-\frac{1}{4}}{1} = \frac{-\frac{1}{20}}{1} = -\frac{1}{20} = -0{,}05.
-- **Q2** — 1,5 pt — Attendu : approcher — \[ h(5{,}02) \approx h(5) + h'(5) \times 0{,}02 = \frac{1}{5} + \left(-\frac{1}{25}\right) \times 0{,}02 = 0{,}2 - 0{,}0008 = 0{,}1992.
+- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{h(5)-h(4)}{5-4} = \frac{\frac{1}{5}-\frac{1}{4}}{1} = \frac{-\frac{1}{20}}{1} = -\frac{1}{20} = -0{,}05. \].
+- **Q2** — 1,5 pt — Attendu : approcher — \[ h(5{,}02) \approx h(5) + h'(5) \times 0{,}02 = \frac{1}{5} + \left(-\frac{1}{25}\right) \times 0{,}02 = 0{,}2 - 0{,}0008 = 0{,}1992. \].
 - **Q3** — 1 pt — Attendu : comparer — Valeur exacte : $\dfrac{1}{5{,}02} = \dfrac{50}{251} \approx 0{,}19920\ldots$ Approximation : $0{,}1992$.
 
 Ce chapitre porte 30 question(s) évaluée(s), dont 0 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.

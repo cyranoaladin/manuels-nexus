@@ -24,7 +24,7 @@ Chapitre `1SPE-DERIVATION-LOCAL` · manuel `1SPE` (Première, Spécialité math�
 | Empreinte de l'ensemble d'objets | `sha256:66ee703b23338630536567639b52f69a2e9be842f10d4ec633f8e9903747680d` |
 | Empreinte semantique liee a l'approbation | `sha256:854b4e1dda5f894278dbd584ffd99da653a9217105a6dc35ca4ced1e0fb0c681` |
 | Empreinte du packet | `sha256:d499360110f3f47e9dd74fcf32a02b8600678ec748a2ea0adf2ebf3ed5c5a833` |
-| Revision du depot gelee dans le packet | `5bc44275a0afe33f10b7ce2ec7700778f8de6308` |
+| Revision du depot gelee dans le packet | `dfc99058e7a7c16ae4af46b99245edbe14b4f8e5` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel
