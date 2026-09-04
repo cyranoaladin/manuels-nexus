@@ -300,18 +300,21 @@ def rendre_diagnostics(donnees: dict, identifiant: str) -> str:
     """
 
     chapitre = donnees["chapitre"]
-    meta = json.dumps(
-        {
-            "id": identifiant,
-            "chapitre": chapitre,
-            "type_objet": "qcm_diagnostics",
-            "genere_depuis": donnees["_source"],
-            # Herite comme le QCM : le statut est une decision de gouvernance,
-            # pas une propriete du mode de production.
-            "status": donnees.get("_statut_diagnostics") or "needs_review",
-        },
-        ensure_ascii=False,
-    )
+    entetes: dict = {
+        "id": identifiant,
+        "chapitre": chapitre,
+        "type_objet": "qcm_diagnostics",
+    }
+    # INT-005 : la fiche derive du QCM, elle en porte les capacites (les
+    # memes references officielles, resolues une seule fois) des que le QCM
+    # les declare. Sans cela, l'objet reste UNKNOWN dans la couverture.
+    if donnees.get("_capacites"):
+        entetes["capacites"] = donnees["_capacites"]
+    entetes["genere_depuis"] = donnees["_source"]
+    # Herite comme le QCM : le statut est une decision de gouvernance,
+    # pas une propriete du mode de production.
+    entetes["status"] = donnees.get("_statut_diagnostics") or "needs_review"
+    meta = json.dumps(entetes, ensure_ascii=False)
     out = [
         f"% META: {meta}\n"
         "% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.\n",
