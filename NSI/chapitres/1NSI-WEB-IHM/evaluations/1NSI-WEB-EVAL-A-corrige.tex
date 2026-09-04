@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-WEB-EVAL-A-corrige", "chapitre": "1NSI-WEB-IHM", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-WEB-EVAL-A", "capacites": ["P-IHM-01A", "P-IHM-02", "P-IHM-04B", "P-IHM-04C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% META: {"id": "1NSI-WEB-EVAL-A-corrige", "chapitre": "1NSI-WEB-IHM", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-WEB-EVAL-A", "capacites": ["P-IHM-01A", "P-IHM-01B", "P-IHM-02", "P-IHM-03A", "P-IHM-03B", "P-IHM-03C", "P-IHM-04A", "P-IHM-04B", "P-IHM-04C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % gestionnaires = {}
 % def ajouter_gestionnaire(id_composant, fonction):
@@ -56,3 +56,26 @@ l'URL résultante peut être partagée ou mise en favori pour retrouver la même
 postale sont des données à caractère personnel, qui ne doivent pas apparaître dans l'URL
 (historique du navigateur, journaux du serveur).
 \end{corrige}
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{Une commande, du clic au serveur} \hfill (10 points)
+
+\begin{enumerate}
+  \item (2 pts) La requête vers \lstinline{/livres} ne transporte \textbf{aucun} cookie : aucun
+        n'a encore été déposé. Celle vers \lstinline{/mes-commandes} transporte
+        \lstinline|{"session": "b91c"}|. Le serveur n'a rien mémorisé : c'est le client qui
+        conserve le cookie et le renvoie de lui-même à chaque requête.
+  \item (2 pts) \textbf{Sur le serveur} : la base des commandes ne lui est accessible qu'à lui.
+        Le client ne reçoit que le HTML produit à partir de cette lecture.
+  \item (2 pts) L'utilisateur voit « Adresse de livraison », contenu de la balise
+        \lstinline{<label>}. Sa saisie parvient au serveur sous le nom \lstinline{adresse},
+        valeur de l'attribut \lstinline{name} — et non \lstinline{ch1}, qui est l'identifiant
+        servant au code et au \lstinline{<label>}.
+  \item (2 pts) \textbf{Non} : ce champ n'a pas d'attribut \lstinline{name}, sa valeur n'est
+        donc pas transmise. Correction :
+        \lstinline{<input type="text" id="ch2" name="complement">}.
+  \item (2 pts) Une personne du même réseau ne peut \textbf{pas} lire l'adresse : HTTPS chiffre
+        la transmission. L'éditeur du site, lui, la lit en clair — il doit bien la traiter pour
+        livrer. HTTPS protège le trajet, pas les extrémités.
+\end{enumerate}

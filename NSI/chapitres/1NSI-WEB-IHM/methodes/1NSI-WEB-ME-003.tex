@@ -46,7 +46,7 @@ apres = client_envoie_requete_avec_cookies("/paiement")
 
 La requête vers \lstinline{/accueil} ne transporte \textbf{aucun} cookie : il n'en existe pas
 encore. Après que le serveur a défini le cookie, la requête vers \lstinline{/paiement}
-transporte \lstinline{{"panier": "2 articles"}} — sans que le visiteur ait à le redemander.
+transporte \lstinline|{"panier": "2 articles"}| — sans que le visiteur ait à le redemander.
 Le serveur n'a rien mémorisé : c'est le client qui a rapporté l'information.
 
 \textbf{Erreur fréquente.} Croire que HTTPS rend les données invisibles partout. Le serveur
