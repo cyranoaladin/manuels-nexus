@@ -1,0 +1,21 @@
+% META: {"id": "1NSI-PM-RE-C2-CORRIGE", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "corrige", "exercice_ref": "1NSI-PM-RE-C2", "capacites": ["BO-PREAMBULE-DEMARCHE-DE-PROJET"], "capacites_codes": ["C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-PM-RE-C2}
+\begin{enumerate}
+  \item Les deux jalons ne sont pas vérifiables : « tout coder » n'a pas de fin définie et
+        « que ça marche » ne dit pas quoi tester. Aucun ne peut être coché avant la toute
+        fin, donc l'avancement reste à $0\,\%$ quel que soit le travail fourni. Un jalon
+        terminé est un jalon dont le \textbf{critère de validation} a été exécuté ou montré.
+  \item Par exemple : cahier des charges écrit (critère : la liste des fonctionnalités a été
+        relue par le professeur) ; ajout et affichage des tâches (critère : ajouter trois
+        tâches, les voir affichées) ; suppression et sauvegarde (critère : supprimer une
+        tâche, relancer le programme, constater qu'elle est absente) ; présentation répétée
+        (critère : une démonstration de deux minutes chronométrée). Chaque critère peut être
+        joué devant l'équipe.
+  \item Avec les deux premiers jalons terminés, \lstinline{avancement(jalons)} vaut
+        $50{,}0$ et \lstinline{prochain_jalon(jalons)} renvoie
+        \lstinline{"Suppression et sauvegarde"}. Ce $50\,\%$ compte deux jalons sur quatre,
+        pas la moitié du travail : la sauvegarde peut coûter plus que tout ce qui précède. Et
+        il ne dit rien des bugs : seul le critère de chaque jalon, exécuté, en dit quelque
+        chose, et uniquement sur ce qu'il teste.
+\end{enumerate}
+\end{corrige}

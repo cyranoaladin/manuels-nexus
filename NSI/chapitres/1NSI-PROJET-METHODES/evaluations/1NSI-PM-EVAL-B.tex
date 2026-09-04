@@ -1,8 +1,8 @@
-% META: {"id": "1NSI-PM-EVAL-B", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "evaluation", "capacites": ["P-HIST-01", "BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
+% META: {"id": "1NSI-PM-EVAL-B", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "evaluation", "capacites": ["P-HIST-01", "BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE", "BO-PREAMBULE-COMPETENCES-ORALES"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 60, "status": "verified"}
 \section*{Évaluation B --- Projet et méthodes}
-\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+\textit{Durée : 60 minutes. Ordinateur avec interpréteur Python autorisé.}
 
-\baremeIndicatif{Ex. 1 : 10 pts (histoire, démarche de projet) ; Ex. 2 : 10 pts (débogage)}
+\baremeIndicatif{Ex. 1 : 10 pts (histoire, démarche de projet) ; Ex. 2 : 10 pts (débogage) ; Ex. 3 : 10 pts (documentation, oral)}
 
 \bigskip
 
@@ -74,4 +74,48 @@ acceder_element_bugue([1, 2, 3], 5)
 % except AssertionError:
 %     erreur_precondition = True
 % assert erreur_precondition is True
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{Documenter et présenter} \hfill (10 points)
+
+On donne la fonction suivante, sans documentation :
+\begin{python}
+def maximum(liste):
+    m = liste[0]
+    for x in liste:
+        if x > m:
+            m = x
+    return m
+\end{python}
+
+\begin{enumerate}
+  \item (2 pts) Que renvoie \lstinline{a_une_docstring(maximum)} du cours ? Que renvoient
+        \lstinline{maximum([4, 9, 2, 9, 5])} et \lstinline{maximum([-3])} ?
+  \item (4 pts) Écrire une docstring complète pour cette fonction : rôle, précondition
+        (que se passe-t-il avec une liste vide ?), postcondition sur le résultat.
+  \item (4 pts) Rédiger, en quatre points (problème, choix, difficulté, démonstration), le
+        plan d'une présentation orale de deux minutes de cette fonction. La démonstration
+        s'appuie sur l'un des appels de la question 1.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def a_une_docstring(fonction):
+%     return fonction.__doc__ is not None and len(fonction.__doc__.strip()) > 0
+% def maximum(liste):
+%     m = liste[0]
+%     for x in liste:
+%         if x > m:
+%             m = x
+%     return m
+% assert a_une_docstring(maximum) is False
+% assert maximum([4, 9, 2, 9, 5]) == 9
+% assert maximum([-3]) == -3
+% try:
+%     maximum([])
+% except IndexError:
+%     pass
+% else:
+%     raise AssertionError("une liste vide doit provoquer IndexError")
 % END-VERIFY

@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-PM-EVAL-A-corrige", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-PM-EVAL-A", "capacites": ["P-HIST-01", "BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% META: {"id": "1NSI-PM-EVAL-A-corrige", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-PM-EVAL-A", "capacites": ["P-HIST-01", "BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE", "BO-PREAMBULE-COMPETENCES-ORALES"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % evenements = [
 %     (1948, "Premier ordinateur a programme enregistre", "Equipe de Manchester"),
@@ -43,4 +43,29 @@ l'hypothèse nécessaire au bon fonctionnement de la fonction, avec un \textbf{m
 personnalisé} compréhensible. Laisser l'erreur native se produire fonctionne aussi (le
 programme s'arrête bien), mais sans cette documentation, un autre développeur (ou soi-même
 plus tard) doit deviner pourquoi la division a été appelée avec un diviseur nul.
+\end{corrige}
+
+\begin{corrige}{1NSI-PM-EVAL-A-EX3}
+\textbf{1.} \lstinline{a_une_docstring(compter_occurrences)} vaut \lstinline{False} : la
+fonction n'a pas de docstring. \lstinline{compter_occurrences([3, 1, 3, 3, 2], 3)} vaut $3$
+et \lstinline{compter_occurrences([], 3)} vaut $0$.
+
+\textbf{2.}
+\begin{python}
+def compter_occurrences(liste, element):
+    """Renvoie le nombre d'apparitions de element dans liste.
+
+    Precondition : liste est une liste (eventuellement vide).
+    Postcondition : le resultat est un entier entre 0 et len(liste).
+    """
+    return sum(1 for x in liste if x == element)
+\end{python}
+Après cette docstring, \lstinline{a_une_docstring} renvoie \lstinline{True}.
+
+\textbf{3.} Problème : savoir combien de fois une valeur apparaît dans une liste, par
+exemple un score dans une série de parties. Choix : parcourir la liste une seule fois et
+compter les égalités, sans construire de liste intermédiaire. Difficulté : le cas de la liste
+vide, qui doit renvoyer $0$ et non provoquer une erreur ; le test
+\lstinline{compter_occurrences([], 3)} le vérifie. Démonstration :
+\lstinline{compter_occurrences([3, 1, 3, 3, 2], 3)} renvoie $3$.
 \end{corrige}

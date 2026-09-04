@@ -1,0 +1,60 @@
+% META: {"id": "1NSI-PM-RE-C2", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "remediation", "capacites": ["BO-PREAMBULE-DEMARCHE-DE-PROJET"], "capacites_codes": ["C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : un jalon se verifie, il ne se proclame pas
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tes jalons sont des intentions (« tout coder », « que ça marche »)
+et non des étapes vérifiables : l'avancement reste à $0\,\%$ pendant des semaines, puis
+saute à $100\,\%$ la veille, sans que personne sache où en est le projet. Et tu attends du
+découpage qu'il garantisse l'absence de bug, ce qu'aucun jalon ne peut faire.
+
+\textbf{À retenir.} Un jalon porte un critère de validation exécutable : un test qui passe,
+une démonstration précise. Le pourcentage compte des jalons vérifiés ; il ne mesure ni la
+charge de travail restante ni la qualité du code.
+
+\begin{exercice}{1NSI-PM-RE-C2-EX1}{1}{12}
+Une équipe a décrit son projet de gestionnaire de tâches ainsi :
+\begin{python}
+jalons = [
+    {"nom": "Tout coder", "termine": False},
+    {"nom": "Que ca marche", "termine": False},
+]
+\end{python}
+Après trois semaines et $300$ lignes de code, \lstinline{avancement(jalons)} vaut toujours
+$0{,}0$.
+\begin{enumerate}
+  \item Pourquoi ce pourcentage ne dit-il rien du travail accompli ? Que faudrait-il pour
+        qu'un jalon puisse être déclaré terminé ?
+  \item Réécrire ce projet en quatre jalons ordonnés, chacun avec un critère de validation
+        que l'on peut exécuter ou montrer. Le premier doit être le cahier des charges, le
+        dernier la présentation.
+  \item Deux de ces quatre jalons sont terminés. Que valent \lstinline{avancement} et
+        \lstinline{prochain_jalon} ? Ce $50\,\%$ garantit-il que la moitié du travail est
+        faite, ou que le code déjà écrit est sans bug ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def avancement(jalons):
+%     if len(jalons) == 0:
+%         raise ValueError("au moins un jalon est requis")
+%     nb_termines = sum(1 for j in jalons if j["termine"])
+%     return nb_termines / len(jalons) * 100
+% def prochain_jalon(jalons):
+%     for j in jalons:
+%         if not j["termine"]:
+%             return j["nom"]
+%     return None
+% vagues = [{"nom": "Tout coder", "termine": False}, {"nom": "Que ca marche", "termine": False}]
+% assert avancement(vagues) == 0.0
+% assert prochain_jalon(vagues) == "Tout coder"
+% jalons = [
+%     {"nom": "Cahier des charges ecrit", "critere": "liste des fonctionnalites relue", "termine": True},
+%     {"nom": "Ajout et affichage des taches", "critere": "ajouter 3 taches, les afficher", "termine": True},
+%     {"nom": "Suppression et sauvegarde", "critere": "supprimer une tache, relancer, la retrouver absente", "termine": False},
+%     {"nom": "Presentation repetee", "critere": "demonstration de 2 minutes", "termine": False},
+% ]
+% assert avancement(jalons) == 50.0
+% assert prochain_jalon(jalons) == "Suppression et sauvegarde"
+% END-VERIFY

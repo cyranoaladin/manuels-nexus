@@ -1,0 +1,51 @@
+% META: {"id": "1NSI-PM-RE-C4", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "remediation", "capacites": ["BO-PREAMBULE-COMPETENCES-ORALES"], "capacites_codes": ["C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C4 : une docstring dit ce que la fonction promet, pas qui l'a ecrite
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu confonds « il y a une docstring » et « la fonction est
+documentée » : un nom d'auteur ou une date passent le test \lstinline{a_une_docstring} sans
+rien dire à qui veut utiliser la fonction. Et à l'oral, tu lis le code ligne par ligne, alors
+que le jury attend le raisonnement.
+
+\textbf{À retenir.} Une docstring énonce le rôle, la précondition et la postcondition. Un
+oral expose le problème, le choix, la difficulté et une démonstration.
+
+\begin{exercice}{1NSI-PM-RE-C4-EX1}{1}{12}
+Sara a documenté sa fonction ainsi :
+\begin{python}
+def nombre_voyelles(mot):
+    """Ecrit par Sara le 12 mars"""
+    return sum(1 for caractere in mot if caractere in "aeiouy")
+\end{python}
+Pour l'oral, son plan tient en une ligne : « lire chaque ligne de la fonction et l'expliquer ».
+\begin{enumerate}
+  \item Que renvoie \lstinline{a_une_docstring(nombre_voyelles)} ? Pourquoi ce résultat ne
+        prouve-t-il pas que la fonction est documentée ?
+  \item Réécrire la docstring avec un rôle, une précondition et une postcondition. Quelle
+        précondition le test \lstinline{"aeiouy"} impose-t-il sur \lstinline{mot} ?
+  \item Proposer à Sara un plan d'oral de deux minutes en quatre points, avec pour
+        démonstration l'appel \lstinline{nombre_voyelles("informatique")} et son résultat.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def a_une_docstring(fonction):
+%     return fonction.__doc__ is not None and len(fonction.__doc__.strip()) > 0
+% def nombre_voyelles(mot):
+%     """Ecrit par Sara le 12 mars"""
+%     return sum(1 for caractere in mot if caractere in "aeiouy")
+% assert a_une_docstring(nombre_voyelles) is True
+% assert "Renvoie" not in nombre_voyelles.__doc__
+% def nombre_voyelles_documente(mot):
+%     """Renvoie le nombre de voyelles (a, e, i, o, u, y) de mot.
+%
+%     Precondition : mot est une chaine en minuscules sans accent.
+%     Postcondition : le resultat est un entier entre 0 et len(mot).
+%     """
+%     return sum(1 for caractere in mot if caractere in "aeiouy")
+% assert a_une_docstring(nombre_voyelles_documente) is True
+% assert nombre_voyelles_documente("informatique") == 6
+% assert nombre_voyelles_documente("INFORMATIQUE") == 0
+% END-VERIFY

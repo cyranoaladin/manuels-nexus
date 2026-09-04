@@ -1,0 +1,30 @@
+% META: {"id": "1NSI-PM-RE-C4-CORRIGE", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "corrige", "exercice_ref": "1NSI-PM-RE-C4", "capacites": ["BO-PREAMBULE-COMPETENCES-ORALES"], "capacites_codes": ["C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-PM-RE-C4}
+\begin{enumerate}
+  \item \lstinline{True} : la docstring existe et n'est pas vide. Mais le test ne lit pas son
+        contenu ; il vérifie une présence, pas une utilité. « Écrit par Sara le 12 mars »
+        n'indique ni ce que renvoie la fonction, ni ce qu'elle exige, ni ce qu'elle garantit :
+        l'auteur et la date relèvent du suivi de version, pas de la documentation.
+  \item
+\begin{python}
+def nombre_voyelles(mot):
+    """Renvoie le nombre de voyelles (a, e, i, o, u, y) de mot.
+
+    Precondition : mot est une chaine en minuscules sans accent.
+    Postcondition : le resultat est un entier entre 0 et len(mot).
+    """
+    return sum(1 for caractere in mot if caractere in "aeiouy")
+\end{python}
+        Le test \lstinline{caractere in "aeiouy"} ne reconnaît ni les majuscules ni les
+        lettres accentuées : \lstinline{nombre_voyelles("INFORMATIQUE")} renvoie $0$. La
+        précondition « minuscules, sans accent » rend cette limite explicite au lieu de la
+        laisser surprendre l'utilisateur.
+  \item Problème : compter les voyelles d'un mot, par exemple pour un jeu de lettres. Choix :
+        parcourir la chaîne une seule fois et tester l'appartenance de chaque caractère à
+        \lstinline{"aeiouy"}, plus simple qu'une série de six comparaisons. Difficulté : les
+        majuscules et les accents n'étaient pas comptés, découvert en testant
+        \lstinline{"INFORMATIQUE"} ; d'où la précondition, ou une conversion en minuscules.
+        Démonstration : \lstinline{nombre_voyelles("informatique")} renvoie $6$ (i, o, a, i,
+        u, e). Lire le code ligne par ligne n'apporterait rien : le jury l'a sous les yeux.
+\end{enumerate}
+\end{corrige}

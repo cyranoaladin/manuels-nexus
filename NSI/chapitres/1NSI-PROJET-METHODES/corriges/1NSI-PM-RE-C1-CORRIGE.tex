@@ -1,0 +1,20 @@
+% META: {"id": "1NSI-PM-RE-C1-CORRIGE", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "corrige", "exercice_ref": "1NSI-PM-RE-C1", "capacites": ["P-HIST-01"], "capacites_codes": ["C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-PM-RE-C1}
+\begin{enumerate}
+  \item Les triplets de $1936$ et de $1989$ ont échangé leurs faits. Alan Turing formule le
+        \textbf{concept de machine universelle} en $1936$ ; Tim Berners-Lee invente le
+        \textbf{World Wide Web} en $1989$. Corrigés :
+        \lstinline{(1936, "Concept de machine universelle", "Alan Turing")} et
+        \lstinline{(1989, "Invention du World Wide Web", "Tim Berners-Lee")}. Les triplets de
+        $1642$ (Pascal) et de $1969$ (DARPA) étaient cohérents.
+  \item Non : $1936$ précède $1642$ dans la liste. Vérification :
+        \lstinline{chronologie == sorted(chronologie, key=lambda e: e[0])} vaut
+        \lstinline{False}. Pour ranger : \lstinline{sorted(chronologie, key=lambda e: e[0])},
+        qui donne l'ordre $1642$, $1936$, $1969$, $1989$.
+  \item Le Web est un service qui fait circuler des pages \emph{sur} un réseau : il suppose
+        Internet, apparu vingt ans plus tôt. La Pascaline exécute une seule opération fixée
+        par sa mécanique ; la machine universelle de Turing est l'idée d'une machine capable
+        d'exécuter n'importe quel programme, ce qui fait d'elle l'ancêtre conceptuel de
+        l'ordinateur.
+\end{enumerate}
+\end{corrige}

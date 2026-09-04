@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-PM-EVAL-B-corrige", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-PM-EVAL-B", "capacites": ["P-HIST-01", "BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% META: {"id": "1NSI-PM-EVAL-B-corrige", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-PM-EVAL-B", "capacites": ["P-HIST-01", "BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE", "BO-PREAMBULE-COMPETENCES-ORALES"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % evenements = [
 %     (1936, "Concept de machine universelle", "Alan Turing"),
@@ -43,4 +43,34 @@ nécessaire (un indice valide) avec un message personnalisé et compréhensible.
 native \lstinline{IndexError} arrête aussi le programme, mais sans expliquer la
 \textbf{cause métier} du problème (ici, un indice incohérent avec la taille de la liste)
 aussi clairement qu'un message d'assertion rédigé pour ce cas précis.
+\end{corrige}
+
+\begin{corrige}{1NSI-PM-EVAL-B-EX3}
+\textbf{1.} \lstinline{a_une_docstring(maximum)} vaut \lstinline{False} : la fonction n'a
+pas de docstring. \lstinline{maximum([4, 9, 2, 9, 5])} vaut $9$ et \lstinline{maximum([-3])}
+vaut $-3$.
+
+\textbf{2.}
+\begin{python}
+def maximum(liste):
+    """Renvoie le plus grand element de liste.
+
+    Precondition : liste est non vide (sinon liste[0] provoque IndexError).
+    Postcondition : le resultat appartient a liste et aucun element ne le depasse.
+    """
+    m = liste[0]
+    for x in liste:
+        if x > m:
+            m = x
+    return m
+\end{python}
+Avec une liste vide, \lstinline{liste[0]} lève \lstinline{IndexError} : la précondition
+« non vide » doit donc figurer dans la docstring. Après cette docstring,
+\lstinline{a_une_docstring} renvoie \lstinline{True}.
+
+\textbf{3.} Problème : trouver la plus grande valeur d'une liste, par exemple le meilleur
+score. Choix : partir du premier élément et ne le remplacer que par une valeur strictement
+plus grande, en un seul parcours. Difficulté : la liste vide n'a pas de maximum, d'où la
+précondition explicite plutôt qu'une erreur inexpliquée. Démonstration :
+\lstinline{maximum([4, 9, 2, 9, 5])} renvoie $9$, même si $9$ apparaît deux fois.
 \end{corrige}

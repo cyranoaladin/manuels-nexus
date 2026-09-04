@@ -1,8 +1,8 @@
-% META: {"id": "1NSI-PM-EVAL-A", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "evaluation", "capacites": ["P-HIST-01", "BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
+% META: {"id": "1NSI-PM-EVAL-A", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "evaluation", "capacites": ["P-HIST-01", "BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE", "BO-PREAMBULE-COMPETENCES-ORALES"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 60, "status": "verified"}
 \section*{Évaluation A --- Projet et méthodes}
-\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+\textit{Durée : 60 minutes. Ordinateur avec interpréteur Python autorisé.}
 
-\baremeIndicatif{Ex. 1 : 10 pts (histoire, démarche de projet) ; Ex. 2 : 10 pts (débogage)}
+\baremeIndicatif{Ex. 1 : 10 pts (histoire, démarche de projet) ; Ex. 2 : 10 pts (débogage) ; Ex. 3 : 10 pts (documentation, oral)}
 
 \bigskip
 
@@ -73,4 +73,35 @@ diviser_bugue(10, 0)
 % except AssertionError:
 %     erreur_precondition = True
 % assert erreur_precondition is True
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{Documenter et présenter} \hfill (10 points)
+
+On donne la fonction suivante, sans documentation :
+\begin{python}
+def compter_occurrences(liste, element):
+    return sum(1 for x in liste if x == element)
+\end{python}
+
+\begin{enumerate}
+  \item (2 pts) Que renvoie \lstinline{a_une_docstring(compter_occurrences)} du cours ?
+        Que renvoient \lstinline{compter_occurrences([3, 1, 3, 3, 2], 3)} et
+        \lstinline{compter_occurrences([], 3)} ?
+  \item (4 pts) Écrire une docstring complète pour cette fonction : rôle, précondition,
+        postcondition sur le résultat.
+  \item (4 pts) Rédiger, en quatre points (problème, choix, difficulté, démonstration), le
+        plan d'une présentation orale de deux minutes de cette fonction. La démonstration
+        s'appuie sur l'un des appels de la question 1.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def a_une_docstring(fonction):
+%     return fonction.__doc__ is not None and len(fonction.__doc__.strip()) > 0
+% def compter_occurrences(liste, element):
+%     return sum(1 for x in liste if x == element)
+% assert a_une_docstring(compter_occurrences) is False
+% assert compter_occurrences([3, 1, 3, 3, 2], 3) == 3
+% assert compter_occurrences([], 3) == 0
 % END-VERIFY
