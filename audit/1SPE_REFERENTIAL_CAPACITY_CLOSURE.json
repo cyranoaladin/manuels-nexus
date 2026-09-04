@@ -1,0 +1,85 @@
+{
+  "applicable_nor": "MENE2602917A",
+  "applicable_school_year": "2026-2027",
+  "approves_nothing": true,
+  "artifact_type": "1spe_referential_capacity_closure",
+  "atoms_credited_to_several_capacities": [],
+  "atoms_out_of_applicable_year": [],
+  "capacities_without_direct_atom_credit": [
+    {
+      "capacity": "1SPE-GEOMETRIE-REPEREE-C4",
+      "chapter": "1SPE-GEOMETRIE-REPEREE"
+    },
+    {
+      "capacity": "1SPE-PROBA-COND-C5",
+      "chapter": "1SPE-PROBA-COND"
+    },
+    {
+      "capacity": "1SPE-SECOND-DEGRE-C2",
+      "chapter": "1SPE-SECOND-DEGRE"
+    },
+    {
+      "capacity": "1SPE-SECOND-DEGRE-C5",
+      "chapter": "1SPE-SECOND-DEGRE"
+    },
+    {
+      "capacity": "1SPE-SECOND-DEGRE-C6",
+      "chapter": "1SPE-SECOND-DEGRE"
+    },
+    {
+      "capacity": "1SPE-SUITES-C7",
+      "chapter": "1SPE-SUITES"
+    }
+  ],
+  "capacities_without_referential_entry": [
+    {
+      "capacity": "1SPE-VARIABLES-ALEATOIRES-C6",
+      "chapter": "1SPE-VARIABLES-ALEATOIRES"
+    },
+    {
+      "capacity": "1SPE-VARIABLES-ALEATOIRES-C7",
+      "chapter": "1SPE-VARIABLES-ALEATOIRES"
+    }
+  ],
+  "finding": "P1_1SPE_VARALEA_REFERENTIAL_OMISSION",
+  "generated_by": "scripts/build_1spe_referential_capacity_closure.py",
+  "nothing_pedagogical_was_touched": "Aucune capacite n'est creee, aucune n'est supprimee, aucun contenu de chapitre n'est modifie. Les entrees ecrites portent le libelle eleve que le contrat declarait deja et le libelle BO que les atomes officiels ecrivent.",
+  "repaired": [
+    {
+      "capacity": "1SPE-VARIABLES-ALEATOIRES-C6",
+      "chapter": "1SPE-VARIABLES-ALEATOIRES",
+      "libelle_bo": "Le travail expérimental de simulation d’échantillons prolonge celui entrepris en seconde. L’objectif est de faire percevoir le principe de l’estimation de l’espérance d’une variable aléatoire, ou de la moyenne d’une variable statistique dans une population, par une moyenne observée sur un échantillon. Simuler une variable aléatoire avec Python ou un tableur. Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire.",
+      "official_atoms": [
+        "1SPE-OFFICIAL-175",
+        "1SPE-OFFICIAL-176",
+        "1SPE-OFFICIAL-177"
+      ],
+      "referential": "Mathematiques/manuel-maths/referentiel/capacites_1SPE_VARIABLES_ALEATOIRES.json"
+    },
+    {
+      "capacity": "1SPE-VARIABLES-ALEATOIRES-C7",
+      "chapter": "1SPE-VARIABLES-ALEATOIRES",
+      "libelle_bo": "Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n",
+      "official_atoms": [
+        "1SPE-OFFICIAL-178",
+        "1SPE-OFFICIAL-179"
+      ],
+      "referential": "Mathematiques/manuel-maths/referentiel/capacites_1SPE_VARIABLES_ALEATOIRES.json"
+    }
+  ],
+  "schema_version": 1,
+  "summary": {
+    "ATOM_CREDITED_TO_A_FOREIGN_CAPACITY": 0,
+    "ATOM_OUT_OF_APPLICABLE_YEAR": 0,
+    "CAPACITIES_CLOSED": 47,
+    "CAPACITIES_REPAIRED": 2,
+    "CAPACITY_WITHOUT_DIRECT_ATOM_CREDIT": 6,
+    "CAPACITY_WITHOUT_REFERENTIAL_ENTRY": 0,
+    "CONTRACT_CAPACITIES": 53,
+    "UNKNOWN": 0,
+    "VARALEA_OFFICIAL_MAPPING_UNKNOWN": 0
+  },
+  "the_authority_is_the_official_matrix": "Le sens de lecture est unique : la matrice officielle dicte, le referentiel enregistre. Un libelle BO n'est jamais redige ici.",
+  "what_was_wrong": "Deux capacites de Variables aleatoires n'avaient aucune entree dans le referentiel du depot. Le dossier de revue le disait ainsi -- « le referentiel ne declare pas cette capacite » -- ce qui se lit comme du hors-programme. Ce n'en etait pas : les atomes officiels 175 a 179, tous obligatoires, tous issus de MENE2602917A, leur sont rattaches par la matrice de couverture. Le contenu etait au programme ; le referentiel local ne le disait pas.",
+  "why_a_capacity_without_direct_credit_is_not_a_gap": "Six capacites du contrat ne sont creditees d'aucun atome en propre. Ce n'est pas un trou de programme : la matrice officielle rattache 133 atomes obligatoires sur 133 pour ce manuel, et chacun de ces chapitres en porte entre huit et quinze, credites a des capacites soeurs. Ces six-la sont des decoupages pedagogiques du meme attendu officiel. C'est observe et dit, pas bloquant -- et pas non plus efface : reattribuer un atome officiel a une capacite est un jugement de programme, pas une reparation d'outil."
+}

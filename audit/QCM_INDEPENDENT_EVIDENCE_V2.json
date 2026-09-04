@@ -1,19 +1,19 @@
 {
   "ALL_QCM_HUMAN_REVIEW_COMPLETE": false,
   "EVIDENCE_ROUTING_COMPLETE": true,
-  "answer_key_verified_by_independent_computation": 22,
+  "answer_key_verified_by_independent_computation": 23,
   "approves_nothing": true,
   "artifact_type": "qcm_independent_evidence_v2",
   "counts": {
     "CARRIED_FORWARD_IDENTICAL": 301,
-    "HUMAN_REVIEW_REQUIRED": 167,
-    "MACHINE_RECALCULATED": 22,
+    "HUMAN_REVIEW_REQUIRED": 166,
+    "MACHINE_RECALCULATED": 23,
     "UNKNOWN": 0,
     "question_count": 490
   },
   "diagnostic_coverage_findings": [],
   "diagnostic_coverage_is_release_blocking": true,
-  "equation": "490 = 301 + 22 + 167",
+  "equation": "490 = 301 + 23 + 166",
   "evidence_schema_fields": [
     "statement",
     "options",
@@ -101,7 +101,6 @@
     "1NSI-WEB-IHM/Q7",
     "1NSI-WEB-IHM/Q8",
     "1NSI-WEB-IHM/Q9",
-    "1SPE-VARIABLES-ALEATOIRES/Q16",
     "TNSI-ALGORITHMIQUE/Q1",
     "TNSI-ALGORITHMIQUE/Q10",
     "TNSI-ALGORITHMIQUE/Q11",
@@ -4620,22 +4619,51 @@
     {
       "capacity": "C6",
       "chapter": "1SPE-VARIABLES-ALEATOIRES",
-      "computed_option_truths": {},
-      "computed_unique_answer": null,
+      "computed_option_truths": {
+        "A": false,
+        "B": false,
+        "C": true,
+        "D": false
+      },
+      "computed_unique_answer": "C",
+      "computed_value": "len(simuler_variable(...)) == n",
       "delta_classes": [],
-      "evidence_digest": "sha256:4b2d61de9fc99bcd9717a6335d06b45f0403fb615d213593f5243444673fc43f",
-      "evidence_status": "HUMAN_REVIEW_REQUIRED",
-      "human_review_required": true,
-      "independent_evidence": "",
+      "evidence_digest": "sha256:c66182bd7f8b106d13d2a5674721f4410ab12e842055be4c7ac4b5f9fd60559b",
+      "evidence_status": "MACHINE_RECALCULATED",
+      "human_review_required": false,
+      "independent_evidence": "La fonction `simuler_variable` publiee par le chapitre a ete executee : pour n valant 3, 5, 11, elle rend un echantillon plat de longueur exactement n. Le nombre de valeurs distinctes ne suit pas n, et le second parametre est passe au generateur : ni la graine, ni un nombre d'echantillons.",
       "question_id": "Q16",
-      "reason": "aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question",
-      "release_blocking": true,
       "semantic_question_digest": "sha256:0fa5fcd1a4b8358652374ce5b70c07f8cb4ca21cd96dff23cc93182a9cb049b3",
-      "solver_family": null,
+      "solver_family": "PUBLISHED_FUNCTION_PARAMETER_ROLE",
       "solver_input_digest": "sha256:a3bf0d60b53e52c9ef3f5e48f5bcd7323a687395ff6d9c13da234a41c03d60fb",
+      "solver_output_digest": "sha256:fda90d23a551fee16589360e16c5ad91ec0467e70d9cc63510d823d16d8a1c5f",
       "solver_version": "1.1.0",
       "source_path": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/qcm/1SPE-VARALEA-QCM.json",
-      "verification": null
+      "verification": {
+        "answer_key_verdict": "PASS",
+        "capacity": "C6",
+        "capacity_declared": true,
+        "computed_unique_answer": "C",
+        "coverage_verdict": "PASS",
+        "declared_key": "C",
+        "declared_key_matches_computation": true,
+        "diagnostic_coverage": {
+          "complete": true,
+          "diagnostic_on_the_correct_option": [],
+          "distractors": [
+            "A",
+            "B",
+            "D"
+          ],
+          "missing_error_model": [],
+          "missing_remediation_reference": []
+        },
+        "equivalent_option_groups": [],
+        "no_equivalent_options": true,
+        "true_option_count": 1,
+        "unique_true_option": true,
+        "verdict": "PASS"
+      }
     },
     {
       "capacity": "C6",
@@ -9813,7 +9841,7 @@
     }
   ],
   "schema_version": 2,
-  "set_digest": "sha256:3c6672cc15ab365d0556298bee2edac25a51ad1225317c68ba3dc706c6d276b4",
+  "set_digest": "sha256:6cb88ce196c7d6993a3a2aca3057e874c667001c1a44d729606187f47d54a2ab",
   "solver_families_used": [
     "ALGEBRAIC_GAIN",
     "BINARY_TREE_TERMINAL_PATHS",
@@ -9826,6 +9854,7 @@
     "LINEAR_EXPECTATION",
     "POLYNOMIAL_LOCAL_EXTREMA",
     "PROBABILITY_DISTRIBUTION_TOTAL_MASS",
+    "PUBLISHED_FUNCTION_PARAMETER_ROLE",
     "SAMPLE_MEAN_DEFINITION",
     "SAMPLE_MEAN_FLUCTUATION_MONOTONICITY",
     "SAMPLE_MEAN_FLUCTUATION_SCALE",

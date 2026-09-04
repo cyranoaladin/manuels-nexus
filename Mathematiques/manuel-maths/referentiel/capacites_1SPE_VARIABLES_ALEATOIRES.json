@@ -34,6 +34,66 @@
       "libelle_bo": "Résoudre des problèmes contextualisés faisant intervenir des variables aléatoires.",
       "libelle_eleve": "Je sais modéliser une situation par une variable aléatoire et interpréter E(X).",
       "demonstration_exigible": false
+    },
+    {
+      "id": "1SPE-VARIABLES-ALEATOIRES-C6",
+      "libelle_bo": "Le travail expérimental de simulation d’échantillons prolonge celui entrepris en seconde. L’objectif est de faire percevoir le principe de l’estimation de l’espérance d’une variable aléatoire, ou de la moyenne d’une variable statistique dans une population, par une moyenne observée sur un échantillon. Simuler une variable aléatoire avec Python ou un tableur. Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire.",
+      "libelle_eleve": "Je sais simuler une variable aleatoire et des echantillons, et lire, comprendre et ecrire une fonction Python renvoyant la moyenne d'un echantillon de taille n.",
+      "demonstration_exigible": false,
+      "atomes_officiels": [
+        "1SPE-OFFICIAL-175",
+        "1SPE-OFFICIAL-176",
+        "1SPE-OFFICIAL-177"
+      ],
+      "rubrique_officielle": "Experimentations",
+      "source_officielle_nor": [
+        "MENE2602917A"
+      ],
+      "attendus_officiels": [
+        {
+          "atom_id": "1SPE-OFFICIAL-175",
+          "ancre": "lines:657-659",
+          "texte": "Le travail expérimental de simulation d’échantillons prolonge celui entrepris en seconde. L’objectif est de faire percevoir le principe de l’estimation de l’espérance d’une variable aléatoire, ou de la moyenne d’une variable statistique dans une population, par une moyenne observée sur un échantillon."
+        },
+        {
+          "atom_id": "1SPE-OFFICIAL-176",
+          "ancre": "lines:660",
+          "texte": "Simuler une variable aléatoire avec Python ou un tableur."
+        },
+        {
+          "atom_id": "1SPE-OFFICIAL-177",
+          "ancre": "lines:661",
+          "texte": "Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire."
+        }
+      ],
+      "derive_par": "scripts/build_1spe_referential_capacity_closure.py"
+    },
+    {
+      "id": "1SPE-VARIABLES-ALEATOIRES-C7",
+      "libelle_bo": "Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n",
+      "libelle_eleve": "Je sais etudier experimentalement la fluctuation des moyennes d'echantillons autour de l'esperance, simuler N echantillons et interpreter l'ecart entre moyenne empirique et esperance, notamment au regard de 2 sigma / racine(n).",
+      "demonstration_exigible": false,
+      "atomes_officiels": [
+        "1SPE-OFFICIAL-178",
+        "1SPE-OFFICIAL-179"
+      ],
+      "rubrique_officielle": "Experimentations",
+      "source_officielle_nor": [
+        "MENE2602917A"
+      ],
+      "attendus_officiels": [
+        {
+          "atom_id": "1SPE-OFFICIAL-178",
+          "ancre": "lines:662-663",
+          "texte": "Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire."
+        },
+        {
+          "atom_id": "1SPE-OFFICIAL-179",
+          "ancre": "lines:664-667",
+          "texte": "Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n"
+        }
+      ],
+      "derive_par": "scripts/build_1spe_referential_capacity_closure.py"
     }
   ],
   "optional_extensions": [

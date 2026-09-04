@@ -1,4 +1,7 @@
 {
+  "ambiguous_scope": [],
+  "an_expected_must_be_typesettable": "Un attendu est du LaTeX que le manuel professeur composera. Une formule coupée en deux -- `\\[` sans `\\]`, un `\\end{align*}` orphelin -- n'est pas un attendu : c'est un accident d'extraction. Le découpage s'arrête désormais aux frontières où le fragment tient debout.",
+  "an_expected_must_belong_to_its_question": "Un corrigé écrit à l'échelle de l'exercice répond à toutes ses questions à la fois : en tirer un attendu donnait le même texte à des questions dont les gestes diffèrent. Ces questions-là attendent désormais un jugement, elles ne reçoivent plus une copie.",
   "approves_nothing": true,
   "artifact_type": "1spe_bareme_commentary_proposal",
   "assessments": [
@@ -34,7 +37,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "donner — $f(2) = 3 \\times 4 - 2 \\times 2 + 1 = 12 - 4 + 1 = 9.$ Équation de la tangente : \\[ T : y = f'(2)(x - 2) + f(2) = 10(x-2) + 9 = 10x - 20 + 9 = 10x - 11",
+              "expected": "donner — $f(2) = 3 \\times 4 - 2 \\times 2 + 1 = 12 - 4 + 1 = 9.$ Équation de la tangente : \\[ T : y = f'(2)(x - 2) + f(2) = 10(x-2) + 9 = 10x - 20 + 9 = 10x - 11. \\]",
               "gesture": "donner",
               "partial_credit": "",
               "points": "1,5 pt",
@@ -81,13 +84,12 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "",
+              "expected": "construire — $g(-\\sqrt{2}) = -(\\sqrt{2})^3 + 6\\sqrt{2} = -2\\sqrt{2} + 6\\sqrt{2} = 4\\sqrt{2}.$ $g(\\sqrt{2}) = (\\sqrt{2})^3 - 6\\sqrt{2} = 2\\sqrt{2} - 6\\sqrt{2} = -4\\sqrt{2}.$",
               "gesture": "construire",
               "partial_credit": "",
               "points": "2 pts",
               "question": "Q3",
-              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
-              "why": "le corrigé n'établit aucun résultat repérable"
+              "verdict": "PROPOSED"
             },
             {
               "answer_scope": "question",
@@ -109,7 +111,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "calculer — \\[ h'(x) = \\frac{u'v - uv'}{v^2} = \\frac{2x(x-1) - (x^2+2)}{(x-1)^2} = \\frac{2x^2 - 2x - x^2 - 2}{(x-1)^2} = \\frac{x^2 - 2x - 2}{(x-1)^2}",
+              "expected": "calculer — \\[ h'(x) = \\frac{u'v - uv'}{v^2} = \\frac{2x(x-1) - (x^2+2)}{(x-1)^2} = \\frac{2x^2 - 2x - x^2 - 2}{(x-1)^2} = \\frac{x^2 - 2x - 2}{(x-1)^2}. \\]",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "2 pts",
@@ -130,7 +132,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "construire — Le signe de $h'$ est celui du numérateur $x^2-2x-2$ : $h'(x) < 0$ pour $1 < x < 1+\\sqrt{3}$ et $h'(x) > 0$ pour $x > 1+\\sqrt{3}$",
+              "expected": "construire — $h(1+\\sqrt{3}) = \\dfrac{(1+\\sqrt{3})^2 + 2}{(1+\\sqrt{3})-1} = \\dfrac{1 + 2\\sqrt{3} + 3 + 2}{\\sqrt{3}} = \\dfrac{6 + 2\\sqrt{3}}{\\sqrt{3}} = \\dfrac{6}{\\sqrt{3}} + 2 = 2\\sqrt{3} + 2.$",
               "gesture": "construire",
               "partial_credit": "",
               "points": "1,5 pt",
@@ -213,7 +215,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "donner — \\] Vérification : $T(1) = 7 - 6 = 1 = f(1)$",
+              "expected": "donner — $f(1) = 2 + 3 - 4 = 1.$ Équation de la tangente : \\[ T : y = f'(1)(x - 1) + f(1) = 7(x-1) + 1 = 7x - 7 + 1 = 7x - 6. \\] Vérification : $T(1) = 7 - 6 = 1 = f(1)$",
               "gesture": "donner",
               "partial_credit": "",
               "points": "1,5 pt",
@@ -289,7 +291,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "simplifier — $x^2 - 4 = (x-2)(x+2)$, donc pour $x \\neq -2$ : \\[ h(x) = \\frac{(x-2)(x+2)}{x+2} = x - 2",
+              "expected": "simplifier — $x^2 - 4 = (x-2)(x+2)$, donc pour $x \\neq -2$ : \\[ h(x) = \\frac{(x-2)(x+2)}{x+2} = x - 2. \\]",
               "gesture": "simplifier",
               "partial_credit": "",
               "points": "1 pt",
@@ -336,13 +338,12 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "",
+              "expected": "calculer — Tableau de variations de $R$ sur $[0\\,;\\,15]$ :",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "2 pts",
               "question": "Q2",
-              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
-              "why": "le corrigé n'établit aucun résultat repérable"
+              "verdict": "PROPOSED"
             },
             {
               "answer_scope": "question",
@@ -373,7 +374,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "calculer — \\[ \\tau = \\frac{f(4)-f(1)}{4-1} = \\frac{5-2}{3} = 1",
+              "expected": "calculer — \\[ \\tau = \\frac{f(4)-f(1)}{4-1} = \\frac{5-2}{3} = 1. \\]",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1,5 pt",
@@ -383,7 +384,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "calculer — \\end{align*} \\[ \\frac{f(3+h)-f(3)}{h} = \\frac{h^2+2h+2-2}{h} = \\frac{h^2+2h}{h} = h+2",
+              "expected": "calculer — $f(3) = 9 - 12 + 5 = 2$",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "2 pts",
@@ -430,7 +431,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "donner — La tangente $T_1$ en $x=1$ : \\[ T_1 : y = g'(1)(x-1) + g(1) = 3(x-1) + 1 = 3x - 2",
+              "expected": "donner — La tangente $T_1$ en $x=1$ : \\[ T_1 : y = g'(1)(x-1) + g(1) = 3(x-1) + 1 = 3x - 2. \\]",
               "gesture": "donner",
               "partial_credit": "",
               "points": "2 pts",
@@ -514,7 +515,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "calculer — \\[ \\tau = \\frac{h(3)-h(2)}{3-2} = \\frac{\\frac{1}{3}-\\frac{1}{2}}{1} = \\frac{-\\frac{1}{6}}{1} = -\\frac{1}{6} \\approx -0{,}167",
+              "expected": "calculer — \\[ \\tau = \\frac{h(3)-h(2)}{3-2} = \\frac{\\frac{1}{3}-\\frac{1}{2}}{1} = \\frac{-\\frac{1}{6}}{1} = -\\frac{1}{6} \\approx -0{,}167. \\]",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1,5 pt",
@@ -524,7 +525,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "approcher — \\[ h(2{,}05) \\approx h(2) + h'(2) \\times 0{,}05 = \\frac{1}{2} + \\left(-\\frac{1}{4}\\right) \\times 0{,}05 = 0{,}5 - 0{,}0125 = 0{,}4875",
+              "expected": "approcher — \\[ h(2{,}05) \\approx h(2) + h'(2) \\times 0{,}05 = \\frac{1}{2} + \\left(-\\frac{1}{4}\\right) \\times 0{,}05 = 0{,}5 - 0{,}0125 = 0{,}4875. \\]",
               "gesture": "approcher",
               "partial_credit": "",
               "points": "1,5 pt",
@@ -560,7 +561,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "calculer — \\[ \\tau = \\frac{f(5)-f(2)}{5-2} = \\frac{5-2}{3} = 1",
+              "expected": "calculer — \\[ \\tau = \\frac{f(5)-f(2)}{5-2} = \\frac{5-2}{3} = 1. \\]",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1,5 pt",
@@ -570,7 +571,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "calculer — \\end{align*} \\[ \\frac{f(5+h)-f(5)}{h} = \\frac{h^2+4h}{h} = h+4",
+              "expected": "calculer — \\begin{align*} f(5+h) &= (5+h)^2 - 6(5+h) + 10 \\\\ &= 25 + 10h + h^2 - 30 - 6h + 10 = h^2 + 4h + 5. \\end{align*} \\[ \\frac{f(5+h)-f(5)}{h} = \\frac{h^2+4h}{h} = h+4. \\]",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "2 pts",
@@ -617,7 +618,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "donner — La tangente $T_2$ en $x=2$ : \\[ T_2 : y = 12(x-2) + 8 = 12x - 16",
+              "expected": "donner — La tangente $T_2$ en $x=2$ : \\[ T_2 : y = 12(x-2) + 8 = 12x - 16. \\]",
               "gesture": "donner",
               "partial_credit": "",
               "points": "2 pts",
@@ -701,7 +702,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "calculer — \\[ \\tau = \\frac{h(5)-h(4)}{5-4} = \\frac{\\frac{1}{5}-\\frac{1}{4}}{1} = \\frac{-\\frac{1}{20}}{1} = -\\frac{1}{20} = -0{,}05",
+              "expected": "calculer — \\[ \\tau = \\frac{h(5)-h(4)}{5-4} = \\frac{\\frac{1}{5}-\\frac{1}{4}}{1} = \\frac{-\\frac{1}{20}}{1} = -\\frac{1}{20} = -0{,}05. \\]",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1,5 pt",
@@ -711,7 +712,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "approcher — \\[ h(5{,}02) \\approx h(5) + h'(5) \\times 0{,}02 = \\frac{1}{5} + \\left(-\\frac{1}{25}\\right) \\times 0{,}02 = 0{,}2 - 0{,}0008 = 0{,}1992",
+              "expected": "approcher — \\[ h(5{,}02) \\approx h(5) + h'(5) \\times 0{,}02 = \\frac{1}{5} + \\left(-\\frac{1}{25}\\right) \\times 0{,}02 = 0{,}2 - 0{,}0008 = 0{,}1992. \\]",
               "gesture": "approcher",
               "partial_credit": "",
               "points": "1,5 pt",
@@ -747,22 +748,24 @@
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "rappeler — Les simplifications donnent $\\mathrm{e}^{x}$ et $\\mathrm{e}^{2x}$",
+              "expected": "",
               "gesture": "rappeler",
               "partial_credit": "",
               "points": "2 pts",
               "question": "Q1",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             },
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "simplifier — Les simplifications donnent $\\mathrm{e}^{x}$ et $\\mathrm{e}^{2x}$",
+              "expected": "",
               "gesture": "simplifier",
               "partial_credit": "",
               "points": "3 pts",
               "question": "Q2",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             }
           ]
         },
@@ -774,22 +777,24 @@
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "justifier — $f(0)=1$ et $f(5)=\\mathrm{e}^{-2}\\approx0{,}14$",
+              "expected": "",
               "gesture": "justifier",
               "partial_credit": "",
               "points": "3 pts",
               "question": "Q1",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             },
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "calculer — $f(0)=1$ et $f(5)=\\mathrm{e}^{-2}\\approx0{,}14$",
+              "expected": "",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "2 pts",
               "question": "Q2",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             }
           ]
         },
@@ -801,22 +806,24 @@
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "exprimer — .} $u_n=120(\\mathrm{e}^{0{,}1})^n=120\\mathrm{e}^{0{,}1n}$ et $u_5=120\\mathrm{e}^{0{,}5}\\approx197{,}85$",
+              "expected": "",
               "gesture": "exprimer",
               "partial_credit": "",
               "points": "2 pts",
               "question": "Q1",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             },
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "calculer — .} $u_n=120(\\mathrm{e}^{0{,}1})^n=120\\mathrm{e}^{0{,}1n}$ et $u_5=120\\mathrm{e}^{0{,}5}\\approx197{,}85$",
+              "expected": "",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "3 pts",
               "question": "Q2",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             }
           ]
         },
@@ -828,32 +835,35 @@
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "calculer — Le coefficient de $t$ est positif : le modèle est croissant",
+              "expected": "",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "2 pts",
               "question": "Q1",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             },
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "interpréter — Le coefficient de $t$ est positif : le modèle est croissant",
+              "expected": "",
               "gesture": "interpréter",
               "partial_credit": "",
               "points": "2 pts",
               "question": "Q2",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             },
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "justifier — Le coefficient de $t$ est positif : le modèle est croissant",
+              "expected": "",
               "gesture": "justifier",
               "partial_credit": "",
               "points": "1 pt",
               "question": "Q3",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             }
           ]
         }
@@ -885,12 +895,13 @@
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "simplifier — Les simplifications donnent $\\mathrm{e}^{2x}$ et $\\mathrm{e}^{-3x}$",
+              "expected": "",
               "gesture": "simplifier",
               "partial_credit": "",
               "points": "3 pts",
               "question": "Q2",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             }
           ]
         },
@@ -902,22 +913,24 @@
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "justifier — $g(0)=1$ et $g(4)=\\mathrm{e}^{1{,}2}\\approx3{,}32$",
+              "expected": "",
               "gesture": "justifier",
               "partial_credit": "",
               "points": "3 pts",
               "question": "Q1",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             },
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "calculer — $g(0)=1$ et $g(4)=\\mathrm{e}^{1{,}2}\\approx3{,}32$",
+              "expected": "",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "2 pts",
               "question": "Q2",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             }
           ]
         },
@@ -929,22 +942,24 @@
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "exprimer — .} $v_n=300(\\mathrm{e}^{-0{,}2})^n=300\\mathrm{e}^{-0{,}2n}$ et $v_3=300\\mathrm{e}^{-0{,}6}\\approx164{,}64$",
+              "expected": "",
               "gesture": "exprimer",
               "partial_credit": "",
               "points": "2 pts",
               "question": "Q1",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             },
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "calculer — .} $v_n=300(\\mathrm{e}^{-0{,}2})^n=300\\mathrm{e}^{-0{,}2n}$ et $v_3=300\\mathrm{e}^{-0{,}6}\\approx164{,}64$",
+              "expected": "",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "3 pts",
               "question": "Q2",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             }
           ]
         },
@@ -956,32 +971,35 @@
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "calculer — Le coefficient de $t$ est négatif : le modèle est décroissant",
+              "expected": "",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "2 pts",
               "question": "Q1",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             },
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "interpréter — Le coefficient de $t$ est négatif : le modèle est décroissant",
+              "expected": "",
               "gesture": "interpréter",
               "partial_credit": "",
               "points": "2 pts",
               "question": "Q2",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             },
             {
               "answer_scope": "exercise",
               "competence": null,
-              "expected": "justifier — Le coefficient de $t$ est négatif : le modèle est décroissant",
+              "expected": "",
               "gesture": "justifier",
               "partial_credit": "",
               "points": "1 pt",
               "question": "Q3",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             }
           ]
         }
@@ -1917,7 +1935,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "déterminer — $\\overrightarrow{AH} \\cdot \\overrightarrow{BC} = 0$ : $(6-4t)(-4) + (4t)(4) = 0$, soit $-24 + 32t = 0$, d'ou $t = \\dfrac{3}{4}$",
+              "expected": "déterminer — $H = (3; 3)$",
               "gesture": "déterminer",
               "partial_credit": "1,5 pt si la première étape est correcte mais la suite erronée",
               "points": "2 pts",
@@ -2085,7 +2103,7 @@
             {
               "answer_scope": "question",
               "competence": null,
-              "expected": "déterminer — $\\overrightarrow{AH} \\cdot \\overrightarrow{BC} = 0$ : $(8-5t)(-5) + (6t)(6) = 0$, soit $-40 + 25t + 36t = 0$, $61t = 40$, $t = \\dfrac{40}{61}$",
+              "expected": "déterminer — $H = \\left(\\dfrac{288}{61}; \\dfrac{240}{61}\\right)$",
               "gesture": "déterminer",
               "partial_credit": "",
               "points": "2 pts",
@@ -2168,17 +2186,18 @@
             {
               "answer_scope": "question",
               "competence": "calculer, communiquer",
-              "expected": "calculer — \\] \\[ \\boxed{f(x) = 2(x-2)^2 - 2.} \\] \\medskip",
+              "expected": "",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "2 pts",
               "question": "Q2",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé n'établit aucun résultat repérable"
             },
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "en déduire — \\] Deux racines réelles distinctes : \\[ x_1 = \\frac{8 - 4}{4} = 1, \\qquad x_2 = \\frac{8 + 4}{4} = 3",
+              "expected": "en déduire — \\[ \\Delta = 64 - 48 = 16 > 0. \\quad \\sqrt{\\Delta} = 4. \\] Deux racines réelles distinctes : \\[ x_1 = \\frac{8 - 4}{4} = 1, \\qquad x_2 = \\frac{8 + 4}{4} = 3. \\] \\medskip",
               "gesture": "en déduire",
               "partial_credit": "",
               "points": "2 pts",
@@ -2205,13 +2224,13 @@
             {
               "answer_scope": "question",
               "competence": "calculer, communiquer",
-              "expected": "calculer — \\quad \\checkmark \\] Donc $g(x) = -(x-2)^2 + 1$ est bien la forme canonique de $g$",
+              "expected": "",
               "gesture": "calculer",
-              "partial_credit": "1,5 pt si la première étape est correcte mais la suite erronée",
+              "partial_credit": "",
               "points": "2 pts",
               "question": "Q1",
-              "separable_steps": 2,
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé n'établit aucun résultat repérable"
             },
             {
               "answer_scope": "question",
@@ -2291,7 +2310,7 @@
             {
               "answer_scope": "question",
               "competence": "modeliser",
-              "expected": "exprimer — \\item Largeur : $20 - 2x$~cm",
+              "expected": "exprimer — Après decoupe et pliage : \\begin{itemize} \\item Hauteur : $x$~cm. \\item Longueur : $30 - 2x$~cm. \\item Largeur : $20 - 2x$~cm. \\end{itemize} \\medskip",
               "gesture": "exprimer",
               "partial_credit": "",
               "points": "1 pt",
@@ -2301,7 +2320,7 @@
             {
               "answer_scope": "question",
               "competence": "modeliser",
-              "expected": "montrer — \\] Domaine : $x > 0$, $30 - 2x > 0$ et $20 - 2x > 0$, soit $x \\in \\,]0\\,;\\,10[$",
+              "expected": "montrer — \\[ V(x) = x \\times (30-2x) \\times (20-2x). \\] Domaine : $x > 0$, $30 - 2x > 0$ et $20 - 2x > 0$, soit $x \\in \\,]0\\,;\\,10[$",
               "gesture": "montrer",
               "partial_credit": "",
               "points": "1 pt",
@@ -2311,12 +2330,13 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "calculer — \\] \\[ V(5) = 5 \\times (30-10) \\times (20-10) = 5 \\times 20 \\times 10 = 1\\,000 \\text{ cm}^3",
+              "expected": "",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1 pt",
               "question": "Q3",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé n'établit aucun résultat repérable"
             },
             {
               "answer_scope": "question",
@@ -2357,7 +2377,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer, communiquer",
-              "expected": "calculer — \\] \\[ \\boxed{f(x) = 3(x-2)^2 - 3.} \\] \\medskip",
+              "expected": "calculer — \\[ \\alpha = \\frac{-(-12)}{2 \\times 3} = \\frac{12}{6} = 2, \\qquad \\beta = f(2) = 3 \\times 4 - 12 \\times 2 + 9 = 12 - 24 + 9 = -3. \\] \\[ \\boxed{f(x) = 3(x-2)^2 - 3.} \\] \\medskip",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "2 pts",
@@ -2367,7 +2387,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "en déduire — \\] \\[ x_1 = \\frac{12 - 6}{6} = 1, \\qquad x_2 = \\frac{12 + 6}{6} = 3",
+              "expected": "en déduire — \\[ \\Delta = 144 - 108 = 36 > 0. \\quad \\sqrt{\\Delta} = 6. \\] \\[ x_1 = \\frac{12 - 6}{6} = 1, \\qquad x_2 = \\frac{12 + 6}{6} = 3. \\] \\medskip",
               "gesture": "en déduire",
               "partial_credit": "",
               "points": "2 pts",
@@ -2394,13 +2414,13 @@
             {
               "answer_scope": "question",
               "competence": "calculer, communiquer",
-              "expected": "calculer — \\quad \\checkmark \\] Donc $g(x) = -2(x-2)^2 + 2$ est bien la forme canonique de $g$",
+              "expected": "",
               "gesture": "calculer",
-              "partial_credit": "1,5 pt si la première étape est correcte mais la suite erronée",
+              "partial_credit": "",
               "points": "2 pts",
               "question": "Q1",
-              "separable_steps": 2,
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé n'établit aucun résultat repérable"
             },
             {
               "answer_scope": "question",
@@ -2500,12 +2520,13 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "calculer — \\] \\[ V(6) = 6 \\times (30-12) \\times (20-12) = 6 \\times 18 \\times 8 = 864 \\text{ cm}^3",
+              "expected": "",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1 pt",
               "question": "Q3",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé n'établit aucun résultat repérable"
             },
             {
               "answer_scope": "question",
@@ -2536,7 +2557,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "calculer — On applique la relation de récurrence $u_{n+1} = u_n + 4$ : \\[ u_1 = u_0 + 4 = 3 + 4 = 7, \\qquad u_2 = u_1 + 4 = 7 + 4 = 11, \\qquad u_3 = u_2 + 4 = 11 + 4 = 15",
+              "expected": "calculer — On applique la relation de récurrence $u_{n+1} = u_n + 4$ : \\[ u_1 = u_0 + 4 = 3 + 4 = 7, \\qquad u_2 = u_1 + 4 = 7 + 4 = 11, \\qquad u_3 = u_2 + 4 = 11 + 4 = 15. \\] \\medskip",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1 pt",
@@ -2556,7 +2577,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "exprimer — Par la formule du terme général d'une suite arithmétique : \\[ \\boxed{u_n = 3 + 4n} \\quad \\text{pour tout } n \\in \\mathbb{N}",
+              "expected": "exprimer — Par la formule du terme général d'une suite arithmétique : \\[ \\boxed{u_n = 3 + 4n} \\quad \\text{pour tout } n \\in \\mathbb{N}. \\] \\medskip",
               "gesture": "exprimer",
               "partial_credit": "",
               "points": "1 pt",
@@ -2593,7 +2614,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "calculer — \\[ u_0 = 2 \\times 3^0 = 2 \\times 1 = 2, \\qquad u_1 = 2 \\times 3^1 = 6, \\qquad u_2 = 2 \\times 3^2 = 2 \\times 9 = 18",
+              "expected": "calculer — \\[ u_0 = 2 \\times 3^0 = 2 \\times 1 = 2, \\qquad u_1 = 2 \\times 3^1 = 6, \\qquad u_2 = 2 \\times 3^2 = 2 \\times 9 = 18. \\] \\medskip",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1 pt",
@@ -2614,7 +2635,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "calculer — \\] \\[ \\boxed{S = 242.} \\] \\textit{Vérification :} $u_0 + u_1 + u_2 + u_3 + u_4 = 2 + 6 + 18 + 54 + 162 = 242$",
+              "expected": "calculer — On somme les termes de rang $k = 0$ à $k = 4$, soit $5$ termes",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "2 pts",
@@ -2631,7 +2652,7 @@
             {
               "answer_scope": "question",
               "competence": "modéliser",
-              "expected": "justifier — Le capital au bout de $(n+1)$ années est donc : \\[ u_{n+1} = u_n + 0{,}05\\,u_n = (1 + 0{,}05)\\,u_n = 1{,}05\\,u_n",
+              "expected": "justifier — Le capital au bout de $(n+1)$ années est donc : \\[ u_{n+1} = u_n + 0{,}05\\,u_n = (1 + 0{,}05)\\,u_n = 1{,}05\\,u_n. \\] \\medskip",
               "gesture": "justifier",
               "partial_credit": "",
               "points": "1 pt",
@@ -2641,7 +2662,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "en déduire — Par la formule du terme général d'une suite géométrique : \\[ \\boxed{u_n = 800 \\times 1{,}05^n} \\quad \\text{pour tout } n \\in \\mathbb{N}",
+              "expected": "en déduire — Par la formule du terme général d'une suite géométrique : \\[ \\boxed{u_n = 800 \\times 1{,}05^n} \\quad \\text{pour tout } n \\in \\mathbb{N}. \\] \\medskip",
               "gesture": "en déduire",
               "partial_credit": "",
               "points": "1 pt",
@@ -2651,7 +2672,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "calculer — \\[ u_1 = 800 \\times 1{,}05 = 840 \\text{ €}, \\qquad u_2 = 800 \\times 1{,}05^2 = 800 \\times 1{,}1025 = 882 \\text{ €}",
+              "expected": "calculer — \\[ u_1 = 800 \\times 1{,}05 = 840 \\text{ €}, \\qquad u_2 = 800 \\times 1{,}05^2 = 800 \\times 1{,}1025 = 882 \\text{ €}. \\] \\medskip",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1 pt",
@@ -2659,19 +2680,20 @@
               "verdict": "PROPOSED"
             },
             {
-              "answer_scope": "question",
+              "answer_scope": "exercise",
               "competence": "communiquer",
-              "expected": "interpréter — \\item \\texttt{n = n + 1} : on incrément",
+              "expected": "",
               "gesture": "interpréter",
               "partial_credit": "",
               "points": "1 pt",
               "question": "Q4a",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             },
             {
               "answer_scope": "question",
               "competence": "chercher",
-              "expected": "vérifier — \\item \\texttt{n = n + 1} : on incrément",
+              "expected": "vérifier — \\textit{Vérification algébrique :} On résout $800 \\times 1{,}05^n \\geq 1\\,200$, soit $1{,}05^n \\geq \\dfrac{1\\,200}{800} = 1{,}5$",
               "gesture": "vérifier",
               "partial_credit": "",
               "points": "1 pt",
@@ -2698,7 +2720,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer, raisonner",
-              "expected": "établir — \\] \\[ \\boxed{S_n = (n+1)(n+5)} \\quad \\text{pour tout } n \\in \\mathbb{N}",
+              "expected": "établir — Le premier terme est $v_0 = 5$ et le dernier terme est $v_n = 2n + 5$",
               "gesture": "établir",
               "partial_credit": "",
               "points": "2 pts",
@@ -2708,7 +2730,7 @@
             {
               "answer_scope": "question",
               "competence": "chercher",
-              "expected": "déterminer — \\] \\textbf{Conclusion :} Le plus petit entier naturel $n$ tel que $S_n > 200$ est $\\boxed{n = 12}$",
+              "expected": "déterminer — La fonction $(n+1)(n+5) = n^2 + 6n + 5$ est croissante pour $n \\geq 0$",
               "gesture": "déterminer",
               "partial_credit": "",
               "points": "1 pt",
@@ -2734,7 +2756,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "calculer — On applique la relation de récurrence $u_{n+1} = u_n + 3$ : \\[ u_1 = u_0 + 3 = 5 + 3 = 8, \\qquad u_2 = u_1 + 3 = 8 + 3 = 11, \\qquad u_3 = u_2 + 3 = 11 + 3 = 14",
+              "expected": "calculer — On applique la relation de récurrence $u_{n+1} = u_n + 3$ : \\[ u_1 = u_0 + 3 = 5 + 3 = 8, \\qquad u_2 = u_1 + 3 = 8 + 3 = 11, \\qquad u_3 = u_2 + 3 = 11 + 3 = 14. \\] \\medskip",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1 pt",
@@ -2754,7 +2776,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "exprimer — Par la formule du terme général d'une suite arithmétique : \\[ \\boxed{u_n = 5 + 3n} \\quad \\text{pour tout } n \\in \\mathbb{N}",
+              "expected": "exprimer — Par la formule du terme général d'une suite arithmétique : \\[ \\boxed{u_n = 5 + 3n} \\quad \\text{pour tout } n \\in \\mathbb{N}. \\] \\medskip",
               "gesture": "exprimer",
               "partial_credit": "",
               "points": "1 pt",
@@ -2791,7 +2813,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "calculer — \\[ u_0 = 4 \\times 2^0 = 4 \\times 1 = 4, \\qquad u_1 = 4 \\times 2^1 = 8, \\qquad u_2 = 4 \\times 2^2 = 4 \\times 4 = 16",
+              "expected": "calculer — \\[ u_0 = 4 \\times 2^0 = 4 \\times 1 = 4, \\qquad u_1 = 4 \\times 2^1 = 8, \\qquad u_2 = 4 \\times 2^2 = 4 \\times 4 = 16. \\] \\medskip",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1 pt",
@@ -2812,7 +2834,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "calculer — \\] \\[ \\boxed{S = 124.} \\] \\textit{Vérification :} $u_0 + u_1 + u_2 + u_3 + u_4 = 4 + 8 + 16 + 32 + 64 = 124$",
+              "expected": "calculer — On somme les termes de rang $k = 0$ à $k = 4$, soit $5$ termes",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "2 pts",
@@ -2829,7 +2851,7 @@
             {
               "answer_scope": "question",
               "competence": "modéliser",
-              "expected": "justifier — Le capital au bout de $(n+1)$ années est donc : \\[ u_{n+1} = u_n + 0{,}04\\,u_n = (1 + 0{,}04)\\,u_n = 1{,}04\\,u_n",
+              "expected": "justifier — Le capital au bout de $(n+1)$ années est donc : \\[ u_{n+1} = u_n + 0{,}04\\,u_n = (1 + 0{,}04)\\,u_n = 1{,}04\\,u_n. \\] \\medskip",
               "gesture": "justifier",
               "partial_credit": "",
               "points": "1 pt",
@@ -2839,7 +2861,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "en déduire — Par la formule du terme général d'une suite géométrique : \\[ \\boxed{u_n = 1\\,000 \\times 1{,}04^n} \\quad \\text{pour tout } n \\in \\mathbb{N}",
+              "expected": "en déduire — Par la formule du terme général d'une suite géométrique : \\[ \\boxed{u_n = 1\\,000 \\times 1{,}04^n} \\quad \\text{pour tout } n \\in \\mathbb{N}. \\] \\medskip",
               "gesture": "en déduire",
               "partial_credit": "",
               "points": "1 pt",
@@ -2849,7 +2871,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "calculer — \\[ u_1 = 1\\,000 \\times 1{,}04 = 1\\,040 \\text{ €}, \\qquad u_2 = 1\\,000 \\times 1{,}04^2 = 1\\,000 \\times 1{,}0816 \\approx 1\\,082 \\text{ €}",
+              "expected": "calculer — \\[ u_1 = 1\\,000 \\times 1{,}04 = 1\\,040 \\text{ €}, \\qquad u_2 = 1\\,000 \\times 1{,}04^2 = 1\\,000 \\times 1{,}0816 \\approx 1\\,082 \\text{ €}. \\] \\medskip",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1 pt",
@@ -2857,19 +2879,20 @@
               "verdict": "PROPOSED"
             },
             {
-              "answer_scope": "question",
+              "answer_scope": "exercise",
               "competence": "communiquer",
-              "expected": "interpréter — \\item \\texttt{n = n + 1} : on incrémen",
+              "expected": "",
               "gesture": "interpréter",
               "partial_credit": "",
               "points": "1 pt",
               "question": "Q4a",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit"
             },
             {
               "answer_scope": "question",
               "competence": "chercher",
-              "expected": "vérifier — \\item \\texttt{n = n + 1} : on incrémen",
+              "expected": "vérifier — \\textit{Vérification algébrique :} On résout $1\\,000 \\times 1{,}04^n \\geq 1\\,500$, soit $1{,}04^n \\geq \\dfrac{1\\,500}{1\\,000} = 1{,}5$",
               "gesture": "vérifier",
               "partial_credit": "",
               "points": "1 pt",
@@ -2886,7 +2909,7 @@
             {
               "answer_scope": "question",
               "competence": "modéliser, raisonner",
-              "expected": "justifier — Son terme général est \\[ \\boxed{p_n=18+4n}",
+              "expected": "justifier — Son terme général est \\[ \\boxed{p_n=18+4n}. \\] \\medskip",
               "gesture": "justifier",
               "partial_credit": "",
               "points": "1 pt",
@@ -2896,7 +2919,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer, raisonner",
-              "expected": "établir — \\] \\[ \\boxed{T_n=(n+1)(18+2n)}",
+              "expected": "établir — Comme $p_0=18$ et $p_n=18+4n$, on obtient \\[ T_n=\\frac{(n+1)(p_0+p_n)}{2} =\\frac{(n+1)(18+18+4n)}{2}. \\] \\[ \\boxed{T_n=(n+1)(18+2n)}. \\] \\medskip",
               "gesture": "établir",
               "partial_credit": "1,5 pt si la première étape est correcte mais la suite erronée",
               "points": "2 pts",
@@ -2907,7 +2930,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "calculer — \\] Le théâtre compte donc $\\boxed{480\\text{ places}}$ dans ses douze premières rangées",
+              "expected": "calculer — Ainsi, \\[ T_{11}=(11+1)(18+2\\times11)=12\\times40=480. \\] Le théâtre compte donc $\\boxed{480\\text{ places}}$ dans ses douze premières rangées",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1 pt",
@@ -3519,7 +3542,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "calculer — $\\sqrt{64} = 8$, donc \\[ \\frac{2\\sigma}{\\sqrt{n}} = \\frac{2 \\times 2{,}4}{8} = \\frac{4{,}8}{8} = 0{,}6",
+              "expected": "calculer — $\\sqrt{64} = 8$, donc \\[ \\frac{2\\sigma}{\\sqrt{n}} = \\frac{2 \\times 2{,}4}{8} = \\frac{4{,}8}{8} = 0{,}6. \\] \\medskip",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1 pt",
@@ -3539,12 +3562,13 @@
             {
               "answer_scope": "question",
               "competence": "calculer, communiquer",
-              "expected": "calculer — \\] Elle est cohérente avec l'ordre de grandeur attendu, environ $95\\,\\%$ : l'écart de $0{,}6$ point relève de la fluctuation de la simulation",
+              "expected": "",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1,5 pt",
               "question": "Q4",
-              "verdict": "PROPOSED"
+              "verdict": "PEDAGOGICAL_JUDGEMENT_REQUIRED",
+              "why": "le corrigé n'établit aucun résultat repérable"
             }
           ]
         }
@@ -3642,7 +3666,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "calculer — L'écart type a déjà été calculé à l'exercice 1 ",
+              "expected": "calculer — L'écart type a déjà été calculé à l'exercice 1",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1 pt",
@@ -3718,7 +3742,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer",
-              "expected": "calculer — $\\sqrt{81} = 9$, donc \\[ \\frac{2\\sigma}{\\sqrt{n}} = \\frac{2 \\times 1{,}8}{9} = \\frac{3{,}6}{9} = 0{,}4",
+              "expected": "calculer — $\\sqrt{81} = 9$, donc \\[ \\frac{2\\sigma}{\\sqrt{n}} = \\frac{2 \\times 1{,}8}{9} = \\frac{3{,}6}{9} = 0{,}4. \\] \\medskip",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1 pt",
@@ -3738,7 +3762,7 @@
             {
               "answer_scope": "question",
               "competence": "calculer, communiquer",
-              "expected": "calculer — \\] Elle est cohérente avec l'ordre de grandeur attendu, environ $95\\,\\%$",
+              "expected": "calculer — La proportion vaut \\[ \\frac{381}{400} = 0{,}9525 = 95{,}25\\,\\%. \\] Elle est cohérente avec l'ordre de grandeur attendu, environ $95\\,\\%$",
               "gesture": "calculer",
               "partial_credit": "",
               "points": "1,5 pt",
@@ -3758,14 +3782,17 @@
   "schema_version": 1,
   "summary": {
     "ASSESSMENTS": 20,
-    "PARTIAL_CREDIT_PROPOSED": 8,
-    "PEDAGOGICAL_JUDGEMENT_REQUIRED": 54,
-    "PROPOSED": 238,
+    "BAREME_EXPECTED_TEX_UNBALANCED": 0,
+    "BAREME_QUESTION_SCOPE_AMBIGUOUS": 0,
+    "PARTIAL_CREDIT_PROPOSED": 6,
+    "PEDAGOGICAL_JUDGEMENT_REQUIRED": 77,
+    "PROPOSED": 215,
     "QUESTIONS": 292,
     "QUESTIONS_WITHOUT_PROPOSAL_OR_FLAG": 0
   },
   "the_format_is_the_one_the_policy_fixed": "X pt(s) — Attendu : <ce qui permet d'attribuer les points>. Crédit partiel : <seulement si pertinent>.",
   "these_are_proposals_not_content": "Rien n'est écrit dans les corrigés : ces propositions entrent dans la revue de chapitre, et c'est l'expert programme/pédagogie qui tranche.",
+  "unbalanced_expected": [],
   "what_is_derived_and_from_where": {
     "expected": "le geste que le sujet demande (son verbe) et le résultat que le corrigé établit",
     "partial_credit": "seulement si le corrigé sépare lui-même ses étapes et si les points se coupent sur la grille du demi-point",

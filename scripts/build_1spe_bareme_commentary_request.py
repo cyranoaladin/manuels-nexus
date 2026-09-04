@@ -38,6 +38,7 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import build_1spe_assessment_bareme_transcription as transcription  # noqa: E402
+import tex_units  # noqa: E402
 from build_1spe_assessment_bareme_transcription import LETTERS  # noqa: E402
 from manual_source_surface import ROOT  # noqa: E402
 
@@ -62,6 +63,12 @@ REQUESTED_FIELDS = (
 COMMENTARY_MARK = re.compile(
     r"erreurs? p[ée]nalis|points? de r[ée]daction", re.IGNORECASE
 )
+
+
+# Un extrait de corrige tient dans un dossier de revue ; au-dela, l'enseignant
+# rouvre le corrige. La coupure ne tombe jamais dans une unite TeX : c'est
+# `tex_units` qui choisit ou s'arreter.
+EXTRACT_LIMIT = 400
 
 
 class CommentaryError(RuntimeError):
@@ -117,8 +124,13 @@ EXERCISE_HEADING = re.compile(
     r"|\\textbf\{\s*Exercice\s+(\d+)",
     re.IGNORECASE,
 )
+# Un corrige titre ses reponses « Question 4 — ... », « 4. ... », et descend
+# dans les sous-questions : « 4a. Explication de la boucle. ». Ignorer la
+# lettre faisait retomber « 4a » et « 4b » sur la reponse de la question 4 :
+# les deux sous-questions recevaient alors le meme attendu, alors que le
+# corrige repond bel et bien a chacune.
 ANSWER_HEADING = re.compile(
-    r"\\textbf\{\s*(?:Question\s+)?(\d+)\s*[.\u2014-][^}]*\}"
+    r"\\textbf\{\s*(?:Question\s+)?(\d+)\s*([a-z])?\s*[.\u2014-][^}]*\}"
 )
 
 
@@ -143,12 +155,15 @@ def correction_answers(path: Path) -> dict[int, dict[str, str]]:
         # Quatre chapitres repondent par EXERCICE et non par question : un seul
         # paragraphe couvre toutes les questions. Ce texte-la est garde comme
         # contexte, sous la clef vide, plutot que de laisser le dossier muet.
-        found[""] = " ".join(
-            _strip_macro(
-                re.sub(r"\\baremeIndicatif\{[^}]*\}", " ", body),
-                "commentaireMarge",
-            ).split()
-        )[:400]
+        found[""] = tex_units.truncate(
+            " ".join(
+                _strip_macro(
+                    re.sub(r"\\baremeIndicatif\{[^}]*\}", " ", body),
+                    "commentaireMarge",
+                ).split()
+            ),
+            EXTRACT_LIMIT,
+        )
         questions = list(ANSWER_HEADING.finditer(body))
         for position, question in enumerate(questions):
             end = (
@@ -159,7 +174,10 @@ def correction_answers(path: Path) -> dict[int, dict[str, str]]:
             # La note de marge est une aide de lecture destinee au professeur,
             # pas la reponse : elle est retiree de l'extrait.
             chunk = _strip_macro(body[question.end() : end], "commentaireMarge")
-            found[question.group(1)] = " ".join(chunk.split())[:400]
+            label = question.group(1) + (question.group(2) or "")
+            found[label] = tex_units.truncate(
+                " ".join(chunk.split()), EXTRACT_LIMIT
+            )
         # Un exercice repete (section puis gras) ne doit pas ecraser ce qui a
         # deja ete lu pour lui.
         answers.setdefault(number, {}).update(
@@ -220,22 +238,37 @@ def statements_by_label(body: str) -> dict[str, str]:
         # La valeur en points est donnée à part, dans son propre champ : la
         # laisser traîner en queue d'énoncé ne ferait que brouiller la lecture.
         chunk = re.split(r"\\ifnxVersionProfesseur", chunk)[0]
-        statements[label] = " ".join(chunk.split())[:400]
+        statements[label] = tex_units.truncate(
+            " ".join(chunk.split()), EXTRACT_LIMIT
+        )
     return statements
 
 
-def _answer_for(answers: dict[str, str], number: str) -> tuple[str, str]:
-    """La reponse du corrige pour une question, et a quelle echelle elle est ecrite.
+def _answer_for(answers: dict[str, str], label: str) -> tuple[str, str]:
+    """La reponse du corrige pour une question, et a quelle ECHELLE elle est ecrite.
 
-    Quatre chapitres redigent leur corrige par exercice : un seul paragraphe
-    couvre toutes les questions. Le presenter comme la reponse DE la question
-    serait faux ; ne rien presenter obligerait l'enseignant a rouvrir le
-    corrige. L'echelle est donc dite.
+    Trois echelles reellement differentes, qu'il serait faux de confondre :
+
+    * `question` -- le corrige titre cette question-la et lui repond ;
+    * `parent_question` -- il repond a « 4 » sans distinguer « 4a » de
+      « 4b » : le texte concerne les deux, il n'est specifique d'aucune ;
+    * `exercise` -- un seul paragraphe couvre tout l'exercice, comme le font
+      les corriges d'exponentielle.
+
+    Les deux dernieres echelles portaient jusqu'ici le nom de la premiere. Un
+    meme paragraphe devenait alors l'attendu de deux, parfois trois questions
+    aux gestes differents. Dire l'echelle est le seul moyen de ne pas proposer
+    un barème question par question a partir d'un texte qui ne l'est pas.
     """
 
-    precise = answers.get(number, "")
+    precise = answers.get(label, "")
     if precise:
         return precise, "question"
+    parent = label.rstrip(LETTERS)
+    if parent != label:
+        inherited = answers.get(parent, "")
+        if inherited:
+            return inherited, "parent_question"
     whole = answers.get("", "")
     if whole:
         return whole, "exercise"
@@ -280,12 +313,10 @@ def prepare(subject_path: Path, requirement: str) -> dict[str, Any]:
                     "competence": mark["competence"] if mark else None,
                     "statement": statement,
                     "correction_answer": _answer_for(
-                        answers.get(exercise["number"], {}),
-                        label.lstrip("Q").rstrip(LETTERS),
+                        answers.get(exercise["number"], {}), label.lstrip("Q")
                     )[0],
                     "correction_answer_scope": _answer_for(
-                        answers.get(exercise["number"], {}),
-                        label.lstrip("Q").rstrip(LETTERS),
+                        answers.get(exercise["number"], {}), label.lstrip("Q")
                     )[1],
                     # Les trois cases restent VIDES : les remplir serait
                     # inventer le jugement qu'on vient demander.

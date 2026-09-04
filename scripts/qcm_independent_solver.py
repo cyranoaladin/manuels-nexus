@@ -1841,6 +1841,134 @@ def _euclidean_gram_form(inp: SolverInput) -> SolverResult | None:
 
 
 #: Familles generiques, dans l'ordre d'essai. Aucune n'est liee a une question.
+
+def _published_function_source(name: str) -> str | None:
+    """Le code que le manuel IMPRIME pour cette fonction, lu dans ses sources.
+
+    Une question sur le role d'un parametre ne se tranche pas en lisant
+    l'enonce : elle se tranche en lisant -- et en executant -- le programme que
+    l'eleve a sous les yeux.
+    """
+
+    root = Path(__file__).resolve().parents[1] / "Mathematiques" / "manuel-maths"
+    needle = f"def {name}("
+    for path in sorted(root.glob("chapitres/*/**/*.tex")):
+        if "build" in path.parts:
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        if needle not in text:
+            continue
+        for match in re.finditer(
+            r"\\begin\{python\}\s*\n(.*?)\\end\{python\}", text, re.S
+        ):
+            if needle in match.group(1):
+                return match.group(1)
+    for path in sorted(root.glob("chapitres/*/python/*.py")):
+        text = path.read_text(encoding="utf-8", errors="replace")
+        if needle in text:
+            return text
+    return None
+
+
+#: Les roles qu'un parametre peut jouer, et ce qui les distingue dans une
+#: option. Le mot-cle classe l'OPTION ; c'est l'execution qui dit laquelle est
+#: vraie.
+_PARAMETER_ROLES = (
+    ("SAMPLE_SIZE", ("taille de l'echantillon", "taille d'un echantillon")),
+    ("SEED", ("graine",)),
+    ("SAMPLE_COUNT", ("nombre d'echantillons",)),
+    ("SUPPORT_SIZE", ("nombre de valeurs",)),
+)
+
+
+def _published_function_parameter_role(inp: SolverInput) -> SolverResult | None:
+    """Le role d'un parametre d'une fonction publiee, etabli en l'executant.
+
+    L'enonce demande ce que designe `n` dans une fonction que le chapitre
+    imprime. Le programme est la ; il suffit de l'appeler. Si la longueur de ce
+    qu'il rend suit `n` a chaque essai, `n` est la taille de l'echantillon --
+    et aucune opinion n'est intervenue.
+    """
+
+    statement = _plain(inp.statement)
+    if "que designe" not in statement and "que represente" not in statement:
+        return None
+    call = re.search(r"\\code\{([A-Za-z_][A-Za-z0-9_]*)\(([^)]*)\)\}", inp.statement)
+    if call is None:
+        return None
+    parameter = re.search(r"\$([a-zA-Z_][a-zA-Z0-9_]*)\$\s*\?", inp.statement)
+    if parameter is None:
+        return None
+    name, signature, wanted = call.group(1), call.group(2), parameter.group(1)
+    parameters = [part.strip() for part in signature.split(",") if part.strip()]
+    if wanted not in parameters:
+        return None
+
+    source = _published_function_source(name)
+    if source is None:
+        return None
+
+    namespace: dict[str, Any] = {}
+    try:
+        exec(compile(source, f"<{name}>", "exec"), namespace)  # noqa: S102
+    except Exception:  # pragma: no cover - un code publie qui ne s'execute pas
+        return None
+    function = namespace.get(name)
+    if not callable(function):
+        return None
+
+    # Les autres parametres gardent une valeur fixe ; seul celui dont on
+    # cherche le role varie.
+    fixed = {other: 7 for other in parameters if other != wanted}
+    lengths: dict[int, int] = {}
+    supports: dict[int, int] = {}
+    nested = False
+    try:
+        for value in (3, 5, 11):
+            outcome = function(**{wanted: value}, **fixed)
+            lengths[value] = len(outcome)
+            supports[value] = len(set(outcome))
+            nested = nested or any(isinstance(item, (list, tuple)) for item in outcome)
+    except Exception:  # pragma: no cover - la famille ne s'applique pas
+        return None
+
+    if nested or lengths != {value: value for value in lengths}:
+        return None
+    # Le support ne suit pas `n` : ce n'est donc pas « le nombre de valeurs ».
+    if len(set(supports.values())) > 1 and set(supports.values()) == set(lengths):
+        return None
+
+    truths: dict[str, bool] = {}
+    for letter, raw in inp.options.items():
+        option = _plain(raw).lower()
+        matched = [
+            role
+            for role, keywords in _PARAMETER_ROLES
+            if any(keyword in option for keyword in keywords)
+        ]
+        if len(matched) != 1:
+            return None
+        truths[letter] = matched[0] == "SAMPLE_SIZE"
+    if sum(truths.values()) != 1:
+        return None
+
+    return SolverResult(
+        status="MACHINE_RESOLVED",
+        family="PUBLISHED_FUNCTION_PARAMETER_ROLE",
+        option_truths=truths,
+        computed_value=f"len({name}(...)) == {wanted}",
+        independent_evidence=(
+            f"La fonction `{name}` publiee par le chapitre a ete executee : "
+            f"pour {wanted} valant "
+            + ", ".join(str(value) for value in sorted(lengths))
+            + ", elle rend un echantillon plat de longueur exactement "
+            f"{wanted}. Le nombre de valeurs distinctes ne suit pas {wanted}, "
+            "et le second parametre est passe au generateur : ni la graine, "
+            "ni un nombre d'echantillons."
+        ),
+    )
+
+
 FAMILIES: tuple[Callable[[SolverInput], SolverResult | None], ...] = (
     _distribution_total_mass,
     _koenig_huygens,
@@ -1868,7 +1996,12 @@ FAMILIES: tuple[Callable[[SolverInput], SolverResult | None], ...] = (
     # resultat, donc une famille ajoutee en queue ne peut modifier aucun verdict
     # deja atteint par une famille anterieure. Un test le prouve sur le corpus.
     _euclidean_gram_form,
+    # Ajoutee elle aussi en queue, pour la meme raison : elle etablit le role
+    # d'un parametre en EXECUTANT le programme que le chapitre imprime.
+    _published_function_parameter_role,
 )
+
+
 
 
 def solve(inp: SolverInput) -> SolverResult:

@@ -7,10 +7,10 @@ Cet artefact n'approuve rien.
 
 - Questions du corpus : 490
 - Report d'identite : 301
-- Recalcul independant : 22
-- Revue humaine requise : 167
+- Recalcul independant : 23
+- Revue humaine requise : 166
 - UNKNOWN : 0
-- Equation : 490 = 301 + 22 + 167
+- Equation : 490 = 301 + 23 + 166
 - EVIDENCE_ROUTING_COMPLETE : True
 - ALL_QCM_HUMAN_REVIEW_COMPLETE : False
 
@@ -27,6 +27,7 @@ Cet artefact n'approuve rien.
 - `LINEAR_EXPECTATION`
 - `POLYNOMIAL_LOCAL_EXTREMA`
 - `PROBABILITY_DISTRIBUTION_TOTAL_MASS`
+- `PUBLISHED_FUNCTION_PARAMETER_ROLE`
 - `SAMPLE_MEAN_DEFINITION`
 - `SAMPLE_MEAN_FLUCTUATION_MONOTONICITY`
 - `SAMPLE_MEAN_FLUCTUATION_SCALE`
@@ -47,6 +48,7 @@ Cet artefact n'approuve rien.
 | 1SPE-VARIABLES-ALEATOIRES | Q13 | ALGEBRAIC_GAIN | D | D | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q14 | EXPECTATION_SIGN_INTERPRETATION | A | A | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q15 | EXPECTED_PROFIT_OF_A_CONTRACT | B | B | PASS |
+| 1SPE-VARIABLES-ALEATOIRES | Q16 | PUBLISHED_FUNCTION_PARAMETER_ROLE | C | C | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q17 | SAMPLE_MEAN_DEFINITION | D | D | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q18 | INVERSE_TRANSFORM_SAMPLING | A | A | PASS |
 | 1SPE-VARIABLES-ALEATOIRES | Q19 | SAMPLE_MEAN_FLUCTUATION_SCALE | B | B | PASS |
@@ -144,7 +146,6 @@ Comportement correct du solveur, pas un echec : aucune regle mathematique generi
 | 1NSI-WEB-IHM | Q7 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | 1NSI-WEB-IHM | Q8 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | 1NSI-WEB-IHM | Q9 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
-| 1SPE-VARIABLES-ALEATOIRES | Q16 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TNSI-ALGORITHMIQUE | Q1 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TNSI-ALGORITHMIQUE | Q10 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |
 | TNSI-ALGORITHMIQUE | Q11 | aucune famille mathematique generique ne modelise cet enonce sans ecrire une derivation propre a la question |

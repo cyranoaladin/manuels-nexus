@@ -42,6 +42,7 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import build_1spe_bareme_commentary_request as request  # noqa: E402
+import tex_units  # noqa: E402
 from manual_source_surface import ROOT  # noqa: E402
 
 JSON_TARGET = ROOT / "audit/1SPE_BAREME_COMMENTARY_PROPOSAL.json"
@@ -134,23 +135,23 @@ def key_result(answer: str) -> str | None:
     cleaned = _strip_comments(answer)
     if not cleaned:
         return None
-    sentences = [
-        part.strip()
-        for part in re.split(r"(?<=[.;])\s+", cleaned)
-        if part.strip()
-    ]
-    for sentence in reversed(sentences):
+    # Le découpage en phrases ne tombe jamais dans une unité TeX : un point à
+    # l'intérieur de `\[ ... u_{n+1} = 1{,}05\,u_n. \]` ponctue la formule, il
+    # ne termine pas la phrase. Découper dessus produisait des attendus qui
+    # commençaient par `\end{align*}` ou s'arrêtaient avant `\]`.
+    for sentence in reversed(tex_units.sentences(cleaned)):
         if "$" not in sentence and not re.search(r"\d", sentence):
-            continue
-        if sentence.count("$") % 2:
-            # Une phrase qui ouvre un mode mathématique sans le refermer est
-            # une coupure, pas un résultat : on ne la propose pas.
             continue
         if len(sentence) > 180:
             continue
         # Le fragment porte déjà sa ponctuation finale ; le format en ajoute
         # une, et deux points de suite se lisent mal.
-        return sentence.rstrip(".;")
+        candidate = sentence.rstrip(".;").strip()
+        if not candidate or not tex_units.is_balanced(candidate):
+            # Retirer la ponctuation finale peut rouvrir la question : un
+            # fragment qui ne tient plus debout n'est pas un résultat.
+            continue
+        return candidate
     return None
 
 
@@ -205,13 +206,26 @@ def propose(question: dict[str, Any]) -> dict[str, Any]:
         "answer_scope": question.get("correction_answer_scope"),
     }
 
-    if verbatim is None or gesture is None or result is None:
+    scope = question.get("correction_answer_scope")
+    # Un corrigé écrit à l'échelle de l'exercice répond à toutes ses questions
+    # à la fois. En tirer un attendu, c'est donner le même à des questions dont
+    # les gestes diffèrent -- « rappeler » et « simplifier » recevaient le même
+    # texte. Ce qui manque ici n'est pas une phrase : c'est une réponse
+    # question par question, et personne d'autre que l'enseignant ne peut la
+    # découper sans l'inventer.
+    if verbatim is None or gesture is None or result is None or scope != "question":
         row["verdict"] = "PEDAGOGICAL_JUDGEMENT_REQUIRED"
         row["why"] = (
             "le sujet ne value pas cette question"
             if verbatim is None
             else "le geste évalué ne se lit pas dans l'énoncé"
             if gesture is None
+            else "le corrigé répond à l'échelle de l'exercice, pas de cette "
+            "question : aucun attendu question par question ne s'en déduit"
+            if scope == "exercise"
+            else "le corrigé répond à la question mère sans distinguer cette "
+            "sous-question"
+            if scope == "parent_question"
             else "le corrigé n'établit aucun résultat repérable"
         )
         row["expected"] = ""
@@ -228,15 +242,25 @@ def propose(question: dict[str, Any]) -> dict[str, Any]:
         verbatim.split()[0].replace(",", ".")
     )
     steps = separable_steps(answer)
-    if question.get("correction_answer_scope") == "question":
-        split = divide(points, steps)
-        if split is not None:
-            row["partial_credit"] = (
-                f"{render_points(split[0])} si la première étape est correcte "
-                f"mais la suite erronée"
-            )
-            row["separable_steps"] = steps
+    split = divide(points, steps)
+    if split is not None:
+        row["partial_credit"] = (
+            f"{render_points(split[0])} si la première étape est correcte "
+            f"mais la suite erronée"
+        )
+        row["separable_steps"] = steps
     return row
+
+
+def result_of(expected: str) -> str:
+    """La part de l'attendu qui vient du corrigé, sans le geste du sujet.
+
+    Deux questions peuvent légitimement demander le même geste ; ce qui ne
+    peut pas être partagé, c'est le résultat. Comparer l'attendu entier
+    laisserait passer « rappeler — X » et « simplifier — X ».
+    """
+
+    return expected.split("—", 1)[1].strip() if "—" in expected else expected.strip()
 
 
 def build() -> dict[str, Any]:
@@ -274,6 +298,43 @@ def build() -> dict[str, Any]:
     ]
     proposed = [row for row in rows if row["verdict"] == "PROPOSED"]
     flagged = [row for row in rows if row["verdict"] != "PROPOSED"]
+
+    # Un attendu que personne ne peut composer n'est pas un attendu, et deux
+    # questions qui reçoivent le même n'ont pas été évaluées séparément. Les
+    # deux se comptent ici, sur ce qui vient d'être produit.
+    unbalanced: list[dict[str, Any]] = []
+    ambiguous: list[dict[str, Any]] = []
+    for chapter in chapters:
+        for exercise in chapter["exercises"]:
+            shared: dict[str, list[str]] = {}
+            for question in exercise["questions"]:
+                expected = question["expected"]
+                if not expected:
+                    continue
+                faults = tex_units.imbalances(expected)
+                if faults:
+                    unbalanced.append(
+                        {
+                            "object_id": chapter["object_id"],
+                            "question": question["question"],
+                            "faults": faults,
+                            "expected": expected,
+                        }
+                    )
+                shared.setdefault(result_of(expected), []).append(
+                    question["question"]
+                )
+            for result, questions in shared.items():
+                if len(questions) > 1:
+                    ambiguous.append(
+                        {
+                            "object_id": chapter["object_id"],
+                            "exercise": exercise["exercise"],
+                            "questions": questions,
+                            "shared_result": result,
+                        }
+                    )
+
     return {
         "artifact_type": "1spe_bareme_commentary_proposal",
         "schema_version": 1,
@@ -300,6 +361,22 @@ def build() -> dict[str, Any]:
             "schéma d'une autre question, fabriquer des sous-critères absents "
             "de la solution"
         ),
+        "an_expected_must_be_typesettable": (
+            "Un attendu est du LaTeX que le manuel professeur composera. Une "
+            "formule coupée en deux -- `\\[` sans `\\]`, un `\\end{align*}` "
+            "orphelin -- n'est pas un attendu : c'est un accident d'extraction. "
+            "Le découpage s'arrête désormais aux frontières où le fragment "
+            "tient debout."
+        ),
+        "an_expected_must_belong_to_its_question": (
+            "Un corrigé écrit à l'échelle de l'exercice répond à toutes ses "
+            "questions à la fois : en tirer un attendu donnait le même texte à "
+            "des questions dont les gestes diffèrent. Ces questions-là "
+            "attendent désormais un jugement, elles ne reçoivent plus une "
+            "copie."
+        ),
+        "unbalanced_expected": unbalanced,
+        "ambiguous_scope": ambiguous,
         "these_are_proposals_not_content": (
             "Rien n'est écrit dans les corrigés : ces propositions entrent dans "
             "la revue de chapitre, et c'est l'expert programme/pédagogie qui "
@@ -317,6 +394,10 @@ def build() -> dict[str, Any]:
             "QUESTIONS_WITHOUT_PROPOSAL_OR_FLAG": sum(
                 1 for row in rows if row["verdict"] not in
                 {"PROPOSED", "PEDAGOGICAL_JUDGEMENT_REQUIRED"}
+            ),
+            "BAREME_EXPECTED_TEX_UNBALANCED": len(unbalanced),
+            "BAREME_QUESTION_SCOPE_AMBIGUOUS": sum(
+                len(row["questions"]) for row in ambiguous
             ),
         },
     }
@@ -367,6 +448,13 @@ def render_markdown(payload: dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
+BLOCKING = (
+    "QUESTIONS_WITHOUT_PROPOSAL_OR_FLAG",
+    "BAREME_EXPECTED_TEX_UNBALANCED",
+    "BAREME_QUESTION_SCOPE_AMBIGUOUS",
+)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="ne rien écrire")
@@ -387,7 +475,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"écrit {JSON_TARGET.name} et {MD_TARGET.name}")
     for name, value in payload["summary"].items():
         print(f"{name}={value}")
-    return 1 if payload["summary"]["QUESTIONS_WITHOUT_PROPOSAL_OR_FLAG"] else 0
+    return 1 if any(payload["summary"][name] for name in BLOCKING) else 0
 
 
 if __name__ == "__main__":

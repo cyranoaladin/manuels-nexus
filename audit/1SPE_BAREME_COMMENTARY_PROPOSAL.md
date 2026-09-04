@@ -14,10 +14,12 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 |---|---:|
 | `ASSESSMENTS` | 20 |
 | `QUESTIONS` | 292 |
-| `PROPOSED` | 238 |
-| `PARTIAL_CREDIT_PROPOSED` | 8 |
-| `PEDAGOGICAL_JUDGEMENT_REQUIRED` | 54 |
+| `PROPOSED` | 215 |
+| `PARTIAL_CREDIT_PROPOSED` | 6 |
+| `PEDAGOGICAL_JUDGEMENT_REQUIRED` | 77 |
 | `QUESTIONS_WITHOUT_PROPOSAL_OR_FLAG` | 0 |
+| `BAREME_EXPECTED_TEX_UNBALANCED` | 0 |
+| `BAREME_QUESTION_SCOPE_AMBIGUOUS` | 0 |
 
 ## 1SPE-DERGLOBAL-EV-A
 
@@ -25,21 +27,21 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 
 - **Q1** — 1 pt — Attendu : calculer — $f(x) = 3x^2 - 2x + 1$, donc $f'(x) = 6x - 2.$.
 - **Q2** — 1,5 pt — Attendu : calculer — La courbe « monte » localement avec une pente de $10$ en ce point.
-- **Q3** — 1,5 pt — Attendu : donner — $f(2) = 3 \times 4 - 2 \times 2 + 1 = 12 - 4 + 1 = 9.$ Équation de la tangente : \[ T : y = f'(2)(x - 2) + f(2) = 10(x-2) + 9 = 10x - 20 + 9 = 10x - 11.
+- **Q3** — 1,5 pt — Attendu : donner — $f(2) = 3 \times 4 - 2 \times 2 + 1 = 12 - 4 + 1 = 9.$ Équation de la tangente : \[ T : y = f'(2)(x - 2) + f(2) = 10(x-2) + 9 = 10x - 20 + 9 = 10x - 11. \].
 - **Q4** — 1 pt — Attendu : déterminer — Tangente horizontale $\Leftrightarrow f'(x) = 0 \Leftrightarrow 6x - 2 = 0 \Leftrightarrow x = \dfrac{1}{3}.$.
 
 ### Exercice 2 — 6 points (C3, C4)
 
 - **Q1** — 1,5 pt — Attendu : calculer — $g(x) = x^3 - 6x$, donc $g'(x) = 3x^2 - 6 = 3(x^2 - 2) = 3(x - \sqrt{2})(x + \sqrt{2}).$.
 - **Q2** — 1,5 pt — Attendu : résoudre — $g'(x) = 0 \Leftrightarrow x = -\sqrt{2}$ ou $x = \sqrt{2}$ \quad ($\sqrt{2} \approx 1{,}41$).
-- **Q3** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé n'établit aucun résultat repérable
+- **Q3** — 2 pts — Attendu : construire — $g(-\sqrt{2}) = -(\sqrt{2})^3 + 6\sqrt{2} = -2\sqrt{2} + 6\sqrt{2} = 4\sqrt{2}.$ $g(\sqrt{2}) = (\sqrt{2})^3 - 6\sqrt{2} = 2\sqrt{2} - 6\sqrt{2} = -4\sqrt{2}.$.
 - **Q4** — 1 pt — Attendu : donner — $g$ admet un \textbf{minimum local} de $-4\sqrt{2} \approx -5{,}66$ en $x = \sqrt{2}$.
 
 ### Exercice 3 — 5 points (C2, C3, C4)
 
-- **Q1** — 2 pts — Attendu : calculer — \[ h'(x) = \frac{u'v - uv'}{v^2} = \frac{2x(x-1) - (x^2+2)}{(x-1)^2} = \frac{2x^2 - 2x - x^2 - 2}{(x-1)^2} = \frac{x^2 - 2x - 2}{(x-1)^2}.
+- **Q1** — 2 pts — Attendu : calculer — \[ h'(x) = \frac{u'v - uv'}{v^2} = \frac{2x(x-1) - (x^2+2)}{(x-1)^2} = \frac{2x^2 - 2x - x^2 - 2}{(x-1)^2} = \frac{x^2 - 2x - 2}{(x-1)^2}. \].
 - **Q2** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé n'établit aucun résultat repérable
-- **Q3** — 1,5 pt — Attendu : construire — Le signe de $h'$ est celui du numérateur $x^2-2x-2$ : $h'(x) < 0$ pour $1 < x < 1+\sqrt{3}$ et $h'(x) > 0$ pour $x > 1+\sqrt{3}$.
+- **Q3** — 1,5 pt — Attendu : construire — $h(1+\sqrt{3}) = \dfrac{(1+\sqrt{3})^2 + 2}{(1+\sqrt{3})-1} = \dfrac{1 + 2\sqrt{3} + 3 + 2}{\sqrt{3}} = \dfrac{6 + 2\sqrt{3}}{\sqrt{3}} = \dfrac{6}{\sqrt{3}} + 2 = 2\sqrt{3} + 2.$.
 
 ### Exercice 4 — 4 points (C5)
 
@@ -54,7 +56,7 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 
 - **Q1** — 1 pt — Attendu : calculer — $f(x) = 2x^2 + 3x - 4$, donc $f'(x) = 4x + 3.$.
 - **Q2** — 1,5 pt — Attendu : calculer — La courbe monte localement avec une pente de $7$ en ce point.
-- **Q3** — 1,5 pt — Attendu : donner — \] Vérification : $T(1) = 7 - 6 = 1 = f(1)$.
+- **Q3** — 1,5 pt — Attendu : donner — $f(1) = 2 + 3 - 4 = 1.$ Équation de la tangente : \[ T : y = f'(1)(x - 1) + f(1) = 7(x-1) + 1 = 7x - 7 + 1 = 7x - 6. \] Vérification : $T(1) = 7 - 6 = 1 = f(1)$.
 - **Q4** — 1 pt — Attendu : déterminer — Tangente horizontale $\Leftrightarrow f'(x) = 0 \Leftrightarrow 4x + 3 = 0 \Leftrightarrow x = -\dfrac{3}{4}.$.
 
 ### Exercice 2 — 6 points (C3, C4)
@@ -66,14 +68,14 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 
 ### Exercice 3 — 5 points (C2, C3, C4)
 
-- **Q1** — 1 pt — Attendu : simplifier — $x^2 - 4 = (x-2)(x+2)$, donc pour $x \neq -2$ : \[ h(x) = \frac{(x-2)(x+2)}{x+2} = x - 2.
+- **Q1** — 1 pt — Attendu : simplifier — $x^2 - 4 = (x-2)(x+2)$, donc pour $x \neq -2$ : \[ h(x) = \frac{(x-2)(x+2)}{x+2} = x - 2. \].
 - **Q2** — 1,5 pt — Attendu : en déduire — $h(x) = x - 2$ (pour $x \neq -2$), donc $h'(x) = 1$.
 - **Q3** — 2,5 pts — Attendu : résoudre — $h$ est strictement croissante sur $]-\infty\,;\,-2[$.
 
 ### Exercice 4 — 4 points (C5)
 
 - **Q1** — 1 pt — Attendu : exprimer — $R(x) = x \times (30 - 2x) = 30x - 2x^2.$.
-- **Q2** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé n'établit aucun résultat repérable
+- **Q2** — 2 pts — Attendu : calculer — Tableau de variations de $R$ sur $[0\,;\,15]$ :.
 - **Q3** — 1 pt — Attendu : calculer — Le producteur maximise son chiffre d'affaires en vendant $7{,}5$ litres au prix de $30 - 2 \times 7{,}5 = 15$ euros/L, pour un chiffre d'affaires de $\mathbf{112{,}5}$ euros.
 
 
@@ -81,15 +83,15 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 
 ### Exercice 1 — 6 points (C1, C2)
 
-- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{f(4)-f(1)}{4-1} = \frac{5-2}{3} = 1.
-- **Q2** — 2 pts — Attendu : calculer — \end{align*} \[ \frac{f(3+h)-f(3)}{h} = \frac{h^2+2h+2-2}{h} = \frac{h^2+2h}{h} = h+2.
+- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{f(4)-f(1)}{4-1} = \frac{5-2}{3} = 1. \].
+- **Q2** — 2 pts — Attendu : calculer — $f(3) = 9 - 12 + 5 = 2$.
 - **Q3** — 1 pt — Attendu : en déduire — $f'(3) = \lim_{h \to 0}(h+2) = 2.$.
 - **Q4** — 1,5 pt — Attendu : interpréter — $f'(3) = 2$ signifie que la tangente à la courbe de $f$ au point d'abscisse $3$ a pour pente $2$ : la courbe monte localement avec un coefficient directeur de $2$.
 
 ### Exercice 2 — 5 points (C2, C4)
 
 - **Q1** — 1 pt — Attendu : calculer — $g'(1) = 3 \times 1^2 = 3.$.
-- **Q2** — 2 pts — Attendu : donner — La tangente $T_1$ en $x=1$ : \[ T_1 : y = g'(1)(x-1) + g(1) = 3(x-1) + 1 = 3x - 2.
+- **Q2** — 2 pts — Attendu : donner — La tangente $T_1$ en $x=1$ : \[ T_1 : y = g'(1)(x-1) + g(1) = 3(x-1) + 1 = 3x - 2. \].
 - **Q3** — 1 pt — Attendu : vérifier — Le point $(0;-2)$ est bien sur $T_1$.
 - **Q4** — 1 pt — Attendu : déterminer — La tangente est horizontale au point d'abscisse $0$.
 
@@ -102,8 +104,8 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 
 ### Exercice 4 — 4 points (C1, C5)
 
-- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{h(3)-h(2)}{3-2} = \frac{\frac{1}{3}-\frac{1}{2}}{1} = \frac{-\frac{1}{6}}{1} = -\frac{1}{6} \approx -0{,}167.
-- **Q2** — 1,5 pt — Attendu : approcher — \[ h(2{,}05) \approx h(2) + h'(2) \times 0{,}05 = \frac{1}{2} + \left(-\frac{1}{4}\right) \times 0{,}05 = 0{,}5 - 0{,}0125 = 0{,}4875.
+- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{h(3)-h(2)}{3-2} = \frac{\frac{1}{3}-\frac{1}{2}}{1} = \frac{-\frac{1}{6}}{1} = -\frac{1}{6} \approx -0{,}167. \].
+- **Q2** — 1,5 pt — Attendu : approcher — \[ h(2{,}05) \approx h(2) + h'(2) \times 0{,}05 = \frac{1}{2} + \left(-\frac{1}{4}\right) \times 0{,}05 = 0{,}5 - 0{,}0125 = 0{,}4875. \].
 - **Q3** — 1 pt — Attendu : comparer — L'erreur est de l'ordre de $0{,}0003$, soit environ $0{,}06\,\%$.
 
 
@@ -111,15 +113,15 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 
 ### Exercice 1 — 6 points (C1, C2)
 
-- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{f(5)-f(2)}{5-2} = \frac{5-2}{3} = 1.
-- **Q2** — 2 pts — Attendu : calculer — \end{align*} \[ \frac{f(5+h)-f(5)}{h} = \frac{h^2+4h}{h} = h+4.
+- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{f(5)-f(2)}{5-2} = \frac{5-2}{3} = 1. \].
+- **Q2** — 2 pts — Attendu : calculer — \begin{align*} f(5+h) &= (5+h)^2 - 6(5+h) + 10 \\ &= 25 + 10h + h^2 - 30 - 6h + 10 = h^2 + 4h + 5. \end{align*} \[ \frac{f(5+h)-f(5)}{h} = \frac{h^2+4h}{h} = h+4. \].
 - **Q3** — 1 pt — Attendu : en déduire — $f'(5) = \lim_{h \to 0}(h+4) = 4.$.
 - **Q4** — 1,5 pt — Attendu : interpréter — $f'(5) = 4$ signifie que la tangente à la courbe de $f$ au point d'abscisse $5$ a pour pente $4$ : la courbe monte localement avec un coefficient directeur de $4$.
 
 ### Exercice 2 — 5 points (C2, C4)
 
 - **Q1** — 1 pt — Attendu : calculer — $g'(2) = 3 \times 2^2 = 12.$.
-- **Q2** — 2 pts — Attendu : donner — La tangente $T_2$ en $x=2$ : \[ T_2 : y = 12(x-2) + 8 = 12x - 16.
+- **Q2** — 2 pts — Attendu : donner — La tangente $T_2$ en $x=2$ : \[ T_2 : y = 12(x-2) + 8 = 12x - 16. \].
 - **Q3** — 1 pt — Attendu : vérifier — Le point $(0;-16)$ est bien sur $T_2$.
 - **Q4** — 1 pt — Attendu : déterminer — Tangente horizontale $\Leftrightarrow g'(a) = 0 \Leftrightarrow 3a^2 = 0 \Leftrightarrow a = 0$.
 
@@ -132,8 +134,8 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 
 ### Exercice 4 — 4 points (C1, C5)
 
-- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{h(5)-h(4)}{5-4} = \frac{\frac{1}{5}-\frac{1}{4}}{1} = \frac{-\frac{1}{20}}{1} = -\frac{1}{20} = -0{,}05.
-- **Q2** — 1,5 pt — Attendu : approcher — \[ h(5{,}02) \approx h(5) + h'(5) \times 0{,}02 = \frac{1}{5} + \left(-\frac{1}{25}\right) \times 0{,}02 = 0{,}2 - 0{,}0008 = 0{,}1992.
+- **Q1** — 1,5 pt — Attendu : calculer — \[ \tau = \frac{h(5)-h(4)}{5-4} = \frac{\frac{1}{5}-\frac{1}{4}}{1} = \frac{-\frac{1}{20}}{1} = -\frac{1}{20} = -0{,}05. \].
+- **Q2** — 1,5 pt — Attendu : approcher — \[ h(5{,}02) \approx h(5) + h'(5) \times 0{,}02 = \frac{1}{5} + \left(-\frac{1}{25}\right) \times 0{,}02 = 0{,}2 - 0{,}0008 = 0{,}1992. \].
 - **Q3** — 1 pt — Attendu : comparer — Valeur exacte : $\dfrac{1}{5{,}02} = \dfrac{50}{251} \approx 0{,}19920\ldots$ Approximation : $0{,}1992$.
 
 
@@ -141,24 +143,24 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 
 ### Exercice 1 — 5 points (C1, C2)
 
-- **Q1** — 2 pts — Attendu : rappeler — Les simplifications donnent $\mathrm{e}^{x}$ et $\mathrm{e}^{2x}$.
-- **Q2** — 3 pts — Attendu : simplifier — Les simplifications donnent $\mathrm{e}^{x}$ et $\mathrm{e}^{2x}$.
+- **Q1** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q2** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
 
 ### Exercice 2 — 5 points (C3, C4)
 
-- **Q1** — 3 pts — Attendu : justifier — $f(0)=1$ et $f(5)=\mathrm{e}^{-2}\approx0{,}14$.
-- **Q2** — 2 pts — Attendu : calculer — $f(0)=1$ et $f(5)=\mathrm{e}^{-2}\approx0{,}14$.
+- **Q1** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q2** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
 
 ### Exercice 3 — 5 points (C2, C3)
 
-- **Q1** — 2 pts — Attendu : exprimer — .} $u_n=120(\mathrm{e}^{0{,}1})^n=120\mathrm{e}^{0{,}1n}$ et $u_5=120\mathrm{e}^{0{,}5}\approx197{,}85$.
-- **Q2** — 3 pts — Attendu : calculer — .} $u_n=120(\mathrm{e}^{0{,}1})^n=120\mathrm{e}^{0{,}1n}$ et $u_5=120\mathrm{e}^{0{,}5}\approx197{,}85$.
+- **Q1** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q2** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
 
 ### Exercice 4 — 5 points (C5)
 
-- **Q1** — 2 pts — Attendu : calculer — Le coefficient de $t$ est positif : le modèle est croissant.
-- **Q2** — 2 pts — Attendu : interpréter — Le coefficient de $t$ est positif : le modèle est croissant.
-- **Q3** — 1 pt — Attendu : justifier — Le coefficient de $t$ est positif : le modèle est croissant.
+- **Q1** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q2** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q3** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
 
 
 ## 1SPE-EXPO-EV-B
@@ -166,23 +168,23 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 ### Exercice 1 — 5 points (C1, C2)
 
 - **Q1** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le geste évalué ne se lit pas dans l'énoncé
-- **Q2** — 3 pts — Attendu : simplifier — Les simplifications donnent $\mathrm{e}^{2x}$ et $\mathrm{e}^{-3x}$.
+- **Q2** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
 
 ### Exercice 2 — 5 points (C3, C4)
 
-- **Q1** — 3 pts — Attendu : justifier — $g(0)=1$ et $g(4)=\mathrm{e}^{1{,}2}\approx3{,}32$.
-- **Q2** — 2 pts — Attendu : calculer — $g(0)=1$ et $g(4)=\mathrm{e}^{1{,}2}\approx3{,}32$.
+- **Q1** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q2** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
 
 ### Exercice 3 — 5 points (C2, C3)
 
-- **Q1** — 2 pts — Attendu : exprimer — .} $v_n=300(\mathrm{e}^{-0{,}2})^n=300\mathrm{e}^{-0{,}2n}$ et $v_3=300\mathrm{e}^{-0{,}6}\approx164{,}64$.
-- **Q2** — 3 pts — Attendu : calculer — .} $v_n=300(\mathrm{e}^{-0{,}2})^n=300\mathrm{e}^{-0{,}2n}$ et $v_3=300\mathrm{e}^{-0{,}6}\approx164{,}64$.
+- **Q1** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q2** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
 
 ### Exercice 4 — 5 points (C5)
 
-- **Q1** — 2 pts — Attendu : calculer — Le coefficient de $t$ est négatif : le modèle est décroissant.
-- **Q2** — 2 pts — Attendu : interpréter — Le coefficient de $t$ est négatif : le modèle est décroissant.
-- **Q3** — 1 pt — Attendu : justifier — Le coefficient de $t$ est négatif : le modèle est décroissant.
+- **Q1** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q2** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q3** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
 
 
 ## 1SPE-GEOREP-EV-A
@@ -331,7 +333,7 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 ### Exercice 3 — 5 points (C4)
 
 - **Q1** — 1,5 pt — Attendu : déterminer — $\overrightarrow{IM} \cdot \overrightarrow{AB} = 0$ : $6(x - 3) + 0 = 0$, soit $x = 3$.
-- **Q2** — 2 pts — Attendu : déterminer — $\overrightarrow{AH} \cdot \overrightarrow{BC} = 0$ : $(6-4t)(-4) + (4t)(4) = 0$, soit $-24 + 32t = 0$, d'ou $t = \dfrac{3}{4}$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
+- **Q2** — 2 pts — Attendu : déterminer — $H = (3; 3)$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
 - **Q3** — 1,5 pt — Attendu : calculer — $\mathcal{A} = \dfrac{1}{2} |x_B \cdot y_C - x_C \cdot y_B| = \dfrac{1}{2} |6 \times 4 - 2 \times 0| = \dfrac{24}{2} = 12$.
 
 ### Exercice 4 — 5 points (C5)
@@ -359,7 +361,7 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 ### Exercice 3 — 5 points (C4)
 
 - **Q1** — 1,5 pt — Attendu : déterminer — Mediatrice : $8(x - 4) = 0$, soit $x = 4$.
-- **Q2** — 2 pts — Attendu : déterminer — $\overrightarrow{AH} \cdot \overrightarrow{BC} = 0$ : $(8-5t)(-5) + (6t)(6) = 0$, soit $-40 + 25t + 36t = 0$, $61t = 40$, $t = \dfrac{40}{61}$.
+- **Q2** — 2 pts — Attendu : déterminer — $H = \left(\dfrac{288}{61}; \dfrac{240}{61}\right)$.
 - **Q3** — 1,5 pt — Attendu : calculer — $\mathcal{A} = \dfrac{1}{2} |x_B \cdot y_C - x_C \cdot y_B| = \dfrac{1}{2} |48 - 0| = 24$.
 
 ### Exercice 4 — 5 points (C5)
@@ -374,13 +376,13 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 ### Exercice 1 — 7 points (C1, C3, C4)
 
 - **Q1** — 1 pt — Attendu : calculer — Pour $f(x) = 2x^2 - 8x + 6$ : $a = 2$, $b = -8$, $c = 6$.
-- **Q2** — 2 pts — Attendu : calculer — \] \[ \boxed{f(x) = 2(x-2)^2 - 2.} \] \medskip.
-- **Q3** — 2 pts — Attendu : en déduire — \] Deux racines réelles distinctes : \[ x_1 = \frac{8 - 4}{4} = 1, \qquad x_2 = \frac{8 + 4}{4} = 3.
+- **Q2** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé n'établit aucun résultat repérable
+- **Q3** — 2 pts — Attendu : en déduire — \[ \Delta = 64 - 48 = 16 > 0. \quad \sqrt{\Delta} = 4. \] Deux racines réelles distinctes : \[ x_1 = \frac{8 - 4}{4} = 1, \qquad x_2 = \frac{8 + 4}{4} = 3. \] \medskip.
 - **Q4** — 2 pts — Attendu : vérifier — \[ \boxed{f(x) = 2(x-1)(x-3).} \] Vérification : $2(x-1)(x-3) = 2(x^2 - 4x + 3) = 2x^2 - 8x + 6 = f(x)$.
 
 ### Exercice 2 — 5 points (C2)
 
-- **Q1** — 2 pts — Attendu : calculer — \quad \checkmark \] Donc $g(x) = -(x-2)^2 + 1$ est bien la forme canonique de $g$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
+- **Q1** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé n'établit aucun résultat repérable
 - **Q2** — 1 pt — Attendu : en déduire — Comme $a = -1 < 0$, la parabole est tournee vers le bas : $g$ admet un \textbf{maximum} de valeur $g(2) = 1$, atteint en $x = 2$.
 - **Q3** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé n'établit aucun résultat repérable
 - **Q4** — 1 pt — Attendu : calculer — L'axe de symetrie de la parabole a pour équation $x = \alpha = 2$.
@@ -393,9 +395,9 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 
 ### Exercice 4 — 4 points (C6)
 
-- **Q1** — 1 pt — Attendu : exprimer — \item Largeur : $20 - 2x$~cm.
-- **Q2** — 1 pt — Attendu : montrer — \] Domaine : $x > 0$, $30 - 2x > 0$ et $20 - 2x > 0$, soit $x \in \,]0\,;\,10[$.
-- **Q3** — 1 pt — Attendu : calculer — \] \[ V(5) = 5 \times (30-10) \times (20-10) = 5 \times 20 \times 10 = 1\,000 \text{ cm}^3.
+- **Q1** — 1 pt — Attendu : exprimer — Après decoupe et pliage : \begin{itemize} \item Hauteur : $x$~cm. \item Longueur : $30 - 2x$~cm. \item Largeur : $20 - 2x$~cm. \end{itemize} \medskip.
+- **Q2** — 1 pt — Attendu : montrer — \[ V(x) = x \times (30-2x) \times (20-2x). \] Domaine : $x > 0$, $30 - 2x > 0$ et $20 - 2x > 0$, soit $x \in \,]0\,;\,10[$.
+- **Q3** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé n'établit aucun résultat repérable
 - **Q4** — 1 pt — Attendu : justifier — Une étude complete de $V$ (dérivée ou tableau de variations) est nécessaire pour trouver le maximum absolu.
 
 
@@ -404,13 +406,13 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 ### Exercice 1 — 7 points (C1, C3, C4)
 
 - **Q1** — 1 pt — Attendu : calculer — Pour $f(x) = 3x^2 - 12x + 9$ : $a = 3$, $b = -12$, $c = 9$.
-- **Q2** — 2 pts — Attendu : calculer — \] \[ \boxed{f(x) = 3(x-2)^2 - 3.} \] \medskip.
-- **Q3** — 2 pts — Attendu : en déduire — \] \[ x_1 = \frac{12 - 6}{6} = 1, \qquad x_2 = \frac{12 + 6}{6} = 3.
+- **Q2** — 2 pts — Attendu : calculer — \[ \alpha = \frac{-(-12)}{2 \times 3} = \frac{12}{6} = 2, \qquad \beta = f(2) = 3 \times 4 - 12 \times 2 + 9 = 12 - 24 + 9 = -3. \] \[ \boxed{f(x) = 3(x-2)^2 - 3.} \] \medskip.
+- **Q3** — 2 pts — Attendu : en déduire — \[ \Delta = 144 - 108 = 36 > 0. \quad \sqrt{\Delta} = 6. \] \[ x_1 = \frac{12 - 6}{6} = 1, \qquad x_2 = \frac{12 + 6}{6} = 3. \] \medskip.
 - **Q4** — 2 pts — Attendu : vérifier — \[ \boxed{f(x) = 3(x-1)(x-3).} \] Vérification : $3(x-1)(x-3) = 3(x^2 - 4x + 3) = 3x^2 - 12x + 9 = f(x)$.
 
 ### Exercice 2 — 5 points (C2)
 
-- **Q1** — 2 pts — Attendu : calculer — \quad \checkmark \] Donc $g(x) = -2(x-2)^2 + 2$ est bien la forme canonique de $g$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
+- **Q1** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé n'établit aucun résultat repérable
 - **Q2** — 1 pt — Attendu : en déduire — Comme $a = -2 < 0$, la parabole est tournee vers le bas : $g$ admet un \textbf{maximum} de valeur $g(2) = 2$, atteint en $x = 2$.
 - **Q3** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé n'établit aucun résultat repérable
 - **Q4** — 1 pt — Attendu : calculer — L'axe de symetrie de la parabole a pour équation $x = \alpha = 2$.
@@ -425,7 +427,7 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 
 - **Q1** — 1 pt — Attendu : exprimer — Après decoupe et pliage : hauteur $x$~cm, longueur $30-2x$~cm, largeur $20-2x$~cm.
 - **Q2** — 1 pt — Attendu : montrer — Domaine : $x > 0$, $30-2x > 0$ et $20-2x > 0$, d'ou $x \in \,]0\,;\,10[$.
-- **Q3** — 1 pt — Attendu : calculer — \] \[ V(6) = 6 \times (30-12) \times (20-12) = 6 \times 18 \times 8 = 864 \text{ cm}^3.
+- **Q3** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé n'établit aucun résultat repérable
 - **Q4** — 1 pt — Attendu : justifier — Une étude complete de $V$ est nécessaire.
 
 
@@ -433,62 +435,62 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 
 ### Exercice 1 — 6 points (C1, C2, C5, C8)
 
-- **Q1** — 1 pt — Attendu : calculer — On applique la relation de récurrence $u_{n+1} = u_n + 4$ : \[ u_1 = u_0 + 4 = 3 + 4 = 7, \qquad u_2 = u_1 + 4 = 7 + 4 = 11, \qquad u_3 = u_2 + 4 = 11 + 4 = 15.
+- **Q1** — 1 pt — Attendu : calculer — On applique la relation de récurrence $u_{n+1} = u_n + 4$ : \[ u_1 = u_0 + 4 = 3 + 4 = 7, \qquad u_2 = u_1 + 4 = 7 + 4 = 11, \qquad u_3 = u_2 + 4 = 11 + 4 = 15. \] \medskip.
 - **Q2** — 2 pts — Attendu : démontrer — \textbf{Conclusion :} La suite $(u_n)$ est une suite arithmétique de raison $r = 4$ et de premier terme $u_0 = 3$.
-- **Q3** — 1 pt — Attendu : exprimer — Par la formule du terme général d'une suite arithmétique : \[ \boxed{u_n = 3 + 4n} \quad \text{pour tout } n \in \mathbb{N}.
+- **Q3** — 1 pt — Attendu : exprimer — Par la formule du terme général d'une suite arithmétique : \[ \boxed{u_n = 3 + 4n} \quad \text{pour tout } n \in \mathbb{N}. \] \medskip.
 - **Q4** — 1 pt — Attendu : justifier — \textit{Remarque : on peut aussi argumenter que la raison $r = 4 > 0$, ce qui suffit pour conclure qu'une suite arithmétique est strictement croissante.}.
 - **Q5** — 1 pt — Attendu : justifier — Chaque terme dépasse le précédent de $4$, et cet écart ne diminue jamais : en allant assez loin, on dépasse n'importe quelle valeur fixée à.
 
 ### Exercice 2 — 5 points (C3, C4)
 
-- **Q1** — 1 pt — Attendu : calculer — \[ u_0 = 2 \times 3^0 = 2 \times 1 = 2, \qquad u_1 = 2 \times 3^1 = 6, \qquad u_2 = 2 \times 3^2 = 2 \times 9 = 18.
+- **Q1** — 1 pt — Attendu : calculer — \[ u_0 = 2 \times 3^0 = 2 \times 1 = 2, \qquad u_1 = 2 \times 3^1 = 6, \qquad u_2 = 2 \times 3^2 = 2 \times 9 = 18. \] \medskip.
 - **Q2** — 2 pts — Attendu : démontrer — \textbf{Conclusion :} La suite $(u_n)$ est une suite géométrique de raison $q = 3$ et de premier terme $u_0 = 2$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
-- **Q3** — 2 pts — Attendu : calculer — \] \[ \boxed{S = 242.} \] \textit{Vérification :} $u_0 + u_1 + u_2 + u_3 + u_4 = 2 + 6 + 18 + 54 + 162 = 242$.
+- **Q3** — 2 pts — Attendu : calculer — On somme les termes de rang $k = 0$ à $k = 4$, soit $5$ termes.
 
 ### Exercice 3 — 5 points (C6, C7)
 
-- **Q1** — 1 pt — Attendu : justifier — Le capital au bout de $(n+1)$ années est donc : \[ u_{n+1} = u_n + 0{,}05\,u_n = (1 + 0{,}05)\,u_n = 1{,}05\,u_n.
-- **Q2** — 1 pt — Attendu : en déduire — Par la formule du terme général d'une suite géométrique : \[ \boxed{u_n = 800 \times 1{,}05^n} \quad \text{pour tout } n \in \mathbb{N}.
-- **Q3** — 1 pt — Attendu : calculer — \[ u_1 = 800 \times 1{,}05 = 840 \text{ €}, \qquad u_2 = 800 \times 1{,}05^2 = 800 \times 1{,}1025 = 882 \text{ €}.
-- **Q4a** — 1 pt — Attendu : interpréter — \item \texttt{n = n + 1} : on incrément.
-- **Q4b** — 1 pt — Attendu : vérifier — \item \texttt{n = n + 1} : on incrément.
+- **Q1** — 1 pt — Attendu : justifier — Le capital au bout de $(n+1)$ années est donc : \[ u_{n+1} = u_n + 0{,}05\,u_n = (1 + 0{,}05)\,u_n = 1{,}05\,u_n. \] \medskip.
+- **Q2** — 1 pt — Attendu : en déduire — Par la formule du terme général d'une suite géométrique : \[ \boxed{u_n = 800 \times 1{,}05^n} \quad \text{pour tout } n \in \mathbb{N}. \] \medskip.
+- **Q3** — 1 pt — Attendu : calculer — \[ u_1 = 800 \times 1{,}05 = 840 \text{ €}, \qquad u_2 = 800 \times 1{,}05^2 = 800 \times 1{,}1025 = 882 \text{ €}. \] \medskip.
+- **Q4a** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q4b** — 1 pt — Attendu : vérifier — \textit{Vérification algébrique :} On résout $800 \times 1{,}05^n \geq 1\,200$, soit $1{,}05^n \geq \dfrac{1\,200}{800} = 1{,}5$.
 
 ### Exercice 4 — 4 points (C2, C4)
 
 - **Q1** — 1 pt — Attendu : montrer — \textbf{Conclusion :} $(v_n)$ est une suite arithmétique de raison $r = 2$ et de premier terme $v_0 = 2 \times 0 + 5 = 5$.
-- **Q2** — 2 pts — Attendu : établir — \] \[ \boxed{S_n = (n+1)(n+5)} \quad \text{pour tout } n \in \mathbb{N}.
-- **Q3** — 1 pt — Attendu : déterminer — \] \textbf{Conclusion :} Le plus petit entier naturel $n$ tel que $S_n > 200$ est $\boxed{n = 12}$.
+- **Q2** — 2 pts — Attendu : établir — Le premier terme est $v_0 = 5$ et le dernier terme est $v_n = 2n + 5$.
+- **Q3** — 1 pt — Attendu : déterminer — La fonction $(n+1)(n+5) = n^2 + 6n + 5$ est croissante pour $n \geq 0$.
 
 
 ## 1SPE-SUITES-EV-B
 
 ### Exercice 1 — 6 points (C1, C2, C5, C8)
 
-- **Q1** — 1 pt — Attendu : calculer — On applique la relation de récurrence $u_{n+1} = u_n + 3$ : \[ u_1 = u_0 + 3 = 5 + 3 = 8, \qquad u_2 = u_1 + 3 = 8 + 3 = 11, \qquad u_3 = u_2 + 3 = 11 + 3 = 14.
+- **Q1** — 1 pt — Attendu : calculer — On applique la relation de récurrence $u_{n+1} = u_n + 3$ : \[ u_1 = u_0 + 3 = 5 + 3 = 8, \qquad u_2 = u_1 + 3 = 8 + 3 = 11, \qquad u_3 = u_2 + 3 = 11 + 3 = 14. \] \medskip.
 - **Q2** — 2 pts — Attendu : démontrer — \textbf{Conclusion :} La suite $(u_n)$ est une suite arithmétique de raison $r = 3$ et de premier terme $u_0 = 5$.
-- **Q3** — 1 pt — Attendu : exprimer — Par la formule du terme général d'une suite arithmétique : \[ \boxed{u_n = 5 + 3n} \quad \text{pour tout } n \in \mathbb{N}.
+- **Q3** — 1 pt — Attendu : exprimer — Par la formule du terme général d'une suite arithmétique : \[ \boxed{u_n = 5 + 3n} \quad \text{pour tout } n \in \mathbb{N}. \] \medskip.
 - **Q4** — 1 pt — Attendu : justifier — \textit{Remarque : on peut aussi argumenter que la raison $r = 3 > 0$, ce qui suffit pour conclure qu'une suite arithmétique est strictement croissante.}.
 - **Q5** — 1 pt — Attendu : justifier — Chaque terme dépasse le précédent de $3$, et cet écart ne diminue jamais : en allant assez loin, on dépasse n'importe quelle valeur fixée à.
 
 ### Exercice 2 — 5 points (C3, C4)
 
-- **Q1** — 1 pt — Attendu : calculer — \[ u_0 = 4 \times 2^0 = 4 \times 1 = 4, \qquad u_1 = 4 \times 2^1 = 8, \qquad u_2 = 4 \times 2^2 = 4 \times 4 = 16.
+- **Q1** — 1 pt — Attendu : calculer — \[ u_0 = 4 \times 2^0 = 4 \times 1 = 4, \qquad u_1 = 4 \times 2^1 = 8, \qquad u_2 = 4 \times 2^2 = 4 \times 4 = 16. \] \medskip.
 - **Q2** — 2 pts — Attendu : démontrer — \textbf{Conclusion :} La suite $(u_n)$ est une suite géométrique de raison $q = 2$ et de premier terme $u_0 = 4$. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
-- **Q3** — 2 pts — Attendu : calculer — \] \[ \boxed{S = 124.} \] \textit{Vérification :} $u_0 + u_1 + u_2 + u_3 + u_4 = 4 + 8 + 16 + 32 + 64 = 124$.
+- **Q3** — 2 pts — Attendu : calculer — On somme les termes de rang $k = 0$ à $k = 4$, soit $5$ termes.
 
 ### Exercice 3 — 5 points (C6, C7)
 
-- **Q1** — 1 pt — Attendu : justifier — Le capital au bout de $(n+1)$ années est donc : \[ u_{n+1} = u_n + 0{,}04\,u_n = (1 + 0{,}04)\,u_n = 1{,}04\,u_n.
-- **Q2** — 1 pt — Attendu : en déduire — Par la formule du terme général d'une suite géométrique : \[ \boxed{u_n = 1\,000 \times 1{,}04^n} \quad \text{pour tout } n \in \mathbb{N}.
-- **Q3** — 1 pt — Attendu : calculer — \[ u_1 = 1\,000 \times 1{,}04 = 1\,040 \text{ €}, \qquad u_2 = 1\,000 \times 1{,}04^2 = 1\,000 \times 1{,}0816 \approx 1\,082 \text{ €}.
-- **Q4a** — 1 pt — Attendu : interpréter — \item \texttt{n = n + 1} : on incrémen.
-- **Q4b** — 1 pt — Attendu : vérifier — \item \texttt{n = n + 1} : on incrémen.
+- **Q1** — 1 pt — Attendu : justifier — Le capital au bout de $(n+1)$ années est donc : \[ u_{n+1} = u_n + 0{,}04\,u_n = (1 + 0{,}04)\,u_n = 1{,}04\,u_n. \] \medskip.
+- **Q2** — 1 pt — Attendu : en déduire — Par la formule du terme général d'une suite géométrique : \[ \boxed{u_n = 1\,000 \times 1{,}04^n} \quad \text{pour tout } n \in \mathbb{N}. \] \medskip.
+- **Q3** — 1 pt — Attendu : calculer — \[ u_1 = 1\,000 \times 1{,}04 = 1\,040 \text{ €}, \qquad u_2 = 1\,000 \times 1{,}04^2 = 1\,000 \times 1{,}0816 \approx 1\,082 \text{ €}. \] \medskip.
+- **Q4a** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé répond à l'échelle de l'exercice, pas de cette question : aucun attendu question par question ne s'en déduit
+- **Q4b** — 1 pt — Attendu : vérifier — \textit{Vérification algébrique :} On résout $1\,000 \times 1{,}04^n \geq 1\,500$, soit $1{,}04^n \geq \dfrac{1\,500}{1\,000} = 1{,}5$.
 
 ### Exercice 4 — 4 points (C2, C4)
 
-- **Q1** — 1 pt — Attendu : justifier — Son terme général est \[ \boxed{p_n=18+4n}.
-- **Q2** — 2 pts — Attendu : établir — \] \[ \boxed{T_n=(n+1)(18+2n)}. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
-- **Q3** — 1 pt — Attendu : calculer — \] Le théâtre compte donc $\boxed{480\text{ places}}$ dans ses douze premières rangées.
+- **Q1** — 1 pt — Attendu : justifier — Son terme général est \[ \boxed{p_n=18+4n}. \] \medskip.
+- **Q2** — 2 pts — Attendu : établir — Comme $p_0=18$ et $p_n=18+4n$, on obtient \[ T_n=\frac{(n+1)(p_0+p_n)}{2} =\frac{(n+1)(18+18+4n)}{2}. \] \[ \boxed{T_n=(n+1)(18+2n)}. \] \medskip. *Crédit partiel : 1,5 pt si la première étape est correcte mais la suite erronée.*
+- **Q3** — 1 pt — Attendu : calculer — Ainsi, \[ T_{11}=(11+1)(18+2\times11)=12\times40=480. \] Le théâtre compte donc $\boxed{480\text{ places}}$ dans ses douze premières rangées.
 
 
 ## 1SPE-TRIGO-EV-A
@@ -587,9 +589,9 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 ### Exercice 4 — 5 points (C6, C7)
 
 - **Q1** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé n'établit aucun résultat repérable
-- **Q2** — 1 pt — Attendu : calculer — $\sqrt{64} = 8$, donc \[ \frac{2\sigma}{\sqrt{n}} = \frac{2 \times 2{,}4}{8} = \frac{4{,}8}{8} = 0{,}6.
+- **Q2** — 1 pt — Attendu : calculer — $\sqrt{64} = 8$, donc \[ \frac{2\sigma}{\sqrt{n}} = \frac{2 \times 2{,}4}{8} = \frac{4{,}8}{8} = 0{,}6. \] \medskip.
 - **Q3** — 1,5 pt — Attendu : justifier — Or $0{,}8 > 0{,}6$ : l'écart \textbf{dépasse} le seuil.
-- **Q4** — 1,5 pt — Attendu : calculer — \] Elle est cohérente avec l'ordre de grandeur attendu, environ $95\,\%$ : l'écart de $0{,}6$ point relève de la fluctuation de la simulation.
+- **Q4** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé n'établit aucun résultat repérable
 
 
 ## 1SPE-VARALEA-EV-B
@@ -606,7 +608,7 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 - **Q1** — 1 pt — Attendu : construire — À chaque nœud, la branche « réussi » porte $\frac14$ et la branche « manqué » $\frac34$.
 - **Q2** — 1 pt — Attendu : calculer — $P(X=0)=\left(\frac34\right)^4=\frac{81}{256}$.
 - **Q3** — 1,5 pt — Attendu : calculer — Donc $P(X=1)=4\times\frac{27}{256}=\frac{27}{64}$.
-- **Q4** — 1 pt — Attendu : calculer — L'écart type a déjà été calculé à l'exercice 1 .
+- **Q4** — 1 pt — Attendu : calculer — L'écart type a déjà été calculé à l'exercice 1.
 - **Q5** — 0,5 pt — Attendu : calculer — $P(X\geq1)=1-P(X=0)=1-\frac{81}{256}=\frac{175}{256}$.
 
 ### Exercice 3 — 4 points (C5)
@@ -618,7 +620,7 @@ Politique : `RESOLVED_BY_HUMAN_DECISION_2026_09_04`.
 ### Exercice 4 — 5 points (C6, C7)
 
 - **Q1** — `PEDAGOGICAL_JUDGEMENT_REQUIRED` : le corrigé n'établit aucun résultat repérable
-- **Q2** — 1 pt — Attendu : calculer — $\sqrt{81} = 9$, donc \[ \frac{2\sigma}{\sqrt{n}} = \frac{2 \times 1{,}8}{9} = \frac{3{,}6}{9} = 0{,}4.
+- **Q2** — 1 pt — Attendu : calculer — $\sqrt{81} = 9$, donc \[ \frac{2\sigma}{\sqrt{n}} = \frac{2 \times 1{,}8}{9} = \frac{3{,}6}{9} = 0{,}4. \] \medskip.
 - **Q3** — 1,5 pt — Attendu : justifier — L'inégalité demandée étant large, la condition $|m - \mu| \leq \dfrac{2\sigma}{\sqrt{n}}$ est \textbf{vérifiée}.
-- **Q4** — 1,5 pt — Attendu : calculer — \] Elle est cohérente avec l'ordre de grandeur attendu, environ $95\,\%$.
+- **Q4** — 1,5 pt — Attendu : calculer — La proportion vaut \[ \frac{381}{400} = 0{,}9525 = 95{,}25\,\%. \] Elle est cohérente avec l'ordre de grandeur attendu, environ $95\,\%$.
 

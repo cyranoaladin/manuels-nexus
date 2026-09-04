@@ -270,3 +270,179 @@ def test_the_gesture_list_is_read_from_the_corpus_not_guessed() -> None:
     )
     for pattern, name in gate.GESTURES:
         assert __import__("re").search(pattern, corpus), name
+
+
+# ---------------------------------------------------------------------------
+#  Un attendu appartient à SA question — les cas observés dans le manuel
+# ---------------------------------------------------------------------------
+
+# Ces quatre configurations sont celles où le même paragraphe se retrouvait
+# proposé comme attendu de plusieurs questions aux gestes différents.
+SCOPE_FIXTURES = {
+    "rappeler_vs_simplifier": (
+        [("Q1", "Rappeler la définition de la fonction exponentielle."),
+         ("Q2", "Simplifier $\\mathrm{e}^{2x-1}\\mathrm{e}^{1-x}$.")],
+        "La fonction exponentielle vérifie $y'=y$ et $y(0)=1$. "
+        "Les simplifications donnent $\\mathrm{e}^{x}$ et $\\mathrm{e}^{2x}$.",
+    ),
+    "justifier_vs_calculer": (
+        [("Q1", "Justifier que $f$ est décroissante."),
+         ("Q2", "Calculer $f(0)$ et $f(5)$.")],
+        "$f'(x)=-0{,}4\\mathrm{e}^{-0{,}4x}<0$, donc $f$ est décroissante. "
+        "$f(0)=1$ et $f(5)=\\mathrm{e}^{-2}\\approx0{,}14$.",
+    ),
+    "calculer_interpreter_justifier": (
+        [("Q1", "Calculer $P(0)$ et $P(12)$."),
+         ("Q2", "Interpréter le coefficient de $t$."),
+         ("Q3", "Justifier que le modèle est croissant.")],
+        "$P(0)=2500$ et $P(12)\\approx5136$. "
+        "Le coefficient de $t$ est positif : le modèle est croissant.",
+    ),
+    "sous_questions_interpreter_verifier": (
+        [("Q4a", "Interpréter la ligne $n = n + 1$."),
+         ("Q4b", "Vérifier que l'algorithme renvoie $9$.")],
+        "La boucle incrémente le rang. On obtient $n = 9$.",
+    ),
+}
+
+
+@pytest.mark.parametrize("name", sorted(SCOPE_FIXTURES))
+def test_an_exercise_wide_correction_proposes_nothing_question_by_question(
+    name: str,
+) -> None:
+    """Le corrigé répond à l'exercice : aucun attendu ne s'en déduit par question."""
+
+    questions, correction = SCOPE_FIXTURES[name]
+    rows = [
+        gate.propose(
+            {
+                "question": label,
+                "statement": statement,
+                "points": "1 pt",
+                "correction_answer": correction,
+                "correction_answer_scope": "exercise",
+            }
+        )
+        for label, statement in questions
+    ]
+
+    for row in rows:
+        assert row["verdict"] == "PEDAGOGICAL_JUDGEMENT_REQUIRED", row
+        assert row["expected"] == "", row
+        assert "échelle de l'exercice" in row["why"], row
+
+
+@pytest.mark.parametrize("name", sorted(SCOPE_FIXTURES))
+def test_the_same_correction_never_becomes_two_identical_expectations(
+    name: str,
+) -> None:
+    """Ce qui était le défaut : un texte partagé, servi à des gestes différents."""
+
+    questions, correction = SCOPE_FIXTURES[name]
+    expectations = [
+        gate.propose(
+            {
+                "question": label,
+                "statement": statement,
+                "points": "1 pt",
+                "correction_answer": correction,
+                "correction_answer_scope": "exercise",
+            }
+        )["expected"]
+        for label, statement in questions
+    ]
+
+    produced = [gate.result_of(row) for row in expectations if row]
+    assert len(produced) == len(set(produced))
+
+
+def test_a_correction_answering_the_parent_question_is_not_credited_to_a_sub_question() -> None:
+    row = gate.propose(
+        {
+            "question": "Q4a",
+            "statement": "Interpréter la ligne $n = n + 1$.",
+            "points": "1 pt",
+            "correction_answer": "La boucle incrémente le rang jusqu'à $n = 9$.",
+            "correction_answer_scope": "parent_question",
+        }
+    )
+
+    assert row["verdict"] == "PEDAGOGICAL_JUDGEMENT_REQUIRED"
+    assert "question mère" in row["why"]
+
+
+def test_a_question_scoped_correction_still_produces_its_proposal() -> None:
+    """Le remède ne doit pas tout refuser : ce qui est question-specific passe."""
+
+    row = gate.propose(
+        {
+            "question": "Q2",
+            "statement": "Calculer $f(0)$ et $f(5)$.",
+            "points": "1 pt",
+            "correction_answer": "$f(0)=1$ et $f(5)=\\mathrm{e}^{-2}\\approx0{,}14$.",
+            "correction_answer_scope": "question",
+        }
+    )
+
+    assert row["verdict"] == "PROPOSED"
+    assert row["expected"].startswith("calculer — ")
+    assert "$f(0)=1$" in row["expected"]
+
+
+# ---------------------------------------------------------------------------
+#  Un attendu doit pouvoir être composé
+# ---------------------------------------------------------------------------
+
+
+def test_a_correction_cut_inside_a_display_yields_no_expectation() -> None:
+    """Observé en DERGLOBAL : `\\[ ... = 10x - 11` sans `\\]`."""
+
+    row = gate.propose(
+        {
+            "question": "Q3",
+            "statement": "Donner l'équation de la tangente.",
+            "points": "1 pt",
+            "correction_answer": (
+                "Équation de la tangente : \\[ T : y = f'(2)(x - 2) + 9 = 10x - 11"
+            ),
+            "correction_answer_scope": "question",
+        }
+    )
+
+    assert row["verdict"] == "PEDAGOGICAL_JUDGEMENT_REQUIRED"
+    assert row["expected"] == ""
+
+
+def test_an_orphan_environment_close_yields_no_expectation() -> None:
+    """Observé en DERLOCAL : un fragment ouvert par `\\end{align*}`."""
+
+    row = gate.propose(
+        {
+            "question": "Q2",
+            "statement": "Calculer le taux d'accroissement.",
+            "points": "1 pt",
+            "correction_answer": "\\end{align*} \\[ \\frac{f(3+h)-f(3)}{h} = h+2",
+            "correction_answer_scope": "question",
+        }
+    )
+
+    assert row["verdict"] == "PEDAGOGICAL_JUDGEMENT_REQUIRED"
+
+
+def test_every_delivered_expectation_can_be_typeset(payload: dict[str, Any]) -> None:
+    import tex_units
+
+    assert payload["summary"]["BAREME_EXPECTED_TEX_UNBALANCED"] == 0
+    assert payload["unbalanced_expected"] == []
+    for assessment in payload["assessments"]:
+        for exercise in assessment["exercises"]:
+            for question in exercise["questions"]:
+                if question["expected"]:
+                    assert tex_units.is_balanced(question["expected"]), question
+
+
+def test_no_two_questions_of_an_exercise_share_a_result(
+    payload: dict[str, Any],
+) -> None:
+    assert payload["summary"]["BAREME_QUESTION_SCOPE_AMBIGUOUS"] == 0
+    assert payload["ambiguous_scope"] == []
