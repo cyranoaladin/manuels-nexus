@@ -18,7 +18,7 @@ depuis l'arbre par `scripts/chapter_readiness.py`.
 
 | Manuel | Programme | Chapitres | READY | EN COURS | SQUELETTE | BLOQUÉ | Capacités | Exercices | `generated` | Prêt |
 |---|---|---:|---:|---:|---:|---:|---|---:|---:|---:|
-| Mathématiques Première spécialité | 2026 | 10 | 0 | 10 | 0 | 0 | 53/53 | 482/330 | 1408/1441 | 79.3% |
+| Mathématiques Première spécialité | 2026 | 10 | 0 | 10 | 0 | 0 | 53/53 | 482/330 | 1408/1441 | 92.6% |
 | NSI Première spécialité | 2019 | 10 | 0 | 8 | 2 | 0 | 53/53 | 296/320 | 0/781 | 74.7% |
 | Mathématiques Terminale spécialité | 2019 | 11 | 0 | 10 | 1 | 0 | 67/67 | 413/376 | 56/1139 | 69.7% |
 | NSI Terminale spécialité | 2019 | 7 | 0 | 6 | 1 | 0 | 61/61 | 266/290 | 109/720 | 64.8% |

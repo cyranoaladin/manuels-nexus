@@ -151,6 +151,21 @@ def _versions_programme() -> dict:
     }
 
 
+def _variantes_du_manifeste(builds: list) -> dict[str, set[str]]:
+    """Les variantes attestées, lues sur le manifeste et sur rien d'autre."""
+
+    variantes: dict[str, set[str]] = {}
+    for build in builds:
+        if not isinstance(build, Mapping):
+            return {}
+        manuel = build.get("manual")
+        variante = build.get("variant")
+        if not isinstance(manuel, str) or not isinstance(variante, str):
+            return {}
+        variantes.setdefault(manuel, set()).add(variante)
+    return variantes
+
+
 def _builds_observes() -> dict[str, set[str]]:
     manifeste = RACINE / "audit/BUILD_MANIFEST.json"
     try:
@@ -176,11 +191,19 @@ def _builds_observes() -> dict[str, set[str]]:
         ValueError,
         subprocess.SubprocessError,
     ):
-        return {}
+        # L'inventaire exige une provenance Git propre. Répondre « aucune
+        # construction observée » quand il ne peut pas tourner rendait ce
+        # producteur non déterministe : ses PROPRES écritures salissent
+        # l'arbre, si bien qu'il s'annonçait périmé aussitôt après s'être
+        # écrit, et que `build_eleve` basculait d'un passage à l'autre.
+        # Le manifeste, lui, dit ce qu'il atteste indépendamment de l'état de
+        # l'arbre -- et il a été validé par son propre producteur au moment où
+        # il l'a écrit.
+        return _variantes_du_manifeste(builds)
 
     observes = inventaire.get("observed_builds")
     if not isinstance(observes, list):
-        return {}
+        return _variantes_du_manifeste(builds)
     variantes: dict[str, set[str]] = {}
     for build in observes:
         if not isinstance(build, Mapping):
