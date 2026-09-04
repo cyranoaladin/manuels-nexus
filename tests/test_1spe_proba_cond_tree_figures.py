@@ -459,16 +459,73 @@ def test_l_arbre_dessine_dit_ce_que_l_enonce_impose(number: str) -> None:
     assert tree_mismatches(number) == {}
 
 
-@pytest.mark.parametrize("number", TREE_EXERCISES)
+def _declared_leaf_mass(number: str) -> Fraction:
+    """La masse que les feuilles DÉCLARÉES portent, calculée sur l'énoncé.
+
+    Pour un arbre complet elle vaut 1 ; pour un arbre volontairement partiel
+    elle vaut le produit des probabilités le long des seuls chemins tracés.
+    Elle se calcule, elle ne se recopie pas.
+    """
+
+    branches = STATEMENTS[number]["branches"]
+    total = Fraction(0)
+    for path in STATEMENTS[number]["leaves"]:
+        mass = Fraction(1)
+        for depth in range(1, len(path) + 1):
+            mass *= branches[path[:depth]]
+        total += mass
+    return total
+
+
+COMPLETE_TREES = tuple(
+    number for number in TREE_EXERCISES if STATEMENTS[number]["somme"] is not None
+)
+PARTIAL_TREES = tuple(
+    number for number in TREE_EXERCISES if STATEMENTS[number]["somme"] is None
+)
+
+
+@pytest.mark.parametrize("number", COMPLETE_TREES)
 def test_les_feuilles_somment_a_un_quand_l_arbre_est_complet(number: str) -> None:
     expected = STATEMENTS[number]["somme"]
-    if expected is None:
-        pytest.skip("arbre volontairement partiel (EX-019)")
     tree = tree_of(number)
     total = sum(
         (tree.value[n] for n in tree.leaves() if n in tree.value), Fraction(0)
     )
     assert total == expected
+
+
+@pytest.mark.parametrize("number", PARTIAL_TREES)
+def test_un_arbre_volontairement_partiel_porte_exactement_sa_masse(
+    number: str,
+) -> None:
+    """Un arbre tronqué se VÉRIFIE ; il ne se saute pas.
+
+    EX-019 ne développe la branche rouge qu'aux niveaux 2 et 3 : ses feuilles ne
+    somment donc pas à un, et l'ancien contrôle se contentait de passer son
+    tour. Or le comportement est parfaitement déterministe -- la masse des
+    feuilles tracées se calcule sur l'énoncé -- et un contrôle qui saute ne
+    protège rien.
+    """
+
+    expected = _declared_leaf_mass(number)
+    tree = tree_of(number)
+    total = sum(
+        (tree.value[n] for n in tree.leaves() if n in tree.value), Fraction(0)
+    )
+
+    assert total == expected, f"EX-{number} : masse tracée {total} ≠ {expected}"
+    # C'est bien un arbre TRONQUÉ, pas un arbre complet mal déclaré.
+    assert total < 1, f"EX-{number} est déclaré partiel mais somme à un"
+    # Les feuilles dessinées sont exactement celles que l'énoncé déclare.
+    drawn = {
+        normalise(tree.event[n]) for n in tree.leaves() if n in tree.event
+    }
+    assert drawn == {
+        normalise(label) for label in STATEMENTS[number]["leaves"].values()
+    }
+    # Et aucune branche n'a été ajoutée en chemin.
+    assert tree_mismatches(number) == {}
 
 
 @pytest.mark.parametrize("number", TREE_EXERCISES)
