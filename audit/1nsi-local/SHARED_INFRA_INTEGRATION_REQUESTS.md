@@ -278,3 +278,70 @@ doivent passer. Aucun contenu 1NSI n'est concerné.
 périmés (les trois méthodes DICHO dont `1bce9de4` a corrigé la META).
 Régénérés par leurs producteurs en `987edb6e` : six lignes de diff, aucun
 verdict changé.
+
+---
+
+## Intégration autorisée du 2026-09-04 (instance B2, second lot)
+
+Pré-intégration : arbre propre, branche `codex/urgent-1nsi-content`,
+`PRE_INTEGRATION_HEAD = a587186c`. INT-006 (`ba89af6b`) était déjà intégré en
+`4863adc0` ; il n'a pas été re-cherry-pické.
+
+| Ordre | Commit C | Commit local | Objet | Conflit |
+|---|---|---|---|---|
+| 1 | `ba89af6b` | `4863adc0` (déjà fait) | INT-006 ré-observation par ensembles | dérivés seulement, régénérés |
+| 2 | `dad673c7` | `f89e661d` | garde `content_untouched` : compte rapporté, non imposé | aucun |
+| 3 | `e9490cb8` | `ef5ed34e` | INT-001 cible `remediation` valide dans `ex_co_graph` | aucun |
+| 4 | `b4483b61` | `16931ca3` | INT-005 `qcm_diagnostics` hérite les capacités du QCM | aucun |
+
+Puis :
+
+- `50fe291d` — commit de cause : `1NSI-TC-QCM-DIAG` régénéré par le générateur
+  (une ligne, la META hérite `1NSI-TYPES-CONSTRUITS-C1..C5`). Ensemble exact des
+  générés affectés : ce seul fichier ; les dix `*-QCM.tex` 1NSI sont synchrones
+  (`--check` vert).
+- `61577bfd` — dérivés régénérés par leurs producteurs : registres de
+  ré-observation, `content_untouched`, `EX_CO_GRAPH`. Idempotence prouvée :
+  `--check` rend `CURRENT` / `NO` / `current` et n'écrit rien ; arbre propre.
+
+### INT-001 — FERMÉ localement
+
+`FALSE_REMEDIATION_ORPHANS = 0 / 48`, `ORPHAN_CO = 0`, `UNKNOWN = 0` sur les
+149 relations 1NSI. Une cible inexistante échoue toujours
+(`tests/test_ex_co_graph.py`, 14 passed).
+
+### INT-005 — FERMÉ localement
+
+Un seul objet `qcm_diagnostics` dans le corpus ; régénéré, capacités héritées.
+
+### INT-007 — FERMÉ localement
+
+`test_1nsi_content_untouched` : 26/26 après `dad673c7` et régénération.
+
+### Unités
+
+```
+REOBSERVATION_SOURCE_FILE_COUNT = 468   (458 objets + 10 contrat.yaml)
+OBJECT_COUNT (objects_total)    = 458
+```
+
+L'ancien `807 → 802` était un `objects_total` ; en fichiers source il aurait
+valu `817 → 812`. Les deux unités diffèrent toujours des dix contrats.
+
+### INT-008 — `P0_CONTENT_CLONE_LEDGER` périmé (nouveau, artefact global de A)
+
+**Problème.** `build_ex_co_graph` hérite la classe `CLONE` de
+`audit/P0_CONTENT_CLONE_LEDGER.json` (`objects_on_invalid_credit` +
+`objects_with_indeterminate_credit`), dont la dernière génération (`caa7be76`,
+2 septembre) précède tous les retraits de copies synthétiques. Sur cet arbre :
+42 relations 1NSI portent `CLONE`, 84 chemins épinglés, **429 partenaires
+historiques, 0 encore existant**. Le scan exact current des 477 objets 1NSI
+donne 0 groupe.
+
+**Pourquoi non corrigé ici.** Le registre est un artefact de collection
+globale, propriété de l'intégration. Il n'est ni régénéré ni édité sur cette
+branche.
+
+**Attendu à l'intégration.** `scripts/build_p0_content_clone_ledger.py` puis
+`build_ex_co_graph` : les 42 `CLONE` 1NSI doivent tomber à 0 sans qu'aucune
+source ne change.

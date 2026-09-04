@@ -7,14 +7,35 @@ un état machine local et ce qu'il reste à faire hors de cette branche.
 
 ```
 1NSI_MACHINE_CONTENT_COMPLETE_LOCAL = YES          (10 / 10 chapitres)
-GOVERNANCE_CURRENT                  = CURRENT_AFTER_INT006_LOCAL_CHERRY_PICK
+GOVERNANCE_CURRENT                  = CURRENT_AFTER_INT006_INT007_INT001_INT005_LOCAL_CHERRY_PICKS
+NSI governance tests                = GREEN  (1748 passed / 0 failed ; racine 77 passed / 0 failed)
+INT006_failures = 0   INT001_false_orphans = 0   INT005_stale_diagnostics = 0   UNKNOWN = 0
 1NSI_PRINT_READY                    = NOT_CLAIMED
 1NSI_PUBLISH_READY                  = NOT_CLAIMED
 ```
 
-Reste hors de portée de cette branche : intégration, infra partagée (INT-001,
-INT-005, INT-007, INT-002, INT-003), 20 verdicts humains, D7, build final,
-prépresse, reproductibilité.
+Reste hors de portée de cette branche : intégration par A, INT-008 (registre
+global de clones périmé, propriété de A), INT-002 / INT-003 (hors contenu),
+20 verdicts humains, D7, build final, prépresse, reproductibilité.
+
+## Lot d'intégration autorisé (2026-09-04, après le milestone)
+
+| Ordre | Commit C | Commit local | Objet |
+|---|---|---|---|
+| 1 | `ba89af6b` | `4863adc0` (déjà intégré avant le sweep) | INT-006 |
+| 2 | `dad673c7` | `f89e661d` | garde `content_untouched` |
+| 3 | `e9490cb8` | `ef5ed34e` | INT-001 |
+| 4 | `b4483b61` | `16931ca3` | INT-005 |
+
+Puis `50fe291d` (commit de cause : `1NSI-TC-QCM-DIAG` régénéré, une ligne
+META, seul fichier généré affecté) et `61577bfd` (dérivés régénérés par leurs
+producteurs : registres de ré-observation, `content_untouched`, `EX_CO_GRAPH`).
+Aucun conflit ; idempotence prouvée (`--check` → `CURRENT` / `NO` / `current`,
+arbre propre). `HUMAN_RECEIPTS_AFFECTED = 0`.
+
+Unités, tenues séparées : `REOBSERVATION_SOURCE_FILE_COUNT = 468` (458 objets
++ 10 `contrat.yaml`), `OBJECT_COUNT = 458`. L'ancien `807 → 802` était un
+`objects_total` ; en fichiers source il aurait valu `817 → 812`.
 
 ## Provenance
 
@@ -80,9 +101,20 @@ git log --reverse --format='%H %s' ec12c2b5..987edb6e
 42. `5d1643ce` [1NSI] re-observe the two pending registers after INT-006
 43. `987edb6e` [1NSI] regenerate the two NSI ledgers that pin source digests
 
-Commits 1–29 : instance B. Commits 30–43 : instance B2. Le commit 41 est
-le seul à toucher une surface partagée (`scripts/`, `tests/`), tel que livré
-par l'instance C.
+44. `b2cba3a1` [1NSI] seal the manual-level sweep and the integration package
+45. `a587186c` [1NSI] state that the tracked manual PDFs are not rewritten by this branch
+46. `f89e661d` [tests] report the shared-template change count instead of asserting it positive (cherry-pick de `dad673c7`)
+47. `ef5ed34e` [governance] ex_co_graph accepts a remediation as explicit correction target (cherry-pick de `e9490cb8`)
+48. `16931ca3` [qcm] propagate the QCM capacities to the generated diagnostics sheet (cherry-pick de `b4483b61`)
+49. `50fe291d` [1NSI] regenerate QCM diagnostics capacity metadata after INT-005
+50. `61577bfd` [1NSI] regenerate the derived registers after INT-001, INT-005 and INT-007
+51. (ce commit) [1NSI] record the integration lot in the sweep and the package
+
+Commits 1–29 : instance B. Commits 30–45, 49–51 : instance B2. Les commits
+41, 46, 47 et 48 sont les seuls à toucher une surface partagée (`scripts/`,
+`tests/`), tels que livrés par l'instance C, dans l'ordre imposé. Le seul
+fichier de contenu touché après le milestone est `1NSI-TC-QCM-DIAG.tex`
+(généré, commit 49).
 
 ## Matrice d'état des chapitres
 
