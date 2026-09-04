@@ -38,7 +38,9 @@ print([ligne["nom"] for ligne in tries_par_age])
   \lstinline{reverse=True} à \lstinline{sorted}.
 }
 
-\exemple{Trier les adhérents par cotisation décroissante :}
+\exemple{Trier les adhérents par cotisation décroissante :
+\lstinline{sorted(adherents, key=lambda ligne: ligne["cotisation"], reverse=True)} place
+Yasmine et Karim ($120$) en tête, avant Ali, Sami et Nour ($80$).}
 
 % BEGIN-VERIFY
 % adherents = [

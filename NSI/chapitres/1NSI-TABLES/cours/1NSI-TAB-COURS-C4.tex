@@ -119,10 +119,11 @@ print(resultat)
 %     raise AssertionError
 % END-VERIFY
 
-\exemple{Si \lstinline{presences} ne contient pas d'entrée pour \lstinline{"Karim"} et
-\lstinline{"Nour"} (absents du domaine de valeurs commun), ces adhérents
-\textbf{n'apparaissent pas} dans la table fusionnée, même s'ils sont présents dans
-\lstinline{adherents} :}
+\exemple{Si \lstinline{adherents} contient Ali et Karim mais que \lstinline{presences} ne
+contient une entrée que pour \lstinline{"Ali"}, alors
+\lstinline{fusionner(adherents, presences, "nom")} renvoie une seule ligne, celle d'Ali :
+Karim, absent du domaine de valeurs commun, \textbf{n'apparaît pas} dans la table fusionnée,
+même s'il est présent dans \lstinline{adherents}.}
 
 % BEGIN-VERIFY
 % def fusionner(table1, table2, cle):
