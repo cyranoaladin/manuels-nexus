@@ -1,0 +1,71 @@
+% META: {"id": "1NSI-PM-ME-003", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "methode", "capacites": ["BO-PREAMBULE-COMPETENCES-METHODE"], "capacites_codes": ["C3"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def moyenne_buguee(valeurs):
+%     return sum(valeurs) / len(valeurs)
+% try:
+%     moyenne_buguee([])
+% except ZeroDivisionError as erreur:
+%     assert str(erreur) == "division by zero"
+% else:
+%     raise AssertionError("une liste vide doit provoquer ZeroDivisionError")
+% assert len([]) == 0
+% def moyenne(valeurs):
+%     if len(valeurs) == 0:
+%         raise ValueError("la liste ne doit pas etre vide")
+%     return sum(valeurs) / len(valeurs)
+% assert moyenne([12, 15, 18]) == 15.0
+% try:
+%     moyenne([])
+% except ValueError as erreur:
+%     assert str(erreur) == "la liste ne doit pas etre vide"
+% else:
+%     raise AssertionError("la precondition doit refuser la liste vide")
+% END-VERIFY
+\begin{fichemethode}{M3}{Lire un traceback de bas en haut, puis remonter du symptôme à la cause}
+
+\textbf{Quand l'utiliser ?} Dès qu'un programme plante ou donne un résultat faux, et
+chaque fois qu'un énoncé demande « quel type d'erreur », « quelle ligne », « quelle cause »
+ou « corriger ».
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Lis la dernière ligne du traceback} : elle donne le \emph{type} de l'erreur
+        (\lstinline{ZeroDivisionError}, \lstinline{IndexError}, \lstinline{KeyError},
+        \lstinline{TypeError}) et son \emph{message}. Recopie les deux exactement.
+  \item \textbf{Remonte à la ligne de ton code} désignée juste au-dessus : c'est l'endroit
+        où l'erreur s'est produite, pas forcément celui où elle est née.
+  \item \textbf{Nomme la valeur impossible} à cet endroit : quel nom, quelle valeur ? Un
+        dénominateur qui vaut $0$, un indice égal à la longueur, une clé absente, un entier
+        là où une chaîne était attendue. Le type de l'erreur te dit quoi chercher.
+  \item \textbf{Formule une hypothèse sur l'origine} de cette valeur, et vérifie-la avec un
+        \lstinline{print} ou un \lstinline{len} placé juste avant la ligne fautive. Ne
+        modifie rien tant que l'hypothèse n'est pas confirmée.
+  \item \textbf{Corrige à la cause}, puis protège : une précondition explicite qui refuse la
+        valeur impossible avec un message clair (\lstinline{raise ValueError(...)}), et un
+        test qui rejoue le cas qui plantait.
+\end{enumerate}
+
+\textbf{Exemple rédigé.} L'appel \lstinline{moyenne_buguee([])} affiche un traceback qui
+se termine par la ligne suivante.
+\begin{console}
+ZeroDivisionError: division by zero
+\end{console}
+La ligne de code désignée juste au-dessus est
+\lstinline{return sum(valeurs) / len(valeurs)}. Valeur impossible : le dénominateur
+\lstinline{len(valeurs)} vaut $0$. Hypothèse : la fonction a été appelée avec une liste
+vide ; \lstinline{print(len(valeurs))} affiche bien $0$. Correction à la cause : une liste
+vide n'a pas de moyenne, la fonction doit le dire.
+\begin{python}
+def moyenne(valeurs):
+    if len(valeurs) == 0:
+        raise ValueError("la liste ne doit pas etre vide")
+    return sum(valeurs) / len(valeurs)
+\end{python}
+Le test \lstinline{moyenne([12, 15, 18]) == 15.0} continue de passer, et l'appel sur la
+liste vide produit désormais un message qui explique le problème.
+
+\textbf{Erreur fréquente.} Modifier une ligne au hasard jusqu'à ce que le message
+disparaisse : le symptôme s'efface, la cause reste. Ou supprimer la fonction mise en cause,
+ce qui supprime aussi la fonctionnalité.
+
+\end{fichemethode}

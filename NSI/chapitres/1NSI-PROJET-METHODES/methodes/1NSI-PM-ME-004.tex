@@ -1,0 +1,62 @@
+% META: {"id": "1NSI-PM-ME-004", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "methode", "capacites": ["BO-PREAMBULE-COMPETENCES-ORALES"], "capacites_codes": ["C4"], "methodes": ["M4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def a_une_docstring(fonction):
+%     return fonction.__doc__ is not None and len(fonction.__doc__.strip()) > 0
+% def nombre_voyelles(mot):
+%     return sum(1 for caractere in mot if caractere in "aeiouy")
+% assert a_une_docstring(nombre_voyelles) is False
+% def nombre_voyelles_documente(mot):
+%     """Renvoie le nombre de voyelles (a, e, i, o, u, y) de mot.
+%
+%     Precondition : mot est une chaine en minuscules sans accent.
+%     Postcondition : le resultat est un entier entre 0 et len(mot).
+%     """
+%     return sum(1 for caractere in mot if caractere in "aeiouy")
+% assert a_une_docstring(nombre_voyelles_documente) is True
+% assert nombre_voyelles_documente("informatique") == 6
+% assert nombre_voyelles_documente("") == 0
+% END-VERIFY
+\begin{fichemethode}{M4}{Documenter une fonction en trois lignes, puis bâtir un oral de deux minutes en quatre points}
+
+\textbf{Quand l'utiliser ?} Quand l'énoncé demande d'écrire ou de corriger une docstring, ou
+de préparer l'explication orale d'une fonction ou d'un projet.
+
+\textbf{Pas à pas --- la docstring :}
+\begin{enumerate}
+  \item \textbf{Première ligne : ce que la fonction renvoie ou fait}, en une phrase qui
+        commence par un verbe : « Renvoie le nombre de voyelles de \lstinline{mot} ».
+  \item \textbf{Précondition} : ce que les arguments doivent vérifier pour que l'appel ait un
+        sens (type, non-vide, minuscules).
+  \item \textbf{Postcondition} : ce que le résultat garantit (un entier entre $0$ et
+        \lstinline{len(mot)}). Si tu ne sais pas l'écrire, c'est que tu ne sais pas encore
+        ce que la fonction promet.
+  \item \textbf{Vérifie} avec \lstinline{a_une_docstring} que la docstring existe, puis
+        relis-la : le nom de l'auteur ou la date n'y ont pas leur place, ils ne disent rien
+        du comportement.
+\end{enumerate}
+
+\textbf{Pas à pas --- l'oral de deux minutes :}
+\begin{enumerate}
+  \item \textbf{Le problème} : quelle question la fonction ou le projet résout, en une
+        phrase.
+  \item \textbf{Le choix} : la solution retenue, et pourquoi elle plutôt qu'une autre.
+  \item \textbf{La difficulté} : ce qui a bloqué, et comment cela a été surmonté (un bug
+        trouvé grâce au traceback, un test qui a révélé un cas limite).
+  \item \textbf{La démonstration} : un appel concret avec son résultat, préparé à l'avance.
+        Répète à voix haute, chronomètre : deux minutes, c'est court.
+\end{enumerate}
+
+\textbf{Exemple rédigé.} Pour \lstinline{nombre_voyelles(mot)} : « Renvoie le nombre de
+voyelles (a, e, i, o, u, y) de \lstinline{mot}. Précondition : \lstinline{mot} est une chaîne
+en minuscules sans accent. Postcondition : le résultat est un entier entre $0$ et
+\lstinline{len(mot)}. » \lstinline{a_une_docstring} renvoie désormais \lstinline{True}. Oral :
+problème (compter les voyelles pour un jeu de mots) ; choix (parcourir la chaîne une fois et
+tester l'appartenance à \lstinline{"aeiouy"}) ; difficulté (les majuscules et les accents
+n'étaient pas comptés, d'où la précondition) ; démonstration
+(\lstinline{nombre_voyelles("informatique")} renvoie $6$).
+
+\textbf{Erreur fréquente.} Une docstring qui ne contient que « écrit par Sara le 12 mars » :
+elle existe, mais n'apprend rien à qui veut utiliser la fonction. Ou un oral qui lit le code
+ligne par ligne : le jury a le code sous les yeux, il attend le raisonnement.
+
+\end{fichemethode}
