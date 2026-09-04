@@ -4,33 +4,36 @@
 
 > la campagne de revue 1NSI reste PENDING ; ce producteur ne mesure que l'etat courant et ne leve aucune attente
 
-## Cause
+État : `CURRENT`
 
-- commit : `2d522877b67a2417602a40e33b7f3bd1f0c620ab`
-- sujet : [1NSI] retirer 44 cours qui dupliquaient ou usurpaient un autre objet
-- date : 2026-09-01
-- objets `.tex` supprimés sous `NSI/chapitres` : 44
+## Source set
+
+- déclaré (historique) : commit `3dae8002d0ab6bdb5cdab676ccd53a2b375a5b40`, 817 sources, `sha256:45d1ffcf341024851a821d018f84f83b195bece989ec3ff20c55046d22b540c1`
+- observé (courant) : 817 sources, `sha256:45d1ffcf341024851a821d018f84f83b195bece989ec3ff20c55046d22b540c1`
+- ajoutés : 0 ; retirés : 0 ; modifiés : 0 ; inchangés : 817
+
+## Commits de cause
+
+- aucun depuis le dernier état observé ; dernière mutation du périmètre : `2d522877b67a2417602a40e33b7f3bd1f0c620ab` ([1NSI] retirer 44 cours qui dupliquaient ou usurpaient un autre objet)
 
 ## Métriques
 
 | Métrique | Valeur |
 |---|---:|
 | `REGISTERS` | 2 |
-| `FIELDS_REOBSERVED` | 9 |
+| `FIELDS_REOBSERVED` | 0 |
 | `SEALED_FIELDS_MUTATED` | 0 |
+| `CAUSE_COMMITS` | 0 |
+| `SOURCES_ADDED` | 0 |
+| `SOURCES_REMOVED` | 0 |
+| `SOURCES_MODIFIED` | 0 |
+| `UNEXPLAINED_ADDITIONS` | 0 |
+| `UNEXPLAINED_REMOVALS` | 0 |
+| `UNEXPLAINED_MODIFICATIONS` | 0 |
 | `UNEXPLAINED_DELTA` | 0 |
-| `DELETED_TEX_FILES_IN_CAUSE_COMMIT` | 44 |
+| `HUMAN_RECEIPTS_AFFECTED` | 0 |
 
 ## Champs ré-observés
 
 | Registre | Champ | Déclaré | Observé |
 |---|---|---|---|
-| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.sources_count` | `861` | `817` |
-| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.sources_ids_digest` | `sha256:565758d105188eac1527efc149e3436a4682ffdd00356def8e76e836fc96cb6a` | `sha256:45d1ffcf341024851a821d018f84f83b195bece989ec3ff20c55046d22b540c1` |
-| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.object_sources_count` | `851` | `807` |
-| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.ids_only_in_sources_count` | `531` | `487` |
-| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.ids_only_in_sources_digest` | `sha256:0c42e6f989bafb7088267e6dab6cd66033883f68e16c1b2bc7a0dacc2420b525` | `sha256:12739bc9b6556e234dc33c4cffe55d4327fff30a095227fe91647d849bdad765` |
-| `1NSI_STATUS_GOVERNANCE_PENDING` | `observed_counts` | `dict[4]` | `dict[4]` |
-| `1NSI_STATUS_GOVERNANCE_PENDING` | `objects_total` | `851` | `807` |
-| `1NSI_STATUS_GOVERNANCE_PENDING` | `prohibited_status_objects_count` | `485` | `441` |
-| `1NSI_STATUS_GOVERNANCE_PENDING` | `prohibited_status_objects_digest` | `sha256:360dc2646153cf9b8482eedd73af4d55e2da9050843d2a961eb892a83bbf9687` | `sha256:e54846025a605977292e8f613f36fe5bf73c836e7a11e46daea1323cc50a0eed` |

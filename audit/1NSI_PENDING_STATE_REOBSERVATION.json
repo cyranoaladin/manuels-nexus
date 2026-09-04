@@ -2,77 +2,16 @@
   "approves_nothing": "la campagne de revue 1NSI reste PENDING ; ce producteur ne mesure que l'etat courant et ne leve aucune attente",
   "artifact_type": "1nsi_pending_state_reobservation",
   "cause": {
+    "baseline": "3dae8002d0ab6bdb5cdab676ccd53a2b375a5b40",
+    "cause_commits_count": 0,
     "date": "2026-09-01",
-    "deleted_tex_files": 44,
     "sha": "2d522877b67a2417602a40e33b7f3bd1f0c620ab",
+    "sources_added": 0,
+    "sources_modified": 0,
+    "sources_removed": 0,
     "subject": "[1NSI] retirer 44 cours qui dupliquaient ou usurpaient un autre objet"
   },
-  "delta": [
-    {
-      "declared": 861,
-      "field": "observed.sources_count",
-      "observed": 817,
-      "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE"
-    },
-    {
-      "declared": "sha256:565758d105188eac1527efc149e3436a4682ffdd00356def8e76e836fc96cb6a",
-      "field": "observed.sources_ids_digest",
-      "observed": "sha256:45d1ffcf341024851a821d018f84f83b195bece989ec3ff20c55046d22b540c1",
-      "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE"
-    },
-    {
-      "declared": 851,
-      "field": "observed.object_sources_count",
-      "observed": 807,
-      "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE"
-    },
-    {
-      "declared": 531,
-      "field": "observed.ids_only_in_sources_count",
-      "observed": 487,
-      "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE"
-    },
-    {
-      "declared": "sha256:0c42e6f989bafb7088267e6dab6cd66033883f68e16c1b2bc7a0dacc2420b525",
-      "field": "observed.ids_only_in_sources_digest",
-      "observed": "sha256:12739bc9b6556e234dc33c4cffe55d4327fff30a095227fe91647d849bdad765",
-      "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE"
-    },
-    {
-      "declared": {
-        "approved": 485,
-        "manual_review": 7,
-        "needs_review": 210,
-        "verified": 149
-      },
-      "field": "observed_counts",
-      "observed": {
-        "approved": 441,
-        "manual_review": 7,
-        "needs_review": 210,
-        "verified": 149
-      },
-      "register": "1NSI_STATUS_GOVERNANCE_PENDING"
-    },
-    {
-      "declared": 851,
-      "field": "objects_total",
-      "observed": 807,
-      "register": "1NSI_STATUS_GOVERNANCE_PENDING"
-    },
-    {
-      "declared": 485,
-      "field": "prohibited_status_objects_count",
-      "observed": 441,
-      "register": "1NSI_STATUS_GOVERNANCE_PENDING"
-    },
-    {
-      "declared": "sha256:360dc2646153cf9b8482eedd73af4d55e2da9050843d2a961eb892a83bbf9687",
-      "field": "prohibited_status_objects_digest",
-      "observed": "sha256:e54846025a605977292e8f613f36fe5bf73c836e7a11e46daea1323cc50a0eed",
-      "register": "1NSI_STATUS_GOVERNANCE_PENDING"
-    }
-  ],
+  "delta": [],
   "generated_by": "scripts/build_1nsi_pending_state_reobservation.py",
   "no_1nsi_content_is_modified": true,
   "registers": [
@@ -85,13 +24,43 @@
       "status": "PENDING_HUMAN_REVIEW"
     }
   ],
-  "schema_version": 1,
+  "schema_version": 2,
+  "source_set": {
+    "added": [],
+    "affected_chapters": [],
+    "attribution": [],
+    "cause_commits": [],
+    "declared_historical": {
+      "commit": "3dae8002d0ab6bdb5cdab676ccd53a2b375a5b40",
+      "count": 817,
+      "ids_digest": "sha256:45d1ffcf341024851a821d018f84f83b195bece989ec3ff20c55046d22b540c1",
+      "paths_digest": "sha256:9a9dca81bb68f665c846fbff33f4e035213f1ffd98a1d02b728fa21c4f8c4e80"
+    },
+    "human_receipts_affected": [],
+    "identity_moves": [],
+    "modified_existing": [],
+    "observed_current": {
+      "count": 817,
+      "ids_digest": "sha256:45d1ffcf341024851a821d018f84f83b195bece989ec3ff20c55046d22b540c1",
+      "paths_digest": "sha256:9a9dca81bb68f665c846fbff33f4e035213f1ffd98a1d02b728fa21c4f8c4e80"
+    },
+    "removed": [],
+    "unchanged_count": 817
+  },
+  "state": "CURRENT",
   "summary": {
-    "DELETED_TEX_FILES_IN_CAUSE_COMMIT": 44,
-    "FIELDS_REOBSERVED": 9,
+    "CAUSE_COMMITS": 0,
+    "FIELDS_REOBSERVED": 0,
+    "HUMAN_RECEIPTS_AFFECTED": 0,
     "REGISTERS": 2,
     "SEALED_FIELDS_MUTATED": 0,
-    "UNEXPLAINED_DELTA": 0
+    "SOURCES_ADDED": 0,
+    "SOURCES_MODIFIED": 0,
+    "SOURCES_REMOVED": 0,
+    "UNEXPLAINED_ADDITIONS": 0,
+    "UNEXPLAINED_DELTA": 0,
+    "UNEXPLAINED_MODIFICATIONS": 0,
+    "UNEXPLAINED_REMOVALS": 0
   },
   "unexplained_delta": []
 }
