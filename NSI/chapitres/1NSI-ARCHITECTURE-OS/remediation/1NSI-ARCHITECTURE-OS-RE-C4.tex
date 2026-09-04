@@ -1,0 +1,28 @@
+% META: {"id": "1NSI-ARCHITECTURE-OS-RE-C4", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "remediation", "capacites": ["P-ARCH-03B"], "capacites_codes": ["C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C4 : chaque commande fait UNE chose
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu attends d'une commande qu'elle fasse ce que fait sa voisine.
+\lstinline{cd} change de répertoire courant : elle déplace, elle n'affiche rien.
+\lstinline{mkdir} crée un répertoire : elle ne lit pas celui qui existe. Seule
+\lstinline{ls} affiche un contenu.
+
+\textbf{À retenir.} Trois verbes à ne pas mélanger : \emph{lire} (\lstinline{ls}),
+\emph{se déplacer} (\lstinline{cd}), \emph{créer} (\lstinline{mkdir}). Et \lstinline{pwd}
+répond à la seule question qui compte quand on est perdu : où suis-je ?
+
+\begin{exercice}{1NSI-ARCHOS-RE-C4-EX1}{1}{10}
+On part du répertoire \lstinline{/home/eleve}, qui contient déjà un répertoire
+\lstinline{cours}.
+\begin{enumerate}
+  \item Que produit chacune de ces commandes, exécutées dans l'ordre :
+        \lstinline{pwd}, \lstinline{ls}, \lstinline{cd cours}, \lstinline{pwd} ?
+        Préciser à chaque fois ce qui est affiché, ou rien.
+  \item Écrire les commandes créant un répertoire \lstinline{tp} dans \lstinline{cours}, puis
+        s'y plaçant, puis vérifiant qu'il est vide.
+  \item Un élève écrit \lstinline{mkdir cours} pour voir ce que contient \lstinline{cours}.
+        Que se passe-t-il réellement ?
+\end{enumerate}
+\end{exercice}

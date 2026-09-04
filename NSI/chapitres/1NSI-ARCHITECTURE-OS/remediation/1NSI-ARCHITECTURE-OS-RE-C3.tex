@@ -1,0 +1,26 @@
+% META: {"id": "1NSI-ARCHITECTURE-OS-RE-C3", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "remediation", "capacites": ["P-ARCH-03A"], "capacites_codes": ["C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : le systeme arbitre, il ne bloque pas
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu prêtes au système d'exploitation un rôle d'obstacle. Il
+\emph{régule} l'accès aux ressources : bloquer les programmes serait l'exact contraire de sa
+fonction. Et un logiciel ne se substitue pas au matériel — le système organise l'accès au
+processeur, il ne le rend pas plus rapide.
+
+\textbf{À retenir.} À chaque ressource sa fonction : le processeur relève de l'ordonnancement,
+la mémoire de son allocation, les fichiers du système de fichiers, les périphériques des
+pilotes, les utilisateurs de la gestion des droits.
+
+\begin{exercice}{1NSI-ARCHOS-RE-C3-EX1}{1}{10}
+Pour chaque situation, nommer la ressource en jeu puis la fonction du système concernée.
+\begin{enumerate}
+  \item Trois programmes semblent progresser en même temps sur une machine à un seul cœur.
+  \item Un document enregistré hier est retrouvé au même endroit aujourd'hui.
+  \item Une imprimante est utilisée successivement par deux applications.
+  \item Un utilisateur ne peut pas ouvrir le fichier d'un autre.
+\end{enumerate}
+Puis expliquer, en une phrase, pourquoi « le système ralentit les programmes » est une
+description fautive de l'ordonnancement.
+\end{exercice}

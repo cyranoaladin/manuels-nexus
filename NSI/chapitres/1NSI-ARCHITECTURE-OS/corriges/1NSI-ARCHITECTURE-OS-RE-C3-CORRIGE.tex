@@ -1,0 +1,16 @@
+% META: {"id": "1NSI-ARCHITECTURE-OS-RE-C3-CORRIGE", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "corrige", "exercice_ref": "1NSI-ARCHITECTURE-OS-RE-C3", "capacites": ["P-ARCH-03A"], "capacites_codes": ["C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-ARCHITECTURE-OS-RE-C3}
+\begin{enumerate}
+  \item Ressource : le \textbf{processeur}. Fonction : l'\textbf{ordonnancement}. Le système
+        alterne très rapidement entre les programmes ; la simultanéité est une illusion.
+  \item Ressource : le \textbf{disque}. Fonction : le \textbf{système de fichiers}, qui donne
+        aux données un nom et un emplacement stables.
+  \item Ressource : un \textbf{périphérique}. Fonction : le \textbf{pilote}, et l'arbitrage des
+        accès concurrents.
+  \item Ressource : les \textbf{fichiers} et leurs propriétaires. Fonction : la \textbf{gestion
+        des droits}.
+\end{enumerate}
+« Le système ralentit les programmes » est fautif : sans ordonnanceur, un seul programme
+occuperait le processeur et les autres n'avanceraient \emph{pas du tout}. Le partage ne retire
+pas du temps, il en distribue.
+\end{corrige}

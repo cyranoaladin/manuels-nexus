@@ -1,0 +1,13 @@
+% META: {"id": "1NSI-ARCHITECTURE-OS-RE-C2-CORRIGE", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "corrige", "exercice_ref": "1NSI-ARCHITECTURE-OS-RE-C2", "capacites": ["P-ARCH-01B"], "capacites_codes": ["C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-ARCHITECTURE-OS-RE-C2}
+\begin{enumerate}
+  \item Après « charger \lstinline{a} » : compteur $1$, accumulateur $4$.
+        Après « ajouter \lstinline{b} » : compteur $2$, accumulateur $10$.
+        Après « ajouter \lstinline{a} » : compteur $3$, accumulateur $14$.
+        Après « ranger \lstinline{c} » : compteur $4$, accumulateur inchangé à $14$.
+  \item \lstinline{c} vaut $\mathbf{14}$. \lstinline{a} vaut toujours $4$ et \lstinline{b}
+        toujours $6$ : les lire ne les modifie pas.
+  \item \textbf{Une seule} à la fois. Le compteur ordinal avance d'un cran par instruction ;
+        il n'en désigne jamais deux.
+\end{enumerate}
+\end{corrige}

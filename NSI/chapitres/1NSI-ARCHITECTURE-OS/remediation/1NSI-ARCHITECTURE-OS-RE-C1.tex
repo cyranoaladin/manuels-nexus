@@ -1,0 +1,24 @@
+% META: {"id": "1NSI-ARCHITECTURE-OS-RE-C1", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "remediation", "capacites": ["P-ARCH-01A"], "capacites_codes": ["C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : von Neumann, une seule memoire
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu décris l'architecture de Harvard en croyant décrire celle de von
+Neumann. La rupture introduite par von Neumann est précisément qu'\textbf{une même mémoire}
+contient les données \emph{et} le programme. Séparer les deux, c'est Harvard.
+
+\textbf{À retenir.} Et les registres ne sont pas une petite mémoire d'appoint : ils sont
+internes au processeur, très rapides, et ne contiennent que les quelques valeurs en cours de
+traitement. Ils ne remplacent jamais la mémoire.
+
+\begin{exercice}{1NSI-ARCHOS-RE-C1-EX1}{1}{10}
+\begin{enumerate}
+  \item Pour chacun des éléments — processeur, mémoire, registres, bus — donner en une phrase
+        ce qu'il fait, et ce qu'il ne fait pas.
+  \item Un élève affirme : « dans l'architecture de von Neumann, le programme est rangé
+        séparément des données ». Corriger, et nommer l'architecture qu'il décrit.
+  \item Pourquoi ne peut-on pas se passer de la mémoire en agrandissant simplement les
+        registres ?
+\end{enumerate}
+\end{exercice}

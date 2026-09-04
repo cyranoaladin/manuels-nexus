@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-ARCHOS-EVAL-A-corrige", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-ARCHOS-EVAL-A", "capacites": ["P-ARCH-01A", "P-ARCH-01B", "P-ARCH-03A", "P-ARCH-03C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% META: {"id": "1NSI-ARCHOS-EVAL-A-corrige", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-ARCHOS-EVAL-A", "capacites": ["P-ARCH-01A", "P-ARCH-01B", "P-ARCH-03A", "P-ARCH-03B", "P-ARCH-03C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % def executer(programme, memoire):
 %     registres = {}
@@ -81,3 +81,20 @@ gestion des fichiers).
 \textbf{3.} \lstinline{rwx}=$7$, \lstinline{r-x}=$5$, \lstinline{---}=$0$ : notation
 octale \lstinline{750}.
 \end{corrige}
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{En ligne de commande} \hfill (10 points)
+
+\begin{enumerate}
+  \item (2 pts) \lstinline{pwd} affiche le répertoire courant ; \lstinline{ls} affiche son
+        contenu.
+  \item (3 pts) \lstinline{mkdir nsi/tp1} puis \lstinline{cd nsi/tp1}.
+  \item (2 pts) \lstinline{pwd} renvoie \lstinline{/home/leila/nsi/tp1}. \lstinline{ls}
+        n'affiche rien : le répertoire vient d'être créé, il est vide.
+  \item (3 pts) Première méprise : \lstinline{cd} \emph{déplace}, elle n'affiche rien — c'est
+        \lstinline{pwd} qui rend le déplacement visible.
+        Seconde méprise : \lstinline{mkdir} \emph{crée} ; appliquée à un répertoire existant
+        elle échoue avec un message d'erreur et n'affiche aucun contenu. Il fallait écrire
+        \lstinline{ls nsi}.
+\end{enumerate}

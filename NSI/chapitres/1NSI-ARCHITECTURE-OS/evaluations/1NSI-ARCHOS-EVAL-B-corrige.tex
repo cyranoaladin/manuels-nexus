@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-ARCHOS-EVAL-B-corrige", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-ARCHOS-EVAL-B", "capacites": ["P-ARCH-01A", "P-ARCH-01B", "P-ARCH-03A", "P-ARCH-03C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% META: {"id": "1NSI-ARCHOS-EVAL-B-corrige", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-ARCHOS-EVAL-B", "capacites": ["P-ARCH-01A", "P-ARCH-01B", "P-ARCH-03A", "P-ARCH-03B", "P-ARCH-03C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % def executer(programme, memoire):
 %     registres = {}
@@ -79,3 +79,19 @@ et gestion des fichiers (organiser le stockage sur disque).
 \textbf{3.} \lstinline{rw-}=$6$, \lstinline{rw-}=$6$, \lstinline{r--}=$4$ : notation
 octale \lstinline{664}.
 \end{corrige}
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{En ligne de commande} \hfill (10 points)
+
+\begin{enumerate}
+  \item (2 pts) \lstinline{pwd} affiche le répertoire courant ; \lstinline{ls} affiche son
+        contenu.
+  \item (3 pts) \lstinline{mkdir projets/jeu} puis \lstinline{cd projets/jeu}.
+  \item (2 pts) \lstinline{pwd} renvoie \lstinline{/home/karim/projets/jeu}. \lstinline{ls}
+        n'affiche rien : le répertoire est vide.
+  \item (3 pts) Première méprise : \lstinline{mkdir} \emph{crée} et ne lit pas ; appliquée à un
+        répertoire existant elle échoue. Il fallait \lstinline{ls projets}.
+        Seconde méprise : \lstinline{cd} \emph{déplace} en silence ; c'est \lstinline{pwd} qui
+        rend le déplacement visible.
+\end{enumerate}

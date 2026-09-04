@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-ARCHOS-EVAL-A", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "evaluation", "capacites": ["P-ARCH-01A", "P-ARCH-01B", "P-ARCH-03A", "P-ARCH-03C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
+% META: {"id": "1NSI-ARCHOS-EVAL-A", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "evaluation", "capacites": ["P-ARCH-01A", "P-ARCH-01B", "P-ARCH-03A", "P-ARCH-03B", "P-ARCH-03C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 60, "status": "verified"}
 \section*{Évaluation A --- Architecture et systèmes d'exploitation}
 \textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
 
@@ -82,3 +82,21 @@ programme = [
 % assert droit_accorde(perm, "autres", "lecture") is False
 % assert permissions_vers_octal(perm) == "750"
 % END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{En ligne de commande} \hfill (10 points)
+
+Un élève ouvre un terminal. Il se trouve dans \lstinline{/home/leila}, qui contient un
+répertoire \lstinline{nsi} et un fichier \lstinline{notes.txt}.
+
+\begin{enumerate}
+  \item (2 pts) Quelle commande affiche le répertoire courant ? Quelle commande affiche son
+        contenu ?
+  \item (3 pts) Écrire les commandes qui créent un répertoire \lstinline{tp1} dans
+        \lstinline{nsi}, puis s'y placent.
+  \item (2 pts) Après ces commandes, que renvoie \lstinline{pwd} ? Que renvoie \lstinline{ls} ?
+  \item (3 pts) L'élève tape \lstinline{cd} et s'étonne que rien ne s'affiche, puis
+        \lstinline{mkdir nsi} en espérant voir le contenu de \lstinline{nsi}. Expliquer les
+        deux méprises, et donner la commande qu'il fallait employer dans le second cas.
+\end{enumerate}

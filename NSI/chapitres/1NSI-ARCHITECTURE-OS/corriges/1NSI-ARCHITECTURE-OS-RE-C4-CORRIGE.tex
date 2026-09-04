@@ -1,0 +1,15 @@
+% META: {"id": "1NSI-ARCHITECTURE-OS-RE-C4-CORRIGE", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "corrige", "exercice_ref": "1NSI-ARCHITECTURE-OS-RE-C4", "capacites": ["P-ARCH-03B"], "capacites_codes": ["C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-ARCHITECTURE-OS-RE-C4}
+\begin{enumerate}
+  \item \lstinline{pwd} affiche \lstinline{/home/eleve}.
+        \lstinline{ls} affiche le contenu, dont \lstinline{cours}.
+        \lstinline{cd cours} \textbf{n'affiche rien} : elle déplace en silence.
+        \lstinline{pwd} affiche alors \lstinline{/home/eleve/cours} — c'est elle qui rend le
+        déplacement visible.
+  \item \lstinline{mkdir cours/tp}, puis \lstinline{cd cours/tp}, puis \lstinline{ls}, qui
+        n'affiche rien puisque le répertoire est vide.
+  \item Rien de ce qu'il attend. \lstinline{mkdir cours} tente de \emph{créer} un répertoire
+        déjà existant : la commande échoue avec un message d'erreur, et n'affiche aucun
+        contenu. Pour lire, il fallait \lstinline{ls cours}.
+\end{enumerate}
+\end{corrige}
