@@ -1,8 +1,8 @@
-% META: {"id": "1NSI-RES-EVAL-A", "chapitre": "1NSI-RESEAUX", "type_objet": "evaluation", "capacites": ["P-ARCH-02A", "P-ARCH-02B", "P-ARCH-02C", "P-ARCH-04A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
+% META: {"id": "1NSI-RES-EVAL-A", "chapitre": "1NSI-RESEAUX", "type_objet": "evaluation", "capacites": ["P-ARCH-02A", "P-ARCH-02B", "P-ARCH-02C", "P-ARCH-04A", "P-ARCH-04B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 60, "status": "verified"}
 \section*{Évaluation A --- Réseaux}
-\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+\textit{Durée : 60 minutes. Ordinateur avec interpréteur Python autorisé.}
 
-\baremeIndicatif{Ex. 1 : 10 pts (paquets, bit alterné) ; Ex. 2 : 10 pts (réseau, capteurs)}
+\baremeIndicatif{Ex. 1 : 10 pts (paquets, bit alterné) ; Ex. 2 : 10 pts (réseau, capteurs) ; Ex. 3 : 10 pts (IHM, cahier des charges)}
 
 \bigskip
 
@@ -78,4 +78,39 @@
 %     return humidite < seuil
 % assert decider_arrosage(20) is True
 % assert decider_arrosage(30) is False
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{IHM et cahier des charges} \hfill (10 points)
+
+Cahier des charges d'un volet roulant automatique : le volet \textbf{descend} lorsque la
+luminosité extérieure dépasse $800$ lux, et ne \textbf{remonte} que lorsqu'elle redescend
+sous $500$ lux. L'état du volet est mémorisé dans \lstinline|etat = {"volet_bas": False}|.
+
+\begin{enumerate}
+  \item (4 pts) Écrire une fonction
+        \lstinline{decider_volet(luminosite, seuil_descente=800, seuil_montee=500)} qui met à
+        jour \lstinline{etat["volet_bas"]} selon ce cahier des charges et renvoie sa nouvelle
+        valeur.
+  \item (3 pts) Donner la séquence des états pour les mesures
+        \lstinline{[600, 900, 700, 400, 600]} (une mesure toutes les dix minutes), en
+        justifiant la réponse à la mesure $700$.
+  \item (3 pts) Le volet est levé et la luminosité vaut exactement $800$ lux : descend-il ?
+        Expliquer ensuite ce qui se passerait, avec un seul seuil à $800$ lux, si la
+        luminosité oscillait entre $790$ et $810$ lux.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% etat = {"volet_bas": False}
+% def decider_volet(luminosite, seuil_descente=800, seuil_montee=500):
+%     if etat["volet_bas"]:
+%         if luminosite < seuil_montee:
+%             etat["volet_bas"] = False
+%     else:
+%         if luminosite > seuil_descente:
+%             etat["volet_bas"] = True
+%     return etat["volet_bas"]
+% assert [decider_volet(l) for l in [600, 900, 700, 400, 600]] == [False, True, True, False, False]
+% assert decider_volet(800) is False
 % END-VERIFY

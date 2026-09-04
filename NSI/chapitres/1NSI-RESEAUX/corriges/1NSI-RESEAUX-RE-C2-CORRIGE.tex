@@ -1,0 +1,19 @@
+% META: {"id": "1NSI-RESEAUX-RE-C2-CORRIGE", "chapitre": "1NSI-RESEAUX", "type_objet": "corrige", "exercice_ref": "1NSI-RESEAUX-RE-C2", "capacites": ["P-ARCH-02B"], "capacites_codes": ["C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-RESEAUX-RE-C2}
+\begin{enumerate}
+  \item Le tableau change le bit à \textbf{chaque tentative}. Or le bit ne bascule
+        qu'après une réception confirmée : la retransmission de \lstinline{"K"} doit porter
+        le bit $0$, comme le premier envoi. Avec le bit $1$, le récepteur voit un bit qu'il
+        n'a jamais reçu et croit recevoir un \emph{nouveau} message : rien ne lui permet de
+        reconnaître une retransmission.
+  \item Tableau correct : tentative $1$, \lstinline{"K"}, bit $0$, perdu ; tentative $2$,
+        \lstinline{"K"}, bit $0$, reçu ; tentative $3$, \lstinline{"L"}, bit $1$, perdu ;
+        tentative $4$, \lstinline{"L"}, bit $1$, reçu. Reçus :
+        \lstinline{[(0, "K"), (1, "L")]}, en $4$ tentatives.
+  \item L'émetteur n'a pas reçu l'accusé : pour lui, rien ne distingue « paquet perdu » de
+        « accusé perdu ». Il retransmet donc \lstinline{"K"} avec le bit $0$. Le récepteur
+        reçoit \lstinline{"K"} une \textbf{seconde} fois, avec un bit $0$ qu'il a déjà
+        accepté : il reconnaît un doublon, l'ignore, et renvoie simplement l'accusé pour le
+        bit $0$. C'est exactement le rôle du bit : distinguer une répétition d'une nouveauté.
+\end{enumerate}
+\end{corrige}

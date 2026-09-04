@@ -1,8 +1,8 @@
-% META: {"id": "1NSI-RES-EVAL-B", "chapitre": "1NSI-RESEAUX", "type_objet": "evaluation", "capacites": ["P-ARCH-02A", "P-ARCH-02B", "P-ARCH-02C", "P-ARCH-04A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
+% META: {"id": "1NSI-RES-EVAL-B", "chapitre": "1NSI-RESEAUX", "type_objet": "evaluation", "capacites": ["P-ARCH-02A", "P-ARCH-02B", "P-ARCH-02C", "P-ARCH-04A", "P-ARCH-04B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 60, "status": "verified"}
 \section*{Évaluation B --- Réseaux}
-\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+\textit{Durée : 60 minutes. Ordinateur avec interpréteur Python autorisé.}
 
-\baremeIndicatif{Ex. 1 : 10 pts (paquets, bit alterné) ; Ex. 2 : 10 pts (réseau, capteurs)}
+\baremeIndicatif{Ex. 1 : 10 pts (paquets, bit alterné) ; Ex. 2 : 10 pts (réseau, capteurs) ; Ex. 3 : 10 pts (IHM, cahier des charges)}
 
 \bigskip
 
@@ -78,4 +78,39 @@
 %     return co2 > seuil
 % assert decider_ventilation(1000) is True
 % assert decider_ventilation(500) is False
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{IHM et cahier des charges} \hfill (10 points)
+
+Cahier des charges du chauffage d'un aquarium : le chauffage \textbf{s'allume} lorsque la
+température descend sous $24\,^\circ\text{C}$, et ne \textbf{s'éteint} que lorsqu'elle
+dépasse $26\,^\circ\text{C}$. L'état est mémorisé dans \lstinline|etat = {"chauffage": False}|.
+
+\begin{enumerate}
+  \item (4 pts) Écrire une fonction
+        \lstinline{decider_chauffage(temperature, seuil_bas=24, seuil_haut=26)} qui met à
+        jour \lstinline{etat["chauffage"]} selon ce cahier des charges et renvoie sa nouvelle
+        valeur.
+  \item (3 pts) Donner la séquence des états pour les mesures
+        \lstinline{[25, 23, 25, 27, 25]} (une mesure par heure), en justifiant la réponse à
+        la troisième mesure.
+  \item (3 pts) Le chauffage est éteint et la température vaut exactement
+        $24\,^\circ\text{C}$ : s'allume-t-il ? Expliquer ensuite pourquoi le cahier des
+        charges impose deux seuils plutôt qu'un seul à $25\,^\circ\text{C}$.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% etat = {"chauffage": False}
+% def decider_chauffage(temperature, seuil_bas=24, seuil_haut=26):
+%     if etat["chauffage"]:
+%         if temperature > seuil_haut:
+%             etat["chauffage"] = False
+%     else:
+%         if temperature < seuil_bas:
+%             etat["chauffage"] = True
+%     return etat["chauffage"]
+% assert [decider_chauffage(t) for t in [25, 23, 25, 27, 25]] == [False, True, True, False, False]
+% assert decider_chauffage(24) is False
 % END-VERIFY

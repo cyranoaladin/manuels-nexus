@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-RES-EVAL-B-corrige", "chapitre": "1NSI-RESEAUX", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-RES-EVAL-B", "capacites": ["P-ARCH-02A", "P-ARCH-02B", "P-ARCH-02C", "P-ARCH-04A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% META: {"id": "1NSI-RES-EVAL-B-corrige", "chapitre": "1NSI-RESEAUX", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-RES-EVAL-B", "capacites": ["P-ARCH-02A", "P-ARCH-02B", "P-ARCH-02C", "P-ARCH-04A", "P-ARCH-04B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % def decouper_en_paquets(message, taille_max):
 %     nb_paquets = (len(message) + taille_max - 1) // taille_max
@@ -51,4 +51,30 @@ def decider_ventilation(co2, seuil=800):
 faut ventiler) ; \lstinline{decider_ventilation(500)} vaut \lstinline{False} (air
 correct). Le \textbf{capteur} est le capteur de CO2 ; l'\textbf{actionneur} est le système
 de ventilation.
+\end{corrige}
+
+\begin{corrige}{1NSI-RES-EVAL-B-EX3}
+\textbf{1.}
+\begin{python}
+etat = {"chauffage": False}
+
+def decider_chauffage(temperature, seuil_bas=24, seuil_haut=26):
+    if etat["chauffage"]:
+        if temperature > seuil_haut:
+            etat["chauffage"] = False
+    else:
+        if temperature < seuil_bas:
+            etat["chauffage"] = True
+    return etat["chauffage"]
+\end{python}
+
+\textbf{2.} \lstinline{[False, True, True, False, False]}. À la troisième mesure
+($25\,^\circ\text{C}$) le chauffage est déjà allumé (mesure précédente : $23 < 24$) et
+$25$ ne dépasse pas $26$ : il reste allumé. La réponse dépend de l'état mémorisé.
+
+\textbf{3.} Non : « descend sous $24$ » se traduit par \lstinline{temperature < 24}, test
+strict que $24$ ne vérifie pas. Avec un seul seuil à $25\,^\circ\text{C}$, une température
+oscillant entre $24{,}9$ et $25{,}1$ allumerait et éteindrait le chauffage à chaque mesure ;
+les deux seuils ($24$ pour allumer, $26$ pour éteindre) laissent une zone où l'état
+précédent est conservé, ce qui évite ces basculements incessants.
 \end{corrige}

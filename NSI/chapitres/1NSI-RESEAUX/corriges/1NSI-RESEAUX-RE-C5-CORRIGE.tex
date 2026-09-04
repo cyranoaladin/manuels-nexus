@@ -1,0 +1,28 @@
+% META: {"id": "1NSI-RESEAUX-RE-C5-CORRIGE", "chapitre": "1NSI-RESEAUX", "type_objet": "corrige", "exercice_ref": "1NSI-RESEAUX-RE-C5", "capacites": ["P-ARCH-04B"], "capacites_codes": ["C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-RESEAUX-RE-C5}
+\begin{enumerate}
+  \item Fonction de l'élève : \lstinline{[False, True, False, False]}. Cahier des charges :
+        \lstinline{[False, True, True, False]}. Les deux divergent à la mesure $26$ : le
+        ventilateur a démarré à $29$, et $26$ n'est pas \emph{sous} $25$, donc il doit
+        \textbf{continuer}. La fonction de l'élève l'arrête dès que la température repasse
+        sous $28$, parce qu'elle ne sait pas qu'il tournait.
+  \item Les valeurs $20$ et $35$ sont loin des deux seuils et ne forment pas une séquence :
+        elles ne testent ni le franchissement du seuil de démarrage, ni la zone entre $25$
+        et $28$ où la réponse dépend de l'état précédent, ni le retour sous $25$.
+  \item La fonction doit mémoriser si le ventilateur tourne :
+\begin{python}
+etat = {"ventilateur": False}
+
+def ventilateur(temperature, seuil_marche=28, seuil_arret=25):
+    if etat["ventilateur"]:
+        if temperature < seuil_arret:
+            etat["ventilateur"] = False
+    else:
+        if temperature > seuil_marche:
+            etat["ventilateur"] = True
+    return etat["ventilateur"]
+\end{python}
+        Sur \lstinline{[27, 29, 26, 24]} elle renvoie bien
+        \lstinline{[False, True, True, False]}.
+\end{enumerate}
+\end{corrige}

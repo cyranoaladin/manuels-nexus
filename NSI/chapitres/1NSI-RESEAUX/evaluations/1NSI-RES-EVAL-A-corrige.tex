@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-RES-EVAL-A-corrige", "chapitre": "1NSI-RESEAUX", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-RES-EVAL-A", "capacites": ["P-ARCH-02A", "P-ARCH-02B", "P-ARCH-02C", "P-ARCH-04A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% META: {"id": "1NSI-RES-EVAL-A-corrige", "chapitre": "1NSI-RESEAUX", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-RES-EVAL-A", "capacites": ["P-ARCH-02A", "P-ARCH-02B", "P-ARCH-02C", "P-ARCH-04A", "P-ARCH-04B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % def decouper_en_paquets(message, taille_max):
 %     nb_paquets = (len(message) + taille_max - 1) // taille_max
@@ -50,4 +50,30 @@ def decider_arrosage(humidite, seuil=25):
 arroser) ; \lstinline{decider_arrosage(30)} vaut \lstinline{False} (sol suffisamment
 humide). Le \textbf{capteur} est le capteur d'humidité du sol ; l'\textbf{actionneur} est
 la pompe d'arrosage.
+\end{corrige}
+
+\begin{corrige}{1NSI-RES-EVAL-A-EX3}
+\textbf{1.}
+\begin{python}
+etat = {"volet_bas": False}
+
+def decider_volet(luminosite, seuil_descente=800, seuil_montee=500):
+    if etat["volet_bas"]:
+        if luminosite < seuil_montee:
+            etat["volet_bas"] = False
+    else:
+        if luminosite > seuil_descente:
+            etat["volet_bas"] = True
+    return etat["volet_bas"]
+\end{python}
+
+\textbf{2.} \lstinline{[False, True, True, False, False]}. À $700$ lux le volet est déjà
+descendu (mesure précédente : $900 > 800$) et $700$ n'est pas \emph{sous} $500$ : il
+reste baissé. La décision dépend de l'état mémorisé, pas seulement de la mesure.
+
+\textbf{3.} Non : le cahier des charges dit « dépasse $800$ », donc le test est strict
+(\lstinline{luminosite > 800}) et $800$ ne le vérifie pas. Avec un seul seuil, chaque
+passage de $790$ à $810$ ferait descendre le volet et chaque retour à $790$ le ferait
+remonter : il s'agiterait sans cesse. Les deux seuils ($800$ pour descendre, $500$ pour
+remonter) évitent ces basculements autour d'une valeur unique.
 \end{corrige}

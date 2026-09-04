@@ -1,0 +1,51 @@
+% META: {"id": "1NSI-RESEAUX-RE-C5", "chapitre": "1NSI-RESEAUX", "type_objet": "remediation", "capacites": ["P-ARCH-04B"], "capacites_codes": ["C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C5 : un test qui reussit n'est pas un cahier des charges respecte
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu écris un seul seuil là où le cahier des charges en donne deux, et
+tu conclus « ça marche » parce que deux valeurs éloignées des seuils donnent le bon
+résultat. Les défauts se logent précisément dans les cas que tes tests évitent : le
+franchissement des seuils, et le retour en arrière.
+
+\textbf{À retenir.} Deux seuils, c'est un état à mémoriser : la décision dépend de ce que
+faisait le système à la mesure précédente. Et un tableau de tests doit contenir une
+\emph{séquence} qui monte puis redescend, pas seulement deux valeurs isolées.
+
+\begin{exercice}{1NSI-RES-RE-C5-EX1}{1}{12}
+Cahier des charges d'un ventilateur de serre : il \textbf{démarre} quand la température
+dépasse $28\,^\circ\text{C}$ et ne s'\textbf{arrête} que lorsqu'elle redescend sous
+$25\,^\circ\text{C}$. Un élève propose :
+\begin{python}
+def ventilateur(temperature):
+    return temperature > 28
+\end{python}
+Il l'a testée avec $20$ et $35$ : « les deux réponses sont bonnes, c'est fini ».
+\begin{enumerate}
+  \item Pour la séquence de mesures \lstinline{[27, 29, 26, 24]}, donner ce que renvoie la
+        fonction de l'élève, puis ce que le cahier des charges exige. À quelle mesure les deux
+        divergent-elles, et pourquoi ?
+  \item Quels cas les tests $20$ et $35$ ne pouvaient pas révéler ?
+  \item Réécrire la fonction pour qu'elle respecte le cahier des charges. Indiquer ce
+        qu'elle doit mémoriser entre deux appels.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def ventilateur_eleve(temperature):
+%     return temperature > 28
+% etat = {"ventilateur": False}
+% def ventilateur(temperature, seuil_marche=28, seuil_arret=25):
+%     if etat["ventilateur"]:
+%         if temperature < seuil_arret:
+%             etat["ventilateur"] = False
+%     else:
+%         if temperature > seuil_marche:
+%             etat["ventilateur"] = True
+%     return etat["ventilateur"]
+% mesures = [27, 29, 26, 24]
+% assert [ventilateur_eleve(t) for t in mesures] == [False, True, False, False]
+% assert [ventilateur(t) for t in mesures] == [False, True, True, False]
+% assert ventilateur_eleve(20) is False and ventilateur_eleve(35) is True
+% END-VERIFY

@@ -1,0 +1,20 @@
+% META: {"id": "1NSI-RESEAUX-RE-C3-CORRIGE", "chapitre": "1NSI-RESEAUX", "type_objet": "corrige", "exercice_ref": "1NSI-RESEAUX-RE-C3", "capacites": ["P-ARCH-02C"], "capacites_codes": ["C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-RESEAUX-RE-C3}
+\begin{enumerate}
+  \item \lstinline{peuvent_communiquer(reseau, "Box", "TV")} renvoie \lstinline{True} :
+        \lstinline{"TV"} est dans la liste de \lstinline{"Box"}. Mais
+        \lstinline{peuvent_communiquer(reseau, "TV", "Box")} renvoie \lstinline{False} : la
+        liste de \lstinline{"TV"} est vide, la recherche n'a aucun voisin à explorer. Un même
+        câble ne peut pas exister dans un sens et pas dans l'autre : le dictionnaire a noté
+        le lien d'un seul côté.
+  \item Compléter \lstinline{"TV"} en \lstinline{["Box"]} et ajouter la clé manquante
+        \lstinline{"Tablette"} avec la liste \lstinline{["Box"]} : la tablette était citée
+        comme voisine sans être une machine du dictionnaire. Après correction, chaque câble
+        apparaît des deux côtés.
+  \item Oui, elle se termine, et elle renvoie \lstinline{True}. Depuis \lstinline{"TV"} on
+        explore \lstinline{"Box"} (visités : TV, Box), puis depuis \lstinline{"Box"} on trouve
+        \lstinline{"Tablette"}. Le cycle \lstinline{Box-PC-TV} ne pose aucun problème : quand
+        \lstinline{"TV"} réapparaît comme voisine de \lstinline{"PC"}, elle est déjà dans les
+        visités et n'est pas réexplorée. Il n'y a rien à interdire, seulement à marquer.
+\end{enumerate}
+\end{corrige}

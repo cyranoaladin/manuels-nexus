@@ -1,0 +1,66 @@
+% META: {"id": "1NSI-RESEAUX-RE-C3", "chapitre": "1NSI-RESEAUX", "type_objet": "remediation", "capacites": ["P-ARCH-02C"], "capacites_codes": ["C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : un cable se note des deux cotes
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Ton dictionnaire dit qu'une machine « voit » sa voisine, mais pas
+l'inverse : la recherche de chemin répond alors \lstinline{True} dans un sens et
+\lstinline{False} dans l'autre. Le réseau n'a pas changé, c'est le modèle qui est faux. Et
+quand un cycle apparaît, tu crois devoir l'interdire alors que le marquage des visités
+suffit.
+
+\textbf{À retenir.} Un câble relie deux machines : il figure dans la liste de \emph{chacune}.
+Toute machine citée comme voisine doit aussi être une clé. La recherche s'arrête toujours,
+cycle ou non, parce qu'une machine visitée n'est jamais réexplorée.
+
+\begin{exercice}{1NSI-RES-RE-C3-EX1}{1}{12}
+Un élève modélise le réseau de sa maison : une box reliée à un PC, à une télévision et à une
+tablette.
+\begin{python}
+reseau = {"Box": ["PC", "TV", "Tablette"], "PC": ["Box"], "TV": []}
+\end{python}
+\begin{enumerate}
+  \item Que renvoie \lstinline{peuvent_communiquer(reseau, "Box", "TV")} ? Et
+        \lstinline{peuvent_communiquer(reseau, "TV", "Box")} ? Expliquer la contradiction.
+  \item Corriger le dictionnaire : quelles listes compléter, quelle clé ajouter ?
+  \item On tire ensuite un câble direct entre le PC et la télévision, ce qui crée un cycle
+        \lstinline{Box-PC-TV}. La recherche
+        \lstinline{peuvent_communiquer(reseau, "TV", "Tablette")} se termine-t-elle ? Que
+        renvoie-t-elle ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def liens_non_reciproques(reseau):
+%     defauts = []
+%     for machine, voisins in reseau.items():
+%         for voisin in voisins:
+%             if machine not in reseau.get(voisin, []):
+%                 defauts.append((machine, voisin))
+%     return defauts
+% def peuvent_communiquer(reseau, depart, arrivee, visites=None):
+%     if visites is None:
+%         visites = set()
+%     if depart == arrivee:
+%         return True
+%     visites.add(depart)
+%     for voisin in reseau.get(depart, []):
+%         if voisin not in visites:
+%             if peuvent_communiquer(reseau, voisin, arrivee, visites):
+%                 return True
+%     return False
+% reseau = {"Box": ["PC", "TV", "Tablette"], "PC": ["Box"], "TV": []}
+% assert peuvent_communiquer(reseau, "Box", "TV") is True
+% assert peuvent_communiquer(reseau, "TV", "Box") is False
+% assert liens_non_reciproques(reseau) == [("Box", "TV"), ("Box", "Tablette")]
+% reseau["TV"] = ["Box"]
+% reseau["Tablette"] = ["Box"]
+% assert liens_non_reciproques(reseau) == []
+% assert peuvent_communiquer(reseau, "TV", "Box") is True
+% reseau["PC"].append("TV")
+% reseau["TV"].append("PC")
+% visites = set()
+% assert peuvent_communiquer(reseau, "TV", "Tablette", visites) is True
+% assert visites <= {"TV", "Box", "PC"}
+% END-VERIFY
