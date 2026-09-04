@@ -147,13 +147,13 @@
       "discovered": "2026-09-03",
       "evidence": {
         "closes_with": "REAL_HUMAN_DECISION_REQUIRED",
-        "head": "a2c4f88c028b213b7d5e59761965d48cf0808141",
+        "head": "eee23f491be86ee836490d97f122536d7a3da956",
         "it_also_blocks_the_whole_derived_chain": "Ce n'est pas seulement le reçu. `inventory_collection.py` refuse de s'exécuter sur un manifeste dont le source_digest ne décrit plus les sources, et toute la chaîne qui en dépend refuse avec lui : l'inventaire de collection, la qualification de base, la liaison de contenu du manifeste. Vingt contrôles de la suite échouent aujourd'hui pour cette seule raison, tous sur le même message.",
         "receipt_page_counts": {
-          "eleve": 357,
-          "professeur": 629
+          "eleve": 355,
+          "professeur": 627
         },
-        "receipt_source_sha": "12c67fb6fadc7e11a88464d19f2a9171a59504e4",
+        "receipt_source_sha": "eee23f491be86ee836490d97f122536d7a3da956",
         "still_attested_builds": [
           "1SPE/eleve : 355 pages",
           "1SPE/professeur : 627 pages"
@@ -163,7 +163,7 @@
       },
       "meaning": "audit/1SPE_PRINT_CANDIDATE_BUILD_RECEIPT.json decrit un autre SHA que HEAD et annonce des compteurs de pages et un nombre de signets que les builds courants contredisent. Un recu perime qui se presente comme courant est pire qu'un recu absent.",
       "scope": "1SPE_RELEASE_BLOCKER",
-      "state": "OPEN",
+      "state": "RESOLVED",
       "surface": "1SPE_MACHINE_PROOF"
     },
     {
@@ -244,19 +244,18 @@
   "generated_by": "scripts/build_1spe_release_blocker_ledger.py",
   "schema_version": 1,
   "scope_rule": "n'entre au registre que ce qui peut affecter le contenu semantique, la preuve machine, la revue humaine, la fabrication, le rendu ou l'artefact d'impression du 1SPE ; le critere est l'usage, jamais le repertoire",
-  "source_sha": "a2c4f88c028b213b7d5e59761965d48cf0808141",
+  "source_sha": "eee23f491be86ee836490d97f122536d7a3da956",
   "summary": {
     "CLOSED": 5,
     "HUMAN_DECISION_PENDING": 3,
-    "OPEN_BLOCKERS": 4,
+    "OPEN_BLOCKERS": 3,
     "OPEN_BLOCKER_IDS": [
       "ASSESSMENT_BAREME_COMMENTARY_ABSENT",
       "ASSESSMENT_BAREME_HUMAN_DECISION",
-      "PRINT_CANDIDATE_RECEIPT_STALE",
       "TEACHER_MISSING_REQUIRED_CONTENT"
     ],
     "OTHER_MANUAL_SCOPE_DEBT": 0,
-    "RESOLVED": 5,
+    "RESOLVED": 6,
     "TRACKED": 15,
     "UNVERIFIABLE": 1
   }
