@@ -1,0 +1,56 @@
+% META: {"id": "1NSI-WEB-ME-001", "chapitre": "1NSI-WEB-IHM", "type_objet": "methode", "capacites": ["P-IHM-01A", "P-IHM-01B"], "capacites_codes": ["C1", "C2"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M1}{Repérer les composants d'interaction d'une page et les événements qu'ils traitent}
+
+\textbf{Quand l'utiliser ?} Devant un extrait de code HTML, quand l'énoncé demande
+d'\textbf{identifier} ce avec quoi l'utilisateur peut interagir, ou de dire \textbf{quel
+événement} chaque élément est capable de traiter.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Cherche les balises d'interaction}, pas les balises de mise en forme.
+        Trois familles reviennent presque toujours :
+        \lstinline{<input>} (saisie), \lstinline{<select>} avec ses \lstinline{<option>}
+        (choix dans une liste), \lstinline{<button>} (déclenchement).
+        Une balise \lstinline{<p>} ou \lstinline{<div>} n'est pas un composant d'interaction.
+  \item \textbf{Note l'identifiant} de chacun : c'est l'attribut \lstinline{id}. C'est par lui
+        que le programme désignera le composant.
+  \item \textbf{Associe à chaque composant l'événement qu'il traite}, en te demandant
+        \emph{ce que l'utilisateur fait} :
+        \begin{itemize}
+          \item il tape au clavier dans un champ de texte $\rightarrow$ \lstinline{input} ;
+          \item il choisit une option dans une liste $\rightarrow$ \lstinline{change} ;
+          \item il appuie sur un bouton $\rightarrow$ \lstinline{click} ;
+          \item il envoie le formulaire entier $\rightarrow$ \lstinline{submit}.
+        \end{itemize}
+  \item \textbf{Ne confonds pas le conteneur et le composant.} La balise \lstinline{<form>}
+        regroupe les composants ; elle n'est pas elle-même un composant de saisie, même si
+        elle traite l'événement \lstinline{submit}.
+\end{enumerate}
+
+\textbf{Exemple.} Sur ce fragment :
+\begin{console}
+<form id="inscription">
+    <input type="text" id="champ_nom" name="nom">
+    <select id="liste_pays" name="pays"><option value="tn">Tunisie</option></select>
+    <button id="bouton_valider" type="submit">Valider</button>
+</form>
+\end{console}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+\textbf{Identifiant} & \textbf{Composant} & \textbf{Événement traité} \\
+\hline
+\lstinline{champ_nom} & champ de texte & \lstinline{input} \\
+\lstinline{liste_pays} & liste déroulante & \lstinline{change} \\
+\lstinline{bouton_valider} & bouton & \lstinline{click} \\
+\hline
+\end{tabular}
+\end{center}
+
+Le formulaire \lstinline{inscription} n'est pas compté : c'est le conteneur.
+
+\textbf{Erreur fréquente.} Compter \lstinline{<option>} comme un composant. L'option est une
+\emph{valeur possible} de la liste, pas un élément avec lequel on interagit séparément.
+
+\end{fichemethode}
