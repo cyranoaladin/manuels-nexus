@@ -1,0 +1,17 @@
+% META: {"id": "1NSI-LANGAGE-RE-C7-CORRIGE", "chapitre": "1NSI-LANGAGE", "type_objet": "corrige", "exercice_ref": "1NSI-LANGAGE-RE-C7", "capacites": ["P-LANG-03C"], "capacites_codes": ["C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-LANGAGE-RE-C7}
+\begin{enumerate}
+  \item \textbf{Précondition} : « \lstinline{t} est un tableau non vide de nombres » — elle
+        contraint l'entrée.
+        \textbf{Postconditions} : « le résultat est un entier compris entre $0$ et
+        $\operatorname{len}(t)-1$ », « aucun élément n'est strictement inférieur à
+        \lstinline{t[resultat]} », et « \lstinline{t} n'est pas modifié » — les trois décrivent
+        ce que la fonction garantit après l'appel.
+  \item Par exemple : « le tableau renvoyé contient exactement les mêmes éléments que
+        \lstinline{t}, rangés par ordre croissant ». Les deux moitiés comptent : mêmes
+        éléments, et ordonnés.
+  \item Parce que \lstinline{indice_min} ne trie rien : elle lit le tableau et renvoie un
+        indice. Exiger qu'il soit trié porterait sur l'entrée, donc sur l'appelant — ce serait
+        une précondition, et d'ailleurs une précondition inutile ici.
+\end{enumerate}
+\end{corrige}

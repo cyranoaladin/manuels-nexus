@@ -1,0 +1,15 @@
+% META: {"id": "1NSI-LANGAGE-RE-C3-CORRIGE", "chapitre": "1NSI-LANGAGE", "type_objet": "corrige", "exercice_ref": "1NSI-LANGAGE-RE-C3", "capacites": ["P-LANG-03A"], "capacites_codes": ["C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-LANGAGE-RE-C3}
+\begin{enumerate}
+  \item La deuxième : \lstinline{est_palindrome(mot)} prend une chaîne et renvoie un booléen.
+        Elle nomme la fonction, son paramètre et sa valeur de retour.
+        La première décrit la \emph{recette} : c'est de l'implémentation, l'appelant n'en a pas
+        besoin. La troisième parle de la longueur du code, qui n'engage personne et n'apparaît
+        dans aucune signature.
+  \item Par exemple : \lstinline{compte(mot, lettre)} prend une chaîne et un caractère, et
+        renvoie un entier positif ou nul.
+  \item \textbf{Oui}, et c'est même l'intérêt du prototype. Un parcours par boucle et un
+        appel à une fonction de bibliothèque offrent la même chose à l'appelant : même nom,
+        mêmes paramètres, même type de retour. Le prototype est un contrat, pas une recette.
+\end{enumerate}
+\end{corrige}

@@ -1,0 +1,30 @@
+% META: {"id": "1NSI-LANGAGE-RE-C3", "chapitre": "1NSI-LANGAGE", "type_objet": "remediation", "capacites": ["P-LANG-03A"], "capacites_codes": ["C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : le prototype dit l'offre, pas la recette
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu décris l'\textbf{implémentation} au lieu de l'\textbf{offre}. Le
+prototype précède le corps : il annonce ce que la fonction met à disposition — son nom, ses
+paramètres, ce qu'elle renvoie — et rien de la manière dont elle s'y prend.
+
+\textbf{À retenir.} « Fait une boucle sur la liste » n'est pas un prototype : c'est une
+indication de recette, inutile à l'appelant. Et la longueur du code n'apparaît dans aucune
+signature : elle n'engage personne.
+
+\begin{exercice}{1NSI-LANG-RE-C3-EX1}{1}{10}
+Une fonction doit indiquer si un mot est un palindrome.
+\begin{enumerate}
+  \item Parmi ces trois phrases, laquelle est un prototype ? Expliquer ce qui disqualifie les
+        deux autres.
+        \begin{itemize}
+          \item « la fonction parcourt le mot de gauche à droite et compare les lettres » ;
+          \item « \lstinline{est_palindrome(mot)} prend une chaîne et renvoie un booléen » ;
+          \item « la fonction tient en quatre lignes ».
+        \end{itemize}
+  \item Écrire le prototype d'une fonction qui renvoie le nombre d'occurrences d'une lettre
+        dans un mot.
+  \item Deux implémentations très différentes peuvent-elles partager le même prototype ?
+        Justifier.
+\end{enumerate}
+\end{exercice}

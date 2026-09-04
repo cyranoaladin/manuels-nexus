@@ -1,0 +1,29 @@
+% META: {"id": "1NSI-LANGAGE-RE-C2", "chapitre": "1NSI-LANGAGE", "type_objet": "remediation", "capacites": ["P-LANG-02"], "capacites_codes": ["C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : un noyau commun, une ecriture propre
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu effaces l'une des deux moitiés. Ou bien tu déclares les langages
+identiques parce que le noyau est commun, ou bien tu les déclares incomparables parce que
+l'écriture diffère. Les deux sont vrais en même temps.
+
+\textbf{À retenir.} Sont \textbf{communs} : séquence, affectation, conditionnelle, boucle,
+appel de fonction. Sont \textbf{propres} à chaque langage : la ponctuation (accolades ou
+indentation, points-virgules), le typage (déclaré ou non), les bibliothèques disponibles.
+
+\begin{exercice}{1NSI-LANG-RE-C2-EX1}{1}{10}
+\begin{console}
+function pair(n) {
+    if (n % 2 === 0) { return true; }
+    else { return false; }
+}
+\end{console}
+\begin{enumerate}
+  \item Classer en deux colonnes : ce qui relève du noyau commun, ce qui est propre à ce
+        langage.
+  \item Réécrire cette fonction en Python.
+  \item Un élève affirme : « ce langage sait faire des choses que Python ne sait pas faire,
+        puisque son écriture est différente ». Que répondre ?
+\end{enumerate}
+\end{exercice}

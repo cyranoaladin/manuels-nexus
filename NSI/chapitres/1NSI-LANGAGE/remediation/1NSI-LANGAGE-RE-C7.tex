@@ -1,0 +1,47 @@
+% META: {"id": "1NSI-LANGAGE-RE-C7", "chapitre": "1NSI-LANGAGE", "type_objet": "remediation", "capacites": ["P-LANG-03C"], "capacites_codes": ["C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C7 : une postcondition decrit la SORTIE
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu énonces une contrainte d'entrée en croyant décrire une sortie.
+« la liste doit être triée » contraint ce que l'appelant fournit : c'est une
+\textbf{pré}condition. Une \textbf{post}condition décrit ce que la fonction garantit
+\emph{après} l'appel, sur ce qu'elle renvoie.
+
+\textbf{À retenir.} Un test simple : la phrase parle-t-elle de ce qui \emph{entre} ou de ce qui
+\emph{sort} ? Entrée $\rightarrow$ précondition, à la charge de l'appelant. Sortie
+$\rightarrow$ postcondition, à la charge de la fonction.
+
+\begin{exercice}{1NSI-LANG-RE-C7-EX1}{1}{10}
+Soit \lstinline{indice_min(t)}, qui renvoie l'indice du plus petit élément d'un tableau.
+\begin{enumerate}
+  \item Classer chaque énoncé en précondition ou postcondition :
+        \begin{itemize}
+          \item \lstinline{t} est un tableau non vide de nombres ;
+          \item le résultat est un entier compris entre $0$ et $\operatorname{len}(t)-1$ ;
+          \item aucun élément de \lstinline{t} n'est strictement inférieur à
+                \lstinline{t[resultat]} ;
+          \item \lstinline{t} n'est pas modifié par l'appel.
+        \end{itemize}
+  \item Écrire une postcondition pour \lstinline{trier(t)}, qui renvoie un nouveau tableau
+        trié.
+  \item Pourquoi « le tableau doit être trié » ne peut-il pas être une postcondition de
+        \lstinline{indice_min} ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def indice_min(t):
+%     m = 0
+%     for i in range(len(t)):
+%         if t[i] < t[m]:
+%             m = i
+%     return m
+% t = [7, 3, 9, 3]
+% r = indice_min(t)
+% assert r == 1
+% assert 0 <= r < len(t)
+% assert all(v >= t[r] for v in t)
+% assert t == [7, 3, 9, 3]
+% END-VERIFY

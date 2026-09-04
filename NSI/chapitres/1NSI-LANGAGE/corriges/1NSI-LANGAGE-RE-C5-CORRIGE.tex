@@ -1,0 +1,17 @@
+% META: {"id": "1NSI-LANGAGE-RE-C5-CORRIGE", "chapitre": "1NSI-LANGAGE", "type_objet": "corrige", "exercice_ref": "1NSI-LANGAGE-RE-C5", "capacites": ["P-LANG-05"], "capacites_codes": ["C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-LANGAGE-RE-C5}
+\begin{enumerate}
+  \item La documentation dit explicitement $a \leq N \leq b$, \textbf{bornes comprises} : le
+        $6$ peut sortir. L'élève a raisonné par analogie avec \lstinline{range(1, 6)}, qui
+        exclut sa borne haute — mais \lstinline{randint} n'est pas \lstinline{range}. C'est
+        exactement pourquoi on lit la documentation plutôt que le nom.
+  \item \begin{python}
+from random import randint
+randint(1, 20)
+        \end{python}
+  \item Tirer un grand nombre de fois et vérifier deux choses : que toutes les valeurs
+        obtenues sont entre $1$ et $6$, et que $1$ et $6$ figurent effectivement parmi elles.
+        Cela ne prouve pas l'uniformité, mais cela tranche la question posée : les bornes sont
+        atteignables.
+\end{enumerate}
+\end{corrige}

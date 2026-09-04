@@ -1,0 +1,37 @@
+% META: {"id": "1NSI-LANGAGE-RE-C5", "chapitre": "1NSI-LANGAGE", "type_objet": "remediation", "capacites": ["P-LANG-05"], "capacites_codes": ["C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C5 : lire la documentation, ne pas deviner
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu conclus d'après le nom de la fonction. Un nom suggère une intention,
+jamais un contrat : il ne dit ni le type des arguments, ni la valeur renvoyée, ni les cas
+d'erreur. Et devant l'incertitude, tu recopies le code trouvé — ce qui prive de toute
+correction ultérieure et alourdit le programme, alors qu'un import suffit.
+
+\textbf{À retenir.} Quatre choses à lire, dans cet ordre : les paramètres, la valeur de retour,
+les conditions d'emploi, un exemple. Puis un essai borné sur une valeur dont tu connais déjà
+la réponse.
+
+\begin{exercice}{1NSI-LANG-RE-C5-EX1}{1}{10}
+La documentation annonce : \lstinline{randint(a, b)} renvoie un entier aléatoire $N$ tel que
+$a \leq N \leq b$, bornes comprises.
+\begin{enumerate}
+  \item Un élève écrit \lstinline{randint(1, 6)} pour simuler un dé et affirme que le $6$ ne
+        sort jamais. Que lui répondre, en citant la documentation ?
+  \item Écrire l'import nécessaire, puis l'appel simulant un dé à vingt faces.
+  \item Proposer un essai qui vérifie, sans lire le code de la bibliothèque, que les deux
+        bornes sont bien atteignables.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from random import randint, seed
+% seed(7)
+% tirages = [randint(1, 6) for _ in range(500)]
+% assert all(1 <= v <= 6 for v in tirages)
+% assert 1 in tirages
+% assert 6 in tirages
+% d20 = [randint(1, 20) for _ in range(500)]
+% assert all(1 <= v <= 20 for v in d20)
+% END-VERIFY

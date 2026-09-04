@@ -1,0 +1,16 @@
+% META: {"id": "1NSI-LANGAGE-RE-C6-CORRIGE", "chapitre": "1NSI-LANGAGE", "type_objet": "corrige", "exercice_ref": "1NSI-LANGAGE-RE-C6", "capacites": ["P-LANG-03B"], "capacites_codes": ["C6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-LANGAGE-RE-C6}
+\begin{enumerate}
+  \item Sont des préconditions : « \lstinline{t} est un tableau non vide » et
+        « \lstinline{i} est un entier vérifiant $0 \leq i < \operatorname{len}(t)$ ». Toutes
+        deux portent sur les arguments.
+        « écrite en trois lignes » décrit l'implémentation et n'engage pas l'appelant.
+        « le paramètre s'appelle \lstinline{t} » relève de la lisibilité : renommer le
+        paramètre ne change rien au contrat.
+  \item L'exécution échoue — sur \lstinline{element([4, 8, 15], 7)}, une \lstinline{IndexError}
+        est levée. La fonction \textbf{n'est pas fautive} : l'appel est hors contrat.
+        Respecter la précondition était à la charge de l'appelant.
+  \item \lstinline{a} et \lstinline{b} sont des nombres, et \lstinline{b} est \textbf{non nul}.
+        Sans cette seconde précondition, l'appel provoque une \lstinline{ZeroDivisionError}.
+\end{enumerate}
+\end{corrige}

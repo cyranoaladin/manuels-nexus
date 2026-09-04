@@ -1,0 +1,13 @@
+% META: {"id": "1NSI-LANGAGE-RE-C1-CORRIGE", "chapitre": "1NSI-LANGAGE", "type_objet": "corrige", "exercice_ref": "1NSI-LANGAGE-RE-C1", "capacites": ["P-LANG-01"], "capacites_codes": ["C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-LANGAGE-RE-C1}
+\begin{enumerate}
+  \item \textbf{Non bornée} : le nombre de tours ne se lit nulle part dans l'écriture, il
+        dépend de la valeur initiale de \lstinline{n}.
+  \item \lstinline{n} prend les valeurs $20$, $10$, $5$, $2$, $1$. La boucle s'arrête dès que
+        \lstinline{n} vaut $1$, donc \lstinline{tours} vaut \textbf{4}.
+  \item L'arrêt est garanti parce que \lstinline{n} est un entier positif qui
+        \textbf{décroît strictement} à chaque tour : il finit nécessairement par atteindre $1$.
+        Remplacer \lstinline{n = n // 2} par \lstinline{n = n + 1} rendrait la boucle infinie :
+        la condition \lstinline{n > 1} ne deviendrait jamais fausse.
+\end{enumerate}
+\end{corrige}
