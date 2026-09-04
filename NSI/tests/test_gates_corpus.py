@@ -27,10 +27,14 @@ LANGUAGE_SPECIFICATION_REFS = {
 LANGUAGE_SPECIFICATION_OBJECT_REFS = {
     "corriges/1NSI-LANG-CO-003.tex": LANGUAGE_SPECIFICATION_REFS,
     "cours/1NSI-LANG-COURS-C3.tex": LANGUAGE_SPECIFICATION_REFS,
-    "evaluations/1NSI-LANG-EVAL-A-corrige.tex": {"P-LANG-03B"},
-    "evaluations/1NSI-LANG-EVAL-A.tex": {"P-LANG-03B"},
-    "evaluations/1NSI-LANG-EVAL-B-corrige.tex": {"P-LANG-03B"},
-    "evaluations/1NSI-LANG-EVAL-B.tex": {"P-LANG-03B"},
+    # Les deux sujets n'evaluaient que les preconditions. Depuis qu'ils portent
+    # un troisieme exercice demandant separement le prototype d'une fonction et
+    # une postcondition sur son resultat, ils tracent les trois capacites de
+    # specification individuellement — meme evolution que le QCM ci-dessous.
+    "evaluations/1NSI-LANG-EVAL-A-corrige.tex": LANGUAGE_SPECIFICATION_REFS,
+    "evaluations/1NSI-LANG-EVAL-A.tex": LANGUAGE_SPECIFICATION_REFS,
+    "evaluations/1NSI-LANG-EVAL-B-corrige.tex": LANGUAGE_SPECIFICATION_REFS,
+    "evaluations/1NSI-LANG-EVAL-B.tex": LANGUAGE_SPECIFICATION_REFS,
     "exercices/1NSI-LANG-EX-003.tex": LANGUAGE_SPECIFICATION_REFS,
     # Le QCM n'evaluait que C6. Depuis qu'il porte une question par capacite,
     # il trace les trois capacites de specification individuellement : C3

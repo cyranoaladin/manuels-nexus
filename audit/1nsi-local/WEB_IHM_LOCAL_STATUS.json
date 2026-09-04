@@ -6,15 +6,12 @@
   "scope": "LOCAL_SATELLITE_ONLY",
   "approves_nothing": true,
   "grants_no_publication_approval": true,
-
   "p0_class": "P0_PEDAGOGICAL_CONTENT_CLONING_AND_CAPACITY_MISREPRESENTATION",
   "p0_subclass": "SYNTHETIC_FILLER_TEMPLATE_CONTAMINATION",
   "note_sur_la_classe": "Ampleur nouvelle, mecanique connue. Aucune classe de P0 independante n'est ouverte.",
-
   "WEB_IHM_LOCAL_MACHINE_CONTENT_COMPLETE": "YES",
   "WEB_IHM_GOVERNANCE_CURRENT": "PENDING_SHARED_INT006",
   "les_deux_ne_se_confondent_pas": "Le contenu du chapitre est reconstruit et prouve. L'etat de gouvernance ne peut pas etre rafraichi depuis cette branche : le producteur partage ne sait pas attribuer des ajouts.",
-
   "local_gates": {
     "CAPACITY_IDENTITY": "PASS",
     "FALSE_CREDITS": 0,
@@ -30,7 +27,6 @@
     "UNKNOWN": 0,
     "SOURCE_SET_REOBSERVATION": "BLOCKED_BY_INT006"
   },
-
   "evidence": {
     "capacity_identity": "9 capacites, deux identifiants chacune, correspondance lue dans contrat.yaml. UNKNOWN 0, AMBIGUITY 0.",
     "clones": "40 objets pour 40 corps distincts. 0 groupe.",
@@ -39,17 +35,27 @@
     "render": "19 pages, 0 glyphe manquant, 0 overfull, 0 underfull, 0 erreur.",
     "delta_ledger": "audit/1nsi-local/WEB_IHM_LOCAL_DELTA_LEDGER.json"
   },
-
   "governance_failure_ledger": {
     "id": "INT006_REOBSERVATION_ADDITION_BLINDNESS",
     "failing_tests": 15,
     "attribution": "PROUVEE_PAR_MESURE_ET_NON_SUPPOSEE",
     "distinct_assertions": [
-      {"assertion": "assert 732 == 713", "occurrences": 14, "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE", "ecart": 19},
-      {"assertion": "assert 722 == 703", "occurrences": 1, "register": "1NSI_STATUS_GOVERNANCE_PENDING", "ecart": 19}
+      {
+        "assertion": "assert 666 == 713",
+        "occurrences": 14,
+        "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE",
+        "ecart": -47
+      },
+      {
+        "assertion": "assert 656 == 703",
+        "occurrences": 1,
+        "register": "1NSI_STATUS_GOVERNANCE_PENDING",
+        "ecart": -47
+      }
     ],
-    "preuve": "Les quinze echecs se reduisent a deux comparaisons de comptage entre l'arbre vivant et les registres. L'ecart vaut 19 dans les deux cas, soit exactement les 19 ajouts nets posterieurs a la derniere re-observation (20 objets ecrits, 1 stub retire). Aucun echec ne porte sur le contenu.",
+    "preuve": "Les quinze echecs se reduisent a deux comparaisons de comptage entre l'arbre vivant et les registres. L'ecart vaut -47 dans les deux cas : +19 ajouts nets sur WEB-IHM et -66 sur LANGAGE (16 objets ecrits, 82 copies retirees). Aucun echec ne porte sur le contenu.",
     "traitement": "Aucun skip, aucun xfail, aucune exclusion, aucune whitelist. Ces echecs doivent disparaitre d'eux-memes une fois INT-006 integre.",
-    "condition_de_levee": "Apres integration, exiger ADDED / REMOVED / MODIFIED exacts et UNEXPLAINED vide, pas seulement un compte qui retombe juste."
+    "condition_de_levee": "Apres integration, exiger ADDED / REMOVED / MODIFIED exacts et UNEXPLAINED vide, pas seulement un compte qui retombe juste.",
+    "portee": "WEB-IHM et LANGAGE ; les deux chapitres partagent le meme blocage."
   }
 }
