@@ -112,6 +112,10 @@ def build_graph(
 
     paths = list(source_paths) if source_paths is not None else _sources(corpora)
     exercises: dict[str, dict[str, Any]] = {}
+    # INT-001 : un corrige peut viser un exercice OU une remediation du meme
+    # chapitre. Les remediations sont indexees comme cibles, jamais comptees
+    # dans la cardinalite des exercices.
+    remediations: dict[str, dict[str, Any]] = {}
     corrections: list[dict[str, Any]] = []
     all_ids: dict[str, str] = {}
     for path in paths:
@@ -122,11 +126,13 @@ def build_graph(
         if len(parts) <= index + 1:
             continue
         chapter, role = parts[index], parts[index + 1]
-        if role not in {"exercices", "corriges"}:
+        if role not in {"exercices", "corriges", "remediation"}:
             continue
         meta = clone.read_meta(path.read_text(encoding="utf-8", errors="replace"))
         object_type = str(meta.get("type_objet") or "").strip()
         if role == "exercices" and object_type != "exercice":
+            continue
+        if role == "remediation" and object_type != "remediation":
             continue
         if role == "corriges" and object_type not in {"corrige", "correction"}:
             continue
@@ -156,8 +162,11 @@ def build_graph(
         }
         if role == "exercices":
             exercises[object_id] = row
+        elif role == "remediation":
+            remediations[object_id] = row
         else:
             corrections.append(row)
+    targets = {**exercises, **remediations}
 
     relations: list[dict[str, Any]] = []
     linked: dict[str, list[str]] = collections.defaultdict(list)
@@ -171,7 +180,7 @@ def build_graph(
             }
         )
         classes: list[str] = []
-        exercise = exercises.get(references[0]) if len(references) == 1 else None
+        exercise = targets.get(references[0]) if len(references) == 1 else None
         if not references:
             classes.append("ORPHAN_CO")
         elif len(references) > 1:
@@ -319,8 +328,9 @@ def build_graph(
         "artifact_type": "ex_co_graph",
         "generated_by": "scripts/build_ex_co_graph.py",
         "relationship_rule": (
-            "each correction names exactly one exercise in the same chapter and "
-            "declares the same exact canonical capacity set when it declares one"
+            "each correction names exactly one exercise or remediation in the same "
+            "chapter and declares the same exact canonical capacity set when it "
+            "declares one"
         ),
         "exercise_count": len(exercises),
         "correction_count": len(corrections),

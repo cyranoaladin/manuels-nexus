@@ -491,3 +491,110 @@ def test_answer_coverage_never_rescues_a_structurally_broken_pair(
     row = graph["relations"][0]
     assert row["classifications"] == ["MISMATCHED_CAPACITY"]
     assert "ANSWER_COVERAGE_ESTABLISHED" not in row["classifications"]
+
+
+# ---------------------------------------------------------------- INT-001
+
+
+def _int001_corpus(tmp_path: Path):
+    """Un chapitre avec un exercice, une remediation et leurs corriges."""
+
+    module = _module()
+    corpus, chapter = _corpus(tmp_path)
+    other = corpus / "1NSI-Y"
+    other.mkdir()
+    (other / "contrat.yaml").write_text(
+        yaml.safe_dump({"capacites": [{"code": "C1", "ref_capacite": "P-Y-C1"}]}),
+        encoding="utf-8",
+    )
+    remediation = _source(
+        chapter / "remediation/1NSI-X-RE-C1.tex",
+        {
+            "id": "1NSI-X-RE-C1",
+            "chapitre": chapter.name,
+            "type_objet": "remediation",
+            "capacites_codes": ["C1"],
+        },
+    )
+    foreign = _source(
+        other / "remediation/1NSI-Y-RE-C1.tex",
+        {
+            "id": "1NSI-Y-RE-C1",
+            "chapitre": other.name,
+            "type_objet": "remediation",
+            "capacites_codes": ["C1"],
+        },
+    )
+    not_a_target = _source(
+        chapter / "remediation/1NSI-X-RE-NOTE.tex",
+        {
+            "id": "1NSI-X-RE-NOTE",
+            "chapitre": chapter.name,
+            "type_objet": "methode",
+            "capacites_codes": ["C1"],
+        },
+    )
+
+    def corrige(name: str, **meta):
+        return _source(
+            chapter / f"corriges/{name}.tex",
+            {
+                "id": name,
+                "chapitre": chapter.name,
+                "type_objet": "corrige",
+                "capacites_codes": ["C1"],
+                **meta,
+            },
+        )
+
+    sources = [
+        remediation,
+        foreign,
+        not_a_target,
+        corrige("1NSI-X-RE-C1-CORRIGE", exercice_ref="1NSI-X-RE-C1"),
+        corrige("CO-ABSENT", exercice_ref="1NSI-X-RE-C9"),
+        corrige("CO-FOREIGN", exercice_ref="1NSI-Y-RE-C1"),
+        corrige("CO-TWO", exercice_ref="1NSI-X-RE-C1", exercice_id="1NSI-X-RE-NOTE"),
+        corrige("CO-NOT-A-TARGET", exercice_ref="1NSI-X-RE-NOTE"),
+    ]
+    graph = module.build_graph(
+        corpora=(corpus,),
+        source_paths=sources,
+        clone_ledger={
+            "objects_on_invalid_credit": [],
+            "objects_with_indeterminate_credit": [],
+        },
+    )
+    return graph, {row["correction_id"]: row for row in graph["relations"]}
+
+
+def test_a_correction_may_target_a_remediation_of_the_same_chapter(tmp_path: Path) -> None:
+    """INT-001 : la cible d'un corrige est un exercice OU une remediation."""
+
+    graph, by_id = _int001_corpus(tmp_path)
+    row = by_id["1NSI-X-RE-C1-CORRIGE"]
+    assert row["classifications"] == ["ANSWER_COVERAGE_ESTABLISHED"]
+    assert row["structural_status"] == "MATCH"
+    assert row["exercise_id"] == "1NSI-X-RE-C1"
+    assert row["exercise_chapter"] == "1NSI-X"
+    assert row["exercise_capacities"] == row["correction_capacities"]
+
+
+def test_remediation_targets_keep_the_negative_outcomes(tmp_path: Path) -> None:
+    """Cible absente, d'un autre chapitre, double, ou d'un type non cible."""
+
+    _graph, by_id = _int001_corpus(tmp_path)
+    assert by_id["CO-ABSENT"]["classifications"] == ["ORPHAN_CO"]
+    assert "MISMATCHED_CONTENT" in by_id["CO-FOREIGN"]["classifications"]
+    assert by_id["CO-FOREIGN"]["structural_status"] == "FAIL"
+    assert by_id["CO-TWO"]["classifications"] == ["MISMATCHED_CONTENT"]
+    assert by_id["CO-NOT-A-TARGET"]["classifications"] == ["ORPHAN_CO"]
+
+
+def test_remediation_targets_do_not_enter_the_exercise_cardinality(tmp_path: Path) -> None:
+    """La cardinalite des exercices est inchangee : aucune remediation n'y figure."""
+
+    graph, _by_id = _int001_corpus(tmp_path)
+    assert graph["exercise_count"] == 0
+    assert graph["exercise_cardinality"] == []
+    assert graph["correction_count"] == 5
