@@ -21,8 +21,26 @@ de `1NSI-ALGO-PARCOURS-TRIS`.
 **Sémantique attendue.** Un corrigé peut viser un `exercice` **ou** une
 `remediation` du même chapitre. La cardinalité et l'unicité restent inchangées.
 
-**Fixtures négatives à conserver.** cible inexistante → `ORPHAN_CO` ;
-cible d'un autre chapitre → échec ; deux références → `MISMATCHED_CONTENT`.
+**Fixture positive attendue (doit passer).**
+
+```
+corrigé  1NSI-ADGK-RE-C1-CORRIGE
+  META   exercice_ref = "1NSI-ADGK-RE-C1"
+  cible  1NSI-ADGK-RE-C1, type_objet = "remediation", même chapitre
+  ⇒ ANSWER_COVERAGE_ESTABLISHED, et non ORPHAN_CO
+```
+
+**Fixtures négatives à conserver (doivent continuer d'échouer).**
+
+```
+cible absente du chapitre            → ORPHAN_CO
+cible dans un autre chapitre         → échec
+deux références dans la même META    → MISMATCHED_CONTENT
+cible de type ni exercice ni remediation → ORPHAN_CO
+```
+
+Le correctif minimal est d'élargir l'ensemble des rôles indexés comme cible, sans
+toucher à la cardinalité ni à l'unicité.
 
 **Chapitres affectés.** 9 faux `ORPHAN_CO` sur les deux chapitres
 d'algorithmique ; à vérifier sur les 8 autres après correction.
@@ -66,7 +84,7 @@ fichiers suivis modifiés (`reasons[] = modified_tracked:<fichier>`) : à renomm
 
 ---
 
-## INT-004 — Cinq copies de remédiation figurent dans une campagne scellée
+## INT-004 — FERMÉ le 2026-09-04 — cinq copies de remédiation redondantes
 
 **Problème.** `1NSI-TYPES-CONSTRUITS` porte six objets de remédiation aux corps
 **rigoureusement identiques** (md5 du corps : `aa1a0b1eeab8`) :
@@ -98,6 +116,56 @@ satellite reviendrait à réécrire des preuves de relecture.
 campagne de relecture 1NSI sur le nouvel ensemble de sources (334 objets), en
 consignant le motif du rescellement.
 
-**Garde en place.** `NSI/tests/test_1nsi_types_construits_remediation_canonicity.py`
-porte deux `xfail(strict=True)` : ils redeviennent bloquants dès que le défaut
-est corrigé, et échouent si quelqu'un les neutralise.
+### Clôture
+
+Autorisée par décision humaine, sous preuve sémantique préalable du bundle
+canonique. Appliquée en trois commits : `0ca6f92b` (retrait), `0aced484`
+(ré-observation des registres), `d051fd9e` (dernière capacité manquante).
+
+**Preuve sémantique.** `1NSI-TC-REM` porte cinq sections visant cinq
+misconceptions distinctes, alignées sur C1…C5 et utilisables isolément. Les cinq
+tâches de réinvestissement ont été **exécutées** : 17/17.
+`LEGITIMATE_MULTI_CAPACITY_REMEDIATION_BUNDLE = YES`.
+
+**Ensemble de sources, mesuré.** `807 → 802` objets, 10 contrats inchangés.
+`REMOVED` = exactement les cinq copies, `ADDED` = 0, `UNCHANGED` = 802.
+`OLD_SET_DIGEST sha256:7493cc39…` → `NEW_SET_DIGEST sha256:93b468ab…`.
+Le chiffre « 339 → 334 » annoncé au checkpoint précédent était **faux** : cette
+attente est court-circuitée par `_guard_campaign_pending()` tant que la campagne
+dérive. Mesurer, ne pas présumer.
+
+**Mécanisme.** `scripts/build_1nsi_pending_state_reobservation.py` lit son commit
+de cause dans l'historique git : il a reconnu `0ca6f92b` et ses cinq
+suppressions. Aucune ligne de code partagée n'a été modifiée.
+`SEALED_FIELDS_MUTATED 0`, `UNEXPLAINED_DELTA 0`.
+
+**Ancien scellement préservé.** `audit/1NSI_PENDING_STATE_REOBSERVATION.json`
+conserve `declared` face à `observed` sur les neuf champs, avec SHA, sujet et
+date du commit de cause. Rien de réécrit rétrospectivement.
+
+**Aucun travail humain perdu.** `HUMAN_RECEIPTS 0` avant comme après,
+`review_a`/`review_b` `PENDING_UNASSIGNED`, `publication_approval false`.
+
+**Dette soldée.** `EXPECTED_XFAIL_FOR_INT004 = 0` : les deux `xfail` sont
+devenus des invariants verts, plus un test interdisant le retour des copies.
+
+
+---
+
+## INT-005 — `qcm_diagnostics` ne porte aucune capacité
+
+**Problème.** `1NSI-TC-QCM-DIAG` est le seul objet `qcm_diagnostics` du corpus
+NSI et ne déclare aucune capacité, ce qui le laisse en `UNKNOWN` dans la
+couverture par capacité.
+
+**Pourquoi ce n'est pas corrigé ici.** Le fichier porte en tête
+« Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main » et un
+champ `genere_depuis` pointant le JSON du QCM. La correction relève du
+générateur, pas du contenu ; l'éditer à la main serait écrasé au prochain build.
+
+**Correctif attendu.** `build_qcm_tex.py` propage dans la META de l'objet
+diagnostics les capacités du QCM dont il dérive — ici C1 à C5, déjà déclarées
+par `1NSI-TC-QCM`.
+
+**Portée.** Un seul objet aujourd'hui ; le devient pour chaque chapitre dès que
+d'autres diagnostics seront générés.
