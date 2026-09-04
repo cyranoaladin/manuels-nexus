@@ -43,7 +43,7 @@ Mécanisme ratifié : `clearpage` — refusé : `cleardoublepage`
 
 - PDF : `Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf`
 - pages : 359 → 363 au commit ratifié
-- build courant : 355 pages, `sha256:39c6a8541f4b35d8…`, 0 folio faux, identique au build ratifié : false
+- build courant : 355 pages, `sha256:33215c1bfe45bbfd…`, 0 folio faux, identique au build ratifié : false
 - folios de chapitre faux : 3 → 0
 - flux de contenu dépouillé conservé : true (582029 caractères)
 - pages blanches : [2, 4, 6, 12]
@@ -77,7 +77,7 @@ Mécanisme ratifié : `clearpage` — refusé : `cleardoublepage`
 
 - PDF : `Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf`
 - pages : 633 → 635 au commit ratifié
-- build courant : 627 pages, `sha256:dc5f2575f5f7cd0b…`, 0 folio faux, identique au build ratifié : false
+- build courant : 627 pages, `sha256:ae48d4bd2ab4f7ac…`, 0 folio faux, identique au build ratifié : false
 - folios de chapitre faux : 6 → 0
 - flux de contenu dépouillé conservé : true (1007663 caractères)
 - pages blanches : [2, 4, 6, 12]
