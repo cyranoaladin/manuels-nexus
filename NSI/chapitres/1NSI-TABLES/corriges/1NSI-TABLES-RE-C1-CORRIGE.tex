@@ -1,0 +1,23 @@
+% META: {"id": "1NSI-TABLES-RE-C1-CORRIGE", "chapitre": "1NSI-TABLES", "type_objet": "corrige", "exercice_ref": "1NSI-TABLES-RE-C1", "capacites": ["P-TABLE-01"], "capacites_codes": ["C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-TABLES-RE-C1}
+\begin{enumerate}
+  \item \lstinline{plus_age} vaut \lstinline{"9"} et \lstinline{majeurs} vaut
+        \lstinline{["Sara", "Tom"]}. Les âges sont des chaînes : \lstinline{max} les compare
+        caractère par caractère, et \lstinline{"9"} dépasse \lstinline{"17"},
+        \lstinline{"16"} et \lstinline{"21"} parce que le caractère \lstinline{"9"} vient
+        après \lstinline{"1"} et \lstinline{"2"}. De même \lstinline{"9" >= "18"} est vrai :
+        Sara, neuf ans, est déclarée majeure.
+  \item Python refuse de comparer une chaîne et un entier : \lstinline{"17" >= 18} lève
+        \lstinline{TypeError}. L'erreur est plus visible que le résultat faux de la
+        question 1, mais la cause est la même : la colonne n'a jamais été convertie.
+  \item Convertir la colonne pour toutes les lignes, puis calculer :
+\begin{python}
+for ligne in eleves:
+    ligne["age"] = int(ligne["age"])
+plus_age = max(ligne["age"] for ligne in eleves)
+majeurs = [ligne["nom"] for ligne in eleves if ligne["age"] >= 18]
+\end{python}
+        \lstinline{plus_age} vaut alors $21$ et \lstinline{majeurs} vaut
+        \lstinline{["Tom"]}.
+\end{enumerate}
+\end{corrige}

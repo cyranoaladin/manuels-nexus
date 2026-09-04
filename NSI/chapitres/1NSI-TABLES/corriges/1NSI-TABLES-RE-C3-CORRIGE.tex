@@ -1,0 +1,19 @@
+% META: {"id": "1NSI-TABLES-RE-C3-CORRIGE", "chapitre": "1NSI-TABLES", "type_objet": "corrige", "exercice_ref": "1NSI-TABLES-RE-C3", "capacites": ["P-TABLE-03"], "capacites_codes": ["C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-TABLES-RE-C3}
+\begin{enumerate}
+  \item Il affiche \lstinline|{"nom": "Amine", "note": 14}| : la première ligne de la table
+        \emph{non triée}. \lstinline{sorted} a bien construit une liste triée, mais personne
+        ne l'a gardée ; \lstinline{notes} n'a pas bougé.
+  \item Il affiche \lstinline{None} : \lstinline{notes.sort(...)} ne renvoie rien. En
+        revanche la table a été triée sur place : \lstinline{notes} vaut désormais Omar $9$,
+        Amine $14$, Lina $18$, et \lstinline{notes[0]} est bien la ligne d'Omar. L'élève a
+        obtenu le tri, mais l'a cherché au mauvais endroit.
+  \item Garder le résultat de \lstinline{sorted} dans une nouvelle variable :
+\begin{python}
+classement = sorted(notes, key=lambda ligne: ligne["note"])
+print(classement[0])
+\end{python}
+        \lstinline{classement[0]} vaut \lstinline|{"nom": "Omar", "note": 9}| et
+        \lstinline{notes} reste dans l'ordre Amine, Lina, Omar.
+\end{enumerate}
+\end{corrige}

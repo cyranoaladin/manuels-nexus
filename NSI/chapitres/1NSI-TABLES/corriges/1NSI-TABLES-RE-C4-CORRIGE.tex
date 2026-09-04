@@ -1,0 +1,23 @@
+% META: {"id": "1NSI-TABLES-RE-C4-CORRIGE", "chapitre": "1NSI-TABLES", "type_objet": "corrige", "exercice_ref": "1NSI-TABLES-RE-C4", "capacites": ["P-TABLE-04"], "capacites_codes": ["C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-TABLES-RE-C4}
+\begin{enumerate}
+  \item Domaine de \lstinline{nom} dans \lstinline{eleves} : $\{$Amine, Lina, Omar, Sara$\}$ ;
+        dans \lstinline{clubs} : $\{$Lina, Sara, Yanis$\}$ ; intersection : $\{$Lina, Sara$\}$.
+        La fusion renvoie donc \textbf{deux} lignes, et non sept :
+        \lstinline|{"nom": "Lina", "classe": "1B", "club": "robotique"}| et
+        \lstinline|{"nom": "Sara", "classe": "1B", "club": "theatre"}|. Une fusion ne
+        \emph{juxtapose} pas les tables, elle apparie les lignes qui partagent une valeur de
+        clé.
+  \item Amine et Omar ont un nom absent du domaine de \lstinline{clubs} ; Yanis a un nom
+        absent du domaine de \lstinline{eleves}. Aucun n'est dans l'intersection, donc aucun
+        n'a de ligne. Ce n'est pas une erreur : c'est le sens de la fusion par défaut, qui ne
+        conserve que le domaine commun. Garder tous les élèves avec un club vide serait une
+        autre opération, à programmer explicitement.
+  \item Les colonnes hors clé ne sont plus disjointes : \lstinline{classe} existe des deux
+        côtés. \lstinline{fusionner} lève \lstinline{ValueError} avec le message
+        \lstinline{"les colonnes hors cle doivent etre disjointes"}. C'est préférable à un résultat
+        silencieux : sinon la classe venue de \lstinline{clubs} écraserait celle de
+        \lstinline{eleves} sans que rien ne le signale, et une erreur de données passerait
+        pour un résultat correct.
+\end{enumerate}
+\end{corrige}
