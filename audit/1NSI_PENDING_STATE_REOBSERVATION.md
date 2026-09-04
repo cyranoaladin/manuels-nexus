@@ -4,36 +4,535 @@
 
 > la campagne de revue 1NSI reste PENDING ; ce producteur ne mesure que l'etat courant et ne leve aucune attente
 
-État : `CURRENT`
+État : `REOBSERVED`
 
 ## Source set
 
-- déclaré (historique) : commit `3dae8002d0ab6bdb5cdab676ccd53a2b375a5b40`, 817 sources, `sha256:45d1ffcf341024851a821d018f84f83b195bece989ec3ff20c55046d22b540c1`
-- observé (courant) : 817 sources, `sha256:45d1ffcf341024851a821d018f84f83b195bece989ec3ff20c55046d22b540c1`
-- ajoutés : 0 ; retirés : 0 ; modifiés : 0 ; inchangés : 817
+- déclaré (historique) : commit `a99aee0a63497e1621ab6d6ee4a650eb5ec90a84`, 713 sources, `sha256:d9d796a784218d294220acaeec5dc79cc88ea1f94e45f5a32b75383c97638278`
+- observé (courant) : 468 sources, `sha256:72c261b9535e89cea56aedb930480d58118d88e9e309498aea8b8ac636dead4c`
+- ajoutés : 92 ; retirés : 337 ; modifiés : 32 ; inchangés : 344
 
 ## Commits de cause
 
-- aucun depuis le dernier état observé ; dernière mutation du périmètre : `2d522877b67a2417602a40e33b7f3bd1f0c620ab` ([1NSI] retirer 44 cours qui dupliquaient ou usurpaient un autre objet)
+- `33b10054ee195a0cad2469076d5fcd33f7f8b8a2` (2026-09-04) [WEB-IHM] author four real méthodes and retire the 95-character stub
+- `6703e3a74e985cc1e8bf742be830d419ac5d7241` (2026-09-04) [WEB-IHM] author the eight missing remediations from documented misconceptions
+- `9cafa435f0ca2c0c62f1951fc024e5821d993fcf` (2026-09-04) [WEB-IHM] extend both assessments to the nine capacities and fix two authoring defects
+- `cb662c89554bbb7a626d39192e00796e5205dda4` (2026-09-04) [LANGAGE] remove 81 synthetic filler copies and restore the true coverage
+- `96f2fcaf8ed4b37365ff6dfe4f2e0501b5263aa6` (2026-09-04) [LANGAGE] author four real méthodes and retire the 95-character stub
+- `142c26cfa20770014b5452c297c99966ef01991e` (2026-09-04) [LANGAGE] author the six missing remediations from documented misconceptions
+- `dab9b09600ec28c79070ca208d446e1fae263816` (2026-09-04) [LANGAGE] extend both assessments to the seven capacities
+- `1c491bec20f8d59e4d7e6615fcbead16464bd394` (2026-09-04) [TYPES-BASE] remove 55 synthetic filler copies and restore the true coverage
+- `8abc056fbf7bea60e6354f062e70a580c7441983` (2026-09-04) [TYPES-BASE] author four real méthodes and retire the 95-character stub
+- `100f1b004a1cece98bc6fcf3123d0b08a5d9e468` (2026-09-04) [TYPES-BASE] author the four missing remediations and close the chapter
+- `8fbfeb1a68a571aff0a23743155458a2e1dccff9` (2026-09-04) [ARCHITECTURE-OS] remove 55 synthetic filler copies and restore the true coverage
+- `f602c7d5116a0a5f91bc0dda13b6a22afc909b37` (2026-09-04) [ARCHITECTURE-OS] author four méthodes and fix a pre-existing syntax defect
+- `de23e1bcb0240b7ef779e3e1f9163b47a91e6ae2` (2026-09-04) [ARCHITECTURE-OS] author four remediations, evaluate the command line, close the chapter
+- `1bce9de4acf6193748f470021e191e1d30eeb44a` (2026-09-04) [DICHO-GLOUTON-KNN] declare the official capacity refs on the three méthodes
+- `57b15caa04ff59884c68e27d5320c9d9c6e39a32` (2026-09-04) [RESEAUX] remove 55 synthetic filler copies and restore the true coverage
+- `f3122cbda202cccb4f6dd2f20160dd2d4ac49f65` (2026-09-04) [RESEAUX] author four méthodes and retire the 95-character stub
+- `7f8e4e6df1ab3587bdd554bee9ae7ea4ee0e3797` (2026-09-04) [RESEAUX] author four remediations, evaluate the IHM capacity, close the chapter
+- `b90bd4f2bd72b82fd86e5b3927650d77e8e0bc3b` (2026-09-04) [TABLES] remove 42 synthetic filler copies and restore the true coverage
+- `087e9adcb813b0fefc4526602189e8c5170a6a53` (2026-09-04) [TABLES] fix six pre-existing defects in the canonical objects
+- `1aba51477d24194b561474d8dfa0dfcbc1ba0209` (2026-09-04) [TABLES] author four méthodes and retire the 95-character stub
+- `30de9677ed39263f5c897c0596c9bf4b4648e0c7` (2026-09-04) [TABLES] author three remediations and close the chapter
+- `7b8a62d43346f10372346482f1c174d2c20336af` (2026-09-04) [PROJET-METHODES] establish canonical ownership, then remove 42 filler copies
+- `858c0089d3b2dbc0cf3df762323758f5488c657c` (2026-09-04) [PROJET-METHODES] author four méthodes
+- `533ae735626deb52654ccb7e376e65006763ce2e` (2026-09-04) [PROJET-METHODES] author three remediations, evaluate the oral capacity, close the chapter
+- `7cbe3337a2f77ae254155a48d5f1418d26648551` (2026-09-04) [1NSI] align the printed duration and barème of six extended evaluations
 
 ## Métriques
 
 | Métrique | Valeur |
 |---|---:|
 | `REGISTERS` | 2 |
-| `FIELDS_REOBSERVED` | 0 |
+| `FIELDS_REOBSERVED` | 9 |
 | `SEALED_FIELDS_MUTATED` | 0 |
-| `CAUSE_COMMITS` | 0 |
-| `SOURCES_ADDED` | 0 |
-| `SOURCES_REMOVED` | 0 |
-| `SOURCES_MODIFIED` | 0 |
+| `CAUSE_COMMITS` | 25 |
+| `SOURCES_ADDED` | 92 |
+| `SOURCES_REMOVED` | 337 |
+| `SOURCES_MODIFIED` | 32 |
 | `UNEXPLAINED_ADDITIONS` | 0 |
 | `UNEXPLAINED_REMOVALS` | 0 |
 | `UNEXPLAINED_MODIFICATIONS` | 0 |
 | `UNEXPLAINED_DELTA` | 0 |
 | `HUMAN_RECEIPTS_AFFECTED` | 0 |
 
+## Attribution par chemin
+
+| Chemin | Changement | Commits de cause | Expliqué |
+|---|---|---|---|
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHITECTURE-OS-RE-C1-CORRIGE.tex` | added | de23e1bc | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHITECTURE-OS-RE-C2-CORRIGE.tex` | added | de23e1bc | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHITECTURE-OS-RE-C3-CORRIGE.tex` | added | de23e1bc | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHITECTURE-OS-RE-C4-CORRIGE.tex` | added | de23e1bc | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-ME-001.tex` | added | f602c7d5 | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-ME-002.tex` | added | f602c7d5 | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-ME-003.tex` | added | f602c7d5 | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHOS-ME-004.tex` | added | f602c7d5 | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHITECTURE-OS-RE-C1.tex` | added | de23e1bc | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHITECTURE-OS-RE-C2.tex` | added | de23e1bc | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHITECTURE-OS-RE-C3.tex` | added | de23e1bc | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHITECTURE-OS-RE-C4.tex` | added | de23e1bc | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANGAGE-RE-C1-CORRIGE.tex` | added | 142c26cf | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANGAGE-RE-C2-CORRIGE.tex` | added | 142c26cf | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANGAGE-RE-C3-CORRIGE.tex` | added | 142c26cf | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANGAGE-RE-C5-CORRIGE.tex` | added | 142c26cf | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANGAGE-RE-C6-CORRIGE.tex` | added | 142c26cf | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANGAGE-RE-C7-CORRIGE.tex` | added | 142c26cf | oui |
+| `NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-ME-001.tex` | added | 96f2fcaf | oui |
+| `NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-ME-002.tex` | added | 96f2fcaf | oui |
+| `NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-ME-003.tex` | added | 96f2fcaf | oui |
+| `NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANG-ME-004.tex` | added | 96f2fcaf | oui |
+| `NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C1.tex` | added | 142c26cf | oui |
+| `NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C2.tex` | added | 142c26cf | oui |
+| `NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C3.tex` | added | 142c26cf | oui |
+| `NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C5.tex` | added | 142c26cf | oui |
+| `NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C6.tex` | added | 142c26cf | oui |
+| `NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C7.tex` | added | 142c26cf | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-RE-C1-CORRIGE.tex` | added | 533ae735 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-RE-C2-CORRIGE.tex` | added | 533ae735 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-RE-C4-CORRIGE.tex` | added | 533ae735 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-ME-001.tex` | added | 858c0089 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-ME-002.tex` | added | 858c0089 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-ME-003.tex` | added | 858c0089 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PM-ME-004.tex` | added | 858c0089 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/remediation/1NSI-PM-RE-C1.tex` | added | 533ae735 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/remediation/1NSI-PM-RE-C2.tex` | added | 533ae735 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/remediation/1NSI-PM-RE-C4.tex` | added | 533ae735 | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RESEAUX-RE-C2-CORRIGE.tex` | added | 7f8e4e6d | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RESEAUX-RE-C3-CORRIGE.tex` | added | 7f8e4e6d | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RESEAUX-RE-C4-CORRIGE.tex` | added | 7f8e4e6d | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RESEAUX-RE-C5-CORRIGE.tex` | added | 7f8e4e6d | oui |
+| `NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-ME-001.tex` | added | f3122cbd | oui |
+| `NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-ME-002.tex` | added | f3122cbd | oui |
+| `NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-ME-003.tex` | added | f3122cbd | oui |
+| `NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RES-ME-004.tex` | added | f3122cbd | oui |
+| `NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RESEAUX-RE-C2.tex` | added | 7f8e4e6d | oui |
+| `NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RESEAUX-RE-C3.tex` | added | 7f8e4e6d | oui |
+| `NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RESEAUX-RE-C4.tex` | added | 7f8e4e6d | oui |
+| `NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RESEAUX-RE-C5.tex` | added | 7f8e4e6d | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TABLES-RE-C1-CORRIGE.tex` | added | 30de9677 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TABLES-RE-C3-CORRIGE.tex` | added | 30de9677 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TABLES-RE-C4-CORRIGE.tex` | added | 30de9677 | oui |
+| `NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-ME-001.tex` | added | 1aba5147 | oui |
+| `NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-ME-002.tex` | added | 1aba5147 | oui |
+| `NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-ME-003.tex` | added | 1aba5147 | oui |
+| `NSI/chapitres/1NSI-TABLES/methodes/1NSI-TAB-ME-004.tex` | added | 1aba5147 | oui |
+| `NSI/chapitres/1NSI-TABLES/remediation/1NSI-TABLES-RE-C1.tex` | added | 30de9677 | oui |
+| `NSI/chapitres/1NSI-TABLES/remediation/1NSI-TABLES-RE-C3.tex` | added | 30de9677 | oui |
+| `NSI/chapitres/1NSI-TABLES/remediation/1NSI-TABLES-RE-C4.tex` | added | 30de9677 | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TYPES-BASE-RE-C1-CORRIGE.tex` | added | 100f1b00 | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TYPES-BASE-RE-C2-CORRIGE.tex` | added | 100f1b00 | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TYPES-BASE-RE-C4-CORRIGE.tex` | added | 100f1b00 | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TYPES-BASE-RE-C5-CORRIGE.tex` | added | 100f1b00 | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-ME-001.tex` | added | 8abc056f | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-ME-002.tex` | added | 8abc056f | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-ME-003.tex` | added | 8abc056f | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TB-ME-004.tex` | added | 8abc056f | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TYPES-BASE-RE-C1.tex` | added | 100f1b00 | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TYPES-BASE-RE-C2.tex` | added | 100f1b00 | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TYPES-BASE-RE-C4.tex` | added | 100f1b00 | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TYPES-BASE-RE-C5.tex` | added | 100f1b00 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-IHM-RE-C1-CORRIGE.tex` | added | 6703e3a7 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-IHM-RE-C2-CORRIGE.tex` | added | 6703e3a7 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-IHM-RE-C3-CORRIGE.tex` | added | 6703e3a7 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-IHM-RE-C4-CORRIGE.tex` | added | 6703e3a7 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-IHM-RE-C5-CORRIGE.tex` | added | 6703e3a7 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-IHM-RE-C6-CORRIGE.tex` | added | 6703e3a7 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-IHM-RE-C7-CORRIGE.tex` | added | 6703e3a7 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-IHM-RE-C8-CORRIGE.tex` | added | 6703e3a7 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-ME-001.tex` | added | 33b10054, 9cafa435 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-ME-002.tex` | added | 33b10054 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-ME-003.tex` | added | 33b10054, 9cafa435 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-ME-004.tex` | added | 33b10054 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C1.tex` | added | 6703e3a7 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C2.tex` | added | 6703e3a7 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C3.tex` | added | 6703e3a7 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C4.tex` | added | 6703e3a7 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C5.tex` | added | 6703e3a7 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C6.tex` | added | 6703e3a7 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C7.tex` | added | 6703e3a7 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C8.tex` | added | 6703e3a7 | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-006.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-007.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-008.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-009.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-010.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-011.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-012.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-013.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-014.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-015.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-016.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-017.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-018.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-019.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-020.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-021.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-022.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-023.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-024.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-025.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-026.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-027.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-028.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-029.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-030.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-006.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-007.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-008.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-009.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-010.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-011.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-012.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-013.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-014.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-015.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-016.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-017.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-018.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-019.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-020.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-021.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-022.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-023.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-024.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-025.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-026.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-027.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-028.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-029.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-030.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/methodes/1NSI-ARCHITECTURE-OS-METH-01.tex` | removed | f602c7d5 | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHOS-REMED-01.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHOS-REMED-02.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHOS-REMED-03.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHOS-REMED-04.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHOS-REMED-05.tex` | removed | 8fbfeb1a | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-006.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-007.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-008.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-009.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-010.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-011.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-012.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-013.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-014.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-015.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-016.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-017.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-018.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-019.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-020.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-021.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-022.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-023.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-024.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-025.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-026.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-027.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-028.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-029.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-030.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-031.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-032.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-033.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-034.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-035.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-036.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-037.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-038.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-039.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-040.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-041.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-042.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-006.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-007.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-008.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-009.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-010.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-011.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-012.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-013.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-014.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-015.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-016.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-017.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-018.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-019.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-020.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-021.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-022.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-023.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-024.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-025.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-026.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-027.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-028.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-029.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-030.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-031.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-032.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-033.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-034.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-035.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-036.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-037.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-038.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-039.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-040.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-041.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-042.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/methodes/1NSI-LANGAGE-METH-01.tex` | removed | 96f2fcaf | oui |
+| `NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANG-REMED-01.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANG-REMED-02.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANG-REMED-03.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANG-REMED-04.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANG-REMED-05.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANG-REMED-06.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANG-REMED-07.tex` | removed | cb662c89 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-006.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-007.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-008.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-009.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-010.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-011.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-012.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-013.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-014.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-015.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-016.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-017.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-018.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-019.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-020.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-021.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-022.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-023.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-024.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-006.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-007.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-008.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-009.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-010.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-011.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-012.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-013.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-014.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-015.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-016.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-017.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-018.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-019.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-020.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-021.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-022.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-023.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-024.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/methodes/1NSI-PROJET-METHODES-METH-01.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/remediation/1NSI-PM-REMED-01.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/remediation/1NSI-PM-REMED-02.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/remediation/1NSI-PM-REMED-03.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/remediation/1NSI-PM-REMED-04.tex` | removed | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-006.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-007.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-008.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-009.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-010.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-011.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-012.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-013.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-014.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-015.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-016.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-017.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-018.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-019.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-020.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-021.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-022.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-023.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-024.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-025.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-026.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-027.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-028.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-029.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-030.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-006.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-007.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-008.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-009.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-010.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-011.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-012.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-013.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-014.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-015.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-016.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-017.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-018.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-019.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-020.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-021.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-022.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-023.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-024.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-025.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-026.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-027.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-028.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-029.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-030.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/methodes/1NSI-RESEAUX-METH-01.tex` | removed | f3122cbd | oui |
+| `NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RES-REMED-01.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RES-REMED-02.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RES-REMED-03.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RES-REMED-04.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RES-REMED-05.tex` | removed | 57b15caa | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-006.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-007.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-008.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-009.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-010.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-011.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-012.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-013.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-014.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-015.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-016.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-017.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-018.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-019.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-020.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-021.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-022.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-023.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-024.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-006.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-007.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-008.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-009.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-010.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-011.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-012.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-013.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-014.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-015.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-016.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-017.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-018.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-019.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-020.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-021.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-022.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-023.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-024.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/methodes/1NSI-TABLES-METH-01.tex` | removed | 1aba5147 | oui |
+| `NSI/chapitres/1NSI-TABLES/remediation/1NSI-TAB-REMED-01.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/remediation/1NSI-TAB-REMED-02.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/remediation/1NSI-TAB-REMED-03.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TABLES/remediation/1NSI-TAB-REMED-04.tex` | removed | b90bd4f2 | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-006.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-007.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-008.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-009.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-010.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-011.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-012.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-013.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-014.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-015.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-016.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-017.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-018.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-019.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-020.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-021.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-022.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-023.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-024.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-025.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-026.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-027.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-028.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-029.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-030.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-006.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-007.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-008.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-009.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-010.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-011.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-012.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-013.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-014.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-015.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-016.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-017.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-018.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-019.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-020.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-021.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-022.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-023.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-024.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-025.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-026.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-027.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-028.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-029.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-030.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/methodes/1NSI-TYPES-BASE-METH-01.tex` | removed | 8abc056f | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TB-REMED-01.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TB-REMED-02.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TB-REMED-03.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TB-REMED-04.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TB-REMED-05.tex` | removed | 1c491bec | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/methodes/1NSI-WEB-IHM-METH-01.tex` | removed | 33b10054 | oui |
+| `NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-001.tex` | modified | 1bce9de4 | oui |
+| `NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-002.tex` | modified | 1bce9de4 | oui |
+| `NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/methodes/1NSI-ADGK-ME-003.tex` | modified | 1bce9de4 | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-004.tex` | modified | f602c7d5 | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A-corrige.tex` | modified | de23e1bc | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A.tex` | modified | de23e1bc, 7cbe3337 | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B-corrige.tex` | modified | de23e1bc | oui |
+| `NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B.tex` | modified | de23e1bc, 7cbe3337 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/evaluations/1NSI-LANG-EVAL-A-corrige.tex` | modified | dab9b096 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/evaluations/1NSI-LANG-EVAL-A.tex` | modified | dab9b096, 7cbe3337 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/evaluations/1NSI-LANG-EVAL-B-corrige.tex` | modified | dab9b096 | oui |
+| `NSI/chapitres/1NSI-LANGAGE/evaluations/1NSI-LANG-EVAL-B.tex` | modified | dab9b096, 7cbe3337 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-005.tex` | modified | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-A-corrige.tex` | modified | 533ae735 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-A.tex` | modified | 533ae735 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-B-corrige.tex` | modified | 533ae735 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-B.tex` | modified | 533ae735 | oui |
+| `NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-005.tex` | modified | 7b8a62d4 | oui |
+| `NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A-corrige.tex` | modified | 7f8e4e6d | oui |
+| `NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A.tex` | modified | 7f8e4e6d | oui |
+| `NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B-corrige.tex` | modified | 7f8e4e6d | oui |
+| `NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B.tex` | modified | 7f8e4e6d | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-001.tex` | modified | 087e9adc | oui |
+| `NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-003.tex` | modified | 087e9adc | oui |
+| `NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C1.tex` | modified | 087e9adc | oui |
+| `NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C3.tex` | modified | 087e9adc | oui |
+| `NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C4.tex` | modified | 087e9adc | oui |
+| `NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-001.tex` | modified | 087e9adc | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex` | modified | 9cafa435 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A.tex` | modified | 9cafa435, 7cbe3337 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex` | modified | 9cafa435 | oui |
+| `NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B.tex` | modified | 9cafa435, 7cbe3337 | oui |
+
 ## Champs ré-observés
 
 | Registre | Champ | Déclaré | Observé |
 |---|---|---|---|
+| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.sources_count` | `713` | `468` |
+| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.sources_ids_digest` | `sha256:d9d796a784218d294220acaeec5dc79cc88ea1f94e45f5a32b75383c97638278` | `sha256:72c261b9535e89cea56aedb930480d58118d88e9e309498aea8b8ac636dead4c` |
+| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.object_sources_count` | `703` | `458` |
+| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.ids_only_in_sources_count` | `383` | `138` |
+| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.ids_only_in_sources_digest` | `sha256:de7bcd718ba2fc81c9b553f64dbaaca87db1fbdab4dfda515ca84aef873ecee1` | `sha256:da5796071af611378e5ecf9a6217dfdf6fd3ef132b11903848d068efacf3ac18` |
+| `1NSI_STATUS_GOVERNANCE_PENDING` | `observed_counts` | `dict[4]` | `dict[3]` |
+| `1NSI_STATUS_GOVERNANCE_PENDING` | `objects_total` | `703` | `458` |
+| `1NSI_STATUS_GOVERNANCE_PENDING` | `prohibited_status_objects_count` | `337` | `0` |
+| `1NSI_STATUS_GOVERNANCE_PENDING` | `prohibited_status_objects_digest` | `sha256:145b1cffa70522f6bb801b0b38f6de7eaee15ac976e26da24fd3714c12a26dba` | `sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945` |
