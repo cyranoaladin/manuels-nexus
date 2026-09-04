@@ -1,0 +1,52 @@
+{
+  "artifact_type": "chapter_local_status",
+  "schema_version": 1,
+  "chapter": "1NSI-RESEAUX",
+  "generated_by": "instance B2 (codex/urgent-1nsi-content)",
+  "scope": "LOCAL_SATELLITE_ONLY",
+  "approves_nothing": true,
+  "grants_no_publication_approval": true,
+  "p0_class": "P0_PEDAGOGICAL_CONTENT_CLONING_AND_CAPACITY_MISREPRESENTATION",
+  "p0_subclass": "SYNTHETIC_FILLER_TEMPLATE_CONTAMINATION",
+  "RESEAUX_HEALTHY_CONTENT": "YES",
+  "RESEAUX_LOCAL_MACHINE_CONTENT_COMPLETE": "YES",
+  "RESEAUX_GOVERNANCE_CURRENT": "CURRENT_AFTER_INT006",
+  "les_deux_ne_se_confondent_pas": "HEALTHY_CONTENT = clone-free et scientifiquement correct. MACHINE_COMPLETE = en plus, identite de capacite resolue, chaque cellule capacite x role servie par un objet authentique et declaree dans la META, evaluations couvrant chaque capacite.",
+  "commits": ["57b15caa remove 55 synthetic filler copies", "f3122cbd author four methodes", "7f8e4e6d author four remediations, evaluate the IHM capacity"],
+  "local_gates": {
+    "PROGRAMME": "PASS (5 atomes P-ARCH-02A/02B/02C/04A/04B, tous du referentiel 1NSI, aucun atome Terminale)",
+    "CAPACITY_IDENTITY": "PASS (code local -> ref contractuelle -> atome officiel ; UNKNOWN 0, collisions 0)",
+    "SCIENCE_CODE": "PASS (verify_python --check 27 OK / 4 REVIEW sans code / 0 FAIL ; toutes les valeurs des exemples rediges calculees par execution independante)",
+    "EX_CO": "PASS (5 EX <-> 5 CO ; 5 RE <-> 5 RE-CORRIGE ; 0 REAL_ORPHAN_CO ; 5 faux ORPHAN_CO attendus du producteur partage tant qu'INT-001 n'est pas integre)",
+    "ROLE_COVERAGE": "PASS (35/35 cellules, 0 MISSING, aucune cellule comptee par la seule META)",
+    "FALSE_CREDITS": 0,
+    "CLONES": 0,
+    "NEAR_CLONES": "PASS (aucune paire >= 0,6 hors A/B paralleles par construction)",
+    "QCM": "PASS (6 questions, 5 capacites, une seule bonne reponse chacune, distracteurs diagnostiques avec renvoi)",
+    "ASSESSMENTS": "PASS (A et B : 3 exercices, 30 points, 60 minutes, 5 capacites ; P-ARCH-04B ajoutee dans les deux)",
+    "REMEDIATIONS": "PASS (5 fiches, une par capacite, chacune issue d'une misconception documentee ; 4 executees, RE-C4 raisonne sur des roles)",
+    "RICHNESS": "PASS_MINIMAL (voir HUMAN_ATTENTION_ITEMS : volume minimal viable, pas de quota)",
+    "NARRATIVE": "PASS (cours -> methodes -> exercices -> remediation -> QCM -> evaluations ; le thermostat du cours est reinvesti par l'arrosage, la ventilation, le volet, l'aquarium)",
+    "TARGETED_RENDER": "PASS (variante eleve 16 pages, 0 erreur, 0 overfull, 0 underfull, 0 glyphe manquant, 0 corrige)",
+    "UNKNOWN": 0
+  },
+  "evidence": {
+    "objects": "76 -> 32, 32 corps distincts",
+    "deleted_synthetic_set": "EX-006..030, CO-006..030, REMED-01..05, METH-01 (56)",
+    "authored_set": "ME-001..004, RE-C2..C5, RE-C2..C5-CORRIGE (12)",
+    "modified_set": "EVAL-A, EVAL-A-corrige, EVAL-B, EVAL-B-corrige (exercice 3, capacites, duree, bareme)",
+    "delta_ledger": "audit/1nsi-local/RESEAUX_LOCAL_DELTA_LEDGER.json",
+    "latex_regression_classes_hit": ["\\lstinline dans une cellule de tabular -> \\texttt (RE-C2)"]
+  },
+  "HUMAN_ATTENTION_ITEMS": {
+    "EXPERT_NSI": [
+      "Le bit alterne du cours modelise l'emetteur seul (pas d'ACK explicite dans le code) ; verifier que la simplification reste acceptable au niveau attendu.",
+      "P-ARCH-04A/04B (capteurs, actionneurs, IHM) vivent dans ce chapitre et non dans WEB-IHM : coherent avec le referentiel local (theme ARCHITECTURES), a confirmer editorialement.",
+      "M4 traduit « a partir de » par <= / >= ; les enonces du chapitre n'emploient que des seuils stricts."
+    ],
+    "EXPERT_PROGRAMME_PEDAGOGIE": [
+      "Duree des evaluations portee a 60 minutes (3 exercices) : verifier la compatibilite avec le format de devoir attendu.",
+      "Cinq exercices pour cinq capacites : volume minimal viable, sans quota ; juger si la progression parcours 1/2/3 (2/2/1) suffit."
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "artifact_type": "chapter_local_status",
+  "schema_version": 1,
+  "chapter": "1NSI-PROJET-METHODES",
+  "generated_by": "instance B2 (codex/urgent-1nsi-content)",
+  "scope": "LOCAL_SATELLITE_ONLY",
+  "approves_nothing": true,
+  "grants_no_publication_approval": true,
+  "p0_class": "P0_PEDAGOGICAL_CONTENT_CLONING_AND_CAPACITY_MISREPRESENTATION",
+  "p0_subclass": "SYNTHETIC_FILLER_TEMPLATE_CONTAMINATION",
+  "atypical_case": "Trois capacites sur quatre sont des references contractuelles BO-PREAMBULE-* sans atome P-XXX ; selection canonique semantique et contractuelle, consignee avant suppression dans PROJET_METHODES_CANONICAL_OWNERSHIP_LEDGER.json.",
+  "PROJET_METHODES_HEALTHY_CONTENT": "YES",
+  "PROJET_METHODES_LOCAL_MACHINE_CONTENT_COMPLETE": "YES",
+  "PROJET_METHODES_GOVERNANCE_CURRENT": "CURRENT_AFTER_INT006",
+  "commits": ["7b8a62d4 establish canonical ownership, then remove 42 filler copies", "858c0089 author four methodes", "533ae735 author three remediations, evaluate the oral capacity"],
+  "local_gates": {
+    "PROGRAMME": "PASS (P-HIST-01 atome officiel ; C2/C3/C4 references contractuelles du preambule du B.O., connues de audit/CAPACITY_ALIAS_MAP.json et des atomes 1NSI-OFFICIAL-* ; aucun atome Terminale ; aucun contenu mathematique etranger)",
+    "CAPACITY_IDENTITY": "PASS (UNKNOWN 0, collisions 0 ; EX-005/CO-005 multi-capacites avec mapping question -> capacite inscrit dans le fichier)",
+    "SCIENCE_CODE": "PASS (verify_python --check 28 OK / 2 REVIEW / 0 FAIL ; ZeroDivisionError, IndexError provoques ; chronologies triees par execution)",
+    "EX_CO": "PASS (5 EX <-> 5 CO ; 4 RE <-> 4 RE-CORRIGE ; 0 REAL_ORPHAN_CO ; 4 faux ORPHAN_CO INT-001)",
+    "ROLE_COVERAGE": "PASS (28/28, 0 MISSING)",
+    "FALSE_CREDITS": 0,
+    "CLONES": 0,
+    "NEAR_CLONES": "PASS",
+    "QCM": "PASS (6 questions, 4 capacites, une bonne reponse chacune)",
+    "ASSESSMENTS": "PASS (A et B : 3 exercices, 30 points, 60 minutes, 4 capacites ; C4 ajoutee dans les deux)",
+    "REMEDIATIONS": "PASS (4 fiches : chronologie melangee, jalons invérifiables, TypeError str+int (canonique conserve), docstring vide de sens)",
+    "RICHNESS": "PASS_MINIMAL",
+    "NARRATIVE": "PASS (chapitre transversal de cloture : histoire -> projet -> debogage -> documentation et oral ; M4 et RE-C4 reinvestissent la specification vue en LANGAGE)",
+    "TARGETED_RENDER": "PASS (variante eleve 17 pages, 0 erreur, 0 overfull, 0 underfull, 0 glyphe manquant, 0 corrige)",
+    "UNKNOWN": 0
+  },
+  "evidence": {
+    "objects": "64 -> 31, 31 corps distincts",
+    "deleted_synthetic_set": "EX-006..024, CO-006..024, REMED-01..04, METH-01 (43)",
+    "authored_set": "ME-001..004, RE-C1, RE-C2, RE-C4 et leurs corriges (10)",
+    "modified_set": "EX-005, CO-005 (ligne CAPACITY-MAP) ; EVAL-A, EVAL-A-corrige, EVAL-B, EVAL-B-corrige (exercice 3)",
+    "delta_ledger": "audit/1nsi-local/PROJET_METHODES_LOCAL_DELTA_LEDGER.json",
+    "ownership_ledger": "audit/1nsi-local/PROJET_METHODES_CANONICAL_OWNERSHIP_LEDGER.json",
+    "latex_regression_classes_hit": ["\\lstinline long en tete de paragraphe -> bloc python / bloc console (ME-003, deux underfull hbox)"]
+  },
+  "HUMAN_ATTENTION_ITEMS": {
+    "EXPERT_NSI": [
+      "Les reperes historiques (1642, 1936, 1948, 1969, 1989, 1991) sont ceux du cours existant ; verifier la formulation « premiers ordinateurs en 1948 » (programme enregistre, Manchester).",
+      "M3 recommande raise ValueError plutot qu'assert pour une precondition permanente, en coherence avec le cours ; les evaluations demandent un assert : verifier que la distinction est enseignee et non contradictoire."
+    ],
+    "EXPERT_PROGRAMME_PEDAGOGIE": [
+      "C2, C3, C4 reposent sur le preambule du B.O. et non sur le tableau Contenus/Capacites : confirmer que ce chapitre transversal a sa place comme dixieme chapitre et que ses evaluations (documentation, oral) sont notables.",
+      "L'exercice 3 des evaluations note un plan d'oral ecrit : verifier l'adequation avec l'evaluation reelle des competences orales."
+    ]
+  }
+}

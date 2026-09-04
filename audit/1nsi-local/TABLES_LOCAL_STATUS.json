@@ -1,0 +1,55 @@
+{
+  "artifact_type": "chapter_local_status",
+  "schema_version": 1,
+  "chapter": "1NSI-TABLES",
+  "generated_by": "instance B2 (codex/urgent-1nsi-content)",
+  "scope": "LOCAL_SATELLITE_ONLY",
+  "approves_nothing": true,
+  "grants_no_publication_approval": true,
+  "p0_class": "P0_PEDAGOGICAL_CONTENT_CLONING_AND_CAPACITY_MISREPRESENTATION",
+  "p0_subclass": "SYNTHETIC_FILLER_TEMPLATE_CONTAMINATION",
+  "TABLES_HEALTHY_CONTENT": "YES",
+  "TABLES_LOCAL_MACHINE_CONTENT_COMPLETE": "YES",
+  "TABLES_GOVERNANCE_CURRENT": "CURRENT_AFTER_INT006",
+  "commits": ["b90bd4f2 remove 42 synthetic filler copies", "087e9adc fix six pre-existing defects in the canonical objects", "1aba5147 author four methodes", "30de9677 author three remediations"],
+  "pre_existing_defects_found_and_fixed": [
+    "EX-001, CO-001, COURS-C1 : chaine CSV multi-ligne hors commentaire dans le bloc VERIFY -> SyntaxError et texte fuyant dans le corps imprime (10 FAIL -> 0)",
+    "CO-003 : cle {\"quantité\"} inexistante (la colonne est quantite)",
+    "COURS-C3, COURS-C4 : exemples annonces par un deux-points et jamais montres ; completes en prose avec les valeurs deja affirmees par leurs blocs VERIFY, sans listing ajoute (recus d'execution intacts)"
+  ],
+  "local_gates": {
+    "PROGRAMME": "PASS (P-TABLE-01..04, referentiel 1NSI, aucun atome Terminale)",
+    "CAPACITY_IDENTITY": "PASS (UNKNOWN 0, collisions 0)",
+    "SCIENCE_CODE": "PASS (verify_python --check 29 OK / 1 REVIEW / 0 FAIL ; valeurs des exemples calculees par execution independante ; TypeError, ValueError et IndexError provoques dans les blocs VERIFY)",
+    "EX_CO": "PASS (5 EX <-> 5 CO ; 4 RE <-> 4 RE-CORRIGE ; 0 REAL_ORPHAN_CO ; 4 faux ORPHAN_CO INT-001)",
+    "ROLE_COVERAGE": "PASS (28/28, 0 MISSING ; P-TABLE-02 garde deux exercices distincts)",
+    "FALSE_CREDITS": 0,
+    "CLONES": 0,
+    "NEAR_CLONES": "PASS",
+    "QCM": "PASS (6 questions, 4 capacites)",
+    "ASSESSMENTS": "PASS (A et B couvraient deja les 4 capacites, chacune dans un exercice distinct : non etendues)",
+    "REMEDIATIONS": "PASS (4 fiches : max sur chaines, doublons ligne entiere, sorted/sort, fusion et domaine commun)",
+    "RICHNESS": "PASS_MINIMAL",
+    "NARRATIVE": "PASS (le club sportif du cours, puis livres, coureurs, villes, eleves et clubs : aucun jeu de donnees recycle d'un autre chapitre)",
+    "TARGETED_RENDER": "PASS (variante eleve 16 pages, 0 erreur, 0 overfull, 0 underfull, 0 glyphe manquant, 0 corrige)",
+    "UNKNOWN": 0
+  },
+  "evidence": {
+    "objects": "64 -> 31, 31 corps distincts",
+    "deleted_synthetic_set": "EX-006..024, CO-006..024, REMED-01..04, METH-01 (43)",
+    "authored_set": "ME-001..004, RE-C1, RE-C3, RE-C4 et leurs corriges (10)",
+    "modified_set": "EX-001, CO-001, CO-003, COURS-C1, COURS-C3, COURS-C4 (defauts preexistants)",
+    "delta_ledger": "audit/1nsi-local/TABLES_LOCAL_DELTA_LEDGER.json",
+    "latex_regression_classes_hit": ["\\lstinline dans le titre d'une fichemethode (argument mobile) -> \\texttt (ME-003)"]
+  },
+  "HUMAN_ATTENTION_ITEMS": {
+    "EXPERT_NSI": [
+      "La fusion du cours refuse les colonnes homonymes par ValueError (choix de conception deja present) ; M4 et RE-C4 l'enseignent comme comportement attendu.",
+      "M1 presente le tri lexicographique des chaines (\"121\" < \"17\" < \"3\") : verifier la formulation « caractere par caractere »."
+    ],
+    "EXPERT_PROGRAMME_PEDAGOGIE": [
+      "Les evaluations restent a 2 exercices / 45 minutes alors que six autres chapitres sont a 3 exercices / 60 minutes : heterogeneite assumee (couverture deja suffisante), a arbitrer.",
+      "Cinq exercices pour quatre capacites : volume minimal viable."
+    ]
+  }
+}

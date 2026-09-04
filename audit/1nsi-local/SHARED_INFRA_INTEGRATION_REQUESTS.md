@@ -214,3 +214,67 @@ branche.
 tout lot de rédaction, et quinze tests de gouvernance échouent pour cette seule raison.
 Aucun de ces échecs ne signale un défaut de contenu ; ils disparaîtront à l'intégration,
 une fois la ré-observation relancée par le coordinateur.
+
+---
+
+## Mise à jour du 2026-09-04 (instance B2, après les dix chapitres)
+
+### INT-006 — INTÉGRÉ LOCALEMENT par cherry-pick
+
+`ba89af6b` (branche `codex/shared-infra-integration`, instance C) est
+cherry-pické tel quel en `4863adc0`, avant le sweep manuel, conformément à
+l'instruction de reprise. Les deux registres en conflit ont été pris dans la
+version livrée puis **régénérés par le producteur** (`--apply`, commit
+`5d1643ce`) : `SOURCES_ADDED=92`, `SOURCES_REMOVED=337`, `SOURCES_MODIFIED=32`,
+`UNEXPLAINED_DELTA=0`, `HUMAN_RECEIPTS_AFFECTED=0`, `SEALED_FIELDS_MUTATED=0`.
+
+Effet mesuré : la suite NSI passe de **15 failed / 1733 passed** à
+**0 failed / 1748 passed**. Les quinze échecs de gouvernance étaient bien
+imputables à INT-006 et à rien d'autre.
+
+### INT-001 — mesure current, toujours ouvert côté shared
+
+Séparation faite sur l'arbre current (`REAL_ORPHAN_CO` vs
+`SHARED_PRODUCER_FALSE_POSITIVE`) :
+
+```
+ANSWER_COVERAGE_OK                 101
+REAL_ORPHAN_CO                       0
+SHARED_PRODUCER_FALSE_POSITIVE      48   (tous : corrigés RE-Cn-CORRIGE -> remédiation RE-Cn du même chapitre)
+```
+
+Les 48 faux positifs se répartissent sur les dix chapitres (3 ADGK, 6 APT,
+5 ARCHOS, 7 LANGAGE, 4 PM, 5 RESEAUX, 4 TABLES, 5 TYPES-BASE, 9 WEB-IHM,
+0 TC). Le correctif shared existe (`e9490cb8` sur
+`codex/shared-infra-integration`) ; il n'est **pas** cherry-pické ici faute
+d'instruction explicite. Après intégration, attendu : 0.
+
+### INT-005 — inchangé
+
+`1NSI-TC-QCM-DIAG` reste sans capacité. Le correctif shared existe
+(`b4483b61`) ; non cherry-pické ici. Aucune compensation locale.
+
+### INT-007 — garde racine `test_1nsi_content_untouched` (nouveau, mineur)
+
+**Problème.** `tests/test_1nsi_content_untouched.py::test_the_baseline_is_the_commit_the_repository_itself_named`
+échoue sur cette branche : `audit/1NSI_CONTENT_UNTOUCHED.json` pointe une
+baseline antérieure au registre de ré-observation régénéré (INT-006).
+
+**Pourquoi non corrigé ici.** Régénérer l'artefact (`--check` donne
+`CONTENT_FILES_CHANGED=0`, `SHARED_TEMPLATE_FILES_CHANGED=0`) ferait tomber
+`test_the_shared_template_change_is_reported_not_hidden`, qui **exige**
+`SHARED_TEMPLATE_FILES_CHANGED > 0` — une assertion propre à la campagne 1SPE.
+Le correctif shared existe (`dad673c7`, « report the shared-template change
+count instead of asserting it positive ») ; non cherry-pické ici.
+
+**Attendu à l'intégration.** Cherry-pick `dad673c7`, puis
+`python3 scripts/build_1nsi_content_untouched.py` ; les 26 tests du module
+doivent passer. Aucun contenu 1NSI n'est concerné.
+
+### Registres racine régénérés (aucune ligne de code partagée modifiée)
+
+`audit/NSI_COUPLED_ALGORITHMICS_REVIEW_DEBT.json` et
+`audit/NSI_CROSS_DISCIPLINE_CONTENT_LEDGER.json` épinglaient trois condensats
+périmés (les trois méthodes DICHO dont `1bce9de4` a corrigé la META).
+Régénérés par leurs producteurs en `987edb6e` : six lignes de diff, aucun
+verdict changé.

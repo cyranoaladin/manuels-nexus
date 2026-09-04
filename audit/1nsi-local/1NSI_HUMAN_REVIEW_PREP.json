@@ -1,0 +1,558 @@
+{
+ "artifact_type": "1nsi_human_review_preparation",
+ "schema_version": 1,
+ "generated_by": "instance B2 (codex/urgent-1nsi-content)",
+ "head_sha": "987edb6efcf1cc65886c85dbdac6d67a932e2ce7",
+ "approves_nothing": true,
+ "no_verdict_is_generated_here": true,
+ "required_human_verdicts": {
+  "EXPERT_NSI": 10,
+  "EXPERT_PROGRAMME_PEDAGOGIE": 10,
+  "received": 0
+ },
+ "manual_level_attention_items": {
+  "EXPERT_NSI": [
+   "Verifier l'homogeneite du vocabulaire reseau/IHM entre RESEAUX et WEB-IHM (capteur, actionneur, requete, serveur).",
+   "Aucun rendu enseignant n'a ete relu page a page par un humain : les corriges sont compiles et verifies par execution seulement."
+  ],
+  "EXPERT_PROGRAMME_PEDAGOGIE": [
+   "Neuf chapitres a cinq exercices contre cinquante-cinq pour TYPES-CONSTRUITS : desequilibre de volume a arbitrer (aucun quota impose a cette branche).",
+   "Formats d'evaluation heterogenes : 2 exercices/45 min (ADGK, TABLES, TYPES-BASE), 3/20 pts/45 min (APT), 3/30 pts/60 min (ARCHOS, LANGAGE, PM, RESEAUX, WEB-IHM), 4/20 pts/55 min (TC).",
+   "Progression sur l'annee : ADGK demarre a P2 majoritaire, APT n'a aucun P3 ; le reste est a 2/2/1."
+  ]
+ },
+ "chapters": [
+  {
+   "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+   "titre": "Algorithmique 2 : dichotomie, algorithmes gloutons, k plus proches voisins",
+   "capacites": [
+    {
+     "code": "C1",
+     "ref": "P-ALGO-04"
+    },
+    {
+     "code": "C2",
+     "ref": "P-ALGO-05"
+    },
+    {
+     "code": "C3",
+     "ref": "P-ALGO-03"
+    }
+   ],
+   "semantic_digest": {
+    "objects": 27,
+    "roles": {
+     "corriges": 8,
+     "cours": 3,
+     "evaluations": 4,
+     "exercices": 5,
+     "methodes": 3,
+     "qcm": 1,
+     "remediation": 3
+    },
+    "qcm_questions": 6,
+    "qcm_capacites": 3,
+    "source_set_digest": "sha256:e19521fc8c1f7f6bb33b0c1470453225cfdb297f4b2a05517dda144043509d82"
+   },
+   "machine_status": "LOCAL_MACHINE_CONTENT_COMPLETE",
+   "EXPERT_NSI_attention_items": [
+    "Les trois methodes portent depuis 1bce9de4 les refs officielles P-ALGO-04/05/03 : verifier l'appariement methode <-> capacite (dichotomie, glouton, k plus proches voisins).",
+    "Verifier les invariants et terminaisons enonces dans les cours et corriges (dichotomie, distance kNN)."
+   ],
+   "EXPERT_PROGRAMME_PEDAGOGIE_attention_items": [
+    "Progression P1=1 / P2=3 / P3=1 : le chapitre demarre haut ; juger la difficulte d'entree.",
+    "Volume minimal viable (5 exercices, 3 capacites)."
+   ],
+   "EXPERT_NSI_verdict": "PENDING_UNASSIGNED",
+   "EXPERT_PROGRAMME_PEDAGOGIE_verdict": "PENDING_UNASSIGNED"
+  },
+  {
+   "chapter": "1NSI-ALGO-PARCOURS-TRIS",
+   "titre": "Algorithmique 1 : parcours et tris",
+   "capacites": [
+    {
+     "code": "C1",
+     "ref": "P-ALGO-01A"
+    },
+    {
+     "code": "C2",
+     "ref": "P-ALGO-01B"
+    },
+    {
+     "code": "C3",
+     "ref": "P-ALGO-02A"
+    },
+    {
+     "code": "C4",
+     "ref": "P-ALGO-02C"
+    },
+    {
+     "code": "C5",
+     "ref": "P-ALGO-02B"
+    },
+    {
+     "code": "C6",
+     "ref": "P-ALGO-02D"
+    }
+   ],
+   "semantic_digest": {
+    "objects": 38,
+    "roles": {
+     "corriges": 12,
+     "cours": 3,
+     "evaluations": 4,
+     "exercices": 6,
+     "methodes": 6,
+     "qcm": 1,
+     "remediation": 6
+    },
+    "qcm_questions": 6,
+    "qcm_capacites": 6,
+    "source_set_digest": "sha256:159856697a612cd408068989805db98fb53924f775f6afec7123118e38949e16"
+   },
+   "machine_status": "LOCAL_MACHINE_CONTENT_COMPLETE",
+   "EXPERT_NSI_attention_items": [
+    "Verifier les complexites et invariants affirmes pour les tris par insertion et selection et les parcours sequentiels.",
+    "Six remediations : verifier qu'elles ciblent des misconceptions distinctes."
+   ],
+   "EXPERT_PROGRAMME_PEDAGOGIE_attention_items": [
+    "Progression P1=4 / P2=2 / P3=0 : aucun exercice de parcours 3 ; juger si le transfert est suffisant.",
+    "Evaluations a 3 exercices / 20 points / 45 minutes : format distinct des autres chapitres."
+   ],
+   "EXPERT_NSI_verdict": "PENDING_UNASSIGNED",
+   "EXPERT_PROGRAMME_PEDAGOGIE_verdict": "PENDING_UNASSIGNED"
+  },
+  {
+   "chapter": "1NSI-ARCHITECTURE-OS",
+   "titre": "Architecture de von Neumann et systèmes d'exploitation",
+   "capacites": [
+    {
+     "code": "C1",
+     "ref": "P-ARCH-01A"
+    },
+    {
+     "code": "C2",
+     "ref": "P-ARCH-01B"
+    },
+    {
+     "code": "C3",
+     "ref": "P-ARCH-03A"
+    },
+    {
+     "code": "C4",
+     "ref": "P-ARCH-03B"
+    },
+    {
+     "code": "C5",
+     "ref": "P-ARCH-03C"
+    }
+   ],
+   "semantic_digest": {
+    "objects": 32,
+    "roles": {
+     "corriges": 10,
+     "cours": 3,
+     "evaluations": 4,
+     "exercices": 5,
+     "methodes": 4,
+     "qcm": 1,
+     "remediation": 5
+    },
+    "qcm_questions": 6,
+    "qcm_capacites": 5,
+    "source_set_digest": "sha256:8c51d43c4a090b76835c887e21a52b9fb9acf621a9f8a9c3a5750628cbeb3743"
+   },
+   "machine_status": "LOCAL_MACHINE_CONTENT_COMPLETE",
+   "EXPERT_NSI_attention_items": [
+    "Le modele de machine (charger/ajouter/ranger, compteur ordinal) est un jeu d'instructions simplifie : verifier qu'il n'induit pas d'erreur sur l'architecture reelle.",
+    "Les permissions (rw-r-xr--, octal 750) et commandes (pwd, ls, mkdir, cd) ont ete verifiees par execution ; relire les explications."
+   ],
+   "EXPERT_PROGRAMME_PEDAGOGIE_attention_items": [
+    "Evaluations 3 exercices / 60 minutes (bareme et duree alignes par 7cbe3337).",
+    "Volume minimal viable."
+   ],
+   "EXPERT_NSI_verdict": "PENDING_UNASSIGNED",
+   "EXPERT_PROGRAMME_PEDAGOGIE_verdict": "PENDING_UNASSIGNED"
+  },
+  {
+   "chapter": "1NSI-LANGAGE",
+   "titre": "Langages et programmation",
+   "capacites": [
+    {
+     "code": "C1",
+     "ref": "P-LANG-01"
+    },
+    {
+     "code": "C2",
+     "ref": "P-LANG-02"
+    },
+    {
+     "code": "C3",
+     "ref": "P-LANG-03A"
+    },
+    {
+     "code": "C4",
+     "ref": "P-LANG-04"
+    },
+    {
+     "code": "C5",
+     "ref": "P-LANG-05"
+    },
+    {
+     "code": "C6",
+     "ref": "P-LANG-03B"
+    },
+    {
+     "code": "C7",
+     "ref": "P-LANG-03C"
+    }
+   ],
+   "semantic_digest": {
+    "objects": 38,
+    "roles": {
+     "corriges": 12,
+     "cours": 5,
+     "evaluations": 4,
+     "exercices": 5,
+     "methodes": 4,
+     "qcm": 1,
+     "remediation": 7
+    },
+    "qcm_questions": 8,
+    "qcm_capacites": 7,
+    "source_set_digest": "sha256:3e9ff9dcbab1c6e3baac8767de129553e57820941c52861112db6f1374bd5881"
+   },
+   "machine_status": "LOCAL_MACHINE_CONTENT_COMPLETE",
+   "EXPERT_NSI_attention_items": [
+    "Les trois capacites de specification (prototype, precondition, postcondition) sont tracees individuellement dans les evaluations depuis 02b234b8 : verifier la separation.",
+    "Sept remediations : verifier qu'aucune ne recycle un exercice."
+   ],
+   "EXPERT_PROGRAMME_PEDAGOGIE_attention_items": [
+    "Sept capacites en un chapitre : juger la charge et la progression.",
+    "Evaluations 3 exercices / 60 minutes."
+   ],
+   "EXPERT_NSI_verdict": "PENDING_UNASSIGNED",
+   "EXPERT_PROGRAMME_PEDAGOGIE_verdict": "PENDING_UNASSIGNED"
+  },
+  {
+   "chapter": "1NSI-PROJET-METHODES",
+   "titre": "Projet et méthodes",
+   "capacites": [
+    {
+     "code": "C1",
+     "ref": "P-HIST-01"
+    },
+    {
+     "code": "C2",
+     "ref": "BO-PREAMBULE-DEMARCHE-DE-PROJET"
+    },
+    {
+     "code": "C3",
+     "ref": "BO-PREAMBULE-COMPETENCES-METHODE"
+    },
+    {
+     "code": "C4",
+     "ref": "BO-PREAMBULE-COMPETENCES-ORALES"
+    }
+   ],
+   "semantic_digest": {
+    "objects": 31,
+    "roles": {
+     "corriges": 9,
+     "cours": 4,
+     "evaluations": 4,
+     "exercices": 5,
+     "methodes": 4,
+     "qcm": 1,
+     "remediation": 4
+    },
+    "qcm_questions": 6,
+    "qcm_capacites": 4,
+    "source_set_digest": "sha256:7e622d873437608addf91e9bc1f228063ca6a8a70a13698f071c1be333dfd571"
+   },
+   "machine_status": "LOCAL_MACHINE_CONTENT_COMPLETE",
+   "EXPERT_NSI_attention_items": [
+    "Reperes historiques (1642, 1936, 1948, 1969, 1989, 1991) : verifier la formulation « premiers ordinateurs en 1948 ».",
+    "M3 : raise ValueError (permanent) vs assert (developpement) — verifier la coherence avec les evaluations qui demandent un assert."
+   ],
+   "EXPERT_PROGRAMME_PEDAGOGIE_attention_items": [
+    "C2/C3/C4 sont des references du preambule du B.O. (pas d'atome P-XXX) : confirmer la place du chapitre et la notabilite de l'oral.",
+    "L'exercice 3 note un plan d'oral ecrit."
+   ],
+   "EXPERT_NSI_verdict": "PENDING_UNASSIGNED",
+   "EXPERT_PROGRAMME_PEDAGOGIE_verdict": "PENDING_UNASSIGNED"
+  },
+  {
+   "chapter": "1NSI-RESEAUX",
+   "titre": "Réseaux : transmission de données",
+   "capacites": [
+    {
+     "code": "C1",
+     "ref": "P-ARCH-02A"
+    },
+    {
+     "code": "C2",
+     "ref": "P-ARCH-02B"
+    },
+    {
+     "code": "C3",
+     "ref": "P-ARCH-02C"
+    },
+    {
+     "code": "C4",
+     "ref": "P-ARCH-04A"
+    },
+    {
+     "code": "C5",
+     "ref": "P-ARCH-04B"
+    }
+   ],
+   "semantic_digest": {
+    "objects": 32,
+    "roles": {
+     "corriges": 10,
+     "cours": 3,
+     "evaluations": 4,
+     "exercices": 5,
+     "methodes": 4,
+     "qcm": 1,
+     "remediation": 5
+    },
+    "qcm_questions": 6,
+    "qcm_capacites": 5,
+    "source_set_digest": "sha256:98f79655f6579946ef09d8027574ce7293fa75bdcfd02fcb0a0795fa3b6d2c45"
+   },
+   "machine_status": "LOCAL_MACHINE_CONTENT_COMPLETE",
+   "EXPERT_NSI_attention_items": [
+    "Bit alterne modelise cote emetteur sans ACK explicite : verifier l'acceptabilite au niveau attendu.",
+    "P-ARCH-04A/04B (capteurs, actionneurs, IHM) vivent ici et non dans WEB-IHM : confirmer."
+   ],
+   "EXPERT_PROGRAMME_PEDAGOGIE_attention_items": [
+    "Evaluations portees a 3 exercices / 60 minutes.",
+    "Volume minimal viable."
+   ],
+   "EXPERT_NSI_verdict": "PENDING_UNASSIGNED",
+   "EXPERT_PROGRAMME_PEDAGOGIE_verdict": "PENDING_UNASSIGNED"
+  },
+  {
+   "chapter": "1NSI-TABLES",
+   "titre": "Traitement de données en tables",
+   "capacites": [
+    {
+     "code": "C1",
+     "ref": "P-TABLE-01"
+    },
+    {
+     "code": "C2",
+     "ref": "P-TABLE-02"
+    },
+    {
+     "code": "C3",
+     "ref": "P-TABLE-03"
+    },
+    {
+     "code": "C4",
+     "ref": "P-TABLE-04"
+    }
+   ],
+   "semantic_digest": {
+    "objects": 31,
+    "roles": {
+     "corriges": 9,
+     "cours": 4,
+     "evaluations": 4,
+     "exercices": 5,
+     "methodes": 4,
+     "qcm": 1,
+     "remediation": 4
+    },
+    "qcm_questions": 6,
+    "qcm_capacites": 4,
+    "source_set_digest": "sha256:019fa194e890462b08a8cd4c3d0109be2d7104efa3ec5c451a4eb92417e1a6cb"
+   },
+   "machine_status": "LOCAL_MACHINE_CONTENT_COMPLETE",
+   "EXPERT_NSI_attention_items": [
+    "fusionner refuse les colonnes homonymes par ValueError : choix enseigne comme comportement attendu.",
+    "Tri lexicographique des chaines (\"121\" < \"17\" < \"3\") : verifier la formulation."
+   ],
+   "EXPERT_PROGRAMME_PEDAGOGIE_attention_items": [
+    "Evaluations restees a 2 exercices / 45 minutes : heterogeneite assumee.",
+    "Volume minimal viable."
+   ],
+   "EXPERT_NSI_verdict": "PENDING_UNASSIGNED",
+   "EXPERT_PROGRAMME_PEDAGOGIE_verdict": "PENDING_UNASSIGNED"
+  },
+  {
+   "chapter": "1NSI-TYPES-BASE",
+   "titre": "Représentation des données : types et valeurs de base",
+   "capacites": [
+    {
+     "code": "C1",
+     "ref": "P-BASE-01"
+    },
+    {
+     "code": "C2",
+     "ref": "P-BASE-02"
+    },
+    {
+     "code": "C3",
+     "ref": "P-BASE-03"
+    },
+    {
+     "code": "C4",
+     "ref": "P-BASE-04"
+    },
+    {
+     "code": "C5",
+     "ref": "P-BASE-05"
+    }
+   ],
+   "semantic_digest": {
+    "objects": 34,
+    "roles": {
+     "corriges": 10,
+     "cours": 5,
+     "evaluations": 4,
+     "exercices": 5,
+     "methodes": 4,
+     "qcm": 1,
+     "remediation": 5
+    },
+    "qcm_questions": 6,
+    "qcm_capacites": 5,
+    "source_set_digest": "sha256:0ffc1427ab4a7a78649337025315b81369ffe7619f872c2fbdab0d1702013b87"
+   },
+   "machine_status": "LOCAL_MACHINE_CONTENT_COMPLETE",
+   "EXPERT_NSI_attention_items": [
+    "Verifier bases, complement a deux, flottants et encodage dans les quatre methodes et cinq remediations redigees par l'instance B.",
+    "Verifier que les corriges ne presentent aucune sortie non executee (chapitre sans ordinateur en evaluation)."
+   ],
+   "EXPERT_PROGRAMME_PEDAGOGIE_attention_items": [
+    "Evaluations 2 exercices / 45 minutes sans ordinateur.",
+    "Volume minimal viable."
+   ],
+   "EXPERT_NSI_verdict": "PENDING_UNASSIGNED",
+   "EXPERT_PROGRAMME_PEDAGOGIE_verdict": "PENDING_UNASSIGNED"
+  },
+  {
+   "chapter": "1NSI-TYPES-CONSTRUITS",
+   "titre": "Types construits : p-uplets, tableaux, dictionnaires",
+   "capacites": [
+    {
+     "code": "C1",
+     "ref": "1NSI-TYPES-CONSTRUITS-C1"
+    },
+    {
+     "code": "C2",
+     "ref": "1NSI-TYPES-CONSTRUITS-C2"
+    },
+    {
+     "code": "C3",
+     "ref": "1NSI-TYPES-CONSTRUITS-C3"
+    },
+    {
+     "code": "C4",
+     "ref": "1NSI-TYPES-CONSTRUITS-C4"
+    },
+    {
+     "code": "C5",
+     "ref": "1NSI-TYPES-CONSTRUITS-C5"
+    }
+   ],
+   "semantic_digest": {
+    "objects": 126,
+    "roles": {
+     "corriges": 55,
+     "cours": 5,
+     "evaluations": 4,
+     "exercices": 55,
+     "methodes": 5,
+     "qcm": 1,
+     "remediation": 1
+    },
+    "qcm_questions": 16,
+    "qcm_capacites": 5,
+    "source_set_digest": "sha256:ff18a3661c2d92fa3ef16e2237abc41bdab8696b391f91942de0fab3d8abd221"
+   },
+   "machine_status": "LOCAL_MACHINE_CONTENT_COMPLETE",
+   "EXPERT_NSI_attention_items": [
+    "Chapitre protege : 55 exercices, 5 methodes, une remediation multi-capacites (1NSI-TC-REM) ; verifier la separation des cinq sections de la remediation.",
+    "C5 (effet d'une affectation sur un objet mutable) declaree METHODOLOGY, non obligatoire : confirmer."
+   ],
+   "EXPERT_PROGRAMME_PEDAGOGIE_attention_items": [
+    "Le seul chapitre a fort volume (55 exercices, 24 coups de pouce, 2 TD, projet) : desequilibre de volume avec les neuf autres.",
+    "QCM diagnostics genere sans capacite (INT-005)."
+   ],
+   "EXPERT_NSI_verdict": "PENDING_UNASSIGNED",
+   "EXPERT_PROGRAMME_PEDAGOGIE_verdict": "PENDING_UNASSIGNED"
+  },
+  {
+   "chapter": "1NSI-WEB-IHM",
+   "titre": "Interactions entre l'homme et la machine sur le Web",
+   "capacites": [
+    {
+     "code": "C1",
+     "ref": "P-IHM-01A"
+    },
+    {
+     "code": "C2",
+     "ref": "P-IHM-01B"
+    },
+    {
+     "code": "C3",
+     "ref": "P-IHM-02"
+    },
+    {
+     "code": "C4",
+     "ref": "P-IHM-03A"
+    },
+    {
+     "code": "C5",
+     "ref": "P-IHM-03B"
+    },
+    {
+     "code": "C6",
+     "ref": "P-IHM-03C"
+    },
+    {
+     "code": "C7",
+     "ref": "P-IHM-04A"
+    },
+    {
+     "code": "C8",
+     "ref": "P-IHM-04B"
+    },
+    {
+     "code": "C9",
+     "ref": "P-IHM-04C"
+    }
+   ],
+   "semantic_digest": {
+    "objects": 40,
+    "roles": {
+     "corriges": 14,
+     "cours": 3,
+     "evaluations": 4,
+     "exercices": 5,
+     "methodes": 4,
+     "qcm": 1,
+     "remediation": 9
+    },
+    "qcm_questions": 10,
+    "qcm_capacites": 9,
+    "source_set_digest": "sha256:49db8ade15296d4ed679d3ad24581cbd67c068d2b50ee7642b5328f096d280d1"
+   },
+   "machine_status": "LOCAL_MACHINE_CONTENT_COMPLETE",
+   "EXPERT_NSI_attention_items": [
+    "Neuf capacites, quatorze corriges, neuf remediations : verifier les contenus HTTP (GET/POST, cookies, serveur) rediges par l'instance B.",
+    "Verifier la propriete « Ce qui s'execute ou » (code serveur non transmis) epinglee par test."
+   ],
+   "EXPERT_PROGRAMME_PEDAGOGIE_attention_items": [
+    "Neuf capacites en un chapitre : charge la plus forte du manuel.",
+    "Evaluations 3 exercices / 60 minutes."
+   ],
+   "EXPERT_NSI_verdict": "PENDING_UNASSIGNED",
+   "EXPERT_PROGRAMME_PEDAGOGIE_verdict": "PENDING_UNASSIGNED"
+  }
+ ]
+}
