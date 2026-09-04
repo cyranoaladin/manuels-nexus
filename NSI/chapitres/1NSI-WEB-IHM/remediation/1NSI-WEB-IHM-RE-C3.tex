@@ -1,0 +1,52 @@
+% META: {"id": "1NSI-WEB-IHM-RE-C3", "chapitre": "1NSI-WEB-IHM", "type_objet": "remediation", "capacites": ["P-IHM-02"], "capacites_codes": ["C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : associer la fonction, ne pas l'appeler
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu écris les parenthèses par réflexe. Or
+\lstinline{ajouter_gestionnaire("b", compter())} \textbf{appelle} \lstinline{compter}
+immédiatement, une seule fois, et associe au bouton la \emph{valeur renvoyée}. Le bouton
+devient inerte : au clic, il n'y a plus rien à exécuter.
+
+\textbf{À retenir.} Sans parenthèses, on désigne la fonction elle-même et on la confie au
+bouton. Avec parenthèses, on l'exécute sur-le-champ. Un bouton inerte n'empêche d'ailleurs pas
+la page de s'afficher : le document reste visible, seul le clic ne produit rien.
+
+\begin{exercice}{1NSI-WEB-RE-C3-EX1}{1}{10}
+On reprend le modèle du cours (\lstinline{ajouter_gestionnaire}, \lstinline{declencher_clic}).
+\begin{python}
+compteur = {"valeur": 0}
+
+def incrementer():
+    compteur["valeur"] = compteur["valeur"] + 1
+    return compteur["valeur"]
+
+ajouter_gestionnaire("bouton", incrementer())
+\end{python}
+\begin{enumerate}
+  \item Que vaut \lstinline{compteur["valeur"]} juste après cette ligne, avant tout clic ?
+  \item Que renvoie \lstinline{declencher_clic("bouton")} ? Expliquer.
+  \item Corriger la ligne fautive, puis donner la suite des valeurs renvoyées par trois clics.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% gestionnaires = {}
+% def ajouter_gestionnaire(id_composant, fonction):
+%     gestionnaires[id_composant] = fonction
+% def declencher_clic(id_composant):
+%     if id_composant in gestionnaires:
+%         valeur = gestionnaires[id_composant]
+%         return valeur() if callable(valeur) else None
+%     return None
+% compteur = {"valeur": 0}
+% def incrementer():
+%     compteur["valeur"] = compteur["valeur"] + 1
+%     return compteur["valeur"]
+% ajouter_gestionnaire("bouton", incrementer())
+% assert compteur["valeur"] == 1
+% assert declencher_clic("bouton") is None
+% ajouter_gestionnaire("bouton", incrementer)
+% assert [declencher_clic("bouton") for _ in range(3)] == [2, 3, 4]
+% END-VERIFY

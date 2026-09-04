@@ -1,0 +1,27 @@
+% META: {"id": "1NSI-WEB-IHM-RE-C1", "chapitre": "1NSI-WEB-IHM", "type_objet": "remediation", "capacites": ["P-IHM-01A"], "capacites_codes": ["C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : chaque composant a un rôle propre
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu choisis un composant d'après son apparence, et non d'après
+\emph{ce que l'utilisateur doit produire}. Une case à cocher ne transmet qu'un état, coché ou
+non : elle ne peut pas recueillir un texte. Et cocher une case ne déclenche aucun envoi —
+seul un bouton de soumission le fait.
+
+\textbf{À retenir.} Trois questions suffisent : l'utilisateur \emph{écrit} quelque chose
+$\rightarrow$ \lstinline{<input type="text">} ; il \emph{choisit parmi} des possibilités
+$\rightarrow$ \lstinline{<select>} ou des boutons radio ; il \emph{déclenche} une action
+$\rightarrow$ \lstinline{<button>}. Plusieurs cases à cocher d'un même formulaire peuvent être
+cochées ensemble ; les boutons radio, eux, sont exclusifs.
+
+\begin{exercice}{1NSI-WEB-RE-C1-EX1}{1}{8}
+Un formulaire doit recueillir : le prénom du visiteur, sa ville parmi une liste imposée,
+les langues qu'il parle (il peut en parler plusieurs), et son accord unique sur les
+conditions d'utilisation.
+\begin{enumerate}
+  \item Pour chacune des quatre informations, indiquer le composant approprié.
+  \item Lequel de ces composants déclenche l'envoi du formulaire ? Justifier.
+  \item Pourquoi les langues ne peuvent-elles pas être recueillies par des boutons radio ?
+\end{enumerate}
+\end{exercice}

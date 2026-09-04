@@ -1,0 +1,26 @@
+% META: {"id": "1NSI-WEB-IHM-RE-C2", "chapitre": "1NSI-WEB-IHM", "type_objet": "remediation", "capacites": ["P-IHM-01B"], "capacites_codes": ["C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : HTML declare, CSS habille, le code reagit
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu attends d'HTML ou de CSS qu'ils \emph{réagissent}. HTML déclare
+qu'un bouton existe et ce qu'il affiche. CSS décrit son apparence, y compris au survol. Ni
+l'un ni l'autre ne sait calculer ni modifier une donnée.
+
+\textbf{À retenir.} Répondre à un événement demande du \textbf{code}, associé au composant par
+un gestionnaire. C'est le mécanisme central de l'interactivité : à chaque événement
+(\lstinline{click}, \lstinline{input}, \lstinline{change}, \lstinline{submit}) peut être
+associée une fonction.
+
+\begin{exercice}{1NSI-WEB-RE-C2-EX1}{1}{8}
+Pour chaque besoin, indiquer s'il relève de HTML, de CSS, ou d'un gestionnaire d'événement,
+et nommer l'événement concerné le cas échéant.
+\begin{enumerate}
+  \item Le bouton doit afficher le mot « Envoyer ».
+  \item Le bouton doit devenir bleu quand la souris le survole.
+  \item Le compteur affiché doit augmenter de $1$ à chaque appui sur le bouton.
+  \item Le message « adresse invalide » doit apparaître dès que l'utilisateur tape un caractère
+        interdit dans le champ.
+\end{enumerate}
+\end{exercice}

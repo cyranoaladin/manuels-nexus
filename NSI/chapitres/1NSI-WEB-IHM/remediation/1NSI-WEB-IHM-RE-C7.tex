@@ -1,0 +1,33 @@
+% META: {"id": "1NSI-WEB-IHM-RE-C7", "chapitre": "1NSI-WEB-IHM", "type_objet": "remediation", "capacites": ["P-IHM-04A"], "capacites_codes": ["C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C7 : name transmet, label affiche
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu prends l'attribut \lstinline{name} pour le texte affiché. Il ne
+s'affiche jamais : c'est la \textbf{clé} sous laquelle la valeur saisie part vers le serveur.
+Le libellé visible, lui, est porté par la balise \lstinline{<label>}. Et un champ dépourvu de
+\lstinline{name} n'est \emph{pas transmis du tout}.
+
+\textbf{À retenir.} Trois attributs, trois rôles à ne pas mélanger : \lstinline{id} désigne le
+composant pour le code, \lstinline{name} nomme la valeur pour le serveur, \lstinline{<label>}
+parle à l'utilisateur. La largeur du champ relève de CSS ou de \lstinline{size} ; la validation
+relève de \lstinline{required}, \lstinline{pattern} ou du code.
+
+\begin{exercice}{1NSI-WEB-RE-C7-EX1}{1}{10}
+On donne ce formulaire :
+\begin{console}
+<form action="/inscription" method="POST">
+    <label for="c1">Adresse électronique</label>
+    <input type="email" id="c1" name="courriel" required>
+    <input type="text" id="c2">
+    <button type="submit">S'inscrire</button>
+</form>
+\end{console}
+\begin{enumerate}
+  \item Quel texte l'utilisateur voit-il au-dessus du premier champ ?
+  \item Sous quel nom la valeur saisie dans le premier champ parvient-elle au serveur ?
+  \item Le second champ est-il transmis ? Justifier, puis corriger.
+  \item Quel attribut impose que le premier champ soit rempli ?
+\end{enumerate}
+\end{exercice}

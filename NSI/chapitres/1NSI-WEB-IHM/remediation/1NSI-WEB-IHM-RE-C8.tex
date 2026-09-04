@@ -1,0 +1,35 @@
+% META: {"id": "1NSI-WEB-IHM-RE-C8", "chapitre": "1NSI-WEB-IHM", "type_objet": "remediation", "capacites": ["P-IHM-04B"], "capacites_codes": ["C8"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C8 : POST deplace, HTTPS chiffre
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu crois que POST chiffre. Il ne chiffre rien : il déplace les
+paramètres de l'URL vers le \textbf{corps} de la requête. Seul HTTPS chiffre — et il chiffre
+GET comme POST. C'est une confusion fréquente et lourde de conséquences.
+
+\textbf{À retenir.} GET inscrit les paramètres dans l'URL, après un \lstinline{?} et séparés
+par \lstinline{&} : ils se retrouvent dans l'historique, les favoris et les journaux du
+serveur. POST les met dans le corps : ils n'apparaissent pas dans l'URL, et leur volume n'est
+pas limité par la longueur d'une adresse.
+
+\begin{exercice}{1NSI-WEB-RE-C8-EX1}{1}{10}
+Un formulaire transmet \lstinline|{"identifiant": "leila", "mdp": "Ete2026"}|.
+\begin{enumerate}
+  \item Avec \lstinline{urlencode}, écrire l'URL produite si la méthode est GET, l'action étant
+        \lstinline{/connexion}.
+  \item Écrire ce que transporte le corps de la requête si la méthode est POST.
+  \item Le mot de passe est-il chiffré dans le second cas ? Qu'est-ce qui le chiffrerait ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from urllib.parse import urlencode
+% donnees = {"identifiant": "leila", "mdp": "Ete2026"}
+% url = "/connexion?" + urlencode(donnees)
+% assert url == "/connexion?identifiant=leila&mdp=Ete2026"
+% corps = urlencode(donnees)
+% assert corps == "identifiant=leila&mdp=Ete2026"
+% assert "?" not in corps
+% assert "Ete2026" in url and "Ete2026" in corps
+% END-VERIFY

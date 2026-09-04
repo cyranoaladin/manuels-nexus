@@ -1,0 +1,41 @@
+% META: {"id": "1NSI-WEB-IHM-RE-C5", "chapitre": "1NSI-WEB-IHM", "type_objet": "remediation", "capacites": ["P-IHM-03B"], "capacites_codes": ["C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C5 : le cookie est stocke chez le client
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu places la mémorisation du mauvais côté. Le cookie n'est pas gardé
+par le serveur : il est stocké \textbf{chez le client}, et c'est le client qui le renvoie à
+chaque requête. C'est précisément ce qui permet au serveur de reconnaître un visiteur alors
+qu'il n'a rien retenu de lui.
+
+\textbf{À retenir.} Un cookie est une \emph{donnée}, en général un couple nom-valeur : il ne
+s'exécute pas. Et il n'est renvoyé qu'au domaine qui l'a déposé — sans cette règle, n'importe
+quel site lirait les cookies de tous les autres.
+
+\begin{exercice}{1NSI-WEB-RE-C5-EX1}{1}{10}
+On reprend le modèle du cours (\lstinline{serveur_definit_cookie},
+\lstinline{client_envoie_requete_avec_cookies}). Un visiteur charge \lstinline{/catalogue},
+puis se connecte : le serveur dépose alors un cookie \lstinline{"session"} valant
+\lstinline{"a7f3"}. Il charge ensuite \lstinline{/profil}.
+\begin{enumerate}
+  \item Que transporte la requête vers \lstinline{/catalogue} ?
+  \item Que transporte la requête vers \lstinline{/profil} ?
+  \item Le serveur a-t-il mémorisé quoi que ce soit entre les deux requêtes ? Où l'information
+        a-t-elle réellement séjourné ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% cookies_client = {}
+% def serveur_definit_cookie(nom, valeur):
+%     cookies_client[nom] = valeur
+% def client_envoie_requete_avec_cookies(url):
+%     return {"url": url, "cookies": dict(cookies_client)}
+% r1 = client_envoie_requete_avec_cookies("/catalogue")
+% assert r1["cookies"] == {}
+% serveur_definit_cookie("session", "a7f3")
+% r2 = client_envoie_requete_avec_cookies("/profil")
+% assert r2["cookies"] == {"session": "a7f3"}
+% assert r1["cookies"] == {}
+% END-VERIFY
