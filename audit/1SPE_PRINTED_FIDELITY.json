@@ -1,0 +1,640 @@
+{
+  "artifact_type": "1spe_printed_fidelity",
+  "code_composition_size_pt": 7.414,
+  "french_typography_keeps_its_quotes": "Le guillemet courbe n'est cherche que dans ce qui est compose avec la fonte du code. Le corps du texte garde les siens.",
+  "generated_by": "scripts/build_1spe_printed_fidelity.py",
+  "indentation_is_not_what_is_checked": "La couche texte d'un PDF ne restitue pas fidelement les espaces de tete. La comparaison porte sur tout le reste, espaces retires.",
+  "literate_substitutions": {
+    "À": "À",
+    "È": "È",
+    "É": "É",
+    "à": "à",
+    "â": "â",
+    "ç": "ç",
+    "è": "è",
+    "é": "é",
+    "ê": "ê",
+    "ë": "ë",
+    "î": "î",
+    "ô": "ô",
+    "ù": "ù",
+    "û": "û",
+    "—": "---"
+  },
+  "only_what_is_composed_as_a_program_is_compared": "La fonte du code sert aussi aux numeros de ligne et aux annotations de marge de l'edition professeur, plus petites, qui s'intercalent dans l'ordre de lecture. La comparaison ne retient que ce qui est compose a la taille d'un programme, taille lue dans la classe. Le controle des guillemets, lui, regarde toute la fonte du code.",
+  "schema_version": 1,
+  "source_fragments": [],
+  "summary": {
+    "CODE_BLOCKS": 72,
+    "CODE_BLOCK_FAITHFUL": 67,
+    "CODE_BLOCK_NOT_FAITHFUL": 0,
+    "CODE_BLOCK_WITHHELD_AS_DECLARED": 5,
+    "MALFORMED_FRAGMENT_IN_SOURCE": 0,
+    "SMART_QUOTE_IN_CODE_TOKEN": 0,
+    "UNKNOWN": 0,
+    "VISIBLE_MALFORMED_LATEX_FRAGMENT": 0,
+    "WITHHELD_CODE_BLOCK_PRINTED": 0
+  },
+  "the_vocabulary_is_read_not_listed": "Les queues de commande surveillees viennent des sequences de controle que le corpus emploie reellement, pas d'une liste noire ecrite a la main. Celles qui sont aussi des mots du corpus sont surveillees dans les sources et non sur la page, ou rien ne permettrait de les distinguer.",
+  "this_compares_it_does_not_blacklist": "Chaque programme publie est retrouve dans la couche texte du PDF et compare caractere par caractere a sa source. Comparer plutot que suspecter fait voir aussi bien un guillemet courbe qu'une ligature fusionnee ou un programme compose dans la mauvaise fonte.",
+  "variants": [
+    {
+      "code_blocks": 33,
+      "emptied_environments": [
+        "corrige"
+      ],
+      "faithful": [
+        {
+          "characters_compared": 33,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-DIAGNOSTIC-R5-SOMME.py",
+          "pages": [
+            16
+          ]
+        },
+        {
+          "characters_compared": 33,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-DIAGNOSTIC-R5-RECURRENCE.py",
+          "pages": [
+            16
+          ]
+        },
+        {
+          "characters_compared": 145,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-CR-016-TERME.py",
+          "pages": [
+            26
+          ]
+        },
+        {
+          "characters_compared": 142,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-CR-016-SOMME.py",
+          "pages": [
+            26,
+            27
+          ]
+        },
+        {
+          "characters_compared": 719,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-CR-016-SEUIL.py",
+          "pages": [
+            27
+          ]
+        },
+        {
+          "characters_compared": 77,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-ME-007-CAPITAL.py",
+          "pages": [
+            36
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-ME-007-SEUIL.py",
+          "pages": [
+            37
+          ]
+        },
+        {
+          "characters_compared": 33,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-020.py",
+          "pages": [
+            41
+          ]
+        },
+        {
+          "characters_compared": 39,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-021.py",
+          "pages": [
+            41
+          ]
+        },
+        {
+          "characters_compared": 59,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-034.py",
+          "pages": [
+            45
+          ]
+        },
+        {
+          "characters_compared": 77,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-035.py",
+          "pages": [
+            45
+          ]
+        },
+        {
+          "characters_compared": 56,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-044.py",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 106,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-049.py",
+          "pages": [
+            51
+          ]
+        },
+        {
+          "characters_compared": 199,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-050.py",
+          "pages": [
+            51
+          ]
+        },
+        {
+          "characters_compared": 96,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-TD-CONTEXTUALISE-LECTURE.py",
+          "pages": [
+            53
+          ]
+        },
+        {
+          "characters_compared": 309,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-TD-FIL-ROUGE-CROISEMENT.py",
+          "pages": [
+            54,
+            55
+          ]
+        },
+        {
+          "characters_compared": 41,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EV-A-SEUIL.py",
+          "pages": [
+            59
+          ]
+        },
+        {
+          "characters_compared": 42,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EV-B-SEUIL.py",
+          "pages": [
+            60
+          ]
+        },
+        {
+          "characters_compared": 31,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX1-TRACE.py",
+          "pages": [
+            65
+          ]
+        },
+        {
+          "characters_compared": 31,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX2.py",
+          "pages": [
+            65
+          ]
+        },
+        {
+          "characters_compared": 39,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX3-SEUIL.py",
+          "pages": [
+            65
+          ]
+        },
+        {
+          "characters_compared": 39,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX4-SOMME.py",
+          "pages": [
+            66
+          ]
+        },
+        {
+          "characters_compared": 44,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-RE-C7-EX1-TERME.py",
+          "pages": [
+            73
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-RE-C7-EX2-SOMME.py",
+          "pages": [
+            73
+          ]
+        },
+        {
+          "characters_compared": 45,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-RE-C7-EX3-SEUIL.py",
+          "pages": [
+            74
+          ]
+        },
+        {
+          "characters_compared": 292,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/15_algorithmique_monte_carlo.tex#python-1",
+          "pages": [
+            289
+          ]
+        },
+        {
+          "characters_compared": 560,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/15_experimentations.tex#python-1",
+          "pages": [
+            319
+          ]
+        },
+        {
+          "characters_compared": 126,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-051.tex#python-1",
+          "pages": [
+            336
+          ]
+        }
+      ],
+      "leaked": [],
+      "pages": 355,
+      "smart_quote_pages": [],
+      "unfaithful": [],
+      "unresolved_references": [],
+      "variant": "eleve",
+      "visible_malformed_fragments": [],
+      "withheld": [
+        {
+          "characters_compared": 120,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-TD-CONTEXTUALISE-VALEURS.py"
+        },
+        {
+          "characters_compared": 156,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-TD-CONTEXTUALISE-DEMI-VIE.py"
+        },
+        {
+          "characters_compared": 31,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX2-MODIFIE.py"
+        },
+        {
+          "characters_compared": 42,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX4-CARRES.py"
+        },
+        {
+          "characters_compared": 50,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-RE-C7-EX2-ADAPTATION.py"
+        }
+      ]
+    },
+    {
+      "code_blocks": 39,
+      "emptied_environments": [],
+      "faithful": [
+        {
+          "characters_compared": 33,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-DIAGNOSTIC-R5-SOMME.py",
+          "pages": [
+            16
+          ]
+        },
+        {
+          "characters_compared": 33,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-DIAGNOSTIC-R5-RECURRENCE.py",
+          "pages": [
+            16
+          ]
+        },
+        {
+          "characters_compared": 145,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-CR-016-TERME.py",
+          "pages": [
+            26
+          ]
+        },
+        {
+          "characters_compared": 142,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-CR-016-SOMME.py",
+          "pages": [
+            26,
+            27
+          ]
+        },
+        {
+          "characters_compared": 719,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-CR-016-SEUIL.py",
+          "pages": [
+            27
+          ]
+        },
+        {
+          "characters_compared": 77,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-ME-007-CAPITAL.py",
+          "pages": [
+            36
+          ]
+        },
+        {
+          "characters_compared": 78,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-ME-007-SEUIL.py",
+          "pages": [
+            37
+          ]
+        },
+        {
+          "characters_compared": 33,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-020.py",
+          "pages": [
+            41
+          ]
+        },
+        {
+          "characters_compared": 39,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-021.py",
+          "pages": [
+            41
+          ]
+        },
+        {
+          "characters_compared": 59,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-034.py",
+          "pages": [
+            45
+          ]
+        },
+        {
+          "characters_compared": 77,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-035.py",
+          "pages": [
+            45
+          ]
+        },
+        {
+          "characters_compared": 56,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-044.py",
+          "pages": [
+            49
+          ]
+        },
+        {
+          "characters_compared": 106,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-049.py",
+          "pages": [
+            51
+          ]
+        },
+        {
+          "characters_compared": 199,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-050.py",
+          "pages": [
+            51
+          ]
+        },
+        {
+          "characters_compared": 96,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-TD-CONTEXTUALISE-LECTURE.py",
+          "pages": [
+            54
+          ]
+        },
+        {
+          "characters_compared": 120,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-TD-CONTEXTUALISE-VALEURS.py",
+          "pages": [
+            54
+          ]
+        },
+        {
+          "characters_compared": 156,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-TD-CONTEXTUALISE-DEMI-VIE.py",
+          "pages": [
+            54,
+            55
+          ]
+        },
+        {
+          "characters_compared": 309,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-TD-FIL-ROUGE-CROISEMENT.py",
+          "pages": [
+            57
+          ]
+        },
+        {
+          "characters_compared": 41,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EV-A-SEUIL.py",
+          "pages": [
+            69
+          ]
+        },
+        {
+          "characters_compared": 42,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EV-B-SEUIL.py",
+          "pages": [
+            73
+          ]
+        },
+        {
+          "characters_compared": 31,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX1-TRACE.py",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 31,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX2.py",
+          "pages": [
+            83
+          ]
+        },
+        {
+          "characters_compared": 31,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX2-MODIFIE.py",
+          "pages": [
+            84
+          ]
+        },
+        {
+          "characters_compared": 39,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX3-SEUIL.py",
+          "pages": [
+            84
+          ]
+        },
+        {
+          "characters_compared": 39,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX4-SOMME.py",
+          "pages": [
+            85
+          ]
+        },
+        {
+          "characters_compared": 42,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-FR-R5-EX4-CARRES.py",
+          "pages": [
+            85
+          ]
+        },
+        {
+          "characters_compared": 44,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-RE-C7-EX1-TERME.py",
+          "pages": [
+            97
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-RE-C7-EX2-SOMME.py",
+          "pages": [
+            98
+          ]
+        },
+        {
+          "characters_compared": 50,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-RE-C7-EX2-ADAPTATION.py",
+          "pages": [
+            99
+          ]
+        },
+        {
+          "characters_compared": 45,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-RE-C7-EX3-SEUIL.py",
+          "pages": [
+            99
+          ]
+        },
+        {
+          "characters_compared": 72,
+          "kind": "included_python_file",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/python/1SPE-SUITES-EX-047.py",
+          "pages": [
+            133
+          ]
+        },
+        {
+          "characters_compared": 292,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/15_algorithmique_monte_carlo.tex#python-1",
+          "pages": [
+            528
+          ]
+        },
+        {
+          "characters_compared": 560,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/15_experimentations.tex#python-1",
+          "pages": [
+            574
+          ]
+        },
+        {
+          "characters_compared": 126,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-051.tex#python-1",
+          "pages": [
+            592
+          ]
+        },
+        {
+          "characters_compared": 13,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/1SPE-VARALEA-EV-A-corrige.tex#python-1",
+          "pages": [
+            576
+          ]
+        },
+        {
+          "characters_compared": 13,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/evaluations/1SPE-VARALEA-EV-B-corrige.tex#python-1",
+          "pages": [
+            576
+          ]
+        },
+        {
+          "characters_compared": 13,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-051.tex#python-1",
+          "pages": [
+            576
+          ]
+        },
+        {
+          "characters_compared": 129,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-052.tex#python-1",
+          "pages": [
+            619
+          ]
+        },
+        {
+          "characters_compared": 142,
+          "kind": "inline_python_environment",
+          "origin": "Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-052.tex#python-2",
+          "pages": [
+            619
+          ]
+        }
+      ],
+      "leaked": [],
+      "pages": 627,
+      "smart_quote_pages": [],
+      "unfaithful": [],
+      "unresolved_references": [],
+      "variant": "professeur",
+      "visible_malformed_fragments": [],
+      "withheld": []
+    }
+  ],
+  "what_a_variant_withholds_is_declared_not_guessed": "L'edition eleve vide l'environnement `corrige` : elle l'ecrit dans son propre maitre. Un programme de corrige n'y est donc pas attendu, et s'il y apparaissait ce serait le defaut.",
+  "why_geometry_could_not_see_this": "Une page peut etre parfaitement composee — encre dans le format, aucun debordement, aucune collision — et raconter print(f”...”) ou afficher « ewpage » en toutes lettres. La geometrie regarde ou l'encre se pose ; il fallait lire ce qu'elle dit."
+}

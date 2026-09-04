@@ -107,7 +107,20 @@
 
 % Code : JetBrains Mono (installé dans le système ou ~/.local/share/fonts/)
 % Les fichiers .otf sources sont conservés dans gabarits/fonts/ pour la CI.
-\setmonofont{JetBrains Mono}[Scale=0.89]
+% Le code imprimé doit être RECOPIABLE : ce que l'élève lit doit être ce que
+% Python accepte. `\defaultfontfeatures{Ligatures=TeX}` s'applique à TOUTES les
+% fontes chargées ensuite, celle du code comprise -- et la fonctionnalité
+% `tlig` y transforme le guillemet droit `"` en guillemet typographique `”`.
+% Un manuel imprimait donc `print(f”...”)`, `”””Renvoie...”””` : du code
+% syntaxiquement invalide, sur 29 pages. Les ligatures de programmation de
+% JetBrains Mono soudaient en outre `==` en un seul glyphe.
+%
+% Ces trois fonctionnalités sont donc éteintes POUR LA FONTE DU CODE, et pour
+% elle seule : la typographie française du corps garde ses guillemets, ses
+% tirets et ses ligatures. Remplacer globalement les guillemets du manuel
+% aurait cassé le texte pour réparer le code.
+\setmonofont{JetBrains Mono}[Scale=0.89,
+  Ligatures=NoCommon, RawFeature={-tlig;-calt;-liga}]
 
 % ===========================================================================
 %  TYPOGRAPHIE PROFESSIONNELLE
@@ -536,7 +549,10 @@
 % ===========================================================================
 \RequirePackage{listings}
 
-% Réglages globaux listings (columns flexible, upquote, breaklines)
+% Réglages globaux listings. Le commentaire annonçait « upquote » : il n'y en
+% avait pas, et il n'en fallait pas -- `upquote` ne change rien ici, la
+% transformation du guillemet droit venait de la FONTE et se règle là où la
+% fonte est chargée.
 \lstset{
   columns=fullflexible,
   keepspaces=true,
@@ -569,6 +585,26 @@
   belowskip=9pt,
 }
 \lstnewenvironment{python}{\lstset{style=nxpy}}{}
+
+% `\lstinputlisting` n'appliquait AUCUN style : le `\lstset` global ne fixe pas
+% de `basicstyle`, si bien qu'un programme lu depuis un fichier heritait de la
+% fonte du texte courant. Les dix-sept programmes Python inclus par fichier
+% etaient donc composes en Pagella -- serif, proportionnelle, docstrings en
+% italique -- et la fonte du texte applique `Ligatures=TeX` : les guillemets
+% droits du code y devenaient des guillemets courbes. Le meme defaut que dans
+% les blocs `python`, mais sur un autre chemin, invisible tant qu'on ne
+% comparait pas la source a la page.
+%
+% Le style ne peut pas etre pose dans le `\lstset` global : `\lstinline` le
+% prendrait aussi et composerait le code en ligne a 8,5 pt, encadre et
+% numerote, au milieu d'un paragraphe. Il est donc applique la ou il a du sens,
+% sur le programme affiche, dans un groupe qui le confine.
+\let\nxOrigLstInputListing\lstinputlisting
+\renewcommand{\lstinputlisting}[2][]{%
+  \begingroup
+    \lstset{style=nxpy}%
+    \nxOrigLstInputListing[#1]{#2}%
+  \endgroup}
 
 % Code en ligne
 \newcommand{\code}[1]{{\ttfamily\color{coulCode}#1}}
