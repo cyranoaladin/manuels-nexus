@@ -1,0 +1,46 @@
+{
+  "artifact_type": "chapter_local_status",
+  "schema_version": 1,
+  "chapter": "1NSI-LANGAGE",
+  "generated_by": "instance B (codex/urgent-1nsi-content)",
+  "scope": "LOCAL_SATELLITE_ONLY",
+  "approves_nothing": true,
+  "grants_no_publication_approval": true,
+  "p0_class": "P0_PEDAGOGICAL_CONTENT_CLONING_AND_CAPACITY_MISREPRESENTATION",
+  "p0_subclass": "SYNTHETIC_FILLER_TEMPLATE_CONTAMINATION",
+
+  "LANGAGE_LOCAL_MACHINE_CONTENT_COMPLETE": "YES",
+  "LANGAGE_GOVERNANCE_CURRENT": "PENDING_SHARED_INT006",
+
+  "local_gates": {
+    "CAPACITY_IDENTITY": "PASS",
+    "FALSE_CREDITS": 0,
+    "ROLE_GAPS": 0,
+    "CLONES": 0,
+    "CODE": "PASS",
+    "QCM": "PASS",
+    "ASSESSMENTS": "PASS",
+    "REMEDIATIONS": "PASS",
+    "RICHNESS": "PASS",
+    "NARRATIVE": "PASS",
+    "TARGETED_RENDER": "PASS",
+    "UNKNOWN": 0,
+    "SOURCE_SET_REOBSERVATION": "BLOCKED_BY_INT006"
+  },
+
+  "evidence": {
+    "capacity_identity": "7 capacites, deux identifiants chacune, correspondance lue dans contrat.yaml. UNKNOWN 0, AMBIGUITY 0.",
+    "clones": "38 objets pour 38 corps distincts. 0 groupe.",
+    "coverage": "0 cellule MISSING sur 49 (7 capacites x 7 roles).",
+    "code": "verify_python --check : 31 OK / 0 FAIL. 42 assertions ecrites et executees dans le contenu neuf.",
+    "render": "18 pages, 0 glyphe manquant, 0 overfull, 0 underfull, 0 erreur.",
+    "delta_ledger": "audit/1nsi-local/LANGAGE_LOCAL_DELTA_LEDGER.json"
+  },
+
+  "authored": {
+    "methodes": "4 gestes pour 7 capacites — constructions elementaires et comparaison de langages ; specification (prototype, pre, post) ; jeux de tests ; documentation de bibliotheque",
+    "remediations": "6 fiches, une par misconception documentee dans les diagnostics du QCM",
+    "assessments": "un troisieme exercice ajoute a A et a B, symetriquement",
+    "volume_note": "Aucun quota. Le volume final vient du besoin pedagogique : 104 objets synthetiques deviennent 38 objets reels."
+  }
+}
