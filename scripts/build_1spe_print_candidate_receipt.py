@@ -213,6 +213,17 @@ def build_receipt() -> dict[str, Any]:
             "python3 Mathematiques/manuel-maths/scripts/assemble_manuel.py "
             "--manual 1SPE --variant <variant> --record-observed"
         ),
+        # Le statut est DÉRIVÉ des métriques, pas écrit : un candidat dont un
+        # contrôle parle n'est pas un candidat. Les vues de relecture le citent.
+        "status": (
+            "PRINT_CANDIDATE"
+            if describes_head and not missing and not any(
+                value
+                for row in evidence
+                for value in row["metrics"].values()
+            )
+            else "NOT_A_CANDIDATE"
+        ),
         "source_sha": head,
         "observed_source_digest": observed_digest,
         "current_source_digest": current_digest,

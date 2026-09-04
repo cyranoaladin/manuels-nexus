@@ -6,7 +6,7 @@
 
 > L'artefact qui portait ce nom était une saisie manuelle : rien ne le produisait, donc rien ne le rafraîchissait, et il décrivait encore un manuel de 357 et 629 pages sans signets ni TrimBox. Un reçu qui ne peut pas se périmer ne prouve rien.
 
-SHA source : `eee23f491be86ee836490d97f122536d7a3da956`
+SHA source : `c4c648db6c71d917ce3bfa4b0eadbfd945f3522a`
 
 > Chaque enregistrement se lie à son propre commit, et le HEAD avance ensuite d'un commit par manifeste : comparer les SHA dirait toujours faux. Un commit qui n'ajoute qu'un artefact d'audit ne change pas les sources.
 

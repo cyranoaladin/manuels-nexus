@@ -2159,9 +2159,21 @@ def test_materialization_revalidations_use_only_the_owned_lock_identity(
         )
     manifest_path = repository / inventory_module.BUILD_MANIFEST_FILE
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    assert manifest["builds"] == [], (
-        "la fiction ne vaut que pour le manifeste vide canonique"
-    )
+    # La fiction de ce test -- aucune qualification suspendue, aucune
+    # construction observee -- doit valoir dans le depot CLONE, quel que soit
+    # l'etat du depot reel. L'exiger vide au depart liait ce test a une phase
+    # transitoire : des qu'une construction est legitimement enregistree, il
+    # echouait sans que rien ne soit casse. Le clone est donc rendu coherent
+    # avec sa propre fiction, plutot que d'exiger du reel qu'il l'incarne.
+    manifest["builds"] = []
+    # Le condensat d'etat suit la liste des constructions : le laisser derriere
+    # ferait echouer la validation sur « build_state_digest incoherent ». Il est
+    # recalcule comme le producteur le calcule.
+    manifest["build_state_digest"] = "sha256:" + hashlib.sha256(
+        json.dumps(
+            [], ensure_ascii=False, sort_keys=True, separators=(",", ":")
+        ).encode("utf-8")
+    ).hexdigest()
     manifest["model_digest"] = fiction_model_digest
     manifest_path.write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
