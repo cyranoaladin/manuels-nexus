@@ -365,7 +365,27 @@ Ces propositions sont **machine** et ne valent aucune approbation. Elles sont le
 
 Ce chapitre porte 28 question(s) évaluée(s), dont 3 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
 
-## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
+## 8. Recommandations d'une revue externe
+
+Ces recommandations viennent d'une revue externe automatisee. Elles ne portent aucune identite humaine, ne valent aucun recu, et ne sont ecrites dans aucun corrige. Elles entrent dans le dossier de revue comme propositions, au meme titre que celles que la machine derive du sujet et du corrige.
+
+Une recommandation qui ne retrouve pas sa question, dont la somme ne tombe pas sur le total declare, ou dont la valeur en points contredit le sujet, est refusee plutot qu'enregistree.
+
+### Attendus proposes
+
+**`1SPE-PROBCOND-EV-A` / Exercice 1 / `Q4` — 1 pt**
+
+calculer une probabilite conditionnelle inverse et obtenir $P_G(R) = \dfrac{3}{4}$
+
+**`1SPE-PROBCOND-EV-A` / Exercice 2 / `Q4` — 1 pt**
+
+interpreter la valeur predictive positive, environ $41\,\%$ : un test positif seul ne suffit pas a poser un diagnostic individuel, une confirmation est necessaire
+
+**`1SPE-PROBCOND-EV-B` / Exercice 1 / `Q4` — 1 pt**
+
+calculer la probabilite conditionnelle inverse et obtenir $P_G(B) = \dfrac{3}{5}$
+
+## 9. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 
 1. completude du programme officiel
 2. alignement des capacites
@@ -383,7 +403,7 @@ Ce chapitre porte 28 question(s) évaluée(s), dont 3 attendent votre jugement. 
 
 Cette checklist est celle du role. Elle s'applique au CHAPITRE COURANT ENTIER, y compris aux objets qu'aucune section de cette vue ne cite.
 
-## 9. Reference de lecture : le PDF candidat
+## 10. Reference de lecture : le PDF candidat
 
 Le PDF sert a lire le chapitre dans l'ordre ou l'eleve le recevra. Il n'est pas une preuve : le packet ne porte aucune preuve de rendu (`render_evidence = ABSENT`), et aucun index page-objet n'est etabli.
 

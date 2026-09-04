@@ -166,3 +166,85 @@ def test_a_missing_source_view_is_refused(
 
     with pytest.raises(gate.KitError, match="chapitres absents"):
         gate.build(write=False)
+
+
+# ---------------------------------------------------------------------------
+#  Ce qu'il faut relire — et ce qu'il ne faut pas redemander
+# ---------------------------------------------------------------------------
+
+
+def test_the_kit_says_which_packets_moved_since_the_reviewed_one(
+    payload: dict[str, Any],
+) -> None:
+    summary = payload["summary"]
+    assert payload["kit_version"] == "V2"
+    assert payload["reviewed_kit_zip_sha256"].startswith("cccb36e8")
+    assert summary["PACKETS_WITH_UNKNOWN_READING_DEBT"] == 0
+    assert (
+        summary["PACKETS_TO_RE_READ"] + summary["PACKETS_UNCHANGED_SINCE_REVIEW"]
+        == summary["EXPECTED_VERDICTS"]
+    )
+    # Une campagne qui redemande les vingt lectures n'en obtient aucune.
+    assert 0 < summary["PACKETS_TO_RE_READ"] < summary["EXPECTED_VERDICTS"]
+
+
+def test_a_packet_whose_substance_did_not_move_is_not_re_asked(
+    payload: dict[str, Any],
+) -> None:
+    """La revision gelée bouge à chaque commit ; ce n'est pas une lecture."""
+
+    unchanged = [
+        (row["chapter"], role["role"])
+        for row in payload["chapters"]
+        for role in row["roles"]
+        if role["since_reviewed_kit"]["state"] == "UNCHANGED_SINCE_REVIEW"
+    ]
+    assert unchanged, "aucun packet stable : la comparaison mesure la provenance"
+    # Ce qui est retire de la comparaison est nomme : la ligne de revision.
+    assert "Revision du depot gelee" in gate._FROZEN_REVISION.pattern
+    masked = gate._without_provenance(
+        "| Revision du depot gelee dans le packet | `abc123` |"
+    )
+    assert "abc123" not in masked
+
+
+def test_the_mathematics_packets_are_staled_only_where_mathematics_moved(
+    payload: dict[str, Any],
+) -> None:
+    """Le référentiel et Q16 ont bougé dans un seul chapitre."""
+
+    stale_math = [
+        row["chapter"]
+        for row in payload["chapters"]
+        for role in row["roles"]
+        if role["role"].endswith("EXPERT_MATHEMATIQUE")
+        and role["since_reviewed_kit"]["state"] == "MUST_BE_RE_READ"
+    ]
+    assert stale_math == ["1SPE-VARIABLES-ALEATOIRES"]
+
+
+def test_the_index_shows_what_must_be_re_read(payload: dict[str, Any]) -> None:
+    index = (gate.KIT / "INDEX.html").read_text(encoding="utf-8")
+
+    assert "À RELIRE" in index
+    assert "inchangé" in index
+    assert payload["reviewed_kit_zip_sha256"][:24] in index
+
+
+def test_the_external_recommendations_reach_the_view_that_judges_them() -> None:
+    """Une recommandation rangée dans un artefact que personne n'ouvre ne sert à rien."""
+
+    georep = (
+        ROOT
+        / "audit/reviews/human/1SPE-GEOMETRIE-REPEREE"
+        / "view-B-EXPERT_PROGRAMME_PEDAGOGIE.md"
+    ).read_text(encoding="utf-8")
+
+    assert "Recommandations d'une revue externe" in georep
+    assert "Repartition de points proposee" in georep
+    # Les dix-sept questions des deux variantes, et rien qui ressemble à un reçu.
+    assert georep.count("1SPE-GEOREP-EV-A") >= 17
+    # La provenance est dite, et elle n'est pas humaine.
+    assert "ne portent aucune identite humaine" in georep
+    assert "ne valent aucun recu" in georep
+    assert "PROPOSED_BY_EXTERNAL_REVIEW" not in georep.split("Verdicts autorises")[0]

@@ -29,6 +29,8 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -280,6 +282,64 @@ def barème_facts(chapter: str) -> dict[str, Any]:
     }
 
 
+# Le kit qu'une revue externe a reellement examine : son ZIP porte cette
+# empreinte, et ses vues sont recuperables a ce commit-la. Comparer a lui est
+# le seul moyen de dire ce qu'un relecteur doit relire.
+REVIEWED_KIT_COMMIT = "60051b0c"
+REVIEWED_KIT_ZIP_SHA256 = (
+    "cccb36e8f7c9c160c5a86df47fc4fce66a270503487dddd9fe2cd74b7d063fef"
+)
+# La revision gelee dans le packet change a chaque commit, sans qu'une seule
+# phrase de la vue ait bouge. La masquer separe le fond de la provenance.
+_FROZEN_REVISION = re.compile(
+    r"^\| Revision du depot gelee dans le packet \|.*$", re.M
+)
+
+
+def _without_provenance(text: str) -> str:
+    return _FROZEN_REVISION.sub("| Revision du depot gelee | (masquee) |", text)
+
+
+def _view_at_reviewed_kit(relative: str) -> str | None:
+    """La vue telle que la revue externe l'a lue, relue depuis Git."""
+
+    try:
+        return subprocess.run(
+            ["git", "show", f"{REVIEWED_KIT_COMMIT}:{relative}"],
+            capture_output=True,
+            text=True,
+            check=True,
+            cwd=ROOT,
+        ).stdout
+    except (subprocess.CalledProcessError, OSError):
+        return None
+
+
+def _reading_debt(relative: str) -> dict[str, Any]:
+    """Ce que ce role doit relire, ou pas.
+
+    Un packet ne devient perime que si sa SUBSTANCE a change. Numeroter les
+    sections a l'avance, ou laisser la revision gelee dans la comparaison,
+    ferait declarer perimes des chapitres dont pas une phrase n'a bouge -- et
+    un relecteur qui relit tout ne relit rien.
+    """
+
+    previous = _view_at_reviewed_kit(relative)
+    current_path = ROOT / relative
+    if previous is None or not current_path.is_file():
+        return {"state": "UNKNOWN", "why": "vue introuvable dans le kit examine"}
+    current = current_path.read_text(encoding="utf-8")
+    if _without_provenance(previous) == _without_provenance(current):
+        return {
+            "state": "UNCHANGED_SINCE_REVIEW",
+            "why": "aucune phrase de cette vue n'a change depuis le kit examine",
+        }
+    return {
+        "state": "MUST_BE_RE_READ",
+        "why": "cette vue a change depuis le kit examine",
+    }
+
+
 def build(write: bool = True) -> dict[str, Any]:
     chapters = [name for name in READING_ORDER if (REVIEWS / name).is_dir()]
     missing = [name for name in READING_ORDER if name not in chapters]
@@ -294,6 +354,8 @@ def build(write: bool = True) -> dict[str, Any]:
         entry = chapter_entry(chapter)
         entry["reading_order"] = order
         entry["bareme"] = barème_facts(chapter)
+        for role in entry["roles"]:
+            role["since_reviewed_kit"] = _reading_debt(role["source_view"])
         entries.append(entry)
         if not write:
             continue
@@ -330,9 +392,37 @@ def build(write: bool = True) -> dict[str, Any]:
             "Dix chapitres, deux rôles, vingt verdicts. Les items d'attention "
             "dirigent la lecture ; ils ne sont pas des signatures."
         ),
+        "kit_version": "V2",
+        "reviewed_kit_commit": REVIEWED_KIT_COMMIT,
+        "reviewed_kit_zip_sha256": REVIEWED_KIT_ZIP_SHA256,
+        "only_what_really_moved_is_stale": (
+            "Un packet n'est declare a relire que si la substance de sa vue a "
+            "change depuis le kit examine. La revision gelee dans le packet, "
+            "qui bouge a chaque commit, est retiree de la comparaison, et les "
+            "sections se numerotent d'apres ce qui est ecrit : un chapitre "
+            "dont rien n'a bouge ne renvoie personne a sa lecture."
+        ),
         "chapters": entries,
         "summary": {
             "CHAPTERS": len(entries),
+            "PACKETS_TO_RE_READ": sum(
+                1
+                for row in entries
+                for role in row["roles"]
+                if role["since_reviewed_kit"]["state"] == "MUST_BE_RE_READ"
+            ),
+            "PACKETS_UNCHANGED_SINCE_REVIEW": sum(
+                1
+                for row in entries
+                for role in row["roles"]
+                if role["since_reviewed_kit"]["state"] == "UNCHANGED_SINCE_REVIEW"
+            ),
+            "PACKETS_WITH_UNKNOWN_READING_DEBT": sum(
+                1
+                for row in entries
+                for role in row["roles"]
+                if role["since_reviewed_kit"]["state"] == "UNKNOWN"
+            ),
             "VIEWS_WRITTEN": written,
             "EXPECTED_VERDICTS": len(entries) * len(ROLES),
             "PENDING_VERDICTS": pending,
@@ -364,6 +454,9 @@ def render_index(payload: dict[str, Any]) -> str:
         f"<blockquote>{payload['the_unit_of_decision_is_the_chapter']}</blockquote>",
         f"<blockquote>{payload['the_json_packet_remains_the_authority']}</blockquote>",
         f"<blockquote>{payload['no_reviewer_is_named_here']}</blockquote>",
+        f"<blockquote>{payload['only_what_really_moved_is_stale']}</blockquote>",
+        f"<p>Kit precedemment examine : <code>{payload['reviewed_kit_zip_sha256'][:24]}…</code> "
+        f"(commit <code>{payload['reviewed_kit_commit']}</code>).</p>",
         "<h2>Ce qui est attendu</h2>",
         "<table><tr><th>Grandeur</th><th>Valeur</th></tr>",
     ]
@@ -390,9 +483,19 @@ def render_index(payload: dict[str, Any]) -> str:
                 links.append("—")
                 continue
             name = Path(role["kit_view"]).name
+            # Ce qui a bouge depuis le kit examine se voit ici : un relecteur
+            # a qui l'on redemande vingt lectures n'en refait aucune.
+            debt = role.get("since_reviewed_kit", {}).get("state")
+            marker = (
+                " <span class='mandatory'>À RELIRE</span>"
+                if debt == "MUST_BE_RE_READ"
+                else " <em>inchangé</em>"
+                if debt == "UNCHANGED_SINCE_REVIEW"
+                else ""
+            )
             links.append(
                 f"<a href='{name}'>ouvrir</a> · "
-                f"<code>{role['state'] or 'PENDING'}</code>"
+                f"<code>{role['state'] or 'PENDING'}</code>{marker}"
             )
         rows.append(
             f"<tr><td>{entry['reading_order']}</td>"

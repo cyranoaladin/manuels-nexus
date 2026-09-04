@@ -383,7 +383,54 @@ Le sujet ne value aucune question individuellement : répartir son total est un 
 
 Ce chapitre porte 34 question(s) évaluée(s), dont 34 attendent votre jugement. Ce ne sont pas autant de signatures : votre verdict porte sur le chapitre.
 
-## 8. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
+## 8. Recommandations d'une revue externe
+
+Ces recommandations viennent d'une revue externe automatisee. Elles ne portent aucune identite humaine, ne valent aucun recu, et ne sont ecrites dans aucun corrige. Elles entrent dans le dossier de revue comme propositions, au meme titre que celles que la machine derive du sujet et du corrige.
+
+Une recommandation qui ne retrouve pas sa question, dont la somme ne tombe pas sur le total declare, ou dont la valeur en points contredit le sujet, est refusee plutot qu'enregistree.
+
+### Repartition de points proposee
+
+*Les taches directes portent moins de poids que les constructions, les deductions, les systemes, les completions de carre ou le projete orthogonal.*
+
+| Evaluation | Exercice | Question | Points |
+| --- | ---: | --- | ---: |
+| `1SPE-GEOREP-EV-A` | 1 | `Q1` | 1 pt |
+| `1SPE-GEOREP-EV-A` | 1 | `Q2` | 1 pt |
+| `1SPE-GEOREP-EV-A` | 1 | `Q3` | 1,5 pt |
+| `1SPE-GEOREP-EV-A` | 1 | `Q4` | 0,5 pt |
+| `1SPE-GEOREP-EV-A` | 2 | `Q1` | 1 pt |
+| `1SPE-GEOREP-EV-A` | 2 | `Q2` | 2 pts |
+| `1SPE-GEOREP-EV-A` | 2 | `Q3` | 1 pt |
+| `1SPE-GEOREP-EV-A` | 3 | `Q1` | 1 pt |
+| `1SPE-GEOREP-EV-A` | 3 | `Q2` | 0,5 pt |
+| `1SPE-GEOREP-EV-A` | 3 | `Q3` | 0,5 pt |
+| `1SPE-GEOREP-EV-A` | 3 | `Q4` | 2 pts |
+| `1SPE-GEOREP-EV-A` | 4 | `Q1` | 1,5 pt |
+| `1SPE-GEOREP-EV-A` | 4 | `Q2` | 0,5 pt |
+| `1SPE-GEOREP-EV-A` | 4 | `Q3` | 2 pts |
+| `1SPE-GEOREP-EV-A` | 5 | `Q1` | 1,5 pt |
+| `1SPE-GEOREP-EV-A` | 5 | `Q2` | 1,5 pt |
+| `1SPE-GEOREP-EV-A` | 5 | `Q3` | 1 pt |
+| `1SPE-GEOREP-EV-B` | 1 | `Q1` | 1 pt |
+| `1SPE-GEOREP-EV-B` | 1 | `Q2` | 1 pt |
+| `1SPE-GEOREP-EV-B` | 1 | `Q3` | 1,5 pt |
+| `1SPE-GEOREP-EV-B` | 1 | `Q4` | 0,5 pt |
+| `1SPE-GEOREP-EV-B` | 2 | `Q1` | 1 pt |
+| `1SPE-GEOREP-EV-B` | 2 | `Q2` | 2 pts |
+| `1SPE-GEOREP-EV-B` | 2 | `Q3` | 1 pt |
+| `1SPE-GEOREP-EV-B` | 3 | `Q1` | 1 pt |
+| `1SPE-GEOREP-EV-B` | 3 | `Q2` | 0,5 pt |
+| `1SPE-GEOREP-EV-B` | 3 | `Q3` | 0,5 pt |
+| `1SPE-GEOREP-EV-B` | 3 | `Q4` | 2 pts |
+| `1SPE-GEOREP-EV-B` | 4 | `Q1` | 1,5 pt |
+| `1SPE-GEOREP-EV-B` | 4 | `Q2` | 0,5 pt |
+| `1SPE-GEOREP-EV-B` | 4 | `Q3` | 2 pts |
+| `1SPE-GEOREP-EV-B` | 5 | `Q1` | 1,5 pt |
+| `1SPE-GEOREP-EV-B` | 5 | `Q2` | 1,5 pt |
+| `1SPE-GEOREP-EV-B` | 5 | `Q3` | 1 pt |
+
+## 9. Checklist du role `EXPERT_PROGRAMME_PEDAGOGIE`
 
 1. completude du programme officiel
 2. alignement des capacites
@@ -401,7 +448,7 @@ Ce chapitre porte 34 question(s) évaluée(s), dont 34 attendent votre jugement.
 
 Cette checklist est celle du role. Elle s'applique au CHAPITRE COURANT ENTIER, y compris aux objets qu'aucune section de cette vue ne cite.
 
-## 9. Reference de lecture : le PDF candidat
+## 10. Reference de lecture : le PDF candidat
 
 Le PDF sert a lire le chapitre dans l'ordre ou l'eleve le recevra. Il n'est pas une preuve : le packet ne porte aucune preuve de rendu (`render_evidence = ABSENT`), et aucun index page-objet n'est etabli.
 

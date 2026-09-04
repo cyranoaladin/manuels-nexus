@@ -1319,18 +1319,109 @@ def _manual_coherence_block(facts: dict[str, Any], index: int) -> list[str]:
     return lines
 
 
+def _external_review_block(facts: dict[str, Any], index: int) -> list[str]:
+    """Ce qu'une revue externe a recommande pour ce chapitre.
+
+    Une recommandation qui reste dans un artefact que personne n'ouvre ne sert
+    a rien : celle-ci se lit la ou le jugement se rend. Elle est presentee pour
+    ce qu'elle est -- une proposition automatisee, confrontee au manuel, sans
+    identite humaine et sans valeur de recu. Le relecteur peut la retenir, la
+    corriger ou l'ecarter.
+    """
+
+    payload = _load_json(ROOT / "audit/1SPE_EXTERNAL_REVIEW_PROPOSALS.json")
+    if payload is None:
+        return []
+    chapter = facts["chapter"]
+    allocations = [
+        row
+        for row in payload["georep_allocations"]
+        if _chapter_of_object(row["object_id"]) == chapter
+    ]
+    expectations = [
+        row
+        for row in payload["probability_expectations"]
+        if _chapter_of_object(row["object_id"]) == chapter
+    ]
+    if not allocations and not expectations:
+        return []
+
+    lines = [
+        f"## {index}. Recommandations d'une revue externe",
+        "",
+        payload["this_is_not_a_human_verdict"],
+        "",
+        payload["each_recommendation_is_confronted_to_the_manual"],
+        "",
+    ]
+    if allocations:
+        lines += [
+            "### Repartition de points proposee",
+            "",
+            f"*{payload['georep_rationale']}*",
+            "",
+            "| Evaluation | Exercice | Question | Points |",
+            "| --- | ---: | --- | ---: |",
+        ]
+        for row in allocations:
+            lines.append(
+                f"| `{row['object_id']}` | {row['exercise']} | "
+                f"`{row['question']}` | {row['points']} |"
+            )
+        lines.append("")
+    if expectations:
+        lines += ["### Attendus proposes", ""]
+        for row in expectations:
+            lines += [
+                f"**`{row['object_id']}` / Exercice {row['exercise']} / "
+                f"`{row['question']}` — {row['points']}**",
+                "",
+                row["expected"],
+                "",
+            ]
+    return lines
+
+
+def _chapter_of_object(object_id: str) -> str:
+    """Le chapitre auquel appartient un objet d'evaluation.
+
+    Les identifiants d'evaluation abregent le chapitre (`1SPE-GEOREP-EV-A`
+    pour `1SPE-GEOMETRIE-REPEREE`). La correspondance est LUE dans les
+    propositions de bareme, qui portent les deux.
+    """
+
+    proposal = _load_json(ROOT / "audit/1SPE_BAREME_COMMENTARY_PROPOSAL.json")
+    for row in (proposal or {}).get("assessments", []):
+        if row["object_id"] == object_id:
+            return row["chapter"]
+    return ""
+
+
 def view_expert_programme(facts: dict[str, Any], sources: dict[str, Any]) -> str:
     lines: list[str] = []
     lines += _header(facts, ROLE_B)
     lines += _decision_block(facts, ROLE_B)
     lines += _programme_block(facts, ROLE_B)
     lines += _assembly_block(facts)
-    lines += _capacity_block(facts, 4)
-    lines += _qcm_human_block(facts, 5)
-    lines += _manual_coherence_block(facts, 6)
-    lines += _bareme_block(facts, 7)
-    lines += _checklist_block(ROLE_B, 8)
-    lines += _pdf_block(facts, sources, 9)
+    # Les sections se numerotent d'apres ce qui est REELLEMENT ecrit. Fixer les
+    # numeros a l'avance faisait glisser toute la vue des qu'une section
+    # apparaissait ailleurs -- un chapitre sans recommandation externe voyait
+    # ses titres changer, et son packet devenait perime sans qu'une seule
+    # phrase de son contenu ait bouge.
+    index = 4
+    for block in (
+        lambda position: _capacity_block(facts, position),
+        lambda position: _qcm_human_block(facts, position),
+        lambda position: _manual_coherence_block(facts, position),
+        lambda position: _bareme_block(facts, position),
+        lambda position: _external_review_block(facts, position),
+        lambda position: _checklist_block(ROLE_B, position),
+        lambda position: _pdf_block(facts, sources, position),
+    ):
+        rendered = block(index)
+        if rendered:
+            lines += rendered
+            index += 1
     lines += _closing(facts, ROLE_B)
     return "\n".join(lines).rstrip("\n") + "\n"
 
