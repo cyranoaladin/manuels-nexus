@@ -2,77 +2,16 @@
   "approves_nothing": "la campagne de revue 1NSI reste PENDING ; ce producteur ne mesure que l'etat courant et ne leve aucune attente",
   "artifact_type": "1nsi_pending_state_reobservation",
   "cause": {
-    "date": "2026-09-04",
-    "deleted_tex_files": 99,
-    "sha": "16388110bb1bf1d0b3ec5dba29c5be081cb993e2",
-    "subject": "[WEB-IHM] remove 99 synthetic filler copies and restore the true coverage"
+    "baseline": "3dae8002d0ab6bdb5cdab676ccd53a2b375a5b40",
+    "cause_commits_count": 0,
+    "date": "2026-09-01",
+    "sha": "2d522877b67a2417602a40e33b7f3bd1f0c620ab",
+    "sources_added": 0,
+    "sources_modified": 0,
+    "sources_removed": 0,
+    "subject": "[1NSI] retirer 44 cours qui dupliquaient ou usurpaient un autre objet"
   },
-  "delta": [
-    {
-      "declared": 812,
-      "field": "observed.sources_count",
-      "observed": 713,
-      "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE"
-    },
-    {
-      "declared": "sha256:54ae22ca8b41bf69913f6e71a902eaabb89dc59871c340d65f3fd49c976559d5",
-      "field": "observed.sources_ids_digest",
-      "observed": "sha256:d9d796a784218d294220acaeec5dc79cc88ea1f94e45f5a32b75383c97638278",
-      "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE"
-    },
-    {
-      "declared": 802,
-      "field": "observed.object_sources_count",
-      "observed": 703,
-      "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE"
-    },
-    {
-      "declared": 482,
-      "field": "observed.ids_only_in_sources_count",
-      "observed": 383,
-      "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE"
-    },
-    {
-      "declared": "sha256:2a5535511729431a1c26f2be83c32d5f4f573fb46d2c5bdc91e8ee97d5e3fae6",
-      "field": "observed.ids_only_in_sources_digest",
-      "observed": "sha256:de7bcd718ba2fc81c9b553f64dbaaca87db1fbdab4dfda515ca84aef873ecee1",
-      "register": "1NSI_CONTENT_REVIEW_CAMPAIGN_STATE"
-    },
-    {
-      "declared": {
-        "approved": 436,
-        "manual_review": 7,
-        "needs_review": 210,
-        "verified": 149
-      },
-      "field": "observed_counts",
-      "observed": {
-        "approved": 337,
-        "manual_review": 7,
-        "needs_review": 210,
-        "verified": 149
-      },
-      "register": "1NSI_STATUS_GOVERNANCE_PENDING"
-    },
-    {
-      "declared": 802,
-      "field": "objects_total",
-      "observed": 703,
-      "register": "1NSI_STATUS_GOVERNANCE_PENDING"
-    },
-    {
-      "declared": 436,
-      "field": "prohibited_status_objects_count",
-      "observed": 337,
-      "register": "1NSI_STATUS_GOVERNANCE_PENDING"
-    },
-    {
-      "declared": "sha256:beb221c231d553b3499309e3ce9094b89f909d3123d1e34924332a080a620b68",
-      "field": "prohibited_status_objects_digest",
-      "observed": "sha256:145b1cffa70522f6bb801b0b38f6de7eaee15ac976e26da24fd3714c12a26dba",
-      "register": "1NSI_STATUS_GOVERNANCE_PENDING"
-    }
-  ],
+  "delta": [],
   "generated_by": "scripts/build_1nsi_pending_state_reobservation.py",
   "no_1nsi_content_is_modified": true,
   "registers": [
@@ -85,13 +24,43 @@
       "status": "PENDING_HUMAN_REVIEW"
     }
   ],
-  "schema_version": 1,
+  "schema_version": 2,
+  "source_set": {
+    "added": [],
+    "affected_chapters": [],
+    "attribution": [],
+    "cause_commits": [],
+    "declared_historical": {
+      "commit": "3dae8002d0ab6bdb5cdab676ccd53a2b375a5b40",
+      "count": 817,
+      "ids_digest": "sha256:45d1ffcf341024851a821d018f84f83b195bece989ec3ff20c55046d22b540c1",
+      "paths_digest": "sha256:9a9dca81bb68f665c846fbff33f4e035213f1ffd98a1d02b728fa21c4f8c4e80"
+    },
+    "human_receipts_affected": [],
+    "identity_moves": [],
+    "modified_existing": [],
+    "observed_current": {
+      "count": 817,
+      "ids_digest": "sha256:45d1ffcf341024851a821d018f84f83b195bece989ec3ff20c55046d22b540c1",
+      "paths_digest": "sha256:9a9dca81bb68f665c846fbff33f4e035213f1ffd98a1d02b728fa21c4f8c4e80"
+    },
+    "removed": [],
+    "unchanged_count": 817
+  },
+  "state": "CURRENT",
   "summary": {
-    "DELETED_TEX_FILES_IN_CAUSE_COMMIT": 99,
-    "FIELDS_REOBSERVED": 9,
+    "CAUSE_COMMITS": 0,
+    "FIELDS_REOBSERVED": 0,
+    "HUMAN_RECEIPTS_AFFECTED": 0,
     "REGISTERS": 2,
     "SEALED_FIELDS_MUTATED": 0,
-    "UNEXPLAINED_DELTA": 0
+    "SOURCES_ADDED": 0,
+    "SOURCES_MODIFIED": 0,
+    "SOURCES_REMOVED": 0,
+    "UNEXPLAINED_ADDITIONS": 0,
+    "UNEXPLAINED_DELTA": 0,
+    "UNEXPLAINED_MODIFICATIONS": 0,
+    "UNEXPLAINED_REMOVALS": 0
   },
   "unexplained_delta": []
 }

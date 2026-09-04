@@ -4,33 +4,36 @@
 
 > la campagne de revue 1NSI reste PENDING ; ce producteur ne mesure que l'etat courant et ne leve aucune attente
 
-## Cause
+État : `CURRENT`
 
-- commit : `16388110bb1bf1d0b3ec5dba29c5be081cb993e2`
-- sujet : [WEB-IHM] remove 99 synthetic filler copies and restore the true coverage
-- date : 2026-09-04
-- objets `.tex` supprimés sous `NSI/chapitres` : 99
+## Source set
+
+- déclaré (historique) : commit `3dae8002d0ab6bdb5cdab676ccd53a2b375a5b40`, 817 sources, `sha256:45d1ffcf341024851a821d018f84f83b195bece989ec3ff20c55046d22b540c1`
+- observé (courant) : 817 sources, `sha256:45d1ffcf341024851a821d018f84f83b195bece989ec3ff20c55046d22b540c1`
+- ajoutés : 0 ; retirés : 0 ; modifiés : 0 ; inchangés : 817
+
+## Commits de cause
+
+- aucun depuis le dernier état observé ; dernière mutation du périmètre : `2d522877b67a2417602a40e33b7f3bd1f0c620ab` ([1NSI] retirer 44 cours qui dupliquaient ou usurpaient un autre objet)
 
 ## Métriques
 
 | Métrique | Valeur |
 |---|---:|
 | `REGISTERS` | 2 |
-| `FIELDS_REOBSERVED` | 9 |
+| `FIELDS_REOBSERVED` | 0 |
 | `SEALED_FIELDS_MUTATED` | 0 |
+| `CAUSE_COMMITS` | 0 |
+| `SOURCES_ADDED` | 0 |
+| `SOURCES_REMOVED` | 0 |
+| `SOURCES_MODIFIED` | 0 |
+| `UNEXPLAINED_ADDITIONS` | 0 |
+| `UNEXPLAINED_REMOVALS` | 0 |
+| `UNEXPLAINED_MODIFICATIONS` | 0 |
 | `UNEXPLAINED_DELTA` | 0 |
-| `DELETED_TEX_FILES_IN_CAUSE_COMMIT` | 99 |
+| `HUMAN_RECEIPTS_AFFECTED` | 0 |
 
 ## Champs ré-observés
 
 | Registre | Champ | Déclaré | Observé |
 |---|---|---|---|
-| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.sources_count` | `812` | `713` |
-| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.sources_ids_digest` | `sha256:54ae22ca8b41bf69913f6e71a902eaabb89dc59871c340d65f3fd49c976559d5` | `sha256:d9d796a784218d294220acaeec5dc79cc88ea1f94e45f5a32b75383c97638278` |
-| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.object_sources_count` | `802` | `703` |
-| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.ids_only_in_sources_count` | `482` | `383` |
-| `1NSI_CONTENT_REVIEW_CAMPAIGN_STATE` | `observed.ids_only_in_sources_digest` | `sha256:2a5535511729431a1c26f2be83c32d5f4f573fb46d2c5bdc91e8ee97d5e3fae6` | `sha256:de7bcd718ba2fc81c9b553f64dbaaca87db1fbdab4dfda515ca84aef873ecee1` |
-| `1NSI_STATUS_GOVERNANCE_PENDING` | `observed_counts` | `dict[4]` | `dict[4]` |
-| `1NSI_STATUS_GOVERNANCE_PENDING` | `objects_total` | `802` | `703` |
-| `1NSI_STATUS_GOVERNANCE_PENDING` | `prohibited_status_objects_count` | `436` | `337` |
-| `1NSI_STATUS_GOVERNANCE_PENDING` | `prohibited_status_objects_digest` | `sha256:beb221c231d553b3499309e3ce9094b89f909d3123d1e34924332a080a620b68` | `sha256:145b1cffa70522f6bb801b0b38f6de7eaee15ac976e26da24fd3714c12a26dba` |
