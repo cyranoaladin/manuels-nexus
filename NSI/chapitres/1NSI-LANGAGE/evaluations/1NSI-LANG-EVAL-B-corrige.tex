@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-LANG-EVAL-B-corrige", "chapitre": "1NSI-LANGAGE", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-LANG-EVAL-B", "capacites": ["P-LANG-01", "P-LANG-03B", "P-LANG-04", "P-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% META: {"id": "1NSI-LANG-EVAL-B-corrige", "chapitre": "1NSI-LANGAGE", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-LANG-EVAL-B", "capacites": ["P-LANG-01", "P-LANG-02", "P-LANG-03A", "P-LANG-03B", "P-LANG-03C", "P-LANG-04", "P-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % def moyenne_ponderee(valeurs, poids):
 %     assert len(valeurs) == len(poids)
@@ -55,3 +55,31 @@ def produit_negatifs(liste):
 
 \textbf{3.} \lstinline{import math} puis \lstinline{math.gcd(60, 48)}, qui renvoie $12$.
 \end{corrige}
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{D'un langage à l'autre, et le contrat d'une fonction} \hfill (10 points)
+
+\begin{enumerate}
+  \item (3 pts) \textbf{Noyau commun} : l'affectation \lstinline{n = 0}, la boucle bornée, la
+        conditionnelle, l'appel de fonction et le renvoi d'une valeur.
+        \textbf{Propre à ce langage} : \lstinline{function}, les déclarations \lstinline{let},
+        les accolades, les points-virgules et l'opérateur \lstinline{===}.
+  \item (3 pts)
+        \begin{python}
+def compte(t, x):
+    n = 0
+    for v in t:
+        if v == x:
+            n = n + 1
+    return n
+        \end{python}
+        Sur \lstinline{[3, 7, 3, 3, 9]} et \lstinline{x = 3}, elle renvoie \lstinline{3}.
+  \item (2 pts) \lstinline{compte(t, x)} prend un tableau et une valeur, et renvoie un entier :
+        le nombre d'occurrences de \lstinline{x} dans \lstinline{t}. Rien sur le parcours.
+  \item (2 pts) Postcondition : « le résultat est un entier compris entre $0$ et
+        $\operatorname{len}(t)$, égal au nombre d'éléments de \lstinline{t} égaux à
+        \lstinline{x} ». On peut ajouter que \lstinline{t} n'est pas modifié.
+        « les éléments doivent être comparables à \lstinline{x} » porte sur ce que l'appelant
+        fournit : c'est une \textbf{pré}condition.
+\end{enumerate}

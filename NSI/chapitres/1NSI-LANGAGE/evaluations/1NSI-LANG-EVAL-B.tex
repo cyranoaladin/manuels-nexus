@@ -1,8 +1,8 @@
-% META: {"id": "1NSI-LANG-EVAL-B", "chapitre": "1NSI-LANGAGE", "type_objet": "evaluation", "capacites": ["P-LANG-01", "P-LANG-03B", "P-LANG-04", "P-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "verified"}
+% META: {"id": "1NSI-LANG-EVAL-B", "chapitre": "1NSI-LANGAGE", "type_objet": "evaluation", "capacites": ["P-LANG-01", "P-LANG-02", "P-LANG-03A", "P-LANG-03B", "P-LANG-03C", "P-LANG-04", "P-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 60, "status": "verified"}
 \section*{Évaluation B --- Langages et programmation}
 \textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
 
-\baremeIndicatif{Ex. 1 : 10 pts (constructions, spécification) ; Ex. 2 : 10 pts (mise au point, bibliothèque)}
+\baremeIndicatif{Ex. 1 : 10 pts (constructions, spécification) ; Ex. 2 : 10 pts (mise au point, bibliothèque) ; Ex. 3 : 10 pts (traits communs et particuliers, prototype, postcondition)}
 
 \bigskip
 
@@ -63,4 +63,47 @@ def produit_negatifs_bugue(liste):
 % assert produit_negatifs([-2, -3, -4]) == -24
 % import math
 % assert math.gcd(60, 48) == 12
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{D'un langage à l'autre, et le contrat d'une fonction} \hfill (10 points)
+
+On donne cet extrait, écrit dans un langage à accolades :
+
+\begin{console}
+function compte(t, x) {
+    let n = 0;
+    for (let i = 0; i < t.length; i = i + 1) {
+        if (t[i] === x) { n = n + 1; }
+    }
+    return n;
+}
+\end{console}
+
+\begin{enumerate}
+  \item (3 pts) Citer trois éléments du \textbf{noyau commun} présents dans cet extrait, et
+        trois éléments \textbf{propres} à ce langage.
+  \item (3 pts) Réécrire cette fonction en Python, sans changer son comportement.
+  \item (2 pts) Écrire le \textbf{prototype} de cette fonction : nom, paramètres, valeur
+        renvoyée. Ne rien dire de la manière dont elle procède.
+  \item (2 pts) Énoncer une \textbf{postcondition} portant sur le résultat, puis expliquer
+        pourquoi « les éléments de \lstinline{t} doivent être comparables à \lstinline{x} »
+        n'en est pas une.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def compte(t, x):
+%     n = 0
+%     for v in t:
+%         if v == x:
+%             n = n + 1
+%     return n
+% t = [3, 7, 3, 3, 9]
+% r = compte(t, 3)
+% assert r == 3
+% assert 0 <= r <= len(t)
+% assert compte(t, 42) == 0
+% assert compte([], 1) == 0
+% assert t == [3, 7, 3, 3, 9]
 % END-VERIFY

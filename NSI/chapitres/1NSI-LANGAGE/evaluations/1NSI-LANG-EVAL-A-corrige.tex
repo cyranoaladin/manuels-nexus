@@ -1,4 +1,4 @@
-% META: {"id": "1NSI-LANG-EVAL-A-corrige", "chapitre": "1NSI-LANGAGE", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-LANG-EVAL-A", "capacites": ["P-LANG-01", "P-LANG-03B", "P-LANG-04", "P-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+% META: {"id": "1NSI-LANG-EVAL-A-corrige", "chapitre": "1NSI-LANGAGE", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-LANG-EVAL-A", "capacites": ["P-LANG-01", "P-LANG-02", "P-LANG-03A", "P-LANG-03B", "P-LANG-03C", "P-LANG-04", "P-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
 % BEGIN-VERIFY
 % def moyenne_ponderee(valeurs, poids):
 %     assert len(valeurs) == len(poids)
@@ -54,3 +54,32 @@ def somme_positifs(liste):
 
 \textbf{3.} \lstinline{import math} puis \lstinline{math.gcd(84, 30)}, qui renvoie $6$.
 \end{corrige}
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{D'un langage à l'autre, et le contrat d'une fonction} \hfill (10 points)
+
+\begin{enumerate}
+  \item (3 pts) \textbf{Noyau commun} : l'affectation \lstinline{m = 0}, la boucle bornée sur
+        les indices, la conditionnelle, l'appel de fonction et le renvoi d'une valeur.
+        \textbf{Propre à ce langage} : le mot-clé \lstinline{function}, les déclarations
+        \lstinline{let}, les accolades et les points-virgules.
+  \item (3 pts)
+        \begin{python}
+def indice_max(t):
+    m = 0
+    for i in range(len(t)):
+        if t[i] > t[m]:
+            m = i
+    return m
+        \end{python}
+        Sur \lstinline{[4, 11, 2, 11]} elle renvoie \lstinline{1} : en cas d'égalité, c'est le
+        premier indice atteint qui est conservé, car la comparaison est stricte.
+  \item (2 pts) \lstinline{indice_max(t)} prend un tableau de nombres et renvoie un entier :
+        l'indice d'un plus grand élément. Rien sur la boucle ni sur le parcours.
+  \item (2 pts) Postcondition : « le résultat est un indice valide, et aucun élément du tableau
+        n'est strictement supérieur à \lstinline{t[resultat]} ». On peut ajouter que
+        \lstinline{t} n'est pas modifié.
+        « le tableau doit être non vide » contraint ce que l'appelant fournit : c'est une
+        \textbf{pré}condition, à sa charge, et non une garantie de la fonction.
+\end{enumerate}
