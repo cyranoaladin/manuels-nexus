@@ -101,6 +101,53 @@ def test_no_expected_swallows_a_latex_comment(payload: dict[str, Any]) -> None:
 
 
 # ---------------------------------------------------------------------------
+#  Le `%` : marqueur de commentaire ou signe pour cent
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "answer,expected_absent,expected_present",
+    [
+        # Le défaut trouvé : un séparateur posé en FIN de ligne, après la
+        # formule. Le filtre « ligne commençant par % » le laissait passer.
+        (
+            "$x = 3$. %===========================",
+            "%=====",
+            "$x = 3$",
+        ),
+        # Le même, sur sa propre ligne.
+        ("%-----------------\n$x = 3$.", "-----", "$x = 3$"),
+        # Et l'inverse : un `\%` échappé est un SIGNE POUR CENT, pas un
+        # commentaire. Le refuser mutilerait « 0,06 % ».
+        ("L'erreur vaut $0{,}06\\,\\%$.", None, "\\%"),
+        # Un `%` en fin de ligne coupe bien la suite, pas ce qui précède.
+        ("$a = 1$ % un commentaire\n$b = 2$.", "commentaire", "$a = 1$"),
+    ],
+)
+def test_the_percent_sign_is_read_as_latex_reads_it(
+    answer: str, expected_absent: str | None, expected_present: str
+) -> None:
+    """Un commentaire s'ouvre à un `%` NON échappé, n'importe où dans la ligne."""
+
+    cleaned = gate._strip_comments(answer)
+
+    if expected_absent is not None:
+        assert expected_absent not in cleaned, cleaned
+    assert expected_present in cleaned, cleaned
+
+
+def test_the_mathematics_is_never_altered_to_please_the_parser() -> None:
+    """Le contenu mathématique traverse le nettoyage sans une égratignure."""
+
+    formula = "$\\dfrac{5\\pi}{6} = \\pi - \\dfrac{\\pi}{6}$"
+    cleaned = gate._strip_comments(f"{formula} %séparateur")
+
+    assert cleaned == formula
+    assert "\\pi" in cleaned
+    assert "( )/(" not in cleaned
+
+
+# ---------------------------------------------------------------------------
 #  Le crédit partiel n'apparaît que sur une décomposition réelle
 # ---------------------------------------------------------------------------
 
