@@ -1,0 +1,18 @@
+% META: {"id": "1NSI-TYPES-BASE-RE-C5-CORRIGE", "chapitre": "1NSI-TYPES-BASE", "type_objet": "corrige", "exercice_ref": "1NSI-TYPES-BASE-RE-C5", "capacites": ["P-BASE-05"], "capacites_codes": ["C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-TYPES-BASE-RE-C5}
+\begin{enumerate}
+  \item \lstinline{"Note: 12/20"} : les \textbf{trois} conviennent, aucun caractère ne sort
+        d'ASCII.
+        \lstinline{"Élève"} : ISO-8859-1 et UTF-8 ; ASCII ne peut pas, à cause du
+        \lstinline{É} et du \lstinline{è}.
+        la chaîne au symbole euro : \textbf{UTF-8 seulement}. ISO-8859-1 ne contient pas ce
+        symbole, apparu après sa définition.
+  \item \lstinline{"Note: 12/20"} : $11$ caractères, $11$ octets — un octet chacun.
+        \lstinline{"Élève"} : $5$ caractères, $7$ octets, car \lstinline{É} et \lstinline{è}
+        en occupent deux chacun.
+        la chaîne au symbole euro : $9$ caractères, $11$ octets, ce symbole en occupant trois.
+  \item Le \lstinline{É} appartient à l'alphabet latin d'Europe occidentale : ISO-8859-1 le
+        contient. Le symbole euro n'y figure pas. La différence ne tient donc pas au nombre
+        d'octets en UTF-8, mais à ce que chaque encodage a prévu de représenter.
+\end{enumerate}
+\end{corrige}

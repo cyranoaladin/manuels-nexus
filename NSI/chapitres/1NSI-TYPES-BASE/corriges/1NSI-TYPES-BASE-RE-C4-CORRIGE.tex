@@ -1,0 +1,18 @@
+% META: {"id": "1NSI-TYPES-BASE-RE-C4-CORRIGE", "chapitre": "1NSI-TYPES-BASE", "type_objet": "corrige", "exercice_ref": "1NSI-TYPES-BASE-RE-C4", "capacites": ["P-BASE-04"], "capacites_codes": ["C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-TYPES-BASE-RE-C4}
+\begin{enumerate}
+  \item Deux variables, donc $2^2 = \mathbf{4}$ lignes.
+  \item
+        \begin{itemize}
+          \item $a$ faux, $b$ faux : $a \text{ and } b$ faux, $\text{not } a$ vrai
+                $\rightarrow$ \textbf{vrai} ;
+          \item $a$ faux, $b$ vrai : faux, vrai $\rightarrow$ \textbf{vrai} ;
+          \item $a$ vrai, $b$ faux : $a \text{ and } b$ \textbf{faux} — c'est ici que la règle
+                du \lstinline{or} induirait en erreur — et $\text{not } a$ faux
+                $\rightarrow$ \textbf{faux} ;
+          \item $a$ vrai, $b$ vrai : vrai, faux $\rightarrow$ \textbf{vrai}.
+        \end{itemize}
+  \item \textbf{Trois} lignes sur quatre. L'expression est fausse dans le seul cas où $a$ est
+        vrai et $b$ faux : autrement dit, elle est vraie sauf si $a$ vaut vrai sans $b$.
+\end{enumerate}
+\end{corrige}

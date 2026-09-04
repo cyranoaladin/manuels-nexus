@@ -1,0 +1,32 @@
+% META: {"id": "1NSI-TYPES-BASE-RE-C1", "chapitre": "1NSI-TYPES-BASE", "type_objet": "remediation", "capacites": ["P-BASE-01"], "capacites_codes": ["C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : chaque bit a son poids, meme le zero
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu additionnes les poids de mémoire, et tu en sautes un. Lire
+$1010_2$ comme $8+2$ est juste ; le lire comme $8+4$ ne l'est pas, car le troisième bit vaut
+$0$. Chaque position a un poids fixe, qu'elle porte un $1$ ou un $0$.
+
+\textbf{À retenir.} Écris toujours les poids \emph{au-dessus} des bits avant d'additionner :
+$8\ 4\ 2\ 1$ au-dessus de $1\ 0\ 1\ 0$. Puis n'additionne que les colonnes marquées $1$.
+
+\begin{exercice}{1NSI-TB-RE-C1-EX1}{1}{10}
+\begin{enumerate}
+  \item Écrire les poids au-dessus de chaque bit, puis convertir en décimal :
+        $1101_2$, $10010_2$, $100001_2$.
+  \item Convertir $45$ en base $2$ par soustractions successives, en détaillant.
+  \item Vérifier chaque réponse en réadditionnant les poids marqués $1$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert int('1101', 2) == 13
+% assert int('10010', 2) == 18
+% assert int('100001', 2) == 33
+% assert 8 + 4 + 1 == 13
+% assert 16 + 2 == 18
+% assert 32 + 1 == 33
+% assert bin(45) == '0b101101'
+% assert 32 + 8 + 4 + 1 == 45
+% END-VERIFY

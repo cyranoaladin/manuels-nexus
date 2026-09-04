@@ -1,0 +1,37 @@
+% META: {"id": "1NSI-TYPES-BASE-RE-C4", "chapitre": "1NSI-TYPES-BASE", "type_objet": "remediation", "capacites": ["P-BASE-04"], "capacites_codes": ["C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C4 : le « and » exige les DEUX
+%---------------------------------------------------------------
+
+\textbf{Ce qui bloque.} Tu appliques la règle du \lstinline{or} au \lstinline{and}. Avec
+\lstinline{or}, un seul opérande vrai suffit. Avec \lstinline{and}, il les faut
+\textbf{tous les deux} : une seule condition remplie ne donne pas un résultat vrai.
+
+\textbf{À retenir.} Sur $n$ variables, la table a $2^n$ lignes — trois variables, huit lignes.
+Et un opérateur logique renvoie toujours un booléen, jamais \lstinline{None} :
+\lstinline{None} est l'absence de valeur, pas une valeur de vérité.
+
+\begin{exercice}{1NSI-TB-RE-C4-EX1}{1}{10}
+On considère l'expression $(a \text{ and } b) \text{ or } (\text{not } a)$.
+\begin{enumerate}
+  \item Combien de lignes compte sa table de vérité ? Justifier avant de la dresser.
+  \item Dresser la table complète, avec une colonne par sous-expression.
+  \item Combien de lignes rendent l'expression vraie ? Décrire ces cas en une phrase française.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% lignes = []
+% for a in (False, True):
+%     for b in (False, True):
+%         lignes.append((a, b, (a and b) or (not a)))
+% assert len(lignes) == 4
+% assert sum(1 for *_, r in lignes if r) == 3
+% assert (False, False, True) in lignes
+% assert (False, True, True) in lignes
+% assert (True, False, False) in lignes
+% assert (True, True, True) in lignes
+% assert (True and False) is False
+% assert (True or False) is True
+% END-VERIFY
