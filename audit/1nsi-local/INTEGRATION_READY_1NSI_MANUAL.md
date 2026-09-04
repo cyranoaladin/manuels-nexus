@@ -130,7 +130,12 @@ attribué INT-007). Aucun xfail, skip ou exclusion ajouté.
 **Code.** `verify_python --check` sur les dix chapitres : 366 OK, 56 REVIEW
 (objets sans code), 0 FAIL.
 
-**Rendu.** Source `987edb6e`. PDF dérivés locaux, non suivis, non preuve D7.
+**Rendu.** Source `987edb6e`. Les deux PDF ont été reconstruits localement
+puis **remis à leur état committé** : les fichiers suivis
+`NSI/build/MANUEL_1NSI/*.pdf` ne sont pas réécrits par cette branche (ils
+doivent être régénérés à l'intégration, jamais cherry-pickés comme
+attestation). Les mesures ci-dessous sont celles de la construction observée
+sur `987edb6e` ; elles ne constituent pas une preuve D7.
 
 | Variante | Pages | SHA-256 | Erreurs | Overfull | Underfull | Glyphes manquants |
 |---|---|---|---|---|---|---|
