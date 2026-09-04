@@ -1,0 +1,32 @@
+% META: {"id": "1NSI-ARCHOS-ME-002", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "methode", "capacites": ["P-ARCH-03A"], "capacites_codes": ["C3"], "methodes": ["M2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M2}{Attribuer une observation à la bonne fonction du système}
+
+\textbf{Quand l'utiliser ?} Quand une situation concrète est décrite — plusieurs programmes
+ouverts, un fichier enregistré, une imprimante partagée — et qu'il faut dire quelle fonction du
+système d'exploitation est en jeu.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Nomme la ressource} dont il est question : le processeur, la mémoire, un
+        fichier, un périphérique. C'est elle qui désigne la fonction.
+  \item \textbf{Associe la ressource à sa fonction} : le processeur relève de
+        l'\textbf{ordonnancement}, la mémoire de son \textbf{allocation}, les fichiers du
+        \textbf{système de fichiers}, les périphériques des \textbf{pilotes}, et les
+        utilisateurs de la \textbf{gestion des droits}.
+  \item \textbf{Retiens ce que le système fait} : il \emph{organise} et \emph{arbitre} l'accès
+        aux ressources. Il ne les remplace pas, et il ne les bloque pas — bloquer serait
+        l'exact contraire de sa fonction.
+  \item \textbf{Distingue le matériel du logiciel.} Le système répartit le temps du processeur ;
+        il n'accélère pas le processeur.
+\end{enumerate}
+
+\textbf{Exemple rédigé.} On ouvre un navigateur, un éditeur et un lecteur de musique. Sur un
+seul cœur, le processeur n'exécute qu'une instruction à la fois : c'est l'\textbf{ordonnanceur}
+qui alterne très rapidement entre les programmes. L'illusion de simultanéité vient de cette
+alternance, pas d'une exécution réellement parallèle.
+
+\textbf{Erreur fréquente.} Croire que le système « bloque » les programmes concurrents, ou
+qu'un logiciel peut se substituer au matériel. Le système organise l'accès au processeur ; il
+ne le rend pas plus rapide.
+
+\end{fichemethode}

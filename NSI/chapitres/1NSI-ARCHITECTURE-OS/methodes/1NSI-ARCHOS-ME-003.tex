@@ -1,0 +1,33 @@
+% META: {"id": "1NSI-ARCHOS-ME-003", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "methode", "capacites": ["P-ARCH-03B"], "capacites_codes": ["C4"], "methodes": ["M3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M3}{Se repérer et agir en ligne de commande}
+
+\textbf{Quand l'utiliser ?} Devant une suite de commandes à interpréter, ou pour écrire celles
+qui réalisent une tâche décrite en français.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Demande-toi toujours où tu es.} La plupart des commandes agissent sur le
+        \emph{répertoire courant}. \lstinline{pwd} l'affiche : c'est la première chose à faire
+        quand on est perdu.
+  \item \textbf{Distingue lire, se déplacer et créer}, car ces trois verbes ne se confondent
+        pas :
+        \begin{itemize}
+          \item \lstinline{ls} \emph{lit} le contenu du répertoire courant ;
+          \item \lstinline{cd} \emph{se déplace} — elle n'affiche rien ;
+          \item \lstinline{mkdir} \emph{crée} un répertoire — elle ne lit pas celui qui existe.
+        \end{itemize}
+  \item \textbf{Lis les chemins.} Un chemin commençant par \lstinline{/} part de la racine ;
+        sinon il part du répertoire courant. \lstinline{..} désigne le répertoire parent.
+  \item \textbf{Enchaîne prudemment} : après un \lstinline{cd}, les commandes suivantes ne
+        parlent plus du même endroit.
+\end{enumerate}
+
+\textbf{Exemple rédigé.} Depuis \lstinline{/home/eleve}, la suite
+\lstinline{mkdir travaux}, puis \lstinline{cd travaux}, puis \lstinline{ls}
+crée un répertoire, s'y déplace, et affiche son contenu — vide. Un élève qui attend un
+affichage après \lstinline{cd} se trompe de verbe : \lstinline{cd} déplace en silence.
+
+\textbf{Erreur fréquente.} Employer \lstinline{cd} en croyant afficher, ou \lstinline{mkdir}
+en croyant lire. Chaque commande fait une chose, et une seule.
+
+\end{fichemethode}
