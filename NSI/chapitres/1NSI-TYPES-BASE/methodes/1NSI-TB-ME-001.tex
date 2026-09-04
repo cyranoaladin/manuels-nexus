@@ -1,0 +1,54 @@
+% META: {"id": "1NSI-TB-ME-001", "chapitre": "1NSI-TYPES-BASE", "type_objet": "methode", "capacites": ["P-BASE-01", "P-BASE-02"], "capacites_codes": ["C1", "C2"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% assert bin(156) == '0b10011100'
+% assert hex(156) == '0x9c'
+% assert 128 + 16 + 8 + 4 == 156
+% assert int('10011100', 2) == 156
+% assert int('9c', 16) == 156
+% assert 0b1010 == 10
+% n = 300
+% bits = 0
+% while 2 ** bits <= n:
+%     bits = bits + 1
+% assert bits == 9
+% assert 2 ** 8 <= 300 < 2 ** 9
+% assert len(bin(300)) - 2 == 9
+% END-VERIFY
+\begin{fichemethode}{M1}{Convertir entre bases, et compter les bits nécessaires}
+
+\textbf{Quand l'utiliser ?} Pour passer de l'écriture décimale au binaire ou à
+l'hexadécimal, et pour répondre à « combien de bits faut-il ? ».
+
+\textbf{Pas à pas — conversion vers le binaire :}
+\begin{enumerate}
+  \item \textbf{Écris les puissances de deux} décroissantes tant qu'elles ne dépassent pas le
+        nombre : $128, 64, 32, 16, 8, 4, 2, 1$.
+  \item \textbf{Soustrais de gauche à droite} : si la puissance tient, écris $1$ et soustrais ;
+        sinon écris $0$ et passe à la suivante.
+  \item \textbf{Relis le résultat} en additionnant les poids marqués $1$. Tu dois retomber sur
+        le nombre de départ. C'est la seule vérification qui compte.
+  \item \textbf{Pour l'hexadécimal}, regroupe les bits par \textbf{quatre} en partant de la
+        droite : chaque groupe donne un chiffre hexadécimal.
+\end{enumerate}
+
+\textbf{Pas à pas — nombre de bits :}
+\begin{enumerate}
+  \item Cherche le plus petit $n$ tel que $2^n$ \textbf{dépasse strictement} le nombre.
+  \item Ce $n$ est le nombre de bits nécessaires.
+  \item Ne confonds pas les deux questions : sur $n$ bits on écrit $2^n$ valeurs
+        \emph{différentes}, de $0$ à $2^n - 1$. Le nombre de bits et le nombre de combinaisons
+        ne sont pas la même grandeur.
+\end{enumerate}
+
+\textbf{Exemple rédigé.} Convertissons $156$.
+$128$ tient, reste $28$. $64$ ne tient pas, $32$ non plus. $16$ tient, reste $12$.
+$8$ tient, reste $4$. $4$ tient, reste $0$. Puis $2$ et $1$ ne tiennent pas.
+On obtient $10011100_2$. Vérification : $128+16+8+4 = 156$.
+Par groupes de quatre, $1001\,1100$ donne $9$ et $12$, soit $\mathtt{9C}_{16}$.
+
+Pour $300$ : $2^8 = 256 \leq 300 < 512 = 2^9$, il faut donc \textbf{9 bits}.
+
+\textbf{Erreur fréquente.} Oublier un bit de poids intermédiaire en lisant $1010_2$ comme
+$8+2$ trop vite, ou annoncer $2^9$ quand la question porte sur le nombre de bits.
+
+\end{fichemethode}
