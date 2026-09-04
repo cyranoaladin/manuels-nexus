@@ -1,0 +1,47 @@
+% META: {"id": "1NSI-LANG-ME-004", "chapitre": "1NSI-LANGAGE", "type_objet": "methode", "capacites": ["P-LANG-05"], "capacites_codes": ["C5"], "methodes": ["M4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% from math import sqrt, floor
+% assert sqrt(16) == 4.0
+% assert floor(3.7) == 3
+% assert floor(-3.2) == -4
+% from random import randint, seed
+% seed(1)
+% tirage = [randint(1, 6) for _ in range(200)]
+% assert all(1 <= v <= 6 for v in tirage)
+% assert min(tirage) >= 1 and max(tirage) <= 6
+% END-VERIFY
+\begin{fichemethode}{M4}{Employer une fonction de bibliothèque à partir de sa documentation}
+
+\textbf{Quand l'utiliser ?} Dès qu'un énoncé mentionne une bibliothèque, ou qu'une tâche
+courante (racine carrée, tirage aléatoire, tri) est déjà résolue ailleurs.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Cherche la fonction par ce qu'elle fait}, pas par son nom supposé. Un nom
+        suggère une intention ; il n'annonce ni le type des arguments, ni les cas d'erreur,
+        ni ce qui est renvoyé.
+  \item \textbf{Lis quatre choses dans la documentation}, dans cet ordre : les
+        \textbf{paramètres} attendus, la \textbf{valeur de retour}, les \textbf{conditions
+        d'emploi} (valeurs interdites), et un \textbf{exemple}.
+  \item \textbf{Importe précisément} ce dont tu as besoin : \lstinline{from math import sqrt}.
+        L'import rend la fonction disponible sans la recopier.
+  \item \textbf{Vérifie ton hypothèse par un essai borné}, sur une valeur dont tu connais le
+        résultat. C'est le moyen le plus rapide de confirmer que tu as bien lu.
+\end{enumerate}
+
+\textbf{Exemple rédigé.} La documentation de \lstinline{math.floor} annonce : prend un réel,
+renvoie le plus grand entier inférieur ou égal. On vérifie sur deux valeurs choisies :
+
+\begin{python}
+from math import floor
+floor(3.7)    # 3
+floor(-3.2)   # -4, et non -3
+\end{python}
+
+Le cas négatif est celui qui distingue \lstinline{floor} d'une troncature. Un seul essai bien
+choisi tranche la question.
+
+\textbf{Erreur fréquente.} Recopier le code de la bibliothèque dans son programme. On se prive
+alors de toute correction ultérieure et l'on alourdit le fichier, alors qu'un import suffit.
+
+\end{fichemethode}

@@ -1,0 +1,50 @@
+% META: {"id": "1NSI-LANG-ME-001", "chapitre": "1NSI-LANGAGE", "type_objet": "methode", "capacites": ["P-LANG-01", "P-LANG-02"], "capacites_codes": ["C1", "C2"], "methodes": ["M1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M1}{Reconnaître les constructions élémentaires dans un langage inconnu}
+
+\textbf{Quand l'utiliser ?} Devant un extrait écrit dans un langage que tu n'as jamais
+pratiqué, quand l'énoncé demande ce que fait le programme, ou de distinguer ce qui est
+\emph{commun} à tous les langages de ce qui est \emph{propre} à celui-ci.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Cherche les cinq constructions}, elles sont présentes partout :
+        la \textbf{séquence} (des instructions les unes après les autres),
+        l'\textbf{affectation} (donner une valeur à une variable),
+        la \textbf{conditionnelle} (exécuter selon un test),
+        la \textbf{boucle} (répéter),
+        l'\textbf{appel de fonction}.
+  \item \textbf{Repère la boucle par sa nature, pas par son mot-clé.} Une boucle
+        \textbf{bornée} connaît d'avance son nombre de tours ; une boucle
+        \textbf{non bornée} s'arrête quand une condition devient fausse. « Non bornée »
+        ne veut pas dire « infinie » : la condition décide de chaque tour.
+  \item \textbf{Sépare le noyau de l'habillage.} Ce qui change d'un langage à l'autre :
+        les accolades ou l'indentation, les points-virgules, la déclaration ou non des types,
+        le nom des fonctions de la bibliothèque. Ce qui ne change pas : les cinq constructions.
+  \item \textbf{Traduis mentalement, construction par construction}, sans chercher à traduire
+        mot à mot.
+\end{enumerate}
+
+\textbf{Exemple.} Un extrait dans un langage à accolades :
+\begin{console}
+int somme = 0;
+for (int i = 1; i <= 5; i = i + 1) {
+    somme = somme + i;
+}
+\end{console}
+
+On y lit : une affectation initiale, une boucle \textbf{bornée} (cinq tours connus d'avance),
+une affectation dans le corps. En Python, la même chose s'écrit :
+
+\begin{python}
+somme = 0
+for i in range(1, 6):
+    somme = somme + i
+\end{python}
+
+Propre à ce langage : les accolades, les points-virgules, la déclaration \lstinline{int}.
+Commun : la séquence, l'affectation, la boucle bornée.
+
+\textbf{Erreur fréquente.} Conclure que les langages sont interchangeables parce que le noyau
+est commun. Le noyau l'est ; l'écriture, le typage et les bibliothèques, non.
+
+\end{fichemethode}
