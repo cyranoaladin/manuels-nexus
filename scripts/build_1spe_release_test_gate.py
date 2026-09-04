@@ -498,6 +498,10 @@ def build(global_capture: Path | None, gate_capture: Path | None) -> dict[str, A
         payload["summary"]["1SPE_RELEASE_TEST_GATE"] = (
             "PASS" if not failures else "FAIL"
         )
+        # Un registre de blocage lit des COMPTES : « PASS » est une chaîne, donc
+        # vrai, donc un bloqueur ouvert. Le nombre d'échecs du périmètre est la
+        # même information, sous la forme qu'une métrique bloquante attend.
+        payload["summary"]["GATE_FAILURES"] = len(failures)
     return payload
 
 

@@ -125,8 +125,12 @@ DERIVED_SOURCES: tuple[dict[str, Any], ...] = (
         "closes_with": "MACHINE",
     },
     {
+        # `FAILURES_TOUCHING_1SPE` n'existe qu'avec une capture GLOBALE ; le
+        # verdict du périmètre, lui, est produit par la capture du périmètre.
+        # C'est celui-là que ce bloqueur nomme, et il se lit en nombre d'échecs
+        # -- « PASS » est une chaîne, donc vraie, donc ouverte.
         "artifact": "audit/1SPE_RELEASE_TEST_GATE.json",
-        "metric": "FAILURES_TOUCHING_1SPE",
+        "metric": "GATE_FAILURES",
         "blocker_id": "RELEASE_TEST_GATE_RED",
         "scope": "1SPE_RELEASE_BLOCKER",
         "surface": "1SPE_MACHINE_PROOF",
@@ -240,6 +244,27 @@ def _check_receipt_is_stale() -> dict[str, Any]:
         return {"verifiable": False, "reason": "recu absent"}
     declared = receipt.get("source_sha")
     current = head_sha()
+    # Le reçu est désormais DÉRIVÉ, et il porte son propre verdict de fraîcheur.
+    # Comparer les SHA de commit dirait toujours périmé : le reçu se génère à un
+    # commit, puis le HEAD avance d'un commit rien qu'en le livrant. Ce qui
+    # atteste la fraîcheur est le condensat de SOURCES, que le reçu compare
+    # lui-même -- et c'est son verdict qui fait autorité ici.
+    own_verdict = (receipt.get("summary") or {}).get("RECEIPT_DESCRIBES_HEAD")
+    if own_verdict is not None:
+        summary = receipt["summary"]
+        return {
+            "verifiable": True,
+            "still_true": not own_verdict,
+            "evidence": {
+                "receipt_describes_current_sources": own_verdict,
+                "observed_source_digest": receipt.get("observed_source_digest"),
+                "current_source_digest": receipt.get("current_source_digest"),
+                "page_counts": summary.get("PAGE_COUNTS"),
+                "observed_variants": summary.get("OBSERVED_VARIANTS"),
+                "qa_metrics_not_zero": summary.get("QA_METRICS_NOT_ZERO"),
+                "status": receipt.get("status"),
+            },
+        }
     counts = {}
     variants = receipt.get("variants")
     if isinstance(variants, dict):

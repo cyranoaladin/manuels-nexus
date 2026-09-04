@@ -90,12 +90,12 @@
       "artifact": "audit/1SPE_RELEASE_TEST_GATE.json",
       "blocker_id": "RELEASE_TEST_GATE_RED",
       "closes_with": "MACHINE",
+      "evidence_path": "audit/1SPE_RELEASE_TEST_GATE.json",
       "meaning": "un test du perimetre de release 1SPE echoue",
-      "metric": "FAILURES_TOUCHING_1SPE",
-      "observed": null,
-      "reason": "metrique FAILURES_TOUCHING_1SPE absente de l'artefact",
+      "metric": "GATE_FAILURES",
+      "observed": 0,
       "scope": "1SPE_RELEASE_BLOCKER",
-      "state": "UNVERIFIABLE",
+      "state": "CLOSED",
       "surface": "1SPE_MACHINE_PROOF"
     },
     {
@@ -146,24 +146,20 @@
       "closes_with": "MACHINE",
       "discovered": "2026-09-03",
       "evidence": {
-        "closes_with": "REAL_HUMAN_DECISION_REQUIRED",
-        "head": "3eddce26b7d21837573f7ca484ae6ac1019ad49e",
-        "it_also_blocks_the_whole_derived_chain": "Ce n'est pas seulement le reçu. `inventory_collection.py` refuse de s'exécuter sur un manifeste dont le source_digest ne décrit plus les sources, et toute la chaîne qui en dépend refuse avec lui : l'inventaire de collection, la qualification de base, la liaison de contenu du manifeste. Vingt contrôles de la suite échouent aujourd'hui pour cette seule raison, tous sur le même message.",
-        "receipt_page_counts": {
+        "current_source_digest": "sha256:21f270bd89eda97f0dc7dde4f95dadff58c68e7fee609df1017026ea969f6678",
+        "observed_source_digest": "sha256:21f270bd89eda97f0dc7dde4f95dadff58c68e7fee609df1017026ea969f6678",
+        "observed_variants": 2,
+        "page_counts": {
           "eleve": 355,
           "professeur": 627
         },
-        "receipt_source_sha": "c4c648db6c71d917ce3bfa4b0eadbfd945f3522a",
-        "still_attested_builds": [
-          "1SPE/eleve : 355 pages",
-          "1SPE/professeur : 627 pages"
-        ],
-        "the_gesture_that_unblocks_it": "python3 scripts/build_manifest.py --invalidate-stale --reason '<pourquoi>' --approved-by '<nom>' puis python3 Mathematiques/manuel-maths/scripts/assemble_manuel.py --manual 1SPE --variant <variante> --record-observed",
-        "why_the_machine_cannot_close_it": "Le manifeste de build atteste encore des constructions que la décision humaine du 2026-09-03 déclare superseded, et son source_digest ne décrit plus les sources courantes. `build_manifest.py --invalidate-stale` exige une justification et un approbateur humains, refuse en CI et exige un dépôt propre : c'est une décision, pas un calcul."
+        "qa_metrics_not_zero": 0,
+        "receipt_describes_current_sources": true,
+        "status": "PRINT_CANDIDATE"
       },
       "meaning": "audit/1SPE_PRINT_CANDIDATE_BUILD_RECEIPT.json decrit un autre SHA que HEAD et annonce des compteurs de pages et un nombre de signets que les builds courants contredisent. Un recu perime qui se presente comme courant est pire qu'un recu absent.",
       "scope": "1SPE_RELEASE_BLOCKER",
-      "state": "OPEN",
+      "state": "RESOLVED",
       "surface": "1SPE_MACHINE_PROOF"
     },
     {
@@ -244,20 +240,19 @@
   "generated_by": "scripts/build_1spe_release_blocker_ledger.py",
   "schema_version": 1,
   "scope_rule": "n'entre au registre que ce qui peut affecter le contenu semantique, la preuve machine, la revue humaine, la fabrication, le rendu ou l'artefact d'impression du 1SPE ; le critere est l'usage, jamais le repertoire",
-  "source_sha": "3eddce26b7d21837573f7ca484ae6ac1019ad49e",
+  "source_sha": "c47de7f9a707960ab0c599e9f9b17d12b0788934",
   "summary": {
-    "CLOSED": 5,
+    "CLOSED": 6,
     "HUMAN_DECISION_PENDING": 3,
-    "OPEN_BLOCKERS": 4,
+    "OPEN_BLOCKERS": 3,
     "OPEN_BLOCKER_IDS": [
       "ASSESSMENT_BAREME_COMMENTARY_ABSENT",
       "ASSESSMENT_BAREME_HUMAN_DECISION",
-      "PRINT_CANDIDATE_RECEIPT_STALE",
       "TEACHER_MISSING_REQUIRED_CONTENT"
     ],
     "OTHER_MANUAL_SCOPE_DEBT": 0,
-    "RESOLVED": 5,
+    "RESOLVED": 6,
     "TRACKED": 15,
-    "UNVERIFIABLE": 1
+    "UNVERIFIABLE": 0
   }
 }
