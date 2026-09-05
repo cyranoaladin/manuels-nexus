@@ -57,9 +57,25 @@ JSON_TARGET = ROOT / "audit/1SPE_PRINTED_FIDELITY.json"
 MD_TARGET = ROOT / "audit/1SPE_PRINTED_FIDELITY.md"
 GENERATED_BY = "scripts/build_1spe_printed_fidelity.py"
 
-BUILD = MATH / "build/MANUEL_1SPE"
 CLASS = ROOT / "gabarits/common/nexus-manuel.cls"
 VARIANTS = ("eleve", "professeur")
+
+#: Les six manuels canoniques de la collection, avec le repertoire de build et
+#: la racine depuis laquelle leurs `\input` se resolvent. La liste n'est pas
+#: inventee : elle suit les assembleurs des deux disciplines.
+CANONICAL_MANUALS = {
+    "1SPE": (MATH / "build/MANUEL_1SPE", MATH),
+    "TSPE_2026_2027": (MATH / "build/MANUEL_TSPE_2026-2027", MATH),
+    "TCOMPL": (MATH / "build/MANUEL_TCOMPL", MATH),
+    "TEXPERTES": (MATH / "build/MANUEL_TEXPERTES", MATH),
+    "1NSI": (ROOT / "NSI/build/MANUEL_1NSI", ROOT / "NSI"),
+    "TNSI": (ROOT / "NSI/build/MANUEL_TNSI", ROOT / "NSI"),
+}
+
+#: Reglee par `--manual` ; le module garde son comportement 1SPE par defaut.
+BUILD = CANONICAL_MANUALS["1SPE"][0]
+SOURCE_ROOT = MATH
+MASTER_STEM = "MANUEL_1SPE"
 
 # Une commande doit etre employee au moins ainsi de fois pour que sa queue
 # compte comme un mot surveille : en dessous, une occurrence unique ferait du
@@ -179,7 +195,7 @@ def listing_font_size() -> float:
 
 
 def master_text(variant: str) -> str:
-    master = BUILD / f"MANUEL_1SPE_{variant}.tex"
+    master = BUILD / f"{MASTER_STEM}_{variant}.tex"
     if not master.is_file():
         raise FidelityError(f"maitre absent : {relative(master)}")
     return master.read_text(encoding="utf-8")
@@ -216,7 +232,7 @@ def master_inputs(variant: str) -> tuple[list[Path], list[str]]:
     resolved: list[Path] = []
     unresolved: list[str] = []
     for reference in INPUT.findall(master_text(variant)):
-        path = MATH / reference
+        path = SOURCE_ROOT / reference
         if path.suffix != ".tex":
             path = path.with_suffix(".tex")
         if path.is_file():
@@ -249,7 +265,7 @@ def published_code(variant: str) -> tuple[list[dict[str, Any]], list[str]]:
                 }
             )
         for match in INPUT_LISTING.finditer(text):
-            included = MATH / match.group(1)
+            included = SOURCE_ROOT / match.group(1)
             if not included.is_file():
                 unresolved.append(match.group(1))
                 continue
@@ -476,7 +492,7 @@ def diagnose(expected: str, corpus: str) -> dict[str, Any]:
 
 
 def compare(variant: str, literate: dict[str, str]) -> dict[str, Any]:
-    pdf = BUILD / f"MANUEL_1SPE_{variant}.pdf"
+    pdf = BUILD / f"{MASTER_STEM}_{variant}.pdf"
     if not pdf.is_file():
         raise FidelityError(f"PDF absent : {relative(pdf)}")
     blocks, unresolved = published_code(variant)
@@ -535,7 +551,8 @@ def build() -> dict[str, Any]:
     variants = [compare(variant, literate) for variant in VARIANTS]
     source_fragments = malformed_in_sources(command_tails())
     return {
-        "artifact_type": "1spe_printed_fidelity",
+        "artifact_type": "printed_fidelity",
+        "manual": MASTER_STEM,
         "schema_version": 1,
         "generated_by": GENERATED_BY,
         "why_geometry_could_not_see_this": (
@@ -685,9 +702,22 @@ def render_markdown(payload: dict[str, Any]) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
+    global BUILD, SOURCE_ROOT, MASTER_STEM, JSON_TARGET, MD_TARGET
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="ne rien ecrire")
+    parser.add_argument(
+        "--manual",
+        default="1SPE",
+        choices=sorted(CANONICAL_MANUALS),
+        help="manuel canonique a controler",
+    )
     arguments = parser.parse_args(argv)
+
+    BUILD, SOURCE_ROOT = CANONICAL_MANUALS[arguments.manual]
+    MASTER_STEM = BUILD.name
+    JSON_TARGET = ROOT / f"audit/{arguments.manual}_PRINTED_FIDELITY.json"
+    MD_TARGET = ROOT / f"audit/{arguments.manual}_PRINTED_FIDELITY.md"
 
     try:
         payload = build()
