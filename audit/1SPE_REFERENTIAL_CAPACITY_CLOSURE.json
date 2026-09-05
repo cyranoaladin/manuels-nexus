@@ -1,4 +1,5 @@
 {
+  "a_derived_entry_never_outlives_its_authority": "Une entree ecrite par ce producteur est reecrite des que le texte officiel dont elle derive change. Les entrees redigees a la main ne sont jamais ecrasees : elles ne portent pas la marque de ce producteur.",
   "applicable_nor": "MENE2602917A",
   "applicable_school_year": "2026-2027",
   "approves_nothing": true,
@@ -31,51 +32,31 @@
       "chapter": "1SPE-SUITES"
     }
   ],
-  "capacities_without_referential_entry": [
-    {
-      "capacity": "1SPE-VARIABLES-ALEATOIRES-C6",
-      "chapter": "1SPE-VARIABLES-ALEATOIRES"
-    },
-    {
-      "capacity": "1SPE-VARIABLES-ALEATOIRES-C7",
-      "chapter": "1SPE-VARIABLES-ALEATOIRES"
-    }
-  ],
+  "capacities_without_referential_entry": [],
   "finding": "P1_1SPE_VARALEA_REFERENTIAL_OMISSION",
   "generated_by": "scripts/build_1spe_referential_capacity_closure.py",
   "nothing_pedagogical_was_touched": "Aucune capacite n'est creee, aucune n'est supprimee, aucun contenu de chapitre n'est modifie. Les entrees ecrites portent le libelle eleve que le contrat declarait deja et le libelle BO que les atomes officiels ecrivent.",
-  "repaired": [
-    {
-      "capacity": "1SPE-VARIABLES-ALEATOIRES-C6",
-      "chapter": "1SPE-VARIABLES-ALEATOIRES",
-      "libelle_bo": "Le travail expérimental de simulation d’échantillons prolonge celui entrepris en seconde. L’objectif est de faire percevoir le principe de l’estimation de l’espérance d’une variable aléatoire, ou de la moyenne d’une variable statistique dans une population, par une moyenne observée sur un échantillon. Simuler une variable aléatoire avec Python ou un tableur. Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire.",
-      "official_atoms": [
-        "1SPE-OFFICIAL-175",
-        "1SPE-OFFICIAL-176",
-        "1SPE-OFFICIAL-177"
-      ],
-      "referential": "Mathematiques/manuel-maths/referentiel/capacites_1SPE_VARIABLES_ALEATOIRES.json"
-    },
+  "refreshed_from_authority": [
     {
       "capacity": "1SPE-VARIABLES-ALEATOIRES-C7",
       "chapter": "1SPE-VARIABLES-ALEATOIRES",
-      "libelle_bo": "Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n",
-      "official_atoms": [
-        "1SPE-OFFICIAL-178",
-        "1SPE-OFFICIAL-179"
-      ],
-      "referential": "Mathematiques/manuel-maths/referentiel/capacites_1SPE_VARIABLES_ALEATOIRES.json"
+      "now": "Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à 2𝜎/√n.",
+      "referential": "Mathematiques/manuel-maths/referentiel/capacites_1SPE_VARIABLES_ALEATOIRES.json",
+      "was": "Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n"
     }
   ],
+  "repaired": [],
   "schema_version": 1,
   "summary": {
     "ATOM_CREDITED_TO_A_FOREIGN_CAPACITY": 0,
     "ATOM_OUT_OF_APPLICABLE_YEAR": 0,
     "CAPACITIES_CLOSED": 47,
-    "CAPACITIES_REPAIRED": 2,
+    "CAPACITIES_REFRESHED_FROM_AUTHORITY": 1,
+    "CAPACITIES_REPAIRED": 0,
     "CAPACITY_WITHOUT_DIRECT_ATOM_CREDIT": 6,
     "CAPACITY_WITHOUT_REFERENTIAL_ENTRY": 0,
     "CONTRACT_CAPACITIES": 53,
+    "DERIVED_ENTRY_CONTRADICTING_AUTHORITY": 0,
     "UNKNOWN": 0,
     "VARALEA_OFFICIAL_MAPPING_UNKNOWN": 0
   },

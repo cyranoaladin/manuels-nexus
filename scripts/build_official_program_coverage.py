@@ -54,6 +54,39 @@ def _digest(paths: tuple[Path, ...]) -> str:
     return f"sha256:{digest.hexdigest()}"
 
 
+def _refuse_wording_drift(
+    atoms: list[dict[str, Any]], rows: list[dict[str, Any]]
+) -> None:
+    """Le libelle officiel ne peut pas differer entre le registre et la matrice.
+
+    Le meme texte officiel etait recopie a trois endroits -- le segment lu dans
+    le document, la definition d'atome, la ligne de couverture -- et rien ne
+    les confrontait. Une formule mise a plat par l'extraction du PDF a ainsi
+    traverse toute la chaine jusqu'a la vue de revue, ou une lecture humaine
+    l'a refusee.
+
+    Le registre d'atomes fait autorite ici : c'est lui qui derive des segments
+    officiels. La matrice enregistre la couverture, pas le texte du programme.
+    """
+
+    registry = {
+        atom["atom_id"]: atom["short_official_wording_or_paraphrase"]
+        for atom in atoms
+    }
+    drift = [
+        row["atom_id"]
+        for row in rows
+        if row["atom_id"] in registry
+        and row["official_wording_or_short_paraphrase"] != registry[row["atom_id"]]
+    ]
+    if drift:
+        raise ValueError(
+            "OFFICIAL_WORDING_DRIFT: la matrice de couverture contredit le "
+            f"registre d'atomes pour {drift}. Le registre fait autorite : il "
+            "derive des segments officiels."
+        )
+
+
 def build_payload() -> dict[str, Any]:
     atoms = json.loads(ATOMS_PATH.read_text(encoding="utf-8"))["atoms"]
     rows = [
@@ -62,6 +95,7 @@ def build_payload() -> dict[str, Any]:
         for row in json.loads(path.read_text(encoding="utf-8"))["rows"]
     ]
     _validate_mandatory_bijection(atoms, rows)
+    _refuse_wording_drift(atoms, rows)
     by_manual: dict[str, dict[str, int]] = {}
     for manual in MANUAL_ORDER:
         subset = [row for row in rows if row["manual"] == manual]

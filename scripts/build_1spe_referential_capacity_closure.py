@@ -176,6 +176,7 @@ def build(write: bool = False) -> dict[str, Any]:
     out_of_year: list[dict[str, Any]] = []
     false_credit: list[dict[str, Any]] = []
     repaired: list[dict[str, Any]] = []
+    refreshed: list[dict[str, Any]] = []
     closed: list[dict[str, Any]] = []
 
     # Un atome ne peut appartenir qu'a une capacite : le creditter deux fois
@@ -214,11 +215,39 @@ def build(write: bool = False) -> dict[str, Any]:
             continue
 
         if capacity["id"] in entries:
+            existing = entries[capacity["id"]]
+            expected = entry_from_official(capacity, atoms)
+            # Le producteur ne rafraichit QUE ce qu'il a lui-meme ecrit. Les
+            # entrees redigees a la main portent un libelle BO qui resume
+            # plusieurs attendus ; les ecraser detruirait un texte relu.
+            owned = existing.get("derive_par") == GENERATED_BY
+            drifted = owned and any(
+                existing.get(field) != expected[field]
+                for field in ("libelle_bo", "atomes_officiels", "attendus_officiels")
+            )
+            if drifted:
+                # Le texte officiel a change en amont : une entree derivee qui
+                # garde l'ancien libelle fait mentir le referentiel.
+                payload["capacites"] = [
+                    expected if row["id"] == capacity["id"] else row
+                    for row in payload["capacites"]
+                ]
+                pending_writes[path] = payload
+                refreshed.append(
+                    {
+                        "chapter": chapter,
+                        "capacity": capacity["id"],
+                        "referential": relative(path),
+                        "was": existing.get("libelle_bo", ""),
+                        "now": expected["libelle_bo"],
+                    }
+                )
             closed.append(
                 {
                     "chapter": chapter,
                     "capacity": capacity["id"],
                     "official_atoms": [atom["atom_id"] for atom in atoms],
+                    "wording_drifted_from_authority": drifted,
                 }
             )
             continue
@@ -280,6 +309,13 @@ def build(write: bool = False) -> dict[str, Any]:
         "applicable_school_year": APPLICABLE_YEAR,
         "applicable_nor": APPLICABLE_NOR,
         "repaired": repaired,
+        "refreshed_from_authority": refreshed,
+        "a_derived_entry_never_outlives_its_authority": (
+            "Une entree ecrite par ce producteur est reecrite des que le "
+            "texte officiel dont elle derive change. Les entrees redigees "
+            "a la main ne sont jamais ecrasees : elles ne portent pas la "
+            "marque de ce producteur."
+        ),
         "capacities_without_referential_entry": without_entry,
         "capacities_without_direct_atom_credit": without_atom,
         "why_a_capacity_without_direct_credit_is_not_a_gap": (
@@ -299,6 +335,8 @@ def build(write: bool = False) -> dict[str, Any]:
             "CONTRACT_CAPACITIES": len(capacities),
             "CAPACITIES_CLOSED": len(closed) + len(repaired),
             "CAPACITIES_REPAIRED": len(repaired),
+            "CAPACITIES_REFRESHED_FROM_AUTHORITY": len(refreshed),
+            "DERIVED_ENTRY_CONTRADICTING_AUTHORITY": 0 if write else len(refreshed),
             "CAPACITY_WITHOUT_REFERENTIAL_ENTRY": 0 if write else len(without_entry),
             "CAPACITY_WITHOUT_DIRECT_ATOM_CREDIT": len(without_atom),
             "ATOM_OUT_OF_APPLICABLE_YEAR": len(out_of_year),
@@ -311,6 +349,7 @@ def build(write: bool = False) -> dict[str, Any]:
 
 BLOCKING = (
     "CAPACITY_WITHOUT_REFERENTIAL_ENTRY",
+    "DERIVED_ENTRY_CONTRADICTING_AUTHORITY",
     "ATOM_OUT_OF_APPLICABLE_YEAR",
     "ATOM_CREDITED_TO_A_FOREIGN_CAPACITY",
     "VARALEA_OFFICIAL_MAPPING_UNKNOWN",

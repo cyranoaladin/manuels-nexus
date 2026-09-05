@@ -88,9 +88,14 @@ def test_no_capacity_was_created_or_removed(payload: dict[str, Any]) -> None:
     """La réparation touche le référentiel, jamais la pédagogie."""
 
     assert payload["summary"]["CONTRACT_CAPACITIES"] == 53
-    assert payload["summary"]["CAPACITIES_REPAIRED"] == 2
+    # C6 et C7 ont été écrites une fois ; depuis, elles suivent leur autorité.
+    # « Réparée » compte une entrée absente, « rafraîchie » une entrée dérivée
+    # dont le texte officiel a changé en amont. Les deux touchent le
+    # référentiel, jamais la pédagogie.
+    assert payload["summary"]["CAPACITIES_REPAIRED"] == 0
+    assert payload["summary"]["DERIVED_ENTRY_CONTRADICTING_AUTHORITY"] == 0
     assert "Aucune capacite n'est creee" in payload["nothing_pedagogical_was_touched"]
-    for row in payload["repaired"]:
+    for row in payload["repaired"] + payload["refreshed_from_authority"]:
         assert row["capacity"].endswith(("C6", "C7"))
 
 

@@ -98,10 +98,33 @@ def test_the_kit_names_no_reviewer(payload: dict[str, Any]) -> None:
     forbidden = ("Claude", "OpenAI", "Anthropic", "Nexus Réussite <")
     for entry in payload["chapters"]:
         for role in entry["roles"]:
-            assert role["verdict"] is None, role
+            # Un verdict peut exister : il vient alors d'un reçu humain
+            # réellement déposé, jamais du kit. Ce qui reste interdit est que
+            # le kit NOMME quelqu'un — la vue rendue ne porte aucune identité.
+            if role["verdict"] is not None:
+                receipts = sorted(
+                    (
+                        ROOT
+                        / "audit/reviews/human"
+                        / entry["chapter"]
+                        / "receipts"
+                    ).glob("*.json")
+                )
+                assert receipts, (entry["chapter"], role["role"])
             text = (ROOT / role["kit_view"]).read_text(encoding="utf-8")
             for name in forbidden:
                 assert name not in text, (role["kit_view"], name)
+            import json as _json
+
+            for receipt in sorted(
+                (ROOT / "audit/reviews/human" / entry["chapter"] / "receipts").glob(
+                    "*.json"
+                )
+            ):
+                identity = _json.loads(receipt.read_text(encoding="utf-8"))[
+                    "reviewer_identity_reference"
+                ]
+                assert identity not in text, (role["kit_view"], identity)
 
 
 def test_the_mandatory_decision_is_visible_and_not_lost(
@@ -129,7 +152,17 @@ def test_the_mandatory_decision_is_visible_and_not_lost(
 
 def test_the_index_reports_what_is_pending(payload: dict[str, Any]) -> None:
     summary = payload["summary"]
-    assert summary["PENDING_VERDICTS"] == summary["EXPECTED_VERDICTS"] == 20
+    # Un verdict rendu quitte la file d'attente : il ne s'y ajoute pas et ne
+    # s'y substitue pas. Ce qui doit rester vrai est la somme.
+    assert summary["EXPECTED_VERDICTS"] == 20
+    assert summary["PENDING_VERDICTS"] <= summary["EXPECTED_VERDICTS"]
+    rendered = sum(
+        1
+        for row in payload["chapters"]
+        for role in row["roles"]
+        if role["verdict"] is not None
+    )
+    assert summary["PENDING_VERDICTS"] + rendered == summary["EXPECTED_VERDICTS"]
     assert summary["ASSESSMENT_QUESTIONS"] > 250
     assert summary["BAREME_JUDGEMENTS_REQUIRED"] > 0
     index = (gate.KIT / "INDEX.html").read_text(encoding="utf-8")

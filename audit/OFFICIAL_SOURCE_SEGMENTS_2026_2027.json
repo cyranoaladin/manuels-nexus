@@ -1981,7 +1981,7 @@
       "segment_id": "1SPE-SOURCE-SEG-179",
       "source_anchor": "lines:664-667",
       "source_path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
-      "source_wording_short": "Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n"
+      "source_wording_short": "Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à 2𝜎/√n."
     },
     {
       "authority_NOR": "MENE1921246A",
@@ -10862,7 +10862,8 @@
       "effective_until": null,
       "official_url": "https://www.education.gouv.fr/bo/19/Special1/MENE1901633A.htm",
       "source_format": "PDF",
-      "source_path": "NSI/corpus_nsi/00_programmes_officiels/programme_nsi_premiere.pdf"
+      "source_path": "NSI/corpus_nsi/00_programmes_officiels/programme_nsi_premiere.pdf",
+      "stacked_fractions_recomposed": []
     },
     "1SPE": {
       "applicable_school_year": "2026-2027",
@@ -10874,7 +10875,27 @@
       "effective_until": null,
       "official_url": "https://www.education.gouv.fr/bo/2026/Hebdo14/MENE2602917A",
       "source_format": "TXT",
-      "source_path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt"
+      "source_path": "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
+      "stacked_fractions_recomposed": [
+        {
+          "denominator": "d𝑥",
+          "denominator_line": 415,
+          "fraction": "d𝑦/d𝑥",
+          "numerator": "d𝑦",
+          "numerator_line": 413,
+          "shared_column": 37,
+          "text_line": 414
+        },
+        {
+          "denominator": "√n",
+          "denominator_line": 667,
+          "fraction": "2𝜎/√n",
+          "numerator": "2𝜎",
+          "numerator_line": 665,
+          "shared_column": 125,
+          "text_line": 666
+        }
+      ]
     },
     "TCOMPL": {
       "applicable_school_year": "2026-2027",
@@ -10886,7 +10907,8 @@
       "effective_until": "2026-2027",
       "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921265A.htm",
       "source_format": "TXT",
-      "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TCOMPL_optionnel.txt"
+      "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TCOMPL_optionnel.txt",
+      "stacked_fractions_recomposed": []
     },
     "TEXPERTES": {
       "applicable_school_year": "2026-2027",
@@ -10898,7 +10920,8 @@
       "effective_until": null,
       "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921264A.htm",
       "source_format": "TXT",
-      "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TEXPERTES_optionnel.txt"
+      "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TEXPERTES_optionnel.txt",
+      "stacked_fractions_recomposed": []
     },
     "TNSI": {
       "applicable_school_year": "2026-2027",
@@ -10910,7 +10933,8 @@
       "effective_until": null,
       "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921247A.htm",
       "source_format": "PDF",
-      "source_path": "NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf"
+      "source_path": "NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf",
+      "stacked_fractions_recomposed": []
     },
     "TSPE": {
       "applicable_school_year": "2026-2027",
@@ -10922,7 +10946,8 @@
       "effective_until": "2026-2027",
       "official_url": "https://www.education.gouv.fr/bo/19/Special8/MENE1921246A.htm",
       "source_format": "TXT",
-      "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TSPE_specialite.txt"
+      "source_path": "Mathematiques/manuel-maths/sources/txt/BO2019_TSPE_specialite.txt",
+      "stacked_fractions_recomposed": []
     }
   },
   "summary": {

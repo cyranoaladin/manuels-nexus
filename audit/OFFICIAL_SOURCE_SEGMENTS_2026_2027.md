@@ -201,7 +201,7 @@ Population purement **source-first** des six TXT/PDF officiels. Le registre d'at
 | 1SPE-SOURCE-SEG-176 | lines:660 | ALGORITHMS | YES | Simuler une variable aléatoire avec Python ou un tableur. |
 | 1SPE-SOURCE-SEG-177 | lines:661 | ALGORITHMS | YES | Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire. |
 | 1SPE-SOURCE-SEG-178 | lines:662-663 | ALGORITHMS | YES | Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. |
-| 1SPE-SOURCE-SEG-179 | lines:664-667 | ALGORITHMS | YES | Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n |
+| 1SPE-SOURCE-SEG-179 | lines:664-667 | ALGORITHMS | YES | Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à 2𝜎/√n. |
 
 ## TSPE
 

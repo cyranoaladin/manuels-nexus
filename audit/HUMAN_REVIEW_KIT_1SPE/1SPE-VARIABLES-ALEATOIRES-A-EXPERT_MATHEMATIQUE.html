@@ -26,16 +26,16 @@ background:#fbf5f6}
 <h2>1. Ce que vous decidez</h2>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• L&#x27;unite de decision est le CHAPITRE : 10 chapitres x 2 roles = 20 verdicts, pas des centaines de signatures objet par objet.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Aucun humain n&#x27;a encore approuve ce chapitre : REVIEW_DELTA_BASELINE = NONE. Le perimetre de revue est le CHAPITRE COURANT ENTIER. Les listes ci-dessous dirigent l&#x27;attention, elles ne reduisent pas le perimetre.</p>
-<p style='margin:.2rem 0 .2rem 1.2rem'>• CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (<code>sha256:85735e287edf87b501bb6d95ada33b0974c38322d15d45d933b499d7b1629022</code>) ; l&#x27;approbation graphique releve de la porte D7, independante.</p>
+<p style='margin:.2rem 0 .2rem 1.2rem'>• CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (<code>sha256:c68406a0ef2cad2dc64b773691e7be431e62d11f149b1783e9b94fa48974fc7c</code>) ; l&#x27;approbation graphique releve de la porte D7, independante.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Verdicts autorises, a rendre dans le packet JSON canonique et jamais dans cette vue : <code>APPROVED</code> / <code>CHANGES_REQUESTED</code> / <code>REJECTED</code>.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• Cette vue ne porte aucune decision et ne nomme personne : l&#x27;assignation du role reste <code>PENDING_UNASSIGNED</code>, l&#x27;etat du packet reste <code>PENDING_UNASSIGNED</code>.</p>
 <table>
 <tr><th>Perimetre</th><th>Valeur</th></tr>
 <tr><td>Objets du chapitre dans le packet</td><td>167</td></tr>
 <tr><td>Empreinte de l&#x27;ensemble d&#x27;objets</td><td><code>sha256:32b2dd9bff3bc3c7c82007986ef3a2009ee89d1aecb9fcad87cf1670af00490e</code></td></tr>
-<tr><td>Empreinte semantique liee a l&#x27;approbation</td><td><code>sha256:85735e287edf87b501bb6d95ada33b0974c38322d15d45d933b499d7b1629022</code></td></tr>
-<tr><td>Empreinte du packet</td><td><code>sha256:5ffdb4c21649dfc773888a13b3c3530771de9fbf27035c67d0b814c9f148926d</code></td></tr>
-<tr><td>Revision du depot gelee dans le packet</td><td><code>dfc99058e7a7c16ae4af46b99245edbe14b4f8e5</code></td></tr>
+<tr><td>Empreinte semantique liee a l&#x27;approbation</td><td><code>sha256:c68406a0ef2cad2dc64b773691e7be431e62d11f149b1783e9b94fa48974fc7c</code></td></tr>
+<tr><td>Empreinte du packet</td><td><code>sha256:9943fd16ddace27b7af542496caeb9d5df3fe28e5e35da0a28db632ce1e0d34b</code></td></tr>
+<tr><td>Revision du depot gelee dans le packet</td><td><code>bdb5edb33b59fceb3e69105f8ce108712b0d051c</code></td></tr>
 <tr><td>Preuve de rendu portee par le packet</td><td><code>ABSENT</code></td></tr>
 </table>
 <h2>2. Le chapitre et ses capacites du programme officiel</h2>
@@ -51,7 +51,7 @@ background:#fbf5f6}
 <tr><td><code>C4</code></td><td>Je sais utiliser la linearite de l&#x27;esperance pour calculer E(aX+b).</td><td>Utiliser la linéarité de l&#x27;espérance.</td><td>non</td></tr>
 <tr><td><code>C5</code></td><td>Je sais resoudre des problemes contextualises (jeux, decisions, assurances) a l&#x27;aide de variables aleatoires.</td><td>Résoudre des problèmes contextualisés faisant intervenir des variables aléatoires.</td><td>non</td></tr>
 <tr><td><code>C6</code></td><td>Je sais simuler une variable aleatoire et des echantillons, et lire, comprendre et ecrire une fonction Python renvoyant la moyenne d&#x27;un echantillon de taille n.</td><td>Le travail expérimental de simulation d’échantillons prolonge celui entrepris en seconde. L’objectif est de faire percevoir le principe de l’estimation de l’espérance d’une variable aléatoire, ou de la moyenne d’une variable statistique dans une population, par une moyenne observée sur un échantillon. Simuler une variable aléatoire avec Python ou un tableur. Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire.</td><td>non</td></tr>
-<tr><td><code>C7</code></td><td>Je sais etudier experimentalement la fluctuation des moyennes d&#x27;echantillons autour de l&#x27;esperance, simuler N echantillons et interpreter l&#x27;ecart entre moyenne empirique et esperance, notamment au regard de 2 sigma / racine(n).</td><td>Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n</td><td>non</td></tr>
+<tr><td><code>C7</code></td><td>Je sais etudier experimentalement la fluctuation des moyennes d&#x27;echantillons autour de l&#x27;esperance, simuler N echantillons et interpreter l&#x27;ecart entre moyenne empirique et esperance, notamment au regard de 2 sigma / racine(n).</td><td>Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à 2𝜎/√n.</td><td>non</td></tr>
 </table>
 <p><strong>Attendus officiels rattaches, capacite par capacite</strong></p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• <code>C1</code> — 4 attendus :</p>
@@ -178,7 +178,7 @@ background:#fbf5f6}
 <p>1 objet · 3 affirmations calculables sans preuve machine.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• <code>cours</code>** — 1 objet, 3 affirmations a verifier :</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• <code>1SPE-VARALEA-CR-000</code> (3 affirmations) — <code>Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/00_ouverture.tex</code></p>
-<h3>Famille <code>C7</code> — Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n</h3>
+<h3>Famille <code>C7</code> — Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à 2𝜎/√n.</h3>
 <p>Capacite eleve : « Je sais etudier experimentalement la fluctuation des moyennes d&#x27;echantillons autour de l&#x27;esperance, simuler N echantillons et interpreter l&#x27;ecart entre moyenne empirique et esperance, notamment au regard de 2 sigma / racine(n). »</p>
 <p>1 objet · 3 affirmations calculables sans preuve machine.</p>
 <p style='margin:.2rem 0 .2rem 1.2rem'>• <code>cours</code>** — 1 objet, 3 affirmations a verifier :</p>
@@ -265,7 +265,7 @@ sans rôle, sans condensat, ou sur un paquet périmé.</p>
 signés par la même identité. Une même personne peut en revanche prendre
 plusieurs chapitres.</p>
 <p>Condensat sémantique que votre approbation lie :
-<code>sha256:85735e287edf87b501bb6d95ada33b0974c38322d15d45d933b499d7b1629022</code></p>
+<code>sha256:c68406a0ef2cad2dc64b773691e7be431e62d11f149b1783e9b94fa48974fc7c</code></p>
 </div>
 
 </body></html>

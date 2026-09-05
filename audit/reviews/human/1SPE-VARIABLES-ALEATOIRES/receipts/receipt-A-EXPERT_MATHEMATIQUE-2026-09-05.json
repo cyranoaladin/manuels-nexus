@@ -1,0 +1,29 @@
+{
+  "attestation_text": "I reviewed the frozen chapter 1SPE-VARIABLES-ALEATOIRES, object set sha256:32b2dd9bff3bc3c7c82007986ef3a2009ee89d1aecb9fcad87cf1670af00490e, packet sha256:5ffdb4c21649dfc773888a13b3c3530771de9fbf27035c67d0b814c9f148926d, as EXPERT_MATHEMATIQUE. Verdict: CHANGES_REQUESTED.",
+  "blocking_findings": [
+    {
+      "description": "Le libelle officiel rattache a la capacite C7 est materiellement degrade dans la vue de revue et dans le referentiel derive : la formule du programme a ete desordonnee a l'extraction, produisant « Si m 2sigma designe ... inferieur ou egal a . racine(n) ». Cette representation ne peut pas etre attestee fidele au programme officiel (MENE2602917A, BO n.14 du 2 avril 2026, applicable a la rentree 2026-2027), qui enonce la condition avec la fraction 2sigma / racine(n). Correction de fidelite au referentiel officiel demandee, sans reformulation pedagogique et sans modification du sens mathematique.",
+      "finding_id": "C7_OFFICIAL_WORDING_NOT_FAITHFUL",
+      "object_ref": "1SPE-VARALEA-EXP-004",
+      "severity": "P1"
+    }
+  ],
+  "chapter_id": "1SPE-VARIABLES-ALEATOIRES",
+  "comments": [],
+  "human_review_receipt_schema_version": 1,
+  "manual_id": "1SPE",
+  "object_count": 167,
+  "object_set_digest": "sha256:32b2dd9bff3bc3c7c82007986ef3a2009ee89d1aecb9fcad87cf1670af00490e",
+  "packet_digest": "sha256:5ffdb4c21649dfc773888a13b3c3530771de9fbf27035c67d0b814c9f148926d",
+  "programme_authority_digest": "sha256:85763623a5407f39e74a26439dcd30979a74c1d9a13ec013d090ee41a02b71ea",
+  "repository_source_sha": "dfc99058e7a7c16ae4af46b99245edbe14b4f8e5",
+  "review_id": "1SPE-VARIABLES-ALEATOIRES-EXPERT_MATHEMATIQUE-2026-09-05",
+  "review_render_digest": "sha256:1d4b86fdbc20db24d60facf950f8292748681eb348ce195adb7b260c78483ef6",
+  "review_role": "EXPERT_MATHEMATIQUE",
+  "review_timestamp": "2026-09-05T00:00:00Z",
+  "reviewer_identity_reference": "abenrhouma",
+  "reviewer_is_human": true,
+  "reviewer_name": "abenrhouma",
+  "semantic_review_digest": "sha256:85735e287edf87b501bb6d95ada33b0974c38322d15d45d933b499d7b1629022",
+  "verdict": "CHANGES_REQUESTED"
+}

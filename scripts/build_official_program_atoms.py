@@ -26,6 +26,50 @@ DEFINITION_PATHS = {
 }
 
 
+def _recomposed_fractions(source_payload: dict[str, Any]) -> dict[str, list[str]]:
+    """Les fractions que la lecture des sources a du recomposer, par manuel."""
+
+    return {
+        manual: [row["fraction"] for row in document.get("stacked_fractions_recomposed", [])]
+        for manual, document in source_payload["source_documents"].items()
+    }
+
+
+def _refuse_fraction_lost_in_transcription(
+    item: dict[str, Any],
+    segments: list[dict[str, Any]],
+    recomposed: dict[str, list[str]],
+) -> None:
+    """Une transcription ne peut pas perdre une fraction que sa source porte.
+
+    Le libelle d'un atome est transcrit a la main depuis le segment officiel
+    qu'il cite, et rien ne comparait jamais les deux. Une fraction du programme
+    -- ecrite sur deux etages dans le PDF, donc mise a plat par l'extraction --
+    a ainsi traverse toute la chaine jusqu'a la vue de revue, ou une lecture
+    humaine l'a refusee : « inferieur ou egal a . racine(n) » ne peut pas etre
+    atteste fidele au programme officiel.
+
+    La source est desormais capable de rendre a la formule sa structure. Cette
+    verification empeche qu'une transcription reste en arriere : si le segment
+    cite porte une fraction recomposee, l'atome doit la porter aussi.
+    """
+
+    if len(segments) != 1:
+        # Un atome qui resume plusieurs segments est une synthese assumee ;
+        # exiger l'egalite y interdirait toute paraphrase.
+        return
+    segment = segments[0]
+    wording = item["short_official_wording_or_paraphrase"]
+    for fraction in recomposed.get(segment["manual"], []):
+        if fraction in segment["source_wording_short"] and fraction not in wording:
+            raise ValueError(
+                f"{item['atom_id']} : la transcription a perdu la fraction "
+                f"{fraction!r} que porte {segment['segment_id']} "
+                f"({segment['source_anchor']}). Transcrire le segment tel "
+                f"qu'il est desormais lu, sans reformuler."
+            )
+
+
 def _digest(paths: list[Path]) -> str:
     digest = hashlib.sha256()
     for path in sorted(paths, key=lambda item: str(item.relative_to(ROOT))):
@@ -50,6 +94,7 @@ def _authority_by_manual() -> dict[str, dict[str, Any]]:
 def build_registry() -> dict[str, Any]:
     authorities = _authority_by_manual()
     source_payload = json.loads(SEGMENTS_PATH.read_text(encoding="utf-8"))
+    recomposed = _recomposed_fractions(source_payload)
     source_segments = {
         segment["segment_id"]: segment for segment in source_payload["segments"]
     }
@@ -70,6 +115,7 @@ def build_registry() -> dict[str, Any]:
             segments = [source_segments[segment_id] for segment_id in segment_ids]
             if any(segment["manual"] != manual for segment in segments):
                 raise ValueError(f"cross-manual source in {item['atom_id']}")
+            _refuse_fraction_lost_in_transcription(item, segments, recomposed)
             atoms.append(
                 {
                     "atom_id": item["atom_id"],

@@ -157,6 +157,106 @@ KNOWN_MISLEADING_ATOM_WORDING = (
 )
 
 
+
+# ---------------------------------------------------------------------------
+#  Fractions empilees : rendre a la formule sa structure
+# ---------------------------------------------------------------------------
+
+#: Ligne dont le contenu a ete replie dans sa voisine. Elle reste presente pour
+#: que les numeros de ligne -- donc les ancres de source -- ne bougent pas.
+FOLDED_INTO_NEIGHBOUR = "\x00FOLDED"
+
+#: Un numerateur ou un denominateur isole tient en peu de signes. Au-dela, la
+#: ligne raconte quelque chose et n'est pas un etage de fraction.
+STACKED_TERM_MAX_LENGTH = 12
+#: La ligne de texte doit menager un vide a l'endroit de la barre. Trois
+#: espaces suffisent a distinguer ce vide d'une simple separation de mots.
+FRACTION_GAP_MIN_WIDTH = 3
+
+
+def _is_stacked_term(raw: str) -> bool:
+    """Un etage de fraction : court, isole, sans ponctuation de phrase."""
+
+    stripped = raw.strip()
+    if not stripped or len(stripped) > STACKED_TERM_MAX_LENGTH:
+        return False
+    if re.match(r"^[\s]*(?:\u2212|\uf0ad|-|\u2022)", raw):
+        return False
+    # Une phrase se termine ; un etage de fraction, non.
+    if stripped.endswith((".", ";", ":", ",")):
+        return False
+    return not re.search(r"[a-zA-Z\u00e0-\u00ff]{4,}", stripped)
+
+
+def _column(raw: str) -> int:
+    return len(raw) - len(raw.lstrip())
+
+
+def fold_stacked_fractions(lines: list[str]) -> tuple[list[str], list[dict[str, Any]]]:
+    """Recompose les fractions que l'extraction du PDF a mises a plat.
+
+    Le programme officiel ecrit certaines conditions sous forme de fraction.
+    Le texte extrait du PDF conserve la disposition, pas la structure : le
+    numerateur se retrouve sur la ligne du dessus, le denominateur sur celle du
+    dessous, et la ligne de texte garde un blanc a l'endroit de la barre.
+
+        ... d'ecart type sigma. Si m
+                                                    2sigma
+           designe la moyenne ..., inferieur ou egal a        .
+                                                    racine(n)
+
+    Joindre ces lignes dans l'ordre de lecture donne « Si m 2sigma designe ...
+    inferieur ou egal a . racine(n) » -- une phrase qui ne veut rien dire et
+    qui ne peut pas etre attestee fidele au programme.
+
+    Ce qui identifie la fraction n'est pas devine : c'est l'ALIGNEMENT. Les
+    deux etages commencent a la meme colonne, et cette colonne tombe dans un
+    blanc de la ligne de texte qu'ils encadrent. Cet alignement EST la barre de
+    fraction ; le reconstituer ne reformule rien.
+
+    Les lignes repliees ne sont pas supprimees mais neutralisees : les numeros
+    de ligne, donc les ancres de source, restent ceux du document officiel.
+    """
+
+    folded = list(lines)
+    records: list[dict[str, Any]] = []
+    for index in range(1, len(folded) - 1):
+        above, middle, below = folded[index - 1], folded[index], folded[index + 1]
+        if not (_is_stacked_term(above) and _is_stacked_term(below)):
+            continue
+        column = _column(above)
+        if column != _column(below):
+            continue
+        gap = next(
+            (
+                match
+                for match in re.finditer(r" {%d,}" % FRACTION_GAP_MIN_WIDTH, middle)
+                if match.start() <= column < match.end()
+            ),
+            None,
+        )
+        if gap is None:
+            continue
+        numerator, denominator = above.strip(), below.strip()
+        fraction = f"{numerator}/{denominator}"
+        folded[index] = (
+            middle[: gap.start()].rstrip() + " " + fraction + middle[gap.end() :].lstrip()
+        )
+        folded[index - 1] = FOLDED_INTO_NEIGHBOUR
+        folded[index + 1] = FOLDED_INTO_NEIGHBOUR
+        records.append(
+            {
+                "numerator": numerator,
+                "denominator": denominator,
+                "fraction": fraction,
+                "numerator_line": index,
+                "text_line": index + 1,
+                "denominator_line": index + 2,
+                "shared_column": column,
+            }
+        )
+    return folded, records
+
 # Direct source-review units that the generic rubric/bullet state machine
 # cannot infer safely.  The archived authorities are digest-pinned, so exact
 # physical line anchors are deterministic.  Each entry records a substantive
@@ -455,6 +555,8 @@ def _reviewed_math_segments(
             raise ValueError(f"invalid reviewed source range for {manual}: {start}-{end}")
         parts: list[str] = []
         for raw in lines[start - 1 : end]:
+            if raw == FOLDED_INTO_NEIGHBOUR:
+                continue
             stripped = raw.strip().lstrip("\f").strip()
             if not stripped or stripped.startswith("© Ministère"):
                 continue
@@ -510,7 +612,11 @@ def _math_segment_source_order(segment: Segment) -> tuple[int, int, int, str]:
 def _extract_math_segments(manual: str, authority: dict[str, Any]) -> list[Segment]:
     relative = authority["local_archival_file"]
     path = ROOT / relative
-    lines = path.read_text(encoding="utf-8").split("\n")
+    # La disposition du PDF est lue AVANT le decoupage : une fraction empilee
+    # doit redevenir une fraction pendant qu'on a encore les colonnes.
+    lines, _folds = fold_stacked_fractions(
+        path.read_text(encoding="utf-8").split("\n")
+    )
     segments: list[Segment] = []
     category: tuple[str, str] | None = None
     section = "Programme"
@@ -534,6 +640,11 @@ def _extract_math_segments(manual: str, authority: dict[str, Any]) -> list[Segme
         current = []
 
     for line_number, raw in enumerate(lines, start=1):
+        if raw == FOLDED_INTO_NEIGHBOUR:
+            # Repliee dans sa voisine : ni contenu, ni coupure. La traiter
+            # comme une ligne vide fermerait l'unite en cours et couperait en
+            # deux une phrase que le programme officiel ecrit d'un trait.
+            continue
         stripped = raw.strip().replace("\uf0ad", "−")
         new_category = _math_category(stripped)
         if new_category is not None:
@@ -858,6 +969,18 @@ def build_registry() -> dict[str, Any]:
             "digest": digest,
             "authority_registry_digest": expected,
             "digest_matches_authority_registry": True,
+            # Ce que la lecture a du recomposer pour rendre au texte officiel
+            # sa structure : chaque fraction empilee, avec les lignes et la
+            # colonne qui l'ont identifiee. Rien n'est reformule ; on rend
+            # lisible une barre de fraction que le PDF n'avait laissee que
+            # sous forme d'alignement.
+            "stacked_fractions_recomposed": (
+                fold_stacked_fractions(
+                    path.read_text(encoding="utf-8").split("\n")
+                )[1]
+                if path.suffix == ".txt"
+                else []
+            ),
         }
     segments = extract_source_segments(authorities)
     serialised_segments = [

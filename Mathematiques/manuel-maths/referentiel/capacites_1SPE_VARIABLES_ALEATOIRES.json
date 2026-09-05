@@ -70,7 +70,7 @@
     },
     {
       "id": "1SPE-VARIABLES-ALEATOIRES-C7",
-      "libelle_bo": "Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n",
+      "libelle_bo": "Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à 2𝜎/√n.",
       "libelle_eleve": "Je sais etudier experimentalement la fluctuation des moyennes d'echantillons autour de l'esperance, simuler N echantillons et interpreter l'ecart entre moyenne empirique et esperance, notamment au regard de 2 sigma / racine(n).",
       "demonstration_exigible": false,
       "atomes_officiels": [
@@ -90,7 +90,7 @@
         {
           "atom_id": "1SPE-OFFICIAL-179",
           "ancre": "lines:664-667",
-          "texte": "Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n"
+          "texte": "Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à 2𝜎/√n."
         }
       ],
       "derive_par": "scripts/build_1spe_referential_capacity_closure.py"

@@ -14,7 +14,7 @@ Chapitre `1SPE-VARIABLES-ALEATOIRES` · manuel `1SPE` (Première, Spécialité m
 
 - L'unite de decision est le CHAPITRE : 10 chapitres x 2 roles = 20 verdicts, pas des centaines de signatures objet par objet.
 - Aucun humain n'a encore approuve ce chapitre : REVIEW_DELTA_BASELINE = NONE. Le perimetre de revue est le CHAPITRE COURANT ENTIER. Les listes ci-dessous dirigent l'attention, elles ne reduisent pas le perimetre.
-- CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (`sha256:85735e287edf87b501bb6d95ada33b0974c38322d15d45d933b499d7b1629022`) ; l'approbation graphique releve de la porte D7, independante.
+- CONTENT_APPROVAL_BINDS_TO = SEMANTIC_DIGEST (`sha256:c68406a0ef2cad2dc64b773691e7be431e62d11f149b1783e9b94fa48974fc7c`) ; l'approbation graphique releve de la porte D7, independante.
 - Verdicts autorises, a rendre dans le packet JSON canonique et jamais dans cette vue : `APPROVED` / `CHANGES_REQUESTED` / `REJECTED`.
 - Cette vue ne porte aucune decision et ne nomme personne : l'assignation du role reste `PENDING_UNASSIGNED`, l'etat du packet reste `PENDING_UNASSIGNED`.
 
@@ -22,9 +22,9 @@ Chapitre `1SPE-VARIABLES-ALEATOIRES` · manuel `1SPE` (Première, Spécialité m
 | --- | --- |
 | Objets du chapitre dans le packet | 167 |
 | Empreinte de l'ensemble d'objets | `sha256:32b2dd9bff3bc3c7c82007986ef3a2009ee89d1aecb9fcad87cf1670af00490e` |
-| Empreinte semantique liee a l'approbation | `sha256:85735e287edf87b501bb6d95ada33b0974c38322d15d45d933b499d7b1629022` |
-| Empreinte du packet | `sha256:5ffdb4c21649dfc773888a13b3c3530771de9fbf27035c67d0b814c9f148926d` |
-| Revision du depot gelee dans le packet | `dfc99058e7a7c16ae4af46b99245edbe14b4f8e5` |
+| Empreinte semantique liee a l'approbation | `sha256:c68406a0ef2cad2dc64b773691e7be431e62d11f149b1783e9b94fa48974fc7c` |
+| Empreinte du packet | `sha256:9943fd16ddace27b7af542496caeb9d5df3fe28e5e35da0a28db632ce1e0d34b` |
+| Revision du depot gelee dans le packet | `bdb5edb33b59fceb3e69105f8ce108712b0d051c` |
 | Preuve de rendu portee par le packet | `ABSENT` |
 
 ## 2. Le chapitre et ses capacites du programme officiel
@@ -44,7 +44,7 @@ Temps estime declare : parcours 1 : 14 h · parcours 2 : 11 h · parcours 3 : 9 
 | `C4` | Je sais utiliser la linearite de l'esperance pour calculer E(aX+b). | Utiliser la linéarité de l'espérance. | non |
 | `C5` | Je sais resoudre des problemes contextualises (jeux, decisions, assurances) a l'aide de variables aleatoires. | Résoudre des problèmes contextualisés faisant intervenir des variables aléatoires. | non |
 | `C6` | Je sais simuler une variable aleatoire et des echantillons, et lire, comprendre et ecrire une fonction Python renvoyant la moyenne d'un echantillon de taille n. | Le travail expérimental de simulation d’échantillons prolonge celui entrepris en seconde. L’objectif est de faire percevoir le principe de l’estimation de l’espérance d’une variable aléatoire, ou de la moyenne d’une variable statistique dans une population, par une moyenne observée sur un échantillon. Simuler une variable aléatoire avec Python ou un tableur. Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire. | non |
-| `C7` | Je sais etudier experimentalement la fluctuation des moyennes d'echantillons autour de l'esperance, simuler N echantillons et interpreter l'ecart entre moyenne empirique et esperance, notamment au regard de 2 sigma / racine(n). | Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n | non |
+| `C7` | Je sais etudier experimentalement la fluctuation des moyennes d'echantillons autour de l'esperance, simuler N echantillons et interpreter l'ecart entre moyenne empirique et esperance, notamment au regard de 2 sigma / racine(n). | Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à 2𝜎/√n. | non |
 
 **Attendus officiels rattaches, capacite par capacite**
 
@@ -212,7 +212,7 @@ Capacite eleve : « Je sais simuler une variable aleatoire et des echantillons, 
 - **`cours`** — 1 objet, 3 affirmations a verifier :
     - `1SPE-VARALEA-CR-000` (3 affirmations) — `Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/00_ouverture.tex`
 
-### Famille `C7` — Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n
+### Famille `C7` — Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à 2𝜎/√n.
 
 Capacite eleve : « Je sais etudier experimentalement la fluctuation des moyennes d'echantillons autour de l'esperance, simuler N echantillons et interpreter l'ecart entre moyenne empirique et esperance, notamment au regard de 2 sigma / racine(n). »
 

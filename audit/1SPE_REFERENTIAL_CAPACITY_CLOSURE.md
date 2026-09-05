@@ -18,37 +18,15 @@ Programme applicable : `MENE2602917A`, rentree 2026-2027.
 |---|---:|
 | `CONTRACT_CAPACITIES` | 53 |
 | `CAPACITIES_CLOSED` | 47 |
-| `CAPACITIES_REPAIRED` | 2 |
+| `CAPACITIES_REPAIRED` | 0 |
+| `CAPACITIES_REFRESHED_FROM_AUTHORITY` | 1 |
+| `DERIVED_ENTRY_CONTRADICTING_AUTHORITY` | 0 |
 | `CAPACITY_WITHOUT_REFERENTIAL_ENTRY` | 0 |
 | `CAPACITY_WITHOUT_DIRECT_ATOM_CREDIT` | 6 |
 | `ATOM_OUT_OF_APPLICABLE_YEAR` | 0 |
 | `ATOM_CREDITED_TO_A_FOREIGN_CAPACITY` | 0 |
 | `VARALEA_OFFICIAL_MAPPING_UNKNOWN` | 0 |
 | `UNKNOWN` | 0 |
-
-## Entrees ecrites depuis l'autorite officielle
-
-### `1SPE-VARIABLES-ALEATOIRES-C6` — 1SPE-VARIABLES-ALEATOIRES
-
-Atomes officiels : 1SPE-OFFICIAL-175, 1SPE-OFFICIAL-176, 1SPE-OFFICIAL-177
-
-Libelle BO repris mot pour mot : Le travail expérimental de simulation d’échantillons prolonge celui entrepris en seconde. L’objectif est de faire percevoir le principe de l’estimation de l’espérance d’une variable aléatoire, ou de la moyenne d’une variable statistique dans une population, par une moyenne observée sur un échantillon. Simuler une variable aléatoire avec Python ou un tableur. Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire.
-
-Referentiel : `Mathematiques/manuel-maths/referentiel/capacites_1SPE_VARIABLES_ALEATOIRES.json`
-
-### `1SPE-VARIABLES-ALEATOIRES-C7` — 1SPE-VARIABLES-ALEATOIRES
-
-Atomes officiels : 1SPE-OFFICIAL-178, 1SPE-OFFICIAL-179
-
-Libelle BO repris mot pour mot : Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire. Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n
-
-Referentiel : `Mathematiques/manuel-maths/referentiel/capacites_1SPE_VARIABLES_ALEATOIRES.json`
-
-
-## Capacites sans entree
-
-- `{"chapter": "1SPE-VARIABLES-ALEATOIRES", "capacity": "1SPE-VARIABLES-ALEATOIRES-C6"}`
-- `{"chapter": "1SPE-VARIABLES-ALEATOIRES", "capacity": "1SPE-VARIABLES-ALEATOIRES-C7"}`
 
 ## Capacites sans credit direct (observe, non bloquant)
 
