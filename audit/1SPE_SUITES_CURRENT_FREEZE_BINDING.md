@@ -16,10 +16,10 @@ courant du dépôt lui est équivalent **en contenu**.
 |---|---|
 | Identité binaire des 161 sources | **PASS** |
 | Identité sémantique des sources couvertes | **PASS** |
-| Identité de l'autorité programme (projection chapitre) | **FAIL** |
+| Identité de l'autorité programme (projection chapitre) | **PASS** |
 | Identité des règles de variante | **PASS** |
 
-## État : `STALE_CONTENT_CHANGED`
+## État : `CURRENT_EQUIVALENT_TO_FROZEN_CONTENT`
 
 Ni l'avancée de HEAD, ni un changement de nom de branche, ni un autre
 worktree, ni le rafraîchissement d'une enveloppe dérivée, ni l'édition

@@ -241,7 +241,96 @@ def _current_blob(path: str) -> str:
 
 #: Sources d'autorite structurees par chapitre : une ligne d'un AUTRE chapitre
 #: ne concerne pas cette revue. Voir programme_authority_projection.
-CHAPTER_SCOPED_AUTHORITY_PATHS = ("audit/official_program_coverage/1SPE.json",)
+#:
+#: La matrice de couverture porte `chapter` sur chaque ligne. Les trois autres
+#: n'en portent pas : elles sont rattachees par la chaine canonique
+#: segment -> atomes -> chapitre, dont la matrice est l'autorite. Tant qu'elles
+#: etaient comparees fichier entier, corriger un atome de Variables aleatoires
+#: perimait le gel de Suites -- exactement le faux positif que ce module dit
+#: corriger, et qu'un test nomme deja (« une ligne GEOREP ne perime pas
+#: SUITES »).
+CHAPTER_SCOPED_AUTHORITY_PATHS = (
+    "audit/official_program_coverage/1SPE.json",
+    "audit/OFFICIAL_SOURCE_SEGMENT_LEDGER.json",
+    "audit/OFFICIAL_SOURCE_ATOM_CROSSWALK_2026_2027.json",
+    "audit/OFFICIAL_ATOMIZATION_SECOND_PASS.json",
+)
+
+#: Ou lire les lignes, et sous quelle clef, pour chaque artefact projete.
+_AUTHORITY_ROW_KEYS = {
+    "audit/official_program_coverage/1SPE.json": "rows",
+    "audit/OFFICIAL_SOURCE_SEGMENT_LEDGER.json": "rows",
+    "audit/OFFICIAL_SOURCE_ATOM_CROSSWALK_2026_2027.json": "rows",
+    "audit/OFFICIAL_ATOMIZATION_SECOND_PASS.json": "requirements",
+}
+
+#: Champs d'enveloppe qui bougent des qu'un artefact est reconstruit, sans
+#: qu'une seule ligne d'autorite ait change. Les inclure ferait perimer tous
+#: les chapitres a chaque regeneration -- ce que le contrat de fraicheur
+#: interdit deja sous le nom `derived_envelope_refreshed`.
+_AUTHORITY_ENVELOPE_FIELDS = (
+    "artifact_name",
+    "manual",
+    "applicable_school_year",
+    "schema_version",
+)
+
+COVERAGE_MATRIX_PATH = "audit/official_program_coverage/1SPE.json"
+ATOM_REGISTRY_PATH = "audit/OFFICIAL_PROGRAM_ATOMS_2026_2027.json"
+
+
+def _atom_chapters() -> dict[str, set[str]]:
+    """Le rattachement atome -> chapitre, lu dans la matrice canonique.
+
+    Aucune table parallele : la matrice de couverture est deja l'autorite de
+    ce lien, et c'est elle qu'on interroge.
+    """
+
+    document = json.loads((ROOT / COVERAGE_MATRIX_PATH).read_text(encoding="utf-8"))
+    chapters: dict[str, set[str]] = {}
+    for row in document.get("rows", []):
+        atom, chapter = row.get("atom_id"), row.get("chapter")
+        if atom and chapter:
+            chapters.setdefault(atom, set()).add(chapter)
+    return chapters
+
+
+def _segment_atoms() -> dict[str, set[str]]:
+    """Le rattachement segment -> atomes, lu dans le registre d'atomes."""
+
+    document = json.loads((ROOT / ATOM_REGISTRY_PATH).read_text(encoding="utf-8"))
+    segments: dict[str, set[str]] = {}
+    for atom in document.get("atoms", []):
+        for segment in atom.get("source_segment_ids", []):
+            segments.setdefault(segment, set()).add(atom["atom_id"])
+    return segments
+
+
+def _row_chapters(
+    row: dict[str, Any],
+    atom_chapters: dict[str, set[str]],
+    segment_atoms: dict[str, set[str]],
+) -> set[str] | None:
+    """Les chapitres auxquels cette ligne d'autorite se rattache.
+
+    `None` signifie « rattachement inconnu » : la ligne ne cite aucun atome, ou
+    ses atomes ne figurent pas dans la matrice. Elle n'est alors attribuee a
+    personne -- et, faute de pouvoir dire qu'elle ne concerne pas ce
+    chapitre-ci, elle est CONSERVEE dans la projection de chacun. Echouer
+    ferme plutot que deviner : une vraie modification de programme ne doit
+    jamais disparaitre du calcul.
+    """
+
+    atoms = set(row.get("atom_ids") or row.get("first_pass_atom_ids") or ())
+    identifier = row.get("segment_id")
+    if not atoms and identifier:
+        atoms = set(segment_atoms.get(identifier, ()))
+    if not atoms:
+        return None
+    chapters = {
+        chapter for atom in atoms for chapter in atom_chapters.get(atom, ())
+    }
+    return chapters or None
 
 
 def _current_bytes(path: str) -> bytes:
@@ -265,15 +354,22 @@ def programme_authority_projection(path: str, payload: bytes) -> str:
     if path not in CHAPTER_SCOPED_AUTHORITY_PATHS:
         return "sha256:" + hashlib.sha256(payload).hexdigest()
     document = json.loads(payload.decode("utf-8"))
-    rows = [row for row in document.get("rows", []) if row.get("chapter") == CHAPTER_ID]
+    rows = document.get(_AUTHORITY_ROW_KEYS[path], [])
+    if any("chapter" in row for row in rows):
+        # La matrice de couverture porte le chapitre sur chaque ligne.
+        kept = [row for row in rows if row.get("chapter") == CHAPTER_ID]
+    else:
+        atom_chapters, segment_atoms = _atom_chapters(), _segment_atoms()
+        kept = []
+        for row in rows:
+            chapters = _row_chapters(row, atom_chapters, segment_atoms)
+            if chapters is None or CHAPTER_ID in chapters:
+                kept.append(row)
     return canonical_digest(
         {
-            "artifact_name": document.get("artifact_name"),
-            "manual": document.get("manual"),
-            "applicable_school_year": document.get("applicable_school_year"),
-            "schema_version": document.get("schema_version"),
+            **{field: document.get(field) for field in _AUTHORITY_ENVELOPE_FIELDS},
             "chapter": CHAPTER_ID,
-            "rows": rows,
+            "rows": kept,
         }
     )
 
