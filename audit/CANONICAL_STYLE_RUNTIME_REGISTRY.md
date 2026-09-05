@@ -94,7 +94,7 @@ La présence d'une cible canonique unique n'implique pas encore un runtime sans 
 | `gabarits/common/nexus-exercices.sty` | CANONICAL_SUPPORT_STYLE | YES | `530c1f35d41a80e6fb4363396a60b71dba00b3dd8689cd1623ab4a4be93a7942` | — | 13 | 0 | NO | NO |
 | `gabarits/common/nexus-figures-bib.sty` | CANONICAL_SUPPORT_STYLE | YES | `174dc7dd86fafa7d74f32a2cee77cc880cdc25403a4f090259afbbc5e5fc54cb` | — | 13 | 0 | NO | NO |
 | `gabarits/common/nexus-icons.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `42af1195dda223dc642255754ff7a94f1d5add6720e7062883de4c429132cc8b` | — | 1 | 0 | NO | NO |
-| `gabarits/common/nexus-manuel.cls` | CANONICAL_CLASS_IMPLEMENTATION | YES | `a40d657638f9dc6cc56802f3d60890ed2aa7f4f01544f6fee7b1201b13fd8a63` | — | 24 | 1 | NO | NO |
+| `gabarits/common/nexus-manuel.cls` | CANONICAL_CLASS_IMPLEMENTATION | YES | `618c9cac51ce0930f12c30dc80c82fd321a09c0cee34776f4d2bdb2e0c58cc8a` | — | 24 | 1 | NO | NO |
 | `gabarits/common/nexus-margin-rail.tex` | RUNTIME_SUPPORT_TEMPLATE | YES | `04cb45a5f8796d9ce0a25bd2c0f23b190b515056e2f69f5b7eac64b5f0c88f14` | — | 0 | 0 | NO | NO |
 | `gabarits/common/nexus-pages-froides.sty` | CANONICAL_SUPPORT_STYLE | YES | `2b27ed9c641e0c0f0a4855a176197bc01099ada96e7af02f7e39862eeb16b652` | — | 14 | 0 | NO | NO |
 | `gabarits/common/nexus-pont.sty` | CANONICAL_SUPPORT_STYLE | YES | `2d4c8839add6d3e83e9ba6044995bd7e673e2e03a88d7390281d1458281bfe50` | — | 14 | 0 | NO | NO |
