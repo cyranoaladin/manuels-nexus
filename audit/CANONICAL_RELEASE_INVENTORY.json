@@ -1,6 +1,20 @@
 {
   "ambiguous_current_artifacts": [],
   "artifact_type": "canonical_release_inventory",
+  "canonical_release_roots": [
+    "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.tex",
+    "Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.tex",
+    "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.tex",
+    "Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.tex",
+    "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_eleve.tex",
+    "Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_professeur.tex",
+    "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.tex",
+    "Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_professeur.tex",
+    "NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.tex",
+    "NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.tex",
+    "NSI/build/MANUEL_TNSI/MANUEL_TNSI_eleve.tex",
+    "NSI/build/MANUEL_TNSI/MANUEL_TNSI_professeur.tex"
+  ],
   "canonical_targets": [
     {
       "classification": "CANONICAL_RELEASE_TARGET",
@@ -130,6 +144,205 @@
     "TEXPERTES",
     "TNSI",
     "TSPE_2026_2027"
+  ],
+  "explicit_non_release_roots": [
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "Mathematiques/manuel-maths/build/1SPE-PROBA-COND/1SPE-PROBA-COND_complet.tex",
+      "why": "construction d'un chapitre isole : artefact de travail, pas un manuel"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "Mathematiques/manuel-maths/build/maquette-v5/maquette.tex",
+      "why": "maquette de charte : sert au controle visuel, ne se diffuse pas"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "Mathematiques/manuel-maths/gabarits/chapitre_master.tex",
+      "why": "gabarit de compilation d'un chapitre isole"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "Mathematiques/manuel-maths/gabarits/objet_standalone.tex",
+      "why": "gabarit de compilation d'un objet isole"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "Mathematiques/manuel-maths/gabarits/specimen-pont-v6.tex",
+      "why": "specimen de charte, jamais diffuse"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "Mathematiques/manuel-maths/gabarits/specimen-v6.tex",
+      "why": "specimen de charte, jamais diffuse"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "Mathematiques/manuel-maths/gabarits/specimen.tex",
+      "why": "specimen de charte, jamais diffuse"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/build/MANUEL_1NSI/.MANUEL_1NSI_professeur-8kftu7dd/MANUEL_1NSI_professeur.tex",
+      "why": "repertoire de construction transitoire, efface en fin de build"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/build/MANUEL_1NSI/.MANUEL_1NSI_professeur-xdcj5dhv/MANUEL_1NSI_professeur.tex",
+      "why": "repertoire de construction transitoire, efface en fin de build"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/build/MANUEL_TNSI/.MANUEL_TNSI_professeur-um6bu82c/MANUEL_TNSI_professeur.tex",
+      "why": "repertoire de construction transitoire, efface en fin de build"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/02_modeles_documents/modele_aides.tex",
+      "why": "modele de document du corpus NSI : gabarit d'auteur, jamais assemble"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/02_modeles_documents/modele_corrige.tex",
+      "why": "modele de document du corpus NSI : gabarit d'auteur, jamais assemble"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/02_modeles_documents/modele_cours.tex",
+      "why": "modele de document du corpus NSI : gabarit d'auteur, jamais assemble"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/02_modeles_documents/modele_evaluation.tex",
+      "why": "modele de document du corpus NSI : gabarit d'auteur, jamais assemble"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/02_modeles_documents/modele_fiche_methode.tex",
+      "why": "modele de document du corpus NSI : gabarit d'auteur, jamais assemble"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/02_modeles_documents/modele_td.tex",
+      "why": "modele de document du corpus NSI : gabarit d'auteur, jamais assemble"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/02_modeles_documents/modele_tp.tex",
+      "why": "modele de document du corpus NSI : gabarit d'auteur, jamais assemble"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/02_modeles_documents/modele_trace.tex",
+      "why": "modele de document du corpus NSI : gabarit d'auteur, jamais assemble"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_aides.tex",
+      "why": "pack NSI autonome : chaine de production distincte des manuels"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_corrige.tex",
+      "why": "pack NSI autonome : chaine de production distincte des manuels"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_cours.tex",
+      "why": "pack NSI autonome : chaine de production distincte des manuels"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_evaluation.tex",
+      "why": "pack NSI autonome : chaine de production distincte des manuels"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_fiche_methode.tex",
+      "why": "pack NSI autonome : chaine de production distincte des manuels"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_td.tex",
+      "why": "pack NSI autonome : chaine de production distincte des manuels"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_td_eleve.tex",
+      "why": "pack NSI autonome : chaine de production distincte des manuels"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_tp.tex",
+      "why": "pack NSI autonome : chaine de production distincte des manuels"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_tp_eleve.tex",
+      "why": "pack NSI autonome : chaine de production distincte des manuels"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/corpus_nsi/latex/packs/premiere/P13/P13_trace.tex",
+      "why": "pack NSI autonome : chaine de production distincte des manuels"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/gabarits/book_master.tex",
+      "why": "gabarit d'assemblage, instancie par l'assembleur"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/gabarits/chapitre_master.tex",
+      "why": "gabarit de compilation d'un chapitre isole"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/gabarits/objet_standalone.tex",
+      "why": "gabarit de compilation d'un objet isole"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "NSI/gabarits/specimen.tex",
+      "why": "specimen de charte, jamais diffuse"
+    },
+    {
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "path": "gabarits/common/chapitre_master.tex",
+      "why": "gabarit de compilation d'un chapitre isole"
+    }
+  ],
+  "extra_assembler_variants": [
+    {
+      "assembler": "nsi",
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "variant": "methodes",
+      "why": "variante de travail : la release ne diffuse que eleve et professeur"
+    },
+    {
+      "assembler": "nsi",
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "variant": "remediation",
+      "why": "variante de travail : la release ne diffuse que eleve et professeur"
+    },
+    {
+      "assembler": "nsi",
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "variant": "amenagee",
+      "why": "variante de travail : la release ne diffuse que eleve et professeur"
+    },
+    {
+      "assembler": "nsi",
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "variant": "evaluations",
+      "why": "variante de travail : la release ne diffuse que eleve et professeur"
+    },
+    {
+      "assembler": "nsi",
+      "classification": "EXPLICITLY_NON_RELEASE",
+      "variant": "projets",
+      "why": "variante de travail : la release ne diffuse que eleve et professeur"
+    }
   ],
   "generated_by": "scripts/build_canonical_release_inventory.py",
   "missing_canonical_targets": [],
@@ -339,9 +552,14 @@
     "AMBIGUOUS_CURRENT_ARTIFACT": 0,
     "CANONICAL_MANUALS": 6,
     "CANONICAL_PDFS": 12,
+    "CANONICAL_RELEASE_ROOTS": 12,
+    "EXPLICIT_NON_RELEASE_ROOTS": 33,
+    "EXTRA_ASSEMBLER_VARIANTS": 5,
     "MISSING_CANONICAL_TARGET": 0,
     "NON_RELEASE_TARGETS": 38,
     "TEX_ROOTS_FOUND": 45,
+    "TOTAL_TEX_ROOTS": 45,
+    "UNCLASSIFIED_TEX_ROOTS": 0,
     "UNKNOWN": 0,
     "UNREGISTERED_RELEASE_TARGET": 0
   },

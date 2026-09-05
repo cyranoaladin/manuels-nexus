@@ -42,11 +42,18 @@ def test_preflight_all_twelve_targets_pass(preflight_data):
 def test_each_target_satisfies_all_preflight_facets(preflight_data):
     for r in preflight_data["records"]:
         assert r["geometry"]["passed"] is True
+        assert r["geometry"]["boxes_present"] is True
+        assert r["geometry"]["mediabox"] is not None
+        assert r["geometry"]["trimbox"] is not None
+        assert r["geometry"]["bleedbox"] is not None
+        assert r["geometry"]["cropbox"] is not None
         assert r["fonts"]["passed"] is True
         assert r["fonts"]["unembedded_fonts"] == 0
         assert r["structure"]["passed"] is True
         assert r["structure"]["toc_entries"] > 0
         assert r["structure"]["links_count"] > 0
+        assert r["structure"]["broken_bookmarks"] == 0
+        assert r["structure"]["broken_links"] == 0
         assert r["overfull_hbox_vbox"] == 0
         if r["variant"] == "eleve":
             assert r["student_separation"]["applicable"] is True

@@ -65,3 +65,14 @@ def test_mutation_missing_canonical_target_detected(monkeypatch) -> None:
     summary = report["summary"]
     assert summary["CANONICAL_MANUALS"] == 5
     assert summary["UNREGISTERED_RELEASE_TARGET"] > 0 or summary["MISSING_CANONICAL_TARGET"] > 0
+
+
+def test_tex_roots_exact_partition(inventory: dict) -> None:
+    summary = inventory["summary"]
+    assert summary["TOTAL_TEX_ROOTS"] == 45
+    assert summary["CANONICAL_RELEASE_ROOTS"] == 12
+    assert summary["EXPLICIT_NON_RELEASE_ROOTS"] == 33
+    assert summary["CANONICAL_RELEASE_ROOTS"] + summary["EXPLICIT_NON_RELEASE_ROOTS"] == summary["TOTAL_TEX_ROOTS"]
+    assert summary["UNCLASSIFIED_TEX_ROOTS"] == 0
+    assert summary["EXTRA_ASSEMBLER_VARIANTS"] == 5
+    assert summary["NON_RELEASE_TARGETS"] == 38

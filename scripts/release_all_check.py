@@ -265,10 +265,10 @@ def main() -> int:
         "| :--- | :--- | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |",
     ]
     for t in report["targets"]:
-        sha_short = t["pdf_sha256"][:12] + "..." if t["pdf_sha256"] else "N/A"
+        sha_full = t["pdf_sha256"] if t["pdf_sha256"] else "N/A"
         cand = "OUI" if t["publish_ready_candidate"] else "NON"
         md_lines.append(
-            f"| **{t['manual_id']}** | `{t['variant']}` | {t['page_count']} | `{sha_short}` | "
+            f"| **{t['manual_id']}** | `{t['variant']}` | {t['page_count']} | `{sha_full}` | "
             f"PASS | PASS | PASS | PASS | PASS | **`{cand}`** |"
         )
     for path in (MD_TARGET, COLLECTION_READINESS_MD):

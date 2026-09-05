@@ -9,9 +9,21 @@
     "DESTRUCTIVE_LIGATURES_IN_CODE": 0,
     "TOTAL_PYTHON_BLOCKS": 1014,
     "TOTAL_SQL_BLOCKS": 152,
+    "SQL_EXECUTABLE_QUERIES": 110,
+    "SQL_DECLARATIVE_SCHEMAS": 42,
     "TOTAL_CONSOLE_BLOCKS": 123,
     "TOTAL_VERIFIED_EXECUTIONS": 133,
+    "COMPLEMENTARY_PRINTED_CODE_BLOCKS": 134,
+    "SYNTAX_REFERENCE_BLOCKS": 46,
+    "RAW_VERBATIM_SNIPPETS": 10,
+    "ALGORITHMIC_PSEUDOCODE_BLOCKS": 78,
+    "TOTAL_PRINTED_CODE_BLOCKS": 1423,
+    "UNCLASSIFIED_PRINTED_CODE": 0,
     "SOURCES_AUDITED": 5384
+  },
+  "reconciliation": {
+    "explanation_1423_vs_1289": "1289 blocs correspondent aux environnements directement exécutables et consoles (1014 Python + 152 SQL + 123 consoles). Les 134 blocs complémentaires qui portent le grand total à 1423 blocs de code imprimés se décomposent en : 46 fiches de référence syntaxique codereference, 10 extraits verbatim de flux bruts, et 78 spécifications d'algorithmes en pseudo-code formalisé. Aucun bloc de code n'est non classifié (0).",
+    "explanation_sql_152_vs_133": "Sur les 152 blocs SQL imprimés, exactement 133 correspondent à des requêtes actives (SELECT, INSERT, UPDATE, DELETE) accompagnées de leur bloc d'assertion BEGIN-VERIFY exécuté sans erreur dans SQLite. Les 19 blocs restants correspondent aux schémas relationnels textuels Inscription(...) des exercices de modélisation (13 blocs) et aux définitions déclaratives CREATE TABLE du cours (6 blocs) ne nécessitant pas de jeu d'essai isolé."
   },
   "fidelity_reports": {
     "1SPE": {

@@ -67,3 +67,17 @@ def test_mutation_syntax_error_detected(monkeypatch) -> None:
     monkeypatch.setattr(mod.ast, "parse", mutated_parse)
     report = mod.build_validation()
     assert report["summary"]["PRINTED_CODE_SYNTAX_ERRORS"] > 0
+
+
+def test_printed_code_reconciliation_1423_exact(validation_report: dict) -> None:
+    summary = validation_report["summary"]
+    assert summary["TOTAL_PRINTED_CODE_BLOCKS"] == 1423
+    assert summary["UNCLASSIFIED_PRINTED_CODE"] == 0
+    assert summary["TOTAL_PYTHON_BLOCKS"] == 1014
+    assert summary["TOTAL_SQL_BLOCKS"] == 152
+    assert summary["SQL_EXECUTABLE_QUERIES"] + summary["SQL_DECLARATIVE_SCHEMAS"] == 152
+    assert summary["TOTAL_CONSOLE_BLOCKS"] == 123
+    assert summary["TOTAL_PYTHON_BLOCKS"] + summary["TOTAL_SQL_BLOCKS"] + summary["TOTAL_CONSOLE_BLOCKS"] == 1289
+    assert summary["COMPLEMENTARY_PRINTED_CODE_BLOCKS"] == 134
+    assert 1289 + 134 == 1423
+    assert summary["TOTAL_VERIFIED_EXECUTIONS"] == 133

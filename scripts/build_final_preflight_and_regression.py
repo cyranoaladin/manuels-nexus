@@ -61,12 +61,16 @@ def run_print_preflight(root: Path) -> dict[str, Any]:
         )
         page_size_match = re.search(r"Page size:\s+([0-9.]+)\s+x\s+([0-9.]+)\s+pts", pdfinfo_res.stdout)
         mediabox_match = re.search(r"MediaBox:\s+([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)", pdfinfo_res.stdout)
+        cropbox_match = re.search(r"CropBox:\s+([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)", pdfinfo_res.stdout)
+        bleedbox_match = re.search(r"BleedBox:\s+([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)", pdfinfo_res.stdout)
+        trimbox_match = re.search(r"TrimBox:\s+([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)", pdfinfo_res.stdout)
 
         width_pt = float(page_size_match.group(1)) if page_size_match else 0.0
         height_pt = float(page_size_match.group(2)) if page_size_match else 0.0
 
         # Width ~ 612.28 pt (216 mm), Height ~ 858.90 pt (303 mm)
         geometry_ok = abs(width_pt - 612.28) < 1.0 and abs(height_pt - 858.90) < 1.0
+        boxes_present = bool(mediabox_match and cropbox_match and bleedbox_match and trimbox_match)
 
         # 2. Font check
         pdffonts_res = subprocess.run(
@@ -92,7 +96,24 @@ def run_print_preflight(root: Path) -> dict[str, Any]:
         has_author = bool(str(metadata.get("author", "")).strip())
         links_count = sum(len(page.get_links()) for page in doc)
 
-        structure_ok = (page_count > 0) and (len(toc) > 0) and (links_count > 0) and has_title
+        # Check for broken bookmarks or internal links
+        broken_bookmarks = sum(1 for item in toc if item[2] < 1 or item[2] > page_count)
+        broken_links = 0
+        for page in doc:
+            for link in page.get_links():
+                if link.get("kind") == fitz.LINK_GOTO:
+                    lp = link.get("page", 0)
+                    if lp < 0 or lp >= page_count:
+                        broken_links += 1
+
+        structure_ok = (
+            (page_count > 0)
+            and (len(toc) > 0)
+            and (links_count > 0)
+            and has_title
+            and (broken_bookmarks == 0)
+            and (broken_links == 0)
+        )
 
         # 4. Student separation (if applicable)
         student_issues: list[str] = []
@@ -121,7 +142,7 @@ def run_print_preflight(root: Path) -> dict[str, Any]:
                 overfull_count = len(re.findall(r"Overfull \\[hv]box", log_text))
                 break
 
-        overall_pass = geometry_ok and fonts_ok and structure_ok and student_separation_ok and (overfull_count == 0)
+        overall_pass = geometry_ok and boxes_present and fonts_ok and structure_ok and student_separation_ok and (overfull_count == 0)
 
         preflight_records.append({
             "target_id": target_id,
@@ -132,7 +153,12 @@ def run_print_preflight(root: Path) -> dict[str, Any]:
             "geometry": {
                 "width_pt": width_pt,
                 "height_pt": height_pt,
-                "passed": geometry_ok,
+                "mediabox": mediabox_match.group(0) if mediabox_match else None,
+                "cropbox": cropbox_match.group(0) if cropbox_match else None,
+                "bleedbox": bleedbox_match.group(0) if bleedbox_match else None,
+                "trimbox": trimbox_match.group(0) if trimbox_match else None,
+                "boxes_present": boxes_present,
+                "passed": geometry_ok and boxes_present,
             },
             "fonts": {
                 "total_fonts": total_fonts,
@@ -142,6 +168,8 @@ def run_print_preflight(root: Path) -> dict[str, Any]:
             "structure": {
                 "toc_entries": len(toc),
                 "links_count": links_count,
+                "broken_bookmarks": broken_bookmarks,
+                "broken_links": broken_links,
                 "has_title": has_title,
                 "has_author": has_author,
                 "passed": structure_ok,

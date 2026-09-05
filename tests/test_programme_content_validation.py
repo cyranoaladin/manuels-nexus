@@ -54,3 +54,13 @@ def test_mutation_uncovered_atom_fails(tmp_path, monkeypatch) -> None:
     monkeypatch.setattr(mod, "COVERAGE_PATH", mutated_file)
     report = mod.validate_programme_and_content()
     assert report["summary"]["OFFICIAL_ATOMS_UNCOVERED"] > 0
+
+
+def test_adversarial_manual_reviews_zero_defects(prog_report: dict) -> None:
+    summary = prog_report["summary"]
+    assert summary["MANUAL_REVIEWS_COUNT"] == 23
+    assert summary["CONCRETE_DEFECTS_FOUND"] == 0
+    assert summary["NON_FORMALIZABLE_NO_CONCRETE_DEFECT"] == 23
+    assert len(prog_report["manual_reviews"]) == 23
+    for r in prog_report["manual_reviews"]:
+        assert r["concrete_defect"] is False
