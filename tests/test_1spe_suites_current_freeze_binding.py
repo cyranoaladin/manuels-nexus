@@ -377,7 +377,6 @@ def _load_freeze_producer(repo: Path):
         "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt",
         "audit/OFFICIAL_PROGRAM_AUTHORITY_2026_2027.yaml",
         "audit/official_program_contracts/1SPE.yaml",
-        "audit/OFFICIAL_SOURCE_SEGMENT_LEDGER.json",
     ],
 )
 def test_a_global_programme_rule_change_makes_the_binding_stale(
@@ -385,10 +384,17 @@ def test_a_global_programme_rule_change_makes_the_binding_stale(
 ) -> None:
     """La projection de chapitre ne doit pas devenir une echappatoire.
 
-    Seule la matrice de couverture est structuree par chapitre, donc seule elle
-    est projetee. Les autorites GLOBALES -- texte officiel, autorite programme,
-    contrat de manuel, registre de segments -- restent liees integralement :
-    une regle applicable a tous les chapitres perime bien ce gel.
+    Une autorite reellement GLOBALE -- le texte officiel lui-meme, l'autorite
+    programme, le contrat de manuel -- n'est structuree par aucun chapitre :
+    elle reste liee a l'octet, et une regle applicable a tous perime bien ce
+    gel.
+
+    Le registre de segments a quitte cette liste : ses lignes se rattachent
+    desormais a un chapitre par la chaine canonique segment -> atomes ->
+    chapitre. Il n'est pas pour autant sorti du calcul -- une ligne DE CE
+    CHAPITRE y perime toujours le gel, et
+    `tests/test_chapter_scoped_authority_projection.py` l'exige dans les deux
+    sens, sur les trois artefacts nouvellement projetes.
     """
 
     path = clean_repo / authority
@@ -404,7 +410,14 @@ def test_a_global_programme_rule_change_makes_the_binding_stale(
 
 
 def test_only_the_chapter_structured_authority_is_projected(clean_repo: Path) -> None:
-    """Une seule autorite est projetee ; les autres sont liees a l'octet."""
+    """Ce qui est projete l'est parce qu'un chapitre s'y lit, pas par commodite.
+
+    Quatre autorites portent une structure par chapitre : la matrice de
+    couverture directement, et les trois artefacts d'atomisation par la chaine
+    segment -> atomes -> chapitre. Les autres n'en portent aucune et restent
+    liees a l'octet. La projection n'est jamais une echappatoire : il doit
+    toujours rester des autorites non projetees.
+    """
 
     producer = _load_freeze_producer(clean_repo)
     frozen = json.loads(
@@ -416,5 +429,5 @@ def test_only_the_chapter_structured_authority_is_projected(clean_repo: Path) ->
     projected = set(producer.CHAPTER_SCOPED_AUTHORITY_PATHS)
 
     assert projected <= declared
-    assert len(projected) == 1
+    assert len(projected) == 4
     assert declared - projected, "toutes les autorites ne peuvent pas etre projetees"
